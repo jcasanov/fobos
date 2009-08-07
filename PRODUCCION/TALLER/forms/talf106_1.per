@@ -1,0 +1,26 @@
+database diteca
+screen
+{
+
+
+     Código Tipo Orden Trabajo: [a] [c                    ]
+
+  Código Subtipo Orden Trabajo: [b] [f001                     ]
+
+	         Ingresado Por: [f002      ]
+              Fecha de Ingreso: [f003               ]
+
+}
+end
+tables
+talt006
+attributes
+a    = talt006.t06_tipord, REVERSE, UPSHIFT, 
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c    = formonly.nom_tipo TYPE VARCHAR, NOENTRY; 
+b    = talt006.t06_subtipo, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f001 = talt006.t06_nombre, REVERSE, UPSHIFT;
+f002 = talt006.t06_usuario,REVERSE, NOENTRY;
+f003 = talt006.t06_fecing, REVERSE, NOENTRY;
+end

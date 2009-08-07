@@ -1,0 +1,38 @@
+database diteca
+screen 
+{
+
+
+   Liquidación No: [c002       ]              Fecha: [c025               ]
+           Pedido: [c003       ]             Estado: [a|c026     ]
+
+           Moneda: [a0] [c027           ]  
+      Fob Fábrica: [c012            ]          Fecha Llegada: [c010      ]   
+        Total Fob: [c016            ]          Fecha Ingreso: [c011      ] 
+     Total Cargos: [c018            ]
+      Margen Uti.: [c020            ]  
+}
+end
+tables
+veht036
+attributes
+c002 = veht036.v36_numliq, REVERSE,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2' ;
+c003 = veht036.v36_pedido, UPSHIFT, REVERSE, NOENTRY,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2' ;
+a    = veht036.v36_estado, UPSHIFT, NOENTRY, REVERSE;
+c010 = veht036.v36_fecha_lleg, REVERSE, NOENTRY,
+	FORMAT='dd-mm-yyyy', COMMENT='Ingrese fecha en formato: dd-mm-aaaa';
+c011 = veht036.v36_fecha_ing, REVERSE, NOENTRY,
+	FORMAT='dd-mm-yyyy', COMMENT='Ingrese fecha en formato: dd-mm-aaaa';
+a0   = veht036.v36_moneda, UPSHIFT, REVERSE, AUTONEXT, NOENTRY,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2' ;
+c012 = veht036.v36_fob_fabrica, REVERSE, NOENTRY, FORMAT='#,###,###,##&.##';
+c016 = veht036.v36_total_fob, REVERSE, NOENTRY, FORMAT='#,###,###,##&.##';
+c018 = veht036.v36_tot_cargos, REVERSE, NOENTRY, FORMAT='#,###,###,##&.##';
+c020 = veht036.v36_margen_uti, REVERSE, NOENTRY, FORMAT='###,##&.##',
+	COMMENT='Margen de utilidad.';
+c025 = veht036.v36_fecing, REVERSE, NOENTRY;
+c026 = formonly.n_estado, NOENTRY;
+c027 = formonly.n_moneda, NOENTRY;
+end

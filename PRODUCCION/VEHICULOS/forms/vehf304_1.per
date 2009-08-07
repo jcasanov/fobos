@@ -1,0 +1,72 @@
+database diteca
+SCREEN
+{                                                         
+         Factura: [c1][c002           ]
+         Cliente: [c003       ][c051                                     ]
+        Vendedor: [c004  ][c052                                          ]
+          Moneda: [a0][c053            ]    Paridad: [c006               ]
+          Bodega: [a2][c056            ]       Pago: [b             ]       
+        Impuesto: [c][c059 ]%
+      Devolución: [a1][c023            ]  Fec. Dev.: [c060      ]
+
+                                Detalle del Vehículo
+                               ---------------------
+   Tipo Vehículo: [c061                 ]     Total Precio: [c012            ]
+          Modelo: [c062            ]         Total Descto.: [c013            ]
+    Año Vehículo: [c063]                       Total Bruto: [c014            ]
+  Serie Vehículo: [c064                      ]    Impuesto: [c057            ]
+          Precio: [c030            ]            Total Neto: [c058            ]
+       Descuento: [c031  ]%
+   Valor Descto.: [c032            ]  
+                                        
+         Usuario: [c024      ]     Fecha de Ingreso: [c025               ]  
+}
+END
+TABLES
+veht004, veht022, veht030, veht031
+ATTRIBUTES
+c1   = veht030.v30_cod_tran, NOENTRY, REVERSE, UPSHIFT;
+c002 = veht030.v30_num_tran, NOENTRY, REVERSE, UPSHIFT;
+c003 = veht030.v30_codcli, NOENTRY, REVERSE, UPSHIFT;
+c051 = veht030.v30_nomcli, NOENTRY, REVERSE, UPSHIFT;
+c004 = veht030.v30_vendedor, NOENTRY, REVERSE, UPSHIFT;
+c052 = FORMONLY.tit_vendedor, NOENTRY, REVERSE, UPSHIFT;
+a0   = veht030.v30_moneda, NOENTRY, REVERSE, UPSHIFT;
+c053 = FORMONLY.tit_mon_bas, NOENTRY, REVERSE, UPSHIFT;
+c006 = veht030.v30_paridad, NOENTRY, FORMAT = '#,###,##&.#########';
+a2   = veht030.v30_bodega_ori, NOENTRY, REVERSE, UPSHIFT;
+c056 = FORMONLY.tit_bodega, NOENTRY, REVERSE, UPSHIFT;
+b    = veht030.v30_cont_cred, NOENTRY, UPSHIFT, DEFAULT = 'R',
+	WIDGET = 'RADIO', CONFIG = 'R Crédito C Contado';
+c    = FORMONLY.tit_iva_che, NOENTRY, REVERSE, DEFAULT = 'N', UPSHIFT,
+	WIDGET ='CHECK', CONFIG = 'S N acknowledge';
+c059 = veht030.v30_porc_impto, NOENTRY, REVERSE, FORMAT = '#&.##';
+a1   = veht030.v30_tipo_dev, NOENTRY, UPSHIFT;
+c023 = veht030.v30_num_dev, NOENTRY, UPSHIFT;
+c060 = FORMONLY.tit_fecha_dev, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+
+c061 = veht004.v04_nombre, NOENTRY, UPSHIFT, OPTIONS ='-nolist';
+c062 = veht022.v22_modelo, NOENTRY, UPSHIFT, OPTIONS ='-nolist';
+c063 = veht022.v22_ano, NOENTRY, UPSHIFT, OPTIONS ='-nolist';
+c064 = veht022.v22_chasis, NOENTRY, UPSHIFT, OPTIONS ='-nolist';
+c030 = veht031.v31_precio, NOENTRY, OPTIONS = '-nolist', 
+	FORMAT = '#,###,###,##&.##';
+c031 = veht031.v31_descuento, NOENTRY, OPTIONS = '-nolist', FORMAT = '#&.##';
+c032 = veht031.v31_val_descto, NOENTRY, OPTIONS = '-nolist',
+	FORMAT = '###,###,##&.##';
+
+c012 = FORMONLY.tit_total_pre, REVERSE, NOENTRY, FORMAT = '#,###,###,##&.##';
+c013 = FORMONLY.tit_total_des, NOENTRY, REVERSE, FORMAT = '###,###,##&.##';
+c014 = FORMONLY.tit_subtotal, NOENTRY, REVERSE, FORMAT = '#,###,###,##&.##';
+c057 = FORMONLY.tit_valor_iva, NOENTRY, REVERSE, FORMAT = '#,###,###,##&.##';
+c058 = FORMONLY.tit_total_neto, NOENTRY, REVERSE, FORMAT = '#,###,###,##&.##';
+
+c024 = veht030.v30_usuario, REVERSE, UPSHIFT, NOENTRY;
+c025 = veht030.v30_fecing, REVERSE, NOENTRY, UPSHIFT;
+END
+KEYS
+F5 = 'Forma de Pago'
+F6 = 'Liquidación'
+INSTRUCTIONS
+SCREEN RECORD rm_det[1] (v04_nombre, v22_modelo, v22_ano, v22_chasis,
+			v31_precio, v31_descuento, v31_val_descto)

@@ -1,0 +1,40 @@
+database diteca
+screen 
+{
+
+          Serie: [c002                     ]       Estado: [b|c029     ] 
+
+         Bodega: [a0] [c023                          ]
+         Modelo: [c001           ] [c024                               ]
+    Comentarios: [c004                                    ]
+
+          Motor: [c005            ]       Año: [c006]
+          Color: [c007      ] [c025                 ]
+
+         Moneda: [a3] [c028            ] Precio Fab.: [c019            ] 
+
+}
+end
+tables
+veht022
+attributes
+a0 = veht022.v22_bodega, REVERSE, UPSHIFT, AUTONEXT,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c001 = veht022.v22_modelo, UPSHIFT, REVERSE, NOENTRY,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c002 = veht022.v22_chasis, UPSHIFT, REVERSE;
+c004 = veht022.v22_comentarios, UPSHIFT, REVERSE;
+b = veht022.v22_estado, UPSHIFT, REVERSE, AUTONEXT, NOENTRY;
+c005 = veht022.v22_motor, UPSHIFT;
+c006 = veht022.v22_ano, REVERSE, INCLUDE=(1950 TO 9999);
+c007 = veht022.v22_cod_color, REVERSE, UPSHIFT, -- NOENTRY,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+a3 = veht022.v22_moneda_prec, UPSHIFT, REVERSE, AUTONEXT,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c019 = veht022.v22_precio, REVERSE, FORMAT='#,###,###,##&.##';
+c023 = formonly.n_bodega, NOENTRY, UPSHIFT;
+c024 = formonly.n_modelo, NOENTRY, UPSHIFT;
+c025 = formonly.n_color, NOENTRY, UPSHIFT;
+c028 = formonly.n_moneda_prec, NOENTRY, UPSHIFT;
+c029 = formonly.n_estado, NOENTRY, UPSHIFT;
+end

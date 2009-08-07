@@ -1,0 +1,64 @@
+database diteca
+screen 
+{
+
+      Código Plan: [c001  ] [c051                                       ]      
+    Cuota Inicial: [c002             ]  Saldo Crédito: [c003            ] 
+     Nro. vcmtos.: [c004  ]                   Interés: [c005  ]%  
+      Primer Pago: [c006      ]     Días entre cuotas: [c007]    
+  -------------------------------------------------------------------------
+   [lbl1][lbl2      ][lbl3            ][lbl4            ][lbl5            ] 
+  [c008][c009      ][c010            ][c011            ][c012             ]
+  [c008][c009      ][c010            ][c011            ][c012             ]
+  [c008][c009      ][c010            ][c011            ][c012             ]
+  [c008][c009      ][c010            ][c011            ][c012             ]
+  [c008][c009      ][c010            ][c011            ][c012             ]
+                    [c013            ][c014            ][c015             ]
+  -------------------------------------------------------------------------
+                 Reserva de dominio:
+                [c016                                         ]
+                [c016                                         ]
+                [c016                                         ]
+                [c016                                         ]
+}
+end
+tables
+veht026
+veht028
+attributes
+c002 = veht026.v26_cuotai_fin, REVERSE, FORMAT='###,###,##&.##';
+c008 = veht028.v28_dividendo, OPTIONS='-nolist', NOENTRY;
+c009 = veht028.v28_fecha_vcto, OPTIONS='-nolist',
+	FORMAT='dd-mm-yyyy', COMMENT='Ingrese fecha en formato: dd-mm-aaaa';
+c012 = veht028.v28_val_adi, FORMAT='#,###,###,##&.##', 
+	OPTIONS='-nolist';
+c011 = veht028.v28_val_int, FORMAT='#,###,###,##&.##', NOENTRY, 
+	OPTIONS='-nolist';
+c010 = veht028.v28_val_cap, FORMAT='#,###,###,##&.##', 
+	OPTIONS='-nolist';
+c001 = veht026.v26_codigo_plan, REVERSE,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2'; 
+c004 = veht026.v26_num_vctos, REVERSE, REQUIRED, INCLUDE=(0 TO 1000);
+c005 = veht026.v26_int_saldo, REVERSE, FORMAT='#&.##';
+c051 = formonly.n_plan,     NOENTRY;
+c016 = veht026.v26_reserva, WORDWRAP COMPRESS, UPSHIFT;
+c006 = formonly.primer_pago TYPE DATE, REQUIRED, REVERSE,
+	 FORMAT='dd-mm-yyyy', COMMENT='Ingrese fecha en formato: dd-mm-aaaa';
+c007 = formonly.dias TYPE SMALLINT, REQUIRED, REVERSE, 
+	INCLUDE=(0 TO 9999, NULL);
+c003 = veht026.v26_sdo_credito, NOENTRY, FORMAT='###,###,##&.##';
+
+c013 = formonly.tot_cap, NOENTRY, OPTIONS='-nolist', FORMAT='#,###,###,##&.##';
+c014 = formonly.tot_int, NOENTRY, OPTIONS='-nolist', FORMAT='#,###,###,##&.##';
+c015 = formonly.tot_adi, NOENTRY, OPTIONS='-nolist', FORMAT='#,###,###,##&.##';
+
+lbl1 = formonly.bt_nro,        WIDGET='BUTTON', CONFIG='F15';
+lbl2 = formonly.bt_fecha_vcto, WIDGET='BUTTON', CONFIG='F16';
+lbl3 = formonly.bt_val_cuota,  WIDGET='BUTTON', CONFIG='F17';
+lbl4 = formonly.bt_val_int,    WIDGET='BUTTON', CONFIG='F18';
+lbl5 = formonly.bt_val_adi,    WIDGET='BUTTON', CONFIG='F19';
+
+end
+
+instructions
+screen record ra_financ[5] (v28_dividendo, v28_fecha_vcto, v28_val_cap, v28_val_int, v28_val_adi)

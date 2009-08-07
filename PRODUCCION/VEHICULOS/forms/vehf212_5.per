@@ -1,0 +1,35 @@
+database diteca
+screen 
+{
+  -----------------------------------------------------------------------
+       Modelo               Chasís           Cod. Color  Precio Fábrica  
+  -----------------------------------------------------------------------
+  [c004           |c005                     |c008      |c007            ]
+  [c004           |c005                     |c008      |c007            ]
+  [c004           |c005                     |c008      |c007            ]
+  [c004           |c005                     |c008      |c007            ]
+  [c004           |c005                     |c008      |c007            ]
+  [c004           |c005                     |c008      |c007            ]
+  [c004           |c005                     |c008      |c007            ]
+  [c004           |c005                     |c008      |c007            ]
+  [c004           |c005                     |c008      |c007            ]
+  [c004           |c005                     |c008      |c007            ]
+  -----------------------------------------------------------------------
+
+  Color: [c009       ]
+
+}
+end
+tables
+veht035
+attributes
+c004 = veht035.v35_modelo, NOENTRY, UPSHIFT, OPTIONS='-nolist';
+c005 = formonly.chasis, UPSHIFT, NOENTRY, OPTIONS='-nolist';
+c007 = veht035.v35_precio_unit, NOENTRY, FORMAT='#,###,###,##&.##',
+	 OPTIONS='-nolist';
+c008 = veht035.v35_cod_color, OPTIONS='-nolist', NOENTRY;
+c009 = formonly.n_color, NOENTRY;
+end
+
+INSTRUCTIONS
+SCREEN RECORD ra_unid[10](v35_modelo, chasis, v35_cod_color, v35_precio_unit)

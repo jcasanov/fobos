@@ -1,0 +1,45 @@
+DATABASE diteca
+SCREEN
+{
+
+ [c010           |c011                          |c012  |c013      |c014      ]
+[c000           |c001                          |c002  |c003      |c004      ]
+[c000           |c001                          |c002  |c003      |c004      ]
+[c000           |c001                          |c002  |c003      |c004      ]
+[c000           |c001                          |c002  |c003      |c004      ]
+[c000           |c001                          |c002  |c003      |c004      ]
+[c000           |c001                          |c002  |c003      |c004      ]
+[c000           |c001                          |c002  |c003      |c004      ]
+[c000           |c001                          |c002  |c003      |c004      ]
+[c000           |c001                          |c002  |c003      |c004      ]
+[c000           |c001                          |c002  |c003      |c004      ]
+[c000           |c001                          |c002  |c003      |c004      ]
+[c000           |c001                          |c002  |c003      |c004      ]
+[c000           |c001                          |c002  |c003      |c004      ]
+[c000           |c001                          |c002  |c003      |c004      ]
+[c000           |c001                          |c002  |c003      |c004      ]
+[c000           |c001                          |c002  |c003      |c004      ]
+[c000           |c001                          |c002  |c003      |c004      ]
+
+}
+TABLES
+rept016,
+rept017
+ATTRIBUTES
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c000 = rept017.r17_item, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c001 = FORMONLY.tit_descripcion, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c002 = FORMONLY.tit_cantidad, NOENTRY, OPTIONS = '-nolist';
+c003 = rept017.r17_pedido, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c004 = rept016.r16_fec_llegada, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+END
+KEYS
+F5 = 'Pedido'
+INSTRUCTIONS
+SCREEN RECORD rm_repd[17] (r17_item, tit_descripcion, tit_cantidad, r17_pedido,
+			r16_fec_llegada)

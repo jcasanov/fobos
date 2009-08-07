@@ -1,0 +1,34 @@
+DATABASE diteca
+
+SCREEN
+{
+ DOCUMENTOS A FAVOR DE PROVEEDORES EN TESORERIA
+-----------------------------------------------------------
+ Nombre                       Documento    Saldo       Mo 
+-----------------------------------------------------------
+[c001                       ][c0][c002   ][c003      ][c1]
+[c001                       ][c0][c002   ][c003      ][c1]
+[c001                       ][c0][c002   ][c003      ][c1]
+[c001                       ][c0][c002   ][c003      ][c1]
+[c001                       ][c0][c002   ][c003      ][c1]
+[c001                       ][c0][c002   ][c003      ][c1]
+[c001                       ][c0][c002   ][c003      ][c1]
+[c001                       ][c0][c002   ][c003      ][c1]
+[c001                       ][c0][c002   ][c003      ][c1]
+[c001                       ][c0][c002   ][c003      ][c1]
+}
+
+TABLES
+cxpt021
+cxpt001
+
+ATTRIBUTES
+c001 = p01_nomprov, UPSHIFT;
+c0   = p21_tipo_doc, UPSHIFT;
+c002 = p21_num_doc, UPSHIFT;
+c003 = p21_saldo, UPSHIFT;
+c1   = p21_moneda, UPSHIFT;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_favortes[10]( p01_nomprov, p21_tipo_doc, p21_num_doc, p21_saldo, p21_moneda)

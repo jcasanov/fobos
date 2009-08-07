@@ -1,0 +1,43 @@
+DATABASE diteca
+SCREEN
+{
+
+                     MOVIMIENTOS DEL E/C NO CONTABILIZADOS
+                    --------------------------------------
+
+ [c10  |c011          |c012                                   |c013          ]
+[c00] [c001        ] [c002                                   |c003          ]
+[c00] [c001        ] [c002                                   |c003          ]
+[c00] [c001        ] [c002                                   |c003          ]
+[c00] [c001        ] [c002                                   |c003          ]
+[c00] [c001        ] [c002                                   |c003          ]
+[c00] [c001        ] [c002                                   |c003          ]
+[c00] [c001        ] [c002                                   |c003          ]
+[c00] [c001        ] [c002                                   |c003          ]
+[c00] [c001        ] [c002                                   |c003          ]
+[c00] [c001        ] [c002                                   |c003          ]
+                                                             ---------------
+                                                      Total: [c020          ]
+
+}
+TABLES
+ctbt031
+ATTRIBUTES
+c10  = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+
+c00  = ctbt031.b31_tipo_doc, AUTONEXT, UPSHIFT, REVERSE, OPTIONS = '-nolist',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = ctbt031.b31_cuenta, AUTONEXT, UPSHIFT, REVERSE, OPTIONS = '-nolist',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = ctbt031.b31_glosa, AUTONEXT, UPSHIFT, REVERSE, OPTIONS = '-nolist';
+c003 = FORMONLY.valor TYPE DECIMAL NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = '---,---,--&.##', OPTIONS = '-nolist',
+	COMMENTS = 'Digíte valor positivo para DEBITOS, negativo para CREDITOS';
+
+c020 = FORMONLY.tit_total_val, NOENTRY, REVERSE, FORMAT = '---,---,--&.##';
+END
+INSTRUCTIONS
+SCREEN RECORD rm_mov[10] (b31_tipo_doc, b31_cuenta, b31_glosa, valor)

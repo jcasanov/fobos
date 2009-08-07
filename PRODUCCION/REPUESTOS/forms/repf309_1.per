@@ -1,0 +1,55 @@
+DATABASE diteca
+SCREEN
+{
+
+  Tipo Transacción: [c000  ] [c001                ]
+     Fecha Inicial: [c002      ]                  Fecha Final: [c003      ]
+
+ [l1        |l2|l3             |l4                        |l5|l6              ]
+[c010      |c0|a4             |c013                      |a6|c016            ]
+[c010      |c0|a4             |c013                      |a6|c016            ]
+[c010      |c0|a4             |c013                      |a6|c016            ]
+[c010      |c0|a4             |c013                      |a6|c016            ]
+[c010      |c0|a4             |c013                      |a6|c016            ]
+[c010      |c0|a4             |c013                      |a6|c016            ]
+[c010      |c0|a4             |c013                      |a6|c016            ]
+[c010      |c0|a4             |c013                      |a6|c016            ]
+[c010      |c0|a4             |c013                      |a6|c016            ]
+[c010      |c0|a4             |c013                      |a6|c016            ]
+[c010      |c0|a4             |c013                      |a6|c016            ]
+[c010      |c0|a4             |c013                      |a6|c016            ]
+[c010      |c0|a4             |c013                      |a6|c016            ]
+[c010      |c0|a4             |c013                      |a6|c016            ]
+
+}
+ATTRIBUTES
+c000 = formonly.cod_tran, AUTONEXT, UPSHIFT, WIDGET='FIELD_BMP', 
+	CONFIG='lista.bmp F2';
+c001 = formonly.n_cod_tran, NOENTRY;
+c002 = FORMONLY.fecha_ini TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy';
+c003 = FORMONLY.fecha_fin TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy';
+
+l1   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+l2   = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+l3   = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+l4   = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+l5   = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+l6   = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+c010 = formonly.fecha_tran TYPE DATE, NOENTRY, FORMAT = 'dd-mm-yyyy', 
+       OPTIONS = '-nolist';
+c0   = formonly.tipo_tran, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+a4   = formonly.num_tran, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c013 = formonly.referencia,  NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+a6   = formonly.moneda, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c016 = formonly.tot_neto, NOENTRY, UPSHIFT, FORMAT = '#,###,###,##&.##',
+	OPTIONS = '-nolist';
+END
+INSTRUCTIONS
+SCREEN RECORD rm_det[14] (fecha_tran, tipo_tran, num_tran, referencia,
+			  moneda, tot_neto)
+
+keys
+F6 = 'Ver Comprobante'

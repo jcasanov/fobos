@@ -1,0 +1,34 @@
+DATABASE diteca
+
+SCREEN
+{
+ TRANSACCIONES COBRANZAS
+---------------------------------------------------
+ TD Número Cliente  
+---------------------------------------------------
+[c0|c001  |c002                                  ]
+[c0|c001  |c002                                  ]
+[c0|c001  |c002                                  ]
+[c0|c001  |c002                                  ]
+[c0|c001  |c002                                  ]
+[c0|c001  |c002                                  ]
+[c0|c001  |c002                                  ]
+[c0|c001  |c002                                  ]
+[c0|c001  |c002                                  ]
+[c0|c001  |c002                                  ]
+
+
+}
+
+TABLES
+cxct001
+cxct022
+
+ATTRIBUTES
+c0   = z22_tipo_trn, UPSHIFT;
+c001 = z22_num_trn, UPSHIFT;
+c002 = z01_nomcli, UPSHIFT;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_trancob[10](z22_tipo_trn, z22_num_trn, z01_nomcli)

@@ -1,0 +1,29 @@
+                                                                                
+database diteca
+screen 
+{
+
+
+       Grupo de Línea de Venta: [c000 ]
+     
+                        Nombre: [c001                          ]		
+               Area de Negocio: [c002] [c003                   ]
+
+                 Ingresado Por: [c004       ]
+              Fecha de ingreso: [c005               ]
+
+
+}
+end
+tables
+gent020
+attributes
+c000 = gent020.g20_grupo_linea, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = gent020.g20_nombre, REVERSE, UPSHIFT;
+c002 = gent020.g20_areaneg, REVERSE,
+       WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = formonly.nom_areaneg TYPE VARCHAR, NOENTRY;
+c004 = gent020.g20_usuario, REVERSE, UPSHIFT, NOENTRY;
+c005 = gent020.g20_fecing, REVERSE, NOENTRY;
+end

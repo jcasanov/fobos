@@ -1,0 +1,36 @@
+                                                                                
+database diteca
+screen 
+{
+
+
+       Código de Localidad: [c000] [a                        ]
+          Código de Modulo: [c0]   [b                        ]
+                    Bodega: [c1]
+
+                      Tipo: [c2]
+                    Nombre: [c001                            ]		
+                    Número: [c002    ]
+
+             Ingresado Por: [c003       ]
+          Fecha de ingreso: [c004               ]
+
+
+}
+end
+tables
+gent015
+attributes
+c000 = gent015.g15_localidad, REVERSE,
+       WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+a    = formonly.nom_loc TYPE VARCHAR, NOENTRY;
+c0   = gent015.g15_modulo, REVERSE, UPSHIFT,
+       WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+b    = formonly.nom_mod TYPE VARCHAR, NOENTRY;
+c1   = gent015.g15_bodega, REVERSE, UPSHIFT;
+c2   = gent015.g15_tipo, REVERSE, UPSHIFT;
+c001 = gent015.g15_nombre,REVERSE, UPSHIFT;
+c002 = gent015.g15_numero,REVERSE;
+c003 = gent015.g15_usuario, REVERSE, UPSHIFT, NOENTRY;
+c004= gent015.g15_fecing, REVERSE, NOENTRY;
+end

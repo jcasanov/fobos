@@ -1,0 +1,62 @@
+database diteca
+screen {
+
+       Proveedor: [c000                                       ]
+
+                                         Valor Bienes: [c001            ]
+                                      Valor Servicios: [c002            ]
+                                             Impuesto: [c003            ]
+                                                       ------------------
+                                           Valor Neto: [c004            ]
+          
+    [lbl1                |lb2|lbl3|lbl4          |lbl5  |lbl6            ]   
+ [c|c010                |c12|c005|c006          |c007  |c008            ]
+ [c|c010                |c12|c005|c006          |c007  |c008            ]
+ [c|c010                |c12|c005|c006          |c007  |c008            ]
+ [c|c010                |c12|c005|c006          |c007  |c008            ]
+ [c|c010                |c12|c005|c006          |c007  |c008            ]
+                                                       ------------------
+                                    Total Retenciones: [c011            ]
+                                          Saldo Deuda: [c009            ] 
+} 
+end
+
+attributes
+c000 = formonly.n_proveedor, NOENTRY, REVERSE;
+c001 = formonly.val_bienes,  NOENTRY, REVERSE, FORMAT='#,###,###,##&.##',
+	INCLUDE=(0 TO 9999999999.99);
+c002 = formonly.val_servi,   NOENTRY, REVERSE, FORMAT='#,###,###,##&.##',
+	INCLUDE=(0 TO 9999999999.99);
+c003 = formonly.val_impto,   NOENTRY, REVERSE, FORMAT='#,###,###,##&.##',
+	INCLUDE=(0 TO 9999999999.99);
+c004 = formonly.val_neto,    NOENTRY, REVERSE, FORMAT='#,###,###,##&.##',
+	INCLUDE=(0 TO 9999999999.99);
+
+c12  = formonly.codigo_sri,  NOENTRY, REVERSE, OPTIONS='-nolist';
+c005 = formonly.tipo_ret,    NOENTRY, OPTIONS='-nolist';
+c006 = formonly.val_base,    NOENTRY, FORMAT='##,###,##&.##',
+	INCLUDE=(0 TO 9999999999.99), OPTIONS='-nolist';
+c007 = formonly.porc,        NOENTRY, FORMAT='##&.##',
+	OPTIONS='-nolist';
+c008 = formonly.subtotal,    NOENTRY, FORMAT='#,###,###,##&.##',
+	INCLUDE=(0 TO 9999999999.99), OPTIONS='-nolist';
+c010 = formonly.n_retencion, NOENTRY, OPTIONS='-nolist';
+
+c009 = formonly.val_pagar,   NOENTRY, REVERSE, FORMAT='#,###,###,##&.##',
+	INCLUDE=(0 TO 9999999999.99);
+c011 = formonly.tot_ret,     NOENTRY, REVERSE, FORMAT='#,###,###,##&.##',
+	INCLUDE=(0 TO 9999999999.99);
+
+c    = formonly.check,	     WIDGET='CHECK', CONFIG='S N acknowledge',
+	AUTONEXT, DEFAULT='N', OPTIONS='-nolist';
+	
+lbl1 = formonly.bt_nom_ret,    WIDGET='BUTTON', CONFIG='F15';
+lb2  = formonly.bt_codigo_sri, WIDGET='BUTTON', CONFIG='F16';
+lbl3 = formonly.bt_tipo_ret,   WIDGET='BUTTON', CONFIG='F17';
+lbl4 = formonly.bt_base,       WIDGET='BUTTON', CONFIG='F18';
+lbl5 = formonly.bt_porc,       WIDGET='BUTTON', CONFIG='F19';
+lbl6 = formonly.bt_valor,      WIDGET='BUTTON', CONFIG='F20';
+end
+
+instructions
+screen record ra_ret[5] (check, n_retencion, codigo_sri, tipo_ret, val_base, porc, subtotal)

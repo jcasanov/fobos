@@ -1,0 +1,21 @@
+DATABASE formonly
+SCREEN
+{
+
+             Año: [c000]          Mes: [c0] [c100        ]  
+          
+             Tipo Retencion: [c001                  ]
+
+
+
+
+}
+TABLES
+formonly
+ATTRIBUTES
+c000 = formonly.anio TYPE SMALLINT NOT NULL, REVERSE, INCLUDE=(1900 TO 9999);
+c0   = formonly.mes  TYPE SMALLINT NOT NULL, REVERSE, INCLUDE=(1 TO 12);
+c100 = formonly.n_mes, NOENTRY;
+c001 = formonly.tipo_ret, REVERSE, WIDGET='RADIO', DEFAULT = 'T', 
+                          CONFIG='T Todos F Fuente I IVA';
+END

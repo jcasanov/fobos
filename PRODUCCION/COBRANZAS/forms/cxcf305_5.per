@@ -1,0 +1,43 @@
+DATABASE diteca
+SCREEN
+{
+                   MOVIMIENTOS DE DOCUMENTOS A FAVOR
+
+   Cliente: [c000                                     ]
+ Documento: [c1][c002          ]
+
+ [c10|c011  |c012      |c013                               |c014            ]
+[c15|c016  |c017      |c018                               |c019            ]
+[c15|c016  |c017      |c018                               |c019            ]
+[c15|c016  |c017      |c018                               |c019            ]
+[c15|c016  |c017      |c018                               |c019            ]
+[c15|c016  |c017      |c018                               |c019            ]
+[c15|c016  |c017      |c018                               |c019            ]
+[c15|c016  |c017      |c018                               |c019            ]
+                                                          [c030            ]
+}
+TABLES 
+cxct001
+cxct022
+cxct023
+ATTRIBUTES
+c000 = z01_nomcli, REVERSE;
+c1   = z23_tipo_favor, REVERSE;
+c002 = z23_doc_favor,  REVERSE;
+c10  = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c15  = z23_tipo_trn;
+c016 = z23_num_trn, FORMAT = '#####&';
+c017 = z22_fecha_emi, FORMAT = 'dd-mm-yyyy';
+c018 = z22_referencia;
+c019 = formonly.val_pago TYPE DECIMAL(12,2), FORMAT = '-,---,---,--&.##';
+c030 = formonly.tot_pago TYPE DECIMAL(12,2), FORMAT = '-,---,---,--&.##',
+       REVERSE;
+INSTRUCTIONS
+SCREEN RECORD r_pdoc[7] (z23_tipo_trn, z23_num_trn, z22_fecha_emi,
+			 z22_referencia, formonly.val_pago);
+KEYS
+'F5'='Documento'

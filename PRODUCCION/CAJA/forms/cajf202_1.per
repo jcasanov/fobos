@@ -1,0 +1,54 @@
+
+database diteca
+SCREEN 
+{
+
+      Fecha Cierre:[c0                  ]
+
+           Usuario:[c1        ]
+
+              Caja:[c2                  ]
+
+    [b0             |b1              |b2              |b3                ]
+   [c3             |c4              |c5              |c6                ]
+   [c3             |c4              |c5              |c6                ]
+   [c3             |c4              |c5              |c6                ]
+   [c3             |c4              |c5              |c6                ]
+   [c3             |c4              |c5              |c6                ]
+   [c3             |c4              |c5              |c6                ]
+   [c3             |c4              |c5              |c6                ]
+   [c3             |c4              |c5              |c6                ]
+
+}
+END	
+
+TABLES
+	cajt004
+	cajt005
+	cajt002
+	gent013
+
+ATTRIBUTES
+
+b0   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+b1   = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b2   = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+b3   = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+
+c0   = cajt004.j04_fecha_cierre,  REVERSE, NOENTRY;
+c1   = cajt004.j04_usuario,     REVERSE, NOENTRY;
+c2   = cajt002.j02_nombre_caja, REVERSE, NOENTRY;
+
+c3   = gent013.g13_nombre, REVERSE, OPTIONS = '-nolist';
+c4   = FORMONLY.efectivo TYPE DECIMAL(12,2), REVERSE, 
+	FORMAT = '#,###,###,##&.##', OPTIONS = '-nolist';
+c5   = FORMONLY.cheque TYPE DECIMAL(12,2), REVERSE, 
+	FORMAT = '#,###,###,##&.##', OPTIONS = '-nolist';
+c6   = FORMONLY.total TYPE DECIMAL(12,2), REVERSE,  
+	FORMAT = '#,###,###,##&.##', OPTIONS = '-nolist';
+
+END
+
+INSTRUCTIONS
+SCREEN RECORD r_detalle[8] (g13_nombre, efectivo, cheque, total)
+

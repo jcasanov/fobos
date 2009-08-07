@@ -1,0 +1,32 @@
+DATABASE diteca
+
+SCREEN
+{
+ PROVEEDORES POR LOCALIDAD
+-----------------------------------------------
+ Código  Proveedor 
+-----------------------------------------------
+[c01   ][c002                               ] 
+[c01   ][c002                               ]
+[c01   ][c002                               ]
+[c01   ][c002                               ]
+[c01   ][c002                               ]
+[c01   ][c002                               ]
+[c01   ][c002                               ] 
+[c01   ][c002                               ] 
+[c01   ][c002                               ] 
+[c01   ][c002                               ] 
+
+}
+
+TABLES
+cxpt002
+cxpt001
+
+ATTRIBUTES
+c01  = p02_codprov, UPSHIFT;
+c002 = p01_nomprov, UPSHIFT;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_provloc[10](p02_codprov, p01_nomprov)

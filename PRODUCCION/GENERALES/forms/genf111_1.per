@@ -1,0 +1,34 @@
+                                                                                
+database diteca
+screen 
+{
+
+
+	Código de Moneda: [c1]		     Estado:[c|c02      ]
+
+                  Nombre: [c000           ]
+	         Símbolo: [c001]
+	       Decimales: [c002]
+
+	   Ingresado Por: [c003      ]
+        Fecha de Ingreso: [c004               ]
+
+}
+end
+tables
+gent013
+attributes
+c1   = gent013.g13_moneda,  REVERSE, UPSHIFT, AUTONEXT, 
+       WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c000 = gent013.g13_nombre,  REVERSE, UPSHIFT;
+c    = formonly.g13_estado, NOENTRY, REVERSE;
+c02  = formonly.tit_estado, COMMENT = 'A Activo B Bloqueado';
+c001 = gent013.g13_simbolo, REVERSE,UPSHIFT;
+c002 = gent013.g13_decimales, REVERSE;
+c003 = gent013.g13_usuario, REVERSE, NOENTRY;
+c004 = gent013.g13_fecing, REVERSE, NOENTRY;
+end
+
+KEYS
+"F5"="(F5)Num. Registros"
+"F6"= "(F6)Eliminar"

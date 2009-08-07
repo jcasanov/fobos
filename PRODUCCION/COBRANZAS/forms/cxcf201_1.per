@@ -1,0 +1,70 @@
+DATABASE diteca
+SCREEN
+{
+                                                              [x001] de [y001]
+
+       Código Cliente: [c000       ]
+       Nombre Cliente: [c001                                              ]
+
+    Tipo de Documento: [a0] [c002           ]
+     Número Documento: [c003           ]        
+ Subtipo de Documento: [b01] [c004                          ]
+      Area de Negocio: [c005  ] [c006           ]
+          Grupo Línea: [c020  ] [c110            ]
+           Referencia: [c007                                ]
+
+     Fecha de Emisión: [c008      ]              
+               Moneda: [a1] [c009           ]  
+    Paridad Cambiaria: [c010                ]    Valor Total: [c011          ]
+               Origen: [c013             ]             Saldo: [c012          ]
+
+
+              Usuario: [c014      ]    Fecha de Ingreso: [c015               ]
+}
+TABLES
+cxct021
+ATTRIBUTES
+c000 = cxct021.z21_codcli, AUTONEXT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = FORMONLY.tit_nombre_cli, NOENTRY, REVERSE, UPSHIFT;
+a0   = cxct021.z21_tipo_doc, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = FORMONLY.tit_tipo_doc, NOENTRY, REVERSE, UPSHIFT;
+c003 = cxct021.z21_num_doc, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Numeración automatica en Notas Crédito. Ingreso manual otro No. Doc.';
+b01  = cxct021.z21_subtipo, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c004 = FORMONLY.tit_subtipo, NOENTRY, REVERSE, UPSHIFT;
+c005 = cxct021.z21_areaneg, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c020 = cxct021.z21_linea, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c110 = FORMONLY.n_linea, NOENTRY;
+c006 = FORMONLY.tit_area, NOENTRY, REVERSE, UPSHIFT;
+c007 = cxct021.z21_referencia, AUTONEXT, UPSHIFT;
+c008 = cxct021.z21_fecha_emi, AUTONEXT, REVERSE, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+        COMMENTS = 'Ingrese fecha en formato: dd-mm-yyyy';
+
+a1   = cxct021.z21_moneda, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c009 = FORMONLY.tit_mon_bas, NOENTRY, REVERSE, UPSHIFT;
+c010 = cxct021.z21_paridad, NOENTRY, REVERSE, INCLUDE = (1 TO 999999.999999999),
+	FORMAT = '#,###,##&.#########';
+--v001 = formonly.val_base TYPE DECIMAL(12,2) NOT NULL, REQUIRED,
+--       FORMAT = '###,###,##&.##', INCLUDE = (0.01 TO 999999999);
+--v002 = formonly.z21_val_impto, REQUIRED, FORMAT = '###,###,##&.##', NOENTRY;
+c011 = cxct021.z21_valor, AUTONEXT, REVERSE, INCLUDE = (0 TO 9999999999.99),
+	FORMAT = '###,###,##&.##';
+c012 = cxct021.z21_saldo, AUTONEXT, REVERSE, FORMAT = '###,###,##&.##';
+c013 = cxct021.z21_origen, NOENTRY, REVERSE, UPSHIFT,
+	WIDGET = 'RADIO', CONFIG = 'M Manual A Automatico', DEFAULT = 'M';
+c014 = cxct021.z21_usuario, NOENTRY, REVERSE, UPSHIFT;
+c015 = cxct021.z21_fecing, NOENTRY, REVERSE, UPSHIFT;
+
+x001 = FORMONLY.vm_num_current1, NOENTRY;
+y001 = FORMONLY.vm_num_rows1, NOENTRY;
+--z001 = z21_num_sri, COMMENTS = 'Requerido solo para Notas de Crédito.';
+--z    = FORMONLY.flag_impto TYPE CHAR NOT NULL, WIDGET = 'CHECK', 
+--       CONFIG = 'S N acknowledge', DEFAULT = 'S', INCLUDE = ('S', 'N'), UPSHIFT;
+END

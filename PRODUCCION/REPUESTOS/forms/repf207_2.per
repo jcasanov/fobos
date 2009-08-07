@@ -1,0 +1,33 @@
+database diteca
+screen 
+{
+
+  -------------------------------------------------------------
+     Pedido           Moneda         Proveedor       Tipo         
+  -------------------------------------------------------------
+  [c002      ] [a0|c006           ][c004       ][b|c005       ] 
+  [c002      ] [a0|c006           ][c004       ][b|c005       ] 
+  [c002      ] [a0|c006           ][c004       ][b|c005       ] 
+  [c002      ] [a0|c006           ][c004       ][b|c005       ] 
+  [c002      ] [a0|c006           ][c004       ][b|c005       ] 
+  [c002      ] [a0|c006           ][c004       ][b|c005       ] 
+  -------------------------------------------------------------
+}
+end
+tables
+rept016
+attributes
+c002 = rept016.r16_pedido, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2', 
+	UPSHIFT, OPTIONS='-nolist';
+b = rept016.r16_tipo, NOENTRY, OPTIONS='-nolist';
+c004 = rept016.r16_proveedor, NOENTRY, OPTIONS='-nolist';
+a0 = rept016.r16_moneda, NOENTRY, OPTIONS='-nolist';
+c005 = formonly.n_tipo, NOENTRY, OPTIONS='-nolist';
+c006 = formonly.n_moneda, NOENTRY, OPTIONS='-nolist';
+end
+
+instructions
+screen record ra_pedido[6] (r16_pedido, r16_moneda, n_moneda, r16_proveedor, r16_tipo, n_tipo)
+
+keys
+F5 = 'Ver pedido'

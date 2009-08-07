@@ -1,0 +1,28 @@
+DATABASE diteca
+
+SCREEN
+{
+ COMPANIAS CONFIGURADAS VEHICULOS
+----------------------------------------
+ Código	        Descripción 	  
+----------------------------------------
+[f001] [f002                         ] 
+[f001] [f002                         ]
+[f001] [f002                         ]
+[f001] [f002                         ]
+[f001] [f002                         ]
+[f001] [f002                         ]
+[f001] [f002                         ]
+}
+
+TABLES
+gent001
+veht001
+
+ATTRIBUTES
+f001 = v01_compania;
+f002 = g01_razonsocial;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_ciaveh[7](v01_compania, g01_razonsocial)

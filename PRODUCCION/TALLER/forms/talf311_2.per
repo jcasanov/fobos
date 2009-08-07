@@ -1,0 +1,46 @@
+DATABASE formonly
+SCREEN
+{
+                    DETALLE MANO DE OBRA MECANICOS
+
+       Mecánico: [c001                     ]
+        Período: [c002      ] - [c003      ]
+         Moneda: [c4]     [c005           ]
+         Modelo: [c006           ]
+
+ [c040      |c041  |c042         |c043                        |c044          ]
+[c020      |c021  |c022         |c023                        |c024          ]   
+[c020      |c021  |c022         |c023                        |c024          ] 
+[c020      |c021  |c022         |c023                        |c024          ] 
+[c020      |c021  |c022         |c023                        |c024          ] 
+[c020      |c021  |c022         |c023                        |c024          ] 
+[c020      |c021  |c022         |c023                        |c024          ] 
+[c020      |c021  |c022         |c023                        |c024          ] 
+[c020      |c021  |c022         |c023                        |c024          ] 
+[c020      |c021  |c022         |c023                        |c024          ] 
+[c020      |c021  |c022         |c023                        |c024          ] 
+                                                             [c030          ]
+}
+ATTRIBUTES
+c001 = formonly.name_meca, REVERSE;
+c002 = formonly.fec_ini TYPE DATE NOT NULL, REVERSE, FORMAT = 'dd-mm-yyyy';
+c003 = formonly.fec_fin TYPE DATE NOT NULL, REVERSE, FORMAT = 'dd-mm-yyyy';
+c4   = formonly.moneda TYPE CHAR NOT NULL, UPSHIFT, REVERSE, AUTONEXT;
+c005 = formonly.tit_mon;
+c006 = formonly.modelo, UPSHIFT;
+c040 = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c041 = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c042 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c043 = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c044 = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c020 = formonly.fecha   TYPE DATE, FORMAT = 'dd-mm-yyyy';
+c021 = formonly.num_ot;
+c022 = formonly.num_fa;
+c023 = formonly.descri_tar;
+c024 = formonly.valor TYPE DECIMAL(12,2), FORMAT = '---,---,--&.##';
+c030 = formonly.tot_val TYPE DECIMAL(12,2), FORMAT = '---,---,--&.##', REVERSE;
+INSTRUCTIONS
+SCREEN RECORD r_mot[10] (formonly.fecha,  formonly.num_ot, formonly.num_fa, 
+			formonly.descri_tar, formonly.valor)
+KEYS
+F5='Orden'

@@ -1,0 +1,21 @@
+DATABASE formonly
+SCREEN
+{
+   Indicador Vencimiento: [c001          ]
+
+   Rango 1: [a  ] a [b  ] días
+   Rango 2: [c  ] a [d  ] días
+   Rango 3: [e  ] a [f  ] días
+   Rango 4:      >= [g  ] días
+
+}
+ATTRIBUTES
+c001 = formonly.ind_venc TYPE CHAR NOT NULL, UPSHIFT, AUTONEXT, INCLUDE = 
+       ('P','V'), WIDGET = 'RADIO', CONFIG = 'P "Por Vencer" V "Vencidos"'; 
+a    = formonly.rango1_i TYPE SMALLINT NOT NULL, INCLUDE = (0 TO 999);
+b    = formonly.rango1_f TYPE SMALLINT NOT NULL, INCLUDE = (0 TO 999);
+c    = formonly.rango2_i TYPE SMALLINT NOT NULL, INCLUDE = (0 TO 999);
+d    = formonly.rango2_f TYPE SMALLINT NOT NULL, INCLUDE = (0 TO 999);
+e    = formonly.rango3_i TYPE SMALLINT NOT NULL, INCLUDE = (0 TO 999);
+f    = formonly.rango3_f TYPE SMALLINT NOT NULL, INCLUDE = (0 TO 999);
+g    = formonly.rango4_i TYPE SMALLINT NOT NULL, INCLUDE = (0 TO 999);

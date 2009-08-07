@@ -1,0 +1,71 @@
+DATABASE diteca
+SCREEN
+{
+ Comprobantes
+ [c|b0|c011    |c012] [b|c013      |c015                                     ]
+[a|a0|c001    |c002] [d|c003      |c005                                     ]
+[a|a0|c001    |c002] [d|c003      |c005                                     ]
+[a|a0|c001    |c002] [d|c003      |c005                                     ]
+[a|a0|c001    |c002] [d|c003      |c005                                     ]
+[a|a0|c001    |c002] [d|c003      |c005                                     ]
+     Subtipo: [c010                               ]
+
+ Detalle de Comprobantes
+ [c016        |c017                    |c018              |c019              ]
+[c006        |c007                    |c008              |c009              ]
+[c006        |c007                    |c008              |c009              ]
+[c006        |c007                    |c008              |c009              ]
+[c006        |c007                    |c008              |c009              ]
+[c006        |c007                    |c008              |c009              ]
+[c006        |c007                    |c008              |c009              ]
+[c006        |c007                    |c008              |c009              ]
+[c006        |c007                    |c008              |c009              ]
+ Tipo Doc.: [c22]            Totales: [c020              |c021              ]
+     Glosa: [c023                               ]
+}
+TABLES
+ctbt012,
+ctbt013
+ATTRIBUTES
+c    = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+b0   = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c011 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c012 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c013 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+b    = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c015 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+
+c016 = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22';
+c017 = FORMONLY.tit_col9, WIDGET = 'BUTTON', CONFIG = 'F23';
+c018 = FORMONLY.tit_col10, WIDGET = 'BUTTON', CONFIG = 'F24';
+c019 = FORMONLY.tit_col11, WIDGET = 'BUTTON', CONFIG = 'F25';
+
+a    = ctbt012.b12_estado, AUTONEXT, UPSHIFT, OPTIONS = '-nolist';
+a0   = ctbt012.b12_tipo_comp, AUTONEXT, UPSHIFT, OPTIONS = '-nolist';
+c001 = ctbt012.b12_num_comp, AUTONEXT, UPSHIFT, OPTIONS = '-nolist';
+c002 = ctbt012.b12_subtipo, AUTONEXT, INCLUDE = (0 TO 9999),
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2', OPTIONS = '-nolist';
+c003 = ctbt012.b12_fec_proceso, AUTONEXT, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy', OPTIONS = '-nolist';
+d    = ctbt012.b12_origen, AUTONEXT, UPSHIFT, INCLUDE=('A', 'M'),
+	COMMENTS='(A)utomático (M)anual', OPTIONS = '-nolist'; 
+c005 = ctbt012.b12_glosa, AUTONEXT, UPSHIFT, SCROLL, OPTIONS = '-nolist';
+c010 = FORMONLY.tit_subtipo, NOENTRY, UPSHIFT;
+
+c006 = ctbt013.b13_cuenta, NOENTRY, UPSHIFT, OPTIONS = 'list';
+c007 = FORMONLY.tit_descripcion, NOENTRY, UPSHIFT, OPTIONS = 'list';
+c008 = FORMONLY.tit_debito, NOENTRY, FORMAT = '###,###,###,##&.##',
+	OPTIONS = 'list';
+c009 = FORMONLY.tit_credito, NOENTRY, FORMAT = '###,###,###,##&.##',
+	OPTIONS = 'list';
+c020 = FORMONLY.tit_total_deb, NOENTRY, REVERSE, FORMAT = '###,###,###,##&.##';
+c021 = FORMONLY.tit_total_cre, NOENTRY, REVERSE, FORMAT = '###,###,###,##&.##';
+c22  = ctbt013.b13_tipo_doc, NOENTRY, UPSHIFT;
+c023 = ctbt013.b13_glosa, NOENTRY, UPSHIFT;
+END
+KEYS
+F5 = 'Detalle'
+INSTRUCTIONS
+SCREEN RECORD rm_cab[5] (b12_estado,b12_tipo_comp,b12_num_comp,b12_subtipo,
+			 b12_origen, b12_fec_proceso,b12_glosa)
+SCREEN RECORD rm_det[8] (b13_cuenta,tit_descripcion,tit_debito,tit_credito)

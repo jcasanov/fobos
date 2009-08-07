@@ -1,0 +1,58 @@
+DATABASE diteca
+SCREEN
+{
+
+                                                      Estado: [c] [c0a0     ]
+                  Compañía: [c000] [c007                                    ]
+
+      Crédito Automático ?: [b]
+                       Bloquear crédito a clientes con saldos vencidos ?: [d]
+
+              Crédito Días: [c001   ]
+             Tasa por Mora: [c002   ] %
+          Cobra por Mora ?: [a]
+
+            Mes de Proceso: [c020]    Año de Proceso: [c021]
+
+  Aux. Cliente Moneda Base: [c003        ] [c008                            ]
+  Aux. Cli. Moneda Alterna: [c004        ] [c009                            ]
+ Aux. Anticipo Moneda Base: [c005        ] [c010                            ]
+ Aux. Antic. Moneda Alter.: [c006        ] [c011                            ]
+}
+TABLES
+cxct000
+ATTRIBUTES
+c000 = cxct000.z00_compania, AUTONEXT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+        COMMENTS = 'Indicar que compañía serán config. para cuentas por cobrar';
+b    = cxct000.z00_credit_auto, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S';
+d    = cxct000.z00_bloq_vencido, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S';
+c001 = cxct000.z00_credit_dias, AUTONEXT, REVERSE, INCLUDE = (0 TO 360),
+	COMMENTS = 'Cero si se especifica Crédito Automático No';
+c002 = cxct000.z00_tasa_mora, AUTONEXT, REVERSE, FORMAT = '##&.##',
+	INCLUDE = (0 TO 999.99), COMMENTS = 'Interés que se calcula por Mora';
+a    = cxct000.z00_cobra_mora, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S',
+	COMMENTS = 'Especifique si se calculará interés por mora al momento del pago del documento';
+c003 = cxct000.z00_aux_clte_mb, AUTONEXT, REVERSE, UPSHIFT,
+        WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+        COMMENTS = 'Indicar auxiliar contable de cliente para ctas. por cobrar';
+c004 = cxct000.z00_aux_clte_ma, AUTONEXT, REVERSE, UPSHIFT,
+        WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c005 = cxct000.z00_aux_ant_mb, AUTONEXT, REVERSE, UPSHIFT,
+        WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+        COMMENTS = 'Indicar auxiliar contable para anticípo';
+c006 = cxct000.z00_aux_ant_ma, AUTONEXT, REVERSE, UPSHIFT,
+        WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c007 = FORMONLY.tit_compania, NOENTRY, REVERSE, UPSHIFT;
+c008 = FORMONLY.tit_cli_mb, NOENTRY, REVERSE, UPSHIFT;
+c009 = FORMONLY.tit_cli_ma, NOENTRY, REVERSE, UPSHIFT;
+c010 = FORMONLY.tit_ant_mb, NOENTRY, REVERSE, UPSHIFT;
+c011 = FORMONLY.tit_ant_ma, NOENTRY, REVERSE, UPSHIFT;
+c    = FORMONLY.tit_est, NOENTRY, REVERSE, UPSHIFT;
+c0a0 = FORMONLY.tit_estado_cob, NOENTRY, UPSHIFT;
+c020 = cxct000.z00_mespro, NOENTRY;
+c021 = cxct000.z00_anopro, NOENTRY;
+END

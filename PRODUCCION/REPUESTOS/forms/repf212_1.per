@@ -1,0 +1,76 @@
+database diteca
+screen 
+{
+
+     Ajuste No: [b ][f002           ]         	    Fecha:[f029               ]
+    Referencia: [f005                                   ]
+      Vendedor: [f011 ] [b0                             ]       Tipo Ajuste
+   Bod. Origen: [a2] [b1                                ]    [a0              ]
+    Línea Vta.: [b2   ] [b3                             ]
+Subtipo Trans.: [b10  ] [b11                            ]
+
+ [v0  |v1   |v2             ][v3            |v4            |v5              ]
+[b4  |b5   |b6             ][b7            |b8            |b9              ]
+[b4  |b5   |b6             ][b7            |b8            |b9              ]
+[b4  |b5   |b6             ][b7            |b8            |b9              ]
+[b4  |b5   |b6             ][b7            |b8            |b9              ]
+[b4  |b5   |b6             ][b7            |b8            |b9              ]
+[b4  |b5   |b6             ][b7            |b8            |b9              ]
+[b4  |b5   |b6             ][b7            |b8            |b9              ]
+
+ Ingresado Por: [f028      ]	              Total Costo:[f022            ]
+}
+end
+TABLES
+	rept019
+	rept020
+	rept010
+ATTRIBUTES
+		     ---- BOTONES ----
+v0  = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+v1  = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+v2  = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+v3  = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+v4  = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F20';
+v5  = formonly.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F21';
+
+a0   = rept019.r19_cod_tran, REVERSE, 
+	WIDGET = 'RADIO', CONFIG = 'A+ Incremento A- Decremento';
+f002 = rept019.r19_num_tran, REVERSE, NOENTRY;
+f005 = rept019.r19_referencia, REVERSE, UPSHIFT,
+	COMMENT = 'Motivo por el cual se realiza el Ajuste de Existencia. ';
+f011 = rept019.r19_vendedor, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+b0   = formonly.nom_vend TYPE VARCHAR, NOENTRY;
+b    = FORMONLY.tipo_ajuste, NOENTRY, REVERSE;
+a2   = rept019.r19_bodega_ori, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENT = 'Bodega a la que se le realizará el Ajuste de Existencia. ';
+b1   = formonly.nom_bod TYPE VARCHAR, NOENTRY;
+f022 = rept019.r19_tot_costo, REVERSE, FORMAT = '#,###,###,##&.##', NOENTRY;
+f028 = rept019.r19_usuario, REVERSE, NOENTRY, UPSHIFT;
+f029 = rept019.r19_fecing, REVERSE, NOENTRY, COMMENT='Formato para consulta: [<|=|>] yyyy-mm-dd hh:mm:ss';
+b2   = formonly.linea TYPE VARCHAR, REVERSE, UPSHIFT, REQUIRED,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENT = 'Línea de Venta de los Items del detalle del Ajuste de Existencia.';
+b3   = formonly.nom_lin TYPE VARCHAR, NOENTRY;
+b4   = rept020.r20_cant_ven, REVERSE, OPTIONS = '-nolist', 
+	INCLUDE = (1 TO 9999);
+b5   = rept020.r20_stock_ant, REVERSE, NOENTRY, OPTIONS = '-nolist';
+b6   = rept020.r20_item, REVERSE, UPSHIFT, OPTIONS = '-nolist',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+b7   = rept010.r10_nombre, REVERSE, NOENTRY, OPTIONS = '-nolist';
+b8   = rept010.r10_costo_mb, REVERSE, FORMAT = '###,###,##&.##',
+	NOENTRY, OPTIONS = '-nolist';
+b9   = formonly.total TYPE DECIMAL(12,2), REVERSE, NOENTRY, 
+	FORMAT = '#,###,###,##&.##', OPTIONS = '-nolist';
+b10  = rept019.r19_cod_subtipo,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENT = 'Ingrese el subtipo de acuerdo al motivo del ajuste. ';
+b11  = formonly.nom_subtipo TYPE VARCHAR, NOENTRY;
+
+INSTRUCTIONS
+SCREEN RECORD rm_aj_exist[7](r20_cant_ven, r20_stock_ant, r20_item, r10_nombre,
+			     r10_costo_mb, total)
+
+END

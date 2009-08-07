@@ -1,0 +1,30 @@
+DATABASE diteca
+
+SCREEN
+{
+ CARGOS
+-----------------------------------
+ Código	  Nombre 		
+-----------------------------------
+[c01] [c002                    ] 
+[c01] [c002                    ]
+[c01] [c002                    ]
+[c01] [c002                    ]
+[c01] [c002                    ]
+[c01] [c002                    ]
+[c01] [c002                    ] 
+[c01] [c002                    ] 
+[c01] [c002                    ] 
+[c01] [c002                    ] 
+}
+
+TABLES
+gent035
+
+ATTRIBUTES
+c01 = g35_cod_cargo;
+c002 = g35_nombre;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_cargo[10](g35_cod_cargo, g35_nombre)

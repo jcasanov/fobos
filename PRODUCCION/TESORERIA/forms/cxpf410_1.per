@@ -1,0 +1,27 @@
+
+DATABASE DITECA
+SCREEN 
+
+{
+		
+			     Moneda: [c0] [c001              ]
+	              Fecha Inicial: [c002      ]  
+            	        Fecha Final: [c003      ]
+		       Departamento: [c004] [c010            ]
+}
+END
+
+ATTRIBUTES
+c0   = formonly.moneda TYPE CHAR NOT NULL, REVERSE, UPSHIFT, 
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2', AUTONEXT;
+c001 = formonly.desc_moneda;
+c002 = formonly.inicial TYPE CHAR NOT NULL, REVERSE, FORMAT = 'dd-mm-yyyy', 
+	AUTONEXT, COMMENT = 'Ingrese fecha en formato: dd-mm-aaaa';
+c003 = formonly.final TYPE CHAR NOT NULL, REVERSE, FORMAT = 'dd-mm-yyyy', 
+	AUTONEXT, COMMENT = 'Ingrese fecha en formato: dd-mm-aaaa';
+c004 = formonly.proveedor, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';	
+c004 = formonly.departamento, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';	
+--c004 = formonly.proveedor, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';	
+c010 = formonly.desc_departa;
+END
+

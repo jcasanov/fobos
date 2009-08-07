@@ -1,0 +1,70 @@
+DATABASE diteca
+SCREEN
+{
+       Pedido:[c000      ]    Tipo:[c001        ]        Estado:[b|c002      ]
+        Línea:[c025 ]           
+    Proveedor:[c003      |c004                        ]  Demora:[c006        ]
+  Fecha Envío:[c005      ]                        Fecha Llegada:[c008        ]
+       Bodega:[a1] [c028                           ]
+       Moneda:[a0|c010            ]  	              Seguridad:[c007        ]
+Aux. Contable:[c011        |c012                      ]   
+   Referencia:[c009                                   ]
+
+     [c013 |c014 |c015             |c016                             ]
+    [c018 |c019 |c020           ] [c021                             ]
+    [c018 |c019 |c020           ] [c021                             ]
+    [c018 |c019 |c020           ] [c021                             ]
+    [c018 |c019 |c020           ] [c021                             ]
+    [c018 |c019 |c020           ] [c021                             ]
+    [c018 |c019 |c020           ] [c021                             ]
+    [c018 |c019 |c020           ] [c021                             ]
+    [c018 |c019 |c020           ] [c021                             ]
+
+}
+TABLES
+	rept010,
+	rept016,
+	rept017,
+	rept019
+ATTRIBUTES
+
+c025 = rept016.r16_linea, NOENTRY, REVERSE;
+c000 = rept016.r16_pedido, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = rept016.r16_tipo, REVERSE, UPSHIFT, NOENTRY,
+	WIDGET = 'RADIO', CONFIG = 'S Sugerido E Emergencia', DEFAULT = 'E';
+b    = rept016.r16_estado, AUTONEXT, REVERSE, UPSHIFT, NOENTRY;
+c002 = FORMONLY.tit_estado, NOENTRY, UPSHIFT;
+c003 = rept016.r16_proveedor, AUTONEXT, REVERSE, UPSHIFT, NOENTRY;
+c004 = FORMONLY.nom_proveedor, NOENTRY, REVERSE, UPSHIFT;
+c005 = rept016.r16_fec_envio, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c006 = rept016.r16_demora, NOENTRY, REVERSE;
+c007 = rept016.r16_seguridad, NOENTRY, REVERSE;
+c008 = rept016.r16_fec_llegada, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c009 = rept016.r16_referencia, AUTONEXT, REVERSE, UPSHIFT, NOENTRY;
+a0   = rept016.r16_moneda, AUTONEXT, REVERSE, UPSHIFT, NOENTRY;
+c010 = FORMONLY.nom_moneda TYPE VARCHAR, NOENTRY;
+c011 = rept016.r16_aux_cont, AUTONEXT, REVERSE, UPSHIFT;
+c012 = FORMONLY.nom_aux_cont, NOENTRY, REVERSE, UPSHIFT;
+
+c013 = FORMONLY.tit_col1, NOENTRY, WIDGET = 'BUTTON', CONFIG = 'F15';
+c014 = FORMONLY.tit_col2, NOENTRY, WIDGET = 'BUTTON', CONFIG = 'F16';
+c015 = FORMONLY.tit_col3, NOENTRY, WIDGET = 'BUTTON', CONFIG = 'F17';
+c016 = FORMONLY.tit_col4, NOENTRY, WIDGET = 'BUTTON', CONFIG = 'F18';
+
+c020 = rept017.r17_item,    REVERSE, OPTIONS = '-nolist', NOENTRY,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c018 = rept017.r17_cantped, REVERSE, NOENTRY, OPTIONS = '-nolist';
+c019 = rept017.r17_cantrec, REVERSE,          OPTIONS = '-nolist',
+	INCLUDE = (0 TO 9999);
+c021 = rept010.r10_nombre, REVERSE, NOENTRY, OPTIONS = '-nolist';
+
+a1   = rept019.r19_bodega_ori, UPSHIFT, REVERSE, AUTONEXT,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c028 = formonly.n_bodega, NOENTRY;
+
+END
+INSTRUCTIONS
+SCREEN RECORD r_detalle[8] (r17_cantped, r17_cantrec, r17_item, r10_nombre)
+
+KEYS 'F5' = 'Buscar Item'

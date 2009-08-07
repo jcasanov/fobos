@@ -1,0 +1,52 @@
+database diteca
+SCREEN
+{
+
+     [c010           |c011                |a1|c012          |c013  |c014  ]
+    [c000           |c001                |a0|c002          |c003  |c004  ]
+    [c000           |c001                |a0|c002          |c003  |c004  ]
+    [c000           |c001                |a0|c002          |c003  |c004  ]
+    [c000           |c001                |a0|c002          |c003  |c004  ]
+    [c000           |c001                |a0|c002          |c003  |c004  ]
+    [c000           |c001                |a0|c002          |c003  |c004  ]
+    [c000           |c001                |a0|c002          |c003  |c004  ]
+    [c000           |c001                |a0|c002          |c003  |c004  ]
+    [c000           |c001                |a0|c002          |c003  |c004  ]
+    [c000           |c001                |a0|c002          |c003  |c004  ]
+    [c000           |c001                |a0|c002          |c003  |c004  ]
+    [c000           |c001                |a0|c002          |c003  |c004  ]
+    [c000           |c001                |a0|c002          |c003  |c004  ]
+    [c000           |c001                |a0|c002          |c003  |c004  ]
+    [c000           |c001                |a0|c002          |c003  |c004  ]
+    [c000           |c001                |a0|c002          |c003  |c004  ]
+
+     Moneda: [c005           ]                    Totales: [c007  |c008  ]
+}
+TABLES
+veht004, veht020
+ATTRIBUTES
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+a1   = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c012 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c013 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c014 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+c000 = veht020.v20_modelo, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c001 = veht004.v04_nombre, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+a0   = veht020.v20_moneda, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c002 = veht020.v20_precio, NOENTRY, UPSHIFT, FORMAT = '###,###,##&.##',
+	OPTIONS = '-nolist';
+c003 = veht020.v20_stock, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c004 = veht020.v20_pedidos, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c005 = FORMONLY.tit_moneda, NOENTRY, REVERSE, UPSHIFT;
+c007 = FORMONLY.tit_total_sto, NOENTRY, REVERSE, UPSHIFT, FORMAT = '#####&';
+c008 = FORMONLY.tit_total_ped, NOENTRY, REVERSE, UPSHIFT, FORMAT = '#####&';
+END
+KEYS
+F5 = 'Modelo'
+F6 = 'Vehículos'
+F7 = 'Pedidos'
+INSTRUCTIONS
+SCREEN RECORD rm_det[16] (v20_modelo, v04_nombre, v20_moneda, v20_precio,
+			v20_stock, v20_pedidos)

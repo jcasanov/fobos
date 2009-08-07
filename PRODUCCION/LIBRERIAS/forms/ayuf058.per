@@ -1,0 +1,30 @@
+DATABASE diteca
+
+SCREEN
+{
+ LINEAS VEHICULOS 
+-------------------------------------
+ Código      Descripción 		
+-------------------------------------
+[c01  ] [c002                    ] 
+[c01  ] [c002                    ]
+[c01  ] [c002                    ]
+[c01  ] [c002                    ]
+[c01  ] [c002                    ]
+[c01  ] [c002                    ]
+[c01  ] [c002                    ] 
+[c01  ] [c002                    ] 
+[c01  ] [c002                    ] 
+[c01  ] [c002                    ] 
+}
+
+TABLES
+veht003
+
+ATTRIBUTES
+c01  = v03_linea;
+c002 = v03_nombre;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_linveh[10](v03_linea, v03_nombre)

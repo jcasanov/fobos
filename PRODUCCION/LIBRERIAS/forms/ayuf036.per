@@ -1,0 +1,30 @@
+DATABASE diteca
+
+SCREEN
+{
+ RUBROS DE IMPORTACIONES 
+------------------------------------
+ Rubro   Descripción 		
+------------------------------------
+[c01] [c002                       ] 
+[c01] [c002                       ]
+[c01] [c002                       ]
+[c01] [c002                       ]
+[c01] [c002                       ]
+[c01] [c002                       ]
+[c01] [c002                       ] 
+[c01] [c002                       ] 
+[c01] [c002                       ] 
+[c01] [c002                       ] 
+}
+
+TABLES
+gent017
+
+ATTRIBUTES
+c01 = g17_codrubro;
+c002 = g17_nombre;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_rubros[10](g17_codrubro, g17_nombre)

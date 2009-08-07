@@ -1,0 +1,34 @@
+database diteca
+screen 
+{
+
+      Banco: [c000] [c100                                   ]
+   No. Cta.: [c001           ]   Moneda: [a0|c101           ]       
+
+  Proveedor: [c002] [c102                                   ]
+  
+  Tipo Vencimiento: [c003            ]
+
+
+
+
+}
+end
+tables 
+gent008
+gent009
+gent013
+cxpt001
+
+attributes
+c000 = formonly.banco,  REVERSE, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c100 = gent008.g08_nombre, NOENTRY, UPSHIFT;                                   
+c001 = gent009.g09_numero_cta, REVERSE, UPSHIFT,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+a0   = gent013.g13_moneda, NOENTRY, UPSHIFT;
+c101 = gent013.g13_nombre, NOENTRY, UPSHIFT;
+c002 = formonly.proveedor, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c102 = cxpt001.p01_nomprov, NOENTRY, UPSHIFT;
+c003 = formonly.tipo_vcto, WIDGET='RADIO', 
+	CONFIG='V Vencidos P "Por Vencer" T Todos';
+end

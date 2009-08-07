@@ -1,0 +1,28 @@
+database diteca
+screen size 24 by 80
+{
+
+
+           Modelo de Vehículo: [f001           ]
+
+		        Línea: [f002 ] [a1                          ]
+                   Dificultad: [f3]
+
+                Ingresado Por: [f004      ]
+	     Fecha de Ingreso: [f005               ]
+
+}
+end
+tables
+talt004
+attributes
+f001 = talt004.t04_modelo, REVERSE, UPSHIFT, 
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f002 = talt004.t04_linea, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+a1   = formonly.nom_linea TYPE VARCHAR;
+f3   = talt004.t04_dificultad, REVERSE, 
+	COMMENT = ' Grado de dificultad por modelo de vehículo entre 1-10 ';
+f004 = talt004.t04_usuario, REVERSE, NOENTRY;
+f005 = talt004.t04_fecing, REVERSE, NOENTRY;
+end

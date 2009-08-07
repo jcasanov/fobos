@@ -1,0 +1,38 @@
+DATABASE diteca
+SCREEN
+{
+
+                                                     Estado: [c] [c101     ]
+
+                       Compañía: [c100]  [c1a0                             ]                         
+
+               Cuando Retiene ?: [c1b0        ]
+
+
+       Valor Mínimo Moneda Base: [c102              ]
+    Valor Mínimo Moneda Alterna: [c103              ]
+    Días Reactivar Orden Compra: [c104 ]
+                         
+     Reactivar dentro del Mes ?: [d]
+
+}
+TABLES
+ordt000
+ATTRIBUTES
+c101 = FORMONLY.tit_estado_cia, NOENTRY;
+c100 = c00_compania, REVERSE, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c1b0 = ordt000.c00_cuando_ret, UPSHIFT, REVERSE,
+	WIDGET = 'RADIO', CONFIG = 'C Compra P Pago', DEFAULT = 'P',
+	COMMENTS = 'Retiene en la fuente cuando se hace una compra o cuando se hace el pago';
+c102 = ordt000.c00_valmin_mb, AUTONEXT, REVERSE,
+	FORMAT = '#,###,###,##&.##';
+c103 = ordt000.c00_valmin_ma, AUTONEXT, REVERSE,
+	FORMAT = '#,###,###,##&.##';
+c104 = ordt000.c00_dias_react, REVERSE, AUTONEXT,
+       COMMENTS = 'Dias en que se puede reactivar, desde que se cerró la orden';
+d    = ordt000.c00_react_mes, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S',
+	COMMENTS = 'Permite reaperturar Ordenes de Compras ya procesadas';
+c1a0 = FORMONLY.tit_descripcion, REVERSE, NOENTRY;
+c    = FORMONLY.tit_est, NOENTRY, REVERSE;
+END

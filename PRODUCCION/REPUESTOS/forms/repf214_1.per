@@ -1,0 +1,78 @@
+database diteca
+screen 
+{
+
+   Compra Local No: [a0|c002           ]        Fecha: [c029               ]
+   Orden de Compra: [c014      ]               Moneda: [a4|c102            ]    
+          Impuesto: [c006 ]%                Descuento: [c007 ]%  
+         Proveedor: [c109       |c100                                      ] 
+  Autorización SRI: [c099      ]    Serie Comprobante: [c101  ]
+           Factura: [c005           ]   Guia Remision: [c018           ] 
+          Vendedor: [c011  ] [c103                                         ]
+
+       [lbl1|lbl2|lbl3            ][lbl4 |lbl5          |lbl6           ]   
+      [c035|c036|c033           ] [c045 |c041          |c105            ]
+      [c035|c036|c033           ] [c045 |c041          |c105            ]
+      [c035|c036|c033           ] [c045 |c041          |c105            ]
+      [c035|c036|c033           ] [c045 |c041          |c105            ]
+      [c035|c036|c033           ] [c045 |c041          |c105            ]
+		                             Subtotal: [c030            ]
+    Item: [c106                         ]   Descuento: [c031            ]
+				             Impuesto: [c023            ]
+    Ingresado Por: [c028      ]                 Total: [c025            ]
+
+}
+end
+tables
+rept019
+rept020
+attributes
+a0   = rept019.r19_cod_tran, NOENTRY, REVERSE, UPSHIFT;
+c002 = rept019.r19_num_tran, NOENTRY, REVERSE;
+c006 = rept019.r19_porc_impto, NOENTRY, REVERSE, FORMAT='#&.##';
+c007 = rept019.r19_descuento, NOENTRY, REVERSE, FORMAT='#&.##';
+c011 = rept019.r19_vendedor, REVERSE, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c014 = rept019.r19_oc_interna, REVERSE, WIDGET='FIELD_BMP', 
+	CONFIG='lista.bmp F2';
+c005 = rept019.r19_oc_externa, UPSHIFT, REVERSE, REQUIRED;
+c018 = formonly.vm_num_guia, UPSHIFT, REVERSE, REQUIRED;
+a4 = rept019.r19_moneda, REVERSE, NOENTRY;
+c025 = rept019.r19_tot_neto, NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+c023 = formonly.iva, NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+c031 = rept019.r19_tot_dscto, NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+c030 = rept019.r19_tot_bruto, NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+c028 = rept019.r19_usuario, NOENTRY, REVERSE, UPSHIFT;
+c029 = rept019.r19_fecing, NOENTRY, REVERSE;
+
+c033 = rept020.r20_item, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2',
+	UPSHIFT, OPTIONS='-nolist', NOENTRY;
+c035 = rept020.r20_cant_ped, INCLUDE=(0 TO 9999), OPTIONS='-nolist',
+	NOENTRY;
+c036 = rept020.r20_cant_ven, OPTIONS='-nolist', INCLUDE=(0 TO 9999);
+c041 = rept020.r20_precio, FORMAT='###,###,##&.##', OPTIONS='-nolist',
+	NOENTRY;
+c045 = rept020.r20_descuento, FORMAT='#&.##', NOENTRY, OPTIONS='-nolist';
+c105 = formonly.total, NOENTRY, FORMAT='#,###,###,##&.##', OPTIONS='-nolist';
+
+c099 = formonly.vm_num_aut,    REQUIRED, REVERSE, UPSHIFT;
+c101 = formonly.vm_serie_comp, REQUIRED, REVERSE, UPSHIFT;
+
+c103 = formonly.n_vendedor, NOENTRY;
+c100 = formonly.n_proveedor, NOENTRY;
+c102 = formonly.n_moneda, NOENTRY;
+c106 = formonly.descripcion, NOENTRY;
+c109 = formonly.cod_proveedor, NOENTRY;
+
+lbl1 = formonly.bt_cant_ped, NOENTRY, WIDGET='BUTTON', CONFIG='F20';
+lbl2 = formonly.bt_cant_vend, NOENTRY, WIDGET='BUTTON', CONFIG='F21';
+lbl3 = formonly.bt_item, NOENTRY, WIDGET='BUTTON', CONFIG='F22';
+lbl4 = formonly.bt_dscto, NOENTRY, WIDGET='BUTTON', CONFIG='F23';
+lbl5 = formonly.bt_precio, NOENTRY, WIDGET='BUTTON', CONFIG='F25';
+lbl6 = formonly.bt_total, NOENTRY, WIDGET='BUTTON', CONFIG='F26';
+end
+
+instructions
+screen record ra_compra[5] (r20_cant_ped, r20_cant_ven, r20_item, r20_descuento, r20_precio, total)
+
+keys
+F5 = 'Orden de Compra'

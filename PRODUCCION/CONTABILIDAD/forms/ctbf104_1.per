@@ -1,0 +1,25 @@
+DATABASE diteca
+SCREEN
+{
+
+
+						      Estado: [c] [c004     ]
+
+    Subtipo de Comprobante: [c0   ]  [c001                               ]
+
+                   Usuario: [c002      ]
+          Fecha de Ingreso: [c003               ]
+}
+TABLES
+ctbt004
+ATTRIBUTES
+c0   = ctbt004.b04_subtipo, AUTONEXT, REVERSE, UPSHIFT, NOENTRY,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Indicar el número del subtipo de comprobante contable';
+c001 = ctbt004.b04_nombre, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Indicar la descripción del subtipo de comprobante contable';
+c002 = ctbt004.b04_usuario, NOENTRY, REVERSE, UPSHIFT;
+c003 = ctbt004.b04_fecing, NOENTRY, REVERSE, UPSHIFT;
+c    = FORMONLY.tit_est, NOENTRY, UPSHIFT, REVERSE;
+c004 = FORMONLY.tit_estado_sub, NOENTRY, UPSHIFT;
+END

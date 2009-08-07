@@ -1,0 +1,18 @@
+DATABASE diteca
+SCREEN
+{
+      ¡ADVERTENCIA!: Este proceso puede tardar algunos minutos
+                     ya que remayorizara todos los meses a partir 
+                     del mes indicado hasta la fecha actual.
+
+
+      Remayorizar desde       Año: [c002] Mes: [c003][c004       ]
+}
+TABLES
+ctbt000
+ATTRIBUTES
+c002 = ctbt000.b00_anopro, AUTONEXT, REVERSE, UPSHIFT;
+c003 = FORMONLY.b00_mespro, AUTONEXT, REVERSE, UPSHIFT, INCLUDE = (1 TO 12),
+	COMMENTS = 'Mes de remayorización para el proceso contable';
+c004 = FORMONLY.tit_mes, NOENTRY, REVERSE, UPSHIFT;
+END

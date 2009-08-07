@@ -1,0 +1,48 @@
+
+database diteca
+screen 
+{
+	        DOCUMENTOS A FAVOR DEL CLIENTE
+
+  [b0|b1        |b2|b3        |b4              ][b5              ]
+ [a0|c003      |a1|c004      |c6              ][c7              ] 
+ [a0|c003      |a1|c004      |c6              ][c7              ] 
+ [a0|c003      |a1|c004      |c6              ][c7              ] 
+ [a0|c003      |a1|c004      |c6              ][c7              ] 
+ [a0|c003      |a1|c004      |c6              ][c7              ] 
+ [a0|c003      |a1|c004      |c6              ][c7              ] 
+ 						----------------
+                                        Total: [c8              ]
+}
+end
+TABLES
+	rept027
+	rept023
+	cxct021
+ATTRIBUTES
+		     ---- BOTONES ----
+b0  = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+b1  = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b2  = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+b3  = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+b4  = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F20';
+b5  = formonly.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F21';
+
+a0   = cxct021.z21_tipo_doc, REVERSE, NOENTRY, UPSHIFT, OPTIONS='-nolist';
+c003 = cxct021.z21_num_doc, REVERSE, NOENTRY, OPTIONS = '-nolist';
+a1   = cxct021.z21_moneda, REVERSE, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c004 = cxct021.z21_fecha_emi, REVERSE, NOENTRY, OPTIONS='-nolist', 
+	FORMAT='dd-mm-yyyy';
+c6  = cxct021.z21_saldo, REVERSE, NOENTRY,
+	FORMAT = '#,###,###,##&.##', OPTIONS = '-nolist';
+c7  = rept027.r27_valor, REVERSE, FORMAT='###,###,##&.##',
+	OPTIONS='-nolist', INCLUDE = (0.00 TO 999999999.99);
+c8  = formonly.total_anticipos TYPE DECIMAL(11,2), REVERSE, NOENTRY, 
+	FORMAT='###,###,##&.##';
+END
+
+INSTRUCTIONS     
+SCREEN RECORD r_detalle_2[6] (z21_tipo_doc,  z21_num_doc, z21_moneda, 
+			      z21_fecha_emi, z21_saldo,   r27_valor)
+
+

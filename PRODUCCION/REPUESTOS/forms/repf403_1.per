@@ -1,0 +1,39 @@
+DATABASE diteca
+SCREEN
+{
+  
+                    Moneda: [a0]     [c001           ]
+
+                    Bodega: [a1]     [c002                          ]
+
+               Línea Venta: [c003 ]  [c004                          ]
+
+          Tipo de Artículo: [c005  ] [c006      ]
+
+  Con Stock Mayor a Cero ?: [c]         Año: [c007]         Mes: [c8]
+
+ Detenerse al alcanzar los: [c010            ]
+
+}
+TABLES
+rept010, rept011, rept031
+ATTRIBUTES
+a0   = FORMONLY.vm_moneda, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = FORMONLY.tit_moneda, NOENTRY, REVERSE, UPSHIFT;
+a1   = formonly.r11_bodega, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = FORMONLY.tit_bodega, NOENTRY, REVERSE, UPSHIFT;
+c003 = rept010.r10_linea, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c004 = FORMONLY.tit_linea, NOENTRY, REVERSE, UPSHIFT;
+c005 = FORMONLY.r10_tipo, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c006 = FORMONLY.tit_tipo, NOENTRY, UPSHIFT;
+c    = FORMONLY.tit_stock_may, AUTONEXT, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+c007 = rept031.r31_ano, AUTONEXT, REVERSE, UPSHIFT, INCLUDE = (1900 TO 9999);
+c8   = rept031.r31_mes, AUTONEXT, REVERSE, UPSHIFT, INCLUDE = (1 TO 12);
+c010 = formonly.vm_max_costo TYPE DECIMAL(12,2), FORMAT = '#,###,###,##&.##', 
+       COMMENT='Ingrese 0 para mostrar todo.';
+END

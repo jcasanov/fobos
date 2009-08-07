@@ -1,0 +1,25 @@
+
+DATABASE diteca
+SCREEN
+{
+
+              Bodega: [c0] [c1                     ]
+
+      Percha Inicial: [c2 ]	       Percha Final: [c3 ]
+	
+   Ubicación Inicial: [c4     ]     Ubicación Final: [c5     ]
+
+}
+TABLES
+	rept011
+ATTRIBUTES
+
+c0  = rept011.r11_bodega, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c1  = formonly.nom_bod, NOENTRY;
+c2  = formonly.vm_percha TYPE VARCHAR, REVERSE, UPSHIFT, AUTONEXT;
+c3  = formonly.vm_percha2 TYPE VARCHAR, REVERSE, UPSHIFT, AUTONEXT;
+c4  = formonly.vm_ubicacion TYPE VARCHAR, REVERSE, UPSHIFT;
+c5  = formonly.vm_ubicacion2 TYPE VARCHAR, REVERSE, UPSHIFT;
+
+END

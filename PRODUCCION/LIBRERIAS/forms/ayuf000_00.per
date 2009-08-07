@@ -1,0 +1,25 @@
+DATABASE diteca
+SCREEN
+{
+ CODIGO 	   DESCRIPCION
+-----------------------------------------------
+[f001      ][f002                             ]
+[f001      ][f002                             ]
+[f001      ][f002                             ]
+[f001      ][f002                             ]
+[f001      ][f002                             ]
+[f001      ][f002                             ]
+[f001      ][f002                             ]
+[f001      ][f002                             ]
+[f001      ][f002                             ]
+[f001      ][f002                             ]
+
+}
+TABLES
+gent001
+ATTRIBUTES
+f001 = g01_compania, UPSHIFT;
+f002 = g01_razonsocial, UPSHIFT;
+INSTRUCTIONS
+DELIMITERS "  "
+SCREEN RECORD r_ayuda[10] (g01_compania, g01_razonsocial)

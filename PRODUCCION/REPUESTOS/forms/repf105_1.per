@@ -1,0 +1,23 @@
+database diteca
+screen
+{
+
+
+	Código de Unidad de Medida : [f000   ]
+
+                             Siglas: [a0 ]
+
+	              Ingresado Por: [f001      ]
+                   Fecha de Ingreso: [f002               ]
+
+}
+end
+tables
+rept005
+attributes
+f000 = rept005.r05_codigo, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+a0 = rept005.r05_siglas, REVERSE, UPSHIFT;
+f001 = rept005.r05_usuario, REVERSE, NOENTRY;
+f002 = rept005.r05_fecing, REVERSE, NOENTRY;
+end

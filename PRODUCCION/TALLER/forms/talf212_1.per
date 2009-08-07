@@ -1,0 +1,81 @@
+database diteca
+screen
+{
+   No. Gasto: [c000       ]    	                       Estado: [a|a100     ]
+
+       Orden: [c001       ]                      Estado Orden: [b|b100     ]
+     Cliente: [c002     ] [c101                                            ]
+      Modelo: [c003           ]          Chasís: [c004                     ]
+
+      Origen: [c005                   ] Destino:[c006                      ]
+Fecha Inicio: [c007      ]                           Fecha Fin: [c008      ]
+      Moneda: [a1] [c102              ]                Recargo: [c009  ] %
+  Decripción: [c010                                                        ]
+              [c010                                                        ]
+
+  [l1                                  |l2] [l3            |l4              ]
+ [c011                                |a2] [c012          |c013            ]
+ [c011                                |a2] [c012          |c013            ]
+ [c011                                |a2] [c012          |c013            ]
+ [c011                                |a2] [c012          |c013            ]
+ [c011                                |a2] [c012          |c013            ]
+                                                          [c014            ]
+  Ingresado Por: [c015      ]       Fecha de Ingreso: [c016               ]
+}
+
+tables
+talt023
+talt030
+talt031
+
+attributes
+c000 = talt030.t30_num_gasto, NOENTRY, UPSHIFT, WIDGET='FIELD_BMP', 
+	CONFIG='lista.bmp F2';
+c001 = t30_num_ot, UPSHIFT, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c002 = t23_cod_cliente, NOENTRY, UPSHIFT, WIDGET='FIELD_BMP', 	
+	CONFIG='lista.bmp F2';
+c003 = talt023.t23_modelo, NOENTRY, UPSHIFT;
+c004 = talt023.t23_chasis, NOENTRY, UPSHIFT;
+c005 = talt030.t30_origen,  UPSHIFT, SCROLL;
+c006 = talt030.t30_destino, UPSHIFT, SCROLL;
+c007 = talt030.t30_fec_ini_viaje, UPSHIFT, FORMAT='dd-mm-yyyy',
+	COMMENT='Ingrese fecha en formato: dd-mm-aaaa';
+c008 = talt030.t30_fec_fin_viaje, UPSHIFT, FORMAT='dd-mm-yyyy',
+	COMMENT='Ingrese fecha en formato: dd-mm-aaaa';
+c009 = talt030.t30_recargo, UPSHIFT, FORMAT='##&.##', INCLUDE=(0 TO 999.99);
+c010 = talt030.t30_desc_viaje, UPSHIFT, WORDWRAP COMPRESS;
+
+c011 = talt031.t31_descripcion, UPSHIFT, SCROLL, OPTIONS='-nolist';
+a2   = talt031.t31_moneda, AUTONEXT, UPSHIFT, WIDGET='FIELD_BMP',
+	CONFIG='lista.bmp F2', OPTIONS='-nolist';
+c012 = talt031.t31_valor, UPSHIFT, FORMAT='###,###,##&.##', OPTIONS='-nolist';
+c013 = formonly.valor_mb, UPSHIFT, FORMAT='#,###,###,##&.##', NOENTRY,
+	OPTIONS='-nolist';
+
+c014 = talt030.t30_tot_gasto, NOENTRY, UPSHIFT, FORMAT='#,###,###,##&.##';
+c015 = talt030.t30_usuario, NOENTRY, UPSHIFT;
+c016 = talt030.t30_fecing, NOENTRY;
+
+a1   = talt030.t30_moneda, UPSHIFT, NOENTRY, WIDGET='FIELD_BMP', 
+       	CONFIG='lista.bmp F2';
+
+a    = talt030.t30_estado,    NOENTRY, UPSHIFT, AUTONEXT,
+	COMMENT='(A)ctivo (E)liminado';
+b    = t23_estado, NOENTRY, UPSHIFT, AUTONEXT, 
+	COMMENT='(A)ctivo (C)errada (F)acturada (E)liminada (D)evuelta';
+
+a100 = formonly.n_est_gasto,    NOENTRY;
+b100 = formonly.n_est_orden,    NOENTRY;
+c101 = talt023.t23_nom_cliente, NOENTRY, UPSHIFT;
+c102 = formonly.n_moneda,       NOENTRY;
+
+l1   = formonly.bt_descripcion, WIDGET='BUTTON', CONFIG='F15';
+l2   = formonly.bt_moneda     , WIDGET='BUTTON', CONFIG='F16';
+l3   = formonly.bt_valor      , WIDGET='BUTTON', CONFIG='F17';
+l4   = formonly.bt_valor_mb   , WIDGET='BUTTON', CONFIG='F18';
+
+instructions
+screen record ra_gastos[5] (t31_descripcion, t31_moneda, t31_valor, valor_mb)
+
+keys
+F5 = 'Mecánicos'

@@ -1,0 +1,25 @@
+                                                                                
+database diteca
+screen size 24 by 80
+{
+
+
+	                Código: [c000]
+		
+       Motivo Guia de Remisión: [c001                          ]
+	
+	         Ingresado Por: [c002       ]
+              Fecha de ingreso: [c003               ]
+
+
+}
+end
+tables
+gent019
+attributes
+c000 = formonly.g19_codigo TYPE INTEGER NOT NULL, REVERSE,
+    	  WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = gent019.g19_nombre, REVERSE, UPSHIFT;
+c002 = gent019.g19_usuario, REVERSE, UPSHIFT, NOENTRY;
+c003 = gent019.g19_fecing, REVERSE, NOENTRY;
+end

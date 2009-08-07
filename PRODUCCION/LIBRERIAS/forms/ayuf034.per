@@ -1,0 +1,30 @@
+DATABASE diteca
+
+SCREEN
+{
+ TIPOS DE TRANSACCIONES 
+-----------------------------------
+ Código   Descripción 		
+-----------------------------------
+[c01] [c002                    ] 
+[c01] [c002                    ]
+[c01] [c002                    ]
+[c01] [c002                    ]
+[c01] [c002                    ]
+[c01] [c002                    ]
+[c01] [c002                    ] 
+[c01] [c002                    ] 
+[c01] [c002                    ] 
+[c01] [c002                    ] 
+}
+
+TABLES
+gent021
+
+ATTRIBUTES
+c01 = g21_cod_tran;
+c002 = g21_nombre;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_tiptran[10](g21_cod_tran, g21_nombre)

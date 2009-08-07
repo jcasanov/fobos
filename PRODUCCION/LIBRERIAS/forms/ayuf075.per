@@ -1,0 +1,30 @@
+DATABASE diteca
+
+SCREEN
+{
+ GRUPOS DE CUENTAS
+----------------------------------
+      Grupos 
+----------------------------------
+[c0] [c002                     ]
+[c0] [c002                     ]
+[c0] [c002                     ]
+[c0] [c002                     ]
+[c0] [c002                     ]
+[c0] [c002                     ]
+[c0] [c002                     ] 
+[c0] [c002                     ] 
+[c0] [c002                     ] 
+[c0] [c002                     ] 
+}
+
+TABLES
+ctbt002
+
+ATTRIBUTES
+c0   = b02_grupo_cta, UPSHIFT;
+c002 = b02_nombre, UPSHIFT;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_gructa[10](b02_grupo_cta, b02_nombre)

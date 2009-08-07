@@ -1,0 +1,19 @@
+DATABASE diteca
+SCREEN
+{
+
+   Ejecutar este proceso luego que haya cerrado el mes de Diciembre, y de
+   haber hecho todos los ajustes contables del caso.
+   Ningun usuario que ingrese/genere/modifique comprobantes contables debe
+   estar accesando al sistema.
+
+
+
+                     Año Contable a Cerrar: [c002]
+
+}
+TABLES
+ctbt000
+ATTRIBUTES
+c002 = ctbt000.b00_anopro, AUTONEXT, REVERSE, UPSHIFT;
+end

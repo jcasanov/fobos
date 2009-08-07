@@ -1,0 +1,28 @@
+DATABASE formonly
+screen
+{
+
+      Provincia: [c001 ] [c100                                ]
+         Canton: [c002 ] [c101                                ]
+
+          Línea: [c005 ] [c102                                ]
+        Cliente: [c003 ] [c103                                ]
+
+}
+end
+attributes
+c001   = formonly.m01_provincia,	UPSHIFT, WIDGET = 'FIELD_BMP',
+				CONFIG = 'lista.bmp F2';	
+c002   = formonly.m11_canton,	UPSHIFT, WIDGET = 'FIELD_BMP',
+				CONFIG = 'lista.bmp F2';	
+c005   = formonly.m10_linea,	UPSHIFT, WIDGET = 'FIELD_BMP',
+				CONFIG = 'lista.bmp F2';
+c003   = formonly.m11_codcli,	UPSHIFT, WIDGET = 'FIELD_BMP',
+				CONFIG = 'lista.bmp F2';   
+
+c100 = formonly.n_provincia, 	UPSHIFT, NOENTRY;
+c101 = formonly.n_canton, 	UPSHIFT, NOENTRY;
+c102 = formonly.n_linea, 	UPSHIFT, NOENTRY;
+c103 = formonly.n_cliente,	UPSHIFT, NOENTRY;
+END
+

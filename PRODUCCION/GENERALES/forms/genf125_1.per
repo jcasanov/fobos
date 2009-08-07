@@ -1,0 +1,25 @@
+                                                                                
+database diteca
+screen size 10 by 80 
+{
+
+
+	     Código de Cargo: [c001]
+		
+		      Nombre: [c002                         ]		
+	
+	       Ingresado Por: [c003       ]
+            Fecha de ingreso: [c004               ]
+
+
+}
+end
+tables
+gent035
+attributes
+c001 = gent035.g35_cod_cargo, REVERSE,
+       WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = gent035.g35_nombre, REVERSE, UPSHIFT;
+c003 = gent035.g35_usuario, REVERSE, UPSHIFT, NOENTRY;
+c004 = gent035.g35_fecing, REVERSE, NOENTRY;
+end

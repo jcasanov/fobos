@@ -1,0 +1,60 @@
+DATABASE diteca
+SCREEN
+{
+
+       Código Caja: [c000  ] [c001                ]
+     Fecha Inicial: [c002      ]                  Fecha Final: [c003      ]
+
+ [c020      |c021                        |c4|c023       |c5|c6|c026          ]
+[c010      |c011                        |a4|c013       |a5|a6|c016          ]
+[c010      |c011                        |a4|c013       |a5|a6|c016          ]
+[c010      |c011                        |a4|c013       |a5|a6|c016          ]
+[c010      |c011                        |a4|c013       |a5|a6|c016          ]
+[c010      |c011                        |a4|c013       |a5|a6|c016          ]
+[c010      |c011                        |a4|c013       |a5|a6|c016          ]
+[c010      |c011                        |a4|c013       |a5|a6|c016          ]
+[c010      |c011                        |a4|c013       |a5|a6|c016          ]
+[c010      |c011                        |a4|c013       |a5|a6|c016          ]
+[c010      |c011                        |a4|c013       |a5|a6|c016          ]
+[c010      |c011                        |a4|c013       |a5|a6|c016          ]
+[c010      |c011                        |a4|c013       |a5|a6|c016          ]
+[c010      |c011                        |a4|c013       |a5|a6|c016          ]
+[c010      |c011                        |a4|c013       |a5|a6|c016          ]
+
+}
+TABLES
+cajt010, cajt011, cajt002
+ATTRIBUTES
+c000 = cajt010.j10_codigo_caja, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = cajt002.j02_nombre_caja, NOENTRY, UPSHIFT;
+c002 = FORMONLY.vm_fecha_ini TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy';
+c003 = FORMONLY.vm_fecha_fin TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy';
+
+c020 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c021 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c4   = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c023 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c5   = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c6   = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c026 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+
+c010 = FORMONLY.j10_fecha_pro TYPE DATE, NOENTRY, FORMAT = 'dd-mm-yyyy', 
+       UPSHIFT, OPTIONS = '-nolist';
+c011 = FORMONLY.j10_nomcli, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+a4   = cajt010.j10_tipo_destino, NOENTRY, UPSHIFT, OPTIONS = '-nolist',
+	COMMENTS = 'DOC.: FA FACTURA, PG PAGOS, PA, PAGOS ANTIC., OI OTROS INGRESOS, EC EGRESOS CAJA';
+c013 = cajt010.j10_num_destino, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+a5   = cajt011.j11_codigo_pago, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+a6   = cajt011.j11_moneda, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c016 = cajt011.j11_valor, NOENTRY, UPSHIFT, FORMAT = '###,###,##&.##',
+	OPTIONS = '-nolist';
+END
+KEYS
+F5 = 'Forma de Pago'
+F7 = 'Imprimir Comp.'
+INSTRUCTIONS
+SCREEN RECORD rm_det[14] (j10_fecha_pro, j10_nomcli, j10_tipo_destino,
+			j10_num_destino, j11_codigo_pago, j11_moneda, j11_valor)

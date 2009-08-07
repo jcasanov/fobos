@@ -1,0 +1,54 @@
+DATABASE diteca
+SCREEN
+{
+                Moneda: [c0] [c1              ]
+         Fecha Inicial: [c4        ]          Fecha Final: [c5        ]
+     Tipo Orden Compra: [c2] [c3              ]
+
+
+      [b0        |b1                                      |b2              ]
+     [f0        |f1                                      |f2              ]
+     [f0        |f1                                      |f2              ]
+     [f0        |f1                                      |f2              ]
+     [f0        |f1                                      |f2              ]
+     [f0        |f1                                      |f2              ]
+     [f0        |f1                                      |f2              ]
+     [f0        |f1                                      |f2              ]
+     [f0        |f1                                      |f2              ]
+     [f0        |f1                                      |f2              ]
+     [f0        |f1                                      |f2              ]
+     [f0        |f1                                      |f2              ]
+     [f0        |f1                                      |f2              ]
+                                                  Total: [c10             ]
+
+}
+TABLES ordt010, cxpt001
+ATTRIBUTES
+c0  = ordt010.c10_moneda, AUTONEXT, UPSHIFT, REVERSE,
+        WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c1  = FORMONLY.nom_moneda, NOENTRY;
+c2  = FORMONLY.c10_tipo_orden, AUTONEXT, UPSHIFT,
+        WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c3  = FORMONLY.tit_tipo, NOENTRY;
+c4  = FORMONLY.vm_fecha_ini TYPE DATE, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy', 
+	COMMENTS = 'Digite la fecha en formato: dd-mm-aaaa';
+c5  = FORMONLY.vm_fecha_fin TYPE DATE, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy', 
+	COMMENTS = 'Digite la fecha en formato: dd-mm-aaaa';
+
+b0  = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+b1  = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b2  = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+
+f0  = cxpt001.p01_codprov, NOENTRY, OPTIONS = '-nolist';
+f1  = cxpt001.p01_nomprov, NOENTRY, OPTIONS = '-nolist';
+f2  = ordt010.c10_tot_compra, NOENTRY, OPTIONS = '-nolist',
+	FORMAT = '###,###,##&.##';
+
+c10 = FORMONLY.total_compra, FORMAT = '#,###,###,##&.##', NOENTRY, REVERSE;
+END
+KEYS
+F5 = 'Detalle'
+INSTRUCTIONS
+SCREEN RECORD r_detalle[12] (p01_codprov, p01_nomprov, c10_tot_compra)

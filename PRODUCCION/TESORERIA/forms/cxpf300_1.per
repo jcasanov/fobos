@@ -1,0 +1,25 @@
+DATABASE formonly
+SCREEN
+{
+ Código Proveedor: [c001 ] [c002                                    ]
+           Moneda: [c3]    [c004           ]
+   Qué Documentos: [c050         ]
+
+
+       Tipo Saldo: [c005          ]    Saldo >= a: [c006          ]
+
+
+
+}
+ATTRIBUTES
+c001 = formonly.codprov TYPE INTEGER, WIDGET = 'FIELD_BMP', 
+       CONFIG = 'lista.bmp F2';
+c002 = formonly.nomprov, NOENTRY;
+c3   = formonly.moneda TYPE CHAR NOT NULL, WIDGET = 'FIELD_BMP', 
+       CONFIG = 'lista.bmp F2', UPSHIFT, AUTONEXT, REVERSE;
+c004 = formonly.tit_mon, NOENTRY;
+c050 = formonly.flag_saldo, WIDGET = 'RADIO', CONFIG = 'S Con_Saldo T Todos';
+c005 = formonly.tipo_saldo, WIDGET = 'RADIO', 
+       CONFIG = 'A A_Favor  P Por_Vencer  V Vencidos  T Todos';
+c006 = formonly.valor TYPE DECIMAL(11,2), INCLUDE = (0.01 TO 999999999),
+       FORMAT = '###,###,##&.##';

@@ -1,0 +1,27 @@
+database diteca@ol_server
+screen size 24 by 80
+{
+b100_compania      [f000       ]
+b100_localidad     [f001  ]
+b100_modulo        [a0]
+b100_grupo_linea   [f002 ]
+b100_codcli        [f003       ]
+b100_cxc_mb        [f004        ]
+b100_cxc_me        [f005        ]
+b100_ant_mb        [f006        ]
+b100_ant_me        [f007        ]
+}
+end
+tables
+ctbt100
+attributes
+f000 = ctbt100.b100_compania;
+f001 = ctbt100.b100_localidad;
+a0 = ctbt100.b100_modulo;
+f002 = ctbt100.b100_grupo_linea;
+f003 = ctbt100.b100_codcli;
+f004 = ctbt100.b100_cxc_mb;
+f005 = ctbt100.b100_cxc_me;
+f006 = ctbt100.b100_ant_mb;
+f007 = ctbt100.b100_ant_me;
+end

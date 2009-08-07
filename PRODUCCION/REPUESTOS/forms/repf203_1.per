@@ -1,0 +1,40 @@
+DATABASE diteca
+SCREEN
+{
+                    Nombre Pedido: [c001    ]                               
+                       Referencia: [c002                          ]         
+   	                    Línea: [c003 ]                                  
+                        Proveedor: [c004]  [c005                          ] 
+ 	                                                                        
+          Bodega para Cálculo de Estadísticas y Stock: [c6]  [c007                    ]
+
+               Periodo Cálculo para Unidades Vendidas: [z1] meses
+                 Periodo Cálculo para Ventas Perdidas: [z2] meses
+                 
+                              Periodo de Stock Mínimo: [z3] meses         
+                              Periodo de Stock Máximo: [z4] meses      
+
+          Considerar Ventas Perdidas para el Cálculo?: [x]
+               Considerar Otros Pedidos ya Generados?: [y]
+
+}
+TABLES
+rept016
+ATTRIBUTES
+c001 = r16_pedido, UPSHIFT, REQUIRED, REVERSE;
+c002 = r16_referencia, UPSHIFT;
+c003 = r16_linea, UPSHIFT, REQUIRED, REVERSE, WIDGET = 'FIELD_BMP', 
+       CONFIG = 'lista.bmp F2';
+c004 = r16_proveedor, REVERSE, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c005 = formonly.name_prov, REVERSE, NOENTRY;
+c6   = formonly.bod_est TYPE CHAR, UPSHIFT, REVERSE, WIDGET = 'FIELD_BMP', 
+       CONFIG = 'lista.bmp F2';
+c007 = formonly.name_bod, REVERSE, NOENTRY;
+x    = formonly.flag_vtp, WIDGET = 'CHECK', CONFIG = 'S N ACKNOWLEDGE';
+y    = formonly.flag_ped, WIDGET = 'CHECK', CONFIG = 'S N ACKNOWLEDGE';                                                                       
+z1   = r16_periodo_vta, REQUIRED, INCLUDE = (1 TO 99);
+z2   = formonly.periodo_vtp TYPE SMALLINT NOT NULL, REQUIRED, INCLUDE = (1 TO 99);
+z3   = r16_minimo, REQUIRED, INCLUDE = (1 TO 99);
+z4   = r16_maximo, REQUIRED, INCLUDE = (1 TO 99);                                                                       
+--z5   = r16_pto_reorden, REQUIRED, INCLUDE = (1 TO 99);                                                                       
+--                                Periodo Punto Reorden: [z5] meses              

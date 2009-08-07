@@ -1,0 +1,41 @@
+database diteca
+screen 
+{
+
+
+ Código Indice Rotación: [a0]                         Estado:[a][a1        ]
+
+                 Nombre: [f001                ]       Pedido:[b]
+
+Unidades Ventas Inicial: [f002  ]      Unidades Ventas Final: [f003  ]
+
+          Periodo Meses: [f04]        Porcentaje de Utilidad: [f005 ]%
+
+      Descuento Contado: [f008 ]%          Descuento Crédito: [f009 ]%
+
+          Ingresado Por: [f006      ] 
+       Fecha de Ingreso: [f007               ]
+
+}
+end
+tables
+rept004
+attributes
+a0   = rept004.r04_rotacion,REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f001 = rept004.r04_nombre, REVERSE, UPSHIFT;
+a    = rept004.r04_estado,REVERSE, NOENTRY, UPSHIFT;
+a1   = formonly.tit_estado TYPE VARCHAR, NOENTRY;
+b = rept004.r04_pedido, REVERSE, 
+	WIDGET  = 'CHECK', CONFIG = 'S N acknowedge',
+	COMMENT = 'Se pueden hacer o no pedidos de items pertenecientes a esté índice de rotación';
+f002 = rept004.r04_uni_vtai, REVERSE;
+f003 = rept004.r04_uni_vtaf, REVERSE;
+f04  = rept004.r04_meses, REVERSE, COMMENT = 'Periodo en meses para el índice de rotación';
+f005 = rept004.r04_porc_uti, REVERSE,
+	COMMENT = 'Porcentaje mínimo de utilidad a controlarse en facturación';
+f006 = rept004.r04_usuario, REVERSE, NOENTRY;
+f007 = rept004.r04_fecing, REVERSE, NOENTRY;
+f008 = rept004.r04_dcto_cont, REVERSE, FORMAT = '#&.##';
+f009 = rept004.r04_dcto_cred, REVERSE, FORMAT = '#&.##';
+end

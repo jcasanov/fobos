@@ -1,0 +1,58 @@
+DATABASE diteca
+SCREEN
+{
+
+        Moneda: [c1]   [c002           ]             Estado: [c005         ]    
+  Rango Fechas: [c003      ] - [c004      ]
+      Vendedor: [c05]  [c006                         ]
+
+ [c010      |c011  |c012                       |c13|c014      |c015           ]
+[c020      |c021  |c022                       |c23|c024      |c025           ]
+[c020      |c021  |c022                       |c23|c024      |c025           ]
+[c020      |c021  |c022                       |c23|c024      |c025           ]
+[c020      |c021  |c022                       |c23|c024      |c025           ]
+[c020      |c021  |c022                       |c23|c024      |c025           ]
+[c020      |c021  |c022                       |c23|c024      |c025           ]
+[c020      |c021  |c022                       |c23|c024      |c025           ]
+[c020      |c021  |c022                       |c23|c024      |c025           ]
+[c020      |c021  |c022                       |c23|c024      |c025           ]
+[c020      |c021  |c022                       |c23|c024      |c025           ]
+[c020      |c021  |c022                       |c23|c024      |c025           ]
+[c020      |c021  |c022                       |c23|c024      |c025           ]
+[c020      |c021  |c022                       |c23|c024      |c025           ]
+                                                             [c030           ]
+}
+TABLES
+rept021
+rept022
+ATTRIBUTES
+c1   = r21_moneda, UPSHIFT, AUTONEXT, REVERSE, WIDGET = 'FIELD_BMP',
+	CONFIG = 'lista.bmp F2';
+c002 = formonly.tit_moneda, NOENTRY, REVERSE;
+c003 = formonly.fecha_ini TYPE DATE, FORMAT = 'dd-mm-yyyy',
+       COMMENTS = 'Ingrese fecha en formato: dd-mm-aaaa';
+c004 = formonly.fecha_fin TYPE DATE, FORMAT = 'dd-mm-yyyy',
+       COMMENTS = 'Ingrese fecha en formato: dd-mm-aaaa';
+c005 = formonly.estado, REVERSE, WIDGET = 'RADIO', DEFAULT='T', 
+	   CONFIG = 'T Todas A Aprobadas S "Sin aprobar"';
+c05  = formonly.r21_vendedor, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c006 = formonly.tit_vend, NOENTRY;
+c010 = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c13  = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c015 = formonly.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c020 = formonly.fecha TYPE DATE, FORMAT = 'dd-mm-yyyy';
+c021 = r21_numprof;
+c022 = r21_nomcli;
+c23  = formonly.siglas_vend;
+c024 = formonly.fecha_max TYPE DATE, FORMAT = 'dd-mm-yyyy';
+c025 = r21_tot_neto, FORMAT = '####,###,##&.##';
+c030 = formonly.tot_prof, FORMAT = '####,###,##&.##', REVERSE;
+
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_prof[13] (formonly.fecha, r21_numprof, r21_nomcli, 
+			   formonly.siglas_vend, formonly.fecha_max, 
+			   r21_tot_neto)

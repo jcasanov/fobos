@@ -1,0 +1,36 @@
+
+database diteca
+screen
+{
+
+
+     Registro N°: [f001       ]
+
+     Línea Venta: [f003 ] [a2                   ]  
+ Indice Rotación: [a0] [a3                      ]
+       Tipo Item: [f004 ] [a4                   ]
+      Porcentaje: [f002     ]%		       
+
+          Moneda: [b1              ]       Rubro Base: [b               ]
+}
+end
+tables
+rept032
+attributes
+f001 = rept032.r32_numreg, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+b1   = rept032.r32_moneda, REVERSE, NOENTRY, 
+	WIDGET = 'RADIO', CONFIG = 'A Moneda_Base B Moneda_Alterna';
+b    = rept032.r32_rubro_base, REVERSE, NOENTRY, 
+	WIDGET = 'RADIO', CONFIG = 'C Costo P Precio';
+f002 = rept032.r32_porc_fact, REVERSE, FORMAT = '##,##&.##';
+f003 = rept032.r32_linea, REVERSE, NOENTRY,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+a2   = formonly.nom_lin TYPE VARCHAR, NOENTRY;
+a0   = rept032.r32_rotacion, NOENTRY,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+a3   = formonly.nom_rot TYPE VARCHAR, NOENTRY;
+f004 = rept032.r32_tipo_item, NOENTRY,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+a4   = formonly.nom_tipo TYPE VARCHAR, NOENTRY;
+end

@@ -1,0 +1,55 @@
+
+DATABASE diteca
+screen
+{
+ [b0   |b1        |b2                       |b3            |b4              ]
+[c0   |c1        |c2                       |c3            |c4              ]
+[c0   |c1        |c2                       |c3            |c4              ]
+[c0   |c1        |c2                       |c3            |c4              ]
+[c0   |c1        |c2                       |c3            |c4              ]
+[c0   |c1        |c2                       |c3            |c4              ]
+[c0   |c1        |c2                       |c3            |c4              ]
+[c0   |c1        |c2                       |c3            |c4              ]
+[c0   |c1        |c2                       |c3            |c4              ]
+[c0   |c1        |c2                       |c3            |c4              ]
+[c0   |c1        |c2                       |c3            |c4              ]
+[c0   |c1        |c2                       |c3            |c4              ]
+[c0   |c1        |c2                       |c3            |c4              ]
+[c0   |c1        |c2                       |c3            |c4              ]
+[c0   |c1        |c2                       |c3            |c4              ]
+[c0   |c1        |c2                       |c3            |c4              ]
+[c0   |c1        |c2                       |c3            |c4              ]
+
+}
+end
+TABLES
+	rept028
+	cxpt001
+ATTRIBUTES
+
+		     ---- BOTONES ----
+b0  = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+b1  = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b2  = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+b3  = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+b4  = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+	---------------------------------------------
+
+c0  = rept028.r28_numliq, REVERSE, INCLUDE = (NULL, 1 TO 99999),
+	OPTIONS = '-nolist';
+c1  = rept028.r28_fecha_ing, FORMAT = 'dd-mm-yyyy', REVERSE, 
+	OPTIONS = '-nolist', COMMENT = 'Digite la fecha en formato dd-mm-aaaa';
+c2  = cxpt001.p01_nomprov, UPSHIFT, REVERSE, OPTIONS = '-nolist';
+c3  = rept028.r28_total_fob, REVERSE, FORMAT = '###,###,##&.##',
+	OPTIONS = '-nolist';
+c4  = FORMONLY.total TYPE DECIMAL(12,2), REVERSE, FORMAT = '#,###,###,##&.##',
+	OPTIONS = '-nolist';
+
+INSTRUCTIONS 
+DELIMITERS '||'
+
+SCREEN RECORD r_detalle[16] (r28_numliq, r28_fecha_ing, p01_nomprov, 
+			     r28_total_fob, total)
+KEYS
+	F5 = 'Liquidación'
+	F6 = 'Recibido'

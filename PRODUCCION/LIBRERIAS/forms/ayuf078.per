@@ -1,0 +1,39 @@
+DATABASE diteca
+
+SCREEN
+{
+ MAESTRO DE SERIES DE VEHICULOS
+
+ [lbl1  |lbl2                   |lbl3            |lbl4     |lb]                
+[c000  |c001                   |c002            |c003     |c0]
+[c000  |c001                   |c002            |c003     |c0]
+[c000  |c001                   |c002            |c003     |c0]
+[c000  |c001                   |c002            |c003     |c0]
+[c000  |c001                   |c002            |c003     |c0]
+[c000  |c001                   |c002            |c003     |c0]
+[c000  |c001                   |c002            |c003     |c0]
+[c000  |c001                   |c002            |c003     |c0]
+[c000  |c001                   |c002            |c003     |c0]
+[c000  |c001                   |c002            |c003     |c0]
+
+}
+
+TABLES
+veht022
+
+ATTRIBUTES
+c000 = v22_codigo_veh, UPSHIFT;
+c001 = v22_chasis, UPSHIFT;
+c002 = v22_modelo, UPSHIFT;
+c003 = v22_cod_color, UPSHIFT;
+c0   = v22_estado, UPSHIFT;
+
+lbl1 = formonly.bt_codigo,      NOENTRY, WIDGET='BUTTON', CONFIG='F15';
+lbl2 = formonly.bt_serie,       NOENTRY, WIDGET='BUTTON', CONFIG='F16';
+lbl3 = formonly.bt_modelo,      NOENTRY, WIDGET='BUTTON', CONFIG='F17';
+lbl4 = formonly.bt_color,       NOENTRY, WIDGET='BUTTON', CONFIG='F18';
+lb   = formonly.bt_estado,      NOENTRY, WIDGET='BUTTON', CONFIG='F19';
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_serveh[10](v22_codigo_veh, v22_chasis, v22_modelo, v22_cod_color,v22_estado)

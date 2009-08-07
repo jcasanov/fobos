@@ -1,0 +1,67 @@
+
+DATABASE diteca
+screen
+{
+     No Orden:[c0    ] [c1                             ]	
+ No Recepcion:[c2    ]      	     Fecha de Recepción:[c3                  ]
+      Factura:[c4             ]		  Forma de Pago:[c5            ]
+
+
+  [b0  |b1             |b2                          |b3   |b4              ]
+ [c6  |c7             |c8                          |c9   |c10             ]
+ [c6  |c7             |c8                          |c9   |c10             ]
+ [c6  |c7             |c8                          |c9   |c10             ]
+ [c6  |c7             |c8                          |c9   |c10             ]
+ [c6  |c7             |c8                          |c9   |c10             ]
+ [c6  |c7             |c8                          |c9   |c10             ]
+ [c6  |c7             |c8                          |c9   |c10             ]
+ [c6  |c7             |c8                          |c9   |c10             ]
+ [c6  |c7             |c8                          |c9   |c10             ]
+                		                Subtotal:[c11             ]
+			 		       Descuento:[c12             ]
+Ingresado Por:[c15        ]                     Impuesto:[c13             ]
+					            Neto:[c14             ]
+}
+end
+TABLES
+	ordt010
+	ordt013
+	ordt014
+ATTRIBUTES
+
+		     ---- BOTONES ----
+b0  = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+b1  = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b2  = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+b3  = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+b4  = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+
+c0  = ordt013.c13_numero_oc, REVERSE, WIDGET = 'FIELD_BMP',
+	CONFIG = 'lista.bmp F2';
+c1  = FORMONLY.nomprov, REVERSE, NOENTRY;
+c2  = ordt013.c13_num_recep, REVERSE, NOENTRY;  
+c3  = ordt013.c13_fecha_recep, REVERSE, NOENTRY;  
+
+c4  = ordt013.c13_factura, REVERSE, NOENTRY; 
+c15 = ordt013.c13_usuario, REVERSE, NOENTRY; 
+
+c6  = ordt014.c14_cantidad, REVERSE, OPTIONS = '-nolist';
+c7  = ordt014.c14_codigo, REVERSE, UPSHIFT, OPTIONS = '-nolist';
+c8  = ordt014.c14_descrip,   REVERSE, OPTIONS = '-nolist';
+c9  = ordt014.c14_descuento, REVERSE, OPTIONS = '-nolist', FORMAT = '#&.##';
+c10 = ordt014.c14_precio,    REVERSE, FORMAT = '#,###,###,##&.##',
+	OPTIONS = '-nolist';
+
+c11 = ordt013.c13_tot_bruto,  NOENTRY, FORMAT = '#,###,###,##&.##', REVERSE; 
+c12 = ordt013.c13_tot_dscto,  NOENTRY, FORMAT = '###,###,##&.##'; 
+c13 = ordt013.c13_tot_impto,  NOENTRY, FORMAT = '###,###,##&.##'; 
+c14 = ordt013.c13_tot_recep,  REVERSE, NOENTRY, FORMAT = '#,###,###,##&.##'; 
+
+c5  = ordt010.c10_tipo_pago, REVERSE, NOENTRY,
+	WIDGET = 'RADIO', CONFIG = 'C Contado R Crédito';
+
+INSTRUCTIONS 
+DELIMITERS '||'
+SCREEN RECORD r_detalle[9] (c14_cantidad,  c14_codigo, c14_descrip,  
+			    c14_descuento, c14_precio)
+

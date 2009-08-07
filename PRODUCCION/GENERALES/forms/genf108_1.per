@@ -1,0 +1,31 @@
+DATABASE diteca  
+SCREEN
+{
+
+
+         Código Tarjeta: [c01] 
+         
+         Nombre Tarjeta: [c02                       ] 
+       Código Cobranzas: [c03   ] [c04                                 ]       
+ 
+          Ingresado Por: [c05       ]    
+       Fecha de Ingreso: [c06                ]                                
+
+}
+end
+tables
+gent010
+attributes
+c01 = g10_tarjeta, REVERSE, AUTONEXT, NOENTRY, 
+	FORMAT  = '###', WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c02 = g10_nombre, UPSHIFT, REQUIRED, REVERSE;
+c03 = g10_codcobr, FORMAT = '######', REQUIRED, 
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c04 = formonly.nom_cliente;
+c05 = g10_usuario, NOENTRY, REQUIRED, REVERSE, UPSHIFT;
+c06 = g10_fecing, NOENTRY, REQUIRED, REVERSE;
+
+instructions
+delimiters "[]"
+end
+

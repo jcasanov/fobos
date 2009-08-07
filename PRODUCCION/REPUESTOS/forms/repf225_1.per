@@ -1,0 +1,71 @@
+DATABASE diteca
+SCREEN
+{
+   Registro: [f001 ]                              Estado: [a|f101          ]  
+     Bodega: [f1|f102              ] 
+
+                            [f106                                          ]
+  [f010      |f011           |f012                       |f013  |f014  |f015  ]
+ [f020      |f021           |f025                       |f022  |f023  |f024  ]
+ [f020      |f021           |f025                       |f022  |f023  |f024  ]
+ [f020      |f021           |f025                       |f022  |f023  |f024  ]
+ [f020      |f021           |f025                       |f022  |f023  |f024  ]
+ [f020      |f021           |f025                       |f022  |f023  |f024  ]
+ [f020      |f021           |f025                       |f022  |f023  |f024  ]
+ [f020      |f021           |f025                       |f022  |f023  |f024  ]
+ [f020      |f021           |f025                       |f022  |f023  |f024  ]
+ [f020      |f021           |f025                       |f022  |f023  |f024  ]
+ [f020      |f021           |f025                       |f022  |f023  |f024  ]
+ [f020      |f021           |f025                       |f022  |f023  |f024  ]
+ [f020      |f021           |f025                       |f022  |f023  |f024  ]
+
+}
+TABLES
+rept111
+ATTRIBUTES
+f001 = rept111.r111_numreg, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+a    = rept111.r111_estado, MP', CONFIG='lista.bmp F2', UPSHIFT;
+f003 = formonly.r103_maquina,   WIDGET='FIELD_BMP', CONFIG='lista.bmp F2', UPSHIFT;
+f004 = formonly.r10_tipo,		  WIDGET='FIELD_BMP', CONFIG='lista.bmp F2', UPSHIFT;
+f005 = formonly.r103_componente,  WIDGET='FIELD_BMP', CONFIG='lista.bmp F2', UPSHIFT;
+
+f101 = formonly.desc_linea, 	 NOENTRY, UPSHIFT;
+f102 = formonly.desc_familia_vta,NOENTRY, UPSHIFT;
+f103 = formonly.desc_maquina,    NOENTRY, UPSHIFT;
+f104 = formonly.desc_tipo, 		 NOENTRY, UPSHIFT;
+f105 = formonly.desc_componente, NOENTRY, UPSHIFT;
+
+f010 = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+f011 = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+f012 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+f013 = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+f020 = formonly.r10_codigo, UPSHIFT, NOENTRY, options='-nolist';
+f021 = formonly.r10_nombre, UPSHIFT, NOENTRY, options='-nolist';
+f022 = formonly.valact  TYPE DECIMAL, FORMAT='###,###,##&.&&', NOENTRY, 
+						UPSHIFT, options='-nolist';
+f023 = formonly.valnue  TYPE DECIMAL, FORMAT='###,###,##&.&&', UPSHIFT, 
+						options='-nolist';
+
+f106 = formonly.num_reg, NOENTRY;
+
+a = formonly.clasif_a, WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+b = formonly.clasif_b, WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+c = formonly.clasif_c, WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+e = formonly.clasif_e, WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+
+f024 = formonly.precio_ant, REVERSE, NOENTRY, UPSHIFT, FORMAT='###,###,##&.&&';
+f025 = formonly.precio_act, REVERSE, NOENTRY, UPSHIFT, FORMAT='###,###,##&.&&';
+f026 = formonly.costo_ant, REVERSE, NOENTRY, UPSHIFT, FORMAT='###,###,##&.&&';
+f027 = formonly.costo_act, REVERSE, NOENTRY, UPSHIFT, FORMAT='###,###,##&.&&';
+f028 = formonly.ult_costo_compra, REVERSE, NOENTRY, UPSHIFT, 
+		FORMAT='###,###,##&.&&';
+f029 = formonly.ult_fecha_compra, REVERSE, NOENTRY, UPSHIFT, 
+		FORMAT='dd-mm-yyyy';
+
+z = formonly.clas_abc, REVERSE, NOENTRY, UPSHIFT; 
+
+INSTRUCTIONS
+SCREEN RECORD rm_item[12] (formonly.r10_codigo, formonly.r10_nombre, 
+			   			   formonly.valact, formonly.valnue)
+KEYS
+'F5' = 'Ver Item'

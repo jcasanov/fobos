@@ -1,0 +1,26 @@
+database diteca
+screen 
+{
+
+  Codigo: [c001           ] [c002                          ]
+  Factor: [c004  ]%
+
+  [a] Usar por omision                      Tipo: [c003               ] 
+
+
+    Ingresado Por: [c011      ]   Fecha de Ingreso: [c012               ]
+}
+end
+tables
+rept114
+attributes
+c001 = rept114.r114_codigo, REVERSE, UPSHIFT, NOENTRY,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c002 = rept114.r114_descripcion, REVERSE, UPSHIFT;
+c004 = rept114.r114_factor, REVERSE, FORMAT='##&.&&';
+a    = rept114.r114_default, WIDGET='CHECK', CONFIG='S N acknowledge', DEFAULT='N';
+c003 = rept114.r114_flag_ident, WIDGET='RADIO', CONFIG='IMP Importacion STO "En Stock"', DEFAULT='IMP';
+c011 = rept114.r114_usuario, REVERSE, UPSHIFT, NOENTRY;
+c012 = rept114.r114_fecing, REVERSE, NOENTRY;
+
+end

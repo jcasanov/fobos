@@ -1,0 +1,31 @@
+DATABASE diteca
+
+SCREEN
+{
+ MAESTRO DE ITEMS
+
+ [lbl1           |lbl2                                    ]
+[c01            |c002                                    ] 
+[c01            |c002                                    ]
+[c01            |c002                                    ]
+[c01            |c002                                    ]
+[c01            |c002                                    ]
+[c01            |c002                                    ]
+[c01            |c002                                    ] 
+[c01            |c002                                    ] 
+[c01            |c002                                    ] 
+[c01            |c002                                    ] 
+
+}
+
+TABLES
+rept010
+
+ATTRIBUTES
+c01 = r10_codigo , UPSHIFT;
+c002 = r10_nombre , UPSHIFT;
+lbl1 = formonly.bt_codigo,      NOENTRY, WIDGET='BUTTON', CONFIG='F15';
+lbl2 = formonly.bt_nombre,      NOENTRY, WIDGET='BUTTON', CONFIG='F16';
+END
+INSTRUCTIONS
+SCREEN RECORD rh_items[10](r10_codigo, r10_nombre)

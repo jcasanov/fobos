@@ -1,0 +1,51 @@
+DATABASE diteca
+SCREEN
+{
+
+
+   Compañía Venta: [c004 ] [c013                    ]  Estado: [c] [c018     ]
+  Localidad Venta: [c005 ] [c014                    ]
+   Vehículo Venta: [c006 ] 
+
+          Cliente: [c001       ] [c016                                     ]
+           Modelo: [c002           ]
+           Chasis: [c003                     ]
+
+            Color: [c007           ]
+            Motor: [c008                ]
+            Placa: [c009      ]
+              Año: [c010]
+
+          Usuario: [c011      ]      Fecha de Ingreso: [c012               ]
+}
+TABLES
+talt010
+ATTRIBUTES
+c004 = talt010.t10_codcia_vta, AUTONEXT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Para los vehículos que se hayan vendido en esta compañía';
+c005 = talt010.t10_codloc_vta, AUTONEXT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Para los vehículos que se hayan vendido en esta compañía';
+c006 = talt010.t10_codveh_vta, AUTONEXT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Vehículos que se hayan vendido en esta compañía';
+c001 = talt010.t10_codcli, AUTONEXT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = talt010.t10_modelo, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = talt010.t10_chasis, AUTONEXT, REVERSE, UPSHIFT;
+c007 = talt010.t10_color, AUTONEXT, REVERSE, UPSHIFT;
+c008 = talt010.t10_motor, AUTONEXT, UPSHIFT;
+c009 = talt010.t10_placa, AUTONEXT, REVERSE, UPSHIFT;
+c010 = talt010.t10_ano, AUTONEXT, REVERSE, INCLUDE = (1970 TO 9999);
+c011 = talt010.t10_usuario, NOENTRY, REVERSE, UPSHIFT;
+c012 = talt010.t10_fecing, NOENTRY, REVERSE, UPSHIFT;
+c013 = FORMONLY.tit_compania, NOENTRY, UPSHIFT;
+c014 = FORMONLY.tit_localidad, NOENTRY, UPSHIFT;
+--c015 = FORMONLY.tit_vehiculo, NOENTRY, UPSHIFT;
+c016 = FORMONLY.tit_nombre_cli, NOENTRY, REVERSE, UPSHIFT;
+--c017 = FORMONLY.tit_modelo, NOENTRY, REVERSE, UPSHIFT;
+c    = FORMONLY.tit_est, NOENTRY, REVERSE, UPSHIFT;
+c018 = FORMONLY.tit_estado_tal, NOENTRY, UPSHIFT;
+END

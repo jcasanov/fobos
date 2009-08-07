@@ -1,0 +1,33 @@
+DATABASE diteca
+SCREEN
+{
+
+
+ 			 			       Estado: [c] [c004     ]
+
+            Tipo de Comprobante: [c0]  [c001                ]
+                         Módulo: [c1]  [c005                ]
+          Tipo de Comp. Reversa: [c2]  [c006                ]
+
+                        Usuario: [c002      ]
+               Fecha de Ingreso: [c003               ]
+}
+TABLES
+ctbt003
+ATTRIBUTES
+c0   = ctbt003.b03_tipo_comp, AUTONEXT, REVERSE, UPSHIFT, PICTURE = 'AA',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Indicar las 2 primeras iniciales del comprobante contable';
+c001 = ctbt003.b03_nombre, AUTONEXT, REVERSE, UPSHIFT;
+c1   = ctbt003.b03_modulo, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Indicar a que módulo pertenece el comprobante contable';
+c2   = ctbt003.b03_tipo_reversa, AUTONEXT, UPSHIFT, PICTURE = 'AA',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = ctbt003.b03_usuario, NOENTRY, REVERSE, UPSHIFT;
+c003 = ctbt003.b03_fecing, NOENTRY, REVERSE, UPSHIFT;
+c    = FORMONLY.tit_est, NOENTRY, UPSHIFT, REVERSE;
+c004 = FORMONLY.tit_estado_com, NOENTRY;
+c005 = FORMONLY.tit_modulo, NOENTRY;
+c006 = FORMONLY.tit_reversa, NOENTRY;
+END

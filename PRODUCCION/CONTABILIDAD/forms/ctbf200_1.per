@@ -1,0 +1,48 @@
+DATABASE diteca
+SCREEN
+{
+
+
+           Año Proceso Contable: [c001]
+
+                          Enero: [a]         Julio: [g]
+                        Febrero: [b]        Agosto: [h]
+                          Marzo: [c]    Septiembre: [i]
+                          Abril: [d]       Octubre: [j]
+                           Mayo: [e]     Noviembre: [k]
+                          Junio: [f]     Diciembre: [l]
+
+                        Usuario: [c003      ]
+               Fecha de Ingreso: [c004               ]
+}
+TABLES
+ctbt006
+ATTRIBUTES
+c001 = ctbt006.b06_ano, AUTONEXT, REVERSE, UPSHIFT;
+a    = FORMONLY.tit_enero, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N';
+b    = FORMONLY.tit_febrero, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N';
+c    = FORMONLY.tit_marzo, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N';
+d    = FORMONLY.tit_abril, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N';
+e    = FORMONLY.tit_mayo, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N';
+f    = FORMONLY.tit_junio, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N';
+g    = FORMONLY.tit_julio, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N';
+h    = FORMONLY.tit_agosto, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N';
+i    = FORMONLY.tit_septiembre, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N';
+j    = FORMONLY.tit_octubre, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N';
+k    = FORMONLY.tit_noviembre, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N';
+l    = FORMONLY.tit_diciembre, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N';
+c003 = ctbt006.b06_usuario, NOENTRY, REVERSE, UPSHIFT;
+c004 = ctbt006.b06_fecing, NOENTRY, REVERSE, UPSHIFT;
+END

@@ -1,0 +1,34 @@
+database diteca
+screen 
+{
+
+  << Detalle Pedido >>
+
+  --------------------------------------------------------------------------
+        Item       Línea C. Ped. C. Rec.       Fob            Subtotal     
+  --------------------------------------------------------------------------
+  [c003           |c007 |c005   |c006   |c004            |c008             ]
+  [c003           |c007 |c005   |c006   |c004            |c008             ]
+  [c003           |c007 |c005   |c006   |c004            |c008             ]
+  [c003           |c007 |c005   |c006   |c004            |c008             ]
+  [c003           |c007 |c005   |c006   |c004            |c008             ]
+  [c003           |c007 |c005   |c006   |c004            |c008             ]
+  --------------------------------------------------------------------------
+                                                  Total: [c009             ]    
+}
+end
+tables
+rept017
+attributes
+c003 = rept017.r17_item, NOENTRY, OPTIONS='-nolist';
+c004 = rept017.r17_fob, NOENTRY, FORMAT='###,###,##&.##', OPTIONS='-nolist';
+c005 = rept017.r17_cantped, NOENTRY, FORMAT='###,##&', OPTIONS='-nolist';
+c006 = rept017.r17_cantrec, NOENTRY, FORMAT='###,##&', OPTIONS='-nolist';
+c007 = rept017.r17_linea, NOENTRY, OPTIONS='-nolist';
+c008 = formonly.subtotal, NOENTRY, FORMAT='#,###,###,##&.##', 
+	OPTIONS='-nolist';
+c009 = formonly.total, NOENTRY, FORMAT='#,###,###,##&.##';
+end
+
+instructions
+screen record ra_detped[6] (r17_item, r17_linea, r17_cantped, r17_cantrec, r17_fob, subtotal)

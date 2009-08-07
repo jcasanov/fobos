@@ -1,0 +1,46 @@
+database diteca
+screen 
+{
+
+          Moneda: [c1] [c001              ]            Estado: [c            ]
+ Rango de Fechas: [c002      ] hasta [c003      ]
+      Tipo O. C.: [c4] [c004              ]           
+    Departamento: [c5] [c005                          ]
+       Proveedor: [c6   ] [c006                       ] 
+   
+   Ordenar Por:
+           [c051                ]  [a]Ascendente  [d]Descendente
+           [c051                ]  [a]Ascendente  [d]Descendente
+
+}
+end
+tables
+gent013
+
+attributes
+c1   = gent013.g13_moneda, REVERSE, AUTONEXT, UPSHIFT, WIDGET='FIELD_BMP', 
+	CONFIG='lista.bmp F2';
+c001 = gent013.g13_nombre, NOENTRY;
+c    = formonly.estado, DEFAULT='T', WIDGET='RADIO', 
+	CONFIG='A Activa P Aprobada C Cerrada T Todos';
+c002 = formonly.fecha_ini TYPE DATE NOT NULL, REVERSE, FORMAT='dd-mm-yyyy',
+	COMMENT='Ingrese fecha en formato: dd-mm-aaaa.';
+c003 = formonly.fecha_fin TYPE DATE NOT NULL, REVERSE, FORMAT='dd-mm-yyyy',
+	COMMENT='Ingrese fecha en formato: dd-mm-aaaa.';
+c4   = formonly.tipo_oc, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c004 = formonly.n_tipo_oc, NOENTRY;
+c5   = formonly.dpto, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c005 = formonly.n_dpto, NOENTRY;
+c6   = formonly.codprov, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c006 = formonly.nomprov, NOENTRY;
+
+c051 = formonly.col TYPE VARCHAR NOT NULL, REVERSE, OPTIONS='-nolist',
+	UPSHIFT, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+a    = formonly.chk_asc,  AUTONEXT, WIDGET='CHECK', CONFIG='S N acknowledge', 
+	OPTIONS='-nolist', DEFAULT='S', COMMENT='Ordena ascendentemente.';
+d    = formonly.chk_desc, AUTONEXT, WIDGET='CHECK', CONFIG='S N acknowledge', 
+	OPTIONS='-nolist', DEFAULT='N', COMMENT='Ordena descendentemente.';
+end
+
+instructions
+screen record rm_ord[2] (col, chk_asc, chk_desc)

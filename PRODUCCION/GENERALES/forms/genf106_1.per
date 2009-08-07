@@ -1,0 +1,22 @@
+database diteca
+screen
+{
+
+
+                 Código del Banco: [c000]
+		
+                 Nombre del Banco: [c001                          ]
+		
+                    Ingresado Por: [c002      ]
+		 Fecha de Ingreso: [c003               ]
+}
+end
+tables
+gent008
+attributes
+c000 = gent008.g08_banco, NOENTRY, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = gent008.g08_nombre, UPSHIFT, REVERSE;
+c002 = gent008.g08_usuario, UPSHIFT, NOENTRY, REVERSE;
+c003 = gent008.g08_fecing, NOENTRY, REVERSE;
+end

@@ -1,0 +1,35 @@
+DATABASE diteca
+
+SCREEN
+{
+ VEHICULOS FACTURADOS
+------------------------------------------------------------------
+ Código    Cliente                 Vehículo  Modelo     
+------------------------------------------------------------------
+[c000    ][c001                   ][c002   ][c003           ]
+[c000    ][c001                   ][c002   ][c003           ]
+[c000    ][c001                   ][c002   ][c003           ]
+[c000    ][c001                   ][c002   ][c003           ]
+[c000    ][c001                   ][c002   ][c003           ]
+[c000    ][c001                   ][c002   ][c003           ]
+[c000    ][c001                   ][c002   ][c003           ]
+[c000    ][c001                   ][c002   ][c003           ]
+[c000    ][c001                   ][c002   ][c003           ]
+[c000    ][c001                   ][c002   ][c003           ]
+
+}
+
+TABLES
+veht022
+veht030
+cxct001
+
+ATTRIBUTES
+c000 = v30_codcli, UPSHIFT;
+c001 = z01_nomcli, UPSHIFT;
+c002 = v22_codigo_veh, UPSHIFT;
+c003 = v22_modelo, UPSHIFT;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_vehfac[10](v30_codcli, z01_nomcli, v22_codigo_veh, v22_modelo)

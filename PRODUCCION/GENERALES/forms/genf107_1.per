@@ -1,0 +1,48 @@
+database diteca
+screen
+{
+
+
+                Banco: [c001] [c008                                     ]
+
+     Número de Cuenta: [c002           ]            Estado: [a|c009     ] 
+        
+          Tipo Cuenta: [b             ]    Moneda: [a0] [c010           ]
+
+    
+           Pago Roles: [c]     
+           Dirigido a: [c003                                            ]
+    Auxiliar Contable: [c004        ] [c011                             ]
+
+        Ingresado Por: [c006      ]
+     Fecha de Ingreso: [c007               ]
+
+}
+end
+tables
+gent009
+attributes
+c001 = gent009.g09_banco, REVERSE, 
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c002 = gent009.g09_numero_cta, UPSHIFT, REVERSE,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+a = gent009.g09_estado, AUTONEXT, UPSHIFT, REVERSE, NOENTRY, 
+	COMMENT='A ACTIVO B BLOQUEADO';
+b = gent009.g09_tipo_cta, AUTONEXT, REVERSE, DEFAULT='A',
+	WIDGET='RADIO', CONFIG='A Ahorro C Corriente';
+a0 = gent009.g09_moneda, UPSHIFT, REVERSE, AUTONEXT,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c = gent009.g09_pago_roles, AUTONEXT, REVERSE, DEFAULT='N',
+	WIDGET='CHECK', CONFIG='S N acknowledge',
+        COMMENT = 'Indicar si la cuenta va a ser usada para pagos a empleados';
+c003 = gent009.g09_atencion_rol, UPSHIFT,
+        COMMENT = 'Indicar a quien va dirigida la carta al banco para pagos a empleados';
+c004 = gent009.g09_aux_cont, REVERSE, UPSHIFT,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c006 = gent009.g09_usuario, REVERSE, UPSHIFT, NOENTRY;
+c007 = gent009.g09_fecing, REVERSE, NOENTRY;
+c008 = formonly.n_banco, UPSHIFT, NOENTRY;
+c009 = formonly.n_estado, UPSHIFT, NOENTRY;
+c010 = formonly.n_moneda, UPSHIFT, NOENTRY;
+c011 = formonly.n_cuenta, UPSHIFT, NOENTRY;
+end

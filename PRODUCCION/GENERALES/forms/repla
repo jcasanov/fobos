@@ -1,0 +1,8 @@
+for i in *.per
+do
+	echo $i
+	sed s/deimos/diteca/ $i > temporal
+	mv temporal $i
+	sed s/@ol_fobos// $i > temporal
+	mv temporal $i
+done

@@ -1,0 +1,30 @@
+DATABASE diteca
+
+SCREEN
+{
+ LINEAS 
+-------------------------------------
+ Código      Descripción 		
+-------------------------------------
+[c01  ] [c002                    ] 
+[c01  ] [c002                    ]
+[c01  ] [c002                    ]
+[c01  ] [c002                    ]
+[c01  ] [c002                    ]
+[c01  ] [c002                    ]
+[c01  ] [c002                    ] 
+[c01  ] [c002                    ] 
+[c01  ] [c002                    ] 
+[c01  ] [c002                    ] 
+}
+
+TABLES
+rept003
+
+ATTRIBUTES
+c01 = r03_codigo;
+c002 = r03_nombre;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_linea[10](r03_codigo, r03_nombre)

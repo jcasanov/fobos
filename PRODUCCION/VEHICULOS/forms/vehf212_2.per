@@ -1,0 +1,43 @@
+database diteca
+screen 
+{
+-------------------------------------------------------------------------------
+Rubro    Fecha  I. B. Mon.       Paridad           Valor        Valor Liq.  
+-------------------------------------------------------------------------------
+[c4] [c006      |a|a0 |a1] [c008             |c009            |c012        ][c]
+[c4] [c006      |a|a0 |a1] [c008             |c009            |c012        ][c]
+[c4] [c006      |a|a0 |a1] [c008             |c009            |c012        ][c]
+[c4] [c006      |a|a0 |a1] [c008             |c009            |c012        ][c]
+[c4] [c006      |a|a0 |a1] [c008             |c009            |c012        ][c]
+[c4] [c006      |a|a0 |a1] [c008             |c009            |c012        ][c]
+[c4] [c006      |a|a0 |a1] [c008             |c009            |c012        ][c]
+[c4] [c006      |a|a0 |a1] [c008             |c009            |c012        ][c]
+-------------------------------------------------------------------------------
+Rubro: [c010                           ]              Total: [c011         ]
+
+}
+end
+tables
+veht037
+attributes
+c4 = veht037.v37_codrubro, OPTIONS='-nolist', WIDGET='FIELD_BMP', 
+	CONFIG='lista.bmp F2';
+c006 = veht037.v37_fecha, NOENTRY, OPTIONS='-nolist',
+	FORMAT='dd-mm-yyyy', COMMENT='Ingrese fecha en formato: dd-mm-aaaa';
+a    = veht037.v37_indicador, UPSHIFT, NOENTRY, OPTIONS='-nolist';
+a0   = veht037.v37_base, UPSHIFT, OPTIONS='-nolist', NOENTRY;
+a1   = veht037.v37_moneda, UPSHIFT, OPTIONS='-nolist', AUTONEXT,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c008 = veht037.v37_paridad, NOENTRY, FORMAT='#,###,##&.######', 
+	OPTIONS='-nolist';
+c009 = veht037.v37_valor, FORMAT='#,###,###,##&.##', 
+	OPTIONS='-nolist';
+c    = formonly.check, DEFAULT='N', OPTIONS='-nolist',
+	WIDGET='CHECK', CONFIG='S N acknowledge';
+c010 = formonly.n_rubro, NOENTRY; 
+c011 = formonly.total_cargos, NOENTRY, FORMAT='##,###,##&.##'; 
+c012 = formonly.valor_ml, NOENTRY, FORMAT='#,###,##&.##', OPTIONS='-nolist'; 
+end
+
+INSTRUCTIONS
+SCREEN RECORD ra_rubros[8] (v37_codrubro, v37_fecha, v37_indicador, v37_base,  v37_moneda, v37_paridad, v37_valor, valor_ml, check)

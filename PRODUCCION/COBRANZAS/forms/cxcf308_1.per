@@ -1,0 +1,64 @@
+DATABASE formonly
+SCREEN
+{
+   Moneda: [c1]   [c002           ]       Tipo Detalle: [c003              ]
+Localidad: [c004] [c005                ]
+
+[c006                          ]
+                                      [c007                           ]
+ [c010              |c011    |c012    |c013   |c014   |c015   |c016   |c017   ]
+[c020              |c021    |c022    |c023   |c024   |c025   |c026   |c027   ]
+[c020              |c021    |c022    |c023   |c024   |c025   |c026   |c027   ]
+[c020              |c021    |c022    |c023   |c024   |c025   |c026   |c027   ]
+[c020              |c021    |c022    |c023   |c024   |c025   |c026   |c027   ]
+[c020              |c021    |c022    |c023   |c024   |c025   |c026   |c027   ]
+[c020              |c021    |c022    |c023   |c024   |c025   |c026   |c027   ]
+[c020              |c021    |c022    |c023   |c024   |c025   |c026   |c027   ]
+[c020              |c021    |c022    |c023   |c024   |c025   |c026   |c027   ]
+[c020              |c021    |c022    |c023   |c024   |c025   |c026   |c027   ]
+[c020              |c021    |c022    |c023   |c024   |c025   |c026   |c027   ]
+[c020              |c021    |c022    |c023   |c024   |c025   |c026   |c027   ]
+[c020              |c021    |c022    |c023   |c024   |c025   |c026   |c027   ]
+                   [c030    |c031    |c032   |c033   |c034   |c035   |c036   ]
+
+}
+ATTRIBUTES
+c1   = formonly.moneda TYPE CHAR NOT NULL, UPSHIFT, AUTONEXT, REVERSE, 
+       WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = formonly.tit_mon, REVERSE, NOENTRY;
+c003 = formonly.tipo_detalle, WIDGET = 'RADIO',
+       CONFIG = 'A "Area de Negocio" C "Tipo de Cliente" R "Tipo de Cartera"';
+c004 = formonly.localidad, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c005 = formonly.tit_local, NOENTRY;
+c006 = formonly.tit_precision; 
+c007 = formonly.tit_edad;
+c010 = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c015 = formonly.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c016 = formonly.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+c017 = formonly.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22';
+c020 = formonly.descripcion;
+c021 = formonly.val_col1 TYPE DECIMAL(14,2), FORMAT = '####,##&';
+c022 = formonly.val_col2 TYPE DECIMAL(14,2), FORMAT = '####,##&';
+c023 = formonly.val_col3 TYPE DECIMAL(14,2), FORMAT = '###,##&';
+c024 = formonly.val_col4 TYPE DECIMAL(14,2), FORMAT = '###,##&';
+c025 = formonly.val_col5 TYPE DECIMAL(14,2), FORMAT = '###,##&';
+c026 = formonly.val_col6 TYPE DECIMAL(14,2), FORMAT = '###,##&';
+c027 = formonly.val_col7 TYPE DECIMAL(14,2), FORMAT = '###,##&';
+c030 = formonly.tot_col1 TYPE DECIMAL(14,2), FORMAT = '####,##&', REVERSE;
+c031 = formonly.tot_col2 TYPE DECIMAL(14,2), FORMAT = '####,##&', REVERSE;
+c032 = formonly.tot_col3 TYPE DECIMAL(14,2), FORMAT = '###,##&', REVERSE;
+c033 = formonly.tot_col4 TYPE DECIMAL(14,2), FORMAT = '###,##&', REVERSE;
+c034 = formonly.tot_col5 TYPE DECIMAL(14,2), FORMAT = '###,##&', REVERSE;
+c035 = formonly.tot_col6 TYPE DECIMAL(14,2), FORMAT = '###,##&', REVERSE;
+c036 = formonly.tot_col7 TYPE DECIMAL(14,2), FORMAT = '###,##&', REVERSE;
+INSTRUCTIONS
+SCREEN RECORD rm_det[12] (formonly.descripcion, formonly.val_col1, 
+			  formonly.val_col2,    formonly.val_col3, 
+			  formonly.val_col4,    formonly.val_col5, 
+			  formonly.val_col6,    formonly.val_col7)
+KEYS
+'F5'='Documentos'

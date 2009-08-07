@@ -1,0 +1,34 @@
+DATABASE diteca  
+-------------
+-------------
+SCREEN
+{
+
+         Código Area: [c02] 
+
+       Area Negocios: [c03                      ]    
+         Abreviación: [c04           ]	                                  
+              Módulo: [c0]  [c050                ]
+
+       Ingresado Por: [c05       ]    Fecha de Ingreso: [c06                ]                                
+
+}
+end
+tables
+gent003
+attributes
+c02 = formonly.g03_areaneg TYPE INTEGER,REQUIRED,  REVERSE, AUTONEXT, NOENTRY
+	,widget="FIELD_BMP", config="lista.bmp F2";
+c03 = g03_nombre 		,UPSHIFT, REQUIRED, REVERSE;
+c04 = g03_abreviacion 	,UPSHIFT, REQUIRED, REVERSE;
+c0   = gent003.g03_modulo, AUTONEXT, UPSHIFT, 
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+        COMMENTS = 'Módulo para facturación (RE, TA, VE)';
+c050 = FORMONLY.tit_modulo, UPSHIFT;
+c05 = g03_usuario		,NOENTRY, REQUIRED, REVERSE;
+c06 = g03_fecing		,NOENTRY, REQUIRED, REVERSE;
+instructions
+delimiters "[]"
+end
+
+

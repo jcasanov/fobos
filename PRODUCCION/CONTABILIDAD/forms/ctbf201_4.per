@@ -1,0 +1,19 @@
+DATABASE diteca
+SCREEN
+{
+              Banco: [c001 |c100                                    ]
+   Número de Cuenta: [c002            ]
+
+       Beneficiario: [c004                                          ]
+  Número del Cheque: [c003      ]             Valor: [c005          ]
+}
+TABLES
+cxpt100
+ATTRIBUTES
+c001 = cxpt100.p100_banco, NOENTRY;
+c002 = cxpt100.p100_numero_cta, REVERSE, 
+				WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c003 = cxpt100.p100_num_cheque, NOENTRY;
+c004 = cxpt100.p100_benef_che, NOENTRY;
+c005 = cxpt100.p100_valor, FORMAT='###,###,##&.&&', REVERSE;
+c100 = formonly.n_banco, NOENTRY;

@@ -1,0 +1,44 @@
+DATABASE diteca
+SCREEN 
+
+{
+
+			     Moneda: [c1] [c020                ]
+		      
+		      Fecha Inicial: [c002      ]  
+            	        Fecha Final: [c003      ]
+
+     	     	     Punto de Venta: [c004 ] [c021             ]
+       		     Línea de Venta: [c005 ] [c022             ]
+		           Vendedor: [c006 ] [c023             ]
+	     
+
+
+}
+end
+
+attributes
+c1     = formonly.moneda,	REVERSE, UPSHIFT, AUTONEXT, 
+				WIDGET = 'FIELD_BMP',
+				CONFIG = 'lista.bmp F2';
+
+c002   = formonly.inicial, 	REVERSE, FORMAT = 'dd-mm-yyyy',
+				COMMENT = 'Ingrese fecha en formato: dd-mm-aaaa';
+c003   = formonly.final, 	REVERSE, FORMAT = 'dd-mm-yyyy',
+				COMMENT = 'Ingrese fecha en formato: dd-mm-aaaa';
+
+c004   = formonly.bodega, 	UPSHIFT, WIDGET = 'FIELD_BMP',
+				CONFIG = 'lista.bmp F2';	
+
+c005   = formonly.linea,	UPSHIFT, WIDGET = 'FIELD_BMP',
+				CONFIG = 'lista.bmp F2';
+
+c006   = formonly.vendedor,	WIDGET = 'FIELD_BMP',
+				CONFIG = 'lista.bmp F2';   
+
+c020 = formonly.desc_moneda, 	REVERSE, UPSHIFT;
+c021 = formonly.desc_bodega, 	UPSHIFT;
+c022 = formonly.desc_linea, 	UPSHIFT;
+c023 = formonly.desc_vendedor,	UPSHIFT;
+END
+

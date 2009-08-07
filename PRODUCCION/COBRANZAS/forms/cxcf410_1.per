@@ -1,0 +1,19 @@
+
+DATABASE diteca
+SCREEN 
+
+{
+		
+	              Fecha Inicial: [c001      ]  
+            	        Fecha Final: [c002      ]
+
+}
+end
+
+attributes
+c001 = formonly.inicial, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENT = 'Ingrese fecha en formato: dd-mm-aaaa';
+c002 = formonly.final, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENT = 'Ingrese fecha en formato: dd-mm-aaaa';
+end
+

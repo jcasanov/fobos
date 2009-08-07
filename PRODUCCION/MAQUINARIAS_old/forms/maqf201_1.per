@@ -1,0 +1,33 @@
+database diteca
+screen
+{
+
+          Orden Chequeo: [c002       ]        Estado: [a|c010     ]
+
+        Código Vehículo: [c003       ] [c011                      ]
+
+             Referencia: [c004                                    ]
+                         [c004                                    ]
+                         [c004                                    ]
+      
+       Orden de Trabajo: [c007      ]
+
+          Ingresado Por: [c008      ]
+       Fecha de Ingreso: [c009               ]
+}
+end
+tables
+veht038
+attributes
+c002 = veht038.v38_orden_cheq, NOENTRY, REVERSE,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+a    = veht038.v38_estado, NOENTRY, UPSHIFT, REVERSE;
+c003 = veht038.v38_codigo_veh, REVERSE,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c004 = veht038.v38_referencia, WORDWRAP COMPRESS, REVERSE, UPSHIFT;
+c007 = veht038.v38_num_ot, NOENTRY;
+c008 = veht038.v38_usuario, NOENTRY, UPSHIFT, REVERSE;
+c009 = veht038.v38_fecing, NOENTRY, REVERSE;
+c010 = formonly.n_estado, NOENTRY;
+c011 = formonly.serie_veh, NOENTRY;
+end

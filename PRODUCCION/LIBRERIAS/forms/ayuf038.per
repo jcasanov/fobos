@@ -1,0 +1,30 @@
+DATABASE diteca
+
+SCREEN
+{
+ VENDEDORES
+------------------------------------
+ Código  Nombres
+------------------------------------
+[c01] [c002                       ] 
+[c01] [c002                       ]
+[c01] [c002                       ]
+[c01] [c002                       ]
+[c01] [c002                       ]
+[c01] [c002                       ]
+[c01] [c002                       ] 
+[c01] [c002                       ] 
+[c01] [c002                       ] 
+[c01] [c002                       ] 
+}
+
+TABLES
+rept001
+
+ATTRIBUTES
+c01 = r01_codigo;
+c002 = r01_nombres;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_vend[10](r01_codigo, r01_nombres)

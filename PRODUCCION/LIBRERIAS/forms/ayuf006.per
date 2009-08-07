@@ -1,0 +1,30 @@
+DATABASE diteca
+
+SCREEN
+{
+ PAISES
+-----------------------------------
+ Código	  Nombre 		
+-----------------------------------
+[c01] [c002                    ] 
+[c01] [c002                    ]
+[c01] [c002                    ]
+[c01] [c002                    ]
+[c01] [c002                    ]
+[c01] [c002                    ]
+[c01] [c002                    ] 
+[c01] [c002                    ] 
+[c01] [c002                    ] 
+[c01] [c002                    ] 
+}
+
+TABLES
+gent030
+
+ATTRIBUTES
+c01 = g30_pais;
+c002 = g30_nombre;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_pais[10](g30_pais, g30_nombre)

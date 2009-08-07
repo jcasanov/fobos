@@ -1,0 +1,38 @@
+DATABASE diteca
+SCREEN
+{
+
+  Cuenta Master: [c001        ]  [c004                                     ]
+
+      [c016        ] [c017                                     |c018    ]
+     [c002        ] [c005                                     |c003    ]
+     [c002        ] [c005                                     |c003    ]
+     [c002        ] [c005                                     |c003    ]
+     [c002        ] [c005                                     |c003    ]
+     [c002        ] [c005                                     |c003    ]
+     [c002        ] [c005                                     |c003    ]
+     [c002        ] [c005                                     |c003    ]
+     [c002        ] [c005                                     |c003    ]
+     [c002        ] [c005                                     |c003    ]
+     [c002        ] [c005                                     |c003    ]
+                                                              ---------
+                                        Total de Porcentaje:  [c006    ]
+}
+TABLES
+ctbt016
+ATTRIBUTES
+c001 = ctbt016.b16_cta_master, AUTONEXT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c016 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c017 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c018 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c002 = ctbt016.b16_cta_detail, AUTONEXT, 
+	OPTIONS = '-nolist', WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = ctbt016.b16_porcentaje, AUTONEXT, OPTIONS = '-nolist',
+	FORMAT = '#,##&.##', INCLUDE = (0.01 TO 99.99);
+c004 = FORMONLY.tit_master, NOENTRY, UPSHIFT, REVERSE;
+c005 = FORMONLY.tit_detalle, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c006 = FORMONLY.tit_total_por, NOENTRY, REVERSE, FORMAT = '#,##&.##';
+INSTRUCTIONS
+SCREEN RECORD vm_cm[10] (b16_cta_detail,tit_detalle,b16_porcentaje)
+END

@@ -1,0 +1,31 @@
+database formonly
+screen 
+{
+
+  [lbl1      ]: [c001           |c010                                ]   
+
+   [lbl0 |lbl2                                               |lbl3      ]  
+  [c000 |c002           |c020                               |c003      ]
+  [c000 |c002           |c020                               |c003      ]
+  [c000 |c002           |c020                               |c003      ]
+  [c000 |c002           |c020                               |c003      ]
+  [c000 |c002           |c020                               |c003      ]
+  [c000 |c002           |c020                               |c003      ]
+}
+end
+attributes
+lbl1 = formonly.lbl_item, NOENTRY;
+lbl2 = formonly.bt_item,  WIDGET='BUTTON', CONFIG='F15';
+lbl3 = formonly.bt_fecha, WIDGET='BUTTON', CONFIG='F16';
+lbl0 = formonly.bt_canti, WIDGET='BUTTON', CONFIG='F17';
+
+c001 = formonly.item1,    REVERSE, NOENTRY;
+c010 = formonly.n_item1,          NOENTRY;
+
+c000 = formonly.cantidad, NOENTRY, OPTIONS='-nolist';
+c002 = formonly.item2,    NOENTRY, OPTIONS='-nolist';
+c020 = formonly.n_item2,  NOENTRY, OPTIONS='-nolist';
+c003 = formonly.fecha,    NOENTRY, OPTIONS='-nolist';
+end
+instructions
+screen record ra_items[6] (cantidad, item2, n_item2, fecha)

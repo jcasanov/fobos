@@ -1,0 +1,24 @@
+DATABASE formonly
+SCREEN
+{
+   [f000          ]                
+------------------------------------------
+   [f001                               ]	
+   [f001                               ]	
+   [f001                               ]	
+   [f001                               ]	
+   [f001                               ]	
+   [f001                               ]	
+   [f001                               ]	
+   [f001                               ]	
+   [f001                               ]	
+   [f001                               ]	
+   [f001                               ]	
+}
+attributes
+f000 = formonly.titulo, REVERSE;
+f001 = formonly.opcion;
+INSTRUCTIONS
+DELIMITERS "  "
+SCREEN RECORD r_menu_rep [11] (formonly.opcion)
+

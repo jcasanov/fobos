@@ -1,0 +1,30 @@
+DATABASE diteca
+
+SCREEN
+{
+ SUBTIPOS DE CARTERAS
+--------------------------------------
+ Subtipo  Nombre 		
+--------------------------------------
+[c02] [c002                         ] 
+[c02] [c002                         ]
+[c02] [c002                         ]
+[c02] [c002                         ]
+[c02] [c002                         ]
+[c02] [c002                         ]
+[c02] [c002                         ] 
+[c02] [c002                         ] 
+[c02] [c002                         ] 
+[c02] [c002                         ] 
+}
+
+TABLES
+gent012
+
+ATTRIBUTES
+c02 = g12_subtipo;
+c002 = g12_nombre;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_subcar[10](g12_subtipo, g12_nombre)

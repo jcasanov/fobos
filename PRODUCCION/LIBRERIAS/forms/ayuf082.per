@@ -1,0 +1,34 @@
+DATABASE diteca
+
+SCREEN
+{
+ CHASIS CLIENTE  
+------------------------------------------------------------
+ Chasis			     Placa        Color 
+------------------------------------------------------------
+[c000                     ] [c001      ] [c002           ]
+[c000                     ] [c001      ] [c002           ]
+[c000                     ] [c001      ] [c002           ]
+[c000                     ] [c001      ] [c002           ]
+[c000                     ] [c001      ] [c002           ]
+[c000                     ] [c001      ] [c002           ]
+[c000                     ] [c001      ] [c002           ]
+[c000                     ] [c001      ] [c002           ]
+[c000                     ] [c001      ] [c002           ]
+[c000                     ] [c001      ] [c002           ]
+
+
+}
+
+TABLES
+talt023
+
+ATTRIBUTES
+
+c000 = t23_chasis, NOENTRY ;
+c001 = t23_placa, UPSHIFT;
+c002 = t23_color, UPSHIFT;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_chasisex[10](t23_chasis, t23_placa, t23_color)

@@ -1,0 +1,37 @@
+database diteca
+screen 
+{
+
+
+   Liquidación No: [c002       ]                     Estado: [a|c026     ]
+            Fecha: [c025               ]   
+
+           Moneda: [a0] [c027           ]  
+      Fob Fábrica: [c012            ]          Fecha Llegada: [c010      ]   
+        Total Fob: [c016            ]          Fecha Ingreso: [c011      ] 
+     Total Cargos: [c018            ]
+           Seguro: [c017            ]
+     Factor Costo: [c019            ]
+}
+end
+tables
+rept028
+attributes
+c002 = rept028.r28_numliq, REVERSE,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2' ;
+a    = rept028.r28_estado, UPSHIFT, NOENTRY, REVERSE;
+c010 = rept028.r28_fecha_lleg, REVERSE, NOENTRY,
+	FORMAT='dd-mm-yyyy', COMMENT='Ingrese fecha en formato: dd-mm-aaaa';
+c011 = rept028.r28_fecha_ing, REVERSE, NOENTRY,
+	FORMAT='dd-mm-yyyy', COMMENT='Ingrese fecha en formato: dd-mm-aaaa';
+a0   = rept028.r28_moneda, UPSHIFT, REVERSE, AUTONEXT, NOENTRY,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2' ;
+c012 = rept028.r28_fob_fabrica, REVERSE, NOENTRY, FORMAT='###,###,##&.####';
+c016 = rept028.r28_total_fob, REVERSE, NOENTRY, FORMAT='###,###,##&.####';
+c017 = rept028.r28_seguro, REVERSE, NOENTRY, FORMAT='###,###,##&.####';
+c018 = rept028.r28_tot_cargos, REVERSE, NOENTRY, FORMAT='###,###,##&.####';
+c019 = rept028.r28_fact_costo, REVERSE, NOENTRY, FORMAT='###,##&.######';
+c025 = rept028.r28_fecing, REVERSE, NOENTRY;
+c026 = formonly.n_estado, NOENTRY;
+c027 = formonly.n_moneda, NOENTRY;
+end

@@ -1,0 +1,36 @@
+DATABASE diteca
+
+SCREEN
+{
+ MAESTRO DE ITEMS
+------------------------------------------------------------------------
+ Código   	 Descripción               Línea Precio      Bod Stock
+------------------------------------------------------------------------
+[c01            |c001                     |c002 |c003       |c0 |c004 ]
+[c01            |c001                     |c002 |c003       |c0 |c004 ]
+[c01            |c001                     |c002 |c003       |c0 |c004 ]
+[c01            |c001                     |c002 |c003       |c0 |c004 ]
+[c01            |c001                     |c002 |c003       |c0 |c004 ]
+[c01            |c001                     |c002 |c003       |c0 |c004 ]
+[c01            |c001                     |c002 |c003       |c0 |c004 ]
+[c01            |c001                     |c002 |c003       |c0 |c004 ]
+[c01            |c001                     |c002 |c003       |c0 |c004 ]
+[c01            |c001                     |c002 |c003       |c0 |c004 ]
+
+}
+
+TABLES
+rept010
+rept011
+
+ATTRIBUTES
+c01  = r10_codigo , UPSHIFT;
+c001 = r10_nombre , UPSHIFT;
+c002 = r10_linea , UPSHIFT;
+c003 = r10_precio_mb , UPSHIFT, FORMAT='###,##&.&&';
+c0   = r11_bodega, UPSHIFT;
+c004 = r11_stock_act , UPSHIFT;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_reppre[10](r10_codigo, r10_nombre, r10_linea, r10_precio_mb, r11_bodega, r11_stock_act)

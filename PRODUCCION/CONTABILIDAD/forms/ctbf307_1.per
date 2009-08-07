@@ -1,0 +1,37 @@
+DATABASE formonly
+SCREEN
+{
+          Código de Cuenta: [c000        ]  [c001                          ]
+                       Año: [c002]  
+                    Moneda: [c3]   [c004          ]
+[c005                                                                          ]
+[c005                                                                          ]
+[c005                                                                          ]
+[c005                                                                          ]
+[c005                                                                          ]
+[c005                                                                          ]
+[c005                                                                          ]
+[c005                                                                          ]
+[c005                                                                          ]
+[c005                                                                          ]
+[c005                                                                          ]
+[c005                                                                          ]
+[c005                                                                          ]
+[c005                                                                          ]
+[c005                                                                          ]
+[c005                                                                          ]
+[c005                                                                          ]
+[c005                                                                          ]
+[c005                                                                          ]
+[a]
+}
+ATTRIBUTES
+c000 = formonly.cuenta TYPE CHAR NOT NULL, REVERSE, WIDGET = 'FIELD_BMP',  
+       CONFIG = 'lista.bmp F2';
+c001 = formonly.tit_cuenta, REVERSE, NOENTRY;
+c002 = formonly.ano TYPE SMALLINT NOT NULL, REQUIRED, REVERSE;
+c3   = formonly.moneda TYPE CHAR NOT NULL ,REQUIRED, REVERSE, 
+       WIDGET = 'FIELD_BMP',  CONFIG = 'lista.bmp F2';
+c004 = formonly.tit_mon, REVERSE, NOENTRY;
+c005 = formonly.c001, WIDGET = 'Canvas';
+a    = formonly.tecla, AUTONEXT, INVISIBLE;

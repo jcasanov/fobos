@@ -1,0 +1,24 @@
+DATABASE diteca
+SCREEN
+{
+
+
+                Filtro: [c001       ]               Estado: [c] [c0a0     ]
+                Nombre: [c002                ]
+
+               Usuario: [c003      ]
+      Fecha de Ingreso: [c004               ]
+}
+TABLES
+ctbt008
+ATTRIBUTES
+c001 = ctbt008.b08_filtro, AUTONEXT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Indicar el filtro para configuración de una cuenta';
+c002 = ctbt008.b08_nombre, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Indicar el nombre del filtro de la cuenta';
+c003 = ctbt008.b08_usuario, NOENTRY, REVERSE, UPSHIFT;
+c004 = ctbt008.b08_fecing, NOENTRY, REVERSE, UPSHIFT;
+c    = FORMONLY.tit_est, NOENTRY, REVERSE;
+c0a0 = FORMONLY.tit_estado_fil, NOENTRY, UPSHIFT;
+END

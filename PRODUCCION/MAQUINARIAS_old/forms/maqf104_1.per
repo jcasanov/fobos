@@ -1,0 +1,51 @@
+database diteca
+screen 
+{
+
+  Modelo: [c001           ]               [f1                           ] 
+          [c002                          ]
+   Tipo : [c003 ] [c013                  ]
+   Línea: [c004 ] [c014                  ]         
+ Observ.: [c005                ]
+          [c005                ]
+  Origen: [a            ]
+
+
+  Moneda: [a0] [c015           ]            Precio: [c006          ]
+  Moneda: [a1] [c016           ]  Precio Exfábrica: [c007          ]     
+       Cilindraje: [c008       ]
+            Stock: [c009  ]                Pedidos: [c010  ]
+    Ingresado Por: [c011      ]   Fecha de Ingreso: [c012               ]
+}
+end
+tables
+veht020
+attributes
+c001 = veht020.v20_modelo, REVERSE, UPSHIFT,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c002 = veht020.v20_modelo_ext, REVERSE, UPSHIFT;
+c003 = veht020.v20_tipo_veh, REVERSE,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c004 = veht020.v20_linea, REVERSE, UPSHIFT,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c005 = veht020.v20_observacion, REVERSE, UPSHIFT, WORDWRAP COMPRESS;
+a = veht020.v20_origen, REVERSE, DEFAULT='N', AUTONEXT, 
+	WIDGET='RADIO', CONFIG='N Nacional I Importado';
+a0 = veht020.v20_moneda, REVERSE, UPSHIFT, AUTONEXT,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c006 = veht020.v20_precio, REVERSE, FORMAT='###,###,##&.##';
+a1 = veht020.v20_mon_prov, REVERSE, UPSHIFT, AUTONEXT,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c007 = veht020.v20_prec_exfab, REVERSE, FORMAT='###,###,##&.##';
+c008 = veht020.v20_cilindraje, REVERSE, INCLUDE=(0 TO 999999999);
+c009 = veht020.v20_stock, NOENTRY, DEFAULT=0;
+c010 = veht020.v20_pedidos, NOENTRY, DEFAULT=0;
+c011 = veht020.v20_usuario, REVERSE, UPSHIFT, NOENTRY;
+c012 = veht020.v20_fecing, REVERSE, NOENTRY;
+c013 = formonly.n_tipo_veh, UPSHIFT, NOENTRY;
+c014 = formonly.n_linea, UPSHIFT, NOENTRY;
+c015 = formonly.n_moneda, UPSHIFT, NOENTRY;
+c016 = formonly.n_mon_prov, UPSHIFT, NOENTRY;
+f1 = formonly.f1, widget="BMP" , NOENTRY;
+
+end

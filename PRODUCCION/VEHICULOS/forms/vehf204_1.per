@@ -1,0 +1,55 @@
+database diteca
+screen 
+{
+
+   Transferencia No: [a0|c001       ]         Fecha: [c005               ]     
+
+           Vendedor: [c002  ] [c010                           ]
+      Bodega Origen: [a1] [c011                           ]
+     Bodega Destino: [a2] [c012                           ]
+             Motivo: [c003                                    ]
+
+    [lbl1         ][lbl2                     ][lbl3           ][lbl4     ]
+   [c006        ] [c007                     ][c008           ][c009      ]    
+   [c006        ] [c007                     ][c008           ][c009      ]    
+   [c006        ] [c007                     ][c008           ][c009      ]    
+   [c006        ] [c007                     ][c008           ][c009      ]    
+   [c006        ] [c007                     ][c008           ][c009      ]    
+   [c006        ] [c007                     ][c008           ][c009      ]    
+   [c006        ] [c007                     ][c008           ][c009      ]    
+
+    Ingresado Por: [c004      ]  
+}
+end
+tables
+veht030
+veht031
+attributes
+a0   = veht030.v30_cod_tran, NOENTRY, REVERSE;
+c001 = veht030.v30_num_tran, NOENTRY, REVERSE;
+c002 = veht030.v30_vendedor, REVERSE, 
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c003 = veht030.v30_referencia, UPSHIFT;
+a1 = veht030.v30_bodega_ori, REVERSE, UPSHIFT,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+a2 = veht030.v30_bodega_dest, REVERSE, UPSHIFT,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c004 = veht030.v30_usuario, REVERSE, NOENTRY, UPSHIFT;
+c005 = veht030.v30_fecing, REVERSE, NOENTRY;
+c006 = veht031.v31_codigo_veh, OPTIONS='-nolist', 
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c007 = formonly.serie, NOENTRY, OPTIONS='-nolist';
+c008 = formonly.modelo, NOENTRY, OPTIONS='-nolist';
+c009 = formonly.color, NOENTRY, OPTIONS='-nolist';
+c010 = formonly.n_vendedor, NOENTRY;
+c011 = formonly.n_bodega_ori, NOENTRY;
+c012 = formonly.n_bodega_dest, NOENTRY;
+
+lbl1 = formonly.bt_codigo_veh, WIDGET='BUTTON', CONFIG='F15';
+lbl2 = formonly.bt_serie, WIDGET='BUTTON', CONFIG='F16';
+lbl3 = formonly.bt_modelo, WIDGET='BUTTON', CONFIG='F17';
+lbl4 = formonly.bt_color, WIDGET='BUTTON', CONFIG='F18';
+end
+
+INSTRUCTIONS
+SCREEN RECORD ra_transf[7] (v31_codigo_veh, serie, modelo, color)

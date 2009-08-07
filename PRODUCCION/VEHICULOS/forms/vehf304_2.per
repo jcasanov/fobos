@@ -1,0 +1,83 @@
+database diteca
+SCREEN
+{
+
+     Transacción: [c1|c002         ]
+            Caja: [c003            ]         Detalle Documentos Aplicados:
+   Cuota Inicial: [c004            ]         [c10|c011  |c012            ]
+       Anticipos: [c005            ]        [c20|c021  |c022            ]
+         Crédito: [c006            ]        [c20|c021  |c022            ]
+                  -----------------         [c20|c021  |c022            ]
+           Total: [c007            ]                       [c70] de [c71]
+
+          Detalle Cuota Inicial Financiada:      
+          [c30|c031      |c032          |c033          |c034            ]
+         [c40|c041      |c042          |c043          |c044            ]
+         [c40|c041      |c042          |c043          |c044            ]
+         [c40|c041      |c042          |c043          |c044            ]
+                                                          [c72] de [c73]
+ Detalle Crédito:
+ [c50|c051      |c052          |c053          |c054         |c055            ]
+[c60|c061      |c062          |c063          |c064         |c065            ]
+[c60|c061      |c062          |c063          |c064         |c065            ]
+[c60|c061      |c062          |c063          |c064         |c065            ]
+                                                               [c74] de [c75]
+}
+TABLES
+veht026, veht028, veht029
+ATTRIBUTES
+c1   = FORMONLY.tit_cod_tran, NOENTRY, REVERSE, UPSHIFT;
+c002 = FORMONLY.tit_num_tran, NOENTRY, REVERSE, UPSHIFT;
+c003 = FORMONLY.tit_val_caja, NOENTRY, REVERSE, FORMAT = '#,###,###,##&.##';
+c004 = veht026.v26_cuotai_fin, NOENTRY, REVERSE, FORMAT = '###,###,##&.##';
+c005 = veht026.v26_tot_pa_nc, NOENTRY, REVERSE, FORMAT = '#,###,###,##&.##';
+c006 = veht026.v26_sdo_credito, NOENTRY, REVERSE, FORMAT = '#,###,###,##&.##';
+c007 = veht026.v26_tot_neto, NOENTRY, REVERSE, FORMAT = '#,###,###,##&.##';
+
+c10  = FORMONLY.tit_ant1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_ant2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_ant3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c20  = veht029.v29_tipo_doc, NOENTRY, REVERSE, UPSHIFT;
+c021 = veht029.v29_numdoc, NOENTRY, REVERSE, UPSHIFT;
+c022 = veht029.v29_valor, NOENTRY, REVERSE, FORMAT = '#,###,###,##&.##';
+
+c30  = FORMONLY.tit_ini1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c031 = FORMONLY.tit_ini2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c032 = FORMONLY.tit_ini3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c033 = FORMONLY.tit_ini4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c034 = FORMONLY.tit_ini5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c40  = FORMONLY.tit_dividendo, NOENTRY, REVERSE, UPSHIFT, FORMAT = '&&';
+c041 = FORMONLY.tit_fecha_vcto, NOENTRY, REVERSE, UPSHIFT,FORMAT = 'dd-mm-yyyy';
+c042 = FORMONLY.tit_val_cap, NOENTRY, REVERSE, FORMAT = '###,###,##&.##';
+c043 = FORMONLY.tit_val_int, NOENTRY, REVERSE, FORMAT = '###,###,##&.##';
+c044 = FORMONLY.tit_total_ini, NOENTRY, REVERSE, FORMAT = '#,###,###,##&.##';
+
+c50  = FORMONLY.tit_cred1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c051 = FORMONLY.tit_cred2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c052 = FORMONLY.tit_cred3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c053 = FORMONLY.tit_cred4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c054 = FORMONLY.tit_cred5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c055 = FORMONLY.tit_cred6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c60  = veht028.v28_dividendo, NOENTRY, REVERSE, UPSHIFT, FORMAT = '&&';
+c061 = veht028.v28_fecha_vcto, NOENTRY, REVERSE, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c062 = veht028.v28_val_cap, NOENTRY, REVERSE, FORMAT = '###,###,##&.##';
+c063 = veht028.v28_val_int, NOENTRY, REVERSE, FORMAT = '###,###,##&.##';
+c064 = veht028.v28_val_adi, NOENTRY, REVERSE, FORMAT = '##,###,##&.##';
+c065 = FORMONLY.tit_total_cre, REVERSE, NOENTRY, FORMAT = '#,###,###,##&.##';
+
+c70  = FORMONLY.vm_num_current1, NOENTRY;
+c71  = FORMONLY.vm_num_rows1, NOENTRY;
+c72  = FORMONLY.vm_num_current2, NOENTRY;
+c73  = FORMONLY.vm_num_rows2, NOENTRY;
+c74  = FORMONLY.vm_num_current3, NOENTRY;
+c75  = FORMONLY.vm_num_rows3, NOENTRY;
+END
+KEYS
+F5 = 'Doc. a Favor'
+F6 = 'Doc. Deudores'
+INSTRUCTIONS
+SCREEN RECORD rm_ant[3] (v29_tipo_doc, v29_numdoc, v29_valor)
+SCREEN RECORD rm_ini[3] (tit_dividendo, tit_fecha_vcto, tit_val_cap,
+			tit_val_int, tit_total_ini)
+SCREEN RECORD rm_cred[3] (v28_dividendo, v28_fecha_vcto, v28_val_cap,
+			v28_val_int, v28_val_adi, tit_total_cre)

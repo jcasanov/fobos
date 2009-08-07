@@ -1,0 +1,40 @@
+database diteca
+screen 
+{
+
+
+ Código Venta Perdida: [f000       ]  	              Estado:[a][a4        ]
+
+          Código Item: [f002           ] [a2                               ]
+        Código Bodega: [a0] [a3                       ]
+             Cantidad: [f003  ]
+
+       Tipo Documento: [a1]
+     Número Documento: [f005           ]
+           Referencia: [f004                          ]
+
+        Ingresado Por: [f006      ]
+     Fecha de Ingreso: [f007               ]
+
+}
+end
+tables
+rept013
+attributes
+f000 = rept013.r13_serial, REVERSE, NOENTRY,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+a0   = rept013.r13_bodega, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+a3   = formonly.nom_bod TYPE VARCHAR, NOENTRY;
+f002 = rept013.r13_item, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+a2   = formonly.nom_item TYPE VARCHAR, NOENTRY;
+a    = rept013.r13_estado, REVERSE, NOENTRY;
+a4   = formonly.tit_estado TYPE VARCHAR, NOENTRY;
+f003 = rept013.r13_cantidad, REVERSE;
+f004 = rept013.r13_referencia, REVERSE, UPSHIFT;
+a1   = rept013.r13_cod_tran, UPSHIFT, NOENTRY;
+f005 = rept013.r13_num_tran, NOENTRY;
+f006 = rept013.r13_usuario, REVERSE, NOENTRY, UPSHIFT;
+f007 = rept013.r13_fecing, REVERSE, NOENTRY;
+end

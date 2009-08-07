@@ -1,0 +1,53 @@
+database diteca
+screen
+{
+
+
+     Compañía: [f000] [a4                           ]	Estado:[a][a1       ]
+
+ Compañía Ventas Vehículos: [f001 ] [a2                                   ]     
+Código Cliente OT Internas: [f002 ] [a3                                   ]	
+          Consumidor Final: [f005 ] [a5                                   ]
+
+        Factor Moneda Base: [f003        ]	 Valor Tarea:[b           ]
+     Factor Moneda Alterna: [f004        ]
+Código Tarea No Codificada: [a0]
+ Requisiciones al Taller ?: [d]
+
+	   Días Devolución: [f05]             Devolución Mes:[c]
+
+}
+end
+tables
+talt000
+attributes
+f000 = talt000.t00_compania, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+a4   = formonly.nom_cia TYPE VARCHAR, NOENTRY;
+a    = talt000.t00_estado,REVERSE, NOENTRY, UPSHIFT;
+a1   = formonly.tit_estado TYPE VARCHAR, NOENTRY;
+b    = talt000.t00_valor_tarea, REVERSE, AUTONEXT,
+	WIDGET = 'RADIO', CONFIG = 'O Optimo R Real',
+	COMMENT = 'Facturación del valor de la tarea basado en tiempo Optimo o Real';
+f001 = talt000.t00_cia_vehic, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+a2   = formonly.nom_cia_veh TYPE VARCHAR, NOENTRY;
+f002 = talt000.t00_codcli_int,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+a3   = formonly.nom_cli TYPE VARCHAR, NOENTRY;
+f005 = talt000.t00_cliente_final,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+a5   = formonly.nom_cli_final TYPE VARCHAR, NOENTRY;
+f003 = talt000.t00_factor_mb, REVERSE, FORMAT = '#,###,##&.##',
+	COMMENT = 'Factor para obtención de valor de tarea';
+f004 = talt000.t00_factor_ma, REVERSE, FORMAT = '#,###,##&.##', NOENTRY,
+	COMMENT = 'Factor para obtención de valor de tarea con respecto a moneda alterna';
+a0   = talt000.t00_seudo_tarea, REVERSE, UPSHIFT;
+f05  = talt000.t00_dias_dev, REVERSE, COMMENT = 'Días que acepta la compañía para la devolución por la venta de vehículos';
+c    = talt000.t00_dev_mes, REVERSE,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowedge',
+	COMMENT = 'Devolución unicamente dentro del mes corriente a la venta del vehículo';
+d    = talt000.t00_req_tal, REVERSE,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowedge',
+	COMMENT = 'Permitir Requisiciones contra O.T. que sí se facturan';
+end

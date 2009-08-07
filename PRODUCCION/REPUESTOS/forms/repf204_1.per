@@ -1,0 +1,74 @@
+DATABASE diteca
+SCREEN
+{
+
+         Pedido: [c000      ]   Tipo: [c001        ]  Estado: [b][c002      ]
+          Línea: [c025 ]
+      Proveedor: [c003      ] [c004                                         ]
+    Fecha Envío: [c005      ]        Demora: [c006  ]     Seguridad: [c007  ]
+  Fecha Llegada: [c008      ]    Referencia: [c009                          ]
+  Moneda Pedido: [a0] [c010            ]
+  Aux. Contable: [c011        ] [c012                                       ]
+
+ [c013           ] [c014                |c015  |c016          |c017          ]
+[c018           ] [c019                |c020  |c021          |c022          ]
+[c018           ] [c019                |c020  |c021          |c022          ]
+[c018           ] [c019                |c020  |c021          |c022          ]
+[c018           ] [c019                |c020  |c021          |c022          ]
+[c018           ] [c019                |c020  |c021          |c022          ]
+[c018           ] [c019                |c020  |c021          |c022          ]
+[c018           ] [c019                |c020  |c021          |c022          ]
+[c018           ] [c019                |c020  |c021          |c022          ]
+[c018           ] [c019                |c020  |c021          |c022          ]
+[c023                                  |c026  ]       Total: [c024          ]
+}
+TABLES
+rept016,
+rept017
+ATTRIBUTES
+c000 = rept016.r16_pedido, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = rept016.r16_tipo, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'RADIO', CONFIG = 'S Sugerido E Emergencia', DEFAULT = 'E';
+b    = rept016.r16_estado, NOENTRY, REVERSE, UPSHIFT;
+c002 = FORMONLY.tit_estado_rep, NOENTRY, UPSHIFT;
+c025 = rept016.r16_linea, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = rept016.r16_proveedor, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c004 = FORMONLY.tit_proveedor, NOENTRY, REVERSE, UPSHIFT;
+c005 = rept016.r16_fec_envio, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la fecha en formato dd-mm-aaaa';
+c006 = rept016.r16_demora, NOENTRY, REVERSE;
+c007 = rept016.r16_seguridad, NOENTRY, REVERSE;
+c008 = rept016.r16_fec_llegada, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c009 = rept016.r16_referencia, AUTONEXT, REVERSE, UPSHIFT;
+a0   = rept016.r16_moneda, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c010 = FORMONLY.tit_mon_bas, NOENTRY, REVERSE, UPSHIFT;
+c011 = rept016.r16_aux_cont, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c012 = FORMONLY.tit_aux_con, NOENTRY, REVERSE, UPSHIFT;
+c013 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c014 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c015 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c016 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c017 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c018 = rept017.r17_item, AUTONEXT, UPSHIFT, OPTIONS = '-nolist',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c019 = FORMONLY.tit_descripcion, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c020 = rept017.r17_cantped, AUTONEXT, INCLUDE = (1 TO 65536),
+	OPTIONS = '-nolist';
+c021 = rept017.r17_fob, AUTONEXT, INCLUDE = (0.01 TO 999999999.99),
+	FORMAT = '###,###,##&.##', OPTIONS = '-nolist';
+c022 = FORMONLY.tit_subtotal, NOENTRY, FORMAT = '###,###,##&.##',
+	OPTIONS = '-nolist';
+c023 = FORMONLY.tit_descri, NOENTRY, REVERSE, UPSHIFT;
+c024 = FORMONLY.tit_total, NOENTRY, REVERSE, FORMAT = '###,###,##&.##';
+c026 = formonly.tot_cant, NOENTRY, REVERSE;
+END
+KEYS
+F5 = 'Imprimir'
+INSTRUCTIONS
+SCREEN RECORD rm_repd[9] (r17_item, tit_descripcion, r17_cantped, r17_fob,
+			tit_subtotal)

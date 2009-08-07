@@ -1,0 +1,75 @@
+DATABASE diteca
+SCREEN
+{
+
+  Conciliación: [c000      ]                        Estado: [a|c008         ]
+         Banco: [c001                       ]   No. Cuenta: [c002           ]
+        Moneda: [c003           ]
+ Fecha Inicial: [c004      ]                         Fecha Final: [c005      ]
+                                         Saldo E/C Banco: [c006              ]
+
+ [c020      |c021             |b0|c022    |c023            |c024            |b]
+[c010      |c011             |a1|c012    |c013            |c014            |c]
+[c010      |c011             |a1|c012    |c013            |c014            |c]
+[c010      |c011             |a1|c012    |c013            |c014            |c]
+[c010      |c011             |a1|c012    |c013            |c014            |c]
+[c010      |c011             |a1|c012    |c013            |c014            |c]
+[c010      |c011             |a1|c012    |c013            |c014            |c]
+[c010      |c011             |a1|c012    |c013            |c014            |c]
+[c010      |c011             |a1|c012    |c013            |c014            |c]
+[c010      |c011             |a1|c012    |c013            |c014            |c]
+[c010      |c011             |a1|c012    |c013            |c014            |c]
+                                Totales: [c016            |c017            ]
+  Refer.: [c018                                                            ]
+   Glosa: [c019                                                            ]
+}
+TABLES
+gent008, ctbt030, ctbt013
+ATTRIBUTES
+c000 = ctbt030.b30_num_concil, UPSHIFT, NOENTRY, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+a    = ctbt030.b30_estado, UPSHIFT, NOENTRY, REVERSE;
+c008 = FORMONLY.tit_estado, UPSHIFT, NOENTRY, REVERSE;
+c001 = gent008.g08_nombre, NOENTRY, REVERSE, UPSHIFT;
+c002 = ctbt030.b30_numero_cta, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = FORMONLY.tit_moneda, NOENTRY, REVERSE, UPSHIFT;
+c004 = ctbt030.b30_fecha_ini, AUTONEXT, REVERSE, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Fecha Inicial ingresar en formato: dd-mm-aaaa';
+c005 = ctbt030.b30_fecha_fin, AUTONEXT, REVERSE, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Fecha Final ingresar en formato: dd-mm-aaaa';
+c006 = ctbt030.b30_saldo_ec, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = '---,---,---,--&.##';
+
+c020 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c021 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b0   = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c022 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c023 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c024 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+b    = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+
+c010 = ctbt013.b13_fec_proceso, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy', OPTIONS = '-nolist';
+c011 = FORMONLY.referencia, NOENTRY, UPSHIFT, OPTIONS = '-nolist', REVERSE;
+a1   = ctbt013.b13_tipo_comp, NOENTRY, UPSHIFT, OPTIONS = '-nolist', REVERSE;
+c012 = ctbt013.b13_num_comp, NOENTRY, UPSHIFT, OPTIONS = '-nolist', REVERSE;
+c013 = FORMONLY.tit_debito, NOENTRY, FORMAT = '#,###,###,##&.##', REVERSE,
+	OPTIONS = '-nolist';
+c014 = FORMONLY.tit_credito, NOENTRY, FORMAT = '#,###,###,##&.##', REVERSE,
+	OPTIONS = '-nolist';
+c    = FORMONLY.conciliado, UPSHIFT, REVERSE, OPTIONS = '-nolist', REVERSE,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowedge',
+	COMMENTS = 'Marcar si este movimiento esta en el E/C.';
+
+c016 = FORMONLY.tit_total_deb, NOENTRY, REVERSE, FORMAT = '#,###,###,##&.##';
+c017 = FORMONLY.tit_total_cre, NOENTRY, REVERSE, FORMAT = '#,###,###,##&.##';
+
+c018 = FORMONLY.referen, NOENTRY, UPSHIFT;
+c019 = ctbt013.b13_glosa, NOENTRY, UPSHIFT;
+END
+KEYS
+F5 = 'Comprobante'
+INSTRUCTIONS
+SCREEN RECORD rm_det[10] (b13_fec_proceso, referencia, b13_tipo_comp,
+			b13_num_comp, tit_debito, tit_credito, conciliado)

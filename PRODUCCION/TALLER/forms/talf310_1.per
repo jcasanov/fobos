@@ -1,0 +1,65 @@
+DATABASE formonly
+SCREEN
+{
+        Localidad: [c1]    [c002               ]  Ene: [d]  May: [h]  Sep: [l]
+              Año: [c003]                         Feb: [e]  Jun: [i]  Oct: [m]
+           Moneda: [c4]    [c005               ]  Mar: [f]  Jul: [j]  Nov: [n]
+           Modelo: [c006           ]              Abr: [g]  Ago: [k]  Dic: [o]
+       Tipo Orden: [c8]    [c009               ]                       
+                                            [c10                           ]
+----------------------------------------------------------------------------
+ R u b r o                [c010       |c011       |c012       ]    Subtotal
+----------------------------------------------------------------------------
+[c020                     |c021       |c022       |c023       |c024        ]
+[c020                     |c021       |c022       |c023       |c024        ]
+[c020                     |c021       |c022       |c023       |c024        ]
+[c020                     |c021       |c022       |c023       |c024        ]
+[c020                     |c021       |c022       |c023       |c024        ]
+[c020                     |c021       |c022       |c023       |c024        ]
+[c020                     |c021       |c022       |c023       |c024        ]
+[c020                     |c021       |c022       |c023       |c024        ]
+[c020                     |c021       |c022       |c023       |c024        ]
+[c020                     |c021       |c022       |c023       |c024        ]
+[c020                     |c021       |c022       |c023       |c024        ]
+[c020                     |c021       |c022       |c023       |c024        ]
+}
+ATTRIBUTES
+c1   = formonly.localidad, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = formonly.tit_local, NOENTRY;
+c003 = formonly.ano TYPE SMALLINT NOT NULL, REVERSE;
+c4   = formonly.moneda TYPE CHAR NOT NULL, REVERSE, WIDGET = 'FIELD_BMP', 
+       CONFIG = 'lista.bmp F2', UPSHIFT, AUTONEXT;
+c005 = formonly.tit_mon, NOENTRY;
+c006 = formonly.modelo, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2', UPSHIFT;
+c8   = formonly.tipo_ot, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2', UPSHIFT,
+       AUTONEXT;
+c009 = formonly.tit_tipo_ot , NOENTRY;
+d    = formonly.mes1,  WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+e    = formonly.mes2,  WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+f    = formonly.mes3,  WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+g    = formonly.mes4,  WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+h    = formonly.mes5,  WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+i    = formonly.mes6,  WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+j    = formonly.mes7,  WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+k    = formonly.mes8,  WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+l    = formonly.mes9,  WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+m    = formonly.mes10, WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+n    = formonly.mes11, WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+o    = formonly.mes12, WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+c10  = formonly.tit_precision;
+c010 = formonly.tit_mes1, RIGHT;
+c011 = formonly.tit_mes2, RIGHT;
+c012 = formonly.tit_mes3, RIGHT;
+c020 = formonly.tit_rubro;
+c021 = formonly.valor_1   TYPE DECIMAL(14,2), FORMAT = '----,--&.##';
+c022 = formonly.valor_2   TYPE DECIMAL(14,2), FORMAT = '----,--&.##';
+c023 = formonly.valor_3   TYPE DECIMAL(14,2), FORMAT = '----,--&.##';
+c024 = formonly.tot_val   TYPE DECIMAL(14,2), FORMAT = '-,---,--&.##';
+INSTRUCTIONS
+SCREEN RECORD rm_cons[12] (formonly.tit_rubro, formonly.valor_1, 
+			   formonly.valor_2, formonly.valor_3, 
+			   formonly.tot_val)
+KEYS
+F5='Movimientos'
+F6='Más Meses'
+F7='Precisión'

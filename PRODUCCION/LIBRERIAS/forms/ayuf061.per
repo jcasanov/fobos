@@ -1,0 +1,32 @@
+DATABASE diteca
+
+SCREEN
+{
+ CLIENTES ORDENES DE TRABAJO
+-----------------------------------------------------
+ Código      Nombre 		
+-----------------------------------------------------
+[c001     ] [c002                                 ] 
+[c001     ] [c002                                 ]
+[c001     ] [c002                                 ]
+[c001     ] [c002                                 ]
+[c001     ] [c002                                 ]
+[c001     ] [c002                                 ]
+[c001     ] [c002                                 ] 
+[c001     ] [c002                                 ] 
+[c001     ] [c002                                 ] 
+[c001     ] [c002                                 ] 
+
+}
+
+TABLES
+talt023
+
+ATTRIBUTES
+c001 = t23_cod_cliente, UPSHIFT;
+c002 = t23_nom_cliente, UPSHIFT;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_cliord[10](t23_cod_cliente, t23_nom_cliente)
+

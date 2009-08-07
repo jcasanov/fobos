@@ -1,0 +1,40 @@
+DATABASE diteca
+SCREEN
+{
+ CONCILIACION BANCARIA
+
+ [lbl1    |l|lbl2            |lbl3           |lbl4        ]
+[c000    |c|c002            |c003           |c004        ]
+[c000    |c|c002            |c003           |c004        ]
+[c000    |c|c002            |c003           |c004        ]
+[c000    |c|c002            |c003           |c004        ]
+[c000    |c|c002            |c003           |c004        ]
+[c000    |c|c002            |c003           |c004        ]
+[c000    |c|c002            |c003           |c004        ]
+[c000    |c|c002            |c003           |c004        ]
+[c000    |c|c002            |c003           |c004        ]
+[c000    |c|c002            |c003           |c004        ]
+
+}
+TABLES
+ctbt030
+gent008
+
+ATTRIBUTES
+c000 = b30_num_concil,    UPSHIFT;
+c    = b30_estado,        UPSHIFT;
+c002 = g08_nombre,        UPSHIFT;
+c003 = b30_numero_cta,    UPSHIFT;
+c004 = b30_aux_cont,  	  UPSHIFT;
+
+lbl1 = formonly.bt_numero,        NOENTRY, WIDGET='BUTTON', CONFIG='F15';
+l    = formonly.bt_estado,        NOENTRY, WIDGET='BUTTON', CONFIG='F16';
+lbl2 = formonly.bt_banco,         NOENTRY, WIDGET='BUTTON', CONFIG='F17';
+lbl3 = formonly.bt_cuenta,        NOENTRY, WIDGET='BUTTON', CONFIG='F18';
+lbl4 = formonly.bt_auxiliar,      NOENTRY, WIDGET='BUTTON', CONFIG='F19';
+
+END
+INSTRUCTIONS
+SCREEN RECORD rh_concilia[10] ( b30_num_concil,  b30_estado,
+                                g08_nombre,      b30_numero_cta,
+                                b30_aux_cont)

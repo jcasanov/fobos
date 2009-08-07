@@ -1,0 +1,42 @@
+DATABASE diteca
+
+SCREEN
+{
+ DOCUMENTOS A FAVOR DE CLIENTES EN COBRANZAS
+
+ [lb11                       |l1|lb13   |lb14      |l2|lb15      ]
+[c001                       |c0|c002   |c003      |c1|c004      ]
+[c001                       |c0|c002   |c003      |c1|c004      ]
+[c001                       |c0|c002   |c003      |c1|c004      ]
+[c001                       |c0|c002   |c003      |c1|c004      ]
+[c001                       |c0|c002   |c003      |c1|c004      ]
+[c001                       |c0|c002   |c003      |c1|c004      ]
+[c001                       |c0|c002   |c003      |c1|c004      ]
+[c001                       |c0|c002   |c003      |c1|c004      ]
+[c001                       |c0|c002   |c003      |c1|c004      ]
+[c001                       |c0|c002   |c003      |c1|c004      ]
+}
+
+TABLES
+cxct021
+cxct001
+gent003
+
+ATTRIBUTES
+c001 = z01_nomcli, UPSHIFT;
+c0   = z21_tipo_doc, UPSHIFT;
+c002 = z21_num_doc, UPSHIFT;
+c003 = z21_saldo, UPSHIFT;
+c1   = z21_moneda, UPSHIFT;
+c004 = g03_abreviacion, UPSHIFT;
+
+lb11 = formonly.bt_cliente,  NOENTRY, WIDGET='BUTTON', CONFIG='F15';
+l1   = formonly.bt_tipo,     NOENTRY, WIDGET='BUTTON', CONFIG='F16';
+lb13 = formonly.bt_numero,   NOENTRY, WIDGET='BUTTON', CONFIG='F17';
+lb14 = formonly.bt_saldo,    NOENTRY, WIDGET='BUTTON', CONFIG='F18';
+l2   = formonly.bt_moneda,   NOENTRY, WIDGET='BUTTON', CONFIG='F19';
+lb15 = formonly.bt_area,     NOENTRY, WIDGET='BUTTON', CONFIG='F20';
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_favorcob[10]( z01_nomcli, z21_tipo_doc, z21_num_doc, z21_saldo, z21_moneda, g03_abreviacion)

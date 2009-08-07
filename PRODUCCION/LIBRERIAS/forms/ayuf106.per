@@ -1,0 +1,36 @@
+DATABASE diteca
+
+SCREEN
+{
+ PRE-VENTAS REPUESTOS
+
+ [lbl1     |lbl2                                 |l]
+[c001     |c002                                 |c] 
+[c001     |c002                                 |c]
+[c001     |c002                                 |c]
+[c001     |c002                                 |c]
+[c001     |c002                                 |c]
+[c001     |c002                                 |c]
+[c001     |c002                                 |c]
+[c001     |c002                                 |c]
+[c001     |c002                                 |c]
+[c001     |c002                                 |c]
+
+}
+
+TABLES
+rept023
+
+ATTRIBUTES
+c001 = r23_numprev, UPSHIFT;
+c002 = r23_nomcli,  UPSHIFT;
+c    = r23_estado,  UPSHIFT;
+
+lbl1 = formonly.bt_numero,     NOENTRY, WIDGET='BUTTON', CONFIG='F15';
+lbl2 = formonly.bt_cliente,    NOENTRY, WIDGET='BUTTON', CONFIG='F16';
+l    = formonly.bt_estado,     NOENTRY, WIDGET='BUTTON', CONFIG='F17';
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_prerep[10](r23_numprev, r23_nomcli, r23_estado)
+

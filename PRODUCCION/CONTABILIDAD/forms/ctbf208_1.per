@@ -1,0 +1,44 @@
+DATABASE diteca
+
+screen 
+{
+ [l0  |l1|l2                                          |l3        |l4           ]
+[x000|c0|c001                                        |c002      |c003         ]
+[x000|c0|c001                                        |c002      |c003         ]
+[x000|c0|c001                                        |c002      |c003         ]
+[x000|c0|c001                                        |c002      |c003         ]
+[x000|c0|c001                                        |c002      |c003         ]
+[x000|c0|c001                                        |c002      |c003         ]
+[x000|c0|c001                                        |c002      |c003         ]
+[x000|c0|c001                                        |c002      |c003         ]
+[x000|c0|c001                                        |c002      |c003         ]
+[x000|c0|c001                                        |c002      |c003         ]
+[x000|c0|c001                                        |c002      |c003         ]
+[x000|c0|c001                                        |c002      |c003         ]
+[x000|c0|c001                                        |c002      |c003         ]
+[x000|c0|c001                                        |c002      |c003         ]
+[x000|c0|c001                                        |c002      |c003         ]
+}
+tables
+ctbt014
+
+attributes
+l0   = formonly.bt_diario   , WIDGET='BUTTON', CONFIG='F15';
+l1   = formonly.bt_tipo_comp, WIDGET='BUTTON', CONFIG='F16';
+l2   = formonly.bt_glosa    , WIDGET='BUTTON', CONFIG='F17';
+l3   = formonly.bt_fecha    , WIDGET='BUTTON', CONFIG='F18';
+l4   = formonly.bt_veces    , WIDGET='BUTTON', CONFIG='F19';
+
+x000 = b14_codigo    , NOENTRY, OPTIONS='-nolist';
+c0   = b14_tipo_comp , NOENTRY, OPTIONS='-nolist';
+c001 = b14_glosa     , NOENTRY, OPTIONS='-nolist';
+c002 = b14_fecha_ini , NOENTRY, OPTIONS='-nolist', FORMAT='dd-mm-yyyy';
+c003 = formonly.veces, NOENTRY, OPTIONS='-nolist';
+
+instructions
+screen record ra_rows[15] (b14_codigo, b14_tipo_comp, b14_glosa, b14_fecha_ini, 
+			   veces)
+
+keys
+F5 = 'Ver Diario'
+F6 = 'Generar Comp.'

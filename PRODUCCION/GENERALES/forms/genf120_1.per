@@ -1,0 +1,27 @@
+                                                                                
+database diteca
+screen size 24 by 80
+{
+
+
+		      Código: [c000]
+		
+		        País: [c001                           ]
+	              Siglas: [c01]
+	
+	       Ingresado Por: [c002       ]
+            Fecha de ingreso: [c003               ]
+
+
+}
+end
+tables
+gent030
+attributes
+c000 = formonly.g30_pais TYPE INTEGER NOT NULL, REVERSE,
+    	  WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = gent030.g30_nombre, REVERSE, UPSHIFT;
+c01 = gent030.g30_siglas, REVERSE, UPSHIFT, AUTONEXT;
+c002 = gent030.g30_usuario, REVERSE, UPSHIFT, NOENTRY;
+c003 = gent030.g30_fecing, REVERSE, NOENTRY;
+end

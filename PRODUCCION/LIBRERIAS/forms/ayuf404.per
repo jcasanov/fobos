@@ -1,0 +1,30 @@
+DATABASE diteca
+
+SCREEN
+{
+  Clasificion Importacion
+-----------------------------------
+ Código	  Descripcion 		
+-----------------------------------
+[c01] [c002                    ] 
+[c01] [c002                    ]
+[c01] [c002                    ]
+[c01] [c002                    ]
+[c01] [c002                    ]
+[c01] [c002                    ]
+[c01] [c002                    ] 
+[c01] [c002                    ] 
+[c01] [c002                    ] 
+[c01] [c002                    ] 
+}
+
+TABLES
+rept114
+
+ATTRIBUTES
+c01 = r114_codigo;
+c002 = r114_descripcion;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_impp[10](r114_codigo, r114_descripcion)

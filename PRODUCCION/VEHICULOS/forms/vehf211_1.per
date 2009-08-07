@@ -1,0 +1,71 @@
+database diteca
+screen
+{
+
+          Pedido: [c002       ]                       Estado: [a|c022      ] 
+       Proveedor: [c005       ] [c023                                      ]
+          Moneda: [a0] [c024           ] 
+   Aux. Contable: [c011        ] [c025                                     ] 
+      Referencia: [c003                          ]      Tipo: [b           ]
+                  [c003                          ]
+  Fecha de Envío: [c006      ]               Fecha de Llegada: [c007       ]
+
+     [lbl1|lbl2         |lbl3     |lbl4                |lbl5             |l]   
+  [c|c026|c018         |c019     |c021                |c027             |d]
+  [c|c026|c018         |c019     |c021                |c027             |d]
+  [c|c026|c018         |c019     |c021                |c027             |d]
+  [c|c026|c018         |c019     |c021                |c027             |d]
+  [c|c026|c018         |c019     |c021                |c027             |d]
+
+  Ingresado Por: [c012      ]       Fecha de Ingreso: [c013               ]
+
+}
+end
+tables
+veht034
+veht035
+attributes
+c002 = veht034.v34_pedido, REVERSE, UPSHIFT,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+a    = veht034.v34_estado, REVERSE, NOENTRY, UPSHIFT;
+b    = veht034.v34_tipo, REVERSE, DEFAULT='I',
+	WIDGET='RADIO', CONFIG='I Importado N Nacional';
+c003 = veht034.v34_referencia, WORDWRAP COMPRESS, REVERSE, UPSHIFT;
+c005 = veht034.v34_proveedor, REVERSE, 
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c006 = veht034.v34_fec_envio, FORMAT='dd-mm-yyyy', 
+	COMMENT='Ingrese fecha en formato: dd-mm-aaaa';
+c007 = veht034.v34_fec_llegada, FORMAT='dd-mm-yyyy', 
+	COMMENT='Ingrese fecha en formato: dd-mm-aaaa';
+a0   = veht034.v34_moneda, REVERSE, UPSHIFT, AUTONEXT, 
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c011 = veht034.v34_aux_cont, REVERSE, UPSHIFT, AUTONEXT,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c012 = veht034.v34_usuario, UPSHIFT, REVERSE, NOENTRY;
+c013 = veht034.v34_fecing, REVERSE, NOENTRY;
+
+c018 = veht035.v35_modelo, UPSHIFT, NOENTRY, OPTIONS='-nolist';
+c019 = veht035.v35_cod_color, NOENTRY, UPSHIFT, OPTIONS='-nolist';
+c021 = formonly.serie, UPSHIFT, NOENTRY, OPTIONS='-nolist';
+c022 = formonly.n_estado, NOENTRY;
+c023 = formonly.n_proveedor, NOENTRY;
+c024 = formonly.n_moneda, NOENTRY;
+c025 = formonly.n_cuenta, NOENTRY;
+c026 = veht035.v35_secuencia, NOENTRY, OPTIONS='-nolist';
+c027 = veht035.v35_precio_unit, NOENTRY, OPTIONS='-nolist',
+	FORMAT='#,###,###,##&.##';
+d    = veht035.v35_estado, NOENTRY, OPTIONS='-nolist';
+c    = formonly.check, DEFAULT='N', OPTIONS='-nolist', AUTONEXT, 
+	WIDGET='CHECK', CONFIG='S N acknowledge',
+       COMMENT='Para modificar una serie desmarque y vuelva a marcar el check.';
+
+lbl1 = formonly.bt_sec,    WIDGET='BUTTON', CONFIG='F14';
+lbl2 = formonly.bt_modelo, WIDGET='BUTTON', CONFIG='F15';
+lbl3 = formonly.bt_color,  WIDGET='BUTTON', CONFIG='F16';
+lbl4 = formonly.bt_serie,  WIDGET='BUTTON', CONFIG='F17';
+lbl5 = formonly.bt_fob,    WIDGET='BUTTON', CONFIG='F18';
+l    = formonly.bt_estado, WIDGET='BUTTON', CONFIG='F19';
+end
+
+INSTRUCTIONS
+SCREEN RECORD ra_pedido[5] (check, v35_secuencia, v35_modelo, v35_cod_color, serie, v35_precio_unit, v35_estado)

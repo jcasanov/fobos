@@ -1,0 +1,20 @@
+database diteca
+screen 
+{
+
+
+    Cantón: [c022] [c105                                         ]  
+ Provincia: [c021] [c104           ]    
+
+}
+end
+tables
+maqt002
+attributes
+c021 = maqt002.m02_provincia, UPSHIFT, REVERSE, WIDGET='FIELD_BMP', 
+	CONFIG='lista.bmp F2';
+c022 = maqt002.m02_canton, UPSHIFT, REVERSE, WIDGET='FIELD_BMP', 
+	CONFIG='lista.bmp F2', NOENTRY;
+c104 = formonly.n_provincia, NOENTRY, UPSHIFT;
+c105 = maqt002.m02_nombre,   REVERSE , UPSHIFT;
+end

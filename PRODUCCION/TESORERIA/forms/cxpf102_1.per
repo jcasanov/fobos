@@ -1,0 +1,31 @@
+DATABASE diteca  
+SCREEN
+{
+
+
+                                                        Estado: [d][c003     ]
+
+                  Tipo Documento: [c0]  [c002           ] 
+    
+                            Tipo: [c                ]     
+         				   
+
+
+                         Usuario: [c004      ]    
+                Fecha de Ingreso: [c005               ]                       
+
+}
+TABLES
+cxpt004
+ATTRIBUTES
+c0   = cxpt004.p04_tipo_doc, UPSHIFT, REQUIRED, REVERSE, AUTONEXT,
+	PICTURE = 'AA', WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = cxpt004.p04_nombre, UPSHIFT, REQUIRED, REVERSE;
+c    = cxpt004.p04_tipo, AUTONEXT, REVERSE, DEFAULT = 'D',
+	WIDGET='RADIO', CONFIG='D Deudor F Favor T Transacción'; 
+d    = FORMONLY.tit_est, NOENTRY, UPSHIFT, REVERSE;
+c003 = FORMONLY.tit_estado_tip, NOENTRY;
+c004 = cxpt004.p04_usuario, NOENTRY, REQUIRED, REVERSE;
+c005 = cxpt004.p04_fecing, NOENTRY, REQUIRED, REVERSE;
+END
+

@@ -1,0 +1,29 @@
+database diteca
+screen 
+{
+
+
+	          Línea: [c001 ]	  Estado: [a|c006     ]
+
+           Nombre Línea: [c002                                ]
+	    Grupo Línea: [c003 ] [c007                        ]
+
+          Ingresado Por: [c004      ]
+       Fecha de Ingreso: [c005               ]
+}
+end
+tables
+veht003
+attributes
+c001 = veht003.v03_linea, REVERSE, UPSHIFT, 
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c002 = veht003.v03_nombre, REVERSE, UPSHIFT;
+a = veht003.v03_estado, REVERSE, UPSHIFT, NOENTRY,
+	COMMENT='A ACTIVO B BLOQUEADO';
+c003 = veht003.v03_grupo_linea, REVERSE, UPSHIFT,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c004 = veht003.v03_usuario, REVERSE, UPSHIFT, NOENTRY;
+c005 = veht003.v03_fecing, REVERSE, UPSHIFT, NOENTRY;
+c006 = formonly.n_estado, UPSHIFT, NOENTRY;
+c007 = formonly.n_grupo, UPSHIFT, NOENTRY;
+end

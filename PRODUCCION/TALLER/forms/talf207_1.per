@@ -1,0 +1,27 @@
+DATABASE diteca
+SCREEN
+{ 
+
+ 
+                                                     Estado: [a][c005     ]
+
+                 Orden: [c000    ]   Modelo: [c001                 ]
+
+               Cliente: [c003                                      ] 
+                 Línea: [c002 ]
+
+      Total Neto Orden: [c004          ]
+}
+TABLES
+talt023
+ATTRIBUTES
+c000 = talt023.t23_orden, AUTONEXT, REVERSE,
+        WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = FORMONLY.tit_modelo, NOENTRY, REVERSE, UPSHIFT;
+c002 = FORMONLY.tit_linea, NOENTRY, REVERSE, UPSHIFT;
+c003 = FORMONLY.tit_cliente, NOENTRY, REVERSE, UPSHIFT;
+c004 = FORMONLY.tit_total, NOENTRY, REVERSE, INCLUDE = (0 TO 999999999.99),
+        FORMAT = '###,###,##&.##';
+a    = FORMONLY.tit_est, NOENTRY, REVERSE, UPSHIFT;
+c005 = FORMONLY.tit_estado_tal, NOENTRY, UPSHIFT;
+END

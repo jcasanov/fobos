@@ -1,0 +1,28 @@
+DATABASE diteca
+
+SCREEN
+{
+ COMPANIAS CONFIGURADAS ACTIVOS FIJOS
+----------------------------------------
+ Código	        Descripción 	  
+----------------------------------------
+[f001] [f002                         ] 
+[f001] [f002                         ]
+[f001] [f002                         ]
+[f001] [f002                         ]
+[f001] [f002                         ]
+[f001] [f002                         ]
+[f001] [f002                         ]
+}
+
+TABLES
+gent001
+actt000
+
+ATTRIBUTES
+f001 = a00_compania;
+f002 = g01_razonsocial;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_ciaact[7](a00_compania, g01_razonsocial)

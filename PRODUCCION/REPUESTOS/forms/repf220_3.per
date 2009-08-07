@@ -1,0 +1,40 @@
+
+DATABASE diteca
+SCREEN
+{
+
+         Pedido: [c000      ]   Tipo: [c001        ]  Estado: [b][c002      ]
+          Línea: [c025 ]
+      Proveedor: [c003      ] [c004                                         ]
+    Fecha Envío: [c005      ]        Demora: [c006  ]     Seguridad: [c007  ]
+  Fecha Llegada: [c008      ]    Referencia: [c009                          ]
+  Moneda Pedido: [a0] [c010            ]
+  Aux. Contable: [c011        ] [c012                                       ]
+
+}
+TABLES
+	rept016
+ATTRIBUTES
+c000 = rept016.r16_pedido, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = rept016.r16_tipo, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'RADIO', CONFIG = 'S Sugerido E Emergencia', DEFAULT = 'E';
+b    = rept016.r16_estado, NOENTRY, REVERSE, UPSHIFT;
+c002 = FORMONLY.tit_estado_rep, NOENTRY, UPSHIFT;
+c025 = rept016.r16_linea, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = rept016.r16_proveedor, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c004 = FORMONLY.tit_proveedor, NOENTRY, REVERSE, UPSHIFT;
+c005 = rept016.r16_fec_envio, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la fecha en formato dd-mm-aaaa';
+c006 = rept016.r16_demora, NOENTRY, REVERSE;
+c007 = rept016.r16_seguridad, NOENTRY, REVERSE;
+c008 = rept016.r16_fec_llegada, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c009 = rept016.r16_referencia, AUTONEXT, REVERSE, UPSHIFT;
+a0   = rept016.r16_moneda, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c010 = FORMONLY.tit_mon_bas, NOENTRY, REVERSE, UPSHIFT;
+c011 = rept016.r16_aux_cont, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c012 = FORMONLY.tit_aux_con, NOENTRY, REVERSE, UPSHIFT;

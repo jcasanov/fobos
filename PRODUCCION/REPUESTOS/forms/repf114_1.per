@@ -1,0 +1,39 @@
+database diteca
+screen
+{
+
+                                                     Estado: [a|f101     ]
+          Item: [f002           ] [f100                                  ]
+  Fecha inicio: [f003      ]                    Fecha limite: [f007      ]
+   Descripcion: [f004                          ]
+                [f004                          ]
+
+     Descuento: [f006   ] 
+       Recargo: [f011   ]
+
+   Hasta stock: [f008       ]               Bloquear en nuevo ingreso: [b]
+
+       Usuario: [f009      ]       Fecha de ingreso: [f010               ]
+}
+end
+tables
+rept110
+attributes
+f002 = rept110.r110_item, REVERSE, UPSHIFT, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+f003 = rept110.r110_fecha_inicio, REVERSE, FORMAT='dd-mm-yyyy',
+		COMMENTS='Ingrese fecha en formato: dd-mm-yyyy';
+f004 = rept110.r110_descripcion, UPSHIFT, WORDWRAP;
+a = rept110.r110_estado, REVERSE, UPSHIFT, NOENTRY, 
+		COMMENTS='(A) ACTIVO   (B) BLOQUEADO';
+f006 = rept110.r110_descuento, REVERSE, FORMAT='&&&.&&';
+f011 = rept110.r110_recargo,   REVERSE, FORMAT='&&&.&&';
+f007 = rept110.r110_fecha_limite, FORMAT='dd-mm-yyyy',
+		COMMENTS='Ingrese fecha en formato: dd-mm-yyyy';
+f008 = rept110.r110_stock_limite, FORMAT='#,##&', INCLUDE=(NULL, 0 TO 9999);
+b = rept110.r110_hasta_ingreso, UPSHIFT, WIDGET='CHECK', CONFIG='S N acknowledge';
+f009 = rept110.r110_usuario, UPSHIFT, REVERSE, NOENTRY;
+f010 = rept110.r110_fecing, REVERSE, NOENTRY;
+
+f100 = formonly.tit_item, UPSHIFT, NOENTRY, REVERSE;
+f101 = formonly.tit_estado, UPSHIFT, NOENTRY, REVERSE;
+end

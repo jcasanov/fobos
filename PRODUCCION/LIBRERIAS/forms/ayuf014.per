@@ -1,0 +1,30 @@
+DATABASE diteca
+
+SCREEN
+{
+ USUARIOS
+-----------------------------------------
+ Código	      Nombre 		
+-----------------------------------------
+[c01       ] [c002                    ] 
+[c01       ] [c002                    ]
+[c01       ] [c002                    ]
+[c01       ] [c002                    ]
+[c01       ] [c002                    ]
+[c01       ] [c002                    ]
+[c01       ] [c002                    ] 
+[c01       ] [c002                    ] 
+[c01       ] [c002                    ] 
+[c01       ] [c002                    ] 
+}
+
+TABLES
+gent005
+
+ATTRIBUTES
+c01 = g05_usuario;
+c002 = g05_nombres;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_usua[10](g05_usuario, g05_nombres)

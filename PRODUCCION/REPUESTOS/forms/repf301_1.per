@@ -1,0 +1,76 @@
+
+DATABASE diteca
+SCREEN
+{
+              Moneda:[c0] [c1             ]   Tipo Transacción:[c2           ]
+      Desde la Fecha:[c3        ]    
+      Hasta la Fecha:[c4        ]
+Rango Utilidad Desde:[c13       ]         Rango Utilidad Hasta:[c14       ]
+
+ [b0        |b1|b2             |b3 |b4              |b5            |b6      ]
+[c5        |c6|c7             |c8 |c9              |c10           |c11     ]
+[c5        |c6|c7             |c8 |c9              |c10           |c11     ]
+[c5        |c6|c7             |c8 |c9              |c10           |c11     ]
+[c5        |c6|c7             |c8 |c9              |c10           |c11     ]
+[c5        |c6|c7             |c8 |c9              |c10           |c11     ]
+[c5        |c6|c7             |c8 |c9              |c10           |c11     ]
+[c5        |c6|c7             |c8 |c9              |c10           |c11     ]
+[c5        |c6|c7             |c8 |c9              |c10           |c11     ]
+[c5        |c6|c7             |c8 |c9              |c10           |c11     ]
+[c5        |c6|c7             |c8 |c9              |c10           |c11     ]
+[c5        |c6|c7             |c8 |c9              |c10           |c11     ]
+[c5        |c6|c7             |c8 |c9              |c10           |c11     ]
+[c5        |c6|c7             |c8 |c9              |c10           |c11     ]
+              [c12                                 ]
+}
+TABLES
+	rept019
+	rept020
+
+ATTRIBUTES
+
+b0  = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+b1  = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b2  = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+b3  = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+b4  = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+b5  = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+b6  = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+
+c0  = rept019.r19_moneda , AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c1  = FORMONLY.nom_moneda, NOENTRY, REVERSE;
+
+c3  = FORMONLY.vm_fecha_desde TYPE DATE NOT NULL, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy', COMMENTS = 'Fecha en formato: dd-mm-aaaa';
+c4  = FORMONLY.vm_fecha_hasta TYPE DATE NOT NULL, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy', COMMENTS = 'Fecha en formato: dd-mm-aaaa';
+c2  = FORMONLY.vm_tipo_tran TYPE VARCHAR, REVERSE, WIDGET = 'RADIO',
+	CONFIG = 'FA Factura RQ Requisición TO Todas'; 
+
+c5  = FORMONLY.fecha TYPE DATE, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+c6  = FORMONLY.tipo_tran TYPE VARCHAR, OPTIONS = '-nolist';
+c7  = FORMONLY.num_tran TYPE DECIMAL(15,0), OPTIONS = '-nolist';
+c8  = FORMONLY.siglas_vend TYPE VARCHAR, OPTIONS = '-nolist';
+c9  = FORMONLY.tot_sin_impto TYPE DECIMAL(12,2),  
+	FORMAT = '#,###,###,##&.##', OPTIONS = '-nolist';
+c10 = FORMONLY.tot_costo TYPE DECIMAL(11,2),  
+	FORMAT = '###,###,##&.##', OPTIONS = '-nolist';
+c11 = FORMONLY.utilidad TYPE DECIMAL( 7,2), COLOR =  RED WHERE c11 < 0,
+	COLOR = BLACK WHERE c11 >= 0, FORMAT = '---&.##', OPTIONS = '-nolist';
+
+c12 = FORMONLY.nom_cliente TYPE VARCHAR, REVERSE, NOENTRY; 
+c13 = FORMONLY.utilidad_desde TYPE DECIMAL(6,2), REVERSE, FORMAT = '-,--&.##',
+	INCLUDE = (NULL, -999.99 TO 9999.99), COLOR = RED WHERE c13 < 0; 
+c14 = FORMONLY.utilidad_hasta TYPE DECIMAL(6,2), REVERSE, FORMAT = '#,##&.##',
+	INCLUDE = (NULL, 0.00 TO 9999.99); 
+
+END
+
+KEYS 
+	F5 = 'Comprobante'
+
+INSTRUCTIONS
+SCREEN RECORD r_detalle[13] (fecha, tipo_tran, num_tran, siglas_vend,
+			     tot_sin_impto, tot_costo, utilidad)

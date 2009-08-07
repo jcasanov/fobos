@@ -1,0 +1,50 @@
+database diteca
+screen
+{
+
+
+           Registro No: [f001       ]	               Estado: [a|a1       ]
+
+           Línea Venta: [f003 ] [a2                      ]
+       Indice Rotación: [a0] [a3                         ]
+             Tipo Item: [f004 ] [a4                      ]
+	    Porcentaje: [f002     ]%	                 
+
+                Moneda: [b1              ]       Rubro Base: [b          ]
+
+
+    Fecha de Procesado: [f007               ]
+         Ingresado Por: [f005      ] 
+      Fecha de Ingreso: [f006               ]
+
+}
+tables
+rept032
+attributes
+f001 = rept032.r32_numreg, REVERSE, NOENTRY,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+a    = rept032.r32_estado, REVERSE,UPSHIFT, NOENTRY,
+	COMMENTS = 'A Activo  P Procesado';
+a1   = formonly.tit_estado TYPE VARCHAR, NOENTRY;
+b1   = rept032.r32_moneda, REVERSE, UPSHIFT, DEFAULT = 'A', 
+	WIDGET = 'RADIO', CONFIG = 'A "Moneda Base" B "Moneda Alterna"',
+	COMMENT = 'Moneda a la que se le hara el cambio de precio. ';
+b    = rept032.r32_rubro_base, REVERSE,UPSHIFT, 
+	WIDGET = 'RADIO', CONFIG = 'P Precio C Costo',
+	COMMENT = 'Rubro Base sobre el que se va a calcular el nuevo valor. ';
+f002 = rept032.r32_porc_fact, REVERSE, FORMAT = '##,##&.##', 
+	INCLUDE = (0.00 TO 99999.99),
+	COMMENT = 'Porcentaje para cambio de precios. ';
+f003 = rept032.r32_linea, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+a2   = formonly.nom_lin TYPE VARCHAR, NOENTRY;
+a0   = rept032.r32_rotacion, UPSHIFT, AUTONEXT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+a3   = formonly.nom_rot TYPE VARCHAR, NOENTRY;
+f004 = rept032.r32_tipo_item,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+a4   = formonly.nom_tipo TYPE VARCHAR, NOENTRY;
+f005 = rept032.r32_usuario, REVERSE, NOENTRY;
+f006 = rept032.r32_fecing, REVERSE, NOENTRY;
+f007 = rept032.r32_fecpro, REVERSE, NOENTRY;
+end

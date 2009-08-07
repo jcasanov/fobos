@@ -1,0 +1,29 @@
+database diteca
+screen
+{
+
+     Cliente: [c001   |c100                                   ] 
+   Direccion: [c005                                           ]
+   Telefonos: [c004                         ]    
+
+    CAMPAMENTO
+   ------------
+   Ubicacion: [c007                                           ]
+    Telefono: [c008                         ]    
+
+}
+end
+tables
+maqt011
+attributes
+c001 = maqt011.m11_codcli, UPSHIFT, REVERSE,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c005 = formonly.direccion, UPSHIFT, REVERSE, NOENTRY;
+c004 = formonly.telefonos, UPSHIFT, REVERSE, NOENTRY;
+
+c007 = maqt011.m11_ubicacion, UPSHIFT;
+c008 = maqt011.m11_telf_ubic, UPSHIFT;
+
+c100 = formonly.n_cliente,   NOENTRY, UPSHIFT;
+
+end

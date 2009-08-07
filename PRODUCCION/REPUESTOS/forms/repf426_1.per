@@ -1,0 +1,56 @@
+DATABASE diteca
+SCREEN
+{
+   Pedido: [c000      ]
+       De: [c0                                                              ]
+ Telefono: [c1                       ]              Fax: [c2                ]
+  Contact: [c3                       ]
+     Para: [c4                                                              ]
+ Telefono: [c5                       ]              Fax: [c6                ]
+  Contact: [c7                       ]
+    Flete: [c14              ]			 Seguro: [c15               ]
+ Embarque: [c8               ]
+Documento a la Orden de: [c9                                                ]
+     Pago: [c10              ]                 Embarque: [c11               ]
+Marcas y nùmeros: [c12                                                      ]
+Declaración Consular: 
+           [c13     		                                            ]
+           [c13     		                                            ]
+           [c13     		                                            ]
+           [c13     		                                            ]
+           [c13     		                                            ]
+           [c13     		                                            ]
+           [c13     		                                            ]
+           [c13     		                                            ]
+           [c13     		                                            ]
+           [c13     		                                            ]
+}
+TABLES
+rept016
+ATTRIBUTES
+c000 = rept016.r16_pedido, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c0   = formonly.nom_diteca TYPE VARCHAR, UPSHIFT, REVERSE;
+c1   = formonly.tel_diteca TYPE VARCHAR, UPSHIFT, REVERSE;
+c2   = formonly.fax_diteca TYPE VARCHAR, UPSHIFT, REVERSE;
+c3   = formonly.contact_1  TYPE VARCHAR, UPSHIFT, REVERSE;
+
+c4   = formonly.nom_proveedor TYPE VARCHAR, UPSHIFT, REVERSE;
+c5   = formonly.tel_proveedor TYPE VARCHAR, UPSHIFT, REVERSE;
+c6   = formonly.fax_proveedor TYPE VARCHAR, UPSHIFT, REVERSE;
+c7   = formonly.contact_2     TYPE VARCHAR, UPSHIFT, REVERSE;
+
+c8   = formonly.embarque_1   TYPE VARCHAR, UPSHIFT, REVERSE;
+c9   = formonly.nom_diteca_2 TYPE VARCHAR, UPSHIFT, REVERSE;
+c10  = formonly.pago         TYPE VARCHAR, UPSHIFT, REVERSE;
+c11  = formonly.embarque_2   TYPE VARCHAR, UPSHIFT, REVERSE;
+c12  = formonly.nom_diteca_3 TYPE VARCHAR, UPSHIFT, REVERSE;
+
+c13  = formonly.declaracion_consular TYPE VARCHAR, AUTONEXT,
+	REVERSE, WORDWRAP;
+c14  = formonly.flete	TYPE DECIMAL(12,2), REVERSE, 
+	INCLUDE = (0 TO 999999999.99),	FORMAT = '#,###,###,##&.##';
+c15  = formonly.seguro	TYPE DECIMAL(12,2), REVERSE, 
+	INCLUDE = (0 TO 999999999.99),	FORMAT = '#,###,###,##&.##';
+END
+

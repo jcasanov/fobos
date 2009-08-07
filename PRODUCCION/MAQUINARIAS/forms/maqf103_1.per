@@ -1,0 +1,23 @@
+database diteca
+screen 
+{
+
+  Modelo: [c001           ] [c002                          ]
+   Línea: [c004 ] [c014                  ]         
+
+    Ingresado Por: [c011      ]   Fecha de Ingreso: [c012               ]
+}
+end
+tables
+maqt010
+attributes
+c001 = maqt010.m10_modelo, REVERSE, UPSHIFT,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c002 = maqt010.m10_descripcion, REVERSE, UPSHIFT;
+c004 = maqt010.m10_linea, REVERSE, UPSHIFT,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c011 = maqt010.m10_usuario, REVERSE, UPSHIFT, NOENTRY;
+c012 = maqt010.m10_fecing, REVERSE, NOENTRY;
+
+c014 = formonly.n_linea, UPSHIFT, NOENTRY;
+end

@@ -1,0 +1,55 @@
+DATABASE formonly
+SCREEN
+{
+  Area de Negocio: [c1]   [c002          ]   Tipo Vencimiento: [c007          ]
+           Moneda: [c3]   [c004          ]
+     Tipo Cliente: [c05]  [c006          ]      
+					        Rango de Dias: [c08] a [c009]
+
+ [c020                        |c021           |c022           |c023           ]
+[c030                        |c031           |c032           |c033           ]
+[c030                        |c031           |c032           |c033           ]
+[c030                        |c031           |c032           |c033           ]
+[c030                        |c031           |c032           |c033           ]
+[c030                        |c031           |c032           |c033           ]
+[c030                        |c031           |c032           |c033           ]
+[c030                        |c031           |c032           |c033           ]
+[c030                        |c031           |c032           |c033           ]
+[c030                        |c031           |c032           |c033           ]
+[c030                        |c031           |c032           |c033           ]
+[c030                        |c031           |c032           |c033           ]
+                             [c040           |c041           |c042           ]
+}   
+ATTRIBUTES
+c1   = formonly.area_n TYPE SMALLINT, AUTONEXT, WIDGET = "FIELD_BMP", 
+       CONFIG="lista.bmp F2";
+c002 = formonly.tit_area, NOENTRY;
+c3   = formonly.moneda TYPE CHAR NOT NULL, UPSHIFT, AUTONEXT, REQUIRED,
+	WIDGET = "FIELD_BMP", CONFIG = "lista.bmp F2", REVERSE;
+c004 = formonly.tit_mon, NOENTRY;
+c05  = formonly.tipcli, WIDGET = 'FIELD_BMP',
+       CONFIG = 'lista.bmp F2';
+c006 = formonly.tit_tipcli, NOENTRY;
+c007 = formonly.ind_venc TYPE CHAR, UPSHIFT, AUTONEXT, REVERSE,
+	WIDGET = 'RADIO', CONFIG = 'V Vencidos P Por_Vencer T Todos';
+c08  = formonly.dias_i TYPE SMALLINT, 
+       COMMENT = 'Rango días para cartera por vencer o vencida';
+c009 = formonly.dias_f TYPE SMALLINT,
+       COMMENT = 'Rango días para cartera por vencer o vencida';
+c020 = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c021 = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c022 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c023 = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c030 = formonly.nomcli;
+c031 = formonly.por_vencer TYPE DECIMAL(12,2), FORMAT =  '####,###,##&.##';
+c032 = formonly.vencido    TYPE DECIMAL(12,2), FORMAT =  '####,###,##&.##';
+c033 = formonly.tot_saldo  TYPE DECIMAL(12,2), FORMAT =  '####,###,##&.##';
+c040 = formonly.tot_1      TYPE DECIMAL(14,2), FORMAT =  '####,###,##&.##';
+c041 = formonly.tot_2      TYPE DECIMAL(14,2), FORMAT =  '####,###,##&.##';
+c042 = formonly.tot_3      TYPE DECIMAL(14,2), FORMAT =  '####,###,##&.##';
+INSTRUCTIONS
+DELIMITERS '  '
+SCREEN RECORD rm_cli[11] (formonly.nomcli,formonly.por_vencer, formonly.vencido,
+			  formonly.tot_saldo)
+KEYS
+"F5"="E/C Cliente"

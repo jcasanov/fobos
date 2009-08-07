@@ -1,0 +1,37 @@
+DATABASE diteca
+
+SCREEN
+{
+ PRE-VENTAS VEHICULOS
+
+ [lbl1     |lbl2                                 |l]
+[c001     |c002                                 |c] 
+[c001     |c002                                 |c] 
+[c001     |c002                                 |c] 
+[c001     |c002                                 |c] 
+[c001     |c002                                 |c] 
+[c001     |c002                                 |c] 
+[c001     |c002                                 |c] 
+[c001     |c002                                 |c] 
+[c001     |c002                                 |c] 
+[c001     |c002                                 |c] 
+
+}
+
+TABLES
+veht026
+cxct001
+
+ATTRIBUTES
+c001 = v26_numprev, UPSHIFT;
+c002 = z01_nomcli,  UPSHIFT;
+c    = v26_estado,  UPSHIFT;
+
+lbl1 = formonly.bt_orden,      NOENTRY, WIDGET='BUTTON', CONFIG='F15';
+lbl2 = formonly.bt_cliente,    NOENTRY, WIDGET='BUTTON', CONFIG='F16';
+l    = formonly.bt_estado,     NOENTRY, WIDGET='BUTTON', CONFIG='F17';
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_preveh[10](v26_numprev, z01_nomcli, v26_estado)
+

@@ -1,0 +1,26 @@
+DATABASE diteca
+SCREEN
+{
+
+
+             Nivel Plan de Cuenta: [c000  ]  [c001                ]
+
+                 Posición Inicial: [c002  ]
+                   Posición Final: [c003  ]
+
+                          Usuario: [c004      ]
+                 Fecha de Ingreso: [c005               ]
+}
+TABLES
+ctbt001
+ATTRIBUTES
+c000 = ctbt001.b01_nivel, NOENTRY, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Indicar nivel que puede tener una cuenta';
+c001 = ctbt001.b01_nombre, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Descripción del nivel de cuenta';
+c002 = ctbt001.b01_posicion_i, AUTONEXT, REVERSE;
+c003 = ctbt001.b01_posicion_f, AUTONEXT, REVERSE;
+c004 = ctbt001.b01_usuario, NOENTRY, UPSHIFT, REVERSE;
+c005 = ctbt001.b01_fecing, NOENTRY, UPSHIFT, REVERSE;
+END

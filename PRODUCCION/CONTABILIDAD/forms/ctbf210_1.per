@@ -1,0 +1,19 @@
+DATABASE diteca
+SCREEN
+{
+
+   Este proceso revisara que facturas no se han contabilizado desde la 
+   fecha indicada abajo y las contabilizara.
+   Es preferible que ningun usuario este ingresando/generando/modificando 
+   comprobantes contables en el sistema.
+
+
+
+                    Contabilizar desde: [c001      ]
+
+}
+TABLES
+ctbt999
+ATTRIBUTES
+c001 = ctbt999.b999_fechult, AUTONEXT, REVERSE, UPSHIFT, FORMAT='dd-mm-yyyy';
+end

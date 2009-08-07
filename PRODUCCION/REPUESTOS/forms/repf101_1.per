@@ -1,0 +1,34 @@
+database diteca
+screen 
+{
+
+
+  Código Vendedor: [f001  ]                              Estado:[a|a1        ]
+
+          Nombres: [f002                          ] 
+        Iniciales: [a2 ]                     Modifica Descuento:[c]
+    Código de Rol: [f003  ]		                   Tipo:[b            ]
+
+    Ingresado Por: [f004      ]
+ Fecha de Ingreso: [f005               ]
+
+}
+end
+tables
+rept001
+attributes
+f001 = rept001.r01_codigo, REVERSE, NOENTRY,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f002 = rept001.r01_nombres, REVERSE, UPSHIFT;
+a2   = rept001.r01_iniciales, REVERSE, UPSHIFT, AUTONEXT;
+a    = rept001.r01_estado, REVERSE, UPSHIFT, NOENTRY;
+a1   = formonly.tit_estado TYPE VARCHAR, NOENTRY;
+b    = rept001.r01_tipo, REVERSE, AUTONEXT, DEFAULT = 'I',
+	WIDGET = 'RADIO', CONFIG = 'I Interno E Externo';
+f003 = rept001.r01_codrol,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f004 = rept001.r01_usuario, REVERSE, NOENTRY;
+f005 = rept001.r01_fecing, REVERSE, NOENTRY;
+c    = rept001.r01_mod_descto, REVERSE, 
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+end

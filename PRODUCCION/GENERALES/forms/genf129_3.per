@@ -1,0 +1,36 @@
+DATABASE diteca
+SCREEN
+{
+      Asignar Proceso: [c099    ]   
+
+   Compañía: [c000]  [c001         ]  
+  ----------------------------------
+        [c] [c002            ]    
+        [c] [c002            ]
+        [c] [c002            ]
+        [c] [c002            ]
+        [c] [c002            ]
+        [c] [c002            ]
+        [c] [c002            ] 
+        [c] [c002            ] 
+        [c] [c002            ] 
+        [c] [c002            ] 
+
+}
+
+TABLES
+gent005
+
+ATTRIBUTES
+c    = formonly.checkbox, DEFAULT='S', 
+	WIDGET='CHECK', CONFIG='S N acknowledge', OPTIONS='-nolist';
+c002 = gent005.g05_usuario, NOENTRY, OPTIONS='-nolist';
+c000 = formonly.cia,   REVERSE, REQUIRED,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c001 = formonly.n_cia, NOENTRY;
+c099 = formonly.n_proceso, UPSHIFT, NOENTRY;
+END
+
+INSTRUCTIONS
+SCREEN RECORD ra_usu_scr[10](checkbox, g05_usuario)
+ 

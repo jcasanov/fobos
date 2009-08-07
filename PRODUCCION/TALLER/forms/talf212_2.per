@@ -1,0 +1,24 @@
+database formonly
+screen
+{
+
+   [lbl1  ] [lbl2                                    ]
+  [c000  ] [c001                                    |c]
+  [c000  ] [c001                                    |c]
+  [c000  ] [c001                                    |c]
+  [c000  ] [c001                                    |c]
+  [c000  ] [c001                                    |c]
+}
+attributes
+c000 = formonly.cod_mecanico, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2',
+	UPSHIFT, OPTIONS='-nolist';
+c001 = formonly.nom_mecanico, UPSHIFT, NOENTRY, OPTIONS='-nolist';
+c    = formonly.check, WIDGET='CHECK', CONFIG='S N acknowledge', AUTONEXT,
+	COMMENT='Indique quien es el jefe del grupo de trabajo.', 
+	OPTIONS='-nolist';
+
+lbl1 = formonly.bt_cod_mecanico, WIDGET='BUTTON', CONFIG='F15';
+lbl2 = formonly.bt_nom_mecanico, WIDGET='BUTTON', CONFIG='F16';
+
+instructions
+screen record ra_mecanico[5] (cod_mecanico, nom_mecanico, check)

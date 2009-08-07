@@ -1,0 +1,22 @@
+database diteca
+screen size 8 by 80 
+{
+
+
+        Código del Grupo: [a0]
+
+	Nombre del Grupo: [c000                                    ]
+	      Ver Costos: [c]
+
+}
+end
+tables
+gent004
+attributes
+a0 = gent004.g04_grupo, REVERSE, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c000 = gent004.g04_nombre, REVERSE, UPSHIFT;
+c    = gent004.g04_ver_costo, AUTONEXT, WIDGET='CHECK', 
+	CONFIG='S N acknowledge', DEFAULT='N', 
+	COMMENT='Permite a los integrantes de este grupo ver costos.';
+end

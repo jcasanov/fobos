@@ -1,0 +1,30 @@
+database diteca
+screen 
+{
+
+
+Cód. Comisionista: [f001  ]                              Estado:[a|a1        ]
+
+          Nombres: [f002                          ] 
+        Iniciales: [a2 ]   
+      Vendedor RE: [f003  ] [f006                       ] 
+
+    Ingresado Por: [f004      ]
+ Fecha de Ingreso: [f005               ]
+
+}
+end
+tables
+cmst002
+attributes
+f001 = cmst002.c02_codigo, REVERSE, NOENTRY,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f002 = cmst002.c02_nombres, REVERSE, UPSHIFT;
+a2   = cmst002.c02_iniciales, REVERSE, UPSHIFT, AUTONEXT;
+a    = cmst002.c02_estado, REVERSE, UPSHIFT, NOENTRY;
+a1   = formonly.tit_estado TYPE VARCHAR, NOENTRY;
+f003 = cmst002.c02_vendrep, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f006 = formonly.nomvendrep, NOENTRY;
+f004 = cmst002.c02_usuario, REVERSE, NOENTRY;
+f005 = cmst002.c02_fecing, REVERSE, NOENTRY;
+end

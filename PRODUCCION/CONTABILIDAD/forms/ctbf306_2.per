@@ -1,0 +1,37 @@
+DATABASE formonly
+SCREEN
+{
+             Pérdidas y Ganancias Año: [c000]  
+                               Moneda: [c0]   [c002          ]
+                      Centro de Costo: [c03]  [c004                      ]
+[c001                                                                          ]
+[c001                                                                          ]
+[c001                                                                          ]
+[c001                                                                          ]
+[c001                                                                          ]
+[c001                                                                          ]
+[c001                                                                          ]
+[c001                                                                          ]
+[c001                                                                          ]
+[c001                                                                          ]
+[c001                                                                          ]
+[c001                                                                          ]
+[c001                                                                          ]
+[c001                                                                          ]
+[c001                                                                          ]
+[c001                                                                          ]
+[c001                                                                          ]
+[c001                                                                          ]
+[c001                                                                          ]
+[a]
+}
+ATTRIBUTES
+c000 = formonly.ano TYPE SMALLINT NOT NULL, REQUIRED, REVERSE;
+c0   = formonly.moneda TYPE CHAR NOT NULL ,REQUIRED, REVERSE,
+       WIDGET = 'FIELD_BMP',  CONFIG = 'lista.bmp F2';
+c002 = formonly.tit_mon, REVERSE, NOENTRY;
+c03  = formonly.ccosto TYPE SMALLINT, WIDGET = 'FIELD_BMP',  CONFIG =
+       'lista.bmp F2', COMMENT = 'Deje en blanco para un PyG consolidado';
+c004 = formonly.tit_ccosto, NOENTRY, REVERSE;
+c001 = formonly.c001, WIDGET = 'Canvas';
+a    = formonly.tecla, AUTONEXT, INVISIBLE;

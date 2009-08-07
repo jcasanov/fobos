@@ -1,0 +1,48 @@
+DATABASE diteca
+SCREEN
+{
+   Retenciones Proveedor: [c001                                    ]
+	          Moneda: [c002           ]
+
+ [c010      |c011 |y1|c012           |c13|c014            |c015          ]
+[c020      |c021 |z1|c022           |c23|c024            |c025          ]
+[c020      |c021 |z1|c022           |c23|c024            |c025          ]
+[c020      |c021 |z1|c022           |c23|c024            |c025          ]
+[c020      |c021 |z1|c022           |c23|c024            |c025          ]
+[c020      |c021 |z1|c022           |c23|c024            |c025          ]
+[c020      |c021 |z1|c022           |c23|c024            |c025          ]
+[c020      |c021 |z1|c022           |c23|c024            |c025          ]
+[c020      |c021 |z1|c022           |c23|c024            |c025          ]
+[c020      |c021 |z1|c022           |c23|c024            |c025          ]
+                             Totales:   [c030            |c031          ]
+}
+TABLES
+cxpt027
+cxpt028
+ATTRIBUTES
+c001 = formonly.nomprov, REVERSE;
+c002 = formonly.titmon,  REVERSE;
+c010 = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+y1   = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c012 = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c13  = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c014 = formonly.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c015 = formonly.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+c020 = formonly.fecing TYPE DATE, FORMAT = 'dd-mm-yyyy', OPTIONS = '-nolist';
+c021 = p28_num_ret,    OPTIONS = '-nolist';
+z1   = p28_tipo_doc,   OPTIONS = '-nolist'; 
+c022 = p28_num_doc,    OPTIONS = '-nolist';
+c23  = p28_porcentaje, FORMAT = '##&', OPTIONS = '-nolist';
+c024 = p28_valor_base, FORMAT = '#,###,###,##&.##', OPTIONS = '-nolist';
+c025 = p28_valor_ret,  FORMAT = '###,###,##&.##', OPTIONS = '-nolist';
+c030 = formonly.tot_base TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##', 
+	REVERSE;
+c031 = formonly.tot_ret  TYPE DECIMAL(14,2), FORMAT = '###,###,##&.##', 
+	REVERSE;
+INSTRUCTIONS
+DELIMITERS '  '
+SCREEN RECORD r_ret[9] (fecing, p28_num_ret, p28_tipo_doc, p28_num_doc,
+			p28_porcentaje, p28_valor_base, p28_valor_ret)
+KEYS
+'F5' = 'Imprimir'

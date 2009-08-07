@@ -1,0 +1,30 @@
+DATABASE diteca
+
+SCREEN
+{
+ PLANES DE FINANCIAMIENTO
+------------------------------------
+ Plan  Descripción
+------------------------------------
+[c01] [c002                       ] 
+[c01] [c002                       ]
+[c01] [c002                       ]
+[c01] [c002                       ]
+[c01] [c002                       ]
+[c01] [c002                       ]
+[c01] [c002                       ] 
+[c01] [c002                       ] 
+[c01] [c002                       ] 
+[c01] [c002                       ] 
+}
+
+TABLES
+veht006
+
+ATTRIBUTES
+c01  = v06_codigo_plan;
+c002 = v06_nonbre_plan;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_plafin[10](v06_codigo_plan, v06_nonbre_plan)

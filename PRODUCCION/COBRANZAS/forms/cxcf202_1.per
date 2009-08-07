@@ -1,0 +1,96 @@
+DATABASE diteca
+SCREEN
+{
+
+    Tipo Trans.: [a0] [c003           ]  Fec. Ingreso: [c014                 ]
+     No. Trans.: [c000       ]                Subtipo: [c04] [c005           ]
+        Cliente: [c001       ] [c002                                         ]
+   Area Negocio: [c006] [c007           ]      Moneda: [a1] [c008            ]
+       Cobrador: [c009] [c010                         ]
+     Referencia: [c011                                ]
+ [a3|c110          |c11|c112            |c113            |c114             |d]
+[a2|c100          |c01|c102            |c103            |c104             |c]
+[a2|c100          |c01|c102            |c103            |c104             |c]
+[a2|c100          |c01|c102            |c103            |c104             |c]
+[a2|c100          |c01|c102            |c103            |c104             |c]
+[a2|c100          |c01|c102            |c103            |c104             |c]
+[a2|c100          |c01|c102            |c103            |c104             |c]
+[a2|c100          |c01|c102            |c103            |c104             |c]
+             Totales: [c012            |c018            |c019             ]
+  Documento: [c015      |c016      |c017] dias
+
+    Usuario: [c013      ]
+}
+TABLES
+cxct020, cxct022, cxct023
+ATTRIBUTES
+c000 = cxct022.z22_num_trn, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Número de Transacción del ajuste';
+c001 = cxct022.z22_codcli, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = FORMONLY.tit_nombre_cli, NOENTRY, REVERSE, UPSHIFT;
+a0   = cxct022.z22_tipo_trn, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Tipo de Transacción del ajuste';
+c003 = FORMONLY.tit_tipo_trn, NOENTRY, REVERSE, UPSHIFT;
+c04  = cxct022.z22_subtipo, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Subtipo de Transacción del ajuste';
+c005 = FORMONLY.tit_subtipo, NOENTRY, UPSHIFT;
+c006 = cxct022.z22_areaneg, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c007 = FORMONLY.tit_area, NOENTRY, REVERSE, UPSHIFT;
+a1   = cxct022.z22_moneda, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c008 = FORMONLY.tit_mon_bas, NOENTRY, REVERSE, UPSHIFT;
+c009 = cxct022.z22_cobrador, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c010 = FORMONLY.tit_cobrador, NOENTRY, UPSHIFT;
+c011 = cxct022.z22_referencia, AUTONEXT, UPSHIFT;
+
+a3   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c110 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c11  = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c112 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c113 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c114 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+d    = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+
+a2   = cxct023.z23_tipo_doc, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c100 = cxct023.z23_num_doc, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c01  = cxct023.z23_div_doc, NOENTRY, UPSHIFT, FORMAT = '#&&',
+	OPTIONS = '-nolist';
+c102 = FORMONLY.tit_saldo_act, NOENTRY, UPSHIFT,
+	FORMAT = '-,---,---,--&.##', INCLUDE = (0.01 TO 9999999999.99),
+	OPTIONS = '-nolist';
+c103 = FORMONLY.tit_valor_apl, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Valor negativo disminuye el saldo, Valor sin signo incrementa el saldo',
+	FORMAT = '-,---,---,--&.##',INCLUDE = (-9999999999.99 TO 9999999999.99),
+	OPTIONS = '-nolist';
+c104 = FORMONLY.tit_saldo_nue, NOENTRY, UPSHIFT,
+	FORMAT = '--,---,---,--&.##', INCLUDE = (0.01 TO 9999999999.99),
+	OPTIONS = '-nolist';
+c    = FORMONLY.tit_check, AUTONEXT, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N',
+	COMMENTS = 'Click para ajustar todo el valor',
+	OPTIONS = '-nolist';
+
+c012 = FORMONLY.tit_total_act, NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = '-,---,---,--&.##';
+c018 = FORMONLY.tit_total_apl, NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = '-,---,---,--&.##',INCLUDE = (-9999999999.99 TO 9999999999.99);
+c019 = FORMONLY.tit_total_nue, NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = '--,---,---,--&.##';
+c013 = cxct022.z22_usuario, NOENTRY, REVERSE, UPSHIFT;
+c014 = cxct022.z22_fecing, NOENTRY, REVERSE, UPSHIFT;
+c015 = cxct020.z20_fecha_vcto, COLOR = RED WHERE c015 < TODAY,
+	FORMAT = 'dd-mm-yyyy', NOENTRY, UPSHIFT;
+c016 = FORMONLY.tit_fecha_vcto, COLOR = RED WHERE c016 = 'VENCIDO',
+	NOENTRY, REVERSE, UPSHIFT;
+c017 = FORMONLY.tit_dias, COLOR = RED WHERE c017 < 0,
+	NOENTRY, REVERSE, FORMAT = '###&';
+END
+INSTRUCTIONS
+SCREEN RECORD rm_aju[7] (z23_tipo_doc, z23_num_doc, z23_div_doc, tit_saldo_act,
+			tit_valor_apl, tit_saldo_nue, tit_check)

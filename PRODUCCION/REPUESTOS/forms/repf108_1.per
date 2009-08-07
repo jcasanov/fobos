@@ -1,0 +1,101 @@
+database diteca
+screen size 18 by 78 TITLE '   Datos Item   '
+{
+							       [x000] de [y000]
+	  Código Item: [f001           ]         Estado: [a][aa         ]
+
+	       Nombre: [f002                               ]
+       Linea de Venta: [f010 ] [a5                                  ]
+                 Tipo: [f003] [a2                                   ]
+	         Peso: [f004     ] 
+        Unidad Medida: [f005   ] [a3                                ]
+ Cantidad Por Paquete: [f006 ]         Sustituye a: [c051           ]
+Cantidad Por Vehículo: [f007 ]      Sustituido por: [c052           ]
+
+               Modelo: [f009      ]
+  Partida Arancelaria: [f008           ] [a4                                 ]
+   Indice de Rotación: [a0] [a6                            ]
+
+	   Precio FOB: [f011         ]
+       Moneda del FOB: [a1] [a7                            ]
+   Filtro de Busqueda: [c050      ]
+}
+screen size 18 by 78 TITLE ' Valoración Item '
+{
+							       [x001] de [y001]
+	   Precio Moneda Base: [f012          ]      Paga Impuesto ?:[c]
+        Precio Moneda Alterna: [f013          ]
+            Costo Moneda Base: [f014          ]    
+         Costo Moneda Alterna: [f015          ]
+     Costo Ultimo Moneda Base: [f016          ]
+  Costo Ultimo Moneda Alterna: [f017          ]
+
+          Cantidad en Pedidos: [f018 ]        Cantidad Backorders: [f019 ]
+              Precio Anterior: [f023          ]
+
+	  Fecha Cambio Precio: [f024               ]
+		Ingresado Por: [f025      ]
+	     Fecha de Ingreso: [f026               ]
+         Fecha de Eliminación: [f027               ]
+
+Comentarios: [f020                                                        ]
+             [f020                                                        ]
+
+}
+end
+tables
+rept010
+attributes
+x000 = formonly.vm_row_current1 TYPE SMALLINT, NOENTRY;
+y000 = formonly.vm_num_rows1 TYPE SMALLINT, NOENTRY;
+x001 = formonly.vm_row_current2 TYPE SMALLINT, NOENTRY;
+y001 = formonly.vm_num_rows2 TYPE SMALLINT, NOENTRY;
+f001 = rept010.r10_codigo, REVERSE, UPSHIFT, 
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f002 = rept010.r10_nombre, REVERSE, UPSHIFT;
+a    = rept010.r10_estado, REVERSE, NOENTRY, UPSHIFT;
+aa   = formonly.tit_estado TYPE VARCHAR, NOENTRY;
+f003 = rept010.r10_tipo, REVERSE, 
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+a2   = formonly.nom_tipo TYPE VARCHAR, NOENTRY;
+f004 = rept010.r10_peso, REVERSE, FORMAT = '#,##&.###';
+f005 = rept010.r10_uni_med, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+a3   = formonly.nom_uni TYPE VARCHAR, NOENTRY;
+f006 = rept010.r10_cantpaq, REVERSE;
+f007 = rept010.r10_cantveh, REVERSE;
+f008 = rept010.r10_partida, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+a4   = formonly.nom_par TYPE VARCHAR, NOENTRY;
+f009 = rept010.r10_modelo, REVERSE, UPSHIFT;
+f010 = rept010.r10_linea ,REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+a5   = formonly.nom_lin TYPE VARCHAR, NOENTRY;
+a0 = rept010.r10_rotacion, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+a6   = formonly.nom_rot TYPE VARCHAR, NOENTRY;
+c = rept010.r10_paga_impto, REVERSE,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowedge';
+f011 = rept010.r10_fob, REVERSE, FORMAT = '#,###,##&.##';
+a1 = rept010.r10_monfob, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+a7   = formonly.nom_mon TYPE VARCHAR, NOENTRY;
+f012 = rept010.r10_precio_mb, REVERSE, FORMAT = '###,###,##&.##';
+f013 = rept010.r10_precio_ma, NOENTRY, REVERSE, FORMAT = '###,###,##&.##';
+f014 = rept010.r10_costo_mb, NOENTRY,  REVERSE, FORMAT  =  '###,###,##&.##';
+f015 = rept010.r10_costo_ma, NOENTRY, REVERSE, FORMAT   = '###,###,##&.##';
+f016 = rept010.r10_costult_mb, NOENTRY, REVERSE, FORMAT = '###,###,##&.##';
+f017 = rept010.r10_costult_ma, NOENTRY, REVERSE, FORMAT = '###,###,##&.##';
+f018 = rept010.r10_cantped, REVERSE, NOENTRY;
+f019 = rept010.r10_cantback, REVERSE, NOENTRY;
+f020 = rept010.r10_comentarios, AUTONEXT, UPSHIFT, WORDWRAP;
+f023 = rept010.r10_precio_ant, REVERSE, NOENTRY, FORMAT = '###,###,##&.##';
+f024 = rept010.r10_fec_camprec, NOENTRY; 
+f025 = rept010.r10_usuario, REVERSE, NOENTRY;
+f026 = rept010.r10_fecing, REVERSE, NOENTRY;
+f027 = rept010.r10_feceli, NOENTRY;
+
+c050 = rept010.r10_filtro, UPSHIFT;
+c051 = formonly.vm_sustituye,  NOENTRY;
+c052 = formonly.vm_sustituido, NOENTRY;
+end

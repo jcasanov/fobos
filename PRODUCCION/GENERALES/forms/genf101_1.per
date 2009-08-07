@@ -1,0 +1,49 @@
+DATABASE diteca  
+-------------
+-------------
+SCREEN
+{
+
+     Código Compañía: [c01]                     Estado: [a] [c04       ]
+				   Compañía Princial ?: [c]
+
+        Razón Social: [c02                           ]         
+         Abreviación: [c03       ]                                      
+                    
+           Actividad: [c05                                   ]                              
+     Número Patronal: [c06            ]                         
+ Representante Legal: [c07                           ]                                
+              Cédula: [c08          ]                                                                         
+
+       Ingresado Por: [c09       ]    Fecha de Ingreso: [c10                ]                                
+     
+
+
+
+}
+end
+tables
+gent001
+attributes
+c01 = formonly.g01_compania TYPE INTEGER  	,REQUIRED,  REVERSE, AUTONEXT, 
+	COMMENTS = "Escoja la compañía a Consultar", FORMAT  = '###'
+	,widget="FIELD_BMP", config="lista.bmp F2";
+c02 = g01_razonsocial 	,UPSHIFT, REQUIRED, REVERSE;
+c03 = g01_abreviacion 	,UPSHIFT, REQUIRED, REVERSE;
+  a = g01_estado		,AUTONEXT, UPSHIFT, NOENTRY, REVERSE;
+c04 = formonly.tit_estado;
+c   = g01_principal, default="N", REQUIRED, AUTONEXT    
+	,widget="CHECK",  CONFIG="S N acknowledge"
+	, COMMENTS ="Presione con Mouse o barra espaciadora, Caractér: S ó N";
+c05 = g01_actividad	,UPSHIFT, REQUIRED, REVERSE;
+c06 = g01_numpatronal	,UPSHIFT, REQUIRED, REVERSE;
+c07 = g01_replegal	,UPSHIFT, REQUIRED, REVERSE;
+c08 = g01_cedrepl       ,FORMAT = "##########", REQUIRED, REVERSE,
+      COMMENTS = "Digite la Cédula ó Pasaporte del Representante Legal de la Empresa";
+c09 = g01_usuario		,NOENTRY, REQUIRED, REVERSE;
+c10 = g01_fecing		,NOENTRY, REQUIRED, REVERSE;
+
+instructions
+delimiters "[]"
+end
+

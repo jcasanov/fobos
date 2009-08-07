@@ -1,0 +1,53 @@
+DATABASE diteca
+SCREEN
+{
+
+                                                      Estado: [c|c007     ]
+            
+                         Tipo de Orden: [c000  ]  [c001            ]
+
+                    Ingresa a Bodega ?: [b]
+                                Tipo ?: [d                   ]
+
+
+       Genera diario automáticamente ?: [a] 
+                                Módulo: [c0]  [c050                ]
+
+      Porc. Retención Fuente en Bienes: [c002  ]
+   Porc. Retención Fuente en Servicios: [c008  ]
+         Porc. Retención IVA en Bienes: [c003  ]
+      Porc. Retención IVA en Servicios: [c004  ]
+                               Usuario: [c005      ]
+                      Fecha de Ingreso: [c006               ]
+}
+TABLES
+ordt001
+ATTRIBUTES
+c000 = c01_tipo_orden, REVERSE, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = ordt001.c01_nombre, UPSHIFT, REVERSE, AUTONEXT;
+b    = ordt001.c01_ing_bodega, UPSHIFT, AUTONEXT, REVERSE, INCLUDE=('S', 'N'),
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S',
+    	COMMENTS ='Indicar si los artículos de este tipo ingresan a inventario';
+a    = ordt001.c01_gendia_auto, AUTONEXT, REVERSE, INCLUDE=('S', 'N'),
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N',
+    	COMMENTS ='Indicar si se genera el diario contable automáticamente.';
+d    = ordt001.c01_bien_serv, UPSHIFT, AUTONEXT, REVERSE,
+	WIDGET = 'RADIO',CONFIG = 'B Bienes S Servicios T "Bienes y Servicios"',
+	DEFAULT = 'S';
+c0   = ordt001.c01_modulo, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+ 	COMMENTS = 'Indicar el módulo respectivo para la orden de compra';
+c050 = FORMONLY.tit_modulo, UPSHIFT;
+c002 = ordt001.c01_porc_retf_b, REVERSE, AUTONEXT, FORMAT = '#&.##',
+	INCLUDE = (0 TO 99.99);
+c008 = ordt001.c01_porc_retf_s, REVERSE, AUTONEXT, FORMAT = '#&.##',
+	INCLUDE = (0 TO 99.99);
+c003 = ordt001.c01_porc_reti_b, REVERSE, AUTONEXT, FORMAT = '##&.##',
+	INCLUDE = (0 TO 100);
+c004 = ordt001.c01_porc_reti_s, REVERSE, AUTONEXT, FORMAT = '##&.##',
+	INCLUDE = (0 TO 100);
+c005 = ordt001.c01_usuario, REVERSE, NOENTRY;
+c006 = ordt001.c01_fecing, REVERSE, NOENTRY;
+c007 = FORMONLY.tit_estado, NOENTRY;
+c    = ordt001.c01_estado, REVERSE, NOENTRY;
+END

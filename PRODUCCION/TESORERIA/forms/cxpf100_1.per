@@ -1,0 +1,46 @@
+DATABASE diteca
+SCREEN
+{
+
+                                                       Estado: [c] [c0a0     ]
+
+                   Compañía: [c000]  [c005                                   ]
+                Tipo Egreso: [c010        ]
+
+
+             Mes de Proceso: [c020]   Año de Proceso: [c021] 
+
+  Aux. Proveed. Moneda Base: [c001        ]  [c006                           ]
+  Aux. Prov. Moneda Alterna: [c002        ]  [c007                           ]
+  Aux. Anticípo Moneda Base: [c003        ]  [c008                           ]
+ Aux. Antícipo Moneda Alte.: [c004        ]  [c009                           ]
+}
+TABLES
+cxpt000
+ATTRIBUTES
+c000 = cxpt000.p00_compania, AUTONEXT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Indicar que compañía serán config. para tesorería';
+c010 = cxpt000.p00_tipo_egr_gen, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'RADIO', CONFIG = 'D Detallado R Resumido', DEFAULT = 'D',
+	COMMENTS = 'Tipo de egreso que va a generar';
+c001 = cxpt000.p00_aux_prov_mb, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Indicar auxiliar contable de proveedor';
+c002 = cxpt000.p00_aux_prov_ma, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = cxpt000.p00_aux_ant_mb, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Indicar auxiliar contable para anticípo';
+c004 = cxpt000.p00_aux_ant_ma, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c005 = FORMONLY.tit_compania, NOENTRY, REVERSE, UPSHIFT;
+c006 = FORMONLY.tit_prv_mb, NOENTRY, REVERSE, UPSHIFT;
+c007 = FORMONLY.tit_prv_ma, NOENTRY, REVERSE, UPSHIFT;
+c008 = FORMONLY.tit_ant_mb, NOENTRY, REVERSE, UPSHIFT;
+c009 = FORMONLY.tit_ant_ma, NOENTRY, REVERSE, UPSHIFT;
+c    = FORMONLY.tit_est, NOENTRY, REVERSE, UPSHIFT;
+c0a0 = FORMONLY.tit_estado_tes, NOENTRY, UPSHIFT;
+c020 = cxpt000.p00_mespro, NOENTRY;
+c021 = cxpt000.p00_anopro, NOENTRY;
+END

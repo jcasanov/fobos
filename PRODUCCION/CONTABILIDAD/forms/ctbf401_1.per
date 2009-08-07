@@ -1,0 +1,37 @@
+database diteca
+screen 
+{
+
+          Moneda: [c1]  [c002           ]
+
+   Rango Cuentas: [c003        ]  [c004                           ]
+                  [c005        ]  [c006                           ]
+
+   Rango Niveles: [c]  [c007            ]
+                  [d]  [c008            ]
+
+             Año: [c009]       
+
+     Rango Meses: [c2|c010      ]
+                  [c3|c011      ]
+ 
+}
+end
+attributes
+c1   = formonly.moneda TYPE CHAR NOT NULL, REQUIRED, REVERSE, AUTONEXT, 
+       UPSHIFT, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';   
+c002 = formonly.n_moneda, NOENTRY;
+c003 = formonly.cuenta_ini, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c004 = formonly.n_cuenta_ini, UPSHIFT, NOENTRY;
+c005 = formonly.cuenta_fin, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c006 = formonly.n_cuenta_fin, UPSHIFT, NOENTRY;
+c    = formonly.nivel_ini, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c007 = formonly.n_nivel_ini, NOENTRY;
+d    = formonly.nivel_fin, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c008 = formonly.n_nivel_fin, NOENTRY;
+c009 = formonly.ano TYPE SMALLINT NOT NULL, REQUIRED, REVERSE;
+c2   = formonly.mes_ini, INCLUDE=(1 TO 12);
+c010 = formonly.n_mes_ini, NOENTRY;
+c3   = formonly.mes_fin, INCLUDE=(1 TO 12);
+c011 = formonly.n_mes_fin, NOENTRY;
+end

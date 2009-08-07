@@ -1,0 +1,63 @@
+DATABASE diteca
+SCREEN
+{
+	Fecha Inicial:[c0        ]           Fecha Final:[c1        ]
+	       Moneda:[c2] [c3	    		       	            ]
+               Bodega:[c4] [c5                                      ]
+        Tipo Consulta:[c6                            ] 
+
+
+   	 [b0    |b1   		              	 |b2                ]
+  	[f0    |f1                 		|f2                ]
+  	[f0    |f1                 		|f2                ]
+  	[f0    |f1                 		|f2                ]
+  	[f0    |f1                 		|f2                ]
+  	[f0    |f1                 		|f2                ]
+  	[f0    |f1                 		|f2                ]
+  	[f0    |f1                 		|f2                ]
+  	[f0    |f1                 		|f2                ]
+  	[f0    |f1                 		|f2                ]
+  	[f0    |f1                 		|f2                ]
+  	[f0    |f1                 		|f2                ]
+					 Total: [c10               ]
+}
+TABLES
+	rept019
+ATTRIBUTES
+
+c0  = formonly.vm_fecha_ini TYPE DATE, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy', 
+	COMMENTS = 'Digite la fecha en formato: dd-mm-aaaa';
+c1  = formonly.vm_fecha_fin TYPE DATE, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy', 
+	COMMENTS = 'Digite la fecha en formato: dd-mm-aaaa';
+
+c2  = formonly.vm_moneda TYPE VARCHAR, REQUIRED, AUTONEXT, UPSHIFT, REVERSE,
+        WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c3  = formonly.nom_moneda, NOENTRY;
+
+c4  = formonly.vm_bodega TYPE VARCHAR, REQUIRED, AUTONEXT, UPSHIFT, REVERSE,
+        WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c5  = formonly.nom_bodega, NOENTRY;
+
+c6  = formonly.vm_tipcli TYPE CHAR NOT NULL , WIDGET='RADIO', 
+	CONFIG='C "Por cliente" T "Por tipo de cliente"', DEFAULT='C';  
+c10 = formonly.total_neto, FORMAT = '-,---,---,--&.--', NOENTRY;
+
+b0  = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+b1  = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b2  = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+
+f0  = r19_codcli,   OPTIONS = '-nolist';
+f1  = r19_nomcli,   OPTIONS = '-nolist';
+f2  = r19_tot_neto, OPTIONS = '-nolist', FORMAT = '-,---,---,--&.--';
+
+ 
+INSTRUCTIONS
+SCREEN RECORD r_detalle[11] (r19_codcli,  r19_nomcli, r19_tot_neto)
+
+KEYS
+'F5' = 'Det. Ventas'
+'F6' = 'Estado Cuenta'
+
+END

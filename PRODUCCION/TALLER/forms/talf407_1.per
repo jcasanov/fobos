@@ -1,0 +1,26 @@
+
+DATABASE diteca
+SCREEN
+{
+	 Mecánico:[c         ] [a                                       ]
+
+    Fecha Inicial:[c0        ]     	         Fecha Final:[c1        ]
+
+           Moneda:[c2] [c3                        ]
+}
+TABLES
+	talt003
+ATTRIBUTES
+
+c   = talt003.t03_mecanico, REVERSE, WIDGET = 'FIELD_BMP',
+	CONFIG = 'lista.bmp F2';
+a   = formonly.nom_mecanico, NOENTRY;
+c0  = formonly.vm_fecha_ini TYPE DATE, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENT = 'Digite la fecha en formato: dd-mm-aaaa.';
+c1  = formonly.vm_fecha_fin TYPE DATE, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENT = 'Digite la fecha en formato: dd-mm-aaaa.';
+c2  = formonly.vm_moneda TYPE VARCHAR, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c3  = formonly.nom_moneda, NOENTRY;
+
+END

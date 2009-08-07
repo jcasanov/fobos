@@ -1,0 +1,21 @@
+DATABASE diteca
+SCREEN
+{
+          Cuentas de Niveles Superiores Creadas
+-------------------------------------------------------
+  Cuenta                  Descripción
+-------------------------------------------------------
+[c000    ][c001                                      ]
+[c000    ][c001                                      ]
+[c000    ][c001                                      ]
+[c000    ][c001                                      ]
+[c000    ][c001                                      ]
+
+}
+TABLES
+ctbt010
+ATTRIBUTES
+c000 = b10_cuenta, NOENTRY;
+c001 = b10_descripcion, UPSHIFT;
+INSTRUCTIONS
+SCREEN RECORD vm_cc[5] (b10_cuenta, b10_descripcion)

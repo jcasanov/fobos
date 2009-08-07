@@ -1,0 +1,15 @@
+echo Compiling Forms...
+cd ../forms
+sh make_f  
+cd ../fuentes
+echo done
+echo ...
+echo ...
+
+for i in *4gl
+	do
+		fglrun compilar $i
+		echo       
+	done
+
+chmod 777 *

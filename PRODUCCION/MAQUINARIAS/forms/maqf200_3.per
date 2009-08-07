@@ -1,0 +1,36 @@
+DATABASE diteca
+screen
+{
+   [c0        ][c1	                                                 ]  
+  [c001      ][c002                                                     ]
+  [c001      ][c002                                                     ]
+  [c001      ][c002                                                     ]
+  [c001      ][c002                                                     ]
+  [c001      ][c002                                                     ]
+  [c001      ][c002                                                     ]
+
+  [c003                                                                 ]
+  [c003                                                                 ]
+  [c003                                                                 ]
+  [c003                                                                 ]
+}
+end
+TABLES
+maqt013
+ATTRIBUTES
+		     ---- BOTONES ----
+c0  = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c1  = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+	---------------------------------------------
+
+c001 = maqt013.m13_fecha, REVERSE, UPSHIFT, OPTIONS='-nolist', NOENTRY,
+			  FORMAT='dd-mm-yyyy', 
+			  COMMENTS='Ingrese la fecha en formato dd-mm-yyyy';
+c002 = maqt013.m13_comentario, REVERSE, UPSHIFT, OPTIONS='-nolist', 
+			       SCROLL;
+
+c003 = formonly.tit_coment, REVERSE, NOENTRY, UPSHIFT, WORDWRAP;
+
+
+INSTRUCTIONS 
+SCREEN RECORD r_detalle[6] (m13_fecha, m13_comentario)

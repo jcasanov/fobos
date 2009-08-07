@@ -1,0 +1,34 @@
+DATABASE diteca
+SCREEN
+{
+  
+                    Moneda: [a0]     [c001           ]
+
+               Línea Venta: [c004 ]  [c005                          ]
+
+          Tipo de Artículo: [c002  ] [c003      ]
+
+  Con impresión de Stock ?: [c]    Item con Stock mayor a cero ?: [d]
+
+                    Bodega: [a1]     [c006                          ]
+}
+TABLES
+rept010, rept011
+ATTRIBUTES
+a0   = FORMONLY.vm_moneda, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = FORMONLY.tit_moneda, NOENTRY, REVERSE, UPSHIFT;
+c002 = FORMONLY.r10_tipo, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = FORMONLY.tit_tipo, NOENTRY, UPSHIFT;
+c004 = rept010.r10_linea, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c005 = FORMONLY.tit_linea, NOENTRY, REVERSE, UPSHIFT;
+a1   = FORMONLY.r11_bodega, REVERSE,AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c006 = FORMONLY.tit_bodega, NOENTRY, UPSHIFT;
+c    = FORMONLY.tit_stock_imp, AUTONEXT, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+d    = FORMONLY.tit_stock_may, AUTONEXT, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+END

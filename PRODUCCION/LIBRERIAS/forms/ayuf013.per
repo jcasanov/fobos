@@ -1,0 +1,30 @@
+DATABASE diteca
+
+SCREEN
+{
+ AREAS DE NEGOCIOS
+-----------------------------------
+ Código	  Nombre 		
+-----------------------------------
+[c01] [c002                    ] 
+[c01] [c002                    ]
+[c01] [c002                    ]
+[c01] [c002                    ]
+[c01] [c002                    ]
+[c01] [c002                    ]
+[c01] [c002                    ] 
+[c01] [c002                    ] 
+[c01] [c002                    ] 
+[c01] [c002                    ] 
+}
+
+TABLES
+gent003
+
+ATTRIBUTES
+c01 = g03_areaneg;
+c002 = g03_nombre;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_area[10](g03_areaneg, g03_nombre)

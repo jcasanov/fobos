@@ -1,0 +1,45 @@
+database diteca
+screen 
+{
+ 
+ [lbl2   |lbl3            |lbl4            |lbl5            ]
+[c002   |c003            |c004            |c005            ]
+[c002   |c003            |c004            |c005            ]
+[c002   |c003            |c004            |c005            ]
+[c002   |c003            |c004            |c005            ]
+[c002   |c003            |c004            |c005            ]
+[c002   |c003            |c004            |c005            ]
+[c002   |c003            |c004            |c005            ]
+[c002   |c003            |c004            |c005            ]
+[c002   |c003            |c004            |c005            ]
+[c002   |c003            |c004            |c005            ]
+        [c006            |c007            |c008            ]
+               
+[c100                                            ]
+}
+end
+
+attributes
+lbl2 = formonly.bt_proveedor, WIDGET='BUTTON', CONFIG='F16';
+lbl3 = formonly.bt_val_ret_f, WIDGET='BUTTON', CONFIG='F17';
+lbl4 = formonly.bt_val_ret_i, WIDGET='BUTTON', CONFIG='F18';
+lbl5 = formonly.bt_val_che,   WIDGET='BUTTON', CONFIG='F19';
+
+c002 = formonly.codprov,      NOENTRY, OPTIONS='-nolist';
+c003 = formonly.val_ret_f,    NOENTRY, FORMAT='#,###,###,##&.##', 
+	OPTIONS='-nolist';
+c004 = formonly.val_ret_i,    NOENTRY, FORMAT='#,###,###,##&.##', 
+	OPTIONS='-nolist';
+c005 = formonly.val_che,      NOENTRY, FORMAT='#,###,###,##&.##', 
+	OPTIONS='-nolist';
+	
+c006 = formonly.tot_ret_f,    NOENTRY, FORMAT='#,###,###,##&.##', REVERSE;
+c007 = formonly.tot_ret_i,    NOENTRY, FORMAT='#,###,###,##&.##', REVERSE;
+c008 = formonly.tot_che,      NOENTRY, FORMAT='#,###,###,##&.##', REVERSE;
+	
+c100 = formonly.nomprov,      NOENTRY, UPSHIFT;
+
+
+
+instructions
+screen record ra_totales (codprov, val_ret_f, val_ret_i, val_che)

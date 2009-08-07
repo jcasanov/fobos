@@ -1,0 +1,74 @@
+
+DATABASE diteca
+SCREEN
+{
+          Item:[c0               ] [c1                                  ]
+        Bodega:[c2] [c3                            ]
+Desde la Fecha:[c         ]                   Hasta la Fecha:[c4        ]
+ Stock inicial:[c12 ]
+
+ [a|b0|b1             |b2        |b3                         |b4  |b5  |b6    ]
+[d|c5|c6             |c7        |c8                         |c9  |c10 |c11   ]
+[d|c5|c6             |c7        |c8                         |c9  |c10 |c11   ]
+[d|c5|c6             |c7        |c8                         |c9  |c10 |c11   ]
+[d|c5|c6             |c7        |c8                         |c9  |c10 |c11   ]
+[d|c5|c6             |c7        |c8                         |c9  |c10 |c11   ]
+[d|c5|c6             |c7        |c8                         |c9  |c10 |c11   ]
+[d|c5|c6             |c7        |c8                         |c9  |c10 |c11   ]
+[d|c5|c6             |c7        |c8                         |c9  |c10 |c11   ]
+[d|c5|c6             |c7        |c8                         |c9  |c10 |c11   ]
+[d|c5|c6             |c7        |c8                         |c9  |c10 |c11   ]
+[d|c5|c6             |c7        |c8                         |c9  |c10 |c11   ]
+[d|c5|c6             |c7        |c8                         |c9  |c10 |c11   ]
+[d|c5|c6             |c7        |c8                         |c9  |c10 |c11   ]
+						    Total:[c13 |c14 ]
+}
+TABLES
+	rept019
+	rept020
+
+ATTRIBUTES
+
+b0  = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+b1  = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b2  = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+b3  = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+b4  = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+b5  = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+b6  = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+a   = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22';
+
+c0  = rept020.r20_item, REVERSE, UPSHIFT, WIDGET = 'FIELD_BMP',
+	CONFIG = 'lista.bmp F2'; 
+c1  = FORMONLY.nom_item TYPE VARCHAR, REVERSE, NOENTRY;
+c2  = FORMONLY.vm_bodega TYPE VARCHAR, REQUIRED, REVERSE, UPSHIFT, 
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2', AUTONEXT; 
+c3  = FORMONLY.nom_bodega TYPE VARCHAR, REVERSE, NOENTRY;
+c   = FORMONLY.vm_fecha_desde TYPE DATE NOT NULL, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy', AUTONEXT; 
+c4  = FORMONLY.vm_fecha_hasta TYPE DATE NOT NULL, REVERSE, UPSHIFT, 
+	FORMAT = 'dd-mm-yyyy', AUTONEXT; 
+c12  = FORMONLY.vm_stock_inicial TYPE SMALLINT, REVERSE, NOENTRY; 
+c13  = FORMONLY.vm_tot_ing TYPE SMALLINT, REVERSE;  
+c14  = FORMONLY.vm_tot_egr TYPE SMALLINT, REVERSE;  
+
+d   = rept020.r20_localidad, OPTIONS = '-nolist';
+c5  = rept020.r20_cod_tran, OPTIONS = '-nolist';
+c6  = rept020.r20_num_tran, OPTIONS = '-nolist'; 
+c7  = FORMONLY.fecha TYPE DATE, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';  
+c8  = FORMONLY.cliente TYPE VARCHAR,   OPTIONS = '-nolist';  
+c9  = FORMONLY.cant_ing TYPE SMALLINT, OPTIONS = '-nolist';  
+c10 = FORMONLY.cant_egr TYPE SMALLINT, OPTIONS = '-nolist';  
+c11 = FORMONLY.saldo TYPE SMALLINT,    OPTIONS = '-nolist', 
+	COLOR = RED WHERE c11 < 0;  
+
+END
+
+KEYS 
+	F5 = 'Ver Transacción'
+
+INSTRUCTIONS
+SCREEN RECORD r_detalle[13] (r20_localidad, r20_cod_tran, r20_num_tran, fecha, 
+							cliente, 
+			     cant_ing, cant_egr, saldo)

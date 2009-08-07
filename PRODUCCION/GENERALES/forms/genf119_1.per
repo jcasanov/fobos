@@ -1,0 +1,30 @@
+                                                                                
+database diteca
+screen
+{
+
+
+	            Código: [c000]          Estado: [c][c1       ]
+		
+  	            Nombre: [c001                 ]
+     Código de Transacción: [c01] [c002                          ]
+	
+               Ingresado Por: [c003       ]
+            Fecha de ingreso: [c004               ]
+
+}
+end
+tables
+gent022
+attributes
+c000 = formonly.g22_cod_subtipo TYPE INTEGER NOT NULL, REVERSE,
+    	  WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c01 = gent022.g22_cod_tran, REVERSE, UPSHIFT,
+    	  WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = formonly.nom_tran;
+c001 = gent022.g22_nombre, REVERSE, UPSHIFT;
+c    = gent022.g22_estado, REVERSE, UPSHIFT, NOENTRY;
+c1   = formonly.tit_estado TYPE VARCHAR, NOENTRY;
+c003 = gent022.g22_usuario, REVERSE, NOENTRY;
+c004 = gent022.g22_fecing, REVERSE, NOENTRY;
+end

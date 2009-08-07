@@ -1,0 +1,70 @@
+database diteca 
+screen 
+{
+      
+   Tipo Destino: [a0                  ]      Número Destino: [c002       ]   
+                                                   Estado: [x1|c100      ]
+
+        Cliente: [c004       |c005                                       ]
+   Area Negocio: [c03|c052            ]
+         Moneda: [a1|c051            ]  Fecha Proceso: [c007                ]
+
+  [l1  |l2  |l3      |l4             |l5                  |l6              ]
+ [a5] [a6] [c024  ] [c025           |c026                |c023             ]
+ [a5] [a6] [c024  ] [c025           |c026                |c023             ]
+ [a5] [a6] [c024  ] [c025           |c026                |c023             ]
+ [a5] [a6] [c024  ] [c025           |c026                |c023             ]
+ [a5] [a6] [c024  ] [c025           |c026                |c023             ]
+ [a5] [a6] [c024  ] [c025           |c026                |c023             ]
+ [a5] [a6] [c024  ] [c025           |c026                |c023             ]
+ ---------------------------------------------------------------------------
+ Ingresado Por: [c016      ]       Total Moneda Factura: [c050             ]
+}
+end
+tables
+cajt010
+cajt011
+attributes
+a0 = cajt010.j10_tipo_destino, DEFAULT='PG', WIDGET='RADIO', AUTONEXT,
+	CONFIG='PG "Pago Factura" PA "Pago Anticipo" OI "Otros Ingresos"';
+c002 = cajt010.j10_num_destino, REVERSE;
+c03  = cajt010.j10_areaneg, NOENTRY;
+c004 = cajt010.j10_codcli, NOENTRY;
+c005 = cajt010.j10_nomcli, REVERSE, UPSHIFT, NOENTRY;
+a1 = cajt010.j10_moneda, NOENTRY, REVERSE, UPSHIFT, AUTONEXT;
+c007 = cajt010.j10_fecha_pro, NOENTRY;
+
+c016 = cajt010.j10_usuario, REVERSE, NOENTRY, UPSHIFT;
+
+a5 = cajt011.j11_codigo_pago, UPSHIFT, AUTONEXT, OPTIONS='-nolist', 
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2',
+	COMMENT='Ingrese la forma de pago.';
+a6 = cajt011.j11_moneda, UPSHIFT, AUTONEXT, OPTIONS='-nolist', 
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c023 = cajt011.j11_valor, FORMAT='#,###,###,##&.##', 
+	OPTIONS='-nolist'; 
+c024 = cajt011.j11_cod_bco_tarj, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2',
+	OPTIONS='-nolist', 
+	COMMENT='Ingrese el código del banco o de la tarjeta de crédito';
+c025 = cajt011.j11_num_ch_aut, UPSHIFT,	OPTIONS='-nolist',   
+	COMMENT='Ingrese el número del cheque o de la autorización de la tarjeta';
+c026 = cajt011.j11_num_cta_tarj, UPSHIFT, SCROLL, OPTIONS='-nolist', 
+	COMMENT='Ingrese el número de la cuenta o de la tarjeta';
+
+c050 = formonly.total_mf, REVERSE, FORMAT='#,###,###,##&.##', NOENTRY; 
+c051 = formonly.n_moneda, NOENTRY;
+c052 = formonly.n_areaneg, NOENTRY;
+
+x1   = cajt010.j10_estado, REVERSE, NOENTRY;
+c100 = formonly.n_estado,  REVERSE, NOENTRY;
+
+l1   = formonly.bt_codigo_pago, WIDGET='BUTTON', CONFIG='F15';
+l2   = formonly.bt_moneda,      WIDGET='BUTTON', CONFIG='F16';
+l3   = formonly.bt_bco_tarj, 	WIDGET='BUTTON', CONFIG='F17';
+l4   = formonly.bt_che_aut,     WIDGET='BUTTON', CONFIG='F18';
+l5   = formonly.bt_cta_tarj,    WIDGET='BUTTON', CONFIG='F19';
+l6   = formonly.bt_valor,       WIDGET='BUTTON', CONFIG='F20';
+end
+
+instructions
+screen record ra_j11[7] (j11_codigo_pago, j11_moneda, j11_cod_bco_tarj, j11_num_ch_aut, j11_num_cta_tarj, j11_valor)

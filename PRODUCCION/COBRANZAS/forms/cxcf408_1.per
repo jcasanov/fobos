@@ -1,0 +1,21 @@
+DATABASE diteca
+SCREEN 
+
+{
+		
+	              Fecha Inicial: [c001      ]  
+            	        Fecha Final: [c002      ]
+
+		  	     Estado: [c010        ]
+}
+end
+
+attributes
+c001 = formonly.inicial, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENT = 'Ingrese fecha en formato: dd-mm-aaaa';
+c002 = formonly.final, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENT = 'Ingrese fecha en formato: dd-mm-aaaa';
+c010 = formonly.estado, WIDGET = 'RADIO', REVERSE, 
+	CONFIG = 'A Activos B Bloqueados T Todos', DEFAULT = 'A', AUTONEXT;
+end
+

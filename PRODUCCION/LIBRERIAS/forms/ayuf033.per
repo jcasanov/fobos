@@ -1,0 +1,30 @@
+DATABASE diteca
+
+SCREEN
+{
+ TIPOS DE ITEMS
+-----------------------
+ Código  Descripción 		
+-----------------------
+[c01  ] [c002       ] 
+[c01  ] [c002       ]
+[c01  ] [c002       ]
+[c01  ] [c002       ]
+[c01  ] [c002       ]
+[c01  ] [c002       ]
+[c01  ] [c002       ] 
+[c01  ] [c002       ] 
+[c01  ] [c002       ] 
+[c01  ] [c002       ] 
+}
+
+TABLES
+rept006
+
+ATTRIBUTES
+c01 = r06_codigo;
+c002 = r06_nombre;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_tipitem[10](r06_codigo, r06_nombre)

@@ -1,0 +1,29 @@
+                                                                                
+database diteca
+screen 
+{
+
+
+       Código de Departamento: [c000]
+     
+                       Nombre: [c001                         ]		
+    Código de Centro de Costo: [c002] [c003                  ]
+
+                Ingresado Por: [c004       ]
+             Fecha de ingreso: [c005               ]
+
+
+}
+end
+tables
+gent034
+attributes
+c000 = gent034.g34_cod_depto, REVERSE, NOENTRY,
+       WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = gent034.g34_nombre, REVERSE, UPSHIFT;
+c002 = gent034.g34_cod_ccosto, REVERSE,
+       WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = formonly.nom_ccosto TYPE VARCHAR, NOENTRY;
+c004 = gent034.g34_usuario, REVERSE, UPSHIFT, NOENTRY;
+c005 = gent034.g34_fecing, REVERSE, NOENTRY;
+end

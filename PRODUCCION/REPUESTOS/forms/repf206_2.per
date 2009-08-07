@@ -1,0 +1,16 @@
+
+DATABASE diteca
+SCREEN
+{
+   Item: [c0             ] [c1                                 ]
+}
+TABLES
+	rept010
+ATTRIBUTES
+
+c0  = formonly.vm_item TYPE VARCHAR, REVERSE, UPSHIFT, WIDGET = 'FIELD_BMP', 
+	CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Digite los primeros caracteres del item a buscar.';
+c1  = r10_nombre, NOENTRY; 
+
+END

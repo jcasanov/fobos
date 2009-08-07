@@ -1,0 +1,16 @@
+DATABASE formonly
+SCREEN
+{
+
+               Ano: [c001]
+          Vendedor: [c002 ] [c100                           ]
+
+}
+TABLES
+formonly
+ATTRIBUTES
+c001 = formonly.anio, REVERSE;
+
+c002 = formonly.codvend, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c100 = formonly.nomvend, NOENTRY;
+END

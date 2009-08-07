@@ -1,0 +1,64 @@
+DATABASE diteca
+SCREEN
+{
+   Cliente: [c001 ] [c002                           ]    Moneda: [c03         ] 
+ Domicilio: [c003                                   ]                          
+  Teléfono: [c004      ] - [c005      ]	      Saldo a Favor: [c007            ]
+       Fax: [c006       ]		      Saldo Vencido: [c008            ]
+  					   Saldo Por Vencer: [c009            ]
+    Estado: [c011     ]                         Saldo Total: [c010            ]
+                                           Ch. Postfechados: [c099            ]
+ [c020      |c21|c022              |c023      |c024    |c025 |c026            ]
+[c030      |c31|c032              |c033      |c034    |c035 |c036            ]
+[c030      |c31|c032              |c033      |c034    |c035 |c036            ]
+[c030      |c31|c032              |c033      |c034    |c035 |c036            ]
+[c030      |c31|c032              |c033      |c034    |c035 |c036            ]
+[c030      |c31|c032              |c033      |c034    |c035 |c036            ]
+[c030      |c31|c032              |c033      |c034    |c035 |c036            ]
+[c030      |c31|c032              |c033      |c034    |c035 |c036            ]
+[c030      |c31|c032              |c033      |c034    |c035 |c036            ]
+[c030      |c31|c032              |c033      |c034    |c035 |c036            ]
+[c030      |c31|c032              |c033      |c034    |c035 |c036            ]
+
+}
+TABLES
+cxct001
+cxct020
+ATTRIBUTES
+c001 = z01_codcli;
+C002 = z01_nomcli, REVERSE;
+c03  = formonly.tit_mon, REVERSE; 
+c003 = z01_direccion1;
+c004 = z01_telefono1;
+c005 = z01_telefono2;
+c006 = z01_fax1;
+c007 = formonly.tot_favor TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##';
+c008 = formonly.tot_vcdo  TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##',
+       COLOR = RED WHERE c008 > 0;
+c009 = formonly.tot_xven  TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##';
+c010 = formonly.tot_saldo TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##', 
+       REVERSE;
+c011 = formonly.tit_estcli;
+c099 = formonly.tot_postfec TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##';
+c020 = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c21  = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c022 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c023 = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c024 = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c025 = formonly.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c026 = formonly.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+c030 = formonly.tit_area;
+c31  = z20_tipo_doc;
+c032 = formonly.num_doc;
+c033 = z20_fecha_vcto, FORMAT = 'dd-mm-yyyy';
+c034 = formonly.tit_estado, COLOR = RED WHERE c034 = 'Vencido';
+c035 = formonly.dias, FORMAT = '----&', COLOR = RED WHERE c035 < 0;
+c036 = formonly.saldo TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##'; 
+INSTRUCTIONS
+SCREEN RECORD rm_dcli[10] (formonly.tit_area, z20_tipo_doc, formonly.num_doc,
+			   z20_fecha_vcto, formonly.tit_estado, formonly.dias,
+			   formonly.saldo)
+KEYS
+"F5"="Ver Factura"
+"F6"="Movimientos"
+"F7"="Documento"

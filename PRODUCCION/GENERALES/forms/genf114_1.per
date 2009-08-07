@@ -1,0 +1,25 @@
+database diteca
+screen 
+{
+
+
+             Partida: [c000           ]
+
+              Nombre: [c001                                            ]
+          Porcentaje: [c002  ]%
+
+       Ingresado Por: [c003      ]
+    Fecha de Ingreso: [c004               ]
+
+}
+end
+tables
+gent016
+attributes
+c000 = gent016.g16_partida, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG =  'lista.bmp F2';
+c001 = gent016.g16_nombre, SCROLL, REVERSE, UPSHIFT;
+c002 = gent016.g16_porcentaje, REVERSE, FORMAT = '##&.##';
+c003 = gent016.g16_usuario, REVERSE, NOENTRY;
+c004 = gent016.g16_fecing, REVERSE, NOENTRY;
+end

@@ -1,0 +1,40 @@
+DATABASE diteca
+SCREEN 
+{
+
+  DETALLE DE DOCUMENTOS A FAVOR
+
+  [c010         |c1|c012      |c013            |c014            ] 
+ [a0|c003      |a1|c004      |c006            |c007            ] 
+ [a0|c003      |a1|c004      |c006            |c007            ] 
+ [a0|c003      |a1|c004      |c006            |c007            ] 
+ [a0|c003      |a1|c004      |c006            |c007            ] 
+ [a0|c003      |a1|c004      |c006            |c007            ] 
+                                              -----------------  
+   Neto Orden: [c008            ]      Total: [c009            ]
+
+}
+TABLES
+talt025, talt027, cxct021
+ATTRIBUTES
+c010 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F15';
+c1   = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col9, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = FORMONLY.tit_col10, WIDGET = 'BUTTON', CONFIG = 'F19';
+a0   = talt027.t27_tipo, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c003 = talt027.t27_numero, NOENTRY, OPTIONS = '-nolist';
+a1   = cxct021.z21_moneda, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c004 = cxct021.z21_fecha_emi, NOENTRY, OPTIONS = '-nolist', 
+	FORMAT = 'dd-mm-yyyy';
+c006 = talt027.t27_valor, NOENTRY, FORMAT = '#,###,###,##&.##',
+	OPTIONS = '-nolist';
+c007 = FORMONLY.tit_valor_usar, INCLUDE = (0.00 TO 99999999999.99),
+	FORMAT = '#,###,###,##&.##', OPTIONS = '-nolist';
+c008 = FORMONLY.tit_neto, REVERSE, NOENTRY, FORMAT = '#,###,###,##&.##';
+c009 = talt025.t25_valor_ant, REVERSE, NOENTRY, FORMAT = '#,###,###,##&.##';
+END
+
+INSTRUCTIONS
+SCREEN RECORD rm_docs[5] (t27_tipo, t27_numero, z21_moneda, z21_fecha_emi,
+			t27_valor, tit_valor_usar)

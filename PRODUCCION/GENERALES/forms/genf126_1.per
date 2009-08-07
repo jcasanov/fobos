@@ -1,0 +1,27 @@
+database diteca
+screen 
+{
+
+
+             Día Feriado: [c000      ]
+
+              Referencia: [c001                          ]
+               Nuevo Día: [c002      ]
+
+           Ingresado Por: [c003      ]
+        Fecha de Ingreso: [c004               ]
+
+}
+end
+tables
+gent036
+attributes
+c000 = gent036.g36_dia, REVERSE, UPSHIFT, FORMAT = 'dd-mm-yyyy', 
+	COMMENT = 'Ingrese fecha en formato: dd-mm-aa',
+        WIDGET = 'FIELD_BMP', CONFIG =  'lista.bmp F2';
+c001 = gent036.g36_referencia, REVERSE, UPSHIFT;
+c002 = gent036.g36_nue_dia, FORMAT = 'dd-mm-yyyy',
+       	COMMENT = 'Ingrese fecha en formato: dd-mm-aa';
+c003 = gent036.g36_usuario, REVERSE, NOENTRY;
+c004 = gent036.g36_fecing, REVERSE, NOENTRY;
+end

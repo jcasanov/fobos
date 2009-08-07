@@ -1,0 +1,49 @@
+database diteca
+SCREEN
+{
+
+ [c010      |c011                |c012      |c013           |c014        |c15]
+[c000      |c001                |c002      |c003           |c004        |c05]
+[c000      |c001                |c002      |c003           |c004        |c05]
+[c000      |c001                |c002      |c003           |c004        |c05]
+[c000      |c001                |c002      |c003           |c004        |c05]
+[c000      |c001                |c002      |c003           |c004        |c05]
+[c000      |c001                |c002      |c003           |c004        |c05]
+[c000      |c001                |c002      |c003           |c004        |c05]
+[c000      |c001                |c002      |c003           |c004        |c05]
+[c000      |c001                |c002      |c003           |c004        |c05]
+[c000      |c001                |c002      |c003           |c004        |c05]
+[c000      |c001                |c002      |c003           |c004        |c05]
+[c000      |c001                |c002      |c003           |c004        |c05]
+[c000      |c001                |c002      |c003           |c004        |c05]
+[c000      |c001                |c002      |c003           |c004        |c05]
+[c000      |c001                |c002      |c003           |c004        |c05]
+[c000      |c001                |c002      |c003           |c004        |c05]
+[c000      |c001                |c002      |c003           |c004        |c05]
+[c000      |c001                |c002      |c003           |c004        |c05]
+                                                     Total de Unidades: [c06]
+}
+TABLES
+veht034, veht035, veht005, cxpt001
+ATTRIBUTES
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c15  = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+c000 = veht034.v34_pedido, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c001 = cxpt001.p01_nomprov, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c002 = veht034.v34_fec_llegada, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c003 = veht035.v35_modelo, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c004 = veht005.v05_descri_base, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c05  = FORMONLY.tit_unidades, NOENTRY, UPSHIFT, FORMAT = '###',
+	OPTIONS = '-nolist';
+c06  = FORMONLY.tit_total_uni, NOENTRY, REVERSE, UPSHIFT, FORMAT = '###';
+END
+KEYS
+F5 = 'Pedido'
+INSTRUCTIONS
+SCREEN RECORD rm_det[18] (v34_pedido, p01_nomprov, v34_fec_llegada, v35_modelo,
+			v05_descri_base, tit_unidades)

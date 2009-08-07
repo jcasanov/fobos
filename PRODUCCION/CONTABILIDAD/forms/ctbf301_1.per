@@ -1,0 +1,59 @@
+DATABASE diteca
+SCREEN
+{
+  Nivel de Cuenta: [c000  ] [c001                ]
+    Número Cuenta: [c002        ] [c003                                      ]
+           Moneda: [a0] [c004           ]  Año: [c005] Mes: [a2] [c006       ]
+
+  [c020        |c021                                     |c022              ]
+ [c010        |c011                                     |c012              ]
+ [c010        |c011                                     |c012              ]
+ [c010        |c011                                     |c012              ]
+ [c010        |c011                                     |c012              ]
+ [c010        |c011                                     |c012              ]
+ [c010        |c011                                     |c012              ]
+ [c010        |c011                                     |c012              ]
+ [c010        |c011                                     |c012              ]
+ [c010        |c011                                     |c012              ]
+ [c010        |c011                                     |c012              ]
+ [c010        |c011                                     |c012              ]
+ [c010        |c011                                     |c012              ]
+ [c010        |c011                                     |c012              ]
+ [c010        |c011                                     |c012              ]
+ [c010        |c011                                     |c012              ]
+}
+TABLES
+ctbt010
+ATTRIBUTES
+c000 = ctbt010.b10_nivel, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = FORMONLY.tit_nivel, NOENTRY, UPSHIFT;
+c002 = ctbt010.b10_cuenta, AUTONEXT, UPSHIFT, PICTURE = '########XXXX',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = ctbt010.b10_descripcion, AUTONEXT, UPSHIFT;
+a0   = FORMONLY.vm_moneda, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c004 = FORMONLY.tit_moneda_des, NOENTRY, UPSHIFT;
+c005 = FORMONLY.vm_anio, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Año válido para el plan de cuentas con saldo';
+a2   = FORMONLY.vm_mes, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Mes válido para el plan de cuentas con saldo';
+c006 = FORMONLY.tit_mes_des, NOENTRY, UPSHIFT;
+
+c020 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c021 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c022 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+
+c010 = FORMONLY.b10_cuenta, NOENTRY, UPSHIFT, PICTURE = '########XXXX',
+	OPTIONS = '-nolist';
+c011 = FORMONLY.b10_descripcion, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c012 = FORMONLY.tit_saldo, NOENTRY, UPSHIFT,
+	FORMAT = '((,(((,(((,((&.##)', OPTIONS = '-nolist';
+END
+KEYS
+F5 = 'Cuenta'
+F6 = 'Movimientos'
+INSTRUCTIONS
+SCREEN RECORD rm_det[15] (FORMONLY.b10_cuenta, FORMONLY.b10_descripcion,
+			tit_saldo)

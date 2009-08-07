@@ -1,0 +1,30 @@
+DATABASE diteca
+
+SCREEN
+{
+ COMISIONISTAS
+------------------------------------
+ Código  Nombres
+------------------------------------
+[c01] [c002                       ] 
+[c01] [c002                       ]
+[c01] [c002                       ]
+[c01] [c002                       ]
+[c01] [c002                       ]
+[c01] [c002                       ]
+[c01] [c002                       ] 
+[c01] [c002                       ] 
+[c01] [c002                       ] 
+[c01] [c002                       ] 
+}
+
+TABLES
+cmst002
+
+ATTRIBUTES
+c01 = c02_codigo;
+c002 = c02_nombres;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_comi[10](c02_codigo, c02_nombres)

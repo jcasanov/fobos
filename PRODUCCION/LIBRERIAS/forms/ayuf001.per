@@ -1,0 +1,27 @@
+DATABASE diteca
+
+SCREEN
+{
+ LOCALIDADES
+----------------------------------------
+ Código	        Descripción 	  
+----------------------------------------
+[f001] [f002                         ] 
+[f001] [f002                         ]
+[f001] [f002                         ]
+[f001] [f002                         ]
+[f001] [f002                         ]
+[f001] [f002                         ]
+[f001] [f002                         ]
+}
+
+TABLES
+gent002
+
+ATTRIBUTES
+f001 = g02_localidad;
+f002 = g02_nombre;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_loc[7](g02_localidad, g02_nombre)

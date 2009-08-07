@@ -1,0 +1,15 @@
+DATABASE formonly
+SCREEN
+{
+
+ Rubro Base: [b          ]
+
+
+ Factor aumento: [c000 ]% 
+
+}
+ATTRIBUTES
+c000 = formonly.val  TYPE DECIMAL(5,2), FORMAT = '##&.&&';
+b    = formonly.rubro_base, REVERSE,UPSHIFT, 
+	WIDGET = 'RADIO', CONFIG = 'P Precio C Costo',
+	COMMENT = 'Rubro Base sobre el que se va a calcular el nuevo valor. ';

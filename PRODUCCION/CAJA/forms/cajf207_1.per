@@ -1,0 +1,84 @@
+database diteca
+screen 
+{
+   Comprobante: [a0|c002        ]                     Estado: [a|c103      ] 
+       No Cta.: [c014           ]       Banco: [c013] [c100                ] 
+        Moneda: [a1] [c101           ]   
+    Referencia: [c010                                                      ]
+Saldo Ant. Ef.: [c015            ]        Saldo Ant. Ch.: [c017            ]
+ Saldo Hoy Ef.: [c003            ]         Saldo Hoy Ch.: [c004            ]
+    Egreso Ef.: [c006            ]        
+
+ [l1|l2     |l3             |l4                     |l5  |l6              |l]
+[a3|c018   |c020           |c021                   |c022|c023            |c]
+[a3|c018   |c020           |c021                   |c022|c023            |c]
+[a3|c018   |c020           |c021                   |c022|c023            |c]
+[a3|c018   |c020           |c021                   |c022|c023            |c]
+[a3|c018   |c020           |c021                   |c022|c023            |c]
+[a3|c018   |c020           |c021                   |c022|c023            |c]
+[a3|c018   |c020           |c021                   |c022|c023            |c]
+                                                        [c025            ]     
+         Caja: [c008] [c102              ]
+Ingresado Por: [c016      ]          Fecha de Ingreso: [c007               ]
+}
+end
+tables
+cajt010
+cajt011
+attributes
+a0   = cajt010.j10_tipo_fuente, NOENTRY, REVERSE;
+c002 = cajt010.j10_num_fuente, REVERSE, NOENTRY, WIDGET='FIELD_BMP',
+	CONFIG='lista.bmp F2';
+	
+a    = cajt010.j10_estado, NOENTRY, REVERSE, UPSHIFT,
+	COMMENT='(P) Procesado  (E) Eliminado';
+	
+a1   = cajt010.j10_moneda, REVERSE, AUTONEXT, UPSHIFT, WIDGET='FIELD_BMP',
+	CONFIG='lista.bmp F2';
+c006 = cajt010.j10_valor, REVERSE, FORMAT='-,---,---,--&.##',
+	COMMENT='Digite valor a egresar de caja en efectivo.',
+	INCLUDE=(0 TO 9999999999.99);
+c010 = cajt010.j10_referencia NOT NULL, SCROLL, REVERSE, REQUIRED, UPSHIFT;
+c013 = cajt010.j10_banco, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c014 = cajt010.j10_numero_cta, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+	
+c015 = formonly.saldo_ant_ef, FORMAT='-,---,---,--&.##', NOENTRY, REVERSE;
+c017 = formonly.saldo_ant_ch, FORMAT='-,---,---,--&.##', NOENTRY, REVERSE;
+
+c003 = formonly.saldo_hoy_ef, FORMAT='-,---,---,--&.##', NOENTRY, REVERSE;
+c004 = formonly.saldo_hoy_ch, FORMAT='-,---,---,--&.##', NOENTRY, REVERSE;
+
+c016 = cajt010.j10_usuario, REVERSE, NOENTRY, UPSHIFT;
+c007 = cajt010.j10_fecing, REVERSE, NOENTRY;
+
+c008 = cajt010.j10_codigo_caja, NOENTRY, REVERSE, WIDGET='FIELD_BMP',
+	CONFIG='lista.bmp F2';
+
+a3   = cajt011.j11_tipo_fuente,  OPTIONS='-nolist', NOENTRY;
+c018 = cajt011.j11_num_fuente,   OPTIONS='-nolist', NOENTRY;
+c020 = cajt011.j11_num_ch_aut,   OPTIONS='-nolist', NOENTRY;
+c021 = cajt011.j11_num_cta_tarj, OPTIONS='-nolist', NOENTRY;
+c022 = cajt011.j11_cod_bco_tarj, OPTIONS='-nolist', NOENTRY;
+c023 = cajt011.j11_valor, FORMAT='#,###,###,##&.##', OPTIONS='-nolist', 
+	NOENTRY;
+c    = formonly.check, WIDGET='CHECK', CONFIG='S N acknowledge', AUTONEXT,
+	DEFAULT='N', OPTIONS='-nolist';
+
+c025 = formonly.tot_egreso_ch, NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+
+c100 = formonly.n_banco,  NOENTRY;
+c101 = formonly.n_moneda, NOENTRY;
+c102 = formonly.n_caja,   NOENTRY;
+c103 = formonly.n_estado, NOENTRY;
+
+l1 = formonly.bt_tipo,    WIDGET='BUTTON', CONFIG='F15';
+l2 = formonly.bt_num,     WIDGET='BUTTON', CONFIG='F16';
+l3 = formonly.bt_cheque,  WIDGET='BUTTON', CONFIG='F17';
+l4 = formonly.bt_cta_cte, WIDGET='BUTTON', CONFIG='F18';
+l5 = formonly.bt_banco,   WIDGET='BUTTON', CONFIG='F19';
+l6 = formonly.bt_valor,   WIDGET='BUTTON', CONFIG='F20';
+l  = formonly.bt_check,   WIDGET='BUTTON', CONFIG='F21';
+end
+
+instructions
+screen record ra_egresos[7] (j11_tipo_fuente, j11_num_fuente, j11_num_ch_aut, j11_num_cta_tarj, j11_cod_bco_tarj, j11_valor, check)

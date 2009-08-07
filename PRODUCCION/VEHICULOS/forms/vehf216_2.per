@@ -1,0 +1,44 @@
+database diteca 
+screen
+{
+ Cuota inicial: [c000             ]
+   Nro. Cuotas: [c002    ]         Tipo Pago: [c            ] 
+       Interés: [c001    ]%
+
+    [lbl1  ][lbl2            ][lbl3            ][lbl4     ]
+   [c003  ][c007            ][c006            ][c004      ]
+   [c003  ][c007            ][c006            ][c004      ]
+   [c003  ][c007            ][c006            ][c004      ]
+   [c003  ][c007            ][c006            ][c004      ]
+   [c003  ][c007            ][c006            ][c004      ]
+   [c003  ][c007            ][c006            ][c004      ]
+   [c003  ][c007            ][c006            ][c004      ]
+           [c050            ][c051            ]
+}
+end
+tables
+veht026
+veht028
+attributes
+c000 = veht026.v26_cuotai_fin, REVERSE, FORMAT='###,###,##&.##';
+c001 = veht026.v26_int_cuotaif, REVERSE, REQUIRED, FORMAT='#&.##';
+c002 = veht026.v26_num_cuotaif, REVERSE, REQUIRED;
+c003 = veht028.v28_dividendo, NOENTRY, OPTIONS='-nolist';
+c004 = veht028.v28_fecha_vcto, OPTIONS='-nolist',
+	FORMAT='dd-mm-yyyy', COMMENT='Ingrese fecha en formato: dd-mm-aaaa';
+c006 = veht028.v28_val_int, FORMAT='#,###,###,##&.##', OPTIONS='-nolist', 
+	NOENTRY;
+c007 = veht028.v28_val_cap, FORMAT='#,###,###,##&.##', OPTIONS='-nolist';
+c    = formonly.vm_tipo_pago_cuotai, REVERSE, REQUIRED, DEFAULT='C',
+	WIDGET='RADIO', CONFIG='C Contado F Financiada';
+c050 = formonly.tot_cap, FORMAT='#,###,###,##&.##', OPTIONS='-nolist', NOENTRY;
+c051 = formonly.tot_int, FORMAT='#,###,###,##&.##', OPTIONS='-nolist', NOENTRY;
+
+lbl1 = formonly.bt_nro_vctos,  WIDGET='BUTTON', CONFIG='F15';
+lbl2 = formonly.bt_capital,    WIDGET='BUTTON', CONFIG='F16';
+lbl3 = formonly.bt_interes,    WIDGET='BUTTON', CONFIG='F17';
+lbl4 = formonly.bt_fecha_vcto, WIDGET='BUTTON', CONFIG='F18';
+end
+
+instructions
+screen record ra_cuotai[7] (v28_dividendo, v28_val_cap, v28_val_int, v28_fecha_vcto)

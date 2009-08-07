@@ -1,0 +1,68 @@
+DATABASE diteca
+SCREEN
+{
+
+  Forma Pago Factura: [f002         ]
+
+        Caja: [f003            ]         Detalle Documentos Aplicados:
+   Anticipos: [f004            ]         [f10|f011  |f012            ]
+     Crédito: [f005            ]        [f20|f021  |f022            ]
+               ----------------         [f20|f021  |f022            ]
+       Total: [f006            ]        [f20|f021  |f022            ]
+
+          Detalle Caja:      
+          [f30|f031           |f032             |f33|f034            ]
+         [f40|f041           |f042             |f43|f044            ]
+         [f40|f041           |f042             |f43|f044            ]
+         [f40|f041           |f042             |f43|f044            ]
+   
+        Detalle Crédito:
+        [f50|f051      |f052          |f053         |f054            ]
+       [f60|f061      |f062          |f063         |f064            ]
+       [f60|f061      |f062          |f063         |f064            ]
+       [f60|f061      |f062          |f063         |f064            ]
+}
+TABLES
+talt023
+talt025
+talt026
+talt027
+cajt011
+ATTRIBUTES
+f002 = t23_num_factura, REVERSE;
+f003 = formonly.val_caja TYPE DECIMAL(12,2), FORMAT = '#,###,###,##&.##';
+f004 = t25_valor_ant, FORMAT = '#,###,###,##&.##';
+f005 = t25_valor_cred, FORMAT = '#,###,###,##&.##';
+f006 = t23_tot_neto, FORMAT = '#,###,###,##&.##';
+f10  = formonly.tit_ant1, WIDGET = 'BUTTON';
+f011 = formonly.tit_ant2, WIDGET = 'BUTTON';
+f012 = formonly.tit_ant3, WIDGET = 'BUTTON';
+f20  = t27_tipo;
+f021 = t27_numero;
+f022 = t27_valor, FORMAT = '#,###,###,##&.##';
+f30  = formonly.tit_caj1, WIDGET = 'BUTTON';
+f031 = formonly.tit_caj2, WIDGET = 'BUTTON';
+f032 = formonly.tit_caj3, WIDGET = 'BUTTON';
+f33  = formonly.tit_caj4, WIDGET = 'BUTTON';
+f034 = formonly.tit_caj5, WIDGET = 'BUTTON';
+f40  = j11_codigo_pago;
+f041 = formonly.nombre_bt;
+f042 = j11_num_ch_aut;
+f43  = j11_moneda;
+f044 = j11_valor, FORMAT = '#,###,###,##&.##';
+f50  = formonly.tit_cred1, WIDGET = 'BUTTON';
+f051 = formonly.tit_cred2, WIDGET = 'BUTTON';
+f052 = formonly.tit_cred3, WIDGET = 'BUTTON';
+f053 = formonly.tit_cred4, WIDGET = 'BUTTON';
+f054 = formonly.tit_cred5, WIDGET = 'BUTTON';
+f60  = t26_dividendo, FORMAT = '&&';
+f061 = t26_fec_vcto, FORMAT = 'dd-mm-yyyy';
+f062 = t26_valor_cap, FORMAT = '###,###,##&.##';
+f063 = t26_valor_int, FORMAT = '##,###,##&.##';
+f064 = formonly.tot_div TYPE DECIMAL(12,2), FORMAT = '#,###,###,##&.##';
+INSTRUCTIONS
+SCREEN RECORD r_ant[3] (t27_tipo, t27_numero, t27_valor)
+SCREEN RECORD r_caj[3] (j11_codigo_pago, formonly.nombre_bt, j11_num_ch_aut,
+			j11_moneda, j11_valor)
+SCREEN RECORD r_cred[3] (t26_dividendo, t26_fec_vcto, t26_valor_cap, 
+			 t26_valor_int, formonly.tot_div)

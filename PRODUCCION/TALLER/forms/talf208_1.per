@@ -1,0 +1,46 @@
+DATABASE diteca
+SCREEN 
+{
+
+ [c010  |c011                |c012            |c013            |c014          ]
+[c000  |c001                |c002            |c003            |c004          ]
+[c000  |c001                |c002            |c003            |c004          ]
+[c000  |c001                |c002            |c003            |c004          ]
+[c000  |c001                |c002            |c003            |c004          ]
+[c000  |c001                |c002            |c003            |c004          ]
+[c000  |c001                |c002            |c003            |c004          ]
+[c000  |c001                |c002            |c003            |c004          ]
+[c000  |c001                |c002            |c003            |c004          ]
+[c000  |c001                |c002            |c003            |c004          ]
+[c000  |c001                |c002            |c003            |c004          ]
+[c000  |c001                |c002            |c003            |c004          ]
+[c000  |c001                |c002            |c003            |c004          ]
+[c000  |c001                |c002            |c003            |c004          ]
+[c000  |c001                |c002            |c003            |c004          ]
+[c000  |c001                |c002            |c003            |c004          ]
+
+}
+TABLES
+talt023,
+talt025
+ATTRIBUTES
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c000 = talt023.t23_orden, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c001 = talt023.t23_nom_cliente, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c002 = talt023.t23_tot_neto, NOENTRY, OPTIONS = '-nolist',
+	FORMAT = '#,###,###,##&.##';
+c003 = talt025.t25_valor_cred, NOENTRY, FORMAT = '#,###,###,##&.##',
+	OPTIONS = '-nolist';
+c004 = talt025.t25_valor_ant, NOENTRY, FORMAT = '###,###,##&.##',
+	OPTIONS = '-nolist';
+END
+KEYS
+F5 = 'Formas de Pago'
+F6 = 'Orden de Trabajo'
+INSTRUCTIONS
+SCREEN RECORD rm_deto[15] (t23_orden, t23_nom_cliente, t23_tot_neto,
+				t25_valor_cred, t25_valor_ant)

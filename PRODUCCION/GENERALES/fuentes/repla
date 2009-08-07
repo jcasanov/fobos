@@ -1,0 +1,8 @@
+for i in *.4gl
+do
+	echo $i
+	sed s/"DEFINE vm_programa"/"DEFINE vm_demonios"/ $i > temporal
+	mv temporal $i
+	sed s/vm_programa/vg_proceso/ $i > temporal
+	mv temporal $i
+done

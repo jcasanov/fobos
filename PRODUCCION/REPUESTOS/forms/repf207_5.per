@@ -1,0 +1,16 @@
+database diteca
+screen
+{
+         
+        Moneda: [c0|c001           ]
+   Observación: [c002                          ]
+
+}
+
+tables
+rept030
+
+attributes
+c0   = rept030.r30_moneda, NOENTRY, UPSHIFT, REVERSE;
+C001 = formonly.n_moneda, NOENTRY;
+c002 = rept030.r30_observacion, UPSHIFT;

@@ -1,0 +1,30 @@
+                                                                                
+database diteca
+screen
+{
+
+
+		      Código: [c000]
+		
+	              Nombre: [c001                           ]
+	      Código de País: [c01] [c002                     ]
+	              Siglas: [c02]
+	
+               Ingresado Por: [c003       ]
+            Fecha de ingreso: [c004               ]
+
+}
+end
+tables
+gent031
+attributes
+c000 = formonly.g31_ciudad TYPE INTEGER NOT NULL, REVERSE,
+    	  WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c01 = gent031.g31_pais, REVERSE, UPSHIFT,
+    	  WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = formonly.nom_pais, UPSHIFT;
+c001 = gent031.g31_nombre, REVERSE, UPSHIFT;
+c02 = gent031.g31_siglas, REVERSE, UPSHIFT, AUTONEXT;
+c003 = gent031.g31_usuario, REVERSE, UPSHIFT, NOENTRY;
+c004 = gent031.g31_fecing, REVERSE, NOENTRY;
+end

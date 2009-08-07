@@ -1,0 +1,43 @@
+DATABASE formonly
+SCREEN
+{
+ [c1|c010  |c011                          |c012      |c013           |c014    ]
+[c0|c021  |c022                          |c023      |c024           |c025    ]
+[c0|c021  |c022                          |c023      |c024           |c025    ]
+[c0|c021  |c022                          |c023      |c024           |c025    ]
+[c0|c021  |c022                          |c023      |c024           |c025    ]
+[c0|c021  |c022                          |c023      |c024           |c025    ]
+[c0|c021  |c022                          |c023      |c024           |c025    ]
+[c0|c021  |c022                          |c023      |c024           |c025    ]
+[c0|c021  |c022                          |c023      |c024           |c025    ]
+[c0|c021  |c022                          |c023      |c024           |c025    ]
+[c0|c021  |c022                          |c023      |c024           |c025    ]
+[c0|c021  |c022                          |c023      |c024           |c025    ]
+[c0|c021  |c022                          |c023      |c024           |c025    ]
+[c0|c021  |c022                          |c023      |c024           |c025    ]
+[c0|c021  |c022                          |c023      |c024           |c025    ]
+[c0|c021  |c022                          |c023      |c024           |c025    ]
+[c0|c021  |c022                          |c023      |c024           |c025    ]
+[c0|c021  |c022                          |c023      |c024           |c025    ]
+[c100                                   ]
+}
+ATTRIBUTES
+c1   = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c010 = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c011 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c012 = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c013 = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c014 = formonly.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+c0   = formonly.cod_tran, REVERSE, NOENTRY, OPTIONS='-nolist';
+c021 = formonly.num_tran, REVERSE, NOENTRY, OPTIONS='-nolist';
+c022 = formonly.nomcli,   REVERSE, NOENTRY, OPTIONS='-nolist';
+c023 = formonly.fecing,   REVERSE, NOENTRY, OPTIONS='-nolist', FORMAT='dd-mm-yyyy';
+c024 = formonly.item,     REVERSE, NOENTRY, OPTIONS='-nolist';
+c025 = formonly.cantidad, REVERSE, NOENTRY, OPTIONS='-nolist';
+
+c100 = formonly.nomitem, REVERSE, NOENTRY;
+
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_fact[17] (cod_tran, num_tran, nomcli, fecing, item, cantidad) 

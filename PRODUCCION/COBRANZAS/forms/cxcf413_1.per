@@ -1,0 +1,40 @@
+DATABASE DITECA
+SCREEN 
+
+{
+
+			     Moneda: [c1] [c020             ]
+     	    	   Tipo Transacción: [c2] [c021             ]
+
+   		    Area de Negocio: [c3  ] [c022             ]		
+			    Cliente: [c004] [c023             ]
+	     
+		      Fecha Inicial: [c005      ]  
+            	        Fecha Final: [c006      ]   Origen: [c008          ]
+
+}
+end
+
+attributes
+c1   = formonly.moneda,		REVERSE, UPSHIFT, AUTONEXT, 
+				WIDGET = 'FIELD_BMP',
+				CONFIG = 'lista.bmp F2';
+c2   = formonly.transaccion,	UPSHIFT, WIDGET = 'FIELD_BMP',
+				CONFIG = 'lista.bmp F2';
+c3   = formonly.area,		WIDGET = 'FIELD_BMP',
+				CONFIG = 'lista.bmp F2';   
+c004 = formonly.cliente,	WIDGET = 'FIELD_BMP',
+				CONFIG = 'lista.bmp F2';
+c005 = formonly.inicial, 	REVERSE, FORMAT = 'dd-mm-yyyy',
+				COMMENT = 'Ingrese fecha en formato: dd-mm-aaaa';
+c006 = formonly.final, 		REVERSE, FORMAT = 'dd-mm-yyyy',
+				COMMENT = 'Ingrese fecha en formato: dd-mm-aaaa';
+c008 = formonly.origen_doc,     WIDGET = 'RADIO', CONFIG = "lines=3", AUTONEXT,
+                                CONFIG = 'M Manual A Automático T Todos',
+                                DEFAULT = 'M';
+c020 = formonly.desc_moneda, 	  REVERSE, UPSHIFT;
+c021 = formonly.desc_transaccion, UPSHIFT;
+c022 = formonly.desc_area, 	  UPSHIFT;
+c023 = formonly.desc_cliente,	  UPSHIFT;
+END
+

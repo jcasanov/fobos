@@ -1,0 +1,32 @@
+DATABASE diteca
+
+SCREEN
+{
+ TRANSACCIONES 
+--------------------------------------------------------------
+ TR  Código	      Nombre 		
+--------------------------------------------------------------
+[c0][c01            ][c002                                  ] 
+[c0][c01            ][c002                                  ]
+[c0][c01            ][c002                                  ]
+[c0][c01            ][c002                                  ]
+[c0][c01            ][c002                                  ]
+[c0][c01            ][c002                                  ]
+[c0][c01            ][c002                                  ] 
+[c0][c01            ][c002                                  ] 
+[c0][c01            ][c002                                  ] 
+[c0][c01            ][c002                                  ] 
+
+}
+
+TABLES
+rept019
+
+ATTRIBUTES
+c0   = r19_cod_tran;
+c01  = r19_num_tran;
+c002 = r19_nomcli, UPSHIFT;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_vtatal[10](r19_cod_tran, r19_num_tran, r19_nomcli)

@@ -1,0 +1,28 @@
+database diteca
+screen 
+{
+
+
+              Código de Impresora: [c000      ]
+
+              Nombre de Impresora: [c001                          ]
+         Impresora Predeterminada: [a]
+
+                    Ingresado Por: [c002      ]
+                 Fecha de Ingreso: [c003               ]
+
+
+}
+end
+tables
+gent006
+attributes
+c000 = gent006.g06_impresora, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = gent006.g06_nombre, REVERSE, UPSHIFT;
+a = gent006.g06_default, DEFAULT = 'N', REVERSE,  
+		 WIDGET = 'CHECK', CONFIG = 'S N acknowledge', 
+       COMMENT = 'Presione con Mouse o barra espaciadora';
+c002 = gent006.g06_usuario, REVERSE, UPSHIFT, NOENTRY;
+c003 = gent006.g06_fecing, REVERSE, NOENTRY;
+end

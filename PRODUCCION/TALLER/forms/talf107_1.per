@@ -1,0 +1,39 @@
+database diteca
+screen 
+{
+
+
+                       Modelo: [f001           ] 
+
+              Código de tarea: [f002        ]	       Estado:[a][a1       ]  
+
+                       Nombre: [f003                                    ]
+
+                Tiempo Optimo: [f005 ]	                 Tipo:[b           ]
+    Valor Default Moneda Base: [f006        ]	
+ Valor Default Moneda Alterna: [f007        ]
+
+                Ingresado Por: [f008      ]
+             Fecha de Ingreso: [f009               ]
+
+}
+end
+tables
+talt007
+attributes
+f001 = talt007.t07_modelo, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f002 = talt007.t07_codtarea, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f003 = talt007.t07_nombre, REVERSE, UPSHIFT, SCROLL;
+a    = talt007.t07_estado, REVERSE, NOENTRY, UPSHIFT;
+a1   = formonly.tit_estado TYPE VARCHAR, NOENTRY;
+b    = talt007.t07_tipo, REVERSE, DEFAULT = 'V', 
+	WIDGET = 'RADIO', CONFIG = 'P Puntuable V Valor';
+f005 = talt007.t07_pto_default, REVERSE, 
+	COMMENT = 'Unicamente para cuando la tarea es Tipo Puntuable';
+f006 = talt007.t07_val_defa_mb, REVERSE, FORMAT = '#,###,##&.##';
+f007 = talt007.t07_val_defa_ma, REVERSE, NOENTRY, FORMAT = '#,###,##&.##';
+f008 = talt007.t07_usuario, REVERSE, NOENTRY;
+f009 = talt007.t07_fecing, REVERSE, NOENTRY;
+end

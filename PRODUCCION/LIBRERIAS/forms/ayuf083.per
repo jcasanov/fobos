@@ -1,0 +1,37 @@
+DATABASE diteca
+
+SCREEN
+{
+ RESERVACIONES
+
+ [lbl1    |lbl2    |lbl3                          ]
+[c00     |c01     |c000                          ]
+[c00     |c01     |c000                          ]
+[c00     |c01     |c000                          ]
+[c00     |c01     |c000                          ]
+[c00     |c01     |c000                          ]
+[c00     |c01     |c000                          ]
+[c00     |c01     |c000                          ]
+[c00     |c01     |c000                          ]
+[c00     |c01     |c000                          ]
+[c00     |c01     |c000                          ]
+
+}
+
+TABLES
+veht033
+veht001
+
+ATTRIBUTES
+
+c00  = v33_num_reserv, UPSHIFT ;
+c01 = v33_codigo_veh, UPSHIFT;
+c000 = v01_nombres, UPSHIFT;
+
+lbl1 = formonly.bt_reserva,      NOENTRY, WIDGET='BUTTON', CONFIG='F15';
+lbl2 = formonly.bt_codigo,       NOENTRY, WIDGET='BUTTON', CONFIG='F16';
+lbl3 = formonly.bt_vendedor,     NOENTRY, WIDGET='BUTTON', CONFIG='F17';
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_reser[10](v33_num_reserv, v33_codigo_veh, v01_nombres)

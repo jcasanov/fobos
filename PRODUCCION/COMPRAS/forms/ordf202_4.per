@@ -1,0 +1,38 @@
+database diteca
+screen 
+{
+
+ [lb1          ][lb2                       |lb4             |lb5            ]
+[c018        ] [a4                        |c020            |c021            ]
+[c018        ] [a4                        |c020            |c021            ]
+[c018        ] [a4                        |c020            |c021            ]
+[c018        ] [a4                        |c020            |c021            ]
+[c018        ] [a4                        |c020            |c021            ]
+[c018        ] [a4                        |c020            |c021            ]
+[c018        ] [a4                        |c020            |c021            ]
+                                          [c050            |c051            ]
+
+}
+end
+tables
+ctbt013
+attributes
+c050 = formonly.tot_debito, NOENTRY, FORMAT='#,###,###,##&.##';
+c051 = formonly.tot_credito, NOENTRY, FORMAT='#,###,###,##&.##';
+
+c018 = ctbt013.b13_cuenta, UPSHIFT, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2',
+	OPTIONS='-nolist', COMMENT='Digite cuenta de gastos.';
+a4 = formonly.n_cuenta, UPSHIFT, NOENTRY, OPTIONS='-nolist';
+c020 = formonly.valor_db, OPTIONS='-nolist', 
+	FORMAT='#,###,###,##&.##', INCLUDE=(0 TO 9999999999.99);
+c021 = formonly.valor_cr, OPTIONS='-nolist', 
+	FORMAT='#,###,###,##&.##', INCLUDE=(0 TO 9999999999.99);
+
+lb1  = formonly.bt_cuenta     , WIDGET='BUTTON', CONFIG='F15'; 
+lb2  = formonly.bt_descripcion, WIDGET='BUTTON', CONFIG='F16';
+lb4  = formonly.bt_valor_db   , WIDGET='BUTTON', CONFIG='F17';
+lb5  = formonly.bt_valor_cr   , WIDGET='BUTTON', CONFIG='F18';
+end
+
+instructions
+screen record r_ctas[7] (b13_cuenta, n_cuenta, valor_db, valor_cr)

@@ -1,0 +1,110 @@
+DATABASE diteca
+screen
+{
+     No Orden: [c0    ]  [c33      ]             Estado: [c|c2        ]
+       Moneda: [c3] [c4              ]    Fecha Ingreso: [c5                 ]
+   Tipo Orden: [c6   ] [c7           ]         Impuesto: [c8   ]% [z] Subtotal
+ Departamento: [c9   ] [c10                ]  Descuento: [c11  ]%
+    Proveedor: [c12  ] [c13                ]    Recargo: [c14   ]%
+     Atención: [c15                  ]   Solicitado Por: [c16               ]
+Orden Trabajo: [c17   ] [c18               ] Forma Pago: [c31         ] 
+   Referencia: [c19                        ]
+
+ [b|b0  |b1             ] [b2                       |b3   |b4                ]
+[a|c20 |c21            ] [c22                      |c23  |c24               |y] 
+[a|c20 |c21            ] [c22                      |c23  |c24               |y] 
+[a|c20 |c21            ] [c22                      |c23  |c24               |y] 
+[a|c20 |c21            ] [c22                      |c23  |c24               |y] 
+[a|c20 |c21            ] [c22                      |c23  |c24               |y] 
+[a|c20 |c21            ] [c22                      |c23  |c24               |y] 
+       [c32               ]                    Subtotal: [c26               ] 
+                                              Descuento: [c27               ] 
+Ingresado Por:[c30        ]                    Impuesto: [c28               ] 
+                                                   Neto: [c29               ] 
+}
+end
+TABLES
+	ordt010
+	ordt011
+ATTRIBUTES
+
+		     ---- BOTONES ----
+b   = formonly.tit_col0, WIDGET = 'BUTTON', CONFIG = 'F14';
+b0  = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+b1  = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b2  = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+b3  = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+b4  = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+
+c0  = ordt010.c10_numero_oc, REVERSE, NOENTRY, 
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c   = ordt010.c10_estado, REVERSE, NOENTRY, UPSHIFT,
+	COMMENT = 'Estado: A ACTIVAS, P APROBADAS, C CERRADAS.';
+c2  = formonly.tit_estado TYPE VARCHAR, NOENTRY;
+c3  = ordt010.c10_moneda, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENT = 'Moneda Base ó Moneda Alterna'; 
+c4  = formonly.nom_moneda TYPE VARCHAR, NOENTRY;
+c5  = ordt010.c10_fecing, REVERSE, UPSHIFT, NOENTRY;
+c6  = ordt010.c10_tipo_orden, REVERSE, INCLUDE = (0 TO 9999),
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c7  = formonly.nom_tipo_orden TYPE VARCHAR, NOENTRY;
+c8  = ordt010.c10_porc_impto, REVERSE, INCLUDE = (0 TO 99.99),
+	FORMAT = '#&.##';
+c9  = ordt010.c10_cod_depto, REVERSE, INCLUDE = (0 TO 9999),
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c10 = formonly.nom_departamento TYPE VARCHAR, NOENTRY;
+c11 = ordt010.c10_porc_descto, REVERSE, INCLUDE = (0 TO 99.99),
+	FORMAT = '#&.##';
+c12  = ordt010.c10_codprov, REVERSE, INCLUDE = (0 TO 9999),
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c13 = formonly.nom_proveedor TYPE VARCHAR, NOENTRY;
+c14 = ordt010.c10_recargo, REVERSE, INCLUDE = (0 TO 999.99),
+	FORMAT = '##&.##';
+c15 = ordt010.c10_atencion, REVERSE, UPSHIFT, SCROLL;
+c16 = ordt010.c10_solicitado, REVERSE, UPSHIFT, SCROLL;
+c19 = ordt010.c10_referencia, REVERSE, UPSHIFT, SCROLL;
+c17 = ordt010.c10_ord_trabajo, 
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENT = 'Obligatorio cuando la orden sea por bienes y servicios.';
+c18 = formonly.nom_ord_trabajo TYPE VARCHAR, NOENTRY;
+	
+a   = formonly.c11_tipo, REVERSE, OPTIONS = '-nolist', 
+	WIDGET = 'CHECK', CONFIG = 'B S acknowledge',
+	COMMENT = 'Marque si es un bien o desmarque si es un servicio.'; 
+	
+c20 = formonly.c11_cant_ped TYPE SMALLINT, REVERSE, INCLUDE = (NULL,1 TO 9999),
+	OPTIONS = '-nolist';
+c21 = ordt011.c11_codigo, REVERSE, UPSHIFT, OPTIONS = '-nolist',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c22 = ordt011.c11_descrip, REVERSE, UPSHIFT, SCROLL,
+	OPTIONS = '-nolist';
+c23 = ordt011.c11_descuento, REVERSE, INCLUDE = (0 TO 99.99),
+	OPTIONS = '-nolist', FORMAT = '#&.##';
+c24 = ordt011.c11_precio, REVERSE, FORMAT = '#,###,###,##&.####',
+	OPTIONS = '-nolist', INCLUDE = (0.01 TO 9999999999.9999);
+
+c27 = ordt010.c10_tot_dscto,  NOENTRY, FORMAT = '###,###,##&.##'; 
+c28 = ordt010.c10_tot_impto,  NOENTRY, FORMAT = '###,###,##&.##'; 
+c29 = ordt010.c10_tot_compra, REVERSE,NOENTRY, FORMAT = '#,###,###,##&.##'; 
+c30 = ordt010.c10_usuario,    NOENTRY, UPSHIFT, REVERSE; 
+c31 = ordt010.c10_tipo_pago,  REVERSE, UPSHIFT, 
+	WIDGET = 'RADIO', CONFIG = 'C Contado R Crédito'; 
+c26 = formonly.vm_subtotal TYPE DECIMAL(13,4), REVERSE, 
+	FORMAT = '###,###,##&.##';
+c32 = formonly.vm_subtotal_2 TYPE DECIMAL(13,4), REVERSE, 
+	FORMAT = '###,###,##&.##';
+c33 = formonly.tit_orden TYPE VARCHAR, REVERSE; 
+
+z   = formonly.vm_calc_iva, WIDGET='CHECK', CONFIG='S D acknowledge',
+	DEFAULT='D', COMMENT='Indique si desea calcular el impuesto sobre el subtotal o sobre el detalle.';
+
+y   = ordt011.c11_paga_iva, WIDGET='CHECK', CONFIG='S N acknowledge',
+	DEFAULT='S', COMMENT='Indique si el articulo paga iva.',
+	OPTIONS='-nolist' ;
+
+INSTRUCTIONS 
+DELIMITERS '||'
+SCREEN RECORD r_detalle[6] (c11_tipo, c11_cant_ped,  c11_codigo, c11_descrip, 
+			    c11_descuento, c11_precio, c11_paga_iva)
+

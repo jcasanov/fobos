@@ -1,0 +1,68 @@
+database diteca
+SCREEN
+{
+           Moneda: [a0] [c000           ]
+  Fecha de Inicio: [c001      ]                Fecha de Término: [c002      ]
+         Vendedor: [c003  ] [c004                                    ]
+           Modelo: [c005           ] [c006                           ]
+           Bodega: [a1] [c007                                        ]
+
+ [c2|c021      |c022|c023                    |c024           |c025           ]
+[c1|c011      |c012|c013                    |c014           |c015           ]
+[c1|c011      |c012|c013                    |c014           |c015           ]
+[c1|c011      |c012|c013                    |c014           |c015           ]
+[c1|c011      |c012|c013                    |c014           |c015           ]
+[c1|c011      |c012|c013                    |c014           |c015           ]
+[c1|c011      |c012|c013                    |c014           |c015           ]
+[c1|c011      |c012|c013                    |c014           |c015           ]
+[c1|c011      |c012|c013                    |c014           |c015           ]
+[c1|c011      |c012|c013                    |c014           |c015           ]
+[c1|c011      |c012|c013                    |c014           |c015           ]
+[c1|c011      |c012|c013                    |c014           |c015           ]
+[c1|c011      |c012|c013                    |c014           |c015           ]
+                                            Total de Venta: [c016           ]
+}
+TABLES
+veht022, veht030
+ATTRIBUTES
+a0   = FORMONLY.v30_moneda TYPE DATE NOT NULL, AUTONEXT, REVERSE, UPSHIFT,
+	REQUIRED, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c000 = FORMONLY.tit_mon_bas, NOENTRY, REVERSE, UPSHIFT;
+c001 = FORMONLY.vm_fecha_ini TYPE DATE NOT NULL, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy', COMMENTS = 'Fecha en formato: dd-mm-aaaa';
+c002 = FORMONLY.vm_fecha_ter TYPE DATE NOT NULL, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy', COMMENTS = 'Fecha en formato: dd-mm-aaaa';
+c003 = FORMONLY.v30_vendedor, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c004 = FORMONLY.tit_vendedor, NOENTRY, UPSHIFT;
+c005 = FORMONLY.v22_modelo, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c006 = FORMONLY.tit_modelo, NOENTRY, UPSHIFT;
+a1   = FORMONLY.v22_bodega, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c007 = FORMONLY.tit_bodega, NOENTRY, UPSHIFT;
+
+c2   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c021 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c022 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c023 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c024 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c025 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+c1   = veht030.v30_bodega_ori, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c011 = FORMONLY.tit_fecha_vta, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+c012 = FORMONLY.tit_siglas, NOENTRY, OPTIONS = '-nolist';
+c013 = veht030.v30_nomcli, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c014 = FORMONLY.tit_modelo_det, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c015 = FORMONLY.tit_valor_vta, NOENTRY, UPSHIFT,
+	FORMAT = '####,###,##&.##', OPTIONS = '-nolist';
+
+c016 = FORMONLY.tit_total, NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = '####,###,##&.##';
+END
+KEYS
+F5 = 'Factura'
+INSTRUCTIONS
+SCREEN RECORD rm_det[12] (v30_bodega_ori,tit_fecha_vta,tit_siglas,v30_nomcli,
+			tit_modelo_det,tit_valor_vta)

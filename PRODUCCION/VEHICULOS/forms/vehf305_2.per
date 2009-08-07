@@ -1,0 +1,38 @@
+database diteca
+SCREEN
+{
+
+  PEDIDOS DE MODELOS
+
+  [c010      |c011                               |c012      |c013            ]
+ [c000      |c001                               |c002      |c003            ]
+ [c000      |c001                               |c002      |c003            ]
+ [c000      |c001                               |c002      |c003            ]
+ [c000      |c001                               |c002      |c003            ]
+ [c000      |c001                               |c002      |c003            ]
+ [c000      |c001                               |c002      |c003            ]
+ [c000      |c001                               |c002      |c003            ]
+ [c000      |c001                               |c002      |c003            ]
+ [c000      |c001                               |c002      |c003            ]
+ [c000      |c001                               |c002      |c003            ]
+
+}
+TABLES
+veht034, veht005, cxpt001
+ATTRIBUTES
+c010 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col9, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col10, WIDGET = 'BUTTON', CONFIG = 'F18';
+
+c000 = veht034.v34_pedido, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c001 = cxpt001.p01_nomprov, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c002 = veht034.v34_fec_llegada, NOENTRY, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy', OPTIONS = '-nolist';
+c003 = veht005.v05_descri_base, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+END
+KEYS
+F5 = 'Det. Pedido'
+INSTRUCTIONS
+SCREEN RECORD rm_ped[10] (v34_pedido, p01_nomprov, v34_fec_llegada,
+			v05_descri_base)

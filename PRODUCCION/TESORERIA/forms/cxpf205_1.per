@@ -1,0 +1,48 @@
+database diteca
+screen 
+{
+
+
+    No Orden Pago: [c002       ]                  Estado: [b|c100      ]
+        Proveedor: [c004       ] [c102                                 ]
+            Banco: [c010] [c105                                        ]
+         No. Cta.: [c011           ]   
+           Moneda: [a0] [c103           ] Paridad: [c006               ]
+	  Subtipo: [c009] [c104                        ]    
+       Referencia: [c005                               ]
+
+    Valor a Pagar: [c008            ]
+
+    Ingresado Por: [c013      ]         
+ Fecha de Ingreso: [c014               ]
+}
+end
+tables
+cxpt024
+attributes
+c002 = cxpt024.p24_orden_pago, REVERSE, NOENTRY, WIDGET='FIELD_BMP',
+	CONFIG='lista.bmp F2';
+c004 = cxpt024.p24_codprov, REVERSE, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+b = cxpt024.p24_estado, NOENTRY, UPSHIFT, REVERSE;
+c005 = cxpt024.p24_referencia, UPSHIFT, REVERSE;
+a0 = cxpt024.p24_moneda, NOENTRY, REVERSE, UPSHIFT, AUTONEXT,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c009 = cxpt024.p24_subtipo, REVERSE, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c006 = cxpt024.p24_paridad, NOENTRY, REVERSE, FORMAT='#,###,##&.#########';
+c010 = cxpt024.p24_banco,   REVERSE, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c011 = cxpt024.p24_numero_cta, REVERSE, WIDGET='FIELD_BMP', 
+	CONFIG='lista.bmp F2';
+c013 = cxpt024.p24_usuario, REVERSE, NOENTRY, UPSHIFT;
+c014 = cxpt024.p24_fecing, REVERSE, NOENTRY;
+
+c008 = cxpt024.p24_total_cap, REVERSE, FORMAT='#,###,###,##&.##';
+
+c100 = formonly.n_estado,    NOENTRY;
+c102 = formonly.n_proveedor, NOENTRY;
+c103 = formonly.n_moneda,    NOENTRY;
+c104 = formonly.n_motivo,    NOENTRY;
+c105 = formonly.n_banco,     NOENTRY;
+end
+
+keys
+F5 = 'Estado Cuenta'

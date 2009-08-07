@@ -1,0 +1,31 @@
+database diteca
+screen 
+{
+
+  Item: [c001           ]
+  [c002                                ] 
+
+       [lbl1           ] [lbl2  ]
+      [c003           ] [c004  ]
+      [c003           ] [c004  ]
+      [c003           ] [c004  ]
+      [c003           ] [c004  ]
+      [c003           ] [c004  ]
+      [c003           ] [c004  ]
+      [c003           ] [c004  ]
+}
+end
+attributes
+c001 = formonly.item,   NOENTRY, REVERSE;
+c002 = formonly.n_item, NOENTRY, REVERSE;
+
+c003 = formonly.modelo	, OPTIONS='-nolist',
+		WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c004 = formonly.linea,    NOENTRY, OPTIONS='-nolist';
+
+lbl1 = formonly.bt_modelo, NOENTRY, WIDGET='BUTTON', CONFIG='F20';
+lbl2 = formonly.bt_linea,  NOENTRY, WIDGET='BUTTON', CONFIG='F21';
+end
+
+instructions
+screen record ra_modelo[7] (modelo, linea)

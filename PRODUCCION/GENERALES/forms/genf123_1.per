@@ -1,0 +1,25 @@
+                                                                                
+database diteca
+screen size 10 by 80 
+{
+
+
+   Código de Centro de Costo: [c001]
+		
+		      Nombre: [c002                         ]		
+	
+	       Ingresado Por: [c003       ]
+            Fecha de ingreso: [c004               ]
+
+
+}
+end
+tables
+gent033
+attributes
+c001 = gent033.g33_cod_ccosto, REVERSE,
+       WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = gent033.g33_nombre, REVERSE, UPSHIFT;
+c003 = gent033.g33_usuario, REVERSE, UPSHIFT, NOENTRY;
+c004 = gent033.g33_fecing, REVERSE, NOENTRY;
+end

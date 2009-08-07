@@ -1,0 +1,30 @@
+DATABASE diteca
+
+SCREEN
+{
+ FORMAS DE PAGO EN CAJA
+------------------------------
+ Tipo  Descripción
+------------------------------
+[c01] [c002                ] 
+[c01] [c002                ]
+[c01] [c002                ]
+[c01] [c002                ]
+[c01] [c002                ]
+[c01] [c002                ]
+[c01] [c002                ] 
+[c01] [c002                ] 
+[c01] [c002                ] 
+[c01] [c002                ] 
+}
+
+TABLES
+cajt001
+
+ATTRIBUTES
+c01  = j01_codigo_pago;
+c002 = j01_nombre;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_forpago[10](j01_codigo_pago, j01_nombre)

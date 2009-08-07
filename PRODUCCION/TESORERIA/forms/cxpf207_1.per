@@ -1,0 +1,67 @@
+DATABASE diteca
+SCREEN
+{
+                                                     Estado: [c][c000     ]
+   Proveedor: [c001       ] [c002                                         ]
+      Moneda: [a1] [c003           ]        Paridad: [c004                ]
+
+       [a2|c021           |c022      |c023             |c024             ]
+      [a0|c011           |c012      |c013             |c014             ]
+      [a0|c011           |c012      |c013             |c014             ]
+      [a0|c011           |c012      |c013             |c014             ]
+      [a0|c011           |c012      |c013             |c014             ]
+      [a0|c011           |c012      |c013             |c014             ]
+      [a0|c011           |c012      |c013             |c014             ]
+      [a0|c011           |c012      |c013             |c014             ]
+      [a0|c011           |c012      |c013             |c014             ]
+      [a0|c011           |c012      |c013             |c014             ]
+      [a0|c011           |c012      |c013             |c014             ]
+      [a0|c011           |c012      |c013             |c014             ]
+      [a0|c011           |c012      |c013             |c014             ]
+                                     Total Retención: [c015             ]
+
+  Referencia: [c016                               ]
+     Usuario: [c017      ]          Fecha de Ingreso: [c018               ]
+}
+TABLES
+cxpt027, cxpt020
+ATTRIBUTES
+c    = cxpt027.p27_estado, AUTONEXT, REVERSE, UPSHIFT;
+c000 = FORMONLY.tit_estado_pro, NOENTRY, UPSHIFT;
+c001 = cxpt027.p27_codprov, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = FORMONLY.tit_nombre_pro, NOENTRY, REVERSE, UPSHIFT;
+a1   = cxpt027.p27_moneda, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = FORMONLY.tit_moneda, NOENTRY, REVERSE, UPSHIFT;
+c004 = cxpt027.p27_paridad, NOENTRY, REVERSE, INCLUDE = (1 TO 999999.999999999),
+	FORMAT = '#,###,##&.#########';
+
+a2   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c021 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c022 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c023 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c024 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+
+a0   = cxpt020.p20_tipo_doc, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c011 = cxpt020.p20_num_doc, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c012 = cxpt020.p20_fecha_emi, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+c013 = cxpt020.p20_valor_fact, NOENTRY, INCLUDE = (0 TO 9999999999.99),
+	FORMAT = '#,###,###,##&.##', OPTIONS = '-nolist';
+c014 = FORMONLY.tit_valor_ret, NOENTRY, INCLUDE = (0 TO 9999999999.99),
+	FORMAT = '#,###,###,##&.##', OPTIONS = '-nolist';
+
+c015 = FORMONLY.tit_total_ret, NOENTRY, REVERSE, INCLUDE = (0 TO 9999999999.99),
+	FORMAT = '#,###,###,##&.##';
+c016 = cxpt020.p20_referencia, NOENTRY, UPSHIFT;
+c017 = cxpt027.p27_usuario, NOENTRY, REVERSE, UPSHIFT;
+c018 = cxpt027.p27_fecing, NOENTRY, REVERSE, UPSHIFT;
+END
+KEYS
+F5 = 'Retenciones'
+F6 = 'Grabar'
+F7 = 'Estado Cuenta'
+INSTRUCTIONS
+SCREEN RECORD rm_det[12] (p20_tipo_doc, p20_num_doc, p20_fecha_emi,
+			p20_valor_fact, tit_valor_ret)

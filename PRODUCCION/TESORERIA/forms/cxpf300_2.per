@@ -1,0 +1,63 @@
+DATABASE diteca
+SCREEN
+{
+ Proveedor: [c001 ] [c002                           ]    Moneda: [c03         ] 
+ Domicilio: [c003                                   ]                          
+  Teléfono: [c004      ] - [c005      ]	      Saldo a Favor: [c007            ]
+       Fax: [c006       ]		      Saldo Vencido: [c008            ]
+  					   Saldo Por Vencer: [c009            ]
+    Estado: [c011     ]                         Saldo Total: [c010            ]
+
+ [c2|c021              |c022      |c023      |c024    |c025 |c026            ]
+[c3|c031              |c032      |c033      |c034    |c035 |c036            ]
+[c3|c031              |c032      |c033      |c034    |c035 |c036            ]
+[c3|c031              |c032      |c033      |c034    |c035 |c036            ]
+[c3|c031              |c032      |c033      |c034    |c035 |c036            ]
+[c3|c031              |c032      |c033      |c034    |c035 |c036            ]
+[c3|c031              |c032      |c033      |c034    |c035 |c036            ]
+[c3|c031              |c032      |c033      |c034    |c035 |c036            ]
+[c3|c031              |c032      |c033      |c034    |c035 |c036            ]
+[c3|c031              |c032      |c033      |c034    |c035 |c036            ]
+[c3|c031              |c032      |c033      |c034    |c035 |c036            ]
+
+}
+TABLES
+cxpt001
+cxpt020
+ATTRIBUTES
+c001 = p01_codprov;
+c002 = p01_nomprov, REVERSE;
+c03  = formonly.tit_mon, REVERSE; 
+c003 = p01_direccion1;
+c004 = p01_telefono1;
+c005 = p01_telefono2;
+c006 = p01_fax1;
+c007 = formonly.tot_favor TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##';
+c008 = formonly.tot_vcdo  TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##',
+       COLOR = RED WHERE c008 > 0;
+c009 = formonly.tot_xven  TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##';
+c010 = formonly.tot_saldo TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##', 
+       REVERSE;
+c011 = formonly.tit_estprov;
+c2   = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c021 = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c022 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c023 = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c024 = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c025 = formonly.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c026 = formonly.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+c3   = p20_tipo_doc;
+c031 = formonly.num_doc;
+c032 = p20_fecha_emi,  FORMAT = 'dd-mm-yyyy';
+c033 = p20_fecha_vcto, FORMAT = 'dd-mm-yyyy';
+c034 = formonly.tit_estado, COLOR = RED WHERE c034 = 'Vencido';
+c035 = formonly.dias, FORMAT = '----&', COLOR = RED WHERE c035 < 0;
+c036 = formonly.saldo TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##'; 
+INSTRUCTIONS
+SCREEN RECORD rm_dprov[10] (p20_tipo_doc, formonly.num_doc, p20_fecha_emi,
+			   p20_fecha_vcto, formonly.tit_estado, formonly.dias,
+			   formonly.saldo)
+KEYS
+"F5"="Orden Compra"
+"F6"="Movimientos"
+"F7"="Documento"

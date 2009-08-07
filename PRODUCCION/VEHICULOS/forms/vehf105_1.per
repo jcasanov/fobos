@@ -1,0 +1,24 @@
+database diteca
+screen 
+{
+
+
+	          Código Color: [c001      ]
+
+              Descripción Base: [c002                ]
+             Descripción Extra: [c003                ]
+
+                 Ingresado Por: [c004      ]
+              Fecha de Ingreso: [c005               ]
+}
+end
+tables
+veht005
+attributes
+c001 = veht005.v05_cod_color, UPSHIFT, REVERSE, 
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c002 = veht005.v05_descri_base, REVERSE, UPSHIFT;
+c003 = veht005.v05_descri_extr, REVERSE, UPSHIFT;
+c004 = veht005.v05_usuario, REVERSE, NOENTRY, UPSHIFT;
+c005 = veht005.v05_fecing, REVERSE, NOENTRY;
+end

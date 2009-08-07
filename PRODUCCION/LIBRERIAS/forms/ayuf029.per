@@ -1,0 +1,31 @@
+DATABASE diteca
+
+SCREEN
+{
+ PROCESOS DEL SISTEMA
+-----------------------------------------------------------
+ Proceso      Nombre 		
+-----------------------------------------------------------
+[c0] [c01       ] [c002                                 ] 
+[c0] [c01       ] [c002                                 ]
+[c0] [c01       ] [c002                                 ]
+[c0] [c01       ] [c002                                 ]
+[c0] [c01       ] [c002                                 ]
+[c0] [c01       ] [c002                                 ]
+[c0] [c01       ] [c002                                 ] 
+[c0] [c01       ] [c002                                 ] 
+[c0] [c01       ] [c002                                 ] 
+[c0] [c01       ] [c002                                 ] 
+}
+
+TABLES
+gent054
+
+ATTRIBUTES
+c0   = g54_modulo;
+c01  = g54_proceso;
+c002 = g54_nombre;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_proc[10](g54_modulo, g54_proceso, g54_nombre)

@@ -1,0 +1,145 @@
+DATABASE diteca
+SCREEN TITLE ' Datos Proveedor ' 
+{
+                                                              [x001] de [y001]
+
+        Código Proveedor: [c000       ]                Estado: [c] [c0a0     ]
+        Nombre Proveedor: [c001                                    ]
+
+              Personería               Documento Identidad: [c012           ]
+             [c0b0         ]                                [c0c0           ]
+
+
+
+        Autorización SRI: [c100      ]   Serie Comprobante: [c101  ]
+
+     Dirección Domicilio: [c002                                    ]
+      Teléfono Domicilio: [c004      ]
+
+                 Usuario: [c014      ]
+        Fecha de Ingreso: [c015               ]
+}
+SCREEN TITLE 'Datos Adicionales'
+{
+                                                              [x002] de [y002]
+
+          Tipo Proveedor: [c011  ] [c018                           ]
+
+       Dirección Trabajo: [c003                                    ]
+        Teléfono Trabajo: [c005      ]
+
+                     Fax: [c006       ]
+           Fax Adicional: [c007       ]
+                 Casilla: [c008      ]
+
+ 	            País: [c009       ] [c016                     ]
+                  Ciudad: [c010       ] [c017                     ]
+
+     Representante Legal: [c013                          ]
+
+        Retiene Fuente ?: [a]   Retiene Impto. ?: [e]   Contr. Especial ?: [f]
+}
+SCREEN TITLE '    Compañía     '
+{
+                                                              [x003] de [y003]
+                Proveedor: [c124      ][c125                                 ]
+                 Contacto: [c103                          ]
+               Referencia: [c104                                    ]
+             Crédito Días: [c105  ]
+
+ Cupo Crédito Moneda base: [c106            ]           Datos de Facturación
+ Cupo Crédito Moneda Alt.: [c107            ]             Descuento: [c108 ]% 
+                                                            Recargo: [c109 ]%
+                                                        Días Demora: [c122 ] 
+                                                     Días Seguridad: [c123 ] 
+        Clase de Proveedor: [d              ]
+
+
+ Aux. Proveed. Moneda Base: [c112        ] [c118                             ]
+ Aux. Prov. Moneda Alterna: [c113        ] [c119                             ]
+ Aux. Anticipo Moneda Base: [c114        ] [c120                             ]
+ Aux. Antic. Moneda Alter.: [c115        ] [c121                             ]
+}
+TABLES
+cxpt001, cxpt002
+ATTRIBUTES
+c000 = cxpt001.p01_codprov, AUTONEXT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'El sistema asigna código automáticamente';
+c001 = cxpt001.p01_nomprov, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Indicar el nombre del proveedor';
+c002 = cxpt001.p01_direccion1, AUTONEXT, REVERSE, UPSHIFT;
+c003 = cxpt001.p01_direccion2, AUTONEXT, UPSHIFT;
+c004 = cxpt001.p01_telefono1, AUTONEXT, REVERSE, UPSHIFT;
+c005 = cxpt001.p01_telefono2, AUTONEXT, UPSHIFT;
+c006 = cxpt001.p01_fax1, AUTONEXT, UPSHIFT;
+c007 = cxpt001.p01_fax2, AUTONEXT, UPSHIFT;
+c008 = cxpt001.p01_casilla, AUTONEXT, UPSHIFT;
+c009 = cxpt001.p01_pais, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c010 = cxpt001.p01_ciudad, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c011 = cxpt001.p01_tipo_prov, AUTONEXT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c0b0 = cxpt001.p01_personeria, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'RADIO', CONFIG = 'N Natural J Jurídica', DEFAULT = 'N';
+c0c0 = cxpt001.p01_tipo_doc, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'RADIO', CONFIG = 'C Cédula P Pasaporte R Ruc', DEFAULT = 'C';
+c012 = cxpt001.p01_num_doc, REVERSE, FORMAT = '###############';
+c013 = cxpt001.p01_rep_legal, AUTONEXT, UPSHIFT;
+a    = cxpt001.p01_ret_fuente, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S';
+e    = cxpt001.p01_ret_impto, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S';
+f    = cxpt001.p01_cont_espe, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S',
+	COMMENTS = 'Contribuyente Especial';
+c014 = cxpt001.p01_usuario, NOENTRY, UPSHIFT, REVERSE;
+c015 = cxpt001.p01_fecing, NOENTRY, UPSHIFT, REVERSE;
+c    = FORMONLY.tit_est, NOENTRY, REVERSE, UPSHIFT;
+c0a0 = FORMONLY.tit_estado_pro, NOENTRY, UPSHIFT;
+c016 = FORMONLY.tit_pais, NOENTRY, REVERSE, UPSHIFT;
+c017 = FORMONLY.tit_ciudad, NOENTRY, REVERSE, UPSHIFT;
+c018 = FORMONLY.tit_tipo_pro, NOENTRY, REVERSE, UPSHIFT;
+
+c124 = FORMONLY.tit_codigo_pro, NOENTRY, REVERSE;
+c125 = FORMONLY.tit_nombre_pro, NOENTRY, REVERSE, UPSHIFT;
+c103 = cxpt002.p02_contacto, AUTONEXT, UPSHIFT;
+c104 = cxpt002.p02_referencia, AUTONEXT, UPSHIFT;
+c105 = cxpt002.p02_credit_dias, AUTONEXT, REVERSE, INCLUDE = (0 TO 65536);
+c106 = cxpt002.p02_cupocred_mb, AUTONEXT, INCLUDE = (0 TO 9999999999.99),
+	REVERSE, FORMAT = '#,###,###,##&.##';
+c107 = cxpt002.p02_cupocred_ma, NOENTRY, REVERSE, FORMAT = '#,###,###,##&.##';
+c108 = cxpt002.p02_descuento, AUTONEXT, REVERSE, 
+	INCLUDE = (0 TO 99.99), FORMAT = '#&.##';
+c109 = cxpt002.p02_recargo, AUTONEXT, REVERSE,
+	INCLUDE = (0 TO 99.99), FORMAT = '#&.##';
+c122 = cxpt002.p02_dias_demora, AUTONEXT, REVERSE, UPSHIFT,
+	INCLUDE = (0 TO 9999);
+c123 = cxpt002.p02_dias_seguri, AUTONEXT, REVERSE, UPSHIFT,
+	INCLUDE = (0 TO 9999);
+d    = cxpt002.p02_int_ext, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'RADIO', CONFIG = 'I Interno E Externo', DEFAULT = 'E';
+c112 = cxpt002.p02_aux_prov_mb, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c113 = cxpt002.p02_aux_prov_ma, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c114 = cxpt002.p02_aux_ant_mb, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c115 = cxpt002.p02_aux_ant_ma, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c118 = FORMONLY.tit_pro_mb, NOENTRY, REVERSE, UPSHIFT;
+c119 = FORMONLY.tit_pro_ma, NOENTRY, REVERSE, UPSHIFT;
+c120 = FORMONLY.tit_ant_mb, NOENTRY, REVERSE, UPSHIFT;
+c121 = FORMONLY.tit_ant_ma, NOENTRY, REVERSE, UPSHIFT;
+
+c100 = cxpt001.p01_num_aut,    UPSHIFT;
+c101 = cxpt001.p01_serie_comp, UPSHIFT;
+
+x001 = FORMONLY.vm_row_current1, NOENTRY;
+y001 = FORMONLY.vm_num_rows1, NOENTRY;
+x002 = FORMONLY.vm_row_current2, NOENTRY;
+y002 = FORMONLY.vm_num_rows2, NOENTRY;
+x003 = FORMONLY.vm_row_current3, NOENTRY;
+y003 = FORMONLY.vm_num_rows3, NOENTRY;
+END

@@ -1,0 +1,50 @@
+
+DATABASE DITECA
+SCREEN 
+
+{
+
+			     Moneda: [c1] [c020             ]
+     	     Tipo Documento a Favor: [c2] [c021             ]
+
+   		    Area de Negocio: [c3  ] [c022             ]		
+			    Cliente: [c004] [c023             ]
+	     
+		      Fecha Inicial: [c005      ]  
+            	        Fecha Final: [c006      ]
+
+     			      Saldo: [c007       ]   Origen: [c008          ]
+
+
+
+}
+end
+
+attributes
+c1   = formonly.moneda,		REVERSE, UPSHIFT, AUTONEXT, 
+				WIDGET = 'FIELD_BMP',
+				CONFIG = 'lista.bmp F2';
+c2   = formonly.documento,	UPSHIFT, WIDGET = 'FIELD_BMP',
+				CONFIG = 'lista.bmp F2';
+c3   = formonly.area,		WIDGET = 'FIELD_BMP',
+				CONFIG = 'lista.bmp F2';   
+c004 = formonly.cliente,	WIDGET = 'FIELD_BMP',
+				CONFIG = 'lista.bmp F2';
+c005 = formonly.inicial, 	REVERSE, FORMAT = 'dd-mm-yyyy',
+				COMMENT = 'Ingrese fecha en formato: dd-mm-aaaa';
+c006 = formonly.final, 		REVERSE, FORMAT = 'dd-mm-yyyy',
+				COMMENT = 'Ingrese fecha en formato: dd-mm-aaaa';
+--c007 = formonly.saldo, 		FORMAT = '##,###,##&.##';
+c007 = formonly.saldo,		WIDGET = 'RADIO',
+				CONFIG = 'S Saldo_>_0 T Todo', DEFAULT = 'S';
+--c008 = formonly.origen_doc,	WIDGET = 'COMBO', CONFIG = "lines=3", 
+--			      INCLUDE =("Manual    ","Automático","Todos     ");
+c008 = formonly.origen_doc,	WIDGET = 'RADIO', CONFIG = "lines=3", AUTONEXT,
+				CONFIG = 'M Manual A Automático T Todos', 
+				DEFAULT = 'M';
+c020 = formonly.desc_moneda, 	REVERSE, UPSHIFT;
+c021 = formonly.desc_documento, UPSHIFT;
+c022 = formonly.desc_area, 	UPSHIFT;
+c023 = formonly.desc_cliente,	UPSHIFT;
+END
+

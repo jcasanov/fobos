@@ -1,0 +1,46 @@
+
+DATABASE diteca
+SCREEN
+{
+
+           Moneda: [c0] [c1             ]
+
+            Línea: [c7   ] [c8                  ]
+
+     Tipo de O.T.: [c4] [c5                                     ]
+
+   Desde la Fecha: [c2        ]      Hasta la Fecha: [c3        ]
+
+           Estado: [c6           ]             Tipo: [c006         ]
+
+
+
+
+}
+TABLES
+	talt023, talt004
+ATTRIBUTES
+
+c0  = talt023.t23_moneda, REVERSE, UPSHIFT, AUTONEXT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2'; 
+c1  = formonly.nom_mon, NOENTRY;
+c2  = formonly.fecha_desde TYPE DATE, REQUIRED, REVERSE, FORMAT = 'dd-mm-yyyy';
+c3  = formonly.fecha_hasta TYPE DATE, REQUIRED, REVERSE, FORMAT = 'dd-mm-yyyy';
+c4  = talt023.t23_tipo_ot, REVERSE, UPSHIFT, AUTONEXT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2'; 
+c5  = formonly.nom_tipo_ot, NOENTRY;
+
+-- UBICADO POR NPC EL 14-08-2002 para solicitar el estado en la forma
+c6  = talt023.t23_estado, REVERSE, UPSHIFT, AUTONEXT,
+	WIDGET = 'RADIO', CONFIG = 'A Activas C Cerradas F Facturadas D Devueltas', DEFAULT = 'A';
+c7  = talt004.t04_linea, REVERSE, UPSHIFT, AUTONEXT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2'; 
+c8  = formonly.t01_nombre, NOENTRY;
+--
+
+-- Incluido por NPC el 06-09-2002
+c006 = talt023.t23_cont_cred, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'RADIO', CONFIG = 'C Contado R Crédito T TODOS', DEFAULT = 'T',
+	COMMENTS = 'Indicar si el tipo de orden de trabajo débito o crédito';
+--
+END

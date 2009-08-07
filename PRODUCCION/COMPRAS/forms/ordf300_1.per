@@ -1,0 +1,70 @@
+
+DATABASE diteca
+SCREEN
+{
+   Orden de Compra:[c0    ] 		           Estado:[c1           ]
+    Desde la Fecha:[c2        ]    
+    Hasta la Fecha:[c3        ]
+         Proveedor:[c4    ] [c7                           ]      
+      Departamento:[c5    ] [c8                           ]
+     Tipo de Orden:[c6    ] [c9                           ]
+
+  [b0    |b |b1                                 |b2        |b3              ]
+ [c10   |c |c11                                |c12       |c13             ]
+ [c10   |c |c11                                |c12       |c13             ]
+ [c10   |c |c11                                |c12       |c13             ]
+ [c10   |c |c11                                |c12       |c13             ]
+ [c10   |c |c11                                |c12       |c13             ]
+ [c10   |c |c11                                |c12       |c13             ]
+ [c10   |c |c11                                |c12       |c13             ]
+ [c10   |c |c11                                |c12       |c13             ]
+ [c10   |c |c11                                |c12       |c13             ]
+ [c10   |c |c11                                |c12       |c13             ]
+ [c10   |c |c11                                |c12       |c13             ]
+
+}
+TABLES
+	ordt010
+
+ATTRIBUTES
+
+b0  = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+b   = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b1  = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+b2  = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+b3  = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+
+c0  = FORMONLY.vm_numero_oc TYPE INTEGER, 
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c1  = ordt010.c10_estado, REVERSE, WIDGET = 'RADIO',
+	CONFIG = 'A Activas P Aprobadas C Cerradas'; 
+c2  = FORMONLY.vm_fecha_desde TYPE DATE, AUTONEXT, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy', COMMENTS = 'Fecha en formato: dd-mm-aaaa';
+c3  = FORMONLY.vm_fecha_hasta TYPE DATE, AUTONEXT, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy', COMMENTS = 'Fecha en formato: dd-mm-aaaa';
+c4  = FORMONLY.vm_proveedor,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c7  = FORMONLY.nom_proveedor, NOENTRY;
+c5  = FORMONLY.vm_depto, 
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c8  = FORMONLY.nom_depto, NOENTRY;
+c6  = FORMONLY.vm_tipo_orden, 
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c9  = FORMONLY.nom_tipo, NOENTRY;
+
+c10 = ordt010.c10_numero_oc, OPTIONS = '-nolist';
+c   = ordt010.c10_moneda,    OPTIONS = '-nolist';
+c11 = FORMONLY.proveedor TYPE VARCHAR, OPTIONS = '-nolist';
+c12 = FORMONLY.fecha     TYPE DATE, FORMAT = 'dd-mm-yyyy', OPTIONS = '-nolist';
+
+c13 = ordt010.c10_tot_compra, FORMAT = '#,###,###,##&.##',
+	OPTIONS = '-nolist';
+
+END
+
+KEYS 
+	F6 = 'Ver Orden'
+
+INSTRUCTIONS
+SCREEN RECORD r_detalle[11] (c10_numero_oc, c10_moneda, proveedor, 
+			     fecha, c10_tot_compra)

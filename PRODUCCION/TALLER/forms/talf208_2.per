@@ -1,0 +1,78 @@
+DATABASE diteca
+SCREEN
+{
+
+           Orden: [c000  ]   Modelo: [c001                 ]     [c][c002   ]
+         Cliente: [c003                                    ]   Línea: [c004 ]
+ Fec. Vcto. Pago: [c005      ]                Plazo Total: [c006 ] días
+ Días Dividendos: [c007 ]                     Total Orden: [c008            ] 
+       No. Pagos: [c009]                    Total Crédito: [c010            ]
+         Interés: [c011 ]%                 Total Anticípo: [c012            ]
+
+       [c013|c014      |c015            |c016          |c017            ]
+      [c100|c101      |c102            |c103          |c104            ]
+      [c100|c101      |c102            |c103          |c104            ]
+      [c100|c101      |c102            |c103          |c104            ]
+      [c100|c101      |c102            |c103          |c104            ]
+      [c100|c101      |c102            |c103          |c104            ]
+      [c100|c101      |c102            |c103          |c104            ]
+      [c100|c101      |c102            |c103          |c104            ]
+                      ------------------------------------------------- 
+             Totales: [c105            |c106          |c107            ]
+}
+TABLES
+talt023,
+talt025,
+talt026
+ATTRIBUTES
+c000 = talt023.t23_orden, AUTONEXT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = FORMONLY.tit_modelo, NOENTRY, REVERSE, UPSHIFT;
+c002 = FORMONLY.tit_estado, NOENTRY, UPSHIFT;
+c003 = FORMONLY.tit_cliente, NOENTRY, REVERSE, UPSHIFT;
+c004 = FORMONLY.tit_linea, NOENTRY, REVERSE, UPSHIFT;
+c005 = FORMONLY.vm_fec_vcto, AUTONEXT, REVERSE, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Fecha de Vencimiento del primer pago dd-mm-aaaa';
+c006 = talt025.t25_plazo, NOENTRY, REVERSE, INCLUDE = (0 TO 9999),
+	COMMENTS = 'Número de días que se da a un cliente para pagar el saldo';
+c007 = 	FORMONLY.vm_plazo_dia, AUTONEXT, REVERSE, INCLUDE = (0 TO 999),
+	COMMENTS = 'Número de días que se da entre un pago y otro';
+c008 = FORMONLY.tit_neto_cre, REVERSE, NOENTRY, FORMAT = '#,###,###,##&.##';
+c009 = talt025.t25_dividendos, AUTONEXT, REVERSE, INCLUDE = (0 TO 999),
+	COMMENTS = 'Número de dividendos del crédito, digíte cero si quiere eliminar el crédito';
+c010 = talt025.t25_valor_cred, NOENTRY, REVERSE,
+	INCLUDE = (0.01 TO 99999999999.99), FORMAT = '#,###,###,##&.##';
+c011 = talt025.t25_interes, AUTONEXT, REVERSE, INCLUDE = (0 TO 99.99),
+	FORMAT = '#&.##', COMMENTS = 'Interés que se carga por financiamiento';
+c012 = talt025.t25_valor_ant, NOENTRY, REVERSE, INCLUDE = (0 TO 999999999.99),
+	FORMAT = '###,###,##&.##';
+c    = FORMONLY.tit_est, NOENTRY, REVERSE, UPSHIFT;
+
+c013 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c014 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c015 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c016 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c017 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+
+c100 = talt026.t26_dividendo, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c101 = talt026.t26_fec_vcto, AUTONEXT, UPSHIFT, OPTIONS = '-nolist',
+	FORMAT = 'dd-mm-yyyy', COMMENTS = 'Fecha de Vencimiento del pago dd-mm-aaaa';
+c102 = talt026.t26_valor_cap, AUTONEXT, OPTIONS = '-nolist',
+	INCLUDE = (0.01 TO 99999999999.99), FORMAT = '#,###,###,##&.##';
+c103 = talt026.t26_valor_int, NOENTRY, OPTIONS = '-nolist',
+	INCLUDE = (0.01 TO 999999999.99), FORMAT = '###,###,##&.##';
+c104 = FORMONLY.tit_valor_tot, NOENTRY, OPTIONS = '-nolist',
+	INCLUDE = (0.01 TO 99999999999.99), FORMAT = '#,###,###,##&.##';
+c105 = FORMONLY.tit_total_cap, NOENTRY, REVERSE,
+	INCLUDE = (0 TO 99999999999.99), FORMAT = '#,###,###,##&.##';
+c106 = FORMONLY.tit_total_int, NOENTRY, REVERSE,
+        INCLUDE = (0 TO 999999999.99), FORMAT = '###,###,##&.##';
+c107 = FORMONLY.tit_total_gen, NOENTRY, REVERSE,
+        INCLUDE = (0 TO 99999999999.99), FORMAT = '#,###,###,##&.##';
+
+END
+KEYS
+F6 = 'Orden de Trabajo'
+INSTRUCTIONS
+SCREEN RECORD rm_ta[7] (t26_dividendo,t26_fec_vcto,t26_valor_cap,t26_valor_int,
+			tit_valor_tot)

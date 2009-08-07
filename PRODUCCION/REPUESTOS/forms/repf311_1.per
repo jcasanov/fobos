@@ -1,0 +1,74 @@
+DATABASE diteca
+SCREEN
+{
+
+                    Bodega: [c0]     [c1                            ]
+	 Ultima Venta <= a: [c2        ]        [c] Sin Ventas
+
+               Línea Venta: [c3   ]  [c4                            ]
+	Indice de Rotaci¢n: [c5]     [c6                            ]
+          Tipo de Art¡culo: [c7   ]  [c8                            ]
+
+ [b0             |b1                  |b2        |b3        |b4   |b5        ]
+[f0             |f1                  |f2        |f3        |f4   |f5        ]
+[f0             |f1                  |f2        |f3        |f4   |f5        ]
+[f0             |f1                  |f2        |f3        |f4   |f5        ]
+[f0             |f1                  |f2        |f3        |f4   |f5        ]
+[f0             |f1                  |f2        |f3        |f4   |f5        ]
+[f0             |f1                  |f2        |f3        |f4   |f5        ]
+[f0             |f1                  |f2        |f3        |f4   |f5        ]
+[f0             |f1                  |f2        |f3        |f4   |f5        ]
+[f0             |f1                  |f2        |f3        |f4   |f5        ]
+[f0             |f1                  |f2        |f3        |f4   |f5        ]
+[f0             |f1                  |f2        |f3        |f4   |f5        ]
+
+
+}
+TABLES
+	rept010, rept011
+
+ATTRIBUTES
+c0  = formonly.vm_bodega, AUTONEXT, UPSHIFT, REVERSE,
+        WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c1  = FORMONLY.nom_bodega, NOENTRY;
+
+c2  = formonly.vm_fecha TYPE DATE, REVERSE, REQUIRED, FORMAT='dd-mm-yyyy';
+
+c3  = formonly.vm_linea TYPE VARCHAR, UPSHIFT, WIDGET = 'FIELD_BMP',
+	CONFIG = 'lista.bmp F2';
+c4  = formonly.nom_linea, NOENTRY;
+
+c5  = formonly.vm_rotacion TYPE VARCHAR, UPSHIFT, WIDGET = 'FIELD_BMP', 
+	CONFIG = 'lista.bmp F2';
+c6  = formonly.nom_rotacion, NOENTRY;
+
+c7  = formonly.vm_tipo TYPE SMALLINT, WIDGET = 'FIELD_BMP', 
+	CONFIG = 'lista.bmp F2';
+c8  = formonly.nom_tipo, NOENTRY;
+
+c    = FORMONLY.sin_ventas, AUTONEXT, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT='N';
+
+b0  = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+b1  = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b2  = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+b3  = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+b4  = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+b5  = formonly.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+f0  = r10_codigo, OPTIONS = '-nolist';
+f1  = r10_nombre, OPTIONS = '-nolist';
+f2  = formonly.fec_ult_ing TYPE DATE, FORMAT = 'dd-mm-yyyy',
+	 OPTIONS = '-nolist';
+f3  = formonly.fec_ult_vta TYPE DATE, FORMAT = 'dd-mm-yyyy',
+	 OPTIONS = '-nolist';
+f4  = r11_stock_act, OPTIONS = '-nolist';
+f5  = rept010.r10_costo_mb, NOENTRY, FORMAT='###,##&.&&', OPTIONS='-nolist';
+ 
+INSTRUCTIONS
+SCREEN RECORD r_detalle[11] (r10_codigo,  r10_nombre, fec_ult_ing, 
+			     fec_ult_vta, r11_stock_act, r10_costo_mb)
+KEYS
+'F5' = 'Ver Kardex'
+
+END

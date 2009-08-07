@@ -1,0 +1,41 @@
+database diteca
+screen 
+{
+
+------------------------------------------------------------------------------
+Rubro     Fecha   Mon.      Paridad           Valor       Valor Mon. Liq.  
+------------------------------------------------------------------------------
+[c004] [c006      |a1] [c008            |c009            |c010            ][c]
+[c004] [c006      |a1] [c008            |c009            |c010            ][c]
+[c004] [c006      |a1] [c008            |c009            |c010            ][c]
+[c004] [c006      |a1] [c008            |c009            |c010            ][c]
+[c004] [c006      |a1] [c008            |c009            |c010            ][c]
+[c004] [c006      |a1] [c008            |c009            |c010            ][c]
+[c004] [c006      |a1] [c008            |c009            |c010            ][c]
+[c004] [c006      |a1] [c008            |c009            |c010            ][c]
+------------------------------------------------------------------------------
+Rubro: [c012           ]                         Total: [c011             ]
+
+}
+end
+tables
+rept030
+attributes
+c004 = rept030.r30_codrubro, OPTIONS='-nolist',
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c006 = rept030.r30_fecha, NOENTRY, OPTIONS='-nolist',
+	FORMAT='dd-mm-yyyy', COMMENT='Ingrese fecha en formato: dd-mm-aaaa';
+a1   = rept030.r30_moneda, UPSHIFT, OPTIONS='-nolist', AUTONEXT,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c008 = rept030.r30_paridad, FORMAT='#,###,##&.######', OPTIONS='-nolist';
+c009 = rept030.r30_valor, FORMAT='#,###,###,##&.##',   OPTIONS='-nolist';
+c010 = formonly.valor_ml, FORMAT='#,###,###,##&.##',   OPTIONS='-nolist';
+c    = formonly.check, DEFAULT='N', OPTIONS='-nolist',
+	WIDGET='CHECK', CONFIG='S N acknowledge';
+c012 = formonly.n_rubro, NOENTRY; 
+c011 = formonly.total_cargos, NOENTRY, FORMAT='#,###,###,##&.##'; 
+end
+
+
+INSTRUCTIONS
+SCREEN RECORD ra_rubros[8] (r30_codrubro, r30_fecha, r30_moneda, r30_paridad, r30_valor, valor_ml, check)

@@ -1,0 +1,28 @@
+database diteca
+screen 
+{
+
+          
+                      Entidad: [a0] [c004                     ]
+
+            Código Componente: [c000  ]
+
+            Nombre Componente: [c001                          ]
+
+                Ingresado Por: [c002      ]
+             Fecha de Ingreso: [c003               ]
+
+}
+end
+tables
+gent012
+attributes
+a0 = gent012.g12_tiporeg, REVERSE, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c000 = gent012.g12_subtipo, REVERSE, NOENTRY,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = gent012.g12_nombre, UPSHIFT, REVERSE;
+c002 = gent012.g12_usuario, UPSHIFT, REVERSE, NOENTRY;
+c003 = gent012.g12_fecing, UPSHIFT, REVERSE, NOENTRY;
+c004 = formonly.nom_ent, UPSHIFT, NOENTRY;
+end

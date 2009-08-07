@@ -1,0 +1,25 @@
+                                                                                
+database diteca
+screen size 10 by 80 
+{
+
+
+	      Código de Zona: [c001]
+		
+		      Nombre: [c002                         ]		
+	
+	       Ingresado Por: [c003       ]
+            Fecha de ingreso: [c004               ]
+
+
+}
+end
+tables
+gent032
+attributes
+c001 = gent032.g32_zona_venta, REVERSE,
+       WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = gent032.g32_nombre, REVERSE, UPSHIFT;
+c003 = gent032.g32_usuario, REVERSE, UPSHIFT, NOENTRY;
+c004 = gent032.g32_fecing, REVERSE, NOENTRY;
+end

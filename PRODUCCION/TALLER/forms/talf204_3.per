@@ -1,0 +1,29 @@
+DATABASE diteca
+SCREEN
+{
+DETALLE DE ORDENES DE COMPRA CARGADOS A LA O.T.: [c001    ]
+
+ [x1|c021  |c022      |c023                                   |c024          ]
+[c3|c004  |c005      |c006                                   |c008          ]
+[c3|c004  |c005      |c006                                   |c008          ]
+[c3|c004  |c005      |c006                                   |c008          ]
+[c3|c004  |c005      |c006                                   |c008          ]
+[c3|c004  |c005      |c006                                   |c008          ]
+[c3|c004  |c005      |c006                                   |c008          ]
+					              Total: [c014          ]
+}
+ATTRIBUTES
+c001 = formonly.num_ot, REVERSE;
+x1   = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c021 = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c022 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c023 = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c024 = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c3   = formonly.estado;
+c004 = formonly.orden_compra;
+c005 = formonly.fecha TYPE DATE, FORMAT = 'dd-mm-yyyy';
+c006 = formonly.descripcion;
+c008 = formonly.subtotal TYPE DECIMAL(12,2), FORMAT = '---,---,--&.##';
+c014 = formonly.tot_neto TYPE DECIMAL(12,2), FORMAT = '###,###,##&.##', REVERSE;
+INSTRUCTIONS
+SCREEN RECORD ra_oc[6] (estado, orden_compra, fecha, descripcion, subtotal)

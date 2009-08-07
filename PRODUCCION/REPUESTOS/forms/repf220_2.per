@@ -1,0 +1,25 @@
+DATABASE diteca
+screen 
+{
+
+  Peso Total: [c000            ]
+
+   Total FOB: [c001            ]
+  Factor FOB: [c002            ]
+              ------------------
+   Nuevo FOB: [c003            ]
+
+ Landed Cost: [c004            ]
+
+}
+tables
+rept021
+
+attributes
+c000 = formonly.tot_peso TYPE DECIMAL(11,3), REVERSE, NOENTRY, 
+	FORMAT = '###,###,##&.###';
+c001 = formonly.total_fob TYPE DECIMAL(11,2), REVERSE, NOENTRY, 
+	FORMAT = '###,###,##&.##';
+c002 = rept021.r21_factor_fob, FORMAT ='#&.##', INCLUDE=(NULL, 0 TO 99.99);
+c003 = formonly.nuevo_fob, FORMAT='###,###,##&.##', NOENTRY;
+c004 = rept021.r21_factor_prec, FORMAT='#&.####', INCLUDE=(NULL, 0 TO 99.9999);

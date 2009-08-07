@@ -1,0 +1,30 @@
+DATABASE diteca
+
+SCREEN
+{
+ TRABAJADORES
+----------------------------------------------------
+ Código  Nombres
+----------------------------------------------------
+[c01   ] [c002                                    ] 
+[c01   ] [c002                                    ]
+[c01   ] [c002                                    ]
+[c01   ] [c002                                    ]
+[c01   ] [c002                                    ]
+[c01   ] [c002                                    ]
+[c01   ] [c002                                    ] 
+[c01   ] [c002                                    ] 
+[c01   ] [c002                                    ] 
+[c01   ] [c002                                    ] 
+}
+
+TABLES
+rolt030
+
+ATTRIBUTES
+c01 = n30_cod_trab;
+c002 = n30_nombres;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_trab[10](n30_cod_trab, n30_nombres)

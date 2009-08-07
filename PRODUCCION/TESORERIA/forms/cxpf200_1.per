@@ -1,0 +1,96 @@
+DATABASE diteca
+SCREEN TITLE 'Datos Documento'
+{
+
+                                                             [x001] de [y001]
+       Código Proveedor: [c000       ]
+       Nombre Proveedor: [c001                                              ]
+
+      Tipo de Documento: [a0] [c002           ]
+       Número Documento: [c003           ]
+              Dividendo: [c004  ]
+
+             Referencia: [c007                               ]
+
+       Fecha de Emisión: [c008      ]
+   Fecha de Vencimiento: [c009      ]
+        Tasa de Interés: [c010  ] %
+           Tasa de Mora: [c011  ] %
+}
+SCREEN TITLE '    Valores    '
+{
+
+                                                             [x002] de [y002]
+                 Moneda: [a1] [c012           ]
+      Paridad Cambiaria: [c013                ]
+
+          Valor Capital: [c014             ]  Saldo Cap.: [c016             ]
+          Valor Interés: [c015             ]  Saldo Int.: [c017             ]
+          Valor Factura: [c028             ]
+    Porcentaje Impuesto: [c029 ] %        Valor Impuesto: [c030             ]
+
+           Departamento: [c025  ] [c026                          ]
+                Cartera: [c018  ] [c019                          ]
+        Número de Orden: [c020  ]
+                 Origen: [c022             ]
+
+                Usuario: [c023      ]
+       Fecha de Ingreso: [c024               ]
+}
+TABLES
+cxpt020
+ATTRIBUTES
+c000 = cxpt020.p20_codprov, AUTONEXT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = FORMONLY.tit_nombre_pro, NOENTRY, REVERSE, UPSHIFT;
+a0   = cxpt020.p20_tipo_doc, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = FORMONLY.tit_tipo_doc, NOENTRY, REVERSE, UPSHIFT;
+c003 = cxpt020.p20_num_doc, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Numeración automática en Notas Débito. Ingreso manual otro No. Doc.';
+c004 = cxpt020.p20_dividendo, AUTONEXT, REVERSE, FORMAT = '###&&',
+	INCLUDE = (01 TO 65536);
+c007 = cxpt020.p20_referencia, AUTONEXT, UPSHIFT;
+c008 = cxpt020.p20_fecha_emi, AUTONEXT, REVERSE, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+        COMMENTS = 'Ingrese fecha en formato: dd-mm-yyyy';
+c009 = cxpt020.p20_fecha_vcto, AUTONEXT, REVERSE,UPSHIFT, FORMAT = 'dd-mm-yyyy',
+        COMMENTS = 'Ingrese fecha en formato: dd-mm-yyyy';
+c010 = cxpt020.p20_tasa_int, AUTONEXT, REVERSE, FORMAT = '#&.##';
+c011 = cxpt020.p20_tasa_mora, AUTONEXT, REVERSE, FORMAT = '#&.##';
+
+a1   = cxpt020.p20_moneda, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c012 = FORMONLY.tit_mon_bas, NOENTRY, REVERSE, UPSHIFT;
+c013 = cxpt020.p20_paridad, NOENTRY, REVERSE, INCLUDE = (1 TO 999999.999999999),
+	FORMAT = '#,###,##&.#########';
+c014 = cxpt020.p20_valor_cap, AUTONEXT, REVERSE, INCLUDE = (0 TO 9999999999.99),
+	FORMAT = '#,###,###,##&.##';
+c015 = cxpt020.p20_valor_int, AUTONEXT, REVERSE, INCLUDE = (0 TO 9999999999.99),
+	FORMAT = '#,###,###,##&.##';
+c016 = cxpt020.p20_saldo_cap, NOENTRY, REVERSE,	FORMAT = '#,###,###,##&.##';
+c017 = cxpt020.p20_saldo_int, NOENTRY, REVERSE, FORMAT = '#,###,###,##&.##';
+c028 = cxpt020.p20_valor_fact, AUTONEXT, REVERSE,INCLUDE = (0 TO 9999999999.99),
+	FORMAT = '#,###,###,##&.##';
+c029 = cxpt020.p20_porc_impto, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = (0 TO 99.99), FORMAT = '#&.##';
+c030 = cxpt020.p20_valor_impto, NOENTRY, REVERSE, UPSHIFT,
+	INCLUDE = (0 TO 999999999.99), FORMAT = '###,###,##&.##';
+c018 = cxpt020.p20_cartera, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c019 = FORMONLY.tit_cartera, NOENTRY, REVERSE, UPSHIFT;
+c020 = cxpt020.p20_numero_oc, NOENTRY, UPSHIFT;
+c022 = cxpt020.p20_origen, NOENTRY, REVERSE, UPSHIFT,
+	WIDGET = 'RADIO', CONFIG = 'M Manual A Automático', DEFAULT = 'M';
+c023 = cxpt020.p20_usuario, NOENTRY, REVERSE, UPSHIFT;
+c024 = cxpt020.p20_fecing, NOENTRY, REVERSE, UPSHIFT;
+
+c025 = cxpt020.p20_cod_depto, {REVERSE,} WIDGET='FIELD_BMP', 
+	CONFIG='lista.bmp F2';
+c026 = formonly.n_depto, NOENTRY;
+
+x001 = FORMONLY.vm_num_current1, NOENTRY;
+y001 = FORMONLY.vm_num_rows1, NOENTRY;
+x002 = FORMONLY.vm_num_current2, NOENTRY;
+y002 = FORMONLY.vm_num_rows2, NOENTRY;
+END

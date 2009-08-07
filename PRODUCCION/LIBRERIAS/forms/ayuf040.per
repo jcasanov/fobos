@@ -1,0 +1,30 @@
+DATABASE diteca
+
+SCREEN
+{
+ COBRADORES
+----------------------------------------------------
+ Código   Nombres
+----------------------------------------------------
+[c01   ] [c002                                    ] 
+[c01   ] [c002                                    ]
+[c01   ] [c002                                    ]
+[c01   ] [c002                                    ]
+[c01   ] [c002                                    ]
+[c01   ] [c002                                    ]
+[c01   ] [c002                                    ] 
+[c01   ] [c002                                    ] 
+[c01   ] [c002                                    ] 
+[c01   ] [c002                                    ] 
+}
+
+TABLES
+cxct005
+
+ATTRIBUTES
+c01 = z05_codigo;
+c002 = z05_nombres;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_cobra[10](z05_codigo, z05_nombres)

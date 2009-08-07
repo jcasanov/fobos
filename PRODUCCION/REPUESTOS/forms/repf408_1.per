@@ -1,0 +1,21 @@
+
+DATABASE diteca
+SCREEN
+{
+
+         No Liquidación: [c0     ]     Fecha: [c1                 ]
+	
+   	      Proveedor: [c2     |c3                              ]
+
+}
+TABLES
+	rept028
+ATTRIBUTES
+
+c0  = rept028.r28_numliq, REVERSE, 
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c1  = rept028.r28_fecing,  REVERSE, NOENTRY;
+c2  = rept028.r28_codprov, REVERSE, NOENTRY;
+c3  = formonly.nom_prov, REVERSE, NOENTRY;
+
+END

@@ -1,0 +1,30 @@
+DATABASE diteca
+
+SCREEN
+{
+ DEPARTAMENTOS
+-----------------------------------
+ Código	  Nombre 		
+-----------------------------------
+[c01] [c002                    ] 
+[c01] [c002                    ]
+[c01] [c002                    ]
+[c01] [c002                    ]
+[c01] [c002                    ]
+[c01] [c002                    ]
+[c01] [c002                    ] 
+[c01] [c002                    ] 
+[c01] [c002                    ] 
+[c01] [c002                    ] 
+}
+
+TABLES
+gent034
+
+ATTRIBUTES
+c01 = g34_cod_depto;
+c002 = g34_nombre;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_depto[10](g34_cod_depto, g34_nombre)

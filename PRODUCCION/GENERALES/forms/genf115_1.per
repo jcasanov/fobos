@@ -1,0 +1,35 @@
+database diteca
+screen
+{
+
+
+Código de Rubro: [a0   ]      	    Tipo Producto Liquidado: [a            ] 
+
+         Nombre: [f000                           ]  
+          Orden: [c    ]                Indicador de Costeo: [b            ]
+
+ 
+                                             Base Prorrateo: [a1           ]
+   Ingresado Por: [f001      ]
+Fecha de Ingreso: [f002               ]
+
+}
+
+end
+tables
+gent017
+attributes
+a0   = formonly.g17_codrubro TYPE INTEGER NOT NULL, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG  = 'lista.bmp F2';
+f000 = gent017.g17_nombre, REVERSE, UPSHIFT;
+a    = gent017.g17_tipo_rubro, REVERSE,AUTONEXT, DEFAULT = 'N', 
+	WIDGET = 'RADIO', CONFIG = 'N Nacional I Importación';
+b    = gent017.g17_indicador, REVERSE, AUTONEXT, DEFAULT = 'U',
+	WIDGET = 'RADIO', CONFIG = 'P Prorrateo U Unidad';
+c    = gent017.g17_orden, REVERSE, 
+	COMMENT = 'Orden en que se va a mostrar el rubro tanto en pantalla como en impresiones';
+a1   = gent017.g17_base, REVERSE, DEFAULT = 'N', AUTONEXT,
+	WIDGET = 'RADIO', CONFIG  = 'F FOB C CIF N Ninguno';
+f001 = gent017.g17_usuario, REVERSE, NOENTRY;
+f002 = gent017.g17_fecing, REVERSE, NOENTRY;
+end

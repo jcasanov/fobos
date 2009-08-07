@@ -1,0 +1,50 @@
+DATABASE diteca
+SCREEN
+{
+
+           No. Presupuesto: [c002    ]                  Estado: [c] [c015    ]
+                   Cliente: [c021                                            ]
+          Orden de Trabajo: [c001    ]     Modelo: [c017           ]
+                                           Chasis: [c018                     ]
+                                            Color: [c019           ]
+        Motivo Presupuesto: [c003                                    ]
+                            [c003                                    ]
+                            [c003                                    ]
+      Recargo Mano de Obra: [c006  ] %          Recargo Repuestos: [c007  ] % 
+                    Moneda: [c0] [c016            ]
+          Precisión Moneda: [c008  ]
+             Total en M.O.: [c009          ]
+       Total de Respuestos: [c010          ]
+        Usuario que Aprobó: [c011      ]
+       Fecha de Aprobación: [c012               ]
+
+       Usuario: [c013      ]           Fecha de Ingreso: [c014               ]
+}
+TABLES
+talt020
+ATTRIBUTES
+c001 = talt020.t20_orden, AUTONEXT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = talt020.t20_numpre, AUTONEXT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'El número lo genera el sistema automáticamente';
+c003 = talt020.t20_motivo, AUTONEXT, REVERSE, UPSHIFT, WORDWRAP COMPRESS;
+c006 = talt020.t20_recargo_mo, AUTONEXT, REVERSE, INCLUDE = (0 TO 99.99);
+c007 = talt020.t20_recargo_rp, AUTONEXT, REVERSE, INCLUDE = (0 TO 99.99);
+c0   = talt020.t20_moneda, AUTONEXT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c008 = talt020.t20_precision, NOENTRY, REVERSE;
+c009 = talt020.t20_total_mo, NOENTRY, REVERSE, FORMAT = '###,###,##&.##';
+c010 = talt020.t20_total_rp, NOENTRY, REVERSE, FORMAT = '###,###,##&.##';
+c011 = talt020.t20_user_aprob, NOENTRY, UPSHIFT;
+C012 = talt020.t20_fecha_aprob, NOENTRY, UPSHIFT;
+c013 = talt020.t20_usuario, NOENTRY, REVERSE, UPSHIFT;
+c014 = talt020.t20_fecing, NOENTRY, REVERSE, UPSHIFT;
+c    = FORMONLY.tit_est, NOENTRY, REVERSE, UPSHIFT;
+c015 = FORMONLY.tit_estado_tal, NOENTRY, UPSHIFT;
+c016 = FORMONLY.tit_mon_bas, NOENTRY, REVERSE, UPSHIFT;
+c017 = FORMONLY.tit_modelo, NOENTRY, REVERSE, UPSHIFT;
+c018 = FORMONLY.tit_chasis, NOENTRY, REVERSE, UPSHIFT;
+c019 = FORMONLY.tit_color, NOENTRY, REVERSE, UPSHIFT;
+c021 = FORMONLY.tit_nomcli, NOENTRY, REVERSE, UPSHIFT;
+END

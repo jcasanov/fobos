@@ -1,0 +1,57 @@
+DATABASE diteca
+SCREEN
+{
+                                                              [x001] de [y001]
+
+     Código Proveedor: [c000       ]
+     Nombre Proveedor: [c001                                              ]
+
+    Tipo de Documento: [a0] [c002           ]
+     Número Documento: [c003           ]
+ Subtipo de Documento: [b01] [c004                          ]
+           Referencia: [c007                                ]
+
+     Fecha de Emisión: [c008      ]
+               Moneda: [a1] [c009           ]
+    Paridad Cambiaria: [c010                ]
+       Valor Original: [c011             ]        Saldo: [c012             ]
+               Origen: [c013             ]
+
+
+              Usuario: [c014      ]    Fecha de Ingreso: [c015               ]
+}
+TABLES
+cxpt021
+ATTRIBUTES
+c000 = cxpt021.p21_codprov, AUTONEXT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = FORMONLY.tit_nombre_pro, NOENTRY, REVERSE, UPSHIFT;
+a0   = cxpt021.p21_tipo_doc, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = FORMONLY.tit_tipo_doc, NOENTRY, REVERSE, UPSHIFT;
+c003 = cxpt021.p21_num_doc, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Numeración automática en Notas Crédito. Ingreso manual otro No. Doc.';
+b01  = cxpt021.p21_subtipo, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c004 = FORMONLY.tit_subtipo, NOENTRY, UPSHIFT;
+c007 = cxpt021.p21_referencia, AUTONEXT, UPSHIFT;
+c008 = cxpt021.p21_fecha_emi, AUTONEXT, REVERSE, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+        COMMENTS = 'Ingrese fecha en formato: dd-mm-yyyy';
+
+a1   = cxpt021.p21_moneda, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c009 = FORMONLY.tit_mon_bas, NOENTRY, REVERSE, UPSHIFT;
+c010 = cxpt021.p21_paridad, NOENTRY, REVERSE, INCLUDE = (1 TO 999999.999999999),
+	FORMAT = '#,###,##&.#########';
+c011 = cxpt021.p21_valor, AUTONEXT, REVERSE, INCLUDE = (0 TO 9999999999.99),
+	FORMAT = '#,###,###,##&.##';
+c012 = cxpt021.p21_saldo, AUTONEXT, REVERSE, FORMAT = '#,###,###,##&.##';
+c013 = cxpt021.p21_origen, NOENTRY, REVERSE, UPSHIFT,
+	WIDGET = 'RADIO', CONFIG = 'M Manual A Automático', DEFAULT = 'M';
+c014 = cxpt021.p21_usuario, NOENTRY, REVERSE, UPSHIFT;
+c015 = cxpt021.p21_fecing, NOENTRY, REVERSE, UPSHIFT;
+
+x001 = FORMONLY.vm_num_current1, NOENTRY;
+y001 = FORMONLY.vm_num_rows1, NOENTRY;
+END

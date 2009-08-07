@@ -1,0 +1,17 @@
+DATABASE diteca
+SCREEN
+{
+
+
+                    Año de Proceso: [c002]
+
+                     Mes de Cierre: [c003][c004       ]
+}
+TABLES
+ctbt000
+ATTRIBUTES
+c002 = ctbt000.b00_anopro, NOENTRY, REVERSE, UPSHIFT;
+c003 = FORMONLY.b00_mespro, AUTONEXT, REVERSE, UPSHIFT, INCLUDE = (1 TO 12),
+	COMMENTS = 'Mes de cierre para el proceso contable';
+c004 = FORMONLY.tit_mes, NOENTRY, REVERSE, UPSHIFT;
+END

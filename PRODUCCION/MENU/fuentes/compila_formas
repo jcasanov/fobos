@@ -1,0 +1,6 @@
+for i in *per 
+do
+	fglform $i
+done
+
+chmod 777 *

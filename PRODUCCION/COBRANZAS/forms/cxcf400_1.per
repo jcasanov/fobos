@@ -1,0 +1,52 @@
+database diteca
+screen 
+{
+
+             Año: [c000]          Mes: [c0] 
+          Moneda: [c1] [c001              ]
+ Area de Negocio: [c2] [c002              ]     Tipo Vcto.: [c            ]
+   Zona de Cobro: [c3] [c003              ]
+    Tipo Cliente: [c4] [c004              ]
+    Tipo Cartera: [c5] [c005              ]  Rango de Días: [c10] - [c010 ]
+   
+   Ordenar Por:
+           [c051                ]  [a]Ascendente  [d]Descendente
+           [c051                ]  [a]Ascendente  [d]Descendente
+           [c051                ]  [a]Ascendente  [d]Descendente
+
+}
+end
+tables
+gent013
+
+attributes
+c000 = formonly.anho TYPE SMALLINT NOT NULL, REVERSE, INCLUDE=(1900 TO 9999);
+c0   = formonly.mes  TYPE SMALLINT NOT NULL, REVERSE, INCLUDE=(1 TO 12);
+c1   = gent013.g13_moneda, REVERSE, AUTONEXT, UPSHIFT, WIDGET='FIELD_BMP', 
+	CONFIG='lista.bmp F2';
+c2   = formonly.areaneg,     WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c3   = formonly.zona_cobro,  WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c4   = formonly.tipocli,     WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c5   = formonly.tipocartera, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c001 = gent013.g13_nombre,     NOENTRY;
+c002 = formonly.n_areaneg,     NOENTRY;
+c003 = formonly.n_zona_cobro,  NOENTRY;
+c004 = formonly.n_tipocli,     NOENTRY;
+c005 = formonly.n_tipocartera, NOENTRY;
+
+c    = formonly.tipo_vcto, DEFAULT='T', WIDGET='RADIO', 
+	CONFIG='P "Por Vencer" V Vencidos T Todos';
+	
+c10  = formonly.dias_ini, INCLUDE=(NULL, 0 TO 999);
+c010 = formonly.dias_fin, INCLUDE=(NULL, 0 TO 99999);
+	
+c051 = formonly.col TYPE VARCHAR NOT NULL, REVERSE, OPTIONS='-nolist',
+	UPSHIFT, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+a    = formonly.chk_asc,  AUTONEXT, WIDGET='CHECK', CONFIG='S N acknowledge', 
+	OPTIONS='-nolist', DEFAULT='S', COMMENT='Ordena ascendentemente.';
+d    = formonly.chk_desc, AUTONEXT, WIDGET='CHECK', CONFIG='S N acknowledge', 
+	OPTIONS='-nolist', DEFAULT='N', COMMENT='Ordena descendentemente.';
+end
+
+instructions
+screen record rm_ord[3] (col, chk_asc, chk_desc)

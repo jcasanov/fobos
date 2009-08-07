@@ -1,0 +1,17 @@
+DATABASE formonly
+SCREEN
+{
+
+              Año: [c002]
+              Mes: [c003] [c004       ]
+
+              Facturas emitidas entre:
+              [c005      ] - [c006      ]
+}
+ATTRIBUTES
+c002 = formonly.anio, REVERSE, UPSHIFT;
+c003 = FORMONLY.mes, AUTONEXT, REVERSE, INCLUDE = (1 TO 12);
+c004 = FORMONLY.tit_mes, NOENTRY, REVERSE, UPSHIFT;
+c005 = formonly.fecini_fact, FORMAT='dd-mm-yyyy', COMMENT='Ingrese fecha en formato dd-mm-aaaa';
+c006 = formonly.fecfin_fact, FORMAT='dd-mm-yyyy', COMMENT='Ingrese fecha en formato dd-mm-aaaa';
+END

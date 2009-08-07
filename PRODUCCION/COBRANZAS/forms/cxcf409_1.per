@@ -1,0 +1,23 @@
+DATABASE formonly
+SCREEN
+{
+   Código Cliente: [c001 ] [c002                                    ]
+  Area de Negocio: [c2]    [c003              ]
+           Moneda: [c3]    [c004           ]
+
+       	     Tipo: [c005          ]    
+
+
+
+}
+ATTRIBUTES
+c001 = formonly.codcli TYPE INTEGER, WIDGET = 'FIELD_BMP', 
+       CONFIG = 'lista.bmp F2', REVERSE;
+c002 = formonly.nomcli, NOENTRY;
+c2   = formonly.areaneg,   WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c003 = formonly.d_areaneg, NOENTRY;
+c3   = formonly.moneda TYPE CHAR NOT NULL, WIDGET = 'FIELD_BMP', 
+       CONFIG = 'lista.bmp F2', UPSHIFT, AUTONEXT, REVERSE;
+c004 = formonly.tit_mon, NOENTRY;
+c005 = formonly.tipo, WIDGET = 'RADIO', 
+       CONFIG = 'R Resumido  D Detallado';

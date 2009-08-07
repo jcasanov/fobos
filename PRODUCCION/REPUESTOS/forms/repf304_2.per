@@ -1,0 +1,59 @@
+DATABASE formonly
+SCREEN
+{
+                        MOVIMIENTOS DE VENDEDORES
+
+       Vendedor: [c001]  [c002                     ]      
+        Período: [c003      ] - [c004      ]
+         Moneda: [c5]     [c006           ]
+         Bodega: [c7]     [c008                     ]
+          Línea: [c009 ]  [c010                     ]
+Indice Rotación: [t1]     [c012                     ] 
+
+ [c040       |x1|x2|c041         |c042           |c043 |c044          ]
+[c020       |y1|y2|c021         |c022           |c023 |c024          ] 
+[c020       |y1|y2|c021         |c022           |c023 |c024          ] 
+[c020       |y1|y2|c021         |c022           |c023 |c024          ] 
+[c020       |y1|y2|c021         |c022           |c023 |c024          ] 
+[c020       |y1|y2|c021         |c022           |c023 |c024          ] 
+[c020       |y1|y2|c021         |c022           |c023 |c024          ] 
+[c020       |y1|y2|c021         |c022           |c023 |c024          ] 
+[c020       |y1|y2|c021         |c022           |c023 |c024          ] 
+[c020       |y1|y2|c021         |c022           |c023 |c024          ] 
+                                                [c030 |c031          ]
+}
+ATTRIBUTES
+c001 = formonly.cod_vend,  REVERSE;
+c002 = formonly.name_vend, REVERSE;
+c003 = formonly.fec_ini TYPE DATE NOT NULL, REVERSE, FORMAT = 'dd-mm-yyyy';
+c004 = formonly.fec_fin TYPE DATE NOT NULL, REVERSE, FORMAT = 'dd-mm-yyyy';
+c5   = formonly.moneda TYPE CHAR NOT NULL, UPSHIFT, REVERSE, AUTONEXT;
+c006 = formonly.tit_mon;
+c7   = formonly.bodega, UPSHIFT, AUTONEXT;
+c008 = formonly.tit_bod;
+c009 = formonly.linea, UPSHIFT;
+c010 = formonly.tit_lin;
+t1   = formonly.indrot, UPSHIFT, AUTONEXT;
+c012 = formonly.tit_indrot;
+c040 = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+x1   = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+x2   = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c041 = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c042 = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c043 = formonly.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c044 = formonly.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+c020 = formonly.fecha   TYPE DATE, FORMAT = 'dd-mm-yyyy';
+y1   = formonly.cod_bod;
+y2   = formonly.tipo;
+c021 = formonly.numero;
+c022 = formonly.item;
+c023 = formonly.unidades TYPE INTEGER, FORMAT = '----&';
+c024 = formonly.valor TYPE DECIMAL(12,2), FORMAT = '---,---,--&.##';
+c030 = formonly.tot_uni TYPE INTEGER, FORMAT = '----&', REVERSE;
+c031 = formonly.tot_val TYPE DECIMAL(12,2), FORMAT = '---,---,--&.##', REVERSE;
+INSTRUCTIONS
+SCREEN RECORD r_mov[9] (formonly.fecha,  formonly.cod_bod, formonly.tipo, 
+			formonly.numero, formonly.item, formonly.unidades, 
+			formonly.valor)
+KEYS
+F5='Comprobante'

@@ -1,0 +1,37 @@
+DATABASE diteca
+SCREEN
+{
+                 RETENCIONES
+ -----------------------------------------
+  Proveedor: [c000       ]
+ [c001                                 ]
+
+  [c016   ][c08|c|c017                   ]
+ [c002  ] [c09|a|c003                   ]
+ [c002  ] [c09|a|c003                   ]
+ [c002  ] [c09|a|c003                   ]
+ [c002  ] [c09|a|c003                   ]
+ [c002  ] [c09|a|c003                   ]
+
+}
+TABLES
+cxpt005
+ATTRIBUTES
+c000 = cxpt005.p05_codprov, NOENTRY, REVERSE, UPSHIFT;
+c001 = FORMONLY.tit_proveedor, NOENTRY, REVERSE, UPSHIFT;
+c016 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c08  = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c    = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c017 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c002 = cxpt005.p05_porcentaje, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	INCLUDE = (0 TO 100), FORMAT = '##&.##', OPTIONS = '-nolist',
+	COMMENTS = 'Porcentaje de la retención';
+c09  = cxpt005.p05_codigo_sri, AUTONEXT, UPSHIFT, OPTIONS='-nolist';
+a    = cxpt005.p05_tipo_ret, AUTONEXT, UPSHIFT,
+	INCLUDE = ('F','I'), OPTIONS = '-nolist',
+	COMMENTS = 'F Fuente o I IVA';
+c003 = FORMONLY.tit_tipo_ret, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+END
+INSTRUCTIONS
+SCREEN RECORD rm_ret[5] (p05_porcentaje,p05_codigo_sri,p05_tipo_ret,tit_tipo_ret)

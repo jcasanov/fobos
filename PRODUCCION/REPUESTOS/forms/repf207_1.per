@@ -1,0 +1,60 @@
+database diteca
+screen 
+{
+
+   Liquidación No: [c002       ]                Fecha: [c021               ]
+                                               Estado: [a|c026     ]
+           Origen: [c004           ]
+    Forma de Pago: [c005                          ] 
+      Descripción: [c003                          ]
+                                             
+  Permiso Import.: [c006                ]     Fob Fábrica:[c011            ]
+             Guía: [c007           ]             Faltante:[c012            ]
+        Pedimento: [c008      ]                     Flete:[c014            ]
+    Fecha Llegada: [c009      ]                     Otros:[c013            ]
+    Fecha Ingreso: [c010      ]              Total Cargos:[c016            ] 
+           Moneda: [a0] [c027           ]    	   Seguro:[c017            ]
+ 						Total Fob:[c015            ]
+     Factor Costo: [c022                ] 
+
+   Elaborado: [c019                          ]   Ingresado Por: [c020      ]
+}
+end
+tables
+rept028
+attributes
+c002 = rept028.r28_numliq, NOENTRY, REVERSE, 
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2' ;
+a    = rept028.r28_estado, UPSHIFT, NOENTRY, REVERSE;
+c003 = rept028.r28_descripcion, UPSHIFT, REVERSE;
+c004 = rept028.r28_origen, UPSHIFT, REVERSE;
+c005 = rept028.r28_forma_pago, UPSHIFT, REVERSE;
+c006 = rept028.r28_num_pi, UPSHIFT;
+c007 = rept028.r28_guia, UPSHIFT;
+c008 = rept028.r28_pedimento, UPSHIFT;
+c009 = rept028.r28_fecha_lleg, REVERSE,
+	FORMAT='dd-mm-yyyy', COMMENT='Ingrese fecha en formato: dd-mm-aaaa';
+c010 = rept028.r28_fecha_ing, REVERSE,
+	FORMAT='dd-mm-yyyy', COMMENT='Ingrese fecha en formato: dd-mm-aaaa';
+a0 = rept028.r28_moneda, UPSHIFT, REVERSE, AUTONEXT,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2' ;
+c011 = rept028.r28_fob_fabrica, REVERSE, NOENTRY, FORMAT='###,###,##&.####';
+c012 = rept028.r28_faltante, REVERSE, FORMAT='###,###,##&.####';
+c013 = rept028.r28_otros, REVERSE, FORMAT='###,###,##&.####';
+c014 = rept028.r28_flete, REVERSE, FORMAT='###,###,##&.####';
+c015 = rept028.r28_total_fob, REVERSE, NOENTRY, FORMAT='###,###,##&.####';
+c016 = rept028.r28_tot_cargos, REVERSE, NOENTRY, FORMAT='###,###,##&.####';
+c017 = rept028.r28_seguro, REVERSE, FORMAT='###,###,##&.####';
+
+c019 = rept028.r28_elaborado, REVERSE, UPSHIFT;
+c020 = rept028.r28_usuario, REVERSE, NOENTRY, UPSHIFT;
+c021 = rept028.r28_fecing, REVERSE, NOENTRY;
+c022 = rept028.r28_fact_costo, REVERSE, NOENTRY, FORMAT='###,##&.######';
+
+c026 = formonly.n_estado, NOENTRY;
+c027 = formonly.n_moneda, NOENTRY;
+
+end
+
+keys
+F5 = 'Pedidos'

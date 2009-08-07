@@ -1,0 +1,44 @@
+DATABASE diteca
+SCREEN
+{
+
+
+     No. Devolución: [c011           ]                 Estado: [c][c001     ]
+   Fecha Devolución: [c012               ]
+
+        No. Factura: [c000           ]
+      Fecha Factura: [c003               ]
+              Orden: [c004    ]
+            Cliente: [c002                                    ]
+             Modelo: [c005           ]              
+              Línea: [c006 ][c010                ]
+             Chasis: [c007                     ]
+              Color: [c008           ]
+
+  Motivo Devolución: [c013                                    ]
+        Nueva Orden: [c009    ]
+}
+TABLES
+talt028,
+talt023
+ATTRIBUTES
+c011 = talt028.t28_num_dev, AUTONEXT, REVERSE, UPSHIFT;
+c012 = talt028.t28_fec_anula, NOENTRY, REVERSE, UPSHIFT;
+c000 = talt023.t23_num_factura, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Dígite el número de la factura que se anulará';
+c    = talt023.t23_estado, NOENTRY, REVERSE, UPSHIFT;
+c001 = FORMONLY.tit_estado_tal, NOENTRY, UPSHIFT;
+c002 = talt023.t23_nom_cliente, NOENTRY, REVERSE, UPSHIFT;
+c003 = talt023.t23_fec_factura, NOENTRY, REVERSE, UPSHIFT,
+	COMMENTS = 'Fecha de emisión de la factura';
+c004 = talt023.t23_orden, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c005 = talt023.t23_modelo, NOENTRY, REVERSE, UPSHIFT;
+c006 = FORMONLY.tit_linea, NOENTRY, REVERSE, UPSHIFT;
+c007 = talt023.t23_chasis, NOENTRY, REVERSE, UPSHIFT;
+c008 = talt023.t23_color, NOENTRY, REVERSE, UPSHIFT;
+c013 = talt028.t28_motivo_dev, REVERSE, UPSHIFT;
+c009 = FORMONLY.vm_nue_orden TYPE INTEGER NOT NULL, AUTONEXT, REVERSE;
+c010 = FORMONLY.tit_linea_des, NOENTRY, REVERSE, UPSHIFT;
+END

@@ -1,0 +1,28 @@
+database diteca
+screen 
+{
+
+             Año: [c006]       
+	     Mes: [c2] [c002                ]
+           Nivel: [c0] [c003                ] 
+
+ Imprimir Saldos: [c]   
+          Moneda: [c1] [c005                ]              
+         
+ 
+}
+end
+attributes
+c0   = formonly.nivel TYPE SMALLINT NOT NULL, REVERSE,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';   
+c    = formonly.imprime_saldos, AUTONEXT, DEFAULT='N', WIDGET='CHECK', 
+	CONFIG='S N acknowledge', 
+	COMMENT='Desea imprimir los saldos de las cuentas.';
+c1   = formonly.moneda, AUTONEXT, UPSHIFT, 
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';   
+c005 = formonly.n_moneda, NOENTRY;
+c006 = formonly.anho TYPE SMALLINT NOT NULL, INCLUDE=(1900 TO 9999), REVERSE;
+c2   = formonly.mes  TYPE SMALLINT NOT NULL, INCLUDE=(1 TO 12),      REVERSE;
+c002 = formonly.n_mes, NOENTRY;
+c003 = formonly.n_nivel, NOENTRY;
+end

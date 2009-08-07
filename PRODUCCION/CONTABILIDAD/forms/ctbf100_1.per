@@ -1,0 +1,69 @@
+DATABASE diteca
+SCREEN
+{
+
+                                                       Estado: [c][c0a0     ]
+                Código Compañía: [c000]  [c013                              ]
+                    Moneda Base: [c0]  [c007           ]
+                Moneda Auxiliar: [c1]  [c008           ]
+                Período Inicial: [c001      ]    Período Final: [c002      ]
+           Integración en Línea: [d]     Mayorización en Línea: [e]
+   Modificar Comprobante Manual: [f]      Modifi. Compr. Auto.: [g]
+                    Año Proceso: [c014]
+
+     Cierre Diario             Cierre Mensual                 Cierre Anual
+     [c015      ]               [c016      ]                  [c017      ]
+
+  Cta. Util. Presente Ejercicio: [c003        ] [c009                       ]
+     Cta. Util. Años Anteriores: [c004        ] [c010                       ]
+     Cuenta Difirencial Ingreso: [c005        ] [c011                       ]
+      Cuenta Diferencial Egreso: [c006        ] [c012                       ]
+}
+TABLES
+ctbt000
+ATTRIBUTES
+c000 = ctbt000.b00_compania, AUTONEXT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Indicar la compañía a configurar';
+c0a0 = FORMONLY.tit_estado_cia, NOENTRY, UPSHIFT;
+c0   = ctbt000.b00_moneda_base, AUTONEXT, REVERSE, UPSHIFT, PICTURE = 'AA',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c1   = ctbt000.b00_moneda_aux, AUTONEXT, UPSHIFT, PICTURE = 'AA',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = ctbt000.b00_periodo_ini, AUTONEXT, REVERSE,UPSHIFT,FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese fecha en formato: dd-mm-yyyy';
+c002 = ctbt000.b00_periodo_fin, AUTONEXT, REVERSE,UPSHIFT,FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese fecha en formato: dd-mm-yyyy';
+d    = ctbt000.b00_inte_online, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S',
+	COMMENTS = 'Integración en este momento o luego del ejercicio contable';
+e = ctbt000.b00_mayo_online, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S',
+	COMMENTS = 'Mayorización ahora o luego del ejercicio contable';
+f = ctbt000.b00_modi_compma, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S',
+	COMMENTS = 'Indicar si la compañía permite modificar comprobantes manuales';
+g = ctbt000.b00_modi_compau, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S',
+	COMMENTS = 'Indicar si la compañía permite modificar comprobantes automáticos';
+c003 = ctbt000.b00_cuenta_uti, AUTONEXT, UPSHIFT, 
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c004 = ctbt000.b00_cta_uti_ant, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c005 = ctbt000.b00_cuenta_difi, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c006 = ctbt000.b00_cuenta_dife, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c007 = FORMONLY.tit_mon_bas, NOENTRY, UPSHIFT, REVERSE;
+c008 = FORMONLY.tit_mon_alt, NOENTRY, UPSHIFT;
+c009 = FORMONLY.tit_cta_pre, NOENTRY, UPSHIFT;
+c010 = FORMONLY.tit_cta_ant, NOENTRY, UPSHIFT;
+c011 = FORMONLY.tit_cta_dfi, NOENTRY, UPSHIFT;
+c012 = FORMONLY.tit_cta_dfe, NOENTRY, UPSHIFT;
+c013 = FORMONLY.tit_cia_des, NOENTRY, UPSHIFT, REVERSE;
+c    = FORMONLY.tit_est, NOENTRY, REVERSE;
+c014 = ctbt000.b00_anopro, REVERSE, UPSHIFT;
+c015 = ctbt000.b00_fecha_cd, REVERSE, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c016 = ctbt000.b00_fecha_cm, REVERSE, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c017 = ctbt000.b00_fecha_ca, REVERSE, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+END

@@ -1,0 +1,37 @@
+DATABASE diteca
+SCREEN 
+{
+  Cliente: [c003  |c100                               ] 
+
+ Localidad            Modulo   Ctas. X Cob. Anticipos 
+[c1 |c101            |a0|c002 |c004        |c006        ]
+[c1 |c101            |a0|c002 |c004        |c006        ]
+[c1 |c101            |a0|c002 |c004        |c006        ]
+[c1 |c101            |a0|c002 |c004        |c006        ]
+[c1 |c101            |a0|c002 |c004        |c006        ]
+
+   Cuentas X Cobrar: [c102                          ]
+   Anticipos       : [c103                          ]
+}
+END
+
+TABLES
+ctbt100
+
+ATTRIBUTES
+c003 = ctbt100.b100_codcli, NOENTRY, REVERSE;
+
+c1 = ctbt100.b100_localidad, REVERSE, COMMENT='Presione F2 para ver valores', OPTIONS='-nolist';
+a0 = ctbt100.b100_modulo, REVERSE, UPSHIFT, COMMENT='RE: Repuestos TA: Taller', OPTIONS='-nolist', INCLUDE=('RE', 'TA');
+c002 = ctbt100.b100_grupo_linea, REVERSE, UPSHIFT, COMMENT='Presione F2 para ver valores', OPTIONS='-nolist';
+c004 = ctbt100.b100_cxc_mb, REVERSE, COMMENT='Presione F2 para ver valores', OPTIONS='-nolist';
+c006 = ctbt100.b100_ant_mb, REVERSE, COMMENT='Presione F2 para ver valores', OPTIONS='-nolist';
+
+c100 = formonly.n_cliente, REVERSE, NOENTRY; 
+c101 = formonly.n_localidad, REVERSE, NOENTRY, OPTIONS='-nolist'; 
+c102 = formonly.n_cxc, REVERSE, NOENTRY; 
+c103 = formonly.n_ant, REVERSE, NOENTRY; 
+END 
+
+INSTRUCTIONS
+SCREEN RECORD r_ctas[5] (b100_localidad, n_localidad, b100_modulo, b100_grupo_linea, b100_cxc_mb, b100_ant_mb)

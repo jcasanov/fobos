@@ -1,0 +1,23 @@
+database diteca
+screen
+{
+
+
+	Código de Tipo de Item: [f000]
+
+                        Nombre: [a0        ]
+
+	         Ingresado Por: [f001      ]
+              Fecha de Ingreso: [f002               ]
+
+}
+end
+tables
+rept006
+attributes
+f000 = rept006.r06_codigo, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+a0 = rept006.r06_nombre, REVERSE, UPSHIFT;
+f001 = rept006.r06_usuario, REVERSE, NOENTRY;
+f002 = rept006.r06_fecing, REVERSE, NOENTRY;
+end

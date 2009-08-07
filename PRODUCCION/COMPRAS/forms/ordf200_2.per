@@ -1,0 +1,65 @@
+
+database diteca
+screen 
+{
+
+      No. Pagos: [c0  ]                              Interés: [c1   ]%  
+ Fecha 1er Pago: [c2        ]               Días entre pagos: [c3   ]    
+          Total: [c4              ] 		  Total Días: [c13  ]
+
+  [b0  |b1        |b2              |b3              |b4              ]  
+ [c5  |c6        |c7              |c8              |c9              ]
+ [c5  |c6        |c7              |c8              |c9              ]
+ [c5  |c6        |c7              |c8              |c9              ]
+ [c5  |c6        |c7              |c8              |c9              ]
+ [c5  |c6        |c7              |c8              |c9              ]
+ [c5  |c6        |c7              |c8              |c9              ]
+ [c5  |c6        |c7              |c8              |c9              ]
+                  ---------------- ---------------- ----------------
+	         [c10             |c11             |c12             ]
+}
+END
+TABLES
+	ordt010
+	ordt012
+ATTRIBUTES
+		     ---- BOTONES ----
+b0  = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+b1  = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b2  = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+b3  = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+b4  = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+c0  = formonly.pagos TYPE SMALLINT, REVERSE, INCLUDE = (1 TO 999), REQUIRED;
+c1  = ordt010.c10_interes, REVERSE, INCLUDE = (0.00 TO 99.99), REQUIRED;
+c2  = formonly.fecha_pago TYPE DATE, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENT = 'Digite la fecha e formato dd-mm-aaaa', REQUIRED;
+c3  = formonly.dias_pagos TYPE SMALLINT, REVERSE, INCLUDE = (1 TO 999),
+	REQUIRED;
+c4  = formonly.tot_compra TYPE DECIMAL(12,2), REVERSE, 
+	FORMAT = '#,###,###,##&.##', REQUIRED;
+c13 = formonly.tot_dias TYPE SMALLINT, REVERSE, NOENTRY; 
+
+c5  = ordt012.c12_dividendo,  REVERSE, NOENTRY, OPTIONS = '-nolist',
+	FORMAT='&&';
+c6  = ordt012.c12_fecha_vcto, REVERSE, OPTIONS = '-nolist',
+	FORMAT = 'dd-mm-yyyy',
+	COMMENT = 'Digite la fecha e formato dd-mm-aaaa', REQUIRED;
+c7  = ordt012.c12_valor_cap,  REVERSE, OPTIONS = '-nolist', 
+	FORMAT = '#,###,###,##&.##';
+c8  = ordt012.c12_valor_int,  REVERSE, OPTIONS = '-nolist', NOENTRY, 
+	FORMAT = '#,###,###,##&.##';
+c9  = formonly.subtotal TYPE DECIMAL(12,2), REVERSE, OPTIONS = '-nolist', 
+	NOENTRY, FORMAT = '#,###,###,##&.##';
+c10 = formonly.tot_cap  TYPE DECIMAL(12,2), REVERSE, OPTIONS = '-nolist', 
+	NOENTRY, FORMAT = '#,###,###,##&.##';
+c11 = formonly.tot_int  TYPE DECIMAL(12,2), REVERSE, OPTIONS = '-nolist', 
+	NOENTRY, FORMAT = '#,###,###,##&.##';
+c12 = formonly.tot_sub  TYPE DECIMAL(12,2), REVERSE, OPTIONS = '-nolist', 
+	NOENTRY, FORMAT = '#,###,###,##&.##';
+
+END
+
+INSTRUCTIONS
+SCREEN RECORD r_detalle_2[7] (c12_dividendo, c12_fecha_vcto, c12_valor_cap,
+			      c12_valor_int, subtotal)

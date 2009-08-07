@@ -1,0 +1,55 @@
+DATABASE diteca
+SCREEN
+{
+ 
+     	 Módulo: [a0] [c000               ]                           
+
+       Compañía: [c005] [c006                                    ]
+        Usuario: [c003      ] [c004                              ]
+
+        [l1][l2        ][l3                                              ]
+    [c][c1][c001      ][c002                                             ] 
+    [c][c1][c001      ][c002                                             ] 
+    [c][c1][c001      ][c002                                             ] 
+    [c][c1][c001      ][c002                                             ] 
+    [c][c1][c001      ][c002                                             ] 
+    [c][c1][c001      ][c002                                             ] 
+    [c][c1][c001      ][c002                                             ] 
+    [c][c1][c001      ][c002                                             ] 
+    [c][c1][c001      ][c002                                             ] 
+    [c][c1][c001      ][c002                                             ] 
+
+}
+
+TABLES
+gent054
+
+ATTRIBUTES
+a0   = formonly.g54_modulo, UPSHIFT, REQUIRED, REVERSE, AUTONEXT, 
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c    = formonly.check, DEFAULT='N', AUTONEXT, 
+	WIDGET='CHECK', CONFIG='S N acknowledge', OPTIONS='-nolist';
+c1   = g54_tipo, NOENTRY, OPTIONS='-nolist';
+c000 = formonly.n_modulo, UPSHIFT, REVERSE;
+c001 = g54_proceso, NOENTRY, OPTIONS='-nolist';
+c002 = g54_nombre,  NOENTRY, OPTIONS='-nolist';  
+c003 = formonly.usuario, UPSHIFT, REVERSE, REQUIRED, 
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c004 = formonly.n_usuario, UPSHIFT, REVERSE;
+c005 = formonly.compania, UPSHIFT, REQUIRED, REVERSE, 
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c006 = formonly.n_compania, UPSHIFT, REVERSE;
+
+l1   = formonly.bt_tipo, WIDGET='BUTTON', CONFIG='F15';
+l2   = formonly.bt_proceso, WIDGET='BUTTON', CONFIG='F16';
+l3   = formonly.bt_descripcion, WIDGET='BUTTON', CONFIG='F17';
+
+END
+
+INSTRUCTIONS
+SCREEN RECORD ra_proc[10](check, g54_tipo, g54_proceso ,g54_nombre)
+
+KEYS
+##F2='Módulos'
+F5='Asignar Usuarios'
+F7='Todos'

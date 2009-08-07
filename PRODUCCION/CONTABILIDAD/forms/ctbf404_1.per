@@ -1,0 +1,32 @@
+database diteca
+screen 
+{
+
+   Rango Niveles: [c000]  hasta [c001]
+   Rango Cuentas: [c002        ]  hasta [c003        ]
+ Patrón Búsqueda: [c004                                   ]
+
+ Imprimir Saldos: [c]                       Tipo Cuenta: [c007        ]
+          Moneda: [c1] [c005           ]
+             Año: [c006]       Mes: [c2|c008       ]
+ 
+}
+end
+attributes
+c000 = formonly.nivel_ini, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c001 = formonly.nivel_fin, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c002 = formonly.cuenta_ini, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c003 = formonly.cuenta_fin, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c004 = formonly.n_cuenta, UPSHIFT;
+c007 = formonly.tipo_cta, WIDGET='RADIO', DEFAULT='B',
+	CONFIG='B Balance R Resultado';
+c    = formonly.imprime_saldos, AUTONEXT, DEFAULT='N', WIDGET='CHECK', 
+	CONFIG='S N acknowledge', 
+	COMMENT='Desea imprimir los saldos de las cuentas.';
+c1   = formonly.moneda, AUTONEXT, UPSHIFT, WIDGET='FIELD_BMP',
+	CONFIG='lista.bmp F2';   
+c005 = formonly.n_moneda, NOENTRY;
+c006 = formonly.anho, INCLUDE=(NULL, 1900 TO 9999);
+c2   = formonly.mes,  INCLUDE=(NULL, 1 TO 12);
+c008 = formonly.n_mes, NOENTRY;
+end

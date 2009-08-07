@@ -1,0 +1,54 @@
+database diteca
+screen 
+{
+
+             Código Plan: [c001]                Estado: [a|c010     ] 
+             Nonbre Plan: [c002                     ]
+
+     Tasa Financiamiento: [c004  ]%              Plazo: [c005  ] días
+           Cuota Inicial: [c006  ]%
+
+         Crédito Directo: [b] 
+	Código Cobranzas: [c003  ] [c011                            ]   
+
+          Código Cartera: [a0] [c012                                ]     
+
+                  Seguro: [c]
+             Adicionales: [d]            Número adicionales: [c007  ]    
+
+           Ingresado Por: [c008      ]
+        Fecha de Ingreso: [c009               ]
+}
+end
+tables
+veht006
+attributes
+c001 = veht006.v06_codigo_plan, NOENTRY, REVERSE, 
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c002 = veht006.v06_nonbre_plan, UPSHIFT, REVERSE;
+a = veht006.v06_estado, UPSHIFT, NOENTRY, REVERSE, AUTONEXT,
+	COMMENT='A ACTIVO I INACTIVO';
+c003 = veht006.v06_codigo_cobr,	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2',
+	COMMENT='Código de cobranzas a cargar cuando no es crédito directo';
+b = veht006.v06_cred_direct, REVERSE, DEFAULT='N', 
+	WIDGET='CHECK', CONFIG='S N acknowledge';
+a0 = veht006.v06_cod_cartera, REVERSE, UPSHIFT, AUTONEXT,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c = veht006.v06_seguro, REVERSE, DEFAULT='N', 
+	WIDGET='CHECK', CONFIG='S N acknowledge';
+c004 = veht006.v06_tasa_finan, REVERSE, FORMAT='##&.##';
+c005 = veht006.v06_plazo, REVERSE, INCLUDE=(0 TO 32767),
+	COMMENT='Días para cálculo basándose en el plan.'; 
+c006 = veht006.v06_porc_inic, REVERSE, FORMAT='##&.##';
+d = veht006.v06_adicionales, REVERSE, DEFAULT='N',
+	WIDGET='CHECK', CONFIG='S N acknowledge';
+c007 = veht006.v06_num_adic, REVERSE, INCLUDE=(0 TO 32767);
+c008 = veht006.v06_usuario, REVERSE, UPSHIFT, NOENTRY;
+c009 = veht006.v06_fecing, REVERSE, NOENTRY;
+c010 = formonly.n_estado, REVERSE, UPSHIFT, NOENTRY;
+c011 = formonly.n_cliente, REVERSE, UPSHIFT, NOENTRY;
+c012 = formonly.n_cartera, REVERSE, UPSHIFT, NOENTRY;
+end
+
+keys
+F5 = 'Coeficientes'

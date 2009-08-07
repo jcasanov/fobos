@@ -1,0 +1,36 @@
+screen 
+{
+
+  Pedidos Item: [c001           ]
+ [c002                                     ] 
+
+  [lbl1      ][lbl2     ][lbl3      ][lbl4 ]  
+ [c003      ][c004     ][c005      ][c006  ]
+ [c003      ][c004     ][c005      ][c006  ]
+ [c003      ][c004     ][c005      ][c006  ]
+ [c003      ][c004     ][c005      ][c006  ]
+ [c003      ][c004     ][c005      ][c006  ]
+ [c003      ][c004     ][c005      ][c006  ]
+ [c003      ][c004     ][c005      ][c006  ]
+}
+end
+attributes
+c001 = formonly.item,   NOENTRY, REVERSE;
+c002 = formonly.n_item, NOENTRY, REVERSE;
+
+c003 = formonly.pedido,     NOENTRY, OPTIONS='-nolist';
+c004 = formonly.proveedor,  NOENTRY, OPTIONS='-nolist';
+c005 = formonly.fecha_lleg, NOENTRY, OPTIONS='-nolist';
+c006 = formonly.cantidad,   NOENTRY, OPTIONS='-nolist';
+
+lbl1 = formonly.bt_pedido,    WIDGET='BUTTON', CONFIG='F20';
+lbl2 = formonly.bt_proveedor, WIDGET='BUTTON', CONFIG='F21';	
+lbl3 = formonly.bt_fecha,     WIDGET='BUTTON', CONFIG='F22';	
+lbl4 = formonly.bt_cantidad,  WIDGET='BUTTON', CONFIG='F23';	
+end
+
+instructions
+screen record ra_pedido[7] (pedido, proveedor, fecha_lleg, cantidad)
+
+KEYS
+	F9 = 'Pedidos'

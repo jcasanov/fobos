@@ -1,0 +1,25 @@
+DATABASE diteca
+SCREEN
+{
+
+
+                    Moneda: [a0] [c001           ]
+          Tipo Transacción: [c004 ] [c005                           ]
+          
+             Fecha Inicial: [c002      ]    Fecha Final: [c003      ]
+
+}
+TABLES
+rept019
+ATTRIBUTES
+a0   = rept019.r19_moneda, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = FORMONLY.tit_moneda, NOENTRY, REVERSE, UPSHIFT;
+c004 = rept019.r19_cod_tran, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c005 = FORMONLY.tit_tipo, NOENTRY, REVERSE, UPSHIFT;
+c002 = FORMONLY.vm_fecha_ini TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy';
+c003 = FORMONLY.vm_fecha_fin TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy';
+END

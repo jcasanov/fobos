@@ -1,0 +1,67 @@
+DATABASE diteca  
+-------------
+-------------
+SCREEN
+{
+
+       Código Agencia: [c02] [c18                                       ]
+
+              Agencia: [c03                 ]    Estado: [a] [c05       ]     
+          Abreviación: [c04       ]         Es Matriz ?: [c]
+                R.U.C: [c06          ]     Correo: [c08                 ]  
+               Ciudad: [c07] [c19                     ]                
+            Dirección: [c09                                         ]
+             Teléfono: [c10          ]    Teléfono Aux.: [c11          ]
+   	          Fax: [c12          ]         Fax Aux.: [c13          ]
+              Casilla: [c14            ]
+
+ No. Autorización SRI: [c020           ]
+   Fecha Autoriz. SRI: [c021      ]    Fecha Expir. SRI: [c022      ] 
+   Serie Compañía SRI: [c023      ]    Serie Local. SRI: [c024      ] 
+
+        Ingresado Por: [c15       ]    Fecha de Ingreso: [c16                ] 
+
+}
+end
+tables
+gent002
+attributes
+c02 = formonly.g02_localidad TYPE INTEGER,REQUIRED,  REVERSE, AUTONEXT, NOENTRY
+	,widget="FIELD_BMP", config="lista.bmp F2";
+c03 = g02_nombre 		,UPSHIFT, REQUIRED, REVERSE;
+c04 = g02_abreviacion 	,UPSHIFT, REQUIRED, REVERSE;
+  a = g02_estado		,AUTONEXT, UPSHIFT, REVERSE, NOENTRY;
+c05 = formonly.tit_estado;
+c06 = g02_numruc		,UPSHIFT, REQUIRED, REVERSE;
+c07 = g02_ciudad		,REQUIRED, REVERSE, AUTONEXT 
+	,widget="FIELD_BMP", config="lista.bmp F2";
+c08 = g02_correo		, REQUIRED;
+c09 = g02_direccion	,UPSHIFT, REQUIRED, REVERSE;
+c10 = g02_telefono1	,FORMAT = "############", REQUIRED, REVERSE;
+c11 = g02_telefono2	,FORMAT = "############" 
+	, COMMENTS ="Digite un segundo teléfono";
+c12 = g02_fax1		,FORMAT = "############";
+c13 = g02_fax2		,FORMAT = "############" 
+	, COMMENTS ="Digite un segundo fax";
+c14 = g02_casilla		,UPSHIFT, REQUIRED ;
+c   = g02_matriz, default="N", REQUIRED, AUTONEXT    
+	,widget="CHECK",  CONFIG="S N acknowledge"
+	, COMMENTS ="Presione con Mouse o barra espaciadora, Caractér: S ó N";
+c15 = g02_usuario		,NOENTRY, REQUIRED, REVERSE;
+c16 = g02_fecing		,NOENTRY, REQUIRED, REVERSE;
+c18 = formonly.desc_loc         ,NOENTRY, REQUIRED;
+c19 = formonly.desc_ciudad      ,NOENTRY, REQUIRED;
+c020 = gent002.g02_numaut_sri, AUTONEXT, REVERSE, UPSHIFT;
+c021 = gent002.g02_fecaut_sri, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy', COMMENTS = 'Fecha de autorización del SRI (dd-mm-aaaa)';
+c022 = gent002.g02_fecexp_sri, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy', COMMENTS = 'Fecha de expiración del SRI (dd-mm-aaaa)';
+c023 = gent002.g02_serie_cia, AUTONEXT, REVERSE, UPSHIFT, FORMAT = '&&&',
+	INCLUDE = (0 TO 65536);
+c024 = gent002.g02_serie_loc, AUTONEXT, REVERSE, UPSHIFT, FORMAT = '&&&',
+	INCLUDE = (0 TO 65536),	COMMENTS = 'Serie de localidad para el SRI';
+instructions
+delimiters "[]"
+end
+
+

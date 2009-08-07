@@ -1,0 +1,32 @@
+DATABASE diteca
+
+SCREEN
+{
+ LINEAS VENTA REPUESTOS 
+-------------------------------------
+ Código  Línea   Descripción
+-------------------------------------
+[c01   ][c002 ] [c001             ] 
+[c01   ][c002 ] [c001             ]
+[c01   ][c002 ] [c001             ]
+[c01   ][c002 ] [c001             ]
+[c01   ][c002 ] [c001             ]
+[c01   ][c002 ] [c001             ]
+[c01   ][c002 ] [c001             ]
+[c01   ][c002 ] [c001             ]
+[c01   ][c002 ] [c001             ]
+[c01   ][c002 ] [c001             ]
+}
+
+TABLES
+rept007
+rept004
+
+ATTRIBUTES
+c01  = r07_serial, UPSHIFT;
+c002 = r07_linea, UPSHIFT;
+c001 = r04_nombre, UPSHIFT;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_dctoind[10](r07_serial, r07_linea, r04_nombre)

@@ -1,0 +1,58 @@
+DATABASE diteca
+SCREEN
+{
+             Estado: [d001            ]
+
+
+
+   [f1|f011    |f2|f3|f014                             |f015    |f4|f016    ] 
+[z|c2|c021    |c3|c4|c022                             |c023    |c5|c024    ] 
+[z|c2|c021    |c3|c4|c022                             |c023    |c5|c024    ] 
+[z|c2|c021    |c3|c4|c022                             |c023    |c5|c024    ] 
+[z|c2|c021    |c3|c4|c022                             |c023    |c5|c024    ] 
+[z|c2|c021    |c3|c4|c022                             |c023    |c5|c024    ] 
+[z|c2|c021    |c3|c4|c022                             |c023    |c5|c024    ] 
+[z|c2|c021    |c3|c4|c022                             |c023    |c5|c024    ] 
+[z|c2|c021    |c3|c4|c022                             |c023    |c5|c024    ] 
+[z|c2|c021    |c3|c4|c022                             |c023    |c5|c024    ] 
+[z|c2|c021    |c3|c4|c022                             |c023    |c5|c024    ] 
+[z|c2|c021    |c3|c4|c022                             |c023    |c5|c024    ] 
+[z|c2|c021    |c3|c4|c022                             |c023    |c5|c024    ] 
+[z|c2|c021    |c3|c4|c022                             |c023    |c5|c024    ] 
+}
+TABLES
+rept090
+rept091
+ATTRIBUTES
+d001 = FORMONLY.vm_estado, REVERSE, WIDGET = 'RADIO',
+	CONFIG = 'P Pendientes T Transmitidas D Todas'; 
+f1   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+f011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+f2   = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+f3   = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+f014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+f015 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+f4   = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+f016 = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22';
+z    = r91_localidad, NOENTRY, OPTIONS = '-nolist';
+c2   = r91_cod_tran,  NOENTRY, OPTIONS = '-nolist';
+c021 = r91_num_tran,  NOENTRY, OPTIONS = '-nolist';
+c3   = r91_bodega_ori,  NOENTRY, OPTIONS = '-nolist';
+c4   = r91_bodega_dest, NOENTRY, OPTIONS = '-nolist';
+c022 = r91_referencia,  NOENTRY, OPTIONS = '-nolist';
+c023 = FORMONLY.r91_fecing TYPE DATE, NOENTRY, FORMAT = 'dd-mm-yy', 
+       OPTIONS = '-nolist';
+c5   = r90_codtra_fin,  NOENTRY, OPTIONS = '-nolist';
+c024 = r90_numtra_fin,  NOENTRY, OPTIONS = '-nolist';
+end
+
+KEYS 
+F5 = 'Origen'
+F6 = 'Destino'
+F7 = 'Transmitir'
+
+INSTRUCTIONS
+SCREEN RECORD rm_tran[13] (r91_localidad,  r91_cod_tran,    r91_num_tran, 
+			   r91_bodega_ori, r91_bodega_dest, r91_referencia,
+			   FORMONLY.r91_fecing, r90_codtra_fin,  
+			   r90_numtra_fin)

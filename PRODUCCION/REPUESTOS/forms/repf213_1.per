@@ -1,0 +1,67 @@
+database diteca
+screen 
+{
+
+     Ajuste No: [b ][f002    ]                    Fecha:[f029                ]
+    Referencia: [f005                                   ]
+      Vendedor: [f011 ] [b0                             ]   
+    Línea Vta.: [b2   ] [b3                             ] 
+Subtipo Trans.: [b10  ] [b11                            ]
+
+ [v0             ][v1                   |v2   |v3            |v4            ]
+[b4             |[b5                   |b6   |b7            |b8            ]
+[b4             |[b5                   |b6   |b7            |b8            ]
+[b4             |[b5                   |b6   |b7            |b8            ]
+[b4             |[b5                   |b6   |b7            |b8            ]
+[b4             |[b5                   |b6   |b7            |b8            ]
+[b4             |[b5                   |b6   |b7            |b8            ]
+[b4             |[b5                   |b6   |b7            |b8            ]
+[b4             |[b5                   |b6   |b7            |b8            ]
+
+ Ingresado Por: [f028      ]	              Total Costo:[f022            ]
+}
+end
+TABLES
+	rept019
+	rept020
+	rept010
+	rept011
+ATTRIBUTES
+		     ---- BOTONES ----
+v0  = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+v1  = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+v2  = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+v3  = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+v4  = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+f002 = rept019.r19_num_tran, REVERSE, NOENTRY;
+f005 = rept019.r19_referencia, REVERSE, UPSHIFT,
+	COMMENT = 'Motivo por el cual se realiza el Ajuste de Costo. ';
+f011 = rept019.r19_vendedor, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+b0   = formonly.nom_vend TYPE VARCHAR, NOENTRY;
+b    = rept019.r19_cod_tran , REVERSE, NOENTRY, UPSHIFT,
+	COMMENT = '(AC) Ajuste de Costo';
+f022 = rept019.r19_tot_costo, REVERSE, FORMAT = '#,###,###,##&.##', NOENTRY;
+f028 = rept019.r19_usuario, REVERSE, NOENTRY, UPSHIFT;
+f029 = rept019.r19_fecing, REVERSE, NOENTRY;
+b2   = formonly.linea TYPE VARCHAR, REVERSE, UPSHIFT, REQUIRED,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENT = 'Línea de Venta de los Items del Ajuste de Costos. ';
+b3   = formonly.nom_lin TYPE VARCHAR, NOENTRY;
+b4   = rept020.r20_item, REVERSE, UPSHIFT, OPTIONS = '-nolist',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+b5   = rept010.r10_nombre, REVERSE, NOENTRY, OPTIONS = '-nolist';
+b6   = rept020.r20_stock_ant, REVERSE, NOENTRY, OPTIONS = '-nolist';
+b7   = rept020.r20_costant_mb, REVERSE, NOENTRY, OPTIONS = '-nolist';
+b8   = rept020.r20_costnue_mb, REVERSE, OPTIONS = '-nolist',
+	FORMAT = '###,###,##&.##', INCLUDE = (0.01 TO 999999999.99);
+b10  = rept019.r19_cod_subtipo,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENT = 'Ingrese el subtipo de acuerdo al motivo del ajuste. ';
+b11  = formonly.nom_subtipo TYPE VARCHAR, NOENTRY;
+
+INSTRUCTIONS
+SCREEN RECORD rm_aj_costo[8](rept020.r20_item, rept010.r10_nombre, rept020.r20_stock_ant, r20_costant_mb, r20_costnue_mb)
+
+END

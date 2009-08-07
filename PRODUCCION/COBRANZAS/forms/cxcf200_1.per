@@ -1,0 +1,105 @@
+DATABASE diteca
+SCREEN TITLE 'Datos Documento'
+{
+
+                                                             [x001] de [y001]
+         Código Cliente: [c000       ]
+         Nombre Cliente: [c001                                              ]
+
+      Tipo de Documento: [a0] [c002           ]
+       Número Documento: [c003           ]
+              Dividendo: [c004  ]
+   Subtipo de Documento: [b01] [c027                          ]
+
+        Area de Negocio: [c005  ] [c006           ]
+             Referencia: [c007                               ]
+
+       Fecha de Emisión: [c008      ]
+   Fecha de Vencimiento: [c009      ]               Módulo: [c025           ]
+        Tasa de Interés: [c010  ] %      Tipo Tran. Origen: [c2]
+           Tasa de Mora: [c011  ] %       No. Tran. Origen: [c026           ]
+}
+SCREEN TITLE '    Valores    '
+{
+
+                                                             [x002] de [y002]
+                 Moneda: [a1] [c012           ]
+      Paridad Cambiaria: [c013                ]
+
+             Valor Base: [z001             ]
+          Valor Capital: [c014             ]
+          Valor Interés: [c015             ]
+          Saldo Capital: [c016             ]
+          Saldo Interés: [c017             ]
+
+                Cartera: [c018  ] [c019                          ]
+         Línea de Venta: [c020  ] [c021                          ]
+                 Origen: [c022             ] 
+
+
+                Usuario: [c023      ]    Fecha Ingreso: [c024               ]
+}
+TABLES
+cxct020
+ATTRIBUTES
+c000 = cxct020.z20_codcli, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = FORMONLY.tit_nombre_cli, NOENTRY, REVERSE, UPSHIFT;
+a0   = cxct020.z20_tipo_doc, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = FORMONLY.tit_tipo_doc, NOENTRY, REVERSE, UPSHIFT;
+c003 = cxct020.z20_num_doc, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Numeración automatica en Notas Débito. Ingreso manual otro No. Doc.';
+c004 = cxct020.z20_dividendo, AUTONEXT, REVERSE, UPSHIFT, FORMAT = '###&&',
+	INCLUDE = (01 TO 65536);
+b01  = cxct020.z20_subtipo, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c027 = FORMONLY.tit_subtipo, NOENTRY, UPSHIFT;
+c005 = cxct020.z20_areaneg, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c006 = FORMONLY.tit_area, NOENTRY, REVERSE, UPSHIFT;
+c007 = cxct020.z20_referencia, AUTONEXT, UPSHIFT;
+c008 = cxct020.z20_fecha_emi, AUTONEXT, REVERSE, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+        COMMENTS = 'Ingrese fecha en formato: dd-mm-yyyy';
+c009 = cxct020.z20_fecha_vcto, AUTONEXT, REVERSE,UPSHIFT, FORMAT = 'dd-mm-yyyy',
+        COMMENTS = 'Ingrese fecha en formato: dd-mm-yyyy';
+c010 = cxct020.z20_tasa_int, AUTONEXT, REVERSE, FORMAT = '#&.##';
+c011 = cxct020.z20_tasa_mora, AUTONEXT, REVERSE, FORMAT = '#&.##';
+
+a1   = cxct020.z20_moneda, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c012 = FORMONLY.tit_mon_bas, NOENTRY, REVERSE, UPSHIFT;
+c013 = cxct020.z20_paridad, NOENTRY, REVERSE, INCLUDE = (1 TO 999999.999999999),
+	FORMAT = '#,###,##&.#########';
+z001 = formonly.val_base TYPE DECIMAL(12,2) NOT NULL, 
+       FORMAT = '#,###,###,##&.##', INCLUDE = (0.01 TO 9999999999);
+--z    = FORMONLY.flag_impto TYPE CHAR NOT NULL, WIDGET = 'CHECK', 
+--     CONFIG = 'S N acknowledge', DEFAULT = 'S', INCLUDE = ('S','N'), UPSHIFT;
+--z002 = z20_val_impto, NOENTRY, FORMAT = '###,###,##&.##';
+--z003 = z20_num_sri, COMMENTS = 'Requerido solo para Notas de Débito.';
+c014 = cxct020.z20_valor_cap, AUTONEXT, REVERSE, INCLUDE = (0 TO 9999999999.99),
+	FORMAT = '#,###,###,##&.##';
+c015 = cxct020.z20_valor_int, AUTONEXT, REVERSE, INCLUDE = (0 TO 9999999999.99),
+	FORMAT = '#,###,###,##&.##';
+c016 = cxct020.z20_saldo_cap, NOENTRY, REVERSE,	FORMAT = '#,###,###,##&.##';
+c017 = cxct020.z20_saldo_int, NOENTRY, REVERSE, FORMAT = '#,###,###,##&.##';
+c018 = cxct020.z20_cartera, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c019 = FORMONLY.tit_cartera, NOENTRY, REVERSE, UPSHIFT;
+c020 = cxct020.z20_linea, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c021 = FORMONLY.tit_linea, NOENTRY, REVERSE, UPSHIFT;
+c022 = cxct020.z20_origen, NOENTRY, REVERSE, UPSHIFT,
+	WIDGET = 'RADIO', CONFIG = 'M Manual A Automatico', DEFAULT = 'M';
+c023 = cxct020.z20_usuario, NOENTRY, REVERSE, UPSHIFT;
+c024 = cxct020.z20_fecing, NOENTRY, REVERSE, UPSHIFT;
+c025 = FORMONLY.tit_modulo, NOENTRY, UPSHIFT;
+c2   = cxct020.z20_cod_tran, NOENTRY, UPSHIFT;
+c026 = cxct020.z20_num_tran, NOENTRY, FORMAT = '###############';
+
+x001 = FORMONLY.vm_num_current1, NOENTRY;
+y001 = FORMONLY.vm_num_rows1, NOENTRY;
+x002 = FORMONLY.vm_num_current2, NOENTRY;
+y002 = FORMONLY.vm_num_rows2, NOENTRY;
+end

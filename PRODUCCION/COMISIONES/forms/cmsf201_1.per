@@ -1,0 +1,57 @@
+DATABASE formonly
+SCREEN
+{
+             Periodo Comisiones: [c005] [c0]
+ [lb1 |lb2                             |lb3  |lb4             |lb5             ]
+[c010|c011                            |c016 |c012            |c018            ]
+[c010|c011                            |c016 |c012            |c018            ]
+[c010|c011                            |c016 |c012            |c018            ]
+[c010|c011                            |c016 |c012            |c018            ]
+
+ [lb6 |lb7                         |lb8|lb9  |lb10            |lb11            ]
+[c013|c014                        |c00|c017 |c015            |c019            ]
+[c013|c014                        |c00|c017 |c015            |c019            ]
+[c013|c014                        |c00|c017 |c015            |c019            ]
+[c013|c014                        |c00|c017 |c015            |c019            ]
+[c013|c014                        |c00|c017 |c015            |c019            ]
+[c013|c014                        |c00|c017 |c015            |c019            ]
+[c013|c014                        |c00|c017 |c015            |c019            ]
+[c013|c014                        |c00|c017 |c015            |c019            ]
+[c013|c014                        |c00|c017 |c015            |c019            ]
+[c013|c014                        |c00|c017 |c015            |c019            ]
+[c013|c014                        |c00|c017 |c015            |c019            ]
+[c013|c014                        |c00|c017 |c015            |c019            ]
+}
+ATTRIBUTES
+c005 = formonly.anio, FORMAT='&&&&', REVERSE;
+c0   = formonly.mes,  FORMAT='&&', REVERSE, INCLUDE=(1 TO 12);
+
+lb1  = formonly.tit_col1,  WIDGET = 'BUTTON', CONFIG = 'F15';
+lb2  = formonly.tit_col2,  WIDGET = 'BUTTON', CONFIG = 'F16';
+lb3  = formonly.tit_col3,  WIDGET = 'BUTTON', CONFIG = 'F17';
+lb4  = formonly.tit_col4,  WIDGET = 'BUTTON', CONFIG = 'F18';
+lb5  = formonly.tit_col5,  WIDGET = 'BUTTON', CONFIG = 'F19';
+lb6  = formonly.tit_col6,  WIDGET = 'BUTTON', CONFIG = 'F20';
+lb7  = formonly.tit_col7,  WIDGET = 'BUTTON', CONFIG = 'F21';
+lb8  = formonly.tit_col8,  WIDGET = 'BUTTON', CONFIG = 'F22';
+lb9  = formonly.tit_col9,  WIDGET = 'BUTTON', CONFIG = 'F23';
+lb10 = formonly.tit_col10, WIDGET = 'BUTTON', CONFIG = 'F24';
+lb11 = formonly.tit_col11, WIDGET = 'BUTTON', CONFIG = 'F25';
+
+c010 = formonly.localidad,     NOENTRY, REVERSE, OPTIONS='-nolist';
+c011 = formonly.nom_localidad, NOENTRY, REVERSE, OPTIONS='-nolist', UPSHIFT;
+c016 = formonly.linea_loc,	   NOENTRY, REVERSE, OPTIONS='-nolist';
+c012 = formonly.tot_localidad, NOENTRY, REVERSE, OPTIONS='-nolist', FORMAT='###,###,##&.&&';
+c018 = formonly.dev_localidad, NOENTRY, REVERSE, OPTIONS='-nolist', FORMAT='###,###,##&.&&';
+c013 = formonly.codcomi,       NOENTRY, REVERSE, OPTIONS='-nolist';
+c014 = formonly.nomcomi,	   NOENTRY, REVERSE, OPTIONS='-nolist', UPSHIFT;
+c00  = formonly.categoria,	   NOENTRY, REVERSE, OPTIONS='-nolist', UPSHIFT;
+c017 = formonly.linea_comi,	   NOENTRY, REVERSE, OPTIONS='-nolist';
+c015 = formonly.tot_comi,      NOENTRY, REVERSE, OPTIONS='-nolist', FORMAT='###,###,##&.&&';
+c019 = formonly.dev_comi,      NOENTRY, REVERSE, OPTIONS='-nolist', FORMAT='###,###,##&.&&';
+END
+
+INSTRUCTIONS 
+DELIMITERS '||'
+SCREEN RECORD rm_loc[4] (localidad, nom_localidad, linea_loc, tot_localidad, dev_localidad)
+SCREEN RECORD rm_comi[12] (codcomi, nomcomi, categoria, linea_comi, tot_comi, dev_comi)
