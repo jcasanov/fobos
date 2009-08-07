@@ -128,6 +128,11 @@ DEFINE r_par RECORD
 	n_bodega	LIKE rept002.r02_nombre
 END RECORD
 
+IF item IS NULL THEN
+	CALL fgl_winmessage(vg_producto, 'Debe consultar un item primero.', 'exclamation')
+	RETURN
+END IF
+
 INITIALIZE r_par.* TO NULL
 CALL fl_lee_compania_repuestos(cod_cia)                RETURNING r_r00.*
 CALL fl_lee_moneda(rg_gen.g00_moneda_base)             RETURNING r_g13.*

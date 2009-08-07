@@ -175,7 +175,7 @@ MENU 'OPCIONES'
 	COMMAND KEY('L') 'Modelos'		'Modelos en los que este item sirve'
 		CALL control_modelos()
 	COMMAND KEY('T') 'Estadisticas'		'Estadisticas de ventas'
-		CALL estadisticas()
+		CALL fl_mostrar_estadisticas_items(vg_codcia, vg_codloc, rm_r10.r10_codigo)
 	COMMAND KEY('E') 'Existencias'		'Consulta existencia del item'
 		CALL control_existencias()
 	COMMAND KEY('P') 'Pedidos'		'Consulta pedidos del item'
@@ -1329,7 +1329,7 @@ CLOSE WINDOW w_108_4
 END FUNCTION
 
 
-
+{
 FUNCTION estadisticas()
 
 DEFINE r_g13		RECORD LIKE gent013.*
@@ -1754,6 +1754,7 @@ DROP TABLE temp_mov
 LET int_flag = 0
 
 END FUNCTION
+}
 
 
 
