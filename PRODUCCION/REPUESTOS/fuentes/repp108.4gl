@@ -175,7 +175,7 @@ MENU 'OPCIONES'
 	COMMAND KEY('L') 'Modelos'		'Modelos en los que este item sirve'
 		CALL control_modelos()
 	COMMAND KEY('T') 'Estadisticas'		'Estadisticas de ventas'
-		CALL fl_mostrar_estadisticas_items(vg_codcia, vg_codloc, rm_r10.r10_codigo)
+		CALL fl_mostrar_estadisticas_items(vg_codcia, vg_codloc, rm_item.r10_codigo)
 	COMMAND KEY('E') 'Existencias'		'Consulta existencia del item'
 		CALL control_existencias()
 	COMMAND KEY('P') 'Pedidos'		'Consulta pedidos del item'
