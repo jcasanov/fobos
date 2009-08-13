@@ -1845,21 +1845,30 @@ END FUNCTION
 
 
 
+{*
+ * Esta funcion extrae el stock disponible en todas las bodegas de
+ * todas las localidades
+ *}
 FUNCTION fl_lee_stock_total_localidades_rep(cod_cia, item, area)
 DEFINE cod_cia		LIKE rept011.r11_compania
-DEFINE item		LIKE rept011.r11_item
+DEFINE item			LIKE rept011.r11_item
 DEFINE area   		LIKE rept002.r02_area
 DEFINE stock		LIKE rept011.r11_stock_act
 
-SELECT SUM(r11_stock_act) INTO stock 
-  FROM rept011, rept002 
- WHERE r02_compania  = cod_cia
-   AND r02_estado    = 'A'
-   AND r02_area      = area
---   AND r02_factura   = 'S'
-   AND r11_compania  = r02_compania
-   AND r11_bodega    = r02_codigo  
-   AND r11_item      = item
+DEFINE r_g02		RECORD LIKE gent002.*
+
+DECLARE q_stock_disp_loc CURSOR WITH HOLD FOR
+	SELECT * FROM gent002 
+	 WHERE g02_compania  = cod_cia
+	   AND g02_estado    = 'A'
+
+LET stock = 0
+FOREACH q_stock_disp_loc INTO r_g02.*
+	LET stock = stock + fl_lee_stock_disponible_rep(cod_cia, 
+													r_g02.g02_localidad, 
+													item, area)
+END FOREACH	
+FREE q_stock_disp_loc
 
 IF stock IS NULL THEN
 	LET stock = 0
