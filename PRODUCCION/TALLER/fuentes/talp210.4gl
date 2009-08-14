@@ -335,15 +335,42 @@ END FUNCTION
 FUNCTION genera_factura()
 DEFINE numero 		INTEGER
 DEFINE costo		DECIMAL(14,2)
+DEFINE r_z20		RECORD LIKE cxct020.*
 
 WHENEVER ERROR STOP
 SET LOCK MODE TO WAIT
-CALL fl_actualiza_control_secuencias(vg_codcia, vg_codloc, vg_modulo, 'AA', vm_tipo_doc)
-	RETURNING numero
-IF numero <= 0 THEN
-	ROLLBACK WORK
-	EXIT PROGRAM
-END IF
+
+WHILE TRUE
+	CALL fl_actualiza_control_secuencias(vg_codcia, vg_codloc, vg_modulo, 
+										 'AA', vm_tipo_doc)
+		RETURNING numero
+	IF numero <= 0 THEN
+		ROLLBACK WORK
+		EXIT PROGRAM
+	END IF
+
+	{*
+	 * Verifiquemos que el documento no exista ya. Esto puede ocurrir porque 
+	 * el numero interno de las facturas se generan de forma independiente
+	 * en cada modulo mientras que el modulo de CXC espera que cada cliente
+	 * tenga numeros de facturas que no se repitan independientemente del 
+	 * modulo del que venga. Para el caso de los clientes a los que se les
+	 * factura frecuentemente es pósible que si se repitan los numeros internos
+	 * de los diferentes modulos.
+	 * Si el documento ya existe no se genera ningun error, solo se pasa al 
+	 * siguiente numero interno.
+	 *}	
+	 CALL fl_lee_documento_deudor_cxc(vg_codcia, vg_codloc, 
+	 								  retorna_cliente_final(), vm_tipo_doc,
+									  numero, 1)
+			RETURNING r_z20.*								  
+
+	-- El documeno no existe continue con el proceso		
+	IF r_z20.z20_compania IS NULL THEN
+		EXIT WHILE	
+	END IF
+END WHILE	
+
 LET rm_ord.t23_num_factura = numero
 LET rm_ord.t23_fec_factura = CURRENT
 UPDATE talt023 SET t23_estado = 'F',
