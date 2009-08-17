@@ -29,9 +29,9 @@ ATTRIBUTES
 c1   = r21_moneda, UPSHIFT, AUTONEXT, REVERSE, WIDGET = 'FIELD_BMP',
 	CONFIG = 'lista.bmp F2';
 c002 = formonly.tit_moneda, NOENTRY, REVERSE;
-c003 = formonly.fecha_ini TYPE DATE, FORMAT = 'dd-mm-yyyy',
+c003 = formonly.fecha_ini TYPE DATE, FORMAT = 'dd-mm-yyyy', REVERSE, REQUIRED,
        COMMENTS = 'Ingrese fecha en formato: dd-mm-aaaa';
-c004 = formonly.fecha_fin TYPE DATE, FORMAT = 'dd-mm-yyyy',
+c004 = formonly.fecha_fin TYPE DATE, FORMAT = 'dd-mm-yyyy', REVERSE, REQUIRED,
        COMMENTS = 'Ingrese fecha en formato: dd-mm-aaaa';
 c005 = formonly.estado, REVERSE, WIDGET = 'RADIO', DEFAULT='T', 
 	   CONFIG = 'T Todas A Aprobadas S "Sin aprobar"';

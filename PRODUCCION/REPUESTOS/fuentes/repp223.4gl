@@ -178,30 +178,17 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 		IF int_flag THEN
 			EXIT INPUT
 		END IF
-		IF rm_par.fecha_ini IS NOT NULL AND rm_par.fecha_fin IS NULL THEN
+		IF rm_par.fecha_ini IS NULL OR rm_par.fecha_fin IS NULL THEN
+			CALL fgl_winmessage(vg_producto, 'Debe ingresar un rango de fechas',
+								'exclamation')
+			CONTINUE INPUT					
+		END IF
+		IF rm_par.fecha_fin < rm_par.fecha_ini THEN
 			CALL fgl_winmessage(vg_producto, 
-				'Si ingresa fecha inicial debe ingresar ' || 
-				'fecha final tambien.',
+				'La fecha final debe ser mayor ' || 
+				'a la fecha inicial.',
 				'exclamation')
 			CONTINUE INPUT
-		END IF
-		IF rm_par.fecha_fin IS NOT NULL AND rm_par.fecha_ini IS NULL THEN
-			CALL fgl_winmessage(vg_producto, 
-				'Si ingresa fecha final debe ingresar ' || 
-				'fecha inicial tambien.',
-				'exclamation')
-			CONTINUE INPUT
-		END IF
-		IF  rm_par.fecha_fin IS NOT NULL 
-		AND rm_par.fecha_ini IS NOT NULL 
-		THEN
-			IF rm_par.fecha_fin < rm_par.fecha_ini THEN
-				CALL fgl_winmessage(vg_producto, 
-					'La fecha final debe ser mayor ' || 
-					'a la fecha inicial.',
-					'exclamation')
-				CONTINUE INPUT
-			END IF
 		END IF
 END INPUT
 
@@ -211,71 +198,42 @@ END FUNCTION
 
 FUNCTION lee_parametros2()
 DEFINE i		SMALLINT
-DEFINE query		VARCHAR(1000)
 DEFINE expr_sql		VARCHAR(200)
-DEFINE expr_fecha	VARCHAR(200)
-DEFINE expr_vend	VARCHAR(100)
-DEFINE expr_estado	VARCHAR(350)
 
 DEFINE tot_prof		LIKE rept021.r21_tot_neto
 
 LET int_flag = 0
 CONSTRUCT expr_sql ON   r21_numprof, r21_nomcli, r21_tot_neto
-		   FROM r21_numprof, r21_nomcli, r21_tot_neto
+				   FROM r21_numprof, r21_nomcli, r21_tot_neto
 IF int_flag THEN
 	RETURN
 END IF
 ERROR 'Generando consulta . . . espere por favor' ATTRIBUTE(NORMAL)
 
-LET expr_fecha = ' 1 = 1 '
-IF rm_par.fecha_ini IS NOT NULL THEN
-	LET expr_fecha = ' DATE(r21_fecing) BETWEEN "', rm_par.fecha_ini, '"',
-					  ' AND "', rm_par.fecha_fin, '"'
-END IF
+CREATE TEMP TABLE temp_prof (
+	fecha_ini		DATE,
+	r21_numprof		INTEGER,
+	r21_nomcli		VARCHAR(100),
+	r01_iniciales	CHAR(3),
+	r21_dias_prof	SMALLINT,
+	r21_tot_neto	DECIMAL(12,2)
+)
 
-LET expr_vend = ' 1 = 1 '
-IF rm_par.r21_vendedor IS NOT NULL THEN
-	LET expr_vend = ' r21_vendedor = ', rm_par.r21_vendedor
-END IF
-
-LET expr_estado = ' 1 = 1 '
 CASE rm_par.estado 
-	WHEN 'A' 
-		LET expr_estado = ' EXISTS (SELECT 1 FROM rept102, rept023',
-								   ' WHERE r102_compania  = r21_compania',
-								     ' AND r102_localidad = r21_localidad',
-								     ' AND r102_numprof   = r21_numprof',
-								     ' AND r23_compania   = r102_compania',
-								     ' AND r23_localidad  = r102_localidad',
-								     ' AND r23_numprev    = r102_numprev',
-								     ' AND r23_estado     = "P")'
+	WHEN 'A'
+		CALL generar_consulta_aprobadas(expr_sql)
 	WHEN 'S'
-		LET expr_estado = ' NOT EXISTS (SELECT 1 FROM rept102, rept023',
-								   ' WHERE r102_compania  = r21_compania',
-								     ' AND r102_localidad = r21_localidad',
-								     ' AND r102_numprof   = r21_numprof',
-								     ' AND r23_compania   = r102_compania',
-								     ' AND r23_localidad  = r102_localidad',
-								     ' AND r23_numprev    = r102_numprev',
-								     ' AND r23_estado     = "P")'
-END CASE
+		CALL generar_consulta_sin_aprobar(expr_sql)
+{
+	WHEN 'F'
+		CALL generar_consulta_facturadas(expr_sql)
+}
+	WHEN 'T'
+		CALL generar_consulta_aprobadas(expr_sql)
+		CALL generar_consulta_sin_aprobar(expr_sql)
+--		CALL generar_consulta_facturadas(expr_sql)
+END CASE		
 
-LET query = 'SELECT DATE(r21_fecing) fecha_ini, r21_numprof, r21_nomcli, ',
-			' r01_iniciales, (DATE(r21_fecing) + r21_dias_prof) fecha_max, ',
-			' r21_tot_neto ',
-			'  FROM rept021, rept001 ',
-			' WHERE r21_compania  = ', vg_codcia, 
-			'   AND r21_localidad = ', vg_codloc, 
-			'   AND r21_moneda    = "', rm_par.r21_moneda, '"',
-			'   AND ', expr_fecha CLIPPED, 
-			'   AND ', expr_vend CLIPPED,  
-			'   AND ', expr_sql CLIPPED,  
-			'   AND ', expr_estado CLIPPED, 
-			'   AND r01_compania  = r21_compania', 
-			'   AND r01_codigo    = r21_vendedor', 
-			'  INTO TEMP temp_prof'
-PREPARE q_cit FROM query
-EXECUTE q_cit
 SELECT COUNT(*) INTO i FROM temp_prof
 IF i = 0 THEN
 	CALL fl_mensaje_consulta_sin_registros()
@@ -293,6 +251,132 @@ END FUNCTION
 
 
 
+FUNCTION generar_consulta_aprobadas(expr_sql)
+DEFINE query		VARCHAR(1000)
+DEFINE expr_sql		VARCHAR(200)
+DEFINE expr_vend	VARCHAR(100)
+
+LET expr_vend = ' 1 = 1 '
+IF rm_par.r21_vendedor IS NOT NULL THEN
+	LET expr_vend = ' r21_vendedor = ', rm_par.r21_vendedor
+END IF
+
+LET query = 'INSERT INTO temp_prof ',
+			'SELECT DATE(MIN(r23_fecing)) fecha_ini, ',
+			'       r21_numprof, r21_nomcli, r01_iniciales, ',
+			'       r21_dias_prof, r21_tot_neto ',
+			'  FROM rept021, rept001, rept102, rept023 ',
+			' WHERE r21_compania   = ', vg_codcia, 
+			'   AND r21_localidad  = ', vg_codloc, 
+			'   AND r21_moneda     = "', rm_par.r21_moneda, '"',
+			'   AND ', expr_vend CLIPPED,  
+			'   AND ', expr_sql CLIPPED,  
+			'   AND r01_compania   = r21_compania', 
+			'   AND r01_codigo     = r21_vendedor', 
+			'   AND r102_compania  = r21_compania',
+			'   AND r102_localidad = r21_localidad',
+			'   AND r102_numprof   = r21_numprof',
+			'   AND r23_compania   = r102_compania',
+			'   AND r23_localidad  = r102_localidad',
+			'   AND r23_numprev    = r102_numprev',
+			'   AND r23_estado     = "P" ',
+			' GROUP BY r21_numprof, r21_nomcli, ',
+			' 		   r01_iniciales, r21_dias_prof, r21_tot_neto ',
+			'HAVING DATE(MIN(r23_fecing)) BETWEEN "', rm_par.fecha_ini, '"', 
+											' AND "', rm_par.fecha_fin, '"'
+
+PREPARE stmt1 FROM query
+EXECUTE stmt1
+
+END FUNCTION
+
+
+
+FUNCTION generar_consulta_sin_aprobar(expr_sql)
+DEFINE query		VARCHAR(1000)
+DEFINE expr_sql		VARCHAR(200)
+DEFINE expr_vend	VARCHAR(100)
+
+LET expr_vend = ' 1 = 1 '
+IF rm_par.r21_vendedor IS NOT NULL THEN
+	LET expr_vend = ' r21_vendedor = ', rm_par.r21_vendedor
+END IF
+
+LET query = 'INSERT INTO temp_prof ',
+			'SELECT DATE(r21_fecing), ',
+			'       r21_numprof, r21_nomcli, r01_iniciales, ',
+			'       r21_dias_prof, r21_tot_neto ',
+			'  FROM rept021, rept001 ',
+			' WHERE r21_compania   = ', vg_codcia, 
+			'   AND r21_localidad  = ', vg_codloc, 
+			'   AND r21_moneda     = "', rm_par.r21_moneda, '"',
+			'   AND DATE(r21_fecing) BETWEEN "', rm_par.fecha_ini, '"', 
+									   ' AND "', rm_par.fecha_fin, '"',
+			'   AND ', expr_vend CLIPPED,  
+			'   AND ', expr_sql CLIPPED,  
+			'   AND NOT EXISTS (SELECT 1 FROM rept102, rept023',
+							   ' WHERE r102_compania  = r21_compania',
+							     ' AND r102_localidad = r21_localidad',
+							     ' AND r102_numprof   = r21_numprof',
+							     ' AND r23_compania   = r102_compania',
+							     ' AND r23_localidad  = r102_localidad',
+							     ' AND r23_numprev    = r102_numprev',
+							     ' AND r23_estado     = "P")',
+			'   AND r01_compania   = r21_compania', 
+			'   AND r01_codigo     = r21_vendedor', 
+			' GROUP BY r21_fecing, r21_numprof, r21_nomcli, ',
+			' 		   r01_iniciales, r21_dias_prof, r21_tot_neto '
+
+PREPARE stmt2 FROM query
+EXECUTE stmt2
+
+END FUNCTION
+
+
+
+{
+FUNCTION generar_consulta_facturadas(expr_sql)
+DEFINE query		VARCHAR(1000)
+DEFINE expr_sql		VARCHAR(200)
+DEFINE expr_vend	VARCHAR(100)
+
+LET expr_vend = ' 1 = 1 '
+IF rm_par.r21_vendedor IS NOT NULL THEN
+	LET expr_vend = ' r21_vendedor = ', rm_par.r21_vendedor
+END IF
+
+LET query = 'INSERT INTO temp_prof ',
+			'SELECT DATE(MIN(r23_fecing)) fecha_ini, ',
+			'       r21_numprof, r21_nomcli, r01_iniciales, ',
+			'       r21_dias_prof, r21_tot_neto ',
+			'  FROM rept021, rept001, rept102, rept023 ',
+			' WHERE r21_compania   = ', vg_codcia, 
+			'   AND r21_localidad  = ', vg_codloc, 
+			'   AND r21_moneda     = "', rm_par.r21_moneda, '"',
+			'   AND ', expr_vend CLIPPED,  
+			'   AND ', expr_sql CLIPPED,  
+			'   AND r01_compania   = r21_compania', 
+			'   AND r01_codigo     = r21_vendedor', 
+			'   AND r102_compania  = r21_compania',
+			'   AND r102_localidad = r21_localidad',
+			'   AND r102_numprof   = r21_numprof',
+			'   AND r23_compania   = r102_compania',
+			'   AND r23_localidad  = r102_localidad',
+			'   AND r23_numprev    = r102_numprev',
+			'   AND r23_estado     = "F" ',
+			' GROUP BY r21_numprof, r21_nomcli, ',
+			' 		   r01_iniciales, r21_dias_prof, r21_tot_neto ',
+			'HAVING DATE(MIN(r23_fecing)) BETWEEN "', rm_par.fecha_ini, '"', 
+											' AND "', rm_par.fecha_fin, '"'
+
+PREPARE stmt3 FROM query
+EXECUTE stmt3
+
+END FUNCTION
+}
+
+
+
 FUNCTION muestra_consulta()
 DEFINE i		SMALLINT
 DEFINE query		VARCHAR(300)
@@ -307,7 +391,10 @@ LET vm_columna_2 = 2
 LET rm_orden[vm_columna_1] = 'DESC'
 LET rm_orden[vm_columna_2] = 'ASC'
 WHILE TRUE
-	LET query = 'SELECT * FROM temp_prof ORDER BY ',
+	LET query = 'SELECT fecha_ini, r21_numprof, r21_nomcli, ',
+				'       r01_iniciales, fecha_ini + r21_dias_prof, ', 
+				'       r21_tot_neto ',
+				'  FROM temp_prof ORDER BY ',
 			vm_columna_1, ' ', rm_orden[vm_columna_1], ',', 
 			vm_columna_2, ' ', rm_orden[vm_columna_2] 
 	PREPARE crep FROM query
