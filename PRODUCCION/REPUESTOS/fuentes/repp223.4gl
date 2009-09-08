@@ -421,6 +421,11 @@ WHILE TRUE
 				CALL dialog.keysetlabel("F6","")
 				CALL dialog.keysetlabel("F8","")
 			END IF
+
+			-- Verifico que de hecho tenga los permisos apropiados
+			IF NOT fl_control_permiso_opcion('Eliminar') THEN
+				CALL dialog.keysetlabel("F8","")
+			END IF
 		BEFORE DISPLAY
 			CALL dialog.keysetlabel("ACCEPT","")
 			CALL dialog.keysetlabel("F5","Ver proforma")
@@ -519,6 +524,13 @@ DEFINE numprof	LIKE rept021.r21_numprof
 DEFINE numprev          LIKE rept023.r23_numprev
 DEFINE r_r23            RECORD LIKE rept023.*
 DEFINE resp 		CHAR(6)
+
+IF NOT fl_control_permiso_opcion('Eliminar') THEN
+	CALL fgl_winmessage(vg_producto,'USUARIO NO TIENE PERMISO PARA ESTA OPCION'
+				|| '. PEDIR AYUDA AL ADMINISTRADOR ',
+				'stop')
+	RETURN
+END IF
 
 CALL fgl_winquestion(vg_producto,
 				'¿Desea anular las preventas generadas para esta proforma?', 

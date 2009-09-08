@@ -12,6 +12,7 @@ DEFINE vg_codloc	LIKE gent002.g02_localidad
 DEFINE vg_usuario	LIKE gent005.g05_usuario
 DEFINE vg_separador	LIKE fobos.fb_separador
 DEFINE vg_dir_fobos	LIKE fobos.fb_dir_fobos
+DEFINE vg_opciones	LIKE gent055.g55_opciones
 
 DEFINE rg_gen		RECORD LIKE gent000.* 
 DEFINE rg_cia		RECORD LIKE gent001.* 

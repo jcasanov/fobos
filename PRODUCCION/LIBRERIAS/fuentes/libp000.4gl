@@ -2488,6 +2488,7 @@ IF vg_codloc = 0 OR vg_codloc IS NULL THEN
 	LET vg_codloc = fl_retorna_agencia_default(vg_codcia)
 END IF
 CALL fl_control_acceso_procesos(vg_usuario, vg_codcia, vg_modulo, vg_proceso) 
+	RETURNING vg_opciones
 OPTIONS ACCEPT KEY	F12,
 	INPUT WRAP,
 	FORM LINE	FIRST + 2,
@@ -2504,6 +2505,7 @@ END FUNCTION
 
 
 
+
 FUNCTION fl_control_acceso_procesos(v_usuario, v_codcia, v_modulo, v_proceso) 
 DEFINE v_usuario	LIKE gent005.g05_usuario
 DEFINE v_codcia		LIKE gent001.g01_compania
@@ -2517,7 +2519,7 @@ DEFINE clave		LIKE gent005.g05_clave
 
 -- El usuario FOBOS no tiene restricciones
 IF v_usuario = 'FOBOS' THEN
-	RETURN
+	RETURN 'SSSSSSSSSSSSSSS'
 END IF
 
 CALL fl_lee_usuario(v_usuario) RETURNING r_g05.*
@@ -2562,7 +2564,7 @@ IF status = NOTFOUND THEN
 	EXIT PROGRAM
 END IF
 IF v_proceso IS NULL THEN
-	RETURN
+	RETURN 'NNNNNNNNNNNNNNN'
 END IF
 CALL fl_lee_proceso(v_modulo, v_proceso) RETURNING r_g54.*
 IF r_g54.g54_modulo IS NULL THEN
@@ -2601,12 +2603,68 @@ IF r_g54.g54_estado = 'R' THEN
 	IF clave = r_g05.g05_clave OR 
 		(clave IS NULL AND r_g05.g05_clave IS NULL) THEN
 		CLOSE WINDOW w_clave
-		RETURN
+		RETURN 'NNNNNNNNNNNNNNN'
 	END IF
 	CALL fgl_winmessage(vg_producto, 'LO SIENTO CLAVE INCORRECTA ',
 				'stop')
 	EXIT PROGRAM
 END IF	
+
+RETURN r_g55.g55_opciones
+
+END FUNCTION
+
+
+
+FUNCTION fl_mapear_opciones(opcion)
+DEFINE opcion VARCHAR(15)
+DEFINE num_op INTEGER
+
+CASE opcion 
+	WHEN 'Ejecutar'
+		LET num_op = 1
+	WHEN 'Ingresar'
+		LET num_op = 2
+	WHEN 'Modificar'
+		LET num_op = 3
+	WHEN 'Procesar'
+		LET num_op = 3
+	WHEN 'Consultar'
+		LET num_op = 4
+	WHEN 'Eliminar'
+		LET num_op = 5
+	WHEN 'Bloquear'
+		LET num_op = 5
+	WHEN 'Imprimir'
+		LET num_op = 6 
+	OTHERWISE
+		LET num_op = 0
+END CASE
+
+RETURN num_op
+
+END FUNCTION
+
+
+
+{*
+ * Funcion para determinar, a partir de la mascara de opciones, si el usuario
+ * tiene permiso para una opcion especifica.
+ *}
+FUNCTION fl_control_permiso_opcion(opcion) 
+DEFINE opcion VARCHAR(15)
+DEFINE num_op INTEGER
+
+IF vg_opciones IS NULL THEN
+	RETURN FALSE
+END IF
+
+LET num_op = fl_mapear_opciones(opcion)
+IF vg_opciones[num_op] = 'S' THEN
+	RETURN TRUE
+END IF
+
+RETURN FALSE
 
 END FUNCTION
 

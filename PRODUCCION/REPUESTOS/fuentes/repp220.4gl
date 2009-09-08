@@ -176,6 +176,9 @@ CALL inicializar_factores_importacion_stock()
 
 MENU 'OPCIONES'
 	BEFORE MENU
+		IF NOT fl_control_permiso_opcion('Ingresar') THEN
+			HIDE OPTION 'Ingresar'
+		END IF
 		HIDE OPTION 'Avanzar'
 		HIDE OPTION 'Retroceder'
 		HIDE OPTION 'Modificar'
@@ -195,12 +198,20 @@ MENU 'OPCIONES'
 	COMMAND KEY('I') 'Ingresar' 		'Ingresar nuevos registros.'
         CALL control_ingreso()
 		IF vm_num_rows >= 1 THEN
-			SHOW OPTION 'Modificar'
-			SHOW OPTION 'Copiar'
+			IF fl_control_permiso_opcion('Modificar') THEN
+				SHOW OPTION 'Modificar'
+			END IF
+			IF fl_control_permiso_opcion('Ingresar') THEN
+				SHOW OPTION 'Copiar'
+			END IF
 			SHOW OPTION 'Ver Detalle'
-			SHOW OPTION 'Hacer Preventa'
-			SHOW OPTION 'Hacer Pedido'
-			SHOW OPTION 'Imprimir'
+			IF fl_control_permiso_opcion('Procesar') THEN
+				SHOW OPTION 'Hacer Preventa'
+				SHOW OPTION 'Hacer Pedido'
+			END IF
+			IF fl_control_permiso_opcion('Imprimir') THEN
+				SHOW OPTION 'Imprimir'
+			END IF
 		END IF
                 IF vm_row_current > 1 THEN
                         SHOW OPTION 'Retroceder'
@@ -221,12 +232,20 @@ MENU 'OPCIONES'
 			CALL fl_mensaje_consultar_primero()
 		END IF
 		IF vm_num_rows >= 1 THEN
-			SHOW OPTION 'Modificar'
-			SHOW OPTION 'Copiar'
+			IF fl_control_permiso_opcion('Modificar') THEN
+				SHOW OPTION 'Modificar'
+			END IF
+			IF fl_control_permiso_opcion('Ingresar') THEN
+				SHOW OPTION 'Copiar'
+			END IF
 			SHOW OPTION 'Ver Detalle'
-			SHOW OPTION 'Hacer Preventa'
-			SHOW OPTION 'Hacer Pedido'
-			SHOW OPTION 'Imprimir'
+			IF fl_control_permiso_opcion('Procesar') THEN
+				SHOW OPTION 'Hacer Preventa'
+				SHOW OPTION 'Hacer Pedido'
+			END IF
+			IF fl_control_permiso_opcion('Imprimir') THEN
+				SHOW OPTION 'Imprimir'
+			END IF
 		END IF
 		IF vm_row_current > 1 THEN
         	SHOW OPTION 'Retroceder'
@@ -249,15 +268,23 @@ MENU 'OPCIONES'
 		ELSE
 			CALL fl_mensaje_consultar_primero()
 		END IF
-        COMMAND KEY('C') 'Consultar'            'Consultar un registro.'
-                CALL control_consulta()
+	COMMAND KEY('C') 'Consultar'            'Consultar un registro.'
+        CALL control_consulta()
                 IF vm_num_rows <= 1 THEN
-			SHOW OPTION 'Modificar'
-			SHOW OPTION 'Copiar'
+			IF fl_control_permiso_opcion('Modificar') THEN
+				SHOW OPTION 'Modificar'
+			END IF
+			IF fl_control_permiso_opcion('Ingresar') THEN
+				SHOW OPTION 'Copiar'
+			END IF
 			SHOW OPTION 'Ver Detalle'
-			SHOW OPTION 'Hacer Preventa'
-			SHOW OPTION 'Hacer Pedido'
-			SHOW OPTION 'Imprimir'
+			IF fl_control_permiso_opcion('Procesar') THEN
+				SHOW OPTION 'Hacer Preventa'
+				SHOW OPTION 'Hacer Pedido'
+			END IF
+			IF fl_control_permiso_opcion('Imprimir') THEN
+				SHOW OPTION 'Imprimir'
+			END IF
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 				IF vm_num_rows = 0 THEN
@@ -269,11 +296,19 @@ MENU 'OPCIONES'
 					HIDE OPTION 'Hacer Pedido'
                         END IF
                 ELSE
-					SHOW OPTION 'Modificar'
-					SHOW OPTION 'Copiar'	
-					SHOW OPTION 'Hacer Pedido'
-					SHOW OPTION 'Imprimir'
-					SHOW OPTION 'Hacer Preventa'
+					IF fl_control_permiso_opcion('Modificar') THEN
+						SHOW OPTION 'Modificar'
+					END IF
+					IF fl_control_permiso_opcion('Ingresar') THEN
+						SHOW OPTION 'Copiar'	
+					END IF
+					IF fl_control_permiso_opcion('Procesar') THEN
+						SHOW OPTION 'Hacer Pedido'
+						SHOW OPTION 'Hacer Preventa'
+					END IF
+					IF fl_control_permiso_opcion('Imprimir') THEN
+						SHOW OPTION 'Imprimir'
+					END IF
 					SHOW OPTION 'Ver Detalle'
 					SHOW OPTION 'Avanzar'
                 END IF
@@ -295,35 +330,59 @@ MENU 'OPCIONES'
 		CALL siguiente_registro()
 		IF vm_row_current = vm_num_rows THEN
 			HIDE OPTION 'Avanzar'
-			SHOW OPTION 'Hacer Preventa'
+			IF fl_control_permiso_opcion('Procesar') THEN
+				SHOW OPTION 'Hacer Preventa'
+			END IF
 			SHOW OPTION 'Ver Detalle'
 			SHOW OPTION 'Retroceder'
-			SHOW OPTION 'Modificar'
-			SHOW OPTION 'Copiar'
+			IF fl_control_permiso_opcion('Modificar') THEN
+				SHOW OPTION 'Modificar'
+			END IF
+			IF fl_control_permiso_opcion('Ingresar') THEN
+				SHOW OPTION 'Copiar'
+			END IF
 			NEXT OPTION 'Retroceder'
 		ELSE
-			SHOW OPTION 'Hacer Preventa'
+			IF fl_control_permiso_opcion('Procesar') THEN
+				SHOW OPTION 'Hacer Preventa'
+			END IF
 			SHOW OPTION 'Ver Detalle'
-			SHOW OPTION 'Modificar'
-			SHOW OPTION 'Copiar'
+			IF fl_control_permiso_opcion('Modificar') THEN
+				SHOW OPTION 'Modificar'
+			END IF
+			IF fl_control_permiso_opcion('Ingresar') THEN
+				SHOW OPTION 'Copiar'
+			END IF
 			SHOW OPTION 'Avanzar'
 			SHOW OPTION 'Retroceder'
 		END IF
 	COMMAND KEY('R') 'Retroceder' 		'Ver anterior registro.'
 		CALL anterior_registro()
 		IF vm_row_current = 1 THEN
-			SHOW OPTION 'Hacer Preventa'
+			IF fl_control_permiso_opcion('Procesar') THEN
+				SHOW OPTION 'Hacer Preventa'
+			END IF
 			SHOW OPTION 'Ver Detalle'
-			SHOW OPTION 'Modificar'
-			SHOW OPTION 'Copiar'
+			IF fl_control_permiso_opcion('Modificar') THEN
+				SHOW OPTION 'Modificar'
+			END IF
+			IF fl_control_permiso_opcion('Ingresar') THEN
+				SHOW OPTION 'Copiar'
+			END IF
 			HIDE OPTION 'Retroceder'
 			SHOW OPTION 'Avanzar'
 			NEXT OPTION 'Avanzar'
 		ELSE
-			SHOW OPTION 'Hacer Preventa'
+			IF fl_control_permiso_opcion('Procesar') THEN
+				SHOW OPTION 'Hacer Preventa'
+			END IF
 			SHOW OPTION 'Ver Detalle'
-			SHOW OPTION 'Modificar'
-			SHOW OPTION 'Copiar'
+			IF fl_control_permiso_opcion('Modificar') THEN
+				SHOW OPTION 'Modificar'
+			END IF
+			IF fl_control_permiso_opcion('Ingresar') THEN
+				SHOW OPTION 'Copiar'
+			END IF
 			SHOW OPTION 'Avanzar'
 			SHOW OPTION 'Retroceder'
 		END IF

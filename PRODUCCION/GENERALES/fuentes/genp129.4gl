@@ -856,6 +856,7 @@ LET r_g55.g55_user     = usuario
 LET r_g55.g55_modulo   = modulo
 LET r_g55.g55_compania = cia
 LET r_g55.g55_proceso  = proc
+LET r_g55.g55_opciones = 'SSSSSSSSSSSSSSS';
 LET r_g55.g55_usuario  = vg_usuario
 LET r_g55.g55_fecing   = CURRENT 
 
