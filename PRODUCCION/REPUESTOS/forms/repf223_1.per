@@ -34,7 +34,7 @@ c003 = formonly.fecha_ini TYPE DATE, FORMAT = 'dd-mm-yyyy', REVERSE, REQUIRED,
 c004 = formonly.fecha_fin TYPE DATE, FORMAT = 'dd-mm-yyyy', REVERSE, REQUIRED,
        COMMENTS = 'Ingrese fecha en formato: dd-mm-aaaa';
 c005 = formonly.estado, REVERSE, WIDGET = 'RADIO', DEFAULT='T', 
-	   CONFIG = 'T Todas A Aprobadas S "Sin aprobar"';
+	   CONFIG = 'T Todas A Aprobadas S "Sin aprobar" F Facturadas';
 c05  = formonly.r21_vendedor, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 c006 = formonly.tit_vend, NOENTRY;
 c010 = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';

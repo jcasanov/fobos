@@ -224,14 +224,12 @@ CASE rm_par.estado
 		CALL generar_consulta_aprobadas(expr_sql)
 	WHEN 'S'
 		CALL generar_consulta_sin_aprobar(expr_sql)
-{
 	WHEN 'F'
 		CALL generar_consulta_facturadas(expr_sql)
-}
 	WHEN 'T'
 		CALL generar_consulta_aprobadas(expr_sql)
 		CALL generar_consulta_sin_aprobar(expr_sql)
---		CALL generar_consulta_facturadas(expr_sql)
+		CALL generar_consulta_facturadas(expr_sql)
 END CASE		
 
 SELECT COUNT(*) INTO i FROM temp_prof
@@ -334,7 +332,6 @@ END FUNCTION
 
 
 
-{
 FUNCTION generar_consulta_facturadas(expr_sql)
 DEFINE query		VARCHAR(1000)
 DEFINE expr_sql		VARCHAR(200)
@@ -373,7 +370,6 @@ PREPARE stmt3 FROM query
 EXECUTE stmt3
 
 END FUNCTION
-}
 
 
 
