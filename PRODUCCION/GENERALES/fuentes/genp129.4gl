@@ -101,8 +101,19 @@ DEFINE modulo		LIKE gent050.g50_modulo
 DEFINE usr		LIKE gent005.g05_usuario
 DEFINE cia		LIKE gent001.g01_compania 
 
+DEFINE mascara	LIKE gent055.g55_opciones
+
 DEFINE ra_proc ARRAY[1000] OF RECORD
-	check			CHAR(1),
+	p1				CHAR(1),
+	p2				CHAR(1),
+	p3				CHAR(1),
+	p4				CHAR(1),
+	p5				CHAR(1),
+	p6				CHAR(1),
+	p7				CHAR(1),
+	p8				CHAR(1),
+	p9				CHAR(1),
+	p0				CHAR(1),
 	g54_tipo		CHAR(1),
 	g54_proceso		CHAR(15),
 	g54_nombre		CHAR(50)
@@ -114,7 +125,6 @@ DEFINE j		SMALLINT
 DEFINE query		CHAR(500)	## Contiene todo el query preparado
 DEFINE resp		CHAR(6)
 DEFINE modified		CHAR(1)
-DEFINE chk		CHAR(1)		-- Guarda el valor anterior de check
 
 DEFINE filas_max	SMALLINT	## No. elementos del arreglo
 DEFINE filas_pant	SMALLINT	## No. elementos de cada pantalla
@@ -148,11 +158,11 @@ DECLARE q_prcons2 CURSOR FOR prcons2
 LET i = 1
 FOREACH q_prcons2 INTO ra_proc[i].g54_tipo, ra_proc[i].g54_proceso,
        	               ra_proc[i].g54_nombre 
-	LET ra_proc[i].check = 'S'
-	IF NOT canAccessProcessInCia(usr, modulo, ra_proc[i].g54_proceso, cia) 
-	THEN
-		LET ra_proc[i].check = 'N'
-	END IF
+	CALL split_permission_mask(usr, modulo, ra_proc[i].g54_proceso, cia) 
+		RETURNING ra_proc[i].p1, ra_proc[i].p2, ra_proc[i].p3, 
+		          ra_proc[i].p4, ra_proc[i].p5, ra_proc[i].p6, 
+		          ra_proc[i].p7, ra_proc[i].p8, ra_proc[i].p9, 
+		          ra_proc[i].p0
 	LET i = i + 1
 	IF i > filas_max THEN
 		EXIT FOREACH
@@ -171,13 +181,8 @@ WHILE NOT salir
 	INPUT ARRAY ra_proc WITHOUT DEFAULTS FROM ra_proc.*
 		ATTRIBUTE (INSERT ROW = FALSE, DELETE ROW = FALSE)
 		ON KEY(INTERRUPT)
-			IF NOT modified THEN
-				EXIT INPUT		
-			END IF
-
 			LET INT_FLAG = 0
-			CALL fl_mensaje_abandonar_proceso()
-				RETURNING resp
+			CALL fl_mensaje_abandonar_proceso() RETURNING resp
 			IF resp = 'Yes' THEN
 				LET INT_FLAG = 1   
 				EXIT INPUT 
@@ -203,12 +208,6 @@ WHILE NOT salir
 		BEFORE ROW
 			LET j = arr_curr()
 			MESSAGE j, ' de ', i
-		BEFORE FIELD check 
-			LET chk = ra_proc[j].check
-		AFTER  FIELD check
-			IF chk <> ra_proc[j].check THEN
-				LET modified = 1
-			END IF
 		AFTER INPUT
 			LET salir = 1
 	END INPUT
@@ -218,13 +217,23 @@ WHILE NOT salir
 	END IF
 
 	-- SI SE CONCEDIO O QUITO ALGUN PERMISO AQUI DEBE SER MANEJADO
-	LET j = 0
 	FOR j = 1 TO i
-		IF ra_proc[j].check = 'S' THEN
+		IF ra_proc[j].p1 = 'S' OR ra_proc[j].p2 = 'S' OR  
+		   ra_proc[j].p3 = 'S' OR ra_proc[j].p4 = 'S' OR  
+		   ra_proc[j].p5 = 'S' OR ra_proc[j].p6 = 'S' OR  
+		   ra_proc[j].p7 = 'S' OR ra_proc[j].p8 = 'S' OR  
+		   ra_proc[j].p9 = 'S' OR ra_proc[j].p0 = 'S'   
+		THEN
+			CALL form_permission_mask(ra_proc[j].p1, ra_proc[j].p2,
+			                          ra_proc[j].p3, ra_proc[j].p4,
+			                          ra_proc[j].p5, ra_proc[j].p6,
+			                          ra_proc[j].p7, ra_proc[j].p8,
+			                          ra_proc[j].p9, ra_proc[j].p0)
+				RETURNING mascara
 			CALL grantUserToModuleInCia(usr, modulo, cia)
 			CALL grantUserToProcess(usr, modulo, 
                                                 ra_proc[j].g54_proceso,
-                                       		cia)
+                                       		cia, mascara)
 		ELSE	
 			CALL revokeGrantsToUserInProcess(usr, modulo, 
        		                                         ra_proc[j].g54_proceso,
@@ -447,15 +456,24 @@ END FUNCTION
 FUNCTION asignaProcesoAUsuarios()
 
 DEFINE ra_proc ARRAY[1000] OF RECORD
-	check			CHAR(1),
+	p1				CHAR(1),
+	p2				CHAR(1),
+	p3				CHAR(1),
+	p4				CHAR(1),
+	p5				CHAR(1),
+	p6				CHAR(1),
+	p7				CHAR(1),
+	p8				CHAR(1),
+	p9				CHAR(1),
+	p0				CHAR(1),
 	g54_tipo		CHAR(1),
 	g54_proceso		CHAR(15),
 	g54_nombre		CHAR(50)
 END RECORD
 
-DEFINE i		SMALLINT
-DEFINE j		SMALLINT
-DEFINE ind		SMALLINT
+DEFINE i			SMALLINT
+DEFINE j			SMALLINT
+DEFINE ind			SMALLINT
 DEFINE salir		SMALLINT
 
 DEFINE query		CHAR(500)	## Contiene todo el query preparado
@@ -464,8 +482,8 @@ DEFINE filas_max	SMALLINT	## No. elementos del arreglo
 DEFINE filas_pant	SMALLINT	## No. elementos de cada pantalla
 
 DEFINE modulo		LIKE gent050.g50_modulo
-define cia		like gent001.g01_compania
-define usr		like gent005.g05_usuario
+DEFINE cia			LIKE gent001.g01_compania
+DEFINE usr			LIKE gent005.g05_usuario
 
 LET filas_max  = 1000
 LET filas_pant = 10
@@ -764,7 +782,7 @@ FOR j = 1 TO i
 		CALL grantUserToProcess(ra_usu[j].usuario,
                                         r_g55.g55_modulo,
 		           	        r_g55.g55_proceso,
-                                        r_g55.g55_compania)
+                                        r_g55.g55_compania, 'SSSSSSSSSSSSSSS')
 	ELSE	
 		CALL revokeGrantsToUserInProcess(ra_usu[j].usuario,
                                                  r_g55.g55_modulo,
@@ -843,12 +861,13 @@ END FUNCTION
 
 
 
-FUNCTION grantUserToProcess(usuario, modulo, proc, cia)
+FUNCTION grantUserToProcess(usuario, modulo, proc, cia, mascara)
 
 DEFINE usuario		LIKE gent005.g05_usuario
 DEFINE modulo 		LIKE gent050.g50_modulo
-DEFINE proc		LIKE gent054.g54_proceso
-DEFINE cia		LIKE gent001.g01_compania
+DEFINE proc			LIKE gent054.g54_proceso
+DEFINE cia			LIKE gent001.g01_compania
+DEFINE mascara		LIKE gent055.g55_opciones
 
 DEFINE r_g55		RECORD LIKE gent055.*
 
@@ -856,13 +875,19 @@ LET r_g55.g55_user     = usuario
 LET r_g55.g55_modulo   = modulo
 LET r_g55.g55_compania = cia
 LET r_g55.g55_proceso  = proc
-LET r_g55.g55_opciones = 'SSSSSSSSSSSSSSS';
+LET r_g55.g55_opciones = mascara 
 LET r_g55.g55_usuario  = vg_usuario
 LET r_g55.g55_fecing   = CURRENT 
 
 IF NOT canAccessProcessInCia(r_g55.g55_user, r_g55.g55_modulo,
 			     r_g55.g55_proceso, r_g55.g55_compania) THEN
 	INSERT INTO gent055 VALUES (r_g55.*)
+ELSE
+	UPDATE gent055 SET g55_opciones = r_g55.g55_opciones
+	 WHERE g55_user     = r_g55.g55_user
+	   AND g55_modulo   = r_g55.g55_modulo
+	   AND g55_compania = r_g55.g55_compania
+	   AND g55_proceso  = r_g55.g55_proceso 
 END IF
 
 END FUNCTION
@@ -931,6 +956,59 @@ IF STATUS = NOTFOUND THEN
 END IF	
 	
 RETURN returnValue
+
+END FUNCTION
+
+
+
+FUNCTION form_permission_mask(p1, p2, p3, p4, p5, p6, p7, p8, p9, p0)
+DEFINE p1, p2, p3, p4, p5 		CHAR(1)
+DEFINE p6, p7, p8, p9, p0 		CHAR(1)
+DEFINE mascara			LIKE gent055.g55_opciones
+
+LET mascara = 'NNNNNNNNNNNNNNN'
+LET mascara[1]  = p1
+LET mascara[2]  = p2
+LET mascara[3]  = p3
+LET mascara[4]  = p4
+LET mascara[5]  = p5
+LET mascara[6]  = p6
+LET mascara[7]  = p7
+LET mascara[8]  = p8
+LET mascara[9]  = p9
+LET mascara[10] = p0
+
+RETURN mascara
+
+END FUNCTION
+
+
+
+FUNCTION split_permission_mask(usuario, modulo, proc, cia)
+
+DEFINE usuario		LIKE gent005.g05_usuario
+DEFINE modulo 		LIKE gent050.g50_modulo
+DEFINE proc		LIKE gent054.g54_proceso
+DEFINE cia		LIKE gent001.g01_compania
+
+DEFINE r_g55		RECORD LIKE gent055.*
+
+INITIALIZE r_g55.* TO NULL
+SELECT * INTO r_g55.* FROM gent055
+	WHERE g55_user     = usuario
+	  AND g55_compania = cia
+	  AND g55_modulo   = modulo
+	  AND g55_proceso  = proc
+
+IF r_g55.g55_user IS NULL THEN
+	RETURN 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N'
+ELSE
+	RETURN r_g55.g55_opciones[1], r_g55.g55_opciones[2],
+		   r_g55.g55_opciones[3], r_g55.g55_opciones[4],
+		   r_g55.g55_opciones[5], r_g55.g55_opciones[6],
+		   r_g55.g55_opciones[7], r_g55.g55_opciones[8],
+		   r_g55.g55_opciones[9], r_g55.g55_opciones[10]
+END IF
 
 END FUNCTION
 
@@ -1018,7 +1096,7 @@ DEFINE r_g54		RECORD LIKE gent054.*
 DECLARE qu_processes CURSOR FOR
 	SELECT * FROM gent054 WHERE g54_modulo = modulo
 FOREACH qu_processes INTO r_g54.*
-	CALL grantUserToProcess(usuario, modulo, r_g54.g54_proceso, cia)
+	CALL grantUserToProcess(usuario, modulo, r_g54.g54_proceso, cia, 'SSSSSSSSSSSSSSS')
 END FOREACH
 
 END FUNCTION
@@ -1379,6 +1457,16 @@ END FUNCTION
 
 FUNCTION setea_botones_f_proc()
 	
+	DISPLAY 'X'			  TO bt_p1
+	DISPLAY 'I'			  TO bt_p2
+	DISPLAY 'M'			  TO bt_p3
+	DISPLAY 'C'			  TO bt_p4
+	DISPLAY 'E'			  TO bt_p5
+	DISPLAY 'P'			  TO bt_p6
+	DISPLAY '1'			  TO bt_p7
+	DISPLAY '2'			  TO bt_p8
+	DISPLAY '3'			  TO bt_p9
+	DISPLAY '4'			  TO bt_p0
 	DISPLAY 'T.'          TO bt_tipo
 	DISPLAY 'Proceso'     TO bt_proceso
 	DISPLAY 'Descripción' TO bt_descripcion
