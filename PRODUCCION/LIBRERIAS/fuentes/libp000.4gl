@@ -2511,9 +2511,14 @@ DEFINE v_modulo		LIKE gent050.g50_modulo
 DEFINE v_proceso	LIKE gent054.g54_proceso
 DEFINE r_g50		RECORD LIKE gent050.*
 DEFINE r_g05		RECORD LIKE gent005.*
-DEFINE rm_g55   	RECORD LIKE gent055.*
+DEFINE r_g55 	  	RECORD LIKE gent055.*
 DEFINE r_g54   		RECORD LIKE gent054.*
 DEFINE clave		LIKE gent005.g05_clave
+
+-- El usuario FOBOS no tiene restricciones
+IF v_usuario = 'FOBOS' THEN
+	RETURN
+END IF
 
 CALL fl_lee_usuario(v_usuario) RETURNING r_g05.*
 IF r_g05.g05_usuario IS NULL THEN
@@ -2536,7 +2541,8 @@ IF r_g50.g50_modulo IS NULL THEN
 END IF
 SELECT * FROM gent052 
 	WHERE g52_modulo  = v_modulo  AND 
-	      g52_usuario = v_usuario
+	      g52_usuario = v_usuario AND
+          g52_estado  = 'A'
 IF status = NOTFOUND THEN
 	CALL fgl_winmessage(vg_producto, 'USUARIO NO TIENE ACCESO AL MODULO: '
 					 || r_g50.g50_nombre CLIPPED 
@@ -2574,8 +2580,8 @@ IF r_g54.g54_estado = 'B' THEN
 	EXIT PROGRAM
 END IF
 CALL fl_lee_permisos_usuarios(vg_usuario, vg_codcia, vg_modulo, vg_proceso) 
-	RETURNING rm_g55.*
-IF rm_g55.g55_user IS NOT  NULL THEN
+	RETURNING r_g55.*
+IF r_g55.g55_user IS NULL THEN
 	CALL fgl_winmessage(vg_producto, 'USTED NO TIENE ACCESO AL PROCESO ' 
 				|| v_proceso CLIPPED
 				|| '. PEDIR AYUDA AL ADMINISTRADOR ',
