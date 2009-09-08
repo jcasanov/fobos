@@ -513,7 +513,7 @@ WHILE TRUE
 	LET i = 1
 	FOREACH q_prcons INTO ra_proc[i].g54_tipo, ra_proc[i].g54_proceso,
                               ra_proc[i].g54_nombre 
-		LET ra_proc[i].check = 'N'
+		LET ra_proc[i].p1 = 'N'
 		LET i = i + 1
 		IF i > filas_max THEN
 			EXIT FOREACH
@@ -546,11 +546,11 @@ WHILE TRUE
 				LET i = arr_curr()
 				LET j = scr_line()
 				MESSAGE i, ' de ', ind           
-			AFTER FIELD check
-				IF ra_proc[i].check = 'S' THEN
-					LET ra_proc[i].check = 'N'
+			AFTER FIELD p1
+				IF ra_proc[i].p1 = 'S' THEN
+					LET ra_proc[i].p1 = 'N'
 					DISPLAY ra_proc[i].* TO ra_proc[j].*
-					NEXT FIELD ra_proc[j].check
+					NEXT FIELD ra_proc[j].p1
 				END IF
 			BEFORE INSERT
 				CANCEL INSERT
