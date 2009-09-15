@@ -260,7 +260,7 @@ IF rm_par.r21_vendedor IS NOT NULL THEN
 END IF
 
 LET query = 'INSERT INTO temp_prof ',
-			'SELECT DATE(MIN(r23_fecing)) fecha_ini, ',
+			'SELECT MIN(DATE(r23_fecing)) fecha_ini, ',
 			'       r21_numprof, r21_nomcli, r01_iniciales, ',
 			'       r21_dias_prof, r21_tot_neto ',
 			'  FROM rept021, rept001, rept102, rept023 ',
@@ -280,7 +280,7 @@ LET query = 'INSERT INTO temp_prof ',
 			'   AND r23_estado     = "P" ',
 			' GROUP BY r21_numprof, r21_nomcli, ',
 			' 		   r01_iniciales, r21_dias_prof, r21_tot_neto ',
-			'HAVING DATE(MIN(r23_fecing)) BETWEEN "', rm_par.fecha_ini, '"', 
+			'HAVING MIN(DATE(r23_fecing)) BETWEEN "', rm_par.fecha_ini, '"', 
 											' AND "', rm_par.fecha_fin, '"'
 
 PREPARE stmt1 FROM query
@@ -343,7 +343,7 @@ IF rm_par.r21_vendedor IS NOT NULL THEN
 END IF
 
 LET query = 'INSERT INTO temp_prof ',
-			'SELECT DATE(MIN(r23_fecing)) fecha_ini, ',
+			'SELECT MIN(DATE(r23_fecing)) fecha_ini, ',
 			'       r21_numprof, r21_nomcli, r01_iniciales, ',
 			'       r21_dias_prof, r21_tot_neto ',
 			'  FROM rept021, rept001, rept102, rept023 ',
@@ -363,7 +363,7 @@ LET query = 'INSERT INTO temp_prof ',
 			'   AND r23_estado     = "F" ',
 			' GROUP BY r21_numprof, r21_nomcli, ',
 			' 		   r01_iniciales, r21_dias_prof, r21_tot_neto ',
-			'HAVING DATE(MIN(r23_fecing)) BETWEEN "', rm_par.fecha_ini, '"', 
+			'HAVING MIN(DATE(r23_fecing)) BETWEEN "', rm_par.fecha_ini, '"', 
 											' AND "', rm_par.fecha_fin, '"'
 
 PREPARE stmt3 FROM query
