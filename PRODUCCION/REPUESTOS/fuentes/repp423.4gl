@@ -299,10 +299,10 @@ PAGE HEADER
 	END FOR}
 --	LET titulo = modulo, titulo 
 	PRINT COLUMN 1, rm_cia.g01_razonsocial,
-  	      COLUMN 122, "Página: ", PAGENO USING "&&&"
+  	      COLUMN 158, "Página: ", PAGENO USING "&&&"
 	PRINT COLUMN 1, modulo CLIPPED,
 	      COLUMN 51, titulo CLIPPED,
-	      COLUMN 126, UPSHIFT(vg_proceso) 
+	      COLUMN 162, UPSHIFT(vg_proceso) 
 	PRINT COLUMN 47, "** Moneda        : ", rm_rep.r19_moneda,
 						" ", vm_moneda_des
 	IF vm_linea IS NOT NULL THEN
@@ -313,20 +313,21 @@ PAGE HEADER
 	PRINT COLUMN 47, "** Fecha Inicial : ", vm_fecha_ini USING "dd-mm-yyyy"
 	PRINT COLUMN 47, "** Fecha Final   : ", vm_fecha_fin USING "dd-mm-yyyy"
 	PRINT COLUMN 01, "Fecha  : ", TODAY USING "dd-mm-yyyy", 1 SPACES, TIME,
-	      COLUMN 114, usuario
+	      COLUMN 154, usuario
 	SKIP 1 LINES
 	print '&k2S'	                -- Letra condensada (16 cpi)
-	PRINT COLUMN 1,   "Cliente",
-	      COLUMN 43,  "Item",
-	      COLUMN 60,  "Descripcion.",
-	      COLUMN 82,  "Fecha",
-		  COLUMN 94,  "TP",
-	      COLUMN 98,  "Numero",
-	      COLUMN 106,  "Cant. Ven.",
-	      COLUMN 118,  fl_justifica_titulo("D", "PVP Total", 14),
-	      COLUMN 136, fl_justifica_titulo("D", "Costo", 14),
-	      COLUMN 152, fl_justifica_titulo("D", "Costo Total", 14)
-	PRINT "--------------------------------------------------------------------------------------------------------------------------------------------------------"
+	PRINT COLUMN 1,   fl_justifica_titulo("D", "Cod.", 5), 
+	      COLUMN 7,   "Cliente",
+	      COLUMN 49,  "Item",
+	      COLUMN 66,  "Descripcion.",
+	      COLUMN 88,  "Fecha",
+		  COLUMN 100, "TP",
+	      COLUMN 104, "Numero",
+	      COLUMN 112, "Cant. Ven.",
+	      COLUMN 124, fl_justifica_titulo("D", "PVP Total", 14),
+	      COLUMN 142, fl_justifica_titulo("D", "Costo", 14),
+	      COLUMN 158, fl_justifica_titulo("D", "Costo Total", 14)
+	PRINT "-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
 
 ON EVERY ROW
 	NEED 2 LINES
@@ -344,17 +345,18 @@ ON EVERY ROW
 	LET precio = r_r20.r20_precio - (r_r20.r20_val_descto / r_r20.r20_cant_ven) 
 	LET precio = precio * (1 - r_rep.r19_descuento / 100) 
 
-	PRINT COLUMN 1,   r_rep.r19_nomcli[1,40],
-	      COLUMN 43,  r_r20.r20_item,
-	      COLUMN 60,  r_r10.r10_nombre[1,21],
-	      COLUMN 82,  fecha USING "dd-mm-yyyy",
-		  COLUMN 94,  r_r20.r20_cod_tran CLIPPED,
-	      COLUMN 98,  r_rep.r19_num_tran USING "#####&",
-	      COLUMN 106, r_r20.r20_cant_ven * signo USING "--,---,--&",
-	      COLUMN 118, precio * r_r20.r20_cant_ven * signo   
+	PRINT COLUMN 1,   r_rep.r19_codcli USING "#####",
+	      COLUMN 7,   r_rep.r19_nomcli[1,40],
+	      COLUMN 49,  r_r20.r20_item,
+	      COLUMN 66,  r_r10.r10_nombre[1,21],
+	      COLUMN 88,  fecha USING "dd-mm-yyyy",
+		  COLUMN 100, r_r20.r20_cod_tran CLIPPED,
+	      COLUMN 104, r_rep.r19_num_tran USING "#####&",
+	      COLUMN 112, r_r20.r20_cant_ven * signo USING "--,---,--&",
+	      COLUMN 124, precio * r_r20.r20_cant_ven * signo   
 						USING "---,---,--&.&&",
-	      COLUMN 136, r_r20.r20_costo * signo USING "---,---,--&.&&",
-	      COLUMN 152, r_r20.r20_costo * r_r20.r20_cant_ven * signo 
+	      COLUMN 142, r_r20.r20_costo * signo USING "---,---,--&.&&",
+	      COLUMN 158, r_r20.r20_costo * r_r20.r20_cant_ven * signo 
 		  				USING "---,---,--&.&&"
 END REPORT
 

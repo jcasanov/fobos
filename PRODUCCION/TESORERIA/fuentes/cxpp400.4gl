@@ -515,7 +515,7 @@ PAGE HEADER
 ON EVERY ROW
 
 	PRINT COLUMN 1,   fl_justifica_titulo('D', codprov, 6) CLIPPED,
-			  ' ', fl_justifica_titulo('I', nomprov, 35) CLIPPED,
+			  ' ', fl_justifica_titulo('I', nomprov[1,35], 35) CLIPPED,
 	      COLUMN 44,  fl_justifica_titulo('D', numero_oc, 6) CLIPPED,
 	      COLUMN 52,  tipo_doc, '-', 
 	      		  fl_justifica_titulo('I', num_doc, 15) CLIPPED, '-', 
