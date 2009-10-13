@@ -188,14 +188,6 @@ END FUNCTION
 
 FUNCTION menu_vehiculos()
 
-DEFINE c100 		char(30)
-DEFINE c200 		char(30)
-DEFINE c300 		char(30)
-DEFINE c400 		char(30)
-DEFINE c500 		char(30)
-DEFINE c600 		char(30)
-DEFINE c700 		char(30)
-DEFINE c800 		char(30)
 DEFINE b		SMALLINT
 
 WHILE TRUE
@@ -266,15 +258,6 @@ END FUNCTION
 
 FUNCTION menu_configuracion_veh()
 
-DEFINE c100 		char(30)
-DEFINE c200 		char(30)
-DEFINE c300 		char(30)
-DEFINE c400 		char(30)
-DEFINE c500 		char(30)
-DEFINE c600 		char(30)
-DEFINE c700 		char(30)
-DEFINE c800 		char(30)
-DEFINE c900 		char(30)
 DEFINE c		SMALLINT
 
 WHILE TRUE
@@ -337,16 +320,6 @@ END FUNCTION
 
 FUNCTION menu_transacciones_veh()
 
-DEFINE c100 		char(30)
-DEFINE c200 		char(30)
-DEFINE c300 		char(30)
-DEFINE c400 		char(30)
-DEFINE c500 		char(30)
-DEFINE c600 		char(30)
-DEFINE c700 		char(30)
-DEFINE c800 		char(30)
-DEFINE c900 		char(30)
-DEFINE c1000 		char(30)
 DEFINE d		SMALLINT
 
 WHILE TRUE
@@ -413,10 +386,6 @@ END FUNCTION
 
 FUNCTION menu_pedidos_veh()
 
-DEFINE c100 		char(30)
-DEFINE c200 		char(30)
-DEFINE c300 		char(30)
-DEFINE c400 		char(30)
 DEFINE e		SMALLINT
 
 WHILE TRUE
@@ -459,17 +428,6 @@ END FUNCTION
 
 FUNCTION menu_consultas_veh()
 
-DEFINE c100 		char(30)
-DEFINE c200 		char(30)
-DEFINE c300 		char(30)
-DEFINE c400 		char(30)
-DEFINE c500 		char(30)
-DEFINE c600 		char(30)
-DEFINE c700 		char(30)
-DEFINE c800 		char(30)
-DEFINE c900 		char(30)
-DEFINE c1000 		char(30)
-DEFINE c1100 		char(30)
 DEFINE g		SMALLINT
 
 WHILE TRUE
@@ -536,25 +494,6 @@ END FUNCTION
 
 FUNCTION menu_reportes_veh()
 
-DEFINE c100 		char(30)
-DEFINE c200 		char(30)
-DEFINE c300 		char(30)
-DEFINE c400 		char(30)
-DEFINE c500 		char(30)
-DEFINE c600 		char(30)
-DEFINE c700 		char(30)
-DEFINE c800 		char(30)
-DEFINE c900 		char(30)
-DEFINE c1000		char(30)
-DEFINE c1100		char(30)
-DEFINE c1200		char(30)
-DEFINE c1300		char(30)
-DEFINE c1400		char(30)
-DEFINE c1500		char(30)
-DEFINE c1600		char(30)
-DEFINE c1700		char(30)
-DEFINE c1800		char(30)
-DEFINE c1900		char(30)
 DEFINE h		SMALLINT
 
 WHILE TRUE
@@ -657,11 +596,6 @@ END FUNCTION
 ------------------------ R E P U E S T O S -----------------------
 FUNCTION menu_repuestos()
 
-DEFINE c100 		char(30)
-DEFINE c200 		char(30)
-DEFINE c300 		char(30)
-DEFINE c400 		char(30)
-DEFINE c500 		char(30)
 DEFINE b		SMALLINT
 
 WHILE TRUE
@@ -711,16 +645,6 @@ END FUNCTION
 
 FUNCTION menu_configuracion_rep()
 
-DEFINE c100 		char(30)
-DEFINE c200 		char(30)
-DEFINE c300 		char(30)
-DEFINE c400 		char(30)
-DEFINE c500 		char(30)
-DEFINE c600 		char(30)
-DEFINE c700 		char(30)
-DEFINE c800 		char(30)
-DEFINE c900 		char(30)
-DEFINE c1000 		char(30)
 DEFINE c		SMALLINT
 
 WHILE TRUE
@@ -791,27 +715,6 @@ END FUNCTION
 
 FUNCTION menu_transacciones_rep()
 
-DEFINE c100 		char(30)
-DEFINE c200 		char(30)
-DEFINE c300 		char(30)
-DEFINE c400 		char(30)
-DEFINE c500 		char(30)
-DEFINE c600 		char(30)
-DEFINE c700 		char(30)
-DEFINE c800 		char(30)
-DEFINE c900 		char(30)
-DEFINE c1000 		char(30)
-DEFINE c1100 		char(30)
-DEFINE c1200 		char(30)
-DEFINE c1300 		char(30)
-DEFINE c1400 		char(30)
-DEFINE c1500 		char(30)
-DEFINE c1600 		char(30)
-DEFINE c1700 		char(30)
-DEFINE c1800 		char(30)
-DEFINE c1900 		char(35)
-DEFINE c2000 		char(30)
-DEFINE c2100 		char(30)
 DEFINE d		SMALLINT
 
 WHILE TRUE
@@ -930,13 +833,6 @@ END FUNCTION
 
 FUNCTION menu_pedidos_rep()
 
-DEFINE c100 		char(30)
-DEFINE c200 		char(30)
-DEFINE c300 		char(30)
-DEFINE c400 		char(30)
-DEFINE c500 		char(30)
-DEFINE c600 		char(30)
-DEFINE c700 		char(30)
 DEFINE e		SMALLINT
 
 WHILE TRUE
@@ -991,16 +887,6 @@ END FUNCTION
 
 FUNCTION menu_consultas_rep()
 
-DEFINE c100 		char(30)
-DEFINE c200 		char(30)
-DEFINE c300 		char(30)
-DEFINE c400 		char(30)
-DEFINE c500 		char(30)
-DEFINE c600 		char(30)
-DEFINE c700 		char(30)
-DEFINE c800 		char(30)
-DEFINE c900 		char(30)
-DEFINE c1000 		char(30)
 DEFINE g		SMALLINT
 
 WHILE TRUE
@@ -1078,32 +964,6 @@ END FUNCTION
 
 FUNCTION menu_reportes_rep()
 
-DEFINE c100 		char(30)
-DEFINE c200 		char(30)
-DEFINE c300 		char(30)
-DEFINE c400 		char(30)
-DEFINE c500 		char(30)
-DEFINE c600 		char(30)
-DEFINE c700 		char(30)
-DEFINE c800 		char(30)
-DEFINE c900 		char(30)
-DEFINE c1000		char(30)
-DEFINE c1100		char(30)
-DEFINE c1200		char(30)
-DEFINE c1300		char(30)
-DEFINE c1400		char(30)
-DEFINE c1500		char(30)
-DEFINE c1600		char(30)
-DEFINE c1700		char(30)
-DEFINE c1800		char(30)
-DEFINE c1900		char(30)
-DEFINE c2000		char(30)
-DEFINE c2100		char(30)
-DEFINE c2200		char(30)
-DEFINE c2300		char(30)
-DEFINE c2400		char(30)
-DEFINE c2500		char(30)
-DEFINE c2600		char(30)
 DEFINE h		SMALLINT
 
 WHILE TRUE
@@ -1201,14 +1061,6 @@ END FUNCTION
 ------------------------ T A L L E R E S  -----------------------
 FUNCTION menu_talleres()
 
-DEFINE c100 		char(30)
-DEFINE c200 		char(30)
-DEFINE c300 		char(30)
-DEFINE c400 		char(30)
-DEFINE c500 		char(30)
-DEFINE c600 		char(30)
-DEFINE c700 		char(30)
-DEFINE c800 		char(30)
 DEFINE b		SMALLINT
 
 WHILE TRUE
@@ -1253,15 +1105,6 @@ END FUNCTION
 
 FUNCTION menu_configuracion_tal()
 
-DEFINE c100 		char(30)
-DEFINE c200 		char(30)
-DEFINE c300 		char(30)
-DEFINE c400 		char(30)
-DEFINE c500 		char(30)
-DEFINE c600 		char(30)
-DEFINE c700 		char(30)
-DEFINE c800 		char(30)
-DEFINE c900 		char(30)
 DEFINE c		SMALLINT
 
 WHILE TRUE
@@ -1320,17 +1163,6 @@ END FUNCTION
 
 FUNCTION menu_transacciones_tal()
 
-DEFINE c100 		char(30)
-DEFINE c200 		char(30)
-DEFINE c300 		char(30)
-DEFINE c400 		char(30)
-DEFINE c500 		char(30)
-DEFINE c600 		char(30)
-DEFINE c700 		char(30)
-DEFINE c800 		char(30)
-DEFINE c900 		char(30)
-DEFINE c1000 		char(30)
-DEFINE c1100 		char(30)
 DEFINE d		SMALLINT
 
 WHILE TRUE
@@ -1400,16 +1232,6 @@ END FUNCTION
 
 FUNCTION menu_consultas_tal()
 
-DEFINE c100 		char(30)
-DEFINE c200 		char(30)
-DEFINE c300 		char(30)
-DEFINE c400 		char(30)
-DEFINE c500 		char(30)
-DEFINE c600 		char(30)
-DEFINE c700 		char(30)
-DEFINE c800 		char(30)
-DEFINE c900 		char(30)
-DEFINE c1000 		char(30)
 DEFINE g		SMALLINT
 
 WHILE TRUE
@@ -1452,12 +1274,6 @@ END FUNCTION
 
 FUNCTION menu_reportes_tal()
 
-DEFINE c100 		char(30)
-DEFINE c200 		char(30)
-DEFINE c300 		char(30)
-DEFINE c400 		char(30)
-DEFINE c500 		char(30)
-DEFINE c600 		char(30)
 DEFINE h		SMALLINT
 
 WHILE TRUE
@@ -1500,14 +1316,6 @@ END FUNCTION
 ------------------------ C O B R A N Z A S  -----------------------
 FUNCTION menu_cobranzas()
 
-DEFINE c100 		char(30)
-DEFINE c200 		char(30)
-DEFINE c300 		char(30)
-DEFINE c400 		char(30)
-DEFINE c500 		char(30)
-DEFINE c600 		char(30)
-DEFINE c700 		char(30)
-DEFINE c800 		char(30)
 DEFINE b		SMALLINT
 
 WHILE TRUE
@@ -1552,15 +1360,6 @@ END FUNCTION
 
 FUNCTION menu_configuracion_cob()
 
-DEFINE c100 		char(30)
-DEFINE c200 		char(30)
-DEFINE c300 		char(30)
-DEFINE c400 		char(30)
-DEFINE c500 		char(30)
-DEFINE c600 		char(30)
-DEFINE c700 		char(30)
-DEFINE c800 		char(30)
-DEFINE c900 		char(30)
 DEFINE c		SMALLINT
 
 WHILE TRUE
@@ -1611,15 +1410,6 @@ END FUNCTION
 
 FUNCTION menu_transacciones_cob()
 
-DEFINE c100 		char(30)
-DEFINE c200 		char(30)
-DEFINE c300 		char(30)
-DEFINE c400 		char(30)
-DEFINE c500 		char(30)
-DEFINE c600 		char(30)
-DEFINE c700 		char(30)
-DEFINE c800 		char(30)
-DEFINE c900 		char(30)
 DEFINE d		SMALLINT
 
 WHILE TRUE
@@ -1682,17 +1472,6 @@ END FUNCTION
 
 FUNCTION menu_consultas_cob()
 
-DEFINE c100 		char(30)
-DEFINE c200 		char(30)
-DEFINE c300 		char(30)
-DEFINE c400 		char(30)
-DEFINE c500 		char(30)
-DEFINE c600 		char(30)
-DEFINE c700 		char(30)
-DEFINE c800 		char(30)
-DEFINE c900 		char(30)
-DEFINE c1000 		char(30)
-DEFINE c1100 		char(30)
 DEFINE g		SMALLINT
 
 WHILE TRUE
@@ -1751,16 +1530,6 @@ END FUNCTION
 
 FUNCTION menu_reportes_cob()
 
-DEFINE c100 		char(30)
-DEFINE c200 		char(30)
-DEFINE c300 		char(30)
-DEFINE c400 		char(30)
-DEFINE c500 		char(30)
-DEFINE c600 		char(30)
-DEFINE c700 		char(30)
-DEFINE c800 		char(30)
-DEFINE c900 		char(30)
-DEFINE c1000		char(30)
 DEFINE h		SMALLINT
 
 WHILE TRUE
@@ -1831,14 +1600,6 @@ END FUNCTION
 ------------------------ T E S O R E R I A  -----------------------
 FUNCTION menu_tesoreria()
 
-DEFINE c100 		char(30)
-DEFINE c200 		char(30)
-DEFINE c300 		char(30)
-DEFINE c400 		char(30)
-DEFINE c500 		char(30)
-DEFINE c600 		char(30)
-DEFINE c700 		char(30)
-DEFINE c800 		char(30)
 DEFINE b		SMALLINT
 
 WHILE TRUE
@@ -1883,9 +1644,6 @@ END FUNCTION
 
 FUNCTION menu_configuracion_tes()
 
-DEFINE c100 		char(30)
-DEFINE c200 		char(30)
-DEFINE c300 		char(30)
 DEFINE c		SMALLINT
 
 WHILE TRUE
@@ -1924,17 +1682,6 @@ END FUNCTION
 
 FUNCTION menu_transacciones_tes()
 
-DEFINE c100 		char(30)
-DEFINE c200 		char(30)
-DEFINE c300 		char(30)
-DEFINE c400 		char(30)
-DEFINE c500 		char(30)
-DEFINE c600 		char(30)
-DEFINE c700 		char(30)
-DEFINE c800 		char(30)
-DEFINE c900 		char(30)
-DEFINE c1000 		char(30)
-DEFINE c1001 		char(30)
 DEFINE d		SMALLINT
 
 WHILE TRUE
@@ -2001,11 +1748,6 @@ END FUNCTION
 
 FUNCTION menu_consultas_tes()
 
-DEFINE c100 		char(30)
-DEFINE c200 		char(30)
-DEFINE c300 		char(30)
-DEFINE c400 		char(30)
-DEFINE c500 		char(30)
 DEFINE g		SMALLINT
 
 WHILE TRUE
@@ -2052,17 +1794,6 @@ END FUNCTION
 
 FUNCTION menu_reportes_tes()
 
-DEFINE c100 		char(30)
-DEFINE c200 		char(30)
-DEFINE c300 		char(30)
-DEFINE c400 		char(30)
-DEFINE c500 		char(30)
-DEFINE c600 		char(30)
-DEFINE c700 		char(30)
-DEFINE c800 		char(30)
-DEFINE c900 		char(30)
-DEFINE c1000		char(30)
-DEFINE c1100		char(30)
 DEFINE h		SMALLINT
 
 WHILE TRUE
@@ -2135,14 +1866,6 @@ END FUNCTION
 ------------------------ C O N T A B I L I D A D  -----------------------
 FUNCTION menu_contabilidad()
 
-DEFINE c100 		char(30)
-DEFINE c200 		char(30)
-DEFINE c300 		char(30)
-DEFINE c400 		char(30)
-DEFINE c500 		char(30)
-DEFINE c600 		char(30)
-DEFINE c700 		char(30)
-DEFINE c800 		char(30)
 DEFINE c900 		char(30)
 DEFINE b		SMALLINT
 
