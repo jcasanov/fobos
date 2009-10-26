@@ -397,18 +397,6 @@ IF int_flag THEN
 	RETURN
 END IF
 LET vm_cod_tran_2   = vm_cod_dev
-IF rm_r19.r19_tot_neto = rm_fact.r19_tot_neto THEN
-	IF TODAY = DATE(rm_fact.r19_fecing) THEN
-		LET vm_cod_tran_2   = vm_cod_dev
-		IF rm_fact.r19_cont_cred = 'R' THEN 
-			IF NOT verifica_saldo_fact_devuelta() THEN
-				LET vm_cod_tran_2   = vm_cod_dev
-			END IF
-		END IF
-	ELSE
-		LET vm_cod_tran_2   = vm_cod_dev
-	END IF
-END IF
 LET done = control_cabecera()
 DISPLAY BY NAME rm_r19.r19_cod_tran
 IF done = 0 THEN
@@ -770,7 +758,7 @@ DEFINE r19_bodega_ori	LIKE rept019.r19_bodega_ori
 
 LET int_flag = 0
 LET r19_referencia = NULL
-INPUT BY NAME rm_r19.r19_num_dev, rm_r19.r19_codcli, r19_referencia, 
+INPUT BY NAME rm_r19.r19_num_dev, r19_referencia, 
 			  r19_bodega_ori
 	WITHOUT DEFAULTS
 	ON KEY (INTERRUPT)
@@ -804,16 +792,6 @@ INPUT BY NAME rm_r19.r19_num_dev, rm_r19.r19_codcli, r19_referencia,
 				CALL control_display_cabecera()
 		      	END IF
 		END IF
-                IF INFIELD(r19_codcli) THEN
-                        CALL fl_ayuda_cliente_localidad(vg_codcia,vg_codloc)
-                                RETURNING r_z01.z01_codcli, r_z01.z01_nomcli
-                        IF r_z01.z01_codcli IS NOT NULL THEN
-                                LET rm_r19.r19_codcli = r_z01.z01_codcli
-                                LET rm_r19.r19_nomcli = r_z01.z01_nomcli
-                                DISPLAY BY NAME rm_r19.r19_codcli,
-                                                rm_r19.r19_nomcli
-                        END IF
-                END IF
 		LET int_flag = 0
 	AFTER FIELD r19_num_dev
 		IF rm_r19.r19_num_dev IS NOT NULL THEN
@@ -845,66 +823,8 @@ INPUT BY NAME rm_r19.r19_num_dev, rm_r19.r19_codcli, r19_referencia,
 				CALL fgl_winmessage(vg_producto,'La factura no puede ser devuelta porque supero el plazo para su devolución.','exclamation')
 				NEXT FIELD r19_num_dev
 			END IF
-
-			IF rm_r19.r19_codcli IS NULL THEN
-				CALL fgl_winquestion(vg_producto,
-					'No hay código de cliente, desea ' ||
-					'ingresar los datos del cliente. ',
-					'No', 'Yes|No', 'question', 1)
-					RETURNING resp
-				IF resp = 'No' THEN
-					NEXT FIELD r19_num_dev
-				END IF	
-				LET comando = 'cd ..',     vg_separador, 
-					         '..',     vg_separador,
-                                              'COBRANZAS', vg_separador, 
-					      'fuentes',   vg_separador, 
-                                              '; fglrun cxcp101 ', vg_base, ' ',
-                                              'CO ', vg_codcia, ' ',
-                                              vg_codloc
-				RUN comando CLIPPED
-
-				NEXT FIELD r19_codcli
-			END IF
 		ELSE 
 			NEXT FIELD r19_num_dev
-		END IF
-        AFTER FIELD r19_codcli
-		IF r_r19.r19_codcli IS NOT NULL THEN
-                	LET rm_r19.r19_codcli = r_r19.r19_codcli
-			DISPLAY BY NAME rm_r19.r19_codcli
-		END IF
-		IF r_r19.r19_codcli IS NULL AND
-                	rm_r19.r19_codcli IS NOT NULL THEN
-			CALL fl_lee_cliente_general(rm_r19.r19_codcli)
-        			RETURNING r_z01.*
-			IF r_z01.z01_codcli IS NULL THEN
-				CALL fgl_winmessage(vg_producto,
-					'Cliente no existe.',
-					'exclamation')
-				NEXT FIELD r19_codcli
-			END IF
-			IF r_z01.z01_estado = 'B' THEN
-				CALL fgl_winmessage(vg_producto,
-					'Cliente está bloqueado.',
-					'exclamation')
-				NEXT FIELD r19_codcli
-			END IF
-			LET rm_r19.r19_nomcli = r_z01.z01_nomcli
-			DISPLAY BY NAME rm_r19.r19_nomcli
-
-			UPDATE rept019 SET r19_codcli = r_z01.z01_codcli,
-				 	   r19_nomcli = r_z01.z01_nomcli
-				WHERE r19_compania  = vg_codcia
-				  AND r19_localidad = vg_codloc
-				  AND r19_cod_tran  = vm_cod_tran
-				  AND r19_num_tran  = rm_r19.r19_num_dev
-                END IF
-               	IF rm_r19.r19_codcli IS NULL THEN
-			CALL fgl_winmessage(vg_producto,
-				'Debe ingresar código del cliente.',
-				'exclamation')
-			NEXT FIELD r19_codcli
 		END IF
 	AFTER FIELD r19_bodega_ori
 		IF rm_r19.r19_bodega_ori IS NOT NULL THEN
@@ -1429,41 +1349,6 @@ LET comando = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS',
 	rm_r19.r19_num_tran
 	
 RUN comando	
-
-END FUNCTION
-
-
-
-FUNCTION verifica_saldo_fact_devuelta()
-DEFINE r_r25		RECORD LIKE rept025.*
-DEFINE saldo_fact	DECIMAL(14,2)
-
-SELECT * INTO r_r25.* FROM rept025
-	WHERE r25_compania  = rm_fact.r19_compania  AND 
-	      r25_localidad = rm_fact.r19_localidad AND 
-	      r25_cod_tran  = rm_fact.r19_cod_tran  AND 
-	      r25_num_tran  = rm_fact.r19_num_tran
-IF status = NOTFOUND THEN
-	LET r_r25.r25_valor_ant  = 0
-	LET r_r25.r25_valor_cred = 0
-END IF
-SELECT SUM(z20_saldo_cap) INTO saldo_fact FROM cxct020
-	WHERE z20_compania  = rm_fact.r19_compania  AND 
-	      z20_localidad = rm_fact.r19_localidad AND 
-	      z20_cod_tran  = rm_fact.r19_cod_tran  AND 
-	      z20_num_tran  = rm_fact.r19_num_tran  AND 
-	      z20_codcli    = rm_fact.r19_codcli
-IF saldo_fact IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'Factura crédito no existe en  ' || 
-					 'módulo de Cobranzas. Devolución ' ||
-					 'no se ejecutó', 'stop')
-	ROLLBACK WORK
-	EXIT PROGRAM
-END IF	
-IF r_r25.r25_valor_cred = saldo_fact THEN
-	RETURN 1
-END IF
-RETURN 0
 
 END FUNCTION
 
