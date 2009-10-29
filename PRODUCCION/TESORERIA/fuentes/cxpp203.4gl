@@ -1211,7 +1211,7 @@ LET query = 'SELECT * FROM cxpt020 ' ||
 PREPARE cons1 FROM query
 DECLARE q_cons1 CURSOR FOR cons1
 LET i          = 1
-LET vm_num_elm = 0
+LET vm_num_elm = 1
 WHENEVER ERROR CONTINUE
 FOREACH q_cons1 INTO r_cxp.*
 	DECLARE q_proc CURSOR FOR SELECT * FROM cxpt020
@@ -1234,6 +1234,12 @@ FOREACH q_cons1 INTO r_cxp.*
 		WHENEVER ERROR STOP
 		RETURN
 	END IF
+	CLOSE q_proc
+	FREE  q_proc
+	IF r_cxp.p20_saldo_cap + r_cxp.p20_saldo_int <= 0 THEN
+		-- El documento ya esta pagado  
+		CONTINUE FOREACH
+	END IF
 	LET rm_aju[i].p23_tipo_doc   = r_cxp.p20_tipo_doc
 	LET rm_aju[i].p23_num_doc    = r_cxp.p20_num_doc
 	LET rm_aju[i].p23_div_doc    = r_cxp.p20_dividendo
@@ -1242,14 +1248,13 @@ FOREACH q_cons1 INTO r_cxp.*
 	LET rm_aju[i].tit_saldo_nue  = rm_aju[i].tit_saldo_act
 	LET rm_aju[i].tit_check      = 'N'
 	LET rm_sld[i].p20_fecha_vcto = r_cxp.p20_fecha_vcto
-        LET vm_num_elm = vm_num_elm + 1
-        LET i = i + 1
-        IF vm_num_elm > vm_max_elm THEN
-        	LET vm_num_elm = vm_num_elm - 1
+    LET vm_num_elm = vm_num_elm + 1
+    LET i = i + 1
+    IF vm_num_elm > vm_max_elm THEN
+		LET vm_num_elm = vm_num_elm - 1
 		CALL fl_mensaje_arreglo_incompleto()
-		EXIT PROGRAM
-                --EXIT FOREACH
-        END IF
+        EXIT FOREACH
+	END IF
 END FOREACH
 WHENEVER ERROR STOP
 IF vm_num_elm > 0 THEN
