@@ -70,6 +70,7 @@ IF rm_ord.t23_cont_cred = 'C' THEN
 	CALL genera_orden_cobro()
 END IF
 UPDATE cajt010 SET j10_estado = 'P',
+				   j10_fecha_pro    = rm_ord.t23_fec_factura,	
 				   j10_tipo_destino = vm_tipo_doc,
 				   j10_num_destino  = rm_ord.t23_num_factura
 	WHERE CURRENT OF q_ccaj
@@ -355,7 +356,7 @@ WHILE TRUE
 	 * en cada modulo mientras que el modulo de CXC espera que cada cliente
 	 * tenga numeros de facturas que no se repitan independientemente del 
 	 * modulo del que venga. Para el caso de los clientes a los que se les
-	 * factura frecuentemente es pósible que si se repitan los numeros internos
+	 * factura frecuentemente es posible que si se repitan los numeros internos
 	 * de los diferentes modulos.
 	 * Si el documento ya existe no se genera ningun error, solo se pasa al 
 	 * siguiente numero interno.

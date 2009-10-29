@@ -82,6 +82,7 @@ UPDATE rept025 SET r25_cod_tran = rm_cabt.r19_cod_tran,
               r25_localidad = vg_codloc AND 
               r25_numprev   = vm_preventa
 UPDATE cajt010 SET j10_estado = 'P',
+				   j10_fecha_pro    = rm_cabt.r19_fecing,	
 				   j10_tipo_destino = rm_cabt.r19_cod_tran,
 		   		   j10_num_destino  = rm_cabt.r19_num_tran
 	WHERE CURRENT OF q_ccaj
