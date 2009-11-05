@@ -474,6 +474,10 @@ DECLARE q_read_r20 CURSOR FOR SELECT * FROM rept020
 LET i = 1 
 FOREACH q_read_r20 INTO r_r20.*
 	IF r_r20.r20_cant_ent > 0 THEN
+		-- Verifico que aun hay pendientes por devolver	
+		IF r_r20.r20_cant_ent <= r_r20.r20_cant_dev THEN
+			CONTINUE FOREACH
+		END IF	
 		CALL fl_lee_item(vg_codcia, r_r20.r20_item)
 			RETURNING r_r10.*
 		LET r_detalle[i].r10_nombre       = r_r10.r10_nombre
@@ -489,7 +493,7 @@ FOREACH q_read_r20 INTO r_r20.*
 		LET r_detalle[i].r20_item         = r_r20.r20_item 
 		LET r_detalle_1[i].r20_precio       = r_r20.r20_precio 
 		LET r_detalle_1[i].r20_descuento    = r_r20.r20_descuento 
-		LET r_detalle[i].r20_cant_ven     = r_r20.r20_cant_ent  
+		LET r_detalle[i].r20_cant_ven     = r_r20.r20_cant_ent - r_r20.r20_cant_dev  
 		LET r_detalle[i].r20_cant_dev     = 0 	  
 		LET r_detalle_1[i].subtotal_item    = r_r20.r20_cant_dev * 
 						    r_r20.r20_precio
