@@ -34,7 +34,7 @@ DEFINE vm_cod_fav	LIKE cxpt021.p21_tipo_doc
 DEFINE vm_cod_cont	LIKE ctbt012.b12_tipo_comp
 DEFINE vm_num_pago	INTEGER
 DEFINE rm_rows	ARRAY [1000] OF INTEGER
-DEFINE rm_tran		ARRAY [100] OF RECORD
+DEFINE rm_tran		ARRAY [1000] OF RECORD
 		b13_cuenta	LIKE ctbt013.b13_cuenta,
 		b10_descripcion	LIKE ctbt010.b10_descripcion,
 		valor_debito	LIKE ctbt013.b13_valor_base,
@@ -83,7 +83,7 @@ CREATE TEMP TABLE temp_pago
 	 te_valor_db		DECIMAL(14,2),
 	 te_valor_cr		DECIMAL(14,2))
 LET vm_max_rows	= 1000
-LET vm_max_det  = 200
+LET vm_max_det  = 1000
 OPEN WINDOW wf AT 3,2 WITH 22 ROWS, 80 COLUMNS
     ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE 0,BORDER,
 	      MESSAGE LINE LAST - 2)
