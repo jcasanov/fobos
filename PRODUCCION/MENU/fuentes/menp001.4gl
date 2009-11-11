@@ -2986,6 +2986,12 @@ IF r_g50.g50_modulo IS NULL THEN
 				          || ' NO EXISTE ', 'stop')
 	RETURN 0
 END IF
+
+-- El usuario FOBOS no tiene restricciones de ningun tipo
+IF v_usuario = 'FOBOS' THEN
+	RETURN 1	
+END IF
+
 SELECT * FROM gent052 
 	WHERE g52_modulo  = v_modulo  AND 
 	      g52_usuario = v_usuario AND
