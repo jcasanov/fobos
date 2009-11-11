@@ -8,7 +8,6 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_demonios	VARCHAR(12)
 DEFINE rm_cxp		RECORD LIKE cxpt022.*
 DEFINE rm_cxp2		RECORD LIKE cxpt023.*
 DEFINE rm_cxp3		RECORD LIKE cxpt021.*
@@ -45,7 +44,7 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
+CALL startlog('../logs/cxpp203.error')
 CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN          -- Validar # parámetros correcto
@@ -761,8 +760,7 @@ WHILE NOT salir
         PREPARE deto FROM query
         DECLARE q_deto CURSOR FOR deto
         LET vm_num_elm = 1
-        FOREACH q_deto INTO rm_aju[vm_num_elm].*,
-				rm_sld[vm_num_elm].p20_fecha_vcto
+        FOREACH q_deto INTO rm_aju[vm_num_elm].*, rm_sld[vm_num_elm].p20_fecha_vcto
                 LET vm_num_elm = vm_num_elm + 1
                 IF vm_num_elm > vm_max_elm THEN
                         EXIT FOREACH
@@ -1148,7 +1146,7 @@ LET query = 'SELECT cxpt023.*, p20_fecha_vcto FROM cxpt023, cxpt020 ' ||
 PREPARE cons2 FROM query
 DECLARE q_cons2 CURSOR FOR cons2
 LET i          = 1
-LET vm_num_elm = 0
+LET vm_num_elm = 1
 FOREACH q_cons2 INTO r_cxp.*, rm_sld[i].p20_fecha_vcto
 	LET rm_aju[i].p23_tipo_doc   = r_cxp.p23_tipo_doc
 	LET rm_aju[i].p23_num_doc    = r_cxp.p23_num_doc
@@ -1232,6 +1230,8 @@ FOREACH q_cons1 INTO r_cxp.*
 		CALL fgl_winmessage(vg_producto,'El documento ' || documento || ' del proveedor está siendo modificado por otro usuario.','exclamation')
 		LET vm_num_elm = 0
 		WHENEVER ERROR STOP
+		CLOSE q_proc
+		FREE  q_proc
 		RETURN
 	END IF
 	CLOSE q_proc
@@ -1248,15 +1248,15 @@ FOREACH q_cons1 INTO r_cxp.*
 	LET rm_aju[i].tit_saldo_nue  = rm_aju[i].tit_saldo_act
 	LET rm_aju[i].tit_check      = 'N'
 	LET rm_sld[i].p20_fecha_vcto = r_cxp.p20_fecha_vcto
-    LET vm_num_elm = vm_num_elm + 1
-    LET i = i + 1
-    IF vm_num_elm > vm_max_elm THEN
-		LET vm_num_elm = vm_num_elm - 1
+	LET vm_num_elm = vm_num_elm + 1
+	LET i = i + 1
+	IF vm_num_elm > vm_max_elm THEN
 		CALL fl_mensaje_arreglo_incompleto()
-        EXIT FOREACH
+		EXIT FOREACH
 	END IF
 END FOREACH
 WHENEVER ERROR STOP
+LET vm_num_elm = vm_num_elm - 1
 IF vm_num_elm > 0 THEN
         LET int_flag = 0
         FOR i = 1 TO fgl_scr_size('rm_aju')
