@@ -9,6 +9,7 @@ GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
 DEFINE vm_cod_fact		LIKE rept019.r19_cod_tran
 DEFINE vm_cod_desp		LIKE rept019.r19_cod_tran
+DEFINE vm_subt_tran		LIKE rept019.r19_cod_subtipo
 
 
 DEFINE vm_max_rows		INTEGER
@@ -78,6 +79,8 @@ DISPLAY FORM repf227_1
 LET vm_max_rows = 1000
 LET vm_cod_fact = 'FA'
 LET vm_cod_desp = 'NE'
+LET vm_subt_tran = 2  -- Subtipo de transaccion:
+                      --  Despacho en base a una factura
 
 DISPLAY '.'				 TO tit_col1
 DISPLAY '#'				 TO tit_col2
@@ -225,6 +228,7 @@ INITIALIZE r_r19.* TO NULL
 LET r_r19.r19_compania   = vg_codcia
 LET r_r19.r19_localidad  = vg_codloc
 LET r_r19.r19_cod_tran   = vm_cod_desp 
+LET r_r19.r19_cod_subtipo = vm_subt_tran
 LET r_r19.r19_cont_cred  = 'C'
 LET r_r19.r19_codcli     = r_fcab.r19_codcli
 LET r_r19.r19_nomcli     = r_fcab.r19_nomcli
