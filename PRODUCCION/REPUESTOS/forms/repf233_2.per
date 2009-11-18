@@ -1,0 +1,61 @@
+DATABASE diteca
+SCREEN
+{
+ Nota de despacho: [c9|c008    ]
+
+ Proforma: [c001   ]                 Fecha Aprobacion: [c003               ]
+ Preventa: [c004   ] 
+  Cliente: [c002                                        ] 
+
+  Bodega:[c4] [c100                           ]
+
+ [c012            |c013                          |c014      |c015 |c016 |c017]
+[c020            |c021                          |c023      |c018 |c019 |c022]
+[c020            |c021                          |c023      |c018 |c019 |c022]
+[c020            |c021                          |c023      |c018 |c019 |c022]
+[c020            |c021                          |c023      |c018 |c019 |c022]
+[c020            |c021                          |c023      |c018 |c019 |c022]
+[c020            |c021                          |c023      |c018 |c019 |c022]
+[c020            |c021                          |c023      |c018 |c019 |c022]
+[c020            |c021                          |c023      |c018 |c019 |c022]
+[c020            |c021                          |c023      |c018 |c019 |c022]
+[c020            |c021                          |c023      |c018 |c019 |c022]
+
+}
+TABLES
+	rept010,
+	rept011,
+	rept019,
+	rept020
+ATTRIBUTES
+
+c9   = rept019.r19_cod_tran, REVERSE, UPSHIFT, NOENTRY;
+c008 = rept019.r19_num_tran, REVERSE, UPSHIFT, NOENTRY;
+
+c001 = formonly.numprof,  REVERSE, UPSHIFT, NOENTRY;
+c004 = formonly.numprev,  REVERSE, UPSHIFT, NOENTRY;
+c002 = formonly.nomcli,   REVERSE, UPSHIFT, NOENTRY;
+c003 = formonly.fecing,   REVERSE, UPSHIFT, NOENTRY;
+
+c4   = rept019.r19_bodega_ori, UPSHIFT, REVERSE, AUTONEXT,
+							   WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c100 = formonly.n_bodega, NOENTRY;
+
+c012 = FORMONLY.tit_col1, NOENTRY, WIDGET = 'BUTTON', CONFIG = 'F15';
+c013 = FORMONLY.tit_col2, NOENTRY, WIDGET = 'BUTTON', CONFIG = 'F16';
+c014 = FORMONLY.tit_col3, NOENTRY, WIDGET = 'BUTTON', CONFIG = 'F17';
+c015 = FORMONLY.tit_col4, NOENTRY, WIDGET = 'BUTTON', CONFIG = 'F18';
+c016 = FORMONLY.tit_col5, NOENTRY, WIDGET = 'BUTTON', CONFIG = 'F19';
+c017 = FORMONLY.tit_col6, NOENTRY, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+c020 = rept020.r20_item,      REVERSE, NOENTRY, OPTIONS = '-nolist';
+c021 = rept010.r10_nombre,    REVERSE, NOENTRY, OPTIONS = '-nolist';
+c023 = rept011.r11_ubicacion, REVERSE, NOENTRY, OPTIONS = '-nolist';
+c018 = rept020.r20_cant_ped,  REVERSE, NOENTRY, OPTIONS = '-nolist';
+c019 = rept011.r11_stock_act, REVERSE, NOENTRY, OPTIONS = '-nolist';
+c022 = rept020.r20_cant_ven,  REVERSE,          OPTIONS = '-nolist',
+							  INCLUDE = (0 TO 9999);
+END
+INSTRUCTIONS
+SCREEN RECORD r_detalle[10] (r20_item, r10_nombre, r11_ubicacion, r20_cant_ped, 
+							r11_stock_act, r20_cant_ven)

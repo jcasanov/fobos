@@ -72,6 +72,14 @@ UPDATE rept023 SET r23_estado = 'F',
 	 	   r23_cod_tran = rm_cabt.r19_cod_tran,
 		   r23_num_tran = rm_cabt.r19_num_tran
 	WHERE CURRENT OF q_cprev 
+
+UPDATE rept118 SET r118_cod_fact = rm_cabt.r19_cod_tran,
+				   r118_num_fact = rm_cabt.r19_num_tran
+ WHERE r118_compania  = rm_cprev.r23_compania
+   AND r118_localidad = rm_cprev.r23_localidad
+   AND r118_numprev   = rm_cprev.r23_numprev 
+   AND r118_cod_fact  IS NULL 
+
 CALL genera_cuenta_por_cobrar()
 IF rm_cpago.r25_valor_ant > 0 THEN
 	CALL actualiza_documentos_favor()
@@ -399,6 +407,7 @@ END FUNCTION
 FUNCTION genera_factura()
 DEFINE numero 		INTEGER
 DEFINE costo		DECIMAL(14,2)
+DEFINE cant_pend	LIKE rept020.r20_cant_ped
 DEFINE vta_perd		LIKE rept020.r20_cant_ped
 DEFINE r 			RECORD LIKE rept024.*
 DEFINE r_r13		RECORD LIKE rept013.*
@@ -481,12 +490,32 @@ FOREACH q_dprev INTO r.*
 	END IF
 	LET vm_tot_costo = vm_tot_costo + (r.r24_cant_ven * costo)
 
+	-- En r20_cant_ent debo indicar si ya ha habido algun despacho
+	-- para ese item en esa preventa
+	INITIALIZE rm_dett.r20_cant_ent TO NULL
+    SELECT SUM(r20_cant_ent) INTO rm_dett.r20_cant_ent
+      FROM rept118, rept020
+     WHERE r118_compania  = r.r24_compania
+       AND r118_localidad = r.r24_localidad
+       AND r118_numprev   = r.r24_numprev
+       AND r118_cod_fact  IS NULL
+       AND r118_item_desp = r.r24_item
+       AND r20_compania   = r118_compania
+       AND r20_localidad  = r118_localidad
+       AND r20_cod_tran   = r118_cod_desp
+       AND r20_num_tran   = r118_num_desp
+       AND r20_item       = r118_item_desp
+
+	IF rm_dett.r20_cant_ent IS NULL THEN
+		LET rm_dett.r20_cant_ent = 0
+	END IF
+
 	-- Si la configuracion no permite facturar sin stock, debo chequear el
 	-- disponible
 	IF vm_fact_sstock = 'N' THEN
-		IF r.r24_cant_ven >
-		   r.r24_cant_ven + fl_lee_stock_disponible_rep(vg_codcia, vg_codloc,
-														r.r24_item, 'R')
+		LET cant_pend = r.r24_cant_ven - rm_dett.r20_cant_ent
+		IF cant_pend > fl_lee_stock_disponible_rep(vg_codcia, vg_codloc,
+												   r.r24_item, 'R')
 		THEN
 			CALL fgl_winmessage(vg_producto, 'Item ' || r.r24_item CLIPPED ||
 											 ' no tiene stock suficiente.',
@@ -506,7 +535,6 @@ FOREACH q_dprev INTO r.*
    	LET rm_dett.r20_cant_ped 	= r.r24_cant_ped
    	LET rm_dett.r20_cant_ven 	= r.r24_cant_ven
    	LET rm_dett.r20_cant_dev 	= 0
-   	LET rm_dett.r20_cant_ent 	= 0 
    	LET rm_dett.r20_descuento 	= r.r24_descuento
    	LET rm_dett.r20_val_descto 	= r.r24_val_descto
    	LET rm_dett.r20_precio 		= r.r24_precio
@@ -528,6 +556,7 @@ FOREACH q_dprev INTO r.*
    	LET rm_dett.r20_costnue_ma 	= rm_item.r10_costo_ma
    	LET rm_dett.r20_stock_bd 	= 0
    	LET rm_dett.r20_fecing 		= CURRENT
+
 	INSERT INTO rept020 VALUES (rm_dett.*)
 
 	{*
@@ -542,8 +571,10 @@ FOREACH q_dprev INTO r.*
 	LET r_r116.r116_num_tran  = rm_dett.r20_num_tran
 	LET r_r116.r116_item      = rm_dett.r20_item
 	LET r_r116.r116_item_fact = rm_dett.r20_item
-	LET r_r116.r116_cantidad  = rm_dett.r20_cant_ven
-	INSERT INTO rept116 VALUES (r_r116.*)
+	LET r_r116.r116_cantidad  = rm_dett.r20_cant_ven - rm_dett.r20_cant_ent
+	IF r_r116.r116_cantidad > 0 THEN
+		INSERT INTO rept116 VALUES (r_r116.*)
+	END IF
 	
 	{*
 	 * Esto es para mantener un registro de las ventas perdidas

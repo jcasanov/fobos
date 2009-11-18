@@ -1,0 +1,37 @@
+DATABASE formonly
+SCREEN
+{
+
+  [c010  |c011  |c012                                |c013               ]
+ [c021  |c022  |c023                                |c024               ]
+ [c021  |c022  |c023                                |c024               ]
+ [c021  |c022  |c023                                |c024               ]
+ [c021  |c022  |c023                                |c024               ]
+ [c021  |c022  |c023                                |c024               ]
+ [c021  |c022  |c023                                |c024               ]
+ [c021  |c022  |c023                                |c024               ]
+ [c021  |c022  |c023                                |c024               ]
+ [c021  |c022  |c023                                |c024               ]
+ [c021  |c022  |c023                                |c024               ]
+ [c021  |c022  |c023                                |c024               ]
+ [c021  |c022  |c023                                |c024               ]
+ [c021  |c022  |c023                                |c024               ]
+ [c021  |c022  |c023                                |c024               ]
+ [c021  |c022  |c023                                |c024               ]
+ [c021  |c022  |c023                                |c024               ]
+ [c021  |c022  |c023                                |c024               ]
+}
+ATTRIBUTES
+c010 = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+
+c021 = formonly.numprof,  REVERSE, NOENTRY, OPTIONS='-nolist';
+c022 = formonly.numprev,  REVERSE, NOENTRY, OPTIONS='-nolist';
+c023 = formonly.nomcli,   REVERSE, NOENTRY, OPTIONS='-nolist';
+c024 = formonly.fecing,   REVERSE, NOENTRY, OPTIONS='-nolist';
+
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_prof[17] (numprof, numprev, nomcli, fecing) 

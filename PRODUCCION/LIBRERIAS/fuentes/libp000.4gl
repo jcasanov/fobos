@@ -1893,6 +1893,7 @@ DEFINE stock		LIKE rept011.r11_stock_act
 DEFINE x_despachar	LIKE rept011.r11_stock_act
 DEFINE reservado	LIKE rept011.r11_stock_act
 DEFINE stock_disp	LIKE rept011.r11_stock_act
+DEFINE entrega_prv	LIKE rept011.r11_stock_act
 	
 	CALL fl_lee_stock_total_rep(cod_cia, cod_loc, item, area) RETURNING stock
 
@@ -1920,7 +1921,23 @@ DEFINE stock_disp	LIKE rept011.r11_stock_act
 		LET reservado = 0
 	END IF
 
-	LET stock_disp = stock - x_despachar - reservado
+    SELECT SUM(r20_cant_ent) INTO entrega_prv
+      FROM rept118, rept020
+     WHERE r118_compania  = cod_cia
+       AND r118_localidad = cod_loc
+       AND r118_cod_fact  IS NULL
+       AND r118_item_desp = item
+       AND r20_compania   = r118_compania
+       AND r20_localidad  = r118_localidad
+       AND r20_cod_tran   = r118_cod_desp
+       AND r20_num_tran   = r118_num_desp
+       AND r20_item       = r118_item_desp
+
+	IF entrega_prv IS NULL THEN
+		LET entrega_prv = 0
+	END IF
+
+	LET stock_disp = stock - x_despachar - (reservado - entrega_prv)
 
 	RETURN stock_disp
 END FUNCTION

@@ -1,8 +1,8 @@
 {*
- * Titulo           : repp227.4gl - Revisar facturas pendientes de despacho
- * Elaboracion      : 27-oct-2008
+ * Titulo           : repp233.4gl - Despacho de proformas no facturadas
+ * Elaboracion      : 12-nov-2009
  * Autor            : JCM
- * Formato Ejecucion: fglrun repp227 base modulo compañía localidad
+ * Formato Ejecucion: fglrun repp233 base modulo compañía localidad
  *}
 
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
@@ -18,11 +18,11 @@ DEFINE rm_orden ARRAY[10] OF CHAR(4)
 DEFINE vm_columna_1	SMALLINT
 DEFINE vm_columna_2	SMALLINT
 
-DEFINE rm_fact ARRAY[1000] OF RECORD
-	cod_tran		LIKE rept019.r19_cod_tran,
-	num_tran		LIKE rept019.r19_num_tran,
-	nomcli			LIKE rept019.r19_nomcli,
-	fecing			LIKE rept019.r19_fecing
+DEFINE rm_prof ARRAY[1000] OF RECORD
+	numprof			LIKE rept021.r21_numprof,
+	numprev			LIKE rept023.r23_numprev,
+	nomcli			LIKE rept021.r21_nomcli,
+	fecing			LIKE rept021.r21_fecing
 END RECORD
 
 DEFINE r_detalle ARRAY[1000] OF RECORD
@@ -41,7 +41,7 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/repp227.error')
+CALL startlog('../logs/repp233.error')
 CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN          -- Validar # parámetros correcto
@@ -54,7 +54,7 @@ LET vg_base     = arg_val(1)
 LET vg_modulo   = arg_val(2)
 LET vg_codcia   = arg_val(3)
 LET vg_codloc   = arg_val(4)
-LET vg_proceso = 'repp227'
+LET vg_proceso = 'repp233'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
 CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
@@ -71,24 +71,24 @@ DEFINE r		RECORD LIKE gent000.*
 DEFINE r_rep	RECORD LIKE rept000.*
 DEFINE i		SMALLINT
 
-OPEN WINDOW repw227_1 AT 3,2 WITH 22 ROWS, 80 COLUMNS
+OPEN WINDOW repw233_1 AT 3,2 WITH 22 ROWS, 80 COLUMNS
 	ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE FIRST,
 		  BORDER, MESSAGE LINE LAST) 
-OPEN FORM repf227_1 FROM '../forms/repf227_1'
-DISPLAY FORM repf227_1
+OPEN FORM repf233_1 FROM '../forms/repf233_1'
+DISPLAY FORM repf233_1
 LET vm_max_rows = 1000
 LET vm_cod_fact = 'FA'
 LET vm_cod_desp = 'NE'
-LET vm_subt_tran = 2  -- Subtipo de transaccion:
-                      --  Despacho en base a una factura
+LET vm_subt_tran = 3 -- Subtipo de transaccion:
+                     --  Despacho en base a una proforma
 
-DISPLAY '.'				 TO tit_col1
-DISPLAY '#'				 TO tit_col2
+DISPLAY 'Prof'			 TO tit_col1
+DISPLAY 'Prev'			 TO tit_col2
 DISPLAY 'Cliente'        TO tit_col3
-DISPLAY 'Fecha fact.'    TO tit_col4
+DISPLAY 'Fecha aprob.'   TO tit_col4
 
-FOR i = 1 TO fgl_scr_size('rm_fact')
-	CLEAR rm_fact[i].*
+FOR i = 1 TO fgl_scr_size('rm_prof')
+	CLEAR rm_prof[i].*
 END FOR
 CALL muestra_consulta()
 
@@ -104,27 +104,27 @@ DEFINE num_rows		INTEGER
 FOR i = 1 TO 10
 	LET rm_orden[i] = '' 
 END FOR
-LET vm_columna_1 = 4
-LET vm_columna_2 = 3
+LET vm_columna_1 = 3
+LET vm_columna_2 = 2
 LET rm_orden[vm_columna_1] = 'ASC'
 LET rm_orden[vm_columna_2] = 'ASC'
 WHILE TRUE
-	LET query = 'SELECT r19_cod_tran, r19_num_tran, r19_nomcli, r19_fecing ',
-				'  FROM rept019, rept116 ',
-				' WHERE r19_compania   = ', vg_codcia, 
-				'   AND r19_localidad  = ', vg_codloc, 
-				'   AND r19_cod_tran   = "', vm_cod_fact CLIPPED, '"',
-				'   AND r116_compania  = r19_compania', 
-				'   AND r116_localidad = r19_localidad', 
-				'   AND r116_cod_tran  = r19_cod_tran', 
-				'   AND r116_num_tran  = r19_num_tran', 
-				' GROUP BY 1, 2, 3, 4 ',
+	LET query = 'SELECT r102_numprof, r23_numprev, r23_nomcli, r23_fecing ',
+				'  FROM rept023, rept102 ',
+				' WHERE r23_compania   = ', vg_codcia, 
+				'   AND r23_localidad  = ', vg_codloc, 
+				'   AND r23_codcli     IS NOT NULL ',  
+				'   AND r23_cont_cred  = "R" ',  
+				'   AND r23_estado     = "P" ',  
+				'   AND r102_compania  = r23_compania ',
+				'   AND r102_localidad = r23_localidad ',
+				'   AND r102_numprev   = r23_numprev ',
 				' ORDER BY ', vm_columna_1, ' ', rm_orden[vm_columna_1], ',', 
 							  vm_columna_2, ' ', rm_orden[vm_columna_2] 
 	PREPARE crep FROM query
 	DECLARE q_crep CURSOR FOR crep 
 	LET i = 1
-	FOREACH q_crep INTO rm_fact[i].*
+	FOREACH q_crep INTO rm_prof[i].*
 		LET i = i + 1
 		IF i > vm_max_rows THEN
 			EXIT FOREACH
@@ -138,7 +138,7 @@ WHILE TRUE
 		EXIT PROGRAM
 	END IF
 	CALL set_count(num_rows)
-	DISPLAY ARRAY rm_fact TO rm_fact.*
+	DISPLAY ARRAY rm_prof TO rm_prof.*
 		BEFORE ROW
 			LET i = arr_curr()
 			MESSAGE i, ' de ', num_rows
@@ -150,7 +150,7 @@ WHILE TRUE
 		ON KEY(INTERRUPT)
 			EXIT DISPLAY
 		ON KEY(F5)
-			CALL despachar_factura(rm_fact[i].cod_tran, rm_fact[i].num_tran)
+			CALL despachar_preventa(rm_prof[i].numprof, rm_prof[i].numprev)
 			LET int_flag = 0
 		ON KEY(F15)
 			LET i = 1
@@ -189,24 +189,23 @@ END FUNCTION
 
 
 
-FUNCTION despachar_factura(cod_fact, num_fact)
-DEFINE cod_fact		LIKE rept019.r19_cod_tran
-DEFINE num_fact		LIKE rept019.r19_num_tran
+FUNCTION despachar_preventa(numprof, numprev)
+DEFINE numprof		LIKE rept021.r21_numprof
+DEFINE numprev		LIKE rept023.r23_numprev
 DEFINE resp			CHAR(6)
 DEFINE r_r19		RECORD LIKE rept019.*
-DEFINE r_fcab		RECORD LIKE rept019.*
+DEFINE r_r23		RECORD LIKE rept023.*
 DEFINE r_g21		RECORD LIKE gent021.*
 
 DEFINE numelm		INTEGER
 
-OPEN WINDOW repw227_2 AT 3,2 WITH 22 ROWS, 80 COLUMNS
+OPEN WINDOW repw233_2 AT 3,2 WITH 22 ROWS, 80 COLUMNS
 	ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE FIRST,
 		  BORDER, MESSAGE LINE LAST) 
-OPEN FORM repf227_2 FROM '../forms/repf227_2'
-DISPLAY FORM repf227_2
+OPEN FORM repf233_2 FROM '../forms/repf233_2'
+DISPLAY FORM repf233_2
 
 CREATE TEMP TABLE tmp_det (
-	r20_item_fact	CHAR(15),
 	r20_item		CHAR(15),
 	r10_nombre		VARCHAR(35),
 	r11_ubicacion	CHAR(10),
@@ -215,63 +214,59 @@ CREATE TEMP TABLE tmp_det (
 	r20_cant_ven	SMALLINT
 )
 
-CALL fl_lee_cabecera_transaccion_rep(vg_codcia, vg_codloc, cod_fact, num_fact)
-	RETURNING r_fcab.*
+CALL fl_lee_preventa_rep(vg_codcia, vg_codloc, numprev) RETURNING r_r23.*
 
 DISPLAY 'Codigo' 		TO tit_col1
 DISPLAY 'Descripcion' 	TO tit_col2
-DISPLAY 'Fact' 			TO tit_col3
+DISPLAY 'Ped' 			TO tit_col3
 DISPLAY 'Stock' 		TO tit_col4
 DISPLAY 'Desp' 			TO tit_col5
 
 INITIALIZE r_r19.* TO NULL
-LET r_r19.r19_compania   = vg_codcia
-LET r_r19.r19_localidad  = vg_codloc
-LET r_r19.r19_cod_tran   = vm_cod_desp 
+LET r_r19.r19_compania    = vg_codcia
+LET r_r19.r19_localidad   = vg_codloc
+LET r_r19.r19_cod_tran    = vm_cod_desp 
 LET r_r19.r19_cod_subtipo = vm_subt_tran
-LET r_r19.r19_cont_cred  = 'C'
-LET r_r19.r19_codcli     = r_fcab.r19_codcli
-LET r_r19.r19_nomcli     = r_fcab.r19_nomcli
-LET r_r19.r19_dircli     = r_fcab.r19_dircli
-LET r_r19.r19_telcli     = r_fcab.r19_telcli
-LET r_r19.r19_cedruc     = r_fcab.r19_cedruc
-LET r_r19.r19_vendedor   = r_fcab.r19_vendedor
-LET r_r19.r19_descuento  = 0.0
-LET r_r19.r19_porc_impto = 0.0
-LET r_r19.r19_moneda     = rg_gen.g00_moneda_base
-LET r_r19.r19_paridad    = 1
-LET r_r19.r19_precision  = rg_gen.g00_decimal_mb
-LET r_r19.r19_tot_costo  = 0.0
-LET r_r19.r19_tot_bruto  = 0.0
-LET r_r19.r19_tot_dscto  = 0.0
-LET r_r19.r19_tot_neto   = 0.0
-LET r_r19.r19_flete      = 0.0
-LET r_r19.r19_usuario    = vg_usuario
-LET r_r19.r19_fecing     = CURRENT
+LET r_r19.r19_cont_cred   = 'C'
+LET r_r19.r19_codcli      = r_r23.r23_codcli
+LET r_r19.r19_nomcli      = r_r23.r23_nomcli
+LET r_r19.r19_dircli      = r_r23.r23_dircli
+LET r_r19.r19_telcli      = r_r23.r23_telcli
+LET r_r19.r19_cedruc      = r_r23.r23_cedruc
+LET r_r19.r19_vendedor    = r_r23.r23_vendedor
+LET r_r19.r19_descuento   = 0.0
+LET r_r19.r19_porc_impto  = 0.0
+LET r_r19.r19_moneda      = rg_gen.g00_moneda_base
+LET r_r19.r19_paridad     = 1
+LET r_r19.r19_precision   = rg_gen.g00_decimal_mb
+LET r_r19.r19_tot_costo   = 0.0
+LET r_r19.r19_tot_bruto   = 0.0
+LET r_r19.r19_tot_dscto   = 0.0
+LET r_r19.r19_tot_neto    = 0.0
+LET r_r19.r19_flete       = 0.0
+LET r_r19.r19_usuario     = vg_usuario
+LET r_r19.r19_fecing      = CURRENT
 
 CALL fl_lee_cod_transaccion(r_r19.r19_cod_tran) RETURNING r_g21.*
 LET r_r19.r19_tipo_tran  = r_g21.g21_tipo
 LET r_r19.r19_calc_costo = r_g21.g21_calc_costo
 
-DISPLAY r_fcab.r19_cod_tran, r_fcab.r19_num_tran, r_fcab.r19_nomcli,
-		r_fcab.r19_fecing 
-	 TO cod_tran, num_tran, nomcli, fecing
+DISPLAY numprof, r_r23.r23_numprev, r_r23.r23_nomcli, r_r23.r23_fecing 
+	 TO numprof, numprev, nomcli, fecing
 
 CALL ingresar_bodega(r_r19.*) RETURNING r_r19.r19_bodega_ori
 IF r_r19.r19_bodega_ori IS NULL THEN
-	CLOSE WINDOW repw227_2
+	CLOSE WINDOW repw233_2
 	DROP TABLE tmp_det
 	RETURN
 END IF
 
-CALL cargar_items_pendientes(r_fcab.r19_cod_tran, r_fcab.r19_num_tran,
-							 r_r19.r19_bodega_ori) 
+CALL cargar_items_pendientes(numprof, numprev, r_r19.r19_bodega_ori) 
 	RETURNING numelm
 IF numelm = 0 THEN
-	CALL fgl_winmessage(vg_producto, 'No queda nada pendiente de despacho ' ||
-									 'para esta factura.',
+	CALL fgl_winmessage(vg_producto, 'No queda nada pendiente de despacho.', 
 						'exclamation')
-	CLOSE WINDOW repw227_2
+	CLOSE WINDOW repw233_2
 	DROP TABLE tmp_det
 	RETURN
 END IF
@@ -279,7 +274,7 @@ END IF
 LET int_flag = 0
 CALL ingresar_detalle(numelm) RETURNING numelm
 IF numelm IS NULL THEN
-	CLOSE WINDOW repw227_2
+	CLOSE WINDOW repw233_2
 	DROP TABLE tmp_det
 	RETURN
 END IF
@@ -289,14 +284,14 @@ BEGIN WORK
 LET r_r19.r19_bodega_dest = r_r19.r19_bodega_ori
 LET r_r19.r19_num_tran = nextValInSequence(vg_modulo, r_r19.r19_cod_tran)
 IF r_r19.r19_num_tran = -1 THEN
-	CLOSE WINDOW repw227_2
+	CLOSE WINDOW repw233_2
 	DROP TABLE tmp_det
 	RETURN
 END IF
 
 INSERT INTO rept019 VALUES (r_r19.*)
 
-CALL grabar_detalle(r_fcab.*, r_r19.*, numelm)
+CALL grabar_detalle(r_r23.*, r_r19.*, numelm)
 
 COMMIT WORK
 
@@ -304,16 +299,11 @@ CALL fl_control_master_contab_repuestos(vg_codcia, vg_codloc,
 		r_r19.r19_cod_tran, r_r19.r19_num_tran)
 CALL imprimir(r_r19.r19_cod_tran, r_r19.r19_num_tran)
 
-DELETE FROM rept116 
- WHERE r116_compania  = r_fcab.r19_compania
-   AND r116_localidad = r_fcab.r19_localidad
-   AND r116_cantidad  = 0 
-
 DROP TABLE tmp_det
 
 CALL fgl_winmessage(vg_producto, 'Proceso completado OK', 'exclamation')
 
-CLOSE WINDOW repw227_2
+CLOSE WINDOW repw233_2
 
 END FUNCTION
 
@@ -406,30 +396,62 @@ END FUNCTION
 
 
 
-FUNCTION cargar_items_pendientes(cod_tran, num_tran, bodega)
-DEFINE cod_tran				LIKE rept019.r19_cod_tran
-DEFINE num_tran				LIKE rept019.r19_num_tran
+FUNCTION cargar_items_pendientes(numprof, numprev, bodega)
+DEFINE numprof				LIKE rept021.r21_numprof
+DEFINE numprev				LIKE rept023.r23_numprev
 DEFINE bodega				LIKE rept019.r19_bodega_ori
 
 DEFINE i					INTEGER
 
+DEFINE entregado			INTEGER
+DEFINE r_desp RECORD
+	r20_item		LIKE rept020.r20_item,
+	r10_nombre		LIKE rept010.r10_nombre,
+	r11_ubicacion	LIKE rept011.r11_ubicacion,
+	r20_cant_ped	LIKE rept020.r20_cant_ped,
+	r11_stock_act	LIKE rept011.r11_stock_act,
+	r20_cant_ven	LIKE rept020.r20_cant_ven
+END RECORD
+
 DECLARE q_desp CURSOR FOR
-	SELECT r116_item, r10_nombre, NVL(r11_ubicacion, 'SN'), r116_cantidad, 
+	SELECT r24_item, r10_nombre, NVL(r11_ubicacion, 'SN'), r24_cant_ven, 
 		   NVL(r11_stock_act, 0), 0
-	  FROM rept116, rept010, OUTER rept011
-	 WHERE r116_compania  = vg_codcia
-	   AND r116_localidad = vg_codloc
-	   AND r116_cod_tran  = cod_tran
-	   AND r116_num_tran  = num_tran
-	   AND r10_compania   = r116_compania
-	   AND r10_codigo     = r116_item
+	  FROM rept024, rept010, OUTER rept011
+	 WHERE r24_compania  = vg_codcia
+	   AND r24_localidad = vg_codloc
+	   AND r24_numprev   = numprev
+	   AND r10_compania   = r24_compania
+	   AND r10_codigo     = r24_item
 	   AND r11_compania   = r10_compania
 	   AND r11_bodega     = bodega
 	   AND r11_item       = r10_codigo
 	 ORDER BY 3
 
 LET i = 1
-FOREACH q_desp INTO r_detalle[i].* 
+FOREACH q_desp INTO r_desp.*
+	INITIALIZE entregado TO NULL
+	SELECT SUM(r20_cant_ent) INTO entregado 
+	  FROM rept118, rept020
+	 WHERE r118_compania  = vg_codcia
+	   AND r118_localidad = vg_codloc
+	   AND r118_numprev   = numprev
+       AND r118_cod_fact  IS NULL
+       AND r118_item_desp = r_desp.r20_item
+	   AND r20_compania   = r118_compania
+	   AND r20_localidad  = r118_localidad
+	   AND r20_cod_tran   = r118_cod_desp
+	   AND r20_num_tran   = r118_num_desp
+	   AND r20_item       = r118_item_desp
+
+	IF entregado IS NULL THEN
+		LET entregado = 0
+	END IF
+
+	IF r_desp.r20_cant_ped <= entregado THEN
+		CONTINUE FOREACH
+	END IF
+	LET r_detalle[i].* = r_desp.*
+	LET r_detalle[i].r20_cant_ped = r_detalle[i].r20_cant_ped - entregado
 	LET i = i + 1
 	IF i > vm_max_rows THEN
 		EXIT FOREACH
@@ -497,18 +519,17 @@ END FUNCTION
 
 
 
-FUNCTION grabar_detalle(r_fcab, r_r19, numelm)
-DEFINE r_fcab		RECORD LIKE rept019.*
+FUNCTION grabar_detalle(r_r23, r_r19, numelm)
+DEFINE r_r23		RECORD LIKE rept023.*
 DEFINE r_r19		RECORD LIKE rept019.*
 DEFINE numelm		INTEGER
 
 DEFINE r_r10		RECORD LIKE rept010.*
 DEFINE r_r20		RECORD LIKE rept020.*
-DEFINE r_r23		RECORD LIKE rept023.*
 DEFINE r_r118		RECORD LIKE rept118.*
 DEFINE i			INTEGER
 
-INITIALIZE r_r20.*, r_r23.*, r_r118.* TO NULL
+INITIALIZE r_r20.*, r_r118.* TO NULL
 
 LET r_r20.r20_compania  = r_r19.r19_compania
 LET r_r20.r20_localidad = r_r19.r19_localidad
@@ -567,67 +588,24 @@ FOR i = 1 TO numelm
 	INSERT INTO rept020 VALUES (r_r20.*)
 
 	{*
-	 * Esto es para indicar que Factura se despacho con que Nota de Entrega.
-	 * En la tabla hay hasta item por que se iba a permitir que en el momento 
-	 * del despacho se cambiara el item a despachar por su sustituto. (NO SE 
-	 * IMPLEMENTO ESO PORQUE PEPE NO LO QUIZO)
+	 * Esto es para indicar que preventa se despacho con que Nota de Entrega.
 	 *}
 	LET r_r118.r118_compania  = r_r20.r20_compania
 	LET r_r118.r118_localidad = r_r20.r20_localidad
 	LET r_r118.r118_cod_desp  = r_r20.r20_cod_tran
 	LET r_r118.r118_num_desp  = r_r20.r20_num_tran
 	LET r_r118.r118_item_desp = r_r20.r20_item
-
-	SELECT r23_numprev INTO r_r118.r118_numprev 
-      FROM rept023
-	 WHERE r23_compania  = r_r20.r20_compania
-	   AND r23_localidad = r_r20.r20_localidad
-	   AND r23_cod_tran  = r_r20.r20_cod_tran
-	   AND r23_num_tran  = r_r20.r20_num_tran
-	{*
-	 * Obtengo el item de la rept116, porque ahi ya he cambiado el item en el
-	 * caso que este despachando un sustituto.
-	 *}
-	SELECT r116_cod_tran, r116_num_tran, r116_item_fact
-	  INTO r_r118.r118_cod_fact, r_r118.r118_num_fact, r_r118.r118_item_fact
-	  FROM rept116
-	 WHERE r116_compania  = r_fcab.r19_compania
-	   AND r116_localidad = r_fcab.r19_localidad
-	   AND r116_cod_tran  = r_fcab.r19_cod_tran
-	   AND r116_num_tran  = r_fcab.r19_num_tran
-	   AND r116_item      = r_r20.r20_item
+	LET r_r118.r118_numprev   = r_r23.r23_numprev
+	LET r_r118.r118_item_fact = r_r20.r20_item
 
 	INSERT INTO rept118 VALUES (r_r118.*)
-
-	{*
-	 * Actualizo la cantidad a despachar
-	 *}
-	UPDATE rept116 SET r116_cantidad = r116_cantidad - r_r20.r20_cant_ven
-	 WHERE r116_compania  = r_fcab.r19_compania
-	   AND r116_localidad = r_fcab.r19_localidad
-	   AND r116_cod_tran  = r_fcab.r19_cod_tran
-	   AND r116_num_tran  = r_fcab.r19_num_tran
-	   AND r116_item      = r_r20.r20_item
-
-	{*
-	 * Si el item despachado es el mismo que esta en la factura, actualice
-	 * rept020.r20_cant_ent en la factura.
-	 *}
-	IF r_r118.r118_item_fact = r_r118.r118_item_desp THEN
-		UPDATE rept020 SET r20_cant_ent = r20_cant_ent + r_r20.r20_cant_ven
-		 WHERE r20_compania  = r_r118.r118_compania
-		   AND r20_localidad = r_r118.r118_localidad
-		   AND r20_cod_tran  = r_r118.r118_cod_fact
-		   AND r20_num_tran  = r_r118.r118_num_fact
-		   AND r20_item      = r_r118.r118_item_fact
-	END IF
 
 	{*
 	 * Actualizo la existencia del item despachado
 	 *}
 	UPDATE rept011 SET r11_stock_act = r11_stock_act - r_r20.r20_cant_ven
-	 WHERE r11_compania = r_fcab.r19_compania
-	   AND r11_bodega   = r_fcab.r19_bodega_ori
+	 WHERE r11_compania = r_r19.r19_compania
+	   AND r11_bodega   = r_r19.r19_bodega_ori
 	   AND r11_item     = r_r20.r20_item
 
 	CALL fl_proceso_despues_insertar_linea_tr_rep(vg_codcia, vg_codloc, 
