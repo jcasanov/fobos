@@ -6738,6 +6738,35 @@ END FUNCTION
 
 
 
+FUNCTION fl_proforma_despachada(codcia, codloc, numprof)
+DEFINE codcia			LIKE rept102.r102_compania
+DEFINE codloc			LIKE rept102.r102_localidad
+DEFINE numprof			LIKE rept102.r102_numprof
+DEFINE despachos		SMALLINT
+
+	SELECT COUNT(*) INTO despachos
+	  FROM rept102, rept023, rept118
+	 WHERE r102_compania  = codcia
+	   AND r102_localidad = codloc
+	   AND r102_numprof   = numprof
+	   AND r23_compania   = r102_compania
+	   AND r23_localidad  = r102_localidad
+	   AND r23_numprev    = r102_numprev  
+	   AND r23_estado     = 'P'
+           AND r118_compania  = r23_compania
+           AND r118_localidad = r23_localidad
+           AND r118_numprev   = r23_numprev
+           AND r118_cod_fact  IS NULL
+
+	IF despachos > 0 THEN
+		RETURN TRUE 
+	ELSE
+		RETURN FALSE
+	END IF
+END FUNCTION
+
+
+
 FUNCTION fl_sustituido_por(codcia, item)
 DEFINE codcia		LIKE rept010.r10_compania
 DEFINE item			LIKE rept010.r10_codigo

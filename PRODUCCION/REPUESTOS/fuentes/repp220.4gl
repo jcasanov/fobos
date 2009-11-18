@@ -1536,6 +1536,11 @@ IF fl_proforma_facturada(vg_codcia, vg_codloc, rm_r21.r21_numprof) THEN
 	RETURN
 END IF
 
+IF fl_proforma_despachada(vg_codcia, vg_codloc, rm_r21.r21_numprof) THEN
+	CALL fgl_winmessage(vg_producto, 'No se puede modificar proforma porque ya se han generado despachos.', 'exclamation')
+	RETURN
+END IF
+
 LET vm_flag_mant = 'M'
 WHENEVER ERROR CONTINUE
 BEGIN WORK
