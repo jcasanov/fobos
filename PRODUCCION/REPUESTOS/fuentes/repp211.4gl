@@ -514,7 +514,12 @@ FOREACH q_dprev INTO r.*
 	-- disponible
 	IF vm_fact_sstock = 'N' THEN
 		LET cant_pend = r.r24_cant_ven - rm_dett.r20_cant_ent
-		IF cant_pend > fl_lee_stock_disponible_rep(vg_codcia, vg_codloc,
+		-- Al verificar stock a la cantidad disponible le sumo lo que esta pendiente
+		-- esto lo hago porque la funcion no sabe que preventa estoy procesando
+		-- y por lo tanto tambien sumo como reservado (y, por lo tanto, no disponible
+		-- lo que esta en esta preventa 
+		IF cant_pend > 
+		   cant_pend + fl_lee_stock_disponible_rep(vg_codcia, vg_codloc,
 												   r.r24_item, 'R')
 		THEN
 			CALL fgl_winmessage(vg_producto, 'Item ' || r.r24_item CLIPPED ||
