@@ -1,6 +1,6 @@
 {*
  * Titulo           : cmsp201.4gl - Consultar liquidacion para pago
- *									de comisiones
+ *				    de comisiones
  * Elaboracion      : 19-jun-2009
  * Autor            : JCM
  * Formato Ejecucion: fglrun cmsp201 base módulo compañía 

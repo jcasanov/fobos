@@ -722,6 +722,7 @@ LET rm_r20.r20_cod_tran  = vm_cod_tran_2
 LET rm_r20.r20_fecing    = rm_r19.r19_fecing
 LET rm_r20.r20_ubicacion = 'SN'
 
+INITIALIZE r_r118.* TO NULL
 LET k = 1
 FOR i = 1 TO vm_ind_arr
 	IF r_detalle[i].r20_cant_dev > 0 THEN
