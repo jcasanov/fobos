@@ -132,6 +132,13 @@ LET rm_ctb.b01_usuario = vg_usuario
 LET rm_ctb.b01_fecing = CURRENT
 CALL leer_datos('I')
 IF NOT int_flag THEN
+	-- Hay que obtener el nivel de la cuenta
+	SELECT MAX(b01_nivel) INTO rm_ctb.b01_nivel FROM ctbt001
+	IF rm_ctb.b01_nivel IS NULL THEN
+		LET rm_ctb.b01_nivel = 0
+	END IF
+	LET rm_ctb.b01_nivel = rm_ctb.b01_nivel + 1
+
 	LET rm_ctb.b01_fecing = CURRENT
 	INSERT INTO ctbt001 VALUES (rm_ctb.*)
 	LET vm_num_rows = vm_num_rows + 1

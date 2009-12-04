@@ -8,7 +8,6 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_demonios	VARCHAR(12)
 DEFINE rm_ctb		RECORD LIKE ctbt002.*
 DEFINE vm_num_rows	SMALLINT
 DEFINE vm_row_current	SMALLINT
@@ -44,6 +43,7 @@ END MAIN
 
 
 FUNCTION control_master()
+DEFINE r_b00			RECORD LIKE ctbt000.*
 
 CALL fl_nivel_isolation()
 LET vm_max_rows	= 50
@@ -58,6 +58,13 @@ INITIALIZE rm_ctb.* TO NULL
 LET vm_num_rows = 0
 LET vm_row_current = 0
 CALL muestra_contadores(vm_row_current, vm_num_rows)
+
+CALL fl_lee_compania_contabilidad(vg_codcia) RETURNING r_b00.*
+IF r_b00.b00_compania IS NULL THEN
+	CALL fgl_winmessage(vg_producto, 'No se ha configurado la compania en el modulo de contabilidad.', 'exclamation')
+	RETURN
+END IF
+
 MENU 'OPCIONES'
 	BEFORE MENU
 		HIDE OPTION 'Avanzar'
