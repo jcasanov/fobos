@@ -80,20 +80,29 @@ FOREACH q1 INTO r.*
 					LET r_r10.r10_peso = r.te_peso
 				END IF
 
-				-- Si no tiene movimientos, se actualiza costo y pvp
-				SELECT COUNT(*) INTO movim
-				  FROM rept020
-				 WHERE r20_compania  = 1 
-				   AND r20_localidad = 1
-				   AND r20_item      = r.te_item
-				
-				LET r_r10.r10_fob = fob
-				IF movim = 0 THEN
+				-- Si el item es de la linea SOUVE solo se 
+				-- debe actualizar el costo y continuar con
+				-- el siguiente
+				IF linea = 'SOUVE' THEN
 					LET r_r10.r10_costult_mb = r_r10.r10_costo_mb 
-					LET r_r10.r10_precio_ant = r_r10.r10_precio_mb
-					LET r_r10.r10_fec_camprec = CURRENT
-					LET r_r10.r10_costo_mb = fob * 1.17
-					LET r_r10.r10_precio_mb = r_r10.r10_costo_mb * 1.67
+					LET r_r10.r10_costo_mb = fob
+				ELSE
+
+					-- Si no tiene movimientos, se actualiza costo y pvp
+					SELECT COUNT(*) INTO movim
+					  FROM rept020
+					 WHERE r20_compania  = 1 
+					   AND r20_localidad = 1
+					   AND r20_item      = r.te_item
+					
+					LET r_r10.r10_fob = fob
+					IF movim = 0 THEN
+						LET r_r10.r10_costult_mb = r_r10.r10_costo_mb 
+						LET r_r10.r10_precio_ant = r_r10.r10_precio_mb
+						LET r_r10.r10_fec_camprec = CURRENT
+						LET r_r10.r10_costo_mb = fob * 1.17
+						LET r_r10.r10_precio_mb = r_r10.r10_costo_mb * 1.67
+					END IF
 				END IF	
 
                 UPDATE rept010 SET * = r_r10.* 
@@ -104,12 +113,21 @@ FOREACH q1 INTO r.*
  
 	LET qq = qq + 1 
 	DISPLAY qq USING "&&&&", '  ', r.te_item, ' no existe... Creando registro '
-	INSERT INTO rept010 VALUES 
-		(1, r.te_item, r.te_nombre, 'A', 1, 
-		0, 'UNIDAD', 1, 1, 'LAS DEMAS', modelo, 
-		linea  , '99', 'S', r.te_fob, 
-		'DO', ((r.te_fob * 1.17) * 1.67), 0, (r.te_fob * 1.17), 0, 0, 0, 
-		0, 0, NULL, 0, CURRENT, filtro, 'FOBOS', CURRENT, NULL)
+	IF linea = 'SOUVE' THEN
+		INSERT INTO rept010 VALUES 
+			(1, r.te_item, r.te_nombre, 'A', 1, 
+			0, 'UNIDAD', 1, 1, 'LAS DEMAS', modelo, 
+			linea  , '99', 'S', 0, 
+			'DO', 0, 0, r.te_fob, 0, 0, 0, 
+			0, 0, NULL, 0, CURRENT, filtro, 'FOBOS', CURRENT, NULL)
+	ELSE
+		INSERT INTO rept010 VALUES 
+			(1, r.te_item, r.te_nombre, 'A', 1, 
+			0, 'UNIDAD', 1, 1, 'LAS DEMAS', modelo, 
+			linea  , '99', 'S', r.te_fob, 
+			'DO', ((r.te_fob * 1.17) * 1.67), 0, (r.te_fob * 1.17), 0, 0, 0, 
+			0, 0, NULL, 0, CURRENT, filtro, 'FOBOS', CURRENT, NULL)
+	END IF
  
 END FOREACH
 --COMMIT WORK
