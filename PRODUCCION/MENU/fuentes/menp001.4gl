@@ -738,7 +738,7 @@ DISPLAY "Ventas al Taller"  	TO c1000  ## Botón 10 repp215
 DISPLAY "Transferencias"  	TO c1100  ## Botón 11 repp216
 DISPLAY "Dev. Facturas"  	TO c1200  ## Botón 12 repp217
 DISPLAY "Dev. Compra Local"  	TO c1300  ## Botón 13 repp218
-DISPLAY "Dev. Ventas Taller"  	TO c1400  ## Botón 14 repp219
+DISPLAY "Refacturación"  	TO c1400  ## Botón 14 repp232
 DISPLAY "Proformas"  		TO c1500  ## Botón 15 repp220
 DISPLAY "Mantenimiento Precios"	TO c1600  ## Botón 16 repp113
 DISPLAY "Clasificacion ABC"		TO c1700  ## Botón 17 repp112
@@ -793,7 +793,7 @@ CASE d
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp218 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
 		RUN ejecuta
 	WHEN 14
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp219 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
+		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp232 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
 		RUN ejecuta
 	WHEN 15
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp220 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc

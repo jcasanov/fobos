@@ -2,7 +2,8 @@
  * Titulo           : repp217.4gl - Devolucion de Facturas
  * Elaboracion      : 23-sep-2008
  * Autor            : JCM
- * Formato Ejecucion: fglrun repp217 base modulo compania localidad
+ * Formato Ejecucion: fglrun repp217 base modulo compania localidad 
+ *                                   [cod_tran] [num_fact] 
  *}
 
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
@@ -151,15 +152,23 @@ MENU 'OPCIONES'
 		HIDE OPTION 'Ver Factura'
 		HIDE OPTION 'Avanzar'
 		HIDE OPTION 'Retroceder'
-                HIDE OPTION 'Imprimir'
+        HIDE OPTION 'Imprimir'
 		IF num_args() = 6 THEN
-			HIDE OPTION 'Consultar'
-			HIDE OPTION 'Ingresar'
-			SHOW OPTION 'Ver Factura'
-                	SHOW OPTION 'Imprimir'
-			CALL control_consulta()
-			IF vm_ind_arr > vm_filas_pant THEN
-				SHOW OPTION 'Ver Detalle'
+			IF vg_cod_tran = 'DF' OR vg_cod_tran = 'AF' THEN
+				HIDE OPTION 'Consultar'
+				HIDE OPTION 'Ingresar'
+				SHOW OPTION 'Ver Factura'
+	            SHOW OPTION 'Imprimir'
+				CALL control_consulta()
+				IF vm_ind_arr > vm_filas_pant THEN
+					SHOW OPTION 'Ver Detalle'
+				END IF
+			ELSE  -- IF vg_cod_tran = 'FA'
+				HIDE OPTION 'Consultar'
+				HIDE OPTION 'Ingresar'
+				SHOW OPTION 'Ver Factura'
+	            SHOW OPTION 'Imprimir'
+				CALL control_ingreso()
 			END IF
 		END IF
 	COMMAND KEY('I') 'Ingresar' 		'Ingresar nuevos registros.'
@@ -241,6 +250,7 @@ MENU 'OPCIONES'
 	COMMAND KEY('S') 'Salir'    		'Salir del programa.'
 		EXIT MENU
 END MENU
+CLOSE WINDOW w_217
 
 END FUNCTION
 
@@ -448,30 +458,14 @@ IF done = 0 THEN
 	RETURN
 END IF
 
-UPDATE rept019 
-	SET   r19_tipo_dev  = NULL, r19_num_dev   = NULL
-	WHERE r19_compania  = vg_codcia
-	AND   r19_localidad = vg_codloc 
-	AND   r19_cod_tran  = 'NI'
-	AND   r19_tipo_dev  = vm_cod_tran
-	AND   r19_num_dev  = rm_r19.r19_num_dev
+UPDATE rept019 SET   r19_tipo_dev  = NULL, r19_num_dev   = NULL
+ WHERE r19_compania  = vg_codcia
+   AND   r19_localidad = vg_codloc 
+   AND   r19_cod_tran  = 'NI'
+   AND   r19_tipo_dev  = vm_cod_tran
+   AND   r19_num_dev  = rm_r19.r19_num_dev
 
-LET pago_fact_nc_pa = 'N'
-{
-IF rm_r19.r19_cod_tran = vm_cod_anu AND rm_fact.r19_cont_cred = 'C' THEN
-	LET val_ant = 0
-	SELECT r25_valor_ant INTO val_ant FROM rept025
-		WHERE r25_compania  = rm_r19.r19_compania  AND 
-		      r25_localidad = rm_r19.r19_localidad AND 
-		      r25_cod_tran  = rm_r19.r19_tipo_dev  AND 
-		      r25_num_tran  = rm_r19.r19_num_dev
-	IF val_ant > 0 THEN
-}
-		LET pago_fact_nc_pa = 'S'
-{
-	END IF
-END IF
-}
+LET pago_fact_nc_pa = 'S'
 IF rm_r19.r19_cod_tran = vm_cod_dev OR 
 	(rm_r19.r19_cod_tran = vm_cod_anu AND rm_fact.r19_cont_cred = 'R') OR 
 	pago_fact_nc_pa = 'S' THEN
@@ -491,7 +485,9 @@ CALL fl_control_master_contab_repuestos(vg_codcia, vg_codloc,
 	rm_r19.r19_cod_tran, rm_r19.r19_num_tran)
 CALL muestra_contadores()
 
-CALL fl_mensaje_registro_ingresado()
+IF num_args() = 4 THEN
+	CALL fl_mensaje_registro_ingresado()
+END IF
 
 END FUNCTION
 
@@ -571,25 +567,30 @@ DECLARE q_read_r20 CURSOR FOR SELECT * FROM rept020
 LET i = 1 
 FOREACH q_read_r20 INTO r_r20.*
 
-	-- Si r20_cant_ent > 0 han habido despachos y solo se puede devolver lo que
-	-- haya reingresado por NI. 
-	IF r_r20.r20_cant_ent > 0 THEN
-		SELECT SUM(r20_cant_ent) INTO r_detalle[i].r20_cant_ven
-		  FROM rept020, rept019
-		 WHERE r19_compania  = vg_codcia
-		   AND r19_localidad = vg_codloc
-		   AND r19_cod_tran  = 'NI'
-		   AND r19_tipo_dev  = rm_r19.r19_cod_tran
-		   AND r19_num_dev   = rm_r19.r19_num_tran
-		   AND r20_compania  = r19_compania
-		   AND r20_localidad = r19_localidad
-		   AND r20_cod_tran  = r19_cod_tran 
-		   AND r20_num_tran  = r19_num_tran 
-		   AND r20_item      = r_r20.r20_item
-	ELSE
-	-- Caso contratrio no se ha despachado nada y se puede hacer devolucion
+	IF num_args() = 4 THEN
+		-- Si r20_cant_ent > 0 han habido despachos y solo se puede devolver lo que
+		-- haya reingresado por NI. 
+		IF r_r20.r20_cant_ent > 0 THEN
+			SELECT SUM(r20_cant_ent) INTO r_detalle[i].r20_cant_ven
+			  FROM rept020, rept019
+			 WHERE r19_compania  = vg_codcia
+			   AND r19_localidad = vg_codloc
+			   AND r19_cod_tran  = 'NI'
+			   AND r19_tipo_dev  = rm_r19.r19_cod_tran
+			   AND r19_num_dev   = rm_r19.r19_num_tran
+			   AND r20_compania  = r19_compania
+			   AND r20_localidad = r19_localidad
+			   AND r20_cod_tran  = r19_cod_tran 
+			   AND r20_num_tran  = r19_num_tran 
+			   AND r20_item      = r_r20.r20_item
+		ELSE
+		-- Caso contratrio no se ha despachado nada y se puede hacer devolucion
+			LET r_detalle[i].r20_cant_ven = r_r20.r20_cant_ven
+		END IF	   
+	ELSE -- IF num_args() = 6 AND vg_cod_tran = 'FA'
+		-- Hago de cuenta que no se hubiera despachado nada
 		LET r_detalle[i].r20_cant_ven = r_r20.r20_cant_ven
-	END IF	   
+	END IF
 
 	IF r_detalle[i].r20_cant_ven > 0 THEN
 		CALL fl_lee_item(vg_codcia, r_r20.r20_item)
@@ -870,84 +871,109 @@ DEFINE r_z01		RECORD LIKE cxct001.*
 DEFINE r19_referencia	LIKE rept019.r19_referencia
 
 LET int_flag = 0
-LET r19_referencia = NULL
-INPUT BY NAME rm_r19.r19_num_dev, r19_referencia 
-	WITHOUT DEFAULTS
-	ON KEY (INTERRUPT)
-		LET INT_FLAG = 0
-		CALL fl_mensaje_abandonar_proceso()
-                	RETURNING resp
-		IF resp = 'Yes' THEN
-			LET int_flag = 1
-			RETURN
-		END IF
-	ON KEY(F5)
-		IF INFIELD(r19_num_dev) THEN
+IF num_args() = 4 THEN
+	LET r19_referencia = NULL
+	INPUT BY NAME rm_r19.r19_num_dev, r19_referencia 
+		WITHOUT DEFAULTS
+		ON KEY (INTERRUPT)
+			LET INT_FLAG = 0
+			CALL fl_mensaje_abandonar_proceso()
+	                	RETURNING resp
+			IF resp = 'Yes' THEN
+				LET int_flag = 1
+				RETURN
+			END IF
+		ON KEY(F5)
+			IF INFIELD(r19_num_dev) THEN
+				IF rm_r19.r19_num_dev IS NOT NULL THEN
+					CALL control_ver_factura(rm_r19.r19_num_dev)
+				END IF
+			END IF
+		ON KEY(F2)
+			IF INFIELD(r19_num_dev) THEN
+				CALL fl_ayuda_transaccion_rep(vg_codcia, vg_codloc,
+										      vm_cod_tran)
+					RETURNING r_r19.r19_cod_tran, 
+						  r_r19.r19_num_tran,
+						  r_r19.r19_nomcli 
+			    IF r_r19.r19_num_tran IS NOT NULL THEN
+					CALL fl_lee_cabecera_transaccion_rep(vg_codcia,
+														 vg_codloc,
+														 vm_cod_tran,
+														 r_r19.r19_num_tran)
+						RETURNING rm_r19.*
+					LET rm_r19.r19_num_dev = rm_r19.r19_num_tran
+					CALL control_display_cabecera()
+			    END IF
+			END IF
+		AFTER FIELD r19_num_dev
 			IF rm_r19.r19_num_dev IS NOT NULL THEN
-				CALL control_ver_factura(rm_r19.r19_num_dev)
-			END IF
-		END IF
-	ON KEY(F2)
-		IF INFIELD(r19_num_dev) THEN
-			CALL fl_ayuda_transaccion_rep(vg_codcia, vg_codloc,
-						      vm_cod_tran)
-				RETURNING r_r19.r19_cod_tran, 
-					  r_r19.r19_num_tran,
-					  r_r19.r19_nomcli 
-		      	IF r_r19.r19_num_tran IS NOT NULL THEN
 				CALL fl_lee_cabecera_transaccion_rep(vg_codcia,
-							    vg_codloc,
-							    vm_cod_tran,
-							    r_r19.r19_num_tran)
-					RETURNING rm_r19.*
+													 vg_codloc,
+													 vm_cod_tran,
+													 rm_r19.r19_num_dev)
+					RETURNING r_r19.*
+	           	IF r_r19.r19_num_tran IS  NULL THEN
+		    		CALL fgl_winmessage(vg_producto, 'La factura no existe en la Compañía. ',
+										'exclamation')
+    	           	NEXT FIELD r19_num_dev
+				END IF
+
+				LET rm_r19.* = r_r19.*
 				LET rm_r19.r19_num_dev = rm_r19.r19_num_tran
+				LET rm_r19.r19_referencia = r19_referencia
+
 				CALL control_display_cabecera()
-		      	END IF
-		END IF
-	AFTER FIELD r19_num_dev
-		IF rm_r19.r19_num_dev IS NOT NULL THEN
-			CALL fl_lee_cabecera_transaccion_rep(vg_codcia,
-							    vg_codloc,
-							    vm_cod_tran,
-							    rm_r19.r19_num_dev)
-				RETURNING r_r19.*
-           	IF r_r19.r19_num_tran IS  NULL THEN
-	    		CALL fgl_winmessage(vg_producto, 'La factura no existe en la Compañía. ',
-									'exclamation')
-               	NEXT FIELD r19_num_dev
-			END IF
 
-			LET rm_r19.* = r_r19.*
-			LET rm_r19.r19_num_dev = rm_r19.r19_num_tran
+				CALL fl_lee_compania_repuestos(vg_codcia) RETURNING rm_r00.*
+
+				IF DATE(rm_r19.r19_fecing) + rm_r00.r00_dias_dev < TODAY 
+				THEN
+					CALL fgl_winmessage(vg_producto,'La factura no puede ser devuelta porque supero el plazo para su devolución.','exclamation')
+					NEXT FIELD r19_num_dev
+				END IF
+
+				IF rm_r19.r19_tipo_dev = vm_cod_anu THEN
+					CALL fgl_winmessage(vg_producto,'La factura ya ha sido anulada.','exclamation')
+					NEXT FIELD r19_num_dev
+				END IF
+			ELSE 
+				NEXT FIELD r19_num_dev
+			END IF
+		AFTER INPUT
+			IF r19_referencia IS NULL THEN
+				CALL fgl_winmessage(vg_producto,
+					'Debe ingresar motivo de la devolución.',
+					'exclamation')
+				NEXT FIELD r19_referencia
+			END IF
 			LET rm_r19.r19_referencia = r19_referencia
+	END INPUT
+ELSE -- num_args() = 6 AND vg_cod_tran = 'FA'
+	CALL fl_lee_cabecera_transaccion_rep(vg_codcia,
+										 vg_codloc,
+										 vg_cod_tran,
+										 vg_num_tran)
+		RETURNING r_r19.*
+   	IF r_r19.r19_num_tran IS  NULL THEN
+   		CALL fgl_winmessage(vg_producto, 'La factura no existe en la Compañía.',
+							'exclamation')
+		EXIT PROGRAM
+	END IF
 
-			CALL control_display_cabecera()
+	LET rm_r19.* = r_r19.*
+	LET rm_r19.r19_num_dev = rm_r19.r19_num_tran
+	LET rm_r19.r19_referencia = 'DEV. X CAMBIO DE FECHA' 
 
-			CALL fl_lee_compania_repuestos(vg_codcia)  
-        			RETURNING rm_r00.*                
+	CALL control_display_cabecera()
 
-			IF DATE(rm_r19.r19_fecing) + rm_r00.r00_dias_dev < TODAY 
-			THEN
-				CALL fgl_winmessage(vg_producto,'La factura no puede ser devuelta porque supero el plazo para su devolución.','exclamation')
-				NEXT FIELD r19_num_dev
-			END IF
+	IF rm_r19.r19_tipo_dev = vm_cod_anu THEN
+		CALL fgl_winmessage(vg_producto, 'La factura ya ha sido anulada.',
+							'exclamation')
+		EXIT PROGRAM
+	END IF
+END IF
 
-			IF rm_r19.r19_tipo_dev = vm_cod_anu THEN
-				CALL fgl_winmessage(vg_producto,'La factura ya ha sido anulada.','exclamation')
-				NEXT FIELD r19_num_dev
-			END IF
-		ELSE 
-			NEXT FIELD r19_num_dev
-		END IF
-	AFTER INPUT
-		IF r19_referencia IS NULL THEN
-			CALL fgl_winmessage(vg_producto,
-				'Debe ingresar motivo de la devolución.',
-				'exclamation')
-			NEXT FIELD r19_referencia
-		END IF
-		LET rm_r19.r19_referencia = r19_referencia
-END INPUT
 LET rm_fact.* = rm_r19.*
 
 END FUNCTION
