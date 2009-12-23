@@ -2414,6 +2414,7 @@ LET rm_r16.r16_fec_envio  = TODAY
 LET rm_r16.r16_tipo       = 'E'
 LET rm_r16.r16_referencia = 'PROFORMA # '|| rm_r21.r21_numprof || '.' 
 LET rm_r16.r16_estado     = 'A'
+LET rm_r16.r16_numprof    = rm_r21.r21_numprof
 DISPLAY 'ACTIVO' TO tit_estado_rep
 DISPLAY r_g13.g13_nombre TO tit_mon_bas
 
