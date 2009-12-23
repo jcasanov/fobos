@@ -324,6 +324,8 @@ BEGIN WORK
 			RETURN
 		END IF
 		CALL control_ingreso_detalle()
+		-- Este proceso reemplaza el costo promedio ponderado anterior
+		CALL control_actualizacion_items() RETURNING intentar, done
 	END IF
 	IF intentar = 0 AND done = 0 THEN
 		CLEAR FORM
@@ -416,6 +418,7 @@ FOR j = 1 TO vm_num_detalles
 	LET rm_r20.r20_costant_ma = rm_aj_costo_2[j].r20_costant_ma
 	LET rm_r20.r20_costnue_ma = rm_aj_costo_2[j].r20_costnue_ma
 	INSERT INTO rept020 VALUES(rm_r20.*)
+
 
 	CALL fl_proceso_despues_insertar_linea_tr_rep(vg_codcia, vg_codloc, 
 							rm_r20.r20_cod_tran, rm_r20.r20_num_tran, rm_r20.r20_item)
