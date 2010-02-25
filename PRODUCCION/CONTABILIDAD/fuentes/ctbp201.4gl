@@ -1329,7 +1329,7 @@ IF i > vm_ind_cta THEN
 	ELSE
 		LET sec = sec + 1
 	END IF
-	INSERT INTO tmp_detalle VALUES(sec, rm_cuenta[i].*, 0, rm_otros[i].*)
+	INSERT INTO tmp_detalle VALUES(sec, rm_cuenta[i].*, NULL, rm_otros[i].*)
 	LET vm_ind_cta = vm_ind_cta + 1
 ELSE
 	UPDATE tmp_detalle SET
@@ -1601,7 +1601,7 @@ LET vm_columna_1 = 5
 LET vm_columna_2 = 6
 LET rm_orden[vm_columna_1]  = 'DESC'
 LET rm_orden[vm_columna_2]  = 'ASC'
-INITIALIZE col TO NULL
+INITIALIZE num_concil, col TO NULL
 
 LET salir = 0
 WHILE NOT salir
