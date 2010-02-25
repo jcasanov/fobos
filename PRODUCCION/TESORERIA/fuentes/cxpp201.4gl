@@ -206,7 +206,7 @@ IF NOT int_flag THEN
                         INSERT INTO cxpt040
                         VALUES (rm_cxp.p21_compania, rm_cxp.p21_localidad,
                                 rm_cxp.p21_codprov, rm_cxp.p21_tipo_doc,
-                                rm_cxp.p21_num_doc, rm_cxp.p21_dividendo,
+                                rm_cxp.p21_num_doc, 
                                 r_b12.b12_tipo_comp, r_b12.b12_num_comp)
                 END IF
 	COMMIT WORK
