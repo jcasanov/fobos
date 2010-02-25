@@ -200,7 +200,6 @@ DISPLAY BY NAME vm_cod_fact_ant, vm_cod_fact_nue
  * Condiciones para el cambio de fecha:
  * - La factura no puede tener ninguna DF, AF ni NI
  * (Esto no se esta haciendo, lo agrego solo si me lo piden)  
- *     La factura debe ser del mes anterior
  *}
 CALL lee_datos()
 IF INT_FLAG THEN
@@ -457,12 +456,16 @@ INPUT BY NAME vm_num_fact_ant WITHOUT DEFAULTS
 		END IF
 
 
-		IF MONTH(r_r19.r19_fecing + 1 UNITS MONTH) <> MONTH(TODAY)
-		THEN
-			CALL fgl_winmessage(vg_producto,'Solo puede refacturar facturas del mes anterior.',
-								'exclamation')
-			NEXT FIELD vm_num_fact_ant
-		END IF
+{* -- Se quito esta restriccion porque refacturan por "cambio de fecha" incluso cosas de
+ *    hace un año
+ *
+ *		IF MONTH(r_r19.r19_fecing + 1 UNITS MONTH) <> MONTH(TODAY)
+ *		THEN
+ *			CALL fgl_winmessage(vg_producto,'Solo puede refacturar facturas del mes anterior.',
+ *								'exclamation')
+ *			NEXT FIELD vm_num_fact_ant
+ *		END IF
+ *}
 
 		-- Se verifica que no existan devoluciones para la factura
 		SELECT COUNT(*) FROM rept019
