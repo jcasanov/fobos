@@ -585,7 +585,8 @@ FOREACH q_read_r20 INTO r_r20.*
 			   AND r20_item      = r_r20.r20_item
 		ELSE
 		-- Caso contratrio no se ha despachado nada y se puede hacer devolucion
-			LET r_detalle[i].r20_cant_ven = r_r20.r20_cant_ven
+		-- de cant_ven - cant_dev 
+			LET r_detalle[i].r20_cant_ven = r_r20.r20_cant_ven - r_r20.r20_cant_dev
 		END IF	   
 	ELSE -- IF num_args() = 6 AND vg_cod_tran = 'FA'
 		-- Hago de cuenta que no se hubiera despachado nada
