@@ -1,33 +1,15 @@
-{*
- * Titulo               : repp229.4gl -- CIERRE MENSUAL DE REPUESTOS
- * Elaboración          : 30-abr-2002
- * Autor                : GVA
- * Formato de Ejecución : fglrun repp229 base modulo compañia localidad
- *}
-                                                                                
-GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
+DATABASE diteca
 
-DEFINE vm_anio		VARCHAR(4)
-DEFINE vm_mes		VARCHAR(2)
-DEFINE rm_r00		RECORD LIKE rept000.*
+DEFINE vg_codcia	INTEGER
+DEFINE vg_codloc	SMALLINT
+DEFINE vm_anio		SMALLINT	
+DEFINE vm_mes		SMALLINT	
 
 
 MAIN
 
-CALL startlog('../logs/repp229.error')
-
-IF num_args() <> 4 THEN
-     EXIT PROGRAM
-END IF
-
-LET vg_base		= arg_val(1)
-LET vg_modulo	= arg_val(2)
-LET vg_codcia	= arg_val(3)
-LET vg_codloc	= arg_val(4)
-
-LET vg_proceso	= 'repp229'
-
-CALL fl_activar_base_datos(vg_base)
+LET vg_codcia	= arg_val(1)
+LET vg_codloc	= arg_val(2)
 
 CALL funcion_master()
 
@@ -37,131 +19,26 @@ END MAIN
 
 FUNCTION funcion_master()
 DEFINE resp 		VARCHAR(6)
-
-CALL fl_nivel_isolation()
-
-CALL fl_lee_compania_repuestos(vg_codcia) RETURNING rm_r00.*
-IF rm_r00.r00_compania IS NULL THEN
-	EXIT PROGRAM
-END IF
-
-IF rm_r00.r00_anopro IS NULL THEN 
-	LET vm_anio = YEAR(TODAY)
-	LET vm_mes  = MONTH(TODAY)
-ELSE
-	LET vm_anio = rm_r00.r00_anopro
-	LET vm_mes  = rm_r00.r00_mespro
-END IF
-
-CALL control_cerrar_mes()
-
-END FUNCTION
-
-
-
-FUNCTION validar_mes(anho, mes)
-
-DEFINE mes,anho		SMALLINT
-
-DEFINE dia, mes2, anho2	SMALLINT
 DEFINE fecha		DATE
 
-IF anho < YEAR(TODAY) THEN
-	RETURN 1
-ELSE
-	IF mes < MONTH(TODAY) THEN
-		RETURN 1
+LET fecha = MDY(9, 1, 2008)
+
+WHILE TRUE
+	LET vm_anio = YEAR(fecha)
+	LET vm_mes  = MONTH(fecha)
+
+
+	DISPLAY 'procesando: ', fecha USING 'yyyy-mm-dd'
+	CALL calcular_datos_estadisticos()
+
+	LET fecha = fecha + 1 UNITS MONTH
+	IF YEAR(fecha) = 2010 AND MONTH(fecha) = 2 THEN
+		EXIT WHILE
 	END IF
-END IF
-
-IF mes = 12 THEN
-	LET mes2  = 1
-	LET anho2 = anho + 1
-ELSE
-	LET mes2  = mes + 1
-	LET anho2 = anho
-END IF
-
-LET fecha = mdy(mes2, 1, anho2)
-LET fecha = fecha - 1
-
-IF TODAY < fecha THEN
-	RETURN 0
-END IF
-
-RETURN 1
+END WHILE
 
 END FUNCTION
 
-
-
-FUNCTION control_cerrar_mes()
-DEFINE expr_sql 	VARCHAR(500)
-
-BEGIN WORK
-
-INITIALIZE rm_r00.* TO NULL
-
-SET LOCK MODE TO WAIT 5
-WHENEVER ERROR CONTINUE
-DECLARE q_rept000 CURSOR FOR
-	SELECT * FROM rept000 WHERE r00_compania = vg_codcia
-	FOR UPDATE
-OPEN  q_rept000
-FETCH q_rept000 INTO rm_r00.*
-IF STATUS < 0 THEN
-	WHENEVER ERROR STOP
-	SET LOCK MODE TO NOT WAIT
-	ROLLBACK WORK
-	CALL fl_mensaje_bloqueo_otro_usuario()
-	RETURN
-END IF
-WHENEVER ERROR STOP
-SET LOCK MODE TO NOT WAIT
-
-DELETE FROM rept031 WHERE r31_compania = vg_codcia
-		      AND r31_ano      = vm_anio
-		      AND r31_mes      = vm_mes
-
-LET expr_sql = 'INSERT INTO rept031 ',
-		'SELECT r11_compania,', vm_anio, ',', vm_mes,
-		', r11_bodega, r11_item, r11_stock_act,',
-		'r10_costo_mb, r10_costo_ma, r10_precio_mb,',
-		'r10_precio_ma',
-		' FROM rept011, rept010 ',
-		'WHERE r11_compania  =',vg_codcia,
-		'  AND r11_stock_act > 0',
-		'  AND r10_compania  = r11_compania',
-		'  AND r10_codigo    = r11_item'
-
-PREPARE sentencia FROM expr_sql
-EXECUTE sentencia
-
-IF status < 0 THEN
-	ROLLBACK WORK
-	RETURN 0
-END IF
-
-LET expr_sql = 'UPDATE STATISTICS'
-PREPARE updstats FROM expr_sql
-EXECUTE updstats
-
-IF vm_mes = 12 THEN
-	LET vm_mes  = 1
-	LET vm_anio = vm_anio + 1
-ELSE
-	LET vm_mes  = vm_mes + 1
-END IF
-
-CALL calcular_datos_estadisticos()
-
-UPDATE rept000 SET r00_mespro = vm_mes, r00_anopro = vm_anio 
-	WHERE CURRENT OF q_rept000 
-
-COMMIT WORK
-RETURN 1
-
-END FUNCTION
 
 
 
@@ -393,4 +270,3 @@ DEFINE A, F, X, Y		DECIMAL(15,5)
 	DROP TABLE te_items
 	DROP TABLE items_a_procesar
 END FUNCTION
-
