@@ -990,7 +990,7 @@ DISPLAY "Movimientos de Items" 	TO c1300  ## Botón 13 repp421
 DISPLAY "Control Inv. Físico"  	TO c1400  ## Botón 14 repp425
 DISPLAY "Listado Detalle Vtas"	TO c1500  ## Botón 15 repp423
 DISPLAY "Transacciones" 	TO c1600  ## Botón 16 repp430
-DISPLAY "Nota de Pedido" 	TO c1700  ## Botón 17 repp426
+DISPLAY "Analisis re-orden"	TO c1700  ## Botón 17 repp424
 DISPLAY "Ubicación de Items" 	TO c1800  ## Botón 18 repp427
 
 LET h = fgl_getkey()
@@ -1045,7 +1045,7 @@ CASE h
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp430_', vg_codloc USING '&', ' ', vg_base, ' ', 'RE', vg_codcia, ' ', vg_codloc
 		RUN ejecuta
 	WHEN 17
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp426 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
+		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp424 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
 		RUN ejecuta
 	WHEN 18
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp427 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
