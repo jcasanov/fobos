@@ -347,7 +347,7 @@ VALUES (vg_codcia, vg_codloc, vm_cod_fact_ant, vm_num_fact_ant,
 CALL fl_lee_grupo_linea(vg_codcia, r_r23.r23_grupo_linea) RETURNING r_g20.*
 CALL imprime_comprobante(r_r23.*)
 
-{*
+{* XXX arreglar
  * Aplico la NC que se genero a la nueva factura
  *
  * Claro que para eso debo primero obtener la NC y eso esta dificil por
@@ -355,7 +355,6 @@ CALL imprime_comprobante(r_r23.*)
  * es sacar la última NC generada para este cliente en esta localidad,
  * de esta area de negocio, que sea de origen automatico y subtipo 1.
  * Ah, si... y que tenga saldo. 
- *}
 INITIALIZE r_z21.* TO NULL
 SQL 
 	SELECT FIRST 1 * INTO $r_z21.*
@@ -391,6 +390,7 @@ IF r_z21.z21_compania IS NOT NULL THEN
 	COMMIT WORK
 END IF
 CALL fl_genera_saldos_cliente(vg_codcia, vg_codloc, r_z21.z21_codcli)
+ *}
 
 CALL muestra_contadores()
 CALL fl_mensaje_registro_ingresado()
@@ -773,7 +773,6 @@ LET comando = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS',
 	vg_separador, 'fuentes', vg_separador, '; fglrun repp211 ', vg_base, 
 	' ', vg_codcia, ' ', vg_codloc, ' ', numprev, ' S' 
 	
-display comando
 RUN comando	
 
 END FUNCTION
