@@ -350,7 +350,7 @@ DEFINE A, F, X, Y		DECIMAL(15,5)
 			LET X = F * lead_time
 			LET Y = 360 / X
 }
-			LET r_r106.r106_pto_reorden = (360*360) / (num_items_anio*lead_time*lead_time) 
+			LET r_r106.r106_pto_reorden = (num_items_anio*lead_time) / 360 
 		END IF
 		
 		{*
