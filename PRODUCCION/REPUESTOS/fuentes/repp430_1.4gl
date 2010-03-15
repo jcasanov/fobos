@@ -165,9 +165,11 @@ WHILE TRUE
 		IF rm_rep.r19_cod_tran = 'CL' OR rm_rep.r19_cod_tran = 'DC'
 	    OR rm_rep.r19_cod_tran = 'IC' OR rm_rep.r19_cod_tran = 'IX'
 		THEN
+{
 			IF r_rep.r19_oc_interna IS NULL THEN
 				CONTINUE FOREACH
 			END IF
+}
 			LET flag = 'D'
 			OUTPUT TO REPORT rep_fact_dev(r_rep.*, valor_iva,
 					total_bru, total_des, total_iva,
