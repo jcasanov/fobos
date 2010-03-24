@@ -910,6 +910,7 @@ DISPLAY "Det. Transacciónes"    TO c1000  ## Botón 10 repp309
 DISPLAY "Stock sin Ventas"      TO c1100  ## Botón 11 repp311
 DISPLAY "Cons. Ventas Clientes" TO c1200  ## Botón 12 repp312
 DISPLAY "Items x Despachar"     TO c1300  ## Botón 13 repp313
+DISPLAY "Proformas x Facturar"  TO c1400  ## Botón 13 repp313
 
 LET g = fgl_getkey()
 CASE g
@@ -951,6 +952,9 @@ CASE g
 		RUN ejecuta
 	WHEN 13
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp313 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
+		RUN ejecuta
+	WHEN 14
+		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp314 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
 		RUN ejecuta
 	WHEN 0
 		CLOSE WINDOW w_menu_consultas
