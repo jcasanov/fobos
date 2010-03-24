@@ -1,0 +1,40 @@
+DATABASE formonly
+SCREEN
+{
+ [c010  |c012  |c011                           |c0|c013  |c014      ]
+[c021  |c023  |c022                           |c1|c024  |c025      ]
+[c021  |c023  |c022                           |c1|c024  |c025      ]
+[c021  |c023  |c022                           |c1|c024  |c025      ]
+[c021  |c023  |c022                           |c1|c024  |c025      ]
+[c021  |c023  |c022                           |c1|c024  |c025      ]
+[c021  |c023  |c022                           |c1|c024  |c025      ]
+[c021  |c023  |c022                           |c1|c024  |c025      ]
+[c021  |c023  |c022                           |c1|c024  |c025      ]
+[c021  |c023  |c022                           |c1|c024  |c025      ]
+[c021  |c023  |c022                           |c1|c024  |c025      ]
+[c021  |c023  |c022                           |c1|c024  |c025      ]
+[c021  |c023  |c022                           |c1|c024  |c025      ]
+[c021  |c023  |c022                           |c1|c024  |c025      ]
+[c021  |c023  |c022                           |c1|c024  |c025      ]
+[c021  |c023  |c022                           |c1|c024  |c025      ]
+[c021  |c023  |c022                           |c1|c024  |c025      ]
+[c021  |c023  |c022                           |c1|c024  |c025      ]
+}
+ATTRIBUTES
+c010 = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F17';
+c011 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F18';
+c0   = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F19';
+c013 = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F20';
+c014 = formonly.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F21';
+
+c021 = formonly.numprof,  REVERSE, NOENTRY, OPTIONS='-nolist';
+c023 = formonly.numprev,  REVERSE, NOENTRY, OPTIONS='-nolist';
+c022 = formonly.nomcli,   REVERSE, NOENTRY, OPTIONS='-nolist';
+c1   = formonly.cod_desp, REVERSE, NOENTRY, OPTIONS='-nolist';
+c024 = formonly.num_desp, REVERSE, NOENTRY, OPTIONS='-nolist';
+c025 = formonly.fecing,   REVERSE, NOENTRY, OPTIONS='-nolist', FORMAT='dd-mm-yyyy';
+
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_desp[17] (numprof, numprev, nomcli, cod_desp, num_desp, fecing) 
