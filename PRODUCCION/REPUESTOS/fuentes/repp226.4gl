@@ -269,9 +269,10 @@ IF rm_r16.r16_estado <> 'P' THEN
 		FOREACH q_r117_1 INTO r_r117.*
 			-- La cantidad solo se actualiza una vez
 			IF actualiza_cant = 1 THEN
+				-- cantrec tiene la cantidad facturada y cantped la cantidad recibida
 				UPDATE rept117 
 				   SET r117_fob       = r_detalle[i].r17_fob,
-					 r117_cantidad    = r117_cantidad + (r_detalle[i].r17_cantped - r_detalle[i].r17_cantrec)	
+					 r117_cantidad    = r117_cantidad + (r_detalle[i].r17_cantrec - r_detalle[i].r17_cantped)	
 				 WHERE r117_compania  = r_r117.r117_compania
 				   AND r117_localidad = r_r117.r117_localidad
 				   AND r117_cod_tran  = r_r117.r117_cod_tran
@@ -310,9 +311,10 @@ ELSE
 			LET actualiza_cant = 1
 			FOREACH q_r117_2 INTO r_r117.*
 				IF actualiza_cant = 1 THEN
+					-- cantrec tiene la cantidad facturada y cantped la cantidad recibida
 					UPDATE rept117 
 					   SET r117_fob       = r_detalle[i].r17_fob,
-						 r117_cantidad  = r117_cantidad + (r_detalle[i].r17_cantped - r_detalle[i].r17_cantrec)	
+						 r117_cantidad  = r117_cantidad + (r_detalle[i].r17_cantrec - r_detalle[i].r17_cantped)	
 					 WHERE r117_compania  = r_r117.r117_compania
 					   AND r117_localidad = r_r117.r117_localidad
 					   AND r117_cod_tran  = r_r117.r117_cod_tran
