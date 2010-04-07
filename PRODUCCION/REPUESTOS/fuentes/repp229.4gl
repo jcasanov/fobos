@@ -334,37 +334,25 @@ DEFINE A, F, X, Y		DECIMAL(15,5)
 		END IF
 		LET prom_costo_anio = (prom_costo_anio + costo) / 12
 
-		{*
-		 * Calculo del Punto de Reorden; si el lead time es igual a 0 no calcule nada
-		 *
-	     * A = 360 / lead time
-		 * F = num_items_anio / A  
-		 * X = F * lead time
-		 * Y = 360 / X
-		 * PR = num_items_anio / Y 
-		 *}
 		IF lead_time > 0 AND num_items_anio > 0 THEN
-{
-			LET A = 360 / lead_time
-			LET F = num_items_anio / A 
-			LET X = F * lead_time
-			LET Y = 360 / X
-}
+			{*
+			 * Calculo del Punto de Reorden; si el lead time es igual a 0 no calcule nada
+			 *
+			 * PR = (num_items_anio * Lead Time) / 360 
+			 *}
 			LET r_r106.r106_pto_reorden = (num_items_anio*lead_time) / 360 
-		END IF
 		
-		{*
-		 * Calculo del EOQ y stock minimo y de seguridad; si el lead time es igual a 0 no 
-		 * calcule nada
-		 *
-		 * EOQ = (num_items_anio * lead time) / 360
-		 * stock_seguridad = EOQ * 1.5 
-		 * stock_minimo    = EOQ + stock_seguridad 
-		 *}
-		IF lead_time > 0 AND num_items_anio > 0 THEN
+			{*
+			 * Calculo del EOQ y stock minimo y de seguridad; si el lead time es igual a 0 no 
+			 * calcule nada
+			 *
+			 * EOQ = (num_items_anio * lead time) / 360
+			 * stock_seguridad = EOQ * 1.5 
+			 * stock_minimo    = EOQ + stock_seguridad 
+			 *}
 			LET r_r106.r106_eoq = (num_items_anio * lead_time) / 360 
 			LET r_r106.r106_stock_seg   = r_r106.r106_eoq * 1.5
-			LET r_r106.r106_stock_min   = r_r106.r106_eoq + r_r106.r106_stock_seg
+			LET r_r106.r106_stock_min   = num_items_anio / 12 
 		END IF
 
 		{*
