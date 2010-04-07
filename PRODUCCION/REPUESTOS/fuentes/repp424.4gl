@@ -9,6 +9,7 @@ GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 DEFINE rm_cia		RECORD LIKE gent001.*
 DEFINE vm_fecha_ini	DATE
 DEFINE vm_fecha_fin	DATE
+DEFINE vm_consolidar CHAR(1)
 
 
 
@@ -74,6 +75,7 @@ DEFINE pto_reorden	LIKE rept106.r106_pto_reorden
 
 LET vm_fecha_ini = TODAY
 LET vm_fecha_fin = TODAY
+LET vm_consolidar = 'S'
 WHILE TRUE
 	CALL lee_parametros()
 	IF int_flag THEN
@@ -110,15 +112,19 @@ WHILE TRUE
         			    '   AND r105_fecha_fin IS NULL) as lead_time, ',
 					'   SUM(r20_cant_ven), 0, 0, 0',
 			'FROM rept020, rept010 ',
-			'WHERE r20_compania   = ', vg_codcia,
-			'  AND r20_localidad  = ', vg_codloc,
-			'  AND r20_cod_tran   = "FA" ',
-			'  AND DATE(r20_fecing) BETWEEN "', vm_fecha_ini, '" AND "',
-                                                vm_fecha_fin, '"',
-			'  AND r10_compania   = r20_compania ',
-			'  AND r10_codigo     = r20_item ',
-			' GROUP BY 1, 2, 3, 4 ',
-			' ORDER BY 1'
+			'WHERE r20_compania   = ', vg_codcia
+
+			IF vm_consolidar = 'N' THEN
+				LET query = query CLIPPED || '  AND r20_localidad  = ', vg_codloc
+			END IF
+
+			LET query = query CLIPPED || '  AND r20_cod_tran   = "FA" ',
+										 '  AND DATE(r20_fecing) BETWEEN "', vm_fecha_ini, '" AND "',
+                    	                						             vm_fecha_fin, '"',
+										 '  AND r10_compania   = r20_compania ',
+										 '  AND r10_codigo     = r20_item ',
+										 ' GROUP BY 1, 2, 3, 4 ',
+									 	 ' ORDER BY 1'
 
 	PREPARE deto FROM query
 	DECLARE q_deto CURSOR FOR deto
@@ -146,9 +152,10 @@ END FUNCTION
 FUNCTION lee_parametros()
 DEFINE fecha_ini	DATE
 DEFINE fecha_fin	DATE
+DEFINE consolidar	CHAR(1)
 
 LET int_flag = 0
-INPUT BY NAME vm_fecha_ini, vm_fecha_fin
+INPUT BY NAME vm_fecha_ini, vm_fecha_fin, vm_consolidar
 	WITHOUT DEFAULTS
 	ON KEY(INTERRUPT)
 		LET int_flag = 1
@@ -157,6 +164,8 @@ INPUT BY NAME vm_fecha_ini, vm_fecha_fin
 		LET fecha_ini = vm_fecha_ini
 	BEFORE FIELD vm_fecha_fin
 		LET fecha_fin = vm_fecha_fin
+	BEFORE FIELD vm_consolidar
+		LET consolidar = vm_consolidar
 	AFTER FIELD vm_fecha_ini 
 		IF vm_fecha_ini IS NOT NULL THEN
 			IF vm_fecha_ini > TODAY THEN
@@ -177,6 +186,15 @@ INPUT BY NAME vm_fecha_ini, vm_fecha_fin
 			LET vm_fecha_fin = fecha_fin
 			DISPLAY BY NAME vm_fecha_fin
 		END IF
+	AFTER FIELD vm_consolidar
+		IF vm_consolidar IS NULL THEN
+			LET vm_consolidar = 'N'
+		END IF
+		IF vm_consolidar <> 'S' AND vm_consolidar <> 'N' THEN
+				CALL fgl_winmessage(vg_producto,'valor fuera de rango para la opción: consolidar','exclamation')
+				NEXT FIELD vm_consolidar
+		END IF
+		DISPLAY BY NAME vm_consolidar
 	AFTER INPUT
 		IF vm_fecha_ini > vm_fecha_fin THEN
 			CALL fgl_winmessage(vg_producto,'Fecha inicial debe ser menor a fecha final.','exclamation')
@@ -199,6 +217,8 @@ DEFINE stock_disp	LIKE rept011.r11_stock_act
 DEFINE stock_min	LIKE rept106.r106_stock_min
 DEFINE pto_reorden	LIKE rept106.r106_pto_reorden
 
+DEFINE query		VARCHAR(500)
+DEFINE localidad	LIKE gent002.g02_localidad
 DEFINE r_r106		RECORD LIKE rept106.*
 
 DEFINE usuario		VARCHAR(19,15)
@@ -253,34 +273,45 @@ PAGE HEADER
 ON EVERY ROW
 	NEED 2 LINES
 
-	DECLARE q_r106 CURSOR FOR
-		SELECT * FROM rept106
-		 WHERE r106_compania  = vg_codcia
-		   AND r106_localidad = vg_codloc
-		   AND r106_item      = item
-		 ORDER BY r106_compania, r106_anio DESC, r106_mes DESC 
-
-	INITIALIZE r_r106.* TO NULL
-	OPEN  q_r106
-	FETCH q_r106 INTO r_r106.*
-	CLOSE q_r106
-	FREE  q_r106
-
-	IF r_r106.r106_compania IS NULL THEN
-		LET r_r106.r106_stock_min = 0
-		LET r_r106.r106_pto_reorden = 0
+	LET query = 'SELECT g02_localidad FROM gent002 ' ||
+				' WHERE g02_compania = ' || vg_codcia
+	IF vm_consolidar = 'N' THEN
+		LET query = query CLIPPED || ' AND g02_localidad = ' || vg_codloc
 	END IF
+
+	PREPARE stmt1 FROM query
+	DECLARE q_local CURSOR FOR stmt1
+
+	FOREACH q_local INTO localidad
+		DECLARE q_r106 CURSOR FOR
+			SELECT * FROM rept106
+			 WHERE r106_compania  = vg_codcia
+			   AND r106_localidad = localidad 
+			   AND r106_item      = item
+			 ORDER BY r106_compania, r106_anio DESC, r106_mes DESC 
+
+		INITIALIZE r_r106.* TO NULL
+		OPEN  q_r106
+		FETCH q_r106 INTO r_r106.*
+		CLOSE q_r106
+		FREE  q_r106
+	
+		IF r_r106.r106_compania IS NOT NULL THEN
+			LET stock_min = stock_min + r_r106.r106_stock_min
+			LET pto_reorden = pto_reorden + r_r106.r106_pto_reorden
+		END IF
+	    LET stock_disp = stock_disp + 
+						 fl_lee_stock_disponible_rep(vg_codcia, localidad, item, 'R')
+	END FOREACH
 
 	PRINT COLUMN 1,   item,
 	      COLUMN 18,  nomitem,
 	      COLUMN 58,  clasif CLIPPED,
-	      COLUMN 64,  lead_time,
+	      COLUMN 64,  lead_time USING '---',
 		  COLUMN 75,  unid_vend,
-	      COLUMN 85,  fl_lee_stock_disponible_rep(vg_codcia, vg_codloc,
-                                                  item, 'R')
-								USING "-,---,--&",
-	      COLUMN 98,  r_r106.r106_stock_min USING "-,---,--&",
-	      COLUMN 110, r_r106.r106_pto_reorden USING "-,---,--&"
+	      COLUMN 85,  stock_disp USING "-,---,--&",
+	      COLUMN 98,  stock_min USING "-,---,--&",
+	      COLUMN 110, pto_reorden USING "-,---,--&"
 	
 END REPORT
 

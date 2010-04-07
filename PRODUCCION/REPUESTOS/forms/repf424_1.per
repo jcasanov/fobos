@@ -4,6 +4,8 @@ SCREEN
 
     Fecha Inicial: [c001      ]         Fecha Final: [c002      ]
 
+    Consolidar sucursales [c]
+
 }
 ATTRIBUTES
 
@@ -11,4 +13,6 @@ c001 = FORMONLY.vm_fecha_ini TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
 	FORMAT = 'dd-mm-yyyy';
 c002 = FORMONLY.vm_fecha_fin TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
 	FORMAT = 'dd-mm-yyyy';
+c    = FORMONLY.vm_consolidar, AUTONEXT, UPSHIFT, DEFAULT = 'S',
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
 END
