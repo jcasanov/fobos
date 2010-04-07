@@ -60,12 +60,13 @@ END FUNCTION
 
 FUNCTION control_reporte()
 DEFINE i,col		SMALLINT
-DEFINE query		VARCHAR(1000)
+DEFINE query		VARCHAR(2000)
 DEFINE comando		VARCHAR(100)
 
 DEFINE item			LIKE rept010.r10_codigo
 DEFINE nomitem		LIKE rept010.r10_nombre
 DEFINE clasif		CHAR(1)
+DEFINE lead_time	LIKE rept104.r104_valor_default
 DEFINE unid_vend	LIKE rept020.r20_cant_ven
 DEFINE stock_disp	LIKE rept011.r11_stock_act
 DEFINE stock_min	LIKE rept106.r106_stock_min
@@ -85,15 +86,30 @@ WHILE TRUE
 	CALL fl_lee_compania(vg_codcia) RETURNING rm_cia.*
 
 	LET query = 'SELECT r20_item, r10_nombre, ',
-            	'       CASE NVL(r105_valor, r104_valor_default) ',
-                	'       WHEN 0 THEN "E" ',
-                	'       WHEN 1 THEN "A" ',
-                	'       WHEN 2 THEN "B" ',
-                	'       WHEN 3 THEN "C" ',
-                	'       ELSE NULL ',
-            	'       END as clasif, ',
+            	'       (SELECT CASE NVL(r105_valor, r104_valor_default) ',
+                		'        WHEN 0 THEN "E" ',
+                		'        WHEN 1 THEN "A" ',
+                		'        WHEN 2 THEN "B" ',
+                		'        WHEN 3 THEN "C" ',
+                		'        ELSE NULL ',
+            			'       END ',
+						'  FROM rept104, OUTER rept105 ',                          
+            			' WHERE r104_compania  = r20_compania ',
+			            '   AND r104_codigo    = "ABC" ',
+        			    '   AND r105_compania  = r104_compania ',
+        			    '   AND r105_parametro = r104_codigo ',
+        			    '   AND r105_item      = r20_item ',
+        			    '   AND r105_fecha_fin IS NULL) as clasif, ',
+            	'       (SELECT NVL(r105_valor, r104_valor_default) ',
+						'  FROM rept104, OUTER rept105 ',                          
+            			' WHERE r104_compania  = r20_compania ',
+			            '   AND r104_codigo    = "LT" ',
+        			    '   AND r105_compania  = r104_compania ',
+        			    '   AND r105_parametro = r104_codigo ',
+        			    '   AND r105_item      = r20_item ',
+        			    '   AND r105_fecha_fin IS NULL) as lead_time, ',
 					'   SUM(r20_cant_ven), 0, 0, 0',
-			'FROM rept020, rept010,  rept104, OUTER rept105 ',
+			'FROM rept020, rept010 ',
 			'WHERE r20_compania   = ', vg_codcia,
 			'  AND r20_localidad  = ', vg_codloc,
 			'  AND r20_cod_tran   = "FA" ',
@@ -101,13 +117,7 @@ WHILE TRUE
                                                 vm_fecha_fin, '"',
 			'  AND r10_compania   = r20_compania ',
 			'  AND r10_codigo     = r20_item ',
-            '  AND r104_compania  = r10_compania ',
-            '  AND r104_codigo    = "ABC" ',
-            '  AND r105_compania  = r104_compania ',
-            '  AND r105_parametro = r104_codigo ',
-            '  AND r105_item      = r20_item ',
-            '  AND r105_fecha_fin IS NULL ',
-			' GROUP BY 1, 2, 3 ',
+			' GROUP BY 1, 2, 3, 4 ',
 			' ORDER BY 1'
 
 	PREPARE deto FROM query
@@ -121,9 +131,9 @@ WHILE TRUE
 	END IF
 	CLOSE q_deto
 	START REPORT rep_reorden TO PIPE comando
-	FOREACH q_deto INTO item, nomitem, clasif, unid_vend, stock_disp, stock_min, 
+	FOREACH q_deto INTO item, nomitem, clasif, lead_time, unid_vend, stock_disp, stock_min, 
 						pto_reorden 
-		OUTPUT TO REPORT rep_reorden(item, nomitem, clasif, unid_vend, stock_disp, 
+		OUTPUT TO REPORT rep_reorden(item, nomitem, clasif, lead_time, unid_vend, stock_disp, 
 									 stock_min, pto_reorden)
 	END FOREACH
 	FINISH REPORT rep_reorden
@@ -178,11 +188,12 @@ END FUNCTION
 
 
 
-REPORT rep_reorden(item, nomitem, clasif, unid_vend, stock_disp, stock_min, pto_reorden)
+REPORT rep_reorden(item, nomitem, clasif, lead_time, unid_vend, stock_disp, stock_min, pto_reorden)
 
 DEFINE item			LIKE rept010.r10_codigo
 DEFINE nomitem		LIKE rept010.r10_nombre
 DEFINE clasif		CHAR(1)
+DEFINE lead_time	LIKE rept104.r104_valor_default
 DEFINE unid_vend	LIKE rept020.r20_cant_ven
 DEFINE stock_disp	LIKE rept011.r11_stock_act
 DEFINE stock_min	LIKE rept106.r106_stock_min
@@ -232,10 +243,11 @@ PAGE HEADER
 	PRINT COLUMN 1,   "Item",
 	      COLUMN 18,  "Descripción",
 		  COLUMN 55,  "Clasif.",
-	      COLUMN 64,  "Unidades",
-	      COLUMN 75,  "Stock Disp.",
-	      COLUMN 88,  "Stock Min.",
-	      COLUMN 100, "Pto. Reorden"
+		  COLUMN 64,  "Lead Time",
+	      COLUMN 75,  "Unidades",
+	      COLUMN 85,  "Stock Disp.",
+	      COLUMN 98,  "Stock Min.",
+	      COLUMN 110, "Pto. Reorden"
 	PRINT "----------------------------------------------------------------------------------------------------------------------------------"
 
 ON EVERY ROW
@@ -262,12 +274,13 @@ ON EVERY ROW
 	PRINT COLUMN 1,   item,
 	      COLUMN 18,  nomitem,
 	      COLUMN 58,  clasif CLIPPED,
-		  COLUMN 64,  unid_vend,
-	      COLUMN 75,  fl_lee_stock_disponible_rep(vg_codcia, vg_codloc,
+	      COLUMN 64,  lead_time,
+		  COLUMN 75,  unid_vend,
+	      COLUMN 85,  fl_lee_stock_disponible_rep(vg_codcia, vg_codloc,
                                                   item, 'R')
 								USING "-,---,--&",
-	      COLUMN 88,  r_r106.r106_stock_min USING "-,---,--&",
-	      COLUMN 100, r_r106.r106_pto_reorden USING "-,---,--&"
+	      COLUMN 98,  r_r106.r106_stock_min USING "-,---,--&",
+	      COLUMN 110, r_r106.r106_pto_reorden USING "-,---,--&"
 	
 END REPORT
 
