@@ -1,8 +1,8 @@
 {*
- * Titulo           : repp311.4gl - Consulta Items con Stock y sin Ventas
- * Elaboracion      : 14-ene-2008
+ * Titulo           : repp315.4gl - Consulta de rotación de items
+ * Elaboracion      : 08-abr-2010
  * Autor            : JCM
- * Formato Ejecucion: fglrun repp311 base módulo compañía localidad
+ * Formato Ejecucion: fglrun repp315 base módulo compañía localidad
  *}
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
@@ -12,14 +12,12 @@ DEFINE rm_r11		RECORD LIKE rept011.*
 DEFINE vm_bodega	LIKE rept011.r11_bodega
 DEFINE vm_fecha		DATE
 DEFINE vm_linea		LIKE rept010.r10_linea
-DEFINE vm_rotacion	LIKE rept010.r10_rotacion
 DEFINE vm_tipo		LIKE rept010.r10_tipo
-DEFINE sin_ventas	CHAR(1)
 
 DEFINE r_detalle	ARRAY[150000] OF RECORD
 	r10_codigo		LIKE rept010.r10_codigo,
 	r10_nombre		LIKE rept010.r10_nombre,
-	fec_ult_ing		DATE,
+	cant_ult_vta	LIKE rept011.r11_stock_act,
 	fec_ult_vta		DATE, 
 	r11_stock_act	LIKE rept011.r11_stock_act,
 	r10_costo_mb	LIKE rept010.r10_costo_mb
@@ -32,7 +30,7 @@ DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
 
-CALL startlog('../logs/repp311.error')
+CALL startlog('../logs/repp315.error')
 CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 
@@ -46,7 +44,7 @@ LET vg_base     = arg_val(1)
 LET vg_modulo   = arg_val(2)
 LET vg_codcia   = arg_val(3)
 LET vg_codloc   = arg_val(4)
-LET vg_proceso = 'repp311'
+LET vg_proceso = 'repp315'
 
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()
@@ -56,22 +54,21 @@ CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 
 
 CALL fl_nivel_isolation()
-OPEN WINDOW w_311 AT 3,2 WITH 22 ROWS, 80 COLUMNS
+OPEN WINDOW w_315 AT 3,2 WITH 22 ROWS, 80 COLUMNS
     ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE 0, BORDER,
               MESSAGE LINE LAST - 2)
 OPTIONS INPUT WRAP,
         ACCEPT KEY      F12
-OPEN FORM f_repf311 FROM "../forms/repf311_1"
-DISPLAY FORM f_repf311
+OPEN FORM f_repf315 FROM "../forms/repf315_1"
+DISPLAY FORM f_repf315
 
-INITIALIZE rm_r11.*, rm_r10.*, vm_fecha, vm_linea, vm_tipo, vm_rotacion,
-	   vm_bodega TO NULL
+INITIALIZE rm_r11.*, rm_r10.*, vm_fecha, vm_linea, vm_tipo, vm_bodega TO NULL
 
-LET vm_fecha = TODAY
+LET vm_fecha = TODAY - 12 UNITS MONTH
 
 DISPLAY 'Item'        TO tit_col1
-DISPLAY 'Descripci¢n' TO tit_col2
-DISPLAY 'Ult. Ing.'   TO tit_col3
+DISPLAY 'Descripción' TO tit_col2
+DISPLAY 'Cant.'       TO tit_col3
 DISPLAY 'Ult. Vta.'   TO tit_col4
 DISPLAY 'Stock'       TO tit_col5
 DISPLAY 'Costo'       TO tit_col6
@@ -89,20 +86,17 @@ FUNCTION funcion_master()
 
 DEFINE r_r02 		RECORD LIKE rept002.*		--BODEGAS
 DEFINE r_r03 		RECORD LIKE rept003.*		--LINEAS
-DEFINE r_r04 		RECORD LIKE rept004.*		--ROTACION
 DEFINE r_r06 		RECORD LIKE rept006.*		--TIPO
 
-INITIALIZE r_r02.*, r_r03.*, r_r04.*, r_r06.* TO NULL
-LET sin_ventas = 'N'
+INITIALIZE r_r02.*, r_r03.*, r_r06.* TO NULL
 
 LET int_flag = 0
 
-INPUT BY NAME vm_bodega, vm_fecha, sin_ventas, vm_linea, vm_rotacion, vm_tipo
+INPUT BY NAME vm_bodega, vm_fecha, vm_linea, vm_tipo
 	      WITHOUT DEFAULTS
 
 	ON KEY(INTERRUPT)
-		IF NOT field_touched(vm_bodega, vm_fecha, 
-				     vm_linea, vm_rotacion, vm_tipo) THEN
+		IF NOT field_touched(vm_bodega, vm_fecha, vm_linea, vm_tipo) THEN
 			EXIT PROGRAM
 		ELSE
 			RETURN
@@ -130,16 +124,6 @@ INPUT BY NAME vm_bodega, vm_fecha, sin_ventas, vm_linea, vm_rotacion, vm_tipo
 			END IF
 		END IF
 
-		IF INFIELD(vm_rotacion) THEN
-			CALL fl_ayuda_clases(vg_codcia)
-				RETURNING r_r04.r04_rotacion, r_r04.r04_nombre
-			IF r_r04.r04_rotacion IS NOT NULL THEN
-				LET vm_rotacion = r_r04.r04_rotacion
-				DISPLAY BY NAME vm_rotacion
-				DISPLAY r_r04.r04_nombre TO nom_rotacion
-			END IF
-		END IF
-
 		IF INFIELD(vm_tipo) THEN
 			CALL fl_ayuda_tipo_item()
 				RETURNING r_r06.r06_codigo, r_r06.r06_nombre
@@ -158,7 +142,7 @@ INPUT BY NAME vm_bodega, vm_fecha, sin_ventas, vm_linea, vm_rotacion, vm_tipo
 				RETURNING r_r02.*
 			IF r_r02.r02_codigo IS NULL THEN
 				CLEAR nom_bodega
-				CALL fgl_winmessage(vg_producto, 'No existe la Bodega en la Compa¤¡a.', 'exclamation')
+				CALL fgl_winmessage(vg_producto, 'No existe la Bodega en la Compañía.', 'exclamation')
 				NEXT FIELD vm_bodega
 			ELSE 
 				DISPLAY r_r02.r02_nombre TO nom_bodega
@@ -173,7 +157,7 @@ INPUT BY NAME vm_bodega, vm_fecha, sin_ventas, vm_linea, vm_rotacion, vm_tipo
 				RETURNING r_r03.*
 			IF r_r03.r03_codigo IS NULL THEN
 				CLEAR nom_linea 
-				CALL fgl_winmessage(vg_producto, 'No existe Linea de Venta en la Compa¤¡a.','exclamation')
+				CALL fgl_winmessage(vg_producto, 'No existe Linea de Venta en la Compañía.','exclamation')
 				NEXT FIELD vm_linea
 			ELSE
 				DISPLAY r_r03.r03_nombre TO nom_linea
@@ -182,28 +166,13 @@ INPUT BY NAME vm_bodega, vm_fecha, sin_ventas, vm_linea, vm_rotacion, vm_tipo
 			CLEAR nom_linea
 		END IF
 		
-	AFTER FIELD vm_rotacion
-		IF vm_rotacion IS NOT NULL THEN
-			CALL fl_lee_indice_rotacion(vg_codcia, vm_rotacion)
-				RETURNING r_r04.*
-			IF r_r04.r04_rotacion IS NULL THEN
-				CLEAR nom_rotacion
-				CALL fgl_winmessage(vg_producto,'No existe la Rotaci¢n en la Compa¤¡a.','exclamation')
-				NEXT FIELD vm_rotacion
-			ELSE
-				DISPLAY r_r04.r04_nombre TO nom_rotacion
-			END IF
-		ELSE
-			CLEAR nom_rotacion
-		END IF
-	
 	AFTER FIELD vm_tipo
 		IF vm_tipo IS NOT NULL THEN
 			CALL fl_lee_tipo_item(vm_tipo)
 				RETURNING r_r06.*
 			IF r_r06.r06_codigo IS NULL THEN
 				CLEAR nom_tipo
-				CALL fgl_winmessage(vg_producto,'No existe el tipo de item en la Compan¡a.','exclamation')
+				CALL fgl_winmessage(vg_producto,'No existe el tipo de item en la Compañía.','exclamation')
 				NEXT FIELD vm_tipo
 			ELSE
 				DISPLAY r_r06.r06_nombre TO nom_tipo
@@ -212,29 +181,11 @@ INPUT BY NAME vm_bodega, vm_fecha, sin_ventas, vm_linea, vm_rotacion, vm_tipo
 			CLEAR nom_tipo
 		END IF
 
-	AFTER FIELD vm_fecha
-		IF vm_fecha IS NOT NULL THEN
-			IF vm_fecha < '01-01-2000' THEN
-				CALL fgl_winmessage(vg_producto,'No puede ingresar una fecha menor a 01-01-2000.','exclamation')
-				NEXT FIELD vm_fecha
-			END IF
-			LET sin_ventas = 'N'
-			DISPLAY BY NAME sin_ventas 
-		END IF
-
-	AFTER FIELD sin_ventas
-		IF sin_ventas IS NOT NULL THEN
-			IF sin_ventas = 'S' THEN
-				INITIALIZE vm_fecha TO NULL
-				DISPLAY BY NAME vm_fecha
-			END IF
-		END IF
-
 	AFTER INPUT 
 		IF vm_bodega IS NULL THEN
 			NEXT FIELD vm_bodega
 		END IF
-		IF vm_fecha IS NULL AND sin_ventas ='N' THEN
+		IF vm_fecha IS NULL THEN
 			NEXT FIELD vm_fecha
 		END IF
 		CALL control_display_array()
@@ -248,11 +199,10 @@ END FUNCTION
 
 FUNCTION control_display_array()
 DEFINE expr_sql 	VARCHAR(1500)
-DEFINE sq_ulting 	VARCHAR(500)
 DEFINE sq_ultvta 	VARCHAR(500)
 
 DEFINE item		LIKE rept010.r10_codigo
-DEFINE fec_ulting	LIKE rept011.r11_fec_ulting
+DEFINE cant_ultvta	LIKE rept011.r11_stock_act
 DEFINE fec_ultvta	LIKE rept011.r11_fec_ultvta
 DEFINE stock		LIKE rept011.r11_stock_act
 
@@ -264,39 +214,39 @@ DEFINE r_orden		ARRAY[5] OF CHAR(4)
 DEFINE columna		SMALLINT
 
 CREATE TEMP TABLE tmp_items
-	(item		VARCHAR(15),
-	 nombre		VARCHAR(40),
-	 fec_ulting	DATE,
-	 fec_ultvta	DATE,
-	 stock		SMALLINT,
-	 costo		DECIMAL(11,2))
+	(item			VARCHAR(15),
+	 nombre			VARCHAR(40),
+	 cant_ultvta	SMALLINT,
+	 fec_ultvta		DATE,
+	 stock			SMALLINT,
+	 costo			DECIMAL(11,2))
 
-LET expr_sql = 'SELECT r11_item, r11_fec_ulting as ulting, r11_fec_ultvta, ',
+LET expr_sql = 'SELECT r11_item, r20_cant_ven, r11_fec_ultvta, ',
                      ' r11_stock_act ',
-		' FROM rept011 ',
-		'WHERE r11_compania   =',vg_codcia,
-		'  AND r11_bodega     ="',vm_bodega,'"',
-		'  AND r11_stock_act  > 0'
-IF sin_ventas = 'N' THEN
-	LET expr_sql = expr_sql CLIPPED, '  AND r11_fec_ultvta <= "',vm_fecha,'"'
-ELSE
-	LET expr_sql = expr_sql CLIPPED, '  AND r11_fec_ultvta IS NULL '
-END IF
+		' FROM rept011, rept020 ',
+		'WHERE r11_compania   = ',vg_codcia,
+		'  AND r11_bodega     = "',vm_bodega,'"',
+	    '  AND r11_fec_ultvta >= "',vm_fecha,'"',
+		'  AND r20_compania   = r11_compania ',
+		'  AND r20_localidad  = (SELECT r02_localidad ',
+								'  FROM rept002 ',
+								' WHERE r02_compania = ', vg_codcia,
+								'   AND r02_codigo   = "', vm_bodega, '")',
+		'  AND r20_cod_tran   = r11_tip_ultvta ',
+		'  AND r20_num_tran   = r11_num_ultvta ',
+		'  AND r20_item       = r11_item '
 
 PREPARE consulta FROM expr_sql
 DECLARE q_consulta CURSOR FOR consulta
 		
 LET i = 1
-FOREACH q_consulta INTO item, fec_ulting, fec_ultvta, stock
-	IF fec_ultvta > vm_fecha THEN
+FOREACH q_consulta INTO item, cant_ultvta, fec_ultvta, stock
+	IF fec_ultvta < vm_fecha THEN
 		CONTINUE FOREACH
 	END IF
 	CALL fl_lee_item(vg_codcia, item) RETURNING r_r10.*
 
 	IF vm_linea IS NOT NULL AND vm_linea <> r_r10.r10_linea THEN
-		CONTINUE FOREACH
-	END IF
-	IF vm_rotacion IS NOT NULL AND vm_rotacion <> r_r10.r10_rotacion THEN
 		CONTINUE FOREACH
 	END IF
 	IF vm_tipo IS NOT NULL AND vm_tipo <> r_r10.r10_tipo THEN
@@ -305,7 +255,7 @@ FOREACH q_consulta INTO item, fec_ulting, fec_ultvta, stock
 
 	LET r_detalle[i].r10_codigo    = item
 	LET r_detalle[i].r10_nombre    = r_r10.r10_nombre
-	LET r_detalle[i].fec_ult_ing   = fec_ulting
+	LET r_detalle[i].cant_ult_vta  = cant_ultvta
 	LET r_detalle[i].fec_ult_vta   = fec_ultvta
 	LET r_detalle[i].r11_stock_act = stock			
 	LET r_detalle[i].r10_costo_mb  = r_r10.r10_costo_mb			
@@ -409,11 +359,7 @@ DEFINE item		LIKE rept010.r10_codigo
 DEFINE fecha	DATE
 DEFINE command_run 	VARCHAR(200)
 
-IF sin_ventas THEN
-	LET fecha = TODAY
-ELSE
-	LET fecha = vm_fecha
-END IF
+LET fecha = TODAY
 
 LET command_run = 'fglrun repp307 ',vg_base, ' ',vg_modulo, ' ',
 		  vg_codcia, ' ', vg_codloc, ' ',vm_bodega, ' ',item, ' ',
@@ -434,17 +380,17 @@ IF int_flag THEN
 	RETURN          
 END IF
 
-START REPORT rep_stock_sv TO PIPE comando 
+START REPORT rep_rotacion TO PIPE comando 
 	FOR i = 1 TO (maxelm)
-		OUTPUT TO REPORT rep_stock_sv(i)
+		OUTPUT TO REPORT rep_rotacion(i)
 	END FOR
-FINISH REPORT rep_stock_sv
+FINISH REPORT rep_rotacion
 
 END FUNCTION
 
 
 
-REPORT rep_stock_sv(numelm)
+REPORT rep_rotacion(numelm)
 DEFINE numelm		SMALLINT
 DEFINE usuario		VARCHAR(19,15)
 DEFINE titulo		VARCHAR(80)
@@ -454,7 +400,6 @@ DEFINE fecha		DATE
 
 DEFINE r_r02		RECORD LIKE rept002.*
 DEFINE r_r03		RECORD LIKE rept003.*
-DEFINE r_r04		RECORD LIKE rept004.*
 DEFINE r_r06		RECORD LIKE rept006.*
 
 OUTPUT
@@ -471,25 +416,23 @@ PAGE HEADER
 	LET long    = LENGTH(modulo)
 	LET usuario = 'Usuario: ', vg_usuario
 	CALL fl_justifica_titulo('D', usuario, 19) RETURNING usuario
-	CALL fl_justifica_titulo('I', 'LISTADO STOCK SIN VENTAS', 80)
+	CALL fl_justifica_titulo('I', 'LISTADO DE ROTACION DE ITEMS', 80)
 		RETURNING titulo
 
 	CALL fl_lee_bodega_rep(vg_codcia, vm_bodega) RETURNING r_r02.*
 	CALL fl_lee_linea_rep(vg_codcia, vm_linea) RETURNING r_r03.*
-	CALL fl_lee_indice_rotacion(vg_codcia, vm_rotacion) RETURNING r_r04.*
 	CALL fl_lee_tipo_item(vm_tipo) RETURNING r_r06.*
 
 	PRINT COLUMN 1, rg_cia.g01_razonsocial,
   	      COLUMN 82, "Página: ", PAGENO USING "&&&"
 	PRINT COLUMN 1, modulo CLIPPED,
-	      COLUMN 86, "REPP311" 
+	      COLUMN 86, "REPP315" 
 	PRINT COLUMN 30, titulo CLIPPED
 	SKIP 1 LINES
 	PRINT COLUMN 30, "** Bodega        : ", vm_bodega, " ", r_r02.r02_nombre
-	PRINT COLUMN 30, "** Ult. Vta. <= a: ", vm_fecha USING 'dd-mm-yyyy'
+	PRINT COLUMN 30, "** Ult. Vta. >= a: ", vm_fecha USING 'dd-mm-yyyy'
 
 	PRINT COLUMN 30, "** Linea Venta   : ", vm_linea, " ", r_r03.r03_nombre 
-	PRINT COLUMN 30, "** Ind. Rotacion : ", vm_rotacion, " ", r_r04.r04_nombre 
 	PRINT COLUMN 30, "** Tipo Articulo : ", vm_tipo, " ", r_r06.r06_nombre 
 
 	PRINT COLUMN 01, "Fecha  : ", TODAY USING "dd-mm-yyyy", 1 SPACES, TIME,
@@ -498,7 +441,7 @@ PAGE HEADER
 --	print '&k2S'	                -- Letra condensada (16 cpi)
 	PRINT COLUMN 1,   "Item",
 	      COLUMN 18,  "Descripcion",
-	      COLUMN 55,  "Ult. Ingreso",
+	      COLUMN 55,  "Cant Ult Vta",
 	      COLUMN 73,  "Ult. Venta",
 	      COLUMN 86,  "Stock",
 	      COLUMN 93,  "Costo"
@@ -507,7 +450,7 @@ ON EVERY ROW
 	NEED 2 LINES
 	PRINT COLUMN 1,   r_detalle[numelm].r10_codigo,
 	      COLUMN 18,  r_detalle[numelm].r10_nombre,
-	      COLUMN 55,  r_detalle[numelm].fec_ult_ing USING "dd-mm-yyyy",
+	      COLUMN 55,  r_detalle[numelm].cant_ult_vta USING "####&",
 	      COLUMN 73,  r_detalle[numelm].fec_ult_vta USING "dd-mm-yyyy",
 	      COLUMN 86,  r_detalle[numelm].r11_stock_act USING "####&", 
 	      COLUMN 93,  r_detalle[numelm].r10_costo_mb USING "###,##&.&&" 
