@@ -908,9 +908,10 @@ DISPLAY "Estadística Bodega"  	TO c800   ## Botón 8 repp305
 DISPLAY "Análisis Ventas Item"  TO c900   ## Botón 9 repp310
 DISPLAY "Det. Transacciónes"    TO c1000  ## Botón 10 repp309
 DISPLAY "Stock sin Ventas"      TO c1100  ## Botón 11 repp311
-DISPLAY "Cons. Ventas Clientes" TO c1200  ## Botón 12 repp312
+DISPLAY "Rotación items"		TO c1200  ## Botón 12 repp315
 DISPLAY "Items x Despachar"     TO c1300  ## Botón 13 repp313
-DISPLAY "Proformas x Facturar"  TO c1400  ## Botón 13 repp313
+DISPLAY "Proformas x Facturar"  TO c1400  ## Botón 14 repp314
+DISPLAY "Cons. Ventas Clientes" TO c1500  ## Botón 15 repp312
 
 LET g = fgl_getkey()
 CASE g
@@ -948,13 +949,16 @@ CASE g
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp311 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
 		RUN ejecuta
 	WHEN 12
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp312 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
+		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp315 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
 		RUN ejecuta
 	WHEN 13
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp313 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
 		RUN ejecuta
 	WHEN 14
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp314 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
+		RUN ejecuta
+	WHEN 15
+		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp312 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
 		RUN ejecuta
 	WHEN 0
 		CLOSE WINDOW w_menu_consultas
