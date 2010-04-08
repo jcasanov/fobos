@@ -219,13 +219,13 @@ DEFINE pto_reorden	LIKE rept106.r106_pto_reorden
 
 DEFINE query		VARCHAR(500)
 DEFINE localidad	LIKE gent002.g02_localidad
+DEFINE fecha		DATE
 DEFINE r_r106		RECORD LIKE rept106.*
 
 DEFINE usuario		VARCHAR(19,15)
 DEFINE titulo		VARCHAR(80)
 DEFINE modulo		VARCHAR(40)
 DEFINE i,long		SMALLINT
-DEFINE fecha		DATE
 DEFINE factura		VARCHAR(15)
 DEFINE tipo		CHAR(1)
 
@@ -266,9 +266,13 @@ PAGE HEADER
 		  COLUMN 64,  "Lead Time",
 	      COLUMN 75,  "Unidades",
 	      COLUMN 85,  "Stock Disp.",
-	      COLUMN 98,  "Stock Min.",
-	      COLUMN 110, "Pto. Reorden"
+		  COLUMN 98,  "Vtas Anuales",
+	      COLUMN 112, "Stock Min.",
+	      COLUMN 124, "Pto. Reorden"
 	PRINT "----------------------------------------------------------------------------------------------------------------------------------"
+
+	-- Esta variable se usa para determinar el rango de meses en los que buscara
+	LET fecha = MDY(MONTH(TODAY), 1, YEAR(TODAY)) - 1 UNITS MONTH
 
 ON EVERY ROW
 	NEED 2 LINES
@@ -283,23 +287,19 @@ ON EVERY ROW
 	DECLARE q_local CURSOR FOR stmt1
 
 	FOREACH q_local INTO localidad
-		DECLARE q_r106 CURSOR FOR
-			SELECT * FROM rept106
-			 WHERE r106_compania  = vg_codcia
-			   AND r106_localidad = localidad 
-			   AND r106_item      = item
-			 ORDER BY r106_compania, r106_anio DESC, r106_mes DESC 
-
 		INITIALIZE r_r106.* TO NULL
-		OPEN  q_r106
-		FETCH q_r106 INTO r_r106.*
-		CLOSE q_r106
-		FREE  q_r106
-	
-		IF r_r106.r106_compania IS NOT NULL THEN
-			LET stock_min = stock_min + r_r106.r106_stock_min
-			LET pto_reorden = pto_reorden + r_r106.r106_pto_reorden
-		END IF
+		SELECT NVL(SUM(r106_unid_vtas), 0) INTO r_r106.r106_unid_vtas 
+		  FROM rept106
+		 WHERE r106_compania  = vg_codcia
+		   AND r106_localidad = localidad 
+		   AND r106_item      = item
+		   AND MDY(r106_mes, 1, r106_anio) BETWEEN fecha - 12 UNITS MONTH
+											   AND fecha
+
+		-- Referencia: repp229.4gl
+		LET pto_reorden = pto_reorden + (r_r106.r106_unid_vtas * lead_time / 360)
+		LET stock_min = stock_min + (r_r106.r106_unid_vtas / 12)
+
 	    LET stock_disp = stock_disp + 
 						 fl_lee_stock_disponible_rep(vg_codcia, localidad, item, 'R')
 	END FOREACH
@@ -308,10 +308,11 @@ ON EVERY ROW
 	      COLUMN 18,  nomitem,
 	      COLUMN 58,  clasif CLIPPED,
 	      COLUMN 64,  lead_time USING '---',
-		  COLUMN 75,  unid_vend,
+		  COLUMN 75,  unid_vend USING "##,##&",
 	      COLUMN 85,  stock_disp USING "-,---,--&",
-	      COLUMN 98,  stock_min USING "-,---,--&",
-	      COLUMN 110, pto_reorden USING "-,---,--&"
+		  COLUMN 98,  r_r106.r106_unid_vtas USING "#,###,##&",
+	      COLUMN 112, stock_min USING "-,---,--&",
+	      COLUMN 124, pto_reorden USING "-,---,--&"
 	
 END REPORT
 
