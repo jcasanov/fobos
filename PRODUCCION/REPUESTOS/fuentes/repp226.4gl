@@ -250,6 +250,7 @@ DEFINE i,cantrec	SMALLINT
 DEFINE r_r11		RECORD LIKE rept011.*
 DEFINE r_r117		RECORD LIKE rept117.*
 
+DEFINE cantfact			SMALLINT
 DEFINE actualiza_cant		INTEGER
 
 IF rm_r16.r16_estado <> 'P' THEN
@@ -270,9 +271,14 @@ IF rm_r16.r16_estado <> 'P' THEN
 			-- La cantidad solo se actualiza una vez
 			IF actualiza_cant = 1 THEN
 				-- cantrec tiene la cantidad facturada y cantped la cantidad recibida
+				LET cantfact = r_detalle[i].r17_cantrec - r_detalle[i].r17_cantped	
+				IF cantfact < 0 THEN
+					LET cantfact = 0
+				END IF
+
 				UPDATE rept117 
 				   SET r117_fob       = r_detalle[i].r17_fob,
-					 r117_cantidad    = r117_cantidad + (r_detalle[i].r17_cantrec - r_detalle[i].r17_cantped)	
+					 r117_cantidad    =  r_detalle[i].r17_cantrec 
 				 WHERE r117_compania  = r_r117.r117_compania
 				   AND r117_localidad = r_r117.r117_localidad
 				   AND r117_cod_tran  = r_r117.r117_cod_tran
@@ -312,9 +318,14 @@ ELSE
 			FOREACH q_r117_2 INTO r_r117.*
 				IF actualiza_cant = 1 THEN
 					-- cantrec tiene la cantidad facturada y cantped la cantidad recibida
+					LET cantfact = r_detalle[i].r17_cantrec - r_detalle[i].r17_cantped	
+					IF cantfact < 0 THEN
+						LET cantfact = 0
+					END IF
+
 					UPDATE rept117 
 					   SET r117_fob       = r_detalle[i].r17_fob,
-						 r117_cantidad  = r117_cantidad + (r_detalle[i].r17_cantrec - r_detalle[i].r17_cantped)	
+						 r117_cantidad  = r_detalle[i].r17_cantrec 
 					 WHERE r117_compania  = r_r117.r117_compania
 					   AND r117_localidad = r_r117.r117_localidad
 					   AND r117_cod_tran  = r_r117.r117_cod_tran
