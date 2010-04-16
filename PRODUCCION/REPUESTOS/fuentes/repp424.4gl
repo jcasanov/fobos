@@ -214,6 +214,7 @@ DEFINE clasif		CHAR(1)
 DEFINE lead_time	LIKE rept104.r104_valor_default
 DEFINE unid_vend	LIKE rept020.r20_cant_ven
 DEFINE stock_disp	LIKE rept011.r11_stock_act
+DEFINE vta_anual	LIKE rept106.r106_unid_vtas
 DEFINE stock_min	LIKE rept106.r106_stock_min
 DEFINE pto_reorden	LIKE rept106.r106_pto_reorden
 
@@ -286,6 +287,7 @@ ON EVERY ROW
 	PREPARE stmt1 FROM query
 	DECLARE q_local CURSOR FOR stmt1
 
+	LET vta_anual = 0
 	FOREACH q_local INTO localidad
 		INITIALIZE r_r106.* TO NULL
 		SELECT NVL(SUM(r106_unid_vtas), 0) INTO r_r106.r106_unid_vtas 
@@ -297,8 +299,9 @@ ON EVERY ROW
 											   AND fecha
 
 		-- Referencia: repp229.4gl
+		LET vta_anual   = vta_anual   + r_r106.r106_unid_vtas
 		LET pto_reorden = pto_reorden + (r_r106.r106_unid_vtas * lead_time / 360)
-		LET stock_min = stock_min + (r_r106.r106_unid_vtas / 12)
+		LET stock_min   = stock_min   + (r_r106.r106_unid_vtas / 12)
 
 	    LET stock_disp = stock_disp + 
 						 fl_lee_stock_disponible_rep(vg_codcia, localidad, item, 'R')
