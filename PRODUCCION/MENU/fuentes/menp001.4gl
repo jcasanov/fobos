@@ -995,7 +995,7 @@ DISPLAY "Comprob. Importación" 	TO c1000  ## Botón 10 repp409
 DISPLAY "Proformas" 	 	TO c1100  ## Botón 11 repp419
 DISPLAY "Márgenes de Utilidad" 	TO c1200  ## Botón 12 repp420
 DISPLAY "Movimientos de Items" 	TO c1300  ## Botón 13 repp421
-DISPLAY "Control Inv. Físico"  	TO c1400  ## Botón 14 repp425
+DISPLAY "Listado Detalle Trans"  	TO c1400  ## Botón 14 repp425
 DISPLAY "Listado Detalle Vtas"	TO c1500  ## Botón 15 repp423
 DISPLAY "Transacciones" 	TO c1600  ## Botón 16 repp430
 DISPLAY "Analisis re-orden"	TO c1700  ## Botón 17 repp424
