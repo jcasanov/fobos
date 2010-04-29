@@ -250,7 +250,8 @@ DEFINE i,cantrec	SMALLINT
 DEFINE r_r11		RECORD LIKE rept011.*
 DEFINE r_r117		RECORD LIKE rept117.*
 
-DEFINE cantfact			SMALLINT
+DEFINE facturado_actual		LIKE rept117.r117_cantidad
+DEFINE difcant			SMALLINT
 DEFINE actualiza_cant		INTEGER
 
 IF rm_r16.r16_estado <> 'P' THEN
@@ -266,19 +267,26 @@ IF rm_r16.r16_estado <> 'P' THEN
 			   AND r117_numliq    IS NULL  
 			 ORDER BY r117_compania, r117_localidad, r117_cod_tran, r117_num_tran DESC
 		
-		LET actualiza_cant = 1
+		LET actualiza_cant = 1 
 		FOREACH q_r117_1 INTO r_r117.*
-			-- La cantidad solo se actualiza una vez
 			IF actualiza_cant = 1 THEN
+
+				SELECT SUM(r117_cantidad)
+				  INTO facturado_actual
+				  FROM rept117
+				 WHERE r117_compania  = vg_codcia
+				   AND r117_localidad = vg_codloc
+				   AND r117_cod_tran  = 'IX'
+				   AND r117_pedido    = rm_r16.r16_pedido
+				   AND r117_item      = r_r117.r117_item
+				   AND r117_numliq    IS NULL
+
 				-- cantrec tiene la cantidad facturada y cantped la cantidad recibida
-				LET cantfact = r_detalle[i].r17_cantrec - r_detalle[i].r17_cantped	
-				IF cantfact < 0 THEN
-					LET cantfact = 0
-				END IF
+				LET difcant = r_detalle[i].r17_cantrec - facturado_actual 
 
 				UPDATE rept117 
 				   SET r117_fob       = r_detalle[i].r17_fob,
-					 r117_cantidad    =  r_detalle[i].r17_cantrec 
+				       r117_cantidad  = r117_cantidad + difcant
 				 WHERE r117_compania  = r_r117.r117_compania
 				   AND r117_localidad = r_r117.r117_localidad
 				   AND r117_cod_tran  = r_r117.r117_cod_tran
@@ -286,7 +294,7 @@ IF rm_r16.r16_estado <> 'P' THEN
 				   AND r117_pedido    = r_r117.r117_pedido
 				   AND r117_item      = r_r117.r117_item 
 				   AND r117_numliq IS NULL  
-				LET actualiza_cant = 0
+				LET actualiza_cant = 0 
 			ELSE
 				UPDATE rept117 
 				   SET r117_fob       = r_detalle[i].r17_fob
@@ -317,15 +325,22 @@ ELSE
 			LET actualiza_cant = 1
 			FOREACH q_r117_2 INTO r_r117.*
 				IF actualiza_cant = 1 THEN
+					SELECT SUM(r117_cantidad)
+					  INTO facturado_actual
+					  FROM rept117
+					 WHERE r117_compania  = vg_codcia
+					   AND r117_localidad = vg_codloc
+					   AND r117_cod_tran  = 'IX'
+					   AND r117_pedido    = rm_r16.r16_pedido
+					   AND r117_item      = r_r117.r117_item
+					   AND r117_numliq    IS NULL
+
 					-- cantrec tiene la cantidad facturada y cantped la cantidad recibida
-					LET cantfact = r_detalle[i].r17_cantrec - r_detalle[i].r17_cantped	
-					IF cantfact < 0 THEN
-						LET cantfact = 0
-					END IF
+					LET difcant = r_detalle[i].r17_cantrec - facturado_actual 
 
 					UPDATE rept117 
 					   SET r117_fob       = r_detalle[i].r17_fob,
-						 r117_cantidad  = r_detalle[i].r17_cantrec 
+						 r117_cantidad  = r117_cantidad + difcant 
 					 WHERE r117_compania  = r_r117.r117_compania
 					   AND r117_localidad = r_r117.r117_localidad
 					   AND r117_cod_tran  = r_r117.r117_cod_tran
