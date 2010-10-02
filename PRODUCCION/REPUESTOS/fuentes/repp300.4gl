@@ -555,7 +555,7 @@ DECLARE q_pedido CURSOR FOR
 		FROM rept016, rept017
 		WHERE r17_compania  = vg_codcia
 	          AND r17_item      = item
-		  AND r17_estado    NOT IN ('A', 'P')
+		  AND r17_estado    IN ('A', 'C')
 		  AND r16_compania  = r17_compania
                   AND r16_localidad = r17_localidad
                   AND r16_pedido    = r17_pedido
