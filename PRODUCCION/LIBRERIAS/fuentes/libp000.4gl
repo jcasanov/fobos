@@ -5264,7 +5264,7 @@ INPUT BY NAME tit_impresion, r_gen.g07_impresora
 END INPUT
 IF NOT int_flag THEN
 	IF tit_impresion = 'I' THEN
-		LET comando = 'lpr -P ', r_gen.g07_impresora
+		LET comando = 'lpr -o raw -P ', r_gen.g07_impresora
 	END IF
 	IF tit_impresion = 'P' THEN
 		LET comando = 'fglpager'
