@@ -3508,7 +3508,7 @@ IF r_cia.b00_compania IS NULL THEN
 	RETURN 0
 END IF
 IF ano < r_cia.b00_anopro THEN 
-	CALL fgl_winmessage(vg_producto, 'El ano ya está cerrado', 'exclamation')
+	CALL fgl_winmessage(vg_producto, 'El año ya está cerrado', 'exclamation')
 	RETURN 0
 END IF
 IF mes < 1 OR mes > 12 THEN 
