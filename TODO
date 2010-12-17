@@ -1,0 +1,4 @@
+libp000.4gl:fl_mayorizacion_mes()
+FIXME:
+- En algun lugar se esta incluyendo la cuenta 62010102, en el caso de equirent esa cuenta no existe y estaba dando un error al remayorizar.
+  Se solucionó creando la cuenta en la ctbt010, pero aun queda la duda de porque procesa una cuenta no existente.
