@@ -3424,7 +3424,7 @@ FOREACH q_tmay INTO cuenta, debito, credito
 			IF status < 0 THEN
 				--DROP TABLE temp_may
 				ROLLBACK WORK
-				CALL fgl_winmessage(vg_producto, 'Error al crear registro de saldos', 'exclamation')
+				CALL fgl_winmessage(vg_producto, 'Error al crear registro de saldos para la cuenta: ' || cuenta, 'exclamation')
 				RETURN
 			END IF
 		ELSE
@@ -3613,7 +3613,7 @@ FOREACH q_tmm INTO cuenta, debito, credito
 			IF status < 0 THEN
 				ROLLBACK WORK
 				WHENEVER ERROR STOP
-				CALL fgl_winmessage(vg_producto, 'Error al crear registro de saldos', 'exclamation')
+				CALL fgl_winmessage(vg_producto, 'Error al crear registro de saldos para la cuenta: ' || cuenta, 'exclamation')
 				RETURN 0
 			END IF
 		ELSE
