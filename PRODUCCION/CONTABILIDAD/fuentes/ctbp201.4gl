@@ -188,7 +188,10 @@ MENU 'OPCIONES'
 	COMMAND KEY('I') 'Ingresar' 		'Ingresar nuevos registros.'
 		CALL control_ingreso()
 		IF vm_num_rows = 1 THEN
+		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
+		   END IF
+			
 			SHOW OPTION 'Reversar'
 		END IF
 		IF vm_row_current > 1 THEN
@@ -198,7 +201,10 @@ MENU 'OPCIONES'
 			HIDE OPTION 'Avanzar'
 		END IF
 		IF vm_num_rows > 0 THEN
-			SHOW OPTION 'Imprimir'
+		   IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+		   END IF
+			
 		ELSE
 			HIDE OPTION 'Imprimir'
 		END IF
@@ -214,7 +220,10 @@ MENU 'OPCIONES'
 		HIDE OPTION 'Detalle'
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
+		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
+		   END IF
+			
 			SHOW OPTION 'Reversar'
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
@@ -229,8 +238,10 @@ MENU 'OPCIONES'
 				HIDE OPTION 'Reversar'
 			END IF
 		ELSE
-			SHOW OPTION 'Avanzar'
+		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
+		   END IF
+			SHOW OPTION 'Avanzar'
 			SHOW OPTION 'Reversar'
 {
 			HIDE OPTION 'Cheque' 
@@ -244,7 +255,10 @@ MENU 'OPCIONES'
 		END IF
 		IF vm_num_rows > 0 THEN
 			SHOW OPTION 'Origen'
-			SHOW OPTION 'Imprimir'
+		   IF fl_control_permiso_opcion('Imprimir') THEN
+		        SHOW OPTION 'Imprimir'
+		   END IF
+			
 {
 			HIDE OPTION 'Cheque' 
 			IF comprobante_admite_cheque() THEN

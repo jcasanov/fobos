@@ -147,7 +147,10 @@ MENU 'OPCIONES'
 			HIDE OPTION 'Avanzar'
 		END IF
 		IF vm_num_rows > 0 THEN
-			SHOW OPTION 'Imprimir'
+		   IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+		   END IF
+		
 		ELSE
 			HIDE OPTION 'Imprimir'
 		END IF
@@ -165,8 +168,14 @@ MENU 'OPCIONES'
 		HIDE OPTION 'Detalle'
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
+		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
+		   END IF 
+
+		   IF fl_control_permiso_opcion('Eliminar') THEN
 			SHOW OPTION 'Eliminar'
+		   END IF
+			
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -174,15 +183,25 @@ MENU 'OPCIONES'
 				HIDE OPTION 'Eliminar'
 			END IF
 		ELSE
-			SHOW OPTION 'Avanzar'
+		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
+		   END IF 
+
+		   IF fl_control_permiso_opcion('Eliminar') THEN
 			SHOW OPTION 'Eliminar'
+		   END IF
+			SHOW OPTION 'Avanzar'
+		
 		END IF
 		IF vm_row_current <= 1 THEN
                         HIDE OPTION 'Retroceder'
                 END IF
 		IF vm_num_rows > 0 THEN
-			SHOW OPTION 'Imprimir'
+
+		   IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+		   END IF
+			
 		ELSE
 			HIDE OPTION 'Imprimir'
 		END IF

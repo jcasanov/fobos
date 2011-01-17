@@ -128,8 +128,15 @@ MENU 'OPCIONES'
 	COMMAND KEY('I') 'Ingresar' 'Ingresar nuevos registros. '
                 CALL control_ingreso()
                 IF vm_num_rows >= 1 THEN
-                        SHOW OPTION 'Modificar'
+
+		   IF fl_control_permiso_opcion('Modificar') THEN			
+			SHOW OPTION 'Modificar'
+		   END IF 
+
+		   IF fl_control_permiso_opcion('Eliminar') THEN			
 			SHOW OPTION 'Eliminar'
+		   END IF                     
+		
                 END IF
                 IF vm_row_current > 1 THEN
                         SHOW OPTION 'Retroceder'
@@ -140,15 +147,22 @@ MENU 'OPCIONES'
 	COMMAND KEY('M') 'Modificar' 'Modificar registro corriente. '
                 CALL control_modificacion()
 		IF vm_num_repd > vm_scr_lin THEN
-                        SHOW OPTION 'Detalle'
+		   
+			SHOW OPTION 'Detalle'		   
+                    
                 ELSE
                         HIDE OPTION 'Detalle'
                 END IF
 	COMMAND KEY('C') 'Consultar' 'Consultar un registro. '
                 CALL control_consulta()
                 IF vm_num_rows <= 1 THEN
-                        SHOW OPTION 'Modificar'
+		   IF fl_control_permiso_opcion('Modificar') THEN			
+			SHOW OPTION 'Modificar'
+		   END IF
+		   IF fl_control_permiso_opcion('Imprimir') THEN			
 			SHOW OPTION 'Imprimir'
+		   END IF
+                       
 			SHOW OPTION 'Exportar Archivo'
                         HIDE OPTION 'Avanzar'
                         HIDE OPTION 'Retroceder'
@@ -159,20 +173,31 @@ MENU 'OPCIONES'
 				HIDE OPTION 'Eliminar'
                         END IF
                 ELSE
+		  IF fl_control_permiso_opcion('Modificar') THEN			
+			SHOW OPTION 'Modificar'
+		   END IF
+		   IF fl_control_permiso_opcion('Imprimir') THEN			
 			SHOW OPTION 'Imprimir'
+		   END IF
+		
 			SHOW OPTION 'Exportar Archivo'
                         SHOW OPTION 'Avanzar'
-                        SHOW OPTION 'Modificar'
+
                 END IF
                 IF vm_num_rows >= 1 THEN
+		   IF fl_control_permiso_opcion('Eliminar') THEN			
 			SHOW OPTION 'Eliminar'
+		   END IF
+			
 		END IF
                 IF vm_row_current <= 1 THEN
                         HIDE OPTION 'Retroceder'
                 END IF
 		IF vm_num_repd > vm_scr_lin THEN
-                        SHOW OPTION 'Detalle'
-                ELSE
+		   
+			SHOW OPTION 'Detalle'		   
+                        
+                 ELSE
                         HIDE OPTION 'Detalle'
                 END IF
 	 COMMAND KEY('A') 'Avanzar' 'Ver siguiente registro. '
@@ -186,7 +211,9 @@ MENU 'OPCIONES'
                         SHOW OPTION 'Retroceder'
                 END IF
 		IF vm_num_repd > vm_scr_lin THEN
-                        SHOW OPTION 'Detalle'
+			
+				SHOW OPTION 'Detalle'			
+                        
                 ELSE
                         HIDE OPTION 'Detalle'
                 END IF
@@ -201,10 +228,12 @@ MENU 'OPCIONES'
                         SHOW OPTION 'Retroceder'
                 END IF
 		IF vm_num_repd > vm_scr_lin THEN
-                        SHOW OPTION 'Detalle'
+             
+		  	  SHOW OPTION 'Detalle'
+		     
                 ELSE
                         HIDE OPTION 'Detalle'
-                END IF
+        END IF
 	COMMAND KEY('D') 'Detalle' 'Muestra siguiente detalles del registro. '
                 CALL muestra_detalle_arr()
 	COMMAND KEY('P') 'Imprimir' 'Muestra el pedido para imprimir.'
@@ -242,7 +271,9 @@ MENU 'OPCIONES'
 			IF vm_flag_grabar = 0 THEN
 				HIDE OPTION 'Detalle'
 			ELSE
-				SHOW OPTION 'Detalle'
+				
+				   SHOW OPTION 'Detalle'
+				
 			END IF
 		END IF
 		IF vm_flag_mant = 'M' THEN

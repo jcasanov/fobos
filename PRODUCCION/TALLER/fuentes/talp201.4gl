@@ -77,7 +77,10 @@ MENU 'OPCIONES'
 			HIDE OPTION 'Ver Orden'
 			HIDE OPTION 'Aprobar/Activar'
 		ELSE
-			SHOW OPTION 'Modificar'
+			IF fl_control_permiso_opcion('Modificar') THEN			
+			   SHOW OPTION 'Modificar'
+		        END IF 
+			
 			SHOW OPTION 'Ver Orden'
 			IF vm_num_rows = 1 THEN
                                 HIDE OPTION 'Avanzar'
@@ -101,7 +104,10 @@ MENU 'OPCIONES'
 	COMMAND KEY('I') 'Ingresar' 'Ingresar nuevos registros. '
 		CALL control_ingreso()
 		IF vm_num_rows = 1 THEN
+		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
+		   END IF 
+			
 			SHOW OPTION 'Aprobar/Activar'
 			SHOW OPTION 'Ver Orden'
 		END IF
@@ -116,7 +122,10 @@ MENU 'OPCIONES'
 	COMMAND KEY('C') 'Consultar' 'Consultar un registro. '
 		CALL control_consulta('C')
 		IF vm_num_rows <= 1 THEN
+		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
+		   END IF 
+			
 			SHOW OPTION 'Ver Orden'
 			SHOW OPTION 'Aprobar/Activar'
 			HIDE OPTION 'Avanzar'
@@ -129,7 +138,11 @@ MENU 'OPCIONES'
 		ELSE
 			SHOW OPTION 'Avanzar'
 			SHOW OPTION 'Aprobar/Activar'
-			SHOW OPTION 'Modificar'
+
+			IF fl_control_permiso_opcion('Modificar') THEN			
+				SHOW OPTION 'Modificar'
+			END IF 
+			
 			SHOW OPTION 'Ver Orden'
 		END IF
 		IF vm_row_current <= 1 THEN

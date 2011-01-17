@@ -149,18 +149,31 @@ MENU 'OPCIONES'
 				EXIT PROGRAM
 			END IF
 			IF rm_b30.b30_estado = 'C' THEN
-				SHOW OPTION 'Imprimir'
+			   IF fl_control_permiso_opcion('Imprimir') THEN
+			      SHOW OPTION 'Imprimir'
+			   END IF
+				
 			END IF
 		END IF
 	COMMAND KEY('B') 'Conciliación'	'Conciliación Bancaria.'
 		CALL sub_menu()
 		IF vm_num_rows = 1 THEN
 			IF num_args() <> 4 THEN
+	  		   IF fl_control_permiso_opcion('Modificar') THEN			
 				SHOW OPTION 'Modificar'
+			   END IF 
+	
+			   IF fl_control_permiso_opcion('Eliminar') THEN
 				SHOW OPTION 'Eliminar'
+			   END IF				
+			
 				IF rm_b30.b30_estado = 'C' THEN
 					SHOW OPTION 'Reaperturar'
-					SHOW OPTION 'Imprimir'
+
+					 IF fl_control_permiso_opcion('Imprimir') THEN
+					   SHOW OPTION 'Imprimir'
+					 END IF
+					
 				ELSE
 					HIDE OPTION 'Reaperturar'
 					HIDE OPTION 'Imprimir'
@@ -187,11 +200,20 @@ MENU 'OPCIONES'
 		HIDE OPTION 'Detalle'
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
-			SHOW OPTION 'Modificar'
-			SHOW OPTION 'Eliminar'
+
+			IF fl_control_permiso_opcion('Modificar') THEN			
+				SHOW OPTION 'Modificar'
+			END IF 
+	
+			IF fl_control_permiso_opcion('Eliminar') THEN
+				SHOW OPTION 'Eliminar'
+			END IF
 			IF rm_b30.b30_estado = 'C' THEN
 				SHOW OPTION 'Reaperturar'
-				SHOW OPTION 'Imprimir'
+			   IF fl_control_permiso_opcion('Imprimir') THEN
+			  	SHOW OPTION 'Imprimir'
+			   END IF
+				
 			ELSE
 				HIDE OPTION 'Reaperturar'
 				HIDE OPTION 'Imprimir'
@@ -204,7 +226,10 @@ MENU 'OPCIONES'
 				HIDE OPTION 'Eliminar'
 				IF rm_b30.b30_estado = 'C' THEN
 					SHOW OPTION 'Reaperturar'
-					SHOW OPTION 'Imprimir'
+
+					IF fl_control_permiso_opcion('Imprimir') THEN
+			  			SHOW OPTION 'Imprimir'
+			   		END IF
 				ELSE
 					HIDE OPTION 'Reaperturar'
 					HIDE OPTION 'Imprimir'
@@ -216,12 +241,17 @@ MENU 'OPCIONES'
 			SHOW OPTION 'Modificar'
 			IF rm_b30.b30_estado = 'C' THEN
 				SHOW OPTION 'Reaperturar'
-				SHOW OPTION 'Imprimir'
+			   IF fl_control_permiso_opcion('Imprimir') THEN
+			   	SHOW OPTION 'Imprimir'
+			   END IF
 			ELSE
 				HIDE OPTION 'Reaperturar'
 				HIDE OPTION 'Imprimir'
 			END IF
-			SHOW OPTION 'Eliminar'
+			IF fl_control_permiso_opcion('Eliminar') THEN
+			  	SHOW OPTION 'Eliminar'
+			END IF
+	
 			SHOW OPTION 'Detalle'
 		END IF
 		IF vm_row_current <= 1 THEN
@@ -243,7 +273,11 @@ MENU 'OPCIONES'
 		END IF
 		IF rm_b30.b30_estado = 'C' THEN
 			SHOW OPTION 'Reaperturar'
-			SHOW OPTION 'Imprimir'
+
+		    IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+		    END IF
+			
 		ELSE
 			HIDE OPTION 'Reaperturar'
 			HIDE OPTION 'Imprimir'

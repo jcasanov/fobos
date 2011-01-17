@@ -103,24 +103,30 @@ MENU 'OPCIONES'
 			HIDE OPTION 'Modificar'
 			HIDE OPTION 'Consultar'
 			HIDE OPTION 'Modelos'
-			CALL control_consulta()
-			SHOW OPTION 'Existencias'
-			SHOW OPTION 'Pedidos'
+			CALL control_consulta()			
+		    SHOW OPTION 'Existencias'
+		    SHOW OPTION 'Pedidos'		    
+			
 			IF vm_sustituye IS NOT NULL THEN
 				SHOW OPTION 'Sustituye a'
 			END IF
 			IF vm_sustituido IS NOT NULL THEN
 				SHOW OPTION 'Sustituido por'
 			END IF
-			SHOW OPTION 'Estadisticas'
-			SHOW OPTION 'Ubicación'
+			
+			SHOW OPTION 'Estadisticas'		    
+			SHOW OPTION 'Ubicación'		    
+		
 		END IF
 	COMMAND KEY('I') 'Ingresar' 'Ingresar nuevos registros. '
 		HIDE OPTION 'Sustituye a'
 		HIDE OPTION 'Sustituido por'
 		CALL control_ingreso()
 		IF vm_num_rows = 1 THEN
-			SHOW OPTION 'Modificar'
+			IF fl_control_permiso_opcion('Modificar') THEN
+			   SHOW OPTION 'Modificar'
+		    END IF
+		
 			SHOW OPTION 'Bloquear/Activar'
 			SHOW OPTION 'Modelos'
 		END IF
@@ -154,13 +160,18 @@ MENU 'OPCIONES'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
-			SHOW OPTION 'Modificar'
-			SHOW OPTION 'Modelos'
-			SHOW OPTION 'Existencias'
-			SHOW OPTION 'Pedidos'
-			SHOW OPTION 'Ubicación'
+
+	 		IF fl_control_permiso_opcion('Modificar') THEN			
+			   SHOW OPTION 'Modificar'
+			END IF 
+
+			    SHOW OPTION 'Modelos'
+			    SHOW OPTION 'Existencias'			
+	 		    SHOW OPTION 'Pedidos'
+		        SHOW OPTION 'Ubicación'		        
+		
 			IF rm_item.r10_estado <> 'S' THEN
-				SHOW OPTION 'Bloquear/Activar'
+			   SHOW OPTION 'Bloquear/Activar'
 			END IF
 		END IF
 		IF vm_sustituye IS NOT NULL THEN
@@ -236,7 +247,11 @@ MENU 'OPCIONES'
 			SHOW OPTION 'Sustituido por'
 		END IF
 		IF vm_num_rows > 0 THEN
-			SHOW OPTION 'Estadisticas'
+
+		   IF fl_control_permiso_opcion('Modificar') THEN			
+			SHOW OPTION 'Modificar'
+		   END IF 
+		
 		END IF
 	COMMAND KEY('B') 'Bloquear/Activar' 'Bloquear o activar registro. '
 		CALL control_bloqueo_activacion()

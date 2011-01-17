@@ -262,7 +262,10 @@ MENU 'OPCIONES'
 			SHOW OPTION 'Ver Retenciones'
 		END IF
 		IF vm_num_rows > 0 THEN
-			SHOW OPTION 'Imprimir'
+		   IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+		   END IF			
+	
 		END IF
 		CALL setea_nombre_botones()
 	COMMAND KEY('C') 'Consultar' 		'Consultar un registro.'
@@ -297,8 +300,12 @@ MENU 'OPCIONES'
 			END IF
 			IF vm_indice > vm_filas_pant THEN
 				SHOW OPTION 'Detalle'
-			END IF		
-			SHOW OPTION 'Imprimir'
+			END IF	
+			IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+			END IF
+
+
 		END IF
 		IF vm_row_current <= 1 THEN
                         HIDE OPTION 'Retroceder'
@@ -377,8 +384,10 @@ MENU 'OPCIONES'
                 IF ind_ret > 0 THEN
                 	SHOW OPTION 'Ver Retenciones'
                 END IF
-                IF vm_num_rows > 0 THEN
-                	SHOW OPTION 'Imprimir'
+                IF vm_num_rows > 0 THEN		
+    		     IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+		   END IF
                 END IF
         COMMAND KEY('P') 'Imprimir'		'Imprime la compra local.'
         	CALL imprimir()

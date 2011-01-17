@@ -148,7 +148,10 @@ MENU 'OPCIONES'
 		IF num_args() = 6 THEN
 			HIDE OPTION 'Consultar'
 			HIDE OPTION 'Egreso'
-                	SHOW OPTION 'Imprimir'
+			IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+		  	END IF
+                	
 			CALL execute_query()
 			IF vm_filas_pant < vm_ind_egr THEN
 				SHOW OPTION 'Detalle'
@@ -160,9 +163,15 @@ MENU 'OPCIONES'
 		CALL control_egreso()
 		IF vm_num_rows >= 1 THEN
 			IF rm_j10.j10_estado <> 'E' THEN
-				SHOW OPTION 'Eliminar'
+			   IF fl_control_permiso_opcion('Eliminar') THEN
+			  	 SHOW OPTION 'Eliminar'
+			   END IF
 			END IF
-			SHOW OPTION 'Imprimir'
+
+		    if fl_control_permiso_opcion('imprimir') then
+			   show option 'imprimir'
+		    end if
+
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -180,7 +189,9 @@ MENU 'OPCIONES'
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
 			IF rm_j10.j10_estado <> 'E' THEN
-				SHOW OPTION 'Eliminar'
+				 IF fl_control_permiso_opcion('Eliminar') THEN
+			  	 	SHOW OPTION 'Eliminar'
+			     END IF
 			END IF
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
@@ -190,11 +201,15 @@ MENU 'OPCIONES'
 		ELSE
 			SHOW OPTION 'Avanzar'
 			IF rm_j10.j10_estado <> 'E' THEN
-				SHOW OPTION 'Eliminar'
+				 IF fl_control_permiso_opcion('Eliminar') THEN
+			  	 	SHOW OPTION 'Eliminar'
+			     END IF
 			END IF
 		END IF
-		IF vm_num_rows > 0 THEN
-			SHOW OPTION 'Imprimir'
+		IF vm_num_rows > 0 THEN		
+			IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+		    END IF
 		END IF
 		IF vm_row_current <= 1 THEN
                         HIDE OPTION 'Retroceder'
@@ -220,13 +235,17 @@ MENU 'OPCIONES'
 			SHOW OPTION 'Retroceder'
 		END IF
 		IF rm_j10.j10_estado <> 'E' THEN
-			SHOW OPTION 'Eliminar'
+			 IF fl_control_permiso_opcion('Eliminar') THEN
+			  	 	SHOW OPTION 'Eliminar'
+			 END If
 		END IF
 		IF vm_filas_pant < vm_ind_egr THEN
 			SHOW OPTION 'Detalle'
 		END IF
 		IF vm_num_rows > 0 THEN
-			SHOW OPTION 'Imprimir'
+				IF fl_control_permiso_opcion('Imprimir') THEN
+				   SHOW OPTION 'Imprimir'
+			    END IF
 		END IF
 	COMMAND KEY('R') 'Retroceder' 		'Ver anterior registro.'
 		HIDE OPTION 'Detalle'
@@ -241,13 +260,17 @@ MENU 'OPCIONES'
 			SHOW OPTION 'Retroceder'
 		END IF
 		IF rm_j10.j10_estado <> 'E' THEN
-			SHOW OPTION 'Eliminar'
+			IF fl_control_permiso_opcion('Eliminar') THEN
+			  	 	SHOW OPTION 'Eliminar'
+			END If   
 		END IF
 		IF vm_filas_pant < vm_ind_egr THEN
-			SHOW OPTION 'Detalle'
+			SHOW OPTION 'Detalle' 
 		END IF
 		IF vm_num_rows > 0 THEN
-			SHOW OPTION 'Imprimir'
+				IF fl_control_permiso_opcion('Imprimir') THEN
+				   SHOW OPTION 'Imprimir'
+			    END IF
 		END IF
         COMMAND KEY('P') 'Imprimir'		'Imprime el egreso.'
         	CALL imprimir()

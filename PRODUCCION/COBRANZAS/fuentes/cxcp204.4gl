@@ -146,8 +146,14 @@ MENU 'OPCIONES'
 			CALL control_ingreso()
 		END IF
 		IF vm_num_rows = 1 THEN
-			SHOW OPTION 'Modificar'
-			SHOW OPTION 'Imprimir'
+
+		   IF fl_control_permiso_opcion('Modificar') THEN
+			   SHOW OPTION 'Modificar'
+		   END IF
+		   IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+		   END IF
+			
 			SHOW OPTION 'Detalle'
 		END IF
 		IF vm_row_current > 1 THEN
@@ -169,8 +175,15 @@ MENU 'OPCIONES'
 	COMMAND KEY('C') 'Consultar' 		'Consultar un registro.'
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
+
+		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-			SHOW OPTION 'Imprimir'
+		   END IF 
+		   
+		   IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+		   END IF
+			
 			SHOW OPTION 'Detalle'
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
@@ -181,8 +194,13 @@ MENU 'OPCIONES'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
+		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-			SHOW OPTION 'Imprimir'
+		   END IF 
+		   
+		   IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+		   END If
 			SHOW OPTION 'Detalle'
 		END IF
 		IF vm_row_current <= 1 THEN

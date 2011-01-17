@@ -257,7 +257,10 @@ MENU 'OPCIONES'
                         IF (vm_ind_arr - vm_curr_arr) > 0 THEN
                                 SHOW OPTION 'Avanzar Detalle'
                         END IF
-                        SHOW OPTION 'Modificar'
+			IF fl_control_permiso_opcion('Modificar') THEN			
+				SHOW OPTION 'Modificar'
+			END IF
+                        
 			SHOW OPTION 'Forma de Pago'
                         HIDE OPTION 'Avanzar'
                         HIDE OPTION 'Retroceder'
@@ -268,7 +271,11 @@ MENU 'OPCIONES'
                                 HIDE OPTION 'Retroceder Detalle'
                         END IF
                 ELSE
-                        SHOW OPTION 'Modificar'
+
+			IF fl_control_permiso_opcion('Modificar') THEN			
+				SHOW OPTION 'Modificar'
+			END IF
+                        
                         SHOW OPTION 'Avanzar'
 			SHOW OPTION 'Forma de Pago'
                         IF (vm_ind_arr - vm_curr_arr) > 0 THEN
@@ -304,13 +311,21 @@ MENU 'OPCIONES'
 			SHOW OPTION 'Retroceder'
 			NEXT OPTION 'Retroceder'
 			IF vg_tipo IS NULL THEN
+				IF fl_control_permiso_opcion('Modificar') THEN			
+				   SHOW OPTION 'Modificar'
+				END IF
+				
 				SHOW OPTION 'Forma de Pago'
-				SHOW OPTION 'Modificar'
+				
 			END IF
 		ELSE
 			IF vg_tipo IS NULL THEN
+				IF fl_control_permiso_opcion('Modificar') THEN			
+					SHOW OPTION 'Modificar'
+				END IF
+				
 				SHOW OPTION 'Forma de Pago'
-				SHOW OPTION 'Modificar'
+				
 			END IF
 			SHOW OPTION 'Avanzar'
 			SHOW OPTION 'Retroceder'
@@ -326,16 +341,25 @@ MENU 'OPCIONES'
 		CALL anterior_registro()
 		IF vm_row_current = 1 THEN
 			IF vg_tipo IS NULL THEN
+				IF fl_control_permiso_opcion('Modificar') THEN			
+				   SHOW OPTION 'Modificar'
+				END IF
+				
 				SHOW OPTION 'Forma de Pago'
-				SHOW OPTION 'Modificar'
+
 			END IF
 			HIDE OPTION 'Retroceder'
 			SHOW OPTION 'Avanzar'
 			NEXT OPTION 'Avanzar'
 		ELSE
 			IF vg_tipo IS NULL THEN
+
+			    IF fl_control_permiso_opcion('Modificar') THEN			
+			  	 SHOW OPTION 'Modificar'
+			    END IF
+
 				SHOW OPTION 'Forma de Pago'
-				SHOW OPTION 'Modificar'
+			
 			END IF
 			SHOW OPTION 'Avanzar'
 			SHOW OPTION 'Retroceder'

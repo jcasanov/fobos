@@ -266,9 +266,12 @@ ELSE
 END IF
 MENU 'OPCIONES'
 	BEFORE MENU
+	   IF fl_control_permiso_opcion('Grabar') THEN			
+		SHOW OPTION 'Grabar'
+	   END IF 
+		
 		SHOW OPTION 'Crédito'
 		SHOW OPTION 'Dcto. a Favor'
-		SHOW OPTION 'Grabar'
 		SHOW OPTION 'Orden de Trabajo'
 		IF rm_tal.t25_dividendos > vm_scr_lin THEN
                         SHOW OPTION 'Detalle'

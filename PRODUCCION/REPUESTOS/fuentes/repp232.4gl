@@ -101,7 +101,10 @@ MENU 'OPCIONES'
 			HIDE OPTION 'Consultar'
 			HIDE OPTION 'Ingresar'
 			SHOW OPTION 'Ver Factura'
-                	SHOW OPTION 'Imprimir'
+                	
+			IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+		   	END IF
 			CALL control_consulta()
 			IF vm_ind_arr > fgl_scr_size('r_detalle') THEN
 				SHOW OPTION 'Ver Detalle'

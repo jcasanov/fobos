@@ -130,7 +130,10 @@ MENU 'OPCIONES'
 	COMMAND KEY('I') 'Ingresar' 'Ingresar nuevos registros. '
 		CALL control_ingreso()
 		IF vm_num_rows = 1 THEN
+		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
+		   END IF 
+			
 		END IF
 		IF vm_num_rows > 1 THEN
 			SHOW OPTION 'Retroceder'

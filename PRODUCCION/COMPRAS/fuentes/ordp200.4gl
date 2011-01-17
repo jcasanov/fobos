@@ -173,7 +173,10 @@ MENU 'OPCIONES'
 			HIDE OPTION 'Ingresar'
 			HIDE OPTION 'Consultar'
 			CALL control_consulta()
-			SHOW OPTION 'Imprimir'
+		    IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+		    END IF
+			
 			IF rm_c10.c10_estado <> 'A' THEN
 				CALL control_cargar_recepciones()
 				IF vm_num_recep <> 0 THEN
@@ -192,8 +195,14 @@ MENU 'OPCIONES'
                 CALL control_ingreso()
                 HIDE OPTION 'Ver Recepción'
 		IF vm_num_rows >= 1 THEN
-			SHOW OPTION 'Modificar'
-			SHOW OPTION 'Imprimir'
+		   IF fl_control_permiso_opcion('Modificar') THEN			
+		 	   SHOW OPTION 'Modificar'
+		   END IF 
+		
+		   IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+		   END IF
+			
 		END IF
                 IF vm_num_rows = 1 AND (vm_ind_arr - vm_curr_arr) > 0 THEN
                         SHOW OPTION 'Avanzar Detalle'
@@ -226,7 +235,10 @@ MENU 'OPCIONES'
         COMMAND KEY('C') 'Consultar'            'Consultar un registro.'
                 CALL control_consulta()
 		IF num_args() = 5 THEN
-			SHOW OPTION 'Imprimir'
+		   IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+		   END IF
+			
 		END IF
 		IF vm_num_rows > 0 THEN
 			IF rm_c10.c10_estado <> 'A' THEN
@@ -244,7 +256,10 @@ MENU 'OPCIONES'
                         IF (vm_ind_arr - vm_curr_arr) > 0 THEN
                                 SHOW OPTION 'Avanzar Detalle'
                         END IF
-                        SHOW OPTION 'Modificar'
+ 					    IF fl_control_permiso_opcion('Modificar') THEN			
+					    	SHOW OPTION 'Modificar'
+		  			    END IF 
+                        
                         HIDE OPTION 'Avanzar'
                         HIDE OPTION 'Retroceder'
                         IF vm_num_rows = 0 THEN
@@ -252,7 +267,10 @@ MENU 'OPCIONES'
                         	HIDE OPTION 'Ver Recepción'
                         END IF
                 ELSE
-                        SHOW OPTION 'Modificar'
+ 				  IF fl_control_permiso_opcion('Modificar') THEN			
+				    	SHOW OPTION 'Modificar'
+		   	      END IF 
+                        
                         SHOW OPTION 'Avanzar'
                         IF (vm_ind_arr - vm_curr_arr) > 0 THEN
                                 SHOW OPTION 'Avanzar Detalle'
@@ -288,10 +306,16 @@ MENU 'OPCIONES'
 		IF vm_row_current = vm_num_rows THEN
 			HIDE OPTION 'Avanzar'
 			SHOW OPTION 'Retroceder'
-			SHOW OPTION 'Modificar'
+		  IF fl_control_permiso_opcion('Modificar') THEN			
+		   	SHOW OPTION 'Modificar'
+		  END IF 
+			
 			NEXT OPTION 'Retroceder'
 		ELSE
+		 IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
+		 END IF 
+			
 			SHOW OPTION 'Avanzar'
 			SHOW OPTION 'Retroceder'
 		END IF
@@ -314,12 +338,18 @@ MENU 'OPCIONES'
                 HIDE OPTION 'Retroceder Detalle'
 		CALL anterior_registro()
 		IF vm_row_current = 1 THEN
+		  IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
+		  END IF 
+			
 			HIDE OPTION 'Retroceder'
 			SHOW OPTION 'Avanzar'
 			NEXT OPTION 'Avanzar'
 		ELSE
+		  IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
+		  END IF 
+			
 			SHOW OPTION 'Avanzar'
 			SHOW OPTION 'Retroceder'
 		END IF

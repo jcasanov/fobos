@@ -95,7 +95,9 @@ MENU 'OPCIONES'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
-			SHOW OPTION 'Mantenimiento'
+		    SHOW OPTION 'Mantenimiento'
+			
+			
 		END IF
 	COMMAND KEY('M') 'Mantenimiento' 'Mantenimiento a las equivalencias.'
 		IF vm_num_rows > 0  AND rm_r14.r14_item_ant IS NOT NULL THEN
@@ -121,7 +123,8 @@ MENU 'OPCIONES'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
-			SHOW OPTION 'Mantenimiento'
+			SHOW OPTION 'Mantenimiento'	
+			
 		END IF
 	COMMAND KEY('A') 'Avanzar' 'Ver siguiente registro'
 		IF vm_row_current < vm_num_rows THEN

@@ -64,7 +64,10 @@ MENU 'OPCIONES'
 	COMMAND KEY('I') 'Ingresar' 'Ingresar nuevos registros. '
 		CALL control_ingreso()
 		IF vm_num_rows = 1 THEN
-			SHOW OPTION 'Modificar'
+		   IF fl_control_permiso_opcion('Modificar') THEN			
+				SHOW OPTION 'Modificar'
+		   END IF
+			
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -77,7 +80,10 @@ MENU 'OPCIONES'
 	COMMAND KEY('C') 'Consultar' 'Consultar un registro. '
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
-			SHOW OPTION 'Modificar'
+			IF fl_control_permiso_opcion('Modificar') THEN			
+				SHOW OPTION 'Modificar'
+		   	END IF
+			
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -85,7 +91,10 @@ MENU 'OPCIONES'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
+		 IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
+		 END IF
+			
 		END IF
 		IF vm_row_current <= 1 THEN
                         HIDE OPTION 'Retroceder'

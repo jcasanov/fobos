@@ -71,8 +71,10 @@ MENU 'OPCIONES'
 	COMMAND KEY('C') 'Consultar' 'Consultar un registro. '
                 CALL control_consulta()
                 IF vm_num_rows <= 1 THEN
-                        SHOW OPTION 'Confirmar'
-			SHOW OPTION 'Pedido'
+			
+				SHOW OPTION 'Confirmar'
+				SHOW OPTION 'Pedido'			
+                       
                         HIDE OPTION 'Avanzar'
                         HIDE OPTION 'Retroceder'
                         IF vm_num_rows = 0 THEN
@@ -80,9 +82,10 @@ MENU 'OPCIONES'
 				HIDE OPTION 'Pedido'
                         END IF
                 ELSE
-                        SHOW OPTION 'Avanzar'
-                        SHOW OPTION 'Confirmar'
-			SHOW OPTION 'Pedido'
+                        SHOW OPTION 'Avanzar'                      
+						SHOW OPTION 'Confirmar'		
+						SHOW OPTION 'Pedido'
+		
                 END IF
                 IF vm_row_current <= 1 THEN
                         HIDE OPTION 'Retroceder'

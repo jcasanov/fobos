@@ -130,10 +130,14 @@ MENU 'OPCIONES'
 	COMMAND KEY('I') 'Ingresar' 		'Ingresar nuevos registros.'
 		CALL control_ingreso()
 		IF vm_num_rows = 1 THEN
+		  IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
+		  END IF
+		  IF fl_control_permiso_opcion('Eliminar') THEN			
+			SHOW OPTION 'Eliminar'
+		  END IF
 			SHOW OPTION 'Rubros'
 			SHOW OPTION 'Fletes'
-			SHOW OPTION 'Eliminar'
 			SHOW OPTION 'Unidades'
 		END IF
 		IF vm_row_current > 1 THEN
@@ -157,11 +161,15 @@ MENU 'OPCIONES'
 	COMMAND KEY('C') 'Consultar' 		'Consultar un registro.'
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
+		  IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
+		  END IF
+		  IF fl_control_permiso_opcion('Eliminar') THEN			
+			SHOW OPTION 'Eliminar'
+		  END IF
 			SHOW OPTION 'Unidades'
 			SHOW OPTION 'Rubros'
 			SHOW OPTION 'Fletes'
-			SHOW OPTION 'Eliminar'
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -172,10 +180,14 @@ MENU 'OPCIONES'
 				HIDE OPTION 'Eliminar'
 			END IF
 		ELSE
+		  IF fl_control_permiso_opcion('Modificar') THEN			
+			SHOW OPTION 'Modificar'
+		  END IF
+		  IF fl_control_permiso_opcion('Eliminar') THEN			
+			SHOW OPTION 'Eliminar'
+		  END IF
 			SHOW OPTION 'Avanzar'
 			SHOW OPTION 'Unidades'
-			SHOW OPTION 'Modificar'
-			SHOW OPTION 'Eliminar'
 			SHOW OPTION 'Rubros'
 			SHOW OPTION 'Fletes'
 		END IF

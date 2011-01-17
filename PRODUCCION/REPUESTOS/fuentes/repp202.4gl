@@ -145,7 +145,10 @@ MENU 'OPCIONES'
 			CALL execute_query()
 			HIDE OPTION 'Ingresar'  -- consulta
 			HIDE OPTION 'Consultar'
-			SHOW OPTION 'Imprimir'
+			IF fl_control_permiso_opcion('Imprimir') THEN			
+				SHOW OPTION 'Imprimir'
+			END IF 
+		
 		END IF
 	COMMAND KEY('I') 'Ingresar' 		'Ingresar nuevos registros.'
 		HIDE OPTION 'Detalle'
@@ -153,20 +156,27 @@ MENU 'OPCIONES'
 		CALL control_ingreso()
 		IF vm_num_rows = 1 THEN
 			IF vm_indice > vm_filas_pant THEN
-				SHOW OPTION 'Detalle'
+			   
+			      SHOW OPTION 'Detalle'		       
+
 			END IF
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
 			IF vm_indice > vm_filas_pant THEN
-				SHOW OPTION 'Detalle'
+				
+			    		  SHOW OPTION 'Detalle'
+		        
 			END IF
 		END IF
 		IF vm_row_current = vm_num_rows THEN
 			HIDE OPTION 'Avanzar'
 		END IF
 		IF vm_num_rows > 0 THEN
-			SHOW OPTION 'Imprimir'
+			IF fl_control_permiso_opcion('Imprimir') THEN
+			      SHOW OPTION 'Imprimir'
+		        END IF
+		
 		END IF
 		CALL setea_nombre_botones()
 	COMMAND KEY('C') 'Consultar' 		'Consultar un registro.'
@@ -176,7 +186,9 @@ MENU 'OPCIONES'
 	
 		IF vm_num_rows <= 1 THEN
 			IF vm_indice > vm_filas_pant THEN
-				SHOW OPTION 'Detalle'
+				
+			    	  SHOW OPTION 'Detalle'
+		        
 			END IF
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
@@ -185,15 +197,22 @@ MENU 'OPCIONES'
 			END IF
 		ELSE
 			IF vm_indice > vm_filas_pant THEN
-				SHOW OPTION 'Detalle'
+				
+			    		  SHOW OPTION 'Detalle'
+		        
 			END IF
 			SHOW OPTION 'Avanzar'
 		END IF
 		IF vm_num_rows > 0 THEN
 			IF vm_indice > vm_filas_pant THEN
-				SHOW OPTION 'Detalle'
-			END IF		
-			SHOW OPTION 'Imprimir'
+				
+			    		  SHOW OPTION 'Detalle'
+		        
+			END IF	
+				IF fl_control_permiso_opcion('Imprimir') THEN
+			    		  SHOW OPTION 'Imprimir'
+		           	END IF	
+		
 		END IF
 		IF vm_row_current <= 1 THEN
             HIDE OPTION 'Retroceder'
@@ -214,10 +233,14 @@ MENU 'OPCIONES'
 			SHOW OPTION 'Retroceder'
 		END IF
         IF vm_indice > vm_filas_pant THEN
-			SHOW OPTION 'Detalle'
-		END IF
+			
+			   SHOW OPTION 'Detalle'
+		    
+	END IF
         IF vm_num_rows > 0 THEN
-			SHOW OPTION 'Imprimir'
+			IF fl_control_permiso_opcion('Imprimir') THEN
+	    		  SHOW OPTION 'Imprimir'
+	           	END IF	
         END IF
 	COMMAND KEY('R') 'Retroceder' 		'Ver anterior registro.'
 		HIDE OPTION 'Detalle'
@@ -232,10 +255,14 @@ MENU 'OPCIONES'
 			SHOW OPTION 'Retroceder'
 		END IF
                 IF vm_indice > vm_filas_pant THEN
-			SHOW OPTION 'Detalle'
+			
+			   SHOW OPTION 'Detalle'
+		    
 		END IF
                 IF vm_num_rows > 0 THEN
-                	SHOW OPTION 'Imprimir'
+                	IF fl_control_permiso_opcion('Imprimir') THEN
+	    		  SHOW OPTION 'Imprimir'
+	           	END IF	
                 END IF
         COMMAND KEY('P') 'Imprimir'		'Imprime la recepción.'
         	CALL imprimir()

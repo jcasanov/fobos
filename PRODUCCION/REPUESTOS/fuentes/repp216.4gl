@@ -133,7 +133,9 @@ MENU 'OPCIONES'
 			SHOW OPTION 'Ver Detalle'
 		END IF
 		IF vm_num_rows > 0 THEN
-			SHOW OPTION 'Imprimir'
+		   IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+		   END IF
 		END IF
 	COMMAND KEY('C') 'Consultar' 		'Consultar un registro.'
 		HIDE OPTION 'Imprimir'
@@ -153,7 +155,9 @@ MENU 'OPCIONES'
 				SHOW OPTION 'Avanzar'
 				SHOW OPTION 'Ver Detalle'
 			END IF
-			SHOW OPTION 'Imprimir'
+		   IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+		   END IF
 		END IF
 	COMMAND KEY('D') 'Ver Detalle'		'Ver detalle del Registro.'
 		IF vm_num_rows > 0 THEN
@@ -173,7 +177,9 @@ MENU 'OPCIONES'
 			SHOW OPTION 'Retroceder'
 		END IF
                 IF vm_num_rows > 0 THEN
-			SHOW OPTION 'Imprimir'
+			 IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+		   	 END IF
                 END IF
 	COMMAND KEY('R') 'Retroceder' 		'Ver anterior registro.'
 		HIDE OPTION 'Imprimir'
@@ -187,7 +193,9 @@ MENU 'OPCIONES'
 			SHOW OPTION 'Retroceder'
 		END IF
                 IF vm_num_rows > 0 THEN
-                	SHOW OPTION 'Imprimir'
+                   IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+		   END IF
                 END IF
         COMMAND KEY('P') 'Imprimir'		'Imprime comprobante.'
         	CALL imprimir()

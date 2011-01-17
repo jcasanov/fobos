@@ -130,8 +130,13 @@ MENU 'PROCESOS'
 	COMMAND KEY('I') 'Ingresar' 'Ingresar nuevos registros. '
 		CALL control_ingreso()
 		IF vm_num_rows = 1 THEN
+		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
+		   END IF 
+		   IF fl_control_permiso_opcion('Eliminar') THEN			
 			SHOW OPTION 'Eliminar'
+		   END IF 			
+		
 		END IF
 		IF vm_num_rows > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -144,8 +149,12 @@ MENU 'PROCESOS'
 	COMMAND KEY('C') 'Consultar' 'Consultar un registro. '
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
+		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
+		   END IF 
+		   IF fl_control_permiso_opcion('Eliminar') THEN			
 			SHOW OPTION 'Eliminar'
+		   END IF 
 			SHOW OPTION 'Repuestos'
 			SHOW OPTION 'Mano Obra'
 			SHOW OPTION 'Ordenes Compra'
@@ -163,12 +172,17 @@ MENU 'PROCESOS'
 				HIDE OPTION 'Gastos de Viaje'
 			END IF
 		ELSE
+		   IF fl_control_permiso_opcion('Modificar') THEN			
+			SHOW OPTION 'Modificar'
+		   END IF 
+		   IF fl_control_permiso_opcion('Eliminar') THEN			
+			SHOW OPTION 'Eliminar'
+		   END IF 
 			SHOW OPTION 'Repuestos'
 			SHOW OPTION 'Mano Obra'
 			SHOW OPTION 'Ordenes Compra'
 			SHOW OPTION 'Avanzar'
-			SHOW OPTION 'Modificar'
-			SHOW OPTION 'Eliminar'
+		
 			IF rm_orden.t23_val_otros1 > 0 THEN
 				SHOW OPTION 'Gastos de Viaje'
 			END IF

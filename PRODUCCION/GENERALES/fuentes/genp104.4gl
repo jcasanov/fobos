@@ -111,7 +111,10 @@ MENU 'OPCIONES'
 			CALL control_ingreso_grp()
 		END IF
 		IF vm_num_rows = 1 THEN
+		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
+		   END IF
+			
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -124,7 +127,10 @@ MENU 'OPCIONES'
 	COMMAND KEY('C') 'Consultar' 		'Consultar un registro.'
 		CALL control_consulta_grp()
 		IF vm_num_rows <= 1 THEN
+		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
+		   END IF
+			
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -132,7 +138,10 @@ MENU 'OPCIONES'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
+		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
+		   END IF
+			
 		END IF
 		IF vm_row_current <= 1 THEN
                         HIDE OPTION 'Retroceder'
@@ -197,7 +206,10 @@ MENU 'OPCIONES'
 		IF r_g05.g05_tipo = 'UF' THEN
 			HIDE OPTION 'Ingresar'
 			HIDE OPTION 'Consultar'
-			SHOW OPTION 'Modificar'
+			IF fl_control_permiso_opcion('Modificar') THEN			
+				SHOW OPTION 'Modificar'
+			END IF
+			
 			LET vm_num_rows    = 1
 			LET vm_row_current = 1
 			SELECT ROWID INTO vm_rows[vm_row_current]
@@ -214,9 +226,15 @@ MENU 'OPCIONES'
 			CALL control_ingreso_usr()
 		END IF
 		IF vm_num_rows = 1 THEN
+		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-			SHOW OPTION 'Permisos'
+		   END IF
+		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
+		   END IF
+			
+			SHOW OPTION 'Permisos'
+
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -230,10 +248,14 @@ MENU 'OPCIONES'
 		CALL control_permisos()
 	COMMAND KEY('C') 'Consultar' 		'Consultar un registro.'
 		CALL control_consulta_usr()
-		IF vm_num_rows <= 1 THEN
+	        IF vm_num_rows <= 1 THEN
+		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-			SHOW OPTION 'Permisos'
+		   END IF
+		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
+		   END IF
+			SHOW OPTION 'Permisos'
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -241,12 +263,18 @@ MENU 'OPCIONES'
 				HIDE OPTION 'Permisos'
 				HIDE OPTION 'Bloquear/Activar'
 			END IF
-		ELSE
-			SHOW OPTION 'Avanzar'
+		 ELSE
+		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-			SHOW OPTION 'Permisos'
+		   END IF
+		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
+		   END IF
+			SHOW OPTION 'Avanzar'
+			SHOW OPTION 'Permisos'
+		
 		END IF
+
 		IF vm_row_current <= 1 THEN
                         HIDE OPTION 'Retroceder'
                 END IF

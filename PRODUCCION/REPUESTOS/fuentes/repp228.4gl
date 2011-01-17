@@ -155,7 +155,10 @@ MENU 'OPCIONES'
 			HIDE OPTION 'Consultar'
 			HIDE OPTION 'Ingresar'
 			SHOW OPTION 'Ver Factura'
-                	SHOW OPTION 'Imprimir'
+
+			IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+		        END IF
 			CALL control_consulta()
 			IF vm_ind_arr > vm_filas_pant THEN
 				SHOW OPTION 'Ver Detalle'
@@ -169,7 +172,9 @@ MENU 'OPCIONES'
 			SHOW OPTION 'Ver Detalle'
 			SHOW OPTION 'Avanzar'
 			SHOW OPTION 'Retroceder'
-			SHOW OPTION 'Imprimir'
+			IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+		        END IF
 		END IF
         COMMAND KEY('C') 'Consultar'            'Consultar un registro.'
 		HIDE OPTION 'Imprimir'
@@ -187,7 +192,9 @@ MENU 'OPCIONES'
                         SHOW OPTION 'Avanzar'
                 END IF
 		IF vm_num_rows > 0 THEN
-			SHOW OPTION 'Imprimir'
+			 IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+		         END IF
 		END IF
 	COMMAND KEY('F') 'Ver Factura' 		'Ver Factura de la Transacción.'
 		IF vm_num_rows > 0 THEN
@@ -233,7 +240,9 @@ MENU 'OPCIONES'
 			SHOW OPTION 'Retroceder'
 		END IF
 		IF vm_num_rows > 0 THEN
-			SHOW OPTION 'Imprimir'
+			 IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+		         END IF
 		END IF
         COMMAND KEY('P') 'Imprimir'		'Imprime la devolución.'
         	CALL imprimir()

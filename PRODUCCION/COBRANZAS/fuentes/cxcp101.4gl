@@ -94,9 +94,14 @@ MENU 'OPCIONES'
 	COMMAND KEY('I') 'Ingresar' 'Ingresar nuevos registros. '
 		CALL control_ingreso()
 		IF vm_num_rows = 1 THEN
+		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-			SHOW OPTION 'Contabilidad'
+		   END IF 
+		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
+		   END IF			
+			
+			SHOW OPTION 'Contabilidad'		
 			SHOW OPTION 'Area de Negocio'
 		END IF
 		IF vm_row_current > 1 THEN
@@ -110,9 +115,15 @@ MENU 'OPCIONES'
 	COMMAND KEY('C') 'Consultar' 'Consultar un registro. '
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
+			
+		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-			SHOW OPTION 'Contabilidad'
+		   END IF 
+		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
+		   END IF
+		
+			SHOW OPTION 'Contabilidad'
 			SHOW OPTION 'Area de Negocio'
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
@@ -123,10 +134,14 @@ MENU 'OPCIONES'
 				HIDE OPTION 'Area de Negocio'
 			END IF
 		ELSE
-			SHOW OPTION 'Avanzar'
+		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-			SHOW OPTION 'Contabilidad'
+		   END IF 
+		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
+		   END IF
+			SHOW OPTION 'Avanzar'
+			SHOW OPTION 'Contabilidad'
 			SHOW OPTION 'Area de Negocio'
 		END IF
 		IF vm_row_current <= 1 THEN

@@ -127,6 +127,7 @@ MENU 'OPCIONES'
 			HIDE OPTION 'Ingresar'  -- consulta
 			HIDE OPTION 'Consultar'
 			IF vm_num_rows = 1 THEN
+			   
 				SHOW OPTION 'Rubros'
 				SHOW OPTION 'Ver pedidos'
 			END IF
@@ -134,10 +135,19 @@ MENU 'OPCIONES'
 	COMMAND KEY('I') 'Ingresar' 		'Ingresar nuevos registros.'
 		CALL control_ingreso()
 		IF vm_num_rows >= 1 THEN
+
+		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-			SHOW OPTION 'Rubros'
+		   END IF 
+	  	   
+			SHOW OPTION 'Rubros'	
+
+		   IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+		   END IF
+	
 			SHOW OPTION 'Ver pedidos'
-			SHOW OPTION 'Imprimir'
+
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -155,10 +165,20 @@ MENU 'OPCIONES'
 	COMMAND KEY('C') 'Consultar' 		'Consultar un registro.'
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
+		   
+		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-			SHOW OPTION 'Rubros'
+		   END IF 
+
+	  	   SHOW OPTION 'Rubros'
+		   
+
+		   IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+		   END IF		
+		
 			SHOW OPTION 'Ver pedidos'
-			SHOW OPTION 'Imprimir'
+		
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -168,11 +188,21 @@ MENU 'OPCIONES'
 				HIDE OPTION 'Ver pedidos'
 			END IF
 		ELSE
-			SHOW OPTION 'Avanzar'
+
+		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-			SHOW OPTION 'Rubros'
+		   END IF 
+
+	  	   SHOW OPTION 'Rubros'		   
+
+		   IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+		   END IF
+
+
+			SHOW OPTION 'Avanzar'
 			SHOW OPTION 'Ver pedidos'
-			SHOW OPTION 'Imprimir'
+		
 		END IF
 		IF vm_row_current <= 1 THEN
                         HIDE OPTION 'Retroceder'

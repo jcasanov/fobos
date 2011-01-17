@@ -203,7 +203,9 @@ MENU 'OPCIONES'
                 	IF rm_r19.r19_tipo_dev IS NOT NULL THEN
                 		SHOW OPTION 'Devoluciones'
                 	END IF
-                	SHOW OPTION 'Imprimir'
+                	 IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+			 END IF
 		END IF
 	COMMAND KEY('I') 'Ingresar' 		'Ingresar nuevos registros.'
 		HIDE OPTION 'Imprimir'
@@ -223,7 +225,9 @@ MENU 'OPCIONES'
 			HIDE OPTION 'Avanzar'
 		END IF
 		IF vm_num_rows > 0 THEN
-			SHOW OPTION 'Imprimir'
+		   IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+		   END IF
 		END IF
 	COMMAND KEY('C') 'Consultar' 		'Consultar un registro.'
 		HIDE OPTION 'Imprimir'	
@@ -245,7 +249,9 @@ MENU 'OPCIONES'
 			SHOW OPTION 'Detalle'
 		END IF
 		IF vm_num_rows > 0 THEN
-			SHOW OPTION 'Imprimir'
+			 IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+		         END IF
 		END IF
 	COMMAND KEY('D') 'Detalle'		'Ver detalle de venta'
 		CALL control_mostrar_det()
@@ -271,7 +277,9 @@ MENU 'OPCIONES'
 			SHOW OPTION 'Detalle'
 		END IF
                 IF vm_num_rows > 0 THEN
-			SHOW OPTION 'Imprimir'
+			 IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+		         END IF
                 END IF
 	COMMAND KEY('R') 'Retroceder' 		'Ver anterior registro.'
 		HIDE OPTION 'Devoluciones'
@@ -293,7 +301,9 @@ MENU 'OPCIONES'
 			SHOW OPTION 'Detalle'
 		END IF
                 IF vm_num_rows > 0 THEN
-                	SHOW OPTION 'Imprimir'
+                   IF fl_control_permiso_opcion('Imprimir') THEN
+			   SHOW OPTION 'Imprimir'
+		   END IF
                 END IF
         COMMAND KEY('P') 'Imprimir'		'Imprime comprobante.'
         	CALL imprimir()

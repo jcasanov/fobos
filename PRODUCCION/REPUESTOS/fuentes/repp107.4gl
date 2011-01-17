@@ -142,7 +142,9 @@ MENU 'OPCIONES'
 	COMMAND KEY('I') 'Ingresar' 'Ingresar nuevos registros.'
 		CALL control_ingreso()
 		IF vm_num_rows <= 1 THEN
+		   IF fl_control_permiso_opcion('Mantenimiento') THEN
 			SHOW OPTION 'Mantenimiento'
+		   END IF
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -151,7 +153,8 @@ MENU 'OPCIONES'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
-			SHOW OPTION 'Mantenimiento'
+ 		    SHOW OPTION 'Mantenimiento'
+			
 		END IF
 	COMMAND KEY('M') 'Mantenimiento' 'Mantenimiento a las Configuraciones.'
 		IF vm_num_rows > 0  AND rm_r07.r07_linea IS NOT NULL THEN
@@ -177,7 +180,8 @@ MENU 'OPCIONES'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
-			SHOW OPTION 'Mantenimiento'
+		    SHOW OPTION 'Mantenimiento'
+		
 		END IF
 	COMMAND KEY('A') 'Avanzar' 'Ver siguiente registro'
 		IF vm_row_current < vm_num_rows THEN
@@ -244,7 +248,8 @@ MENU 'OPCIONES'
 	COMMAND KEY('I') 'Ingresar' 'Ingresar nuevos registros.'
 		CALL control_ingreso_2()
 		IF vm_num_rows_2 <= 1 THEN
-			SHOW OPTION 'Mantenimiento'
+			  SHOW OPTION 'Mantenimiento'
+		    
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows_2 = 0 THEN
@@ -254,6 +259,7 @@ MENU 'OPCIONES'
 		ELSE
 			SHOW OPTION 'Avanzar'
 			SHOW OPTION 'Mantenimiento'
+		    
 		END IF
 	COMMAND KEY('M') 'Mantenimiento' 'Mantenimiento a las Configuraciones.'
 		IF vm_num_rows_2 > 0  AND rm_r08.r08_rotacion IS NOT NULL THEN
@@ -280,6 +286,7 @@ MENU 'OPCIONES'
 		ELSE
 			SHOW OPTION 'Avanzar'
 			SHOW OPTION 'Mantenimiento'
+		    
 		END IF
 	COMMAND KEY('A') 'Avanzar' 'Ver siguiente registro'
 		IF vm_row_current_2 < vm_num_rows_2 THEN

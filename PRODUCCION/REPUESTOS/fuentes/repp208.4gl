@@ -92,8 +92,9 @@ MENU 'OPCIONES'
 			CALL control_ingreso()
 		END IF
 		IF vm_num_rows = 1 THEN
+			SHOW OPTION 'Cerrar'
 			SHOW OPTION 'Ver Liquidación'
-			SHOW OPTION 'Cerrar' 
+	
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -108,8 +109,8 @@ MENU 'OPCIONES'
 	COMMAND KEY('C') 'Consultar' 		'Consultar un registro.'
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
+		        SHOW OPTION 'Cerrar'
 			SHOW OPTION 'Ver Liquidación'
-			SHOW OPTION 'Cerrar' 
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
