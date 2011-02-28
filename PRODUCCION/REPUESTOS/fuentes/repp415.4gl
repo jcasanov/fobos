@@ -220,8 +220,9 @@ PAGE HEADER
 	      		rm_g13.g13_nombre
 	      
 	PRINT COLUMN 1, fl_justifica_titulo('I', 'Referencia', 15), ': ',
-	        	rm_r19.r19_referencia
-	      
+	        	rm_r19.r19_referencia, 	     
+	      COLUMN 65, fl_justifica_titulo('I', 'Cliente', 19), ': ',
+                        rm_r19.r19_nomcli
 --
 
 	SKIP 1 LINES

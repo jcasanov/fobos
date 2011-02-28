@@ -4,13 +4,14 @@ screen
 {
 
  No Tranferencia: [c ][c0             ] 	   Fecha:[c1                 ]
+	     Cliente: [c19 ] [c20                     ] 
         Vendedor: [c2  ] [c3                      ] 
    Bodega Origen: [c4] [c5                        ]
   Bodega Destino: [c6] [c7                        ] 
       Referencia: [c8                             ]
   Subtipo Trans.: [c9  ] [c10                     ]
 
-	 [b0   |b1   |b2             |[b3              |b4		]   
+	[b0   |b1   |b2             |[b3              |b4	       ]   
 	[c11  |c12  |c13            |[c15             |c16             ]
 	[c11  |c12  |c13            |[c15             |c16             ]
 	[c11  |c12  |c13            |[c15             |c16             ]
@@ -65,6 +66,9 @@ c16 = formonly.subtotal_item TYPE DECIMAL(12,2), REVERSE, NOENTRY,
 	FORMAT = '#,###,###,##&.##', OPTIONS = '-nolist';
 c17 = rept019.r19_tot_costo, REVERSE, FORMAT = '#,###,###,##&.##';
 c18 = rept019.r19_usuario, REVERSE, UPSHIFT, NOENTRY;
+
+c19  = rept019.r19_codcli, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c20  = rept019.r19_nomcli, NOENTRY, UPSHIFT;
 
 INSTRUCTIONS
 SCREEN RECORD r_detalle[7](r20_cant_ped, r20_stock_ant, r20_item,

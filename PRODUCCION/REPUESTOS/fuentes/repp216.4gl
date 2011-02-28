@@ -29,13 +29,15 @@ DEFINE rm_r11		 	RECORD LIKE rept011.*	-- EXIST. ITEMS
 DEFINE rm_r19			RECORD LIKE rept019.*	-- CABECERA
 DEFINE rm_r20		 	RECORD LIKE rept020.*	-- DETALLE
 DEFINE rm_g22		 	RECORD LIKE gent022.*	-- SUBTIPO TRANSACCIONES
+DEFINE rm_c01			RECORD LIKE cxct001.*   -- CLIENTE GENERAL
+DEFINE rm_c02			RECORD LIKE cxct002.*   -- CLIENTE LOCALIDAD
 
 DEFINE r_detalle ARRAY[200] OF RECORD
-	r20_cant_ped		LIKE rept020.r20_cant_ped,
+	r20_cant_ped		LIKE rept020.r20_cant_ped, -- DETALLE TRANSACCIONES DBODEGA
 	r20_stock_ant		LIKE rept020.r20_stock_ant,
 	r20_item		LIKE rept020.r20_item,
 	r20_costo		LIKE rept020.r20_costo,
-	subtotal_item		LIKE rept019.r19_tot_costo
+	subtotal_item		LIKE rept019.r19_tot_costo -- CABECERA TRANS..
 	END RECORD
 	-----------------------------------------------------
 DEFINE vm_ind_arr	SMALLINT
@@ -72,14 +74,14 @@ CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	-- Asigna un valor por default a vg_codloc
 				-- que luego puede ser reemplazado si se 
                                 -- mantiene sin comentario la siguiente linea
+
+
 CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
 CALL validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
 END MAIN
-
-
 
 FUNCTION funcion_master()
 
@@ -138,6 +140,7 @@ MENU 'OPCIONES'
 		   END IF
 		END IF
 	COMMAND KEY('C') 'Consultar' 		'Consultar un registro.'
+	
 		HIDE OPTION 'Imprimir'
 		CALL control_consulta()
 		IF vm_num_rows < 1 THEN
@@ -254,12 +257,16 @@ CALL control_display_botones()
 INITIALIZE rm_r19.* TO NULL
 INITIALIZE rm_r20.* TO NULL
 
+INITIALIZE rm_c01.*, rm_c02.* TO NULL
+
+
 -- INITIAL VALUES FOR rm_r19 FIELDS
 LET rm_r19.r19_fecing     = CURRENT
 LET rm_r19.r19_usuario    = vg_usuario
 LET rm_r19.r19_compania   = vg_codcia
 LET rm_r19.r19_localidad  = vg_codloc
 LET rm_r19.r19_cod_tran   = vm_cod_tran
+
 
 DISPLAY BY NAME rm_r19.r19_usuario, rm_r19.r19_fecing, rm_r19.r19_cod_tran
 
@@ -350,6 +357,7 @@ LET rm_r19.r19_tot_bruto  = 0.0
 LET rm_r19.r19_tot_dscto  = 0.0
 LET rm_r19.r19_flete      = 0.0
 LET rm_r19.r19_tot_neto   = rm_r19.r19_tot_costo
+  
 
 CALL fl_lee_cod_transaccion(rm_r19.r19_cod_tran) RETURNING r_g21.*
 LET rm_r19.r19_tipo_tran  = r_g21.g21_tipo
@@ -502,17 +510,21 @@ END FUNCTION
 
 
 FUNCTION lee_datos(flag)
-
 DEFINE flag 		CHAR(1)
 DEFINE resp 		CHAR(6)
 
+DEFINE cliente LIKE cxct001.z01_codcli
+DEFINE r_z01   RECORD LIKE cxct001.*
+
 LET INT_FLAG = 0
-INPUT BY NAME rm_r19.r19_vendedor,    rm_r19.r19_bodega_ori,
+INPUT BY NAME rm_r19.r19_codcli,
+              rm_r19.r19_vendedor,  rm_r19.r19_bodega_ori,
 	      rm_r19.r19_bodega_dest, rm_r19.r19_referencia,
 	      rm_r19.r19_cod_subtipo
 	      WITHOUT DEFAULTS
 	ON KEY (INTERRUPT)
-		IF NOT FIELD_TOUCHED(r19_vendedor, r19_bodega_ori,
+		IF NOT FIELD_TOUCHED(r19_codcli,
+				     r19_vendedor, r19_bodega_ori,
 				     r19_referencia, r19_bodega_dest)
 		THEN
 			RETURN
@@ -534,6 +546,18 @@ INPUT BY NAME rm_r19.r19_vendedor,    rm_r19.r19_bodega_ori,
 			    DISPLAY rm_r01.r01_nombres TO nom_vendedor
 			END IF
 		END IF
+
+		IF INFIELD(r19_codcli) THEN    
+	           CALL fl_ayuda_cliente_localidad(vg_codcia,vg_codloc)
+        	   RETURNING  rm_c02.z02_codcli, rm_c01.z01_nomcli
+
+	           IF  rm_c02.z02_codcli IS NOT NULL THEN
+        	       LET rm_r19.r19_codcli =   rm_c02.z02_codcli   
+	               LET rm_r19.r19_nomcli =   rm_c01.z01_nomcli
+        	       DISPLAY BY NAME rm_r19.r19_codcli, rm_r19.r19_nomcli			
+		    END IF
+		END IF
+
 		IF INFIELD(r19_bodega_ori) THEN
 		     	CALL fl_ayuda_bodegas_rep(vg_codcia, vg_codloc, 'T')
 		     		RETURNING rm_r02.r02_codigo, rm_r02.r02_nombre
@@ -543,6 +567,7 @@ INPUT BY NAME rm_r19.r19_vendedor,    rm_r19.r19_bodega_ori,
 			    	DISPLAY rm_r02.r02_nombre TO nom_bod_ori
 		     END IF
 		END IF
+
 		IF INFIELD(r19_bodega_dest) THEN
 		     	CALL fl_ayuda_bodegas_rep(vg_codcia, NULL, 'T')
 		     		RETURNING rm_r02.r02_codigo, rm_r02.r02_nombre
@@ -583,9 +608,36 @@ INPUT BY NAME rm_r19.r19_vendedor,    rm_r19.r19_bodega_ori,
 					NEXT FIELD r19_vendedor
 			END IF
 			DISPLAY rm_r01.r01_nombres TO nom_vendedor
+
 		ELSE
 			CLEAR nom_vendedor
-		END IF		 
+		END IF
+
+	AFTER FIELD r19_codcli
+		IF rm_r19.r19_codcli IS NOT NULL THEN
+		     CALL fl_lee_cliente_general(rm_r19.r19_codcli) 
+		     RETURNING rm_c01.*
+	
+			IF rm_c01.z01_codcli IS NULL THEN	 	
+				CALL fgl_winmessage(vg_producto,'No existe el Cliente en la Compañía. ','exclamation') 
+		  		CLEAR r19_nomcli
+				NEXT FIELD r19_codcli
+			END IF
+		
+			IF rm_c01.z01_estado <>'A' THEN
+				CALL fgl_winmessage(vg_producto,
+						    'Cliente está bloqueado',
+						    'exclamation')
+				NEXT FIELD r19_codcli
+			END IF    
+ 
+			 DISPLAY rm_c01.z01_nomcli TO r19_nomcli
+
+                      ELSE
+                        CLEAR r19_nomcli
+
+		   END IF
+
 	AFTER FIELD r19_bodega_ori
 		IF rm_r19.r19_bodega_ori IS NOT NULL THEN
 			CALL fl_lee_bodega_rep(vg_codcia, rm_r19.r19_bodega_ori)
@@ -886,6 +938,10 @@ FUNCTION control_consulta()
 DEFINE expr_sql			VARCHAR(500)
 DEFINE query			VARCHAR(500)
 DEFINE r_r19		RECORD LIKE rept019.*
+DEFINE r_z01            RECORD LIKE cxct001.* 
+DEFINE r_z02            RECORD LIKE cxct002.*
+
+
 
 CLEAR FORM
 CALL control_display_botones()
@@ -895,8 +951,8 @@ DISPLAY BY NAME rm_r19.r19_cod_tran
 IF num_args() = 4 THEN
 	LET INT_FLAG = 0
 	CONSTRUCT BY NAME expr_sql 
-			  ON r19_num_tran,    r19_vendedor, r19_bodega_ori, 
-			     r19_bodega_dest, r19_referencia, r19_cod_subtipo,
+			  ON r19_num_tran,   r19_codcli, r19_nomcli,
+				 r19_vendedor, r19_bodega_ori, r19_bodega_dest, r19_referencia, r19_cod_subtipo,
 			     r19_fecing,      r19_usuario
 	ON KEY(F2)
 		IF INFIELD(r19_num_tran) THEN
@@ -905,12 +961,29 @@ IF num_args() = 4 THEN
 				RETURNING r_r19.r19_cod_tran, 
 					  r_r19.r19_num_tran,
 					  r_r19.r19_nomcli 
-
+		
 		      	IF r_r19.r19_num_tran IS NOT NULL THEN
 				LET rm_r19.r19_num_tran = r_r19.r19_num_tran
-				DISPLAY BY NAME rm_r19.r19_num_tran	
-			END IF
+				LET rm_r19.r19_nomcli = r_r19.r19_nomcli
+
+				DISPLAY BY NAME rm_r19.r19_num_tran,rm_r19.r19_nomcli				END IF
 		END IF
+	
+
+  		IF INFIELD(r19_codcli) THEN
+                       CALL fl_ayuda_cliente_localidad(vg_codcia,vg_codloc)
+                                RETURNING rm_c02.z02_codcli, rm_c01.z01_nomcli
+                        IF r_z02.z02_codcli IS NOT NULL THEN
+
+                                LET rm_r19.r19_codcli = rm_c02.z02_codcli
+                                LET rm_r19.r19_nomcli = rm_c01.z01_nomcli
+                                DISPLAY BY NAME rm_r19.r19_codcli,
+                                                rm_r19.r19_nomcli
+				DISPLAY rm_c01.z01_nomcli TO r19_nomcli	
+                        END IF
+               END IF
+
+
 		IF INFIELD(r19_vendedor) THEN
 			CALL fl_ayuda_vendedores(vg_codcia)
 			RETURNING rm_r01.r01_codigo, rm_r01.r01_nombres
@@ -939,12 +1012,14 @@ IF num_args() = 4 THEN
 		    	END IF
 		END IF
 		LET int_flag = 0
+
 	END CONSTRUCT
 ELSE
 
 	LET expr_sql = ' r19_num_tran = ', vg_num_tran
 
 END IF
+
 
 IF INT_FLAG THEN
 	CLEAR FORM
@@ -1003,7 +1078,8 @@ IF STATUS = NOTFOUND THEN
 	ERROR 'No existe registro con rowid', row
 END IF
 	---PARA MOSTRAR LA CABECERA-----
-DISPLAY BY NAME rm_r19.r19_num_tran,    rm_r19.r19_cod_tran, 
+DISPLAY BY NAME rm_r19.r19_num_tran,    rm_r19.r19_cod_tran,
+		rm_r19.r19_codcli,      rm_r19.r19_nomcli,    
 		rm_r19.r19_cod_subtipo,	rm_r19.r19_vendedor, 
 		rm_r19.r19_bodega_ori,  rm_r19.r19_bodega_dest,
 		rm_r19.r19_tot_costo, 	rm_r19.r19_referencia, 
@@ -1153,9 +1229,12 @@ DEFINE r_r02		RECORD LIKE rept002.*
 	IF r_r02.r02_localidad = vg_codloc THEN
 		RETURN
 	END IF 
+	
 	LET r_r19.r19_nomcli   = 'ORIGEN: TR-', r_r19.r19_num_tran 
 					       USING '<<<<<<<'
 	LET r_r19.r19_dircli   = r_r19.r19_nomcli
+
+
 	INSERT INTO rept091 VALUES (r_r19.*)
 	DECLARE qu_dtr CURSOR FOR 
 		SELECT * FROM rept020
