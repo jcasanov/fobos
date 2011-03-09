@@ -840,6 +840,9 @@ FOR i = 1 TO preventas
 		CALL fl_lee_stock_disponible_rep(vg_codcia, vg_codloc, 
 										 r_detprev.item, 'R') 
 			RETURNING stock 
+		IF stock < 0 THEN
+			LET stock = 0
+		END IF
 		IF stock < rm_r24.r24_cant_ped THEN
 --			LET rm_r24.r24_cant_ven = stock
 			LET mensaje = 'El Item ', rm_r24.r24_item CLIPPED, '  ',
