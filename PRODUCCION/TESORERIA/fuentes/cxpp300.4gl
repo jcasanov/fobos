@@ -485,10 +485,11 @@ WHILE TRUE
 	IF int_flag = 1 THEN
 		EXIT WHILE
 	END IF
-	IF i <> vm_columna_1 THEN
+	IF int_flag = 2 THEN
 		LET vm_columna_2           = vm_columna_1 
 		LET rm_orden[vm_columna_2] = rm_orden[vm_columna_1]
 		LET vm_columna_1 = i 
+		LET int_flag = 0
 	END IF
 	IF rm_orden[vm_columna_1] = 'ASC' THEN
 		LET rm_orden[vm_columna_1] = 'DESC'
