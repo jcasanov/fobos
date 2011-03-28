@@ -130,7 +130,7 @@ LET vm_cod_anu      = 'AF'
 LET vm_cod_tran     = 'FA'
 LET vm_cod_tran_2   = vm_cod_dev
 LET vm_max_rows     = 1000
-LET vm_elementos    = 250
+LET vm_elementos    = 200
 OPTIONS
 	INPUT WRAP,
 	ACCEPT KEY F12
