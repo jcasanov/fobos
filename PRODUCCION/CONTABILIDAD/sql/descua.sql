@@ -14,6 +14,8 @@ select b12_tipo_comp, b12_num_comp,
 	b12_origen
 from ctbt012
 where b12_compania = 1
+  and b12_estado = 'M'
+  and year(b12_proceso) >= 2010
 into temp tt_asientos;
 
 delete from tt_asientos where debito = credito;
