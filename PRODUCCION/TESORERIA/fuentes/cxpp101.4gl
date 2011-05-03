@@ -84,6 +84,10 @@ LET vm_flag_ret    = 1
 CALL muestra_contadores(vm_row_current, vm_num_rows)
 MENU 'OPCIONES'
 	BEFORE MENU
+		HIDE OPTION 'Ingresar'
+		IF fl_control_permiso_opcion('Ingresar') THEN			
+			SHOW OPTION 'Ingresar'
+		END IF
 		HIDE OPTION 'Avanzar'
 		HIDE OPTION 'Retroceder'
 		HIDE OPTION 'Modificar'
@@ -103,13 +107,10 @@ MENU 'OPCIONES'
 	COMMAND KEY('I') 'Ingresar' 'Ingresar nuevos registros. '
 		CALL control_ingreso()
 		IF vm_num_rows = 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
-			SHOW OPTION 'Modificar'
-		   END IF
-			
-		   IF fl_control_permiso_opcion('Grabar') THEN			
+			IF fl_control_permiso_opcion('Modificar') THEN			
+				SHOW OPTION 'Modificar'
+			END IF
 			SHOW OPTION 'Grabar'
-		   END IF
 
   		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
@@ -130,12 +131,9 @@ MENU 'OPCIONES'
 
 		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF
-			
-		   IF fl_control_permiso_opcion('Grabar') THEN			
 			SHOW OPTION 'Grabar'
 		   END IF
-
+			
   		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
 		   END IF
@@ -153,12 +151,9 @@ MENU 'OPCIONES'
 
 		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF
-			
-		   IF fl_control_permiso_opcion('Grabar') THEN			
 			SHOW OPTION 'Grabar'
 		   END IF
-
+			
   		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
 		   END IF
