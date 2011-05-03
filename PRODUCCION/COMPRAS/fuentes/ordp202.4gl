@@ -289,9 +289,7 @@ MENU 'OPCIONES'
 			SHOW OPTION 'Forma de Pago'
 		END IF
 		IF rm_c13.c13_numero_oc IS NOT NULL THEN
-		   IF fl_control_permiso_opcion('Grabar') THEN			
 		  	  SHOW OPTION 'Grabar'
-		   END IF 			
 
 			SHOW OPTION 'Ver Orden'
 		ELSE
