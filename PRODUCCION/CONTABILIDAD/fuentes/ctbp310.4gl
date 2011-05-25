@@ -190,7 +190,7 @@ INPUT BY NAME vm_fecha_ini, vm_fecha_fin
                 END IF
         AFTER INPUT
                 IF vm_fecha_fin < vm_fecha_ini THEN
-                        CALL fgl_winmessage(vg_producto,'La fecha final debe ser mayor a la fecha de inicial.','exclamation')
+                        CALL fgl_winmessage(vg_producto,'La fecha final debe ser mayor a la fecha inicial.','exclamation')
                         NEXT FIELD vm_fecha_fin
                 END IF
 END INPUT
@@ -224,8 +224,8 @@ END FUNCTION
 FUNCTION muestra_contadores_det(cor)
 DEFINE cor                 SMALLINT
 
-DISPLAY "" AT 4, 66
-DISPLAY cor, " de ", vm_num_det AT 4, 70
+DISPLAY "" AT 3, 66
+DISPLAY cor, " de ", vm_num_det AT 3, 70
 
 END FUNCTION
 
