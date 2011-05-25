@@ -1,13 +1,19 @@
 DATABASE migracion
 
+
+
 MAIN
 
 CALL startlog('errores')
 
-DELETE FROM komatsu_precios
 DELETE FROM te_new_precios
 
-LOAD FROM "/FOBOS/lista.txt" INSERT INTO komatsu_precios(linea)
+CREATE TEMP TABLE precios_komatsu(
+	id		SERIAL,
+	linea	VARCHAR(200)
+)
+
+LOAD FROM "/home/fobos/shared/precios.txt" INSERT INTO precios_komatsu(linea)
 
 BEGIN WORK
 CALL depuracion_datos()
@@ -28,7 +34,7 @@ DEFINE num_item_repetido INTEGER
 LET cod_item = ''
 LET num_item_repetido=0
 
-DECLARE q_doc CURSOR FOR SELECT linea[1,14] codigo, trim(linea[48,61]) item, linea[38,47] precio, id FROM komatsu_precios order by id
+DECLARE q_doc CURSOR FOR SELECT linea[1,14] codigo, trim(linea[48,62]) item, linea[38,46] precio, id FROM precios_komatsu order by id
 FOREACH q_doc INTO r_z20.*
         
 	IF cod_item = r_z20.te_item THEN

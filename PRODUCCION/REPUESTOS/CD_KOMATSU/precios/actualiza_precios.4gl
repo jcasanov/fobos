@@ -1,5 +1,6 @@
 DATABASE diteca
 
+
 MAIN
 DEFINE r		RECORD LIKE migracion:te_new_precios.*
 DEFINE i		INTEGER
@@ -14,6 +15,8 @@ DEFINE modelo		VARCHAR(10)
 DEFINE filtro		CHAR(10)
 DEFINE act_pesos	CHAR(2)
 DEFINE kk, qq		INTEGER
+
+CALL STARTLOG('errores')
 
 IF num_args() <> 2 THEN
 	display 'Ingrese linea y si actualiza pesos.'
