@@ -17,6 +17,7 @@ DEFINE vm_scr_lin       SMALLINT
 DEFINE rm_det           ARRAY [100] OF RECORD
                                 b12_tipo_comp   LIKE ctbt012.b12_tipo_comp,
                                 b12_num_comp	LIKE ctbt012.b12_num_comp,
+								b12_glosa		LIKE ctbt012.b12_glosa,
                                 b13_valor_base  DECIMAL(14,2),
                                 b13_valor_aux   DECIMAL(14,2),
                                 b12_origen      LIKE ctbt012.b12_origen
@@ -90,7 +91,7 @@ WHILE TRUE
 
 	BEGIN WORK;
 
-	SELECT  b12_tipo_comp, b12_num_comp,
+	SELECT  b12_tipo_comp, b12_num_comp, b12_glosa,
         	(SELECT round(sum(b13_valor_base),2)  FROM ctbt013
 			  WHERE b13_compania  = b12_compania
 				AND b13_tipo_comp = b12_tipo_comp
