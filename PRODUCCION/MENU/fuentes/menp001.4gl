@@ -2089,14 +2089,15 @@ OPEN WINDOW w_menu_consultas AT 3,2 WITH 22 ROWS, 80 COLUMNS
 OPEN FORM f_menf133 FROM '../forms/menf133'
 DISPLAY FORM f_menf133
 --DISPLAY fondo		  	TO c000   ## Picture
-DISPLAY "boton_consultas"	TO a      ## Picture 
-DISPLAY "Plan de Cuentas" 	TO c100   ## Botón 1  ctbp301
-DISPLAY "Movimientos Cuentas"   TO c200   ## Botón 2  ctbp302
-DISPLAY "Balance General"       TO c300   ## Botón 3  ctbp305
-DISPLAY "Perdidas y Ganancias"  TO c400   ## Botón 4  ctbp306
-DISPLAY "Consulta Genérica" 	TO c500   ## Botón 5  ctbp308
-DISPLAY "Anl. Gràfico Cuentas" 	TO c600   ## Botón 6  ctbp307
-DISPLAY "Saldos de Bancos" 	TO c700   ## Botón 7  ctbp309
+DISPLAY "boton_consultas"			TO a      ## Picture 
+DISPLAY "Plan de Cuentas" 			TO c100   ## Botón 1  ctbp301
+DISPLAY "Movimientos Cuentas"   	TO c200   ## Botón 2  ctbp302
+DISPLAY "Balance General"       	TO c300   ## Botón 3  ctbp305
+DISPLAY "Perdidas y Ganancias"  	TO c400   ## Botón 4  ctbp306
+DISPLAY "Consulta Genérica" 		TO c500   ## Botón 5  ctbp308
+DISPLAY "Anl. Gràfico Cuentas" 		TO c600   ## Botón 6  ctbp307
+DISPLAY "Saldos de Bancos" 			TO c700   ## Botón 7  ctbp309
+DISPLAY "Comprobantes Descuadrados" TO c800   ## Botón 8  ctbp310
 
 LET g = fgl_getkey()
 
@@ -2122,6 +2123,11 @@ CASE g
 	WHEN 7
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'CONTABILIDAD', vg_separador, 'fuentes', vg_separador, '; fglrun ctbp309 ', vg_base, ' ', 'CB', vg_codcia
 		RUN ejecuta
+
+	WHEN 8
+                LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'CONTABILIDAD', vg_separador, 'fuentes', vg_separador, '; fglrun ctbp310 ', vg_base, ' ', 'CB', vg_codcia
+                RUN ejecuta
+
 	WHEN 0
 		CLOSE WINDOW w_menu_consultas
 		CALL menu_contabilidad()
