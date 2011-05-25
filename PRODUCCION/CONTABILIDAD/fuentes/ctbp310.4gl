@@ -233,11 +233,12 @@ END FUNCTION
 
 FUNCTION mostrar_cabecera_forma()
 
-DISPLAY 'Tipo-Comprob ' TO tit_col1
-DISPLAY 'Num_Comp'	TO tit_col2
-DISPLAY 'Débitos'       TO tit_col3
-DISPLAY 'Créditos'      TO tit_col4
-DISPLAY 'Origen' 	TO tit_col5
+DISPLAY 'TC' 		TO tit_col1
+DISPLAY 'No.'		TO tit_col2
+DISPLAY 'Glosa'		TO tit_col3
+DISPLAY 'Debitos'   TO tit_col4
+DISPLAY 'Creditos'  TO tit_col5
+DISPLAY 'O'	 		TO tit_col6
 
 END FUNCTION
 
