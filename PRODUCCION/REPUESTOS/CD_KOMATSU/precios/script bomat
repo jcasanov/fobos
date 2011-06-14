@@ -1,0 +1,16 @@
+delete from te_new_precios;
+
+CREATE TEMP TABLE precios_bomat(
+        item           VARCHAR(200)
+);
+
+LOAD FROM "/FOBOS/PRODUCCION/REPUESTOS/CD_KOMATSU/precios/precios.txt"
+INSERT INTO precios_bomat ;
+
+-- se hizo esta linea de codigo aqui; a causa de q dentro del codigo del
+--programa de 4gl, el comando CAST(para este caso, convierte d caracter a float%--al parecer no era compatible, aun cuando al escribirlo, el editor lo marcaba %--el color q representa a los comandos
+
+insert into te_new_precios(te_item, te_nombre,te_fob)
+select trim(item[1,12]) codigo, TRIM(item[14,54]) item,
+(CAST(trim(item[55,72]) as float) * 1.4596)  precio from precios_bomat;
+
