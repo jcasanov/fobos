@@ -15,6 +15,7 @@ END IF
 
 LET linea = arg_val(1)
 
+DISPLAY 'Borrando la última lista de precios procesada...'
 DELETE FROM te_new_precios
 
 CREATE TEMP TABLE tbl_lista_precios(
@@ -22,8 +23,11 @@ CREATE TEMP TABLE tbl_lista_precios(
 	linea	VARCHAR(200)
 )
 
+DISPLAY 'Cargando una nueva lista de precios...'
 LOAD FROM "/home/fobos/shared/precios.txt" INSERT INTO tbl_lista_precios(linea)
 
+DISPLAY 'Se depurará la lista tomando en cuenta el proveedor.' 
+DISPLAY 'Esto puede tomar algunos minutos, por favor espere...'
 BEGIN WORK
 	CASE linea
 		WHEN 'KOMAT' 
@@ -34,6 +38,7 @@ BEGIN WORK
 			DISPLAY 'LINEA DESCONOCIDA: ', linea 
 	END CASE
 COMMIT WORK
+DISPLAY 'Proceso terminado, ahora puede actualizar la lista de precios con "actualiza_precios"'
 
 END MAIN
 
