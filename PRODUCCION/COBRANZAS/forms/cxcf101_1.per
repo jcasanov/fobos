@@ -4,7 +4,8 @@ SCREEN TITLE '  Datos Cliente  '
                                                               [x001] de [y001]
 
           Código Cliente: [c000       ]                 Estado: [c][c0a0     ]
-          Nombre Cliente: [c001                                    ]
+          Nombre Cliente: [c001                                              ]
+                          [c001                                              ]
 
               Personería               Documento Identidad: [c012           ]
              [c0b0         ]                                [c0c0           ]
@@ -13,7 +14,6 @@ SCREEN TITLE '  Datos Cliente  '
 
      Dirección Domicilio: [c002                                    ]
       Teléfono Domicilio: [c004      ]
-
 
                  Usuario: [c014      ]
         Fecha de Ingreso: [c015               ]
@@ -65,7 +65,7 @@ ATTRIBUTES
 c000 = cxct001.z01_codcli, AUTONEXT, REVERSE,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
 	COMMENTS = 'El sistema asigna código automáticamente';
-c001 = cxct001.z01_nomcli, AUTONEXT, REVERSE, UPSHIFT,
+c001 = cxct001.z01_nomcli, AUTONEXT, REVERSE, UPSHIFT, WORDWRAP COMPRESS,
 	COMMENTS = 'Indicar el nombre y los apellidos del cliente';
 c002 = cxct001.z01_direccion1, AUTONEXT, REVERSE, UPSHIFT;
 c003 = cxct001.z01_direccion2, AUTONEXT, UPSHIFT;
