@@ -1710,7 +1710,7 @@ CASE cod_tran
 	WHEN 'NE'        
 		LET comando = 'cd ..', vg_separador, '..', vg_separador,
 			      'REPUESTOS', vg_separador, 'fuentes', 
-			      vg_separador, '; fglrun repp308 ', vg_base, ' ',
+			      vg_separador, '; fglrun repp422 ', vg_base, ' ',
 			      'RE', codcia, ' ', codloc,
 			      ' ', cod_tran, ' ', num_tran   
 	WHEN 'CL'          
