@@ -24,6 +24,12 @@ DEFINE rm_orden         ARRAY[10] OF CHAR(4)
 DEFINE vm_columna_1     SMALLINT
 DEFINE vm_columna_2     SMALLINT
 
+DEFINE glosa_cabecera	VARCHAR(200)	-- almacena todas los num_doc transaccionales relacionad
+					-- con una orden de pago, especificamente cuando se hace
+					-- un reverso. Una vez q se han almacenado; lo actualiza-
+					-- mos en el campo b12_glosa de la tabla ctb012, especi-
+					-- ficamente para la transacion actual que se ha reversad
+
 -- CADA VEZ QUE SE REALIZE UNA CONSULTA SE GUARDARAN LOS ROWID DE CADA FILA 
 -- RECUPERADA EN UNA TABLA LLAMADA r_rows QUE TENDRA 1000 ELEMENTOS
 DEFINE vm_rows ARRAY[1000] OF INTEGER  	-- ARREGLO DE ROWID DE FILAS LEIDAS
@@ -142,7 +148,7 @@ CREATE TEMP TABLE tmp_detalle(
 	secuencia		INTEGER,
 	cuenta			CHAR(12),
 	tipo_doc		CHAR(3),
-	glosa			VARCHAR(35),
+	glosa			VARCHAR(200),
 	valor_debito	DECIMAL(14,2),
 	valor_credito	DECIMAL(14,2),
 	num_concil		INTEGER,
@@ -151,6 +157,14 @@ CREATE TEMP TABLE tmp_detalle(
 	b13_pedido		CHAR(10)
 );
 CREATE UNIQUE INDEX tmp_pk   ON tmp_detalle(secuencia);
+
+
+CREATE TEMP TABLE tmp_secuencia_ctbt013(
+	secuencia		SMALLINT,
+	secuencia_original	SMALLINT
+);
+
+
 
 IF vm_tipo_comp IS NOT NULL THEN
 	CALL execute_query()
@@ -917,8 +931,8 @@ DISPLAY BY NAME rm_b12.b12_tipo_comp,
 	      	rm_b12.b12_glosa,    
               	rm_b12.b12_moneda,  
               	rm_b12.b12_paridad,
-			rm_b12.b12_benef_che,
-			rm_b12.b12_num_cheque,
+		rm_b12.b12_benef_che,
+		rm_b12.b12_num_cheque,
  	      	rm_b12.b12_fec_proceso, 
 		rm_b12.b12_origen,
 	      	rm_b12.b12_fec_modifi,
@@ -927,7 +941,6 @@ DISPLAY BY NAME rm_b12.b12_tipo_comp,
 CALL muestra_etiquetas()
 CALL muestra_contadores()
 CALL muestra_detalle()
-
 
 END FUNCTION
 
@@ -1418,7 +1431,7 @@ PREPARE statement4 FROM query
 EXECUTE statement4
 
 SELECT COUNT(*) INTO i FROM tmp_detalle
-	  
+ 
 RETURN i
 	
 END FUNCTION
@@ -1673,6 +1686,9 @@ WHILE NOT salir
 
 		BEFORE ROW
 			LET i = arr_curr()
+
+			DISPLAY rm_cuenta[i].glosa TO n_glosa
+
 			CALL fl_lee_cuenta(vg_codcia, rm_cuenta[i].cuenta)
 				RETURNING r_b10.*
 			DISPLAY r_b10.b10_descripcion TO n_cuenta
@@ -1765,10 +1781,12 @@ FUNCTION control_eliminacion()
 
 DEFINE resp		CHAR(6)
 DEFINE done		SMALLINT
-DEFINE query	VARCHAR(1000)
+DEFINE query		VARCHAR(1000)
+DEFINE r_b03		RECORD LIKE ctbt003.*
+DEFINE r_b12_reversa	RECORD LIKE ctbt012.*
+DEFINE r_p24            RECORD LIKE cxpt024.*
 
-DEFINE r_b03				RECORD LIKE ctbt003.*
-DEFINE r_b12_reversa		RECORD LIKE ctbt012.*
+INITIALIZE r_p24.* TO NULL
 
 IF vm_num_rows = 0 THEN   
 	CALL fl_mensaje_consultar_primero()
@@ -1846,8 +1864,9 @@ LET r_b12_reversa.b12_origen   = 'A'
 LET r_b12_reversa.b12_fec_proceso = TODAY
 LET r_b12_reversa.b12_usuario  = vg_usuario
 LET r_b12_reversa.b12_fecing   = CURRENT
-LET r_b12_reversa.b12_glosa = 'REVERSA COMPROBANTE ' || rm_b12.b12_tipo_comp ||
-							  rm_b12.b12_num_comp 
+
+LET r_b12_reversa.b12_glosa = 'REVERSA COMPROBANTE '	||rm_b12.b12_tipo_comp 
+							||rm_b12.b12_num_comp						
 LET r_b12_reversa.b12_fec_reversa = TODAY
 LET r_b12_reversa.b12_tip_reversa = rm_b12.b12_tipo_comp
 LET r_b12_reversa.b12_num_reversa = rm_b12.b12_num_comp
@@ -1877,9 +1896,31 @@ LET query = 'INSERT INTO ctbt013 (b13_compania, b13_tipo_comp, b13_num_comp, ',
 PREPARE statement5 FROM query
 EXECUTE statement5
 
+--La sgte. proceso solo se lo podra ejecutar para los tipos EG/ND 
+IF (rm_b12.b12_tipo_comp = 'EG') OR rm_b12.b12_tipo_comp = 'ND' THEN
+	-- busco la orden-pago relacionada con esta transaccion, indispensable para poder ejecu-
+	-- tar el proceso que le sigue
+	SELECT * INTO r_p24.* FROM cxpt024
+	WHERE
+		p24_compania     = rm_b12.b12_compania  AND
+        	p24_localidad    = vg_codloc            AND
+                p24_tip_contable = rm_b12.b12_tipo_comp AND
+	        p24_num_contable = rm_b12.b12_num_comp  AND
+        	p24_tipo         = 'P'
+
+	-- buscamos los diferentes registros transaccionales relacionada con la orden-pago,
+	-- encontrada en el  query anterior, a fin de adjuntarlos(en compañia de otros campos),
+	-- en la glosa "recien insertada"en la ctbt013 
+
+	CALL adjuntar_documentos_transaccionales_glosa(r_p24.p24_orden_pago,
+					r_b12_reversa.b12_tipo_comp,
+					r_b12_reversa.b12_num_comp ) 
+	
+END IF
+
 DECLARE q_del CURSOR FOR 
-	SELECT * FROM ctbt012 WHERE ROWID = vm_rows[vm_row_current]
-	FOR UPDATE
+SELECT * FROM ctbt012 WHERE ROWID = vm_rows[vm_row_current]
+FOR UPDATE
 OPEN  q_del
 FETCH q_del INTO rm_b12.*
 WHENEVER ERROR STOP
@@ -1891,9 +1932,11 @@ END IF
 LET rm_b12.b12_fec_reversa = TODAY
 LET rm_b12.b12_tip_reversa = r_b12_reversa.b12_tipo_comp
 LET rm_b12.b12_num_reversa = r_b12_reversa.b12_num_comp
+
 UPDATE ctbt012 SET b12_fec_reversa = TODAY,
-				   b12_tip_reversa = r_b12_reversa.b12_tipo_comp,
-				   b12_num_reversa = r_b12_reversa.b12_num_comp
+	b12_tip_reversa = r_b12_reversa.b12_tipo_comp,
+	b12_num_reversa = r_b12_reversa.b12_num_comp
+
 	 WHERE CURRENT OF q_del
 
 LET done = elimina_origen()
@@ -3038,3 +3081,138 @@ LET comando = 'cd ..', vg_separador, '..', vg_separador, 'TESORERIA',
 RUN comando
 
 END FUNCTION
+
+FUNCTION adjuntar_documentos_transaccionales_glosa(orden_pago, tipo_reversa, num_reversa)
+DEFINE r_p01            RECORD LIKE cxpt001.*
+DEFINE codprov		LIKE cxpt001.p01_codprov
+DEFINE cod_prov		LIKE cxpt001.p01_codprov
+DEFINE prov		LIKE cxpt001.p01_nomprov
+DEFINE orden_pago	LIKE cxpt025.p25_orden_pago
+DEFINE glosa_detalle   	VARCHAR(200)
+DEFINE tipo_reversa	LIKE ctbt013.b13_tipo_comp 
+DEFINE num_reversa	LIKE ctbt013.b13_num_comp 
+DEFINE num_doc		LIKE cxpt025.p25_num_doc
+DEFINE tipo_doc		LIKE cxpt025.p25_tipo_doc	
+DEFINE secuencia	LIKE ctbt013.b13_secuencia
+DEFINE secuencia_p13	LIKE ctbt013.b13_secuencia
+DEFINE secuencia_p25	LIKE ctbt013.b13_secuencia
+DEFINE done             SMALLINT
+DEFINE query            VARCHAR(600)
+
+LET done = 0
+LET secuencia= 0
+LET secuencia_p13= 0
+LET secuencia_p25= 0
+LET glosa_cabecera = ""
+LET glosa_detalle = ""
+LET tipo_doc = ""
+LET num_doc =0
+LET cod_prov = 0
+LET prov =""
+LET codprov = 0
+
+DELETE FROM tmp_secuencia_ctbt013
+
+--se creo esta temp(arriba), a fin de q almacene las secuencias de los "x" registros reversads
+--insertados(previo a esta funcion); en la tabla ctb013, a fin de ser utilizadas como uno de los
+--filtros principales para "actualizar" una nuevaglosa "personalizada", enla misma tabla(ctb013)
+--En vista q la secuencia q se registra en la tabla ctb013, no tiene un orden definido(puesto 
+--q el campo p13_secuencia, muchas veces  almacena secuencias NO A PARTIR DESDE EL #  1,sino q a
+--veces empieza con una secuencia YA CONTINUADA por ej. 65, 66, 67, 68..etc.), lo q complico
+--la actualizacion, pues para este caso el campo SECUENCIA, despues de otros 2 campos, son funda-
+--mentales para saber d q registro se esta hablando.. Por lo tanto me vi en la obligacion de 
+--crear en esta TEMP 2 campos, SECUENCIA(q contendra un secuencial segun el numero d 
+--inserciones q reciba, y SECUENCIA ORIGINAL, quien almacenara el NUMERO SECUENCIAL CON LA Q SE
+--GRABO EN LA TABLA ORIGINAL, afin de q cuando se quiera hacer la comparacion entre LA TEMP con
+--con la CXPT025(quien tiene los mismos reg.), se use el campo SECUENCIA, y cuando se haga la
+--ACTUALIZACION de la nueva glosa(ctbt013), se use el campo SECUENCIA_ORIGINAL,
+--Y ASI SE ACTUALIZARAN SIEMPRE EN LOS REGISTROS CORRECTOS..
+
+DECLARE q_docs_ CURSOR FOR
+	SELECT b13_secuencia,b13_codprov FROM ctbt013
+	WHERE
+		b13_compania 	= vg_codcia	AND
+		b13_tipo_comp 	= tipo_reversa	AND
+		b13_num_comp	= num_reversa 
+
+FOREACH q_docs_ INTO secuencia_p13, codprov
+
+	--se realiza la sgte. condicion a causa de q existen b13_codprov NULOS, y q provocaban
+	--q el rest--de los procesos al actualizar la informaciòn salgan nulos o blancos.. 
+	IF codprov IS NOT NULL  THEN  
+		LET cod_prov = codprov	
+	END IF
+
+	LET secuencia = secuencia  + 1
+	INSERT INTO tmp_secuencia_ctbt013 VALUES(secuencia,secuencia_p13)
+
+END FOREACH	
+
+LET secuencia =0
+LET secuencia_p13=0
+INITIALIZE r_p01.* TO NULL
+
+CALL fl_lee_proveedor(cod_prov) RETURNING r_p01.*
+        
+	LET prov = r_p01.p01_nomprov
+
+	IF prov IS NULL  THEN
+		LET prov = '--'
+	END IF
+
+	LET glosa_cabecera = 'REVERSO ' || rm_b12.b12_tipo_comp || ':' 
+					|| rm_b12.b12_num_comp  || ', '
+					|| prov || ', '
+
+DECLARE q_docs CURSOR FOR
+        SELECT p25_secuencia, p25_tipo_doc, p25_num_doc FROM cxpt025, cxpt020
+		WHERE 
+			p25_compania = vg_codcia	AND
+	                p25_localidad  = vg_codloc	AND
+        	        p25_orden_pago = orden_pago	AND
+                	p20_compania   = p25_compania	AND
+	                p20_localidad  = p25_localidad	AND
+        	        p20_codprov    = p25_codprov	AND
+	                p20_tipo_doc   = p25_tipo_doc	AND
+	                p20_num_doc    = p25_num_doc	AND
+        	        p20_dividendo  = p25_dividendo	
+			ORDER BY p25_secuencia asc
+
+	FOREACH q_docs INTO secuencia, tipo_doc, num_doc
+		
+		LET secuencia_p25 = secuencia_p25 + 1
+		
+		LET glosa_cabecera = glosa_cabecera || ' ' || tipo_doc || ':' ||
+					 num_doc CLIPPED ||' /'
+
+		LET glosa_detalle = 'REVERSO '	|| rm_b12.b12_tipo_comp ||': ' 
+					||rm_b12.b12_num_comp  		||', '
+					|| prov || ' ' || tipo_doc || ': '|| num_doc CLIPPED  
+
+		SELECT  secuencia_original INTO secuencia_p13 
+		FROM tmp_secuencia_ctbt013
+		WHERE tmp_secuencia_ctbt013.secuencia = secuencia_p25
+				
+		UPDATE ctbt013 SET b13_glosa = glosa_detalle
+		WHERE
+			b13_compania    = vg_codcia	AND
+		        b13_tipo_comp   = tipo_reversa	AND
+		        b13_num_comp	= num_reversa 	AND
+			b13_secuencia	= secuencia_p13		
+					
+			LET done = 1
+
+	END FOREACH
+
+	IF done = 1  THEN
+	
+		--actualizo la glosa de la cabecera de la transaccion REVERSADA
+		UPDATE ctbt012 SET b12_glosa = glosa_cabecera
+		WHERE	b12_compania    = vg_codcia     AND
+                	b12_tipo_comp   = tipo_reversa  AND
+                        b12_num_comp    = num_reversa  
+
+	END IF
+
+END FUNCTION
+
