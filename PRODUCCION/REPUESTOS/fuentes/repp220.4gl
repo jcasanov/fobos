@@ -591,6 +591,7 @@ DEFINE command_line	VARCHAR(100)
 
 DEFINE r_r10		RECORD LIKE rept010.*
 DEFINE r_r102		RECORD LIKE rept102.*
+DEFINE r_r120			RECORD LIKE rept120.*  --tabla historica de las preventas eliminadas
 DEFINE r_z02			RECORD LIKE cxct002.*
 DEFINE r_z30			RECORD LIKE cxct030.*
 DEFINE r_g20			RECORD LIKE gent020.*
@@ -633,6 +634,14 @@ BEGIN WORK
 	 * Elimina las preventas existentes para esta proforma, asi como sus 
 	 * registros de caja... damn it, esto deberia ser un trigger
 	 *} 
+	-- Inicializar valores del registro (rept120)
+	INITIALIZE r_r120.* TO NULL
+	LET r_r120.r120_compania  = vg_codcia
+	LET r_r120.r120_localidad = vg_codloc
+	LET r_r120.r120_motivo    = 'PREVENTAS REEMPLAZADAS AUTOMATICAMENTE AL GENERAR NUEVAS'
+	LET r_r120.r120_usuario   = vg_usuario
+	LET r_r120.r120_fecing    = CURRENT
+
 	DECLARE q_r102 CURSOR FOR
 		SELECT rept102.* FROM rept102, rept023
 		 WHERE r102_compania  = vg_codcia
@@ -656,6 +665,9 @@ BEGIN WORK
 		   AND r23_localidad = r_r102.r102_localidad
 		   AND r23_numprev   = r_r102.r102_numprev
 		   AND r23_estado    = 'P'
+
+		LET r_r120.r120_numprev = r_r102.r120_numprev
+		INSERT INTO rept120 VALUES(r_r120.*)
 	END FOREACH
 
 INITIALIZE rm_r23.* TO NULL
