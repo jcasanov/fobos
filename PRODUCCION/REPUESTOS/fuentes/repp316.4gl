@@ -21,12 +21,14 @@ DEFINE rm_desp ARRAY[1000] OF RECORD
         fecing	                  LIKE rept120.r120_fecing
 END RECORD
 
+
+
 MAIN
 
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/repp314.error')
+CALL startlog('../logs/repp316.error')
 CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN          -- Validar # parámetros correcto
@@ -50,6 +52,8 @@ CALL funcion_master()
 
 END MAIN
 
+
+
 FUNCTION funcion_master()
 DEFINE i                SMALLINT
 
@@ -69,10 +73,10 @@ FOR i = 1 TO fgl_scr_size('rm_desp')
         CLEAR rm_desp[i].*
 END FOR
 
-
 CALL muestra_consulta()
 
 END FUNCTION
+
 
 
 FUNCTION muestra_consulta()
@@ -157,6 +161,8 @@ END WHILE
 ERROR ' ' ATTRIBUTE(NORMAL)
 
 END FUNCTION
+
+
 
 FUNCTION validar_parametros()
 

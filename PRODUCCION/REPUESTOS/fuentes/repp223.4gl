@@ -31,11 +31,7 @@ DEFINE rm_par RECORD
 	END RECORD
 DEFINE vm_max_rows	SMALLINT
 
-DEFINE rm_r120           RECORD LIKE rept120.*  --tabla historica de las preventas eliminadas
-DEFINE numprof_		 LIKE rept021.r21_numprof
 
-DEFINE cancelar_transaccion	INTEGER -- lleva 1 cuando no se ingresa un "motivo"; para 
-					-- eliminar una preventa 
 
 MAIN
 	
@@ -523,118 +519,101 @@ END FUNCTION
 
 
 
-FUNCTION motivo_eliminacion_preventa()
-DEFINE usuario_          LIKE rept120.r120_usuario
-DEFINE fecing_           LIKE rept120.r120_fecing
-
-INITIALIZE rm_r120.* TO NULL
-
-LET rm_r120.r120_compania  = vg_codcia
-LET rm_r120.r120_localidad = vg_codloc
-LET rm_r120.r120_usuario   = vg_usuario
-LET rm_r120.r120_fecing    = CURRENT
-
-LET usuario_ = vg_usuario
-LET fecing_  = CURRENT
+FUNCTION ingresar_motivo(numprof)
+DEFINE numprof			LIKE rept021.r21_numprof
+DEFINE r120_motivo		LIKE rept120.r120_motivo
+DEFINE resp             CHAR(6)
 
 OPTIONS
         INPUT WRAP,
         ACCEPT KEY F12
 
+-- Normalmente no se reutilizan las formas, y si se hace se crean como una
+-- libreria pero eso parece excesivo para este caso asi que vamos a hacerlo
+-- por esta vez
 OPEN WINDOW w_220 AT 9,4 WITH FORM "../forms/repf220_5"
         ATTRIBUTE(BORDER) 
 
-	DISPLAY BY NAME numprof_ , usuario_ , fecing_
+DISPLAY numprof, vg_usuario, CURRENT 
+	 TO numprof, usuario, fecing
 
-	CALL ingresar_motivo()
-
-CLOSE WINDOW w_220
-
-RETURN
-
-END FUNCTION
-
-
-FUNCTION ingresar_motivo()
-DEFINE resp             CHAR(6)
-
-INPUT BY NAME rm_r120.r120_motivo 
-
-	WITHOUT DEFAULTS
-
+INPUT BY NAME r120_motivo WITHOUT DEFAULTS
 	ON KEY (INTERRUPT)
-                LET INT_FLAG = 0
-                CALL fl_mensaje_abandonar_proceso()
-                        RETURNING resp
-                IF resp = 'Yes' THEN
-                        LET int_flag = 1
-			LET cancelar_transaccion = 1			
-                        RETURN
-                END IF
-
-        AFTER FIELD r120_motivo
-
-		IF (rm_r120.r120_motivo IS NULL) OR rm_r120.r120_motivo ='' THEN
-                	CALL fgl_winmessage(vg_producto, 'Ingrese el motivo por el cual 
-			se anulara(n) la(s) preventa(s) de la proforma actual', 'exclamation') 
-
-                        DISPLAY BY NAME rm_r120.r120_motivo
-                        NEXT FIELD r120_motivo
-                  ELSE
+		LET INT_FLAG = 0
+		CALL fl_mensaje_abandonar_proceso() RETURNING resp
+		IF resp = 'Yes' THEN
+			LET INT_FLAG = 1
+			EXIT INPUT
+		END IF
+	AFTER FIELD r120_motivo
+		IF r120_motivo IS NULL THEN
+			CALL fgl_winmessage(vg_producto, 
+								'Ingrese el motivo por el cual se anulara(n) la(s) preventa(s) de la proforma actual', 
+								'exclamation') 
+			DISPLAY BY NAME r120_motivo
+			NEXT FIELD r120_motivo
+		ELSE
 			CALL fgl_winquestion(vg_producto,
                                 '¿Esta seguro que desea realizar esta transacion?',
                                 'No', 'Yes|No', 'question', 1)
       		        RETURNING resp
 	
 			IF resp = 'No' THEN
-				DISPLAY BY NAME rm_r120.r120_motivo
+				DISPLAY BY NAME r120_motivo
 				NEXT FIELD r120_motivo
 			  ELSE
 				EXIT INPUT
 			END IF
-
 		END IF
-	
 END INPUT
+IF INT_FLAG THEN
+	LET INT_FLAG = 0
+	INITIALIZE r120_motivo TO NULL
+END IF
+
+CLOSE WINDOW w_220
+
+RETURN r120_motivo
 
 END FUNCTION
 
 
+
 FUNCTION anular_preventas(numprof)
-DEFINE numprof	LIKE rept021.r21_numprof
+DEFINE numprof			LIKE rept021.r21_numprof
 DEFINE numprev          LIKE rept023.r23_numprev
 DEFINE r_r23            RECORD LIKE rept023.*
-DEFINE resp 		CHAR(6)
+DEFINE r_r120			RECORD LIKE rept120.*  --tabla historica de las preventas eliminadas
+DEFINE resp 			CHAR(6)
 
-LET cancelar_transaccion = 0
-LET numprof_ = 0
+-- Inicializar valores del registro (rept120)
+INITIALIZE r_r120.* TO NULL
+LET r_r120.r120_compania  = vg_codcia
+LET r_r120.r120_localidad = vg_codloc
+LET r_r120.r120_usuario   = vg_usuario
+LET r_r120.r120_fecing    = CURRENT
 
 IF NOT fl_control_permiso_opcion('Eliminar') THEN
 	CALL fgl_winmessage(vg_producto,'USUARIO NO TIENE PERMISO PARA ESTA OPCION'
-				|| '. PEDIR AYUDA AL ADMINISTRADOR ',
-				'stop')
+									|| '. PEDIR AYUDA AL ADMINISTRADOR ',
+						'stop')
 	RETURN
 END IF
 
 CALL fgl_winquestion(vg_producto,
-				'¿Desea anular las preventas generadas para esta proforma?', 
-				'No', 'Yes|No', 'question', 1)
+					'¿Desea anular las preventas generadas para esta proforma?', 
+					'No', 'Yes|No', 'question', 1)
 		RETURNING resp
 IF resp = 'No' THEN
 	RETURN
-  ELSE
-	LET numprof_ = numprof
-	CALL motivo_eliminacion_preventa()   
-	
-	IF cancelar_transaccion = 1 THEN
-		
-		CALL fgl_winmessage(vg_producto, 'Transaccion anulada', 'stop')
-		
-		RETURN
-	END IF	
-		
 END IF
 
+CALL ingresar_motivo(numprof) RETURNING r_r120.r120_motivo
+	
+IF r_r120.r120_motivo IS NULL THEN
+	CALL fgl_winmessage(vg_producto, 'Para anular preventas debe ingresar un motivo', 'stop')
+	RETURN
+END IF	
 
 DECLARE q_prevs CURSOR FOR 
 	SELECT r102_numprev FROM rept102
@@ -677,8 +656,8 @@ FOREACH q_prevs INTO numprev
 	   AND r23_numprev   = numprev
 
 	--grabamos un historico de las preventas eliminadas
- 	LET rm_r120.r120_numprev = numprev
-	INSERT INTO rept120 VALUES (rm_r120.*)
+ 	LET r_r120.r120_numprev = numprev
+	INSERT INTO rept120 VALUES (r_r120.*)
 
 END FOREACH
 FREE q_prevs
