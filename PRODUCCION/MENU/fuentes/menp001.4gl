@@ -606,7 +606,7 @@ OPEN FORM f_menf110 FROM '../forms/menf110'
 DISPLAY FORM f_menf110
 --DISPLAY fondo		  TO c000   ## Picture
 --DISPLAY "boton_repuestos" TO a      ## Picture 
-DISPLAY "boton_invetarios" TO a      ## Picture 
+DISPLAY "boton_inventarios" TO a      ## Picture 
 DISPLAY "Configuraciones" TO c100   ## Botón
 DISPLAY "Transacciones"   TO c200   ## Botón
 DISPLAY "Pedidos"         TO c300   ## Botón
@@ -908,10 +908,11 @@ DISPLAY "Estadística Bodega"  	TO c800   ## Botón 8 repp305
 DISPLAY "Análisis Ventas Item"  TO c900   ## Botón 9 repp310
 DISPLAY "Det. Transacciónes"    TO c1000  ## Botón 10 repp309
 DISPLAY "Stock sin Ventas"      TO c1100  ## Botón 11 repp311
-DISPLAY "Rotación items"		TO c1200  ## Botón 12 repp315
+DISPLAY "Rotación items"	TO c1200  ## Botón 12 repp315
 DISPLAY "Items x Despachar"     TO c1300  ## Botón 13 repp313
 DISPLAY "Proformas x Facturar"  TO c1400  ## Botón 14 repp314
 DISPLAY "Cons. Ventas Clientes" TO c1500  ## Botón 15 repp312
+DISPLAY "Preventas Anuladas" 	TO c1600  ## Botón 16 repp316
 
 LET g = fgl_getkey()
 CASE g
@@ -960,6 +961,9 @@ CASE g
 	WHEN 15
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp312 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
 		RUN ejecuta
+	WHEN 16
+                LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp316 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
+                RUN ejecuta
 	WHEN 0
 		CLOSE WINDOW w_menu_consultas
 		CALL menu_repuestos()

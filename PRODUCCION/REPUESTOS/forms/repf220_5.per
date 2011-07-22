@@ -1,0 +1,26 @@
+DATABASE diteca
+screen
+{
+    			ELIMINACION DE PREVENTAS
+		
+    Proforma:    [c001      ]          					
+    Usuario:     [c013      ]         	Fecha : [c014               	]
+    Motivo 	 
+	[c003                                              		]
+        [c003                                                   	]
+        [c003                                                   	]
+
+}
+end
+TABLES
+rept120
+
+attributes
+
+c001 = formonly.numprof_ , NOENTRY, REVERSE, UPSHIFT;
+c003 = rept120.r120_motivo, WORDWRAP COMPRESS, UPSHIFT, REVERSE, SCROLL;
+c013 = formonly.usuario_, REVERSE, UPSHIFT, NOENTRY;
+c014 = formonly.fecing_  TYPE DATE, REVERSE, NOENTRY, FORMAT = 'dd-mm-yyyy';
+
+
+

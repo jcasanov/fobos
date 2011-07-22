@@ -31,7 +31,11 @@ DEFINE rm_par RECORD
 	END RECORD
 DEFINE vm_max_rows	SMALLINT
 
+DEFINE rm_r120           RECORD LIKE rept120.*  --tabla historica de las preventas eliminadas
+DEFINE numprof_		 LIKE rept021.r21_numprof
 
+DEFINE cancelar_transaccion	INTEGER -- lleva 1 cuando no se ingresa un "motivo"; para 
+					-- eliminar una preventa 
 
 MAIN
 	
@@ -41,6 +45,7 @@ CLEAR SCREEN
 CALL startlog('../logs/repp223.error')
 CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
+
 IF num_args() <> 4 THEN          -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 
 		'Número de parámetros incorrecto', 
@@ -72,6 +77,7 @@ DEFINE i		SMALLINT
 
 INITIALIZE rm_par.* TO NULL
 LET rm_par.r21_moneda = rg_gen.g00_moneda_base
+
 CALL fl_lee_moneda(rm_par.r21_moneda) RETURNING r_mon.* 
 LET rm_par.tit_moneda = r_mon.g13_nombre
 
@@ -85,7 +91,7 @@ DISPLAY FORM f_cons
 LET vm_max_rows = 1000
 
 DISPLAY 'Fecha Ini.'     TO tit_col1
-DISPLAY '#'		 		 TO tit_col2
+DISPLAY '#'		 TO tit_col2
 DISPLAY 'Cliente'        TO tit_col3
 DISPLAY 'Ven'            TO tit_col4
 DISPLAY 'Validez'        TO tit_col5
@@ -105,6 +111,8 @@ WHILE TRUE
 	END IF
 	CALL muestra_consulta()
 END WHILE
+
+CALL fgl_winmessage(vg_producto, 'salio master','exclamation')
 
 END FUNCTION
 
@@ -515,11 +523,91 @@ END FUNCTION
 
 
 
+FUNCTION motivo_eliminacion_preventa()
+DEFINE usuario_          LIKE rept120.r120_usuario
+DEFINE fecing_           LIKE rept120.r120_fecing
+
+INITIALIZE rm_r120.* TO NULL
+
+LET rm_r120.r120_compania  = vg_codcia
+LET rm_r120.r120_localidad = vg_codloc
+LET rm_r120.r120_usuario   = vg_usuario
+LET rm_r120.r120_fecing    = CURRENT
+
+LET usuario_ = vg_usuario
+LET fecing_  = CURRENT
+
+OPTIONS
+        INPUT WRAP,
+        ACCEPT KEY F12
+
+OPEN WINDOW w_220 AT 9,4 WITH FORM "../forms/repf220_5"
+        ATTRIBUTE(BORDER) 
+
+	DISPLAY BY NAME numprof_ , usuario_ , fecing_
+
+	CALL ingresar_motivo()
+
+CLOSE WINDOW w_220
+
+RETURN
+
+END FUNCTION
+
+
+FUNCTION ingresar_motivo()
+DEFINE resp             CHAR(6)
+
+INPUT BY NAME rm_r120.r120_motivo 
+
+	WITHOUT DEFAULTS
+
+	ON KEY (INTERRUPT)
+                LET INT_FLAG = 0
+                CALL fl_mensaje_abandonar_proceso()
+                        RETURNING resp
+                IF resp = 'Yes' THEN
+                        LET int_flag = 1
+			LET cancelar_transaccion = 1			
+                        RETURN
+                END IF
+
+        AFTER FIELD r120_motivo
+
+		IF (rm_r120.r120_motivo IS NULL) OR rm_r120.r120_motivo ='' THEN
+                	CALL fgl_winmessage(vg_producto, 'Ingrese el motivo por el cual 
+			se anulara(n) la(s) preventa(s) de la proforma actual', 'exclamation') 
+
+                        DISPLAY BY NAME rm_r120.r120_motivo
+                        NEXT FIELD r120_motivo
+                  ELSE
+			CALL fgl_winquestion(vg_producto,
+                                '¿Esta seguro que desea realizar esta transacion?',
+                                'No', 'Yes|No', 'question', 1)
+      		        RETURNING resp
+	
+			IF resp = 'No' THEN
+				DISPLAY BY NAME rm_r120.r120_motivo
+				NEXT FIELD r120_motivo
+			  ELSE
+				EXIT INPUT
+			END IF
+
+		END IF
+	
+END INPUT
+
+END FUNCTION
+
+
 FUNCTION anular_preventas(numprof)
 DEFINE numprof	LIKE rept021.r21_numprof
 DEFINE numprev          LIKE rept023.r23_numprev
 DEFINE r_r23            RECORD LIKE rept023.*
 DEFINE resp 		CHAR(6)
+
+LET cancelar_transaccion = 0
+LET numprof_ = 0
 
 IF NOT fl_control_permiso_opcion('Eliminar') THEN
 	CALL fgl_winmessage(vg_producto,'USUARIO NO TIENE PERMISO PARA ESTA OPCION'
@@ -534,7 +622,19 @@ CALL fgl_winquestion(vg_producto,
 		RETURNING resp
 IF resp = 'No' THEN
 	RETURN
+  ELSE
+	LET numprof_ = numprof
+	CALL motivo_eliminacion_preventa()   
+	
+	IF cancelar_transaccion = 1 THEN
+		
+		CALL fgl_winmessage(vg_producto, 'Transaccion anulada', 'stop')
+		
+		RETURN
+	END IF	
+		
 END IF
+
 
 DECLARE q_prevs CURSOR FOR 
 	SELECT r102_numprev FROM rept102
@@ -575,6 +675,10 @@ FOREACH q_prevs INTO numprev
 	 WHERE r23_compania  = vg_codcia
 	   AND r23_localidad = vg_codloc
 	   AND r23_numprev   = numprev
+
+	--grabamos un historico de las preventas eliminadas
+ 	LET rm_r120.r120_numprev = numprev
+	INSERT INTO rept120 VALUES (rm_r120.*)
 
 END FOREACH
 FREE q_prevs
