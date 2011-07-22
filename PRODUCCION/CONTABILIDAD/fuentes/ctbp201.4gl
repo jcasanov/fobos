@@ -24,12 +24,6 @@ DEFINE rm_orden         ARRAY[10] OF CHAR(4)
 DEFINE vm_columna_1     SMALLINT
 DEFINE vm_columna_2     SMALLINT
 
-DEFINE glosa_cabecera	VARCHAR(200)	-- almacena todas los num_doc transaccionales relacionad
-					-- con una orden de pago, especificamente cuando se hace
-					-- un reverso. Una vez q se han almacenado; lo actualiza-
-					-- mos en el campo b12_glosa de la tabla ctb012, especi-
-					-- ficamente para la transacion actual que se ha reversad
-
 -- CADA VEZ QUE SE REALIZE UNA CONSULTA SE GUARDARAN LOS ROWID DE CADA FILA 
 -- RECUPERADA EN UNA TABLA LLAMADA r_rows QUE TENDRA 1000 ELEMENTOS
 DEFINE vm_rows ARRAY[1000] OF INTEGER  	-- ARREGLO DE ROWID DE FILAS LEIDAS
@@ -158,11 +152,6 @@ CREATE TEMP TABLE tmp_detalle(
 );
 CREATE UNIQUE INDEX tmp_pk   ON tmp_detalle(secuencia);
 
-
-CREATE TEMP TABLE tmp_secuencia_ctbt013(
-	secuencia		SMALLINT,
-	secuencia_original	SMALLINT
-);
 
 
 
@@ -1896,26 +1885,23 @@ LET query = 'INSERT INTO ctbt013 (b13_compania, b13_tipo_comp, b13_num_comp, ',
 PREPARE statement5 FROM query
 EXECUTE statement5
 
---La sgte. proceso solo se lo podra ejecutar para los tipos EG/ND 
-IF (rm_b12.b12_tipo_comp = 'EG') OR rm_b12.b12_tipo_comp = 'ND' THEN
-	-- busco la orden-pago relacionada con esta transaccion, indispensable para poder ejecu-
-	-- tar el proceso que le sigue
-	SELECT * INTO r_p24.* FROM cxpt024
-	WHERE
-		p24_compania     = rm_b12.b12_compania  AND
-        	p24_localidad    = vg_codloc            AND
-                p24_tip_contable = rm_b12.b12_tipo_comp AND
-	        p24_num_contable = rm_b12.b12_num_comp  AND
-        	p24_tipo         = 'P'
+-- El sgte. proceso solo se lo podra ejecutar para los tipos EG/ND 
+IF rm_b12.b12_tipo_comp = 'EG' OR rm_b12.b12_tipo_comp = 'ND' THEN
+	-- busco la orden de pago relacionada con esta transaccion, 
+	-- indispensable para poder ejecutar el proceso que le sigue
+	SELECT * INTO r_p24.* 
+	  FROM cxpt024
+	 WHERE p24_compania     = rm_b12.b12_compania  
+	   AND p24_tip_contable = rm_b12.b12_tipo_comp 
+	   AND p24_num_contable = rm_b12.b12_num_comp  
+	   AND p24_tipo         = 'P'
 
 	-- buscamos los diferentes registros transaccionales relacionada con la orden-pago,
 	-- encontrada en el  query anterior, a fin de adjuntarlos(en compañia de otros campos),
 	-- en la glosa "recien insertada"en la ctbt013 
-
 	CALL adjuntar_documentos_transaccionales_glosa(r_p24.p24_orden_pago,
-					r_b12_reversa.b12_tipo_comp,
-					r_b12_reversa.b12_num_comp ) 
-	
+												   r_b12_reversa.b12_tipo_comp,
+												   r_b12_reversa.b12_num_comp) 
 END IF
 
 DECLARE q_del CURSOR FOR 
@@ -3082,6 +3068,8 @@ RUN comando
 
 END FUNCTION
 
+
+
 FUNCTION adjuntar_documentos_transaccionales_glosa(orden_pago, tipo_reversa, num_reversa)
 DEFINE r_p01            RECORD LIKE cxpt001.*
 DEFINE codprov		LIKE cxpt001.p01_codprov
@@ -3099,6 +3087,22 @@ DEFINE secuencia_p25	LIKE ctbt013.b13_secuencia
 DEFINE done             SMALLINT
 DEFINE query            VARCHAR(600)
 
+{*
+ * debemos almacenar todas los num_doc transaccionales relacionados
+ * con una orden de pago, especificamente cuando se hace
+ * un reverso. Una vez q se han almacenado; lo actualizamos
+ * en el campo b12_glosa de la tabla ctb012, especicamente
+ * para la transacion actual que se ha reversado
+ *}
+DEFINE glosa_cabecera	VARCHAR(200)	
+
+
+CREATE TEMP TABLE tmp_secuencia_ctbt013(
+	secuencia		SMALLINT,
+	secuencia_original	SMALLINT
+);
+
+
 LET done = 0
 LET secuencia= 0
 LET secuencia_p13= 0
@@ -3111,31 +3115,29 @@ LET cod_prov = 0
 LET prov =""
 LET codprov = 0
 
-DELETE FROM tmp_secuencia_ctbt013
+{*
+ * se creo esta temp(arriba), a fin de q almacene las secuencias de los "x" registros reversads
+ * insertados(previo a esta funcion); en la tabla ctb013, a fin de ser utilizadas como uno de los
+ * filtros principales para "actualizar" una nuevaglosa "personalizada", enla misma tabla(ctb013)
+ * En vista q la secuencia q se registra en la tabla ctb013, no tiene un orden definido(puesto 
+ * q el campo p13_secuencia, muchas veces  almacena secuencias NO A PARTIR DESDE EL #  1,sino q a
+ * veces empieza con una secuencia YA CONTINUADA por ej. 65, 66, 67, 68..etc.), lo q complico
+ * la actualizacion, pues para este caso el campo SECUENCIA, despues de otros 2 campos, son funda-
+ * mentales para saber d q registro se esta hablando.. Por lo tanto me vi en la obligacion de 
+ * crear en esta TEMP 2 campos, SECUENCIA(q contendra un secuencial segun el numero d 
+ * inserciones q reciba, y SECUENCIA ORIGINAL, quien almacenara el NUMERO SECUENCIAL CON LA Q SE
+ * GRABO EN LA TABLA ORIGINAL, afin de q cuando se quiera hacer la comparacion entre LA TEMP con
+ * con la CXPT025(quien tiene los mismos reg.), se use el campo SECUENCIA, y cuando se haga la
+ * ACTUALIZACION de la nueva glosa(ctbt013), se use el campo SECUENCIA_ORIGINAL,
+ * Y ASI SE ACTUALIZARAN SIEMPRE EN LOS REGISTROS CORRECTOS..
+ *}
+DECLARE q_secuencias_docs CURSOR FOR
+	SELECT b13_secuencia, b13_codprov FROM ctbt013
+	 WHERE b13_compania  = vg_codcia	
+	   AND b13_tipo_comp = tipo_reversa	
+	   AND b13_num_comp	 = num_reversa 
 
---se creo esta temp(arriba), a fin de q almacene las secuencias de los "x" registros reversads
---insertados(previo a esta funcion); en la tabla ctb013, a fin de ser utilizadas como uno de los
---filtros principales para "actualizar" una nuevaglosa "personalizada", enla misma tabla(ctb013)
---En vista q la secuencia q se registra en la tabla ctb013, no tiene un orden definido(puesto 
---q el campo p13_secuencia, muchas veces  almacena secuencias NO A PARTIR DESDE EL #  1,sino q a
---veces empieza con una secuencia YA CONTINUADA por ej. 65, 66, 67, 68..etc.), lo q complico
---la actualizacion, pues para este caso el campo SECUENCIA, despues de otros 2 campos, son funda-
---mentales para saber d q registro se esta hablando.. Por lo tanto me vi en la obligacion de 
---crear en esta TEMP 2 campos, SECUENCIA(q contendra un secuencial segun el numero d 
---inserciones q reciba, y SECUENCIA ORIGINAL, quien almacenara el NUMERO SECUENCIAL CON LA Q SE
---GRABO EN LA TABLA ORIGINAL, afin de q cuando se quiera hacer la comparacion entre LA TEMP con
---con la CXPT025(quien tiene los mismos reg.), se use el campo SECUENCIA, y cuando se haga la
---ACTUALIZACION de la nueva glosa(ctbt013), se use el campo SECUENCIA_ORIGINAL,
---Y ASI SE ACTUALIZARAN SIEMPRE EN LOS REGISTROS CORRECTOS..
-
-DECLARE q_docs_ CURSOR FOR
-	SELECT b13_secuencia,b13_codprov FROM ctbt013
-	WHERE
-		b13_compania 	= vg_codcia	AND
-		b13_tipo_comp 	= tipo_reversa	AND
-		b13_num_comp	= num_reversa 
-
-FOREACH q_docs_ INTO secuencia_p13, codprov
+FOREACH q_secuencias_docs INTO secuencia_p13, codprov
 
 	--se realiza la sgte. condicion a causa de q existen b13_codprov NULOS, y q provocaban
 	--q el rest--de los procesos al actualizar la informaciòn salgan nulos o blancos.. 
@@ -3154,15 +3156,15 @@ INITIALIZE r_p01.* TO NULL
 
 CALL fl_lee_proveedor(cod_prov) RETURNING r_p01.*
         
-	LET prov = r_p01.p01_nomprov
+LET prov = r_p01.p01_nomprov
 
-	IF prov IS NULL  THEN
-		LET prov = '--'
-	END IF
+IF prov IS NULL  THEN
+	LET prov = '--'
+END IF
 
-	LET glosa_cabecera = 'REVERSO ' || rm_b12.b12_tipo_comp || ':' 
-					|| rm_b12.b12_num_comp  || ', '
-					|| prov || ', '
+LET glosa_cabecera = 'REVERSO ' || rm_b12.b12_tipo_comp || ':' 
+				|| rm_b12.b12_num_comp  || ', '
+				|| prov || ', '
 
 DECLARE q_docs CURSOR FOR
         SELECT p25_secuencia, p25_tipo_doc, p25_num_doc FROM cxpt025, cxpt020
@@ -3214,5 +3216,6 @@ DECLARE q_docs CURSOR FOR
 
 	END IF
 
+	DROP TABLE tmp_secuencia_ctbt013
 END FUNCTION
 
