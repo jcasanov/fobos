@@ -528,10 +528,7 @@ OPTIONS
         INPUT WRAP,
         ACCEPT KEY F12
 
--- Normalmente no se reutilizan las formas, y si se hace se crean como una
--- libreria pero eso parece excesivo para este caso asi que vamos a hacerlo
--- por esta vez
-OPEN WINDOW w_220 AT 9,4 WITH FORM "../forms/repf220_5"
+OPEN WINDOW w_220 AT 9,4 WITH FORM "../forms/repf223_2"
         ATTRIBUTE(BORDER) 
 
 DISPLAY numprof, vg_usuario, CURRENT 
