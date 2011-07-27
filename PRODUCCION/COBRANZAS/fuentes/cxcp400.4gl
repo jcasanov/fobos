@@ -381,7 +381,7 @@ END FUNCTION
 
 FUNCTION prepare_query_cxct050()
 
-DEFINE query	 	VARCHAR(1100)
+DEFINE query	 	VARCHAR(1250)
 DEFINE expr_area	VARCHAR(30)
 DEFINE expr_zona	VARCHAR(30)
 DEFINE expr_tipocli	VARCHAR(30)
@@ -457,7 +457,7 @@ END FUNCTION
 
 FUNCTION prepare_query_cxct020()
 
-DEFINE query	 	VARCHAR(1000)
+DEFINE query	 	VARCHAR(1250)
 DEFINE expr_area	VARCHAR(30)
 DEFINE expr_zona	VARCHAR(30)
 DEFINE expr_tipocli	VARCHAR(30)
