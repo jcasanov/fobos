@@ -666,7 +666,7 @@ BEGIN WORK
 		   AND r23_numprev   = r_r102.r102_numprev
 		   AND r23_estado    = 'P'
 
-		LET r_r120.r120_numprev = r_r120.r120_numprev
+		LET r_r120.r120_numprev = r_r102.r102_numprev
 		INSERT INTO rept120 VALUES(r_r120.*)
 	END FOREACH
 
