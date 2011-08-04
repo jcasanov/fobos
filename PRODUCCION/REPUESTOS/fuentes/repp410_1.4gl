@@ -207,21 +207,20 @@ PAGE HEADER
 	LET impuesto = rm_r19.r19_tot_neto   -  rm_r19.r19_flete  -
 		(rm_r19.r19_tot_bruto - rm_r19.r19_tot_dscto)
 
-	SKIP 3 LINES
-	SKIP 6 LINES
+	SKIP 11 LINES
 --	print '&k2S' 		-- Letra condensada
 
-	PRINT COLUMN 20, fl_justifica_titulo('I', rm_r19.r19_num_tran CLIPPED, 15),
-	      COLUMN 92, DATE(rm_r19.r19_fecing) USING 'dd-mm-yyyy', 1 SPACES, TIME 
-	PRINT COLUMN 20, rm_r19.r19_nomcli CLIPPED,
-	      COLUMN 92, rm_r19.r19_cedruc 
-	PRINT COLUMN 20, rm_r19.r19_dircli CLIPPED
-	PRINT COLUMN 20, rm_r19.r19_telcli CLIPPED,
+	PRINT COLUMN 22, fl_justifica_titulo('I', rm_r19.r19_num_tran CLIPPED, 15),
+		  COLUMN 99, DATE(rm_r19.r19_fecing) USING 'dd-mm-yyyy', 1 SPACES, TIME 
+	PRINT COLUMN 22, rm_r19.r19_nomcli CLIPPED,
+		  COLUMN 99, rm_r19.r19_cedruc 
+	PRINT COLUMN 22, rm_r19.r19_dircli CLIPPED
+	PRINT COLUMN 22, rm_r19.r19_telcli CLIPPED,
 	      COLUMN 78, rm_r19.r19_vendedor
-	PRINT COLUMN 20, forma_pago CLIPPED
-	PRINT COLUMN 20, rm_r19.r19_oc_externa CLIPPED
+	PRINT COLUMN 22, forma_pago CLIPPED
+	PRINT COLUMN 22, rm_r19.r19_oc_externa CLIPPED
 
-	SKIP 5 LINES
+	SKIP 6 LINES
 
 ON EVERY ROW
 
