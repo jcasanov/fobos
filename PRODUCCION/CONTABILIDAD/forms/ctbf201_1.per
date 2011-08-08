@@ -18,7 +18,7 @@ screen
 [c018        ] [a4 ] [c019                  |c020           |c021           ]
 [c018        ] [a4 ] [c019                  |c020           |c021           ]
 [c104                               ]       [c050           |c051           ]
-
+[c022                                                                       ]
    Ingresado Por: [c013      ]           Fecha Ingreso: [c014               ]
                                     Fecha Modificación: [c012               ]
 }
@@ -60,6 +60,8 @@ c020 = formonly.valor_debito, OPTIONS='-nolist',
 	FORMAT='####,###,##&.##', INCLUDE=(0 TO 9999999999.99);
 c021 = formonly.valor_credito, OPTIONS='-nolist', 
 	FORMAT='####,###,##&.##', INCLUDE=(0 TO 9999999999.99);
+
+c022 = formonly.n_glosa, NOENTRY, UPSHIFT;
 
 c100 = formonly.n_estado,  NOENTRY;
 c101 = formonly.n_subtipo, NOENTRY;

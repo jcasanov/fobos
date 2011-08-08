@@ -1676,7 +1676,7 @@ WHILE NOT salir
 		BEFORE ROW
 			LET i = arr_curr()
 
-			DISPLAY rm_cuenta[i].glosa TO b13_glosa
+			DISPLAY rm_cuenta[i].glosa TO n_glosa
 
 			CALL fl_lee_cuenta(vg_codcia, rm_cuenta[i].cuenta)
 				RETURNING r_b10.*
