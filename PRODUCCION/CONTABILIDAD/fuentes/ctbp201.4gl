@@ -1467,6 +1467,7 @@ END FOREACH
 
 CALL calcula_totales()
 
+CLEAR n_glosa
 CLEAR n_cuenta
 CALL fl_lee_cuenta(vg_codcia, rm_cuenta[1].cuenta) RETURNING r_b10.*
 DISPLAY r_b10.b10_descripcion TO n_cuenta
