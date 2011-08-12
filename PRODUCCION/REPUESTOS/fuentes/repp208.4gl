@@ -489,7 +489,7 @@ SELECT SUM(r117_cantidad * r117_fob) INTO tot_fob_rec FROM rept029, rept117
 	      r29_numliq    = r117_numliq
 IF rm_r28.r28_fob_fabrica <> tot_fob_rec THEN
 	CALL fgl_winmessage(vg_producto,
-			    'Fob recibido en liquidación es distinto del fob recibido en pedidos. Verifique y de mantenimiento a la liquidación',
+			    'Fob recibido en liquidación (' || rm_r28.r28_fob_fabrica || ') es distinto del fob recibido en pedidos (' || tot_fob_rec || '). Verifique y de mantenimiento a la liquidación',
 			    'exclamation')
 	RETURN
 END IF
