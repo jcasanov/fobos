@@ -185,17 +185,14 @@ SET LOCK MODE TO NOT WAIT
 DELETE FROM cxct050 WHERE z50_ano       = anho 
 	  	      AND z50_mes       = mes 
 	              AND z50_compania  = vg_codcia
-	              AND z50_localidad = vg_codloc
 
 DELETE FROM cxct051 WHERE z51_ano       = anho 
 	  	      AND z51_mes       = mes 
 	              AND z51_compania  = vg_codcia
-	              AND z51_localidad = vg_codloc
 
 LET query = 'INSERT INTO cxct051 ',
 		' SELECT ', anho, ', ', mes, ', * FROM cxct021 ',
 		' 	WHERE z21_compania  = ', vg_codcia,
-		'	  AND z21_localidad = ', vg_codloc,
 	  	'	  AND z21_saldo > 0 '
 
 PREPARE stmnt1 FROM query
@@ -204,7 +201,6 @@ EXECUTE stmnt1
 LET query = 'INSERT INTO cxct050 ',
 		' SELECT ', anho, ', ', mes, ', * FROM cxct020 ',
 		' 	WHERE z20_compania  = ', vg_codcia,
-		'	  AND z20_localidad = ', vg_codloc,
 	 	'	  AND z20_saldo_cap + z20_saldo_int > 0 '
 
 PREPARE stmnt2 FROM query

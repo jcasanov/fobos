@@ -41,13 +41,14 @@ CLEAR SCREEN
 CALL startlog('../logs/cxcp414.err')
 CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
-IF num_args() <> 3 THEN   -- Validar # parámetros correcto
+IF num_args() <> 4 THEN   -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto.', 'stop')
 	EXIT PROGRAM
 END IF
 LET vg_base     = arg_val(1)
 LET vg_modulo   = arg_val(2)
 LET vg_codcia   = arg_val(3)
+LET vg_codloc   = arg_val(4)
 LET vg_proceso = 'cxcp414'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
