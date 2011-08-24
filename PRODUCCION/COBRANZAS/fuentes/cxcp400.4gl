@@ -130,7 +130,7 @@ END FUNCTION
 
 FUNCTION control_reporte()
 DEFINE i,col		SMALLINT
-DEFINE query		VARCHAR(1000)
+DEFINE query		VARCHAR(5000)
 DEFINE comando		VARCHAR(100)
 DEFINE data_found	SMALLINT
 
@@ -167,11 +167,7 @@ WHILE TRUE
 	END IF
 	CALL fl_lee_compania(vg_codcia) RETURNING rm_g01.*
 	
-	IF year(TODAY) <> rm_par.anho OR month(TODAY) <> rm_par.mes THEN
-		LET query = prepare_query_cxct050()
-	ELSE
-		LET query = prepare_query_cxct020()
-	END IF
+	LET query = prepare_query()
 	
 	PREPARE deto FROM query
 	DECLARE q_deto CURSOR FOR deto
@@ -187,6 +183,7 @@ WHILE TRUE
 	IF NOT data_found THEN
 		CALL fl_mensaje_consulta_sin_registros()
 	END IF
+	DROP TABLE temp_cartera
 END WHILE
 
 END FUNCTION
@@ -379,9 +376,9 @@ END FUNCTION
 
 
 
-FUNCTION prepare_query_cxct050()
+FUNCTION prepare_query()
 
-DEFINE query	 	VARCHAR(1250)
+DEFINE query	 	VARCHAR(5000)
 DEFINE expr_area	VARCHAR(30)
 DEFINE expr_zona	VARCHAR(30)
 DEFINE expr_tipocli	VARCHAR(30)
@@ -389,82 +386,16 @@ DEFINE expr_tipocartera VARCHAR(30)
 DEFINE expr_vcto	VARCHAR(30)
 DEFINE expr_dias	VARCHAR(60)
 
-LET expr_area = ' '
-IF rm_par.areaneg IS NOT NULL THEN
-	LET expr_area = ' AND z50_areaneg = ', rm_par.areaneg
+DEFINE fecha_calculo	DATE
+
+-- Podemos obtener el estado de cuenta a cualquier fecha pero por la forma del 
+-- reporte siempre lo haremos a fin de mes o TODAY
+LET fecha_calculo = (MDY(rm_par.mes, 1, rm_par.anho) + 1 UNITS MONTH) - 1 UNITS SECOND
+IF fecha_calculo > TODAY THEN
+	LET fecha_calculo = TODAY
 END IF
 
-LET expr_zona = ' '
-IF rm_par.zona_cobro IS NOT NULL THEN
-	LET expr_zona = ' AND z02_zona_cobro = ', rm_par.zona_cobro
-END IF
-
-LET expr_tipocli = ' '
-IF rm_par.tipocli IS NOT NULL THEN
-	LET expr_tipocli = ' AND z01_tipo_clte = ', rm_par.tipocli
-END IF
-
-LET expr_tipocartera = ' '
-IF rm_par.tipocartera IS NOT NULL THEN
-	LET expr_tipocartera = ' AND z50_cartera = ', rm_par.tipocartera
-END IF
-
-CASE rm_par.tipo_vcto 
-	WHEN 'P'
-		LET expr_vcto = ' AND z50_fecha_vcto >= TODAY '
-		IF rm_par.dias_ini IS NOT NULL THEN
-			LET expr_dias = ' AND (z50_fecha_vcto - TODAY) BETWEEN ',
-					rm_par.dias_ini, ' AND ', rm_par.dias_fin
-		END IF
-	WHEN 'V'
-		LET expr_vcto = ' AND z50_fecha_vcto < TODAY '
-		IF rm_par.dias_ini IS NOT NULL THEN
-			LET expr_dias = ' AND (TODAY - z50_fecha_vcto) BETWEEN ',
-					rm_par.dias_ini, ' AND ', rm_par.dias_fin
-		END IF
-	OTHERWISE
-		LET expr_vcto = ' '
-		LET expr_dias = ' '
-END CASE
-
-LET query = 'SELECT z50_areaneg, z02_zona_cobro, z50_codcli, z01_nomcli, ',
-	          ' z50_tipo_doc, z50_num_doc, z50_dividendo, z50_fecha_emi, ',
-	          ' z50_fecha_vcto, (z50_fecha_vcto - TODAY), ',
-	          ' (z50_saldo_cap + z50_saldo_int) ',
-	    	' FROM cxct050, cxct001, OUTER cxct002 ', 
-	    	' WHERE z50_ano = ', rm_par.anho,
-	    	  ' AND z50_mes = ', rm_par.mes,
-	    	  ' AND z50_compania = ', vg_codcia,
-	    	  ' AND z50_localidad = ', vg_codloc,
-	    	  ' AND z50_moneda = "', rm_par.g13_moneda, '"', 
-	    	  expr_area CLIPPED, 
-	    	  expr_tipocartera CLIPPED,
-	    	  expr_vcto CLIPPED,
-	    	  expr_dias CLIPPED,
-		  ' AND (z50_saldo_cap + z50_saldo_int) > 0 ', 
-	    	  ' AND z01_codcli = z50_codcli ',
-	    	  expr_tipocli CLIPPED,
-	    	  ' AND z02_compania = z50_compania ',
-	    	  ' AND z02_localidad = z50_localidad ', 
-	    	  ' AND z02_codcli = z50_codcli ',
-	    	  expr_zona CLIPPED
-	    	  
-RETURN full_query(query)
-
-END FUNCTION
-
-
-
-FUNCTION prepare_query_cxct020()
-
-DEFINE query	 	VARCHAR(1250)
-DEFINE expr_area	VARCHAR(30)
-DEFINE expr_zona	VARCHAR(30)
-DEFINE expr_tipocli	VARCHAR(30)
-DEFINE expr_tipocartera VARCHAR(30)
-DEFINE expr_vcto	VARCHAR(30)
-DEFINE expr_dias	VARCHAR(60)
-
+-- Parametros
 LET expr_area = ' '
 IF rm_par.areaneg IS NOT NULL THEN
 	LET expr_area = ' AND z20_areaneg = ', rm_par.areaneg
@@ -487,15 +418,15 @@ END IF
 
 CASE rm_par.tipo_vcto 
 	WHEN 'P'
-		LET expr_vcto = ' AND z20_fecha_vcto >= TODAY '
+		LET expr_vcto = ' AND z20_fecha_vcto >= "', fecha_calculo, '" '
 		IF rm_par.dias_ini IS NOT NULL THEN
-			LET expr_dias = ' AND (z20_fecha_vcto - TODAY) BETWEEN ',
+			LET expr_dias = ' AND (z20_fecha_vcto - "', fecha_calculo, '") BETWEEN ',
 					rm_par.dias_ini, ' AND ', rm_par.dias_fin
 		END IF
 	WHEN 'V'
-		LET expr_vcto = ' AND z20_fecha_vcto < TODAY '
+		LET expr_vcto = ' AND z20_fecha_vcto < "', fecha_calculo, '" '
 		IF rm_par.dias_ini IS NOT NULL THEN
-			LET expr_dias = ' AND (TODAY - z20_fecha_vcto) BETWEEN ',
+			LET expr_dias = ' AND ("', fecha_calculo, '" - z20_fecha_vcto) BETWEEN ',
 					rm_par.dias_ini, ' AND ', rm_par.dias_fin
 		END IF
 	OTHERWISE
@@ -504,25 +435,84 @@ CASE rm_par.tipo_vcto
 END CASE
 
 LET query = 'SELECT z20_areaneg, z02_zona_cobro, z20_codcli, z01_nomcli, ',
-	          ' z20_tipo_doc, z20_num_doc, z20_dividendo, z20_fecha_emi, ',
-	          ' z20_fecha_vcto, (z20_fecha_vcto - TODAY) antiguedad, ',
-	          ' (z20_saldo_cap + z20_saldo_int) saldo ',
+			'       z20_tipo_doc, z20_num_doc, z20_dividendo, z20_fecha_emi, ',
+			'       z20_fecha_vcto, (z20_fecha_vcto - "', fecha_calculo, '") antiguedad, ',
+			'       z20_valor_cap + z20_valor_int as saldo, ',
+			'       (SELECT DISTINCT a.z23_tipo_trn || a.z23_num_trn ',
+			'              FROM cxct023 a, cxct022 b',
+			'             WHERE a.z23_compania  = z20_compania ',
+			'               AND a.z23_localidad = z20_localidad ',
+			'               AND a.z23_codcli    = z20_codcli ',
+			'               AND a.z23_tipo_doc  = z20_tipo_doc ',
+			'               AND a.z23_num_doc   = z20_num_doc ',
+			'               AND a.z23_div_doc   = z20_dividendo ',
+			'               AND b.z22_compania  = a.z23_compania ',
+			'               AND b.z22_localidad = a.z23_localidad ',
+			'               AND b.z22_codcli    = a.z23_codcli ',
+			'               AND b.z22_tipo_trn  = a.z23_tipo_trn ',
+			'               AND b.z22_num_trn   = a.z23_num_trn ',
+			'               AND b.z22_fecing    = (SELECT MAX(d.z22_fecing) ',
+												'  FROM cxct023 c, cxct022 d',
+												' WHERE c.z23_compania   = z20_compania ',
+												'   AND c.z23_localidad  = z20_localidad ',
+												'   AND c.z23_codcli     = z20_codcli ',
+												'   AND c.z23_tipo_doc   = z20_tipo_doc ',
+												'   AND c.z23_num_doc    = z20_num_doc ',
+												'   AND c.z23_div_doc    = z20_dividendo ',
+												'   AND d.z22_compania   = c.z23_compania ',
+												'   AND d.z22_localidad  = c.z23_localidad ',
+												'   AND d.z22_codcli     = c.z23_codcli ',
+												'   AND d.z22_tipo_trn   = c.z23_tipo_trn ',
+												'   AND d.z22_num_trn    = c.z23_num_trn ',
+												'   AND d.z22_fecing    <= "', EXTEND(fecha_calculo, YEAR TO SECOND) + 23 UNITS HOUR + 
+																					  59 UNITS MINUTE + 59 UNITS SECOND, '" ',
+                                                ' )) as tran ',
 	    	' FROM cxct020, cxct001, OUTER cxct002 ', 
 	    	' WHERE z20_compania = ', vg_codcia,
-	    	  ' AND z20_localidad = ', vg_codloc,
-	    	  ' AND z20_moneda = "', rm_par.g13_moneda, '"', 
-	    	  expr_area CLIPPED, 
-	    	  expr_tipocartera CLIPPED,
-	    	  expr_vcto CLIPPED,
-	    	  expr_dias CLIPPED,
-		  ' AND (z20_saldo_cap + z20_saldo_int) > 0 ', 
-	    	  ' AND z01_codcli = z20_codcli ',
-	    	  expr_tipocli CLIPPED,
-	    	  ' AND z02_compania = z20_compania ',
-	    	  ' AND z02_localidad = z20_localidad ', 
-	    	  ' AND z02_codcli = z20_codcli ',
-	    	  expr_zona CLIPPED
-	    	  
+	    	'   AND z20_localidad = ', vg_codloc,
+	    	'   AND z20_moneda = "', rm_par.g13_moneda, '"', 
+			'   AND z20_fecha_emi <= "', fecha_calculo, '" ',
+			expr_area CLIPPED, 
+			expr_tipocartera CLIPPED,
+			expr_vcto CLIPPED,
+			expr_dias CLIPPED,
+			'   AND z01_codcli = z20_codcli ',
+			expr_tipocli CLIPPED,
+			'   AND z02_compania = z20_compania ',
+			'   AND z02_localidad = z20_localidad ', 
+			'   AND z02_codcli = z20_codcli ',
+			expr_zona CLIPPED,
+		' INTO TEMP temp_cartera '
+
+PREPARE stmt1 FROM query
+EXECUTE stmt1
+
+LET query = ' UPDATE temp_cartera SET saldo = (SELECT z23_saldo_cap + z23_saldo_int + z23_valor_cap + z23_valor_int ',
+											'	 FROM cxct023 ',
+											'   WHERE z23_compania  = ', vg_codcia,
+											'	  AND z23_localidad = ', vg_codloc,
+											'	  AND z23_codcli    = z20_codcli ',
+											'	  AND (z23_tipo_trn || z23_num_trn) = tran ',
+											'	  AND z23_tipo_doc  = z20_tipo_doc ',
+											'	  AND z23_num_doc   = z20_num_doc ',
+											'	  AND z23_div_doc   = z20_dividendo ',
+											'	  AND z23_orden     = (SELECT max(a.z23_orden) ',
+																	'	 FROM cxct023 a ',
+																	'	WHERE a.z23_compania  = cxct023.z23_compania ',
+																	'	  AND a.z23_localidad = cxct023.z23_localidad ',
+																	'	  AND a.z23_codcli    = cxct023.z23_codcli ',
+																	'	  AND a.z23_tipo_trn  = cxct023.z23_tipo_trn ',
+																	'	  AND a.z23_num_trn  = cxct023.z23_num_trn ',
+																	'	  AND a.z23_tipo_doc  = cxct023.z23_tipo_doc ',
+																	'	  AND a.z23_num_doc   = cxct023.z23_num_doc ',
+																	'	  AND a.z23_div_doc   = cxct023.z23_div_doc)) ',
+			' WHERE tran IS NOT NULL '
+
+PREPARE stmt2 FROM query
+EXECUTE stmt2
+
+LET query = ' SELECT * FROM temp_cartera WHERE saldo > 0 '
+	
 RETURN full_query(query)
 
 END FUNCTION
@@ -531,7 +521,7 @@ END FUNCTION
 
 FUNCTION full_query(query)
 
-DEFINE query		VARCHAR(1000)
+DEFINE query		VARCHAR(5000)
 DEFINE order_clause	VARCHAR(150)
 
 DEFINE i		SMALLINT
