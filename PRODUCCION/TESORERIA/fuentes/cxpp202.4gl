@@ -9,7 +9,6 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_demonios	VARCHAR(12)
 DEFINE rm_cxp		RECORD LIKE cxpt022.*
 DEFINE rm_cxp2		RECORD LIKE cxpt023.*
 DEFINE rm_cxp3		RECORD LIKE cxpt020.*
@@ -26,7 +25,7 @@ DEFINE vm_columna_1	SMALLINT
 DEFINE vm_columna_2	SMALLINT
 DEFINE vm_tipo_trn	LIKE cxpt022.p22_tipo_trn
 DEFINE vm_r_rows	ARRAY [1000] OF INTEGER
-DEFINE rm_aju 		ARRAY [1000] OF RECORD
+DEFINE rm_aju 		ARRAY [5000] OF RECORD
 				p23_tipo_doc	LIKE cxpt023.p23_tipo_doc,
 				p23_num_doc	LIKE cxpt023.p23_num_doc,
 				p23_div_doc	LIKE cxpt023.p23_div_doc,
@@ -35,7 +34,7 @@ DEFINE rm_aju 		ARRAY [1000] OF RECORD
 				tit_saldo_nue	DECIMAL(12,2),
 				tit_check	CHAR(1)
 			END RECORD
-DEFINE rm_sld 		ARRAY [1000] OF RECORD
+DEFINE rm_sld 		ARRAY [5000] OF RECORD
 				p20_fecha_vcto	LIKE cxpt020.p20_fecha_vcto
 			END RECORD
 
@@ -76,7 +75,7 @@ IF int_flag THEN
 	RETURN
 END IF
 LET vm_max_rows	= 1000
-LET vm_max_elm  = 1000
+LET vm_max_elm  = 5000
 LET vm_tipo_trn = 'AJ'
 OPEN WINDOW wf AT 3,2 WITH 22 ROWS, 80 COLUMNS
     ATTRIBUTE(FORM LINE FIRST + 2, COMMENT LINE LAST, MENU LINE FIRST,BORDER,
