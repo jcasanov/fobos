@@ -4,10 +4,10 @@ SCREEN
       Marca: [f001 ] [f101            ]  Tipo: [f004 ] [f104               ]
   Fam. Vta.: [f002 ] [f102            ] Comp.: [f005 ] [f105               ] 
     Maquina: [f003 ] [f103                         ] 
-   Solo con clasificacion: [a] A     [b] B     [c] C     [e] E  
+   Solo con clasificacion: [a] A     [b] B     [c] C    [d] D     [e] E  
 
                             [f106                                          ]
-  [f010           |f011                               |f012      |f013      ]
+ [f010           |f011                               |f012      |f013      ]
  [f020           |f021                               |f022      |f023      ]
  [f020           |f021                               |f022      |f023      ]
  [f020           |f021                               |f022      |f023      ]
@@ -42,14 +42,15 @@ f012 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
 f013 = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
 f020 = formonly.r10_codigo, UPSHIFT, NOENTRY;
 f021 = formonly.r10_nombre, UPSHIFT, NOENTRY;
-f022 = formonly.valact  TYPE CHAR, INCLUDE=('A','B','C','E'), NOENTRY, UPSHIFT;
-f023 = formonly.valnue  TYPE CHAR, INCLUDE=(NULL, 'A','B','C','E'), UPSHIFT;
+f022 = formonly.valact  TYPE CHAR, INCLUDE=('A','B','C','D','E'), NOENTRY, UPSHIFT;
+f023 = formonly.valnue  TYPE CHAR, INCLUDE=(NULL, 'A','B','C','D','E'), UPSHIFT;
 
 f106 = formonly.num_reg, NOENTRY;
 
 a = formonly.clasif_a, WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
 b = formonly.clasif_b, WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
 c = formonly.clasif_c, WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+d = formonly.clasif_d, WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
 e = formonly.clasif_e, WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
 
 INSTRUCTIONS

@@ -22,6 +22,7 @@ DEFINE rm_par RECORD
 	clasif_a			CHAR(1),
 	clasif_b			CHAR(1),
 	clasif_c			CHAR(1),
+	clasif_d			CHAR(1),
 	clasif_e			CHAR(1),
 	desc_linea			VARCHAR(30),
 	desc_familia_vta	VARCHAR(30),
@@ -34,7 +35,7 @@ DEFINE vm_table_rows DECIMAL(7,0)
 
 DEFINE vm_param		LIKE rept104.r104_codigo
 
-
+DEFINE GrabarNuevoCalculo VARCHAR(1)
 
 MAIN
 	
@@ -62,7 +63,6 @@ CALL funcion_master()
 END MAIN
 
 
-
 FUNCTION funcion_master()
 DEFINE i		SMALLINT
 
@@ -86,14 +86,18 @@ WHILE TRUE
 	FOR i = 1 TO fgl_scr_size('rm_item')
 		CLEAR rm_item[i].*
 	END FOR
-	CALL lee_parametros1()
+
+
+CALL lee_parametros1()
 	IF int_flag THEN
 		RETURN
 	END IF
 	CALL lee_parametros2()
+
 	IF int_flag THEN
 		CONTINUE WHILE
 	END IF
+
 	CALL muestra_consulta()
 END WHILE
 
@@ -110,6 +114,7 @@ INITIALIZE rm_par.* TO NULL
 LET rm_par.clasif_a = 'S'
 LET rm_par.clasif_b = 'S'
 LET rm_par.clasif_c = 'S'
+LET rm_par.clasif_d = 'S'
 LET rm_par.clasif_e = 'S'
 LET int_flag = 0
 INPUT BY NAME rm_par.* WITHOUT DEFAULTS
@@ -133,9 +138,9 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 		END IF
 	AFTER INPUT
 		IF rm_par.clasif_a = 'N' AND rm_par.clasif_b = 'N' AND rm_par.clasif_c = 'N' AND 
-		   rm_par.clasif_e = 'N' 
+		   rm_par.clasif_d = 'N' AND rm_par.clasif_e = 'N' 
 		THEN 
-			CALL fgl_winmessage(vg_producto, 'Debe pedir items con alguna clasificacion.',
+		CALL fgl_winmessage(vg_producto, 'Debe pedir items con alguna clasificacion.',
 											 'exclamation')
 			CONTINUE INPUT
 		END IF
@@ -147,7 +152,7 @@ END FUNCTION
 
 FUNCTION lee_parametros2()
 DEFINE i			INTEGER
-DEFINE query		VARCHAR(700)
+DEFINE query		VARCHAR(1000)
 DEFINE expr_sql		VARCHAR(200)
 DEFINE expr_lin		VARCHAR(100)
 DEFINE expr_filtro 	VARCHAR(150)
@@ -192,6 +197,16 @@ IF rm_par.clasif_c = 'S' THEN
 	END IF
 	LET expr_clasif = expr_clasif CLIPPED, '"C"'
 END IF
+
+IF rm_par.clasif_d = 'S' THEN
+        IF expr_clasif = ' 1=1 ' THEN
+                LET expr_clasif = ' clasif IN ('
+        ELSE
+                LET expr_clasif = expr_clasif CLIPPED, ', '
+        END IF
+        LET expr_clasif = expr_clasif CLIPPED, '"D"'
+END IF
+
 IF rm_par.clasif_e = 'S' THEN
 	IF expr_clasif = ' 1=1 ' THEN
 		LET expr_clasif = ' clasif IN ('
@@ -218,15 +233,16 @@ CREATE TEMP TABLE temp_item
 	 te_valnue		CHAR(1)
 	)
 
-LET query = 'SELECT r10_codigo, r10_nombre, ',
+		LET query = 'SELECT r10_codigo, r10_nombre, ',
 			'		CASE NVL(r105_valor, r104_valor_default) ',
-				'		WHEN 0 THEN "E" ',
-				'		WHEN 1 THEN "A" ',
-				'		WHEN 2 THEN "B" ',
-				'		WHEN 3 THEN "C" ',
-				'		ELSE NULL ',	
+			'		WHEN 0 THEN "E" ',
+			'		WHEN 1 THEN "A" ',
+			'		WHEN 2 THEN "B" ',
+			'		WHEN 3 THEN "C" ',
+			'		WHEN 4 THEN "D" ',
+			'		ELSE NULL ',	
 			'		END as clasif',
-		    '  FROM rept010, rept011, rept104, OUTER rept105, OUTER rept103 ', 
+		    '  FROM rept010, rept011, rept104, OUTER rept105 ', 
 		    ' WHERE r10_compania   = ', vg_codcia, 
 			expr_lin CLIPPED,
 			'   AND ', expr_sql CLIPPED,
@@ -234,8 +250,8 @@ LET query = 'SELECT r10_codigo, r10_nombre, ',
 			'	AND r11_item       = r10_codigo ',
 			'   AND r104_compania  = r10_compania ',
   			'   AND r104_codigo    = "', vm_param CLIPPED, '"',
-			'   AND r103_compania  = r10_compania ',
-			'   AND r103_item      = r10_codigo ',
+--			'   AND r103_compania  = r10_compania ',
+--			'   AND r103_item      = r10_codigo ',
 			'   AND r105_compania  = r104_compania ',
 			'   AND r105_parametro = r104_codigo ',
 			'   AND r105_item      = r10_codigo ',
@@ -267,8 +283,8 @@ END FUNCTION
 
 
 FUNCTION muestra_consulta()
-DEFINE i			INTEGER
-DEFINE j			INTEGER
+DEFINE i		INTEGER
+DEFINE j		INTEGER
 DEFINE num_rows		INTEGER
 DEFINE lastpos		DECIMAL(7,0)
 DEFINE query		VARCHAR(300)
@@ -276,21 +292,34 @@ DEFINE contador		VARCHAR(35)
 DEFINE comando		VARCHAR(1000)
 DEFINE r_r10		RECORD LIKE rept010.*
 
+
+DEFINE TieneNuevoABC	INTEGER  -- lleva 1 si el campo valnuev de la grilla no esta vacio
+				 -- esta variable es una de las q se usa para condicionar la
+				 -- grabacion del registro 
+
 LET lastpos = 0
 WHILE TRUE 
 	LET query = 'SELECT * FROM temp_item ',
-				' WHERE te_posicion BETWEEN ', lastpos + 1, 
-									  ' AND ', lastpos + vm_max_rows,
-				'  ORDER BY 1'
+		' WHERE te_posicion BETWEEN ', lastpos + 1, 
+ 	        ' AND ', lastpos + vm_max_rows,
+		'  ORDER BY  te_valact,te_descripcion '
 
 	PREPARE crep FROM query
 	DECLARE q_crep CURSOR FOR crep 
 	LET i = 1
 	FOREACH q_crep INTO lastpos, rm_item[i].*
+
+		IF rm_item[i].valnue IS NOT NULL THEN
+                  LET TieneNuevoABC = 1
+		 ELSE
+                  LET TieneNuevoABC = 0
+		END IF		
+		
 		LET i = i + 1
 		IF i > vm_max_rows THEN
 			EXIT FOREACH
 		END IF
+
 	END FOREACH
 	FREE q_crep
 	LET num_rows = i - 1
@@ -302,56 +331,52 @@ WHILE TRUE
 	END IF
 
 	CALL set_count(num_rows)
-	INPUT ARRAY rm_item WITHOUT DEFAULTS FROM rm_item.*
+		DISPLAY ARRAY rm_item TO  rm_item.*
 		BEFORE ROW
+ 
 			LET i = arr_curr()
 			CALL mostrar_contadores(i, num_rows)
-		AFTER ROW
-			CALL actualizar_registro(i)
-			LET int_flag = 0
-		BEFORE INPUT
-			CALL dialog.keysetlabel('INSERT', '')
-			CALL dialog.keysetlabel('DELETE', '')
---			CALL dialog.keysetlabel('F6', 'Clasificar')
+		BEFORE DISPLAY
 			CALL dialog.keysetlabel('F7', 'Avanzar')
 			CALL dialog.keysetlabel('F8', 'Retroceder')
+			CALL dialog.keysetlabel('F9', 'Recalcular')
+			CALL dialog.keysetlabel('F3', 'Grabar')
+
 			IF lastpos >= vm_table_rows THEN
 				CALL dialog.keysetlabel('F7', '')
 			END IF
 			IF lastpos <= vm_max_rows THEN
 				CALL dialog.keysetlabel('F8', '')
 			END IF
-		AFTER INPUT
+
+		AFTER DISPLAY
 			LET int_flag = 0
-			CALL actualiza_parametro()
 			EXIT WHILE
-		BEFORE INSERT
-			LET lastpos = lastpos - num_rows 
-			LET int_flag = 0
-			EXIT INPUT
 		ON KEY(INTERRUPT)
-			EXIT INPUT
+			EXIT DISPLAY
 		ON KEY(F5)
-			LET comando = 'fglrun repp108 ', vg_base, ' RE ', 
+		        LET comando = 'fglrun repp108 ', vg_base, ' RE ', 
 			               vg_codcia, ' "',
 			               rm_item[i].r10_codigo CLIPPED || '"'
 			RUN comando
 			LET int_flag = 0
---		ON KEY(F6)
---			CALL control_clasificacion()
---			LET lastpos = lastpos - num_rows 
---			LET int_flag = 0
---			EXIT INPUT
-		ON KEY(F7)
-			CALL actualizar_registro(i)
-			LET int_flag = 0
-			EXIT INPUT
-		ON KEY(F8)
-			CALL actualizar_registro(i)
-			LET lastpos = lastpos - num_rows - vm_max_rows
-			LET int_flag = 0
-			EXIT INPUT
-	END INPUT
+
+		ON KEY(F9)
+		        LET GrabarNuevoCalculo = 1  --lleva 1 al hacer clic en el boton
+						    --Recalcular, indispensable para grabar
+						    --el recalculo  
+                        CALL calcular_ABC()         --funcion para hacer el Recalculo 
+ 	 		LET int_flag = 0
+                        EXIT WHILE 
+		ON KEY(F3)
+		    --Si existen items recalculados 
+			IF (GrabarNuevoCalculo = 1) AND TieneNuevoABC = 1 THEN
+		  	  LET int_flag = 0
+		          CALL actualiza_parametro()  -- funcion para grabar el nuevo recalculo 
+		      	  LET GrabarNuevoCalculo = 0
+	                  EXIT WHILE
+ 		   	END IF	
+	END DISPLAY
 	IF int_flag = 1 THEN
 		LET int_flag = 0
 		EXIT WHILE
@@ -361,86 +386,144 @@ END WHILE
 END FUNCTION
 
 
+FUNCTION calcular_ABC()
 
-FUNCTION control_clasificacion()
-DEFINE item			LIKE rept010.r10_codigo
-DEFINE fecha		DATE
-DEFINE fecha_ini	DATE
-DEFINE fecha_fin	DATE
+--Esta funcion tiene como objetivo recalcular la clasificacion ABC ACTUAL de los items q
+--se han cargado en la grilla; segun la nueva formula de clasificacion. 
 
-DEFINE query		VARCHAR(1000)
+DEFINE fecha            DATE
+DEFINE fecha_ini        DATE
+DEFINE fecha_fin        DATE
 
-DEFINE vtas_item	DECIMAL(15,2)
-DEFINE vtas_totales	DECIMAL(15,2)
-DEFINE porc			DECIMAL(5,2)
-DEFINE porc_total	DECIMAL(5,2)
-DEFINE clasif		CHAR(1)
+DEFINE query            VARCHAR(50)
+DEFINE query_           VARCHAR(1000)
 
-define	i	integer
+DEFINE vtas_item        DECIMAL(15,2)
+DEFINE NumReg       	INTEGER   		    -- lleva 1 si halla por lo menos 1 registro 
+DEFINE clasif           CHAR(1)
 
-	OPEN WINDOW repw112_2 AT 9,15 WITH 6 ROWS, 50 COLUMNS
-		ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE FIRST,
-			  BORDER, MESSAGE LINE LAST) 
-	OPEN FORM f_repf112_2 FROM '../forms/repf112_2'
-	DISPLAY FORM f_repf112_2
+DEFINE  i 	        INTEGER
 
-	LET fecha = MDY(MONTH(TODAY), 1, YEAR(TODAY)) 
-	LET fecha_fin = fecha - 1 UNITS DAY
+DEFINE item     	LIKE rept020.r20_item
+DEFINE CodTran  	LIKE rept020.r20_cod_tran   -- lleva los tipos FA/DF/AF
+DEFINE Cant_fa       	LIKE rept020.r20_cant_ven   -- Cant. de facturas de un item  
+DEFINE cant_df       	LIKE rept020.r20_cant_dev   -- cant  de devoluciones-factura de un item  
+DEFINE cant_af       	LIKE rept020.r20_cant_dev   -- cant  de Facturas anuladas     "      "
+DEFINE total_tran   	LIKE rept020.r20_cant_ven   -- Total de transacciones encontradas 
+						    -- segun su codtran, de un item 
+LET NumReg 	= 0
+LET vtas_item	= 0
+LET cant_fa	= 0
+LET cant_df 	= 0
+LET cant_af 	= 0
+
+        OPEN WINDOW repw112_2 AT 9,15 WITH 6 ROWS, 50 COLUMNS
+                ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE FIRST,
+                          BORDER, MESSAGE LINE LAST)
+        OPEN FORM f_repf112_2 FROM '../forms/repf112_2'
+        DISPLAY FORM f_repf112_2
+
+        LET fecha = MDY(MONTH(TODAY), 1, YEAR(TODAY))
+        LET fecha_fin = fecha - 1 UNITS DAY
 	LET fecha_ini = fecha - 1 UNITS YEAR
-	
-	WHENEVER ERROR CONTINUE
-	DROP TABLE tt_vtas
-	WHENEVER ERROR STOP
 
-	LET query = 'SELECT r106_item as te_item, SUM(r106_valor_vtas) as valvta ',
-	  			' FROM rept106 ',
-				'WHERE r106_compania  = ', vg_codcia CLIPPED,
-	   			'  AND r106_localidad = ', vg_codloc CLIPPED,
-	   			'  AND MDY(r106_mes, 1, r106_anio) BETWEEN "', fecha_ini CLIPPED, '" ',
-													'  AND "', fecha_fin CLIPPED, '" ',
-				'GROUP BY 1 ',
-				' INTO TEMP tt_vtas '
+	--cargamos todos los codigos-item q estan en la tabla temporal y q muestra la grilla  
+	LET query = 'SELECT te_item FROM temp_item ORDER BY 1'   
 
-	PREPARE stmt2 FROM query
-	EXECUTE stmt2
-
-	SELECT NVL(SUM(valvta), 0) INTO vtas_totales FROM tt_vtas
-	IF vtas_totales = 0 THEN
-		CALL fgl_winmessage(vg_producto, 'No han habido ventas en el periodo.',
-										 'exclamation')
-		CLOSE WINDOW repw112_2
-		RETURN
-	END IF
+        PREPARE cons_ FROM query
+        DECLARE q_cons_ CURSOR FOR cons_
  
-	LET query = 'SELECT te_item, SUM(valvta), (SUM(valvta)*100)/', vtas_totales,
-				'  FROM tt_vtas ',
-				' WHERE valvta > 0 ',
-				' GROUP BY te_item ',
-				' ORDER BY 3 DESC ' 
 
-	PREPARE stmt3 FROM query
-	DECLARE q_clasif CURSOR FOR stmt3
+  FOREACH q_cons_ INTO  item
 
-	LET porc_total = 0
-	FOREACH q_clasif INTO item, vtas_item, porc
-		DISPLAY BY NAME item
-		IF porc_total <= 50 THEN
-			LET clasif = 'A'
-		END IF
-		IF porc_total <= 90 THEN
-			LET clasif = 'B'
-		END IF
-		IF porc_total > 90 THEN
-			EXIT FOREACH
-		END IF
-		LET porc_total = porc_total + porc
-		UPDATE temp_item SET te_valnue = clasif 
-		 WHERE te_item = item 
-	END FOREACH 
+	LET cant_fa     = 0
+	LET cant_df     = 0
+	LET cant_af     = 0
 
-	CLOSE WINDOW repw112_2
+	  --se  hace un conteo para saber cuantas "FA/DF/AF" a tenido cada "item cargado"
+	  --durante los ultimos 12 meses
+
+     	LET query_ = 'SELECT  r20_cod_tran,r20_item as te_item, count(*) as TOTAL ',
+	            ' FROM rept019, rept020 ',
+		    ' WHERE ',
+		    ' r20_compania  = r19_compania  AND ',
+	            ' r20_localidad = r19_localidad AND ',
+                    ' r20_cod_tran  = r19_cod_tran  AND ',
+                    ' r20_num_tran  = r19_num_tran  AND ',
+                    ' r19_compania      = ', vg_codcia CLIPPED,
+		    ' AND r19_localidad = ', vg_codloc CLIPPED,
+		    ' AND r19_cod_tran  IN ("FA","DF","AF")',		   
+		    ' AND r20_item  = "', item ,                   '" AND ',
+                    ' DATE(r19_fecing) BETWEEN "', fecha_ini CLIPPED, '" ',
+                    ' AND "', fecha_fin CLIPPED, '" ',
+                    ' GROUP BY 1,2 '
+        
+	PREPARE stmt3 FROM query_
+        DECLARE q_clasif CURSOR FOR stmt3
+
+	FOREACH q_clasif INTO CodTran,item, total_tran
+
+		IF Codtran='FA' THEN   
+		   LET cant_fa = total_tran  	 
+	        END IF
+		IF Codtran='DF' THEN
+                   LET cant_df = total_tran  
+                END IF
+		IF Codtran='AF' THEN
+                   LET cant_af = total_tran  
+                END IF
+
+                LET NumReg =  1  	      
+
+        END FOREACH
+		-- obtenemos el Numero de facturas final, "FACTURAS EXITOSAMENTE VENDIDAS" 
+		LET vtas_item = cant_fa - ( cant_df + cant_af )		
+	
+                DISPLAY BY NAME item
+
+		--Segun el rsultado de vtas_item, se procede a clasificar el item,
+		--basandonos en ciertas condiciones y/o parametros ya establecidos por diteca.
+
+		IF vtas_item > 12 THEN
+                   LET clasif = 'A'
+		 ELSE
+                  IF vtas_item > 5 THEN
+                    LET clasif = 'B'
+                   ELSE 
+	            IF vtas_item > 2 THEN
+		      LET clasif = 'C'
+	             ELSE
+		      IF vtas_item > 1 THEN
+                        LET clasif = 'D'
+                       ELSE
+                        IF vtas_item >= 0 THEN
+                           LET clasif = 'E'
+                        END IF
+		      END IF
+		    END IF
+		  END IF
+		END IF			
+
+		--actualizamos en la tabla temp, el nuevo ABC
+                UPDATE temp_item SET te_valnue = clasif
+                WHERE te_item = item
+			
+  END FOREACH
+       
+        CLOSE WINDOW repw112_2
+        -- NumReg, lleva 0, significa q no hubo reg encontrados x el query, caso contrario
+	-- procede la carga de la tabla temp, con los nuevos ABC, en la grilla(funcion muestra
+	-- consulta)    
+	IF NumReg > 0 THEN  
+ 	   CALL muestra_consulta()
+         ELSE
+	   LET GrabarNuevoCalculo = 0	
+           CALL fgl_winmessage(vg_producto, 'No han habido ventas en el periodo.',
+	   'exclamation')
+	END IF
+
+
 END FUNCTION
-
 
 
 FUNCTION mostrar_contadores(num_elm, num_rows)
@@ -471,32 +554,32 @@ DEFINE query		VARCHAR(1000)
 
 BEGIN WORK
 
-	UPDATE rept105 SET r105_fecha_fin = TODAY
-	 WHERE r105_compania = vg_codcia
-	   AND r105_parametro = vm_param 
-	   AND r105_item IN (SELECT te_item FROM temp_item WHERE te_valnue IS NOT NULL)
-	   AND r105_fecha_fin IS NULL
+  UPDATE rept105 SET r105_fecha_fin = TODAY
+  WHERE r105_compania = vg_codcia
+  AND r105_parametro = vm_param 
+  AND r105_item IN (SELECT te_item FROM temp_item WHERE te_valnue IS NOT NULL)
+  AND r105_fecha_fin IS NULL
 
-	LET query = 'INSERT INTO rept105(r105_compania, r105_parametro, r105_item, ', 
-								'	 r105_fecha_ini, r105_secuencia, r105_valor, ',
- 								'	 r105_origen, r105_usuario) ',
-				'SELECT ', vg_codcia CLIPPED, ', "',  vm_param CLIPPED, '",  ',
-						' te_item, TODAY, ',
-						' NVL((SELECT MAX(r105_secuencia) FROM rept105 ',
-							' 	 WHERE r105_compania = ', vg_codcia CLIPPED,
-								'  AND r105_parametro = "', vm_param CLIPPED, '"',
-								'  AND r105_item = te_item ',
-								'  AND r105_fecha_ini = TODAY), 0) + 1, ',
-						' CASE te_valnue WHEN "A" THEN 1 ',
-										'WHEN "B" THEN 2 ',
-										'WHEN "C" THEN 3 ',
-										'WHEN "E" THEN 0 ',
-						'  END, "M", "', vg_usuario CLIPPED, '"',
-	 			'  FROM temp_item ',
-				' WHERE te_valnue IS NOT NULL AND te_valnue <> te_valact '
+  LET query = 'INSERT INTO rept105(r105_compania, r105_parametro, r105_item, ', 
+  ' r105_fecha_ini, r105_secuencia, r105_valor, r105_origen, r105_usuario) ',
+  ' SELECT ', vg_codcia CLIPPED, ',  "',  vm_param CLIPPED, '",  ',
+  ' te_item, TODAY, NVL((SELECT MAX(r105_secuencia) FROM rept105 ',
+  ' WHERE r105_compania = ', vg_codcia CLIPPED,
+  ' AND r105_parametro = "', vm_param CLIPPED, '"',
+  ' AND r105_item = te_item  AND r105_fecha_ini = TODAY), 0) + 1, ',
+  ' CASE te_valnue WHEN "A" THEN 1 ',
+  ' WHEN "B" THEN 2 ',
+  ' WHEN "C" THEN 3 ',
+  ' WHEN "D" THEN 4 ',
+  ' WHEN "E" THEN 0 ',
+  ' END, "M", "', vg_usuario CLIPPED, '"',
+  ' FROM temp_item ',
+  ' WHERE (te_valnue IS NOT NULL) AND (te_valnue <> te_valact) '
 
-	PREPARE stmt1 FROM query
-	EXECUTE stmt1
+  PREPARE stmt1 FROM query
+  EXECUTE stmt1
+
+ -- DELETE FROM rept105 WHERE r105_valor = 0
 
 COMMIT WORK
 
