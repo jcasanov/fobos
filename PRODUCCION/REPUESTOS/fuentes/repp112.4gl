@@ -443,7 +443,7 @@ LET cant_af 	= 0
 	  --se  hace un conteo para saber cuantas "FA/DF/AF" a tenido cada "item cargado"
 	  --durante los ultimos 12 meses
 
-     	LET query_ = 'SELECT  r20_cod_tran,r20_item as te_item, count(*) as TOTAL ',
+     	LET query_ = 'SELECT  r20_cod_tran,r20_item as te_item, count(DISTINCT r20_num_tran) as TOTAL ',
 	            ' FROM rept019, rept020 ',
 		    ' WHERE ',
 		    ' r20_compania  = r19_compania  AND ',
@@ -484,24 +484,24 @@ LET cant_af 	= 0
 		--Segun el rsultado de vtas_item, se procede a clasificar el item,
 		--basandonos en ciertas condiciones y/o parametros ya establecidos por diteca.
 
-		IF vtas_item > 12 THEN
-                   LET clasif = 'A'
-		 ELSE
-                  IF vtas_item > 5 THEN
-                    LET clasif = 'B'
-                   ELSE 
-	            IF vtas_item > 2 THEN
-		      LET clasif = 'C'
-	             ELSE
-		      IF vtas_item > 1 THEN
-                        LET clasif = 'D'
-                       ELSE
-                        IF vtas_item >= 0 THEN
-                           LET clasif = 'E'
-                        END IF
-		      END IF
-		    END IF
-		  END IF
+		IF vtas_item >= 7 THEN
+			LET clasif = 'A'
+		ELSE
+			IF vtas_item >= 5 THEN
+				LET clasif = 'B'
+			ELSE 
+				IF vtas_item >= 3 THEN
+					LET clasif = 'C'
+				ELSE
+					IF vtas_item = 2 THEN
+						LET clasif = 'D'
+					ELSE
+						IF vtas_item <= 1 THEN
+							LET clasif = 'E'
+						END IF
+					END IF
+				END IF
+			END IF
 		END IF			
 
 		--actualizamos en la tabla temp, el nuevo ABC
