@@ -13,6 +13,7 @@ DEFINE rm_item ARRAY[30000] OF RECORD
 	valact		CHAR(1),
 	valnue		CHAR(1)
 	END RECORD
+DEFINE arr_vtas_item	ARRAY[30000] OF INTEGER
 DEFINE rm_par RECORD
 	r10_linea			LIKE rept010.r10_linea,
 	r103_familia_vta	LIKE rept103.r103_familia_vta,
@@ -68,7 +69,7 @@ DEFINE i		SMALLINT
 
 LET vm_param = 'ABC'
 
-OPEN WINDOW repw112_1 AT 3,2 WITH 22 ROWS, 80 COLUMNS
+OPEN WINDOW repw112_1 AT 3,2 WITH 23 ROWS, 80 COLUMNS
 	ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE FIRST,
 		  BORDER, MESSAGE LINE LAST) 
 OPEN FORM f_repf112_1 FROM '../forms/repf112_1'
@@ -230,7 +231,8 @@ CREATE TEMP TABLE temp_item
 	 te_item		CHAR(15),
 	 te_descripcion CHAR(40),
 	 te_valact		CHAR(1),
-	 te_valnue		CHAR(1)
+	 te_valnue		CHAR(1),
+	 te_vtas_item	INTEGER
 	)
 
 		LET query = 'SELECT r10_codigo, r10_nombre, ',
@@ -307,7 +309,7 @@ WHILE TRUE
 	PREPARE crep FROM query
 	DECLARE q_crep CURSOR FOR crep 
 	LET i = 1
-	FOREACH q_crep INTO lastpos, rm_item[i].*
+	FOREACH q_crep INTO lastpos, rm_item[i].*, arr_vtas_item[i]
 
 		IF rm_item[i].valnue IS NOT NULL THEN
                   LET TieneNuevoABC = 1
@@ -333,9 +335,9 @@ WHILE TRUE
 	CALL set_count(num_rows)
 		DISPLAY ARRAY rm_item TO  rm_item.*
 		BEFORE ROW
- 
 			LET i = arr_curr()
 			CALL mostrar_contadores(i, num_rows)
+			DISPLAY arr_vtas_item[i] TO vtas_item
 		BEFORE DISPLAY
 			CALL dialog.keysetlabel('F7', 'Avanzar')
 			CALL dialog.keysetlabel('F8', 'Retroceder')
@@ -479,7 +481,7 @@ LET cant_af 	= 0
 		-- obtenemos el Numero de facturas final, "FACTURAS EXITOSAMENTE VENDIDAS" 
 		LET vtas_item = cant_fa - ( cant_df + cant_af )		
 	
-                DISPLAY BY NAME item
+		DISPLAY BY NAME item
 
 		--Segun el rsultado de vtas_item, se procede a clasificar el item,
 		--basandonos en ciertas condiciones y/o parametros ya establecidos por diteca.
@@ -505,7 +507,7 @@ LET cant_af 	= 0
 		END IF			
 
 		--actualizamos en la tabla temp, el nuevo ABC
-                UPDATE temp_item SET te_valnue = clasif
+                UPDATE temp_item SET te_valnue = clasif, te_vtas_item = vtas_item
                 WHERE te_item = item
 			
   END FOREACH

@@ -7,7 +7,7 @@ SCREEN
    Solo con clasificacion: [a] A     [b] B     [c] C    [d] D     [e] E  
 
                             [f106                                          ]
- [f010           |f011                               |f012      |f013      ]
+  [f010           |f011                               |f012      |f013      ]
  [f020           |f021                               |f022      |f023      ]
  [f020           |f021                               |f022      |f023      ]
  [f020           |f021                               |f022      |f023      ]
@@ -21,7 +21,7 @@ SCREEN
  [f020           |f021                               |f022      |f023      ]
  [f020           |f021                               |f022      |f023      ]
  [f020           |f021                               |f022      |f023      ]
- [f020           |f021                               |f022      |f023      ]
+ Núm. Facturas: [f006 ]
 }
 ATTRIBUTES
 f001 = formonly.r10_linea, 		  WIDGET='FIELD_BMP', CONFIG='lista.bmp F2', UPSHIFT;
@@ -46,6 +46,7 @@ f022 = formonly.valact  TYPE CHAR, INCLUDE=('A','B','C','D','E'), NOENTRY, UPSHI
 f023 = formonly.valnue  TYPE CHAR, INCLUDE=(NULL, 'A','B','C','D','E'), UPSHIFT;
 
 f106 = formonly.num_reg, NOENTRY;
+f006 = formonly.vtas_item, NOENTRY, UPSHIFT;
 
 a = formonly.clasif_a, WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
 b = formonly.clasif_b, WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
@@ -54,7 +55,7 @@ d = formonly.clasif_d, WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
 e = formonly.clasif_e, WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
 
 INSTRUCTIONS
-SCREEN RECORD rm_item[14] (formonly.r10_codigo, formonly.r10_nombre, 
+SCREEN RECORD rm_item[13] (formonly.r10_codigo, formonly.r10_nombre, 
 			   			   formonly.valact, formonly.valnue)
 KEYS
 'F5' = 'Ver Item'
