@@ -1004,6 +1004,7 @@ DISPLAY "Listado Detalle Vtas"	TO c1500  ## Botón 15 repp423
 DISPLAY "Transacciones" 	TO c1600  ## Botón 16 repp430
 DISPLAY "Analisis re-orden"	TO c1700  ## Botón 17 repp424
 DISPLAY "Ubicación de Items" 	TO c1800  ## Botón 18 repp427
+DISPLAY "Listado de Items x clasificación" TO c1900  ## Botón 19 repp431
 
 LET h = fgl_getkey()
 
@@ -1062,6 +1063,10 @@ CASE h
 	WHEN 18
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp427 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
 		RUN ejecuta
+	 WHEN 19
+                LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp431 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
+                RUN ejecuta
+
 	WHEN 0
 		CLOSE WINDOW w_menu_reportes
 		CALL menu_repuestos()
