@@ -863,8 +863,8 @@ FOR i = 1 TO preventas
 				rm_r24.r24_cant_ped, '. ', 'Modifique la proforma y vuelva a ',
 				'generar la preventa.' 
 			CALL fgl_winmessage(vg_producto, mensaje,'exclamation') 
-			ROLLBACK WORK
-			RETURN 
+--			ROLLBACK WORK
+--			RETURN 
 		END IF 
 	
         LET rm_r24.r24_val_descto   = 
