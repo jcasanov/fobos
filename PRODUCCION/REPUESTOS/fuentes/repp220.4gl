@@ -1087,12 +1087,10 @@ INPUT BY NAME rm_r16.r16_pedido,    rm_r16.r16_tipo,      rm_r16.r16_linea,
 			CALL fl_mensaje_abandonar_proceso() RETURNING resp
 			IF resp = 'Yes' THEN
 				LET int_flag = 1
-				CLOSE WINDOW w_220_3
-				RETURN
+				EXIT INPUT
 			END IF
 		ELSE
-			CLOSE WINDOW w_220_3
-			RETURN
+			EXIT INPUT
 		END IF
 	ON KEY(F2)
 		IF infield(r16_linea) THEN
@@ -1252,6 +1250,7 @@ INPUT BY NAME rm_r16.r16_pedido,    rm_r16.r16_tipo,      rm_r16.r16_linea,
 		END IF
 END INPUT	
 
+LET int_flag = 0
 CLOSE WINDOW w_220_3
 
 END FUNCTION
