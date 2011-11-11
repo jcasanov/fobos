@@ -168,8 +168,8 @@ MENU 'OPCIONES'
 			   END IF
 			END IF
 
-		    if fl_control_permiso_opcion('imprimir') then
-			   show option 'imprimir'
+		    if fl_control_permiso_opcion('Imprimir') then
+			   show option 'Imprimir'
 		    end if
 
 		END IF
