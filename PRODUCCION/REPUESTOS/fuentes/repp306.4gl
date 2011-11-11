@@ -502,26 +502,15 @@ DISPLAY nombre TO n_item
 
 DECLARE q_pedido CURSOR FOR
 	SELECT r17_pedido, r16_proveedor, r16_fec_llegada, r17_cantped
-		FROM rept016, rept017
-		WHERE r17_compania  = vg_codcia
-	          AND r17_item      = item
-		  AND r17_estado    NOT IN ('A', 'P')
-		  AND r16_compania  = r17_compania
-                  AND r16_localidad = r17_localidad
-                  AND r16_pedido    = r17_pedido
-{ XXX no creo que esto haya estado bien
-	UNION ALL
-	SELECT r17_pedido, r16_proveedor, r16_fec_llegada, 
-	       (r17_cantped - r17_cantrec)
-		FROM rept016, rept017
-		WHERE r17_compania  = vg_codcia
-	          AND r17_item      = item
-		  AND r17_cantped   > r17_cantrec 
-		  AND r17_estado    = 'P'
-		  AND r16_compania  = r17_compania
-                  AND r16_localidad = r17_localidad
-                  AND r16_pedido    = r17_pedido
-}                  
+      FROM rept016, rept017
+	 WHERE r17_compania  = vg_codcia
+	   AND r17_item      = item
+	   AND r17_estado    NOT IN ('A', 'P', 'N')
+	   AND r16_compania  = r17_compania
+	   AND r16_localidad = r17_localidad
+	   AND r16_pedido    = r17_pedido
+	   AND r16_estado    NOT IN ('N')
+
 LET i = 1
 FOREACH q_pedido INTO r_pedido[i].*
 	LET i = i + 1
