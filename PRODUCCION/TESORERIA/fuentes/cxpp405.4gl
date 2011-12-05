@@ -206,7 +206,6 @@ ON EVERY ROW
 			      COLUMN 19, r_iva.p28_valor_base 
 					 	USING "###,###,##&.##",
 			      COLUMN 50, tipo,
-				  COLUMN 65, r_iva.p28_codigo_sri,
 			      COLUMN 86, r_iva.p28_porcentaje USING "#&.##",
 			      COLUMN 94, r_iva.p28_valor_ret  
 						USING "###,###,##&.##"
@@ -217,7 +216,6 @@ ON EVERY ROW
 			      COLUMN 19, r_iva.p28_valor_base 
 					 	USING "###,###,##&.##",
 			      COLUMN 50, tipo,
-				  COLUMN 65, r_iva.p28_codigo_sri,
 			      COLUMN 86, r_iva.p28_porcentaje USING "#&.##",
 			      COLUMN 94, r_iva.p28_valor_ret  
 						USING "###,###,##&.##"
@@ -230,7 +228,6 @@ ON EVERY ROW
 	    PRINT COLUMN 00, YEAR(rm_p27.p27_fecing),
 		      COLUMN 19, r_fuente.p28_valor_base USING "###,###,##&.##",
 		      COLUMN 50, tipo,
-			  COLUMN 65, r_fuente.p28_codigo_sri,
 		      COLUMN 86, r_fuente.p28_porcentaje USING "##&.##",
 		      COLUMN 94, r_fuente.p28_valor_ret  USING "###,###,##&.##"
 		LET sum_valor_ret = sum_valor_ret + r_fuente.p28_valor_ret
