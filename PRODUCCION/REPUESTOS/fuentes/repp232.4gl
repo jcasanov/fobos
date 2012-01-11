@@ -718,13 +718,16 @@ LET query = 'INSERT INTO rept026 ',
 PREPARE stmt4 FROM query
 EXECUTE stmt4
 
+-- Al copiar los documentos a aplicar ignora los PA, porque como ya fueron 
+-- aplicados no tiene sentido
 LET query = 'INSERT INTO rept027 ',
 			'SELECT r27_compania, r27_localidad, ', numprev, ', r27_tipo, ',
 				  ' r27_numero, r27_valor ',
 		 	'  FROM rept027 ',
 			' WHERE r27_compania  = ', vg_codcia,
 			'   AND r27_localidad = ', vg_codloc,
-			'   AND r27_numprev   = ', r_prev.r23_numprev
+			'   AND r27_numprev   = ', r_prev.r23_numprev,
+			'   AND r27_tipo <> "PA" '
 
 PREPARE stmt5 FROM query
 EXECUTE stmt5
