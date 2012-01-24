@@ -273,7 +273,6 @@ DEFINE max_lineas	INTEGER
 DEFINE linea_act	INTEGER
 DEFINE saltar		INTEGER
 
-DEFINE relleno		VARCHAR(150)
 
 OUTPUT
 	TOP    MARGIN	vm_top
@@ -287,7 +286,6 @@ PAGE HEADER
 	SKIP rm_g100.g100_posy_benef LINES
 	LET max_lineas = 15
 	LET linea_act = rm_g100.g100_posy_benef
-	LET relleno = 'X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X'
 
 ON EVERY ROW
 	IF valor_base < 0 THEN
@@ -308,7 +306,6 @@ ON EVERY ROW
 				LET i = indice + 1
 				LET valletras2 = valletras1[i, rm_g100.g100_posfx_vallt2]
 				LET i = LENGTH(valletras2 CLIPPED) + 1
-				LET valletras2 = relleno[i, rm_g100.g100_posfx_vallt2]
 				EXIT WHILE
 			ELSE 
 				LET indice = indice - 1
@@ -316,8 +313,6 @@ ON EVERY ROW
 		END WHILE
 	ELSE 
 		LET i = indice + 1
-		LET valletras1[i, rm_g100.g100_posfx_vallt1] = relleno[i, rm_g100.g100_posfx_vallt1]
-		LET valletras2 = relleno
 	END IF
 
 	LET saltar = rm_g100.g100_posy_vallt1 - linea_act 
