@@ -1102,7 +1102,7 @@ END FUNCTION
 FUNCTION nextValInSequence()
 
 DEFINE resp		CHAR(6)
-DEFINE retVal 		SMALLINT
+DEFINE retVal 		INTEGER
 
 LET retVal = -1
 WHILE retVal = -1
