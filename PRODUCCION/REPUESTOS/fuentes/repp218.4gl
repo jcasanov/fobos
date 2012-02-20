@@ -988,7 +988,7 @@ DEFINE modulo		LIKE gent050.g50_modulo
 DEFINE tipo_tran 	LIKE rept019.r19_cod_tran
 
 DEFINE resp		CHAR(6)
-DEFINE retVal 		SMALLINT
+DEFINE retVal 		INTEGER
 
 SET LOCK MODE TO WAIT 3
 
