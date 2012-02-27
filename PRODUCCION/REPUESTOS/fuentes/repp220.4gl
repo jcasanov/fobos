@@ -736,6 +736,7 @@ IF rm_r23.r23_cont_cred = 'C' THEN
 	IF r_z30.z30_saldo_venc > 0 THEN
 		CALL fgl_winmessage(vg_producto, 'El cliente tiene un saldo vencido de ' || r_z30.z30_saldo_venc || ' no se puede facturar al contado.', 'info')
 		CLOSE WINDOW w_220_4
+		ROLLBACK WORK
 		RETURN
 	END IF 
 END IF
@@ -820,6 +821,7 @@ FOR i = 1 TO preventas
 					'precios diferentes. Se detendrá ' ||
 					'la generación de la preventa.',
 					'stop')
+				CLOSE WINDOW w_220_4
 				ROLLBACK WORK
 				RETURN
 			END IF
@@ -831,6 +833,7 @@ FOR i = 1 TO preventas
 					'descuentos diferentes. Se detendrá ' ||
 					'la generación de la preventa.',
 					'stop')
+				CLOSE WINDOW w_220_4
 				ROLLBACK WORK
 				RETURN
 			END IF
@@ -863,6 +866,7 @@ FOR i = 1 TO preventas
 				rm_r24.r24_cant_ped, '. ', 'Modifique la proforma y vuelva a ',
 				'generar la preventa.' 
 			CALL fgl_winmessage(vg_producto, mensaje,'exclamation') 
+--			CLOSE WINDOW w_220_4
 --			ROLLBACK WORK
 --			RETURN 
 		END IF 
@@ -1557,8 +1561,9 @@ IF fl_proforma_despachada(vg_codcia, vg_codloc, rm_r21.r21_numprof) THEN
 END IF
 
 LET vm_flag_mant = 'M'
-WHENEVER ERROR CONTINUE
 BEGIN WORK
+
+WHENEVER ERROR CONTINUE
 DECLARE q_up2 CURSOR FOR 
 	SELECT * FROM rept021 
 		WHERE r21_compania  = vg_codcia
@@ -1605,6 +1610,7 @@ ELSE
 		ELSE	
 			CALL lee_muestra_registro(vm_rows[vm_row_current])
 		END IF
+		ROLLBACK WORK
 		RETURN
 	END IF
 
