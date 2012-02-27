@@ -5086,6 +5086,9 @@ DEFINE aplicado_cap	DECIMAL(14,2)
 DEFINE aplicado_int	DECIMAL(14,2)
 DEFINE valor_aplicar	DECIMAL(14,2)
 
+SET LOCK MODE TO WAIT 10
+WHENEVER ERROR CONTINUE
+
 DECLARE q_ddev CURSOR FOR 
 	SELECT * FROM cxct020 WHERE z20_compania  = cod_cia AND 
 	                            z20_localidad = cod_loc AND 
@@ -5094,10 +5097,20 @@ DECLARE q_ddev CURSOR FOR
 	                            z20_num_tran  = num_tran AND
 				    z20_saldo_cap + z20_saldo_int > 0
 		FOR UPDATE
+IF status < 0 THEN
+	WHENEVER ERROR STOP
+	SET LOCK MODE TO NOT WAIT
+	CALL fl_mensaje_bloqueo_otro_usuario()
+	RETURN 0
+END IF
+WHENEVER ERROR STOP
+SET LOCK MODE TO NOT WAIT
+
 INITIALIZE r_doc.* TO NULL
 OPEN q_ddev
 FETCH q_ddev INTO r_doc.*
 CLOSE q_ddev
+
 IF r_doc.z20_codcli IS NOT NULL AND r_doc.z20_codcli <> codcli THEN
 	RETURN 0
 END IF
