@@ -1428,16 +1428,24 @@ LET vm_fecha              = DATE(CURRENT)
 LET rm_r21.r21_usuario    = vg_usuario
 LET rm_r21.r21_compania   = vg_codcia
 LET rm_r21.r21_localidad  = vg_codloc
--- XXX esto es un hack horrible
-IF vg_codloc = 1 THEN
-	-- LET rm_r21.r21_bodega     = rm_r00.r00_bodega_fact
-	LET rm_r21.r21_bodega     = 'MA'
-END IF 
-IF vg_codloc = 2 THEN
-	-- LET rm_r21.r21_bodega     = rm_r00.r00_bodega_fact
-	LET rm_r21.r21_bodega     = 'QT'
+
+SQL 
+	SELECT FIRST 1 r02_codigo
+      INTO $rm_r21.r21_bodega
+	  FROM rept002
+	 WHERE r02_compania  = $vg_codcia
+	   AND r02_localidad = $vg_codloc 
+	   AND r02_tipo      = 'F'
+	   AND r02_factura   = 'S'
+	   AND r02_area      = 'R'
+	   AND r02_estado    = 'A'
+END SQL
+
+IF rm_r21.r21_bodega IS NULL THEN
+	CALL fgl_winmessage(vg_producto, 'No hay bodegas de facturación registradas para esta localidad.', 'stop')
+	RETURN
 END IF
--- XXX fin del hack 
+
 LET rm_r21.r21_dias_prof  = rm_r00.r00_dias_prof
 LET rm_r21.r21_moneda     = rg_gen.g00_moneda_base
 LET rm_r21.r21_porc_impto = rg_gen.g00_porc_impto
