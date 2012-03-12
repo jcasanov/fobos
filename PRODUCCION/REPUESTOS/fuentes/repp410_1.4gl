@@ -131,7 +131,7 @@ DEFINE acumulado	LIKE rept019.r19_tot_neto
 
 WHILE TRUE
 
-	LET vm_skip_lin = 34
+	LET vm_skip_lin = 33
 	CALL fl_control_reportes() RETURNING comando
 	IF int_flag THEN
 		EXIT WHILE
@@ -215,9 +215,9 @@ PAGE HEADER
 	PRINT COLUMN 22, rm_r19.r19_nomcli CLIPPED,
 		  COLUMN 99, rm_r19.r19_cedruc 
 	PRINT COLUMN 22, rm_r19.r19_dircli CLIPPED
-	PRINT COLUMN 22, rm_r19.r19_telcli CLIPPED,
+	PRINT COLUMN 22, rm_r19.r19_telcli CLIPPED
+	PRINT COLUMN 22, forma_pago CLIPPED,
 	      COLUMN 78, rm_r19.r19_vendedor
-	PRINT COLUMN 22, forma_pago CLIPPED
 	PRINT COLUMN 22, rm_r19.r19_oc_externa CLIPPED
 
 	SKIP 6 LINES
@@ -235,7 +235,7 @@ ON LAST ROW
 	NEED 5 LINES
 
 	LET vm_skip_lin = vm_skip_lin - vm_lin 
-	IF vm_skip_lin = 0 THEN
+	IF vm_skip_lin <= 0 THEN
 		SKIP 1 LINES
 	ELSE
 		SKIP vm_skip_lin LINES
