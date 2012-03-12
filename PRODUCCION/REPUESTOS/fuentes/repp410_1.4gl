@@ -77,7 +77,7 @@ LET vm_top    = 0
 LET vm_left   =	2
 LET vm_right  =	132
 LET vm_bottom =	0
-LET vm_page   = 64
+LET vm_page   = 66
 
 CALL fl_lee_cabecera_transaccion_rep(vg_codcia, vg_codloc, 
 				     vm_cod_tran, vm_factura) 
@@ -131,7 +131,7 @@ DEFINE acumulado	LIKE rept019.r19_tot_neto
 
 WHILE TRUE
 
-	LET vm_skip_lin = 32
+	LET vm_skip_lin = 34
 	CALL fl_control_reportes() RETURNING comando
 	IF int_flag THEN
 		EXIT WHILE
@@ -207,7 +207,7 @@ PAGE HEADER
 	LET impuesto = rm_r19.r19_tot_neto   -  rm_r19.r19_flete  -
 		(rm_r19.r19_tot_bruto - rm_r19.r19_tot_dscto)
 
-	SKIP 11 LINES
+	SKIP 12 LINES
 --	print '&k2S' 		-- Letra condensada
 
 	PRINT COLUMN 22, fl_justifica_titulo('I', rm_r19.r19_num_tran CLIPPED, 15),
