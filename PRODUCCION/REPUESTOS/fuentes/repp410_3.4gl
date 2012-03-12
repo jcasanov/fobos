@@ -131,7 +131,7 @@ DEFINE acumulado	LIKE rept019.r19_tot_neto
 
 WHILE TRUE
 
-	LET vm_skip_lin = 33
+	LET vm_skip_lin = 32
 	CALL fl_control_reportes() RETURNING comando
 	IF int_flag THEN
 		EXIT WHILE
