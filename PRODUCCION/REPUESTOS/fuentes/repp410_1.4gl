@@ -131,7 +131,7 @@ DEFINE acumulado	LIKE rept019.r19_tot_neto
 
 WHILE TRUE
 
-	LET vm_skip_lin = 34
+	LET vm_skip_lin = 35
 	CALL fl_control_reportes() RETURNING comando
 	IF int_flag THEN
 		EXIT WHILE
@@ -210,14 +210,14 @@ PAGE HEADER
 	SKIP 12 LINES
 --	print '&k2S' 		-- Letra condensada
 
-	PRINT COLUMN 22, fl_justifica_titulo('I', rm_r19.r19_num_tran CLIPPED, 15),
-		  COLUMN 99, DATE(rm_r19.r19_fecing) USING 'dd-mm-yyyy', 1 SPACES, TIME 
+	PRINT COLUMN 22, fl_justifica_titulo('I', rm_r19.r19_num_tran CLIPPED, 15)
 	PRINT COLUMN 22, rm_r19.r19_nomcli CLIPPED,
+		  COLUMN 99, DATE(rm_r19.r19_fecing) USING 'dd-mm-yyyy', 1 SPACES, TIME 
+	PRINT COLUMN 22, rm_r19.r19_dircli CLIPPED,
 		  COLUMN 99, rm_r19.r19_cedruc 
-	PRINT COLUMN 22, rm_r19.r19_dircli CLIPPED
-	PRINT COLUMN 22, rm_r19.r19_telcli CLIPPED,
+	PRINT COLUMN 22, rm_r19.r19_telcli CLIPPED
+	PRINT COLUMN 22, forma_pago CLIPPED,
 	      COLUMN 78, rm_r19.r19_vendedor
-	PRINT COLUMN 22, forma_pago CLIPPED
 	PRINT COLUMN 22, rm_r19.r19_oc_externa CLIPPED
 
 	SKIP 6 LINES
