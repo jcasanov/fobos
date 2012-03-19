@@ -6312,10 +6312,6 @@ CASE tipo_doc
 		RETURN 0
 END CASE
 
-IF (cedruc[1, 2] > 22) OR (cedruc[1, 2] = 00) THEN
-	CALL fgl_winmessage(vg_producto, 'Los digitos iniciales de cédula/ruc son incorrectos.', 'exclamation')
-	RETURN 0
-END IF
 IF tipo_doc = 'R' THEN
 	IF cedruc[11, 13] <> '001' OR cedruc[11, 12] <> '00' THEN
 		CALL fgl_winmessage(vg_producto, 'El número de digitos del ruc es incorrecto.', 'exclamation')
