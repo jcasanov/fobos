@@ -1,42 +1,41 @@
-DATABASE DITECA
+DATABASE aceros
 SCREEN 
 
 {
 
-			     Moneda: [c1] [c020             ]
-     	      Tipo Documento Deudor: [c2] [c021             ]
+                   Moneda: [c1] [c020             ]
+    Tipo Documento Deudor: [c2] [c021             ]
 
-   		    	  Proveedor: [c3  ] [c022             ]		
+                Proveedor: [c3  ] [c022                                   ]
 	     
-		      Fecha Inicial: [c005      ]  
-            	        Fecha Final: [c006      ]
+            Fecha Inicial: [c005      ]  
+              Fecha Final: [c006      ]
 
-     			      Saldo: [c007       ]   Origen: [c008          ]
+                    Saldo: [c007         ]         Origen: [c008          ]
 
 
 }
-end
 
-attributes
-c1   = formonly.moneda,		REVERSE, UPSHIFT, AUTONEXT, 
+ATTRIBUTES
+c1   = FORMONLY.moneda,		REVERSE, UPSHIFT, AUTONEXT, 
 				WIDGET = 'FIELD_BMP',
 				CONFIG = 'lista.bmp F2';
-c2   = formonly.documento,	UPSHIFT, WIDGET = 'FIELD_BMP',
+c2   = FORMONLY.documento,	UPSHIFT, WIDGET = 'FIELD_BMP',
 				CONFIG = 'lista.bmp F2';
-c3   = formonly.proveedor,		WIDGET = 'FIELD_BMP',
+c3   = FORMONLY.proveedor,		WIDGET = 'FIELD_BMP',
 				CONFIG = 'lista.bmp F2';   
-c005 = formonly.inicial, 	REVERSE, FORMAT = 'dd-mm-yyyy',
+c005 = FORMONLY.inicial, 	REVERSE, FORMAT = 'dd-mm-yyyy',
 				COMMENT = 'Ingrese fecha en formato: dd-mm-aaaa';
-c006 = formonly.final, 		REVERSE, FORMAT = 'dd-mm-yyyy',
+c006 = FORMONLY.final, 		REVERSE, FORMAT = 'dd-mm-yyyy',
 				COMMENT = 'Ingrese fecha en formato: dd-mm-aaaa';
---c007 = formonly.saldo, 		FORMAT = '##,###,##&.##';
-c007 = formonly.saldo,          WIDGET = 'RADIO',
-                                CONFIG = 'S Saldo_>_0 T Todo', DEFAULT = 'S';
-c008 = formonly.origen_doc,     WIDGET = 'RADIO', CONFIG = "lines=3", AUTONEXT,
-                                CONFIG = 'M Manual A Automático T Todos',
+--c007 = FORMONLY.saldo, 		FORMAT = '##,###,##&.##';
+c007 = FORMONLY.saldo,          WIDGET = 'RADIO',
+                                CONFIG = 'S "Saldo > 0" T Todo', DEFAULT = 'S';
+c008 = FORMONLY.origen_doc,     WIDGET = 'RADIO', CONFIG = "lines=3", AUTONEXT,
+                                CONFIG = 'M Manual A Automatico T Todos',
                                 DEFAULT = 'M';
-c020 = formonly.desc_moneda, 	REVERSE, UPSHIFT;
-c021 = formonly.desc_documento, UPSHIFT;
-c022 = formonly.desc_proveedor,	UPSHIFT;
-END
+c020 = FORMONLY.desc_moneda, 	REVERSE, UPSHIFT;
+c021 = FORMONLY.desc_documento, UPSHIFT;
+c022 = FORMONLY.desc_proveedor,	UPSHIFT;
+end
 

@@ -1,0 +1,52 @@
+DATABASE aceros
+SCREEN
+{ 
+
+         Orden: [c000    ]  
+       Cliente: [c003                                      ] 
+ Factor Puntos: [c004         ]              Total Orden: [c005            ]
+
+      Tarea                    Mécanico              P.O. P.R.      Valor     
+ [c010        ]  [c011] [c012                            ] 
+ [c013                                              |c014|c015|c016         ] 
+ [c010        ]  [c011] [c012                            ]
+ [c013                                              |c014|c015|c016         ] 
+ [c010        ]  [c011] [c012                            ]
+ [c013                                              |c014|c015|c016         ] 
+ [c010        ]  [c011] [c012                            ]
+ [c013                                              |c014|c015|c016         ] 
+ [c010        ]  [c011] [c012                            ]
+ [c013                                              |c014|c015|c016         ] 
+ [c020                                                   ]    [c023         ]
+  Usuario: [c021      ]               Fecha de Ingreso: [c022               ]
+}
+TABLES talt004, talt023, talt024
+ATTRIBUTES
+c000 = talt023.t23_orden, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c003 = FORMONLY.tit_cliente, NOENTRY, REVERSE, UPSHIFT;
+c004 = talt024.t24_factor, NOENTRY, REVERSE,
+	INCLUDE = (0 TO 99,999,999.99), FORMAT = '##,###,##&.##';
+c005 = talt023.t23_tot_neto, NOENTRY, REVERSE, FORMAT = '#,###,###,##&.##';
+c010 = talt024.t24_codtarea, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c011 = talt024.t24_mecanico, AUTONEXT, UPSHIFT, REVERSE, 
+	COMMENTS = 'Digite el código del técnico';
+c012 = FORMONLY.tit_mecanico, NOENTRY, UPSHIFT;
+c013 = talt024.t24_descripcion, AUTONEXT, UPSHIFT;
+c014 = talt024.t24_puntos_opti, NOENTRY;
+c015 = talt024.t24_puntos_real, AUTONEXT,
+	COMMENTS = 'Ingrese los puntos reales';
+c016 = talt024.t24_valor_tarea, AUTONEXT,
+	INCLUDE = (0 TO 99999999.99), FORMAT = '##,###,##&.##';
+c020 = FORMONLY.tit_descri, NOENTRY, REVERSE, UPSHIFT;
+c023 = FORMONLY.tit_total TYPE DECIMAL (12,2), NOENTRY, REVERSE,
+	INCLUDE = (0 TO 99999999.99),
+	FORMAT = '##,###,##&.##';
+c021 = talt024.t24_usuario, NOENTRY, REVERSE, UPSHIFT;
+c022 = talt024.t24_fecing, NOENTRY, REVERSE, UPSHIFT;
+end
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_ta[5] (t24_codtarea,t24_mecanico,tit_mecanico,t24_descripcion,
+			t24_puntos_opti,t24_puntos_real,t24_valor_tarea)

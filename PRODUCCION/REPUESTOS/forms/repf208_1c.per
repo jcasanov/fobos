@@ -1,0 +1,64 @@
+DATABASE aceros
+SCREEN 
+{
+
+
+  Liquidación No.: [c000       ]                        Estado: [a|c001     ]
+            Fecha: [c002               ]   
+           Moneda: [a1] [c003           ]  Paridad: [c004                   ]
+    Fecha Llegada: [c005      ]         Fecha Ingreso: [c006      ]
+
+                    Moneda Pedido   Moneda BASE
+      Fob Fabrica: [c007        ] [c008        ] Impuesto IVA: [c009        ] 
+     Otros Cargos: [c010        ] [c011        ]
+        Total Fob: [c012        ] [c013        ]
+       Flete Real:                [c014        ]    Flete Cae: [c040        ]
+     Seguro Total:                [c015        ]   Prima Neta: [c016        ]
+        Total CIF:                [c017        ]
+        Aranceles:                [c018        ]
+     Salvaguardia:                [c019        ]
+   Gastos Locales:                [c020        ] 
+ Total Costo Imp.:                [c021        ]
+
+}
+TABLES
+rept028
+ATTRIBUTES
+c000 = rept028.r28_numliq, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+a    = rept028.r28_estado, UPSHIFT, NOENTRY, REVERSE,
+	COMMENTS = 'A Activo  P Procesado';
+c001 = FORMONLY.n_estado, NOENTRY, UPSHIFT, REVERSE;
+c002 = rept028.r28_fecing, REVERSE, UPSHIFT, NOENTRY;
+a1   = rept028.r28_moneda, UPSHIFT, REVERSE, NOENTRY,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c003 = FORMONLY.n_moneda, NOENTRY, UPSHIFT, REVERSE;
+c004 = rept028.r28_paridad, AUTONEXT, REVERSE,
+	INCLUDE = (0.000000001 TO 999999.999999999),
+	FORMAT = '###,##&.###############';
+c005 = rept028.r28_fecha_lleg, REVERSE, NOENTRY, UPSHIFT,
+	FORMAT='dd-mm-yyyy', COMMENTS = 'Ingrese fecha en formato: dd-mm-aaaa';
+c006 = rept028.r28_fecha_ing, REVERSE, NOENTRY, UPSHIFT,
+	FORMAT='dd-mm-yyyy', COMMENTS = 'Ingrese fecha en formato: dd-mm-aaaa';
+c007 = rept028.r28_tot_exfab_mi, NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c008 = rept028.r28_tot_exfab_mb, NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c009 = rept028.r28_tot_iva,      AUTONEXT, REVERSE, FORMAT = '-,---,--&.##';
+c010 = rept028.r28_tot_desp_mi,  AUTONEXT, REVERSE, FORMAT = '-,---,--&.##';
+c011 = rept028.r28_tot_desp_mb,  NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c012 = rept028.r28_tot_fob_mi,   NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c013 = rept028.r28_tot_fob_mb,   NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c014 = rept028.r28_tot_flete,    AUTONEXT, REVERSE, FORMAT = '-,---,--&.##';
+c015 = rept028.r28_tot_seg_neto, AUTONEXT, REVERSE, FORMAT = '-,---,--&.##',
+	COMMENTS = 'Valor del seguro (con tasas - sin IVA) para costos';
+c016 = rept028.r28_tot_seguro,   AUTONEXT, REVERSE, FORMAT = '-,---,--&.##',
+	COMMENTS = 'Valor del seguro (sin tasas ni impuestos)';
+c017 = rept028.r28_tot_cif,      NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c018 = rept028.r28_tot_arancel,  NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c019 = rept028.r28_tot_salvagu,  NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c020 = rept028.r28_tot_cargos,   NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c021 = rept028.r28_tot_costimp,  NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c040 = rept028.r28_tot_flet_cae, REVERSE, FORMAT = '-,---,--&.##',
+	COMMENTS = 'Valor flete suministrado por la CAE. Utilizado en el calculo de aranceles.';
+END
+INSTRUCTIONS
+DELIMITERS '||'

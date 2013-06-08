@@ -1,0 +1,27 @@
+DATABASE aceros
+
+SCREEN
+{
+  LOCALIDADES
+ --------------------------------------
+  Cod.	 Descripción 	  
+ --------------------------------------
+ [f001] [f002                         ] 
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+}
+
+TABLES
+gent002
+
+ATTRIBUTES
+f001 = g02_localidad,REVERSE;
+f002 = g02_nombre, REVERSE;
+END
+INSTRUCTIONS 
+DELIMITERS '||'
+SCREEN RECORD rh_loc[7](g02_localidad, g02_nombre)

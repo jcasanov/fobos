@@ -1,0 +1,25 @@
+DATABASE aceros
+SCREEN
+{
+
+      Almacen: [c003] [c004                                             ] 
+
+     Empleado: [c000] [c001                                             ] 
+
+        Valor: [c002         ]
+
+}
+TABLES
+rolt030
+rolt062
+ATTRIBUTES
+c000 = rolt030.n30_cod_trab, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = rolt030.n30_nombres, UPSHIFT, REVERSE, NOENTRY;
+c002 = formonly.valor, REVERSE, INCLUDE = (0 TO 99999999.99), 
+	FORMAT = '#,###,###,##&.##';
+
+c003 = rolt062.n62_cod_almacen, REVERSE, WIDGET = 'FIELD_BMP', 
+	CONFIG = 'lista.bmp F2';
+c004 = rolt062.n62_nombre, UPSHIFT, REVERSE, NOENTRY; 
+END

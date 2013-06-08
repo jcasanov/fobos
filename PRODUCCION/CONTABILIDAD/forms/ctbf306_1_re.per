@@ -1,0 +1,56 @@
+DATABASE aceros
+SCREEN
+{
+             Año: [c001]                  Formato: [c008       ]
+             Mes: [c2]  [c003      ]
+          Moneda: [c4]  [c005           ]   Nivel: [a]  Diario Cierre Año [d]
+ Centro de Costo: [c6 ] [c007                          ] 
+
+[c020        |c021                                    |c022              |a2]
+[c020        |c021                                    |c022              |a2]
+[c020        |c021                                    |c022              |a2]
+[c020        |c021                                    |c022              |a2]
+[c020        |c021                                    |c022              |a2]
+[c020        |c021                                    |c022              |a2]
+[c020        |c021                                    |c022              |a2]
+[c020        |c021                                    |c022              |a2]
+[c020        |c021                                    |c022              |a2]
+[c020        |c021                                    |c022              |a2]
+[c020        |c021                                    |c022              |a2]
+[c020        |c021                                    |c022              |a2]
+[c020        |c021                                    |c022              |a2]
+
+                      Utilidad/Pérdida del Ejercicio: [c030              |a3]
+}
+TABLES
+ctbt010
+ATTRIBUTES
+c001 = FORMONLY.ano TYPE SMALLINT, REVERSE;
+c2   = FORMONLY.mes TYPE SMALLINT, INCLUDE = ( 1 TO 12), REVERSE;
+c003 = FORMONLY.tit_mes, NOENTRY;
+c4   = FORMONLY.moneda, REVERSE, UPSHIFT, WIDGET = 'FIELD_BMP', 
+       CONFIG = 'lista.bmp F2';
+c005 = FORMONLY.tit_mon, REVERSE, NOENTRY;
+c6   = FORMONLY.ccosto TYPE SMALLINT, WIDGET = 'FIELD_BMP',  CONFIG =
+       'lista.bmp F2', COMMENT = 'Deje en blanco para un PyG consolidado';
+c007 = FORMONLY.tit_ccosto, NOENTRY;
+c008 = FORMONLY.formato, AUTONEXT, UPSHIFT, REVERSE, WIDGET = 'RADIO', 
+       CONFIG = 'M Mensual A Acumulado';
+a    = b10_nivel, REVERSE, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c020 = b10_cuenta, OPTIONS = '-nolist';
+c021 = b10_descripcion, OPTIONS = '-nolist';
+c022 = FORMONLY.saldo TYPE DECIMAL(14,2), FORMAT = '###,###,###,##&.##', 
+       OPTIONS = '-nolist';
+a2   = FORMONLY.signo, OPTIONS = '-nolist';
+c030 = FORMONLY.saldo_pyg TYPE DECIMAL(14,2), FORMAT = '###,###,###,##&.##', 
+       OPTIONS = '-nolist', REVERSE;
+a3   = FORMONLY.signo_pyg, OPTIONS = '-nolist', REVERSE;
+d    = FORMONLY.diario_cie TYPE CHAR NOT NULL, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N';
+END
+INSTRUCTIONS
+SCREEN RECORD rm_pyg[13] (b10_cuenta, b10_descripcion, FORMONLY.saldo,
+			 FORMONLY.signo)
+KEYS
+'F5' = 'Movimientos'
+'F6' = 'Imprimir'

@@ -1,0 +1,80 @@
+DATABASE aceros
+SCREEN
+{
+
+ Tran. Generada: [a4] [c000       ]      Fecha Ingreso: [c014               ]
+        Cliente: [c001       ] [c002                                        ]
+   Area Negocio: [c006] [c007           ]     Moneda: [a1] [c008            ]
+ Tipo Documento: [a0] [c010           ]    No. Documento: [c003             ]
+     Referencia: [c011                           ] Saldo: [c004             ]
+ TD   Documento    Div   Saldo Actual    Valor a Ajustar    Saldo Nuevo   C 
+[a2|c100          |c01|c102            |c103            |c104            |c]
+[a2|c100          |c01|c102            |c103            |c104            |c]
+[a2|c100          |c01|c102            |c103            |c104            |c]
+[a2|c100          |c01|c102            |c103            |c104            |c]
+[a2|c100          |c01|c102            |c103            |c104            |c]
+[a2|c100          |c01|c102            |c103            |c104            |c]
+[a2|c100          |c01|c102            |c103            |c104            |c]
+             Totales: [c012            |c018            |c019            ]
+  Documento: [c015      |c016      |c017] dias
+
+    Usuario: [c013      ]
+}
+TABLES
+cxct020, cxct021, cxct022, cxct023
+ATTRIBUTES
+a4   = cxct022.z22_tipo_trn, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Tipo de Transacción del ajuste';
+c000 = cxct022.z22_num_trn, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Número de Transacción del ajuste';
+c001 = cxct022.z22_codcli, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c002 = FORMONLY.tit_nombre_cli, NOENTRY, REVERSE, UPSHIFT;
+c006 = cxct022.z22_areaneg, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c007 = FORMONLY.tit_area, NOENTRY, REVERSE, UPSHIFT;
+a1   = cxct022.z22_moneda, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c008 = FORMONLY.tit_mon_bas, NOENTRY, REVERSE, UPSHIFT;
+a0   = cxct021.z21_tipo_doc, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Tipo de documento a favor';
+c010 = FORMONLY.tit_tipo_doc, NOENTRY, REVERSE, UPSHIFT;
+c003 = cxct021.z21_num_doc, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Escoja el documento a aplicar';
+c004 = cxct021.z21_saldo, NOENTRY, REVERSE, FORMAT = '##,###,###,##&.##';
+c011 = cxct022.z22_referencia, AUTONEXT, UPSHIFT;
+
+a2   = cxct023.z23_tipo_doc, NOENTRY, UPSHIFT;
+c100 = cxct023.z23_num_doc, NOENTRY, UPSHIFT;
+c01  = cxct023.z23_div_doc, NOENTRY, UPSHIFT,
+	FORMAT = '#&&';
+c102 = FORMONLY.tit_saldo_act TYPE DECIMAL (12,2), NOENTRY, UPSHIFT,
+	FORMAT = '-,---,---,--&.##', INCLUDE = (0.01 TO 9999999999.99);
+c103 = FORMONLY.tit_valor_apl TYPE DECIMAL (12,2), AUTONEXT, UPSHIFT,
+	COMMENTS = 'El Valor a ajustar es negativo',
+	FORMAT = '-,---,---,--&.##';
+c104 = FORMONLY.tit_saldo_nue TYPE DECIMAL (12,2), NOENTRY, UPSHIFT,
+	FORMAT = '-,---,---,--&.##', INCLUDE = (0.01 TO 9999999999.99);
+c    = FORMONLY.tit_check TYPE CHAR, AUTONEXT, UPSHIFT,
+	INCLUDE = ('S', 'N'), DEFAULT = 'N',
+	COMMENTS = '(S) para ajustar todo el valor o (N) para no ajustar';
+
+c012 = FORMONLY.tit_total_act TYPE DECIMAL (12,2), NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = '-,---,---,--&.##';
+c018 = FORMONLY.tit_total_apl TYPE DECIMAL (12,2), NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = '-,---,---,--&.##',INCLUDE = (-9999999999.99 TO 0);
+c019 = FORMONLY.tit_total_nue TYPE DECIMAL (12,2), NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = '-,---,---,--&.##';
+c013 = cxct022.z22_usuario, NOENTRY, REVERSE, UPSHIFT;
+c014 = cxct022.z22_fecing, NOENTRY, REVERSE, UPSHIFT;
+c015 = cxct020.z20_fecha_vcto, COLOR = RED WHERE c015 < TODAY,
+	FORMAT = 'dd-mm-yyyy', NOENTRY, UPSHIFT;
+c016 = FORMONLY.tit_fecha_vcto TYPE VARCHAR, COLOR = RED WHERE c016 = 'VENCIDO',
+	NOENTRY, REVERSE, UPSHIFT;
+c017 = FORMONLY.tit_dias TYPE SMALLINT, COLOR = RED WHERE c017 < 0,
+	NOENTRY, REVERSE, FORMAT = '###&';
+end
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_aju[7] (z23_tipo_doc, z23_num_doc, z23_div_doc, tit_saldo_act,
+			tit_valor_apl, tit_saldo_nue, tit_check)

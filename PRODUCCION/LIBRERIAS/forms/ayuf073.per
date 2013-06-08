@@ -1,31 +1,36 @@
-DATABASE diteca
-
+DATABASE aceros
 SCREEN
 {
- FACTURAS DE CLIENTES DE TALLER
------------------------------------------------
- Factura         Cliente
------------------------------------------------
-[c01          ] [c002                       ] 
-[c01          ] [c002                       ]
-[c01          ] [c002                       ]
-[c01          ] [c002                       ]
-[c01          ] [c002                       ]
-[c01          ] [c002                       ]
-[c01          ] [c002                       ] 
-[c01          ] [c002                       ] 
-[c01          ] [c002                       ] 
-[c01          ] [c002                       ] 
+
+ FACTURAS CLIENTES DEL TALLER
+
+ [c001  |c002  |c003  |c004                                    ]
+[c011  |c012  |c013  |c014                                    ]
+[c011  |c012  |c013  |c014                                    ]
+[c011  |c012  |c013  |c014                                    ]
+[c011  |c012  |c013  |c014                                    ]
+[c011  |c012  |c013  |c014                                    ]
+[c011  |c012  |c013  |c014                                    ]
+[c011  |c012  |c013  |c014                                    ]
+[c011  |c012  |c013  |c014                                    ]
+[c011  |c012  |c013  |c014                                    ]
+[c011  |c012  |c013  |c014                                    ]
 
 }
-
 TABLES
 talt023
-
 ATTRIBUTES
-c01  = t23_num_factura, UPSHIFT;
-c002 = t23_nom_cliente, UPSHIFT;
-END
+c001 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c002 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c003 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c004 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
 
+c011 = talt023.t23_num_factura, NOENTRY, UPSHIFT;
+c012 = talt023.t23_orden, NOENTRY, UPSHIFT;
+c013 = talt023.t23_numpre, NOENTRY, UPSHIFT;
+c014 = talt023.t23_nom_cliente, NOENTRY, UPSHIFT;
+END
 INSTRUCTIONS
-SCREEN RECORD rh_factal[10](t23_num_factura, t23_nom_cliente)
+DELIMITERS '||'
+SCREEN RECORD rh_factal[10] (t23_num_factura, t23_orden, t23_numpre,
+				t23_nom_cliente)

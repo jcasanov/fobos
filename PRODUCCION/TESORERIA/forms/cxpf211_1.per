@@ -1,0 +1,49 @@
+DATABASE aceros
+SCREEN
+{
+
+                                                          [c014 ] de [c015 ]
+
+     Orden de Compra: [c000  ]                        Compra Local: [c001  ]
+
+           Proveedor: [c002  ] [c003                                       ]
+         No. Factura: [c004              ]       Num. Aut. SRI: [c005      ]
+                                               Fecha Caducidad: [c006      ]
+
+
+     Proveedor Nuevo: [c007  ] [c008                                       ]
+
+   No. Factura Nuevo: [c009              ] Num. Aut. SRI Nuevo: [c010      ]
+
+                                         Fecha Caducidad Nueva: [c011      ]
+
+
+             Usuario: [c012      ]      Fecha Ingreso: [c013               ]
+
+}
+TABLES
+cxpt033
+ATTRIBUTES
+c000 = cxpt033.p33_numero_oc, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = cxpt033.p33_num_tran, NOENTRY, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = cxpt033.p33_cod_prov_ant, NOENTRY, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = cxpt033.p33_nom_prov_ant, NOENTRY, UPSHIFT, REVERSE;
+c004 = cxpt033.p33_num_fac_ant, NOENTRY, UPSHIFT, REVERSE;
+c005 = cxpt033.p33_num_aut_ant, NOENTRY, UPSHIFT, REVERSE;
+c006 = cxpt033.p33_fec_cad_ant, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c007 = cxpt033.p33_cod_prov_nue, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c008 = cxpt033.p33_nom_prov_nue, NOENTRY, UPSHIFT;
+c009 = cxpt033.p33_num_fac_nue, AUTONEXT, UPSHIFT;
+c010 = cxpt033.p33_num_aut_nue, AUTONEXT, UPSHIFT;
+c011 = cxpt033.p33_fec_cad_nue, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha en formato: dd-mm-aaaa.';
+c012 = cxpt033.p33_usuario, NOENTRY, UPSHIFT, REVERSE;
+c013 = cxpt033.p33_fecing, NOENTRY, UPSHIFT, REVERSE;
+
+c014 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c015 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+END

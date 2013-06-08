@@ -1,24 +1,24 @@
-database diteca
-screen 
+DATABASE aceros
+SCREEN 
 {
 
-     Item: [f002            ] [a                                  ]
+	 Item: [f002            ] [a                            ]
 
-     [c0              ]
-      [b2  |b0              ][b1                                   ]
-     [f0  |f1              ][f2                                   ]	
-     [f0  |f1              ][f2                                   ]	
-     [f0  |f1              ][f2                                   ]	
-     [f0  |f1              ][f2                                   ]	
-     [f0  |f1              ][f2                                   ]	
-     [f0  |f1              ][f2                                   ]	
-     [f0  |f1              ][f2                                   ]	
-     [f0  |f1              ][f2                                   ]	
-     [f0  |f1              ][f2                                   ]	
-     [f0  |f1              ][f2                                   ]	
+	[c0              ]
+	 [b0              ][b1                                   ]
+	[f1              ][f2                                   ]	
+	[f1              ][f2                                   ]	
+	[f1              ][f2                                   ]	
+	[f1              ][f2                                   ]	
+	[f1              ][f2                                   ]	
+	[f1              ][f2                                   ]	
+	[f1              ][f2                                   ]	
+	[f1              ][f2                                   ]	
+	[f1              ][f2                                   ]	
+	[f1              ][f2                                   ]	
 
-        Ingresado Por: [f004      ]
-     Fecha de Ingreso: [f005               ]
+	    Ingresado Por: [f004      ]
+   	 Fecha de Ingreso: [f005               ]
 
 }
 end
@@ -29,16 +29,13 @@ TABLES
 
 ATTRIBUTES
 		     ---- BOTONES ----
-b0  = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-b1  = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-b2  = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+b0  = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+b1  = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
 
-c0  = formonly.tit_sus, NOENTRY, REVERSE;
+c0  = FORMONLY.tit_sus, NOENTRY, REVERSE;
 f002 = rept014.r14_item_ant, REVERSE, UPSHIFT,
 	 WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-a    = formonly.nom_item TYPE VARCHAR, NOENTRY;
-f0   = rept014.r14_cantidad, REVERSE, OPTIONS='-nolist', INCLUDE=(0 TO 9999),
-							 FORMAT='###&';
+a    = FORMONLY.nom_item TYPE VARCHAR, NOENTRY;
 f1   = rept014.r14_item_nue, REVERSE, UPSHIFT, OPTIONS='-nolist',
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 f2   = rept010.r10_nombre, REVERSE, UPSHIFT, NOENTRY, OPTIONS='-nolist';
@@ -46,6 +43,6 @@ f004 = rept014.r14_usuario ,REVERSE, NOENTRY;
 f005 = rept014.r14_fecing, REVERSE, NOENTRY;
 
 INSTRUCTIONS
-SCREEN RECORD r_detalle[10](r14_cantidad, r14_item_nue, r10_nombre)
+SCREEN RECORD r_detalle[10](r14_item_nue, r10_nombre)
 
-END
+end

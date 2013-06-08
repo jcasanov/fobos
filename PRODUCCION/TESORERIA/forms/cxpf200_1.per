@@ -1,4 +1,4 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN TITLE 'Datos Documento'
 {
 
@@ -7,7 +7,7 @@ SCREEN TITLE 'Datos Documento'
        Nombre Proveedor: [c001                                              ]
 
       Tipo de Documento: [a0] [c002           ]
-       Número Documento: [c003           ]
+       Número Documento: [c003              ]
               Dividendo: [c004  ]
 
              Referencia: [c007                               ]
@@ -48,7 +48,7 @@ a0   = cxpt020.p20_tipo_doc, AUTONEXT, REVERSE, UPSHIFT,
 c002 = FORMONLY.tit_tipo_doc, NOENTRY, REVERSE, UPSHIFT;
 c003 = cxpt020.p20_num_doc, AUTONEXT, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
-	COMMENTS = 'Numeración automática en Notas Débito. Ingreso manual otro No. Doc.';
+	COMMENTS = 'Numeración automatica en Notas Débito. Ingreso manual otro No. Doc.';
 c004 = cxpt020.p20_dividendo, AUTONEXT, REVERSE, FORMAT = '###&&',
 	INCLUDE = (01 TO 65536);
 c007 = cxpt020.p20_referencia, AUTONEXT, UPSHIFT;
@@ -81,16 +81,16 @@ c018 = cxpt020.p20_cartera, AUTONEXT, REVERSE, UPSHIFT,
 c019 = FORMONLY.tit_cartera, NOENTRY, REVERSE, UPSHIFT;
 c020 = cxpt020.p20_numero_oc, NOENTRY, UPSHIFT;
 c022 = cxpt020.p20_origen, NOENTRY, REVERSE, UPSHIFT,
-	WIDGET = 'RADIO', CONFIG = 'M Manual A Automático', DEFAULT = 'M';
+	WIDGET = 'RADIO', CONFIG = 'M Manual A Automatico', DEFAULT = 'M';
 c023 = cxpt020.p20_usuario, NOENTRY, REVERSE, UPSHIFT;
 c024 = cxpt020.p20_fecing, NOENTRY, REVERSE, UPSHIFT;
 
 c025 = cxpt020.p20_cod_depto, {REVERSE,} WIDGET='FIELD_BMP', 
 	CONFIG='lista.bmp F2';
-c026 = formonly.n_depto, NOENTRY;
+c026 = FORMONLY.n_depto, NOENTRY;
 
 x001 = FORMONLY.vm_num_current1, NOENTRY;
 y001 = FORMONLY.vm_num_rows1, NOENTRY;
 x002 = FORMONLY.vm_num_current2, NOENTRY;
 y002 = FORMONLY.vm_num_rows2, NOENTRY;
-END
+end

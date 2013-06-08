@@ -1,0 +1,89 @@
+DATABASE aceros
+SCREEN
+{
+                                                          [c052  ] de [c053  ]
+ Proveedor: [c001  |c002                            ]   Moneda: [c03         ] 
+ Domicilio: [c003                                   ]                          
+  Teléfono: [c004       ] - [c005       ]     Saldo a Favor [c007            ]
+       Fax: [c006       ]		      Saldo Vencido [c008            ]
+    Estado: [c011      ]                   Saldo Por Vencer [c009            ]
+   Período: [c054      ] - [c055      ]         Saldo Total [c010            ]
+ Fec.Vcto.: [c059      ] - [c060      ]
+      Saldo Anterior [c080            ]                   [c056  ] de [c057  ]
+ [c2|c022               |c023      |c024      |c025      |c026 |c027          ]
+[c4|c032               |c033      |c034      |c035      |c036 |c037          ]
+[c4|c032               |c033      |c034      |c035      |c036 |c037          ]
+[c4|c032               |c033      |c034      |c035      |c036 |c037          ]
+[c4|c032               |c033      |c034      |c035      |c036 |c037          ]
+[c4|c032               |c033      |c034      |c035      |c036 |c037          ]
+[c4|c032               |c033      |c034      |c035      |c036 |c037          ]
+[c4|c032               |c033      |c034      |c035      |c036 |c037          ]
+[c4|c032               |c033      |c034      |c035      |c036 |c037          ]
+[c4|c032               |c033      |c034      |c035      |c036 |c037          ]
+[c4|c032               |c033      |c034      |c035      |c036 |c037          ]
+                                                   Total ==>  [c058          ]
+}
+TABLES
+cxpt001
+cxpt020
+ATTRIBUTES
+c001 = cxpt001.p01_codprov, UPSHIFT, NOENTRY, REVERSE;
+C002 = cxpt001.p01_nomprov, REVERSE;
+c03  = FORMONLY.tit_mon, REVERSE; 
+c003 = p01_direccion1;
+c004 = p01_telefono1;
+c005 = p01_telefono2;
+c006 = p01_fax1;
+c007 = FORMONLY.tot_favor TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##';
+c008 = FORMONLY.tot_vcdo  TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##',
+       COLOR = RED WHERE c008 > 0;
+c009 = FORMONLY.tot_xven  TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##';
+c010 = FORMONLY.tot_saldo TYPE DECIMAL(14,2), FORMAT = '-,---,---,--&.##', 
+       REVERSE;
+c011 = FORMONLY.tit_estprov;
+c054 = FORMONLY.fecha_emi, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c055 = FORMONLY.fecha_cart, NOENTRY, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy';
+c059 = FORMONLY.fecha_vcto1, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c060 = FORMONLY.fecha_vcto2, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+
+c2   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c022 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c023 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c024 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c025 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c026 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c027 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+
+c4   = cxpt020.p20_tipo_doc, OPTIONS = '-nolist';
+c032 = FORMONLY.num_doc, OPTIONS = '-nolist';
+c033 = cxpt020.p20_fecha_emi, FORMAT = 'dd-mm-yyyy', OPTIONS = '-nolist';
+c034 = cxpt020.p20_fecha_vcto, FORMAT = 'dd-mm-yyyy', OPTIONS = '-nolist';
+c035 = FORMONLY.tit_estado, COLOR = RED WHERE c035 = 'Vencido',
+	COLOR = BLUE WHERE c035 = 'Pagado', OPTIONS = '-nolist';
+c036 = FORMONLY.dias, FORMAT = '----&', COLOR = RED WHERE c036 < 0,
+	COLOR = BLUE WHERE c037 = 0, OPTIONS = '-nolist';
+c037 = FORMONLY.saldo TYPE DECIMAL(14,2), FORMAT = '--,---,--&.##',
+	OPTIONS = '-nolist'; 
+
+c052 = FORMONLY.num_cur, NOENTRY, UPSHIFT;
+c053 = FORMONLY.max_cur, NOENTRY, UPSHIFT;
+
+c056 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c057 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c058 = FORMONLY.tot_sal TYPE DECIMAL(14,2), FORMAT = '--,---,--&.##', REVERSE; 
+
+c080 = FORMONLY.vm_sal_inites TYPE DECIMAL(14,2), FORMAT = '-,---,---,--&.##',
+	REVERSE; 
+END
+KEYS
+F5 = "Orden Compra"
+F6 = "Movimientos"
+F7 = "Documento"
+F8 = "Tesorería vs. Cont."
+F9 = "Imprimir"
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_dprov[10] (p20_tipo_doc, FORMONLY.num_doc, p20_fecha_emi,
+				p20_fecha_vcto, FORMONLY.tit_estado,
+				FORMONLY.dias, FORMONLY.saldo)

@@ -18,17 +18,20 @@ DEFINE vm_max_rows      SMALLINT        -- MAXIMO DE FILAS LEIDAS
 DEFINE vm_demonios	VARCHAR(12)
 DEFINE vm_flag_mant         CHAR(1)
 
+
+
 MAIN
 
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
 CALL startlog('../logs/errores')
-CALL fgl_init4js()
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN
-     CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto','stop')
-     EXIT PROGRAM
+	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.','stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
+     	EXIT PROGRAM
 END IF
 LET vg_base	= arg_val(1)
 LET vg_modulo	= arg_val(2)
@@ -36,7 +39,8 @@ LET vg_codcia	= arg_val(3)
 LET vg_proceso	= 'repp101'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -48,7 +52,7 @@ FUNCTION funcion_master()
 
 CALL fl_nivel_isolation()
 LET vm_max_rows = 1000
-OPEN WINDOW w_vend AT 3,2 WITH 15 ROWS, 80 COLUMNS 
+OPEN WINDOW w_vend AT 3,2 WITH 18 ROWS, 80 COLUMNS 
     ATTRIBUTE(FORM LINE FIRST + 2, COMMENT LINE LAST, MENU LINE FIRST,BORDER,
 	      MESSAGE LINE LAST - 2)
 OPEN FORM f_vend FROM '../forms/repf101_1'
@@ -66,14 +70,8 @@ MENU 'OPCIONES'
 	COMMAND KEY('I') 'Ingresar' 'Ingresar nuevos registros. '
 		CALL control_ingreso()
 		IF vm_num_rows = 1 THEN
-
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF	
-		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-   		   END IF
-
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -86,26 +84,12 @@ MENU 'OPCIONES'
 			CALL control_modificacion()
 		ELSE
 			CALL fl_mensaje_consultar_primero()
-		END IF 
-		IF fl_control_permiso_opcion('Modificar') THEN			
-			SHOW OPTION 'Modificar'
-		END IF 
-
-  		IF fl_control_permiso_opcion('Bloquear') THEN
-			SHOW OPTION 'Bloquear/Activar'
-		END IF 
+		END IF	
         COMMAND KEY('C') 'Consultar' 'Consultar un registro. '
                 CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
-			
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-  		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		   END IF			
-
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -113,15 +97,9 @@ MENU 'OPCIONES'
 				HIDE OPTION 'Bloquear/Activar'
 			END IF
 		ELSE
-		   SHOW OPTION 'Avanzar'
-
-		   IF fl_control_permiso_opcion('Modificar') THEN			
-		      SHOW OPTION 'Modificar'
-		   END IF 
-
-  		   IF fl_control_permiso_opcion('Bloquear') THEN
+			SHOW OPTION 'Avanzar'
+			SHOW OPTION 'Modificar'
 			SHOW OPTION 'Bloquear/Activar'
-		   END IF
 		END IF
 		IF vm_row_current <= 1 THEN
                         HIDE OPTION 'Retroceder'
@@ -169,17 +147,18 @@ DEFINE codrol		LIKE rept001.r01_codrol
 DEFINE codigo		LIKE rept001.r01_codigo
 DEFINE nombre		LIKE rept001.r01_nombres
 DEFINE nomrol		LIKE rolt030.n30_nombres
+DEFINE r_g05		RECORD LIKE gent005.*
 DEFINE expr_sql		VARCHAR(500)
 DEFINE query		VARCHAR(600)
 
 CLEAR FORM
-LET int_flag = 0
 INITIALIZE codigo TO NULL
-CONSTRUCT BY NAME expr_sql ON r01_codigo, r01_nombres,r01_iniciales, r01_estado, 			      r01_codrol, r01_codrol,  r01_tipo, r01_usuario,
-			      r01_fecing
+LET int_flag = 0
+CONSTRUCT BY NAME expr_sql ON r01_codigo, r01_nombres,r01_iniciales, r01_estado,
+	r01_codrol, r01_codrol, r01_tipo, r01_user_owner, r01_usuario,r01_fecing
 	ON KEY(F2)
 		IF INFIELD(r01_codigo) THEN
-			CALL fl_ayuda_vendedores(vg_codcia)
+			CALL fl_ayuda_vendedores(vg_codcia, 'T', 'T')
 			RETURNING codigo, nombre
 			IF codigo IS NOT NULL THEN
 			    LET rm_vend.r01_codigo = codigo
@@ -189,11 +168,19 @@ CONSTRUCT BY NAME expr_sql ON r01_codigo, r01_nombres,r01_iniciales, r01_estado,
 			END IF
 		END IF
 		IF INFIELD(r01_codrol) THEN
-			CALL fl_ayuda_trabajadores(vg_codcia)
+			CALL fl_ayuda_codigo_empleado(vg_codcia)
 			 RETURNING codrol, nomrol
 			IF codrol IS NOT NULL THEN
 			    LET rm_vend.r01_codrol = codrol
 			    DISPLAY BY NAME rm_vend.r01_codrol
+			END IF
+		END IF
+		IF INFIELD(r01_user_owner) THEN
+			CALL fl_ayuda_usuarios() RETURNING r_g05.g05_usuario,
+							   r_g05.g05_nombres
+			IF r_g05.g05_usuario IS NOT NULL THEN
+				LET rm_vend.r01_user_owner = r_g05.g05_usuario
+				DISPLAY BY NAME rm_vend.r01_user_owner
 			END IF
 		END IF
 		LET int_flag = 0
@@ -231,6 +218,7 @@ END FUNCTION
 
 
 FUNCTION control_ingreso()
+DEFINE aux_row		INTEGER	
 
 LET vm_flag_mant = 'I'
 CLEAR FORM
@@ -251,12 +239,11 @@ SELECT MAX(r01_codigo) + 1 INTO rm_vend.r01_codigo FROM rept001
         END IF
 CALL lee_datos()
 IF NOT int_flag THEN
-	WHENEVER ERROR CONTINUE
 	BEGIN WORK
+	WHENEVER ERROR CONTINUE
 	INSERT INTO rept001 VALUES (rm_vend.*)
 	WHENEVER ERROR STOP
-
-	IF status < 0 THEN
+	IF STATUS < 0 THEN
 	    SELECT MAX(r01_codigo) + 1 INTO rm_vend.r01_codigo FROM rept001
                    WHERE r01_compania = vg_codcia
             IF rm_vend.r01_codigo IS NULL THEN
@@ -264,13 +251,14 @@ IF NOT int_flag THEN
             END IF
 	    INSERT INTO rept001 VALUES (rm_vend.*)
 	END IF 
+	LET aux_row = SQLCA.SQLERRD[6] 
 	COMMIT WORK
         IF vm_num_rows = vm_max_rows THEN
                 LET vm_num_rows = 1
         ELSE
                 LET vm_num_rows = vm_num_rows + 1
         END IF
-	LET vm_r_rows[vm_num_rows] = SQLCA.SQLERRD[6] 
+	LET vm_r_rows[vm_num_rows] = aux_row
 	LET vm_row_current = vm_num_rows
 	CALL fl_mensaje_registro_ingresado()
 END IF
@@ -290,34 +278,39 @@ IF rm_vend.r01_estado <> 'A' THEN
 	CALL fl_mensaje_estado_bloqueado()
 	RETURN
 END IF
-WHENEVER ERROR CONTINUE
 BEGIN WORK
-DECLARE q_up CURSOR FOR SELECT * FROM rept001 WHERE ROWID = vm_r_rows[vm_row_current]
+WHENEVER ERROR CONTINUE
+DECLARE q_up CURSOR FOR
+	SELECT * FROM rept001
+		WHERE ROWID = vm_r_rows[vm_row_current]
 	FOR UPDATE
 OPEN q_up
 FETCH q_up INTO rm_vend.*
-IF status < 0 THEN
-	COMMIT WORK
+IF STATUS < 0 THEN
+	ROLLBACK WORK
 	CALL fl_mensaje_bloqueo_otro_usuario()
 	WHENEVER ERROR STOP
 	RETURN
 END IF
+WHENEVER ERROR STOP
 CALL lee_datos()
 IF NOT int_flag THEN
-    	UPDATE rept001
-	 SET	r01_nombres    = rm_vend.r01_nombres,
-	     	r01_iniciales  = rm_vend.r01_iniciales,
-		r01_tipo       = rm_vend.r01_tipo, 
-		r01_mod_descto = rm_vend.r01_mod_descto, 
-		r01_codrol     = rm_vend.r01_codrol
+    	UPDATE rept001 SET r01_nombres    = rm_vend.r01_nombres,
+		       	   r01_iniciales  = rm_vend.r01_iniciales,
+			   r01_tipo       = rm_vend.r01_tipo, 
+			   r01_mod_descto = rm_vend.r01_mod_descto, 
+			   r01_user_owner = rm_vend.r01_user_owner, 
+			   r01_codrol     = rm_vend.r01_codrol
 		WHERE CURRENT OF q_up
 	COMMIT WORK
 	CALL fl_mensaje_registro_modificado()
 ELSE
+	ROLLBACK WORK
 	CALL lee_muestra_registro(vm_r_rows[vm_row_current])
 END IF
 
 END FUNCTION
+
 
 
 FUNCTION control_bloqueo_activacion()
@@ -338,19 +331,20 @@ END IF
 CALL fl_mensaje_seguro_ejecutar_proceso()
 	RETURNING resp
 IF resp = 'Yes' THEN
-WHENEVER ERROR CONTINUE
 	BEGIN WORK
+	WHENEVER ERROR CONTINUE
 	DECLARE q_del CURSOR FOR SELECT * FROM rept001 
 		WHERE ROWID = vm_r_rows[vm_row_current]
 		FOR UPDATE
 	OPEN q_del
 	FETCH q_del INTO rm_vend.*
-	IF status < 0 THEN
-		COMMIT WORK
+	IF STATUS < 0 THEN
+		ROLLBACK WORK
 		CALL fl_mensaje_bloqueo_otro_usuario()
 		WHENEVER ERROR STOP
 		RETURN
 	END IF
+	WHENEVER ERROR STOP
 	LET estado = 'B'
 	IF rm_vend.r01_estado <> 'A' THEN
 		LET estado = 'A'
@@ -372,16 +366,20 @@ FUNCTION lee_datos()
 DEFINE  resp    	CHAR(6)
 DEFINE 	serial 	 	LIKE rept001.r01_codigo
 DEFINE nomrol		LIKE rolt030.n30_nombres
-DEFINE 	iniciales	LIKE rept001.r01_iniciales
+DEFINE	iniciales	LIKE rept001.r01_iniciales
 DEFINE 	codrol    	LIKE rept001.r01_codrol
+DEFINE r_g05		RECORD LIKE gent005.*
+DEFINE mensaje		VARCHAR(100)
 
 OPTIONS INPUT WRAP
 LET int_flag = 0
 INPUT BY NAME rm_vend.r01_nombres, rm_vend.r01_iniciales, rm_vend.r01_codrol,
-	      rm_vend.r01_mod_descto, rm_vend.r01_tipo  WITHOUT DEFAULTS
+	      rm_vend.r01_mod_descto, rm_vend.r01_tipo, rm_vend.r01_user_owner
+	WITHOUT DEFAULTS
 	ON KEY(INTERRUPT)
-        	 IF field_touched( rm_vend.r01_nombres, rm_vend.r01_iniciales,
-				   rm_vend.r01_codrol)
+        	 IF field_touched(rm_vend.r01_nombres, rm_vend.r01_iniciales,
+				  rm_vend.r01_codrol, rm_vend.r01_mod_descto,
+				  rm_vend.r01_tipo, rm_vend.r01_user_owner)
                  THEN
                         LET int_flag = 0
 			CALL fl_mensaje_abandonar_proceso()
@@ -401,31 +399,53 @@ INPUT BY NAME rm_vend.r01_nombres, rm_vend.r01_iniciales, rm_vend.r01_codrol,
                 END IF
 	ON KEY(F2)
 		IF INFIELD(r01_codrol) THEN
-			CALL fl_ayuda_trabajadores(vg_codcia)
+			CALL fl_ayuda_codigo_empleado(vg_codcia)
 			  RETURNING codrol, nomrol
 			IF codrol IS NOT NULL THEN
 			    LET rm_vend.r01_codrol = codrol
 			    DISPLAY BY NAME rm_vend.r01_codrol
 			END IF
 		END IF
+		IF INFIELD(r01_user_owner) THEN
+			CALL fl_ayuda_usuarios() RETURNING r_g05.g05_usuario,
+							   r_g05.g05_nombres
+			IF r_g05.g05_usuario IS NOT NULL THEN
+				LET rm_vend.r01_user_owner = r_g05.g05_usuario
+				DISPLAY BY NAME rm_vend.r01_user_owner
+			END IF
+		END IF
 		LET int_flag = 0
+	AFTER FIELD r01_user_owner
+		IF rm_vend.r01_user_owner IS NOT NULL THEN
+			CALL fl_lee_usuario(rm_vend.r01_user_owner)
+				RETURNING r_g05.*
+			IF r_g05.g05_usuario IS NULL THEN
+				CALL fl_mostrar_mensaje('No existe este usuario.','exclamation')
+				NEXT FIELD r01_user_owner
+			END IF
+		END IF
 	AFTER INPUT
 	    IF rm_vend.r01_codrol IS NOT NULL THEN
 		CALL fl_lee_trabajador_roles(vg_codcia, rm_vend.r01_codrol)
 			RETURNING rm_rol.*
 		IF rm_rol.n30_nombres  IS NULL THEN
-	             CALL fgl_winmessage(vg_producto, 'No existe código de rol', 					 'exclamation')
-		     NEXT FIELD r01_codrol 
+	             	--CALL fgl_winmessage(vg_producto,'No existe código de rol.','exclamation')
+			CALL fl_mostrar_mensaje('No existe código de rol.','exclamation')
+		     	NEXT FIELD r01_codrol 
 		END IF
 		IF rm_vend.r01_tipo = 'E' THEN
-			CALL fgl_winmessage(vg_producto, 'No puede asignarle un código de rol a un vendedor externo', 'exclamation')
+			--CALL fgl_winmessage(vg_producto,'No puede asignarle un código de rol a un vendedor externo.', 'exclamation')
+			CALL fl_mostrar_mensaje('No puede asignarle un código de rol a un vendedor externo.', 'exclamation')
 			NEXT FIELD r01_codrol
 		END IF
             ELSE
+	        LET int_flag = 0
+		{
 		IF rm_vend.r01_tipo = 'I' THEN
-			CALL fgl_winmessage(vg_producto, 'Trabajador es empleado interno, debe asignarle un código de rol', 'exclamation')
+			CALL fl_mostrar_mensaje('Trabajador es empleado interno, debe asignarle un código de rol', 'exclamation')
 			NEXT FIELD r01_codrol
            	END IF
+		}
             END IF
 		INITIALIZE serial TO NULL
 		SELECT r01_codigo, r01_iniciales INTO serial, iniciales
@@ -436,7 +456,10 @@ INPUT BY NAME rm_vend.r01_nombres, rm_vend.r01_iniciales, rm_vend.r01_codrol,
 		   IF vm_flag_mant = 'I' OR
 		      (vm_flag_mant = 'M' AND rm_vend.r01_codigo <> serial)
 		   THEN
-		   	CALL fgl_winmessage(vg_producto,'Las iniciales ya fueron asignadas al vendedor de código  '|| serial,'exclamation')
+			LET mensaje = 'Las iniciales ya fueron asignadas ' ||
+					'al vendedor de código  '|| serial
+		   	--CALL fgl_winmessage(vg_producto,mensaje,'exclamation')
+			CALL fl_mostrar_mensaje(mensaje,'exclamation')
 		      	NEXT FIELD r01_iniciales
 		   END IF
 		END IF
@@ -458,7 +481,7 @@ IF STATUS = NOTFOUND THEN
 END IF
 DISPLAY BY NAME rm_vend.r01_codigo, rm_vend.r01_nombres, rm_vend.r01_iniciales, 
 		rm_vend.r01_estado, rm_vend.r01_tipo, rm_vend.r01_codrol,
-		rm_vend.r01_usuario, rm_vend.r01_fecing, rm_vend.r01_mod_descto 
+		rm_vend.r01_usuario, rm_vend.r01_fecing, rm_vend.r01_mod_descto,		rm_vend.r01_user_owner
 IF rm_vend.r01_estado = 'A' THEN
 	DISPLAY 'ACTIVO' TO tit_estado
 ELSE
@@ -480,7 +503,7 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION no_validar_parametros()
                                                                                 
 CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
 IF rg_mod.g50_modulo IS NULL THEN

@@ -1,0 +1,51 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+ Ordenes de Compra cargadas a la O.T.: [c000  ] que se pueden ANULAR
+                              Factura: [c001  ]
+                                                    [c002] de [c003]
+ [c|c010  |c011      |c012                             |c013      |d]
+[e|c020  |c021      |c022                             |c023      |f]
+[e|c020  |c021      |c022                             |c023      |f]
+[e|c020  |c021      |c022                             |c023      |f]
+[e|c020  |c021      |c022                             |c023      |f]
+[e|c020  |c021      |c022                             |c023      |f]
+[e|c020  |c021      |c022                             |c023      |f]
+                                               Total: [c030      ]
+}
+ATTRIBUTES
+c000 = FORMONLY.num_ot, NOENTRY, REVERSE;
+c001 = FORMONLY.num_fac, NOENTRY, REVERSE;
+
+c002 = FORMONLY.cur_row, NOENTRY, UPSHIFT, REVERSE;
+c003 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+
+c    = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c010 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c011 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c012 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c013 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+d    = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+e    = FORMONLY.estado, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c020 = FORMONLY.orden_compra, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c021 = FORMONLY.fecha TYPE DATE, FORMAT = 'dd-mm-yyyy', NOENTRY, UPSHIFT,
+	OPTIONS = '-nolist';
+c022 = FORMONLY.descripcion, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c023 = FORMONLY.subtotal TYPE DECIMAL(12,2), FORMAT = '---,--&.##',
+	NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+f    = FORMONLY.marcar_ot TYPE CHAR NOT NULL, INCLUDE = ('S', 'N'),
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S',
+	COMMENTS = 'Marque: para ANULAR OC. Desmarque: para pasar a nueva OT.',
+	REQUIRED, UPSHIFT, OPTIONS = '-nolist';
+
+c030 = FORMONLY.tot_neto TYPE DECIMAL(12,2) NOT NULL, FORMAT = '---,--&.##',
+	NOENTRY, REVERSE;
+END
+KEYS
+F5 = 'Orden Compra'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_oc[6] (estado, orden_compra, fecha, descripcion, subtotal,
+			marcar_ot)

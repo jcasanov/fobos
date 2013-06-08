@@ -1,0 +1,101 @@
+DATABASE aceros
+SCREEN
+{
+  Usuario: [c000      ]                    Fechas: [c001      ] - [c002      ]
+   Bodega: [c3] [c004                          ]       Ordenar columnas ?: [c]
+     Item: [c005   ] [c006                                                   ]
+                                                              [c030] de [c031]
+ [c1|c010  |c011            |c012     |c013     |c014     |c015     |c016     ]
+[c2|c020  |c021            |c022     |c023     |c024     |c025     |c026     ]
+[c2|c020  |c021            |c022     |c023     |c024     |c025     |c026     ]
+[c2|c020  |c021            |c022     |c023     |c024     |c025     |c026     ]
+[c2|c020  |c021            |c022     |c023     |c024     |c025     |c026     ]
+[c2|c020  |c021            |c022     |c023     |c024     |c025     |c026     ]
+[c2|c020  |c021            |c022     |c023     |c024     |c025     |c026     ]
+[c2|c020  |c021            |c022     |c023     |c024     |c025     |c026     ]
+[c2|c020  |c021            |c022     |c023     |c024     |c025     |c026     ]
+[c2|c020  |c021            |c022     |c023     |c024     |c025     |c026     ]
+[c2|c020  |c021            |c022     |c023     |c024     |c025     |c026     ]
+                           [c050     |c051     |c052     |c053     |c054     ]
+
+[c071                                ]       Diferencia: [c070     ]
+[c072                                    ]
+[c073                                              ]
+[c074                                                               |c075    ]
+}
+TABLES
+rept002
+rept010
+rept089
+ATTRIBUTES
+c000 = rept089.r89_usuario, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = FORMONLY.vm_fecha_ini TYPE DATE NOT NULL, FORMAT = 'dd-mm-yyyy',
+	REQUIRED, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = "Digite la Fecha Inicial en formato: dd-mm-aaaa";
+c002 = FORMONLY.vm_fecha_fin TYPE DATE NOT NULL, FORMAT = 'dd-mm-yyyy',
+	REQUIRED, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = "Digite la Fecha Final en formato: dd-mm-aaaa";
+c3   = FORMONLY.vm_bodega TYPE CHAR, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c004 = rept002.r02_nombre, NOENTRY, UPSHIFT;
+c005 = FORMONLY.vm_item TYPE CHAR, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c006 = FORMONLY.vm_desc_item, NOENTRY, UPSHIFT;
+c    = FORMONLY.vm_ordenar TYPE CHAR NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, INCLUDE = ('S', 'N'),
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge', DEFAULT = 'N';
+
+c1   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c010 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c011 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c012 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c013 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c014 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c015 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+c016 = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22';
+
+c2   = rept089.r89_bodega, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c020 = rept089.r89_item,   NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c021 = rept010.r10_nombre, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c022 = rept089.r89_bueno,  AUTONEXT, UPSHIFT, FORMAT = '##,##&.##',
+	INCLUDE = (0 TO 99999.99), OPTIONS = '-nolist';
+c023 = rept089.r89_incompleto, AUTONEXT, UPSHIFT, FORMAT = '##,##&.##',
+	INCLUDE = (0 TO 99999.99), OPTIONS = '-nolist';
+c024 = rept089.r89_mal_est, AUTONEXT, UPSHIFT, FORMAT = '##,##&.##',
+	INCLUDE = (0 TO 99999.99), OPTIONS = '-nolist';
+c025 = rept089.r89_suma, NOENTRY, UPSHIFT, FORMAT = '##,##&.##',
+	OPTIONS = '-nolist';
+c026 = rept089.r89_stock_act, NOENTRY, UPSHIFT, FORMAT = '--,--&.##',
+	OPTIONS = '-nolist';
+
+c050 = FORMONLY.total_bueno TYPE DECIMAL, NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = '##,##&.##';
+c051 = FORMONLY.total_incompleto TYPE DECIMAL, NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = '##,##&.##';
+c052 = FORMONLY.total_mal_est TYPE DECIMAL, NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = '##,##&.##';
+c053 = FORMONLY.total_suma TYPE DECIMAL, NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = '##,##&.##';
+c054 = FORMONLY.total_stock_act TYPE DECIMAL, NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = '--,--&.##';
+
+c030 = FORMONLY.num_row,   NOENTRY, REVERSE;
+c031 = FORMONLY.max_row,   NOENTRY, REVERSE;
+
+c070 = FORMONLY.tit_diferencia, NOENTRY, UPSHIFT, REVERSE, FORMAT = '--,--&.##',
+	COLOR = RED WHERE c070 < 0;
+c071 = FORMONLY.descrip_2, NOENTRY;
+c072 = FORMONLY.descrip_3, NOENTRY;
+c073 = FORMONLY.descrip_4, NOENTRY;
+c074 = FORMONLY.nom_item,  NOENTRY, REVERSE;
+c075 = FORMONLY.nom_marca, NOENTRY, REVERSE;
+END
+KEYS
+F5 = 'Modificar'
+F6 = 'Detalle'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_inventario[10] (r89_bodega, r89_item, r10_nombre, r89_bueno,
+				 r89_incompleto, r89_mal_est, r89_suma,
+				 r89_stock_act)

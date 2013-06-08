@@ -1,0 +1,21 @@
+DATABASE aceros
+SCREEN 
+{
+    FILTROS DE ENLACE
+
+    Cliente: 	[c000  ] [c001                                ]           
+    Proveedor:	[c002  ] [c003                                ]
+    Pedido: 	[c004      ]
+
+}
+TABLES
+ctbt013
+ATTRIBUTES
+c000 = ctbt013.b13_codcli, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c001 = FORMONLY.nom_cli TYPE VARCHAR, NOENTRY, REVERSE, UPSHIFT;
+
+c002 = ctbt013.b13_codprov, REVERSE, UPSHIFT, AUTONEXT;
+c003 = FORMONLY.nom_prov TYPE VARCHAR, NOENTRY, REVERSE, UPSHIFT;
+c004 = ctbt013.b13_pedido, REVERSE, UPSHIFT, AUTONEXT;
+end

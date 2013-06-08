@@ -1,0 +1,30 @@
+DATABASE aceros
+
+SCREEN
+{
+ CASAS COMERCIALES
+-----------------------------------------
+ Código	      Nombre 		
+-----------------------------------------
+[c01       ] [c002                    ] 
+[c01       ] [c002                    ]
+[c01       ] [c002                    ]
+[c01       ] [c002                    ]
+[c01       ] [c002                    ]
+[c01       ] [c002                    ]
+[c01       ] [c002                    ] 
+[c01       ] [c002                    ] 
+[c01       ] [c002                    ] 
+[c01       ] [c002                    ] 
+}
+
+TABLES
+rolt062
+
+ATTRIBUTES
+c01  = n62_cod_almacen;
+c002 = n62_nombre;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_almacen[10](n62_cod_almacen, n62_nombre)

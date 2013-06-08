@@ -1,74 +1,77 @@
-
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
-          Item:[c0               ] [c1                                  ]
-        Bodega:[c2] [c3                            ]
-Desde la Fecha:[c         ]                   Hasta la Fecha:[c4        ]
- Stock inicial:[c12 ]
-
- [a|b0|b1             |b2        |b3                         |b4  |b5  |b6    ]
-[d|c5|c6             |c7        |c8                         |c9  |c10 |c11   ]
-[d|c5|c6             |c7        |c8                         |c9  |c10 |c11   ]
-[d|c5|c6             |c7        |c8                         |c9  |c10 |c11   ]
-[d|c5|c6             |c7        |c8                         |c9  |c10 |c11   ]
-[d|c5|c6             |c7        |c8                         |c9  |c10 |c11   ]
-[d|c5|c6             |c7        |c8                         |c9  |c10 |c11   ]
-[d|c5|c6             |c7        |c8                         |c9  |c10 |c11   ]
-[d|c5|c6             |c7        |c8                         |c9  |c10 |c11   ]
-[d|c5|c6             |c7        |c8                         |c9  |c10 |c11   ]
-[d|c5|c6             |c7        |c8                         |c9  |c10 |c11   ]
-[d|c5|c6             |c7        |c8                         |c9  |c10 |c11   ]
-[d|c5|c6             |c7        |c8                         |c9  |c10 |c11   ]
-[d|c5|c6             |c7        |c8                         |c9  |c10 |c11   ]
-						    Total:[c13 |c14 ]
+          Item: [c0     ] [c1                                                ]
+        Bodega: [c2]      [c3                            ]  Solo Facturas? [d]
+Desde la Fecha: [c         ]                      Hasta la Fecha: [c4        ]
+ Stock inicial: [c12       ]                         
+                                                              [c050] de [c051]
+ [b0|b1    |b2        |b3                 |b4         |b5         |b6         ]
+[c5|c6    |c7        |c8                 |c9         |c10        |c11        ]
+[c5|c6    |c7        |c8                 |c9         |c10        |c11        ]
+[c5|c6    |c7        |c8                 |c9         |c10        |c11        ]
+[c5|c6    |c7        |c8                 |c9         |c10        |c11        ]
+[c5|c6    |c7        |c8                 |c9         |c10        |c11        ]
+[c5|c6    |c7        |c8                 |c9         |c10        |c11        ]
+[c5|c6    |c7        |c8                 |c9         |c10        |c11        ]
+[c5|c6    |c7        |c8                 |c9         |c10        |c11        ]
+[c5|c6    |c7        |c8                 |c9         |c10        |c11        ]
+[c5|c6    |c7        |c8                 |c9         |c10        |c11        ]
+[c5|c6    |c7        |c8                 |c9         |c10        |c11        ]
+[c5|c6    |c7        |c8                 |c9         |c10        |c11        ]
+[c5|c6    |c7        |c8                 |c9         |c10        |c11        ]
+   [c052                 ]      Totales: [c13        |c14        ]
 }
 TABLES
-	rept019
-	rept020
-
+gent021
+rept020
 ATTRIBUTES
+b0   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+b1   = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b2   = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+b3   = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+b4   = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+b5   = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+b6   = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
 
-b0  = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-b1  = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-b2  = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
-b3  = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
-b4  = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
-b5  = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
-b6  = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
-a   = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22';
-
-c0  = rept020.r20_item, REVERSE, UPSHIFT, WIDGET = 'FIELD_BMP',
+c0   = rept020.r20_item, REVERSE, UPSHIFT, WIDGET = 'FIELD_BMP',
 	CONFIG = 'lista.bmp F2'; 
-c1  = FORMONLY.nom_item TYPE VARCHAR, REVERSE, NOENTRY;
-c2  = FORMONLY.vm_bodega TYPE VARCHAR, REQUIRED, REVERSE, UPSHIFT, 
+c1   = FORMONLY.nom_item TYPE VARCHAR, REVERSE, NOENTRY;
+c2   = FORMONLY.vm_bodega TYPE VARCHAR, AUTONEXT, UPSHIFT, 
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2', AUTONEXT; 
-c3  = FORMONLY.nom_bodega TYPE VARCHAR, REVERSE, NOENTRY;
-c   = FORMONLY.vm_fecha_desde TYPE DATE NOT NULL, REVERSE, UPSHIFT,
+c3   = FORMONLY.nom_bodega TYPE VARCHAR, NOENTRY, UPSHIFT;
+c    = FORMONLY.vm_fecha_desde TYPE DATE NOT NULL, REVERSE, UPSHIFT,
 	FORMAT = 'dd-mm-yyyy', AUTONEXT; 
-c4  = FORMONLY.vm_fecha_hasta TYPE DATE NOT NULL, REVERSE, UPSHIFT, 
+c4   = FORMONLY.vm_fecha_hasta TYPE DATE NOT NULL, REVERSE, UPSHIFT, 
 	FORMAT = 'dd-mm-yyyy', AUTONEXT; 
-c12  = FORMONLY.vm_stock_inicial TYPE SMALLINT, REVERSE, NOENTRY; 
-c13  = FORMONLY.vm_tot_ing TYPE SMALLINT, REVERSE;  
-c14  = FORMONLY.vm_tot_egr TYPE SMALLINT, REVERSE;  
+c12  = FORMONLY.vm_stock_inicial TYPE DECIMAL, REVERSE, NOENTRY,
+	FORMAT = '---,--&.##';
+d    = FORMONLY.vm_solo_fact TYPE CHAR NOT NULL, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S',
+	COMMENTS = 'Marque: muestra movtos. Items Bodegas Fact. Desmarcado: Todas.';
 
-d   = rept020.r20_localidad, OPTIONS = '-nolist';
-c5  = rept020.r20_cod_tran, OPTIONS = '-nolist';
-c6  = rept020.r20_num_tran, OPTIONS = '-nolist'; 
-c7  = FORMONLY.fecha TYPE DATE, FORMAT = 'dd-mm-yyyy',
-	OPTIONS = '-nolist';  
-c8  = FORMONLY.cliente TYPE VARCHAR,   OPTIONS = '-nolist';  
-c9  = FORMONLY.cant_ing TYPE SMALLINT, OPTIONS = '-nolist';  
-c10 = FORMONLY.cant_egr TYPE SMALLINT, OPTIONS = '-nolist';  
-c11 = FORMONLY.saldo TYPE SMALLINT,    OPTIONS = '-nolist', 
-	COLOR = RED WHERE c11 < 0;  
+c5   = rept020.r20_cod_tran, OPTIONS = '-nolist';
+c6   = rept020.r20_num_tran, OPTIONS = '-nolist'; 
+c7   = FORMONLY.fecha TYPE DATE, FORMAT = 'dd-mm-yyyy', OPTIONS = '-nolist';  
+c8   = FORMONLY.cliente TYPE VARCHAR, OPTIONS = '-nolist';  
+c9   = FORMONLY.cant_ing TYPE DECIMAL (8,2),OPTIONS= '-nolist',
+	FORMAT = '----,--&.##';
+c10  = FORMONLY.cant_egr TYPE DECIMAL (8,2), OPTIONS = '-nolist',
+	FORMAT='----,--&.##';
+c11  = FORMONLY.saldo TYPE DECIMAL (8,2),OPTIONS = '-nolist',
+	FORMAT = '----,--&.##', COLOR = RED WHERE c11 < 0;  
 
+c13  = FORMONLY.vm_tot_ing TYPE DECIMAL, REVERSE, FORMAT = '----,--&.##';
+c14  = FORMONLY.vm_tot_egr TYPE DECIMAL, REVERSE, FORMAT = '----,--&.##';
+
+c050 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c051 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+c052 = gent021.g21_nombre, NOENTRY, REVERSE, UPSHIFT;
 END
-
 KEYS 
-	F5 = 'Ver Transacción'
-
+F5 = 'Ver Transacción'
+F6 = 'Imprimir Listado'
 INSTRUCTIONS
-SCREEN RECORD r_detalle[13] (r20_localidad, r20_cod_tran, r20_num_tran, fecha, 
-							cliente, 
+DELIMITERS '||'
+SCREEN RECORD r_detalle[13] (r20_cod_tran, r20_num_tran, fecha, cliente, 
 			     cant_ing, cant_egr, saldo)

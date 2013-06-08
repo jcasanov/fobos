@@ -1,0 +1,18 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+                       Año Proceso: [c000]
+
+                       Mes Proceso: [c0] [c001      ]
+}
+ATTRIBUTES
+c000 = FORMONLY.anio, NOENTRY, UPSHIFT, REVERSE, INCLUDE = (2009 TO 2099),
+	FORMAT = '&&&&';
+c0   = FORMONLY.mes, AUTONEXT, UPSHIFT, REVERSE, INCLUDE = (1 TO 12),
+	FORMAT = '&&',
+	CONFIG = 'lista.bmp F2', WIDGET = 'FIELD_BMP';
+c001 = FORMONLY.tit_mes, NOENTRY, UPSHIFT, REVERSE;
+END
+KEYS
+F5 = 'Generar Archivo'

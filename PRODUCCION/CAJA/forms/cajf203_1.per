@@ -1,37 +1,38 @@
-database diteca 
-screen 
+DATABASE aceros 
+SCREEN 
 { 
                                Comprobante Emitido: [x1|x001             ]
          Tipo Fuente          
    [a0                          ]    Número Fuente: [c002       ]   
-                                   
+                                   No. Pre-Impreso: [c060             ]
                                    Area de Negocio: [c03|c052            ]
                                      Fecha Proceso: [c007                ]
 
    Cliente: [c004       ][c005                                           ]
     Moneda: [a1|c051            ]  Valor a Recaudar: [c006               ]
-
-  [l1  |l2  |l3      |l4             |l5                  |l6              ]
- [a5] [a6] [c024  ] [c025           |c026                |c023             ]
- [a5] [a6] [c024  ] [c025           |c026                |c023             ]
- [a5] [a6] [c024  ] [c025           |c026                |c023             ]
- [a5] [a6] [c024  ] [c025           |c026                |c023             ]
- [a5] [a6] [c024  ] [c025           |c026                |c023             ]
- [a5] [a6] [c024  ] [c025           |c026                |c023             ]
- [a5] [a6] [c024  ] [c025           |c026                |c023             ]
- ---------------------------------------------------------------------------
+ [l1  |l2  |l3      |l4               |l5                  |l6               ]
+[a5] [a6] [c024  ] [c025             |c026                |c023             ]
+[a5] [a6] [c024  ] [c025             |c026                |c023             ]
+[a5] [a6] [c024  ] [c025             |c026                |c023             ]
+[a5] [a6] [c024  ] [c025             |c026                |c023             ]
+[a5] [a6] [c024  ] [c025             |c026                |c023             ]
+[a5] [a6] [c024  ] [c025             |c026                |c023             ]
+[a5] [a6] [c024  ] [c025             |c026                |c023             ]
+-----------------------------------------------------------------------------
                                    Total Moneda Factura: [c050             ]
  Ingresado Por: [c016      ]                     Vuelto: [c055             ]   
 }
-end
-tables
+TABLES
 cajt010
 cajt011
-attributes
+rept038
+ATTRIBUTES
 a0 = cajt010.j10_tipo_fuente, DEFAULT='PR', WIDGET='RADIO', AUTONEXT,
-	CONFIG='SC "Solicitud Cobro a Clientes"';
+	CONFIG='OT "Orden de Trabajo" PR "Preventa de Inventario" SC "Solicitud Cobro a Clientes"';
 c002 = cajt010.j10_num_fuente, REVERSE, WIDGET='FIELD_BMP',
 	CONFIG='lista.bmp F2';
+c060 = FORMONLY.r38_num_sri, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Dígite el Número de Factura Pre-Impresa (SRI)';
 c03  = cajt010.j10_areaneg, NOENTRY;
 c004 = cajt010.j10_codcli, NOENTRY;
 c005 = cajt010.j10_nomcli, REVERSE, UPSHIFT, NOENTRY;
@@ -48,7 +49,8 @@ a5 = cajt011.j11_codigo_pago, UPSHIFT, AUTONEXT, OPTIONS='-nolist',
 a6 = cajt011.j11_moneda, UPSHIFT, AUTONEXT, OPTIONS='-nolist', 
 	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
 c023 = cajt011.j11_valor, FORMAT='#,###,###,##&.##', 
-	OPTIONS='-nolist'; 
+	OPTIONS='-nolist', COMMENTS = 
+        'Presione <F7> para que le aparezca la diferencia.';
 c024 = cajt011.j11_cod_bco_tarj, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2',
 	OPTIONS='-nolist', 
 	COMMENT='Ingrese el código del banco o de la tarjeta de crédito';
@@ -57,25 +59,26 @@ c025 = cajt011.j11_num_ch_aut, UPSHIFT,	OPTIONS='-nolist',
 c026 = cajt011.j11_num_cta_tarj, UPSHIFT, SCROLL, OPTIONS='-nolist', 
 	COMMENT='Ingrese el número de la cuenta o de la tarjeta';
 
-c050 = formonly.total_mf, REVERSE, FORMAT='#,###,###,##&.##', NOENTRY; 
-c055 = formonly.vuelto,   REVERSE, FORMAT='#,###,###,##&.##', NOENTRY; 
-c051 = formonly.n_moneda, NOENTRY;
-c052 = formonly.n_areaneg, NOENTRY;
+c050 = FORMONLY.total_mf, REVERSE, FORMAT='#,###,###,##&.##', NOENTRY; 
+c055 = FORMONLY.vuelto,   REVERSE, FORMAT='#,###,###,##&.##', NOENTRY; 
+c051 = FORMONLY.n_moneda, NOENTRY;
+c052 = FORMONLY.n_areaneg, NOENTRY;
 
 x1   = cajt010.j10_tipo_destino, NOENTRY, COLOR=BLUE;
 x001 = cajt010.j10_num_destino,  NOENTRY, COLOR=BLUE;
 
-l1   = formonly.bt_codigo_pago, WIDGET='BUTTON', CONFIG='F15';
-l2   = formonly.bt_moneda,      WIDGET='BUTTON', CONFIG='F16';
-l3   = formonly.bt_bco_tarj, 	WIDGET='BUTTON', CONFIG='F17';
-l4   = formonly.bt_che_aut,     WIDGET='BUTTON', CONFIG='F18';
-l5   = formonly.bt_cta_tarj,    WIDGET='BUTTON', CONFIG='F19';
-l6   = formonly.bt_valor,       WIDGET='BUTTON', CONFIG='F20';
+l1   = FORMONLY.bt_codigo_pago, WIDGET='BUTTON', CONFIG='F15';
+l2   = FORMONLY.bt_moneda,      WIDGET='BUTTON', CONFIG='F16';
+l3   = FORMONLY.bt_bco_tarj, 	WIDGET='BUTTON', CONFIG='F17';
+l4   = FORMONLY.bt_che_aut,     WIDGET='BUTTON', CONFIG='F18';
+l5   = FORMONLY.bt_cta_tarj,    WIDGET='BUTTON', CONFIG='F19';
+l6   = FORMONLY.bt_valor,       WIDGET='BUTTON', CONFIG='F20';
 end
 
-instructions
-screen record ra_j11[7] (j11_codigo_pago, j11_moneda, j11_cod_bco_tarj, j11_num_ch_aut, j11_num_cta_tarj, j11_valor)
+INSTRUCTIONS
+SCREEN RECORD ra_j11[7] (j11_codigo_pago, j11_moneda, j11_cod_bco_tarj, j11_num_ch_aut, j11_num_cta_tarj, j11_valor)
 
 
-keys 
+KEYS 
 F5 = 'Ver Documento'
+F6 = 'Retenciones'

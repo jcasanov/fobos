@@ -1,5 +1,4 @@
-DATABASE diteca
-
+DATABASE aceros
 SCREEN
 {
  DOCUMENTOS A FAVOR DE CLIENTES EN COBRANZAS
@@ -15,13 +14,12 @@ SCREEN
 [c001                       |c0|c002   |c003      |c1|c004      ]
 [c001                       |c0|c002   |c003      |c1|c004      ]
 [c001                       |c0|c002   |c003      |c1|c004      ]
+                             Total ==> [c010      ]
 }
-
 TABLES
 cxct021
 cxct001
 gent003
-
 ATTRIBUTES
 c001 = z01_nomcli, UPSHIFT;
 c0   = z21_tipo_doc, UPSHIFT;
@@ -30,13 +28,15 @@ c003 = z21_saldo, UPSHIFT;
 c1   = z21_moneda, UPSHIFT;
 c004 = g03_abreviacion, UPSHIFT;
 
-lb11 = formonly.bt_cliente,  NOENTRY, WIDGET='BUTTON', CONFIG='F15';
-l1   = formonly.bt_tipo,     NOENTRY, WIDGET='BUTTON', CONFIG='F16';
-lb13 = formonly.bt_numero,   NOENTRY, WIDGET='BUTTON', CONFIG='F17';
-lb14 = formonly.bt_saldo,    NOENTRY, WIDGET='BUTTON', CONFIG='F18';
-l2   = formonly.bt_moneda,   NOENTRY, WIDGET='BUTTON', CONFIG='F19';
-lb15 = formonly.bt_area,     NOENTRY, WIDGET='BUTTON', CONFIG='F20';
-END
+lb11 = FORMONLY.bt_cliente,  NOENTRY, WIDGET='BUTTON', CONFIG='F15';
+l1   = FORMONLY.bt_tipo,     NOENTRY, WIDGET='BUTTON', CONFIG='F16';
+lb13 = FORMONLY.bt_numero,   NOENTRY, WIDGET='BUTTON', CONFIG='F17';
+lb14 = FORMONLY.bt_saldo,    NOENTRY, WIDGET='BUTTON', CONFIG='F18';
+l2   = FORMONLY.bt_moneda,   NOENTRY, WIDGET='BUTTON', CONFIG='F19';
+lb15 = FORMONLY.bt_area,     NOENTRY, WIDGET='BUTTON', CONFIG='F20';
 
+c010 = FORMONLY.tit_total TYPE DECIMAL, NOENTRY, UPSHIFT, FORMAT = "---,--&.##";
+END
 INSTRUCTIONS
-SCREEN RECORD rh_favorcob[10]( z01_nomcli, z21_tipo_doc, z21_num_doc, z21_saldo, z21_moneda, g03_abreviacion)
+SCREEN RECORD rh_favorcob[10] (z01_nomcli, z21_tipo_doc, z21_num_doc, z21_saldo,
+				z21_moneda, g03_abreviacion)

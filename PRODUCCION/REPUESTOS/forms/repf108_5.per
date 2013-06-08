@@ -1,56 +1,57 @@
-database diteca
-screen
+DATABASE aceros
+SCREEN
 {
 
-     Moneda: [c1] [c001           ]    Año: [c000]    
-     Bodega: [c2] [c002           ]
-                      ** Unidades **
- [lbl1      |lbl2      |lbl3      |lbl4      |lbl5      ]
-[c011      |c012      |c013      |c014      |c015      ]  
-[c011      |c012      |c013      |c014      |c015      ]  
-[c011      |c012      |c013      |c014      |c015      ]  
-[c011      |c012      |c013      |c014      |c015      ]  
-[c011      |c012      |c013      |c014      |c015      ]  
-[c011      |c012      |c013      |c014      |c015      ]  
-[c011      |c012      |c013      |c014      |c015      ]  
-[c011      |c012      |c013      |c014      |c015      ]  
-[c011      |c012      |c013      |c014      |c015      ]  
-[c011      |c012      |c013      |c014      |c015      ]  
-[c011      |c012      |c013      |c014      |c015      ]  
-[c011      |c012      |c013      |c014      |c015      ]  
-    Total  [c022      |c023      |c024      |c025      ]
+           Moneda: [c1] [c001           ]    Año: [c000]    
+           Bodega: [c2] [c002           ]
+                           ** Unidades **
+ [lbl1      |lbl2      |lbl3      |lbl4      |lbl5      |lbl6      ]
+[c011      |c012      |c013      |c014      |c015      |c016      ]
+[c011      |c012      |c013      |c014      |c015      |c016      ]
+[c011      |c012      |c013      |c014      |c015      |c016      ]
+[c011      |c012      |c013      |c014      |c015      |c016      ]
+[c011      |c012      |c013      |c014      |c015      |c016      ]
+[c011      |c012      |c013      |c014      |c015      |c016      ]
+[c011      |c012      |c013      |c014      |c015      |c016      ]
+[c011      |c012      |c013      |c014      |c015      |c016      ]
+[c011      |c012      |c013      |c014      |c015      |c016      ]
+[c011      |c012      |c013      |c014      |c015      |c016      ]
+[c011      |c012      |c013      |c014      |c015      |c016      ]
+[c011      |c012      |c013      |c014      |c015      |c016      ]
+    Total  [c022      |c023      |c024      |c025      |c026      ]
 }
-end
-
-tables
+TABLES
 rept012
-
-attributes
+ATTRIBUTES
 c1   = rept012.r12_moneda, REVERSE, AUTONEXT, UPSHIFT, WIDGET='FIELD_BMP',
 	CONFIG='lista.bmp F2';
-c001 = formonly.n_moneda, NOENTRY;
-c000 = formonly.anho TYPE SMALLINT NOT NULL, REVERSE, INCLUDE=(1900 TO 9999);
-c2   = formonly.bodega, AUTONEXT, UPSHIFT, WIDGET='FIELD_BMP',
+c001 = FORMONLY.n_moneda, NOENTRY;
+c000 = FORMONLY.anho TYPE SMALLINT NOT NULL, REVERSE, INCLUDE=(1900 TO 9999);
+c2   = FORMONLY.bodega, AUTONEXT, UPSHIFT, WIDGET='FIELD_BMP',
 	CONFIG='lista.bmp F2';
-c002 = formonly.n_bodega, NOENTRY;
+c002 = FORMONLY.n_bodega, NOENTRY;
 
-c011 = formonly.mes,                            NOENTRY, OPTIONS='-nolist';
-c012 = formonly.unid_vend, FORMAT='##,###,##&', NOENTRY, OPTIONS='-nolist';
-c013 = formonly.unid_dema, FORMAT='##,###,##&', NOENTRY, OPTIONS='-nolist';
-c014 = formonly.unid_perd, FORMAT='##,###,##&', NOENTRY, OPTIONS='-nolist';
-c015 = formonly.subtotal , FORMAT='##,###,##&', NOENTRY, OPTIONS='-nolist';
+c011 = FORMONLY.mes,                            NOENTRY, OPTIONS='-nolist';
+c012 = FORMONLY.unid_vant, FORMAT='---,--&.##', NOENTRY, OPTIONS='-nolist';
+c013 = FORMONLY.unid_vend, FORMAT='###,##&.##', NOENTRY, OPTIONS='-nolist';
+c014 = FORMONLY.unid_dev , FORMAT='---,--&.##', NOENTRY, OPTIONS='-nolist';
+c015 = FORMONLY.unid_vtot, FORMAT='---,--&.##', NOENTRY, OPTIONS='-nolist';
+c016 = FORMONLY.unid_dema, FORMAT='---,--&.##', NOENTRY, OPTIONS='-nolist';
 
-c022 = formonly.tot_vend , FORMAT='##,###,##&', NOENTRY, REVERSE;
-c023 = formonly.tot_dema , FORMAT='##,###,##&', NOENTRY, REVERSE; 
-c024 = formonly.tot_perd , FORMAT='##,###,##&', NOENTRY, REVERSE; 
-c025 = formonly.total    , FORMAT='##,###,##&', NOENTRY, REVERSE; 
+c022 = FORMONLY.tot_vant , FORMAT='---,--&.##', NOENTRY, REVERSE; 
+c023 = FORMONLY.tot_vend , FORMAT='###,##&.##', NOENTRY, REVERSE;
+c024 = FORMONLY.tot_dev  , FORMAT='---,--&.##', NOENTRY, REVERSE; 
+c025 = FORMONLY.tot_vtot , FORMAT='---,--&.##', NOENTRY, REVERSE; 
+c026 = FORMONLY.tot_dema , FORMAT='---,--&.##', NOENTRY, REVERSE; 
 
-lbl1 = formonly.bt_mes   , WIDGET='BUTTON', CONFIG='F15';
-lbl2 = formonly.bt_vend  , WIDGET='BUTTON', CONFIG='F16';
-lbl3 = formonly.bt_dema  , WIDGET='BUTTON', CONFIG='F17';
-lbl4 = formonly.bt_perd  , WIDGET='BUTTON', CONFIG='F18';
-lbl5 = formonly.bt_total , WIDGET='BUTTON', CONFIG='F19';
-end 
-
-instructions
-screen record r_estat[12] (mes, unid_vend, unid_dema, unid_perd, subtotal)
+lbl1 = FORMONLY.tit_col1 , WIDGET='BUTTON', CONFIG='F15';
+lbl2 = FORMONLY.tit_col2 , WIDGET='BUTTON', CONFIG='F16';
+lbl3 = FORMONLY.tit_col3 , WIDGET='BUTTON', CONFIG='F17';
+lbl4 = FORMONLY.tit_col4 , WIDGET='BUTTON', CONFIG='F18';
+lbl5 = FORMONLY.tit_col5 , WIDGET='BUTTON', CONFIG='F19';
+lbl6 = FORMONLY.tit_col6 , WIDGET='BUTTON', CONFIG='F20';
+END 
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_estat[12] (mes, unid_vant, unid_vend, unid_dev, unid_vtot,
+				unid_dema)

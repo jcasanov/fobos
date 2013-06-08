@@ -1,0 +1,57 @@
+database aceros
+screen 
+{
+ Código Trabajador: [c001 ] [c002                                     ]
+        Tipo Saldo: [c003          ]       Saldo >= a: [c004          ]
+
+
+      Rango Fechas: [c005      ] - [c006      ]
+
+  [lbl0      |lbl1|lbl2                           |lbl3         |lbl4         ]
+ [c010      |c011|c012                           |c013         |c014         ]
+ [c010      |c011|c012                           |c013         |c014         ]
+ [c010      |c011|c012                           |c013         |c014         ]
+ [c010      |c011|c012                           |c013         |c014         ]
+ [c010      |c011|c012                           |c013         |c014         ]
+ [c010      |c011|c012                           |c013         |c014         ]
+ [c010      |c011|c012                           |c013         |c014         ]
+ [c010      |c011|c012                           |c013         |c014         ]
+ [c010      |c011|c012                           |c013         |c014         ]
+ [c010      |c011|c012                           |c013         |c014         ]
+ [c010      |c011|c012                           |c013         |c014         ]
+                                                 [c101         |c102         ]
+}
+tables
+rolt064
+attributes
+c001 = FORMONLY.cod_trab TYPE INTEGER, WIDGET = 'FIELD_BMP', 
+	CONFIG = 'lista.bmp F2';
+c002 = FORMONLY.nom_trab, NOENTRY;
+
+c003 = FORMONLY.flag_saldo, WIDGET = 'RADIO', CONFIG = 'S Con_Saldo T Todos',
+	DEFAULT='S';
+c004 = FORMONLY.val_filtro TYPE DECIMAL(11,2), INCLUDE = (NULL, 0.01 TO 999999999.99),
+       FORMAT = '###,###,##&.##';
+
+c005 = formonly.fecha_ini, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha inicial en formato: dd-mm-aaaa.';
+c006 = formonly.fecha_fin, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha final en formato: dd-mm-aaaa.';
+
+c010 = formonly.n64_fecha,   NOENTRY, OPTIONS='-nolist', FORMAT='dd-mm-yyyy';
+c011 = rolt064.n64_cod_trab, NOENTRY, OPTIONS='-nolist';
+c012 = formonly.n_trab,      NOENTRY, OPTIONS='-nolist';
+c013 = formonly.valor, FORMAT='##,###,##&.##', OPTIONS='-nolist';
+c014 = formonly.saldo, FORMAT='##,###,##&.##', OPTIONS='-nolist';
+
+c101 = formonly.tot_valor, NOENTRY, REVERSE, FORMAT='##,###,##&.##';
+c102 = formonly.tot_saldo, NOENTRY, REVERSE, FORMAT='##,###,##&.##';
+
+lbl0 = formonly.bt_fecha,    WIDGET='BUTTON', CONFIG='F15';
+lbl1 = formonly.bt_cod_trab, WIDGET='BUTTON', CONFIG='F16';
+lbl2 = formonly.bt_n_trab,   WIDGET='BUTTON', CONFIG='F17';
+lbl3 = formonly.bt_valor,    WIDGET='BUTTON', CONFIG='F18';
+lbl4 = formonly.bt_saldo,    WIDGET='BUTTON', CONFIG='F19';
+end
+instructions
+screen record ra_scr[11] (n64_fecha, n64_cod_trab, n_trab, valor, saldo) 

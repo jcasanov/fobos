@@ -1,4 +1,4 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
 
@@ -20,7 +20,7 @@ cxpt000
 ATTRIBUTES
 c000 = cxpt000.p00_compania, AUTONEXT, REVERSE,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
-	COMMENTS = 'Indicar que compañía serán config. para tesorería';
+	COMMENTS = 'Indicar que compañía sera config. para tesorería';
 c010 = cxpt000.p00_tipo_egr_gen, AUTONEXT, REVERSE, UPSHIFT,
 	WIDGET = 'RADIO', CONFIG = 'D Detallado R Resumido', DEFAULT = 'D',
 	COMMENTS = 'Tipo de egreso que va a generar';
@@ -43,4 +43,4 @@ c    = FORMONLY.tit_est, NOENTRY, REVERSE, UPSHIFT;
 c0a0 = FORMONLY.tit_estado_tes, NOENTRY, UPSHIFT;
 c020 = cxpt000.p00_mespro, NOENTRY;
 c021 = cxpt000.p00_anopro, NOENTRY;
-END
+end

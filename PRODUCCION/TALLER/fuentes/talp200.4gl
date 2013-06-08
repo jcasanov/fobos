@@ -8,6 +8,7 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
+DEFINE vm_demonios	VARCHAR(12)
 DEFINE rm_tal		RECORD LIKE talt010.*
 DEFINE vm_num_rows	SMALLINT
 DEFINE vm_row_current	SMALLINT
@@ -19,11 +20,12 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/talp200.error')
-CALL fgl_init4js()
+CALL startlog('../logs/errores')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN          -- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
+	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto', 'stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
 LET vg_base     = arg_val(1)
@@ -32,8 +34,8 @@ LET vg_codcia   = arg_val(3)
 LET vg_proceso = 'talp200'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL control_master()
 
@@ -42,15 +44,31 @@ END MAIN
 
 
 FUNCTION control_master()
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
 CALL fl_nivel_isolation()
 LET vm_max_rows	= 1000
-OPEN WINDOW wf AT 3,2 WITH 21 ROWS, 80 COLUMNS
-    ATTRIBUTE(FORM LINE FIRST + 2, COMMENT LINE LAST, MENU LINE FIRST,BORDER,
-	      MESSAGE LINE LAST - 2)
-OPTIONS INPUT WRAP,
-	ACCEPT KEY	F12
-OPEN FORM f_tal FROM "../forms/talf200_1"
+LET lin_menu = 0
+LET row_ini  = 3
+LET num_rows = 21
+LET num_cols = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW wf AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
+    ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE lin_menu,BORDER,
+	      MESSAGE LINE LAST - 1)
+IF vg_gui = 1 THEN
+	OPEN FORM f_tal FROM "../forms/talf200_1"
+ELSE
+	OPEN FORM f_tal FROM "../forms/talf200_1c"
+END IF
 DISPLAY FORM f_tal
 INITIALIZE rm_tal.* TO NULL
 LET vm_num_rows = 0
@@ -65,14 +83,8 @@ MENU 'OPCIONES'
 	COMMAND KEY('I') 'Ingresar' 'Ingresar nuevos registros. '
 		CALL control_ingreso()
 		IF vm_num_rows = 1 THEN
-		  IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		  END IF 
-
-		IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		END IF
-			
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -85,14 +97,8 @@ MENU 'OPCIONES'
 	COMMAND KEY('C') 'Consultar' 'Consultar un registro. '
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		   END IF
-			
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -101,14 +107,8 @@ MENU 'OPCIONES'
                         END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		   END IF
-
 		END IF
 		IF vm_row_current <= 1 THEN
                         HIDE OPTION 'Retroceder'
@@ -239,8 +239,8 @@ DEFINE nomcli		LIKE cxct001.z01_nomcli
 DEFINE modelo           LIKE veht022.v22_modelo
 DEFINE r_veh            RECORD LIKE veht022.*
 DEFINE r_col            RECORD LIKE veht005.*
-DEFINE query		VARCHAR(400)
-DEFINE expr_sql		VARCHAR(400)
+DEFINE query		CHAR(400)
+DEFINE expr_sql		CHAR(400)
 DEFINE num_reg		INTEGER
 
 LET int_flag = 0
@@ -255,8 +255,10 @@ CLEAR FORM
 CONSTRUCT BY NAME expr_sql ON t10_codcia_vta, t10_codloc_vta, t10_codveh_vta,
 	t10_codcli, t10_modelo, t10_chasis, t10_color, t10_motor, t10_placa,
 	t10_ano
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
 	ON KEY(F2)
-		IF infield(t10_codcia_vta) THEN
+		IF INFIELD(t10_codcia_vta) THEN
                         CALL fl_ayuda_companias_taller()
                                 RETURNING codc_aux, nomc_aux
                         LET int_flag = 0
@@ -265,7 +267,7 @@ CONSTRUCT BY NAME expr_sql ON t10_codcia_vta, t10_codloc_vta, t10_codveh_vta,
                                 DISPLAY nomc_aux TO tit_compania
                         END IF
                 END IF
-		IF infield(t10_codloc_vta) THEN
+		IF INFIELD(t10_codloc_vta) THEN
                         CALL fl_ayuda_localidad(codc_aux)
                                 RETURNING codl_aux, noml_aux
                         LET int_flag = 0
@@ -274,7 +276,7 @@ CONSTRUCT BY NAME expr_sql ON t10_codcia_vta, t10_codloc_vta, t10_codveh_vta,
                                 DISPLAY noml_aux TO tit_localidad
                         END IF
                 END IF
-		IF infield(t10_codveh_vta) THEN
+		IF INFIELD(t10_codveh_vta) THEN
 		  IF codc_aux IS NOT NULL AND codl_aux IS NOT NULL THEN
                         CALL fl_ayuda_serie_veh_facturados(codc_aux,codl_aux)
                                 RETURNING cliente, nomcli, codv_aux, modelo
@@ -299,7 +301,7 @@ CONSTRUCT BY NAME expr_sql ON t10_codcia_vta, t10_codloc_vta, t10_codveh_vta,
 			CALL blanquear()
 		  END IF
                 END IF
-		IF infield(t10_codcli) THEN
+		IF INFIELD(t10_codcli) THEN
                         CALL fl_ayuda_cliente_general()
                                 RETURNING codi_aux, nomi_aux
                         LET int_flag = 0
@@ -308,7 +310,7 @@ CONSTRUCT BY NAME expr_sql ON t10_codcia_vta, t10_codloc_vta, t10_codveh_vta,
                                 DISPLAY nomi_aux TO tit_nombre_cli
                         END IF
                 END IF
-		IF infield(t10_modelo) THEN
+		IF INFIELD(t10_modelo) THEN
                         CALL fl_ayuda_tipos_vehiculos(vg_codcia)
                                 RETURNING codm_aux, nomm_aux
                         LET int_flag = 0
@@ -316,6 +318,9 @@ CONSTRUCT BY NAME expr_sql ON t10_codcia_vta, t10_codloc_vta, t10_codveh_vta,
                                 DISPLAY codm_aux TO t10_modelo
                         END IF
                 END IF
+	BEFORE CONSTRUCT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 END CONSTRUCT
 IF int_flag THEN
 	IF vm_row_current > 0 THEN
@@ -325,8 +330,10 @@ IF int_flag THEN
 	END IF
 	RETURN
 END IF
-LET query = 'SELECT *, ROWID FROM talt010 WHERE t10_compania = ' ||
-		vg_codcia || ' AND ' || expr_sql CLIPPED || ' ORDER BY 2'
+LET query = 'SELECT *, ROWID FROM talt010 ' ||
+		' WHERE t10_compania = ' || vg_codcia ||
+		'   AND ' || expr_sql CLIPPED ||
+		' ORDER BY 2'
 PREPARE cons FROM query	
 DECLARE q_cons CURSOR FOR cons
 LET vm_num_rows = 0
@@ -416,8 +423,10 @@ INPUT BY NAME rm_tal.t10_codcia_vta, rm_tal.t10_codloc_vta,
 		ELSE
 			RETURN
 		END IF
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
 	ON KEY(F2)
-		IF infield(t10_codcia_vta) THEN
+		IF INFIELD(t10_codcia_vta) THEN
                         CALL fl_ayuda_companias_taller()
                                 RETURNING codc_aux, nomc_aux
                         LET int_flag = 0
@@ -427,7 +436,7 @@ INPUT BY NAME rm_tal.t10_codcia_vta, rm_tal.t10_codloc_vta,
                                 DISPLAY nomc_aux TO tit_compania
                         END IF
                 END IF
-		IF infield(t10_codloc_vta) THEN
+		IF INFIELD(t10_codloc_vta) THEN
                         CALL fl_ayuda_localidad(rm_tal.t10_codcia_vta)
                                 RETURNING codl_aux, noml_aux
                         LET int_flag = 0
@@ -437,7 +446,7 @@ INPUT BY NAME rm_tal.t10_codcia_vta, rm_tal.t10_codloc_vta,
                                 DISPLAY noml_aux TO tit_localidad
                         END IF
                 END IF
-		IF infield(t10_codveh_vta) THEN
+		IF INFIELD(t10_codveh_vta) THEN
 		  IF rm_tal.t10_codcia_vta IS NOT NULL
 		  AND rm_tal.t10_codloc_vta IS NOT NULL THEN
                        CALL fl_ayuda_serie_veh_facturados(rm_tal.t10_codcia_vta,
@@ -469,7 +478,7 @@ INPUT BY NAME rm_tal.t10_codcia_vta, rm_tal.t10_codloc_vta,
 			CALL blanquear()
 		  END IF
                 END IF
-		IF infield(t10_codcli) THEN
+		IF INFIELD(t10_codcli) THEN
                         CALL fl_ayuda_cliente_general()
                                 RETURNING codi_aux, nomi_aux
                         LET int_flag = 0
@@ -479,7 +488,7 @@ INPUT BY NAME rm_tal.t10_codcia_vta, rm_tal.t10_codloc_vta,
                                 DISPLAY nomi_aux TO tit_nombre_cli
                         END IF
                 END IF
-		IF infield(t10_modelo) THEN
+		IF INFIELD(t10_modelo) THEN
                         CALL fl_ayuda_tipos_vehiculos(vg_codcia)
                                 RETURNING codm_aux, nomm_aux
                         LET int_flag = 0
@@ -488,20 +497,26 @@ INPUT BY NAME rm_tal.t10_codcia_vta, rm_tal.t10_codloc_vta,
                                 DISPLAY BY NAME rm_tal.t10_modelo
                         END IF
                 END IF
+	BEFORE INPUT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 	BEFORE FIELD t10_chasis
 		IF rm_tal.t10_codcli IS NULL THEN
-			CALL fgl_winmessage(vg_producto,'Ingrese el cliente primero','info')
+			--CALL fgl_winmessage(vg_producto,'Ingrese el cliente primero','info')
+			CALL fl_mostrar_mensaje('Ingrese el cliente primero.','info')
 			NEXT FIELD t10_codcli
 		END IF
 		IF rm_tal.t10_modelo IS NULL THEN
-			CALL fgl_winmessage(vg_producto,'Ingrese el modelo primero','info')
+			--CALL fgl_winmessage(vg_producto,'Ingrese el modelo primero.','info')
+			CALL fl_mostrar_mensaje('Ingrese el modelo primero.','info')
 			NEXT FIELD t10_modelo
 		END IF
 	BEFORE FIELD t10_color
 		IF rm_tal.t10_codcli IS NOT NULL
 		AND rm_tal.t10_modelo IS NOT NULL
 		AND rm_tal.t10_chasis IS NULL THEN
-			CALL fgl_winmessage(vg_producto,'Ingrese el chasis','info')
+			--CALL fgl_winmessage(vg_producto,'Ingrese el chasis','info')
+			CALL fl_mostrar_mensaje('Ingrese el chasis.','info')
 			NEXT FIELD t10_chasis
 		END IF
 	AFTER FIELD t10_codcia_vta
@@ -509,7 +524,8 @@ INPUT BY NAME rm_tal.t10_codcia_vta, rm_tal.t10_codloc_vta,
 			CALL fl_lee_compania(rm_tal.t10_codcia_vta)
 				RETURNING r_cia.*
 			IF r_cia.g01_compania IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'Compañía no existe','exclamation')
+				--CALL fgl_winmessage(vg_producto,'Compañía no existe','exclamation')
+				CALL fl_mostrar_mensaje('Compañía no existe.','exclamation')
 				NEXT FIELD t10_codcia_vta
 			END IF
 			DISPLAY r_cia.g01_razonsocial TO tit_compania
@@ -531,7 +547,8 @@ INPUT BY NAME rm_tal.t10_codcia_vta, rm_tal.t10_codloc_vta,
 	AFTER FIELD t10_codloc_vta
 		IF rm_tal.t10_codloc_vta IS NOT NULL THEN
 			IF rm_tal.t10_codcia_vta IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'Ingrese la compañía primero','exclamation')
+				--CALL fgl_winmessage(vg_producto,'Ingrese la compañía primero','exclamation')
+				CALL fl_mostrar_mensaje('Ingrese la compañía primero.','exclamation')
 				LET rm_tal.t10_codloc_vta = NULL
 				CLEAR t10_codloc_vta, tit_localidad
 				NEXT FIELD t10_codcia_vta
@@ -540,7 +557,8 @@ INPUT BY NAME rm_tal.t10_codcia_vta, rm_tal.t10_codloc_vta,
 						rm_tal.t10_codloc_vta)
 				RETURNING r_loc.*
 			IF r_loc.g02_compania IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'Localidad no existe','exclamation')
+				--CALL fgl_winmessage(vg_producto,'Localidad no existe','exclamation')
+				CALL fl_mostrar_mensaje('Localidad no existe.','exclamation')
 				NEXT FIELD t10_codloc_vta
 			END IF
 			DISPLAY r_loc.g02_nombre TO tit_localidad
@@ -573,7 +591,8 @@ INPUT BY NAME rm_tal.t10_codcia_vta, rm_tal.t10_codloc_vta,
                         CALL fl_lee_cliente_general(rm_tal.t10_codcli)
                                 RETURNING r_cli.*
                         IF r_cli.z01_codcli IS NULL  THEN
-                                CALL fgl_winmessage(vg_producto,'Cliente no existe','exclamation')
+                                --CALL fgl_winmessage(vg_producto,'Cliente no existe','exclamation')
+				CALL fl_mostrar_mensaje('Cliente no existe.','exclamation')
                                 NEXT FIELD t10_codcli
                         END IF
                         DISPLAY r_cli.z01_nomcli TO tit_nombre_cli
@@ -587,7 +606,8 @@ INPUT BY NAME rm_tal.t10_codcia_vta, rm_tal.t10_codloc_vta,
 			CALL fl_lee_tipo_vehiculo(vg_codcia,rm_tal.t10_modelo)
 				RETURNING r_mod.*
 			IF r_mod.t04_compania IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'Modelo no existe','exclamation')
+				--CALL fgl_winmessage(vg_producto,'Modelo no existe','exclamation')
+				CALL fl_mostrar_mensaje('Modelo no existe.','exclamation')
 				NEXT FIELD t10_modelo
 			END IF
 		END IF
@@ -601,7 +621,8 @@ INPUT BY NAME rm_tal.t10_codcia_vta, rm_tal.t10_codloc_vta,
 	AFTER FIELD t10_ano
 		IF rm_tal.t10_ano IS NOT NULL THEN
 			IF rm_tal.t10_ano > YEAR(TODAY) + 1 THEN
-				CALL fgl_winmessage(vg_producto,'Año del vehículo es incorrecto','exclamation')
+				--CALL fgl_winmessage(vg_producto,'Año del vehículo es incorrecto','exclamation')
+				CALL fl_mostrar_mensaje('Año del vehículo es incorrecto.','exclamation')
 				NEXT FIELD t10_ano
 			END IF
 		END IF
@@ -626,6 +647,7 @@ END FUNCTION
 
 
 FUNCTION blanquear()
+
 LET rm_tal.t10_codcia_vta = NULL
 LET rm_tal.t10_codloc_vta = NULL
 LET rm_tal.t10_codveh_vta = NULL
@@ -644,7 +666,8 @@ CALL fl_lee_vehiculo_cliente_taller(vg_codcia,rm_tal.t10_codcli,
 					rm_tal.t10_modelo,rm_tal.t10_chasis)
 	RETURNING r_tal_aux.*
 IF r_tal_aux.t10_compania IS NOT NULL THEN
-	CALL fgl_winmessage(vg_producto,'Este vehículo con su cliente ya existe','exclamation')
+	--CALL fgl_winmessage(vg_producto,'Este vehículo con su cliente ya existe','exclamation')
+	CALL fl_mostrar_mensaje('Este vehículo con su cliente ya existe.','exclamation')
 	RETURN 1
 END IF
 RETURN 0
@@ -675,10 +698,16 @@ INPUT BY NAME rm_tal.t10_color, rm_tal.t10_motor, rm_tal.t10_placa,
 		ELSE
 			RETURN
 		END IF
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
+	BEFORE INPUT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 	AFTER FIELD t10_ano
 		IF rm_tal.t10_ano IS NOT NULL THEN
 			IF rm_tal.t10_ano > YEAR(TODAY) + 1 THEN
-				CALL fgl_winmessage(vg_producto,'Año del vehículo es incorrecto','exclamation')
+				--CALL fgl_winmessage(vg_producto,'Año del vehículo es incorrecto','exclamation')
+				CALL fl_mostrar_mensaje('Año del vehículo es incorrecto.','exclamation')
 				NEXT FIELD t10_ano
 			END IF
 		END IF
@@ -706,11 +735,13 @@ CALL fl_lee_cod_vehiculo_veh(rm_tal.t10_codcia_vta,rm_tal.t10_codloc_vta,
 				rm_tal.t10_codveh_vta)
 	RETURNING r_veh.*
 IF r_veh.v22_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto,'Este vehículo no existe','exclamation')
+	--CALL fgl_winmessage(vg_producto,'Este vehículo no existe','exclamation')
+	CALL fl_mostrar_mensaje('Este vehículo no existe.','exclamation')
 	RETURN 1, r_veh.*
 END IF 
 IF r_veh.v22_estado <> 'F' THEN
-	CALL fgl_winmessage(vg_producto,'Este vehículo no ha sido facturado','exclamation')
+	--CALL fgl_winmessage(vg_producto,'Este vehículo no ha sido facturado','exclamation')
+	CALL fl_mostrar_mensaje('Este vehículo no ha sido facturado.','exclamation')
 	RETURN 1, r_veh.*
 END IF
 CALL fl_lee_cabecera_transaccion_veh(rm_tal.t10_codcia_vta,
@@ -761,12 +792,17 @@ END FUNCTION
 
 
 FUNCTION muestra_contadores(row_current, num_rows)
-DEFINE row_current	SMALLINT
-DEFINE num_rows		SMALLINT
+DEFINE row_current		SMALLINT
+DEFINE num_rows			SMALLINT
+DEFINE nrow                     SMALLINT
                                                                                 
-DISPLAY "" AT 1,1
-DISPLAY row_current, " de ", num_rows AT 1, 68
-                                                                                
+LET nrow = 19
+IF vg_gui = 1 THEN
+	LET nrow = 1
+END IF
+DISPLAY "" AT nrow, 1
+DISPLAY row_current, " de ", num_rows AT nrow, 67
+
 END FUNCTION
 
 
@@ -780,7 +816,8 @@ DEFINE r_loc            RECORD LIKE gent002.*
 IF vm_num_rows > 0 THEN
 	SELECT * INTO rm_tal.* FROM talt010 WHERE ROWID = num_registro	
 	IF STATUS = NOTFOUND THEN
-		CALL fgl_winmessage (vg_producto,'No existe registro con índice: ' || vm_row_current,'exclamation')
+		--CALL fgl_winmessage(vg_producto,'No existe registro con índice: ' || vm_row_current,'exclamation')
+		CALL fl_mostrar_mensaje('No existe registro con índice: ' || vm_row_current,'exclamation')
 		RETURN
 	END IF
 	DISPLAY BY NAME rm_tal.t10_codcia_vta, rm_tal.t10_codloc_vta,
@@ -857,6 +894,7 @@ END FUNCTION
 
 
 FUNCTION muestra_estado()
+
 IF rm_tal.t10_estado = 'A' THEN
         DISPLAY 'ACTIVO' TO tit_estado_tal
 ELSE
@@ -868,33 +906,14 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION llamar_visor_teclas()
+DEFINE a		CHAR(1)
 
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
+IF vg_gui = 0 THEN
+	CALL fl_visor_teclas_caracter() RETURNING int_flag 
+	LET a = fgl_getkey()
+	CLOSE WINDOW w_tf
+	LET int_flag = 0
 END IF
 
 END FUNCTION

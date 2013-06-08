@@ -1,0 +1,24 @@
+DATABASE aceros
+SCREEN
+{
+
+
+   Ultimo Rol Contabilizado: [a1] [a002      ]-[a003      ]  [c1|c002    ]
+
+       Rol a Contabilizarse: [b1] [b002      ]-[b003      ]  [c2|c003    ]
+
+}
+TABLES
+rolt053
+ATTRIBUTES
+a1   = rolt053.n53_cod_liqrol, NOENTRY, UPSHIFT;
+a002 = rolt053.n53_fecha_ini, FORMAT = 'dd-mm-yyyy', UPSHIFT;
+a003 = rolt053.n53_fecha_fin, FORMAT = 'dd-mm-yyyy', UPSHIFT;
+c1   = rolt053.n53_tipo_comp, NOENTRY, UPSHIFT;
+c002 = rolt053.n53_num_comp, NOENTRY, UPSHIFT;
+b1   = FORMONLY.vm_cod_liqrol TYPE CHAR NOT NULL, NOENTRY, REVERSE, UPSHIFT;
+b002 = FORMONLY.vm_fecha_ini TYPE DATE NOT NULL, FORMAT = 'dd-mm-yyyy', REVERSE;
+b003 = FORMONLY.vm_fecha_fin TYPE DATE NOT NULL, FORMAT = 'dd-mm-yyyy', REVERSE;
+c2   = FORMONLY.vm_tipo_comp, NOENTRY, UPSHIFT, REVERSE;
+c003 = FORMONLY.vm_num_comp, NOENTRY, UPSHIFT, REVERSE;
+END

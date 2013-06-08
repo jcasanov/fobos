@@ -1,37 +1,47 @@
-DATABASE diteca
-
+DATABASE aceros
 SCREEN
 {
  DOCUMENTOS DEUDORES DE CLIENTES EN COBRANZAS 
------------------------------------------------------------------------------
- Cliente              Documento          Div Saldo            Mo Area Neg.
------------------------------------------------------------------------------
-[c001                |c0|c002           |c01|c003            |c1|c004      ]
-[c001                |c0|c002           |c01|c003            |c1|c004      ]
-[c001                |c0|c002           |c01|c003            |c1|c004      ]
-[c001                |c0|c002           |c01|c003            |c1|c004      ]
-[c001                |c0|c002           |c01|c003            |c1|c004      ]
-[c001                |c0|c002           |c01|c003            |c1|c004      ]
-[c001                |c0|c002           |c01|c003            |c1|c004      ]
-[c001                |c0|c002           |c01|c003            |c1|c004      ]
-[c001                |c0|c002           |c01|c003            |c1|c004      ]
-[c001                |c0|c002           |c01|c003            |c1|c004      ]
-}
 
+ [c001                   |c0|c002           |c03|c004          |c1|c005      ]
+[c011                   |c2|c012           |c13|c014          |c3|c015      ]
+[c011                   |c2|c012           |c13|c014          |c3|c015      ]
+[c011                   |c2|c012           |c13|c014          |c3|c015      ]
+[c011                   |c2|c012           |c13|c014          |c3|c015      ]
+[c011                   |c2|c012           |c13|c014          |c3|c015      ]
+[c011                   |c2|c012           |c13|c014          |c3|c015      ]
+[c011                   |c2|c012           |c13|c014          |c3|c015      ]
+[c011                   |c2|c012           |c13|c014          |c3|c015      ]
+[c011                   |c2|c012           |c13|c014          |c3|c015      ]
+[c011                   |c2|c012           |c13|c014          |c3|c015      ]
+                                     Total ==> [c020          ]
+
+}
 TABLES
 cxct020
 cxct001
 gent003
-
 ATTRIBUTES
-c001 = z01_nomcli, UPSHIFT;
-c0   = z20_tipo_doc, UPSHIFT;
-c002 = z20_num_doc, UPSHIFT;
-c01  = z20_dividendo, UPSHIFT, FORMAT = '#&&';
-c003 = z20_saldo_cap, UPSHIFT, FORMAT = '#,###,###,##&.##';
-c1   = z20_moneda, UPSHIFT;
-c004 = g03_abreviacion, UPSHIFT;
-END
+c001 = FORMONLY.bt_cliente,  NOENTRY, WIDGET='BUTTON', CONFIG='F15';
+c0   = FORMONLY.bt_tipo,     NOENTRY, WIDGET='BUTTON', CONFIG='F16';
+c002 = FORMONLY.bt_numero,   NOENTRY, WIDGET='BUTTON', CONFIG='F17';
+c03  = FORMONLY.bt_dividendo,NOENTRY, WIDGET='BUTTON', CONFIG='F18';
+c004 = FORMONLY.bt_saldo,    NOENTRY, WIDGET='BUTTON', CONFIG='F19';
+c1   = FORMONLY.bt_moneda,   NOENTRY, WIDGET='BUTTON', CONFIG='F20';
+c005 = FORMONLY.bt_area,     NOENTRY, WIDGET='BUTTON', CONFIG='F21';
 
+c011 = cxct001.z01_nomcli, NOENTRY, UPSHIFT;
+c2   = cxct020.z20_tipo_doc, NOENTRY, UPSHIFT;
+c012 = cxct020.z20_num_doc, NOENTRY, UPSHIFT;
+c13  = cxct020.z20_dividendo, NOENTRY, UPSHIFT, FORMAT = '#&&';
+c014 = cxct020.z20_saldo_cap, NOENTRY, UPSHIFT, FORMAT = '###,###,##&.##';
+c3   = cxct020.z20_moneda, NOENTRY, UPSHIFT;
+c015 = gent003.g03_abreviacion, NOENTRY, UPSHIFT;
+
+c020 = FORMONLY.tit_total TYPE DECIMAL, NOENTRY, UPSHIFT,
+	FORMAT = "---,---,--&.##";
+END
 INSTRUCTIONS
-SCREEN RECORD rh_deudacob[10](z01_nomcli, z20_tipo_doc, z20_num_doc, z20_dividendo, z20_saldo_cap, z20_moneda, g03_abreviacion)
+SCREEN RECORD rh_deudacob[10] (z01_nomcli, z20_tipo_doc, z20_num_doc,
+				z20_dividendo, z20_saldo_cap, z20_moneda,
+				g03_abreviacion)

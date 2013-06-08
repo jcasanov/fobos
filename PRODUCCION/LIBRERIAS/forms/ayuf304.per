@@ -1,11 +1,10 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
 
               SELECCIONAR DISPOSITIVO DE IMPRESION
 
- Enviar Impresión a: [c000       ]
-
+ Enviar Impresión a: [c000        ]
 
 
           Impresora: [c001      ] [c002                      ]
@@ -15,8 +14,8 @@ TABLES
 gent007, gent006
 ATTRIBUTES
 c000 = FORMONLY.tit_impresion, AUTONEXT, REVERSE, UPSHIFT,
-	WIDGET = 'RADIO', CONFIG = 'I Impresora P Pantalla A Archivo',
+	WIDGET = 'RADIO', CONFIG = 'I Impresora P Pantalla',
 	DEFAULT = 'P';
 c001 = FORMONLY.g07_impresora, AUTONEXT, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c002 = gent006.g06_nombre, UPSHIFT;
+c002 = gent006.g06_nombre, NOENTRY, UPSHIFT;

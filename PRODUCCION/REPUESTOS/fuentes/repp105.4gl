@@ -1,4 +1,3 @@
-
 -------------------------------------------------------------------------------
 -- Titulo               : repp105.4gl -- Mantenimiento de Unidades de Medida
 -- Elaboración          : 5-sep-2001
@@ -10,33 +9,36 @@
                                                                                 
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
                                                                                 
-DEFINE rm_uni   RECORD LIKE rept005.*
-DEFINE rm_uni2  RECORD LIKE rept005.*
-DEFINE vm_r_rows ARRAY[1000] OF INTEGER -- ARREGLO DE ROWID DE FILAS LEIDAS
+DEFINE rm_uni   	RECORD LIKE rept005.*
+DEFINE rm_uni2  	RECORD LIKE rept005.*
+DEFINE vm_r_rows 	ARRAY[1000] OF INTEGER -- ARREGLO DE ROWID DE FILAS
 DEFINE vm_row_current   SMALLINT        -- FILA CORRIENTE DEL ARREGLO
 DEFINE vm_num_rows      SMALLINT        -- CANTIDAD DE FILAS LEIDAS
 DEFINE vm_max_rows      SMALLINT        -- MAXIMO DE FILAS LEIDAS
-DEFINE vm_demonios      VARCHAR(12)
 DEFINE vm_flag_mant     CHAR(1)
+
+
 
 MAIN
                                                                                 
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
-CALL fgl_init4js()
+CALL startlog('../logs/repp105.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 2 THEN
-     CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto','stop')
-     EXIT PROGRAM
+     	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto','stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
+     	EXIT PROGRAM
 END IF
 LET vg_base     = arg_val(1)
 LET vg_modulo   = arg_val(2)
-LET vg_proceso = 'repp105'
+LET vg_proceso  = 'repp105'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
                                                                                 
@@ -48,7 +50,7 @@ FUNCTION funcion_master()
 
 CALL fl_nivel_isolation()
 LET vm_max_rows = 1000
-OPEN WINDOW w_uni AT 3,2 WITH 13 ROWS, 80 COLUMNS
+OPEN WINDOW w_uni AT 3,2 WITH 14 ROWS, 80 COLUMNS
     ATTRIBUTE(FORM LINE FIRST + 2, COMMENT LINE LAST, MENU LINE FIRST,BORDER,
 	      MESSAGE LINE LAST - 2)
 OPEN FORM f_uni FROM '../forms/repf105_1'
@@ -65,10 +67,7 @@ MENU 'OPCIONES'
 	COMMAND KEY('I') 'Ingresar' 'Ingresar nuevos registros. '
 		CALL control_ingreso()
 		IF vm_num_rows = 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-			
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -85,10 +84,7 @@ MENU 'OPCIONES'
 	COMMAND KEY('C') 'Consultar' 'Consultar un registro. '
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-			
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -143,7 +139,8 @@ DEFINE query		VARCHAR(600)
 
 CLEAR FORM
 LET int_flag = 0
-CONSTRUCT BY NAME expr_sql ON r05_codigo, r05_siglas, r05_usuario, r05_fecing
+CONSTRUCT BY NAME expr_sql ON r05_codigo, r05_siglas, r05_decimales,
+	r05_usuario, r05_fecing
 	ON KEY(F2)
 		IF INFIELD(r05_codigo) THEN
 		     CALL fl_ayuda_unidad_medida()
@@ -195,11 +192,13 @@ OPTIONS INPUT WRAP
 CLEAR FORM
 INITIALIZE rm_uni.* TO NULL
 LET vm_flag_mant          = 'I'
+LET rm_uni.r05_decimales  = 'N'
 LET rm_uni.r05_fecing     = CURRENT
 LET rm_uni.r05_usuario    = vg_usuario
 DISPLAY BY NAME rm_uni.r05_fecing, rm_uni.r05_usuario
 CALL lee_datos()
 IF NOT int_flag THEN
+	LET rm_uni.r05_fecing     = CURRENT
 	INSERT INTO rept005 VALUES (rm_uni.*)
         IF vm_num_rows = vm_max_rows THEN
                 LET vm_num_rows = 1
@@ -222,25 +221,27 @@ END FUNCTION
 FUNCTION control_modificacion()
 
 LET vm_flag_mant      = 'M'
-WHENEVER ERROR CONTINUE
 BEGIN WORK
-DECLARE q_up CURSOR FOR SELECT * FROM rept005 WHERE ROWID = vm_r_rows[vm_row_current]
+WHENEVER ERROR CONTINUE
+DECLARE q_up CURSOR FOR SELECT * FROM rept005
+	WHERE ROWID = vm_r_rows[vm_row_current]
 	FOR UPDATE
 OPEN q_up
 FETCH q_up INTO rm_uni.*
-IF status < 0 THEN
-	COMMIT WORK
+IF STATUS < 0 THEN
+	ROLLBACK WORK
 	CALL fl_mensaje_bloqueo_otro_usuario()
 	WHENEVER ERROR STOP
 	RETURN
 END IF
+WHENEVER ERROR STOP
 CALL lee_datos()
 IF NOT int_flag THEN
-    	UPDATE rept005 SET * = rm_uni.*
-		WHERE CURRENT OF q_up
+    	UPDATE rept005 SET * = rm_uni.* WHERE CURRENT OF q_up
 	COMMIT WORK
 	CALL fl_mensaje_registro_modificado()
 ELSE
+	ROLLBACK WORK
 	CALL lee_muestra_registro(vm_r_rows[vm_row_current])
 END IF
 
@@ -254,9 +255,11 @@ DEFINE           codigo    LIKE rept005.r05_codigo
                                                                                 
 OPTIONS INPUT WRAP
 LET int_flag = 0 
-INPUT BY NAME rm_uni.r05_codigo, rm_uni.r05_siglas  WITHOUT DEFAULTS
+INPUT BY NAME rm_uni.r05_codigo, rm_uni.r05_siglas, rm_uni.r05_decimales
+	WITHOUT DEFAULTS
         ON KEY(INTERRUPT)
-        	 IF field_touched(rm_uni.r05_codigo, rm_uni.r05_siglas)
+        	 IF field_touched(rm_uni.r05_codigo, rm_uni.r05_siglas,
+				rm_uni.r05_decimales)
                  THEN
                         LET int_flag = 0
 			CALL fl_mensaje_abandonar_proceso()
@@ -282,17 +285,20 @@ INPUT BY NAME rm_uni.r05_codigo, rm_uni.r05_siglas  WITHOUT DEFAULTS
                IF vm_flag_mant = 'I' THEN
      			SELECT r05_codigo FROM rept005
 			WHERE  r05_codigo = rm_uni.r05_codigo 
-                        IF status <> NOTFOUND THEN
-                                CALL fgl_winmessage (vg_producto, 'La unidad de medida ya existe en la base de datos','exclamation')
+                        IF STATUS <> NOTFOUND THEN
+                                --CALL fgl_winmessage(vg_producto,'La unidad de medida ya existe en la base de datos','exclamation')
+				CALL fl_mostrar_mensaje('La unidad de medida ya existe en la base de datos.','exclamation')
                                 NEXT FIELD r05_codigo
                         END IF
               END IF
-	      SELECT r05_codigo INTO codigo FROM rept005
-	      WHERE  r05_siglas   = rm_uni.r05_siglas
-	      IF status <> NOTFOUND THEN
-                 CALL fgl_winmessage (vg_producto, 'Las siglas de la unidad de medida ya han sido asignadas al registro de código  '|| codigo, 'exclamation')
-	         NEXT FIELD r05_siglas  
-              END IF
+		SELECT r05_codigo INTO codigo
+			FROM rept005
+			WHERE r05_codigo NOT MATCHES 'UNI*'
+			  AND r05_siglas = rm_uni.r05_siglas
+		IF codigo <> rm_uni.r05_codigo THEN
+			CALL fl_mostrar_mensaje('Las siglas de la unidad de medida ya han sido asignadas al registro de código '|| codigo, 'exclamation')
+			NEXT FIELD r05_siglas  
+		END IF
 END INPUT
 
 END FUNCTION
@@ -326,7 +332,7 @@ END FUNCTION
 
                                                                                 
                                                                                 
-FUNCTION validar_parametros()
+FUNCTION no_validar_parametros()
                                                                                 
 CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
 IF rg_mod.g50_modulo IS NULL THEN

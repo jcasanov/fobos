@@ -1,0 +1,30 @@
+DATABASE aceros
+
+SCREEN
+{
+  TIPOS DE VEHICULOS 
+ --------------------------
+  Cod.  Tipo
+ --------------------------
+ [c01] [c002              ] 
+ [c01] [c002              ]
+ [c01] [c002              ]
+ [c01] [c002              ]
+ [c01] [c002              ]
+ [c01] [c002              ]
+ [c01] [c002              ] 
+ [c01] [c002              ] 
+ [c01] [c002              ] 
+ [c01] [c002              ] 
+}
+
+TABLES
+veht004
+
+ATTRIBUTES
+c01  = v04_tipo_veh,REVERSE;
+c002 = v04_nombre,REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_tipoveh[10](v04_tipo_veh, v04_nombre)

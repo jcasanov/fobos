@@ -1,0 +1,19 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+         Imprimir: [c] [c000                 ]
+
+ Incluir todas la Bodegas de Facturación ? [d]
+
+}
+ATTRIBUTES
+c    = FORMONLY.vm_imprimir TYPE CHAR NOT NULL, REQUIRED,
+	AUTONEXT, UPSHIFT, REVERSE, INCLUDE = ('O', 'I', 'T'),
+	COMMENTS = '(O) Por Orden Despacho (I) Por Item (T) TODOS',
+	DEFAULT = 'O';
+c000 = FORMONLY.tit_imprimir, NOENTRY, UPSHIFT, REVERSE;
+d    = FORMONLY.vm_incluir TYPE CHAR NOT NULL, AUTONEXT, REVERSE, UPSHIFT,
+	INCLUDE = ('S', 'N'), DEFAULT = 'N',
+	COMMENTS = 'Solo Impresión Por Item. (S) o (N)';
+END

@@ -1,4 +1,4 @@
-DATABASE formonly
+DATABASE FORMONLY
 SCREEN
 {
  Código Proveedor: [c001 ] [c002                                    ]
@@ -12,14 +12,14 @@ SCREEN
 
 }
 ATTRIBUTES
-c001 = formonly.codprov TYPE INTEGER, WIDGET = 'FIELD_BMP', 
+c001 = FORMONLY.codprov TYPE INTEGER, WIDGET = 'FIELD_BMP', 
        CONFIG = 'lista.bmp F2';
-c002 = formonly.nomprov, NOENTRY;
-c3   = formonly.moneda TYPE CHAR NOT NULL, WIDGET = 'FIELD_BMP', 
+c002 = FORMONLY.nomprov, NOENTRY;
+c3   = FORMONLY.moneda TYPE CHAR NOT NULL, WIDGET = 'FIELD_BMP', 
        CONFIG = 'lista.bmp F2', UPSHIFT, AUTONEXT, REVERSE;
-c004 = formonly.tit_mon, NOENTRY;
-c050 = formonly.flag_saldo, WIDGET = 'RADIO', CONFIG = 'S Con_Saldo T Todos';
-c005 = formonly.tipo_saldo, WIDGET = 'RADIO', 
+c004 = FORMONLY.tit_mon, NOENTRY;
+c050 = FORMONLY.flag_saldo, WIDGET = 'RADIO', CONFIG = 'S Con_Saldo T Todos';
+c005 = FORMONLY.tipo_saldo, WIDGET = 'RADIO', 
        CONFIG = 'A A_Favor  P Por_Vencer  V Vencidos  T Todos';
-c006 = formonly.valor TYPE DECIMAL(11,2), INCLUDE = (0.01 TO 999999999),
+c006 = FORMONLY.valor TYPE DECIMAL(11,2), INCLUDE = (0.01 TO 999999999),
        FORMAT = '###,###,##&.##';

@@ -1,0 +1,24 @@
+database aceros
+screen 
+{
+
+                Codigo: [c001]  
+                Nombre: [c002                          ]
+             Abreviado: [c003      ]
+       Rubro Descuento: [c006 ] [c100                            ] 
+         Ingresado Por: [c004      ] 
+      Fecha de Ingreso: [c005               ]
+}
+end
+tables
+rolt062
+attributes
+c001 = rolt062.n62_cod_almacen, REVERSE, NOENTRY, WIDGET = 'FIELD_BMP', 
+	CONFIG = 'lista.bmp F2';
+c002 = rolt062.n62_nombre, UPSHIFT, REVERSE;
+c003 = rolt062.n62_abreviado, UPSHIFT, REVERSE;
+c004 = rolt062.n62_usuario, UPSHIFT, REVERSE, NOENTRY;
+c005 = rolt062.n62_fecing, REVERSE, NOENTRY;
+c006 = rolt062.n62_cod_rubro, REVERSE, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c100 = formonly.n06_nombre, REVERSE, NOENTRY;
+end

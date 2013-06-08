@@ -9,29 +9,27 @@
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
 DEFINE vm_nivel_max	SMALLINT
-
 DEFINE rm_g01		RECORD LIKE gent001.*
-
-DEFINE rm_par RECORD 
-	nivel_ini	LIKE ctbt010.b10_nivel,
-	nivel_fin 	LIKE ctbt010.b10_nivel,
-	cuenta_ini	LIKE ctbt010.b10_cuenta,
-	cuenta_fin	LIKE ctbt010.b10_cuenta,
-	n_cuenta 	LIKE ctbt010.b10_descripcion,
-	imprime_saldos	CHAR(1),
-	moneda		LIKE gent013.g13_moneda,
-	n_moneda	LIKE gent013.g13_nombre,
-	anho		SMALLINT,
-	mes		SMALLINT,
-	n_mes		VARCHAR(11),
-	tipo_cta	LIKE ctbt010.b10_tipo_cta
-END RECORD
-
+DEFINE rm_par		RECORD 
+				nivel_ini	LIKE ctbt010.b10_nivel,
+				nivel_fin 	LIKE ctbt010.b10_nivel,
+				cuenta_ini	LIKE ctbt010.b10_cuenta,
+				cuenta_fin	LIKE ctbt010.b10_cuenta,
+				n_cuenta 	LIKE ctbt010.b10_descripcion,
+				imprime_saldos	CHAR(1),
+				moneda		LIKE gent013.g13_moneda,
+				n_moneda	LIKE gent013.g13_nombre,
+				anho		SMALLINT,
+				mes		SMALLINT,
+				n_mes		VARCHAR(11),
+				tipo_cta	LIKE ctbt010.b10_tipo_cta
+			END RECORD
 DEFINE vm_page		SMALLINT	-- PAGE   LENGTH
 DEFINE vm_top		SMALLINT	-- TOP    MARGIN
 DEFINE vm_left		SMALLINT	-- LEFT   MARGIN
 DEFINE vm_right		SMALLINT	-- RIGHT  MARGIN
 DEFINE vm_bottom	SMALLINT	-- BOTTOM MARGIN
+DEFINE vm_archivo	CHAR(6)
 
 
 
@@ -40,8 +38,8 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
-CALL fgl_init4js()
+CALL startlog('../logs/ctbp404.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN          -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 
@@ -55,8 +53,8 @@ LET vg_codcia   = arg_val(3)
 LET vg_proceso  = 'ctbp404'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -67,17 +65,14 @@ END MAIN
 FUNCTION funcion_master()
 
 CALL fl_nivel_isolation()
-
-LET vm_top    = 0
-LET vm_left   =	4
-LET vm_right  =	120
-LET vm_bottom =	4
+LET vm_top    = 1
+LET vm_left   =	0
+LET vm_right  =	80
+LET vm_bottom =	3
 LET vm_page   = 66
-
 INITIALIZE rm_par.* TO NULL
 LET rm_par.tipo_cta       = 'B'
 LET rm_par.imprime_saldos = 'N'	
-
 SELECT MAX(b01_nivel) INTO vm_nivel_max FROM ctbt001
 IF vm_nivel_max IS NULL THEN
 	CALL fgl_winmessage(vg_producto, 
@@ -86,7 +81,6 @@ IF vm_nivel_max IS NULL THEN
 		'stop')
 	EXIT PROGRAM
 END IF
-
 OPEN WINDOW w_mas AT 3,2 WITH 10 ROWS, 80 COLUMNS
 	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE 0, 
 		BORDER, MESSAGE LINE LAST - 2)
@@ -94,7 +88,6 @@ OPTIONS INPUT WRAP,
 	ACCEPT KEY	F12
 OPEN FORM f_rep FROM "../forms/ctbf404_1"
 DISPLAY FORM f_rep
-
 CALL control_reporte()
 
 END FUNCTION
@@ -102,39 +95,83 @@ END FUNCTION
 
 
 FUNCTION control_reporte()
-DEFINE i,col		SMALLINT
+DEFINE r_det		RECORD 
+				cuenta		LIKE ctbt010.b10_cuenta,
+				descripcion	LIKE ctbt010.b10_descripcion,
+				saldo		DECIMAL(14,2)
+			END RECORD
+DEFINE r_b10		RECORD LIKE ctbt010.*
+DEFINE col		SMALLINT
 DEFINE query		VARCHAR(1000)
 DEFINE comando		VARCHAR(100)
 DEFINE data_found	SMALLINT
+DEFINE registro		CHAR(400)
+DEFINE enter		SMALLINT
+DEFINE fecha		DATE
+DEFINE val1, val2	DECIMAL(14,2)
+DEFINE fec_ini, fec_fin	DATE
+DEFINE flag		CHAR(1)
 
-DEFINE r_det		RECORD 
-	cuenta		LIKE ctbt010.b10_cuenta,
-	descripcion	LIKE ctbt010.b10_descripcion
-END RECORD
-
+LET enter = 13
 INITIALIZE r_det.* TO NULL 
-
 WHILE TRUE
 	CALL lee_parametros()
 	IF int_flag THEN
 		EXIT WHILE
 	END IF
-	
+	LET int_flag = 0
+	CALL fl_hacer_pregunta('Desea generar también un archivo de texto ?',
+				'No')
+		RETURNING vm_archivo
 	CALL fl_control_reportes() RETURNING comando
 	IF int_flag THEN
 		CONTINUE WHILE
 	END IF
 	CALL fl_lee_compania(vg_codcia) RETURNING rm_g01.*
-	
 	LET query = prepare_query()
-	
 	PREPARE deto FROM query
 	DECLARE q_deto CURSOR FOR deto
 	LET data_found = 0
-
 	START REPORT rep_cuentas TO PIPE comando
 	FOREACH	q_deto INTO r_det.*
+		LET r_det.saldo = 0
+		IF rm_par.imprime_saldos = 'S' THEN
+			LET fecha = MDY(rm_par.mes, 1, rm_par.anho)
+					+ 1 UNITS MONTH - 1 UNITS DAY
+			IF r_det.cuenta[1, 1] <> '3' THEN
+				LET r_det.saldo =
+					fl_obtiene_saldo_contable(vg_codcia,
+						r_det.cuenta, rm_par.moneda,
+						fecha, 'A')
+			ELSE
+				LET fec_ini = MDY(MONTH(fecha), 1, YEAR(fecha))
+				LET fec_fin = fecha
+				LET flag    = 'S'
+				CALL fl_lee_cuenta(vg_codcia, r_det.cuenta)
+					RETURNING r_b10.*
+				IF r_b10.b10_nivel = vm_nivel_max THEN
+					LET fec_ini = fecha
+					LET fec_fin = TODAY
+					LET flag    = 'A'
+				END IF
+				CALL fl_obtener_saldo_cuentas_patrimonio(vg_codcia,
+						r_det.cuenta, rm_par.moneda,
+						fec_ini, fec_fin, flag)
+					RETURNING val1, val2
+				LET r_det.saldo = val1 + val2
+			END IF
+		END IF
 		LET data_found = 1
+		IF vm_archivo = 'Yes' THEN
+			LET registro = fl_justifica_titulo('D',r_det.cuenta,12),
+				'|', fl_justifica_titulo('D', r_det.descripcion,
+				40)
+			IF rm_par.imprime_saldos = 'S' THEN
+				LET registro = registro CLIPPED,
+					'|', r_det.saldo USING '###,###,##&.##'
+			END IF
+			DISPLAY registro CLIPPED, ASCII(enter)
+		END IF
 		OUTPUT TO REPORT rep_cuentas(r_det.*)
 	END FOREACH
 	FINISH REPORT rep_cuentas
@@ -380,10 +417,8 @@ END FUNCTION
 
 
 FUNCTION prepare_query()
-
 DEFINE i		SMALLINT
 DEFINE j		SMALLINT
-
 DEFINE query	 	VARCHAR(1000)
 DEFINE expr_tipo_cta	VARCHAR(30)
 DEFINE expr_nivel	VARCHAR(30)
@@ -451,17 +486,19 @@ END FUNCTION
 
 
 
-REPORT rep_cuentas(cuenta, n_cuenta)
-
+REPORT rep_cuentas(cuenta, n_cuenta, saldo)
 DEFINE cuenta		LIKE ctbt010.b10_cuenta
 DEFINE n_cuenta		LIKE ctbt010.b10_descripcion
 DEFINE saldo		DECIMAL(14,2)
-
+DEFINE r_g02		RECORD LIKE gent002.*
 DEFINE usuario		VARCHAR(19,15)
 DEFINE titulo		VARCHAR(80)
+DEFINE tit_sist		VARCHAR(40)
 DEFINE modulo		VARCHAR(40)
-DEFINE i, long		SMALLINT
-DEFINE fecha		DATE
+DEFINE long		SMALLINT
+DEFINE escape		SMALLINT
+DEFINE act_comp, db_c	SMALLINT
+DEFINE desact_comp, db	SMALLINT
 
 OUTPUT
 	TOP    MARGIN	vm_top
@@ -469,122 +506,115 @@ OUTPUT
 	RIGHT  MARGIN	vm_right
 	BOTTOM MARGIN	vm_bottom
 	PAGE   LENGTH	vm_page
+
 FORMAT
+
 PAGE HEADER
-
-	LET modulo  = "Módulo: Contabilidad"
+	LET escape	= 27		# Iniciar sec. impresi¢n
+	LET act_comp	= 15		# Activar Comprimido.
+	LET desact_comp	= 18		# Cancelar Comprimido.
+	LET modulo  = "MÓDULO: CONTABILIDAD"
 	LET long    = LENGTH(modulo)
-	LET usuario = 'Usuario: ', vg_usuario
+	LET usuario = 'USUARIO: ', vg_usuario
 	CALL fl_justifica_titulo('D', usuario, 19) RETURNING usuario
-	CALL fl_justifica_titulo('C', 'PLAN DE CUENTAS', 30)
+	CALL fl_justifica_titulo('C', 'PLAN DE CUENTAS', 80)
 		RETURNING titulo
-
-	PRINT '@'
-	PRINT COLUMN 1, rm_g01.g01_razonsocial,
-	      COLUMN 110, "Página: ", PAGENO USING "&&&"
-	PRINT COLUMN 1, modulo CLIPPED,
-	      COLUMN 45, titulo CLIPPED,
-	      COLUMN 110, UPSHIFT(vg_proceso)
-      
+	CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING r_g02.*
+	LET tit_sist = r_g02.g02_nombre CLIPPED, " - ", vg_base CLIPPED, " (",
+			vg_servidor CLIPPED, ")"
+	CALL fl_justifica_titulo('C', tit_sist, 40) RETURNING tit_sist
+	--PRINT '@'
+	SKIP 2 LINES
+	print ASCII escape;
+	print ASCII act_comp
+	PRINT COLUMN 01,  rm_g01.g01_razonsocial CLIPPED,
+	      COLUMN 21,  tit_sist CLIPPED,
+	      COLUMN 70,  "PAGINA: ", PAGENO USING "&&&"
+	PRINT COLUMN 01,  titulo CLIPPED
+	PRINT COLUMN 01,  modulo CLIPPED,
+	      COLUMN 74,  UPSHIFT(vg_proceso)
 	SKIP 1 LINES
 	IF rm_par.nivel_ini IS NOT NULL THEN
-		PRINT COLUMN 20, "** Rango Niveles  : ", rm_par.nivel_ini, 
-					      " hasta ", rm_par.nivel_fin
+		PRINT COLUMN 20, "** RANGO NIVELES  : ", rm_par.nivel_ini, 
+					      " HASTA ", rm_par.nivel_fin
 	END IF
 	IF rm_par.cuenta_ini IS NOT NULL THEN
 		IF rm_par.cuenta_fin IS NULL THEN
-			PRINT COLUMN 20, "** Rango Cuentas  : desde ", 
+			PRINT COLUMN 20, "** RANGO CUENTAS  : DESDE ", 
 					 rm_par.cuenta_ini 
 		ELSE
-			PRINT COLUMN 20, "** Rango Cuentas  : desde ", 
-					 rm_par.cuenta_ini, " hasta ",
+			PRINT COLUMN 20, "** RANGO CUENTAS  : DESDE ", 
+					 rm_par.cuenta_ini, " HASTA ",
 					 rm_par.cuenta_fin 
 		END IF
 	ELSE
 		IF rm_par.cuenta_fin IS NULL THEN
-			PRINT COLUMN 20, "** Rango Cuentas  : Todas " 
+			PRINT COLUMN 20, "** RANGO CUENTAS  : TODAS " 
 		ELSE
-			PRINT COLUMN 20, "** Rango Cuentas  : hasta ",
+			PRINT COLUMN 20, "** RANGO CUENTAS  : HASTA ",
 					 rm_par.cuenta_fin 
 		END IF
 	END IF
 	IF rm_par.n_cuenta IS NOT NULL THEN
-		PRINT COLUMN 20, "** Patrón Busqueda: ",
+		PRINT COLUMN 20, "** PATRÓN BUSQUEDA: ",
 				 rm_par.n_cuenta
 	END IF
 	IF rm_par.tipo_cta = 'B' THEN
-		PRINT COLUMN 20, "** Tipo Cuenta    : Balance"
+		PRINT COLUMN 20, "** TIPO CUENTA    : BALANCE"
 	ELSE
 		IF rm_par.tipo_cta = 'R' THEN
-			PRINT COLUMN 20, "** Tipo Cuenta    : Resultado"
+			PRINT COLUMN 20, "** TIPO CUENTA    : RESULTADO"
 		END IF
 	END IF
 	IF rm_par.moneda IS NOT NULL THEN
-		PRINT COLUMN 20, "** Moneda         : ", rm_par.n_moneda 
+		PRINT COLUMN 20, "** MONEDA         : ", rm_par.n_moneda 
 	END IF
 	IF rm_par.anho IS NOT NULL THEN
-		PRINT COLUMN 20, "** Saldos a ", get_month_name(rm_par.mes) CLIPPED, 
+		PRINT COLUMN 20, "** SALDOS A ", get_month_name(rm_par.mes) CLIPPED, 
 				 " del ", fl_justifica_titulo('I', rm_par.anho, 4)
 	END IF
-	
 	SKIP 1 LINES
-	PRINT COLUMN 01, "Fecha de Impresión: ", TODAY USING "dd-mm-yyyy", 
+	PRINT COLUMN 01, "FECHA DE IMPRESION: ", TODAY USING "dd-mm-yyyy", 
 	                 1 SPACES, TIME,
-	      COLUMN 68, usuario
+	      COLUMN 61, usuario
 	SKIP 1 LINES
-
+	PRINT COLUMN 01,  '--------------------------------------------------------------------------------'
 	IF rm_par.imprime_saldos = 'N' THEN
-		PRINT COLUMN 1,  "Cuenta",
-		      COLUMN 30, "Descripción"
+		PRINT COLUMN 01,  "CUENTA",
+		      COLUMN 30,  "DESCRIPCION"
 	ELSE
-		PRINT COLUMN 1,  "Cuenta",
-		      COLUMN 30, "Descripción",
-		      COLUMN 92, fl_justifica_titulo('D', "Saldo", 17),
-		      COLUMN 113, "Signo"
+		PRINT COLUMN 01,  "CUENTA",
+		      COLUMN 20,  "DESCRIPCION",
+		      COLUMN 62,  "SALDO",
+		      COLUMN 76,  "SIGNO"
 	END IF
-
-	IF rm_par.imprime_saldos = 'N' THEN
-		PRINT COLUMN 1,  '------------------------------',
-		      COLUMN 30, '-------------------------------------------',
-				 '---------------------'
-	ELSE
-		PRINT COLUMN 1,  '------------------------------',
-		      COLUMN 30, '-------------------------------------------',
-				 '---------------------',
-		      COLUMN 92, '--------------------',
-		      COLUMN 110, '-----'
-	END IF
+	PRINT COLUMN 01,  '--------------------------------------------------------------------------------'
 
 ON EVERY ROW
-
-	LET fecha = MDY(rm_par.mes, 1, rm_par.anho)+ 1 UNITS MONTH - 1 UNITS DAY
-	LET saldo = fl_obtiene_saldo_contable(vg_codcia, cuenta, rm_par.moneda,
-					      fecha, 'A')
-	
 	IF rm_par.imprime_saldos = 'N' THEN
-		PRINT COLUMN 1,  retorna_cuenta_expandida(cuenta) CLIPPED,
-		      COLUMN 30, n_cuenta CLIPPED
+		PRINT COLUMN 01,  retorna_cuenta_expandida(cuenta) CLIPPED,
+		      COLUMN 30,  n_cuenta CLIPPED
 	ELSE
+		PRINT COLUMN 01,  retorna_cuenta_expandida(cuenta) 
+				  CLIPPED,
+	      	      COLUMN 20,  n_cuenta CLIPPED,
+	              COLUMN 62,  saldo USING '###,###,##&.##';
 		IF saldo >= 0 THEN
-			PRINT COLUMN 1, retorna_cuenta_expandida(cuenta) 
-					CLIPPED,
-		      	      COLUMN 30, n_cuenta CLIPPED,
-		              COLUMN 92, saldo USING '###,###,###,##&.##',
-		              COLUMN 115, "Db"
+			PRINT COLUMN 77,  "DB"
 		ELSE
-			PRINT COLUMN 1,   retorna_cuenta_expandida(cuenta) 
-					  CLIPPED,
-		      	      COLUMN 30,  n_cuenta CLIPPED,
-		              COLUMN 92,  saldo USING '###,###,###,##&.##',
-		              COLUMN 115, "Cr"
+			PRINT COLUMN 77,  "CR"
 		END IF
 	END IF
+
+ON LAST ROW
+	print ASCII escape;
+	print ASCII desact_comp 
+
 END REPORT
 
 
 
 FUNCTION retorna_cuenta_expandida(cuenta)
-
 DEFINE cuenta		LIKE ctbt010.b10_cuenta
 DEFINE nvl_cta		VARCHAR(25)
 DEFINE i		SMALLINT
@@ -635,7 +665,7 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION no_validar_parametros()
 
 CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
 IF rg_mod.g50_modulo IS NULL THEN

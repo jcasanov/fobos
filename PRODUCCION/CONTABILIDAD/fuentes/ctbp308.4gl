@@ -1,13 +1,14 @@
-------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 -- Titulo           : ctbp308.4gl - Consulta de comprobantes contables
 -- Elaboracion      : 31-oct-2001
 -- Autor            : NPC
 -- Formato Ejecucion: fglrun ctbp308 base módulo compañía
 -- Ultima Correccion: 
 -- Motivo Correccion: 
-------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
+DEFINE vm_nuevoprog     VARCHAR(400)
 DEFINE rm_ctb		RECORD LIKE ctbt012.*
 DEFINE rm_ctb2		RECORD LIKE ctbt013.*
 DEFINE vm_max_elm       SMALLINT
@@ -22,8 +23,7 @@ DEFINE vm_total_cre     LIKE ctbt013.b13_valor_base
 DEFINE rm_orden 	ARRAY[10] OF CHAR(4)
 DEFINE vm_columna_1	SMALLINT
 DEFINE vm_columna_2	SMALLINT
-DEFINE vm_nivel_cta	LIKE ctbt001.b01_nivel
-DEFINE rm_cab 		ARRAY [1000] OF RECORD
+DEFINE rm_cab 		ARRAY[10000] OF RECORD
 				b12_estado	LIKE ctbt012.b12_estado,
 				b12_tipo_comp	LIKE ctbt012.b12_tipo_comp,
 				b12_num_comp	LIKE ctbt012.b12_num_comp,
@@ -33,37 +33,40 @@ DEFINE rm_cab 		ARRAY [1000] OF RECORD
 				--b12_fecing	LIKE ctbt012.b12_fecing,
 				b12_glosa	LIKE ctbt012.b12_glosa
 			END RECORD
-DEFINE rm_det		ARRAY [1000] OF RECORD
+DEFINE rm_det		ARRAY[1000] OF RECORD
 				b13_cuenta	LIKE ctbt013.b13_cuenta,
 				tit_descripcion	LIKE ctbt010.b10_descripcion,
 				tit_debito  	LIKE ctbt013.b13_valor_base,
 				tit_credito   	LIKE ctbt013.b13_valor_base
 			END RECORD
-DEFINE rm_descri	ARRAY [1000] OF RECORD
+DEFINE rm_descri	ARRAY[1000] OF RECORD
 				tipo		LIKE ctbt013.b13_tipo_doc,
 				glosa		LIKE ctbt013.b13_glosa
 			END RECORD
+DEFINE vm_nivel         LIKE ctbt001.b01_nivel
+
+
 
 MAIN
 
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/ctbp308.error')
-CALL fgl_init4js()
+CALL startlog('../logs/ctbp308.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN          -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
 	EXIT PROGRAM
 END IF
-LET vg_base     = arg_val(1)
-LET vg_modulo   = arg_val(2)
-LET vg_codcia   = arg_val(3)
+LET vg_base    = arg_val(1)
+LET vg_modulo  = arg_val(2)
+LET vg_codcia  = arg_val(3)
 LET vg_proceso = 'ctbp308'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -75,7 +78,7 @@ FUNCTION funcion_master()
 DEFINE i		SMALLINT
 
 CALL fl_nivel_isolation()
-LET vm_max_elm  = 1000
+LET vm_max_elm  = 10000
 LET vm_max_det  = 1000
 CREATE TEMP TABLE tmp_detalle_comp(
 		b13_cuenta	CHAR(12),
@@ -95,13 +98,6 @@ OPTIONS INPUT WRAP,
 OPEN FORM f_ctb FROM "../forms/ctbf308_1"
 DISPLAY FORM f_ctb
 CALL mostrar_cabecera_forma()
-
-SELECT MAX(b01_nivel) INTO vm_nivel_cta FROM ctbt001
-IF vm_nivel_cta IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No se ha configurado el plan de cuentas.', 'stop')
-	EXIT PROGRAM
-END IF
-
 FOR i = 1 TO vm_max_elm
 	INITIALIZE rm_cab[i].* TO NULL
 END FOR
@@ -117,6 +113,11 @@ LET vm_num_det = 0
 LET vm_scr_lin = 0
 CALL muestra_contadores_cab(0)
 CALL muestra_contadores_det(0)
+SELECT MAX(b01_nivel) INTO vm_nivel FROM ctbt001
+IF vm_nivel IS NULL THEN
+	CALL fgl_winmessage(vg_producto,'Nivel no esta configurado.','stop')
+	EXIT PROGRAM
+END IF
 MENU 'OPCIONES'
 	COMMAND KEY ('C') 'Consultar'
 		CALL control_consulta()
@@ -149,15 +150,12 @@ END FUNCTION
 
 FUNCTION control_consulta()
 DEFINE j,l,col		SMALLINT
-DEFINE query		VARCHAR(1500)
-DEFINE expr_sql     VARCHAR(600)
-DEFINE expr_cta     VARCHAR(600)
-DEFINE expr_fec     VARCHAR(600)
+DEFINE query		VARCHAR(1200)
+DEFINE expr_sql         VARCHAR(600)
+DEFINE expr_cta         VARCHAR(150)
+DEFINE r_b03		RECORD LIKE ctbt003.*
 DEFINE r_tip		RECORD LIKE ctbt004.*
-
-DEFINE b13_cuenta	LIKE ctbt013.b13_cuenta
 DEFINE r_b10		RECORD LIKE ctbt010.*
-
 
 LET vm_num_elm   = 0
 LET vm_num_det   = 0
@@ -168,9 +166,20 @@ LET col          = 2
 CALL borrar_cabecera()
 CALL borrar_detalle()
 LET int_flag = 0
-CONSTRUCT BY NAME expr_sql ON b12_estado,b12_tipo_comp,b12_num_comp,
-	b12_subtipo, b12_origen, b12_fec_proceso,b12_glosa
+CONSTRUCT BY NAME expr_sql ON b12_estado, b12_tipo_comp, b12_num_comp,
+	b12_subtipo, b12_origen, b12_fec_proceso, b12_glosa
+	ON KEY(INTERRUPT)
+		LET int_flag = 1
+		EXIT CONSTRUCT
 	ON KEY(F2)
+		IF INFIELD(b12_tipo_comp) THEN
+			CALL fl_ayuda_tipos_comprobantes(vg_codcia)
+				RETURNING r_b03.b03_tipo_comp,
+					  r_b03.b03_nombre
+			IF r_b03.b03_tipo_comp IS NOT NULL THEN
+				DISPLAY r_b03.b03_tipo_comp TO b12_tipo_comp
+			END IF
+		END IF
 		IF INFIELD(b12_subtipo) THEN
 			CALL fl_ayuda_subtipos_comprobantes(vg_codcia)
 				RETURNING r_tip.b04_subtipo,
@@ -179,46 +188,44 @@ CONSTRUCT BY NAME expr_sql ON b12_estado,b12_tipo_comp,b12_num_comp,
 				DISPLAY r_tip.b04_subtipo TO b12_subtipo
 			END IF
 		END IF
+		LET int_flag = 0
 END CONSTRUCT
-INITIALIZE rm_det[1].b13_cuenta TO NULL
-CONSTRUCT BY NAME expr_cta ON b13_cuenta 
+IF int_flag THEN
+	CLEAR b12_estado, b12_tipo_comp, b12_num_comp, b12_subtipo, b12_origen,
+		b12_fec_proceso, b12_glosa
+	RETURN
+END IF
+CONSTRUCT BY NAME expr_cta ON b13_cuenta
+	ON KEY(INTERRUPT)
+		LET int_flag = 1
+		EXIT CONSTRUCT
 	ON KEY(F2)	
 		IF INFIELD(b13_cuenta) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel_cta) 
-				RETURNING r_b10.b10_cuenta, r_b10.b10_descripcion 
+			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
-				LET rm_det[1].b13_cuenta = r_b10.b10_cuenta
-				DISPLAY BY NAME rm_det[1].b13_cuenta
+				DISPLAY r_b10.b10_cuenta TO b13_cuenta
 			END IF	
 		END IF
+		LET int_flag = 0
 END CONSTRUCT
-IF expr_cta = ' 1=1 ' THEN
-	LET expr_cta = ' ' 
-ELSE
-	LET expr_cta = ' AND EXISTS (SELECT b13_tipo_comp, b13_num_comp FROM ctbt013 ',
-						   	   '  WHERE b13_compania  = b12_compania ',   
-						       '    AND b13_tipo_comp = b12_tipo_comp ',   
-						       '    AND b13_num_comp  = b12_num_comp ',   
-						       '    AND b13_cuenta    = "', rm_det[1].b13_cuenta CLIPPED, 
-							   '")'   
+IF int_flag THEN
+	CLEAR b12_estado, b12_tipo_comp, b12_num_comp, b12_subtipo, b12_origen,
+		b12_fec_proceso, b12_glosa, b13_cuenta
+	RETURN
 END IF
-
-LET query = 'SELECT * FROM ctbt012',
-			' WHERE b12_compania  = ', vg_codcia, ' AND ',
-				expr_sql CLIPPED, expr_cta CLIPPED,
-			' INTO TEMP tt_ctas '
-
-PREPARE stmnt1 FROM query
-EXECUTE stmnt1
-
-LET expr_fec = ''
 WHILE TRUE
-	LET query = 'SELECT b12_estado, b12_tipo_comp, b12_num_comp,',
+	LET query = 'SELECT UNIQUE b12_estado, b12_tipo_comp, b12_num_comp,',
 			' b12_subtipo, b12_origen, b12_fec_proceso, ',
-			' b12_glosa, b12_moneda',
-			' FROM tt_ctas',
-			' WHERE b12_compania  = ', vg_codcia, expr_fec CLIPPED,
-			" ORDER BY ", vm_columna_1, ' ', rm_orden[vm_columna_1],
+			' b12_glosa, b12_moneda ',
+			' FROM ctbt012, ctbt013 ',
+			' WHERE b12_compania  = ', vg_codcia,
+			'   AND ', expr_sql CLIPPED,
+			'   AND b13_compania  = b12_compania ',
+			'   AND b13_tipo_comp = b12_tipo_comp ',
+			'   AND b13_num_comp  = b12_num_comp ',
+			'   AND ', expr_cta CLIPPED,
+			' ORDER BY ', vm_columna_1, ' ', rm_orden[vm_columna_1],
 			        ', ', vm_columna_2, ' ', rm_orden[vm_columna_2]
 	PREPARE deto FROM query
 	DECLARE q_deto CURSOR FOR deto
@@ -238,24 +245,8 @@ WHILE TRUE
 	CALL set_count(vm_num_elm)
 	LET int_flag = 0
 	DISPLAY ARRAY rm_cab TO rm_cab.*
-		BEFORE DISPLAY
-			CALL dialog.keysetlabel('ACCEPT','')
-			CALL dialog.keysetlabel('F6', 'Ver Comprobante')
-			CALL dialog.keysetlabel('F7', 'Filtrar')
-		BEFORE ROW
-			LET j = arr_curr()
-			LET l = scr_line()
-			CALL muestra_contadores_cab(j)
-			CALL fl_lee_subtipo_comprob_contable(vg_codcia,
-						rm_cab[j].b12_subtipo)
-				RETURNING r_tip.*
-			DISPLAY r_tip.b04_nombre TO tit_subtipo
-			CALL muestra_detalle(rm_cab[j].b12_tipo_comp,
-						rm_cab[j].b12_num_comp)
-			LET int_flag = 0
-		AFTER DISPLAY 
-			CONTINUE DISPLAY
 		ON KEY(INTERRUPT)
+			LET int_flag = 1
 			EXIT DISPLAY
 		ON KEY(F5)
 			CALL muestra_detalle_arr(rm_cab[j].b12_tipo_comp,
@@ -265,10 +256,6 @@ WHILE TRUE
 			CALL ver_comprobante(rm_cab[j].b12_tipo_comp,
 					     rm_cab[j].b12_num_comp)
 			LET int_flag = 0
-		ON KEY(F7)
-			LET expr_fec = filtrar_comprobantes()
-			LET int_flag = 0
-			EXIT DISPLAY
 		ON KEY(F15)
 			LET col = 1
 			EXIT DISPLAY
@@ -290,6 +277,22 @@ WHILE TRUE
 		ON KEY(F21)
 			LET col = 7
 			EXIT DISPLAY
+		BEFORE DISPLAY
+			--#CALL dialog.keysetlabel('ACCEPT','')
+			--#CALL dialog.keysetlabel('F6', 'Ver Comprobante')
+		BEFORE ROW
+			LET j = arr_curr()
+			LET l = scr_line()
+			CALL muestra_contadores_cab(j)
+			CALL fl_lee_subtipo_comprob_contable(vg_codcia,
+						rm_cab[j].b12_subtipo)
+				RETURNING r_tip.*
+			DISPLAY r_tip.b04_nombre TO tit_subtipo
+			CALL muestra_detalle(rm_cab[j].b12_tipo_comp,
+						rm_cab[j].b12_num_comp)
+			LET int_flag = 0
+		AFTER DISPLAY 
+			CONTINUE DISPLAY
 	END DISPLAY
 	IF int_flag = 1 THEN
 		EXIT WHILE
@@ -306,20 +309,17 @@ WHILE TRUE
 	END IF
 END WHILE
 
-DROP TABLE tt_ctas
-
 END FUNCTION
 
 
 
-FUNCTION muestra_detalle(tipo,num)
+FUNCTION muestra_detalle(tipo, num)
 DEFINE tipo		LIKE ctbt012.b12_tipo_comp
 DEFINE num		LIKE ctbt012.b12_num_comp
 DEFINE valor_base	LIKE ctbt013.b13_valor_base
 DEFINE valor_aux	LIKE ctbt013.b13_valor_aux
-DEFINE query            VARCHAR(600)
-DEFINE i		SMALLINT
 DEFINE r_det		RECORD LIKE ctbt013.*
+DEFINE i		SMALLINT
 
 CALL borrar_detalle()
 INITIALIZE r_det.* TO NULL
@@ -413,7 +413,7 @@ WHILE TRUE
 			DISPLAY rm_descri[i].glosa TO b13_glosa
 		BEFORE DISPLAY
 			LET vm_scr_lin = fgl_scr_size('rm_det')
-			CALL dialog.keysetlabel("ACCEPT","")
+			--#CALL dialog.keysetlabel("ACCEPT","")
 		AFTER DISPLAY
 			CONTINUE DISPLAY
 		ON KEY(INTERRUPT)
@@ -536,21 +536,21 @@ END FUNCTION
 
 
 
-FUNCTION muestra_contadores_cab(cor)
-DEFINE cor	           SMALLINT
+FUNCTION muestra_contadores_cab(num_row_cab)
+DEFINE num_row_cab	SMALLINT
 
-DISPLAY "" AT 1,61
-DISPLAY cor, " de ", vm_num_elm AT 1, 65
+DISPLAY BY NAME num_row_cab
+DISPLAY vm_num_elm TO max_row_cab
 
 END FUNCTION
 
 
 
-FUNCTION muestra_contadores_det(cor)
-DEFINE cor	           SMALLINT
+FUNCTION muestra_contadores_det(num_row_det)
+DEFINE num_row_det	SMALLINT
 
-DISPLAY "" AT 10,61
-DISPLAY cor, " de ", vm_num_det AT 10, 65
+DISPLAY BY NAME num_row_det
+DISPLAY vm_num_det TO max_row_det
 
 END FUNCTION
 
@@ -566,72 +566,8 @@ DEFINE num_comp		LIKE ctbt012.b12_num_comp
 LET comando = 'cd ..', vg_separador, '..', vg_separador,
 	      'CONTABILIDAD', vg_separador, 'fuentes', 
 	      vg_separador, '; fglrun ctbp201 ', vg_base, ' ',
-	      'CB ', vg_codcia, ' ', vg_codloc, ' ', tipo_comp, ' ', num_comp
+	      'CB ', vg_codcia, ' ', tipo_comp, ' ', num_comp
 
 RUN comando
-
-END FUNCTION
-
-
-
-FUNCTION filtrar_comprobantes()
-DEFINE expr		CHAR(300)
-DEFINE fecha_ini	DATE
-DEFINE fecha_fin	DATE
-
-INITIALIZE fecha_ini, fecha_fin TO NULL
-
-OPEN WINDOW w_b308_2 AT 10,20 WITH 7 ROWS, 60 COLUMNS
-    ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE 0,BORDER,
-	      MESSAGE LINE LAST - 2)
-OPTIONS INPUT WRAP,
-	ACCEPT KEY	F12
-OPEN FORM f_ctb_2 FROM "../forms/ctbf308_2"
-DISPLAY FORM f_ctb_2
-
-INPUT BY NAME fecha_ini, fecha_fin WITHOUT DEFAULTS 
-
-CLOSE WINDOW w_b308_2
-
-LET expr = ' AND (b12_fecing BETWEEN EXTEND("', fecha_ini, '", YEAR TO SECOND) ',
-                           ' AND EXTEND("', fecha_fin, '", YEAR TO SECOND)) ',
-			' OR ',
-           ' (b12_fec_modifi BETWEEN EXTEND("', fecha_ini, '", YEAR TO SECOND) ',
-                               ' AND EXTEND("', fecha_fin, '", YEAR TO SECOND)) '
-
-RETURN expr
-
-END FUNCTION
-
-
-
-FUNCTION validar_parametros()
-
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
 
 END FUNCTION

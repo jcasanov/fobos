@@ -1,0 +1,61 @@
+DATABASE aceros
+SCREEN
+{
+   Orden de Compra:[c0    ] 		           Estado:[d|c20      ]
+    Desde la Fecha:[c2        ]                                        
+    Hasta la Fecha:[c3        ]                                       
+         Proveedor:[c4    ] [c7                           ]      
+      Departamento:[c5    ] [c8                           ]
+     Tipo de Orden:[c6    ] [c9                           ]
+
+  No. OC Mo              Proveedor                 Fecha       Total OC     
+ [c10   |c |c11                                |c12       |c13             ]
+ [c10   |c |c11                                |c12       |c13             ]
+ [c10   |c |c11                                |c12       |c13             ]
+ [c10   |c |c11                                |c12       |c13             ]
+ [c10   |c |c11                                |c12       |c13             ]
+ [c10   |c |c11                                |c12       |c13             ]
+ [c10   |c |c11                                |c12       |c13             ]
+ [c10   |c |c11                                |c12       |c13             ]
+ [c10   |c |c11                                |c12       |c13             ]
+                                                   Total: [c050            ]
+}
+TABLES ordt010
+ATTRIBUTES
+
+c0  = FORMONLY.vm_numero_oc TYPE INTEGER, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+d   = ordt010.c10_estado, REVERSE, UPSHIFT, AUTONEXT, 
+	INCLUDE = ('A', 'P', 'C'), 
+	COMMENTS = 'A Activas  P Aprobadas  C Cerradas'; 
+c20 = FORMONLY.tit_estado,REVERSE,UPSHIFT,NOENTRY;
+c2  = FORMONLY.vm_fecha_desde TYPE DATE, AUTONEXT, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy', COMMENTS = 'Fecha en formato: dd-mm-aaaa';
+c3  = FORMONLY.vm_fecha_hasta TYPE DATE, AUTONEXT, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy', COMMENTS = 'Fecha en formato: dd-mm-aaaa';
+c4  = FORMONLY.vm_proveedor, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c7  = FORMONLY.nom_proveedor, NOENTRY, REVERSE;
+c5  = FORMONLY.vm_depto, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c8  = FORMONLY.nom_depto, NOENTRY, REVERSE;
+c6  = FORMONLY.vm_tipo_orden, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c9  = FORMONLY.nom_tipo, NOENTRY, REVERSE;
+
+c10 = ordt010.c10_numero_oc;
+c   = ordt010.c10_moneda;
+c11 = FORMONLY.proveedor TYPE VARCHAR;
+c12 = FORMONLY.fecha     TYPE DATE, FORMAT = 'dd-mm-yyyy';
+
+c13 = ordt010.c10_tot_compra, FORMAT = '#,###,###,##&.##';
+
+c050 = FORMONLY.vm_total TYPE DECIMAL, NOENTRY, REVERSE,
+	FORMAT = '#,###,###,##&.##';
+
+END
+
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_detalle[9] (c10_numero_oc, c10_moneda, proveedor, 
+			     fecha, c10_tot_compra)

@@ -1,4 +1,4 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
 
@@ -6,8 +6,8 @@ SCREEN
                  Descripción: [c002                                    ]
      Descripción Alternativa: [c003                                    ]
 
-                 Tipo Cuenta             Tipo Movimiento 
-                [c0b0       ]             [c0c0        ]
+                  Tipo Cuenta             Tipo Movimiento 
+                 [c0b0        ]            [c0c0        ]
 
 
              Nivel de Cuenta: [c004  ]  [c010                ]
@@ -22,7 +22,7 @@ ctbt010
 ATTRIBUTES
 c001 = ctbt010.b10_cuenta, AUTONEXT, REVERSE, PICTURE = '########XXXX',
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
-	COMMENTS= 'Indicar el número de la cuenta de más de 10 caracteres';
+	COMMENTS= 'Indicar el número de la cuenta de mas de 10 caracteres';
 c002 = ctbt010.b10_descripcion, AUTONEXT, REVERSE, UPSHIFT;
 c003 = ctbt010.b10_descri_alt, AUTONEXT, UPSHIFT;
 c0b0 = ctbt010.b10_tipo_cta, NOENTRY, REVERSE, AUTONEXT,
@@ -37,8 +37,8 @@ d    = ctbt010.b10_saldo_ma, AUTONEXT, REVERSE,
 	COMMENTS = 'Indicar si existe saldo en la moneda alterna';
 c006 = ctbt010.b10_usuario, NOENTRY, UPSHIFT, REVERSE;
 c007 = ctbt010.b10_fecing, NOENTRY, UPSHIFT, REVERSE;
-c    = FORMONLY.tit_est, REVERSE, UPSHIFT, NOENTRY;
+c    = ctbt010.b10_estado, REVERSE, UPSHIFT, NOENTRY;
 c008 = FORMONLY.tit_estado_cta, NOENTRY, UPSHIFT;
 c010 = FORMONLY.tit_nivel, REVERSE, UPSHIFT, NOENTRY;
 c011 = FORMONLY.tit_centro, NOENTRY, UPSHIFT;
-END
+end

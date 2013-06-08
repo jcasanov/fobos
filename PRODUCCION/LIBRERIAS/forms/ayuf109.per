@@ -1,33 +1,48 @@
-DATABASE diteca
-
+DATABASE aceros
 SCREEN
 {
  TRANSACCIONES DE CAJA
--------------------------------------------------------------
- Número   Cliente 			        Valor	
--------------------------------------------------------------
-[c000   ][c001                            ][c003          ]
-[c000   ][c001                            ][c003          ]
-[c000   ][c001                            ][c003          ]
-[c000   ][c001                            ][c003          ]
-[c000   ][c001                            ][c003          ]
-[c000   ][c001                            ][c003          ]
-[c000   ][c001                            ][c003          ]
-[c000   ][c001                            ][c003          ]
-[c000   ][c001                            ][c003          ]
-[c000   ][c001                            ][c003          ]
+                                                       [c030 ] de [c031 ]
+ [c0|c000   |c001 |c002  |c003                          |c004          |c]
+[c1|c010   |c011 |c012  |c013                          |c014          |d]
+[c1|c010   |c011 |c012  |c013                          |c014          |d]
+[c1|c010   |c011 |c012  |c013                          |c014          |d]
+[c1|c010   |c011 |c012  |c013                          |c014          |d]
+[c1|c010   |c011 |c012  |c013                          |c014          |d]
+[c1|c010   |c011 |c012  |c013                          |c014          |d]
+[c1|c010   |c011 |c012  |c013                          |c014          |d]
+[c1|c010   |c011 |c012  |c013                          |c014          |d]
+[c1|c010   |c011 |c012  |c013                          |c014          |d]
+[c1|c010   |c011 |c012  |c013                          |c014          |d]
+ Vendedor: [c020                          ]     Total: [c021          ]
 
 }
-
 TABLES
 cajt010
-
 ATTRIBUTES
-c000 = j10_num_fuente, UPSHIFT;
-c001 = j10_nomcli,  UPSHIFT;
-c003 = j10_valor,  UPSHIFT;
+c030 = FORMONLY.num_rows, NOENTRY, UPSHIFT;
+c031 = FORMONLY.max_rows, NOENTRY, UPSHIFT;
+
+c0   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c000 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c001 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c002 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c003 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c004 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c    = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+
+c1   = cajt010.j10_tipo_fuente, NOENTRY, UPSHIFT;
+c010 = cajt010.j10_num_fuente, NOENTRY, UPSHIFT;
+c011 = FORMONLY.numero, NOENTRY, UPSHIFT;
+c012 = cajt010.j10_codcli, NOENTRY, UPSHIFT;
+c013 = cajt010.j10_nomcli, NOENTRY, UPSHIFT;
+c014 = cajt010.j10_valor, NOENTRY, UPSHIFT, FORMAT = "###,###,##&.##";
+d    = cajt010.j10_estado, NOENTRY, UPSHIFT;
+
+c020 = FORMONLY.vendedor, NOENTRY, UPSHIFT;
+c021 = FORMONLY.total, NOENTRY, UPSHIFT, FORMAT = "###,###,##&.##";
 END
-
 INSTRUCTIONS
-SCREEN RECORD rh_numfue[10](j10_num_fuente, j10_nomcli, j10_valor)
-
+DELIMITERS '||'
+SCREEN RECORD rh_numfue[10] (j10_tipo_fuente, j10_num_fuente, numero,
+				j10_codcli, j10_nomcli, j10_valor, j10_estado)

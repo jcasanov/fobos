@@ -1,0 +1,60 @@
+DATABASE aceros
+SCREEN
+{
+
+                 Moneda de Pago: [c0] [c000                 ]
+
+      	         Días Mes        Días Semana        Horas Día 
+                 [c001  ]          [c002  ]          [c003  ]
+
+                  Salario Mínimo: [c004         ]
+               Seguro Eventual ?: [c]
+
+        Porc. Util. Trabajadores: [c005  ] %
+ Porc. Util. Cargas Trabajadores: [c006  ] %
+
+              Días de Vacaciones: [c007  ]    Maximo Días Vacaciones: [c008  ]
+                                             Maximo Vacaciones Acum.: [c009  ]
+   Antiguedad Vacación Adicional: [c010  ] años
+         Días Vacación Adicional: [c011  ] días
+
+       Usuario: [c012      ]           Fecha de Ingreso: [c013               ]
+}
+TABLES
+rolt000
+ATTRIBUTES
+c0 = rolt000.n00_moneda_pago, AUTONEXT, REVERSE, UPSHIFT, PICTURE = 'AA',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Moneda en que se paga todas las liquidaciones de roles';
+c000 = FORMONLY.tit_moneda, NOENTRY, UPSHIFT, REVERSE;
+c001 = rolt000.n00_dias_mes, AUTONEXT, REVERSE, INCLUDE = (1 TO 30),
+	COMMENTS = 'Días del mes que se han trabajado';
+c002 = rolt000.n00_dias_semana, AUTONEXT, REVERSE, INCLUDE = (1 TO 7),
+	COMMENTS = 'Días de la semana que se han trabajado';
+c003 = rolt000.n00_horas_dia, AUTONEXT, REVERSE, INCLUDE = (1 TO 8),
+	COMMENTS = 'Horas del día que se trabajan';
+c004 = rolt000.n00_salario_min, AUTONEXT, REVERSE, FORMAT = '#,###,##&.##',
+	COMMENTS = 'Salario mínimo de un trabajador';
+c    = rolt000.n00_seguro_event, AUTONEXT, REVERSE,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge',
+	COMMENTS = 'Se reconoce seguro social a los trabajadores eventuales ?';
+c005 = rolt000.n00_uti_trabaj, AUTONEXT, REVERSE, FORMAT = '#&.##',
+	INCLUDE = (0 TO 99),
+	COMMENTS = 'Porcentaje de utilidades que reciben los trabajadores al cierre del ejercicio';
+c006 = rolt000.n00_uti_cargas, AUTONEXT, REVERSE, FORMAT = '#&.##',
+	COMMENTS = 'Porcentaje de utilidades que reciben los trabajadores por cargas familiares';
+c007 = rolt000.n00_dias_vacac, AUTONEXT, REVERSE, INCLUDE = (1 TO 30),
+	COMMENTS = 'Días de vacaciones para un empleado';
+c008 = rolt000.n00_max_vacac, AUTONEXT, REVERSE, INCLUDE = (1 TO 30),
+	COMMENTS = 'Maximo días de vacaciones para un empleado';
+c009 = rolt000.n00_max_vac_acum, AUTONEXT, REVERSE,
+	COMMENTS = 'Maximo vacaciones acumuladas para un empleado';
+--c010 = rolt000.n00_ano_adi_vac, AUTONEXT, REVERSE, INCLUDE = (0 TO 10),
+c010 = rolt000.n00_ano_adi_vac, AUTONEXT, REVERSE, 
+	COMMENTS = 'Años antiguedad a partir de los cuales recibe días adicionales de vacaciones';
+--c011 = rolt000.n00_dias_adi_va, AUTONEXT, REVERSE, INCLUDE = (0 TO 5),
+c011 = rolt000.n00_dias_adi_va, AUTONEXT, REVERSE,
+	COMMENTS = 'Días adicionales de vacaciones por cada año de antiguedad';
+c012 = rolt000.n00_usuario, AUTONEXT, REVERSE, UPSHIFT;
+c013 = rolt000.n00_fecing, AUTONEXT, REVERSE, UPSHIFT;
+END

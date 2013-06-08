@@ -1,0 +1,44 @@
+database aceros
+screen 
+{
+  [lbl1|lbl2                                   |lbl3      |lbl4            ]
+ [c001|c100                                   |c002      |c003            ]
+ [c001|c100                                   |c002      |c003            ]
+ [c001|c100                                   |c002      |c003            ]
+ [c001|c100                                   |c002      |c003            ]
+ [c001|c100                                   |c002      |c003            ]
+ [c001|c100                                   |c002      |c003            ]
+ [c001|c100                                   |c002      |c003            ]
+ [c001|c100                                   |c002      |c003            ]
+ [c001|c100                                   |c002      |c003            ]
+ [c001|c100                                   |c002      |c003            ]
+ [c001|c100                                   |c002      |c003            ]
+ [c001|c100                                   |c002      |c003            ]
+ [c001|c100                                   |c002      |c003            ]
+ [c001|c100                                   |c002      |c003            ]
+ [c001|c100                                   |c002      |c003            ]
+ [c001|c100                                   |c002      |c003            ]
+ [c001|c100                                   |c002      |c003            ]
+ [c001|c100                                   |c002      |c003            ]
+ Total Trabajadores ==> [c102]                           [c101            ]
+}
+end
+tables
+rolt061
+attributes
+c001 = rolt061.n61_cod_trab, NOENTRY, OPTIONS='-nolist';
+c100 = formonly.n_trab,      NOENTRY, OPTIONS='-nolist';
+c002 = rolt061.n61_fec_ing_club, FORMAT='dd-mm-yyyy', 
+	COMMENT='Ingrese la fecha en formato dd-mm-yyyy', OPTIONS='-nolist';
+c003 = rolt061.n61_cuota, FORMAT='#,###,###,##&.##', OPTIONS='-nolist';
+
+c101 = formonly.tot_cuota, NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+c102 = formonly.num_trab,  NOENTRY, REVERSE;
+
+lbl1 = formonly.bt_cod_trab,    WIDGET='BUTTON', CONFIG='F15';
+lbl2 = formonly.bt_n_trab,      WIDGET='BUTTON', CONFIG='F16';
+lbl3 = formonly.bt_fecha,       WIDGET='BUTTON', CONFIG='F17';
+lbl4 = formonly.bt_cuota,       WIDGET='BUTTON', CONFIG='F18';
+end
+instructions
+screen record ra_scr[18] (n61_cod_trab, n_trab, n61_fec_ing_club, n61_cuota) 

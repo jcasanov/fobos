@@ -1,0 +1,43 @@
+DATABASE aceros
+SCREEN
+{
+
+                    IMPRESORAS DEL SISTEMA
+                   ----------------------
+
+ Usuario Impresora: [c002      ]
+
+ [b000      |b001                                      |a|b]
+[c000      |c001                                      |c|d]
+[c000      |c001                                      |c|d]
+[c000      |c001                                      |c|d]
+[c000      |c001                                      |c|d]
+[c000      |c001                                      |c|d]
+[c000      |c001                                      |c|d]
+[c000      |c001                                      |c|d]
+
+}
+TABLES
+gent006
+gent007
+ATTRIBUTES
+c002 = gent007.g07_user, NOENTRY, REVERSE, UPSHIFT;
+b000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15'; 
+b001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16'; 
+a    = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17'; 
+b    = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18'; 
+c000 = gent007.g07_impresora, NOENTRY, REVERSE, UPSHIFT, OPTIONS = '-nolist';
+c001 = gent006.g06_nombre, NOENTRY, REVERSE, UPSHIFT, OPTIONS = '-nolist';
+c    = gent007.g07_default, REVERSE, UPSHIFT, INCLUDE = ('S', 'N'),
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge',
+	COMMENTS = 'Marque que impresora (solo 1) tiene por defecto este usuario.',
+	OPTIONS = '-nolist';
+d    = FORMONLY.impresora, REVERSE, UPSHIFT, INCLUDE = ('S', 'N'),
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge',
+	COMMENTS = 'Marque que impresora(s) tendra acceso este usuario.',
+	OPTIONS = '-nolist';
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_impresoras[07] (g07_impresora, g06_nombre, g07_default,
+				impresora)

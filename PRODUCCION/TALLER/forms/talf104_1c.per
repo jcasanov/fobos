@@ -1,0 +1,26 @@
+DATABASE aceros
+SCREEN
+{
+
+
+                       Modelo: [f001           ]
+
+		        Línea: [f002 ] [a1                          ]
+                   Dificultad: [f3]
+
+                Ingresado Por: [f004      ]
+	     Fecha de Ingreso: [f005               ]
+
+}
+TABLES talt004
+ATTRIBUTES
+f001 = talt004.t04_modelo, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f002 = talt004.t04_linea, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+a1   = FORMONLY.nom_linea TYPE VARCHAR, REVERSE;
+f3   = talt004.t04_dificultad, REVERSE, AUTONEXT,
+	COMMENTS = ' Grado de dificultad por modelo de vehículo entre 1-10 ';
+f004 = talt004.t04_usuario, REVERSE, NOENTRY;
+f005 = talt004.t04_fecing, REVERSE, NOENTRY;
+end

@@ -1,0 +1,27 @@
+DATABASE aceros
+SCREEN
+{
+
+	  Técnico: [c         ] [a                                       ]
+
+    Fecha Inicial: [c0        ]     	         Fecha Final: [c1        ]
+
+           Moneda: [c2|c3                        ]
+
+}
+TABLES
+	talt003
+ATTRIBUTES
+c   = talt003.t03_mecanico, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+a   = FORMONLY.nom_mecanico, NOENTRY;
+c0  = FORMONLY.vm_fecha_ini TYPE DATE, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha en formato: dd-mm-aaaa.';
+c1  = FORMONLY.vm_fecha_fin TYPE DATE, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha en formato: dd-mm-aaaa.';
+c2  = FORMONLY.vm_moneda TYPE VARCHAR, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c3  = FORMONLY.nom_moneda, NOENTRY;
+end
+INSTRUCTIONS
+DELIMITERS '||'

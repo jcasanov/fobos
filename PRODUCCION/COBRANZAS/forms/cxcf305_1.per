@@ -1,26 +1,38 @@
-DATABASE formonly
+DATABASE FORMONLY
 SCREEN
 {
- Código Cliente: [c001 ] [c002                                    ]
+
+      Localidad: [c051 ] [c052                ]
+ Código Cliente: [c001 ] [c002                                         ]
          Moneda: [c3]    [c004           ]
  Qué Documentos: [c050         ]
 
 
-     Tipo Saldo: [c005          ]    Saldo >= a: [c006          ]
+     Tipo Saldo: [c005          ]          Saldo >= a: [c006           ]
 
+                                           Rango Días: [c060 ] - [c061 ]
 
 
 }
 ATTRIBUTES
-c001 = formonly.codcli TYPE INTEGER, WIDGET = 'FIELD_BMP', 
+c051 = FORMONLY.localidad, UPSHIFT, AUTONEXT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c052 = FORMONLY.tit_localidad, UPSHIFT, NOENTRY;
+c001 = FORMONLY.codcli TYPE INTEGER, WIDGET = 'FIELD_BMP', 
        CONFIG = 'lista.bmp F2';
-c002 = formonly.nomcli, NOENTRY;
-c3   = formonly.moneda TYPE CHAR NOT NULL, WIDGET = 'FIELD_BMP', 
+c002 = FORMONLY.nomcli, NOENTRY;
+c3   = FORMONLY.moneda TYPE CHAR NOT NULL, WIDGET = 'FIELD_BMP', 
        CONFIG = 'lista.bmp F2', UPSHIFT, AUTONEXT, REVERSE;
-c004 = formonly.tit_mon, NOENTRY;
-c050 = formonly.flag_saldo, WIDGET = 'RADIO', CONFIG = 'S Con_Saldo T Todos';
-c005 = formonly.tipo_saldo, WIDGET = 'RADIO', 
-       CONFIG = 'A A_Favor  P Por_Vencer  V Vencidos  T Todos';
-c006 = formonly.valor TYPE DECIMAL(11,2), INCLUDE = (0.01 TO 999999999),
-       FORMAT = '###,###,##&.##';
-
+c004 = FORMONLY.tit_mon, NOENTRY;
+c050 = FORMONLY.flag_saldo, WIDGET = 'RADIO', CONFIG = 'S "Con Saldo" T Todos';
+c005 = FORMONLY.tipo_saldo, WIDGET = 'RADIO', 
+       CONFIG = 'A "A Favor"  P "Por Vencer"  V Vencidos  T Todos';
+c006 = FORMONLY.valor TYPE DECIMAL(11,2), INCLUDE = (0 TO 999999999),
+	FORMAT = '####,###,##&.##';
+c060 = FORMONLY.dias_min TYPE SMALLINT, AUTONEXT, UPSHIFT,
+	INCLUDE = (-9999 TO 9999, NULL),
+	COMMENTS = 'Solo es para Tipo Saldo = Por Vencer o Vencidos.';
+c061 = FORMONLY.dias_max TYPE SMALLINT, AUTONEXT, UPSHIFT,
+	INCLUDE = (-9999 TO 9999, NULL),
+	COMMENTS = 'Solo es para Tipo Saldo = Por Vencer o Vencidos.';
+END

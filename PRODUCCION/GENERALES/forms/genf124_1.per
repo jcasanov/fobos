@@ -1,29 +1,33 @@
-                                                                                
-database diteca
-screen 
+DATABASE aceros
+SCREEN 
 {
 
 
-       Código de Departamento: [c000]
+  Código de Departamento: [c000]
      
-                       Nombre: [c001                         ]		
-    Código de Centro de Costo: [c002] [c003                  ]
+                  Nombre: [c001                         ]		
+  Código Centro de Costo: [c002] [c003                  ]
 
-                Ingresado Por: [c004       ]
-             Fecha de ingreso: [c005               ]
+       Auxiliar Contable: [c050        ] [c051                                ]
+
+           Ingresado Por: [c004       ]
+        Fecha de Ingreso: [c005               ]
 
 
 }
-end
-tables
+TABLES
 gent034
-attributes
+ATTRIBUTES
 c000 = gent034.g34_cod_depto, REVERSE, NOENTRY,
        WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 c001 = gent034.g34_nombre, REVERSE, UPSHIFT;
 c002 = gent034.g34_cod_ccosto, REVERSE,
        WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c003 = formonly.nom_ccosto TYPE VARCHAR, NOENTRY;
+c003 = FORMONLY.nom_ccosto TYPE VARCHAR, NOENTRY;
 c004 = gent034.g34_usuario, REVERSE, UPSHIFT, NOENTRY;
 c005 = gent034.g34_fecing, REVERSE, NOENTRY;
-end
+c050 = gent034.g34_aux_deprec, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Auxiliar contable para la depreciación.';
+c051 = FORMONLY.tit_aux_deprec, NOENTRY, UPSHIFT;
+END

@@ -1,5 +1,5 @@
-database formonly
-screen 
+DATABASE FORMONLY
+SCREEN 
 {
 
   [l1         |l3        |l4                               ]     
@@ -11,20 +11,20 @@ screen
  [a0|c006    |c004      |c005                             ] 
 }
 end
-attributes
+ATTRIBUTES
 
-l1   = formonly.bt_tipo_comp, WIDGET='BUTTON', CONFIG='F15';
-l3   = formonly.bt_fecha    , WIDGET='BUTTON', CONFIG='F17';
-l4   = formonly.bt_subtipo  , WIDGET='BUTTON', CONFIG='F18';
+l1   = FORMONLY.bt_tipo_comp, WIDGET='BUTTON', CONFIG='F15';
+l3   = FORMONLY.bt_fecha    , WIDGET='BUTTON', CONFIG='F17';
+l4   = FORMONLY.bt_subtipo  , WIDGET='BUTTON', CONFIG='F18';
 
-a0   = formonly.tipo_comp, OPTIONS='-nolist';
-c006 = formonly.num_comp , OPTIONS='-nolist';
-c004 = formonly.fecha    , OPTIONS='-nolist';
-c005 = formonly.subtipo  , OPTIONS='-nolist';
+a0   = FORMONLY.tipo_comp, OPTIONS='-nolist';
+c006 = FORMONLY.num_comp , OPTIONS='-nolist';
+c004 = FORMONLY.fecha    , OPTIONS='-nolist';
+c005 = FORMONLY.subtipo  , OPTIONS='-nolist';
 end
 
-instructions
-screen record r_det[6](tipo_comp, num_comp, fecha, subtipo)
+INSTRUCTIONS
+SCREEN RECORD r_det[6](tipo_comp, num_comp, fecha, subtipo)
 
-keys
+KEYS
 F5 = 'Ver Comprobante'

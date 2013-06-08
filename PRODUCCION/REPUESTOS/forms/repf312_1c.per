@@ -1,0 +1,70 @@
+DATABASE aceros
+SCREEN
+{
+    Fecha Inicial: [c0        ]                  Fecha Final: [c1        ]
+           Moneda: [c2]   [c3             ]      Tipo Venta: [b|c002     ]
+           Bodega: [c4]   [c5                            ]
+         Vendedor: [c003] [c004                          ]
+    Tipo Consulta: [c|f20                   ]       Valor >=: [c011      ]     
+
+  Ven Código                    Nombre                           Total
+ [f0 |f1    |f2                                          |f3                ]
+ [f0 |f1    |f2                                          |f3                ]
+ [f0 |f1    |f2                                          |f3                ]
+ [f0 |f1    |f2                                          |f3                ]
+ [f0 |f1    |f2                                          |f3                ]
+ [f0 |f1    |f2                                          |f3                ]
+ [f0 |f1    |f2                                          |f3                ]
+ [f0 |f1    |f2                                          |f3                ]
+ [f0 |f1    |f2                                          |f3                ]
+ [f0 |f1    |f2                                          |f3                ]
+  Vendedor: [c050                          ]      Total: [c10               ]
+}
+TABLES
+	rept001
+	rept019
+ATTRIBUTES
+
+c0  = FORMONLY.vm_fecha_ini TYPE DATE, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy', 
+	COMMENTS = 'Digite la fecha en formato: dd-mm-aaaa';
+c1  = FORMONLY.vm_fecha_fin TYPE DATE, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy', 
+	COMMENTS = 'Digite la fecha en formato: dd-mm-aaaa';
+
+c2  = FORMONLY.vm_moneda TYPE VARCHAR, REQUIRED, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c3  = FORMONLY.nom_moneda,REVERSE,UPSHIFT, NOENTRY;
+
+b    = FORMONLY.tipo_vta TYPE CHAR NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, INCLUDE = ('C', 'R', 'T'), DEFAULT = 'T',
+	COMMENTS = '(C) CONTADO  (R) CREDITO  (T) T O D O S.';
+c002 = FORMONLY.tit_tipo_vta TYPE VARCHAR, NOENTRY, UPSHIFT, REVERSE;
+
+c4  = FORMONLY.vm_bodega TYPE VARCHAR, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c5  = FORMONLY.nom_bodega, UPSHIFT,NOENTRY;
+
+c003 = FORMONLY.r19_vendedor, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c004 = FORMONLY.tit_vendedor, NOENTRY, UPSHIFT;
+
+c   = FORMONLY.vm_tipcli TYPE CHAR NOT NULL, REVERSE, UPSHIFT, AUTONEXT,
+	INCLUDE=('C', 'T'), DEFAULT='C',  
+	COMMENTS = 'C Cliente  T Por tipo de cliente';
+f20 = FORMONLY.tit_tipcli,REVERSE,UPSHIFT,NOENTRY;
+c10 = FORMONLY.total_neto TYPE DECIMAL (14,2), FORMAT = '---,---,---,--&.--',
+	NOENTRY;
+c011 = FORMONLY.filtro_val TYPE DECIMAL, FORMAT = '---,--&.--',           
+	INCLUDE=(NULL, -99999 TO 999999.99);
+
+f0  = r01_iniciales;
+f1  = r19_codcli;
+f2  = r19_nomcli;
+f3  = r19_tot_neto, FORMAT = '---,---,---,--&.--';
+c050 = r01_nombres, UPSHIFT, REVERSE, NOENTRY;
+end
+ 
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_detalle[10] (r01_iniciales, r19_codcli, r19_nomcli,r19_tot_neto)

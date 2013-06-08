@@ -1,0 +1,38 @@
+DATABASE aceros
+SCREEN
+{
+ CLIENTES POR LOCALIDAD A COBRAR
+
+ [lb11     |lbl2                                 |lbl3           |lbl4      ]
+[c001     |c002                                 |c003           |c004      ]
+[c001     |c002                                 |c003           |c004      ]
+[c001     |c002                                 |c003           |c004      ]
+[c001     |c002                                 |c003           |c004      ]
+[c001     |c002                                 |c003           |c004      ]
+[c001     |c002                                 |c003           |c004      ]
+[c001     |c002                                 |c003           |c004      ]
+[c001     |c002                                 |c003           |c004      ]
+[c001     |c002                                 |c003           |c004      ]
+[c001     |c002                                 |c003           |c004      ]
+                                                      Total ==> [c010      ]
+
+}
+TABLES
+cxct001
+cxct002
+ATTRIBUTES
+lb11 = FORMONLY.bt_codigo,       NOENTRY, WIDGET='BUTTON', CONFIG='F15';
+lbl2 = FORMONLY.bt_nombre,       NOENTRY, WIDGET='BUTTON', CONFIG='F16';
+lbl3 = FORMONLY.bt_cedruc,       NOENTRY, WIDGET='BUTTON', CONFIG='F17';
+lbl4 = FORMONLY.bt_total,        NOENTRY, WIDGET='BUTTON', CONFIG='F18';
+
+c001 = cxct002.z02_codcli, UPSHIFT;
+c002 = cxct001.z01_nomcli, UPSHIFT;
+c003 = cxct001.z01_num_doc_id, UPSHIFT;
+c004 = FORMONLY.total_cxc TYPE DECIMAL, UPSHIFT, FORMAT = '###,##&.##';
+
+c010 = FORMONLY.total_gen TYPE DECIMAL, UPSHIFT, FORMAT = '###,##&.##';
+END
+INSTRUCTIONS
+SCREEN RECORD rh_cliloc[10](z02_codcli, z01_nomcli, z01_num_doc_id, total_cxc)
+

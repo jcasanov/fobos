@@ -1,0 +1,51 @@
+DATABASE aceros
+SCREEN
+{
+       Código Caja: [c000  ] [c001                ]
+     Fecha Inicial: [c002      ]                   Fecha Final: [c003      ]
+-----------------------------------------------------------------------------
+   Fecha       Cliente/Referencia        DO   Número    TP Mo     Valor
+-----------------------------------------------------------------------------
+[c010      |c011                        |a4|c013       |a5|a6|c016          ]
+[c010      |c011                        |a4|c013       |a5|a6|c016          ]
+[c010      |c011                        |a4|c013       |a5|a6|c016          ]
+[c010      |c011                        |a4|c013       |a5|a6|c016          ]
+[c010      |c011                        |a4|c013       |a5|a6|c016          ]
+[c010      |c011                        |a4|c013       |a5|a6|c016          ]
+[c010      |c011                        |a4|c013       |a5|a6|c016          ]
+[c010      |c011                        |a4|c013       |a5|a6|c016          ]
+[c010      |c011                        |a4|c013       |a5|a6|c016          ]
+[c010      |c011                        |a4|c013       |a5|a6|c016          ]
+[c010      |c011                        |a4|c013       |a5|a6|c016          ]
+                                                       TOTAL [c050          ]
+}
+TABLES
+cajt010, cajt011, cajt002
+ATTRIBUTES
+c000 = cajt010.j10_codigo_caja, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS='Presione F2 para obtener ayuda del campo';
+c001 = cajt002.j02_nombre_caja, NOENTRY, UPSHIFT;
+c002 = FORMONLY.vm_fecha_ini TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy';
+c003 = FORMONLY.vm_fecha_fin TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy';
+
+c010 = FORMONLY.j10_fecha_pro TYPE DATE, NOENTRY, FORMAT = 'dd-mm-yyyy', 
+       UPSHIFT;
+c011 = FORMONLY.j10_nomcli, NOENTRY, UPSHIFT;
+a4   = cajt010.j10_tipo_destino, NOENTRY, UPSHIFT, 
+	COMMENTS = 'DOC.: FA FACTURA, PG PAGOS, PA, PAG. ANT., OI OTROS ING., EC E. CAJA';
+c013 = cajt010.j10_num_destino, NOENTRY, UPSHIFT;
+a5   = cajt011.j11_codigo_pago, NOENTRY, UPSHIFT;
+a6   = cajt011.j11_moneda, NOENTRY, UPSHIFT;
+c016 = cajt011.j11_valor, NOENTRY, UPSHIFT, FORMAT = '---,---,--&.##';
+c050 = FORMONLY.vm_total TYPE DECIMAL, REVERSE, NOENTRY,
+	FORMAT = '###,###,##&.##';
+END
+--KEYS
+--F5 = 'Forma de Pago'
+--F7 = 'Imprimir Comp.'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_det[11] (j10_fecha_pro, j10_nomcli, j10_tipo_destino,
+			j10_num_destino, j11_codigo_pago, j11_moneda, j11_valor)

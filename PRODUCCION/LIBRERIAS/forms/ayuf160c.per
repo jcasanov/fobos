@@ -1,0 +1,41 @@
+DATABASE aceros
+SCREEN
+{
+
+ SOLICITUDES DE COBRO A CLIENTES
+ --------------------------------------------------------------------------
+  LC Número AN          C L I E N T E S         Fecha Sol.     Valor     E
+ --------------------------------------------------------------------------
+ [c2|c010  |c3|c011                            |c012      |c013         |d]
+ [c2|c010  |c3|c011                            |c012      |c013         |d]
+ [c2|c010  |c3|c011                            |c012      |c013         |d]
+ [c2|c010  |c3|c011                            |c012      |c013         |d]
+ [c2|c010  |c3|c011                            |c012      |c013         |d]
+ [c2|c010  |c3|c011                            |c012      |c013         |d]
+ [c2|c010  |c3|c011                            |c012      |c013         |d]
+ [c2|c010  |c3|c011                            |c012      |c013         |d]
+ [c2|c010  |c3|c011                            |c012      |c013         |d]
+ [c2|c010  |c3|c011                            |c012      |c013         |d]
+                                               Total ==>  [c020         ]
+
+}
+TABLES
+cxct001
+cxct024
+ATTRIBUTES
+c2   = cxct024.z24_localidad, NOENTRY, UPSHIFT, FORMAT = "&&";
+c010 = cxct024.z24_numero_sol, NOENTRY, UPSHIFT;
+c3   = cxct024.z24_areaneg, NOENTRY, UPSHIFT, FORMAT = "&&";
+c011 = cxct001.z01_nomcli, NOENTRY, UPSHIFT;
+c012 = FORMONLY.z24_fecing TYPE DATE, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c013 = cxct024.z24_total_cap, NOENTRY, UPSHIFT, FORMAT = "--,---,--&.##";
+d    = cxct024.z24_estado, NOENTRY, UPSHIFT;
+
+c020 = FORMONLY.tit_total TYPE DECIMAL, NOENTRY, UPSHIFT,
+	FORMAT = "--,---,--&.##";
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_solcob[10] (z24_localidad, z24_numero_sol, z24_areaneg,
+				z01_nomcli, z24_fecing, z24_total_cap,
+				z24_estado)

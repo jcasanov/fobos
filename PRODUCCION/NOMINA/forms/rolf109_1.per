@@ -1,0 +1,21 @@
+DATABASE aceros
+SCREEN
+{
+
+
+     Código Sectorial: [c000      ] [c001                               ] 
+                                    [c001                               ] 
+
+                Valor: [c002         ]
+
+}
+TABLES
+rolt017
+ATTRIBUTES
+c000 = rolt017.n17_sectorial, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = rolt017.n17_descripcion, AUTONEXT, UPSHIFT, REVERSE, SCROLL,
+	WORDWRAP COMPRESS;
+c002 = rolt017.n17_valor, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = (0 TO 99999999.99), FORMAT = '##,###,##&.##';
+END

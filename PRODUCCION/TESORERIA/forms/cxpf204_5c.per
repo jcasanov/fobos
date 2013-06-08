@@ -1,0 +1,39 @@
+DATABASE FORMONLY
+SCREEN 
+{
+ 
+  Prov.  Retención Fuente Retención en IVA   Valor Cheque
+[c002   |c003            |c004            |c005            ]
+[c002   |c003            |c004            |c005            ]
+[c002   |c003            |c004            |c005            ]
+[c002   |c003            |c004            |c005            ]
+[c002   |c003            |c004            |c005            ]
+[c002   |c003            |c004            |c005            ]
+[c002   |c003            |c004            |c005            ]
+[c002   |c003            |c004            |c005            ]
+[c002   |c003            |c004            |c005            ]
+[c002   |c003            |c004            |c005            ]
+        [c006            |c007            |c008            ]
+               
+[c100                                            ]
+}
+ATTRIBUTES
+c002 = FORMONLY.codprov,      NOENTRY;
+c003 = FORMONLY.val_ret_f TYPE DECIMAL (12,2), NOENTRY,
+	FORMAT='#,###,###,##&.##';
+c004 = FORMONLY.val_ret_i TYPE DECIMAL (12,2), NOENTRY,
+	FORMAT='#,###,###,##&.##';
+c005 = FORMONLY.val_che TYPE DECIMAL (12,2), NOENTRY, FORMAT='#,###,###,##&.##';
+	
+c006 = FORMONLY.tot_ret_f TYPE DECIMAL (12,2), NOENTRY,
+	FORMAT='#,###,###,##&.##', REVERSE;
+c007 = FORMONLY.tot_ret_i TYPE DECIMAL (12,2), NOENTRY,
+	FORMAT='#,###,###,##&.##', REVERSE;
+c008 = FORMONLY.tot_che TYPE DECIMAL (12,2), NOENTRY,
+	FORMAT='#,###,###,##&.##', REVERSE;
+	
+c100 = FORMONLY.nomprov,      NOENTRY, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD ra_totales[10] (codprov, val_ret_f, val_ret_i, val_che)

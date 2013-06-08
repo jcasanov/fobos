@@ -19,8 +19,7 @@ DEFINE vm_num_doc	SMALLINT
 DEFINE rm_progen	RECORD LIKE cxpt001.*
 DEFINE rm_procia	RECORD LIKE cxpt002.*
 DEFINE rm_mon		RECORD LIKE gent013.*
-DEFINE vm_filtro	VARCHAR(250)
-DEFINE rm_orden ARRAY[10] OF CHAR(4)
+DEFINE rm_orden 	ARRAY[10] OF CHAR(4)
 DEFINE vm_columna_1	SMALLINT
 DEFINE vm_columna_2	SMALLINT
 DEFINE rm_par  RECORD
@@ -49,11 +48,12 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/cxpp300.error')
-CALL fgl_init4js()
+CALL startlog('../logs/cxpp300.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 AND num_args() <> 6 THEN    -- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
+	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto', 'stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
 LET vg_base     = arg_val(1)
@@ -63,8 +63,8 @@ LET vg_codloc   = arg_val(4)
 LET vg_proceso = 'cxpp300'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL control_master()
 
@@ -76,6 +76,11 @@ FUNCTION control_master()
 DEFINE r		RECORD LIKE gent013.*
 DEFINE ru		RECORD LIKE gent005.*
 DEFINE comando		VARCHAR(100)
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
+DEFINE run_prog		CHAR(10)
 
 CALL fl_nivel_isolation()
 LET vm_max_rows	= 1000
@@ -100,13 +105,33 @@ LET rm_par.valor      = 0.01
 LET rm_par.moneda = rg_gen.g00_moneda_base
 CALL fl_lee_moneda(rm_par.moneda) RETURNING rm_mon.*
 LET rm_par.tit_mon = rm_mon.g13_nombre
-OPEN WINDOW wf AT 3,2 WITH 22 ROWS, 80 COLUMNS
-    ATTRIBUTE(FORM LINE FIRST + 2, COMMENT LINE LAST, MENU LINE 30,BORDER,
-	      MESSAGE LINE LAST - 2)
-OPEN FORM f_prov FROM "../forms/cxpf300_2"
+LET lin_menu = 0
+LET row_ini  = 3
+LET num_rows = 22
+LET num_cols = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW wf AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
+	ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE lin_menu,
+		  BORDER, MESSAGE LINE LAST - 1) 
+IF vg_gui = 1 THEN
+	OPEN FORM f_prov FROM "../forms/cxpf300_2"
+ELSE
+	OPEN FORM f_prov FROM "../forms/cxpf300_2c"
+END IF
 DISPLAY FORM f_prov
 LET vm_num_rows = 0
 LET vm_row_current = 0
+{-- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE --}
+LET run_prog = 'fglrun '
+IF vg_gui = 0 THEN
+	LET run_prog = 'fglgo '
+END IF
+{--- ---}
 CALL muestra_contadores(vm_row_current, vm_num_rows)
 CALL muestra_titulos_columnas()
 MENU 'OPCIONES'
@@ -198,7 +223,7 @@ MENU 'OPCIONES'
 			CALL mostrar_movimientos_proveedor(vg_codcia, vg_codloc,
 				rm_rows[vm_row_current], rm_par.moneda)
 		END IF
-	COMMAND KEY('D') 'Doc. a Favor'
+	COMMAND KEY('F') 'Doc. a Favor'
 		IF vm_num_rows > 0 THEN
 			CALL mostrar_documentos_favor(vg_codcia, vg_codloc, 
 				    rm_rows[vm_row_current], rm_par.moneda)
@@ -210,12 +235,12 @@ MENU 'OPCIONES'
 		END IF
 	COMMAND KEY('T') 'Datos'
 		IF vm_row_current > 0 THEN
-			LET comando = 'fglrun cxpp101 ', vg_base, ' ',
+			LET comando = run_prog, 'cxpp101 ', vg_base, ' ',
 				vg_modulo, ' ', vg_codcia, ' ', 
 				vg_codloc, ' ', rm_rows[vm_row_current]
 			RUN comando 
 		END IF
-	COMMAND KEY('Z') 'Recalcular Saldos'
+	COMMAND KEY('L') 'Recalcular Saldos'
 		CALL proceso_recalcula_saldos()
 	COMMAND KEY('S') 'Salir'
 		EXIT MENU
@@ -226,7 +251,7 @@ END FUNCTION
 
 
 FUNCTION control_consulta()
-DEFINE query		VARCHAR(500)
+DEFINE query		CHAR(500)
 DEFINE expr_valor	VARCHAR(150)
 DEFINE orden		VARCHAR(20)
 DEFINE mon_aux		LIKE gent013.g13_moneda
@@ -234,14 +259,41 @@ DEFINE tit_mon		LIKE gent013.g13_nombre
 DEFINE codprov		LIKE cxpt001.p01_codprov
 DEFINE nomprov		LIKE cxpt001.p01_nomprov
 DEFINE i		SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
 LET int_flag = 0
 IF num_args() = 4 THEN
-	OPEN WINDOW w_par AT 9,8 WITH FORM "../forms/cxpf300_1"
+	LET num_rows = 10
+	LET num_cols = 68
+	IF vg_gui = 0 THEN
+		LET num_rows = 11
+		LET num_cols = 70
+	END IF
+	OPEN WINDOW w_par AT 9, 8 WITH num_rows ROWS, num_cols COLUMNS
 		ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, BORDER)
-	INPUT BY NAME rm_par.* WITHOUT DEFAULTS
+	IF vg_gui = 1 THEN
+		OPEN FORM f_300_1 FROM "../forms/cxpf300_1"
+	ELSE
+		OPEN FORM f_300_1 FROM "../forms/cxpf300_1c"
+	END IF
+	DISPLAY FORM f_300_1
+	DISPLAY BY NAME rm_par.*
+	IF vg_gui = 0 THEN
+		CALL muestra_flagsaldo(rm_par.flag_saldo)
+		CALL muestra_tiposaldo(rm_par.tipo_saldo)
+	END IF
+	LET int_flag = 0
+	INPUT BY NAME rm_par.codprov, rm_par.moneda, rm_par.flag_saldo,
+		rm_par.tipo_saldo, rm_par.valor
+		WITHOUT DEFAULTS
+		ON KEY(INTERRUPT)
+			LET int_flag = 1
+			EXIT INPUT
+        	ON KEY(F1,CONTROL-W)
+			CALL llamar_visor_teclas()
 		ON KEY(F2)
-			IF infield(codprov) THEN
+			IF INFIELD(codprov) THEN
 				CALL fl_ayuda_proveedores_localidad(vg_codcia, vg_codloc)
 					RETURNING codprov, nomprov
 				IF codprov IS NOT NULL THEN
@@ -250,7 +302,7 @@ IF num_args() = 4 THEN
 					DISPLAY BY NAME rm_par.codprov, rm_par.nomprov
 				END IF
 			END IF
-			IF infield(moneda) THEN
+			IF INFIELD(moneda) THEN
                         	CALL fl_ayuda_monedas() RETURNING mon_aux, tit_mon, i
                         	IF mon_aux IS NOT NULL THEN
 					LET rm_par.tit_mon = tit_mon
@@ -258,12 +310,16 @@ IF num_args() = 4 THEN
                         	END IF
                 	END IF
                 	LET int_flag = 0
+		BEFORE INPUT
+			--#CALL dialog.keysetlabel("F1","")
+			--#CALL dialog.keysetlabel("CONTROL-W","")
 		AFTER FIELD codprov
 			IF rm_par.codprov IS NOT NULL THEN
 				CALL fl_lee_proveedor(rm_par.codprov)
 					RETURNING rm_progen.*
 				IF rm_progen.p01_codprov IS NULL THEN
-					CALL fgl_winmessage(vg_producto, 'Proveedor no existe', 'exclamation')
+					--CALL fgl_winmessage(vg_producto,'Proveedor no existe', 'exclamation')
+					CALL fl_mostrar_mensaje('Proveedor no existe.','exclamation')
 					NEXT FIELD codprov
 				END IF
 				LET rm_par.nomprov = rm_progen.p01_nomprov
@@ -271,7 +327,8 @@ IF num_args() = 4 THEN
 				CALL fl_lee_proveedor_localidad(vg_codcia, vg_codloc, rm_par.codprov)
 					RETURNING rm_procia.*
 				IF rm_procia.p02_compania IS NULL THEN
-					CALL fgl_winmessage(vg_producto, 'Proveedor no está activado para la compañía', 'exclamation')
+					--CALL fgl_winmessage(vg_producto,'Proveedor no está activado para la compañía', 'exclamation')
+					CALL fl_mostrar_mensaje('Proveedor no está activado para la compañía.','exclamation')
 					NEXT FIELD codprov
 				END IF
 			ELSE
@@ -282,7 +339,8 @@ IF num_args() = 4 THEN
 			IF rm_par.moneda IS NOT NULL THEN
 				CALL fl_lee_moneda(rm_par.moneda) RETURNING rm_mon.*
 				IF rm_mon.g13_moneda IS NULL THEN
-					CALL fgl_winmessage(vg_producto, 'Moneda no existe', 'exclamation')
+					--CALL fgl_winmessage(vg_producto,'Moneda no existe', 'exclamation')
+					CALL fl_mostrar_mensaje('Moneda no existe.','exclamation')
 					NEXT FIELD moneda
 				END IF
 				LET rm_par.tit_mon = rm_mon.g13_nombre
@@ -290,6 +348,22 @@ IF num_args() = 4 THEN
 			ELSE
 				LET rm_par.tit_mon = NULL
 				DISPLAY BY NAME rm_par.tit_mon
+			END IF
+		AFTER FIELD flag_saldo
+			IF vg_gui = 0 THEN
+				IF rm_par.flag_saldo IS NOT NULL THEN
+				       CALL muestra_flagsaldo(rm_par.flag_saldo)
+				ELSE
+					CLEAR tit_flag_saldo
+				END IF
+			END IF
+		AFTER FIELD tipo_saldo
+			IF vg_gui = 0 THEN
+				IF rm_par.tipo_saldo IS NOT NULL THEN
+				       CALL muestra_tiposaldo(rm_par.tipo_saldo)
+				ELSE
+					CLEAR tit_tipo_saldo
+				END IF
 			END IF
 		AFTER FIELD valor
 			IF rm_par.valor < 0 OR rm_par.valor IS NULL THEN
@@ -336,7 +410,7 @@ IF rm_par.codprov IS NULL THEN
 	END CASE
 	LET query = query CLIPPED || 
 			' GROUP BY 1 ' ||
-			' HAVING ' || expr_valor ||
+			' HAVING ' || expr_valor CLIPPED ||
 			' ORDER BY ' || orden
 ELSE
 	LET query = query CLIPPED || 
@@ -376,7 +450,7 @@ END FUNCTION
 
 FUNCTION ubicarse_en_detalle()
 DEFINE i		SMALLINT
-DEFINE query		VARCHAR(500)
+DEFINE query		CHAR(300)
 DEFINE r_an		RECORD LIKE gent003.*
 DEFINE num_doc		LIKE cxpt020.p20_num_doc
 DEFINE dividendo	LIKE cxpt020.p20_dividendo
@@ -384,46 +458,61 @@ DEFINE codprov		LIKE cxpt020.p20_codprov
 DEFINE val_original	DECIMAL(14,2)
 DEFINE comando		VARCHAR(150)
 DEFINE num_oc		LIKE ordt010.c10_numero_oc
-DEFINE filtro		VARCHAR(250)
+DEFINE run_prog		CHAR(10)
+DEFINE mens		VARCHAR(50)
 
-LET rm_orden[4] = 'ASC'
-LET vm_columna_1 = 4
-LET vm_columna_2 = 1
-LET vm_filtro = ' 1 = 1 '
 WHILE TRUE
 	CALL set_count(vm_num_doc)
 	DISPLAY ARRAY rm_dprov TO rm_dprov.*
-		BEFORE ROW
-			LET i = arr_curr()
-			SELECT p20_num_doc, p20_dividendo,
-			       p20_codprov, val_ori, p20_numero_oc
-				INTO num_doc, dividendo, 
-				     codprov, val_original, num_oc
-				FROM temp_doc 
-				WHERE ROWID = rm_rowid[i]
-			MESSAGE i, ' de ', vm_num_doc, 
-				'    Valor Original: ', 
-			        val_original USING '#,###,###,##&.##'
-		BEFORE DISPLAY
-			CALL dialog.keysetlabel("ACCEPT","")
-			CALL dialog.keysetlabel("F8","Filtrar")
-		AFTER DISPLAY
-			CONTINUE DISPLAY
+		--#BEFORE ROW
+			--#LET i = arr_curr()
+			--#SELECT p20_num_doc, p20_dividendo,
+			       --#p20_codprov, val_ori, p20_numero_oc
+				--#INTO num_doc, dividendo, 
+				     --#codprov, val_original, num_oc
+				--#FROM temp_doc 
+				--#WHERE ROWID = rm_rowid[i]
+			--#MESSAGE i, ' de ', vm_num_doc, 
+				--#'    Valor Original: ', 
+			        --#val_original USING '#,###,###,##&.##'
+		--#BEFORE DISPLAY
+			--#CALL dialog.keysetlabel("ACCEPT","")
+			--#CALL dialog.keysetlabel("F1","")
+			--#CALL dialog.keysetlabel("CONTROL-W","")
+		--#AFTER DISPLAY
+			--#CONTINUE DISPLAY
 		ON KEY(INTERRUPT)
 			EXIT DISPLAY
+        	ON KEY(F1,CONTROL-W)
+			CALL control_visor_teclas_caracter_1() 
 		ON KEY(F5)
-			IF num_oc IS NULL THEN
-				CONTINUE DISPLAY
+			IF vg_gui = 0 THEN
+				LET i = arr_curr()
+				SELECT p20_num_doc, p20_dividendo,
+			       		p20_codprov, val_ori, p20_numero_oc
+					INTO num_doc, dividendo, 
+				     		codprov, val_original, num_oc
+					FROM temp_doc 
+					WHERE ROWID = rm_rowid[i]
+			END IF
+			IF num_oc IS NOT NULL THEN
+				{-- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE --}
+				LET run_prog = '; fglrun '
+				IF vg_gui = 0 THEN
+					LET run_prog = '; fglgo '
+				END IF
+				{--- ---}
+				LET comando = 'cd ..' || vg_separador || 
+				        '..' || vg_separador || 'COMPRAS' ||
+					vg_separador || 'fuentes' ||
+					vg_separador || run_prog ||
+				      	'ordp200 ' || vg_base || 
+				      	' OC ' || 
+			      		vg_codcia || ' ' || 
+				      	vg_codloc || ' ' ||
+				      	num_oc
+				RUN comando
 			END IF	
-			LET comando = 'cd ..' || vg_separador || 
-			        '..' || vg_separador || 
-				'COMPRAS' || vg_separador || 'fuentes; ' ||
-			      	'fglrun ordp200 ' || vg_base || 
-			      	' OC ' || 
-			      	vg_codcia || ' ' || 
-			      	vg_codloc || ' ' ||
-			      	num_oc
-			RUN comando
 		ON KEY(F6)
 			LET i = arr_curr()
 			SELECT p20_codprov, p20_num_doc, p20_dividendo
@@ -435,24 +524,21 @@ WHILE TRUE
 				num_doc, dividendo)
 		ON KEY(F7)
 			LET i = arr_curr()
-			LET comando = 'fglrun cxpp200 ' || vg_base || ' ' ||
-			      vg_modulo || ' ' ||
+			{- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE -}
+			LET run_prog = 'fglrun '
+			IF vg_gui = 0 THEN
+				LET run_prog = 'fglgo '
+			END IF
+			{--- ---}
+			LET comando = run_prog || 'cxpp200 ' || vg_base ||
+				' ' || vg_modulo || ' ' ||
 			      vg_codcia || ' ' || 
 			      vg_codloc || ' ' ||
 			      codprov   || ' ' ||
-			      rm_dprov[i].p20_tipo_doc || ' ' ||
-			      num_doc   || ' ' ||
+			      rm_dprov[i].p20_tipo_doc || ' "' ||
+			      num_doc   || '" ' ||
 			      dividendo
 			RUN comando
-		ON KEY(F8)
-			CALL filtrar_detalle() RETURNING filtro
-			LET int_flag = 0
-			IF filtro = 'FILTRO_CANCELADO' THEN
-				LET vm_filtro = filtro
-			ELSE
-				LET vm_filtro = ' 1 = 1 ' 
-			END IF
-			EXIT DISPLAY
 		ON KEY(F15)
 			LET i = 1
 			LET int_flag = 2
@@ -485,11 +571,10 @@ WHILE TRUE
 	IF int_flag = 1 THEN
 		EXIT WHILE
 	END IF
-	IF int_flag = 2 THEN
+	IF i <> vm_columna_1 THEN
 		LET vm_columna_2           = vm_columna_1 
 		LET rm_orden[vm_columna_2] = rm_orden[vm_columna_1]
 		LET vm_columna_1 = i 
-		LET int_flag = 0
 	END IF
 	IF rm_orden[vm_columna_1] = 'ASC' THEN
 		LET rm_orden[vm_columna_1] = 'DESC'
@@ -498,9 +583,8 @@ WHILE TRUE
 	END IF
 	LET query = 'SELECT p20_tipo_doc, num_doc, p20_fecha_emi, ',
 		        'p20_fecha_vcto, tit_estado, dias, saldo, ROWID ',
-			' FROM temp_doc ',
-			' WHERE ', vm_filtro CLIPPED,
-			' ORDER BY ',
+			'FROM temp_doc ',
+			'ORDER BY ',
 			vm_columna_1, ' ', rm_orden[vm_columna_1], ',', 
 			vm_columna_2, ' ', rm_orden[vm_columna_2] 
 	PREPARE dcol FROM query
@@ -509,66 +593,23 @@ WHILE TRUE
 	FOREACH q_dcol INTO rm_dprov[i].*, rm_rowid[i]
 		LET i = i + 1
 	END FOREACH
-	LET vm_num_doc = i - 1
 END WHILE
-MESSAGE vm_num_doc || ' documento(s)'
-
--- Regreso todo a su estado original
-LET query = 'SELECT p20_tipo_doc, num_doc, p20_fecha_emi, ',
-  	          ' p20_fecha_vcto, tit_estado, dias, saldo, ROWID ',
-	     ' FROM temp_doc ',
-	    ' ORDER BY ', vm_columna_1, ' ', rm_orden[vm_columna_1], ',', 
-			  vm_columna_2, ' ', rm_orden[vm_columna_2] 
-
--- Cursors *must be* uniquely declared 
-PREPARE dcol1 FROM query
-DECLARE q_dcol1 CURSOR FOR dcol1
-LET i = 1
-FOREACH q_dcol1 INTO rm_dprov[i].*, rm_rowid[i]
-	LET i = i + 1
-	IF i > 1000 THEN
-		EXIT FOREACH
-	END IF
-END FOREACH
-LET vm_num_doc = i - 1
-CALL set_count(vm_num_doc)
-DISPLAY ARRAY rm_dprov TO rm_dprov.*
-	BEFORE DISPLAY
-		EXIT DISPLAY
-END DISPLAY
-FREE q_dcol1
-
-END FUNCTION
-
-
-
-FUNCTION filtrar_detalle()
-DEFINE filtro		VARCHAR(250)
-
-LET int_flag = 0
-CONSTRUCT BY NAME filtro ON p20_tipo_doc, num_doc, p20_fecha_vcto, dias, 
-                            saldo 
-
-IF int_flag THEN
-	LET int_flag = 0
-	LET filtro = 'FILTRO_CANCELADO'
-END IF
-
-RETURN filtro
-
+LET mens = vm_num_doc || ' documento(s)'
+MESSAGE mens 
+                                                                                
 END FUNCTION
 
 
 
 FUNCTION muestra_titulos_columnas()
 
-DISPLAY 'Tip'           TO tit_col1
-DISPLAY 'No. Documento' TO tit_col2
-DISPLAY 'Fecha Emis.'   TO tit_col3
-DISPLAY 'Fecha Vcto.'   TO tit_col4
-DISPLAY 'Estado'        TO tit_col5
-DISPLAY 'Días'          TO tit_col6
-DISPLAY 'S a l d o'     TO tit_col7
+--#DISPLAY 'Tip'           TO tit_col1
+--#DISPLAY 'No. Documento' TO tit_col2
+--#DISPLAY 'Fecha Emis.'   TO tit_col3
+--#DISPLAY 'Fecha Vcto.'   TO tit_col4
+--#DISPLAY 'Estado'        TO tit_col5
+--#DISPLAY 'Días'          TO tit_col6
+--#DISPLAY 'S a l d o'     TO tit_col7
 
 END FUNCTION
 
@@ -602,8 +643,10 @@ FUNCTION muestra_contadores(row_current, num_rows)
 DEFINE row_current	SMALLINT
 DEFINE num_rows		SMALLINT
                                                                                 
-DISPLAY "" AT 1,1
-DISPLAY row_current, " de ", num_rows AT 1, 68
+IF vg_gui = 1 THEN
+	DISPLAY "" AT 1,1
+	DISPLAY row_current, " de ", num_rows AT 1, 68
+END IF
                                                                                 
 END FUNCTION
 
@@ -622,7 +665,8 @@ IF vm_num_rows > 0 THEN
 	SELECT * INTO rm_progen.* FROM cxpt001 
                 WHERE p01_codprov = num_registro
 	IF STATUS = NOTFOUND THEN
-		CALL fgl_winmessage (vg_producto,'No existe proveedor: ' || num_registro,'exclamation')
+		--CALL fgl_winmessage (vg_producto,'No existe proveedor: ' || num_registro,'exclamation')
+		CALL fl_mostrar_mensaje('No existe proveedor: ' || num_registro,'exclamation')
 		RETURN
 	END IF
 	DISPLAY BY NAME	rm_progen.p01_codprov, rm_progen.p01_nomprov, 
@@ -663,10 +707,10 @@ FUNCTION carga_muestra_detalle(codprov)
 DEFINE codprov           LIKE cxpt001.p01_codprov
 DEFINE r_doc		RECORD LIKE cxpt020.*
 DEFINE tit_estado	CHAR(10)
-DEFINE query            VARCHAR(400)
 DEFINE i, dias          SMALLINT
 DEFINE valor_aux, aux	DECIMAL(13,2)
 DEFINE numdoc   	CHAR(18)
+DEFINE mens		VARCHAR(50)
                                                                                 
 DELETE FROM temp_doc 
 FOR i = 1 TO fgl_scr_size('rm_dprov')
@@ -731,7 +775,8 @@ IF vm_num_doc > 0 THEN
                 DISPLAY rm_dprov[i].* TO rm_dprov[i].*
         END FOR
 END IF
-MESSAGE vm_num_doc || ' documento(s)'
+LET mens = vm_num_doc || ' documento(s)'
+MESSAGE mens
                                                                                 
 END FUNCTION
 
@@ -752,7 +797,7 @@ DEFINE columna_1	SMALLINT
 DEFINE columna_2	SMALLINT
 DEFINE num_rows		SMALLINT
 DEFINE tot_pago		DECIMAL(14,2)
-DEFINE query		VARCHAR(500)
+DEFINE query		CHAR(500)
 DEFINE comando		VARCHAR(200)
 DEFINE r_pdoc	ARRAY[100] OF RECORD
 	p23_tipo_trn	LIKE cxpt023.p23_tipo_trn,
@@ -761,19 +806,34 @@ DEFINE r_pdoc	ARRAY[100] OF RECORD
 	p22_referencia	LIKE cxpt022.p22_referencia,
 	val_pago	DECIMAL(14,2)
 	END RECORD
+DEFINE num_rows2 	SMALLINT
+DEFINE num_cols 	SMALLINT
+DEFINE run_prog		CHAR(10)
 
-LET max_rows = 100
-OPEN WINDOW w_mdoc AT 8,3 WITH FORM "../forms/cxpf300_3"
+LET max_rows  = 100
+LET num_rows2 = 15
+LET num_cols  = 76
+IF vg_gui = 0 THEN
+	LET num_rows2 = 14
+	LET num_cols  = 77
+END IF
+OPEN WINDOW w_mdoc AT 8, 3 WITH num_rows2 ROWS, num_cols COLUMNS
 	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MESSAGE LINE LAST, BORDER)
-DISPLAY 'Tp'                  TO tit_col1 
-DISPLAY 'Número'              TO tit_col2 
-DISPLAY 'Fec.Pago'            TO tit_col3
-DISPLAY 'R e f e r e n c i a' TO tit_col4 
-DISPLAY 'V a l o r'           TO tit_col5
+IF vg_gui = 1 THEN
+	OPEN FORM f_300_3 FROM "../forms/cxpf300_3"
+ELSE
+	OPEN FORM f_300_3 FROM "../forms/cxpf300_3c"
+END IF
+DISPLAY FORM f_300_3
+--#DISPLAY 'Tp'                  TO tit_col1 
+--#DISPLAY 'Número'              TO tit_col2 
+--#DISPLAY 'Fec.Pago'            TO tit_col3
+--#DISPLAY 'R e f e r e n c i a' TO tit_col4 
+--#DISPLAY 'V a l o r'           TO tit_col5
 CALL fl_lee_proveedor(codprov) RETURNING r_prov.*
 IF r_prov.p01_codprov IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe proveedor: ' || codprov,
-			    'exclamation')
+	--CALL fgl_winmessage(vg_producto,'No existe proveedor: ' || codprov,'exclamation')
+	CALL fl_mostrar_mensaje('No existe proveedor: ' || codprov,'exclamation')
 	CLOSE WINDOW w_mdoc
 	RETURN
 END IF
@@ -823,7 +883,8 @@ WHILE TRUE
 	FREE q_dpgc
 	LET num_rows = i - 1
 	IF num_rows = 0 THEN
-		CALL fgl_winmessage(vg_producto, 'Documento no tiene movimientos', 'exclamation')
+		--CALL fgl_winmessage(vg_producto,'Documento no tiene movimientos', 'exclamation')
+		CALL fl_mostrar_mensaje('Documento no tiene movimientos.','exclamation')
 		CLOSE WINDOW w_mdoc
 		RETURN
 	END IF
@@ -831,26 +892,37 @@ WHILE TRUE
 	CALL set_count(num_rows)
 	DISPLAY BY NAME tot_pago
 	DISPLAY ARRAY r_pdoc TO r_pdoc.*
-		BEFORE ROW
-			LET i = arr_curr()
-			MESSAGE i, ' de ', num_rows
-			IF r_pdoc[i].p23_tipo_trn <> 'PG' THEN
-				CALL dialog.keysetlabel("F5","")
-			ELSE
-				CALL dialog.keysetlabel("F5","Cheque")
-			END IF
-		BEFORE DISPLAY
-			CALL dialog.keysetlabel("ACCEPT","")
-		AFTER DISPLAY
-			CONTINUE DISPLAY
+		--#BEFORE ROW
+			--#LET i = arr_curr()
+			--#MESSAGE i, ' de ', num_rows
+			--#IF r_pdoc[i].p23_tipo_trn <> 'PG' THEN
+				--#CALL dialog.keysetlabel("F5","")
+			--#ELSE
+				--#CALL dialog.keysetlabel("F5","Cheque")
+			--#END IF
+		--#BEFORE DISPLAY
+			--#CALL dialog.keysetlabel("ACCEPT","")
+			--#CALL dialog.keysetlabel("F1","")
+			--#CALL dialog.keysetlabel("CONTROL-W","")
+		--#AFTER DISPLAY
+			--#CONTINUE DISPLAY
 		ON KEY(INTERRUPT)
 			EXIT DISPLAY
+        	ON KEY(F1,CONTROL-W)
+			CALL control_visor_teclas_caracter_2() 
 		ON KEY(F5)
+			LET i = arr_curr()
 			CALL muestra_cheque_emitido(codcia, codloc, codprov, r_pdoc[i].p23_tipo_trn, r_pdoc[i].p23_num_trn ) 
 		ON KEY(F6)
 			LET i = arr_curr()
-			LET comando = 'fglrun cxpp202 ' || vg_base || ' ' ||
-			      vg_modulo || ' ' ||
+			{- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE -}
+			LET run_prog = 'fglrun '
+			IF vg_gui = 0 THEN
+				LET run_prog = 'fglgo '
+			END IF
+			{--- ---}
+			LET comando = run_prog || 'cxpp202 ' || vg_base ||
+				' ' || vg_modulo || ' ' ||
 			      codcia    || ' ' || 
 			      codloc    || ' ' ||
 			      codprov   || ' ' ||
@@ -898,8 +970,8 @@ END FUNCTION
 
 
 
-FUNCTION muestra_movimientos_de_doc_favor(codcia, codloc, codprov, tipo_doc, 
-					   num_doc)
+FUNCTION muestra_movimientos_de_doc_favor(codcia, codloc, codprov, tipo_doc,
+						num_doc)
 DEFINE codcia		LIKE gent001.g01_compania
 DEFINE codloc		LIKE gent002.g02_localidad
 DEFINE codprov		LIKE cxpt001.p01_codprov
@@ -912,7 +984,7 @@ DEFINE columna_1	SMALLINT
 DEFINE columna_2	SMALLINT
 DEFINE num_rows		SMALLINT
 DEFINE tot_pago		DECIMAL(14,2)
-DEFINE query		VARCHAR(500)
+DEFINE query		CHAR(500)
 DEFINE comando		VARCHAR(200)
 DEFINE r_pdoc	ARRAY[100] OF RECORD
 	p23_tipo_trn	LIKE cxpt023.p23_tipo_trn,
@@ -921,19 +993,34 @@ DEFINE r_pdoc	ARRAY[100] OF RECORD
 	p22_referencia	LIKE cxpt022.p22_referencia,
 	val_pago	DECIMAL(14,2)
 	END RECORD
+DEFINE num_rows2 	SMALLINT
+DEFINE num_cols 	SMALLINT
+DEFINE run_prog		CHAR(10)
 
-LET max_rows = 100
-OPEN WINDOW w_ftrn AT 8,3 WITH FORM "../forms/cxpf300_7"
+LET max_rows  = 100
+LET num_rows2 = 13
+LET num_cols  = 76
+IF vg_gui = 0 THEN
+	LET num_rows2 = 14
+	LET num_cols  = 77
+END IF
+OPEN WINDOW w_ftrn AT 8, 3 WITH num_rows2 ROWS, num_cols COLUMNS
 	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MESSAGE LINE LAST, BORDER)
-DISPLAY 'Tp'                  TO tit_col1 
-DISPLAY 'Número'              TO tit_col2 
-DISPLAY 'Fecha'               TO tit_col3
-DISPLAY 'R e f e r e n c i a' TO tit_col4 
-DISPLAY 'V a l o r'           TO tit_col5
+IF vg_gui = 1 THEN
+	OPEN FORM f_300_7 FROM "../forms/cxpf300_7"
+ELSE
+	OPEN FORM f_300_7 FROM "../forms/cxpf300_7c"
+END IF
+DISPLAY FORM f_300_7
+--#DISPLAY 'Tp'                  TO tit_col1 
+--#DISPLAY 'Número'              TO tit_col2 
+--#DISPLAY 'Fecha'               TO tit_col3
+--#DISPLAY 'R e f e r e n c i a' TO tit_col4 
+--#DISPLAY 'V a l o r'           TO tit_col5
 CALL fl_lee_proveedor(codprov) RETURNING r_prov.*
 IF r_prov.p01_codprov IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe proveedor: ' || codprov,
-			    'exclamation')
+	--CALL fgl_winmessage(vg_producto,'No existe proveedor: ' || codprov,'exclamation')
+	CALL fl_mostrar_mensaje('No existe proveedor: ' || codprov,'exclamation')
 	CLOSE WINDOW w_ftrn
 	RETURN
 END IF
@@ -982,7 +1069,8 @@ WHILE TRUE
 	FREE q_dtf
 	LET num_rows = i - 1
 	IF num_rows = 0 THEN
-		CALL fgl_winmessage(vg_producto, 'Documento no tiene movimientos', 'exclamation')
+		--CALL fgl_winmessage(vg_producto,'Documento no tiene movimientos', 'exclamation')
+		CALL fl_mostrar_mensaje('Documento no tiene movimientos.','exclamation')
 		CLOSE WINDOW w_ftrn
 		RETURN
 	END IF
@@ -990,19 +1078,29 @@ WHILE TRUE
 	CALL set_count(num_rows)
 	DISPLAY BY NAME tot_pago
 	DISPLAY ARRAY r_pdoc TO r_pdoc.*
-		BEFORE ROW
-			LET i = arr_curr()
-			MESSAGE i, ' de ', num_rows
-		BEFORE DISPLAY
-			CALL dialog.keysetlabel("ACCEPT","")
-		AFTER DISPLAY
-			CONTINUE DISPLAY
+		--#BEFORE ROW
+			--#LET i = arr_curr()
+			--#MESSAGE i, ' de ', num_rows
+		--#BEFORE DISPLAY
+			--#CALL dialog.keysetlabel("ACCEPT","")
+			--#CALL dialog.keysetlabel("F1","")
+			--#CALL dialog.keysetlabel("CONTROL-W","")
+		--#AFTER DISPLAY
+			--#CONTINUE DISPLAY
 		ON KEY(INTERRUPT)
 			EXIT DISPLAY
+        	ON KEY(F1,CONTROL-W)
+			CALL control_visor_teclas_caracter_3() 
 		ON KEY(F5)
 			LET i = arr_curr()
-			LET comando = 'fglrun cxpp202 ' || vg_base || ' ' ||
-			      vg_modulo || ' ' ||
+			{- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE -}
+			LET run_prog = 'fglrun '
+			IF vg_gui = 0 THEN
+				LET run_prog = 'fglgo '
+			END IF
+			{--- ---}
+			LET comando = run_prog || 'cxpp202 ' || vg_base ||
+				' ' || vg_modulo || ' ' ||
 			      codcia    || ' ' || 
 			      codloc    || ' ' ||
 			      codprov   || ' ' ||
@@ -1062,7 +1160,7 @@ DEFINE columna_1	SMALLINT
 DEFINE columna_2	SMALLINT
 DEFINE num_rows		SMALLINT
 DEFINE tot_pago		DECIMAL(14,2)
-DEFINE query		VARCHAR(500)
+DEFINE query		CHAR(500)
 DEFINE comando		VARCHAR(200)
 DEFINE dividendo	SMALLINT
 DEFINE r_movc	ARRAY[800] OF RECORD
@@ -1075,22 +1173,37 @@ DEFINE r_movc	ARRAY[800] OF RECORD
 	p22_moneda	LIKE cxpt022.p22_moneda,
 	val_pago	DECIMAL(14,2)
 	END RECORD
+DEFINE num_rows2 	SMALLINT
+DEFINE num_cols 	SMALLINT
+DEFINE run_prog		CHAR(10)
 
-LET max_rows = 800
-OPEN WINDOW w_dmprov AT 8,3 WITH FORM "../forms/cxpf300_4"
+LET max_rows  = 800
+LET num_rows2 = 16
+LET num_cols  = 78
+IF vg_gui = 0 THEN
+	LET num_rows2 = 14
+	LET num_cols  = 76
+END IF
+OPEN WINDOW w_dmprov AT 8, 3 WITH num_rows2 ROWS, num_cols COLUMNS
 	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MESSAGE LINE LAST, BORDER)
-DISPLAY 'Tp'                  TO tit_col1 
-DISPLAY 'Número'              TO tit_col2 
-DISPLAY 'Tp'                  TO tit_col3 
-DISPLAY 'Documento'           TO tit_col4
-DISPLAY 'Fec. Elim'           TO tit_col5 
-DISPLAY 'Fec. Pago'           TO tit_col6 
-DISPLAY 'Mo'                  TO tit_col7 
-DISPLAY 'V a l o r'           TO tit_col8
+IF vg_gui = 1 THEN
+	OPEN FORM f_300_4 FROM "../forms/cxpf300_4"
+ELSE
+	OPEN FORM f_300_4 FROM "../forms/cxpf300_4c"
+END IF
+DISPLAY FORM f_300_4
+--#DISPLAY 'Tp'                  TO tit_col1 
+--#DISPLAY 'Número'              TO tit_col2 
+--#DISPLAY 'Tp'                  TO tit_col3 
+--#DISPLAY 'Documento'           TO tit_col4
+--#DISPLAY 'Fec. Elim'           TO tit_col5 
+--#DISPLAY 'Fec. Pago'           TO tit_col6 
+--#DISPLAY 'Mo'                  TO tit_col7 
+--#DISPLAY 'V a l o r'           TO tit_col8
 CALL fl_lee_proveedor(codprov) RETURNING r_prov.*
 IF r_prov.p01_codprov IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe proveedor: ' || codprov,
-			    'exclamation')
+	--CALL fgl_winmessage(vg_producto,'No existe proveedor: ' || codprov,'exclamation')
+	CALL fl_mostrar_mensaje('No existe proveedor: ' || codprov,'exclamation')
 	CLOSE WINDOW w_dmprov
 	RETURN
 END IF
@@ -1141,7 +1254,8 @@ WHILE TRUE
 	FREE q_dmprov
 	LET num_rows = i - 1
 	IF num_rows = 0 THEN
-		CALL fgl_winmessage(vg_producto, 'Proveedor no tiene movimientos', 'exclamation')
+		--CALL fgl_winmessage(vg_producto,'Proveedor no tiene movimientos', 'exclamation')
+		CALL fl_mostrar_mensaje('Proveedor no tiene movimientos.','exclamation')
 		CLOSE WINDOW w_dmprov
 		RETURN
 	END IF
@@ -1149,25 +1263,37 @@ WHILE TRUE
 	CALL set_count(num_rows)
 	DISPLAY BY NAME tot_pago
 	DISPLAY ARRAY r_movc TO r_movc.*
-		BEFORE ROW
-			LET j = arr_curr()
-			MESSAGE j, ' de ', num_rows
-			IF r_movc[j].p23_tipo_trn <> 'PG' THEN
-				CALL dialog.keysetlabel("F5","")
-			ELSE
-				CALL dialog.keysetlabel("F5","Cheque")
-			END IF
-		BEFORE DISPLAY
-			CALL dialog.keysetlabel("ACCEPT","")
-		AFTER DISPLAY
-			CONTINUE DISPLAY
+		--#BEFORE ROW
+			--#LET j = arr_curr()
+			--#MESSAGE j, ' de ', num_rows
+			--#IF r_movc[j].p23_tipo_trn <> 'PG' THEN
+				--#CALL dialog.keysetlabel("F5","")
+			--#ELSE
+				--#CALL dialog.keysetlabel("F5","Cheque")
+			--#END IF
+		--#BEFORE DISPLAY
+			--#CALL dialog.keysetlabel("ACCEPT","")
+			--#CALL dialog.keysetlabel("F1","")
+			--#CALL dialog.keysetlabel("CONTROL-W","")
+		--#AFTER DISPLAY
+			--#CONTINUE DISPLAY
 		ON KEY(INTERRUPT)
 			EXIT DISPLAY
+        	ON KEY(F1,CONTROL-W)
+			CALL control_visor_teclas_caracter_4() 
 		ON KEY(F5)
+			LET j = arr_curr()
 			CALL muestra_cheque_emitido(codcia, codloc, codprov, r_movc[j].p23_tipo_trn, r_movc[j].p23_num_trn) 
 		ON KEY(F6)
-			LET comando = 'fglrun cxpp202 ' || vg_base || ' ' ||
-			      vg_modulo || ' ' ||
+			LET j = arr_curr()
+			{- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE -}
+			LET run_prog = 'fglrun '
+			IF vg_gui = 0 THEN
+				LET run_prog = 'fglgo '
+			END IF
+			{--- ---}
+			LET comando = run_prog || 'cxpp202 ' || vg_base ||
+				' ' || vg_modulo || ' ' ||
 			      codcia    || ' ' || 
 			      codloc    || ' ' ||
 			      codprov   || ' ' ||
@@ -1240,7 +1366,7 @@ DEFINE columna_2	SMALLINT
 DEFINE num_rows		SMALLINT
 DEFINE tot_valor	DECIMAL(14,2)
 DEFINE tot_saldo	DECIMAL(14,2)
-DEFINE query		VARCHAR(500)
+DEFINE query		CHAR(500)
 DEFINE dividendo	SMALLINT
 DEFINE comando		VARCHAR(200)
 DEFINE r_dda	ARRAY[500] OF RECORD
@@ -1250,19 +1376,34 @@ DEFINE r_dda	ARRAY[500] OF RECORD
 	p21_valor	LIKE cxpt021.p21_valor,
 	p21_saldo	LIKE cxpt021.p21_saldo
 	END RECORD
+DEFINE num_rows2 	SMALLINT
+DEFINE num_cols 	SMALLINT
+DEFINE run_prog		CHAR(10)
 
-LET max_rows = 500
-OPEN WINDOW w_dda AT 6,11 WITH FORM "../forms/cxpf300_5"
+LET max_rows  = 500
+LET num_rows2 = 15
+LET num_cols  = 62
+IF vg_gui = 0 THEN
+	LET num_rows2 = 14
+	LET num_cols  = 63
+END IF
+OPEN WINDOW w_dda AT 6, 11 WITH num_rows2 ROWS, num_cols COLUMNS
 	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MESSAGE LINE LAST, BORDER)
-DISPLAY 'Tipo'                TO tit_col1 
-DISPLAY 'Número'              TO tit_col2 
-DISPLAY 'Fec. Pago'           TO tit_col3 
-DISPLAY 'V a l o r'           TO tit_col4
-DISPLAY 'S a l d o'           TO tit_col5
+IF vg_gui = 1 THEN
+	OPEN FORM f_300_5 FROM "../forms/cxpf300_5"
+ELSE
+	OPEN FORM f_300_5 FROM "../forms/cxpf300_5c"
+END IF
+DISPLAY FORM f_300_5
+--#DISPLAY 'Tipo'                TO tit_col1 
+--#DISPLAY 'Número'              TO tit_col2 
+--#DISPLAY 'Fec. Pago'           TO tit_col3 
+--#DISPLAY 'V a l o r'           TO tit_col4
+--#DISPLAY 'S a l d o'           TO tit_col5
 CALL fl_lee_proveedor(codprov) RETURNING r_prov.*
 IF r_prov.p01_codprov IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe proveedor: ' || codprov,
-			    'exclamation')
+	--CALL fgl_winmessage(vg_producto,'No existe proveedor: ' || codprov,'exclamation')
+	CALL fl_mostrar_mensaje('No existe proveedor: ' || codprov,'exclamation')
 	CLOSE WINDOW w_dda
 	RETURN
 END IF
@@ -1308,7 +1449,8 @@ WHILE TRUE
 	FREE q_dda
 	LET num_rows = i - 1
 	IF num_rows = 0 THEN
-		CALL fgl_winmessage(vg_producto, 'Proveedor no tiene documentos a favor', 'exclamation')
+		--CALL fgl_winmessage(vg_producto,'Proveedor no tiene documentos a favor', 'exclamation')
+		CALL fl_mostrar_mensaje('Proveedor no tiene documentos a favor.','exclamation')
 		CLOSE WINDOW w_dda
 		RETURN
 	END IF
@@ -1316,27 +1458,38 @@ WHILE TRUE
 	CALL set_count(num_rows)
 	DISPLAY BY NAME tot_valor, tot_saldo
 	DISPLAY ARRAY r_dda TO r_dda.*
-		BEFORE ROW
-			LET i = arr_curr()
-			MESSAGE i, ' de ', num_rows
-			IF r_dda[i].p21_tipo_doc <> 'PA' THEN
-				CALL dialog.keysetlabel("F5","")
-			ELSE
-				CALL dialog.keysetlabel("F5","Cheque")
-			END IF
-		BEFORE DISPLAY
-			CALL dialog.keysetlabel("ACCEPT","")
-		AFTER DISPLAY
-			CONTINUE DISPLAY
+		--#BEFORE ROW
+			--#LET i = arr_curr()
+			--#MESSAGE i, ' de ', num_rows
+			--#IF r_dda[i].p21_tipo_doc <> 'PA' THEN
+				--#CALL dialog.keysetlabel("F5","")
+			--#ELSE
+				--#CALL dialog.keysetlabel("F5","Cheque")
+			--#END IF
+		--#BEFORE DISPLAY
+			--#CALL dialog.keysetlabel("ACCEPT","")
+			--#CALL dialog.keysetlabel("F1","")
+			--#CALL dialog.keysetlabel("CONTROL-W","")
+		--#AFTER DISPLAY
+			--#CONTINUE DISPLAY
 		ON KEY(INTERRUPT)
 			EXIT DISPLAY
+        	ON KEY(F1,CONTROL-W)
+			CALL control_visor_teclas_caracter_5() 
 		ON KEY(F5)
+			LET i = arr_curr()
 			CALL muestra_cheque_emitido(codcia, codloc, codprov,
 				r_dda[i].p21_tipo_doc, r_dda[i].p21_num_doc) 
 		ON KEY(F6)
 			LET i = arr_curr()
-			LET comando = 'fglrun cxpp201 ' || vg_base || ' ' ||
-			      vg_modulo || ' ' ||
+			{- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE -}
+			LET run_prog = 'fglrun '
+			IF vg_gui = 0 THEN
+				LET run_prog = 'fglgo '
+			END IF
+			{--- ---}
+			LET comando = run_prog || 'cxpp201 ' || vg_base ||
+				' ' || vg_modulo || ' ' ||
 			      vg_codcia || ' ' || 
 			      vg_codloc || ' ' ||
 			      codprov   || ' ' ||
@@ -1344,6 +1497,7 @@ WHILE TRUE
 			      r_dda[i].p21_num_doc
 			RUN comando
 		ON KEY(F7)
+			LET i = arr_curr()
 			CALL muestra_movimientos_de_doc_favor(codcia, codloc, 
 			codprov, r_dda[i].p21_tipo_doc, r_dda[i].p21_num_doc) 
 		ON KEY(F15)
@@ -1401,6 +1555,8 @@ DEFINE r_fav		RECORD LIKE cxpt021.*
 DEFINE r_trn		RECORD LIKE cxpt022.*
 DEFINE comando		VARCHAR(200)
 DEFINE orden_pago	INTEGER
+DEFINE num_cols 	SMALLINT
+DEFINE run_prog		CHAR(10)
 
 CALL fl_lee_tipo_doc_tesoreria(tipo_trn) RETURNING r_td.*
 IF r_td.p04_tipo IS NULL THEN
@@ -1423,10 +1579,21 @@ CALL fl_lee_orden_pago_cxp(codcia, codloc, orden_pago)
 IF r.p24_orden_pago IS NULL THEN
 	RETURN
 END IF
-OPEN WINDOW w_pch AT 7,20 WITH FORM "../forms/cxpf300_6"
-	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, BORDER, MENU LINE 0)
+LET num_cols = 49
+IF vg_gui = 0 THEN
+	LET num_cols = 50
+END IF
+OPEN WINDOW w_pch AT 7, 20 WITH 8 ROWS, num_cols COLUMNS
+	ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, BORDER, MENU LINE 0)
+IF vg_gui = 1 THEN
+	OPEN FORM f_300_6 FROM "../forms/cxpf300_6"
+ELSE
+	OPEN FORM f_300_6 FROM "../forms/cxpf300_6c"
+END IF
+DISPLAY FORM f_300_6
 IF status = NOTFOUND THEN
-	CALL fgl_winmessage(vg_producto, 'No existe registro en órdenes de pago', 'exclamation')
+	--CALL fgl_winmessage(vg_producto,'No existe registro en órdenes de pago', 'exclamation')
+	CALL fl_mostrar_mensaje('No existe registro en órdenes de pago.','exclamation')
 	CLOSE WINDOW w_pch
 	RETURN
 END IF
@@ -1434,13 +1601,19 @@ CALL fl_lee_banco_general(r.p24_banco) RETURNING r_ban.*
 DISPLAY r_ban.g08_nombre TO banco
 DISPLAY BY NAME r.p24_numero_cta, r.p24_numero_che, r.p24_tip_contable, 
 		r.p24_num_contable
+{-- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE --}
+LET run_prog = '; fglrun '
+IF vg_gui = 0 THEN
+	LET run_prog = '; fglgo '
+END IF
+{--- ---}
 LET int_flag = 0
 MENU 'OPCIONES'
 	COMMAND KEY('C') 'Contabilización' 
 		LET comando = 'cd ..', vg_separador, '..', vg_separador,
-			       'CONTABILIDAD', vg_separador, 'fuentes; ',
-			       'fglrun ctbp201 ', vg_base, ' CB ',
-				vg_codcia, ' ', vg_codloc, ' ', r.p24_tip_contable, ' ',
+			       'CONTABILIDAD', vg_separador, 'fuentes',
+				vg_separador, run_prog, 'ctbp201 ', vg_base,
+				' CB ', vg_codcia, ' ', r.p24_tip_contable, ' ',
 				r.p24_num_contable
 		RUN comando
 	COMMAND KEY('S') 'Salir'
@@ -1450,7 +1623,7 @@ LET int_flag = 0
 CLOSE WINDOW w_pch
 
 END FUNCTION
-			        
+
 
 
 FUNCTION mostrar_retenciones(codcia, codloc, codprov, moneda)
@@ -1467,7 +1640,7 @@ DEFINE columna_2	SMALLINT
 DEFINE num_rows		SMALLINT
 DEFINE tot_base		DECIMAL(14,2)
 DEFINE tot_ret		DECIMAL(14,2)
-DEFINE query		VARCHAR(500)
+DEFINE query		CHAR(500)
 DEFINE comando		VARCHAR(200)
 DEFINE r_ret	ARRAY[800] OF RECORD
 	fecing		DATE,
@@ -1478,22 +1651,36 @@ DEFINE r_ret	ARRAY[800] OF RECORD
 	p28_valor_base	LIKE cxpt028.p28_valor_base,
 	p28_valor_ret	LIKE cxpt028.p28_valor_ret
 	END RECORD
+DEFINE num_rows2 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
-LET max_rows = 800
-OPEN WINDOW w_ret AT 8,3 WITH FORM "../forms/cxpf300_8"
+LET max_rows  = 800
+LET num_rows2 = 15
+LET num_cols  = 75
+IF vg_gui = 0 THEN
+	LET num_rows2 = 14
+	LET num_cols  = 74
+END IF
+OPEN WINDOW w_ret AT 8, 3 WITH num_rows2 ROWS, num_cols COLUMNS
 	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MESSAGE LINE LAST, BORDER)
-DISPLAY 'Fecha'               TO tit_col1 
-DISPLAY 'Núm.'                TO tit_col2 
-DISPLAY 'Tp'                  TO tit_col3
-DISPLAY 'Factura'             TO tit_col4 
-DISPLAY ' % '                 TO tit_col5 
-DISPLAY 'Valor Base'          TO tit_col6 
-DISPLAY 'Valor Reten.'        TO tit_col7 
+IF vg_gui = 1 THEN
+	OPEN FORM f_300_8 FROM "../forms/cxpf300_8"
+ELSE
+	OPEN FORM f_300_8 FROM "../forms/cxpf300_8c"
+END IF
+DISPLAY FORM f_300_8
+--#DISPLAY 'Fecha'               TO tit_col1 
+--#DISPLAY 'Núm.'                TO tit_col2 
+--#DISPLAY 'Tp'                  TO tit_col3
+--#DISPLAY 'Factura'             TO tit_col4 
+--#DISPLAY ' % '                 TO tit_col5 
+--#DISPLAY 'Valor Base'          TO tit_col6 
+--#DISPLAY 'Valor Reten.'        TO tit_col7 
 CALL fl_lee_proveedor(codprov) RETURNING r_prov.*
 CALL fl_lee_moneda(moneda) RETURNING r_mon.*
 IF r_prov.p01_codprov IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe proveedor: ' || codprov,
-			    'exclamation')
+	--CALL fgl_winmessage(vg_producto,'No existe proveedor: ' || codprov,'exclamation')
+	CALL fl_mostrar_mensaje('No existe proveedor: ' || codprov,'exclamation')
 	CLOSE WINDOW w_ret
 	RETURN
 END IF
@@ -1542,7 +1729,8 @@ WHILE TRUE
 	FREE q_dret
 	LET num_rows = i - 1
 	IF num_rows = 0 THEN
-		CALL fgl_winmessage(vg_producto, 'Proveedor no tiene retenciones', 'exclamation')
+		--CALL fgl_winmessage(vg_producto,'Proveedor no tiene retenciones', 'exclamation')
+		CALL fl_mostrar_mensaje('Proveedor no tiene retenciones.','exclamation')
 		CLOSE WINDOW w_ret
 		RETURN
 	END IF
@@ -1550,16 +1738,21 @@ WHILE TRUE
 	CALL set_count(num_rows)
 	DISPLAY BY NAME tot_base, tot_ret
 	DISPLAY ARRAY r_ret TO r_ret.*
-		BEFORE ROW
-			LET j = arr_curr()
-			MESSAGE j, ' de ', num_rows
-		BEFORE DISPLAY
-			CALL dialog.keysetlabel("ACCEPT","")
-		AFTER DISPLAY
-			CONTINUE DISPLAY
+		--#BEFORE ROW
+			--#LET j = arr_curr()
+			--#MESSAGE j, ' de ', num_rows
+		--#BEFORE DISPLAY
+			--#CALL dialog.keysetlabel("ACCEPT","")
+			--#CALL dialog.keysetlabel("F1","")
+			--#CALL dialog.keysetlabel("CONTROL-W","")
+		--#AFTER DISPLAY
+			--#CONTINUE DISPLAY
 		ON KEY(INTERRUPT)
 			EXIT DISPLAY
+        	ON KEY(F1,CONTROL-W)
+			CALL control_visor_teclas_caracter_6() 
 		ON KEY(F5)
+			LET j = arr_curr()
 			CALL imprimir_retenciones(r_ret[j].p28_num_ret)
 			LET int_flag = 0
 		ON KEY(F15)
@@ -1626,13 +1819,19 @@ END FUNCTION
 
 
 FUNCTION imprimir_retenciones(num_ret)
-
 DEFINE num_ret		LIKE cxpt027.p27_num_ret
 DEFINE comando		VARCHAR(255)
+DEFINE run_prog		CHAR(10)
 
+{-- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE --}
+LET run_prog = '; fglrun '
+IF vg_gui = 0 THEN
+	LET run_prog = '; fglgo '
+END IF
+{--- ---}
 LET comando = 'cd ..' || vg_separador || '..' || vg_separador || 
-	      'TESORERIA' || vg_separador || 'fuentes; ' ||
-	      'fglrun cxpp405 ' || vg_base || ' TE ' || 
+	      'TESORERIA' || vg_separador || 'fuentes' || vg_separador ||
+	      run_prog || 'cxpp405 ' || vg_base || ' TE ' || 
 	      vg_codcia || ' ' || vg_codloc || ' ' || num_ret
 
 RUN comando
@@ -1641,33 +1840,164 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION llamar_visor_teclas()
+DEFINE a		CHAR(1)
 
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
+IF vg_gui = 0 THEN
+	CALL fl_visor_teclas_caracter() RETURNING int_flag 
+	LET a = fgl_getkey()
+	CLOSE WINDOW w_tf
+	LET int_flag = 0
 END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
+
+END FUNCTION
+
+
+
+FUNCTION control_visor_teclas_caracter_1() 
+DEFINE a, fila		INTEGER
+
+CALL fl_visor_teclas_caracter() RETURNING fila
+LET a = fila + 2
+DISPLAY 'Teclas exclusivas de este proceso:' AT a,2 ATTRIBUTE(REVERSE)	
+LET a = a + 1
+DISPLAY '<F5>      Orden Compra'             AT a,2
+DISPLAY  'F5' AT a,3 ATTRIBUTE(REVERSE)
+LET a = a + 1
+DISPLAY '<F6>      Movimientos'              AT a,2
+DISPLAY  'F6' AT a,3 ATTRIBUTE(REVERSE)
+LET a = a + 1
+DISPLAY '<F7>      Documento'                AT a,2
+DISPLAY  'F7' AT a,3 ATTRIBUTE(REVERSE)
+LET a = fgl_getkey()
+CLOSE WINDOW w_tf
+
+END FUNCTION
+
+
+
+FUNCTION control_visor_teclas_caracter_2() 
+DEFINE a, fila		INTEGER
+
+CALL fl_visor_teclas_caracter() RETURNING fila
+LET a = fila + 2
+DISPLAY 'Teclas exclusivas de este proceso:' AT a,2 ATTRIBUTE(REVERSE)	
+LET a = a + 1
+DISPLAY '<F5>      Cheque'                   AT a,2
+DISPLAY  'F5' AT a,3 ATTRIBUTE(REVERSE)
+LET a = a + 1
+DISPLAY '<F6>      Documento'                AT a,2
+DISPLAY  'F6' AT a,3 ATTRIBUTE(REVERSE)
+LET a = fgl_getkey()
+CLOSE WINDOW w_tf
+
+END FUNCTION
+
+
+
+FUNCTION control_visor_teclas_caracter_3() 
+DEFINE a, fila		INTEGER
+
+CALL fl_visor_teclas_caracter() RETURNING fila
+LET a = fila + 2
+DISPLAY 'Teclas exclusivas de este proceso:' AT a,2 ATTRIBUTE(REVERSE)	
+LET a = a + 1
+DISPLAY '<F5>      Documento'                AT a,2
+DISPLAY  'F5' AT a,3 ATTRIBUTE(REVERSE)
+LET a = fgl_getkey()
+CLOSE WINDOW w_tf
+
+END FUNCTION
+
+
+
+FUNCTION control_visor_teclas_caracter_4() 
+DEFINE a, fila		INTEGER
+
+CALL fl_visor_teclas_caracter() RETURNING fila
+LET a = fila + 2
+DISPLAY 'Teclas exclusivas de este proceso:' AT a,2 ATTRIBUTE(REVERSE)	
+LET a = a + 1
+DISPLAY '<F5>      Pago Caja'                AT a,2
+DISPLAY  'F5' AT a,3 ATTRIBUTE(REVERSE)
+LET a = a + 1
+DISPLAY '<F6>      Documento'                AT a,2
+DISPLAY  'F6' AT a,3 ATTRIBUTE(REVERSE)
+LET a = fgl_getkey()
+CLOSE WINDOW w_tf
+
+END FUNCTION
+
+
+
+FUNCTION control_visor_teclas_caracter_5() 
+DEFINE a, fila		INTEGER
+
+CALL fl_visor_teclas_caracter() RETURNING fila
+LET a = fila + 2
+DISPLAY 'Teclas exclusivas de este proceso:' AT a,2 ATTRIBUTE(REVERSE)	
+LET a = a + 1
+DISPLAY '<F5>      Cheque'                   AT a,2
+DISPLAY  'F5' AT a,3 ATTRIBUTE(REVERSE)
+LET a = a + 1
+DISPLAY '<F6>      Documento'                AT a,2
+DISPLAY  'F6' AT a,3 ATTRIBUTE(REVERSE)
+LET a = a + 1
+DISPLAY '<F7>      Movimientos'              AT a,2
+DISPLAY  'F7' AT a,3 ATTRIBUTE(REVERSE)
+LET a = fgl_getkey()
+CLOSE WINDOW w_tf
+
+END FUNCTION
+
+
+
+FUNCTION control_visor_teclas_caracter_6() 
+DEFINE a, fila		INTEGER
+
+CALL fl_visor_teclas_caracter() RETURNING fila
+LET a = fila + 2
+DISPLAY 'Teclas exclusivas de este proceso:' AT a,2 ATTRIBUTE(REVERSE)	
+LET a = a + 1
+DISPLAY '<F5>      Imprimir'                AT a,2
+DISPLAY  'F5' AT a,3 ATTRIBUTE(REVERSE)
+LET a = fgl_getkey()
+CLOSE WINDOW w_tf
+
+END FUNCTION
+
+
+
+FUNCTION muestra_tiposaldo(tiposaldo)
+DEFINE tiposaldo	CHAR(1)
+
+CASE tiposaldo
+	WHEN 'A'
+		DISPLAY 'A FAVOR' TO tit_tipo_saldo
+	WHEN 'P'
+		DISPLAY 'POR VENCER' TO tit_tipo_saldo
+	WHEN 'V'
+		DISPLAY 'VENCIDOS' TO tit_tipo_saldo
+	WHEN 'T'
+		DISPLAY 'T O D O S' TO tit_tipo_saldo
+	OTHERWISE
+		CLEAR tipo_saldo, tit_tipo_saldo
+END CASE
+
+END FUNCTION
+
+
+
+FUNCTION muestra_flagsaldo(flagsaldo)
+DEFINE flagsaldo	CHAR(1)
+
+CASE flagsaldo
+	WHEN 'S'
+		DISPLAY 'CON SALDO' TO tit_flag_saldo
+	WHEN 'T'
+		DISPLAY 'T O D O S' TO tit_flag_saldo
+	OTHERWISE
+		CLEAR flag_saldo, tit_flag_saldo
+END CASE
 
 END FUNCTION

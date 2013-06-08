@@ -1,0 +1,40 @@
+DATABASE aceros
+SCREEN 
+{
+
+	        DOCUMENTOS A FAVOR DEL CLIENTE
+
+ Tip  No. Doc.  Mo Fecha            Saldo Doc.      Valor a usar
+ [a0|c003      |a1|c004      |c6              ][c7              ] 
+ [a0|c003      |a1|c004      |c6              ][c7              ] 
+ [a0|c003      |a1|c004      |c6              ][c7              ] 
+ [a0|c003      |a1|c004      |c6              ][c7              ] 
+ [a0|c003      |a1|c004      |c6              ][c7              ] 
+ [a0|c003      |a1|c004      |c6              ][c7              ] 
+ 						----------------
+                                        Total: [c8              ]
+}
+TABLES
+	rept027
+	rept023
+	cxct021
+ATTRIBUTES
+a0   = cxct021.z21_tipo_doc, REVERSE, NOENTRY, UPSHIFT;
+c003 = cxct021.z21_num_doc, REVERSE, NOENTRY;
+a1   = cxct021.z21_moneda, REVERSE, NOENTRY, UPSHIFT;
+c004 = cxct021.z21_fecha_emi, REVERSE, NOENTRY,
+	FORMAT='dd-mm-yyyy';
+c6  = cxct021.z21_saldo, REVERSE, NOENTRY,
+	FORMAT = '#,###,###,##&.##';
+c7  = rept027.r27_valor, REVERSE, FORMAT='#,###,###,##&.##',
+	INCLUDE = (0.00 TO 999999999.99);
+c8  = FORMONLY.total_anticipos TYPE DECIMAL(11,2), REVERSE, NOENTRY, 
+	FORMAT='#,###,###,##&.##';
+end
+
+INSTRUCTIONS     
+DELIMITERS '||'
+SCREEN RECORD r_detalle_2[6] (z21_tipo_doc,  z21_num_doc, z21_moneda, 
+			      z21_fecha_emi, z21_saldo,   r27_valor)
+
+

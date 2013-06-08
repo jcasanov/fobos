@@ -1,0 +1,32 @@
+DATABASE aceros
+SCREEN
+{
+
+  TRANSACCIONES DE INVENTARIO
+ -----------------------------------------------------------------
+  TP  Número      Cliente/Proveedor            Referencia
+ -----------------------------------------------------------------
+ [c1|c011    |c012                     |c013                     ]
+ [c1|c011    |c012                     |c013                     ]
+ [c1|c011    |c012                     |c013                     ]
+ [c1|c011    |c012                     |c013                     ]
+ [c1|c011    |c012                     |c013                     ]
+ [c1|c011    |c012                     |c013                     ]
+ [c1|c011    |c012                     |c013                     ]
+ [c1|c011    |c012                     |c013                     ]
+ [c1|c011    |c012                     |c013                     ]
+ [c1|c011    |c012                     |c013                     ]
+
+}
+TABLES
+rept019
+ATTRIBUTES
+c1   = rept019.r19_cod_tran, UPSHIFT, NOENTRY, REVERSE;
+c011 = rept019.r19_num_tran, UPSHIFT, REVERSE;
+c012 = rept019.r19_nomcli, UPSHIFT, REVERSE;
+c013 = rept019.r19_referencia, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_transac[10] (r19_cod_tran, r19_num_tran, r19_nomcli,
+				r19_referencia)

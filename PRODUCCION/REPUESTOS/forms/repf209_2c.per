@@ -1,0 +1,29 @@
+DATABASE aceros
+SCREEN
+{
+
+		   	<<<< OTROS DATOS >>>>		
+  Pedido Cliente: [g0        ] 	       Teléfono:[c         ]
+ Orden de Compra: [a               ]
+    Cupo Crédito: [g1              ] 
+   Saldo Crédito: [g5              ]
+         Paridad: [g2              ]
+      Referencia: [g3                                      ]
+
+   Ingresado Por: [g4         ]  
+}
+TABLES
+	rept023 -- CABECERA
+ATTRIBUTES
+g1  = FORMONLY.cupo_credito TYPE DECIMAL(12,2), REVERSE, 
+	FORMAT = '#,###,###,##&.##', NOENTRY;
+g5  = FORMONLY.saldo_credito TYPE DECIMAL(12,2), REVERSE, 
+	FORMAT = '#,###,###,##&.##', NOENTRY;
+g2  = rept023.r23_paridad, REVERSE, NOENTRY;
+g3  = rept023.r23_referencia, UPSHIFT;
+a   = rept023.r23_ord_compra, UPSHIFT;
+c   = rept023.r23_telcli, REVERSE, UPSHIFT,
+	COMMENTS = 'Teléfono del Cliente. ';
+g0  = rept023.r23_ped_cliente, UPSHIFT;
+g4  = rept023.r23_usuario, REVERSE, UPSHIFT, NOENTRY;
+END

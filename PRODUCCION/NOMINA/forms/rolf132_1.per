@@ -1,0 +1,29 @@
+DATABASE aceros
+SCREEN
+{
+
+
+                                                       Estado: [c][c000     ]
+
+            Rubro: [c001  ] [c002                          ]
+
+   Identificación: [c003         ]
+
+
+          Usuario: [c004      ]       Fecha de Ingreso: [c005               ]
+
+}
+TABLES
+rolt067
+ATTRIBUTES
+c    = rolt067.n67_estado, NOENTRY, UPSHIFT, REVERSE;
+c000 = FORMONLY.tit_estado, NOENTRY, UPSHIFT, REVERSE;
+c001 = rolt067.n67_cod_rubro, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = rolt067.n67_nombre, AUTONEXT, UPSHIFT, REVERSE;
+c003 = rolt067.n67_flag_ident, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'RADIO', CONFIG = 'I Ingreso E Egreso',
+	COMMENTS = 'Escoja el tipo de detalle de identificación del rubro.';
+c004 = rolt067.n67_usuario, NOENTRY, UPSHIFT, REVERSE;
+c005 = rolt067.n67_fecing, NOENTRY, UPSHIFT, REVERSE;
+END

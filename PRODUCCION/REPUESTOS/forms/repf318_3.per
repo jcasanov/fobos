@@ -1,0 +1,64 @@
+DATABASE aceros
+SCREEN
+{
+
+                       FACTURAS PENDIENTES ENTREGAR
+                       ---------------------------
+Bodega: [c2]   [c022                          ]
+  Item: [c023  |c024                                                    ]
+                                                           [c30] de [c31]
+ [c0|c001    |c002                        |c003      |c004    |c005      ]
+[c1|c011    |c012                        |c013      |c014    |c015      ]
+[c1|c011    |c012                        |c013      |c014    |c015      ]
+[c1|c011    |c012                        |c013      |c014    |c015      ]
+[c1|c011    |c012                        |c013      |c014    |c015      ]
+[c1|c011    |c012                        |c013      |c014    |c015      ]
+[c1|c011    |c012                        |c013      |c014    |c015      ]
+[c1|c011    |c012                        |c013      |c014    |c015      ]
+[c1|c011    |c012                        |c013      |c014    |c015      ]
+                                                   Total ==> [c020      ]
+[c021                                                 ]
+
+}
+TABLES
+rept002
+rept010
+rept019
+rept034
+ATTRIBUTES
+c2   = rept002.r02_codigo, NOENTRY, REVERSE, UPSHIFT;
+c022 = rept002.r02_nombre, NOENTRY, REVERSE, UPSHIFT;
+c023 = rept010.r10_codigo, NOENTRY, REVERSE, UPSHIFT;
+c024 = rept010.r10_nombre, NOENTRY, REVERSE, UPSHIFT;
+
+c0   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c002 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c003 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c004 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c005 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+c1   = rept019.r19_cod_tran, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c011 = rept019.r19_num_tran, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c012 = rept019.r19_nomcli, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c013 = FORMONLY.r19_fecing, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+c014 = rept034.r34_num_ord_des, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c015 = FORMONLY.stock_pend TYPE DECIMAL NOT NULL, NOENTRY, UPSHIFT, REQUIRED,
+	FORMAT = '---,--&.##', OPTIONS = '-nolist';
+
+c020 = FORMONLY.tot_stock_pend TYPE DECIMAL NOT NULL, NOENTRY, UPSHIFT,
+	REVERSE, REQUIRED, FORMAT = '---,--&.##';
+
+c021 = FORMONLY.nombre_cli, NOENTRY, REVERSE, UPSHIFT;
+
+c30  = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c31  = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+END
+KEYS
+F5 = 'Factura'
+F6 = 'Ord. Desp. Pend.'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_factura[8] (r19_cod_tran, r19_num_tran, r19_nomcli, r19_fecing,
+				r34_num_ord_des, stock_pend)

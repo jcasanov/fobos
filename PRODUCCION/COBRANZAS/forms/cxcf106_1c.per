@@ -1,0 +1,48 @@
+DATABASE aceros
+SCREEN
+{
+
+                         Cliente: [c014        ]
+                                  [c015                                    ]
+                 Area de Negocio: [c002  ] [c011           ]
+            Crédito Automatico ?: [a]
+
+                    Crédito Días: [c004  ]
+        Cupo Crédito Moneda Base: [c005            ]
+        Cupo Crédito Moneda Alt.: [c006            ]
+
+                          Descuentos Preestablecidos
+                          --------------------------
+   Factura Contado Bienes: [c007 ]%       Factura Contado Servicio: [c012 ]%
+   Factura Crédito Bienes: [c008 ]%       Factura Crédito Servicio: [c013 ]%
+
+   Usuario: [c009      ]             Fecha de Ingreso: [c010               ]
+}
+TABLES
+cxct003
+ATTRIBUTES
+c002 = cxct003.z03_areaneg, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+a    = cxct003.z03_credit_auto, AUTONEXT, REVERSE, UPSHIFT,
+        INCLUDE = ('S', 'N'), DEFAULT = 'S',
+	COMMENTS = '(S) crédito automatico  (N) crédito manual';
+c004 = cxct003.z03_credit_dias, AUTONEXT, REVERSE, INCLUDE = (0 TO 32767);
+c005 = cxct003.z03_cupocred_mb, AUTONEXT, REVERSE,
+	INCLUDE = (0 TO 9999999999.99), FORMAT = '#,###,###,##&.##';
+c006 = cxct003.z03_cupocred_ma, NOENTRY, REVERSE, FORMAT = '#,###,###,##&.##';
+c007 = cxct003.z03_dcto_item_c, AUTONEXT, REVERSE, FORMAT = '#&.##',
+	INCLUDE = (0 TO 99.99);
+c008 = cxct003.z03_dcto_item_r, AUTONEXT, REVERSE, FORMAT = '#&.##',
+	INCLUDE = (0 TO 99.99);
+c012 = cxct003.z03_dcto_mano_c, AUTONEXT, REVERSE, FORMAT = '#&.##',
+	INCLUDE = (0 TO 99.99);
+c013 = cxct003.z03_dcto_mano_r, AUTONEXT, REVERSE, FORMAT = '#&.##',
+	INCLUDE = (0 TO 99.99);
+c009 = cxct003.z03_usuario, NOENTRY, UPSHIFT, REVERSE;
+c010 = cxct003.z03_fecing, NOENTRY, UPSHIFT, REVERSE;
+c011 = FORMONLY.tit_area, NOENTRY, REVERSE, UPSHIFT;
+c014 = FORMONLY.tit_codcli, NOENTRY, REVERSE;
+c015 = FORMONLY.tit_nomcli, NOENTRY, REVERSE, UPSHIFT;
+end
+INSTRUCTIONS
+DELIMITERS '||'

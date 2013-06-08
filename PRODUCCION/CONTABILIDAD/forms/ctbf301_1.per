@@ -1,4 +1,4 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
   Nivel de Cuenta: [c000  ] [c001                ]
@@ -35,10 +35,10 @@ a0   = FORMONLY.vm_moneda, AUTONEXT, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 c004 = FORMONLY.tit_moneda_des, NOENTRY, UPSHIFT;
 c005 = FORMONLY.vm_anio, AUTONEXT, UPSHIFT,
-	COMMENTS = 'Año válido para el plan de cuentas con saldo';
+	COMMENTS = 'Año valido para el plan de cuentas con saldo';
 a2   = FORMONLY.vm_mes, AUTONEXT, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
-	COMMENTS = 'Mes válido para el plan de cuentas con saldo';
+	COMMENTS = 'Mes valido para el plan de cuentas con saldo';
 c006 = FORMONLY.tit_mes_des, NOENTRY, UPSHIFT;
 
 c020 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
@@ -50,7 +50,7 @@ c010 = FORMONLY.b10_cuenta, NOENTRY, UPSHIFT, PICTURE = '########XXXX',
 c011 = FORMONLY.b10_descripcion, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
 c012 = FORMONLY.tit_saldo, NOENTRY, UPSHIFT,
 	FORMAT = '((,(((,(((,((&.##)', OPTIONS = '-nolist';
-END
+end
 KEYS
 F5 = 'Cuenta'
 F6 = 'Movimientos'

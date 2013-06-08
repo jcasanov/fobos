@@ -1,0 +1,63 @@
+DATABASE aceros
+SCREEN
+{
+
+
+  Transacción: [c0][c000      ]    Rubro: [c001] [c002                      ]
+
+        Fecha: [c003      ]                   Valor: [c004         ]
+   Referencia: [c005                                               ]
+
+     Empleado: [c006] [c007                                        ]
+
+  Liquidación: [c1]   [c008                          ]  Nro. Préstamo: [c009]
+
+      Período: [c010      ]       -       [c011      ]
+
+        Banco: [c012] [c013                          ]
+  Nro. Cuenta: [c014           ]          Nro. Cheque: [c015       ]
+ Beneficiario: [c016                                               ]
+
+      Usuario: [c017      ]           Fecha de Ingreso: [c018               ]
+
+}
+TABLES
+gent008
+rolt003
+rolt030
+rolt067
+rolt068
+ATTRIBUTES
+c0   = rolt068.n68_cod_tran, AUTONEXT, UPSHIFT, REVERSE, INCLUDE = ('IN', 'EG'),
+	COMMENTS = 'Digite código de transacción: (IN) Ingreso (EG) Egreso.';
+c000 = rolt068.n68_num_tran, NOENTRY, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = rolt068.n68_cod_rubro, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = rolt067.n67_nombre, NOENTRY, UPSHIFT, REVERSE;
+c003 = rolt068.n68_fecha, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha en formato: dd-mm-aaaa.';
+c004 = rolt068.n68_valor, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = (0 TO 99999999.99), FORMAT = '##,###,##&.##';
+c005 = rolt068.n68_referencia, AUTONEXT, UPSHIFT, REVERSE, SCROLL;
+c006 = rolt068.n68_cod_trab, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c007 = rolt030.n30_nombres, NOENTRY, UPSHIFT;
+c1   = rolt068.n68_cod_liqrol, NOENTRY, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c008 = rolt003.n03_nombre, NOENTRY, UPSHIFT;
+c009 = rolt068.n68_num_prest, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Sólo en el caso que el empleado tenga un anticipo.';
+c010 = rolt068.n68_fecha_ini, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c011 = rolt068.n68_fecha_fin, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c012 = rolt068.n68_banco, AUTONEXT, UPSHIFT, NOENTRY,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c013 = gent008.g08_nombre, NOENTRY, UPSHIFT;
+c014 = rolt068.n68_numero_cta, AUTONEXT, UPSHIFT, NOENTRY,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c015 = rolt068.n68_num_cheque, AUTONEXT, UPSHIFT;
+c016 = rolt068.n68_beneficiario, AUTONEXT, UPSHIFT;
+c017 = rolt068.n68_usuario, NOENTRY, UPSHIFT, REVERSE;
+c018 = rolt068.n68_fecing, NOENTRY, UPSHIFT, REVERSE;
+END

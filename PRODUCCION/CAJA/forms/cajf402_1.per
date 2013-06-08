@@ -1,27 +1,26 @@
-database diteca 
-screen {
+DATABASE aceros 
+SCREEN
+{
 
 
              Rango de Fechas: [c002      ] hasta [c003      ]
+
                  Codigo Caja: [c0 ] [c000                   ]
              Area de Negocio: [c1 ] [c001                   ]
-   
-                     Cliente: [c010  ] [c100                ]
-               Forma de Pago: [c3] [c101                    ]         
-}
-end
-attributes
-c0   = formonly.codigo_caja, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
-c000 = formonly.n_caja, NOENTRY;
-c1   = formonly.areaneg, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
-c001 = formonly.n_areaneg, NOENTRY;
-c002 = formonly.fecha_ini TYPE DATE NOT NULL, REVERSE, FORMAT='dd-mm-yyyy',
-	COMMENT='Ingrese fecha en formato: dd-mm-aaaa.';
-c003 = formonly.fecha_fin TYPE DATE NOT NULL, REVERSE, FORMAT='dd-mm-yyyy',
-	COMMENT='Ingrese fecha en formato: dd-mm-aaaa.';
 
-c010 = formonly.codcli, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
-c3   = formonly.f_pago, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
-c100 = formonly.n_codcli, NOENTRY;
-c101 = formonly.n_f_pago, NOENTRY;
-end
+              Forma de Cobro: [c2 ] [c004                   ]
+   
+}
+ATTRIBUTES
+c0   = FORMONLY.codigo_caja, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c000 = FORMONLY.n_caja, NOENTRY;
+c1   = FORMONLY.areaneg, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c001 = FORMONLY.n_areaneg, NOENTRY;
+c002 = FORMONLY.fecha_ini TYPE DATE NOT NULL, REVERSE, FORMAT='dd-mm-yyyy',
+	COMMENT='Ingrese fecha en formato: dd-mm-aaaa.';
+c003 = FORMONLY.fecha_fin TYPE DATE NOT NULL, REVERSE, FORMAT='dd-mm-yyyy',
+	COMMENT='Ingrese fecha en formato: dd-mm-aaaa.';
+c2   = FORMONLY.j11_codigo_pago, AUTONEXT, UPSHIFT,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c004 = FORMONLY.j01_nombre, NOENTRY, UPSHIFT;
+END

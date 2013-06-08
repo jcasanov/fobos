@@ -1,0 +1,90 @@
+DATABASE aceros
+SCREEN
+{
+  No. Proforma:[c01   ]      Presupuesto:[c090  ]      Orden Trabajo:[c091  ] 
+      Preventa:[c080   ]                        Factura:[c9][c081           ]
+      Moneda:[c3] [c04                ]           Fecha:[c02                ]
+ Cód.Cliente:[c06  ]                              Impuesto:[c07  ]%    
+     Nombres:[c08                                                ]
+   Dirección:[c10                            ] Ced/RUC/Pas:[c09             ]
+    Vendedor:[c15] [c16                      ]    Teléfono:[c11             ] 
+                                                            [c092] de [c093]
+  Bd.  Item   Stock T.  Stock L.  Cant.   Desc.  Precio Unit.      Subtotal
+ [y1] [c050  |c051    |c052    |c053    ][c054 |c055         |c056         ]
+ [y1] [c050  |c051    |c052    |c053    ][c054 |c055         |c056         ]
+ [y1] [c050  |c051    |c052    |c053    ][c054 |c055         |c056         ]
+ [y1] [c050  |c051    |c052    |c053    ][c054 |c055         |c056         ]
+ [y1] [c050  |c051    |c052    |c053    ][c054 |c055         |c056         ]
+ [c070                               ]              Subtotal:[c060         ]
+ [c071                               ]             Descuento:[c061         ]
+ [c072                                    ]         Impuesto:[c062         ]
+ [c073                                              ]   Neto:[c063         ]
+ [c074                                                            |c075    ]
+}
+TABLES
+	rept021
+	rept022
+	rept023
+ATTRIBUTES
+c090 = r21_num_presup, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c091 = r21_num_ot, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c01  = r21_numprof, REVERSE, NOENTRY,          
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c02  = r21_fecing, REVERSE, NOENTRY;
+c3   = r21_moneda, REVERSE, UPSHIFT,           
+       COMMENTS = 'Moneda Base o Moneda Alterna. '; 
+c04  = formonly.nom_moneda TYPE VARCHAR, NOENTRY, REVERSE;
+c06  = r21_codcli, REQUIRED, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c07  = r21_porc_impto, REVERSE, NOENTRY, FORMAT = '#&.##';
+c08  = r21_nomcli, REVERSE, UPSHIFT;
+c09  = r21_cedruc, REVERSE, UPSHIFT, COMMENTS = 'Cédula o RUC del cliente. ';
+c10  = r21_dircli, REVERSE, UPSHIFT,
+       COMMENTS = 'Dirección del domicilio del cliente.';
+c15  = r21_vendedor, UPSHIFT, REVERSE, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c16  = formonly.nom_vendedor TYPE VARCHAR, NOENTRY;     
+c11  = r21_telcli;
+
+	---- DETALLE ----
+c050 = r22_item, UPSHIFT, REQUIRED,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c051 = formonly.stock_tot TYPE DECIMAL(8,2), 
+       NOENTRY, FORMAT = '####&.##';                            
+c052 = formonly.stock_loc TYPE DECIMAL(8,2),        
+       NOENTRY, FORMAT = '####&.##';                                 
+c053 = r22_cantidad, 
+       INCLUDE = (0.00 TO 99999.99), FORMAT = '####&.##';
+y1   = r22_bodega, UPSHIFT, REQUIRED,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c054 = r22_porc_descto, FORMAT = '#&.##',   
+       INCLUDE = (0 TO 99.99); 	
+c055 = r22_precio, FORMAT = '##,###,##&.##';
+       --NOENTRY;
+c056 = formonly.subtotal_item TYPE DECIMAL(12,2), 
+       NOENTRY, FORMAT = '##,###,##&.##'; 
+c060 = r21_tot_bruto, FORMAT = '##,###,##&.##', REVERSE, NOENTRY;       
+c061 = r21_tot_dscto, FORMAT = '##,###,##&.##', NOENTRY;       
+c062 = formonly.vm_impuesto TYPE DECIMAL(11,2),	FORMAT = '##,###,##&.##', NOENTRY;    
+c063 = r21_tot_neto, REVERSE, FORMAT = '##,###,##&.##', NOENTRY;
+c070 = formonly.descrip_1, NOENTRY;
+c071 = formonly.descrip_2, NOENTRY;
+c072 = formonly.descrip_3, NOENTRY;
+c073 = formonly.descrip_4, NOENTRY;
+c074 = formonly.nom_item,  NOENTRY, REVERSE;
+c075 = formonly.nom_marca, NOENTRY, REVERSE;
+c080 = rept023.r23_numprev, NOENTRY, UPSHIFT, REVERSE;
+c9   = rept021.r21_cod_tran, NOENTRY, UPSHIFT, REVERSE;
+c081 = rept021.r21_num_tran, NOENTRY, UPSHIFT, REVERSE;
+
+c092 = FORMONLY.num_row, NOENTRY, REVERSE;
+c093 = FORMONLY.max_row, NOENTRY, REVERSE;
+END
+INSTRUCTIONS 
+DELIMITERS '||'
+SCREEN RECORD r_detalle[5] (r22_bodega, r22_item, formonly.stock_tot, 
+		            formonly.stock_loc, r22_cantidad, 
+			    r22_porc_descto, r22_precio, formonly.subtotal_item)
+

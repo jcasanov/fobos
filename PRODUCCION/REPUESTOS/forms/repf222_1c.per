@@ -1,0 +1,41 @@
+DATABASE aceros
+SCREEN
+{
+
+
+     Registro N°: [f001       ]
+
+        Division: [f003 ] [a2                   ]  
+ Indice Rotación: [a0] [a3                      ]
+       Tipo Item: [f004 ] [a4                   ]
+      Porcentaje: [f002     ]%		       
+
+          Moneda: [d|f020          ]       Rubro Base: [b|f021  ]
+
+}
+TABLES
+rept032
+ATTRIBUTES
+f001 = rept032.r32_numreg, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+d    = rept032.r32_moneda, REVERSE, NOENTRY, UPSHIFT, 
+	INCLUDE = ('A', 'B'),
+	COMMENTS = 'A = Moneda Base y B = Moneda Alterna';
+f020 = FORMONLY.tit_moneda,REVERSE,UPSHIFT,NOENTRY;
+b    = rept032.r32_rubro_base, REVERSE, NOENTRY, UPSHIFT,
+	INCLUDE = ('C', 'P'),
+	COMMENTS = 'C Costo  P Precio';
+f021 = FORMONLY.tit_rubro_base,REVERSE,UPSHIFT,NOENTRY;
+f002 = rept032.r32_porc_fact, REVERSE, FORMAT = '##,##&.##';
+f003 = rept032.r32_linea, REVERSE, NOENTRY, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+a2   = FORMONLY.nom_lin TYPE VARCHAR, NOENTRY;
+a0   = rept032.r32_rotacion, NOENTRY, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+a3   = FORMONLY.nom_rot TYPE VARCHAR, NOENTRY;
+f004 = rept032.r32_tipo_item, NOENTRY, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+a4   = FORMONLY.nom_tipo TYPE VARCHAR, NOENTRY;
+end 
+INSTRUCTIONS
+DELIMITERS '||'

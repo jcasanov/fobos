@@ -1,0 +1,30 @@
+DATABASE FORMONLY 
+SCREEN
+{
+
+            Rango de Fechas: [c002      ]  hasta: [c003      ]
+
+                Codigo Caja: [c0 ]   [c000                   ]
+
+            Area de Negocio: [c1 ]   [c001                   ]
+   
+              Forma de Pago: [c2 ]   [c004                   ]
+
+}
+ATTRIBUTES
+c0   = FORMONLY.codigo_caja, UPSHIFT, REVERSE,
+	COMMENTS='Presione F2 para obtener ayuda del campo';
+c000 = FORMONLY.n_caja, NOENTRY;
+c1   = FORMONLY.areaneg, UPSHIFT, REVERSE,
+	COMMENTS='Presione F2 para obtener ayuda del campo'; 
+c001 = FORMONLY.n_areaneg, NOENTRY;
+c002 = FORMONLY.fecha_ini TYPE DATE NOT NULL, REVERSE, FORMAT='dd-mm-yyyy',
+	COMMENTS='Ingrese fecha en formato: dd-mm-aaaa.';
+c003 = FORMONLY.fecha_fin TYPE DATE NOT NULL, REVERSE, FORMAT='dd-mm-yyyy',
+	COMMENTS='Ingrese fecha en formato: dd-mm-aaaa.';
+c2   = FORMONLY.j11_codigo_pago, UPSHIFT, REVERSE,
+	COMMENTS='Presione F2 para obtener ayuda del campo'; 
+c004 = FORMONLY.j01_nombre, NOENTRY, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'

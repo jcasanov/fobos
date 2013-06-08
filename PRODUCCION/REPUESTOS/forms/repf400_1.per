@@ -1,4 +1,4 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
 
@@ -22,8 +22,8 @@ c001 = FORMONLY.tit_moneda, NOENTRY, REVERSE, UPSHIFT;
 
 -- Incluido por JCM para permitir que el reporte pueda ser emitido para ver las
 -- facturas de un solo vendedor
-c004 = formonly.r19_vendedor, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c005 = formonly.n_vendedor, NOENTRY;
+c004 = FORMONLY.r19_vendedor, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c005 = FORMONLY.n_vendedor, NOENTRY;
 --
 
 -- Incluido por NPC el 06-09-2002
@@ -35,4 +35,4 @@ c002 = FORMONLY.vm_fecha_ini TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
 	FORMAT = 'dd-mm-yyyy';
 c003 = FORMONLY.vm_fecha_fin TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
 	FORMAT = 'dd-mm-yyyy';
-END
+end

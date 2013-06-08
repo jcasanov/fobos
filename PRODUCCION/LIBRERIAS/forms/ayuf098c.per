@@ -1,0 +1,31 @@
+DATABASE aceros
+SCREEN
+{
+ CLIENTES POR LOCALIDAD
+ -------------------------------------------------------------------
+  Código    Nombre del  Cliente                   Cedula/RUC      E
+ -------------------------------------------------------------------
+ [c001     |c002                                 |c003           |c]
+ [c001     |c002                                 |c003           |c]
+ [c001     |c002                                 |c003           |c]
+ [c001     |c002                                 |c003           |c]
+ [c001     |c002                                 |c003           |c]
+ [c001     |c002                                 |c003           |c]
+ [c001     |c002                                 |c003           |c]
+ [c001     |c002                                 |c003           |c]
+ [c001     |c002                                 |c003           |c]
+ [c001     |c002                                 |c003           |c]
+
+}
+TABLES
+cxct001
+cxct002
+ATTRIBUTES
+c001 = z02_codcli, UPSHIFT,REVERSE;
+c002 = z01_nomcli, UPSHIFT,REVERSE;
+c003 = z01_num_doc_id, UPSHIFT,REVERSE;
+c    = z01_estado, UPSHIFT, COMMENTS = '(A) ACTIVO  (B) BLOQUEADO';
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_cliloc[10] (z02_codcli, z01_nomcli, z01_num_doc_id, z01_estado)

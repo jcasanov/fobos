@@ -1,4 +1,4 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
                  DETALLE DOCUMENTOS A FAVOR  
@@ -20,21 +20,21 @@ Proveedor: [c001                          ]
 TABLES
 cxpt021
 ATTRIBUTES
-c001 = formonly.p01_nomprov, REVERSE;
-c002 = formonly.tit_mon, REVERSE;
-c010 = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-c011 = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-c012 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
-c013 = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
-c014 = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c001 = FORMONLY.p01_nomprov, REVERSE;
+c002 = FORMONLY.tit_mon, REVERSE;
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
 c020 = p21_tipo_doc;
 c021 = p21_num_doc;
 c022 = p21_fecha_emi, FORMAT = 'dd-mm-yyyy';
 c023 = p21_valor, FORMAT = '#,###,###,##&.##';
 c024 = p21_saldo, FORMAT = '#,###,###,##&.##';
-c030 = formonly.tot_valor TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##',
+c030 = FORMONLY.tot_valor TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##',
        REVERSE;
-c031 = formonly.tot_saldo TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##',
+c031 = FORMONLY.tot_saldo TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##',
        REVERSE;
 INSTRUCTIONS
 SCREEN RECORD r_dda[7] (p21_tipo_doc, p21_num_doc, p21_fecha_emi, p21_valor,

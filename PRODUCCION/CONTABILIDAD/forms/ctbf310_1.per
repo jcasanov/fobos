@@ -1,52 +1,75 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
-   Fecha Inicial: [c002      ]          Fecha Final: [c003      ]
+      Cuentas: [c000        ]    -    [c001        ]
+          Año: [c002]      Meses: [c3] [c004       ]  -  [c5] [c006       ]
 
-
- [b1|c021    |c022                     |c023            |c024            |c]
-[c1|c011    |c012                     |c013            |c014            |a]
-[c1|c011    |c012                     |c013            |c014            |a]
-[c1|c011    |c012                     |c013            |c014            |a]
-[c1|c011    |c012                     |c013            |c014            |a]
-[c1|c011    |c012                     |c013            |c014            |a]
-[c1|c011    |c012                     |c013            |c014            |a]
-[c1|c011    |c012                     |c013            |c014            |a]
-[c1|c011    |c012                     |c013            |c014            |a]
-[c1|c011    |c012                     |c013            |c014            |a]
-[c1|c011    |c012                     |c013            |c014            |a]
-[c1|c011    |c012                     |c013            |c014            |a]
-[c1|c011    |c012                     |c013            |c014            |a]
-[c1|c011    |c012                     |c013            |c014            |a]
-[c1|c011    |c012                     |c013            |c014            |a]
+    Con el Diario de Cierre de Año [e]  Con Totales en Débito y Crédito [f]
+    Con Saldos en Débito y Crédito [g]
+                                                            [c050 ] de [c051 ]
+ [c010        |c011           |c012           |c013           |c014           ]
+[c020        |c021           |c022           |c023           |c024           ]
+[c020        |c021           |c022           |c023           |c024           ]
+[c020        |c021           |c022           |c023           |c024           ]
+[c020        |c021           |c022           |c023           |c024           ]
+[c020        |c021           |c022           |c023           |c024           ]
+[c020        |c021           |c022           |c023           |c024           ]
+[c020        |c021           |c022           |c023           |c024           ]
+[c020        |c021           |c022           |c023           |c024           ]
+[c020        |c021           |c022           |c023           |c024           ]
+[c020        |c021           |c022           |c023           |c024           ]
+[c020        |c021           |c022           |c023           |c024           ]
+[c020        |c021           |c022           |c023           |c024           ]
+                    Totales: [c030           |c031           ]
+[c040                                        ]
 }
 TABLES
-ctbt012, ctbt013 
-
+ctbt010
 ATTRIBUTES
+c000 = FORMONLY.cuenta_ini, NOENTRY, UPSHIFT;
+c001 = FORMONLY.cuenta_fin, NOENTRY, UPSHIFT;
+c002 = FORMONLY.ano, NOENTRY, UPSHIFT, REVERSE;
+c3   = FORMONLY.mes_ini, NOENTRY, UPSHIFT, REVERSE;
+c004 = FORMONLY.n_mes_ini, NOENTRY, UPSHIFT, REVERSE;
+c5   = FORMONLY.mes_fin, NOENTRY, UPSHIFT, REVERSE;
+c006 = FORMONLY.n_mes_fin, NOENTRY, UPSHIFT, REVERSE;
+e    = FORMONLY.diario_cie TYPE CHAR NOT NULL, NOENTRY, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N';
+f    = FORMONLY.ver_tot_dc TYPE CHAR NOT NULL, NOENTRY, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S';
+g    = FORMONLY.ver_saldos TYPE CHAR NOT NULL, NOENTRY, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S';
 
-c002 = FORMONLY.vm_fecha_ini TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
-        FORMAT = 'dd-mm-yyyy';
-c003 = FORMONLY.vm_fecha_fin TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
-        FORMAT = 'dd-mm-yyyy';
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
 
-b1   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-c021 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-c022 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
-c023 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
-c024 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
-c    = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c020 = FORMONLY.cuenta, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c021 = FORMONLY.saldo_ant, NOENTRY, UPSHIFT, FORMAT = '(((,(((,((&.##)',
+	COLOR = RED WHERE c021 < 0, OPTIONS = '-nolist';
+c022 = FORMONLY.mov_neto_db, NOENTRY, UPSHIFT, FORMAT = '(((,(((,((&.##)',
+	COLOR = RED WHERE c022 < 0, OPTIONS = '-nolist';
+c023 = FORMONLY.mov_neto_cr, NOENTRY, UPSHIFT, FORMAT = '(((,(((,((&.##)',
+	COLOR = RED WHERE c023 < 0, OPTIONS = '-nolist';
+c024 = FORMONLY.saldo_fin, NOENTRY, UPSHIFT, FORMAT = '(((,(((,((&.##)',
+	COLOR = RED WHERE c024 < 0, OPTIONS = '-nolist';
 
-c1   = ctbt012.b12_tipo_comp, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
-c011 = ctbt012.b12_num_comp,  NOENTRY, UPSHIFT, OPTIONS = '-nolist';
-c012 = ctbt012.b12_glosa,     NOENTRY, UPSHIFT, OPTIONS = '-nolist';
-c013 = ctbt013.b13_valor_base, NOENTRY, UPSHIFT,
-        FORMAT = '#,###,###,##&.##', OPTIONS = '-nolist';
-c014 = ctbt013.b13_valor_aux, NOENTRY, UPSHIFT,
-        FORMAT = '#,###,###,##&.##', OPTIONS = '-nolist';
-a    = ctbt012.b12_origen, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c030 = FORMONLY.tot_mov_neto_db, NOENTRY, UPSHIFT,
+	FORMAT = '(((,(((,((&.##)', COLOR = RED WHERE c030 < 0;
+c031 = FORMONLY.tot_mov_neto_cr, NOENTRY, UPSHIFT,
+	FORMAT = '(((,(((,((&.##)', COLOR = RED WHERE c031 < 0;
 
+c040 = ctbt010.b10_descripcion, NOENTRY, UPSHIFT, REVERSE;
+
+c050 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c051 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
 END
-
+KEYS
+F5 = 'Movimientos'
+F6 = 'Imprimir'
 INSTRUCTIONS
-SCREEN RECORD rm_det[14] (b12_tipo_comp, b12_num_comp, b12_glosa, b13_valor_base, b13_valor_aux, b12_origen)
+DELIMITERS '||'
+SCREEN RECORD rm_detalle[12] (cuenta, saldo_ant, mov_neto_db, mov_neto_cr,
+				saldo_fin)

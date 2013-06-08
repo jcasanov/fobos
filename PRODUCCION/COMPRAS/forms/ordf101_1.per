@@ -1,36 +1,38 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
 
-                                                      Estado: [c|c007     ]
-            
-                         Tipo de Orden: [c000  ]  [c001            ]
+                                                         Estado: [c|c007     ]
+           Tipo de Orden: [c000] [c001                                       ]
 
-                    Ingresa a Bodega ?: [b]
-                                Tipo ?: [d                   ]
+      Ingresa a Bodega ?: [b]                   Tipo ?: [d                   ]
 
 
-       Genera diario automáticamente ?: [a] 
-                                Módulo: [c0]  [c050                ]
+ Módulo: [c0] [c050                ]      Genera diario automaticamente ?: [a] 
 
-      Porc. Retención Fuente en Bienes: [c002  ]
-   Porc. Retención Fuente en Servicios: [c008  ]
-         Porc. Retención IVA en Bienes: [c003  ]
-      Porc. Retención IVA en Servicios: [c004  ]
-                               Usuario: [c005      ]
-                      Fecha de Ingreso: [c006               ]
+          Porc. Retención Fuente en Bienes: [c002  ]
+       Porc. Retención Fuente en Servicios: [c008  ]
+             Porc. Retención IVA en Bienes: [c003  ]
+          Porc. Retención IVA en Servicios: [c004  ]
+
+  Aux. Contable para Iva: [c051        ] [c052                               ]
+    Aux. O.T. en Proceso: [c053        ] [c054                               ]
+   Aux. Costo Venta O.T.: [c055        ] [c056                               ]
+     Auxiliar Venta O.T.: [c057        ] [c058                               ]
+  Aux. Devol. Venta O.T.: [c059        ] [c060                               ]
+                 Usuario: [c005      ]    Fecha Ingreso: [c006               ]
 }
 TABLES
 ordt001
 ATTRIBUTES
 c000 = c01_tipo_orden, REVERSE, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c001 = ordt001.c01_nombre, UPSHIFT, REVERSE, AUTONEXT;
+c001 = ordt001.c01_nombre, UPSHIFT, REVERSE, AUTONEXT, SCROLL;
 b    = ordt001.c01_ing_bodega, UPSHIFT, AUTONEXT, REVERSE, INCLUDE=('S', 'N'),
 	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S',
     	COMMENTS ='Indicar si los artículos de este tipo ingresan a inventario';
 a    = ordt001.c01_gendia_auto, AUTONEXT, REVERSE, INCLUDE=('S', 'N'),
 	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N',
-    	COMMENTS ='Indicar si se genera el diario contable automáticamente.';
+    	COMMENTS ='Indicar si se genera el diario contable automaticamente.';
 d    = ordt001.c01_bien_serv, UPSHIFT, AUTONEXT, REVERSE,
 	WIDGET = 'RADIO',CONFIG = 'B Bienes S Servicios T "Bienes y Servicios"',
 	DEFAULT = 'S';
@@ -46,8 +48,30 @@ c003 = ordt001.c01_porc_reti_b, REVERSE, AUTONEXT, FORMAT = '##&.##',
 	INCLUDE = (0 TO 100);
 c004 = ordt001.c01_porc_reti_s, REVERSE, AUTONEXT, FORMAT = '##&.##',
 	INCLUDE = (0 TO 100);
+c051 = ordt001.c01_aux_cont, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c052 = FORMONLY.tit_aux_cont, UPSHIFT, NOENTRY;
+c053 = ordt001.c01_aux_ot_proc, AUTONEXT, UPSHIFT, COMMENTS =
+       'Auxiliar contable para órdenes de compras asociadas a órdenes de trabajo.',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c054 = FORMONLY.tit_ot_proc, UPSHIFT, NOENTRY;
+c055 = ordt001.c01_aux_ot_cost, AUTONEXT, UPSHIFT, COMMENTS =
+       'Auxiliar contable para el costo de venta de las facturas del Taller.',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c056 = FORMONLY.tit_ot_cost, UPSHIFT, NOENTRY;
+c057 = ordt001.c01_aux_ot_vta, AUTONEXT, UPSHIFT, COMMENTS =
+       'Auxiliar contable para el diario de venta de las facturas del Taller.',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c058 = FORMONLY.tit_ot_vta, UPSHIFT, NOENTRY;
+c059 = ordt001.c01_aux_ot_dvta, AUTONEXT, UPSHIFT, COMMENTS =
+       'Auxiliar contable para el diario devol. venta de las facturas del Taller.',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c060 = FORMONLY.tit_ot_dvta, UPSHIFT, NOENTRY;
 c005 = ordt001.c01_usuario, REVERSE, NOENTRY;
 c006 = ordt001.c01_fecing, REVERSE, NOENTRY;
 c007 = FORMONLY.tit_estado, NOENTRY;
-c    = ordt001.c01_estado, REVERSE, NOENTRY;
+c    = ordt001.c01_estado, REVERSE, NOENTRY, UPSHIFT;
+
 END
+KEYS
+F5 = 'Sustentos SRI'

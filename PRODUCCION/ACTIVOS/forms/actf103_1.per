@@ -1,0 +1,33 @@
+database aceros
+screen size 24 by 80
+{
+
+   	         Responsable:[f001  ]    	Estado:[a|f007     ]
+	             Nombres:[f002                                 ]
+	
+ 	     Compañía de Rol:[f003  ] [f008                        ]
+               Código de Rol:[f004  ] [f009                        ]
+	
+	       Ingresado Por:[f005     ]
+	       Fecha Ingreso:[f006               ]
+} 
+end
+
+tables
+actt003
+
+attributes
+f001 = actt003.a03_responsable, NOENTRY, REVERSE, WIDGET = 'FIELD_BMP',
+	CONFIG = 'lista.bmp F2';
+f002 = actt003.a03_nombres, UPSHIFT;
+a    = actt003.a03_estado, NOENTRY, UPSHIFT, REVERSE;
+f003 = actt003.a03_ciarol,  WIDGET = 'FIELD_BMP',
+	CONFIG = 'lista.bmp F2';
+f004 = actt003.a03_codrol,  WIDGET = 'FIELD_BMP',
+	CONFIG = 'lista.bmp F2';
+f005 = actt003.a03_usuario, NOENTRY, REVERSE;
+f006 = actt003.a03_fecing, NOENTRY, REVERSE;
+f007 = formonly.estado, NOENTRY;
+f008 = formonly.compania, NOENTRY;
+f009 = formonly.trabajador, NOENTRY;
+end

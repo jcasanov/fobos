@@ -1,0 +1,59 @@
+DATABASE aceros
+SCREEN
+{
+	                DETALLE DE LA PREVENTA 
+  Cliente: [c13                                             ]
+   Moneda: [c |c12                 ]
+
+  Can  Item   Dscto Precio - Dcto  Total Costo   Diferencia   % Util.
+ [c0 |c1     |c2   |c3           |c4           |c5          |c6       ]
+ [c0 |c1     |c2   |c3           |c4           |c5          |c6       ]
+ [c0 |c1     |c2   |c3           |c4           |c5          |c6       ]
+ [c0 |c1     |c2   |c3           |c4           |c5          |c6       ]
+ [c0 |c1     |c2   |c3           |c4           |c5          |c6       ]
+                    ------------- ------------- ------------ --------- 
+                   [c7           |c8           |c9          |c10      ]
+ [c070                               ]
+ [c071                               ]
+ [c072                                    ]
+ [c073                                              ]
+ [c11                                                              ]
+}
+TABLES
+	rept023
+	rept024
+ATTRIBUTES
+
+c   = rept023.r23_moneda, REVERSE, NOENTRY;
+c12 = FORMONLY.nom_moneda TYPE VARCHAR, NOENTRY, REVERSE;
+c0  = rept024.r24_cant_ven, NOENTRY, REVERSE;
+c1  = rept024.r24_item, NOENTRY, REVERSE;
+c11 = FORMONLY.nom_item TYPE VARCHAR, REVERSE, NOENTRY;
+c2  = rept024.r24_descuento, REVERSE, NOENTRY, FORMAT = '#&.##';
+c3  = FORMONLY.precio_descuento TYPE DECIMAL, NOENTRY, REVERSE,
+	FORMAT = '##,###,##&.##';
+c4  = FORMONLY.costo_item TYPE DECIMAL(11,2), NOENTRY, 
+	FORMAT = '##,###,##&.##', REVERSE;
+c5  = FORMONLY.diferencia TYPE DECIMAL(10,2), NOENTRY, 
+	FORMAT = '-,---,--&.##', REVERSE;
+c6  = FORMONLY.utilidad TYPE DECIMAL, NOENTRY, 
+	FORMAT = '--,--&.##', REVERSE;
+c7  = FORMONLY.tot_precio_descuento TYPE DECIMAL(11,2), REVERSE, NOENTRY,
+	FORMAT = '##,###,##&.##';
+c8  = FORMONLY.tot_costo TYPE DECIMAL(11,2),REVERSE, NOENTRY, 
+	FORMAT = '##,###,##&.##';
+c9  = FORMONLY.tot_diferencia TYPE DECIMAL(9,2), REVERSE, NOENTRY, 
+	FORMAT = '-,---,--&.##';
+c10 = FORMONLY.tot_utilidad TYPE DECIMAL, REVERSE, NOENTRY, 
+	FORMAT = '--,--&.##';
+c13 = rept023.r23_nomcli, REVERSE, NOENTRY;
+c070 = formonly.descrip_1, NOENTRY;
+c071 = formonly.descrip_2, NOENTRY;
+c072 = formonly.descrip_3, NOENTRY;
+c073 = formonly.descrip_4, NOENTRY;
+END
+INSTRUCTIONS 
+DELIMITERS '||'
+SCREEN RECORD r_preventa[5] (r24_cant_ven, r24_item, r24_descuento, 
+			     precio_descuento, costo_item, diferencia, 
+			     utilidad)

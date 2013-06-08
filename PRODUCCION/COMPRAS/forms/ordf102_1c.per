@@ -1,0 +1,43 @@
+DATABASE aceros
+SCREEN
+{
+
+                                                      Estado: [c][c0b0     ]
+
+            Tipo de Retención: [a|c10   ]
+
+         Porcentaje Retención: [c001  ]
+
+  Descripción de la Retención: [c002                ]
+                                    
+       Base para la Retención: [d|c11      ]
+
+            Auxiliar Contable: [c003       ]  [c007                        ]
+
+                      Usuario: [c004      ]
+             Fecha de Ingreso: [c005               ]
+}
+TABLES
+ordt002
+ATTRIBUTES
+c    = ordt002.c02_estado, REVERSE, NOENTRY, UPSHIFT,
+	COMMENTS = '(A) ACTIVO  (B) BLOQUEADO';
+c0b0 = FORMONLY.tit_estado_ret, NOENTRY;
+a    = ordt002.c02_tipo_ret, AUTONEXT, REVERSE,UPSHIFT,
+	INCLUDE = ('F', 'I'), DEFAULT = 'F',
+	COMMENTS = 'Indicar si la retención es  F Fuente o antes del  I IVA'; 
+c10 = FORMONLY.tit_tipo_ret,REVERSE,UPSHIFT,NOENTRY;
+c001 = ordt002.c02_porcentaje, AUTONEXT, REVERSE, FORMAT = '##&.##';
+c002 = ordt002.c02_nombre, AUTONEXT, UPSHIFT, REVERSE;
+d    = ordt002.c02_tipo_fuente, AUTONEXT, REVERSE,UPSHIFT,
+	INCLUDE = ('B', 'S', 'T'), DEFAULT = 'B',
+	COMMENTS = 'B Bienes  S Servicios  T Todos';
+c11 = FORMONLY.tit_tipo_fuente,REVERSE,UPSHIFT,NOENTRY;
+c003 = ordt002.c02_aux_cont, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c004 = ordt002.c02_usuario, NOENTRY, REVERSE;
+c005 = ordt002.c02_fecing, NOENTRY, REVERSE;
+c007 = FORMONLY.tit_aux_con, NOENTRY, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'

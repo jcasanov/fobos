@@ -1,25 +1,43 @@
-database diteca
-screen 
+DATABASE aceros
+SCREEN 
 {
 
 
-             Partida: [c000           ]
+                 Capítulo: [c0] [c1                                       ]
+                       	        [c1                                       ]
+                                [c1                                       ]
+                                [c1                                       ]
+                   	        [c1                                       ]
+                   	        [c1                                       ]
+     Partida: [c000           ] [c001                                     ]
+            		        [c001                                     ]
+             		        [c001                                     ]
+              		        [c001                                     ]
+                                [c001                                     ]
+                                [c001                                     ]
+	 Arancel: [c004  ]%      Salvaguardia: [c050  ]%	
+	   Nivel: [c2]            P. Nacional: [c3]        Verificador: [c]
 
-              Nombre: [c001                                            ]
-          Porcentaje: [c002  ]%
-
-       Ingresado Por: [c003      ]
-    Fecha de Ingreso: [c004               ]
-
+   Ingresado Por: [c005      ]  Fecha Ingreso: [c006               ]
 }
-end
-tables
+TABLES
 gent016
-attributes
-c000 = gent016.g16_partida, REVERSE, UPSHIFT,
+gent038
+ATTRIBUTES
+c0   = gent016.g16_capitulo, AUTONEXT, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG =  'lista.bmp F2';
-c001 = gent016.g16_nombre, SCROLL, REVERSE, UPSHIFT;
-c002 = gent016.g16_porcentaje, REVERSE, FORMAT = '##&.##';
-c003 = gent016.g16_usuario, REVERSE, NOENTRY;
-c004 = gent016.g16_fecing, REVERSE, NOENTRY;
-end
+c1   = gent038.g38_desc_cap, AUTONEXT, REVERSE, WORDWRAP COMPRESS,
+ 	COMMENTS = 'No utilizar puntos seguidos (..) ni dos puntos (:)';
+c000 = gent016.g16_partida, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG =  'lista.bmp F2';
+c001 = gent016.g16_desc_par, AUTONEXT, REVERSE, WORDWRAP COMPRESS,
+ 	COMMENTS = 'No utilizar puntos seguidos (..) ni dos puntos (:)';
+c2   = gent016.g16_niv_par, AUTONEXT,  UPSHIFT;
+c3   = gent016.g16_nacional, AUTONEXT, UPSHIFT;
+c    = gent016.g16_verifcador, AUTONEXT, UPSHIFT;
+
+c004 = gent016.g16_porcentaje, AUTONEXT, REVERSE, FORMAT = '##&.##';
+c050 = gent016.g16_salvagu, AUTONEXT, REVERSE, FORMAT = '##&.##';
+c005 = gent016.g16_usuario, REVERSE, NOENTRY, UPSHIFT;
+c006 = gent016.g16_fecing, REVERSE, NOENTRY, UPSHIFT;
+END

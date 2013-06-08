@@ -1,0 +1,32 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+ Código Proveedor: [c001 ] [c002                                    ]
+           Moneda: [c3]    [c004           ]
+
+   Qué Documentos: [c|c010     ]
+
+
+       Tipo Saldo: [d|c011       ]      Saldo >= a: [c006          ]
+
+}
+ATTRIBUTES
+c001 = FORMONLY.codprov TYPE INTEGER, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c002 = FORMONLY.nomprov,REVERSE, NOENTRY;
+c3   = FORMONLY.moneda TYPE CHAR NOT NULL, UPSHIFT, AUTONEXT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c004 = FORMONLY.tit_mon,REVERSE ,NOENTRY;
+c    = FORMONLY.flag_saldo TYPE CHAR, AUTONEXT, REVERSE, UPSHIFT,
+	INCLUDE = ('S', 'T'), COMMENTS = '(S) Con Saldo  (T) Todos';
+c010 = FORMONLY.tit_flag_saldo,REVERSE,UPSHIFT,NOENTRY;
+d    = FORMONLY.tipo_saldo TYPE CHAR, AUTONEXT, REVERSE, UPSHIFT,
+       INCLUDE = ('A', 'P', 'V', 'T'),
+       COMMENTS = '(A) A Favor  (P) Por Vencer  (V) Vencidos  (T) Todos';
+c011 = FORMONLY.tit_tipo_saldo,REVERSE,UPSHIFT,NOENTRY;
+c006 = FORMONLY.valor TYPE DECIMAL(11,2), INCLUDE = (0.01 TO 999999999),
+       FORMAT = '###,###,##&.##';
+END
+INSTRUCTIONS
+DELIMITERS '||'

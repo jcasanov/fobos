@@ -1,0 +1,29 @@
+DATABASE aceros
+SCREEN
+{
+  TIPOS ORDENES DE COMPRA
+ -------------------------------------------------
+  Cód. Descripción                              E
+ -------------------------------------------------
+ [c010|c011                                    |c]
+ [c010|c011                                    |c]
+ [c010|c011                                    |c]
+ [c010|c011                                    |c]
+ [c010|c011                                    |c]
+ [c010|c011                                    |c]
+ [c010|c011                                    |c]
+ [c010|c011                                    |c]
+ [c010|c011                                    |c]
+ [c010|c011                                    |c]
+
+}
+TABLES
+ordt001
+ATTRIBUTES
+c010 = c01_tipo_orden, UPSHIFT, REVERSE;
+c011 = c01_nombre, UPSHIFT, REVERSE;
+c    = c01_estado, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_oc[10] (c01_tipo_orden, c01_nombre, c01_estado)

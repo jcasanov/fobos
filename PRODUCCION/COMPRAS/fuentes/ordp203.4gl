@@ -1,4 +1,3 @@
-
 ------------------------------------------------------------------------------
 -- Titulo           : ordp203.4gl - Cierre de Ordenes de Compra
 -- Elaboracion      : 17-nov-2001
@@ -45,7 +44,7 @@ DEFINE r_detalle_1 ARRAY[250] OF RECORD
 DEFINE vm_estado		LIKE ordt010.c10_estado
 DEFINE vm_num_detalle		SMALLINT   -- INDICE DE LA PREVENTA (ARRAY)
 DEFINE vm_ind_arr		SMALLINT   -- INDICE DE MI ARREGLO  (ARRAY)
-DEFINE vm_filas_pant		SMALLINT   -- FILAS EN PANTALLA
+DEFINE vm_size_arr		SMALLINT   -- FILAS EN PANTALLA
 DEFINE vm_max_detalle		SMALLINT   -- MAXIMO NUMERO DE ELEMENTOS DEL
 					   -- DETALLE
 
@@ -55,12 +54,12 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/ordp203.error')
-CALL fgl_init4js()
+CALL startlog('../logs/errores')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN          -- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 
-                            'stop')
+	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.','stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
 LET vg_base     = arg_val(1)
@@ -73,8 +72,8 @@ CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	-- Asigna un valor por default a vg_codloc
 				-- que luego puede ser reemplazado si se 
                                 -- mantiene sin comentario la siguiente linea
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -84,6 +83,10 @@ END MAIN
 
 FUNCTION funcion_master()
 DEFINE i		SMALLINT
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
 CALL fl_nivel_isolation()
 LET vm_max_detalle  = 250
@@ -101,18 +104,30 @@ CREATE TEMP TABLE temp_oc(
 CREATE UNIQUE INDEX ind_tmp ON temp_oc(c10_numero_oc)
 
 OPTIONS
-	INPUT WRAP,
-	ACCEPT KEY F12,
 	INSERT KEY F30,
 	DELETE KEY F31
 
-OPEN WINDOW w_203 AT 3,2 WITH 22 ROWS, 80 COLUMNS
-	ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE 0,
-		  BORDER, MESSAGE LINE LAST - 2) 
-OPEN FORM f_203 FROM '../forms/ordf203_1'
+LET lin_menu = 0
+LET row_ini  = 3
+LET num_rows = 22
+LET num_cols = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW w_203 AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
+    ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE lin_menu,BORDER,
+	      MESSAGE LINE LAST - 1)
+IF vg_gui = 1 THEN
+	OPEN FORM f_203 FROM '../forms/ordf203_1'
+ELSE
+	OPEN FORM f_203 FROM '../forms/ordf203_1c'
+END IF
 DISPLAY FORM f_203
 
-LET vm_filas_pant = fgl_scr_size('r_detalle')
+CALL retorna_tam_arr()
 INITIALIZE rm_c10.* TO NULL
 INITIALIZE rm_c11.* TO NULL
 
@@ -124,13 +139,13 @@ LET rm_orden[2] = 'ASC'
 LET vm_columna_1 = 1
 LET vm_columna_2 = 2
 
-DISPLAY 'No.Orden'        	TO tit_col1
-DISPLAY 'Nombre del Proveedor'  TO tit_col2
-DISPLAY 'Fecha'			TO tit_col3
-DISPLAY 'C Ped'			TO tit_col4
-DISPLAY 'C Rec'			TO tit_col5
-DISPLAY 'Total' 		TO tit_col6
-DISPLAY 'C'			TO tit_col7
+--#DISPLAY 'No.Orden'        	  TO tit_col1
+--#DISPLAY 'Nombre del Proveedor' TO tit_col2
+--#DISPLAY 'Fecha'		  TO tit_col3
+--#DISPLAY 'C Ped'		  TO tit_col4
+--#DISPLAY 'C Rec'		  TO tit_col5
+--#DISPLAY 'Total' 		  TO tit_col6
+--#DISPLAY 'C'			  TO tit_col7
 
 CALL control_cargar_detalle()
 CALL control_lee_detalle()
@@ -140,13 +155,20 @@ END FUNCTION
 
 
 FUNCTION control_lee_detalle()
-DEFINE i,j,k,m,salir,done		SMALLINT
+DEFINE i,j,k,m,salir,done	SMALLINT
 DEFINE resp			CHAR(6)
 DEFINE command_line		VARCHAR(100)
 DEFINE query			VARCHAR(200)
+DEFINE run_prog			CHAR(10)
 
+{-- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE --}
+LET run_prog = 'fglrun '
+IF vg_gui = 0 THEN
+	LET run_prog = 'fglgo '
+END IF
+{--- ---}
 LET salir = 0
-LET vm_filas_pant  = fgl_scr_size('r_detalle')
+CALL retorna_tam_arr()
 LET k = 1
 WHILE NOT salir
 
@@ -169,8 +191,10 @@ WHILE NOT salir
 	CALL set_count(vm_ind_arr)
 	INPUT ARRAY r_detalle WITHOUT DEFAULTS FROM r_detalle.*
 		BEFORE INPUT
-			CALL dialog.keysetlabel('INSERT','')
-			CALL dialog.keysetlabel('DELETE','')
+			--#CALL dialog.keysetlabel('INSERT','')
+			--#CALL dialog.keysetlabel('DELETE','')
+			--#CALL dialog.keysetlabel("F1","")
+			--#CALL dialog.keysetlabel("CONTROL-W","")
 
 		ON KEY(INTERRUPT)
 			LET INT_FLAG = 0
@@ -180,20 +204,22 @@ WHILE NOT salir
 				LET int_flag = 1
 				EXIT INPUT
 			END IF
+        	ON KEY(F1,CONTROL-W)
+			CALL control_visor_teclas_caracter_1() 
 
 		ON KEY(F5)
-			LET command_line = 'fglrun ordp200 ' || vg_base || ' '
-					    || vg_modulo || ' ' || vg_codcia 
-					    || ' ' || vg_codloc || ' ' ||
-					    r_detalle[i].c10_numero_oc
+			LET command_line = run_prog || 'ordp200 ' || vg_base
+					|| ' ' || vg_modulo || ' ' || vg_codcia 
+					|| ' ' || vg_codloc || ' ' ||
+					r_detalle[i].c10_numero_oc
 			RUN command_line
 
 		BEFORE ROW
 			LET i = arr_curr()    # POSICION CORRIENTE EN EL ARRAY
 			LET j = scr_line()    # POSICION CORRIENTE EN PANTALLA
 
-			DISPLAY '' AT 20, 10
-			DISPLAY i, ' de ', vm_ind_arr AT 20, 10
+			--#DISPLAY '' AT 20, 10
+			--#DISPLAY i, ' de ', vm_ind_arr AT 20, 10
 
 		BEFORE INSERT  
 			IF i = arr_count() THEN
@@ -216,54 +242,48 @@ WHILE NOT salir
 					RETURNING done
 				IF done = 0 THEN
 					ROLLBACK WORK
-					CALL fgl_winmessage(vg_producto,'No se realizó proceso. ', 'exclamation')
+					--CALL fgl_winmessage(vg_producto,'No se realizó proceso. ', 'exclamation')
+					CALL fl_mostrar_mensaje('No se realizó proceso.','exclamation')
 					CONTINUE INPUT
 				ELSE 
 					COMMIT WORK
-					CALL fgl_winmessage(vg_producto,
-						'Proceso realizado Ok. ','info')
+					--CALL fgl_winmessage(vg_producto,'Proceso realizado Ok. ','info')
+					CALL fl_mostrar_mensaje('Proceso realizado Ok.','info')
 					CALL control_cargar_detalle()
 				END IF 
 		END IF
 		ON KEY(F15)
-			LET r_detalle[i].cerrar = 
-		            GET_FLDBUF(r_detalle[j].cerrar)
+			LET r_detalle[i].cerrar = r_detalle[j].cerrar
 			LET k = 1
 			LET int_flag = 2
 			EXIT INPUT
 		ON KEY(F16)
-			LET r_detalle[i].cerrar = 
-		            GET_FLDBUF(r_detalle[j].cerrar)
+			LET r_detalle[i].cerrar = r_detalle[j].cerrar
 			LET k = 2
 			LET int_flag = 2
 			EXIT INPUT
 		ON KEY(F17)
-			LET r_detalle[i].cerrar = 
-		            GET_FLDBUF(r_detalle[j].cerrar)
+			LET r_detalle[i].cerrar = r_detalle[j].cerrar
 			LET k = 3
 			LET int_flag = 2
 			EXIT INPUT
 		ON KEY(F18)
-			LET r_detalle[i].cerrar = 
-		            GET_FLDBUF(r_detalle[j].cerrar)
+			LET r_detalle[i].cerrar = r_detalle[j].cerrar
 			LET k = 4
 			LET int_flag = 2
 			EXIT INPUT
 		ON KEY(F19)
-			LET r_detalle[i].cerrar = 
-		            GET_FLDBUF(r_detalle[j].cerrar)
+			LET r_detalle[i].cerrar = r_detalle[j].cerrar
 			LET k = 5
 			LET int_flag = 2
 			EXIT INPUT
 		ON KEY(F20)
-			LET r_detalle[i].cerrar = 
-		            GET_FLDBUF(r_detalle[j].cerrar)
+			LET r_detalle[i].cerrar = r_detalle[j].cerrar
 			LET k = 6
 			LET int_flag = 2
 			EXIT INPUT
 		ON KEY(F21)
-			LET r_detalle[i].cerrar = 
-		            GET_FLDBUF(r_detalle[j].cerrar)
+			LET r_detalle[i].cerrar = r_detalle[j].cerrar
 			LET k = 7
 			LET int_flag = 2
 			EXIT INPUT
@@ -294,11 +314,11 @@ END FUNCTION
 
 
 FUNCTION control_cargar_detalle()
-DEFINE query	VARCHAR(600)
+DEFINE query	CHAR(600)
 DEFINE i 	SMALLINT
 
-LET vm_filas_pant = fgl_scr_size('r_detalle')
-FOR i = 1 TO vm_filas_pant 
+CALL retorna_tam_arr()
+FOR i = 1 TO vm_size_arr 
 	INITIALIZE r_detalle[i].*    TO NULL
 	INITIALIZE r_detalle_1[i].*  TO NULL
 	CLEAR r_detalle[i].*
@@ -340,9 +360,8 @@ END FOREACH
 
 LET i = i - 1
 IF i = 0 THEN 
-	CALL fgl_winmessage(vg_producto,
-			    'No existen Ordenes de Compra recibidas para que puedan ser cerradas .',
-			    'info')
+	--CALL fgl_winmessage(vg_producto,'No existen Ordenes de Compra recibidas para que puedan ser cerradas.','stop')
+	CALL fl_mostrar_mensaje('No existen Ordenes de Compra recibidas para que puedan ser cerradas.','stop')
 	EXIT PROGRAM
 END IF
 
@@ -387,11 +406,18 @@ WHILE TRUE
 	END IF
         WHENEVER ERROR STOP
         IF STATUS < 0 THEN
+		{
                 CALL fgl_winmessage(vg_producto,'La Orden de Compra número '||
 				r_detalle[j].c10_numero_oc ||'  del proveedor  '
 				||r_detalle[j].p01_nomprov ||
 				    '  está siendo modificada, no se '||
 				    'realizará la aprobacion. ','exclamation')
+		}
+		CALL fl_mostrar_mensaje('La Orden de Compra número ' ||
+				r_detalle[j].c10_numero_oc ||
+				' del proveedor ' || r_detalle[j].p01_nomprov ||
+				' está siendo modificada, no se ' ||
+				'realizará la aprobacion.','exclamation')
 		EXIT WHILE
         END IF
 	LET j = j + 1
@@ -406,38 +432,27 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION retorna_tam_arr()
 
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 
-                            'stop')
-	EXIT PROGRAM
+--#LET vm_size_arr = fgl_scr_size('r_detalle')
+IF vg_gui = 0 THEN
+	LET vm_size_arr = 16
 END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 
-                            'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || 
-                            vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 
-                            'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: ' || 
-                            vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
+
+END FUNCTION
+
+
+
+FUNCTION control_visor_teclas_caracter_1() 
+DEFINE a, fila		INTEGER
+
+CALL fl_visor_teclas_caracter() RETURNING fila
+LET a = fila + 2
+DISPLAY 'Teclas exclusivas de este proceso:' AT a,2 ATTRIBUTE(REVERSE)	
+LET a = a + 1
+DISPLAY '<F5>      Ver Orden'                AT a,2
+DISPLAY  'F5' AT a,3 ATTRIBUTE(REVERSE)
+LET a = fgl_getkey()
+CLOSE WINDOW w_tf
 
 END FUNCTION

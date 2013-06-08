@@ -1,0 +1,27 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+                     INGRESAR EMPLEADO ADICIONAL
+                     --------------------------
+
+     Empleado: [c000 ] [c001                                    ]
+
+      Periodo: [c002      ]   -   [c003      ]
+
+ Total Ganado: [c004      ]             Valor Fondo: [c005      ]
+
+}
+ATTRIBUTES
+c000 = FORMONLY.cod_trab, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = FORMONLY.nom_trab, NOENTRY, UPSHIFT, REVERSE;
+c002 = FORMONLY.per_ini, AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha inicial en formato: dd-mm-aaaa';
+c003 = FORMONLY.per_fin, AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha final en formato: dd-mm-aaaa';
+c004 = FORMONLY.tot_gan, NOENTRY, UPSHIFT, FORMAT = '###,##&.##',
+	COLOR = BLUE WHERE c004 > 0;
+c005 = FORMONLY.val_fon, NOENTRY, UPSHIFT, FORMAT = '###,##&.##',
+	COLOR = BLUE WHERE c005 > 0;
+END

@@ -23,7 +23,7 @@ DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
 CALL startlog('../logs/errores')
-CALL fgl_init4js()
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN          -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
@@ -35,8 +35,8 @@ LET vg_codcia   = arg_val(3)
 LET vg_proceso = 'cxcp102'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -67,14 +67,8 @@ MENU 'PROCESOS'
 			CALL control_ingreso()
 		END IF
 		IF vm_num_rows = 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		   END IF
-			
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -91,14 +85,8 @@ MENU 'PROCESOS'
 	COMMAND KEY('C') 'Consultar' 'Consultar un registro'
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		   END IF
-			
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -107,14 +95,8 @@ MENU 'PROCESOS'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		   END IF
-			
 		END IF
 		IF vm_row_current <= 1 THEN
 			HIDE OPTION 'Retroceder'
@@ -419,7 +401,7 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION no_validar_parametros()
 
 CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
 IF rg_mod.g50_modulo IS NULL THEN

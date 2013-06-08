@@ -1,0 +1,42 @@
+DATABASE aceros
+SCREEN
+{
+   Retenciones Proveedor: [c001                                    ]
+	          Moneda: [c002           ]
+
+    Fecha   Num.  TP     Factura      %     Valor Base    Valor Retención
+[c020      |c021 |z1|c022           |c23|c024            |c025          ]
+[c020      |c021 |z1|c022           |c23|c024            |c025          ]
+[c020      |c021 |z1|c022           |c23|c024            |c025          ]
+[c020      |c021 |z1|c022           |c23|c024            |c025          ]
+[c020      |c021 |z1|c022           |c23|c024            |c025          ]
+[c020      |c021 |z1|c022           |c23|c024            |c025          ]
+[c020      |c021 |z1|c022           |c23|c024            |c025          ]
+[c020      |c021 |z1|c022           |c23|c024            |c025          ]
+[c020      |c021 |z1|c022           |c23|c024            |c025          ]
+                             Totales:   [c030            |c031          ]
+}
+TABLES
+cxpt027
+cxpt028
+ATTRIBUTES
+c001 = FORMONLY.nomprov, REVERSE;
+c002 = FORMONLY.titmon,  REVERSE;
+c020 = FORMONLY.fecing TYPE DATE, FORMAT = 'dd-mm-yyyy';
+c021 = p28_num_ret;
+z1   = p28_tipo_doc;
+c022 = p28_num_doc;
+c23  = p28_porcentaje, FORMAT = '##&';
+c024 = p28_valor_base, FORMAT = '#,###,###,##&.##';
+c025 = p28_valor_ret,  FORMAT = '###,###,##&.##';
+c030 = FORMONLY.tot_base TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##', 
+	REVERSE;
+c031 = FORMONLY.tot_ret  TYPE DECIMAL(14,2), FORMAT = '###,###,##&.##', 
+	REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_ret[9] (fecing, p28_num_ret, p28_tipo_doc, p28_num_doc,
+			p28_porcentaje, p28_valor_base, p28_valor_ret)
+--KEYS
+--'F5' = 'Imprimir'

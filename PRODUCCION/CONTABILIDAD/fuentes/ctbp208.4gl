@@ -37,8 +37,9 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
-CALL fgl_init4js()
+--CALL startlog('../logs/errores')
+CALL startlog('../logs/ctbp208.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN                   -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 
@@ -55,8 +56,8 @@ CALL fl_seteos_defaults()	-- Asigna un valor por default a vg_codloc
 				-- que luego puede ser reemplazado si se 
                                 -- mantiene sin comentario la siguiente linea
 --LET vg_codloc = arg_val(4)
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -221,7 +222,7 @@ WHILE NOT salir
 			END IF
 			EXIT DISPLAY
 		BEFORE DISPLAY
-			CALL dialog.keysetlabel('ACCEPT', '')
+			--#CALL dialog.keysetlabel('ACCEPT', '')
 		BEFORE ROW
 			LET i = arr_curr()
 			LET j = scr_line()
@@ -385,10 +386,10 @@ INSERT INTO ctbt012 VALUES (r_b12.*)
 
 LET query = 'INSERT INTO ctbt013(b13_compania, b13_tipo_comp, b13_num_comp, ',
 			       ' b13_secuencia, b13_cuenta, b13_valor_base, ',
-			       ' b13_valor_aux, b13_fec_proceso) ', 
+			       ' b13_valor_aux, b13_num_concil, b13_fec_proceso) ', 
 		' SELECT ', r_b12.b12_compania, ', "', r_b12.b12_tipo_comp,  
 		      '", "', r_b12.b12_num_comp, '", b15_secuencia, ',
-                         'b15_cuenta, b15_valor_base, b15_valor_aux, "', 
+                         'b15_cuenta, b15_valor_base, b15_valor_aux, 0, "', 
 		         r_b12.b12_fec_proceso,
 			'" FROM ctbt015 ',
 			' WHERE b15_compania = ', r_b14.b14_compania,
@@ -412,7 +413,7 @@ OPTIONS
 	INPUT WRAP,
 	ACCEPT KEY F12
 
-OPEN WINDOW w_208_2 AT 10,22 WITH 5 ROWS, 35 COLUMNS
+OPEN WINDOW w_208_2 AT 10, 10 WITH 5 ROWS, 70 COLUMNS
 	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, BORDER) 
 OPEN FORM f_208_2 FROM '../forms/ctbf208_2'
 DISPLAY FORM f_208_2
@@ -429,7 +430,7 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION no_validar_parametros()
 
 CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
 IF rg_mod.g50_modulo IS NULL THEN

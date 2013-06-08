@@ -1,4 +1,4 @@
-DATABASE formonly
+DATABASE FORMONLY
 SCREEN
 {
 
@@ -7,15 +7,19 @@ SCREEN
 
 			    [f100                ]                  
 
+			    [f200                ]                  
+
  
 }
-attributes
+ATTRIBUTES
 
-a   =  formonly.a,    WIDGET='BMP',
+a   =  FORMONLY.a,    WIDGET='BMP',
   	config='boton_consultas.bmp CONTROL-Z';
 	
-f100=  formonly.c100, WIDGET='BUTTON', 
+f100=  FORMONLY.c100, WIDGET='BUTTON', 
 	config='CONTROL-A';
+f200=  FORMONLY.c200, WIDGET='BUTTON', 
+	config='CONTROL-B';
+END
 INSTRUCTIONS
 DELIMITERS '  '
-

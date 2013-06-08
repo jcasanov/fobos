@@ -1,39 +1,47 @@
-database diteca
-screen size 24 by 80
+DATABASE aceros
+SCREEN
 {
 
 
     Código Bodega: [f0]                              Estado: [a][a1        ]
            Nombre: [f002                          ] 
 
-        Localidad: [a2 ] [a22                     ]    Tipo: [b            ]
+        Localidad: [a2 ] [a22                     ]    Tipo: [b              ]
           Factura: [f]			            
 
-    Ingresado Por: [f005      ]                        Area: [f003         ]
- Fecha de Ingreso: [f006               ]
+   Identificación: [g] [f007                      ]
+                                                       Area: [f003         ]
+
+
+    Ingresado Por: [f005      ]      Fecha de Ingreso: [f006               ]
 
 }
-end
-tables
+TABLES
 rept002
-attributes
+rept009
+ATTRIBUTES
 f0   = rept002.r02_codigo, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 f002 = rept002.r02_nombre, REVERSE, UPSHIFT;
 a2   = rept002.r02_localidad, REVERSE,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-a22  = formonly.nom_loc TYPE VARCHAR, NOENTRY;
-a    = rept002.r02_estado, REVERSE, UPSHIFT, NOENTRY;
-a1   = formonly.tit_estado TYPE VARCHAR, NOENTRY;
+a22  = FORMONLY.nom_loc TYPE VARCHAR, NOENTRY;
+a    = rept002.r02_estado, REVERSE, UPSHIFT, NOENTRY,
+	COMMENTS = 'A ACTIVA  B BLOQUEADA';
+a1   = FORMONLY.tit_estado TYPE VARCHAR, NOENTRY;
 b    = rept002.r02_tipo, REVERSE, AUTONEXT, DEFAULT = 'F',
-	WIDGET = 'RADIO', CONFIG = 'F Física L Lógica',
-	 COMMENT = 'Seleccione el tipo de bodega';
+	WIDGET = 'RADIO', CONFIG = 'F Física L Lógica S "Sin Stock"',
+	 COMMENTS = 'F Física  L Lógica  S Sin Stock';
 f003 = rept002.r02_area, REVERSE, AUTONEXT, DEFAULT = 'R',
-	 WIDGET = 'RADIO', CONFIG = 'R Repuestos T Talleres',
-	 COMMENT = 'Seleccione el área a la que pertenece la bodega';
+	 WIDGET = 'RADIO', CONFIG = 'R Inventario T Talleres',
+	 COMMENT = 'Seleccione el area a la que pertenece la bodega';
 f    = rept002.r02_factura, REVERSE, DEFAULT = 'N',
 	WIDGET = 'CHECK', CONFIG = 'S N acknowedge', 
 	 COMMENT = '¿ Esta bodega factura ?';
+g    = rept002.r02_tipo_ident, REVERSE, AUTONEXT, UPSHIFT, DEFAULT = 'V',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+	#WIDGET = 'RADIO',CONFIG = 'V Comun C Contratos R Reserva I Importacion';
+f007 = rept009.r09_descripcion, NOENTRY, UPSHIFT;
 f005 = rept002.r02_usuario, REVERSE, NOENTRY;
 f006 = rept002.r02_fecing, REVERSE, NOENTRY;
-end
+END

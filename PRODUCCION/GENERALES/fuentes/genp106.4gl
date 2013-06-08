@@ -8,8 +8,6 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_demonios	VARCHAR(12)
-
 -- CADA VEZ QUE SE REALIZE UNA CONSULTA SE GUARDARAN LOS ROWID DE CADA FILA 
 -- RECUPERADA EN UNA TABLA LLAMADA r_rows QUE TENDRA 1000 ELEMENTOS
 DEFINE vm_rows ARRAY[1000] OF INTEGER  	-- ARREGLO DE ROWID DE FILAS LEIDAS
@@ -27,8 +25,8 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
-CALL fgl_init4js()
+CALL startlog('../logs/genp106.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 2 THEN          -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 
@@ -43,8 +41,8 @@ CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	-- Asigna un valor por default a vg_codloc
 				-- que luego puede ser reemplazado si se 
                                 -- mantiene sin comentario la siguiente linea
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL control_master()
 
@@ -82,10 +80,7 @@ MENU 'OPCIONES'
 			CALL control_ingreso()
 		END IF
 		IF vm_num_rows = 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-			
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -98,10 +93,7 @@ MENU 'OPCIONES'
 	COMMAND KEY('C') 'Consultar' 		'Consultar un registro.'
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-			
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -109,10 +101,7 @@ MENU 'OPCIONES'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-			
 		END IF
 		IF vm_row_current <= 1 THEN
                         HIDE OPTION 'Retroceder'
@@ -162,9 +151,10 @@ IF INT_FLAG THEN
 	END IF
 	RETURN
 END IF
-LET rm_ban.g08_banco = 0
+--LET rm_ban.g08_banco = 1
+SELECT NVL(MAX(g08_banco), 0) + 1 INTO rm_ban.g08_banco FROM gent008
 INSERT INTO gent008 VALUES (rm_ban.*)
-LET rm_ban.g08_banco = SQLCA.SQLERRD[2]	        -- Obtiene el numero secuencial 
+--LET rm_ban.g08_banco = SQLCA.SQLERRD[2]        -- Obtiene el numero secuencial
 				        	-- asignado por informix
 DISPLAY BY NAME rm_ban.g08_banco
 LET vm_num_rows = vm_num_rows + 1
@@ -379,7 +369,7 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION no_validar_parametros()
 
 CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
 IF rg_mod.g50_modulo IS NULL THEN

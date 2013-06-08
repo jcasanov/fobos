@@ -1,0 +1,89 @@
+DATABASE aceros
+SCREEN
+{
+                                                           [c050 ] de [c051 ]
+   Guía Remisión: [c014      ]  Estado: [d|c016     ]  Trans.: [c4|c015     ]
+         No. SRI: [c007              ]           Aut. SRI: [c010            ]
+ Fec. Ini. Tras.: [c000      ]              Fecha Ter. Traslado: [c001      ]
+ Motivo Traslado: [c|c002                            ] Fec.Emi.: [c003      ]
+   Punto Partida: [c004                                                     ]
+  Persona Trans.: [c005                                 ] Placa: [c080      ]
+    Destinatario: [c011                                                     ]
+ Cédula/RUC Tra.: [c006         ]           Cédula/RUC Dest.: [c012         ]
+   Punto Llegada: [c013                                                     ]
+                                                           [c060 ] de [c061 ]
+ TP Número   BD Ord D. N. Ent.   Item     Cantidad  U. Med.   Descripción
+[c2|c030  ] [c3|c031  |c032  ] [c033  ] [c034      |c035  |c036             ]
+[c2|c030  ] [c3|c031  |c032  ] [c033  ] [c034      |c035  |c036             ]
+[c2|c030  ] [c3|c031  |c032  ] [c033  ] [c034      |c035  |c036             ]
+[c2|c030  ] [c3|c031  |c032  ] [c033  ] [c034      |c035  |c036             ]
+[c075                                              ]
+[c076                                                              |c077    ]
+   Ingresado Por: [c008      ]           Fecha Ingreso: [c009               ]
+}
+TABLES
+rept010
+rept020
+rept036
+rept095
+rept097
+ATTRIBUTES
+c014 = rept095.r95_guia_remision, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+d    = rept095.r95_estado, NOENTRY, UPSHIFT, REVERSE;
+c016 = FORMONLY.tit_estado, NOENTRY, UPSHIFT, REVERSE;
+c4   = rept097.r97_cod_tran, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = '(FA) FACTURA  (TR) TRANSFERENCIAS';
+c015 = FORMONLY.r97_num_tran, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c000 = rept095.r95_fecha_initras, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la fecha de iniciación en formato: dd-mm-aaaa.';
+c001 = rept095.r95_fecha_fintras, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la fecha de terminación en formato: dd-mm-aaaa.';
+c    = rept095.r95_motivo, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = ('V', 'D', 'I', 'N'),	DEFAULT = 'V',
+	COMMENTS = '(V) Venta (D) Devolución (I) Importación (N) Transferencias entre Localidades';
+c002 = FORMONLY.tit_motivo, NOENTRY, UPSHIFT, REVERSE;
+c003 = rept095.r95_fecha_emi, AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la fecha de emisión en formato: dd-mm-aaaa.';
+c004 = rept095.r95_punto_part, AUTONEXT, UPSHIFT, REVERSE;
+c005 = rept095.r95_persona_guia, AUTONEXT, UPSHIFT, REVERSE;
+c006 = rept095.r95_persona_id, AUTONEXT, UPSHIFT, REVERSE;
+c007 = rept095.r95_num_sri, AUTONEXT, UPSHIFT, REVERSE;
+c010 = rept095.r95_autoriz_sri, AUTONEXT, UPSHIFT, REVERSE;
+c011 = rept095.r95_persona_dest, AUTONEXT, UPSHIFT, REVERSE;
+c012 = rept095.r95_pers_id_dest, AUTONEXT, UPSHIFT, REVERSE;
+c013 = rept095.r95_punto_lleg, AUTONEXT, UPSHIFT, REVERSE;
+
+c2   = rept020.r20_cod_tran, NOENTRY, UPSHIFT;
+c030 = rept020.r20_num_tran, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c3   = rept036.r36_bodega_real, NOENTRY, UPSHIFT;
+c031 = rept036.r36_num_ord_des, NOENTRY, UPSHIFT;
+c032 = rept036.r36_num_entrega, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c033 = rept020.r20_item, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c034 = rept020.r20_cant_ven, NOENTRY, UPSHIFT, FORMAT = '---,--&.##';
+c035 = rept010.r10_uni_med, NOENTRY, UPSHIFT;
+c036 = rept010.r10_nombre, NOENTRY, UPSHIFT;
+c080 = rept095.r95_placa, AUTONEXT, UPSHIFT;
+
+c050 = FORMONLY.num_reg, NOENTRY, UPSHIFT, REVERSE;
+c051 = FORMONLY.max_reg, NOENTRY, UPSHIFT, REVERSE;
+c060 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c061 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c075 = FORMONLY.descrip_3, NOENTRY;
+c076 = FORMONLY.nom_item TYPE VARCHAR, REVERSE, NOENTRY;
+c077 = FORMONLY.nom_marca, NOENTRY, REVERSE;
+
+c008 = rept095.r95_usuario, NOENTRY, UPSHIFT, REVERSE;
+c009 = rept095.r95_fecing, NOENTRY, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_guia[4] (r20_cod_tran, r20_num_tran, r36_bodega_real,
+				r36_num_ord_des, r36_num_entrega, r20_item,
+				r20_cant_ven, r10_uni_med, r10_nombre)

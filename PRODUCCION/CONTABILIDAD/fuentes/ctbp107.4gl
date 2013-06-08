@@ -28,8 +28,9 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
-CALL fgl_init4js()
+--CALL startlog('../logs/errores')
+CALL startlog('../logs/ctbp107.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN          -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
@@ -41,8 +42,8 @@ LET vg_codcia   = arg_val(3)
 LET vg_proceso = 'ctbp107'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL control_master()
 
@@ -76,10 +77,7 @@ MENU 'OPCIONES'
 	COMMAND KEY('I') 'Ingresar' 'Ingresar nuevos registros. '
 		CALL control_ingreso()
 		IF vm_num_rows = 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-			
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -92,10 +90,7 @@ MENU 'OPCIONES'
 	COMMAND KEY('C') 'Consultar' 'Consultar un registro. '
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-			
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -103,10 +98,7 @@ MENU 'OPCIONES'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-			
 		END IF
 		IF vm_row_current <= 1 THEN
                         HIDE OPTION 'Retroceder'
@@ -285,7 +277,7 @@ CALL mostrar_botones_detalle()
 INITIALIZE cod_aux TO NULL
 CONSTRUCT BY NAME expr_sql ON b16_cta_master
 	ON KEY(F2)
-	IF infield(b16_cta_master) THEN
+	IF INFIELD(b16_cta_master) THEN
 		CALL fl_ayuda_distribucion_cuentas(vg_codcia)
 			RETURNING cod_aux, nom_aux
 		LET int_flag = 0
@@ -364,7 +356,7 @@ INPUT BY NAME rm_ctb.b16_cta_master
 		RETURN
 	END IF
 	ON KEY(F2)
-	IF infield(b16_cta_master) THEN
+	IF INFIELD(b16_cta_master) THEN
 		CALL fl_ayuda_cuenta_contable(vg_codcia,6)
 			RETURNING cod_aux, nom_aux
 		LET int_flag = 0
@@ -457,7 +449,7 @@ IF vm_total_por < 100 THEN
                        		RETURN i
                 	END IF
 		ON KEY(F2)
-			IF infield(b16_cta_detail) THEN
+			IF INFIELD(b16_cta_detail) THEN
 				CALL fl_ayuda_cuenta_contable(vg_codcia,6)
 					RETURNING cod_aux, nom_aux
 				LET int_flag = 0
@@ -678,7 +670,7 @@ FUNCTION muestra_detalle_arr()
 CALL set_count(vm_num_elm)
 DISPLAY ARRAY vm_cm TO vm_cm.*
 	BEFORE DISPLAY
-		CALL dialog.keysetlabel("ACCEPT","")
+		--#CALL dialog.keysetlabel("ACCEPT","")
 	AFTER DISPLAY
 		CONTINUE DISPLAY
 	ON KEY(INTERRUPT)
@@ -707,7 +699,7 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION no_validar_parametros()
 
 CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
 IF rg_mod.g50_modulo IS NULL THEN

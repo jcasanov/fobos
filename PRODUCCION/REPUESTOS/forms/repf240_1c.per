@@ -1,0 +1,54 @@
+DATABASE aceros
+SCREEN
+{
+                                                              [c050] de [c051]
+  Item      Código de Pedido    Descrp.  MAX. MIN. ACT.LOC. Pendien.  Pedir
+[c010  ] [c011                |c012     |c013|c014|c015    |c016    |c017    ]
+[c010  ] [c011                |c012     |c013|c014|c015    |c016    |c017    ]
+[c010  ] [c011                |c012     |c013|c014|c015    |c016    |c017    ]
+[c010  ] [c011                |c012     |c013|c014|c015    |c016    |c017    ]
+[c010  ] [c011                |c012     |c013|c014|c015    |c016    |c017    ]
+[c010  ] [c011                |c012     |c013|c014|c015    |c016    |c017    ]
+[c010  ] [c011                |c012     |c013|c014|c015    |c016    |c017    ]
+[c010  ] [c011                |c012     |c013|c014|c015    |c016    |c017    ]
+[c010  ] [c011                |c012     |c013|c014|c015    |c016    |c017    ]
+[c010  ] [c011                |c012     |c013|c014|c015    |c016    |c017    ]
+                                   Cantidad Total de Items Pedidos: [c020    ]
+[c070                               ]
+[c071                               ]
+[c072                                    ]
+[c073                                              ]
+[c074                                                               |c075    ]
+}
+TABLES
+rept010
+rept093
+ATTRIBUTES
+c010 = rept093.r93_item, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c011 = rept093.r93_cod_pedido, NOENTRY, UPSHIFT;
+c012 = rept010.r10_nombre, NOENTRY, UPSHIFT;
+c013 = rept093.r93_stock_max, NOENTRY, UPSHIFT;
+c014 = rept093.r93_stock_min, NOENTRY, UPSHIFT;
+c015 = rept093.r93_stock_act, NOENTRY, UPSHIFT, FORMAT = '####&.##';
+c016 = rept093.r93_cantpend, NOENTRY, UPSHIFT, FORMAT = '####&.##';
+c017 = rept093.r93_cantpedir, AUTONEXT, UPSHIFT, FORMAT = '----&.##';
+
+c020 = FORMONLY.total_pedir TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '----&.##';
+
+c070 = FORMONLY.descrip_1, NOENTRY;
+c071 = FORMONLY.descrip_2, NOENTRY;
+c072 = FORMONLY.descrip_3, NOENTRY;
+c073 = FORMONLY.descrip_4, NOENTRY, REVERSE;
+c074 = FORMONLY.nom_item,  NOENTRY, REVERSE;
+c075 = FORMONLY.nom_marca, NOENTRY, REVERSE;
+
+c050 = FORMONLY.num_row, NOENTRY, REVERSE;
+c051 = FORMONLY.max_row, NOENTRY, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_pedido[10] (r93_item, r93_cod_pedido, r10_nombre,
+				r93_stock_max, r93_stock_min, r93_stock_act,
+				r93_cantpend, r93_cantpedir)

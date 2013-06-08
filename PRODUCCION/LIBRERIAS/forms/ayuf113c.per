@@ -1,0 +1,31 @@
+DATABASE aceros
+SCREEN
+{
+  PEDIDOS REPUESTOS 
+ -----------------------------------------------------------
+  Pedido      Proveedor                                E  T
+ -----------------------------------------------------------
+ [c01       ][c001                                   ][c][d] 
+ [c01       ][c001                                   ][c][d] 
+ [c01       ][c001                                   ][c][d] 
+ [c01       ][c001                                   ][c][d] 
+ [c01       ][c001                                   ][c][d] 
+ [c01       ][c001                                   ][c][d] 
+ [c01       ][c001                                   ][c][d] 
+ [c01       ][c001                                   ][c][d] 
+ [c01       ][c001                                   ][c][d] 
+ [c01       ][c001                                   ][c][d] 
+}
+TABLES
+rept016
+cxpt001
+cxpt001
+ATTRIBUTES
+c01  = r16_pedido, REVERSE;
+c001 = p01_nomprov, REVERSE;
+c    = r16_estado, REVERSE;
+d    = r16_tipo, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_pedrep[10](r16_pedido, p01_nomprov, r16_estado, r16_tipo)

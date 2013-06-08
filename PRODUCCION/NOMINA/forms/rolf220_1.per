@@ -1,0 +1,19 @@
+database aceros
+screen 
+{
+
+        Fecha Inicio: [c001      ]         Fecha Fin: [c002      ]
+         Año Proceso: [c005  ]           Mes Proceso: [c6|c103           ]
+
+}
+end
+tables
+rolt036
+attributes
+c001 = rolt036.n36_fecha_ini, REVERSE, FORMAT='dd-mm-yyyy', NOENTRY;
+c002 = rolt036.n36_fecha_fin, REVERSE, FORMAT='dd-mm-yyyy', NOENTRY;
+c005 = rolt036.n36_ano_proceso, REVERSE, NOENTRY;
+c6   = rolt036.n36_mes_proceso, REVERSE, NOENTRY;
+
+c103 = formonly.n_mes, NOENTRY;
+end

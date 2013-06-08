@@ -1,5 +1,5 @@
-database diteca
-screen 
+DATABASE aceros
+SCREEN 
 {
 
           Moneda: [c1] [c001              ] Tipo Vcto.: [c            ]
@@ -8,18 +8,18 @@ screen
    
 }
 end
-tables
+TABLES
 gent013
 
-attributes
+ATTRIBUTES
 c1   = gent013.g13_moneda, REVERSE, AUTONEXT, UPSHIFT, WIDGET='FIELD_BMP', 
 	CONFIG='lista.bmp F2';
-c2   = formonly.areaneg,     WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
-c4   = formonly.tipocli,     WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
-c001 = gent013.g13_nombre,     NOENTRY;
-c002 = formonly.n_areaneg,     NOENTRY;
-c004 = formonly.n_tipocli,     NOENTRY;
+c2   = FORMONLY.areaneg,     WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c4   = FORMONLY.tipocli,     WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c001 = gent013.g13_nombre, REVERSE ,  NOENTRY;
+c002 = FORMONLY.n_areaneg,     NOENTRY;
+c004 = FORMONLY.n_tipocli,     NOENTRY;
 
-c    = formonly.tipo_vcto, DEFAULT='T', WIDGET='RADIO', 
+c    = FORMONLY.tipo_vcto, DEFAULT='T', WIDGET='RADIO', 
 	CONFIG='P "Por Vencer" V Vencidos T Todos';
 end

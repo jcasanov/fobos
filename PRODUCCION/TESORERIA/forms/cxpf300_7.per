@@ -1,4 +1,4 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
                    MOVIMIENTOS DE DOCUMENTOS A FAVOR
@@ -24,20 +24,20 @@ ATTRIBUTES
 c000 = p01_nomprov, REVERSE;
 c1   = p23_tipo_favor, REVERSE;
 c002 = p23_doc_favor,  REVERSE;
-c10  = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-c011 = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-c012 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
-c013 = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
-c014 = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c10  = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
 c15  = p23_tipo_trn;
 c016 = p23_num_trn, FORMAT = '#####&';
 c017 = p22_fecha_emi, FORMAT = 'dd-mm-yyyy';
 c018 = p22_referencia;
-c019 = formonly.val_pago TYPE DECIMAL(12,2), FORMAT = '-,---,---,--&.##';
-c030 = formonly.tot_pago TYPE DECIMAL(12,2), FORMAT = '-,---,---,--&.##',
+c019 = FORMONLY.val_pago TYPE DECIMAL(12,2), FORMAT = '-,---,---,--&.##';
+c030 = FORMONLY.tot_pago TYPE DECIMAL(12,2), FORMAT = '-,---,---,--&.##',
        REVERSE;
 INSTRUCTIONS
 SCREEN RECORD r_pdoc[7] (p23_tipo_trn, p23_num_trn, p22_fecha_emi,
-			 p22_referencia, formonly.val_pago);
+			 p22_referencia, FORMONLY.val_pago);
 KEYS
 'F5'='Documento'

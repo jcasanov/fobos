@@ -1,59 +1,53 @@
------------------------------------------------------------------------------
--- Titulo           : cxpp413.4gl - Listado retenciones pagadas          
--- Elaboracion      : 09-ene-2006
--- Autor            : JCM
--- Formato Ejecucion: fglrun cxpp413 base módulo compañía localidad
+--------------------------------------------------------------------------------
+-- Titulo           : cxpp413.4gl - Listado de Tesorería realizado en un período
+-- Elaboracion      : 03-May-2006
+-- Autor            : NPC
+-- Formato Ejecucion: fglrun cxpp413 base modulo compañía localidad
 -- Ultima Correccion: 
--- Motivo Correccion: 
-------------------------------------------------------------------------------
+-- Motivo Correccion:
+--------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE rm_cia		RECORD LIKE gent001.*
-
-DEFINE rm_par		RECORD
-	anio			SMALLINT,
-	mes				SMALLINT,
-	n_mes			VARCHAR(19),
-	tipo_ret		CHAR(1)
-END RECORD
-
-DEFINE rm_cons		RECORD
-	nom_prov 	LIKE cxpt001.p01_nomprov,
-	tipo_doc	LIKE cxpt001.p01_tipo_doc,
-	num_doc		LIKE cxpt001.p01_num_doc,
-	porcentaje	LIKE cxpt028.p28_porcentaje,
-	base		LIKE cxpt028.p28_valor_base,
-	retenido	LIKE cxpt028.p28_valor_ret,
-	num_ret		SMALLINT,
-	tipo_ret	LIKE cxpt028.p28_tipo_ret
-END RECORD
-
+DEFINE rm_par 		RECORD
+				moneda          LIKE gent013.g13_moneda,
+				tit_mon         LIKE gent013.g13_nombre,
+				fecha_ini	DATE,
+				fecha_fin	DATE,
+				codprov		LIKE cxpt001.p01_codprov,
+				nomprov		LIKE cxpt001.p01_nomprov,
+				tipprov		LIKE gent012.g12_subtipo,
+				tit_tipprov	LIKE gent012.g12_nombre,
+				tipcar		LIKE gent012.g12_subtipo,
+				tit_tipcar	LIKE gent012.g12_nombre
+			END RECORD
+DEFINE vm_fecha_ini	DATE
+DEFINE vm_fin_mes	DATE
+DEFINE rm_z60		RECORD LIKE cxct060.*
 
 
 
 MAIN
-
-DEFER QUIT 
+	
+DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/cxpp413.error')
-CALL fgl_init4js()
+CALL startlog('../logs/cxpp413.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
-IF num_args() <> 4 THEN   -- Validar # parámetros correcto
+IF num_args() <> 4 THEN -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto.', 'stop')
 	EXIT PROGRAM
 END IF
-LET vg_base     = arg_val(1)
-LET vg_modulo   = arg_val(2)
-LET vg_codcia   = arg_val(3)
-LET vg_codloc   = arg_val(4)
-LET vg_proceso  = 'cxpp413'
+LET vg_base    = arg_val(1)
+LET vg_modulo  = arg_val(2)
+LET vg_codcia  = arg_val(3)
+LET vg_codloc  = arg_val(4)
+LET vg_proceso = 'cxpp413'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
-
 CALL funcion_master()
 
 END MAIN
@@ -63,13 +57,22 @@ END MAIN
 FUNCTION funcion_master()
 
 CALL fl_nivel_isolation()
-OPEN WINDOW w_mas AT 3,2 WITH 13 ROWS, 80 COLUMNS
-    ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE 0, BORDER,
-	      MESSAGE LINE LAST - 2)
-OPTIONS INPUT WRAP,
-	ACCEPT KEY	F12
-OPEN FORM f_rep FROM "../forms/cxpf413_1"
-DISPLAY FORM f_rep
+CALL fl_lee_fecha_carga_cxc(vg_codcia, vg_codloc) RETURNING rm_z60.*
+IF rm_z60.z60_compania IS NULL THEN
+	CALL fl_mostrar_mensaje('No existe una fecha de carga para este módulo.', 'stop')
+	EXIT PROGRAM
+END IF
+OPEN WINDOW w_imp AT 3,2 WITH 11 ROWS, 80 COLUMNS
+	ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE FIRST,
+		  BORDER, MESSAGE LINE LAST) 
+OPEN FORM f_par FROM "../forms/cxpf413_1"
+DISPLAY FORM f_par
+INITIALIZE rm_par.* TO NULL
+LET rm_par.moneda    = rg_gen.g00_moneda_base
+LET rm_par.fecha_ini = MDY(MONTH(TODAY), 01, YEAR(TODAY))
+LET vm_fin_mes       = rm_par.fecha_ini + 1 UNITS MONTH - 1 UNITS DAY
+LET rm_par.fecha_fin = vm_fin_mes
+LET vm_fecha_ini     = rm_z60.z60_fecha_carga
 CALL control_reporte()
 
 END FUNCTION
@@ -77,78 +80,17 @@ END FUNCTION
 
 
 FUNCTION control_reporte()
-DEFINE i,col		SMALLINT
-DEFINE query		VARCHAR(1000)
-DEFINE comando		VARCHAR(100)
-DEFINE fecha_ini	DATE 
-DEFINE fecha_fin	DATE 
-DEFINE expr_ret		VARCHAR(100)
+DEFINE i		SMALLINT
+DEFINE r_g13		RECORD LIKE gent013.*
 
-INITIALIZE rm_par.* TO NULL
-
-LET rm_par.anio     = YEAR(TODAY)
-LET rm_par.mes      = MONTH(TODAY)
-LET rm_par.tipo_ret = 'T'
-
+CALL fl_lee_moneda(rm_par.moneda) RETURNING r_g13.*
+LET rm_par.tit_mon = r_g13.g13_nombre
 WHILE TRUE
-	CALL lee_parametros()
+	CALL lee_parametros() 
 	IF int_flag THEN
 		EXIT WHILE
 	END IF
-	CALL fl_control_reportes() RETURNING comando
-	IF int_flag THEN
-		CONTINUE WHILE
-	END IF
-	CALL fl_lee_compania(vg_codcia) RETURNING rm_cia.*
-
-	LET expr_ret = ' '
-	IF rm_par.tipo_ret <> 'T' THEN
-		LET expr_ret = ' AND p28_tipo_ret = "', rm_par.tipo_ret, '"'
-	END IF 
-
-	{*
- 	 * Fechas inicial y final siempre seran primer dia del mes y ultimo dia
-	 * del mes respectivamente.
-	 *}
-	LET fecha_ini = mdy(rm_par.mes, 1, rm_par.anio)
-	LET fecha_fin = (fecha_ini + 1 UNITS MONTH) - 1 UNITS DAY
-
-	LET query = 'SELECT p01_nomprov, p01_tipo_doc, p01_num_doc, ' ||
-    	   		      ' p28_porcentaje, SUM(p28_valor_base) valor_base, ' ||
-	       			  ' SUM(p28_valor_ret) valor_ret, COUNT(*) num_ret, ' ||
-					  ' p28_tipo_ret ' ||
-	             ' FROM cxpt027, cxpt028, cxpt001 ' ||
-				' WHERE p27_compania  = ' || vg_codcia ||
-				'   AND p27_localidad = ' || vg_codloc ||
-				'   AND p27_estado    = "A" ' ||
-				'   AND p27_moneda    = "DO"	' ||
-				'   AND DATE(p27_fecing) BETWEEN "' || fecha_ini || '"' ||
-										'    AND "' || fecha_fin || '"' ||
-				'   AND p28_compania  = p27_compania ' ||
-				'   AND p28_localidad = p27_localidad ' ||
-				'   AND p28_num_ret   = p27_num_ret ' ||
-				'   AND p28_codprov   = p27_codprov ' ||
-				expr_ret CLIPPED ||
-				'   AND p01_codprov   = p27_codprov ' ||
-				' GROUP BY p01_nomprov, p01_tipo_doc, p01_num_doc, ' ||
-						'  p28_tipo_ret, p28_porcentaje ' ||
-				' ORDER BY p28_tipo_ret, p01_nomprov, p28_porcentaje '  
-
-	PREPARE deto FROM query
-	DECLARE q_deto CURSOR FOR deto
-	OPEN q_deto
-	FETCH q_deto
-	IF STATUS = NOTFOUND THEN
-		CLOSE q_deto
-		CALL fl_mensaje_consulta_sin_registros()
-		CONTINUE WHILE
-	END IF
-	CLOSE q_deto
-	START REPORT rep_reten TO PIPE comando
-	FOREACH q_deto INTO rm_cons.*
-		OUTPUT TO REPORT rep_reten(rm_cons.*)
-	END FOREACH
-	FINISH REPORT rep_reten
+	CALL control_imprimir()
 END WHILE
 
 END FUNCTION
@@ -156,125 +98,436 @@ END FUNCTION
 
 
 FUNCTION lee_parametros()
-DEFINE  r_c02		RECORD LIKE ordt002.*
+DEFINE r_g11		RECORD LIKE gent011.*
+DEFINE r_g12		RECORD LIKE gent012.*
+DEFINE r_g13		RECORD LIKE gent013.*
+DEFINE r_p01		RECORD LIKE cxpt001.*
+DEFINE r_p02		RECORD LIKE cxpt002.*
+DEFINE fec_ini, fec_fin	DATE
 
 LET int_flag = 0
-INPUT BY NAME rm_par.* WITHOUT DEFAULTS
+INPUT BY NAME rm_par.*
+	WITHOUT DEFAULTS
 	ON KEY(INTERRUPT)
 		LET int_flag = 1
 		RETURN
+	ON KEY(F2)
+		IF INFIELD(moneda) THEN
+			CALL fl_ayuda_monedas()
+				RETURNING r_g13.g13_moneda, r_g13.g13_nombre,
+					  r_g13.g13_decimales
+			IF r_g13.g13_moneda IS NOT NULL THEN
+				LET rm_par.moneda  = r_g13.g13_moneda
+				LET rm_par.tit_mon = r_g13.g13_nombre
+				DISPLAY BY NAME rm_par.moneda, rm_par.tit_mon
+			END IF
+		END IF
+		IF INFIELD(codprov) THEN
+			CALL fl_ayuda_proveedores_localidad(vg_codcia,vg_codloc)
+				RETURNING r_p01.p01_codprov,
+					  r_p01.p01_nomprov
+			IF r_p01.p01_codprov IS NOT NULL THEN
+				LET rm_par.codprov = r_p01.p01_codprov
+				LET rm_par.nomprov = r_p01.p01_nomprov
+				DISPLAY BY NAME rm_par.codprov, rm_par.nomprov
+			END IF
+		END IF
+		IF INFIELD(tipprov) THEN
+			CALL fl_ayuda_subtipo_entidad('TP') 
+				RETURNING r_g12.g12_tiporeg, r_g12.g12_subtipo,
+					  r_g12.g12_nombre, r_g11.g11_nombre
+			IF r_g12.g12_nombre IS NOT NULL THEN
+				LET rm_par.tipprov     = r_g12.g12_subtipo
+				LET rm_par.tit_tipprov = r_g12.g12_nombre
+				DISPLAY BY NAME rm_par.tipprov,
+						rm_par.tit_tipprov
+			END IF
+		END IF
+		IF INFIELD(tipcar) THEN
+			CALL fl_ayuda_subtipo_entidad('CR') 
+				RETURNING r_g12.g12_tiporeg, r_g12.g12_subtipo,
+					  r_g12.g12_nombre, r_g11.g11_nombre
+			IF r_g12.g12_nombre IS NOT NULL THEN
+				LET rm_par.tipcar     = r_g12.g12_subtipo
+				LET rm_par.tit_tipcar = r_g12.g12_nombre
+				DISPLAY BY NAME rm_par.tipcar, rm_par.tit_tipcar
+			END IF
+		END IF
+		LET int_flag = 0
+	BEFORE FIELD fecha_ini
+		LET fec_ini = rm_par.fecha_ini
+	BEFORE FIELD fecha_fin
+		LET fec_fin = rm_par.fecha_fin
+	AFTER FIELD moneda
+		IF rm_par.moneda IS NOT NULL THEN
+			CALL fl_lee_moneda(rm_par.moneda) RETURNING r_g13.*
+			IF r_g13.g13_moneda IS NULL THEN
+				CALL fgl_winmessage(vg_producto, 'No existe moneda.', 'exclamation')
+				NEXT FIELD moneda
+			END IF
+		ELSE
+			LET rm_par.moneda = rg_gen.g00_moneda_base
+			CALL fl_lee_moneda(rm_par.moneda) RETURNING r_g13.*
+		END IF
+		LET rm_par.tit_mon = r_g13.g13_nombre 
+		DISPLAY BY NAME rm_par.tit_mon
+	AFTER FIELD fecha_ini
+		IF rm_par.fecha_ini IS NULL THEN
+			LET rm_par.fecha_ini = fec_ini
+			DISPLAY BY NAME rm_par.fecha_ini
+		END IF
+		IF rm_par.fecha_ini <= vm_fecha_ini THEN
+			CALL fl_mostrar_mensaje('La Fecha Inicial no puede ser menor a la Fecha de Inicio de las TESORERIA en el FOBOS.', 'exclamation')
+			NEXT FIELD fecha_ini
+		END IF
+		IF rm_par.fecha_ini > TODAY THEN
+			CALL fl_mostrar_mensaje('La Fecha Inicial no puede ser mayor a la Fecha de Hoy.', 'exclamation')
+			NEXT FIELD fecha_ini
+		END IF
+	AFTER FIELD fecha_fin
+		IF rm_par.fecha_fin IS NULL THEN
+			LET rm_par.fecha_fin = fec_fin
+			DISPLAY BY NAME rm_par.fecha_fin
+		END IF
+		IF rm_par.fecha_fin <= vm_fecha_ini THEN
+			CALL fl_mostrar_mensaje('La Fecha Final no puede ser menor a la Fecha de Inicio de las TESORERIA en el FOBOS.', 'exclamation')
+			NEXT FIELD fecha_fin
+		END IF
+		IF rm_par.fecha_fin > vm_fin_mes THEN
+			CALL fl_mostrar_mensaje('La Fecha Final no puede ser mayor a la Fecha de Fin de Mes.', 'exclamation')
+			NEXT FIELD fecha_fin
+		END IF
+	AFTER FIELD codprov
+		IF rm_par.codprov IS NOT NULL THEN
+			CALL fl_lee_proveedor(rm_par.codprov) RETURNING r_p01.*
+			IF r_p01.p01_codprov IS NULL THEN
+				CALL fl_mostrar_mensaje('Proveedor no existe.', 'exclamation')
+				NEXT FIELD codprov
+			END IF
+			LET rm_par.nomprov = r_p01.p01_nomprov
+			DISPLAY BY NAME rm_par.nomprov
+			CALL fl_lee_proveedor_localidad(vg_codcia, vg_codloc,
+							r_p01.p01_codprov)
+				RETURNING r_p02.*
+			IF r_p02.p02_compania IS NULL THEN
+				CALL fl_mostrar_mensaje('Proveedor no está activado para esta Localidad.', 'exclamation')
+				NEXT FIELD codprov
+			END IF
+		ELSE
+			LET rm_par.nomprov = NULL
+			DISPLAY BY NAME rm_par.nomprov
+		END IF
+	AFTER FIELD tipprov
+		IF rm_par.tipprov IS NOT NULL THEN
+			CALL fl_lee_subtipo_entidad('TP', rm_par.tipprov)
+				RETURNING r_g12.*
+			IF r_g12.g12_tiporeg IS NULL THEN
+				CALL fgl_winmessage(vg_producto, 'No existe tipo proveedor.', 'exclamation')
+				NEXT FIELD tipprov
+			END IF
+			LET rm_par.tit_tipprov = r_g12.g12_nombre 
+			DISPLAY BY NAME rm_par.tit_tipprov
+		ELSE
+			LET rm_par.tit_tipprov = NULL
+			DISPLAY BY NAME rm_par.tit_tipprov
+		END IF
+	AFTER FIELD tipcar
+		IF rm_par.tipcar IS NOT NULL THEN
+			CALL fl_lee_subtipo_entidad('CR', rm_par.tipcar)
+				RETURNING r_g12.*
+			IF r_g12.g12_tiporeg IS NULL THEN
+				CALL fgl_winmessage(vg_producto, 'No existe tipo cartera.', 'exclamation')
+				NEXT FIELD tipcar
+			END IF
+			LET rm_par.tit_tipcar = r_g12.g12_nombre 
+			DISPLAY BY NAME rm_par.tit_tipcar
+		ELSE
+			LET rm_par.tit_tipcar = NULL
+			DISPLAY BY NAME rm_par.tit_tipcar
+		END IF
+	AFTER INPUT 
+		IF rm_par.codprov IS NOT NULL THEN
+			LET rm_par.tipprov     = NULL
+			LET rm_par.tit_tipprov = NULL
+			DISPLAY BY NAME rm_par.tipprov, rm_par.tit_tipprov
+		END IF
+		IF rm_par.fecha_ini > rm_par.fecha_fin THEN
+			CALL fl_mostrar_mensaje('La Fecha Inicial no puede ser mayor que la Fecha Final.', 'exclamation')
+			NEXT FIELD fecha_ini
+		END IF
 END INPUT
 
 END FUNCTION
 
 
 
-REPORT rep_reten(nom_prov, tipo_doc, num_doc, porcentaje, base, retenido, num_ret, tipo_ret)
-DEFINE nom_prov 	LIKE cxpt001.p01_nomprov
-DEFINE tipo_doc		LIKE cxpt001.p01_tipo_doc
-DEFINE num_doc		LIKE cxpt001.p01_num_doc
-DEFINE porcentaje	LIKE cxpt028.p28_porcentaje
-DEFINE base			LIKE cxpt028.p28_valor_base
-DEFINE retenido		LIKE cxpt028.p28_valor_ret
-DEFINE num_ret		SMALLINT
-DEFINE tipo_ret		LIKE cxpt028.p28_tipo_ret
+FUNCTION control_imprimir()
+DEFINE r_aux		RECORD
+				codprov		LIKE cxpt001.p01_codprov,
+				nomprov		LIKE cxpt001.p01_nomprov,
+				tipo_doc	LIKE cxpt020.p20_tipo_doc,
+				num_doc		LIKE cxpt020.p20_num_doc,
+				div_doc		LIKE cxpt020.p20_dividendo,
+				tipo_trn	LIKE cxpt022.p22_tipo_trn,
+				num_trn		LIKE cxpt022.p22_num_trn,
+				localidad	LIKE cxpt022.p22_localidad,
+				fec_emi		LIKE cxpt020.p20_fecha_emi,
+				fec_vcto	LIKE cxpt020.p20_fecha_vcto,
+				fec_pago	LIKE cxpt022.p22_fecha_emi,
+				dias_dif	INTEGER,
+				val_doc		DECIMAL(12,2),
+				val_tes		DECIMAL(12,2)
+			END RECORD
+DEFINE documento	VARCHAR(30)
+DEFINE movimient	VARCHAR(15)
+DEFINE comando		VARCHAR(100)
+DEFINE query		CHAR(4000)
+DEFINE expr1, expr2	VARCHAR(100)
+DEFINE expr3, expr4	VARCHAR(100)
+DEFINE expr5, expr6	VARCHAR(100)
+DEFINE expr7, expr9	VARCHAR(100)
+DEFINE expr8		VARCHAR(250)
+DEFINE expr10, expr11	VARCHAR(100)
+DEFINE tabl1		VARCHAR(10)
+DEFINE cuantos		INTEGER
+DEFINE fecing		LIKE cxpt022.p22_fecing
 
-DEFINE desc_ret     VARCHAR(15)
-
-DEFINE usuario		VARCHAR(19,15)
-DEFINE titulo		VARCHAR(80)
-DEFINE modulo		VARCHAR(40)
-DEFINE i,long		SMALLINT
-
-OUTPUT
-	TOP MARGIN	1
-	LEFT MARGIN	2
-	RIGHT MARGIN	90
-	BOTTOM MARGIN	4
-	PAGE LENGTH	66
-FORMAT
-PAGE HEADER
-	LET modulo  = "Módulo: Repuestos"
-	LET long    = LENGTH(modulo)
-	LET usuario = 'Usuario: ', vg_usuario
-	CALL fl_justifica_titulo('D', usuario, 19) RETURNING usuario
-	CALL fl_justifica_titulo('I', 'RESUMEN MENSUAL DE RETENCIONES PAGADAS', 80)
-		RETURNING titulo
-
-	PRINT COLUMN 1, rm_cia.g01_razonsocial,
-  	      COLUMN 120, "Página: ", PAGENO USING "&&&"
-	PRINT COLUMN 1, modulo CLIPPED,
-	      COLUMN 52, titulo CLIPPED,
-	      COLUMN 124, "CXPP413" 
-
-	PRINT COLUMN 48, "** Año            : ", rm_par.anio USING '&&&&' 
-	PRINT COLUMN 48, "** Mes            : ", rm_par.mes  USING '&&'
-
-	PRINT COLUMN 01, "Fecha  : ", TODAY USING "dd-mm-yyyy", 1 SPACES, TIME,
-	      COLUMN 112, usuario
-	SKIP 1 LINES
-
-	PRINT COLUMN 1,   "Proveedor",
-	      COLUMN 43,  "Tipo Doc",
-	      COLUMN 53,  "Número Documento",
-	      COLUMN 71,  "Porc.",
-	      COLUMN 78,  fl_justifica_titulo('D', "Valor Base", 16),
-	      COLUMN 96,  fl_justifica_titulo('D', "Valor Retenido", 16),
-		  COLUMN 114, "Total Ret."
-	PRINT "----------------------------------------------------------------------------------------------------------------------------------"
-
-BEFORE GROUP OF tipo_ret
-	SKIP 1 LINES
-	CASE tipo_ret
-		WHEN 'I' 
-			LET desc_ret = 'I V A'
-		WHEN 'F' 
-			LET desc_ret = 'F U E N T E'
-	END CASE
-	PRINT COLUMN 1, "** Tipo Retención : ", desc_ret CLIPPED 
-	SKIP 1 LINES
-
-ON EVERY ROW
-	NEED 2 LINES
-	PRINT COLUMN 1,   nom_prov CLIPPED,
-	      COLUMN 46,  tipo_doc CLIPPED,
-	      COLUMN 53,  num_doc CLIPPED,
-	      COLUMN 71,  porcentaje USING '##&.&&',
-	      COLUMN 78, base USING "-,---,---,--&.&&",
-	      COLUMN 96, retenido USING "---,---,--&.&&",
-	      COLUMN 114, num_ret USING "######"
-
-END REPORT
-
-
-
-FUNCTION validar_parametros()
-
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
+ERROR "Procesando documentos deudores . . . espere por favor." ATTRIBUTE(NORMAL)
+INITIALIZE expr1, expr2, expr3, expr4, expr5, expr6, expr7, expr8, expr9,
+		expr10, expr11, tabl1 TO NULL
+LET expr1 = '   AND p22_fecha_emi    BETWEEN "', rm_par.fecha_ini,
+				      '" AND "', rm_par.fecha_fin, '"'
+IF rm_par.codprov IS NOT NULL THEN
+	LET expr2 = '   AND p20_codprov       = ', rm_par.codprov
 END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
+IF rm_par.tipprov IS NOT NULL THEN
+	LET expr3 = '   AND p01_tipo_prov    = ', rm_par.tipprov
 END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
+IF rm_par.tipcar IS NOT NULL THEN
+	LET expr4 = '   AND p20_cartera      = ', rm_par.tipcar
 END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
+LET query = 'SELECT * FROM cxpt020 ',
+		' WHERE p20_compania     = ', vg_codcia,
+		'   AND p20_localidad    = ', vg_codloc,
+			expr2 CLIPPED,
+		'   AND p20_moneda       = "', rm_par.moneda, '"',
+			expr4 CLIPPED,
+		' INTO TEMP tmp_p20 '
+PREPARE cons_p20 FROM query
+EXECUTE cons_p20
+LET query = 'SELECT p20_compania, p20_localidad, p20_codprov, p01_nomprov,',
+			' p20_tipo_doc, p20_num_doc, p20_dividendo,',
+			' p20_fecha_emi, p20_fecha_vcto,',
+			' (p20_valor_cap + p20_valor_int) valor_doc ',
+		' FROM tmp_p20, cxpt001 ',
+		' WHERE p01_codprov = p20_codprov ',
+			expr3 CLIPPED,
+		' INTO TEMP tmp_doc '
+PREPARE stmnt1 FROM query
+EXECUTE stmnt1
+DROP TABLE tmp_p20
+SELECT COUNT(*) INTO cuantos FROM tmp_doc 
+ERROR ' '
+IF cuantos = 0 THEN
+	DROP TABLE tmp_doc
+	CALL fl_mostrar_mensaje('No existen documentos con saldo para este criterio de búsqueda.', 'exclamation')
+	RETURN
 END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
+LET query = 'SELECT p20_codprov, p01_nomprov, p20_tipo_doc, p20_num_doc,',
+			' p20_dividendo, p22_tipo_trn, p22_num_trn,',
+			' p22_localidad, p20_fecha_emi, p20_fecha_vcto,',
+			' p22_fecha_emi,',
+			' (p22_fecha_emi - p20_fecha_vcto) fecha, valor_doc,',
+			' (p23_valor_cap + p23_valor_int) valor_mov,',
+			' p22_fecing ',
+		' FROM tmp_doc, cxpt023, cxpt022 ',
+		' WHERE p23_compania     = p20_compania ',
+		'   AND p23_localidad    = p20_localidad ',
+		'   AND p23_codprov      = p20_codprov ',
+		'   AND p23_tipo_doc     = p20_tipo_doc ',
+		'   AND p23_num_doc      = p20_num_doc ',
+		'   AND p23_div_doc      = p20_dividendo ',
+		'   AND p22_compania     = p23_compania ',
+		'   AND p22_localidad    = p23_localidad ',
+		'   AND p22_codprov      = p23_codprov ',
+		'   AND p22_tipo_trn     = p23_tipo_trn ',
+		'   AND p22_num_trn      = p23_num_trn ',
+			expr1  CLIPPED,
+		' INTO TEMP tmp_mov '
+PREPARE exec_tmp FROM query
+EXECUTE exec_tmp
+LET query = 'SELECT * FROM tmp_mov ',
+		' ORDER BY p22_fecing, p01_nomprov, p20_tipo_doc,',
+			' p20_num_doc, p20_dividendo '
+PREPARE cons_report FROM query
+DECLARE q_report CURSOR FOR cons_report
+CALL fl_control_reportes() RETURNING comando
+IF int_flag THEN
+	DROP TABLE tmp_doc
+	RETURN
 END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
+START REPORT report_list_tesoreria TO PIPE comando
+LET cuantos = 0
+FOREACH q_report INTO r_aux.*, fecing
+	LET documento = r_aux.tipo_doc CLIPPED, '-',
+			r_aux.num_doc CLIPPED, '-',
+			r_aux.div_doc USING "&&"
+	LET movimient = r_aux.tipo_trn CLIPPED, '-',
+			r_aux.num_trn USING "<<<<<&&"
+	OUTPUT TO REPORT report_list_tesoreria(r_aux.codprov, r_aux.nomprov,
+						documento, movimient,
+						r_aux.localidad, r_aux.fec_emi,
+						r_aux.fec_vcto, r_aux.fec_pago,
+						r_aux.dias_dif,	r_aux.val_doc,
+						r_aux.val_tes)
+	LET cuantos   = 1
+END FOREACH
+FINISH REPORT report_list_tesoreria
+DROP TABLE tmp_doc
+DROP TABLE tmp_mov
+IF cuantos = 0 THEN
+	CALL fl_mensaje_consulta_sin_registros()
 END IF
 
 END FUNCTION
+
+
+
+REPORT report_list_tesoreria(r_rep)
+DEFINE r_rep		RECORD
+				codprov		LIKE cxpt001.p01_codprov,
+				nomprov		LIKE cxpt001.p01_nomprov,
+				documento	VARCHAR(30),
+				movimient	VARCHAR(15),
+				localidad	LIKE cxpt022.p22_localidad,
+				fec_emi		LIKE cxpt020.p20_fecha_emi,
+				fec_vcto	LIKE cxpt020.p20_fecha_vcto,
+				fec_pago	LIKE cxpt022.p22_fecha_emi,
+				dias_dif	INTEGER,
+				val_doc		DECIMAL(12,2),
+				val_tes		DECIMAL(12,2)
+			END RECORD
+DEFINE r_g01		RECORD LIKE gent001.*
+DEFINE r_g50		RECORD LIKE gent050.*
+DEFINE tipo		LIKE cxpt022.p22_tipo_trn
+DEFINE tipo_nom		LIKE cxpt004.p04_nombre
+DEFINE total_doc	DECIMAL(14,2)
+DEFINE total_mov	DECIMAL(14,2)
+DEFINE total_trn	INTEGER
+DEFINE usuario		VARCHAR(19,15)
+DEFINE modulo		VARCHAR(40)
+DEFINE escape		SMALLINT
+DEFINE act_comp		SMALLINT
+DEFINE desact_comp	SMALLINT
+DEFINE act_10cpi	SMALLINT
+DEFINE act_12cpi	SMALLINT
+
+OUTPUT
+	TOP MARGIN	1
+	LEFT MARGIN	0
+	RIGHT MARGIN	160
+	BOTTOM MARGIN	4
+	PAGE LENGTH	66
+
+FORMAT
+
+PAGE HEADER
+	LET escape	= 27		# Iniciar sec. impresi¢n
+	LET act_comp	= 15		# Activar Comprimido.
+	LET desact_comp	= 18		# Cancelar Comprimido.
+	LET act_10cpi	= 80		# Comprimido 10 CPI.
+	LET act_12cpi	= 77		# Comprimido 12 CPI.
+	CALL fl_lee_modulo(vg_modulo) RETURNING r_g50.*
+	LET modulo  = 'MODULO: ', r_g50.g50_nombre[1, 19] CLIPPED
+	LET usuario = 'USUARIO: ', vg_usuario
+	CALL fl_justifica_titulo('D', usuario, 19) RETURNING usuario
+	CALL fl_lee_compania(vg_codcia) RETURNING r_g01.*
+	print ASCII escape;
+	print ASCII act_comp;
+	print ASCII escape;
+	print ASCII act_12cpi
+	PRINT COLUMN 001, r_g01.g01_razonsocial,
+  	      COLUMN 150, "PAGINA: ", PAGENO USING '&&&'
+	PRINT COLUMN 001, modulo CLIPPED,
+	      COLUMN 062, "<< LISTADO DE TESORERIA REALIZADA >>",
+	      COLUMN 154, UPSHIFT(vg_proceso) CLIPPED
+	SKIP 1 LINES
+	PRINT COLUMN 015, "** MONEDA            : ", rm_par.moneda,
+		" ", rm_par.tit_mon,
+	      COLUMN 095, "TESORERIA REALIZADA DEL ",
+		rm_par.fecha_ini USING 'dd-mm-yyyy', " AL ",
+		rm_par.fecha_fin USING 'dd-mm-yyyy'
+	IF rm_par.codprov IS NOT NULL THEN
+		PRINT COLUMN 015, "** PROVEEDOR         : ",
+			rm_par.codprov USING '<<<<&&', " ",
+			rm_par.nomprov CLIPPED
+	END IF
+	IF rm_par.tipprov IS NOT NULL THEN
+		PRINT COLUMN 015, "** TIPO PROVEEDOR    : ",
+			rm_par.tipprov USING '<<&&', " ", rm_par.tit_tipprov
+	END IF
+	IF rm_par.tipcar IS NOT NULL THEN
+		PRINT COLUMN 015, "** TIPO CARTERA      : ",
+			rm_par.tipcar USING '<<&&', " ", rm_par.tit_tipcar
+	END IF
+	SKIP 1 LINES
+	PRINT COLUMN 001, "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy",
+ 		1 SPACES, TIME,
+	      COLUMN 142, usuario
+	PRINT "----------------------------------------------------------------------------------------------------------------------------------------------------------------"
+	PRINT COLUMN 001, "CODIGO",
+	      COLUMN 019, "P R O V E E D O R E S",
+	      COLUMN 052, "DOCUMENTOS",
+	      COLUMN 078, "MOVIMIENTOS",
+	      COLUMN 096, "LC",
+	      COLUMN 100, "FECHA EMI.",
+	      COLUMN 111, "FEC. VCTO.",
+	      COLUMN 122, " FEC. PAGO",
+	      COLUMN 133, "DIAS",
+	      COLUMN 138, " VALOR DOC.",
+	      COLUMN 150, " VALOR COB."
+	PRINT "----------------------------------------------------------------------------------------------------------------------------------------------------------------"
+
+ON EVERY ROW
+	NEED 3 LINES
+	PRINT COLUMN 001, r_rep.codprov		USING "####&&",
+	      COLUMN 008, r_rep.nomprov[1, 42]	CLIPPED,
+	      COLUMN 052, r_rep.documento	CLIPPED,
+	      COLUMN 078, r_rep.movimient	CLIPPED,
+	      COLUMN 096, r_rep.localidad	USING "&&",
+	      COLUMN 100, r_rep.fec_emi		USING "dd-mm-yyyy",
+	      COLUMN 111, r_rep.fec_vcto	USING "dd-mm-yyyy",
+	      COLUMN 122, r_rep.fec_pago	USING "dd-mm-yyyy",
+	      COLUMN 133, r_rep.dias_dif	USING "---&",
+	      COLUMN 138, r_rep.val_doc		USING "----,--&.##",
+	      COLUMN 150, r_rep.val_tes		USING "----,--&.##"
+	
+ON LAST ROW
+	NEED 2 LINES
+	PRINT COLUMN 138, "-----------",
+	      COLUMN 150, "-----------"
+	PRINT COLUMN 125, "TOTALES ==>  ",
+	      COLUMN 138, SUM(r_rep.val_doc)		USING "----,--&.##",
+	      COLUMN 150, SUM(r_rep.val_tes)		USING "----,--&.##"
+	SKIP 2 LINES
+	DECLARE q_totales CURSOR FOR
+		SELECT p22_tipo_trn, p04_nombre, NVL(SUM(valor_doc), 0),
+			NVL(SUM(valor_mov), 0), COUNT(*)
+			FROM tmp_mov, cxpt004
+			WHERE p04_tipo_doc = p22_tipo_trn
+			GROUP BY 1, 2
+			ORDER BY 1
+	FOREACH q_totales INTO tipo, tipo_nom, total_doc, total_mov, total_trn
+		PRINT COLUMN 005, "TOTAL DOCUMENTOS  ==> ",
+			total_doc USING "----,--&.##",
+		      COLUMN 045, "TOTAL ", tipo CLIPPED, " - ",
+			tipo_nom CLIPPED,
+		      COLUMN 071, " (", total_trn USING "<<<&&", ") ==> ",
+			total_mov USING "----,--&.##"
+	END FOREACH
+	print ASCII escape;
+	print ASCII desact_comp;
+	print ASCII escape;
+	print ASCII act_10cpi
+
+END REPORT

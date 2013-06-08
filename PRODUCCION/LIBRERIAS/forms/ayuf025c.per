@@ -1,0 +1,32 @@
+DATABASE aceros
+SCREEN
+{
+  GUIAS DE REMISION
+
+ --------------------------------------------------------------
+   Guía      Número SRI              Destinatario          M E
+ --------------------------------------------------------------
+ [c010  |c011              |c012                          |e|f]
+ [c010  |c011              |c012                          |e|f]
+ [c010  |c011              |c012                          |e|f]
+ [c010  |c011              |c012                          |e|f]
+ [c010  |c011              |c012                          |e|f]
+ [c010  |c011              |c012                          |e|f]
+ [c010  |c011              |c012                          |e|f]
+ [c010  |c011              |c012                          |e|f]
+ [c010  |c011              |c012                          |e|f]
+ [c010  |c011              |c012                          |e|f]
+}
+TABLES
+rept095
+ATTRIBUTES
+c010 = rept095.r95_guia_remision, NOENTRY, UPSHIFT;
+c011 = rept095.r95_num_sri, NOENTRY, UPSHIFT;
+c012 = rept095.r95_persona_dest, NOENTRY, UPSHIFT;
+e    = rept095.r95_motivo, NOENTRY, UPSHIFT;
+f    = rept095.r95_estado, NOENTRY, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_guia[10] (r95_guia_remision, r95_num_sri, r95_persona_dest,
+				r95_motivo, r95_estado)

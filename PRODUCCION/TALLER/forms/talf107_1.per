@@ -1,39 +1,48 @@
-database diteca
-screen 
+DATABASE aceros
+SCREEN 
 {
 
 
-                       Modelo: [f001           ] 
+              Código de tarea: [c002        ]	       Estado:[a|a1       ]  
 
-              Código de tarea: [f002        ]	       Estado:[a][a1       ]  
+                       Nombre: [c003                                    ]
 
-                       Nombre: [f003                                    ]
+                Tiempo Optimo: [c005 ]	                 Tipo:[b           ]
+    Valor Default Moneda Base: [c006        ]	
+ Valor Default Moneda Alterna: [c007        ]   Modific. Descripcion ? : [c]
 
-                Tiempo Optimo: [f005 ]	                 Tipo:[b           ]
-    Valor Default Moneda Base: [f006        ]	
- Valor Default Moneda Alterna: [f007        ]
+          Dscto. Max. Gerente: [c010 ] %
+             Dscto. Max. Jefe: [c011 ] %      Dscto. Max. Tecnico: [c012 ] %
 
-                Ingresado Por: [f008      ]
-             Fecha de Ingreso: [f009               ]
+                Ingresado Por: [c008      ]
+             Fecha de Ingreso: [c009               ]
 
 }
-end
-tables
+TABLES
 talt007
-attributes
-f001 = talt007.t07_modelo, REVERSE, UPSHIFT,
+ATTRIBUTES
+c002 = talt007.t07_codtarea, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-f002 = talt007.t07_codtarea, REVERSE, UPSHIFT,
-	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-f003 = talt007.t07_nombre, REVERSE, UPSHIFT, SCROLL;
+c003 = talt007.t07_nombre, REVERSE, UPSHIFT, SCROLL;
 a    = talt007.t07_estado, REVERSE, NOENTRY, UPSHIFT;
-a1   = formonly.tit_estado TYPE VARCHAR, NOENTRY;
+a1   = FORMONLY.tit_estado TYPE VARCHAR, NOENTRY;
 b    = talt007.t07_tipo, REVERSE, DEFAULT = 'V', 
 	WIDGET = 'RADIO', CONFIG = 'P Puntuable V Valor';
-f005 = talt007.t07_pto_default, REVERSE, 
+c005 = talt007.t07_pto_default, REVERSE, 
 	COMMENT = 'Unicamente para cuando la tarea es Tipo Puntuable';
-f006 = talt007.t07_val_defa_mb, REVERSE, FORMAT = '#,###,##&.##';
-f007 = talt007.t07_val_defa_ma, REVERSE, NOENTRY, FORMAT = '#,###,##&.##';
-f008 = talt007.t07_usuario, REVERSE, NOENTRY;
-f009 = talt007.t07_fecing, REVERSE, NOENTRY;
-end
+c006 = talt007.t07_val_defa_mb, REVERSE, FORMAT = '#,###,##&.##';
+c007 = talt007.t07_val_defa_ma, REVERSE, NOENTRY, FORMAT = '#,###,##&.##';
+c008 = talt007.t07_usuario, REVERSE, NOENTRY;
+c009 = talt007.t07_fecing, REVERSE, NOENTRY;
+c010 = talt007.t07_dscmax_ger, AUTONEXT, REVERSE, UPSHIFT, FORMAT = "#&.##",
+	INCLUDE = (0 TO 99.99);
+c011 = talt007.t07_dscmax_jef, AUTONEXT, REVERSE, UPSHIFT, FORMAT = "#&.##",
+	INCLUDE = (0 TO 99.99);
+c012 = talt007.t07_dscmax_ven, AUTONEXT, REVERSE, UPSHIFT, FORMAT = "#&.##",
+	INCLUDE = (0 TO 99.99);
+c    = talt007.t07_modif_desc, AUTONEXT, REVERSE, UPSHIFT, DEFAULT = 'N',
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowlegde',
+	COMMENTS = 'Utilizado para modificar descripcion de la tarea en Presupuesto y OT.';
+END
+INSTRUCTIONS
+DELIMITERS '||'

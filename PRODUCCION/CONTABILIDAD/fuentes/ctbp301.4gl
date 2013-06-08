@@ -1,14 +1,13 @@
-------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 -- Titulo           : ctbp301.4gl - Consulta del plan de cuentas
 -- Elaboracion      : 10-dic-2001
 -- Autor            : NPC
 -- Formato Ejecucion: fglrun ctbp301 base módulo compañía
 -- Ultima Correccion: 
 -- Motivo Correccion: 
-------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_demonios	VARCHAR(12)
 DEFINE vm_nuevoprog     VARCHAR(400)
 DEFINE rm_ctb		RECORD LIKE ctbt010.*
 DEFINE vm_max_det       SMALLINT
@@ -20,33 +19,36 @@ DEFINE vm_columna_2	SMALLINT
 DEFINE vm_moneda	LIKE ctbt011.b11_moneda
 DEFINE vm_anio		SMALLINT
 DEFINE vm_mes		SMALLINT
-DEFINE rm_det		ARRAY [1000] OF RECORD
+DEFINE rm_det		ARRAY[1500] OF RECORD
 				b10_cuenta	LIKE ctbt010.b10_cuenta,
 				b10_descripcion	LIKE ctbt010.b10_descripcion,
 				tit_saldo	DECIMAL(14,2)
 			END RECORD
+DEFINE vm_nivel_max	LIKE ctbt001.b01_nivel
+
+
 
 MAIN
 
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
-CALL fgl_init4js()
+CALL startlog('../logs/ctbp301.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN   -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto.', 'stop')
 	EXIT PROGRAM
 END IF
-LET vg_base     = arg_val(1)
-LET vg_modulo   = arg_val(2)
-LET vg_codcia   = arg_val(3)
-LET vg_codloc   = arg_val(4)
+LET vg_base    = arg_val(1)
+LET vg_modulo  = arg_val(2)
+LET vg_codcia  = arg_val(3)
+LET vg_codloc  = arg_val(4)
 LET vg_proceso = 'ctbp301'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -57,7 +59,15 @@ END MAIN
 FUNCTION funcion_master()
 
 CALL fl_nivel_isolation()
-LET vm_max_det = 1000
+LET vm_max_det = 1500
+SELECT MAX(b01_nivel) INTO vm_nivel_max FROM ctbt001
+IF vm_nivel_max IS NULL THEN
+	CALL fgl_winmessage(vg_producto, 
+		'No se ha configurado la estructura de niveles del plan de ' ||
+		'cuentas.',
+		'stop')
+	EXIT PROGRAM
+END IF
 OPEN WINDOW w_mas AT 3,2 WITH 22 ROWS, 80 COLUMNS
     ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE 0, BORDER,
 	      MESSAGE LINE LAST - 2)
@@ -80,8 +90,12 @@ FUNCTION control_consulta()
 DEFINE i,j,l,col	SMALLINT
 DEFINE query		VARCHAR(1000)
 DEFINE expr_sql         VARCHAR(600)
-DEFINE r_mon		RECORD LIKE gent013.*
 DEFINE fecha		DATE
+DEFINE val1, val2	DECIMAL(14,2)
+DEFINE fec_ini, fec_fin	DATE
+DEFINE flag		CHAR(1)
+DEFINE r_mon		RECORD LIKE gent013.*
+DEFINE nivel		LIKE ctbt010.b10_nivel
 
 LET vm_moneda = rg_gen.g00_moneda_base
 CALL fl_lee_moneda(vm_moneda) RETURNING r_mon.*
@@ -102,14 +116,15 @@ WHILE TRUE
 	FOR i = 1 TO 10
 		LET rm_orden[i] = '' 
 	END FOR
-	LET rm_orden[1]  = 'ASC'
-	LET vm_columna_1 = 1
-	LET vm_columna_2 = 2
-	LET col          = 1
+	LET col           = 1
+	LET vm_columna_1  = col
+	LET vm_columna_2  = 2
+	LET rm_orden[col] = 'ASC'
 	WHILE TRUE
-		LET query = 'SELECT b10_cuenta, b10_descripcion ',
+		LET query = 'SELECT b10_cuenta, b10_descripcion, b10_nivel ',
 				'FROM ctbt010 ',
 				'WHERE b10_compania = ', vg_codcia,
+				'  AND b10_estado   = "A"',
 				'  AND ', expr_sql CLIPPED,
 				" ORDER BY ", vm_columna_1, ' ',
 					rm_orden[vm_columna_1],
@@ -119,14 +134,29 @@ WHILE TRUE
 		DECLARE q_deto CURSOR FOR deto
 		LET vm_num_det = 1
 		FOREACH q_deto INTO rm_det[vm_num_det].b10_cuenta,
-				rm_det[vm_num_det].b10_descripcion
+				rm_det[vm_num_det].b10_descripcion, nivel
 			IF vm_anio IS NOT NULL THEN
 				LET fecha = MDY(vm_mes, 1, vm_anio) +
 					    1 UNITS MONTH - 1 UNITS DAY
-				CALL fl_obtiene_saldo_contable(vg_codcia,
+				IF rm_det[vm_num_det].b10_cuenta[1, 1] <> '3'
+				THEN
+					CALL fl_obtiene_saldo_contable(vg_codcia,
 						rm_det[vm_num_det].b10_cuenta,
 						vm_moneda, fecha, 'A')
 					RETURNING rm_det[vm_num_det].tit_saldo
+				ELSE
+					LET fec_ini = MDY(MONTH(fecha), 1, YEAR(fecha))
+					LET fec_fin = fecha
+					LET flag    = 'S'
+					IF nivel = vm_nivel_max THEN
+						LET fec_ini = fecha
+						LET fec_fin = TODAY
+						LET flag    = 'A'
+					END IF
+					CALL fl_obtener_saldo_cuentas_patrimonio(vg_codcia, rm_det[vm_num_det].b10_cuenta, vm_moneda, fec_ini, fec_fin, flag)
+						RETURNING val1, val2
+					LET rm_det[vm_num_det].tit_saldo = val1 + val2
+				END IF
 			ELSE
 				LET rm_det[vm_num_det].tit_saldo = NULL
 			END IF
@@ -149,7 +179,7 @@ WHILE TRUE
 		LET int_flag = 0
 		DISPLAY ARRAY rm_det TO rm_det.*
 			BEFORE DISPLAY
-				CALL dialog.keysetlabel('ACCEPT','')
+				--#CALL dialog.keysetlabel('ACCEPT','')
 			BEFORE ROW
 				LET j = arr_curr()
 				LET l = scr_line()
@@ -425,42 +455,8 @@ ELSE
 END IF
 LET vm_nuevoprog = 'cd ..', vg_separador, '..', vg_separador, 'CONTABILIDAD',
 	vg_separador, 'fuentes', vg_separador, '; fglrun ctbp302 ', vg_base,
-	' ', vg_modulo, ' ', vg_codcia, ' ', '', rm_det[i].b10_cuenta, '',
-	' ', mdy(vm_mes,1,vm_anio), ' ', fecha_fin, ' ', '', vm_moneda, ''
-display vm_nuevoprog
+	' ', vg_modulo, ' ', vg_codcia, ' ', '"', rm_det[i].b10_cuenta, '"',
+	' ', mdy(vm_mes,1,vm_anio), ' ', fecha_fin, ' ', '"', vm_moneda, '"'
 RUN vm_nuevoprog
-
-END FUNCTION
-
-
-
-FUNCTION validar_parametros()
-
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEn
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
 
 END FUNCTION

@@ -1,0 +1,77 @@
+DATABASE aceros
+SCREEN 
+{
+
+                          DIARIOS CONTABLES GENERADOS
+                          --------------------------
+
+   Grupo del Bien: [c000|c001                          ]
+  Codigo del Bien: [c002|c003                                              ]
+   Valor del Bien: [c004         ]    Depreciacion del Bien: [c005         ]
+      Transaccion: [c0|c006  |c007      |c008                |c009         ]
+      Util./Perd.: [c010         ]                              [c03] de [c04]
+ [c020       |c021        |c022                   |c023         |c024         ]
+[c1|c031    |c032        |c033                   |c034         |c035         ] 
+[c1|c031    |c032        |c033                   |c034         |c035         ] 
+[c1|c031    |c032        |c033                   |c034         |c035         ] 
+[c1|c031    |c032        |c033                   |c034         |c035         ] 
+[c1|c031    |c032        |c033                   |c034         |c035         ] 
+[c1|c031    |c032        |c033                   |c034         |c035         ] 
+[c1|c031    |c032        |c033                   |c034         |c035         ] 
+                                        Totales: [c040         |c041         ]
+ Subtipo: [c2|c042                               ]
+   Glosa: [c043                                                              ]
+}
+TABLES
+actt001
+actt010
+actt012
+ATTRIBUTES
+c000 = actt010.a10_grupo_act, NOENTRY, UPSHIFT;
+c001 = actt001.a01_nombre, NOENTRY, UPSHIFT;
+c002 = actt010.a10_codigo_bien, NOENTRY, UPSHIFT;
+c003 = actt010.a10_descripcion, NOENTRY, UPSHIFT;
+c004 = actt010.a10_valor_mb, NOENTRY, UPSHIFT, FORMAT = '##,###,##&.##',
+	COLOR = BLUE;
+c005 = actt010.a10_tot_dep_mb, NOENTRY, UPSHIFT, FORMAT = '##,###,##&.##',
+	COLOR = RED;
+c0   = actt012.a12_codigo_tran, NOENTRY, UPSHIFT, REVERSE;
+c006 = actt012.a12_numero_tran, NOENTRY, UPSHIFT, REVERSE;
+c007 = FORMONLY.a12_fecing TYPE DATE, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy';
+c008 = actt012.a12_referencia, NOENTRY, UPSHIFT, REVERSE;
+c009 = actt012.a12_valor_mb, NOENTRY, UPSHIFT, REVERSE,FORMAT = '--,---,--&.##';
+c010 = FORMONLY.util_per, NOENTRY, UPSHIFT, FORMAT = '##,###,##&.##',
+	COLOR = RED WHERE c010 > 0, COLOR = BLACK WHERE c010 = 0,
+	COLOR = BLUE WHERE c010 < 0;
+
+c020 = FORMONLY.tit_col1, WIDGET='BUTTON', CONFIG='F15';
+c021 = FORMONLY.tit_col2, WIDGET='BUTTON', CONFIG='F16';
+c022 = FORMONLY.tit_col3, WIDGET='BUTTON', CONFIG='F17';
+c023 = FORMONLY.tit_col4, WIDGET='BUTTON', CONFIG='F18';
+c024 = FORMONLY.tit_col5, WIDGET='BUTTON', CONFIG='F19';
+
+c03  = FORMONLY.num_row, REVERSE, NOENTRY, UPSHIFT;
+c04  = FORMONLY.max_row, REVERSE, NOENTRY, UPSHIFT;
+
+c1   = FORMONLY.tipo_comp, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c031 = FORMONLY.num_comp, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c032 = FORMONLY.cuenta, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c033 = FORMONLY.descripcion, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c034 = FORMONLY.valor_db, NOENTRY, UPSHIFT, FORMAT = '--,---,--&.##',
+	OPTIONS = '-nolist';
+c035 = FORMONLY.valor_cr, NOENTRY, UPSHIFT, FORMAT = '--,---,--&.##',
+	OPTIONS = '-nolist';
+
+c040 = FORMONLY.total_db, NOENTRY, UPSHIFT, REVERSE, FORMAT = '--,---,--&.##';
+c041 = FORMONLY.total_cr, NOENTRY, UPSHIFT, REVERSE, FORMAT = '--,---,--&.##';
+c2   = FORMONLY.subtipo,  NOENTRY, UPSHIFT;
+c042 = FORMONLY.desc_sub, NOENTRY, UPSHIFT;
+c043 = FORMONLY.glosa, NOENTRY, UPSHIFT, REVERSE;
+END
+KEYS
+F5 = 'Contabilizacion'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_det[7] (tipo_comp, num_comp, cuenta, descripcion, valor_db,
+			valor_cr)

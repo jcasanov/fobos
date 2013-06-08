@@ -1,0 +1,71 @@
+DATABASE aceros
+SCREEN
+{
+
+      Grupo de Activo: [f001  ] [f002                                  ]
+
+       Años Vida Util: [f003  ]                      Depreciable ? : [a]
+   Porc. Depreciación: [f004   ] %             Porcentaje manual ? : [b]
+
+             Aux. Grupo Activo: [f005        ] [f011                        ]
+        Aux. Grupo Reexpresión: [f006        ] [f012                        ]
+   Aux. Depreciación Acumulada: [f007        ] [f013                        ]
+ Aux. Depreciación Reexpresión: [f008        ] [f014                        ]
+
+ Aux. de Pago en Venta Activos: [f015        ] [f016                        ]
+                   Paga IVA ? : [c]
+  Aux. de IVA en Venta Activos: [f017        ] [f018                        ]
+         Aux. de Venta Activos: [f019        ] [f020                        ]
+  Aux. Util/Gasto Vta. Activos: [f021        ] [f022                        ]
+    Aux. Transferencia Activos: [f023        ] [f024                        ]
+
+    Ingresado Por: [f009      ]       Fecha de Ingreso: [f010               ]
+}
+TABLES
+actt001
+ATTRIBUTES
+f001 = actt001.a01_grupo_act, REVERSE, NOENTRY, WIDGET = 'FIELD_BMP',
+       CONFIG = 'lista.bmp F2';
+f002 = actt001.a01_nombre, UPSHIFT, REVERSE;
+a    = actt001.a01_depreciable, WIDGET = 'CHECK', REVERSE,
+	CONFIG = 'S N acknowledge', DEFAULT = 'N', AUTONEXT;
+f003 = actt001.a01_anos_util, AUTONEXT, INCLUDE = (0 TO 9999), REVERSE;
+f004 = actt001.a01_porc_deprec, AUTONEXT, FORMAT = "##&.##", REVERSE,
+	INCLUDE = (0 TO 100.00);
+f005 = actt001.a01_aux_activo, REVERSE, WIDGET = 'FIELD_BMP', 
+       CONFIG = 'lista.bmp F2',
+       COMMENTS = 'Auxiliar al momento de la Compra';
+f006 = actt001.a01_aux_reexpr, REVERSE, WIDGET = 'FIELD_BMP', 
+       CONFIG = 'lista.bmp F2';
+f007 = actt001.a01_aux_dep_act, REVERSE, WIDGET = 'FIELD_BMP',
+       CONFIG = 'lista.bmp F2', 
+       COMMENTS = 'Auxiliar al momento de la Depreciación';
+f008 = actt001.a01_aux_dep_reex, REVERSE, WIDGET = 'FIELD_BMP',
+       CONFIG = 'lista.bmp F2';
+f009 = actt001.a01_usuario, UPSHIFT, REVERSE;
+f010 = actt001.a01_fecing, REVERSE, NOENTRY;
+f011 = FORMONLY.descripcion1, NOENTRY;
+f012 = FORMONLY.descripcion2, NOENTRY;
+f013 = FORMONLY.descripcion3, NOENTRY;
+f014 = FORMONLY.descripcion4, NOENTRY;
+b    = FORMONLY.vm_calculo, WIDGET = 'CHECK', REVERSE, UPSHIFT,
+	CONFIG = 'S N acknowledge', DEFAULT = 'N', AUTONEXT;
+c    = actt001.a01_paga_iva, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N';
+
+f015 = actt001.a01_aux_pago, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f016 = FORMONLY.descripcion5, NOENTRY, UPSHIFT;
+f017 = actt001.a01_aux_iva, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f018 = FORMONLY.descripcion6, NOENTRY, UPSHIFT;
+f019 = actt001.a01_aux_venta, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f020 = FORMONLY.descripcion7, NOENTRY, UPSHIFT;
+f021 = actt001.a01_aux_gasto, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f022 = FORMONLY.descripcion8, NOENTRY, UPSHIFT;
+f023 = actt001.a01_aux_transf, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f024 = FORMONLY.descripcion9, NOENTRY, UPSHIFT;
+END

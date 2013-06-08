@@ -1,40 +1,71 @@
-DATABASE formonly
+DATABASE aceros
 SCREEN
 {
-                     Año: [c000]     Mes: [c1] [c010         ] 
-                  Moneda: [c0] [c002          ]
-           Linea (Marca): [c03  ] [c004                      ]
-[c001                                                                          ]
-[c001                                                                          ]
-[c001                                                                          ]
-[c001                                                                          ]
-[c001                                                                          ]
-[c001                                                                          ]
-[c001                                                                          ]
-[c001                                                                          ]
-[c001                                                                          ]
-[c001                                                                          ]
-[c001                                                                          ]
-[c001                                                                          ]
-[c001                                                                          ]
-[c001                                                                          ]
-[c001                                                                          ]
-[c001                                                                          ]
-[c001                                                                          ]
-[c001                                                                          ]
-[c001                                                                          ]
-[a]
+   Fecha Inicial: [c004      ]                       Fecha Final: [c005      ]
+
+  Código Cliente: [c000  ] [c001                                             ]
+
+                                                            [c006 ] de [c007 ]
+ [c010  |c011  |c012  |c013  |c014      |c015                     |c016       ]
+[c020  |c021  |c022  |c023  |c024      |c025                     |c026       ]
+[c020  |c021  |c022  |c023  |c024      |c025                     |c026       ]
+[c020  |c021  |c022  |c023  |c024      |c025                     |c026       ]
+[c020  |c021  |c022  |c023  |c024      |c025                     |c026       ]
+[c020  |c021  |c022  |c023  |c024      |c025                     |c026       ]
+[c020  |c021  |c022  |c023  |c024      |c025                     |c026       ]
+[c020  |c021  |c022  |c023  |c024      |c025                     |c026       ]
+[c020  |c021  |c022  |c023  |c024      |c025                     |c026       ]
+[c020  |c021  |c022  |c023  |c024      |c025                     |c026       ]
+[c020  |c021  |c022  |c023  |c024      |c025                     |c026       ]
+[c020  |c021  |c022  |c023  |c024      |c025                     |c026       ]
+[c020  |c021  |c022  |c023  |c024      |c025                     |c026       ]
+[c020  |c021  |c022  |c023  |c024      |c025                     |c026       ]
+[c030                                  ]               Total ==> [c031       ]
 }
+TABLES
+talt060
 ATTRIBUTES
-c000 = formonly.ano TYPE SMALLINT NOT NULL, REQUIRED, REVERSE;
-c0   = formonly.moneda TYPE CHAR NOT NULL ,REQUIRED, REVERSE,
-       WIDGET = 'FIELD_BMP',  CONFIG = 'lista.bmp F2';
-c1   = formonly.mes TYPE SMALLINT NOT NULL ,REQUIRED, REVERSE,
-       WIDGET = 'FIELD_BMP',  CONFIG = 'lista.bmp F2';
-c010 = formonly.tit_mes, REVERSE, NOENTRY, UPSHIFT;
-c002 = formonly.tit_mon, REVERSE, NOENTRY;
-c03  = formonly.t01_linea TYPE CHAR, WIDGET = 'FIELD_BMP',  
-	CONFIG = 'lista.bmp F2', UPSHIFT;
-c004 = formonly.tit_linea, NOENTRY, REVERSE;
-c001 = formonly.c001, WIDGET = 'Canvas';
-a    = formonly.tecla, AUTONEXT, INVISIBLE;
+c000 = FORMONLY.vm_cliente TYPE CHAR, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = FORMONLY.tit_cliente, NOENTRY, UPSHIFT;
+c004 = FORMONLY.vm_fecha_ini TYPE DATE NOT NULL, REQUIRED,
+	AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Inicial en formato: dd-mm-aaaa';
+c005 = FORMONLY.vm_fecha_fin TYPE DATE NOT NULL, REQUIRED,
+	AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Final en formato: dd-mm-aaaa';
+
+c006 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c007 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c015 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c016 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+
+c020 = talt060.t60_fac_nue, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c021 = talt060.t60_ot_nue, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c022 = talt060.t60_fac_ant, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c023 = talt060.t60_ot_ant, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c024 = FORMONLY.t60_fecing TYPE DATE, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+c025 = talt060.t60_nomcli_nue, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c026 = FORMONLY.total_fact TYPE DECIMAL, NOENTRY, UPSHIFT,
+	FORMAT = '####,##&.##', OPTIONS = '-nolist';
+
+c030 = talt060.t60_motivo_refact, NOENTRY, UPSHIFT, REVERSE;
+c031 = FORMONLY.total_gen TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '####,##&.##';
+END
+KEYS
+F5 = 'Factura Nueva'
+F6 = 'Factura Origen'
+F7 = 'Refacturación'
+F8 = 'Imprimir Listado'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_refact[13] (t60_fac_nue, t60_ot_nue, t60_fac_ant, t60_ot_ant,
+				t60_fecing, t60_nomcli_nue, total_fact)

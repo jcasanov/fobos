@@ -1,63 +1,79 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
-	Fecha Inicial:[c0        ]           Fecha Final:[c1        ]
-	       Moneda:[c2] [c3	    		       	            ]
-               Bodega:[c4] [c5                                      ]
-        Tipo Consulta:[c6                            ] 
+    Fecha Inicial: [c0        ]                  Fecha Final: [c1        ]
+           Moneda: [c2]   [c3             ]      Tipo Venta: [b|c002     ]
+           Bodega: [c4]   [c5                            ]
+         Vendedor: [c003] [c004                          ]
+    Tipo Consulta: [c6                   ]          Valor >=: [c011      ] 
 
 
-   	 [b0    |b1   		              	 |b2                ]
-  	[f0    |f1                 		|f2                ]
-  	[f0    |f1                 		|f2                ]
-  	[f0    |f1                 		|f2                ]
-  	[f0    |f1                 		|f2                ]
-  	[f0    |f1                 		|f2                ]
-  	[f0    |f1                 		|f2                ]
-  	[f0    |f1                 		|f2                ]
-  	[f0    |f1                 		|f2                ]
-  	[f0    |f1                 		|f2                ]
-  	[f0    |f1                 		|f2                ]
-  	[f0    |f1                 		|f2                ]
-					 Total: [c10               ]
+ [b0 |b1    |b2                                           |b3                ]
+[f0 |f1    |f2                                           |f3                ]
+[f0 |f1    |f2                                           |f3                ]
+[f0 |f1    |f2                                           |f3                ]
+[f0 |f1    |f2                                           |f3                ]
+[f0 |f1    |f2                                           |f3                ]
+[f0 |f1    |f2                                           |f3                ]
+[f0 |f1    |f2                                           |f3                ]
+[f0 |f1    |f2                                           |f3                ]
+[f0 |f1    |f2                                           |f3                ]
+[f0 |f1    |f2                                           |f3                ]
+[f0 |f1    |f2                                           |f3                ]
+ Vendedor: [c050                          ]       Total: [c10               ]
 }
 TABLES
+	rept001
 	rept019
 ATTRIBUTES
 
-c0  = formonly.vm_fecha_ini TYPE DATE, AUTONEXT, UPSHIFT, REVERSE,
+c0  = FORMONLY.vm_fecha_ini TYPE DATE, AUTONEXT, UPSHIFT, REVERSE,
 	FORMAT = 'dd-mm-yyyy', 
 	COMMENTS = 'Digite la fecha en formato: dd-mm-aaaa';
-c1  = formonly.vm_fecha_fin TYPE DATE, AUTONEXT, UPSHIFT, REVERSE,
+c1  = FORMONLY.vm_fecha_fin TYPE DATE, AUTONEXT, UPSHIFT, REVERSE,
 	FORMAT = 'dd-mm-yyyy', 
 	COMMENTS = 'Digite la fecha en formato: dd-mm-aaaa';
 
-c2  = formonly.vm_moneda TYPE VARCHAR, REQUIRED, AUTONEXT, UPSHIFT, REVERSE,
+c2  = FORMONLY.vm_moneda TYPE VARCHAR, REQUIRED, AUTONEXT, UPSHIFT, REVERSE,
         WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c3  = formonly.nom_moneda, NOENTRY;
+c3  = FORMONLY.nom_moneda,UPSHIFT ,REVERSE,NOENTRY;
 
-c4  = formonly.vm_bodega TYPE VARCHAR, REQUIRED, AUTONEXT, UPSHIFT, REVERSE,
+b    = FORMONLY.tipo_vta TYPE CHAR NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, INCLUDE = ('C', 'R', 'T'), DEFAULT = 'T',
+	COMMENTS = '(C) CONTADO  (R) CREDITO  (T) T O D O S.';
+c002 = FORMONLY.tit_tipo_vta TYPE VARCHAR, NOENTRY, UPSHIFT, REVERSE;
+
+c4  = FORMONLY.vm_bodega TYPE VARCHAR, REQUIRED, AUTONEXT, UPSHIFT, 
         WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c5  = formonly.nom_bodega, NOENTRY;
+c5  = FORMONLY.nom_bodega, UPSHIFT,NOENTRY;
 
-c6  = formonly.vm_tipcli TYPE CHAR NOT NULL , WIDGET='RADIO', 
+c003 = FORMONLY.r19_vendedor, AUTONEXT, UPSHIFT,
+        WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c004 = FORMONLY.tit_vendedor, NOENTRY, UPSHIFT;
+
+c6  = FORMONLY.vm_tipcli TYPE CHAR NOT NULL , WIDGET='RADIO', 
 	CONFIG='C "Por cliente" T "Por tipo de cliente"', DEFAULT='C';  
-c10 = formonly.total_neto, FORMAT = '-,---,---,--&.--', NOENTRY;
+c10 = FORMONLY.total_neto, FORMAT = '-,---,---,--&.--', NOENTRY;
+c011 = FORMONLY.filtro_val, FORMAT='---,--&.--', 
+	INCLUDE=(NULL, -99999 TO 999999.99);
 
-b0  = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-b1  = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-b2  = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+b0  = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+b1  = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b2  = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+b3  = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
 
-f0  = r19_codcli,   OPTIONS = '-nolist';
-f1  = r19_nomcli,   OPTIONS = '-nolist';
-f2  = r19_tot_neto, OPTIONS = '-nolist', FORMAT = '-,---,---,--&.--';
+f0  = r01_iniciales, OPTIONS = '-nolist';
+f1  = r19_codcli,    OPTIONS = '-nolist', UPSHIFT;
+f2  = r19_nomcli,    OPTIONS = '-nolist', UPSHIFT;
+f3  = r19_tot_neto,  OPTIONS = '-nolist', FORMAT = '-,---,---,--&.--';
 
+c050 = r01_nombres, UPSHIFT, REVERSE, NOENTRY;
+END
  
 INSTRUCTIONS
-SCREEN RECORD r_detalle[11] (r19_codcli,  r19_nomcli, r19_tot_neto)
+SCREEN RECORD r_detalle[11] (r01_iniciales, r19_codcli, r19_nomcli,r19_tot_neto)
 
 KEYS
-'F5' = 'Det. Ventas'
+'F5' = 'Detalle Ventas'
 'F6' = 'Estado Cuenta'
 
-END

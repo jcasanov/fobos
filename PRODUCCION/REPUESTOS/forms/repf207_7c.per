@@ -1,0 +1,39 @@
+DATABASE aceros
+SCREEN 
+{
+                           PARTIDAS Y ARANCELES
+                           --------------------
+
+  Item                  Descripción                  Partida      Por. %
+[d001   |d002                                   |d003           ][d004  ] 
+[d001   |d002                                   |d003           ][d004  ] 
+[d001   |d002                                   |d003           ][d004  ] 
+[d001   |d002                                   |d003           ][d004  ] 
+[d001   |d002                                   |d003           ][d004  ] 
+[d001   |d002                                   |d003           ][d004  ] 
+[d001   |d002                                   |d003           ][d004  ] 
+[d001   |d002                                   |d003           ][d004  ] 
+[d001   |d002                                   |d003           ][d004  ] 
+[d001   |d002                                   |d003           ][d004  ] 
+[d001   |d002                                   |d003           ][d004  ]    
+[c072                                    ]
+[c073                                              ]
+[c074                                                             ]
+}
+TABLES
+rept017
+ATTRIBUTES
+d001 = r17_item, NOENTRY, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+d002 = FORMONLY.r10_nombre, NOENTRY, REVERSE;
+d003 = r17_partida, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+d004 = r17_porc_part, INCLUDE = (0 TO 999.99), REVERSE;
+c072 = FORMONLY.descrip_3, NOENTRY, REVERSE;
+c073 = FORMONLY.descrip_4, NOENTRY, REVERSE;
+c074 = FORMONLY.nom_item,  NOENTRY, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_pp[11](r17_item, formonly.r10_nombre, r17_partida, 
+			r17_porc_part)

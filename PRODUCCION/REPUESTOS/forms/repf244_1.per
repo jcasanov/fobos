@@ -1,0 +1,67 @@
+DATABASE FORMONLY
+SCREEN
+{
+  Cliente: [c000   ] [c001                                              ]
+
+     Item: [c002   ] [c003                                              ]
+           [c004                                                             ]
+
+                                                            [c008 ] de [c009 ]
+ [c010   |c011      |c012                 |c013  |c014       |c015       |c016]
+[c020   |c021      |c022                 |c023  |c024       |c025       |c026]
+[c020   |c021      |c022                 |c023  |c024       |c025       |c026]
+[c020   |c021      |c022                 |c023  |c024       |c025       |c026]
+[c020   |c021      |c022                 |c023  |c024       |c025       |c026]
+[c020   |c021      |c022                 |c023  |c024       |c025       |c026]
+[c020   |c021      |c022                 |c023  |c024       |c025       |c026]
+[c020   |c021      |c022                 |c023  |c024       |c025       |c026]
+[c020   |c021      |c022                 |c023  |c024       |c025       |c026]
+[c020   |c021      |c022                 |c023  |c024       |c025       |c026]
+[c020   |c021      |c022                 |c023  |c024       |c025       |c026]
+[c020   |c021      |c022                 |c023  |c024       |c025       |c026]
+[c020   |c021      |c022                 |c023  |c024       |c025       |c026]
+        [c030                                               ]
+        [c031                                                            ]
+}
+ATTRIBUTES
+c000 = FORMONLY.codcli,  AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = FORMONLY.nomcli,  NOENTRY, UPSHIFT;
+c002 = FORMONLY.item_p TYPE CHAR, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = FORMONLY.clase, NOENTRY, UPSHIFT;
+c004 = FORMONLY.desc_item,  NOENTRY, UPSHIFT;
+
+c008 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c009 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c015 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c016 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+
+c020 = FORMONLY.num_fact TYPE DECIMAL, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c021 = FORMONLY.fec_fact TYPE DATE, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+c022 = FORMONLY.cliente TYPE VARCHAR, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c023 = FORMONLY.item TYPE CHAR, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c024 = FORMONLY.cant_pend TYPE DECIMAL, NOENTRY, UPSHIFT,
+	FORMAT = '----,--&.##', OPTIONS = '-nolist';
+c025 = FORMONLY.cant_cruc TYPE DECIMAL NOT NULL, AUTONEXT, UPSHIFT,
+	INCLUDE = (0.00 TO 9999999.99), FORMAT = '----,--&.##',
+	OPTIONS = '-nolist';
+c026 = FORMONLY.prioridad TYPE INTEGER NOT NULL, AUTONEXT, UPSHIFT,
+	INCLUDE = (0 TO 9999), FORMAT = '###&', OPTIONS = '-nolist';
+
+c030 = FORMONLY.descrip_4, NOENTRY, UPSHIFT;
+c031 = FORMONLY.nom_item,  NOENTRY, UPSHIFT, REVERSE;
+END
+KEYS
+F5 = 'Factura'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_detalle[12] (num_fact, fec_fact, cliente, item, cant_pend,
+				cant_cruc, prioridad)

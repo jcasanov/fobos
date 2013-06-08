@@ -1,0 +1,70 @@
+DATABASE aceros
+SCREEN
+{
+
+                   TRANSFERENCIAS/ORDEN DE DESPACHO
+                  --------------------------------
+
+      Cliente: [c000  ][c001                                    ]
+  Presupuesto: [c002  ]                Orden de Trabajo: [c003  ]
+
+   Transferencias                                 [c060] de [c061]
+   [c010           |b0|b1|c011                                    ]
+  [c020           |c0|c1|c021                                    ]
+  [c020           |c0|c1|c021                                    ]
+  [c020           |c0|c1|c021                                    ]
+  [c020           |c0|c1|c021                                    ]
+
+ Ordenes de Despacho                                [c062] de [c063]
+ [c030      |b3|c031      |c032                                    ]
+[c040      |c3|c041      |c042                                    ]
+[c040      |c3|c041      |c042                                    ]
+[c040      |c3|c041      |c042                                    ]
+[c040      |c3|c041      |c042                                    ]
+}
+TABLES
+rept019
+rept021
+rept034
+talt023
+ATTRIBUTES
+c000 = rept021.r21_codcli, NOENTRY, UPSHIFT, REVERSE;
+c001 = talt023.t23_nom_cliente, NOENTRY, UPSHIFT, REVERSE;
+c002 = talt023.t23_numpre, NOENTRY, UPSHIFT, REVERSE;
+c003 = rept021.r21_num_ot, NOENTRY, UPSHIFT, REVERSE;
+
+c010 = FORMONLY.tit_col1,  WIDGET = 'BUTTON', CONFIG = 'F15';
+b0   = FORMONLY.tit_col2,  WIDGET = 'BUTTON', CONFIG = 'F16';
+b1   = FORMONLY.tit_col3,  WIDGET = 'BUTTON', CONFIG = 'F17';
+c011 = FORMONLY.tit_col4,  WIDGET = 'BUTTON', CONFIG = 'F18';
+
+c030 = FORMONLY.tit_col5,  WIDGET = 'BUTTON', CONFIG = 'F19';
+b3   = FORMONLY.tit_col6,  WIDGET = 'BUTTON', CONFIG = 'F20';
+c031 = FORMONLY.tit_col7,  WIDGET = 'BUTTON', CONFIG = 'F21';
+c032 = FORMONLY.tit_col8,  WIDGET = 'BUTTON', CONFIG = 'F22';
+
+c020 = rept019.r19_num_tran, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c0   = rept019.r19_bodega_ori, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c1   = rept019.r19_bodega_dest, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c021 = rept019.r19_referencia, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+
+c040 = rept034.r34_num_ord_des, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c3   = rept034.r34_bodega, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c041 = rept034.r34_fec_entrega, NOENTRY, UPSHIFT, OPTIONS = '-nolist',
+	FORMAT = 'dd-mm-yyyy';
+c042 = rept034.r34_entregar_a, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+
+c060 = FORMONLY.vm_cur_transf TYPE SMALLINT, NOENTRY, UPSHIFT;
+c061 = FORMONLY.vm_num_transf TYPE SMALLINT, NOENTRY, UPSHIFT;
+c062 = FORMONLY.vm_cur_orddes TYPE SMALLINT, NOENTRY, UPSHIFT;
+c063 = FORMONLY.vm_num_orddes TYPE SMALLINT, NOENTRY, UPSHIFT;
+END
+KEYS
+F6 = 'Transferencia'
+F7 = 'Orden Despacho'
+F8 = 'Imprimir Trans.'
+INSTRUCTIONS
+SCREEN RECORD rm_dettrans[4]  (r19_num_tran, r19_bodega_ori, r19_bodega_dest,
+				r19_referencia)
+SCREEN RECORD rm_detorddes[4] (r34_num_ord_des, r34_bodega, r34_fec_entrega,
+				r34_entregar_a)

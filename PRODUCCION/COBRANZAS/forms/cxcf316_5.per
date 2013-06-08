@@ -1,0 +1,73 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+  Fecha Inicial: [c000      ]                        Fecha Final: [c001      ]
+       Vendedor: [c1 ]  [c002                          ]
+        Cliente: [c003  |c004                                                ]
+                                                            [c005 ] de [c006 ]
+ [c2|c3|c4|c010  |c011      |c5|c012        |c013               |c014         ]
+[c6|c7|c8|c020  |c021      |c9|c022        |c023               |c024         ]
+[c6|c7|c8|c020  |c021      |c9|c022        |c023               |c024         ]
+[c6|c7|c8|c020  |c021      |c9|c022        |c023               |c024         ]
+[c6|c7|c8|c020  |c021      |c9|c022        |c023               |c024         ]
+[c6|c7|c8|c020  |c021      |c9|c022        |c023               |c024         ]
+[c6|c7|c8|c020  |c021      |c9|c022        |c023               |c024         ]
+[c6|c7|c8|c020  |c021      |c9|c022        |c023               |c024         ]
+[c6|c7|c8|c020  |c021      |c9|c022        |c023               |c024         ]
+[c6|c7|c8|c020  |c021      |c9|c022        |c023               |c024         ]
+[c6|c7|c8|c020  |c021      |c9|c022        |c023               |c024         ]
+                                                     TOTAL ==> [c030         ]
+    Cobrado RE: [c031         ]    Cobrado TA: [c032         ]
+}
+ATTRIBUTES
+c000 = FORMONLY.fecha_ini TYPE DATE, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy';
+c001 = FORMONLY.fecha_fin TYPE DATE, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy';
+c1   = FORMONLY.vendedor TYPE SMALLINT, UPSHIFT, AUTONEXT, UPSHIFT;
+c002 = FORMONLY.tit_vendedor, UPSHIFT, NOENTRY;
+c003 = FORMONLY.codcli TYPE INTEGER, AUTONEXT, UPSHIFT;
+c004 = FORMONLY.nomcli TYPE VARCHAR, NOENTRY, UPSHIFT;
+
+c005 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c006 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+
+c2   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c3   = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c4   = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c010 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c011 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c5   = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c012 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+c013 = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22';
+c014 = FORMONLY.tit_col9, WIDGET = 'BUTTON', CONFIG = 'F23';
+
+c6   = FORMONLY.localidad TYPE SMALLINT, NOENTRY, UPSHIFT, FORMAT = '&&';
+c7   = FORMONLY.areaneg TYPE SMALLINT, NOENTRY, UPSHIFT, FORMAT = '&&';
+c8   = FORMONLY.tipo_trn TYPE CHAR, NOENTRY, UPSHIFT;
+c020 = FORMONLY.num_trn TYPE DECIMAL, NOENTRY, UPSHIFT;
+c021 = FORMONLY.fecha TYPE DATE, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c9   = FORMONLY.tipo_doc TYPE CHAR, NOENTRY, UPSHIFT;
+c022 = FORMONLY.num_doc TYPE CHAR, NOENTRY, UPSHIFT;
+c023 = FORMONLY.referencia TYPE DECIMAL, NOENTRY, UPSHIFT;
+c024 = FORMONLY.valor_cobr TYPE DECIMAL, NOENTRY, UPSHIFT,
+	FORMAT = '--,---,--&.##';
+
+c030 = FORMONLY.tot_cobr TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '--,---,--&.##';
+
+c031 = FORMONLY.tot_cobr_inv TYPE DECIMAL, NOENTRY, UPSHIFT,
+	FORMAT = '-,---,--&.##', COLOR = RED WHERE c031 < 0,
+	COLOR = BLUE WHERE c031 > 0, COLOR = BLACK WHERE c031 = 0;
+c032 = FORMONLY.tot_cobr_tal TYPE DECIMAL, NOENTRY, UPSHIFT,
+	FORMAT = '-,---,--&.##', COLOR = RED WHERE c032 < 0,
+	COLOR = BLUE WHERE c032 > 0, COLOR = BLACK WHERE c032 = 0;
+END
+KEYS
+F5 = 'Pago Caja'
+F6 = 'Documento'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_cob[10] (localidad, areaneg, tipo_trn, num_trn, fecha,
+				tipo_doc, num_doc, referencia, valor_cobr)

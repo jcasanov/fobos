@@ -1,4 +1,4 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
 
@@ -38,6 +38,6 @@ c003 = FORMONLY.valor TYPE DECIMAL NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
 	COMMENTS = 'Digíte valor positivo para DEBITOS, negativo para CREDITOS';
 
 c020 = FORMONLY.tit_total_val, NOENTRY, REVERSE, FORMAT = '---,---,--&.##';
-END
+end
 INSTRUCTIONS
 SCREEN RECORD rm_mov[10] (b31_tipo_doc, b31_cuenta, b31_glosa, valor)

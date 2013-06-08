@@ -1,0 +1,32 @@
+DATABASE aceros
+SCREEN
+{
+ CODIGOS COLORES  
+
+ [lbl0      |lbl1                                    |l]
+[c001      |c002                                    |c]
+[c001      |c002                                    |c]
+[c001      |c002                                    |c]
+[c001      |c002                                    |c]
+[c001      |c002                                    |c]
+[c001      |c002                                    |c]
+[c001      |c002                                    |c]
+[c001      |c002                                    |c]
+[c001      |c002                                    |c]
+[c001      |c002                                    |c]
+}
+TABLES
+rept075
+
+ATTRIBUTES
+c001 = r75_color,  	 UPSHIFT,REVERSE,OPTIONS='-nolist';
+c002 = r75_descripcion,  UPSHIFT,REVERSE,OPTIONS='-nolist';
+c    = r75_estado,     	 UPSHIFT,REVERSE,OPTIONS='-nolist';
+
+lbl0 = formonly.bt_color,        WIDGET='BUTTON', CONFIG='F15';
+lbl1 = formonly.bt_descripcion,  WIDGET='BUTTON', CONFIG='F16';
+l    = formonly.bt_estado,       WIDGET='BUTTON', CONFIG='F17';
+
+END
+INSTRUCTIONS
+SCREEN RECORD rh_color[10] (r75_color, r75_descripcion, r75_estado)

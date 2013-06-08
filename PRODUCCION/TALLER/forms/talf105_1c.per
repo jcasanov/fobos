@@ -1,0 +1,33 @@
+DATABASE aceros
+SCREEN 
+{
+
+
+      Código Tipo de Orden: [a] [f001           ]
+
+           Cliente Default: [f004       ] [d                                 ]
+    Valor Tope Moneda Base: [f002          ]
+ Valor Tope Moneda Alterna: [f003          ]
+
+                 Factura ?: [b]     Cargar Repuestos: [c] Precio Venta
+                                                          Costo Fabrica
+
+             Ingresado Por: [f005      ]
+          Fecha de Ingreso: [f006               ]
+}
+TABLES talt005
+ATTRIBUTES
+a    = talt005.t05_tipord, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f001 = talt005.t05_nombre, REVERSE, UPSHIFT;
+b    = talt005.t05_factura, REVERSE, UPSHIFT, INCLUDE = ('S', 'N'), 
+	COMMENTS = 'Esta orden factura ?';
+c    = talt005.t05_prec_rpto, REVERSE, UPSHIFT, INCLUDE = ('P', 'C');
+f002 = talt005.t05_valtope_mb, REVERSE, FORMAT = '###,###,##&.##';
+f003 = talt005.t05_valtope_ma, REVERSE, NOENTRY, FORMAT = '###,###,##&.##';
+f004 = talt005.t05_cli_default, UPSHIFT, REVERSE, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+d    = FORMONLY.nom_cli TYPE VARCHAR, NOENTRY;
+f005 = talt005.t05_usuario, REVERSE, NOENTRY;
+f006 = talt005.t05_fecing, REVERSE, NOENTRY;
+end

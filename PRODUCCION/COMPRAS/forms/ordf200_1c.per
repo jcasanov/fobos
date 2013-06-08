@@ -1,0 +1,101 @@
+DATABASE aceros
+SCREEN
+{
+
+     No Orden:[c0    ]      [c33      ]	         Estado:[c|c2        ]
+       Moneda:[c3] [c4                ]   Fecha Ingreso:[c5                 ]
+   Tipo Orden:[c6   ] [c7             ]        Impuesto:[c8   ]%   [z]Subtotal
+ Departamento:[c9   ] [c10                  ] Descuento:[c11  ]%
+    Proveedor:[c12  ] [c13                  ]   Recargo:[c14   ]%
+     Atención:[c15                    ]  Solicitado Por:[c16                 ]
+Orden Trabajo:[c17   ] [c18                 ] Forma Pago:[d|c060   ]
+   Referencia:[c19                          ] Usr:[c052     ] [c050] de [c051]
+ T Cantidad   Código   Descripción              Des %  Precio U.   Subtotal
+[a|c20       |c21   ] [c22                     |c23  |c24       |c25       |y] 
+[a|c20       |c21   ] [c22                     |c23  |c24       |c25       |y] 
+[a|c20       |c21   ] [c22                     |c23  |c24       |c25       |y] 
+[a|c20       |c21   ] [c22                     |c23  |c24       |c25       |y] 
+  Valor Factura antes Iva:[z001         ]              Subtotal:[c26       ] 
+        Diferencia Cuadre:[z002         ]             Descuento:[c27       ] 
+                   Seguro:[y056         ]              Impuesto:[c28       ] 
+                    Flete:[y055         ] 	           Neto:[c29       ] 
+}
+TABLES ordt010, ordt011
+ATTRIBUTES
+
+c0  = ordt010.c10_numero_oc, REVERSE, NOENTRY,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c   = ordt010.c10_estado, REVERSE, NOENTRY, UPSHIFT,
+	COMMENTS = 'Estado: A ACTIVAS, P APROBADAS, C CERRADAS.';
+c2  = FORMONLY.tit_estado TYPE VARCHAR, NOENTRY;
+c3  = ordt010.c10_moneda, REVERSE, UPSHIFT,
+	COMMENTS = 'Moneda Base ó Moneda Alterna'; 
+c4  = FORMONLY.nom_moneda TYPE VARCHAR, NOENTRY;
+c5  = ordt010.c10_fecing, REVERSE, UPSHIFT, NOENTRY;
+c6  = ordt010.c10_tipo_orden, REVERSE, INCLUDE = (0 TO 9999),
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c7  = FORMONLY.nom_tipo_orden TYPE VARCHAR, NOENTRY;
+c8  = ordt010.c10_porc_impto, REVERSE, INCLUDE = (0 TO 99.99),
+	FORMAT = "#&.##";
+c9  = ordt010.c10_cod_depto, REVERSE, INCLUDE = (0 TO 9999),
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c10 = FORMONLY.nom_departamento TYPE VARCHAR, NOENTRY;
+c11 = ordt010.c10_porc_descto, REVERSE, INCLUDE = (0 TO 99.99),
+	FORMAT = "#&.##";
+c12  = ordt010.c10_codprov, REVERSE, INCLUDE = (0 TO 9999),
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c13 = FORMONLY.nom_proveedor TYPE VARCHAR, NOENTRY;
+c14 = ordt010.c10_recargo, REVERSE, INCLUDE = (0 TO 999.99),
+	FORMAT = "##&.##";
+c15 = ordt010.c10_atencion, REVERSE, UPSHIFT;
+c16 = ordt010.c10_solicitado, REVERSE, UPSHIFT;
+c19 = ordt010.c10_referencia, REVERSE, UPSHIFT;
+c17 = ordt010.c10_ord_trabajo,
+	COMMENTS = 'Obligatorio cuando la orden sea por bienes y servicios.';
+c18 = FORMONLY.nom_ord_trabajo TYPE VARCHAR, NOENTRY;
+	
+a   = FORMONLY.c11_tipo TYPE CHAR, REVERSE, UPSHIFT, INCLUDE = ('B', 'S'),
+	COMMENTS = 'Marque si es un bien o desmarque si es un servicio.'; 
+	
+c20 = ordt011.c11_cant_ped, REVERSE, INCLUDE = (0.01 TO 999999.99),
+	FORMAT='###,##&.##';
+c21 = ordt011.c11_codigo, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c22 = ordt011.c11_descrip, REVERSE, UPSHIFT;
+c23 = ordt011.c11_descuento, REVERSE, INCLUDE = (0 TO 99.99),
+	FORMAT = "#&.##";
+c24 = ordt011.c11_precio, REVERSE, FORMAT = '##,##&.###',
+	INCLUDE = (0.001 TO 99999.999);
+c25 = formonly.subtotal TYPE DECIMAL(12,2), REVERSE, FORMAT = '###,##&.##', 
+      REVERSE, NOENTRY;
+c27 = ordt010.c10_tot_dscto,  NOENTRY, FORMAT = "###,##&.##"; 
+c28 = ordt010.c10_tot_impto,  NOENTRY, FORMAT = "###,##&.##"; 
+c29 = ordt010.c10_tot_compra, REVERSE,NOENTRY, FORMAT = "###,##&.##"; 
+d   = ordt010.c10_tipo_pago,  REVERSE, UPSHIFT, INCLUDE = ('C', 'R'),
+	COMMENTS = 'C Contado  R Crédito', NOENTRY;
+c060 = FORMONLY.tit_tipo_pago,REVERSE,UPSHIFT,NOENTRY;
+c26 = FORMONLY.vm_subtotal TYPE DECIMAL(12,2), REVERSE, 
+	FORMAT = "###,##&.##";
+c33 = FORMONLY.tit_orden TYPE VARCHAR, REVERSE; 
+
+z   = FORMONLY.vm_calc_iva TYPE CHAR, INCLUDE = ('S', 'D'),
+	DEFAULT='D', COMMENTS='Indique si desea calcular el impuesto sobre el subtotal o sobre el detalle.';
+
+y   = ordt011.c11_paga_iva, INCLUDE = ('S', 'N'),
+	DEFAULT='S', COMMENTS='Indique si el articulo paga iva.',
+	AUTONEXT;
+y055 = c10_flete, REQUIRED, INCLUDE = (0 TO 99999999), FORMAT = '##,###,##&.##';
+y056 = c10_otros, REQUIRED, INCLUDE = (0 TO 99999999), FORMAT = '##,###,##&.##';
+z001 = formonly.valor_fact TYPE DECIMAL(10,2) NOT NULL, 
+        FORMAT = '##,###,##&.##', INCLUDE = (0.00 TO 99999999.99), REVERSE, 
+        COMMENTS = 'Ingrese el subtotal antes del Iva de la factura del proveedor.';
+z002 = c10_dif_cuadre, NOENTRY, FORMAT = '--,---,--&.##';
+c050 = FORMONLY.num_row, REVERSE, UPSHIFT, NOENTRY;
+c051 = FORMONLY.max_row, REVERSE, UPSHIFT, NOENTRY;
+c052 = ordt010.c10_usuario, NOENTRY, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS 
+DELIMITERS '||'
+SCREEN RECORD r_detalle[4] (c11_tipo, c11_cant_ped,  c11_codigo, c11_descrip, 
+			    c11_descuento, c11_precio, formonly.subtotal,
+			    c11_paga_iva)

@@ -1,0 +1,87 @@
+DATABASE aceros
+SCREEN
+{
+      Codigo Liquidación: [c0] [c000                              ]
+
+             Año Proceso: [c003]     Mes Proceso: [c1] [c004      ]
+            Fecha Inicio: [c001      ]      Fecha Fin: [c002      ]
+                                                 Mostrar dias en consulta: [c]
+     [c030                                  ]                 [c005] de [c006]
+ [c010|c011            |c2|c012|c3|c013      |c014      |c015      |c016      ]
+[c020|c021            |c4|c022|c5|c023      |c024      |c025      |c026      ]
+[c020|c021            |c4|c022|c5|c023      |c024      |c025      |c026      ]
+[c020|c021            |c4|c022|c5|c023      |c024      |c025      |c026      ]
+[c020|c021            |c4|c022|c5|c023      |c024      |c025      |c026      ]
+[c020|c021            |c4|c022|c5|c023      |c024      |c025      |c026      ]
+[c020|c021            |c4|c022|c5|c023      |c024      |c025      |c026      ]
+[c020|c021            |c4|c022|c5|c023      |c024      |c025      |c026      ]
+[c020|c021            |c4|c022|c5|c023      |c024      |c025      |c026      ]
+[c020|c021            |c4|c022|c5|c023      |c024      |c025      |c026      ]
+[c020|c021            |c4|c022|c5|c023      |c024      |c025      |c026      ]
+[c020|c021            |c4|c022|c5|c023      |c024      |c025      |c026      ]
+                                              Totales: [c031      |c032      ]
+}
+TABLES
+rolt003
+rolt030
+rolt039
+rolt047
+ATTRIBUTES
+c0   = rolt047.n47_cod_liqrol, REVERSE, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c000 = rolt003.n03_nombre, NOENTRY, UPSHIFT, REVERSE;
+c001 = rolt047.n47_fecha_ini, REVERSE, FORMAT='dd-mm-yyyy', NOENTRY;
+c002 = rolt047.n47_fecha_fin, REVERSE, FORMAT='dd-mm-yyyy', NOENTRY;
+c003 = rolt039.n39_ano_proceso, REVERSE, AUTONEXT;
+c1   = rolt039.n39_mes_proceso, REVERSE, AUTONEXT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c004 = FORMONLY.tit_mes, REVERSE, NOENTRY, UPSHIFT;
+c    = FORMONLY.vm_consulta TYPE CHAR NOT NULL, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowlegde', DEFAULT = 'N';
+
+c005 = FORMONLY.num_row, NOENTRY, UPSHIFT;
+c006 = FORMONLY.max_row, NOENTRY, UPSHIFT;
+
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c2   = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c012 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c3   = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c013 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c014 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+c015 = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22';
+c016 = FORMONLY.tit_col9, WIDGET = 'BUTTON', CONFIG = 'F23';
+
+c020 = rolt047.n47_cod_trab, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c021 = rolt030.n30_nombres, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c4   = rolt047.n47_dias_goza, AUTONEXT, UPSHIFT, INCLUDE = (1 TO 15),
+	OPTIONS = '-nolist';
+c022 = FORMONLY.anio_vac TYPE SMALLINT, AUTONEXT, UPSHIFT,
+	INCLUDE = (2003 TO 2099), OPTIONS = '-nolist';
+c5   = rolt047.n47_dias_real, AUTONEXT, UPSHIFT, INCLUDE = (0 TO 15),
+	OPTIONS = '-nolist';
+c023 = rolt047.n47_periodo_ini, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+c024 = rolt047.n47_periodo_fin, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+c025 = rolt047.n47_valor_pag, NOENTRY, UPSHIFT, FORMAT = '###,##&.##',
+	OPTIONS = '-nolist';
+c026 = rolt047.n47_valor_des, NOENTRY, UPSHIFT, FORMAT = '###,##&.##',
+	OPTIONS = '-nolist';
+
+c030 = FORMONLY.nom_trab, NOENTRY, REVERSE, UPSHIFT;
+c031 = FORMONLY.tot_valor_pag TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '###,##&.##';
+c032 = FORMONLY.tot_valor_des TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '###,##&.##';
+END
+KEYS
+F5 = 'Cabecera'
+F6 = 'Comprobante'
+F7 = 'Dias Gozados'
+F8 = 'Liquidación'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_det[11] (n47_cod_trab, n30_nombres, n47_dias_goza, anio_vac, 
+			n47_dias_real, n47_periodo_ini, n47_periodo_fin,
+			n47_valor_pag, n47_valor_des)

@@ -1,0 +1,43 @@
+DATABASE aceros
+SCREEN 
+{
+
+             Año: [c000]          Mes: [c0]     Tipo Vcto.: [c|c060      ]
+          Moneda: [c1] [c001              ]                          
+
+  Tipo Proveedor: [c2] [c002              ]  Rango de Días: [c10] - [c010 ]
+   
+     Ordenar Por:
+           [c051                ]  [a]Ascendente  [d]Descendente
+           [c051                ]  [a]Ascendente  [d]Descendente
+
+}
+TABLES
+gent013
+ATTRIBUTES
+c000 = FORMONLY.anho TYPE SMALLINT NOT NULL, REVERSE, INCLUDE=(1900 TO 9999);
+c0   = FORMONLY.mes  TYPE SMALLINT NOT NULL, REVERSE, INCLUDE=(1 TO 12);
+c1   = gent013.g13_moneda, REVERSE, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c2   = FORMONLY.tipoprov, REVERSE, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c001 = gent013.g13_nombre,REVERSE, NOENTRY;
+c002 = FORMONLY.n_tipoprov, NOENTRY;
+c    = FORMONLY.tipo_vcto TYPE CHAR, DEFAULT='T', REVERSE, AUTONEXT, UPSHIFT,
+	INCLUDE = ('P', 'V', 'T'),
+	COMMENTS = '(P) Por Vencer  (V) Vencidos  (T) Todos';
+c060 = FORMONLY.tit_tipo_vcto,REVERSE,UPSHIFT,NOENTRY;
+
+c10  = FORMONLY.dias_ini TYPE SMALLINT, INCLUDE=(NULL, 0 TO 999);
+c010 = FORMONLY.dias_fin TYPE INTEGER, INCLUDE=(NULL, 0 TO 99999);
+
+c051 = FORMONLY.col TYPE VARCHAR NOT NULL, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+a    = FORMONLY.chk_asc TYPE CHAR, AUTONEXT, UPSHIFT, INCLUDE = ('S', 'N'), 
+	DEFAULT='S', COMMENTS='Ordena ascendentemente.';
+d    = FORMONLY.chk_desc TYPE CHAR, AUTONEXT, UPSHIFT, INCLUDE = ('S', 'N'), 
+	DEFAULT='N', COMMENTS='Ordena descendentemente.';
+end
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_ord[2] (col, chk_asc, chk_desc)

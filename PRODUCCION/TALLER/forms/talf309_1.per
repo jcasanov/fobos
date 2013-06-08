@@ -1,0 +1,91 @@
+DATABASE aceros
+SCREEN
+{
+      Tipo Transacción: [a|c000        ]            Tipo Venta: [b|c001     ]
+          Fecha Incial: [c002      ]               Fecha Final: [c003      ]
+ Incluir FA de Inventario fuera de fechas ?: [e]         [c050  ] de [c051  ]
+ [c010      |c011 |c012 |c013        |c014        |c015        |c016        |c]
+[c020      |c021 |c022 |c023        |c024        |c025        |c026        |d]
+[c020      |c021 |c022 |c023        |c024        |c025        |c026        |d]
+[c020      |c021 |c022 |c023        |c024        |c025        |c026        |d]
+[c020      |c021 |c022 |c023        |c024        |c025        |c026        |d]
+[c020      |c021 |c022 |c023        |c024        |c025        |c026        |d]
+[c020      |c021 |c022 |c023        |c024        |c025        |c026        |d]
+[c020      |c021 |c022 |c023        |c024        |c025        |c026        |d]
+[c020      |c021 |c022 |c023        |c024        |c025        |c026        |d]
+[c020      |c021 |c022 |c023        |c024        |c025        |c026        |d]
+[c020      |c021 |c022 |c023        |c024        |c025        |c026        |d]
+[c020      |c021 |c022 |c023        |c024        |c025        |c026        |d]
+[c020      |c021 |c022 |c023        |c024        |c025        |c026        |d]
+[c020      |c021 |c022 |c023        |c024        |c025        |c026        |d]
+           Totales ==> [c030        |c031        |c032        |c033        ]
+
+[c040  |c041                                                               ]
+}
+TABLES
+talt023
+ATTRIBUTES
+a    = FORMONLY.tipo TYPE CHAR NOT NULL, REQUIRED, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = ('F', 'D', 'N', 'T'), DEFAULT = 'T',
+	COMMENTS = '(F) FACTURAS  (D) DEVOLUCIONES  (N) ANULACIONES  (T) T O D A S.';
+c000 = FORMONLY.tit_tipo TYPE VARCHAR, NOENTRY, UPSHIFT, REVERSE;
+b    = FORMONLY.tipo_vta TYPE CHAR NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, INCLUDE = ('C', 'R', 'T'), DEFAULT = 'T',
+	COMMENTS = '(C) CONTADO  (R) CREDITO  (T) T O D O S.';
+c001 = FORMONLY.tit_tipo_vta TYPE VARCHAR, NOENTRY, UPSHIFT, REVERSE;
+c002 = FORMONLY.fecha_ini TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy';
+c003 = FORMONLY.fecha_fin TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy';
+e    = FORMONLY.todo_inv TYPE CHAR NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', INCLUDE = ('S', 'N'),
+	DEFAULT = 'N';
+
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c015 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c016 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+c    = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22';
+
+c020 = FORMONLY.fecha TYPE DATE, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c021 = talt023.t23_num_factura, NOENTRY, UPSHIFT;
+c022 = talt023.t23_orden, NOENTRY, UPSHIFT;
+c023 = talt023.t23_val_mo_tal, NOENTRY, UPSHIFT, FORMAT = '-,---,--&.##';
+c024 = FORMONLY.tot_oc TYPE DECIMAL(12,2), NOENTRY, UPSHIFT,
+	FORMAT = '-,---,--&.##';
+c025 = FORMONLY.tot_fa TYPE DECIMAL(12,2), NOENTRY, UPSHIFT,
+	FORMAT = '-,---,--&.##';
+c026 = FORMONLY.tot_ot TYPE DECIMAL(12,2), NOENTRY, UPSHIFT,
+	FORMAT = '-,---,--&.##';
+d    = talt023.t23_estado, NOENTRY, UPSHIFT;
+
+c030 = FORMONLY.tot_neto TYPE DECIMAL(12,2), NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '-,---,--&.##';
+c031 = FORMONLY.total_oc TYPE DECIMAL(12,2), NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '-,---,--&.##';
+c032 = FORMONLY.total_fa TYPE DECIMAL(12,2), NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '-,---,--&.##';
+c033 = FORMONLY.total_ot TYPE DECIMAL(12,2), NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '-,---,--&.##';
+
+c040 = talt023.t23_cod_cliente, NOENTRY, UPSHIFT;
+c041 = talt023.t23_nom_cliente, NOENTRY, UPSHIFT;
+
+c050 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c051 = FORMONLY.vm_num_det, NOENTRY, REVERSE, UPSHIFT;
+END
+KEYS
+F5  = 'Contabilización'
+F6  = 'Comprobante'
+F7  = 'Orden Trabajo'
+F8  = 'Mano de Obra'
+F9  = 'Ordenes Compra'
+F10 = 'Detalle Proforma'
+F11 = 'Detalle Inv. Venta'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_det[13] (fecha, t23_num_factura, t23_orden, t23_val_mo_tal,
+				tot_oc, tot_fa, tot_ot, t23_estado)

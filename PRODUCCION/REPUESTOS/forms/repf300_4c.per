@@ -1,0 +1,29 @@
+DATABASE FORMONLY
+SCREEN 
+{
+  Pedidos Item: [c001           ]
+ [c002                                     ] 
+
+ -------------------------------------------
+    Pedido    Proveedor  Fec. Lleg.   Cant.   
+ -------------------------------------------
+ [c003      ][c004     ][c005      ][c006  ]
+ [c003      ][c004     ][c005      ][c006  ]
+ [c003      ][c004     ][c005      ][c006  ]
+ [c003      ][c004     ][c005      ][c006  ]
+ [c003      ][c004     ][c005      ][c006  ]
+ [c003      ][c004     ][c005      ][c006  ]
+ [c003      ][c004     ][c005      ][c006  ]
+}
+ATTRIBUTES
+c001 = FORMONLY.item,   NOENTRY, REVERSE;
+c002 = FORMONLY.n_item, NOENTRY, REVERSE;
+
+c003 = FORMONLY.pedido,     NOENTRY;
+c004 = FORMONLY.proveedor,  NOENTRY;
+c005 = FORMONLY.fecha_lleg, NOENTRY;
+c006 = FORMONLY.cantidad,   NOENTRY;
+end
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD ra_pedido[7] (pedido, proveedor, fecha_lleg, cantidad)

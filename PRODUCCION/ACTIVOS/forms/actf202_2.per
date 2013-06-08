@@ -1,0 +1,75 @@
+DATABASE aceros
+SCREEN
+{
+
+                          MOVIMIENTOS DEL ACTIVO FIJO
+                          --------------------------
+
+       Grupo del Bien: [c000|c001                          ]
+      Código del Bien: [c002|c003                                      ]
+       Valor del Bien: [c004         ]   Depr. del Bien: [c005         ]
+                                                              [c010] de [c011]
+ [c0|c020  |c1|c021    |c022      |c023                   |c024 |c025         ]
+[c2|c030  |c3|c031    |c032      |c033                   |c034 |c035         ]
+[c2|c030  |c3|c031    |c032      |c033                   |c034 |c035         ]
+[c2|c030  |c3|c031    |c032      |c033                   |c034 |c035         ]
+[c2|c030  |c3|c031    |c032      |c033                   |c034 |c035         ]
+[c2|c030  |c3|c031    |c032      |c033                   |c034 |c035         ]
+[c2|c030  |c3|c031    |c032      |c033                   |c034 |c035         ]
+[c2|c030  |c3|c031    |c032      |c033                   |c034 |c035         ]
+[c2|c030  |c3|c031    |c032      |c033                   |c034 |c035         ]
+   [c040                                          ]     Total: [c041         ]
+   [c040                                          ]
+}
+TABLES
+actt001
+actt010
+actt012
+ATTRIBUTES
+c000 = actt010.a10_grupo_act, NOENTRY, UPSHIFT;
+c001 = actt001.a01_nombre, NOENTRY, UPSHIFT;
+c002 = actt010.a10_codigo_bien, NOENTRY, UPSHIFT;
+c003 = actt010.a10_descripcion, NOENTRY, UPSHIFT;
+c004 = actt010.a10_valor_mb, NOENTRY, UPSHIFT, FORMAT = '##,###,##&.##',
+	COLOR = BLUE;
+c005 = actt010.a10_tot_dep_mb, NOENTRY, UPSHIFT, FORMAT = '##,###,##&.##',
+	COLOR = RED;
+
+c010 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c011 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+
+c0   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c020 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c1   = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c021 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c022 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c023 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c024 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+c025 = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22';
+
+c2   = actt012.a12_codigo_tran, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c030 = actt012.a12_numero_tran, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c3   = actt012.a12_tipcomp_gen, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c031 = actt012.a12_numcomp_gen, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c032 = FORMONLY.a12_fecing TYPE DATE, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+c033 = actt012.a12_referencia, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c034 = actt012.a12_porc_deprec, NOENTRY, UPSHIFT, FORMAT = '#&.##',
+	OPTIONS = '-nolist';
+c035 = actt012.a12_valor_mb, NOENTRY, UPSHIFT, FORMAT = '--,---,--&.##',
+	OPTIONS = '-nolist';
+
+c040 = FORMONLY.referencia, NOENTRY, REVERSE, UPSHIFT, WORDWRAP COMPRESS;
+c041 = FORMONLY.total, NOENTRY, REVERSE, UPSHIFT, FORMAT = '--,---,--&.##';
+END
+KEYS
+F5 = 'El Bien'
+F6 = 'Orden Compra'
+F7 = 'Transacción'
+F8 = 'Contabilización'
+F9 = 'Imprimir'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_mov[8] (a12_codigo_tran, a12_numero_tran, a12_tipcomp_gen,
+			a12_numcomp_gen, a12_fecing, a12_referencia,
+			a12_porc_deprec, a12_valor_mb)

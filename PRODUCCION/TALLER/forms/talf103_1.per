@@ -1,9 +1,9 @@
-database diteca
-screen
+DATABASE aceros
+SCREEN
 {
 
 
-  Código de Mecánico: [f001  ] [f002                          ]
+   Código de Técnico: [f001  ] [f002                          ]
 
            Iniciales: [a0 ]			          Tipo [a              ]
        Código de Rol: [f003  ] [c1                     ]
@@ -12,35 +12,34 @@ screen
                Línea: [f005  ] [c3                     ]
 
   Horario de Trabajo: [c5   ] a [c6   ]
-  				       	         COSTOS	      COSTOS
-	        	               	         LUN-VIE      FIN-FER
-  		  Valor Hora Viaje   Normal     [c8    ]     [c12   ]
-  		  Valor Hora Viaje   Extra      [c9    ]     [c13   ]
-  		  Valor Hora Trabajo Normal     [c10   ]     [c14   ]
-  		  Valor Hora Trabajo Extra      [c11   ]     [c15   ]
+
+		                      COSTEABLE	  FACTURABLE
+	Valor Hora Viaje   Normal     [c8    ]     [c12   ]
+	Valor Hora Viaje   Extra      [c9    ]     [c13   ]
+	Valor Hora Trabajo Normal     [c10   ]     [c14   ]
+	Valor Hora Trabajo Extra      [c11   ]     [c15   ]
 
        Ingresado Por: [f006      ]    Fecha de Ingreso: [f007               ]
 }
-end
-tables
+TABLES
 talt003
-attributes
+ATTRIBUTES
 f001 = talt003.t03_mecanico, REVERSE, UPSHIFT, NOENTRY, 
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 f002 = talt003.t03_nombres, REVERSE, UPSHIFT,
-	COMMENTS = 'Nombre del Mecánico.'; 
+	COMMENTS = 'Nombre del Técnico.'; 
 a0   = talt003.t03_iniciales, REVERSE, UPSHIFT, AUTONEXT;
 f003 = talt003.t03_codrol,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c1   = formonly.nom_rol TYPE VARCHAR, NOENTRY;
+c1   = FORMONLY.nom_rol TYPE VARCHAR, NOENTRY;
 a    = talt003.t03_tipo, AUTONEXT, REVERSE, DEFAULT = 'M',
-	WIDGET = 'RADIO', CONFIG = 'M Mecánico A Asesor';
+	WIDGET = 'RADIO', CONFIG = 'M Técnico A Asesor';
 f004 = talt003.t03_seccion, REVERSE,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c2   = formonly.nom_sec TYPE VARCHAR,NOENTRY;
+c2   = FORMONLY.nom_sec TYPE VARCHAR,NOENTRY;
 f005 = talt003.t03_linea, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c3   = formonly.nom_linea TYPE VARCHAR,NOENTRY;
+c3   = FORMONLY.nom_linea TYPE VARCHAR,NOENTRY;
 f006 = talt003.t03_usuario, REVERSE, NOENTRY;
 f007 = talt003.t03_fecing, REVERSE, NOENTRY;
 c5   = talt003.t03_hora_ini, PICTURE =  '##:##',

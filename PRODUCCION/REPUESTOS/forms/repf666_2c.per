@@ -1,0 +1,63 @@
+DATABASE aceros
+SCREEN 
+{
+Localidad Origen: [h1][h002                ]
+ No Tranferencia: [c ][c0       ]               Fecha: [c1                 ]
+   Bodega Origen: [c4] [c5                        ]
+  Bodega Destino: [c6] [c7                        ] 
+      Referencia: [c8                                      ]
+                                                            [c051] de [c052]
+ 	 Cant       Stock      Item        Costo Unitario       Subtotal
+   [c11       |c12       |c13            |c15             |c16             ]
+   [c11       |c12       |c13            |c15             |c16             ]
+   [c11       |c12       |c13            |c15             |c16             ]
+   [c11       |c12       |c13            |c15             |c16             ]
+   [c11       |c12       |c13            |c15             |c16             ]
+   [c11       |c12       |c13            |c15             |c16             ]
+   [c11       |c12       |c13            |c15             |c16             ]
+ [c070                               ]       Total Costo: [c17             ]
+ [c071                               ]     Ingresado Por: [c18        ] 
+ [c072                                    ]
+ [c073                                              ]
+ [c074                                                            |c075    ]
+}
+TABLES
+rept091
+rept092
+ATTRIBUTES
+h1  = rept091.r91_localidad, REVERSE, NOENTRY;
+h002 = FORMONLY.tit_local, REVERSE, NOENTRY;
+c   = rept091.r91_cod_tran, REVERSE, NOENTRY;
+c0  = rept091.r91_num_tran, REVERSE, NOENTRY;
+c1  = rept091.r91_fecing, REVERSE, NOENTRY;
+c4  = rept091.r91_bodega_ori, REVERSE, UPSHIFT, AUTONEXT;
+c5  = FORMONLY.nom_bod_ori TYPE VARCHAR, NOENTRY;
+c6  = rept091.r91_bodega_dest, REVERSE, UPSHIFT, AUTONEXT;
+c7  = FORMONLY.nom_bod_des TYPE VARCHAR, NOENTRY;
+c8  = rept091.r91_referencia, REVERSE, UPSHIFT;
+c11 = rept092.r92_cant_ped, REVERSE, INCLUDE = (0.01 TO 999999.99),
+	FORMAT = '---,--&.##';
+c12 = rept092.r92_stock_ant, REVERSE, NOENTRY,
+	FORMAT = '---,--&.##';
+c13 = rept092.r92_item, REVERSE, UPSHIFT, AUTONEXT; 
+c15 = rept092.r92_costo, REVERSE, NOENTRY, FORMAT = '#,###,###,##&.##';
+c16 = FORMONLY.subtotal_item TYPE DECIMAL(12,2), REVERSE, NOENTRY, 
+	FORMAT = '#,###,###,##&.##';
+
+c070 = formonly.descrip_1, NOENTRY;
+c071 = formonly.descrip_2, NOENTRY;
+c072 = formonly.descrip_3, NOENTRY;
+c073 = formonly.descrip_4, NOENTRY;
+c074 = formonly.nom_item,  NOENTRY, REVERSE;
+c075 = formonly.nom_marca, NOENTRY, REVERSE;
+
+c17 = rept091.r91_tot_costo, REVERSE, FORMAT = '#,###,###,##&.##';
+c18 = rept091.r91_usuario, REVERSE, UPSHIFT, NOENTRY;
+
+c051 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c052 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_detalle[7] (r92_cant_ped, r92_stock_ant, r92_item, r92_costo,
+				subtotal_item)

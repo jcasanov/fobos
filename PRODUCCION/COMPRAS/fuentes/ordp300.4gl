@@ -1,10 +1,12 @@
-{*
- * Titulo           : ordp300.4gl - Consulta de Ordenes de Compra
- * Elaboracion      : 10-dic-2001
- * Autor            : GVA
- * Formato Ejecucion: fglrun ordp300 base módulo compañía localidad
- *                       [tipo_orden] [fecha_ini] [fecha_fin] [codprov]
- *}
+------------------------------------------------------------------------------
+-- Titulo           : ordp300.4gl - Consulta de Ordenes de Compra
+-- Elaboracion      : 10-dic-2001
+-- Autor            : GVA
+-- Formato Ejecucion: fglrun ordp300 base módulo compañía localidad
+--                       [tipo_orden] [fecha_ini] [fecha_fin] [codprov]
+-- Ultima Correccion: 1
+-- Motivo Correccion: 1
+------------------------------------------------------------------------------
 
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
@@ -14,15 +16,14 @@ DEFINE vm_num_det       SMALLINT
 DEFINE vm_scr_lin       SMALLINT
 DEFINE vm_fecha_desde	DATE
 DEFINE vm_fecha_hasta	DATE
+DEFINE vm_total		DECIMAL(14,2)
 DEFINE vm_numero_oc	LIKE ordt010.c10_numero_oc
 DEFINE vm_proveedor	LIKE ordt010.c10_codprov
 DEFINE vm_depto		LIKE ordt010.c10_cod_depto
 DEFINE vm_tipo_orden	LIKE ordt010.c10_tipo_orden
-
 DEFINE rm_orden 	ARRAY[10] OF CHAR(4)
 DEFINE vm_columna_1	SMALLINT
 DEFINE vm_columna_2	SMALLINT
-
 DEFINE r_detalle	ARRAY [1000] OF RECORD
 				c10_numero_oc	LIKE ordt010.c10_numero_oc,
 				c10_moneda	LIKE ordt010.c10_moneda,
@@ -34,30 +35,32 @@ DEFINE r_detalle_1	ARRAY [1000] OF RECORD
 				codprov		LIKE ordt010.c10_codprov
 			END RECORD
 
+
+
 MAIN
 
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/ordp300.error')
-CALL fgl_init4js()
+CALL startlog('../logs/errores')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 
 IF num_args() <> 4 AND num_args() <> 8 THEN  -- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto',
-			    'stop')
+	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.','stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
 
-LET vg_base     = arg_val(1)
-LET vg_modulo   = arg_val(2)
-LET vg_codcia   = arg_val(3)
-LET vg_codloc   = arg_val(4)
+LET vg_base    = arg_val(1)
+LET vg_modulo  = arg_val(2)
+LET vg_codcia  = arg_val(3)
+LET vg_codloc  = arg_val(4)
 LET vg_proceso = 'ordp300'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 
 CALL funcion_master()
@@ -68,6 +71,10 @@ END MAIN
 
 FUNCTION funcion_master()
 DEFINE i 	SMALLINT
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
 CALL fl_nivel_isolation()
 CREATE TEMP TABLE tmp_consulta(
@@ -80,12 +87,24 @@ CREATE TEMP TABLE tmp_consulta(
 
 LET vm_max_det  = 1000
 
-OPEN WINDOW w_ordp300 AT 3,2 WITH 22 ROWS, 80 COLUMNS
-    ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE 0,BORDER,
-	      MESSAGE LINE LAST - 2)
-OPTIONS INPUT WRAP,
-	ACCEPT KEY	F12
-OPEN FORM f_ordp300 FROM "../forms/ordf300_1"
+LET lin_menu = 0
+LET row_ini  = 3
+LET num_rows = 22
+LET num_cols = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW w_ordp300 AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
+    ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE lin_menu,
+		BORDER, MESSAGE LINE LAST)
+IF vg_gui = 1 THEN
+	OPEN FORM f_ordp300 FROM "../forms/ordf300_1"
+ELSE
+	OPEN FORM f_ordp300 FROM "../forms/ordf300_1c"
+END IF
 DISPLAY FORM f_ordp300
 
 LET vm_num_det = 0
@@ -103,9 +122,9 @@ WHILE TRUE
 		END FOR
 	END IF
 	CLEAR FORM 
-	CALL control_display_botones()
-	DISPLAY "" AT 21, 4
-	DISPLAY '0', ' de ', '0' AT 21, 4
+	CALL control_DISPLAY_botones()
+	--#DISPLAY "" AT 21, 4
+	--#DISPLAY '0', ' de ', '0' AT 21, 4
 	DELETE FROM tmp_consulta
 	IF num_args() = 8 THEN
 		LET vm_tipo_orden  = arg_val(5)
@@ -116,6 +135,9 @@ WHILE TRUE
 		LET vm_fecha_hasta = arg_val(7)
 		LET vm_proveedor   = arg_val(8)
 		LET rm_c10.c10_estado = 'C'
+		IF vg_gui = 0 THEN
+			CALL muestra_estado(rm_c10.c10_estado)
+		END IF
 	END IF
 	CALL control_lee_cabecera()
 	IF INT_FLAG THEN
@@ -127,13 +149,14 @@ WHILE TRUE
 	END IF
 
 	IF vm_num_det = 0 THEN
-		CALL fgl_winmessage(vg_producto,'No se encontraron registros con el criterio indicado.','exclamation')
+		--CALL fgl_winmessage(vg_producto,'No se encontraron registros con el criterio indicado.','exclamation')
+		CALL fl_mostrar_mensaje('No se encontraron registros con el criterio indicado.','exclamation')
 		IF num_args() = 8 THEN
 			EXIT PROGRAM
 		END IF
 		CONTINUE WHILE
 	END IF
-	CALL control_display_array()
+	CALL control_DISPLAY_array()
 	DISPLAY BY NAME vm_tipo_orden, vm_proveedor, vm_depto
 END WHILE
 
@@ -141,13 +164,13 @@ END FUNCTION
 
 
 
-FUNCTION control_display_botones()
+FUNCTION control_DISPLAY_botones()
 
-DISPLAY 'No OC'       		TO tit_col1
-DISPLAY 'Moneda'		TO tit_col2
-DISPLAY 'Proveedor'		TO tit_col3
-DISPLAY 'Fecha'       		TO tit_col4
-DISPLAY 'Total OC'     		TO tit_col5
+--#DISPLAY 'No OC'     	TO tit_col1
+--#DISPLAY 'Moneda'	TO tit_col2
+--#DISPLAY 'Proveedor'	TO tit_col3
+--#DISPLAY 'Fecha'     	TO tit_col4
+--#DISPLAY 'Total OC'  	TO tit_col5
 
 END FUNCTION
 
@@ -165,20 +188,23 @@ IF vm_num_det = 0 AND num_args() <> 8 THEN
 	LET rm_c10.c10_estado = 'P'
 	LET vm_fecha_hasta    = TODAY
 END IF
-	DISPLAY BY NAME rm_c10.c10_estado, vm_numero_oc, 
-			vm_proveedor,      vm_depto,
-			vm_tipo_orden, vm_fecha_desde, vm_fecha_hasta
-	CALL fl_lee_proveedor(vm_proveedor)
-		RETURNING r_p01.*
-	CALL fl_lee_departamento(vg_codcia, vm_depto)
-		RETURNING r_g34.*
-	CALL fl_lee_tipo_orden_compra(vm_tipo_orden)
-		RETURNING r_c01.*
-	DISPLAY r_p01.p01_nomprov TO nom_proveedor
-	DISPLAY r_g34.g34_nombre  TO nom_depto
-	DISPLAY r_c01.c01_nombre  TO nom_tipo
+DISPLAY BY NAME rm_c10.c10_estado, vm_numero_oc, 
+		vm_proveedor,      vm_depto,
+		vm_tipo_orden, vm_fecha_desde, vm_fecha_hasta
+IF vg_gui = 0 THEN
+	CALL muestra_estado(rm_c10.c10_estado)
+END IF
+CALL fl_lee_proveedor(vm_proveedor)
+	RETURNING r_p01.*
+CALL fl_lee_departamento(vg_codcia, vm_depto)
+	RETURNING r_g34.*
+CALL fl_lee_tipo_orden_compra(vm_tipo_orden)
+	RETURNING r_c01.*
+DISPLAY r_p01.p01_nomprov TO nom_proveedor
+DISPLAY r_g34.g34_nombre  TO nom_depto
+DISPLAY r_c01.c01_nombre  TO nom_tipo
 
-	LET INT_FLAG   = 0
+LET INT_FLAG   = 0
 IF num_args() = 8 THEN
 	RETURN
 END IF
@@ -196,6 +222,9 @@ END IF
 		END IF
 		LET INT_FLAG = 1 
 		RETURN
+
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
 
 	ON KEY(F2)
 		IF INFIELD(vm_numero_oc) THEN
@@ -232,7 +261,7 @@ END IF
 		END IF
 
 		IF INFIELD(vm_tipo_orden) THEN
-			CALL fl_ayuda_tipos_ordenes_compras()
+			CALL fl_ayuda_tipos_ordenes_compras('T')
 				RETURNING r_c01.c01_tipo_orden,
 					  r_c01.c01_nombre
 			IF r_c01.c01_tipo_orden IS NOT NULL THEN
@@ -243,29 +272,47 @@ END IF
 		END IF
 		LET INT_FLAG = 0
 
+	BEFORE INPUT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 	AFTER FIELD vm_numero_oc
 		IF vm_numero_oc IS NOT NULL THEN
 			CALL fl_lee_orden_compra(vg_codcia, vg_codloc, 
 						 vm_numero_oc)
 				RETURNING r_c10.*
 			IF r_c10.c10_numero_oc IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'No existe la Orden de Compra en la Compañía.','exclamation')
+				--CALL fgl_winmessage(vg_producto,'No existe la Orden de Compra en la Compañía.','exclamation')
+				CALL fl_mostrar_mensaje('No existe la Orden de Compra en la Compañía.','exclamation')
 			END IF
 			LET rm_c10.c10_estado = r_c10.c10_estado
+			IF vg_gui = 0 THEN
+				CALL muestra_estado(rm_c10.c10_estado)
+			END IF
 		END IF
 
+	AFTER FIELD c10_estado 
+		IF vg_gui = 0 THEN
+			IF rm_c10.c10_estado IS NOT NULL THEN
+				CALL muestra_estado(rm_c10.c10_estado)
+			ELSE
+				CLEAR tit_estado
+			END IF
+		END IF
 	AFTER FIELD vm_fecha_hasta 
 		IF vm_fecha_hasta IS NOT NULL THEN
 			IF vm_fecha_hasta < vm_fecha_desde THEN
-				CALL fgl_winmessage(vg_producto,'La fecha final no debe ser mayor a la de fecha de inicio.','exclamation')
+				--CALL fgl_winmessage(vg_producto,'La fecha final no debe ser mayor a la de fecha de inicio.','exclamation')
+				CALL fl_mostrar_mensaje('La fecha final no debe ser mayor a la de fecha de inicio.','exclamation')
 				NEXT FIELD vm_fecha_hasta
 			END IF
 			IF vm_fecha_hasta > TODAY THEN
-				CALL fgl_winmessage(vg_producto,'La fecha final no puede ser mayor a la de hoy.','exclamation')
+				--CALL fgl_winmessage(vg_producto,'La fecha final no puede ser mayor a la de hoy.','exclamation')
+				CALL fl_mostrar_mensaje('La fecha final no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD vm_fecha_hasta
 			END IF
 			IF vm_fecha_desde < '01-01-1900' THEN
-				CALL fgl_winmessage(vg_producto,'Debe ingresa fechas mayores a las del año 1900.','exclamation')	
+				--CALL fgl_winmessage(vg_producto,'Debe ingresa fechas mayores a las del año 1900.','exclamation')	
+				CALL fl_mostrar_mensaje('Debe ingresa fechas mayores a las del año 1900.','exclamation')
 				NEXT FIELD vm_fecha_hasta
 			END IF
 		END IF
@@ -273,11 +320,13 @@ END IF
 	AFTER FIELD vm_fecha_desde 
 		IF vm_fecha_desde IS NOT NULL THEN
 			IF vm_fecha_desde > vm_fecha_hasta THEN
-				CALL fgl_winmessage(vg_producto,'La fecha de inicio debe ser menor a la fecha final.','exclamation')
+				--CALL fgl_winmessage(vg_producto,'La fecha de inicio debe ser menor a la fecha final.','exclamation')
+				CALL fl_mostrar_mensaje('La fecha de inicio debe ser menor a la fecha final.','exclamation')
 				NEXT FIELD vm_fecha_desde
 			END IF
 			IF vm_fecha_hasta < '01-01-1900' THEN
-				CALL fgl_winmessage(vg_producto,'Debe ingresa fechas mayores a las del año 1889.','exclamation')	
+				--CALL fgl_winmessage(vg_producto,'Debe ingresa fechas mayores a las del año 1889.','exclamation')	
+				CALL fl_mostrar_mensaje('Debe ingresa fechas mayores a las del año 1889.','exclamation')
 				NEXT FIELD vm_fecha_desde
 			END IF
 		END IF
@@ -287,7 +336,8 @@ END IF
 			CALL fl_lee_proveedor(vm_proveedor)
 				RETURNING r_p01.*
 			IF r_p01.p01_codprov IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'No existe el proveedor en la Compañía.','exclamation')
+				--CALL fgl_winmessage(vg_producto,'No existe el proveedor en la Compañía.','exclamation')
+				CALL fl_mostrar_mensaje('No existe el proveedor en la Compañía.','exclamation')
 				CLEAR nom_proveedor
 				NEXT FIELD vm_proveedor
 			END IF
@@ -302,7 +352,8 @@ END IF
 						 vm_depto)
 				RETURNING r_g34.*
 			IF r_g34.g34_cod_depto IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'No existe el departamento en la Compañía.','exclamation')
+				--CALL fgl_winmessage(vg_producto,'No existe el departamento en la Compañía.','exclamation')
+				CALL fl_mostrar_mensaje('No existe el departamento en la Compañía.','exclamation')
 				CLEAR nom_depto
 				NEXT FIELD vm_depto
 			END IF
@@ -316,7 +367,8 @@ END IF
 			CALL fl_lee_tipo_orden_compra(vm_tipo_orden)
 				RETURNING r_c01.*
 			IF r_c01.c01_tipo_orden IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'No existe el tipo de orden en la Compañía.','exclamation')
+				--CALL fgl_winmessage(vg_producto,'No existe el tipo de orden en la Compañía.','exclamation')
+				CALL fl_mostrar_mensaje('No existe el tipo de orden en la Compañía.','exclamation')
 				CLEAR nom_tipo
 				NEXT FIELD vm_tipo_orden
 			END IF
@@ -333,13 +385,18 @@ END IF
 
 		IF rm_c10.c10_estado = 'C' THEN
 			IF vm_fecha_desde IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'Debe ingresar la fecha de inicio.','exclamation') 
+				--CALL fgl_winmessage(vg_producto,'Debe ingresar la fecha de inicio.','exclamation') 
+				CALL fl_mostrar_mensaje('Debe ingresar la fecha de inicio.','exclamation') 
 				NEXT FIELD vm_fecha_desde
 			END IF
 			IF vm_fecha_hasta IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'Debe ingresar la fecha final.','exclamation') 
+				--CALL fgl_winmessage(vg_producto,'Debe ingresar la fecha final.','exclamation') 
+				CALL fl_mostrar_mensaje('Debe ingresar la fecha final.','exclamation') 
 				NEXT FIELD vm_fecha_hasta
 			END IF
+		END IF
+		IF vg_gui = 0 THEN
+			CALL muestra_estado(rm_c10.c10_estado)
 		END IF
 
 		IF vm_fecha_desde IS NULL AND vm_fecha_hasta IS NULL THEN
@@ -347,11 +404,13 @@ END IF
 		END IF
 
 		IF vm_fecha_desde IS NULL AND vm_fecha_hasta IS NOT NULL THEN
-			CALL fgl_winmessage(vg_producto,'Debe ingresar la fecha de inicio.','exclamation') 
+			--CALL fgl_winmessage(vg_producto,'Debe ingresar la fecha de inicio.','exclamation') 
+			CALL fl_mostrar_mensaje('Debe ingresar la fecha de inicio.','exclamation') 
 			NEXT FIELD vm_fecha_desde
 		END IF
 		IF vm_fecha_hasta IS NULL AND vm_fecha_desde IS NOT NULL THEN
-			CALL fgl_winmessage(vg_producto,'Debe ingresar la fecha de inicio.','exclamation') 
+			--CALL fgl_winmessage(vg_producto,'Debe ingresar la fecha de inicio.','exclamation') 
+			CALL fl_mostrar_mensaje('Debe ingresar la fecha de inicio.','exclamation') 
 			NEXT FIELD vm_fecha_hasta
 		END IF
 
@@ -364,8 +423,15 @@ END FUNCTION
 FUNCTION control_ver_oc(oc)
 DEFINE oc		LIKE ordt010.c10_numero_oc
 DEFINE command_run  	VARCHAR(150)
+DEFINE run_prog		CHAR(10)
 
-	LET command_run = 'fglrun ordp200 ' || vg_base || ' '
+{-- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE --}
+LET run_prog = 'fglrun '
+IF vg_gui = 0 THEN
+	LET run_prog = 'fglgo '
+END IF
+{--- ---}
+	LET command_run = run_prog || 'ordp200 ' || vg_base || ' '
 			    || vg_modulo || ' ' || vg_codcia 
 			    || ' ' || vg_codloc || ' ' || oc
 	RUN command_run
@@ -377,10 +443,17 @@ END FUNCTION
 FUNCTION control_ver_proveedor(codprov)
 DEFINE codprov		LIKE ordt010.c10_codprov
 DEFINE command_run  	VARCHAR(200)
+DEFINE run_prog		CHAR(10)
 
+{-- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE --}
+LET run_prog = '; fglrun '
+IF vg_gui = 0 THEN
+	LET run_prog = '; fglgo '
+END IF
+{--- ---}
 LET command_run = 'cd ..', vg_separador|| '..'|| vg_separador|| 
     		  'TESORERIA'|| vg_separador|| 'fuentes'|| 
-		   vg_separador|| '; fglrun cxpp101 '|| vg_base||
+		   vg_separador || run_prog || 'cxpp101 '|| vg_base||
 		  ' '|| 'TE'|| ' '|| vg_codcia|| ' '|| vg_codloc|| ' '|| codprov
 
 RUN command_run
@@ -390,7 +463,7 @@ END FUNCTION
 
 
 FUNCTION control_consulta()
-DEFINE query         	VARCHAR(500)
+DEFINE query         	CHAR(500)
 DEFINE i		SMALLINT
 DEFINE r_c10		RECORD LIKE ordt010.*
 DEFINE r_p01		RECORD LIKE cxpt001.*
@@ -464,8 +537,8 @@ END FUNCTION
 
 
 
-FUNCTION control_display_array()
-DEFINE query 		VARCHAR(300)
+FUNCTION control_DISPLAY_array()
+DEFINE query 		CHAR(300)
 DEFINE i,j,m,col 	SMALLINT
 DEFINE r_r19		RECORD LIKE rept019.*
 DEFINE cuantos		SMALLINT
@@ -495,40 +568,46 @@ WHILE TRUE
 		END IF
 	END FOREACH
 
+	CALL sacar_total()
+
 	CALL set_count(vm_num_det)
 	LET int_flag = 0
 	DISPLAY ARRAY r_detalle TO r_detalle.*
 
-		BEFORE DISPLAY
-			CALL dialog.keysetlabel('ACCEPT','')
+		--#BEFORE DISPLAY
+			--#CALL dialog.keysetlabel('ACCEPT','')
+			--#CALL dialog.keysetlabel("F1","")
+			--#CALL dialog.keysetlabel("CONTROL-W","")
 
-		BEFORE ROW
-			LET i = arr_curr()
-			LET j = scr_line()
-			CALL muestra_contadores_det(i)
-			LET tipo_comp = NULL
-			LET num_comp  = NULL
-			DECLARE q_levis CURSOR FOR 
-				SELECT c40_tipo_comp, c40_num_comp 
-				FROM ordt040 
-				WHERE c40_compania  = vg_codcia	
-				  AND c40_localidad = vg_codloc
-				  AND c40_numero_oc = r_detalle[i].c10_numero_oc
-			OPEN q_levis 
-			FETCH q_levis INTO tipo_comp, num_comp
-			IF tipo_comp IS NOT NULL THEN
-				CALL dialog.keysetlabel('F5', 
-					'Contabilización')
-			ELSE
-				CALL dialog.keysetlabel('F5', '')
-			END IF
+		--#BEFORE ROW
+			--#LET i = arr_curr()
+			--#LET j = scr_line()
+			--#CALL muestra_contadores_det(i)
+			--#LET tipo_comp = NULL
+			--#LET num_comp  = NULL
+			--#DECLARE q_levis CURSOR FOR 
+				--#SELECT c40_tipo_comp, c40_num_comp 
+				--#FROM ordt040 
+				--#WHERE c40_compania  = vg_codcia	
+				 --# AND c40_localidad = vg_codloc
+				  --#AND c40_numero_oc = r_detalle[i].c10_numero_oc
+			--#OPEN q_levis 
+			--#FETCH q_levis INTO tipo_comp, num_comp
+			--#IF tipo_comp IS NOT NULL THEN
+				--#CALL dialog.keysetlabel('F5', 
+					--#'Contabilización')
+			--#ELSE
+				--#CALL dialog.keysetlabel('F5', '')
+			--#END IF
 
-		AFTER DISPLAY 
-			CONTINUE DISPLAY
+		--#AFTER DISPLAY 
+			--#CONTINUE DISPLAY
 
 		ON KEY(INTERRUPT)
 			LET INT_FLAG = 1
 			EXIT DISPLAY
+        	ON KEY(F1,CONTROL-W)
+			CALL control_visor_teclas_caracter_1() 
 		ON KEY(F5)
 			IF tipo_comp IS NOT NULL THEN
 				CALL contabilizacion(tipo_comp, num_comp)
@@ -536,6 +615,8 @@ WHILE TRUE
 			LET int_flag = 0
 
 		ON KEY(F6)
+			LET i = arr_curr()
+			LET j = scr_line()
 			CALL control_ver_oc(r_detalle[i].c10_numero_oc)
 			LET INT_FLAG = 0
 
@@ -586,11 +667,18 @@ FUNCTION contabilizacion(tipo_comp, num_comp)
 DEFINE comando 		VARCHAR(255)
 DEFINE tipo_comp	LIKE ctbt012.b12_tipo_comp
 DEFINE num_comp		LIKE ctbt012.b12_num_comp
+DEFINE run_prog		CHAR(10)
 
+{-- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE --}
+LET run_prog = '; fglrun '
+IF vg_gui = 0 THEN
+	LET run_prog = '; fglgo '
+END IF
+{--- ---}
 LET comando = 'cd ..', vg_separador, '..', vg_separador,
 	      'CONTABILIDAD', vg_separador, 'fuentes', 
-	      vg_separador, '; fglrun ctbp201 ', vg_base, ' ',
-	      'CB ', vg_codcia, ' ', vg_codloc, ' ', tipo_comp, ' ', num_comp
+	      vg_separador, run_prog, 'ctbp201 ', vg_base, ' ',
+	      'CB ', vg_codcia, ' ', tipo_comp, ' ', num_comp
 
 RUN comando
 
@@ -601,40 +689,73 @@ END FUNCTION
 FUNCTION muestra_contadores_det(i)
 DEFINE i           SMALLINT
 
-DISPLAY "" AT 21, 4
-DISPLAY i, " de ", vm_num_det AT 21,4
+IF vg_gui = 1 THEN
+	DISPLAY "" AT 21, 4
+	DISPLAY i, " de ", vm_num_det AT 21,4
+END IF
 
 END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION llamar_visor_teclas()
+DEFINE a		CHAR(1)
 
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
+IF vg_gui = 0 THEN
+	CALL fl_visor_teclas_caracter() RETURNING int_flag 
+	LET a = fgl_getkey()
+	CLOSE WINDOW w_tf
+	LET int_flag = 0
 END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEn
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
+
+END FUNCTION
+
+
+
+FUNCTION control_visor_teclas_caracter_1() 
+DEFINE a, fila		INTEGER
+
+CALL fl_visor_teclas_caracter() RETURNING fila
+LET a = fila + 2
+DISPLAY 'Teclas exclusivas de este proceso:' AT a,2 ATTRIBUTE(REVERSE)	
+LET a = a + 1
+DISPLAY '<F5>      Contabilización'          AT a,2
+DISPLAY  'F5' AT a,3 ATTRIBUTE(REVERSE)
+LET a = a + 1
+DISPLAY '<F6>      Orden de Compra'          AT a,2
+DISPLAY  'F6' AT a,3 ATTRIBUTE(REVERSE)
+LET a = fgl_getkey()
+CLOSE WINDOW w_tf
+
+END FUNCTION
+
+
+
+FUNCTION muestra_estado(estado)
+DEFINE estado		CHAR(1)
+
+CASE estado
+	WHEN 'A'
+		DISPLAY 'ACTIVAS' TO tit_estado
+	WHEN 'P'
+		DISPLAY 'APROBADAS' TO tit_estado
+	WHEN 'C'
+		DISPLAY 'CERRADAS' TO tit_estado
+	OTHERWISE
+		CLEAR c10_estado, tit_estado
+END CASE
+
+END FUNCTION
+
+
+
+FUNCTION sacar_total()
+DEFINE i		SMALLINT
+
+LET vm_total = 0
+FOR i = 1 TO vm_num_det
+	LET vm_total = vm_total + r_detalle[i].c10_tot_compra
+END FOR
+DISPLAY BY NAME vm_total
 
 END FUNCTION

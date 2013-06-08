@@ -20,8 +20,9 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
-CALL fgl_init4js()
+--CALL startlog('../logs/errores')
+CALL startlog('../logs/ctbp101.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN          -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
@@ -33,8 +34,8 @@ LET vg_codcia   = arg_val(3)
 LET vg_proceso = 'ctbp101'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL control_master()
 
@@ -69,10 +70,7 @@ MENU 'OPCIONES'
 			CALL control_ingreso()
 		END IF
 		IF vm_num_rows = 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-			
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -85,10 +83,7 @@ MENU 'OPCIONES'
 	COMMAND KEY('C') 'Consultar' 'Consultar un registro. '
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-			
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -96,10 +91,7 @@ MENU 'OPCIONES'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
-			IF fl_control_permiso_opcion('Modificar') THEN			
-				SHOW OPTION 'Modificar'
-			END IF 
-			
+			SHOW OPTION 'Modificar'
 		END IF
 		IF vm_row_current <= 1 THEN
                         HIDE OPTION 'Retroceder'
@@ -140,13 +132,6 @@ LET rm_ctb.b01_usuario = vg_usuario
 LET rm_ctb.b01_fecing = CURRENT
 CALL leer_datos('I')
 IF NOT int_flag THEN
-	-- Hay que obtener el nivel de la cuenta
-	SELECT MAX(b01_nivel) INTO rm_ctb.b01_nivel FROM ctbt001
-	IF rm_ctb.b01_nivel IS NULL THEN
-		LET rm_ctb.b01_nivel = 0
-	END IF
-	LET rm_ctb.b01_nivel = rm_ctb.b01_nivel + 1
-
 	LET rm_ctb.b01_fecing = CURRENT
 	INSERT INTO ctbt001 VALUES (rm_ctb.*)
 	LET vm_num_rows = vm_num_rows + 1
@@ -221,7 +206,7 @@ CLEAR FORM
 CONSTRUCT BY NAME expr_sql ON b01_nivel, b01_nombre, b01_posicion_i,
 	   b01_posicion_f
 	ON KEY(F2)
-	IF infield(b01_nivel) THEN
+	IF INFIELD(b01_nivel) THEN
 		CALL fl_ayuda_nivel_cuentas()
 			RETURNING cod_aux, nom_aux, psi_aux, psf_aux
 		LET int_flag = 0
@@ -410,7 +395,7 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION no_validar_parametros()
 
 CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
 IF rg_mod.g50_modulo IS NULL THEN

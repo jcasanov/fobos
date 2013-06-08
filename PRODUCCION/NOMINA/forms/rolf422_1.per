@@ -1,0 +1,14 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+
+                               Anio: [c000]
+
+
+}
+ATTRIBUTES
+c000 = FORMONLY.vm_anio TYPE SMALLINT NOT NULL, REQUIRED, REVERSE, UPSHIFT,
+	INCLUDE = (1980 TO 2099),
+	COMMENTS = 'Ingrese un año que este cerrado o el vigente.';
+END

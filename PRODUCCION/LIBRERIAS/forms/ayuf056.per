@@ -1,32 +1,56 @@
-DATABASE diteca
-
+DATABASE aceros
 SCREEN
 {
  ORDENES DE TRABAJO
------------------------------------------------------
- Orden       Cliente 		
------------------------------------------------------
-[c001     ] [c002                                 ] 
-[c001     ] [c002                                 ]
-[c001     ] [c002                                 ]
-[c001     ] [c002                                 ]
-[c001     ] [c002                                 ]
-[c001     ] [c002                                 ]
-[c001     ] [c002                                 ] 
-[c001     ] [c002                                 ] 
-[c001     ] [c002                                 ] 
-[c001     ] [c002                                 ] 
+
+ [c000 |c001 |c002             |c003      |c004      |c005      |c006       |c]
+[c010 |c011 |c012             |c013      |c014      |c015      |c016       |d]
+[c010 |c011 |c012             |c013      |c014      |c015      |c016       |d]
+[c010 |c011 |c012             |c013      |c014      |c015      |c016       |d]
+[c010 |c011 |c012             |c013      |c014      |c015      |c016       |d]
+[c010 |c011 |c012             |c013      |c014      |c015      |c016       |d]
+[c010 |c011 |c012             |c013      |c014      |c015      |c016       |d]
+[c010 |c011 |c012             |c013      |c014      |c015      |c016       |d]
+[c010 |c011 |c012             |c013      |c014      |c015      |c016       |d]
+[c010 |c011 |c012             |c013      |c014      |c015      |c016       |d]
+[c010 |c011 |c012             |c013      |c014      |c015      |c016       |d]
+                  Totales OT: [c020      |c021      |c022      |c023       ]
+[c030                                                          ]
 
 }
-
 TABLES
 talt023
-
 ATTRIBUTES
-c001 = t23_orden, UPSHIFT;
-c002 = t23_nom_cliente, UPSHIFT;
+c000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c002 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c003 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c004 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c005 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c006 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+c    = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22';
+
+c010 = talt023.t23_orden, NOENTRY, UPSHIFT;
+c011 = talt023.t23_cod_cliente, NOENTRY, UPSHIFT;
+c012 = talt023.t23_nom_cliente, NOENTRY, UPSHIFT;
+c013 = talt023.t23_val_mo_tal, NOENTRY, UPSHIFT, FORMAT = '###,##&.##';
+c014 = FORMONLY.tot_oc TYPE DECIMAL, NOENTRY, UPSHIFT, FORMAT = '###,##&.##';
+c015 = FORMONLY.tot_fa TYPE DECIMAL, NOENTRY, UPSHIFT, FORMAT = '###,##&.##';
+c016 = FORMONLY.tot_ot TYPE DECIMAL, NOENTRY, UPSHIFT, FORMAT = '####,##&.##';
+d    = talt023.t23_estado, NOENTRY, UPSHIFT;
+
+c020 = FORMONLY.tot_neto TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '###,##&.##';
+c021 = FORMONLY.total_oc TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '###,##&.##';
+c022 = FORMONLY.total_fa TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '###,##&.##';
+c023 = FORMONLY.total_ot TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '####,##&.##';
+
+c030 = FORMONLY.tit_cliente, NOENTRY, UPSHIFT;
 END
-
 INSTRUCTIONS
-SCREEN RECORD rh_ordtal[10](t23_orden, t23_nom_cliente)
-
+DELIMITERS '||'
+SCREEN RECORD rh_ordtal[10] (t23_orden, t23_cod_cliente, t23_nom_cliente,
+			t23_val_mo_tal, tot_oc, tot_fa, tot_ot, t23_estado)

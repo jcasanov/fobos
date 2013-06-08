@@ -1,76 +1,22 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
-      Moneda: [f1] [f002          ]
-      Bodega: [f3] [f004          ]     
-      Linea : [f005 ]
 
- Solo con clasificacion: [a] A     [b] B     [c] C    [d] D     [e] E
 
-[f010       |f011               |f012	      |f013	    |f014 |f015 |f016 ]
-[f020       |f021               |f022         |f023         |f024 |f025 |f026 ]
-[f020       |f021               |f022	      |f023         |f024 |f025 |f026 ]
-[f020       |f021               |f022         |f023         |f024 |f025 |f026 ]
-[f020       |f021               |f022         |f023         |f024 |f025 |f026 ]
-[f020       |f021               |f022         |f023         |f024 |f025 |f026 ]
-[f020       |f021               |f022         |f023         |f024 |f025 |f026 ]
-[f020       |f021               |f022         |f023         |f024 |f025 |f026 ]
-[f020       |f021               |f022         |f023         |f024 |f025 |f026 ]
-[f020       |f021               |f022         |f023         |f024 |f025 |f026 ]
-[f020       |f021               |f022         |f023         |f024 |f025 |f026 ]
-[f020       |f021               |f022         |f023         |f024 |f025 |f026 ]
-[f020       |f021               |f022         |f023         |f024 |f025 |f026 ]
-[f020       |f021               |f022         |f023         |f024 |f025 |f026 ]
-[f020       |f021               |f022         |f023         |f024 |f025 |f026 ]
+    Se va Imprimir Orden Despacho: [c001      ]
+
+                     De la Bodega: [a0] [c002                          ]
+
+                      Factura No.: [a1] [c003           ]
+ 
 
 }
-	
 TABLES
-rept010
-rept011
+rept034, rept002
 ATTRIBUTES
---c000 = rept010.r10_filtro, UPSHIFT;
---c001 = formonly.filtro, NOENTRY;
---c002 = formonly.margen, NOENTRY, FORMAT='#&.&&';
-f1   = formonly.moneda TYPE CHAR NOT NULL, REVERSE, UPSHIFT, AUTONEXT,
-       WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2', UPSHIFT;
-f002 = formonly.tit_moneda, NOENTRY;
-f3   = formonly.bodega TYPE CHAR NOT NULL, REVERSE, UPSHIFT, AUTONEXT,
-       WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2', UPSHIFT;
-f004 = formonly.tit_bodega, NOENTRY;
-f005 = formonly.linea, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2', UPSHIFT;
---f006 = formonly.margen_ini TYPE DECIMAL(9,0);
---f007 = formonly.margen_fin TYPE DECIMAL(9,0);
-f010 = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-f011 = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-f012 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
-f013 = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
-f014 = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
-f015 = formonly.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
-f016 = formonly.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F22';
-
-
-f020 = r10_codigo, UPSHIFT;
-f021 = r10_nombre, UPSHIFT;
-f022 = formonly.fob  TYPE DECIMAL(12,2), FORMAT = '##,###,##&.##';
-f023 = formonly.precio TYPE DECIMAL(12,2), FORMAT = '##,###,##&.##';
-f024 = formonly.stock_disp, FORMAT = '####&';
-f025 = r11_stock_act, FORMAT = '####&';
-f026 = formonly.valact  TYPE CHAR, INCLUDE=('A','B','C','D','E'), NOENTRY, UPSHIFT;
-
-
-a = formonly.clasif_a, WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
-b = formonly.clasif_b, WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
-c = formonly.clasif_c, WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
-d = formonly.clasif_d, WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
-e = formonly.clasif_e, WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
-
-
-
-INSTRUCTIONS
-SCREEN RECORD rm_item[14] (r10_codigo, r10_nombre, formonly.fob,
-                           formonly.precio, formonly.stock_disp, r11_stock_act,formonly.valact)
---KEYS
---'F5' = 'Ver Item'
---'F8' = 'Ubicación'
-
+c001 = rept034.r34_num_ord_des, NOENTRY, REVERSE, UPSHIFT;
+a0   = rept034.r34_bodega, NOENTRY, REVERSE, UPSHIFT;
+c002 = rept002.r02_nombre, NOENTRY, REVERSE, UPSHIFT;
+a1   = rept034.r34_cod_tran, NOENTRY, REVERSE, UPSHIFT;
+c003 = rept034.r34_num_tran, NOENTRY, REVERSE, UPSHIFT;
+END

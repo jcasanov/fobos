@@ -1,0 +1,59 @@
+database aceros
+screen 
+{
+
+       Empleado: [c003|c100                                        ]
+         Depto.: [c004|c101                                        ]
+      Tipo Pago: [b|c102           ]
+
+          Banco: [c016|c103                                        ]
+   Cta. Empresa: [c017           ]  Cta. Empleado: [c018           ]
+
+                                      Valor Decimo: [c012          ]  
+
+   [lbl1    |lbl2                         |lbl3    |lbl4            ]
+  [c025  ] [c110                         |c026    |c028            ]
+  [c025  ] [c110                         |c026    |c028            ]
+  [c025  ] [c110                         |c026    |c028            ]
+  [c025  ] [c110                         |c026    |c028            ]
+                	    (-) Total Descuentos: [c111            ]
+  			 	                  ------------------ 		
+                                 Valor A Recibir: [c014            ]
+}
+end
+tables
+rolt036
+rolt037
+attributes
+c003 = rolt036.n36_cod_trab,   NOENTRY, REVERSE;
+c004 = rolt036.n36_cod_depto,  NOENTRY, REVERSE;
+c012 = rolt036.n36_ganado_per, NOENTRY, REVERSE, FORMAT='###,###,##&.##';
+c014 = rolt036.n36_valor_neto, NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+b = rolt036.n36_tipo_pago,     NOENTRY, REVERSE;
+
+c016 = rolt036.n36_bco_empresa, NOENTRY, REVERSE;
+c017 = rolt036.n36_cta_empresa, NOENTRY, REVERSE;
+c018 = rolt036.n36_cta_trabaj, NOENTRY, REVERSE;
+
+c025 = rolt037.n37_cod_rubro, OPTIONS='-nolist', WIDGET='FIELD_BMP', 
+                              CONFIG='lista.bmp F2';
+c110 = formonly.n_rubro,      OPTIONS='-nolist', NOENTRY;
+c026 = rolt037.n37_num_prest, OPTIONS='-nolist', NOENTRY;
+c028 = rolt037.n37_valor,     OPTIONS='-nolist', FORMAT="#,###,###,##&.##",
+			      INCLUDE=(0 TO 9999999999.99);
+
+c100 = formonly.n_trab,      NOENTRY, UPSHIFT;
+c101 = formonly.n_depto,     NOENTRY, UPSHIFT;
+c102 = formonly.n_tipo_pago, NOENTRY, UPSHIFT;
+c103 = formonly.n_banco,     NOENTRY, UPSHIFT;
+c111 = formonly.tot_valor,   NOENTRY, FORMAT="#,###,###,##&.##";
+
+lbl1 = formonly.bt_cod_rubro, WIDGET='BUTTON', CONFIG='F15';
+lbl2 = formonly.bt_nom_rubro, WIDGET='BUTTON', CONFIG='F16';
+lbl3 = formonly.bt_num_prest, WIDGET='BUTTON', CONFIG='F18';  
+lbl4 = formonly.bt_valor,     WIDGET='BUTTON', CONFIG='F17';
+
+end
+
+instructions
+screen record ra_desc[4] (n37_cod_rubro, n_rubro, n37_num_prest, n37_valor)

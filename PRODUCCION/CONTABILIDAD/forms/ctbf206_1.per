@@ -1,17 +1,27 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
 
 
-                    Año de Proceso: [c002]
+                      Desde: [c2|c003       ] - [c000]
 
-                     Mes de Cierre: [c003][c004       ]
+
+                      Hasta: [c4|c005       ] - [c001]
+
 }
-TABLES
-ctbt000
 ATTRIBUTES
-c002 = ctbt000.b00_anopro, NOENTRY, REVERSE, UPSHIFT;
-c003 = FORMONLY.b00_mespro, AUTONEXT, REVERSE, UPSHIFT, INCLUDE = (1 TO 12),
-	COMMENTS = 'Mes de cierre para el proceso contable';
-c004 = FORMONLY.tit_mes, NOENTRY, REVERSE, UPSHIFT;
+c000 = FORMONLY.vm_anopro_ini TYPE INTEGER NOT NULL, REQUIRED, NOENTRY,
+	REVERSE, UPSHIFT, INCLUDE = (1900 TO 2099),
+	COMMENTS = 'Año Inicial de Cierre Mensual para proceso contable.';
+c001 = FORMONLY.vm_anopro_fin TYPE INTEGER NOT NULL, REQUIRED, AUTONEXT,
+	REVERSE, UPSHIFT, INCLUDE = (1900 TO 2099),
+	COMMENTS = 'Año Final de Cierre Mensual para proceso contable.';
+c2   = FORMONLY.vm_mespro_ini TYPE SMALLINT NOT NULL, REQUIRED, NOENTRY,
+	REVERSE, UPSHIFT, INCLUDE = (1 TO 12),
+	COMMENTS = 'Mes de Inicio Cierre Mensual para el proceso contable.';
+c003 = FORMONLY.tit_mes_ini, NOENTRY, REVERSE, UPSHIFT;
+c4   = FORMONLY.vm_mespro_fin TYPE SMALLINT NOT NULL, REQUIRED, AUTONEXT,
+	REVERSE, UPSHIFT, INCLUDE = (1 TO 12),
+	COMMENTS = 'Mes Final Cierre Mensual para el proceso contable.';
+c005 = FORMONLY.tit_mes_fin, NOENTRY, REVERSE, UPSHIFT;
 END

@@ -1,0 +1,71 @@
+DATABASE aceros
+SCREEN
+{
+
+ No Recepcion:[c0    ]      	              Estado:[a|a1          ] 
+Fecha Ingreso:[c1                  ]   Fecha de Elim:[a2                 ]
+     No Orden:[c2   ][c33                  ] Forma de Pago:[d|c060   ]
+      Factura:[c4               ]            Fecha Caducidad: [c040      ]
+Num. Aut. SRI:[c100      ]              Serie Comprobante:[c101  ]
+              [c] Calcular el impuesto sobre el Subtotal
+ C Pe  C Re  Código      Descripción                      Des %    Precio  C
+[c8   |c9   |c10     |c11                                |c12  |c13       |y]
+[c8   |c9   |c10     |c11                                |c12  |c13       |y]
+[c8   |c9   |c10     |c11                                |c12  |c13       |y]
+[c8   |c9   |c10     |c11                                |c12  |c13       |y]
+[c8   |c9   |c10     |c11                                |c12  |c13       |y]
+[c8   |c9   |c10     |c11                                |c12  |c13       |y]
+          		                              Subtotal:[c14       ]
+    Diferencia Cuadre:[y057      ]                   Descuento:[c15       ]
+               Seguro:[y056      ]                    Impuesto:[c16       ] 
+                Flete:[y055      ]                        Neto:[c17       ] 
+}
+TABLES ordt010, ordt011, ordt013, ordt014, cxpt001
+ATTRIBUTES
+
+a   = ordt013.c13_estado,    REVERSE, NOENTRY;
+a1  = FORMONLY.tit_estado,   REVERSE, NOENTRY;
+a2  = ordt013.c13_fecha_eli, REVERSE, NOENTRY;
+
+c0  = ordt013.c13_num_recep, REVERSE, NOENTRY;  
+c1  = ordt013.c13_fecing,    REVERSE, NOENTRY;  
+c2  = ordt013.c13_numero_oc, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c4  = ordt013.c13_num_guia, REVERSE, UPSHIFT; 
+
+c8  = ordt011.c11_cant_ped, REVERSE, NOENTRY; 
+c9  = ordt014.c14_cantidad, REVERSE, INCLUDE = (0 TO 99999);
+c10 = ordt014.c14_codigo, REVERSE, UPSHIFT, NOENTRY;
+c11 = ordt014.c14_descrip,   REVERSE, UPSHIFT, NOENTRY;
+c12 = ordt014.c14_descuento, REVERSE, NOENTRY,
+	FORMAT = '#&.##';
+c13 = ordt014.c14_precio,    REVERSE, FORMAT = '##,##&.###', NOENTRY;
+y   = FORMONLY.paga_iva TYPE CHAR, INCLUDE = ('S', 'N'), NOENTRY;
+c040 = ordt013.c13_fecha_cadu, AUTONEXT, REVERSE, UPSHIFT,FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha en formato: dd-mm-aaaa.';
+
+c14 = ordt013.c13_tot_bruto,  NOENTRY, FORMAT = '###,##&.##', REVERSE; 
+c15 = ordt013.c13_tot_dscto,  NOENTRY, FORMAT = '###,##&.##'; 
+c16 = ordt013.c13_tot_impto,  NOENTRY, FORMAT = '###,##&.##'; 
+c17 = ordt013.c13_tot_recep,  REVERSE, NOENTRY, FORMAT = '###,##&.##'; 
+
+c33 = FORMONLY.nomprov TYPE VARCHAR, REVERSE, NOENTRY; 
+
+d   = ordt010.c10_tipo_pago, REVERSE, UPSHIFT,NOENTRY,
+	INCLUDE = ('C', 'R'),
+	COMMENTS = 'C Contado  R Crédito';
+c060 = FORMONLY.tit_tipo_pago,REVERSE,UPSHIFT,NOENTRY;
+c100 = ordt013.c13_num_aut,    UPSHIFT, REVERSE;
+c101 = ordt013.c13_serie_comp, UPSHIFT, REVERSE;
+
+c    = FORMONLY.vm_calc_iva TYPE CHAR, INCLUDE = ('S', 'D'), 
+	DEFAULT='D', COMMENTS='Indique si desea calcular el impuesto sobre el subtotal o sobre el detalle.';
+y055 = c13_flete, REQUIRED, INCLUDE = (0 TO 99999999), FORMAT = '###,##&.##';
+y056 = c13_otros, REQUIRED, INCLUDE = (0 TO 99999999), FORMAT = '###,##&.##';	
+y057 = c13_dif_cuadre, REQUIRED, INCLUDE = (0 TO 99999999), FORMAT = '---,--&.##';	
+END
+INSTRUCTIONS 
+DELIMITERS '||'
+SCREEN RECORD r_detalle[6] (c11_cant_ped, c14_cantidad,  c14_codigo,
+			    c14_descrip,  c14_descuento, c14_precio, paga_iva)
+

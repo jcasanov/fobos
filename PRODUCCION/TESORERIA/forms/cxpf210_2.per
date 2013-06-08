@@ -1,0 +1,33 @@
+DATABASE aceros
+SCREEN
+{
+
+          PORCENTAJE ICE TIPO FACTURA
+          --------------------------
+
+  Tipo Factura: [c000][c001                   ]
+                      [c001                   ]
+
+    Codigo ICE: [c002][c003  ] %  [c004       ]
+
+   Descripcion: [c005                         ]
+                [c005                         ]
+
+    Valor Base: [c006         ]
+     Valor ICE: [c007         ]
+
+}
+TABLES
+srit010
+ordt010
+ATTRIBUTES
+c000 = FORMONLY.tipo_orden, NOENTRY, REVERSE, UPSHIFT;
+c001 = FORMONLY.descripcion, NOENTRY, REVERSE, UPSHIFT;
+c002 = ordt010.c10_cod_ice, NOENTRY, UPSHIFT, REVERSE;
+c003 = ordt010.c10_porc_ice, NOENTRY, UPSHIFT, REVERSE, FORMAT = '##&.##';
+c004 = ordt010.c10_cod_ice_imp, NOENTRY, UPSHIFT, REVERSE;
+c005 = srit010.s10_descripcion, NOENTRY, UPSHIFT, REVERSE, WORDWRAP COMPRESS;
+c006 = ordt010.c10_base_ice, AUTONEXT, UPSHIFT, FORMAT = '##,###,##&.##',
+	INCLUDE = (0 TO 99999999.99);
+c007 = ordt010.c10_valor_ice, NOENTRY, UPSHIFT, FORMAT = '##,###,##&.##';
+END

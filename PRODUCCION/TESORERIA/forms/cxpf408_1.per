@@ -1,7 +1,5 @@
-
-DATABASE DITECA
+DATABASE aceros
 SCREEN 
-
 {
 
 			     Moneda: [c1] [c020             ]
@@ -15,23 +13,23 @@ SCREEN
 }
 end
 
-attributes
-c1   = formonly.moneda,		REVERSE, UPSHIFT, AUTONEXT, 
+ATTRIBUTES
+c1   = FORMONLY.moneda,		REVERSE, UPSHIFT, AUTONEXT, 
 				WIDGET = 'FIELD_BMP',
 				CONFIG = 'lista.bmp F2';
-c2   = formonly.transaccion,	UPSHIFT, WIDGET = 'FIELD_BMP',
+c2   = FORMONLY.transaccion,	UPSHIFT, WIDGET = 'FIELD_BMP',
 				CONFIG = 'lista.bmp F2';
-c004 = formonly.proveedor,	WIDGET = 'FIELD_BMP',
+c004 = FORMONLY.proveedor,	WIDGET = 'FIELD_BMP',
 				CONFIG = 'lista.bmp F2';
-c005 = formonly.inicial, 	REVERSE, FORMAT = 'dd-mm-yyyy',
-				COMMENT = 'Ingrese fecha en formato: dd-mm-aaaa';
-c006 = formonly.final, 		REVERSE, FORMAT = 'dd-mm-yyyy',
-				COMMENT = 'Ingrese fecha en formato: dd-mm-aaaa';
-c008 = formonly.origen_doc,     WIDGET = 'RADIO', CONFIG = "lines=3", AUTONEXT,
-                                CONFIG = 'M Manual A Automático T Todos',
+c005 = FORMONLY.inicial TYPE DATE NOT NULL, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENT = 'Ingrese fecha en formato: dd-mm-aaaa';
+c006 = FORMONLY.final TYPE DATE NOT NULL, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENT = 'Ingrese fecha en formato: dd-mm-aaaa';
+c008 = FORMONLY.origen_doc,     WIDGET = 'RADIO', CONFIG = "lines=3", AUTONEXT,
+                                CONFIG = 'M Manual A Automatico T Todos',
                                 DEFAULT = 'M';
-c020 = formonly.desc_moneda, 	  REVERSE, UPSHIFT;
-c021 = formonly.desc_transaccion, UPSHIFT;
-c023 = formonly.desc_proveedor,	  UPSHIFT;
-END
+c020 = FORMONLY.desc_moneda, 	  REVERSE, UPSHIFT;
+c021 = FORMONLY.desc_transaccion, UPSHIFT;
+c023 = FORMONLY.desc_proveedor,	  UPSHIFT;
+end
 

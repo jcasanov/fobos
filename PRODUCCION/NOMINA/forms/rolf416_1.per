@@ -1,0 +1,40 @@
+DATABASE aceros
+SCREEN
+{
+
+            Liquidación: [c0] [c001                          ]
+
+                    Año: [c002]        Mes: [c1] [c003       ]
+      
+                Período: [c004      ]      -      [c005      ]
+
+           Tipo Reporte: [c006                 ]
+
+
+
+                       Agrupado por Departamento ?: [c]
+
+}
+TABLES
+rolt003
+rolt032
+ATTRIBUTES
+c0   = rolt032.n32_cod_liqrol, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = rolt003.n03_nombre, NOENTRY, UPSHIFT, REVERSE;
+c002 = rolt032.n32_ano_proceso, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = (1980 TO 2099);
+c1   = rolt032.n32_mes_proceso, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	INCLUDE = (01 TO 12);
+c003 = FORMONLY.tit_mes, NOENTRY, UPSHIFT, REVERSE;
+c004 = rolt032.n32_fecha_ini, NOENTRY, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy';
+c005 = rolt032.n32_fecha_fin, NOENTRY, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy';
+c006 = FORMONLY.vm_reporte TYPE CHAR NOT NULL, REQUIRED, UPSHIFT, REVERSE,
+	INCLUDE = ('I', 'D', 'T'), DEFAULT = 'I',
+	WIDGET = 'RADIO',
+	CONFIG = 'I "Detalle Ingresos" D "Detalle Descuentos" T "T O D O S"',
+	COMMENTS = 'Escoja el tipo de reporte que desea analizar.';
+c    = FORMONLY.vm_agrupado, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+END

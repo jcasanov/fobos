@@ -1,0 +1,74 @@
+DATABASE aceros
+SCREEN
+{
+    Estado: [d001            ]             Fechas: [c052      ] - [c053      ]
+                                                   Ver mis Transferencias: [e]
+
+                                                              [c050] de [c051]
+ [y|f1|f011   |f2|f3|f014                             |f015      |f4|f016   |c] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   |d] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   |d] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   |d] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   |d] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   |d] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   |d] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   |d] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   |d] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   |d] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   |d] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   |d] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   |d] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   |d] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   |d] 
+}
+TABLES
+gent002
+rept019
+rept094
+ATTRIBUTES
+d001 = FORMONLY.vm_estado, REVERSE, WIDGET = 'RADIO',
+	CONFIG = 'P Pendientes T Traspasadas D "T o d a s"'; 
+c052 = FORMONLY.vm_fecha_ini TYPE DATE NOT NULL, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Inicial en Formato: dd-mm-aaaa.';
+c053 = FORMONLY.vm_fecha_fin TYPE DATE NOT NULL, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Final en Formato: dd-mm-aaaa.';
+e    = FORMONLY.vm_vertrans, REVERSE, UPSHIFT, INCLUDE = ('S', 'N'),
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N',
+	COMMENTS = 'Solo si es que se quiere anular un traspaso.';
+
+y    = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+f1   = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+f011 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+f2   = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+f3   = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+f014 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+f015 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+f4   = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22';
+f016 = FORMONLY.tit_col9, WIDGET = 'BUTTON', CONFIG = 'F23';
+c    = FORMONLY.tit_col10, WIDGET = 'BUTTON', CONFIG = 'F24';
+
+z    = r19_localidad, NOENTRY, OPTIONS = '-nolist';
+c2   = r19_cod_tran,  NOENTRY, OPTIONS = '-nolist';
+c021 = r19_num_tran,  NOENTRY, OPTIONS = '-nolist';
+c3   = r19_bodega_ori,  NOENTRY, OPTIONS = '-nolist';
+c4   = r19_bodega_dest, NOENTRY, OPTIONS = '-nolist';
+c022 = r19_referencia,  NOENTRY, OPTIONS = '-nolist';
+c023 = FORMONLY.r19_fecing TYPE DATE, NOENTRY, FORMAT = 'dd-mm-yyyy', 
+       OPTIONS = '-nolist';
+c5   = r94_codtra_fin,  NOENTRY, OPTIONS = '-nolist';
+c024 = r94_numtra_fin,  NOENTRY, OPTIONS = '-nolist';
+d    = r94_traspasada,  NOENTRY, OPTIONS = '-nolist',
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+
+c050 = FORMONLY.num_cur TYPE SMALLINT, NOENTRY, REVERSE, UPSHIFT;
+c051 = FORMONLY.vm_num_rows TYPE SMALLINT, NOENTRY, REVERSE, UPSHIFT;
+END
+KEYS 
+F5 = 'Origen'
+INSTRUCTIONS
+SCREEN RECORD rm_tran[14] (r19_localidad,  r19_cod_tran,    r19_num_tran, 
+			   r19_bodega_ori, r19_bodega_dest, r19_referencia,
+			   FORMONLY.r19_fecing, r94_codtra_fin,  
+			   r94_numtra_fin, r94_traspasada)

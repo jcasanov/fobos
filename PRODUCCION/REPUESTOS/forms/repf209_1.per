@@ -1,28 +1,25 @@
-
-DATABASE diteca
-screen
+DATABASE aceros
+SCREEN
 {
- No Pre-Venta:[g0   ]                 	               Fecha:[g1        ]
-       Moneda:[c ] [g12                  ]	      Estado:[g|g28          ]  
-       Bodega:[a ] [g14                  ] 	         IVA:[g4   ]%
-  Grupo Línea:[g2   ] [g3                     ]	  
-      Cliente:[g5    ] [g6                    ]  Ced/RUC/Pas:[g7             ]
-    Dirección:[g8                             ]    Tipo Pago:[g13            ]  
-     Vendedor:[g10 ] [g11                     ]  
 
-             [c0  |c1  |c2              ] [c4            |c5              ]  
-            [g16 |g17 |g18             ] [g21           |g22             ]
-            [g16 |g17 |g18             ] [g21           |g22             ]
-            [g16 |g17 |g18             ] [g21           |g22             ]
-            [g16 |g17 |g18             ] [g21           |g22             ]
-            [g16 |g17 |g18             ] [g21           |g22             ]
-            [g16 |g17 |g18             ] [g21           |g22             ]
-                                               Subtotal:[g23             ]
-     [g19                           ]         Descuento:[g24             ]
+ No Pre-Venta:[g0     ]                            Fecha:[g1                 ]
+       Moneda:[c ] [g12                  ]        Estado:[g|g28          ]  
+       Bodega:[a ] [g14                  ] 	     IVA:[g4   ]%
+  Grupo Línea:[g2   ] [g3                     ]   Dscto.:[g9   ]%   
+      Cliente:[g5    ]    [g6                                                ]
+    Dirección:[g8                             ]  Ced/RUC/Pas:[g7             ]
+     Vendedor:[g10 ] [g11                     ]    Tipo Pago:[g13            ]
+
+    [e][c0     |c1     |c2] [c3        ] [c4   |c5           |c6              ]
+   [b][g16    |g17    |z1] [g18       ] [g20  |g21          |g22             ]
+   [b][g16    |g17    |z1] [g18       ] [g20  |g21          |g22             ]
+   [b][g16    |g17    |z1] [g18       ] [g20  |g21          |g22             ]
+   [b][g16    |g17    |z1] [g18       ] [g20  |g21          |g22             ]
+                  		                   Subtotal:[g23             ]
+     [g19                           ]             Descuento:[g24             ]
 	 Peso Total:[c00            ]              Impuesto:[g25             ]
-              Flete:[g15            ]	           Neto:[g26             ]
+              Flete:[g15            ]	               Neto:[g26             ]
 }
-end
 TABLES
 	rept023
 	rept024
@@ -34,24 +31,27 @@ TABLES
 	gent013
 ATTRIBUTES
 
-c00  = formonly.vm_tot_peso TYPE DECIMAL(11,3), REVERSE, NOENTRY, 
+c00  = FORMONLY.vm_tot_peso TYPE DECIMAL(11,3), REVERSE, NOENTRY, 
 	FORMAT = '###,###,##&.###';
 
 		     ---- BOTONES ----
-c0  = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-c1  = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
-c2  = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
-c4  = formonly.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
-c5  = formonly.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+e  = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c0  = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c1  = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c2  = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c3  = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c4  = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c5  = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+c6  = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22';
 	---------------------------------------------
 
 g0  = rept023.r23_numprev, REVERSE, NOENTRY,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-g1  = formonly.vm_fecha TYPE DATE, REVERSE, NOENTRY;
+g1  = FORMONLY.vm_fecha TYPE DATETIME YEAR TO SECOND, REVERSE, NOENTRY;
 g2  = rept023.r23_grupo_linea , REVERSE, UPSHIFT, 
 	COMMENT = 'Grupo de Línea a la que pertenecen los Items. ',
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-g3  = formonly.nom_grupo, NOENTRY;
+g3  = FORMONLY.nom_grupo, NOENTRY;
 g4  = rept023.r23_porc_impto, REVERSE, NOENTRY;
 g5  = rept023.r23_codcli, UPSHIFT, 
 	COMMENTS = 'Obligatorio para ventas a crédito.',
@@ -62,45 +62,55 @@ g8  = rept023.r23_dircli, REVERSE, UPSHIFT, SCROLL,
 	COMMENTS = 'Dirección del domicilio del cliente.  ';
 g7  = rept023.r23_cedruc, REVERSE, UPSHIFT,
 	COMMENTS = 'Cédula o RUC del cliente. ';
+g9  = rept023.r23_descuento, REVERSE, FORMAT = '#&.##', 
+	INCLUDE = (0.00 TO 99.99);
 g13 = rept023.r23_cont_cred, REVERSE, COMMENTS = 'Tipos de Pago. ',
 	WIDGET = 'RADIO', CONFIG = 'C Contado R Crédito';
 c   = rept023.r23_moneda, REVERSE, UPSHIFT,
 	COMMENTS = 'Moneda Base o Moneda Alterna. ',
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-g12 = formonly.nom_moneda TYPE VARCHAR, NOENTRY;
+g12 = FORMONLY.nom_moneda TYPE VARCHAR, NOENTRY;
 g10 = rept023.r23_vendedor, REVERSE, 
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-g11 = formonly.nom_vendedor TYPE VARCHAR, NOENTRY;
+g11 = FORMONLY.nom_vendedor TYPE VARCHAR, NOENTRY;
 a   = r23_bodega, REVERSE, UPSHIFT,COMMENT = 'Bodega que Factura. ',
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-g14 = formonly.nom_bodega TYPE VARCHAR, NOENTRY;
+g14 = FORMONLY.nom_bodega TYPE VARCHAR, NOENTRY;
 g15 = rept023.r23_flete, REVERSE, FORMAT = '###,###,##&.##',
 	COMMENTS = 'En caso de que haya un recargo por transportación. ',
 	INCLUDE = (0 TO 999999999.99);
-g16 = rept024.r24_cant_ped, REVERSE,OPTIONS = '-nolist',
-	INCLUDE = (1 TO 9999);
-g17 = rept024.r24_cant_ven, REVERSE, NOENTRY, OPTIONS = '-nolist';
-g18 = rept024.r24_item, REVERSE, UPSHIFT, OPTIONS = '-nolist',
+b   = rept024.r24_proformado, NOENTRY, OPTIONS = '-nolist', AUTONEXT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N';
+g16 = rept024.r24_cant_ped , OPTIONS = '-nolist', 
+	FORMAT = '###&.##';
+g17 = rept024.r24_cant_ven ,NOENTRY, OPTIONS = '-nolist', FORMAT = '###&.##';
+z1  = r24_bodega, UPSHIFT, AUTONEXT, REQUIRED, OPTIONS = '-nolist',
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-g19 = formonly.nom_item, REVERSE, NOENTRY;
-g21 = rept024.r24_precio, NOENTRY, REVERSE, FORMAT = '###,###,##&.##',
-	 REVERSE, OPTIONS = '-nolist';
-g22 = formonly.subtotal_item TYPE DECIMAL(12,2), NOENTRY, 
-	FORMAT = '#,###,###,##&.##', REVERSE, OPTIONS = '-nolist';
+g18 = rept024.r24_item, AUTONEXT, UPSHIFT, OPTIONS = '-nolist',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+g19 = FORMONLY.nom_item, NOENTRY;
+g20 = rept024.r24_descuento, FORMAT = '#&.##', INCLUDE = (0 TO 99.99),
+	OPTIONS = '-nolist';
+g21 = rept024.r24_precio, NOENTRY, FORMAT = '##,###,##&.##',
+	 OPTIONS = '-nolist';
+g22 = FORMONLY.subtotal_item TYPE DECIMAL(12,2), NOENTRY, 
+	FORMAT = '#,###,###,##&.##', OPTIONS = '-nolist';
 g23 = rept023.r23_tot_bruto,  
 	FORMAT = '#,###,###,##&.##',NOENTRY;
 g24 = rept023.r23_tot_dscto, 
 	FORMAT = '###,###,##&.##', NOENTRY;
-g25 = formonly.vm_impuesto TYPE DECIMAL(11,2), 
+g25 = FORMONLY.vm_impuesto TYPE DECIMAL(11,2), 
 	FORMAT = '###,###,##&.##', NOENTRY;
 g26 = rept023.r23_tot_neto , REVERSE, FORMAT = '#,###,###,##&.##', NOENTRY;
-g28 = formonly.tit_estado TYPE VARCHAR, NOENTRY;
+g28 = FORMONLY.tit_estado TYPE VARCHAR, NOENTRY;
 g   = rept023.r23_estado, REVERSE, NOENTRY, UPSHIFT;
 INSTRUCTIONS 
 DELIMITERS '||'
-SCREEN RECORD r_detalle[6] (rept024.r24_cant_ped, 
-			    rept024.r24_cant_ven,   rept024.r24_item, 
-			    rept024.r24_precio, formonly.subtotal_item)
+SCREEN RECORD r_detalle[4] (rept024.r24_proformado, rept024.r24_cant_ped, 
+			    rept024.r24_cant_ven,   rept024.r24_bodega,
+			    rept024.r24_item, 
+			    rept024.r24_descuento,  rept024.r24_precio, 
+			    FORMONLY.subtotal_item)
 
 KEYS
 	F5 = 'Crear Cliente'

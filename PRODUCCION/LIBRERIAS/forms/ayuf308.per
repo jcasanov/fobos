@@ -1,49 +1,90 @@
-DATABASE formonly
+DATABASE aceros
 SCREEN
 {
-                         MOVIMIENTOS DE ITEMS
+ITEMS DE ALMACEN PROFORMADOS EN OT: [c001  ]                 [c050] de [c051]
+ [c120      |c121    |c122         |c123         |c124         |c125         ]
+[c012      |c014    |c015         |c016         |c017         |c018         ]
+[c012      |c014    |c015         |c016         |c017         |c018         ]
+[c012      |c014    |c015         |c016         |c017         |c018         ]
+[c012      |c014    |c015         |c016         |c017         |c018         ]
+[c012      |c014    |c015         |c016         |c017         |c018         ]
+[c070                               ]            Total Bruto: [c010         ]
+[c071                               ]              Descuento: [c011         ]
+[c072                                    ]          Subtotal: [c019         ]
+[c073                                          ]    [c062 ]%: [c013         ]
+[c074                                          |c075  ] Neto: [c061         ]
 
-       Item: [c001            ] [c002                         ] 
-     Bodega: [c03                      ]
-    Período: [c003      ] - [c04       ]      Moneda: [c05           ]
-
- [c020       |x1|c021         |c022               |c023 |c024          ]
-[c004       |c5|c006         |c007               |c008 |c009          ] 
-[c004       |c5|c006         |c007               |c008 |c009          ] 
-[c004       |c5|c006         |c007               |c008 |c009          ] 
-[c004       |c5|c006         |c007               |c008 |c009          ] 
-[c004       |c5|c006         |c007               |c008 |c009          ] 
-[c004       |c5|c006         |c007               |c008 |c009          ] 
-[c004       |c5|c006         |c007               |c008 |c009          ] 
-[c004       |c5|c006         |c007               |c008 |c009          ] 
-[c004       |c5|c006         |c007               |c008 |c009          ] 
-[c004       |c5|c006         |c007               |c008 |c009          ] 
-                                                 [c010 |c011          ]
+TRANSACCIONES ITEM: [c008  ] PARA PROFORMAS DE OT            [c052] de [c053]
+ [c020      |x1|c021    |c2|c023                               |c024         ]
+[c002      |c3|c004    |c5|c006                               |c007         ]
+[c002      |c3|c004    |c5|c006                               |c007         ]
+[c002      |c3|c004    |c5|c006                               |c007         ]
+[c002      |c3|c004    |c5|c006                               |c007         ]
+[c002      |c3|c004    |c5|c006                               |c007         ]
+                                              Total Cantidad: [c060         ]
 }
+TABLES
+rept019
+rept020
+rept021
+rept022
 ATTRIBUTES
-c001 = formonly.item, REVERSE;
-c002 = formonly.name_item, REVERSE;
-c03  = formonly.tit_bod;
-c003 = formonly.fec_ini TYPE DATE, FORMAT = 'dd-mm-yyyy';
-c04  = formonly.fec_fin TYPE DATE, FORMAT = 'dd-mm-yyyy';
-c05  = formonly.tit_mon;
-c004 = formonly.fecha   TYPE DATE, FORMAT = 'dd-mm-yyyy';
-c5   = formonly.tipo;
-c006 = formonly.numero;
-c007 = formonly.cliente;
-c008 = formonly.unidades TYPE INTEGER, FORMAT = '----&';
-c009 = formonly.valor TYPE DECIMAL(12,2), FORMAT = '---,---,--&.##';
-c010 = formonly.tot_uni TYPE INTEGER, FORMAT = '----&', REVERSE;
-c011 = formonly.tot_val TYPE DECIMAL(12,2), FORMAT = '---,---,--&.##', REVERSE;
-c020 = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-x1   = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-c021 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
-c022 = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
-c023 = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
-c024 = formonly.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
-INSTRUCTIONS
-SCREEN RECORD r_mov[10] (formonly.fecha, formonly.tipo, formonly.numero, 
-			 formonly.cliente, formonly.unidades, formonly.valor)
+c001 = FORMONLY.num_ot, REVERSE;
+c008 = FORMONLY.item, REVERSE;
+
+c020 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+x1   = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c021 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c2   = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c023 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c024 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+c002 = FORMONLY.fecha TYPE DATE, FORMAT = 'dd-mm-yyyy';
+c3   = r20_cod_tran;
+c004 = r20_num_tran;
+c5   = r20_bodega;
+c006 = r19_referencia;
+c007 = r20_cant_ven, FORMAT = '--,---,--&.##';
+c060 = FORMONLY.tot_cant TYPE DECIMAL(12,2), FORMAT = '--,---,--&.##';
+
+c120 = FORMONLY.tit_col7,  WIDGET = 'BUTTON', CONFIG = 'F21';
+c121 = FORMONLY.tit_col8,  WIDGET = 'BUTTON', CONFIG = 'F22';
+c122 = FORMONLY.tit_col9,  WIDGET = 'BUTTON', CONFIG = 'F23';
+c123 = FORMONLY.tit_col10, WIDGET = 'BUTTON', CONFIG = 'F24';
+c124 = FORMONLY.tit_col11, WIDGET = 'BUTTON', CONFIG = 'F25';
+c125 = FORMONLY.tit_col12, WIDGET = 'BUTTON', CONFIG = 'F26';
+
+c012 = FORMONLY.fec_prof TYPE DATE, FORMAT = 'dd-mm-yyyy';
+c014 = r22_numprof;
+c015 = r22_item;
+c016 = r22_cantidad, FORMAT = '--,---,--&.##';
+c017 = r22_precio, FORMAT = '--,---,--&.##';
+c018 = FORMONLY.subtotal_p TYPE DECIMAL(12,2), FORMAT = '--,---,--&.##';
+
+c010 = FORMONLY.tot_bruto TYPE DECIMAL(12,2), FORMAT = '--,---,--&.##';
+c011 = FORMONLY.tot_dscto TYPE DECIMAL(12,2), FORMAT = '--,---,--&.##';
+c062 = r21_porc_impto, FORMAT = '#&.##';
+c013 = FORMONLY.tot_impto TYPE DECIMAL(12,2), FORMAT = '--,---,--&.##';
+c061 = FORMONLY.tot_neto TYPE DECIMAL(12,2), FORMAT = '--,---,--&.##', REVERSE;
+c019 = FORMONLY.tot_sub TYPE DECIMAL(12,2), FORMAT = '--,---,--&.##', REVERSE;
+
+c050 = FORMONLY.num_row1, NOENTRY, UPSHIFT, REVERSE;
+c051 = FORMONLY.max_row1, NOENTRY, UPSHIFT, REVERSE;
+c052 = FORMONLY.num_row2, NOENTRY, UPSHIFT, REVERSE;
+c053 = FORMONLY.max_row2, NOENTRY, UPSHIFT, REVERSE;
+
+c070 = FORMONLY.descrip_1, NOENTRY;
+c071 = FORMONLY.descrip_2, NOENTRY;
+c072 = FORMONLY.descrip_3, NOENTRY;
+c073 = FORMONLY.descrip_4, NOENTRY;
+c074 = FORMONLY.nom_item,  NOENTRY, REVERSE;
+c075 = FORMONLY.nom_marca, NOENTRY, REVERSE;
+END
 KEYS
-F5='Comprobante'
-F6='Item'
+F5 = 'Cabecera'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_trans[5] (fecha, r20_cod_tran, r20_num_tran, r20_bodega,
+				r19_referencia, r20_cant_ven)
+SCREEN RECORD rh_prof[5] (fec_prof, r22_numprof, r22_item, r22_cantidad,
+				r22_precio, subtotal_p)

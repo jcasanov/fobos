@@ -1,0 +1,16 @@
+SCREEN
+{
+          Estado: [a|c001       ]
+    Departamento: [c015  ] [c016                                    ]
+}
+TABLES
+formonly
+ATTRIBUTES
+a    = formonly.n30_estado, AUTONEXT,  UPSHIFT, INCLUDE=('A', 'I', 'J', NULL),
+	COMMENTS='A ACTIVO  I INACTIVO  J JUBILADO';
+c001 = FORMONLY.n_estado, NOENTRY, UPSHIFT;
+c015 = formonly.n30_cod_depto, AUTONEXT,  UPSHIFT,
+        WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c016 = FORMONLY.tit_departamento, NOENTRY,  UPSHIFT;
+
+END

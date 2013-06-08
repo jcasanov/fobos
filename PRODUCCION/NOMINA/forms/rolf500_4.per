@@ -1,0 +1,18 @@
+DATABASE aceros
+SCREEN
+{
+
+            AUXILIAR CONTABLE DE PAGO DE NOMINA EN EFECTIVO
+            ----------------------------------------------
+
+ Aux. Contable: [c000        ] [c001                                    ]
+
+}
+TABLES
+rolt054
+ctbt010
+ATTRIBUTES
+c000 = rolt054.n54_aux_cont, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = ctbt010.b10_descripcion, NOENTRY, REVERSE, UPSHIFT;
+END

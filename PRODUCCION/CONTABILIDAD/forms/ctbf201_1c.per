@@ -1,0 +1,80 @@
+DATABASE aceros
+SCREEN 
+{
+
+   Comprobante: [a0] [c001    ]                         Estado: [a|c100      ]
+       Subtipo: [c002  ] [c101                                ]
+         Glosa: [c003                                                        ]
+                [c003                                                        ]
+        Moneda: [a1] [c102           ]    Paridad: [c008               ]
+ Fecha Proceso: [c009      ]               Origen: [b|c103       ]
+     No Cheque: [c007       ]        Beneficiario: [c006                     ]
+                                                              [c080] de [c081]
+    Cuenta      Doc            Glosa              Crédito          Débito
+[c018        ] [a4 ] [c019                   |c020           |c021           ]
+[c018        ] [a4 ] [c019                   |c020           |c021           ]
+[c018        ] [a4 ] [c019                   |c020           |c021           ]
+[c018        ] [a4 ] [c019                   |c020           |c021           ]
+[c104                               ]        [c050           |c051           ]
+[c054                               ]            Diferencia: [c060           ]
+ Ingresado Por: [c013      ]              Fecha Ingreso: [c014               ]
+                                     Fecha Modificación: [c012               ]
+}
+TABLES
+ctbt012
+ctbt013
+ATTRIBUTES
+a0 = ctbt012.b12_tipo_comp, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c001 = ctbt012.b12_num_comp, NOENTRY, REVERSE, UPSHIFT;
+a = ctbt012.b12_estado, NOENTRY, UPSHIFT, AUTONEXT, 
+	COMMENTS='(A) Activo  (M) Mayorizado  (E) Eliminado';
+c002 = ctbt012.b12_subtipo, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c003 = ctbt012.b12_glosa, WORDWRAP COMPRESS, UPSHIFT, REVERSE;
+c006 = ctbt012.b12_benef_che, UPSHIFT;
+c007 = ctbt012.b12_num_cheque;
+a1 = ctbt012.b12_moneda, UPSHIFT, AUTONEXT, REVERSE, 
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c008 = ctbt012.b12_paridad, REVERSE, NOENTRY, FORMAT='#,###,##&.#########';
+c009 = ctbt012.b12_fec_proceso, FORMAT='dd-mm-yyyy', REVERSE,
+	COMMENTS='Digite fecha en formato: dd-mm-aaaa';
+
+c012 = ctbt012.b12_fec_modifi, NOENTRY;
+c013 = ctbt012.b12_usuario, REVERSE, UPSHIFT, NOENTRY;
+c014 = ctbt012.b12_fecing,  REVERSE,          NOENTRY;
+
+c050 = FORMONLY.tot_debito TYPE DECIMAL (12,2), NOENTRY,
+	FORMAT='####,###,##&.##';
+c051 = FORMONLY.tot_credito TYPE DECIMAL (12,2), NOENTRY,
+	FORMAT='####,###,##&.##';
+c060 = FORMONLY.tot_deb_cre TYPE DECIMAL(12,2), NOENTRY,
+	FORMAT = '----,---,--&.##', COLOR = RED WHERE c060 < 0;
+
+c018 = ctbt013.b13_cuenta, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+a4 = ctbt013.b13_tipo_doc, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c019 = ctbt013.b13_glosa, UPSHIFT;
+c020 = FORMONLY.valor_debito TYPE DECIMAL (12,2), 
+	FORMAT='####,###,##&.##', INCLUDE=(0 TO 9999999999.99);
+c021 = FORMONLY.valor_credito TYPE DECIMAL (12,2),
+	FORMAT='####,###,##&.##', INCLUDE=(0 TO 9999999999.99);
+
+c100 = FORMONLY.n_estado,  NOENTRY;
+c101 = FORMONLY.n_subtipo, NOENTRY;
+c102 = FORMONLY.n_moneda,  NOENTRY;
+c103 = FORMONLY.n_origen,  NOENTRY;
+c104 = FORMONLY.n_cuenta,  NOENTRY, REVERSE, UPSHIFT;
+c054 = FORMONLY.n_glosa,  NOENTRY, REVERSE, UPSHIFT;
+
+b    = ctbt012.b12_origen, REVERSE, NOENTRY, UPSHIFT, 
+	COMMENTS='(A) Automatico  (M) Manual';
+
+c080 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c081 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD ra_cuenta[4] (b13_cuenta, b13_tipo_doc, b13_glosa, valor_debito,
+				valor_credito)

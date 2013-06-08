@@ -1,6 +1,6 @@
                                                                                 
-database diteca
-screen 
+DATABASE aceros
+SCREEN 
 {
 
 
@@ -15,15 +15,15 @@ screen
 
 }
 end
-tables
+TABLES
 gent020
-attributes
+ATTRIBUTES
 c000 = gent020.g20_grupo_linea, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 c001 = gent020.g20_nombre, REVERSE, UPSHIFT;
 c002 = gent020.g20_areaneg, REVERSE,
        WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c003 = formonly.nom_areaneg TYPE VARCHAR, NOENTRY;
+c003 = FORMONLY.nom_areaneg TYPE VARCHAR, NOENTRY;
 c004 = gent020.g20_usuario, REVERSE, UPSHIFT, NOENTRY;
 c005 = gent020.g20_fecing, REVERSE, NOENTRY;
 end

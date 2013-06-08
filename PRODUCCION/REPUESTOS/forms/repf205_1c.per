@@ -1,0 +1,33 @@
+DATABASE aceros
+SCREEN
+{
+
+
+            Pedido: [c000      ]                    Estado: [b][c002      ]
+
+         Proveedor: [c003      ] [c004                                    ]
+
+       Fecha Envío: [c005      ]
+     Fecha Llegada: [c008      ]
+
+     Moneda Pedido: [a0] [c010            ]
+}
+TABLES
+rept016
+ATTRIBUTES
+c000 = rept016.r16_pedido, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+b    = rept016.r16_estado, NOENTRY, REVERSE, UPSHIFT;
+c002 = FORMONLY.tit_estado_rep, NOENTRY, UPSHIFT;
+c003 = rept016.r16_proveedor, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c004 = FORMONLY.tit_proveedor, NOENTRY, REVERSE, UPSHIFT;
+c005 = rept016.r16_fec_envio, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la fecha en formato dd-mm-aaaa';
+c008 = rept016.r16_fec_llegada, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la fecha en formato dd-mm-aaaa';
+a0   = rept016.r16_moneda, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c010 = FORMONLY.tit_mon_bas, NOENTRY, REVERSE, UPSHIFT;
+end

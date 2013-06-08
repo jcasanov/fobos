@@ -1,0 +1,38 @@
+DATABASE FORMONLY
+SCREEN 
+{
+		
+     Codigo Caja: [c006  ] [c007                ]
+
+          Moneda: [c0] [c001              ]
+
+   Fecha Inicial: [c002      ]                   Fecha Final: [c003      ]
+
+         Cliente: [c004 ] [c010                                          ] 
+
+            Tipo: [c|c005        ]
+
+}
+ATTRIBUTES
+c0   = FORMONLY.moneda TYPE CHAR NOT NULL, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c001 = FORMONLY.desc_moneda, REVERSE, UPSHIFT, NOENTRY;
+c002 = FORMONLY.inicial TYPE DATE NOT NULL, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy', AUTONEXT,
+	COMMENTS = 'Ingrese fecha inicial en formato: dd-mm-aaaa';
+c003 = FORMONLY.final TYPE DATE NOT NULL, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy', AUTONEXT,
+	COMMENTS = 'Ingrese fecha final en formato: dd-mm-aaaa';
+c004 = FORMONLY.cliente TYPE INTEGER, UPSHIFT, AUTONEXT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c010 = FORMONLY.desc_cli, UPSHIFT, NOENTRY, REVERSE;
+c    = FORMONLY.vm_tipo TYPE CHAR NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = ('F', 'P', 'T'), DEFAULT = 'T',
+	COMMENTS = '(F) Facturas  (P) Pagos  (T) Todos';
+c005 = FORMONLY.tit_tipo, NOENTRY, REVERSE, UPSHIFT;
+c006 = FORMONLY.j10_codigo_caja TYPE SMALLINT, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c007 = FORMONLY.j02_nombre_caja TYPE VARCHAR, NOENTRY, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'

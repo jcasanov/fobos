@@ -1,11 +1,11 @@
-------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 -- Titulo           : ctbp307.4gl - Análisis Gráfico de Cuentas
 -- Elaboracion      : 08-Jul-2002
 -- Autor            : YEC
 -- Formato Ejecucion: fglrun ctbp307 base módulo compañía
 -- Ultima Correccion: 
 -- Motivo Correccion: 
-------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
 DEFINE vm_max_rows	SMALLINT
@@ -13,35 +13,37 @@ DEFINE vm_num_rows	SMALLINT
 DEFINE vm_max_nivel	LIKE ctbt001.b01_nivel
 DEFINE vm_saldo_pyg	DECIMAL(16,2)
 DEFINE rg_cont		RECORD LIKE ctbt000.*
-DEFINE rm_par   RECORD 
-		cuenta		LIKE ctbt010.b10_cuenta,
-		tit_cuenta	LIKE ctbt010.b10_descripcion,
-		ano		SMALLINT,
-		moneda		LIKE gent013.g13_moneda,
-		tit_mon		LIKE gent013.g13_nombre
-	END RECORD
-DEFINE rm_color ARRAY[10] OF VARCHAR(10)
+DEFINE rm_par		RECORD 
+				cuenta		LIKE ctbt010.b10_cuenta,
+				tit_cuenta	LIKE ctbt010.b10_descripcion,
+				ano		SMALLINT,
+				moneda		LIKE gent013.g13_moneda,
+				tit_mon		LIKE gent013.g13_nombre
+			END RECORD
+DEFINE rm_color		ARRAY[10] OF VARCHAR(10)
+
+
 
 MAIN
 
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
-CALL fgl_init4js()
+CALL startlog('../logs/ctbp307.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN    -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
 	EXIT PROGRAM
 END IF
-LET vg_base     = arg_val(1)
-LET vg_modulo   = arg_val(2)
-LET vg_codcia   = arg_val(3)
+LET vg_base    = arg_val(1)
+LET vg_modulo  = arg_val(2)
+LET vg_codcia  = arg_val(3)
 LET vg_proceso = 'ctbp307'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL drawinit()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL control_master()
@@ -61,8 +63,8 @@ OPEN FORM f_bal FROM "../forms/ctbf307_1"
 DISPLAY FORM f_bal
 CALL fl_lee_compania_contabilidad(vg_codcia) RETURNING rg_cont.*
 INITIALIZE rm_par.* TO NULL
-LET rm_par.moneda  = rg_cont.b00_moneda_base
-LET rm_par.ano     = YEAR(TODAY)
+LET rm_par.moneda = rg_cont.b00_moneda_base
+LET rm_par.ano    = YEAR(TODAY)
 SELECT MAX(b01_nivel) INTO vm_max_nivel FROM ctbt001
 IF vm_max_nivel IS NULL THEN
 	CALL fgl_winmessage(vg_producto,'Nivel no está configurado.','stop')
@@ -96,7 +98,7 @@ LET int_flag = 0
 DISPLAY BY NAME rm_par.tit_mon
 INPUT BY NAME rm_par.cuenta, rm_par.ano, rm_par.moneda WITHOUT DEFAULTS
 	ON KEY(F2)
-		IF infield(moneda) THEN
+		IF INFIELD(moneda) THEN
                        	CALL fl_ayuda_monedas() RETURNING mon_aux, tit_aux, i
                        	IF mon_aux IS NOT NULL THEN
 				LET rm_par.moneda  = mon_aux
@@ -252,10 +254,10 @@ DEFINE titulo, tit_pos	CHAR(75)
 DEFINE tit_val		CHAR(16)
 DEFINE siglas_mes	CHAR(3)
 DEFINE nombre_mes	CHAR(11)
-DEFINE r_obj ARRAY[12] OF RECORD
-	id_obj_rec1	SMALLINT,
-	valor		DECIMAL(14,2)
-	END RECORD
+DEFINE r_obj		ARRAY[12] OF RECORD
+				id_obj_rec1	SMALLINT,
+				valor		DECIMAL(14,2)
+			END RECORD
 
 CALL carga_colores()
 LET inicio_x    = 120
@@ -413,19 +415,19 @@ LET key_f30 = FGL_KEYVAL("F30")
 LET int_flag = 0
 INPUT BY NAME tecla
 	BEFORE INPUT
-		CALL dialog.keysetlabel("ACCEPT","")
-		CALL dialog.keysetlabel("F31","")
-		CALL dialog.keysetlabel("F32","")
-		CALL dialog.keysetlabel("F33","")
-		CALL dialog.keysetlabel("F34","")
-		CALL dialog.keysetlabel("F35","")
-		CALL dialog.keysetlabel("F36","")
-		CALL dialog.keysetlabel("F37","")
-		CALL dialog.keysetlabel("F38","")
-		CALL dialog.keysetlabel("F39","")
-		CALL dialog.keysetlabel("F40","")
-		CALL dialog.keysetlabel("F41","")
-		CALL dialog.keysetlabel("F42","")
+		--#CALL dialog.keysetlabel("ACCEPT","")
+		--#CALL dialog.keysetlabel("F31","")
+		--#CALL dialog.keysetlabel("F32","")
+		--#CALL dialog.keysetlabel("F33","")
+		--#CALL dialog.keysetlabel("F34","")
+		--#CALL dialog.keysetlabel("F35","")
+		--#CALL dialog.keysetlabel("F36","")
+		--#CALL dialog.keysetlabel("F37","")
+		--#CALL dialog.keysetlabel("F38","")
+		--#CALL dialog.keysetlabel("F39","")
+		--#CALL dialog.keysetlabel("F40","")
+		--#CALL dialog.keysetlabel("F41","")
+		--#CALL dialog.keysetlabel("F42","")
 	ON KEY(F31,F32,F33,F34,F35,F36,F37,F38,F39,F40,F41,F42)
 		LET i = FGL_LASTKEY() - key_f30
 		CALL control_movimientos(i, rm_par.cuenta)
@@ -453,38 +455,5 @@ LET rm_color[10] = 'blue'
 
 
 
-
-END FUNCTION
-
-
-
-FUNCTION validar_parametros()
-
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
 
 END FUNCTION

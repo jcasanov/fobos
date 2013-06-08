@@ -45,7 +45,7 @@ DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
 CALL startlog('../logs/errores')
-CALL fgl_init4js()
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 AND num_args() <> 7 THEN     -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
@@ -58,8 +58,8 @@ LET vg_codloc   = arg_val(4)
 LET vg_proceso = 'cxpp305'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -142,7 +142,7 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 		CLOSE FORM f_par
 		RETURN
 	ON KEY(F2)
-		IF infield(moneda) THEN
+		IF INFIELD(moneda) THEN
 			CALL fl_ayuda_monedas() RETURNING mon_aux, tit_mon, num
 			IF mon_aux IS NOT NULL THEN
 				LET rm_par.moneda  = mon_aux
@@ -150,7 +150,7 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 				DISPLAY BY NAME rm_par.moneda, rm_par.tit_mon
 			END IF
 		END IF
-		IF infield(tipo_doc) THEN
+		IF INFIELD(tipo_doc) THEN
 			CALL fl_ayuda_tipo_documento_cobranzas('F')
 				RETURNING cod_tipo, tit_tipo
 			LET int_flag = 0
@@ -287,15 +287,15 @@ WHILE TRUE
 	CALL set_count(i - 1)
 	DISPLAY ARRAY rm_ant TO rm_ant.*
 		BEFORE DISPLAY
-			CALL dialog.keysetlabel("ACCEPT","")
+			--#CALL dialog.keysetlabel("ACCEPT","")
 		AFTER DISPLAY
 			CONTINUE DISPLAY
 		BEFORE ROW
 			LET pos_arr = arr_curr()
 			IF rm_ant[pos_arr].p21_tipo_doc <> 'PA' THEN
-				CALL dialog.keysetlabel("F5","")
+				--#CALL dialog.keysetlabel("F5","")
 			ELSE
-				CALL dialog.keysetlabel("F5","Cheque")
+				--#CALL dialog.keysetlabel("F5","Cheque")
 			END IF
 		ON KEY(INTERRUPT)
 			EXIT DISPLAY
@@ -410,7 +410,7 @@ MENU 'OPCIONES'
 		LET comando = 'cd ..', vg_separador, '..', vg_separador,
 			       'CONTABILIDAD', vg_separador, 'fuentes; ',
 			       'fglrun ctbp201 ', vg_base, ' CB ',
-				vg_codcia, ' ', vg_codloc, ' ', r.p24_tip_contable, ' ',
+				vg_codcia, ' ', r.p24_tip_contable, ' ',
 				r.p24_num_contable
 		RUN comando
 	COMMAND KEY('S') 'Salir'
@@ -423,7 +423,7 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION no_validar_parametros()
 
 CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
 IF rg_mod.g50_modulo IS NULL THEN

@@ -1,0 +1,17 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+    SELECCIONE COBRANZAS vs. CONTABILIDAD
+    ------------------------------------
+
+ [c000                                     ]
+
+
+
+}
+ATTRIBUTES
+c000 = FORMONLY.vm_contab TYPE CHAR NOT NULL, UPSHIFT, REVERSE,
+	WIDGET = 'RADIO', CONFIG = 'B "Solo Contabilidad"  C "Cobranzas vs. Contabilidad por Cliente"  M "Cobranzas vs. Contabilidad por Modulo"',
+	DEFAULT = 'C';
+END

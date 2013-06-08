@@ -1,0 +1,73 @@
+DATABASE aceros
+SCREEN 
+{
+
+    Ajuste No.: [b ][f002           ]             Fecha: [f029               ]
+    Referencia: [f005                                    ]
+       Usuario: [f011 ] [b0                            ]         Tipo Ajuste
+ Bodega Origen: [a2]    [b1                            ]        [y|b40       ]
+      División: [b2   ] [b3                            ]                   
+Subtipo Trans.: [b10  ] [b11                 ]                [c051] de [c052]
+ Cantidad    Stock    Item       Descripción       Costo         Subtotal
+[b4        |b5        |b6    ] [b7           |b8            |b9              ]
+[b4        |b5        |b6    ] [b7           |b8            |b9              ]
+[b4        |b5        |b6    ] [b7           |b8            |b9              ]
+[b4        |b5        |b6    ] [b7           |b8            |b9              ]
+[b4        |b5        |b6    ] [b7           |b8            |b9              ]
+[c070                               ]          Total Costo: [f022            ]
+[c071                               ]
+[c072                                    ]            
+[c073                                              ]
+[c074                                                             |c075    ]
+}
+TABLES
+	rept019
+	rept020
+	rept010
+ATTRIBUTES
+
+y    = FORMONLY.tipo_ajuste TYPE CHAR, REVERSE, UPSHIFT, AUTONEXT,
+	INCLUDE = ('I', 'D'),
+	COMMENTS = '(I) Incremento  (D) Decremento';
+b40 = FORMONLY.tit_cod_tran,REVERSE,UPSHIFT,NOENTRY;
+f002 = rept019.r19_num_tran, REVERSE, NOENTRY;
+f005 = rept019.r19_referencia, REVERSE, UPSHIFT,
+	COMMENTS = 'Motivo por el cual se realiza el Ajuste de Existencia. ';
+f011 = rept019.r19_vendedor, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+b0   = FORMONLY.nom_vend TYPE VARCHAR, NOENTRY, REVERSE;
+b    = r19_cod_tran, NOENTRY, UPSHIFT, REVERSE;
+a2   = rept019.r19_bodega_ori, REVERSE, UPSHIFT,
+	COMMENTS = 'Bodega a la que se le realizara el Ajuste de Existencia. ';
+b1   = FORMONLY.nom_bod TYPE VARCHAR, NOENTRY, REVERSE;
+f022 = rept019.r19_tot_costo, REVERSE, FORMAT = '#,###,###,##&.##', NOENTRY;
+f029 = rept019.r19_fecing, UPSHIFT, REVERSE, NOENTRY;
+b2   = FORMONLY.linea TYPE VARCHAR, REVERSE, UPSHIFT, REQUIRED,
+	COMMENTS = 'Línea de Venta de los Items del detalle del Ajuste de Existencia.';
+b3   = FORMONLY.nom_lin TYPE VARCHAR, NOENTRY, REVERSE;
+b4   = rept020.r20_cant_ven, REVERSE, FORMAT = '###,##&.##', 
+	INCLUDE = (0.01 TO 999999.99);
+b5   = rept020.r20_stock_ant, REVERSE, NOENTRY, FORMAT = '###,##&.##';
+b6   = rept020.r20_item, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+b7   = rept010.r10_nombre, REVERSE, NOENTRY;
+b8   = rept010.r10_costo_mb, REVERSE, FORMAT = '###,###,##&.##', NOENTRY;
+b9   = FORMONLY.total TYPE DECIMAL(12,2), REVERSE, NOENTRY, 
+	FORMAT = '#,###,###,##&.##';
+b10  = rept019.r19_cod_subtipo, REVERSE, UPSHIFT,
+	COMMENTS = 'Ingrese el subtipo de acuerdo al motivo del ajuste. ';
+b11  = FORMONLY.nom_subtipo TYPE VARCHAR, NOENTRY;
+c070 = FORMONLY.descrip_1, NOENTRY;
+c071 = FORMONLY.descrip_2, NOENTRY;
+c072 = FORMONLY.descrip_3, NOENTRY;
+c073 = FORMONLY.descrip_4, NOENTRY;
+c074 = FORMONLY.nom_item,  NOENTRY, REVERSE;
+c075 = FORMONLY.nom_marca, NOENTRY, REVERSE;
+
+c051 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c052 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_aj_exist[5](r20_cant_ven, r20_stock_ant, r20_item, r10_nombre,
+			     r10_costo_mb, total)

@@ -8,9 +8,11 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE rm_cxp		RECORD LIKE cxpt001.*
-DEFINE rm_cxp2		RECORD LIKE cxpt002.*
-DEFINE rm_cxp3		RECORD LIKE cxpt005.*
+DEFINE vm_nuevoprog	VARCHAR(100)
+DEFINE vm_nivel		LIKE ctbt001.b01_nivel
+DEFINE rm_p01		RECORD LIKE cxpt001.*
+DEFINE rm_p02		RECORD LIKE cxpt002.*
+DEFINE rm_p05		RECORD LIKE cxpt005.*
 DEFINE vm_num_rows	SMALLINT
 DEFINE vm_row_current	SMALLINT
 DEFINE vm_max_rows	SMALLINT
@@ -19,17 +21,19 @@ DEFINE vm_max_ret       SMALLINT
 DEFINE vm_flag_ret      SMALLINT
 DEFINE vm_flag_mant	CHAR(1)
 DEFINE vm_r_rows	ARRAY [1000] OF INTEGER
-DEFINE rm_ret		ARRAY [10] OF RECORD 
+DEFINE rm_ret		ARRAY [50] OF RECORD 
 				p05_porcentaje	LIKE cxpt005.p05_porcentaje,
-				p05_codigo_sri	LIKE cxpt005.p05_codigo_sri,
 				p05_tipo_ret	LIKE cxpt005.p05_tipo_ret,
-				tit_tipo_ret	CHAR(24)
+				tit_tipo_ret	VARCHAR(30),
+				p05_codigo_sri	LIKE cxpt005.p05_codigo_sri,
+				p05_fecha_ini_porc LIKE cxpt005.p05_fecha_ini_porc
 			END RECORD
-DEFINE rm_ret_aux	ARRAY [10] OF RECORD 
+DEFINE rm_ret_aux	ARRAY [50] OF RECORD 
 				p05_porcentaje	LIKE cxpt005.p05_porcentaje,
-				p05_codigo_sri	LIKE cxpt005.p05_codigo_sri,
 				p05_tipo_ret	LIKE cxpt005.p05_tipo_ret,
-				tit_tipo_ret	CHAR(24)
+				tit_tipo_ret	VARCHAR(30),
+				p05_codigo_sri	LIKE cxpt005.p05_codigo_sri,
+				p05_fecha_ini_porc LIKE cxpt005.p05_fecha_ini_porc
 			END RECORD
 
 MAIN
@@ -37,8 +41,8 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/cxpp101.error')
-CALL fgl_init4js()
+CALL startlog('../logs/cxpp101.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 AND num_args() <> 5 THEN   -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
@@ -51,8 +55,8 @@ LET vg_codloc   = arg_val(4)
 LET vg_proceso = 'cxpp101'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL control_master()
 
@@ -65,18 +69,23 @@ DEFINE i		SMALLINT
 
 CALL fl_nivel_isolation()
 LET vm_max_rows	= 1000
-LET vm_max_ret	= 10
+LET vm_max_ret	= 50
 OPEN WINDOW wf AT 3,2 WITH 21 ROWS, 80 COLUMNS
     ATTRIBUTE(FORM LINE FIRST + 2, COMMENT LINE LAST, MENU LINE FIRST,BORDER,
-	      MESSAGE LINE LAST - 2)
+	      MESSAGE LINE LAST - 1)
 OPTIONS INPUT WRAP,
 	ACCEPT KEY	F12
 OPEN FORM f_cxp FROM "../forms/cxpf101_1"
 DISPLAY FORM f_cxp
-INITIALIZE rm_cxp.*, rm_cxp2.*, rm_cxp3.* TO NULL
+INITIALIZE rm_p01.*, rm_p02.*, rm_p05.* TO NULL
 FOR i = 1 TO vm_max_ret
         INITIALIZE rm_ret[i].*, rm_ret_aux[i].* TO NULL
 END FOR
+SELECT MAX(b01_nivel) INTO vm_nivel FROM ctbt001
+IF vm_nivel IS NULL THEN
+	CALL fl_mostrar_mensaje('No existe ningun nivel de cuenta configurado en la compania.','stop')
+	EXIT PROGRAM
+END IF
 LET vm_num_rows    = 0
 LET vm_num_ret     = 0
 LET vm_row_current = 0
@@ -84,10 +93,6 @@ LET vm_flag_ret    = 1
 CALL muestra_contadores(vm_row_current, vm_num_rows)
 MENU 'OPCIONES'
 	BEFORE MENU
-		HIDE OPTION 'Ingresar'
-		IF fl_control_permiso_opcion('Ingresar') THEN			
-			SHOW OPTION 'Ingresar'
-		END IF
 		HIDE OPTION 'Avanzar'
 		HIDE OPTION 'Retroceder'
 		HIDE OPTION 'Modificar'
@@ -107,15 +112,10 @@ MENU 'OPCIONES'
 	COMMAND KEY('I') 'Ingresar' 'Ingresar nuevos registros. '
 		CALL control_ingreso()
 		IF vm_num_rows = 1 THEN
-			IF fl_control_permiso_opcion('Modificar') THEN			
-				SHOW OPTION 'Modificar'
-			END IF
+			SHOW OPTION 'Modificar'
+			SHOW OPTION 'Retenciones'
 			SHOW OPTION 'Grabar'
-
-  		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		   END IF
-			SHOW OPTION 'Retenciones'	
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -128,17 +128,10 @@ MENU 'OPCIONES'
 	COMMAND KEY('C') 'Consultar' 'Consultar un registro. '
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
-
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-			SHOW OPTION 'Grabar'
-		   END IF
-			
-  		   IF fl_control_permiso_opcion('Bloquear') THEN
-			SHOW OPTION 'Bloquear/Activar'
-		   END IF
-
 			SHOW OPTION 'Retenciones'
+			SHOW OPTION 'Grabar'
+			SHOW OPTION 'Bloquear/Activar'
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -148,19 +141,11 @@ MENU 'OPCIONES'
 				HIDE OPTION 'Bloquear/Activar'
 			END IF
 		ELSE
-
-		   IF fl_control_permiso_opcion('Modificar') THEN			
-			SHOW OPTION 'Modificar'
-			SHOW OPTION 'Grabar'
-		   END IF
-			
-  		   IF fl_control_permiso_opcion('Bloquear') THEN
-			SHOW OPTION 'Bloquear/Activar'
-		   END IF
-
 			SHOW OPTION 'Avanzar'
+			SHOW OPTION 'Modificar'
 			SHOW OPTION 'Retenciones'
-		
+			SHOW OPTION 'Grabar'
+			SHOW OPTION 'Bloquear/Activar'
 		END IF
 		IF vm_row_current <= 1 THEN
                         HIDE OPTION 'Retroceder'
@@ -189,7 +174,7 @@ MENU 'OPCIONES'
 		CALL control_retenciones()
      	COMMAND KEY('G') 'Grabar' 'Graba el registro corriente. '
 		BEGIN WORK
-		CALL control_grabar()
+			CALL control_grabar()
 		COMMIT WORK
      	COMMAND KEY('B') 'Bloquear/Activar' 'Bloquear o activar registro. '
 		CALL bloquear_activar()
@@ -207,47 +192,47 @@ DEFINE r_cta		RECORD LIKE ctbt010.*
 
 CALL fl_retorna_usuario()
 LET vm_flag_ret = 0
-INITIALIZE rm_cxp.*, rm_cxp2.*, rm_cxp3.*, r_cia.*, r_cta.* TO NULL
-CLEAR p02_cupocred_ma, tit_codigo_pro, tit_nombre_pro, tit_est, tit_estado_pro,
+INITIALIZE rm_p01.*, rm_p02.*, rm_p05.*, r_cia.*, r_cta.* TO NULL
+CLEAR p02_cupocred_ma, tit_codigo_pro, tit_nombre_pro, p01_estado, tit_estado_pro,
 	tit_pais, tit_ciudad, tit_tipo_pro, tit_pro_mb, tit_pro_ma, tit_ant_mb,
 	tit_ant_ma, p01_codprov
 CALL fl_lee_compania_tesoreria(vg_codcia) RETURNING r_cia.*
 IF r_cia.p00_estado = 'A' THEN
-	LET rm_cxp2.p02_aux_prov_mb = r_cia.p00_aux_prov_mb
+	LET rm_p02.p02_aux_prov_mb = r_cia.p00_aux_prov_mb
 	CALL fl_lee_cuenta(vg_codcia,r_cia.p00_aux_prov_mb) RETURNING r_cta.*
 	DISPLAY r_cta.b10_descripcion TO tit_pro_mb
-	LET rm_cxp2.p02_aux_prov_ma = r_cia.p00_aux_prov_ma
+	LET rm_p02.p02_aux_prov_ma = r_cia.p00_aux_prov_ma
 	CALL fl_lee_cuenta(vg_codcia,r_cia.p00_aux_prov_ma) RETURNING r_cta.*
 	DISPLAY r_cta.b10_descripcion TO tit_pro_ma
-	LET rm_cxp2.p02_aux_ant_mb  = r_cia.p00_aux_ant_mb
+	LET rm_p02.p02_aux_ant_mb  = r_cia.p00_aux_ant_mb
 	CALL fl_lee_cuenta(vg_codcia,r_cia.p00_aux_ant_mb) RETURNING r_cta.*
 	DISPLAY r_cta.b10_descripcion TO tit_ant_mb
-	LET rm_cxp2.p02_aux_ant_ma  = r_cia.p00_aux_ant_ma
+	LET rm_p02.p02_aux_ant_ma  = r_cia.p00_aux_ant_ma
 	CALL fl_lee_cuenta(vg_codcia,r_cia.p00_aux_ant_ma) RETURNING r_cta.*
 	DISPLAY r_cta.b10_descripcion TO tit_ant_ma
 END IF
 
-LET rm_cxp.p01_personeria   = 'J'
-LET rm_cxp.p01_tipo_doc     = 'R'
-LET rm_cxp.p01_ret_fuente   = 'S'
-LET rm_cxp.p01_ret_impto    = 'S'
-LET rm_cxp.p01_cont_espe    = 'N'
-LET rm_cxp.p01_estado       = 'A'
-LET rm_cxp.p01_usuario      = vg_usuario
-LET rm_cxp.p01_fecing       = CURRENT
+LET rm_p01.p01_personeria   = 'J'
+LET rm_p01.p01_tipo_doc     = 'R'
+LET rm_p01.p01_ret_fuente   = 'S'
+LET rm_p01.p01_ret_impto    = 'S'
+LET rm_p01.p01_cont_espe    = 'N'
+LET rm_p01.p01_estado       = 'A'
+LET rm_p01.p01_usuario      = vg_usuario
+LET rm_p01.p01_fecing       = CURRENT
 
-LET rm_cxp2.p02_compania    = vg_codcia
-LET rm_cxp2.p02_localidad   = vg_codloc
-LET rm_cxp2.p02_int_ext     = 'E'
-LET rm_cxp2.p02_credit_dias = 0
-LET rm_cxp2.p02_cupocred_mb = 0
-LET rm_cxp2.p02_cupocred_ma = 0
-LET rm_cxp2.p02_descuento   = 0
-LET rm_cxp2.p02_recargo     = 0
-LET rm_cxp2.p02_dias_demora = 0
-LET rm_cxp2.p02_dias_seguri = 0
-LET rm_cxp2.p02_usuario     = rm_cxp.p01_usuario
-LET rm_cxp2.p02_fecing      = rm_cxp.p01_fecing
+LET rm_p02.p02_compania    = vg_codcia
+LET rm_p02.p02_localidad   = vg_codloc
+LET rm_p02.p02_int_ext     = 'E'
+LET rm_p02.p02_credit_dias = 0
+LET rm_p02.p02_cupocred_mb = 0
+LET rm_p02.p02_cupocred_ma = 0
+LET rm_p02.p02_descuento   = 0
+LET rm_p02.p02_recargo     = 0
+LET rm_p02.p02_dias_demora = 0
+LET rm_p02.p02_dias_seguri = 0
+LET rm_p02.p02_usuario     = rm_p01.p01_usuario
+LET rm_p02.p02_fecing      = rm_p01.p01_fecing
 
 CALL muestra_estado()
 LET vm_flag_mant = 'I'
@@ -265,7 +250,7 @@ ELSE
 		CALL mostrar_registro(vm_r_rows[vm_row_current])
 	ELSE
 		CALL muestra_estado()
-		CLEAR tit_est, tit_estado_pro
+		CLEAR p01_estado, tit_estado_pro
 	END IF
 END IF
 
@@ -274,12 +259,12 @@ END FUNCTION
 
 
 FUNCTION control_modificacion()
-	
+
 IF vm_num_rows = 0 THEN
 	CALL fl_mensaje_consultar_primero()
 	RETURN
 END IF
-IF rm_cxp.p01_estado = 'B' THEN
+IF rm_p01.p01_estado = 'B' THEN
 	CALL fl_mensaje_estado_bloqueado()
 	RETURN
 END IF
@@ -290,7 +275,7 @@ DECLARE q_up CURSOR FOR SELECT * FROM cxpt001
 	WHERE ROWID = vm_r_rows[vm_row_current]
 	FOR UPDATE
 OPEN q_up
-FETCH q_up INTO rm_cxp.*
+FETCH q_up INTO rm_p01.*
 IF STATUS < 0 THEN
 	ROLLBACK WORK
 	CALL fl_mensaje_bloqueo_otro_usuario()
@@ -298,32 +283,33 @@ IF STATUS < 0 THEN
 	RETURN
 END IF
 DECLARE q_up2 CURSOR FOR SELECT * FROM cxpt002
-	WHERE p02_compania  = rm_cxp2.p02_compania 
-   	  AND p02_localidad = rm_cxp2.p02_localidad
-	  AND p02_codprov   = rm_cxp.p01_codprov
+	WHERE p02_compania  = rm_p02.p02_compania 
+   	  AND p02_localidad = rm_p02.p02_localidad
+	  AND p02_codprov   = rm_p01.p01_codprov
 	FOR UPDATE
 OPEN q_up2
-FETCH q_up2 INTO rm_cxp2.*
+FETCH q_up2 INTO rm_p02.*
 IF STATUS < 0 THEN
 	ROLLBACK WORK
 	CALL fl_mensaje_bloqueo_otro_usuario()
 	WHENEVER ERROR STOP
 	RETURN
 END IF
-IF rm_cxp2.p02_codprov IS NULL THEN
-	LET rm_cxp2.p02_int_ext = 'I'
-	LET rm_cxp2.p02_usuario = rm_cxp.p01_usuario
-	LET rm_cxp2.p02_fecing  = CURRENT
+IF rm_p02.p02_codprov IS NULL THEN
+	LET rm_p02.p02_int_ext = 'I'
+	LET rm_p02.p02_usuario = rm_p01.p01_usuario
+	LET rm_p02.p02_fecing  = CURRENT
 END IF
 WHENEVER ERROR STOP
 CALL leer_datos()
 IF NOT int_flag THEN
-	LET vm_flag_mant         = 'M'
-	LET rm_cxp3.p05_compania = vg_codcia
-	LET rm_cxp3.p05_codprov  = rm_cxp.p01_codprov
+	LET vm_flag_mant        = 'M'
+	LET rm_p05.p05_compania = vg_codcia
+	LET rm_p05.p05_codprov  = rm_p01.p01_codprov
 	CALL control_grabar()
 	COMMIT WORK
 	CALL muestra_contadores(vm_row_current, vm_num_rows)
+	CALL muestra_estado()
 	CALL fl_mensaje_registro_modificado()
 ELSE
 	ROLLBACK WORK
@@ -332,7 +318,6 @@ ELSE
 		CALL mostrar_registro(vm_r_rows[vm_row_current])
 	END IF
 END IF
-WHENEVER ERROR STOP
  
 END FUNCTION
 
@@ -360,9 +345,9 @@ INITIALIZE codi_aux, codp_aux, codc_aux, codt1_aux, cod_aux TO NULL
 LET vm_flag_ret = 0
 LET int_flag    = 0
 IF num_args() = 4 THEN
-	CONSTRUCT BY NAME expr_sql ON p01_codprov, p01_nomprov, p01_personeria,
-	p01_num_doc, p01_tipo_doc, p01_num_aut, p01_serie_comp, p01_direccion1,
-	p01_telefono1, p01_tipo_prov,
+	CONSTRUCT BY NAME expr_sql ON p01_codprov, p01_estado, p01_nomprov,
+	p01_personeria,	p01_num_doc, p01_tipo_doc, p01_num_aut, p01_serie_comp,
+	p01_direccion1, p01_telefono1, p01_usuario, p01_tipo_prov,
 	p01_direccion2, p01_telefono2, p01_fax1, p01_fax2, p01_casilla,p01_pais,
 	p01_ciudad, p01_rep_legal, p01_ret_fuente, p01_ret_impto, p01_cont_espe,
 	p02_contacto, p02_referencia, p02_credit_dias, p02_cupocred_mb,
@@ -370,7 +355,7 @@ IF num_args() = 4 THEN
 	p02_int_ext, p02_aux_prov_mb, p02_aux_prov_ma, p02_aux_ant_mb,
 	p02_aux_ant_ma
 	ON KEY(F2)
-		IF infield(p01_codprov) THEN
+		IF INFIELD(p01_codprov) THEN
                         CALL fl_ayuda_proveedores()
                                 RETURNING codi_aux, nomi_aux
                         LET int_flag = 0
@@ -379,7 +364,7 @@ IF num_args() = 4 THEN
                                 DISPLAY nomi_aux TO p01_nomprov
                         END IF
                 END IF
-		IF infield(p01_pais) THEN
+		IF INFIELD(p01_pais) THEN
                         CALL fl_ayuda_pais()
                                 RETURNING codp_aux, nomp_aux
                         LET int_flag = 0
@@ -388,7 +373,7 @@ IF num_args() = 4 THEN
                                 DISPLAY nomp_aux TO tit_pais
                         END IF
                 END IF
-		IF infield(p01_ciudad) THEN
+		IF INFIELD(p01_ciudad) THEN
                         CALL fl_ayuda_ciudad(codp_aux)
                                 RETURNING codc_aux, nomc_aux
                         LET int_flag = 0
@@ -397,7 +382,7 @@ IF num_args() = 4 THEN
                                 DISPLAY nomc_aux TO tit_ciudad
                         END IF
                 END IF
-		IF infield(p01_tipo_prov) THEN
+		IF INFIELD(p01_tipo_prov) THEN
                         CALL fl_ayuda_subtipo_entidad('TP')
                                 RETURNING codt1_aux, codt2_aux,
  					  nomt1_aux, nomt2_aux
@@ -407,8 +392,8 @@ IF num_args() = 4 THEN
                                 DISPLAY nomt1_aux TO tit_tipo_pro
                         END IF
                 END IF
-		IF infield(p02_aux_prov_mb) THEN
-                        CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+		IF INFIELD(p02_aux_prov_mb) THEN
+                        CALL fl_ayuda_cuenta_contable(vg_codcia,vm_nivel)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
                         IF cod_aux IS NOT NULL THEN
@@ -416,8 +401,8 @@ IF num_args() = 4 THEN
                                 DISPLAY nom_aux TO tit_pro_mb
                         END IF
                 END IF
-                IF infield(p02_aux_prov_ma) THEN
-                        CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+                IF INFIELD(p02_aux_prov_ma) THEN
+                        CALL fl_ayuda_cuenta_contable(vg_codcia,vm_nivel)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
                         IF cod_aux IS NOT NULL THEN
@@ -425,8 +410,8 @@ IF num_args() = 4 THEN
                                 DISPLAY nom_aux TO tit_pro_ma
                         END IF
                 END IF
-		IF infield(p02_aux_ant_mb) THEN
-                        CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+		IF INFIELD(p02_aux_ant_mb) THEN
+                        CALL fl_ayuda_cuenta_contable(vg_codcia,vm_nivel)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
                         IF cod_aux IS NOT NULL THEN
@@ -434,8 +419,8 @@ IF num_args() = 4 THEN
                                 DISPLAY nom_aux TO tit_ant_mb
                         END IF
                 END IF
-                IF infield(p02_aux_ant_ma) THEN
-                        CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+                IF INFIELD(p02_aux_ant_ma) THEN
+                        CALL fl_ayuda_cuenta_contable(vg_codcia,vm_nivel)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
                         IF cod_aux IS NOT NULL THEN
@@ -464,7 +449,7 @@ LET query = 'SELECT cxpt001.*, cxpt001.ROWID FROM cxpt001, cxpt002 ' ||
 PREPARE cons FROM query	
 DECLARE q_cons CURSOR FOR cons
 LET vm_num_rows = 0
-FOREACH q_cons INTO rm_cxp.*, num_reg
+FOREACH q_cons INTO rm_p01.*, num_reg
 	LET vm_num_rows = vm_num_rows + 1
         IF vm_num_rows > vm_max_rows THEN
 		LET vm_num_rows = vm_num_rows - 1
@@ -489,44 +474,26 @@ END FUNCTION
 
 
 FUNCTION control_retenciones()
-DEFINE r_cxp3		RECORD LIKE cxpt005.*
 DEFINE l		SMALLINT
 
-IF rm_cxp.p01_estado = 'B' THEN
+IF rm_p01.p01_estado = 'B' THEN
 	CALL fl_mensaje_estado_bloqueado()
 	RETURN
 END IF
-IF rm_cxp.p01_ret_impto = 'N' THEN
+IF rm_p01.p01_ret_impto = 'N' AND rm_p01.p01_ret_fuente = 'N'
+AND rm_p01.p01_cont_espe = 'N' THEN
 	CALL fgl_winmessage(vg_producto,'El proveedor no está configurado para retener impuestos.','exclamation')
 	RETURN
 END IF
-OPEN WINDOW w_ret AT 07,35
+OPEN WINDOW w_ret AT 06, 22
         WITH FORM '../forms/cxpf101_2'
         ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MESSAGE LINE LAST,
                    BORDER)
 CALL mostrar_botones_retencion()
-DISPLAY rm_cxp.p01_codprov TO p05_codprov
-DISPLAY rm_cxp.p01_nomprov TO tit_proveedor
+DISPLAY rm_p01.p01_codprov TO p05_codprov
+DISPLAY rm_p01.p01_nomprov TO tit_proveedor
 IF vm_flag_ret = 0 THEN
-	DECLARE q_ret CURSOR FOR SELECT * FROM cxpt005
-		WHERE p05_compania = vg_codcia
-		  AND p05_codprov  = rm_cxp.p01_codprov
-                ORDER BY 4
-	LET vm_num_ret = 1
-	FOREACH q_ret INTO r_cxp3.*
-		LET rm_ret[vm_num_ret].p05_codigo_sri = r_cxp3.p05_codigo_sri
-		LET rm_ret[vm_num_ret].p05_porcentaje = r_cxp3.p05_porcentaje
-		LET rm_ret[vm_num_ret].p05_tipo_ret   = r_cxp3.p05_tipo_ret
-		CALL descripcion_retencion(r_cxp3.p05_codigo_sri,r_cxp3.p05_tipo_ret,
-						r_cxp3.p05_porcentaje)
-			RETURNING rm_ret[vm_num_ret].tit_tipo_ret
-		LET rm_ret_aux[vm_num_ret].* = rm_ret[vm_num_ret].*
-		LET vm_num_ret = vm_num_ret + 1
-	        IF vm_num_ret > vm_max_ret THEN
-       	        	EXIT FOREACH
-	        END IF
-	END FOREACH
-	LET vm_num_ret = vm_num_ret - 1
+	CALL cargar_retencion()
 	IF num_args() = 5 THEN
 		IF vm_num_ret = 0 THEN
 			CALL fl_mensaje_consulta_sin_registros()
@@ -537,7 +504,6 @@ IF vm_flag_ret = 0 THEN
 		RETURN
 	END IF
 	LET vm_flag_ret = 1
-	CLOSE q_ret
 END IF
 LET int_flag = 0
 CALL leer_retencion()
@@ -551,25 +517,53 @@ END FUNCTION
 
 
 
-FUNCTION descripcion_retencion(codsri, tipo, porc)
-DEFINE codsri	LIKE cxpt005.p05_codigo_sri
+FUNCTION cargar_retencion()
+DEFINE r_cxp3		RECORD LIKE cxpt005.*
+
+DECLARE q_ret CURSOR FOR
+	SELECT * FROM cxpt005
+		WHERE p05_compania = vg_codcia
+		  AND p05_codprov  = rm_p01.p01_codprov
+	        ORDER BY 4
+LET vm_num_ret = 1
+FOREACH q_ret INTO r_cxp3.*
+	LET rm_ret[vm_num_ret].p05_porcentaje = r_cxp3.p05_porcentaje
+	LET rm_ret[vm_num_ret].p05_tipo_ret   = r_cxp3.p05_tipo_ret
+	CALL descripcion_retencion(r_cxp3.p05_tipo_ret,
+					r_cxp3.p05_porcentaje)
+		RETURNING rm_ret[vm_num_ret].tit_tipo_ret
+	LET rm_ret[vm_num_ret].p05_codigo_sri     = r_cxp3.p05_codigo_sri
+	LET rm_ret[vm_num_ret].p05_fecha_ini_porc = r_cxp3.p05_fecha_ini_porc
+	LET rm_ret_aux[vm_num_ret].* = rm_ret[vm_num_ret].*
+	LET vm_num_ret = vm_num_ret + 1
+        IF vm_num_ret > vm_max_ret THEN
+        	EXIT FOREACH
+        END IF
+END FOREACH
+LET vm_num_ret = vm_num_ret - 1
+
+END FUNCTION
+
+
+
+FUNCTION descripcion_retencion(tipo, porc)
 DEFINE tipo		LIKE cxpt005.p05_tipo_ret
 DEFINE porc		LIKE cxpt005.p05_porcentaje
 DEFINE r_ord		RECORD LIKE ordt002.*
 
-CALL fl_lee_tipo_retencion(vg_codcia, codsri, tipo, porc) RETURNING r_ord.*
+CALL fl_lee_tipo_retencion(vg_codcia, tipo, porc) RETURNING r_ord.*
 RETURN r_ord.c02_nombre
 
 END FUNCTION
 
 
 
-FUNCTION leer_datos ()
+FUNCTION leer_datos()
 DEFINE resp		CHAR(6)
+DEFINE resul		SMALLINT
 DEFINE r_pai            RECORD LIKE gent030.*
 DEFINE r_ciu            RECORD LIKE gent031.*
 DEFINE r_car            RECORD LIKE gent012.*
-DEFINE r_cta            RECORD LIKE ctbt010.*
 DEFINE r_mon		RECORD LIKE gent014.*
 DEFINE codp_aux         LIKE gent030.g30_pais
 DEFINE nomp_aux         LIKE gent030.g30_nombre
@@ -582,47 +576,47 @@ DEFINE nomt2_aux        LIKE gent011.g11_nombre
 DEFINE cod_aux          LIKE ctbt010.b10_cuenta
 DEFINE nom_aux          LIKE ctbt010.b10_descripcion
 
-INITIALIZE r_pai.*, r_ciu.*, r_car.*, r_cta.*, r_mon.*, codp_aux, codc_aux, 
+INITIALIZE r_pai.*, r_ciu.*, r_car.*, r_mon.*, codp_aux, codc_aux, 
 	codt1_aux, cod_aux TO NULL
-DISPLAY rm_cxp.p01_codprov TO tit_codigo_pro
-DISPLAY rm_cxp.p01_nomprov TO tit_nombre_pro
-DISPLAY BY NAME rm_cxp.p01_usuario, rm_cxp.p01_fecing, rm_cxp2.p02_credit_dias,
-		rm_cxp2.p02_cupocred_mb, rm_cxp2.p02_cupocred_ma,
-		rm_cxp2.p02_descuento, rm_cxp2.p02_recargo,
-		rm_cxp2.p02_dias_demora, rm_cxp2.p02_dias_seguri,
-	 	rm_cxp2.p02_aux_prov_mb, rm_cxp2.p02_aux_prov_ma,
-	 	rm_cxp2.p02_aux_ant_mb,	rm_cxp2.p02_aux_ant_ma
+DISPLAY rm_p01.p01_codprov TO tit_codigo_pro
+DISPLAY rm_p01.p01_nomprov TO tit_nombre_pro
+DISPLAY BY NAME rm_p01.p01_usuario, rm_p01.p01_fecing, rm_p02.p02_credit_dias,
+		rm_p02.p02_cupocred_mb, rm_p02.p02_cupocred_ma,
+		rm_p02.p02_descuento, rm_p02.p02_recargo,
+		rm_p02.p02_dias_demora, rm_p02.p02_dias_seguri,
+	 	rm_p02.p02_aux_prov_mb, rm_p02.p02_aux_prov_ma,
+	 	rm_p02.p02_aux_ant_mb,	rm_p02.p02_aux_ant_ma
 LET int_flag = 0
-INPUT BY NAME rm_cxp.p01_nomprov, rm_cxp.p01_personeria, rm_cxp.p01_num_doc,
-	rm_cxp.p01_tipo_doc, 
-	rm_cxp.p01_num_aut, rm_cxp.p01_serie_comp,
-	rm_cxp.p01_direccion1, rm_cxp.p01_telefono1,
-	rm_cxp.p01_tipo_prov, rm_cxp.p01_direccion2, rm_cxp.p01_telefono2,
-	rm_cxp.p01_fax1, rm_cxp.p01_fax2, rm_cxp.p01_casilla, rm_cxp.p01_pais,
-	rm_cxp.p01_ciudad, rm_cxp.p01_rep_legal, rm_cxp.p01_ret_fuente,
-	rm_cxp.p01_ret_impto, rm_cxp.p01_cont_espe, rm_cxp2.p02_contacto,
-	rm_cxp2.p02_referencia, rm_cxp2.p02_credit_dias,rm_cxp2.p02_cupocred_mb,
-	rm_cxp2.p02_descuento, rm_cxp2.p02_recargo, rm_cxp2.p02_dias_demora,
-	rm_cxp2.p02_dias_seguri, rm_cxp2.p02_int_ext, rm_cxp2.p02_aux_prov_mb,
-	rm_cxp2.p02_aux_prov_ma, rm_cxp2.p02_aux_ant_mb, rm_cxp2.p02_aux_ant_ma
+INPUT BY NAME rm_p01.p01_nomprov, rm_p01.p01_personeria, rm_p01.p01_num_doc,
+	rm_p01.p01_tipo_doc, rm_p01.p01_num_aut, rm_p01.p01_serie_comp,
+	rm_p01.p01_direccion1, 
+	rm_p01.p01_telefono1, rm_p01.p01_tipo_prov,
+	rm_p01.p01_direccion2, rm_p01.p01_telefono2, rm_p01.p01_fax1,
+	rm_p01.p01_fax2, rm_p01.p01_casilla, rm_p01.p01_pais, rm_p01.p01_ciudad,
+	rm_p01.p01_rep_legal, rm_p01.p01_ret_fuente, rm_p01.p01_ret_impto,
+	rm_p01.p01_cont_espe, rm_p02.p02_contacto, rm_p02.p02_referencia,
+	rm_p02.p02_credit_dias, rm_p02.p02_cupocred_mb, rm_p02.p02_descuento,
+	rm_p02.p02_recargo, rm_p02.p02_dias_demora, rm_p02.p02_dias_seguri,
+	rm_p02.p02_int_ext, rm_p02.p02_aux_prov_mb, rm_p02.p02_aux_prov_ma,
+	rm_p02.p02_aux_ant_mb, rm_p02.p02_aux_ant_ma
 	WITHOUT DEFAULTS
 	ON KEY(INTERRUPT)
-        	IF field_touched(rm_cxp.p01_nomprov, rm_cxp.p01_personeria,
-			rm_cxp.p01_num_doc, rm_cxp.p01_tipo_doc,
-			rm_cxp.p01_num_aut, rm_cxp.p01_serie_comp,
-			rm_cxp.p01_direccion1, rm_cxp.p01_telefono1,
-			rm_cxp.p01_tipo_prov, rm_cxp.p01_direccion2,
-			rm_cxp.p01_telefono2, rm_cxp.p01_fax1, rm_cxp.p01_fax2,
-			rm_cxp.p01_casilla, rm_cxp.p01_pais, rm_cxp.p01_ciudad,
-			rm_cxp.p01_rep_legal, rm_cxp.p01_ret_fuente,
-			rm_cxp.p01_ret_impto, rm_cxp.p01_cont_espe,
-			rm_cxp2.p02_contacto, rm_cxp2.p02_referencia,
-			rm_cxp2.p02_credit_dias, rm_cxp2.p02_cupocred_mb,
-			rm_cxp2.p02_descuento, rm_cxp2.p02_recargo,
-			rm_cxp2.p02_dias_demora, rm_cxp2.p02_dias_seguri,
-			rm_cxp2.p02_int_ext, rm_cxp2.p02_aux_prov_mb,
-			rm_cxp2.p02_aux_prov_ma, rm_cxp2.p02_aux_ant_mb,
-			rm_cxp2.p02_aux_ant_ma)
+        	IF field_touched(rm_p01.p01_nomprov, rm_p01.p01_personeria,
+			rm_p01.p01_num_doc, rm_p01.p01_tipo_doc,
+			rm_p01.p01_num_aut, rm_p01.p01_serie_comp,
+			rm_p01.p01_direccion1, rm_p01.p01_telefono1,
+			rm_p01.p01_tipo_prov, rm_p01.p01_direccion2,
+			rm_p01.p01_telefono2, rm_p01.p01_fax1, rm_p01.p01_fax2,
+			rm_p01.p01_casilla, rm_p01.p01_pais, rm_p01.p01_ciudad,
+			rm_p01.p01_rep_legal, rm_p01.p01_ret_fuente,
+			rm_p01.p01_ret_impto, rm_p01.p01_cont_espe,
+			rm_p02.p02_contacto, rm_p02.p02_referencia,
+			rm_p02.p02_credit_dias, rm_p02.p02_cupocred_mb,
+			rm_p02.p02_descuento, rm_p02.p02_recargo,
+			rm_p02.p02_dias_demora, rm_p02.p02_dias_seguri,
+			rm_p02.p02_int_ext, rm_p02.p02_aux_prov_mb,
+			rm_p02.p02_aux_prov_ma, rm_p02.p02_aux_ant_mb,
+			rm_p02.p02_aux_ant_ma)
         	THEN
                		LET int_flag = 0
 			CALL fl_mensaje_abandonar_proceso()
@@ -636,113 +630,119 @@ INPUT BY NAME rm_cxp.p01_nomprov, rm_cxp.p01_personeria, rm_cxp.p01_num_doc,
 			RETURN
 		END IF
 	ON KEY(F2)
-		IF infield(p01_pais) THEN
+		IF INFIELD(p01_pais) THEN
                         CALL fl_ayuda_pais()
                                 RETURNING codp_aux, nomp_aux
                         LET int_flag = 0
                         IF codp_aux IS NOT NULL THEN
-				LET rm_cxp.p01_pais = codp_aux
-                                DISPLAY BY NAME rm_cxp.p01_pais
+				LET rm_p01.p01_pais = codp_aux
+                                DISPLAY BY NAME rm_p01.p01_pais
                                 DISPLAY nomp_aux TO tit_pais
                         END IF
                 END IF
-		IF infield(p01_ciudad) THEN
-                        CALL fl_ayuda_ciudad(rm_cxp.p01_pais)
+		IF INFIELD(p01_ciudad) THEN
+                        CALL fl_ayuda_ciudad(rm_p01.p01_pais)
                                 RETURNING codc_aux, nomc_aux
                         LET int_flag = 0
                         IF codc_aux IS NOT NULL THEN
-				LET rm_cxp.p01_ciudad = codc_aux
-                                DISPLAY BY NAME rm_cxp.p01_ciudad
+				LET rm_p01.p01_ciudad = codc_aux
+                                DISPLAY BY NAME rm_p01.p01_ciudad
                                 DISPLAY nomc_aux TO tit_ciudad
                         END IF
                 END IF
-		IF infield(p01_tipo_prov) THEN
+		IF INFIELD(p01_tipo_prov) THEN
                         CALL fl_ayuda_subtipo_entidad('TP')
                                 RETURNING codt1_aux, codt2_aux,
 					  nomt1_aux, nomt2_aux
                         LET int_flag = 0
                         IF codt1_aux IS NOT NULL THEN
-				LET rm_cxp.p01_tipo_prov = codt2_aux
-                                DISPLAY BY NAME rm_cxp.p01_tipo_prov
+				LET rm_p01.p01_tipo_prov = codt2_aux
+                                DISPLAY BY NAME rm_p01.p01_tipo_prov
                                 DISPLAY nomt1_aux TO tit_tipo_pro
                         END IF
                 END IF
-		IF infield(p02_aux_prov_mb) THEN
-                        CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+		IF INFIELD(p02_aux_prov_mb) THEN
+                        CALL fl_ayuda_cuenta_contable(vg_codcia,vm_nivel)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
                         IF cod_aux IS NOT NULL THEN
-				LET rm_cxp2.p02_aux_prov_mb = cod_aux
-                                DISPLAY BY NAME rm_cxp2.p02_aux_prov_mb
+				LET rm_p02.p02_aux_prov_mb = cod_aux
+                                DISPLAY BY NAME rm_p02.p02_aux_prov_mb
                                 DISPLAY nom_aux TO tit_pro_mb
                         END IF
                 END IF
-                IF infield(p02_aux_prov_ma) THEN
-                        CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+                IF INFIELD(p02_aux_prov_ma) THEN
+                        CALL fl_ayuda_cuenta_contable(vg_codcia,vm_nivel)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
                         IF cod_aux IS NOT NULL THEN
-				LET rm_cxp2.p02_aux_prov_ma = cod_aux
-                                DISPLAY BY NAME rm_cxp2.p02_aux_prov_ma
+				LET rm_p02.p02_aux_prov_ma = cod_aux
+                                DISPLAY BY NAME rm_p02.p02_aux_prov_ma
                                 DISPLAY nom_aux TO tit_pro_ma
                         END IF
                 END IF
-		IF infield(p02_aux_ant_mb) THEN
-                        CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+		IF INFIELD(p02_aux_ant_mb) THEN
+                        CALL fl_ayuda_cuenta_contable(vg_codcia,vm_nivel)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
                         IF cod_aux IS NOT NULL THEN
-				LET rm_cxp2.p02_aux_ant_mb = cod_aux
-                                DISPLAY BY NAME rm_cxp2.p02_aux_ant_mb
+				LET rm_p02.p02_aux_ant_mb = cod_aux
+                                DISPLAY BY NAME rm_p02.p02_aux_ant_mb
                                 DISPLAY nom_aux TO tit_ant_mb
                         END IF
                 END IF
-                IF infield(p02_aux_ant_ma) THEN
-                        CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+                IF INFIELD(p02_aux_ant_ma) THEN
+                        CALL fl_ayuda_cuenta_contable(vg_codcia,vm_nivel)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
                         IF cod_aux IS NOT NULL THEN
-				LET rm_cxp2.p02_aux_ant_ma = cod_aux
-                                DISPLAY BY NAME rm_cxp2.p02_aux_ant_ma
+				LET rm_p02.p02_aux_ant_ma = cod_aux
+                                DISPLAY BY NAME rm_p02.p02_aux_ant_ma
                                 DISPLAY nom_aux TO tit_ant_ma
                         END IF
                 END IF
 	BEFORE FIELD p01_tipo_doc
-		IF rm_cxp.p01_num_doc IS NULL THEN
+		IF rm_p01.p01_num_doc IS NULL THEN
 			CALL fgl_winmessage(vg_producto,'Digite primero el número de identificación de documento.','info')
 			NEXT FIELD p01_num_doc
 		END IF
 	BEFORE FIELD p01_direccion1
-		IF rm_cxp.p01_personeria = 'N' THEN
-			IF rm_cxp.p01_tipo_doc = 'R' THEN
+		IF rm_p01.p01_personeria = 'N' THEN
+			IF rm_p01.p01_tipo_doc = 'R' THEN
 				CALL fgl_winmessage(vg_producto,'Una persona natural no puede tener asignado Ruc.','exclamation')
 				NEXT FIELD p01_tipo_doc
 			END IF
 		ELSE
-			IF rm_cxp.p01_tipo_doc <> 'R' THEN
+			IF rm_p01.p01_tipo_doc <> 'R' THEN
 				CALL fgl_winmessage(vg_producto,'Una persona jurídica no puede tener asignado Cédula o Pasaporte.','exclamation')
 				NEXT FIELD p01_tipo_doc
 			END IF
 		END IF
 	BEFORE FIELD p01_ciudad
-		IF rm_cxp.p01_pais IS NULL THEN
+		IF rm_p01.p01_pais IS NULL THEN
 			CALL fgl_winmessage(vg_producto,'Ingrese el país primero.','info')
 			NEXT FIELD p01_pais
 		END IF
 	AFTER FIELD p01_nomprov
-		DISPLAY rm_cxp.p01_nomprov TO tit_nombre_pro
+		DISPLAY rm_p01.p01_nomprov TO tit_nombre_pro
 	AFTER FIELD p01_num_doc
-		IF rm_cxp.p01_num_doc IS NOT NULL THEN
-			IF rm_cxp.p01_personeria = 'N' THEN
-				LET rm_cxp.p01_tipo_doc = 'C'
+		IF rm_p01.p01_num_doc IS NOT NULL THEN
+			IF rm_p01.p01_personeria = 'N' THEN
+				LET rm_p01.p01_tipo_doc = 'C'
 			ELSE
-				LET rm_cxp.p01_tipo_doc = 'R'
+				LET rm_p01.p01_tipo_doc = 'R'
 			END IF
-			DISPLAY BY NAME rm_cxp.p01_tipo_doc
+			DISPLAY BY NAME rm_p01.p01_tipo_doc
+			CALL validar_cedruc(rm_p01.p01_codprov,
+						rm_p01.p01_num_doc)
+				RETURNING resul
+			IF NOT resul THEN
+				--NEXT FIELD p01_num_doc
+			END IF
 		END IF
 	AFTER FIELD p01_pais
-                IF rm_cxp.p01_pais IS NOT NULL THEN
-                        CALL fl_lee_pais(rm_cxp.p01_pais)
+                IF rm_p01.p01_pais IS NOT NULL THEN
+                        CALL fl_lee_pais(rm_p01.p01_pais)
                                 RETURNING r_pai.*
                         IF r_pai.g30_pais IS NULL  THEN
                                 CALL fgl_winmessage(vg_producto,'Este país no existe','exclamation')
@@ -753,8 +753,8 @@ INPUT BY NAME rm_cxp.p01_nomprov, rm_cxp.p01_personeria, rm_cxp.p01_num_doc,
                         CLEAR tit_pais
                 END IF
 	AFTER FIELD p01_ciudad
-                IF rm_cxp.p01_ciudad IS NOT NULL THEN
-                        CALL fl_lee_ciudad(rm_cxp.p01_ciudad)
+                IF rm_p01.p01_ciudad IS NOT NULL THEN
+                        CALL fl_lee_ciudad(rm_p01.p01_ciudad)
                                 RETURNING r_ciu.*
                         IF r_ciu.g31_ciudad IS NULL  THEN
                                 CALL fgl_winmessage(vg_producto,'Está ciudad no existe','exclamation')
@@ -769,8 +769,8 @@ INPUT BY NAME rm_cxp.p01_nomprov, rm_cxp.p01_personeria, rm_cxp.p01_num_doc,
                         CLEAR tit_ciudad
                 END IF
 	AFTER FIELD p01_tipo_prov
-                IF rm_cxp.p01_tipo_prov IS NOT NULL THEN
-                        CALL fl_lee_subtipo_entidad('TP',rm_cxp.p01_tipo_prov)
+                IF rm_p01.p01_tipo_prov IS NOT NULL THEN
+                        CALL fl_lee_subtipo_entidad('TP',rm_p01.p01_tipo_prov)
                                 RETURNING r_car.*
                         IF r_car.g12_tiporeg IS NULL  THEN
                                 CALL fgl_winmessage(vg_producto,'Cartera no existe','exclamation')
@@ -781,7 +781,7 @@ INPUT BY NAME rm_cxp.p01_nomprov, rm_cxp.p01_personeria, rm_cxp.p01_num_doc,
 			CLEAR tit_tipo_pro
                 END IF
 	AFTER FIELD p02_cupocred_mb
-		IF rm_cxp2.p02_cupocred_mb IS NOT NULL THEN
+		IF rm_p02.p02_cupocred_mb IS NOT NULL THEN
 			IF rg_gen.g00_moneda_alt IS NOT NULL
 			OR rg_gen.g00_moneda_alt <> ' ' THEN
 			       CALL fl_lee_factor_moneda(rg_gen.g00_moneda_base,
@@ -789,14 +789,14 @@ INPUT BY NAME rm_cxp.p01_nomprov, rm_cxp.p01_personeria, rm_cxp.p01_num_doc,
 					RETURNING r_mon.*
 				CALL fl_retorna_precision_valor(
 							rg_gen.g00_moneda_base,
-                                                        rm_cxp2.p02_cupocred_mb)
-                                	RETURNING rm_cxp2.p02_cupocred_mb
-                                DISPLAY BY NAME rm_cxp2.p02_cupocred_mb
+                                                        rm_p02.p02_cupocred_mb)
+                                	RETURNING rm_p02.p02_cupocred_mb
+                                DISPLAY BY NAME rm_p02.p02_cupocred_mb
 				IF r_mon.g14_serial IS NOT NULL THEN
-					LET rm_cxp2.p02_cupocred_ma = 
-					rm_cxp2.p02_cupocred_mb * r_mon.g14_tasa
-					IF rm_cxp2.p02_cupocred_ma IS NULL 
-					OR rm_cxp2.p02_cupocred_ma>9999999999.99
+					LET rm_p02.p02_cupocred_ma = 
+					rm_p02.p02_cupocred_mb * r_mon.g14_tasa
+					IF rm_p02.p02_cupocred_ma IS NULL 
+					OR rm_p02.p02_cupocred_ma>9999999999.99
 					THEN
 						CALL fgl_winmessage(vg_producto,'El cupo de crédito en moneda base está demasiado grande', 'exclamation')
 						NEXT FIELD p02_cupocred_mb
@@ -804,129 +804,159 @@ INPUT BY NAME rm_cxp.p01_nomprov, rm_cxp.p01_personeria, rm_cxp.p01_num_doc,
 				END IF
 				CALL fl_retorna_precision_valor(
 							rg_gen.g00_moneda_base,
-                                                        rm_cxp2.p02_cupocred_ma)
-                                	RETURNING rm_cxp2.p02_cupocred_ma
-				DISPLAY BY NAME rm_cxp2.p02_cupocred_ma
+                                                        rm_p02.p02_cupocred_ma)
+                                	RETURNING rm_p02.p02_cupocred_ma
+				DISPLAY BY NAME rm_p02.p02_cupocred_ma
 			END IF
 		END IF
 	AFTER FIELD p02_aux_prov_mb
-                IF rm_cxp2.p02_aux_prov_mb IS NOT NULL THEN
-                        CALL fl_lee_cuenta(vg_codcia,rm_cxp2.p02_aux_prov_mb)
-                                RETURNING r_cta.*
-                        IF r_cta.b10_cuenta IS NULL  THEN
-                                CALL fgl_winmessage(vg_producto,'Cuenta no exist
-e para esta compañía','exclamation')
-                                NEXT FIELD p02_aux_prov_mb
-                        END IF
-                        DISPLAY r_cta.b10_descripcion TO tit_pro_mb
-                        IF rm_cxp2.p02_aux_prov_mb = rm_cxp2.p02_aux_ant_mb
-                        OR rm_cxp2.p02_aux_prov_mb = rm_cxp2.p02_aux_ant_ma THEN
-                                CALL fgl_winmessage(vg_producto,'La cuenta de cl
-iente debe ser distinta del anticípo','info')
-                                NEXT FIELD p02_aux_prov_mb
-                        END IF
-                        IF r_cta.b10_estado = 'B' THEN
-                                CALL fl_mensaje_estado_bloqueado()
-                                NEXT FIELD p02_aux_prov_mb
-                        END IF
-			IF r_cta.b10_nivel <> 6 THEN
-                                CALL fgl_winmessage(vg_producto,'Nivel de cuenta
- debe ser solo 6','info')
-                                NEXT FIELD p02_aux_prov_mb
-                        END IF
+                IF rm_p02.p02_aux_prov_mb IS NOT NULL THEN
+			CALL validar_cuenta(rm_p02.p02_aux_prov_mb, 1)
+				RETURNING resul
+			IF resul = 1 THEN
+				NEXT FIELD p02_aux_prov_mb
+			END IF
 		ELSE
 			CLEAR tit_pro_mb
                 END IF
 	AFTER FIELD p02_aux_prov_ma
-                IF rm_cxp2.p02_aux_prov_ma IS NOT NULL THEN
-                        CALL fl_lee_cuenta(vg_codcia,rm_cxp2.p02_aux_prov_ma)
-                                RETURNING r_cta.*
-                        IF r_cta.b10_cuenta IS NULL  THEN
-                                CALL fgl_winmessage(vg_producto,'Cuenta no exist
-e para esta compañía','exclamation')
-                                NEXT FIELD p02_aux_prov_ma
-                        END IF
-                        DISPLAY r_cta.b10_descripcion TO tit_pro_ma
-                        IF rm_cxp2.p02_aux_prov_ma = rm_cxp2.p02_aux_ant_mb
-                        OR rm_cxp2.p02_aux_prov_ma = rm_cxp2.p02_aux_ant_ma THEN
-                                CALL fgl_winmessage(vg_producto,'La cuenta de cl
-iente debe ser distinta del anticípo','info')
-                                NEXT FIELD p02_aux_prov_ma
-                        END IF
-                        IF r_cta.b10_estado = 'B' THEN
-                                CALL fl_mensaje_estado_bloqueado()
-                                NEXT FIELD p02_aux_prov_ma
-                        END IF
-			IF r_cta.b10_nivel <> 6 THEN
-                                CALL fgl_winmessage(vg_producto,'Nivel de cuenta
- debe ser solo 6','info')
-                                NEXT FIELD p02_aux_prov_ma
-                        END IF
+                IF rm_p02.p02_aux_prov_ma IS NOT NULL THEN
+			CALL validar_cuenta(rm_p02.p02_aux_prov_ma, 2)
+				RETURNING resul
+			IF resul = 1 THEN
+				NEXT FIELD p02_aux_prov_ma
+			END IF
 		ELSE
 			CLEAR tit_pro_ma
                 END IF
 	AFTER FIELD p02_aux_ant_mb
-                IF rm_cxp2.p02_aux_ant_mb IS NOT NULL THEN
-                        CALL fl_lee_cuenta(vg_codcia,rm_cxp2.p02_aux_ant_mb)
-                                RETURNING r_cta.*
-                        IF r_cta.b10_cuenta IS NULL  THEN
-                                CALL fgl_winmessage(vg_producto,'Cuenta no exist
-e para esta compañía','exclamation')
-                                NEXT FIELD p02_aux_ant_mb
-                        END IF
-                        DISPLAY r_cta.b10_descripcion TO tit_ant_mb
-                        IF rm_cxp2.p02_aux_ant_mb = rm_cxp2.p02_aux_prov_mb
-                        OR rm_cxp2.p02_aux_ant_mb = rm_cxp2.p02_aux_prov_ma THEN
-                                CALL fgl_winmessage(vg_producto,'La cuenta de an
-ticípo debe ser distinta del cliente','info')
-                                NEXT FIELD p02_aux_ant_mb
-                        END IF
-                        IF r_cta.b10_estado = 'B' THEN
-                                CALL fl_mensaje_estado_bloqueado()
-                                NEXT FIELD p02_aux_ant_mb
-                        END IF
-			IF r_cta.b10_nivel <> 6 THEN
-                                CALL fgl_winmessage(vg_producto,'Nivel de cuenta
- debe ser solo 6','info')
-                                NEXT FIELD p02_aux_ant_mb
-                        END IF
+                IF rm_p02.p02_aux_ant_mb IS NOT NULL THEN
+			CALL validar_cuenta(rm_p02.p02_aux_ant_mb, 3)
+				RETURNING resul
+			IF resul = 1 THEN
+				NEXT FIELD p02_aux_ant_mb
+			END IF
 		ELSE
 			CLEAR  tit_ant_mb
                 END IF
 	AFTER FIELD p02_aux_ant_ma
-                IF rm_cxp2.p02_aux_ant_ma IS NOT NULL THEN
-                        CALL fl_lee_cuenta(vg_codcia,rm_cxp2.p02_aux_ant_ma)
-                                RETURNING r_cta.*
-                        IF r_cta.b10_cuenta IS NULL  THEN
-                                CALL fgl_winmessage(vg_producto,'Cuenta no exist
-e para esta compañía','exclamation')
-                                NEXT FIELD p02_aux_ant_ma
-                        END IF
-                        DISPLAY r_cta.b10_descripcion TO tit_ant_ma
-                        IF rm_cxp2.p02_aux_ant_ma = rm_cxp2.p02_aux_prov_mb
-                        OR rm_cxp2.p02_aux_ant_ma = rm_cxp2.p02_aux_prov_ma THEN
-                                CALL fgl_winmessage(vg_producto,'La cuenta de an
-ticípo debe ser distinta del cliente','info')
-                                NEXT FIELD p02_aux_ant_ma
-                        END IF
-                        IF r_cta.b10_estado = 'B' THEN
-                                CALL fl_mensaje_estado_bloqueado()
-                                NEXT FIELD p02_aux_ant_ma
-                        END IF
-			IF r_cta.b10_nivel <> 6 THEN
-                                CALL fgl_winmessage(vg_producto,'Nivel de cuenta
- debe ser solo 6','info')
-                                NEXT FIELD p02_aux_ant_ma
-                        END IF
+                IF rm_p02.p02_aux_ant_ma IS NOT NULL THEN
+			CALL validar_cuenta(rm_p02.p02_aux_ant_ma, 4)
+				RETURNING resul
+			IF resul = 1 THEN
+				NEXT FIELD p02_aux_ant_ma
+			END IF
 		ELSE
 			CLEAR  tit_ant_ma
                 END IF
 	AFTER INPUT
-		IF fl_validar_cedruc_dig_ver(rm_cxp.p01_tipo_doc, rm_cxp.p01_num_doc) = 0
+		IF rm_p01.p01_ret_fuente = 'N' AND rm_p01.p01_ret_impto = 'N'
+		AND rm_p01.p01_cont_espe = 'N' THEN
+			CALL fl_mostrar_mensaje('No puede dejar sin retenciones al proveedor. Por favor cheque retencion fuente, retencion impuesto o si contribuyente especial.','exclamation')
+			NEXT FIELD p01_ret_fuente
+		END IF
+		IF rm_p01.p01_num_doc IS NOT NULL AND rm_p02.p02_int_ext = 'I'
 		THEN
-			NEXT FIELD p01_num_doc
+			CALL validar_cedruc(rm_p01.p01_codprov,
+						rm_p01.p01_num_doc)
+				RETURNING resul
+			IF NOT resul THEN
+				NEXT FIELD p01_num_doc
+			END IF
 		END IF
 END INPUT
+
+END FUNCTION
+
+
+
+FUNCTION validar_cedruc(codprov, cedruc)
+DEFINE codprov		LIKE cxpt001.p01_codprov
+DEFINE cedruc		LIKE cxpt001.p01_num_doc
+DEFINE r_p01		RECORD LIKE cxpt001.*
+DEFINE cont		INTEGER
+DEFINE resul		SMALLINT
+
+IF rm_p01.p01_tipo_doc = 'C' THEN
+	IF LENGTH(cedruc) <> 10 THEN
+		CALL fl_mostrar_mensaje('El tipo de documento no corresponde a este número de documento.', 'exclamation')
+		RETURN 0
+	END IF
+END IF
+IF rm_p01.p01_tipo_doc = 'R' THEN
+	IF LENGTH(cedruc) <> 13 THEN
+		CALL fl_mostrar_mensaje('El tipo de documento no corresponde a este número de documento.', 'exclamation')
+		RETURN 0
+	END IF
+END IF
+SELECT COUNT(*) INTO cont FROM cxpt001 WHERE p01_num_doc = cedruc
+CASE cont
+	WHEN 0
+		LET resul = 1
+	WHEN 1
+		INITIALIZE r_p01.* TO NULL
+		DECLARE q_cedruc CURSOR FOR
+			SELECT * FROM cxpt001 WHERE p01_num_doc = cedruc
+		OPEN q_cedruc
+		FETCH q_cedruc INTO r_p01.*
+		CLOSE q_cedruc
+		FREE q_cedruc
+		LET resul = 1
+		IF r_p01.p01_codprov <> codprov OR codprov IS NULL THEN
+			CALL fl_mostrar_mensaje('Este número de identificación ya existe.','exclamation')
+			LET resul = 0
+		END IF
+	OTHERWISE
+		CALL fl_mostrar_mensaje('Este número de identificación ya existe varias veces.','exclamation')
+		LET resul = 0
+END CASE
+IF cont <= 1 THEN
+	IF rm_p01.p01_tipo_doc = 'C' OR rm_p01.p01_tipo_doc = 'R' THEN
+		CALL fl_validar_cedruc_dig_ver(cedruc) RETURNING resul
+	END IF
+END IF
+RETURN resul
+
+END FUNCTION
+
+
+
+FUNCTION validar_cuenta(aux_cont, flag)
+DEFINE aux_cont		LIKE ctbt010.b10_cuenta
+DEFINE flag		SMALLINT
+DEFINE r_cta            RECORD LIKE ctbt010.*
+
+CALL fl_lee_cuenta(vg_codcia, aux_cont) RETURNING r_cta.*
+IF r_cta.b10_cuenta IS NULL  THEN
+	CALL fgl_winmessage(vg_producto,'Cuenta no existe para esta compañía.','exclamation')
+	RETURN 1
+END IF
+CASE flag
+	WHEN 1
+		DISPLAY r_cta.b10_descripcion TO tit_pro_mb
+	WHEN 2
+		DISPLAY r_cta.b10_descripcion TO tit_pro_ma
+	WHEN 3
+		DISPLAY r_cta.b10_descripcion TO tit_ant_mb
+	WHEN 4
+		DISPLAY r_cta.b10_descripcion TO tit_ant_ma
+END CASE
+{--
+IF auxt_cont = rm_p02.p02_aux_ant_mb
+   OR auxt_cont = rm_p02.p02_aux_ant_ma THEN
+	CALL fgl_winmessage(vg_producto,'La cuenta de proveedor debe ser distinta del anticípo','exclamation')
+	RETURN 1
+END IF
+--}
+IF r_cta.b10_estado = 'B' THEN
+	CALL fl_mensaje_estado_bloqueado()
+	RETURN 1
+END IF
+IF r_cta.b10_nivel <> vm_nivel THEN
+	CALL fgl_winmessage(vg_producto,'Nivel de cuenta debe ser solo del ultimo.','exclamation')
+	RETURN 1
+END IF
+RETURN 0
 
 END FUNCTION
 
@@ -935,18 +965,17 @@ END FUNCTION
 FUNCTION leer_retencion()
 DEFINE resp             CHAR(6)
 DEFINE i,j,l,k		SMALLINT
-DEFINE conti,contf	SMALLINT
 DEFINE r_ord		RECORD LIKE ordt002.*
-DEFINE codigo_sri	LIKE ordt002.c02_codigo_sri
+DEFINE r_c03		RECORD LIKE ordt003.*
 DEFINE tipo		LIKE ordt002.c02_tipo_ret
 DEFINE porc		LIKE ordt002.c02_porcentaje
 DEFINE nom		LIKE ordt002.c02_nombre
+DEFINE cod_pago		LIKE cajt091.j91_codigo_pago
+DEFINE codprov		LIKE cxpt001.p01_codprov
 
 OPTIONS INPUT WRAP
 INITIALIZE r_ord.* TO NULL
 LET i        = 1
-LET conti    = 0
-LET contf    = 0
 LET int_flag = 0
 CALL set_count(vm_num_ret)
 INPUT ARRAY rm_ret WITHOUT DEFAULTS FROM rm_ret.*
@@ -963,39 +992,76 @@ INPUT ARRAY rm_ret WITHOUT DEFAULTS FROM rm_ret.*
        	       	END IF	
 	ON KEY(F2)
 		IF INFIELD(rm_ret[i].p05_porcentaje) THEN
-			CALL fl_ayuda_retenciones(vg_codcia)
-				RETURNING codigo_sri, tipo, porc, nom
-			LET int_flag = 0
+			LET cod_pago = NULL
+			CALL fl_ayuda_retenciones(vg_codcia, cod_pago, 'A')
+				RETURNING tipo, porc, nom
 			IF tipo IS NOT NULL THEN
-				LET rm_ret[i].p05_codigo_sri = codigo_sri
 				LET rm_ret[i].p05_tipo_ret   = tipo
 				LET rm_ret[i].p05_porcentaje = porc
 				LET rm_ret[i].tit_tipo_ret   = nom
 				DISPLAY rm_ret[i].* TO rm_ret[j].*
 			END IF
 		END IF
+		IF INFIELD(rm_ret[i].p05_codigo_sri) THEN
+			LET codprov = rm_p01.p01_codprov
+			IF rm_p01.p01_codprov IS NULL THEN
+				LET codprov = 1
+			END IF
+			CALL fl_ayuda_codigos_sri(vg_codcia,
+					rm_ret[i].p05_tipo_ret,
+					rm_ret[i].p05_porcentaje, 'A',
+					codprov, 'P')
+				RETURNING r_c03.c03_codigo_sri,
+					  r_c03.c03_concepto_ret,
+					  r_c03.c03_fecha_ini_porc
+			IF r_c03.c03_codigo_sri IS NOT NULL THEN
+				LET rm_ret[i].p05_codigo_sri =
+							r_c03.c03_codigo_sri
+				LET rm_ret[i].p05_fecha_ini_porc =
+							r_c03.c03_fecha_ini_porc
+				DISPLAY rm_ret[i].p05_codigo_sri TO
+					rm_ret[j].p05_codigo_sri
+				DISPLAY rm_ret[i].p05_fecha_ini_porc TO
+					rm_ret[j].p05_fecha_ini_porc
+				DISPLAY BY NAME r_c03.c03_concepto_ret
+			END IF
+		END IF
+		LET int_flag = 0
 	BEFORE ROW
        		LET i = arr_curr()
        		LET j = scr_line()
-	AFTER FIELD p05_codigo_sri
-		IF rm_ret[i].p05_codigo_sri IS NOT NULL THEN
-			IF rm_ret[i].p05_tipo_ret IS NULL THEN
-				NEXT FIELD p05_tipo_ret
-			END IF
-		END IF
+		CALL fl_lee_codigos_sri(vg_codcia, rm_ret[i].p05_tipo_ret,
+					rm_ret[i].p05_porcentaje,
+					rm_ret[i].p05_codigo_sri,
+					rm_ret[i].p05_fecha_ini_porc)
+			RETURNING r_c03.*
+		DISPLAY BY NAME r_c03.c03_concepto_ret
+		DISPLAY i TO num_rows
+		DISPLAY vm_num_ret TO max_rows
 	AFTER FIELD p05_tipo_ret
 		IF rm_ret[i].p05_tipo_ret IS NOT NULL THEN
 			IF rm_ret[i].p05_porcentaje IS NULL THEN
 				NEXT FIELD p05_porcentaje
 			END IF
 		END IF
-	AFTER ROW
-		CALL descripcion_retencion(rm_ret[i].p05_codigo_sri, 
-					rm_ret[i].p05_tipo_ret,
+	BEFORE FIELD p05_porcentaje
+		IF rm_ret[i].p05_porcentaje IS NOT NULL THEN
+			IF rm_ret[i].p05_tipo_ret IS NULL THEN
+				NEXT FIELD p05_tipo_ret
+			END IF
+		END IF
+	AFTER FIELD p05_porcentaje, p05_tipo_ret
+		IF rm_ret[i].p05_porcentaje IS NULL THEN
+			CONTINUE INPUT
+		END IF
+		IF rm_ret[i].p05_tipo_ret IS NULL THEN
+			CONTINUE INPUT
+		END IF
+		CALL descripcion_retencion(rm_ret[i].p05_tipo_ret,
 					rm_ret[i].p05_porcentaje)
 			RETURNING rm_ret[i].tit_tipo_ret
 		DISPLAY rm_ret[i].tit_tipo_ret TO rm_ret[j].tit_tipo_ret
-		CALL fl_lee_tipo_retencion(vg_codcia, rm_ret[i].p05_codigo_sri, rm_ret[i].p05_tipo_ret,
+		CALL fl_lee_tipo_retencion(vg_codcia, rm_ret[i].p05_tipo_ret,
 				rm_ret[i].p05_porcentaje)
 			RETURNING r_ord.*
 		IF r_ord.c02_compania IS NULL THEN
@@ -1004,37 +1070,58 @@ INPUT ARRAY rm_ret WITHOUT DEFAULTS FROM rm_ret.*
 			DISPLAY rm_ret[i].* TO rm_ret[j].*
 			NEXT FIELD p05_porcentaje
 		END IF
-		IF rm_cxp.p01_ret_fuente = 'N'
+		IF rm_p01.p01_ret_fuente = 'N'
 		AND rm_ret[i].p05_tipo_ret = 'F' THEN
-			CALL fgl_winmessage(vg_producto,'El proveedor no configurado para retención en la fuente.','exclamation')
+			CALL fgl_winmessage(vg_producto,'El proveedor no esta configurado para retención en la fuente.','exclamation')
 			INITIALIZE rm_ret[i].* TO NULL
 			DISPLAY rm_ret[i].* TO rm_ret[j].*
 			NEXT FIELD p05_porcentaje
 		END IF
-		FOR k = 1 TO arr_count() - 1
-			FOR l = k + 1 TO arr_count()
-				IF rm_ret[k].p05_porcentaje
-				= rm_ret[l].p05_porcentaje
-				AND rm_ret[k].p05_tipo_ret
-				= rm_ret[l].p05_tipo_ret THEN
-					CALL fgl_winmessage(vg_producto,'El tipo y porcentaje de retención ya ha sido ingresado.','exclamation')
-					INITIALIZE rm_ret[i].* TO NULL
-					DISPLAY rm_ret[i].* TO rm_ret[j].*
-					NEXT FIELD p05_porcentaje
-				END IF
-			END FOR
-		END FOR
-		IF rm_ret[i].p05_tipo_ret = 'I' THEN
-			LET conti = conti + 1
-		ELSE
-			LET contf = contf + 1
+		IF rm_p01.p01_ret_impto = 'N'
+		AND rm_ret[i].p05_tipo_ret = 'I' THEN
+			CALL fgl_winmessage(vg_producto,'El proveedor no esta configurado para retención del impuesto.','exclamation')
+			INITIALIZE rm_ret[i].* TO NULL
+			DISPLAY rm_ret[i].* TO rm_ret[j].*
+			NEXT FIELD p05_porcentaje
 		END IF
-		IF conti > 2 OR contf > 2 THEN
-			CALL fgl_winmessage(vg_producto,'El tipo de retención ya ha sido ingresado 2 veces.','exclamation')
-			NEXT FIELD p05_tipo_ret
+	AFTER FIELD p05_codigo_sri
+		IF rm_ret[i].p05_codigo_sri IS NOT NULL THEN
+			CALL fl_lee_codigos_sri(vg_codcia,
+						rm_ret[i].p05_tipo_ret,
+						rm_ret[i].p05_porcentaje,
+						rm_ret[i].p05_codigo_sri,
+						rm_ret[i].p05_fecha_ini_porc)
+				RETURNING r_c03.*
+			IF r_c03.c03_compania IS NULL THEN
+				CALL fl_mostrar_mensaje('No existe configurado este codigo del SRI.', 'exclamation')
+				NEXT FIELD p05_codigo_sri
+			END IF
+			IF r_c03.c03_estado <> 'A' THEN
+				CALL fl_mostrar_mensaje('El codigo del SRI esta bloqueado.', 'exclamation')
+				NEXT FIELD p05_codigo_sri
+			END IF
+			DISPLAY BY NAME r_c03.c03_concepto_ret
+		ELSE
+			CLEAR c03_concepto_ret
 		END IF
 	AFTER INPUT
 		LET vm_num_ret = arr_count()
+		FOR l = 1 TO vm_num_ret - 1
+			FOR k = l + 1 TO vm_num_ret
+				IF (rm_ret[l].p05_tipo_ret =
+				    rm_ret[k].p05_tipo_ret) AND
+				   (rm_ret[l].p05_porcentaje =
+				    rm_ret[k].p05_porcentaje) AND
+				   (rm_ret[l].p05_codigo_sri =
+				    rm_ret[k].p05_codigo_sri) AND
+				   (rm_ret[l].p05_fecha_ini_porc =
+				    rm_ret[k].p05_fecha_ini_porc)
+				THEN
+					CALL fl_mostrar_mensaje('Existen un mismo tipo de porcentaje y codigo del SRI mas de una vez en el detalle.', 'exclamation')
+					CONTINUE INPUT
+				END IF
+			END FOR
+		END FOR
 		FOR k = 1 TO vm_num_ret
 			LET rm_ret_aux[k].* = rm_ret[k].*
 		END FOR
@@ -1048,83 +1135,87 @@ FUNCTION control_grabar()
 DEFINE num_aux		INTEGER
 
 IF vm_num_ret = 0 AND vm_flag_mant <> 'M' THEN
-	IF rm_cxp.p01_ret_fuente = 'S' OR rm_cxp.p01_ret_impto = 'S' THEN
-		CALL fgl_winmessage(vg_producto,'Debe ingresar primero las retenciones del proveedor.','exclamation')
-		RETURN
-	END IF	
+	CALL fgl_winmessage(vg_producto,'Debe ingresar primero las retenciones del proveedor.','exclamation')
+	RETURN
 END IF
-IF rm_cxp.p01_codprov IS NULL THEN
+IF rm_p01.p01_codprov IS NULL THEN
 	LET num_aux            = 0 
-	LET rm_cxp.p01_fecing  = CURRENT
-	LET rm_cxp2.p02_fecing = rm_cxp.p01_fecing
-	SELECT MAX(p01_codprov) INTO rm_cxp.p01_codprov FROM cxpt001
-	IF rm_cxp.p01_codprov IS NOT NULL THEN
-		LET rm_cxp.p01_codprov = rm_cxp.p01_codprov + 1
+	LET rm_p01.p01_fecing  = CURRENT
+	LET rm_p02.p02_fecing = rm_p01.p01_fecing
+	SELECT MAX(p01_codprov) INTO rm_p01.p01_codprov FROM cxpt001
+	IF rm_p01.p01_codprov IS NOT NULL THEN
+		LET rm_p01.p01_codprov = rm_p01.p01_codprov + 1
 	ELSE
-		LET rm_cxp.p01_codprov = 1
+		LET rm_p01.p01_codprov = 1
 	END IF
-	LET rm_cxp2.p02_codprov = rm_cxp.p01_codprov
-	INSERT INTO cxpt001 VALUES (rm_cxp.*)
+	LET rm_p02.p02_codprov = rm_p01.p01_codprov
+	INSERT INTO cxpt001 VALUES (rm_p01.*)
 	LET num_aux = SQLCA.SQLERRD[6] 
-	INSERT INTO cxpt002 VALUES (rm_cxp2.*)
-	CALL grabar_retencion(rm_cxp2.p02_codprov)
+	INSERT INTO cxpt002 VALUES (rm_p02.*)
+	CALL grabar_retencion(rm_p02.p02_codprov)
+	IF vm_num_rows = vm_max_rows THEN
+		LET vm_num_rows = 1
+	ELSE
+		LET vm_num_rows = vm_num_rows + 1
+	END IF
+	LET vm_row_current = vm_num_rows
 	LET vm_r_rows[vm_row_current] = num_aux
-	DISPLAY rm_cxp.p01_codprov TO tit_codigo_pro
-	DISPLAY rm_cxp.p01_nomprov TO tit_nombre_pro
-	DISPLAY BY NAME rm_cxp.p01_codprov, rm_cxp.p01_fecing
-	CALL muestra_contadores(vm_row_current, vm_num_rows)
+	DISPLAY rm_p01.p01_codprov TO tit_codigo_pro
+	DISPLAY rm_p01.p01_nomprov TO tit_nombre_pro
+	DISPLAY BY NAME rm_p01.p01_codprov, rm_p01.p01_fecing
 	CALL mostrar_registro(vm_r_rows[vm_num_rows])	
+	CALL muestra_contadores(vm_row_current, vm_num_rows)
 	CALL fl_mensaje_registro_ingresado()
 ELSE
 	IF vm_flag_mant = 'M' THEN
-		UPDATE cxpt001 SET p01_nomprov    = rm_cxp.p01_nomprov, 
-				   p01_personeria = rm_cxp.p01_personeria,
-				   p01_num_doc    = rm_cxp.p01_num_doc,
-				   p01_tipo_doc   = rm_cxp.p01_tipo_doc,
-				   p01_num_aut    = rm_cxp.p01_num_aut,
-				   p01_serie_comp = rm_cxp.p01_serie_comp,
-				   p01_direccion1 = rm_cxp.p01_direccion1, 
-				   p01_telefono1  = rm_cxp.p01_telefono1, 
-				   p01_tipo_prov  = rm_cxp.p01_tipo_prov,
-				   p01_direccion2 = rm_cxp.p01_direccion2, 
-				   p01_telefono2  = rm_cxp.p01_telefono2,
-				   p01_fax1       = rm_cxp.p01_fax1,
-				   p01_fax2       = rm_cxp.p01_fax2,
-				   p01_casilla    = rm_cxp.p01_casilla,
-				   p01_pais       = rm_cxp.p01_pais,
-				   p01_ciudad     = rm_cxp.p01_ciudad,
-				   p01_rep_legal  = rm_cxp.p01_rep_legal,
-				   p01_ret_fuente = rm_cxp.p01_ret_fuente,
-				   p01_ret_impto  = rm_cxp.p01_ret_impto,
-				   p01_cont_espe  = rm_cxp.p01_cont_espe
+		UPDATE cxpt001 SET p01_nomprov    = rm_p01.p01_nomprov, 
+				   p01_personeria = rm_p01.p01_personeria,
+				   p01_num_doc    = rm_p01.p01_num_doc,
+				   p01_tipo_doc   = rm_p01.p01_tipo_doc,
+				   p01_num_aut    = rm_p01.p01_num_aut,
+				   p01_serie_comp = rm_p01.p01_serie_comp,
+				   p01_direccion1 = rm_p01.p01_direccion1, 
+				   p01_telefono1  = rm_p01.p01_telefono1, 
+				   p01_tipo_prov  = rm_p01.p01_tipo_prov,
+				   p01_direccion2 = rm_p01.p01_direccion2, 
+				   p01_telefono2  = rm_p01.p01_telefono2,
+				   p01_fax1       = rm_p01.p01_fax1,
+				   p01_fax2       = rm_p01.p01_fax2,
+				   p01_casilla    = rm_p01.p01_casilla,
+				   p01_pais       = rm_p01.p01_pais,
+				   p01_ciudad     = rm_p01.p01_ciudad,
+				   p01_rep_legal  = rm_p01.p01_rep_legal,
+				   p01_ret_fuente = rm_p01.p01_ret_fuente,
+				   p01_ret_impto  = rm_p01.p01_ret_impto,
+				   p01_cont_espe  = rm_p01.p01_cont_espe
 			WHERE CURRENT OF q_up
-		IF rm_cxp2.p02_codprov IS NOT NULL THEN
+		IF rm_p02.p02_codprov IS NOT NULL THEN
 			UPDATE cxpt002 SET
-				p02_contacto    = rm_cxp2.p02_contacto,
-				p02_referencia  = rm_cxp2.p02_referencia,
-				p02_credit_dias = rm_cxp2.p02_credit_dias,
-				p02_cupocred_mb = rm_cxp2.p02_cupocred_mb,
-				p02_descuento   = rm_cxp2.p02_descuento,
-				p02_recargo     = rm_cxp2.p02_recargo,
-				p02_dias_demora = rm_cxp2.p02_dias_demora,
-			  	p02_dias_seguri = rm_cxp2.p02_dias_seguri,
-				p02_int_ext     = rm_cxp2.p02_int_ext,
-				p02_aux_prov_mb = rm_cxp2.p02_aux_prov_mb,
-				p02_aux_prov_ma = rm_cxp2.p02_aux_prov_ma,
-				p02_aux_ant_mb  = rm_cxp2.p02_aux_ant_mb,
-				p02_aux_ant_ma  = rm_cxp2.p02_aux_ant_ma
+				p02_contacto    = rm_p02.p02_contacto,
+				p02_referencia  = rm_p02.p02_referencia,
+				p02_credit_dias = rm_p02.p02_credit_dias,
+				p02_cupocred_mb = rm_p02.p02_cupocred_mb,
+				p02_descuento   = rm_p02.p02_descuento,
+				p02_recargo     = rm_p02.p02_recargo,
+				p02_dias_demora = rm_p02.p02_dias_demora,
+			  	p02_dias_seguri = rm_p02.p02_dias_seguri,
+				p02_int_ext     = rm_p02.p02_int_ext,
+				p02_aux_prov_mb = rm_p02.p02_aux_prov_mb,
+				p02_aux_prov_ma = rm_p02.p02_aux_prov_ma,
+				p02_aux_ant_mb  = rm_p02.p02_aux_ant_mb,
+				p02_aux_ant_ma  = rm_p02.p02_aux_ant_ma
 			      WHERE CURRENT OF q_up2
 		ELSE
-			LET rm_cxp2.p02_compania  = vg_codcia
-			LET rm_cxp2.p02_localidad = vg_codloc
-			LET rm_cxp2.p02_codprov   = rm_cxp.p01_codprov
-			INSERT INTO cxpt002 VALUES (rm_cxp2.*)
+			LET rm_p02.p02_compania  = vg_codcia
+			LET rm_p02.p02_localidad = vg_codloc
+			LET rm_p02.p02_codprov   = rm_p01.p01_codprov
+			INSERT INTO cxpt002 VALUES (rm_p02.*)
 		END IF
-		CALL grabar_retencion(rm_cxp.p01_codprov)
+		CALL grabar_retencion(rm_p01.p01_codprov)
 		LET vm_flag_mant = 'I'
 	END IF
 	IF vm_flag_mant = 'C' THEN
-		CALL grabar_retencion(rm_cxp.p01_codprov)
+		CALL grabar_retencion(rm_p01.p01_codprov)
 		CALL fl_mensaje_registro_modificado()
 		LET vm_flag_mant = 'I'
 	END IF
@@ -1140,12 +1231,13 @@ DEFINE codprov		LIKE cxpt001.p01_codprov
 
 DELETE FROM cxpt005 WHERE p05_compania = vg_codcia
 		      AND p05_codprov  = codprov
-LET rm_cxp3.p05_compania = vg_codcia
-LET rm_cxp3.p05_codprov  = rm_cxp.p01_codprov
+LET rm_p05.p05_compania = vg_codcia
+LET rm_p05.p05_codprov  = rm_p01.p01_codprov
 FOR i = 1 TO vm_num_ret
-	INSERT INTO cxpt005 
-	VALUES (rm_cxp3.p05_compania, rm_cxp3.p05_codprov, rm_ret[i].p05_codigo_sri,
-			rm_ret[i].p05_tipo_ret, rm_ret[i].p05_porcentaje)
+        INSERT INTO cxpt005
+		VALUES (rm_p05.p05_compania, rm_p05.p05_codprov,
+			rm_ret[i].p05_tipo_ret, rm_ret[i].p05_porcentaje,
+			rm_ret[i].p05_codigo_sri, rm_ret[i].p05_fecha_ini_porc)
 END FOR
 
 END FUNCTION
@@ -1203,58 +1295,59 @@ DEFINE r_cta            RECORD LIKE ctbt010.*
 DEFINE num_registro	INTEGER
 
 IF vm_num_rows > 0 THEN
-	SELECT * INTO rm_cxp.* FROM cxpt001 WHERE ROWID = num_registro	
+	SELECT * INTO rm_p01.* FROM cxpt001 WHERE ROWID = num_registro	
 	IF STATUS = NOTFOUND THEN
 		CALL fgl_winmessage (vg_producto,'No existe registro con índice: ' || vm_row_current,'exclamation')
 		RETURN
 	END IF
-	DISPLAY BY NAME rm_cxp.p01_codprov, rm_cxp.p01_nomprov,
-			rm_cxp.p01_personeria, rm_cxp.p01_num_doc,
-			rm_cxp.p01_tipo_doc, rm_cxp.p01_direccion1, 
-			rm_cxp.p01_num_aut, rm_cxp.p01_serie_comp,
-			rm_cxp.p01_telefono1, rm_cxp.p01_tipo_prov,
-			rm_cxp.p01_direccion2, rm_cxp.p01_telefono2,
-			rm_cxp.p01_fax1, rm_cxp.p01_fax2, rm_cxp.p01_casilla,
-			rm_cxp.p01_pais, rm_cxp.p01_ciudad,rm_cxp.p01_rep_legal,
-			rm_cxp.p01_ret_fuente, rm_cxp.p01_ret_impto,
-			rm_cxp.p01_cont_espe, rm_cxp.p01_usuario,
-			rm_cxp.p01_fecing
-	CALL fl_lee_pais(rm_cxp.p01_pais) RETURNING r_pai.*
+	DISPLAY BY NAME rm_p01.p01_codprov, rm_p01.p01_nomprov,
+			rm_p01.p01_personeria, rm_p01.p01_num_doc,
+			rm_p01.p01_tipo_doc, rm_p01.p01_direccion1, 
+			rm_p01.p01_num_aut, rm_p01.p01_serie_comp,
+			rm_p01.p01_telefono1, rm_p01.p01_tipo_prov,
+			rm_p01.p01_direccion2, rm_p01.p01_telefono2,
+			rm_p01.p01_fax1, rm_p01.p01_fax2, rm_p01.p01_casilla,
+			rm_p01.p01_pais, rm_p01.p01_ciudad,rm_p01.p01_rep_legal,
+			rm_p01.p01_ret_fuente, rm_p01.p01_ret_impto,
+			rm_p01.p01_cont_espe, rm_p01.p01_usuario,
+			rm_p01.p01_fecing
+	CALL fl_lee_pais(rm_p01.p01_pais) RETURNING r_pai.*
 	DISPLAY r_pai.g30_nombre TO tit_pais
-	CALL fl_lee_ciudad(rm_cxp.p01_ciudad) RETURNING r_ciu.*
+	CALL fl_lee_ciudad(rm_p01.p01_ciudad) RETURNING r_ciu.*
 	DISPLAY r_ciu.g31_nombre TO tit_ciudad
-	CALL fl_lee_subtipo_entidad('TP',rm_cxp.p01_tipo_prov) RETURNING r_car.*
+	CALL fl_lee_subtipo_entidad('TP',rm_p01.p01_tipo_prov) RETURNING r_car.*
         DISPLAY r_car.g12_nombre TO tit_tipo_pro
-	SELECT * INTO rm_cxp2.* FROM cxpt002
+	SELECT * INTO rm_p02.* FROM cxpt002
 		WHERE p02_compania  = vg_codcia
 		  AND p02_localidad = vg_codloc
-		  AND p02_codprov   = rm_cxp.p01_codprov
+		  AND p02_codprov   = rm_p01.p01_codprov
 	IF STATUS = NOTFOUND THEN
 		CALL muestra_estado()
 		RETURN
 	END IF
-	DISPLAY rm_cxp.p01_codprov TO tit_codigo_pro
-	DISPLAY rm_cxp.p01_nomprov TO tit_nombre_pro
-	DISPLAY BY NAME rm_cxp2.p02_contacto, rm_cxp2.p02_referencia,
-			rm_cxp2.p02_credit_dias, rm_cxp2.p02_cupocred_mb,
-			rm_cxp2.p02_cupocred_ma, rm_cxp2.p02_descuento,
-			rm_cxp2.p02_recargo, rm_cxp2.p02_dias_demora,
-			rm_cxp2.p02_dias_seguri, rm_cxp2.p02_int_ext,
-			rm_cxp2.p02_aux_prov_mb, rm_cxp2.p02_aux_prov_ma,
-			rm_cxp2.p02_aux_ant_mb, rm_cxp2.p02_aux_ant_ma
-	CALL fl_lee_cuenta(vg_codcia,rm_cxp2.p02_aux_prov_mb)
+	DISPLAY rm_p01.p01_codprov TO tit_codigo_pro
+	DISPLAY rm_p01.p01_nomprov TO tit_nombre_pro
+	DISPLAY BY NAME rm_p02.p02_contacto, rm_p02.p02_referencia,
+			rm_p02.p02_credit_dias, rm_p02.p02_cupocred_mb,
+			rm_p02.p02_cupocred_ma, rm_p02.p02_descuento,
+			rm_p02.p02_recargo, rm_p02.p02_dias_demora,
+			rm_p02.p02_dias_seguri, rm_p02.p02_int_ext,
+			rm_p02.p02_aux_prov_mb, rm_p02.p02_aux_prov_ma,
+			rm_p02.p02_aux_ant_mb, rm_p02.p02_aux_ant_ma
+	CALL fl_lee_cuenta(vg_codcia,rm_p02.p02_aux_prov_mb)
                 RETURNING r_cta.*
         DISPLAY r_cta.b10_descripcion TO tit_pro_mb
-        CALL fl_lee_cuenta(vg_codcia,rm_cxp2.p02_aux_prov_ma)
+        CALL fl_lee_cuenta(vg_codcia,rm_p02.p02_aux_prov_ma)
                 RETURNING r_cta.*
         DISPLAY r_cta.b10_descripcion TO tit_pro_ma
-        CALL fl_lee_cuenta(vg_codcia,rm_cxp2.p02_aux_ant_mb)
+        CALL fl_lee_cuenta(vg_codcia,rm_p02.p02_aux_ant_mb)
                 RETURNING r_cta.*
         DISPLAY r_cta.b10_descripcion TO tit_ant_mb
-        CALL fl_lee_cuenta(vg_codcia,rm_cxp2.p02_aux_ant_ma)
+        CALL fl_lee_cuenta(vg_codcia,rm_p02.p02_aux_ant_ma)
                 RETURNING r_cta.*
         DISPLAY r_cta.b10_descripcion TO tit_ant_ma
 	CALL muestra_estado()
+	CALL cargar_retencion()
 ELSE
 	RETURN
 END IF
@@ -1271,19 +1364,20 @@ IF vm_num_rows = 0 THEN
 	RETURN
 END IF
 LET int_flag = 0
-WHENEVER ERROR CONTINUE
 BEGIN WORK
+WHENEVER ERROR CONTINUE
 DECLARE q_ba CURSOR FOR SELECT * FROM cxpt001
 	WHERE ROWID = vm_r_rows[vm_row_current]
 	FOR UPDATE
 OPEN q_ba
-FETCH q_ba INTO rm_cxp.*
+FETCH q_ba INTO rm_p01.*
 IF STATUS < 0 THEN
 	ROLLBACK WORK
 	CALL fl_mensaje_bloqueo_otro_usuario()
 	WHENEVER ERROR STOP
 	RETURN
 END IF	
+WHENEVER ERROR STOP
 CALL fl_mensaje_seguro_ejecutar_proceso()
 	RETURNING confir
 IF confir = 'Yes' THEN
@@ -1291,7 +1385,6 @@ IF confir = 'Yes' THEN
 	CALL bloquea_activa_registro()
 END IF
 COMMIT WORK
-WHENEVER ERROR STOP
 
 END FUNCTION
 
@@ -1300,28 +1393,29 @@ END FUNCTION
 FUNCTION bloquea_activa_registro()
 DEFINE estado	CHAR(1)
 
-IF rm_cxp.p01_estado = 'A' THEN
+IF rm_p01.p01_estado = 'A' THEN
 	DISPLAY 'BLOQUEADO' TO tit_estado_pro
 	LET estado = 'B'
 ELSE 
 	DISPLAY 'ACTIVO' TO tit_estado_pro
 	LET estado = 'A'
 END IF
-DISPLAY estado TO tit_est
+DISPLAY estado TO p01_estado
 UPDATE cxpt001 SET p01_estado = estado WHERE CURRENT OF q_ba
-LET rm_cxp.p01_estado = estado
+LET rm_p01.p01_estado = estado
 
 END FUNCTION
 
 
 
 FUNCTION muestra_estado()
-IF rm_cxp.p01_estado = 'A' THEN
+
+IF rm_p01.p01_estado = 'A' THEN
 	DISPLAY 'ACTIVO' TO tit_estado_pro
 ELSE
 	DISPLAY 'BLOQUEADO' TO tit_estado_pro
 END IF
-DISPLAY rm_cxp.p01_estado TO tit_est
+DISPLAY BY NAME rm_p01.p01_estado
 
 END FUNCTION
 
@@ -1330,9 +1424,10 @@ END FUNCTION
 FUNCTION mostrar_botones_retencion()
 
 DISPLAY 'Porc.'       TO tit_col1
-DISPLAY 'Cod' 	      TO tit_col2
-DISPLAY 'T'           TO tit_col3
-DISPLAY 'Descripción' TO tit_col4
+DISPLAY 'T'           TO tit_col2
+DISPLAY 'Descripción' TO tit_col3
+DISPLAY 'SRI'         TO tit_col4
+DISPLAY 'Fecha Ini.'  TO tit_col5
 
 END FUNCTION
 
@@ -1347,44 +1442,11 @@ DISPLAY ARRAY rm_ret TO rm_ret.*
 		LET i = arr_curr()
 		LET j = scr_line()
 	BEFORE DISPLAY
-		CALL dialog.keysetlabel("ACCEPT","")
+		--#CALL dialog.keysetlabel("ACCEPT","")
 	AFTER DISPLAY
 		CONTINUE DISPLAY
 	ON KEY(INTERRUPT)
 		EXIT DISPLAY
 END DISPLAY
                                                                                 
-END FUNCTION
-
-
-
-FUNCTION validar_parametros()
-
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-
 END FUNCTION

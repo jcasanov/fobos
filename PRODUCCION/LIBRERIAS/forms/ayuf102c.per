@@ -1,0 +1,30 @@
+DATABASE aceros
+SCREEN
+{
+  PEDIDOS IMPORTACION VEHICULOS
+ ---------------------------------------
+  Código         Envío      Llegada
+ ---------------------------------------
+ [c001      ][c][c002      ][c003      ]
+ [c001      ][c][c002      ][c003      ]
+ [c001      ][c][c002      ][c003      ]
+ [c001      ][c][c002      ][c003      ]
+ [c001      ][c][c002      ][c003      ]
+ [c001      ][c][c002      ][c003      ]
+ [c001      ][c][c002      ][c003      ]
+ [c001      ][c][c002      ][c003      ]
+ [c001      ][c][c002      ][c003      ]
+ [c001      ][c][c002      ][c003      ]
+}
+TABLES
+veht034
+ATTRIBUTES
+c001 = v34_pedido, REVERSE;
+c    = v34_estado, REVERSE;
+c002 = v34_fec_envio, REVERSE;
+c003 = v34_fec_llegada, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_pedveh[10] (v34_pedido, v34_estado, v34_fec_envio,
+				v34_fec_llegada)

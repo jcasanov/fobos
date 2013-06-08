@@ -1,60 +1,82 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
-            Estado: [c000         ]          Moneda: [a0] [c001           ]
-                                      Fecha Inicial: [c002      ]
-                                        Fecha Final: [c003      ]
+     Estado: [c000         ]               Moneda: [a0] [c001           ]
+                                    Tipo de Fecha: [c008                ]
 
-           Cliente: [c004      ] [c005                                    ]
-
- [c020                    |c021            |c022            |c023            ]
-[c010                    |c011            |c012            |c013            ]
-[c010                    |c011            |c012            |c013            ]
-[c010                    |c011            |c012            |c013            ]
-[c010                    |c011            |c012            |c013            ]
-[c010                    |c011            |c012            |c013            ]
-[c010                    |c011            |c012            |c013            ]
-[c010                    |c011            |c012            |c013            ]
-[c010                    |c011            |c012            |c013            ]
-[c010                    |c011            |c012            |c013            ]
-[c010                    |c011            |c012            |c013            ]
-[c010                    |c011            |c012            |c013            ]
-[c010                    |c011            |c012            |c013            ]
-                                                    Total: [c014            ]
+                                   Rango de Fecha: [c002      ] - [c003      ]
+    Cliente: [c004 ] [c005                                                   ]
+  Localidad: [c006 ] [c007                ]                 [c040 ] de [c041 ]
+ [c010             |c1|c011           |c012           |c013      |c014        ]
+[c020             |c2|c021           |c022           |c023      |c024        ]
+[c020             |c2|c021           |c022           |c023      |c024        ]
+[c020             |c2|c021           |c022           |c023      |c024        ]
+[c020             |c2|c021           |c022           |c023      |c024        ]
+[c020             |c2|c021           |c022           |c023      |c024        ]
+[c020             |c2|c021           |c022           |c023      |c024        ]
+[c020             |c2|c021           |c022           |c023      |c024        ]
+[c020             |c2|c021           |c022           |c023      |c024        ]
+[c020             |c2|c021           |c022           |c023      |c024        ]
+[c020             |c2|c021           |c022           |c023      |c024        ]
+[c020             |c2|c021           |c022           |c023      |c024        ]
+[c020             |c2|c021           |c022           |c023      |c024        ]
+[c030                                                ]   Total: [c031        ]
 }
 TABLES
-cxct026, cxct020, cxct001, gent008
+cxct001
+cxct020
+cxct026
+gent008
 ATTRIBUTES
 c000 = cxct026.z26_estado, AUTONEXT, REVERSE, UPSHIFT,
-	WIDGET = 'RADIO', CONFIG = 'A Activos B Bloqueados T TODOS',
+	WIDGET = 'RADIO', CONFIG = 'A "Por Cobrar" B Cobrados T "T O D O S"',
 	DEFAULT = 'A';
 a0   = cxct020.z20_moneda, AUTONEXT, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 c001 = FORMONLY.tit_moneda, NOENTRY, REVERSE, UPSHIFT;
-c002 = FORMONLY.vm_fecha_ini TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
-	FORMAT = 'dd-mm-yyyy';
-c003 = FORMONLY.vm_fecha_fin TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
-	FORMAT = 'dd-mm-yyyy';
+c002 = FORMONLY.vm_fecha_ini TYPE DATE, AUTONEXT, UPSHIFT,FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la Fecha Inicial en formato: dd-mm-yyyy';
+c003 = FORMONLY.vm_fecha_fin TYPE DATE, AUTONEXT, UPSHIFT,FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la Fecha Final en formato: dd-mm-yyyy';
 c004 = FORMONLY.z26_codcli, AUTONEXT, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 c005 = FORMONLY.tit_nombre_cli, NOENTRY, UPSHIFT;
+c006 = FORMONLY.localidad, UPSHIFT, AUTONEXT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c007 = FORMONLY.tit_localidad, UPSHIFT, NOENTRY;
+c008 = FORMONLY.tipo_fecha, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'RADIO', CONFIG = 'I "Fecha Ingreso" C "Fecha Cobro"',
+	DEFAULT = 'C';
 
-c020 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-c021 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-c022 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
-c023 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c1   = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c011 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c012 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c013 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c014 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
 
-c010 = cxct001.z01_nomcli, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
-c011 = gent008.g08_nombre, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
-c012 = cxct026.z26_num_cheque, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
-c013 = cxct026.z26_valor, NOENTRY, UPSHIFT,
-	FORMAT = '#,###,###,##&.##', OPTIONS = '-nolist';
-c014 = FORMONLY.tit_total, NOENTRY, REVERSE, UPSHIFT,
-	FORMAT = '#,###,###,##&.##';
+c020 = cxct001.z01_nomcli, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c2   = cxct026.z26_localidad, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c021 = gent008.g08_nombre, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c022 = cxct026.z26_num_cheque, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c023 = cxct026.z26_fecha_cobro, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+c024 = cxct026.z26_valor, NOENTRY, UPSHIFT, FORMAT = '#,###,##&.##',
+	OPTIONS = '-nolist';
+
+c030 = FORMONLY.tit_cliente TYPE VARCHAR, NOENTRY, UPSHIFT, REVERSE;
+c031 = FORMONLY.tit_total TYPE DECIMAL, NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = '#,###,##&.##';
+
+c040 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c041 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
 END
 KEYS
 F5 = 'Cheque'
 F6 = 'Documento'
 F7 = 'Estado Cuenta'
+F8 = 'Imprimir Listado'
 INSTRUCTIONS
-SCREEN RECORD rm_det[12] (z01_nomcli, g08_nombre, z26_num_cheque, z26_valor)
+DELIMITERS '||'
+SCREEN RECORD rm_det[12] (z01_nomcli, z26_localidad, g08_nombre, z26_num_cheque,
+				z26_fecha_cobro, z26_valor)

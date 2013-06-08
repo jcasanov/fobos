@@ -1,0 +1,32 @@
+DATABASE aceros
+SCREEN
+{
+
+ ANTICIPOS TRABAJADORES
+
+ [c000    |c001                              |b]
+[c010    |c011                              |c]
+[c010    |c011                              |c]
+[c010    |c011                              |c]
+[c010    |c011                              |c]
+[c010    |c011                              |c]
+[c010    |c011                              |c]
+[c010    |c011                              |c]
+[c010    |c011                              |c]
+[c010    |c011                              |c]
+[c010    |c011                              |c]
+}
+TABLES
+rolt045
+rolt030
+
+ATTRIBUTES
+c000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b    = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c010 = rolt045.n45_num_prest, 	AUTONEXT, UPSHIFT, REVERSE;
+c011 = rolt030.n30_nombres, 	AUTONEXT, UPSHIFT, REVERSE;
+c    = rolt045.n45_estado, 	AUTONEXT, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+SCREEN RECORD rh_prestamo[10] (n45_num_prest, n30_nombres, n45_estado)

@@ -1,0 +1,35 @@
+DATABASE aceros
+SCREEN
+{
+ CLIENTES POR LOCALIDAD A COBRAR
+ ----------------------------------------------------------------------------
+  Código    Nombre del  Cliente                   Cedula/RUC      Total Cob.
+ ----------------------------------------------------------------------------
+ [c001     |c002                                 |c003           |c004      ]
+ [c001     |c002                                 |c003           |c004      ]
+ [c001     |c002                                 |c003           |c004      ]
+ [c001     |c002                                 |c003           |c004      ]
+ [c001     |c002                                 |c003           |c004      ]
+ [c001     |c002                                 |c003           |c004      ]
+ [c001     |c002                                 |c003           |c004      ]
+ [c001     |c002                                 |c003           |c004      ]
+ [c001     |c002                                 |c003           |c004      ]
+ [c001     |c002                                 |c003           |c004      ]
+                                                       Total ==> [c010      ]
+
+}
+TABLES
+cxct001
+cxct002
+ATTRIBUTES
+c001 = cxct002.z02_codcli, UPSHIFT;
+c002 = cxct001.z01_nomcli, UPSHIFT;
+c003 = cxct001.z01_num_doc_id, UPSHIFT;
+c004 = FORMONLY.total_cxc TYPE DECIMAL, UPSHIFT, FORMAT = '###,##&.##';
+
+c010 = FORMONLY.total_gen TYPE DECIMAL, UPSHIFT, FORMAT = '###,##&.##';
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_cliloc[10](z02_codcli, z01_nomcli, z01_num_doc_id, total_cxc)
+

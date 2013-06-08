@@ -1,0 +1,19 @@
+DATABASE aceros
+SCREEN
+{
+
+
+                   Marca: [f00   ] [f001                               ]
+
+           Ingresado Por: [f002      ]
+        Fecha de Ingreso: [f003               ]
+
+}
+TABLES rept073
+ATTRIBUTES
+f00  = rept073.r73_marca, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f001 = rept073.r73_desc_marca, AUTONEXT, UPSHIFT, REVERSE;
+f002 = rept073.r73_usuario, REVERSE, NOENTRY, UPSHIFT;
+f003 = rept073.r73_fecing, REVERSE, NOENTRY, UPSHIFT;
+end

@@ -1,0 +1,53 @@
+DATABASE aceros
+SCREEN
+{
+
+
+           Año del Impuesto: [c001]
+
+           [c010|c011          |c012          |c013          |c014  ]
+          [c020|c021          |c022          |c023          |c024  ]
+          [c020|c021          |c022          |c023          |c024  ]
+          [c020|c021          |c022          |c023          |c024  ]
+          [c020|c021          |c022          |c023          |c024  ]
+          [c020|c021          |c022          |c023          |c024  ]
+          [c020|c021          |c022          |c023          |c024  ]
+          [c020|c021          |c022          |c023          |c024  ]
+          [c020|c021          |c022          |c023          |c024  ]
+          [c020|c021          |c022          |c023          |c024  ]
+          [c020|c021          |c022          |c023          |c024  ]
+
+                        Usuario: [c006      ]
+                  Fecha Ingreso: [c007               ]
+}
+TABLES
+rolt015
+ATTRIBUTES
+c001 = rolt015.n15_ano, AUTONEXT, REVERSE, INCLUDE = (2003 TO 9999);
+
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+
+c020 = rolt015.n15_secuencia, NOENTRY, FORMAT = '#&&', OPTIONS = '-nolist';
+c021 = rolt015.n15_base_imp_ini, AUTONEXT, OPTIONS = '-nolist',
+	INCLUDE = (0 TO 999999999.99), FORMAT = '###,###,##&.##',
+	COMMENTS = 'Ingreso Gravable (Ingreso - Aportes al IESS)';
+c022 = rolt015.n15_base_imp_fin, AUTONEXT, OPTIONS = '-nolist',
+	INCLUDE = (0 TO 999999999.99), FORMAT = '###,###,##&.##',
+	COMMENTS = 'Ingreso Gravable (Ingreso - Aportes al IESS)';
+c023 = rolt015.n15_fracc_base, AUTONEXT, OPTIONS = '-nolist',
+	INCLUDE = (0 TO 999999999.99), FORMAT = '###,###,##&.##',
+	COMMENTS = 'Valor a Retener (Impuesto sobre F. Básica)';
+c024 = rolt015.n15_porc_ir, AUTONEXT, OPTIONS = '-nolist',
+	FORMAT = '##&.##', INCLUDE = (0 TO 100.00),
+	COMMENTS = 'Valor a Retener (Porcentage de Impuesto sobre F. Excedente)';
+c006 = rolt015.n15_usuario, NOENTRY, REVERSE, UPSHIFT;
+c007 = rolt015.n15_fecing, NOENTRY, REVERSE, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_impren[10] (n15_secuencia, n15_base_imp_ini, n15_base_imp_fin,
+				n15_fracc_base, n15_porc_ir)

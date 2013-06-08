@@ -1,0 +1,31 @@
+DATABASE aceros
+SCREEN 
+{
+
+            Moneda: [c1] [c001              ]    Tipo Vcto.: [c|c010      ]
+                                                                         
+   Area de Negocio: [c2] [c002              ]                         
+
+      Tipo Cliente: [c4] [c004              ]
+   
+}
+TABLES
+gent013
+ATTRIBUTES
+c1   = gent013.g13_moneda, REVERSE, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c2   = FORMONLY.areaneg,  AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c4   = FORMONLY.tipocli,  AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c001 = gent013.g13_nombre, REVERSE ,   NOENTRY;
+c002 = FORMONLY.n_areaneg,     NOENTRY;
+c004 = FORMONLY.n_tipocli,     NOENTRY;
+
+c    = FORMONLY.tipo_vcto TYPE CHAR, DEFAULT='T', AUTONEXT, REVERSE, UPSHIFT,
+	INCLUDE = ('P', 'V', 'T'),
+	COMMENTS = '(P) Por Vencer  (V) Vencidos  (T) Todos';
+c010 = FORMONLY.tit_tipo_vcto,REVERSE,UPSHIFT,NOENTRY;
+end
+INSTRUCTIONS
+DELIMITERS '||'

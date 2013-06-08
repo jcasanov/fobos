@@ -1,0 +1,69 @@
+DATABASE aceros
+SCREEN
+{
+
+             PARAMETROS PARA GENERAR DIVIDENDOS POR PROCESO
+             ---------------------------------------------
+
+ Anticipo: [c000 ]                 Rubro: [c01|c002                          ]
+ Empleado: [c003|c004                                                        ]
+
+                Diferencia: [c040        ]      Valor Anticipo: [c005        ]
+                                                                [c0 ] de [c1 ]
+ [c2|c010                    |c011|c012|c013        |c014        |c015        ]
+[c3|c020                    |c021|c022|c023        |c024        |c025        ]
+[c3|c020                    |c021|c022|c023        |c024        |c025        ]
+[c3|c020                    |c021|c022|c023        |c024        |c025        ]
+[c3|c020                    |c021|c022|c023        |c024        |c025        ]
+[c3|c020                    |c021|c022|c023        |c024        |c025        ]
+[c3|c020                    |c021|c022|c023        |c024        |c025        ]
+                Totales ==> [c030|c031]            [c033        |c034        ]
+
+}
+TABLES
+rolt003
+rolt006
+rolt030
+rolt045
+rolt058
+ATTRIBUTES
+c000 = rolt058.n58_num_prest, NOENTRY, REVERSE, UPSHIFT;
+c01  = rolt045.n45_cod_rubro, NOENTRY, REVERSE, UPSHIFT;
+c002 = rolt006.n06_nombre, NOENTRY, REVERSE, UPSHIFT;
+c003 = rolt045.n45_cod_trab, NOENTRY, REVERSE, UPSHIFT;
+c004 = rolt030.n30_nombres, NOENTRY, REVERSE, UPSHIFT;
+c005 = FORMONLY.val_prest, NOENTRY, REVERSE,UPSHIFT,COLOR = BLUE WHERE c005 > 0;
+c040 = FORMONLY.val_dif, NOENTRY, REVERSE, UPSHIFT, COLOR = RED WHERE c040 <> 0;
+
+c0   = FORMONLY.vm_cur_dettot, NOENTRY, REVERSE, UPSHIFT;
+c1   = FORMONLY.vm_num_dettot, NOENTRY, REVERSE, UPSHIFT;
+
+c2   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c010 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c011 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c012 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c013 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c014 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c015 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+
+c3   = rolt058.n58_proceso, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c020 = rolt003.n03_nombre, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c021 = rolt058.n58_div_act, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c022 = rolt058.n58_num_div, AUTONEXT, UPSHIFT, OPTIONS = '-nolist';
+c023 = rolt058.n58_valor_div, AUTONEXT, UPSHIFT, FORMAT = '-,---,--&.##',
+	INCLUDE = (0 TO 9999999.99), OPTIONS = '-nolist';
+c024 = rolt058.n58_valor_dist, NOENTRY, UPSHIFT, FORMAT = '-,---,--&.##',
+	OPTIONS = '-nolist';
+c025 = rolt058.n58_saldo_dist, NOENTRY, UPSHIFT, FORMAT = '-,---,--&.##',
+	OPTIONS = '-nolist';
+
+c030 = FORMONLY.tot_div_act, NOENTRY, UPSHIFT, REVERSE;
+c031 = FORMONLY.tot_num_div, NOENTRY, UPSHIFT, REVERSE;
+#c032 = FORMONLY.tot_val_div,NOENTRY, UPSHIFT, REVERSE, FORMAT = '-,---,--&.##';
+c033 = FORMONLY.tot_val_dis, NOENTRY, UPSHIFT, REVERSE, FORMAT = '-,---,--&.##';
+c034 = FORMONLY.tot_sal_dis, NOENTRY, UPSHIFT, REVERSE, FORMAT = '-,---,--&.##';
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_dettotpre[6] (n58_proceso, n03_nombre, n58_div_act,n58_num_div,
+				n58_valor_div, n58_valor_dist, n58_saldo_dist)

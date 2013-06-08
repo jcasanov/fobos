@@ -1,0 +1,55 @@
+DATABASE aceros
+SCREEN
+{
+
+     Código Liquidación:[c0] [c1                             ]
+
+                                              [c050] de [c051]
+ 		         [b0 |b1                            |b] 
+ 		        [c4 |c5                            |c] 
+ 		        [c4 |c5                            |c] 
+ 		        [c4 |c5                            |c] 
+ 		        [c4 |c5                            |c] 
+ 		        [c4 |c5                            |c] 
+ 		        [c4 |c5                            |c] 
+ 		        [c4 |c5                            |c] 
+ 		        [c4 |c5                            |c] 
+ 		        [c4 |c5                            |c] 
+ 		        [c4 |c5                            |c] 
+ 		        [c4 |c5                            |c] 
+ 		        [c4 |c5                            |c] 
+
+                Usuario:[c2        ]
+       Fecha de Ingreso:[c3                 ]
+}
+TABLES
+	rolt011
+	rolt006
+	rolt003
+
+ATTRIBUTES
+
+		     ---- BOTONES ----
+b0  = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+b1  = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b   = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+	---------------------------------------------
+
+c0  = rolt011.n11_cod_liqrol,  REVERSE, UPSHIFT, WIDGET = 'FIELD_BMP',
+	CONFIG = 'lista.bmp F2', AUTONEXT;
+c1  = rolt003.n03_nombre,  REVERSE, NOENTRY;
+c2  = rolt011.n11_usuario, REVERSE, NOENTRY;
+c3  = rolt011.n11_fecing,  REVERSE, NOENTRY;
+
+c4  = rolt011.n11_cod_rubro,  UPSHIFT, OPTIONS = '-nolist', NOENTRY;
+c5  = rolt006.n06_nombre,     UPSHIFT, OPTIONS = '-nolist', NOENTRY;
+c   = FORMONLY.seleccionar,   UPSHIFT, OPTIONS = '-nolist', WIDGET = 'CHECK',
+	CONFIG = 'S N acknowledge';
+
+c050 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c051 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+END
+INSTRUCTIONS 
+DELIMITERS '||'
+SCREEN RECORD r_detalle[12] (n11_cod_rubro, n06_nombre, seleccionar)

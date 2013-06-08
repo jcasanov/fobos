@@ -1,11 +1,11 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
 
                    RESUMEN CONCILIACION BANCARIA
                   ------------------------------
- Saldo Según E/C:                                  [c000          ]
- Saldo Contable Al:                     [c001      |c002          ]
+ Saldo Actual Según E/C:                           [c000          ]
+      Saldo Contable Al:                [c001      |c002          ]
 
  [c020                                              |c021          ]
 [c010                                              |c011          ]
@@ -20,7 +20,7 @@ SCREEN
  Total Cheques Cobrados:                           [c031          ]
  Total Depósitos Realizados:                       [c032          ]
 
- Asciento Contable Generado: [c0|c033           ]
+  Asiento Contable Generado: [c0|c033           ]
 }
 ATTRIBUTES
 c000 = FORMONLY.saldo_ec, REVERSE, UPSHIFT, NOENTRY, FORMAT = '---,---,--&.##';
@@ -40,7 +40,7 @@ c032 = FORMONLY.tit_total_dep, NOENTRY, REVERSE, FORMAT = '---,---,--&.##';
 
 c0   = FORMONLY.tipo_comp, UPSHIFT, NOENTRY;
 c033 = FORMONLY.num_comp, UPSHIFT, NOENTRY;
-END
+end
 KEYS
 F5 = 'Grabar'
 INSTRUCTIONS

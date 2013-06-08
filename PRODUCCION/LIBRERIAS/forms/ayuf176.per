@@ -1,0 +1,35 @@
+DATABASE aceros
+SCREEN
+{
+ TIPOS IDENTIFICACION BODEGA
+
+                                  [c2] de [c3]
+ [c|c000                                    |d]
+[e|c010                                    |f]
+[e|c010                                    |f]
+[e|c010                                    |f]
+[e|c010                                    |f]
+[e|c010                                    |f]
+[e|c010                                    |f]
+[e|c010                                    |f]
+[e|c010                                    |f]
+[e|c010                                    |f]
+[e|c010                                    |f]
+
+}
+TABLES
+rept009
+ATTRIBUTES
+c    = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c000 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+d    = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+
+e    = rept009.r09_tipo_ident, NOENTRY, UPSHIFT, REVERSE;
+c010 = rept009.r09_descripcion, NOENTRY, UPSHIFT, REVERSE;
+f    = rept009.r09_estado, NOENTRY, UPSHIFT, REVERSE;
+
+c2   = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c3   = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+END
+INSTRUCTIONS
+SCREEN RECORD rh_tipo_ident[10] (r09_tipo_ident, r09_descripcion, r09_estado)

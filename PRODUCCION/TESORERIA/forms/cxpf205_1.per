@@ -1,5 +1,5 @@
-database diteca
-screen 
+DATABASE aceros
+SCREEN 
 {
 
 
@@ -17,13 +17,14 @@ screen
  Fecha de Ingreso: [c014               ]
 }
 end
-tables
+TABLES
 cxpt024
-attributes
+ATTRIBUTES
 c002 = cxpt024.p24_orden_pago, REVERSE, NOENTRY, WIDGET='FIELD_BMP',
 	CONFIG='lista.bmp F2';
 c004 = cxpt024.p24_codprov, REVERSE, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
-b = cxpt024.p24_estado, NOENTRY, UPSHIFT, REVERSE;
+b = cxpt024.p24_estado, NOENTRY, UPSHIFT, REVERSE,
+	COMMENTS = 'A Activo  P Procesado';
 c005 = cxpt024.p24_referencia, UPSHIFT, REVERSE;
 a0 = cxpt024.p24_moneda, NOENTRY, REVERSE, UPSHIFT, AUTONEXT,
 	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
@@ -37,12 +38,12 @@ c014 = cxpt024.p24_fecing, REVERSE, NOENTRY;
 
 c008 = cxpt024.p24_total_cap, REVERSE, FORMAT='#,###,###,##&.##';
 
-c100 = formonly.n_estado,    NOENTRY;
-c102 = formonly.n_proveedor, NOENTRY;
-c103 = formonly.n_moneda,    NOENTRY;
-c104 = formonly.n_motivo,    NOENTRY;
-c105 = formonly.n_banco,     NOENTRY;
+c100 = FORMONLY.n_estado,    NOENTRY;
+c102 = FORMONLY.n_proveedor, NOENTRY;
+c103 = FORMONLY.n_moneda,    NOENTRY;
+c104 = FORMONLY.n_motivo,    NOENTRY;
+c105 = FORMONLY.n_banco,     NOENTRY;
 end
 
-keys
+KEYS
 F5 = 'Estado Cuenta'

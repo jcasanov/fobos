@@ -9,16 +9,18 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_nuevoprog     VARCHAR(400)
+DEFINE vm_nuevoprog     CHAR(400)
+DEFINE rm_g05		RECORD LIKE gent005.*
 DEFINE rm_caj		RECORD LIKE cajt010.*
 DEFINE vm_max_det       SMALLINT
 DEFINE vm_num_det       SMALLINT
-DEFINE vm_scr_lin       SMALLINT
 DEFINE vm_fecha_ini	DATE
 DEFINE vm_fecha_fin	DATE
+DEFINE vm_total		DECIMAL(14,2)
 DEFINE rm_orden 	ARRAY[10] OF CHAR(4)
 DEFINE vm_columna_1	SMALLINT
 DEFINE vm_columna_2	SMALLINT
+DEFINE vm_size_arr	INTEGER
 DEFINE rm_det		ARRAY [1000] OF RECORD
 				j10_fecha_pro	DATE,
 				j10_nomcli	LIKE cajt010.j10_nomcli,
@@ -41,11 +43,12 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/cajp300.error')
-CALL fgl_init4js()
+CALL startlog('../logs/cajp300.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN   -- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto.', 'stop')
+	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.', 'stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
 LET vg_base     = arg_val(1)
@@ -55,8 +58,8 @@ LET vg_codloc   = arg_val(4)
 LET vg_proceso = 'cajp300'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -65,18 +68,34 @@ END MAIN
 
 
 FUNCTION funcion_master()
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
 CALL fl_nivel_isolation()
 LET vm_max_det = 1000
-OPEN WINDOW w_mas AT 3,2 WITH 22 ROWS, 80 COLUMNS
-    ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE 0, BORDER,
-	      MESSAGE LINE LAST - 2)
-OPTIONS INPUT WRAP,
-	ACCEPT KEY	F12
-OPEN FORM f_caj FROM "../forms/cajf300_1"
+LET lin_menu = 0
+LET row_ini  = 3
+LET num_rows = 22
+LET num_cols = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW w_mas AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
+    ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE lin_menu,BORDER,
+	      MESSAGE LINE LAST - 1)
+IF vg_gui = 1 THEN
+        OPEN FORM f_caj FROM '../forms/cajf300_1'
+ELSE
+        OPEN FORM f_caj FROM '../forms/cajf300_1c'
+END IF
 DISPLAY FORM f_caj
-LET vm_scr_lin = 0
-CALL muestra_contadores_det(0)
+
+CALL muestra_contadores_det(0, 0)
 CALL borrar_cabecera()
 CALL borrar_detalle()
 CALL mostrar_cabecera_forma()
@@ -88,22 +107,38 @@ END FUNCTION
 
 FUNCTION control_consulta()
 DEFINE i,j,col		SMALLINT
-DEFINE query		VARCHAR(1000)
-DEFINE expr_sql         VARCHAR(400)
+DEFINE query		CHAR(7000)
+DEFINE expr_sql         CHAR(400)
 DEFINE expr_sql2        VARCHAR(100)
-
+DEFINE expr_sql3        CHAR(400)
+DEFINE expr		CHAR(10)
 DEFINE cuantos		SMALLINT
-
 DEFINE tipo_comp	LIKE ctbt012.b12_tipo_comp
 DEFINE num_comp		LIKE ctbt012.b12_num_comp
+DEFINE r_j02		RECORD LIKE cajt002.*
 
 LET vm_fecha_ini = TODAY
 LET vm_fecha_fin = TODAY
+CALL fl_lee_usuario(vg_usuario) RETURNING rm_g05.*
+IF rm_g05.g05_tipo = 'UF' THEN
+	INITIALIZE r_j02.* TO NULL
+	SELECT * INTO r_j02.*
+		FROM cajt002
+		WHERE j02_compania  = vg_codcia
+		  AND j02_localidad = vg_codloc
+		  AND j02_usua_caja = rm_g05.g05_usuario
+	IF r_j02.j02_usua_caja IS NULL THEN
+		CALL fl_mostrar_mensaje('Usted no es un usuario de caja.', 'stop')
+		RETURN
+	END IF
+	LET rm_caj.j10_codigo_caja = r_j02.j02_codigo_caja
+	DISPLAY BY NAME r_j02.j02_nombre_caja
+END IF
 WHILE TRUE
 	LET vm_num_det = 0
 	CALL borrar_detalle()
-	CALL muestra_contadores_det(0)
-	CALL lee_parametros() RETURNING expr_sql
+	CALL muestra_contadores_det(0, vm_num_det)
+	CALL lee_parametros() RETURNING expr_sql, expr_sql3
 	IF int_flag = 2 THEN
 		CONTINUE WHILE
 	END IF
@@ -123,23 +158,71 @@ WHILE TRUE
 	LET vm_columna_2 = 2
 	LET col          = 1
 	WHILE TRUE
+		IF expr_sql <> ' 1=1' OR expr_sql3 = ' 1=1' THEN
 		LET query = 'SELECT DATE(j10_fecha_pro), j10_nomcli, ',
-			'j10_tipo_destino, j10_num_destino, j11_codigo_pago, ',
-			'j11_moneda, j11_valor, j10_compania, j10_localidad, ',
-			'j10_tipo_fuente, j10_num_fuente, j10_codcli ',
-			'FROM cajt010, OUTER cajt011 ',
-			'WHERE j10_compania    = ', vg_codcia,
-			'  AND j10_localidad   = ', vg_codloc,
-			'  AND j10_estado IN ("P") ',
+			'j10_tipo_destino, j10_num_destino, ',
+			'CASE WHEN (j10_tipo_fuente = "EC" AND j10_valor > 0)',
+				' THEN "EF" ',
+			'END, ',
+			'CASE WHEN (j10_tipo_fuente = "EC" AND j10_valor > 0)',
+				' THEN "DO" ',
+			'END, ',
+			'CASE WHEN (j10_tipo_fuente = "EC" AND j10_valor > 0)',
+				' THEN j10_valor * (-1) ',
+			'     WHEN (j10_tipo_fuente <> "EC")',
+				' THEN j10_valor ',
+			'END, ',
+			'j10_compania, j10_localidad, j10_tipo_fuente, ',
+			'j10_num_fuente, j10_codcli ',
+			'FROM cajt010 ',
+			'WHERE j10_compania      = ', vg_codcia,
+			'  AND j10_localidad     = ', vg_codloc,
+			--'  AND j10_tipo_destino <> "FA" ',
+			'  AND j10_tipo_fuente   = "EC" ',
+			'  AND j10_estado        = "P" ',
 			'  AND ', expr_sql CLIPPED, 
 			expr_sql2 CLIPPED, 
 			'  AND DATE(j10_fecha_pro) BETWEEN "', vm_fecha_ini,
 			'" AND "', vm_fecha_fin, '"',
-			'  AND j10_compania    = j11_compania ',
-			'  AND j10_localidad   = j11_localidad ',
-			'  AND j10_tipo_fuente = j11_tipo_fuente ',
-			'  AND j10_num_fuente  = j11_num_fuente ',
-			" ORDER BY ", vm_columna_1, ' ', rm_orden[vm_columna_1],
+			' UNION '
+				LET expr  = 'OUTER'
+			ELSE
+				LET query = NULL
+				LET expr  = NULL
+			END IF
+			LET query = query CLIPPED,
+			' SELECT DATE(j10_fecha_pro), j10_nomcli, ',
+			'j10_tipo_destino, j10_num_destino, ',
+			'CASE WHEN (j10_tipo_fuente = "EC" AND j10_banco = 0)',
+				' THEN "EF" ',
+				' ELSE j11_codigo_pago ',
+			'END, ',
+			'CASE WHEN (j10_tipo_fuente = "EC" AND j10_banco = 0)',
+				' THEN "DO" ',
+				' ELSE j11_moneda ',
+			'END, ',
+			'CASE WHEN (j10_tipo_fuente = "EC" AND j10_banco = 0)',
+				' THEN j10_valor * (-1) ',
+				' ELSE j11_valor ',
+			'END, ',
+			'j10_compania, j10_localidad, j10_tipo_fuente, ',
+			'j10_num_fuente, j10_codcli ',
+			'FROM cajt010, ', expr CLIPPED, ' cajt011 ',
+			'WHERE j10_compania     = ', vg_codcia,
+			'  AND j10_localidad    = ', vg_codloc,
+			--'  AND j10_tipo_destino = "FA" ',
+			'  AND j10_tipo_fuente <> "EC" ',
+			'  AND j10_estado       = "P" ',
+			'  AND ', expr_sql CLIPPED, 
+			'  AND ', expr_sql3 CLIPPED, 
+			expr_sql2 CLIPPED, 
+			'  AND DATE(j10_fecha_pro) BETWEEN "', vm_fecha_ini,
+			'" AND "', vm_fecha_fin, '"',
+			'  AND j10_compania     = j11_compania ',
+			'  AND j10_localidad    = j11_localidad ',
+			'  AND j10_tipo_fuente  = j11_tipo_fuente ',
+			'  AND j10_num_fuente   = j11_num_fuente ',
+			' ORDER BY ', vm_columna_1, ' ', rm_orden[vm_columna_1],
 			       	', ', vm_columna_2, ' ', rm_orden[vm_columna_2]
 		PREPARE deto FROM query
 		DECLARE q_deto CURSOR FOR deto
@@ -155,52 +238,59 @@ WHILE TRUE
 			CALL fl_mensaje_consulta_sin_registros()
 			EXIT WHILE
 		END IF
+		CALL sacar_total()
 		CALL set_count(vm_num_det)
 		LET int_flag = 0
 		DISPLAY ARRAY rm_det TO rm_det.*
-			BEFORE DISPLAY
-				CALL dialog.keysetlabel('ACCEPT','')
-			BEFORE ROW
-				LET i = arr_curr()
-				LET j = scr_line()
-				CALL muestra_contadores_det(i)
-				IF rm_det[i].j10_tipo_destino = 'EC' THEN
-					CALL dialog.keysetlabel("F5", "")
-				ELSE
-					CALL dialog.keysetlabel("F5", 
-						"Forma de Pago")
-				END IF
-				IF rm_det[i].j10_tipo_destino = 'FA' OR 
-				   rm_det[i].j10_tipo_destino = 'PG' OR
-				   rm_det[i].j10_tipo_destino = 'PA' OR
-				   rm_det[i].j10_tipo_destino = 'EC' THEN
-					CALL dialog.keysetlabel("F6",
-						"Comprobante")
-				ELSE
-					CALL dialog.keysetlabel("F6","")
-				END IF
-				CALL contar_comprobantes(
-						rm_cajs[i].j10_tipo_fuente,
-						rm_cajs[i].j10_num_fuente, 
-						rm_det[i].j10_tipo_destino,
-						rm_det[i].j10_num_destino
-					) RETURNING cuantos
+			--#BEFORE DISPLAY
+				--#CALL dialog.keysetlabel('ACCEPT','')
+				--#CALL dialog.keysetlabel("F1","")
+				--#CALL dialog.keysetlabel("CONTROL-W","")
+			--#BEFORE ROW
+				--#LET i = arr_curr()
+				--#LET j = scr_line()
+				--#CALL muestra_contadores_det(i, vm_num_det)
+				--#IF rm_det[i].j10_tipo_destino = 'EC' THEN
+					--#CALL dialog.keysetlabel("F5", "")
+				--#ELSE
+					--#CALL dialog.keysetlabel("F5", "Forma de Pago")
+				--#END IF
+				--#IF rm_det[i].j10_tipo_destino = 'FA' OR 
+				   --#rm_det[i].j10_tipo_destino = 'PG' OR
+				   --#rm_det[i].j10_tipo_destino = 'PR' OR
+				   --#rm_det[i].j10_tipo_destino = 'PA' OR
+				   --#rm_det[i].j10_tipo_destino = 'EC' THEN
+					--#CALL dialog.keysetlabel("F6", "Comprobante")
+				--#ELSE
+					--#CALL dialog.keysetlabel("F6","")
+				--#END IF
+				--#CALL contar_comprobantes(
+						--#rm_cajs[i].j10_tipo_fuente,
+						--#rm_cajs[i].j10_num_fuente, 
+						--#rm_det[i].j10_tipo_destino,
+						--#rm_det[i].j10_num_destino
+					--#) RETURNING cuantos
 							
-				IF cuantos > 0 THEN
-					CALL dialog.keysetlabel('F8', 
-						'Contabilización')
-				ELSE
-					CALL dialog.keysetlabel('F8', '')
-				END IF
-			AFTER DISPLAY 
-				CONTINUE DISPLAY
+				--#IF cuantos > 0 THEN
+					--#CALL dialog.keysetlabel('F8', 'Contabilización')
+				--#ELSE
+					--#CALL dialog.keysetlabel('F8', '')
+				--#END IF
+			--#AFTER DISPLAY 
+				--#CONTINUE DISPLAY
 			ON KEY(INTERRUPT)
 				LET int_flag = 1
 				EXIT DISPLAY
+        		ON KEY(F1,CONTROL-W)
+				CALL control_visor_teclas_caracter_1() 
 			ON KEY(F5)
+				LET i = arr_curr()
+				LET j = scr_line()
 				CALL ver_forma_pago(i)
 				LET int_flag = 0
 			ON KEY(F6)
+				LET i = arr_curr()
+				LET j = scr_line()
 				CALL fl_ver_comprobantes_emitidos_caja(
 					rm_cajs[i].j10_tipo_fuente, 
 					rm_cajs[i].j10_num_fuente, 
@@ -209,11 +299,15 @@ WHILE TRUE
 				        rm_cajs[i].j10_codcli)
 				LET int_flag = 0
 			ON KEY(F7)
+				LET i = arr_curr()
+				LET j = scr_line()
 				CALL imprime_comprobante(
 					rm_cajs[i].j10_tipo_fuente, 
 					rm_cajs[i].j10_num_fuente) 
 				LET int_flag = 0
 			ON KEY(F8)
+				LET i = arr_curr()
+				LET j = scr_line()
 				CALL mostrar_comp_contable(
 						rm_cajs[i].j10_tipo_fuente, 
 						rm_cajs[i].j10_num_fuente, 
@@ -273,18 +367,24 @@ DEFINE cod_aux		LIKE cajt002.j02_codigo_caja
 DEFINE nom_aux		LIKE cajt002.j02_nombre_caja
 DEFINE fecha_ini	DATE
 DEFINE fecha_fin	DATE
-DEFINE expr_sql		VARCHAR(400)
+DEFINE expr_sql		CHAR(400)
+DEFINE expr_sql3	CHAR(400)
 
 OPTIONS INPUT NO WRAP
-INITIALIZE cod_aux, expr_sql TO NULL
+INITIALIZE cod_aux, expr_sql, expr_sql3 TO NULL
 LET int_flag = 0
 INPUT BY NAME rm_caj.j10_codigo_caja, vm_fecha_ini, vm_fecha_fin
 	WITHOUT DEFAULTS
 	ON KEY(INTERRUPT)
 		LET int_flag = 1
-		RETURN NULL
+		EXIT INPUT
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
 	ON KEY(F2)
-		IF infield(j10_codigo_caja) THEN
+		IF rm_g05.g05_tipo = 'UF' THEN
+			CONTINUE INPUT
+		END IF
+		IF INFIELD(j10_codigo_caja) THEN
 			CALL fl_ayuda_cajas(vg_codcia, vg_codloc)
 				RETURNING cod_aux, nom_aux
 			OPTIONS INPUT NO WRAP
@@ -295,17 +395,38 @@ INPUT BY NAME rm_caj.j10_codigo_caja, vm_fecha_ini, vm_fecha_fin
 				DISPLAY nom_aux TO j02_nombre_caja
 			END IF 
 		END IF
+	BEFORE INPUT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 	BEFORE FIELD vm_fecha_ini
 		LET fecha_ini = vm_fecha_ini
 	BEFORE FIELD vm_fecha_fin
 		LET fecha_fin = vm_fecha_fin
+	BEFORE FIELD j10_codigo_caja
+		{--
+		IF rm_g05.g05_tipo = 'UF' THEN
+			LET r_caj.j02_codigo_caja = rm_caj.j10_codigo_caja
+		END IF
+		--}
 	AFTER FIELD j10_codigo_caja
+		{--
+		IF rm_g05.g05_tipo = 'UF' THEN
+			LET rm_caj.j10_codigo_caja = r_caj.j02_codigo_caja
+			CALL fl_lee_codigo_caja_caja(vg_codcia, vg_codloc,
+							rm_caj.j10_codigo_caja)
+                        	RETURNING r_caj.*
+			DISPLAY BY NAME rm_caj.j10_codigo_caja,
+					r_caj.j02_nombre_caja
+			CONTINUE INPUT
+		END IF
+		--}
 		IF rm_caj.j10_codigo_caja IS NOT NULL THEN
 			CALL fl_lee_codigo_caja_caja(vg_codcia, vg_codloc,
 							rm_caj.j10_codigo_caja)
                         	RETURNING r_caj.*
 			IF r_caj.j02_compania IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'Código de Caja no existe.','exclamation')
+				--CALL fgl_winmessage(vg_producto,'Código de Caja no existe.','exclamation')
+				CALL fl_mostrar_mensaje('Código de Caja no existe.','exclamation')
 				NEXT FIELD j10_codigo_caja
 			END IF
 			DISPLAY BY NAME r_caj.j02_nombre_caja
@@ -315,7 +436,8 @@ INPUT BY NAME rm_caj.j10_codigo_caja, vm_fecha_ini, vm_fecha_fin
 	AFTER FIELD vm_fecha_ini 
 		IF vm_fecha_ini IS NOT NULL THEN
 			IF vm_fecha_ini > TODAY THEN
-				CALL fgl_winmessage(vg_producto,'La fecha de inicio no puede ser mayor a la de hoy.','exclamation')
+				--CALL fgl_winmessage(vg_producto,'La fecha de inicio no puede ser mayor a la de hoy.','exclamation')
+				CALL fl_mostrar_mensaje('La fecha de inicio no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD vm_fecha_ini
 			END IF
 		ELSE
@@ -325,7 +447,8 @@ INPUT BY NAME rm_caj.j10_codigo_caja, vm_fecha_ini, vm_fecha_fin
 	AFTER FIELD vm_fecha_fin 
 		IF vm_fecha_fin IS NOT NULL THEN
 			IF vm_fecha_fin > TODAY THEN
-				CALL fgl_winmessage(vg_producto,'La fecha de término no puede ser mayor a la de hoy.','exclamation')
+				--CALL fgl_winmessage(vg_producto,'La fecha de término no puede ser mayor a la de hoy.','exclamation')
+				CALL fl_mostrar_mensaje('La fecha de término no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD vm_fecha_fin
 			END IF
 		ELSE
@@ -334,18 +457,39 @@ INPUT BY NAME rm_caj.j10_codigo_caja, vm_fecha_ini, vm_fecha_fin
 		END IF
 	AFTER INPUT
 		IF vm_fecha_ini > vm_fecha_fin THEN
-			CALL fgl_winmessage(vg_producto,'Fecha inicial debe ser menor a fecha final.','exclamation')
+			--CALL fgl_winmessage(vg_producto,'Fecha inicial debe ser menor a fecha final.','exclamation')
+			CALL fl_mostrar_mensaje('Fecha inicial debe ser menor a fecha final.','exclamation')
 			NEXT FIELD vm_fecha_ini
 		END IF
 END INPUT
-OPTIONS INPUT WRAP
-CONSTRUCT BY NAME expr_sql ON j10_nomcli, j10_tipo_destino, j11_codigo_pago,
-	j11_moneda, j11_valor
+IF int_flag THEN
+	RETURN expr_sql, expr_sql3
+END IF
+CONSTRUCT BY NAME expr_sql ON j10_nomcli, j10_tipo_destino
 	ON KEY(INTERRUPT)
 		LET int_flag = 2
-		RETURN NULL
+		EXIT CONSTRUCT
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
+	BEFORE CONSTRUCT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 END CONSTRUCT
-RETURN expr_sql
+IF int_flag THEN
+	RETURN expr_sql, expr_sql3
+END IF
+OPTIONS INPUT WRAP
+CONSTRUCT BY NAME expr_sql3 ON j11_codigo_pago, j11_moneda, j11_valor
+	ON KEY(INTERRUPT)
+		LET int_flag = 2
+		EXIT CONSTRUCT
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
+	BEFORE CONSTRUCT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
+END CONSTRUCT
+RETURN expr_sql, expr_sql3
 
 END FUNCTION
 
@@ -363,9 +507,10 @@ END FUNCTION
 FUNCTION borrar_detalle()
 DEFINE i  		SMALLINT
 
-CALL muestra_contadores_det(0)
-LET vm_scr_lin = fgl_scr_size('rm_det')
-FOR i = 1 TO vm_scr_lin
+CALL muestra_contadores_det(0, 0)
+CALL retorna_arreglo()
+
+FOR i = 1 TO vm_size_arr   
         INITIALIZE rm_det[i].*, rm_cajs[i].* TO NULL
         CLEAR rm_det[i].*
 END FOR
@@ -374,11 +519,10 @@ END FUNCTION
 
 
 
-FUNCTION muestra_contadores_det(cor)
-DEFINE cor	           SMALLINT
+FUNCTION muestra_contadores_det(num_row, max_row)
+DEFINE num_row, max_row	SMALLINT
 
-DISPLAY "" AT 21, 2
-DISPLAY cor, " de ", vm_num_det AT 21, 6
+DISPLAY BY NAME num_row, max_row
 
 END FUNCTION
 
@@ -386,13 +530,13 @@ END FUNCTION
  
 FUNCTION mostrar_cabecera_forma()
 
-DISPLAY 'Fecha'              TO tit_col1
-DISPLAY 'Cliente/Referencia' TO tit_col2
-DISPLAY 'DO'                 TO tit_col3
-DISPLAY 'Número'             TO tit_col4
-DISPLAY 'TP'                 TO tit_col5
-DISPLAY 'Mo'                 TO tit_col6
-DISPLAY 'Valor'              TO tit_col7
+--#DISPLAY 'Fecha'              TO tit_col1
+--#DISPLAY 'Cliente/Referencia' TO tit_col2
+--#DISPLAY 'DO'                 TO tit_col3
+--#DISPLAY 'Número'             TO tit_col4
+--#DISPLAY 'TP'                 TO tit_col5
+--#DISPLAY 'Mo'                 TO tit_col6
+--#DISPLAY 'Valor'              TO tit_col7
 
 END FUNCTION
 
@@ -401,14 +545,19 @@ END FUNCTION
 FUNCTION ver_forma_pago(i)
 DEFINE i		SMALLINT
 DEFINE prog		CHAR(10)
+DEFINE run_prog		CHAR(10)
 
 IF rm_det[i].j10_tipo_destino <> 'OI' THEN
 	LET prog = 'cajp203'
 ELSE
 	LET prog = 'cajp206'
 END IF
+LET run_prog = '; fglrun '
+IF vg_gui = 0 THEN
+	LET run_prog = '; fglgo '
+END IF
 LET vm_nuevoprog = 'cd ..', vg_separador, '..', vg_separador, 'CAJA',
-	vg_separador, 'fuentes', vg_separador, '; fglrun ', prog, ' ', vg_base,
+	vg_separador, 'fuentes', vg_separador, run_prog, prog, ' ', vg_base,
 	' ', vg_modulo, ' ', rm_cajs[i].j10_compania, ' ',
 	rm_cajs[i].j10_localidad, ' ', '"', rm_cajs[i].j10_tipo_fuente, '"',
 	' ', rm_cajs[i].j10_num_fuente
@@ -419,23 +568,24 @@ END FUNCTION
 
 
 FUNCTION imprime_comprobante(tipo_fuente, num_fuente)
-
-DEFINE comando                  VARCHAR(250)
-
-DEFINE tipo_fuente		LIKE cajt010.j10_tipo_fuente
-DEFINE num_fuente		LIKE cajt010.j10_num_fuente
-
+DEFINE comando          VARCHAR(250)
+DEFINE tipo_fuente	LIKE cajt010.j10_tipo_fuente
+DEFINE num_fuente	LIKE cajt010.j10_num_fuente
 DEFINE r_r23            RECORD LIKE rept023.*   -- Preventa Repuestos
 DEFINE r_v26            RECORD LIKE veht026.*   -- Preventa Vehiculos
 DEFINE r_t23            RECORD LIKE talt023.*   -- Orden de Trabajo
 DEFINE r_z24            RECORD LIKE cxct024.*   -- Solicitud Cobro Clientes
+DEFINE run_prog		CHAR(10)
 
 INITIALIZE comando TO NULL
+LET run_prog = '; fglrun '
+IF vg_gui = 0 THEN
+	LET run_prog = '; fglgo '
+END IF
 CASE tipo_fuente
         WHEN 'PV'
-                CALL fgl_winmessage(vg_producto,                
-			'Opcion no habilitada.',
-			'exclamation')
+                --CALL fgl_winmessage(vg_producto,'Opcion no habilitada.','exclamation')
+		CALL fl_mostrar_mensaje('Opcion no habilitada.','exclamation')
 
         WHEN 'PR'
                 CALL fl_lee_preventa_rep(vg_codcia, vg_codloc,
@@ -443,20 +593,18 @@ CASE tipo_fuente
 
                 LET comando = 'cd ..', vg_separador, '..', vg_separador,
                               'REPUESTOS', vg_separador, 'fuentes',
-                              vg_separador, '; fglrun repp410_', vg_codloc USING '&', ' ',
-							  vg_base, ' ',
-                              'RE', vg_codcia, ' ', vg_codloc,
-                              ' ', r_r23.r23_num_tran
-	display comando								  
+                              vg_separador, run_prog, 'repp410 ', vg_base, ' ',
+                              'RE', vg_codcia, ' ', vg_codloc, ' "',
+                              r_r23.r23_cod_tran, '" ', r_r23.r23_num_tran
         WHEN 'OT'
                 CALL fl_lee_orden_trabajo(vg_codcia, vg_codloc,
                         num_fuente) RETURNING r_t23.*
 
                 LET comando = 'cd ..', vg_separador, '..', vg_separador,
                               'TALLER', vg_separador, 'fuentes',
-                              vg_separador, '; fglrun talp403 ', vg_base, ' ',
-                              'TA', vg_codcia, ' ', vg_codloc,
-                              ' ', r_t23.t23_num_factura
+                              vg_separador, run_prog, 'talp403 ', vg_base, ' ',
+                              'TA', ' ', vg_codcia, ' ', vg_codloc, ' ',
+				r_t23.t23_num_factura
         WHEN 'SC'
                 CALL fl_lee_solicitud_cobro_cxc(vg_codcia, vg_codloc,
                                                 num_fuente)
@@ -464,32 +612,40 @@ CASE tipo_fuente
                 IF r_z24.z24_tipo = 'A' THEN
                         LET comando = 'cd ..', vg_separador, '..', vg_separador,
                                       'CAJA', vg_separador, 'fuentes',
-                                      vg_separador, '; fglrun cajp401 ',
+                                      vg_separador, run_prog, 'cajp401 ',
                                       vg_base, ' ', 'CG', vg_codcia, ' ',
                                       vg_codloc, ' ', r_z24.z24_numero_sol
                 ELSE
                         LET comando = 'cd ..', vg_separador, '..', vg_separador,
                                       'CAJA', vg_separador, 'fuentes',
-                                      vg_separador, '; fglrun cajp400_', vg_codloc USING '&', ' ',
+                                      vg_separador, run_prog, 'cajp400 ',
                                       vg_base, ' ', 'CG', vg_codcia, ' ',
                                       vg_codloc, ' ', r_z24.z24_numero_sol
                 END IF
         WHEN 'OI'
         	LET comando = 'cd ..', vg_separador, '..', vg_separador,
                               'CAJA', vg_separador, 'fuentes',
-                              vg_separador, '; fglrun cajp403 ',
+                              vg_separador, run_prog, 'cajp403 ',
                               vg_base, ' ', 'CG', vg_codcia, ' ',
                               vg_codloc, ' ', num_fuente             
         WHEN 'EC'
         	LET comando = 'cd ..', vg_separador, '..', vg_separador,
                               'CAJA', vg_separador, 'fuentes',
-                              vg_separador, '; fglrun cajp404 ',
+                              vg_separador, run_prog, 'cajp404 ',
                               vg_base, ' ', 'CG', vg_codcia, ' ',
                               vg_codloc, ' ', num_fuente             
 END CASE
 
 IF comando IS NOT NULL THEN
         RUN comando
+	IF tipo_fuente = 'OT' THEN
+		LET comando = 'cd ..', vg_separador, '..', vg_separador,
+ 			      'TALLER', vg_separador, 'fuentes', 
+			      vg_separador, run_prog, 'talp408 ', vg_base, ' ',
+			      'TA', ' ', vg_codcia, ' ', vg_codloc, ' ',
+			      r_t23.t23_orden
+		RUN comando
+	END IF 
 END IF
 
 END FUNCTION
@@ -497,16 +653,19 @@ END FUNCTION
 
 
 FUNCTION contabilizacion(tipo_comp, num_comp)
-
 DEFINE comando 		VARCHAR(255)
-
 DEFINE tipo_comp	LIKE ctbt012.b12_tipo_comp
 DEFINE num_comp		LIKE ctbt012.b12_num_comp
+DEFINE run_prog		CHAR(10)
 
+LET run_prog = '; fglrun '
+IF vg_gui = 0 THEN
+	LET run_prog = '; fglgo '
+END IF
 LET comando = 'cd ..', vg_separador, '..', vg_separador,
 	      'CONTABILIDAD', vg_separador, 'fuentes', 
-	      vg_separador, '; fglrun ctbp201 ', vg_base, ' ',
-	      'CB ', vg_codcia, ' ', vg_codloc, ' ' , tipo_comp, ' ', num_comp
+	      vg_separador, run_prog, 'ctbp201 ', vg_base, ' ',
+	      'CB ', vg_codcia, ' ', tipo_comp, ' ', num_comp
 
 RUN comando
 
@@ -582,7 +741,7 @@ DEFINE tipo_destino	LIKE cajt010.j10_tipo_destino
 DEFINE num_destino	LIKE cajt010.j10_num_destino
 DEFINE r_j10		RECORD LIKE cajt010.*
 
-DEFINE query 		VARCHAR(500)
+DEFINE query 		CHAR(500)
 
 DEFINE i       	 	SMALLINT
 
@@ -593,6 +752,10 @@ DEFINE r_det ARRAY[50] OF RECORD
 	fecha			LIKE ctbt012.b12_fec_proceso,
 	subtipo			LIKE ctbt004.b04_nombre
 END RECORD
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
 LET max_rows = 50
 
@@ -697,15 +860,32 @@ IF i = 1 THEN
 	RETURN r_det[1].tipo_comp, r_det[1].num_comp
 END IF
 
-OPEN WINDOW w_300_2 AT 10,10 WITH 09 ROWS, 60 COLUMNS
-    ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE 0, BORDER,
-	      MESSAGE LINE LAST - 2)
-OPEN FORM f_300_2 FROM '../forms/cajf300_2'
-DISPLAY FORM f_300_2
+IF vg_gui = 0 THEN
+	LET num_rows = 12
+END IF
+LET lin_menu = 0
+LET row_ini  = 10
+LET num_rows = 9
+LET num_cols = 60
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 9
+	LET num_rows = 11
+	LET num_cols = 61
+END IF
+OPEN WINDOW w_300_2 AT row_ini, 10 WITH num_rows ROWS, num_cols COLUMNS
+    ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE lin_menu,BORDER,
+	      MESSAGE LINE LAST - 1)
+IF vg_gui = 1 THEN
+        OPEN FORM f_302_2 FROM '../forms/cajf300_2'
+ELSE
+        OPEN FORM f_302_2 FROM '../forms/cajf300_2c'
+END IF
+DISPLAY FORM f_302_2
 
-DISPLAY 'Comprobante' TO bt_tipo_comp
-DISPLAY 'Fecha'       TO bt_fecha    
-DISPLAY 'Subtipo'     TO bt_subtipo  
+--#DISPLAY 'Comprobante' TO bt_tipo_comp
+--#DISPLAY 'Fecha'       TO bt_fecha    
+--#DISPLAY 'Subtipo'     TO bt_subtipo  
 
 IF i = 0 THEN
 	CALL fl_mensaje_consulta_sin_registros()
@@ -716,16 +896,21 @@ END IF
 
 CALL set_count(i)
 DISPLAY ARRAY r_det TO r_det.*
-	BEFORE DISPLAY
-		CALL dialog.keysetlabel('ACCEPT', '')
-	BEFORE ROW
-		LET i = arr_curr()
 	ON KEY(INTERRUPT)
 		EXIT DISPLAY
+       	ON KEY(F1,CONTROL-W)
+		CALL control_visor_teclas_caracter_2() 
 	ON KEY(F5)
+		LET i = arr_curr()
 		CALL contabilizacion(r_det[i].tipo_comp, r_det[i].num_comp)	
-	AFTER DISPLAY
-		CONTINUE DISPLAY
+	--#BEFORE DISPLAY
+		--#CALL dialog.keysetlabel('ACCEPT', '')
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
+	--#BEFORE ROW
+		--#LET i = arr_curr()
+	--#AFTER DISPLAY
+		--#CONTINUE DISPLAY
 END DISPLAY
 
 CLOSE WINDOW w_300_2
@@ -734,94 +919,81 @@ RETURN r_det[1].tipo_comp, r_det[1].num_comp
 END FUNCTION
 
 
-FUNCTION validar_parametros()
+FUNCTION retorna_arreglo()
 
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEn
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
+--#LET vm_size_arr = fgl_scr_size('rm_det')
+IF vg_gui = 0 THEN
+        LET vm_size_arr = 11
 END IF
 
 END FUNCTION
 
 
 
-FUNCTION fl_ver_comprobantes_emitidos_caja(tipo_fuente, num_fuente, tipo_destino, num_destino, codcli)
-DEFINE tipo_fuente	LIKE cajt010.j10_tipo_fuente
-DEFINE num_fuente	LIKE cajt010.j10_num_fuente
-DEFINE tipo_destino	LIKE cajt010.j10_tipo_destino
-DEFINE num_destino	LIKE cajt010.j10_num_destino
-DEFINE codcli		LIKE cajt010.j10_codcli	
-DEFINE rs		RECORD LIKE cxct024.*	
-DEFINE comando		VARCHAR(250)
+FUNCTION sacar_total()
+DEFINE i		SMALLINT
 
-LET comando = NULL
-CASE tipo_fuente
-	WHEN 'PV'
-		LET comando = 'cd ..', vg_separador, '..', vg_separador,
- 			      'VEHICULOS', vg_separador, 'fuentes', 
-			      vg_separador, '; fglrun vehp304 ', vg_base, ' ',
-			      'VE', vg_codcia, ' ', vg_codloc,
-			      ' ', tipo_destino, ' ', num_destino
-	WHEN 'PR'
-		LET comando = 'cd ..', vg_separador, '..', vg_separador,
- 			      'REPUESTOS', vg_separador, 'fuentes', 
-			      vg_separador, '; fglrun repp308 ', vg_base, ' ',
-			      'RE', vg_codcia, ' ', vg_codloc,
-			      ' ', tipo_destino, ' ', num_destino
-	WHEN 'OT'
-		LET comando = 'cd ..', vg_separador, '..', vg_separador,
- 			      'TALLER', vg_separador, 'fuentes', 
-			      vg_separador, '; fglrun talp204 ', vg_base, ' ',
-			      'TA ', vg_codcia, ' ', vg_codloc, ' ', 
-			      num_destino, ' F '
-	WHEN 'SC'
-		CALL fl_lee_solicitud_cobro_cxc(vg_codcia, vg_codloc, num_fuente)
-			RETURNING rs.*
-		CASE rs.z24_tipo 
-			WHEN 'P'
-		LET comando = 'cd ..', vg_separador, '..', vg_separador,
- 			      'COBRANZAS', vg_separador, 'fuentes', 
-			      vg_separador, '; fglrun cxcp202 ', vg_base, ' ',
-			      'CO ', vg_codcia, ' ', vg_codloc, ' ', 
-			      codcli, ' ', tipo_destino, ' ', num_destino
-			WHEN 'A'
-		LET comando = 'cd ..', vg_separador, '..', vg_separador,
- 			      'COBRANZAS', vg_separador, 'fuentes', 
-			      vg_separador, '; fglrun cxcp201 ', vg_base, ' ',
-			      'CO ', vg_codcia, ' ', vg_codloc, ' ', 
-			      codcli, ' ', tipo_destino, ' ', num_destino
-		END CASE
-	WHEN 'EC'
-		LET comando = 'cd ..', vg_separador, '..', vg_separador,
- 			      'CAJA', vg_separador, 'fuentes', 
-			      vg_separador, '; fglrun cajp207 ', vg_base, ' ',
-			      'CG ', vg_codcia, ' ', vg_codloc, ' ',  
-			      tipo_fuente, num_fuente
-END CASE
-IF comando IS NOT NULL THEN
-	RUN comando
+LET vm_total = 0
+FOR i = 1 TO vm_num_det
+	IF rm_det[i].j11_valor IS NOT NULL THEN
+		LET vm_total = vm_total + rm_det[i].j11_valor
+	END IF
+END FOR
+DISPLAY BY NAME vm_total
+
+END FUNCTION
+
+
+
+FUNCTION llamar_visor_teclas()
+DEFINE a		CHAR(1)
+
+IF vg_gui = 0 THEN
+	CALL fl_visor_teclas_caracter() RETURNING int_flag 
+	LET a = fgl_getkey()
+	CLOSE WINDOW w_tf
+	LET int_flag = 0
 END IF
+
+END FUNCTION
+
+
+
+FUNCTION control_visor_teclas_caracter_1() 
+DEFINE a, fila		INTEGER
+
+CALL fl_visor_teclas_caracter() RETURNING fila
+LET a = fila + 2
+DISPLAY 'Teclas exclusivas de este proceso:' AT a,2 ATTRIBUTE(REVERSE)	
+LET a = a + 1
+DISPLAY '<F5>      Ver Forma de Pago'        AT a,2
+DISPLAY  'F5' AT a,3 ATTRIBUTE(REVERSE)
+LET a = a + 1
+DISPLAY '<F6>      Comprobante Emitido por Caja' AT a,2
+DISPLAY  'F6' AT a,3 ATTRIBUTE(REVERSE)
+LET a = a + 1
+DISPLAY '<F7>      Imprime Comprobante'      AT a,2
+DISPLAY  'F7' AT a,3 ATTRIBUTE(REVERSE)
+LET a = a + 1
+DISPLAY '<F8>      Contabilización'          AT a,2
+DISPLAY  'F8' AT a,3 ATTRIBUTE(REVERSE)
+LET a = fgl_getkey()
+CLOSE WINDOW w_tf
+
+END FUNCTION
+
+
+
+FUNCTION control_visor_teclas_caracter_2() 
+DEFINE a, fila		INTEGER
+
+CALL fl_visor_teclas_caracter() RETURNING fila
+LET a = fila + 2
+DISPLAY 'Teclas exclusivas de este proceso:' AT a,2 ATTRIBUTE(REVERSE)	
+LET a = a + 1
+DISPLAY '<F5>      Ver Comprobante'          AT a,2
+DISPLAY  'F5' AT a,3 ATTRIBUTE(REVERSE)
+LET a = fgl_getkey()
+CLOSE WINDOW w_tf
 
 END FUNCTION

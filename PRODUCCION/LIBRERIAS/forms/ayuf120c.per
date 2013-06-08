@@ -1,0 +1,29 @@
+DATABASE aceros
+SCREEN
+{
+  TRANSACCIONES TESORERIA
+ --------------------------------------------------
+  TD Número Proveedor  
+ --------------------------------------------------
+ [c0|c001  |c002                                  ]
+ [c0|c001  |c002                                  ]
+ [c0|c001  |c002                                  ]
+ [c0|c001  |c002                                  ]
+ [c0|c001  |c002                                  ]
+ [c0|c001  |c002                                  ]
+ [c0|c001  |c002                                  ]
+ [c0|c001  |c002                                  ]
+ [c0|c001  |c002                                  ]
+ [c0|c001  |c002                                  ]
+}
+TABLES
+cxpt001
+cxpt022
+ATTRIBUTES
+c0   = p22_tipo_trn, UPSHIFT, REVERSE;
+c001 = p22_num_trn, UPSHIFT, REVERSE;
+c002 = p01_nomprov, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_trantes[10] (p22_tipo_trn, p22_num_trn, p01_nomprov)

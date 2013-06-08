@@ -1,0 +1,34 @@
+database aceros
+screen 
+{
+             Ingrese Otros Ingresos y Descuentos
+            -------------------------------------
+ [lbl1                                         |lbl2            ]
+[c000                                         |c001            ]
+[c000                                         |c001            ]
+[c000                                         |c001            ]
+[c000                                         |c001            ]
+[c000                                         |c001            ]
+[c000                                         |c001            ]
+                                              [c100            ]
+}
+end
+tables
+rolt073
+attributes
+c000 = rolt073.n73_rubro, OPTIONS='-nolist', REVERSE;
+c001 = rolt073.n73_valor, OPTIONS='-nolist', 
+			REVERSE, FORMAT='-,---,---,--&.##',
+			COLOR=RED WHERE c001 < 0;
+
+c100 = formonly.tot_valor TYPE DECIMAL(11,2) NOT NULL, NOENTRY, REVERSE, 
+			FORMAT='-,---,---,--&.##',
+			COLOR=RED WHERE c100 < 0;
+
+lbl1 = formonly.bt_rubro,    WIDGET='BUTTON', CONFIG='F15';
+lbl2 = formonly.bt_valor,    WIDGET='BUTTON', CONFIG='F16';
+
+end
+
+instructions
+screen record ra_scr[6] (n73_rubro, n73_valor) 

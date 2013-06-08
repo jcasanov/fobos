@@ -1,32 +1,35 @@
-DATABASE diteca
-
+DATABASE aceros
 SCREEN
 {
- PRESUPUESTOS DE TALLER
------------------------------------------------
- Presup  Cliente  Nombre
------------------------------------------------
-[c01   ][c001  ][c002                       ] 
-[c01   ][c001  ][c002                       ]
-[c01   ][c001  ][c002                       ]
-[c01   ][c001  ][c002                       ]
-[c01   ][c001  ][c002                       ]
-[c01   ][c001  ][c002                       ]
-[c01   ][c001  ][c002                       ] 
-[c01   ][c001  ][c002                       ] 
-[c01   ][c001  ][c002                       ] 
-[c01   ][c001  ][c002                       ] 
+
+ PRESUPUESTOS DE TALLERES
+
+ [lbl1  |lbl2  |lbl3                                     ]
+[c001  |c002  |c003                                     ]
+[c001  |c002  |c003                                     ]
+[c001  |c002  |c003                                     ]
+[c001  |c002  |c003                                     ]
+[c001  |c002  |c003                                     ]
+[c001  |c002  |c003                                     ]
+[c001  |c002  |c003                                     ]
+[c001  |c002  |c003                                     ]
+[c001  |c002  |c003                                     ]
+[c001  |c002  |c003                                     ]
 }
 
 TABLES
 talt020
-talt023
 
 ATTRIBUTES
-c01  = t20_numpre;
-c001 = t23_cod_cliente;
-c002 = t23_nom_cliente;
+c001 = t20_numpre, UPSHIFT;
+c002 = t20_cod_cliente,  UPSHIFT;
+c003 = t20_nom_cliente,  UPSHIFT;
+
+lbl1 = formonly.bt_presupuesto, NOENTRY, WIDGET='BUTTON', CONFIG='F15';
+lbl2 = formonly.bt_cliente,    	NOENTRY, WIDGET='BUTTON', CONFIG='F16';
+lbl3 = formonly.bt_nombre,      NOENTRY, WIDGET='BUTTON', CONFIG='F17';
 END
 
 INSTRUCTIONS
-SCREEN RECORD rh_pretal[10](t20_numpre, t23_cod_cliente, t23_nom_cliente)
+SCREEN RECORD rh_pretal[10](t20_numpre, t20_cod_cliente, t20_nom_cliente)
+

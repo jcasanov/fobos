@@ -52,7 +52,7 @@ DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
 CALL startlog('../logs/errores')
-CALL fgl_init4js()
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN          -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
@@ -65,8 +65,8 @@ LET vg_codloc   = arg_val(4)
 LET vg_proceso = 'cxpp301'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -144,7 +144,7 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 		CLOSE FORM f_par
 		RETURN
 	ON KEY(F2)
-		IF infield(moneda) THEN
+		IF INFIELD(moneda) THEN
 			CALL fl_ayuda_monedas() RETURNING mon_aux, tit_mon, num
 			IF mon_aux IS NOT NULL THEN
 				LET rm_par.moneda  = mon_aux
@@ -152,7 +152,7 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 				DISPLAY BY NAME rm_par.moneda, rm_par.tit_mon
 			END IF
 		END IF
-		IF infield(tipprov) THEN
+		IF INFIELD(tipprov) THEN
 			CALL fl_ayuda_subtipo_entidad('TP') 
 				RETURNING tiporeg, subtipo, nomtipo, nombre
 			IF nomtipo IS NOT NULL THEN
@@ -318,7 +318,7 @@ WHILE TRUE
 	LET int_flag = 0
 	DISPLAY ARRAY rm_prov TO rm_prov.*
 		BEFORE DISPLAY 
-			CALL dialog.keysetlabel("ACCEPT","")
+			--#CALL dialog.keysetlabel("ACCEPT","")
 		AFTER DISPLAY 
 			CONTINUE DISPLAY
 		BEFORE ROW
@@ -372,7 +372,7 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION no_validar_parametros()
 
 CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
 IF rg_mod.g50_modulo IS NULL THEN

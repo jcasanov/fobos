@@ -1,39 +1,82 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
   
-                    Moneda: [a0]     [c001           ]
+      Moneda: [a0]       [c001           ]
+      Bodega: [a1]       [c002                          ]
 
-                    Bodega: [a1]     [c002                          ]
+   Div. Ini.: [d]        [c004                     ]
+   Div. Fin.: [e]        [c005                     ]
+  Línea Ini.: [f5]       [f054                               ]
+  Línea Fin.: [f6]       [f055                               ]
+  Grupo Ini.: [f55]      [f066                                    ]
+  Grupo Fin.: [f56]      [f067                                    ]
+  Clase Ini.: [f057    ] [f078                                              ]
+  Clase Fin.: [f058    ] [f079                                              ]
+  Marca Ini.: [f59   ]   [f080                               ]
+  Marca Fin.: [f60   ]   [f081                               ]
 
-               Línea Venta: [c003 ]  [c004                          ]
+  Con Stock Total Mayor a Cero?: [c]    Año: [c007]    Mes: [c8] [c071      ]
 
-          Tipo de Artículo: [c005  ] [c006      ]
-
-  Con Stock Mayor a Cero ?: [c]         Año: [c007]         Mes: [c8]
-
- Detenerse al alcanzar los: [c010            ]
+  Con Stock Local Mayor a Cero?: [g]      Mostrar Precios?: [f]
 
 }
 TABLES
-rept010, rept011, rept031
+rept010
+rept011
+rept031
 ATTRIBUTES
-a0   = FORMONLY.vm_moneda, AUTONEXT, REVERSE, UPSHIFT,
+a0   = FORMONLY.vm_moneda NOT NULL, REQUIRED, AUTONEXT, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 c001 = FORMONLY.tit_moneda, NOENTRY, REVERSE, UPSHIFT;
-a1   = formonly.r11_bodega, AUTONEXT, UPSHIFT,
+a1   = FORMONLY.r11_bodega, AUTONEXT, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c002 = FORMONLY.tit_bodega, NOENTRY, REVERSE, UPSHIFT;
-c003 = rept010.r10_linea, AUTONEXT, REVERSE, UPSHIFT,
+c002 = FORMONLY.tit_bodega, NOENTRY, UPSHIFT;
+
+d    = rept010.r10_linea, AUTONEXT, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 c004 = FORMONLY.tit_linea, NOENTRY, REVERSE, UPSHIFT;
-c005 = FORMONLY.r10_tipo, AUTONEXT, UPSHIFT,
+e    = FORMONLY.r10_linea2 NOT NULL, REQUIRED, AUTONEXT, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c006 = FORMONLY.tit_tipo, NOENTRY, UPSHIFT;
-c    = FORMONLY.tit_stock_may, AUTONEXT, UPSHIFT,
+c005 = FORMONLY.tit_linea2, NOENTRY, REVERSE, UPSHIFT;
+
+f5   = FORMONLY.r10_sub_linea, AUTONEXT, UPSHIFT, 
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f054 = FORMONLY.tit_sub_linea, NOENTRY, UPSHIFT;
+f6   = FORMONLY.r10_sub_linea2, AUTONEXT, UPSHIFT, 
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f055 = FORMONLY.tit_sub_linea2, NOENTRY, UPSHIFT;
+
+f55  = FORMONLY.r10_cod_grupo, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f066 = FORMONLY.tit_grupo, NOENTRY, UPSHIFT;
+f56  = FORMONLY.r10_cod_grupo2, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f067 = FORMONLY.tit_grupo2, NOENTRY, UPSHIFT;
+
+f057 = FORMONLY.r10_cod_clase, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f078 = FORMONLY.tit_clase, NOENTRY, UPSHIFT;
+f058 = FORMONLY.r10_cod_clase2, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f079 = FORMONLY.tit_clase2, NOENTRY, UPSHIFT;
+
+f59  = FORMONLY.r10_marca, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f080 = FORMONLY.tit_marca, NOENTRY, UPSHIFT;
+f60  = FORMONLY.r10_marca2, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f081 = FORMONLY.tit_marca2, NOENTRY, UPSHIFT;
+
+c    = FORMONLY.vm_stock_tot TYPE CHAR NOT NULL, AUTONEXT, UPSHIFT,
 	WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
 c007 = rept031.r31_ano, AUTONEXT, REVERSE, UPSHIFT, INCLUDE = (1900 TO 9999);
-c8   = rept031.r31_mes, AUTONEXT, REVERSE, UPSHIFT, INCLUDE = (1 TO 12);
-c010 = formonly.vm_max_costo TYPE DECIMAL(12,2), FORMAT = '#,###,###,##&.##', 
-       COMMENT='Ingrese 0 para mostrar todo.';
+c8   = rept031.r31_mes, AUTONEXT, REVERSE, UPSHIFT, INCLUDE = (1 TO 12),
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c071 = FORMONLY.tit_mes, NOENTRY, UPSHIFT, REVERSE;
+
+g    = FORMONLY.vm_stock_loc TYPE CHAR NOT NULL, AUTONEXT, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+f    = FORMONLY.vm_precios TYPE CHAR NOT NULL, AUTONEXT, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
 END

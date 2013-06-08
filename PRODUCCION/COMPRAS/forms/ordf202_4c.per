@@ -1,0 +1,39 @@
+DATABASE aceros
+SCREEN 
+{
+
+ Glosa: [c060                                                               ]
+
+     Cuenta              Descripción             Débtio           Crédito
+ [c018        ] [a4                       |c020            |c021            ]
+ [c018        ] [a4                       |c020            |c021            ]
+ [c018        ] [a4                       |c020            |c021            ]
+ [c018        ] [a4                       |c020            |c021            ]
+ [c018        ] [a4                       |c020            |c021            ]
+ [c018        ] [a4                       |c020            |c021            ]
+ [c018        ] [a4                       |c020            |c021            ]
+                                          [c050            |c051            ]
+
+}
+TABLES
+ctbt012
+ctbt013
+ATTRIBUTES
+c060 = ctbt012.b12_glosa, REVERSE, UPSHIFT;
+c050 = FORMONLY.tot_debito TYPE DECIMAL (12,2), NOENTRY,
+	FORMAT='#,###,###,##&.##';
+c051 = FORMONLY.tot_credito TYPE DECIMAL (12,2), NOENTRY,
+	FORMAT='#,###,###,##&.##';
+
+c018 = ctbt013.b13_cuenta, UPSHIFT, REVERSE,
+	COMMENTS='Digite cuenta de gastos.';
+a4   = FORMONLY.n_cuenta TYPE VARCHAR, UPSHIFT, NOENTRY;
+c020 = FORMONLY.valor_db TYPE DECIMAL (12,2),  
+	FORMAT='#,###,###,##&.##', INCLUDE=(0 TO 9999999999.99);
+c021 = FORMONLY.valor_cr TYPE DECIMAL (12,2), 
+	FORMAT='#,###,###,##&.##', INCLUDE=(0 TO 9999999999.99);
+
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_ctas[7] (b13_cuenta, n_cuenta, valor_db, valor_cr)

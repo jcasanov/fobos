@@ -1,0 +1,42 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+                         MOVIMIENTOS DE ITEMS
+
+       Item: [c001            ] [c002                         ] 
+     Bodega: [c03                      ]
+    Período: [c003      ] - [c04       ]      Moneda: [c05           ]
+
+    Fecha    TP No. Documento       Cliente       Uni.       Valor
+[c004       |c5|c006       |c007               |c008   |c009          ] 
+[c004       |c5|c006       |c007               |c008   |c009          ] 
+[c004       |c5|c006       |c007               |c008   |c009          ] 
+[c004       |c5|c006       |c007               |c008   |c009          ] 
+[c004       |c5|c006       |c007               |c008   |c009          ] 
+[c004       |c5|c006       |c007               |c008   |c009          ] 
+[c004       |c5|c006       |c007               |c008   |c009          ] 
+[c004       |c5|c006       |c007               |c008   |c009          ] 
+[c004       |c5|c006       |c007               |c008   |c009          ] 
+                                                 [c010 |c011          ]
+}
+ATTRIBUTES
+c001 = FORMONLY.item, REVERSE;
+c002 = FORMONLY.name_item, REVERSE;
+c03  = FORMONLY.tit_bod;
+c003 = FORMONLY.fec_ini TYPE DATE, FORMAT = 'dd-mm-yyyy';
+c04  = FORMONLY.fec_fin TYPE DATE, FORMAT = 'dd-mm-yyyy';
+c05  = FORMONLY.tit_mon;
+c004 = FORMONLY.fecha   TYPE DATE, FORMAT = 'dd-mm-yyyy';
+c5   = FORMONLY.tipo;
+c006 = FORMONLY.numero;
+c007 = FORMONLY.cliente;
+c008 = FORMONLY.unidades TYPE DECIMAL, FORMAT = '###&.##';
+c009 = FORMONLY.valor TYPE DECIMAL(12,2), FORMAT = '---,---,--&.##';
+c010 = FORMONLY.tot_uni TYPE INTEGER, FORMAT = '----&', REVERSE;
+c011 = FORMONLY.tot_val TYPE DECIMAL(12,2), FORMAT = '---,---,--&.##', REVERSE;
+end
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_mov[9] (FORMONLY.fecha, formonly.tipo, formonly.numero, 
+			 FORMONLY.cliente, formonly.unidades, formonly.valor)

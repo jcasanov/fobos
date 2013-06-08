@@ -1,0 +1,38 @@
+DATABASE aceros
+SCREEN
+{
+
+ Item: [c001           ]
+       [c002                               ]
+       [c002                               ]
+
+ [lbl0                |lbl1               |d]
+[c003                |c004               |c]
+[c003                |c004               |c]
+[c003                |c004               |c]
+[c003                |c004               |c]
+[c003                |c004               |c]
+[c003                |c004               |c]
+[c003                |c004               |c]
+[c003                |c004               |c]
+
+}
+TABLES
+rept076
+rept010
+ATTRIBUTES
+c001 = rept076.r76_item, NOENTRY, UPSHIFT, REVERSE;
+c002 = rept010.r10_nombre, NOENTRY, UPSHIFT, REVERSE, WORDWRAP;
+
+lbl0 = formonly.bt_serie, 	 WIDGET='BUTTON', CONFIG='F15';
+lbl1 = formonly.bt_fecha,	 WIDGET='BUTTON', CONFIG='F16';
+d    = formonly.bt_check,	 WIDGET='BUTTON', CONFIG='F17';
+
+c003 = rept076.r76_serie, NOENTRY, UPSHIFT, REVERSE, OPTIONS='-nolist';
+c004 = FORMONLY.r76_fecing TYPE DATE, FORMAT = 'dd-mm-yyyy', NOENTRY, UPSHIFT,
+	REVERSE, OPTIONS='-nolist';
+c    = FORMONLY.check TYPE CHAR, AUTONEXT, UPSHIFT, REVERSE, OPTIONS='-nolist',
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+END
+INSTRUCTIONS
+SCREEN RECORD r_serie[8] (r76_serie, r76_fecing, check)

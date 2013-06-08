@@ -1,0 +1,57 @@
+DATABASE aceros
+SCREEN
+{
+
+             Moneda: [c0] [c1             ]
+
+              Línea: [c7   ] [c8                  ]
+
+       Tipo de O.T.: [e] [c5                                     ]
+
+     Desde la Fecha: [c2        ]      Hasta la Fecha: [c3        ]
+
+             Estado: [c|c10      ]               Tipo: [d|c11     ]  
+	                                                        
+                                     Listado solo del Taller ?: [g]
+                    Incluir FA de Inventario fuera de fechas ?: [f]
+
+}
+TABLES
+	talt023, talt004
+ATTRIBUTES
+
+c0  = talt023.t23_moneda, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c1  = FORMONLY.nom_mon, REVERSE, NOENTRY;
+c2  = FORMONLY.fecha_desde TYPE DATE, REQUIRED, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la fecha en formato: dd/mm/aaaa';
+c3  = FORMONLY.fecha_hasta TYPE DATE, REQUIRED, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la fecha en formato: dd/mm/aaaa';
+e   = talt023.t23_tipo_ot, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c5  = FORMONLY.nom_tipo_ot, REVERSE, NOENTRY;
+
+-- UBICADO POR NPC EL 14-08-2002 para solicitar el estado en la forma
+c   = talt023.t23_estado, REVERSE, UPSHIFT, AUTONEXT,
+	INCLUDE = ('F', 'D', 'N', 'T'), DEFAULT = 'T',
+	COMMENTS = '(F)Facturadas (D)Devueltas (N)Anuladas (T)Ventas';
+c10 = FORMONLY.tit_estado,REVERSE, UPSHIFT, NOENTRY;
+c7  = FORMONLY.t04_linea, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c8  = FORMONLY.t01_nombre, REVERSE, NOENTRY;
+--
+
+-- Incluido por NPC el 06-09-2002
+d    = talt023.t23_cont_cred, AUTONEXT, REVERSE, UPSHIFT,
+	INCLUDE = ('C', 'R', 'T'), DEFAULT = 'T',
+	COMMENTS = 'Indicar el tipo de orden de trabajo débito (C), crédito (R) o todas (T)';
+c11 = FORMONLY.tit_cont_cred, REVERSE, UPSHIFT, NOENTRY;
+--
+
+f    = FORMONLY.todo_inv TYPE CHAR NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = ('S', 'N'), COMMENTS = 'Digite (S) o (N)';
+g    = FORMONLY.solo_tal TYPE CHAR NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = ('S', 'N'), COMMENTS = 'Digite (S) o (N)';
+END
+INSTRUCTIONS
+DELIMITERS '||'

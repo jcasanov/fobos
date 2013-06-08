@@ -1,0 +1,48 @@
+DATABASE FORMONLY
+SCREEN
+{
+                   FACTURAS CRUZADAS POR BODEGA SIN STOCK
+                   -------------------------------------
+   Item: [c000  |c001                                              ]
+         [c002                                                             ]
+
+                                                              [c003] de [c004]
+ [c011   |c012      |c013      |c014      |c015                       |c016   ]
+[c021   |c022      |c023      |c024      |c025                       |c026   ]
+[c021   |c022      |c023      |c024      |c025                       |c026   ]
+[c021   |c022      |c023      |c024      |c025                       |c026   ]
+[c021   |c022      |c023      |c024      |c025                       |c026   ]
+[c021   |c022      |c023      |c024      |c025                       |c026   ]
+[c021   |c022      |c023      |c024      |c025                       |c026   ]
+[c021   |c022      |c023      |c024      |c025                       |c026   ]
+[c021   |c022      |c023      |c024      |c025                       |c026   ]
+[c021   |c022      |c023      |c024      |c025                       |c026   ]
+}
+ATTRIBUTES
+c000 = FORMONLY.item TYPE CHAR, NOENTRY, UPSHIFT;
+c001 = FORMONLY.descrip_4, NOENTRY, UPSHIFT;
+c002 = FORMONLY.nom_item,  NOENTRY, UPSHIFT, REVERSE;
+c003 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c004 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c011 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c012 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c013 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c014 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c015 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c016 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+c021 = FORMONLY.num_fact TYPE DECIMAL, NOENTRY, UPSHIFT;
+c022 = FORMONLY.fec_fact TYPE DATE, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c023 = FORMONLY.cant_cruc TYPE DECIMAL, NOENTRY, UPSHIFT, FORMAT = '---,--&.##';
+c024 = FORMONLY.cant_pend TYPE DECIMAL, NOENTRY, UPSHIFT, FORMAT = '---,--&.##';
+c025 = FORMONLY.cliente TYPE VARCHAR, NOENTRY, UPSHIFT;
+c026 = FORMONLY.num_tran TYPE DECIMAL, NOENTRY, UPSHIFT;
+END
+KEYS
+F5 = 'Factura'
+F6 = 'Transferencia'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_detcru[9] (num_fact, fec_fact, cant_cruc, cant_pend, cliente,
+				num_tran)

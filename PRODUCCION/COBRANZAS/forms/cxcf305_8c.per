@@ -1,0 +1,39 @@
+DATABASE aceros
+SCREEN
+{
+
+                      CHEQUES PROTESTADOS
+
+ Cliente: [c004      ][c005                                    ]
+  Moneda: [a0][c001           ]
+
+   Fecha         Banco        Número Cheque     Valor Cheque
+[c010      |c011            |c012            |c013            ]
+[c010      |c011            |c012            |c013            ]
+[c010      |c011            |c012            |c013            ]
+[c010      |c011            |c012            |c013            ]
+[c010      |c011            |c012            |c013            ]
+[c010      |c011            |c012            |c013            ]
+[c010      |c011            |c012            |c013            ]
+[c010      |c011            |c012            |c013            ]
+                                      Total: [c014            ]
+
+}
+TABLES
+cajt012, cxct001, gent008
+ATTRIBUTES
+a0   = cajt012.j12_moneda, NOENTRY, REVERSE, UPSHIFT;
+c001 = FORMONLY.tit_moneda, NOENTRY, REVERSE, UPSHIFT;
+c004 = FORMONLY.j12_codcli, NOENTRY, REVERSE, UPSHIFT;
+c005 = FORMONLY.tit_nombre_cli, NOENTRY, REVERSE, UPSHIFT;
+
+c010 = FORMONLY.j12_fecing TYPE DATE, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c011 = gent008.g08_nombre, NOENTRY, UPSHIFT;
+c012 = cajt012.j12_num_cheque, NOENTRY, UPSHIFT;
+c013 = cajt012.j12_valor, NOENTRY, UPSHIFT, FORMAT = '#,###,###,##&.##';
+c014 = FORMONLY.tit_total TYPE DECIMAL (12,2), NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = '#,###,###,##&.##';
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_chpr[8] (j12_fecing, g08_nombre, j12_num_cheque, j12_valor)

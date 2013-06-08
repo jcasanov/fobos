@@ -1,8 +1,8 @@
-database diteca
-screen 
+DATABASE aceros
+SCREEN 
 {
 
-	      Línea de Venta: [f002 ] [a1                    ]
+    	            División: [f002 ] [a1                    ]
         	      Moneda: [a0] [a2                       ]
     	    	Tipo Factura: [a          ]
 
@@ -18,22 +18,21 @@ screen
 		   [f003           |f004           |f005 ]%
 
 }
-end
 TABLES
 	rept007
 ATTRIBUTES
 		     ---- BOTONES ----
-b0  = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-b1  = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-b2  = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+b0  = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+b1  = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b2  = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
 
 f002 = rept007.r07_linea, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-a1   = formonly.nom_linea TYPE VARCHAR, NOENTRY;
+a1   = FORMONLY.nom_linea TYPE VARCHAR, NOENTRY;
 a0   = rept007.r07_moneda, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
 	COMMENT = ' Moneda Base ó Moneda Alterna. ';
-a2   = formonly.nom_mon TYPE VARCHAR, NOENTRY;
+a2   = FORMONLY.nom_mon TYPE VARCHAR, NOENTRY;
 a    = rept007.r07_cont_cred, REVERSE, 
 	WIDGET = 'RADIO', CONFIG = 'C Contado R Crédito';
 f003 = rept007.r07_monto_ini, REVERSE, FORMAT = '###,###,##&.##',

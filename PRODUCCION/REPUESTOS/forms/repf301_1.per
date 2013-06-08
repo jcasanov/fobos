@@ -1,5 +1,4 @@
-
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
               Moneda:[c0] [c1             ]   Tipo Transacción:[c2           ]
@@ -52,7 +51,7 @@ c5  = FORMONLY.fecha TYPE DATE, FORMAT = 'dd-mm-yyyy',
 	OPTIONS = '-nolist';
 c6  = FORMONLY.tipo_tran TYPE VARCHAR, OPTIONS = '-nolist';
 c7  = FORMONLY.num_tran TYPE DECIMAL(15,0), OPTIONS = '-nolist';
-c8  = FORMONLY.siglas_vend TYPE VARCHAR, OPTIONS = '-nolist';
+c8  = FORMONLY.siglas_vEND TYPE VARCHAR, OPTIONS = '-nolist';
 c9  = FORMONLY.tot_sin_impto TYPE DECIMAL(12,2),  
 	FORMAT = '#,###,###,##&.##', OPTIONS = '-nolist';
 c10 = FORMONLY.tot_costo TYPE DECIMAL(11,2),  
@@ -66,7 +65,7 @@ c13 = FORMONLY.utilidad_desde TYPE DECIMAL(6,2), REVERSE, FORMAT = '-,--&.##',
 c14 = FORMONLY.utilidad_hasta TYPE DECIMAL(6,2), REVERSE, FORMAT = '#,##&.##',
 	INCLUDE = (NULL, 0.00 TO 9999.99); 
 
-END
+end
 
 KEYS 
 	F5 = 'Comprobante'

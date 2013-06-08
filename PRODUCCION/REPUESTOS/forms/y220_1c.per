@@ -1,0 +1,81 @@
+DATABASE aceros
+SCREEN
+{
+No Proforma:[c01  ]                          Fecha:[c02                ]
+     Moneda:[c3] [c04                ]       Días Validez:[c05  ]  
+Cód.Cliente:[c06  ]                              Impuesto:[c07  ]%    
+    Nombres:[c08                            ] Ced/RUC/Pas:[c09             ]
+  Dirección:[c10                            ]    Teléfono:[c11            ] 
+ Atencion a:[c12                            ]
+Entregar en:[c13                            ]  Forma Pago:[c14            ] 
+   Vendedor:[c15] [c16                      ]                    
+
+ Bd.  Item            E.N. E.L.  Cant.  Desc.  Precio Unit.       Subtotal
+[y1] [c050           |c051|c052][c053] [c054 |c055         |c056          ] 
+[y1] [c050           |c051|c052][c053] [c054 |c055         |c056          ]
+[y1] [c050           |c051|c052][c053] [c054 |c055         |c056          ]
+[y1] [c050           |c051|c052][c053] [c054 |c055         |c056          ]
+[c070                                ]            Subtotal:[c060          ]
+[c071                                ]           Descuento:[c061          ]
+[c072                                ]            Impuesto:[c062          ]
+[c073                                ]                Neto:[c063          ]
+[c074                                                             ]
+}
+TABLES
+	rept021
+	rept022
+ATTRIBUTES
+c01  = r21_numprof, REVERSE, NOENTRY,          
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c02  = r21_fecing, REVERSE, NOENTRY;
+c3   = r21_moneda, REVERSE, UPSHIFT,           
+       COMMENTS = 'Moneda Base o Moneda Alterna. '; 
+c04  = formonly.nom_moneda TYPE VARCHAR, NOENTRY;      
+c05  = r21_dias_prof, REVERSE, NOENTRY;
+c06  = r21_codcli, REQUIRED, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c07  = r21_porc_impto, REVERSE, NOENTRY, FORMAT = '#&.##';
+c08  = r21_nomcli, REVERSE, UPSHIFT;
+c09  = r21_cedruc, REVERSE, UPSHIFT, COMMENTS = 'Cédula o RUC del cliente. ';
+c10  = r21_dircli, REVERSE, UPSHIFT,
+       COMMENTS = 'Dirección del domicilio del cliente.';
+c11  = r21_telcli;
+c12  = r21_atencion, REVERSE, UPSHIFT;
+c13  = r21_referencia, REVERSE, UPSHIFT;
+c14  = r21_forma_pago, REVERSE, UPSHIFT;
+c15  = r21_vendedor, UPSHIFT, REVERSE, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c16  = formonly.nom_vendedor TYPE VARCHAR, NOENTRY;     
+
+	---- DETALLE ----
+c050 = r22_item, UPSHIFT, REQUIRED,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c051 = formonly.stock_tot TYPE SMALLINT, 
+       NOENTRY;                            
+c052 = formonly.stock_loc TYPE SMALLINT,        
+       NOENTRY;                                 
+c053 = r22_cantidad, 
+       INCLUDE = (1 TO 9999);
+y1   = r22_bodega, UPSHIFT, REQUIRED,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c054 = r22_porc_descto, FORMAT = '#&.##',   
+       INCLUDE = (0 TO 99.99); 	
+c055 = r22_precio, FORMAT = '##,###,##&.##',                 	
+       NOENTRY;
+c056 = formonly.subtotal_item TYPE DECIMAL(12,2), 
+       NOENTRY, FORMAT = '###,###,##&.##'; 
+c060 = r21_tot_bruto, FORMAT = '###,###,##&.##', REVERSE, NOENTRY;       
+c061 = r21_tot_dscto, FORMAT = '###,###,##&.##', NOENTRY;       
+c062 = formonly.vm_impuesto TYPE DECIMAL(11,2),	FORMAT = '###,###,##&.##', NOENTRY;    
+c063 = r21_tot_neto, REVERSE, FORMAT = '###,###,##&.##', NOENTRY;
+c070 = formonly.descrip_1, NOENTRY;
+c071 = formonly.descrip_2, NOENTRY;
+c072 = formonly.descrip_3, NOENTRY;
+c073 = formonly.descrip_4, NOENTRY;
+c074 = formonly.nom_item,  NOENTRY, REVERSE;
+INSTRUCTIONS 
+DELIMITERS '||'
+SCREEN RECORD r_detalle[4] (r22_bodega, r22_item, formonly.stock_tot, 
+		            formonly.stock_loc, r22_cantidad, 
+			    r22_porc_descto, r22_precio, formonly.subtotal_item)
+

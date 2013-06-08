@@ -1,0 +1,68 @@
+DATABASE aceros
+SCREEN 
+{
+
+             Número: [c001      ]   Estado: [a|c100           ]
+             Título: [c002                                    ]
+             Moneda: [a0] [c101          ]   
+  Tributa para IR ?: [c]        Todo se paga en Efectivo ?: [d]
+        Incluir tipo de empleado ejecutivo ?: [e]            [c050] de [c051]
+  [lbl1  |lbl2                                     |lbl3        |lbl4        ]
+ [c008  |c102                                     |c004        |f|c103      ]
+ [c008  |c102                                     |c004        |f|c103      ]
+ [c008  |c102                                     |c004        |f|c103      ]
+ [c008  |c102                                     |c004        |f|c103      ]
+ [c008  |c102                                     |c004        |f|c103      ]
+ [c008  |c102                                     |c004        |f|c103      ]
+ [c008  |c102                                     |c004        |f|c103      ]
+ [c008  |c102                                     |c004        |f|c103      ]
+ [c008  |c102                                     |c004        |f|c103      ]
+ [c008  |c102                                     |c004        |f|c103      ]
+ [c008  |c102                                     |c004        |f|c103      ]
+  			                          [c110        ]
+
+     Ingresado Por: [c014      ]   Fecha de Ingreso: [c015               ]
+}
+TABLES
+rolt043
+rolt044
+ATTRIBUTES
+c001 = rolt043.n43_num_rol, REVERSE, NOENTRY,
+                            WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c002 = rolt043.n43_titulo,  REVERSE, UPSHIFT;
+a = rolt043.n43_estado, UPSHIFT, REVERSE, NOENTRY, AUTONEXT, INCLUDE=('A', 'P'),
+			COMMENTS = 'A ACTIVA  P PROCESADA';
+c100 = FORMONLY.n_estado, NOENTRY;
+c014 = rolt043.n43_usuario, UPSHIFT, REVERSE, NOENTRY;
+c015 = rolt043.n43_fecing , REVERSE, NOENTRY;
+
+a0 = rolt043.n43_moneda,        REVERSE, AUTONEXT, UPSHIFT,
+                                WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c101 = FORMONLY.n_moneda,                NOENTRY;
+c    = rolt043.n43_tributa, AUTONEXT, UPSHIFT, REVERSE, DEFAULT = 'S',
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge';
+d    = rolt043.n43_pago_efec, AUTONEXT, UPSHIFT, REVERSE, DEFAULT = 'N',
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge';
+e    = rolt043.n43_incluir_ej, AUTONEXT, UPSHIFT, REVERSE, DEFAULT = 'N',
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge';
+
+c008 = rolt044.n44_cod_trab,    OPTIONS='-nolist', NOENTRY;
+c102 = FORMONLY.n_trab,         OPTIONS='-nolist', NOENTRY;
+c004 = rolt044.n44_valor,       OPTIONS='-nolist', FORMAT='#,###,##&.##';
+f    = rolt044.n44_tipo_pago,   OPTIONS='-nolist', UPSHIFT, 
+                                INCLUDE=('E', 'C', 'T'),
+				COMMENTS = 'E EFECTIVO  C CHEQUE  T TRANSFERENCIA';
+c103 = FORMONLY.n_tipo_pago,    OPTIONS='-nolist', NOENTRY;
+c110 = FORMONLY.tot_valor,      REVERSE, NOENTRY,  FORMAT='#,###,##&.##';
+                                                                                
+lbl1 = FORMONLY.bt_cod_trab,    WIDGET='BUTTON', CONFIG='F15';
+lbl2 = FORMONLY.bt_nom_trab,    WIDGET='BUTTON', CONFIG='F16';
+lbl3 = FORMONLY.bt_valor,       WIDGET='BUTTON', CONFIG='F17';
+lbl4 = FORMONLY.bt_tipo_pago,   WIDGET='BUTTON', CONFIG='F18';  
+c050 = FORMONLY.num_row,	NOENTRY, REVERSE, UPSHIFT;
+c051 = FORMONLY.max_row,	NOENTRY, REVERSE, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD ra_scr[11] (n44_cod_trab, n_trab, n44_valor, n44_tipo_pago,
+				n_tipo_pago)

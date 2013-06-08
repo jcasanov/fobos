@@ -1,0 +1,54 @@
+DATABASE aceros
+SCREEN
+{
+                          DETALLE NOTAS DE ENTREGA
+                          ------------------------
+
+  Cliente: [c000  |c001                                                ]
+  Factura: [c0|c002     ]                   Fecha: [c003               ]
+
+                                                        [c030] de [c031]
+  Ord.D. BD Not.E. BE Fecha Ent.        Entregado A         Cantidad  C
+ [c020  |c3|c021  |c4|c022      |c023                     |c024      |d]
+ [c020  |c3|c021  |c4|c022      |c023                     |c024      |d]
+ [c020  |c3|c021  |c4|c022      |c023                     |c024      |d]
+ [c020  |c3|c021  |c4|c022      |c023                     |c024      |d]
+ [c020  |c3|c021  |c4|c022      |c023                     |c024      |d]
+ [c020  |c3|c021  |c4|c022      |c023                     |c024      |d]
+ [c020  |c3|c021  |c4|c022      |c023                     |c024      |d]
+ [c020  |c3|c021  |c4|c022      |c023                     |c024      |d]
+                                                Total ==> [c040      ]
+}
+TABLES
+rept019
+rept036
+ATTRIBUTES
+c000 = rept019.r19_codcli, NOENTRY, UPSHIFT, REVERSE;
+c001 = rept019.r19_nomcli, NOENTRY, UPSHIFT, REVERSE;
+c0   = rept019.r19_cod_tran, NOENTRY, UPSHIFT, REVERSE;
+c002 = rept019.r19_num_tran, NOENTRY, UPSHIFT, REVERSE;
+c003 = rept019.r19_fecing, NOENTRY, UPSHIFT, REVERSE;
+
+c020 = rept036.r36_num_ord_des, NOENTRY, UPSHIFT;
+c3   = rept036.r36_bodega, NOENTRY, UPSHIFT;
+c021 = rept036.r36_num_entrega, NOENTRY, UPSHIFT;
+c4   = rept036.r36_bodega_real, NOENTRY, UPSHIFT;
+c022 = rept036.r36_fec_entrega, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c023 = rept036.r36_entregar_a, NOENTRY, UPSHIFT;
+c024 = FORMONLY.total_ne TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '---,--&.##';
+d    = FORMONLY.seleccionar_ne TYPE CHAR NOT NULL, REQUIRED, UPSHIFT,
+	INCLUDE = ('S', 'N'), DEFAULT = 'N',
+	COMMENTS = 'Seleccione Nota de Entrega para generar Guía de Remisión.';
+
+c030 = FORMONLY.num_row, NOENTRY, UPSHIFT;
+c031 = FORMONLY.max_row, NOENTRY, UPSHIFT;
+
+c040 = FORMONLY.total TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '---,--&.##';
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_nota[8] (r36_num_ord_des, r36_bodega, r36_num_entrega,
+			r36_bodega_real, r36_fec_entrega, r36_entregar_a,
+			total_ne, seleccionar_ne)

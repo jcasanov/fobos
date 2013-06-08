@@ -1,26 +1,33 @@
-DATABASE diteca
+DATABASE aceros
+
 SCREEN
 {
- PROCESOS NOMINA
----------------------------------
- T   Descripción
----------------------------------
-[a ][c001                      ]
-[a ][c001                      ]
-[a ][c001                      ]
-[a ][c001                      ]
-[a ][c001                      ]
-[a ][c001                      ]
-[a ][c001                      ]
-[a ][c001                      ]
-[a ][c001                      ]
-[a ][c001                      ]
+ PROCESOS DE NOMINA
+
+ [lbl1   |lbl2                           ]
+[c01    |c002                           ] 
+[c01    |c002                           ] 
+[c01    |c002                           ] 
+[c01    |c002                           ] 
+[c01    |c002                           ] 
+[c01    |c002                           ] 
+[c01    |c002                           ] 
+[c01    |c002                           ] 
+[c01    |c002                           ] 
+[c01    |c002                           ] 
 
 }
+
 TABLES
 rolt003
+
 ATTRIBUTES
-a    = n03_proceso;
-c001 = n03_nombre;
+c01  = n03_proceso, 		UPSHIFT;
+c002 = n03_nombre,  		UPSHIFT;
+lbl1 = formonly.bt_proceso, 	NOENTRY, WIDGET='BUTTON', CONFIG='F15';
+lbl2 = formonly.bt_descripcion,	NOENTRY, WIDGET='BUTTON', CONFIG='F16';
+END
+
 INSTRUCTIONS
-SCREEN RECORD rh_prorol[10] (n03_proceso, n03_nombre)
+SCREEN RECORD rh_procesos_roles[10](n03_proceso, n03_nombre)
+

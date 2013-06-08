@@ -1,0 +1,28 @@
+DATABASE aceros
+
+SCREEN
+{
+  COMPANIAS CONFIGURADAS COMPRAS
+ --------------------------------------
+  Código Descripción 	  
+ --------------------------------------
+ [f001] [f002                         ] 
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+}
+
+TABLES
+gent001
+ordt000
+
+ATTRIBUTES
+f001 = c00_compania,REVERSE;
+f002 = g01_razonsocial,REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_ciacom[7](c00_compania, g01_razonsocial)

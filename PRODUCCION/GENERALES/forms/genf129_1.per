@@ -1,6 +1,6 @@
-DATABASE formonly
+DATABASE FORMONLY
 
-screen 
+SCREEN 
 {
 
     Usuario: [c000      ] [c100                                    ]
@@ -22,22 +22,22 @@ screen
              [c|a3|c103                                  ]
 }
 
-attributes
-c000 = formonly.usuario, REVERSE, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2', 
+ATTRIBUTES
+c000 = FORMONLY.usuario, REVERSE, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2', 
 	UPSHIFT;
-a0   = formonly.grupo  ,	NOENTRY;
-a1   = formonly.tipo   ,	NOENTRY;
+a0   = FORMONLY.grupo  ,	NOENTRY;
+a1   = FORMONLY.tipo   ,	NOENTRY;
 
-c100 = formonly.n_usuario, NOENTRY;
-c101 = formonly.n_grupo  , NOENTRY;
-c102 = formonly.n_tipo   , NOENTRY;
+c100 = FORMONLY.n_usuario, NOENTRY;
+c101 = FORMONLY.n_grupo  , NOENTRY;
+c102 = FORMONLY.n_tipo   , NOENTRY;
 
-c    = formonly.check,  AUTONEXT, WIDGET='CHECK', CONFIG='S N acknowledge', 
+c    = FORMONLY.check,  AUTONEXT, WIDGET='CHECK', CONFIG='S N acknowledge', 
 	DEFAULT='N', OPTIONS='-nolist';
-a3   = formonly.modulo,   NOENTRY, OPTIONS='-nolist';
-c103 = formonly.n_modulo, NOENTRY, OPTIONS='-nolist'; 
+a3   = FORMONLY.modulo,   NOENTRY, OPTIONS='-nolist';
+c103 = FORMONLY.n_modulo, NOENTRY, OPTIONS='-nolist'; 
 
-l1   = formonly.bt_modulo , WIDGET='BUTTON', CONFIG='F15'; 
+l1   = FORMONLY.bt_modulo , WIDGET='BUTTON', CONFIG='F15'; 
 
-instructions
-screen record ra_modulo[12] (check, modulo, n_modulo)
+INSTRUCTIONS
+SCREEN RECORD ra_modulo[12] (check, modulo, n_modulo)

@@ -1,0 +1,27 @@
+DATABASE aceros
+SCREEN
+{
+  MARCAS REPUESTOS
+ ------------------------------------
+  Código  Nombre
+ ------------------------------------
+ [c01   |c002                       ] 
+ [c01   |c002                       ] 
+ [c01   |c002                       ] 
+ [c01   |c002                       ] 
+ [c01   |c002                       ] 
+ [c01   |c002                       ] 
+ [c01   |c002                       ] 
+ [c01   |c002                       ] 
+ [c01   |c002                       ] 
+ [c01   |c002                       ] 
+}
+TABLES
+rept073
+ATTRIBUTES
+c01  = r73_marca, REVERSE;
+c002 = r73_desc_marca, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_marcasrep[10](r73_marca, r73_desc_marca)

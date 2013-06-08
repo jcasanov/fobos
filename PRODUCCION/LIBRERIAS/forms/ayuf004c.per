@@ -1,0 +1,29 @@
+DATABASE aceros
+
+SCREEN
+{
+  AYUDA MONEDAS 
+ ----------------------------
+  COD. NOMBRE MONEDA
+ ----------------------------
+ [a1] [c002                 ]
+ [a1] [c002                 ]
+ [a1] [c002                 ]
+ [a1] [c002                 ]
+ [a1] [c002                 ]
+ [a1] [c002                 ]
+ [a1] [c002                 ]
+ [a1] [c002                 ]
+ [a1] [c002                 ]
+ [a1] [c002                 ]
+}
+TABLES
+gent013
+ATTRIBUTES
+a1   = g13_moneda,REVERSE;
+c002 = g13_nombre,REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_mon[10] (g13_moneda, g13_nombre)
+

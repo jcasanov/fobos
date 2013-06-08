@@ -1,0 +1,44 @@
+DATABASE aceros
+SCREEN 
+{
+
+                                                              [c020] de [c021]
+------------------------------------------------------------------------------
+Rubro     Fecha   Mon.      Paridad           Valor       Valor Mon. Liq.  
+------------------------------------------------------------------------------
+[c004] [c006      |a1] [c008            |c009            |c010            ][c]
+[c004] [c006      |a1] [c008            |c009            |c010            ][c]
+[c004] [c006      |a1] [c008            |c009            |c010            ][c]
+[c004] [c006      |a1] [c008            |c009            |c010            ][c]
+[c004] [c006      |a1] [c008            |c009            |c010            ][c]
+[c004] [c006      |a1] [c008            |c009            |c010            ][c]
+[c004] [c006      |a1] [c008            |c009            |c010            ][c]
+[c004] [c006      |a1] [c008            |c009            |c010            ][c]
+------------------------------------------------------------------------------
+Rubro: [c012           ]                          Total: [c011            ]
+
+}
+TABLES
+rept030
+ATTRIBUTES
+c004 = rept030.r30_codrubro, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c006 = rept030.r30_fecha, AUTONEXT,
+	FORMAT='dd-mm-yyyy', COMMENTS='Ingrese fecha en formato: dd-mm-aaaa';
+a1   = rept030.r30_moneda, UPSHIFT, AUTONEXT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c008 = rept030.r30_paridad, FORMAT='#,###,##&.######';
+c009 = rept030.r30_valor, FORMAT='-,---,---,--&.##';
+c010 = FORMONLY.valor_ml TYPE DECIMAL (12,2), FORMAT='-,---,---,--&.##';
+c    = FORMONLY.check TYPE CHAR, DEFAULT='N', UPSHIFT, REVERSE,
+	INCLUDE = ('S', 'N'),
+	COMMENTS = 'S para Sí o N para No';
+c012 = FORMONLY.n_rubro, NOENTRY; 
+c011 = FORMONLY.total_cargos TYPE DECIMAL (12,2), NOENTRY,
+	FORMAT='-,---,---,--&.##'; 
+c020 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c021 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD ra_rubros[8] (r30_codrubro, r30_fecha, r30_moneda, r30_paridad, r30_valor, valor_ml, check)

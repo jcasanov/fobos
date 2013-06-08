@@ -1,0 +1,18 @@
+DATABASE aceros
+SCREEN
+{
+
+    Se va Imprimir Dev./Anul. Factura: [a0] [c000           ]
+
+                          Factura No.: [a1] [c001           ]
+ 
+
+}
+TABLES
+rept019
+ATTRIBUTES
+a0   = rept019.r19_cod_tran, NOENTRY, REVERSE, UPSHIFT;
+c000 = rept019.r19_num_tran, NOENTRY, REVERSE, UPSHIFT;
+a1   = rept019.r19_tipo_dev, NOENTRY, REVERSE, UPSHIFT;
+c001 = rept019.r19_num_dev, NOENTRY, REVERSE, UPSHIFT;
+END

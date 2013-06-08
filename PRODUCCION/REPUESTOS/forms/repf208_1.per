@@ -1,37 +1,62 @@
-database diteca
-screen 
+DATABASE aceros
+SCREEN 
 {
 
+  Liquidación No.: [c000       ]                        Estado: [a|c001     ]
+            Fecha: [c002               ]   
 
-   Liquidación No: [c002       ]                     Estado: [a|c026     ]
-            Fecha: [c025               ]   
+           Moneda: [a1] [c003           ]  Paridad: [c004                   ]
+    Fecha Llegada: [c005      ]         Fecha Ingreso: [c006      ]
 
-           Moneda: [a0] [c027           ]  
-      Fob Fábrica: [c012            ]          Fecha Llegada: [c010      ]   
-        Total Fob: [c016            ]          Fecha Ingreso: [c011      ] 
-     Total Cargos: [c018            ]
-           Seguro: [c017            ]
-     Factor Costo: [c019            ]
+                    Moneda Pedido   Moneda BASE
+      Fob Fabrica: [c007        ] [c008        ] Impuesto IVA: [c009        ] 
+     Otros Cargos: [c010        ] [c011        ]
+        Total Fob: [c012        ] [c013        ]
+       Flete Real:                [c014        ]    Flete Cae: [c040        ]
+     Seguro Total:                [c015        ]   Prima Neta: [c016        ]
+        Total CIF:                [c017        ]
+        Aranceles:                [c018        ]
+     Salvaguardia:                [c019        ]
+   Gastos Locales:                [c020        ] 
+ Total Costo Imp.:                [c021        ]
+
 }
-end
-tables
+TABLES
 rept028
-attributes
-c002 = rept028.r28_numliq, REVERSE,
-	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2' ;
-a    = rept028.r28_estado, UPSHIFT, NOENTRY, REVERSE;
-c010 = rept028.r28_fecha_lleg, REVERSE, NOENTRY,
-	FORMAT='dd-mm-yyyy', COMMENT='Ingrese fecha en formato: dd-mm-aaaa';
-c011 = rept028.r28_fecha_ing, REVERSE, NOENTRY,
-	FORMAT='dd-mm-yyyy', COMMENT='Ingrese fecha en formato: dd-mm-aaaa';
-a0   = rept028.r28_moneda, UPSHIFT, REVERSE, AUTONEXT, NOENTRY,
-	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2' ;
-c012 = rept028.r28_fob_fabrica, REVERSE, NOENTRY, FORMAT='###,###,##&.####';
-c016 = rept028.r28_total_fob, REVERSE, NOENTRY, FORMAT='###,###,##&.####';
-c017 = rept028.r28_seguro, REVERSE, NOENTRY, FORMAT='###,###,##&.####';
-c018 = rept028.r28_tot_cargos, REVERSE, NOENTRY, FORMAT='###,###,##&.####';
-c019 = rept028.r28_fact_costo, REVERSE, NOENTRY, FORMAT='###,##&.######';
-c025 = rept028.r28_fecing, REVERSE, NOENTRY;
-c026 = formonly.n_estado, NOENTRY;
-c027 = formonly.n_moneda, NOENTRY;
-end
+ATTRIBUTES
+c000 = rept028.r28_numliq, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+a    = rept028.r28_estado, UPSHIFT, NOENTRY, REVERSE,
+	COMMENTS = 'A Activo  P Procesado';
+c001 = FORMONLY.n_estado, NOENTRY, UPSHIFT, REVERSE;
+c002 = rept028.r28_fecing, REVERSE, UPSHIFT, NOENTRY;
+a1   = rept028.r28_moneda, UPSHIFT, REVERSE, NOENTRY,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = FORMONLY.n_moneda, NOENTRY, UPSHIFT, REVERSE;
+c004 = rept028.r28_paridad, AUTONEXT, REVERSE,
+	INCLUDE = (0.000000001 TO 999999.999999999),
+	FORMAT = '###,##&.###############';
+c005 = rept028.r28_fecha_lleg, REVERSE, NOENTRY, UPSHIFT,
+	FORMAT='dd-mm-yyyy', COMMENTS = 'Ingrese fecha en formato: dd-mm-aaaa';
+c006 = rept028.r28_fecha_ing, REVERSE, NOENTRY, UPSHIFT,
+	FORMAT='dd-mm-yyyy', COMMENTS = 'Ingrese fecha en formato: dd-mm-aaaa';
+c007 = rept028.r28_tot_exfab_mi, NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c008 = rept028.r28_tot_exfab_mb, NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c009 = rept028.r28_tot_iva,      AUTONEXT, REVERSE, FORMAT = '-,---,--&.##';
+c010 = rept028.r28_tot_desp_mi,  AUTONEXT, REVERSE, FORMAT = '-,---,--&.##';
+c011 = rept028.r28_tot_desp_mb,  NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c012 = rept028.r28_tot_fob_mi,   NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c013 = rept028.r28_tot_fob_mb,   NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c014 = rept028.r28_tot_flete,    AUTONEXT, REVERSE, FORMAT = '-,---,--&.##';
+c015 = rept028.r28_tot_seg_neto, AUTONEXT, REVERSE, FORMAT = '-,---,--&.##',
+	COMMENTS = 'Valor del seguro (con tasas - sin IVA) para costos';
+c016 = rept028.r28_tot_seguro,   AUTONEXT, REVERSE, FORMAT = '-,---,--&.##',
+	COMMENTS = 'Valor del seguro (sin tasas ni impuestos)';
+c017 = rept028.r28_tot_cif,      NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c018 = rept028.r28_tot_arancel,  NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c019 = rept028.r28_tot_salvagu,  NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c020 = rept028.r28_tot_cargos,   NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c021 = rept028.r28_tot_costimp,  NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c040 = rept028.r28_tot_flet_cae, REVERSE, FORMAT = '-,---,--&.##',
+	COMMENTS = 'Valor flete suministrado por la CAE. Utilizado en el calculo de aranceles.';
+END

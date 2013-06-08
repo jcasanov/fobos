@@ -1,0 +1,32 @@
+DATABASE aceros
+SCREEN
+{
+ NOTAS DE PEDIDO
+
+ [lbl       |lbl1                                                ]
+[c00       |c002                                                ]
+[c00       |c002                                                ]
+[c00       |c002                                                ]
+[c00       |c002                                                ]
+[c00       |c002                                                ]
+[c00       |c002                                                ]
+[c00       |c002                                                ]
+[c00       |c002                                                ]
+[c00       |c002                                                ]
+[c00       |c002                                                ]
+
+}
+
+TABLES
+rept081
+
+ATTRIBUTES
+c00  = r81_pedido, 		NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c002 = r81_nom_prov,  		UPSHIFT, OPTIONS = '-nolist';
+lbl  = formonly.bt_pedido, 	NOENTRY, WIDGET='BUTTON', CONFIG='F15';
+lbl1 = formonly.bt_proveedor, 	NOENTRY, WIDGET='BUTTON', CONFIG='F16';
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_notapedido[10] (r81_pedido, r81_nom_prov)
+

@@ -1,0 +1,50 @@
+DATABASE aceros
+SCREEN
+{
+
+
+                 DATOS PARA COMPLETAR GUIA DE REMISION
+                 -------------------------------------
+  Fecha Iniciación Traslado: [c000      ] No. SRI: [c007              ]
+ Fecha Terminación Traslado: [c001      ]  Aut. SRI: [c010            ]
+
+        Motivo del Traslado: [c|c002                                  ]
+
+           Fecha de Emisión: [c003      ]
+           Punto de Partida: [c004                                    ]
+
+     Persona que transporta: [c005                                    ]
+               Cédula / RUC: [c006         ]        Placa: [c014      ]
+               Destinatario: [c011                                    ]
+               Cédula / RUC: [c012         ]
+           Punto de Llegada: [c013                                    ]
+              Ingresado Por: [c008      ]  Fecha: [c009               ]
+}
+TABLES
+rept095
+ATTRIBUTES
+c000 = rept095.r95_fecha_initras, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la fecha de iniciación en formato: dd-mm-aaaa.';
+c001 = rept095.r95_fecha_fintras, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la fecha de terminación en formato: dd-mm-aaaa.';
+c    = rept095.r95_motivo, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = '(V) Venta  (D) Devolución  (I) Importación  (N) "Transferencias Localidades"',
+	INCLUDE = ('V', 'D', 'I', 'N'), DEFAULT = 'V';
+c002 = FORMONLY.tit_motivo, NOENTRY, UPSHIFT, REVERSE;
+c003 = rept095.r95_fecha_emi, AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la fecha de emisión en formato: dd-mm-aaaa.';
+c004 = rept095.r95_punto_part, AUTONEXT, UPSHIFT, REVERSE;
+c005 = rept095.r95_persona_guia, AUTONEXT, UPSHIFT, REVERSE;
+c006 = rept095.r95_persona_id, AUTONEXT, UPSHIFT, REVERSE;
+c007 = rept095.r95_num_sri, AUTONEXT, UPSHIFT, REVERSE;
+c010 = rept095.r95_autoriz_sri, AUTONEXT, UPSHIFT, REVERSE;
+c011 = rept095.r95_persona_dest, AUTONEXT, UPSHIFT, REVERSE;
+c012 = rept095.r95_pers_id_dest, AUTONEXT, UPSHIFT, REVERSE;
+c013 = rept095.r95_punto_lleg, AUTONEXT, UPSHIFT, REVERSE;
+c014 = rept095.r95_placa, AUTONEXT, UPSHIFT;
+c008 = rept095.r95_usuario, NOENTRY, UPSHIFT, REVERSE;
+c009 = rept095.r95_fecing, NOENTRY, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'

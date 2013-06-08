@@ -1,0 +1,28 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+              Período: [c000] - [c0] 
+
+       Generar Anexo Ventas Guayaquil ?: [c]
+           Generar Anexo Ventas Quito ?: [d]
+  Generar Consolidado Ventas Nacional ?: [e]
+
+}
+ATTRIBUTES
+c000 = FORMONLY.anio_fin TYPE SMALLINT NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, INCLUDE = (2000 TO 2030),
+	COMMENTS = 'Digite el año final en formato: aaaa.';
+c0   = FORMONLY.mes_fin TYPE SMALLINT NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, INCLUDE = (1 TO 12), FORMAT = '&&',
+	COMMENTS = 'Digite el mes final en formato: mm.';
+c    = FORMONLY.tipo_gye TYPE CHAR NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge',
+	REVERSE, INCLUDE = ('S', 'N'), DEFAULT = 'N';
+d    = FORMONLY.tipo_uio TYPE CHAR NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge',
+	REVERSE, INCLUDE = ('S', 'N'), DEFAULT = 'N';
+e    = FORMONLY.tipo_nac TYPE CHAR NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge',
+	REVERSE, INCLUDE = ('S', 'N'), DEFAULT = 'N';
+END

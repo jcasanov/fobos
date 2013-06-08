@@ -1,0 +1,38 @@
+DATABASE aceros
+SCREEN
+{
+ TIPOS TRANSACCIONES ACTIVOS FIJOS
+
+                      [c2] de [c3]
+ [c0|c000                     |c|d]
+[c1|c010                     |e|f]
+[c1|c010                     |e|f]
+[c1|c010                     |e|f]
+[c1|c010                     |e|f]
+[c1|c010                     |e|f]
+[c1|c010                     |e|f]
+[c1|c010                     |e|f]
+[c1|c010                     |e|f]
+[c1|c010                     |e|f]
+[c1|c010                     |e|f]
+
+}
+TABLES
+actt004
+ATTRIBUTES
+c0   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c000 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c    = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+d    = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+
+c1   = actt004.a04_codigo_proc, NOENTRY, UPSHIFT, REVERSE;
+c010 = actt004.a04_nombre, NOENTRY, UPSHIFT, REVERSE;
+e    = actt004.a04_estado, NOENTRY, UPSHIFT, REVERSE;
+f    = actt004.a04_periocidad, NOENTRY, UPSHIFT, REVERSE;
+
+c2   = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c3   = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+END
+INSTRUCTIONS
+SCREEN RECORD rh_tipo_tr_af[10] (a04_codigo_proc, a04_nombre, a04_estado,
+					a04_periocidad)

@@ -1,0 +1,29 @@
+DATABASE aceros
+SCREEN
+{
+  PRE-VENTAS REPUESTOS
+ ---------------------------------------------------
+  Número    Cliente                               E
+ ---------------------------------------------------
+ [c001     |c002                                 |c] 
+ [c001     |c002                                 |c]
+ [c001     |c002                                 |c]
+ [c001     |c002                                 |c]
+ [c001     |c002                                 |c]
+ [c001     |c002                                 |c]
+ [c001     |c002                                 |c]
+ [c001     |c002                                 |c]
+ [c001     |c002                                 |c]
+ [c001     |c002                                 |c]
+}
+TABLES
+rept023
+ATTRIBUTES
+c001 = r23_numprev, UPSHIFT, REVERSE;
+c002 = r23_nomcli,  UPSHIFT, REVERSE;
+c    = r23_estado,  UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_prerep[10] (r23_numprev, r23_nomcli, r23_estado)
+

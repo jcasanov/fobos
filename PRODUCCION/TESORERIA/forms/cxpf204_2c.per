@@ -1,0 +1,39 @@
+DATABASE aceros
+SCREEN 
+{
+
+      Banco: [c000] [c100                                   ]
+   No. Cta.: [c001           ]   Moneda: [a0|c101           ]       
+
+  Proveedor: [c002] [c102                                   ]
+  
+  Tipo Vencimiento: [c|c200      ]    Tipo Pago: [d|c004    ]
+
+}
+TABLES 
+gent008
+gent009
+gent013
+cxpt001
+ATTRIBUTES
+c000 = FORMONLY.banco,  REVERSE, AUTONEXT, UPSHIFT,	
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c100 = gent008.g08_nombre, NOENTRY, UPSHIFT;                                   
+c001 = gent009.g09_numero_cta, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+a0   = gent013.g13_moneda, NOENTRY, UPSHIFT;
+c101 = gent013.g13_nombre, NOENTRY, UPSHIFT;
+c002 = FORMONLY.proveedor, REVERSE, AUTONEXT, UPSHIFT,	
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c102 = cxpt001.p01_nomprov, NOENTRY, UPSHIFT;
+c    = FORMONLY.tipo_vcto TYPE CHAR, REVERSE, UPSHIFT, AUTONEXT,
+	INCLUDE = ('V', 'P', 'T'),
+	COMMENTS = 'V Vencidos  P "Por Vencer"  T Todos';
+c200 = FORMONLY.tit_tipo_vcto, REVERSE, UPSHIFT, NOENTRY;
+d    = FORMONLY.tipo_pago TYPE CHAR, REVERSE, UPSHIFT, AUTONEXT,
+	INCLUDE = ('C', 'E'),
+	COMMENTS = 'C Cheque  E Efectivo';
+c004 = FORMONLY.tit_tipo_pago, REVERSE, UPSHIFT, NOENTRY;
+END
+INSTRUCTIONS
+DELIMITERS '||'

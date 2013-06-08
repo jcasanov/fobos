@@ -1,0 +1,17 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+ Imprimir
+ 
+            [c000                                ]
+
+
+
+}
+ATTRIBUTES
+c000 = FORMONLY.vm_imprimir TYPE CHAR NOT NULL, REQUIRED, UPSHIFT, REVERSE,
+	INCLUDE = ('B', 'C', 'T'), WIDGET = 'RADIO',
+	CONFIG = 'B "Solo Listado de ésta Bodega" C "Todas las Bodegas de esta consulta" T "T O D O S"',
+	DEFAULT = 'B';
+END

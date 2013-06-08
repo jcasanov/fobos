@@ -1,4 +1,4 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN TITLE 'Datos Documento'
 {
 
@@ -26,15 +26,15 @@ SCREEN TITLE '    Valores    '
                  Moneda: [a1] [c012           ]
       Paridad Cambiaria: [c013                ]
 
-             Valor Base: [z001             ]
-          Valor Capital: [c014             ]
+             Valor Base: [z001             ]  Calcula Impto: [z]
+          Valor Capital: [c014             ]  Val. Impuesto: [z002          ]
           Valor Interés: [c015             ]
           Saldo Capital: [c016             ]
           Saldo Interés: [c017             ]
 
                 Cartera: [c018  ] [c019                          ]
          Línea de Venta: [c020  ] [c021                          ]
-                 Origen: [c022             ] 
+                 Origen: [c022             ]   Número Sri: [z003            ]
 
 
                 Usuario: [c023      ]    Fecha Ingreso: [c024               ]
@@ -74,12 +74,12 @@ c013 = cxct020.z20_paridad, NOENTRY, REVERSE, INCLUDE = (1 TO 999999.999999999),
 	FORMAT = '#,###,##&.#########';
 z001 = formonly.val_base TYPE DECIMAL(12,2) NOT NULL, 
        FORMAT = '#,###,###,##&.##', INCLUDE = (0.01 TO 9999999999);
---z    = FORMONLY.flag_impto TYPE CHAR NOT NULL, WIDGET = 'CHECK', 
---     CONFIG = 'S N acknowledge', DEFAULT = 'S', INCLUDE = ('S','N'), UPSHIFT;
---z002 = z20_val_impto, NOENTRY, FORMAT = '###,###,##&.##';
---z003 = z20_num_sri, COMMENTS = 'Requerido solo para Notas de Débito.';
+z    = FORMONLY.flag_impto TYPE CHAR NOT NULL, WIDGET = 'CHECK', 
+       CONFIG = 'S N acknowledge', DEFAULT = 'S', INCLUDE = ('S','N'), UPSHIFT;
+z002 = z20_val_impto, NOENTRY, FORMAT = '###,###,##&.##';
+z003 = z20_num_sri, COMMENTS = 'Requerido solo para Notas de Débito.';
 c014 = cxct020.z20_valor_cap, AUTONEXT, REVERSE, INCLUDE = (0 TO 9999999999.99),
-	FORMAT = '#,###,###,##&.##';
+	FORMAT = '#,###,###,##&.##', NOENTRY;
 c015 = cxct020.z20_valor_int, AUTONEXT, REVERSE, INCLUDE = (0 TO 9999999999.99),
 	FORMAT = '#,###,###,##&.##';
 c016 = cxct020.z20_saldo_cap, NOENTRY, REVERSE,	FORMAT = '#,###,###,##&.##';

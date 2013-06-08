@@ -19,7 +19,7 @@ DEFINE vm_row_current	SMALLINT	-- FILA CORRIENTE DEL ARREGLO
 DEFINE vm_num_rows	SMALLINT	-- CANTIDAD DE FILAS LEIDAS
 DEFINE vm_max_rows      SMALLINT        -- MAXIMO DE FILAS LEIDAS
 DEFINE vm_demonios	VARCHAR(12)
-DEFINE vm_flag_mant         CHAR(1)
+DEFINE vm_flag_mant     CHAR(1)
 
 MAIN
 
@@ -27,11 +27,12 @@ DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
 CALL startlog('../logs/errores')
-CALL fgl_init4js()
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN
-     CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto','stop')
-     EXIT PROGRAM
+	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.','stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
+     	EXIT PROGRAM
 END IF
 LET vg_base	= arg_val(1)
 LET vg_modulo	= arg_val(2)
@@ -39,7 +40,8 @@ LET vg_codcia	= arg_val(3)
 LET vg_proceso	= 'repp221'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -48,13 +50,31 @@ END MAIN
 
 
 FUNCTION funcion_master()
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
 CALL fl_nivel_isolation()
 LET vm_max_rows = 1000
-OPEN WINDOW w_cam AT 3,2 WITH 20 ROWS, 80 COLUMNS 
-    ATTRIBUTE(FORM LINE FIRST + 2, COMMENT LINE LAST, MENU LINE FIRST,BORDER,
-	      MESSAGE LINE LAST - 2)
-OPEN FORM f_cam FROM '../forms/repf221_1'
+LET lin_menu = 0
+LET row_ini  = 3
+LET num_rows = 20
+LET num_cols = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW w_cam AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
+	ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE lin_menu,
+		  BORDER, MESSAGE LINE LAST - 1) 
+IF vg_gui = 1 THEN
+	OPEN FORM f_cam FROM '../forms/repf221_1'
+ELSE
+	OPEN FORM f_cam FROM '../forms/repf221_1c'
+END IF
 DISPLAY FORM f_cam
 INITIALIZE rm_cam.* TO NULL
 LET vm_num_rows = 0
@@ -135,8 +155,8 @@ END FUNCTION
 
 
 FUNCTION control_consulta()
-DEFINE expr_sql		VARCHAR(500)
-DEFINE query		VARCHAR(600)
+DEFINE expr_sql		CHAR(500)
+DEFINE query		CHAR(600)
 DEFINE  numreg 		LIKE rept032.r32_numreg
 DEFINE  linea 		LIKE rept032.r32_linea
 DEFINE  porcentaje	LIKE rept032.r32_porc_fact
@@ -147,6 +167,8 @@ LET int_flag = 0
 CONSTRUCT BY NAME expr_sql ON r32_numreg, r32_estado, r32_linea, r32_rotacion,
 	r32_tipo_item, r32_porc_fact, r32_moneda, r32_rubro_base, r32_usuario,
 	r32_fecing
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
 	ON KEY(F2)
 		IF INFIELD(r32_numreg) THEN
 			CALL fl_ayuda_cambio_precios(vg_codcia,'T')
@@ -195,6 +217,27 @@ CONSTRUCT BY NAME expr_sql ON r32_numreg, r32_estado, r32_linea, r32_rotacion,
 		ELSE
 			CLEAR tit_estado
 		END IF
+	AFTER FIELD r32_moneda
+		LET rm_cam.r32_moneda = get_fldbuf(r32_moneda)
+		IF vg_gui = 0 THEN
+			IF rm_cam.r32_moneda IS NOT NULL THEN
+				CALL muestra_moneda(rm_cam.r32_moneda)
+			ELSE
+				CLEAR tit_moneda
+			END IF
+		END IF
+	AFTER FIELD r32_rubro_base
+		LET rm_cam.r32_rubro_base = get_fldbuf(r32_rubro_base)
+		IF vg_gui = 0 THEN
+			IF rm_cam.r32_rubro_base IS NOT NULL THEN
+				CALL muestra_rubrobase(rm_cam.r32_rubro_base)
+			ELSE
+				CLEAR tit_rubro_base
+			END IF
+		END IF
+	BEFORE CONSTRUCT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 END CONSTRUCT
 IF int_flag THEN
 	CLEAR FORM
@@ -203,8 +246,9 @@ IF int_flag THEN
 	END IF
 	RETURN
 END IF
-LET query = 'SELECT *, ROWID FROM rept032 WHERE r32_compania = ',
-	     vg_codcia, ' AND ', expr_sql CLIPPED
+LET query = 'SELECT *, ROWID FROM rept032 ',
+		' WHERE r32_compania = ', vg_codcia,
+		' AND ', expr_sql CLIPPED
 PREPARE cons FROM query
 DECLARE q_cons CURSOR FOR cons
 LET vm_num_rows = 1
@@ -247,6 +291,10 @@ SELECT MAX(r32_numreg) + 1 INTO rm_cam.r32_numreg FROM rept032
         IF rm_cam.r32_numreg IS NULL THEN
                 LET rm_cam.r32_numreg = 1
         END IF
+IF vg_gui = 0 THEN
+	CALL muestra_moneda(rm_cam.r32_moneda)
+	CALL muestra_rubrobase(rm_cam.r32_rubro_base)
+END IF
 CALL lee_datos()
 IF NOT int_flag THEN
 	WHENEVER ERROR CONTINUE
@@ -283,7 +331,8 @@ END FUNCTION
 FUNCTION control_modificacion()
 
 IF rm_cam.r32_estado = 'P' THEN
-	CALL fgl_winmessage(vg_producto,'No puede modificar un registro que se encuentra procesado ','exclamation')
+	--CALL fgl_winmessage(vg_producto,'No puede modificar un registro que se encuentra procesado.','exclamation')
+	CALL fl_mostrar_mensaje('No puede modificar un registro que se encuentra procesado.','exclamation')
 	RETURN
 END IF
 LET vm_flag_mant = 'M'
@@ -346,6 +395,8 @@ INPUT BY NAME 	rm_cam.r32_linea, rm_cam.r32_rotacion, rm_cam.r32_tipo_item,
 			END IF
 		        RETURN
                 END IF
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
 	ON KEY(F2)
 		IF INFIELD(r32_linea) THEN
 		     CALL fl_ayuda_lineas_rep(vg_codcia)
@@ -375,12 +426,16 @@ INPUT BY NAME 	rm_cam.r32_linea, rm_cam.r32_rotacion, rm_cam.r32_tipo_item,
 		     END IF
 		END IF
 		LET int_flag = 0
+	BEFORE INPUT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 	AFTER FIELD r32_tipo_item
                 IF rm_cam.r32_tipo_item IS NOT NULL THEN
                     CALL fl_lee_tipo_item(rm_cam.r32_tipo_item)
                                 RETURNING rm_titem.*
                         IF rm_titem.r06_codigo IS NULL THEN
-                                CALL fgl_winmessage (vg_producto, 'El Tipo de Item no existe en la compañía ','exclamation')
+                                --CALL fgl_winmessage(vg_producto,'El Tipo de Item no existe en la compañía.','exclamation')
+				CALL fl_mostrar_mensaje('El Tipo de Item no existe en la compañía.','exclamation')
                                 NEXT FIELD r32_tipo_item
                         END IF
 			DISPLAY rm_titem.r06_nombre TO nom_tipo
@@ -392,7 +447,8 @@ INPUT BY NAME 	rm_cam.r32_linea, rm_cam.r32_rotacion, rm_cam.r32_tipo_item,
                     CALL fl_lee_linea_rep(vg_codcia, rm_cam.r32_linea)
                                 RETURNING rm_lin.*
                         IF rm_lin.r03_codigo IS NULL THEN
-                                CALL fgl_winmessage (vg_producto, 'La Línea de venta no existe en la compañía ','exclamation')
+                                --CALL fgl_winmessage(vg_producto,'La Línea de venta no existe en la compañía.','exclamation')
+				CALL fl_mostrar_mensaje('La Línea de venta no existe en la compañía.','exclamation')
                                 NEXT FIELD r32_linea
                         END IF
 			DISPLAY rm_lin.r03_nombre TO nom_lin
@@ -404,19 +460,37 @@ INPUT BY NAME 	rm_cam.r32_linea, rm_cam.r32_rotacion, rm_cam.r32_tipo_item,
                     CALL fl_lee_indice_rotacion(vg_codcia, rm_cam.r32_rotacion)
                                 RETURNING rm_rot.*
                         IF rm_rot.r04_rotacion IS NULL THEN
-                                CALL fgl_winmessage (vg_producto, 'El Indice de Rotación no existe en la compañía ','exclamation')
+                                --CALL fgl_winmessage(vg_producto,'El Indice de Rotación no existe en la compañía.','exclamation')
+				CALL fl_mostrar_mensaje('El Indice de Rotación no existe en la compañía.','exclamation')
                                 NEXT FIELD r32_rotacion
                         END IF
 			DISPLAY rm_rot.r04_nombre TO nom_rot
 		ELSE 
 			CLEAR nom_rot
                 END IF
+	AFTER FIELD r32_moneda
+		IF vg_gui = 0 THEN
+			IF rm_cam.r32_moneda IS NOT NULL THEN
+				CALL muestra_moneda(rm_cam.r32_moneda)
+			ELSE
+				CLEAR tit_moneda
+			END IF
+		END IF
+	AFTER FIELD r32_rubro_base
+		IF vg_gui = 0 THEN
+			IF rm_cam.r32_rubro_base IS NOT NULL THEN
+				CALL muestra_rubrobase(rm_cam.r32_rubro_base)
+			ELSE
+				CLEAR tit_rubro_base
+			END IF
+		END IF
 	AFTER INPUT
 		IF rm_cam.r32_moneda = 'B' THEN
 			IF rg_gen.g00_moneda_alt IS NULL
 			OR rg_gen.g00_moneda_alt = ' '
 				THEN 
-					CALL fgl_winmessage(vg_producto,'No esta configurada la Moneda Alterna.','exclamation')
+					--CALL fgl_winmessage(vg_producto,'No esta configurada la Moneda Alterna.','exclamation')
+					CALL fl_mostrar_mensaje('No esta configurada la Moneda Alterna.','exclamation')
 					NEXT FIELD r32_moneda
 			END IF
 		END IF
@@ -426,6 +500,9 @@ INPUT BY NAME 	rm_cam.r32_linea, rm_cam.r32_rotacion, rm_cam.r32_tipo_item,
 			WHEN 'B'
 				LET rm_cam.r32_moneda = rg_gen.g00_moneda_alt
 		END CASE
+		IF vg_gui = 0 THEN
+			CALL muestra_moneda(rm_cam.r32_moneda)
+		END IF
 	
 END INPUT
 
@@ -452,7 +529,11 @@ DISPLAY BY NAME rm_cam.r32_numreg, rm_cam.r32_estado, rm_cam.r32_linea,
 		rm_cam.r32_rotacion, rm_cam.r32_tipo_item, rm_cam.r32_moneda,
 		rm_cam.r32_porc_fact, rm_cam.r32_rubro_base,
 		rm_cam.r32_usuario, rm_cam.r32_fecing, rm_cam.r32_fecpro
-DISPLAY 'ACTIVO' TO tit_estado
+CALL muestra_estado()
+IF vg_gui = 0 THEN
+	CALL muestra_moneda(rm_cam.r32_moneda)
+	CALL muestra_rubrobase(rm_cam.r32_rubro_base)
+END IF
 IF rm_cam.r32_rotacion IS NOT NULL THEN
 	CALL fl_lee_indice_rotacion(vg_codcia, rm_cam.r32_rotacion)
         	RETURNING rm_rot.*
@@ -474,10 +555,29 @@ END FUNCTION
 FUNCTION muestra_contadores(row_current, num_rows)
 DEFINE row_current              SMALLINT
 DEFINE num_rows                 SMALLINT
+DEFINE nrow       		SMALLINT
                                                                                 
-DISPLAY "" AT 1,1
-DISPLAY row_current, " de ", num_rows AT 1, 69
+LET nrow = 1
+IF vg_gui = 0 THEN
+	LET nrow = 18
+END IF
+DISPLAY "" AT nrow,1
+DISPLAY row_current, " de ", num_rows AT nrow, 69
                                                                                 
+END FUNCTION
+
+
+
+FUNCTION llamar_visor_teclas()
+DEFINE a		CHAR(1)
+
+IF vg_gui = 0 THEN
+	CALL fl_visor_teclas_caracter() RETURNING int_flag 
+	LET a = fgl_getkey()
+	CLOSE WINDOW w_tf
+	LET int_flag = 0
+END IF
+
 END FUNCTION
 
 
@@ -497,36 +597,32 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
-                                                                                
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-        CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'sto
-p')
-        EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-        CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'st
-op')
-        EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-     CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 			 'stop')
-     EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-        LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-        CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc,
-			    'stop')
-        EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-      CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 			  'stop')
-      EXIT PROGRAM
-END IF
-                                                                                
+FUNCTION muestra_moneda(moneda)
+DEFINE moneda		CHAR(1)
+
+CASE moneda
+	WHEN 'A'
+		DISPLAY 'MONEDA BASE' TO tit_moneda
+	WHEN 'B'
+		DISPLAY 'MONEDA ALTERNA' TO tit_moneda
+	OTHERWISE
+		CLEAR r32_moneda, tit_moneda
+END CASE
+
+END FUNCTION
+
+
+
+FUNCTION muestra_rubrobase(rubrobase)
+DEFINE rubrobase	CHAR(1)
+
+CASE rubrobase
+	WHEN 'P'
+		DISPLAY 'PRECIO' TO tit_rubro_base
+	WHEN 'C'
+		DISPLAY 'COSTO' TO tit_rubro_base
+	OTHERWISE
+		CLEAR r32_rubro_base, tit_rubro_base
+END CASE
+
 END FUNCTION

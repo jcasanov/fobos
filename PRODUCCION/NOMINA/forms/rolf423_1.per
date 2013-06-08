@@ -1,0 +1,31 @@
+DATABASE aceros
+SCREEN
+{
+
+
+     Anios Antiguedad Mínimo: [c0]
+
+                Departamento: [c001] [c002                          ]
+
+                        Agrupado por Departamento ?: [c]
+
+                     Imprimir Sueldo del Empleado ?: [d]
+
+}
+TABLES
+gent034
+rolt030
+ATTRIBUTES
+c0   = FORMONLY.vm_anio_trab TYPE SMALLINT NOT NULL, REQUIRED,
+	AUTONEXT, REVERSE, UPSHIFT, INCLUDE = (0 TO 99),
+	COMMENTS = 'No. anios de trabajo en la compañía. Cero muestra todos los Empleados.';
+c001 = FORMONLY.n30_cod_depto, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = gent034.g34_nombre, NOENTRY, UPSHIFT;
+c    = FORMONLY.vm_agrupado TYPE CHAR NOT NULL, REQUIRED, REVERSE,
+	UPSHIFT, DEFAULT = 'S',
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+d    = FORMONLY.vm_impr_sueldo TYPE CHAR NOT NULL, REQUIRED, REVERSE,
+	UPSHIFT, DEFAULT = 'N',
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+END

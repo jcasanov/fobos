@@ -1,0 +1,72 @@
+DATABASE aceros
+SCREEN
+{
+                                                              [c050] de [c051]
+
+                                                        Estado: [c][c000     ]
+   No.Poliza: [c001                ]  Días Plazo: [c002  ]    Interés: [c003  ]%
+
+ Fecha Firma: [c004      ]                     Fecha Vencimiento: [c005      ]
+      Moneda: [c0] [c006           ]           Paridad: [c007                ]
+
+ Capital Empleado: [c008         ]            Capital Patrono: [c009         ]
+  Capital Interés: [c010         ]          Capital Descuento: [c011         ]
+    Total Capital: [c021         ]               Total Retiro: [c022         ]
+
+       Referencia: [c012                                                     ]
+ Liquidación Tope: [c1] [c013                          ]
+          Período: [c014      ]      -      [c015      ]
+
+   Fecha Distrib.: [c016      ]
+    Valor Interés: [c017         ]            Valor Descuento: [c018         ]
+          Usuario: [c019      ]           Fecha Ingreso: [c020               ]
+
+}
+TABLES
+gent013
+rolt003
+rolt081
+ATTRIBUTES
+c    = rolt081.n81_estado, NOENTRY, UPSHIFT, REVERSE,
+	COMMENTS = '(A) Activa  (P) Procesada.';
+c000 = FORMONLY.tit_estado, NOENTRY, UPSHIFT, REVERSE;
+c001 = rolt081.n81_num_poliza, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = rolt081.n81_dias_plazo, AUTONEXT, UPSHIFT, REVERSE, INCLUDE = (1 TO 500);
+c003 = rolt081.n81_porc_int, AUTONEXT, UPSHIFT, REVERSE, INCLUDE = (0 TO 100),
+	FORMAT = '##&.##';
+c004 = rolt081.n81_fec_firma, AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha de firma en formato: dd-mm-aaaa.';
+c005 = rolt081.n81_fec_vcto, AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha de vcto. en formato: dd-mm-aaaa.';
+c0   = rolt081.n81_moneda, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c006 = gent013.g13_nombre, NOENTRY, UPSHIFT, REVERSE;
+c007 = rolt081.n81_paridad, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '--,---,--&.#########';
+c008 = rolt081.n81_cap_trab, NOENTRY, UPSHIFT, REVERSE,FORMAT = '--,---,--&.##';
+c009 = rolt081.n81_cap_patr, NOENTRY, UPSHIFT, REVERSE,FORMAT = '--,---,--&.##';
+c010 = rolt081.n81_cap_int, NOENTRY, UPSHIFT, REVERSE, FORMAT = '--,---,--&.##';
+c011 = rolt081.n81_cap_dscto, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '--,---,--&.##';
+c021 = FORMONLY.total_cap, NOENTRY, UPSHIFT, REVERSE, FORMAT = '--,---,--&.##';
+c022 = FORMONLY.valor_ret, NOENTRY, UPSHIFT, REVERSE, FORMAT = '--,---,--&.##';
+c012 = rolt081.n81_referencia, AUTONEXT, UPSHIFT, SCROLL;
+c1   = rolt081.n81_cod_liqrol, NOENTRY, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c013 = rolt003.n03_nombre, NOENTRY, UPSHIFT, REVERSE;
+c014 = rolt081.n81_fecha_ini, NOENTRY, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha inicial en formato: dd-mm-aaaa.';
+c015 = rolt081.n81_fecha_fin, NOENTRY, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha final en formato: dd-mm-aaaa.';
+c016 = rolt081.n81_fec_distri, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha distribución en formato: dd-mm-aaaa.';
+c017 = rolt081.n81_val_int, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '--,---,--&.##';
+c018 = rolt081.n81_val_dscto, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '--,---,--&.##';
+c019 = rolt081.n81_usuario, NOENTRY, UPSHIFT, REVERSE;
+c020 = rolt081.n81_fecing, NOENTRY, UPSHIFT, REVERSE;
+c050 = FORMONLY.vm_row_current, NOENTRY, UPSHIFT;
+c051 = FORMONLY.vm_num_rows, NOENTRY, UPSHIFT;
+END

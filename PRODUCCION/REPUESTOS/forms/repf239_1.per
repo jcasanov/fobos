@@ -1,0 +1,55 @@
+DATABASE aceros
+SCREEN
+{
+
+
+  Bodega: [c0] [c001                          ]                   Año: [c002]
+    Item: [c003  ]          Secuencia: [c004  ]
+          [c005                                                             ]
+
+                       Buen Estado: [c006     ]
+                   (+)  Incompleto: [c007     ]
+                        Mal Estado: [c008     ]
+                                    ---------- 
+                             Total: [c009     ]
+
+                      Stock Actual: [c010     ]       Diferencia: [c011     ]
+                    Fecha de corte: [c016               ]
+
+
+       Usuario: [c012      ]                   Usuario Modificó: [c013      ]
+ Fecha Ingreso: [c014               ]   Fecha Modific.: [c015               ]
+  
+
+}
+TABLES
+rept089
+rept002
+rept010
+ATTRIBUTES
+c0   = rept089.r89_bodega, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = rept002.r02_nombre, NOENTRY, UPSHIFT, REVERSE;
+c002 = rept089.r89_anio, NOENTRY, UPSHIFT, REVERSE, INCLUDE = (2003 TO 2020);
+c003 = rept089.r89_item, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c004 = rept089.r89_secuencia, NOENTRY, UPSHIFT, REVERSE;
+c005 = rept010.r10_nombre, NOENTRY, REVERSE;
+c006 = rept089.r89_bueno, AUTONEXT, UPSHIFT, FORMAT = '##,##&.##',
+	INCLUDE = (0 TO 99999.99);
+c007 = rept089.r89_incompleto, AUTONEXT, UPSHIFT, FORMAT = '##,##&.##',
+	INCLUDE = (0 TO 99999.99);
+c008 = rept089.r89_mal_est, AUTONEXT, UPSHIFT, FORMAT = '##,##&.##',
+	INCLUDE = (0 TO 99999.99);
+c009 = rept089.r89_suma, NOENTRY, UPSHIFT, REVERSE, FORMAT = '##,##&.##';
+c010 = rept089.r89_stock_act, NOENTRY, UPSHIFT, REVERSE, FORMAT = '##,##&.##';
+c011 = FORMONLY.tit_diferencia, NOENTRY, UPSHIFT, REVERSE, FORMAT = '--,--&.##',
+	COLOR = RED WHERE c011 < 0;
+c012 = rept089.r89_usuario, NOENTRY, UPSHIFT, REVERSE;
+c013 = rept089.r89_usu_modifi, NOENTRY, UPSHIFT;
+c014 = rept089.r89_fecing, NOENTRY, UPSHIFT, REVERSE;
+c015 = rept089.r89_fec_modifi, NOENTRY, UPSHIFT;
+c016 = rept089.r89_fec_corte, NOENTRY, UPSHIFT, REVERSE;
+END
+KEYS
+F5 = "Diferencia"

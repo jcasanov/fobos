@@ -1,0 +1,22 @@
+DATABASE aceros
+SCREEN
+{
+
+         No Liquidación: [c0     ]     Fecha: [c1                 ]
+	
+   	      Proveedor: [c2     |c3                              ]
+
+}
+TABLES
+	rept028
+ATTRIBUTES
+
+c0  = rept028.r28_numliq, REVERSE, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c1  = rept028.r28_fecing,  REVERSE, NOENTRY;
+c2  = rept028.r28_codprov, REVERSE, NOENTRY;
+c3  = FORMONLY.nom_prov, REVERSE, NOENTRY;
+
+END
+INSTRUCTIONS
+DELIMITERS '||'

@@ -1,26 +1,29 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
  RUBROS GENERALES DE ROLES
---------------------------------------
- Rubro  Descripción
---------------------------------------
-[a    ][c001                        ]
-[a    ][c001                        ]
-[a    ][c001                        ]
-[a    ][c001                        ]
-[a    ][c001                        ]
-[a    ][c001                        ]
-[a    ][c001                        ]
-[a    ][c001                        ]
-[a    ][c001                        ]
-[a    ][c001                        ]
+
+ [b    |c011                          ]
+[a    |c001                          ]
+[a    |c001                          ]
+[a    |c001                          ]
+[a    |c001                          ]
+[a    |c001                          ]
+[a    |c001                          ]
+[a    |c001                          ]
+[a    |c001                          ]
+[a    |c001                          ]
+[a    |c001                          ]
 
 }
 TABLES
 rolt006
 ATTRIBUTES
+b    = FORMONLY.bt_codigo, NOENTRY, WIDGET='BUTTON', CONFIG='F15';
+c011 = FORMONLY.bt_nombre, NOENTRY, WIDGET='BUTTON', CONFIG='F16';
+
 a    = n06_cod_rubro;
-c001 = n06_nombre;
+c001 = n06_nombre, UPSHIFT;
+END
 INSTRUCTIONS
 SCREEN RECORD rh_rubrol[10] (n06_cod_rubro, n06_nombre)

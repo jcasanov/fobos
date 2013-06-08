@@ -1,0 +1,24 @@
+DATABASE aceros
+SCREEN
+{
+
+
+     Código Tipo Orden Trabajo: [a] [c                    ]
+
+  Código Subtipo Orden Trabajo: [b] [f001                     ]
+
+	         Ingresado Por: [f002      ]
+              Fecha de Ingreso: [f003               ]
+
+}
+TABLES talt006
+ATTRIBUTES
+a    = talt006.t06_tipord, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c    = FORMONLY.nom_tipo TYPE VARCHAR, NOENTRY, REVERSE; 
+b    = talt006.t06_subtipo, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f001 = talt006.t06_nombre, REVERSE, UPSHIFT;
+f002 = talt006.t06_usuario,REVERSE, NOENTRY;
+f003 = talt006.t06_fecing, REVERSE, NOENTRY;
+end

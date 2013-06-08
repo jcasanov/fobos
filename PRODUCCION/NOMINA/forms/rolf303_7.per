@@ -1,0 +1,41 @@
+DATABASE FORMONLY
+SCREEN 
+{
+
+  Detalle de Vacaciones               [c10] de [c11]
+  [c0|c001      |c002      |c003|c004     |c005     ] 
+ [c1|c011      |c012      |c013|c014     |c015     ] 
+ [c1|c011      |c012      |c013|c014     |c015     ] 
+ [c1|c011      |c012      |c013|c014     |c015     ] 
+ [c1|c011      |c012      |c013|c014     |c015     ] 
+ [c1|c011      |c012      |c013|c014     |c015     ] 
+                Total ==> [c020|c021     |c022     ]
+
+}
+ATTRIBUTES
+c0   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F17';
+c002 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F18';
+c003 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F19';
+c004 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F20';
+c005 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F21';
+
+c1   = FORMONLY.cod_v,   NOENTRY, OPTIONS = '-nolist';
+c011 = FORMONLY.per_ini, NOENTRY, FORMAT = 'dd-mm-yyyy', OPTIONS = '-nolist';
+c012 = FORMONLY.per_fin, NOENTRY, FORMAT = 'dd-mm-yyyy', OPTIONS = '-nolist';
+c013 = FORMONLY.dias_g,  NOENTRY, OPTIONS = '-nolist';
+c014 = FORMONLY.val_pag, NOENTRY, FORMAT = '##,##&.##', OPTIONS = '-nolist';
+c015 = FORMONLY.val_des, NOENTRY, FORMAT = '##,##&.##', OPTIONS = '-nolist';
+
+c020 = FORMONLY.t_dias_g,  REVERSE, NOENTRY;
+c021 = FORMONLY.t_val_pag, REVERSE, NOENTRY, FORMAT = '##,##&.##';
+c022 = FORMONLY.t_val_des, REVERSE, NOENTRY, FORMAT = '##,##&.##';
+
+c10  = FORMONLY.num_row, NOENTRY, UPSHIFT;
+c11  = FORMONLY.max_row, NOENTRY, UPSHIFT;
+END
+KEYS
+F5 = 'Comp. Vacaciones'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_vac[5] (cod_v, per_ini, per_fin, dias_g, val_pag, val_des)

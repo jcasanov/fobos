@@ -1,0 +1,29 @@
+DATABASE aceros
+SCREEN
+{
+  CODIGOS COLORES  
+ -------------------------------------------------------
+  Código     Descripción                              E
+ -------------------------------------------------------
+ [c001      |c002                                    |c]
+ [c001      |c002                                    |c]
+ [c001      |c002                                    |c]
+ [c001      |c002                                    |c]
+ [c001      |c002                                    |c]
+ [c001      |c002                                    |c]
+ [c001      |c002                                    |c]
+ [c001      |c002                                    |c]
+ [c001      |c002                                    |c]
+ [c001      |c002                                    |c]
+}
+TABLES
+rept075
+
+ATTRIBUTES
+c001 = r75_color,  	 UPSHIFT,REVERSE;                  
+c002 = r75_descripcion,  UPSHIFT,REVERSE;                  
+c    = r75_estado,     	 UPSHIFT,REVERSE;                  
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_color[10] (r75_color, r75_descripcion, r75_estado)

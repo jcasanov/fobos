@@ -1,4 +1,4 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
 
@@ -32,7 +32,8 @@ c021 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
 c022 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
 c023 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
 
-c010 = FORMONLY.j12_fecing, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c010 = FORMONLY.j12_fecing TYPE DATE, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
 c011 = gent008.g08_nombre, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
 c012 = cajt012.j12_num_cheque, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
 c013 = cajt012.j12_valor, NOENTRY, UPSHIFT,

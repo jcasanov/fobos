@@ -1,115 +1,23 @@
-
-DATABASE diteca
-screen
+DATABASE aceros
+SCREEN
 {
-No Proforma:[c0   ]                 	             Fecha:[c1        ]
-     Moneda:[c2] [c3                      ]  Días Proforma:[c4   ]  
-     Bodega:[a ] [b                       ]    	       IVA:[c7   ]%    
-Grupo Línea:[c5   ] [c6                   ]      Descuento:[c10  ]%        
-    Cliente:[c8   ] [c9                     ]  Ced/RUC/Pas:[c12             ]
-  Dirección:[c11                            ]     Teléfono:[c15            ]   
-   Vendedor:[c13 ] [c14                     ]       Modelo:[c02             ] 
-Observación:[c01                            ]   Forma Pago:[c03             ]
- Atencion a:[c05                            ]
-       [b0  |b1             ] [b2 |b3   |b4            |b5              ]
-      [c16 |c18            ] [c00|c19  |c20           |c21             ]
-      [c16 |c18            ] [c00|c19  |c20           |c21             ]
-      [c16 |c18            ] [c00|c19  |c20           |c21             ]
-      [c16 |c18            ] [c00|c19  |c20           |c21             ]
-      [c16 |c18            ] [c00|c19  |c20           |c21             ]
-      [c16 |c18            ] [c00|c19  |c20           |c21             ]
-             			             Subtotal:[c22             ]
-      [c26                             ]    Descuento:[c23             ]
-   Peso Total:[c04            ]              Impuesto:[c24             ]
-Ingresado Por:[c27        ]	                 Neto:[c25             ]
+
+
+                Division: [f000 ] [f001                                ]
+          Línea de Venta: [f2]    [f003                                ]
+
+           Ingresado Por: [f004      ]
+        Fecha de Ingreso: [f005               ]
+
 }
-end
-TABLES
-	rept021
-	rept022
+TABLES rept070
 ATTRIBUTES
-
-c04  = formonly.vm_tot_peso TYPE DECIMAL(11,3), REVERSE, NOENTRY, 
-	FORMAT = '###,###,##&.###';
-
-		     ---- BOTONES ----
-b0  = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-b1  = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-b2  = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
-b3  = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
-b4  = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F20';
-b5  = formonly.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F21';
-
-c01 = rept021.r21_referencia, REVERSE, UPSHIFT, SCROLL;
-c02 = rept021.r21_modelo,     REVERSE, UPSHIFT, SCROLL;
-c03 = rept021.r21_forma_pago, REVERSE, UPSHIFT, SCROLL;
-c05 = rept021.r21_atencion,   REVERSE, UPSHIFT, SCROLL;
-
-c0  = rept021.r21_numprof, REVERSE, NOENTRY,
+f000 = rept070.r70_linea ,REVERSE, UPSHIFT, AUTONEXT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c1  = formonly.vm_fecha TYPE DATE, REVERSE, NOENTRY, FORMAT = 'dd-mm-yyyy',
-	COMMENTS = 'Digite la fecha en formato: dd-mm-aaaa.';
-c2  = rept021.r21_moneda, REVERSE, UPSHIFT,
-	COMMENTS = 'Moneda Base o Moneda Alterna. ',
+f001 = FORMONLY.tit_linea, NOENTRY, REVERSE, UPSHIFT;
+f2   = rept070.r70_sub_linea, AUTONEXT, UPSHIFT, REVERSE,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c3  = formonly.nom_moneda TYPE VARCHAR, NOENTRY;
-c4  = rept021.r21_dias_prof, REVERSE;
-c5  = rept021.r21_grupo_linea , REVERSE, UPSHIFT, 
-	COMMENT = 'Grupo de Línea a la que pertenecen los Items. ',
-	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c6  = formonly.nom_grupo TYPE VARCHAR, NOENTRY;
-c7  = rept021.r21_porc_impto, REVERSE, NOENTRY;
-c8  = rept021.r21_codcli, UPSHIFT, 
-	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c9  = rept021.r21_nomcli, REVERSE, UPSHIFT, SCROLL,
-	COMMENTS = 'Nombre del cliente. ';
-c10 = rept021.r21_descuento, REVERSE, FORMAT = '#&.##', 
-	INCLUDE = (0.00 TO 99.99);
-c11 = rept021.r21_dircli, REVERSE, UPSHIFT, SCROLL,
-	COMMENTS = 'Dirección del domicilio del cliente.  ';
-c12 = rept021.r21_cedruc, REVERSE, UPSHIFT,
-	COMMENTS = 'Cédula o RUC del cliente. ';
-c13 = rept021.r21_vendedor, REVERSE, 
-	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c14 = formonly.nom_vendedor TYPE VARCHAR, NOENTRY;
-c15 = rept021.r21_telcli, UPSHIFT;
-a   = rept021.r21_bodega, REVERSE, UPSHIFT,
-	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-b   = formonly.nom_bodega TYPE VARCHAR, NOENTRY;
-c27 = rept021.r21_usuario, REVERSE,NOENTRY, UPSHIFT;
-
-	---- DETALLE ----
-
-c00 = rept022.r22_dias_ent, REVERSE,OPTIONS = '-nolist',INCLUDE = (0 TO 999),
-	COMMENT = 'Días de entrega. Digite 0 para entrega inmediata.';
-c16 = rept022.r22_cantidad, REVERSE,OPTIONS = '-nolist',
-	INCLUDE = (1 TO 9999);
-c18 = rept022.r22_item, REVERSE, UPSHIFT, OPTIONS = '-nolist',
-	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c26 = formonly.nom_item, REVERSE, NOENTRY;
-c19 = rept022.r22_porc_descto, REVERSE, FORMAT = '#&.##', 
-	INCLUDE = (0 TO 99.99), OPTIONS = '-nolist';
-c20 = rept022.r22_precio, REVERSE, FORMAT = '###,###,##&.##',
-	REVERSE, OPTIONS = '-nolist', INCLUDE = (0.00 TO 999999999.99);
-c21 = formonly.subtotal_item TYPE DECIMAL(12,2), NOENTRY, 
-	FORMAT = '#,###,###,##&.##', REVERSE, OPTIONS = '-nolist';
-c22 = rept021.r21_tot_bruto,  
-	FORMAT = '#,###,###,##&.##',NOENTRY;
-c23 = rept021.r21_tot_dscto, 
-	FORMAT = '###,###,##&.##', NOENTRY;
-c24 = formonly.vm_impuesto TYPE DECIMAL(11,2), 
-	FORMAT = '###,###,##&.##', NOENTRY;
-c25 = rept021.r21_tot_neto , REVERSE, FORMAT = '#,###,###,##&.##', NOENTRY;
-
-INSTRUCTIONS 
-DELIMITERS '||'
-SCREEN RECORD r_detalle[6] (r22_cantidad,    r22_item,   r22_dias_ent, 
-			    r22_porc_descto, r22_precio, 
-			    subtotal_item)
-
-KEYS
-	F5 = 'Crear Cliente'
-	F6 = 'Crear Item'
-	F7 = 'Ver Item'
-	F8 = '% Defaults'
-	F9 = 'Factores'
+f003 = rept070.r70_desc_sub, AUTONEXT, UPSHIFT, REVERSE;
+f004 = rept070.r70_usuario, REVERSE, NOENTRY, UPSHIFT;
+f005 = rept070.r70_fecing, REVERSE, NOENTRY, UPSHIFT;
+end

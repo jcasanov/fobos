@@ -1,0 +1,82 @@
+DATABASE aceros
+SCREEN
+{
+            Localidad: [c000]   [c001                          ]
+       Grupo del Bien: [c002]   [c003                          ]
+      Codigo del Bien: [c004  ] [c005                                    ]
+    Periodo de Compra: [c006      ]        -        [c007      ]
+               Estado: [e] [c008                               ]
+                                                            [c009 ] de [c010 ]
+ [c020  |c021                  |c022      |c023 |c024         |c025         |c]
+[c030  |c031                  |c032      |c033 |c034         |c035         |d]
+[c030  |c031                  |c032      |c033 |c034         |c035         |d]
+[c030  |c031                  |c032      |c033 |c034         |c035         |d]
+[c030  |c031                  |c032      |c033 |c034         |c035         |d]
+[c030  |c031                  |c032      |c033 |c034         |c035         |d]
+[c030  |c031                  |c032      |c033 |c034         |c035         |d]
+[c030  |c031                  |c032      |c033 |c034         |c035         |d]
+[c030  |c031                  |c032      |c033 |c034         |c035         |d]
+[c030  |c031                  |c032      |c033 |c034         |c035         |d]
+[c030  |c031                  |c032      |c033 |c034         |c035         |d]
+[c030  |c031                  |c032      |c033 |c034         |c035         |d]
+[c030  |c031                  |c032      |c033 |c034         |c035         |d]
+[c030  |c031                  |c032      |c033 |c034         |c035         |d]
+                                      Totales: [c040         |c041         ]
+}
+TABLES
+actt010
+gent002
+ATTRIBUTES
+c000 = FORMONLY.a10_localidad, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = gent002.g02_nombre, NOENTRY, UPSHIFT;
+c002 = FORMONLY.cod_grupo TYPE INTEGER, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = FORMONLY.desc_grupo TYPE VARCHAR, NOENTRY, UPSHIFT;
+c004 = FORMONLY.codigo_bien TYPE INTEGER, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c005 = FORMONLY.desc_bien TYPE VARCHAR, NOENTRY, UPSHIFT;
+c006 = FORMONLY.fecha_ini TYPE DATE NOT NULL, REQUIRED, AUTONEXT, REVERSE,
+	UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha inicial en formato: dd-mm-aaaa.';
+c007 = FORMONLY.fecha_fin TYPE DATE NOT NULL, REQUIRED, AUTONEXT, REVERSE,
+	UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha final en formato: dd-mm-aaaa.';
+e    = FORMONLY.estado, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Presione F2 y escoja el estado del bien (ACTIVO FIJO)';
+c008 = FORMONLY.tit_estado, NOENTRY, UPSHIFT, REVERSE;
+
+c009 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c010 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+
+c020 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c021 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c022 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c023 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c024 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c025 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c    = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+
+c030 = actt010.a10_codigo_bien, NOENTRY, UPSHIFT;
+c031 = actt010.a10_descripcion, NOENTRY, UPSHIFT;
+c032 = actt010.a10_fecha_comp, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c033 = actt010.a10_porc_deprec, NOENTRY, UPSHIFT, FORMAT = '#&.##';
+c034 = actt010.a10_valor_mb, NOENTRY, UPSHIFT, FORMAT = '##,###,##&.##';
+c035 = actt010.a10_val_dep_mb, NOENTRY, UPSHIFT, FORMAT = '##,###,##&.##';
+d    = actt010.a10_estado, NOENTRY, UPSHIFT;
+
+c040 = FORMONLY.tot_valor_mb, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '##,###,##&.##';
+c041 = FORMONLY.tot_val_dep_mb, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '##,###,##&.##';
+END
+KEYS
+F5 = 'El Bien'
+F6 = 'Dar de Baja'
+F7 = 'Vender el Bien'
+F8 = 'Movimientos'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_act[13] (a10_codigo_bien, a10_descripcion, a10_fecha_comp,
+			a10_porc_deprec, a10_valor_mb,a10_val_dep_mb,a10_estado)

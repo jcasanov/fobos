@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
--- Titulo               : talp103.4gl -- Mantenimiento de Mecanicos
+-- Titulo               : talp103.4gl -- Mantenimiento de Tecnicos
 -- Elaboración          : 7-sep-2001
 -- Autor                : GVA
 -- Formato de Ejecución : fglrun talp103.4gl base TA 1
@@ -18,19 +18,20 @@ DEFINE vm_row_current	SMALLINT	-- FILA CORRIENTE DEL ARREGLO
 DEFINE vm_num_rows	SMALLINT	-- CANTIDAD DE FILAS LEIDAS
 DEFINE vm_max_rows      SMALLINT        -- MAXIMO DE FILAS LEIDAS
 DEFINE vm_demonios	VARCHAR(12)
-DEFINE vm_flag_mant         CHAR(1)
+DEFINE vm_flag_mant     CHAR(1)
 
 MAIN
 
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/talp103.error')
-CALL fgl_init4js()
+CALL startlog('../logs/errores')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN
-     CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto','stop')
-     EXIT PROGRAM
+     	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto','stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
+     	EXIT PROGRAM
 END IF
 LET vg_base	= arg_val(1)
 LET vg_modulo	= arg_val(2)
@@ -38,7 +39,7 @@ LET vg_codcia	= arg_val(3)
 LET vg_proceso	= 'talp103'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -47,13 +48,31 @@ END MAIN
 
 
 FUNCTION funcion_master()
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
 CALL fl_nivel_isolation()
 LET vm_max_rows = 1000
-OPEN WINDOW w_mec AT 3,2 WITH 22 ROWS, 80 COLUMNS 
-    ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE FIRST,BORDER,
-	      MESSAGE LINE LAST - 2)
-OPEN FORM f_mec FROM '../forms/talf103_1'
+LET lin_menu = 0
+LET row_ini  = 3
+LET num_rows = 22
+LET num_cols = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW w_mec AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
+    ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE lin_menu,BORDER,
+	      MESSAGE LINE LAST - 1)
+IF vg_gui = 1 THEN
+	OPEN FORM f_mec FROM '../forms/talf103_1'
+ELSE
+	OPEN FORM f_mec FROM '../forms/talf103_1c'
+END IF
 DISPLAY FORM f_mec
 INITIALIZE rm_mec.* TO NULL
 LET vm_num_rows = 0
@@ -67,9 +86,7 @@ MENU 'OPCIONES'
 	COMMAND KEY('I') 'Ingresar' 'Ingresar nuevos registros. '
 		CALL control_ingreso()
 		IF vm_num_rows = 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN		
 			SHOW OPTION 'Modificar'
-		   END IF			
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -86,10 +103,7 @@ MENU 'OPCIONES'
         COMMAND KEY('C') 'Consultar' 'Consultar un registro. '
                 CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN		
 			SHOW OPTION 'Modificar'
-		   END IF
-			
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -97,10 +111,7 @@ MENU 'OPCIONES'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
-			IF fl_control_permiso_opcion('Modificar') THEN		
-				SHOW OPTION 'Modificar'
-			END IF
-			
+			SHOW OPTION 'Modificar'
 		END IF
 		IF vm_row_current <= 1 THEN
                         HIDE OPTION 'Retroceder'
@@ -143,32 +154,34 @@ END FUNCTION
 
 FUNCTION control_consulta()
 DEFINE codrol		LIKE talt003.t03_codrol
-DEFINE mecanico		LIKE talt003.t03_mecanico
+DEFINE tecnico		LIKE talt003.t03_mecanico
 DEFINE nombre		LIKE talt003.t03_nombres
 DEFINE nomrol		LIKE rolt030.n30_nombres
-DEFINE expr_sql		VARCHAR(500)
-DEFINE query		VARCHAR(600)
+DEFINE expr_sql		CHAR(500)
+DEFINE query		CHAR(600)
 DEFINE tipo		LIKE talt003.t03_tipo
 
 CLEAR FORM
 LET int_flag = 0
-INITIALIZE mecanico TO NULL
+INITIALIZE tecnico TO NULL
 CONSTRUCT BY NAME expr_sql ON t03_mecanico,t03_nombres,t03_iniciales,t03_codrol,  			      t03_tipo, t03_seccion ,t03_linea, 
 			      t03_usuario, t03_fecing
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
 	ON KEY(F2)
 		IF INFIELD(t03_mecanico) THEN
 			LET tipo = 'T'
 			CALL fl_ayuda_mecanicos(vg_codcia, tipo)
-				RETURNING mecanico, nombre
-			IF mecanico IS NOT NULL THEN
-			    LET rm_mec.t03_mecanico = mecanico
+				RETURNING tecnico, nombre
+			IF tecnico IS NOT NULL THEN
+			    LET rm_mec.t03_mecanico = tecnico
 			    LET rm_mec.t03_nombres  = nombre
 			    DISPLAY BY NAME rm_mec.t03_mecanico,
 			                    rm_mec.t03_nombres
 			END IF
 		END IF
 		IF INFIELD(t03_codrol) THEN
-			CALL fl_ayuda_trabajadores(vg_codcia)
+			CALL fl_ayuda_codigo_empleado(vg_codcia)
 			 RETURNING rm_rol.n30_cod_trab, rm_rol.n30_nombres
 			IF rm_rol.n30_cod_trab IS NOT NULL THEN
 			    LET rm_mec.t03_codrol = rm_rol.n30_cod_trab
@@ -195,6 +208,9 @@ CONSTRUCT BY NAME expr_sql ON t03_mecanico,t03_nombres,t03_iniciales,t03_codrol,
 			END IF
 		END IF
 		LET int_flag = 0
+	BEFORE CONSTRUCT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 END CONSTRUCT
 IF int_flag THEN
 	CLEAR FORM
@@ -238,7 +254,7 @@ LET rm_mec.t03_usuario  = vg_usuario
 LET rm_mec.t03_compania = vg_codcia
 LET rm_mec.t03_tipo     = 'M'
 
--- Los nuevo campos que se ingresaron en la tabla de mecánicos
+-- Los nuevo campos que se ingresaron en la tabla de técnicos
 
 LET rm_mec.t03_hora_ini = '00:00'
 LET rm_mec.t03_hora_fin = '00:00'
@@ -261,8 +277,8 @@ SELECT MAX(t03_mecanico) + 1 INTO rm_mec.t03_mecanico FROM talt003
         END IF
 CALL lee_datos()
 IF NOT int_flag THEN
-	WHENEVER ERROR CONTINUE
 	BEGIN WORK
+	WHENEVER ERROR CONTINUE
 	INSERT INTO talt003 VALUES (rm_mec.*)
 	WHENEVER ERROR STOP
 	IF status < 0 THEN
@@ -295,18 +311,19 @@ END FUNCTION
 FUNCTION control_modificacion()
 
 LET vm_flag_mant = 'M'
-WHENEVER ERROR CONTINUE
 BEGIN WORK
+WHENEVER ERROR CONTINUE
 DECLARE q_up CURSOR FOR SELECT * FROM talt003 WHERE ROWID = vm_r_rows[vm_row_current]
 	FOR UPDATE
 OPEN q_up
 FETCH q_up INTO rm_mec.*
 IF status < 0 THEN
-	COMMIT WORK
+	ROLLBACK WORK
 	CALL fl_mensaje_bloqueo_otro_usuario()
 	WHENEVER ERROR STOP
 	RETURN
 END IF
+WHENEVER ERROR STOP
 CALL lee_datos()
 IF NOT int_flag THEN
    	UPDATE talt003	
@@ -328,6 +345,7 @@ IF NOT int_flag THEN
 	COMMIT WORK
 	CALL fl_mensaje_registro_modificado()
 ELSE
+	COMMIT WORK
 	CALL lee_muestra_registro(vm_r_rows[vm_row_current])
 END IF
 CLOSE q_up
@@ -378,9 +396,11 @@ INPUT BY NAME rm_mec.t03_nombres, rm_mec.t03_iniciales, rm_mec.t03_codrol,  		  
 			END IF
 		        RETURN
                 END IF
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
 	ON KEY(F2)
 		IF INFIELD(t03_codrol) THEN
-			CALL fl_ayuda_trabajadores(vg_codcia)
+			CALL fl_ayuda_codigo_empleado(vg_codcia)
 			 RETURNING rm_rol.n30_cod_trab, rm_rol.n30_nombres
 			IF rm_rol.n30_cod_trab IS NOT NULL THEN
 			    LET rm_mec.t03_codrol = rm_rol.n30_cod_trab
@@ -407,14 +427,18 @@ INPUT BY NAME rm_mec.t03_nombres, rm_mec.t03_iniciales, rm_mec.t03_codrol,  		  
 			END IF
 		END IF
 		LET int_flag = 0
+	BEFORE INPUT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 	AFTER FIELD t03_codrol
 	    IF rm_mec.t03_codrol IS NOT NULL THEN
 		CALL fl_lee_trabajador_roles(vg_codcia, rm_mec.t03_codrol)
 			RETURNING rm_rol.*
 		IF rm_rol.n30_nombres IS NULL THEN
-	             CALL fgl_winmessage(vg_producto, 'No existe código de rol', 					 'exclamation')
-		     CLEAR nom_rol
-		     NEXT FIELD t03_codrol
+	        	--CALL fgl_winmessage(vg_producto,'No existe código de rol','exclamation')
+			CALL fl_mostrar_mensaje('No existe código de rol.','exclamation')
+		     	CLEAR nom_rol
+		     	NEXT FIELD t03_codrol
 		END IF
 		LET rm_mec.t03_codrol = rm_rol.n30_cod_trab
 		DISPLAY BY NAME rm_mec.t03_codrol
@@ -427,9 +451,10 @@ INPUT BY NAME rm_mec.t03_nombres, rm_mec.t03_iniciales, rm_mec.t03_codrol,  		  
 		CALL fl_lee_cod_seccion(vg_codcia, rm_mec.t03_seccion)
 			RETURNING rm_sec.*
 		IF rm_sec.t02_seccion IS NULL THEN
-	             CALL fgl_winmessage(vg_producto, 'No existe la seccion', 					         'exclamation')
-		     CLEAR nom_sec
-		     NEXT FIELD t03_seccion
+	             	--CALL fgl_winmessage(vg_producto,'No existe la seccion','exclamation')
+			CALL fl_mostrar_mensaje('No existe la sección.','exclamation')
+		     	CLEAR nom_sec
+		     	NEXT FIELD t03_seccion
 		END IF
 		LET rm_mec.t03_seccion = rm_sec.t02_seccion
 		DISPLAY BY NAME rm_mec.t03_seccion
@@ -442,9 +467,10 @@ INPUT BY NAME rm_mec.t03_nombres, rm_mec.t03_iniciales, rm_mec.t03_codrol,  		  
 		CALL fl_lee_linea_taller(vg_codcia, rm_mec.t03_linea)
 			RETURNING rm_mar.*
 		IF rm_mar.t01_linea IS NULL THEN
-	             CALL fgl_winmessage(vg_producto, 'No existe la linea de taller', 'exclamation')
-		     CLEAR nom_linea
-		     NEXT FIELD t03_linea
+	             	--CALL fgl_winmessage(vg_producto,'No existe la linea de taller', 'exclamation')
+			CALL fl_mostrar_mensaje('No existe la línea de taller.', 'exclamation')
+		     	CLEAR nom_linea
+		     	NEXT FIELD t03_linea
 		END IF
 		LET rm_mec.t03_linea = rm_mar.t01_linea
 		DISPLAY BY NAME rm_mec.t03_linea
@@ -484,7 +510,8 @@ INPUT BY NAME rm_mec.t03_nombres, rm_mec.t03_iniciales, rm_mec.t03_codrol,  		  
 			NEXT FIELD t03_fact_hte
 		END IF
 		IF rm_mec.t03_hora_fin < rm_mec.t03_hora_ini THEN
-			CALL fgl_winmessage(vg_producto,'La Hora de salida del mecánico debe ser mayor a la hora de ingreso.','exclamation')
+			--CALL fgl_winmessage(vg_producto,'La Hora de salida del técnico debe ser mayor a la hora de ingreso.','exclamation')
+			CALL fl_mostrar_mensaje('La Hora de salida del técnico debe ser mayor a la hora de ingreso.','exclamation')
 			NEXT FIELD t03_hora_fin
 		END IF
 
@@ -496,7 +523,8 @@ INPUT BY NAME rm_mec.t03_nombres, rm_mec.t03_iniciales, rm_mec.t03_codrol,  		  
 		   IF vm_flag_mant = 'I' OR
 		      (vm_flag_mant = 'M' AND rm_mec.t03_mecanico <> serial)
 		   THEN
-		   	CALL fgl_winmessage(vg_producto,'Las iniciales ya fueron asignadas al mecánico de código  '|| serial,'exclamation')
+		   	--CALL fgl_winmessage(vg_producto,'Las iniciales ya fueron asignadas al técnico de código  '|| serial,'exclamation')
+			CALL fl_mostrar_mensaje('Las iniciales ya fueron asignadas al técnico de código '|| serial,'exclamation')
 		      	NEXT FIELD t03_iniciales
 		   END IF
 		END IF
@@ -543,44 +571,23 @@ FUNCTION muestra_contadores(row_current, num_rows)
 DEFINE row_current              SMALLINT
 DEFINE num_rows                 SMALLINT
                                                                                 
-DISPLAY "" AT 1,1
-DISPLAY row_current, " de ", num_rows AT 1, 69
-                                                                                
-END FUNCTION
-
-
-
-FUNCTION validar_parametros()
-                                                                                
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-        CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'sto
-p')
-        EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-        CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'st
-op')
-        EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-     CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 			 'stop')
-     EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-        LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-        CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc,
-			    'stop')
-        EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-      CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 			  'stop')
-      EXIT PROGRAM
+IF vg_gui = 1 THEN
+	DISPLAY "" AT 1,1
+	DISPLAY row_current, " de ", num_rows AT 1, 67
 END IF
                                                                                 
 END FUNCTION
 
+
+
+FUNCTION llamar_visor_teclas()
+DEFINE a		CHAR(1)
+
+IF vg_gui = 0 THEN
+	CALL fl_visor_teclas_caracter() RETURNING int_flag 
+	LET a = fgl_getkey()
+	CLOSE WINDOW w_tf
+	LET int_flag = 0
+END IF
+
+END FUNCTION

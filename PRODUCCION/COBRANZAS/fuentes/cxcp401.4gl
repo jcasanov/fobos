@@ -8,8 +8,8 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
+DEFINE vm_demonios	VARCHAR(12)
 DEFINE rm_g01		RECORD LIKE gent001.*
-
 DEFINE rm_par RECORD 
 	g13_moneda	LIKE gent013.g13_moneda,
 	g13_nombre	LIKE gent013.g13_nombre,
@@ -19,7 +19,6 @@ DEFINE rm_par RECORD
 	n_tipocli	LIKE gent012.g12_nombre,
 	tipo_vcto	CHAR
 END RECORD
-
 DEFINE vm_page		SMALLINT	-- PAGE   LENGTH
 DEFINE vm_top		SMALLINT	-- TOP    MARGIN
 DEFINE vm_left		SMALLINT	-- LEFT   MARGIN
@@ -33,13 +32,12 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/cxcp401.error')
-CALL fgl_init4js()
+CALL startlog('../logs/errores')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN          -- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 
-		'Número de parámetros incorrecto', 
-		'stop')
+	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.','stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
 LET vg_base     = arg_val(1)
@@ -49,8 +47,8 @@ LET vg_codloc   = arg_val(4)
 LET vg_proceso = 'cxcp401'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -59,8 +57,11 @@ END MAIN
 
 
 FUNCTION funcion_master()
-
 DEFINE r_g13		RECORD LIKE gent013.*
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
 CALL fl_nivel_isolation()
 
@@ -76,14 +77,30 @@ LET rm_par.g13_moneda = r_g13.g13_moneda
 LET rm_par.g13_nombre = r_g13.g13_nombre
 LET rm_par.tipo_vcto  = 'T'
 
-OPEN WINDOW w_mas AT 3,2 WITH 6 ROWS, 80 COLUMNS
-	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE 0, 
-		BORDER, MESSAGE LINE LAST - 2)
-OPTIONS INPUT WRAP,
-	ACCEPT KEY	F12
-OPEN FORM f_rep FROM "../forms/cxcf401_1"
+LET lin_menu = 0
+LET row_ini  = 3
+LET num_rows = 6
+LET num_cols = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW w_mas AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
+	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE lin_menu,
+		  MESSAGE LINE LAST - 1, BORDER) 
+IF vg_gui = 1 THEN
+	OPEN FORM f_rep FROM "../forms/cxcf401_1"
+ELSE
+	OPEN FORM f_rep FROM "../forms/cxcf401_1c"
+END IF
 DISPLAY FORM f_rep
 
+DISPLAY BY NAME rm_par.g13_nombre
+IF vg_gui = 0 THEN
+	CALL muestra_tipovcto(rm_par.tipo_vcto)
+END IF
 CALL control_reporte()
 
 END FUNCTION
@@ -92,10 +109,9 @@ END FUNCTION
 
 FUNCTION control_reporte()
 DEFINE i,col		SMALLINT
-DEFINE query		VARCHAR(1000)
+DEFINE query		CHAR(1000)
 DEFINE comando		VARCHAR(100)
 DEFINE data_found	SMALLINT
-
 DEFINE r_det		RECORD 
 	codcli		LIKE cxct001.z01_codcli,
 	nomcli		LIKE cxct001.z01_nomcli,
@@ -145,21 +161,20 @@ END FUNCTION
 
 FUNCTION lee_parametros()
 DEFINE i,j,l		SMALLINT
-
 DEFINE dummy		LIKE gent011.g11_tiporeg
-
 DEFINE r_g03		RECORD LIKE gent003.*
 DEFINE r_g12		RECORD LIKE gent012.*
 DEFINE r_g13		RECORD LIKE gent013.*
 
 LET INT_FLAG   = 0
-INPUT BY NAME rm_par.* WITHOUT DEFAULTS
+INPUT BY NAME rm_par.g13_moneda, rm_par.tipo_vcto, rm_par.areaneg,
+	rm_par.tipocli
+	WITHOUT DEFAULTS
 	ON KEY(INTERRUPT)
-		IF NOT FIELD_TOUCHED(rm_par.*) THEN
-			EXIT PROGRAM
-		END IF
 		LET INT_FLAG = 1 
 		RETURN
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
 	ON KEY(F2)
 		IF INFIELD(g13_moneda) THEN
 			CALL fl_ayuda_monedas() RETURNING r_g13.g13_moneda, 
@@ -194,13 +209,15 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 			END IF
 		END IF
 		LET INT_FLAG = 0
+	BEFORE INPUT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 	AFTER FIELD g13_moneda
 		IF rm_par.g13_moneda IS NOT NULL THEN
 			CALL fl_lee_moneda(rm_par.g13_moneda) RETURNING r_g13.*
 			IF r_g13.g13_moneda IS NULL THEN
-				CALL fgl_winmessage(vg_producto, 
-					'Moneda no existe.', 
-					'exclamation')
+				--CALL fgl_winmessage(vg_producto,'Moneda no existe.','exclamation')
+				CALL fl_mostrar_mensaje('Moneda no existe.','exclamation')
 				NEXT FIELD g13_moneda
 			END IF
 			LET rm_par.g13_nombre = r_g13.g13_nombre
@@ -214,9 +231,8 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 			CALL fl_lee_area_negocio(vg_codcia, rm_par.areaneg) 
 				RETURNING r_g03.*
 			IF r_g03.g03_areaneg IS NULL THEN
-				CALL fgl_winmessage(vg_producto, 
-					'Area de negocio no existe.', 
-					'exclamation')
+				--CALL fgl_winmessage(vg_producto,'Area de negocio no existe.','exclamation')
+				CALL fl_mostrar_mensaje('Area de negocio no existe.','exclamation')
 				NEXT FIELD areaneg
 			END IF
 			LET rm_par.n_areaneg = r_g03.g03_nombre
@@ -230,9 +246,8 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 			CALL fl_lee_subtipo_entidad('CL', rm_par.tipocli)
 				RETURNING r_g12.*
 			IF r_g12.g12_subtipo IS NULL THEN
-				CALL fgl_winmessage(vg_producto, 
-					'Tipo cliente no existe.', 
-					'exclamation')
+				--CALL fgl_winmessage(vg_producto,'Tipo cliente no existe.','exclamation')
+				CALL fl_mostrar_mensaje('Tipo cliente no existe.','exclamation')
 				NEXT FIELD tipocli
 			END IF
 			LET rm_par.n_tipocli = r_g12.g12_nombre
@@ -241,6 +256,14 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 			LET rm_par.n_tipocli = NULL
 			CLEAR n_tipocli
 		END IF
+	AFTER FIELD tipo_vcto
+		IF vg_gui = 0 THEN
+			IF rm_par.tipo_vcto IS NOT NULL THEN
+				CALL muestra_tipovcto(rm_par.tipo_vcto)
+			ELSE
+				CLEAR tit_tipo_vcto
+			END IF
+		END IF
 END INPUT
 
 END FUNCTION
@@ -248,8 +271,7 @@ END FUNCTION
 
 
 FUNCTION prepare_query_cxct030()
-
-DEFINE query	 	VARCHAR(1000)
+DEFINE query	 	CHAR(1000)
 DEFINE expr_area	VARCHAR(30)
 DEFINE expr_tipocli	VARCHAR(30)
 DEFINE expr_vcto	VARCHAR(30)
@@ -303,26 +325,25 @@ DEFINE direccion	LIKE cxct001.z01_direccion1
 DEFINE anticipos	LIKE cxct030.z30_saldo_favor
 DEFINE saldo_vencido	LIKE cxct030.z30_saldo_venc
 DEFINE saldoxvencer	LIKE cxct030.z30_saldo_xvenc
-
 DEFINE telefono		VARCHAR(25,10)
-
 DEFINE usuario		VARCHAR(19,15)
 DEFINE titulo		VARCHAR(80)
 DEFINE modulo		VARCHAR(40)
 DEFINE i,long		SMALLINT
 
 OUTPUT
-	TOP    MARGIN	vm_top
-	LEFT   MARGIN	vm_left
-	RIGHT  MARGIN	vm_right
-	BOTTOM MARGIN	vm_bottom
-	PAGE   LENGTH	vm_page
+	TOP    MARGIN	0
+	LEFT   MARGIN	2
+	RIGHT  MARGIN	220
+	BOTTOM MARGIN	0
+	PAGE   LENGTH	43
+
 FORMAT
 PAGE HEADER
-	print 'E'; 
-	print '&l26A';	-- Indica que voy a trabajar con hojas A4
-	print '&l1O';		-- Modo landscape
-	print '&k4S'	        -- Letra (12 cpi)
+	--#print 'E'; 
+	--#print '&l26A';	-- Indica que voy a trabajar con hojas A4
+	--#print '&l1O';		-- Modo landscape
+	--#print '&k4S'	        -- Letra (12 cpi)
 
 	LET modulo  = "Módulo: Cobranzas"
 	LET long    = LENGTH(modulo)
@@ -340,7 +361,7 @@ PAGE HEADER
 	SKIP 1 LINES
 	PRINT COLUMN 15, "** Moneda         : ", rm_par.g13_nombre
 	IF rm_par.tipo_vcto = 'P' THEN
-			PRINT COLUMN 15, "** Tipo Vcto.     : Por Vencer"
+		PRINT COLUMN 15, "** Tipo Vcto.     : Por Vencer"
 	ELSE 
 		IF rm_par.tipo_vcto = 'V' THEN
 			PRINT COLUMN 15, "** Tipo Vcto.     : Vencido"
@@ -348,19 +369,19 @@ PAGE HEADER
 			PRINT COLUMN 15, "** Tipo Vcto.     : Todos"
 		END IF
 	END IF
-	IF rm_par.areaneg IS NOT NULL THEN
+	--#IF rm_par.areaneg IS NOT NULL THEN
 		PRINT COLUMN 15, "** Area de Negocio: ", rm_par.n_areaneg
-	END IF
-	IF rm_par.tipocli IS NOT NULL THEN
+	--#END IF
+	--#IF rm_par.tipocli IS NOT NULL THEN
 		PRINT COLUMN 15, "** Tipo de Cliente: ", rm_par.n_tipocli
-	END IF
+	--#END IF
 	
 	SKIP 1 LINES
 	PRINT COLUMN 01, "Fecha de Impresión: ", TODAY USING "dd-mm-yyyy", 
 	                 1 SPACES, TIME,
 	      COLUMN 106, usuario
 	
-	print '&k2S'	                -- Letra condensada (16 cpi)
+	--#print '&k2S'	                -- Letra condensada (16 cpi)
 
 	PRINT COLUMN 1,   "Cliente",
 	      COLUMN 48,  "Teléfono",
@@ -408,38 +429,38 @@ ON LAST ROW
 	      COLUMN 133, SUM(saldo_vencido) USING "#,###,###,##&.##",
 	      COLUMN 152, SUM(saldoxvencer)  USING "#,###,###,##&.##",
 	      COLUMN 170, SUM(saldo_vencido + saldoxvencer) 
-				USING "##,###,###,##&.##", 'E'
+				USING "##,###,###,##&.##"
+				--#, 'E'
 END REPORT
 
 
 
-FUNCTION validar_parametros()
+FUNCTION llamar_visor_teclas()
+DEFINE a		CHAR(1)
 
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
+IF vg_gui = 0 THEN
+	CALL fl_visor_teclas_caracter() RETURNING int_flag 
+	LET a = fgl_getkey()
+	CLOSE WINDOW w_tf
+	LET int_flag = 0
 END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
+
+END FUNCTION
+
+
+
+FUNCTION muestra_tipovcto(tipovcto)
+DEFINE tipovcto		CHAR(1)
+
+CASE tipovcto
+	WHEN 'P'
+		DISPLAY 'POR VENCER' TO tit_tipo_vcto
+	WHEN 'V'
+		DISPLAY 'VENCIDOS' TO tit_tipo_vcto
+	WHEN 'T'
+		DISPLAY 'T O D O S' TO tit_tipo_vcto
+	OTHERWISE
+		CLEAR tipo_vcto, tit_tipo_vcto
+END CASE
 
 END FUNCTION

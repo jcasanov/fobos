@@ -1,0 +1,33 @@
+DATABASE aceros
+SCREEN
+{
+  CONCILIACION BANCARIA
+ ----------------------------------------------------------
+  Número   E  Banco           Cuenta          Auxiliar
+ ----------------------------------------------------------
+ [c000    |c|c002            |c003           |c004        ]
+ [c000    |c|c002            |c003           |c004        ]
+ [c000    |c|c002            |c003           |c004        ]
+ [c000    |c|c002            |c003           |c004        ]
+ [c000    |c|c002            |c003           |c004        ]
+ [c000    |c|c002            |c003           |c004        ]
+ [c000    |c|c002            |c003           |c004        ]
+ [c000    |c|c002            |c003           |c004        ]
+ [c000    |c|c002            |c003           |c004        ]
+ [c000    |c|c002            |c003           |c004        ]
+}
+TABLES
+ctbt030
+gent008
+ATTRIBUTES
+c000 = b30_num_concil,    UPSHIFT, REVERSE;
+c    = b30_estado,        UPSHIFT, REVERSE;
+c002 = g08_nombre,        UPSHIFT, REVERSE;
+c003 = b30_numero_cta,    UPSHIFT, REVERSE;
+c004 = b30_aux_cont,  	  UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_concilia[10] ( b30_num_concil,  b30_estado,
+                                g08_nombre,      b30_numero_cta,
+                                b30_aux_cont)

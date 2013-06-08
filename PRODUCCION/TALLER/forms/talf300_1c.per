@@ -1,0 +1,67 @@
+DATABASE aceros
+SCREEN
+{
+            Estado: [a][c000      ]          Moneda: [a0] [c001           ]
+     Fecha Inicial: [c002      ]        Fecha Final: [c003      ]
+    Código Cliente: [c004      ] [c005                                    ]
+            Modelo: [c006           ] [c007                               ]
+  Tipo Orden Trab.: [b] [c008           ]
+                                                           [c060 ] de [c061 ]
+   Fecha    T Orden       Cliente              Modelo        Valor Neto    E
+[c010      |c|c012  |c013                 |c014          |c015            |e]
+[c010      |c|c012  |c013                 |c014          |c015            |e]
+[c010      |c|c012  |c013                 |c014          |c015            |e]
+[c010      |c|c012  |c013                 |c014          |c015            |e]
+[c010      |c|c012  |c013                 |c014          |c015            |e]
+[c010      |c|c012  |c013                 |c014          |c015            |e]
+[c010      |c|c012  |c013                 |c014          |c015            |e]
+[c010      |c|c012  |c013                 |c014          |c015            |e]
+[c010      |c|c012  |c013                 |c014          |c015            |e]
+[c010      |c|c012  |c013                 |c014          |c015            |e]
+[c030                                     ]       Total: [c031            ]
+}
+TABLES
+talt023
+ATTRIBUTES
+a    = FORMONLY.t23_estado TYPE CHAR, AUTONEXT, REVERSE, UPSHIFT,
+	INCLUDE = ('A', 'C', 'F', 'E', 'D', 'T'),
+	COMMENTS = 'Estado: A ACTIVAS C CERRADAS F FACTURADAS E ELIMINADAS D DEVUELTAS T TODAS';
+c000 = FORMONLY.tit_estado, NOENTRY, UPSHIFT;
+a0   = talt023.t23_moneda, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c001 = FORMONLY.tit_moneda, NOENTRY, REVERSE, UPSHIFT;
+c002 = FORMONLY.t23_fecini TYPE DATE, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la fecha inicial en formato: dd/mm/aaaa';
+c003 = FORMONLY.t23_fecfin TYPE DATE, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la fecha final en formato: dd/mm/aaaa';
+c004 = FORMONLY.t23_cod_cliente, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c005 = FORMONLY.tit_nombre_cli, NOENTRY, UPSHIFT;
+c006 = FORMONLY.t23_modelo, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c007 = FORMONLY.tit_modelo_cab, NOENTRY, UPSHIFT;
+b    = FORMONLY.t23_tipo_ot, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c008 = FORMONLY.tit_tipo_ot, NOENTRY, UPSHIFT;
+
+c010 = FORMONLY.tit_fecha TYPE DATE, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la fecha en formato: dd/mm/aaaa';
+c    = FORMONLY.tit_tipo, NOENTRY, UPSHIFT;
+c012 = talt023.t23_orden, NOENTRY, UPSHIFT;
+c013 = talt023.t23_nom_cliente, NOENTRY, UPSHIFT;
+c014 = FORMONLY.tit_modelo_det, NOENTRY, UPSHIFT;
+c015 = talt023.t23_tot_neto, NOENTRY, UPSHIFT,
+	FORMAT = '#,###,###,##&.##';
+e    = FORMONLY.estado TYPE CHAR, NOENTRY, UPSHIFT;
+
+c030 = talt023.t23_descripcion, UPSHIFT, NOENTRY, REVERSE;
+c031 = FORMONLY.tit_total TYPE DECIMAL (12,2), NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = '#,###,###,##&.##';
+
+c060 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c061 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_det[10] (tit_fecha, tit_tipo, t23_orden, t23_nom_cliente,
+				tit_modelo_det, t23_tot_neto, estado)

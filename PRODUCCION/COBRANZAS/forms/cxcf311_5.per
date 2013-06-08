@@ -1,0 +1,27 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+                       FILTROS ADICIONALES
+                       ------------------
+
+     Período Emisión: [c000      ]      -      [c001      ]
+
+ Período Vencimiento: [c002      ]      -      [c003      ]
+
+       Incluir TJ ? : [c]
+
+}
+ATTRIBUTES
+c000 = FORMONLY.fec_emi_ini TYPE DATE, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Fecha Emisión Inicial de documentos. (dd-mm-aaaa)';
+c001 = FORMONLY.fec_emi_fin TYPE DATE, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Fecha Emisión Final de documentos. (dd-mm-aaaa)';
+c002 = FORMONLY.fec_vcto_ini TYPE DATE, AUTONEXT, UPSHIFT,FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Fecha Vencimiento Inicial doc. deudores. (dd-mm-aaaa)';
+c003 = FORMONLY.fec_vcto_fin TYPE DATE, AUTONEXT, UPSHIFT,FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Fecha Vencimiento Final doc. deudores. (dd-mm-aaaa)';
+c    = FORMONLY.incluir_tj TYPE CHAR NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', INCLUDE = ('S', 'N'),
+	DEFAULT = 'S';
+END

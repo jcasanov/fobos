@@ -1,0 +1,26 @@
+DATABASE aceros 
+SCREEN
+{
+
+
+             Rango de Fechas: [c002      ] hasta [c003      ]
+
+                 Codigo Caja: [c0 ] [c000                   ]
+             Area de Negocio: [c1 ] [c001                   ]
+
+               Forma de Pago: [c2 ] [c004                   ]
+   
+}
+ATTRIBUTES
+c0   = FORMONLY.codigo_caja, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c000 = FORMONLY.n_caja, NOENTRY;
+c1   = FORMONLY.areaneg, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c001 = FORMONLY.n_areaneg, NOENTRY;
+c002 = FORMONLY.fecha_ini TYPE DATE NOT NULL, REVERSE, FORMAT='dd-mm-yyyy',
+	COMMENT='Ingrese fecha en formato: dd-mm-aaaa.';
+c003 = FORMONLY.fecha_fin TYPE DATE NOT NULL, REVERSE, FORMAT='dd-mm-yyyy',
+	COMMENT='Ingrese fecha en formato: dd-mm-aaaa.';
+c2   = FORMONLY.j11_codigo_pago, AUTONEXT, UPSHIFT,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c004 = FORMONLY.j01_nombre, NOENTRY, UPSHIFT;
+END

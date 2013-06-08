@@ -1,0 +1,35 @@
+DATABASE aceros
+
+SCREEN
+{
+  VENTAS PERDIDAS 
+ -----------------------------------------------------
+  No. Item           Descripción                          
+ -----------------------------------------------------
+ [c0 |c001          |c002                            ]
+ [c0 |c001          |c002                            ]
+ [c0 |c001          |c002                            ]
+ [c0 |c001          |c002                            ]
+ [c0 |c001          |c002                            ]
+ [c0 |c001          |c002                            ]
+ [c0 |c001          |c002                            ]
+ [c0 |c001          |c002                            ]
+ [c0 |c001          |c002                            ]
+ [c0 |c001          |c002                            ]
+
+}
+
+TABLES
+rept013
+rept010
+
+ATTRIBUTES
+
+c0   = r13_serial, NOENTRY,REVERSE;
+c001 = r13_item,   UPSHIFT,REVERSE;
+c002 = r10_nombre, UPSHIFT,REVERSE;
+
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_vtaper[10](r13_serial, r13_item, r10_nombre)

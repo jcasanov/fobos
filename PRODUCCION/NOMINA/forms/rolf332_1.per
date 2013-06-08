@@ -1,0 +1,56 @@
+database aceros
+screen
+{
+                  Banco: [c011|c050                                ]
+            Numero Cta.: [c012           ]
+
+        Rango de Fechas: [c001      ] - [c002      ]   
+
+  SALDO AL [c110      ]: [c100          ]   
+
+ [lbl1      |lbl2                 |lbl3                |lbl4   |lbl5          ] 
+[c003      |c005                 |c014                |c013   |c004          ]
+[c003      |c005                 |c014                |c013   |c004          ]
+[c003      |c005                 |c014                |c013   |c004          ]
+[c003      |c005                 |c014                |c013   |c004          ]
+[c003      |c005                 |c014                |c013   |c004          ]
+[c003      |c005                 |c014                |c013   |c004          ]
+[c003      |c005                 |c014                |c013   |c004          ]
+[c003      |c005                 |c014                |c013   |c004          ]
+[c003      |c005                 |c014                |c013   |c004          ]
+[c003      |c005                 |c014                |c013   |c004          ]
+                                       SALDO AL [c111      ]: [c101          ]  
+}
+end
+tables
+rolt068
+attributes
+c001 = formonly.fecha_ini, REVERSE, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENT = 'Ingrese fecha en formato dd-mm-aaaa';
+c002 = formonly.fecha_fin, REVERSE, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENT = 'Ingrese fecha en formato dd-mm-aaaa';
+c011 = rolt068.n68_banco, REVERSE, UPSHIFT, NOENTRY; 
+c050 = formonly.g08_nombre, REVERSE, NOENTRY, UPSHIFT;
+c012 = rolt068.n68_numero_cta, REVERSE, UPSHIFT, WIDGET='FIELD_BMP', 
+	CONFIG='lista.bmp F2';
+
+c100 = formonly.saldo_ini, NOENTRY, REVERSE, FORMAT='---,---,--&.##';
+c101 = formonly.saldo_fin, NOENTRY, REVERSE, FORMAT='---,---,--&.##';
+
+c110 = formonly.saldo_ini_al, NOENTRY, REVERSE, UPSHIFT, FORMAT='dd-mm-yyyy';
+c111 = formonly.saldo_fin_al, NOENTRY, REVERSE, UPSHIFT, FORMAT='dd-mm-yyyy';
+
+c003 = rolt068.n68_fecha, NOENTRY, OPTIONS='-nolist', FORMAT='dd-mm-yyyy';
+c004 = rolt068.n68_valor, FORMAT='---,---,--&.##', OPTIONS='-nolist';
+c005 = rolt068.n68_referencia, NOENTRY, OPTIONS='-nolist';
+c013 = rolt068.n68_num_cheque, NOENTRY, OPTIONS='-nolist';
+c014 = rolt068.n68_beneficiario, NOENTRY, OPTIONS='-nolist';
+
+lbl1 = formonly.bt_fecha,    WIDGET='BUTTON', CONFIG='F15';
+lbl2 = formonly.bt_referen,  WIDGET='BUTTON', CONFIG='F16';
+lbl3 = formonly.bt_benef,    WIDGET='BUTTON', CONFIG='F17';
+lbl4 = formonly.bt_cheque,   WIDGET='BUTTON', CONFIG='F18';
+lbl5 = formonly.bt_valor,    WIDGET='BUTTON', CONFIG='F19';
+end
+instructions
+screen record ra_scr[10] (n68_fecha, n68_referencia, n68_beneficiario, n68_num_cheque, n68_valor) 

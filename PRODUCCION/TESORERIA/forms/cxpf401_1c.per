@@ -1,0 +1,26 @@
+DATABASE aceros
+SCREEN 
+{
+            
+            Moneda: [c1] [c001              ]    Tipo Vcto.: [c|c010      ]
+
+    Tipo Proveedor: [c2] [c002                                    ]  
+   
+
+}
+TABLES
+gent013
+ATTRIBUTES
+c1   = gent013.g13_moneda, REVERSE, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c2   = FORMONLY.tipoprov, REVERSE, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c001 = gent013.g13_nombre,REVERSE, NOENTRY;
+c002 = FORMONLY.n_tipoprov,REVERSE ,NOENTRY;
+c    = FORMONLY.tipo_vcto TYPE CHAR, DEFAULT='T', REVERSE, UPSHIFT, AUTONEXT,
+	INCLUDE = ('P', 'V', 'T'),
+	COMMENTS = '(P) Por Vencer  (V) Vencidos  (T) Todos';
+c010 = FORMONLY.tit_tipo_vcto,REVERSE,UPSHIFT,NOENTRY;
+end
+INSTRUCTIONS
+DELIMITERS '||'

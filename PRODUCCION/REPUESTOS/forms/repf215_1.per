@@ -1,32 +1,31 @@
-database diteca
-screen 
+DATABASE aceros
+SCREEN 
 {
           Venta No: [a0|c002           ]        Fecha: [c029               ]
    Ord. de Trabajo: [c014      ]               Moneda: [a4|c102            ]    
-            Chasís: [c108                     ]          Placa: [c101      ]
-          Mecánico: [c109       |c100                                      ] 
+          Mecanico: [c109       |c100                                      ] 
            Cliente: [c006       |c007                                      ]
           Vendedor: [c011  ] [c103                                         ]
             Bodega: [a2] [c104                ]     
 
-       [lbl1|lbl2|lbl3            ][lbl4 |lbl5          |lbl6           ]   
-      [c035|c036|c033           ] [c045 |c041          |c105            ]
-      [c035|c036|c033           ] [c045 |c041          |c105            ]
-      [c035|c036|c033           ] [c045 |c041          |c105            ]
-      [c035|c036|c033           ] [c045 |c041          |c105            ]
-      [c035|c036|c033           ] [c045 |c041          |c105            ]
-      [c035|c036|c033           ] [c045 |c041          |c105            ]
-		                             Subtotal: [c030            ]
-    Item: [c106                         ]   Descuento: [c031            ]
-				               I.V.A.: [c023            ]
-    Ingresado Por: [c028      ]                 Total: [c025            ]
+       [lbl1   |lbl2   |lbl3     ] [lbl4 |lbl5          |lbl6            ]   
+      [c035   |c036   |c033     ] [c045 |c041          |c105            ]
+      [c035   |c036   |c033     ] [c045 |c041          |c105            ]
+      [c035   |c036   |c033     ] [c045 |c041          |c105            ]
+      [c035   |c036   |c033     ] [c045 |c041          |c105            ]
+      [c035   |c036   |c033     ] [c045 |c041          |c105            ]
+      [c035   |c036   |c033     ] [c045 |c041          |c105            ]
+      [c070                               ]  Subtotal: [c030            ]
+      [c071                               ] Descuento: [c031            ]
+      [c072                               ]    I.V.A.: [c023            ]
+      [c073                               ]     Total: [c025            ]
+      [c074                                                             ]
 
 }
-end
-tables
+TABLES
 rept019
 rept020
-attributes
+ATTRIBUTES
 a0   = rept019.r19_cod_tran, NOENTRY, REVERSE, UPSHIFT,
 	COMMENT='(RQ) Requisición  (FA) Factura';
 c002 = rept019.r19_num_tran, NOENTRY, REVERSE;
@@ -39,45 +38,48 @@ a2 = rept019.r19_bodega_ori, REVERSE, UPSHIFT, AUTONEXT,
 	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
 a4 = rept019.r19_moneda, REVERSE, NOENTRY;
 c025 = rept019.r19_tot_neto, NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
-c023 = formonly.iva, NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+c023 = FORMONLY.iva, NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
 c031 = rept019.r19_tot_dscto, NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
 c030 = rept019.r19_tot_bruto, NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
-c028 = rept019.r19_usuario, NOENTRY, REVERSE, UPSHIFT;
 c029 = rept019.r19_fecing, NOENTRY, REVERSE;
 
 c033 = rept020.r20_item, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2',
 	UPSHIFT, OPTIONS='-nolist';
-c035 = rept020.r20_cant_ped, INCLUDE=(0 TO 9999), OPTIONS='-nolist';
-c036 = rept020.r20_cant_ven, NOENTRY, OPTIONS='-nolist';
-c041 = rept020.r20_precio, FORMAT='###,###,##&.##', OPTIONS='-nolist',
+c035 = rept020.r20_cant_ped, INCLUDE=(0.01 TO 9999.99), OPTIONS='-nolist',       	FORMAT = '###&.##';
+c036 = rept020.r20_cant_ven, NOENTRY, OPTIONS='-nolist',FORMAT = '###&.##';
+c041 = rept020.r20_precio, FORMAT = '###,###,##&.##', OPTIONS='-nolist',
 	NOENTRY;
 c045 = rept020.r20_descuento, FORMAT='#&.##', NOENTRY, 
 	OPTIONS='-nolist';
-c105 = formonly.total, NOENTRY, FORMAT='#,###,###,##&.##', OPTIONS='-nolist';
+c105 = FORMONLY.total, NOENTRY, FORMAT='#,###,###,##&.##', OPTIONS='-nolist';
 
-c100 = formonly.n_mecanico, NOENTRY;
-c101 = formonly.n_placa, NOENTRY;
-c102 = formonly.n_moneda, NOENTRY;
-c103 = formonly.n_vendedor, NOENTRY;
-c104 = formonly.n_bodega, NOENTRY;
-c108 = formonly.n_chasis, NOENTRY;
+c100 = FORMONLY.n_mecanico, NOENTRY;
+--c101 = FORMONLY.n_placa, NOENTRY;
+c102 = FORMONLY.n_moneda, NOENTRY;
+c103 = FORMONLY.n_vendedor, NOENTRY;
+c104 = FORMONLY.n_bodega, NOENTRY;
+--c108 = FORMONLY.n_chasis, NOENTRY;
 
-c106 = formonly.descripcion, NOENTRY;
-c109 = formonly.cod_mecanico, NOENTRY;
+c109 = FORMONLY.cod_mecanico, NOENTRY;
+c070 = formonly.descrip_1, NOENTRY;
+c071 = formonly.descrip_2, NOENTRY;
+c072 = formonly.descrip_3, NOENTRY;
+c073 = formonly.descrip_4, NOENTRY;
+c074 = formonly.nom_item,  NOENTRY, REVERSE;
 
 -- Cant 
-lbl1 = formonly.bt_cant_ped, NOENTRY, WIDGET='BUTTON', CONFIG='F20';
+lbl1 = FORMONLY.bt_cant_ped, NOENTRY, WIDGET='BUTTON', CONFIG='F20';
 -- Desp      
-lbl2 = formonly.bt_cant_vend, NOENTRY, WIDGET='BUTTON', CONFIG='F21';
+lbl2 = FORMONLY.bt_cant_vend, NOENTRY, WIDGET='BUTTON', CONFIG='F21';
 -- Item         
-lbl3 = formonly.bt_item, NOENTRY, WIDGET='BUTTON', CONFIG='F22';
+lbl3 = FORMONLY.bt_item, NOENTRY, WIDGET='BUTTON', CONFIG='F22';
 -- descuento
-lbl4 = formonly.bt_dscto, NOENTRY, WIDGET='BUTTON', CONFIG='F23';
+lbl4 = FORMONLY.bt_dscto, NOENTRY, WIDGET='BUTTON', CONFIG='F23';
 -- Precio Unit.       
-lbl5 = formonly.bt_precio, NOENTRY, WIDGET='BUTTON', CONFIG='F25';
+lbl5 = FORMONLY.bt_precio, NOENTRY, WIDGET='BUTTON', CONFIG='F25';
 -- Subtotal
-lbl6 = formonly.bt_total, NOENTRY, WIDGET='BUTTON', CONFIG='F26';
+lbl6 = FORMONLY.bt_total, NOENTRY, WIDGET='BUTTON', CONFIG='F26';
 end
 
-instructions
-screen record ra_venta[6] (r20_cant_ped, r20_cant_ven, r20_item, r20_descuento, r20_precio, total)
+INSTRUCTIONS
+SCREEN RECORD ra_venta[6] (r20_cant_ped, r20_cant_ven, r20_item, r20_descuento, r20_precio, total)

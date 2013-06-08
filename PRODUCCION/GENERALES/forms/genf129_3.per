@@ -1,4 +1,4 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
       Asignar Proceso: [c099    ]   
@@ -22,14 +22,14 @@ TABLES
 gent005
 
 ATTRIBUTES
-c    = formonly.checkbox, DEFAULT='S', 
+c    = FORMONLY.checkbox, DEFAULT='S', 
 	WIDGET='CHECK', CONFIG='S N acknowledge', OPTIONS='-nolist';
 c002 = gent005.g05_usuario, NOENTRY, OPTIONS='-nolist';
-c000 = formonly.cia,   REVERSE, REQUIRED,
+c000 = FORMONLY.cia,   REVERSE, REQUIRED,
 	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
-c001 = formonly.n_cia, NOENTRY;
-c099 = formonly.n_proceso, UPSHIFT, NOENTRY;
-END
+c001 = FORMONLY.n_cia, NOENTRY;
+c099 = FORMONLY.n_proceso, UPSHIFT, NOENTRY;
+end
 
 INSTRUCTIONS
 SCREEN RECORD ra_usu_scr[10](checkbox, g05_usuario)

@@ -1,5 +1,5 @@
-database diteca
-screen
+DATABASE aceros
+SCREEN
 {
 
 
@@ -13,15 +13,16 @@ screen
            Pago Roles: [c]     
            Dirigido a: [c003                                            ]
     Auxiliar Contable: [c004        ] [c011                             ]
-
+   Númeración cheques: [c005     ]
+        
         Ingresado Por: [c006      ]
      Fecha de Ingreso: [c007               ]
 
 }
 end
-tables
+TABLES
 gent009
-attributes
+ATTRIBUTES
 c001 = gent009.g09_banco, REVERSE, 
 	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
 c002 = gent009.g09_numero_cta, UPSHIFT, REVERSE,
@@ -39,10 +40,12 @@ c003 = gent009.g09_atencion_rol, UPSHIFT,
         COMMENT = 'Indicar a quien va dirigida la carta al banco para pagos a empleados';
 c004 = gent009.g09_aux_cont, REVERSE, UPSHIFT,
 	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c005 = gent009.g09_num_cheques, REVERSE, INCLUDE=(0 TO 999999),
+        COMMENT = 'Control automatico de numeración de cheques';
 c006 = gent009.g09_usuario, REVERSE, UPSHIFT, NOENTRY;
 c007 = gent009.g09_fecing, REVERSE, NOENTRY;
-c008 = formonly.n_banco, UPSHIFT, NOENTRY;
-c009 = formonly.n_estado, UPSHIFT, NOENTRY;
-c010 = formonly.n_moneda, UPSHIFT, NOENTRY;
-c011 = formonly.n_cuenta, UPSHIFT, NOENTRY;
+c008 = FORMONLY.n_banco, UPSHIFT, NOENTRY;
+c009 = FORMONLY.n_estado, UPSHIFT, NOENTRY;
+c010 = FORMONLY.n_moneda, UPSHIFT, NOENTRY;
+c011 = FORMONLY.n_cuenta, UPSHIFT, NOENTRY;
 end

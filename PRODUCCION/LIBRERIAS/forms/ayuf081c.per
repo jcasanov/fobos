@@ -1,0 +1,33 @@
+DATABASE aceros
+
+SCREEN
+{
+  CAMBIO DE PRECIOS
+ --------------------------------------
+  Cod.  Porcentaje  Línea   Usuario 
+ --------------------------------------
+ [c0 ] [c001     ] [c002 ] [c003      ]
+ [c0 ] [c001     ] [c002 ] [c003      ]
+ [c0 ] [c001     ] [c002 ] [c003      ]
+ [c0 ] [c001     ] [c002 ] [c003      ]
+ [c0 ] [c001     ] [c002 ] [c003      ]
+ [c0 ] [c001     ] [c002 ] [c003      ]
+ [c0 ] [c001     ] [c002 ] [c003      ]
+ [c0 ] [c001     ] [c002 ] [c003      ]
+ [c0 ] [c001     ] [c002 ] [c003      ]
+ [c0 ] [c001     ] [c002 ] [c003      ]
+}
+
+TABLES
+rept032
+
+ATTRIBUTES
+
+c0   = r32_numreg, NOENTRY,REVERSE;
+c001 = r32_porc_fact, UPSHIFT,REVERSE;
+c002 = r32_linea, UPSHIFT,REVERSE;
+c003 = r32_usuario,REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_campre[10](r32_numreg, r32_porc_fact, r32_linea, r32_usuario)

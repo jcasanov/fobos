@@ -1,4 +1,4 @@
-DATABASE formonly
+DATABASE FORMONLY
 SCREEN
 {
           Moneda: [c1]   [c002            ]  Tipo Vencimiento: [c009          ] 
@@ -22,40 +22,40 @@ SCREEN
  Estado: [c035                ]                              [c040           ]
 }   
 ATTRIBUTES
-c1   = formonly.moneda TYPE CHAR NOT NULL, UPSHIFT, AUTONEXT, REQUIRED,
+c1   = FORMONLY.moneda TYPE CHAR NOT NULL, UPSHIFT, AUTONEXT, REQUIRED,
 	WIDGET = "FIELD_BMP", CONFIG = "lista.bmp F2", REVERSE;
-c002 = formonly.tit_mon, NOENTRY;
-c05  = formonly.tipprov TYPE SMALLINT, WIDGET = 'FIELD_BMP', 
+c002 = FORMONLY.tit_mon, NOENTRY;
+c05  = FORMONLY.tipprov TYPE SMALLINT, WIDGET = 'FIELD_BMP', 
        CONFIG = 'lista.bmp F2';
-c006 = formonly.tit_tipprov, NOENTRY;
-c07  = formonly.tipcar TYPE SMALLINT, WIDGET = 'FIELD_BMP', 
+c006 = FORMONLY.tit_tipprov, NOENTRY;
+c07  = FORMONLY.tipcar TYPE SMALLINT, WIDGET = 'FIELD_BMP', 
        CONFIG = 'lista.bmp F2';
-c008 = formonly.tit_tipcar, NOENTRY;
-c009 = formonly.ind_venc TYPE CHAR, UPSHIFT, AUTONEXT, REVERSE,
+c008 = FORMONLY.tit_tipcar, NOENTRY;
+c009 = FORMONLY.ind_venc TYPE CHAR, UPSHIFT, AUTONEXT, REVERSE,
 	WIDGET = 'RADIO', CONFIG = 'V Vencidos P "Por Vencer" T Todos';
-c10  = formonly.dias_i TYPE SMALLINT, 
+c10  = FORMONLY.dias_i TYPE SMALLINT, 
        COMMENT = 'Rango días para cartera por vencer o vencida';
-c011 = formonly.dias_f TYPE SMALLINT,
+c011 = FORMONLY.dias_f TYPE SMALLINT,
        COMMENT = 'Rango días para cartera por vencer o vencida';
-y1   = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-c020 = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-c021 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
-c022 = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
-c023 = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
-c024 = formonly.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
-x2   = formonly.cladoc;
-c030 = formonly.numdoc;
-c031 = formonly.nomprov;
-c032 = formonly.fecha_emi TYPE DATE, FORMAT = "dd-mm-yyyy";
-c033 = formonly.fecha TYPE DATE, FORMAT = "dd-mm-yyyy";
-c034 = formonly.valor      TYPE DECIMAL(12,2), FORMAT =  '####,###,##&.##';
-c035 = formonly.tit_venc, REVERSE;
-c040 = formonly.tot_doc    TYPE DECIMAL(14,2), FORMAT =  '####,###,##&.##';
+y1   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c020 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c021 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c022 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c023 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c024 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+x2   = FORMONLY.cladoc;
+c030 = FORMONLY.numdoc;
+c031 = FORMONLY.nomprov;
+c032 = FORMONLY.fecha_emi TYPE DATE, FORMAT = "dd-mm-yyyy";
+c033 = FORMONLY.fecha TYPE DATE, FORMAT = "dd-mm-yyyy";
+c034 = FORMONLY.valor      TYPE DECIMAL(12,2), FORMAT =  '####,###,##&.##';
+c035 = FORMONLY.tit_venc, REVERSE;
+c040 = FORMONLY.tot_doc    TYPE DECIMAL(14,2), FORMAT =  '####,###,##&.##';
 INSTRUCTIONS
 DELIMITERS '  '
-SCREEN RECORD rm_doc[12] (formonly.cladoc, formonly.numdoc,
-			 formonly.nomprov, formonly.fecha_emi, formonly.fecha, 
-			 formonly.valor)
+SCREEN RECORD rm_doc[12] (FORMONLY.cladoc, formonly.numdoc,
+			 FORMONLY.nomprov, formonly.fecha_emi, formonly.fecha, 
+			 FORMONLY.valor)
 
 KEYS
 "F5"="Orden Compra"

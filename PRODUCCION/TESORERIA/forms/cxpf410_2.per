@@ -1,0 +1,21 @@
+DATABASE FORMONLY
+SCREEN
+{
+ TIPO RETENCION
+ -------------
+  [c|c000      ]
+ [d|c001      ]
+ [d|c001      ]
+ [d|c001      ]
+
+}
+ATTRIBUTES
+c    = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c000 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+
+d    = FORMONLY.tip_fue, NOENTRY, UPSHIFT;
+c001 = FORMONLY.nom_fue, NOENTRY, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_fue[3] (tip_fue, nom_fue)

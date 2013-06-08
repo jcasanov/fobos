@@ -1,0 +1,39 @@
+DATABASE aceros
+SCREEN
+{
+                                                              [c000] de [c001]
+
+                                                         Estado: [c|c002     ]
+
+             Codigo Transaccion: [c0] [c003                     ]
+
+                     Periocidad: [d                  ]
+
+
+
+                      Secuencia: [c004    ]
+
+                        Usuario: [c005      ]
+               Fecha de Ingreso: [c006               ]
+
+}
+TABLES
+actt004
+actt005
+actt006
+ATTRIBUTES
+c000 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c001 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c    = actt004.a04_estado, NOENTRY, UPSHIFT, REVERSE;
+c002 = actt006.a06_descripcion, NOENTRY, UPSHIFT;
+
+c0   = actt004.a04_codigo_proc, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = actt004.a04_nombre, AUTONEXT, UPSHIFT, REVERSE;
+d    = actt004.a04_periocidad, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'RADIO', CONFIG = 'A Anual M Mensual * Otros', DEFAULT = 'M';
+c004 = actt005.a05_numero, AUTONEXT, UPSHIFT, REVERSE, INCLUDE = (0 TO 999999);
+c005 = actt004.a04_usuario, NOENTRY, UPSHIFT, REVERSE;
+c006 = actt004.a04_fecing, REVERSE, NOENTRY, UPSHIFT;
+END

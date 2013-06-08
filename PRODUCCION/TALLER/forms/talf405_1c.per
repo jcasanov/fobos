@@ -1,0 +1,36 @@
+DATABASE aceros
+SCREEN
+{
+
+    Fecha Inicial: [c0        ]     	        Fecha Final: [c1        ]
+
+           Moneda: [c2|c3                        ]
+
+	   Estado: [c|c8        ]
+
+ Orden de Trabajo: [c4        |c5                                       ]
+
+}
+TABLES
+	talt023
+ATTRIBUTES
+
+c0  = FORMONLY.vm_fecha_ini TYPE DATE, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha en formato: dd-mm-aaaa.';
+c1  = FORMONLY.vm_fecha_fin TYPE DATE, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha en formato: dd-mm-aaaa.';
+c2  = FORMONLY.vm_moneda TYPE VARCHAR, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c3  = FORMONLY.nom_moneda, NOENTRY;
+
+c4  = FORMONLY.vm_ot TYPE INTEGER, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c5  = talt023.t23_nom_cliente, NOENTRY;
+c   = FORMONLY.vm_estado TYPE CHAR, REVERSE, UPSHIFT,
+	INCLUDE = ('F', 'A', 'T'), DEFAULT = 'F',
+	COMMENTS = 'F Facturadas  A Activas  T Todas';
+c8 = FORMONLY.tit_estado,REVERSE,UPSHIFT,NOENTRY;
+
+end
+INSTRUCTIONS
+DELIMITERS '||'

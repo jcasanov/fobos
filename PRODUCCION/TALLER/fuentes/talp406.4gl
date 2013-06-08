@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------
--- Titulo           : talp406.4gl - Listado de Gastos de Viaje por Mecánico   --
+-- Titulo           : talp406.4gl - Listado de Gastos de Viaje por Técnico   --
 -- Elaboracion      : 12-ABR-2002					      --
 -- Autor            : GVA						      --
 -- Formato Ejecucion: fglrun talp406 base módulo cia loc [num_gasto]	      --
@@ -8,6 +8,7 @@
 --------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
+DEFINE vm_demonios	VARCHAR(12)
 DEFINE rm_t30		RECORD LIKE talt030.*
 DEFINE rm_t23		RECORD LIKE talt023.*
 
@@ -28,12 +29,12 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/talp406.error')
-CALL fgl_init4js()
+CALL startlog('../logs/errores')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 5 THEN   	-- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto.',
-			    'stop')
+	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.','stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
 
@@ -47,8 +48,8 @@ LET vg_proceso = 'talp406'
 
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -66,7 +67,7 @@ END FUNCTION
 
 
 FUNCTION control_reporte()
-DEFINE query		VARCHAR(400)
+DEFINE query		CHAR(400)
 DEFINE comando 		VARCHAR(100)
 DEFINE r_report 	RECORD
 	secuencia	LIKE talt031.t31_secuencia,
@@ -83,7 +84,8 @@ LET vm_page   = 66
 CALL fl_lee_gasto_viaje(vg_codcia, vg_codloc, vm_num_gasto)
 	RETURNING rm_t30.*
 IF rm_t30.t30_num_gasto IS NULL THEN
-	CALL fgl_winmessage(vg_producto,'No existe Gasto de Viaje en la Compañía.','exclamation')
+	--CALL fgl_winmessage(vg_producto,'No existe Gasto de Viaje en la Compañía.','exclamation')
+	CALL fl_mostrar_mensaje('No existe Gasto de Viaje en la Compañía.','exclamation')
 	EXIT PROGRAM
 END IF
 CALL fl_lee_moneda(rm_t30.t30_moneda)
@@ -138,16 +140,16 @@ DEFINE fecha_aux 	DATE
 DEFINE titulo		VARCHAR(80)
 
 OUTPUT
-	TOP MARGIN	vm_top
-	LEFT MARGIN	vm_left
-	RIGHT MARGIN	vm_right
-	BOTTOM MARGIN	vm_bottom
-	PAGE LENGTH	vm_page
+	TOP MARGIN	0
+	LEFT MARGIN	20
+	RIGHT MARGIN	90
+	BOTTOM MARGIN	4
+	PAGE LENGTH	66
 FORMAT
 PAGE HEADER
 
-	print 'E'; print '&l26A';  -- Indica que voy a trabajar con hojas A4
-	print '&k4S'	                -- Letra condensada (12 cpi)
+	--#print 'E'; --#print '&l26A';  -- Indica que voy a trabajar con hojas A4
+	--#print '&k4S'	                -- Letra condensada (12 cpi)
 
 	CALL fl_justifica_titulo('C',
 	     'GASTO DE VIAJE No  ' || rm_t30.t30_num_gasto, 60)
@@ -168,7 +170,7 @@ PAGE HEADER
 
 	SKIP 1 LINES
 
-	print '&k2S'	                -- Letra condensada (16 cpi)
+	--#print '&k2S'	                -- Letra condensada (16 cpi)
 
 	LET fecha_aux = DATE(rm_t30.t30_fecing) USING 'dd-mm-yyyy'
 
@@ -215,41 +217,8 @@ ON EVERY ROW
 
 ON LAST ROW
 
-	print '&k4S'	                -- Letra condensada (12 cpi)
+	--#print '&k4S'	                -- Letra condensada (12 cpi)
 	PRINT COLUMN 10, 'TOTAL ',
 	      COLUMN 32,rm_t30.t30_tot_gasto 	USING '#,###,###,##&.##' 
 
 END REPORT
-
-
-
-FUNCTION validar_parametros()
-
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-
-END FUNCTION

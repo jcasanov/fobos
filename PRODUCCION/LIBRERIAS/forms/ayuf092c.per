@@ -1,0 +1,28 @@
+DATABASE aceros
+
+SCREEN
+{
+  COMPANIAS CONFIGURADAS ROLES
+ --------------------------------------
+  Código Descripción 	  
+ --------------------------------------
+ [f001] [f002                         ] 
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+}
+
+TABLES
+gent001
+rolt001
+
+ATTRIBUTES
+f001 = n01_compania,REVERSE;
+f002 = g01_razonsocial,REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_ciarol[7](n01_compania, g01_razonsocial)

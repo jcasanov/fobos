@@ -1,0 +1,31 @@
+DATABASE aceros
+
+SCREEN
+{
+  CODIGOS DE FILTROS 
+ -------------------------------
+  Filtro  Descripción
+ -------------------------------
+ [c0   ] [c001                 ]
+ [c0   ] [c001                 ]
+ [c0   ] [c001                 ]
+ [c0   ] [c001                 ]
+ [c0   ] [c001                 ]
+ [c0   ] [c001                 ]
+ [c0   ] [c001                 ]
+ [c0   ] [c001                 ]
+ [c0   ] [c001                 ]
+ [c0   ] [c001                 ]
+}
+
+TABLES
+ctbt008
+
+ATTRIBUTES
+
+c0   = b08_filtro, UPSHIFT,REVERSE;
+c001 = b08_nombre, UPSHIFT,REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_filtro[10](b08_filtro, b08_nombre)

@@ -1,5 +1,4 @@
-
-DATABASE diteca
+DATABASE aceros
 
 GLOBALS
 
@@ -12,7 +11,9 @@ DEFINE vg_codloc	LIKE gent002.g02_localidad
 DEFINE vg_usuario	LIKE gent005.g05_usuario
 DEFINE vg_separador	LIKE fobos.fb_separador
 DEFINE vg_dir_fobos	LIKE fobos.fb_dir_fobos
-DEFINE vg_opciones	LIKE gent055.g55_opciones
+DEFINE vg_gui		SMALLINT
+
+DEFINE vg_servidor	VARCHAR(20)
 
 DEFINE rg_gen		RECORD LIKE gent000.* 
 DEFINE rg_cia		RECORD LIKE gent001.* 
@@ -20,10 +21,10 @@ DEFINE rg_loc		RECORD LIKE gent002.*
 DEFINE rg_mod		RECORD LIKE gent050.* 
 DEFINE rg_pro		RECORD LIKE gent054.* 
 
-DEFINE ag_one 	ARRAY[9] OF CHAR (6)
-DEFINE ag_two 	ARRAY[9] OF CHAR (10)
-DEFINE ag_three ARRAY[9] OF CHAR (9)
-DEFINE ag_four 	ARRAY[9] OF CHAR (13)
-DEFINE ag_five 	ARRAY[9] OF CHAR (13)
+DEFINE ag_one 		ARRAY[9] OF CHAR (6)
+DEFINE ag_two 		ARRAY[9] OF CHAR (10)
+DEFINE ag_three 	ARRAY[9] OF CHAR (9)
+DEFINE ag_four 		ARRAY[9] OF CHAR (13)
+DEFINE ag_five 		ARRAY[9] OF CHAR (13)
 
 END GLOBALS

@@ -1,31 +1,59 @@
-database diteca
-screen 
+DATABASE aceros
+SCREEN
 {
 
-  Item: [c001           ]
-  [c002                                ] 
+         Item: [c000   |c001                                       ]
+ Rango Fechas: [c002      ] - [c003      ]
 
-       [lbl1           ] [lbl2  ]
-      [c003           ] [c004  ]
-      [c003           ] [c004  ]
-      [c003           ] [c004  ]
-      [c003           ] [c004  ]
-      [c003           ] [c004  ]
-      [c003           ] [c004  ]
-      [c003           ] [c004  ]
+                                                    [c030] de [c031]
+ [c1|c011|c012         |c013         |c014      |c015               ]
+[c2|c021|c022         |c023         |c024      |c025               ]
+[c2|c021|c022         |c023         |c024      |c025               ]
+[c2|c021|c022         |c023         |c024      |c025               ]
+[c2|c021|c022         |c023         |c024      |c025               ]
+[c2|c021|c022         |c023         |c024      |c025               ]
+[c2|c021|c022         |c023         |c024      |c025               ]
+[c2|c021|c022         |c023         |c024      |c025               ]
+[c2|c021|c022         |c023         |c024      |c025               ]
+[c2|c021|c022         |c023         |c024      |c025               ]
+[c2|c021|c022         |c023         |c024      |c025               ]
+
 }
-end
-attributes
-c001 = formonly.item,   NOENTRY, REVERSE;
-c002 = formonly.n_item, NOENTRY, REVERSE;
+TABLES
+rept010
+rept087
+ATTRIBUTES
+c000 = rept087.r87_item, NOENTRY, UPSHIFT, REVERSE;
+c001 = rept010.r10_nombre, NOENTRY, UPSHIFT, REVERSE;
+c002 = FORMONLY.fecha_ini TYPE DATE NOT NULL, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Inicial en formato: dd-mm-aaaa.';
+c003 = FORMONLY.fecha_fin TYPE DATE NOT NULL, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Final en formato: dd-mm-aaaa.';
 
-c003 = formonly.modelo	, OPTIONS='-nolist',
-		WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c004 = formonly.linea,    NOENTRY, OPTIONS='-nolist';
+c1   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c015 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
 
-lbl1 = formonly.bt_modelo, NOENTRY, WIDGET='BUTTON', CONFIG='F20';
-lbl2 = formonly.bt_linea,  NOENTRY, WIDGET='BUTTON', CONFIG='F21';
-end
+c2   = rept087.r87_localidad, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c021 = rept087.r87_secuencia, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c022 = rept087.r87_precio_act, NOENTRY, UPSHIFT, OPTIONS = '-nolist',
+	FORMAT = '##,###,##&.##';
+c023 = rept087.r87_precio_ant, NOENTRY, UPSHIFT, OPTIONS = '-nolist',
+	FORMAT = '##,###,##&.##';
+c024 = rept087.r87_usu_camprec, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c025 = FORMONLY.r87_fec_camprec, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
 
-instructions
-screen record ra_modelo[7] (modelo, linea)
+c030 = FORMONLY.num_row_prec, NOENTRY, UPSHIFT, REVERSE;
+c031 = FORMONLY.max_row_prec, NOENTRY, UPSHIFT, REVERSE;
+END
+KEYS
+F5 = 'Cabecera'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_camprec[10] (r87_localidad, r87_secuencia, r87_precio_act,
+				r87_precio_ant,r87_usu_camprec, r87_fec_camprec)

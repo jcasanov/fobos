@@ -1,31 +1,39 @@
-DATABASE diteca  
+DATABASE aceros  
 SCREEN
 {
 
+                                                        Estado: [c|c008     ]
 
-         Código Tarjeta: [c01] 
-         
-         Nombre Tarjeta: [c02                       ] 
-       Código Cobranzas: [c03   ] [c04                                 ]       
+      Código Tarjeta: [c01] 
+       
+      Nombre Tarjeta: [c02                       ] 
+    Código Cobranzas: [c03   ] [c04                                 ]       
+
+      Código de Pago: [c0] [c007                ]   Tipo de Pago: [d        ]
  
-          Ingresado Por: [c05       ]    
-       Fecha de Ingreso: [c06                ]                                
+       Ingresado Por: [c05       ]    
+    Fecha de Ingreso: [c06                ]                                
 
 }
-end
-tables
+TABLES
 gent010
-attributes
-c01 = g10_tarjeta, REVERSE, AUTONEXT, NOENTRY, 
+cajt001
+ATTRIBUTES
+c    = gent010.g10_estado, NOENTRY, UPSHIFT, REVERSE;
+c008 = FORMONLY.tit_estado, NOENTRY, UPSHIFT;
+c01  = gent010.g10_tarjeta, REVERSE, NOENTRY, NOENTRY, 
 	FORMAT  = '###', WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c02 = g10_nombre, UPSHIFT, REQUIRED, REVERSE;
-c03 = g10_codcobr, FORMAT = '######', REQUIRED, 
+c02  = gent010.g10_nombre, UPSHIFT, REQUIRED, REVERSE;
+c03  = gent010.g10_codcobr, FORMAT = '######', REQUIRED, 
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c04 = formonly.nom_cliente;
-c05 = g10_usuario, NOENTRY, REQUIRED, REVERSE, UPSHIFT;
-c06 = g10_fecing, NOENTRY, REQUIRED, REVERSE;
-
-instructions
-delimiters "[]"
-end
-
+c04  = FORMONLY.nom_cliente;
+c05  = gent010.g10_usuario, NOENTRY, REQUIRED, REVERSE, UPSHIFT;
+c06  = gent010.g10_fecing, NOENTRY, REQUIRED, REVERSE;
+c0   = gent010.g10_cod_tarj, AUTONEXT, REVERSE, UPSHIFT, PICTURE = 'AA',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c007 = cajt001.j01_nombre, NOENTRY, REVERSE, UPSHIFT;
+d    = gent010.g10_cont_cred, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'RADIO', CONFIG = 'C Contado R Credito', DEFAULT = 'C';
+END
+INSTRUCTIONS
+DELIMITERS "||"

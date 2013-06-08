@@ -1,0 +1,63 @@
+DATABASE aceros
+SCREEN 
+{
+  Codigo Liquidación: [a0] [c100                                         ] 
+         Año Proceso: [c006]             Mes Proceso: [c7] [c103         ]
+        Fecha Inicio: [c001      ]         Fecha Fin: [c002      ]
+               Rubro: [a2] [c105                                         ]
+              Moneda: [a1] [c101           ] 
+                                                          [c050] de [c051]
+     [lbl1  |lbl2                                        |lbl3            ]
+    [c008  |c102                                        |c004            ] 
+    [c008  |c102                                        |c004            ] 
+    [c008  |c102                                        |c004            ] 
+    [c008  |c102                                        |c004            ] 
+    [c008  |c102                                        |c004            ] 
+    [c008  |c102                                        |c004            ] 
+    [c008  |c102                                        |c004            ] 
+    [c008  |c102                                        |c004            ] 
+    [c008  |c102                                        |c004            ] 
+    [c008  |c102                                        |c004            ] 
+                                              Total ==> [c110            ]
+}
+TABLES
+rolt032
+rolt033
+ATTRIBUTES
+a0 = rolt032.n32_cod_liqrol,    REVERSE, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c100 = FORMONLY.n_liqrol,       NOENTRY;
+c001 = rolt032.n32_fecha_ini,   REVERSE, FORMAT='dd-mm-yyyy', NOENTRY;
+c002 = rolt032.n32_fecha_fin,   REVERSE, FORMAT='dd-mm-yyyy', NOENTRY;
+c006 = rolt032.n32_ano_proceso, REVERSE, AUTONEXT;
+c7   = rolt032.n32_mes_proceso, REVERSE, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c103 = FORMONLY.n_mes ,         NOENTRY;
+
+a1 = rolt032.n32_moneda,        REVERSE, NOENTRY, UPSHIFT, 
+				WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c101 = FORMONLY.n_moneda,                NOENTRY;
+
+a2 = rolt033.n33_cod_rubro,   REVERSE, AUTONEXT, UPSHIFT,  
+                                WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c105 = FORMONLY.n_rubro,        NOENTRY;
+
+c008 = rolt033.n33_cod_trab,    OPTIONS='-nolist', NOENTRY;
+c102 = FORMONLY.n_trab,         OPTIONS='-nolist', NOENTRY;
+c004 = rolt033.n33_valor,       OPTIONS='-nolist', FORMAT='#,###,###,###.##',
+	INCLUDE = (0 TO 9999999999.99);
+c110 = FORMONLY.tot_valor,      REVERSE, NOENTRY, FORMAT='-,---,---,--&.##';
+
+lbl1 = FORMONLY.bt_cod_trab,    WIDGET='BUTTON', CONFIG='F15';
+lbl2 = FORMONLY.bt_nom_trab,    WIDGET='BUTTON', CONFIG='F16';
+lbl3 = FORMONLY.bt_valor,       WIDGET='BUTTON', CONFIG='F17';
+
+c050 = FORMONLY.num_row,	NOENTRY, REVERSE, UPSHIFT;
+c051 = FORMONLY.max_row,	NOENTRY, REVERSE, UPSHIFT;
+END
+KEYS
+F5 = 'Cabecera'
+F6 = 'Imprimir'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_scr[10] (n33_cod_trab, n_trab, n33_valor) 

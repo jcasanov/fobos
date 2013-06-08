@@ -1,0 +1,64 @@
+DATABASE aceros
+SCREEN 
+{
+
+          Moneda: [c1] [c001              ]           Estado: [c|c060     ]
+
+   Fecha Inicial: [c002      ]                    Fecha Final: [c003      ]
+
+    Tipo Reporte: [e|c011               ]
+                                                                           
+  Aux. Cont. Iva: [c052        ] [c053                                    ]
+	                                                                
+      Tipo O. C.: [c4] [c004              ]
+    Departamento: [c5] [c005                          ]
+       Proveedor: [c6   ] [c006                       ] 
+   
+
+     Ordenar Por:
+           [c051                ]  [a]Ascendente  [d]Descendente
+           [c051                ]  [a]Ascendente  [d]Descendente
+
+}
+TABLES 
+gent013, ordt001
+ATTRIBUTES
+c1   = gent013.g13_moneda, REVERSE, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c001 = gent013.g13_nombre,REVERSE, NOENTRY;
+c    = FORMONLY.estado TYPE CHAR, REVERSE, UPSHIFT, AUTONEXT,
+	INCLUDE = ('A', 'P', 'C', 'T'),
+	COMMENTS = '(A) Activa  (P) Aprobada  (C) Cerrada  (T) Todas';
+c060 = FORMONLY.tit_estado,REVERSE,UPSHIFT,NOENTRY;
+c002 = FORMONLY.fecha_ini TYPE DATE NOT NULL, REVERSE, FORMAT='dd-mm-yyyy',
+	COMMENTS='Ingrese fecha en formato: dd-mm-aaaa.';
+c003 = FORMONLY.fecha_fin TYPE DATE NOT NULL, REVERSE, FORMAT='dd-mm-yyyy',
+	COMMENTS='Ingrese fecha en formato: dd-mm-aaaa.';
+c052 = ordt001.c01_aux_cont, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c053 = FORMONLY.tit_aux_cont, UPSHIFT, REVERSE, NOENTRY;
+c4   = FORMONLY.tipo_oc, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c004 = FORMONLY.n_tipo_oc, NOENTRY;
+c5   = FORMONLY.dpto, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c005 = FORMONLY.n_dpto, NOENTRY;
+c6   = FORMONLY.codprov, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c006 = FORMONLY.nomprov, NOENTRY;
+
+c051 = FORMONLY.col TYPE VARCHAR NOT NULL, REVERSE, UPSHIFT, 
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+a    = FORMONLY.chk_asc TYPE CHAR, AUTONEXT, INCLUDE = ('S', 'N'), 
+	DEFAULT='S', COMMENTS='Ordena ascendentemente.';
+d    = FORMONLY.chk_desc TYPE CHAR, AUTONEXT, INCLUDE = ('S', 'N'), 
+	DEFAULT='N', COMMENTS='Ordena descendentemente.';
+
+e    = FORMONLY.tipo_reporte TYPE CHAR NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, INCLUDE = ('D', 'R', 'T'), DEFAULT = 'T',
+	COMMENTS = '"D" Detalle O/C  "R" Resumen Prov.  "T" T o d o s';
+c011 = FORMONLY.tit_tipo_rep, NOENTRY, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_ord[2] (col, chk_asc, chk_desc)

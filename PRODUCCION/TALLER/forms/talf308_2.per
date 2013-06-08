@@ -1,0 +1,21 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+          TRANSACCION A IMPRIMIR
+          ----------------------
+
+  Transacción: [c000           ]
+
+    Impresión: [c001                   ]
+
+
+
+
+}
+ATTRIBUTES
+c000 = FORMONLY.num_fac, NOENTRY, UPSHIFT, REVERSE;
+c001 = FORMONLY.impresion TYPE CHAR NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'RADIO', CONFIG = 'F Factura A Anexo D "Devolución/Anulación" T "T O D A S"',
+	COMMENTS = 'Escoja tipo de transacción a Imprimir.';
+END

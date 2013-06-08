@@ -1,0 +1,23 @@
+DATABASE aceros
+SCREEN
+{
+
+
+                Division: [f000 ] [f001                                ]
+          Línea de Venta: [f2]    [f003                                ]
+
+           Ingresado Por: [f004      ]
+        Fecha de Ingreso: [f005               ]
+
+}
+TABLES rept070
+ATTRIBUTES
+f000 = rept070.r70_linea ,REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f001 = FORMONLY.tit_linea, NOENTRY, REVERSE, UPSHIFT;
+f2   = rept070.r70_sub_linea, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f003 = rept070.r70_desc_sub, AUTONEXT, UPSHIFT, REVERSE;
+f004 = rept070.r70_usuario, REVERSE, NOENTRY, UPSHIFT;
+f005 = rept070.r70_fecing, REVERSE, NOENTRY, UPSHIFT;
+end

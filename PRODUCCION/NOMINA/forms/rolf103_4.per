@@ -1,0 +1,36 @@
+DATABASE aceros
+SCREEN
+{
+
+  Rubro Base (Enlace para la Formula)
+
+                             [c020] de [c021] 
+ [c000|c001           |c002  |c003           ]
+[c010|c011           |c012] [c013           ]
+[c010|c011           |c012] [c013           ]
+[c010|c011           |c012] [c013           ]
+[c010|c011           |c012] [c013           ]
+[c010|c011           |c012] [c013           ]
+
+}
+TABLES
+rolt008
+ATTRIBUTES
+c000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c002 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c003 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+
+c010 = rolt008.n08_cod_rubro, NOENTRY, UPSHIFT, REVERSE, OPTIONS = '-nolist';
+c011 = FORMONLY.nombre_rub, NOENTRY, UPSHIFT, REVERSE, OPTIONS = '-nolist';
+c012 = rolt008.n08_rubro_base, AUTONEXT, UPSHIFT, REVERSE, OPTIONS = '-nolist',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c013 = FORMONLY.nombre_bas, NOENTRY, UPSHIFT, REVERSE, OPTIONS = '-nolist';
+
+c020 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c021 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_rub_bas[5] (n08_cod_rubro, nombre_rub, n08_rubro_base,
+				nombre_bas)

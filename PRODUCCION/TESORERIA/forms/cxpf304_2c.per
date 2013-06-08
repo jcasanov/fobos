@@ -1,0 +1,48 @@
+DATABASE aceros
+SCREEN
+{
+
+        Proveedor: [c0                               ]
+        Retención: [c1       ]                     Estado: [c|c2        ]
+ Fecha de Ingreso: [c3                 ]    No. SRI: [c050              ]
+
+   TP  No. Documento    TP Retenc. Porcen.    Valor Base    Valor Retención
+  [c4|c5               |c6        |c7     |c8              |c9            ]
+  [c4|c5               |c6        |c7     |c8              |c9            ]
+  [c4|c5               |c6        |c7     |c8              |c9            ]
+  [c4|c5               |c6        |c7     |c8              |c9            ]
+  [c4|c5               |c6        |c7     |c8              |c9            ]
+  [c4|c5               |c6        |c7     |c8              |c9            ]
+  [c4|c5               |c6        |c7     |c8              |c9            ]
+  [c4|c5               |c6        |c7     |c8              |c9            ]
+  [c4|c5               |c6        |c7     |c8              |c9            ]
+  [c4|c5               |c6        |c7     |c8              |c9            ]
+		    			  [c10             |c11           ]
+}
+TABLES
+cxpt027
+cxpt028
+cxpt029
+ATTRIBUTES
+c0  = FORMONLY.vm_nomprov  TYPE VARCHAR, REVERSE, NOENTRY;
+c1  = FORMONLY.vm_numret   TYPE INTEGER, REVERSE, NOENTRY;
+c   = FORMONLY.vm_estado,  REVERSE, NOENTRY;
+c2  = FORMONLY.tit_estado, REVERSE, NOENTRY;
+c3  = cxpt027.p27_fecing,  REVERSE, NOENTRY;
+
+c4  = cxpt028.p28_tipo_doc;
+c5  = cxpt028.p28_num_doc;
+c6  = FORMONLY.tipo_ret TYPE VARCHAR;
+c7  = cxpt028.p28_porcentaje, FORMAT = '###&.##';
+c8  = cxpt028.p28_valor_base, FORMAT = '#,###,###,##&.##';
+c9  = cxpt028.p28_valor_ret,  FORMAT = '###,###,##&.##';
+c10 = FORMONLY.tot_base TYPE DECIMAL(12,2), FORMAT = '#,###,###,##&.##', 
+			REVERSE;
+c11 = FORMONLY.tot_ret  TYPE DECIMAL(11,2), FORMAT = '###,###,##&.##', 
+			REVERSE;
+c050 = cxpt029.p29_num_sri, UPSHIFT, REVERSE, NOENTRY;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_detalle_2[10] (p28_tipo_doc,   p28_num_doc,    tipo_ret,
+			       p28_porcentaje, p28_valor_base, p28_valor_ret)

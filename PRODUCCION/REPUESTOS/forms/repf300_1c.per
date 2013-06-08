@@ -1,0 +1,62 @@
+DATABASE aceros
+SCREEN
+{
+  Moneda: [f1] [f002          ]  Bodega: [f3] [f004                          ]
+División: [f]        [f077                               ]
+   Línea: [f5]       [f054                               ]
+   Grupo: [f55]      [f056                                    ]
+   Clase: [f057    ] [f058                                              ]
+   Marca: [c060  ]   [c061                               ]
+                                                              [c080] de [c081]
+ B. Sec Item                Descripción              Precio Unit.   Stock 
+[fx|f30 |f020  |f021                                |f023         |f025      ]
+[fx|f30 |f020  |f021                                |f023         |f025      ]
+[fx|f30 |f020  |f021                                |f023         |f025      ]
+[fx|f30 |f020  |f021                                |f023         |f025      ]
+[fx|f30 |f020  |f021                                |f023         |f025      ]
+[fx|f30 |f020  |f021                                |f023         |f025      ]
+[fx|f30 |f020  |f021                                |f023         |f025      ]
+[fx|f30 |f020  |f021                                |f023         |f025      ]
+[c077                                              ]
+[c777                                                             ]
+}
+TABLES rept010, rept011
+ATTRIBUTES
+f1   = FORMONLY.moneda TYPE CHAR NOT NULL, REVERSE, UPSHIFT, AUTONEXT, 
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f002 = FORMONLY.tit_moneda, REVERSE, NOENTRY;
+f3   = FORMONLY.bodega TYPE CHAR, UPSHIFT, AUTONEXT, 
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f004 = FORMONLY.tit_bodega, UPSHIFT, NOENTRY;
+f    = FORMONLY.linea, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f077 = formonly.tit_division, NOENTRY;  
+fx   = r11_bodega, UPSHIFT;
+f30  = r10_sec_item, UPSHIFT;
+f020 = r10_codigo, UPSHIFT;
+f021 = r10_nombre, UPSHIFT;
+f023 = FORMONLY.precio TYPE DECIMAL(12,2), FORMAT = '##,###,##&.##';
+f025 = r11_stock_act, FORMAT = '---,--&.##';
+
+f5   = FORMONLY.sub_linea, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f054 = FORMONLY.tit_sub_linea,REVERSE,NOENTRY , UPSHIFT;
+f55  = FORMONLY.cod_grupo, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f056 = FORMONLY.tit_grupo, NOENTRY,REVERSE ,UPSHIFT;
+f057 = FORMONLY.cod_clase, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f058 = FORMONLY.tit_clase, NOENTRY,REVERSE ,UPSHIFT;
+c077 = formonly.descri_clase, REVERSE;
+c777 = formonly.descri_item, REVERSE;
+c060 = FORMONLY.marca, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c061 = FORMONLY.tit_marca, NOENTRY, UPSHIFT;
+
+c080 = FORMONLY.num_row, NOENTRY, REVERSE;
+c081 = FORMONLY.max_row, NOENTRY, REVERSE;
+END 
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_item[8] (r11_bodega, r10_sec_item, r10_codigo, r10_nombre,
+			   FORMONLY.precio, r11_stock_act)

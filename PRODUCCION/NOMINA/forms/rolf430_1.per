@@ -1,0 +1,25 @@
+DATABASE aceros
+SCREEN
+{
+
+               Liquidación: [c0] [c000                          ]
+
+                   Período: [c001      ]      -      [c002      ]
+
+                       Agrupado por Departamento ?: [c]
+
+}
+TABLES
+rolt003
+rolt063
+ATTRIBUTES
+c0   = rolt063.n63_cod_liqrol, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c000 = rolt003.n03_nombre, NOENTRY, UPSHIFT, REVERSE;
+c001 = rolt063.n63_fecha_ini, AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha inicial en formato: dd-mm-aaaa.';
+c002 = rolt063.n63_fecha_fin, AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha final en formato: dd-mm-aaaa.';
+c    = FORMONLY.vm_agrupado, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+END

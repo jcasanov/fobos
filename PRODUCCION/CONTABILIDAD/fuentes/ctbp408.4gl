@@ -1,14 +1,13 @@
 ------------------------------------------------------------------------------
--- Titulo           : ctbp408.4gl - Listado de saldos de bancos
+-- Titulo           : ctbp408.4gl - Conciliacion de bancos
 -- Elaboracion      : 10-Sep-2002
 -- Autor            : NPC
--- Formato Ejecucion: fglrun ctbp408 base módulo compañía num_concil
+-- Formato Ejecucion: fglrun ctbp408 base módulo compañía [num_concil]
 -- Ultima Correccion: 
 -- Motivo Correccion: 
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_demonios	VARCHAR(12)
 DEFINE rm_b13		RECORD LIKE ctbt013.*
 DEFINE rm_b12		RECORD LIKE ctbt012.*
 DEFINE rm_b30		RECORD LIKE ctbt030.*
@@ -17,7 +16,6 @@ DEFINE rm_g09		RECORD LIKE gent009.*
 DEFINE rm_g08		RECORD LIKE gent008.*
 DEFINE vm_fecha_ini	DATE
 DEFINE vm_fecha_fin	DATE
-
 DEFINE vm_top		SMALLINT
 DEFINE vm_left		SMALLINT
 DEFINE vm_right		SMALLINT
@@ -25,27 +23,27 @@ DEFINE vm_bottom	SMALLINT
 DEFINE vm_page		SMALLINT
 
 
+
 MAIN
 
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
-CALL fgl_init4js()
+CALL startlog('../logs/ctbp408.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
-IF num_args() <> 4 THEN   -- Validar # parámetros correcto
+IF num_args() <> 3 AND num_args() <> 4 THEN   -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto.', 'stop')
 	EXIT PROGRAM
 END IF
-LET vg_base		  = arg_val(1)
-LET vg_modulo   	  = arg_val(2)
-LET vg_codcia             = arg_val(3)
-LET rm_b30.b30_num_concil = arg_val(4)
-LET vg_proceso 		  = 'ctbp408'
+LET vg_base    = arg_val(1)
+LET vg_modulo  = arg_val(2)
+LET vg_codcia  = arg_val(3)
+LET vg_proceso = 'ctbp408'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -56,20 +54,100 @@ END MAIN
 FUNCTION funcion_master()
 
 CALL fl_nivel_isolation()
-OPEN WINDOW w_mas AT 3,2 WITH 16 ROWS, 80 COLUMNS
+LET vm_top    = 1
+LET vm_left   = 0
+LET vm_right  = 132
+LET vm_bottom = 4
+LET vm_page   = 66
+IF num_args() <> 3 THEN
+	CALL control_reporte_llamada()
+	EXIT PROGRAM
+END IF
+OPEN WINDOW w_mas AT 3, 2 WITH 6 ROWS, 80 COLUMNS
     ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE 0, BORDER,
 	      MESSAGE LINE LAST - 2)
 OPTIONS INPUT WRAP,
 	ACCEPT KEY	F12
---OPEN FORM f_rep FROM "../forms/ctbf408_1"
---DISPLAY FORM f_rep
-CALL control_reporte()
+OPEN FORM f_rep FROM "../forms/ctbf408_1"
+DISPLAY FORM f_rep
+INITIALIZE rm_b30.* TO NULL
+WHILE TRUE
+	CALL lee_parametros()
+	IF int_flag THEN
+		EXIT WHILE
+	END IF
+	CALL imprimir()
+END WHILE
 
 END FUNCTION
 
 
 
-FUNCTION control_reporte()
+FUNCTION control_reporte_llamada()
+
+INITIALIZE rm_b30.* TO NULL
+LET rm_b30.b30_num_concil = arg_val(4)
+CALL imprimir()
+
+END FUNCTION
+
+
+
+FUNCTION imprimir()
+DEFINE comando		CHAR(100)
+
+CALL fl_control_reportes() RETURNING comando
+IF int_flag THEN
+	RETURN
+END IF
+CALL control_reporte(comando)
+
+END FUNCTION
+
+
+
+FUNCTION lee_parametros()
+DEFINE r_b30		RECORD LIKE ctbt030.*
+DEFINE num_concil	LIKE ctbt030.b30_num_concil
+
+LET int_flag = 0
+INPUT BY NAME rm_b30.b30_num_concil
+	WITHOUT DEFAULTS
+	ON KEY(INTERRUPT)
+		LET int_flag = 1
+		RETURN
+	ON KEY(F2)
+		IF INFIELD(b30_num_concil) THEN
+			CALL fl_ayuda_conciliacion(vg_codcia, NULL)
+				RETURNING num_concil
+			LET int_flag = 0
+			IF num_concil IS NOT NULL THEN
+                     		LET rm_b30.b30_num_concil = num_concil 
+				DISPLAY BY NAME rm_b30.b30_num_concil 
+			END IF 
+		END IF
+	BEFORE FIELD b30_num_concil
+		LET num_concil = rm_b30.b30_num_concil
+	AFTER FIELD b30_num_concil
+		IF rm_b30.b30_num_concil IS NOT NULL THEN
+			CALL fl_lee_conciliacion(vg_codcia,
+							rm_b30.b30_num_concil)
+				RETURNING r_b30.*
+			IF r_b30.b30_compania IS NULL THEN
+				CALL fl_mostrar_mensaje('No existe ese número de conciliación bancaria.', 'exclamation')
+				NEXT FIELD b30_num_concil
+			END IF
+		ELSE
+			LET rm_b30.b30_num_concil = num_concil
+			DISPLAY BY NAME rm_b30.b30_num_concil
+		END IF
+END INPUT
+
+END FUNCTION
+
+
+
+FUNCTION control_reporte(comando)
 DEFINE query		VARCHAR(1000)
 DEFINE comando 		VARCHAR(100)
 DEFINE r_report 	RECORD
@@ -99,134 +177,121 @@ DEFINE tot_ch_gir	SMALLINT
 DEFINE tot_dp		SMALLINT
 DEFINE flag		SMALLINT
 
-LET vm_top    = 0
-LET vm_left   = 1
-LET vm_right  = 220
-LET vm_bottom = 0
-LET vm_page   = 45
-
-WHILE TRUE
-	CALL fl_control_reportes() RETURNING comando
-	IF int_flag THEN
-		EXIT WHILE
-	END IF
-	CALL fl_lee_conciliacion(vg_codcia, rm_b30.b30_num_concil)
-		RETURNING rm_b30.*
-	CALL fl_lee_moneda(rm_b30.b30_moneda) RETURNING rm_g13.*
-	CALL fl_lee_banco_compania(vg_codcia, rm_b30.b30_banco,
-					rm_b30.b30_numero_cta)
-		RETURNING rm_g09.*
-	CALL fl_lee_banco_general(rm_g09.g09_banco) RETURNING rm_g08.*
-	IF rm_b30.b30_compania IS NULL THEN
-		CALL fl_mensaje_consulta_sin_registros()
-		EXIT WHILE
-	END IF
-	LET query = 'SELECT b13_tipo_comp, b13_tipo_doc, b13_num_concil, 0 ',
-			' FROM ctbt013 ',
-			' WHERE b13_compania    = ', vg_codcia,
-			'   AND b13_cuenta      = "', rm_b30.b30_aux_cont, '"',
-			'   AND b13_num_concil IN (0, ',
-						rm_b30.b30_num_concil, ')',
-			'   AND b13_fec_proceso <= "',rm_b30.b30_fecha_fin, '"',
-			' UNION ALL ',
-			'SELECT b32_tipo_comp, b32_tipo_doc, b32_num_concil, 1',
-			' FROM ctbt032 ',
-			' WHERE b32_compania    = ', vg_codcia,
-			'   AND b32_cuenta      = "', rm_b30.b30_aux_cont, '"',
-			'   AND b32_num_concil  IN (0, ',
-						rm_b30.b30_num_concil, ')',
-			'   AND b32_fec_proceso <= "', rm_b30.b30_fecha_fin, '"'
-	PREPARE contar FROM query
-	DECLARE q_contar CURSOR FOR contar 
-	LET tot_ch     = 0
-	LET tot_ch_gir = 0
-	LET tot_dp     = 0
-	FOREACH q_contar INTO tipo_comp, tipo_doc, num_concil, flag
-		IF (tipo_comp = 'EG' OR tipo_doc = 'CHE') THEN
-			IF num_concil <> 0 THEN
-				LET tot_ch = tot_ch + 1
-			END IF
-			LET tot_ch_gir = tot_ch_gir + 1
-		END IF
-		IF flag = 0 THEN
-			IF tipo_comp = 'DP' OR tipo_doc = 'DEP' THEN
-				LET tot_dp = tot_dp + 1
-			END IF
-		END IF
-	END FOREACH
-	START REPORT report_resumen_concil TO PIPE comando
-	OUTPUT TO REPORT report_resumen_concil(tot_ch, tot_ch_gir, tot_dp)
-	FINISH REPORT report_resumen_concil
-	LET query = 'SELECT b13_tipo_comp, b13_num_comp, b13_fec_proceso,',
-			' 0, "0", b13_glosa, b13_valor_base, b13_valor_aux,',
-			' b13_num_concil ',
-			' FROM ctbt013 ',
-			' WHERE b13_compania     = ', vg_codcia,
-			'   AND b13_cuenta       = "', rm_b30.b30_aux_cont, '"',
-			'   AND b13_fec_proceso <= "',rm_b30.b30_fecha_fin, '"',
-			' UNION ALL ',
-			' SELECT b32_tipo_comp, b32_num_comp, b32_fec_proceso,',
-			' b32_num_cheque, b32_benef_che, b32_glosa, ',
-			' b32_valor_base, b32_valor_aux, b32_num_concil ',
-			'	FROM ctbt032 ',
-			'	WHERE b32_compania   = ', vg_codcia,
-			'  	  AND b32_cuenta     = "',
-						rm_b30.b30_aux_cont, '"',
-			'         AND b32_fec_proceso <= "',
-						rm_b30.b30_fecha_fin, '"',
-			' ORDER BY 3, 1, 2 '
-	START REPORT report_che_girados_ncob TO PIPE comando
-	PREPARE reporte FROM query
-	DECLARE q_reporte CURSOR FOR reporte
-	FOREACH q_reporte INTO r_report_aux.*, num_concil
-		IF r_report_aux.fecha > rm_b30.b30_fecha_fin THEN
-			CONTINUE FOREACH
-		END IF
-	
-		-- Parche por arranque de saldos que no debe ser conciliado.
-		IF YEAR(r_report_aux.fecha) <= 2001 THEN
-			CONTINUE FOREACH
-		END IF
-		--
-
+CALL fl_lee_conciliacion(vg_codcia, rm_b30.b30_num_concil)
+	RETURNING rm_b30.*
+CALL fl_lee_moneda(rm_b30.b30_moneda) RETURNING rm_g13.*
+CALL fl_lee_banco_compania(vg_codcia, rm_b30.b30_banco,
+				rm_b30.b30_numero_cta)
+	RETURNING rm_g09.*
+CALL fl_lee_banco_general(rm_g09.g09_banco) RETURNING rm_g08.*
+IF rm_b30.b30_compania IS NULL THEN
+	CALL fl_mensaje_consulta_sin_registros()
+	RETURN
+END IF
+LET query = 'SELECT b13_tipo_comp, b13_tipo_doc, b13_num_concil, 0 ',
+		' FROM ctbt013 ',
+		' WHERE b13_compania    = ', vg_codcia,
+		'   AND b13_cuenta      = "', rm_b30.b30_aux_cont, '"',
+		'   AND b13_num_concil IN (0, ',
+					rm_b30.b30_num_concil, ')',
+		'   AND b13_fec_proceso <= "',rm_b30.b30_fecha_fin, '"',
+		' UNION ALL ',
+		'SELECT b32_tipo_comp, b32_tipo_doc, b32_num_concil, 1',
+		' FROM ctbt032 ',
+		' WHERE b32_compania    = ', vg_codcia,
+		'   AND b32_cuenta      = "', rm_b30.b30_aux_cont, '"',
+		'   AND b32_num_concil  IN (0, ',
+					rm_b30.b30_num_concil, ')',
+		'   AND b32_fec_proceso <= "', rm_b30.b30_fecha_fin, '"'
+PREPARE contar FROM query
+DECLARE q_contar CURSOR FOR contar 
+LET tot_ch     = 0
+LET tot_ch_gir = 0
+LET tot_dp     = 0
+FOREACH q_contar INTO tipo_comp, tipo_doc, num_concil, flag
+	IF (tipo_comp = 'EG' OR tipo_doc = 'CHE') THEN
 		IF num_concil <> 0 THEN
-			IF num_concil <= rm_b30.b30_num_concil THEN
-				CONTINUE FOREACH
-			END IF
+			LET tot_ch = tot_ch + 1
 		END IF
-		CALL fl_lee_comprobante_contable(vg_codcia, r_report_aux.tipo,
-					r_report_aux.numero)
-			RETURNING rm_b12.*
-		IF rm_b12.b12_moneda <> rm_g09.g09_moneda THEN
+		LET tot_ch_gir = tot_ch_gir + 1
+	END IF
+	IF flag = 0 THEN
+		IF tipo_comp = 'DP' OR tipo_doc = 'DEP' THEN
+			LET tot_dp = tot_dp + 1
+		END IF
+	END IF
+END FOREACH
+START REPORT report_resumen_concil TO PIPE comando
+OUTPUT TO REPORT report_resumen_concil(tot_ch, tot_ch_gir, tot_dp)
+FINISH REPORT report_resumen_concil
+LET query = 'SELECT b13_tipo_comp, b13_num_comp, b13_fec_proceso,',
+		' 0, "0", b13_glosa, b13_valor_base, b13_valor_aux,',
+		' b13_num_concil ',
+		' FROM ctbt013 ',
+		' WHERE b13_compania     = ', vg_codcia,
+		'   AND b13_cuenta       = "', rm_b30.b30_aux_cont, '"',
+		'   AND b13_fec_proceso <= "',rm_b30.b30_fecha_fin, '"',
+		' UNION ALL ',
+		' SELECT b32_tipo_comp, b32_num_comp, b32_fec_proceso,',
+		' b32_num_cheque, b32_benef_che, b32_glosa, ',
+		' b32_valor_base, b32_valor_aux, b32_num_concil ',
+		'	FROM ctbt032 ',
+		'	WHERE b32_compania   = ', vg_codcia,
+		'  	  AND b32_cuenta     = "',
+					rm_b30.b30_aux_cont, '"',
+		'         AND b32_fec_proceso <= "',
+					rm_b30.b30_fecha_fin, '"',
+		' ORDER BY 3, 1, 2 '
+START REPORT report_che_girados_ncob TO PIPE comando
+PREPARE reporte FROM query
+DECLARE q_reporte CURSOR FOR reporte
+FOREACH q_reporte INTO r_report_aux.*, num_concil
+	IF r_report_aux.fecha > rm_b30.b30_fecha_fin THEN
+		CONTINUE FOREACH
+	END IF
+
+	-- Parche por arranque de saldos que no debe ser conciliado.
+	IF YEAR(r_report_aux.fecha) <= 2002 THEN
+		CONTINUE FOREACH
+	END IF
+	--
+
+	IF num_concil <> 0 THEN
+		IF num_concil <= rm_b30.b30_num_concil THEN
 			CONTINUE FOREACH
 		END IF
-		IF rm_b12.b12_num_cheque IS NULL THEN
-			CONTINUE FOREACH
-		END IF
-		LET r_report.tipo		= r_report_aux.tipo
-		LET r_report.numero		= r_report_aux.numero
-		LET r_report.fecha		= r_report_aux.fecha
-		IF r_report_aux.cheque <> 0 THEN
-			LET r_report.cheque	  = r_report_aux.cheque
-			LET r_report.beneficiario = r_report_aux.beneficiario
-		ELSE
-			LET r_report.cheque	  = rm_b12.b12_num_cheque
-			LET r_report.beneficiario = rm_b12.b12_benef_che
-		END IF
-		IF rm_b12.b12_estado <> 'E' THEN
-			LET r_report.referencia	= r_report_aux.referencia
-			CALL obtener_valores_deb_cre(r_report_aux.valor_base,
-						     r_report_aux.valor_aux)
-				RETURNING r_report.valor
-		ELSE
-			LET r_report.referencia	= '*** ELIMINADO ***'
-			LET r_report.valor	= 0
-		END IF
-		OUTPUT TO REPORT report_che_girados_ncob(r_report.*)
-	END FOREACH
-	FINISH REPORT report_che_girados_ncob
-	EXIT WHILE
-END WHILE 
+	END IF
+	CALL fl_lee_comprobante_contable(vg_codcia, r_report_aux.tipo,
+				r_report_aux.numero)
+		RETURNING rm_b12.*
+	IF rm_b12.b12_moneda <> rm_g09.g09_moneda THEN
+		CONTINUE FOREACH
+	END IF
+	IF rm_b12.b12_num_cheque IS NULL THEN
+		CONTINUE FOREACH
+	END IF
+	LET r_report.tipo		= r_report_aux.tipo
+	LET r_report.numero		= r_report_aux.numero
+	LET r_report.fecha		= r_report_aux.fecha
+	IF r_report_aux.cheque <> 0 THEN
+		LET r_report.cheque	  = r_report_aux.cheque
+		LET r_report.beneficiario = r_report_aux.beneficiario
+	ELSE
+		LET r_report.cheque	  = rm_b12.b12_num_cheque
+		LET r_report.beneficiario = rm_b12.b12_benef_che
+	END IF
+	IF rm_b12.b12_estado <> 'E' THEN
+		LET r_report.referencia	= r_report_aux.referencia
+		CALL obtener_valores_deb_cre(r_report_aux.valor_base,
+					     r_report_aux.valor_aux)
+			RETURNING r_report.valor
+	ELSE
+		LET r_report.referencia	= '*** ELIMINADO ***'
+		LET r_report.valor	= 0
+	END IF
+	OUTPUT TO REPORT report_che_girados_ncob(r_report.*)
+END FOREACH
+FINISH REPORT report_che_girados_ncob
 
 END FUNCTION
 
@@ -236,8 +301,10 @@ REPORT report_resumen_concil(tot_ch, tot_ch_gir, tot_dp)
 DEFINE tot_ch		SMALLINT
 DEFINE tot_ch_gir	SMALLINT
 DEFINE tot_dp		SMALLINT
+DEFINE r_g02		RECORD LIKE gent002.*
 DEFINE usuario		VARCHAR(19,15)
 DEFINE titulo		VARCHAR(80)
+DEFINE tit_sist		VARCHAR(40)
 DEFINE modulo		VARCHAR(40)
 DEFINE long		SMALLINT
 DEFINE num_concil	VARCHAR(10)
@@ -247,6 +314,9 @@ DEFINE total_con	DECIMAL(12,2)
 DEFINE chc		VARCHAR(5)
 DEFINE chg		VARCHAR(5)
 DEFINE dep		VARCHAR(5)
+DEFINE escape		SMALLINT
+DEFINE act_comp, db_c	SMALLINT
+DEFINE desact_comp, db	SMALLINT
 
 OUTPUT
 	TOP MARGIN	vm_top
@@ -254,6 +324,7 @@ OUTPUT
 	RIGHT MARGIN	vm_right
 	BOTTOM MARGIN	vm_bottom
 	PAGE LENGTH	vm_page
+
 FORMAT
 
 PAGE HEADER
@@ -263,12 +334,19 @@ PAGE HEADER
 	--print '&k2S'	                -- Letra condensada (16 cpi)
 	--print '&k4S'	        -- Letra (12 cpi)
 
+	LET escape	= 27		# Iniciar sec. impresi¢n
+	LET act_comp	= 15		# Activar Comprimido.
+	LET desact_comp	= 18		# Cancelar Comprimido.
 	LET modulo     = "Módulo: Contabilidad"
 	LET long       = LENGTH(modulo)
 	LET usuario    = 'Usuario: ', vg_usuario
 	CALL fl_justifica_titulo('D', usuario, 19) RETURNING usuario
-	CALL fl_justifica_titulo('I','RESUMEN DE CONCILIACION BANCARIA',80)
+	CALL fl_justifica_titulo('C','RESUMEN DE CONCILIACION BANCARIA',80)
 		RETURNING titulo
+	CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING r_g02.*
+	LET tit_sist = r_g02.g02_nombre CLIPPED, " - ", vg_base CLIPPED, " (",
+			vg_servidor CLIPPED, ")"
+	CALL fl_justifica_titulo('C', tit_sist, 40) RETURNING tit_sist
 	LET num_concil = rm_b30.b30_num_concil
 	IF rm_b30.b30_estado = 'A' THEN
 		LET estado = 'ACTIVA'
@@ -292,10 +370,14 @@ PAGE HEADER
 			rm_b30.b30_ch_nocob + rm_b30.b30_nd_banco + 
 			rm_b30.b30_nc_banco + rm_b30.b30_dp_tran +
 	      		rm_b30.b30_db_otros + rm_b30.b30_cr_otros
+	SKIP 2 LINES
+	print ASCII escape;
+	print ASCII act_comp
 	PRINT COLUMN 1,   rg_cia.g01_razonsocial,
-	      COLUMN 122, 'Página: ', PAGENO USING '&&&'
+	      COLUMN 047, tit_sist CLIPPED,
+	      COLUMN 122, 'Pagina: ', PAGENO USING '&&&'
 	PRINT COLUMN 1,   modulo CLIPPED,
-	      COLUMN 51,  titulo CLIPPED,
+	      COLUMN 27,  titulo CLIPPED,
 	      COLUMN 126, UPSHIFT(vg_proceso) 
 	SKIP 2 LINES
 	PRINT COLUMN 1, 'Fecha Impresión: ',
@@ -357,6 +439,10 @@ PAGE HEADER
 				       rm_b12.b12_num_comp
 	END IF
 
+ON LAST ROW
+	print ASCII escape;
+	print ASCII desact_comp 
+
 END REPORT
 
 
@@ -375,6 +461,9 @@ DEFINE usuario		VARCHAR(19,15)
 DEFINE titulo		VARCHAR(80)
 DEFINE modulo		VARCHAR(40)
 DEFINE long		SMALLINT
+DEFINE escape		SMALLINT
+DEFINE act_comp, db_c	SMALLINT
+DEFINE desact_comp, db	SMALLINT
 
 OUTPUT
 	TOP MARGIN	vm_top
@@ -382,6 +471,7 @@ OUTPUT
 	RIGHT MARGIN	vm_right
 	BOTTOM MARGIN	vm_bottom
 	PAGE LENGTH	vm_page
+
 FORMAT
 
 PAGE HEADER
@@ -391,6 +481,9 @@ PAGE HEADER
 	--print '&k2S'	                -- Letra condensada (16 cpi)
 	--print '&k4S'	        -- Letra (12 cpi)
 
+	LET escape	= 27		# Iniciar sec. impresi¢n
+	LET act_comp	= 15		# Activar Comprimido.
+	LET desact_comp	= 18		# Cancelar Comprimido.
 	LET modulo     = "Módulo: Contabilidad"
 	LET long       = LENGTH(modulo)
 	LET usuario    = 'Usuario: ', vg_usuario
@@ -398,6 +491,9 @@ PAGE HEADER
 	CALL fl_justifica_titulo('I','DETALLE DE CHEQUES GIRADOS Y NO COBRADOS',
 				80)
 		RETURNING titulo
+	SKIP 2 LINES
+	print ASCII escape;
+	print ASCII act_comp
 	PRINT COLUMN 1,   rg_cia.g01_razonsocial,
 	      COLUMN 122, 'Página: ', PAGENO USING '&&&'
 	PRINT COLUMN 1,   modulo CLIPPED,
@@ -430,7 +526,9 @@ ON LAST ROW
 	--print '&k4S'	        -- Letra (12 cpi)
 	PRINT COLUMN 116, '----------------'
 	PRINT COLUMN 105, 'TOTAL ==>  ',
-	      COLUMN 116, SUM(r_report.valor)	USING '#,###,###,##&.##'
+	      COLUMN 116, SUM(r_report.valor)	USING '#,###,###,##&.##';
+	print ASCII escape;
+	print ASCII desact_comp 
 
 END REPORT
 
@@ -452,7 +550,7 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION no_validar_parametros()
 
 CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
 IF rg_mod.g50_modulo IS NULL THEN

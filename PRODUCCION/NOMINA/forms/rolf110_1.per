@@ -1,0 +1,29 @@
+DATABASE aceros
+SCREEN
+{
+
+
+                                                      Estado: [c][c000     ]
+
+        Código Seguro: [c001] [c002                          ] 
+
+  Porcentaje Empleado: [c003 ] %                Porcentaje Compañía: [c004 ] %
+
+        Ingresado Por: [c005      ]     Fecha Ingreso: [c006               ]
+
+}
+TABLES
+rolt013
+ATTRIBUTES
+c    = rolt013.n13_estado, NOENTRY, UPSHIFT, REVERSE;
+c000 = FORMONLY.tit_estado, NOENTRY, UPSHIFT, REVERSE;
+c001 = rolt013.n13_cod_seguro, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = rolt013.n13_descripcion, AUTONEXT, UPSHIFT, REVERSE;
+c003 = rolt013.n13_porc_trab, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = (0 TO 99.99), FORMAT = '#&.##';
+c004 = rolt013.n13_porc_cia, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = (0 TO 99.99), FORMAT = '#&.##';
+c005 = rolt013.n13_usuario, NOENTRY, UPSHIFT, REVERSE;
+c006 = rolt013.n13_fecing, NOENTRY, UPSHIFT, REVERSE;
+END

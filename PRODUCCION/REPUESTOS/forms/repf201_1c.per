@@ -1,0 +1,40 @@
+DATABASE aceros
+SCREEN 
+{
+
+
+ Código Venta Perdida: [f000       ]  	              Estado:[a][a4        ]
+
+          Código Item: [f002           ] [a2                               ]
+        Código Bodega: [a0] [a3                       ]
+             Cantidad: [f003  ]
+
+       Tipo Documento: [a1]
+     Número Documento: [f005           ]
+           Referencia: [f004                          ]
+
+        Ingresado Por: [f006      ]
+     Fecha de Ingreso: [f007               ]
+
+}
+TABLES
+rept013
+ATTRIBUTES
+f000 = rept013.r13_serial, REVERSE, NOENTRY,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+a0   = rept013.r13_bodega, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+a3   = FORMONLY.nom_bod TYPE VARCHAR, NOENTRY;
+f002 = rept013.r13_item, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+a2   = FORMONLY.nom_item TYPE VARCHAR, NOENTRY;
+a    = rept013.r13_estado, REVERSE,UPSHIFT, NOENTRY, 
+	COMMENTS = 'A ACTIVA  P PROCESDA';
+a4   = FORMONLY.tit_estado TYPE VARCHAR,UPSHIFT, NOENTRY;
+f003 = rept013.r13_cantidad, REVERSE;
+f004 = rept013.r13_referencia, REVERSE, UPSHIFT;
+a1   = rept013.r13_cod_tran, UPSHIFT, NOENTRY;
+f005 = rept013.r13_num_tran, NOENTRY;
+f006 = rept013.r13_usuario, REVERSE, NOENTRY, UPSHIFT;
+f007 = rept013.r13_fecing, REVERSE, NOENTRY;
+end

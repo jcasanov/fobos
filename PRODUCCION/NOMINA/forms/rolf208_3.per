@@ -1,0 +1,23 @@
+DATABASE aceros
+SCREEN
+{
+
+            DATOS DE GLOSA Y CHEQUE PARA JUBILADOS
+            -------------------------------------
+
+ No. Cheque: [c000      ]        Fecha de Pago: [c001      ]
+
+      Glosa: [c002                                         ]
+             [c002                                         ]
+             [c002                                         ]
+
+}
+TABLES
+ctbt012
+ATTRIBUTES
+c000 = ctbt012.b12_num_cheque, AUTONEXT, REVERSE, UPSHIFT;
+c001 = ctbt012.b12_fec_proceso, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha de pago en formato: dd-mm-aaaa.';
+c002 = ctbt012.b12_glosa, AUTONEXT, REVERSE, UPSHIFT, WORDWRAP COMPRESS;
+END

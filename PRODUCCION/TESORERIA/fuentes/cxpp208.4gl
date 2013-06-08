@@ -18,7 +18,7 @@ DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
 CALL startlog('../logs/errores')
-CALL fgl_init4js()
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN          -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
@@ -31,8 +31,8 @@ LET vg_codloc   = arg_val(4)
 LET vg_proceso = 'cxpp208'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -187,14 +187,17 @@ SET LOCK MODE TO NOT WAIT
 DELETE FROM cxpt050 WHERE p50_ano       = anho 
 	  	      AND p50_mes       = mes 
 	              AND p50_compania  = vg_codcia
+	              AND p50_localidad = vg_codloc
 
 DELETE FROM cxpt051 WHERE p51_ano       = anho 
 	  	      AND p51_mes       = mes 
 	              AND p51_compania  = vg_codcia
+	              AND p51_localidad = vg_codloc
 
 LET query = 'INSERT INTO cxpt051 ',
 		' SELECT ', anho, ', ', mes, ', * FROM cxpt021 ',
 		' 	WHERE p21_compania  = ', vg_codcia,
+		'	  AND p21_localidad = ', vg_codloc,
 	  	'	  AND p21_saldo > 0 '
 
 PREPARE stmnt1 FROM query
@@ -203,6 +206,7 @@ EXECUTE stmnt1
 LET query = 'INSERT INTO cxpt050 ',
 		' SELECT ', anho, ', ', mes, ', * FROM cxpt020 ',
 		' 	WHERE p20_compania  = ', vg_codcia,
+		'	  AND p20_localidad = ', vg_codloc,
 	 	'	  AND p20_saldo_cap + p20_saldo_int > 0 '
 
 PREPARE stmnt2 FROM query
@@ -224,7 +228,7 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION no_validar_parametros()
 
 CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
 IF rg_mod.g50_modulo IS NULL THEN

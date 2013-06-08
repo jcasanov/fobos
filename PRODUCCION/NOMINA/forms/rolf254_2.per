@@ -1,0 +1,25 @@
+DATABASE aceros
+SCREEN
+{
+
+           DATOS PARA INGRESAR VACACION ADICIONAL
+           -------------------------------------
+
+       Empleado: [c000|c001                               ]
+
+ Año Vacaciones: [c002]                  Días de Gozo: [c3]
+
+                                       Días Gozo Real: [c4]
+
+}
+TABLES
+rolt030
+rolt047
+ATTRIBUTES
+c000 = rolt047.n47_cod_trab, NOENTRY, UPSHIFT, REVERSE;
+c001 = rolt030.n30_nombres, NOENTRY, UPSHIFT, REVERSE;
+c002 = FORMONLY.anio_vac TYPE SMALLINT, AUTONEXT, UPSHIFT, REQUIRED,
+	INCLUDE = (2003 TO 2099), REVERSE;
+c3   = rolt047.n47_dias_goza, AUTONEXT, UPSHIFT, INCLUDE = (1 TO 15), REVERSE;
+c4   = rolt047.n47_dias_real, AUTONEXT, UPSHIFT, INCLUDE = (0 TO 15), REVERSE;
+END

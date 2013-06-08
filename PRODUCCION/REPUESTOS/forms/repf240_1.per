@@ -1,0 +1,70 @@
+DATABASE aceros
+SCREEN
+{
+                                                              [c050] de [c051]
+ [c000    |c001                |c002     |c003|c004|c005    |c006    |c007    ]
+[c010  ] [c011                |c012     |c013|c014|c015    |c016    |c017    ]
+[c010  ] [c011                |c012     |c013|c014|c015    |c016    |c017    ]
+[c010  ] [c011                |c012     |c013|c014|c015    |c016    |c017    ]
+[c010  ] [c011                |c012     |c013|c014|c015    |c016    |c017    ]
+[c010  ] [c011                |c012     |c013|c014|c015    |c016    |c017    ]
+[c010  ] [c011                |c012     |c013|c014|c015    |c016    |c017    ]
+[c010  ] [c011                |c012     |c013|c014|c015    |c016    |c017    ]
+[c010  ] [c011                |c012     |c013|c014|c015    |c016    |c017    ]
+[c010  ] [c011                |c012     |c013|c014|c015    |c016    |c017    ]
+[c010  ] [c011                |c012     |c013|c014|c015    |c016    |c017    ]
+[c010  ] [c011                |c012     |c013|c014|c015    |c016    |c017    ]
+[c010  ] [c011                |c012     |c013|c014|c015    |c016    |c017    ]
+                                   Cantidad Total de Items Pedidos: [c020    ]
+[c070                               ]
+[c071                               ]
+[c072                                    ]
+[c073                                              ]
+[c074                                                               |c075    ]
+}
+TABLES
+rept010
+rept093
+ATTRIBUTES
+c000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c002 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c003 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c004 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c005 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c006 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+c007 = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22';
+
+c010 = rept093.r93_item, AUTONEXT, UPSHIFT, OPTIONS = '-nolist',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c011 = rept093.r93_cod_pedido, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c012 = rept010.r10_nombre, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c013 = rept093.r93_stock_max, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c014 = rept093.r93_stock_min, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c015 = rept093.r93_stock_act, NOENTRY, UPSHIFT, FORMAT = '####&.##',
+	OPTIONS = '-nolist';
+c016 = rept093.r93_cantpend, NOENTRY, UPSHIFT, FORMAT = '####&.##',
+	OPTIONS = '-nolist';
+c017 = rept093.r93_cantpedir, AUTONEXT, UPSHIFT, FORMAT = '----&.##',
+	OPTIONS = '-nolist';
+
+c020 = FORMONLY.total_pedir TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '----&.##';
+
+c070 = FORMONLY.descrip_1, NOENTRY;
+c071 = FORMONLY.descrip_2, NOENTRY;
+c072 = FORMONLY.descrip_3, NOENTRY;
+c073 = FORMONLY.descrip_4, NOENTRY, REVERSE;
+c074 = FORMONLY.nom_item,  NOENTRY, REVERSE;
+c075 = FORMONLY.nom_marca, NOENTRY, REVERSE;
+
+c050 = FORMONLY.num_row, NOENTRY, REVERSE;
+c051 = FORMONLY.max_row, NOENTRY, REVERSE;
+END
+KEYS
+F5 = 'Item'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_pedido[12] (r93_item, r93_cod_pedido, r10_nombre,
+				r93_stock_max, r93_stock_min, r93_stock_act,
+				r93_cantpend, r93_cantpedir)

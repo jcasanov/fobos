@@ -1,0 +1,24 @@
+DATABASE aceros
+SCREEN
+{
+
+       No Orden: [c0    ]      
+
+         Moneda: [c1]     [c2                          ] 
+
+      Proveedor: [c3    ] [c4                          ]
+
+ Solicitado Por: [c5                                   ]
+
+}
+TABLES ordt010
+ATTRIBUTES
+c0  = ordt010.c10_numero_oc, REVERSE, UPSHIFT, AUTONEXT, 
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c1  = ordt010.c10_moneda, REVERSE, UPSHIFT, AUTONEXT, 
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c2  = FORMONLY.tit_estado, NOENTRY;
+c3  = ordt010.c10_codprov, REVERSE;
+c4  = FORMONLY.nom_prov, NOENTRY;
+c5  = ordt010.c10_solicitado, REVERSE, NOENTRY;
+end

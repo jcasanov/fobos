@@ -1,15 +1,15 @@
-database diteca
-screen 
+DATABASE aceros
+SCREEN 
 {
     Comprobante: [a0] [c001    ]                  Estado: [a|c100      ]
         Subtipo: [c002  ] [c101                                ]
-          Glosa: [c003                                       ]
-                 [c003                                       ]
-                 [c003                                       ]
+          Glosa: [c003                                          ]
+                 [c003                                          ]
+                 [c003                                          ]
          Moneda: [a1] [c102           ]  Paridad: [c008               ]
   Fecha Proceso: [c009      ]             Origen: [b|c103       ]
       No Cheque: [c007       ]      Beneficiario: [c006                     ]
-
+                                                             [c080] de [c081]
  [lb1           |lb2  |lb3                   |lb4            |lb5            ]
 [c018        ] [a4 ] [c019                  |c020           |c021           ]
 [c018        ] [a4 ] [c019                  |c020           |c021           ]
@@ -17,16 +17,15 @@ screen
 [c018        ] [a4 ] [c019                  |c020           |c021           ]
 [c018        ] [a4 ] [c019                  |c020           |c021           ]
 [c018        ] [a4 ] [c019                  |c020           |c021           ]
-[c104                               ]       [c050           |c051           ]
-[c022                                                                       ]
-   Ingresado Por: [c013      ]           Fecha Ingreso: [c014               ]
-                                    Fecha Modificación: [c012               ]
+[c104                                  ]    [c050           |c051           ]
+[c054                                  ]        Diferencia: [c060           ]
+[c054                                  ] Fecha Ingreso: [c014               ]
+   Ingresado Por: [c013      ]      Fecha Modificación: [c012               ]
 }
-end
-tables
+TABLES
 ctbt012
 ctbt013
-attributes
+ATTRIBUTES
 a0 = ctbt012.b12_tipo_comp, REVERSE, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2',
 	UPSHIFT, AUTONEXT;
 c001 = ctbt012.b12_num_comp, NOENTRY, REVERSE, UPSHIFT;
@@ -42,42 +41,44 @@ c008 = ctbt012.b12_paridad, REVERSE, NOENTRY, FORMAT='#,###,##&.#########';
 c009 = ctbt012.b12_fec_proceso, FORMAT='dd-mm-yyyy', REVERSE,
 	COMMENT='Digite fecha en formato: dd-mm-aaaa';
 
-c012 = ctbt012.b12_fec_modifi, NOENTRY,
-		COMMENT='Formato: [<|=|>] yyyy-mm-dd hh:mm:ss';
+c012 = ctbt012.b12_fec_modifi, NOENTRY;
 c013 = ctbt012.b12_usuario, REVERSE, UPSHIFT, NOENTRY;
-c014 = ctbt012.b12_fecing,  REVERSE,          NOENTRY, 
-		COMMENT='Formato: [<|=|>] yyyy-mm-dd hh:mm:ss';
+c014 = ctbt012.b12_fecing,  REVERSE,          NOENTRY;
 
-c050 = formonly.tot_debito, NOENTRY, FORMAT='####,###,##&.##';
-c051 = formonly.tot_credito, NOENTRY, FORMAT='####,###,##&.##';
+c050 = FORMONLY.tot_debito, NOENTRY, FORMAT='####,###,##&.##';
+c051 = FORMONLY.tot_credito, NOENTRY, FORMAT='####,###,##&.##';
+c060 = FORMONLY.tot_deb_cre TYPE DECIMAL(12,2), NOENTRY,
+	FORMAT = '----,---,--&.##', COLOR = RED WHERE c060 < 0;
 
 c018 = ctbt013.b13_cuenta, UPSHIFT, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2',
 	OPTIONS='-nolist';
 a4 = ctbt013.b13_tipo_doc, UPSHIFT, OPTIONS='-nolist',
 	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
 c019 = ctbt013.b13_glosa, SCROLL, UPSHIFT, OPTIONS='-nolist';
-c020 = formonly.valor_debito, OPTIONS='-nolist', 
+c020 = FORMONLY.valor_debito, OPTIONS='-nolist', 
 	FORMAT='####,###,##&.##', INCLUDE=(0 TO 9999999999.99);
-c021 = formonly.valor_credito, OPTIONS='-nolist', 
+c021 = FORMONLY.valor_credito, OPTIONS='-nolist', 
 	FORMAT='####,###,##&.##', INCLUDE=(0 TO 9999999999.99);
 
-c022 = formonly.n_glosa, NOENTRY, UPSHIFT;
-
-c100 = formonly.n_estado,  NOENTRY;
-c101 = formonly.n_subtipo, NOENTRY;
-c102 = formonly.n_moneda,  NOENTRY;
-c103 = formonly.n_origen,  NOENTRY;
-c104 = formonly.n_cuenta,  NOENTRY;
+c100 = FORMONLY.n_estado,  NOENTRY;
+c101 = FORMONLY.n_subtipo, NOENTRY;
+c102 = FORMONLY.n_moneda, REVERSE,  NOENTRY;
+c103 = FORMONLY.n_origen, REVERSE,  NOENTRY;
+c104 = FORMONLY.n_cuenta,  NOENTRY, REVERSE, UPSHIFT;
+c054 = FORMONLY.n_glosa,  NOENTRY, REVERSE, UPSHIFT, WORDWRAP COMPRESS;
 
 b    = ctbt012.b12_origen, REVERSE, NOENTRY, UPSHIFT, 
-	COMMENT='(A) Automático  (M) Manual';
+	COMMENT='(A) Automatico  (M) Manual';
 
-lb1  = formonly.bt_cuenta,   WIDGET='BUTTON', CONFIG='F15'; 
-lb2  = formonly.bt_tipo_doc, WIDGET='BUTTON', CONFIG='F16';
-lb3  = formonly.bt_glosa,    WIDGET='BUTTON', CONFIG='F17';
-lb4  = formonly.bt_debito,   WIDGET='BUTTON', CONFIG='F18';
-lb5  = formonly.bt_credito,  WIDGET='BUTTON', CONFIG='F19';
-end
+lb1  = FORMONLY.bt_cuenta,   WIDGET='BUTTON', CONFIG='F15'; 
+lb2  = FORMONLY.bt_tipo_doc, WIDGET='BUTTON', CONFIG='F16';
+lb3  = FORMONLY.bt_glosa,    WIDGET='BUTTON', CONFIG='F17';
+lb4  = FORMONLY.bt_debito,   WIDGET='BUTTON', CONFIG='F18';
+lb5  = FORMONLY.bt_credito,  WIDGET='BUTTON', CONFIG='F19';
 
-instructions
-screen record ra_cuenta[6] (b13_cuenta, b13_tipo_doc, b13_glosa, valor_debito, valor_credito)
+c080 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c081 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+SCREEN RECORD ra_cuenta[6] (b13_cuenta, b13_tipo_doc, b13_glosa, valor_debito,
+				valor_credito)

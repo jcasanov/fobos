@@ -1,0 +1,79 @@
+DATABASE FORMONLY
+SCREEN
+{
+                     Periodo: [c000      ] - [c001      ]
+                      Estado: [e                 ]
+
+
+
+                                                            [c010 ] de [c011 ]
+ [c020      |c021  |c022  |c023  |c024             |c025      |c026         |c]
+[c030      |c031  |c032  |c033  |c034             |c035      |c036         |d]
+[c030      |c031  |c032  |c033  |c034             |c035      |c036         |d]
+[c030      |c031  |c032  |c033  |c034             |c035      |c036         |d]
+[c030      |c031  |c032  |c033  |c034             |c035      |c036         |d]
+[c030      |c031  |c032  |c033  |c034             |c035      |c036         |d]
+[c030      |c031  |c032  |c033  |c034             |c035      |c036         |d]
+[c030      |c031  |c032  |c033  |c034             |c035      |c036         |d]
+[c030      |c031  |c032  |c033  |c034             |c035      |c036         |d]
+[c030      |c031  |c032  |c033  |c034             |c035      |c036         |d]
+[c030      |c031  |c032  |c033  |c034             |c035      |c036         |d]
+[c030      |c031  |c032  |c033  |c034             |c035      |c036         |d]
+                                         Totales: [c040      |c041         ]
+[c042                                           ]
+[c043                                                                 |c044  ]
+}
+ATTRIBUTES
+c000 = FORMONLY.fecha_ini TYPE DATE NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite fecha inicial en formato: dd-mm-aaaa.';
+c001 = FORMONLY.fecha_fin TYPE DATE NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite fecha inicial en formato: dd-mm-aaaa.';
+e    = FORMONLY.tipo_est TYPE CHAR NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, INCLUDE = ('X', 'C', 'P', 'E', 'T'), DEFAULT = 'C',
+	WIDGET = 'RADIO', CONFIG = 'X Compuesto P "En Proceso" C "Cargado en Stock" E Eliminado T "T O D O S"';
+
+c010 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c011 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c020 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15'; 
+c021 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16'; 
+c022 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17'; 
+c023 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18'; 
+c024 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19'; 
+c025 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20'; 
+c026 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21'; 
+c    = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22'; 
+
+c030 = FORMONLY.fecha, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+c031 = FORMONLY.item, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c032 = FORMONLY.composicion, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c033 = FORMONLY.carga, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c034 = FORMONLY.referencia, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c035 = FORMONLY.unidades, NOENTRY, UPSHIFT, FORMAT = '---,--&.##',
+	COLOR = RED WHERE c035 < 0, OPTIONS = '-nolist';
+c036 = FORMONLY.costo, NOENTRY, UPSHIFT, FORMAT = '--,---,--&.##',
+	COLOR = RED WHERE c036 < 0, OPTIONS = '-nolist';
+d    = FORMONLY.estado, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+
+c040 = FORMONLY.total_unid, NOENTRY, UPSHIFT, FORMAT = '---,--&.##',
+	COLOR = RED WHERE c040 < 0, REVERSE;
+c041 = FORMONLY.total_costo, NOENTRY, UPSHIFT, FORMAT = '--,---,--&.##',
+	COLOR = RED WHERE c041 < 0, REVERSE;
+c042 = FORMONLY.desc_clase, NOENTRY, UPSHIFT, REVERSE;
+c043 = FORMONLY.desc_item, NOENTRY, UPSHIFT, REVERSE;
+c044 = FORMONLY.desc_marca, NOENTRY, UPSHIFT, REVERSE;
+END
+KEYS
+F5  = 'Item'
+F6  = 'Detalle Venta'
+F7  = 'Composicion'
+F8  = 'Carga'
+F9  = 'Imprimir'
+F10 = 'Archivo'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_detalle[11] (fecha, item, composicion, carga, referencia,
+				unidades, costo, estado)

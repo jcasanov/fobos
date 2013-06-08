@@ -1,0 +1,41 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+      Localidad: [c051 ] [c052                ]
+ Código Cliente: [c001 ] [c002                                         ]
+         Moneda: [c3]    [c004           ]
+ Qué Documentos: [c|c010     ]
+
+     Tipo Saldo: [d|c011      ]            Saldo >= a: [c006           ]
+
+                                           Rango Días: [c060 ] - [c061 ]
+}
+ATTRIBUTES
+c051 = FORMONLY.localidad, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c052 = FORMONLY.tit_localidad, UPSHIFT, NOENTRY;
+c001 = FORMONLY.codcli TYPE INTEGER, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c002 = FORMONLY.nomcli, NOENTRY;
+c3   = FORMONLY.moneda TYPE CHAR NOT NULL, UPSHIFT, AUTONEXT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c004 = FORMONLY.tit_mon, NOENTRY;
+c    = FORMONLY.flag_saldo TYPE CHAR, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = ('S', 'T'), COMMENTS = 'S Con Saldo  T Todos';
+c010 = FORMONLY.tit_flag_saldo,REVERSE,UPSHIFT,NOENTRY;
+d    = FORMONLY.tipo_saldo TYPE CHAR, AUTONEXT, UPSHIFT, REVERSE,
+       INCLUDE = ('A', 'P', 'V', 'T'),
+       COMMENTS = '(A) A Favor  (P) Por Vencer  (V) Vencidos  (T) Todos';
+c011 = FORMONLY.tit_tipo_saldo,REVERSE,UPSHIFT,NOENTRY;
+c006 = FORMONLY.valor TYPE DECIMAL(11,2), INCLUDE = (0 TO 999999999),
+	FORMAT = '####,###,##&.##';
+c060 = FORMONLY.dias_min TYPE SMALLINT, AUTONEXT, UPSHIFT,
+	INCLUDE = (-9999 TO 9999, NULL),
+	COMMENTS = 'Solo es para Tipo Saldo = Por Vencer o Vencidos.';
+c061 = FORMONLY.dias_max TYPE SMALLINT, AUTONEXT, UPSHIFT,
+	INCLUDE = (-9999 TO 9999, NULL),
+	COMMENTS = 'Solo es para Tipo Saldo = Por Vencer o Vencidos.';
+END
+INSTRUCTIONS
+DELIMITERS '||'

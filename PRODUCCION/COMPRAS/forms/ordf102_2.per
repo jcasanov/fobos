@@ -1,0 +1,71 @@
+DATABASE aceros
+SCREEN
+{
+
+                     Códigos del SRI en Tipos de Impuesto
+                     -----------------------------------
+
+ Tipo Retención: [c|c000                ]              Porcentaje: [c001  ] %
+
+                                                           [c010 ] de [c011 ]
+ [c020    |c021                                  |c022      |c023      |d|e|f]
+[c030  ] [c031                                  |c032      |c033      |g|h|i]
+[c030  ] [c031                                  |c032      |c033      |g|h|i]
+[c030  ] [c031                                  |c032      |c033      |g|h|i]
+[c030  ] [c031                                  |c032      |c033      |g|h|i]
+[c030  ] [c031                                  |c032      |c033      |g|h|i]
+[c030  ] [c031                                  |c032      |c033      |g|h|i]
+[c030  ] [c031                                  |c032      |c033      |g|h|i]
+[c030  ] [c031                                  |c032      |c033      |g|h|i]
+
+ Usuario que Modificó: [c040      ]      Fecha: [c041               ]
+  Usuario que Eliminó: [c042      ]      Fecha: [c043               ]
+}
+TABLES
+ordt003
+ordt002
+ATTRIBUTES
+c    = ordt003.c03_tipo_ret, NOENTRY, REVERSE, UPSHIFT;
+c000 = ordt002.c02_nombre, NOENTRY, REVERSE, UPSHIFT;
+c001 = ordt003.c03_porcentaje, NOENTRY, REVERSE, UPSHIFT, FORMAT = '##&.##';
+
+c010 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c011 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+
+c020 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c021 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c022 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c023 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+d    = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+e    = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+f    = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+
+c030 = ordt003.c03_codigo_sri, NOENTRY, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	OPTIONS = '-nolist';
+c031 = ordt003.c03_concepto_ret, NOENTRY, SCROLL, OPTIONS = '-nolist';
+c032 = ordt003.c03_fecha_ini_porc, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+c033 = ordt003.c03_fecha_fin_porc, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+g    = ordt003.c03_ingresa_proc, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N',
+	COMMENTS = 'Seleccione si código del SRI ingresa porcentaje o no.',
+	OPTIONS = '-nolist';
+h    = ordt003.c03_tipo_fuente, UPSHIFT, INCLUDE = ('B', 'S', 'T'),
+	COMMENTS = 'Digite el tipo de retención: B, S, ó T.',
+	DEFAULT = 'T', OPTIONS = '-nolist';
+i    = ordt003.c03_estado, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+
+c040 = ordt003.c03_usuario_modifi, NOENTRY, UPSHIFT;
+c041 = ordt003.c03_fecha_modifi, NOENTRY, UPSHIFT;
+c042 = ordt003.c03_usuario_elimin, NOENTRY, UPSHIFT;
+c043 = ordt003.c03_fecha_elimin, NOENTRY, UPSHIFT;
+END
+KEYS
+F5 = 'Eliminar'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_retsri[8] (c03_codigo_sri, c03_concepto_ret,c03_fecha_ini_porc,
+			c03_fecha_fin_porc, c03_ingresa_proc, c03_tipo_fuente,
+			c03_estado)

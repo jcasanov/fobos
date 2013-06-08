@@ -1,0 +1,57 @@
+DATABASE aceros
+SCREEN
+{
+
+     No. Presupuesto: [c001    ]                       Estado: [c][c002     ]
+
+             Cliente: [c003  ] [c004                                        ]
+           Dirección: [c005                                    ]
+            Teléfono: [c006      ]            Ced/RUC/Pas: [c026            ]
+
+  Motivo Presupuesto: [c007                                                 ]
+       Observaciones: [c050                                    ]
+              Moneda: [c0] [c010            ]
+
+    Orden de Trabajo: [c013    ]         Total M.O. Interna: [c011          ]
+  Usuario que Aprobó: [c015      ]      Total de Materiales: [c012          ]
+ Fecha de Aprobación: [c016               ]   Trab. Externo: [c021          ]
+  Usuario que Modif.: [c027      ]                 Impuesto: [c022          ]
+ Fecha de Modificac.: [c028               ]    Otros Mater.: [c023          ]
+             Usuario: [c017      ]             Otros Gastos: [c024          ]
+    Fecha de Ingreso: [c018               ]      Total Neto: [c025          ]
+}
+TABLES
+talt020
+talt023
+ATTRIBUTES
+c001 = talt020.t20_numpre, AUTONEXT, REVERSE,
+	COMMENTS = 'El número lo genera el sistema automaticamente';
+c    = talt020.t20_estado, NOENTRY, REVERSE, UPSHIFT;
+c002 = FORMONLY.tit_estado_tal, NOENTRY, UPSHIFT;
+c003 = t20_cod_cliente;
+c004 = t20_nom_cliente, UPSHIFT, REVERSE;
+c005 = t20_dir_cliente, UPSHIFT;
+c006 = t20_tel_cliente;
+c026 = talt020.t20_cedruc, AUTONEXT, REVERSE, UPSHIFT;
+c007 = talt020.t20_motivo, AUTONEXT, REVERSE, UPSHIFT, WORDWRAP COMPRESS;
+c050 = talt020.t20_observaciones, AUTONEXT, UPSHIFT;
+c0   = talt020.t20_moneda, AUTONEXT, REVERSE;
+c010 = FORMONLY.tit_mon_bas, NOENTRY, REVERSE, UPSHIFT;
+c011 = talt020.t20_total_mo, NOENTRY, REVERSE, FORMAT = '###,###,##&.##';
+c012 = talt020.t20_total_rp, NOENTRY, REVERSE, FORMAT = '###,###,##&.##';
+c021 = talt020.t20_mano_ext, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = '###,###,##&.##';
+c022 = talt020.t20_total_impto, NOENTRY, REVERSE, FORMAT = '###,###,##&.##';
+c023 = talt020.t20_otros_mat, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = '###,###,##&.##';
+c024 = talt020.t20_gastos, AUTONEXT, UPSHIFT,REVERSE, FORMAT = '###,###,##&.##';
+c025 = talt020.t20_total_neto, NOENTRY, REVERSE, FORMAT = '###,###,##&.##';
+c013 = talt023.t23_orden, AUTONEXT, REVERSE;
+c015 = talt020.t20_user_aprob, NOENTRY, UPSHIFT;
+C016 = talt020.t20_fecha_aprob, NOENTRY, UPSHIFT;
+c017 = talt020.t20_usuario, NOENTRY, REVERSE, UPSHIFT;
+c018 = talt020.t20_fecing, NOENTRY, REVERSE, UPSHIFT;
+
+c027 = talt020.t20_usu_modifi, NOENTRY, UPSHIFT;
+c028 = talt020.t20_fec_modifi, NOENTRY, UPSHIFT;
+END

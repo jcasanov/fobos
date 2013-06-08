@@ -1,4 +1,4 @@
-DATABASE formonly
+DATABASE FORMONLY
 SCREEN
 {
                     Moneda: [c0] [c000        ]
@@ -25,10 +25,10 @@ SCREEN
 [a]
 }
 ATTRIBUTES
-c0   = formonly.moneda TYPE CHAR NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+c0   = FORMONLY.moneda TYPE CHAR NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
        WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c000 = formonly.tit_mon, REVERSE;
-c001 = formonly.fecha_ini TYPE DATE NOT NULL, FORMAT = 'dd-mm-yyyy', REVERSE;
-c002 = formonly.fecha_fin TYPE DATE NOT NULL, FORMAT = 'dd-mm-yyyy', REVERSE;
-c003 = formonly.c001, WIDGET = 'Canvas';
-a    = formonly.tecla, AUTONEXT, INVISIBLE;
+c000 = FORMONLY.tit_mon, REVERSE;
+c001 = FORMONLY.fecha_ini TYPE DATE NOT NULL, FORMAT = 'dd-mm-yyyy', REVERSE;
+c002 = FORMONLY.fecha_fin TYPE DATE NOT NULL, FORMAT = 'dd-mm-yyyy', REVERSE;
+c003 = FORMONLY.c001, WIDGET = 'Canvas';
+a    = FORMONLY.tecla, AUTONEXT, INVISIBLE;

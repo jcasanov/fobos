@@ -1,71 +1,72 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN TITLE '  Datos Cliente  ' 
 {
+
                                                               [x001] de [y001]
 
-          Código Cliente: [c000       ]                 Estado: [c][c0a0     ]
-          Nombre Cliente: [c001                                              ]
-                          [c001                                              ]
+        Código Cliente: [c000    ]                    Estado: [c][c0a0     ]
+        Nombre Cliente: [c001                                              ]
+                        [c001                                              ]
 
-              Personería               Documento Identidad: [c012           ]
-             [c0b0         ]                                [c0c0           ]
+             Personería               Documento Identidad: [c012           ]
+            [c0b0         ]                                [c0c0           ]
 
 
 
-     Dirección Domicilio: [c002                                    ]
-      Teléfono Domicilio: [c004      ]
+   Dirección Domicilio: [c002                                    ]
+    Teléfono Domicilio: [c004      ]
 
-                 Usuario: [c014      ]
-        Fecha de Ingreso: [c015               ]
+               Usuario: [c014      ]
+      Fecha de Ingreso: [c015               ]
 }
 SCREEN TITLE 'Datos Adicionales'
 {
                                                               [x002] de [y002]
 
-            Tipo Cliente: [c011  ] [c018                           ]
+          Tipo Cliente: [c011  ] [c018                           ]
 
-       Dirección Trabajo: [c003                                    ]
-        Teléfono Trabajo: [c005      ]
+     Dirección Trabajo: [c003                                    ]
+      Teléfono Trabajo: [c005      ]
 
-                     Fax: [c006       ]
-           Fax Adicional: [c007       ]
-                 Casilla: [c008      ]
+                   Fax: [c006       ]
+         Fax Adicional: [c007       ]
+               Casilla: [c008      ]
 
- 	            País: [c009       ] [c016                     ]
-                  Ciudad: [c010       ] [c017                     ]
+                  País: [c009       ] [c016                     ]
+                Ciudad: [c010       ] [c017                     ]
 
-     Representante Legal: [c013                          ]
-        Paga Impuestos ?: [a]
+   Representante Legal: [c013                          ]
+      Paga Impuestos ?: [a]
 
 }
-SCREEN TITLE '    Compañía     '
+SCREEN TITLE '     Cia/Loc     '
 {
                                                               [x003] de [y003]
-                  Cliente: [c124      ][c125                                 ]
-                 Contacto: [c103                          ]
-               Referencia: [c104                                    ]
-     Crédito Automático ?: [b]   Crédito Días: [c105  ]
-
+             Localidad: [c130] [c131                   ]
+               Cliente: [c124    |c125                                       ]
+              Contacto: [c103                          ]
+            Referencia: [c104                                    ]
+ Fact. Automatica OT ?: [b]                 Crédito Días: [c105  ]
  Cupo Crédito Moneda base: [c106            ]        Descuento en Facturación
- Cupo Crédito Moneda Alt.: [c107            ]        Dscto. rptos.: [c108  ]% 
-                                                    Recargo rptos.: [c109  ]%
-                                                  Contado Servicio: [c122  ]%
-                                                  Crédito Servicio: [c123  ]%
-                 Cheques ?: [d]
+ Cupo Crédito Moneda Alt.: [c107            ]        Contado Bienes: [c108 ]% 
+                                                     Crédito Bienes: [c109 ]%
+                                                   Contado Servicio: [c122 ]%
+                 Cheques ?: [d]                    Crédito Servicio: [c123 ]%
              Zona de Venta: [c110  ] [c116                          ]
              Zona de Cobro: [c111  ] [c117                          ]
   Aux. Cliente Moneda Base: [c112        ] [c118                             ]
   Aux. Cli. Moneda Alterna: [c113        ] [c119                             ]
  Aux. Anticipo Moneda Base: [c114        ] [c120                             ]
  Aux. Antic. Moneda Alter.: [c115        ] [c121                             ]
+
 }
 TABLES
 cxct001, cxct002
 ATTRIBUTES
-c000 = cxct001.z01_codcli, AUTONEXT, REVERSE,
+c000 = FORMONLY.z01_codcli, AUTONEXT, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
-	COMMENTS = 'El sistema asigna código automáticamente';
-c001 = cxct001.z01_nomcli, AUTONEXT, REVERSE, UPSHIFT, WORDWRAP COMPRESS,
+	COMMENTS = 'Digite codigo o el sistema asigna código automaticamente';
+c001 = cxct001.z01_nomcli, AUTONEXT, REVERSE, UPSHIFT, SCROLL,WORDWRAP COMPRESS,
 	COMMENTS = 'Indicar el nombre y los apellidos del cliente';
 c002 = cxct001.z01_direccion1, AUTONEXT, REVERSE, UPSHIFT;
 c003 = cxct001.z01_direccion2, AUTONEXT, UPSHIFT;
@@ -86,11 +87,12 @@ c0c0 = cxct001.z01_tipo_doc_id, AUTONEXT, REVERSE, UPSHIFT,
 	WIDGET = 'RADIO', CONFIG = 'C Cédula P Pasaporte R Ruc', DEFAULT = 'C';
 c012 = cxct001.z01_num_doc_id, REVERSE, FORMAT = '###############';
 c013 = cxct001.z01_rep_legal, AUTONEXT, UPSHIFT;
-a    = cxct001.z01_paga_impto, AUTONEXT, REVERSE, UPSHIFT,
+a    = cxct001.z01_paga_impto, REVERSE, UPSHIFT,
 	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S';
 c014 = cxct001.z01_usuario, NOENTRY, UPSHIFT, REVERSE;
 c015 = cxct001.z01_fecing, NOENTRY, UPSHIFT, REVERSE;
-c    = FORMONLY.tit_est, NOENTRY, REVERSE, UPSHIFT;
+c    = cxct001.z01_estado, NOENTRY, REVERSE, UPSHIFT,
+	COMMENTS = '(A) ACTIVO  (B) BLOQUEADO';
 c0a0 = FORMONLY.tit_estado_cli, NOENTRY, UPSHIFT;
 c016 = FORMONLY.tit_pais, NOENTRY, REVERSE, UPSHIFT;
 c017 = FORMONLY.tit_ciudad, NOENTRY, REVERSE, UPSHIFT;
@@ -100,21 +102,22 @@ c124 = FORMONLY.tit_codigo_cli, NOENTRY, REVERSE;
 c125 = FORMONLY.tit_nombre_cli, NOENTRY, REVERSE, UPSHIFT;
 c103 = cxct002.z02_contacto, AUTONEXT, UPSHIFT;
 c104 = cxct002.z02_referencia, AUTONEXT, UPSHIFT;
-b    = cxct002.z02_credit_auto, AUTONEXT, REVERSE, UPSHIFT,
-	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S';
+b    = cxct002.z02_credit_auto, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S',
+	COMMENTS = 'Marcar para que genere automaticamente factura a credito en el cierre de OT.';
 c105 = cxct002.z02_credit_dias, AUTONEXT, REVERSE, INCLUDE = (0 TO 65536);
 c106 = cxct002.z02_cupocred_mb, AUTONEXT, INCLUDE = (0 TO 9999999999.99),
 	REVERSE, FORMAT = '#,###,###,##&.##';
 c107 = cxct002.z02_cupocred_ma, NOENTRY, REVERSE, FORMAT = '#,###,###,##&.##';
 c108 = cxct002.z02_dcto_item_c, AUTONEXT, REVERSE, 
-	INCLUDE = (0 TO 99.99), FORMAT = '--&.##';
+	INCLUDE = (0 TO 99.99), FORMAT = '#&.##';
 c109 = cxct002.z02_dcto_item_r, AUTONEXT, REVERSE,
-	INCLUDE = (0 TO 99.99), FORMAT = '--&.##';
+	INCLUDE = (0 TO 99.99), FORMAT = '#&.##';
 c122 = cxct002.z02_dcto_mano_c, AUTONEXT, REVERSE,
-	INCLUDE = (-99.99 TO 99.99), FORMAT = '--&.##';
+	INCLUDE = (0 TO 99.99), FORMAT = '#&.##';
 c123 = cxct002.z02_dcto_mano_r, AUTONEXT, REVERSE, 
-	INCLUDE = (-99.99 TO 99.99), FORMAT = '--&.##';
-d    = cxct002.z02_cheques, AUTONEXT, REVERSE, UPSHIFT,
+	INCLUDE = (0 TO 99.99), FORMAT = '#&.##';
+d    = cxct002.z02_cheques, REVERSE, UPSHIFT,
 	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S',
 	COMMENTS = 'Indique si se le aceptan cheques al momento de pagar en caja';
 c110 = cxct002.z02_zona_venta, AUTONEXT,
@@ -135,6 +138,10 @@ c118 = FORMONLY.tit_cli_mb, NOENTRY, REVERSE, UPSHIFT;
 c119 = FORMONLY.tit_cli_ma, NOENTRY, REVERSE, UPSHIFT;
 c120 = FORMONLY.tit_ant_mb, NOENTRY, REVERSE, UPSHIFT;
 c121 = FORMONLY.tit_ant_ma, NOENTRY, REVERSE, UPSHIFT;
+c130 = cxct002.z02_localidad, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Para activar el Cliente en otras localidades.';
+c131 = FORMONLY.tit_localidad, NOENTRY, REVERSE, UPSHIFT;
 
 x001 = FORMONLY.vm_row_current1, NOENTRY;
 y001 = FORMONLY.vm_num_rows1, NOENTRY;

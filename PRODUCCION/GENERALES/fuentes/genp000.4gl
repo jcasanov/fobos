@@ -14,7 +14,7 @@ DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
 CALL startlog('../logs/errores')
-CALL fgl_init4js()
+--#CALL fgl_init4js()
 IF num_args() <> 1 THEN  
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 
                             'stop')
@@ -48,4 +48,4 @@ LET comando = 'cd ../../MENU/fuentes; fglrun ', r_g05.g05_menu,
 	      ' ', vg_base, ' GE'
 RUN comando
 
-END FUNCTION 
+END FUNCTION

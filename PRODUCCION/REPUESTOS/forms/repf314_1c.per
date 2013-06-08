@@ -1,0 +1,57 @@
+DATABASE aceros
+SCREEN
+{
+
+                                                       Estado: [c|c001      ] 
+ Nota Entrega: [c002      ]                    Orden Despacho: [c003        ]
+      Factura: [c4|c005           ]    Bodega: [c6|c007                     ]
+        Fecha: [c008      ]    Bodega Entrega: [c9|c050                     ]
+  Entregado a: [c009                                    ]
+ Entregado en: [c010                                                        ]
+               [c010                                                        ]
+                                                          [c051] de [c052]
+       Item                     Descripción                     Cant.Ent.
+     [c030   |c031                                             |c032     ]
+     [c030   |c031                                             |c032     ]
+     [c030   |c031                                             |c032     ]
+     [c030   |c031                                             |c032     ]
+     [c030   |c031                                             |c032     ]
+     [f001                               ]              Total: [c040     ]
+     [f002                               ]                                  
+     [f003                               ]                                 
+     [f004                                                             ]
+}
+TABLES rept034, rept036, rept037, rept010
+ATTRIBUTES
+c    = rept036.r36_estado, REVERSE, NOENTRY, UPSHIFT;
+c001 = FORMONLY.tit_estado_rep, REVERSE, NOENTRY, UPSHIFT;
+c002 = rept036.r36_num_entrega, REVERSE, NOENTRY, UPSHIFT;
+c003 = rept036.r36_num_ord_des, REVERSE, NOENTRY, UPSHIFT;
+c4   = rept034.r34_cod_tran, REVERSE, NOENTRY, UPSHIFT;
+c005 = rept034.r34_num_tran, REVERSE, NOENTRY, UPSHIFT;
+c6   = rept034.r34_bodega, REVERSE, NOENTRY, UPSHIFT;
+c007 = FORMONLY.tit_bodega, REVERSE, NOENTRY, UPSHIFT;
+c9   = rept036.r36_bodega_real, REVERSE, NOENTRY, UPSHIFT;
+c050 = FORMONLY.tit_bodega_real, REVERSE, NOENTRY, UPSHIFT;
+c008 = rept036.r36_fec_entrega, REVERSE, NOENTRY, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Fecha con formato: dd-mm-aaaa';
+c009 = rept036.r36_entregar_a, REVERSE, NOENTRY, UPSHIFT;
+c010 = rept036.r36_entregar_en, REVERSE, NOENTRY, UPSHIFT, WORDWRAP;
+
+c030 = rept037.r37_item, NOENTRY, UPSHIFT, REVERSE;
+c031 = rept010.r10_nombre, NOENTRY, UPSHIFT, REVERSE;
+c032 = rept037.r37_cant_ent, NOENTRY, UPSHIFT, FORMAT ='##,##&.##',REVERSE;
+
+c040 = FORMONLY.vm_total_ent TYPE DECIMAL (8,2), FORMAT ='##,##&.##', REVERSE; 
+f001 = formonly.descrip_1, NOENTRY;
+f002 = formonly.descrip_2, NOENTRY;
+f003 = formonly.descrip_3, NOENTRY;
+f004 = formonly.nom_item,  NOENTRY, REVERSE;
+
+c051 = FORMONLY.num_row,     NOENTRY, REVERSE;
+c052 = FORMONLY.vm_num_repd, NOENTRY, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_entr[5] (r37_item, r10_nombre, r37_cant_ent)

@@ -1,0 +1,15 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+        GENERAR REPORTE
+        --------------
+
+ Tipo de Reporte: [c000        ]
+
+
+}
+ATTRIBUTES
+c000 = FORMONLY.vm_imprimir TYPE CHAR NOT NULL, UPSHIFT, REVERSE,
+	WIDGET = 'RADIO', CONFIG = 'R Resumido D Detallado', DEFAULT = 'R';
+END

@@ -1,0 +1,52 @@
+DATABASE aceros
+SCREEN
+{
+  Division: [y]        [f001                          ]
+     Linea: [c2]       [f002                               ]
+     Grupo: [c02]      [f003                                    ]
+     Clase: [c011    ] [f004                                              ]
+     Marca: [c012  ]   [f005                               ]
+ --------------------------------------------------------------------------
+  Sec.  Código             Descripción              Precio   Bd    Stock
+ --------------------------------------------------------------------------
+ [c06  |c01   |c001                               |c003     |c0|c004      ]
+ [c06  |c01   |c001                               |c003     |c0|c004      ]
+ [c06  |c01   |c001                               |c003     |c0|c004      ]
+ [c06  |c01   |c001                               |c003     |c0|c004      ]
+ [c06  |c01   |c001                               |c003     |c0|c004      ]
+ [c06  |c01   |c001                               |c003     |c0|c004      ]
+ [c06  |c01   |c001                               |c003     |c0|c004      ]
+ [c06  |c01   |c001                               |c003     |c0|c004      ]
+ [c050                                                             ]
+}
+TABLES
+rept010
+rept011
+ATTRIBUTES
+y    = FORMONLY.r10_linea,UPSHIFT,REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f001 = FORMONLY.descri_linea;
+c2   = FORMONLY.r10_sub_linea,UPSHIFT,REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f002 = FORMONLY.descri_sub_linea;
+c02  = FORMONLY.r10_cod_grupo,UPSHIFT,REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f003 = FORMONLY.descri_cod_grupo;
+c011 = FORMONLY.r10_cod_clase,UPSHIFT,REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f004 = FORMONLY.descri_cod_clase;
+c012 = FORMONLY.r10_marca,UPSHIFT,REVERSE;
+f005 = FORMONLY.descri_marca;
+
+c06  = r10_sec_item , UPSHIFT, INCLUDE = (0 TO 10000);
+c01  = r10_codigo, UPSHIFT, REVERSE;
+c001 = r10_nombre, UPSHIFT, REVERSE;
+c003 = r10_precio_mb, REVERSE, FORMAT = '##,##&.##';
+c0   = r11_bodega, UPSHIFT, REVERSE;
+c004 = r11_stock_act, UPSHIFT, REVERSE, FORMAT = '---,--&.##';
+c050 = FORMONLY.tit_descripcion, REVERSE, NOENTRY;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_reppre[08] (r10_sec_item,r10_codigo, r10_nombre, r10_precio_mb,
+				r11_bodega, r11_stock_act)

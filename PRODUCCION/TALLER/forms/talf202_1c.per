@@ -1,0 +1,42 @@
+DATABASE aceros
+SCREEN
+{
+
+ No. Presupuesto: [c002    ] 
+         Cliente: [c014                                     ]
+
+     ----------------------------------------------------------------------
+          Tarea                    Descripción                   Valor     
+     ----------------------------------------------------------------------
+     [c004         ] [c006                                 |c008          ]
+     [c004         ] [c006                                 |c008          ]
+     [c004         ] [c006                                 |c008          ]
+     [c004         ] [c006                                 |c008          ]
+     [c004         ] [c006                                 |c008          ]
+     [c004         ] [c006                                 |c008          ]
+     [c004         ] [c006                                 |c008          ]
+                                                           ---------------
+                                              Total Valor: [c015          ]
+     [c013                                                                ] 
+     Usuario: [c009      ]          Fecha de Ingreso: [c010               ]
+}
+TABLES talt020, talt021
+ATTRIBUTES
+c002 = talt020.t20_numpre, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c004 = talt021.t21_codtarea, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c006 = talt021.t21_descripcion, AUTONEXT, UPSHIFT;
+c008 = talt021.t21_valor, AUTONEXT, INCLUDE = (0 TO 999999999.99),
+	FORMAT = '###,###,##&.##';
+c015 = FORMONLY.tit_total TYPE DECIMAL (12,2), NOENTRY, REVERSE,
+	INCLUDE = (0 TO 999999999.99),
+	FORMAT = '###,###,##&.##';
+c013 = FORMONLY.tit_descri, NOENTRY, REVERSE, UPSHIFT;
+c014 = FORMONLY.tit_cliente, NOENTRY, REVERSE, UPSHIFT;
+c009 = talt021.t21_usuario, NOENTRY, REVERSE, UPSHIFT;
+c010 = talt021.t21_fecing, NOENTRY, REVERSE, UPSHIFT;
+end
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_ta[7] (t21_codtarea,t21_descripcion,t21_valor)

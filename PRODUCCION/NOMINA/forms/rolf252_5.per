@@ -1,0 +1,94 @@
+DATABASE aceros
+SCREEN
+{
+
+                 DIAS DE GOZO PARCIAL/TOTAL DE LAS VACACIONES
+                 -------------------------------------------
+
+          Empleado: [c000|c001                                        ]
+  Período Vacación: [c002      ]  -  [c003      ]      Días Vacaciones: [c004]
+ Per. Real Calculo: [c005      ]  -  [c006      ]     Días Adicionales: [c007]
+ Período Gozo Vac.: [c008      ]  -  [c009      ]          Total Días : [c010]
+     Tipo Vacación: [c|c011    ]    Se van a gozar los días adicionales ?: [d]
+      Días de Gozo: [c012]                                    [c0] de [c1]
+      [c020                    |c022|c023|c024|c025      |c026      |c027|e]
+     [c3|c030      |c031      |c032|c033|c034|c035      |c036      |c037|f]
+     [c3|c030      |c031      |c032|c033|c034|c035      |c036      |c037|f]
+     [c3|c030      |c031      |c032|c033|c034|c035      |c036      |c037|f]
+     [c3|c030      |c031      |c032|c033|c034|c035      |c036      |c037|f]
+     [c3|c030      |c031      |c032|c033|c034|c035      |c036      |c037|f]
+     [c3|c030      |c031      |c032|c033|c034|c035      |c036      |c037|f]
+               Total Días a Gozar: [c040|c041]
+
+     Ingresado por: [c042      ]               Fecha: [c043               ]
+}
+TABLES
+rolt030
+rolt039
+rolt047
+ATTRIBUTES
+c000 = rolt039.n39_cod_trab, NOENTRY, UPSHIFT, REVERSE;
+c001 = rolt030.n30_nombres, NOENTRY, UPSHIFT, REVERSE;
+c002 = rolt039.n39_periodo_ini, NOENTRY, UPSHIFT, REVERSE,FORMAT = 'dd-mm-yyyy';
+c003 = rolt039.n39_periodo_fin, NOENTRY, UPSHIFT, REVERSE,FORMAT = 'dd-mm-yyyy';
+c004 = rolt039.n39_dias_vac, NOENTRY, REVERSE;
+c005 = rolt039.n39_perini_real, NOENTRY, REVERSE, FORMAT = 'dd-mm-yyyy';
+c006 = rolt039.n39_perfin_real, NOENTRY, REVERSE, FORMAT = 'dd-mm-yyyy';
+c007 = rolt039.n39_dias_adi, NOENTRY, REVERSE;
+c008 = rolt039.n39_fecini_vac, NOENTRY, FORMAT = 'dd-mm-yyyy';
+c009 = rolt039.n39_fecfin_vac, NOENTRY, FORMAT = 'dd-mm-yyyy';
+c010 = FORMONLY.tot_dias, NOENTRY, REVERSE;
+c    = rolt039.n39_tipo, NOENTRY, UPSHIFT, REVERSE;
+c011 = FORMONLY.tit_tipo, NOENTRY, UPSHIFT, REVERSE;
+d    = rolt039.n39_gozar_adic, NOENTRY, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge', DEFAULT = 'S';
+c012 = rolt039.n39_dias_goza, NOENTRY, REVERSE, UPSHIFT,
+	COLOR = BLUE WHERE c005 > 0;
+
+c0   = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c1   = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+
+c020 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c022 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c023 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c024 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c025 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c026 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c027 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+e    = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22';
+
+c3   = rolt047.n47_cod_liqrol, AUTONEXT, INCLUDE = ('Q1', 'Q2'), UPSHIFT,
+	OPTIONS = '-nolist';
+c030 = rolt047.n47_fecha_ini, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+c031 = rolt047.n47_fecha_fin, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+c032 = rolt047.n47_max_dias, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c033 = rolt047.n47_dias_real, AUTONEXT, UPSHIFT, INCLUDE = (1 TO 30),
+	OPTIONS = '-nolist';
+c034 = rolt047.n47_dias_goza, AUTONEXT, UPSHIFT, INCLUDE = (1 TO 30),
+	OPTIONS = '-nolist';
+c035 = rolt047.n47_fecini_vac, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+c036 = rolt047.n47_fecfin_vac, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+c037 = rolt047.n47_secuencia, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+f    = rolt047.n47_estado, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+
+c040 = FORMONLY.tot_real, NOENTRY, UPSHIFT, REVERSE;
+c041 = FORMONLY.tot_goza, NOENTRY, UPSHIFT, REVERSE;
+
+c042 = rolt047.n47_usuario, NOENTRY, UPSHIFT, REVERSE;
+c043 = rolt047.n47_fecing, NOENTRY, UPSHIFT, REVERSE;
+END
+KEYS
+F5 = 'Modificar Días'
+F6 = 'Borrar'
+F7 = 'Grabar'
+F8 = 'Liquidación'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_diasgoz[6] (n47_cod_liqrol, n47_fecha_ini, n47_fecha_fin,
+				n47_max_dias, n47_dias_real, n47_dias_goza,
+				n47_fecini_vac, n47_fecfin_vac, n47_secuencia,
+				n47_estado)

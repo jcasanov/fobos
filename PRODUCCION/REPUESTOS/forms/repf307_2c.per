@@ -1,0 +1,14 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+ Imprimir: [c] [c000                              ]
+
+}
+ATTRIBUTES
+c    = FORMONLY.vm_imprimir TYPE CHAR NOT NULL, REQUIRED, UPSHIFT, REVERSE,
+	INCLUDE = ('B', 'C', 'T'),
+	COMMENTS = '(B) Solo 1 Bodega  (C) T. Bd. esta cons.  (T) TODOS',
+	DEFAULT = 'B';
+c000 = FORMONLY.tit_imprimir, NOENTRY, UPSHIFT, REVERSE;
+END

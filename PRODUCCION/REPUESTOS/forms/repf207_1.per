@@ -1,60 +1,77 @@
-database diteca
-screen 
+DATABASE aceros
+SCREEN 
 {
+   Liquidación No: [c000       ]                 Fecha: [c001               ]
+                                                      Estado: [a][c002      ]
+           Origen: [c003           ]    Tipo Prorrateo Flete: [b            ]
+    Forma de Pago: [c004                          ]
+      Descripción: [c005                          ]
+           Bodega: [a0] [c006                           ]
+           Moneda: [a1] [c007           ]  Paridad: [c008                   ]
 
-   Liquidación No: [c002       ]                Fecha: [c021               ]
-                                               Estado: [a|c026     ]
-           Origen: [c004           ]
-    Forma de Pago: [c005                          ] 
-      Descripción: [c003                          ]
-                                             
-  Permiso Import.: [c006                ]     Fob Fábrica:[c011            ]
-             Guía: [c007           ]             Faltante:[c012            ]
-        Pedimento: [c008      ]                     Flete:[c014            ]
-    Fecha Llegada: [c009      ]                     Otros:[c013            ]
-    Fecha Ingreso: [c010      ]              Total Cargos:[c016            ] 
-           Moneda: [a0] [c027           ]    	   Seguro:[c017            ]
- 						Total Fob:[c015            ]
-     Factor Costo: [c022                ] 
-
-   Elaborado: [c019                          ]   Ingresado Por: [c020      ]
+                    Moneda Pedido   Moneda BASE
+      Fob Fabrica: [c009        ] [c010        ] Impuesto IVA: [c011        ] 
+     Otros Cargos: [c012        ] [c013        ]
+        Total Fob: [c014        ] [c015        ]
+       Flete Real:                [c016        ]    Flete Cae: [c040        ]
+     Seguro Total:                [c017        ]   Prima Neta: [c018        ]
+        Total CIF:                [c019        ]
+        Aranceles:                [c020        ]
+     Salvaguardia:                [c021        ]
+   Gastos Locales:                [c022        ] 
+ Total Costo Imp.:                [c023        ]
+     Elaborado: [c024                          ]      Usuario: [c025      ]
 }
-end
-tables
+TABLES
 rept028
-attributes
-c002 = rept028.r28_numliq, NOENTRY, REVERSE, 
+ATTRIBUTES
+c000 = rept028.r28_numliq, NOENTRY, REVERSE, 
+	WIDGET = 'FIELD_BMP', CONFIG='lista.bmp F2' ;
+c001 = rept028.r28_fecing, UPSHIFT, REVERSE, NOENTRY;
+a    = rept028.r28_estado, UPSHIFT, NOENTRY, REVERSE,
+	COMMENTS = 'A ACTIVO  P PROCESADO';
+c002 = FORMONLY.n_estado, NOENTRY, REVERSE, UPSHIFT;
+c003 = rept028.r28_origen, AUTONEXT, UPSHIFT, REVERSE;
+b    = rept028.r28_flag_flete, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'RADIO', CONFIG = 'P "Pie Cubico"  F "Total Fob"';
+c004 = rept028.r28_forma_pago, UPSHIFT, REVERSE;
+c005 = rept028.r28_descripcion, UPSHIFT, REVERSE;
+a0   = rept028.r28_bodega, UPSHIFT, REVERSE, AUTONEXT,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c006 = FORMONLY.n_bodega, NOENTRY,REVERSE;
+a1   = rept028.r28_moneda, UPSHIFT, REVERSE, NOENTRY,
 	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2' ;
-a    = rept028.r28_estado, UPSHIFT, NOENTRY, REVERSE;
-c003 = rept028.r28_descripcion, UPSHIFT, REVERSE;
-c004 = rept028.r28_origen, UPSHIFT, REVERSE;
-c005 = rept028.r28_forma_pago, UPSHIFT, REVERSE;
-c006 = rept028.r28_num_pi, UPSHIFT;
-c007 = rept028.r28_guia, UPSHIFT;
-c008 = rept028.r28_pedimento, UPSHIFT;
-c009 = rept028.r28_fecha_lleg, REVERSE,
-	FORMAT='dd-mm-yyyy', COMMENT='Ingrese fecha en formato: dd-mm-aaaa';
-c010 = rept028.r28_fecha_ing, REVERSE,
-	FORMAT='dd-mm-yyyy', COMMENT='Ingrese fecha en formato: dd-mm-aaaa';
-a0 = rept028.r28_moneda, UPSHIFT, REVERSE, AUTONEXT,
-	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2' ;
-c011 = rept028.r28_fob_fabrica, REVERSE, NOENTRY, FORMAT='###,###,##&.####';
-c012 = rept028.r28_faltante, REVERSE, FORMAT='###,###,##&.####';
-c013 = rept028.r28_otros, REVERSE, FORMAT='###,###,##&.####';
-c014 = rept028.r28_flete, REVERSE, FORMAT='###,###,##&.####';
-c015 = rept028.r28_total_fob, REVERSE, NOENTRY, FORMAT='###,###,##&.####';
-c016 = rept028.r28_tot_cargos, REVERSE, NOENTRY, FORMAT='###,###,##&.####';
-c017 = rept028.r28_seguro, REVERSE, FORMAT='###,###,##&.####';
+c007 = FORMONLY.n_moneda, NOENTRY,REVERSE;
+c008 = rept028.r28_paridad, AUTONEXT, REVERSE,
+	INCLUDE = (0.000000001 TO 999999.999999999),
+	FORMAT = '###,##&.###############',
+        COMMENTS = 'Factor de conversión de la moneda del pedido a la de costeo.';
 
-c019 = rept028.r28_elaborado, REVERSE, UPSHIFT;
-c020 = rept028.r28_usuario, REVERSE, NOENTRY, UPSHIFT;
-c021 = rept028.r28_fecing, REVERSE, NOENTRY;
-c022 = rept028.r28_fact_costo, REVERSE, NOENTRY, FORMAT='###,##&.######';
+c009 = rept028.r28_tot_exfab_mi, NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c010 = rept028.r28_tot_exfab_mb, NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c011 = rept028.r28_tot_iva,      AUTONEXT, REVERSE, FORMAT = '-,---,--&.##';
+c012 = rept028.r28_tot_desp_mi,  AUTONEXT, REVERSE, FORMAT = '-,---,--&.##';
+c013 = rept028.r28_tot_desp_mb,  NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c014 = rept028.r28_tot_fob_mi,   NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c015 = rept028.r28_tot_fob_mb,   NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c016 = rept028.r28_tot_flete,    AUTONEXT, REVERSE, FORMAT = '-,---,--&.##',
+	COMMENTS = 'Valor Flete para costos. No se utiliza para aranceles.';
+c017 = rept028.r28_tot_seg_neto, AUTONEXT, REVERSE, FORMAT = '-,---,--&.##',
+	COMMENTS = 'Valor Seguro (con tasas - sin IVA) para costos. No se utiliza para aranceles.';
+c018 = rept028.r28_tot_seguro,   AUTONEXT, REVERSE, FORMAT = '-,---,--&.##',
+	COMMENTS = 'Valor Seguro (sin tasas ni impuestos). Utilizado en el calculo de aranceles.';
+c019 = rept028.r28_tot_cif,      NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c020 = rept028.r28_tot_arancel,  NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c021 = rept028.r28_tot_salvagu,  NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c022 = rept028.r28_tot_cargos,   NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c023 = rept028.r28_tot_costimp,  NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
 
-c026 = formonly.n_estado, NOENTRY;
-c027 = formonly.n_moneda, NOENTRY;
-
-end
-
-keys
+c024 = rept028.r28_elaborado, AUTONEXT, REVERSE, UPSHIFT;
+c025 = rept028.r28_usuario, REVERSE, NOENTRY, UPSHIFT;
+c040 = rept028.r28_tot_flet_cae, REVERSE, FORMAT = '-,---,--&.##',
+	COMMENTS = 'Valor flete suministrado por la CAE. Utilizado en el calculo de aranceles.';
+END
+KEYS
 F5 = 'Pedidos'
+F6 = 'Aranceles'
+F7 = 'Detalle Costeo'

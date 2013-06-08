@@ -1,0 +1,53 @@
+DATABASE aceros
+SCREEN
+{
+ ORDENES DE COMPRAS PARA CARGA
+
+   Carga: [c000    ]                              Estado: [c|c002      ]
+    Item: [c003    |c004                                               ]
+                                                        [c008] de [c009]
+ [c010    |c011                                  |c012     |c013      |d]
+[c020  ] [c021                                  |c022     |c023      |e]
+[c020  ] [c021                                  |c022     |c023      |e]
+[c020  ] [c021                                  |c022     |c023      |e]
+[c020  ] [c021                                  |c022     |c023      |e]
+[c020  ] [c021                                  |c022     |c023      |e]
+                                                   Total: [c030      ]
+}
+TABLES
+ordt010
+rept046
+rept048
+rept049
+ATTRIBUTES
+c000 = rept048.r48_sec_carga, NOENTRY, UPSHIFT, REVERSE;
+c    = rept048.r48_estado, NOENTRY, UPSHIFT, REVERSE;
+c002 = FORMONLY.nom_est, NOENTRY, UPSHIFT;
+c003 = rept048.r48_item_comp, NOENTRY, UPSHIFT, REVERSE;
+c004 = rept046.r46_desc_comp, NOENTRY, UPSHIFT, REVERSE;
+
+c008 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c009 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15'; 
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16'; 
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17'; 
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18'; 
+d    = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19'; 
+
+c020 = rept049.r49_numero_oc, AUTONEXT, UPSHIFT, OPTIONS = '-nolist',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c021 = ordt010.c10_referencia, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c022 = rept049.r49_cant_unid, AUTONEXT, UPSHIFT, INCLUDE = (1 TO 100000),
+	OPTIONS = '-nolist';
+c023 = rept049.r49_costo_oc, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+e    = ordt010.c10_estado, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+
+c030 = rept048.r48_costo_oc, NOENTRY, UPSHIFT, REVERSE, FORMAT = '###,##&.##';
+END
+KEYS
+F5 = 'Orden Compra'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_det_oc[5] (r49_numero_oc, c10_referencia, r49_cant_unid,
+				r49_costo_oc, c10_estado)

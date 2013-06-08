@@ -1,0 +1,44 @@
+database aceros
+screen 
+{
+    Trabajador: [c001] [c100                                  ]
+
+         Banco: [c003] [c101                                  ]
+     Cta. Cte.: [c004           ]         Cheque: [c005       ]
+
+         Fecha: [c006      ]
+
+        Moneda: [a0] [c102           ]  
+   
+          Valor Acumulado De La Ultima Poliza: [c050          ]  (+)
+       Valor Acumulado De Los Ultimos 3 Meses: [c051          ]  (+)
+                              Valor A Retirar: [c008          ]  (-)
+                                               ---------------- 
+            Saldo Acumulado Fondo De Cesantia: [c052          ]
+
+}
+end
+tables
+rolt082
+attributes
+c001 = rolt082.n82_cod_trab,   WIDGET='FIELD_BMP', CONFIG='lista.bmp F2',
+			       REVERSE; 
+c003 = rolt082.n82_banco,      WIDGET='FIELD_BMP', CONFIG='lista.bmp F2',
+			       REVERSE; 
+c004 = rolt082.n82_numero_cta, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2',
+			       REVERSE; 
+c005 = rolt082.n82_num_cheque, REVERSE, INCLUDE=(NULL, 1 TO 99999999);
+c006 = rolt082.n82_fecha,      REVERSE, NOENTRY, FORMAT='dd-mm-yyyy',
+			       COMMENT='Ingrese fecha en formato: dd-mm-aaaa';
+a0 = rolt082.n82_moneda,       REVERSE, NOENTRY, UPSHIFT, AUTONEXT,
+			       WIDGET='FIELD_BMP', CONFIG='lista.bmp F2'; 
+c008 = rolt082.n82_valor,      REVERSE, FORMAT='---,---,--&.##';
+
+c050 = formonly.val_poliza, NOENTRY, REVERSE, FORMAT='###,###,##&.##'; 
+c051 = formonly.val_rol,    NOENTRY, REVERSE, FORMAT='###,###,##&.##'; 
+c052 = formonly.saldo,      NOENTRY, REVERSE, FORMAT='###,###,##&.##'; 
+
+c100 = formonly.nomtrab,   NOENTRY, REVERSE, UPSHIFT;
+c101 = formonly.nombanco,  NOENTRY, REVERSE, UPSHIFT;
+c102 = formonly.nommoneda, NOENTRY, REVERSE, UPSHIFT;
+end

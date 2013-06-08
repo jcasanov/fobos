@@ -1,30 +1,31 @@
-DATABASE diteca
-
+DATABASE aceros
 SCREEN
 {
- PARTIDAS ARANCELARIAS
---------------------------------------------------------------
- Código	  	   Nombre 		
---------------------------------------------------------------
-[c01            ] [c002                                    ] 
-[c01            ] [c002                                    ]
-[c01            ] [c002                                    ]
-[c01            ] [c002                                    ]
-[c01            ] [c002                                    ]
-[c01            ] [c002                                    ]
-[c01            ] [c002                                    ] 
-[c01            ] [c002                                    ] 
-[c01            ] [c002                                    ] 
-[c01            ] [c002                                    ] 
-}
 
+  PARTIDAS ARANCELARIAS
+  [a003 |a01            |a002                                    ] 
+ [c003 |c01            |c002                                    ] 
+ [c003 |c01            |c002                                    ] 
+ [c003 |c01            |c002                                    ] 
+ [c003 |c01            |c002                                    ] 
+ [c003 |c01            |c002                                    ] 
+ [c003 |c01            |c002                                    ] 
+ [c003 |c01            |c002                                    ] 
+ [c003 |c01            |c002                                    ] 
+ [c003 |c01            |c002                                    ] 
+ [c003 |c01            |c002                                    ] 
+
+}
 TABLES
 gent016
-
 ATTRIBUTES
-c01 = g16_partida;
-c002 = g16_nombre;
+a01  = FORMONLY.tit_partida, WIDGET = 'BUTTON', CONFIG = 'F15'; 
+a002 = FORMONLY.tit_nombre,  WIDGET = 'BUTTON', CONFIG = 'F16'; 
+a003 = FORMONLY.tit_nivel,   WIDGET = 'BUTTON', CONFIG = 'F16'; 
+c01  = gent016.g16_partida,  UPSHIFT, AUTONEXT, REVERSE; 
+c002 = gent016.g16_desc_par, AUTONEXT, REVERSE;
+c003 = gent016.g16_niv_par,  UPSHIFT, AUTONEXT, REVERSE;
 END
-
 INSTRUCTIONS
-SCREEN RECORD rh_part[10](g16_partida, g16_nombre)
+DELIMITERS '||'
+SCREEN RECORD rh_part[10] (g16_niv_par, g16_partida, g16_desc_par)

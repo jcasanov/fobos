@@ -1,328 +1,261 @@
 ------------------------------------------------------------------------------
--- Titulo           : repp432.4gl - Listado De Items Por Clasificación
--- Elaboracion      : 26-Sept-2011
--- Autor            : MTP
--- Formato Ejecucion: fglrun repp432 base módulo compañía moneda bodega
---                                      query [linea clasif_a clasif_b clasif_c clasifd clasif_e
---                                      col1 col2 ordA ordD]
--- Ultima Correccion:
--- Motivo Correccion:
+-- Titulo           : repp432.4gl - Impresi�n de Notas de Entrega
+-- Elaboracion      : 23-Dic-2003
+-- Autor            : NPC
+-- Formato Ejecucion: fglrun repp432 base m�dulo compa��a localidad
+--				[bodega] [nota]
+-- Ultima Correccion: 
+-- Motivo Correccion: 
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE rm_cia           RECORD LIKE gent001.*
-DEFINE rm_g04           RECORD LIKE gent004.*
-DEFINE rm_g05           RECORD LIKE gent005.*
-DEFINE vm_moneda_des    LIKE gent013.g13_nombre
-DEFINE vm_max_rows      SMALLINT
-DEFINE rm_par           RECORD
-                                moneda          LIKE gent013.g13_moneda,
-                                bodega          LIKE rept002.r02_codigo,
-                                query           VARCHAR(1000),
-                                linea           LIKE rept003.r03_codigo,
-				clasif_a        CHAR(1),
-			        clasif_b        CHAR(1),
-			        clasif_c        CHAR(1),
-			        clasif_d        CHAR(1),
-			        clasif_e        CHAR(1)
+DEFINE rm_r34		RECORD LIKE rept034.*
+DEFINE rm_r36		RECORD LIKE rept036.*
+DEFINE rm_cia		RECORD LIKE gent001.*
+DEFINE rm_loc		RECORD LIKE gent002.*
 
-                        END RECORD
 
-DEFINE rm_orden         ARRAY[10] OF CHAR(4)
-DEFINE vm_columna_1     SMALLINT
-DEFINE vm_columna_2     SMALLINT
 
 MAIN
 
-DEFER QUIT
+DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/repp432.error')
-CALL fgl_init4js()
+CALL startlog('../logs/repp432.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
-IF num_args() <> 16  THEN
-        -- Validar # parámetros correcto
-        CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto.', 'stop')
-        EXIT PROGRAM
+IF num_args() <> 6 THEN   -- Validar # par�metros correcto
+	CALL fl_mostrar_mensaje('N�mero de par�metros incorrecto.','stop')
+	EXIT PROGRAM
 END IF
-LET vg_base                             = arg_val(1)
-LET vg_modulo                           = arg_val(2)
-LET vg_codcia                           = arg_val(3)
-LET rm_par.moneda                       = arg_val(4)
-LET rm_par.bodega                       = arg_val(5)
-LET rm_par.query                        = arg_val(6)
-LET rm_par.linea                        = arg_val(7)
-LET rm_par.clasif_a                     = arg_val(8) 
-LET rm_par.clasif_b                     = arg_val(9) 
-LET rm_par.clasif_c                     = arg_val(10) 
-LET rm_par.clasif_d                     = arg_val(11) 
-LET rm_par.clasif_e                     = arg_val(12) 
-
-LET vm_columna_1                        = arg_val(13)
-LET vm_columna_2                        = arg_val(14)
-LET rm_orden[vm_columna_1]      	= arg_val(15)
-LET rm_orden[vm_columna_2]      	= arg_val(16)
-LET vg_proceso = 'repp432'
+LET vg_base			= arg_val(1)
+LET vg_modulo			= arg_val(2)
+LET vg_codcia			= arg_val(3)
+LET vg_codloc			= arg_val(4)
+LET rm_r36.r36_bodega		= arg_val(5)
+LET rm_r36.r36_num_entrega	= arg_val(6)
+LET vg_proceso 			= 'repp432'
 CALL fl_activar_base_datos(vg_base)
-CALL fl_seteos_defaults()
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+CALL fl_seteos_defaults()	
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
-
 CALL funcion_master()
 
 END MAIN
 
 
+
 FUNCTION funcion_master()
-CREATE TEMP TABLE temp_item
-        (codigo         CHAR(15),
-         nombre         CHAR(40),
-         fob            DECIMAL (14,2),
-         precio         DECIMAL (14,2),
-         te_stock_disp  INTEGER,
-         stock          INTEGER,
-	 abc		VARCHAR(1)	)
 
 CALL fl_nivel_isolation()
-OPEN WINDOW w_mas AT 3,2 WITH 08 ROWS, 80 COLUMNS
-    ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE 0, BORDER,
-              MESSAGE LINE LAST - 2)
-OPTIONS INPUT WRAP,
-        ACCEPT KEY      F12
-LET vm_max_rows = 2000
-CALL fl_lee_usuario(vg_usuario)             RETURNING rm_g05.*
-CALL fl_lee_grupo_usuario(rm_g05.g05_grupo) RETURNING rm_g04.*
 CALL control_reporte()
 
 END FUNCTION
 
+
+
 FUNCTION control_reporte()
-DEFINE i,col            SMALLINT
-DEFINE r_mon            RECORD LIKE gent013.*
-DEFINE rs               RECORD LIKE rept011.*
-DEFINE r_rep            RECORD
-                                codigo  LIKE rept010.r10_codigo,
-                                nombre  LIKE rept010.r10_nombre,
-                                fob     DECIMAL (14,2),
-                                precio  DECIMAL (14,2),
-                                stock_disp  INTEGER,
-                                stock   INTEGER,
-				clasif VARCHAR(1)
-                        END RECORD
-DEFINE comando          VARCHAR(100)
-DEFINE query            VARCHAR(1000)
-DEFINE te_stock_disp    INTEGER
-DEFINE te_abc           VARCHAR(1)
-DEFINE inserta_reg      SMALLINT  -- indica que si se puede o no insertar "x" reg  
+DEFINE query		CHAR(1200)
+DEFINE comando		VARCHAR(100)
+DEFINE r_r37		RECORD LIKE rept037.*
+DEFINE r_r10		RECORD LIKE rept010.*
+DEFINE r_r72		RECORD LIKE rept072.*
+DEFINE r_r73		RECORD LIKE rept073.*
+DEFINE r_rep		RECORD
+				r37_item	LIKE rept037.r37_item,
+				desc_clase	LIKE rept072.r72_desc_clase,
+				unidades	LIKE rept010.r10_uni_med,
+				desc_marca	LIKE rept073.r73_desc_marca,
+				descripcion	LIKE rept010.r10_nombre,
+				cant_ent	LIKE rept037.r37_cant_ent
+			END RECORD
 
-CALL fl_lee_moneda(rm_par.moneda) RETURNING r_mon.*
-IF r_mon.g13_moneda IS NULL THEN
-        CALL fgl_winmessage(vg_producto,'No existe moneda base.','stop')
-        EXIT PROGRAM
-END IF
-LET vm_moneda_des = r_mon.g13_nombre
-WHILE TRUE
-        CALL fl_control_reportes() RETURNING comando
-        IF int_flag THEN
-                EXIT WHILE
-        END IF
-        CALL fl_lee_compania(vg_codcia) RETURNING rm_cia.*
-
-        PREPARE cit FROM rm_par.query
-        DECLARE q_cit CURSOR FOR cit
-        LET i = 0
-	LET inserta_reg = 1
-        FOREACH q_cit INTO r_rep.codigo,r_rep.nombre, r_rep.clasif, r_rep.fob,r_rep.precio
-
-          	CASE r_rep.clasif 
-        		WHEN 'A'
-		                IF  rm_par.clasif_a <> 'S' THEN
-                                	LET inserta_reg = 0
-                		END IF
-
-		        WHEN 'B'
-                		IF  rm_par.clasif_b <> 'S' THEN
-                                	LET inserta_reg = 0
-		                END IF
-
-	        	WHEN 'C'
-                       		IF  rm_par.clasif_c <> 'S' THEN
-                                	LET inserta_reg = 0
-	                        END IF
-
-        		WHEN 'D'
-                	        IF  rm_par.clasif_d <> 'S' THEN
-                        	        LET inserta_reg = 0
-	                        END IF
-
-		        WHEN 'E'
-                	        IF  rm_par.clasif_e <> 'S' THEN
-                        	        LET inserta_reg = 0
-	                        END IF
-
-        	END CASE
-
-		IF inserta_reg = 1 THEN
-
-                	CALL fl_lee_stock_rep(vg_codcia, rm_par.bodega, r_rep.codigo)
-                        RETURNING rs.*
-	                IF rs.r11_stock_act IS NULL THEN
-        	                LET rs.r11_stock_act = 0
-				LET r_rep.stock= 0
-			  ELSE
-				LET r_rep.stock= rs.r11_stock_act	
-                	END IF
-
-			LET te_stock_disp = fl_lee_stock_disponible_rep(vg_codcia, vg_codloc, r_rep.codigo, 'R')
-		        IF te_stock_disp < 0 THEN
-        			LET te_stock_disp = 0
-				LET r_rep.stock_disp=0
-			  ELSE
-				LET r_rep.stock_disp=te_stock_disp
-		        END IF
-
-        	        LET i = i + 1
-			IF i > vm_max_rows THEN
-                        	EXIT FOREACH
-	                END IF
-
-        	        INSERT INTO temp_item VALUES (r_rep.codigo, r_rep.nombre,
-                                        r_rep.fob, r_rep.precio,
-                                        te_stock_disp, rs.r11_stock_act,r_rep.clasif)
-		END IF
-
-        END FOREACH
-        
-	LET query = 'SELECT * FROM temp_item ',
-                ' ORDER BY ',
-                vm_columna_1, ' ', rm_orden[vm_columna_1], ',',
-                vm_columna_2, ' ', rm_orden[vm_columna_2]
-        START REPORT rep_items TO PIPE comando
-        PREPARE crep FROM query
-        DECLARE q_crep CURSOR FOR crep
-        FOREACH q_crep INTO r_rep.*
-                OUTPUT TO REPORT rep_items (r_rep.*)
-        END FOREACH
-        DELETE FROM temp_item
-        FINISH REPORT rep_items
-END WHILE
+	CALL fl_control_reportes() RETURNING comando
+	IF int_flag THEN
+		EXIT PROGRAM
+	END IF
+	CALL fl_lee_nota_entrega(vg_codcia, vg_codloc, rm_r36.r36_bodega,
+				 rm_r36.r36_num_entrega)
+		RETURNING rm_r36.*
+	IF rm_r36.r36_compania IS NULL THEN
+		CALL fl_mensaje_consulta_sin_registros()
+		EXIT PROGRAM
+	END IF
+	CALL fl_lee_orden_despacho(vg_codcia, vg_codloc, rm_r36.r36_bodega,
+				   rm_r36.r36_num_ord_des)
+		RETURNING rm_r34.*
+	CALL fl_lee_compania(rm_r36.r36_compania) RETURNING rm_cia.*
+	CALL fl_lee_localidad(rm_r36.r36_compania, rm_r36.r36_localidad)
+		RETURNING rm_loc.*
+	START REPORT rep_nota_entre TO PIPE comando
+	DECLARE q_detnot CURSOR FOR
+		SELECT * FROM rept037
+			WHERE r37_compania    = rm_r36.r36_compania
+			  AND r37_localidad   = rm_r36.r36_localidad
+			  AND r37_bodega      = rm_r36.r36_bodega
+			  AND r37_num_entrega = rm_r36.r36_num_entrega
+			ORDER BY r37_orden
+	OPEN q_detnot
+	FETCH q_detnot INTO r_r37.*
+	IF STATUS = NOTFOUND THEN
+		CLOSE q_detnot
+		CALL fl_mostrar_mensaje('No existe detalle de esta Nota de Entrega.','stop')
+		EXIT PROGRAM
+	END IF
+	FOREACH q_detnot INTO r_r37.* 
+		CALL fl_lee_item(rm_r36.r36_compania, r_r37.r37_item)
+			RETURNING r_r10.*
+		CALL fl_lee_marca_rep(rm_r36.r36_compania, r_r10.r10_marca)
+			RETURNING r_r73.*
+		CALL fl_lee_clase_rep(rm_r36.r36_compania, r_r10.r10_linea,
+				r_r10.r10_sub_linea, r_r10.r10_cod_grupo,
+				r_r10.r10_cod_clase)
+			RETURNING r_r72.*
+		LET r_rep.r37_item    = r_r37.r37_item
+		LET r_rep.desc_clase  = r_r72.r72_desc_clase
+		LET r_rep.unidades    = UPSHIFT(r_r10.r10_uni_med)
+		LET r_rep.desc_marca  = r_r73.r73_desc_marca
+		LET r_rep.descripcion = r_r10.r10_nombre
+		LET r_rep.cant_ent    = r_r37.r37_cant_ent
+		OUTPUT TO REPORT rep_nota_entre(r_rep.*)
+	END FOREACH
+	FINISH REPORT rep_nota_entre
 
 END FUNCTION
 
-REPORT rep_items(r_rep)
 
-DEFINE r_rep            RECORD
 
-	codigo		LIKE rept010.r10_codigo,
-        nombre  	LIKE rept010.r10_nombre,
-        fob     	DECIMAL (14,2),
-        precio  	DECIMAL (14,2),
-        stock_disp  	INTEGER,
-        stock   	INTEGER,
-        clasif		VARCHAR(1)
-
-END RECORD
-
-DEFINE stock            LIKE rept011.r11_stock_act
-DEFINE r_r02            RECORD LIKE rept002.* --bodegas
-DEFINE r_r03            RECORD LIKE rept003.* --lineas
-DEFINE usuario          VARCHAR(19,15)
-DEFINE titulo           VARCHAR(80)
-DEFINE modulo           VARCHAR(40)
-DEFINE i,long           SMALLINT
+REPORT rep_nota_entre(r_rep)
+DEFINE r_rep		RECORD
+				r37_item	LIKE rept037.r37_item,
+				desc_clase	LIKE rept072.r72_desc_clase,
+				unidades	LIKE rept010.r10_uni_med,
+				desc_marca	LIKE rept073.r73_desc_marca,
+				descripcion	LIKE rept010.r10_nombre,
+				cant_ent	LIKE rept037.r37_cant_ent
+			END RECORD
+DEFINE r_r01		RECORD LIKE rept001.*
+DEFINE r_r02		RECORD LIKE rept002.*
+DEFINE r_r19		RECORD LIKE rept019.*
+DEFINE r_r21		RECORD LIKE rept021.*
+DEFINE orden		VARCHAR(10)
+DEFINE nota		VARCHAR(10)
+DEFINE proforma		VARCHAR(10)
+DEFINE factura		VARCHAR(15)
+DEFINE estado		VARCHAR(15)
+DEFINE escape		SMALLINT
+DEFINE act_comp, db_c	SMALLINT
+DEFINE desact_comp, db	SMALLINT
 
 OUTPUT
-        TOP MARGIN      1
-        LEFT MARGIN     1
-        RIGHT MARGIN    90
-        BOTTOM MARGIN   4
-        PAGE LENGTH     66
+	TOP MARGIN	1
+	LEFT MARGIN	0
+	RIGHT MARGIN	132
+	BOTTOM MARGIN	3
+	PAGE LENGTH	44
 FORMAT
 
 PAGE HEADER
-        print '^[E'; print '^[&l26A';   -- Indica que voy a trabajar con hojas A4
-        print '^[&k4S'                  -- Letra (12 cpi)
-        LET modulo  = "Módulo: Repuestos"
-        LET long    = LENGTH(modulo)
-        LET usuario = 'Usuario: ', vg_usuario
-        CALL fl_justifica_titulo('D', usuario, 19) RETURNING usuario
-        CALL fl_justifica_titulo('I', 'LISTADO DE ITEMS POR CLASIFICACION', 80)
-                RETURNING titulo
-        CALL fl_lee_bodega_rep(vg_codcia, rm_par.bodega)
-                RETURNING r_r02.*
-
-        PRINT COLUMN 1, rm_cia.g01_razonsocial,
-              COLUMN 70, "Página: ", PAGENO USING "&&&"
-        PRINT COLUMN 1, modulo CLIPPED,
-              COLUMN 32, titulo CLIPPED,
-              COLUMN 74, UPSHIFT(vg_proceso)
-        PRINT COLUMN 20, "** Moneda         : ", rm_par.moneda, " ",
-                                                vm_moneda_des
-        PRINT COLUMN 20, "** Bodega         : ", rm_par.bodega, " ",
-                                                r_r02.r02_nombre
-        IF rm_par.linea <> 'XX' THEN
-                CALL fl_lee_linea_rep(vg_codcia, rm_par.linea)
-                        RETURNING r_r03.*
-	 PRINT COLUMN 20, "** Línea         : ", rm_par.linea, " ",
-                                                r_r03.r03_nombre
-        END IF
-        
-	PRINT COLUMN 01, "Fecha  : ", TODAY USING "dd-mm-yyyy", 1 SPACES, TIME,
-              COLUMN 62, usuario
-        SKIP 1 LINES
-        print '^[&k4S'                  -- Letra condensada (12 cpi)
-        PRINT COLUMN 1,   "Item",
-              COLUMN 17,  "Descripción",
-              COLUMN 40,  "Fob",
-              COLUMN 54,  "Precio Unit.",
-              COLUMN 68,  "Disp.",
-              COLUMN 76,  "Stock",
-              COLUMN 84,  "ABC"
-        PRINT "-----------------------------------------------------------------------------------------"
+	--print 'E'; --print '&l26A';	-- Indica que voy a trabajar con hojas A4
+	--print '&k4S'	                -- Letra (12 cpi)
+	LET escape	= 27		# Iniciar sec. impresi�n
+	LET act_comp	= 15		# Activar Comprimido.
+	LET desact_comp	= 18		# Cancelar Comprimido.
+	--LET db 	    	= "\033W1"      # Activar doble ancho.
+	--LET db_c    	= "\033W0"      # Cancelar doble ancho.
+	CALL fl_lee_cabecera_transaccion_rep(rm_r36.r36_compania,
+				rm_r36.r36_localidad, rm_r34.r34_cod_tran,
+				rm_r34.r34_num_tran)
+		RETURNING r_r19.*
+	CALL fl_lee_vendedor_rep(rm_r36.r36_compania, r_r19.r19_vendedor)
+		RETURNING r_r01.*
+	CALL fl_lee_bodega_rep(rm_r36.r36_compania, rm_r36.r36_bodega_real)
+		RETURNING r_r02.*
+	SELECT * INTO r_r21.* FROM rept021
+		WHERE r21_compania  = rm_r36.r36_compania
+		  AND r21_localidad = rm_r36.r36_localidad
+		  AND r21_cod_tran  = rm_r34.r34_cod_tran
+		  AND r21_num_tran  = rm_r34.r34_num_tran
+	LET orden	= rm_r36.r36_num_ord_des
+	LET nota	= rm_r36.r36_num_entrega
+	LET proforma	= r_r21.r21_numprof
+	LET factura	= rm_r34.r34_num_tran
+	LET estado	= retorna_estado()
+	SKIP 2 LINES
+	print ASCII escape;
+	print ASCII act_comp
+	PRINT COLUMN 01, "CLIENTE (", r_r19.r19_codcli USING "&&&&&", ") : ",
+					r_r19.r19_nomcli[1, 47] CLIPPED,
+	      COLUMN 67, "NOTA DE ENTREGA No. ", nota, 4 SPACES,
+			 "ORDEN DESPACHO No. ", orden
+	PRINT COLUMN 01, "CEDULA/RUC      : ", r_r19.r19_cedruc,
+	      COLUMN 67, "ESTADO NOTA      : ", estado
+	PRINT COLUMN 01, "DIRECCION       : ", r_r19.r19_dircli,
+	      COLUMN 67, "FECHA DE EMISION : ", rm_r36.r36_fec_entrega
+						USING "dd-mm-yyyy"
+	PRINT COLUMN 01, "TELEFONO        : ", r_r19.r19_telcli,
+	      COLUMN 67, "BODEGA ENTREGA   : ", rm_r36.r36_bodega_real, " ",
+					       r_r02.r02_nombre
+	PRINT COLUMN 01, "ENTREGADO A     : ", rm_r36.r36_entregar_a,
+	      COLUMN 67, "No. PROFORMA     : ", proforma,
+			 "  No. FACT. : ", rm_r34.r34_cod_tran, " ", factura;
+	IF r_r19.r19_cont_cred = 'C' THEN
+		PRINT ' (CONTADO)'
+	ELSE
+		PRINT ' (CREDITO)'
+	END IF
+	PRINT COLUMN 01, "ENTREGADO EN    : ", rm_r36.r36_entregar_en
+	PRINT COLUMN 01, "VENDEDOR        : ", r_r01.r01_nombres,
+	      COLUMN 67, "ALMACEN          : ", rm_cia.g01_razonsocial
+	PRINT COLUMN 67, "RUC              : ", rm_loc.g02_numruc
+	PRINT COLUMN 01, "FECHA IMPRESION : ", TODAY USING "dd-mm-yyyy",
+		1 SPACES, TIME,
+	      COLUMN 67, "USUARIO          : ", vg_usuario,
+	      COLUMN 125, UPSHIFT(vg_proceso) 
+	SKIP 1 LINES
+	--print '&k2S'	                -- Letra condensada (16 cpi)
+	PRINT "-----------------------------------------------------------------------------------------------------------------------------------"
+	PRINT COLUMN 02,  "CODIGO",
+	      COLUMN 20,  "DESCRIPCION",
+	      COLUMN 81,  "MARCA",
+	      COLUMN 113, "  CANTIDAD",
+	      COLUMN 125, "MEDIDA"
+	PRINT "-----------------------------------------------------------------------------------------------------------------------------------"
 
 ON EVERY ROW
-        NEED 2 LINES
-        PRINT COLUMN 1,   r_rep.codigo,
-              COLUMN 17,  r_rep.nombre[1,20],
-              COLUMN 38,  r_rep.fob  USING "---,---,--&.##",
-              COLUMN 52,  r_rep.precio USING "---,---,--&.##",
-              COLUMN 70,  r_rep.stock_disp USING "###&",
-              COLUMN 77,  r_rep.stock  USING "###&",
-              COLUMN 85,  r_rep.clasif  
-ON LAST ROW
+	--OJO
+	NEED 2 LINES
+	PRINT COLUMN 02,  r_rep.r37_item,
+	      COLUMN 20,  r_rep.desc_clase,
+	      COLUMN 81,  r_rep.desc_marca
+	PRINT COLUMN 22,  r_rep.descripcion,
+	      COLUMN 113, r_rep.cant_ent	USING "###,##&.##",
+	      COLUMN 125, r_rep.unidades
+	
+PAGE TRAILER
+	--NEED 4 LINES
+	--SKIP 2 LINES
+	PRINT COLUMN 02, "SALIDA LA MERCADERIA NO SE ACEPTAN DEVOLUCIONES"
+	SKIP 3 LINES
+	PRINT COLUMN 42, "-----------------------",
+	      COLUMN 69, "-----------------------"
+	PRINT COLUMN 42, "    RECIBI CONFORME    ",
+	      COLUMN 69, "   ENTREGUE CONFORME   ";
+	print ASCII escape;
+	print ASCII desact_comp 
 
 END REPORT
 
 
 
-FUNCTION validar_parametros()
+FUNCTION retorna_estado()
 
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-        CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-        EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-        CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-        EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-        CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-        EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-        LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-        CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-        EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-        CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-        EXIT PROGRAM
-END IF
+CASE rm_r36.r36_estado
+	WHEN 'A'
+		RETURN 'ACTIVA'
+	WHEN 'E'
+		RETURN 'ELIMINADA'
+END CASE
 
 END FUNCTION

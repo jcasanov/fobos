@@ -15,7 +15,6 @@ GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
 DEFINE vm_demonios	VARCHAR(12)
 DEFINE vm_ord_pago	LIKE cxpt024.p24_orden_pago
-
 DEFINE vm_entidad	LIKE gent011.g11_tiporeg
 
 -- CADA VEZ QUE SE REALIZE UNA CONSULTA SE GUARDARAN LOS ROWID DE CADA FILA 
@@ -39,11 +38,11 @@ DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
 CALL startlog('../logs/errores')
-CALL fgl_init4js()
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 AND num_args() <> 5 THEN	-- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 
-                            'stop')
+	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.','stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
 LET vg_base     = arg_val(1)
@@ -62,8 +61,8 @@ IF num_args() = 5 THEN
 	LET vm_ord_pago  = arg_val(5)
 END IF
 
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -72,21 +71,37 @@ END MAIN
 
 
 FUNCTION funcion_master()
-
 DEFINE i 		SMALLINT
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
 CALL fl_nivel_isolation()
-CALL fl_chequeo_mes_proceso_cxp(vg_codcia) RETURNING int_flag 
-IF int_flag THEN
-	RETURN
+IF num_args() = 4 THEN
+	CALL fl_chequeo_mes_proceso_cxp(vg_codcia) RETURNING int_flag 
+	IF int_flag THEN
+		RETURN
+	END IF
 END IF
-OPTIONS
-	INPUT WRAP,
-	ACCEPT KEY F12
-OPEN WINDOW w_205 AT 3,2 WITH 19 ROWS, 80 COLUMNS
-	ATTRIBUTE(FORM LINE FIRST + 2, COMMENT LINE LAST, MENU LINE FIRST,
-		  BORDER, MESSAGE LINE LAST - 2) 
-OPEN FORM f_205 FROM '../forms/cxpf205_1'
+LET lin_menu = 0
+LET row_ini  = 3
+LET num_rows = 19
+LET num_cols = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW w_205 AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
+	ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE lin_menu,
+		  BORDER, MESSAGE LINE LAST - 1) 
+IF vg_gui = 1 THEN
+	OPEN FORM f_205 FROM '../forms/cxpf205_1'
+ELSE
+	OPEN FORM f_205 FROM '../forms/cxpf205_1c'
+END IF
 DISPLAY FORM f_205
 
 LET vm_entidad = 'PA'
@@ -123,10 +138,7 @@ MENU 'OPCIONES'
 			CALL control_ingreso()
 		END IF
 		IF vm_num_rows = 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF
-			
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -143,10 +155,7 @@ MENU 'OPCIONES'
 		HIDE OPTION 'Estado Cuenta'
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF
-		
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -154,10 +163,7 @@ MENU 'OPCIONES'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF
-			
 		END IF
 		IF vm_row_current <= 1 THEN
                         HIDE OPTION 'Retroceder'
@@ -223,8 +229,6 @@ LET rm_p24.p24_total_int  = 0
 LET rm_p24.p24_total_ret  = 0
 LET rm_p24.p24_estado     = 'A'
 DISPLAY 'ACTIVO' TO n_estado
-
-LET rm_p24.p24_medio_pago = 'C'
 
 CALL lee_datos('I')
 IF INT_FLAG THEN
@@ -293,9 +297,8 @@ IF vm_num_rows = 0 THEN
 END IF
 
 IF rm_p24.p24_estado = 'P' THEN
-	CALL fgl_winmessage(vg_producto,
-		'No puede modificar este registro.',
-		'exclamation')
+	--CALL fgl_winmessage(vg_producto,'No puede modificar este registro.','exclamation')
+	CALL fl_mostrar_mensaje('No puede modificar este registro.','exclamation')
 	RETURN
 END IF
 
@@ -355,6 +358,7 @@ DEFINE nro_cta		LIKE gent009.g09_numero_cta
 DEFINE r_g08		RECORD LIKE gent008.*
 DEFINE r_g09		RECORD LIKE gent009.*
 DEFINE r_p01		RECORD LIKE cxpt001.*
+DEFINE r_b10		RECORD LIKE ctbt010.*
 DEFINE r_mon		RECORD LIKE gent013.*
 DEFINE r_g12		RECORD LIKE gent012.*
 DEFINE dummy		LIKE gent011.g11_nombre
@@ -381,6 +385,8 @@ INPUT BY NAME rm_p24.p24_codprov,   rm_p24.p24_estado,
 			LET INT_FLAG = 1
 			RETURN
 		END IF
+       	ON KEY(F1,CONTROL-W)
+		CALL control_visor_teclas_caracter_1() 
 	ON KEY(F2)
 		IF INFIELD(p24_codprov) THEN
          	  	CALL fl_ayuda_proveedores() 
@@ -401,7 +407,7 @@ INPUT BY NAME rm_p24.p24_codprov,   rm_p24.p24_estado,
 			END IF
 		END IF
 		IF INFIELD(p24_numero_cta) THEN
-			CALL fl_ayuda_cuenta_banco(vg_codcia) 
+			CALL fl_ayuda_cuenta_banco(vg_codcia, 'A') 
 				RETURNING r_g09.g09_banco, dummy2, 
 				          r_g09.g09_tipo_cta, 
 				          r_g09.g09_numero_cta 
@@ -429,13 +435,15 @@ INPUT BY NAME rm_p24.p24_codprov,   rm_p24.p24_estado,
      	ON KEY(F5)
      		IF rm_p24.p24_codprov IS NULL OR rm_p24.p24_moneda IS NULL
      		THEN
-     			CALL fgl_winmessage(vg_producto,
-     				'Debe ingresar un proveedor y la moneda.',
-     				'exclamation')
+     			--CALL fgl_winmessage(vg_producto,'Debe ingresar un proveedor y la moneda.','exclamation')
+			CALL fl_mostrar_mensaje('Debe ingresar un proveedor y la moneda.','exclamation')
      			CONTINUE INPUT
      		END IF
      		CALL ver_estado_cuenta()
      		LET INT_FLAG = 0
+	BEFORE INPUT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 	AFTER FIELD p24_codprov
 		IF rm_p24.p24_codprov IS NULL THEN
 			CLEAR n_proveedor
@@ -443,17 +451,13 @@ INPUT BY NAME rm_p24.p24_codprov,   rm_p24.p24_estado,
 			CALL fl_lee_proveedor(rm_p24.p24_codprov) 
 				RETURNING r_p01.*
 			IF r_p01.p01_codprov IS NULL THEN
-              			CALL fgl_winmessage(vg_producto,
-                                                    'No existe proveedor.',
-                                                    'exclamation')
+              			--CALL fgl_winmessage(vg_producto,'No existe proveedor.','exclamation')
+				CALL fl_mostrar_mensaje('No existe proveedor.','exclamation')
 				CLEAR n_proveedor
 				NEXT FIELD p24_codprov     
         		END IF   
 			IF r_p01.p01_estado = 'B' THEN
-              			CALL fgl_winmessage(vg_producto,
-                                                    'El proveedor '||
-                                                    'está bloqueado',
-                                                    'exclamation')
+				CALL fl_mensaje_estado_bloqueado()
 				CLEAR n_proveedor
 				NEXT FIELD p24_codprov      
 			END IF
@@ -473,9 +477,8 @@ INPUT BY NAME rm_p24.p24_codprov,   rm_p24.p24_estado,
 				CLEAR n_banco
 				INITIALIZE rm_p24.p24_numero_cta TO NULL
 				DISPLAY BY NAME rm_p24.p24_numero_cta
-				CALL fgl_winmessage(vg_producto,
-					            'Banco no existe.',
-						    'exclamation')
+				--CALL fgl_winmessage(vg_producto,'Banco no existe.','exclamation')
+				CALL fl_mostrar_mensaje('Banco no existe.','exclamation')
 				NEXT FIELD p24_banco
 			ELSE
 				DISPLAY r_g08.g08_nombre TO n_banco
@@ -486,9 +489,8 @@ INPUT BY NAME rm_p24.p24_codprov,   rm_p24.p24_estado,
 			CONTINUE INPUT
 		ELSE
 			IF rm_p24.p24_banco IS NULL THEN
-				CALL fgl_winmessage(vg_producto,
-					'Debe ingresar un banco primero.',
-					'exclamation')
+				--CALL fgl_winmessage(vg_producto,'Debe ingresar un banco primero.','exclamation')
+				CALL fl_mostrar_mensaje('Debe ingresar un banco primero.','exclamation')
 				INITIALIZE rm_p24.p24_numero_cta TO NULL
 				DISPLAY BY NAME rm_p24.p24_numero_cta
 				NEXT FIELD p24_banco
@@ -497,20 +499,27 @@ INPUT BY NAME rm_p24.p24_codprov,   rm_p24.p24_estado,
 			CALL fl_lee_banco_compania(vg_codcia, rm_p24.p24_banco,
 				rm_p24.p24_numero_cta) RETURNING r_g09.*
 			IF r_g09.g09_numero_cta IS NULL THEN
-				CALL fgl_winmessage(vg_producto,
-					'No existe cuenta en este banco.',
-					'exclamation')
+				CALL fl_mostrar_mensaje('No existe cuenta en este banco.','exclamation')
 				LET rm_p24.p24_numero_cta = nro_cta
 				NEXT FIELD p24_numero_cta
 			END IF
 			IF r_g09.g09_estado = 'B' THEN
-				CALL fgl_winmessage(vg_producto,
-					'La cuenta está bloqueada.',
-					'exclamation')
+				CALL fl_mostrar_mensaje('La cuenta esta bloqueada.','exclamation')
 				NEXT FIELD p24_numero_cta
 			END IF
 			CALL fl_lee_moneda(r_g09.g09_moneda) RETURNING r_mon.*
 			LET rm_p24.p24_moneda = r_mon.g13_moneda
+			CALL fl_lee_cuenta(r_g09.g09_compania,
+						r_g09.g09_aux_cont)
+				RETURNING r_b10.*
+			IF r_b10.b10_compania IS NULL THEN
+				CALL fl_mostrar_mensaje('No se puede escoger una cuenta corriente que no tiene auxiliar contable.', 'exclamation')
+				NEXT FIELD p24_numero_cta
+			END IF
+			IF r_b10.b10_estado <> 'A' THEN
+				CALL fl_mostrar_mensaje('El auxiliar contable de esta cuenta bancaria esta con estado bloqueado.', 'exclamation')
+				NEXT FIELD p24_numero_cta
+			END IF
 			DISPLAY BY NAME rm_p24.p24_moneda
 			DISPLAY r_mon.g13_nombre TO n_moneda
 			LET rm_p24.p24_paridad = 
@@ -530,9 +539,8 @@ INPUT BY NAME rm_p24.p24_codprov,   rm_p24.p24_estado,
 			CONTINUE INPUT
 		END IF
 		IF rm_p24.p24_total_cap <= 0 THEN
-			CALL fgl_winmessage(vg_producto,
-				'El valor a pagar debe ser mayor a cero.',
-				'exclamation')
+			--CALL fgl_winmessage(vg_producto,'El valor a pagar debe ser mayor a cero.','exclamation')
+			CALL fl_mostrar_mensaje('El valor a pagar debe ser mayor a cero.','exclamation')
 			NEXT FIELD p24_total_cap
 		END IF
 	AFTER FIELD p24_subtipo
@@ -543,9 +551,8 @@ INPUT BY NAME rm_p24.p24_codprov,   rm_p24.p24_estado,
 		CALL fl_lee_subtipo_entidad(vm_entidad, rm_p24.p24_subtipo)
 			RETURNING r_g12.*
 		IF r_g12.g12_tiporeg IS NULL THEN
-			CALL fgl_winmessage(vg_producto,
-				'Código no existe.',
-				'exclamation')
+			--CALL fgl_winmessage(vg_producto,'Código no existe.','exclamation')
+			CALL fl_mostrar_mensaje('Código no existe.','exclamation')
 			CLEAR n_motivo
 			NEXT FIELD p24_subtipo
 		END IF
@@ -567,10 +574,8 @@ END FUNCTION
 
 
 FUNCTION control_consulta()
-
-DEFINE expr_sql			VARCHAR(500)
-DEFINE query			VARCHAR(600)
-
+DEFINE expr_sql		CHAR(500)
+DEFINE query		CHAR(600)
 DEFINE r_g08		RECORD LIKE gent008.*
 DEFINE r_g09		RECORD LIKE gent009.*
 DEFINE r_p01		RECORD LIKE cxpt001.*
@@ -586,6 +591,8 @@ CONSTRUCT BY NAME expr_sql
 	ON p24_estado, p24_codprov,  p24_banco, p24_numero_cta,
 	   p24_moneda, p24_subtipo, p24_referencia, p24_total_cap, 
 	   p24_usuario 
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
 	ON KEY(F2)
 		IF INFIELD(p24_codprov) THEN
          	  	CALL fl_ayuda_proveedores() 
@@ -616,7 +623,7 @@ CONSTRUCT BY NAME expr_sql
 			END IF
 		END IF
 		IF INFIELD(p24_numero_cta) THEN
-			CALL fl_ayuda_cuenta_banco(vg_codcia) 
+			CALL fl_ayuda_cuenta_banco(vg_codcia, 'T') 
 				RETURNING r_g09.g09_banco, dummy2, 
 				          r_g09.g09_tipo_cta, 
 				          r_g09.g09_numero_cta 
@@ -698,6 +705,9 @@ CONSTRUCT BY NAME expr_sql
 				DISPLAY r_g08.g08_nombre TO n_banco
 			END IF 
 		END IF
+	BEFORE CONSTRUCT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 END CONSTRUCT
 
 IF INT_FLAG THEN
@@ -773,9 +783,14 @@ END FUNCTION
 
 
 FUNCTION muestra_contadores()
-
-DISPLAY "" AT 1,1
-DISPLAY vm_row_current, " de ", vm_num_rows AT 1, 68 
+DEFINE nrow                     SMALLINT
+                                                                                
+LET nrow = 17
+IF vg_gui = 1 THEN
+	LET nrow = 1
+END IF
+DISPLAY "" AT nrow, 1
+DISPLAY vm_row_current, " de ", vm_num_rows AT nrow, 67
 
 END FUNCTION
 
@@ -854,10 +869,8 @@ ELSE
 	CALL fl_lee_factor_moneda(moneda_ori, moneda_dest) 
 		RETURNING r_g14.*
 	IF r_g14.g14_serial IS NULL THEN
-		CALL fgl_winmessage(vg_producto, 
-				    'No existe factor de conversión ' ||
-				    'para esta moneda.',
-				    'exclamation')
+		--CALL fgl_winmessage(vg_producto,'No existe factor de conversión para esta moneda.','exclamation')
+		CALL fl_mostrar_mensaje('No existe factor de conversión para esta moneda.','exclamation')
 		INITIALIZE paridad TO NULL
 	ELSE
 		LET paridad = r_g14.g14_tasa 
@@ -876,10 +889,9 @@ DEFINE intentar		SMALLINT
 DEFINE resp		CHAR(6)
 
 LET intentar = 1
-CALL fgl_winquestion(vg_producto, 
-		     'Registro bloqueado por otro usuario, desea ' ||
-                     'intentarlo nuevamente', 'No', 'Yes|No', 'question', 1)
-				RETURNING resp
+--CALL fgl_winquestion(vg_producto,'Registro bloqueado por otro usuario, desea intentarlo nuevamente','No','Yes|No','question',1)
+CALL fl_hacer_pregunta('Registro bloqueado por otro usuario, desea intentarlo nuevamente','No')
+	RETURNING resp
 IF resp = 'No' THEN
 	CALL fl_mensaje_abandonar_proceso()
 		 RETURNING resp
@@ -906,65 +918,61 @@ SELECT ROWID INTO vm_rows[vm_num_rows]
 	  AND p24_orden_pago = vm_ord_pago
 	  AND p24_tipo       = 'A'
 IF STATUS = NOTFOUND THEN
-	CALL fgl_winmessage(vg_producto, 
-		'No existe orden de pago.', 
-		'exclamation')
+	--CALL fgl_winmessage(vg_producto,'No existe orden de pago.','exclamation')
+	CALL fl_mostrar_mensaje('No existe orden de pago.','exclamation')
 	EXIT PROGRAM
-ELSE
-	CALL lee_muestra_registro(vm_rows[vm_row_current])
 END IF
+CALL lee_muestra_registro(vm_rows[vm_row_current])
 
 END FUNCTION
 
 
 
 FUNCTION ver_estado_cuenta()
-
 DEFINE comando		CHAR(255)
+DEFINE run_prog		CHAR(10)
 
-LET comando = 'cd ..', vg_separador, '..', vg_separador, 'TESORERIA', 
-	vg_separador, 'fuentes', vg_separador, '; fglrun cxpp300 ', vg_base, 
-	' ', 'TE', vg_codcia, ' ', vg_codloc, ' ', rm_p24.p24_codprov, 
-	' ', rm_p24.p24_moneda
-	
+{-- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE --}
+LET run_prog = '; fglrun '
+IF vg_gui = 0 THEN
+	LET run_prog = '; fglgo '
+END IF
+{--- ---}
+LET comando = 'cd ..', vg_separador, '..', vg_separador, 'TESORERIA',
+		vg_separador, 'fuentes', vg_separador, run_prog, 'cxpp314 ',
+		vg_base, ' ', vg_modulo, ' ', vg_codcia, ' ', vg_codloc, ' ',
+		rm_p24.p24_moneda, ' ', TODAY, ' "T" 0.01 "N" ',
+		rm_p24.p24_codprov, ' 0 '
 RUN comando	
 
 END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION llamar_visor_teclas()
+DEFINE a		CHAR(1)
 
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 
-                            'stop')
-	EXIT PROGRAM
+IF vg_gui = 0 THEN
+	CALL fl_visor_teclas_caracter() RETURNING int_flag 
+	LET a = fgl_getkey()
+	CLOSE WINDOW w_tf
+	LET int_flag = 0
 END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 
-                            'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || 
-                            vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 
-                            'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: ' || 
-                            vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
+
+END FUNCTION
+
+
+
+FUNCTION control_visor_teclas_caracter_1() 
+DEFINE a, fila		INTEGER
+
+CALL fl_visor_teclas_caracter() RETURNING fila
+LET a = fila + 2
+DISPLAY 'Teclas exclusivas de este proceso:' AT a,2 ATTRIBUTE(REVERSE)	
+LET a = a + 1
+DISPLAY '<F5>      Estado Cuenta'            AT a,2
+DISPLAY  'F5' AT a,3 ATTRIBUTE(REVERSE)
+LET a = fgl_getkey()
+CLOSE WINDOW w_tf
 
 END FUNCTION

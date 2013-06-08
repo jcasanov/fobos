@@ -1,0 +1,45 @@
+DATABASE aceros
+SCREEN 
+{
+
+
+              Código de tarea: [c002        ]	       Estado:[a|a1       ]  
+
+                       Nombre: [c003                                    ]
+
+                Tiempo Optimo: [c005 ]	                 Tipo: [b] Puntuable
+    Valor Default Moneda Base: [c006        ]	                   Valor
+ Valor Default Moneda Alterna: [c007        ]
+
+          Dscto. Max. Gerente: [c010 ] %
+             Dscto. Max. Jefe: [c011 ] %      Dscto. Max. Tecnico: [c012 ] %
+
+                Ingresado Por: [c008      ]
+             Fecha de Ingreso: [c009               ]
+
+}
+TABLES
+talt007
+ATTRIBUTES
+c002 = talt007.t07_codtarea, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c003 = talt007.t07_nombre, REVERSE, UPSHIFT, AUTONEXT;
+a    = talt007.t07_estado, REVERSE, NOENTRY, UPSHIFT;
+a1   = FORMONLY.tit_estado TYPE VARCHAR, NOENTRY;
+b    = talt007.t07_tipo, REVERSE, UPSHIFT, AUTONEXT, DEFAULT = 'V', 
+	INCLUDE = ('P', 'V');
+c005 = talt007.t07_pto_default, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Unicamente para cuando la tarea es Tipo Puntuable';
+c006 = talt007.t07_val_defa_mb, REVERSE, FORMAT = '#,###,##&.##';
+c007 = talt007.t07_val_defa_ma, REVERSE, NOENTRY, FORMAT = '#,###,##&.##';
+c008 = talt007.t07_usuario, REVERSE, NOENTRY;
+c009 = talt007.t07_fecing, REVERSE, NOENTRY;
+c010 = talt007.t07_dscmax_ger, AUTONEXT, REVERSE, UPSHIFT, FORMAT = "#&.##",
+	INCLUDE = (0 TO 99.99);
+c011 = talt007.t07_dscmax_jef, AUTONEXT, REVERSE, UPSHIFT, FORMAT = "#&.##",
+	INCLUDE = (0 TO 99.99);
+c012 = talt007.t07_dscmax_ven, AUTONEXT, REVERSE, UPSHIFT, FORMAT = "#&.##",
+	INCLUDE = (0 TO 99.99);
+END
+INSTRUCTIONS
+DELIMITERS '||'

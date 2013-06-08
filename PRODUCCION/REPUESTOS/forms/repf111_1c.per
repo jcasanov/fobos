@@ -1,0 +1,27 @@
+DATABASE aceros
+SCREEN
+{
+
+
+              Division: [a]     [f001                          ]
+        Línea de Venta: [f0]    [f002                               ]
+                 Grupo: [f003]  [f004                                    ]
+
+         Ingresado Por: [f005      ]
+      Fecha de Ingreso: [f006               ]
+
+}
+TABLES rept071
+ATTRIBUTES
+a    = rept071.r71_linea ,REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f001 = FORMONLY.tit_linea, NOENTRY, REVERSE, UPSHIFT;
+f0   = rept071.r71_sub_linea, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f002 = FORMONLY.tit_sub_linea, NOENTRY, REVERSE, UPSHIFT;
+f003 = rept071.r71_cod_grupo ,REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f004 = rept071.r71_desc_grupo, AUTONEXT, UPSHIFT, REVERSE;
+f005 = rept071.r71_usuario, REVERSE, NOENTRY, UPSHIFT;
+f006 = rept071.r71_fecing, REVERSE, NOENTRY, UPSHIFT;
+end

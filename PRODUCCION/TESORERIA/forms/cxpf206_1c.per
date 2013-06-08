@@ -1,0 +1,60 @@
+DATABASE aceros
+SCREEN 
+{
+
+      Orden Pago: [c001 ]                  
+     Comprobante: [a0] [c002    ]                     No. Cheque: [c003      ]
+   Fecha Proceso: [c004      ]
+    Beneficiario: [c005                                       ]          
+           Glosa: [c006                                                      ]
+          Moneda: [a1] [c007           ]               Paridad: [c008        ]
+
+    Cuenta            Descripción           Valor Débito      Valor Crédito
+[c030        |c031                       |c032             |c033             ]
+[c030        |c031                       |c032             |c033             ]
+[c030        |c031                       |c032             |c033             ]
+[c030        |c031                       |c032             |c033             ]
+[c030        |c031                       |c032             |c033             ]
+[c030        |c031                       |c032             |c033             ]
+[c030        |c031                       |c032             |c033             ]
+[c030        |c031                       |c032             |c033             ]
+                             Totales:    [c040             |c041             ]
+}
+TABLES
+cxpt024
+ctbt010
+ctbt012
+ctbt013
+ATTRIBUTES
+c001 = p24_orden_pago, REVERSE, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+a0   = b12_tipo_comp, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c002 = b12_num_comp, NOENTRY, REVERSE, UPSHIFT;
+c003 = b12_num_cheque, REVERSE;
+c004 = b12_fec_proceso, FORMAT='dd-mm-yyyy', REVERSE;
+c005 = b12_benef_che, UPSHIFT;
+c006 = b12_glosa, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Digite la glosa maximo 130 caracteres.';
+a1   = b12_moneda, UPSHIFT, AUTONEXT, REVERSE, 
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c007 = FORMONLY.tit_moneda;
+c008 = b12_paridad, FORMAT='##,##&.#####';
+
+c030 = b13_cuenta;
+c031 = b10_descripcion;
+c032 = FORMONLY.valor_debito TYPE DECIMAL (12,2), FORMAT = '##,###,###,##&.##';
+c033 = FORMONLY.valor_credito TYPE DECIMAL (12,2), FORMAT = '##,###,###,##&.##';
+
+c040 = FORMONLY.vm_tot_db TYPE DECIMAL (12,2), FORMAT = '##,###,###,##&.##',
+	REVERSE;
+c041 = FORMONLY.vm_tot_cr TYPE DECIMAL (12,2), FORMAT = '##,###,###,##&.##',
+	REVERSE;
+END
+
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_tran[8] (b13_cuenta, b10_descripcion, valor_debito, 
+			  valor_credito)
+--KEYS
+--'F5'='Ver Orden'

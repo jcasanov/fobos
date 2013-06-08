@@ -12,7 +12,7 @@ GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 DEFINE rm_j04   	RECORD LIKE cajt004.*
 DEFINE rm_j02   	RECORD LIKE cajt002.*
 DEFINE vm_detalle	SMALLINT
-
+DEFINE vm_size_arr	INTEGER
 DEFINE r_detalle	ARRAY[100] OF RECORD
 	g13_nombre	LIKE gent013.g13_nombre,
 	efectivo 	LIKE cajt005.j05_ef_apertura,
@@ -27,12 +27,13 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/cajp202.error')
-CALL fgl_init4js()
+CALL startlog('../logs/cajp202.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN
-     CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto','stop')
-     EXIT PROGRAM
+     	--CALL FGL_WINMESSAGE(vg_producto,'Número de parámetros incorrecto','stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
+     	EXIT PROGRAM
 END IF
 LET vg_base     = arg_val(1)
 LET vg_modulo   = arg_val(2)
@@ -42,7 +43,7 @@ LET vg_proceso = 'cajp202'
 
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 
 CALL funcion_master()
@@ -52,17 +53,35 @@ END MAIN
 
 
 FUNCTION funcion_master()
-DEFINE flag	SMALLINT
+DEFINE flag		SMALLINT
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
 CALL fl_nivel_isolation()
 
-OPEN WINDOW w_202 AT 3,2 WITH 20 ROWS, 80 COLUMNS
-    ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE 0, BORDER,
-	      MESSAGE LINE LAST - 2)
-OPEN FORM f_202 FROM '../forms/cajf202_1'
-DISPLAY FORM f_202
+LET lin_menu = 0
+LET row_ini  = 3
+LET num_rows = 20
+LET num_cols = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW w_202 AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
+    ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE lin_menu,BORDER,
+	      MESSAGE LINE LAST - 1)
+IF vg_gui = 1 THEN
+        OPEN FORM f_200 FROM '../forms/cajf202_1'
+ELSE
+        OPEN FORM f_200 FROM '../forms/cajf202_1c'
+END IF
+DISPLAY FORM f_200
 
-CALL control_display_botones()
+CALL control_DISPLAY_botones()
 
 INITIALIZE rm_j04.*, rm_j02.* TO NULL
 
@@ -73,17 +92,18 @@ MENU 'OPCIONES'
 		IF flag = 0 THEN
 			HIDE OPTION 'Cerrar'
 		END IF
-		IF vm_detalle > FGL_SCR_SIZE('r_detalle') THEN
+		CALL retorna_arreglo()
+		IF vm_detalle > vm_size_arr THEN
 			SHOW OPTION 'Ver Detalle'
 		END IF
 
 	COMMAND KEY('V') 'Ver Detalle' 'Ver Detalle del cierre.'
-		CALL control_display_array_cajt005()
+		CALL control_DISPLAY_array_cajt005()
 
 	COMMAND KEY('C') 'Cerrar' 	
 		LET flag = control_cerrar()
 		IF flag THEN
-			HIDE OPTION 'Cerrar'
+			EXIT PROGRAM
 		END IF
 
 	COMMAND KEY('S') 'Salir' 	
@@ -95,27 +115,31 @@ END FUNCTION
 
 
 
-FUNCTION control_display_botones()
+FUNCTION control_DISPLAY_botones()
 	
-	DISPLAY 'Moneda' 	 TO tit_col1
-	DISPLAY 'Efectivo'	 TO tit_col2
-	DISPLAY 'Cheque'  	 TO tit_col3
-	DISPLAY 'Total'	 	 TO tit_col4
+	--#DISPLAY 'Moneda' 	 TO tit_col1
+	--#DISPLAY 'Efectivo'	 TO tit_col2
+	--#DISPLAY 'Cheque'  	 TO tit_col3
+	--#DISPLAY 'Total'	 	 TO tit_col4
 
 END FUNCTION
 
 
 
-FUNCTION control_display_array_cajt005()
+FUNCTION control_DISPLAY_array_cajt005()
 
 CALL set_count(vm_detalle)
 DISPLAY ARRAY r_detalle TO r_detalle.* 
-        BEFORE DISPLAY
-                CALL dialog.keysetlabel('ACCEPT','')
-        AFTER DISPLAY
-                CONTINUE DISPLAY
         ON KEY(INTERRUPT)
                 EXIT DISPLAY
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
+        --#BEFORE DISPLAY
+                --#CALL dialog.keysetlabel('ACCEPT','')
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
+        --#AFTER DISPLAY
+                --#CONTINUE DISPLAY
 END DISPLAY
 
 END FUNCTION
@@ -131,11 +155,13 @@ CALL fl_retorna_caja(vg_codcia, vg_codloc, vg_usuario)
 	RETURNING rm_j02.*
 
 IF rm_j02.j02_usua_caja IS NULL THEN
-	CALL fgl_winmessage(vg_producto,'El usuario no tiene asignada una caja.','exclamation')
+	--CALL FGL_WINMESSAGE(vg_producto,'El usuario no tiene asignada una caja.','exclamation')
+	CALL fl_mostrar_mensaje('El usuario no tiene asignada una caja.','exclamation')
 	RETURN 0
 END IF
 
-FOR i = 1 TO FGL_SCR_SIZE('r_detalle')
+CALL retorna_arreglo()
+FOR i = 1 TO vm_size_arr
 	INITIALIZE r_detalle[i].* TO NULL
 END FOR
 
@@ -146,16 +172,15 @@ SELECT * INTO rm_j04.* FROM cajt004
 	  AND j04_fecha_cierre IS NULL
 
 IF rm_j04.j04_fecha_aper IS NULL THEN
-	CALL fgl_winmessage(vg_producto,'La caja no ha sido aperturada.',
-			    'exclamation')
-	RETURN 0
-	
+	CALL fl_mostrar_mensaje('La caja no ha sido aperturada.','exclamation')
+	EXIT PROGRAM
 END IF
 
 IF rm_j04.j04_fecha_aper   IS NOT NULL AND 
    rm_j04.j04_fecha_cierre IS NOT NULL 
    THEN
-	CALL fgl_winmessage(vg_producto,'La caja ha sido cerrada el '|| DATE(rm_j04.j04_fecha_cierre) || '.','exclamation')
+	--CALL FGL_WINMESSAGE(vg_producto,'La caja ha sido cerrada el '|| DATE(rm_j04.j04_fecha_cierre) || '.','exclamation')
+	CALL fl_mostrar_mensaje('La caja ha sido cerrada el '|| DATE(rm_j04.j04_fecha_cierre) || '.','exclamation')
 	RETURN 0
 END IF
 
@@ -206,9 +231,11 @@ FUNCTION control_cerrar()
 
 BEGIN WORK
 
--- CALL borrar_fuentes_no_procesadas()
 WHENEVER ERROR CONTINUE
+	CALL borrar_fuentes_no_procesados()
+WHENEVER ERROR STOP
 
+WHENEVER ERROR CONTINUE
 DECLARE q_cajt004 CURSOR FOR
 	SELECT * FROM cajt004
 		WHERE j04_compania    = vg_codcia
@@ -221,103 +248,315 @@ DECLARE q_cajt004 CURSOR FOR
 OPEN q_cajt004
 FETCH q_cajt004
 
+WHENEVER ERROR STOP
 IF STATUS < 0 THEN
-	WHENEVER ERROR STOP
 	ROLLBACK WORK
-	CALL fgl_winmessage(vg_producto,'La caja esta siendo actualizada por otro usuario.','stop')
+	CALL fl_mostrar_mensaje('La caja esta siendo actualizada por otro usuario.','stop')
 	EXIT PROGRAM
 END IF
-WHENEVER ERROR STOP
 
-UPDATE cajt004 SET j04_fecha_cierre = CURRENT
+UPDATE cajt004
+	SET j04_fecha_cierre = CURRENT
 	WHERE CURRENT OF q_cajt004
 
 COMMIT WORK
 		 
-CALL fgl_winmessage(vg_producto,'La caja ha sido cerrada.','info')
+CALL fl_mostrar_mensaje('La caja ha sido cerrada.','info')
 RETURN 1
 
 END FUNCTION
 
 
 
-FUNCTION borrar_fuentes_no_procesadas()
-DEFINE r_j10            RECORD LIKE cajt010.*
-DEFINE r_j02            RECORD LIKE cajt002.*
+FUNCTION retorna_arreglo()
+--#LET vm_size_arr = fgl_scr_size('r_detalle')
+IF vg_gui = 0 THEN
+        LET vm_size_arr = 8
+END IF
+                                                                                
+END FUNCTION
+
+
+
+FUNCTION llamar_visor_teclas()
+DEFINE a		CHAR(1)
+
+IF vg_gui = 0 THEN
+	CALL fl_visor_teclas_caracter() RETURNING int_flag 
+	LET a = fgl_getkey()
+	CLOSE WINDOW w_tf
+	LET int_flag = 0
+END IF
+
+END FUNCTION
+
+
+
+FUNCTION borrar_fuentes_no_procesados()
+DEFINE r_j02		RECORD LIKE cajt002.*
+DEFINE cuantos		INTEGER
+
+SET LOCK MODE TO WAIT
+INITIALIZE r_j02.* TO NULL
+DECLARE qu_uc CURSOR FOR
+	SELECT * FROM cajt002
+		WHERE j02_compania  = vg_codcia
+		  AND j02_localidad = vg_codloc
+		  AND j02_usua_caja = vg_usuario
+OPEN qu_uc 
+FETCH qu_uc INTO r_j02.*
+CLOSE qu_uc 
+FREE qu_uc 
+IF r_j02.j02_compania IS NULL THEN
+	ROLLBACK WORK
+	CALL fl_mostrar_mensaje('Usted no es usuario de Caja.','exclamation')
+	EXIT PROGRAM
+END IF
+SELECT j10_compania cia, j10_localidad loc, j10_tipo_fuente tipo_f,
+	j10_num_fuente num_f
+	FROM cajt010
+	WHERE j10_compania     = vg_codcia
+	  AND j10_localidad    = vg_codloc
+	  AND j10_estado       = 'A'
+	  AND j10_tipo_destino IS NULL
+	  AND DATE(j10_fecing) < TODAY
+	INTO TEMP tmp_j10
+IF r_j02.j02_pre_ventas = 'S' THEN
+	CALL borra_preventa()
+END IF
+IF r_j02.j02_solicitudes = 'S' THEN
+	CALL borra_solicitud()
+END IF
+DELETE FROM cajt011 
+	WHERE EXISTS
+		(SELECT * FROM tmp_j10
+			WHERE tmp_j10.cia    = cajt011.j11_compania
+		  	  AND tmp_j10.loc    = cajt011.j11_localidad
+			  AND tmp_j10.tipo_f = cajt011.j11_tipo_fuente
+		          AND tmp_j10.num_f  = cajt011.j11_num_fuente)
+DELETE FROM cajt010 
+	WHERE EXISTS
+		(SELECT * FROM tmp_j10
+			WHERE tmp_j10.cia    = cajt010.j10_compania
+		  	  AND tmp_j10.loc    = cajt010.j10_localidad
+			  AND tmp_j10.tipo_f = cajt010.j10_tipo_fuente
+		          AND tmp_j10.num_f  = cajt010.j10_num_fuente)
+DROP TABLE tmp_j10
+SELECT p24_compania cia, p24_localidad loc, p24_orden_pago ord_pag
+	FROM cxpt024
+	WHERE p24_compania     = vg_codcia
+	  AND p24_localidad    = vg_codloc
+	  AND p24_estado       = 'A'
+	  AND DATE(p24_fecing) < TODAY
+	INTO TEMP tmp_p24
+SELECT COUNT(*) INTO cuantos FROM tmp_p24
+IF cuantos = 0 THEN
+	DROP TABLE tmp_p24
+	RETURN
+END IF
+DELETE FROM cxpt026
+	WHERE EXISTS
+		(SELECT * FROM tmp_p24
+			WHERE tmp_p24.cia     = cxpt026.p26_compania
+		  	  AND tmp_p24.loc     = cxpt026.p26_localidad
+		          AND tmp_p24.ord_pag = cxpt026.p26_orden_pago)
+DELETE FROM cxpt025
+	WHERE EXISTS
+		(SELECT * FROM tmp_p24
+			WHERE tmp_p24.cia     = cxpt025.p25_compania
+		  	  AND tmp_p24.loc     = cxpt025.p25_localidad
+		          AND tmp_p24.ord_pag = cxpt025.p25_orden_pago)
+DELETE FROM cxpt024
+	WHERE EXISTS
+		(SELECT * FROM tmp_p24
+			WHERE tmp_p24.cia     = cxpt024.p24_compania
+		  	  AND tmp_p24.loc     = cxpt024.p24_localidad
+		          AND tmp_p24.ord_pag = cxpt024.p24_orden_pago)
+DROP TABLE tmp_p24
+
+END FUNCTION
+
+
+
+FUNCTION borra_preventa()
+DEFINE cuantos		INTEGER
+
+SELECT r23_compania cia, r23_localidad loc, r23_numprev num_p
+	FROM tmp_j10, rept023
+	WHERE tipo_f            = "PR"
+	  AND r23_compania      = cia
+	  AND r23_localidad     = loc
+	  AND r23_numprev       = num_f
+	  AND r23_estado       <> "F"
+	  AND r23_cod_tran     IS NULL
+	  AND DATE(r23_fecing) < TODAY
+	INTO TEMP tmp_r23
+SELECT COUNT(*) INTO cuantos FROM tmp_r23
+IF cuantos = 0 THEN
+	DROP TABLE tmp_r23
+	RETURN
+END IF
+DELETE FROM rept027
+	WHERE EXISTS
+		(SELECT * FROM tmp_r23
+			WHERE tmp_r23.cia   = rept027.r27_compania
+		  	  AND tmp_r23.loc   = rept027.r27_localidad
+		          AND tmp_r23.num_p = rept027.r27_numprev)
+DELETE FROM rept026
+	WHERE EXISTS
+		(SELECT * FROM tmp_r23
+			WHERE tmp_r23.cia   = rept026.r26_compania
+		  	  AND tmp_r23.loc   = rept026.r26_localidad
+		          AND tmp_r23.num_p = rept026.r26_numprev)
+DELETE FROM rept025
+	WHERE EXISTS
+		(SELECT * FROM tmp_r23
+			WHERE tmp_r23.cia   = rept025.r25_compania
+		  	  AND tmp_r23.loc   = rept025.r25_localidad
+		          AND tmp_r23.num_p = rept025.r25_numprev)
+DELETE FROM rept024
+	WHERE EXISTS
+		(SELECT * FROM tmp_r23
+			WHERE tmp_r23.cia   = rept024.r24_compania
+		  	  AND tmp_r23.loc   = rept024.r24_localidad
+		          AND tmp_r23.num_p = rept024.r24_numprev)
+DELETE FROM rept023 
+	WHERE EXISTS
+		(SELECT * FROM tmp_r23
+			WHERE tmp_r23.cia   = rept023.r23_compania
+		  	  AND tmp_r23.loc   = rept023.r23_localidad
+		          AND tmp_r23.num_p = rept023.r23_numprev)
+UPDATE rept088
+	SET r88_numprev_nue = NULL
+	WHERE r88_compania     = vg_codcia
+	  AND r88_localidad    = vg_codloc
+	  AND r88_numprev_nue IN (SELECT num_p FROM tmp_r23)
+DROP TABLE tmp_r23
+
+END FUNCTION
+
+
+
+FUNCTION borra_solicitud()
+
+DELETE FROM cxct025 
+	WHERE EXISTS
+		(SELECT * FROM tmp_j10
+			WHERE tmp_j10.cia    = cxct025.z25_compania
+		  	  AND tmp_j10.loc    = cxct025.z25_localidad
+			  AND tmp_j10.tipo_f = "SC"
+		          AND tmp_j10.num_f  = cxct025.z25_numero_sol)
+DELETE FROM cxct024 
+	WHERE EXISTS
+		(SELECT * FROM tmp_j10
+			WHERE tmp_j10.cia    = cxct024.z24_compania
+		  	  AND tmp_j10.loc    = cxct024.z24_localidad
+			  AND tmp_j10.tipo_f = "SC"
+		          AND tmp_j10.num_f  = cxct024.z24_numero_sol)
+
+END FUNCTION
+
+
+
+{--
+FUNCTION borrar_fuentes_no_procesados()
+DEFINE r_j10		RECORD LIKE cajt010.*
+DEFINE r_j02		RECORD LIKE cajt002.*
 
 SET LOCK MODE TO WAIT
 DECLARE qu_uc CURSOR FOR SELECT * FROM cajt002
-        WHERE j02_compania  = vg_codcia AND
-              j02_localidad = vg_codloc AND
-              j02_usua_caja = vg_usuario
-OPEN qu_uc
+	WHERE j02_compania  = vg_codcia AND 
+	      j02_localidad = vg_codloc AND 
+	      j02_usua_caja = vg_usuario
+OPEN qu_uc 
 FETCH qu_uc INTO r_j02.*
 IF status = NOTFOUND THEN
-        CALL fgl_winmessage(vg_producto, 'Usted no es usuario de Caja.','exclamation')
-        ROLLBACK WORK
-        EXIT PROGRAM
+	CALL fl_mostrar_mensaje('Usted no es usuario de Caja.','exclamation')
+	ROLLBACK WORK
+	EXIT PROGRAM
 END IF
-DECLARE qu_lt CURSOR FOR SELECT * FROM cajt010
-        WHERE j10_compania  = vg_codcia AND
-              j10_localidad = vg_codloc AND
-              j10_estado    = 'A'       AND
-              j10_tipo_destino IS NULL
+DECLARE qu_lt CURSOR FOR
+	SELECT * FROM cajt010
+		WHERE j10_compania     = vg_codcia
+		  AND j10_localidad    = vg_codloc
+		  AND j10_estado       = 'A'
+		  AND j10_tipo_destino IS NULL
+		  AND DATE(j10_fecing) < TODAY
 FOREACH qu_lt INTO r_j10.*
-        IF r_j02.j02_pre_ventas = 'S' AND r_j10.j10_tipo_fuente = 'PR' THEN
---                CALL borra_preventa(r_j10.j10_compania, r_j10.j10_localidad,
---                                    r_j10.j10_num_fuente)
-        END IF
-        IF r_j02.j02_solicitudes = 'S' AND r_j10.j10_tipo_fuente = 'SC' THEN
-                CALL borra_solicitud(r_j10.j10_compania, r_j10.j10_localidad,
-                                    r_j10.j10_num_fuente)
-        END IF
+	--
+	IF DATE(r_j10.j10_fecing) >= TODAY THEN
+		CONTINUE FOREACH
+	END IF
+	--
+	IF r_j02.j02_pre_ventas = 'S' AND r_j10.j10_tipo_fuente = 'PR' THEN
+		CALL borra_preventa(r_j10.j10_compania, r_j10.j10_localidad,
+				    r_j10.j10_num_fuente)
+	END IF
+	IF r_j02.j02_solicitudes = 'S' AND r_j10.j10_tipo_fuente = 'SC' THEN
+		CALL borra_solicitud(r_j10.j10_compania, r_j10.j10_localidad,
+				    r_j10.j10_num_fuente)
+	END IF
+	DELETE FROM cajt011 
+		WHERE j11_compania    = r_j10.j10_compania 
+		  AND j11_localidad   = r_j10.j10_localidad 
+		  AND j11_tipo_fuente =	r_j10.j10_tipo_fuente 
+		  AND j11_num_fuente  =	r_j10.j10_num_fuente 
+	DELETE FROM cajt010 
+		WHERE j10_compania    = r_j10.j10_compania  AND 
+		      j10_localidad   = r_j10.j10_localidad AND 
+		      j10_tipo_fuente = r_j10.j10_tipo_fuente AND
+		      j10_num_fuente  = r_j10.j10_num_fuente
 END FOREACH
-DECLARE gy_chicho CURSOR FOR SELECT r23_numprev FROM rept023
-        WHERE r23_compania  = vg_codcia AND
-              r23_localidad = vg_codloc AND
-              r23_estado    <> 'F'      AND
-              r23_cod_tran IS NULL
+DECLARE gy_chicho CURSOR FOR
+	SELECT r23_numprev FROM rept023
+	WHERE r23_compania     = vg_codcia
+	  AND r23_localidad    = vg_codloc
+	  AND r23_estado       <> 'F'
+	  AND r23_cod_tran     IS NULL
+	  AND DATE(r23_fecing) < TODAY
 FOREACH gy_chicho INTO r_j10.j10_num_fuente
---        CALL borra_preventa(vg_codcia, vg_codloc, r_j10.j10_num_fuente)
+	CALL borra_preventa(vg_codcia, vg_codloc, r_j10.j10_num_fuente)
 END FOREACH
-DECLARE qu_pichaloca CURSOR FOR SELECT z24_numero_sol FROM cxct024
-        WHERE z24_compania   = vg_codcia AND
-              z24_localidad  = vg_codloc AND
-              z24_estado     <> 'P'
+DECLARE qu_pichaloca CURSOR FOR
+	SELECT z24_numero_sol FROM cxct024
+	WHERE z24_compania     = vg_codcia
+	  AND z24_localidad    = vg_codloc
+	  AND z24_estado       <> 'P'
+	  AND DATE(z24_fecing) < TODAY
 FOREACH qu_pichaloca INTO r_j10.j10_num_fuente
-        CALL borra_solicitud(vg_codcia, vg_codloc, r_j10.j10_num_fuente)
+	CALL borra_solicitud(vg_codcia, vg_codloc, r_j10.j10_num_fuente)
 END FOREACH
--- CALL borra_ordenes_pago(vg_codcia, vg_codloc)
+CALL borra_ordenes_pago(vg_codcia, vg_codloc)
 
 END FUNCTION
 
 
 
 FUNCTION borra_ordenes_pago(codcia, codloc)
-DEFINE codcia           LIKE gent001.g01_compania
-DEFINE codloc           LIKE gent002.g02_localidad
-DEFINE r_p24            RECORD LIKE cxpt024.*
+DEFINE codcia		LIKE gent001.g01_compania
+DEFINE codloc		LIKE gent002.g02_localidad
+DEFINE r_p24		RECORD LIKE cxpt024.*
 
 DECLARE q_p24 CURSOR FOR
-        SELECT * FROM cxpt024
-                WHERE p24_compania     = codcia
-                  AND p24_localidad    = codloc
-                  AND p24_estado       = 'A'
-                  AND DATE(p24_fecing) < TODAY
+	SELECT * FROM cxpt024
+		WHERE p24_compania     = codcia
+		  AND p24_localidad    = codloc
+		  AND p24_estado       = 'A'
+		  AND DATE(p24_fecing) < TODAY
 OPEN q_p24
 FOREACH q_p24 INTO r_p24.*
-        DELETE FROM cxpt026
-                WHERE p26_compania   = codcia
-                  AND p26_localidad  = codloc
-                  AND p26_orden_pago = r_p24.p24_orden_pago
-        DELETE FROM cxpt025
-                WHERE p25_compania   = codcia
-                  AND p25_localidad  = codloc
-                  AND p25_orden_pago = r_p24.p24_orden_pago
-        DELETE FROM cxpt024
-                WHERE p24_compania   = codcia
-                  AND p24_localidad  = codloc
-                  AND p24_orden_pago = r_p24.p24_orden_pago
+	DELETE FROM cxpt026
+		WHERE p26_compania   = codcia
+		  AND p26_localidad  = codloc
+		  AND p26_orden_pago = r_p24.p24_orden_pago
+	DELETE FROM cxpt025
+		WHERE p25_compania   = codcia
+		  AND p25_localidad  = codloc
+		  AND p25_orden_pago = r_p24.p24_orden_pago
+	DELETE FROM cxpt024
+		WHERE p24_compania   = codcia
+		  AND p24_localidad  = codloc
+		  AND p24_orden_pago = r_p24.p24_orden_pago
 END FOREACH
 
 END FUNCTION
@@ -325,121 +564,58 @@ END FUNCTION
 
 
 FUNCTION borra_preventa(codcia, codloc, numprev)
-DEFINE codcia           LIKE rept023.r23_compania
-DEFINE codloc           LIKE rept023.r23_localidad
-DEFINE numprev          LIKE rept023.r23_numprev
-DEFINE r_r23            RECORD LIKE rept023.*
-DEFINE r_r21            RECORD LIKE rept021.*
+DEFINE codcia		LIKE rept023.r23_compania
+DEFINE codloc		LIKE rept023.r23_localidad
+DEFINE numprev		LIKE rept023.r23_numprev
+DEFINE r_r23		RECORD LIKE rept023.*
 
-CALL fl_lee_preventa_rep(codcia, codloc, numprev)
-        RETURNING r_r23.*
+CALL fl_lee_preventa_rep(codcia, codloc, numprev) RETURNING r_r23.*
 IF r_r23.r23_compania IS NULL OR r_r23.r23_estado = 'F' OR
    r_r23.r23_cod_tran IS NOT NULL THEN
-        RETURN
-END IF
-
-{*
- * Si la proforma no ha expirado no borre la preventa
- *}
-CALL fl_lee_proforma_desde_preventa(codcia, codloc, numprev) RETURNING r_r21.*
-IF DATE(r_r21.r21_fecing) + r_r21.r21_dias_prof >= TODAY THEN
 	RETURN
 END IF
-
-DELETE FROM rept102
-		WHERE r102_compania   = codcia
-		  AND r102_localidad  = codloc
-		  AND r102_numprof    = r_r21.r21_numprof
-		  AND r102_numprev    = numprev
-DELETE FROM cajt010
-        WHERE j10_compania    = codcia  
-          AND j10_localidad   = codloc 
-          AND j10_tipo_fuente = 'PR'
-          AND j10_num_fuente  = numprev
 DELETE FROM rept027
-        WHERE r27_compania  = codcia
-          AND r27_localidad = codloc
+	WHERE r27_compania  = codcia
+  	  AND r27_localidad = codloc
           AND r27_numprev   = numprev
 DELETE FROM rept026
-        WHERE r26_compania  = codcia
-          AND r26_localidad = codloc
-          AND r26_numprev   = numprev
+	WHERE r26_compania  = codcia
+  	  AND r26_localidad = codloc
+  	  AND r26_numprev   = numprev
 DELETE FROM rept025
-        WHERE r25_compania  = codcia
-          AND r25_localidad = codloc
-          AND r25_numprev   = numprev
+	WHERE r25_compania  = codcia
+  	  AND r25_localidad = codloc
+  	  AND r25_numprev   = numprev
 DELETE FROM rept024
-        WHERE r24_compania  = codcia
-          AND r24_localidad = codloc
-          AND r24_numprev   = numprev
-DELETE FROM rept023
-        WHERE r23_compania  = codcia
-          AND r23_localidad = codloc
-          AND r23_numprev   = numprev
+	WHERE r24_compania  = codcia
+  	  AND r24_localidad = codloc
+  	  AND r24_numprev   = numprev
+DELETE FROM rept023 
+	WHERE r23_compania  = codcia
+  	  AND r23_localidad = codloc
+  	  AND r23_numprev   = numprev
+UPDATE rept088 SET r88_numprev_nue = NULL
+	WHERE r88_compania    = vg_codcia
+	  AND r88_localidad   = vg_codloc
+	  AND r88_numprev_nue = numprev
 
 END FUNCTION
 
 
 
 FUNCTION borra_solicitud(codcia, codloc, numsol)
-DEFINE codcia           LIKE cxct024.z24_compania
-DEFINE codloc           LIKE cxct024.z24_localidad
-DEFINE numsol           LIKE cxct024.z24_numero_sol
+DEFINE codcia		LIKE cxct024.z24_compania
+DEFINE codloc		LIKE cxct024.z24_localidad
+DEFINE numsol		LIKE cxct024.z24_numero_sol
 
-DELETE FROM cajt010
-        WHERE j10_compania    = codcia AND 
-              j10_localidad   = codloc AND 
-              j10_tipo_fuente = 'SC'   AND 
-              j10_num_fuente  = numsol
-DELETE FROM cxct101
-        WHERE z101_compania   = codcia AND
-              z101_localidad  = codloc AND
-              z101_numero_sol = numsol
-DELETE FROM cxct025
-        WHERE z25_compania   = codcia AND
-              z25_localidad  = codloc AND
-              z25_numero_sol = numsol
-DELETE FROM cxct024
-        WHERE z24_compania   = codcia AND
-              z24_localidad  = codloc AND
-              z24_numero_sol = numsol
+DELETE FROM cxct025 
+	WHERE z25_compania   = codcia AND 
+	      z25_localidad  = codloc AND
+	      z25_numero_sol = numsol
+DELETE FROM cxct024 
+	WHERE z24_compania   = codcia AND 
+	      z24_localidad  = codloc AND
+	      z24_numero_sol = numsol
 
 END FUNCTION
-
-
-
-FUNCTION validar_parametros()
-                                                                                
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-        CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo,
- 			    'stop')
-        EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-        CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia,
-			    'stop')
-        EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-     CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' 
-			 || vg_codcia, 'stop')
-     EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-        LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-        CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc,
-			    'stop')
-        EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-      CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 			  'stop')
-      EXIT PROGRAM
-END IF
-                                                                                
-END FUNCTION
-
+--}

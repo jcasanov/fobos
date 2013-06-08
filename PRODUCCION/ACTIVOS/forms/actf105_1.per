@@ -1,0 +1,40 @@
+database aceros
+screen size 24 by 80
+{
+
+		Código del Bien: [c001  ]
+		    Descripción: [c002                     ]
+
+		 [c003    ][c004                ][c005      ]	
+		[c010  ]  [c011                ][c012      ]
+		[c010  ]  [c011                ][c012      ]
+		[c010  ]  [c011                ][c012      ]
+		[c010  ]  [c011                ][c012      ]
+		[c010  ]  [c011                ][c012      ]
+		[c010  ]  [c011                ][c012      ]
+		[c010  ]  [c011                ][c012      ]
+		[c010  ]  [c011                ][c012      ]
+						
+			      Total Porcentaje: [c013      ]
+}
+end
+tables
+actt011
+attributes
+c001 = actt011.a11_codigo_bien, REVERSE, WIDGET = 'FIELD_BMP',
+       CONFIG = 'lista.bmp F2';
+c002 = formonly.descr_bien, NOENTRY;
+c003 = formonly.tit_col1, WIDGET = 'BUTTON';
+c004 = formonly.tit_col2, WIDGET = 'BUTTON';
+c005 = formonly.tit_col3, WIDGET = 'BUTTON';
+c010 = actt011.a11_cod_depto, REVERSE, WIDGET = 'FIELD_BMP',
+       CONFIG = 'lista.bmp F2', OPTIONS = '-nolist';
+c011 = formonly.descr_depto, REVERSE, NOENTRY, OPTIONS = '-nolist';
+c012 = actt011.a11_porcentaje, REVERSE, OPTIONS = '-nolist', 
+				INCLUDE = ( 0.0001 TO 100);
+c013 = formonly.total, NOENTRY;
+end
+
+INSTRUCTIONS
+SCREEN RECORD rm_detalle[8] (a11_cod_depto, formonly.descr_depto, 
+				a11_porcentaje)

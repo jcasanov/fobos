@@ -1,0 +1,36 @@
+DATABASE aceros
+SCREEN
+{
+ SUBTITULOS NOTA DE PEDIDO
+
+ [lbl|lbl2                                                ]
+[c00|c002                                                ]
+[c00|c002                                                ]
+[c00|c002                                                ]
+[c00|c002                                                ]
+[c00|c002                                                ]
+[c00|c002                                                ]
+[c00|c002                                                ]
+[c00|c002                                                ]
+[c00|c002                                                ]
+[c00|c002                                                ]
+
+}
+
+TABLES
+rept083
+rept084
+
+ATTRIBUTES
+c00  = r83_cod_desc_item, 	NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+--c01  = r83_item, 		UPSHIFT, OPTIONS = '-nolist';
+c002 = r84_descripcion,  	UPSHIFT, OPTIONS = '-nolist';
+lbl  = formonly.bt_cod_desc_item, 	NOENTRY, WIDGET='BUTTON', CONFIG='F15';
+--lbl1 = formonly.bt_item, 		NOENTRY, WIDGET='BUTTON', CONFIG='F16';
+lbl2 = formonly.bt_descripcion,	 	NOENTRY, WIDGET='BUTTON', CONFIG='F16';
+END
+
+INSTRUCTIONS
+--SCREEN RECORD rh_subtitulos[10] (r83_cod_desc_item, r83_item,
+SCREEN RECORD rh_subtitulos[10] (r83_cod_desc_item, r84_descripcion)
+

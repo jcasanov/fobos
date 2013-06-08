@@ -1,0 +1,22 @@
+DATABASE aceros
+SCREEN
+{
+
+       De: [c000                                              ]
+ Enviar a: [c001                                              ]
+
+   Asunto: [c002                                              ]
+
+  Mensaje: [c003                                              ]
+           [c003                                              ]
+           [c003                                              ]
+           [c003                                              ]
+
+}
+ATTRIBUTES
+c000 = FORMONLY.remitente TYPE VARCHAR NOT NULL, REQUIRED, AUTONEXT, REVERSE;
+c001 = FORMONLY.enviar_a TYPE VARCHAR NOT NULL, REQUIRED, AUTONEXT, REVERSE;
+c002 = FORMONLY.asunto TYPE VARCHAR NOT NULL, REQUIRED, AUTONEXT, REVERSE;
+c003 = FORMONLY.mensaje_m TYPE VARCHAR NOT NULL, REQUIRED, AUTONEXT, REVERSE,
+	WORDWRAP COMPRESS;
+END

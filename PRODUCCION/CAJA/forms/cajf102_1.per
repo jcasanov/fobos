@@ -1,4 +1,4 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
 
@@ -12,6 +12,8 @@ SCREEN
   Emisión Factura por Servicios ?: [b]
      Emisión de Ingresos a Caja ?: [c]
 
+        Auxiliar Contable de Caja: [c007        ] [c008                     ]
+
                   Usuario de Caja: [c004      ] [c006                       ]
 }
 TABLES
@@ -22,18 +24,21 @@ c001 = cajt002.j02_localidad, AUTONEXT, REVERSE,
 c002 = cajt002.j02_codigo_caja, AUTONEXT, REVERSE,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 c003 = cajt002.j02_nombre_caja, AUTONEXT, REVERSE, UPSHIFT;
-a    = cajt002.j02_pre_ventas, REVERSE, UPSHIFT,
+a    = cajt002.j02_pre_ventas, AUTONEXT, REVERSE, UPSHIFT,
 	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S',
 	COMMENTS = 'Esta caja emite facturas por Bienes';
-b    = cajt002.j02_ordenes, REVERSE, UPSHIFT,
+b    = cajt002.j02_ordenes, AUTONEXT, REVERSE, UPSHIFT,
 	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S',
 	COMMENTS = 'Esta caja emite facturas por Servicios';
-c    = cajt002.j02_solicitudes, REVERSE, UPSHIFT,
+c    = cajt002.j02_solicitudes, AUTONEXT, REVERSE, UPSHIFT,
 	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S',
 	COMMENTS = 'Esta caja emite facturas por Recuperación Cartera';
 c004 = cajt002.j02_usua_caja, AUTONEXT, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
-	COMMENTS = 'Un mismo usuario no puede estar asignado a más de una caja';
+	COMMENTS = 'Un mismo usuario no puede estar asignado a mas de una caja';
 c005 = FORMONLY.tit_localidad, NOENTRY, REVERSE, UPSHIFT;
 c006 = FORMONLY.tit_usua_caja, NOENTRY, REVERSE, UPSHIFT;
-END
+c007 = cajt002.j02_aux_cont, AUTONEXT, UPSHIFT, 
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c008 = FORMONLY.tit_aux_cont, NOENTRY, UPSHIFT;
+end

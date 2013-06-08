@@ -1,0 +1,86 @@
+DATABASE aceros
+SCREEN
+{
+                Localidad: [c04] [c005                          ]
+          Grupo de Activo: [c00] [c001                          ]
+           Tipo de Activo: [c02] [c003                          ]
+
+                   Estado: [c]   [c006                          ]
+         Fechas de Compra: [c007      ]       -      [c008      ]
+   [c030                         ]                            [c050] de [c051]
+ [c1|c2|c3 |c011|c012                |c013      |c014         |c015         |d]
+[c4|c5|c6 |c021|c022                |c023      |c024         |c025         |e]
+[c4|c5|c6 |c021|c022                |c023      |c024         |c025         |e]
+[c4|c5|c6 |c021|c022                |c023      |c024         |c025         |e]
+[c4|c5|c6 |c021|c022                |c023      |c024         |c025         |e]
+[c4|c5|c6 |c021|c022                |c023      |c024         |c025         |e]
+[c4|c5|c6 |c021|c022                |c023      |c024         |c025         |e]
+[c4|c5|c6 |c021|c022                |c023      |c024         |c025         |e]
+[c4|c5|c6 |c021|c022                |c023      |c024         |c025         |e]
+[c4|c5|c6 |c021|c022                |c023      |c024         |c025         |e]
+[c4|c5|c6 |c021|c022                |c023      |c024         |c025         |e]
+[c4|c5|c6 |c021|c022                |c023      |c024         |c025         |e]
+ Valor Tot. Libros [c034         ]    Totales: [c031         |c032         ]
+ Valor Act. Libros [c033         ]
+}
+TABLES
+actt010
+ATTRIBUTES
+c00  = FORMONLY.a10_grupo_act, AUTONEXT, UPSHIFT,
+	WIDGET  = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = FORMONLY.desc_grupo, NOENTRY, UPSHIFT;
+c02  = FORMONLY.a10_tipo_act, AUTONEXT, UPSHIFT,
+	WIDGET  = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = FORMONLY.desc_tipo, NOENTRY, UPSHIFT;
+c04  = FORMONLY.a10_localidad, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c005 = FORMONLY.g02_nombre, NOENTRY, UPSHIFT;
+c    = actt010.a10_estado, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Presione F2 y escoja el estado del bien (ACTIVO FIJO)';
+c006 = FORMONLY.tit_estado, NOENTRY, UPSHIFT, REVERSE;
+c007 = FORMONLY.fecha_inicial, AUTONEXT, UPSHIFT, FORMAT  = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese fecha en formato dd-mm-aaaa';
+c008 = FORMONLY.fecha_final, AUTONEXT, UPSHIFT, FORMAT  = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese fecha en formato dd-mm-aaaa';
+
+c050 = FORMONLY.num_rows, NOENTRY, UPSHIFT, REVERSE;
+c051 = FORMONLY.max_rows, NOENTRY, UPSHIFT, REVERSE;
+
+c1   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c2   = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c3   = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c011 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c012 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c013 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c014 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+c015 = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22';
+d    = FORMONLY.tit_col9, WIDGET = 'BUTTON', CONFIG = 'F23';
+
+c4   = FORMONLY.tit_localidad, NOENTRY, UPSHIFT, FORMAT = '&&';
+c5   = FORMONLY.grupo_act, NOENTRY, UPSHIFT, FORMAT = '&&';
+c6   = FORMONLY.tipo_act, NOENTRY, UPSHIFT;
+c021 = actt010.a10_codigo_bien, NOENTRY, UPSHIFT;
+c022 = actt010.a10_descripcion, NOENTRY, UPSHIFT;
+c023 = actt010.a10_fecha_comp, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c024 = actt010.a10_valor, NOENTRY, UPSHIFT, FORMAT = '##,###,##&.##';
+c025 = FORMONLY.valor_dep, NOENTRY, UPSHIFT, FORMAT = '##,###,##&.##';
+e    = FORMONLY.estado, NOENTRY, UPSHIFT;
+
+c030 = FORMONLY.desc_estado, NOENTRY, UPSHIFT, REVERSE;
+c031 = FORMONLY.total_comp, NOENTRY, FORMAT = '##,###,##&.##', REVERSE;
+c032 = FORMONLY.total_act, NOENTRY, FORMAT = '##,###,##&.##', REVERSE;
+c033 = FORMONLY.valor_actual, NOENTRY, UPSHIFT, FORMAT = '##,###,##&.##',
+	COLOR = BLUE;
+c034 = FORMONLY.valor_libros, NOENTRY, UPSHIFT, FORMAT = '##,###,##&.##',
+	COLOR = BLUE;
+END
+KEYS
+F5 = 'El Bien'
+F6 = 'Movimientos'
+F7 = 'Imprimir Listado'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_detalle[11] (tit_localidad, grupo_act, tipo_act,
+				a10_codigo_bien, a10_descripcion,a10_fecha_comp,
+				a10_valor, valor_dep, estado)

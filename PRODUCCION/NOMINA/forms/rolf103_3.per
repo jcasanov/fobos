@@ -1,0 +1,44 @@
+DATABASE aceros
+SCREEN
+{
+
+                          DATOS FORMULA
+                          ------------
+
+          Rubro: [c000|c001                          ]
+
+   Tipo Calculo: [c002      ]        Operación: [c003             ]
+
+
+ Factor Calculo: [c004 ] %
+
+   Valor Maximo: [c005      ]            Valor Mínimo: [c006      ]
+  Ganado Maximo: [c007      ]
+                               Sumar de Liquidación Anterior ?: [c]
+
+  Ingresado por: [c008      ]  Fecha Ingreso: [c009               ]
+
+}
+TABLES
+rolt006
+rolt007
+ATTRIBUTES
+c000 = rolt007.n07_cod_rubro, NOENTRY, UPSHIFT, REVERSE;
+c001 = rolt006.n06_nombre, NOENTRY, UPSHIFT, REVERSE;
+c002 = rolt007.n07_tipo_calc, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'RADIO', CONFIG = 'N Nominal  E Extras', INCLUDE = ('E', 'N'),
+	DEFAULT = 'N';
+c003 = rolt007.n07_operacion, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'RADIO', CONFIG = '"P" Multiplicación  "D" División',
+	INCLUDE = ('P', 'D'), DEFAULT = 'P';
+c004 = rolt007.n07_factor, AUTONEXT, UPSHIFT, REVERSE,INCLUDE = (0.00 TO 99.99),
+	FORMAT = "#&.##";
+c005 = rolt007.n07_valor_max, AUTONEXT, UPSHIFT, REVERSE, FORMAT = "---,--&.##";
+c006 = rolt007.n07_valor_min, AUTONEXT, UPSHIFT, REVERSE, FORMAT = "---,--&.##";
+c007 = rolt007.n07_ganado_max, AUTONEXT, UPSHIFT, REVERSE,FORMAT = "---,--&.##";
+c    = rolt007.n07_sum_liq_ant, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', INCLUDE = ('S', 'N'),
+	DEFAULT = 'N';
+c008 = rolt007.n07_usuario, NOENTRY, UPSHIFT, REVERSE;
+c009 = rolt007.n07_fecing, NOENTRY, UPSHIFT, REVERSE;
+END

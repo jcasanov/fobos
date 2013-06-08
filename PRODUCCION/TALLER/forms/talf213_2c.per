@@ -1,0 +1,51 @@
+DATABASE aceros
+SCREEN
+{
+
+                   TRANSFERENCIAS/ORDEN DE DESPACHO
+                   --------------------------------
+
+        Cliente: [c000  ][c001                                    ]
+    Presupuesto: [c002  ]                Orden de Trabajo: [c003  ]
+
+    Número Transf.  BO BD               Referencia
+   [c020           |c0|c1|c021                                    ]
+   [c020           |c0|c1|c021                                    ]
+   [c020           |c0|c1|c021                                    ]
+   [c020           |c0|c1|c021                                    ]
+
+  No. Orden  Bd Fecha O.D.                Entregar a
+ [c040      |c3|c041      |c042                                     ]
+ [c040      |c3|c041      |c042                                     ]
+ [c040      |c3|c041      |c042                                     ]
+ [c040      |c3|c041      |c042                                     ]
+}
+TABLES
+rept019
+rept021
+rept034
+talt023
+ATTRIBUTES
+c000 = rept021.r21_codcli, NOENTRY, UPSHIFT, REVERSE;
+c001 = talt023.t23_nom_cliente, NOENTRY, UPSHIFT, REVERSE;
+c002 = talt023.t23_numpre, NOENTRY, UPSHIFT, REVERSE;
+c003 = rept021.r21_num_ot, NOENTRY, UPSHIFT, REVERSE;
+
+c020 = rept019.r19_num_tran, NOENTRY, UPSHIFT, REVERSE;
+c0   = rept019.r19_bodega_ori, NOENTRY, UPSHIFT, REVERSE;
+c1   = rept019.r19_bodega_dest, NOENTRY, UPSHIFT, REVERSE;
+c021 = rept019.r19_referencia, NOENTRY, UPSHIFT, REVERSE;
+
+c040 = rept034.r34_num_ord_des, NOENTRY, UPSHIFT, REVERSE;
+c3   = rept034.r34_bodega, NOENTRY, UPSHIFT, REVERSE;
+c041 = rept034.r34_fec_entrega, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy';
+c042 = rept034.r34_entregar_a, NOENTRY, UPSHIFT, REVERSE;
+
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_dettrans[4]  (r19_num_tran, r19_bodega_ori, r19_bodega_dest,
+				r19_referencia)
+SCREEN RECORD rm_detorddes[4] (r34_num_ord_des, r34_bodega, r34_fec_entrega,
+				r34_entregar_a)

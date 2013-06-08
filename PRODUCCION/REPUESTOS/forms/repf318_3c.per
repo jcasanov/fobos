@@ -1,0 +1,54 @@
+DATABASE aceros
+SCREEN
+{
+
+                        FACTURAS PENDIENTES ENTREGAR
+                        ----------------------------
+ Bodega: [c2]   [c022                          ]
+   Item: [c023  |c024                                                    ]
+                                                            [c30] de [c31]
+  No. Factura            Cliente           Fecha Fac. Orden D. Cant. Pend
+ [c1|c011    |c012                        |c013      |c014    |c015      ]
+ [c1|c011    |c012                        |c013      |c014    |c015      ]
+ [c1|c011    |c012                        |c013      |c014    |c015      ]
+ [c1|c011    |c012                        |c013      |c014    |c015      ]
+ [c1|c011    |c012                        |c013      |c014    |c015      ]
+ [c1|c011    |c012                        |c013      |c014    |c015      ]
+ [c1|c011    |c012                        |c013      |c014    |c015      ]
+ [c1|c011    |c012                        |c013      |c014    |c015      ]
+                                                    Total ==> [c020      ]
+ [c021                                                 ]
+
+}
+TABLES
+rept002
+rept010
+rept019
+rept034
+ATTRIBUTES
+c2   = rept002.r02_codigo, NOENTRY, REVERSE, UPSHIFT;
+c022 = rept002.r02_nombre, NOENTRY, REVERSE, UPSHIFT;
+c023 = rept010.r10_codigo, NOENTRY, REVERSE, UPSHIFT;
+c024 = rept010.r10_nombre, NOENTRY, REVERSE, UPSHIFT;
+
+c1   = rept019.r19_cod_tran, NOENTRY, UPSHIFT;
+c011 = rept019.r19_num_tran, NOENTRY, UPSHIFT;
+c012 = rept019.r19_nomcli, NOENTRY, UPSHIFT;
+c013 = FORMONLY.r19_fecing TYPE DATE NOT NULL, NOENTRY, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy';
+c014 = rept034.r34_num_ord_des, NOENTRY, UPSHIFT;
+c015 = FORMONLY.stock_pend TYPE DECIMAL NOT NULL, NOENTRY, UPSHIFT, REQUIRED,
+	FORMAT = '---,--&.##';
+
+c020 = FORMONLY.tot_stock_pend TYPE DECIMAL NOT NULL, NOENTRY, UPSHIFT,
+	REVERSE, REQUIRED, FORMAT = '---,--&.##';
+
+c021 = FORMONLY.nombre_cli, NOENTRY, REVERSE, UPSHIFT;
+
+c30  = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c31  = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_factura[8] (r19_cod_tran, r19_num_tran, r19_nomcli, r19_fecing,
+				r34_num_ord_des, stock_pend)

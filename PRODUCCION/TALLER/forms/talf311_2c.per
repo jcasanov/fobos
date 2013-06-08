@@ -1,0 +1,41 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+                    DETALLE MANO DE OBRA TECNICOS
+
+        Técnico: [c001                     ]
+        Período: [c002      ] - [c003      ]
+         Moneda: [c4]     [c005           ]
+         Modelo: [c006           ]
+
+   Fecha    Orden     Factura              T a r e a             V a l o r
+[c020      |c021  |c022         |c023                        |c024          ]   
+[c020      |c021  |c022         |c023                        |c024          ] 
+[c020      |c021  |c022         |c023                        |c024          ] 
+[c020      |c021  |c022         |c023                        |c024          ] 
+[c020      |c021  |c022         |c023                        |c024          ] 
+[c020      |c021  |c022         |c023                        |c024          ] 
+[c020      |c021  |c022         |c023                        |c024          ] 
+                                                             [c030          ]
+}
+ATTRIBUTES
+c001 = FORMONLY.name_meca, REVERSE;
+c002 = FORMONLY.fec_ini TYPE DATE NOT NULL, REVERSE, FORMAT = 'dd-mm-yyyy';
+c003 = FORMONLY.fec_fin TYPE DATE NOT NULL, REVERSE, FORMAT = 'dd-mm-yyyy';
+c4   = FORMONLY.moneda TYPE CHAR NOT NULL, UPSHIFT, REVERSE, AUTONEXT;
+c005 = FORMONLY.tit_mon;
+c006 = FORMONLY.modelo, UPSHIFT;
+c020 = FORMONLY.fecha TYPE DATE, FORMAT = 'dd-mm-yyyy';
+c021 = FORMONLY.num_ot;
+c022 = FORMONLY.num_fa;
+c023 = FORMONLY.descri_tar;
+c024 = FORMONLY.valor TYPE DECIMAL(12,2), FORMAT = '---,---,--&.##';
+c030 = FORMONLY.tot_val TYPE DECIMAL(12,2), FORMAT = '---,---,--&.##', REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_mot[7] (FORMONLY.fecha,  formonly.num_ot, formonly.num_fa, 
+			FORMONLY.descri_tar, formonly.valor)
+--KEYS
+--F5='Orden'

@@ -1,37 +1,279 @@
-DATABASE formonly
-SCREEN
+DATABASE aceros
+SCREEN SIZE 18 BY 78 TITLE '  DATOS NOTA  '
 {
-
-  [c010  |c011  |c012                                |c013               ]
- [c021  |c022  |c023                                |c024               ]
- [c021  |c022  |c023                                |c024               ]
- [c021  |c022  |c023                                |c024               ]
- [c021  |c022  |c023                                |c024               ]
- [c021  |c022  |c023                                |c024               ]
- [c021  |c022  |c023                                |c024               ]
- [c021  |c022  |c023                                |c024               ]
- [c021  |c022  |c023                                |c024               ]
- [c021  |c022  |c023                                |c024               ]
- [c021  |c022  |c023                                |c024               ]
- [c021  |c022  |c023                                |c024               ]
- [c021  |c022  |c023                                |c024               ]
- [c021  |c022  |c023                                |c024               ]
- [c021  |c022  |c023                                |c024               ]
- [c021  |c022  |c023                                |c024               ]
- [c021  |c022  |c023                                |c024               ]
- [c021  |c022  |c023                                |c024               ]
+                                                              [x000] de [y000]
+            Pedido: [c002  ]             Fecha: [c003                     ]
+Moneda Importacion: [a0|c050           ] Paridad: [c016                   ]
+         Proveedor: [c004       ] [c005                                   ]
+   Direccion Prov.: [c006                                                      ]
+                    [c006                                                      ]
+      Ciudad Prov.: [c007           ]       Estado Prov.: [c008           ]
+        Pais Prov.: [c009           ]        Telf. Prov.: [c010           ]
+      E-mail Prov.: [c012                  ]   Fax Prov.: [c011           ]
+     Aux. Contable: [c071        ] [c072                                  ]
+            Marcas: [c027                                    ]
+      Cobranza Via: [c013                                    ]
+     Forma de Pago: [c014                                    ]
+    Pais de Origen: [c026                          ]
+   Puerto Embarque: [c028                                    ]
+    Puerto Destino: [c029                                    ]
+      Despacho Via: [c031                          ]
+          Embalaje: [c030                  ]       Tipo de Precio: [c015  ]
+            Seguro: [c032                                    ]
 }
+SCREEN SIZE 18 BY 78 TITLE ' VALORES NOTA '
+{
+                                                              [x001] de [y001]
+
+               Pedido: [c02b  ]             Fecha: [c03b                     ]
+            Proveedor: [c05b                                    ]
+
+                      PARA EL BANCO (MONEDA IMP)    PARA EL COSTO MONEDA BASE
+                      -------------------------     ------------------------
+ Tot. Fact. EX-FAB.: [a1  |c017                ]   [a10 |c080                ]
+ Gastos de Embarque: [a2  |c018                ]   [a11 |c081                ]
+ Tot. Fact. FOB DIV: [a3  |c019                ]   [a4  |c020                ]
+
+    Total del Flete: [a12 |c082                ]   [a5  |c021                ]
+    Total Valor C&F: [a13 |c083                ]   [a6  |c022                ]
+
+      Seguro Primas: [a14 |c084                ]   [a7  |c023                ]
+       Seguro Total: [a15 |c085                ]   [a8  |c024                ]
+
+    Total Valor CIF: [a16 |c086                ]   [a9  |c025                ]
+
+}
+SCREEN SIZE 18 BY 78 TITLE 'DETALLE ADUANA'
+{
+                                                              [x002] de [y002]
+  Partida: [c076           ][c047                                            ]
+                            [c047                                            ]
+                            [c047                                            ]
+   [x003] de [y003]         [c077					     ]
+   [c060           |c061     |c062            |c063               |c064     ]
+   [c065        |c066        |c067         |c068           |c069            ]
+  [c046           ] [c038  ] [c039           |c040               |c041   ] 
+  [c042        |c049        |c051         |c043           |c052            ]
+  [c046           ] [c038  ] [c039           |c040               |c041   ] 
+  [c042        |c049        |c051         |c043           |c052            ]
+  [c046           ] [c038  ] [c039           |c040               |c041   ] 
+  [c042        |c049        |c051         |c043           |c052            ]
+  [c046           ] [c038  ] [c039           |c040               |c041   ] 
+  [c042        |c049        |c051         |c043           |c052            ]
+   Total Cantidad: [c055           ]
+       Total Peso: [c056           ]           Total FOB: [c057            ]
+          Usuario: [c033      ]         Fecha Ingreso: [c034               ]
+}
+TABLES
+gent016
+rept005
+rept016
+rept081
+rept082
 ATTRIBUTES
-c010 = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-c011 = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-c012 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
-c013 = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
 
-c021 = formonly.numprof,  REVERSE, NOENTRY, OPTIONS='-nolist';
-c022 = formonly.numprev,  REVERSE, NOENTRY, OPTIONS='-nolist';
-c023 = formonly.nomcli,   REVERSE, NOENTRY, OPTIONS='-nolist';
-c024 = formonly.fecing,   REVERSE, NOENTRY, OPTIONS='-nolist';
+-------------------------------- DATOS NOTA ------------------------------------
 
+c002 = rept081.r81_pedido, AUTONEXT, REVERSE, UPSHIFT, FORMAT = "######",
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Número ACERO de la Importación. Ej. A-5499-B';
+c003 = rept081.r81_fecha, AUTONEXT, REVERSE,
+	COMMENTS = 'Fecha del pedido de libre digitación. Ej. Diciembre 10 del 2003';
+a0   = rept081.r81_moneda_base, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Divisa de la cotización de los precios.';
+c050 = FORMONLY.tit_moneda, NOENTRY, REVERSE, UPSHIFT;
+c016 = rept081.r81_paridad_div, AUTONEXT, REVERSE, UPSHIFT,
+	INCLUDE = (0.000000001 TO 9999999.999999999),
+	FORMAT = '###,##&.###############',
+	COMMENTS = 'Cotización de la DIVISA de facturación versus moneda base.';
+c004 = rept081.r81_cod_prov, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Codigo de la empresa proveedora (ACERO).';
+c005 = rept081.r81_nom_prov, SCROLL, AUTONEXT, REVERSE, UPSHIFT, SCROLL,
+	COMMENTS = 'Nombre de la empresa proveedora. Ej. RIDGE TOOL COMPANY';
+c006 = rept081.r81_dir_prov, AUTONEXT, REVERSE, UPSHIFT, WORDWRAP,
+	COMMENTS = 'Dirección del proveedor.';
+c007 = rept081.r81_ciu_prov, SCROLL, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Ciudad del proveedor.';
+c008 = rept081.r81_est_prov, SCROLL, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Estado (federal) dentro del país.';
+c009 = rept081.r81_pai_prov, SCROLL, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'País del proveedor.';
+c010 = rept081.r81_tel_prov, SCROLL, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Télefono del proveedor.';
+c012 = rept081.r81_email_prov, SCROLL, AUTONEXT, REVERSE,
+	COMMENTS = 'E-mail del proveedor. Ej. export.la@ridgetools.com';
+c011 = rept081.r81_fax_prov, SCROLL, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Fax del proveedor.';
+c027 = rept081.r81_marcas, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Marcas para flete y aduana. Ej. ACERO UIO A-5499-B';
+c013 = rept081.r81_pagador, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Cobranza a traves de  Ej. ACERO COMERCIAL';
+c014 = rept081.r81_forma_pago, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Forma de pago (libre digitación).  Ej. GIRO DIRECTO (01)';
+c026 = rept081.r81_pais_origen, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'País de origen de la mercancia.';
+c028 = rept081.r81_puerto_ori, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = '(Aereo) Puerto de embarque.';
+c029 = rept081.r81_puerto_dest, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = '(Aereo) Puerto de destino.';
+c031 = rept081.r81_tipo_trans, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Tipo de transporte. Ej. VIA MARITIMA';
+c030 = rept081.r81_tipo_embal, SCROLL, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Tipo de embalaje. Ej. ADECUADO PARA EXPORTACION';
+c015 = rept081.r81_tipo_fact_pre, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Tipo de facturación de precios. Ej. FOB - EXWRK';
+c032 = rept081.r81_tipo_seguro, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Seguro de transporte. Ej. TOMADO EN EL ECUADOR';
+
+--------------------------------------------------------------------------------
+
+
+------------------------------- VALORES NOTA -----------------------------------
+
+c02b = FORMONLY.tit_pedido, NOENTRY, REVERSE, UPSHIFT;
+c03b = FORMONLY.tit_fecha, NOENTRY, REVERSE;
+c05b = FORMONLY.tit_proveedor, NOENTRY, REVERSE, UPSHIFT;
+
+c017 = rept081.r81_tot_exfab, NOENTRY, FORMAT = '-,---,---,--&.######',
+	COMMENTS = 'Valor de la factura EX-FABRICA en Valor Divisa.';
+c080 = FORMONLY.r81_tot_exfab_base, NOENTRY, FORMAT = '-,---,---,--&.######',
+	COMMENTS = 'Valor de la factura EX-FABRICA en Moneda Base.';
+c018 = rept081.r81_tot_desp_mi, AUTONEXT, REVERSE,
+	FORMAT = '-,---,---,--&.######',
+	COMMENTS = 'Total de gastos de despacho en el país de origen.';
+c081 = FORMONLY.r81_tot_desp_mb, NOENTRY, FORMAT = '-,---,---,--&.######',
+	COMMENTS = 'Total de gastos de despacho en Moneda Base.';
+c019 = rept081.r81_tot_fob_mi, NOENTRY, FORMAT = '-,---,---,--&.######',
+	COMMENTS = 'Valor de la Factura FOB en Divisa del país origen.';
+c020 = rept081.r81_tot_fob_mb, NOENTRY, FORMAT = '-,---,---,--&.######',
+	COMMENTS = 'Valor de la Factura FOB en moneda base.';
+c082 = FORMONLY.r81_tot_flete_mi, NOENTRY, FORMAT = '-,---,---,--&.######',
+	COMMENTS = 'Valor total FLETE contratado en la moneda de importación.';
+c021 = rept081.r81_tot_flete, AUTONEXT, REVERSE,
+	FORMAT = '-,---,---,--&.######',
+	COMMENTS = 'Valor total del FLETE contratado en la moneda de costeo.';
+c083 = FORMONLY.r81_tot_car_fle_mi, NOENTRY, FORMAT = '-,---,---,--&.######',
+	COMMENTS = 'Valor total de la CARGA + FLETE en Moneda Importación.';
+c022 = rept081.r81_tot_car_fle, NOENTRY, FORMAT = '-,---,---,--&.######',
+	COMMENTS = 'Valor total de la CARGA + FLETE en moneda base.';
+c084 = FORMONLY.r81_tot_seguro_mi, NOENTRY, FORMAT = '-,---,---,--&.######',
+	COMMENTS = 'Valor Seguro (sin tasas ni impuestos) > Primas en Moneda Import.';
+c023 = rept081.r81_tot_seguro, AUTONEXT, REVERSE,
+	FORMAT = '-,---,---,--&.######',
+	COMMENTS = 'Valor del Seguro (sin tasas ni impuestos) > Primas.';
+c085 = FORMONLY.r81_tot_seg_neto_mi, NOENTRY, FORMAT = '-,---,---,--&.######',
+	COMMENTS = 'Valor Seguro (con tasas - sin IVA) para costos en Moneda Import.';
+c024 = rept081.r81_tot_seg_neto, AUTONEXT, REVERSE,
+	FORMAT = '-,---,---,--&.######',
+	COMMENTS = 'Valor del Seguro (con tasas - sin IVA) para costos.';
+c086 = FORMONLY.r81_tot_cargos_mi, NOENTRY, FORMAT = '-,---,---,--&.######',
+	COMMENTS = 'Valor total de CARGA + FLETE + SEGURO TOTAL en Moneda Import.';
+c025 = rept081.r81_tot_cargos_mb, NOENTRY, FORMAT = '-,---,---,--&.######',
+	COMMENTS = 'Valor total de CARGA + FLETE + SEGURO TOTAL en moneda base.';
+
+a1   = FORMONLY.moneda1, NOENTRY, UPSHIFT;
+a2   = FORMONLY.moneda2, NOENTRY, REVERSE, UPSHIFT;
+a3   = FORMONLY.moneda3, NOENTRY, UPSHIFT;
+a4   = FORMONLY.moneda4, NOENTRY, UPSHIFT;
+a5   = FORMONLY.moneda5, NOENTRY, REVERSE, UPSHIFT;
+a6   = FORMONLY.moneda6, NOENTRY, UPSHIFT;
+a7   = FORMONLY.moneda7, NOENTRY, REVERSE, UPSHIFT;
+a8   = FORMONLY.moneda8, NOENTRY, REVERSE, UPSHIFT;
+a9   = FORMONLY.moneda9, AUTONEXT, UPSHIFT;
+a10  = FORMONLY.moneda10, AUTONEXT, UPSHIFT;
+a11  = FORMONLY.moneda11, AUTONEXT, UPSHIFT;
+a12  = FORMONLY.moneda12, AUTONEXT, UPSHIFT;
+a13  = FORMONLY.moneda13, AUTONEXT, UPSHIFT;
+a14  = FORMONLY.moneda14, AUTONEXT, UPSHIFT;
+a15  = FORMONLY.moneda15, AUTONEXT, UPSHIFT;
+a16  = FORMONLY.moneda16, AUTONEXT, UPSHIFT;
+
+--------------------------------------------------------------------------------
+
+
+------------------------------ DETALLE ADUANA ----------------------------------
+
+c076 = FORMONLY.tit_partida, NOENTRY, REVERSE, UPSHIFT;
+c077 = FORMONLY.sub_titulo,  NOENTRY, REVERSE, UPSHIFT;
+c047 = gent016.g16_desc_par, NOENTRY, REVERSE, UPSHIFT,
+	WORDWRAP COMPRESS, SCROLL;
+c046 = rept082.r82_partida, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Partida arancelaria de este Item.';
+c038 = rept082.r82_item, AUTONEXT, REVERSE, UPSHIFT, OPTIONS='-nolist',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Codigo de Item (ACERO).';
+c039 = rept082.r82_cod_item_prov, AUTONEXT, REVERSE, UPSHIFT, OPTIONS='-nolist',
+	COMMENTS = 'Codigo de Item de pedido del proveedor.';
+c040 = rept082.r82_descripcion, SCROLL, AUTONEXT, REVERSE, UPSHIFT,
+	OPTIONS='-nolist',
+	COMMENTS = 'Descripción del Item de pedido del proveedor.';
+c041 = rept082.r82_cod_unid, AUTONEXT, REVERSE, UPSHIFT, OPTIONS='-nolist',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Codigo de la unidad.';
+c042 = rept082.r82_cantidad, AUTONEXT, REVERSE, UPSHIFT, FORMAT = "######&.##",
+	OPTIONS='-nolist',
+	COMMENTS = 'Cantidad de Items que se piden de este codigo.';
+c049 = rept082.r82_peso_item, AUTONEXT, REVERSE, UPSHIFT, FORMAT = "####&.####",
+	OPTIONS='-nolist',
+	COMMENTS = 'Peso en kilos del Item.';
+c051 = FORMONLY.total_peso TYPE DECIMAL, NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = "#,###,##&.##", OPTIONS='-nolist';
+c043 = rept082.r82_prec_exfab, AUTONEXT, REVERSE, FORMAT = '--,---,--&.####',
+	OPTIONS='-nolist',
+	COMMENTS = 'Precio unitario de factura del proveedor en Divisa de facturación.';
+--c044 = rept082.r82_prec_fob_mi, NOENTRY, REVERSE, FORMAT = '--,---,--&.####',
+--	OPTIONS='-nolist',
+--	COMMENTS = 'Precio unitario proveedor incluyendo gastos hasta puerto - Divisa facturación.';
+--c045 = rept082.r82_prec_fob_mb, NOENTRY, REVERSE, FORMAT = '--,---,--&.####',
+--	OPTIONS='-nolist',
+--	COMMENTS = 'Precio unitario proveedor incluyendo gastos hasta puerto - Moneda Base.';
+c052 = FORMONLY.total_fob TYPE DECIMAL, NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = "--,---,--&.####", OPTIONS='-nolist';
+c055 = FORMONLY.vm_total_cant TYPE DECIMAL, NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = "--,---,--&.####";
+c056 = FORMONLY.vm_total_pesgen TYPE DECIMAL, NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = "--,---,--&.####";
+c057 = FORMONLY.vm_total_fobgen TYPE DECIMAL, NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = "---,---,--&.####";
+c033 = rept081.r81_usuario, NOENTRY, REVERSE, UPSHIFT;
+c034 = rept081.r81_fecing, NOENTRY, REVERSE, UPSHIFT;
+c071 = rept016.r16_aux_cont, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c072 = FORMONLY.tit_aux_con, NOENTRY, UPSHIFT;
+
+--------------------------------------------------------------------------------
+
+c060 = FORMONLY.tit_col1,  WIDGET = 'BUTTON', CONFIG = 'F15';
+c061 = FORMONLY.tit_col2,  WIDGET = 'BUTTON', CONFIG = 'F16';
+c062 = FORMONLY.tit_col3,  WIDGET = 'BUTTON', CONFIG = 'F17';
+c063 = FORMONLY.tit_col4,  WIDGET = 'BUTTON', CONFIG = 'F18';
+c064 = FORMONLY.tit_col5,  WIDGET = 'BUTTON', CONFIG = 'F19';
+c065 = FORMONLY.tit_col6,  WIDGET = 'BUTTON', CONFIG = 'F20';
+c066 = FORMONLY.tit_col7,  WIDGET = 'BUTTON', CONFIG = 'F21';
+c067 = FORMONLY.tit_col8,  WIDGET = 'BUTTON', CONFIG = 'F22';
+c068 = FORMONLY.tit_col9,  WIDGET = 'BUTTON', CONFIG = 'F23';
+c069 = FORMONLY.tit_col10, WIDGET = 'BUTTON', CONFIG = 'F24';
+--c070 = FORMONLY.tit_col11, WIDGET = 'BUTTON', CONFIG = 'F25';
+
+x000 = FORMONLY.vm_row_current1 TYPE SMALLINT, NOENTRY;
+y000 = FORMONLY.vm_num_rows1 TYPE SMALLINT, NOENTRY;
+x001 = FORMONLY.vm_row_current2 TYPE SMALLINT, NOENTRY;
+y001 = FORMONLY.vm_num_rows2 TYPE SMALLINT, NOENTRY;
+x002 = FORMONLY.vm_row_current3 TYPE SMALLINT, NOENTRY;
+y002 = FORMONLY.vm_num_rows3 TYPE SMALLINT, NOENTRY;
+x003 = FORMONLY.vm_row_current4 TYPE SMALLINT, NOENTRY;
+y003 = FORMONLY.vm_num_rows4 TYPE SMALLINT, NOENTRY;
+END
+KEYS
+F5 = 'Subtitulos'
+F6 = 'Item'
+F7 = 'Partida'
 INSTRUCTIONS
 DELIMITERS '||'
-SCREEN RECORD rm_prof[17] (numprof, numprev, nomcli, fecing) 
+SCREEN RECORD rm_detadu[4] (r82_partida, r82_item, r82_cod_item_prov,
+				r82_descripcion, r82_cod_unid, r82_cantidad,
+				r82_peso_item, FORMONLY.total_peso,
+				r82_prec_exfab, FORMONLY.total_fob)

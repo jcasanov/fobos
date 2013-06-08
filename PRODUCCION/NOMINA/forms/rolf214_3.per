@@ -1,0 +1,98 @@
+DATABASE aceros
+SCREEN
+{
+                    CAPACIDAD DE PAGO DE UN EMPLEADO
+                    -------------------------------
+
+     Empleado: [c002][c003                                         ]
+
+  Anticipos Pendientes                             [c060] de [c061]
+  [c010  |c011|b0|c012      |c013      |c014         |c015         ]
+ [c020  |c021|c0|c022      |c023      |c024         |c025         ]
+ [c020  |c021|c0|c022      |c023      |c024         |c025         ]
+ [c020  |c021|c0|c022      |c023      |c024         |c025         ]
+                             Totales: [c052         |c053         ]
+
+ Ultimas Doce Liquidaciones de Nómina               [c062] de [c063]
+ [b1|c030      |c031      |c032         |c033         |c034         ]
+[c1|c040      |c041      |c042         |c043         |c044         ]
+[c1|c040      |c041      |c042         |c043         |c044         ]
+[c1|c040      |c041      |c042         |c043         |c044         ]
+[c1|c040      |c041      |c042         |c043         |c044         ]
+[c1|c040      |c041      |c042         |c043         |c044         ]
+                Totales: [c054         |c055         |c056         ]
+}
+TABLES
+gent034
+rolt030
+rolt032
+rolt046
+ATTRIBUTES
+c002 = rolt032.n32_cod_trab, NOENTRY, UPSHIFT, REVERSE;
+c003 = rolt030.n30_nombres, NOENTRY, UPSHIFT, REVERSE;
+
+c010 = FORMONLY.tit_col1,  WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2,  WIDGET = 'BUTTON', CONFIG = 'F16';
+b0   = FORMONLY.tit_col3,  WIDGET = 'BUTTON', CONFIG = 'F17';
+c012 = FORMONLY.tit_col4,  WIDGET = 'BUTTON', CONFIG = 'F18';
+c013 = FORMONLY.tit_col5,  WIDGET = 'BUTTON', CONFIG = 'F19';
+c014 = FORMONLY.tit_col6,  WIDGET = 'BUTTON', CONFIG = 'F20';
+c015 = FORMONLY.tit_col7,  WIDGET = 'BUTTON', CONFIG = 'F21';
+
+b1   = FORMONLY.tit_col8,  WIDGET = 'BUTTON', CONFIG = 'F22';
+c030 = FORMONLY.tit_col9,  WIDGET = 'BUTTON', CONFIG = 'F23';
+c031 = FORMONLY.tit_col10,  WIDGET = 'BUTTON', CONFIG = 'F24';
+c032 = FORMONLY.tit_col11, WIDGET = 'BUTTON', CONFIG = 'F25';
+c033 = FORMONLY.tit_col12, WIDGET = 'BUTTON', CONFIG = 'F26';
+c034 = FORMONLY.tit_col13, WIDGET = 'BUTTON', CONFIG = 'F27';
+
+c020 = rolt046.n46_num_prest, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c021 = rolt046.n46_secuencia, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c0   = rolt046.n46_cod_liqrol, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c022 = rolt046.n46_fecha_ini, NOENTRY, UPSHIFT, OPTIONS = '-nolist',
+	FORMAT = 'dd-mm-yyyy';
+c023 = rolt046.n46_fecha_fin, NOENTRY, UPSHIFT, OPTIONS = '-nolist',
+	FORMAT = 'dd-mm-yyyy';
+c024 = rolt046.n46_valor, NOENTRY, UPSHIFT, OPTIONS = '-nolist',
+	FORMAT = '##,###,##&.##';
+c025 = rolt046.n46_saldo, NOENTRY, UPSHIFT,
+	FORMAT = '##,###,##&.##', OPTIONS = '-nolist';
+
+c1   = rolt032.n32_cod_liqrol, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c040 = rolt032.n32_fecha_ini, NOENTRY, UPSHIFT, OPTIONS = '-nolist',
+	FORMAT = 'dd-mm-yyyy';
+c041 = rolt032.n32_fecha_fin, NOENTRY, UPSHIFT, OPTIONS = '-nolist',
+	FORMAT = 'dd-mm-yyyy';
+c042 = rolt032.n32_tot_ing, NOENTRY, UPSHIFT, OPTIONS = '-nolist',
+	FORMAT = '##,###,##&.##';
+c043 = rolt032.n32_tot_egr, NOENTRY, UPSHIFT,
+	FORMAT = '##,###,##&.##', OPTIONS = '-nolist';
+c044 = rolt032.n32_tot_neto, NOENTRY, UPSHIFT,
+	FORMAT = '##,###,##&.##', OPTIONS = '-nolist';
+
+c052 = FORMONLY.total_valor TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '##,###,##&.##';
+c053 = FORMONLY.total_saldo TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '##,###,##&.##';
+
+c054 = FORMONLY.total_ing TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '##,###,##&.##';
+c055 = FORMONLY.total_egr TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '##,###,##&.##';
+c056 = FORMONLY.total_net TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '##,###,##&.##';
+
+c060 = FORMONLY.vm_cur_prest TYPE SMALLINT, NOENTRY, UPSHIFT;
+c061 = FORMONLY.vm_num_prest TYPE SMALLINT, NOENTRY, UPSHIFT;
+c062 = FORMONLY.vm_cur_detliq TYPE SMALLINT, NOENTRY, UPSHIFT;
+c063 = FORMONLY.vm_num_detliq TYPE SMALLINT, NOENTRY, UPSHIFT;
+END
+KEYS
+F6 = 'Anticipo'
+F7 = 'Liquidación'
+INSTRUCTIONS
+SCREEN RECORD rm_detprest[3] (n46_num_prest, n46_secuencia, n46_cod_liqrol,
+				n46_fecha_ini, n46_fecha_fin, n46_valor,
+				n46_saldo)
+SCREEN RECORD rm_detliq[5]   (n32_cod_liqrol, n32_fecha_ini, n32_fecha_fin,
+				n32_tot_ing, n32_tot_egr, n32_tot_neto)

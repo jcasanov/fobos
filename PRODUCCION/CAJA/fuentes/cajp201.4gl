@@ -13,6 +13,7 @@ DEFINE rm_j04   	RECORD LIKE cajt004.*
 DEFINE rm_j02   	RECORD LIKE cajt002.*
 DEFINE vm_demonios      VARCHAR(12)
 DEFINE vm_detalle	SMALLINT
+DEFINE vm_size_arr	INTEGER
 
 DEFINE r_detalle	ARRAY[100] OF RECORD
 	g13_nombre		LIKE gent013.g13_nombre,
@@ -32,12 +33,14 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/cajp201.error')
-CALL fgl_init4js()
+--CALL startlog('../logs/errores')
+CALL startlog('../logs/cajp201.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN
-     CALL FGL_WINMESSAGE(vg_producto,'Número de parámetros incorrecto','stop')
-     EXIT PROGRAM
+     	--CALL FGL_WINMESSAGE(vg_producto,'Número de parámetros incorrecto','stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
+     	EXIT PROGRAM
 END IF
 LET vg_base     = arg_val(1)
 LET vg_modulo   = arg_val(2)
@@ -47,7 +50,7 @@ LET vg_proceso = 'cajp201'
 
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 
 CALL funcion_master()
@@ -57,17 +60,35 @@ END MAIN
 
 
 FUNCTION funcion_master()
-DEFINE flag	SMALLINT
+DEFINE flag		SMALLINT
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
 CALL fl_nivel_isolation()
 
-OPEN WINDOW w_201 AT 3,2 WITH 20 ROWS, 80 COLUMNS
-    ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE 0, BORDER,
-	      MESSAGE LINE LAST - 2)
-OPEN FORM f_201 FROM '../forms/cajf201_1'
+LET lin_menu = 0
+LET row_ini  = 3
+LET num_rows = 20
+LET num_cols = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW w_201 AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
+    ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE lin_menu,BORDER,
+	      MESSAGE LINE LAST - 1)
+IF vg_gui = 1 THEN
+        OPEN FORM f_201 FROM '../forms/cajf201_1'
+ELSE
+        OPEN FORM f_201 FROM '../forms/cajf201_1c'
+END IF
 DISPLAY FORM f_201
 
-CALL control_display_botones()
+CALL control_DISPLAY_botones()
 
 INITIALIZE rm_j04.*, rm_j02.* TO NULL
 
@@ -78,12 +99,13 @@ MENU 'OPCIONES'
 		IF flag = 0 THEN
 			HIDE OPTION 'Reaperturar'
 		END IF
-		IF vm_detalle > FGL_SCR_SIZE('r_detalle') THEN
+		CALL retorna_arreglo()
+		IF vm_detalle > vm_size_arr THEN
 			SHOW OPTION 'Ver Detalle'
 		END IF
 
 	COMMAND KEY('V') 'Ver Detalle' 'Ver Detalle de la apertura.'
-		CALL control_display_array_cajt005()
+		CALL control_DISPLAY_array_cajt005()
 
 	COMMAND KEY('P') 'Reaperturar' 	
 		LET flag = control_reapertura()
@@ -100,27 +122,31 @@ END FUNCTION
 
 
 
-FUNCTION control_display_botones()
+FUNCTION control_DISPLAY_botones()
 	
-	DISPLAY 'Moneda' 		 TO tit_col1
-	DISPLAY 'Efectivo Apertura'	 TO tit_col2
-	DISPLAY 'Cheque Apertura'  	 TO tit_col3
-	DISPLAY 'Total'		  	 TO tit_col4
+	--#DISPLAY 'Moneda' 		 TO tit_col1
+	--#DISPLAY 'Efectivo Apertura'	 TO tit_col2
+	--#DISPLAY 'Cheque Apertura'  	 TO tit_col3
+	--#DISPLAY 'Total'		  	 TO tit_col4
 
 END FUNCTION
 
 
 
-FUNCTION control_display_array_cajt005()
+FUNCTION control_DISPLAY_array_cajt005()
 
 CALL set_count(vm_detalle)
 DISPLAY ARRAY r_detalle TO r_detalle.* 
-        BEFORE DISPLAY
-                CALL dialog.keysetlabel('ACCEPT','')
-        AFTER DISPLAY
-                CONTINUE DISPLAY
         ON KEY(INTERRUPT)
                 EXIT DISPLAY
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
+        --#BEFORE DISPLAY
+                --#CALL dialog.keysetlabel('ACCEPT','')
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
+        --#AFTER DISPLAY
+                --#CONTINUE DISPLAY
 END DISPLAY
 
 END FUNCTION
@@ -136,11 +162,13 @@ CALL fl_retorna_caja(vg_codcia, vg_codloc, vg_usuario)
 	RETURNING rm_j02.*
 
 IF rm_j02.j02_usua_caja IS NULL THEN
-	CALL FGL_WINMESSAGE(vg_producto,'El usuario '|| vg_usuario || ' no tiene asignada una caja.','exclamation')
+	--CALL FGL_WINMESSAGE(vg_producto,'El usuario '|| vg_usuario || ' no tiene asignada una caja.','exclamation')
+	CALL fl_mostrar_mensaje('El usuario '|| vg_usuario || ' no tiene asignada una caja.','exclamation')
 	RETURN 0
 END IF
 
-FOR i = 1 TO FGL_SCR_SIZE('r_detalle')
+CALL retorna_arreglo()
+FOR i = 1 TO vm_size_arr
 	INITIALIZE r_detalle[i].* TO NULL
 END FOR
 
@@ -157,14 +185,14 @@ SELECT * INTO rm_j04.* FROM cajt004
                                           AND j04_fecha_aper  = TODAY)
 			
 IF rm_j04.j04_fecha_aper IS NULL THEN
-	CALL FGL_WINMESSAGE(vg_producto,'La caja no ha sido aperturada.',
-			    'exclamation' )
+	--CALL FGL_WINMESSAGE(vg_producto,'La caja no ha sido aperturada.','exclamation' )
+	CALL fl_mostrar_mensaje('La caja no ha sido aperturada.','exclamation' )
 	RETURN 0
 END IF
 
 IF rm_j04.j04_fecha_aper IS NOT NULL AND rm_j04.j04_fecha_cierre IS NULL THEN
-	CALL FGL_WINMESSAGE(vg_producto,'La caja ' || rm_j02.j02_nombre_caja ||
-' no ha sido cerrada en la fecha '|| rm_j04.j04_fecha_aper || '.', 'exclamation')
+	--CALL FGL_WINMESSAGE(vg_producto,'La caja ' || rm_j02.j02_nombre_caja || ' no ha sido cerrada en la fecha ' || rm_j04.j04_fecha_aper || '.', 'exclamation')
+	CALL fl_mostrar_mensaje('La caja ' || rm_j02.j02_nombre_caja || ' no ha sido cerrada en la fecha ' || rm_j04.j04_fecha_aper || '.', 'exclamation')
 	RETURN 0
 END IF
 
@@ -217,7 +245,7 @@ DEFINE secuencia	LIKE cajt004.j04_secuencia
 DEFINE r_j05		RECORD LIKE cajt005.*
 
 INITIALIZE secuencia TO NULL
-
+BEGIN WORK
 SELECT MAX(j04_secuencia) + 1 INTO secuencia FROM cajt004
 	WHERE j04_compania    = vg_codcia
 	  AND j04_localidad   = vg_codloc
@@ -258,46 +286,33 @@ FOR i = 1 TO vm_detalle
 	INSERT INTO cajt005 VALUES (r_j05.*)
 
 END FOR
-
-CALL FGL_WINMESSAGE(vg_producto,'La caja ha sido reaperturada.','info')
+COMMIT WORK
+CALL fl_mostrar_mensaje('La caja ha sido reaperturada.', 'info')
+CALL fl_verificar_dias_validez_sri(vg_codcia, vg_codloc, 'FA')
+CALL fl_verificar_dias_validez_sri(vg_codcia, vg_codloc, 'NV')
 RETURN 1
 
 END FUNCTION
 
 
-
-FUNCTION validar_parametros()
-                                                                                
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-        CALL FGL_WINMESSAGE(vg_producto, 'No existe módulo: ' || vg_modulo,
- 			    'stop')
-        EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-        CALL FGL_WINMESSAGE(vg_producto, 'No existe compañía: '|| vg_codcia,
-			    'stop')
-        EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-     CALL FGL_WINMESSAGE(vg_producto, 'Compañía no está activa: ' 
-			 || vg_codcia, 'stop')
-     EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-        LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-        CALL FGL_WINMESSAGE(vg_producto, 'No existe localidad: ' || vg_codloc,
-			    'stop')
-        EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-      CALL FGL_WINMESSAGE(vg_producto, 'Localidad no está activa: '|| vg_codloc, 			  'stop')
-      EXIT PROGRAM
+FUNCTION retorna_arreglo()
+--#LET vm_size_arr = fgl_scr_size('r_detalle')
+IF vg_gui = 0 THEN
+        LET vm_size_arr = 8
 END IF
                                                                                 
 END FUNCTION
 
+
+
+FUNCTION llamar_visor_teclas()
+DEFINE a		CHAR(1)
+
+IF vg_gui = 0 THEN
+	CALL fl_visor_teclas_caracter() RETURNING int_flag 
+	LET a = fgl_getkey()
+	CLOSE WINDOW w_tf
+	LET int_flag = 0
+END IF
+
+END FUNCTION

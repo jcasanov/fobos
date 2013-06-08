@@ -1,0 +1,30 @@
+DATABASE aceros
+
+SCREEN
+{
+  BODEGAS 
+ --------------------------------
+  Cod.  Descripción 		
+ --------------------------------
+ [c01] [c002                    ] 
+ [c01] [c002                    ]
+ [c01] [c002                    ]
+ [c01] [c002                    ]
+ [c01] [c002                    ]
+ [c01] [c002                    ]
+ [c01] [c002                    ] 
+ [c01] [c002                    ] 
+ [c01] [c002                    ] 
+ [c01] [c002                    ] 
+}
+
+TABLES
+veht002
+
+ATTRIBUTES
+c01 = v02_bodega,REVERSE;
+c002 = v02_nombre,REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_bodveh[10](v02_bodega, v02_nombre)

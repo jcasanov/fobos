@@ -1,0 +1,70 @@
+DATABASE aceros
+SCREEN 
+{
+
+     Devolución No: [a0|c002           ]        Fecha: [c029               ]
+          Venta No: [a1|c003           ] 
+   Ord. de Trabajo: [c014      ]               Moneda: [a4|c102            ]    
+            Chasís: [c108                     ]          Placa: [c101      ]
+           Cliente: [c006       |c007                                      ]
+          Vendedor: [c011  ] [c103                                         ]
+            Bodega: [a2] [c104                ]     
+       Dev     Desp      Item      Desc  Pre/Cos Unit.        Total
+      [c035   |c036   |c033     ] [c045 |c041          |c105            ]
+      [c035   |c036   |c033     ] [c045 |c041          |c105            ]
+      [c035   |c036   |c033     ] [c045 |c041          |c105            ]
+      [c035   |c036   |c033     ] [c045 |c041          |c105            ]
+      [c035   |c036   |c033     ] [c045 |c041          |c105            ]
+		                             Subtotal: [c030            ]
+    Item: [c106                         ]   Descuento: [c031            ]
+				               I.V.A.: [c023            ]
+    Ingresado Por: [c028      ]                 Total: [c025            ]
+}
+TABLES
+rept019
+rept020
+ATTRIBUTES
+a0   = rept019.r19_cod_tran, NOENTRY, REVERSE, UPSHIFT,
+	COMMENTS='(DR) Devolución Requisición (DF) Devolución Factura';
+a1   = rept019.r19_tipo_dev, NOENTRY, REVERSE, UPSHIFT;
+c002 = rept019.r19_num_tran, NOENTRY, REVERSE;
+c003 = rept019.r19_num_dev, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c006 = rept019.r19_codcli, NOENTRY; 
+c007 = rept019.r19_nomcli, NOENTRY, REVERSE, UPSHIFT;
+c011 = rept019.r19_vendedor, NOENTRY, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c014 = rept019.r19_ord_trabajo, NOENTRY, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+a2 = rept019.r19_bodega_ori, NOENTRY, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+a4 = rept019.r19_moneda, REVERSE, NOENTRY;
+c025 = rept019.r19_tot_neto, NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+c023 = FORMONLY.iva TYPE DECIMAL (12,2), NOENTRY, REVERSE,
+	FORMAT='#,###,###,##&.##';
+c031 = rept019.r19_tot_dscto, NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+c030 = rept019.r19_tot_bruto, NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+c028 = rept019.r19_usuario, NOENTRY, REVERSE, UPSHIFT;
+c029 = rept019.r19_fecing, NOENTRY, REVERSE;
+
+c033 = rept020.r20_item, UPSHIFT, NOENTRY, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c035 = rept020.r20_cant_dev, INCLUDE=(0.01 TO 9999.99),FORMAT = '###&.##';
+c036 = rept020.r20_cant_ven, NOENTRY,FORMAT = '###&.##';
+c041 = rept020.r20_precio, FORMAT='###,###,##&.##', NOENTRY;
+c045 = rept020.r20_descuento, FORMAT='#&.##', NOENTRY;
+c105 = FORMONLY.total TYPE DECIMAL (12,2), NOENTRY, FORMAT='#,###,###,##&.##';
+
+c101 = FORMONLY.n_placa, NOENTRY;
+c102 = FORMONLY.n_moneda, NOENTRY;
+c103 = FORMONLY.n_vendedor, NOENTRY;
+c104 = FORMONLY.n_bodega, NOENTRY;
+c108 = FORMONLY.n_chasis, NOENTRY;
+
+c106 = FORMONLY.descripcion, NOENTRY;
+
+end
+
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD ra_venta[5] (r20_cant_dev, r20_cant_ven, r20_item, r20_descuento, r20_precio, total)

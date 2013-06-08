@@ -1,24 +1,26 @@
 DATABASE formonly
 SCREEN
 {
-   [f000          ]                
-------------------------------------------
-   [f001                               ]	
-   [f001                               ]	
-   [f001                               ]	
-   [f001                               ]	
-   [f001                               ]	
-   [f001                               ]	
-   [f001                               ]	
-   [f001                               ]	
-   [f001                               ]	
-   [f001                               ]	
-   [f001                               ]	
+                         ============================
+   =======================   MENU CONFIGURACIONES   =======================
+   =                     ============================                     =
+   =                                                                      =
+   =       [f003                 ]          [f003                 ]       = 
+   =       [f003                 ]          [f003                 ]       =  
+   =       [f003                 ]          [f003                 ]       =    
+   =       [f003                 ]          [f003                 ]       =  
+   =       [f003                 ]          [f003                 ]       = 
+   =       [f003                 ]          [f003                 ]       =
+   =       [f003                 ]          [f003                 ]       =
+   =       [f003                 ]          [f003                 ]       =
+   =       [f003                 ]          [f003                 ]       =
+   =                                                                      =
+   ========================================================================
+   =               Ubíquese en la opción y presione <ENTER>               =
+   ========================================================================
 }
-attributes
-f000 = formonly.titulo, REVERSE;
-f001 = formonly.opcion;
+ATTRIBUTES
+f003 = FORMONLY.opcion;
 INSTRUCTIONS
 DELIMITERS "  "
-SCREEN RECORD r_menu_rep_1 [11] (formonly.opcion)
-
+SCREEN RECORD r_menu_rep1 [18] (FORMONLY.opcion)

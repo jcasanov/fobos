@@ -1,0 +1,26 @@
+DATABASE aceros
+SCREEN
+{
+
+
+                                                         Estado: [c|c001     ]
+
+    Código Eléctrico: [c004         ] [c005                               ]
+
+       Ingresado Por: [c006      ]
+    Fecha de Ingreso: [c007               ]
+
+}
+TABLES rept074
+ATTRIBUTES
+c    = rept074.r74_estado, NOENTRY, UPSHIFT, REVERSE,
+	COMMENTS = 'A Activo  E Eliminado';
+c001 = FORMONLY.tit_estado, NOENTRY, UPSHIFT, REVERSE;
+c004 = rept074.r74_electrico, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c005 = rept074.r74_descripcion, AUTONEXT, UPSHIFT, REVERSE;
+c006 = rept074.r74_usuario, REVERSE, NOENTRY, UPSHIFT;
+c007 = rept074.r74_fecing, REVERSE, NOENTRY, UPSHIFT;
+end
+INSTRUCTIONS
+DELIMITERS '||'

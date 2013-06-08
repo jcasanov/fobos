@@ -1,0 +1,73 @@
+DATABASE aceros
+SCREEN
+{
+
+   No. Gasto: [c000       ]    	                       Estado: [a|a100     ]
+       Orden: [c001       ]                      Estado Orden: [b|b100     ]
+     Cliente: [c002     ] [c101                                            ]
+      Modelo: [c003           ] 
+      Origen: [c005                   ] Destino:[c006                      ]
+Fecha Inicio: [c007      ]                           Fecha Fin: [c008      ]
+      Moneda: [a1] [c102              ]                Recargo: [c009  ] %
+  Decripción: [c010                                                        ]
+              [c010                                                        ]
+
+            Descripción Gasto          Mo        Valor      Valor Moneda OT  
+ [c011                                |a2] [c012          |c013            ]
+ [c011                                |a2] [c012          |c013            ]
+ [c011                                |a2] [c012          |c013            ]
+ [c011                                |a2] [c012          |c013            ]
+                                                          [c014            ]
+  Ingresado Por: [c015      ]       Fecha de Ingreso: [c016               ]
+}
+
+TABLES
+talt023
+talt030
+talt031
+
+ATTRIBUTES
+c000 = talt030.t30_num_gasto, NOENTRY, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c001 = t30_num_ot, UPSHIFT, AUTONEXT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c002 = t23_cod_cliente, NOENTRY, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c003 = talt023.t23_modelo, NOENTRY, UPSHIFT, REVERSE;
+c005 = talt030.t30_origen,  UPSHIFT, REVERSE;
+c006 = talt030.t30_destino, UPSHIFT, REVERSE;
+c007 = talt030.t30_fec_ini_viaje, UPSHIFT, FORMAT='dd-mm-yyyy', REVERSE,
+	COMMENTS='Ingrese fecha en formato: dd-mm-aaaa';
+c008 = talt030.t30_fec_fin_viaje, UPSHIFT, FORMAT='dd-mm-yyyy', REVERSE,
+	COMMENTS='Ingrese fecha en formato: dd-mm-aaaa';
+c009 = talt030.t30_recargo, UPSHIFT, REVERSE, FORMAT='##&.##', INCLUDE=(0 TO 999.99);
+c010 = talt030.t30_desc_viaje, UPSHIFT, WORDWRAP COMPRESS;
+
+c011 = talt031.t31_descripcion, UPSHIFT;
+a2   = talt031.t31_moneda, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c012 = talt031.t31_valor, UPSHIFT, FORMAT='###,###,##&.##';
+c013 = formonly.valor_mb TYPE DECIMAL (12,2), UPSHIFT,
+	FORMAT='#,###,###,##&.##', NOENTRY;
+
+c014 = talt030.t30_tot_gasto, NOENTRY, UPSHIFT, FORMAT='#,###,###,##&.##';
+c015 = talt030.t30_usuario, NOENTRY, UPSHIFT;
+c016 = talt030.t30_fecing, NOENTRY;
+
+a1   = talt030.t30_moneda, UPSHIFT, NOENTRY, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+
+a    = talt030.t30_estado,    NOENTRY, UPSHIFT, AUTONEXT, REVERSE,
+	COMMENTS='(A)ctivo (E)liminado';
+b    = t23_estado, NOENTRY, UPSHIFT, AUTONEXT, REVERSE, 
+	COMMENTS='(A)ctivo (C)errada (F)acturada (E)liminada (D)evuelta';
+
+a100 = formonly.n_est_gasto,    NOENTRY, REVERSE;
+b100 = formonly.n_est_orden,    NOENTRY, REVERSE;
+c101 = talt023.t23_nom_cliente, NOENTRY, UPSHIFT;
+c102 = formonly.n_moneda,       NOENTRY;
+END
+
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD ra_gastos[4] (t31_descripcion, t31_moneda, t31_valor, valor_mb)

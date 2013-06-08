@@ -1,0 +1,16 @@
+DATABASE aceros
+SCREEN
+{
+
+
+               Anio: [c000]            Mes: [c0] [c001       ]
+
+}
+TABLES
+rolt080
+ATTRIBUTES
+c000 = rolt080.n80_ano, AUTONEXT, UPSHIFT, REVERSE, INCLUDE = (1980 TO 2099);
+c0   = rolt080.n80_mes, AUTONEXT, UPSHIFT, REVERSE, INCLUDE = (01 TO 12),
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = FORMONLY.tit_mes, NOENTRY, UPSHIFT, REVERSE;
+END

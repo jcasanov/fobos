@@ -1,0 +1,41 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+ Ordenes de Compra cargadas a la O.T.: [c000  ] que se pueden ANULAR
+                              Factura: [c001  ]
+                                                    [c002] de [c003]
+  E   OT   Fecha Recp.       R e f e r e n c i a         Valor OT  C
+ [e|c020  |c021      |c022                             |c023      |f]
+ [e|c020  |c021      |c022                             |c023      |f]
+ [e|c020  |c021      |c022                             |c023      |f]
+ [e|c020  |c021      |c022                             |c023      |f]
+ [e|c020  |c021      |c022                             |c023      |f]
+ [e|c020  |c021      |c022                             |c023      |f]
+                                                Total: [c030      ]
+
+}
+ATTRIBUTES
+c000 = FORMONLY.num_ot, NOENTRY, REVERSE;
+c001 = FORMONLY.num_fac, NOENTRY, REVERSE;
+
+c002 = FORMONLY.cur_row, NOENTRY, UPSHIFT, REVERSE;
+c003 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+
+e    = FORMONLY.estado, NOENTRY, UPSHIFT;
+c020 = FORMONLY.orden_compra, NOENTRY, UPSHIFT;
+c021 = FORMONLY.fecha TYPE DATE, FORMAT = 'dd-mm-yyyy', NOENTRY, UPSHIFT;
+c022 = FORMONLY.descripcion, NOENTRY, UPSHIFT;
+c023 = FORMONLY.subtotal TYPE DECIMAL(12,2), FORMAT = '---,--&.##',
+	NOENTRY, UPSHIFT;
+f    = FORMONLY.marcar_ot TYPE CHAR NOT NULL, INCLUDE = ('S', 'N'),
+	COMMENTS = '(S) Para anular  (N) Para pasar a nueva OT.', DEFAULT = 'S',
+	REQUIRED, UPSHIFT;
+
+c030 = FORMONLY.tot_neto TYPE DECIMAL(12,2) NOT NULL, FORMAT = '---,--&.##',
+	NOENTRY, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_oc[6] (estado, orden_compra, fecha, descripcion, subtotal,
+			marcar_ot)

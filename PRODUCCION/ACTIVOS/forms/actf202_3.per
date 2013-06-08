@@ -1,0 +1,46 @@
+DATABASE aceros
+SCREEN 
+{
+                  DATOS PARA VENTA DE ACTIVOS FIJOS
+                  --------------------------------
+
+ Fecha Venta: [c011      ]
+     El bien: [c000  ]   [c001                                    ]
+
+  Valor Bien: [c002         ]        Deprec. Acum.: [c003         ]
+   Aux. Pago: [c009         ]          Deprec. Mes: [c010         ]
+
+  Referencia: [c004                ]  Valor Actual: [c005         ]
+              [c004                ]
+              [c004                ]   Valor Venta: [c006         ]
+              [c004                ]     Valor IVA: [c007         ]
+              [c004                ]                --------------
+                                       Total Venta: [c008         ]
+
+}
+TABLES
+actt010
+ATTRIBUTES
+c000 = actt010.a10_codigo_bien, NOENTRY, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = actt010.a10_descripcion, NOENTRY, UPSHIFT;
+c002 = actt010.a10_valor_mb, NOENTRY, UPSHIFT, FORMAT = '##,###,##&.##',
+	COLOR = BLUE;
+c003 = actt010.a10_tot_dep_mb, NOENTRY, UPSHIFT, FORMAT = '##,###,##&.##',
+	COLOR = RED;
+c004 = FORMONLY.glosa TYPE CHAR NOT NULL, REQUIRED, AUTONEXT, UPSHIFT, REVERSE,
+	WORDWRAP COMPRESS, SCROLL;
+c005 = FORMONLY.valor_suge TYPE DECIMAL NOT NULL, NOENTRY, REVERSE,
+	FORMAT = '--,---,--&.##';
+c006 = FORMONLY.valor_vta TYPE DECIMAL NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	FORMAT = '--,---,--&.##';
+c007 = FORMONLY.valor_iva TYPE DECIMAL NOT NULL, NOENTRY, REVERSE,
+	FORMAT = '--,---,--&.##';
+c008 = FORMONLY.total, NOENTRY, REVERSE, UPSHIFT, FORMAT = '--,---,--&.##';
+c009 = FORMONLY.aux_pago TYPE CHAR, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c010 = FORMONLY.val_dep_mes, NOENTRY, UPSHIFT, FORMAT = '##,###,##&.##';
+c011 = FORMONLY.fec_vta TYPE DATE NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha en formato: dd-mm-aaaa.';
+END

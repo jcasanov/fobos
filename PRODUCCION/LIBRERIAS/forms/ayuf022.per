@@ -1,33 +1,43 @@
-DATABASE diteca
-
+DATABASE aceros
 SCREEN
 {
  CUENTAS BANCARIAS
-----------------------------------------------------
- Cod   Nombre	               Tipo Cuenta 
-----------------------------------------------------
-[c00 ][c01                     ][c][c002          ] 
-[c00 ][c01                     ][c][c002          ]
-[c00 ][c01                     ][c][c002          ]
-[c00 ][c01                     ][c][c002          ]
-[c00 ][c01                     ][c][c002          ]
-[c00 ][c01                     ][c][c002          ]
-[c00 ][c01                     ][c][c002          ] 
-[c00 ][c01                     ][c][c002          ] 
-[c00 ][c01                     ][c][c002          ] 
-[c00 ][c01                     ][c][c002          ] 
-}
 
+ [c000|c001                     |c|c002           |d|c003        |e] 
+[c010|c011                     |f|c012           |g|c013        |h] 
+[c010|c011                     |f|c012           |g|c013        |h] 
+[c010|c011                     |f|c012           |g|c013        |h] 
+[c010|c011                     |f|c012           |g|c013        |h] 
+[c010|c011                     |f|c012           |g|c013        |h] 
+[c010|c011                     |f|c012           |g|c013        |h] 
+[c010|c011                     |f|c012           |g|c013        |h] 
+[c010|c011                     |f|c012           |g|c013        |h] 
+[c010|c011                     |f|c012           |g|c013        |h] 
+[c010|c011                     |f|c012           |g|c013        |h] 
+
+}
 TABLES
 gent008
 gent009
-
+ctbt010
 ATTRIBUTES
-c00  = g08_banco;
-c01  = g08_nombre;
-c    = g09_tipo_cta;
-c002 = g09_numero_cta;
-END
+c000 = FORMONLY.tit_col1,      WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2,      WIDGET = 'BUTTON', CONFIG = 'F16';
+c    = FORMONLY.tit_col3,      WIDGET = 'BUTTON', CONFIG = 'F17';
+c002 = FORMONLY.tit_col4,      WIDGET = 'BUTTON', CONFIG = 'F18';
+d    = FORMONLY.tit_col5,      WIDGET = 'BUTTON', CONFIG = 'F19';
+c003 = FORMONLY.tit_col6,      WIDGET = 'BUTTON', CONFIG = 'F20';
+e    = FORMONLY.tit_col7,      WIDGET = 'BUTTON', CONFIG = 'F21';
 
+c010 = gent008.g08_banco,      NOENTRY, UPSHIFT;
+c011 = gent008.g08_nombre,     NOENTRY, UPSHIFT;
+f    = gent009.g09_tipo_cta,   NOENTRY, UPSHIFT;
+c012 = gent009.g09_numero_cta, NOENTRY, UPSHIFT;
+g    = gent009.g09_estado,     NOENTRY, UPSHIFT;
+c013 = gent009.g09_aux_cont,   NOENTRY, UPSHIFT;
+h    = ctbt010.b10_estado,     NOENTRY, UPSHIFT;
+END
 INSTRUCTIONS
-SCREEN RECORD rh_ctabco[10](g08_banco, g08_nombre, g09_tipo_cta, g09_numero_cta)
+SCREEN RECORD rh_ctabco[10] (g08_banco, g08_nombre, g09_tipo_cta,
+				g09_numero_cta, g09_estado, g09_aux_cont,
+				b10_estado)

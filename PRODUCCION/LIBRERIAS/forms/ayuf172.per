@@ -1,0 +1,43 @@
+DATABASE aceros
+SCREEN
+{
+ CODIGOS DEL SRI
+                                              [c010 ] de [c011 ]
+ [c020  |c021                                    |c022      |d|e]
+[c030  |c031                                    |c032      |f|g]
+[c030  |c031                                    |c032      |f|g]
+[c030  |c031                                    |c032      |f|g]
+[c030  |c031                                    |c032      |f|g]
+[c030  |c031                                    |c032      |f|g]
+[c030  |c031                                    |c032      |f|g]
+[c030  |c031                                    |c032      |f|g]
+[c030  |c031                                    |c032      |f|g]
+[c030  |c031                                    |c032      |f|g]
+[c030  |c031                                    |c032      |f|g]
+       [c040                                                   ]
+       [c040                                                   ]
+
+}
+TABLES
+ordt003
+ATTRIBUTES
+c010 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c011 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+
+c020 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c021 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c022 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+d    = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+e    = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+
+c030 = ordt003.c03_codigo_sri, NOENTRY, UPSHIFT;
+c031 = ordt003.c03_concepto_ret, NOENTRY, SCROLL;
+c032 = ordt003.c03_fecha_ini_porc, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+f    = ordt003.c03_tipo_fuente, NOENTRY, UPSHIFT;
+g    = ordt003.c03_estado, NOENTRY, UPSHIFT;
+
+c040 = FORMONLY.concepto, NOENTRY, REVERSE, UPSHIFT, WORDWRAP COMPRESS;
+END
+INSTRUCTIONS
+SCREEN RECORD rh_sri[10] (c03_codigo_sri, c03_concepto_ret, c03_fecha_ini_porc,
+				c03_tipo_fuente, c03_estado)

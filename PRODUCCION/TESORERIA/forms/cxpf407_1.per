@@ -1,10 +1,9 @@
-DATABASE formonly
+DATABASE FORMONLY
 SCREEN
 {
+
  Código Proveedor: [c001 ] [c002                                    ]
            Moneda: [c3]    [c004           ]
-
-    Fecha Inicial:[c010      ]        Fecha Final:[c011      ]            
 
      	     Tipo: [c005          ]    
 
@@ -12,15 +11,11 @@ SCREEN
 
 }
 ATTRIBUTES
-c001 = formonly.codprov TYPE INTEGER, WIDGET = 'FIELD_BMP', 
+c001 = FORMONLY.codprov TYPE INTEGER, WIDGET = 'FIELD_BMP', 
        CONFIG = 'lista.bmp F2', REVERSE;
-c002 = formonly.nomprov, NOENTRY;
-c3   = formonly.moneda TYPE CHAR NOT NULL, WIDGET = 'FIELD_BMP', 
+c002 = FORMONLY.nomprov, NOENTRY,REVERSE;
+c3   = FORMONLY.moneda TYPE CHAR NOT NULL, WIDGET = 'FIELD_BMP', 
        CONFIG = 'lista.bmp F2', UPSHIFT, AUTONEXT, REVERSE;
-c004 = formonly.tit_mon, NOENTRY;
-c005 = formonly.tipo, WIDGET = 'RADIO', 
+c004 = FORMONLY.tit_mon, REVERSE,NOENTRY;
+c005 = FORMONLY.tipo, WIDGET = 'RADIO', 
        CONFIG = 'R Resumido  D Detallado';
-c010 = formonly.fecha_ini, FORMAT='dd-mm-yyyy', 
-       		COMMENTS='Ingrese la fecha en formato dd-mm-yyyy';
-c011 = formonly.fecha_fin, FORMAT='dd-mm-yyyy', 
-       		COMMENTS='Ingrese la fecha en formato dd-mm-yyyy';

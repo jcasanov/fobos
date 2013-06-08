@@ -1,50 +1,68 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
 
-           No. Presupuesto: [c002    ]                  Estado: [c] [c015    ]
-                   Cliente: [c021                                            ]
-          Orden de Trabajo: [c001    ]     Modelo: [c017           ]
-                                           Chasis: [c018                     ]
-                                            Color: [c019           ]
-        Motivo Presupuesto: [c003                                    ]
-                            [c003                                    ]
-                            [c003                                    ]
-      Recargo Mano de Obra: [c006  ] %          Recargo Repuestos: [c007  ] % 
-                    Moneda: [c0] [c016            ]
-          Precisión Moneda: [c008  ]
-             Total en M.O.: [c009          ]
-       Total de Respuestos: [c010          ]
-        Usuario que Aprobó: [c011      ]
-       Fecha de Aprobación: [c012               ]
+     No. Presupuesto: [c001    ]                         Estado: [c|c002     ]
 
-       Usuario: [c013      ]           Fecha de Ingreso: [c014               ]
+             Cliente: [c003  ] [c004                                         ]
+           Dirección: [c005                                    ]
+            Teléfono: [c006      ]             Ced/RUC/Pas: [c026            ]
+  Motivo Presupuesto: [c007                                                  ]
+                      [c007                                                  ]
+       Observaciones: [c050                                    ]
+              Moneda: [c0] [c010            ]
+                                          Total M.O. Interna: [c011          ]
+    Orden de Trabajo: [c013    ]         Total de Materiales: [c012          ] 
+                                               Trab. Externo: [c021          ]
+  Usuario que Aprobó: [c015      ]               Total Bruto: [c053          ]
+ Fecha de Aprobación: [c016               ] Desc.M.O.Interna: [c052          ]
+                                                    SubTotal: [c054          ]
+  Usuario que Modif.: [c027      ]                  Impuesto: [c022          ]
+ Fecha de Modificac.: [c028               ]     Otros Mater.: [c023          ]
+             Usuario: [c017      ]              Otros Gastos: [c024          ]
+    Fecha de Ingreso: [c018               ]       Total Neto: [c025          ]
 }
 TABLES
 talt020
+talt023
 ATTRIBUTES
-c001 = talt020.t20_orden, AUTONEXT, REVERSE,
-	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c002 = talt020.t20_numpre, AUTONEXT, REVERSE,
+c001 = talt020.t20_numpre, AUTONEXT, REVERSE,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
-	COMMENTS = 'El número lo genera el sistema automáticamente';
-c003 = talt020.t20_motivo, AUTONEXT, REVERSE, UPSHIFT, WORDWRAP COMPRESS;
-c006 = talt020.t20_recargo_mo, AUTONEXT, REVERSE, INCLUDE = (0 TO 99.99);
-c007 = talt020.t20_recargo_rp, AUTONEXT, REVERSE, INCLUDE = (0 TO 99.99);
+	COMMENTS = 'El número lo genera el sistema automaticamente';
+c    = talt020.t20_estado, NOENTRY, REVERSE, UPSHIFT;
+c002 = FORMONLY.tit_estado_tal, NOENTRY, UPSHIFT;
+c003 = t20_cod_cliente, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c004 = t20_nom_cliente, UPSHIFT, REVERSE;
+c005 = t20_dir_cliente, UPSHIFT;
+c006 = t20_tel_cliente;
+c026 = talt020.t20_cedruc, AUTONEXT, REVERSE, UPSHIFT;
+c007 = talt020.t20_motivo, AUTONEXT, REVERSE, UPSHIFT, SCROLL,WORDWRAP COMPRESS;
+c050 = talt020.t20_observaciones, AUTONEXT, UPSHIFT;
 c0   = talt020.t20_moneda, AUTONEXT, REVERSE,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c008 = talt020.t20_precision, NOENTRY, REVERSE;
-c009 = talt020.t20_total_mo, NOENTRY, REVERSE, FORMAT = '###,###,##&.##';
-c010 = talt020.t20_total_rp, NOENTRY, REVERSE, FORMAT = '###,###,##&.##';
-c011 = talt020.t20_user_aprob, NOENTRY, UPSHIFT;
-C012 = talt020.t20_fecha_aprob, NOENTRY, UPSHIFT;
-c013 = talt020.t20_usuario, NOENTRY, REVERSE, UPSHIFT;
-c014 = talt020.t20_fecing, NOENTRY, REVERSE, UPSHIFT;
-c    = FORMONLY.tit_est, NOENTRY, REVERSE, UPSHIFT;
-c015 = FORMONLY.tit_estado_tal, NOENTRY, UPSHIFT;
-c016 = FORMONLY.tit_mon_bas, NOENTRY, REVERSE, UPSHIFT;
-c017 = FORMONLY.tit_modelo, NOENTRY, REVERSE, UPSHIFT;
-c018 = FORMONLY.tit_chasis, NOENTRY, REVERSE, UPSHIFT;
-c019 = FORMONLY.tit_color, NOENTRY, REVERSE, UPSHIFT;
-c021 = FORMONLY.tit_nomcli, NOENTRY, REVERSE, UPSHIFT;
+c010 = FORMONLY.tit_mon_bas, NOENTRY, REVERSE, UPSHIFT;
+c011 = talt020.t20_total_mo, NOENTRY, REVERSE, FORMAT = '###,###,##&.##';
+c012 = talt020.t20_total_rp, NOENTRY, FORMAT = '###,###,##&.##';
+c021 = talt020.t20_mano_ext, AUTONEXT, UPSHIFT, FORMAT = '###,###,##&.##';
+c022 = talt020.t20_total_impto, NOENTRY, REVERSE, FORMAT = '###,###,##&.##';
+c023 = talt020.t20_otros_mat, AUTONEXT, UPSHIFT, FORMAT = '###,###,##&.##';
+c024 = talt020.t20_gastos, AUTONEXT, UPSHIFT, FORMAT = '###,###,##&.##';
+c025 = talt020.t20_total_neto, NOENTRY, REVERSE, FORMAT = '###,###,##&.##';
+c013 = talt023.t23_orden, AUTONEXT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+##c051 = talt020.t20_por_mo_tal, NOENTRY, UPSHIFT, FORMAT = '#&.##',
+	##INCLUDE = (0 TO 99.99);
+c052 = talt020.t20_vde_mo_tal, NOENTRY, UPSHIFT, COLOR = RED WHERE c052 <> 0,
+	FORMAT = '##,###,##&.##';
+c053 = FORMONLY.total_bruto, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '###,###,##&.##';
+c054 = FORMONLY.subtotal, NOENTRY, UPSHIFT, COLOR = BLUE WHERE c053 <> 0,
+	FORMAT = '###,###,##&.##';
+c015 = talt020.t20_user_aprob, NOENTRY, UPSHIFT;
+c016 = talt020.t20_fecha_aprob, NOENTRY, UPSHIFT;
+c017 = talt020.t20_usuario, NOENTRY, REVERSE, UPSHIFT;
+c018 = talt020.t20_fecing, NOENTRY, REVERSE, UPSHIFT;
+
+c027 = talt020.t20_usu_modifi, NOENTRY, UPSHIFT;
+c028 = talt020.t20_fec_modifi, NOENTRY, UPSHIFT;
 END

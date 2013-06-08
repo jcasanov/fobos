@@ -1,0 +1,21 @@
+DATABASE aceros
+SCREEN
+{
+
+    Se va Imprimir Orden Despacho: [c001      ]
+
+                     De la Bodega: [a0] [c002                          ]
+
+                      Factura No.: [a1] [c003           ]
+ 
+
+}
+TABLES
+rept034, rept002
+ATTRIBUTES
+c001 = rept034.r34_num_ord_des, NOENTRY, REVERSE, UPSHIFT;
+a0   = rept034.r34_bodega, NOENTRY, REVERSE, UPSHIFT;
+c002 = rept002.r02_nombre, NOENTRY, REVERSE, UPSHIFT;
+a1   = rept034.r34_cod_tran, NOENTRY, REVERSE, UPSHIFT;
+c003 = rept034.r34_num_tran, NOENTRY, REVERSE, UPSHIFT;
+END

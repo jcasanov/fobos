@@ -20,6 +20,7 @@ DEFINE vm_otros_ingresos LIKE cajt010.j10_tipo_fuente
 DEFINE vm_rowid		INTEGER
 DEFINE vm_max_rows	SMALLINT
 DEFINE vm_indice  	SMALLINT
+DEFINE vm_size_arr	INTEGER
 --
 -- DEFINE RECORD(S) HERE
 --
@@ -45,19 +46,19 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/cajp206.error')
-CALL fgl_init4js()
+--CALL startlog('../logs/errores')
+CALL startlog('../logs/cajp206.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 AND num_args() <> 6 THEN -- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 
-                            'stop')
+	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.','stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
-LET vg_base     = arg_val(1)
-LET vg_modulo   = arg_val(2)
-LET vg_codcia   = arg_val(3)
+LET vg_base    = arg_val(1)
+LET vg_modulo  = arg_val(2)
+LET vg_codcia  = arg_val(3)
 LET vg_proceso = 'cajp206'
-
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	-- Asigna un valor por default a vg_codloc
 				-- que luego puede ser reemplazado si se 
@@ -70,8 +71,8 @@ IF num_args() = 6 THEN
 	LET vm_num_fuente  = arg_val(6)
 END IF
 
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -80,22 +81,35 @@ END MAIN
 
 
 FUNCTION funcion_master()
-
 DEFINE salir		SMALLINT
 DEFINE resp 		CHAR(3)  
-
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 DEFINE r_b00		RECORD LIKE ctbt000.*
 DEFINE r_b12		RECORD LIKE ctbt012.*
 DEFINE r_g13		RECORD LIKE gent013.*
 
 CALL fl_nivel_isolation()
-OPTIONS
-	INPUT WRAP,
-	ACCEPT KEY F12
-OPEN WINDOW w_206 AT 3,2 WITH 21 ROWS, 80 COLUMNS
-	ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, BORDER, 
-		  MESSAGE LINE LAST - 2) 
-OPEN FORM f_206 FROM '../forms/cajf206_1'
+LET lin_menu = 0
+LET row_ini  = 3
+LET num_rows = 21
+LET num_cols = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW w_206 AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
+    ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE lin_menu,BORDER,
+	      MESSAGE LINE LAST - 1)
+IF vg_gui = 1 THEN
+        OPEN FORM f_206 FROM '../forms/cajf206_1'
+ELSE
+        OPEN FORM f_206 FROM '../forms/cajf206_1c'
+END IF
 DISPLAY FORM f_206
 
 LET vm_max_rows = 50
@@ -112,9 +126,8 @@ END IF
 
 CALL fl_retorna_caja(vg_codcia, vg_codloc, vg_usuario) RETURNING rm_j02.*
 IF rm_j02.j02_codigo_caja IS NULL THEN
-	CALL fgl_winmessage(vg_producto,
-		'No hay una caja asignada al usuario ' || vg_usuario || '.',
-		'stop')
+	--CALL fgl_winmessage(vg_producto,'No hay una caja asignada al usuario ' || vg_usuario || '.','stop')
+	CALL fl_mostrar_mensaje('No hay una caja asignada al usuario ' || vg_usuario || '.','stop')
 	EXIT PROGRAM
 END IF
 
@@ -141,9 +154,8 @@ WHILE NOT salir
 	  				  AND j04_fecha_aper  = TODAY)
 
 	IF STATUS = NOTFOUND THEN 
-		CALL fgl_winmessage(vg_producto,
-			'La caja no está aperturada.',
-			'exclamation')
+		--CALL fgl_winmessage(vg_producto,'La caja no está aperturada.','exclamation')
+		CALL fl_mostrar_mensaje('La caja no está aperturada.','exclamation')
 		EXIT PROGRAM
 	END IF
 	
@@ -232,15 +244,18 @@ INPUT BY NAME rm_j10.j10_tipo_fuente, rm_j10.j10_num_fuente,
 		IF NOT FIELD_TOUCHED(j10_areaneg, j10_codcli, 
 	      			     j10_nomcli,    j10_moneda,  j10_valor
 	      			    ) THEN
-			RETURN
+			LET INT_FLAG = 1
+			EXIT INPUT
 		END IF
 
 		LET INT_FLAG = 0
 		CALL fl_mensaje_abandonar_proceso() RETURNING resp
 		IF resp = 'Yes' THEN
 			LET INT_FLAG = 1
-			RETURN
+			EXIT INPUT
 		END IF
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
 	ON KEY(F2)
 		IF INFIELD(j10_areaneg) THEN
 			CALL fl_ayuda_areaneg(vg_codcia) 
@@ -273,6 +288,9 @@ INPUT BY NAME rm_j10.j10_tipo_fuente, rm_j10.j10_num_fuente,
 			END IF
 		END IF
 		LET INT_FLAG = 0
+	BEFORE INPUT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 	AFTER FIELD j10_areaneg
 		IF rm_j10.j10_areaneg IS NULL THEN
 			CLEAR n_areaneg
@@ -281,9 +299,8 @@ INPUT BY NAME rm_j10.j10_tipo_fuente, rm_j10.j10_num_fuente,
 		CALL fl_lee_area_negocio(vg_codcia, rm_j10.j10_areaneg)
 			RETURNING r_g03.*
 		IF r_g03.g03_areaneg IS NULL THEN
-			CALL fgl_winmessage(vg_producto,
-				'Area de negocio no existe.',
-				'exclamation')
+			--CALL fgl_winmessage(vg_producto,'Area de negocio no existe.','exclamation')
+			CALL fl_mostrar_mensaje('Area de negocio no existe.','exclamation')
 			CLEAR n_areaneg
 			NEXT FIELD j10_areaneg
 		END IF
@@ -295,19 +312,14 @@ INPUT BY NAME rm_j10.j10_tipo_fuente, rm_j10.j10_num_fuente,
 			CALL fl_lee_cliente_general(rm_j10.j10_codcli) 
 				RETURNING r_z01.*
 			IF r_z01.z01_codcli IS NULL THEN
-              			CALL fgl_winmessage(vg_producto,
-                                                    'No existe un cliente '||
-                                                    'con ese código',
-                                                    'exclamation')
+              			--CALL fgl_winmessage(vg_producto,'No existe un cliente con ese código.','exclamation')
+				CALL fl_mostrar_mensaje('No existe un cliente con ese código.','exclamation')
 				INITIALIZE rm_j10.j10_nomcli TO NULL
 				DISPLAY BY NAME rm_j10.j10_nomcli
 				NEXT FIELD j10_codcli     
         		END IF   
 			IF r_z01.z01_estado = 'B' THEN
-              			CALL fgl_winmessage(vg_producto,
-                                                    'El cliente '||
-                                                    'está bloqueado',
-                                                    'exclamation')
+				CALL fl_mensaje_estado_bloqueado()
 				INITIALIZE rm_j10.j10_nomcli TO NULL
 				DISPLAY BY NAME rm_j10.j10_nomcli
 				NEXT FIELD j10_codcli      
@@ -333,23 +345,27 @@ INPUT BY NAME rm_j10.j10_tipo_fuente, rm_j10.j10_num_fuente,
 		ELSE
 			CALL fl_lee_moneda(rm_j10.j10_moneda) RETURNING r_g13.*
 			IF r_g13.g13_moneda IS NULL THEN	
-				CALL FGL_WINMESSAGE(vg_producto, 
-                             		            'Moneda no existe.',
-                                        	    'exclamation')
+				--CALL FGL_WINMESSAGE(vg_producto,'Moneda no existe.','exclamation')
+				CALL fl_mostrar_mensaje('Moneda no existe.','exclamation')
 				CLEAR n_moneda
 				NEXT FIELD j10_moneda
 			ELSE
 				IF r_g13.g13_estado = 'B' THEN
-					CALL FGL_WINMESSAGE(vg_producto, 
-                            		 	            'Moneda está ' ||
-                               	                            'bloqueada.',
-                                       	                    'exclamation')
+					CALL fl_mensaje_estado_bloqueado()
 					CLEAR n_moneda
 					NEXT FIELD j10_moneda
 				ELSE
 					DISPLAY r_g13.g13_nombre TO n_moneda
 				END IF
 			END IF 
+		END IF
+	AFTER INPUT
+		IF int_flag THEN
+			EXIT INPUT
+		END IF
+	      	IF rm_j10.j10_referencia IS NULL THEN
+			CALL fl_mostrar_mensaje('Digite referencia.','exclamation')
+			NEXT FIELD j10_referencia
 		END IF
 END INPUT
 
@@ -367,6 +383,7 @@ DEFINE resp		CHAR(6)
 DEFINE total		LIKE cajt011.j11_valor
 DEFINE vuelto		LIKE cajt011.j11_valor
 DEFINE valor_ef		LIKE cajt011.j11_valor
+DEFINE cont_cred	LIKE cajt001.j01_cont_cred
 
 DEFINE bco_tarj		SMALLINT
 
@@ -393,11 +410,14 @@ INPUT ARRAY rm_j11 WITHOUT DEFAULTS FROM ra_j11.*
 			LET INT_FLAG = 1
 			EXIT INPUT
 		END IF
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
 	ON KEY(F2)
 		IF INFIELD(j11_codigo_pago) THEN
-			CALL fl_ayuda_forma_pago(vg_codcia) 
+			CALL fl_ayuda_forma_pago(vg_codcia, 'T', 'A', 'N') 
 				RETURNING r_j01.j01_codigo_pago,
-					  r_j01.j01_nombre
+					  r_j01.j01_nombre,
+					  r_j01.j01_cont_cred
 			IF r_j01.j01_codigo_pago IS NOT NULL THEN
 				LET rm_j11[i].forma_pago = r_j01.j01_codigo_pago
 				DISPLAY rm_j11[i].forma_pago 
@@ -421,7 +441,7 @@ INPUT ARRAY rm_j11 WITHOUT DEFAULTS FROM ra_j11.*
 		END IF
 		LET INT_FLAG = 0
 	BEFORE INPUT
-		CALL dialog.keysetlabel('INSERT', '')
+		--#CALL dialog.keysetlabel('INSERT', '')
 		CALL calcula_total(arr_count()) RETURNING total
 	BEFORE ROW
 		LET i = arr_curr()
@@ -443,28 +463,24 @@ INPUT ARRAY rm_j11 WITHOUT DEFAULTS FROM ra_j11.*
 				CONTINUE INPUT
 			END IF
 		END IF 
-		CALL fl_lee_tipo_pago_caja(vg_codcia, rm_j11[i].forma_pago)
+		CALL fl_lee_tipo_pago_caja(vg_codcia, rm_j11[i].forma_pago,
+						r_j01.j01_cont_cred)
 			RETURNING r_j01.*		
 		IF r_j01.j01_codigo_pago IS NULL THEN
-			CALL fgl_winmessage(vg_producto,
-				'Forma de Pago no existe.',
-				'exclamation')
+			--CALL fgl_winmessage(vg_producto,'Forma de Pago no existe.','exclamation')
+			CALL fl_mostrar_mensaje('Forma de Pago no existe.','exclamation')
 			NEXT FIELD j11_codigo_pago
 		END IF
 		IF r_j01.j01_estado = 'B' THEN
-			CALL fgl_winmessage(vg_producto,
-				'Forma de Pago está bloqueada.',
-				'exclamation')
+			CALL fl_mensaje_estado_bloqueado()
 			NEXT FIELD j11_codigo_pago
 		END IF
 		IF  r_j01.j01_codigo_pago <> vm_efectivo
 		AND r_j01.j01_codigo_pago <> vm_cheque
 		AND r_j01.j01_codigo_pago <> vm_deposito
 		THEN
-			CALL fgl_winmessage(vg_producto,
-				'La forma de pago debe ser en efectivo ' ||
-				', cheque o depósito.',
-				'exclamation')
+			--CALL fgl_winmessage(vg_producto,'La forma de pago debe ser en efectivo, cheque o depósito.','exclamation')
+			CALL fl_mostrar_mensaje('La forma de pago debe ser en efectivo, cheque o depósito.','exclamation')
 			NEXT FIELD j11_codigo_pago
 		END IF
 	AFTER FIELD j11_moneda
@@ -476,21 +492,18 @@ INPUT ARRAY rm_j11 WITHOUT DEFAULTS FROM ra_j11.*
 
 		-- Validaciones sobre la moneda
 		IF r_mon.g13_moneda IS NULL THEN	
-			CALL FGL_WINMESSAGE(vg_producto, 
-                      		            'Moneda no existe',        
-                                       	    'exclamation')
+			--CALL FGL_WINMESSAGE(vg_producto,'Moneda no existe','exclamation')
+			CALL fl_mostrar_mensaje('Moneda no existe.','exclamation')
 			NEXT FIELD j11_moneda
 		END IF
 		IF r_mon.g13_estado = 'B' THEN
-			CALL FGL_WINMESSAGE(vg_producto, 
-                	 	            'Moneda está bloqueada',        
-                                       	    'exclamation')
+			CALL fl_mensaje_estado_bloqueado()
 			NEXT FIELD j11_moneda
 		END IF
 
 		LET vm_paridad[i] = calcula_paridad(rm_j11[i].moneda,
 						    rm_j10.j10_moneda)
-		IF vm_paridad IS NULL THEN
+		IF vm_paridad[i] IS NULL THEN
 			LET rm_j11[i].moneda = rm_j10.j10_moneda
 			DISPLAY rm_j11[i].moneda TO ra_j11[j].j11_moneda
 			LET vm_paridad[i] = 1
@@ -509,9 +522,8 @@ INPUT ARRAY rm_j11 WITHOUT DEFAULTS FROM ra_j11.*
 			NEXT FIELD j11_valor
 		END IF
 		IF rm_j11[i].valor <= 0 THEN
-			CALL fgl_winmessage(vg_producto,
-				'El valor debe ser mayor a cero.',
-				'exclamation')
+			--CALL fgl_winmessage(vg_producto,'El valor debe ser mayor a cero.','exclamation')
+			CALL fl_mostrar_mensaje('El valor debe ser mayor a cero.','exclamation')
 			NEXT FIELD j11_valor
 		END IF	
 		LET vm_indice = arr_count()
@@ -523,7 +535,8 @@ INPUT ARRAY rm_j11 WITHOUT DEFAULTS FROM ra_j11.*
 		END IF
 		DISPLAY BY NAME vuelto
 		IF fgl_lastkey() = fgl_keyval('return') THEN
-			NEXT FIELD ra_j11[j-1].j11_codigo_pago
+			--NEXT FIELD ra_j11[j-1].j11_codigo_pago
+			NEXT FIELD j11_codigo_pago
 		END IF
 	AFTER FIELD j11_cod_bco_tarj
 		IF rm_j11[i].cod_bco_tarj IS NULL THEN
@@ -538,19 +551,23 @@ INPUT ARRAY rm_j11 WITHOUT DEFAULTS FROM ra_j11.*
 			CALL fl_lee_banco_general(rm_j11[i].cod_bco_tarj)
 				RETURNING r_g08.* 
 			IF r_g08.g08_banco IS NULL THEN
-				CALL fgl_winmessage(vg_producto,
-					'Banco no existe.',
-					'exclamation')
+				--CALL fgl_winmessage(vg_producto,'Banco no existe.','exclamation')
+				CALL fl_mostrar_mensaje('Banco no existe.','exclamation')
 				NEXT FIELD j11_cod_bco_tarj
 			END IF
 		END IF
 		IF bco_tarj = 2 THEN
-			CALL fl_lee_tarjeta_credito(rm_j11[i].cod_bco_tarj)
+			LET cont_cred = 'C'
+			IF rm_j10.j10_tipo_fuente = 'SC' THEN
+				LET cont_cred = 'R'
+			END IF
+			CALL fl_lee_tarjeta_credito(vg_codcia,
+							rm_j11[i].cod_bco_tarj,
+							rm_j11[i].forma_pago,
+							cont_cred)
 				RETURNING r_g10.* 
 			IF r_g10.g10_tarjeta IS NULL THEN
-				CALL fgl_winmessage(vg_producto,
-					'Tarjeta no existe.',
-					'exclamation')
+				CALL fl_mostrar_mensaje('Tarjeta no existe.','exclamation')
 				NEXT FIELD j11_cod_bco_tarj
 			END IF
 		END IF
@@ -577,18 +594,13 @@ INPUT ARRAY rm_j11 WITHOUT DEFAULTS FROM ra_j11.*
 			OR banco_tarjeta(rm_j11[i].forma_pago) = 2 
 			THEN
 				IF rm_j11[i].cod_bco_tarj IS NULL THEN
-					CALL fgl_winmessage(vg_producto,
-						'Debe ingresar el código ' ||
-						'del banco o de la tarjeta.',
-						'exclamation')
+					--CALL fgl_winmessage(vg_producto,'Debe ingresar el código del banco o de la tarjeta.','exclamation')
+					CALL fl_mostrar_mensaje('Debe ingresar el código del banco o de la tarjeta.','exclamation')
 					NEXT FIELD j11_cod_bco_tarj
 				END IF
 				IF rm_j11[i].num_cta_tarj IS NULL THEN
-					CALL fgl_winmessage(vg_producto,
-						'Debe ingresar el número ' ||
-						'de la cuenta o de la ' ||
-						'tarjeta.',
-						'exclamation')
+					--CALL fgl_winmessage(vg_producto,'Debe ingresar el número de la cuenta o de la tarjeta.','exclamation')
+					CALL fl_mostrar_mensaje('Debe ingresar el número de la cuenta o de la tarjeta.','exclamation')
 					NEXT FIELD j11_num_cta_tarj
 				END IF
 			END IF
@@ -597,11 +609,8 @@ INPUT ARRAY rm_j11 WITHOUT DEFAULTS FROM ra_j11.*
 			OR rm_j11[i].forma_pago = 'RT'
 			THEN
 				IF rm_j11[i].num_ch_aut IS NULL THEN
-					CALL fgl_winmessage(vg_producto,
-						'Debe ingresar el número ' ||
-						'del cheque/retención/aut. ' ||
-						'tarjeta.',
-						'exclamation')
+					--CALL fgl_winmessage(vg_producto,'Debe ingresar el número del cheque/retención/aut. tarjeta.','exclamation')
+					CALL fl_mostrar_mensaje('Debe ingresar el número del cheque/retención/aut. tarjeta.','exclamation')
 					NEXT FIELD j11_num_ch_aut
 				END IF
 			END IF
@@ -614,19 +623,13 @@ INPUT ARRAY rm_j11 WITHOUT DEFAULTS FROM ra_j11.*
 				IF valor_ef >= vuelto THEN 
 					DISPLAY BY NAME vuelto
 				ELSE
-					CALL fgl_winmessage(vg_producto,
-						'El total en efectivo ' ||
-						'no es suficiente para ' ||
-						'el vuelto.',
-						'exclamation')
+					--CALL fgl_winmessage(vg_producto,'El total en efectivo no es suficiente para el vuelto.','exclamation')
+					CALL fl_mostrar_mensaje('El total en efectivo no es suficiente para el vuelto.','exclamation')
 					CONTINUE INPUT
 				END IF
 			ELSE
-				CALL fgl_winmessage(vg_producto,
-					'El total en la moneda de la ' ||
-					'facturación debe ser igual al ' ||
-					'valor a recaudar.',
-					'exclamation')
+				--CALL fgl_winmessage(vg_producto,'El total en la moneda de la facturación debe ser igual al valor a recaudar.','exclamation')
+				CALL fl_mostrar_mensaje('El total en la moneda de la facturación debe ser igual al valor a recaudar.','exclamation')
 				CONTINUE INPUT
 			END IF 
 		END IF 
@@ -699,7 +702,8 @@ IF cod_bco_tarj = 1 THEN
 	RETURN cod_bco_tarj
 END IF
 IF cod_bco_tarj = 2 THEN
-	CALL fl_ayuda_tarjeta() RETURNING r_g10.g10_tarjeta, r_g10.g10_nombre
+	CALL fl_ayuda_tarjeta(vg_codcia, 'T', 'A')
+		RETURNING r_g10.g10_tarjeta, r_g10.g10_nombre
 	IF r_g10.g10_tarjeta IS NOT NULL THEN
 		LET cod_bco_tarj = r_g10.g10_tarjeta
 	ELSE
@@ -755,10 +759,7 @@ ELSE
 	CALL fl_lee_factor_moneda(moneda_ori, moneda_dest) 
 		RETURNING r_g14.*
 	IF r_g14.g14_serial IS NULL THEN
-		CALL fgl_winmessage(vg_producto, 
-				    'No existe factor de conversión ' ||
-				    'para esta moneda',
-				    'exclamation')
+		--CALL fgl_winmessage(vg_producto,'No existe factor de conversión para esta moneda.','exclamation')
 		INITIALIZE paridad TO NULL
 	ELSE
 		LET paridad = r_g14.g14_tasa 
@@ -963,10 +964,9 @@ DEFINE intentar		SMALLINT
 DEFINE resp		CHAR(6)
 
 LET intentar = 1
-CALL fgl_winquestion(vg_producto, 
-		     'Registro bloqueado por otro usuario, desea ' ||
-                     'intentarlo nuevamente', 'No', 'Yes|No', 'question', 1)
-				RETURNING resp
+--CALL fgl_winquestion(vg_producto,'Registro bloqueado por otro usuario, desea intentarlo nuevamente','No','Yes|No','question',1)
+CALL fl_hacer_pregunta('Registro bloqueado por otro usuario, desea intentarlo nuevamente','No')
+	RETURNING resp
 IF resp = 'No' THEN
 	CALL fl_mensaje_abandonar_proceso()
 		 RETURNING resp
@@ -987,7 +987,7 @@ DEFINE modulo		LIKE gent050.g50_modulo
 DEFINE tipo_tran 	LIKE rept019.r19_cod_tran
 
 DEFINE resp		CHAR(6)
-DEFINE retVal 		INTEGER
+DEFINE retVal 		SMALLINT
 
 LET retVal = -1
 WHILE retVal = -1
@@ -1001,11 +1001,9 @@ IF retVal <> -1 THEN
 	 EXIT WHILE
 END IF
 
-CALL fgl_winquestion(vg_producto, 
-	'La tabla de secuencias de transacciones ' ||
-        'está siendo accesada por otro usuario, espere unos  ' ||
-        'segundos y vuelva a intentar', 
-	'No', 'Yes|No|Cancel', 'question', 1) RETURNING resp 
+--CALL fgl_winquestion(vg_producto,'La tabla de secuencias de transacciones está siendo accesada por otro usuario, espere unos segundos y vuelva a intentar','No','Yes|No|Cancel','question',1)
+CALL fl_hacer_pregunta('La tabla de secuencias de transacciones está siendo accesada por otro usuario, espere unos segundos y vuelva a intentar','No')
+	RETURNING resp 
 IF resp <> 'Yes' THEN
 	EXIT WHILE	
 END IF
@@ -1124,10 +1122,8 @@ FOREACH q_cajas_j11 INTO codigo_pago, moneda, valor
 	WHENEVER ERROR STOP
 
 	IF STATUS < 0 THEN
-		CALL fgl_winmessage(vg_producto,
-			'Registro de caja bloqueado.',
-			'exclamation')
 		ROLLBACK WORK
+		CALL fl_mensaje_bloqueo_otro_usuario()
 		EXIT PROGRAM
 	END IF
 
@@ -1195,10 +1191,9 @@ FOREACH q_cajas_j13 INTO codigo_pago, moneda, valor
 	SET LOCK MODE TO NOT WAIT
 	
 	IF STATUS < 0 THEN
-		CALL fgl_winmessage(vg_producto,
-			'No se pueden actualizar los acumulados.',
-			'exclamation')
 		ROLLBACK WORK
+		--CALL fgl_winmessage(vg_producto,'No se pueden actualizar los acumulados.','exclamation')
+		CALL fl_mostrar_mensaje('No se pueden actualizar los acumulados.','exclamation')
 		EXIT PROGRAM
 	END IF
 
@@ -1231,12 +1226,12 @@ END FUNCTION
 
 FUNCTION setea_botones()
 
-DISPLAY 'FP'			TO 	bt_codigo_pago
-DISPLAY 'Mon'			TO 	bt_moneda
-DISPLAY 'Bco/Tarj'		TO 	bt_bco_tarj
-DISPLAY 'Nro. Che./Aut.'	TO 	bt_che_aut
-DISPLAY 'Nro. Cta./Tarj.'	TO 	bt_cta_tarj
-DISPLAY 'Valor'			TO 	bt_valor
+--#DISPLAY 'FP'			TO 	bt_codigo_pago
+--#DISPLAY 'Mon'			TO 	bt_moneda
+--#DISPLAY 'Bco/Tarj'		TO 	bt_bco_tarj
+--#DISPLAY 'Nro. Che./Aut.'	TO 	bt_che_aut
+--#DISPLAY 'Nro. Cta./Tarj.'	TO 	bt_cta_tarj
+--#DISPLAY 'Valor'			TO 	bt_valor
 
 END FUNCTION
 
@@ -1252,9 +1247,8 @@ SELECT ROWID INTO vm_rowid
 	  AND j10_num_fuente  = vm_num_fuente
 
 IF STATUS = NOTFOUND THEN
-	CALL fgl_winmessage(vg_producto, 
-		'No existe forma de pago.', 
-		'exclamation')
+	--CALL fgl_winmessage(vg_producto,'No existe forma de pago.','exclamation')
+	CALL fl_mostrar_mensaje('No existe forma de pago.','exclamation')
 	EXIT PROGRAM	
 ELSE
 	CALL lee_muestra_registro(vm_rowid)
@@ -1327,7 +1321,9 @@ DEFINE filas_pant	SMALLINT
 
 DEFINE dummy		LIKE cajt011.j11_valor
 
-LET filas_pant = fgl_scr_size('ra_j11')
+CALL retorna_arreglo()
+
+LET filas_pant = vm_size_arr
 FOR i = 1 TO filas_pant
 	CLEAR ra_j11[i].*
 END FOR
@@ -1357,17 +1353,20 @@ IF i > 0 THEN
 	CALL calcula_total(i) RETURNING dummy
 	CALL set_count(i)
 ELSE
-	CALL fgl_winmessage(vg_producto,
-		'No hay detalle de forma de pago.',
-		'exclamation')
+	--CALL fgl_winmessage(vg_producto,'No hay detalle de forma de pago.','exclamation')
+	CALL fl_mostrar_mensaje('No hay detalle de forma de pago.','exclamation')
 	EXIT PROGRAM
 END IF
 DISPLAY ARRAY rm_j11 TO ra_j11.*
-	BEFORE DISPLAY
-		CALL setea_botones()
-		CALL dialog.keysetlabel('F5', 'Imprimir')
+       	ON KEY(F1,CONTROL-W)
+		CALL control_visor_teclas_caracter_1() 
 	ON KEY(F5)
 		CALL imprime_comprobante()
+	--#BEFORE DISPLAY
+		--#CALL setea_botones()
+		--#CALL dialog.keysetlabel('F5', 'Imprimir')
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 END DISPLAY
 
 END FUNCTION
@@ -1419,13 +1418,10 @@ DEFINE tot_debito	LIKE ctbt013.b13_valor_base
 DEFINE tot_credito	LIKE ctbt013.b13_valor_base
 
 DEFINE resp 		VARCHAR(6)
-DEFINE query		VARCHAR(250)
+DEFINE query		CHAR(250)
 DEFINE orden 		ARRAY[10] OF CHAR(4)
 DEFINE columna_1	SMALLINT
 DEFINE columna_2	SMALLINT
-DEFINE r_dj             RECORD LIKE cajt011.*
-DEFINE tot_ic           DECIMAL(14,2)
-DEFINE r_bco            RECORD LIKE gent009.*
 
 FOR i = 1 TO 10
 	LET orden[i] = '' 
@@ -1449,15 +1445,19 @@ LET max_rows = 25
 
 INITIALIZE r_b12.* TO NULL
 
-OPEN WINDOW w_207_2 AT 8,3 WITH 12 ROWS, 76 COLUMNS
+OPEN WINDOW w_207_2 AT 5,3 WITH 14 ROWS, 77 COLUMNS
     ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, BORDER, MESSAGE LINE LAST)
-OPEN FORM f_207_2 FROM "../forms/cajf207_2"
+IF vg_gui = 1 THEN
+        OPEN FORM f_207_2 FROM '../forms/cajf207_2'
+ELSE
+        OPEN FORM f_207_2 FROM '../forms/cajf207_2c'
+END IF
 DISPLAY FORM f_207_2
 
-DISPLAY 'Cuenta' 	TO bt_cuenta
-DISPLAY 'Descripción'	TO bt_descripcion
-DISPLAY 'Débito'	TO bt_valor_db
-DISPLAY 'Crédito'	TO bt_valor_cr
+--#DISPLAY 'Cuenta' 		TO bt_cuenta
+--#DISPLAY 'Descripción'	TO bt_descripcion
+--#DISPLAY 'Débito'		TO bt_valor_db
+--#DISPLAY 'Crédito'		TO bt_valor_cr
 
 DECLARE q_aux CURSOR FOR
 	SELECT * FROM ctbt041 WHERE b41_compania  = vg_codcia
@@ -1468,9 +1468,8 @@ FETCH q_aux INTO r_b41.*
 CLOSE q_aux
 FREE  q_aux
 IF STATUS = NOTFOUND THEN
-	CALL fgl_winmessage(vg_producto,
-		'No se han configurado las cuentas de Caja.',
-		'exclamation')
+	--CALL fgl_winmessage(vg_producto,'No se han configurado las cuentas de Caja.','exclamation')
+	CALL fl_mostrar_mensaje('No se han configurado las cuentas de Caja.','exclamation')
 	LET int_flag = 1
 	CLOSE WINDOW w_207_2
 	RETURN r_b12.*
@@ -1481,44 +1480,22 @@ IF rm_j10.j10_moneda = rg_gen.g00_moneda_base THEN
 ELSE
 	LET cuenta = r_b41.b41_caja_me
 END IF
---OJO
-DECLARE q_dic CURSOR FOR SELECT * FROM cajt011
-        WHERE j11_compania     = rm_j10.j10_compania    AND
-              j11_localidad    = rm_j10.j10_localidad   AND
-              j11_tipo_fuente  = rm_j10.j10_tipo_fuente AND
-              j11_num_fuente   = rm_j10.j10_num_fuente
-
-FOREACH q_dic INTO r_dj.*
-        LET r_dj.j11_valor = r_dj.j11_valor * r_dj.j11_paridad
-        CALL fl_retorna_precision_valor(rg_gen.g00_moneda_base, r_dj.j11_valor)
-                RETURNING r_dj.j11_valor
-        LET tot_ic = tot_ic + r_dj.j11_valor
-        CASE r_dj.j11_codigo_pago
-                WHEN 'DP'
-                        CALL fl_lee_banco_compania(r_dj.j11_compania, r_dj.j11_cod_bco_tarj, r_dj.j11_num_cta_tarj)
-                                RETURNING r_bco.*
-                        IF r_bco.g09_compania IS NULL THEN
-                                CALL fgl_winmessage(vg_producto, 'No existe banco/cuenta: ' || r_dj.j11_cod_bco_tarj || ' ' || r_dj.j11_num_cta_tarj, 'stop')
-                                EXIT PROGRAM
-                        END IF
-			LET cuenta = r_bco.g09_aux_cont 
-        END CASE
-END FOREACH
---END OJO
 
 CALL inserta_tabla_temporal(cuenta, rm_j10.j10_valor, 0, 'V') 
 	RETURNING tot_debito, tot_credito
 
 SELECT MAX(b01_nivel) INTO last_lvl_cta FROM ctbt001
 IF last_lvl_cta IS NULL THEN
-	CALL fgl_winmessage(vg_producto,
-		'No se ha configurado el plan de cuentas, no puede haber ' ||
-		'contabilización en línea.',
-		'exclamation')
+	--CALL fgl_winmessage(vg_producto,'No se ha configurado el plan de cuentas, no puede haber contabilización en línea.','exclamation')
+	CALL fl_mostrar_mensaje('No se ha configurado el plan de cuentas, no puede haber contabilización en línea.','exclamation')
 	LET int_flag = 1
 	CLOSE WINDOW w_207_2
 	RETURN r_b12.*
 END IF
+
+OPTIONS 
+	INSERT KEY F10,
+	DELETE KEY F11
 
 LET salir    = 0
 WHILE NOT salir
@@ -1548,6 +1525,8 @@ WHILE NOT salir
 				LET int_flag = 1
 				EXIT INPUT
 			END IF
+        	ON KEY(F1,CONTROL-W)
+			CALL llamar_visor_teclas()
 		ON KEY(F2)
 			IF INFIELD(b13_cuenta) AND modificable(r_ctas[i].cuenta)
 			THEN
@@ -1579,6 +1558,8 @@ WHILE NOT salir
 			LET col = 4	
 			EXIT INPUT
 		BEFORE INPUT
+			--#CALL dialog.keysetlabel("F1","")
+			--#CALL dialog.keysetlabel("CONTROL-W","")
 			DISPLAY BY NAME tot_debito, tot_credito
 		BEFORE ROW
 			LET i = arr_curr()
@@ -1597,15 +1578,20 @@ WHILE NOT salir
 		AFTER FIELD b13_cuenta
 			IF r_ctas[i].cuenta IS NULL AND modificable(cuenta)
 			THEN
+-- :)
+				IF cuenta IS NOT NULL THEN
+					DELETE FROM tmp_cuenta
+						WHERE te_cuenta = cuenta
+				END IF
+-- :)
 				CONTINUE INPUT
 			END IF
 			IF (r_ctas[i].cuenta IS NULL 
 			 OR cuenta <> r_ctas[i].cuenta) 
 			AND NOT modificable(cuenta) 
 			THEN
-				CALL fgl_winmessage(vg_producto,
-					'No puede modificar esta cuenta.',  
-					'exclamation')
+				--CALL fgl_winmessage(vg_producto,'No puede modificar esta cuenta.','exclamation')
+				CALL fl_mostrar_mensaje('No puede modificar esta cuenta.','exclamation')
 				LET r_ctas[i].cuenta = cuenta
 				DISPLAY r_ctas[i].cuenta TO r_ctas[j].b13_cuenta
 				CONTINUE INPUT
@@ -1613,28 +1599,29 @@ WHILE NOT salir
 			IF (cuenta IS NULL OR cuenta <> r_ctas[i].cuenta) 
 			AND NOT modificable(r_ctas[i].cuenta) 
 			THEN
-				CALL fgl_winmessage(vg_producto,
-					'No puede volver a ingresar esta ' ||
-					'cuenta.',  
-					'exclamation')
+				--CALL fgl_winmessage(vg_producto,'No puede volver a ingresar esta cuenta.','exclamation')
+				CALL fl_mostrar_mensaje('No puede volver a ingresar esta cuenta.','exclamation')
 				LET r_ctas[i].cuenta = ' '
 				NEXT FIELD b13_cuenta
 			END IF
 			CALL fl_lee_cuenta(vg_codcia, r_ctas[i].cuenta) 
 				RETURNING r_b10.*
 			IF r_b10.b10_cuenta IS NULL THEN
-				CALL fgl_winmessage(vg_producto,
-					'No existe cuenta contable.',
-					'exclamation')
+				--CALL fgl_winmessage(vg_producto,'No existe cuenta contable.','exclamation')
+				CALL fl_mostrar_mensaje('No existe cuenta contable.','exclamation')
 				NEXT FIELD b13_cuenta
 			END IF
 			IF r_b10.b10_nivel <> last_lvl_cta THEN
-				CALL fgl_winmessage(vg_producto,
-					'La cuenta ingresada debe ' ||
-					'ser del último nivel.',
-					'exclamation')
+				--CALL fgl_winmessage(vg_producto,'La cuenta ingresada debe ser del último nivel.','exclamation')
+				CALL fl_mostrar_mensaje('La cuenta ingresada debe ser del último nivel.','exclamation')
 				NEXT FIELD b13_cuenta
 			END IF
+-- :)
+			IF cuenta IS NOT NULL THEN
+				DELETE FROM tmp_cuenta
+					WHERE te_cuenta = cuenta
+			END IF
+-- :)
 			CALL inserta_tabla_temporal(r_ctas[i].cuenta,
 				r_ctas[i].valor_db, r_ctas[i].valor_cr, 'V')
 				RETURNING tot_debito, tot_credito
@@ -1709,18 +1696,13 @@ WHILE NOT salir
 			END IF
 		AFTER INPUT
 			IF tot_debito <> tot_credito THEN
-				CALL fgl_winmessage(vg_producto, 
-					'Los valores en el débito y el ' ||
-					'crédito deben ser iguales.',
-					'exclamation')
+				--CALL fgl_winmessage(vg_producto,'Los valores en el débito y el crédito deben ser iguales.','exclamation')
+				CALL fl_mostrar_mensaje('Los valores en el débito y el crédito deben ser iguales.','exclamation')
 				CONTINUE INPUT
 			END IF
 			IF tot_debito <> rm_j10.j10_valor THEN
-				CALL fgl_winmessage(vg_producto, 
-					'Los valores en el débito y el ' ||
-					'crédito deben ser iguales ' ||
-					'al total ingresado.',
-					'exclamation')
+				--CALL fgl_winmessage(vg_producto,'Los valores en el débito y el crédito deben ser iguales al total ingresado.','exclamation')
+				CALL fl_mostrar_mensaje('Los valores en el débito y el crédito deben ser iguales al total ingresado.','exclamation')
 				CONTINUE INPUT
 			END IF
 			LET salir = 1
@@ -1789,7 +1771,7 @@ DEFINE valor_db		LIKE ctbt013.b13_valor_base
 DEFINE valor_cr		LIKE ctbt013.b13_valor_base
 DEFINE flag		CHAR(1)
 
-DEFINE query		VARCHAR(255)
+DEFINE query		CHAR(255)
 
 DEFINE tot_debito	LIKE ctbt013.b13_valor_base
 DEFINE tot_credito	LIKE ctbt013.b13_valor_base
@@ -1856,17 +1838,15 @@ DEFINE r_b12		RECORD LIKE ctbt012.*
 DEFINE tipo_comp	LIKE ctbt003.b03_tipo_comp
 
 DEFINE glosa 		LIKE ctbt013.b13_glosa
-DEFINE query		VARCHAR(500)
-DEFINE expr_valor	VARCHAR(100)
+DEFINE query		CHAR(500)
+DEFINE expr_valor	CHAR(100)
 
 CALL fl_lee_compania_contabilidad(vg_codcia) RETURNING r_b00.*
 
 CALL fl_lee_tipo_comprobante_contable(vg_codcia, tipo_comp) RETURNING r_b03.*
 IF r_b03.b03_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto,	
-		'No existe tipo de comprobante para Egreso de caja: ' ||
-		tipo_comp,
-		'exclamation')
+	--CALL fgl_winmessage(vg_producto,'No existe tipo de comprobante para Egreso de caja: ' || tipo_comp,'exclamation')
+	CALL fl_mostrar_mensaje('No existe tipo de comprobante para Egreso de caja: ' || tipo_comp,'exclamation')
 	RETURN r_b12.*
 END IF
 
@@ -1951,12 +1931,18 @@ END FUNCTION
 
 
 FUNCTION imprime_comprobante()
+DEFINE comando 		CHAR(300)
+DEFINE run_prog		CHAR(10)
 
-DEFINE comando 		VARCHAR(300)
-
+{-- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE --}
+LET run_prog = '; fglrun '
+IF vg_gui = 0 THEN
+	LET run_prog = '; fglgo '
+END IF
+{--- ---}
 LET comando = 'cd ..', vg_separador, '..', vg_separador,
 	      'CAJA', vg_separador, 'fuentes', 
-	      vg_separador, '; fglrun cajp403 ', 
+	      vg_separador, run_prog, 'cajp403 ', 
 	      vg_base, ' ', 'CG', vg_codcia, ' ', 
 	      vg_codloc, ' ', rm_j10.j10_num_fuente 
 
@@ -1966,38 +1952,40 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION retorna_arreglo()
+--#LET vm_size_arr = fgl_scr_size('ra_j11')
+IF vg_gui = 0 THEN
+        LET vm_size_arr = 5
+END IF
+                                                                                
+END FUNCTION
 
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 
-                            'stop')
-	EXIT PROGRAM
+
+
+FUNCTION llamar_visor_teclas()
+DEFINE a		CHAR(1)
+
+IF vg_gui = 0 THEN
+	CALL fl_visor_teclas_caracter() RETURNING int_flag 
+	LET a = fgl_getkey()
+	CLOSE WINDOW w_tf
+	LET int_flag = 0
 END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 
-                            'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || 
-                            vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 
-                            'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: ' || 
-                            vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
+
+END FUNCTION
+
+
+
+FUNCTION control_visor_teclas_caracter_1() 
+DEFINE a, fila		INTEGER
+
+CALL fl_visor_teclas_caracter() RETURNING fila
+LET a = fila + 2
+DISPLAY 'Teclas exclusivas de este proceso:' AT a,2 ATTRIBUTE(REVERSE)	
+LET a = a + 1
+DISPLAY '<F5>      Imprime Documento'        AT a,2
+DISPLAY  'F5' AT a,3 ATTRIBUTE(REVERSE)
+LET a = fgl_getkey()
+CLOSE WINDOW w_tf
 
 END FUNCTION

@@ -1,0 +1,53 @@
+DATABASE aceros
+SCREEN
+{
+
+         Estado: [c|c030       ]          Bodega: [a0|c021                  ]
+
+  Fecha Inicial: [c022      ]        Fecha Final: [c023      ]
+                                                             [c050] de [c051]
+ BD Orden  TP     Factura       Fecha                  Entregar
+[c0|c001  |c2|c003      |c004      |c005                                    ]
+[c0|c001  |c2|c003      |c004      |c005                                    ]
+[c0|c001  |c2|c003      |c004      |c005                                    ]
+[c0|c001  |c2|c003      |c004      |c005                                    ]
+[c0|c001  |c2|c003      |c004      |c005                                    ]
+[c0|c001  |c2|c003      |c004      |c005                                    ]
+[c0|c001  |c2|c003      |c004      |c005                                    ]
+[c0|c001  |c2|c003      |c004      |c005                                    ]
+[c0|c001  |c2|c003      |c004      |c005                                    ]
+[c0|c001  |c2|c003      |c004      |c005                                    ]
+  Dirección Entrega: [c040                                                  ]
+                     [c040                                                  ]
+}
+TABLES
+rept034
+ATTRIBUTES
+c    = rept034.r34_estado, REVERSE, AUTONEXT, UPSHIFT,
+	INCLUDE = ('P', 'D'),
+	COMMENTS = 'P Pendientes  D Despachadas';
+c030 = FORMONLY.tit_estado,REVERSE,UPSHIFT,NOENTRY;
+a0   = FORMONLY.r34_bodega TYPE CHAR NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c021 = FORMONLY.tit_bodega, NOENTRY, UPSHIFT, REVERSE;
+c022 = FORMONLY.vm_fecha_ini TYPE DATE, AUTONEXT, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy';
+c023 = FORMONLY.vm_fecha_fin TYPE DATE, AUTONEXT, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy';
+
+c0   = rept034.r34_bodega, NOENTRY, UPSHIFT;
+c001 = rept034.r34_num_ord_des, NOENTRY, UPSHIFT;
+c2   = rept034.r34_cod_tran, NOENTRY, UPSHIFT;
+c003 = rept034.r34_num_tran, NOENTRY, UPSHIFT;
+c004 = rept034.r34_fec_entrega, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c005 = rept034.r34_entregar_a, NOENTRY, UPSHIFT;
+
+c040 = rept034.r34_entregar_en, REVERSE, AUTONEXT, UPSHIFT, WORDWRAP;
+
+c050 = FORMONLY.num_row, NOENTRY, REVERSE;
+c051 = FORMONLY.max_row, NOENTRY, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_desp[10] (rept034.r34_bodega, r34_num_ord_des, r34_cod_tran,
+			r34_num_tran, r34_fec_entrega, r34_entregar_a)

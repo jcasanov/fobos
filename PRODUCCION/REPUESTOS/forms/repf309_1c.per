@@ -1,0 +1,54 @@
+DATABASE aceros
+SCREEN
+{
+            Moneda: [a0] [c000           ]
+  Tipo Transacción: [a1] [c001                ]
+     Fecha Inicial: [c002      ]    Fecha Final: [c003      ]
+                                                            [c050 ] de [c051 ]
+   Fecha    TR     Número      Cliente/Prov./Referencia   Mo       Valor      
+[c010      |c0|a4           |c013                        |a6|c016            ]
+[c010      |c0|a4           |c013                        |a6|c016            ]
+[c010      |c0|a4           |c013                        |a6|c016            ]
+[c010      |c0|a4           |c013                        |a6|c016            ]
+[c010      |c0|a4           |c013                        |a6|c016            ]
+[c010      |c0|a4           |c013                        |a6|c016            ]
+[c010      |c0|a4           |c013                        |a6|c016            ]
+[c010      |c0|a4           |c013                        |a6|c016            ]
+[c010      |c0|a4           |c013                        |a6|c016            ]
+[c010      |c0|a4           |c013                        |a6|c016            ]
+[c010      |c0|a4           |c013                        |a6|c016            ]
+[c010      |c0|a4           |c013                        |a6|c016            ]
+              [c052                ]                 Total: [c060            ]
+}
+TABLES
+gent021
+ATTRIBUTES
+a0   = FORMONLY.r19_moneda, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c000 = FORMONLY.tit_moneda, NOENTRY, REVERSE, UPSHIFT;
+a1   = FORMONLY.cod_tran, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c001 = FORMONLY.n_cod_tran, NOENTRY;
+c002 = FORMONLY.fecha_ini TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy';
+c003 = FORMONLY.fecha_fin TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy';
+
+c010 = FORMONLY.fecha_tran TYPE DATE, NOENTRY, FORMAT = 'dd-mm-yyyy';
+c0   = FORMONLY.tipo_tran, NOENTRY, UPSHIFT;
+a4   = FORMONLY.num_tran, NOENTRY, UPSHIFT;
+c013 = FORMONLY.referencia,  NOENTRY, UPSHIFT;
+a6   = FORMONLY.moneda, NOENTRY, UPSHIFT;
+c016 = FORMONLY.tot_neto TYPE DECIMAL (12,2), NOENTRY, UPSHIFT,
+	FORMAT = '-,---,---,--&.##';
+c060 = FORMONLY.vm_total TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '-,---,---,--&.##';
+
+c050 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c051 = FORMONLY.vm_num_det, NOENTRY, REVERSE, UPSHIFT;
+c052 = gent021.g21_nombre, NOENTRY, REVERSE, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_det[12] (fecha_tran, tipo_tran, num_tran, referencia,
+			  moneda, tot_neto)

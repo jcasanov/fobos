@@ -1,35 +1,88 @@
-{*
- * Titulo           : repp223.4gl - Revisar proformas aprobadas
- * Elaboracion      : 26-oct-2008
- * Autor            : JCM
- * Formato Ejecucion: fglrun repp223 base modulo compañía localidad
- *}
-
+--------------------------------------------------------------------------------
+-- Titulo           : repp223.4gl - Aprobacion de Pre-Venta
+-- Elaboracion      : 15-oct-2001
+-- Autor            : GVA
+-- Formato Ejecucion: fglrun repp223 base modulo compania localidad [numprev]
+-- Ultima Correccion: 15-oct-2001
+-- Motivo Correccion: 1
+--------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE rm_orden ARRAY[10] OF CHAR(4)
+-- CADA VEZ QUE SE REALIZE UNA CONSULTA SE GUARDARAN LOS ROWID DE CADA FILA 
+-- RECUPERADA EN UNA TABLA LLAMADA vm_rows QUE TENDRA 1000 ELEMENTOS
+DEFINE vm_rows		ARRAY[1000] OF INTEGER	-- ARREGLO ROWID DE FILAS LEIDAS
+DEFINE vm_row_current	SMALLINT		-- FILA CORRIENTE DEL ARREGLO
+DEFINE vm_num_rows	SMALLINT		-- CANTIDAD DE FILAS LEIDAS
+DEFINE vm_max_rows	SMALLINT		-- MAXIMO DE FILAS LEIDAS A LEER
+DEFINE rm_orden		ARRAY[10] OF CHAR(4)
 DEFINE vm_columna_1	SMALLINT
 DEFINE vm_columna_2	SMALLINT
 
-DEFINE rm_prof ARRAY[1000] OF RECORD
-	fecha_ini	DATE,
-	r21_numprof	LIKE rept021.r21_numprof,
-	r21_nomcli	LIKE rept021.r21_nomcli,
-	siglas_vend	LIKE rept001.r01_iniciales,
-	fecha_max	DATE,
-	r21_tot_neto	LIKE rept021.r21_tot_neto
-END RECORD
-	
-DEFINE rm_par RECORD
-	r21_moneda	LIKE gent013.g13_moneda,
-	tit_moneda	CHAR(20),
-	estado		CHAR(1),
-	fecha_ini	DATE,
-	fecha_fin	DATE,
-	r21_vendedor	LIKE rept001.r01_codigo,
-	tit_vend	LIKE rept001.r01_nombres
+-- ---------------------
+-- DEFINE RECORD(S) HERE
+-- ---------------------
+
+DEFINE rm_r23			RECORD LIKE rept023.*	-- CABECERA
+DEFINE rm_r24		 	RECORD LIKE rept024.*	-- DETALLE
+DEFINE rm_g13		 	RECORD LIKE gent013.*	-- MONEDA
+DEFINE rm_g20		 	RECORD LIKE gent020.*	-- GRUPO LINEA
+
+	---- ARREGLO IDENTICO A MI SCREEN RECORD ----
+DEFINE r_detalle ARRAY[200] OF RECORD
+	tit_estado		VARCHAR(11),
+	num_preventa		LIKE rept023.r23_numprev,
+	total_sin_iva		LIKE rept023.r23_tot_bruto,
+	total_costo		LIKE rept023.r23_tot_costo,
+{
+	diferencia		LIKE rept023.r23_tot_neto,
+	utilidad		LIKE rept023.r23_descuento,
+}
+	diferencia		DECIMAL(11,2),
+	utilidad		DECIMAL(11,2),
+	aprobar			LIKE rept023.r23_estado
 	END RECORD
-DEFINE vm_max_rows	SMALLINT
+	---------------------------------------------
+
+	---- ARREGLO PARALELO PARA EL ESTADO y NOMBRE DE CLIENTE----
+DEFINE r_detalle_2 ARRAY[200] OF RECORD
+	r23_cont_cred 	LIKE rept023.r23_estado,
+	r23_estado 	LIKE rept023.r23_estado,
+	r23_nomcli	LIKE rept023.r23_nomcli
+	END RECORD	
+	------------------------------------------------------------
+		---- ARREGLO QUE MUESTRA LA PREVENTA ----
+DEFINE r_preventa ARRAY[200] OF RECORD
+	r24_cant_ven		LIKE rept024.r24_cant_ven,
+	r24_item		LIKE rept024.r24_item,
+	r24_descuento		LIKE rept024.r24_precio,
+	precio_descuento	DECIMAL(11,2),
+	costo_item		DECIMAL(11,2),
+	diferencia		DECIMAL(11,2),
+	utilidad		DECIMAL(11,2)
+	END RECORD 
+
+DEFINE tot_precio_descuento 	DECIMAL(11,2)
+DEFINE tot_costo	 	DECIMAL(11,2)
+DEFINE tot_diferencia	 	DECIMAL(11,2)
+DEFINE tot_utilidad 		DECIMAL(11,2)
+	------------------------------------------------------------
+	---- ARREGLO PARALELO PARA NOMBRE DEL ITEM----
+DEFINE r_preventa_2 ARRAY[200] OF RECORD
+	nom_item	LIKE rept010.r10_nombre
+	END  RECORD
+	----------------------------------------------
+
+DEFINE vm_estado		LIKE rept023.r23_estado
+DEFINE vm_estado_2		LIKE rept023.r23_estado
+DEFINE vm_num_detalle		SMALLINT   -- INDICE DE LA PREVENTA (ARRAY)
+DEFINE vm_ind_arr		SMALLINT   -- INDICE DE MI ARREGLO  (ARRAY)
+DEFINE vm_filas_pant		SMALLINT   -- FILAS EN PANTALLA
+DEFINE vm_size_arr		SMALLINT   -- FILAS EN PANTALLA
+DEFINE vm_size_arr2		SMALLINT   -- FILAS EN PANTALLA
+DEFINE vm_subtotal   	 	DECIMAL(12,2)	-- TOTAL BRUTO 
+DEFINE vm_descuento    		DECIMAL(12,2)	-- TOTAL DEL DESCUENTO
+DEFINE vm_impuesto    		DECIMAL(12,2)	-- TOTAL DEL IMPUESTO
+DEFINE vm_total    		DECIMAL(12,2)	-- TOTAL NETO
 
 
 
@@ -38,25 +91,25 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/repp223.error')
-CALL fgl_init4js()
+CALL startlog('../logs/repp223.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
-
-IF num_args() <> 4 THEN          -- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 
-		'Número de parámetros incorrecto', 
-		'stop')
+IF num_args() <> 4 AND num_args() <> 5 THEN
+	-- Validar # parámetros correcto
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
-LET vg_base     = arg_val(1)
-LET vg_modulo   = arg_val(2)
-LET vg_codcia   = arg_val(3)
-LET vg_codloc   = arg_val(4)
+LET vg_base    = arg_val(1)
+LET vg_modulo  = arg_val(2)
+LET vg_codcia  = arg_val(3)
+LET vg_codloc  = arg_val(4)
 LET vg_proceso = 'repp223'
 CALL fl_activar_base_datos(vg_base)
-CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+CALL fl_seteos_defaults()	-- Asigna un valor por default a vg_codloc
+				-- que luego puede ser reemplazado si se 
+                                -- mantiene sin comentario la siguiente linea
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -65,713 +118,862 @@ END MAIN
 
 
 FUNCTION funcion_master()
-DEFINE r		RECORD LIKE gent000.*
-DEFINE r_mon		RECORD LIKE gent013.*
-DEFINE r_rep		RECORD LIKE rept000.*
-DEFINE r_bod		RECORD LIKE rept002.*
 DEFINE i		SMALLINT
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
-INITIALIZE rm_par.* TO NULL
-LET rm_par.r21_moneda = rg_gen.g00_moneda_base
+CALL fl_nivel_isolation()
+CREATE TEMP TABLE temp_prev(
+	tit_estado		VARCHAR(11),
+	num_preventa		INTEGER,
+	total_sin_iva		DECIMAL(12,2),
+	total_costo		DECIMAL(12,2),
+	diferencia		DECIMAL(12,2),
+	utilidad		DECIMAL(12,2),
+	aprobar			CHAR(1),
+	nom_cli			VARCHAR(100))
 
-CALL fl_lee_moneda(rm_par.r21_moneda) RETURNING r_mon.* 
-LET rm_par.tit_moneda = r_mon.g13_nombre
+CREATE UNIQUE INDEX ind_num_prev ON temp_prev(num_preventa)
 
-LET rm_par.fecha_fin = TODAY
-
-OPEN WINDOW w_imp AT 3,2 WITH 22 ROWS, 80 COLUMNS
-	ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE FIRST,
-		  BORDER, MESSAGE LINE LAST) 
-OPEN FORM f_cons FROM '../forms/repf223_1'
-DISPLAY FORM f_cons
-LET vm_max_rows = 1000
-
-DISPLAY 'Fecha Ini.'     TO tit_col1
-DISPLAY '#'		 TO tit_col2
-DISPLAY 'Cliente'        TO tit_col3
-DISPLAY 'Ven'            TO tit_col4
-DISPLAY 'Validez'        TO tit_col5
-DISPLAY 'Valor Neto'     TO tit_col6
-
-WHILE TRUE
-	FOR i = 1 TO fgl_scr_size('rm_prof')
-		CLEAR rm_prof[i].*
-	END FOR
-	CALL lee_parametros1()
-	IF int_flag THEN
-		RETURN
-	END IF
-	CALL lee_parametros2()
-	IF int_flag THEN
-		CONTINUE WHILE
-	END IF
-	CALL muestra_consulta()
-END WHILE
-
-CALL fgl_winmessage(vg_producto, 'salio master','exclamation')
-
-END FUNCTION
-
-
-
-FUNCTION lee_parametros1()
-DEFINE resp		CHAR(3)
-DEFINE mon_aux		LIKE gent013.g13_moneda
-DEFINE tit_aux		VARCHAR(30)
-DEFINE num_dec		SMALLINT
-DEFINE r_mon		RECORD LIKE gent013.*
-DEFINE r_r01		RECORD LIKE rept001.*
-
-LET rm_par.estado = 'T'
-
-LET int_flag = 0
-INPUT BY NAME rm_par.* WITHOUT DEFAULTS
-	ON KEY(F2)
-		IF infield(r21_moneda) THEN
-			CALL fl_ayuda_monedas() RETURNING mon_aux, tit_aux,
-							  num_dec
-			IF mon_aux IS NOT NULL THEN
-				LET rm_par.r21_moneda     = mon_aux
-				LET rm_par.tit_moneda = tit_aux
-				DISPLAY BY NAME rm_par.*
-			END IF
-		END IF
-		IF infield(r21_vendedor) THEN
-			CALL fl_ayuda_vendedores(vg_codcia) 
-				RETURNING r_r01.r01_codigo,
-					  r_r01.r01_nombres
-			IF r_r01.r01_codigo IS NOT NULL THEN
-				LET rm_par.r21_vendedor = r_r01.r01_codigo
-				LET rm_par.tit_vend     = r_r01.r01_nombres
-				DISPLAY BY NAME rm_par.*
-			END IF
-		END IF
-		LET int_flag = 0
-	AFTER FIELD r21_moneda
-		IF rm_par.r21_moneda IS NOT NULL THEN
-			CALL fl_lee_moneda(rm_par.r21_moneda) RETURNING r_mon.*
-			IF r_mon.g13_moneda IS NULL THEN
-				CALL fgl_winmessage(vg_producto, 
-					'Moneda no existe', 
-					'exclamation')
-				NEXT FIELD r21_moneda
-			END IF
-			LET rm_par.tit_moneda = r_mon.g13_nombre
-			DISPLAY BY NAME rm_par.tit_moneda
-		ELSE
-			LET rm_par.tit_moneda = NULL
-			CLEAR tit_moneda
-		END IF
-	AFTER FIELD r21_vendedor
-		IF rm_par.r21_vendedor IS NOT NULL THEN
-			CALL fl_lee_vendedor_rep(vg_codcia, rm_par.r21_vendedor) 
-				RETURNING r_r01.*
-			IF r_r01.r01_codigo IS NULL THEN
-				CALL fgl_winmessage(vg_producto, 
-					'Vendedor no existe', 
-					'exclamation')
-				NEXT FIELD r21_vendedor
-			END IF
-			LET rm_par.tit_vend = r_r01.r01_nombres
-			DISPLAY BY NAME rm_par.tit_vend
-		ELSE
-			LET rm_par.tit_vend = NULL
-			CLEAR tit_vend
-		END IF
-	AFTER INPUT
-		IF int_flag THEN
-			EXIT INPUT
-		END IF
-		IF rm_par.fecha_ini IS NULL OR rm_par.fecha_fin IS NULL THEN
-			CALL fgl_winmessage(vg_producto, 'Debe ingresar un rango de fechas',
-								'exclamation')
-			CONTINUE INPUT					
-		END IF
-		IF rm_par.fecha_fin < rm_par.fecha_ini THEN
-			CALL fgl_winmessage(vg_producto, 
-				'La fecha final debe ser mayor ' || 
-				'a la fecha inicial.',
-				'exclamation')
-			CONTINUE INPUT
-		END IF
-END INPUT
-
-END FUNCTION
-
-
-
-FUNCTION lee_parametros2()
-DEFINE i		SMALLINT
-DEFINE expr_sql		VARCHAR(200)
-
-DEFINE tot_prof		LIKE rept021.r21_tot_neto
-
-LET int_flag = 0
-CONSTRUCT expr_sql ON   r21_numprof, r21_nomcli, r21_tot_neto
-				   FROM r21_numprof, r21_nomcli, r21_tot_neto
-IF int_flag THEN
-	RETURN
+LET vm_max_rows = 250
+IF num_args() = 5 THEN
+	CALL ejecutar_aprobacion_preventa_automatica()
+	EXIT PROGRAM
 END IF
-ERROR 'Generando consulta . . . espere por favor' ATTRIBUTE(NORMAL)
-
-CREATE TEMP TABLE temp_prof (
-	fecha_ini		DATE,
-	r21_numprof		INTEGER,
-	r21_nomcli		VARCHAR(100),
-	r01_iniciales	CHAR(3),
-	r21_dias_prof	SMALLINT,
-	r21_tot_neto	DECIMAL(12,2)
-)
-
-CASE rm_par.estado 
-	WHEN 'A'
-		CALL generar_consulta_aprobadas(expr_sql)
-	WHEN 'S'
-		CALL generar_consulta_sin_aprobar(expr_sql)
-	WHEN 'F'
-		CALL generar_consulta_facturadas(expr_sql)
-	WHEN 'T'
-		CALL generar_consulta_aprobadas(expr_sql)
-		CALL generar_consulta_sin_aprobar(expr_sql)
-		CALL generar_consulta_facturadas(expr_sql)
-END CASE		
-
-SELECT COUNT(*) INTO i FROM temp_prof
-IF i = 0 THEN
-	CALL fl_mensaje_consulta_sin_registros()
-	DROP TABLE temp_prof
-	LET int_flag = 1
-	RETURN
+OPTIONS
+	INPUT WRAP,
+	ACCEPT KEY F12,
+	INSERT KEY F30,
+	DELETE KEY F31
+LET lin_menu = 0
+LET row_ini  = 3
+LET num_rows = 22
+LET num_cols = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
 END IF
-
-SELECT SUM(r21_tot_neto) INTO tot_prof FROM temp_prof
-DISPLAY BY NAME tot_prof
-
-ERROR ' ' ATTRIBUTE(NORMAL)
-
-END FUNCTION
-
-
-
-FUNCTION generar_consulta_aprobadas(expr_sql)
-DEFINE query		VARCHAR(1000)
-DEFINE expr_sql		VARCHAR(200)
-DEFINE expr_vend	VARCHAR(100)
-
-LET expr_vend = ' 1 = 1 '
-IF rm_par.r21_vendedor IS NOT NULL THEN
-	LET expr_vend = ' r21_vendedor = ', rm_par.r21_vendedor
+OPEN WINDOW w_repp223 AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
+	ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE lin_menu,
+		  BORDER, MESSAGE LINE LAST - 1) 
+IF vg_gui = 1 THEN
+	OPEN FORM f_repp223 FROM '../forms/repf223_1'
+ELSE
+	OPEN FORM f_repp223 FROM '../forms/repf223_1c'
 END IF
+DISPLAY FORM f_repp223
 
-LET query = 'INSERT INTO temp_prof ',
-			'SELECT MIN(DATE(r23_fecing)) fecha_ini, ',
-			'       r21_numprof, r21_nomcli, r01_iniciales, ',
-			'       r21_dias_prof, r21_tot_neto ',
-			'  FROM rept021, rept001, rept102, rept023 ',
-			' WHERE r21_compania   = ', vg_codcia, 
-			'   AND r21_localidad  = ', vg_codloc, 
-			'   AND r21_moneda     = "', rm_par.r21_moneda, '"',
-			'   AND ', expr_vend CLIPPED,  
-			'   AND ', expr_sql CLIPPED,  
-			'   AND r01_compania   = r21_compania', 
-			'   AND r01_codigo     = r21_vendedor', 
-			'   AND r102_compania  = r21_compania',
-			'   AND r102_localidad = r21_localidad',
-			'   AND r102_numprof   = r21_numprof',
-			'   AND r23_compania   = r102_compania',
-			'   AND r23_localidad  = r102_localidad',
-			'   AND r23_numprev    = r102_numprev',
-			'   AND r23_estado     = "P" ',
-			' GROUP BY r21_numprof, r21_nomcli, ',
-			' 		   r01_iniciales, r21_dias_prof, r21_tot_neto ',
-			'HAVING MIN(DATE(r23_fecing)) BETWEEN "', rm_par.fecha_ini, '"', 
-											' AND "', rm_par.fecha_fin, '"'
+CALL control_DISPLAY_botones()
 
-PREPARE stmt1 FROM query
-EXECUTE stmt1
-
-END FUNCTION
-
-
-
-FUNCTION generar_consulta_sin_aprobar(expr_sql)
-DEFINE query		VARCHAR(1000)
-DEFINE expr_sql		VARCHAR(200)
-DEFINE expr_vend	VARCHAR(100)
-
-LET expr_vend = ' 1 = 1 '
-IF rm_par.r21_vendedor IS NOT NULL THEN
-	LET expr_vend = ' r21_vendedor = ', rm_par.r21_vendedor
-END IF
-
-LET query = 'INSERT INTO temp_prof ',
-			'SELECT DATE(r21_fecing), ',
-			'       r21_numprof, r21_nomcli, r01_iniciales, ',
-			'       r21_dias_prof, r21_tot_neto ',
-			'  FROM rept021, rept001 ',
-			' WHERE r21_compania   = ', vg_codcia, 
-			'   AND r21_localidad  = ', vg_codloc, 
-			'   AND r21_moneda     = "', rm_par.r21_moneda, '"',
-			'   AND DATE(r21_fecing) BETWEEN "', rm_par.fecha_ini, '"', 
-									   ' AND "', rm_par.fecha_fin, '"',
-			'   AND ', expr_vend CLIPPED,  
-			'   AND ', expr_sql CLIPPED,  
-			'   AND NOT EXISTS (SELECT 1 FROM rept102, rept023',
-							   ' WHERE r102_compania  = r21_compania',
-							     ' AND r102_localidad = r21_localidad',
-							     ' AND r102_numprof   = r21_numprof',
-							     ' AND r23_compania   = r102_compania',
-							     ' AND r23_localidad  = r102_localidad',
-							     ' AND r23_numprev    = r102_numprev',
-							     ' AND r23_estado     IN ("P", "F"))',
-			'   AND r01_compania   = r21_compania', 
-			'   AND r01_codigo     = r21_vendedor', 
-			' GROUP BY r21_fecing, r21_numprof, r21_nomcli, ',
-			' 		   r01_iniciales, r21_dias_prof, r21_tot_neto '
-
-PREPARE stmt2 FROM query
-EXECUTE stmt2
-
-END FUNCTION
-
-
-
-FUNCTION generar_consulta_facturadas(expr_sql)
-DEFINE query		VARCHAR(1000)
-DEFINE expr_sql		VARCHAR(200)
-DEFINE expr_vend	VARCHAR(100)
-
-LET expr_vend = ' 1 = 1 '
-IF rm_par.r21_vendedor IS NOT NULL THEN
-	LET expr_vend = ' r21_vendedor = ', rm_par.r21_vendedor
-END IF
-
-LET query = 'INSERT INTO temp_prof ',
-			'SELECT MIN(DATE(r23_fecing)) fecha_ini, ',
-			'       r21_numprof, r21_nomcli, r01_iniciales, ',
-			'       r21_dias_prof, r21_tot_neto ',
-			'  FROM rept021, rept001, rept102, rept023 ',
-			' WHERE r21_compania   = ', vg_codcia, 
-			'   AND r21_localidad  = ', vg_codloc, 
-			'   AND r21_moneda     = "', rm_par.r21_moneda, '"',
-			'   AND ', expr_vend CLIPPED,  
-			'   AND ', expr_sql CLIPPED,  
-			'   AND r01_compania   = r21_compania', 
-			'   AND r01_codigo     = r21_vendedor', 
-			'   AND r102_compania  = r21_compania',
-			'   AND r102_localidad = r21_localidad',
-			'   AND r102_numprof   = r21_numprof',
-			'   AND r23_compania   = r102_compania',
-			'   AND r23_localidad  = r102_localidad',
-			'   AND r23_numprev    = r102_numprev',
-			'   AND r23_estado     = "F" ',
-			' GROUP BY r21_numprof, r21_nomcli, ',
-			' 		   r01_iniciales, r21_dias_prof, r21_tot_neto ',
-			'HAVING MIN(DATE(r23_fecing)) BETWEEN "', rm_par.fecha_ini, '"', 
-											' AND "', rm_par.fecha_fin, '"'
-
-PREPARE stmt3 FROM query
-EXECUTE stmt3
-
-END FUNCTION
-
-
-
-FUNCTION muestra_consulta()
-DEFINE i		SMALLINT
-DEFINE query		VARCHAR(300)
-DEFINE num_rows		INTEGER
-DEFINE comando		VARCHAR(100)
-
+CALL retorna_tam_arr()
+LET vm_filas_pant = vm_size_arr
+LET vm_num_rows = 0
+LET vm_row_current = 0
+INITIALIZE rm_r23.* TO NULL
+INITIALIZE rm_r24.* TO NULL
 FOR i = 1 TO 10
 	LET rm_orden[i] = '' 
 END FOR
-LET vm_columna_1 = 1
-LET vm_columna_2 = 2
-LET rm_orden[vm_columna_1] = 'DESC'
-LET rm_orden[vm_columna_2] = 'ASC'
-WHILE TRUE
-	LET query = 'SELECT fecha_ini, r21_numprof, r21_nomcli, ',
-				'       r01_iniciales, fecha_ini + r21_dias_prof, ', 
-				'       r21_tot_neto ',
-				'  FROM temp_prof ORDER BY ',
-			vm_columna_1, ' ', rm_orden[vm_columna_1], ',', 
-			vm_columna_2, ' ', rm_orden[vm_columna_2] 
-	PREPARE crep FROM query
-	DECLARE q_crep CURSOR FOR crep 
-	LET i = 1
-	FOREACH q_crep INTO rm_prof[i].*
-		LET i = i + 1
-		IF i > vm_max_rows THEN
-			EXIT FOREACH
-		END IF
-	END FOREACH
-	FREE q_crep
-	LET num_rows = i - 1
-	CALL set_count(num_rows)
-	DISPLAY ARRAY rm_prof TO rm_prof.*
-		BEFORE ROW
-			LET i = arr_curr()
-			MESSAGE i, ' de ', num_rows
-			IF fl_proforma_aprobada(vg_codcia,vg_codloc,rm_prof[i].r21_numprof)
-			THEN
-				CALL dialog.keysetlabel("F6","Ver preventas")
-				CALL dialog.keysetlabel("F8","Anular preventas")
-			ELSE
-				CALL dialog.keysetlabel("F6","")
-				CALL dialog.keysetlabel("F8","")
-			END IF
+LET rm_orden[2] = 'ASC'
+LET vm_columna_1 = 2
+LET vm_columna_2 = 1
+CALL control_cargar_detalle()
+CALL control_ingreso_detalle()
 
-			-- Verifico que de hecho tenga los permisos apropiados
-			IF NOT fl_control_permiso_opcion('Eliminar') THEN
-				CALL dialog.keysetlabel("F8","")
-			END IF
-		BEFORE DISPLAY
-			CALL dialog.keysetlabel("ACCEPT","")
-			CALL dialog.keysetlabel("F5","Ver proforma")
-			CALL dialog.keysetlabel("F7","Imprimir")
-		AFTER DISPLAY
-			CONTINUE DISPLAY
+END FUNCTION
+
+
+
+FUNCTION ejecutar_aprobacion_preventa_automatica()
+DEFINE r_r23		RECORD LIKE rept023.*
+DEFINE i, done		SMALLINT
+DEFINE mensaje		VARCHAR(100)
+
+CALL retorna_tam_arr()
+LET vm_filas_pant  = vm_size_arr
+LET vm_num_rows    = 0
+LET vm_row_current = 0
+INITIALIZE rm_r23.*, rm_r24.* TO NULL
+FOR i = 1 TO 10
+	LET rm_orden[i] = '' 
+END FOR
+LET rm_orden[2]        = 'ASC'
+LET vm_columna_1       = 2
+LET vm_columna_2       = 1
+LET rm_r23.r23_numprev = arg_val(5)
+CALL fl_lee_preventa_rep(vg_codcia, vg_codloc, rm_r23.r23_numprev)
+	RETURNING r_r23.*
+IF r_r23.r23_estado <> 'A' THEN
+	RETURN
+END IF
+CALL control_cargar_detalle()
+BEGIN WORK
+CALL control_actualizacion() RETURNING done
+IF done = 0 THEN
+	ROLLBACK WORK
+	CALL fl_mostrar_mensaje('No se realizó proceso de Aprobación Pre-Venta.', 'stop')
+	EXIT PROGRAM
+END IF 
+CALL control_credito() RETURNING done
+IF done = 0 THEN
+	ROLLBACK WORK
+	CALL fl_mostrar_mensaje('No se realizó proceso de Aprobación Pre-Venta verificando Crédito.', 'stop')
+	EXIT PROGRAM
+END IF
+COMMIT WORK
+LET mensaje = 'Aprobación de Pre-Venta ', rm_r23.r23_numprev USING "<<<<<<&",
+		' Generada Ok.'
+--CALL fl_mostrar_mensaje(mensaje, 'info')
+
+END FUNCTION
+
+
+
+FUNCTION control_mostrar_detalle_preventa(i)
+DEFINE i		SMALLINT
+DEFINE num_cols 	SMALLINT
+
+LET num_cols = 71
+IF vg_gui = 0 THEN
+	LET num_cols = 72
+END IF
+OPEN WINDOW w_repp223_2 AT 4, 5 WITH 19 ROWS, num_cols COLUMNS
+	ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, BORDER, 
+		  MESSAGE LINE LAST - 1) 
+IF vg_gui = 1 THEN
+	OPEN FORM f_repp223_2 FROM '../forms/repf223_2'
+ELSE
+	OPEN FORM f_repp223_2 FROM '../forms/repf223_2c'
+END IF
+DISPLAY FORM f_repp223_2
+
+CALL control_DISPLAY_botones_2()
+
+LET tot_utilidad = r_detalle[i].utilidad
+CALL control_cargar_detalle_preventa(r_detalle[i].num_preventa)
+CALL fl_lee_moneda(rm_r23.r23_moneda) 	-- PARA OBTENER EL NOMBRE DE LA MONEDA 
+	RETURNING rm_g13.*		   	    
+
+DISPLAY rm_g13.g13_nombre TO nom_moneda
+DISPLAY BY NAME rm_r23.r23_moneda, tot_precio_descuento, tot_costo, 
+		tot_diferencia,	tot_utilidad, rm_r23.r23_nomcli
+CALL control_DISPLAY_detalle_preventa()
+IF int_flag THEN
+	LET int_flag = 0
+	CLOSE WINDOW w_repp223_2 
+	RETURN
+END IF
+
+END FUNCTION
+
+
+
+FUNCTION control_ingreso_detalle()
+DEFINE i,j,k,m,salir,done	SMALLINT
+DEFINE resp			CHAR(6)
+DEFINE command_line		VARCHAR(100)
+DEFINE query			VARCHAR(200)
+DEFINE run_prog		CHAR(10)
+
+LET salir = 0
+CALL retorna_tam_arr()
+LET vm_filas_pant  = vm_size_arr
+LET k = 1
+WHILE NOT salir
+
+	LET query = 'SELECT * FROM temp_prev ',
+		' ORDER BY ', vm_columna_1, ' ', rm_orden[vm_columna_1], ', ',
+		      	      vm_columna_2, ' ', rm_orden[vm_columna_2]
+	PREPARE dprev FROM query
+	DECLARE q_dprev CURSOR FOR dprev
+
+	LET i = 1
+	FOREACH q_dprev INTO r_detalle[i].*, r_detalle_2[i].r23_nomcli
+		LET i = i + 1
+	END FOREACH
+	LET i = 1
+	LET j = 1
+	LET int_flag = 0
+	CALL set_count(vm_ind_arr)
+	INPUT ARRAY r_detalle WITHOUT DEFAULTS FROM r_detalle.*
 		ON KEY(INTERRUPT)
-			EXIT DISPLAY
+			LET INT_FLAG = 0
+			CALL fl_mensaje_abandonar_proceso()
+               			RETURNING resp
+			IF resp = 'Yes' THEN
+				LET int_flag = 1
+				EXIT INPUT
+			END IF
+        	ON KEY(F1,CONTROL-W)
+			CALL control_visor_teclas_caracter_1() 
 		ON KEY(F5)
-			CALL ver_proforma(rm_prof[i].r21_numprof)		
-			LET int_flag = 0
+			IF INFIELD(aprobar) THEN
+				CALL control_mostrar_detalle_preventa(i)
+			END IF 
 		ON KEY(F6)
-			CALL ver_preventas(rm_prof[i].r21_numprof)		
-			LET int_flag = 0
-		ON KEY(F7)
-			CALL imprimir(num_rows)		
-			LET int_flag = 0
-		ON KEY(F8)
-			CALL anular_preventas(rm_prof[i].r21_numprof)
-			CALL dialog.keysetlabel("F6","")
-			CALL dialog.keysetlabel("F8","")
-			LET int_flag = 0
+			{-- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE --}
+			LET run_prog = 'fglrun '
+			IF vg_gui = 0 THEN
+				LET run_prog = 'fglgo '
+			END IF
+			{--- ---}
+			LET command_line = run_prog || 'repp209 ' || vg_base
+					    || ' ' || vg_modulo || ' '
+					    || vg_codcia || ' ' || vg_codloc
+					    || ' ' || r_detalle[i].num_preventa
+			RUN command_line
+		BEFORE INPUT
+			--#CALL dialog.keysetlabel('INSERT','')
+			--#CALL dialog.keysetlabel('DELETE','')
+			--#CALL dialog.keysetlabel("F1","")
+			--#CALL dialog.keysetlabel("CONTROL-W","")
+		BEFORE ROW
+			LET i = arr_curr()    # POSICION CORRIENTE EN EL ARRAY
+			LET j = scr_line()    # POSICION CORRIENTE EN PANTALLA
+			CLEAR r23_nomcli
+			CALL muestra_contadores(i)
+		BEFORE INSERT  
+			IF i = arr_count() THEN
+				LET vm_ind_arr = arr_count() - 1
+			ELSE
+				LET vm_ind_arr = arr_count()
+			END IF
+			EXIT INPUT
+
+		AFTER INPUT 
+		FOR m = 1 TO arr_count()
+			IF r_detalle[m].aprobar = 'P' THEN
+				LET m = 0
+				EXIT FOR
+			END IF
+		END FOR
+		IF m = 0 THEN
+			BEGIN WORK
+				CALL control_actualizacion()
+					RETURNING done
+				IF done = 0 THEN
+					ROLLBACK WORK
+					--CALL fgl_winmessage(vg_producto,'No se realizó proceso.','exclamation')
+					CALL fl_mostrar_mensaje('No se realizó proceso.','exclamation')
+					CONTINUE INPUT
+				END IF 
+				CALL control_credito()
+					RETURNING done
+				IF done = 0 THEN
+					ROLLBACK WORK
+					--CALL fgl_winmessage(vg_producto,'No se realizó proceso.','exclamation')
+					CALL fl_mostrar_mensaje('No se realizó proceso.','exclamation')
+				ELSE
+					COMMIT WORK
+					--CALL fgl_winmessage(vg_producto,'Registros actualizados Ok.','info')
+					CALL fl_mostrar_mensaje('Registros actualizados Ok.','info')
+					CALL control_cargar_detalle()
+				END IF
+		END IF
 		ON KEY(F15)
-			LET i = 1
+			--LET r_detalle[i].aprobar =  r_detalle[j].aprobar
+			LET k = 1
 			LET int_flag = 2
-			EXIT DISPLAY
+			EXIT INPUT
 		ON KEY(F16)
-			LET i = 2
+			--LET r_detalle[i].aprobar = GET_FLDBUF(r_detalle[j].aprobar)
+			LET k = 2
 			LET int_flag = 2
-			EXIT DISPLAY
+			EXIT INPUT
 		ON KEY(F17)
-			LET i = 3
+			--LET r_detalle[i].aprobar = GET_FLDBUF(r_detalle[j].aprobar)
+			LET k = 3
 			LET int_flag = 2
-			EXIT DISPLAY
+			EXIT INPUT
 		ON KEY(F18)
-			LET i = 4
+			--LET r_detalle[i].aprobar = GET_FLDBUF(r_detalle[j].aprobar)
+			LET k = 4
 			LET int_flag = 2
-			EXIT DISPLAY
+			EXIT INPUT
 		ON KEY(F19)
-			LET i = 5
+			--LET r_detalle[i].aprobar = GET_FLDBUF(r_detalle[j].aprobar)
+			LET k = 5
 			LET int_flag = 2
-			EXIT DISPLAY
+			EXIT INPUT
 		ON KEY(F20)
-			LET i = 6
+			--LET r_detalle[i].aprobar = GET_FLDBUF(r_detalle[j].aprobar)
+			LET k = 6
 			LET int_flag = 2
-			EXIT DISPLAY
-	END DISPLAY
+			EXIT INPUT
+	END INPUT
 	IF int_flag = 1 THEN
 		EXIT WHILE
 	END IF
-	IF i <> vm_columna_1 THEN
-		LET vm_columna_2           = vm_columna_1 
-		LET rm_orden[vm_columna_2] = rm_orden[vm_columna_1]
-		LET vm_columna_1 = i 
-	END IF
-	IF rm_orden[vm_columna_1] = 'ASC' THEN
-		LET rm_orden[vm_columna_1] = 'DESC'
-	ELSE
-		LET rm_orden[vm_columna_1] = 'ASC'
+
+	FOR m = 1 TO arr_count()
+		UPDATE temp_prev SET aprobar = r_detalle[m].aprobar
+			WHERE num_preventa  = r_detalle[m].num_preventa
+	END FOR
+			 
+	IF int_flag = 2 THEN
+		IF k <> vm_columna_1 THEN
+			LET vm_columna_2           = vm_columna_1 
+			LET rm_orden[vm_columna_2] = rm_orden[vm_columna_1]
+			LET vm_columna_1 = k 
+		END IF
+		IF rm_orden[vm_columna_1] = 'ASC' THEN
+			LET rm_orden[vm_columna_1] = 'DESC'
+		ELSE
+			LET rm_orden[vm_columna_1] = 'ASC'
+		END IF
 	END IF
 END WHILE
-DROP TABLE temp_prof
-                                                                                
-END FUNCTION
-
-
-
-FUNCTION ver_proforma(numprof)
-DEFINE numprof	LIKE rept021.r21_numprof
-DEFINE comando		CHAR(255)
-
-LET comando = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', 
-	vg_separador, 'fuentes', vg_separador, '; fglrun repp220 ', vg_base, 
-	' ', 'RE', vg_codcia, ' ', vg_codloc, ' ', numprof	
-RUN comando	
 
 END FUNCTION
 
 
 
-FUNCTION ver_preventas(numprof)
-DEFINE numprof	LIKE rept021.r21_numprof
-DEFINE comando		CHAR(255)
+FUNCTION control_DISPLAY_botones()
 
-LET comando = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', 
-	vg_separador, 'fuentes', vg_separador, '; fglrun repp209 ', vg_base, 
-	' ', 'RE', vg_codcia, ' ', vg_codloc, ' PROF ', numprof	
-RUN comando	
-
-END FUNCTION
-
-
-
-FUNCTION ingresar_motivo(numprof)
-DEFINE numprof			LIKE rept021.r21_numprof
-DEFINE r120_motivo		LIKE rept120.r120_motivo
-DEFINE resp             CHAR(6)
-
-OPTIONS
-        INPUT WRAP,
-        ACCEPT KEY F12
-
-OPEN WINDOW w_220 AT 9,4 WITH FORM "../forms/repf223_2"
-        ATTRIBUTE(BORDER) 
-
-DISPLAY numprof, vg_usuario, CURRENT 
-	 TO numprof, usuario, fecing
-
-INPUT BY NAME r120_motivo WITHOUT DEFAULTS
-	ON KEY (INTERRUPT)
-		LET INT_FLAG = 0
-		CALL fl_mensaje_abandonar_proceso() RETURNING resp
-		IF resp = 'Yes' THEN
-			LET INT_FLAG = 1
-			EXIT INPUT
-		END IF
-	AFTER FIELD r120_motivo
-		IF r120_motivo IS NULL THEN
-			CALL fgl_winmessage(vg_producto, 
-								'Ingrese el motivo por el cual se anulara(n) la(s) preventa(s) de la proforma actual', 
-								'exclamation') 
-			DISPLAY BY NAME r120_motivo
-			NEXT FIELD r120_motivo
-		ELSE
-			CALL fgl_winquestion(vg_producto,
-                                '¿Esta seguro que desea realizar esta transacion?',
-                                'No', 'Yes|No', 'question', 1)
-      		        RETURNING resp
-	
-			IF resp = 'No' THEN
-				DISPLAY BY NAME r120_motivo
-				NEXT FIELD r120_motivo
-			  ELSE
-				EXIT INPUT
-			END IF
-		END IF
-END INPUT
-IF INT_FLAG THEN
-	LET INT_FLAG = 0
-	INITIALIZE r120_motivo TO NULL
-END IF
-
-CLOSE WINDOW w_220
-
-RETURN r120_motivo
+--#DISPLAY 'Estado'        TO tit_col1
+--#DISPLAY 'No.'           TO tit_col2
+--#DISPLAY 'Total sin IVA' TO tit_col3
+--#DISPLAY 'Total Costo'   TO tit_col4
+--#DISPLAY 'Diferencia'    TO tit_col5
+--#DISPLAY '% Util.'       TO tit_col6
 
 END FUNCTION
 
 
 
-FUNCTION anular_preventas(numprof)
-DEFINE numprof			LIKE rept021.r21_numprof
-DEFINE numprev          LIKE rept023.r23_numprev
-DEFINE r_r23            RECORD LIKE rept023.*
-DEFINE r_r120			RECORD LIKE rept120.*  --tabla historica de las preventas eliminadas
-DEFINE resp 			CHAR(6)
+FUNCTION control_DISPLAY_botones_2()
 
--- Inicializar valores del registro (rept120)
-INITIALIZE r_r120.* TO NULL
-LET r_r120.r120_compania  = vg_codcia
-LET r_r120.r120_localidad = vg_codloc
-LET r_r120.r120_usuario   = vg_usuario
-LET r_r120.r120_fecing    = CURRENT
+--#DISPLAY 'Cant'      		TO tit_col1
+--#DISPLAY 'Item'          	TO tit_col2
+--#DISPLAY 'Dscto'          	TO tit_col3
+--#DISPLAY 'Precio - Dscto' 	TO tit_col4
+--#DISPLAY 'Total Costo'   	TO tit_col5
+--#DISPLAY 'Diferencia'    	TO tit_col6
+--#DISPLAY '% Util.'       	TO tit_col7
 
-IF NOT fl_control_permiso_opcion('Eliminar') THEN
-	CALL fgl_winmessage(vg_producto,'USUARIO NO TIENE PERMISO PARA ESTA OPCION'
-									|| '. PEDIR AYUDA AL ADMINISTRADOR ',
-						'stop')
-	RETURN
-END IF
+END FUNCTION
 
-CALL fgl_winquestion(vg_producto,
-					'¿Desea anular las preventas generadas para esta proforma?', 
-					'No', 'Yes|No', 'question', 1)
-		RETURNING resp
-IF resp = 'No' THEN
-	RETURN
-END IF
 
-CALL ingresar_motivo(numprof) RETURNING r_r120.r120_motivo
-	
-IF r_r120.r120_motivo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'Para anular preventas debe ingresar un motivo', 'stop')
-	RETURN
-END IF	
 
-DECLARE q_prevs CURSOR FOR 
-	SELECT r102_numprev FROM rept102
-        WHERE r102_compania  = vg_codcia 
-          AND r102_localidad = vg_codloc 
-          AND r102_numprof   = numprof
+FUNCTION control_cargar_detalle()
+DEFINE query		CHAR(800)
+DEFINE expr_numprev	VARCHAR(100)
+DEFINE i 		SMALLINT
 
-FOREACH q_prevs INTO numprev
-	INITIALIZE r_r23.* TO NULL
-	CALL fl_lee_preventa_rep(vg_codcia, vg_codloc, numprev) RETURNING r_r23.*
-	IF r_r23.r23_compania IS NULL OR r_r23.r23_estado <> 'P' OR
-	   r_r23.r23_cod_tran IS NOT NULL THEN
-		CONTINUE FOREACH
+CALL retorna_tam_arr()
+LET vm_filas_pant = vm_size_arr
+FOR i = 1 TO vm_filas_pant 
+	INITIALIZE r_detalle[i].* TO NULL
+	IF num_args() <> 5 THEN
+		CLEAR r_detalle[i].*
 	END IF
+END FOR
+LET vm_estado    = 'A'
+LET vm_estado_2  = 'N'
+LET expr_numprev = NULL
+IF num_args() = 5 THEN
+	LET expr_numprev = '   AND r23_numprev   = ', rm_r23.r23_numprev
+END IF
+LET query = 'SELECT r23_nomcli, r23_estado, r23_cont_cred, r23_numprev, ',
+		    ' r23_tot_bruto - r23_tot_dscto, r23_tot_costo ',
+		' FROM rept023 ',
+		' WHERE r23_compania  = ', vg_codcia,
+		'   AND r23_localidad = ', vg_codloc,
+		expr_numprev CLIPPED,
+		'   AND r23_estado   IN ("', vm_estado,'",', 
+					'"', vm_estado_2,'")'
+PREPARE cons FROM query
+DECLARE q_cons CURSOR FOR cons
+LET i = 1
 
-	DELETE FROM cajt010
-	 WHERE j10_compania    = vg_codcia  
-	   AND j10_localidad   = vg_codloc 
-	   AND j10_tipo_fuente = 'PR'
-	   AND j10_num_fuente  = numprev
+DELETE FROM temp_prev
 
-	DELETE FROM rept027
-	 WHERE r27_compania  = vg_codcia
-	   AND r27_localidad = vg_codloc
-	   AND r27_numprev   = numprev
+FOREACH q_cons INTO r_detalle_2[i].r23_nomcli,    r_detalle_2[i].r23_estado,
+		    r_detalle_2[i].r23_cont_cred, r_detalle[i].num_preventa, 
+		    r_detalle[i].total_sin_iva,   r_detalle[i].total_costo
+        IF i  > vm_max_rows THEN
+		EXIT FOREACH
+	END IF	
+	CASE r_detalle_2[i].r23_estado 
+		WHEN 'A'
+			LET r_detalle[i].tit_estado = 'SIN APROBAR'
+		WHEN 'N'
+			LET r_detalle[i].tit_estado = 'NO APROBADA'
+	END CASE
+	LET r_detalle[i].aprobar    = 'A'
+	IF num_args() = 5 THEN
+		LET r_detalle[i].aprobar = 'P'
+	END IF
+	LET r_detalle[i].diferencia = r_detalle[i].total_sin_iva - 
+				      r_detalle[i].total_costo
+	LET r_detalle[i].utilidad   = r_detalle[i].diferencia  / 
+		     		      r_detalle[i].total_costo * 100	
+	INSERT INTO temp_prev VALUES (r_detalle[i].*, r_detalle_2[i].r23_nomcli)
 
-	DELETE FROM rept026
-	 WHERE r26_compania  = vg_codcia
-	   AND r26_localidad = vg_codloc
-	   AND r26_numprev   = numprev
-
-	DELETE FROM rept025
-	 WHERE r25_compania  = vg_codcia
-	   AND r25_localidad = vg_codloc
-	   AND r25_numprev   = numprev
-
-	UPDATE rept023 SET r23_estado = 'N'
-	 WHERE r23_compania  = vg_codcia
-	   AND r23_localidad = vg_codloc
-	   AND r23_numprev   = numprev
-
-	--grabamos un historico de las preventas eliminadas
- 	LET r_r120.r120_numprev = numprev
-	INSERT INTO rept120 VALUES (r_r120.*)
-
-END FOREACH
-FREE q_prevs
-
-CALL fgl_winmessage(vg_producto, 'Proceso completado OK', 'exclamation')
+	LET i = i + 1
+        IF i > vm_max_rows THEN
+		EXIT FOREACH
+	END IF	
+END FOREACH 
+LET i = i - 1
+IF i = 0 THEN 
+	--CALL fgl_winmessage(vg_producto,'No existen Preventas para aprobación.','info')
+	CALL fl_mostrar_mensaje('No existen Preventas para aprobación.','info')
+	LET i = 0
+	EXIT PROGRAM
+END IF
+LET vm_ind_arr = i
+IF vm_ind_arr < vm_filas_pant THEN
+	LET vm_filas_pant = vm_ind_arr
+END IF
+IF num_args() = 5 THEN
+	RETURN
+END IF
+FOR i = 1 TO vm_filas_pant   
+	DISPLAY r_detalle[i].* TO r_detalle[i].*
+END FOR
 
 END FUNCTION
 
 
 
-FUNCTION imprimir(maxelm)
-DEFINE i		SMALLINT          
-DEFINE maxelm		SMALLINT          
-DEFINE comando		VARCHAR(100)
+FUNCTION control_cargar_detalle_preventa(num_preventa)
+DEFINE num_preventa	LIKE rept023.r23_numprev
+DEFINE i 		SMALLINT
+DEFINE query 		CHAR(300)
+DEFINE r_r10		RECORD LIKE rept010.*	-- MAESTRO DE ITEMS
 
-CALL fl_control_reportes() RETURNING comando
-IF int_flag THEN
-	RETURN          
+CALL retorna_tam_arr2()
+LET vm_filas_pant = vm_size_arr2
+FOR i = 1 TO vm_filas_pant 
+	CLEAR r_preventa[i].*
+END FOR
+LET query = 'SELECT r24_cant_ven, r24_item, r24_descuento, ',
+		    ' (r24_precio * r24_cant_ven) - r24_val_descto ',
+		  ' FROM rept024 ',
+            	'WHERE r24_compania  = ', vg_codcia, 
+	    	'  AND r24_localidad = ', vg_codloc,
+            	'  AND r24_numprev   = ', num_preventa
+PREPARE cons2 FROM query
+DECLARE q_cons2 CURSOR FOR cons2
+
+CALL fl_lee_preventa_rep(vg_codcia,vg_codloc,num_preventa)
+	RETURNING rm_r23.*
+LET tot_precio_descuento = 0
+LET tot_costo	         = 0
+LET tot_diferencia       = 0
+LET i = 1
+FOREACH q_cons2 INTO r_preventa[i].r24_cant_ven,  r_preventa[i].r24_item,
+		     r_preventa[i].r24_descuento, r_preventa[i].precio_descuento
+	CALL fl_lee_item(vg_codcia, r_preventa[i].r24_item)
+		RETURNING r_r10.*
+	IF rm_r23.r23_moneda = rg_gen.g00_moneda_base THEN
+		LET r_preventa[i].costo_item = r_preventa[i].r24_cant_ven *
+					       r_r10.r10_costo_mb
+	ELSE
+		LET r_preventa[i].costo_item = r_preventa[i].r24_cant_ven *
+					       r_r10.r10_costo_ma
+	END IF	 
+	LET r_preventa_2[i].nom_item = r_r10.r10_nombre
+	LET r_preventa[i].diferencia = r_preventa[i].precio_descuento - 
+				       r_preventa[i].costo_item
+	LET r_preventa[i].utilidad   = r_preventa[i].diferencia  / 
+		     		       r_preventa[i].costo_item * 100	
+	LET tot_precio_descuento     = tot_precio_descuento +
+				       r_preventa[i].precio_descuento
+	LET tot_costo		     = tot_costo +
+				       r_preventa[i].costo_item
+	LET tot_diferencia           = tot_diferencia +
+				       r_preventa[i].diferencia
+	LET i = i + 1
+        IF i > vm_max_rows THEN
+		EXIT FOREACH
+	END IF	
+END FOREACH 
+LET i = i - 1
+IF i = 0 THEN 
+	CALL fl_mensaje_consulta_sin_registros()
+	LET i = 0
+	CLEAR FORM
+	RETURN
 END IF
-
-START REPORT rep_proforma TO PIPE comando 
-	FOR i = 1 TO (maxelm - 1)
-		OUTPUT TO REPORT rep_proforma(i)
-	END FOR
-FINISH REPORT rep_proforma
+LET vm_num_detalle = i
 
 END FUNCTION
 
 
 
-REPORT rep_proforma(numelm)
-DEFINE numelm		SMALLINT
-DEFINE usuario		VARCHAR(19,15)
-DEFINE titulo		VARCHAR(80)
-DEFINE modulo		VARCHAR(40)
-DEFINE i,long		SMALLINT
-DEFINE fecha		DATE
+FUNCTION control_DISPLAY_detalle_preventa()
+DEFINE j,i		SMALLINT
+DEFINE r_r10		RECORD LIKE rept010.*
 
-OUTPUT
-	TOP MARGIN	1
-	LEFT MARGIN	2
-	RIGHT MARGIN	90
-	BOTTOM MARGIN	4
-	PAGE LENGTH	66
-FORMAT
-PAGE HEADER
-	print 'E'; print '&l26A';	-- Indica que voy a trabajar con hojas A4
-	print '&k4S'	                -- Letra (12 cpi)
-	LET modulo  = "Módulo: Repuestos"
-	LET long    = LENGTH(modulo)
-	LET usuario = 'Usuario: ', vg_usuario
-	CALL fl_justifica_titulo('D', usuario, 19) RETURNING usuario
-	CALL fl_justifica_titulo('I', 'LISTADO DETALLE DE PROFORMAS', 80)
-		RETURNING titulo
+CALL set_count(vm_num_detalle)
+DISPLAY ARRAY r_preventa TO r_preventa.*
+        ON KEY(INTERRUPT)
+                EXIT DISPLAY
+		LET int_flag = 0
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
+	ON KEY(RETURN)
+		LET i = arr_curr()	
+		LET j = scr_line()
+		CALL fl_lee_item(vg_codcia,r_preventa[i].r24_item) 
+			RETURNING r_r10.*  
+		DISPLAY r_r10.r10_nombre TO nom_item 
+		CALL muestra_descripciones(r_preventa[i].r24_item,
+			r_r10.r10_linea, r_r10.r10_sub_linea,
+			r_r10.r10_cod_grupo, 
+			r_r10.r10_cod_clase)
+        --#BEFORE DISPLAY
+                --#CALL dialog.keysetlabel('ACCEPT', '')
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
+	--#BEFORE ROW
+		--#LET i = arr_curr()
+		--#LET j = scr_line()
+		--#DISPLAY '' AT 5,1
+		--#DISPLAY i,' de ',vm_num_detalle AT 5,58
+		--#DISPLAY r_preventa_2[i].nom_item TO nom_item 
+		--#CALL fl_lee_item(vg_codcia,r_preventa[i].r24_item) 
+			--#RETURNING r_r10.*  
+		--#DISPLAY r_r10.r10_nombre TO nom_item 
+		--#CALL muestra_descripciones(r_preventa[i].r24_item,
+			--#r_r10.r10_linea, r_r10.r10_sub_linea,
+			--#r_r10.r10_cod_grupo, 
+			--#r_r10.r10_cod_clase)
+        --#AFTER DISPLAY
+                --#CONTINUE DISPLAY
+END DISPLAY
 
-	PRINT COLUMN 1, rg_cia.g01_razonsocial,
-  	      COLUMN 120, "Página: ", PAGENO USING "&&&"
-	PRINT COLUMN 1, modulo CLIPPED,
-	      COLUMN 52, titulo CLIPPED,
-	      COLUMN 124, "REPP306" 
-	PRINT COLUMN 48, "** Moneda        : ", rm_par.r21_moneda,
-						" ", rm_par.tit_moneda
-	PRINT COLUMN 48, "** Vendedor      : ", rm_par.r21_vendedor, 
-						" ", rm_par.tit_vend
-	PRINT COLUMN 48, "** Fecha Inicial : ", rm_par.fecha_ini USING "dd-mm-yyyy"
-	PRINT COLUMN 48, "** Fecha Final   : ", rm_par.fecha_fin USING "dd-mm-yyyy"
-	PRINT COLUMN 01, "Fecha  : ", TODAY USING "dd-mm-yyyy", 1 SPACES, TIME,
-	      COLUMN 112, usuario
-	SKIP 1 LINES
---	print '&k2S'	                -- Letra condensada (16 cpi)
-	PRINT COLUMN 1,   "Fecha Ini.",
-	      COLUMN 13,  "  #  ",
-	      COLUMN 20,  "Cliente",
-	      COLUMN 52,  "Ven",
-	      COLUMN 57,  "Validez",
-	      COLUMN 69, "Valor Neto"
-	PRINT "------------------------------------------------------------------------------------------------------------------------"
-ON EVERY ROW
-	NEED 2 LINES
-	PRINT COLUMN 1,   rm_prof[numelm].fecha_ini USING "dd-mm-yyyy",
-	      COLUMN 13,  rm_prof[numelm].r21_numprof USING "####&",
-	      COLUMN 20,  rm_prof[numelm].r21_nomcli[1,30],
-	      COLUMN 52,  rm_prof[numelm].siglas_vend,
-	      COLUMN 57,  rm_prof[numelm].fecha_max USING "dd-mm-yyyy",
-	      COLUMN 69,  rm_prof[numelm].r21_tot_neto USING "---,---,--&.&&" 
-
-END REPORT
+END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION control_actualizacion()
+DEFINE done,j           SMALLINT
+DEFINE mensaje		VARCHAR(100)
 
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
+LET j	     = 1
+LET done     = 0
+WHILE TRUE
+        WHENEVER ERROR CONTINUE
+	IF r_detalle[j].aprobar = 'P' THEN
+		UPDATE rept023 SET r23_estado = 'P'
+                      WHERE r23_compania  = vg_codcia
+                        AND r23_localidad = vg_codloc
+                        AND r23_numprev   = r_detalle[j].num_preventa
+
+		LET done = control_actualizacion_caja(r_detalle[j].num_preventa)
+		IF done = 0 THEN
+			EXIT WHILE
+		END IF
+
+	END IF
+        WHENEVER ERROR STOP
+        IF STATUS < 0 THEN
+		LET mensaje = 'La preventa número ', r_detalle[j].num_preventa,
+				' del cliente ', r_detalle_2[j].r23_nomcli,
+				' está siendo modificada, no se realizará ',
+				'la aprobacion.'
+                --CALL fgl_winmessage(vg_producto, mensaje, 'exclamation')
+		CALL fl_mostrar_mensaje(mensaje, 'exclamation')
+		EXIT WHILE
+        END IF
+	LET j = j + 1
+	IF j > vm_ind_arr THEN
+		LET done     = 1
+		EXIT WHILE
+	END IF
+END WHILE
+RETURN done
+
+END FUNCTION
+
+
+
+FUNCTION control_credito()
+DEFINE done,j 		SMALLINT 
+DEFINE r_r25		RECORD LIKE rept025.*
+DEFINE r_r23		RECORD LIKE rept023.*
+DEFINE r_z02		RECORD LIKE cxct002.*
+DEFINE fecha_aux	DATE 
+
+WHENEVER ERROR CONTINUE
+
+LET done = 0 
+LET j    = 1
+WHILE TRUE
+
+	IF r_detalle[j].aprobar = 'P' AND r_detalle_2[j].r23_cont_cred = 'R'
+	   THEN
+
+		CALL fl_lee_preventa_rep(vg_codcia, vg_codloc, 
+					 r_detalle[j].num_preventa)
+			RETURNING r_r23.*
+
+		CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc, 
+					      r_r23.r23_codcli)
+			RETURNING r_z02.*
+		IF r_z02.z02_credit_dias = 0 THEN
+			LET r_z02.z02_credit_dias = 30
+		END IF
+		CALL fl_lee_cabecera_credito_rep(vg_codcia, vg_codloc,
+			                         r_detalle[j].num_preventa)
+			RETURNING r_r25.*
+		IF r_r25.r25_compania IS NULL THEN
+			DELETE FROM rept025
+				WHERE r25_compania  = vg_codcia
+			        AND   r25_localidad = vg_codloc
+			        AND   r25_numprev   = r_detalle[j].num_preventa
+
+			DELETE FROM rept026
+				WHERE r26_compania  = vg_codcia
+			        AND   r26_localidad = vg_codloc
+			        AND   r26_numprev   = r_detalle[j].num_preventa
+
+			DELETE FROM rept027
+				WHERE r27_compania  = vg_codcia
+				AND   r27_localidad = vg_codloc
+				AND   r27_numprev   = r_detalle[j].num_preventa
+
+			INSERT INTO rept025 VALUES(vg_codcia, vg_codloc, 
+					r_detalle[j].num_preventa, 0, 
+					r_r23.r23_tot_neto, 0, 1, 
+					r_z02.z02_credit_dias, null, null)
+
+			LET fecha_aux = TODAY + r_z02.z02_credit_dias 
+
+			INSERT INTO rept026 VALUES(vg_codcia, vg_codloc,  
+					r_r23.r23_numprev, 1, 
+					r_r23.r23_tot_neto, 0, 
+			       		fecha_aux)
+		END IF
+	END IF
+	LET j = j + 1
+	IF j > vm_ind_arr THEN
+		LET done     = 1
+		EXIT WHILE
+	END IF
+END WHILE
+
+WHENEVER ERROR STOP
+IF status < 0 THEN
+	LET done = 0
 END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
+
+RETURN done 
+
+END FUNCTION
+
+
+
+FUNCTION control_actualizacion_caja(num_preventa)
+DEFINE num_preventa 	LIKE rept023.r23_numprev
+DEFINE intentar		SMALLINT
+DEFINE done    		SMALLINT
+DEFINE r_j10		RECORD LIKE cajt010.*
+DEFINE anticipos	DECIMAL(12,2)
+
+CALL fl_lee_preventa_rep(vg_codcia,vg_codloc,num_preventa)
+	RETURNING rm_r23.*
+
+LET intentar = 1
+LET done = 0
+WHILE (intentar)
+	INITIALIZE r_j10.* TO NULL
+	WHENEVER ERROR CONTINUE
+		DECLARE q_j10 CURSOR FOR
+			SELECT * FROM cajt010
+				WHERE j10_compania    = vg_codcia      
+				  AND j10_localidad   = vg_codloc       
+				  AND j10_tipo_fuente = 'PR'
+				  AND j10_num_fuente  =	rm_r23.r23_numprev
+			FOR UPDATE
+	OPEN  q_j10
+	FETCH q_j10 INTO r_j10.*
+	WHENEVER ERROR STOP
+	IF STATUS < 0 THEN
+		LET intentar = mensaje_intentar()
+	ELSE
+		LET intentar = 0
+		LET done = 1
+	END IF
+END WHILE
+IF NOT intentar AND NOT done THEN
+	RETURN done
 END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
+
+-- GVA * 
+	DELETE FROM cajt010 
+		WHERE j10_compania    = vg_codcia      
+		  AND j10_localidad   = vg_codloc       
+		  AND j10_tipo_fuente = 'PR'
+		  AND j10_num_fuente  =	rm_r23.r23_numprev
+{
+DELETE FROM cajt010 WHERE CURRENT OF q_j10 
+CLOSE q_j10
+FREE  q_j10
+}
+CALL fl_lee_grupo_linea(vg_codcia, rm_r23.r23_grupo_linea)
+	RETURNING rm_g20.*
+
+LET r_j10.j10_areaneg   = rm_g20.g20_areaneg
+LET r_j10.j10_codcli    = rm_r23.r23_codcli
+LET r_j10.j10_nomcli    = rm_r23.r23_nomcli
+LET r_j10.j10_moneda    = rm_r23.r23_moneda
+
+LET r_j10.j10_fecha_pro   = CURRENT
+LET r_j10.j10_usuario     = vg_usuario 
+LET r_j10.j10_fecing      = CURRENT
+LET r_j10.j10_compania    = vg_codcia
+LET r_j10.j10_localidad   = vg_codloc
+LET r_j10.j10_tipo_fuente = 'PR'
+LET r_j10.j10_num_fuente  = rm_r23.r23_numprev
+LET r_j10.j10_estado      = 'A'
+
+INITIALIZE r_j10.j10_codigo_caja,  r_j10.j10_tipo_destino, 
+ 	   r_j10.j10_num_destino,  r_j10.j10_referencia,     
+ 	   r_j10.j10_banco,        r_j10.j10_numero_cta,   
+	   r_j10.j10_tip_contable, r_j10.j10_num_contable,
+	   anticipos
+           TO NULL    
+
+-- Para verificar si existen pagos anticipados o NC aplicados a la preventa 
+SELECT SUM(r27_valor) INTO anticipos FROM rept027
+	WHERE r27_compania  = vg_codcia
+	  AND r27_localidad = vg_codloc
+	  AND r27_numprev   = rm_r23.r23_numprev
+
+IF anticipos IS NULL THEN 
+	LET anticipos = 0
 END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
+                                                                
+IF rm_r23.r23_cont_cred = 'R' THEN
+	LET r_j10.j10_valor = 0
+ELSE
+	LET r_j10.j10_valor = rm_r23.r23_tot_neto - anticipos 
 END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
+
+INSERT INTO cajt010 VALUES(r_j10.*)
+
+RETURN done
+
+END FUNCTION
+
+
+
+FUNCTION mensaje_intentar()
+DEFINE intentar         SMALLINT
+DEFINE resp             CHAR(6)
+                                                                                
+LET intentar = 1
+--CALL fgl_winquestion(vg_producto,'Registro bloqueado por otro usuario, desea intentarlo nuevamente','No','Yes|No','question',1)
+CALL fl_hacer_pregunta('Registro bloqueado por otro usuario, desea intentarlo nuevamente','No')
+	RETURNING resp
+IF resp = 'No' THEN
+	LET intentar = 0
 END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
+RETURN intentar
+
+END FUNCTION
+
+
+
+
+
+
+FUNCTION muestra_contadores(i)
+DEFINE i 	SMALLINT
+
+IF vg_gui = 1 THEN
+	DISPLAY '' AT 19,1
+	DISPLAY i, ' de ', vm_ind_arr AT 19, 5 
 END IF
+DISPLAY r_detalle_2[i].r23_nomcli TO r23_nomcli
+
+END FUNCTION
+
+
+
+FUNCTION muestra_descripciones(item, linea, sub_linea, cod_grupo, cod_clase)
+DEFINE item		LIKE rept010.r10_codigo
+DEFINE linea		LIKE rept010.r10_linea
+DEFINE sub_linea	LIKE rept010.r10_sub_linea
+DEFINE cod_grupo	LIKE rept010.r10_cod_grupo
+DEFINE cod_clase	LIKE rept010.r10_cod_clase
+DEFINE r_r03		RECORD LIKE rept003.*
+DEFINE r_r70		RECORD LIKE rept070.*
+DEFINE r_r71		RECORD LIKE rept071.*
+DEFINE r_r72		RECORD LIKE rept072.*
+
+CALL fl_lee_linea_rep(vg_codcia, linea) RETURNING r_r03.*
+CALL fl_lee_sublinea_rep(vg_codcia, linea, sub_linea) RETURNING r_r70.*
+CALL fl_lee_grupo_rep(vg_codcia, linea, sub_linea, cod_grupo)
+	RETURNING r_r71.*
+CALL fl_lee_clase_rep(vg_codcia, linea, sub_linea, cod_grupo, cod_clase)
+	RETURNING r_r72.*
+DISPLAY r_r03.r03_nombre     TO descrip_1
+DISPLAY r_r70.r70_desc_sub   TO descrip_2
+DISPLAY r_r71.r71_desc_grupo TO descrip_3
+DISPLAY r_r72.r72_desc_clase TO descrip_4
+
+END FUNCTION
+
+
+
+FUNCTION retorna_tam_arr()
+
+--#LET vm_size_arr = fgl_scr_size('r_detalle')
+IF vg_gui = 0 THEN
+	LET vm_size_arr = 14
+END IF
+
+END FUNCTION
+
+
+
+FUNCTION retorna_tam_arr2()
+
+--#LET vm_size_arr2 = fgl_scr_size('r_preventa')
+IF vg_gui = 0 THEN
+	LET vm_size_arr2 = 5
+END IF
+
+END FUNCTION
+
+
+
+FUNCTION llamar_visor_teclas()
+DEFINE a		CHAR(1)
+
+IF vg_gui = 0 THEN
+	CALL fl_visor_teclas_caracter() RETURNING int_flag 
+	LET a = fgl_getkey()
+	CLOSE WINDOW w_tf
+	LET int_flag = 0
+END IF
+
+END FUNCTION
+
+
+
+FUNCTION control_visor_teclas_caracter_1() 
+DEFINE a, fila		INTEGER
+
+CALL fl_visor_teclas_caracter() RETURNING fila
+LET a = fila + 2
+DISPLAY 'Teclas exclusivas de este proceso:' AT a,2 ATTRIBUTE(REVERSE)	
+LET a = a + 1
+DISPLAY '<F5>      Mostrar Detalle Pre-Venta' AT a,2
+DISPLAY  'F5' AT a,3 ATTRIBUTE(REVERSE)
+LET a = a + 1
+DISPLAY '<F6>      Ver Pre-Venta'             AT a,2
+DISPLAY  'F6' AT a,3 ATTRIBUTE(REVERSE)
+LET a = fgl_getkey()
+CLOSE WINDOW w_tf
 
 END FUNCTION

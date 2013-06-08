@@ -1,0 +1,31 @@
+DATABASE aceros
+SCREEN
+{
+
+  BODEGAS 
+ ----------------------------------------------
+  BD           Descripción          Localidad
+ ----------------------------------------------
+ [c1|c012                          |c013      ]
+ [c1|c012                          |c013      ]
+ [c1|c012                          |c013      ]
+ [c1|c012                          |c013      ]
+ [c1|c012                          |c013      ]
+ [c1|c012                          |c013      ]
+ [c1|c012                          |c013      ]
+ [c1|c012                          |c013      ]
+ [c1|c012                          |c013      ]
+ [c1|c012                          |c013      ]
+
+}
+TABLES
+gent002
+rept002
+ATTRIBUTES
+c1   = rept002.r02_codigo, NOENTRY, UPSHIFT;
+c012 = rept002.r02_nombre, NOENTRY, UPSHIFT;
+c013 = gent002.g02_abreviacion, NOENTRY, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_bode[10] (r02_codigo, r02_nombre, g02_abreviacion)

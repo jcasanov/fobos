@@ -1,49 +1,62 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
 
- No. Presupuesto: [c002    ]  Modelo: [c012                 ] Línea: [c003 ]
-         Cliente: [c014                                     ]
-
-      [c016         ] [c017                                 |c018          ]
-     [c004         ] [c006                                 |c008          ]
-     [c004         ] [c006                                 |c008          ]
-     [c004         ] [c006                                 |c008          ]
-     [c004         ] [c006                                 |c008          ]
-     [c004         ] [c006                                 |c008          ]
-     [c004         ] [c006                                 |c008          ]
-     [c004         ] [c006                                 |c008          ]
-     [c004         ] [c006                                 |c008          ]
-     [c004         ] [c006                                 |c008          ]
-     [c004         ] [c006                                 |c008          ]
-                                                           ---------------
-                                              Total Valor: [c015          ]
-    [c013                                                                 ] 
-     Usuario: [c009      ]          Fecha de Ingreso: [c010               ]
+ No. Presupuesto: [c000    ]  
+         Cliente: [c001                                     ]
+                                                             [c002] de [c003]
+  [c010         ] [c011                                 |c012 |c013          ]
+ [c020         ] [c021                                 |c022 |c023          ]
+ [c020         ] [c021                                 |c022 |c023          ]
+ [c020         ] [c021                                 |c022 |c023          ]
+ [c020         ] [c021                                 |c022 |c023          ]
+ [c020         ] [c021                                 |c022 |c023          ]
+ [c020         ] [c021                                 |c022 |c023          ]
+ [c020         ] [c021                                 |c022 |c023          ]
+ [c020         ] [c021                                 |c022 |c023          ]
+ [c020         ] [c021                                 |c022 |c023          ]
+ [c020         ] [c021                                 |c022 |c023          ]
+                                                             ---------------
+ [c033                                          ]  SubTotal: [c030          ]
+           Usuario: [c034      ]                  Descuento: [c031          ]
+  Fecha de Ingreso: [c035               ]              Neto: [c032          ]
 }
 TABLES
 talt020,
 talt021
 ATTRIBUTES
-c002 = talt020.t20_numpre, AUTONEXT, REVERSE,
+c000 = talt020.t20_numpre, AUTONEXT, REVERSE,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c003 = FORMONLY.tit_linea, NOENTRY, REVERSE, UPSHIFT;
-c016 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-c017 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-c018 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
-c004 = talt021.t21_codtarea, AUTONEXT, UPSHIFT, OPTIONS = '-nolist',
+c001 = FORMONLY.tit_cliente, NOENTRY, REVERSE, UPSHIFT;
+
+c002 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c003 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+
+c020 = talt021.t21_codtarea, AUTONEXT, UPSHIFT, OPTIONS = '-nolist',
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c006 = talt021.t21_descripcion, AUTONEXT, UPSHIFT, SCROLL,
+c021 = talt021.t21_descripcion, AUTONEXT, UPSHIFT, SCROLL,
 	OPTIONS = '-nolist';
-c008 = talt021.t21_valor, AUTONEXT, INCLUDE = (0.01 TO 999999999.99),
+c022 = talt021.t21_porc_descto, AUTONEXT, INCLUDE = (0 TO 99.99),
+	FORMAT = '#&.##', OPTIONS = '-nolist';
+c023 = talt021.t21_valor, AUTONEXT, INCLUDE = (0 TO 999999999.99),
 	FORMAT = '###,###,##&.##', OPTIONS = '-nolist';
-c015 = FORMONLY.tit_total, NOENTRY, REVERSE, INCLUDE = (0 TO 999999999.99),
+
+c030 = FORMONLY.subtotal, NOENTRY, REVERSE, INCLUDE = (0 TO 999999999.99),
 	FORMAT = '###,###,##&.##';
-c012 = FORMONLY.tit_modelo, NOENTRY, REVERSE, UPSHIFT;
-c013 = FORMONLY.tit_descri, NOENTRY, REVERSE, UPSHIFT;
-c014 = FORMONLY.tit_cliente, NOENTRY, REVERSE, UPSHIFT;
-c009 = talt021.t21_usuario, NOENTRY, REVERSE, UPSHIFT;
-c010 = talt021.t21_fecing, NOENTRY, REVERSE, UPSHIFT;
-INSTRUCTIONS
-SCREEN RECORD rm_ta[10] (t21_codtarea,t21_descripcion,t21_valor)
+c031 = FORMONLY.val_descto, NOENTRY, REVERSE, INCLUDE = (0 TO 999999999.99),
+	FORMAT = '###,###,##&.##';
+c032 = FORMONLY.total_neto, NOENTRY, REVERSE, INCLUDE = (0 TO 999999999.99),
+	FORMAT = '###,###,##&.##';
+c033 = FORMONLY.tit_descri, NOENTRY, REVERSE, UPSHIFT;
+c034 = talt021.t21_usuario, NOENTRY, REVERSE, UPSHIFT;
+c035 = talt021.t21_fecing, NOENTRY, REVERSE, UPSHIFT;
 END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_detalle[10] (t21_codtarea, t21_descripcion, t21_porc_descto,
+				t21_valor)

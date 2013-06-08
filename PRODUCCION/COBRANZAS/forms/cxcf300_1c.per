@@ -1,0 +1,58 @@
+DATABASE aceros
+SCREEN
+{
+           Moneda: [c0] [c001           ]           Con Saldo Mayor a 0?: [x]
+   Tipo Documento: [c1] [c111           ] 
+  Area de Negocio: [c2] [c003           ]
+     Rango Fechas: [c004      ] - [c005      ]
+
+   Fecha    T. Número      C l i e n t e       Valor Original    S a l d o
+[c020      |z1|c021  |c022                    |c023          |c024          ]  
+[c020      |z1|c021  |c022                    |c023          |c024          ]  
+[c020      |z1|c021  |c022                    |c023          |c024          ]  
+[c020      |z1|c021  |c022                    |c023          |c024          ]  
+[c020      |z1|c021  |c022                    |c023          |c024          ]  
+[c020      |z1|c021  |c022                    |c023          |c024          ]  
+[c020      |z1|c021  |c022                    |c023          |c024          ]  
+[c020      |z1|c021  |c022                    |c023          |c024          ]  
+[c020      |z1|c021  |c022                    |c023          |c024          ]  
+[c020      |z1|c021  |c022                    |c023          |c024          ]  
+[c020      |z1|c021  |c022                    |c023          |c024          ]  
+                                    Totales:  [c030          |c031          ]
+}
+TABLES
+cxct021
+ATTRIBUTES
+c0   = FORMONLY.moneda TYPE CHAR NOT NULL, UPSHIFT, REVERSE, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c001 = FORMONLY.tit_mon, REVERSE, NOENTRY;
+c1   = FORMONLY.tipo_doc, UPSHIFT, REVERSE, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c111 = FORMONLY.tit_tipo, NOENTRY;
+c2   = FORMONLY.area_n TYPE SMALLINT, UPSHIFT, REVERSE, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c003 = FORMONLY.tit_area, NOENTRY;
+c004 = FORMONLY.fecha_ini TYPE DATE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese fecha en fomato: dd-mm-aaaa';
+c005 = FORMONLY.fecha_fin TYPE DATE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese fecha en fomato: dd-mm-aaaa';
+x    = FORMONLY.flag_saldo TYPE CHAR NOT NULL, REVERSE, UPSHIFT,
+	INCLUDE = ('S', 'N'), DEFAULT = 'S',
+	COMMENTS = '(S) consulta con saldo (+)  (N) consulta con saldo (+/-)';
+c020 = z21_fecha_emi, FORMAT = 'dd-mm-yyyy';
+z1   = z21_tipo_doc;
+c021 = z21_num_doc;
+c022 = FORMONLY.nomcli;
+c023 = z21_valor, FORMAT = '###,###,##&.##';
+c024 = z21_saldo, FORMAT = '###,###,##&.##';
+c030 = FORMONLY.tot_valor TYPE DECIMAL(14,2), FORMAT = '###,###,##&.##',
+       REVERSE;
+c031 = FORMONLY.tot_saldo TYPE DECIMAL(14,2), FORMAT = '###,###,##&.##',
+       REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_ant[11](z21_fecha_emi, z21_tipo_doc, z21_num_doc, 
+			 FORMONLY.nomcli, z21_valor, z21_saldo)
+--KEYS
+--'F6'='Documento'

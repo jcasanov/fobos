@@ -1,0 +1,36 @@
+DATABASE aceros
+SCREEN
+{
+  DOCUMENTOS DEUDORES DE CLIENTES EN COBRANZAS 
+ ---------------------------------------------------------------------------
+  Cliente              Documento          Div Saldo            Mo Area Neg.
+ ---------------------------------------------------------------------------
+ [c001               |c0|c002           |c01|c003            |c1|c004      ]
+ [c001               |c0|c002           |c01|c003            |c1|c004      ]
+ [c001               |c0|c002           |c01|c003            |c1|c004      ]
+ [c001               |c0|c002           |c01|c003            |c1|c004      ]
+ [c001               |c0|c002           |c01|c003            |c1|c004      ]
+ [c001               |c0|c002           |c01|c003            |c1|c004      ]
+ [c001               |c0|c002           |c01|c003            |c1|c004      ]
+ [c001               |c0|c002           |c01|c003            |c1|c004      ]
+ [c001               |c0|c002           |c01|c003            |c1|c004      ]
+ [c001               |c0|c002           |c01|c003            |c1|c004      ]
+}
+TABLES
+cxct020
+cxct001
+gent003
+ATTRIBUTES
+c001 = z01_nomcli, UPSHIFT, REVERSE;
+c0   = z20_tipo_doc, UPSHIFT, REVERSE;
+c002 = z20_num_doc, UPSHIFT, REVERSE;
+c01  = z20_dividendo, UPSHIFT, FORMAT = '#&&', REVERSE;
+c003 = z20_saldo_cap, UPSHIFT, FORMAT = '#,###,###,##&.##', REVERSE;
+c1   = z20_moneda, UPSHIFT, REVERSE;
+c004 = g03_abreviacion, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_deudacob[10] (z01_nomcli, z20_tipo_doc, z20_num_doc,
+				z20_dividendo, z20_saldo_cap, z20_moneda,
+				g03_abreviacion)

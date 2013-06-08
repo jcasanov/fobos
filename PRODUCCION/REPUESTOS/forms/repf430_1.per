@@ -1,25 +1,57 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
 
 
-                    Moneda: [a0] [c001           ]
-          Tipo Transacción: [c004 ] [c005                           ]
+                    Moneda: [c0] [c000           ]
+          Tipo Transacción: [c1] [c001                          ]
           
              Fecha Inicial: [c002      ]    Fecha Final: [c003      ]
+
+          Localidad Origen: [c2] [c004                ] Tipo Vta.: [d        ]
+         Localidad Destino: [c3] [c005                ]
+
+             Bodega Origen: [c4] [c006                          ]
+            Bodega Destino: [c5] [c007                          ]
+
+ Incluir Bodega Sin Stock?: [c]
 
 }
 TABLES
 rept019
 ATTRIBUTES
-a0   = rept019.r19_moneda, AUTONEXT, REVERSE, UPSHIFT,
+c0   = rept019.r19_moneda, AUTONEXT, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c001 = FORMONLY.tit_moneda, NOENTRY, REVERSE, UPSHIFT;
-c004 = rept019.r19_cod_tran, AUTONEXT, REVERSE, UPSHIFT,
+c000 = FORMONLY.tit_moneda, NOENTRY, REVERSE, UPSHIFT;
+c1   = rept019.r19_cod_tran, AUTONEXT, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c005 = FORMONLY.tit_tipo, NOENTRY, REVERSE, UPSHIFT;
+c001 = FORMONLY.tit_tipo, NOENTRY, REVERSE, UPSHIFT;
 c002 = FORMONLY.vm_fecha_ini TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
-	FORMAT = 'dd-mm-yyyy';
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la fecha inicial en formato: dd-mm-aaaa';
 c003 = FORMONLY.vm_fecha_fin TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
-	FORMAT = 'dd-mm-yyyy';
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la fecha final en formato: dd-mm-aaaa';
+c2   = FORMONLY.loc1 TYPE SMALLINT, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Solamente es utilizada para las Transferencias.';
+c004 = FORMONLY.tit_loc1, NOENTRY, UPSHIFT;
+c3   = FORMONLY.loc2 TYPE SMALLINT, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Solamente es utilizada para las Transferencias.';
+c005 = FORMONLY.tit_loc2, NOENTRY, UPSHIFT;
+c4   = FORMONLY.bod1 TYPE CHAR, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Solamente es utilizada para las Transferencias.';
+c006 = FORMONLY.tit_bod1, NOENTRY, UPSHIFT;
+c5   = FORMONLY.bod2 TYPE CHAR, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Solamente es utilizada para las Transferencias.';
+c007 = FORMONLY.tit_bod2, NOENTRY, UPSHIFT;
+c    = FORMONLY.sin_stock TYPE CHAR, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge', DEFAULT = 'N',
+	COMMENTS = 'Solamente es utilizada para las Transferencias.';
+d    = FORMONLY.cont_cred TYPE CHAR, UPSHIFT, REVERSE, AUTONEXT,
+	WIDGET = 'RADIO', CONFIG = 'C Contado R Credito T Todos', DEFAULT = 'T',
+	COMMENTS = 'Solamente es utilizada para las Ventas.';
 END

@@ -1,45 +1,56 @@
-database diteca
-screen 
+DATABASE aceros
+SCREEN 
 {
 
+                                                        Estado: [c|c000      ]
 
-     No Solicitud: [c002       ]                  Estado: [b|c100      ]
-          Cliente: [c004       ] [c102                                 ]
-     Area Negocio: [c003  ] [c101            ]
-      Grupo Línea: [c000  ] [c110            ]
-           Moneda: [a0] [c103           ] Paridad: [c006               ]
-	  Subtipo: [c009] [c104                        ]    
-       Referencia: [c005                               ]
+  No. Solicitud: [c001       ]
+        Cliente: [c002  ] [c003                                              ]
+                          [c003                                              ]
 
-    Valor a Pagar: [c008            ]
+   Area Negocio: [c0] [c004            ]  G. Línea: [c005 ] [c006            ]
+         Moneda: [c1] [c007            ]   Paridad: [c008               ]
 
-    Ingresado Por: [c013      ]         
- Fecha de Ingreso: [c014               ]
+        Subtipo: [c009] [c010                          ]    
+       Cobrador: [c011] [c012                          ]
+     Referencia: [c013                                 ]
+
+  Valor a Pagar: [c014            ]
+
+  Ingresado Por: [c015      ]             Fecha Ingreso: [c016               ]
+
 }
-end
-tables
+TABLES
 cxct024
-attributes
-c002 = cxct024.z24_numero_sol, REVERSE, NOENTRY, WIDGET='FIELD_BMP',
-	CONFIG='lista.bmp F2';
-c003 = cxct024.z24_areaneg, REVERSE, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
-c000 = cxct024.z24_linea, REVERSE, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
-c004 = cxct024.z24_codcli, REVERSE, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
-b = cxct024.z24_estado, NOENTRY, UPSHIFT, REVERSE;
-c005 = cxct024.z24_referencia, UPSHIFT;
-a0 = cxct024.z24_moneda, REVERSE, UPSHIFT, AUTONEXT,
-	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
-c009 = cxct024.z24_subtipo, REVERSE, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
-c006 = cxct024.z24_paridad, NOENTRY, REVERSE, FORMAT='#,###,##&.#########';
-c013 = cxct024.z24_usuario, REVERSE, NOENTRY, UPSHIFT;
-c014 = cxct024.z24_fecing, REVERSE, NOENTRY;
+ATTRIBUTES
+c    = cxct024.z24_estado, NOENTRY, UPSHIFT, REVERSE;
+c000 = FORMONLY.n_estado, NOENTRY, UPSHIFT, REVERSE;
 
-c008 = cxct024.z24_total_cap, REVERSE, FORMAT='#,###,###,##&.##';
+c001 = cxct024.z24_numero_sol, REVERSE, NOENTRY, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = cxct024.z24_codcli, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = FORMONLY.n_cliente, NOENTRY, REVERSE, UPSHIFT, WORDWRAP COMPRESS;
+c0   = cxct024.z24_areaneg, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c004 = FORMONLY.n_areaneg, NOENTRY, UPSHIFT, REVERSE;
+c005 = cxct024.z24_linea, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c006 = FORMONLY.n_linea, NOENTRY, UPSHIFT, REVERSE;
+c1   = cxct024.z24_moneda, REVERSE, UPSHIFT, AUTONEXT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c007 = FORMONLY.n_moneda, NOENTRY, REVERSE, UPSHIFT;
+c008 = cxct024.z24_paridad, NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = '#,###,##&.#########';
+c009 = cxct024.z24_subtipo, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c010 = FORMONLY.n_motivo, NOENTRY, REVERSE, UPSHIFT;
+c011 = cxct024.z24_cobrador, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c012 = FORMONLY.n_cobrador, NOENTRY, REVERSE, UPSHIFT;
+c013 = cxct024.z24_referencia, AUTONEXT, UPSHIFT;
+c014 = cxct024.z24_total_cap, AUTONEXT, REVERSE, FORMAT = '#,###,###,##&.##';
 
-c100 = formonly.n_estado, NOENTRY;
-c101 = formonly.n_areaneg, NOENTRY;
-c102 = formonly.n_cliente, NOENTRY;
-c103 = formonly.n_moneda, NOENTRY;
-c104 = formonly.n_motivo, NOENTRY;
-c110 = formonly.n_linea,  NOENTRY;
-end
+c015 = cxct024.z24_usuario, REVERSE, NOENTRY, UPSHIFT;
+c016 = cxct024.z24_fecing, REVERSE, NOENTRY, UPSHIFT;
+END

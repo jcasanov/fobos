@@ -1,0 +1,38 @@
+DATABASE aceros
+SCREEN
+{
+
+                                                        Estado: [c|c000      ]
+
+  Liquidación: [c0|c001                          ]
+
+      Período: [c002      ] - [c003      ]  Año: [c004]  Mes: [c1|c005       ]
+
+   Cód. Trab.: [c006  ] [c007                                                ]
+
+  Ordenar Por: [c008             ]
+
+
+}
+TABLES
+rolt003
+rolt030
+rolt032
+ATTRIBUTES
+c    = rolt032.n32_estado, NOENTRY, UPSHIFT, REVERSE;
+c000 = FORMONLY.tit_estado, NOENTRY, UPSHIFT, REVERSE;
+c0   = rolt032.n32_cod_liqrol, NOENTRY, UPSHIFT, REVERSE;
+c001 = rolt003.n03_nombre, NOENTRY, UPSHIFT, REVERSE;
+c002 = rolt032.n32_fecha_ini, NOENTRY, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy';
+c003 = rolt032.n32_fecha_fin, NOENTRY, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy';
+c004 = rolt032.n32_ano_proceso, NOENTRY, UPSHIFT, REVERSE;
+c1   = rolt032.n32_mes_proceso, NOENTRY, UPSHIFT, REVERSE;
+c005 = FORMONLY.tit_mes, NOENTRY, UPSHIFT, REVERSE;
+c006 = FORMONLY.n32_cod_trab, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Dígite el código del trabajador.';
+c007 = rolt030.n30_nombres, NOENTRY, UPSHIFT;
+c008 = FORMONLY.vm_orden TYPE CHAR NOT NULL, REQUIRED, UPSHIFT, REVERSE,
+	INCLUDE = ('C', 'N'), DEFAULT = 'C',
+	WIDGET = 'RADIO', CONFIG = 'C Código N Nombre';
+END

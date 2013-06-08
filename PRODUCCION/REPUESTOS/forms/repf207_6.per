@@ -1,0 +1,67 @@
+DATABASE aceros
+SCREEN 
+{
+                           Valores:[g001     ]
+ [k001  |k002                                           |k003  |k004 |k005  ]
+ [k006      |k007     |k008     |k009      |k010     |k011     |k012      ]
+[h001  |h002                                        |h003     |h004 ][h005 ]
+[h006      |h007     |h008     |h009      |h010     |h011     |h012      ]
+[h001  |h002                                        |h003     |h004 ][h005 ]
+[h006      |h007     |h008     |h009      |h010     |h011     |h012      ]
+[h001  |h002                                        |h003     |h004 ][h005 ]
+[h006      |h007     |h008     |h009      |h010     |h011     |h012      ]
+[h001  |h002                                        |h003     |h004 ][h005 ]
+[h006      |h007     |h008     |h009      |h010     |h011     |h012      ]
+[h001  |h002                                        |h003     |h004 ][h005 ]
+[h006      |h007     |h008     |h009      |h010     |h011     |h012      ]
+[h001  |h002                                        |h003     |h004 ][h005 ]
+[h006      |h007     |h008     |h009      |h010     |h011     |h012      ]
+[h001  |h002                                        |h003     |h004 ][h005 ]
+[h006      |h007     |h008     |h009      |h010     |h011     |h012      ]
+[h001  |h002                                        |h003     |h004 ][h005 ]
+[h006      |h007     |h008     |h009      |h010     |h011     |h012      ]
+[j001      |j002     |j003     |j004      |j005     |j006     |j007      ]
+}  
+TABLES
+rept017
+ATTRIBUTES
+k001 = formonly.tit_col1,  WIDGET = 'BUTTON';
+k002 = formonly.tit_col2,  WIDGET = 'BUTTON';
+k003 = formonly.tit_col3,  WIDGET = 'BUTTON';
+k004 = formonly.tit_col4,  WIDGET = 'BUTTON';
+k005 = formonly.tit_col5,  WIDGET = 'BUTTON';
+k006 = formonly.tit_col6,  WIDGET = 'BUTTON';
+k007 = formonly.tit_col7,  WIDGET = 'BUTTON';
+k008 = formonly.tit_col8,  WIDGET = 'BUTTON';
+k009 = formonly.tit_col9,  WIDGET = 'BUTTON';
+k010 = formonly.tit_col10, WIDGET = 'BUTTON';
+k011 = formonly.tit_col11, WIDGET = 'BUTTON';
+k012 = formonly.tit_col12, WIDGET = 'BUTTON';
+g001 = formonly.tipo_valor, REVERSE;
+h001 = r17_item, NOENTRY;
+h002 = formonly.descrip, NOENTRY;
+h003 = r17_cantrec, FORMAT = '#####&.##', NOENTRY;
+h004 = r17_porc_part,  FORMAT = '#&.##', NOENTRY;
+h005 = r17_porc_salva, FORMAT = '#&.##';
+h006 = r17_tot_fob_mb,  NOENTRY;
+h007 = r17_flete,       NOENTRY, FORMAT = '##,##&.##';
+h008 = r17_seguro,      NOENTRY, FORMAT = '##,##&.##';
+h009 = r17_cif,         NOENTRY, FORMAT = '###,##&.##';
+h010 = r17_arancel,     NOENTRY, FORMAT = '##,##&.##';
+h011 = r17_cargos,      NOENTRY, FORMAT = '##,##&.##';
+h012 = r17_costuni_ing, NOENTRY, FORMAT = '###,##&.##';
+j001 = formonly.tot_fob_mb,      NOENTRY, REVERSE, FORMAT = '###,##&.##';
+j002 = formonly.tot_flete,       NOENTRY, REVERSE, FORMAT = '##,##&.##';
+j003 = formonly.tot_seguro,      NOENTRY, REVERSE, FORMAT = '##,##&.##';
+j004 = formonly.tot_cif,         NOENTRY, REVERSE, FORMAT = '###,##&.##';
+j005 = formonly.tot_arancel,     NOENTRY, REVERSE, FORMAT = '##,##&.##';
+j006 = formonly.tot_cargos,      NOENTRY, REVERSE, FORMAT = '##,##&.##';
+j007 = formonly.tot_costuni_ing, NOENTRY, REVERSE, FORMAT = '###,##&.##';
+INSTRUCTIONS
+DELIMITERS '  '
+SCREEN RECORD r_costeo[8] (r17_item, formonly.descrip, r17_cantrec, 
+			   r17_porc_part, r17_porc_salva, r17_tot_fob_mb,
+			   r17_flete, r17_seguro, r17_cif, r17_arancel, 
+			   r17_cargos, r17_costuni_ing)
+KEYS
+F5 = 'Unit./Total'

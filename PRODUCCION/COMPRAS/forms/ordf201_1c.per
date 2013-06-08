@@ -1,0 +1,40 @@
+DATABASE aceros
+SCREEN
+{
+  No.Or.              Proveedor                 Fecha         Total       P 
+ [c0    |c1                                 |c2        |c3              ][c]
+ [c0    |c1                                 |c2        |c3              ][c]
+ [c0    |c1                                 |c2        |c3              ][c]
+ [c0    |c1                                 |c2        |c3              ][c]
+ [c0    |c1                                 |c2        |c3              ][c]
+ [c0    |c1                                 |c2        |c3              ][c]
+ [c0    |c1                                 |c2        |c3              ][c]
+ [c0    |c1                                 |c2        |c3              ][c]
+ [c0    |c1                                 |c2        |c3              ][c]
+ [c0    |c1                                 |c2        |c3              ][c]
+ [c0    |c1                                 |c2        |c3              ][c]
+ [c0    |c1                                 |c2        |c3              ][c]
+ [c0    |c1                                 |c2        |c3              ][c]
+ [c0    |c1                                 |c2        |c3              ][c]
+ [c0    |c1                                 |c2        |c3              ][c]
+ [c0    |c1                                 |c2        |c3              ][c]
+
+}
+TABLES ordt010, cxpt001
+
+ATTRIBUTES
+
+c0  = ordt010.c10_numero_oc,   REVERSE, NOENTRY;
+c1  = cxpt001.p01_nomprov, REVERSE, NOENTRY;
+c2  = FORMONLY.vm_fecha        TYPE DATE, REVERSE, NOENTRY, 
+			       FORMAT = 'dd-mm-yyyy';
+c3  = ordt010.c10_tot_compra,  REVERSE, NOENTRY, 
+			       FORMAT = '#,###,###,##&.##';
+c   = FORMONLY.aprobar TYPE CHAR, UPSHIFT, REVERSE, DEFAULT = 'A',
+	INCLUDE = ('P', 'A'), AUTONEXT,
+	COMMENTS = 'Marque ordenes de compra que desee (P) Aprobar  (A) Activa.';
+
+INSTRUCTIONS 
+DELIMITERS '||'
+SCREEN RECORD r_detalle[16] (c10_numero_oc,  p01_nomprov, vm_fecha, 
+			     c10_tot_compra, aprobar)

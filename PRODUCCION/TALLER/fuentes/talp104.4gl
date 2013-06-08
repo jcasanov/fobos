@@ -9,35 +9,36 @@
                                                                                 
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
                                                                                 
-DEFINE rm_tveh   RECORD LIKE talt004.*
-DEFINE rm_tveh2  RECORD LIKE talt004.*
-DEFINE rm_mar    RECORD LIKE talt001.*
-DEFINE vm_r_rows ARRAY[1000] OF INTEGER -- ARREGLO DE ROWID DE FILAS LEIDAS
+DEFINE rm_tveh		RECORD LIKE talt004.*
+DEFINE rm_tveh2		RECORD LIKE talt004.*
+DEFINE rm_mar		RECORD LIKE talt001.*
+DEFINE vm_r_rows	ARRAY[1000] OF INTEGER -- ARREGLO DE ROWID FILAS LEIDAS
 DEFINE vm_row_current   SMALLINT        -- FILA CORRIENTE DEL ARREGLO
 DEFINE vm_num_rows      SMALLINT        -- CANTIDAD DE FILAS LEIDAS
 DEFINE vm_max_rows      SMALLINT        -- MAXIMO DE FILAS LEIDAS
-DEFINE vm_demonios      VARCHAR(12)
 DEFINE vm_flag_mant     CHAR(1)
+
+
 
 MAIN
                                                                                 
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/talp104.error')
-CALL fgl_init4js()
+CALL startlog('../logs/talp104.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN
-     CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto','stop')
-     EXIT PROGRAM
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
+     	EXIT PROGRAM
 END IF
-LET vg_base     = arg_val(1)
-LET vg_modulo   = arg_val(2)
-LET vg_codcia   = arg_val(3)
+LET vg_base    = arg_val(1)
+LET vg_modulo  = arg_val(2)
+LET vg_codcia  = arg_val(3)
 LET vg_proceso = 'talp104'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
                                                                                 
@@ -46,13 +47,31 @@ END MAIN
 
 
 FUNCTION funcion_master()
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
 CALL fl_nivel_isolation()
 LET vm_max_rows = 1000
-OPEN WINDOW w_tveh AT 3,2 WITH 14 ROWS, 80 COLUMNS
-    ATTRIBUTE(FORM LINE FIRST + 2, COMMENT LINE LAST, MENU LINE FIRST,BORDER,
-	      MESSAGE LINE LAST - 2)
-OPEN FORM f_tveh FROM '../forms/talf104_1'
+LET lin_menu = 0
+LET row_ini  = 3
+LET num_rows = 14
+LET num_cols = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW w_tveh AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
+    ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE lin_menu,BORDER,
+	      MESSAGE LINE LAST - 1)
+IF vg_gui = 1 THEN
+	OPEN FORM f_tveh FROM '../forms/talf104_1'
+ELSE
+	OPEN FORM f_tveh FROM '../forms/talf104_1c'
+END IF
 DISPLAY FORM f_tveh
 INITIALIZE rm_tveh.* TO NULL
 LET vm_num_rows = 0
@@ -66,10 +85,7 @@ MENU 'OPCIONES'
 	COMMAND KEY('I') 'Ingresar' 'Ingresar nuevos registros. '
 		CALL control_ingreso()
 		IF vm_num_rows = 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN		
 			SHOW OPTION 'Modificar'
-		   END IF
-			
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -86,10 +102,7 @@ MENU 'OPCIONES'
 	COMMAND KEY('C') 'Consultar' 'Consultar un registro. '
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
-		    IF fl_control_permiso_opcion('Modificar') THEN		
 			SHOW OPTION 'Modificar'
-		    END IF
-			
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -97,10 +110,7 @@ MENU 'OPCIONES'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
-			IF fl_control_permiso_opcion('Modificar') THEN		
-				SHOW OPTION 'Modificar'
-			END IF
-			
+			SHOW OPTION 'Modificar'
 		END IF
 		IF vm_row_current <= 1 THEN
                         HIDE OPTION 'Retroceder'
@@ -142,13 +152,15 @@ END FUNCTION
 
 
 FUNCTION control_consulta()
-DEFINE expr_sql		VARCHAR(500)
-DEFINE query		VARCHAR(600)
+DEFINE expr_sql		CHAR(500)
+DEFINE query		CHAR(600)
 
 CLEAR FORM
 LET int_flag = 0
 CONSTRUCT BY NAME expr_sql ON t04_modelo, t04_linea, t04_dificultad, 
 		              t04_usuario, t04_fecing
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
 	ON KEY(F2)
 		IF INFIELD(t04_modelo) THEN
 		     CALL fl_ayuda_tipos_vehiculos(vg_codcia)
@@ -169,6 +181,9 @@ CONSTRUCT BY NAME expr_sql ON t04_modelo, t04_linea, t04_dificultad,
 			END IF
 		END IF
                 LET int_flag = 0
+	BEFORE CONSTRUCT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 END CONSTRUCT
 IF int_flag THEN
 	CLEAR FORM
@@ -178,14 +193,16 @@ IF int_flag THEN
 	CALL muestra_contadores(vm_row_current, vm_num_rows)
 	RETURN
 END IF
-LET query = 'SELECT *, ROWID FROM talt004 WHERE ', expr_sql CLIPPED,
+LET query = 'SELECT *, ROWID FROM talt004 ',
+		' WHERE t04_compania = ', vg_codcia,
+		'   AND ', expr_sql CLIPPED,
 		' ORDER BY 2, 3'
 PREPARE cons FROM query
 DECLARE q_tveh CURSOR FOR cons
 LET vm_num_rows = 1
 FOREACH q_tveh INTO rm_tveh.*, vm_r_rows[vm_num_rows]
 	LET vm_num_rows = vm_num_rows + 1
-        IF vm_num_rows > 1000 THEN
+        IF vm_num_rows > vm_max_rows THEN
                 EXIT FOREACH
         END IF
 END FOREACH
@@ -206,6 +223,7 @@ END FUNCTION
 
 
 FUNCTION control_ingreso()
+DEFINE r_t00		RECORD LIKE talt000.*
 
 OPTIONS INPUT WRAP
 CLEAR FORM
@@ -218,7 +236,11 @@ LET rm_tveh.t04_cod_mod_veh = 'N'
 DISPLAY BY NAME rm_tveh.t04_fecing, rm_tveh.t04_usuario
 CALL lee_datos()
 IF NOT int_flag THEN
+	BEGIN WORK
 	INSERT INTO talt004 VALUES (rm_tveh.*)
+	CALL fl_lee_configuracion_taller(vg_codcia)
+		RETURNING r_t00.*
+	COMMIT WORK
         IF vm_num_rows = vm_max_rows THEN
                 LET vm_num_rows = 1
         ELSE
@@ -240,18 +262,19 @@ END FUNCTION
 FUNCTION control_modificacion()
 
 LET vm_flag_mant      = 'M'
-WHENEVER ERROR CONTINUE
 BEGIN WORK
+WHENEVER ERROR CONTINUE
 DECLARE q_up CURSOR FOR SELECT * FROM talt004 WHERE ROWID = vm_r_rows[vm_row_current]
 	FOR UPDATE
 OPEN q_up
 FETCH q_up INTO rm_tveh.*
 IF status < 0 THEN
-	COMMIT WORK
+	ROLLBACK WORK
 	CALL fl_mensaje_bloqueo_otro_usuario()
 	WHENEVER ERROR STOP
 	RETURN
 END IF
+WHENEVER ERROR STOP
 CALL lee_datos()
 IF NOT int_flag THEN
     	UPDATE talt004 SET * = rm_tveh.*
@@ -259,6 +282,7 @@ IF NOT int_flag THEN
 	COMMIT WORK
 	CALL fl_mensaje_registro_modificado()
 ELSE
+	ROLLBACK WORK
 	CALL lee_muestra_registro(vm_r_rows[vm_row_current])
 END IF
 CLOSE q_up
@@ -295,6 +319,8 @@ INPUT BY NAME rm_tveh.t04_modelo, rm_tveh.t04_linea, rm_tveh.t04_dificultad
 			END IF
                         RETURN
                 END IF       	
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
 	ON KEY(F2)
                 IF INFIELD(t04_linea) THEN
 			CALL fl_ayuda_marcas_taller(vg_codcia)
@@ -306,7 +332,10 @@ INPUT BY NAME rm_tveh.t04_modelo, rm_tveh.t04_linea, rm_tveh.t04_dificultad
 			END IF
                 END IF
                 LET int_flag = 0
-	BEFORE  FIELD t04_modelo
+	BEFORE INPUT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
+	BEFORE FIELD t04_modelo
 		IF vm_flag_mant = 'M' THEN
 			NEXT FIELD NEXT
 		END IF
@@ -314,7 +343,8 @@ INPUT BY NAME rm_tveh.t04_modelo, rm_tveh.t04_linea, rm_tveh.t04_dificultad
 		IF  rm_tveh.t04_dificultad IS NOT NULL THEN
 			IF rm_tveh.t04_dificultad < 1 OR 
 			   rm_tveh.t04_dificultad > 10 THEN
-				CALL fgl_winmessage(vg_producto,'El nivel de dificultad no es valido ','exclamation')
+				--CALL fgl_winmessage(vg_producto,'El nivel de dificultad no es valido ','exclamation')
+				CALL fl_mostrar_mensaje('El nivel de dificultad no es válido.','exclamation')
 			     	NEXT FIELD t04_dificultad
 			END IF 	
 		END IF 	
@@ -323,8 +353,9 @@ INPUT BY NAME rm_tveh.t04_modelo, rm_tveh.t04_linea, rm_tveh.t04_dificultad
 		     CALL fl_lee_linea_taller(vg_codcia, rm_tveh.t04_linea)
 		     	RETURNING rm_mar.*
 		     IF rm_mar.t01_linea IS NULL THEN
-			   CALL fgl_winmessage(vg_producto,'No existe la línea de taller','exclamation')
-			   NEXT FIELD t04_linea
+			--CALL fgl_winmessage(vg_producto,'No existe la línea de taller','exclamation')
+			CALL fl_mostrar_mensaje('No existe la línea de taller.','exclamation')
+			NEXT FIELD t04_linea
 		     END IF
 		     DISPLAY rm_mar.t01_nombre TO nom_linea	
 		ELSE
@@ -335,7 +366,8 @@ INPUT BY NAME rm_tveh.t04_modelo, rm_tveh.t04_linea, rm_tveh.t04_dificultad
                         CALL fl_lee_tipo_vehiculo(vg_codcia, rm_tveh.t04_modelo)
                                 RETURNING rm_tveh2.*
                         IF rm_tveh2.t04_modelo IS NOT NULL THEN
-                                CALL fgl_winmessage (vg_producto, 'El tipo de vehículo ya existe en la compañia ','exclamation')
+                                --CALL fgl_winmessage (vg_producto,'El tipo de vehículo ya existe en la compañia ','exclamation')
+				CALL fl_mostrar_mensaje('El tipo de vehículo ya existe en la compañia.','exclamation')
                                 NEXT FIELD t04_modelo
                         END IF
              	END IF
@@ -369,45 +401,27 @@ END FUNCTION
 FUNCTION muestra_contadores(row_current, num_rows)
 DEFINE row_current              SMALLINT
 DEFINE num_rows                 SMALLINT
+DEFINE nrow                     SMALLINT
                                                                                 
-DISPLAY "" AT 1,1
-DISPLAY row_current, " de ", num_rows AT 1, 69
-                                                                                
+LET nrow = 17
+IF vg_gui = 1 THEN
+	LET nrow = 1
+END IF
+DISPLAY "" AT nrow, 1
+DISPLAY row_current, " de ", num_rows AT nrow, 67
+
 END FUNCTION
 
-                                                                                
-                                                                                
-FUNCTION validar_parametros()
-                                                                                
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-        CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'sto
-p')
-        EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-        CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'st
-op')
-        EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-     CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 			 'stop')
-     EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-        LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-        CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc,
-			    'stop')
-        EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-      CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 			  'stop')
-      EXIT PROGRAM
-END IF
-                                                                                
-END FUNCTION
 
+
+FUNCTION llamar_visor_teclas()
+DEFINE a		CHAR(1)
+
+IF vg_gui = 0 THEN
+	CALL fl_visor_teclas_caracter() RETURNING int_flag 
+	LET a = fgl_getkey()
+	CLOSE WINDOW w_tf
+	LET int_flag = 0
+END IF
+
+END FUNCTION

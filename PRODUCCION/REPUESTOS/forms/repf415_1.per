@@ -1,0 +1,24 @@
+DATABASE aceros
+SCREEN
+{
+
+
+   Se va Imprimir Transferencia: [c000      ]
+
+                  Bodega Origen: [a0] [c001                          ]
+                 Bodega Destino: [a1] [c002                          ]
+
+                     Referencia: [c003                                    ]
+ 
+
+}
+TABLES
+rept019, rept002
+ATTRIBUTES
+c000 = rept019.r19_num_tran, NOENTRY, REVERSE, UPSHIFT;
+a0   = rept019.r19_bodega_ori, NOENTRY, REVERSE, UPSHIFT;
+c001 = rept002.r02_nombre, NOENTRY, REVERSE, UPSHIFT;
+a1   = rept019.r19_bodega_dest, NOENTRY, REVERSE, UPSHIFT;
+c002 = FORMONLY.tit_nombre, NOENTRY, REVERSE, UPSHIFT;
+c003 = rept019.r19_referencia, NOENTRY, REVERSE, UPSHIFT;
+END

@@ -1,10 +1,12 @@
-{*
- * Titulo               : repp100.4gl -- Mantenimiento Configuración parametros
- *  		  			  por Compañia
- * Elaboración          : 04-feb-2009
- * Autor                : JCM
- * Formato de Ejecución : fglrun  repp100.4gl base RE 1 
- *}
+-------------------------------------------------------------------------------
+-- Titulo               : repp100.4gl -- Mantenimiento Configuración parametros
+--					 por Compañia
+-- Elaboración          : 12-sep-2001
+-- Autor                : GVA
+-- Formato de Ejecución : fglrun  repp100.4gl base RE 1 
+-- Ultima Correción     : 12-sep-2001
+-- Motivo Corrección    : 1
+--------------------------------------------------------------------------------
                                                                                 
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
                                                                                 
@@ -19,18 +21,18 @@ DEFINE vm_max_rows      SMALLINT        -- MAXIMO DE FILAS LEIDAS
 DEFINE vm_demonios      VARCHAR(12)
 DEFINE vm_flag_mant     CHAR(1)
 
-
-
 MAIN
+                                                                                
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/repp100.error')
-CALL fgl_init4js()
+CALL startlog('../logs/errores')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN
-     CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto','stop')
-     EXIT PROGRAM
+     	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.','stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
+     	EXIT PROGRAM
 END IF
 LET vg_base     = arg_val(1)
 LET vg_modulo   = arg_val(2)
@@ -38,7 +40,8 @@ LET vg_codcia   = arg_val(3)
 LET vg_proceso = 'repp100'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
                                                                                 
@@ -61,9 +64,6 @@ LET vm_row_current = 0
 CALL muestra_contadores(vm_row_current, vm_num_rows)
 MENU 'OPCIONES'
 	BEFORE MENU
-		IF NOT fl_control_permiso_opcion('Ingresar') THEN
-			HIDE OPTION 'Ingresar'
-		END IF
 		HIDE OPTION 'Avanzar'
 		HIDE OPTION 'Retroceder'
 		HIDE OPTION 'Modificar'
@@ -71,12 +71,8 @@ MENU 'OPCIONES'
 	COMMAND KEY('I') 'Ingresar' 'Ingresar nuevos registros. '
 		CALL control_ingreso()
 		IF vm_num_rows = 1 THEN
-			IF fl_control_permiso_opcion('Modificar') THEN
-				SHOW OPTION 'Modificar'
-			END IF
-			IF fl_control_permiso_opcion('Bloquear') THEN
-				SHOW OPTION 'Bloquear/Activar'
-			END IF
+			SHOW OPTION 'Modificar'
+			SHOW OPTION 'Bloquear/Activar'
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -93,12 +89,8 @@ MENU 'OPCIONES'
 	COMMAND KEY('C') 'Consultar' 'Consultar un registro. '
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
-			IF fl_control_permiso_opcion('Modificar') THEN
-		 	   SHOW OPTION 'Modificar'
-			END IF
-			IF fl_control_permiso_opcion('Bloquear') THEN
-		    	   SHOW OPTION 'Bloquear/Activar'
-			END IF
+			SHOW OPTION 'Modificar'
+			SHOW OPTION 'Bloquear/Activar'
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -107,12 +99,8 @@ MENU 'OPCIONES'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
-			IF fl_control_permiso_opcion('Modificar') THEN
-			   SHOW OPTION 'Modificar'
-			END IF
-			IF fl_control_permiso_opcion('Bloquear') THEN
-			   SHOW OPTION 'Bloquear/Activar'
-			END IF
+			SHOW OPTION 'Modificar'
+			SHOW OPTION 'Bloquear/Activar'
 		END IF
 		IF vm_row_current <= 1 THEN
                         HIDE OPTION 'Retroceder'
@@ -156,16 +144,14 @@ END FUNCTION
 
 
 FUNCTION control_consulta()
-DEFINE expr_sql		VARCHAR(500)
-DEFINE query		VARCHAR(600)
-DEFINE r_b10		RECORD LIKE ctbt010.*
+DEFINE expr_sql		CHAR(500)
+DEFINE query		CHAR(600)
 
 CLEAR FORM
 LET int_flag = 0
-CONSTRUCT BY NAME expr_sql ON r00_compania, r00_cia_taller, r00_cliente_final,
-		 r00_bodega_fact,
-		 r00_cred_auto, r00_dias_dev,
-		 r00_dias_prof, r00_expi_prof
+CONSTRUCT BY NAME expr_sql ON r00_compania, r00_cia_taller, r00_bodega_fact,
+		 r00_dias_prof, r00_expi_prof, r00_dias_dev, r00_dias_dev, 
+		 r00_cred_auto
 	ON KEY(F2)
 		IF INFIELD(r00_compania) THEN
 		     CALL fl_ayuda_compania()
@@ -190,7 +176,7 @@ CONSTRUCT BY NAME expr_sql ON r00_compania, r00_cia_taller, r00_cliente_final,
 		     END IF
 		END IF
 		IF INFIELD(r00_bodega_fact) THEN
-		     CALL fl_ayuda_bodegas_rep(rm_pcia.r00_compania, vg_codloc, 'F')
+		     CALL fl_ayuda_bodegas_rep(vg_codcia, 'T', 'A', 'F', 'R', 'S', 'V')
 		     RETURNING rm_bod.r02_codigo, rm_bod.r02_nombre
 		     IF rm_bod.r02_codigo IS NOT NULL THEN
 			LET rm_pcia.r00_bodega_fact = rm_bod.r02_codigo
@@ -198,7 +184,7 @@ CONSTRUCT BY NAME expr_sql ON r00_compania, r00_cia_taller, r00_cliente_final,
 			DISPLAY rm_bod.r02_nombre TO nom_bod
 		     END IF
 		END IF
-		LET int_flag = 0
+                LET int_flag = 0
 END CONSTRUCT
 IF int_flag THEN
 	CLEAR FORM
@@ -251,7 +237,6 @@ LET rm_pcia.r00_tipo_margen = 'L'
 LET rm_pcia.r00_tipo_descto = 'L'
 LET rm_pcia.r00_tipo_fact   = 'U'
 LET rm_pcia.r00_contr_prof  = 'S'
-LET rm_pcia.r00_fact_sstock = 'N'
 LET rm_pcia.r00_mespro      = MONTH(TODAY)
 LET rm_pcia.r00_anopro      = YEAR(TODAY)
 DISPLAY BY NAME rm_pcia.r00_estado
@@ -284,18 +269,19 @@ IF rm_pcia.r00_estado = 'B' THEN
 	CALL fl_mensaje_estado_bloqueado()
 	RETURN
 END IF
-WHENEVER ERROR CONTINUE
 BEGIN WORK
+WHENEVER ERROR CONTINUE
 DECLARE q_up CURSOR FOR SELECT * FROM rept000 WHERE ROWID = vm_r_rows[vm_row_current]
 	FOR UPDATE
 OPEN q_up
 FETCH q_up INTO rm_pcia.*
-IF status < 0 THEN
-	COMMIT WORK
+IF STATUS < 0 THEN
+	ROLLBACK WORK
 	CALL fl_mensaje_bloqueo_otro_usuario()
 	WHENEVER ERROR STOP
 	RETURN
 END IF
+WHENEVER ERROR STOP
 CALL lee_datos()
 IF NOT int_flag THEN
     	UPDATE rept000 SET * = rm_pcia.*
@@ -303,6 +289,7 @@ IF NOT int_flag THEN
 	COMMIT WORK
 	CALL fl_mensaje_registro_modificado()
 ELSE
+	ROLLBACK WORK
 	CALL lee_muestra_registro(vm_r_rows[vm_row_current])
 END IF
 CLOSE q_up
@@ -364,26 +351,23 @@ END FUNCTION
 FUNCTION lee_datos()
 DEFINE     resp   	CHAR(6)
 DEFINE     r_z01	RECORD LIKE cxct001.*
-DEFINE r_b10		RECORD LIKE ctbt010.*
                                                                                 
 OPTIONS INPUT WRAP
 LET int_flag = 0 
 INPUT BY NAME rm_pcia.r00_compania,    rm_pcia.r00_cia_taller, 
-	      rm_pcia.r00_codcli_tal, rm_pcia.r00_cliente_final, 
-		  rm_pcia.r00_bodega_fact, 
-		  rm_pcia.r00_numlin_fact, rm_pcia.r00_fact_sstock,
-	      rm_pcia.r00_cred_auto, rm_pcia.r00_dev_mes,
-	      rm_pcia.r00_dias_dev,   
-	      rm_pcia.r00_tipo_costo,  
-	      rm_pcia.r00_tipo_margen, rm_pcia.r00_tipo_descto,
-	      rm_pcia.r00_tipo_fact,   
+              rm_pcia.r00_bodega_fact, 
 	      rm_pcia.r00_contr_prof,
 	      rm_pcia.r00_dias_prof,   rm_pcia.r00_expi_prof,  
-	      rm_pcia.r00_mespro,      rm_pcia.r00_anopro   
+	      rm_pcia.r00_dias_dev,    rm_pcia.r00_dev_mes,
+	      rm_pcia.r00_cred_auto,
+	      rm_pcia.r00_mespro,      rm_pcia.r00_anopro,   
+	      rm_pcia.r00_valmin_ccli, rm_pcia.r00_codcli_tal,
+	      rm_pcia.r00_tipo_costo,  
+	      rm_pcia.r00_tipo_margen, rm_pcia.r00_tipo_descto,
+	      rm_pcia.r00_tipo_fact,   rm_pcia.r00_numlin_fact
 	      WITHOUT DEFAULTS
         ON KEY(INTERRUPT)
         	 IF FIELD_TOUCHED(r00_compania,    r00_cia_taller,
-				r00_cliente_final,
 			          r00_bodega_fact, r00_dias_prof,
 				  r00_expi_prof,   r00_dias_dev, 
 				  r00_tipo_fact,   r00_numlin_fact,
@@ -417,15 +401,6 @@ INPUT BY NAME rm_pcia.r00_compania,    rm_pcia.r00_cia_taller,
 				DISPLAY r_z01.z01_nomcli TO nom_cli_tal	
 			END IF
 		END IF
-		IF INFIELD(r00_cliente_final) THEN
-			CALL fl_ayuda_cliente_general()
-				RETURNING r_z01.z01_codcli, r_z01.z01_nomcli
-			IF r_z01.z01_codcli IS NOT NULL THEN
-				LET rm_pcia.r00_cliente_final = r_z01.z01_codcli
-				DISPLAY BY NAME rm_pcia.r00_cliente_final
-				DISPLAY r_z01.z01_nomcli TO nom_cli_final	
-			END IF
-		END IF
 		IF INFIELD(r00_compania) THEN
 		     CALL fl_ayuda_compania()
 			RETURNING rm_cia.g01_compania
@@ -449,7 +424,7 @@ INPUT BY NAME rm_pcia.r00_compania,    rm_pcia.r00_cia_taller,
 		     END IF
 		END IF
 		IF INFIELD(r00_bodega_fact) THEN
-		     CALL fl_ayuda_bodegas_rep(rm_pcia.r00_compania, vg_codloc, 'F')
+		     CALL fl_ayuda_bodegas_rep(rm_pcia.r00_compania, 'T', 'A', 'F', 'R', 'S', 'V')
 		     	RETURNING rm_bod.r02_codigo, rm_bod.r02_nombre
 		     IF rm_bod.r02_codigo IS NOT NULL THEN
 			LET rm_pcia.r00_bodega_fact = rm_bod.r02_codigo
@@ -469,14 +444,16 @@ INPUT BY NAME rm_pcia.r00_compania,    rm_pcia.r00_cia_taller,
 			CALL fl_lee_compania(rm_pcia.r00_compania)
 				RETURNING rm_cia.*
 			IF rm_cia.g01_compania IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'No existe la compañía ','exclamation')
+				--CALL fgl_winmessage(vg_producto,'No existe la compañía ','exclamation')
+				CALL fl_mostrar_mensaje('No existe la compañía.','exclamation')
 				NEXT FIELD r00_compania
 			END IF
 			DISPLAY rm_cia.g01_razonsocial TO nom_cia
 			CALL fl_lee_compania_repuestos(rm_pcia.r00_compania)
 				RETURNING rm_pcia2.*
 			IF rm_pcia2.r00_compania IS NOT NULL THEN
-				CALL fgl_winmessage(vg_producto, 'Ya existe configuración para esta compañía ','exclamation')
+				--CALL fgl_winmessage(vg_producto,'Ya existe configuración para esta compañía ','exclamation')
+				CALL fl_mostrar_mensaje('Ya existe configuración para esta compañía.','exclamation')
 				NEXT FIELD r00_compania
 			END IF
 		ELSE
@@ -488,44 +465,39 @@ INPUT BY NAME rm_pcia.r00_compania,    rm_pcia.r00_cia_taller,
 			CALL fl_lee_compania(rm_pcia.r00_cia_taller)
 				RETURNING rm_cia.*
 			IF rm_cia.g01_compania IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'No existe la compañía ','exclamation')
+				--CALL fgl_winmessage(vg_producto,'No existe la compañía ','exclamation')
+				CALL fl_mostrar_mensaje('No existe la compañía.','exclamation')
 				NEXT FIELD r00_cia_taller
 			END IF
 			DISPLAY rm_cia.g01_razonsocial TO nom_cia_tal
 		ELSE
 			CLEAR nom_cia_tal
 		END IF
-	
+	{--
+	BEFORE FIELD r00_codcli_tal
+		IF rm_pcia.r00_compania = rm_pcia.r00_cia_taller THEN
+			NEXT FIELD NEXT
+		END IF
+	--}
 	AFTER FIELD r00_codcli_tal
 		IF rm_pcia.r00_codcli_tal IS NOT NULL THEN
 			CALL fl_lee_cliente_general(rm_pcia.r00_codcli_tal)
 				RETURNING r_z01.*
 			IF r_z01.z01_codcli IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'El cliente no existe en la Compañía.','exclamation')
+				--CALL fgl_winmessage(vg_producto,'El cliente no existe en la Compañía.','exclamation')
+				CALL fl_mostrar_mensaje('El cliente no existe en la Compañía.','exclamation')
 				NEXT FIELD r00_codcli_tal
 			END IF
 			DISPLAY r_z01.z01_nomcli TO nom_cli_tal
+		{--
 			IF rm_pcia.r00_compania = rm_pcia.r00_cia_taller THEN
 				INITIALIZE rm_pcia.r00_codcli_tal TO NULL
 				DISPLAY BY NAME rm_pcia.r00_codcli_tal
 				CLEAR nom_cli_tal
 			END IF
+		--}
 		ELSE
 			CLEAR nom_cli_tal
-		END IF
-
-	AFTER FIELD r00_cliente_final
-		IF rm_pcia.r00_cliente_final IS NOT NULL THEN
-			CALL fl_lee_cliente_general(rm_pcia.r00_cliente_final)
-				RETURNING r_z01.*
-			IF r_z01.z01_codcli IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'El cliente no existe en la Compañía.','exclamation')
-				NEXT FIELD r00_cliente_final
-			END IF
-			DISPLAY BY NAME rm_pcia.r00_cliente_final
-			DISPLAY r_z01.z01_nomcli TO nom_cli_final
-		ELSE
-			CLEAR nom_cli_final
 		END IF
 
 	AFTER FIELD r00_bodega_fact
@@ -534,11 +506,13 @@ INPUT BY NAME rm_pcia.r00_compania,    rm_pcia.r00_cia_taller,
 			                       rm_pcia.r00_bodega_fact)
                        		RETURNING rm_bod.*
                         IF rm_bod.r02_codigo IS NULL THEN
-                                CALL fgl_winmessage (vg_producto, 'La Bodega no existe en la compañía ','exclamation')
+                                --CALL fgl_winmessage (vg_producto,'La Bodega no existe en la compañía ','exclamation')
+				CALL fl_mostrar_mensaje('La Bodega no existe en la compañía.','exclamation')
                                 NEXT FIELD r00_bodega_fact
                         END IF
 			IF rm_bod.r02_factura = 'N' THEN
-                                CALL fgl_winmessage (vg_producto, 'La Bodega no factura ','exclamation')
+                                --CALL fgl_winmessage (vg_producto,'La Bodega no factura ','exclamation')
+				CALL fl_mostrar_mensaje('La Bodega no factura.','exclamation')
 				NEXT FIELD r00_pcia.r00_bodega_fact
 			END IF
 			DISPLAY rm_bod.r02_nombre TO nom_bod
@@ -571,7 +545,8 @@ INPUT BY NAME rm_pcia.r00_compania,    rm_pcia.r00_cia_taller,
 				DISPLAY BY NAME rm_pcia.r00_numlin_fact
 			ELSE 
 				IF rm_pcia.r00_numlin_fact > 60 THEN
-					CALL FGL_WINMESSAGE(vg_producto,'No puede ingresar un número de líneas superior a 60 cuando es una sola página. ','exclamation')
+					--CALL FGL_WINMESSAGE(vg_producto,'No puede ingresar un número de líneas superior a 60 cuando es una sola página. ','exclamation')
+					CALL fl_mostrar_mensaje('No puede ingresar un número de líneas superior a 60 cuando es una sola página.','exclamation')
 					NEXT FIELD r00_numlin_fact
 				END IF
 			END IF
@@ -583,7 +558,8 @@ INPUT BY NAME rm_pcia.r00_compania,    rm_pcia.r00_cia_taller,
 			DISPLAY BY NAME rm_pcia.r00_numlin_fact
 		ELSE
 			IF rm_pcia.r00_numlin_fact > 60 THEN
-				CALL FGL_WINMESSAGE(vg_producto,'No puede ingresar un número de líneas superior a 60 cuando es una sola página. ','exclamation')
+				--CALL FGL_WINMESSAGE(vg_producto,'No puede ingresar un número de líneas superior a 60 cuando es una sola página. ','exclamation')
+				CALL fl_mostrar_mensaje('No puede ingresar un número de líneas superior a 60 cuando es una sola página.','exclamation')
 				NEXT FIELD r00_numlin_fact
 			END IF
 		END IF
@@ -592,14 +568,29 @@ INPUT BY NAME rm_pcia.r00_compania,    rm_pcia.r00_cia_taller,
 		IF rm_pcia.r00_compania <> rm_pcia.r00_cia_taller AND
 		   rm_pcia.r00_codcli_tal IS NULL 
 		   THEN
-			CALL fgl_winmessage(vg_producto,'Digite el cliente de la Compañía Taller. ','exclamation')
+			--CALL fgl_winmessage(vg_producto,'Digite el cliente de la Compañía Taller. ','exclamation')
+			CALL fl_mostrar_mensaje('Digite el consumidor final de la Compañía.','exclamation')
 			NEXT FIELD r00_codcli_tal
 		END IF
+	{--
 		IF rm_pcia.r00_compania = rm_pcia.r00_cia_taller AND
 		   rm_pcia.r00_codcli_tal IS NOT NULL 
 		   THEN
-			CALL fgl_winmessage(vg_producto,'No debe digitar cliente si la Compañía Taller es la misma de Repuesto. ','exclamation')
+			--CALL fgl_winmessage(vg_producto,'No debe digitar cliente si la Compañía Taller es la misma de Repuesto. ','exclamation')
+			CALL fl_mostrar_mensaje('No debe digitar cliente si la Compañía Taller es la misma de Inventario. ','exclamation')
 			NEXT FIELD r00_codcli_tal
+		END IF
+	--}
+        	 IF NOT FIELD_TOUCHED(r00_compania,    r00_cia_taller,
+			          r00_bodega_fact, r00_dias_prof,
+				  r00_expi_prof,   r00_dias_dev, 
+				  r00_tipo_fact,   r00_numlin_fact,
+				  r00_tipo_margen, r00_tipo_costo,
+				  r00_cred_auto,   r00_tipo_descto,
+				  r00_codcli_tal,  r00_contr_prof,
+				  r00_valmin_ccli)
+                    THEN
+                        LET INT_FLAG = 1
 		END IF
 
 END INPUT
@@ -610,7 +601,7 @@ END FUNCTION
 
 FUNCTION lee_muestra_registro(num_row)
 DEFINE num_row		INTEGER
-DEFINE r_z01	RECORD LIKE cxct001.*
+DEFINE r_z01		RECORD LIKE cxct001.*
 
 IF vm_num_rows <= 0 THEN
 	RETURN
@@ -620,6 +611,7 @@ IF STATUS = NOTFOUND THEN
 	ERROR 'No existe registro con rowid: ', num_row
 END IF
 DISPLAY BY NAME rm_pcia.r00_compania THRU rm_pcia.r00_mespro     
+DISPLAY BY NAME rm_pcia.r00_valmin_ccli
 CALL fl_lee_bodega_rep(vg_codcia,rm_pcia.r00_bodega_fact)
 	RETURNING rm_bod.*
 	DISPLAY rm_bod.r02_nombre TO nom_bod
@@ -629,16 +621,15 @@ CALL fl_lee_compania(rm_pcia.r00_compania)
 CALL fl_lee_compania(rm_pcia.r00_cia_taller)
 	RETURNING rm_cia.*
 	DISPLAY rm_cia.g01_razonsocial TO nom_cia_tal
+CALL fl_lee_cliente_general(rm_pcia.r00_codcli_tal)
+	RETURNING r_z01.*
+	DISPLAY r_z01.z01_nomcli TO nom_cli_tal
 IF rm_pcia.r00_estado = 'A' THEN
 	DISPLAY 'ACTIVO' TO tit_estado
 ELSE
 	DISPLAY 'BLOQUEADO' TO tit_estado
 END IF
 DISPLAY rm_bod.r02_nombre TO nom_bod
-
-CALL fl_lee_cliente_general(rm_pcia.r00_cliente_final) RETURNING r_z01.*
-DISPLAY r_z01.z01_nomcli TO nom_cli_final
-
 
 END FUNCTION
 
@@ -654,7 +645,7 @@ END FUNCTION
 
                                                                                 
                                                                                 
-FUNCTION validar_parametros()
+FUNCTION no_validar_parametros()
                                                                                 
 CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
 IF rg_mod.g50_modulo IS NULL THEN

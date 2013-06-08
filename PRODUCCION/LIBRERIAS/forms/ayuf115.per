@@ -1,36 +1,45 @@
-DATABASE diteca
-
+DATABASE aceros
 SCREEN
 {
- ORDENES DE COMPRAS 
-----------------------------------------------------------------------------
- O.C.    Tipo             Departamento             Solicitado 		
-----------------------------------------------------------------------------
-[c0   |c001           |c002                   |c003                       ] 
-[c0   |c001           |c002                   |c003                       ] 
-[c0   |c001           |c002                   |c003                       ] 
-[c0   |c001           |c002                   |c003                       ] 
-[c0   |c001           |c002                   |c003                       ] 
-[c0   |c001           |c002                   |c003                       ] 
-[c0   |c001           |c002                   |c003                       ] 
-[c0   |c001           |c002                   |c003                       ] 
-[c0   |c001           |c002                   |c003                       ] 
-[c0   |c001           |c002                   |c003                       ] 
 
+ ORDENES DE COMPRAS 
+
+ [c000  |c001           |c002  |c003      |c004            |c005            |c] 
+[c010  |c011           |c012  |c013      |c014            |c015            |d] 
+[c010  |c011           |c012  |c013      |c014            |c015            |d] 
+[c010  |c011           |c012  |c013      |c014            |c015            |d] 
+[c010  |c011           |c012  |c013      |c014            |c015            |d] 
+[c010  |c011           |c012  |c013      |c014            |c015            |d] 
+[c010  |c011           |c012  |c013      |c014            |c015            |d] 
+[c010  |c011           |c012  |c013      |c014            |c015            |d] 
+[c010  |c011           |c012  |c013      |c014            |c015            |d] 
+[c010  |c011           |c012  |c013      |c014            |c015            |d] 
+[c010  |c011           |c012  |c013      |c014            |c015            |d] 
 
 }
-
 TABLES
-ordt010
-ordt001
 gent034
-
+ordt001
+ordt010
 ATTRIBUTES
-c0   = c10_numero_oc, UPSHIFT;
-c001 = c01_nombre, UPSHIFT;
-c002 = g34_nombre, UPSHIFT;
-c003 = c10_solicitado, UPSHIFT;
-END
+c000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c002 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c003 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c004 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c005 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c    = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
 
+c010 = ordt010.c10_numero_oc, NOENTRY, UPSHIFT;
+c011 = ordt001.c01_nombre, NOENTRY, UPSHIFT;
+c012 = ordt010.c10_ord_trabajo, NOENTRY, UPSHIFT;
+c013 = FORMONLY.c10_fecing TYPE DATE, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c014 = gent034.g34_nombre, NOENTRY, UPSHIFT;
+c015 = ordt010.c10_solicitado, NOENTRY, UPSHIFT;
+d    = ordt010.c10_estado, NOENTRY, UPSHIFT;
+END
 INSTRUCTIONS
-SCREEN RECORD rh_ordcom[10](c10_numero_oc, c01_nombre, g34_nombre, c10_solicitado)
+DELIMITERS '||'
+SCREEN RECORD rh_ordcom[10] (c10_numero_oc, c01_nombre, c10_ord_trabajo,
+				c10_fecing, g34_nombre,	c10_solicitado,
+				c10_estado)

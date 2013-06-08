@@ -1,0 +1,37 @@
+DATABASE aceros
+SCREEN
+{
+
+
+                                                      Estado: [c][c003     ]
+
+                    Compañía: [c000] [c004                                 ]
+
+  Aux. Reexpresión Monetaria: [c001        ] [c005                         ]
+          Indice Reexpresión: [c002  ]
+
+              Año de Proceso: [c010]       Mes de Proceso: [c1] [c012      ]
+
+       Cálculo Reexpresión ?: [b]
+}
+TABLES
+actt000
+ATTRIBUTES
+c000 = actt000.a00_compania, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c    = FORMONLY.tit_est, NOENTRY, REVERSE, UPSHIFT;
+c001 = actt000.a00_aux_reexp, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = actt000.a00_ind_reexp, AUTONEXT, FORMAT = '#&.##';
+b    = actt000.a00_calc_reexp, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+c003 = FORMONLY.tit_estado_act, NOENTRY, UPSHIFT;
+c004 = FORMONLY.tit_compania, NOENTRY, REVERSE, UPSHIFT;
+c005 = FORMONLY.tit_aux_rex, NOENTRY, UPSHIFT;
+c010 = actt000.a00_anopro, NOENTRY, UPSHIFT, REVERSE,
+	INCLUDE = (1980 TO 2099);
+c1   = actt000.a00_mespro, NOENTRY, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	INCLUDE = (01 TO 12);
+c012 = FORMONLY.tit_mes, NOENTRY, UPSHIFT, REVERSE;
+END

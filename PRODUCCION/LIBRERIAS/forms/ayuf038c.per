@@ -1,0 +1,32 @@
+DATABASE aceros
+SCREEN
+{
+
+  VENDEDORES
+ ---------------------------------------------------
+  Cod.            Nombres            Ini. Usuario
+ ---------------------------------------------------
+ [c11|c012                          |c13|c014      ]
+ [c11|c012                          |c13|c014      ]
+ [c11|c012                          |c13|c014      ]
+ [c11|c012                          |c13|c014      ]
+ [c11|c012                          |c13|c014      ]
+ [c11|c012                          |c13|c014      ]
+ [c11|c012                          |c13|c014      ]
+ [c11|c012                          |c13|c014      ]
+ [c11|c012                          |c13|c014      ]
+ [c11|c012                          |c13|c014      ]
+
+}
+TABLES
+rept001
+ATTRIBUTES
+c11  = rept001.r01_codigo, NOENTRY, UPSHIFT;
+c012 = rept001.r01_nombres, NOENTRY, UPSHIFT;
+c13  = rept001.r01_iniciales, NOENTRY, UPSHIFT;
+c014 = rept001.r01_user_owner, NOENTRY, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_vend[10] (r01_codigo, r01_nombres, r01_iniciales,
+				r01_user_owner)

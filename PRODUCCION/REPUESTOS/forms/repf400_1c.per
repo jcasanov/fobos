@@ -1,0 +1,39 @@
+DATABASE aceros
+SCREEN
+{
+
+
+            Moneda: [a0] [c001           ]
+          Vendedor: [c004 ] [c005                           ]
+
+     Fecha Inicial: [c002      ]                  Fecha Final: [c003      ]
+
+	      Tipo: [c|c010   ]
+
+}
+TABLES rept019
+ATTRIBUTES
+a0   = rept019.r19_moneda, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c001 = FORMONLY.tit_moneda, NOENTRY, REVERSE, UPSHIFT;
+
+-- Incluido por JCM para permitir que el reporte pueda ser emitido para ver las
+-- facturas de un solo vendedor
+c004 = FORMONLY.r19_vendedor, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c005 = FORMONLY.n_vendedor, NOENTRY;
+--
+
+-- Incluido por NPC el 06-09-2002
+c    = rept019.r19_cont_cred, AUTONEXT, REVERSE, UPSHIFT,
+	INCLUDE = ('C', 'R', 'T'), DEFAULT = 'T',
+	COMMENTS = 'Indicar el tipo de transacción: débito, crédito o todos (C, R ,T)';
+c010 = FORMONLY.tit_cont_cred,REVERSE,UPSHIFT,NOENTRY;
+--
+c002 = FORMONLY.vm_fecha_ini TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy';
+c003 = FORMONLY.vm_fecha_fin TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy';
+end
+INSTRUCTIONS
+DELIMITERS '||'

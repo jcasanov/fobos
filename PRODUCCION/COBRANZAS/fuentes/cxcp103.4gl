@@ -2,39 +2,41 @@
 -- Titulo           : cxcp103.4gl - Mantenimiento de Ejecutivos de Cuentas
 -- Elaboracion      : 03-sep-2001
 -- Autor            : RCA
--- Formato Ejecucion: fglrun programa.4gl base modulo
+-- Formato Ejecucion: fglrun cxcp103 base modulo compañía
 -- Ultima Correccion: 
 -- Motivo Correccion:  
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_demonios	VARCHAR(12)
 DEFINE vm_titprog	VARCHAR(50)
-DEFINE vm_rows ARRAY[1000] OF INTEGER  	-- ARREGLO DE ROWID DE FILAS LEIDAS
+DEFINE vm_rows		ARRAY[1000] OF INTEGER -- ARREGLO ROWID DE FILAS LEIDAS
 DEFINE vm_row_current	SMALLINT	-- FILA CORRIENTE DEL ARREGLO
 DEFINE vm_num_rows	SMALLINT	-- CANTIDAD DE FILAS LEIDAS
 DEFINE vm_max_rows	SMALLINT	-- MAXIMO DE FILAS LEIDAS
 DEFINE rm_cobra		RECORD LIKE cxct005.*
+
+
+
 MAIN
 	
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
-CALL fgl_init4js()
+CALL startlog('../logs/cxcp103.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN          -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
 	EXIT PROGRAM
 END IF
-LET vg_base     = arg_val(1)
-LET vg_modulo   = arg_val(2)
-LET vg_codcia   = arg_val(3)
+LET vg_base    = arg_val(1)
+LET vg_modulo  = arg_val(2)
+LET vg_codcia  = arg_val(3)
 LET vg_proceso = 'cxcp103'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -45,9 +47,9 @@ END MAIN
 FUNCTION funcion_master()
 
 LET vm_max_rows = 1000
-OPEN WINDOW  w_cia AT 4, 3 WITH FORM '../forms/cxcf103_1'	
-    ATTRIBUTE(FORM LINE FIRST + 2, COMMENT LINE LAST, MENU LINE FIRST,BORDER,
-	      MESSAGE LINE LAST - 2)
+OPEN WINDOW w_cia AT 3,2 WITH FORM '../forms/cxcf103_1'	
+	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE 0, BORDER,
+			MESSAGE LINE LAST) 
 INITIALIZE rm_cobra.* TO NULL
 LET vm_num_rows = 0
 LET vm_row_current = 0
@@ -65,14 +67,8 @@ MENU 'PROCESOS'
 			CALL control_ingreso()
 		END IF
 		IF vm_num_rows = 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		   END IF
-			
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -89,14 +85,8 @@ MENU 'PROCESOS'
 	COMMAND KEY('C') 'Consultar' 'Consultar un registro'
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		   END IF
-			
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -105,14 +95,8 @@ MENU 'PROCESOS'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		   END IF
-			
 		END IF
 		IF vm_row_current <= 1 THEN
                         HIDE OPTION 'Retroceder'
@@ -158,35 +142,50 @@ END FUNCTION
 FUNCTION control_consulta()
 DEFINE codigo		LIKE cxct005.z05_codigo
 DEFINE nombres		LIKE cxct005.z05_nombres
-DEFINE expr_sql		VARCHAR(500)
-DEFINE query		VARCHAR(600)
+DEFINE cod_trab		LIKE rolt030.n30_cod_trab
+DEFINE nom_trab		LIKE rolt030.n30_nombres
+DEFINE expr_sql		VARCHAR(600)
+DEFINE query		VARCHAR(1000)
 
 CLEAR FORM
 LET int_flag = 0
-CONSTRUCT BY NAME expr_sql ON
-		z05_codigo,
-   		z05_nombres,
-		z05_tipo,
-		z05_estado,
-		z05_codrol 
+CONSTRUCT BY NAME expr_sql ON z05_estado, z05_codigo, z05_nombres, z05_tipo,
+	z05_comision, z05_codrol 
+	ON KEY(INTERRUPT)
+		LET int_flag = 1
+		EXIT CONSTRUCT
 	ON KEY(F2)
 		IF INFIELD(z05_codigo) THEN
-			CALL fl_ayuda_cobradores(vg_codcia)RETURNING codigo, nombres  
+			CALL fl_ayuda_cobradores(vg_codcia, 'T', 'T', 'T')
+				RETURNING codigo, nombres
 			IF codigo IS NOT NULL THEN
-				LET rm_cobra.z05_codigo      = codigo
-				LET rm_cobra.z05_nombres     = nombres
-				DISPLAY BY NAME rm_cobra.z05_codigo, rm_cobra.z05_nombres
+				LET rm_cobra.z05_codigo  = codigo
+				LET rm_cobra.z05_nombres = nombres
+				DISPLAY BY NAME rm_cobra.z05_codigo,
+						rm_cobra.z05_nombres
 			END IF
 		END IF
-	ON KEY(interrupt)
-		RETURN
+		IF INFIELD(z05_codrol) THEN
+			CALL fl_ayuda_codigo_empleado(vg_codcia)
+				RETURNING cod_trab, nom_trab
+			IF cod_trab IS NOT NULL THEN
+				LET rm_cobra.z05_codrol = cod_trab
+				DISPLAY BY NAME rm_cobra.z05_codrol
+			END IF
+		END IF
+		LET int_flag = 0
 END CONSTRUCT
 IF int_flag THEN
-	CALL lee_muestra_registro(vm_rows[vm_row_current])
-	CALL muestra_contadores()
+	IF vm_row_current > 0 THEN
+		CALL lee_muestra_registro(vm_rows[vm_row_current])
+	END IF
 	RETURN
 END IF
-LET query = 'SELECT *, ROWID FROM cxct005 WHERE ', expr_sql CLIPPED
+LET query = 'SELECT *, ROWID ',
+		'FROM cxct005 ',
+		'WHERE z05_compania = ', vg_codcia,
+		'  AND ', expr_sql CLIPPED,
+		'ORDER BY z05_codigo '
 PREPARE cons FROM query
 DECLARE q_cobra CURSOR FOR cons
 LET vm_num_rows = 1
@@ -196,13 +195,12 @@ END FOREACH
 LET vm_num_rows = vm_num_rows - 1
 IF vm_num_rows = 0 THEN
 	CALL fl_mensaje_consulta_sin_registros()
-      LET vm_row_current = 0
-      CALL muestra_contadores()
-      CLEAR FORM
-      RETURN
+	LET vm_row_current = 0
+	CALL muestra_contadores()
+	CLEAR FORM
+	RETURN
 END IF
 LET vm_row_current = 1
-CLOSE q_cobra
 CALL lee_muestra_registro(vm_rows[vm_row_current])
 CALL muestra_contadores()
 
@@ -212,64 +210,78 @@ END FUNCTION
    
 
 FUNCTION control_modificacion()
-DEFINE     	flag   CHAR(1)
+DEFINE flag		CHAR(1)
 
 IF rm_cobra.z05_estado <> 'A' THEN
 	CALL fl_mensaje_estado_bloqueado()
 	RETURN
 END IF
-
-WHENEVER ERROR CONTINUE
 BEGIN WORK
-DECLARE q_up CURSOR FOR SELECT * FROM cxct005 WHERE ROWID = vm_rows[vm_row_current]
+WHENEVER ERROR CONTINUE
+DECLARE q_up CURSOR FOR
+	SELECT * FROM cxct005 WHERE ROWID = vm_rows[vm_row_current]
 	FOR UPDATE
 OPEN q_up
 FETCH q_up INTO rm_cobra.*
-IF status < 0 THEN
-	CALL fl_mensaje_bloqueo_otro_usuario()
+IF STATUS < 0 THEN
 	WHENEVER ERROR STOP
-	COMMIT WORK
+	CALL fl_mensaje_bloqueo_otro_usuario()
+	ROLLBACK WORK
 	RETURN
 END IF
-CALL ingresa_datos()
-IF NOT int_flag THEN
-    	UPDATE cxct005 SET * = rm_cobra.*
-		WHERE CURRENT OF q_up
-	CALL fl_mensaje_registro_modificado()
+WHENEVER ERROR STOP
+CALL ingresa_datos('M')
+IF int_flag THEN
+	ROLLBACK WORK
 	CALL lee_muestra_registro(vm_rows[vm_row_current])
+	RETURN
 END IF
+UPDATE cxct005
+	SET * = rm_cobra.*
+	WHERE CURRENT OF q_up
 COMMIT WORK
+CALL lee_muestra_registro(vm_rows[vm_row_current])
+CALL fl_mensaje_registro_modificado()
 
 END FUNCTION
 
    
 
 FUNCTION control_ingreso()
-DEFINE max_cobra		LIKE cxct005.z05_codigo
-OPTIONS INPUT WRAP
+DEFINE max_cobra	LIKE cxct005.z05_codigo
+DEFINE num_aux		INTEGER
+
 CLEAR FORM
 INITIALIZE rm_cobra.* TO NULL
-LET rm_cobra.z05_fecing = CURRENT
-LET rm_cobra.z05_usuario = vg_usuario 
-LET rm_cobra.z05_estado = 'A'
+LET rm_cobra.z05_compania =  vg_codcia
+LET rm_cobra.z05_estado   = 'A'
+LET rm_cobra.z05_comision = 'N'
+LET rm_cobra.z05_tipo     = 'C'
+LET rm_cobra.z05_fecing   = CURRENT
+LET rm_cobra.z05_usuario  = vg_usuario 
 DISPLAY 'ACTIVO' TO tit_estado
-LET rm_cobra.z05_codigo = 1
+LET rm_cobra.z05_codigo   = 1
 DISPLAY BY NAME rm_cobra.z05_fecing, rm_cobra.z05_usuario
-CALL ingresa_datos()
+CALL ingresa_datos('I')
 IF NOT int_flag THEN
-      	SELECT MAX(z05_codigo) INTO max_cobra FROM cxct005
-	IF max_cobra IS NOT NULL THEN 
-      		LET rm_cobra.z05_codigo =  max_cobra  + 1
-	ELSE
+      	SELECT NVL(MAX(z05_codigo) + 1, 1)
+		INTO max_cobra
+		FROM cxct005
+	IF max_cobra IS NULL THEN 
 		LET max_cobra = 1
-      		LET rm_cobra.z05_codigo =  max_cobra  
 	END IF
-      	LET rm_cobra.z05_compania  =  vg_codcia
+	LET rm_cobra.z05_codigo = max_cobra  
+	LET rm_cobra.z05_fecing = CURRENT
       	INSERT INTO cxct005 VALUES (rm_cobra.*)
+	LET num_aux = SQLCA.SQLERRD[6] 
+	IF vm_num_rows = vm_max_rows THEN
+		LET vm_num_rows = 1
+	ELSE
+		LET vm_num_rows = vm_num_rows + 1
+	END IF
+	LET vm_row_current          = vm_num_rows
+	LET vm_rows[vm_row_current] = num_aux
 	CALL fl_mensaje_registro_ingresado()
-	LET vm_num_rows = vm_num_rows + 1
-	LET vm_rows[vm_num_rows] = SQLCA.SQLERRD[6] 
-	LET vm_row_current = vm_num_rows
 END IF
 IF vm_num_rows > 0 THEN
 	CALL lee_muestra_registro(vm_rows[vm_row_current])
@@ -281,69 +293,70 @@ END FUNCTION
 
 
 
-FUNCTION ingresa_datos()
+FUNCTION ingresa_datos(flag)
+DEFINE flag		CHAR(1)
 DEFINE resp   		CHAR(6)
 DEFINE codigo		LIKE cxct005.z05_codigo
 DEFINE nombres		LIKE cxct005.z05_nombres
-DEFINE cod_cia		LIKE cxct005.z05_compania
-DEFINE r		RECORD LIKE cxct005.*
 DEFINE cod_trab		LIKE rolt030.n30_cod_trab
 DEFINE nom_trab		LIKE rolt030.n30_nombres
+DEFINE r		RECORD LIKE cxct005.*
+DEFINE r_n30		RECORD LIKE rolt030.*
+DEFINE cuantos		INTEGER
 
-OPTIONS INPUT WRAP
 LET int_flag = 0 
-LET rm_cobra.z05_estado = 'A'
-DISPLAY BY NAME rm_cobra.z05_fecing, rm_cobra.z05_estado
-INPUT BY NAME   rm_cobra.z05_nombres,
-		rm_cobra.z05_tipo,
-		rm_cobra.z05_codrol,
-		rm_cobra.z05_usuario,
-		rm_cobra.z05_fecing
-		WITHOUT DEFAULTS                                                           
-	ON KEY (INTERRUPT)
-		IF field_touched(
- 				 rm_cobra.z05_nombres,
-				 rm_cobra.z05_tipo,
-				 rm_cobra.z05_codrol,
-				 rm_cobra.z05_usuario,
-				 rm_cobra.z05_fecing) THEN
+INPUT BY NAME rm_cobra.z05_nombres, rm_cobra.z05_tipo, rm_cobra.z05_comision,
+	rm_cobra.z05_codrol
+	WITHOUT DEFAULTS
+	ON KEY(INTERRUPT)
+		IF FIELD_TOUCHED(rm_cobra.z05_nombres, rm_cobra.z05_tipo,
+				 rm_cobra.z05_comision, rm_cobra.z05_codrol)
+		THEN
 			LET int_flag = 0
-			CALL fl_mensaje_abandonar_proceso()
-				RETURNING resp
+			CALL fl_mensaje_abandonar_proceso() RETURNING resp
 			IF resp = 'Yes' THEN
 				LET int_flag = 1
-				RETURN
+				EXIT INPUT
 			END IF
 		ELSE
-			RETURN
+			CLEAR FORM
+			EXIT INPUT
 		END IF
 	ON KEY(F2)
-            IF INFIELD(z05_codigo) THEN
-         	  CALL fl_ayuda_cobradores(cod_cia) RETURNING codigo, nombres
-                  LET rm_cobra.z05_codigo 	= codigo
-		  LET rm_cobra.z05_nombres     	= nombres
-                  DISPLAY BY NAME rm_cobra.z05_codigo, rm_cobra.z05_nombres
-            END IF
-            IF INFIELD(z05_codrol) THEN
-         	  CALL fl_ayuda_trabajadores(cod_cia) RETURNING cod_trab, nom_trab
-                  LET rm_cobra.z05_codrol 	= cod_trab
-                  DISPLAY BY NAME rm_cobra.z05_codrol
-            END IF
-{
-	AFTER FIELD z06_zona_cobro
-	IF rm_zoncob.z06_zona_cobro IS NOT NULL THEN
-		CLEAR rm_zoncob.z06_nombre
-		CALL fl_lee_zona_cobro(rm_zoncob.z06_zona_cobro) 
-				RETURNING r.*
-		IF r.z06_zona_cobro IS NULL THEN
-              		CALL fgl_winmessage(vg_producto,'No existe una Zona de Cobro con ese código','exclamation')
-			NEXT FIELD z06_zona_cobro
-        	END IF   
-		LET rm_zoncob.z06_zona_cobro	= zona_cobro
-		LET rm_zoncob.z06_nombre	= nombre
-        	DISPLAY BY NAME rm_zoncob.z06_zona_cobro, rm_zoncob.z06_nombre
-	END IF
-}
+		IF INFIELD(z05_codrol) THEN
+			CALL fl_ayuda_codigo_empleado(vg_codcia)
+				RETURNING cod_trab, nom_trab
+			IF cod_trab IS NOT NULL THEN
+				LET rm_cobra.z05_codrol = cod_trab
+				DISPLAY BY NAME rm_cobra.z05_codrol
+			END IF
+		END IF
+		LET int_flag = 0
+	AFTER FIELD z05_codrol
+		IF rm_cobra.z05_codrol IS NOT NULL THEN
+			CALL fl_lee_trabajador_roles(vg_codcia,
+							rm_cobra.z05_codrol)
+				RETURNING r_n30.*
+			IF r_n30.n30_compania IS NULL THEN
+				CALL fl_mostrar_mensaje('Código de Rol no existe en la compañía.', 'exclamation')
+				NEXT FIELD z05_codrol
+			END IF
+			IF r_n30.n30_estado = 'I' THEN
+				CALL fl_mostrar_mensaje('Código de Rol esta Inactivo en la compañía.', 'exclamation')
+				NEXT FIELD z05_codrol
+			END IF
+		END IF
+	AFTER INPUT
+		IF flag = 'I' THEN
+			SELECT COUNT(*) INTO cuantos
+				FROM cxct005
+				WHERE z05_compania = vg_codcia
+				  AND z05_nombres  = rm_cobra.z05_nombres
+			IF cuantos > 0 THEN
+				CALL fl_mostrar_mensaje('Este cobrador ya ha sido ingresado en la compañía.', 'exclamation')
+				NEXT FIELD z05_nombres
+			END IF
+		END IF
 END INPUT
                                                                                 
 END FUNCTION
@@ -351,48 +364,49 @@ END FUNCTION
 
 
 FUNCTION control_bloqueo()
-DEFINE resp    	CHAR(6)
+DEFINE resp		CHAR(6)
 DEFINE i		SMALLINT
-DEFINE mensaje	VARCHAR(20)
-DEFINE estado 	CHAR(1)
+DEFINE mensaje		VARCHAR(20)
+DEFINE estado		CHAR(1)
 
 LET int_flag = 0
-IF rm_cobra.z05_compania AND rm_cobra.z05_codigo IS NULL OR vm_num_rows = 0 THEN
-	CALL fl_mensaje_consultar_primero()
-      	RETURN
-END IF
-WHENEVER ERROR CONTINUE
 BEGIN WORK
-DECLARE q_blo CURSOR FOR SELECT * FROM cxct005 WHERE ROWID = vm_rows[vm_row_current]
-      FOR UPDATE
+WHENEVER ERROR CONTINUE
+DECLARE q_blo CURSOR FOR
+	SELECT * FROM cxct005 WHERE ROWID = vm_rows[vm_row_current]
+	FOR UPDATE
 OPEN q_blo
 FETCH q_blo INTO rm_cobra.*
-IF status < 0 THEN
+IF STATUS < 0 THEN
+	WHENEVER ERROR STOP
 	CALL fl_mensaje_bloqueo_otro_usuario()
-      WHENEVER ERROR STOP
-      COMMIT WORK
-      RETURN
+	ROLLBACK WORK
+	RETURN
 END IF
-LET mensaje = 'Seguro de bloquear'
-LET estado = 'B'
+WHENEVER ERROR STOP
+LET mensaje = 'Seguro de bloquear ?'
+LET estado  = 'B'
 IF rm_cobra.z05_estado <> 'A' THEN
-      LET mensaje = 'Seguro de activar'
-      LET estado = 'A'
+      LET mensaje = 'Seguro de activar ?'
+      LET estado  = 'A'
 END IF	
-CALL fl_mensaje_seguro_ejecutar_proceso()
-      RETURNING resp
-IF resp = 'Yes' THEN
-      UPDATE cxct005 set z05_estado = estado WHERE CURRENT OF q_blo
-      DISPLAY 'BLOQUEADO' TO tit_estado
-      DISPLAY 'B' TO z05_estado
-      LET int_flag = 1
-      CALL fl_mensaje_registro_modificado()
-      WHENEVER ERROR STOP	
-      COMMIT WORK
-      CALL lee_muestra_registro(vm_rows[vm_row_current])
+LET int_flag = 0
+CALL fl_hacer_pregunta(mensaje, 'No') RETURNING resp
+IF resp <> 'Yes' THEN
+	ROLLBACK WORK
+	CALL lee_muestra_registro(vm_rows[vm_row_current])
+	RETURN
 END IF
-
-CALL muestra_contadores()
+UPDATE cxct005
+	SET z05_estado = estado
+	WHERE CURRENT OF q_blo
+COMMIT WORK
+CALL lee_muestra_registro(vm_rows[vm_row_current])
+CASE rm_cobra.z05_estado
+	WHEN 'A' LET mensaje = 'Registro ha sido ACTIVADO. OK'
+	WHEN 'B' LET mensaje = 'Registro ha sido BLOQUEADO. OK'
+END CASE
+CALL fl_mostrar_mensaje(mensaje, 'info')
 
 END FUNCTION
 
@@ -408,12 +422,13 @@ SELECT * INTO rm_cobra.* FROM cxct005 WHERE ROWID = num_row
 IF STATUS = NOTFOUND THEN
 	ERROR 'No existe registro con rowid: ', num_row
 END IF
-DISPLAY BY NAME rm_cobra.z05_codigo  THRU rm_cobra.z05_fecing
+DISPLAY BY NAME rm_cobra.z05_codigo THRU rm_cobra.z05_fecing
 IF rm_cobra.z05_estado = 'A' THEN
 	DISPLAY 'ACTIVO' TO tit_estado
 ELSE
 	DISPLAY 'BLOQUEADO' TO tit_estado
 END IF
+
 END FUNCTION
 
 
@@ -424,40 +439,3 @@ DISPLAY '' AT 1,1
 DISPLAY vm_row_current, ' de ',vm_num_rows AT 1,70
 
 END FUNCTION
-
-
-
-FUNCTION validar_parametros()
-
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-
-END FUNCTION
-
-
-
-

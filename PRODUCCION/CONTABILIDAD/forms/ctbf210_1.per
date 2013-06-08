@@ -1,19 +1,77 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
+                                                             [x001] de [y001]
 
-   Este proceso revisara que facturas no se han contabilizado desde la 
-   fecha indicada abajo y las contabilizara.
-   Es preferible que ningun usuario este ingresando/generando/modificando 
-   comprobantes contables en el sistema.
-
-
-
-                    Contabilizar desde: [c001      ]
+          Compañía: [c000]  [c050                                    ]
+         Localidad: [c001]  [c051                ]
+            Módulo: [a0]    [c052                ]
+            Bodega: [a1]    [c053                          ]
+       Grupo Línea: [c002 ] [c054                          ]
+      Impuesto (%): [c070 ] [c071                ]
+                             Auxiliares Contables
+                             -------------------
+             Venta: [c003        ] [c055                                    ]
+         Descuento: [c004        ] [c056                                    ]
+  Devolución Venta: [c005        ] [c057                                    ]
+       Costo Venta: [c006        ] [c058                                    ]
+  Devolución Costo: [c007        ] [c059                                    ]
+        Inventario: [c008        ] [c060                                    ]
+          Transito: [c009        ] [c061                                    ]
+           Ajustes: [c010        ] [c062                                    ]
+             Flete: [c011        ] [c063                                    ]
 
 }
 TABLES
-ctbt999
+ctbt040
 ATTRIBUTES
-c001 = ctbt999.b999_fechult, AUTONEXT, REVERSE, UPSHIFT, FORMAT='dd-mm-yyyy';
-end
+c000 = ctbt040.b40_compania, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c050 = FORMONLY.tit_compania, NOENTRY, UPSHIFT, REVERSE;
+c001 = ctbt040.b40_localidad, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c051 = FORMONLY.tit_localidad, NOENTRY, UPSHIFT, REVERSE;
+a0   = ctbt040.b40_modulo, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c052 = FORMONLY.tit_modulo, NOENTRY, UPSHIFT, REVERSE;
+a1   = ctbt040.b40_bodega, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c053 = FORMONLY.tit_bodega, NOENTRY, UPSHIFT, REVERSE;
+c002 = ctbt040.b40_grupo_linea, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c054 = FORMONLY.tit_grupo_linea, NOENTRY, UPSHIFT, REVERSE;
+c070 = ctbt040.b40_porc_impto, AUTONEXT, UPSHIFT, REVERSE, FORMAT = '#&.##',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	INCLUDE = (0 TO 99.99);
+c071 = FORMONLY.tit_porc_impto, NOENTRY, UPSHIFT, REVERSE;
+c003 = ctbt040.b40_venta, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c055 = FORMONLY.tit_venta, NOENTRY, UPSHIFT, REVERSE;
+c004 = ctbt040.b40_descuento, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c056 = FORMONLY.tit_descuento, NOENTRY, UPSHIFT, REVERSE;
+c005 = ctbt040.b40_dev_venta, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c057 = FORMONLY.tit_dev_venta, NOENTRY, UPSHIFT, REVERSE;
+c006 = ctbt040.b40_costo_venta, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c058 = FORMONLY.tit_costo_venta, NOENTRY, UPSHIFT, REVERSE;
+c007 = ctbt040.b40_dev_costo, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c059 = FORMONLY.tit_dev_costo, NOENTRY, UPSHIFT, REVERSE;
+c008 = ctbt040.b40_inventario, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c060 = FORMONLY.tit_inventario, NOENTRY, UPSHIFT, REVERSE;
+c009 = ctbt040.b40_transito, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c061 = FORMONLY.tit_transito, NOENTRY, UPSHIFT, REVERSE;
+c010 = ctbt040.b40_ajustes, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c062 = FORMONLY.tit_ajustes, NOENTRY, UPSHIFT, REVERSE;
+c011 = ctbt040.b40_flete, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c063 = FORMONLY.tit_flete, NOENTRY, UPSHIFT, REVERSE;
+
+x001 = FORMONLY.vm_row_current, NOENTRY;
+y001 = FORMONLY.vm_num_rows, NOENTRY;
+END

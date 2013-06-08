@@ -1,0 +1,56 @@
+DATABASE aceros
+SCREEN 
+{
+
+      No. Pagos: [c0  ]                              Interés: [c1   ]%  
+ Fecha 1er Pago: [c2        ]               Días entre pagos: [c3   ]    
+          Total: [c4              ] 		  Total Días: [c13  ]
+
+  No.  Fecha Vcto   Valor Capital    Valor Interés      Subtotal      
+ [c5  |c6        |c7              |c8              |c9              ]
+ [c5  |c6        |c7              |c8              |c9              ]
+ [c5  |c6        |c7              |c8              |c9              ]
+ [c5  |c6        |c7              |c8              |c9              ]
+ [c5  |c6        |c7              |c8              |c9              ]
+ [c5  |c6        |c7              |c8              |c9              ]
+ [c5  |c6        |c7              |c8              |c9              ]
+                  ---------------- ---------------- ----------------
+	         [c10             |c11             |c12             ]
+}
+TABLES ordt010, ordt013, ordt015
+ATTRIBUTES
+
+c0  = FORMONLY.pagos TYPE SMALLINT, REVERSE, INCLUDE = (1 TO 999), REQUIRED;
+c1  = ordt013.c13_interes, REVERSE, INCLUDE = (0.00 TO 99.99), REQUIRED;
+c2  = FORMONLY.fecha_pago TYPE DATE, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha e formato dd-mm-aaaa', REQUIRED;
+c3  = FORMONLY.dias_pagos TYPE SMALLINT, REVERSE, INCLUDE = (1 TO 999),
+	REQUIRED;
+c4  = FORMONLY.tot_recep TYPE DECIMAL(12,2), REVERSE, 
+	FORMAT = '#,###,###,##&.##', REQUIRED;
+c13 = FORMONLY.tot_dias TYPE SMALLINT, REVERSE, NOENTRY; 
+
+c5  = ordt015.c15_dividendo,  REVERSE, NOENTRY, 
+	FORMAT='&&&&';
+c6  = ordt015.c15_fecha_vcto, REVERSE,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha e formato dd-mm-aaaa', REQUIRED;
+c7  = ordt015.c15_valor_cap,  REVERSE, 
+	FORMAT = '#,###,###,##&.##';
+c8  = ordt015.c15_valor_int,  REVERSE, NOENTRY, 
+	FORMAT = '#,###,###,##&.##';
+c9  = FORMONLY.subtotal TYPE DECIMAL(12,2), REVERSE, 
+	NOENTRY, FORMAT = '#,###,###,##&.##';
+c10 = FORMONLY.tot_cap  TYPE DECIMAL(12,2), REVERSE, 
+	NOENTRY, FORMAT = '#,###,###,##&.##';
+c11 = FORMONLY.tot_int  TYPE DECIMAL(12,2), REVERSE, 
+	NOENTRY, FORMAT = '#,###,###,##&.##';
+c12 = FORMONLY.tot_sub  TYPE DECIMAL(12,2), REVERSE, 
+	NOENTRY, FORMAT = '#,###,###,##&.##';
+
+end
+
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_detalle_2[7] (c15_dividendo, c15_fecha_vcto, c15_valor_cap,
+			      c15_valor_int, subtotal)

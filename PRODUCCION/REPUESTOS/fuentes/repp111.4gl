@@ -1,435 +1,465 @@
-{*
- * -- Titulo           : repp111.4gl - Mantenimiento parametros
- * -- Elaboracion      : 18-jun-2008
- * -- Autor            : JCM
- * -- Formato Ejecucion: fglrun repp111 base_datos modulo compañía 
- *}
-
+-------------------------------------------------------------------------------
+-- Titulo               : repp111.4gl -- Mantenimiento de Grupos de Ventas
+-- Elaboración          : 24-Ago-2002
+-- Autor                : NPC
+-- Formato de Ejecución : fglrun repp111.4gl Base Modulo Compañía
+-- Ultima Correción     : 
+-- Motivo Corrección    : 
+--------------------------------------------------------------------------------
+                                                                                
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
-
-DEFINE rm_item ARRAY[30000] OF RECORD
-	r10_codigo	LIKE rept010.r10_codigo,
-	r10_nombre	LIKE rept010.r10_nombre,
-	valact		DECIMAL(5,2),
-	valnue		DECIMAL(5,2)
-END RECORD
-DEFINE rm_par RECORD
-	r10_linea			LIKE rept010.r10_linea,
-	r103_pais_origen	LIKE rept103.r103_pais_origen,
-	r103_proveedor		LIKE rept103.r103_proveedor,
-	r10_tipo			LIKE rept010.r10_tipo,
-	r103_componente		LIKE rept103.r103_componente,
-	activos				CHAR(1),
-	sustituidos			CHAR(1),
-	desc_linea			VARCHAR(30),
-	desc_pais			VARCHAR(30),
-	desc_proveedor		VARCHAR(30),
-	desc_tipo			VARCHAR(30),
-	desc_componente		VARCHAR(30)
-END RECORD
-DEFINE vm_max_rows	INTEGER	
-DEFINE vm_table_rows DECIMAL(7,0)
-
-DEFINE vm_param		LIKE rept104.r104_codigo
-
-
+                                                                                
+DEFINE rm_r71   	RECORD LIKE rept071.*
+DEFINE vm_r_rows	ARRAY[1000] OF INTEGER
+DEFINE vm_row_current   SMALLINT        -- FILA CORRIENTE DEL ARREGLO
+DEFINE vm_num_rows      SMALLINT        -- CANTIDAD DE FILAS LEIDAS
+DEFINE vm_max_rows      SMALLINT        -- MAXIMO DE FILAS LEIDAS
+DEFINE vm_demonios      VARCHAR(12)
+DEFINE vm_flag_mant     CHAR(1)
 
 MAIN
-	
+                                                                                
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/repp111.error')
-CALL fgl_init4js()
+CALL startlog('../logs/errores')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
-IF num_args() <> 3 THEN          -- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
-	EXIT PROGRAM
+IF num_args() <> 3 THEN
+     	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.','stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
+     	EXIT PROGRAM
 END IF
 LET vg_base     = arg_val(1)
 LET vg_modulo   = arg_val(2)
 LET vg_codcia   = arg_val(3)
 LET vg_proceso = 'repp111'
 CALL fl_activar_base_datos(vg_base)
-CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+CALL fl_seteos_defaults()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
-
+                                                                                
 END MAIN
 
 
 
 FUNCTION funcion_master()
-DEFINE i		SMALLINT
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
-LET vm_param = 'LT'
-
-OPEN WINDOW repw111_1 AT 3,2 WITH 22 ROWS, 80 COLUMNS
-	ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE FIRST,
-		  BORDER, MESSAGE LINE LAST) 
-OPEN FORM f_repf111_1 FROM '../forms/repf111_1'
-DISPLAY FORM f_repf111_1
-
-
-OPTIONS INSERT KEY F30, DELETE KEY F31
-LET vm_max_rows = 30000
-
-DISPLAY 'Item'           TO tit_col1
-DISPLAY 'Descripción'    TO tit_col2
-DISPLAY 'LT Actual'      TO tit_col3
-DISPLAY 'Nuevo LT'       TO tit_col4
-WHILE TRUE
-	FOR i = 1 TO fgl_scr_size('rm_item')
-		CLEAR rm_item[i].*
-	END FOR
-	CALL lee_parametros1()
-	IF int_flag THEN
-		RETURN
-	END IF
-	CALL lee_parametros2()
-	IF int_flag THEN
-		CONTINUE WHILE
-	END IF
-	CALL muestra_consulta()
-END WHILE
+CALL fl_nivel_isolation()
+LET vm_max_rows = 1000
+LET lin_menu = 0
+LET row_ini  = 3
+LET num_rows = 12
+LET num_cols = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW w_item AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
+    ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE lin_menu,BORDER,
+	      MESSAGE LINE LAST - 1)
+IF vg_gui = 1 THEN
+	OPEN FORM f_rep FROM '../forms/repf111_1'
+ELSE
+	OPEN FORM f_rep FROM '../forms/repf111_1c'
+END IF
+DISPLAY FORM f_rep
+INITIALIZE rm_r71.* TO NULL
+LET vm_num_rows = 0
+LET vm_row_current = 0
+CALL muestra_contadores(vm_row_current, vm_num_rows)
+MENU 'OPCIONES'
+	BEFORE MENU
+		HIDE OPTION 'Avanzar'
+		HIDE OPTION 'Retroceder'
+		HIDE OPTION 'Modificar'
+	COMMAND KEY('I') 'Ingresar' 'Ingresar nuevos registros. '
+		CALL control_ingreso()
+		IF vm_num_rows = 1 THEN
+			SHOW OPTION 'Modificar'
+		END IF
+		IF vm_row_current > 1 THEN
+			SHOW OPTION 'Retroceder'
+		END IF
+		IF vm_row_current = vm_num_rows THEN
+			HIDE OPTION 'Avanzar'
+		END IF
+        COMMAND KEY('M') 'Modificar' 'Modificar registro corriente. '
+                IF vm_num_rows > 0 THEN
+                        CALL control_modificacion()
+                ELSE
+			CALL fl_mensaje_consultar_primero()
+		END IF
+	COMMAND KEY('C') 'Consultar' 'Consultar un registro. '
+		CALL control_consulta()
+		IF vm_num_rows <= 1 THEN
+			SHOW OPTION 'Modificar'
+			HIDE OPTION 'Avanzar'
+			HIDE OPTION 'Retroceder'
+			IF vm_num_rows = 0 THEN
+				HIDE OPTION 'Modificar'
+			END IF
+		ELSE
+			SHOW OPTION 'Avanzar'
+			SHOW OPTION 'Modificar'
+		END IF
+		IF vm_row_current <= 1 THEN
+                        HIDE OPTION 'Retroceder'
+                END IF
+	COMMAND KEY('A') 'Avanzar' 'Ver siguiente registro'
+		IF vm_row_current < vm_num_rows THEN
+			LET vm_row_current = vm_row_current + 1 
+		END IF	
+		CALL lee_muestra_registro(vm_r_rows[vm_row_current])
+		CALL muestra_contadores(vm_row_current, vm_num_rows)
+		IF vm_row_current = vm_num_rows THEN
+			HIDE OPTION 'Avanzar'
+			SHOW OPTION 'Retroceder'
+			NEXT OPTION 'Retroceder'
+		ELSE
+			SHOW OPTION 'Avanzar'
+			SHOW OPTION 'Retroceder'
+		END IF
+	COMMAND KEY('R') 'Retroceder'  'Ver anterior registro. '
+		IF vm_row_current > 1 THEN
+			LET vm_row_current = vm_row_current - 1 
+		END IF
+		CALL lee_muestra_registro(vm_r_rows[vm_row_current])
+		CALL muestra_contadores(vm_row_current, vm_num_rows)
+		IF vm_row_current = 1 THEN
+			HIDE OPTION 'Retroceder'
+			SHOW OPTION 'Avanzar'
+			NEXT OPTION 'Avanzar'
+		ELSE
+			SHOW OPTION 'Avanzar'
+			SHOW OPTION 'Retroceder'
+		END IF
+	COMMAND KEY('S') 'Salir' 'Salir del programa. '
+		EXIT MENU
+END MENU
 
 END FUNCTION
 
 
 
-FUNCTION lee_parametros1()
-DEFINE resp		CHAR(3)
-DEFINE lin_aux		LIKE rept003.r03_codigo
-DEFINE tit_aux		VARCHAR(30)
-DEFINE num_dec		SMALLINT
+FUNCTION control_consulta()
+DEFINE expr_sql		CHAR(500)
+DEFINE query		CHAR(600)
 DEFINE r_lin		RECORD LIKE rept003.*
+DEFINE r_sub		RECORD LIKE rept070.*
+DEFINE r_grp		RECORD LIKE rept071.*
 
-INITIALIZE rm_par.* TO NULL
-LET rm_par.activos = 'S'
-LET rm_par.sustituidos = 'N'
-
+CLEAR FORM
+INITIALIZE rm_r71.* TO NULL
 LET int_flag = 0
-INPUT BY NAME rm_par.* WITHOUT DEFAULTS
+CONSTRUCT BY NAME expr_sql ON r71_linea, r71_sub_linea, r71_cod_grupo,
+	r71_desc_grupo, r71_usuario, r71_fecing
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
 	ON KEY(F2)
-		IF infield(r10_linea) THEN
-			CALL fl_ayuda_lineas_rep(vg_codcia) RETURNING lin_aux, tit_aux
-			IF lin_aux IS NOT NULL THEN
-				LET rm_par.r10_linea = lin_aux
-				LET rm_par.desc_linea = tit_aux
-				DISPLAY BY NAME rm_par.*
-			END IF
+		IF INFIELD(r71_linea) THEN
+			CALL fl_ayuda_lineas_rep(vg_codcia)
+		     		RETURNING r_lin.r03_codigo, r_lin.r03_nombre
+			IF r_lin.r03_codigo IS NOT NULL THEN
+				LET rm_r71.r71_linea = r_lin.r03_codigo
+				DISPLAY BY NAME rm_r71.r71_linea
+				DISPLAY r_lin.r03_nombre TO tit_linea
+		     	END IF
 		END IF
-		LET int_flag = 0
-	AFTER FIELD r10_linea
-		IF rm_par.r10_linea IS NOT NULL THEN
-			CALL fl_lee_linea_rep(vg_codcia, rm_par.r10_linea) RETURNING r_lin.*
-			IF r_lin.r03_codigo IS NULL THEN
-				CALL fgl_winmessage(vg_producto, 'Línea no existe', 'exclamation')
-				NEXT FIELD r10_linea
-			END IF
+		IF INFIELD(r71_sub_linea) THEN
+			CALL fl_ayuda_sublinea_rep(vg_codcia, rm_r71.r71_linea)
+		  		RETURNING r_sub.r70_sub_linea,
+				          r_sub.r70_desc_sub
+			IF r_sub.r70_sub_linea IS NOT NULL THEN
+				LET rm_r71.r71_sub_linea = r_sub.r70_sub_linea
+				DISPLAY BY NAME rm_r71.r71_sub_linea
+				DISPLAY r_sub.r70_desc_sub TO tit_sub_linea
+		   	END IF
 		END IF
+		IF INFIELD(r71_cod_grupo) THEN
+			CALL fl_ayuda_grupo_ventas_rep(vg_codcia,
+							rm_r71.r71_linea,
+							rm_r71.r71_sub_linea)
+		     		RETURNING r_grp.r71_cod_grupo,
+				          r_grp.r71_desc_grupo
+		     	IF r_grp.r71_cod_grupo IS NOT NULL THEN
+				LET rm_r71.r71_cod_grupo = r_grp.r71_cod_grupo
+				DISPLAY BY NAME rm_r71.r71_cod_grupo,
+				 		r_grp.r71_desc_grupo
+		     	END IF
+		END IF
+                LET int_flag = 0
+	BEFORE CONSTRUCT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
+END CONSTRUCT
+IF int_flag THEN
+	CLEAR FORM
+	IF vm_num_rows >0 THEN
+		CALL lee_muestra_registro(vm_r_rows[vm_row_current])
+	END IF
+	CALL muestra_contadores(vm_row_current, vm_num_rows)
+	RETURN
+END IF
+LET query = 'SELECT *, ROWID FROM rept071 ',
+		'WHERE r71_compania = ', vg_codcia,
+		' AND ', expr_sql CLIPPED,
+		' ORDER BY 2'
+PREPARE cons FROM query
+DECLARE q_uni CURSOR FOR cons
+LET vm_num_rows = 1
+FOREACH q_uni INTO rm_r71.*, vm_r_rows[vm_num_rows]
+	LET vm_num_rows = vm_num_rows + 1
+        IF vm_num_rows > vm_max_rows THEN
+                EXIT FOREACH
+        END IF
+END FOREACH
+LET vm_num_rows = vm_num_rows - 1
+IF vm_num_rows = 0 THEN
+	CALL fl_mensaje_consulta_sin_registros()
+	LET vm_row_current = 0
+	CALL muestra_contadores(vm_row_current, vm_num_rows)
+        CLEAR FORM
+        RETURN
+END IF
+LET vm_row_current = 1
+CALL lee_muestra_registro(vm_r_rows[vm_row_current])
+CALL muestra_contadores(vm_row_current, vm_num_rows)
+
+END FUNCTION
+
+
+
+FUNCTION control_ingreso()
+
+OPTIONS INPUT WRAP
+CLEAR FORM
+INITIALIZE rm_r71.* TO NULL
+LET vm_flag_mant          = 'I'
+LET rm_r71.r71_compania   = vg_codcia
+LET rm_r71.r71_usuario    = vg_usuario
+LET rm_r71.r71_fecing     = CURRENT
+DISPLAY BY NAME rm_r71.r71_fecing, rm_r71.r71_usuario
+CALL lee_datos()
+IF NOT int_flag THEN
+	LET rm_r71.r71_fecing     = CURRENT
+        INSERT INTO rept071 VALUES (rm_r71.*)
+        IF vm_num_rows = vm_max_rows THEN
+                LET vm_num_rows = 1
+        ELSE
+                LET vm_num_rows = vm_num_rows + 1
+        END IF
+	LET vm_r_rows[vm_num_rows] = SQLCA.SQLERRD[6] 
+	LET vm_row_current = vm_num_rows
+	CALL fl_mensaje_registro_ingresado()
+END IF
+IF vm_num_rows > 0 THEN
+	CALL lee_muestra_registro(vm_r_rows[vm_row_current])
+END IF
+CALL muestra_contadores(vm_row_current, vm_num_rows)
+
+END FUNCTION
+
+
+
+FUNCTION control_modificacion()
+
+LET vm_flag_mant = 'M'
+BEGIN WORK
+WHENEVER ERROR CONTINUE
+DECLARE q_up CURSOR FOR SELECT * FROM rept071
+	WHERE ROWID = vm_r_rows[vm_row_current]
+	FOR UPDATE
+OPEN q_up
+FETCH q_up INTO rm_r71.*
+IF STATUS < 0 THEN
+	ROLLBACK WORK
+	CALL fl_mensaje_bloqueo_otro_usuario()
+	WHENEVER ERROR STOP
+	RETURN
+END IF
+WHENEVER ERROR STOP
+CALL lee_datos()
+IF NOT int_flag THEN
+    	UPDATE rept071 SET * = rm_r71.*
+		WHERE CURRENT OF q_up
+	COMMIT WORK
+	CALL fl_mensaje_registro_modificado()
+ELSE
+	COMMIT WORK
+	CALL lee_muestra_registro(vm_r_rows[vm_row_current])
+END IF
+
+END FUNCTION
+
+
+
+FUNCTION lee_datos()
+DEFINE resp      	CHAR(6)
+DEFINE r_lin		RECORD LIKE rept003.*
+DEFINE r_sub		RECORD LIKE rept070.*
+DEFINE r_grp		RECORD LIKE rept071.*
+                                                                                
+LET int_flag = 0 
+INPUT BY NAME rm_r71.r71_linea, rm_r71.r71_sub_linea, rm_r71.r71_cod_grupo,
+	rm_r71.r71_desc_grupo
+	WITHOUT DEFAULTS
+        ON KEY(INTERRUPT)
+        	 IF field_touched(rm_r71.r71_linea, rm_r71.r71_sub_linea,
+				  rm_r71.r71_cod_grupo, rm_r71.r71_desc_grupo)
+                 THEN
+                        LET int_flag = 0
+			CALL fl_mensaje_abandonar_proceso()
+                        	RETURNING resp
+                        IF resp = 'Yes' THEN
+                            LET int_flag = 1
+			    IF vm_flag_mant = 'I' THEN
+                                	CLEAR FORM
+			    END IF
+                            RETURN
+                        END IF
+                ELSE
+			IF vm_flag_mant = 'I' THEN
+                	        CLEAR FORM
+			END IF
+                        RETURN
+                END IF       	
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
+	ON KEY(F2)
+		IF INFIELD(r71_linea) THEN
+			CALL fl_ayuda_lineas_rep(vg_codcia)
+		     		RETURNING r_lin.r03_codigo, r_lin.r03_nombre
+			IF r_lin.r03_codigo IS NOT NULL THEN
+				LET rm_r71.r71_linea = r_lin.r03_codigo
+				DISPLAY BY NAME rm_r71.r71_linea
+				DISPLAY r_lin.r03_nombre TO tit_linea
+		     	END IF
+		END IF
+		IF INFIELD(r71_sub_linea) THEN
+			CALL fl_ayuda_sublinea_rep(vg_codcia, rm_r71.r71_linea)
+		     		RETURNING r_sub.r70_sub_linea,
+				          r_sub.r70_desc_sub
+			IF r_sub.r70_sub_linea IS NOT NULL THEN
+				LET rm_r71.r71_sub_linea = r_sub.r70_sub_linea
+				DISPLAY BY NAME rm_r71.r71_sub_linea
+				DISPLAY r_sub.r70_desc_sub TO tit_sub_linea
+		     	END IF
+		END IF
+                LET int_flag = 0
+	BEFORE INPUT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
+	BEFORE FIELD r71_linea, r71_sub_linea, r71_cod_grupo
+		IF vm_flag_mant = 'M' THEN
+			NEXT FIELD NEXT
+		END IF
+	AFTER FIELD r71_linea
+		IF rm_r71.r71_linea IS NOT NULL THEN
+        	       	CALL fl_lee_linea_rep(vg_codcia, rm_r71.r71_linea)
+          	        	RETURNING r_lin.*
+                       	IF r_lin.r03_codigo IS NULL THEN
+                               	--CALL fgl_winmessage(vg_producto,'La Línea de Venta no existe en la compañía.','exclamation')
+				CALL fl_mostrar_mensaje('La Línea de Venta no existe en la compañía.','exclamation')
+                                NEXT FIELD r71_linea
+               	        END IF
+                       	IF r_lin.r03_estado = 'B' THEN
+				CALL fl_mensaje_estado_bloqueado()
+                                NEXT FIELD r71_linea
+               	        END IF
+			DISPLAY r_lin.r03_nombre TO tit_linea
+		ELSE 
+			CLEAR tit_linea
+               	END IF
+	AFTER FIELD r71_sub_linea
+		IF rm_r71.r71_sub_linea IS NOT NULL THEN
+        	       	CALL fl_lee_sublinea_rep(vg_codcia,rm_r71.r71_linea,
+							rm_r71.r71_sub_linea)
+          	        	RETURNING r_sub.*
+                       	IF r_sub.r70_sub_linea IS NULL THEN
+                               	--CALL fgl_winmessage (vg_producto,'La Sublínea de Venta no existe en la compañía.','exclamation')
+				CALL fl_mostrar_mensaje('La Sublínea de Venta no existe en la compañía.','exclamation')
+                                NEXT FIELD r71_sub_linea
+               	        END IF
+			DISPLAY r_sub.r70_desc_sub TO tit_sub_linea
+		ELSE 
+			CLEAR tit_sub_linea
+               	END IF
 	AFTER INPUT
-		IF rm_par.activos = 'N' AND rm_par.sustituidos = 'N' THEN
-			CALL fgl_winmessage(vg_producto, 'Debe pedir items o sustituidos.', 
-											 'exclamation')
-			CONTINUE INPUT
-		END IF
+		IF vm_flag_mant = 'I' THEN
+			CALL fl_lee_grupo_rep(vg_codcia,rm_r71.r71_linea,
+						rm_r71.r71_sub_linea,
+						rm_r71.r71_cod_grupo)
+				RETURNING r_grp.*
+			IF r_grp.r71_cod_grupo IS NOT NULL THEN
+				--CALL fgl_winmessage(vg_producto,'El Grupo ya existe para esta Sublínea de Venta.','exclamation')
+				CALL fl_mostrar_mensaje('El Grupo ya existe para esta Sublínea de Venta.','exclamation')
+				NEXT FIELD r71_cod_grupo
+			END IF
+              	END IF
 END INPUT
 
 END FUNCTION
 
 
 
-FUNCTION lee_parametros2()
-DEFINE i			INTEGER
-DEFINE query		VARCHAR(700)
-DEFINE expr_sql		VARCHAR(200)
-DEFINE expr_lin		VARCHAR(100)
-DEFINE expr_filtro 	VARCHAR(150)
-DEFINE te_codigo	CHAR(15)
-DEFINE te_nombre 	CHAR(40)
-DEFINE te_valact	DECIMAL(5,2)
+FUNCTION lee_muestra_registro(num_row)
+DEFINE num_row		INTEGER
+DEFINE r_lin		RECORD LIKE rept003.*
+DEFINE r_sub		RECORD LIKE rept070.*
 
-DEFINE len 			SMALLINT
-DEFINE expr_estado	VARCHAR(200)
-
-LET int_flag = 0
-CONSTRUCT expr_sql ON r10_codigo, r10_nombre FROM r10_codigo, r10_nombre
-IF int_flag THEN
+IF vm_num_rows <= 0 THEN
 	RETURN
 END IF
-ERROR 'Generando consulta . . . espere por favor' ATTRIBUTE(NORMAL)
-LET expr_lin = ' '
-IF rm_par.r10_linea IS NOT NULL THEN
-	LET expr_lin = ' AND r10_linea = "', rm_par.r10_linea CLIPPED, '"'
-END IF
-
-LET expr_estado = ' 1=1 ' 
-IF rm_par.activos = 'S' THEN
-	IF expr_estado = ' 1=1 ' THEN
-		LET expr_estado = ' AND r10_estado IN ('
-	END IF
-	LET expr_estado = expr_estado CLIPPED, '"A"'
-END IF
-IF rm_par.sustituidos = 'S' THEN
-	IF expr_estado = ' 1=1 ' THEN
-		LET expr_estado = ' AND r10_estado IN ('
-	ELSE
-		LET expr_estado = expr_estado CLIPPED, ', '
-	END IF
-	LET expr_estado = expr_estado CLIPPED, '"S"'
-END IF
-IF expr_estado <> ' 1=1 ' THEN
-	LET expr_estado = expr_estado CLIPPED, ')'
-END IF
-
-WHENEVER ERROR CONTINUE
-DROP TABLE temp_item
-WHENEVER ERROR STOP
-
-CREATE TEMP TABLE temp_item
-	(
-	 te_posicion	SERIAL,
-	 te_item		CHAR(15),
-	 te_descripcion CHAR(40),
-	 te_valact		DECIMAL(14,2),
-	 te_valnue		DECIMAL(14,2)
-	)
-	
-LET query = 'INSERT INTO temp_item(te_item, te_descripcion, te_valact) ',
-			'SELECT r10_codigo, r10_nombre, NVL(r105_valor, r104_valor_default) ',
-		    '  FROM rept010, OUTER rept103, rept104, OUTER rept105 ', 
-		    ' WHERE r10_compania  = ', vg_codcia, 
-			expr_lin CLIPPED, 
-			expr_estado CLIPPED,
-			'   AND ', expr_sql CLIPPED,
-			'   AND r103_compania = r10_compania ',
-			'   AND r103_item     = r10_codigo ',
-			'   AND r104_compania  = r10_compania ',
-  			'   AND r104_codigo    = "', vm_param CLIPPED, '"',
-			'   AND r105_compania  = r104_compania ',
-			'   AND r105_parametro = r104_codigo ',
-			'   AND r105_item      = r10_codigo ',
-			'   AND r105_fecha_fin IS NULL '
-
-PREPARE cit FROM query
-EXECUTE cit
-
-SELECT COUNT(*) INTO vm_table_rows FROM temp_item
-IF vm_table_rows = 0 THEN
-	CALL fl_mensaje_consulta_sin_registros()
-	LET int_flag = 1
+SELECT * INTO rm_r71.* FROM rept071 WHERE ROWID = num_row
+IF STATUS = NOTFOUND THEN
+	CALL fl_mostrar_mensaje('No existe registro con índice: ' || num_row,'exclamation')
 	RETURN
 END IF
-ERROR ' ' ATTRIBUTE(NORMAL)
+DISPLAY BY NAME rm_r71.r71_linea, rm_r71.r71_sub_linea, rm_r71.r71_cod_grupo,
+		rm_r71.r71_desc_grupo, rm_r71.r71_usuario, rm_r71.r71_fecing
+CALL fl_lee_linea_rep(vg_codcia, rm_r71.r71_linea) RETURNING r_lin.*
+DISPLAY r_lin.r03_nombre TO tit_linea
+CALL fl_lee_sublinea_rep(vg_codcia, rm_r71.r71_linea, rm_r71.r71_sub_linea)
+	RETURNING r_sub.*
+DISPLAY r_sub.r70_desc_sub TO tit_sub_linea
 
 END FUNCTION
- 
 
-
-FUNCTION muestra_consulta()
-DEFINE i			INTEGER
-DEFINE j			INTEGER
-DEFINE num_rows		INTEGER
-DEFINE lastpos		DECIMAL(7,0)
-DEFINE query		VARCHAR(300)
-DEFINE contador		VARCHAR(35)
-DEFINE comando		VARCHAR(1000)
-DEFINE r_r10		RECORD LIKE rept010.*
-
-LET lastpos = 0
-WHILE TRUE 
-	LET query = 'SELECT * FROM temp_item ',
-				' WHERE te_posicion BETWEEN ', lastpos + 1, 
-									  ' AND ', lastpos + vm_max_rows,
-				'  ORDER BY 1'
-
-	PREPARE crep FROM query
-	DECLARE q_crep CURSOR FOR crep 
-	LET i = 1
-	FOREACH q_crep INTO lastpos, rm_item[i].*
-		LET i = i + 1
-		IF i > vm_max_rows THEN
-			EXIT FOREACH
-		END IF
-	END FOREACH
-	FREE q_crep
-	LET num_rows = i - 1
-	
-	IF num_rows = 0 THEN
-		CALL fl_mensaje_consulta_sin_registros()
-		LET int_flag = 1
-		EXIT WHILE
-	END IF
-
-	CALL set_count(num_rows)
-	INPUT ARRAY rm_item WITHOUT DEFAULTS FROM rm_item.*
-		BEFORE ROW
-			LET i = arr_curr()
-			CALL mostrar_contadores(i, num_rows)
-		AFTER ROW
-			CALL actualizar_registro(i)
-			LET int_flag = 0
-		BEFORE INPUT
-			CALL dialog.keysetlabel('INSERT', '')
-			CALL dialog.keysetlabel('DELETE', '')
-			CALL dialog.keysetlabel('F6', 'Actualizar todos')
-			CALL dialog.keysetlabel('F7', 'Avanzar')
-			CALL dialog.keysetlabel('F8', 'Retroceder')
-			IF lastpos >= vm_table_rows THEN
-				CALL dialog.keysetlabel('F7', '')
-			END IF
-			IF lastpos <= vm_max_rows THEN
-				CALL dialog.keysetlabel('F8', '')
-			END IF
-		AFTER INPUT
-			LET int_flag = 0
-			CALL actualiza_parametro()
-			EXIT WHILE
-		BEFORE INSERT
-			LET lastpos = lastpos - num_rows 
-			LET int_flag = 0
-			EXIT INPUT
-		ON KEY(INTERRUPT)
-			EXIT INPUT
-		ON KEY(F5)
-			LET comando = 'fglrun repp108 ', vg_base, ' RE ', 
-			               vg_codcia, ' "',
-			               rm_item[i].r10_codigo CLIPPED || '"'
-			RUN comando
-			LET int_flag = 0
-		ON KEY(F6)
-			CALL actualizar_todos()
-			LET lastpos = lastpos - num_rows 
-			LET int_flag = 0
-			EXIT INPUT
-		ON KEY(F7)
-			CALL actualizar_registro(i)
-			LET int_flag = 0
-			EXIT INPUT
-		ON KEY(F8)
-			CALL actualizar_registro(i)
-			LET lastpos = lastpos - num_rows - vm_max_rows
-			LET int_flag = 0
-			EXIT INPUT
-	END INPUT
-	IF int_flag = 1 THEN
-		LET int_flag = 0
-		EXIT WHILE
-	END IF
-END WHILE
 
                                                                                 
-END FUNCTION
-
-
-
-FUNCTION actualizar_todos()
-DEFINE val		LIKE rept105.r105_valor
-
-	OPEN WINDOW repw111_2 AT 9,25 WITH 6 ROWS, 30 COLUMNS
-		ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE FIRST,
-			  BORDER, MESSAGE LINE LAST) 
-	OPEN FORM f_repf111_2 FROM '../forms/repf111_2'
-	DISPLAY FORM f_repf111_2
-
-	INPUT BY NAME val WITHOUT DEFAULTS
-		
-	UPDATE temp_item SET te_valnue = val 
-
-	CLOSE WINDOW repw111_2
-END FUNCTION
-
-
-
-FUNCTION mostrar_contadores(num_elm, num_rows)
-DEFINE num_elm		INTEGER 
-DEFINE num_rows		INTEGER 
-DEFINE num_reg		VARCHAR(45)
-
-LET num_reg = num_elm CLIPPED, ' de ', num_rows CLIPPED, 
-			  ' - Total: ', vm_table_rows CLIPPED
-DISPLAY BY NAME num_reg
-	
-END FUNCTION
-
-
-
-FUNCTION actualizar_registro(currpos)
-DEFINE currpos		INTEGER
-
-UPDATE temp_item SET te_valnue = rm_item[currpos].valnue
- WHERE te_item = rm_item[currpos].r10_codigo
+FUNCTION muestra_contadores(row_current, num_rows)
+DEFINE row_current              SMALLINT
+DEFINE num_rows                 SMALLINT
+DEFINE nrow                     SMALLINT
+                                                                                
+LET nrow = 17
+IF vg_gui = 1 THEN
+	LET nrow = 1
+END IF
+DISPLAY "" AT nrow, 1
+DISPLAY row_current, " de ", num_rows AT nrow, 67
 
 END FUNCTION
 
+                                                                                
+                                                                                
+FUNCTION llamar_visor_teclas()
+DEFINE a		CHAR(1)
 
-
-FUNCTION actualiza_parametro()
-DEFINE query		VARCHAR(1000)
-
-BEGIN WORK
-
-	UPDATE rept105 SET r105_fecha_fin = TODAY
-	 WHERE r105_compania = vg_codcia
-	   AND r105_parametro = vm_param 
-	   AND r105_item IN (SELECT te_item FROM temp_item WHERE te_valnue IS NOT NULL)
-	   AND r105_fecha_fin IS NULL
-
-	LET query = 'INSERT INTO rept105(r105_compania, r105_parametro, r105_item, ', 
-								'	 r105_fecha_ini, r105_secuencia, r105_valor, ',
- 								'	 r105_origen, r105_usuario) ',
-				'SELECT ', vg_codcia CLIPPED, ', "',  vm_param CLIPPED, '",  ',
-						' te_item, TODAY, ',
-						' NVL((SELECT MAX(r105_secuencia) FROM rept105 ',
-							' 	 WHERE r105_compania = ', vg_codcia CLIPPED,
-								'  AND r105_parametro = "', vm_param CLIPPED, '"',
-								'  AND r105_item = te_item ',
-								'  AND r105_fecha_ini = TODAY), 0) + 1, ',
-						' te_valnue, "M", "', vg_usuario CLIPPED, '"',
-	 			'  FROM temp_item ',
-				' WHERE te_valnue IS NOT NULL AND te_valnue <> te_valact '
-
-	PREPARE stmt1 FROM query
-	EXECUTE stmt1
-
-COMMIT WORK
-
-CALL fgl_winmessage(vg_producto, 'Proceso realizado Ok.', 'info')
-
-END FUNCTION
-
-
-
-FUNCTION validar_parametros()
-
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
+IF vg_gui = 0 THEN
+	CALL fl_visor_teclas_caracter() RETURNING int_flag 
+	LET a = fgl_getkey()
+	CLOSE WINDOW w_tf
+	LET int_flag = 0
 END IF
 
 END FUNCTION

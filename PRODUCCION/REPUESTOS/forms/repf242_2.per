@@ -1,0 +1,60 @@
+DATABASE aceros
+SCREEN
+{
+                  DETALLE DE VENTAS TRASPASADAS
+                  ----------------------------
+
+    Vendedor Anterior: [c000|c001                          ]
+    Vendedor Asignado: [c002|c003                          ]
+              Período: [c004      ]      -      [c005      ]
+
+                                             [c010 ] de [c011 ]
+ [c2|c020  |c021      |c022                     |c023          ]
+[c3|c030  |c031      |c032                     |c033          ]
+[c3|c030  |c031      |c032                     |c033          ]
+[c3|c030  |c031      |c032                     |c033          ]
+[c3|c030  |c031      |c032                     |c033          ]
+[c3|c030  |c031      |c032                     |c033          ]
+[c3|c030  |c031      |c032                     |c033          ]
+[c3|c030  |c031      |c032                     |c033          ]
+[c3|c030  |c031      |c032                     |c033          ]
+                                     Total ==> [c040          ]
+}
+TABLES
+rept019
+rept098
+rept099
+ATTRIBUTES
+c000 = rept098.r98_vend_ant, NOENTRY, REVERSE, UPSHIFT;
+c001 = FORMONLY.tit_vend_ant, NOENTRY, REVERSE, UPSHIFT;
+c002 = rept098.r98_vend_nue, NOENTRY, REVERSE, UPSHIFT;
+c003 = FORMONLY.tit_vend_nue, NOENTRY, REVERSE, UPSHIFT;
+c004 = rept098.r98_fecha_ini, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c005 = rept098.r98_fecha_fin, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+
+c010 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c011 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+
+c2   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c020 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c021 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c022 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c023 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+
+c3   = rept099.r99_cod_tran, NOENTRY, REVERSE, UPSHIFT;
+c030 = rept099.r99_num_tran, NOENTRY, REVERSE, UPSHIFT;
+c031 = FORMONLY.r19_fecing TYPE DATE, NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy';
+c032 = rept019.r19_nomcli, NOENTRY, REVERSE, UPSHIFT;
+c033 = rept019.r19_tot_neto, NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = '---,---,--&.##';
+
+c040 = FORMONLY.total TYPE DECIMAL, NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = '---,---,--&.##';
+END
+KEYS
+F5 = 'Transacción'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_det[8] (r99_cod_tran, r99_num_tran, r19_fecing, r19_nomcli,
+			r19_tot_neto)

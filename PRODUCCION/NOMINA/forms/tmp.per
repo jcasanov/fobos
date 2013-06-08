@@ -1,0 +1,31 @@
+database aceros
+screen size 24 by 80
+{
+n41_compania       [f000       ]
+n41_ano            [f001  ]
+n41_estado         [a]
+n41_porc_trabaj    [f002  ]
+n41_porc_cargas    [f003  ]
+n41_val_trabaj     [f004           ]
+n41_val_cargas     [f005           ]
+n41_moneda         [a0]
+n41_paridad        [f006              ]
+n41_usuario        [f007      ]
+n41_fecing         [f008               ]
+}
+end
+tables
+rolt041
+attributes
+f000 = rolt041.n41_compania;
+f001 = rolt041.n41_ano;
+a = rolt041.n41_estado;
+f002 = rolt041.n41_porc_trabaj;
+f003 = rolt041.n41_porc_cargas;
+f004 = rolt041.n41_val_trabaj;
+f005 = rolt041.n41_val_cargas;
+a0 = rolt041.n41_moneda;
+f006 = rolt041.n41_paridad;
+f007 = rolt041.n41_usuario;
+f008 = rolt041.n41_fecing;
+end

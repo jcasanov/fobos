@@ -1,0 +1,49 @@
+DATABASE aceros
+SCREEN
+{
+ CHEQUES POSTFECHADOS DE CLIENTES
+
+ Cliente: [c000  |c001                                                       ]
+
+ [c010      |c011            |c01|c013           |c014           |c015        ]
+[c020      |c021            |c02|c023           |c024           |c025        ]
+[c020      |c021            |c02|c023           |c024           |c025        ]
+[c020      |c021            |c02|c023           |c024           |c025        ]
+[c020      |c021            |c02|c023           |c024           |c025        ]
+[c020      |c021            |c02|c023           |c024           |c025        ]
+[c020      |c021            |c02|c023           |c024           |c025        ]
+[c020      |c021            |c02|c023           |c024           |c025        ]
+[c020      |c021            |c02|c023           |c024           |c025        ]
+[c020      |c021            |c02|c023           |c024           |c025        ]
+[c020      |c021            |c02|c023           |c024           |c025        ]
+                                             Total Cheques ==>  [c030        ]
+
+}
+TABLES
+cxct001
+cxct026
+ATTRIBUTES
+c000 = cxct001.z01_codcli, NOENTRY, UPSHIFT, REVERSE;
+c001 = cxct001.z01_nomcli, NOENTRY, UPSHIFT, REVERSE;
+
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c01  = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c015 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+c020 = cxct026.z26_fecha_cobro, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c021 = cxct026.z26_referencia, NOENTRY, UPSHIFT;
+c02  = cxct026.z26_banco, NOENTRY, UPSHIFT, FORMAT = '#&&';
+c023 = cxct026.z26_num_cheque, NOENTRY, UPSHIFT;
+c024 = cxct026.z26_num_cta, NOENTRY, UPSHIFT;
+c025 = cxct026.z26_valor, NOENTRY, UPSHIFT, FORMAT = '#,###,##&.##';
+
+c030 = FORMONLY.tit_total TYPE DECIMAL, NOENTRY, UPSHIFT,
+	FORMAT = "#,###,##&.##";
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_chepos[10] (z26_fecha_cobro, z26_referencia, z26_banco,
+				z26_num_cheque, z26_num_cta, z26_valor)

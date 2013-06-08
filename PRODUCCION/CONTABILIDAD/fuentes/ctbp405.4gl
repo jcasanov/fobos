@@ -3,45 +3,38 @@
 -- Elaboracion      : 02-ABR-2002
 -- Autor            : GVA
 -- Formato Ejecucion: fglrun ctbp405 base módulo compañía localidad
+--			[cuenta_ini] [cuenta_fin] [fecha_ini] [fecha_fin]
+--			[moneda] [[tipo_comp]] [[subtipo]]
 -- Ultima Correccion: 
 -- Motivo Correccion: 
 ------------------------------------------------------------------------------
+
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
 DEFINE rm_b12		RECORD LIKE ctbt012.*
 DEFINE rm_b13		RECORD LIKE ctbt013.*
-
 DEFINE rm_g13		RECORD LIKE gent013.*
-
 DEFINE vm_top		SMALLINT
 DEFINE vm_left		SMALLINT
 DEFINE vm_right		SMALLINT
 DEFINE vm_bottom	SMALLINT
 DEFINE vm_page		SMALLINT
-
 DEFINE vm_tot_debito	DECIMAL(14,2)
 DEFINE vm_tot_credito	DECIMAL(14,2)
-
+DEFINE vm_tot_debito_g	DECIMAL(14,2)
+DEFINE vm_tot_credito_g	DECIMAL(14,2)
 DEFINE vm_cta_inicial	LIKE ctbt013.b13_cuenta
 DEFINE nom_cta_ini	LIKE ctbt010.b10_descripcion
 DEFINE nom_cta_fin	LIKE ctbt010.b10_descripcion
 DEFINE vm_cta_final	LIKE ctbt013.b13_cuenta
-
+DEFINE vm_tipo_comp	LIKE ctbt012.b12_tipo_comp
+DEFINE vm_subtipo	LIKE ctbt012.b12_subtipo
 DEFINE vm_fecha_ini	DATE
 DEFINE vm_fecha_fin	DATE
-
 DEFINE vm_moneda	LIKE gent013.g13_moneda
-
 DEFINE vm_nivel         SMALLINT
 DEFINE vm_saldo 	DECIMAL (14,2)
-
-DEFINE rm_c40		RECORD LIKE ordt040.*
-DEFINE rm_c13		RECORD LIKE ordt013.*
-DEFINE rm_c10		RECORD LIKE ordt010.*
-DEFINE rm_p01		RECORD LIKE cxpt001.*
-DEFINE rm_p02		RECORD LIKE cxpt002.*
-DEFINE rm_j10		RECORD LIKE cajt010.*
-DEFINE rm_g09		RECORD LIKE gent009.*
+DEFINE vm_archivo	CHAR(6)
 
 
 
@@ -50,25 +43,24 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/ctbp405.error')
-CALL fgl_init4js()
+CALL startlog('../logs/ctbp405.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
-IF num_args() <> 4 THEN   -- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto.', 'stop')
+IF num_args() <> 4 AND num_args() <> 9 AND num_args() <> 10 AND num_args() <> 11
+THEN
+	-- Validar # parámetros correcto
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.', 'stop')
 	EXIT PROGRAM
 END IF
-
-LET vg_base     = arg_val(1)
-LET vg_modulo   = arg_val(2)
-LET vg_codcia   = arg_val(3)
-LET vg_codloc   = arg_val(4)
-
+LET vg_base    = arg_val(1)
+LET vg_modulo  = arg_val(2)
+LET vg_codcia  = arg_val(3)
+LET vg_codloc  = arg_val(4)
 LET vg_proceso = 'ctbp405'
-
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -79,7 +71,21 @@ END MAIN
 FUNCTION funcion_master()
 
 CALL fl_nivel_isolation()
-OPEN WINDOW w_mas AT 3,2 WITH 10 ROWS, 80 COLUMNS
+LET vm_top    = 1
+LET vm_left   = 0
+LET vm_right  = 132
+LET vm_bottom = 4
+LET vm_page   = 66
+SELECT MAX(b01_nivel) INTO vm_nivel FROM ctbt001
+IF vm_nivel IS NULL THEN
+	CALL fgl_winmessage(vg_producto,'Nivel no está configurado.','stop')
+	EXIT PROGRAM
+END IF
+IF num_args() <> 4 THEN
+	CALL llamada_otro_prog()
+	EXIT PROGRAM
+END IF
+OPEN WINDOW w_mas AT 03, 02 WITH 15 ROWS, 80 COLUMNS
     ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE 0, BORDER,
 	      MESSAGE LINE LAST - 2)
 OPTIONS INPUT WRAP,
@@ -93,26 +99,41 @@ END FUNCTION
 
 
 
-FUNCTION control_reporte()
-DEFINE query		VARCHAR(800)
-DEFINE comando 		VARCHAR(100)
-DEFINE r_report 	RECORD LIKE ctbt013.*
-DEFINE r_b12	 	RECORD LIKE ctbt012.*
-DEFINE r_cheque 	LIKE ctbt012.b12_num_cheque
+FUNCTION llamada_otro_prog()
 
-LET vm_top    = 0
-LET vm_left   = 02
-LET vm_right  = 90
-LET vm_bottom = 4
-LET vm_page   = 66
+LET vm_cta_inicial = arg_val(5)
+LET vm_cta_final   = arg_val(6)
+LET vm_fecha_ini   = arg_val(7)
+LET vm_fecha_fin   = arg_val(8)
+LET vm_moneda      = arg_val(9)
+LET vm_tipo_comp   = NULL
+LET vm_subtipo     = NULL
+IF num_args() > 9 THEN
+	LET vm_tipo_comp = arg_val(10)
+	IF vm_tipo_comp = 'XX' THEN
+		LET vm_tipo_comp = NULL
+	END IF
+	IF num_args() = 11 THEN
+		LET vm_subtipo = arg_val(11)
+	END IF
+END IF
+CALL fl_lee_moneda(vm_moneda) RETURNING rm_g13.*
+LET vm_tot_debito  = 0
+LET vm_tot_credito = 0
+LET vm_saldo       = 0
+CALL imprimir_reporte()
+
+END FUNCTION
+
+
+
+FUNCTION control_reporte()
 
 LET vm_moneda = rg_gen.g00_moneda_base
 CALL fl_lee_moneda(vm_moneda) RETURNING rm_g13.*
 DISPLAY rm_g13.g13_nombre TO nom_moneda
+LET vm_fecha_ini = TODAY
 LET vm_fecha_fin = TODAY
-
-LET vm_nivel     = 6
-
 WHILE TRUE
 	LET vm_tot_debito  = 0
 	LET vm_tot_credito = 0
@@ -121,43 +142,90 @@ WHILE TRUE
 	IF int_flag THEN
 		EXIT WHILE
 	END IF
-	CALL fl_control_reportes() RETURNING comando
-	IF int_flag THEN
-		CONTINUE WHILE
-	END IF
-
-	LET query = 'SELECT ctbt013.*, ctbt012.*',
-			' FROM ctbt012, ctbt013 ',
-			'WHERE b12_compania  =',vg_codcia,
-			'  AND b12_moneda    ="',vm_moneda,'"',
-			'  AND b12_fec_proceso ',
-			'BETWEEN "',vm_fecha_ini,'" AND "',vm_fecha_fin, '"',
-			'  AND b12_estado <> "E"',
-			'  AND b12_compania  = b13_compania',
-			'  AND b12_tipo_comp = b13_tipo_comp',
-			'  AND b12_num_comp  = b13_num_comp',
-			'  AND b13_cuenta BETWEEN "',vm_cta_inicial,'"',
-			'  AND "',vm_cta_final,'"',
-  			' ORDER BY b13_cuenta, b13_fec_proceso, b12_num_cheque, b12_tipo_comp, b12_num_comp'
-	PREPARE reporte FROM query
-	DECLARE q_reporte CURSOR FOR reporte
-	OPEN q_reporte
-	FETCH q_reporte
-	IF STATUS = NOTFOUND THEN
-		CLOSE q_reporte
-		FREE  q_reporte
-		CALL fl_mensaje_consulta_sin_registros()
-		CONTINUE WHILE
-	END IF
-	START REPORT report_movimientos_ctas TO PIPE comando
-	FOREACH q_reporte INTO r_report.*, r_b12.* 
-		OUTPUT TO REPORT report_movimientos_ctas(r_report.*, r_b12.*)
-		IF int_flag THEN
-			EXIT FOREACH
-		END IF
-	END FOREACH
-	FINISH REPORT report_movimientos_ctas
+	LET int_flag = 0
+	CALL fl_hacer_pregunta('Desea generar también un archivo de texto ?',
+				'No')
+		RETURNING vm_archivo
+	CALL imprimir_reporte()
 END WHILE 
+
+END FUNCTION
+
+
+
+FUNCTION imprimir_reporte()
+DEFINE comando 		VARCHAR(100)
+DEFINE query		VARCHAR(1200)
+DEFINE expr_tipo	VARCHAR(100)
+DEFINE expr_subtipo	VARCHAR(100)
+DEFINE r_report 	RECORD LIKE ctbt013.*
+DEFINE r_b12	 	RECORD LIKE ctbt012.*
+
+CALL fl_control_reportes() RETURNING comando
+IF int_flag THEN
+	RETURN
+END IF
+LET expr_tipo = NULL
+IF vm_tipo_comp IS NOT NULL THEN
+	LET expr_tipo = '   AND b12_tipo_comp = "', vm_tipo_comp, '"'
+END IF
+LET expr_subtipo = NULL
+IF vm_subtipo IS NOT NULL THEN
+	LET expr_subtipo = '   AND b12_subtipo = ', vm_subtipo
+END IF
+IF vm_cta_inicial IS NULL THEN
+	SQL
+		SELECT MIN(b10_cuenta)
+			INTO $vm_cta_inicial
+			FROM ctbt010
+			WHERE b10_compania = $vg_codcia
+	END SQL
+END IF
+IF vm_cta_final IS NULL THEN
+	SQL
+		SELECT MAX(b10_cuenta)
+			INTO $vm_cta_final
+			FROM ctbt010
+			WHERE b10_compania = $vg_codcia
+	END SQL
+END IF
+LET query = 'SELECT ctbt013.*, ctbt012.*',
+		' FROM ctbt012, ctbt013 ',
+		'WHERE b12_compania  =',vg_codcia,
+		expr_tipo CLIPPED,
+		'  AND b12_moneda    ="',vm_moneda,'"',
+		expr_subtipo CLIPPED,
+		'  AND b12_fec_proceso ',
+		'BETWEEN "',vm_fecha_ini,'" AND "',vm_fecha_fin, '"',
+		'  AND b12_estado <> "E"',
+		'  AND b12_compania  = b13_compania',
+		'  AND b12_tipo_comp = b13_tipo_comp',
+		'  AND b12_num_comp  = b13_num_comp',
+		'  AND b13_cuenta BETWEEN "',vm_cta_inicial,'"',
+		'  AND "',vm_cta_final,'"',
+		--' ORDER BY b13_cuenta, b13_fec_proceso, ',
+		' ORDER BY b13_cuenta, b13_fec_proceso ASC, b12_fecing ASC, ',
+			' b13_tipo_comp, b13_num_comp'
+PREPARE reporte FROM query
+DECLARE q_reporte CURSOR FOR reporte
+OPEN q_reporte
+FETCH q_reporte
+IF STATUS = NOTFOUND THEN
+	CLOSE q_reporte
+	FREE  q_reporte
+	CALL fl_mensaje_consulta_sin_registros()
+	RETURN
+END IF
+START REPORT report_movimientos_ctas TO PIPE comando
+LET vm_tot_debito_g  = 0
+LET vm_tot_credito_g = 0
+FOREACH q_reporte INTO r_report.*, r_b12.* 
+	OUTPUT TO REPORT report_movimientos_ctas(r_report.*, r_b12.*)
+	IF int_flag THEN
+		EXIT FOREACH
+	END IF
+END FOREACH
+FINISH REPORT report_movimientos_ctas
 
 END FUNCTION
 
@@ -165,13 +233,14 @@ END FUNCTION
 
 FUNCTION lee_parametros()
 DEFINE r_b10		RECORD LIKE ctbt010.*
+DEFINE r_b03		RECORD LIKE ctbt003.*
+DEFINE r_b04		RECORD LIKE ctbt004.*
 
 INITIALIZE r_b10.* TO NULL
-
 OPTIONS INPUT NO WRAP
 LET int_flag = 0
 INPUT BY NAME vm_cta_inicial, vm_cta_final, vm_fecha_ini,
-	      vm_fecha_fin,   vm_moneda 
+	      vm_fecha_fin,   vm_moneda, vm_tipo_comp, vm_subtipo
 	WITHOUT DEFAULTS
 	ON KEY(INTERRUPT)
 		LET int_flag = 1
@@ -203,6 +272,26 @@ INPUT BY NAME vm_cta_inicial, vm_cta_final, vm_fecha_ini,
 				LET vm_moneda = rm_g13.g13_moneda
 				DISPLAY BY NAME vm_moneda
 				DISPLAY rm_g13.g13_nombre TO nom_moneda
+			END IF
+		END IF
+		IF INFIELD(vm_tipo_comp) THEN
+			CALL fl_ayuda_tipos_comprobantes(vg_codcia)
+				RETURNING r_b03.b03_tipo_comp,
+					  r_b03.b03_nombre
+			IF r_b03.b03_tipo_comp IS NOT NULL THEN
+				LET vm_tipo_comp = r_b03.b03_tipo_comp
+				DISPLAY r_b03.b03_tipo_comp TO vm_tipo_comp
+				DISPLAY BY NAME r_b03.b03_nombre
+			END IF
+		END IF
+		IF INFIELD(vm_subtipo) THEN
+			CALL fl_ayuda_subtipos_comprobantes(vg_codcia)
+				RETURNING r_b04.b04_subtipo,
+					  r_b04.b04_nombre
+			IF r_b04.b04_subtipo IS NOT NULL THEN
+				LET vm_subtipo = r_b04.b04_subtipo
+				DISPLAY r_b04.b04_subtipo TO vm_subtipo
+				DISPLAY BY NAME r_b04.b04_nombre
 			END IF
 		END IF
 		LET int_flag = 0
@@ -259,12 +348,38 @@ INPUT BY NAME vm_cta_inicial, vm_cta_final, vm_fecha_ini,
 		ELSE
 			CLEAR nom_moneda
 		END IF
+	AFTER FIELD vm_tipo_comp
+		IF vm_tipo_comp IS NOT NULL THEN
+			CALL fl_lee_tipo_comprobante_contable(vg_codcia,
+								vm_tipo_comp)
+				RETURNING r_b03.*
+			IF r_b03.b03_compania IS NULL THEN
+				CALL fl_mostrar_mensaje('No existe este tipo de comprobante.', 'exclamation')
+				NEXT FIELD vm_tipo_comp
+			END IF
+			DISPLAY BY NAME r_b03.b03_nombre
+		ELSE
+			CLEAR b03_nombre
+		END IF
+	AFTER FIELD vm_subtipo
+		IF vm_subtipo IS NOT NULL THEN
+			CALL fl_lee_subtipo_comprob_contable(vg_codcia,
+								vm_subtipo)
+				RETURNING r_b04.*
+			IF r_b04.b04_compania IS NULL THEN
+				CALL fl_mostrar_mensaje('No existe este subtipo de comprobante.', 'exclamation')
+				NEXT FIELD vm_subtipo
+			END IF
+			DISPLAY BY NAME r_b04.b04_nombre
+		ELSE
+			CLEAR b04_nombre
+		END IF
 	AFTER INPUT 
 		IF vm_cta_inicial IS NULL THEN
-			NEXT FIELD vm_cta_inicial
+			--NEXT FIELD vm_cta_inicial
 		END IF
 		IF vm_cta_final IS NULL THEN
-			NEXT FIELD vm_cta_final
+			--NEXT FIELD vm_cta_final
 		END IF
 		IF vm_fecha_ini IS NULL THEN
 			NEXT FIELD vm_fecha_ini
@@ -282,11 +397,23 @@ END FUNCTION
 
 
 REPORT report_movimientos_ctas(r_b13, r_b12)
-DEFINE r_b10		RECORD LIKE ctbt010.*
-DEFINE r_b12		RECORD LIKE ctbt012.*
 DEFINE r_b13		RECORD LIKE ctbt013.*
-DEFINE glosa		CHAR(40)
+DEFINE r_b12		RECORD LIKE ctbt012.*
+DEFINE r_g02		RECORD LIKE gent002.*
+DEFINE r_g09		RECORD LIKE gent009.*
+DEFINE r_b03		RECORD LIKE ctbt003.*
+DEFINE r_b04		RECORD LIKE ctbt004.*
+DEFINE r_b10		RECORD LIKE ctbt010.*
+DEFINE registro		CHAR(400)
+DEFINE enter		SMALLINT
+DEFINE titulo		VARCHAR(80)
+DEFINE tit_sist		VARCHAR(40)
+DEFINE glosa		VARCHAR(230)
 DEFINE fecha_ini	DATE
+DEFINE val1		DECIMAL(14,2)
+DEFINE escape		SMALLINT
+DEFINE act_comp, db_c	SMALLINT
+DEFINE desact_comp, db	SMALLINT
 
 OUTPUT
 	TOP MARGIN	vm_top
@@ -294,277 +421,205 @@ OUTPUT
 	RIGHT MARGIN	vm_right
 	BOTTOM MARGIN	vm_bottom
 	PAGE LENGTH	vm_page
+
 FORMAT
+
 PAGE HEADER
-
-	PRINT COLUMN 1, rg_cia.g01_razonsocial
-	PRINT COLUMN 26,
-		fl_justifica_titulo('C','LISTADO DE MOVIMIENTOS DE CUENTAS',80)
-
-	SKIP 1 LINES
-
-	PRINT COLUMN 1, 'Fecha de Impresión: ',
-	      COLUMN 23, TODAY USING 'dd-mm-yyyy', 1 SPACES, TIME,
-	      COLUMN 119,'Página: ', 
-	      COLUMN 127, PAGENO USING '&&&&'
-	PRINT COLUMN 1, 'Cuenta Inicial: ', 
-	      COLUMN 23, vm_cta_inicial, '  ', nom_cta_ini
-	PRINT COLUMN 1, 'Cuenta Final: ', 
-	      COLUMN 23, vm_cta_final, '  ', nom_cta_fin
-	PRINT COLUMN 1, 'Fecha Inicial: ',
-	      COLUMN 23, vm_fecha_ini USING 'dd-mm-yyyy',
-	      COLUMN 67, 'Fecha Final: ',
-	      COLUMN 81, vm_fecha_fin USING 'dd-mm-yyyy'
-	PRINT COLUMN 1, 'Moneda: ',
-	      COLUMN 23, rm_g13.g13_nombre
-	PRINT COLUMN 1, 'Usuario: ',
-	      COLUMN 23, vg_usuario,
-	      COLUMN 124, 'CTBP405'
-
-	PRINT '=================================================================================================================================='
-	PRINT COLUMN 1,  'TP',
-	      COLUMN 4,  'Número',
-	      COLUMN 14, 'Fecha',
-	      COLUMN 26, 'G l o s a',
-	      COLUMN 63, fl_justifica_titulo('D', 'Débito', 18),
-	      COLUMN 83, fl_justifica_titulo('D', 'Crédito', 18),
-	      COLUMN 103, fl_justifica_titulo('D', 'Saldo', 18)
-	PRINT '=================================================================================================================================='
-
-ON EVERY ROW
-	LET glosa = r_b13.b13_glosa CLIPPED
-	IF r_b12.b12_num_cheque IS NOT NULL THEN
-		INITIALIZE rm_g09.* TO NULL 
-		DECLARE q_bancos CURSOR FOR
-			SELECT * FROM gent009
-			 WHERE g09_compania = vg_codcia
-			   AND g09_aux_cont = r_b13.b13_cuenta
-			OPEN q_bancos
-			FETCH q_bancos INTO rm_g09.*
-			IF STATUS <> NOTFOUND THEN
-			  LET glosa = 'Ch. ', r_b12.b12_num_cheque USING '&&&&#'
-				IF r_b12.b12_benef_che IS NOT NULL THEN
-					LET glosa = glosa CLIPPED, ' ', 
-				    r_b12.b12_benef_che[1,23] CLIPPED
-				END IF
---			ELSE
---				LET glosa = glosa CLIPPED, ' ', r_b13.b13_glosa CLIPPED
---OJO
-			END IF
+	LET escape	= 27		# Iniciar sec. impresi¢n
+	LET act_comp	= 15		# Activar Comprimido.
+	LET desact_comp	= 18		# Cancelar Comprimido.
+	CALL fl_justifica_titulo('C','LISTADO DE MOVIMIENTOS DE CUENTAS',80)
+		RETURNING titulo
+	CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING r_g02.*
+	LET tit_sist = r_g02.g02_nombre CLIPPED, " - ", vg_base CLIPPED, " (",
+			vg_servidor CLIPPED, ")"
+	CALL fl_justifica_titulo('C', tit_sist, 40) RETURNING tit_sist
+	--SKIP 2 LINES
+	print ASCII escape;
+	print ASCII act_comp
+	PRINT COLUMN 001, rg_cia.g01_razonsocial
+	PRINT COLUMN 027, titulo CLIPPED
+	PRINT COLUMN 047, tit_sist CLIPPED
+	PRINT COLUMN 122, 'PAGINA: ', 
+	      COLUMN 130, PAGENO USING '&&&'
+	PRINT COLUMN 001, 'CUENTA INICIAL: ', 
+	      COLUMN 023, vm_cta_inicial, '  ', nom_cta_ini,
+	      COLUMN 126, UPSHIFT(vg_proceso)
+	PRINT COLUMN 001, 'CUENTA FINAL: ', 
+	      COLUMN 023, vm_cta_final, '  ', nom_cta_fin
+	PRINT COLUMN 001, 'FECHA INICIAL: ',
+	      COLUMN 023, vm_fecha_ini USING 'dd-mm-yyyy',
+	      COLUMN 067, 'FECHA FINAL: ',
+	      COLUMN 081, vm_fecha_fin USING 'dd-mm-yyyy'
+	PRINT COLUMN 001, 'MONEDA: ',
+	      COLUMN 023, rm_g13.g13_nombre
+	IF vm_tipo_comp IS NOT NULL THEN
+		CALL fl_lee_tipo_comprobante_contable(vg_codcia, vm_tipo_comp)
+			RETURNING r_b03.*
+		PRINT COLUMN 001, 'TIPO COMPROBANTE: ',
+		      COLUMN 023, r_b03.b03_nombre
 	END IF
-	IF r_b12.b12_tipo_comp = 'OI' THEN
-		INITIALIZE rm_j10.* TO NULL 
-		DECLARE q_otros CURSOR FOR
-			SELECT * FROM cajt010
-			 WHERE j10_compania = vg_codcia
-			   AND j10_localidad= vg_codloc
-			   AND j10_tip_contable = r_b12.b12_tipo_comp
-			   AND j10_num_contable  = r_b12.b12_num_comp 
-			OPEN q_otros
-			FETCH q_otros INTO rm_j10.*
-		        IF STATUS <> NOTFOUND THEN
-		          	 LET glosa = rm_j10.j10_nomcli CLIPPED
-			 END IF
-	CLOSE q_otros
-	FREE  q_otros
+	IF vm_subtipo IS NOT NULL THEN
+		CALL fl_lee_subtipo_comprob_contable(vg_codcia,	vm_subtipo)
+			RETURNING r_b04.*
+		PRINT COLUMN 001, 'SUBTIPO COMPROBANTE: ',
+		      COLUMN 023, r_b04.b04_nombre
 	END IF
-	IF r_b12.b12_tipo_comp = 'DP' OR 'EC' THEN
-		INITIALIZE rm_j10.* TO NULL 
-		DECLARE q_caja CURSOR FOR
-			SELECT * FROM cajt010
-			 WHERE j10_compania = vg_codcia
-			   AND j10_localidad= vg_codloc
-			   AND j10_tip_contable = r_b12.b12_tipo_comp
-			   AND j10_num_contable  = r_b12.b12_num_comp 
-			OPEN q_caja
-			FETCH q_caja INTO rm_j10.*
-		        IF STATUS <> NOTFOUND THEN
-		          	 LET glosa = rm_j10.j10_referencia CLIPPED
-			 END IF
-	CLOSE q_caja
-	FREE  q_caja
-	END IF
-	IF r_b12.b12_tipo_comp = 'DO' THEN
-		INITIALIZE rm_c40.* TO NULL 
-		DECLARE q_diario CURSOR FOR
-			SELECT * FROM ordt040 
-			 WHERE c40_compania = vg_codcia
---			   AND c40_localidad= vg_codloc
-			   AND c40_tipo_comp = 'DO'
-                           AND c40_num_comp = r_b12.b12_num_comp
-		OPEN q_diario
-		FETCH q_diario INTO rm_c40.*
-		IF STATUS <> NOTFOUND THEN
-			INITIALIZE rm_c13.* TO NULL 
-			DECLARE q_recep CURSOR FOR
-				SELECT * FROM ordt013 
-			  	 WHERE c13_compania = vg_codcia
-			  	   AND c13_localidad= rm_c40.c40_localidad
-			   	   AND c13_numero_oc= rm_c40.c40_numero_oc
-			   	   AND c13_num_recep= rm_c40.c40_num_recep
---display 'RECEPCION : ', rm_c40.c40_localidad, '   ',rm_c40.c40_numero_oc
-			OPEN q_recep
-			FETCH q_recep INTO rm_c13.*
-			IF STATUS <> NOTFOUND THEN
-				INITIALIZE rm_c10.* TO NULL 
-				DECLARE q_num_prov CURSOR FOR
-				SELECT * FROM ordt010 
-			  	 WHERE c10_compania = vg_codcia
-			  	   AND c10_localidad= rm_c13.c13_localidad
-			   	   AND c10_numero_oc= rm_c13.c13_numero_oc
---display 'O/C : ', rm_c13.c13_localidad, '   ',rm_c13.c13_numero_oc
-				OPEN q_num_prov
-				FETCH q_num_prov INTO rm_c10.*
-				IF STATUS <> NOTFOUND THEN
-					INITIALIZE rm_p02.* TO NULL 
-					DECLARE q_prov CURSOR FOR
-					SELECT * FROM cxpt002 
-			  	 	 WHERE p02_compania = vg_codcia
-					   AND p02_localidad= rm_c13.c13_localidad
-					   AND p02_codprov  = rm_c10.c10_codprov
---display 'HOLA ', vg_codcia, ' ', rm_c13.c13_localidad, ' ', rm_c10.c10_codprov
-					OPEN q_prov
-					FETCH q_prov INTO rm_p02.*
-					IF STATUS <> NOTFOUND THEN
-			                   INITIALIZE rm_p01.* TO NULL
-                                           DECLARE q_cod CURSOR FOR
-                                           SELECT * FROM cxpt001	
-					    WHERE p01_codprov = rm_c10.c10_codprov
-					   OPEN q_cod
-					   FETCH q_cod INTO rm_p01.*
-					   IF STATUS <> NOTFOUND THEN
-				          	 LET glosa = rm_p01.p01_nomprov CLIPPED, ' ', rm_c13.c13_factura CLIPPED
-					   END IF
-					CLOSE q_cod
-					FREE  q_cod
-					END IF
-					CLOSE q_prov
-					FREE  q_prov
-				END IF
-				CLOSE q_num_prov
-				FREE  q_num_prov
-			END IF
-			CLOSE q_recep
-			FREE  q_recep
-		END IF
-		CLOSE q_diario
-		FREE  q_diario
-	END IF	
-	IF r_b12.b12_tipo_comp = 'DR' THEN
-		INITIALIZE rm_c40.* TO NULL 
-		DECLARE q_diario1 CURSOR FOR
-			SELECT * FROM ordt040 
-			 WHERE c40_compania = vg_codcia
---			   AND c40_localidad= vg_codloc
-			   AND c40_tipo_comp = 'DR'
-                           AND c40_num_comp = r_b12.b12_num_comp
-		OPEN q_diario1
-		FETCH q_diario1 INTO rm_c40.*
-		IF STATUS <> NOTFOUND THEN
-			INITIALIZE rm_c13.* TO NULL 
-			DECLARE q_recep1 CURSOR FOR
-				SELECT * FROM ordt013 
-			  	 WHERE c13_compania = vg_codcia
-			  	   AND c13_localidad= rm_c40.c40_localidad
-			   	   AND c13_numero_oc= rm_c40.c40_numero_oc
-			   	   AND c13_num_recep= rm_c40.c40_num_recep
---display 'RECEPCION : ', rm_c40.c40_localidad, '   ',rm_c40.c40_numero_oc
-			OPEN q_recep1
-			FETCH q_recep1 INTO rm_c13.*
-			IF STATUS <> NOTFOUND THEN
-				INITIALIZE rm_c10.* TO NULL 
-				DECLARE q_num_prov1 CURSOR FOR
-				SELECT * FROM ordt010 
-			  	 WHERE c10_compania = vg_codcia
-			  	   AND c10_localidad= rm_c13.c13_localidad
-			   	   AND c10_numero_oc= rm_c13.c13_numero_oc
---display 'O/C : ', rm_c13.c13_localidad, '   ',rm_c13.c13_numero_oc
-				OPEN q_num_prov1
-				FETCH q_num_prov1 INTO rm_c10.*
-				IF STATUS <> NOTFOUND THEN
-					INITIALIZE rm_p02.* TO NULL 
-					DECLARE q_prov1 CURSOR FOR
-					SELECT * FROM cxpt002 
-			  	 	 WHERE p02_compania = vg_codcia
-					   AND p02_localidad= rm_c13.c13_localidad
-					   AND p02_codprov  = rm_c10.c10_codprov
---display 'HOLA ', vg_codcia, ' ', rm_c13.c13_localidad, ' ', rm_c10.c10_codprov
-					OPEN q_prov1
-					FETCH q_prov1 INTO rm_p02.*
-					IF STATUS <> NOTFOUND THEN
-			                   INITIALIZE rm_p01.* TO NULL
-                                           DECLARE q_cod1 CURSOR FOR
-                                           SELECT * FROM cxpt001	
-					    WHERE p01_codprov = rm_c10.c10_codprov
-					   OPEN q_cod1
-					   FETCH q_cod1 INTO rm_p01.*
-					   IF STATUS <> NOTFOUND THEN
-				          	 LET glosa = rm_p01.p01_nomprov CLIPPED, ' ', rm_c13.c13_factura CLIPPED
-					   END IF
-					CLOSE q_cod1
-					FREE  q_cod1
-					END IF
-					CLOSE q_prov1
-					FREE  q_prov1
-				END IF
-				CLOSE q_num_prov1
-				FREE  q_num_prov1
-			END IF
-			CLOSE q_recep1
-			FREE  q_recep1
-		END IF
-		CLOSE q_diario1
-		FREE  q_diario1
-	END IF	
-
-	IF r_b13.b13_valor_base < 0 THEN
-		LET vm_saldo = vm_saldo + r_b13.b13_valor_base
-		PRINT COLUMN 1,  r_b13.b13_tipo_comp,
-	      	      COLUMN 4,  r_b13.b13_num_comp,
-	      	      COLUMN 14, r_b13.b13_fec_proceso USING 'dd-mm-yyyy',
-	      	      COLUMN 26, glosa,
-	      	      COLUMN 63, '0.00' USING '###,###,###,##&.##',
-	      	      COLUMN 83, r_b13.b13_valor_base 
-				 USING '###,###,###,##&.##',
-		      COLUMN 103,  vm_saldo 
-				 USING '---,---,---,--&.--'
-		LET vm_tot_credito = vm_tot_credito + r_b13.b13_valor_base 
-	ELSE
-		LET vm_saldo = vm_saldo + r_b13.b13_valor_base
-		PRINT COLUMN 1,  r_b13.b13_tipo_comp,
-	      	      COLUMN 4,  r_b13.b13_num_comp,
-	      	      COLUMN 14, r_b13.b13_fec_proceso USING 'dd-mm-yyyy',
-	      	      COLUMN 26, glosa,
-	      	      COLUMN 63, r_b13.b13_valor_base 
-				 USING '###,###,###,##&.##',
-		      COLUMN 83, '0.00' USING '###,###,###,##&.##', 
-		      COLUMN 103, vm_saldo 
-				 USING '---,---,---,--&.--'
-		LET vm_tot_debito = vm_tot_debito + r_b13.b13_valor_base
-	END IF
+	PRINT COLUMN 001, 'USUARIO: ',
+	      COLUMN 023, vg_usuario
+	PRINT COLUMN 001, 'FECHA DE IMPRESION: ',
+	      COLUMN 023, TODAY USING 'dd-mm-yyyy', 1 SPACES, TIME
+	PRINT '------------------------------------------------------------------------------------------------------------------------------------'
+	PRINT COLUMN 001, 'TP',
+	      COLUMN 004, 'NUMERO',
+	      COLUMN 014, 'FECHA PRO.',
+	      COLUMN 026, 'G L O S A',
+	      COLUMN 087, '        DEBITO',
+	      COLUMN 103, '       CREDITO',
+	      COLUMN 119, '         SALDO'
+	PRINT '------------------------------------------------------------------------------------------------------------------------------------'
 
 BEFORE GROUP OF r_b13.b13_cuenta
---	display "CUENTA ...... ", r_b13.b13_cuenta
 	NEED 3 LINES 
 	LET vm_tot_debito  = 0
 	LET vm_tot_credito = 0
 	CALL fl_lee_cuenta(vg_codcia, r_b13.b13_cuenta) RETURNING r_b10.*
 	LET fecha_ini = vm_fecha_ini - 1 
-display fecha_ini
-	CALL fl_obtiene_saldo_contable(vg_codcia, r_b10.b10_cuenta, 
-				       rm_g13.g13_moneda, fecha_ini, 'A')
-					RETURNING vm_saldo
-	PRINT COLUMN 1,  r_b10.b10_descripcion, ': ', r_b10.b10_cuenta,
-	      COLUMN 70, 'Saldo al ', fecha_ini USING 'dd-mm-yyyy', ': ',      
-	      COLUMN 103, vm_saldo USING '---,---,---,--&.--'
+	IF r_b10.b10_cuenta[1, 1] <> '3' THEN
+		CALL fl_obtiene_saldo_contable(vg_codcia, r_b10.b10_cuenta, 
+				  	     rm_g13.g13_moneda, fecha_ini, 'A')
+			RETURNING vm_saldo
+	ELSE
+		CALL fl_obtener_saldo_cuentas_patrimonio(vg_codcia,
+					r_b10.b10_cuenta, rm_g13.g13_moneda,
+					fecha_ini, TODAY, 'A')
+			RETURNING vm_saldo, val1
+	END IF
+	PRINT COLUMN 001, r_b10.b10_descripcion, ': ', r_b10.b10_cuenta,
+	      COLUMN 070, 'SALDO AL ', fecha_ini USING 'dd-mm-yyyy', '  ==> ',
+	      COLUMN 096, vm_saldo USING '---,---,--&.--'
+	LET registro = r_g02.g02_abreviacion CLIPPED,
+			'|', r_b10.b10_cuenta CLIPPED,
+			'|', r_b10.b10_descripcion CLIPPED,
+			'|', '|', '|', fecha_ini USING 'dd-mm-yyyy', '|', '|',
+			'|', '|', vm_saldo USING '---,---,--&.--'
+	DISPLAY registro CLIPPED, ASCII(enter)
 	
+ON EVERY ROW
+	NEED 5 LINES 
+	IF r_b12.b12_benef_che IS NOT NULL THEN
+		LET glosa = r_b12.b12_benef_che[1,23] CLIPPED, ' ' 
+		--LET glosa = NULL
+		INITIALIZE r_g09.* TO NULL
+		DECLARE q_bco CURSOR FOR
+			SELECT * FROM gent009
+				WHERE g09_compania = vg_codcia
+				  AND g09_estado   = "A"
+				  AND g09_aux_cont = r_b13.b13_cuenta
+		OPEN q_bco
+		FETCH q_bco INTO r_g09.*
+		IF STATUS = NOTFOUND THEN
+			LET glosa = r_b13.b13_glosa CLIPPED
+		END IF
+		CLOSE q_bco
+		FREE q_bco
+		LET glosa = 'Ch. ', r_b12.b12_num_cheque USING '&&&&#', ' ',
+				glosa CLIPPED, ' ',
+                            r_b12.b12_glosa CLIPPED
+-- OJO
+	ELSE
+		LET glosa = r_b13.b13_glosa CLIPPED
+		IF r_b12.b12_tipo_comp = 'DP' OR r_b12.b12_tipo_comp = 'EC'
+			OR r_b12.b12_tipo_comp = 'DO' 
+			OR r_b12.b12_tipo_comp = 'DC' THEN
+			LET glosa = r_b12.b12_glosa CLIPPED, ' ',
+				    r_b13.b13_glosa CLIPPED
+		END IF
+	END IF
+	IF r_b13.b13_valor_base < 0 THEN
+		LET vm_saldo = vm_saldo + r_b13.b13_valor_base
+		PRINT COLUMN 001, r_b13.b13_tipo_comp,
+	      	      COLUMN 004, r_b13.b13_num_comp,
+	      	      COLUMN 014, r_b13.b13_fec_proceso USING 'dd-mm-yyyy',
+	      	      COLUMN 026, glosa[1, 60],
+	      	      COLUMN 087, '0.00'		USING '###,###,##&.##',
+	      	      COLUMN 103, r_b13.b13_valor_base	USING '###,###,##&.##',
+		      COLUMN 119, vm_saldo		USING '---,---,--&.--'
+		IF glosa[61,120] IS NOT NULL OR glosa[61,120] <> ' ' THEN
+			PRINT COLUMN 026, glosa[61,120] 
+		END IF
+		IF glosa[121,180] IS NOT NULL OR glosa[121,180] <> ' ' THEN
+			PRINT COLUMN 026, glosa[121,180] 
+		END IF
+		IF glosa[181,230] IS NOT NULL OR glosa[181,230] <> ' ' THEN
+			PRINT COLUMN 026, glosa[181,230] 
+		END IF
+		LET vm_tot_credito = vm_tot_credito + r_b13.b13_valor_base 
+	ELSE
+		LET vm_saldo = vm_saldo + r_b13.b13_valor_base
+		PRINT COLUMN 001, r_b13.b13_tipo_comp,
+	      	      COLUMN 004, r_b13.b13_num_comp,
+	      	      COLUMN 014, r_b13.b13_fec_proceso USING 'dd-mm-yyyy',
+	      	      COLUMN 026, glosa[1, 60],
+	      	      COLUMN 087, r_b13.b13_valor_base	USING '###,###,##&.##',
+		      COLUMN 103, '0.00'		USING '###,###,##&.##', 
+		      COLUMN 119, vm_saldo		USING '---,---,--&.--'
+		IF glosa[61,120] IS NOT NULL OR glosa[61,120] <> ' ' THEN
+			PRINT COLUMN 026, glosa[61,120] 
+		END IF
+		IF glosa[121,180] IS NOT NULL OR glosa[121,180] <> ' ' THEN
+			PRINT COLUMN 026, glosa[121,180] 
+		END IF
+		IF glosa[181,230] IS NOT NULL OR glosa[181,230] <> ' ' THEN
+			PRINT COLUMN 026, glosa[181,230] 
+		END IF
+		LET vm_tot_debito = vm_tot_debito + r_b13.b13_valor_base
+	END IF
+	LET enter = 13
+	IF vm_archivo = 'Yes' THEN
+		CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING r_g02.*
+		CALL fl_lee_cuenta(vg_codcia, r_b13.b13_cuenta)
+			RETURNING r_b10.*
+		LET registro = r_g02.g02_abreviacion CLIPPED,
+				'|', r_b10.b10_cuenta CLIPPED,
+				'|', r_b10.b10_descripcion CLIPPED,
+				'|', r_b13.b13_tipo_comp,
+				'|', r_b13.b13_num_comp,
+				'|', r_b13.b13_fec_proceso USING 'dd-mm-yyyy',
+				'|', glosa CLIPPED
+		IF r_b13.b13_valor_base >= 0 THEN
+			LET registro = registro CLIPPED,
+				'|',r_b13.b13_valor_base USING '###,###,##&.##',
+				'|0.00'
+		ELSE
+			LET registro = registro CLIPPED,
+				'|0.00',
+				'|', r_b13.b13_valor_base USING '###,###,##&.##'
+		END IF
+		LET registro = registro CLIPPED,
+				'|', vm_saldo USING '---,---,--&.--'
+		DISPLAY registro CLIPPED, ASCII(enter)
+	END IF
+
 AFTER GROUP OF r_b13.b13_cuenta
 	NEED 4 LINES
-	PRINT COLUMN 63, '------------------',
-	      COLUMN 83, '------------------'
-	PRINT COLUMN 63, vm_tot_debito USING '###,###,###,##&.##',
-	      COLUMN 83, vm_tot_credito USING '###,###,###,##&.##'
-	PRINT COLUMN 1,  '   '
+	LET vm_tot_credito_g = vm_tot_credito_g + vm_tot_credito
+	LET vm_tot_debito_g  = vm_tot_debito_g  + vm_tot_debito
+	PRINT COLUMN 087, '--------------',
+	      COLUMN 103, '--------------'
+	PRINT COLUMN 087, vm_tot_debito  USING '###,###,##&.##',
+	      COLUMN 103, vm_tot_credito USING '###,###,##&.##'
+	SKIP 1 LINES
+
+ON LAST ROW
+	NEED 2 LINES
+	PRINT COLUMN 087, '--------------',
+	      COLUMN 103, '--------------'
+	PRINT COLUMN 064, 'TOTALES GENERALES ==>  ',
+		vm_tot_debito_g USING '###,###,##&.##',
+	      COLUMN 103, vm_tot_credito_g USING '###,###,##&.##';
+	print ASCII escape;
+	print ASCII desact_comp 
 
 END REPORT
 
@@ -573,39 +628,7 @@ END REPORT
 FUNCTION borrar_cabecera()
 
 CLEAR FORM
-INITIALIZE rm_b12.*, rm_b13.*, vm_fecha_ini, vm_fecha_fin TO NULL
-
-END FUNCTION
-
-
-
-FUNCTION validar_parametros()
-
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
+INITIALIZE rm_b12.*, rm_b13.*, vm_fecha_ini, vm_fecha_fin, vm_tipo_comp,
+		vm_subtipo TO NULL
 
 END FUNCTION

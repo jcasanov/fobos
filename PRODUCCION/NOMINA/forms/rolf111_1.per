@@ -1,0 +1,81 @@
+DATABASE aceros
+SCREEN
+{
+      Departamento: [c000] [c001                          ]
+          Empleado: [c002] [c003                                    ]
+    Sueldo Mensual: [c008     ] - [c009     ]
+
+     Valor Aumento: [c004     ]          Porcentaje Aumento: [c005  ] %
+        Valor Tope: [c040     ]                               [c006] de [c007]
+ [c010|c011                                 |c012     |c013  |c014     |c015  ]
+[c020|c021                                 |c022     |c023  |c024     |c025  ]
+[c020|c021                                 |c022     |c023  |c024     |c025  ]
+[c020|c021                                 |c022     |c023  |c024     |c025  ]
+[c020|c021                                 |c022     |c023  |c024     |c025  ]
+[c020|c021                                 |c022     |c023  |c024     |c025  ]
+[c020|c021                                 |c022     |c023  |c024     |c025  ]
+[c020|c021                                 |c022     |c023  |c024     |c025  ]
+[c020|c021                                 |c022     |c023  |c024     |c025  ]
+[c020|c021                                 |c022     |c023  |c024     |c025  ]
+[c020|c021                                 |c022     |c023  |c024     |c025  ]
+[c020|c021                                 |c022     |c023  |c024     |c025  ]
+[c020|c021                                 |c022     |c023  |c024     |c025  ]
+[c020|c021                                 |c022     |c023  |c024     |c025  ]
+                                Total ==>  [c030     ]      [c031     ]
+}
+TABLES
+gent034
+rolt030
+ATTRIBUTES
+c000 = FORMONLY.n30_cod_depto, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = gent034.g34_nombre, NOENTRY, UPSHIFT;
+c002 = FORMONLY.cod_trab, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = FORMONLY.tit_nombres, NOENTRY, UPSHIFT;
+c008 = FORMONLY.sueldo_ini TYPE DECIMAL, UPSHIFT, FORMAT = '--,--&.##',
+	INCLUDE = (0.00 TO 99999.99, NULL),
+	COMMENTS = 'Filtro adicional que indica el sueldo mayor igual a ?';
+c009 = FORMONLY.sueldo_fin TYPE DECIMAL, UPSHIFT, FORMAT = '--,--&.##',
+	INCLUDE = (0.00 TO 99999.99, NULL),
+	COMMENTS = 'Filtro adicional que indica el sueldo menor igual a ?';
+c004 = FORMONLY.valor_aum TYPE DECIMAL, UPSHIFT, FORMAT = '--,--&.##',
+	INCLUDE = (-99999.99 TO 99999.99, NULL),
+	COMMENTS = 'Este valor indica el monto que se va aumentar al sueldo de los empleados.';
+c040 = FORMONLY.valor_tope TYPE DECIMAL, UPSHIFT, FORMAT = '--,--&.##',
+	INCLUDE = (0.01 TO 99999.99, NULL),
+	COMMENTS = 'Este filtro indica el monto maximo que se va aumentar el sueldo a los empleados.';
+c005 = FORMONLY.porc_aum TYPE DECIMAL, UPSHIFT, FORMAT = '##&.##',
+	INCLUDE = (0.01 TO 100, NULL),
+	COMMENTS = 'Este valor indica cuanto se va aumentar en porcentaje el sueldo de empleados.';
+
+c006 = FORMONLY.num_rows, NOENTRY, UPSHIFT, REVERSE;
+c007 = FORMONLY.max_rows, NOENTRY, UPSHIFT, REVERSE;
+
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c015 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+c020 = rolt030.n30_cod_trab, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c021 = rolt030.n30_nombres, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c022 = rolt030.n30_sueldo_mes, NOENTRY, UPSHIFT, FORMAT = '--,--&.##',
+	OPTIONS = '-nolist';
+c023 = rolt030.n30_factor_hora, NOENTRY, UPSHIFT, FORMAT = '--&.##',
+	OPTIONS = '-nolist';
+c024 = FORMONLY.sueldo_mes_nue TYPE DECIMAL NOT NULL, REQUIRED, AUTONEXT,
+	UPSHIFT, FORMAT = '--,--&.##', OPTIONS = '-nolist';
+c025 = FORMONLY.factor_hora_nue, NOENTRY, UPSHIFT, FORMAT = '--&.##',
+	OPTIONS = '-nolist';
+
+c030 = FORMONLY.total_sue_mes TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '--,--&.##';
+c031 = FORMONLY.total_sue_nue TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '--,--&.##';
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_emp[13] (n30_cod_trab, n30_nombres, n30_sueldo_mes,
+				n30_factor_hora, sueldo_mes_nue,factor_hora_nue)

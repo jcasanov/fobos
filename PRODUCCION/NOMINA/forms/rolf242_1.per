@@ -1,0 +1,43 @@
+database formonly
+screen 
+{
+ [c103|c100                                    |c101      |c102            ]
+[c053|c050                                    |c051      |c052            ]
+[c053|c050                                    |c051      |c052            ]
+[c053|c050                                    |c051      |c052            ]
+[c053|c050                                    |c051      |c052            ]
+[c053|c050                                    |c051      |c052            ]
+[c053|c050                                    |c051      |c052            ]
+[c053|c050                                    |c051      |c052            ]
+[c053|c050                                    |c051      |c052            ]
+[c053|c050                                    |c051      |c052            ]
+[c053|c050                                    |c051      |c052            ]
+[c053|c050                                    |c051      |c052            ]
+[c053|c050                                    |c051      |c052            ]
+[c053|c050                                    |c051      |c052            ]
+[c053|c050                                    |c051      |c052            ]
+[c053|c050                                    |c051      |c052            ]
+[c053|c050                                    |c051      |c052            ]
+[c053|c050                                    |c051      |c052            ]
+                                                         [c062            ]
+}
+end
+tables
+formonly
+attributes
+
+c100 = formonly.bt_nomtrab,  WIDGET='BUTTON', CONFIG='F15';
+c101 = formonly.bt_fecha,    WIDGET='BUTTON', CONFIG='F16';
+c102 = formonly.bt_retirado, WIDGET='BUTTON', CONFIG='F17';
+c103 = formonly.bt_cod_trab, WIDGET='BUTTON', CONFIG='F17';
+
+c050 = formonly.n30_nombres, NOENTRY, OPTIONS='-nolist';
+c051 = formonly.fecha,       NOENTRY, OPTIONS='-nolist', FORMAT='dd-mm-yyyy';
+c052 = formonly.retirado,    NOENTRY, OPTIONS='-nolist', 
+	FORMAT='#,###,###,##&.##';
+c053 = formonly.cod_trab,    NOENTRY, OPTIONS='-nolist';
+
+c062 = formonly.tot_retirado, NOENTRY, FORMAT='###,###,##&.##';
+end
+instructions
+screen record ra_scr[17] (cod_trab, n30_nombres, fecha, retirado)

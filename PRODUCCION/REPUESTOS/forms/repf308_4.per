@@ -1,0 +1,72 @@
+DATABASE aceros
+SCREEN
+{
+  Anul. Imp. No.: [a1|c001           ]           Fecha: [c002               ]
+       Proveedor: [c003                       ]
+ Liquidación No.: [c004  ]
+      Referencia: [c005                                     ]
+    Factor Costo: [c006    ]           Margen Utilidad: [c007 ]%
+          Moneda: [a2]                     Importacion: [c0|c052    ]
+                                                              [c050] de [c051]
+ [c020  |c021              |c022     |c023        |c024        |c025          ]
+[c030  |c031              |c032     |c033        |c034        |c035          ]
+[c030  |c031              |c032     |c033        |c034        |c035          ]
+[c030  |c031              |c032     |c033        |c034        |c035          ]
+[c030  |c031              |c032     |c033        |c034        |c035          ]
+[c030  |c031              |c032     |c033        |c034        |c035          ]
+[c030  |c031              |c032     |c033        |c034        |c035          ]
+[c030  |c031              |c032     |c033        |c034        |c035          ]
+[c030  |c031              |c032     |c033        |c034        |c035          ]
+[c070                               ]     Total Fob Recibido: [c040          ]
+[c071                               ]  Total Costo Ingresado: [c041          ]
+[c072                                    ]
+[c073                                              ]
+[c074                                                             ]
+}
+TABLES
+rept010
+rept019
+rept020
+cxpt001
+ATTRIBUTES
+a1   = r19_cod_tran, REVERSE;
+c001 = r19_num_tran, REVERSE;
+c002 = r19_fecing, REVERSE;
+c003 = p01_nomprov, REVERSE;
+c004 = r19_numliq, REVERSE;
+c005 = r19_referencia, REVERSE;
+c006 = r19_fact_costo, FORMAT = "#,##&.##", REVERSE;
+c007 = r19_fact_venta, FORMAT = "#&.##", REVERSE;
+a2   = r19_moneda, REVERSE;
+c020 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c021 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c022 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c023 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c024 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c025 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c030 = r20_item;
+c031 = r10_nombre;
+c032 = r20_cant_ven, FORMAT = "#####&.##";
+c033 = r20_fob, FORMAT = "###,##&.####";
+c034 = r20_costo, FORMAT = "###,##&.####";
+c035 = FORMONLY.subtotal   TYPE DECIMAL(14,4), FORMAT = '#,###,##&.####';
+c040 = FORMONLY.t_fob   TYPE DECIMAL(14,4), FORMAT = '#,###,##&.####', REVERSE;
+c041 = FORMONLY.t_costo TYPE DECIMAL(14,4), FORMAT = '#,###,##&.####', REVERSE;
+c070 = formonly.descrip_1, NOENTRY;
+c071 = formonly.descrip_2, NOENTRY;
+c072 = formonly.descrip_3, NOENTRY;
+c073 = formonly.descrip_4, NOENTRY;
+c074 = formonly.nom_item,  NOENTRY, REVERSE;
+
+c050 = FORMONLY.num_row,   NOENTRY, REVERSE;
+c051 = FORMONLY.max_row,   NOENTRY, REVERSE;
+
+c0   = r19_tipo_dev, REVERSE, NOENTRY;
+c052 = r19_num_dev,  REVERSE, NOENTRY;
+END
+INSTRUCTIONS
+SCREEN RECORD r_trn[8] (r20_item, r10_nombre, r20_cant_ven, r20_fob, r20_costo,
+			 FORMONLY.subtotal)
+KEYS
+F5 = 'Liquidación'
+F6 = 'Imprimir'

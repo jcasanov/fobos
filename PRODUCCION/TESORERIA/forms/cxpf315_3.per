@@ -1,0 +1,17 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+     SELECCIONE TESORERIA vs. CONTABILIDAD
+     ------------------------------------
+
+ [c000                                       ]
+
+
+
+}
+ATTRIBUTES
+c000 = FORMONLY.vm_contab TYPE CHAR NOT NULL, UPSHIFT, REVERSE,
+	WIDGET = 'RADIO', CONFIG = 'B "Solo Contabilidad"  C "Tesorería vs. Contabilidad por Proveedor"  M "Tesorería vs. Contabilidad por Modulo"',
+	DEFAULT = 'C';
+END

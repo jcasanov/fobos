@@ -1,0 +1,28 @@
+database aceros
+screen 
+{
+
+  Codigo Liquidación: [a0] [c100                                         ] 
+
+        Fecha Inicio: [c001      ]         Fecha Fin: [c002      ]
+         Año Proceso: [c006  ]           Mes Proceso: [c7|c103           ]
+
+	    Empleado: [c008  ] [c102                                     ]
+
+}
+end
+tables
+rolt032
+attributes
+a0 = rolt032.n32_cod_liqrol, REVERSE, AUTONEXT, UPSHIFT, WIDGET='FIELD_BMP', 
+	CONFIG='lista.bmp F2', NOENTRY;
+c001 = rolt032.n32_fecha_ini, REVERSE, FORMAT='dd-mm-yyyy', NOENTRY;
+c002 = rolt032.n32_fecha_fin, REVERSE, FORMAT='dd-mm-yyyy', NOENTRY;
+c006 = rolt032.n32_ano_proceso, REVERSE, NOENTRY;
+c7   = rolt032.n32_mes_proceso, REVERSE, NOENTRY;
+
+c008 = formonly.cod_trab, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c100 = formonly.n_liqrol, NOENTRY;
+c102 = formonly.n_trab,   NOENTRY;
+c103 = formonly.n_mes ,   NOENTRY;
+end

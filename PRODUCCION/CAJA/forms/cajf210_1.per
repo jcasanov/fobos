@@ -1,41 +1,54 @@
-database diteca 
-screen 
-{ 
-                               Comprobante Emitido: [x1|x001             ]
-         Tipo Fuente          
-   [a0                          ]    Número Fuente: [c002       ]   
-                                   
-                                   Area de Negocio: [c03|c052            ]
-                                     Fecha Proceso: [c007                ]
+DATABASE aceros
+SCREEN
+{
 
-   Cliente: [c004       ][c005                                           ]
-    Moneda: [a1|c051            ]    Valor factura: [c006               ]
+     Fecha Inicial: [c000      ]                  Fecha Final: [c001      ]
 
- Ingresado Por: [c016      ]       
+ [b0|c021           |c022                         |c023      |c024            ]
+[c0|c011           |c012                         |c013      |c014            ]
+[c0|c011           |c012                         |c013      |c014            ]
+[c0|c011           |c012                         |c013      |c014            ]
+[c0|c011           |c012                         |c013      |c014            ]
+[c0|c011           |c012                         |c013      |c014            ]
+[c0|c011           |c012                         |c013      |c014            ]
+[c0|c011           |c012                         |c013      |c014            ]
+[c0|c011           |c012                         |c013      |c014            ]
+[c0|c011           |c012                         |c013      |c014            ]
+[c0|c011           |c012                         |c013      |c014            ]
+[c0|c011           |c012                         |c013      |c014            ]
+[c0|c011           |c012                         |c013      |c014            ]
+[c0|c011           |c012                         |c013      |c014            ]
+[c0|c011           |c012                         |c013      |c014            ]
+[c0|c011           |c012                         |c013      |c014            ]
+
 }
-end
-tables
+TABLES
 cajt010
-attributes
-a0 = cajt010.j10_tipo_fuente, DEFAULT='PR', WIDGET='RADIO', AUTONEXT,
-	CONFIG='PR "Preventa de Repuestos"';
-c002 = cajt010.j10_num_fuente, REVERSE, WIDGET='FIELD_BMP',
-	CONFIG='lista.bmp F2';
-c03  = cajt010.j10_areaneg, NOENTRY;
-c004 = cajt010.j10_codcli, NOENTRY;
-c005 = cajt010.j10_nomcli, REVERSE, UPSHIFT, NOENTRY;
-a1 = cajt010.j10_moneda, NOENTRY, REVERSE, UPSHIFT, AUTONEXT;
-c006 = cajt010.j10_valor, NOENTRY, REVERSE, FORMAT='#,###,###,##&.##',
-	INCLUDE=(0 TO 9999999999.99);
-c007 = cajt010.j10_fecha_pro, NOENTRY;
+rept038
+ATTRIBUTES
+c000 = FORMONLY.vm_fecha_ini TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Inicial en formato: dd-mm-aaaa';
+c001 = FORMONLY.vm_fecha_fin TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Final en formato: dd-mm-aaaa';
 
-c016 = cajt010.j10_usuario, REVERSE, NOENTRY, UPSHIFT;
+b0   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c021 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c022 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c023 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c024 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
 
-c051 = formonly.n_moneda, NOENTRY;
-c052 = formonly.n_areaneg, NOENTRY;
-
-x1   = cajt010.j10_tipo_destino, NOENTRY, COLOR=BLUE;
-x001 = cajt010.j10_num_destino,  NOENTRY, COLOR=BLUE;
-
-end
-
+c0   = r38_tipo_fuente, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c011 = r38_num_tran, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c012 = j10_nomcli, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c013 = FORMONLY.r19_fecing TYPE DATE, NOENTRY, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy', OPTIONS = '-nolist';
+c014 = r38_num_sri, AUTONEXT, UPSHIFT, OPTIONS = '-nolist';
+END
+KEYS
+F5 = 'Modificar'
+F6 = 'Nota de Venta'
+INSTRUCTIONS
+SCREEN RECORD rm_det[15] (r38_tipo_fuente, r38_num_tran, j10_nomcli, r19_fecing,
+				r38_num_sri)

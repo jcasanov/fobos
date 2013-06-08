@@ -1,70 +1,78 @@
-database diteca
-screen {
+DATABASE FORMONLY
+SCREEN
+{
 
-           Proveedor: [c000|c001                                    ]
-           Documento: [a1|c006           ]          Dividendo : [c01]     
---------------------------------------------------------------------------
+      Proveedor: [c000|c001                                    ]
+      Documento: [a1|c006           ]          Dividendo : [c01]     
+----------------------------------------------------------------------
    Valor Bienes: [c007            ]
 Valor Servicios: [c008            ]
          I.V.A.: [c009            ]
                  ------------------
-     Total Neto: [c010            ]     Valor a Pagar: [c018            ]
+     Total Neto: [c010            ]  Valor a Pagar: [c018            ]
           
-     [lbl1                |lb2|lbl3|lbl4          |lbl5  |lbl6           ]   
-  [c|c015                |c20|c011|c012          |c013  |c014            ]
-  [c|c015                |c20|c011|c012          |c013  |c014            ]
-  [c|c015                |c20|c011|c012          |c013  |c014            ]
-  [c|c015                |c20|c011|c012          |c013  |c014            ]
-  [c|c015                |c20|c011|c012          |c013  |c014            ]
-                                                        ------------------
-                                     Total Retenciones: [c017            ]
-                                      Valor del Cheque: [c016            ]
+   [c051] de [c052]
+    [lbl1          |lbl6  |lbl2|lbl3          |lbl4  |lbl5            ]   
+ [c|c015          |c020  |c011|c012          |c013  |c014            ]
+ [c|c015          |c020  |c011|c012          |c013  |c014            ]
+ [c|c015          |c020  |c011|c012          |c013  |c014            ]
+ [c|c015          |c020  |c011|c012          |c013  |c014            ]
+ [c|c015          |c020  |c011|c012          |c013  |c014            ]
+                                                    ------------------
+                                 Total Retenciones: [c017            ]
+                                  Valor del Cheque: [c016            ]
+ [c050                                                               ]
 }
-end   
+END   
 
-attributes
-c000 = formonly.cod_proveedor, REVERSE,               NOENTRY;
-c001 = formonly.n_proveedor,   REVERSE,               NOENTRY;
-a1   = formonly.tipo_doc,      REVERSE,               NOENTRY;
-c006 = formonly.num_doc,       REVERSE,               NOENTRY;
-c01  = formonly.dividendo,     REVERSE, FORMAT='#&&', NOENTRY;
+ATTRIBUTES
+c000 = FORMONLY.cod_proveedor, REVERSE,               NOENTRY;
+c001 = FORMONLY.n_proveedor,   REVERSE,               NOENTRY;
+a1   = FORMONLY.tipo_doc,      REVERSE,               NOENTRY;
+c006 = FORMONLY.num_doc,       REVERSE,               NOENTRY;
+c01  = FORMONLY.dividendo,     REVERSE, FORMAT='#&&', NOENTRY;
 	
-c007 = formonly.val_bienes,           REVERSE, FORMAT='#,###,###,##&.##',
+c007 = FORMONLY.val_bienes,           REVERSE, FORMAT='#,###,###,##&.##',
 	INCLUDE=(0 TO 9999999999.99),
 	COMMENT='Valor bienes de la factura.';
-c008 = formonly.val_servi,            REVERSE, FORMAT='#,###,###,##&.##',
+c008 = FORMONLY.val_servi,            REVERSE, FORMAT='#,###,###,##&.##',
 	INCLUDE=(0 TO 9999999999.99),
 	COMMENT='Valor servicios de la factura.';
-c009 = formonly.val_impto,   NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
-c010 = formonly.val_neto,    NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
-c20  = formonly.codigo_sri,	 NOENTRY, REVERSE, OPTIONS='-nolist';
-c011 = formonly.tipo_ret,    NOENTRY, OPTIONS='-nolist';
-c012 = formonly.val_base,    NOENTRY, FORMAT='##,###,##&.##',
+c009 = FORMONLY.val_impto,   NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+c010 = FORMONLY.val_neto,    NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+c011 = FORMONLY.tipo_ret,    NOENTRY, OPTIONS='-nolist';
+c012 = FORMONLY.val_base,    NOENTRY, FORMAT='##,###,##&.##',
 	OPTIONS='-nolist';
-c013 = formonly.porc,        NOENTRY, FORMAT='##&.##',
+c013 = FORMONLY.porc,        NOENTRY, FORMAT='##&.##',
 	OPTIONS='-nolist';
-c014 = formonly.subtotal,    NOENTRY, FORMAT='#,###,###,##&.##',
+c014 = FORMONLY.subtotal,    NOENTRY, FORMAT='#,###,###,##&.##',
 	OPTIONS='-nolist';
-c015 = formonly.n_retencion, NOENTRY, OPTIONS='-nolist';
+c015 = FORMONLY.n_retencion, NOENTRY, OPTIONS='-nolist';
+c020 = FORMONLY.c_sri, NOENTRY, OPTIONS = '-nolist';
 
-c016 = formonly.val_cheque,  NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
-c017 = formonly.tot_ret,     NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
-c018 = formonly.val_pagar,            REVERSE, FORMAT='#,###,###,##&.##',
+c016 = FORMONLY.val_cheque,  NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+c017 = FORMONLY.tot_ret,     NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+c018 = FORMONLY.val_pagar,            REVERSE, FORMAT='#,###,###,##&.##',
 	INCLUDE=(0 TO 9999999999.99);
 
-c    = formonly.check,	     WIDGET='CHECK', CONFIG='S N acknowledge',
+c    = FORMONLY.check,	     WIDGET='CHECK', CONFIG='S N acknowledge',
 	AUTONEXT, DEFAULT='N', OPTIONS='-nolist';
 	
-lbl1 = formonly.bt_nom_ret,    WIDGET='BUTTON', CONFIG='F15';
-lb2  = formonly.bt_codigo_sri, WIDGET='BUTTON', CONFIG='F16';
-lbl3 = formonly.bt_tipo_ret,   WIDGET='BUTTON', CONFIG='F17';
-lbl4 = formonly.bt_base,       WIDGET='BUTTON', CONFIG='F18';
-lbl5 = formonly.bt_porc,       WIDGET='BUTTON', CONFIG='F19';
-lbl6 = formonly.bt_valor,      WIDGET='BUTTON', CONFIG='F20';
-end
+lbl1 = FORMONLY.bt_nom_ret,  WIDGET='BUTTON', CONFIG='F15';
+lbl6 = FORMONLY.bt_sri,      WIDGET='BUTTON', CONFIG='F16';
+lbl2 = FORMONLY.bt_tipo_ret, WIDGET='BUTTON', CONFIG='F17';
+lbl3 = FORMONLY.bt_base,     WIDGET='BUTTON', CONFIG='F18';
+lbl4 = FORMONLY.bt_porc,     WIDGET='BUTTON', CONFIG='F19';
+lbl5 = FORMONLY.bt_valor,    WIDGET='BUTTON', CONFIG='F20';
 
-instructions
-screen record ra_ret[5] (check, n_retencion, codigo_sri, tipo_ret, val_base, porc, subtotal)
+c050 = FORMONLY.tit_codigo_sri, NOENTRY, REVERSE;
 
-keys
+c051 = FORMONLY.num_rows, NOENTRY, REVERSE;
+c052 = FORMONLY.max_rows, NOENTRY, REVERSE;
+END
+KEYS
 F5 = 'Valor a Pagar'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD ra_ret[5] (check, n_retencion, c_sri, tipo_ret, val_base, porc,
+				subtotal)

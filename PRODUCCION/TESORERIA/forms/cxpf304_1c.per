@@ -1,0 +1,49 @@
+DATABASE aceros
+SCREEN
+{
+      Proveedor:[c0        ] [c1                             ]
+ Desde la Fecha:[c2        ]                
+ Hasta la Fecha:[c3        ]
+
+     Fecha            Proveedor          Estado  Num Ret MO Total Recepción
+ [c4        |c5                       |c6       |c7     |c8|c9            ]
+ [c4        |c5                       |c6       |c7     |c8|c9            ]
+ [c4        |c5                       |c6       |c7     |c8|c9            ]
+ [c4        |c5                       |c6       |c7     |c8|c9            ]
+ [c4        |c5                       |c6       |c7     |c8|c9            ]
+ [c4        |c5                       |c6       |c7     |c8|c9            ]
+ [c4        |c5                       |c6       |c7     |c8|c9            ]
+ [c4        |c5                       |c6       |c7     |c8|c9            ]
+ [c4        |c5                       |c6       |c7     |c8|c9            ]
+ [c4        |c5                       |c6       |c7     |c8|c9            ]
+ [c4        |c5                       |c6       |c7     |c8|c9            ]
+ [c4        |c5                       |c6       |c7     |c8|c9            ]
+ [c4        |c5                       |c6       |c7     |c8|c9            ]
+}
+TABLES
+	cxpt027
+	cxpt028
+ATTRIBUTES
+c0  = FORMONLY.vm_proveedor TYPE INTEGER, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c1  = FORMONLY.nom_proveedor, NOENTRY;
+c2  = FORMONLY.vm_fecha_desde TYPE DATE NOT NULL, REVERSE, AUTONEXT, 
+	UPSHIFT, REQUIRED, FORMAT = 'dd-mm-yyyy', 
+	COMMENTS = 'Fecha en formato: dd-mm-aaaa';
+c3  = FORMONLY.vm_fecha_hasta TYPE DATE, REVERSE, AUTONEXT, 
+	UPSHIFT, REQUIRED, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Fecha en formato: dd-mm-aaaa';
+
+c4  = FORMONLY.fecha     TYPE DATE, FORMAT = 'dd-mm-yyyy';
+c5  = FORMONLY.proveedor TYPE VARCHAR;
+c6  = FORMONLY.estado    TYPE VARCHAR;
+c7  = FORMONLY.num_ret   TYPE INTEGER;
+c8  = FORMONLY.moneda    TYPE VARCHAR;
+c9  = cxpt027.p27_total_ret, FORMAT = '---,---,--&.##';
+end
+--KEYS
+--F5 = 'Documento'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_detalle[13] (fecha,  proveedor, estado, num_ret, 
+			     moneda, p27_total_ret)

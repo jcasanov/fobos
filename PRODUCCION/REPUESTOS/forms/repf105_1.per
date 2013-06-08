@@ -1,23 +1,25 @@
-database diteca
-screen
+DATABASE aceros
+SCREEN
 {
 
 
 	Código de Unidad de Medida : [f000   ]
 
                              Siglas: [a0 ]
+                     Con Decimales?: [c]
 
 	              Ingresado Por: [f001      ]
                    Fecha de Ingreso: [f002               ]
 
 }
-end
-tables
+TABLES
 rept005
-attributes
+ATTRIBUTES
 f000 = rept005.r05_codigo, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-a0 = rept005.r05_siglas, REVERSE, UPSHIFT;
+a0   = rept005.r05_siglas, REVERSE, UPSHIFT;
+c    = rept005.r05_decimales, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
 f001 = rept005.r05_usuario, REVERSE, NOENTRY;
 f002 = rept005.r05_fecing, REVERSE, NOENTRY;
 end

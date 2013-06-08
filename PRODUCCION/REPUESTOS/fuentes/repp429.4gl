@@ -10,6 +10,7 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
+DEFINE vm_demonios	VARCHAR(12)
 DEFINE rm_cia		RECORD LIKE gent001.*
 DEFINE rm_g04		RECORD LIKE gent004.*
 DEFINE rm_g05		RECORD LIKE gent005.*
@@ -18,7 +19,7 @@ DEFINE vm_max_rows	SMALLINT
 DEFINE rm_par 		RECORD
 				moneda		LIKE gent013.g13_moneda,
 				bodega		LIKE rept002.r02_codigo,
-				query		VARCHAR(700),
+				query		CHAR(700),
 				margen_ini	DECIMAL(9,0),
 				margen_fin	DECIMAL(9,0),
 				linea		LIKE rept003.r03_codigo,
@@ -33,34 +34,35 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/repp429.error')
-CALL fgl_init4js()
+CALL startlog('../logs/errores')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 6 AND num_args() <> 8 AND num_args() <> 9
   AND num_args() <> 10 AND num_args() <> 14 THEN
 	-- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto.', 'stop')
+	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.', 'stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
-LET vg_base					= arg_val(1)
-LET vg_modulo  	 			= arg_val(2)
-LET vg_codcia   			= arg_val(3)
-LET rm_par.moneda			= arg_val(4)
-LET rm_par.bodega			= arg_val(5)
-LET rm_par.query			= arg_val(6)
+LET vg_base			= arg_val(1)
+LET vg_modulo  	 		= arg_val(2)
+LET vg_codcia   		= arg_val(3)
+LET rm_par.moneda		= arg_val(4)
+LET rm_par.bodega		= arg_val(5)
+LET rm_par.query		= arg_val(6)
 LET rm_par.margen_ini		= arg_val(7)
 LET rm_par.margen_fin		= arg_val(8)
-LET rm_par.linea			= arg_val(9)
-LET rm_par.filtro			= arg_val(10)
-LET vm_columna_1 			= arg_val(11)
-LET vm_columna_2 			= arg_val(12)
+LET rm_par.linea		= arg_val(9)
+LET rm_par.filtro		= arg_val(10)
+LET vm_columna_1 		= arg_val(11)
+LET vm_columna_2 		= arg_val(12)
 LET rm_orden[vm_columna_1] 	= arg_val(13)
 LET rm_orden[vm_columna_2] 	= arg_val(14)
 LET vg_proceso = 'repp429'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 
 CALL funcion_master()
@@ -80,13 +82,6 @@ CREATE TEMP TABLE temp_item
 	 stock		INTEGER)
 
 CALL fl_nivel_isolation()
-OPEN WINDOW w_mas AT 3,2 WITH 08 ROWS, 80 COLUMNS
-    ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE 0, BORDER,
-	      MESSAGE LINE LAST - 2)
-OPTIONS INPUT WRAP,
-	ACCEPT KEY	F12
---OPEN FORM f_rep FROM "../forms/repf429_1"
---DISPLAY FORM f_rep
 LET vm_max_rows = 2000
 CALL fl_lee_usuario(vg_usuario)             RETURNING rm_g05.*
 CALL fl_lee_grupo_usuario(rm_g05.g05_grupo) RETURNING rm_g04.*
@@ -109,11 +104,12 @@ DEFINE r_rep		RECORD
 				stock	LIKE rept011.r11_stock_act
 			END RECORD
 DEFINE comando		VARCHAR(100)
-DEFINE query		VARCHAR(300)
+DEFINE query		CHAR(300)
 
 CALL fl_lee_moneda(rm_par.moneda) RETURNING r_mon.*
 IF r_mon.g13_moneda IS NULL THEN
-       	CALL fgl_winmessage(vg_producto,'No existe moneda base.','stop')
+       	--CALL fgl_winmessage(vg_producto,'No existe moneda base.','stop')
+	CALL fl_mostrar_mensaje('No existe moneda base.','stop')
         EXIT PROGRAM
 END IF
 LET vm_moneda_des = r_mon.g13_nombre
@@ -129,7 +125,8 @@ WHILE TRUE
 	FOREACH q_cit INTO r_rep.*
 		LET r_rep.margen = 0
 		IF r_rep.costo > 0 THEN
-			LET r_rep.margen = (r_rep.precio - r_rep.costo) / r_rep.costo * 100
+			LET r_rep.margen = (r_rep.precio - r_rep.costo)
+						/ r_rep.costo * 100
 		END IF
 		CALL fl_lee_stock_rep(vg_codcia, rm_par.bodega, r_rep.codigo)
 			RETURNING rs.*
@@ -140,7 +137,8 @@ WHILE TRUE
 			IF rs.r11_stock_act = 0 THEN
 				CONTINUE FOREACH
 			END IF
-			IF r_rep.margen < rm_par.margen_ini OR r_rep.margen > rm_par.margen_fin THEN
+			IF r_rep.margen < rm_par.margen_ini OR r_rep.margen
+		  	  > rm_par.margen_fin THEN
 				CONTINUE FOREACH
 			END IF
 		END IF
@@ -200,9 +198,9 @@ OUTPUT
 FORMAT
 
 PAGE HEADER
-	print 'E'; print '&l26A';	-- Indica que voy a trabajar con hojas A4
-	print '&k4S'	                -- Letra (12 cpi)
-	LET modulo  = "Módulo: Repuestos"
+	--#print 'E'; --#print '&l26A';	-- Indica que voy a trabajar con hojas A4
+	--#print '&k4S'	                -- Letra (12 cpi)
+	LET modulo  = "Módulo: Inventario"
 	LET long    = LENGTH(modulo)
 	LET usuario = 'Usuario: ', vg_usuario
 	CALL fl_justifica_titulo('D', usuario, 19) RETURNING usuario
@@ -223,25 +221,25 @@ PAGE HEADER
 						vm_moneda_des
 	PRINT COLUMN 20, "** Bodega         : ", rm_par.bodega, " ",
 						r_r02.r02_nombre
-	IF rm_par.linea <> 'XX' THEN
+	--#IF rm_par.linea <> 'XX' THEN
 		CALL fl_lee_linea_rep(vg_codcia, rm_par.linea)
 			RETURNING r_r03.*
 		PRINT COLUMN 20, "** Línea          : ", rm_par.linea, " ",
 						r_r03.r03_nombre
-	END IF
-	IF rm_par.margen_ini IS NOT NULL AND arg_val(7) <> 'XX' THEN
+	--#END IF
+	--#IF rm_par.margen_ini IS NOT NULL AND arg_val(7) <> 'XX' THEN
 		PRINT COLUMN 20, "** Margen Inicial : ", rm_par.margen_ini
 							USING "----&"
 		PRINT COLUMN 20, "** Margen Final   : ", rm_par.margen_fin
 							USING "----&"
-	END IF
-	IF rm_par.filtro <> 'XX' THEN
+	--#END IF
+	--#IF rm_par.filtro <> 'XX' THEN
 		PRINT COLUMN 20, "** Filtro         : ", rm_par.filtro
-	END IF
+	--#END IF
 	PRINT COLUMN 01, "Fecha  : ", TODAY USING "dd-mm-yyyy", 1 SPACES, TIME,
 	      COLUMN 62, usuario
 	SKIP 1 LINES
-	print '&k4S'	                -- Letra condensada (12 cpi)
+	--#print '&k4S'	                -- Letra condensada (12 cpi)
 	PRINT COLUMN 1,   "Item",
 	      COLUMN 17,  "Descripción",
 	      COLUMN 40,  "Costo  Unit.",
@@ -259,41 +257,8 @@ ON EVERY ROW
 	      COLUMN 70,  r_rep.margen USING "----&",
 	      COLUMN 77,  r_rep.stock  USING "###&"
 	
-ON LAST ROW
+--#ON LAST ROW
 	--NEED 2 LINES
 	--PRINT COLUMN 48, "TOTALES ==>  "
 
 END REPORT
-
-
-
-FUNCTION validar_parametros()
-
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-
-END FUNCTION

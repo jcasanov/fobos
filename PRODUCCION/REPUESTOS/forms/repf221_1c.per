@@ -1,0 +1,53 @@
+DATABASE aceros
+SCREEN
+{
+
+
+           Registro No: [f001       ]	               Estado: [a|a1       ]
+
+              Division: [f003 ] [a2                      ]
+       Indice Rotación: [a0] [a3                         ]
+             Tipo Item: [f004 ] [a4                      ]
+	    Porcentaje: [f002     ]%	                 
+
+                Moneda: [d|f020          ]       Rubro Base: [b|f021  ]
+
+    Fecha de Procesado: [f007               ]
+         Ingresado Por: [f005      ] 
+      Fecha de Ingreso: [f006               ]
+
+}
+TABLES
+rept032
+ATTRIBUTES
+f001 = rept032.r32_numreg, REVERSE, NOENTRY, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+a    = rept032.r32_estado, REVERSE,UPSHIFT, NOENTRY,
+	COMMENTS = 'A Activo  P Procesado';
+a1   = FORMONLY.tit_estado TYPE VARCHAR, NOENTRY;
+d    = rept032.r32_moneda, REVERSE, DEFAULT = 'A', UPSHIFT, AUTONEXT,
+	INCLUDE = ('A', 'B'),
+	COMMENTS = 'Moneda que se le hara el cambio de precio. A=Moneda Base y B=Moneda Alterna';
+f020 = FORMONLY.tit_moneda,REVERSE,UPSHIFT,NOENTRY;
+b    = rept032.r32_rubro_base, REVERSE, UPSHIFT, AUTONEXT,
+	INCLUDE = ('P Precio C Costo'),
+	COMMENTS = 'Rubro Base sobre el que se va a calcular nuevo valor. P=Precio y C=Costo';
+f021 = FORMONLY.tit_rubro_base,REVERSE,UPSHIFT,NOENTRY;
+f002 = rept032.r32_porc_fact, REVERSE, FORMAT = '##,##&.##', 
+	INCLUDE = (0.00 TO 99999.99),
+	COMMENTS = 'Porcentaje para cambio de precios. ';
+f003 = rept032.r32_linea, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+a2   = FORMONLY.nom_lin TYPE VARCHAR, NOENTRY;
+a0   = rept032.r32_rotacion, UPSHIFT, AUTONEXT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+a3   = FORMONLY.nom_rot TYPE VARCHAR, NOENTRY;
+f004 = rept032.r32_tipo_item, UPSHIFT, AUTONEXT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+a4   = FORMONLY.nom_tipo TYPE VARCHAR, NOENTRY;
+f005 = rept032.r32_usuario, REVERSE, NOENTRY;
+f006 = rept032.r32_fecing, REVERSE, NOENTRY;
+f007 = rept032.r32_fecpro, REVERSE, NOENTRY;
+end
+INSTRUCTIONS
+DELIMITERS '||'

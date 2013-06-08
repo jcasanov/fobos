@@ -1,35 +1,33 @@
-DATABASE diteca  
--------------
--------------
+DATABASE aceros  
 SCREEN
 {
 
-             Código: [c01] [c02                         ] 
-    
-               Tipo: [c             ]          Estado: [d] [c04       ]
-                                           Código Rol: [c03   ]
 
-    Usuario Ingreso: [c05       ]    Fecha de Ingreso: [c06                ]                                
+                                                        Estado: [d|c04       ]
+
+               Código: [c01   ] [c02                           ] 
+    
+                 Tipo: [c             ]    Comisiona ?: [e]
+                                            Código Rol: [c03   ]
+
+              Usuario: [c05       ]
+        Fecha Ingreso: [c06                ]                                
 
 }
-end
-tables
+TABLES
 cxct005
-attributes
-c01 = z05_codigo 	,REQUIRED,  REVERSE, AUTONEXT, 
-	FORMAT  = '###'
-	,widget='FIELD_BMP', config='lista.bmp F2';
-c02 = z05_nombres 	,UPSHIFT, REQUIRED, REVERSE;
-c   = formonly.z05_tipo ,AUTONEXT, REVERSE, DEFAULT = 'E',
-	WIDGET='RADIO', CONFIG='E Ejecutivo C Cobrador J Caja'; 
-c03 = z05_codrol  	,UPSHIFT , AUTONEXT
-	,widget='FIELD_BMP', config='lista.bmp F2';
-d   = z05_estado,	AUTONEXT, UPSHIFT, REVERSE;
-c04 = formonly.tit_estado;
-c05 = z05_usuario	,NOENTRY, REQUIRED, REVERSE;
-c06 = z05_fecing	,NOENTRY, REQUIRED, REVERSE;
-
-instructions
-delimiters "[]"
-end
-
+ATTRIBUTES
+c01 = cxct005.z05_codigo, UPSHIFT, REVERSE, NOENTRY,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c02 = cxct005.z05_nombres, UPSHIFT, AUTONEXT, REVERSE;
+c   = cxct005.z05_tipo, AUTONEXT, UPSHIFT, REVERSE, DEFAULT = 'E',
+	WIDGET = 'RADIO', CONFIG = 'E Ejecutivo C Cobrador'; 
+c03 = cxct005.z05_codrol, REVERSE, UPSHIFT , AUTONEXT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+d   = cxct005.z05_estado, NOENTRY, UPSHIFT, REVERSE;
+c04 = FORMONLY.tit_estado, UPSHIFT, REVERSE, NOENTRY;
+e   = cxct005.z05_comision, AUTONEXT, UPSHIFT, REVERSE, DEFAULT = 'N',
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge'; 
+c05 = cxct005.z05_usuario, NOENTRY, UPSHIFT, REVERSE;
+c06 = cxct005.z05_fecing, NOENTRY, UPSHIFT, REVERSE;
+END

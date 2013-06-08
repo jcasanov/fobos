@@ -1,0 +1,27 @@
+DATABASE formonly
+SCREEN
+{
+                      ==================================
+   ====================  MENU TRANSACCIONES COBRANZAS  ====================
+   =                  ==================================                  =
+   =                                                                      =
+   =                                                                      =
+   =       [f003                 ]          [f003                 ]       = 
+   =       [f003                 ]          [f003                 ]       =  
+   =       [f003                 ]          [f003                 ]       =    
+   =       [f003                 ]          [f003                 ]       =    
+   =       [f003                 ]          [f003                 ]       =    
+   =       [f003                 ]          [f003                 ]       =    
+   =       [f003                 ]                                        =    
+   =                                                                      =
+   =                                                                      =
+   ========================================================================
+   =               Ubíquese en la opción y presione <ENTER>               =
+   ========================================================================
+}
+ATTRIBUTES
+f003 = FORMONLY.opcion;
+END
+INSTRUCTIONS
+DELIMITERS "  "
+SCREEN RECORD r_menu_cob2 [13] (FORMONLY.opcion)

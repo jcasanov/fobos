@@ -1,6 +1,6 @@
 
-DATABASE diteca
-screen
+DATABASE aceros
+SCREEN
 {
        No Orden:[c0    ]      
          Moneda:[c1]     [c2                          ] 
@@ -17,8 +17,8 @@ c0  = ordt010.c10_numero_oc, REVERSE,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 c1  = ordt010.c10_moneda, REVERSE, UPSHIFT, AUTONEXT, 
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c2  = formonly.tit_estado, NOENTRY;
+c2  = FORMONLY.tit_estado, NOENTRY;
 c3  = ordt010.c10_codprov, REVERSE;
-c4  = formonly.nom_prov, NOENTRY;
+c4  = FORMONLY.nom_prov, NOENTRY;
 c5  = ordt010.c10_solicitado, REVERSE, NOENTRY;
 

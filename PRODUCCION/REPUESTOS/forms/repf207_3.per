@@ -1,34 +1,32 @@
-database diteca
-screen 
+DATABASE aceros
+SCREEN 
 {
 
   << Detalle Pedido >>
 
-  --------------------------------------------------------------------------
-        Item       Línea C. Ped. C. Rec.       Fob            Subtotal     
-  --------------------------------------------------------------------------
-  [c003           |c007 |c005   |c006   |c004            |c008             ]
-  [c003           |c007 |c005   |c006   |c004            |c008             ]
-  [c003           |c007 |c005   |c006   |c004            |c008             ]
-  [c003           |c007 |c005   |c006   |c004            |c008             ]
-  [c003           |c007 |c005   |c006   |c004            |c008             ]
-  [c003           |c007 |c005   |c006   |c004            |c008             ]
-  --------------------------------------------------------------------------
-                                                  Total: [c009             ]    
+  ----------------------------------------------------------------------
+    Item   Div.  C. Ped.   C. Rec.         Fob             Subtotal     
+  ----------------------------------------------------------------------
+  [c003  |c007 |c005     |c006     |c004             |c008             ]
+  [c003  |c007 |c005     |c006     |c004             |c008             ]
+  [c003  |c007 |c005     |c006     |c004             |c008             ]
+  [c003  |c007 |c005     |c006     |c004             |c008             ]
+  [c003  |c007 |c005     |c006     |c004             |c008             ]
+  [c003  |c007 |c005     |c006     |c004             |c008             ]
+  ----------------------------------------------------------------------
+                                              Total: [c009             ]
 }
-end
-tables
+TABLES
 rept017
-attributes
+ATTRIBUTES
 c003 = rept017.r17_item, NOENTRY, OPTIONS='-nolist';
-c004 = rept017.r17_fob, NOENTRY, FORMAT='###,###,##&.##', OPTIONS='-nolist';
-c005 = rept017.r17_cantped, NOENTRY, FORMAT='###,##&', OPTIONS='-nolist';
-c006 = rept017.r17_cantrec, NOENTRY, FORMAT='###,##&', OPTIONS='-nolist';
+c004 = rept017.r17_fob, NOENTRY, FORMAT='----,---,--&.####', OPTIONS='-nolist';
+c005 = rept017.r17_cantped, NOENTRY, FORMAT='-----&.##', OPTIONS='-nolist';
+c006 = rept017.r17_cantrec, NOENTRY, FORMAT='-----&.##', OPTIONS='-nolist';
 c007 = rept017.r17_linea, NOENTRY, OPTIONS='-nolist';
-c008 = formonly.subtotal, NOENTRY, FORMAT='#,###,###,##&.##', 
+c008 = FORMONLY.subtotal, NOENTRY, FORMAT='----,---,--&.####', 
 	OPTIONS='-nolist';
-c009 = formonly.total, NOENTRY, FORMAT='#,###,###,##&.##';
-end
-
-instructions
-screen record ra_detped[6] (r17_item, r17_linea, r17_cantped, r17_cantrec, r17_fob, subtotal)
+c009 = FORMONLY.total, NOENTRY, FORMAT='----,---,--&.####';
+END
+INSTRUCTIONS
+SCREEN RECORD ra_detped[6] (r17_item, r17_linea, r17_cantped, r17_cantrec, r17_fob, subtotal)

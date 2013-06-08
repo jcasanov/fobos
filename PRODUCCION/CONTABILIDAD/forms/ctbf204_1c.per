@@ -1,0 +1,28 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+
+               Años de Procesos: [c000]            -            [c001]
+
+        Meses de Remayorización: [c2][c003       ] - [c4][c005       ]
+
+}
+ATTRIBUTES
+c000 = FORMONLY.vm_anopro_ini TYPE INTEGER NOT NULL, REQUIRED, AUTONEXT,
+	REVERSE, UPSHIFT, INCLUDE = (1900 TO 2099),
+	COMMENTS = 'Año Inicial de Remayorización para proceso contable.';
+c001 = FORMONLY.vm_anopro_fin TYPE INTEGER NOT NULL, REQUIRED, AUTONEXT,
+	REVERSE, UPSHIFT, INCLUDE = (1900 TO 2099),
+	COMMENTS = 'Año Final de Remayorización para proceso contable.';
+c2   = FORMONLY.vm_mespro_ini TYPE SMALLINT NOT NULL, REQUIRED, AUTONEXT,
+	REVERSE, UPSHIFT, INCLUDE = (1 TO 12),
+	COMMENTS = 'Mes de Inicio Remayorización para el proceso contable.';
+c003 = FORMONLY.tit_mes_ini, NOENTRY, REVERSE, UPSHIFT;
+c4   = FORMONLY.vm_mespro_fin TYPE SMALLINT NOT NULL, REQUIRED, AUTONEXT,
+	REVERSE, UPSHIFT, INCLUDE = (1 TO 12),
+	COMMENTS = 'Mes Final Remayorización para el proceso contable.';
+c005 = FORMONLY.tit_mes_fin, NOENTRY, REVERSE, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'

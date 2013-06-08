@@ -1,0 +1,51 @@
+DATABASE aceros
+SCREEN
+{
+
+     Anio de Proceso: [c000]               Mes de Proceso: [c0] [c001      ]
+
+  Código Liquidación: [c1]   [c002                          ]
+
+        Departamento: [c006] [c007                          ]
+
+     Código Empleado: [c003] [c004                                         ]
+
+                        Agrupado por Departamento ?: [c]
+
+          Imprimir desde el código de empleado especificado ? : [d]
+           Imprimir sólo el código de empleado especificado ? : [e]
+                    Desea imprimir sólo papeleta de totales ? : [f]
+
+}
+TABLES
+gent034
+rolt003
+rolt030
+rolt032
+ATTRIBUTES
+c000 = rolt032.n32_ano_proceso, AUTONEXT, REVERSE, UPSHIFT,
+	INCLUDE = (1980 TO 2099);
+c0   = rolt032.n32_mes_proceso, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	INCLUDE = (01 TO 12);
+c001 = FORMONLY.tit_mes, NOENTRY, UPSHIFT, REVERSE;
+c1   = rolt032.n32_cod_liqrol, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = rolt003.n03_nombre, NOENTRY, REVERSE, UPSHIFT;
+c003 = FORMONLY.n32_cod_trab, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c004 = rolt030.n30_nombres, NOENTRY, UPSHIFT;
+c006 = FORMONLY.n32_cod_depto, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c007 = gent034.g34_nombre, NOENTRY, UPSHIFT;
+c    = FORMONLY.vm_agrupado, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+d    = FORMONLY.vm_imprimir, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge',
+	COMMENTS = 'Utilizar solo en caso de que se interrumpa la impresión.';
+e    = FORMONLY.vm_imprimir_emp, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge',
+	COMMENTS = 'Utilizar en caso de que se imprima sólo un recibo de pago.';
+f    = FORMONLY.vm_impr_total, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+END

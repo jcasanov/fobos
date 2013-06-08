@@ -21,7 +21,7 @@ DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
 CALL startlog('../logs/errores')
-CALL fgl_init4js()
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN          -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
@@ -33,8 +33,8 @@ LET vg_codcia   = arg_val(3)
 LET vg_proceso = 'cxpp100'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL control_master()
 
@@ -70,14 +70,8 @@ MENU 'OPCIONES'
 			CALL control_ingreso()
 		END IF
 		IF vm_num_rows = 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		  IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		  END IF
-			
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -90,14 +84,8 @@ MENU 'OPCIONES'
 	COMMAND KEY('C') 'Consultar' 'Consultar un registro. '
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		   END IF
-			
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -106,14 +94,8 @@ MENU 'OPCIONES'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		   END IF
-		
 		END IF
 		IF vm_row_current <= 1 THEN
                         HIDE OPTION 'Retroceder'
@@ -240,7 +222,7 @@ LET int_flag = 0
 CONSTRUCT BY NAME expr_sql ON p00_compania, p00_tipo_egr_gen, p00_aux_prov_mb,
 	p00_aux_prov_ma, p00_aux_ant_mb, p00_aux_ant_ma
 	ON KEY(F2)
-	IF infield(p00_compania) THEN
+	IF INFIELD(p00_compania) THEN
 		CALL fl_ayuda_companias_tesoreria()
 			RETURNING codc_aux, nomc_aux
 		LET int_flag = 0
@@ -249,7 +231,7 @@ CONSTRUCT BY NAME expr_sql ON p00_compania, p00_tipo_egr_gen, p00_aux_prov_mb,
 			DISPLAY nomc_aux TO tit_compania
 		END IF 
 	END IF
-	IF infield(p00_aux_prov_mb) THEN
+	IF INFIELD(p00_aux_prov_mb) THEN
 		CALL fl_ayuda_cuenta_contable(vg_codcia,6)
 			RETURNING cod_aux, nom_aux
 		LET int_flag = 0
@@ -258,7 +240,7 @@ CONSTRUCT BY NAME expr_sql ON p00_compania, p00_tipo_egr_gen, p00_aux_prov_mb,
 			DISPLAY nom_aux TO tit_prv_mb
 		END IF 
 	END IF
-	IF infield(p00_aux_prov_ma) THEN
+	IF INFIELD(p00_aux_prov_ma) THEN
 		CALL fl_ayuda_cuenta_contable(vg_codcia,6)
 			RETURNING cod_aux, nom_aux
 		LET int_flag = 0
@@ -267,7 +249,7 @@ CONSTRUCT BY NAME expr_sql ON p00_compania, p00_tipo_egr_gen, p00_aux_prov_mb,
 			DISPLAY nom_aux TO tit_prv_ma
 		END IF 
 	END IF
-	IF infield(p00_aux_ant_mb) THEN
+	IF INFIELD(p00_aux_ant_mb) THEN
 		CALL fl_ayuda_cuenta_contable(vg_codcia,6)
 			RETURNING cod_aux, nom_aux
 		LET int_flag = 0
@@ -276,7 +258,7 @@ CONSTRUCT BY NAME expr_sql ON p00_compania, p00_tipo_egr_gen, p00_aux_prov_mb,
 			DISPLAY nom_aux TO tit_ant_mb
 		END IF 
 	END IF
-	IF infield(p00_aux_ant_ma) THEN
+	IF INFIELD(p00_aux_ant_ma) THEN
 		CALL fl_ayuda_cuenta_contable(vg_codcia,6)
 			RETURNING cod_aux, nom_aux
 		LET int_flag = 0
@@ -356,7 +338,7 @@ INPUT BY NAME rm_cxp.p00_compania, rm_cxp.p00_tipo_egr_gen, rm_cxp.p00_mespro,
 			RETURN
 		END IF
 	ON KEY(F2)
-		IF infield(p00_compania) THEN
+		IF INFIELD(p00_compania) THEN
 			CALL fl_ayuda_compania()
 				RETURNING cod_cia_aux
 			LET int_flag = 0
@@ -368,7 +350,7 @@ INPUT BY NAME rm_cxp.p00_compania, rm_cxp.p00_tipo_egr_gen, rm_cxp.p00_mespro,
 				DISPLAY rg_cia.g01_razonsocial TO tit_compania
 			END IF 
 		END IF
-		IF infield(p00_aux_prov_mb) THEN
+		IF INFIELD(p00_aux_prov_mb) THEN
 			CALL fl_ayuda_cuenta_contable(vg_codcia,6)
 				RETURNING cod_aux, nom_aux
 			LET int_flag = 0
@@ -378,7 +360,7 @@ INPUT BY NAME rm_cxp.p00_compania, rm_cxp.p00_tipo_egr_gen, rm_cxp.p00_mespro,
 				DISPLAY nom_aux TO tit_prv_mb
 			END IF 
 		END IF
-		IF infield(p00_aux_prov_ma) THEN
+		IF INFIELD(p00_aux_prov_ma) THEN
 			CALL fl_ayuda_cuenta_contable(vg_codcia,6)
 				RETURNING cod_aux, nom_aux
 			LET int_flag = 0
@@ -388,7 +370,7 @@ INPUT BY NAME rm_cxp.p00_compania, rm_cxp.p00_tipo_egr_gen, rm_cxp.p00_mespro,
 				DISPLAY nom_aux TO tit_prv_ma
 			END IF 
 		END IF
-		IF infield(p00_aux_ant_mb) THEN
+		IF INFIELD(p00_aux_ant_mb) THEN
 			CALL fl_ayuda_cuenta_contable(vg_codcia,6)
 				RETURNING cod_aux, nom_aux
 			LET int_flag = 0
@@ -398,7 +380,7 @@ INPUT BY NAME rm_cxp.p00_compania, rm_cxp.p00_tipo_egr_gen, rm_cxp.p00_mespro,
 				DISPLAY nom_aux TO tit_ant_mb
 			END IF 
 		END IF
-		IF infield(p00_aux_ant_ma) THEN
+		IF INFIELD(p00_aux_ant_ma) THEN
 			CALL fl_ayuda_cuenta_contable(vg_codcia,6)
 				RETURNING cod_aux, nom_aux
 			LET int_flag = 0
@@ -685,7 +667,7 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION no_validar_parametros()
 
 CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
 IF rg_mod.g50_modulo IS NULL THEN

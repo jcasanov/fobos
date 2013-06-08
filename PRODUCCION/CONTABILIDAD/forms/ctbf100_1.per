@@ -1,4 +1,4 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
 
@@ -45,7 +45,7 @@ f = ctbt000.b00_modi_compma, REVERSE, UPSHIFT,
 	COMMENTS = 'Indicar si la compañía permite modificar comprobantes manuales';
 g = ctbt000.b00_modi_compau, REVERSE, UPSHIFT,
 	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S',
-	COMMENTS = 'Indicar si la compañía permite modificar comprobantes automáticos';
+	COMMENTS = 'Indicar si la compañía permite modificar comprobantes automaticos';
 c003 = ctbt000.b00_cuenta_uti, AUTONEXT, UPSHIFT, 
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 c004 = ctbt000.b00_cta_uti_ant, AUTONEXT, UPSHIFT,
@@ -66,4 +66,4 @@ c014 = ctbt000.b00_anopro, REVERSE, UPSHIFT;
 c015 = ctbt000.b00_fecha_cd, REVERSE, UPSHIFT, FORMAT = 'dd-mm-yyyy';
 c016 = ctbt000.b00_fecha_cm, REVERSE, UPSHIFT, FORMAT = 'dd-mm-yyyy';
 c017 = ctbt000.b00_fecha_ca, REVERSE, UPSHIFT, FORMAT = 'dd-mm-yyyy';
-END
+end

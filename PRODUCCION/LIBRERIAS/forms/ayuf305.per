@@ -1,44 +1,27 @@
-DATABASE formonly
+DATABASE aceros
 SCREEN
 {
+  MESES
 
-       Item: [c0             |c021                                      ]   
-
- [c000      |c01|c001                            |c002  |c003  |f|c004         ]
-[c015      |c09|c010                            |c011  |c012  |c|c013         ]
-[c015      |c09|c010                            |c011  |c012  |c|c013         ]
-[c015      |c09|c010                            |c011  |c012  |c|c013         ]
-[c015      |c09|c010                            |c011  |c012  |c|c013         ]
-[c015      |c09|c010                            |c011  |c012  |c|c013         ]
-[c015      |c09|c010                            |c011  |c012  |c|c013         ]
-[c015      |c09|c010                            |c011  |c012  |c|c013         ]
-[c015      |c09|c010                            |c011  |c012  |c|c013         ]
-[c015      |c09|c010                            |c011  |c012  |c|c013         ]
-                                                                [c014         ]
+  [c2 |c021       ]
+ [c1 |c011       ]
+ [c1 |c011       ]
+ [c1 |c011       ]
+ [c1 |c011       ]
+ [c1 |c011       ]
+ [c1 |c011       ]
+ [c1 |c011       ]
+ [c1 |c011       ]
+ [c1 |c011       ]
+ [c1 |c011       ]
+ [c1 |c011       ]
+ [c1 |c011       ]
 }
 ATTRIBUTES
-c000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-c01  = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F21';
-c001 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F16';
-c002 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F17';
-c003 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F18';
-f    = formonly.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F19';
-c004 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F20';
-
-c09  = formonly.vendedor, NOENTRY, UPSHIFT, OPTIONS='-nolist';
-c010 = formonly.cliente,  NOENTRY, UPSHIFT, OPTIONS='-nolist';
-c011 = formonly.proforma, NOENTRY,          OPTIONS='-nolist';
-c012 = formonly.preventa, NOENTRY,          OPTIONS='-nolist';
-c    = formonly.facturado,NOENTRY, UPSHIFT, OPTIONS='-nolist';
-c013 = formonly.reserva,  NOENTRY,          OPTIONS='-nolist';
-c015 = formonly.fecha  ,  NOENTRY,          OPTIONS='-nolist', 
-		FORMAT='dd-mm-yyyy';
-
-c014 = formonly.tot_reserva, NOENTRY;
-
-c0   = formonly.item, NOENTRY, REVERSE, UPSHIFT;
-c021 = formonly.item_desc, NOENTRY, REVERSE, UPSHIFT;
+c2   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c021 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c1   = FORMONLY.tit_mes, NOENTRY, UPSHIFT;
+c011 = FORMONLY.tit_mes_des, NOENTRY, UPSHIFT;
 END
 INSTRUCTIONS
-DELIMITERS '||'
-SCREEN RECORD r_reserva[9] (fecha, vendedor, cliente, proforma, preventa, facturado, reserva)
+SCREEN RECORD r_meses[12] (tit_mes, tit_mes_des)

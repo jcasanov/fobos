@@ -15,27 +15,29 @@ DEFINE rm_ccaj		RECORD LIKE cajt010.*
 DEFINE rm_csol		RECORD LIKE cxct024.*
 DEFINE rm_docf		RECORD LIKE cxct021.*
 
+
+
 MAIN
 	
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/cajp205.error')
-CALL fgl_init4js()
+CALL startlog('../logs/cajp205.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
-IF num_args() <> 4 THEN          -- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
+IF num_args() <> 4 THEN          -- Validar # parametros correcto
+	CALL fl_mostrar_mensaje('Número de parametros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
-LET vg_base     = arg_val(1)
-LET vg_codcia   = arg_val(2)
-LET vg_codloc   = arg_val(3)
-LET vm_numsol = arg_val(4)
-LET vg_modulo   = 'CG'
+LET vg_base    = arg_val(1)
+LET vg_modulo  = 'CG'
+LET vg_codcia  = arg_val(2)
+LET vg_codloc  = arg_val(3)
+LET vm_numsol  = arg_val(4)
 LET vg_proceso = 'cajp205'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL validar_parametros()
+CALL fl_validar_parametros()
 CALL control_master_caja()
 
 END MAIN
@@ -59,15 +61,15 @@ UPDATE cajt010 SET j10_estado = 'P',
 		   j10_fecha_pro    = CURRENT
 	WHERE CURRENT OF q_ccaj
 COMMIT WORK
-CALL fl_control_master_contab_ingresos_caja(vg_codcia, vg_codloc, rm_ccaj.j10_tipo_fuente, rm_ccaj.j10_num_fuente)
+CALL fl_control_master_contab_ingresos_caja(vg_codcia, vg_codloc,
+						rm_ccaj.j10_tipo_fuente,
+						rm_ccaj.j10_num_fuente)
 
 END FUNCTION
 
 
 
 FUNCTION valida_num_solicitud()
-
-DEFINE r_z01		RECORD LIKE cxct001.*
 
 WHENEVER ERROR CONTINUE
 SET LOCK MODE TO WAIT 1
@@ -82,17 +84,19 @@ OPEN q_ccaj
 FETCH q_ccaj INTO rm_ccaj.*
 IF status = NOTFOUND THEN
 	ROLLBACK WORK
-	CALL fgl_winmessage(vg_producto, 'No existe solicitud en Caja', 'exclamation')
+	--CALL fgl_winmessage(vg_producto,'No existe solicitud en Caja', 'exclamation')
+	CALL fl_mostrar_mensaje('No existe solicitud en Caja.','exclamation')
 	EXIT PROGRAM
 END IF
 IF status < 0 THEN
 	ROLLBACK WORK
-	CALL fgl_winmessage(vg_producto, 'Registro de Caja está bloqueado por otro usuario', 'exclamation')
+	CALL fl_mensaje_bloqueo_otro_usuario()
 	EXIT PROGRAM
 END IF
 IF rm_ccaj.j10_estado <> "*" THEN
 	ROLLBACK WORK
-	CALL fgl_winmessage(vg_producto, 'Registro en Caja no tiene estado *', 'exclamation')
+	--CALL fgl_winmessage(vg_producto,'Registro en Caja no tiene estado *', 'exclamation')
+	CALL fl_mostrar_mensaje('Registro en Caja no tiene estado *','exclamation')
 	EXIT PROGRAM
 END IF
 DECLARE q_nsol CURSOR FOR
@@ -105,32 +109,26 @@ OPEN q_nsol
 FETCH q_nsol INTO rm_csol.*
 IF status = NOTFOUND THEN
 	ROLLBACK WORK
-	CALL fgl_winmessage(vg_producto, 'No existe solicitud cobro', 'exclamation')
+	--CALL fgl_winmessage(vg_producto,'No existe solicitud cobro', 'exclamation')
+	CALL fl_mostrar_mensaje('No existe solicitud cobro.','exclamation')
 	EXIT PROGRAM
 END IF
 IF status < 0 THEN
 	ROLLBACK WORK
-	CALL fgl_winmessage(vg_producto, 'Solicitud cobro está bloqueada por otro usuario', 'exclamation')
+	CALL fl_mensaje_bloqueo_otro_usuario()
 	EXIT PROGRAM
 END IF
-WHENEVER ERROR STOP
 IF rm_csol.z24_tipo <> 'A' THEN
 	ROLLBACK WORK
-	CALL fgl_winmessage(vg_producto, 'Solicitud cobro no es por anticipo', 'exclamation')
+	CALL fl_mostrar_mensaje('Solicitud cobro no es por anticipo.','exclamation')
 	EXIT PROGRAM
 END IF
 IF rm_csol.z24_estado <> 'A' THEN
 	ROLLBACK WORK
-	CALL fgl_winmessage(vg_producto, 'Solicitud cobro no está activa', 'exclamation')
+	CALL fl_mostrar_mensaje('Solicitud cobro no esta activa.','exclamation')
 	EXIT PROGRAM
 END IF
-
-INITIALIZE r_z01.* TO NULL
-CALL fl_lee_cliente_general(rm_csol.z24_codcli) RETURNING r_z01.*
-IF fl_validar_cedruc_dig_ver(r_z01.z01_tipo_doc_id, r_z01.z01_num_doc_id) = 0 THEN
-	ROLLBACK WORK
-	EXIT PROGRAM
-END IF
+WHENEVER ERROR STOP
 
 END FUNCTION
 
@@ -166,6 +164,7 @@ LET rm_docf.z21_referencia 	= 'SOLICITUD ANTICIPO: ', rm_csol.z24_numero_sol
 LET rm_docf.z21_fecha_emi 	= TODAY
 LET rm_docf.z21_moneda 		= rm_csol.z24_moneda
 LET rm_docf.z21_paridad 	= rm_csol.z24_paridad
+LET rm_docf.z21_val_impto	= 0
 LET rm_docf.z21_valor		= rm_csol.z24_total_cap
 LET rm_docf.z21_saldo 		= rm_csol.z24_total_cap
 LET rm_docf.z21_subtipo		= rm_csol.z24_subtipo
@@ -173,38 +172,5 @@ LET rm_docf.z21_origen 		= 'A'
 LET rm_docf.z21_usuario 	= vg_usuario
 LET rm_docf.z21_fecing 		= CURRENT
 INSERT INTO cxct021 VALUES (rm_docf.*)
-
-END FUNCTION
-
-
-
-FUNCTION validar_parametros()
-
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
 
 END FUNCTION

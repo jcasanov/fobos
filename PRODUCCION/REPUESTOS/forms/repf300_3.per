@@ -1,5 +1,5 @@
-database diteca
-screen 
+DATABASE aceros
+SCREEN 
 {
 
      Item: [c001           ]
@@ -14,21 +14,21 @@ screen
  [a0|c003               |c004  |c005      ]
 }
 end
-attributes
-c001 = formonly.item,   NOENTRY, REVERSE;
-c002 = formonly.n_item, NOENTRY, REVERSE;
+ATTRIBUTES
+c001 = FORMONLY.item,   NOENTRY, REVERSE;
+c002 = FORMONLY.n_item, NOENTRY, REVERSE;
 
-a0   = formonly.bodega,   NOENTRY, OPTIONS='-nolist';
-c003 = formonly.n_bodega, NOENTRY, OPTIONS='-nolist';
-c004 = formonly.stock,    NOENTRY, OPTIONS='-nolist';
-c005 = formonly.ubicacion, NOENTRY, OPTIONS='-nolist';
+a0   = FORMONLY.bodega,   NOENTRY, OPTIONS='-nolist';
+c003 = FORMONLY.n_bodega, NOENTRY, OPTIONS='-nolist';
+c004 = FORMONLY.stock,    NOENTRY, OPTIONS='-nolist';
+c005 = FORMONLY.ubicacion, NOENTRY, OPTIONS='-nolist';
 
-lbl1 = formonly.bt_bodega, NOENTRY, WIDGET='BUTTON', CONFIG='F20';
-lbl2 = formonly.bt_stock,  NOENTRY, WIDGET='BUTTON', CONFIG='F21';
-lbl3 = formonly.bt_ubicacion, NOENTRY, WIDGET='BUTTON', CONFIG='F22';
+lbl1 = FORMONLY.bt_bodega, NOENTRY, WIDGET='BUTTON', CONFIG='F20';
+lbl2 = FORMONLY.bt_stock,  NOENTRY, WIDGET='BUTTON', CONFIG='F21';
+lbl3 = FORMONLY.bt_ubicacion, NOENTRY, WIDGET='BUTTON', CONFIG='F22';
 end
 
-instructions
-screen record r_detalle[6] (bodega, n_bodega, stock, ubicacion)
+INSTRUCTIONS
+SCREEN RECORD r_detalle[6] (bodega, n_bodega, stock, ubicacion)
 
 KEYS F8 = 'Ubicación'

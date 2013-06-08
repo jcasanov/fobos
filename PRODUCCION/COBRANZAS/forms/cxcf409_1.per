@@ -1,23 +1,28 @@
-DATABASE formonly
+DATABASE FORMONLY
 SCREEN
 {
-   Código Cliente: [c001 ] [c002                                    ]
-  Area de Negocio: [c2]    [c003              ]
-           Moneda: [c3]    [c004           ]
 
-       	     Tipo: [c005          ]    
+           Localidad: [c051 ] [c052                ]
 
+      Código Cliente: [c001 ] [c002                                    ]
 
+              Moneda: [c3]    [c004           ]
+
+     	        Tipo: [c005          ]   Qué Documentos: [c050         ]
 
 }
 ATTRIBUTES
-c001 = formonly.codcli TYPE INTEGER, WIDGET = 'FIELD_BMP', 
-       CONFIG = 'lista.bmp F2', REVERSE;
-c002 = formonly.nomcli, NOENTRY;
-c2   = formonly.areaneg,   WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
-c003 = formonly.d_areaneg, NOENTRY;
-c3   = formonly.moneda TYPE CHAR NOT NULL, WIDGET = 'FIELD_BMP', 
-       CONFIG = 'lista.bmp F2', UPSHIFT, AUTONEXT, REVERSE;
-c004 = formonly.tit_mon, NOENTRY;
-c005 = formonly.tipo, WIDGET = 'RADIO', 
-       CONFIG = 'R Resumido  D Detallado';
+c001 = FORMONLY.codcli TYPE INTEGER NOT NULL, REVERSE, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = FORMONLY.nomcli, UPSHIFT, REVERSE, NOENTRY;
+c3   = FORMONLY.moneda TYPE CHAR NOT NULL, UPSHIFT, AUTONEXT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c051 = FORMONLY.localidad, UPSHIFT, AUTONEXT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c052 = FORMONLY.tit_localidad, UPSHIFT, NOENTRY;
+c004 = FORMONLY.tit_mon, UPSHIFT, REVERSE, NOENTRY;
+c005 = FORMONLY.tipo TYPE CHAR NOT NULL, REVERSE, UPSHIFT,
+	WIDGET = 'RADIO', CONFIG = 'R Resumido  D Detallado',
+	COMMENTS = 'Escoja el tipo de impresión del Estado de Cuenta.';
+c050 = FORMONLY.flag_saldo, WIDGET = 'RADIO', CONFIG = 'S "Con Saldo" T Todos';
+END

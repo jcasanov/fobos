@@ -1,0 +1,42 @@
+DATABASE aceros
+SCREEN
+{
+  No.Or.    Nombre del Preveedor       Fecha   C Pe C Re       Total       C  
+ [c0    |c1                        |c2        |c3  |c4  |c5              ][c]
+ [c0    |c1                        |c2        |c3  |c4  |c5              ][c]
+ [c0    |c1                        |c2        |c3  |c4  |c5              ][c]
+ [c0    |c1                        |c2        |c3  |c4  |c5              ][c]
+ [c0    |c1                        |c2        |c3  |c4  |c5              ][c]
+ [c0    |c1                        |c2        |c3  |c4  |c5              ][c]
+ [c0    |c1                        |c2        |c3  |c4  |c5              ][c]
+ [c0    |c1                        |c2        |c3  |c4  |c5              ][c]
+ [c0    |c1                        |c2        |c3  |c4  |c5              ][c]
+ [c0    |c1                        |c2        |c3  |c4  |c5              ][c]
+ [c0    |c1                        |c2        |c3  |c4  |c5              ][c]
+ [c0    |c1                        |c2        |c3  |c4  |c5              ][c]
+ [c0    |c1                        |c2        |c3  |c4  |c5              ][c]
+ [c0    |c1                        |c2        |c3  |c4  |c5              ][c]
+ [c0    |c1                        |c2        |c3  |c4  |c5              ][c]
+ [c0    |c1                        |c2        |c3  |c4  |c5              ][c]
+
+}
+TABLES ordt010, cxpt001
+ATTRIBUTES
+
+c0  = ordt010.c10_numero_oc,   REVERSE, NOENTRY;
+c1  = cxpt001.p01_nomprov,     REVERSE, NOENTRY;
+c2  = FORMONLY.vm_fecha        TYPE DATE, REVERSE, NOENTRY, 
+			       FORMAT = 'dd-mm-yy';
+c3  = FORMONLY.cant_ped,       NOENTRY, REVERSE;
+c4  = FORMONLY.cant_rec,       NOENTRY, REVERSE;
+c5  = ordt010.c10_tot_compra,  REVERSE, NOENTRY,
+			       FORMAT = '#,###,###,##&.##';
+c   = FORMONLY.cerrar TYPE CHAR, REVERSE, DEFAULT = 'P',
+	INCLUDE = ('C', 'P'), 
+	COMMENTS = 'Marque las ordenes de compra que desee cerrar. ';
+
+INSTRUCTIONS 
+DELIMITERS '||'
+SCREEN RECORD r_detalle[16] (c10_numero_oc,  p01_nomprov, vm_fecha,
+			     cant_ped,       cant_rec,    c10_tot_compra, 
+			     cerrar)

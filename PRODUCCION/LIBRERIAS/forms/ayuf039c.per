@@ -1,0 +1,28 @@
+DATABASE aceros
+SCREEN
+{
+  TRABAJADORES
+ -------------------------------------------------------
+  Cod.     Nombres                                    E
+ -------------------------------------------------------
+ [c01   ] [c002                                    ] [c]
+ [c01   ] [c002                                    ] [c]
+ [c01   ] [c002                                    ] [c]
+ [c01   ] [c002                                    ] [c]
+ [c01   ] [c002                                    ] [c]
+ [c01   ] [c002                                    ] [c]
+ [c01   ] [c002                                    ] [c]
+ [c01   ] [c002                                    ] [c]
+ [c01   ] [c002                                    ] [c]
+ [c01   ] [c002                                    ] [c]
+}
+TABLES
+rolt030
+ATTRIBUTES
+c01  = n30_cod_trab, REVERSE;
+c002 = n30_nombres, REVERSE;
+c    = n30_estado, REVERSE, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_trab[10](n30_cod_trab, n30_nombres, n30_estado)

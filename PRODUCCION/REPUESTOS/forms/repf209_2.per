@@ -1,5 +1,5 @@
-DATABASE diteca
-screen
+DATABASE aceros
+SCREEN
 {
 		   	<<<< OTROS DATOS >>>>		
   Pedido Cliente: [g0        ] 	       Teléfono:[c         ]
@@ -15,13 +15,13 @@ end
 TABLES
 	rept023 -- CABECERA
 ATTRIBUTES
-g1  = formonly.cupo_credito TYPE DECIMAL(12,2), REVERSE, 
+g1  = FORMONLY.cupo_credito TYPE DECIMAL(12,2), REVERSE, 
 	FORMAT = '#,###,###,##&.##', NOENTRY;
-g5  = formonly.saldo_credito TYPE DECIMAL(12,2), REVERSE, 
+g5  = FORMONLY.saldo_credito TYPE DECIMAL(12,2), REVERSE, 
 	FORMAT = '#,###,###,##&.##', NOENTRY;
 g2  = rept023.r23_paridad, REVERSE, NOENTRY;
 g3  = rept023.r23_referencia, UPSHIFT;
-a   = rept023.r23_ord_compra, UPSHIFT, REVERSE;
+a   = rept023.r23_ord_compra, UPSHIFT;
 c   = rept023.r23_telcli, REVERSE, UPSHIFT,
 	COMMENT = 'Teléfono del Cliente. ';
 g0  = rept023.r23_ped_cliente, UPSHIFT;

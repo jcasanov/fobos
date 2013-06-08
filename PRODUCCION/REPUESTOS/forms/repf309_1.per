@@ -1,31 +1,37 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
-
-  Tipo Transacción: [c000  ] [c001                ]
-     Fecha Inicial: [c002      ]                  Fecha Final: [c003      ]
-
- [l1        |l2|l3             |l4                        |l5|l6              ]
-[c010      |c0|a4             |c013                      |a6|c016            ]
-[c010      |c0|a4             |c013                      |a6|c016            ]
-[c010      |c0|a4             |c013                      |a6|c016            ]
-[c010      |c0|a4             |c013                      |a6|c016            ]
-[c010      |c0|a4             |c013                      |a6|c016            ]
-[c010      |c0|a4             |c013                      |a6|c016            ]
-[c010      |c0|a4             |c013                      |a6|c016            ]
-[c010      |c0|a4             |c013                      |a6|c016            ]
-[c010      |c0|a4             |c013                      |a6|c016            ]
-[c010      |c0|a4             |c013                      |a6|c016            ]
-[c010      |c0|a4             |c013                      |a6|c016            ]
-[c010      |c0|a4             |c013                      |a6|c016            ]
-[c010      |c0|a4             |c013                      |a6|c016            ]
-[c010      |c0|a4             |c013                      |a6|c016            ]
+            Moneda: [a0] [c000                ]
+  Tipo Transacción: [a1] [c001                ]
+     Fecha Inicial: [c002      ]    Fecha Final: [c003      ]
+                                                           [c050 ] de [c051 ]
+ [l1        |l2|l3           |l4                         |l5|l6              ]
+[c010      |c0|a4           |c013                       |a6|c016            ]
+[c010      |c0|a4           |c013                       |a6|c016            ]
+[c010      |c0|a4           |c013                       |a6|c016            ]
+[c010      |c0|a4           |c013                       |a6|c016            ]
+[c010      |c0|a4           |c013                       |a6|c016            ]
+[c010      |c0|a4           |c013                       |a6|c016            ]
+[c010      |c0|a4           |c013                       |a6|c016            ]
+[c010      |c0|a4           |c013                       |a6|c016            ]
+[c010      |c0|a4           |c013                       |a6|c016            ]
+[c010      |c0|a4           |c013                       |a6|c016            ]
+[c010      |c0|a4           |c013                       |a6|c016            ]
+[c010      |c0|a4           |c013                       |a6|c016            ]
+[c010      |c0|a4           |c013                       |a6|c016            ]
+[c010      |c0|a4           |c013                       |a6|c016            ]
+              [c052                ]                Total: [c060            ]
 
 }
+TABLES
+gent021
 ATTRIBUTES
-c000 = formonly.cod_tran, AUTONEXT, UPSHIFT, WIDGET='FIELD_BMP', 
-	CONFIG='lista.bmp F2';
-c001 = formonly.n_cod_tran, NOENTRY;
+a0   = FORMONLY.r19_moneda, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c000 = FORMONLY.tit_moneda, NOENTRY, REVERSE, UPSHIFT;
+a1   = FORMONLY.cod_tran, AUTONEXT, UPSHIFT,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c001 = FORMONLY.n_cod_tran, NOENTRY;
 c002 = FORMONLY.fecha_ini TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
 	FORMAT = 'dd-mm-yyyy';
 c003 = FORMONLY.fecha_fin TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
@@ -38,18 +44,26 @@ l4   = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
 l5   = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
 l6   = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
 
-c010 = formonly.fecha_tran TYPE DATE, NOENTRY, FORMAT = 'dd-mm-yyyy', 
+c010 = FORMONLY.fecha_tran TYPE DATE, NOENTRY, FORMAT = 'dd-mm-yyyy', 
        OPTIONS = '-nolist';
-c0   = formonly.tipo_tran, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
-a4   = formonly.num_tran, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
-c013 = formonly.referencia,  NOENTRY, UPSHIFT, OPTIONS = '-nolist';
-a6   = formonly.moneda, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
-c016 = formonly.tot_neto, NOENTRY, UPSHIFT, FORMAT = '#,###,###,##&.##',
+c0   = FORMONLY.tipo_tran, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+a4   = FORMONLY.num_tran, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c013 = FORMONLY.referencia,  NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+a6   = FORMONLY.moneda, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c016 = FORMONLY.tot_neto, NOENTRY, UPSHIFT, FORMAT = '-,---,---,--&.##',
 	OPTIONS = '-nolist';
-END
-INSTRUCTIONS
-SCREEN RECORD rm_det[14] (fecha_tran, tipo_tran, num_tran, referencia,
-			  moneda, tot_neto)
+c060 = FORMONLY.vm_total TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '-,---,---,--&.##';
 
-keys
+c050 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c051 = FORMONLY.vm_num_det, NOENTRY, REVERSE, UPSHIFT;
+c052 = gent021.g21_nombre, NOENTRY, REVERSE, UPSHIFT;
+END
+KEYS
 F6 = 'Ver Comprobante'
+F7 = 'Imprimir Comp.'
+F8 = 'Imprimir Listado'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_det[14] (fecha_tran, tipo_tran, num_tran, referencia, moneda,
+				tot_neto)

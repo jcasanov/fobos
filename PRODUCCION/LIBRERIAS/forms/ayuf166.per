@@ -1,0 +1,32 @@
+DATABASE aceros
+SCREEN
+{
+
+ TIPOS DE FACTURA
+ [f000|f001                                    |b]
+[f010|f011                                    |c]
+[f010|f011                                    |c]
+[f010|f011                                    |c]
+[f010|f011                                    |c]
+[f010|f011                                    |c]
+[f010|f011                                    |c]
+[f010|f011                                    |c]
+[f010|f011                                    |c]
+[f010|f011                                    |c]
+[f010|f011                                    |c]
+
+}
+TABLES
+ordt001
+ATTRIBUTES
+f000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+f001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b    = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+
+f010 = ordt001.c01_tipo_orden, NOENTRY, UPSHIFT;
+f011 = ordt001.c01_nombre, NOENTRY, UPSHIFT;
+c    = ordt001.c01_estado, NOENTRY, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_fact[10] (c01_tipo_orden, c01_nombre, c01_estado)

@@ -1,16 +1,18 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
 
                                                       Estado: [c] [c0a0     ]
+
                   Compañía: [c000] [c007                                    ]
 
-      Crédito Automático ?: [b]
+      Crédito Automatico ?: [b]
                        Bloquear crédito a clientes con saldos vencidos ?: [d]
 
-              Crédito Días: [c001   ]
-             Tasa por Mora: [c002   ] %
-          Cobra por Mora ?: [a]
+              Crédito Días: [c001   ]              Número de Pagos: [c012 ]
+             Tasa por Mora: [c002   ] %        Maximo No. de Pagos: [c013 ]
+          Cobra por Mora ?: [a]                    Interés Crédito: [c014 ] %
+           Días entre Pago: [c015 ]         Maximo días entre Pago: [c016 ]
 
             Mes de Proceso: [c020]    Año de Proceso: [c021]
 
@@ -21,21 +23,22 @@ SCREEN
 }
 TABLES
 cxct000
+cxct061
 ATTRIBUTES
 c000 = cxct000.z00_compania, AUTONEXT, REVERSE,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
-        COMMENTS = 'Indicar que compañía serán config. para cuentas por cobrar';
+        COMMENTS = 'Indicar que compañía sera config. para cuentas por cobrar';
 b    = cxct000.z00_credit_auto, REVERSE, UPSHIFT,
 	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S';
 d    = cxct000.z00_bloq_vencido, REVERSE, UPSHIFT,
 	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S';
 c001 = cxct000.z00_credit_dias, AUTONEXT, REVERSE, INCLUDE = (0 TO 360),
-	COMMENTS = 'Cero si se especifica Crédito Automático No';
+	COMMENTS = 'Cero si se especifica Crédito Automatico No';
 c002 = cxct000.z00_tasa_mora, AUTONEXT, REVERSE, FORMAT = '##&.##',
 	INCLUDE = (0 TO 999.99), COMMENTS = 'Interés que se calcula por Mora';
 a    = cxct000.z00_cobra_mora, REVERSE, UPSHIFT,
 	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S',
-	COMMENTS = 'Especifique si se calculará interés por mora al momento del pago del documento';
+	COMMENTS = 'Especifique si se calculara interés por mora al momento del pago del documento';
 c003 = cxct000.z00_aux_clte_mb, AUTONEXT, REVERSE, UPSHIFT,
         WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
         COMMENTS = 'Indicar auxiliar contable de cliente para ctas. por cobrar';
@@ -55,4 +58,17 @@ c    = FORMONLY.tit_est, NOENTRY, REVERSE, UPSHIFT;
 c0a0 = FORMONLY.tit_estado_cob, NOENTRY, UPSHIFT;
 c020 = cxct000.z00_mespro, NOENTRY;
 c021 = cxct000.z00_anopro, NOENTRY;
+
+c012 = cxct061.z61_num_pagos, AUTONEXT, UPSHIFT, REVERSE, INCLUDE = (1 TO 300),
+	COMMENTS = 'No. de cuotas para el crédito.';
+c013 = cxct061.z61_max_pagos, AUTONEXT, UPSHIFT, REVERSE, INCLUDE = (1 TO 300),
+	COMMENTS = 'Maximo No. de cuotas para el crédito.';
+c014 = cxct061.z61_intereses, AUTONEXT, UPSHIFT, REVERSE,INCLUDE = (0 TO 99.99),
+	COMMENTS = 'Interés que se puede cargar en el crédito.';
+c015 = cxct061.z61_dia_entre_pago, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = (1 TO 360),
+	COMMENTS = 'No. de días entre las cuotas del crédito.';
+c016 = cxct061.z61_max_entre_pago, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = (1 TO 360),
+	COMMENTS = 'Maximo No. de días entre las cuotas del crédito.';
 END

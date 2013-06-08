@@ -1,0 +1,33 @@
+DATABASE aceros
+SCREEN
+{
+ ESTADOS ACTIVOS FIJOS
+
+                     [c0] de [c1]
+ [b|c000                         ]
+[c|c010                         ]
+[c|c010                         ]
+[c|c010                         ]
+[c|c010                         ]
+[c|c010                         ]
+[c|c010                         ]
+[c|c010                         ]
+[c|c010                         ]
+[c|c010                         ]
+[c|c010                         ]
+
+}
+TABLES
+actt006
+ATTRIBUTES
+b    = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c000 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+
+c    = actt006.a06_estado, NOENTRY, UPSHIFT, REVERSE;
+c010 = actt006.a06_descripcion, NOENTRY, UPSHIFT, REVERSE;
+
+c0   = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c1   = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+END
+INSTRUCTIONS
+SCREEN RECORD rh_estado[10] (a06_estado, a06_descripcion)

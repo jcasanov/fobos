@@ -1,0 +1,34 @@
+DATABASE aceros
+SCREEN
+{
+   Item              Descripción             Cantidad   Pedidos   Fec. Lle.
+ [c000  |c001                               |c002     |c003      |c004      ]
+ [c000  |c001                               |c002     |c003      |c004      ]
+ [c000  |c001                               |c002     |c003      |c004      ]
+ [c000  |c001                               |c002     |c003      |c004      ]
+ [c000  |c001                               |c002     |c003      |c004      ]
+ [c000  |c001                               |c002     |c003      |c004      ]
+ [c000  |c001                               |c002     |c003      |c004      ]
+ [c000  |c001                               |c002     |c003      |c004      ]
+ [c000  |c001                               |c002     |c003      |c004      ]
+ [c000  |c001                               |c002     |c003      |c004      ]
+ [c000  |c001                               |c002     |c003      |c004      ]
+ [c000  |c001                               |c002     |c003      |c004      ]
+ [c000  |c001                               |c002     |c003      |c004      ]
+ [c000  |c001                               |c002     |c003      |c004      ]
+ [c000  |c001                               |c002     |c003      |c004      ]
+ [c000  |c001                               |c002     |c003      |c004      ]
+ [c000  |c001                               |c002     |c003      |c004      ]
+}
+TABLES rept016, rept017
+ATTRIBUTES
+c000 = rept017.r17_item, NOENTRY, UPSHIFT;
+c001 = FORMONLY.tit_descripcion, NOENTRY, UPSHIFT;
+c002 = FORMONLY.tit_cantidad TYPE DECIMAL, NOENTRY, FORMAT = '#####&.##';
+c003 = rept017.r17_pedido, NOENTRY, UPSHIFT;
+c004 = rept016.r16_fec_llegada, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_repd[17] (r17_item, tit_descripcion, tit_cantidad, r17_pedido,
+			r16_fec_llegada)

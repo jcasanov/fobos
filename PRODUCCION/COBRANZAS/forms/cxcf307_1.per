@@ -1,11 +1,12 @@
-DATABASE formonly
+DATABASE FORMONLY
 SCREEN
 {
-          Moneda: [c1]   [c002            ]  Tipo Vencimiento: [c009          ] 
- Area de Negocio: [c03]  [c004            ]       
-    Tipo Cliente: [c05]  [c006            ]
-    Tipo Cartera: [c07]  [c008            ]        Rango Dias: [c10] a [c011]
-
+          Moneda: [c1]  [c002            ]  Tipo Vencimiento: [c009          ]
+ Area de Negocio: [c03] [c004            ]       
+    Tipo Cliente: [c05] [c006            ]
+    Tipo Cartera: [c07] [c008            ]          Rango Dias: [c10] a [c011]
+       Localidad: [c51] [c052            ]   Código de Cliente: [c053  ]
+[c054 ] de [c055 ]
  [c020      |y1|c021            |c022              |c023      |c024           ]
 [c030      |x2|c031            |c032              |c033      |c034           ] 
 [c030      |x2|c031            |c032              |c033      |c034           ] 
@@ -18,45 +19,56 @@ SCREEN
 [c030      |x2|c031            |c032              |c033      |c034           ] 
 [c030      |x2|c031            |c032              |c033      |c034           ] 
 [c030      |x2|c031            |c032              |c033      |c034           ] 
- Estado: [c035                ]                              [c040           ]
+[c030      |x2|c031            |c032              |c033      |c034           ] 
+  Estado: [c035                ]                  Total ==>  [c040           ]
 }   
 ATTRIBUTES
-c1   = formonly.moneda TYPE CHAR NOT NULL, UPSHIFT, AUTONEXT, REQUIRED,
+c51  = FORMONLY.localidad, UPSHIFT, AUTONEXT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c052 = FORMONLY.tit_localidad, UPSHIFT, NOENTRY;
+c1   = FORMONLY.moneda TYPE CHAR NOT NULL, UPSHIFT, AUTONEXT, REQUIRED,
 	WIDGET = "FIELD_BMP", CONFIG = "lista.bmp F2", REVERSE;
-c002 = formonly.tit_mon, NOENTRY;
-c03  = formonly.area_n TYPE SMALLINT, AUTONEXT, WIDGET = "FIELD_BMP", 
+c002 = FORMONLY.tit_mon, NOENTRY;
+c03  = FORMONLY.area_n TYPE SMALLINT, AUTONEXT, WIDGET = "FIELD_BMP", 
        CONFIG="lista.bmp F2", COLOR = RED BLINK WHERE a = 0;
-c004 = formonly.tit_area, NOENTRY;
-c05  = formonly.tipcli TYPE SMALLINT, WIDGET = 'FIELD_BMP', 
+c004 = FORMONLY.tit_area, NOENTRY;
+c05  = FORMONLY.tipcli TYPE SMALLINT, WIDGET = 'FIELD_BMP', 
        CONFIG = 'lista.bmp F2';
-c006 = formonly.tit_tipcli, NOENTRY;
-c07  = formonly.tipcar TYPE SMALLINT, WIDGET = 'FIELD_BMP', 
+c006 = FORMONLY.tit_tipcli, NOENTRY;
+c07  = FORMONLY.tipcar TYPE SMALLINT, WIDGET = 'FIELD_BMP', 
        CONFIG = 'lista.bmp F2';
-c008 = formonly.tit_tipcar, NOENTRY;
-c009 = formonly.ind_venc TYPE CHAR, UPSHIFT, AUTONEXT, REVERSE,
+c008 = FORMONLY.tit_tipcar, NOENTRY;
+c009 = FORMONLY.ind_venc TYPE CHAR, UPSHIFT, AUTONEXT, REVERSE,
 	WIDGET = 'RADIO', CONFIG = 'V Vencidos P "Por Vencer" T Todos';
-c10  = formonly.dias_i TYPE SMALLINT, 
+c10  = FORMONLY.dias_i TYPE SMALLINT, 
        COMMENT = 'Rango días para cartera por vencer o vencida';
-c011 = formonly.dias_f TYPE SMALLINT,
+c011 = FORMONLY.dias_f TYPE SMALLINT,
        COMMENT = 'Rango días para cartera por vencer o vencida';
-c020 = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-y1   = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-c021 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
-c022 = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
-c023 = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
-c024 = formonly.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
-c030 = formonly.tit_arean;
-x2   = formonly.cladoc;
-c031 = formonly.numdoc;
-c032 = formonly.nomcli;
-c033 = formonly.fecha TYPE DATE, FORMAT = "dd-mm-yyyy";
-c034 = formonly.valor      TYPE DECIMAL(12,2), FORMAT =  '####,###,##&.##';
-c035 = formonly.tit_venc, REVERSE;
-c040 = formonly.tot_doc    TYPE DECIMAL(14,2), FORMAT =  '####,###,##&.##';
+c053 = FORMONLY.codcli, UPSHIFT, AUTONEXT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+
+c020 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+y1   = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c021 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c022 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c023 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c024 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+c030 = FORMONLY.tit_arean;
+x2   = FORMONLY.cladoc;
+c031 = FORMONLY.numdoc;
+c032 = FORMONLY.nomcli;
+c033 = FORMONLY.fecha TYPE DATE, FORMAT = "dd-mm-yyyy";
+c034 = FORMONLY.valor      TYPE DECIMAL(12,2), FORMAT =  '####,###,##&.##';
+c035 = FORMONLY.tit_venc, REVERSE;
+c040 = FORMONLY.tot_doc    TYPE DECIMAL(14,2), FORMAT =  '####,###,##&.##';
+
+c054 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c055 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
 INSTRUCTIONS
-DELIMITERS '  '
-SCREEN RECORD rm_doc[11] (formonly.tit_arean, formonly.cladoc, formonly.numdoc,
-			 formonly.nomcli, formonly.fecha, formonly.valor)
+DELIMITERS '||'
+SCREEN RECORD rm_doc[12] (FORMONLY.tit_arean, FORMONLY.cladoc, FORMONLY.numdoc,
+			 FORMONLY.nomcli, FORMONLY.fecha, FORMONLY.valor)
 
 KEYS
 "F5"="Ver Factura"

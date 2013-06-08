@@ -1,35 +1,45 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
 DETALLE MANO DE OBRA DE LA ORDEN: [c001   ]
 
- [c020                                           |c021  |c022  |c023         ]
-[c002                                           |c003  |c004  |c005         ] 
-[c002                                           |c003  |c004  |c005         ] 
-[c002                                           |c003  |c004  |c005         ] 
-[c002                                           |c003  |c004  |c005         ] 
-[c002                                           |c003  |c004  |c005         ] 
-[c002                                           |c003  |c004  |c005         ] 
-[c002                                           |c003  |c004  |c005         ] 
-[c002                                           |c003  |c004  |c005         ] 
- Mecánico: [c010                          ]                   [c011         ] 
-[c012                                                        ]
+ [c020                                         |c021|c022|c023 |c024         ]
+[c002                                         |c003|c004|c005 |c006         ] 
+[c002                                         |c003|c004|c005 |c006         ] 
+[c002                                         |c003|c004|c005 |c006         ] 
+[c002                                         |c003|c004|c005 |c006         ] 
+[c002                                         |c003|c004|c005 |c006         ] 
+[c002                                         |c003|c004|c005 |c006         ] 
+[c002                                         |c003|c004|c005 |c006         ] 
+[c002                                         |c003|c004|c005 |c006         ] 
+                                                    SubTotal: [c010         ]
+ Mecanico: [c011                          ]        Descuento: [c012         ] 
+[c013                                               ]  Total: [c014         ]
 }
 TABLES
 talt024
 ATTRIBUTES
 c001 = t24_orden, REVERSE;
-c020 = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-c021 = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-c022 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
-c023 = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c020 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c021 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c022 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c023 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c024 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+
 c002 = t24_descripcion;
 c003 = t24_puntos_opti;
 c004 = t24_puntos_real;
-c005 = t24_valor_tarea, FORMAT = '##,###,##&.##';
-c010 = formonly.nombres;
-c011 = formonly.tot_tareas TYPE DECIMAL(12,2), FORMAT='##,###,##&.##', REVERSE;
-c012 = formonly.descri_tar;
+c005 = t24_porc_descto, FORMAT = '#&.##';
+c006 = t24_valor_tarea, FORMAT = '--,---,--&.##';
+
+c010 = FORMONLY.subtotal TYPE DECIMAL(12,2), FORMAT='--,---,--&.##';
+c012 = FORMONLY.val_descto TYPE DECIMAL(12,2), FORMAT='--,---,--&.##',
+	COLOR = RED WHERE c012 <> 0;
+c014 = FORMONLY.tot_tareas TYPE DECIMAL(12,2), FORMAT='--,---,--&.##', REVERSE;
+
+c011 = FORMONLY.nombres;
+c013 = FORMONLY.descri_tar;
+END
 INSTRUCTIONS
 SCREEN RECORD r_mo[8] (t24_descripcion, t24_puntos_opti, t24_puntos_real, 
-	               t24_valor_tarea)
+	               t24_porc_descto, t24_valor_tarea)

@@ -8,17 +8,18 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
+DEFINE vm_demonios	VARCHAR(12)
 DEFINE rm_tal		RECORD LIKE talt020.*
 DEFINE rm_tal2		RECORD LIKE talt022.*
-DEFINE rm_ord           RECORD LIKE talt023.*
-DEFINE rm_mol           RECORD LIKE talt004.*
 DEFINE vm_num_rows	SMALLINT
 DEFINE vm_row_current	SMALLINT
 DEFINE vm_max_rows	SMALLINT
 DEFINE vm_max_elm       SMALLINT
 DEFINE vm_num_elm       SMALLINT
+DEFINE vm_size_arr	INTEGER
 DEFINE vm_total         LIKE talt020.t20_total_rp
 DEFINE vm_r_rows	ARRAY [100] OF LIKE talt020.t20_numpre 
+DEFINE rm_r10		RECORD LIKE rept010.*
 DEFINE rm_ta 		ARRAY [100] OF RECORD
 				t22_cantidad	LIKE talt022.t22_cantidad,
 				t22_item	LIKE talt022.t22_item,
@@ -32,11 +33,12 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/talp203.error')
-CALL fgl_init4js()
+CALL startlog('../logs/errores')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN          -- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
+	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto', 'stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
 LET vg_base     = arg_val(1)
@@ -46,8 +48,8 @@ LET vg_codloc   = arg_val(4)
 LET vg_proceso = 'talp203'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL control_master()
 
@@ -57,19 +59,35 @@ END MAIN
 
 FUNCTION control_master()
 DEFINE indice           SMALLINT
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
 CALL fl_nivel_isolation()
 LET vm_max_rows	= 100
 LET vm_max_elm  = 100
-OPEN WINDOW wf AT 3,2 WITH 22 ROWS, 80 COLUMNS
-    ATTRIBUTE(FORM LINE FIRST + 2, COMMENT LINE LAST, MENU LINE FIRST,BORDER,
-	      MESSAGE LINE LAST - 2)
-OPTIONS INPUT WRAP,
-	ACCEPT KEY	F12
-OPEN FORM f_tal FROM "../forms/talf203_1"
+LET lin_menu = 0
+LET row_ini  = 3
+LET num_rows = 22
+LET num_cols = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW wf AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
+    ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE lin_menu,BORDER,
+	      MESSAGE LINE LAST - 1)
+IF vg_gui = 1 THEN
+	OPEN FORM f_tal FROM "../forms/talf203_1"
+ELSE
+	OPEN FORM f_tal FROM "../forms/talf203_1c"
+END IF
 DISPLAY FORM f_tal
 CALL mostrar_botones_detalle()
-INITIALIZE rm_tal.*, rm_tal2.*, rm_ord.*, rm_mol.* TO NULL
+INITIALIZE rm_tal.*, rm_tal2.* TO NULL
 LET vm_num_rows = 0
 LET vm_row_current = 0
 LET vm_num_elm = 0
@@ -81,6 +99,12 @@ LET rm_tal2.t22_compania  = vg_codcia
 LET rm_tal2.t22_localidad = vg_codloc
 LET rm_tal2.t22_usuario   = vg_usuario
 LET rm_tal2.t22_fecing    = CURRENT
+LET vm_size_arr = fgl_scr_size('rm_ta')
+{
+IF vg_gui = 0 THEN
+	LET vm_size_arr = 10
+END IF
+}
 CALL muestra_contadores(vm_row_current, vm_num_rows)
 MENU 'OPCIONES'
 	BEFORE MENU
@@ -93,10 +117,7 @@ MENU 'OPCIONES'
 	COMMAND KEY('C') 'Consultar' 'Consultar un registro. '
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-			
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -104,15 +125,12 @@ MENU 'OPCIONES'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
-			IF fl_control_permiso_opcion('Modificar') THEN			
-				SHOW OPTION 'Modificar'
-		   	END IF 
-			
+			SHOW OPTION 'Modificar'
 		END IF
 		IF vm_row_current <= 1 THEN
                         HIDE OPTION 'Retroceder'
                 END IF
-		IF vm_num_elm > fgl_scr_size('rm_ta') THEN
+		IF vm_num_elm > vm_size_arr THEN
                         SHOW OPTION 'Detalle'
                 ELSE
                         HIDE OPTION 'Detalle'
@@ -127,7 +145,7 @@ MENU 'OPCIONES'
 			SHOW OPTION 'Avanzar'
 			SHOW OPTION 'Retroceder'
 		END IF
-		IF vm_num_elm > fgl_scr_size('rm_ta') THEN
+		IF vm_num_elm > vm_size_arr THEN
                         SHOW OPTION 'Detalle'
                 ELSE
                         HIDE OPTION 'Detalle'
@@ -142,7 +160,7 @@ MENU 'OPCIONES'
 			SHOW OPTION 'Avanzar'
 			SHOW OPTION 'Retroceder'
 		END IF
-		IF vm_num_elm > fgl_scr_size('rm_ta') THEN
+		IF vm_num_elm > vm_size_arr THEN
                         SHOW OPTION 'Detalle'
                 ELSE
                         HIDE OPTION 'Detalle'
@@ -169,13 +187,10 @@ CALL mostrar_registro(vm_r_rows[vm_row_current])
 CALL fl_lee_presupuesto_taller(vg_codcia,vg_codloc,vm_r_rows[vm_row_current])
         RETURNING rm_tal.*
 IF rm_tal.t20_estado = 'P' THEN
-        CALL fgl_winmessage(vg_producto,'Este presupuesto ya ha sido aprobado','
-exclamation')
+        --CALL fgl_winmessage(vg_producto,'Este presupuesto ya ha sido aprobado','exclamation')
+	CALL fl_mostrar_mensaje('Este presupuesto ya ha sido aprobado.','exclamation')
         RETURN
 END IF
-CALL fl_lee_orden_trabajo(vg_codcia,vg_codloc,rm_tal.t20_orden)
-        RETURNING rm_ord.*
-CALL fl_lee_tipo_vehiculo(vg_codcia,rm_ord.t23_modelo) RETURNING rm_mol.*
 WHENEVER ERROR CONTINUE
 BEGIN WORK
 DECLARE q_uppre2 CURSOR FOR SELECT * FROM talt020
@@ -215,7 +230,7 @@ IF NOT int_flag THEN
 		LET rm_tal2.t22_secuencia  = indice
 		INSERT INTO talt022 VALUES (rm_tal2.t22_compania,
 					rm_tal2.t22_localidad,
-					rm_tal2.t22_numpre,
+					rm_tal.t20_numpre,
 					rm_tal2.t22_secuencia,
 					rm_ta[indice].t22_item,
 					rm_ta[indice].t22_descripcion,
@@ -248,16 +263,18 @@ FUNCTION control_consulta()
 DEFINE numpre		LIKE talt020.t20_numpre
 DEFINE codcli		LIKE talt023.t23_cod_cliente
 DEFINE nomcli		LIKE talt023.t23_nom_cliente
-DEFINE query		VARCHAR(400)
-DEFINE expr_sql		VARCHAR(400)
+DEFINE query		CHAR(400)
+DEFINE expr_sql		CHAR(400)
 
 LET int_flag = 0
 CLEAR FORM
 CALL mostrar_botones_detalle()
 INITIALIZE numpre TO NULL
 CONSTRUCT BY NAME expr_sql ON t20_numpre
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
 	ON KEY(F2)
-		IF infield(t20_numpre) THEN
+		IF INFIELD(t20_numpre) THEN
                 	CALL fl_ayuda_presupuestos_taller(vg_codcia,vg_codloc,'A')
                                 RETURNING numpre, codcli, nomcli
                         LET int_flag = 0
@@ -269,6 +286,9 @@ CONSTRUCT BY NAME expr_sql ON t20_numpre
 				CALL muestra_cabecera()
                         END IF
                 END IF
+	BEFORE CONSTRUCT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 END CONSTRUCT
 IF int_flag THEN
 	IF vm_row_current > 0 THEN
@@ -312,12 +332,7 @@ END FUNCTION
 
 FUNCTION muestra_cabecera()
 
-CALL fl_lee_orden_trabajo(vg_codcia,vg_codloc,rm_tal.t20_orden)
-	RETURNING rm_ord.*
-CALL fl_lee_tipo_vehiculo(vg_codcia,rm_ord.t23_modelo) RETURNING rm_mol.*
-DISPLAY rm_ord.t23_nom_cliente TO tit_cliente
-DISPLAY rm_ord.t23_modelo TO tit_modelo
-DISPLAY rm_mol.t04_linea TO tit_linea
+DISPLAY rm_tal.t20_nom_cliente TO tit_cliente
 
 END FUNCTION
 
@@ -330,11 +345,15 @@ DEFINE i,j    		SMALLINT
 DEFINE codi_aux		LIKE rept010.r10_codigo
 DEFINE nomi_aux		LIKE rept010.r10_nombre
 DEFINE descri_ori       LIKE talt022.t22_descripcion
+DEFINE r_r10		RECORD LIKE rept010.*
+DEFINE r_r11		RECORD LIKE rept011.*
+DEFINE stock		LIKE rept011.r11_stock_act
+DEFINE grupo_linea	LIKE rept003.r03_grupo_linea
+DEFINE bodega		LIKE rept002.r02_codigo
 
 LET i = 1
 LET resul = 0
-INITIALIZE codi_aux TO NULL
-INITIALIZE descri_ori TO NULL
+INITIALIZE codi_aux, descri_ori, bodega, grupo_linea TO NULL
 CALL set_count(vm_num_elm)
 LET int_flag = 0
 INPUT ARRAY rm_ta WITHOUT DEFAULTS FROM rm_ta.*
@@ -349,11 +368,15 @@ INPUT ARRAY rm_ta WITHOUT DEFAULTS FROM rm_ta.*
 			CALL mostrar_botones_detalle()
           		RETURN i
                	END IF
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
 	ON KEY(F2)
-		IF infield(t22_item) THEN
-			CALL fl_ayuda_maestro_items(vg_codcia,rm_mol.t04_linea)
-				RETURNING codi_aux, nomi_aux
-			display rm_mol.t04_linea
+		IF INFIELD(t22_item) THEN
+                	CALL fl_ayuda_maestro_items_stock(vg_codcia,grupo_linea,
+							bodega)
+				RETURNING codi_aux, nomi_aux,
+					  r_r10.r10_linea,r_r10.r10_precio_mb,
+					  r_r11.r11_bodega, stock
 			LET int_flag = 0
 			IF codi_aux IS NOT NULL THEN
 				LET rm_tal2.t22_numpre = rm_tal.t20_numpre
@@ -362,10 +385,23 @@ INPUT ARRAY rm_ta WITHOUT DEFAULTS FROM rm_ta.*
 				CALL muestra_descripcion(nomi_aux,i,j)
 			END IF
 		END IF
+	BEFORE INPUT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 	BEFORE ROW
         	LET i = arr_curr()
         	LET j = scr_line()
-		DISPLAY rm_ta[i].t22_descripcion TO tit_descri
+		IF rm_ta[i].t22_item IS NOT NULL THEN
+			CALL fl_lee_item(vg_codcia, rm_ta[i].t22_item)
+				RETURNING rm_r10.*
+			CALL muestra_descripciones(rm_ta[i].t22_item,
+				rm_r10.r10_linea, rm_r10.r10_sub_linea,
+				rm_r10.r10_cod_grupo, 
+				rm_r10.r10_cod_clase)
+			DISPLAY rm_r10.r10_nombre TO tit_descri
+		ELSE
+			CLEAR tit_descri, descrip_1, descrip_2, descrip_3
+		END IF
 		CALL sacar_total()
 	BEFORE FIELD t22_descripcion
                 LET descri_ori = rm_ta[i].t22_descripcion
@@ -382,8 +418,13 @@ INPUT ARRAY rm_ta WITHOUT DEFAULTS FROM rm_ta.*
 			IF resul = 1 THEN
 				NEXT FIELD t22_item
 			END IF
+			CALL muestra_descripciones(rm_ta[i].t22_item,
+					rm_r10.r10_linea, rm_r10.r10_sub_linea,
+					rm_r10.r10_cod_grupo, 
+					rm_r10.r10_cod_clase)
 			CALL sacar_total()
 		ELSE
+			CLEAR tit_descri, descrip_1, descrip_2, descrip_3
 			IF rm_ta[i].t22_cantidad IS NULL THEN
 				NEXT FIELD t22_cantidad
 			END IF
@@ -409,7 +450,7 @@ INPUT ARRAY rm_ta WITHOUT DEFAULTS FROM rm_ta.*
 			CALL muestra_descripcion(rm_ta[i].t22_descripcion,i,j)
 		END IF
 		IF rm_ta[i].t22_precio IS NOT NULL THEN
-			CALL fl_retorna_precision_valor(rm_ord.t23_moneda,
+			CALL fl_retorna_precision_valor(rm_tal.t20_moneda,
                                                         rm_ta[i].t22_precio)
                                 RETURNING rm_ta[i].t22_precio
 			DISPLAY rm_ta[i].t22_precio TO rm_ta[j].t22_precio
@@ -449,26 +490,33 @@ END FUNCTION
 FUNCTION validar_item(i,j)
 DEFINE i,j		SMALLINT
 DEFINE resul		SMALLINT
-DEFINE r_ite		RECORD LIKE rept010.*
+DEFINE rm_r10		RECORD LIKE rept010.*
 DEFINE r_cia		RECORD LIKE rept000.*
 DEFINE r_rep		RECORD LIKE rept011.*
 
-INITIALIZE r_ite.* TO NULL
+INITIALIZE rm_r10.* TO NULL
 INITIALIZE r_cia.* TO NULL
 INITIALIZE r_rep.* TO NULL
-CALL fl_lee_item(vg_codcia,rm_ta[i].t22_item) RETURNING r_ite.*
-IF r_ite.r10_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto,'Item no existe','exclamation')
+CALL fl_lee_item(vg_codcia,rm_ta[i].t22_item) RETURNING rm_r10.*
+IF rm_r10.r10_compania IS NULL THEN
+	--CALL fgl_winmessage(vg_producto,'Item no existe','exclamation')
+	CALL fl_mostrar_mensaje('Item no existe.','exclamation')
 	RETURN 1
 END IF
-CALL muestra_descripcion(r_ite.r10_nombre,i,j)
-IF r_ite.r10_estado = 'B' THEN
+CALL muestra_descripcion(rm_r10.r10_nombre,i,j)
+
+IF rm_r10.r10_precio_mb > 0 THEN
+	LET rm_ta[i].t22_precio = rm_r10.r10_precio_mb
+	DISPLAY rm_ta[i].t22_precio TO rm_ta[j].t22_precio
+END IF
+IF rm_r10.r10_estado = 'B' THEN
 	CALL fl_mensaje_estado_bloqueado()
 	RETURN 1
 END IF
 CALL fl_lee_compania_repuestos(vg_codcia) RETURNING r_cia.*
 IF r_cia.r00_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto,'Bodega no existe','exclamation')
+	--CALL fgl_winmessage(vg_producto,'Bodega no existe','exclamation')
+	CALL fl_mostrar_mensaje('Bodega no existe.','exclamation')
 	RETURN 1
 END IF
 IF r_cia.r00_estado = 'B' THEN
@@ -517,8 +565,10 @@ FUNCTION muestra_contadores(row_current, num_rows)
 DEFINE row_current	SMALLINT
 DEFINE num_rows		SMALLINT
                                                                                 
-DISPLAY "" AT 1,1
-DISPLAY row_current, " de ", num_rows AT 1, 69
+IF vg_gui = 1 THEN
+	DISPLAY "" AT 1,1
+	DISPLAY row_current, " de ", num_rows AT 1, 67
+END IF
                                                                                 
 END FUNCTION
 
@@ -535,23 +585,16 @@ IF vm_num_rows > 0 THEN
         OPEN q_dt
         FETCH q_dt INTO rm_tal.*
 	IF STATUS = NOTFOUND THEN
-		CALL fgl_winmessage (vg_producto,'No existe registro con índice: ' || vm_row_current,'exclamation')
+		--CALL fgl_winmessage(vg_producto,'No existe registro con índice: ' || vm_row_current,'exclamation')
+		CALL fl_mostrar_mensaje('No existe registro con índice: ' || vm_row_current,'exclamation')
 		RETURN
 	END IF
-	CALL fl_lee_tipo_vehiculo(vg_codcia,rm_ord.t23_modelo)
-                RETURNING rm_mol.*
         DECLARE q_dt2 CURSOR FOR SELECT * FROM talt022
                 WHERE t22_compania  = vg_codcia AND
                       t22_localidad = vg_codloc AND
                       t22_numpre    = rm_tal.t20_numpre
         OPEN q_dt2
         FETCH q_dt2 INTO rm_tal2.*
-        IF STATUS = NOTFOUND THEN
-                DISPLAY rm_tal.t20_usuario TO t22_usuario
-                DISPLAY rm_tal.t20_fecing TO t22_fecing
-        ELSE
-                DISPLAY BY NAME rm_tal2.t22_usuario, rm_tal2.t22_fecing
-        END IF
 	DISPLAY BY NAME	rm_tal.t20_numpre
 	CALL muestra_cabecera()
 	CALL muestra_detalle(num_registro)
@@ -567,17 +610,16 @@ END FUNCTION
 
 FUNCTION muestra_detalle(num_reg)
 DEFINE num_reg          LIKE talt022.t22_numpre
-DEFINE query            VARCHAR(400)
+DEFINE query            CHAR(400)
 DEFINE i                SMALLINT
                                                                                 
 LET int_flag = 0
-FOR i = 1 TO fgl_scr_size('rm_ta')
+FOR i = 1 TO vm_size_arr
         INITIALIZE rm_ta[i].* TO NULL
         CLEAR rm_ta[i].*
 END FOR
 LET i = 1
-LET query = 'SELECT t22_cantidad,t22_item,t22_descripcion,t22_precio,t22_stock
-		FROM talt022 ' ||
+LET query = 'SELECT t22_cantidad,t22_item,t22_descripcion,t22_precio,t22_stock FROM talt022 ' ||
                 'WHERE t22_compania = ' || vg_codcia ||
 		' AND t22_localidad = ' || vg_codloc ||
 		' AND t22_numpre    = ' || num_reg CLIPPED || ' ORDER BY 2'
@@ -598,7 +640,7 @@ FOREACH q_cons1 INTO rm_ta[i].*
 END FOREACH
 IF vm_num_elm > 0 THEN
         LET int_flag = 0
-        FOR i = 1 TO fgl_scr_size('rm_ta')
+        FOR i = 1 TO vm_size_arr
                 DISPLAY rm_ta[i].* TO rm_ta[i].*
 		DISPLAY rm_ta[i].t22_descripcion TO tit_descri
         END FOR
@@ -618,15 +660,19 @@ DEFINE i		SMALLINT
 
 CALL set_count(vm_num_elm)
 DISPLAY ARRAY rm_ta TO rm_ta.*
-	BEFORE ROW
-		LET i = arr_curr()
-		DISPLAY rm_ta[i].t22_descripcion TO tit_descri
-	BEFORE DISPLAY
-		CALL dialog.keysetlabel("ACCEPT","")
-	AFTER DISPLAY
-		CONTINUE DISPLAY
 	ON KEY(INTERRUPT)
 		EXIT DISPLAY
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
+	--#BEFORE ROW
+		--#LET i = arr_curr()
+		--#DISPLAY rm_ta[i].t22_descripcion TO tit_descri
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
+	--#BEFORE DISPLAY
+		--#CALL dialog.keysetlabel("ACCEPT","")
+	--#AFTER DISPLAY
+		--#CONTINUE DISPLAY
 END DISPLAY
                                                                                 
 END FUNCTION
@@ -655,43 +701,47 @@ END FUNCTION
                                                                                 
 FUNCTION mostrar_botones_detalle()
 
-DISPLAY 'Cant'        TO tit_col1
-DISPLAY 'Item'        TO tit_col2
-DISPLAY 'Descripción' TO tit_col3
-DISPLAY 'Precio'      TO tit_col4
-DISPLAY 'Stock'       TO tit_col5
+--#DISPLAY 'Cant'        TO tit_col1
+--#DISPLAY 'Item'        TO tit_col2
+--#DISPLAY 'Descripción' TO tit_col3
+--#DISPLAY 'Precio'      TO tit_col4
+--#DISPLAY 'Stock'       TO tit_col5
 
 END FUNCTION
-                                                                                
-                                                                                
-                                                                                
-FUNCTION validar_parametros()
 
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
+
+
+FUNCTION muestra_descripciones(item, linea, sub_linea, cod_grupo, cod_clase)
+DEFINE item		LIKE rept010.r10_codigo
+DEFINE linea		LIKE rept010.r10_linea
+DEFINE sub_linea	LIKE rept010.r10_sub_linea
+DEFINE cod_grupo	LIKE rept010.r10_cod_grupo
+DEFINE cod_clase	LIKE rept010.r10_cod_clase
+DEFINE r_r70		RECORD LIKE rept070.*
+DEFINE r_r71		RECORD LIKE rept071.*
+DEFINE r_r72		RECORD LIKE rept072.*
+
+CALL fl_lee_sublinea_rep(vg_codcia, linea, sub_linea) RETURNING r_r70.*
+CALL fl_lee_grupo_rep(vg_codcia, linea, sub_linea, cod_grupo)
+	RETURNING r_r71.*
+CALL fl_lee_clase_rep(vg_codcia, linea, sub_linea, cod_grupo, cod_clase)
+	RETURNING r_r72.*
+DISPLAY r_r70.r70_desc_sub   TO descrip_1
+DISPLAY r_r71.r71_desc_grupo TO descrip_2
+DISPLAY r_r72.r72_desc_clase TO descrip_3
+
+END FUNCTION
+
+
+
+FUNCTION llamar_visor_teclas()
+DEFINE a		CHAR(1)
+
+IF vg_gui = 0 THEN
+	CALL fl_visor_teclas_caracter() RETURNING int_flag 
+	LET a = fgl_getkey()
+	CLOSE WINDOW w_tf
+	LET int_flag = 0
 END IF
 
 END FUNCTION

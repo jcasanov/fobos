@@ -1,0 +1,27 @@
+DATABASE aceros
+SCREEN
+{
+  GRUPOS DE ITEMS
+ ------------------------------------------------
+  Grupo          Descripción      
+ ------------------------------------------------
+ [c000 |c001                                    ]
+ [c000 |c001                                    ]
+ [c000 |c001                                    ]
+ [c000 |c001                                    ]
+ [c000 |c001                                    ]
+ [c000 |c001                                    ]
+ [c000 |c001                                    ]
+ [c000 |c001                                    ]
+ [c000 |c001                                    ]
+ [c000 |c001                                    ]
+}
+TABLES
+rept071
+ATTRIBUTES
+c000 = r71_cod_grupo, UPSHIFT, REVERSE;
+c001 = r71_desc_grupo, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_codgrupo[10] (r71_cod_grupo, r71_desc_grupo)

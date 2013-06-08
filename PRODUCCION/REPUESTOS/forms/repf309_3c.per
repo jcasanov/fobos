@@ -1,0 +1,22 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+          TRANSACCION A IMPRIMIR
+          ----------------------
+
+   Transacción: [a0] [c000           ]
+
+     Impresión: [c|c001                ]
+
+}
+ATTRIBUTES
+a0   = FORMONLY.cod_tran, NOENTRY, UPSHIFT, REVERSE;
+c000 = FORMONLY.num_tran, NOENTRY, UPSHIFT, REVERSE;
+c    = FORMONLY.impresion TYPE CHAR NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = ('F', 'D', 'T'),
+	COMMENTS = '(F) Factura (D) Devol./Anul. (T) T O D A S. Escoja tipo de trans. a Imprimir.';
+c001 = FORMONLY.tit_impresion, NOENTRY, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'

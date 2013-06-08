@@ -1,42 +1,57 @@
-DATABASE formonly
+DATABASE aceros
 SCREEN
 {
-[c011  	|c012			|c013		|c014			]
-[c023  	|c022           	|c1		|c025	  	  	]
-[c023  	|c022                   |c1		|c025		 	]
-[c023  	|c022                   |c1		|c025  			]
-[c023  	|c022                   |c1		|c025  			]
-[c023  	|c022                   |c1		|c025  			]
-[c023  	|c022                   |c1		|c025  			]
-[c023  	|c022                   |c1		|c025  			]
-[c023  	|c022                   |c1		|c025  			]
-[c023  	|c022                   |c1		|c025  			]
-[c023  	|c022                   |c1		|c025  			]
-[c023  	|c022                   |c1		|c025 			]
-[c023  	|c022                   |c1		|c025  			]
-[c023  	|c022                   |c1		|c025  			]
-[c023  	|c022                   |c1		|c025  			]
-[c023  	|c022                   |c1		|c025  			]
+             Marca: [c000  ] [c001                               ]
+             Linea: [c1]     [c002                               ]
 
-  Motivo[c003	        	                		]
-        [c003  	        	                            	]
-        [c003                                           	]
+                [c010  |c011     |c012     |c013     |c014     ]
+               [c020  |c021     |c022     |c023     |c024     ]
+               [c020  |c021     |c022     |c023     |c024     ]
+               [c020  |c021     |c022     |c023     |c024     ]
+               [c020  |c021     |c022     |c023     |c024     ]
+               [c020  |c021     |c022     |c023     |c024     ]
+               [c020  |c021     |c022     |c023     |c024     ]
+               [c020  |c021     |c022     |c023     |c024     ]
+               [c020  |c021     |c022     |c023     |c024     ]
+               [c020  |c021     |c022     |c023     |c024     ]
+               [c020  |c021     |c022     |c023     |c024     ]
+               [c020  |c021     |c022     |c023     |c024     ]
+               [c020  |c021     |c022     |c023     |c024     ]
+               [c020  |c021     |c022     |c023     |c024     ]
+
+             Totales: [c031     |c032     |c033     |c034     ]
 }
+TABLES
+rept010
+rept011
+rept070
+rept073
 ATTRIBUTES
+c000 = rept010.r10_marca, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = rept070.r70_desc_sub, NOENTRY, REVERSE, UPSHIFT;
+c1   = rept010.r10_sub_linea, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = rept073.r73_desc_marca, NOENTRY, REVERSE, UPSHIFT;
 
-c011 = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F17';
-c012 = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F18';
-c013 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F19';
-c014 = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F21';
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
 
-c023 = formonly.numprev,  REVERSE, NOENTRY, OPTIONS='-nolist';
-c022 = formonly.motivo,   REVERSE, NOENTRY, OPTIONS='-nolist';
-c1   = formonly.usuario,  REVERSE, NOENTRY, OPTIONS='-nolist';
-c025 = formonly.fecing	  TYPE DATE, REVERSE, NOENTRY, FORMAT = 'dd-mm-yyyy',
-       OPTIONS = '-nolist';
-c003 = formonly.motivo_seleccionado,   NOENTRY, WORDWRAP COMPRESS, UPSHIFT, REVERSE, SCROLL;
+c020 = rept010.r10_codigo, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c021 = rept010.r10_stock_max, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c022 = rept010.r10_stock_min, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c023 = rept011.r11_stock_act, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c024 = FORMONLY.cant_pedir, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
 
+c031 = FORMONLY.vm_tot_stock_max, NOENTRY, REVERSE, UPSHIFT;
+c032 = FORMONLY.vm_tot_stock_min, NOENTRY, REVERSE, UPSHIFT;
+c033 = FORMONLY.vm_tot_stock_act, NOENTRY, REVERSE, UPSHIFT;
+c034 = FORMONLY.vm_tot_cant_pedir, NOENTRY, REVERSE, UPSHIFT;
+END
 INSTRUCTIONS
 DELIMITERS '||'
-SCREEN RECORD rm_desp[15] (numprev, motivo, usuario, fecing)
-
+SCREEN RECORD rm_detalle[13] (r10_codigo, r10_stock_max, r10_stock_min,
+				r11_stock_act, cant_pedir);

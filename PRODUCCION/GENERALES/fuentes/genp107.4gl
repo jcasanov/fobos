@@ -1,11 +1,15 @@
-{*
- * Titulo           : genp107.4gl - Mantenimiento de Cuentas Corrientes de la
- *                                  Compania     
- * Elaboracion      : 02-mar-2009
- * Autor            : JCM
- * Formato Ejecucion: fglrun genp107 base modulo codcia
- *}
+------------------------------------------------------------------------------
+-- Titulo           : genp107.4gl - Mantenimiento de Cuentas Corrientes de la
+--                                  Compania     
+-- Elaboracion      : 28-AGO-2001
+-- Autor            : JCM
+-- Formato Ejecucion: fglrun genp107 base modulo codcia
+-- Ultima Correccion:  
+-- Motivo Correccion: 
+------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
+
+DEFINE vm_demonios	VARCHAR(12)
 
 DEFINE vm_nivel_cta	LIKE ctbt001.b01_nivel
 
@@ -25,8 +29,8 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/genp107.error')
-CALL fgl_init4js()
+CALL startlog('../logs/errores')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN          -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 
@@ -42,8 +46,8 @@ CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	-- Asigna un valor por default a vg_codloc
 				-- que luego puede ser reemplazado si se 
                                 -- mantiene sin comentario la siguiente linea
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -82,7 +86,6 @@ MENU 'OPCIONES'
 		HIDE OPTION 'Avanzar'
 		HIDE OPTION 'Retroceder'
 		HIDE OPTION 'Modificar'
-		HIDE OPTION 'Chequera'
 		HIDE OPTION 'Bloquear/Activar'
 	COMMAND KEY('I') 'Ingresar' 		'Ingresar nuevos registros.'
 		IF vm_num_rows = vm_max_rows THEN
@@ -91,15 +94,8 @@ MENU 'OPCIONES'
 			CALL control_ingreso()
 		END IF
 		IF vm_num_rows = 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		   END IF
-			
-			SHOW OPTION 'Chequera'
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -109,43 +105,25 @@ MENU 'OPCIONES'
 		END IF
 	COMMAND KEY('M') 'Modificar' 		'Modificar registro corriente.'
 		CALL control_modificacion()
-	COMMAND KEY ('H') 'Chequera'		'Datos de la chequera de la cuenta.'
-		CALL control_chequera()
 	COMMAND KEY('C') 'Consultar' 		'Consultar un registro.'
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		   END IF
-		
-			SHOW OPTION 'Chequera'		
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
 				HIDE OPTION 'Modificar'
 				HIDE OPTION 'Bloquear/Activar'
-				HIDE OPTION 'Chequera'
 			END IF
 		ELSE
-		   IF fl_control_permiso_opcion('Modificar') THEN			
+			SHOW OPTION 'Avanzar'
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		   END IF
-			
-			SHOW OPTION 'Modificar'
-			SHOW OPTION 'Chequera'
-		
 		END IF
 		IF vm_row_current <= 1 THEN
-			HIDE OPTION 'Retroceder'
-		END IF
+                        HIDE OPTION 'Retroceder'
+                END IF
 	COMMAND KEY('A') 'Avanzar' 		'Ver siguiente registro.'
 		CALL siguiente_registro()
 		IF vm_row_current = vm_num_rows THEN
@@ -287,14 +265,14 @@ CALL muestra_etiquetas()
 LET INT_FLAG = 0
 INPUT BY NAME rm_cta.g09_banco, rm_cta.g09_numero_cta, rm_cta.g09_tipo_cta,
               rm_cta.g09_moneda, rm_cta.g09_pago_roles, rm_cta.g09_atencion_rol,
-              rm_cta.g09_aux_cont, rm_cta.g09_usuario,
-			  rm_cta.g09_fecing, rm_cta.g09_estado WITHOUT DEFAULTS
+              rm_cta.g09_aux_cont, rm_cta.g09_num_cheques, rm_cta.g09_usuario,
+	      rm_cta.g09_fecing, rm_cta.g09_estado WITHOUT DEFAULTS
 	ON KEY (INTERRUPT)
 		IF NOT FIELD_TOUCHED(rm_cta.g09_banco, rm_cta.g09_numero_cta,
                                      rm_cta.g09_tipo_cta, rm_cta.g09_moneda,
 				     rm_cta.g09_pago_roles, 
                                      rm_cta.g09_atencion_rol,
-				     rm_cta.g09_aux_cont 
+				     rm_cta.g09_aux_cont, rm_cta.g09_num_cheques
                                     ) THEN
 			RETURN
 		END IF
@@ -482,120 +460,6 @@ END FUNCTION
 
 
 
-FUNCTION control_chequera()
-
-DEFINE r_g08			RECORD LIKE gent008.*
-DEFINE r_g100			RECORD LIKE gent100.*
-
-DEFINE resp				CHAR(6)
-
-OPTIONS INPUT WRAP, ACCEPT KEY F12
-OPEN WINDOW w_cheq AT 3,2 WITH 17 ROWS, 80 COLUMNS
-	ATTRIBUTE(FORM LINE FIRST + 2, COMMENT LINE LAST, MENU LINE FIRST,
-		  BORDER, MESSAGE LINE LAST - 2) 
-OPEN FORM f_cheq FROM '../forms/genf107_2'
-DISPLAY FORM f_cheq
-
-INITIALIZE r_g100.* TO NULL
-
-BEGIN WORK
-
-WHENEVER ERROR CONTINUE
-DECLARE q_cheq CURSOR FOR
-	SELECT * INTO r_g100.* 
-	  FROM gent100
-	 WHERE g100_compania   = vg_codcia
-	   AND g100_banco      = rm_cta.g09_banco
-	   AND g100_numero_cta = rm_cta.g09_numero_cta
-	FOR UPDATE
-
-OPEN  q_cheq
-FETCH q_cheq INTO r_g100.*
-IF STATUS < 0 THEN
-	WHENEVER ERROR STOP
-	ROLLBACK WORK
-	CALL fgl_winmessage(vg_producto, 'La chequera esta siendo bloqueada por otro usuario.', 'exclamation')
-	CLOSE WINDOW w_cheq
-	RETURN
-END IF
-WHENEVER ERROR STOP
-
-IF r_g100.g100_compania IS NULL THEN
-	LET r_g100.g100_banco      = rm_cta.g09_banco
-	LET r_g100.g100_numero_cta = rm_cta.g09_numero_cta
-
-	LET r_g100.g100_cheq_ini     = 0
-	LET r_g100.g100_cheq_fin     = 0
-	LET r_g100.g100_cheq_act     = 0 
-	LET r_g100.g100_posy_benef   = 0
-	LET r_g100.g100_posix_benef  = 0
-	LET r_g100.g100_posfx_benef  = 0
-	LET r_g100.g100_posy_valn    = 0
-	LET r_g100.g100_posix_valn   = 0
-	LET r_g100.g100_posfx_valn   = 0
-	LET r_g100.g100_posy_vallt1  = 0 
-	LET r_g100.g100_posix_vallt1 = 0 
-	LET r_g100.g100_posfx_vallt1 = 0
-	LET r_g100.g100_posy_vallt2  = 0
-	LET r_g100.g100_posix_vallt2 = 0
-	LET r_g100.g100_posfx_vallt2 = 0
-	LET r_g100.g100_posy_ciud    = 0
-	LET r_g100.g100_posix_ciud   = 0
-	LET r_g100.g100_posfx_ciud   = 0
-	LET r_g100.g100_posy_fech    = 0
-	LET r_g100.g100_posix_fech   = 0
-	LET r_g100.g100_posfx_fech   = 0
-END IF
-
-CALL fl_lee_banco_general(rm_cta.g09_banco) RETURNING r_g08.*
-DISPLAY r_g08.g08_nombre TO n_banco
-
-INPUT BY NAME r_g100.g100_banco, r_g100.g100_numero_cta,  r_g100.g100_cheq_ini,
-			  r_g100.g100_cheq_fin, 	r_g100.g100_cheq_act, 
-			  r_g100.g100_posy_benef,
-			  r_g100.g100_posix_benef,	r_g100.g100_posfx_benef, 
-			  r_g100.g100_posy_valn,
-			  r_g100.g100_posix_valn, 	r_g100.g100_posfx_valn,  
-			  r_g100.g100_posy_vallt1,
-			  r_g100.g100_posix_vallt1,	r_g100.g100_posfx_vallt1,
-			  r_g100.g100_posy_vallt2,
-			  r_g100.g100_posix_vallt2,	r_g100.g100_posfx_vallt2,
-			  r_g100.g100_posy_ciud,
-			  r_g100.g100_posix_ciud,  	r_g100.g100_posfx_ciud,  
-			  r_g100.g100_posy_fech,
-			  r_g100.g100_posix_fech,  	r_g100.g100_posfx_fech
-		WITHOUT DEFAULTS
-	ON KEY (INTERRUPT)
-		LET INT_FLAG = 0
-		CALL fl_mensaje_abandonar_proceso() RETURNING resp
-		IF resp = 'Yes' THEN
-			LET INT_FLAG = 1
-			EXIT INPUT
-		END IF
-END INPUT
-IF INT_FLAG THEN
-	LET INT_FLAG = 0
-	ROLLBACK WORK
-	CLOSE WINDOW w_cheq
-	RETURN
-END IF
-
-IF r_g100.g100_compania IS NULL THEN
-	LET r_g100.g100_compania = vg_codcia
-	INSERT INTO gent100 VALUES (r_g100.*)
-ELSE
-	UPDATE gent100 SET * = r_g100.* WHERE CURRENT OF q_cheq
-END IF
-
-COMMIT WORK
-
-CALL fgl_winmessage(vg_producto, 'Chequera actualizada OK', 'information')	
-CLOSE WINDOW w_cheq
-
-END FUNCTION
-
-
-
 FUNCTION control_consulta()
 
 DEFINE expr_sql			VARCHAR(500)
@@ -625,7 +489,7 @@ LET INT_FLAG = 0
 CONSTRUCT BY NAME expr_sql 
         ON g09_banco, g09_numero_cta, g09_estado,
            g09_tipo_cta, g09_moneda, g09_pago_roles, 
-           g09_atencion_rol, g09_aux_cont, 
+           g09_atencion_rol, g09_aux_cont, g09_num_cheques,
            g09_usuario
 	ON KEY(F2)
 		IF INFIELD(g09_banco) THEN
@@ -646,7 +510,7 @@ CONSTRUCT BY NAME expr_sql
 			END IF	
 		END IF
 		IF INFIELD(g09_numero_cta) THEN
-			CALL fl_ayuda_cuenta_banco(vg_codcia) 
+			CALL fl_ayuda_cuenta_banco(vg_codcia, 'T')
 				RETURNING banco, nom_banco, tipo_cta, nro_cta 
 			IF nro_cta IS NOT NULL THEN
 				LET rm_cta.g09_banco = banco
@@ -823,7 +687,7 @@ END IF
 DISPLAY BY NAME rm_cta.g09_banco, rm_cta.g09_numero_cta, rm_cta.g09_estado,
                 rm_cta.g09_tipo_cta, rm_cta.g09_moneda, rm_cta.g09_pago_roles,
                 rm_cta.g09_atencion_rol, rm_cta.g09_aux_cont, 
-				rm_cta.g09_usuario, rm_cta.g09_fecing  
+                rm_cta.g09_num_cheques, rm_cta.g09_usuario, rm_cta.g09_fecing  
 
 CALL muestra_etiquetas()
 CALL muestra_contadores()
@@ -922,7 +786,7 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION no_validar_parametros()
 
 CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
 IF rg_mod.g50_modulo IS NULL THEN

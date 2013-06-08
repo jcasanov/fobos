@@ -1,0 +1,68 @@
+DATABASE aceros
+SCREEN 
+{
+
+    Ajuste No.: [b ][f002           ]             Fecha: [f029               ]
+    Referencia: [f005                                    ]
+      Vendedor: [f011 ] [b0                            ]   
+      Division: [b2   ] [b3                            ] 
+Subtipo Trans.: [b10  ] [b11                 ]
+                                                              [c051] de [c052]
+  Item            Descripción         Stock Act Costo Anterior  Costo Actual
+[b4     ] [b5                        |b6       |b7            |b8            ]
+[b4     ] [b5                        |b6       |b7            |b8            ]
+[b4     ] [b5                        |b6       |b7            |b8            ]
+[b4     ] [b5                        |b6       |b7            |b8            ]
+[b4     ] [b5                        |b6       |b7            |b8            ]
+[b4     ] [b5                        |b6       |b7            |b8            ]
+[c070                               ]	         Total Costo: [f022          ]
+[c071                               ]
+[c072                                    ]       Ingresado Por: [f028      ]
+[c073                                              ]
+[c074                                                             |c075    ]
+}
+TABLES
+rept010
+rept011
+rept019
+rept020
+ATTRIBUTES
+f002 = rept019.r19_num_tran, REVERSE, NOENTRY,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f005 = rept019.r19_referencia, REVERSE, UPSHIFT, REVERSE,
+	COMMENTS = 'Motivo por el cual se realiza el Ajuste de Costo. ';
+f011 = rept019.r19_vendedor, REVERSE, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.';
+b0   = FORMONLY.nom_vend TYPE VARCHAR, NOENTRY, REVERSE;
+b    = rept019.r19_cod_tran , REVERSE, NOENTRY, UPSHIFT,
+	COMMENTS = '(AC) Ajuste de Costo';
+f022 = rept019.r19_tot_costo, REVERSE, FORMAT = '###,###,##&.##', NOENTRY;
+f028 = rept019.r19_usuario, REVERSE, NOENTRY, UPSHIFT;
+f029 = rept019.r19_fecing, REVERSE, NOENTRY;
+b2   = FORMONLY.linea TYPE VARCHAR, REVERSE, UPSHIFT, REQUIRED,
+	COMMENTS = 'Línea de Venta de los Items del Ajuste de Costos. ';
+b3   = FORMONLY.nom_lin TYPE VARCHAR, NOENTRY, REVERSE;
+b4   = rept020.r20_item, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.';
+b5   = rept010.r10_nombre, REVERSE, NOENTRY;
+b6   = rept020.r20_stock_ant, REVERSE, NOENTRY, FORMAT = '##,##&.##';
+b7   = rept020.r20_costant_mb, REVERSE, NOENTRY, FORMAT = '###,###,##&.##';
+b8   = rept020.r20_costnue_mb, REVERSE,
+	FORMAT = '###,###,##&.##', INCLUDE = (0.01 TO 999999999.99);
+b10  = rept019.r19_cod_subtipo, UPSHIFT,
+	COMMENTS = 'Ingrese el subtipo de acuerdo al motivo del ajuste. ';
+b11  = FORMONLY.nom_subtipo TYPE VARCHAR, NOENTRY;
+c070 = FORMONLY.descrip_1, NOENTRY;
+c071 = FORMONLY.descrip_2, NOENTRY;
+c072 = FORMONLY.descrip_3, NOENTRY;
+c073 = FORMONLY.descrip_4, NOENTRY;
+c074 = FORMONLY.nom_item,  NOENTRY, REVERSE;
+c075 = FORMONLY.nom_marca, NOENTRY, REVERSE;
+
+c051 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c052 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_aj_costo[6] (r20_item, r10_nombre, r20_stock_ant,
+				r20_costant_mb, r20_costnue_mb)

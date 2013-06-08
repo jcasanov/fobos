@@ -1,0 +1,92 @@
+DATABASE aceros
+SCREEN
+{
+                                                             [c050] de [c051]
+
+  Liquidación: [c0|c001                          ]     Estado: [c|c000      ]
+  Año: [c004]  Mes: [c1|c005       ]     Período: [c002      ] - [c003      ]
+ Departamento: [c08|c009                ]  Cargo: [c72|c073                 ]
+     Empleado: [c006|c007                                              ]
+   Sueldo Mes: [c070         ]                          Días Faltados: [c057]
+ Total Ganado: [c071         ]
+ Haberes:               [c052] de [c053]    Descuentos:      [c054] de [c055]
+ [c10|c011           |f011 |c012        ]   [c13|c014           |c015        ]  
+[c20|c021           |f021 |c022        ]   [c23|c024           |c025        ]
+[c20|c021           |f021 |c022        ]   [c23|c024           |c025        ]
+[c20|c021           |f021 |c022        ]   [c23|c024           |c025        ]
+[c20|c021           |f021 |c022        ]   [c23|c024           |c025        ]
+[c20|c021           |f021 |c022        ]   [c23|c024           |c025        ]
+[c20|c021           |f021 |c022        ]   [c23|c024           |c025        ]
+[c20|c021           |f021 |c022        ]   [c23|c024           |c025        ]
+          Total Ingresos: [c062        ]     Total Descuentos: [c063        ]
+              Total Neto: [c064        ]
+}
+TABLES
+gent034
+gent035
+rolt003
+rolt030
+rolt032
+ATTRIBUTES
+c    = rolt032.n32_estado, NOENTRY, UPSHIFT, REVERSE;
+c000 = FORMONLY.tit_estado, NOENTRY, UPSHIFT, REVERSE;
+c08  = rolt032.n32_cod_depto, NOENTRY, UPSHIFT, REVERSE;
+c009 = gent034.g34_nombre, NOENTRY, UPSHIFT, REVERSE;
+c0   = rolt032.n32_cod_liqrol, NOENTRY, UPSHIFT, REVERSE;
+c001 = rolt003.n03_nombre, NOENTRY, UPSHIFT, REVERSE;
+c002 = rolt032.n32_fecha_ini, NOENTRY, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy';
+c003 = rolt032.n32_fecha_fin, NOENTRY, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy';
+c004 = rolt032.n32_ano_proceso, NOENTRY, UPSHIFT, REVERSE;
+c1   = rolt032.n32_mes_proceso, NOENTRY, UPSHIFT, REVERSE;
+c005 = FORMONLY.tit_mes, NOENTRY, UPSHIFT, REVERSE;
+c006 = FORMONLY.n32_cod_trab, NOENTRY, UPSHIFT, REVERSE;
+c007 = rolt030.n30_nombres, NOENTRY, UPSHIFT, REVERSE;
+c057 = rolt032.n32_dias_falt, INCLUDE = (0 TO 9999), REVERSE;
+c070 = rolt032.n32_sueldo, NOENTRY, UPSHIFT, REVERSE, FORMAT = '--,---,--&.##';
+c071 = rolt032.n32_tot_gan, NOENTRY, UPSHIFT, FORMAT = '--,---,--&.##',
+	COLOR = BLUE;
+c72  = rolt030.n30_cod_cargo, NOENTRY, UPSHIFT, REVERSE;
+c073 = gent035.g35_nombre, NOENTRY, UPSHIFT, REVERSE;
+
+c10  = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+f011 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c012 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+
+c20  = FORMONLY.codrub_h, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c021 = FORMONLY.nomrub_h, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+f021 = FORMONLY.valaux_h, NOENTRY, OPTIONS = '-nolist', FORMAT = '##&.#';
+c022 = FORMONLY.valrub_h TYPE DECIMAL NOT NULL, REQUIRED, UPSHIFT,
+	INCLUDE = (0 TO 99999999.99), FORMAT = '#,###,##&.##',
+	OPTIONS = '-nolist';
+
+c13  = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F19';
+c015 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+c23  = FORMONLY.codrub_d, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c024 = FORMONLY.nomrub_d, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c025 = FORMONLY.valrub_d TYPE DECIMAL NOT NULL, REQUIRED, UPSHIFT,
+	INCLUDE = (0 TO 99999999.99), FORMAT = '#,###,##&.##',
+	OPTIONS = '-nolist';
+
+c062 = FORMONLY.total_ing TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '-,---,--&.##', OPTIONS = '-nolist';
+c063 = FORMONLY.total_egr TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '-,---,--&.##', OPTIONS = '-nolist';
+c064 = FORMONLY.total_net TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '-,---,--&.##', OPTIONS = '-nolist';
+
+c050 = FORMONLY.vm_row_current, NOENTRY, UPSHIFT;
+c051 = FORMONLY.vm_num_rows, NOENTRY, UPSHIFT;
+c052 = FORMONLY.ini_h, NOENTRY, UPSHIFT;
+c053 = FORMONLY.vm_num_elmh, NOENTRY, UPSHIFT;
+c054 = FORMONLY.ini_d, NOENTRY, UPSHIFT;
+c055 = FORMONLY.vm_num_elmd, NOENTRY, UPSHIFT;
+END
+KEYS
+F6 = 'Imprimir'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_haberes[7] (codrub_h, nomrub_h, valaux_h, valrub_h)
+SCREEN RECORD rm_descuentos[7] (codrub_d, nomrub_d, valrub_d)

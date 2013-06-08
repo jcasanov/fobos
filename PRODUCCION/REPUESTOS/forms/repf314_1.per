@@ -1,40 +1,65 @@
-DATABASE formonly
+DATABASE aceros
 SCREEN
 {
- [c010  |c012  |c011                           |c0|c013  |c014      ]
-[c021  |c023  |c022                           |c1|c024  |c025      ]
-[c021  |c023  |c022                           |c1|c024  |c025      ]
-[c021  |c023  |c022                           |c1|c024  |c025      ]
-[c021  |c023  |c022                           |c1|c024  |c025      ]
-[c021  |c023  |c022                           |c1|c024  |c025      ]
-[c021  |c023  |c022                           |c1|c024  |c025      ]
-[c021  |c023  |c022                           |c1|c024  |c025      ]
-[c021  |c023  |c022                           |c1|c024  |c025      ]
-[c021  |c023  |c022                           |c1|c024  |c025      ]
-[c021  |c023  |c022                           |c1|c024  |c025      ]
-[c021  |c023  |c022                           |c1|c024  |c025      ]
-[c021  |c023  |c022                           |c1|c024  |c025      ]
-[c021  |c023  |c022                           |c1|c024  |c025      ]
-[c021  |c023  |c022                           |c1|c024  |c025      ]
-[c021  |c023  |c022                           |c1|c024  |c025      ]
-[c021  |c023  |c022                           |c1|c024  |c025      ]
-[c021  |c023  |c022                           |c1|c024  |c025      ]
+                                                        Estado: [c|c001      ] 
+  Nota Entrega: [c002      ]                    Orden Despacho: [c003        ]
+       Factura: [c4|c005           ]   Bodega: [c6|c007                      ]
+         Fecha: [c008      ]   Bodega Entrega: [c9|c050                      ]
+   Entregado a: [c009                                    ]
+  Entregado en: [c010                                                        ]
+                [c010                                                        ]
+                                                          [c051] de [c052]
+      [c020   |c021                                             |c022     ]
+     [c030   |c031                                             |c032     ]
+     [c030   |c031                                             |c032     ]
+     [c030   |c031                                             |c032     ]
+     [c030   |c031                                             |c032     ]
+     [c030   |c031                                             |c032     ]
+     [c030   |c031                                             |c032     ]
+     [c030   |c031                                             |c032     ]
+     [f001                             ]                Total: [c040     ]
+     [f002                               ]                                  
+     [f003                               ]                                 
+     [f004                                                             ]
+
 }
+TABLES rept034, rept036, rept037, rept010
 ATTRIBUTES
-c010 = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F16';
-c012 = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F17';
-c011 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F18';
-c0   = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F19';
-c013 = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F20';
-c014 = formonly.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F21';
+c    = rept036.r36_estado, REVERSE, NOENTRY, UPSHIFT;
+c001 = FORMONLY.tit_estado_rep, REVERSE, NOENTRY, UPSHIFT;
+c002 = rept036.r36_num_entrega, REVERSE, NOENTRY, UPSHIFT;
+c003 = rept036.r36_num_ord_des, REVERSE, NOENTRY, UPSHIFT;
+c4   = rept034.r34_cod_tran, REVERSE, NOENTRY, UPSHIFT;
+c005 = rept034.r34_num_tran, REVERSE, NOENTRY, UPSHIFT;
+c6   = rept034.r34_bodega, REVERSE, NOENTRY, UPSHIFT;
+c007 = FORMONLY.tit_bodega, REVERSE, NOENTRY, UPSHIFT;
+c9   = rept036.r36_bodega_real, REVERSE, NOENTRY, UPSHIFT;
+c050 = FORMONLY.tit_bodega_real, REVERSE, NOENTRY, UPSHIFT;
+c008 = rept036.r36_fec_entrega, REVERSE, NOENTRY, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Fecha con formato: dd-mm-aaaa';
+c009 = rept036.r36_entregar_a, REVERSE, NOENTRY, UPSHIFT;
+c010 = rept036.r36_entregar_en, REVERSE, NOENTRY, UPSHIFT, WORDWRAP;
 
-c021 = formonly.numprof,  REVERSE, NOENTRY, OPTIONS='-nolist';
-c023 = formonly.numprev,  REVERSE, NOENTRY, OPTIONS='-nolist';
-c022 = formonly.nomcli,   REVERSE, NOENTRY, OPTIONS='-nolist';
-c1   = formonly.cod_desp, REVERSE, NOENTRY, OPTIONS='-nolist';
-c024 = formonly.num_desp, REVERSE, NOENTRY, OPTIONS='-nolist';
-c025 = formonly.fecing,   REVERSE, NOENTRY, OPTIONS='-nolist', FORMAT='dd-mm-yyyy';
+c020 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c021 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c022 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
 
+c030 = rept037.r37_item, NOENTRY, UPSHIFT, REVERSE, OPTIONS = '-nolist';
+c031 = rept010.r10_nombre, NOENTRY, UPSHIFT, REVERSE, OPTIONS = '-nolist';
+c032 = rept037.r37_cant_ent, NOENTRY, UPSHIFT, REVERSE, FORMAT = '##,##&.##',
+	OPTIONS = '-nolist';
+c040 = FORMONLY.vm_total_ent TYPE DECIMAL (8,2), FORMAT = '##,##&.##', REVERSE; 
+f001 = formonly.descrip_1, NOENTRY;
+f002 = formonly.descrip_2, NOENTRY;
+f003 = formonly.descrip_3, NOENTRY;
+f004 = formonly.nom_item,  NOENTRY, REVERSE;
+
+c051 = FORMONLY.num_row,     NOENTRY, REVERSE;
+c052 = FORMONLY.vm_num_repd, NOENTRY, REVERSE;
+END
+KEYS
+F5 = 'Imprimir Orden'
+F6 = 'Imprimir Nota'
 INSTRUCTIONS
-DELIMITERS '||'
-SCREEN RECORD rm_desp[17] (numprof, numprev, nomcli, cod_desp, num_desp, fecing) 
+SCREEN RECORD r_entr[7] (r37_item, r10_nombre, r37_cant_ent)

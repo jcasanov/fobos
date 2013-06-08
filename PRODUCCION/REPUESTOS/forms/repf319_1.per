@@ -1,0 +1,77 @@
+DATABASE aceros
+SCREEN
+{
+     Fecha Inicial: [c000      ]                     Fecha Final: [c001      ]
+
+     Bodega Origen: [c0]   [c002                          ]
+    Bodega Destino: [c1]   [c003                          ]
+        Referencia: [c006                                 ] TR de Cruce ?: [c]
+
+           Usuario: [c004] [c005                          ]
+                                                            [c050 ] de [c051 ]
+ [c2|c021   |c022      |c3|c4|c025                          |c026             ]
+[c5|c031   |c032      |c6|c7|c035                          |c036             ]
+[c5|c031   |c032      |c6|c7|c035                          |c036             ]
+[c5|c031   |c032      |c6|c7|c035                          |c036             ]
+[c5|c031   |c032      |c6|c7|c035                          |c036             ]
+[c5|c031   |c032      |c6|c7|c035                          |c036             ]
+[c5|c031   |c032      |c6|c7|c035                          |c036             ]
+[c5|c031   |c032      |c6|c7|c035                          |c036             ]
+[c5|c031   |c032      |c6|c7|c035                          |c036             ]
+[c5|c031   |c032      |c6|c7|c035                          |c036             ]
+[c5|c031   |c032      |c6|c7|c035                          |c036             ]
+[c5|c031   |c032      |c6|c7|c035                          |c036             ]
+[c5|c031   |c032      |c6|c7|c035                          |c036             ]
+}
+TABLES
+rept019
+ATTRIBUTES
+c000 = FORMONLY.vm_fecha_ini TYPE DATE NOT NULL, REQUIRED,
+	AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Inicial en formato: dd-mm-aaaa';
+c001 = FORMONLY.vm_fecha_fin TYPE DATE NOT NULL, REQUIRED,
+	AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Final en formato: dd-mm-aaaa';
+c0   = FORMONLY.vm_bodega_ori TYPE CHAR, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = FORMONLY.tit_bodega_ori, NOENTRY, UPSHIFT;
+c1   = FORMONLY.vm_bodega_des TYPE CHAR, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = FORMONLY.tit_bodega_des, NOENTRY, UPSHIFT;
+c004 = FORMONLY.vm_vend_bod TYPE SMALLINT, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c005 = FORMONLY.tit_vend_bod, NOENTRY, UPSHIFT;
+c006 = FORMONLY.referencia TYPE CHAR, AUTONEXT, UPSHIFT;
+c    = FORMONLY.tiene_cru TYPE CHAR NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, INCLUDE = ('S', 'N'), DEFAULT = 'N',
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge';
+
+c2   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c021 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c022 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c3   = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c4   = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c025 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c026 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+
+c5   = rept019.r19_cod_tran, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c031 = rept019.r19_num_tran, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c032 = FORMONLY.r19_fecing, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+c6   = rept019.r19_bodega_ori, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c7   = rept019.r19_bodega_dest, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c035 = rept019.r19_referencia, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c036 = rept019.r19_nomcli, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+
+c050 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c051 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+END
+KEYS
+F6 = 'Transferencia'
+F7 = 'Imprimir Transf.'
+F8 = 'Imprimir Listado'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_trans[12] (r19_cod_tran, r19_num_tran, r19_fecing,
+				r19_bodega_ori, r19_bodega_dest, r19_referencia,
+				r19_nomcli)

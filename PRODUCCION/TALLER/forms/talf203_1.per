@@ -1,24 +1,25 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
 
- No. Presupuesto: [c002    ]  Modelo: [c012                 ]  Línea: [c003 ]
+ No. Presupuesto: [c002    ]
          Cliente: [c014                                     ]
 
-  [c16|c017           ] [c018                          |c019          |c020  ]
- [c06|c004           ] [c005                          |c007          |c008  ]
- [c06|c004           ] [c005                          |c007          |c008  ]
- [c06|c004           ] [c005                          |c007          |c008  ]
- [c06|c004           ] [c005                          |c007          |c008  ]
- [c06|c004           ] [c005                          |c007          |c008  ]
- [c06|c004           ] [c005                          |c007          |c008  ]
- [c06|c004           ] [c005                          |c007          |c008  ]
- [c06|c004           ] [c005                          |c007          |c008  ]
- [c06|c004           ] [c005                          |c007          |c008  ]
- [c06|c004           ] [c005                          |c007          |c008  ]
-                                                      ---------------
- [c013                                ] Total Precio: [c015          ]
-  Usuario: [c009      ]             Fecha de Ingreso: [c010               ]
+  [c16|c017           ] [c018                          |c019         |c020   ]
+ [c06|c004           ] [c005                          |c007         |c008   ]
+ [c06|c004           ] [c005                          |c007         |c008   ]
+ [c06|c004           ] [c005                          |c007         |c008   ]
+ [c06|c004           ] [c005                          |c007         |c008   ]
+ [c06|c004           ] [c005                          |c007         |c008   ]
+ [c06|c004           ] [c005                          |c007         |c008   ]
+ [c06|c004           ] [c005                          |c007         |c008   ]
+ [c06|c004           ] [c005                          |c007         |c008   ]
+ [c06|c004           ] [c005                          |c007         |c008   ]
+ [c06|c004           ] [c005                          |c007         |c008   ]
+ [f001                              ]                 --------------
+ [f002                              ]          Total: [c015         ]
+ [f003                              ]     
+ [c013                                                             ]     
 }
 TABLES
 talt020,
@@ -26,30 +27,29 @@ talt022
 ATTRIBUTES
 c002 = talt020.t20_numpre, AUTONEXT, REVERSE,
         WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c003 = FORMONLY.tit_linea, NOENTRY, REVERSE, UPSHIFT;
 c16  = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
 c017 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
 c018 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
 c019 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
 c020 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
 c06  = talt022.t22_cantidad, AUTONEXT, INCLUDE = (1 TO 100),
-	COMMENTS = 'Cantidad de ítems',	OPTIONS = '-nolist';
+	OPTIONS = '-nolist';
 c004 = talt022.t22_item, AUTONEXT, UPSHIFT, OPTIONS = '-nolist',
         WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 c005 = talt022.t22_descripcion, AUTONEXT, UPSHIFT, SCROLL,
 	OPTIONS = '-nolist';
 c007 = talt022.t22_precio, AUTONEXT, INCLUDE = (0.01 TO 999999999.99),
-        FORMAT = '###,###,##&.##', OPTIONS = '-nolist';
-c008 = talt022.t22_stock, NOENTRY, INCLUDE = (1 TO 65536),
+        FORMAT = '##,###,##&.##', OPTIONS = '-nolist';
+c008 = talt022.t22_stock, NOENTRY, FORMAT = '###&.##',
 	OPTIONS = '-nolist';
 c015 = FORMONLY.tit_total, NOENTRY, REVERSE, INCLUDE = (0 TO 999999999.99),
-        FORMAT = '###,###,##&.##';
-c012 = FORMONLY.tit_modelo, NOENTRY, REVERSE, UPSHIFT;
+        FORMAT = '##,###,##&.##';
 c013 = FORMONLY.tit_descri, NOENTRY, REVERSE, UPSHIFT;
 c014 = FORMONLY.tit_cliente, NOENTRY, REVERSE, UPSHIFT;
-c009 = talt022.t22_usuario, NOENTRY, REVERSE, UPSHIFT;
-c010 = talt022.t22_fecing, NOENTRY, REVERSE, UPSHIFT;
+f001 = formonly.descrip_1, NOENTRY;
+f002 = formonly.descrip_2, NOENTRY;
+f003 = formonly.descrip_3, NOENTRY;
 INSTRUCTIONS
 SCREEN RECORD rm_ta[10] (t22_cantidad,t22_item,t22_descripcion,
 			t22_precio,t22_stock)
-END
+end

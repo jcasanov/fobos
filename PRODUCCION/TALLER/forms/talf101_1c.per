@@ -1,0 +1,36 @@
+DATABASE aceros
+SCREEN
+{
+
+
+                      Grupo de Línea: [f009 ] [f010                ]
+                     Código de Línea: [f001 ] [f002                ] 
+
+      Descuento Mano de Obra Contado: [f003 ]%     
+          Descuento Repuesto Contado: [f004 ]%     
+     Descuento Mano  de Obra Crédito: [f005 ]% 
+          Descuento Repuesto Crédito: [f006 ]% 
+ 
+                       Ingresado Por: [f007      ]
+                    Fecha de Ingreso: [f008               ]
+
+}
+TABLES talt001
+ATTRIBUTES
+f009 = talt001.t01_grupo_linea, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f010 = FORMONLY.nom_grupo TYPE VARCHAR, NOENTRY;
+f001 = talt001.t01_linea, REVERSE, UPSHIFT, AUTONEXT, 
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f002 = talt001.t01_nombre, REVERSE, UPSHIFT; 
+f003 = talt001.t01_dcto_mo_cont, REVERSE, FORMAT = '#&.##', 
+	INCLUDE = (0.0 TO 99.99);
+f004 = talt001.t01_dcto_rp_cont, REVERSE, FORMAT = '#&.##',
+	INCLUDE = (0.0 TO 99.99);
+f005 = talt001.t01_dcto_mo_cred, REVERSE, FORMAT = '#&.##',
+	INCLUDE = (0.0 TO 99.99);
+f006 = talt001.t01_dcto_rp_cred, REVERSE, FORMAT = '#&.##',
+	INCLUDE = (0.0 TO 99.99);
+f007 = talt001.t01_usuario, REVERSE, NOENTRY, UPSHIFT;
+f008 = talt001.t01_fecing, REVERSE, NOENTRY;
+end

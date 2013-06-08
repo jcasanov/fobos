@@ -1,0 +1,22 @@
+DATABASE aceros
+SCREEN
+{
+
+
+	Código de Sección: [f001  ] [f002                          ]
+
+	             Jefe: [f003                          ]
+
+	    Ingresado Por: [f004      ]
+	 Fecha de Ingreso: [f005               ]
+
+}
+TABLES talt002
+ATTRIBUTES
+f001 = talt002.t02_seccion, REVERSE, UPSHIFT, NOENTRY,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f002 = talt002.t02_nombre, REVERSE, UPSHIFT, AUTONEXT;
+f003 = talt002.t02_jefe, REVERSE, UPSHIFT, AUTONEXT;
+f004 = talt002.t02_usuario, REVERSE, NOENTRY;
+f005 = talt002.t02_fecing, REVERSE, NOENTRY;
+end

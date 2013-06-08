@@ -1,15 +1,14 @@
-database diteca
-screen
+DATABASE aceros
+SCREEN
 {
 
 
-       Grupo Línea Venta: [f007 ] [a2                          ]
+    Grupo División Venta: [f007 ] [a2                          ]
 
-      Código Línea Venta: [f001 ]		     Estado:[a][a1         ]
+         Código División: [f]		             Estado:[a][a1         ]
 
 	          Nombre: [f002                          ]
-       Porc. de Utilidad: [f003 ]%   
-      Porc. rentab. min.: [f010 ]%
+  Porcentaje de Utilidad: [f003 ]%
      Descuento al Taller: [f004 ]%		       Area:[b             ] 
        Descuento Contado: [f005 ]%
        Descuento Crédito: [f006 ]%
@@ -18,20 +17,17 @@ screen
 	Fecha de Ingreso: [f009               ]
 
 }
-end
-tables
+TABLES
 rept003
-attributes
-f001 = rept003.r03_codigo, REVERSE, UPSHIFT,
+ATTRIBUTES
+f    = rept003.r03_codigo, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 f002 = rept003.r03_nombre, REVERSE, UPSHIFT;
 a    = rept003.r03_estado, REVERSE, NOENTRY, UPSHIFT;
-a1   = formonly.tit_estado TYPE VARCHAR, NOENTRY;
+a1   = FORMONLY.tit_estado TYPE VARCHAR, NOENTRY;
 b = rept003.r03_area, REVERSE,
-	WIDGET = 'RADIO', CONFIG = 'R Repuesto T Taller';
+	WIDGET = 'RADIO', CONFIG = 'R Inventario T Taller';
 f003 = rept003.r03_porc_uti, REVERSE, FORMAT = '#&.##',
-	INCLUDE = (0 TO 99.99);
-f010 = rept003.r03_rentab_min, REVERSE, FORMAT = '#&.##',
 	INCLUDE = (0 TO 99.99);
 c    = rept003.r03_tipo, REVERSE, 
 	WIDGET = 'RADIO', CONFIG = 'N Nacional I Importado';
@@ -44,7 +40,7 @@ f006 = rept003.r03_dcto_cred, REVERSE, FORMAT = '#&.##',
 	INCLUDE = (0 TO 99.99);
 f007 = rept003.r03_grupo_linea, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-a2   = formonly.nom_grupo TYPE VARCHAR, NOENTRY;
+a2   = FORMONLY.nom_grupo TYPE VARCHAR, NOENTRY;
 f008 = rept003.r03_usuario, REVERSE, NOENTRY, UPSHIFT;
 f009 = rept003.r03_fecing, REVERSE, NOENTRY;
 end

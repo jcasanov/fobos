@@ -1,0 +1,28 @@
+DATABASE aceros
+SCREEN
+{
+  TRANSACCIONES DE CAJA
+ -----------------------------------------------------------
+  Número   Cliente 			        Valor	
+ -----------------------------------------------------------
+ [c000   ][c001                            ][c003          ]
+ [c000   ][c001                            ][c003          ]
+ [c000   ][c001                            ][c003          ]
+ [c000   ][c001                            ][c003          ]
+ [c000   ][c001                            ][c003          ]
+ [c000   ][c001                            ][c003          ]
+ [c000   ][c001                            ][c003          ]
+ [c000   ][c001                            ][c003          ]
+ [c000   ][c001                            ][c003          ]
+ [c000   ][c001                            ][c003          ]
+}
+TABLES
+cajt010
+ATTRIBUTES
+c000 = j10_num_fuente, UPSHIFT, REVERSE;
+c001 = j10_nomcli,  UPSHIFT, REVERSE;
+c003 = j10_valor,  UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_numfue[10] (j10_num_fuente, j10_nomcli, j10_valor)

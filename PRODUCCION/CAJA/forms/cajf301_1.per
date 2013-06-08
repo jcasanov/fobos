@@ -1,0 +1,73 @@
+DATABASE aceros
+SCREEN
+{
+
+                 Código de Caja: [c000] [c001                ]
+                Rango de Fechas: [c002      ]  -  [c003      ]
+
+                                                            [c004 ] de [c005 ]
+ [c1|c11|c012      |c013               |c014      |c015         |c016         ]
+[c2|c21|c022      |c023               |c024      |c025         |c026         ]
+[c2|c21|c022      |c023               |c024      |c025         |c026         ]
+[c2|c21|c022      |c023               |c024      |c025         |c026         ]
+[c2|c21|c022      |c023               |c024      |c025         |c026         ]
+[c2|c21|c022      |c023               |c024      |c025         |c026         ]
+[c2|c21|c022      |c023               |c024      |c025         |c026         ]
+[c2|c21|c022      |c023               |c024      |c025         |c026         ]
+[c2|c21|c022      |c023               |c024      |c025         |c026         ]
+[c2|c21|c022      |c023               |c024      |c025         |c026         ]
+[c2|c21|c022      |c023               |c024      |c025         |c026         ]
+[c2|c21|c022      |c023               |c024      |c025         |c026         ]
+[c2|c21|c022      |c023               |c024      |c025         |c026         ]
+[c2|c21|c022      |c023               |c024      |c025         |c026         ]
+                                        Totales: [c035         |c036         ]
+
+}
+TABLES
+cajt002
+cajt004
+cajt005
+cajt010
+ATTRIBUTES
+c000 = cajt010.j10_codigo_caja, AUTONEXT, UPSHIFT, 
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = cajt002.j02_nombre_caja, NOENTRY, UPSHIFT;
+c002 = FORMONLY.vm_fecha_ini TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la Fecha Inicial en formato: dd-mm-aaaa.';
+c003 = FORMONLY.vm_fecha_fin TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la Fecha Final en formato: dd-mm-aaaa.';
+
+c004 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c005 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c1   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c11  = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c015 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c016 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+
+c2   = cajt004.j04_localidad, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c21  = cajt004.j04_codigo_caja, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c022 = cajt004.j04_fecha_aper, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+c023 = FORMONLY.j04_fecha_cierre, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c024 = cajt004.j04_usuario, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c025 = cajt005.j05_ef_apertura, NOENTRY, UPSHIFT, FORMAT = '##,###,##&.##',
+	OPTIONS = '-nolist';
+c026 = cajt005.j05_ch_apertura, NOENTRY, UPSHIFT, FORMAT = '##,###,##&.##',
+	OPTIONS = '-nolist';
+
+c035 = FORMONLY.vm_total_ef TYPE DECIMAL, NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = '##,###,##&.##';
+c036 = FORMONLY.vm_total_ch TYPE DECIMAL, NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = '##,###,##&.##';
+END
+INSTRUCTIONS
+DELIMITERS "||"
+SCREEN RECORD rm_cierre[13] (j04_localidad, j04_codigo_caja, j04_fecha_aper,
+				j04_fecha_cierre, j04_usuario, j05_ef_apertura,
+				j05_ch_apertura)

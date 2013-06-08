@@ -1,0 +1,35 @@
+DATABASE aceros
+SCREEN
+{
+
+     Anio de Proceso: [c000]        
+
+  Código Liquidación: [c1]   [c002                          ]
+
+        Departamento: [c006] [c007                          ]
+
+     Código Empleado: [c003] [c004                                         ]
+
+                        Agrupado por Departamento ?: [c]
+
+}
+TABLES
+gent034
+rolt003
+rolt030
+rolt036
+ATTRIBUTES
+c000 = rolt036.n36_ano_proceso, AUTONEXT, REVERSE, UPSHIFT,
+	INCLUDE = (1980 TO 2099);
+c1   = rolt036.n36_proceso, AUTONEXT, REVERSE, UPSHIFT,
+	INCLUDE = ('DT', 'DC'), COMMENT='DC DECIMO CUARTO  DT DECIMO TERCERO';
+c002 = rolt003.n03_nombre, NOENTRY, REVERSE, UPSHIFT;
+c003 = FORMONLY.n36_cod_trab, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c004 = rolt030.n30_nombres, NOENTRY, UPSHIFT;
+c006 = FORMONLY.n36_cod_depto, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c007 = gent034.g34_nombre, NOENTRY, UPSHIFT;
+c    = FORMONLY.vm_agrupado, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+END

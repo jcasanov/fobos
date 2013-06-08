@@ -1,0 +1,44 @@
+DATABASE aceros
+SCREEN
+{
+
+                                                   Estado: [c][c0a0     ]
+              Compañía: [c000] [c007                                    ]
+
+         Rol Mensual ?: [d]    Rol Quincenal ?: [e]    Rol Semanal ?: [f]
+
+        % Anticipo Mes: [c001  ]        % Aporte Fondo Cesantia: [c010  ]
+
+                  Año Proceso      Mes Proceso    Semana Proceso 
+                    [c002  ]         [c003  ]        [c004  ]
+
+               Usuario: [c005      ]
+      Fecha de Ingreso: [c006               ]
+}
+TABLES
+rolt001
+ATTRIBUTES
+c000 = rolt001.n01_compania, AUTONEXT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+        COMMENTS = 'Indicar la compañía a configurar';
+c    = FORMONLY.tit_est, NOENTRY, REVERSE, UPSHIFT;
+c0a0 = FORMONLY.tit_estado_cia, NOENTRY, UPSHIFT;
+d    = rolt001.n01_rol_mensual, AUTONEXT, REVERSE,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S',
+	COMMENTS = 'Se generán los roles mes a mes';
+e    = rolt001.n01_rol_quincen, AUTONEXT, REVERSE,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S',
+	COMMENTS = 'Se generán los roles quincena a quincena';
+f    = rolt001.n01_rol_semanal, AUTONEXT, REVERSE,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S',
+	COMMENTS = 'Se generán los roles semana a semana';
+c001 = rolt001.n01_porc_ant_mes, AUTONEXT, REVERSE, FORMAT='##&.##';
+c002 = rolt001.n01_ano_proceso, NOENTRY, REVERSE, INCLUDE = (2000 TO 9999);
+c003 = rolt001.n01_mes_proceso, NOENTRY, REVERSE, INCLUDE = (1 TO 12);
+c004 = rolt001.n01_sem_proceso, NOENTRY, REVERSE, INCLUDE = (1 TO 5);
+c005 = rolt001.n01_usuario, NOENTRY, REVERSE, UPSHIFT;
+c006 = rolt001.n01_fecing, NOENTRY, REVERSE, UPSHIFT;
+c007 = FORMONLY.tit_cia_rol, NOENTRY, UPSHIFT, REVERSE;
+c010 = rolt001.n01_porc_aporte, REVERSE, FORMAT='##&.##', UPSHIFT, 
+		INCLUDE=(0 TO 999.99);
+END

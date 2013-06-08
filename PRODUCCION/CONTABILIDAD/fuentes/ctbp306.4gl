@@ -8,51 +8,54 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_demonios	VARCHAR(12)
 DEFINE vm_max_rows	SMALLINT
 DEFINE vm_num_rows	SMALLINT
 DEFINE vm_max_nivel	LIKE ctbt001.b01_nivel
 DEFINE vm_saldo_pyg	DECIMAL(16,2)
+DEFINE tot_saldo	DECIMAL(16,2)
+DEFINE tot_saldo_mes	DECIMAL(16,2)
 DEFINE rg_cont		RECORD LIKE ctbt000.*
-DEFINE rm_par   RECORD 
-		ano		SMALLINT,
-		mes		SMALLINT,
-		tit_mes		VARCHAR(10),
-		moneda		LIKE gent013.g13_moneda,
-		tit_mon		LIKE gent013.g13_nombre,
-		ccosto		LIKE gent033.g33_cod_ccosto,
-		tit_ccosto	LIKE gent033.g33_nombre,
-		formato		CHAR(1),
-		b10_nivel	LIKE ctbt010.b10_nivel
-	END RECORD
-DEFINE rm_pyg   ARRAY[7000] OF RECORD 
-		b10_cuenta	LIKE ctbt010.b10_cuenta,
-		b10_descripcion	LIKE ctbt010.b10_descripcion,
-		saldo		DECIMAL(14,2),
-		signo		CHAR(2)
-	END RECORD
-DEFINE rm_color ARRAY[10] OF VARCHAR(10)
+DEFINE rm_par		RECORD 
+				ano		SMALLINT,
+				mes		SMALLINT,
+				tit_mes		VARCHAR(10),
+				moneda		LIKE gent013.g13_moneda,
+				tit_mon		LIKE gent013.g13_nombre,
+				ccosto		LIKE gent033.g33_cod_ccosto,
+				tit_ccosto	LIKE gent033.g33_nombre,
+				b10_nivel	LIKE ctbt010.b10_nivel,
+				diario_cie	CHAR(1)
+			END RECORD
+DEFINE rm_pyg		ARRAY[7000] OF RECORD 
+				b10_cuenta	LIKE ctbt010.b10_cuenta,
+				b10_descripcion	LIKE ctbt010.b10_descripcion,
+				saldo_mes	DECIMAL(14,2),
+				saldo		DECIMAL(14,2)
+			END RECORD
+DEFINE rm_color		ARRAY[10] OF VARCHAR(10)
+
+
 
 MAIN
 
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
-CALL fgl_init4js()
+CALL startlog('../logs/ctbp306.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN    -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
 	EXIT PROGRAM
 END IF
-LET vg_base     = arg_val(1)
-LET vg_modulo   = arg_val(2)
-LET vg_codcia   = arg_val(3)
+LET vg_base    = arg_val(1)
+LET vg_modulo  = arg_val(2)
+LET vg_codcia  = arg_val(3)
 LET vg_proceso = 'ctbp306'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL drawinit()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL control_master()
@@ -76,24 +79,32 @@ INITIALIZE rm_par.* TO NULL
 LET rm_par.moneda  = rg_cont.b00_moneda_base
 LET rm_par.ano     = YEAR(TODAY)
 LET rm_par.mes     = MONTH(TODAY)
-LET rm_par.formato = 'A'
 SELECT MAX(b01_nivel) INTO vm_max_nivel FROM ctbt001
 IF vm_max_nivel IS NULL THEN
 	CALL fgl_winmessage(vg_producto,'Nivel no está configurado.','stop')
 	EXIT PROGRAM
 END IF
-LET rm_par.b10_nivel = vm_max_nivel
+LET rm_par.b10_nivel  = vm_max_nivel
 CALL fl_lee_moneda(rm_par.moneda) RETURNING r_mon.*
-LET rm_par.tit_mon = r_mon.g13_nombre
-DISPLAY BY NAME rm_par.moneda, rm_par.tit_mon, rm_par.ano
+LET rm_par.tit_mon    = r_mon.g13_nombre
+LET rm_par.diario_cie = 'N'
+DISPLAY BY NAME rm_par.moneda, rm_par.tit_mon, rm_par.ano, rm_par.diario_cie
+CALL quitar_diario_cierre_anio(rm_par.ano, 'D')
 CALL genera_grafico() 
 WHILE TRUE
 	CALL lee_parametros_grafico()
 	IF int_flag THEN
-		RETURN
+		EXIT WHILE
+	END IF
+	IF rm_par.diario_cie = 'N' THEN
+		CALL quitar_diario_cierre_anio(rm_par.ano, 'D')
 	END IF
 	CALL genera_grafico() 
+	IF rm_par.diario_cie = 'N' THEN
+		CALL quitar_diario_cierre_anio(rm_par.ano, 'M')
+	END IF
 END WHILE
+CALL quitar_diario_cierre_anio(rm_par.ano, 'M')
 
 END FUNCTION
 
@@ -106,6 +117,10 @@ OPEN WINDOW wd AT 3,2 WITH 22 ROWS, 80 COLUMNS
 	      MESSAGE LINE LAST - 2)
 OPEN FORM f_detpyg FROM "../forms/ctbf306_1"
 DISPLAY FORM f_detpyg
+DISPLAY "Cuenta"	TO tit_col1
+DISPLAY "Descripción"	TO tit_col2
+DISPLAY "Mov. del Mes"	TO tit_col3
+DISPLAY "Saldo al Mes"	TO tit_col4
 CALL lee_parametros_detalle()
 IF int_flag THEN
 	CLOSE WINDOW wd
@@ -133,9 +148,10 @@ DEFINE ncosto		LIKE gent033.g33_nombre
 
 LET int_flag = 0
 DISPLAY BY NAME rm_par.tit_mon
-INPUT BY NAME rm_par.ano, rm_par.moneda, rm_par.ccosto WITHOUT DEFAULTS
+INPUT BY NAME rm_par.ano, rm_par.diario_cie, rm_par.moneda, rm_par.ccosto
+	WITHOUT DEFAULTS
 	ON KEY(F2)
-		IF infield(moneda) THEN
+		IF INFIELD(moneda) THEN
                        	CALL fl_ayuda_monedas() RETURNING mon_aux, tit_aux, i
                        	IF mon_aux IS NOT NULL THEN
 				LET rm_par.moneda  = mon_aux
@@ -143,7 +159,7 @@ INPUT BY NAME rm_par.ano, rm_par.moneda, rm_par.ccosto WITHOUT DEFAULTS
                                	DISPLAY BY NAME rm_par.moneda, rm_par.tit_mon
                        	END IF
                 END IF
-		IF infield(ccosto) THEN
+		IF INFIELD(ccosto) THEN
                        	CALL fl_ayuda_ccostos(vg_codcia) 
 				RETURNING ccosto, ncosto
                        	IF ccosto IS NOT NULL THEN
@@ -205,9 +221,10 @@ CALL fl_retorna_nombre_mes(rm_par.mes) RETURNING rm_par.tit_mes
 LET rm_par.tit_mes = fl_justifica_titulo('I', rm_par.tit_mes, 10)
 LET int_flag = 0
 DISPLAY BY NAME rm_par.*
-INPUT BY NAME rm_par.b10_nivel, rm_par.formato WITHOUT DEFAULTS
+INPUT BY NAME rm_par.b10_nivel
+	WITHOUT DEFAULTS
 	ON KEY(F2)
-		IF infield(b10_nivel) THEN
+		IF INFIELD(b10_nivel) THEN
                        	CALL fl_ayuda_nivel_cuentas() 
 				RETURNING nivel, tit_aux, i, j
                        	IF nivel IS NOT NULL THEN
@@ -234,8 +251,10 @@ END FUNCTION
 FUNCTION carga_arreglo()
 DEFINE r_ctas		RECORD LIKE ctbt010.*
 DEFINE i		SMALLINT
+DEFINE cuantos		INTEGER
 DEFINE suma		CHAR(3)
 DEFINE saldo		DECIMAL(14,2)
+DEFINE saldo_mes	DECIMAL(14,2)
 DEFINE fecha		DATE
 
 LET fecha = MDY(rm_par.mes, 1, rm_par.ano) + 1 UNITS MONTH - 1 UNITS DAY
@@ -244,18 +263,32 @@ DECLARE q_ctas CURSOR FOR SELECT * FROM ctbt010
 	      b10_tipo_cta = 'R'       AND
 	      b10_nivel   <= rm_par.b10_nivel
 	ORDER BY b10_cuenta
-LET vm_num_rows = 1 
-LET vm_saldo_pyg = 0
-fOREACH q_ctas INTO r_ctas.*
+LET vm_num_rows   = 1 
+LET vm_saldo_pyg  = 0
+LET tot_saldo     = 0
+LET tot_saldo_mes = 0
+FOREACH q_ctas INTO r_ctas.*
 	IF rm_par.ccosto IS NOT NULL THEN
 		IF rm_par.ccosto <> r_ctas.b10_cod_ccosto OR
 			r_ctas.b10_cod_ccosto IS NULL THEN
 			CONTINUE FOREACH
 		END IF
 	END IF
+	IF r_ctas.b10_estado = 'B' THEN
+		SELECT COUNT(*) INTO cuantos
+			FROM ctbt013
+			WHERE b13_compania = vg_codcia
+			  AND b13_cuenta   = r_ctas.b10_cuenta
+		IF cuantos = 0 THEN
+			CONTINUE FOREACH
+		END IF
+	END IF
 	LET rm_pyg[vm_num_rows].b10_cuenta      = r_ctas.b10_cuenta
 	LET rm_pyg[vm_num_rows].b10_descripcion = r_ctas.b10_descripcion
-	LET saldo = fl_obtiene_saldo_contable(vg_codcia, r_ctas.b10_cuenta, rm_par.moneda, fecha, rm_par.formato)
+	LET saldo = fl_obtiene_saldo_contable(vg_codcia, r_ctas.b10_cuenta,
+						rm_par.moneda, fecha, 'A')
+	LET saldo_mes = fl_obtiene_saldo_contable(vg_codcia, r_ctas.b10_cuenta,
+						rm_par.moneda, fecha, 'M')
 	LET rm_pyg[vm_num_rows].saldo           = saldo
 	IF rm_par.ccosto IS NULL THEN
 		IF r_ctas.b10_nivel = 1 THEN
@@ -266,8 +299,11 @@ fOREACH q_ctas INTO r_ctas.*
 			LET vm_saldo_pyg = vm_saldo_pyg + saldo
 		END IF
 	END IF	
-	LET rm_pyg[vm_num_rows].signo           = 
-		    obtiene_signo_contable(rm_pyg[vm_num_rows].saldo)
+	LET rm_pyg[vm_num_rows].saldo_mes       = saldo_mes
+	IF r_ctas.b10_nivel = 1 THEN
+		LET tot_saldo                   = tot_saldo + saldo
+		LET tot_saldo_mes               = tot_saldo_mes + saldo_mes
+	END IF
 	LET vm_num_rows = vm_num_rows + 1
 	IF vm_num_rows > vm_max_rows THEN
 		EXIT FOREACH
@@ -285,23 +321,28 @@ END FUNCTION
 
 FUNCTION muestra_pyg()
 DEFINE i		SMALLINT
-DEFINE signo_pyg	CHAR(2)
 
-LET signo_pyg = obtiene_signo_contable(vm_saldo_pyg)
+DISPLAY BY NAME tot_saldo, tot_saldo_mes
 DISPLAY vm_saldo_pyg TO saldo_pyg
-DISPLAY BY NAME signo_pyg
+DISPLAY vm_num_rows TO max_row
 CALL set_count(vm_num_rows)
 LET int_flag = 0
 DISPLAY ARRAY rm_pyg TO rm_pyg.*
-	BEFORE DISPLAY 
-		CALL dialog.keysetlabel("ACCEPT","")
-	AFTER DISPLAY 
-		CONTINUE DISPLAY
 	ON KEY(INTERRUPT)
 		EXIT DISPLAY
 	ON KEY(F5)
 		LET i = arr_curr()
 		CALL control_movimientos(rm_pyg[i].b10_cuenta) 
+	ON KEY(F6)
+		CALL imprimir()
+		LET int_flag = 0
+	BEFORE DISPLAY 
+		--#CALL dialog.keysetlabel("ACCEPT","")
+	BEFORE ROW 
+		LET i = arr_curr()
+		DISPLAY i TO num_row
+	AFTER DISPLAY 
+		CONTINUE DISPLAY
 END DISPLAY
 
 END FUNCTION
@@ -333,6 +374,19 @@ LET comando = 'fglrun ctbp302 ' || vg_base || ' ' ||
 		fecha_ini || ' ' ||
 		fecha_fin || ' ' ||
 		rm_par.moneda
+RUN comando
+
+END FUNCTION
+
+
+
+FUNCTION imprimir()
+DEFINE comando          CHAR(200)
+
+LET comando = 'fglrun ctbp403 ', vg_base, ' ', vg_modulo, ' ', vg_codcia, ' ',
+		rm_par.ano, ' ', rm_par.mes, ' "', rm_par.tit_mes, '" ',
+		rm_par.b10_nivel, ' "S" "', rm_par.moneda, '" "',
+		rm_par.tit_mon, '" "', rm_par.diario_cie, '"'
 RUN comando
 
 END FUNCTION
@@ -570,19 +624,19 @@ LET key_f30 = FGL_KEYVAL("F30")
 LET int_flag = 0
 INPUT BY NAME tecla
 	BEFORE INPUT
-		CALL dialog.keysetlabel("ACCEPT","")
-		CALL dialog.keysetlabel("F31","")
-		CALL dialog.keysetlabel("F32","")
-		CALL dialog.keysetlabel("F33","")
-		CALL dialog.keysetlabel("F34","")
-		CALL dialog.keysetlabel("F35","")
-		CALL dialog.keysetlabel("F36","")
-		CALL dialog.keysetlabel("F37","")
-		CALL dialog.keysetlabel("F38","")
-		CALL dialog.keysetlabel("F39","")
-		CALL dialog.keysetlabel("F40","")
-		CALL dialog.keysetlabel("F41","")
-		CALL dialog.keysetlabel("F42","")
+		--#CALL dialog.keysetlabel("ACCEPT","")
+		--#CALL dialog.keysetlabel("F31","")
+		--#CALL dialog.keysetlabel("F32","")
+		--#CALL dialog.keysetlabel("F33","")
+		--#CALL dialog.keysetlabel("F34","")
+		--#CALL dialog.keysetlabel("F35","")
+		--#CALL dialog.keysetlabel("F36","")
+		--#CALL dialog.keysetlabel("F37","")
+		--#CALL dialog.keysetlabel("F38","")
+		--#CALL dialog.keysetlabel("F39","")
+		--#CALL dialog.keysetlabel("F40","")
+		--#CALL dialog.keysetlabel("F41","")
+		--#CALL dialog.keysetlabel("F42","")
 	ON KEY(F31,F32,F33,F34,F35,F36,F37,F38,F39,F40,F41,F42)
 		LET rm_par.mes = FGL_LASTKEY() - key_f30
 		CALL control_detalle_pyg()
@@ -608,40 +662,44 @@ LET rm_color[08] = 'chocolate'
 LET rm_color[09] = 'tomato'
 LET rm_color[10] = 'blue'
 
-
-
-
 END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION quitar_diario_cierre_anio(anio, flag_m)
+DEFINE anio		SMALLINT
+DEFINE flag_m		CHAR(1)
+DEFINE r_b12		RECORD LIKE ctbt012.*
+DEFINE r_b50		RECORD LIKE ctbt050.*
 
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
+INITIALIZE r_b50.* TO NULL
+DECLARE q_b50 CURSOR FOR
+	SELECT * FROM ctbt050
+		WHERE b50_compania = vg_codcia
+		  AND b50_anio     = anio
+OPEN q_b50
+FETCH q_b50 INTO r_b50.*
+IF r_b50.b50_compania IS NULL THEN
+	CLOSE q_b50
+	FREE q_b50
+	RETURN
+END IF
+CLOSE q_b50
+FREE q_b50
+CALL fl_lee_comprobante_contable(r_b50.b50_compania, r_b50.b50_tipo_comp,
+				 r_b50.b50_num_comp)
+	RETURNING r_b12.*
+IF r_b12.b12_estado = 'E' THEN
+	CALL fl_mostrar_mensaje('El Diario de cierre de año ha sido Eliminado.', 'stop')
 	EXIT PROGRAM
 END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
+IF r_b12.b12_estado = 'M' AND flag_m = 'M' THEN
+	RETURN
 END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
+IF r_b12.b12_estado = 'A' AND flag_m = 'D' THEN
+	RETURN
 END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
+CALL fl_mayoriza_comprobante_ult(vg_codcia, r_b50.b50_tipo_comp,
+					r_b50.b50_num_comp, flag_m)
 
 END FUNCTION

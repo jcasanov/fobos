@@ -1,0 +1,18 @@
+DATABASE aceros
+SCREEN
+{
+
+     Se va Imprimir Dev./Anul. Factura: [c000           ]
+
+                           Factura No.: [c001           ]
+ 
+                     Orden Trabajo No.: [c002           ]
+
+}
+TABLES
+talt028
+ATTRIBUTES
+c000 = talt028.t28_num_dev, NOENTRY, REVERSE, UPSHIFT;
+c001 = talt028.t28_factura, NOENTRY, REVERSE, UPSHIFT;
+c002 = talt028.t28_ot_ant, NOENTRY, REVERSE, UPSHIFT;
+END

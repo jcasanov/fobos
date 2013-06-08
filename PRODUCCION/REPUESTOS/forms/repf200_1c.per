@@ -1,0 +1,44 @@
+DATABASE aceros
+SCREEN 
+{
+
+	 Item: [f002            ] [a                            ]
+
+	[c0              ]
+	       Item                     Descripción
+	[f1              ][f2                                   ]	
+	[f1              ][f2                                   ]	
+	[f1              ][f2                                   ]	
+	[f1              ][f2                                   ]	
+	[f1              ][f2                                   ]	
+	[f1              ][f2                                   ]	
+	[f1              ][f2                                   ]	
+	[f1              ][f2                                   ]	
+	[f1              ][f2                                   ]	
+	[f1              ][f2                                   ]	
+
+	    Ingresado Por: [f004      ]
+   	 Fecha de Ingreso: [f005               ]
+}
+
+TABLES
+	rept014
+	rept010
+
+ATTRIBUTES
+
+c0  = FORMONLY.tit_sus, NOENTRY, REVERSE;
+f002 = rept014.r14_item_ant, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+a    = FORMONLY.nom_item TYPE VARCHAR, NOENTRY;
+f1   = rept014.r14_item_nue, REVERSE, UPSHIFT, 
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f2   = rept010.r10_nombre, REVERSE, UPSHIFT, NOENTRY;
+f004 = rept014.r14_usuario ,REVERSE, NOENTRY;
+f005 = rept014.r14_fecing, REVERSE, NOENTRY;
+
+end
+
+INSTRUCTIONS
+SCREEN RECORD r_detalle[10] (r14_item_nue, r10_nombre)
+

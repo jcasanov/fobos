@@ -1,0 +1,31 @@
+DATABASE aceros
+SCREEN
+{
+
+  FACTURAS CLIENTES DEL TALLER
+ ---------------------------------------------------------------
+  Fact.   O.T.  Presp.                  Cliente
+ ---------------------------------------------------------------
+ [c011  |c012  |c013  |c014                                    ]
+ [c011  |c012  |c013  |c014                                    ]
+ [c011  |c012  |c013  |c014                                    ]
+ [c011  |c012  |c013  |c014                                    ]
+ [c011  |c012  |c013  |c014                                    ]
+ [c011  |c012  |c013  |c014                                    ]
+ [c011  |c012  |c013  |c014                                    ]
+ [c011  |c012  |c013  |c014                                    ]
+ [c011  |c012  |c013  |c014                                    ]
+ [c011  |c012  |c013  |c014                                    ]
+}
+TABLES
+talt023
+ATTRIBUTES
+c011 = talt023.t23_num_factura, NOENTRY, UPSHIFT;
+c012 = talt023.t23_orden, NOENTRY, UPSHIFT;
+c013 = talt023.t23_numpre, NOENTRY, UPSHIFT;
+c014 = talt023.t23_nom_cliente, NOENTRY, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_factal[10] (t23_num_factura, t23_orden, t23_numpre,
+				t23_nom_cliente)

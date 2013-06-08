@@ -1,32 +1,36 @@
-                                                                                
-database diteca
-screen
+DATABASE aceros
+SCREEN
 {
 
 
-			       Código: [c000]
-		
-			Moneda Origen: [c0] [c2         ]
-	               Moneda Destino: [c1] [c3         ]
-		       		 Tasa: [c001          ]
-	
-		    	Ingresado Por: [c002      ]
-                     Fecha de ingreso: [c003               ]
+                              Código: [c000]
+
+                       Moneda Origen: [c0] [c2             ]
+                      Moneda Destino: [c1] [c3             ]
+                   Paridad Cambiaria: [c001                   ]
+
+        Factor de Conversión de [c4] a [c5] es [c004                   ]
+
+                       Ingresado Por: [c002      ]
+                    Fecha de Ingreso: [c003                ]
 
 }
-end
-tables
+TABLES
 gent014
-attributes
-c000 = formonly.g14_serial TYPE INTEGER NOT NULL, REVERSE;
+ATTRIBUTES
+c000 = FORMONLY.g14_serial TYPE INTEGER NOT NULL, REVERSE;
 c0 = gent014.g14_moneda_ori, REVERSE, UPSHIFT, AUTONEXT,
     	  WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c2 = formonly.mon_ori;
+c2 = FORMONLY.mon_ori, NOENTRY, UPSHIFT, REVERSE;
 c1 = gent014.g14_moneda_des, REVERSE, UPSHIFT, AUTONEXT,
     	  WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c3 = formonly.mon_des;
-c001 = gent014.g14_tasa, REVERSE, FORMAT = '###,##&.######',
-	INCLUDE = (0 TO 999999.999999);
+c3 = FORMONLY.mon_des, NOENTRY, UPSHIFT, REVERSE;
+c001 = gent014.g14_tasa, REVERSE, AUTONEXT, FORMAT = '###,##&.###############',
+      INCLUDE = (0 TO 9999999.999999999);
 c002 = gent014.g14_usuario, REVERSE, UPSHIFT, NOENTRY;
 c003 = gent014.g14_fecing, REVERSE, NOENTRY;
-end
+c4   = FORMONLY.tit_mon_des, NOENTRY, UPSHIFT, REVERSE;
+c5   = FORMONLY.tit_mon_ori, NOENTRY, UPSHIFT, REVERSE;
+c004 = FORMONLY.tit_paridad, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '###,##&.###############';
+END

@@ -21,10 +21,8 @@ DEFINE rm_par RECORD
 	n_caja		LIKE cajt002.j02_nombre_caja,
 	areaneg		LIKE gent003.g03_areaneg,
 	n_areaneg	LIKE gent003.g03_nombre,
-    codcli		LIKE cxct001.z01_codcli,
-    n_codcli	LIKE cxct001.z01_nomcli,
-    f_pago		LIKE cajt001.j01_codigo_pago,
-    n_f_pago	LIKE cajt001.j01_nombre 
+	j11_codigo_pago	LIKE cajt011.j11_codigo_pago,
+	j01_nombre	LIKE cajt001.j01_nombre
 END RECORD
 
 DEFINE vm_page		SMALLINT	-- PAGE   LENGTH
@@ -40,13 +38,12 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/cajp402.error')
-CALL fgl_init4js()
+CALL startlog('../logs/cajp402.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4  THEN   		-- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 
-		'Número de parámetros incorrecto.', 
-		'stop')
+	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.','stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
 LET vg_base     = arg_val(1)
@@ -57,8 +54,8 @@ LET vg_proceso = 'cajp402'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
 
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 
 CALL funcion_master()
@@ -68,6 +65,10 @@ END MAIN
 
 
 FUNCTION funcion_master()
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
 CREATE TEMP TABLE temp_tipo
 	(tipo		CHAR(2),
@@ -85,12 +86,24 @@ LET vm_egreso   = 'EC'
 LET vm_cheque   = 'CH'
 LET vm_efectivo = 'EF'
 
-OPEN WINDOW w_mas AT 3,2 WITH 11 ROWS, 80 COLUMNS
- 	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE 0, 
-		BORDER, MESSAGE LINE LAST - 2)
-OPTIONS INPUT WRAP,
-	ACCEPT KEY	F12
-OPEN FORM f_rep FROM "../forms/cajf402_1"
+LET lin_menu = 0
+LET row_ini  = 3
+LET num_rows = 11
+LET num_cols = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW w_mas AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
+	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE lin_menu,
+		  MESSAGE LINE LAST - 1, BORDER) 
+IF vg_gui = 1 THEN
+        OPEN FORM f_rep FROM '../forms/cajf402_1'
+ELSE
+        OPEN FORM f_rep FROM '../forms/cajf402_1c'
+END IF
 DISPLAY FORM f_rep
 
 CALL control_reporte()
@@ -101,13 +114,12 @@ END FUNCTION
 
 FUNCTION control_reporte()
 DEFINE i,col		SMALLINT
-DEFINE query		VARCHAR(2100)
+DEFINE query		CHAR(3000)
 DEFINE comando		VARCHAR(100)
 DEFINE data_found	SMALLINT
 DEFINE expr_caja	VARCHAR(100)
 DEFINE expr_area	VARCHAR(100)
-DEFINE expr_cli		VARCHAR(100)
-DEFINE expr_pago	VARCHAR(100)
+DEFINE num_sri		LIKE rept038.r38_num_sri
 
 DEFINE r_det RECORD
 	j10_fecha_pro		DATE,
@@ -138,42 +150,30 @@ WHILE TRUE
 	IF int_flag THEN
 		EXIT WHILE
 	END IF
-
 	CALL fl_control_reportes() RETURNING comando
 	IF int_flag THEN
 		CONTINUE WHILE
 	END IF
 	CALL fl_lee_compania(vg_codcia) RETURNING rm_g01.*
-	
 	LET expr_caja = ' '
 	IF rm_par.codigo_caja IS NOT NULL THEN
 		LET expr_CAJA = ' AND j10_codigo_caja = ', rm_par.codigo_caja
 	END IF
 	LET expr_area = ' '
 	IF rm_par.areaneg IS NOT NULL THEN
-		LET expr_caja = ' AND j10_areaneg = ', rm_par.areaneg
+		LET expr_area = ' AND j10_areaneg = ', rm_par.areaneg
 	END IF
-	LET expr_cli = ' '
-	IF rm_par.codcli IS NOT NULL THEN
-		LET expr_cli = ' AND j10_codcli = ', rm_par.codcli
-	END IF
-	LET expr_pago = ' '
-	IF rm_par.f_pago IS NOT NULL THEN
-		LET expr_pago = ' AND j11_codigo_pago = "', rm_par.f_pago, '"'
-	END IF
- 
-	LET query = 'SELECT DATE(j10_fecha_pro), g03_nombre, ',
+	LET query = 'SELECT UNIQUE DATE(j10_fecha_pro), g03_nombre, ',
 		          ' j10_estado, j10_tipo_fuente, j10_num_fuente, ',
 		          ' j10_nomcli, j10_tipo_destino, j10_num_destino,',
                           ' j10_moneda, j10_valor, j11_codigo_pago, ',
-		          ' j11_cod_bco_tarj, j11_num_ch_aut, j11_num_cta_tarj, ',
+		          ' j11_cod_bco_tarj, j11_num_ch_aut,j11_num_cta_tarj,',
 		          ' j11_moneda, j11_valor ',
 		      ' FROM cajt010, cajt011, OUTER gent003 ',
 		      ' WHERE j10_compania    = ', vg_codcia, 
 		        ' AND j10_localidad   = ', vg_codloc,
 		        ' AND j10_tipo_fuente <> "', vm_egreso, '" ',
-		        ' AND j10_estado <> "E" ',
-		        expr_cli  CLIPPED,
+		        ' AND j10_estado NOT IN ("E", "*") ',
 		        expr_area CLIPPED,
 		        ' AND DATE(j10_fecha_pro) ',
 		              ' BETWEEN "', rm_par.fecha_ini, '" AND "', 
@@ -185,69 +185,115 @@ WHILE TRUE
 		        ' AND j11_localidad   = j10_localidad ',
 		        ' AND j11_tipo_fuente = j10_tipo_fuente ',
 		        ' AND j11_num_fuente  = j10_num_fuente ', 
-				expr_pago CLIPPED,
-		        ' ORDER BY 2, 1, 4, 5'
---		    'UNION ALL ',
-{
-		    'SELECT DATE(j10_fecha_pro), g03_nombre, ',
+		    'UNION ',
+		    'SELECT UNIQUE DATE(j10_fecha_pro), g03_nombre, ',
 		          ' j10_estado, j10_tipo_fuente, j10_num_fuente, ',
 		          ' j10_referencia, j10_tipo_destino, j10_num_destino,',
                           ' j10_moneda, (j11_valor * (-1)), j11_codigo_pago, ',
-		    	  ' j11_cod_bco_tarj, j11_num_ch_aut, j11_num_cta_tarj,',
+		    	  ' j11_cod_bco_tarj, j11_num_ch_aut,j11_num_cta_tarj,',
 		          ' j11_moneda, (j11_valor * (-1))',
 		      ' FROM cajt010, cajt011, OUTER gent003 ',
                       ' WHERE j10_compania    = ', vg_codcia, 
 		        ' AND j10_localidad   = ', vg_codloc,
 		        ' AND j10_tipo_fuente = "', vm_egreso, '" ',
-		        ' AND j10_estado <> "E" ',
+		        ' AND j10_estado      NOT IN ("E", "*") ',
 		        expr_area CLIPPED,
 		        ' AND DATE(j10_fecha_pro) ',
 		              ' BETWEEN "', rm_par.fecha_ini, '" AND "', 
 		                            rm_par.fecha_fin, '" ',
 		        expr_caja CLIPPED, 
+			' AND j10_banco       = 0 ',
 		        ' AND g03_compania    = j10_compania ', 
 		        ' AND g03_areaneg     = j10_areaneg ',
 		        ' AND j11_compania    = j10_compania ',
 		        ' AND j11_localidad   = j10_localidad ',
 		        ' AND j11_num_egreso  = j10_num_fuente ',
-		    'UNION ALL ',
-		    'SELECT DATE(j10_fecha_pro), g03_nombre, ',
+		    'UNION ',
+		    'SELECT UNIQUE DATE(j10_fecha_pro), g03_nombre, ',
 		          ' j10_estado, j10_tipo_fuente, j10_num_fuente, ',
 		          ' j10_referencia, j10_tipo_destino, j10_num_destino,',
-                          ' j10_moneda, (j10_valor * (-1)), "', vm_efectivo, '", ',
-		    	  ' -1, " ", " ", j10_moneda, (j10_valor * (-1))',
+                          ' j10_moneda, (j10_valor * (-1)), "', vm_efectivo,
+			  '", -1, " ", " ", j10_moneda, (j10_valor * (-1))',
 		      ' FROM cajt010, OUTER gent003 ',
                       ' WHERE j10_compania    = ', vg_codcia, 
 		        ' AND j10_localidad   = ', vg_codloc,
 		        ' AND j10_tipo_fuente = "', vm_egreso, '" ',
-		        ' AND j10_estado <> "E" ',
+		        ' AND j10_estado      NOT IN ("E", "*") ',
 		        expr_area CLIPPED,
 		        ' AND DATE(j10_fecha_pro) ',
 		              ' BETWEEN "', rm_par.fecha_ini, '" AND "', 
 		                            rm_par.fecha_fin, '" ',
 		        expr_caja CLIPPED, 
+			' AND j10_banco       = 0 ',
 		        ' AND g03_compania    = j10_compania ', 
-		        ' AND g03_areaneg     = j10_areaneg '
-}
+		        ' AND g03_areaneg     = j10_areaneg ',
+		        ' ORDER BY 1 '
 	PREPARE deto FROM query
 	DECLARE q_deto CURSOR FOR deto
 	LET data_found = 0
-	
 	START REPORT rep_caja TO PIPE comando
 	FOREACH q_deto INTO r_det.*
+		IF r_det.j10_tipo_destino = 'PR' AND
+		  (vg_codloc >= 3 AND vg_codloc <= 5)
+		THEN
+			--CONTINUE FOREACH
+		END IF
+		IF rm_par.j11_codigo_pago IS NOT NULL THEN
+			IF r_det.j11_codigo_pago <> rm_par.j11_codigo_pago THEN
+				CONTINUE FOREACH
+			END IF
+		END IF
 		LET data_found = 1
 		IF r_det.j11_cod_bco_tarj = -1 THEN
 			INITIALIZE r_det.j11_cod_bco_tarj TO NULL
 		END IF
-		SELECT * FROM temp_tipo WHERE tipo = r_det.j11_codigo_pago
-		IF STATUS = NOTFOUND THEN
-			INSERT INTO temp_tipo
-				VALUES (r_det.j11_codigo_pago, r_det.j11_valor)
+		IF r_det.j10_tipo_destino = 'PR' OR
+		   r_det.j10_tipo_destino = 'EC'
+		THEN
+			SELECT * FROM temp_tipo
+				WHERE tipo = r_det.j10_tipo_destino
+			IF STATUS = NOTFOUND THEN
+				INSERT INTO temp_tipo
+					VALUES (r_det.j10_tipo_destino,
+						r_det.j11_valor)
+			ELSE
+				UPDATE temp_tipo
+					SET valor = valor + r_det.j11_valor
+					WHERE tipo = r_det.j10_tipo_destino
+			END IF
 		ELSE
-			UPDATE temp_tipo SET valor = valor + r_det.j11_valor
+			SELECT * FROM temp_tipo
 				WHERE tipo = r_det.j11_codigo_pago
+			IF STATUS = NOTFOUND THEN
+				INSERT INTO temp_tipo
+					VALUES (r_det.j11_codigo_pago,
+						r_det.j11_valor)
+			ELSE
+				UPDATE temp_tipo
+					SET valor = valor + r_det.j11_valor
+					WHERE tipo = r_det.j11_codigo_pago
+			END IF
 		END IF
-		OUTPUT TO REPORT rep_caja(r_det.*)
+		LET num_sri = NULL
+		IF r_det.j10_tipo_destino = 'FA' THEN
+			DECLARE q_r38 CURSOR FOR
+				SELECT UNIQUE r38_num_sri
+					FROM rept038
+					WHERE r38_compania    = vg_codcia    
+					  AND r38_localidad   = vg_codloc 
+					  AND r38_tipo_fuente =
+							r_det.j10_tipo_fuente 
+					  AND r38_cod_tran    =
+							r_det.j10_tipo_destino 
+					  AND r38_num_tran    =
+							r_det.j10_num_destino
+					ORDER BY r38_num_sri DESC
+			OPEN q_r38
+			FETCH q_r38 INTO num_sri
+			CLOSE q_r38
+			FREE q_r38
+		END IF
+		OUTPUT TO REPORT rep_caja(r_det.*, num_sri)
 	END FOREACH
 	FREE q_deto
 	FINISH REPORT rep_caja
@@ -265,24 +311,25 @@ END FUNCTION
 
 
 FUNCTION lee_parametros()
-
+DEFINE r_j01		RECORD LIKE cajt001.*
 DEFINE r_j02		RECORD LIKE cajt002.*
 DEFINE r_g03		RECORD LIKE gent003.*
-DEFINE r_z01		RECORD LIKE cxct001.*
-DEFINE r_j01		RECORD LIKE cajt001.*
 DEFINE i,j,l,col	SMALLINT
 
 LET INT_FLAG   = 0
 INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 
 	ON KEY(INTERRUPT)
-		IF NOT FIELD_TOUCHED(codigo_caja, areaneg, fecha_ini, fecha_fin)
+		IF NOT FIELD_TOUCHED(codigo_caja, areaneg, fecha_ini, fecha_fin,
+					j11_codigo_pago)
 		THEN
 			EXIT PROGRAM
 		END IF
 		LET INT_FLAG = 1 
 		RETURN
 
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
 	ON KEY(F2)
 		IF INFIELD(codigo_caja) THEN
 			CALL fl_ayuda_cajas(vg_codcia, vg_codloc) 
@@ -304,34 +351,31 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 				DISPLAY BY NAME rm_par.*
 			END IF 
 		END IF
-		IF INFIELD(codcli) THEN
-			CALL fl_ayuda_cliente_localidad(vg_codcia, vg_codloc)
-				RETURNING r_z01.z01_codcli, r_z01.z01_nomcli
-			IF r_z01.z01_codcli IS NOT NULL THEN
-				LET rm_par.codcli   = r_z01.z01_codcli
-				LET rm_par.n_codcli = r_z01.z01_nomcli
-				DISPLAY BY NAME rm_par.*
-			END IF 
-		END IF
-		IF INFIELD(f_pago) THEN
-			CALL fl_ayuda_forma_pago(vg_codcia) 
-				RETURNING r_j01.j01_codigo_pago, r_j01.j01_nombre
+		IF INFIELD(j11_codigo_pago) THEN
+			CALL fl_ayuda_forma_pago(vg_codcia, 'T', 'T', 'T') 
+				RETURNING r_j01.j01_codigo_pago,
+					  r_j01.j01_nombre,
+					  r_j01.j01_cont_cred
 			IF r_j01.j01_codigo_pago IS NOT NULL THEN
-				LET rm_par.f_pago = r_j01.j01_codigo_pago
-				LET rm_par.n_f_pago = r_j01.j01_nombre
-				DISPLAY BY NAME rm_par.*
+				LET rm_par.j11_codigo_pago =
+							r_j01.j01_codigo_pago
+				LET rm_par.j01_nombre      = r_j01.j01_nombre
+				DISPLAY BY NAME rm_par.j11_codigo_pago,
+						  r_j01.j01_nombre
 			END IF
 		END IF
 		LET INT_FLAG = 0
 
+	BEFORE INPUT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 	AFTER FIELD codigo_caja
 		IF rm_par.codigo_caja IS NOT NULL THEN
 			CALL fl_lee_codigo_caja_caja(vg_codcia, vg_codloc,
 				rm_par.codigo_caja) RETURNING r_j02.* 
 			IF r_j02.j02_codigo_caja IS NULL THEN
-				CALL fgl_winmessage(vg_producto,
-						    'Código caja no existe.',
-						    'exclamation')
+				--CALL fgl_winmessage(vg_producto,'Código caja no existe.','exclamation')
+				CALL fl_mostrar_mensaje('Código caja no existe.','exclamation')
 				CLEAR n_caja
 				NEXT FIELD codigo_caja
 			END IF
@@ -347,9 +391,8 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 			CALL fl_lee_area_negocio(vg_codcia, rm_par.areaneg) 
 				RETURNING r_g03.* 
 			IF r_g03.g03_areaneg IS NULL THEN
-				CALL fgl_winmessage(vg_producto,
-						    'Area de negocio no existe.',
-						    'exclamation')
+				--CALL fgl_winmessage(vg_producto,'Area de negocio no existe.','exclamation')
+				CALL fl_mostrar_mensaje('Area de negocio no existe.','exclamation')
 				CLEAR n_areaneg
 				NEXT FIELD areaneg
 			END IF
@@ -360,43 +403,16 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 			LET rm_par.n_areaneg = NULL
 		END IF
 
-	AFTER FIELD codcli
-		IF rm_par.codcli IS NOT NULL THEN
-			CALL fl_lee_cliente_general(rm_par.codcli) RETURNING r_z01.*
-			IF r_z01.z01_codcli IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'No existe el Cliente en la Compañía. ','exclamation') 
-				INITIALIZE rm_par.codcli, rm_par.n_codcli TO NULL
-				DISPLAY BY NAME rm_par.*
-				NEXT FIELD codcli
-			END IF
-		END IF
-
-	AFTER FIELD f_pago
-		IF rm_par.f_pago IS NOT NULL THEN
-			CALL fl_lee_tipo_pago_caja(vg_codcia, rm_par.f_pago)
-				RETURNING r_j01.*		
-			IF r_j01.j01_codigo_pago IS NULL THEN
-				CALL fgl_winmessage(vg_producto,
-					'Forma de Pago no existe.',
-					'exclamation')
-				NEXT FIELD f_pago
-			END IF
-		END IF
-
 	AFTER FIELD fecha_ini
 		IF rm_par.fecha_ini IS NOT NULL THEN
 			IF rm_par.fecha_ini > TODAY THEN
-				CALL fgl_winmessage(vg_producto,
-					'La fecha de inicio no puede ser ' ||
-					'mayor a la de hoy.',
-					'exclamation')
+				--calL fgl_winmessage(vg_producto,'La fecha de inicio no puede ser mayor a la de hoy.','exclamation')
+				CALL fl_mostrar_mensaje('La fecha de inicio no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD fecha_ini
 			END IF
 			IF rm_par.fecha_ini < '01-01-1990' THEN
-				CALL fgl_winmessage(vg_producto,
-					'Debe ingresa fechas mayores a las ' ||
-					'del año 1989.',
-					'exclamation')	
+				--CALL fgl_winmessage(vg_producto,'Debe ingresa fechas mayores a las del año 1989.','exclamation')	
+				CALL fl_mostrar_mensaje('Debe ingresa fechas mayores a las del año 1989.','exclamation')	
 				NEXT FIELD fecha_ini
 			END IF
 				
@@ -407,29 +423,39 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 	AFTER FIELD fecha_fin
 		IF rm_par.fecha_fin IS NOT NULL THEN
 			IF rm_par.fecha_fin > TODAY THEN
-				CALL fgl_winmessage(vg_producto,
-					'La fecha de término no puede ser ' || 
-					'mayor a la de hoy.',
-					'exclamation')
+				--CALL fgl_winmessage(vg_producto,'La fecha de término no puede ser mayor a la de hoy.','exclamation')
+				CALL fl_mostrar_mensaje('La fecha de término no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD fecha_fin
 			END IF
 			IF rm_par.fecha_fin < '01-01-1990' THEN
-				CALL fgl_winmessage(vg_producto,
-					'Debe ingresa fechas mayores a las ' ||
-					'del año 1989.',
-					'exclamation')	
+				--CALL fgl_winmessage(vg_producto,'Debe ingresa fechas mayores a las del año 1989.','exclamation')	
+				CALL fl_mostrar_mensaje('Debe ingresa fechas mayores a las del año 1989.','exclamation')	
 				NEXT FIELD fecha_fin
 			END IF
 		ELSE
 			NEXT FIELD fecha_fin
 		END IF
 
+	AFTER FIELD j11_codigo_pago
+		IF rm_par.j11_codigo_pago IS NOT NULL THEN
+			CALL fl_lee_tipo_pago_caja(vg_codcia,
+							rm_par.j11_codigo_pago,
+							r_j01.j01_cont_cred)
+				RETURNING r_j01.*		
+			IF r_j01.j01_codigo_pago IS NULL THEN
+				CALL fl_mostrar_mensaje('Forma de Pago no existe.','exclamation')
+				NEXT FIELD j11_codigo_pago
+			END IF
+			LET rm_par.j01_nombre = r_j01.j01_nombre
+			DISPLAY BY NAME r_j01.j01_nombre
+		ELSE
+			CLEAR j01_nombre
+		END IF
+
 	AFTER INPUT
 		IF rm_par.fecha_ini > rm_par.fecha_fin THEN
-			CALL fgl_winmessage(vg_producto,
-				'La fecha inicial debe ser menor a la fecha ' ||
-				'final.',
-				'exclamation')
+			--CALL fgl_winmessage(vg_producto,'La fecha inicial debe ser menor a la fecha final.','exclamation')
+			CALL fl_mostrar_mensaje('La fecha inicial debe ser menor a la fecha final.','exclamation')
 			CONTINUE INPUT
 		END IF
 END INPUT
@@ -441,7 +467,7 @@ END FUNCTION
 REPORT rep_caja(j10_fecha_pro,  g03_nombre, j10_estado, j10_tipo_fuente,
 		j10_num_fuente, cliente, j10_tipo_destino, j10_num_destino,
 		j10_moneda, j10_valor, j11_codigo_pago, j11_cod_bco_tarj,
-		j11_num_ch_aut, j11_num_cta_tarj, j11_moneda, j11_valor)
+		j11_num_ch_aut, j11_num_cta_tarj, j11_moneda, j11_valor,num_sri)
 
 DEFINE j10_fecha_pro		DATE
 DEFINE g03_nombre		LIKE gent003.g03_nombre
@@ -449,7 +475,7 @@ DEFINE siglas_area		VARCHAR(3)
 DEFINE j10_estado		LIKE cajt010.j10_estado
 DEFINE j10_tipo_fuente		LIKE cajt010.j10_tipo_fuente
 DEFINE j10_num_fuente		LIKE cajt010.j10_num_fuente
-DEFINE cliente			VARCHAR(30)
+DEFINE cliente			VARCHAR(20)
 DEFINE j10_tipo_destino		LIKE cajt010.j10_tipo_destino
 DEFINE j10_num_destino		LIKE cajt010.j10_num_destino
 DEFINE j10_moneda		LIKE cajt010.j10_moneda
@@ -460,10 +486,12 @@ DEFINE j11_num_ch_aut		LIKE cajt011.j11_num_ch_aut
 DEFINE j11_num_cta_tarj		LIKE cajt011.j11_num_cta_tarj
 DEFINE j11_moneda		LIKE cajt011.j11_moneda
 DEFINE j11_valor		LIKE cajt011.j11_valor
+DEFINE cont_cred		LIKE cajt001.j01_cont_cred
+DEFINE num_sri			LIKE rept038.r38_num_sri
 
 DEFINE usuario			VARCHAR(19,15)
 DEFINE titulo			VARCHAR(80)
-DEFINE modulo			VARCHAR(40)
+DEFINE modulo			VARCHAR(30)
 DEFINE i,long			SMALLINT
 
 DEFINE bco_tarj			SMALLINT
@@ -472,66 +500,77 @@ DEFINE r_g08			RECORD LIKE gent008.*
 DEFINE r_g10			RECORD LIKE gent010.*
 DEFINE ttipo			LIKE cajt011.j11_codigo_pago
 DEFINE tvalor			LIKE cajt011.j11_valor
+DEFINE escape		SMALLINT
+DEFINE act_comp, db_c	SMALLINT
+DEFINE desact_comp, db	SMALLINT
 
 OUTPUT
-	TOP    MARGIN	vm_top
-	LEFT   MARGIN	vm_left
-	RIGHT  MARGIN	vm_right
-	BOTTOM MARGIN	vm_bottom
-	PAGE   LENGTH	vm_page
+	TOP MARGIN	1
+	LEFT MARGIN	2
+	RIGHT MARGIN	132
+	BOTTOM MARGIN	4
+	PAGE LENGTH	66
+
 FORMAT
+
 PAGE HEADER
-  	print 'E'; 
-  	print '&l26A';	-- Indica que voy a trabajar con hojas A4
-  	print '&l1O';		-- Modo landscape
-  	print '&k2S'	        -- Letra (16 cpi)
+	LET escape	= 27		# Iniciar sec. impresi¢n
+	LET act_comp	= 15		# Activar Comprimido.
+	LET desact_comp	= 18		# Cancelar Comprimido.
 	LET modulo  = "Módulo: Caja"
 	LET long    = LENGTH(modulo)
 	LET usuario = 'Usuario: ', vg_usuario
 	CALL fl_justifica_titulo('D', usuario, 19) RETURNING usuario
-	CALL fl_justifica_titulo('I', 'VALORES RECAUDADOS POR CAJA', 80)
+	CALL fl_justifica_titulo('C', 'VALORES RECAUDADOS POR CAJA', 80)
 		RETURNING titulo
 	
-	PRINT COLUMN 1, rm_g01.g01_razonsocial,
-	      COLUMN 174, "Página: ", PAGENO USING "&&&"
-	PRINT COLUMN 1, modulo CLIPPED,
-	      COLUMN 79, titulo CLIPPED,
-	      COLUMN 178, UPSHIFT(vg_proceso)
+	SKIP 1 LINES
+	print ASCII escape;
+	print ASCII act_comp;
+	PRINT COLUMN 003, rm_g01.g01_razonsocial,
+	      COLUMN 124, "Pagina: ", PAGENO USING "&&&"
+	PRINT COLUMN 001, modulo,
+	      COLUMN 026, titulo,
+	      COLUMN 124, UPSHIFT(vg_proceso)
       
 	SKIP 1 LINES
-	PRINT COLUMN 40, "** Fecha Inicial   : ", 
-			rm_par.fecha_ini USING "dd-mm-yyyy",
-	      COLUMN 100, "** Fecha Final    : ", 
-	      		rm_par.fecha_fin USING "dd-mm-yyyy"
-
+	PRINT COLUMN 40, "** Caja           : ";
 	IF rm_par.codigo_caja IS NOT NULL THEN
-		PRINT COLUMN 40, "** Caja           : ", rm_par.n_caja
+		PRINT rm_par.n_caja
+	ELSE
+		PRINT ''
 	END IF
+	PRINT COLUMN 40, "** Rango de Fechas: ", 
+			rm_par.fecha_ini USING "dd-mm-yyyy", ' al ',
+	      		rm_par.fecha_fin USING "dd-mm-yyyy"
+	PRINT COLUMN 40, "** Area de Negocio: ";
 	IF rm_par.areaneg IS NOT NULL THEN
-		PRINT COLUMN 40, "** Area de Negocio: ", rm_par.n_areaneg
+		PRINT rm_par.n_areaneg
+	ELSE
+		PRINT ''
 	END IF
-
+	IF rm_par.j11_codigo_pago IS NOT NULL THEN
+		PRINT COLUMN 40, "** Forma de Pago  : ", rm_par.j11_codigo_pago,
+				" ", rm_par.j01_nombre
+	ELSE
+		PRINT ''
+	END IF
 	SKIP 1 LINES
-	PRINT COLUMN 01, "Fecha de Impresión: ", TODAY USING "dd-mm-yyyy", 
+	PRINT COLUMN 01, "Impresión: ", TODAY USING "dd-mm-yyyy", 
 	                 1 SPACES, TIME,
-	      COLUMN 166, usuario
-	SKIP 1 LINES
-	
-	PRINT COLUMN 1,   "Fecha Pro.",
-	      COLUMN 13,  "Area",
-	      COLUMN 18,  "Est",
-	      COLUMN 23,  "Tipo Origen",
-	      COLUMN 35,  "Cliente/Referencia",
-	      COLUMN 67,  "Tipo Destino",
-	      COLUMN 88,  "MD",
-	      COLUMN 92,  fl_justifica_titulo('D', "Valor Doc.", 16),
-	      COLUMN 110, "CP",
-	      COLUMN 114, "Nombre Bco/Tarj",
-	      COLUMN 136, "# Ch/Aut",
-	      COLUMN 153, "# Cta/Tarj",
-	      COLUMN 169, fl_justifica_titulo('D', "Valor Pago", 16)
-
-	PRINT COLUMN 1,   "----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+	      COLUMN 113, usuario
+	PRINT COLUMN 1, "------------------------------------------------------------------------------------------------------------------------------------"
+	PRINT COLUMN 001, "Fecha Pro.",		-- (10)
+	      COLUMN 012, "Cliente/Referenc",   -- (20)
+	      COLUMN 029, "Documento",		-- (10)
+	      COLUMN 040, "Num. SRI",		-- (15)
+	      COLUMN 058, "     Valor",		-- (10) ###,##&.##
+	      COLUMN 069, "CP",
+	      COLUMN 070, "Banco/Tarjeta",      -- (15)
+	      COLUMN 088, "# Ch/Aut",		-- (15)
+	      COLUMN 106, "# Cta/Tarj",		-- (16)
+	      COLUMN 123, "Valor Pago"		-- (10)
+	PRINT COLUMN 1, "------------------------------------------------------------------------------------------------------------------------------------"
 
 ON EVERY ROW
 	LET bco_tarj = banco_tarjeta(j11_codigo_pago)
@@ -540,7 +579,12 @@ ON EVERY ROW
 		LET n_bco_tarj = r_g08.g08_nombre
 	ELSE
 		IF bco_tarj = 2 THEN
-			CALL fl_lee_tarjeta_credito(j11_cod_bco_tarj) 
+			LET cont_cred = 'C'
+			IF j10_tipo_fuente = 'SC' THEN
+				LET cont_cred = 'R'
+			END IF
+			CALL fl_lee_tarjeta_credito(vg_codcia, j11_cod_bco_tarj,
+						j11_codigo_pago, cont_cred) 
 				RETURNING r_g10.*
 			LET n_bco_tarj = r_g10.g10_nombre
 		ELSE
@@ -548,41 +592,34 @@ ON EVERY ROW
 		END IF
 	END IF
 
---	FOR i = 1 TO 3
---		LET siglas_area[i] = g03_nombre[i]
---	END FOR
-	LET siglas_area = g03_nombre[1, 3]
-
-	PRINT COLUMN 1,   j10_fecha_pro USING "dd-mm-yyyy",
-	      COLUMN 13,  siglas_area,
-	      COLUMN 18,  j10_estado,
-	      COLUMN 23,  j10_tipo_fuente, '-', 
-	      		  fl_justifica_titulo('I', j10_num_fuente, 6) CLIPPED,
-	      COLUMN 35,  cliente CLIPPED,
-	      COLUMN 67,  j10_tipo_destino, '-', 
-	      		  fl_justifica_titulo('I', j10_num_destino, 15) CLIPPED,
-	      COLUMN 88,  j10_moneda,
-	      COLUMN 92,  j10_valor USING "-,---,---,--&.##",
-	      COLUMN 110, j11_codigo_pago,
-	      COLUMN 114, n_bco_tarj CLIPPED,
-	      COLUMN 136, fl_justifica_titulo('I', j11_num_ch_aut,  15) CLIPPED,
-	      COLUMN 153, fl_justifica_titulo('I', j11_num_cta_tarj,25) CLIPPED,
-	      COLUMN 169, j11_valor USING "-,---,---,--&.##"
+	FOR i = 1 TO 3
+		LET siglas_area[i] = g03_nombre[i]
+	END FOR
+	NEED 3 LINES
+	PRINT COLUMN 001, j10_fecha_pro USING "dd-mm-yyyy",
+	      COLUMN 012, cliente[1,16],
+	      COLUMN 029, j10_tipo_destino, '-', 
+	      		  fl_justifica_titulo('I', j10_num_destino, 7) CLIPPED,
+	      COLUMN 040, num_sri[1,17], 
+	      COLUMN 058, j10_valor USING "---,--&.##",
+	      COLUMN 069, j11_codigo_pago,
+	      COLUMN 072, n_bco_tarj[1,15],
+	      COLUMN 088, j11_num_ch_aut[1,17],
+	      COLUMN 106, j11_num_cta_tarj[1,16],
+	      COLUMN 123, j11_valor USING "---,--&.##"
 
 ON LAST ROW
-	--NEED 2 LINES
-	PRINT COLUMN 169, "----------------"	
-	      
-	PRINT COLUMN 169, SUM(j11_valor) USING "-,---,---,--&.##"
-
+	PRINT COLUMN 120, "-------------"	
+	PRINT COLUMN 120, SUM(j11_valor) USING "--,---,--&.##"
+	NEED 4 LINES
 	SKIP 1 LINES
-	print '&k4S'	        -- Letra (12 cpi)
-	DECLARE q_tipo CURSOR FOR
-			SELECT * FROM temp_tipo
+	DECLARE q_tipo CURSOR FOR SELECT * FROM temp_tipo
 	FOREACH q_tipo INTO ttipo, tvalor
-		PRINT COLUMN 91, 'Valor Total Tipo ==>  ', ttipo, ' ',
-				tvalor USING "-,---,---,--&.##"
+		PRINT COLUMN 42, 'Valor Total Tipo ==>  ', ttipo, ' ',
+				tvalor USING "--,---,--&.##"
 	END FOREACH
+	print ASCII escape;
+	print ASCII desact_comp 
 	CLOSE q_tipo
 	FREE q_tipo
 
@@ -606,9 +643,9 @@ DEFINE ret_val		SMALLINT
 
 CASE forma_pago
 	WHEN vm_cheque LET ret_val = 1 
+	WHEN 'CP' LET ret_val = 1 
 	WHEN 'DP' LET ret_val = 1 
 	WHEN 'CD' LET ret_val = 1 
-	WHEN 'DA' LET ret_val = 1 
 	
 	WHEN 'TJ' LET ret_val = 2
 
@@ -627,33 +664,14 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION llamar_visor_teclas()
+DEFINE a		CHAR(1)
 
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
+IF vg_gui = 0 THEN
+	CALL fl_visor_teclas_caracter() RETURNING int_flag 
+	LET a = fgl_getkey()
+	CLOSE WINDOW w_tf
+	LET int_flag = 0
 END IF
 
 END FUNCTION

@@ -1,8 +1,8 @@
-DATABASE formonly
+DATABASE FORMONLY
 SCREEN
 {
-    [f1000          ]        [f2000          ]        [f3000          ]
-    [f1001         ]         [f2001         ]         [f3001         ]
+   		             [f2000          ]        [f3000          ]  
+       		             [f2001         ]         [f3001         ]
 
 
 
@@ -11,61 +11,62 @@ SCREEN
 
 
 
-    [f7000          ]        [f8000          ]        [f9000          ]
-    [f7001         ]         [f8001         ]         [f9001         ]
+    [f8000          ]        [f9000          ]        [f10000         ]
+    [f8001         ]         [f9001         ]         [f10001        ]
 
 
 
-    [f10000         ]        [f11000         ]
-    [f10001        ]         [f11001        ] 
+     [f20000         ]
 
 }
-attributes
-f1000=  formonly.c1000, WIDGET='BUTTON', 
-	config='CONTROL-Z';
-f2000=  formonly.c2000, WIDGET='BUTTON', 
+ATTRIBUTES
+--f1000=  FORMONLY.c1000, WIDGET='BUTTON', 
+--	config='CONTROL-Z';
+f2000=  FORMONLY.c2000, WIDGET='BUTTON', 
 	config='CONTROL-Y';
-f3000=  formonly.c3000, WIDGET='BUTTON', 
+f3000=  FORMONLY.c3000, WIDGET='BUTTON', 
 	config='CONTROL-X';
-f4000=  formonly.c4000, WIDGET='BUTTON', 
+f4000=  FORMONLY.c4000, WIDGET='BUTTON', 
 	config='CONTROL-W';
-f5000=  formonly.c5000, WIDGET='BUTTON', 
+f5000=  FORMONLY.c5000, WIDGET='BUTTON', 
 	config='CONTROL-V';
-f6000=  formonly.c6000, WIDGET='BUTTON', 
+f6000=  FORMONLY.c6000, WIDGET='BUTTON', 
 	config='CONTROL-U';
-f7000=  formonly.c7000, WIDGET='BUTTON', 
-	config='CONTROL-T';
-f8000=  formonly.c8000, WIDGET='BUTTON', 
+--f7000=  FORMONLY.c7000, WIDGET='BUTTON', 
+--	config='CONTROL-T';
+f8000=  FORMONLY.c8000, WIDGET='BUTTON', 
 	config='CONTROL-S';
-f9000=  formonly.c9000, WIDGET='BUTTON', 
+f9000=  FORMONLY.c9000, WIDGET='BUTTON', 
 	config='CONTROL-R';
-f10000=  formonly.c10000, WIDGET='BUTTON', 
+f10000=  FORMONLY.c10000, WIDGET='BUTTON', 
 	config='CONTROL-Q';
-f11000=  formonly.c11000, WIDGET='BUTTON', 
-	config='CONTROL-P';
+--f11000=  FORMONLY.c11000, WIDGET='BUTTON', 
+--	config='CONTROL-P';
 
-f1001=  formonly.c1001, WIDGET='BMP', 
-	config='maquinarias.bmp CONTROL-Z';
-f2001=  formonly.c2001, WIDGET='BMP',
+--f1001=  FORMONLY.c1001, WIDGET='BMP', 
+--	config='maquinarias.bmp CONTROL-Z';
+f2001=  FORMONLY.c2001, WIDGET='BMP',
 	config='repuestos.bmp CONTROL-Y';
-f3001=  formonly.c3001, WIDGET='BMP',
-	config='talleres_dit.bmp CONTROL-X';
-f4001=  formonly.c4001, WIDGET='BMP', 
+f3001=  FORMONLY.c3001, WIDGET='BMP',
+	config='talleres.bmp CONTROL-X';
+f4001=  FORMONLY.c4001, WIDGET='BMP', 
 	config='cobranzas.bmp CONTROL-W';
-f5001=  formonly.c5001, WIDGET='BMP',
+f5001=  FORMONLY.c5001, WIDGET='BMP',
 	config='tesoreria.bmp CONTROL-V';
-f6001=  formonly.c6001, WIDGET='BMP',
+f6001=  FORMONLY.c6001, WIDGET='BMP',
 	config='contabilidad.bmp CONTROL-U';
-f7001=  formonly.c7001, WIDGET='BMP', 
-	config='roles.bmp CONTROL-T';
-f8001=  formonly.c8001, WIDGET='BMP',
+--f7001=  FORMONLY.c7001, WIDGET='BMP', 
+--	config='roles.bmp CONTROL-T';
+f8001=  FORMONLY.c8001, WIDGET='BMP',
 	config='compras.bmp CONTROL-S';
-f9001=  formonly.c9001, WIDGET='BMP',
+f9001=  FORMONLY.c9001, WIDGET='BMP',
 	config='caja.bmp CONTROL-R';
-f10001= formonly.c10001, WIDGET='BMP',
+f10001= FORMONLY.c10001, WIDGET='BMP',
 	config='caja_chica.bmp CONTROL-Q';
-f11001= formonly.c11001, WIDGET='BMP',
-	config='generales.bmp CONTROL-P';
+--f11001= FORMONLY.c11001, WIDGET='BMP',
+--	config='repuestos.bmp CONTROL-P';
+f20000= FORMONLY.c20000, WIDGET='BMP',
+	config='phobos_titulo.bmp CONTROL-O';
 INSTRUCTIONS
 DELIMITERS '  '
 

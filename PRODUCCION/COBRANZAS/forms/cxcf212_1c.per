@@ -1,0 +1,57 @@
+DATABASE aceros
+SCREEN
+{
+
+ Codigo Caja: [c000  ] [c001                          ]     Tipo: [c|c002   ]
+     Cliente: [c003  ] [c004                              ]
+
+                                                           [c007 ] de [c008 ]
+  LC FECHA RET.   CLIENTES     No. FACT. SRI   No. RET. SRI     VALOR RET. T
+ [c1|c020      |c021         |c022           |c023           |c024        |d]
+ [c1|c020      |c021         |c022           |c023           |c024        |d]
+ [c1|c020      |c021         |c022           |c023           |c024        |d]
+ [c1|c020      |c021         |c022           |c023           |c024        |d]
+ [c1|c020      |c021         |c022           |c023           |c024        |d]
+ [c1|c020      |c021         |c022           |c023           |c024        |d]
+ [c1|c020      |c021         |c022           |c023           |c024        |d]
+ [c1|c020      |c021         |c022           |c023           |c024        |d]
+ [c1|c020      |c021         |c022           |c023           |c024        |d]
+ [c1|c020      |c021         |c022           |c023           |c024        |d]
+ [c1|c020      |c021         |c022           |c023           |c024        |d]
+ [c030                                          ]  Total ==> [c031        ]
+}
+TABLES
+cajt014
+cxct001
+ATTRIBUTES
+c000 = FORMONLY.codcaj TYPE INTEGER, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c001 = FORMONLY.nomcaj TYPE VARCHAR, NOENTRY, UPSHIFT;
+c    = FORMONLY.cont_cred TYPE CHAR NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, INCLUDE = ('C', 'R', 'T'), DEFAULT = 'R',
+	COMMENTS = '(C) Contado  (R) Credito  (T) Todas';
+c002 = FORMONLY.tit_cont_cred, NOENTRY, UPSHIFT, REVERSE;
+c003 = FORMONLY.codcli TYPE INTEGER, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c004 = FORMONLY.nomcli TYPE VARCHAR, NOENTRY, UPSHIFT;
+
+c007 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c008 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c1   = cajt014.j14_localidad, NOENTRY, UPSHIFT, FORMAT = '&&';
+c020 = cajt014.j14_fecha_emi, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c021 = cxct001.z01_nomcli, NOENTRY, UPSHIFT;
+c022 = cajt014.j14_num_fact_sri, NOENTRY, UPSHIFT;
+c023 = cajt014.j14_num_ret_sri, NOENTRY, UPSHIFT;
+c024 = cajt014.j14_valor_ret, NOENTRY, UPSHIFT, FORMAT = '#,###,##&.##';
+d    = cajt014.j14_cont_cred, NOENTRY, UPSHIFT;
+
+c030 = FORMONLY.tit_nomcli, NOENTRY, UPSHIFT, REVERSE;
+c031 = FORMONLY.tot_valor_ret TYPE DECIMAL, NOENTRY, REVERSE,
+	FORMAT = '#,###,##&.##';
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_detalle[11] (j14_localidad, j14_fecha_emi, z01_nomcli,
+				j14_num_fact_sri, j14_num_ret_sri,
+				j14_valor_ret, j14_cont_cred)

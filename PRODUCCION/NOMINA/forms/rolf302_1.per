@@ -1,0 +1,72 @@
+DATABASE aceros
+SCREEN
+{
+          Departamento: [c000  ] [c001                              ]
+       Estado Empleado: [c002        ] Moneda: [c0] [c003           ]
+
+                                       Desea Total Ganado Cont.?: [d]
+
+                                                              [c050] de [c051]
+ [c010|c011                                  |c012            |c013         |b]
+[c020|c021                                  |c022            |c023         |c]
+[c020|c021                                  |c022            |c023         |c]
+[c020|c021                                  |c022            |c023         |c]
+[c020|c021                                  |c022            |c023         |c]
+[c020|c021                                  |c022            |c023         |c]
+[c020|c021                                  |c022            |c023         |c]
+[c020|c021                                  |c022            |c023         |c]
+[c020|c021                                  |c022            |c023         |c]
+[c020|c021                                  |c022            |c023         |c]
+[c020|c021                                  |c022            |c023         |c]
+[c020|c021                                  |c022            |c023         |c]
+[c020|c021                                  |c022            |c023         |c]
+                                               Total Sueldo: [c030         ]
+}
+TABLES
+gent013
+gent034
+gent035
+rolt030
+ATTRIBUTES
+c000 = FORMONLY.n30_cod_depto, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = gent034.g34_nombre, NOENTRY, UPSHIFT;
+c002 = FORMONLY.n30_estado TYPE CHAR NOT NULL, REQUIRED, AUTONEXT, REVERSE,
+	UPSHIFT, DEFAULT = 'A', INCLUDE = ('A', 'J', 'I', 'T'),
+	WIDGET = 'RADIO', CONFIG = 'A Activos J Jubilados I Inactivos T "T O D O S"';
+c0   = rolt030.n30_mon_sueldo, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = gent013.g13_nombre, NOENTRY, UPSHIFT, REVERSE;
+d    = FORMONLY.ver_tot_gan TYPE CHAR NOT NULL, AUTONEXT, REQUIRED, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge', INCLUDE = ('S', 'N'),
+	DEFAULT = 'N', REVERSE;
+
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+b    = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+
+c020 = rolt030.n30_cod_trab, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c021 = rolt030.n30_nombres, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c022 = gent035.g35_nombre, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c023 = rolt030.n30_sueldo_mes, NOENTRY, UPSHIFT,
+	FORMAT = '--,---,--&.##', OPTIONS = '-nolist';
+c    = rolt030.n30_estado, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+
+c050 = FORMONLY.vm_num_det, NOENTRY, UPSHIFT;
+c051 = FORMONLY.vm_max_det, NOENTRY, UPSHIFT;
+c030 = FORMONLY.total_sueldo TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '--,---,--&.##', OPTIONS = '-nolist';
+END
+KEYS
+F5  = 'Empleado'
+F6  = 'Total Ganado'
+F7  = 'Anticipos'
+F8  = 'Liquidaciones'
+F9  = 'Otros Valores'
+F10 = 'Totales por Rubro'
+F11 = 'Imprimir'
+INSTRUCTIONS
+SCREEN RECORD rm_detalle[12] (n30_cod_trab, n30_nombres, g35_nombre,
+				n30_sueldo_mes, rolt030.n30_estado)

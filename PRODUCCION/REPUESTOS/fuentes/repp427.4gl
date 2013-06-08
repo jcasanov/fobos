@@ -8,7 +8,6 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_demonios	VARCHAR(12)
 DEFINE rm_r11		RECORD LIKE rept011.*
 DEFINE rm_r02		RECORD LIKE rept002.*
 
@@ -35,10 +34,11 @@ DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
 CALL startlog('../logs/errores')
-CALL fgl_init4js()
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN   -- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto.', 'stop')
+	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.', 'stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
 LET vg_base     = arg_val(1)
@@ -47,8 +47,8 @@ LET vg_codcia   = arg_val(3)
 LET vg_proceso = 'repp427'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -57,14 +57,30 @@ END MAIN
 
 
 FUNCTION funcion_master()
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
 CALL fl_nivel_isolation()
-OPEN WINDOW w_mas AT 3,2 WITH 10 ROWS, 80 COLUMNS
-    ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE 0, BORDER,
-	      MESSAGE LINE LAST - 2)
-OPTIONS INPUT WRAP,
-	ACCEPT KEY	F12
-OPEN FORM f_rep FROM "../forms/repf427_1"
+LET lin_menu = 0
+LET row_ini  = 3
+LET num_rows = 10
+LET num_cols = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW w_mas AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
+	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE lin_menu,
+		  MESSAGE LINE LAST - 1, BORDER) 
+IF vg_gui = 1 THEN
+	OPEN FORM f_rep FROM "../forms/repf427_1"
+ELSE
+	OPEN FORM f_rep FROM "../forms/repf427_1c"
+END IF
 DISPLAY FORM f_rep
 CALL borrar_cabecera()
 CALL control_reporte()
@@ -74,15 +90,15 @@ END FUNCTION
 
 
 FUNCTION control_reporte()
-DEFINE query		VARCHAR(800)
+DEFINE query		CHAR(800)
 DEFINE comando 		VARCHAR(100)
 DEFINE r_report 	RECORD
-	item		LIKE rept011.r11_item,
-	descripcion	LIKE rept010.r10_nombre,
-	stock		LIKE rept011.r11_stock_act,
-	percha		VARCHAR(3),
-	ubicacion	VARCHAR(7)
-	END RECORD
+				item		LIKE rept011.r11_item,
+				descripcion	LIKE rept010.r10_nombre,
+				stock		LIKE rept011.r11_stock_act,
+				percha		VARCHAR(3),
+				ubicacion	VARCHAR(7)
+			END RECORD
 
 LET vm_top    = 0
 LET vm_left   = 15
@@ -107,11 +123,11 @@ WHILE TRUE
 			'WHERE r11_compania  =',vg_codcia,
 			'  AND r11_bodega    ="',rm_r11.r11_bodega,'"',
 			'  AND r11_stock_act > 0',
-			'  AND ',expr_percha,
-			'  AND ',expr_ubicacion,
+			'  AND ',expr_percha CLIPPED,
+			'  AND ',expr_ubicacion CLIPPED,
 			'  AND r11_compania = r10_compania',
 			'  AND r11_item     = r10_codigo',
-			' ORDER BY 4, 5'
+			' ORDER BY 4'
 
 	PREPARE reporte FROM query
 	DECLARE q_reporte CURSOR FOR reporte
@@ -146,9 +162,11 @@ INPUT BY NAME rm_r11.r11_bodega, vm_percha, vm_percha2,
 	ON KEY(INTERRUPT)
 		LET int_flag = 1
 		RETURN
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
 	ON KEY(F2)
 		IF INFIELD(r11_bodega) THEN
-                     	CALL fl_ayuda_bodegas_rep(vg_codcia, NULL, 'T')
+                     	CALL fl_ayuda_bodegas_rep(vg_codcia, 'T', 'T', 'T', 'A', 'T', '2')
 				RETURNING rm_r02.r02_codigo, rm_r02.r02_nombre
 			IF rm_r02.r02_codigo IS NOT NULL THEN
 				LET rm_r11.r11_bodega = rm_r02.r02_codigo
@@ -156,12 +174,16 @@ INPUT BY NAME rm_r11.r11_bodega, vm_percha, vm_percha2,
 				DISPLAY rm_r02.r02_nombre TO nom_bod
 			END IF
 		END IF
+	BEFORE INPUT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 	AFTER FIELD r11_bodega
 		IF rm_r11.r11_bodega IS NOT NULL THEN
 			CALL fl_lee_bodega_rep(vg_codcia,rm_r11.r11_bodega)
 				RETURNING rm_r02.*
 			IF rm_r02.r02_codigo IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'No existe la bodega en la Compañía.','exclamation')
+				--CALL fgl_winmessage(vg_producto,'No existe la bodega en la Compañía.','exclamation')
+				CALL fl_mostrar_mensaje('No existe la bodega en la Compañía.','exclamation')
 				CLEAR nom_bod
 				NEXT FIELD r11_bodega
 			ELSE
@@ -176,25 +198,30 @@ INPUT BY NAME rm_r11.r11_bodega, vm_percha, vm_percha2,
 		LET expr_percha    = '1 = 1'
 		LET expr_ubicacion = '1 = 1'
 		IF vm_percha IS NULL AND vm_percha2 IS NOT NULL THEN
-			CALL fgl_winmessage(vg_producto,'Debe ingresar la percha inicial.','exclamation')
+			--CALL fgl_winmessage(vg_producto,'Debe ingresar la percha inicial.','exclamation')
+			CALL fl_mostrar_mensaje('Debe ingresar la percha inicial.','exclamation')
 			NEXT FIELD vm_percha
 		END IF
 		IF vm_percha2 IS NULL AND vm_percha IS NOT NULL THEN
-			CALL fgl_winmessage(vg_producto,'Debe ingresar la percha final.','exclamation')
+			--CALL fgl_winmessage(vg_producto,'Debe ingresar la percha final.','exclamation')
+			CALL fl_mostrar_mensaje('Debe ingresar la percha final.','exclamation')
 			NEXT FIELD vm_percha2
 		END IF
 		IF vm_ubicacion IS NULL AND vm_ubicacion2 IS NOT NULL THEN
-			CALL fgl_winmessage(vg_producto,'Debe ingresar la ubicación inicial.','exclamation')
+			--CALL fgl_winmessage(vg_producto,'Debe ingresar la ubicación inicial.','exclamation')
+			CALL fl_mostrar_mensaje('Debe ingresar la ubicación inicial.','exclamation')
 			NEXT FIELD vm_ubicacion
 		END IF
 		IF vm_ubicacion2 IS NULL AND vm_ubicacion IS NOT NULL THEN
-			CALL fgl_winmessage(vg_producto,'Debe ingresar la ubicación final.','exclamation')
+			--CALL fgl_winmessage(vg_producto,'Debe ingresar la ubicación final.','exclamation')
+			CALL fl_mostrar_mensaje('Debe ingresar la ubicación final.','exclamation')
 			NEXT FIELD vm_ubicacion2
 		END IF
 		IF (vm_ubicacion IS NOT NULL OR vm_ubicacion2 IS NOT NULL) AND
 		   (vm_percha IS NULL OR vm_percha2 IS NULL) 
 		   THEN
-			CALL fgl_winmessage(vg_producto,'Si ingresa la ubicacion debe también ingresar la percha.','exclamation')
+			--CALL fgl_winmessage(vg_producto,'Si ingresa la ubicacion debe también ingresar la percha.','exclamation')
+			CALL fl_mostrar_mensaje('Si ingresa la ubicacion debe también ingresar la percha.','exclamation')
 			NEXT FIELD vm_percha
 		END IF
 		IF vm_percha IS NOT NULL AND
@@ -226,16 +253,16 @@ DEFINE	percha		VARCHAR(3)
 DEFINE	ubicacion	VARCHAR(7)
 
 OUTPUT
-	TOP MARGIN	vm_top
-	LEFT MARGIN	vm_left
-	RIGHT MARGIN	vm_right
-	BOTTOM MARGIN	vm_bottom
-	PAGE LENGTH	vm_page
+	TOP    MARGIN	0
+	LEFT   MARGIN	15
+	RIGHT  MARGIN	90
+	BOTTOM MARGIN	4
+	PAGE   LENGTH	66
 FORMAT
 PAGE HEADER
-	print 'E'; 
-	print '&l26A';	-- Indica que voy a trabajar con hojas A4
-	print '&k4S'	        -- Letra (12 cpi)
+	--#print 'E'; 
+	--#print '&l26A';	-- Indica que voy a trabajar con hojas A4
+	--#print '&k4S'	        -- Letra (12 cpi)
 
 	PRINT COLUMN 1, rg_cia.g01_razonsocial
 	PRINT COLUMN 1,
@@ -243,7 +270,7 @@ PAGE HEADER
 
 	SKIP 1 LINES
 
-	print '&k2S'	        -- Letra (16 cpi)
+	--#print '&k2S'	        -- Letra (16 cpi)
 
 	PRINT COLUMN 1, 'Fecha de Impresión: ',
 	      COLUMN 30, TODAY USING 'dd-mm-yyyy', 1 SPACES, TIME,
@@ -295,33 +322,14 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION llamar_visor_teclas()
+DEFINE a		CHAR(1)
 
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
+IF vg_gui = 0 THEN
+	CALL fl_visor_teclas_caracter() RETURNING int_flag 
+	LET a = fgl_getkey()
+	CLOSE WINDOW w_tf
+	LET int_flag = 0
 END IF
 
 END FUNCTION

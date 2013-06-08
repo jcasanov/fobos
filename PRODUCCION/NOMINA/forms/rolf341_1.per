@@ -1,0 +1,54 @@
+database aceros
+screen 
+{
+                  A¤o: [c012]   Mes: [a0] [c013            ]
+
+ [c100                      |c101        |c102      |c103        |c104        ]
+[c050                      |c051        |c052      |c053        |c054        ] 
+[c050                      |c051        |c052      |c053        |c054        ]
+[c050                      |c051        |c052      |c053        |c054        ]
+[c050                      |c051        |c052      |c053        |c054        ]
+[c050                      |c051        |c052      |c053        |c054        ]
+[c050                      |c051        |c052      |c053        |c054        ]
+[c050                      |c051        |c052      |c053        |c054        ]
+[c050                      |c051        |c052      |c053        |c054        ]
+[c050                      |c051        |c052      |c053        |c054        ]
+[c050                      |c051        |c052      |c053        |c054        ]
+[c050                      |c051        |c052      |c053        |c054        ]
+[c050                      |c051        |c052      |c053        |c054        ]
+[c050                      |c051        |c052      |c053        |c054        ]
+[c050                      |c051        |c052      |c053        |c054        ]  
+[c050                      |c051        |c052      |c053        |c054        ]
+                           [c061        |c062      |c063        |c064        ]
+}
+end
+tables
+rolt080
+attributes
+c012 = rolt080.n80_ano, UPSHIFT, REVERSE, FORMAT='####', INCLUDE=(1900 TO 9999);
+a0 = rolt080.n80_mes, UPSHIFT, REVERSE, INCLUDE=(1 TO 12), WIDGET='FIELD_BMP',
+	CONFIG='lista.bmp F2'; 
+c013 = formonly.nom_mes, NOENTRY, REVERSE;
+
+c100 = formonly.bt_nomtrab,  WIDGET='BUTTON', CONFIG='F15';
+c101 = formonly.bt_capital,  WIDGET='BUTTON', CONFIG='F16';
+c102 = formonly.bt_interes,  WIDGET='BUTTON', CONFIG='F17';
+c103 = formonly.bt_dscto,    WIDGET='BUTTON', CONFIG='F18';
+c104 = formonly.bt_subtotal, WIDGET='BUTTON', CONFIG='F19';
+
+c050 = formonly.n30_nombres, NOENTRY, OPTIONS='-nolist';
+c051 = formonly.capital,     NOENTRY, OPTIONS='-nolist', FORMAT='#,###,##&.##';
+c052 = formonly.interes,     NOENTRY, OPTIONS='-nolist', FORMAT='###,##&.##';
+c053 = formonly.retiro,       NOENTRY, OPTIONS='-nolist', FORMAT='#,###,##&.##',
+				COLOR = RED WHERE c053 < 0;
+c054 = formonly.subtotal,    NOENTRY, OPTIONS='-nolist', FORMAT='#,###,##&.##';
+
+c061 = formonly.tot_capital, NOENTRY, FORMAT='#,###,##&.##';
+c062 = formonly.tot_interes, NOENTRY, FORMAT='###,##&.##';
+c063 = formonly.tot_retiro,   NOENTRY, FORMAT='#,###,##&.##', 
+				COLOR=RED WHERE c063 < 0;
+c064 = formonly.total,       NOENTRY, FORMAT='#,###,##&.##';
+
+end
+instructions
+screen record ra_scr[15] (n30_nombres, capital, interes, retiro, subtotal)

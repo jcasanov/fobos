@@ -1,5 +1,5 @@
-database diteca
-screen 
+DATABASE aceros
+SCREEN 
 {
 
 
@@ -16,9 +16,9 @@ screen
           Fecha de Ingreso: [f006               ]
 }
 end
-tables
+TABLES
 talt005
-attributes
+ATTRIBUTES
 a    = talt005.t05_tipord, REVERSE, UPSHIFT, AUTONEXT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 f001 = talt005.t05_nombre, REVERSE, UPSHIFT;
@@ -31,7 +31,7 @@ f002 = talt005.t05_valtope_mb, REVERSE, FORMAT = '###,###,##&.##';
 f003 = talt005.t05_valtope_ma, REVERSE,NOENTRY, FORMAT = '###,###,##&.##';
 f004 = talt005.t05_cli_default, UPSHIFT, 
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-d    = formonly.nom_cli TYPE VARCHAR, NOENTRY;
+d    = FORMONLY.nom_cli TYPE VARCHAR, NOENTRY;
 f005 = talt005.t05_usuario, REVERSE, NOENTRY;
 f006 = talt005.t05_fecing, REVERSE, NOENTRY;
 end

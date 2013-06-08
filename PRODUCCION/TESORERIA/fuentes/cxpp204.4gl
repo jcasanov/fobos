@@ -1,25 +1,26 @@
-{*
- * Titulo           : cxpp204.4gl - Solicitud de pago a proveedores
- *                                  por documentos
- * Elaboracion      : 21-nov-2001
- * Autor            : JCM
- * Formato Ejecucion: fglrun cxpp204 base modulo compania localidad [ord_pago]
- *		Si (ord_pago <> 0) el programa se esta ejcutando en modo de
- *			solo consulta
- *		Si (ord_pago = 0) el programa se esta ejecutando en forma 
- *			independiente
- *}
+--------------------------------------------------------------------------------
+-- Titulo           : cxpp204.4gl - Solicitud de pago a proveedores
+--                                  por documentos
+-- Elaboracion      : 21-nov-2001
+-- Autor            : JCM
+-- Formato Ejecucion: fglrun cxpp204 base modulo compania localidad [ord_pago]
+--		Si (ord_pago <> 0) el programa se esta ejcutando en modo de
+--			solo consulta
+--		Si (ord_pago = 0) el programa se esta ejecutando en forma 
+--			independiente
+-- Ultima Correccion: 
+-- Motivo Correccion: 
+--------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
 DEFINE vm_ord_pago	LIKE cxpt024.p24_orden_pago
-
 DEFINE rm_orden         ARRAY[10] OF CHAR(4)
 DEFINE vm_columna_1     SMALLINT
 DEFINE vm_columna_2     SMALLINT
 
 -- CADA VEZ QUE SE REALIZE UNA CONSULTA SE GUARDARAN LOS ROWID DE CADA FILA 
 -- RECUPERADA EN UNA TABLA LLAMADA r_rows QUE TENDRA 1000 ELEMENTOS
-DEFINE vm_rows ARRAY[30000] OF INTEGER 	-- ARREGLO DE ROWID DE FILAS LEIDAS
+DEFINE vm_rows ARRAY[1000] OF INTEGER  	-- ARREGLO DE ROWID DE FILAS LEIDAS
 DEFINE vm_row_current	SMALLINT	-- FILA CORRIENTE DEL ARREGLO
 DEFINE vm_num_rows	SMALLINT	-- CANTIDAD DE FILAS LEIDAS
 
@@ -29,10 +30,10 @@ DEFINE vm_max_rows	SMALLINT
 --
 DEFINE rm_p24		RECORD LIKE cxpt024.*
 
-DEFINE rm_docs ARRAY[30000] OF RECORD 
+DEFINE rm_docs ARRAY[1000] OF RECORD 
 	proveedor	INTEGER,
 	tipo_doc	CHAR(2),
-	num_doc		CHAR(15),
+	num_doc		CHAR(21),
 	dividendo	SMALLINT,
 	fecha_vcto	DATE,
 	saldo		DECIMAL(12,2),
@@ -44,7 +45,7 @@ DEFINE vm_max_docs	SMALLINT
 DEFINE vm_ind_docs	SMALLINT
 DEFINE rm_docs_f4 ARRAY[100] OF RECORD 	-- Arreglo que se usara en la
 	tipo_doc	CHAR(2),		-- forma cxpf204_4
-	num_doc		CHAR(15),
+	num_doc		CHAR(21),
 	dividendo	SMALLINT,
 	fecha_vcto	DATE,
 	saldo  		DECIMAL(12,2),
@@ -53,15 +54,27 @@ END RECORD
 
 DEFINE ind_max_ret	SMALLINT
 DEFINE ind_ret		SMALLINT
-DEFINE r_ret ARRAY[50] OF RECORD
-	check		CHAR(1),
-	n_retencion	LIKE ordt002.c02_nombre,
-	codigo_sri	LIKE cxpt005.p05_codigo_sri,
-	tipo_ret	LIKE cxpt005.p05_tipo_ret, 
-	val_base	LIKE rept019.r19_tot_bruto, 
-	porc		LIKE cxpt005.p05_porcentaje, 
-	subtotal 	LIKE rept019.r19_tot_neto
-END RECORD
+DEFINE r_ret		ARRAY[500] OF RECORD
+				check		CHAR(1),
+				n_retencion	LIKE ordt002.c02_nombre,
+				c_sri		LIKE cxpt005.p05_codigo_sri,
+				tipo_ret	LIKE cxpt005.p05_tipo_ret, 
+				val_base	LIKE rept019.r19_tot_bruto, 
+				porc		LIKE cxpt005.p05_porcentaje, 
+				subtotal 	LIKE rept019.r19_tot_neto
+			END RECORD
+DEFINE fec_ini_porc	ARRAY[500] OF LIKE cxpt005.p05_fecha_ini_porc
+DEFINE rm_retsri	ARRAY[10000] OF RECORD
+			c03_codigo_sri		LIKE ordt003.c03_codigo_sri,
+			c03_concepto_ret	LIKE ordt003.c03_concepto_ret,
+			c03_fecha_ini_porc	LIKE ordt003.c03_fecha_ini_porc,
+			c03_fecha_fin_porc	LIKE ordt003.c03_fecha_fin_porc,
+			c03_ingresa_proc	LIKE ordt003.c03_ingresa_proc,
+			tipo_imp		CHAR(1)
+			END RECORD
+DEFINE vm_num_det	INTEGER
+DEFINE vm_max_det	INTEGER
+DEFINE rm_c03		RECORD LIKE ordt003.*
 
 
 
@@ -70,12 +83,11 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/cxpp204.error')
-CALL fgl_init4js()
+CALL startlog('../logs/cxpp204.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 AND num_args() <> 5 THEN	-- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 
-                            'stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
 LET vg_base     = arg_val(1)
@@ -94,8 +106,8 @@ IF num_args() = 5 THEN
 	LET vm_ord_pago  = arg_val(5)
 END IF
 
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -104,34 +116,55 @@ END MAIN
 
 
 FUNCTION funcion_master()
-
 DEFINE i		SMALLINT
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
 CALL fl_nivel_isolation()
-CALL fl_chequeo_mes_proceso_cxp(vg_codcia) RETURNING int_flag 
-IF int_flag THEN
-	RETURN
+IF num_args() = 4 THEN
+	CALL fl_chequeo_mes_proceso_cxp(vg_codcia) RETURNING int_flag 
+	IF int_flag THEN
+		RETURN
+	END IF
 END IF
-OPTIONS
-	INPUT WRAP,
-	ACCEPT KEY F12
-OPEN WINDOW w_204 AT 3,2 WITH 22 ROWS, 80 COLUMNS
-	ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE 0,
-		  BORDER, MESSAGE LINE LAST - 2) 
-OPEN FORM f_204 FROM '../forms/cxpf204_1'
+LET lin_menu = 0
+LET row_ini  = 3
+LET num_rows = 22
+LET num_cols = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW w_204 AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
+	ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE lin_menu,
+		  BORDER, MESSAGE LINE LAST - 1) 
+IF vg_gui = 1 THEN
+	OPEN FORM f_204 FROM '../forms/cxpf204_1'
+ELSE
+	OPEN FORM f_204 FROM '../forms/cxpf204_1c'
+END IF
 DISPLAY FORM f_204
 
 LET vm_num_rows = 0
 LET vm_row_current = 0
 INITIALIZE rm_p24.* TO NULL
 
-LET vm_max_rows = 30000
+LET vm_max_det  = 10000
+LET vm_max_rows = 1000
 LET vm_max_docs = 100
-LET ind_max_ret = 50
+LET ind_max_ret = 500
 
 IF vm_ord_pago <> 0 THEN
 	CLOSE FORM f_204
-	OPEN FORM f_204_4 FROM '../forms/cxpf204_4'
+	IF vg_gui = 1 THEN
+		OPEN FORM f_204_4 FROM '../forms/cxpf204_4'
+	ELSE
+		OPEN FORM f_204_4 FROM '../forms/cxpf204_4c'
+	END IF
 	DISPLAY FORM f_204_4
 	CALL setea_nombre_botones_f4()
 	CALL execute_query()
@@ -142,7 +175,7 @@ ELSE
 	CREATE TEMP TABLE tmp_detalle(
 		proveedor	INTEGER  NOT NULL,
 		tipo_doc	CHAR(2)  NOT NULL,
-		num_doc		CHAR(15) NOT NULL,
+		num_doc		CHAR(21) NOT NULL,
 		dividendo	SMALLINT NOT NULL,
 		fecha_vcto	DATE,
 		saldo		DECIMAL(12,2),
@@ -157,17 +190,32 @@ ELSE
 	CREATE TEMP TABLE tmp_retenciones(
 		proveedor	INTEGER      NOT NULL,
 		tipo_doc	CHAR(2)      NOT NULL,
-		num_doc		CHAR(15)     NOT NULL,
+		num_doc		CHAR(21)     NOT NULL,
 		dividendo	SMALLINT     NOT NULL,
-		codigo_sri	CHAR(3)		 NOT NULL,
 		tipo_ret	CHAR(1)      NOT NULL,
 		porc		DECIMAL(5,2) NOT NULL,
 		val_base	DECIMAL(12,2),
-		subtotal 	DECIMAL(12,2)
+		subtotal 	DECIMAL(12,2),
+		codi_sri	CHAR(6)       NOT NULL,
+		fec_ini_por	DATE	      NOT NULL
 	)
 	CREATE UNIQUE INDEX tmp_pk2
 		ON tmp_retenciones(proveedor, tipo_doc, num_doc, dividendo, 
-				   codigo_sri, tipo_ret, porc)
+				   tipo_ret, porc, codi_sri, fec_ini_por)
+
+	CREATE TEMP TABLE tmp_tipo_porc(
+		proveed		INTEGER		NOT NULL,
+		tipodoc		CHAR(2)		NOT NULL,
+		numdoc		CHAR(21)	NOT NULL,
+		divid		SMALLINT	NOT NULL,
+		tiporet		CHAR(1)		NOT NULL,
+		porcen		DECIMAL(5,2)	NOT NULL,
+		codigo_sri	VARCHAR(15,6)	NOT NULL,
+		fecha_ini_por	DATE		NOT NULL,
+		concepto_ret	VARCHAR(200,100) NOT NULL
+	)
+	CREATE UNIQUE INDEX tmp_pk3
+		ON tmp_tipo_porc(proveed, tipodoc, numdoc, divid,tiporet,porcen)
 
 	FOR i = 1 TO 10
         	LET rm_orden[i] = 'ASC'
@@ -255,7 +303,6 @@ LET rm_p24.p24_tipo       = 'P'
 LET rm_p24.p24_estado     = 'A'
 LET rm_p24.p24_tasa_mora  = 0
 LET rm_p24.p24_total_mora = 0
-LET rm_p24.p24_medio_pago = 'C'
 
 LET rm_p24.p24_usuario    = vg_usuario
 LET rm_p24.p24_fecing     = CURRENT
@@ -291,9 +338,8 @@ END FUNCTION
 
 
 FUNCTION lee_datos()
-
 DEFINE expr_sql			VARCHAR(255)
-DEFINE query			VARCHAR(600)
+DEFINE query			CHAR(600)
 
 DISPLAY BY NAME rm_p24.p24_usuario, rm_p24.p24_fecing
 
@@ -352,11 +398,11 @@ DEFINE salir		SMALLINT
 DEFINE c		CHAR(1)
 
 DEFINE col              SMALLINT
-DEFINE query            VARCHAR(500)
+DEFINE query            CHAR(500)
 
 LET vm_columna_1 = 5
 LET vm_columna_2 = 6
-LET rm_orden[vm_columna_1]  = 'ASC'
+LET rm_orden[vm_columna_1]  = 'DESC'
 LET rm_orden[vm_columna_2]  = 'DESC'
 INITIALIZE col TO NULL
 
@@ -390,9 +436,13 @@ WHILE NOT salir
 				LET INT_FLAG = 1
 				EXIT DISPLAY
 			END IF
+        	ON KEY(F1,CONTROL-W)
+			CALL control_visor_teclas_caracter_2() 
 		ON KEY(F5)
+			LET i = arr_curr()
+			LET j = scr_line()
 			LET rm_docs[i].valor_pagar = pagar(i)
-			LET INT_FLAG = 0
+			LET int_flag = 0
 
 			IF rm_docs[i].valor_pagar = 0 THEN
 				LET rm_docs[i].check = 'N'
@@ -404,12 +454,14 @@ WHILE NOT salir
 			DISPLAY rm_docs[i].* TO ra_docs[j].*
   			CALL graba_valores(i)
       			CALL calcula_totales()
-     			LET INT_FLAG = 0
+     			LET int_flag = 0
       		ON KEY(F6)
      			CALL muestra_totales()
      			LET INT_FLAG = 0
      		ON KEY(F7)
-     			CALL ver_estado_cuenta(arr_curr())
+			LET i = arr_curr()
+			LET j = scr_line()
+     			CALL ver_estado_cuenta(i)
      			LET INT_FLAG = 0
       		ON KEY(F15)
                         LET col = 1
@@ -432,17 +484,22 @@ WHILE NOT salir
                 ON KEY(F21)
                         LET col = 7
 			EXIT DISPLAY
-		BEFORE DISPLAY
-			CALL setea_nombre_botones_f1()
-			CALL calcula_totales()
-		BEFORE ROW
-			LET i = arr_curr()
-			LET j = scr_line()
-			CALL etiquetas_proveedor(rm_docs[i].proveedor,
-						 rm_docs[i].fecha_vcto)
-		AFTER DISPLAY
-			LET salir = 1
+		--#BEFORE DISPLAY
+			--#CALL setea_nombre_botones_f1()
+			--#CALL calcula_totales()
+			--#CALL dialog.keysetlabel("F1","")
+			--#CALL dialog.keysetlabel("CONTROL-W","")
+		--#BEFORE ROW
+			--#LET i = arr_curr()
+			--#LET j = scr_line()
+			--#CALL etiquetas_proveedor(rm_docs[i].proveedor,
+						 --#rm_docs[i].fecha_vcto)
+		--#AFTER DISPLAY
+			--#LET salir = 1
 	END DISPLAY
+	IF vg_gui = 0 THEN
+		LET salir = 1
+	END IF
 	IF INT_FLAG THEN
 		RETURN
 	END IF
@@ -498,14 +555,12 @@ END FUNCTION
 
 
 FUNCTION pagar(i)
-
 DEFINE i		SMALLINT
 DEFINE j		SMALLINT
 DEFINE resp		CHAR(6)
 DEFINE retenciones	SMALLINT
 DEFINE salir		SMALLINT
 DEFINE filas_pant	SMALLINT
-
 DEFINE val_bienes	DECIMAL(12,2)
 DEFINE val_servi	DECIMAL(12,2)
 DEFINE val_impto	DECIMAL(12,2)
@@ -513,34 +568,44 @@ DEFINE val_neto		DECIMAL(12,2)
 DEFINE val_pagar	DECIMAL(12,2)
 DEFINE tot_ret  	DECIMAL(12,2)
 DEFINE val_cheque	DECIMAL(12,2)
-
 DEFINE r_c01		RECORD LIKE ordt001.*
 DEFINE r_c02		RECORD LIKE ordt002.*
+DEFINE r_c03		RECORD LIKE ordt003.*
 DEFINE r_c10		RECORD LIKE ordt010.*
 DEFINE r_p01		RECORD LIKE cxpt001.*
 DEFINE r_p05		RECORD LIKE cxpt005.*
 DEFINE r_p20		RECORD LIKE cxpt020.*
-
 DEFINE r_reten		RECORD
 	proveedor	INTEGER,
 	tipo_doc	CHAR(2),
-	num_doc		CHAR(15),
+	num_doc		CHAR(21),
 	dividendo	SMALLINT,
-	codigo_sri	CHAR(3),
 	tipo_ret	CHAR(1), 
 	porc		DECIMAL(5,2),
 	val_base	DECIMAL(12,2),
 	subtotal 	DECIMAL(12,2)
 END RECORD
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
+DEFINE expr_o		VARCHAR(10)
+DEFINE query		CHAR(1500)
+DEFINE cod_sri		LIKE cxpt026.p26_codigo_sri
 
 CALL fl_lee_proveedor(rm_docs[i].proveedor)	RETURNING r_p01.*
 
-CALL fl_mensaje_proveedor_documentos_favor(vg_codcia, vg_codloc,
-										  rm_docs[i].proveedor)
-
-OPEN WINDOW w_204_3 AT 4,9 WITH 21 ROWS, 70 COLUMNS
+LET num_rows = 22
+LET num_cols = 70
+IF vg_gui = 0 THEN
+	LET num_rows = 20
+	LET num_cols = 71
+END IF
+OPEN WINDOW w_204_3 AT 3, 9 WITH num_rows ROWS, num_cols COLUMNS
 	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, BORDER)
-OPEN FORM f_204_3 FROM '../forms/cxpf204_3'
+IF vg_gui = 1 THEN
+	OPEN FORM f_204_3 FROM '../forms/cxpf204_3'
+ELSE
+	OPEN FORM f_204_3 FROM '../forms/cxpf204_3c'
+END IF
 DISPLAY FORM f_204_3
 
 CALL setea_nombre_botones_f3()
@@ -590,15 +655,18 @@ IF rm_docs[i].valor_pagar = 0 THEN
 				LET INT_FLAG = 1
 				EXIT INPUT
 			END IF
+        	ON KEY(F1,CONTROL-W)
+			CALL llamar_visor_teclas()
+		BEFORE INPUT
+			--#CALL dialog.keysetlabel("F1","")
+			--#CALL dialog.keysetlabel("CONTROL-W","")
 		AFTER FIELD val_bienes
 			IF val_bienes IS NULL THEN
 				LET val_bienes = 0
 			END IF
 			IF val_bienes > val_neto THEN
-				CALL fgl_winmessage(vg_producto,
-					'Debe ingresar un valor menor ' ||
-					'valor neto.',
-					'exclamation')
+				--CALL fgl_winmessage(vg_producto,'Debe ingresar un valor menor valor neto.','exclamation')
+				CALL fl_mostrar_mensaje('Debe ingresar un valor menor valor neto.','exclamation')
 				NEXT FIELD val_bienes
 			END IF
 			LET val_servi = val_neto - val_impto - val_bienes
@@ -608,10 +676,8 @@ IF rm_docs[i].valor_pagar = 0 THEN
 				LET val_servi = 0
 			END IF
 			IF val_servi > val_neto THEN
-				CALL fgl_winmessage(vg_producto,
-					'Debe ingresar un valor menor ' ||
-					'valor neto.',
-					'exclamation')
+				--CALL fgl_winmessage(vg_producto,'Debe ingresar un valor menor valor neto.','exclamation')
+				CALL fl_mostrar_mensaje('Debe ingresar un valor menor valor neto.','exclamation')
 				NEXT FIELD val_servi
 			END IF			
 			LET val_bienes = val_neto - val_impto - val_servi
@@ -619,11 +685,8 @@ IF rm_docs[i].valor_pagar = 0 THEN
 		AFTER INPUT
 			IF (val_bienes + val_servi) <> (val_neto - val_impto) 
 			THEN
-				CALL fgl_winmessage(vg_producto,
-					'Total neto menos iva debe ser ' ||
-					'igual al valor bienes mas valor ' ||
-					'servicios.',
-					'exclamation')
+				--CALL fgl_winmessage(vg_producto,'Total neto menos iva debe ser igual al valor bienes mas valor servicios.','exclamation')
+				CALL fl_mostrar_mensaje('Total neto menos iva debe ser igual al valor bienes mas valor servicios.','exclamation')
 				CONTINUE INPUT
 			END IF
 	END INPUT
@@ -671,15 +734,25 @@ ELSE
 
 	IF retenciones = 0 THEN
 		DECLARE q_ret2 CURSOR FOR
-			SELECT * FROM ordt002, OUTER tmp_retenciones
-				WHERE c02_compania = vg_codcia
-	  	  		  AND proveedor    = rm_docs[i].proveedor
-	  	  	  	  AND tipo_doc     = rm_docs[i].tipo_doc
-	  	  		  AND num_doc      = rm_docs[i].num_doc
-	  	  		  AND dividendo    = rm_docs[i].dividendo
-				  AND codigo_sri   = c02_codigo_sri
-	  	  		  AND tipo_ret     = c02_tipo_ret
-	  	  		  AND porc         = c02_porcentaje
+			--SELECT * FROM ordt002, ordt003, OUTER tmp_retenciones
+			SELECT * FROM ordt002, ordt003, tmp_retenciones
+				WHERE c02_compania   = vg_codcia
+		                  AND c02_estado     = 'A' 
+				  AND c03_compania   = c02_compania
+				  AND c03_tipo_ret   = c02_tipo_ret
+				  AND c03_porcentaje = c02_porcentaje
+				  AND c03_estado     = 'A'
+	  	  		  AND proveedor      = rm_docs[i].proveedor
+	  	  	  	  AND tipo_doc       = rm_docs[i].tipo_doc
+	  	  		  AND num_doc        = rm_docs[i].num_doc
+	  	  		  AND dividendo      = rm_docs[i].dividendo
+	  	  		  AND tipo_ret       = c03_tipo_ret
+	  	  		  AND porc           = c03_porcentaje
+				  AND codi_sri       = c03_codigo_sri
+				  AND fec_ini_por    = c03_fecha_ini_porc
+				ORDER BY val_base DESC, c03_tipo_ret,
+					c03_porcentaje, c03_codigo_sri,
+					c03_fecha_ini_porc
 
 		LET filas_pant = fgl_scr_size('ra_ret')
 		FOR j = 1 TO filas_pant
@@ -687,24 +760,25 @@ ELSE
 		END FOR
 
 		LET j = 1
-		FOREACH q_ret2 INTO r_c02.*, r_reten.*
-			IF r_c02.c02_tipo_ret = 'F' 
+		FOREACH q_ret2 INTO r_c02.*, r_c03.*, r_reten.*
+			IF r_c03.c03_tipo_ret = 'F' 
 			AND r_p01.p01_ret_fuente = 'N' 
 			THEN
 				CONTINUE FOREACH
 			END IF
-			IF r_c02.c02_tipo_ret = 'I' 
+			IF r_c03.c03_tipo_ret = 'I' 
 			AND r_p01.p01_ret_impto = 'N' 
 			THEN
 				CONTINUE FOREACH
 			END IF
-			LET r_ret[j].check    = 'N'
+			LET r_ret[j].check       = 'N'
 			LET r_ret[j].n_retencion = r_c02.c02_nombre
-			LET r_ret[j].codigo_sri  = r_c02.c02_codigo_sri
-			LET r_ret[j].tipo_ret    = r_c02.c02_tipo_ret
-			LET r_ret[j].porc        = r_c02.c02_porcentaje
+			LET r_ret[j].tipo_ret    = r_c03.c03_tipo_ret
+			LET r_ret[j].porc        = r_c03.c03_porcentaje
 			LET r_ret[j].val_base    = 0
 			LET r_ret[j].subtotal    = 0
+			LET r_ret[j].c_sri       = r_c03.c03_codigo_sri
+			LET fec_ini_porc[j]      = r_c03.c03_fecha_ini_porc
 			IF r_reten.subtotal IS NOT NULL THEN
 				LET r_ret[j].check    = 'S'
 				LET r_ret[j].val_base = r_reten.val_base
@@ -744,23 +818,24 @@ INPUT BY NAME val_pagar, tot_ret, val_cheque WITHOUT DEFAULTS
 			LET INT_FLAG = 1
 			EXIT INPUT
 		END IF
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
+	BEFORE INPUT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 	AFTER FIELD val_pagar
 		IF val_pagar IS NULL THEN
 			LET val_pagar = 0
 			DISPLAY BY NAME val_pagar
 		END IF
 		IF val_pagar > rm_docs[i].saldo THEN
-			CALL fgl_winmessage(vg_producto,
-				'Valor a pagar debe ser menor o ' ||
-				'igual al saldo del documento.',
-				'exclamation')
+			--CALL fgl_winmessage(vg_producto,'Valor a pagar debe ser menor o igual al saldo del documento.','exclamation')
+			CALL fl_mostrar_mensaje('Valor a pagar debe ser menor o igual al saldo del documento.','exclamation')
 			LET val_pagar = rm_docs[i].saldo
 			NEXT FIELD val_pagar
 		END IF
 		LET val_cheque = val_pagar - tot_ret
 		DISPLAY BY NAME val_cheque
-	AFTER INPUT 
-		LET salir = 1
 END INPUT
 IF INT_FLAG THEN
 	CLOSE WINDOW w_204_3
@@ -768,9 +843,7 @@ IF INT_FLAG THEN
 END IF
 
 IF val_pagar = 0 THEN
-	CALL fgl_winquestion(vg_producto,
-		'Si deja en cero el valor a pagar no se grabará esta ' ||
-		'autorización.', 'Cancel', 'Ok|Cancel', 'question', 1)
+	CALL fl_hacer_pregunta('Si deja en cero el valor a pagar no se grabará esta autorización.','No')
 		RETURNING resp
 	IF resp = 'Ok' THEN
 		CLOSE WINDOW w_204_3
@@ -805,35 +878,53 @@ IF ind_ret = 0 THEN
 	LET retenciones = retenciones + j
 
 	IF retenciones = 0 THEN
-		DECLARE q_ret CURSOR FOR
-			SELECT * FROM ordt002, OUTER cxpt005
-				WHERE c02_compania   = vg_codcia
-			  	  AND p05_compania   = c02_compania
-			  	  AND p05_codprov    = rm_docs[i].proveedor
-				  AND p05_codigo_sri = c02_codigo_sri
-		  		  AND p05_tipo_ret   = c02_tipo_ret
-			  	  AND p05_porcentaje = c02_porcentaje 
+		--LET expr_o = 'OUTER'
+		LET expr_o = NULL
+		IF r_p01.p01_cont_espe = 'S' AND r_p01.p01_ret_fuente = 'N' THEN
+			LET expr_o = NULL
+		END IF
+		LET query = 'SELECT * FROM ordt002, ordt003, ', expr_o CLIPPED,
+						' cxpt005 ',
+				' WHERE c02_compania   = ', vg_codcia,
+		                '   AND c02_estado     = "A" ' ,
+				'   AND c03_compania   = c02_compania ',
+				'   AND c03_tipo_ret   = c02_tipo_ret ',
+				'   AND c03_porcentaje = c02_porcentaje ',
+		                '   AND c03_estado     = "A" ',
+			  	'   AND p05_compania   = c03_compania ',
+			  	'   AND p05_codprov    = ',rm_docs[i].proveedor,
+			  	'   AND p05_tipo_ret   = c03_tipo_ret ',
+			  	'   AND p05_porcentaje = c03_porcentaje ',
+			  	'   AND p05_codigo_sri = c03_codigo_sri ',
+			  	'   AND p05_fecha_ini_porc =c03_fecha_ini_porc',
+				' ORDER BY c03_tipo_ret, c03_porcentaje,',
+					' c03_codigo_sri, c03_fecha_ini_porc '
+		PREPARE cons_ret FROM query
+		DECLARE q_ret CURSOR FOR cons_ret
 
 		LET j = 1
-		FOREACH q_ret INTO r_c02.*, r_p05.*
-			IF r_c02.c02_tipo_ret = 'F' 
+		FOREACH q_ret INTO r_c02.*, r_c03.*, r_p05.*
+			IF r_c03.c03_tipo_ret = 'F' 
 			AND r_p01.p01_ret_fuente = 'N' 
 			THEN
 				CONTINUE FOREACH
 			END IF
-			IF r_c02.c02_tipo_ret = 'I' 
+			IF r_c03.c03_tipo_ret = 'I' 
 			AND r_p01.p01_ret_impto = 'N' 
 			THEN
 				CONTINUE FOREACH
 			END IF
 			LET r_ret[j].n_retencion = r_c02.c02_nombre
-			LET r_ret[j].codigo_sri  = r_c02.c02_codigo_sri
-			LET r_ret[j].tipo_ret    = r_c02.c02_tipo_ret
-			LET r_ret[j].porc        = r_c02.c02_porcentaje
+			LET r_ret[j].tipo_ret    = r_c03.c03_tipo_ret
+			LET r_ret[j].porc        = r_c03.c03_porcentaje
 			LET r_ret[j].val_base    = 0
 			LET r_ret[j].subtotal    = 0 
-			LET r_ret[j].check    = 'N'
-			IF r_p05.p05_tipo_ret IS NOT NULL THEN
+			LET r_ret[j].check       = 'N'
+			LET r_ret[j].c_sri       = r_c03.c03_codigo_sri
+			LET fec_ini_porc[j]      = r_c03.c03_fecha_ini_porc
+			IF r_p05.p05_tipo_ret IS NOT NULL AND
+			   r_p05.p05_codigo_sri IS NOT NULL
+			THEN
 				LET r_ret[j].check = 'S'
 				IF r_p05.p05_tipo_ret = 'I' THEN
 					LET r_ret[j].val_base = val_impto
@@ -868,10 +959,8 @@ IF ind_ret = 0 THEN
 		DISPLAY BY NAME tot_ret, val_cheque
 	ELSE
 		IF ind_ret = 0 THEN
-			CALL fgl_winmessage(vg_producto,
-				'Ya se hizo la retención sobre este ' ||
-				'documento.',
-				'exclamation')
+			--CALL fgl_winmessage(vg_producto,'Ya se hizo la retención sobre este documento.','exclamation')
+			CALL fl_mostrar_mensaje('Ya se hizo la retención sobre este documento.','exclamation')
 			LET salir = 1
 		END IF
 	END IF
@@ -879,12 +968,13 @@ END IF
 
 IF ind_ret > 0 THEN
 	CALL muestra_retenciones(val_bienes, val_servi, val_impto, val_neto,
-		val_pagar, tot_ret, val_cheque) RETURNING tot_ret, val_cheque
-	IF INT_FLAG =1 THEN
+					val_pagar, tot_ret, val_cheque, i)
+		RETURNING tot_ret, val_cheque
+	IF int_flag = 1 THEN
 		CLOSE WINDOW w_204_3
 		RETURN rm_docs[i].valor_pagar
 	END IF
-	IF INT_FLAG = 2 THEN
+	IF int_flag = 2 THEN
 		CONTINUE WHILE
 	END IF
 	
@@ -893,20 +983,27 @@ IF ind_ret > 0 THEN
 	LET salir = 1
 	FOR j = 1 TO ind_ret
 		IF r_ret[j].check = 'S'  THEN 
+			{--
+			LET cod_sri = NULL
+			SELECT codigo_sri INTO cod_sri
+				FROM tmp_tipo_porc
+				WHERE proveed = rm_docs[i].proveedor
+				  AND tipodoc = rm_docs[i].tipo_doc
+				  AND numdoc  = rm_docs[i].num_doc
+				  AND divid   = rm_docs[i].dividendo
+				  AND tiporet = r_ret[j].tipo_ret
+				  AND porcen  = r_ret[j].porc
+			--}
 			INSERT INTO tmp_retenciones 
-				VALUES(rm_docs[i].proveedor, 
-				       rm_docs[i].tipo_doc,
-			               rm_docs[i].num_doc,   
-			               rm_docs[i].dividendo,
-						   r_ret[j].codigo_sri,
-			       	       r_ret[j].tipo_ret,    
-			       	       r_ret[j].porc,
-			       	       r_ret[j].val_base,    
-			       	       r_ret[j].subtotal)
+				VALUES(rm_docs[i].proveedor,rm_docs[i].tipo_doc,
+					rm_docs[i].num_doc,rm_docs[i].dividendo,
+					r_ret[j].tipo_ret, r_ret[j].porc,
+					r_ret[j].val_base, r_ret[j].subtotal,
+					r_ret[j].c_sri, fec_ini_porc[j])
 		END IF
 	END FOR
 	
-	LET INT_FLAG = INT_FLAG
+	LET int_flag = int_flag
 	
 	UPDATE tmp_detalle SET
 		valor_bienes = val_bienes,
@@ -928,7 +1025,7 @@ END FUNCTION
 
 
 FUNCTION muestra_retenciones(val_bienes, val_servi, val_impto, val_neto, 
-			     val_pagar, tot_ret, val_cheque)
+			     val_pagar, tot_ret, val_cheque, ind2)
 
 DEFINE resp		CHAR(6)
 DEFINE c		CHAR(1)
@@ -945,8 +1042,13 @@ DEFINE val_neto		DECIMAL(12,2)
 DEFINE val_pagar	DECIMAL(12,2)
 DEFINE tot_ret  	DECIMAL(12,2)
 DEFINE val_cheque	DECIMAL(12,2)
+DEFINE ind2 		SMALLINT
+DEFINE tiene_sri	SMALLINT
+
+DEFINE conce_sri	LIKE ordt003.c03_concepto_ret
 
 DEFINE r_c02		RECORD LIKE ordt002.*
+DEFINE r_c03		RECORD LIKE ordt003.*
 DEFINE r_c10		RECORD LIKE ordt010.*
 DEFINE r_p01		RECORD LIKE cxpt001.*
 
@@ -968,16 +1070,59 @@ INPUT ARRAY r_ret WITHOUT DEFAULTS FROM ra_ret.*
 			LET INT_FLAG = 1
 			EXIT INPUT
 		END IF
+       	ON KEY(F1,CONTROL-W)
+		CALL control_visor_teclas_caracter_4() 
 	ON KEY(F5)
-		LET INT_FLAG = 2
+		LET int_flag = 2
 		EXIT INPUT
+	{--
+	ON KEY(F6)
+		LET i = arr_curr()
+		LET j = scr_line()
+		IF r_ret[i].check = 'S' THEN
+			CALL control_codigos_sri(i, ind2) RETURNING tiene_sri
+			LET conce_sri = NULL
+			SELECT concepto_ret INTO conce_sri
+				FROM tmp_tipo_porc
+				WHERE proveed = rm_docs[ind2].proveedor
+				  AND tipodoc = rm_docs[ind2].tipo_doc
+				  AND numdoc  = rm_docs[ind2].num_doc
+				  AND divid   = rm_docs[ind2].dividendo
+				  AND tiporet = r_ret[i].tipo_ret
+				  AND porcen  = r_ret[i].porc
+			DISPLAY conce_sri TO tit_codigo_sri
+		END IF
+		LET int_flag = 0
+	--}
 	BEFORE INPUT
-		CALL dialog.keysetlabel('INSERT', '')
-		CALL dialog.keysetlabel('DELETE', '')
+		--#CALL dialog.keysetlabel('INSERT', '')
+		--#CALL dialog.keysetlabel('DELETE', '')
+		--#CALL dialog.keysetlabel("F1","")
+		--CALL dialog.keysetlabel("F6","Códigos SRI")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 		CALL setea_nombre_botones_f3()
 	BEFORE ROW
 		LET i = arr_curr()
 		LET j = scr_line()
+		{--
+		LET conce_sri = NULL
+		SELECT concepto_ret INTO conce_sri
+			FROM tmp_tipo_porc
+			WHERE proveed = rm_docs[ind2].proveedor
+			  AND tipodoc = rm_docs[ind2].tipo_doc
+			  AND numdoc  = rm_docs[ind2].num_doc
+			  AND divid   = rm_docs[ind2].dividendo
+			  AND tiporet = r_ret[i].tipo_ret
+			  AND porcen  = r_ret[i].porc
+		DISPLAY conce_sri TO tit_codigo_sri
+		--}
+		CALL fl_lee_codigos_sri(vg_codcia, r_ret[i].tipo_ret,
+					r_ret[i].porc, r_ret[i].c_sri,
+					fec_ini_porc[i])
+			RETURNING r_c03.*
+		DISPLAY r_c03.c03_concepto_ret TO tit_codigo_sri
+		DISPLAY i TO num_rows
+		DISPLAY ind_ret TO max_rows
 	BEFORE INSERT
 		EXIT INPUT
 	BEFORE DELETE
@@ -987,7 +1132,7 @@ INPUT ARRAY r_ret WITHOUT DEFAULTS FROM ra_ret.*
 	AFTER  FIELD check
 		IF c <> r_ret[i].check THEN
 			IF r_ret[i].check = 'S' THEN
-				CALL fl_lee_tipo_retencion(vg_codcia, r_ret[i].codigo_sri, 
+				CALL fl_lee_tipo_retencion(vg_codcia, 
 					r_ret[i].tipo_ret, r_ret[i].porc)
 					RETURNING r_c02.*
 				IF r_ret[i].tipo_ret = 'I' THEN
@@ -1010,6 +1155,23 @@ INPUT ARRAY r_ret WITHOUT DEFAULTS FROM ra_ret.*
 					(r_ret[i].porc / 100))	
 				LET val_cheque = val_cheque - r_ret[i].subtotal
 				LET tot_ret = tot_ret + r_ret[i].subtotal
+				DELETE FROM tmp_tipo_porc
+					WHERE proveed  = rm_docs[ind2].proveedor
+					  AND tipodoc  = rm_docs[ind2].tipo_doc
+					  AND numdoc   = rm_docs[ind2].num_doc
+					  AND divid    = rm_docs[ind2].dividendo
+					  AND tiporet  = r_ret[i].tipo_ret
+					  AND porcen   = r_ret[i].porc
+					  AND codigo_sri = r_ret[i].c_sri
+					  AND fecha_ini_por = fec_ini_porc[i]
+				INSERT INTO tmp_tipo_porc
+					VALUES(rm_docs[ind2].proveedor,
+						rm_docs[ind2].tipo_doc,
+						rm_docs[ind2].num_doc,
+						rm_docs[ind2].dividendo,
+						r_ret[i].tipo_ret,r_ret[i].porc,
+						r_ret[i].c_sri, fec_ini_porc[i],
+						r_c03.c03_concepto_ret)
 			END IF
 			IF r_ret[i].check = 'N' THEN
 				LET val_cheque = 
@@ -1020,14 +1182,13 @@ INPUT ARRAY r_ret WITHOUT DEFAULTS FROM ra_ret.*
 			END IF
 			DISPLAY r_ret[i].* TO ra_ret[j].*
 			DISPLAY BY NAME val_cheque, tot_ret
-			NEXT FIELD ra_ret[j-1].check
+			--#NEXT FIELD ra_ret[j-1].check
+			NEXT FIELD check
 		END IF
 	AFTER INPUT 
 		IF tot_ret > val_neto THEN
-			CALL fgl_winmessage(vg_producto,
-				'El valor de las retenciones no debe ser ' ||
-				'mayor al valor neto.',
-				'exclamation')
+			--CALL fgl_winmessage(vg_producto,'El valor de las retenciones no debe ser mayor al valor neto.','exclamation')
+			CALL fl_mostrar_mensaje('El valor de las retenciones no debe ser mayor al valor neto.','exclamation')
 			CONTINUE INPUT
 		END IF
 		LET iva = 0
@@ -1038,12 +1199,16 @@ INPUT ARRAY r_ret WITHOUT DEFAULTS FROM ra_ret.*
 			END IF
 		END FOR
 		IF iva > 100 THEN
-			CALL fgl_winmessage(vg_producto, 
-				'Las retenciones sobre el iva no pueden ' ||
-				'exceder al 100% del iva.',
-				'exclamation')
+			CALL fl_mostrar_mensaje('Las retenciones sobre el iva no pueden exceder al 100% del iva.','exclamation')
 			CONTINUE INPUT
 		END IF
+		{--
+		IF NOT tiene_sri THEN
+			CALL fl_mostrar_mensaje('Debe por lo menos seleccionar un código del SRI para este pago.', 'exclamation')
+			CONTINUE INPUT
+		END IF
+		--}
+		LET ind_ret = arr_count()
 		LET salir = 1
 END INPUT
 IF INT_FLAG = 2 THEN
@@ -1063,6 +1228,7 @@ END FUNCTION
 
 FUNCTION lee_muestra_registro(row)
 DEFINE row 		INTEGER
+DEFINE total		DECIMAL(14,2)
 
 
 IF vm_num_rows <= 0 THEN
@@ -1086,7 +1252,8 @@ DISPLAY BY NAME rm_p24.p24_orden_pago,
 		rm_p24.p24_total_che,
 		rm_p24.p24_usuario,
 		rm_p24.p24_fecing
-DISPLAY (rm_p24.p24_total_int + rm_p24.p24_total_cap) TO tot_val_pagar
+LET total = rm_p24.p24_total_int + rm_p24.p24_total_cap
+DISPLAY total TO tot_val_pagar
 
 CALL muestra_etiquetas_f4()
 CALL muestra_contadores_f4()
@@ -1154,8 +1321,10 @@ END FUNCTION
 
 FUNCTION muestra_contadores_f4()
 
-DISPLAY "" AT 1,1
-DISPLAY vm_row_current, " de ", vm_num_rows AT 1, 68 
+IF vg_gui = 1 THEN
+	DISPLAY "" AT 1,1
+	DISPLAY vm_row_current, " de ", vm_num_rows AT 1, 67
+END IF
 
 END FUNCTION
 
@@ -1163,12 +1332,12 @@ END FUNCTION
 
 FUNCTION setea_nombre_botones_f3()
 
-DISPLAY 'Descripción' TO bt_nom_ret
-DISPLAY 'Cod'		  TO bt_codigo_sri
-DISPLAY 'Tipo R.'     TO bt_tipo_ret
-DISPLAY 'Valor Base'  TO bt_base 
-DISPLAY '%'           TO bt_porc
-DISPLAY 'Subtotal'    TO bt_valor
+--#DISPLAY 'Descripción' TO bt_nom_ret
+--#DISPLAY 'SRI'         TO bt_sri
+--#DISPLAY 'Tipo R.'     TO bt_tipo_ret
+--#DISPLAY 'Valor Base'  TO bt_base 
+--#DISPLAY '%'           TO bt_porc
+--#DISPLAY 'Subtotal'    TO bt_valor
 
 END FUNCTION
 
@@ -1215,21 +1384,21 @@ END FUNCTION
 
 FUNCTION setea_nombre_botones_f1()
 
-DISPLAY 'Prov'          TO bt_proveedor
-DISPLAY 'Tp'            TO bt_tipo_doc
-DISPLAY 'Número'        TO bt_num_doc
-DISPLAY '#'             TO bt_dividendo
-DISPLAY 'Fecha Vcto'    TO bt_fecha
-DISPLAY 'Saldo'         TO bt_saldo
-DISPLAY 'Valor a Pagar' TO bt_valor
+--#DISPLAY 'Prov'          TO bt_proveedor
+--#DISPLAY 'Tp'            TO bt_tipo_doc
+--#DISPLAY 'Número'        TO bt_num_doc
+--#DISPLAY '#'             TO bt_dividendo
+--#DISPLAY 'Fecha Vcto'    TO bt_fecha
+--#DISPLAY 'Saldo'         TO bt_saldo
+--#DISPLAY 'Valor a Pagar' TO bt_valor
 
 END FUNCTION
 
 
 
 FUNCTION criterios()
-
 DEFINE tipo_vcto	CHAR(1)
+DEFINE tipo_pago	CHAR(1)
 DEFINE resp		CHAR(6)
 DEFINE condicion	VARCHAR(255)
 
@@ -1242,6 +1411,7 @@ DEFINE r_g08		RECORD LIKE gent008.*
 DEFINE r_g09		RECORD LIKE gent009.*
 DEFINE r_g13		RECORD LIKE gent013.*
 DEFINE r_p01		RECORD LIKE cxpt001.*
+DEFINE r_b10		RECORD LIKE ctbt010.*
 
 INITIALIZE banco     TO NULL
 INITIALIZE proveedor TO NULL
@@ -1253,17 +1423,28 @@ INITIALIZE r_p01.*   TO NULL
 INITIALIZE condicion TO NULL
 
 LET tipo_vcto = 'V'		-- Default value: 'V' (Vencidos)
+LET tipo_pago = 'C'
 
-OPEN WINDOW w_204_2 AT 7,9 WITH 11 ROWS, 64 COLUMNS
+OPEN WINDOW w_204_2 AT 7, 9 WITH 11 ROWS, 64 COLUMNS
 	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, BORDER)
-OPEN FORM f_204_2 FROM '../forms/cxpf204_2'
+IF vg_gui = 1 THEN
+	OPEN FORM f_204_2 FROM '../forms/cxpf204_2'
+ELSE
+	OPEN FORM f_204_2 FROM '../forms/cxpf204_2c'
+END IF
 DISPLAY FORM f_204_2
 
+IF vg_gui = 0 THEN
+	CALL muestra_tipovcto(tipo_vcto)
+	CALL muestra_tipopago(tipo_pago)
+END IF
 LET INT_FLAG = 0
-INPUT BY NAME banco, r_g09.g09_numero_cta, proveedor, tipo_vcto 
-	      WITHOUT DEFAULTS
+INPUT BY NAME banco, r_g09.g09_numero_cta, proveedor, tipo_vcto, tipo_pago
+	WITHOUT DEFAULTS
 	ON KEY (INTERRUPT)
-		IF NOT FIELD_TOUCHED(banco, g09_numero_cta, p01_codprov) THEN
+		IF NOT FIELD_TOUCHED(banco, r_g09.g09_numero_cta, proveedor,
+					tipo_vcto, tipo_pago)
+		THEN
 			EXIT INPUT
 		END IF
 
@@ -1273,26 +1454,31 @@ INPUT BY NAME banco, r_g09.g09_numero_cta, proveedor, tipo_vcto
 			LET INT_FLAG = 1
 			EXIT INPUT
 		END IF
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
 	ON KEY(F2)
-		IF INFIELD(banco) THEN
-			CALL fl_ayuda_bancos() RETURNING r_g08.g08_banco,
-							 r_g08.g08_nombre
-			IF r_g08.g08_banco IS NOT NULL THEN
-				LET banco = r_g08.g08_banco
-				DISPLAY BY NAME banco, r_g08.g08_nombre
+		IF tipo_pago <> 'E' THEN
+			IF INFIELD(banco) THEN
+				CALL fl_ayuda_bancos()
+					RETURNING r_g08.g08_banco,
+						  r_g08.g08_nombre
+				IF r_g08.g08_banco IS NOT NULL THEN
+					LET banco = r_g08.g08_banco
+					DISPLAY BY NAME banco, r_g08.g08_nombre
+				END IF
 			END IF
-		END IF
-		IF INFIELD(g09_numero_cta) THEN
-			CALL fl_ayuda_cuenta_banco(vg_codcia) 
-				RETURNING r_g09.g09_banco, dummy, 
-				          r_g09.g09_tipo_cta, 
-				          r_g09.g09_numero_cta 
-			IF r_g09.g09_numero_cta IS NOT NULL THEN
-				LET banco = r_g09.g09_banco
-				LET r_g08.g08_nombre = dummy
-				DISPLAY BY NAME banco, r_g08.g08_nombre,
-					        r_g09.g09_numero_cta
-			END IF	
+			IF INFIELD(g09_numero_cta) THEN
+				CALL fl_ayuda_cuenta_banco(vg_codcia, 'A') 
+					RETURNING r_g09.g09_banco, dummy, 
+					          r_g09.g09_tipo_cta, 
+				        	  r_g09.g09_numero_cta 
+				IF r_g09.g09_numero_cta IS NOT NULL THEN
+					LET banco = r_g09.g09_banco
+					LET r_g08.g08_nombre = dummy
+					DISPLAY BY NAME banco, r_g08.g08_nombre,
+						        r_g09.g09_numero_cta
+				END IF	
+			END IF
 		END IF
 		IF INFIELD(proveedor) THEN
 			CALL fl_ayuda_proveedores() RETURNING r_p01.p01_codprov,
@@ -1303,7 +1489,15 @@ INPUT BY NAME banco, r_g09.g09_numero_cta, proveedor, tipo_vcto
 			END IF
 		END IF
 		LET INT_FLAG = 0
+	BEFORE INPUT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 	AFTER FIELD banco
+		IF tipo_pago = 'E' THEN
+			CALL muestra_datos_pago_efectivo()
+				RETURNING banco, r_g09.*, r_g13.*
+			CONTINUE INPUT
+		END IF
 		IF banco IS NULL THEN
 			INITIALIZE r_g08.* TO NULL
 			INITIALIZE r_g09.* TO NULL
@@ -1316,80 +1510,117 @@ INPUT BY NAME banco, r_g09.g09_numero_cta, proveedor, tipo_vcto
 			IF r_g08.g08_banco IS NULL THEN	
 				INITIALIZE r_g08.g08_nombre TO NULL
 				DISPLAY BY NAME r_g08.g08_nombre
-				CALL fgl_winmessage(vg_producto,
-					            'Banco no existe.',
-						    'exclamation')
+				--CALL fgl_winmessage(vg_producto,'Banco no existe.','exclamation')
+				CALL fl_mostrar_mensaje('Banco no existe.','exclamation')
 				NEXT FIELD banco
 			ELSE
 				DISPLAY BY NAME r_g08.g08_nombre
 			END IF 
 		END IF
 	AFTER FIELD g09_numero_cta
+		IF tipo_pago = 'E' THEN
+			CALL muestra_datos_pago_efectivo()
+				RETURNING banco, r_g09.*, r_g13.*
+			CONTINUE INPUT
+		END IF
 		IF r_g09.g09_numero_cta IS NULL THEN
 			INITIALIZE r_g13.* TO NULL
 			DISPLAY BY NAME r_g13.g13_moneda, r_g13.g13_nombre
 			CONTINUE INPUT
-		ELSE
-			IF banco IS NULL THEN
-				CALL fgl_winmessage(vg_producto,
-					'Debe ingresar un banco primero.',
-					'exclamation')
-				INITIALIZE r_g09.g09_numero_cta TO NULL
-				DISPLAY BY NAME r_g09.g09_numero_cta
-				NEXT FIELD banco
-			END IF
-			LET nro_cta = r_g09.g09_numero_cta
-			CALL fl_lee_banco_compania(vg_codcia, banco,
-				r_g09.g09_numero_cta) RETURNING r_g09.*
-			IF r_g09.g09_numero_cta IS NULL THEN
-				CALL fgl_winmessage(vg_producto,
-					'No existe cuenta en este banco.',
-					'exclamation')
-				LET r_g09.g09_numero_cta = nro_cta
-				NEXT FIELD g09_numero_cta
-			END IF
-			IF r_g09.g09_estado = 'B' THEN
-				CALL fgl_winmessage(vg_producto,
-					'La cuenta está bloqueada.',
-					'exclamation')
-				NEXT FIELD g09_numero_cta
-			END IF
-			CALL fl_lee_moneda(r_g09.g09_moneda) RETURNING r_g13.*
-			DISPLAY BY NAME r_g13.g13_moneda, r_g13.g13_nombre
+		END IF
+		IF banco IS NULL THEN
+			CALL fl_mostrar_mensaje('Debe ingresar un banco primero.','exclamation')
+			INITIALIZE r_g09.g09_numero_cta TO NULL
+			DISPLAY BY NAME r_g09.g09_numero_cta
+			NEXT FIELD banco
+		END IF
+		LET nro_cta = r_g09.g09_numero_cta
+		CALL fl_lee_banco_compania(vg_codcia, banco,
+						r_g09.g09_numero_cta)
+			RETURNING r_g09.*
+		IF r_g09.g09_numero_cta IS NULL THEN
+			CALL fl_mostrar_mensaje('No existe cuenta en este banco.','exclamation')
+			LET r_g09.g09_numero_cta = nro_cta
+			NEXT FIELD g09_numero_cta
+		END IF
+		IF r_g09.g09_estado = 'B' THEN
+			CALL fl_mostrar_mensaje('La cuenta esta bloqueada.','exclamation')
+			NEXT FIELD g09_numero_cta
+		END IF
+		CALL fl_lee_moneda(r_g09.g09_moneda) RETURNING r_g13.*
+		DISPLAY BY NAME r_g13.g13_moneda, r_g13.g13_nombre
+		CALL fl_lee_cuenta(r_g09.g09_compania, r_g09.g09_aux_cont)
+			RETURNING r_b10.*
+		IF r_b10.b10_compania IS NULL THEN
+			CALL fl_mostrar_mensaje('No se puede escoger una cuenta corriente que no tiene auxiliar contable.', 'exclamation')
+			NEXT FIELD g09_numero_cta
+		END IF
+		IF r_b10.b10_estado <> 'A' THEN
+			CALL fl_mostrar_mensaje('El auxiliar contable de esta cuenta bancaria esta con estado bloqueado.', 'exclamation')
+			NEXT FIELD g09_numero_cta
 		END IF
 	AFTER FIELD proveedor
 		IF proveedor IS NULL THEN
 			INITIALIZE r_p01.p01_nomprov TO NULL
 			LET tipo_vcto = 'V'
 			DISPLAY BY NAME r_p01.p01_nomprov, tipo_vcto
+			IF vg_gui = 0 THEN
+				CALL muestra_tipovcto(tipo_vcto)
+			END IF
 			CONTINUE INPUT
 		END IF
 		CALL fl_lee_proveedor(proveedor) RETURNING r_p01.*
 		IF r_p01.p01_codprov IS NULL THEN
-			CALL fgl_winmessage(vg_producto,
-				'Proveedor no existe.',
-				'exclamation')
+			--CALL fgl_winmessage(vg_producto,'Proveedor no existe.','exclamation')
+			CALL fl_mostrar_mensaje('Proveedor no existe.','exclamation')
 			DISPLAY BY NAME r_p01.p01_nomprov
 			NEXT FIELD proveedor
 		END IF
 		IF r_p01.p01_estado = 'B' THEN
-			CALL fgl_winmessage(vg_producto,
-				'Proveedor está bloqueado.',
-				'exclamation')
+			CALL fl_mensaje_estado_bloqueado() 
 			DISPLAY BY NAME r_p01.p01_nomprov
 			NEXT FIELD proveedor
 		END IF
 		DISPLAY BY NAME r_p01.p01_nomprov
 	AFTER FIELD tipo_vcto
 		IF tipo_vcto = 'T' AND proveedor IS NULL THEN
-			CALL fgl_winmessage(vg_producto,
-				'Si no especifica proveedor solo podrá ' || 
-				'ver los documentos vencidos o por vencer ' ||
-				'pero no ambos a la vez.',
-				'exclamation')
+			CALL fl_mostrar_mensaje('Si no especifica proveedor solo podrá ver los documentos vencidos o por vencer, pero no ambos a la vez.','exclamation')
 			LET tipo_vcto = 'V'
 			DISPLAY BY NAME tipo_vcto
 			NEXT FIELD tipo_vcto
+		END IF
+		IF vg_gui = 0 THEN
+			IF tipo_vcto IS NOT NULL THEN
+				CALL muestra_tipovcto(tipo_vcto)
+			ELSE
+				CLEAR tit_tipo_vcto
+			END IF
+		END IF
+	AFTER FIELD tipo_pago
+		IF vg_gui = 0 THEN
+			IF tipo_pago IS NOT NULL THEN
+				CALL muestra_tipopago(tipo_pago)
+			ELSE
+				CLEAR tit_tipo_pago
+			END IF
+		END IF
+		IF tipo_pago = 'E' THEN
+			LET banco = 0
+			CALL fl_lee_banco_general(banco) RETURNING r_g08.*
+			IF r_g08.g08_banco IS NULL THEN
+				CALL fl_mostrar_mensaje('No existe el banco para PAGO EFECTIVO. Por favor llame al ADMINISTRADOR.', 'exclamation')
+				LET banco     = NULL
+				LET tipo_pago = 'C'
+				DISPLAY BY NAME banco, tipo_pago
+				CONTINUE INPUT
+			END IF
+			CALL muestra_datos_pago_efectivo()
+				RETURNING banco, r_g09.*, r_g13.*
+		END IF
+	AFTER INPUT
+		IF tipo_pago = 'E' THEN
+			CALL muestra_datos_pago_efectivo()
+				RETURNING banco, r_g09.*, r_g13.*
 		END IF
 END INPUT
 IF INT_FLAG THEN
@@ -1430,6 +1661,33 @@ END FUNCTION
 
 
 
+FUNCTION muestra_datos_pago_efectivo()
+DEFINE banco 		LIKE gent008.g08_banco
+DEFINE r_g08		RECORD LIKE gent008.*
+DEFINE r_g09		RECORD LIKE gent009.*
+DEFINE r_g13		RECORD LIKE gent013.*
+
+LET banco = 0
+CALL fl_lee_banco_general(banco) RETURNING r_g08.*
+INITIALIZE r_g09.* TO NULL
+DECLARE q_g09 CURSOR FOR
+	SELECT * FROM gent009
+		WHERE g09_compania = vg_codcia
+		  AND g09_banco    = banco
+OPEN q_g09
+FETCH q_g09 INTO r_g09.*
+CLOSE q_g09
+FREE q_g09
+CALL fl_lee_moneda(r_g09.g09_moneda) RETURNING r_g13.*
+LET banco = r_g09.g09_banco
+DISPLAY BY NAME banco, r_g08.g08_nombre, r_g09.g09_numero_cta, r_g13.g13_moneda,
+		r_g13.g13_nombre
+RETURN banco, r_g09.*, r_g13.*
+
+END FUNCTION
+
+
+
 FUNCTION calcula_paridad(moneda_ori, moneda_dest)
 
 DEFINE moneda_ori	LIKE veht036.v36_moneda
@@ -1444,10 +1702,8 @@ ELSE
 	CALL fl_lee_factor_moneda(moneda_ori, moneda_dest) 
 		RETURNING r_g14.*
 	IF r_g14.g14_serial IS NULL THEN
-		CALL fgl_winmessage(vg_producto, 
-				    'No existe factor de conversión ' ||
-				    'para esta moneda.',
-				    'exclamation')
+		--CALL fgl_winmessage(vg_producto,'No existe factor de conversión para esta moneda.','exclamation')
+		CALL fl_mostrar_mensaje('No existe factor de conversión para esta moneda.','exclamation')
 		INITIALIZE paridad TO NULL
 	ELSE
 		LET paridad = r_g14.g14_tasa 
@@ -1529,9 +1785,7 @@ END FUNCTION
 
 
 FUNCTION graba_detalle_autorizacion()
-
-DEFINE query		VARCHAR(255)
-
+DEFINE query		CHAR(400)
 DEFINE r_p20		RECORD LIKE cxpt020.*
 DEFINE r_p25		RECORD LIKE cxpt025.*
 DEFINE r_p26		RECORD LIKE cxpt026.*
@@ -1597,13 +1851,14 @@ UPDATE cxpt024 SET
 LET query = 'INSERT INTO cxpt026 ',
 	    '	SELECT ', vg_codcia, ', ', vg_codloc, ', ', 
 	    		r_p25.p25_orden_pago, ', ', r_p25.p25_secuencia, ', ',
-	    '		codigo_sri, tipo_ret, porc, val_base, subtotal',
+	    '		tipo_ret, porc, codi_sri, fec_ini_por, val_base, ',
+	    '           subtotal',
 	    '		FROM tmp_retenciones ',
 	    '		WHERE proveedor = ', r_p25.p25_codprov,
 	    '		  AND tipo_doc  = "', rm_docs[1].tipo_doc, '"',
 	    '		  AND num_doc   = "', rm_docs[1].num_doc, '"',
 	    '		  AND dividendo = ', rm_docs[1].dividendo
-	    
+
 PREPARE statement2 FROM query
 EXECUTE statement2
 
@@ -1614,7 +1869,7 @@ LET r_p26.p26_orden_pago = r_p25.p25_orden_pago
 LET r_p26.p26_secuencia  = r_p25.p25_secuencia
 
 DECLARE q_retenciones CURSOR FOR 
-	SELECT tipo_ret, porc, val_base, subtotal
+	SELECT tipo_ret, porc, codi_sri, val_base, subtotal
 		FROM tmp_retenciones
 		WHERE proveedor = r_p25.p25_codprov
 	  	  AND tipo_doc  = rm_docs[1].tipo_doc
@@ -1622,7 +1877,8 @@ DECLARE q_retenciones CURSOR FOR
 	  	  AND dividendo = rm_docs[1].dividendo
 
 FOREACH q_retenciones INTO r_p26.p26_tipo_ret,   r_p26.p26_porcentaje,
-			   r_p26.p26_valor_base, r_p26.p26_valor_ret
+			   r_p26.p26_codigo_sri, r_p26.p26_valor_base,
+			   r_p26.p26_valor_ret
 	INSERT INTO cxpt026 VALUES(r_p26.*)
 END FOREACH
 }	  
@@ -1663,13 +1919,11 @@ SELECT ROWID INTO vm_rows[vm_num_rows]
 	  AND p24_orden_pago = vm_ord_pago
 	  AND p24_tipo       = 'P'
 IF STATUS = NOTFOUND THEN
-	CALL fgl_winmessage(vg_producto, 
-		'No existe orden de pago.', 
-		'exclamation')
+	--CALL fgl_winmessage(vg_producto,'No existe orden de pago.','exclamation')
+	CALL fl_mostrar_mensaje('No existe orden de pago.','exclamation')
 	EXIT PROGRAM
-ELSE
-	CALL lee_muestra_registro(vm_rows[vm_row_current])
 END IF
+CALL lee_muestra_registro(vm_rows[vm_row_current])
 
 END FUNCTION
 
@@ -1694,20 +1948,26 @@ END IF
 DISPLAY ARRAY rm_docs_f4 TO ra_docs.*
 	ON KEY(INTERRUPT)
 		EXIT DISPLAY
+       	ON KEY(F1,CONTROL-W)
+		CALL control_visor_teclas_caracter_3() 
 	ON KEY(F5)
+		LET i = arr_curr()
+		LET j = scr_line()
 		CALL muestra_retenciones_f4(i)
-		LET INT_FLAG = 0
+		LET int_flag = 0
 	ON KEY(F6)
 		CALL ver_estado_cuenta(0)
 		LET INT_FLAG = 0
-	BEFORE ROW
-		LET i = arr_curr()
-		LET j = scr_line()
-	BEFORE DISPLAY
-		CALL dialog.keysetlabel('ACCEPT', '')
-		CALL setea_nombre_botones_f4()
-	AFTER DISPLAY
-		CONTINUE DISPLAY
+	--#BEFORE ROW
+		--#LET i = arr_curr()
+		--#LET j = scr_line()
+	--#BEFORE DISPLAY
+		--#CALL dialog.keysetlabel('ACCEPT', '')
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
+		--#CALL setea_nombre_botones_f4()
+	--#AFTER DISPLAY
+		--#CONTINUE DISPLAY
 END DISPLAY
 
 END FUNCTION
@@ -1755,12 +2015,10 @@ END FUNCTION
 
 
 FUNCTION muestra_retenciones_f4(i)
-
 DEFINE i		SMALLINT
 DEFINE j		SMALLINT
 DEFINE salir		SMALLINT
 DEFINE resp		CHAR(6)
-
 DEFINE val_bienes	DECIMAL(12,2)
 DEFINE val_servi	DECIMAL(12,2)
 DEFINE val_impto	DECIMAL(12,2)
@@ -1768,19 +2026,30 @@ DEFINE val_neto		DECIMAL(12,2)
 DEFINE val_pagar	DECIMAL(12,2)
 DEFINE tot_ret  	DECIMAL(12,2)
 DEFINE val_cheque	DECIMAL(12,2)
-
 DEFINE r_c01		RECORD LIKE ordt001.*
 DEFINE r_c10		RECORD LIKE ordt010.*
 DEFINE r_p01		RECORD LIKE cxpt001.*
 DEFINE r_p05		RECORD LIKE cxpt005.*
 DEFINE r_p20		RECORD LIKE cxpt020.*
 DEFINE r_p26		RECORD LIKE cxpt026.*
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
 CALL fl_lee_proveedor(rm_docs[i].proveedor)	RETURNING r_p01.*
 
-OPEN WINDOW w_204_3 AT 4,9 WITH 21 ROWS, 70 COLUMNS
+LET num_rows = 21
+LET num_cols = 70
+IF vg_gui = 0 THEN
+	LET num_rows = 20
+	LET num_cols = 71
+END IF
+OPEN WINDOW w_204_3 AT 4, 9 WITH num_rows ROWS, num_cols COLUMNS
 	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, BORDER)
-OPEN FORM f_204_3 FROM '../forms/cxpf204_3'
+IF vg_gui = 1 THEN
+	OPEN FORM f_204_3 FROM '../forms/cxpf204_3'
+ELSE
+	OPEN FORM f_204_3 FROM '../forms/cxpf204_3c'
+END IF
 DISPLAY FORM f_204_3
 
 CALL setea_nombre_botones_f3()
@@ -1816,7 +2085,8 @@ END IF
 LET val_pagar  = rm_docs_f4[i].valor_pagar
 
 DECLARE q_ret3 CURSOR FOR
-	SELECT cxpt026.*, c02_nombre FROM cxpt026, cxpt025, ordt002
+	SELECT cxpt026.*, c02_nombre
+		FROM cxpt026, cxpt025, ordt003, ordt002
 		WHERE p25_compania   = vg_codcia
 		  AND p25_localidad  = vg_codloc
 		  AND p25_orden_pago = rm_p24.p24_orden_pago
@@ -1827,10 +2097,14 @@ DECLARE q_ret3 CURSOR FOR
 		  AND p26_localidad  = p25_localidad
 		  AND p26_orden_pago = p25_orden_pago
 		  AND p26_secuencia  = p25_secuencia
-		  AND c02_compania   = p26_compania
-		  AND c02_codigo_sri = p26_codigo_sri
-		  AND c02_tipo_ret   = p26_tipo_ret
-		  AND c02_porcentaje = p26_porcentaje
+		  AND c03_compania   = p26_compania
+		  AND c03_tipo_ret   = p26_tipo_ret
+		  AND c03_porcentaje = p26_porcentaje
+		  AND c03_codigo_sri = p26_codigo_sri
+		  AND c03_fecha_ini_porc = p26_fecha_ini_porc
+		  AND c02_compania   = c03_compania
+		  AND c02_tipo_ret   = c03_tipo_ret
+		  AND c02_porcentaje = c03_porcentaje
 
 LET j = 1
 FOREACH q_ret3 INTO r_p26.*, r_ret[j].n_retencion
@@ -1863,22 +2137,25 @@ WHILE NOT salir
 	IF ind_ret > 0 THEN
 		CALL set_count(ind_ret)
 	ELSE
-		CALL fgl_winmessage(vg_producto,
-			'No hay datos que mostrar.',
-			'exclamation')
+		--CALL fgl_winmessage(vg_producto,'No hay datos que mostrar.','exclamation')
+		CALL fl_mostrar_mensaje('No hay datos que mostrar.','exclamation')
 		RETURN
 	END IF
 	INPUT ARRAY r_ret WITHOUT DEFAULTS FROM ra_ret.*
 		ON KEY(INTERRUPT)
 			LET salir = 1
 			EXIT INPUT
+        	ON KEY(F1,CONTROL-W)
+			CALL llamar_visor_teclas()
 		BEFORE ROW
 			LET i = arr_curr()
 			LET j = scr_line()
 		BEFORE INPUT
-			CALL dialog.keysetlabel('INSERT', '')
-			CALL dialog.keysetlabel('DELETE', '')
-			CALL dialog.keysetlabel('ACCEPT', '')
+			--#CALL dialog.keysetlabel('INSERT', '')
+			--#CALL dialog.keysetlabel('DELETE', '')
+			--#CALL dialog.keysetlabel('ACCEPT', '')
+			--#CALL dialog.keysetlabel("F1","")
+			--#CALL dialog.keysetlabel("CONTROL-W","")
 		BEFORE INSERT
 			EXIT INPUT
 		BEFORE DELETE
@@ -1889,7 +2166,8 @@ WHILE NOT salir
 			IF fgl_lastkey() <> fgl_keyval('down') 
 			AND fgl_lastkey() <> fgl_keyval('up')
 			THEN
-				NEXT FIELD ra_ret[j-1].check
+				--#NEXT FIELD ra_ret[j-1].check
+				NEXT FIELD check
 			END IF
 		AFTER INPUT
 			CONTINUE INPUT
@@ -1904,12 +2182,12 @@ END FUNCTION
 
 FUNCTION setea_nombre_botones_f4()
 
-DISPLAY 'Tp'            TO bt_tipo_doc
-DISPLAY 'Número Doc.'   TO bt_nro_doc  
-DISPLAY '#'	        TO bt_dividendo 
-DISPLAY 'Fecha Vcto.'   TO bt_fecha_vcto
-DISPLAY 'Saldo Capital' TO bt_capital
-DISPLAY 'Valor a Pagar' TO bt_valor 
+--#DISPLAY 'Tp'            TO bt_tipo_doc
+--#DISPLAY 'Número Doc.'   TO bt_nro_doc  
+--#DISPLAY '#'	           TO bt_dividendo 
+--#DISPLAY 'Fecha Vcto.'   TO bt_fecha_vcto
+--#DISPLAY 'Saldo Capital' TO bt_capital
+--#DISPLAY 'Valor a Pagar' TO bt_valor 
 
 END FUNCTION
 
@@ -1935,16 +2213,20 @@ DEFINE r_p01		RECORD LIKE cxpt001.*
 
 LET max_arr = 255
 
-OPEN WINDOW w_204_5 AT 7,16 WITH 16 ROWS, 62 COLUMNS
+OPEN WINDOW w_204_5 AT 7, 16 WITH 16 ROWS, 62 COLUMNS
 	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, BORDER)
-OPEN FORM f_204_5 FROM '../forms/cxpf204_5'
+IF vg_gui = 1 THEN
+	OPEN FORM f_204_5 FROM '../forms/cxpf204_5'
+ELSE
+	OPEN FORM f_204_5 FROM '../forms/cxpf204_5c'
+END IF
 DISPLAY FORM f_204_5
 
 -- Etiquetas botones
-DISPLAY 'Prov.'		TO 	bt_proveedor
-DISPLAY 'Ret. Fuente'	TO 	bt_val_ret_f
-DISPLAY 'Ret. Iva'	TO 	bt_val_ret_i
-DISPLAY 'Valor Cheque'	TO 	bt_val_che
+--#DISPLAY 'Prov.'		TO 	bt_proveedor
+--#DISPLAY 'Ret. Fuente'	TO 	bt_val_ret_f
+--#DISPLAY 'Ret. Iva'		TO 	bt_val_ret_i
+--#DISPLAY 'Valor Cheque'	TO 	bt_val_che
 
 DECLARE q_prov CURSOR FOR
 	SELECT proveedor FROM tmp_detalle 
@@ -1996,9 +2278,8 @@ END FOREACH
 LET i = i - 1
 
 IF i = 0 THEN
-	CALL fgl_winmessage(vg_producto,
-		'No hay datos que mostrar.',
-		'exclamation')
+	--CALL fgl_winmessage(vg_producto,'No hay datos que mostrar.','exclamation')
+	CALL fl_mostrar_mensaje('No hay datos que mostrar.','exclamation')
 	CLOSE WINDOW w_204_5
 	RETURN
 END IF
@@ -2007,10 +2288,15 @@ DISPLAY BY NAME tot_ret_f, tot_ret_i, tot_che
 
 CALL set_count(i)
 DISPLAY ARRAY r_totales TO ra_totales.*
-	BEFORE ROW
-		LET i = arr_curr()
-		CALL fl_lee_proveedor(r_totales[i].codprov) RETURNING r_p01.*
-		DISPLAY r_p01.p01_nomprov	TO 	nomprov
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
+	--#BEFORE ROW
+		--#LET i = arr_curr()
+		--#CALL fl_lee_proveedor(r_totales[i].codprov) RETURNING r_p01.*
+		--#DISPLAY r_p01.p01_nomprov	TO 	nomprov
+	--#BEFORE DISPLAY
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 END DISPLAY
 
 CLOSE WINDOW w_204_5
@@ -2020,58 +2306,333 @@ END FUNCTION
 
 
 FUNCTION ver_estado_cuenta(i)
-
 DEFINE i		SMALLINT
 DEFINE comando		CHAR(255)
+DEFINE run_prog		CHAR(10)
 
 IF i = 0 THEN
 	LET i = 1
 	LET rm_docs[i].proveedor = rm_p24.p24_codprov
 END IF
 
-LET comando = 'cd ..', vg_separador, '..', vg_separador, 'TESORERIA', 
-	vg_separador, 'fuentes', vg_separador, '; fglrun cxpp300 ', vg_base, 
-	' ', 'TE', vg_codcia, ' ', vg_codloc, ' ', rm_docs[i].proveedor, 
-	' ', rm_p24.p24_moneda
-	
+{-- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE --}
+LET run_prog = '; fglrun '
+IF vg_gui = 0 THEN
+	LET run_prog = '; fglgo '
+END IF
+{--- ---}
+LET comando = 'cd ..', vg_separador, '..', vg_separador, 'TESORERIA',
+		vg_separador, 'fuentes', vg_separador, run_prog, 'cxpp314 ',
+		vg_base, ' ', vg_modulo, ' ', vg_codcia, ' ', vg_codloc, ' ',
+		rm_p24.p24_moneda, ' ', TODAY, ' "T" 0.01 "N" ',
+		rm_docs[i].proveedor, ' 0 '
 RUN comando	
 
 END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION muestra_tipovcto(tipovcto)
+DEFINE tipovcto		CHAR(1)
 
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 
-                            'stop')
-	EXIT PROGRAM
+CASE tipovcto
+	WHEN 'V'
+		DISPLAY 'VENCIDOS' TO tit_tipo_vcto
+	WHEN 'P'
+		DISPLAY 'POR VENCER' TO tit_tipo_vcto
+	WHEN 'T'
+		DISPLAY 'T O D O S' TO tit_tipo_vcto
+	OTHERWISE
+		CLEAR tipo_vcto, tit_tipo_vcto
+END CASE
+
+END FUNCTION
+
+
+
+FUNCTION muestra_tipopago(tipopago)
+DEFINE tipopago		CHAR(1)
+
+CASE tipopago
+	WHEN 'C'
+		DISPLAY 'CHEQUE'   TO tit_tipo_pago
+	WHEN 'E'
+		DISPLAY 'EFECTIVO' TO tit_tipo_pago
+	OTHERWISE
+		CLEAR tipo_pago, tit_tipo_pago
+END CASE
+
+END FUNCTION
+
+
+
+FUNCTION control_codigos_sri(ind, ind2)
+DEFINE ind, ind2	SMALLINT
+DEFINE r_c03		RECORD LIKE ordt003.*
+DEFINE ini_rows 	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
+DEFINE i, j, salir 	SMALLINT
+DEFINE cont, posi	SMALLINT
+DEFINE pos_ori		SMALLINT
+DEFINE resp		CHAR(6)
+
+LET ini_rows = 04
+LET num_rows = 18
+LET num_cols = 79
+IF vg_gui = 0 THEN
+	LET ini_rows = 05
+	LET num_rows = 18
+	LET num_cols = 78
 END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 
-                            'stop')
-	EXIT PROGRAM
+OPEN WINDOW w_cxpf204_6 AT ini_rows, 02 WITH num_rows ROWS, num_cols COLUMNS
+	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MESSAGE LINE LAST, BORDER)
+IF vg_gui = 1 THEN
+	OPEN FORM f_cxpf204_6 FROM "../forms/cxpf204_6"
+ELSE
+	OPEN FORM f_cxpf204_6 FROM "../forms/cxpf204_6c"
 END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || 
-                            vg_codcia, 'stop')
-	EXIT PROGRAM
+DISPLAY FORM f_cxpf204_6
+--#DISPLAY 'Código'		TO tit_col1 
+--#DISPLAY 'Concepto'		TO tit_col2 
+--#DISPLAY 'Fecha Ini.'		TO tit_col3 
+--#DISPLAY 'Fecha Fin.'		TO tit_col4 
+--#DISPLAY 'I'			TO tit_col5 
+--#DISPLAY 'E'			TO tit_col6 
+OPTIONS INSERT KEY F30,
+	DELETE KEY F31
+CLEAR c03_tipo_ret, c02_nombre, c03_porcentaje
+FOR i = 1 TO fgl_scr_size('rm_retsri')
+	CLEAR rm_retsri[i].*
+END FOR
+FOR i = 1 TO vm_max_det
+	INITIALIZE rm_retsri[i].* TO NULL
+END FOR
+INITIALIZE rm_c03.* TO NULL
+DECLARE q_c03 CURSOR WITH HOLD FOR
+	SELECT * FROM ordt003
+		WHERE c03_compania   = vg_codcia
+		  AND c03_tipo_ret   = r_ret[ind].tipo_ret
+		  AND c03_porcentaje = r_ret[ind].porc
+		  AND c03_estado     = 'A'
+OPEN q_c03
+FETCH q_c03 INTO rm_c03.*
+IF STATUS = NOTFOUND THEN
+	CLOSE q_c03
+	FREE q_c03
+	CLOSE WINDOW w_cxpf204_6
+	CALL fl_mensaje_consulta_sin_registros()
+	RETURN 0
 END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
+LET vm_num_det = 1
+LET pos_ori    = 0
+FOREACH q_c03 INTO rm_c03.*
+	LET rm_retsri[vm_num_det].c03_codigo_sri     = rm_c03.c03_codigo_sri
+	LET rm_retsri[vm_num_det].c03_concepto_ret   = rm_c03.c03_concepto_ret
+	LET rm_retsri[vm_num_det].c03_fecha_ini_porc = rm_c03.c03_fecha_ini_porc
+	LET rm_retsri[vm_num_det].c03_fecha_fin_porc = rm_c03.c03_fecha_fin_porc
+	LET rm_retsri[vm_num_det].c03_ingresa_proc   = rm_c03.c03_ingresa_proc
+	LET rm_retsri[vm_num_det].tipo_imp           = 'N'
+	SELECT * FROM tmp_tipo_porc
+		WHERE proveed    = rm_docs[ind2].proveedor
+		  AND tipodoc    = rm_docs[ind2].tipo_doc
+		  AND numdoc     = rm_docs[ind2].num_doc
+		  AND divid      = rm_docs[ind2].dividendo
+		  AND tiporet    = r_ret[ind].tipo_ret
+		  AND porcen     = r_ret[ind].porc
+		  AND codigo_sri = rm_retsri[vm_num_det].c03_codigo_sri
+		  AND fecha_ini_por = rm_retsri[vm_num_det].c03_fecha_ini_porc
+	IF STATUS <> NOTFOUND THEN
+		LET rm_retsri[vm_num_det].tipo_imp = 'S'
+		LET pos_ori                        = vm_num_det
+	END IF
+	LET vm_num_det = vm_num_det + 1
+	IF vm_num_det > vm_max_det THEN
+		CALL fl_mensaje_arreglo_incompleto()
+		EXIT PROGRAM
+	END IF
+END FOREACH
+LET vm_num_det = vm_num_det - 1
+IF vm_num_det = 0 THEN
+	LET vm_num_det = 1
 END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 
-                            'stop')
-	EXIT PROGRAM
+DISPLAY BY NAME rm_c03.c03_tipo_ret, rm_c03.c03_porcentaje
+DISPLAY r_ret[ind].n_retencion TO c02_nombre
+LET salir = 0
+WHILE NOT salir
+	MESSAGE 'Presione F12 para seleccionar el código del SRI apropiado.'
+	CALL set_count(vm_num_det)
+	LET int_flag = 0
+	DISPLAY ARRAY rm_retsri TO rm_retsri.*
+		ON KEY(INTERRUPT)
+			LET int_flag = 0
+			CALL fl_mensaje_abandonar_proceso() RETURNING resp
+			IF resp = 'Yes' THEN
+				LET int_flag = 1
+				LET salir    = 1
+				EXIT DISPLAY
+			END IF
+		ON KEY(F1,CONTROL-W)
+			CALL llamar_visor_teclas()
+		ON KEY(RETURN)
+			LET i    = arr_curr()
+			LET j    = scr_line()
+			LET posi = i
+			LET rm_retsri[posi].tipo_imp = 'S'
+			DISPLAY rm_retsri[i].tipo_imp TO rm_retsri[j].tipo_imp
+			LET int_flag = 0
+			LET salir    = 1
+			EXIT DISPLAY
+		--#BEFORE DISPLAY
+			--#CALL dialog.keysetlabel("F1","")
+			--#CALL dialog.keysetlabel("CONTROL-W","")
+			--#CALL dialog.keysetlabel("INSERT","")
+			--#CALL dialog.keysetlabel("DELETE","")
+		--#BEFORE ROW
+			--#LET i = arr_curr()
+			--#LET j = scr_line()
+			--#DISPLAY i          TO num_row
+			--#DISPLAY vm_num_det TO max_row
+		--#AFTER DISPLAY
+			--LET cont = 0
+			--FOR i = 1 TO vm_num_det
+				--IF rm_retsri[i].tipo_imp = 'S' THEN
+					--LET posi = i
+					--LET cont = cont + 1
+				--END IF
+			--END FOR
+			--IF cont > 1 THEN
+				--CALL fl_mostrar_mensaje('Solo puede marcar un solo código del SRI por cada tipo de impuesto.', 'exclamation')
+				--CONTINUE DISPLAY
+			--END IF
+			--IF cont = 0 THEN
+				--CALL fl_mostrar_mensaje('Marque al menos un código del SRI.', 'exclamation')
+				--CONTINUE DISPLAY
+			--END IF
+			--#LET i = arr_curr()
+			--#LET j = scr_line()
+			--#LET posi = i
+			--#LET rm_retsri[posi].tipo_imp = 'S'
+			--#DISPLAY rm_retsri[i].tipo_imp TO rm_retsri[j].tipo_imp
+			--#LET salir = 1
+	END DISPLAY
+END WHILE
+IF int_flag THEN
+	CLOSE WINDOW w_cxpf204_6
+	LET int_flag = 0
+	RETURN 0
 END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: ' || 
-                            vg_codloc, 'stop')
-	EXIT PROGRAM
+IF pos_ori > 0 THEN
+	DELETE FROM tmp_tipo_porc
+		WHERE proveed    = rm_docs[ind2].proveedor
+		  AND tipodoc    = rm_docs[ind2].tipo_doc
+		  AND numdoc     = rm_docs[ind2].num_doc
+		  AND divid      = rm_docs[ind2].dividendo
+		  AND tiporet    = r_ret[ind].tipo_ret
+		  AND porcen     = r_ret[ind].porc
+		  AND codigo_sri = rm_retsri[pos_ori].c03_codigo_sri
+		  AND fecha_ini_por = rm_retsri[pos_ori].c03_fecha_ini_porc
 END IF
+INSERT INTO tmp_tipo_porc
+	VALUES(rm_docs[ind2].proveedor, rm_docs[ind2].tipo_doc,
+		rm_docs[ind2].num_doc, rm_docs[ind2].dividendo,
+		r_ret[ind].tipo_ret, r_ret[ind].porc,
+		rm_retsri[posi].c03_codigo_sri,
+		rm_retsri[posi].c03_fecha_ini_porc,
+		rm_retsri[posi].c03_concepto_ret)
+CALL fl_mostrar_mensaje('Procesados Códigos del SRI.', 'info')
+CLOSE WINDOW w_cxpf204_6
+LET int_flag = 0
+RETURN 1
+
+END FUNCTION
+
+
+
+FUNCTION llamar_visor_teclas()
+DEFINE a		CHAR(1)
+
+IF vg_gui = 0 THEN
+	CALL fl_visor_teclas_caracter() RETURNING int_flag 
+	LET a = fgl_getkey()
+	CLOSE WINDOW w_tf
+	LET int_flag = 0
+END IF
+
+END FUNCTION
+
+
+
+FUNCTION control_visor_teclas_caracter_1() 
+DEFINE a, fila		INTEGER
+
+CALL fl_visor_teclas_caracter() RETURNING fila
+LET a = fila + 2
+DISPLAY 'Teclas exclusivas de este proceso:' AT a,2 ATTRIBUTE(REVERSE)	
+LET a = a + 1
+DISPLAY '<F5>      Valor a Pagar'            AT a,2
+DISPLAY  'F5' AT a,3 ATTRIBUTE(REVERSE)
+LET a = fgl_getkey()
+CLOSE WINDOW w_tf
+
+END FUNCTION
+
+
+
+FUNCTION control_visor_teclas_caracter_2() 
+DEFINE a, fila		INTEGER
+
+CALL fl_visor_teclas_caracter() RETURNING fila
+LET a = fila + 2
+DISPLAY 'Teclas exclusivas de este proceso:' AT a,2 ATTRIBUTE(REVERSE)	
+LET a = a + 1
+DISPLAY '<F5>      Pagar'                    AT a,2
+DISPLAY  'F5' AT a,3 ATTRIBUTE(REVERSE)
+LET a = a + 1
+DISPLAY '<F6>      Totales'                  AT a,2
+DISPLAY  'F6' AT a,3 ATTRIBUTE(REVERSE)
+LET a = a + 1
+DISPLAY '<F7>      Estado Cuenta'            AT a,2
+DISPLAY  'F7' AT a,3 ATTRIBUTE(REVERSE)
+LET a = fgl_getkey()
+CLOSE WINDOW w_tf
+
+END FUNCTION
+
+
+
+FUNCTION control_visor_teclas_caracter_3() 
+DEFINE a, fila		INTEGER
+
+CALL fl_visor_teclas_caracter() RETURNING fila
+LET a = fila + 2
+DISPLAY 'Teclas exclusivas de este proceso:' AT a,2 ATTRIBUTE(REVERSE)	
+LET a = a + 1
+DISPLAY '<F5>      Ver Retenciones'          AT a,2
+DISPLAY  'F5' AT a,3 ATTRIBUTE(REVERSE)
+LET a = a + 1
+DISPLAY '<F6>      Estado Cuenta'            AT a,2
+DISPLAY  'F6' AT a,3 ATTRIBUTE(REVERSE)
+LET a = fgl_getkey()
+CLOSE WINDOW w_tf
+
+END FUNCTION
+
+
+
+FUNCTION control_visor_teclas_caracter_4() 
+DEFINE a, fila		INTEGER
+
+CALL fl_visor_teclas_caracter() RETURNING fila
+LET a = fila + 2
+DISPLAY 'Teclas exclusivas de este proceso:' AT a,2 ATTRIBUTE(REVERSE)	
+LET a = a + 1
+DISPLAY '<F5>      Valor a Pagar'            AT a,2
+DISPLAY  'F5' AT a,3 ATTRIBUTE(REVERSE)
+LET a = a + 1
+DISPLAY '<F6>      Códigos SRI'              AT a,2
+DISPLAY  'F6' AT a,3 ATTRIBUTE(REVERSE)
+LET a = fgl_getkey()
+CLOSE WINDOW w_tf
 
 END FUNCTION

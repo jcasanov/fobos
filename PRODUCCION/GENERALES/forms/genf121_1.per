@@ -1,6 +1,6 @@
                                                                                 
-database diteca
-screen
+DATABASE aceros
+SCREEN
 {
 
 
@@ -15,14 +15,14 @@ screen
 
 }
 end
-tables
+TABLES
 gent031
-attributes
-c000 = formonly.g31_ciudad TYPE INTEGER NOT NULL, REVERSE,
+ATTRIBUTES
+c000 = FORMONLY.g31_ciudad TYPE INTEGER NOT NULL, REVERSE,
     	  WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 c01 = gent031.g31_pais, REVERSE, UPSHIFT,
     	  WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c002 = formonly.nom_pais, UPSHIFT;
+c002 = FORMONLY.nom_pais, UPSHIFT;
 c001 = gent031.g31_nombre, REVERSE, UPSHIFT;
 c02 = gent031.g31_siglas, REVERSE, UPSHIFT, AUTONEXT;
 c003 = gent031.g31_usuario, REVERSE, UPSHIFT, NOENTRY;

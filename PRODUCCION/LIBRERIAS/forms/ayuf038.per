@@ -1,30 +1,34 @@
-DATABASE diteca
-
+DATABASE aceros
 SCREEN
 {
  VENDEDORES
-------------------------------------
- Código  Nombres
-------------------------------------
-[c01] [c002                       ] 
-[c01] [c002                       ]
-[c01] [c002                       ]
-[c01] [c002                       ]
-[c01] [c002                       ]
-[c01] [c002                       ]
-[c01] [c002                       ] 
-[c01] [c002                       ] 
-[c01] [c002                       ] 
-[c01] [c002                       ] 
-}
 
+ [c01|c002                          |c03|c004      ]
+[c11|c012                          |c13|c014      ]
+[c11|c012                          |c13|c014      ]
+[c11|c012                          |c13|c014      ]
+[c11|c012                          |c13|c014      ]
+[c11|c012                          |c13|c014      ]
+[c11|c012                          |c13|c014      ]
+[c11|c012                          |c13|c014      ]
+[c11|c012                          |c13|c014      ]
+[c11|c012                          |c13|c014      ]
+[c11|c012                          |c13|c014      ]
+
+}
 TABLES
 rept001
-
 ATTRIBUTES
-c01 = r01_codigo;
-c002 = r01_nombres;
-END
+c01  = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c002 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c03  = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c004 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
 
+c11  = rept001.r01_codigo, NOENTRY, UPSHIFT;
+c012 = rept001.r01_nombres, NOENTRY, UPSHIFT;
+c13  = rept001.r01_iniciales, NOENTRY, UPSHIFT;
+c014 = rept001.r01_user_owner, NOENTRY, UPSHIFT;
+END
 INSTRUCTIONS
-SCREEN RECORD rh_vend[10](r01_codigo, r01_nombres)
+SCREEN RECORD rh_vend[10] (r01_codigo, r01_nombres, r01_iniciales,
+				r01_user_owner)

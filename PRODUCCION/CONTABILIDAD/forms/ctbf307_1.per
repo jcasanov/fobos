@@ -1,4 +1,4 @@
-DATABASE formonly
+DATABASE FORMONLY
 SCREEN
 {
           Código de Cuenta: [c000        ]  [c001                          ]
@@ -26,12 +26,12 @@ SCREEN
 [a]
 }
 ATTRIBUTES
-c000 = formonly.cuenta TYPE CHAR NOT NULL, REVERSE, WIDGET = 'FIELD_BMP',  
+c000 = FORMONLY.cuenta TYPE CHAR NOT NULL, REVERSE, WIDGET = 'FIELD_BMP',  
        CONFIG = 'lista.bmp F2';
-c001 = formonly.tit_cuenta, REVERSE, NOENTRY;
-c002 = formonly.ano TYPE SMALLINT NOT NULL, REQUIRED, REVERSE;
-c3   = formonly.moneda TYPE CHAR NOT NULL ,REQUIRED, REVERSE, 
+c001 = FORMONLY.tit_cuenta, REVERSE, NOENTRY;
+c002 = FORMONLY.ano TYPE SMALLINT NOT NULL, REQUIRED, REVERSE;
+c3   = FORMONLY.moneda TYPE CHAR NOT NULL ,REQUIRED, REVERSE, 
        WIDGET = 'FIELD_BMP',  CONFIG = 'lista.bmp F2';
-c004 = formonly.tit_mon, REVERSE, NOENTRY;
-c005 = formonly.c001, WIDGET = 'Canvas';
-a    = formonly.tecla, AUTONEXT, INVISIBLE;
+c004 = FORMONLY.tit_mon, REVERSE, NOENTRY;
+c005 = FORMONLY.c001, WIDGET = 'Canvas';
+a    = FORMONLY.tecla, AUTONEXT, INVISIBLE;

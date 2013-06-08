@@ -1,0 +1,56 @@
+DATABASE aceros
+SCREEN
+{
+
+                    Bodega: [c0]     [c1                            ]
+	 Ultima Venta <= a: [c2        ]
+
+                  Division: [c3   ]  [c4                            ]
+	Indice de Rotación: [c5]     [c6                            ]
+          Tipo de Artículo: [c7   ]  [c8                            ]
+
+         Item          Descripción     Ult. Ing.  Ult. Vta.   Stock 
+   [f0           |f1                  |f2        |f3        |f4     ]
+   [f0           |f1                  |f2        |f3        |f4     ]
+   [f0           |f1                  |f2        |f3        |f4     ]
+   [f0           |f1                  |f2        |f3        |f4     ]
+   [f0           |f1                  |f2        |f3        |f4     ]
+   [f0           |f1                  |f2        |f3        |f4     ]
+   [f0           |f1                  |f2        |f3        |f4     ]
+   [f0           |f1                  |f2        |f3        |f4     ]
+   [f0           |f1                  |f2        |f3        |f4     ]
+   [f0           |f1                  |f2        |f3        |f4     ]
+}
+TABLES
+	rept010, rept011
+
+ATTRIBUTES
+c0  = FORMONLY.vm_bodega, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c1  = FORMONLY.nom_bodega, NOENTRY;
+
+c2  = FORMONLY.vm_fecha TYPE DATE, REVERSE, REQUIRED, FORMAT='dd-mm-yyyy';
+
+c3  = FORMONLY.vm_linea TYPE VARCHAR, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c4  = FORMONLY.nom_linea, NOENTRY;
+
+c5  = FORMONLY.vm_rotacion TYPE VARCHAR, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c6  = FORMONLY.nom_rotacion, NOENTRY;
+
+c7  = FORMONLY.vm_tipo TYPE SMALLINT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c8  = FORMONLY.nom_tipo, NOENTRY;
+
+f0  = r10_codigo;
+f1  = r10_nombre;
+f2  = FORMONLY.fec_ult_ing TYPE DATE, FORMAT = 'dd-mm-yyyy';
+f3  = FORMONLY.fec_ult_vta TYPE DATE, FORMAT = 'dd-mm-yyyy';
+f4  = r11_stock_act,FORMAT = '###&.##';
+end
+ 
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_detalle[10] (r10_codigo,  r10_nombre, fec_ult_ing, 
+			     fec_ult_vta, r11_stock_act)

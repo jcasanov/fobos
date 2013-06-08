@@ -1,0 +1,34 @@
+DATABASE aceros
+
+SCREEN
+{
+  MAESTRO DE SERIES DE VEHICULOS
+ --------------------------------------------------------------
+  Código Serie                   Modelo           Color     E
+ --------------------------------------------------------------
+ [c000  |c001                   |c002            |c003     |c0]
+ [c000  |c001                   |c002            |c003     |c0]
+ [c000  |c001                   |c002            |c003     |c0]
+ [c000  |c001                   |c002            |c003     |c0]
+ [c000  |c001                   |c002            |c003     |c0]
+ [c000  |c001                   |c002            |c003     |c0]
+ [c000  |c001                   |c002            |c003     |c0]
+ [c000  |c001                   |c002            |c003     |c0]
+ [c000  |c001                   |c002            |c003     |c0]
+ [c000  |c001                   |c002            |c003     |c0]
+
+}
+
+TABLES
+veht022
+
+ATTRIBUTES
+c000 = v22_codigo_veh, UPSHIFT,REVERSE;
+c001 = v22_chasis, UPSHIFT,REVERSE;
+c002 = v22_modelo, UPSHIFT,REVERSE;
+c003 = v22_cod_color, UPSHIFT,REVERSE;
+c0   = v22_estado, UPSHIFT,REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_serveh[10](v22_codigo_veh, v22_chasis, v22_modelo, v22_cod_color,v22_estado)

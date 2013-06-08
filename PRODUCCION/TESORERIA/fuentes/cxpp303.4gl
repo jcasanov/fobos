@@ -60,7 +60,7 @@ DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
 CALL startlog('../logs/errores')
-CALL fgl_init4js()
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN          -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
@@ -72,8 +72,8 @@ LET vg_codcia   = arg_val(3)
 LET vg_proceso = 'cxpp303'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -236,7 +236,7 @@ INPUT BY NAME rm_par.moneda, rm_par.localidad, rm_par.tipo_detalle
 			EXIT PROGRAM
 		END IF
 	ON KEY(F2)
-		IF infield(localidad) THEN
+		IF INFIELD(localidad) THEN
 			CALL fl_ayuda_localidad(vg_codcia)
 				RETURNING loc_aux, rm_par.tit_local
 			IF loc_aux IS NOT NULL THEN
@@ -244,7 +244,7 @@ INPUT BY NAME rm_par.moneda, rm_par.localidad, rm_par.tipo_detalle
 				DISPLAY BY NAME rm_par.localidad, rm_par.tit_local
 			END IF
 		END IF
-		IF infield(moneda) THEN
+		IF INFIELD(moneda) THEN
 			CALL fl_ayuda_monedas() RETURNING mon_aux,rm_par.tit_mon,
 							  num_dec
 			IF mon_aux IS NOT NULL THEN
@@ -554,8 +554,8 @@ WHILE TRUE
 	LET int_flag = 0
 	DISPLAY ARRAY rm_det TO rm_det.*
 		BEFORE DISPLAY
-			CALL dialog.keysetlabel("ACCEPT","")
-			CALL dialog.keysetlabel("F6","Gráfico")
+			--#CALL dialog.keysetlabel("ACCEPT","")
+			--#CALL dialog.keysetlabel("F6","Gráfico")
 		AFTER DISPLAY
 			CONTINUE DISPLAY
 		ON KEY(INTERRUPT)
@@ -783,31 +783,31 @@ WHILE TRUE
 		LET key_f30 = FGL_KEYVAL("F30")
 		LET int_flag = 0
 		IF filas_procesadas >= max_elementos THEN
-			CALL fgl_keysetlabel("F3","")
+			--#CALL fgl_keysetlabel("F3","")
 		ELSE
-			CALL fgl_keysetlabel("F3","Avanzar")
+			--#CALL fgl_keysetlabel("F3","Avanzar")
 		END IF
 		IF filas_procesadas <= max_barras THEN
-			CALL fgl_keysetlabel("F4","")
+			--#CALL fgl_keysetlabel("F4","")
 		ELSE
-			CALL fgl_keysetlabel("F4","Retroceder")
+			--#CALL fgl_keysetlabel("F4","Retroceder")
 		END IF
 		INPUT BY NAME tecla
 			BEFORE INPUT
 				IF filas_procesadas <= max_barras THEN
-					CALL dialog.keysetlabel("F5","Vencimientos")
+					--#CALL dialog.keysetlabel("F5","Vencimientos")
 				ELSE
-					CALL dialog.keysetlabel("F5","")
+					--#CALL dialog.keysetlabel("F5","")
 				END IF
-				CALL dialog.keysetlabel("ACCEPT","")
-				CALL dialog.keysetlabel("F31","")
-				CALL dialog.keysetlabel("F32","")
-				CALL dialog.keysetlabel("F33","")
-				CALL dialog.keysetlabel("F34","")
-				CALL dialog.keysetlabel("F35","")
-				CALL dialog.keysetlabel("F36","")
-				CALL dialog.keysetlabel("F37","")
-				CALL dialog.keysetlabel("F38","")
+				--#CALL dialog.keysetlabel("ACCEPT","")
+				--#CALL dialog.keysetlabel("F31","")
+				--#CALL dialog.keysetlabel("F32","")
+				--#CALL dialog.keysetlabel("F33","")
+				--#CALL dialog.keysetlabel("F34","")
+				--#CALL dialog.keysetlabel("F35","")
+				--#CALL dialog.keysetlabel("F36","")
+				--#CALL dialog.keysetlabel("F37","")
+				--#CALL dialog.keysetlabel("F38","")
 			ON KEY(F5)
 				IF filas_procesadas <= max_barras THEN
 					IF ind_venc = 'P' THEN
@@ -893,7 +893,7 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION no_validar_parametros()
 
 CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
 IF rg_mod.g50_modulo IS NULL THEN

@@ -1,6 +1,6 @@
 
-database diteca
-screen 
+DATABASE aceros
+SCREEN 
 {
 
       No. Pagos: [c0  ]                              Interés: [c1   ]%  
@@ -18,28 +18,28 @@ screen
                   ---------------- ---------------- ----------------
 	         [c10             |c11             |c12             ]
 }
-END
+end
 TABLES
 	ordt010
 	ordt013
 	ordt015
 ATTRIBUTES
 		     ---- BOTONES ----
-b0  = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-b1  = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-b2  = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
-b3  = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
-b4  = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F20';
+b0  = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+b1  = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b2  = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+b3  = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+b4  = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F20';
 
-c0  = formonly.pagos TYPE SMALLINT, REVERSE, INCLUDE = (1 TO 999), REQUIRED;
+c0  = FORMONLY.pagos TYPE SMALLINT, REVERSE, INCLUDE = (1 TO 999), REQUIRED;
 c1  = ordt013.c13_interes, REVERSE, INCLUDE = (0.00 TO 99.99), REQUIRED;
-c2  = formonly.fecha_pago TYPE DATE, REVERSE, FORMAT = 'dd-mm-yyyy',
+c2  = FORMONLY.fecha_pago TYPE DATE, REVERSE, FORMAT = 'dd-mm-yyyy',
 	COMMENT = 'Digite la fecha e formato dd-mm-aaaa', REQUIRED;
-c3  = formonly.dias_pagos TYPE SMALLINT, REVERSE, INCLUDE = (1 TO 999),
+c3  = FORMONLY.dias_pagos TYPE SMALLINT, REVERSE, INCLUDE = (1 TO 999),
 	REQUIRED;
-c4  = formonly.tot_recep TYPE DECIMAL(12,2), REVERSE, 
+c4  = FORMONLY.tot_recep TYPE DECIMAL(12,2), REVERSE, 
 	FORMAT = '#,###,###,##&.##', REQUIRED;
-c13 = formonly.tot_dias TYPE SMALLINT, REVERSE, NOENTRY; 
+c13 = FORMONLY.tot_dias TYPE SMALLINT, REVERSE, NOENTRY; 
 
 c5  = ordt015.c15_dividendo,  REVERSE, NOENTRY, OPTIONS = '-nolist',
 	FORMAT='&&';
@@ -50,16 +50,16 @@ c7  = ordt015.c15_valor_cap,  REVERSE, OPTIONS = '-nolist',
 	FORMAT = '#,###,###,##&.##';
 c8  = ordt015.c15_valor_int,  REVERSE, OPTIONS = '-nolist', NOENTRY, 
 	FORMAT = '#,###,###,##&.##';
-c9  = formonly.subtotal TYPE DECIMAL(12,2), REVERSE, OPTIONS = '-nolist', 
+c9  = FORMONLY.subtotal TYPE DECIMAL(12,2), REVERSE, OPTIONS = '-nolist', 
 	NOENTRY, FORMAT = '#,###,###,##&.##';
-c10 = formonly.tot_cap  TYPE DECIMAL(12,2), REVERSE, OPTIONS = '-nolist', 
+c10 = FORMONLY.tot_cap  TYPE DECIMAL(12,2), REVERSE, OPTIONS = '-nolist', 
 	NOENTRY, FORMAT = '#,###,###,##&.##';
-c11 = formonly.tot_int  TYPE DECIMAL(12,2), REVERSE, OPTIONS = '-nolist', 
+c11 = FORMONLY.tot_int  TYPE DECIMAL(12,2), REVERSE, OPTIONS = '-nolist', 
 	NOENTRY, FORMAT = '#,###,###,##&.##';
-c12 = formonly.tot_sub  TYPE DECIMAL(12,2), REVERSE, OPTIONS = '-nolist', 
+c12 = FORMONLY.tot_sub  TYPE DECIMAL(12,2), REVERSE, OPTIONS = '-nolist', 
 	NOENTRY, FORMAT = '#,###,###,##&.##';
 
-END
+end
 
 INSTRUCTIONS
 SCREEN RECORD r_detalle_2[7] (c15_dividendo, c15_fecha_vcto, c15_valor_cap,

@@ -1,0 +1,38 @@
+DATABASE aceros
+SCREEN
+{
+ CONFIGURACION DE IMPUESTOS
+
+ [c0|c001  |c002                          |c|d|e]
+[c1|c011  |c012                          |f|g|h]
+[c1|c011  |c012                          |f|g|h]
+[c1|c011  |c012                          |f|g|h]
+[c1|c011  |c012                          |f|g|h]
+[c1|c011  |c012                          |f|g|h]
+[c1|c011  |c012                          |f|g|h]
+[c1|c011  |c012                          |f|g|h]
+[c1|c011  |c012                          |f|g|h]
+[c1|c011  |c012                          |f|g|h]
+[c1|c011  |c012                          |f|g|h]
+
+}
+TABLES
+gent058
+ATTRIBUTES
+c0   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c002 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c    = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+d    = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+e    = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+c1   = gent058.g58_localidad, UPSHIFT, NOENTRY, FORMAT = '&&';
+c011 = gent058.g58_porc_impto, UPSHIFT, FORMAT = '##&.##';
+c012 = gent058.g58_desc_impto, UPSHIFT;
+f    = gent058.g58_tipo_impto, UPSHIFT;
+g    = gent058.g58_tipo, UPSHIFT;
+h    = gent058.g58_estado, UPSHIFT;
+END
+INSTRUCTIONS
+SCREEN RECORD rh_porc_impto[10] (g58_localidad, g58_porc_impto, g58_desc_impto,
+				g58_tipo_impto, g58_tipo, g58_estado)

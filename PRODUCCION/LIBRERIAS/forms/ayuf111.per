@@ -1,33 +1,34 @@
-DATABASE diteca
-
+DATABASE aceros
 SCREEN
 {
- TRANSACCIONES 
---------------------------------------------------------------
- TR  Código	      Nombre 		
---------------------------------------------------------------
-[c0][c01            ][c002                                  ] 
-[c0][c01            ][c002                                  ]
-[c0][c01            ][c002                                  ]
-[c0][c01            ][c002                                  ]
-[c0][c01            ][c002                                  ]
-[c0][c01            ][c002                                  ]
-[c0][c01            ][c002                                  ] 
-[c0][c01            ][c002                                  ] 
-[c0][c01            ][c002                                  ] 
-[c0][c01            ][c002                                  ] 
+ TRANSACCIONES DE INVENTARIO
 
+ [c0|c001    |c002                     |c003                     ]
+[c1|c011    |c012                     |c013                     ]
+[c1|c011    |c012                     |c013                     ]
+[c1|c011    |c012                     |c013                     ]
+[c1|c011    |c012                     |c013                     ]
+[c1|c011    |c012                     |c013                     ]
+[c1|c011    |c012                     |c013                     ]
+[c1|c011    |c012                     |c013                     ]
+[c1|c011    |c012                     |c013                     ]
+[c1|c011    |c012                     |c013                     ]
+[c1|c011    |c012                     |c013                     ]
 
 }
-
 TABLES
 rept019
-
 ATTRIBUTES
-c0   = r19_cod_tran, UPSHIFT, NOENTRY;
-c01  = r19_num_tran, UPSHIFT;
-c002 = r19_nomcli, UPSHIFT;
-END
+c0   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c002 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c003 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
 
+c1   = rept019.r19_cod_tran, UPSHIFT, NOENTRY;
+c011 = rept019.r19_num_tran, UPSHIFT;
+c012 = rept019.r19_nomcli, UPSHIFT;
+c013 = rept019.r19_referencia, UPSHIFT;
+END
 INSTRUCTIONS
-SCREEN RECORD rh_transac[10](r19_cod_tran, r19_num_tran, r19_nomcli)
+SCREEN RECORD rh_transac[10] (r19_cod_tran, r19_num_tran, r19_nomcli,
+				r19_referencia)

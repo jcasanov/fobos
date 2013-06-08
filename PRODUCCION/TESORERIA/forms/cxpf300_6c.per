@@ -1,0 +1,21 @@
+DATABASE aceros
+SCREEN
+{
+
+                  Banco: [c001                 ]
+       Cuenta Corriente: [c002            ]
+      Número del Cheque: [c003      ]
+
+   Comprobante Contable: [c4] [c005    ]
+}
+TABLES
+cxpt024
+ATTRIBUTES
+c001 = FORMONLY.banco;
+c002 = p24_numero_cta;
+c003 = p24_numero_che;
+c4   = p24_tip_contable;
+c005 = p24_num_contable;
+END
+--KEYS
+--'F5'='Contabilización'

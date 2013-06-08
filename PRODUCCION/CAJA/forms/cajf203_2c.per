@@ -1,0 +1,74 @@
+DATABASE aceros
+SCREEN
+{
+
+                       INGRESO RETENCIONES CLIENTES
+                       ----------------------------
+    No. Comprobante: [c000           ]      Valor Bruto: [c001          ]
+       Autorizacion: [c002      ]              Impuesto: [c003          ]
+  Fecha Comprobante: [c004      ]                        ----------------
+    No. Factura SRI: [c014           ]         Subtotal: [c005          ]
+ Cliente: [c006  |c007                        ]   Flete: [c008          ]
+  Fuente: [a0|c009    ]  Destino: [a1|c013    ]          ----------------
+                                          Valor Factura: [c010          ]
+ [c011] de [c012]
+  T. Porc.    SRI             Descripcion       Base Imponib. Valor Ret.
+ [d|c030  ] [c031  ] [c032                     |c033         |c034      ]
+ [d|c030  ] [c031  ] [c032                     |c033         |c034      ]
+ [d|c030  ] [c031  ] [c032                     |c033         |c034      ]
+ [d|c030  ] [c031  ] [c032                     |c033         |c034      ]
+                                   Totales ==> [c040         |c041      ]
+}
+TABLES
+cajt010
+cajt014
+ordt003
+ATTRIBUTES
+c000 = cajt014.j14_num_ret_sri, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'No. Compr. Retencion SRI.';
+c001 = FORMONLY.valor_bruto TYPE DECIMAL, NOENTRY, UPSHIFT,
+	FORMAT = '###,###,##&.##';
+c002 = cajt014.j14_autorizacion, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Autorizacion Ret. SRI.';
+c003 = FORMONLY.valor_impto TYPE DECIMAL, NOENTRY, UPSHIFT,
+	FORMAT = '###,###,##&.##';
+c004 = cajt014.j14_fecha_emi, AUTONEXT, REVERSE, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Formato: dd-mm-aaaa.';
+c005 = FORMONLY.subtotal TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '###,###,##&.##';
+c006 = cajt010.j10_codcli, NOENTRY, UPSHIFT;
+c007 = cajt010.j10_nomcli, NOENTRY, UPSHIFT;
+c008 = FORMONLY.flete TYPE DECIMAL, NOENTRY, UPSHIFT, FORMAT = '###,###,##&.##';
+a0   = cajt010.j10_tipo_fuente, REVERSE, UPSHIFT, NOENTRY;
+c009 = cajt010.j10_num_fuente, REVERSE, UPSHIFT, NOENTRY;
+a1   = cajt010.j10_tipo_destino, UPSHIFT, NOENTRY;
+c013 = cajt010.j10_num_destino, UPSHIFT, NOENTRY;
+c010 = FORMONLY.valor_fact TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '###,###,##&.##';
+c014 = FORMONLY.num_sri, UPSHIFT, NOENTRY, COLOR = BLUE;
+
+c011 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c012 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+
+d    = cajt014.j14_tipo_ret, NOENTRY, UPSHIFT, INCLUDE = ('F', 'I'),
+	COMMENTS = 'F Retencion en la Fuente. I Retencion del IVA.';
+c030 = cajt014.j14_porc_ret, AUTONEXT, UPSHIFT, FORMAT = '##&.##',
+	COMMENTS = 'Presione F2 para obtener ayuda del campo',
+	INCLUDE = (0 TO 100.00);
+c031 = cajt014.j14_codigo_sri, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener ayuda del campo';
+c032 = ordt003.c03_concepto_ret, NOENTRY;
+c033 = cajt014.j14_base_imp, AUTONEXT, UPSHIFT, FORMAT = '##,###,##&.##',
+	INCLUDE = (0.01 TO 99999999.99);
+c034 = cajt014.j14_valor_ret, AUTONEXT, UPSHIFT, FORMAT = '###,##&.##',
+	INCLUDE = (0 TO 999999.99);
+
+c040 = FORMONLY.tot_base_imp TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '##,###,##&.##';
+c041 = FORMONLY.tot_valor_ret TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '###,##&.##';
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_detret[4] (j14_tipo_ret, j14_porc_ret, j14_codigo_sri,
+				c03_concepto_ret, j14_base_imp, j14_valor_ret)

@@ -10,7 +10,6 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_demonios	VARCHAR(12)
 DEFINE rm_b13		RECORD LIKE ctbt013.*
 DEFINE rm_b12		RECORD LIKE ctbt012.*
 DEFINE vm_fecha_ini	DATE
@@ -19,7 +18,6 @@ DEFINE rm_g13		RECORD LIKE gent013.*
 DEFINE rm_orden 	ARRAY[10] OF CHAR(4)
 DEFINE vm_columna_1	SMALLINT
 DEFINE vm_columna_2	SMALLINT
-
 DEFINE vm_top		SMALLINT
 DEFINE vm_left		SMALLINT
 DEFINE vm_right		SMALLINT
@@ -32,8 +30,8 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
-CALL fgl_init4js()
+CALL startlog('../logs/ctbp407.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 10 THEN   -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto.', 'stop')
@@ -52,8 +50,8 @@ LET rm_orden[vm_columna_2]	= arg_val(10)
 LET vg_proceso 			= 'ctbp407'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -79,7 +77,7 @@ CREATE TEMP TABLE temp_mov
 	 glosa		VARCHAR(35),
 	 debito		DECIMAL(14,2),
 	 credito	DECIMAL(14,2),
-	 beneficiario	VARCHAR(25),
+	 beneficiario	VARCHAR(40),
 	 cheque		INTEGER,
 	 banco		INTEGER,
 	 tipo_cta	CHAR(1),
@@ -148,7 +146,7 @@ WHILE TRUE
 		EXIT WHILE
 	END IF
 	LET query = 'SELECT * FROM gent009 ',
-			'WHERE g09_compania = ', vg_codcia, ' AND g09_estado = "A"'
+			'WHERE g09_compania = ', vg_codcia
 	PREPARE deto FROM query
 	DECLARE q_deto CURSOR FOR deto
 	OPEN q_deto
@@ -245,10 +243,15 @@ DEFINE r_report 	RECORD
 				tit_credito	DECIMAL(14,2),
 				tit_saldo	DECIMAL(14,2)
 			END RECORD
+DEFINE r_g02		RECORD LIKE gent002.*
 DEFINE usuario		VARCHAR(19,15)
 DEFINE titulo		VARCHAR(80)
+DEFINE tit_sist		VARCHAR(40)
 DEFINE modulo		VARCHAR(40)
 DEFINE long		SMALLINT
+DEFINE escape		SMALLINT
+DEFINE act_comp, db_c	SMALLINT
+DEFINE desact_comp, db	SMALLINT
 
 OUTPUT
 	TOP MARGIN	vm_top
@@ -265,16 +268,26 @@ PAGE HEADER
 	--print '&k2S'	                -- Letra condensada (16 cpi)
 	--print '&k4S'	        -- Letra (12 cpi)
 
+	LET escape	= 27		# Iniciar sec. impresi¢n
+	LET act_comp	= 15		# Activar Comprimido.
+	LET desact_comp	= 18		# Cancelar Comprimido.
 	LET modulo     = "Módulo: Contabilidad"
 	LET long       = LENGTH(modulo)
 	LET usuario    = 'Usuario: ', vg_usuario
 	CALL fl_justifica_titulo('D', usuario, 19) RETURNING usuario
-	CALL fl_justifica_titulo('I','LISTADO DE SALDOS DE BANCOS',80)
+	CALL fl_justifica_titulo('C','LISTADO DE SALDOS DE BANCOS',80)
 		RETURNING titulo
+	CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING r_g02.*
+	LET tit_sist = r_g02.g02_nombre CLIPPED, " - ", vg_base CLIPPED, " (",
+			vg_servidor CLIPPED, ")"
+	CALL fl_justifica_titulo('C', tit_sist, 40) RETURNING tit_sist
+	print ASCII escape;
+	print ASCII act_comp
 	PRINT COLUMN 1,   rg_cia.g01_razonsocial,
-	      COLUMN 122, 'Página: ', PAGENO USING '&&&'
+	      COLUMN 047, tit_sist CLIPPED,
+	      COLUMN 122, 'Pagina: ', PAGENO USING '&&&'
 	PRINT COLUMN 1,   modulo CLIPPED,
-	      COLUMN 54,  titulo CLIPPED,
+	      COLUMN 27,  titulo CLIPPED,
 	      COLUMN 126, UPSHIFT(vg_proceso) 
 	PRINT COLUMN 47,  '** Moneda        : ', rm_b12.b12_moneda, ' ',
 					 	 rm_g13.g13_nombre
@@ -312,7 +325,9 @@ ON LAST ROW
 	      COLUMN 74,  SUM(r_report.tit_saldo_ini)	USING '--,---,--&.##',
 	      COLUMN 89,  SUM(r_report.tit_debito)	USING '##,###,##&.##',
 	      COLUMN 104, SUM(r_report.tit_credito)	USING '##,###,##&.##',
-	      COLUMN 119, SUM(r_report.tit_saldo)	USING '--,---,--&.##'
+	      COLUMN 119, SUM(r_report.tit_saldo)	USING '--,---,--&.##';
+	print ASCII escape;
+	print ASCII desact_comp 
 	SKIP 2 LINES
 
 END REPORT
@@ -344,6 +359,9 @@ DEFINE fecha_ini	DATE
 DEFINE saldo		DECIMAL(14,2)
 DEFINE saldo_final	DECIMAL(14,2)
 DEFINE descripcion	VARCHAR(70)
+DEFINE escape		SMALLINT
+DEFINE act_comp, db_c	SMALLINT
+DEFINE desact_comp, db	SMALLINT
 
 OUTPUT
 	TOP MARGIN	vm_top
@@ -362,12 +380,18 @@ PAGE HEADER
 	--print '&k2S'	                -- Letra condensada (16 cpi)
 	--print '&k4S'	        -- Letra (12 cpi)
 
+	LET escape	= 27		# Iniciar sec. impresi¢n
+	LET act_comp	= 15		# Activar Comprimido.
+	LET desact_comp	= 18		# Cancelar Comprimido.
 	LET modulo     = "Módulo: Contabilidad"
 	LET long       = LENGTH(modulo)
 	LET usuario    = 'Usuario: ', vg_usuario
 	CALL fl_justifica_titulo('D', usuario, 19) RETURNING usuario
 	CALL fl_justifica_titulo('I','LISTADO MOVIMIENTOS SALDOS DE BANCOS',80)
 		RETURNING titulo
+	SKIP 2 LINES
+	print ASCII escape;
+	print ASCII act_comp
 	PRINT COLUMN 1,   rg_cia.g01_razonsocial,
 	      COLUMN 122, 'Página: ', PAGENO USING '&&&'
 	PRINT COLUMN 1,   modulo CLIPPED,
@@ -441,7 +465,9 @@ ON LAST ROW
 	      COLUMN 104, '-------------'
 	PRINT COLUMN 76,  'TOTALES ==>  ',
 	      COLUMN 89,  SUM(r_report2.debito)		USING '##,###,##&.##',
-	      COLUMN 104, SUM(r_report2.credito)	USING '##,###,##&.##'
+	      COLUMN 104, SUM(r_report2.credito)	USING '##,###,##&.##';
+	print ASCII escape;
+	print ASCII desact_comp 
 
 END REPORT
 
@@ -522,7 +548,7 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION no_validar_parametros()
 
 CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
 IF rg_mod.g50_modulo IS NULL THEN

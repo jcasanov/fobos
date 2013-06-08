@@ -1,5 +1,4 @@
-
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
    Orden de Compra:[c0    ] 		           Estado:[c1           ]
@@ -20,8 +19,7 @@ SCREEN
  [c10   |c |c11                                |c12       |c13             ]
  [c10   |c |c11                                |c12       |c13             ]
  [c10   |c |c11                                |c12       |c13             ]
- [c10   |c |c11                                |c12       |c13             ]
-
+                                                   Total: [c050            ]
 }
 TABLES
 	ordt010
@@ -60,11 +58,13 @@ c12 = FORMONLY.fecha     TYPE DATE, FORMAT = 'dd-mm-yyyy', OPTIONS = '-nolist';
 c13 = ordt010.c10_tot_compra, FORMAT = '#,###,###,##&.##',
 	OPTIONS = '-nolist';
 
+c050 = FORMONLY.vm_total, NOENTRY, REVERSE, FORMAT = '#,###,###,##&.##';
+
 END
 
 KEYS 
 	F6 = 'Ver Orden'
 
 INSTRUCTIONS
-SCREEN RECORD r_detalle[11] (c10_numero_oc, c10_moneda, proveedor, 
+SCREEN RECORD r_detalle[10] (c10_numero_oc, c10_moneda, proveedor, 
 			     fecha, c10_tot_compra)

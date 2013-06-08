@@ -1,9 +1,11 @@
-{*
- * Titulo           : repp304.4gl - Consulta Ventas Vendedores
- * Elaboración      : 09-feb-2009
- * Autor            : JCM
- * Formato Ejecución: fglrun repp304 base_datos modulo compañía localidad
- *}
+------------------------------------------------------------------------------
+-- Titulo           : repp304.4gl - Consulta Ventas Vendedores
+-- Elaboración      : 04-Sep-2001
+-- Autor            : YEC
+-- Formato Ejecución: fglrun repp304.4gl base_datos modulo compañía
+-- Ultima Corrección: 24-Sep-2001 
+-- Motivo Corrección: Habilitación de graficas. 
+------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
 DEFINE tit_mes1		VARCHAR(11)
@@ -66,22 +68,22 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/repp304.error')
-CALL fgl_init4js()
+CALL startlog('../logs/repp304.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
-IF num_args() <> 4 THEN          -- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
+IF num_args() <> 4 THEN          -- Validar # parametros correcto
+	CALL fl_mostrar_mensaje('Número de parametros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
-LET vg_base     = arg_val(1)
-LET vg_modulo   = arg_val(2)
-LET vg_codcia   = arg_val(3)
-LET vg_codloc   = arg_val(4)
+LET vg_base    = arg_val(1)
+LET vg_modulo  = arg_val(2)
+LET vg_codcia  = arg_val(3)
+LET vg_codloc  = arg_val(4)
 LET vg_proceso = 'repp304'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -112,7 +114,7 @@ LET rm_par.mes9   = 'S'
 LET rm_par.mes10  = 'S'
 LET rm_par.mes11  = 'S'
 LET rm_par.mes12  = 'S'
-OPEN WINDOW w_imp AT 3,2 WITH 22 ROWS, 80 COLUMNS
+OPEN WINDOW w_repf304_1 AT 3,2 WITH 22 ROWS, 80 COLUMNS
 	ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE FIRST,
 		  BORDER, MESSAGE LINE LAST) 
 OPEN FORM f_cons FROM '../forms/repf304_1'
@@ -123,7 +125,7 @@ CALL carga_colores()
 WHILE TRUE
 	CALL lee_parametros()
 	IF int_flag THEN
-		RETURN
+		EXIT WHILE
 	END IF
 	LET vm_pant_cor   = 1
 	CALL obtiene_numero_meses()
@@ -136,6 +138,9 @@ WHILE TRUE
 	CALL muestra_consulta()
 	DROP TABLE temp_acum
 END WHILE
+LET int_flag = 0
+CLOSE WINDOW w_repf304_1
+EXIT PROGRAM
 
 END FUNCTION
 
@@ -157,25 +162,23 @@ DISPLAY 'Enero'    TO tit_mes1
 DISPLAY 'Febrero'  TO tit_mes2
 DISPLAY 'Marzo'    TO tit_mes3 
 DISPLAY 'Subtotal' TO tit_subt
-LET int_flag = 0
 DISPLAY BY NAME rm_par.tit_mon
+LET int_flag = 0
 INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 	ON KEY(INTERRUPT)
 		IF NOT FIELD_TOUCHED(rm_par.ano, rm_par.moneda, rm_par.bodega,
 				     rm_par.linea, rm_par.indrot) THEN
-			RETURN
+			EXIT INPUT
 		END IF
-		LET INT_FLAG = 0
-		CALL FGL_WINQUESTION(vg_producto, 
-                                     'Desea salir de la consulta',
-                                     'No', 'Yes|No|Cancel',
-                                     'question', 1) RETURNING resp
+		LET int_flag = 0
+		CALL fl_hacer_pregunta('Desea salir de la consulta','No')
+			RETURNING resp
 		IF resp = 'Yes' THEN
-			LET INT_FLAG = 1
-			RETURN
+			LET int_flag = 1
+			EXIT INPUT
 		END IF
 	ON KEY(F2)
-		IF infield(moneda) THEN
+		IF INFIELD(moneda) THEN
 			CALL fl_ayuda_monedas() RETURNING mon_aux,rm_par.tit_mon,
 							  num_dec
 			IF mon_aux IS NOT NULL THEN
@@ -183,21 +186,22 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 				DISPLAY BY NAME rm_par.moneda, rm_par.tit_mon
 			END IF
 		END IF
-		IF infield(bodega) THEN
-			CALL fl_ayuda_bodegas_rep(vg_codcia, NULL, 'T') RETURNING bod_aux,rm_par.tit_bod
+		IF INFIELD(bodega) THEN
+			CALL fl_ayuda_bodegas_rep(vg_codcia, vg_codloc, 'T', '2', 'A', 'S', 'V')
+				RETURNING bod_aux,rm_par.tit_bod
 			IF bod_aux IS NOT NULL THEN
 				LET rm_par.bodega = bod_aux
 				DISPLAY BY NAME rm_par.bodega, rm_par.tit_bod
 			END IF
 		END IF
-		IF infield(linea) THEN
+		IF INFIELD(linea) THEN
 			CALL fl_ayuda_lineas_rep(vg_codcia) RETURNING lin_aux,rm_par.tit_lin
 			IF lin_aux IS NOT NULL THEN
 				LET rm_par.linea = lin_aux
 				DISPLAY BY NAME rm_par.linea, rm_par.tit_lin
 			END IF
 		END IF
-		IF infield(indrot) THEN
+		IF INFIELD(indrot) THEN
 			CALL fl_ayuda_clases(vg_codcia) RETURNING ind_aux,rm_par.tit_indrot
 			IF ind_aux IS NOT NULL THEN
 				LET rm_par.indrot = ind_aux
@@ -207,14 +211,14 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 		LET int_flag = 0
 	AFTER FIELD ano
 		IF rm_par.ano > YEAR(TODAY) THEN
-			CALL fgl_winmessage(vg_producto, 'Año incorrecto', 'exclamation')
+			CALL fl_mostrar_mensaje('Año incorrecto.','exclamation')
 			NEXT FIELD ano
 		END IF
 	AFTER FIELD moneda
 		IF rm_par.moneda IS NOT NULL THEN
 			CALL fl_lee_moneda(rm_par.moneda) RETURNING rm_mon.*
 			IF rm_mon.g13_moneda IS NULL THEN
-				CALL fgl_winmessage(vg_producto, 'Moneda no existe', 'exclamation')
+				CALL fl_mostrar_mensaje('Moneda no existe.','exclamation')
 				NEXT FIELD moneda
 			END IF
 			LET rm_par.tit_mon = rm_mon.g13_nombre
@@ -227,7 +231,7 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 		IF rm_par.bodega IS NOT NULL THEN
 			CALL fl_lee_bodega_rep(vg_codcia, rm_par.bodega) RETURNING r_bod.*
 			IF r_bod.r02_codigo IS NULL THEN
-				CALL fgl_winmessage(vg_producto, 'Bodega no existe', 'exclamation')
+				CALL fl_mostrar_mensaje('Bodega no existe.','exclamation')
 				NEXT FIELD bodega
 			END IF
 			LET rm_par.tit_bod = r_bod.r02_nombre
@@ -240,7 +244,7 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 		IF rm_par.linea IS NOT NULL THEN
 			CALL fl_lee_linea_rep(vg_codcia, rm_par.linea) RETURNING r_lin.*
 			IF r_lin.r03_codigo IS NULL THEN
-				CALL fgl_winmessage(vg_producto, 'Línea no existe', 'exclamation')
+				CALL fl_mostrar_mensaje('Línea no existe.','exclamation')
 				NEXT FIELD linea
 			END IF
 			LET rm_par.tit_lin = r_lin.r03_nombre
@@ -253,7 +257,7 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 		IF rm_par.indrot IS NOT NULL THEN
 			CALL fl_lee_indice_rotacion(vg_codcia, rm_par.indrot) RETURNING r_ind.*
 			IF r_ind.r04_rotacion IS NULL THEN
-				CALL fgl_winmessage(vg_producto, 'Indice de rotación no existe', 'exclamation')
+				CALL fl_mostrar_mensaje('Indice de rotación no existe.','exclamation')
 				NEXT FIELD indrot
 			END IF
 			LET rm_par.tit_indrot = r_ind.r04_nombre
@@ -269,7 +273,7 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 		   rm_par.mes7  = 'N' AND rm_par.mes8  = 'N' AND
 		   rm_par.mes9  = 'N' AND rm_par.mes10 = 'N' AND
 		   rm_par.mes11 = 'N' AND rm_par.mes12 = 'N' THEN
-			CALL fgl_winmessage(vg_producto, 'Seleccione un mes por lo menos', 'exclamation')
+			CALL fl_mostrar_mensaje('Seleccion un mes por lo menos.','exclamation')
 			NEXT FIELD mes1
 		END IF
 END INPUT
@@ -280,16 +284,13 @@ END FUNCTION
 
 FUNCTION genera_tabla_temporal()
 DEFINE cod_vend		LIKE rept001.r01_codigo
-DEFINE cod_tran		LIKE rept019.r19_cod_tran
 DEFINE mes, i		SMALLINT
 DEFINE valor, val	DECIMAL(14,2)
-DEFINE porc_dscto_fct	LIKE rept019.r19_descuento
-DEFINE val_dscto_fct	LIKE rept019.r19_tot_dscto
 DEFINE r		RECORD LIKE rept001.*
 DEFINE campo		VARCHAR(15)
 DEFINE expr1, expr2	VARCHAR(80)
 DEFINE expr3       	VARCHAR(80)
-DEFINE query		VARCHAR(1000)
+DEFINE query		VARCHAR(800)
 DEFINE expr_ins		VARCHAR(200)
 DEFINE mes_c		CHAR(10)
 
@@ -313,49 +314,35 @@ LET expr1 = ' 1 = 1 '
 LET expr2 = ' 1 = 1 '
 LET expr3 = ' 1 = 1 '
 IF rm_par.bodega IS NOT NULL THEN
-	LET expr1 = " r19_bodega_ori", rm_par.bodega CLIPPED, "' "
+	LET expr1 = " r60_bodega = '", rm_par.bodega CLIPPED, "' "
 END IF
 IF rm_par.linea IS NOT NULL THEN
-	LET expr2 = " r20_linea = '", rm_par.linea CLIPPED, "' "
+	LET expr2 = " r60_linea = '", rm_par.linea CLIPPED, "' "
 END IF
 IF rm_par.indrot IS NOT NULL THEN
-	LET expr3 = " r20_rotacion = '", rm_par.indrot CLIPPED, "' "
+	LET expr3 = " r60_rotacion = '", rm_par.indrot CLIPPED, "' "
 END IF
-LET query = 'SELECT r19_cod_tran, r19_vendedor, MONTH(r19_fecing), ',
-			'       r19_descuento, ',
-			'       SUM((r20_precio * r20_cant_ven) - r20_val_descto) ',
-		' FROM rept019, rept020 ',
-		' WHERE r19_compania   = ', vg_codcia, 
-		'   AND r19_localidad  = ', vg_codloc, 
-		'   AND r19_cod_tran IN ("FA", "AF", "DF")',
-		'   AND YEAR(r19_fecing) = ? ',
-		'   AND r19_moneda = ? ',
-		'   AND ', expr1, 
-		'   AND r20_compania     = r19_compania ',
-		'   AND r20_localidad    = r19_localidad ',
-		'   AND r20_cod_tran     = r19_cod_tran ',
-		'   AND r20_num_tran     = r19_num_tran ',
-		'   AND ', expr2, 
- 		'   AND ', expr3,
-		' GROUP BY 1, 2, 3, 4 '
-
+LET query = 'SELECT r60_vendedor, MONTH(r60_fecha), SUM(r60_precio) ',
+		' FROM rept060, rept002 ',
+		' WHERE r60_compania = ', vg_codcia, 
+		' AND YEAR(r60_fecha) = ? ',
+		' AND r60_moneda = ? AND ',
+		  expr1, ' AND ',
+		  expr2, ' AND ',
+		  expr3,
+		' AND r02_compania  = r60_compania ',
+		' AND r02_codigo    = r60_bodega ',
+		' AND r02_localidad = ', vg_codloc,
+		' GROUP BY 1, 2 '
 PREPARE men FROM query
 DECLARE q_men CURSOR FOR men
 OPEN q_men USING rm_par.ano, rm_par.moneda
 LET vm_num_vend = 0
 WHILE TRUE
-	FETCH q_men INTO cod_tran, cod_vend, mes, porc_dscto_fct, valor
-	IF status = NOTFOUND THEN
+	FETCH q_men INTO cod_vend, mes, valor
+	IF STATUS = NOTFOUND THEN
 		EXIT WHILE
 	END IF
-	CASE cod_tran
-		WHEN 'DF'
-			LET valor = valor * (-1)
-		WHEN 'AF'
-			LET valor = valor * (-1)
-	END CASE
-	LET val_dscto_fct =  porc_dscto_fct / 100
-	LET valor = valor * (1 - val_dscto_fct) 
 	LET  i = 1
 	WHILE i <= vm_num_meses
 		IF rm_meses[i] = mes THEN
@@ -378,13 +365,12 @@ WHILE TRUE
 		LET expr_ins = expr_ins CLIPPED, ',', val 
 	END FOR
 	SELECT * FROM temp_acum WHERE te_vendedor = cod_vend
-	IF status = NOTFOUND THEN
+	IF STATUS = NOTFOUND THEN
 		IF vm_num_vend = vm_max_rows THEN
 			CONTINUE WHILE
 		END IF
 		LET vm_num_vend = vm_num_vend + 1
-		CALL fl_lee_vendedor_rep(vg_codcia, cod_vend)
-			RETURNING r.*
+		CALL fl_lee_vendedor_rep(vg_codcia, cod_vend) RETURNING r.*
 		LET query = "INSERT INTO temp_acum VALUES(", cod_vend, ", '",
 			     r.r01_nombres CLIPPED, "'", expr_ins CLIPPED, ')'
 		PREPARE in_temp FROM query
@@ -396,10 +382,12 @@ WHILE TRUE
 		EXECUTE up_temp USING valor, cod_vend 
 	END IF
 END WHILE
+CLOSE q_men
+FREE q_men
 LET int_flag = 0
 IF vm_num_vend = 0 THEN
-	CALL fl_mensaje_consulta_sin_registros()
 	LET int_flag = 1
+	CALL fl_mensaje_consulta_sin_registros()
 	RETURN
 END IF
 SELECT SUM(te_mes1+te_mes2+te_mes3+te_mes4+te_mes5+te_mes6+
@@ -495,40 +483,29 @@ END FUNCTION
 
 FUNCTION muestra_consulta()
 DEFINE i, j		SMALLINT
-DEFINE nuevo_display	SMALLINT
+DEFINE nuevo_DISPLAY	SMALLINT
 DEFINE pos_pantalla	SMALLINT
 DEFINE pos_arreglo	SMALLINT
 DEFINE vend_aux		LIKE veht001.v01_nombres
 DEFINE resp		CHAR(3)
 
 ERROR " " ATTRIBUTE(NORMAL) 
-LET nuevo_display = 0
+LET nuevo_DISPLAY = 0
 CALL set_count(vm_num_vend)
 WHILE TRUE
 	CALL muestra_nombre_meses()
 	CALL muestra_precision()
 	LET int_flag = 0
-	CALL fgl_keysetlabel('F9','Gráfico')
-	CALL fgl_keysetlabel('F7','Precisión')
+	--#CALL fgl_keysetlabel('F7','Precisión')
+	--#CALL fgl_keysetlabel('F9','Grafico')
+	--#CALL fgl_keysetlabel('F10','PDF')
 	IF vm_pantallas > 1 THEN
-		CALL fgl_keysetlabel('F6','Más Meses')
+		--#CALL fgl_keysetlabel('F6','Mas Meses')
 	ELSE
-		CALL fgl_keysetlabel('F6','')
+		--#CALL fgl_keysetlabel('F6','')
 	END IF
 	DISPLAY BY NAME t_valor_1, t_valor_2, t_valor_3, t_tot_val
-	LET int_flag = 0
 	DISPLAY ARRAY rm_cons TO rm_cons.*
-		BEFORE DISPLAY 
-			CALL dialog.keysetlabel("ACCEPT","")
-		AFTER DISPLAY 
-			CONTINUE DISPLAY
-		BEFORE ROW
-			IF nuevo_display THEN
-				CALL dialog.setcurrline(pos_pantalla,pos_arreglo)
-				LET nuevo_display = 0
-			END IF
-			LET i = arr_curr()
-			MESSAGE i, ' de ', vm_num_vend
 		ON KEY(INTERRUPT)
 			EXIT DISPLAY
 		ON KEY(F5)
@@ -542,7 +519,7 @@ WHILE TRUE
 				ELSE
 					LET vm_pant_cor = vm_pant_cor + 1
 				END IF
-				LET nuevo_display = 1
+				LET nuevo_DISPLAY = 1
 				LET pos_pantalla = scr_line()
 				LET pos_arreglo  = arr_curr()
 				CALL carga_arreglo_consulta()
@@ -564,16 +541,15 @@ WHILE TRUE
 					END IF
 				END IF
 			END IF
-			LET nuevo_display = 1
+			LET nuevo_DISPLAY = 1
 			LET pos_pantalla = scr_line()
 			LET pos_arreglo  = arr_curr()
 			CALL carga_arreglo_consulta()
 			EXIT DISPLAY
 		ON KEY(F9)
-			CALL FGL_WINQUESTION(vg_producto, 
-                                     'Desea gráfico de barras',
-                                     'Yes', 'Yes|No|Cancel',
-                                     'question', 1) RETURNING resp
+			--CALL FGL_WINQUESTION(vg_producto,'Desea grafico de barras','Yes','Yes|No|Cancel','question',1)
+			CALL fl_hacer_pregunta('Desea grafico de barras','Yes')
+				RETURNING resp
 			IF resp = 'Yes' THEN
 				CALL muestra_grafico_barras()
 			END IF
@@ -581,6 +557,8 @@ WHILE TRUE
 				CALL muestra_grafico_pastel()
 			END IF
 			LET int_flag = 0
+		ON KEY(F10)
+			CALL generar_pdf()
 		ON KEY(F15)
 			LET vm_campo_orden = 1
 			LET int_flag = 2
@@ -601,13 +579,25 @@ WHILE TRUE
 			LET vm_campo_orden = 5
 			LET int_flag = 2
 			EXIT DISPLAY
+		BEFORE DISPLAY 
+			--#CALL dialog.keysetlabel("RETURN","")
+			--#CALL dialog.keysetlabel("ACCEPT","")
+		BEFORE ROW
+			IF nuevo_DISPLAY THEN
+				CALL dialog.setcurrline(pos_pantalla,pos_arreglo)
+				LET nuevo_DISPLAY = 0
+			END IF
+			LET i = arr_curr()
+			MESSAGE i, ' de ', vm_num_vend
+		AFTER DISPLAY 
+			CONTINUE DISPLAY
 	END DISPLAY
 	IF int_flag = 1 THEN
-		RETURN
+		EXIT WHILE
 	END IF
 	IF int_flag = 2 THEN
 		CALL asigna_orden()
-		LET nuevo_display = 1
+		LET nuevo_DISPLAY = 1
 		LET pos_pantalla  = scr_line()
 		LET pos_arreglo   = arr_curr()
 		LET vend_aux      = rm_cons[pos_arreglo].name_vend
@@ -653,9 +643,9 @@ DEFINE r_cab		RECORD LIKE rept019.*
 DEFINE r_det		RECORD LIKE rept020.*
 DEFINE num_rows, i	SMALLINT
 DEFINE max_rows		SMALLINT
-DEFINE tot_uni		INTEGER
+DEFINE tot_uni		DECIMAL(8,2)
 DEFINE tot_val, valor	DECIMAL(14,2)
-DEFINE comando		VARCHAR(140)
+DEFINE comando		VARCHAR(160)
 DEFINE descri_cli	CHAR(28)
 DEFINE descri_item	CHAR(28)
 DEFINE columna_act	SMALLINT
@@ -663,6 +653,7 @@ DEFINE columna_ant	SMALLINT
 DEFINE orden_act	CHAR(4)
 DEFINE orden_ant	CHAR(4)
 DEFINE orden		VARCHAR(100)
+DEFINE prog		VARCHAR(10)
 DEFINE query		VARCHAR(300)
 DEFINE expr_vend	VARCHAR(120)
 DEFINE rt		RECORD LIKE gent021.*
@@ -672,7 +663,7 @@ DEFINE r_mov ARRAY[4000] OF RECORD
 	tipo		LIKE rept019.r19_cod_tran,
 	numero		LIKE rept019.r19_num_tran,
 	item		LIKE rept010.r10_codigo,
-	unidades	INTEGER,
+	unidades	DECIMAL(8,2),
 	valor		DECIMAL(14,2)
 	END RECORD
 
@@ -682,7 +673,7 @@ CREATE TEMP TABLE temp_mov
 	 te_tipo	CHAR(2),
 	 te_numero	INTEGER,
 	 te_item	CHAR(15),
-	 te_unidades	INTEGER,
+	 te_unidades	DECIMAL(8,2),
 	 te_valor	DECIMAL(14,2))
 LET max_rows = 4000
 OPEN WINDOW w_mov AT 4,5 WITH FORM "../forms/repf304_2"
@@ -713,17 +704,21 @@ ELSE
 				out7, ')'
 END IF	
 LET int_flag = 0
-INPUT BY NAME fec_ini, fec_fin WITHOUT DEFAULTS
+INPUT BY NAME fec_ini, fec_fin
+	WITHOUT DEFAULTS
+	ON KEY(INTERRUPT)
+		LET int_flag = 1
+		EXIT INPUT
 	AFTER INPUT
 		IF fec_ini > fec_fin THEN
-			CALL fgl_winmessage(vg_producto, 'Rango de fechas incorrecto', 'exclamation')
+			CALL fl_mostrar_mensaje('Rango de fechas incorrecto.','exclamation')
 			NEXT FIELD fec_ini
 		END IF
 END INPUT			
 IF int_flag THEN
 	LET int_flag = 0
-	DROP TABLE temp_mov
 	CLOSE WINDOW w_mov
+	DROP TABLE temp_mov
 	RETURN
 END IF
 ERROR "Generando consulta . . . espere por favor." ATTRIBUTE(NORMAL)
@@ -747,10 +742,12 @@ WHILE TRUE
 	IF r_cab.r19_localidad <> vg_codloc THEN
 		CONTINUE WHILE
 	END IF
+	{
 	IF rm_par.bodega IS NOT NULL AND 
 		r_cab.r19_bodega_ori <> rm_par.bodega THEN
 		CONTINUE WHILE
 	END IF
+	}
 	IF rm_par.moneda <> r_cab.r19_moneda THEN
 		CONTINUE WHILE
 	END IF
@@ -777,9 +774,14 @@ WHILE TRUE
 			r_det.r20_rotacion <> rm_par.indrot THEN
 			CONTINUE FOREACH
 		END IF
+		IF rm_par.bodega IS NOT NULL AND 
+			r_det.r20_bodega <> rm_par.bodega THEN
+			CONTINUE FOREACH
+		END IF
 		LET valor = (r_det.r20_precio * r_det.r20_cant_ven) - 
 			     r_det.r20_val_descto
 		IF r_cab.r19_cod_tran = 'DF' OR r_cab.r19_cod_tran = 'AF' THEN
+			LET r_det.r20_cant_ven = r_det.r20_cant_ven * (-1) 
 			LET valor = valor * -1
 		END IF
 		INSERT INTO temp_mov VALUES (r_cab.r19_fecing, 	
@@ -796,8 +798,8 @@ WHILE TRUE
 END WHILE
 IF num_rows = 0 THEN
 	CALL fl_mensaje_consulta_sin_registros()
-	DROP TABLE temp_mov
 	CLOSE WINDOW w_mov
+	DROP TABLE temp_mov
 	RETURN
 END IF
 LET orden_act = 'DESC'
@@ -823,28 +825,17 @@ WHILE TRUE
 	END FOREACH 
 	CALL set_count(num_rows)
 	DISPLAY ARRAY r_mov TO r_mov.*
-		BEFORE DISPLAY 
-			CALL dialog.keysetlabel("ACCEPT","")
-		AFTER DISPLAY 
-			CONTINUE DISPLAY
-		BEFORE ROW
-			LET i = arr_curr()
-			CALL fl_lee_cabecera_transaccion_rep(vg_codcia, vg_codloc, 
-				r_mov[i].tipo, r_mov[i].numero)
-				RETURNING r_cab.*
-			CALL fl_lee_item(vg_codcia, r_mov[i].item) RETURNING r_item.* 
-			LET descri_cli  = r_cab.r19_nomcli
-			LET descri_item = r_item.r10_nombre
-			MESSAGE i, ' de ', num_rows, ' ** ', descri_cli, ' ** ', 
-				descri_item
 		ON KEY(INTERRUPT)
 			EXIT DISPLAY
 		ON KEY(F5)
 			LET i = arr_curr()
-			LET comando = 'fglrun repp308 ' || vg_base || ' RE ' || 
-			       	vg_codcia || ' ' ||
-			       	vg_codloc || ' ' || r_mov[i].tipo || ' ' ||
-			       	r_mov[i].numero
+			LET prog = ' repp217 '
+			IF r_mov[i].tipo = 'FA' THEN
+				LET prog = ' repp308 '
+			END IF
+			LET comando = 'fglrun', prog CLIPPED, ' ', vg_base, ' ',
+				vg_modulo, ' ', vg_codcia, ' ', vg_codloc, ' ',
+				r_mov[i].tipo, ' ', r_mov[i].numero
 			RUN comando
 		ON KEY(F15)
 			LET columna_ant = columna_act
@@ -888,14 +879,30 @@ WHILE TRUE
 			LET orden_ant   = orden_act
 			LET int_flag = 2
 			EXIT DISPLAY
+		BEFORE DISPLAY 
+			--#CALL dialog.keysetlabel("RETURN","")
+			--#CALL dialog.keysetlabel("ACCEPT","")
+		BEFORE ROW
+			LET i = arr_curr()
+			CALL fl_lee_cabecera_transaccion_rep(vg_codcia, vg_codloc, 
+				r_mov[i].tipo, r_mov[i].numero)
+				RETURNING r_cab.*
+			CALL fl_lee_item(vg_codcia, r_mov[i].item) RETURNING r_item.* 
+			LET descri_cli  = r_cab.r19_nomcli
+			LET descri_item = r_item.r10_nombre
+			MESSAGE i, ' de ', num_rows, ' ** ', descri_cli, ' ** ', 
+				descri_item
+		AFTER DISPLAY 
+			CONTINUE DISPLAY
 	END DISPLAY
 	IF int_flag = 1 THEN
 		EXIT WHILE
 	END IF
 END WHILE
+LET int_flag = 0
 CLOSE WINDOW w_mov
 DROP TABLE temp_mov
-LET int_flag = 0
+RETURN
 
 END FUNCTION
 
@@ -1040,7 +1047,7 @@ DEFINE r_obj ARRAY[8] OF RECORD
 LET mes_c = rm_par.ano
 LET titulo = 'VALORES VENDIDOS POR VENDEDOR DURANTE MESES SELECCIONADOS DEL ANO: ' || mes_c
 --
--- Solo 8 elementos se mostraran. Desde el 8vo. hasta el final se acumularán
+-- Solo 8 elementos se mostraran. Desde el 8vo. hasta el final se acumularan
 -- como uno solo, bajo el título 'OTROS'.
 --
 LET limite = 8		
@@ -1122,18 +1129,12 @@ FOR i = 1 TO max_elementos
 	CALL drawbuttonleft(r_obj[i].id_obj_arc, key_c)
 	CALL drawbuttonleft(r_obj[i].id_obj_rec, key_c)
 END FOR
-LET key_f30 = FGL_KEYVAL("F30")
+LET key_f30  = FGL_KEYVAL("F30")
+LET int_flag = 0
 INPUT BY NAME tecla
-	BEFORE INPUT
-		CALL dialog.keysetlabel("ACCEPT","")
-		CALL dialog.keysetlabel("F31","")
-		CALL dialog.keysetlabel("F32","")
-		CALL dialog.keysetlabel("F33","")
-		CALL dialog.keysetlabel("F34","")
-		CALL dialog.keysetlabel("F35","")
-		CALL dialog.keysetlabel("F36","")
-		CALL dialog.keysetlabel("F37","")
-		CALL dialog.keysetlabel("F38","")
+	ON KEY(INTERRUPT)
+		LET int_flag = 1
+		EXIT INPUT
 	ON KEY(F31,F32,F33,F34,F35,F36,F37,F38)
 		LET i = FGL_LASTKEY() - key_f30
 		IF i = 8 THEN
@@ -1148,10 +1149,22 @@ INPUT BY NAME tecla
 				    rm_meses[1], rm_meses[vm_num_meses],
 				    null, null, null, null, null, null, null)
 		END IF
+	BEFORE INPUT
+		--#CALL dialog.keysetlabel("ACCEPT","")
+		--#CALL dialog.keysetlabel("F31","")
+		--#CALL dialog.keysetlabel("F32","")
+		--#CALL dialog.keysetlabel("F33","")
+		--#CALL dialog.keysetlabel("F34","")
+		--#CALL dialog.keysetlabel("F35","")
+		--#CALL dialog.keysetlabel("F36","")
+		--#CALL dialog.keysetlabel("F37","")
+		--#CALL dialog.keysetlabel("F38","")
 	AFTER FIELD tecla
 		NEXT FIELD tecla
 END INPUT
+LET int_flag = 0
 CLOSE WINDOW w_gr1
+RETURN
 
 END FUNCTION
 
@@ -1313,18 +1326,12 @@ FOR i = 1 TO max_elementos
 	CALL drawbuttonleft(r_obj[i].id_obj_rec1, key_c)
 	CALL drawbuttonleft(r_obj[i].id_obj_rec2, key_c)
 END FOR
-LET key_f30 = FGL_KEYVAL("F30")
+LET key_f30  = FGL_KEYVAL("F30")
+LET int_flag = 0
 INPUT BY NAME tecla
-	BEFORE INPUT
-		CALL dialog.keysetlabel("ACCEPT","")
-		CALL dialog.keysetlabel("F31","")
-		CALL dialog.keysetlabel("F32","")
-		CALL dialog.keysetlabel("F33","")
-		CALL dialog.keysetlabel("F34","")
-		CALL dialog.keysetlabel("F35","")
-		CALL dialog.keysetlabel("F36","")
-		CALL dialog.keysetlabel("F37","")
-		CALL dialog.keysetlabel("F38","")
+	ON KEY(INTERRUPT)
+		LET int_flag = 1
+		EXIT INPUT
 	ON KEY(F31,F32,F33,F34,F35,F36,F37,F38)
 		LET i = FGL_LASTKEY() - key_f30
 		IF i = 8 THEN
@@ -1339,10 +1346,22 @@ INPUT BY NAME tecla
 				    rm_meses[1], rm_meses[vm_num_meses],
 				    null, null, null, null, null, null, null)
 		END IF
+	BEFORE INPUT
+		--#CALL dialog.keysetlabel("ACCEPT","")
+		--#CALL dialog.keysetlabel("F31","")
+		--#CALL dialog.keysetlabel("F32","")
+		--#CALL dialog.keysetlabel("F33","")
+		--#CALL dialog.keysetlabel("F34","")
+		--#CALL dialog.keysetlabel("F35","")
+		--#CALL dialog.keysetlabel("F36","")
+		--#CALL dialog.keysetlabel("F37","")
+		--#CALL dialog.keysetlabel("F38","")
 	AFTER FIELD tecla
 		NEXT FIELD tecla
 END INPUT
+LET int_flag = 0
 CLOSE WINDOW w_gr1
+RETURN
 
 END FUNCTION
 
@@ -1365,33 +1384,10 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION generar_pdf()
+DEFINE comando		CHAR(256)
 
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
+LET comando = "ev.jsp?anio=", rm_par.ano USING "&&&&"
+CALL fl_ejecuta_reporte_pdf(vg_codloc, comando, 'F')
 
 END FUNCTION

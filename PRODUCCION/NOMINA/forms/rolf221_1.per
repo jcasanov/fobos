@@ -1,0 +1,63 @@
+DATABASE aceros
+SCREEN
+{
+
+	 Ano Proceso: [c000]                  Estado: [a|c100     ] 
+        Fecha Inicio: [c001      ]         Fecha Fin: [c002      ]
+                                                              [c050] de [c051] 
+ [lbl2                    |lbl3         |lbl4        |lbl5       |lbl6        ]
+[c102                    |c004         |c005        |c006       |c007        ]
+[c102                    |c004         |c005        |c006       |c007        ]
+[c102                    |c004         |c005        |c006       |c007        ]
+[c102                    |c004         |c005        |c006       |c007        ]
+[c102                    |c004         |c005        |c006       |c007        ]
+[c102                    |c004         |c005        |c006       |c007        ]
+[c102                    |c004         |c005        |c006       |c007        ]
+[c102                    |c004         |c005        |c006       |c007        ]
+[c102                    |c004         |c005        |c006       |c007        ]
+[c102                    |c004         |c005        |c006       |c007        ]
+[c102                    |c004         |c005        |c006       |c007        ]
+[c102                    |c004         |c005        |c006       |c007        ]
+[c102                    |c004         |c005        |c006       |c007        ]
+                         [c110         |c111        |c112       |c113        ]
+}
+TABLES
+rolt036
+ATTRIBUTES
+c000 = rolt036.n36_ano_proceso, REVERSE, NOENTRY;
+a    = rolt036.n36_estado,      REVERSE, NOENTRY, AUTONEXT, UPSHIFT,
+				INCLUDE=('A', 'P'), 
+				COMMENTS='A ACTIVO  P PROCESADO';
+c100 = formonly.n_estado,	NOENTRY;
+c001 = rolt036.n36_fecha_ini,   REVERSE, FORMAT='dd-mm-yyyy', NOENTRY;
+c002 = rolt036.n36_fecha_fin,   REVERSE, FORMAT='dd-mm-yyyy', NOENTRY;
+
+c007 = rolt036.n36_valor_neto,  OPTIONS='-nolist', FORMAT='#,###,##&.##',
+				NOENTRY, COLOR = RED WHERE c007 < 0;
+c102 = formonly.n_trab,         OPTIONS='-nolist', NOENTRY, 
+				COLOR = RED WHERE c007 < 0;
+c004 = rolt036.n36_ganado_per,  OPTIONS='-nolist', FORMAT='##,###,##&.##',
+				INCLUDE=(0 TO 99999999.99),
+				COLOR = RED WHERE c007 < 0;
+c005 = rolt036.n36_valor_bruto, OPTIONS='-nolist', FORMAT='#,###,##&.##', 
+				NOENTRY, COLOR = RED WHERE c007 < 0;
+c006 = rolt036.n36_descuentos,  OPTIONS='-nolist', FORMAT='###,##&.##',
+				NOENTRY, COLOR = RED WHERE c007 < 0;
+
+c110 = formonly.tot_valor,      REVERSE, NOENTRY, FORMAT='##,###,##&.##';
+c111 = formonly.tot_anticipo,   REVERSE, NOENTRY, FORMAT='#,###,##&.##';
+c112 = formonly.tot_desctos,    REVERSE, NOENTRY, FORMAT='###,##&.##';
+c113 = formonly.tot_neto,       REVERSE, NOENTRY, FORMAT='#,###,##&.##';
+
+lbl2 = formonly.bt_nom_trab,    WIDGET='BUTTON', CONFIG='F16';
+lbl3 = formonly.bt_valor,       WIDGET='BUTTON', CONFIG='F17';
+lbl4 = formonly.bt_anticipo,    WIDGET='BUTTON', CONFIG='F18';
+lbl5 = formonly.bt_desctos,     WIDGET='BUTTON', CONFIG='F19';
+lbl6 = formonly.bt_neto,        WIDGET='BUTTON', CONFIG='F20';
+
+c050 = FORMONLY.num_row,	NOENTRY, REVERSE;
+c051 = FORMONLY.max_row,	NOENTRY, REVERSE;
+END
+
+INSTRUCTIONS
+SCREEN RECORD ra_scr[13] (n_trab, n36_ganado_per, n36_valor_bruto, n36_descuentos, n36_valor_neto) 

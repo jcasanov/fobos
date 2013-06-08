@@ -1,75 +1,77 @@
-------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 -- Titulo           : cxcp306.4gl - Consulta Análisis Cartera Clientes
 -- Elaboracion      : 11-Oct-2001
 -- Autor            : YEC
 -- Formato Ejecucion: fglrun cxcp306.4gl base_datos modulo compañía localidad
 -- Ultima Correccion: 
 -- Motivo Correccion:
-------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_demonios	VARCHAR(12)
-DEFINE rm_orden ARRAY[10] OF CHAR(4)
+DEFINE rm_orden 	ARRAY[10] OF CHAR(4)
 DEFINE vm_columna_1	SMALLINT
 DEFINE vm_columna_2	SMALLINT
 DEFINE rm_mon		RECORD LIKE gent013.*
 DEFINE vm_divisor	SMALLINT
-DEFINE num_doc		SMALLINT
-DEFINE num_cli		SMALLINT
-DEFINE num_max_doc	SMALLINT
-DEFINE num_max_cli	SMALLINT
-DEFINE rm_par RECORD
-		area_n          LIKE gent003.g03_areaneg,
-		tit_area        LIKE gent003.g03_nombre,
-		moneda          LIKE gent013.g13_moneda,
-		tit_mon         LIKE gent013.g13_nombre,
-		tipcli		LIKE gent012.g12_subtipo,
-		tit_tipcli	LIKE gent012.g12_nombre,
-		ind_venc        CHAR(1),
-		dias_i          SMALLINT,
-		dias_f          SMALLINT
-	END RECORD
-DEFINE r_doc ARRAY[1500] OF RECORD
-		area_n          LIKE gent003.g03_areaneg,
-		cladoc		LIKE cxct020.z20_tipo_doc,
-		numdoc		LIKE cxct020.z20_num_doc,
-		secuencia	LIKE cxct020.z20_dividendo,
-		codcli		LIKE cxct020.z20_codcli,
-		nomcli		LIKE cxct001.z01_nomcli,
-		fecha		DATE,
-		valor		DECIMAL(12,2)
-	END RECORD
-DEFINE rm_codcli ARRAY[1500] OF INTEGER
-DEFINE rm_cli ARRAY[1500] OF RECORD
-		nomcli		LIKE cxct001.z01_nomcli,
-		por_vencer	DECIMAL(12,2),
-		vencido		DECIMAL(12,2),
-		tot_saldo 	DECIMAL(12,2)
-	END RECORD
+DEFINE num_doc		INTEGER
+DEFINE num_cli		INTEGER
+DEFINE num_max_doc	INTEGER
+DEFINE num_max_cli	INTEGER
+DEFINE rm_par 		RECORD
+				area_n          LIKE gent003.g03_areaneg,
+				tit_area        LIKE gent003.g03_nombre,
+				moneda          LIKE gent013.g13_moneda,
+				tit_mon         LIKE gent013.g13_nombre,
+				tipcli		LIKE gent012.g12_subtipo,
+				localidad	LIKE gent002.g02_localidad,
+				tit_tipcli	LIKE gent012.g12_nombre,
+				ind_venc        CHAR(1),
+				dias_i          SMALLINT,
+				dias_f          SMALLINT
+			END RECORD
+DEFINE r_doc		ARRAY[100000] OF RECORD
+				area_n          LIKE gent003.g03_areaneg,
+				cladoc		LIKE cxct020.z20_tipo_doc,
+				numdoc		LIKE cxct020.z20_num_doc,
+				secuencia	LIKE cxct020.z20_dividendo,
+				codcli		LIKE cxct020.z20_codcli,
+				nomcli		LIKE cxct001.z01_nomcli,
+				fecha		DATE,
+				valor		DECIMAL(12,2)
+			END RECORD
+DEFINE rm_codcli	ARRAY[100000] OF INTEGER
+DEFINE rm_cli		ARRAY[100000] OF RECORD
+				nomcli		LIKE cxct001.z01_nomcli,
+				por_vencer	DECIMAL(12,2),
+				vencido		DECIMAL(12,2),
+				tot_saldo 	DECIMAL(12,2)
+			END RECORD
 DEFINE tot_1, tot_2	DECIMAL(14,2)
 DEFINE tot_3		DECIMAL(14,2)
+
+
 
 MAIN
 	
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
-CALL fgl_init4js()
+CALL startlog('../logs/cxcp306.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN          -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
 	EXIT PROGRAM
 END IF
-LET vg_base     = arg_val(1)
-LET vg_modulo   = arg_val(2)
-LET vg_codcia   = arg_val(3)
-LET vg_codloc   = arg_val(4)
+LET vg_base    = arg_val(1)
+LET vg_modulo  = arg_val(2)
+LET vg_codcia  = arg_val(3)
+LET vg_codloc  = arg_val(4)
 LET vg_proceso = 'cxcp306'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -81,8 +83,9 @@ FUNCTION funcion_master()
 DEFINE r		RECORD LIKE gent000.*
 DEFINE i		SMALLINT
 
-LET num_max_doc = 1500
-LET num_max_cli = 1500
+CALL fl_nivel_isolation()
+LET num_max_doc = 100000
+LET num_max_cli = 100000
 INITIALIZE rm_par.* TO NULL
 CALL fl_lee_configuracion_facturacion() RETURNING r.*
 LET rm_par.moneda = r.g00_moneda_base
@@ -94,6 +97,7 @@ OPEN WINDOW w_imp AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST) 
 OPEN FORM f_par FROM "../forms/cxcf306_1"
 DISPLAY FORM f_par
+CALL mostrar_botones()
 WHILE TRUE
 	FOR i = 1 TO 10
 		LET rm_orden[i] = '' 
@@ -138,6 +142,7 @@ DEFINE tiporeg		LIKE gent012.g12_tiporeg
 DEFINE subtipo		LIKE gent012.g12_subtipo
 DEFINE nomtipo		LIKE gent012.g12_nombre
 DEFINE nombre		LIKE gent011.g11_nombre
+DEFINE r_g02		RECORD LIKE gent002.*
 DEFINE r_se		RECORD LIKE gent012.*
 
 LET int_flag = 0
@@ -146,7 +151,7 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 		CLOSE FORM f_par
 		RETURN
 	ON KEY(F2)
-		IF infield(area_n) THEN
+		IF INFIELD(area_n) THEN
 			CALL fl_ayuda_areaneg(vg_codcia) 
 				RETURNING area_aux, tit_area
 			IF area_aux IS NOT NULL THEN
@@ -155,7 +160,7 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
  				DISPLAY BY NAME rm_par.area_n, rm_par.tit_area
 			END IF
 		END IF
-		IF infield(moneda) THEN
+		IF INFIELD(moneda) THEN
 			CALL fl_ayuda_monedas() RETURNING mon_aux, tit_mon, num
 			IF mon_aux IS NOT NULL THEN
 				LET rm_par.moneda  = mon_aux
@@ -163,13 +168,23 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 				DISPLAY BY NAME rm_par.moneda, rm_par.tit_mon
 			END IF
 		END IF
-		IF infield(tipcli) THEN
+		IF INFIELD(tipcli) THEN
 			CALL fl_ayuda_subtipo_entidad('CL') 
 				RETURNING tiporeg, subtipo, nomtipo, nombre
 			IF nomtipo IS NOT NULL THEN
 				LET rm_par.tipcli     = subtipo
 				LET rm_par.tit_tipcli = nomtipo
 				DISPLAY BY NAME rm_par.tipcli, rm_par.tit_tipcli
+			END IF
+		END IF
+		IF INFIELD(localidad) THEN
+			CALL fl_ayuda_localidad(vg_codcia)
+				RETURNING r_g02.g02_localidad,
+					  r_g02.g02_nombre
+			IF r_g02.g02_localidad IS NOT NULL THEN
+				LET rm_par.localidad = r_g02.g02_localidad
+				DISPLAY BY NAME rm_par.localidad
+				DISPLAY r_g02.g02_nombre TO tit_localidad
 			END IF
 		END IF
 		LET int_flag = 0
@@ -215,6 +230,22 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 			LET rm_par.tit_tipcli = NULL
 			DISPLAY BY NAME rm_par.tit_tipcli
 		END IF
+	AFTER FIELD localidad
+		IF rm_par.localidad IS NOT NULL THEN
+			CALL fl_lee_localidad(vg_codcia, rm_par.localidad)
+				RETURNING r_g02.*
+			IF r_g02.g02_compania IS NULL THEN
+				CALL fl_mostrar_mensaje('Localidad no existe.','exclamation')
+				NEXT FIELD localidad
+			END IF
+			IF r_g02.g02_estado = 'B' THEN
+				CALL fl_mensaje_estado_bloqueado()
+				NEXT FIELD localidad
+			END IF
+			DISPLAY r_g02.g02_nombre TO tit_localidad
+		ELSE
+			CLEAR tit_localidad
+		END IF
 	AFTER INPUT 
 		IF (rm_par.dias_i IS NOT NULL AND rm_par.dias_f IS NULL) OR
 		   (rm_par.dias_i IS NULL AND rm_par.dias_f IS NOT NULL) THEN
@@ -239,6 +270,7 @@ DEFINE dias		SMALLINT
 DEFINE nomcli		CHAR(40)
 DEFINE r_doc		RECORD LIKE cxct020.*
 DEFINE r_cli		RECORD LIKE cxct001.*
+DEFINE expr_loc		VARCHAR(50)
 
 ERROR "Generando consulta . . . espere por favor." ATTRIBUTE(NORMAL)
 LET expr1 = ' 1 = 1 '
@@ -249,22 +281,20 @@ END IF
 IF rm_par.moneda IS NOT NULL THEN
 	LET expr2 = " z20_moneda = '", rm_par.moneda, "' "
 END IF
+LET expr_loc = ' '
+IF rm_par.localidad IS NOT NULL THEN
+	LET expr_loc = '  AND z20_localidad = ', rm_par.localidad
+END IF
 LET query = "SELECT * FROM cxct020 WHERE ", 
 		expr1 CLIPPED, " AND ",
 		expr2 CLIPPED, " AND ",
-		"z20_compania = ", vg_codcia, " AND z20_localidad= ", vg_codloc, 
+		"z20_compania = ", vg_codcia,
+		expr_loc CLIPPED,
 		" AND z20_saldo_cap + z20_saldo_int > 0"
 PREPARE doc FROM query
 DECLARE q_doc CURSOR FOR doc
 LET num_doc = 0
 FOREACH q_doc INTO r_doc.*
-	IF r_doc.z20_fecha_vcto >= TODAY THEN
-		LET pven = r_doc.z20_saldo_cap + r_doc.z20_saldo_int
-		LET venc = 0
-	ELSE
-		LET venc = r_doc.z20_saldo_cap + r_doc.z20_saldo_int
-		LET pven = 0
-	END IF
 	IF rm_par.ind_venc = 'V' THEN
 		IF r_doc.z20_fecha_vcto >= TODAY THEN
 			CONTINUE FOREACH
@@ -291,10 +321,21 @@ FOREACH q_doc INTO r_doc.*
 			CONTINUE FOREACH
 		END IF
 	END IF		
-	CALL fl_lee_cliente_general(r_doc.z20_codcli)
-		RETURNING r_cli.*
-	IF rm_par.tipcli IS NOT NULL AND rm_par.tipcli <> r_cli.z01_tipo_clte THEN
-		CONTINUE FOREACH
+	CALL fl_lee_cliente_general(r_doc.z20_codcli) RETURNING r_cli.*
+	IF rm_par.tipcli IS NOT NULL THEN
+		IF r_cli.z01_tipo_clte IS NULL THEN
+			CONTINUE FOREACH
+		END IF
+		IF rm_par.tipcli <> r_cli.z01_tipo_clte THEN
+			CONTINUE FOREACH
+		END IF
+	END IF
+	IF r_doc.z20_fecha_vcto >= TODAY THEN
+		LET pven = r_doc.z20_saldo_cap + r_doc.z20_saldo_int
+		LET venc = 0
+	ELSE
+		LET venc = r_doc.z20_saldo_cap + r_doc.z20_saldo_int
+		LET pven = 0
 	END IF
 	INSERT INTO tempo_doc VALUES(r_doc.z20_areaneg, r_doc.z20_tipo_doc,
 		r_doc.z20_num_doc, r_doc.z20_dividendo, r_doc.z20_codcli, 
@@ -316,13 +357,9 @@ END FUNCTION
 FUNCTION muestra_resumen_clientes()
 DEFINE orden		CHAR(40)
 DEFINE query		CHAR(300)
-DEFINE i		SMALLINT
-DEFINE comando          CHAR(100)
+DEFINE i		INTEGER
 
-DISPLAY 'C l i e n t e' TO tit_col1
-DISPLAY 'Por Vencer'    TO tit_col2
-DISPLAY 'Vencido'       TO tit_col3
-DISPLAY 'T o t a l'     TO tit_col4
+CALL mostrar_botones()
 WHILE TRUE
 	LET query = "SELECT nomcli, SUM(por_vencer), SUM(vencido), ",
 			" SUM(por_vencer + vencido), codcli FROM tempo_doc ",
@@ -350,7 +387,7 @@ WHILE TRUE
 	LET int_flag = 0
 	DISPLAY ARRAY rm_cli TO rm_cli.*
 		BEFORE DISPLAY 
-			CALL dialog.keysetlabel("ACCEPT","")
+			--#CALL dialog.keysetlabel("ACCEPT","")
 		AFTER DISPLAY 
 			CONTINUE DISPLAY
 		BEFORE ROW
@@ -358,13 +395,10 @@ WHILE TRUE
 			MESSAGE i, ' de ', num_cli
 		ON KEY(F5)
 			LET i = arr_curr()
-			LET comando = 'fglrun cxcp305 ' || vg_base || 
-			      ' CO ' || 
-			      vg_codcia || ' ' || 
-			      vg_codloc || ' ' ||
-			      rm_codcli[i] || ' ' ||
-		       	      rm_par.moneda
-			RUN comando
+			CALL muestra_estado_cuenta(i)
+		ON KEY(F6)
+			CALL control_imprimir()
+			LET int_flag = 0
 		ON KEY(INTERRUPT)
 			EXIT DISPLAY
 		ON KEY(F15)
@@ -403,33 +437,165 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION mostrar_botones()
 
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
+DISPLAY 'C l i e n t e' TO tit_col1
+DISPLAY 'Por Vencer'    TO tit_col2
+DISPLAY 'Vencido'       TO tit_col3
+DISPLAY 'T o t a l'     TO tit_col4
+
+END FUNCTION
+
+
+
+FUNCTION muestra_estado_cuenta(i)
+DEFINE i		INTEGER
+DEFINE comando          CHAR(100)
+DEFINE codloc		LIKE gent002.g02_localidad
+DEFINE valor		DECIMAL(13,2)
+
+LET codloc = 0
+IF rm_par.localidad IS NOT NULL THEN
+	LET codloc = rm_par.localidad
 END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
+LET valor   = 0.01
+{--
+LET comando = 'fglrun cxcp305 ', vg_base, ' ',vg_modulo,
+		vg_codcia, ' ', codloc, ' ', rm_codcli[i], ' "', rm_par.moneda,
+		'" "S" "', rm_par.ind_venc, '" ', valor
+IF rm_par.dias_i IS NOT NULL THEN
+	LET comando = comando CLIPPED, ' ', rm_par.dias_i, ' ', rm_par.dias_f
 END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
+--}
+LET comando = 'fglrun cxcp314 ', vg_base, ' ', vg_modulo, ' ', vg_codcia, ' ',
+		vg_codloc, ' ', rm_par.moneda, ' ', TODAY, ' ', rm_par.ind_venc,
+		' ', valor, ' "S" ', codloc, ' ', rm_codcli[i]
+RUN comando
+
+END FUNCTION
+
+
+
+FUNCTION control_imprimir()
+DEFINE comando		VARCHAR(100)
+DEFINE i		INTEGER
+
+CALL fl_control_reportes() RETURNING comando
+IF int_flag THEN
+	RETURN
 END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
+START REPORT report_list_cliente TO PIPE comando
+FOR i = 1 TO num_cli
+	OUTPUT TO REPORT report_list_cliente(i)
+END FOR
+FINISH REPORT report_list_cliente
+
+END FUNCTION
+
+
+
+REPORT report_list_cliente(i)
+DEFINE i		INTEGER
+DEFINE usuario		VARCHAR(19,15)
+DEFINE modulo		VARCHAR(40)
+DEFINE factura		VARCHAR(15)
+DEFINE r_g01		RECORD LIKE gent001.*
+DEFINE r_g02		RECORD LIKE gent002.*
+
+OUTPUT
+	TOP MARGIN	1
+	LEFT MARGIN	0
+	RIGHT MARGIN	80
+	BOTTOM MARGIN	4
+	PAGE LENGTH	66
+
+FORMAT
+
+PAGE HEADER
+	LET modulo  = "MODULO: COBRANZAS"
+	LET usuario = 'USUARIO: ', vg_usuario
+	CALL fl_justifica_titulo('D', usuario, 19) RETURNING usuario
+	CALL fl_lee_compania(vg_codcia) RETURNING r_g01.*
+	PRINT COLUMN 001, r_g01.g01_razonsocial,
+  	      COLUMN 070, "PAGINA: ", PAGENO USING '&&&'
+	PRINT COLUMN 001, modulo CLIPPED,
+	      COLUMN 027, "ANALISIS CARTERA DE CLIENTES",
+	      COLUMN 074, UPSHIFT(vg_proceso) 
+	SKIP 1 LINES
+	IF rm_par.area_n IS NOT NULL THEN
+		PRINT COLUMN 015, "** AREA DE NEGOCIO: ",
+			 rm_par.area_n USING '<<&', " ", rm_par.tit_area
+	ELSE
+		PRINT 1 SPACES
+	END IF
+	PRINT COLUMN 015, "** MONEDA         : ", rm_par.moneda,
+		" ", rm_par.tit_mon
+	IF rm_par.tipcli IS NOT NULL THEN
+		PRINT COLUMN 015, "** TIPO CLIENTE   : ",
+			rm_par.tipcli USING '<<<&', " ", rm_par.tit_tipcli
+	ELSE
+		PRINT 1 SPACES
+	END IF
+	IF rm_par.localidad IS NOT NULL THEN
+		CALL fl_lee_localidad(vg_codcia, rm_par.localidad)
+			RETURNING r_g02.*
+		PRINT COLUMN 015, "** LOCALIDAD      : ",
+			rm_par.localidad USING '&&', " ", r_g02.g02_nombre
+	ELSE
+		PRINT 1 SPACES
+	END IF
+	PRINT COLUMN 015, "** TIPO DE VENCTO.: ", rm_par.ind_venc, " ",
+		retorna_tipo_vencto(rm_par.ind_venc)
+	IF rm_par.dias_i IS NOT NULL AND rm_par.dias_f IS NOT NULL THEN
+		PRINT COLUMN 015, "** RANGO DE DIAS  : ",
+			rm_par.dias_i USING '-<<<&', " HASTA ",
+			rm_par.dias_f USING '-<<<&'
+	ELSE
+		PRINT 1 SPACES
+	END IF
+	SKIP 1 LINES
+	PRINT COLUMN 001, "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy",
+ 		1 SPACES, TIME,
+	      COLUMN 062, usuario
+	PRINT "--------------------------------------------------------------------------------"
+	PRINT COLUMN 012, "C L I E N T E S",
+	      COLUMN 040, "   POR VENCER",
+	      COLUMN 054, "     VENCIDOS",
+	      COLUMN 068, "        TOTAL"
+	PRINT "--------------------------------------------------------------------------------"
+
+ON EVERY ROW
+	NEED 3 LINES
+	PRINT COLUMN 001, rm_cli[i].nomcli[1, 38],
+	      COLUMN 040, rm_cli[i].por_vencer		USING "--,---,--&.##",
+	      COLUMN 054, rm_cli[i].vencido		USING "--,---,--&.##",
+	      COLUMN 068, rm_cli[i].tot_saldo		USING "--,---,--&.##"
+	
+ON LAST ROW
+	NEED 2 LINES
+	PRINT COLUMN 040, "-------------",
+	      COLUMN 054, "-------------",
+	      COLUMN 068, "-------------"
+	PRINT COLUMN 027, "TOTALES ==>  ", tot_1	USING "--,---,--&.##",
+	      COLUMN 054, tot_2				USING "--,---,--&.##",
+	      COLUMN 068, tot_3				USING "--,---,--&.##"
+
+END REPORT
+
+
+
+FUNCTION retorna_tipo_vencto(tipo)
+DEFINE tipo		CHAR(1)
+DEFINE tipo_nom		VARCHAR(10)
+
+CASE tipo
+	WHEN 'P'
+		LET tipo_nom = 'POR VENCER'
+	WHEN 'V'
+		LET tipo_nom = 'VENCIDOS'
+	WHEN 'T'
+		LET tipo_nom = 'T O D O S'
+END CASE
+RETURN tipo_nom
 
 END FUNCTION

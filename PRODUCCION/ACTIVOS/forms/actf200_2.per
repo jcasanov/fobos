@@ -1,0 +1,67 @@
+DATABASE aceros
+SCREEN
+{
+
+
+                                                   Estado: [c][c000        ]
+          Transaccion:     [c0] [c019      ]
+      Código del Bien: [c001  ] [c002                                      ]
+          Responsable: [c003  ] [c004                                      ]
+
+  Departamento Origen: [c005  ] [c006                                      ]
+     Localidad Origen: [c1]     [c007                 ]
+ Departamento Destino: [c008  ] [c009                                      ]
+    Localidad Destino: [c2]     [c010                 ]
+
+           Referencia: [c011                                               ]
+                       [c011                                               ]
+               Moneda: [c3]     [c012                 ]
+    Paridad Cambiaría: [c013               ]     Valor Bien: [c014         ]
+                                         Valor Depreciación: [c015         ]
+                                         Total Depreciación: [c016         ]
+
+              Usuario: [c017      ]     Fecha Ingreso: [c018               ]
+}
+TABLES
+actt003
+actt010
+actt012
+ATTRIBUTES
+c0   = actt012.a12_codigo_tran, AUTONEXT, UPSHIFT, REVERSE;
+c019 = actt012.a12_numero_tran, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c    = actt010.a10_estado, NOENTRY, UPSHIFT, REVERSE;
+c000 = FORMONLY.tit_estado, NOENTRY, UPSHIFT;
+c001 = actt012.a12_codigo_bien, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = actt010.a10_descripcion, NOENTRY, UPSHIFT, REVERSE;
+c003 = actt010.a10_responsable, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c004 = actt003.a03_nombres, NOENTRY, UPSHIFT, REVERSE;
+c005 = actt012.a12_depto_ori, NOENTRY, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c006 = FORMONLY.tit_depto_ori, NOENTRY, REVERSE, UPSHIFT;
+c1   = actt012.a12_locali_ori, NOENTRY, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c007 = FORMONLY.tit_locali_ori, NOENTRY, REVERSE, UPSHIFT;
+c008 = actt012.a12_depto_dest NOT NULL, REQUIRED, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c009 = FORMONLY.tit_depto_dest, NOENTRY, REVERSE, UPSHIFT;
+c2   = actt012.a12_locali_dest NOT NULL, REQUIRED, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c010 = FORMONLY.tit_locali_dest, NOENTRY, REVERSE, UPSHIFT;
+c011 = actt012.a12_referencia, AUTONEXT, UPSHIFT, REVERSE, WORDWRAP COMPRESS;
+c3   = actt010.a10_moneda, NOENTRY, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c012 = FORMONLY.tit_moneda, NOENTRY, UPSHIFT, REVERSE;
+c013 = actt010.a10_paridad, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '#,###,##&.#########';
+c014 = actt010.a10_valor_mb, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '##,###,##&.##';
+c015 = actt010.a10_val_dep_mb, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '##,###,##&.##';
+c016 = actt010.a10_tot_dep_mb, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '##,###,##&.##';
+c017 = actt012.a12_usuario, NOENTRY, UPSHIFT, REVERSE;
+c018 = actt012.a12_fecing, NOENTRY, UPSHIFT, REVERSE;
+END

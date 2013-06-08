@@ -1,31 +1,29 @@
-
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
 
-       Proveedor:[c0                               ]
-       Retención:[c1       ]			    Estado:[c|c2        ]
-Fecha de Ingreso:[c3                 ]
+        Proveedor: [c0                               ]
+        Retención: [c1       ]			    Estado:[c|c2        ]
+ Fecha de Ingreso: [c3                 ]    No. SRI: [c050              ]
 
-   [b0|b1             |b2        |b3     |b4              |b5            ]
-  [c4|c5             |c6        |c7     |c8              |c9            ]
-  [c4|c5             |c6        |c7     |c8              |c9            ]
-  [c4|c5             |c6        |c7     |c8              |c9            ]
-  [c4|c5             |c6        |c7     |c8              |c9            ]
-  [c4|c5             |c6        |c7     |c8              |c9            ]
-  [c4|c5             |c6        |c7     |c8              |c9            ]
-  [c4|c5             |c6        |c7     |c8              |c9            ]
-  [c4|c5             |c6        |c7     |c8              |c9            ]
-  [c4|c5             |c6        |c7     |c8              |c9            ]
-  [c4|c5             |c6        |c7     |c8              |c9            ]
-					[c10		 |c11		]
+   [b0|b1               |b2        |b3     |b4              |b5            ]
+  [c4|c5               |c6        |c7     |c8              |c9            ]
+  [c4|c5               |c6        |c7     |c8              |c9            ]
+  [c4|c5               |c6        |c7     |c8              |c9            ]
+  [c4|c5               |c6        |c7     |c8              |c9            ]
+  [c4|c5               |c6        |c7     |c8              |c9            ]
+  [c4|c5               |c6        |c7     |c8              |c9            ]
+  [c4|c5               |c6        |c7     |c8              |c9            ]
+  [c4|c5               |c6        |c7     |c8              |c9            ]
+  [c4|c5               |c6        |c7     |c8              |c9            ]
+  [c4|c5               |c6        |c7     |c8              |c9            ]
+					  [c10             |c11           ]
 }
 TABLES
-	cxpt027
-	cxpt028
-
+cxpt027
+cxpt028
+cxpt029
 ATTRIBUTES
-
 b0  = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
 b1  = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
 b2  = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
@@ -49,8 +47,13 @@ c10 = FORMONLY.tot_base TYPE DECIMAL(12,2), FORMAT = '#,###,###,##&.##',
 			REVERSE;
 c11 = FORMONLY.tot_ret  TYPE DECIMAL(11,2), FORMAT = '###,###,##&.##', 
 			REVERSE;
+c050 = cxpt029.p29_num_sri, UPSHIFT, REVERSE, NOENTRY;
 END
-
+KEYS
+F5 = 'Imprimir'
+F6 = 'Eliminar'
+F7 = 'Contabiliz.'
 INSTRUCTIONS
+DELIMITERS '||'
 SCREEN RECORD r_detalle_2[10] (p28_tipo_doc,   p28_num_doc,    tipo_ret,
 			       p28_porcentaje, p28_valor_base, p28_valor_ret)

@@ -1,0 +1,74 @@
+DATABASE aceros
+SCREEN 
+{
+
+   Liquidación No: [c000       ]                 Fecha: [c001               ]
+                                                      Estado: [a][c002      ]
+           Origen: [c003           ]    Tipo Prorrateo Flete: [b][c026      ]
+    Forma de Pago: [c004                          ]
+      Descripción: [c005                          ]
+           Bodega: [a0][c006                           ]
+           Moneda: [a1][c007           ]   Paridad: [c008                   ]
+                    Moneda Pedido   Moneda BASE
+      Fob Fabrica: [c009        ] [c010        ] Impuesto IVA: [c011        ]
+     Otros Cargos: [c012        ] [c013        ]
+        Total Fob: [c014        ] [c015        ]
+       Flete Real:                [c016        ]    Flete Cae: [c040        ]
+     Seguro Total:                [c017        ]   Prima Neta: [c018        ]
+        Total CIF:                [c019        ]    Aranceles: [c020        ]
+     Salvaguardia:                [c021        ] Gtos Locales: [c022        ]
+ Total Costo Imp.:                [c023        ]
+     Elaborado: [c024                          ]      Usuario: [c025      ]
+}
+TABLES
+rept028
+ATTRIBUTES
+c000 = rept028.r28_numliq, NOENTRY, REVERSE, 
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c001 = rept028.r28_fecing, UPSHIFT, REVERSE, NOENTRY;
+a    = rept028.r28_estado, UPSHIFT, NOENTRY, REVERSE,
+	COMMENTS = '(A) ACTIVO  (P) PROCESADO';
+c002 = FORMONLY.n_estado, NOENTRY, REVERSE, UPSHIFT;
+c003 = rept028.r28_origen, AUTONEXT, UPSHIFT, REVERSE;
+b    = rept028.r28_flag_flete, AUTONEXT, REVERSE, UPSHIFT, INCLUDE = ('P', 'F'),
+	COMMENTS = '(P) Pie Cubico  (F) Total Fob';
+c026 = FORMONLY.tit_flag_flete, NOENTRY, REVERSE, UPSHIFT;
+c004 = rept028.r28_forma_pago, UPSHIFT, REVERSE;
+c005 = rept028.r28_descripcion, UPSHIFT, REVERSE;
+a0   = rept028.r28_bodega, UPSHIFT, REVERSE, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c006 = FORMONLY.n_bodega, NOENTRY,REVERSE;
+a1   = rept028.r28_moneda, UPSHIFT, REVERSE, NOENTRY,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c007 = FORMONLY.n_moneda, NOENTRY,REVERSE;
+c008 = rept028.r28_paridad, AUTONEXT, REVERSE,
+	INCLUDE = (0.01 TO 999999.999999999),
+	FORMAT = '###,##&.###############',
+        COMMENTS = 'Factor de conversión de la moneda del pedido a la de costeo.';
+
+c009 = rept028.r28_tot_exfab_mi, NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c010 = rept028.r28_tot_exfab_mb, NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c011 = rept028.r28_tot_iva,      AUTONEXT, REVERSE, FORMAT = '-,---,--&.##';
+c012 = rept028.r28_tot_desp_mi,  AUTONEXT, REVERSE, FORMAT = '-,---,--&.##';
+c013 = rept028.r28_tot_desp_mb,  NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c014 = rept028.r28_tot_fob_mi,   NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c015 = rept028.r28_tot_fob_mb,   NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c016 = rept028.r28_tot_flete,    AUTONEXT, REVERSE, FORMAT = '-,---,--&.##',
+	COMMENTS = 'Valor Flete para costos. No se utiliza para aranceles.';
+c017 = rept028.r28_tot_seg_neto, AUTONEXT, REVERSE, FORMAT = '-,---,--&.##',
+	COMMENTS = 'Valor Seguro (con tasas - sin IVA) para costos. No se utiliza para aranceles.';
+c018 = rept028.r28_tot_seguro,   AUTONEXT, REVERSE, FORMAT = '-,---,--&.##',
+	COMMENTS = 'Valor Seguro (sin tasas ni impuestos). Utilizado en el calculo de aranceles.';
+c019 = rept028.r28_tot_cif,      NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c020 = rept028.r28_tot_arancel,  NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c021 = rept028.r28_tot_salvagu,  NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c022 = rept028.r28_tot_cargos,   NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c023 = rept028.r28_tot_costimp,  NOENTRY,  REVERSE, FORMAT = '-,---,--&.##';
+c040 = rept028.r28_tot_flet_cae, REVERSE, FORMAT = '-,---,--&.##',
+	COMMENTS = 'Valor flete suministrado por la CAE. Utilizado en el calculo de aranceles.';
+
+c024 = rept028.r28_elaborado, AUTONEXT, REVERSE, UPSHIFT;
+c025 = rept028.r28_usuario, REVERSE, NOENTRY, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'

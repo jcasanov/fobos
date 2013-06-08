@@ -1,19 +1,18 @@
-------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 -- Titulo           : ctbp106.4gl - Mantenimiento de Cuentas
 -- Elaboracion      : 24-sep-2001
 -- Autor            : NPC
 -- Formato Ejecucion: fglrun ctbp106 base módulo compañía [cuenta]
 -- Ultima Correccion: 
 -- Motivo Correccion: 
-------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_demonios	VARCHAR(12)
 DEFINE rm_ctb		RECORD LIKE ctbt010.*
 DEFINE vm_num_rows	SMALLINT
 DEFINE vm_row_current	SMALLINT
 DEFINE vm_max_rows	SMALLINT
-DEFINE vm_r_rows	ARRAY [1000] OF INTEGER
+DEFINE vm_r_rows	ARRAY[1500] OF INTEGER
 DEFINE vm_cc 		ARRAY[5] OF RECORD
 				b10_cuenta	LIKE ctbt010.b10_cuenta,
 				b10_descripcion	LIKE ctbt010.b10_descripcion
@@ -24,8 +23,8 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
-CALL fgl_init4js()
+CALL startlog('../logs/ctbp106.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 AND num_args() <> 4 THEN  -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto.', 'stop')
@@ -37,8 +36,8 @@ LET vg_codcia   = arg_val(3)
 LET vg_proceso = 'ctbp106'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL control_master()
 
@@ -49,7 +48,7 @@ END MAIN
 FUNCTION control_master()
 
 CALL fl_nivel_isolation()
-LET vm_max_rows	= 1000
+LET vm_max_rows	= 1500
 OPEN WINDOW wf AT 3,2 WITH 19 ROWS, 80 COLUMNS
     ATTRIBUTE(FORM LINE FIRST + 2, COMMENT LINE LAST, MENU LINE FIRST,BORDER,
 	      MESSAGE LINE LAST - 2)
@@ -78,14 +77,8 @@ MENU 'OPCIONES'
 	COMMAND KEY('I') 'Ingresar' 'Ingresar nuevos registros. '
 		CALL control_ingreso()
 		IF vm_num_rows = 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		   END IF
-			
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -98,13 +91,8 @@ MENU 'OPCIONES'
 	COMMAND KEY('C') 'Consultar' 'Consultar un registro. '
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
- 		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		   END IF
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -113,13 +101,8 @@ MENU 'OPCIONES'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
-		   IF fl_control_permiso_opcion('Modificar') THEN			
-			 SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Bloquear') THEN
+			SHOW OPTION 'Modificar'
 			SHOW OPTION 'Bloquear/Activar'
-		   END IF
 		END IF
 		IF vm_row_current <= 1 THEN
                         HIDE OPTION 'Retroceder'
@@ -159,6 +142,7 @@ DEFINE r_niv		RECORD LIKE ctbt001.*
 DEFINE r_grp		RECORD LIKE ctbt002.*
 DEFINE crea		CHAR(1)
 DEFINE num_elm		SMALLINT
+DEFINE max_nivel	LIKE ctbt001.b01_nivel
 
 CALL fl_retorna_usuario()
 INITIALIZE rm_ctb.* TO NULL
@@ -167,13 +151,18 @@ INITIALIZE r_grp.* TO NULL
 CLEAR tit_nivel
 CLEAR tit_centro
 LET rm_ctb.b10_compania = vg_codcia
-LET rm_ctb.b10_nivel = 6
+SELECT MAX(b01_nivel) INTO max_nivel FROM ctbt001
+IF max_nivel IS NULL THEN
+	CALL fl_mostrar_mensaje('No hay niveles de cuentas configurado.','stop')
+	EXIT PROGRAM
+END IF
+LET rm_ctb.b10_nivel    = max_nivel
 LET rm_ctb.b10_tipo_cta = NULL
 LET rm_ctb.b10_tipo_mov = NULL
 LET rm_ctb.b10_saldo_ma = 'N'
-LET rm_ctb.b10_estado = 'A'
-LET rm_ctb.b10_usuario = vg_usuario
-LET rm_ctb.b10_fecing = CURRENT
+LET rm_ctb.b10_estado   = 'A'
+LET rm_ctb.b10_usuario  = vg_usuario
+LET rm_ctb.b10_fecing   = CURRENT
 CALL fl_lee_nivel_cuenta(rm_ctb.b10_nivel) RETURNING r_niv.*
 IF r_niv.b01_nivel IS NOT NULL THEN
 	DISPLAY r_niv.b01_nombre TO tit_nivel
@@ -242,9 +231,10 @@ END IF
 CALL leer_datos('M') RETURNING crea
 IF NOT int_flag THEN
 	UPDATE ctbt010 SET b10_descripcion = rm_ctb.b10_descripcion,
-			   b10_descri_alt = rm_ctb.b10_descri_alt,
-			   b10_cod_ccosto = rm_ctb.b10_cod_ccosto,
-			   b10_saldo_ma = rm_ctb.b10_saldo_ma
+			   b10_descri_alt  = rm_ctb.b10_descri_alt,
+			   b10_cod_ccosto  = rm_ctb.b10_cod_ccosto,
+			   b10_saldo_ma    = rm_ctb.b10_saldo_ma,
+			   b10_tipo_mov    = rm_ctb.b10_tipo_mov
 			WHERE CURRENT OF q_up
 	CALL fl_mensaje_registro_modificado()
 ELSE
@@ -277,10 +267,11 @@ CLEAR FORM
 INITIALIZE cod_aux TO NULL
 LET int_flag = 0
 IF num_args() = 3 THEN
-	CONSTRUCT BY NAME expr_sql ON b10_cuenta, b10_descripcion,
-		b10_descri_alt, b10_cod_ccosto, b10_saldo_ma
+	CONSTRUCT BY NAME expr_sql ON b10_cuenta, b10_estado, b10_descripcion,
+		b10_descri_alt, b10_tipo_cta, b10_tipo_mov, b10_cod_ccosto,
+		b10_saldo_ma, b10_usuario
 		ON KEY(F2)
-			IF infield(b10_cuenta) THEN
+			IF INFIELD(b10_cuenta) THEN
 				CALL fl_ayuda_cuenta_contable(vg_codcia,6)
 					RETURNING cod_aux, nom_aux
 				LET int_flag = 0
@@ -289,7 +280,7 @@ IF num_args() = 3 THEN
 					DISPLAY nom_aux TO b10_descripcion
 				END IF 
 			END IF
-			IF infield(b10_nivel) THEN
+			IF INFIELD(b10_nivel) THEN
 				CALL fl_ayuda_nivel_cuentas()
 					RETURNING cniv_aux, nniv_aux, psi_aux, psf_aux
 				LET int_flag = 0
@@ -298,7 +289,7 @@ IF num_args() = 3 THEN
 					DISPLAY nniv_aux TO tit_nivel
 				END IF 
 			END IF
-			IF infield(b10_cod_ccosto) THEN
+			IF INFIELD(b10_cod_ccosto) THEN
 				CALL fl_ayuda_ccostos(vg_codcia)
 					RETURNING codc_aux, nomc_aux
 				LET int_flag = 0
@@ -402,7 +393,7 @@ INPUT BY NAME rm_ctb.b10_cuenta,
 		RETURN crear
 	END IF
 	ON KEY(F2)
-	IF infield(b10_cuenta) THEN
+	IF INFIELD(b10_cuenta) THEN
 		CALL fl_ayuda_cuenta_contable(vg_codcia,6)
 			RETURNING cod_aux, nom_aux
 		LET int_flag = 0
@@ -412,7 +403,7 @@ INPUT BY NAME rm_ctb.b10_cuenta,
 			DISPLAY nom_aux TO b10_descripcion
 		END IF 
 	END IF
-	IF infield(b10_cod_ccosto) THEN
+	IF INFIELD(b10_cod_ccosto) THEN
 		CALL fl_ayuda_ccostos(vg_codcia)
 			RETURNING codc_aux, nomc_aux
 		LET int_flag = 0
@@ -431,7 +422,7 @@ INPUT BY NAME rm_ctb.b10_cuenta,
 			CALL fl_lee_nivel_cuenta(rm_ctb.b10_nivel)
 				RETURNING r_niv.*
 			IF r_niv.b01_nivel IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'Nivel no está configurado','stop')
+				CALL fgl_winmessage(vg_producto,'Nivel no esta configurado','stop')
 				EXIT PROGRAM
 			END IF
 			LET j = comprobar_nivel(rm_ctb.b10_cuenta, 12)
@@ -518,7 +509,7 @@ FOR i = 2 TO 5
 			END IF
 		END FOR
 		IF ceros <> 0 THEN
-			CALL fgl_winmessage(vg_producto,'Número de cuenta está incorrecto','exclamation')
+			CALL fgl_winmessage(vg_producto,'Número de cuenta estáa incorrecto','exclamation')
 			RETURN 1
 		END IF 
 	END IF
@@ -610,28 +601,34 @@ IF vm_num_rows = 0 THEN
 	CALL fl_mensaje_consultar_primero()
 	RETURN
 END IF
-LET int_flag = 0
-WHENEVER ERROR CONTINUE
 BEGIN WORK
-DECLARE q_ba CURSOR FOR SELECT * FROM ctbt010
+WHENEVER ERROR CONTINUE
+DECLARE q_ba CURSOR FOR
+	SELECT * FROM ctbt010
 	WHERE ROWID = vm_r_rows[vm_row_current]
 	FOR UPDATE
 OPEN q_ba
 FETCH q_ba INTO rm_ctb.*
 IF STATUS < 0 THEN
-	COMMIT WORK
+	ROLLBACK WORK
 	CALL fl_mensaje_bloqueo_otro_usuario()
 	WHENEVER ERROR STOP
 	RETURN
-END IF	
-CALL fl_mensaje_seguro_ejecutar_proceso()
-RETURNING confir
-IF confir = 'Yes' THEN
-	LET int_flag = 1
-	CALL bloquea_activa_registro()
 END IF
-COMMIT WORK
 WHENEVER ERROR STOP
+LET int_flag = 0
+CALL fl_mensaje_seguro_ejecutar_proceso() RETURNING confir
+IF confir <> 'Yes' THEN
+	ROLLBACK WORK
+	RETURN
+END IF
+CALL bloquea_activa_registro()
+COMMIT WORK
+IF rm_ctb.b10_estado = 'A' THEN
+	CALL fl_mostrar_mensaje('Cuenta ha sido activada OK.', 'info')
+ELSE
+	CALL fl_mostrar_mensaje('Cuenta ha sido bloqueada OK.', 'info')
+END IF
 
 END FUNCTION
 
@@ -647,7 +644,7 @@ ELSE
 	DISPLAY 'ACTIVO' TO tit_estado_cta
 	LET estado = 'A'
 END IF
-DISPLAY estado TO tit_est
+DISPLAY estado TO b10_estado
 UPDATE ctbt010 SET b10_estado = estado WHERE CURRENT OF q_ba
 LET rm_ctb.b10_estado = estado
 
@@ -661,7 +658,7 @@ IF rm_ctb.b10_estado = 'A' THEN
 ELSE
 	DISPLAY 'BLOQUEADO' TO tit_estado_cta
 END IF
-DISPLAY rm_ctb.b10_estado TO tit_est
+DISPLAY BY NAME rm_ctb.b10_estado
 
 END FUNCTION
 
@@ -739,8 +736,8 @@ LET int_flag = 0
 INPUT ARRAY vm_cc 
 	WITHOUT DEFAULTS FROM vm_cc.*
 	BEFORE INPUT
-		CALL dialog.keysetlabel('INSERT','')
-		CALL dialog.keysetlabel('DELETE','')
+		--#CALL dialog.keysetlabel('INSERT','')
+		--#CALL dialog.keysetlabel('DELETE','')
 	BEFORE ROW
 		LET i = arr_curr()
 		IF i > num_elm THEN
@@ -765,38 +762,5 @@ IF int_flag THEN
 	RETURN 
 END IF
 LET num_elm = arr_curr()
-
-END FUNCTION
-
-
-
-FUNCTION validar_parametros()
-
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
 
 END FUNCTION

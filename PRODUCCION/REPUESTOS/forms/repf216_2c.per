@@ -1,0 +1,35 @@
+DATABASE aceros
+SCREEN
+{
+
+  Item: [c001           ]
+        [c002                               ]
+        [c002                               ]
+ --------------------------------------------
+         Serie          Fecha de Ingreso   C
+ --------------------------------------------
+ [c003                |c004               |c]
+ [c003                |c004               |c]
+ [c003                |c004               |c]
+ [c003                |c004               |c]
+ [c003                |c004               |c]
+ [c003                |c004               |c]
+ [c003                |c004               |c]
+
+}
+TABLES
+rept076
+rept010
+ATTRIBUTES
+c001 = rept076.r76_item, NOENTRY, UPSHIFT, REVERSE;
+c002 = rept010.r10_nombre, NOENTRY, UPSHIFT, REVERSE, WORDWRAP;
+
+c003 = rept076.r76_serie, NOENTRY, UPSHIFT, REVERSE;
+c004 = rept076.r76_fecing, NOENTRY, UPSHIFT, REVERSE;
+c    = FORMONLY.check TYPE CHAR, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = (NULL, 'S', 'N'),
+	COMMENTS = 'S ítem seriado trans.  N ítem seriado no trans.';
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_serie[7] (r76_serie, r76_fecing, check)

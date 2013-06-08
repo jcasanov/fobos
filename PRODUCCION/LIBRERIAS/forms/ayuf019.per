@@ -1,30 +1,36 @@
-DATABASE diteca
-
+DATABASE aceros
 SCREEN
 {
  TARJETAS DE CREDITO
------------------------------------------
- Código	      Nombre 		
------------------------------------------
-[c01       ] [c002                    ] 
-[c01       ] [c002                    ]
-[c01       ] [c002                    ]
-[c01       ] [c002                    ]
-[c01       ] [c002                    ]
-[c01       ] [c002                    ]
-[c01       ] [c002                    ] 
-[c01       ] [c002                    ] 
-[c01       ] [c002                    ] 
-[c01       ] [c002                    ] 
-}
+                          [c020] de [c021]
+ [c001 |c002                          |c|d] 
+[c011 |c012                          |e|f] 
+[c011 |c012                          |e|f] 
+[c011 |c012                          |e|f] 
+[c011 |c012                          |e|f] 
+[c011 |c012                          |e|f] 
+[c011 |c012                          |e|f] 
+[c011 |c012                          |e|f] 
+[c011 |c012                          |e|f] 
+[c011 |c012                          |e|f] 
+[c011 |c012                          |e|f] 
 
+}
 TABLES
 gent010
-
 ATTRIBUTES
-c01 = g10_tarjeta;
-c002 = g10_nombre;
-END
+c020 = FORMONLY.num_rows, NOENTRY, UPSHIFT;
+c021 = FORMONLY.max_rows, NOENTRY, UPSHIFT;
 
+c001 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c002 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c    = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+d    = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+
+c011 = gent010.g10_tarjeta, NOENTRY, UPSHIFT;
+c012 = gent010.g10_nombre, NOENTRY, UPSHIFT;
+e    = gent010.g10_cont_cred, NOENTRY, UPSHIFT;
+f    = gent010.g10_estado, NOENTRY, UPSHIFT;
+END
 INSTRUCTIONS
-SCREEN RECORD rh_tarj[10](g10_tarjeta, g10_nombre)
+SCREEN RECORD rh_tarj[10] (g10_tarjeta, g10_nombre, g10_cont_cred, g10_estado)

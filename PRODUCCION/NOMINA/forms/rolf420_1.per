@@ -1,0 +1,29 @@
+DATABASE aceros
+SCREEN
+{
+
+     Anio de Proceso: [c000]        
+
+        Departamento: [c006] [c007                          ]
+
+     Código Empleado: [c003] [c004                                         ]
+
+                        Agrupado por Departamento ?: [c]
+
+}
+TABLES
+gent034
+rolt030
+rolt042
+ATTRIBUTES
+c000 = rolt042.n42_ano, AUTONEXT, REVERSE, UPSHIFT,
+	INCLUDE = (1980 TO 2099);
+c003 = formonly.n42_cod_trab, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c004 = rolt030.n30_nombres, NOENTRY, UPSHIFT;
+c006 = formonly.n42_cod_depto, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c007 = gent034.g34_nombre, NOENTRY, UPSHIFT;
+c    = FORMONLY.vm_agrupado, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+END

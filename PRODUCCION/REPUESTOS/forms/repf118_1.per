@@ -1,0 +1,28 @@
+DATABASE aceros
+SCREEN
+{
+                                                              [c000] de [c001]
+
+                                                         Estado: [c|c002     ]
+
+       Codigo Identificación: [d|c003                                    ]
+
+                     Usuario: [c004      ]
+            Fecha de Ingreso: [c005               ]
+
+}
+TABLES
+rept009
+ATTRIBUTES
+c000 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c001 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c    = rept009.r09_estado, NOENTRY, UPSHIFT, REVERSE;
+c002 = FORMONLY.tit_estado, NOENTRY, UPSHIFT;
+
+d    = rept009.r09_tipo_ident, AUTONEXT, UPSHIFT, REVERSE;
+c003 = rept009.r09_descripcion, AUTONEXT, REVERSE, UPSHIFT;
+
+c004 = rept009.r09_usuario, NOENTRY, UPSHIFT, REVERSE;
+c005 = rept009.r09_fecing, REVERSE, NOENTRY, UPSHIFT;
+END

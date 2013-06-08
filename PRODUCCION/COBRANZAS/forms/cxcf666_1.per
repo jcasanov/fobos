@@ -1,0 +1,106 @@
+DATABASE aceros
+SCREEN
+{
+       Cliente: [c000  ] [c001                                               ]
+        Moneda: [a0|c006           ]             Paridad: [c007              ]
+                                              Tipo Venta: [c010        ]
+  Area Negocio: [c002  ] [c003            ]
+   Grupo Linea: [c004  ] [c005                          ]
+       Periodo: [c011      ] - [c012      ]
+                    Se devolvera dinero al cliente ?: [e]
+                                                            [c008 ] de [c009 ]
+ [c0|c1|c020     |c021      |c022      |c023        |c024        |c025      |c]
+[c2|c3|c030     |c031      |c032      |c033        |c034        |c035      |d]
+[c2|c3|c030     |c031      |c032      |c033        |c034        |c035      |d]
+[c2|c3|c030     |c031      |c032      |c033        |c034        |c035      |d]
+[c2|c3|c030     |c031      |c032      |c033        |c034        |c035      |d]
+[c2|c3|c030     |c031      |c032      |c033        |c034        |c035      |d]
+[c2|c3|c030     |c031      |c032      |c033        |c034        |c035      |d]
+[c2|c3|c030     |c031      |c032      |c033        |c034        |c035      |d]
+[c2|c3|c030     |c031      |c032      |c033        |c034        |c035      |d]
+[c2|c3|c030     |c031      |c032      |c033        |c034        |c035      |d]
+[c2|c3|c030     |c031      |c032      |c033        |c034        |c035      |d]
+[c2|c3|c030     |c031      |c032      |c033        |c034        |c035      |d]
+                          Totales ==> [c040        |c041        |c042      ]
+}
+TABLES
+cxct001
+cxct020
+gent003
+gent013
+gent020
+ATTRIBUTES
+c000 = cxct020.z20_codcli, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = cxct001.z01_nomcli, NOENTRY, UPSHIFT, REVERSE;
+c002 = cxct020.z20_areaneg, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = gent003.g03_nombre, NOENTRY, UPSHIFT, REVERSE;
+c004 = cxct020.z20_linea, NOENTRY, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c005 = gent020.g20_nombre, NOENTRY, UPSHIFT;
+a0   = cxct020.z20_moneda, NOENTRY, UPSHIFT, REVERSE;
+c006 = gent013.g13_nombre, NOENTRY, UPSHIFT;
+c007 = cxct020.z20_paridad, NOENTRY, UPSHIFT, FORMAT = '####,##&.#########';
+c010 = FORMONLY.tipo_venta TYPE CHAR NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, INCLUDE = ('C', 'R', 'T'), DEFAULT = 'T',
+	WIDGET = 'RADIO', CONFIG = 'C Contado R Credito T "T O D A S"';
+e    = FORMONLY.devuelve TYPE CHAR NOT NULL, REQUIRED, NOENTRY, UPSHIFT,
+	REVERSE, INCLUDE = ('S', 'N'), DEFAULT = 'N',
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge',
+	COMMENTS = 'Solo sera utilizado para FACTURAS CON SALDO CERO.';
+c011 = FORMONLY.fecha_ini TYPE DATE NOT NULL, REQUIRED, AUTONEXT, REVERSE,
+	FORMAT = 'dd-mm-yyyy', UPSHIFT,
+	COMMENTS = 'Digite la fecha inicial en formato: dd-mm-aaaa.';
+c012 = FORMONLY.fecha_fin TYPE DATE NOT NULL, REQUIRED, AUTONEXT, REVERSE,
+	FORMAT = 'dd-mm-yyyy', UPSHIFT,
+	COMMENTS = 'Digite la fecha final en formato: dd-mm-aaaa.';
+
+c008 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c009 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c0   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c1   = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c020 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c021 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c022 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c023 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c024 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+c025 = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22';
+c    = FORMONLY.tit_col9, WIDGET = 'BUTTON', CONFIG = 'F23';
+
+c2   = cxct020.z20_localidad, NOENTRY, UPSHIFT, FORMAT = '&&',
+	OPTIONS = '-nolist';
+c3   = cxct020.z20_tipo_doc, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c030 = FORMONLY.num_doc TYPE VARCHAR, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c031 = cxct020.z20_fecha_emi, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+c032 = cxct020.z20_fecha_vcto, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+c033 = cxct020.z20_valor_cap, NOENTRY, UPSHIFT, FORMAT = '-,---,--&.##',
+	OPTIONS = '-nolist';
+c034 = cxct020.z20_saldo_cap, NOENTRY, UPSHIFT, FORMAT = '-,---,--&.##',
+	OPTIONS = '-nolist';
+c035 = FORMONLY.valor_ret TYPE DECIMAL NOT NULL, AUTONEXT, UPSHIFT,
+	FORMAT = '###,##&.##', INCLUDE = (0 TO 999999.99), OPTIONS = '-nolist';
+d    = FORMONLY.chequear TYPE CHAR NOT NULL, UPSHIFT, REQUIRED, AUTONEXT,
+	INCLUDE = ('S', 'N'), OPTIONS = '-nolist',
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge';
+
+c040 = FORMONLY.tot_val TYPE DECIMAL NOT NULL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '-,---,--&.##';
+c041 = FORMONLY.tot_sal TYPE DECIMAL NOT NULL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '-,---,--&.##';
+c042 = FORMONLY.tot_ret TYPE DECIMAL NOT NULL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '###,##&.##';
+END
+KEYS
+F5 = 'Documento'
+F6 = 'Retenciones'
+F7 = 'Transaccion'
+F8 = 'Imprimir'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_detalle[11] (z20_localidad, z20_tipo_doc, num_doc,
+				z20_fecha_emi, z20_fecha_vcto, z20_valor_cap,
+				z20_saldo_cap, valor_ret, chequear)

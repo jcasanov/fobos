@@ -1,35 +1,35 @@
-database diteca
-screen 
+DATABASE aceros
+SCREEN 
 {
 
-     Item: [c001           ]
+     Item: [c001   ]
     [c002                                ] 
 
-  [lbl1                  |lbl2  |lbl3      |lbl4      ]
- [a0|c003               |c004  |c005      |c006      ]
- [a0|c003               |c004  |c005      |c006      ]
- [a0|c003               |c004  |c005      |c006      ]
- [a0|c003               |c004  |c005      |c006      ]
- [a0|c003               |c004  |c005      |c006      ]
- [a0|c003               |c004  |c005      |c006      ]
- [a0|c003               |c004  |c005      |c006      ]
+  [lbl1                  |lbl2   |lbl3     |lbl4      ]
+ [a0|c003               |c004   |c005     |c006     ]
+ [a0|c003               |c004   |c005     |c006     ]
+ [a0|c003               |c004   |c005     |c006     ]
+ [a0|c003               |c004   |c005     |c006     ]
+ [a0|c003               |c004   |c005     |c006     ]
+ [a0|c003               |c004   |c005     |c006     ]
+ [a0|c003               |c004   |c005     |c006     ]
 }
 end
-attributes
-c001 = formonly.item,   NOENTRY, REVERSE;
-c002 = formonly.n_item, NOENTRY, REVERSE;
+ATTRIBUTES
+c001 = FORMONLY.item,   NOENTRY, REVERSE;
+c002 = FORMONLY.n_item, NOENTRY, REVERSE;
 
-a0   = formonly.bodega,   NOENTRY, OPTIONS='-nolist';
-c003 = formonly.n_bodega, NOENTRY, OPTIONS='-nolist';
-c004 = formonly.stock,    NOENTRY, OPTIONS='-nolist';
-c005 = formonly.ubic_ant, NOENTRY, OPTIONS='-nolist';
-c006 = formonly.ubic_act, UPSHIFT, OPTIONS='-nolist';
+a0   = FORMONLY.bodega,   NOENTRY, OPTIONS='-nolist';
+c003 = FORMONLY.n_bodega, NOENTRY, OPTIONS='-nolist';
+c004 = FORMONLY.stock TYPE DECIMAL (8,2),  NOENTRY, OPTIONS='-nolist',           	FORMAT = '###&.##';
+c005 = FORMONLY.ubic_ant, NOENTRY, OPTIONS='-nolist';
+c006 = FORMONLY.ubic_act, UPSHIFT, OPTIONS='-nolist';
 
-lbl1 = formonly.bt_bodega, NOENTRY, WIDGET='BUTTON', CONFIG='F20';
-lbl2 = formonly.bt_stock,  NOENTRY, WIDGET='BUTTON', CONFIG='F21';
-lbl3 = formonly.bt_ubic_ant, NOENTRY, WIDGET='BUTTON', CONFIG='F22';
-lbl4 = formonly.bt_ubic_act, NOENTRY, WIDGET='BUTTON', CONFIG='F23';
+lbl1 = FORMONLY.bt_bodega, NOENTRY, WIDGET='BUTTON', CONFIG='F20';
+lbl2 = FORMONLY.bt_stock,  NOENTRY, WIDGET='BUTTON', CONFIG='F21';
+lbl3 = FORMONLY.bt_ubic_ant, NOENTRY, WIDGET='BUTTON', CONFIG='F22';
+lbl4 = FORMONLY.bt_ubic_act, NOENTRY, WIDGET='BUTTON', CONFIG='F23';
 end
 
-instructions
-screen record ra_ubica[7] (bodega, n_bodega, stock, ubic_ant, ubic_act)
+INSTRUCTIONS
+SCREEN RECORD ra_ubica[7] (bodega, n_bodega, stock, ubic_ant, ubic_act)

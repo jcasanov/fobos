@@ -1,21 +1,36 @@
-DATABASE formonly
+DATABASE FORMONLY
 SCREEN
 {
 
-             AÃ±o: [c000]          Mes: [c0] [c100        ]  
-          
-             Tipo Retencion: [c001                  ]
+          Moneda: [c0] [c001            ]   Rango: [c002      ] - [c003      ]
 
+  Cód. Proveedor: [c004  ] [c005                                             ]
 
+  Tipo Proveedor: [c008  ] [c009                          ]
+    Tipo Cartera: [c010  ] [c011                          ]
 
-
-}
-TABLES
-formonly
+}   
 ATTRIBUTES
-c000 = formonly.anio TYPE SMALLINT NOT NULL, REVERSE, INCLUDE=(1900 TO 9999);
-c0   = formonly.mes  TYPE SMALLINT NOT NULL, REVERSE, INCLUDE=(1 TO 12);
-c100 = formonly.n_mes, NOENTRY;
-c001 = formonly.tipo_ret, REVERSE, WIDGET='RADIO', DEFAULT = 'T', 
-                          CONFIG='T Todos F Fuente I IVA';
+c0   = FORMONLY.moneda TYPE CHAR NOT NULL, UPSHIFT, AUTONEXT, REQUIRED, REVERSE,
+	WIDGET = "FIELD_BMP", CONFIG = "lista.bmp F2", REVERSE;
+c001 = FORMONLY.tit_mon, NOENTRY, REVERSE;
+c002 = FORMONLY.fecha_ini TYPE DATE NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Fecha Inicial en que se realizó la tesorería. (dd-mm-yyyy)';
+c003 = FORMONLY.fecha_fin TYPE DATE NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Fecha Final en que se realizó la tesorería. (dd-mm-yyyy)';
+
+c004 = FORMONLY.codprov, UPSHIFT, AUTONEXT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c005 = FORMONLY.nomprov, UPSHIFT, NOENTRY;
+
+c008 = FORMONLY.tipprov TYPE SMALLINT, WIDGET = 'FIELD_BMP', 
+       CONFIG = 'lista.bmp F2';
+c009 = FORMONLY.tit_tipprov, NOENTRY;
+c010 = FORMONLY.tipcar TYPE SMALLINT, WIDGET = 'FIELD_BMP', 
+       CONFIG = 'lista.bmp F2';
+c011 = FORMONLY.tit_tipcar, NOENTRY;
 END
+INSTRUCTIONS
+DELIMITERS '||'

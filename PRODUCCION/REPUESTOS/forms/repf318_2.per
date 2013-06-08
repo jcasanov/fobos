@@ -1,0 +1,48 @@
+DATABASE aceros
+SCREEN
+{
+
+          [c000                      ]
+
+Item: [c001  ]
+      [c002                                   ]
+                                 [c30] de [c31]
+ [c1|c010                          |c011       ]
+[c2|c020                          |c021       ]
+[c2|c020                          |c021       ]
+[c2|c020                          |c021       ]
+[c2|c020                          |c021       ]
+[c2|c020                          |c021       ]
+[c2|c020                          |c021       ]
+                        Total ==> [c040       ]
+
+}
+TABLES
+rept002
+rept010
+ATTRIBUTES
+c000 = FORMONLY.tit_principal, NOENTRY, REVERSE, UPSHIFT;
+c001 = rept010.r10_codigo, NOENTRY, REVERSE, UPSHIFT;
+c002 = rept010.r10_nombre, NOENTRY, REVERSE, UPSHIFT;
+
+c1   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c010 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c011 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+
+c2   = rept002.r02_codigo, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c020 = rept002.r02_nombre, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c021 = FORMONLY.stock_var TYPE DECIMAL NOT NULL, NOENTRY, UPSHIFT, REQUIRED,
+	FORMAT = '----,--&.##', OPTIONS = '-nolist';
+
+c040 = FORMONLY.tot_stock_var TYPE DECIMAL NOT NULL, NOENTRY, UPSHIFT,
+	REVERSE, REQUIRED, FORMAT = '----,--&.##';
+
+c30  = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c31  = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+END
+KEYS
+F5 = 'Facturas'
+F6 = 'Movimientos'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_item_pend[6] (r02_codigo, r02_nombre, stock_var)

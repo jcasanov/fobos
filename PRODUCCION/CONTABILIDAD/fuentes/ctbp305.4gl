@@ -1,14 +1,13 @@
-------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 -- Titulo           : ctbp305.4gl - Consulta Balance General
 -- Elaboracion      : 23-nov-2001
 -- Autor            : YEC
 -- Formato Ejecucion: fglrun ctbp305 base módulo compañía
 -- Ultima Correccion: 
 -- Motivo Correccion: 
-------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_demonios	VARCHAR(12)
 DEFINE vm_max_rows	SMALLINT
 DEFINE vm_num_act	SMALLINT
 DEFINE vm_num_pas	SMALLINT
@@ -25,47 +24,49 @@ DEFINE tit_pasivo	VARCHAR(50)
 DEFINE val_pasivo	DECIMAL(14,2)
 DEFINE signo_pasivo	CHAR(2)
 DEFINE rg_cont		RECORD LIKE ctbt000.*
-DEFINE rm_par   RECORD 
-		ano		SMALLINT,
-		mes		SMALLINT,
-		tit_mes		VARCHAR(10),
-		moneda		LIKE gent013.g13_moneda,
-		tit_mon		LIKE gent013.g13_nombre,
-		b10_nivel	LIKE ctbt010.b10_nivel
-	END RECORD
-DEFINE rm_act   ARRAY[2000] OF RECORD 
-		b10_cuenta	LIKE ctbt010.b10_cuenta,
-		b10_descripcion	LIKE ctbt010.b10_descripcion,
-		saldo_act	DECIMAL(14,2),
-		signo_act	CHAR(2)
-	END RECORD
-DEFINE rm_pas   ARRAY[2000] OF RECORD 
-		b10_cuenta	LIKE ctbt010.b10_cuenta,
-		b10_descripcion	LIKE ctbt010.b10_descripcion,
-		saldo_pas	DECIMAL(14,2),
-		signo_pas	CHAR(2)
-	END RECORD
+DEFINE rm_par		RECORD 
+				ano		SMALLINT,
+				mes		SMALLINT,
+				tit_mes		VARCHAR(10),
+				moneda		LIKE gent013.g13_moneda,
+				tit_mon		LIKE gent013.g13_nombre,
+				b10_nivel	LIKE ctbt010.b10_nivel
+			END RECORD
+DEFINE rm_act		ARRAY[2000] OF RECORD 
+				b10_cuenta	LIKE ctbt010.b10_cuenta,
+				b10_descripcion	LIKE ctbt010.b10_descripcion,
+				saldo_act	DECIMAL(14,2),
+				signo_act	CHAR(2)
+			END RECORD
+DEFINE rm_pas		ARRAY[2000] OF RECORD 
+				b10_cuenta	LIKE ctbt010.b10_cuenta,
+				b10_descripcion	LIKE ctbt010.b10_descripcion,
+				saldo_pas	DECIMAL(14,2),
+				signo_pas	CHAR(2)
+			END RECORD
+
+
 
 MAIN
 
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
-CALL fgl_init4js()
+CALL startlog('../logs/ctbp305.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN    -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
 	EXIT PROGRAM
 END IF
-LET vg_base     = arg_val(1)
-LET vg_modulo   = arg_val(2)
-LET vg_codcia   = arg_val(3)
+LET vg_base    = arg_val(1)
+LET vg_modulo  = arg_val(2)
+LET vg_codcia  = arg_val(3)
 LET vg_proceso = 'ctbp305'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL control_master()
 
@@ -132,7 +133,7 @@ LET rm_par.tit_mes = fl_justifica_titulo('I', rm_par.tit_mes, 10)
 LET int_flag = 0
 INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 	ON KEY(F2)
-		IF infield(moneda) THEN
+		IF INFIELD(moneda) THEN
                        	CALL fl_ayuda_monedas() RETURNING mon_aux, tit_aux, i
                        	IF mon_aux IS NOT NULL THEN
 				LET rm_par.moneda  = mon_aux
@@ -140,7 +141,7 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
                                	DISPLAY BY NAME rm_par.moneda, rm_par.tit_mon
                        	END IF
                 END IF
-		IF infield(b10_nivel) THEN
+		IF INFIELD(b10_nivel) THEN
                        	CALL fl_ayuda_nivel_cuentas() 
 				RETURNING nivel, tit_aux, i, j
                        	IF nivel IS NOT NULL THEN
@@ -191,7 +192,10 @@ DEFINE r_ctas		RECORD LIKE ctbt010.*
 DEFINE i		SMALLINT
 DEFINE suma		CHAR(3)
 DEFINE saldo		DECIMAL(14,2)
+DEFINE val1, val2	DECIMAL(14,2)
 DEFINE fecha		DATE
+DEFINE fec_ini, fec_fin	DATE
+DEFINE flag		CHAR(1)
 
 LET fecha = MDY(rm_par.mes, 1, rm_par.ano) + 1 UNITS MONTH - 1 UNITS DAY
 DECLARE q_ctas CURSOR FOR SELECT * FROM ctbt010
@@ -206,7 +210,7 @@ LET signo_activo = NULL
 LET tit_pasivo   = NULL
 LET val_pasivo   = 0
 LET signo_pasivo = NULL
-fOREACH q_ctas INTO r_ctas.*
+FOREACH q_ctas INTO r_ctas.*
 	IF r_ctas.b10_cuenta[1,1] = '1' THEN
 		IF r_ctas.b10_nivel = 1 THEN
 			LET tit_activo = r_ctas.b10_descripcion
@@ -234,12 +238,44 @@ fOREACH q_ctas INTO r_ctas.*
 			LET tit_pasivo = tit_pasivo CLIPPED, suma,
 					 r_ctas.b10_descripcion CLIPPED
 			LET tit_pasivo = fl_justifica_titulo('I', tit_pasivo,50)
-			LET saldo = fl_obtiene_saldo_contable(vg_codcia, r_ctas.b10_cuenta, rm_par.moneda, fecha, 'A')
+			--IF r_ctas.b10_cuenta[1, 1] <> '3' THEN
+				LET saldo = fl_obtiene_saldo_contable(vg_codcia, r_ctas.b10_cuenta, rm_par.moneda, fecha, 'A')
+			{--
+			ELSE
+				LET fec_ini = MDY(MONTH(fecha), 1, YEAR(fecha))
+				LET fec_fin = fecha
+				LET flag    = 'S'
+				IF r_ctas.b10_nivel = vm_max_nivel THEN
+					LET fec_ini = fecha
+					LET fec_fin = TODAY
+					LET flag    = 'A'
+				END IF
+				CALL fl_obtener_saldo_cuentas_patrimonio(vg_codcia, r_ctas.b10_cuenta, rm_par.moneda, fec_ini, fec_fin, flag)
+					RETURNING val1, val2
+				LET saldo = val1 + val2
+			END IF
+			--}
 			LET val_pasivo = val_pasivo + saldo
 		END IF
 		LET rm_pas[vm_num_pas].b10_cuenta      = r_ctas.b10_cuenta
 		LET rm_pas[vm_num_pas].b10_descripcion = r_ctas.b10_descripcion
-		LET rm_pas[vm_num_pas].saldo_pas       = fl_obtiene_saldo_contable(vg_codcia, r_ctas.b10_cuenta, rm_par.moneda, fecha, 'A')
+		--IF r_ctas.b10_cuenta[1, 1] <> '3' THEN
+			LET rm_pas[vm_num_pas].saldo_pas = fl_obtiene_saldo_contable(vg_codcia, r_ctas.b10_cuenta, rm_par.moneda, fecha, 'A')
+		{--
+		ELSE
+			LET fec_ini = MDY(MONTH(fecha), 1, YEAR(fecha))
+			LET fec_fin = fecha
+			LET flag    = 'S'
+			IF r_ctas.b10_nivel = vm_max_nivel THEN
+				LET fec_ini = fecha
+				LET fec_fin = TODAY
+				LET flag    = 'A'
+			END IF
+			CALL fl_obtener_saldo_cuentas_patrimonio(vg_codcia, r_ctas.b10_cuenta, rm_par.moneda, fec_ini, fec_fin, flag)
+				RETURNING val1, val2
+			LET rm_pas[vm_num_pas].saldo_pas = val1 + val2
+		END IF
+		--}
 		LET rm_pas[vm_num_pas].signo_pas       = 
 			    obtiene_signo_contable(rm_pas[vm_num_pas].saldo_pas)
 		IF vm_num_pas > vm_max_rows THEN
@@ -357,38 +393,5 @@ IF valor > 0 THEN
 	RETURN 'Db'
 END IF
 RETURN '  '
-
-END FUNCTION
-
-
-
-FUNCTION validar_parametros()
-
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
 
 END FUNCTION

@@ -1,0 +1,53 @@
+DATABASE FORMONLY
+SCREEN
+{
+                               DETALLE CARGA ITEM
+                               -----------------
+
+        Item: [c000  |c001                                                  ]
+ Composición: [c002  ]
+                                                           [c010 ] de [c011 ]
+ [c020      |c021   |c022                   |c023      |c024         |c025  ]
+[c030      |c031   |c032                   |c033      |c034         |c035  ]
+[c030      |c031   |c032                   |c033      |c034         |c035  ]
+[c030      |c031   |c032                   |c033      |c034         |c035  ]
+[c030      |c031   |c032                   |c033      |c034         |c035  ]
+[c030      |c031   |c032                   |c033      |c034         |c035  ]
+[c030      |c031   |c032                   |c033      |c034         |c035  ]
+[c030      |c031   |c032                   |c033      |c034         |c035  ]
+[c030      |c031   |c032                   |c033      |c034         |c035  ]
+                                  Totales: [c040      |c041         ]
+}
+ATTRIBUTES
+c000 = FORMONLY.item, NOENTRY, UPSHIFT, REVERSE;
+c001 = FORMONLY.desc_item, NOENTRY, UPSHIFT, REVERSE;
+c002 = FORMONLY.composicion, NOENTRY, UPSHIFT, REVERSE;
+
+c010 = FORMONLY.num_row, NOENTRY, UPSHIFT;
+c011 = FORMONLY.max_row, NOENTRY, UPSHIFT;
+
+c020 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15'; 
+c021 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16'; 
+c022 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17'; 
+c023 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18'; 
+c024 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19'; 
+c025 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20'; 
+
+c030 = FORMONLY.fecha, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+c031 = FORMONLY.carga, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c032 = FORMONLY.referencia, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c033 = FORMONLY.unid_carga, NOENTRY, UPSHIFT, FORMAT = '---,--&.##',
+	COLOR = RED WHERE c033 < 0, OPTIONS = '-nolist';
+c034 = FORMONLY.costo, NOENTRY, UPSHIFT, FORMAT = '--,---,--&.##',
+	COLOR = RED WHERE c034 < 0, OPTIONS = '-nolist';
+c035 = FORMONLY.marca, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+
+c040 = FORMONLY.total_carga, NOENTRY, UPSHIFT, FORMAT = '###,##&.##', REVERSE;
+c041 = FORMONLY.total_costo, NOENTRY, UPSHIFT, FORMAT = '##,###,##&.##',REVERSE;
+END
+KEYS
+F5  = 'Carga'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_det_carg[8] (fecha, carga, referencia, unid_carga, costo, marca)

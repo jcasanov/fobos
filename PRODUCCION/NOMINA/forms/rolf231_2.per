@@ -1,0 +1,34 @@
+DATABASE aceros
+SCREEN
+{
+
+             PARAMETROS PARA GENERAR DIVIDENDOS
+             ----------------------------------
+
+  Código Proceso: [c0] [c001                          ]
+
+         Período: [c002      ]      -      [c003      ]
+
+  No. Dividendos: [c004]       Frecuencia: [c005          ]
+
+
+}
+TABLES
+rolt003
+rolt065
+ATTRIBUTES
+c0   = FORMONLY.cod_liqrol TYPE CHAR NOT NULL, REQUIRED, AUTONEXT,
+	UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Código proceso en que quiere comenzar pago del préstamo.';
+c001 = rolt003.n03_nombre, NOENTRY, UPSHIFT, REVERSE;
+c002 = rolt065.n65_fecha_ini, AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Dígite la fecha inicial en formato: dd-mm-aaaa';
+c003 = rolt065.n65_fecha_fin, AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Dígite la fecha final en formato: dd-mm-aaaa';
+c004 = FORMONLY.num_pagos TYPE SMALLINT NOT NULL, REQUIRED, AUTONEXT,
+	UPSHIFT, REVERSE, INCLUDE = (1 TO 100);
+c005 = formonly.frecuencia TYPE CHAR NOT NULL, REQUIRED, UPSHIFT, REVERSE,
+	INCLUDE = ('Q', 'M'), DEFAULT = 'Q', WIDGET = 'RADIO',
+	CONFIG = 'Q Quincenal M Mensual';
+END

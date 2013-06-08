@@ -1,0 +1,64 @@
+DATABASE aceros 
+SCREEN 
+{
+      
+ Tipo Destino: [a0|c060          ]   	      Número Destino: [c002       ]   
+                                                    Estado: [x1|c100      ]
+		                       
+      Cliente: [c004       |c005                                          ]
+ Area Negocio: [c03|c052            ]
+       Moneda: [a1|c051            ]   Fec. Proceso: [c007                ]
+ -------------------------------------------------------------------------
+  FP   Mon Bco/Tarj   Nro. Che./Aut.     Nro. Cta./tarj.        Valor
+ -------------------------------------------------------------------------
+ [a5] [a6] [c024  ] [c025           |c026                |c023            ]
+ [a5] [a6] [c024  ] [c025           |c026                |c023            ]
+ [a5] [a6] [c024  ] [c025           |c026                |c023            ]
+ [a5] [a6] [c024  ] [c025           |c026                |c023            ]
+ [a5] [a6] [c024  ] [c025           |c026                |c023            ]
+ [a5] [a6] [c024  ] [c025           |c026                |c023            ]
+ ---------------------------------------------------------------------------
+ Ingresado Por: [c016      ]       Total Moneda Factura: [c050            ]
+}
+TABLES
+cajt010
+cajt011
+ATTRIBUTES
+a0 = cajt010.j10_tipo_destino,  REVERSE, UPSHIFT, DEFAULT = 'PG',
+                                INCLUDE = ('PG','PA','OI'), AUTONEXT,
+	COMMENTS='PG Pago Factura  PA Pago Anticipo  OI Otros Ingresos';
+c060 = FORMONLY.tit_tipo_destino,REVERSE,UPSHIFT,NOENTRY;
+c002 = cajt010.j10_num_destino, REVERSE;
+c03  = cajt010.j10_areaneg, NOENTRY;
+c004 = cajt010.j10_codcli, NOENTRY;
+c005 = cajt010.j10_nomcli, REVERSE, UPSHIFT, NOENTRY;
+a1 = cajt010.j10_moneda, NOENTRY, REVERSE, UPSHIFT, AUTONEXT;
+c007 = cajt010.j10_fecha_pro, NOENTRY;
+
+c016 = cajt010.j10_usuario, REVERSE, NOENTRY, UPSHIFT;
+
+a5 = cajt011.j11_codigo_pago, UPSHIFT, AUTONEXT, REVERSE,
+	COMMENTS='Ingrese la forma de pago.';
+a6 = cajt011.j11_moneda, UPSHIFT, AUTONEXT, REVERSE, 
+	COMMENTS='Ingrese la moneda a pagar';
+c023 = cajt011.j11_valor, FORMAT='#,###,###,##&.##'; 
+c024 = cajt011.j11_cod_bco_tarj, REVERSE, 
+	COMMENTS='Ingrese el código del banco o de la tarjeta de crédito';
+c025 = cajt011.j11_num_ch_aut, UPSHIFT,	
+	COMMENTS='Ingrese el número del cheque o de la autorización de la tarjeta';
+c026 = cajt011.j11_num_cta_tarj, UPSHIFT, 
+	COMMENTS='Ingrese el número de la cuenta o de la tarjeta';
+
+c050 = FORMONLY.total_mf TYPE DECIMAL(12,2),
+	 REVERSE, FORMAT='#,###,###,##&.##', NOENTRY; 
+c051 = FORMONLY.n_moneda, NOENTRY;
+c052 = FORMONLY.n_areaneg, NOENTRY;
+
+x1   = cajt010.j10_estado, REVERSE, NOENTRY;
+c100 = FORMONLY.n_estado,  REVERSE, NOENTRY;
+
+end
+
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD ra_j11[6] (j11_codigo_pago, j11_moneda, j11_cod_bco_tarj, j11_num_ch_aut, j11_num_cta_tarj, j11_valor)

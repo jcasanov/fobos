@@ -8,8 +8,7 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_demonios	VARCHAR(12)
-DEFINE vm_nuevoprog     VARCHAR(400)
+DEFINE vm_nuevoprog     CHAR(400)
 DEFINE rm_rep		RECORD LIKE rept016.*
 DEFINE rm_rep2		RECORD LIKE rept017.*
 DEFINE rm_rep3		RECORD LIKE rept010.*
@@ -23,21 +22,25 @@ DEFINE vm_columna_2	SMALLINT
 DEFINE rm_repd		ARRAY [1000] OF RECORD
 				r17_item	LIKE rept017.r17_item,
 				tit_descripcion	LIKE rept010.r10_nombre,
-				tit_cantidad	SMALLINT,
+				tit_cantidad	DECIMAL (8,2),
 				r17_pedido	LIKE rept017.r17_pedido,
 				r16_fec_llegada	LIKE rept016.r16_fec_llegada
 			END RECORD
+DEFINE vm_programa	CHAR(1)
+
+
 
 MAIN
 
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
-CALL fgl_init4js()
+CALL startlog('../logs/repp302.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 AND num_args() <> 5 THEN  -- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
+	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.','stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
 LET vg_base     = arg_val(1)
@@ -47,8 +50,8 @@ LET vg_codloc   = arg_val(4)
 LET vg_proceso = 'repp302'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -58,16 +61,32 @@ END MAIN
 
 FUNCTION funcion_master()
 DEFINE i,j,l,col	SMALLINT
-DEFINE query		VARCHAR(500)
+DEFINE query		CHAR(500)
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
 CALL fl_nivel_isolation()
 LET vm_max_elm = 1000
-OPEN WINDOW w_rep AT 3,2 WITH 22 ROWS, 80 COLUMNS
-    ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE FIRST,BORDER,
-	      MESSAGE LINE LAST - 2)
-OPTIONS INPUT WRAP,
-	ACCEPT KEY	F12
-OPEN FORM f_rep FROM "../forms/repf302_1"
+LET lin_menu = 0
+LET row_ini  = 3
+LET num_rows = 22
+LET num_cols = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW w_rep AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
+	ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE lin_menu,
+		  MESSAGE LINE LAST - 1, BORDER) 
+IF vg_gui = 1 THEN
+	OPEN FORM f_rep FROM "../forms/repf302_1"
+ELSE
+	OPEN FORM f_rep FROM "../forms/repf302_1c"
+END IF
 FOR i = 1 TO vm_max_elm
 	INITIALIZE rm_repd[i].* TO NULL
 END FOR
@@ -116,11 +135,11 @@ LET vm_columna_2 = 2
 LET col          = 1
 WHILE TRUE
 	DISPLAY FORM f_rep
-	DISPLAY 'Item'        TO tit_col1
-	DISPLAY 'Descripción' TO tit_col2
-	DISPLAY 'Cant.'       TO tit_col3
-	DISPLAY 'Pedidos'     TO tit_col4
-	DISPLAY 'Fec. Lle.'   TO tit_col5
+	--#DISPLAY 'Item'        TO tit_col1
+	--#DISPLAY 'Descripción' TO tit_col2
+	--#DISPLAY 'Cant.'       TO tit_col3
+	--#DISPLAY 'Pedidos'     TO tit_col4
+	--#DISPLAY 'Fec. Lle.'   TO tit_col5
 	LET query = 'SELECT * FROM tmp_detalle_rep ',
 			" ORDER BY ", vm_columna_1, ' ', rm_orden[vm_columna_1],
 			        ', ', vm_columna_2, ' ', rm_orden[vm_columna_2]
@@ -141,17 +160,23 @@ WHILE TRUE
 	CALL set_count(i)
 	LET int_flag = 0
 	DISPLAY ARRAY rm_repd TO rm_repd.*
-		BEFORE ROW
-			LET j = arr_curr()
-			LET l = scr_line()
-			CALL muestra_contadores(j,i)
-		BEFORE DISPLAY
-			CALL dialog.keysetlabel('ACCEPT','')
-		AFTER DISPLAY 
-			CONTINUE DISPLAY
+		--#BEFORE ROW
+			--#LET j = arr_curr()
+			--#LET l = scr_line()
+			--#CALL muestra_contadores(j,i)
+		--#BEFORE DISPLAY
+			--#CALL dialog.keysetlabel('ACCEPT','')
+			--#CALL dialog.keysetlabel("F1","")
+			--#CALL dialog.keysetlabel("CONTROL-W","")
+		--#AFTER DISPLAY 
+			--#CONTINUE DISPLAY
 		ON KEY(INTERRUPT)
 			EXIT DISPLAY
+        	ON KEY(F1,CONTROL-W)
+			CALL control_visor_teclas_caracter_1() 
 		ON KEY(F5)
+			LET j = arr_curr()
+			LET l = scr_line()
 			CALL ver_pedido(j)
 			LET int_flag = 0
 		ON KEY(F15)
@@ -192,53 +217,103 @@ END FUNCTION
 FUNCTION muestra_contadores(cor,num)
 DEFINE cor,num	         SMALLINT
                                                                                 
-DISPLAY "" AT 21,1
-DISPLAY cor, " de ", num AT 21, 4
-                                                                                
+IF vg_gui = 1 THEN
+	DISPLAY "" AT 21,1
+	DISPLAY cor, " de ", num AT 21, 4
+END IF
+
+END FUNCTION
+
+
+
+FUNCTION leer_nota_ped()
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
+
+LET lin_menu = 0
+LET row_ini  = 6
+LET num_rows = 6
+LET num_cols = 22
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW w_repp AT row_ini, 30 WITH num_rows ROWS, num_cols COLUMNS
+	ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE lin_menu,
+		  MESSAGE LINE LAST, BORDER) 
+IF vg_gui = 1 THEN
+	OPEN FORM f_repf302_2 FROM '../forms/repf302_2'
+ELSE
+	OPEN FORM f_repf302_2 FROM '../forms/repf302_2c'
+END IF
+DISPLAY FORM f_repf302_2
+LET vm_programa = 'N'
+LET int_flag    = 0
+INPUT BY NAME vm_programa
+	WITHOUT DEFAULTS
+	ON KEY(INTERRUPT)
+		LET int_flag = 1
+		EXIT INPUT
+END INPUT
+CLOSE WINDOW w_repp
+RETURN
+
 END FUNCTION
 
 
 
 FUNCTION ver_pedido(i)
 DEFINE i		SMALLINT
+DEFINE run_prog		CHAR(10)
+DEFINE prog		CHAR(10)
+DEFINE r_r81		RECORD LIKE rept081.*
+DEFINE pedido		LIKE rept016.r16_pedido
 
+LET prog        = ' repp204 '
+LET pedido      = rm_repd[i].r17_pedido
+LET vm_programa = 'S'
+CALL fl_lee_nota_pedido_rep(vg_codcia, vg_codloc, rm_repd[i].r17_pedido)
+	RETURNING r_r81.*
+IF r_r81.r81_pedido IS NOT NULL THEN
+	IF vg_gui = 1 THEN
+		CALL leer_nota_ped()
+		IF int_flag THEN
+			RETURN
+		END IF
+		IF vm_programa = 'N' THEN
+			LET prog   = ' repp233 '
+			LET pedido = r_r81.r81_pedido
+		END IF
+	END IF
+END IF
+LET run_prog = '; fglrun '
+IF vg_gui = 0 THEN
+	LET run_prog = '; fglgo '
+END IF
 LET vm_nuevoprog = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS',
-	vg_separador, 'fuentes', vg_separador, '; fglrun repp204 ', vg_base,
+	vg_separador, 'fuentes', vg_separador, run_prog, prog, vg_base,
 	' ', vg_modulo, ' ', vg_codcia,' ', vg_codloc, ' ',
-	'"', rm_repd[i].r17_pedido, '"'
+	'"', pedido, '"'
 RUN vm_nuevoprog
 
 END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION control_visor_teclas_caracter_1() 
+DEFINE a, fila		INTEGER
 
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
+CALL fl_visor_teclas_caracter() RETURNING fila
+LET a = fila + 2
+DISPLAY 'Teclas exclusivas de este proceso:' AT a,2 ATTRIBUTE(REVERSE)	
+LET a = a + 1
+DISPLAY '<F5>      Ver Pedido'               AT a,2
+DISPLAY  'F5' AT a,3 ATTRIBUTE(REVERSE)
+LET a = fgl_getkey()
+CLOSE WINDOW w_tf
 
 END FUNCTION

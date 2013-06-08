@@ -1,0 +1,29 @@
+DATABASE aceros
+SCREEN 
+{
+
+  -------------------------------------------------------------
+     Pedido           Moneda         Proveedor       Tipo         
+  -------------------------------------------------------------
+  [c002      ] [a0|c006           ][c004       ][b|c005       ] 
+  [c002      ] [a0|c006           ][c004       ][b|c005       ] 
+  [c002      ] [a0|c006           ][c004       ][b|c005       ] 
+  [c002      ] [a0|c006           ][c004       ][b|c005       ] 
+  [c002      ] [a0|c006           ][c004       ][b|c005       ] 
+  [c002      ] [a0|c006           ][c004       ][b|c005       ] 
+  -------------------------------------------------------------
+}
+TABLES
+rept016
+ATTRIBUTES
+c002 = rept016.r16_pedido, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+b    = rept016.r16_tipo, NOENTRY;
+c004 = rept016.r16_proveedor, NOENTRY;
+a0 = rept016.r16_moneda, NOENTRY;
+c005 = FORMONLY.n_tipo, NOENTRY;
+c006 = FORMONLY.n_moneda, NOENTRY;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD ra_pedido[6] (r16_pedido, r16_moneda, n_moneda, r16_proveedor, r16_tipo, n_tipo)

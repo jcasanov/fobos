@@ -1,0 +1,29 @@
+DATABASE FORMONLY
+SCREEN 
+{
+
+[lbl1      ]: [c001           |c010                              ] 
+
+  ----------------------------------------------------------------
+                 Sustituto - Sustituidos                  Fecha     
+  ----------------------------------------------------------------
+  [c002           |c020                               |c003      ]
+  [c002           |c020                               |c003      ]
+  [c002           |c020                               |c003      ]
+  [c002           |c020                               |c003      ]
+  [c002           |c020                               |c003      ]
+  [c002           |c020                               |c003      ]
+}
+ATTRIBUTES
+lbl1 = FORMONLY.lbl_item, NOENTRY;
+
+c001 = FORMONLY.item1,   REVERSE, NOENTRY;
+c010 = FORMONLY.n_item1,          NOENTRY;
+
+c002 = FORMONLY.item2,   NOENTRY;
+c020 = FORMONLY.n_item2, NOENTRY;
+c003 = FORMONLY.fecha,   NOENTRY;
+end
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD ra_items[6] (item2, n_item2, fecha)

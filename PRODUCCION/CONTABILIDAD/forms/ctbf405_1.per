@@ -1,31 +1,40 @@
-
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
 
-  Cuenta Inicial:[c0          ][c1                                      ]
-    Cuenta Final:[c2          ][c3                                      ]
+   Cuenta Inicial: [c0          ] [c1                                      ]
+     Cuenta Final: [c2          ] [c3                                      ]
 
-   Fecha Inicial:[c4        ]     	         Fecha Final:[c5        ]
+    Fecha Inicial: [c4        ]                    Fecha Final: [c5        ]
 
-          Moneda:[c6][c7                        ]
+           Moneda: [c6] [c7                        ]
+
+ Tipo Comprobante: [c8] [c9                        ]
+
+    Subtipo Comp.: [c10] [c11                                ]
 
 }
---TABLES
+TABLES
+ctbt003
+ctbt004
 ATTRIBUTES
-
-c0  = formonly.vm_cta_inicial TYPE VARCHAR, REVERSE, UPSHIFT,
+c0  = FORMONLY.vm_cta_inicial TYPE VARCHAR, REVERSE, UPSHIFT, AUTONEXT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c1  = formonly.nom_cta_ini, NOENTRY;
-c2  = formonly.vm_cta_final TYPE VARCHAR, REVERSE, UPSHIFT,
+c1  = FORMONLY.nom_cta_ini, NOENTRY, REVERSE;
+c2  = FORMONLY.vm_cta_final TYPE VARCHAR, REVERSE, UPSHIFT, AUTONEXT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c3  = formonly.nom_cta_fin, NOENTRY;
-c4  = formonly.vm_fecha_ini TYPE DATE, REVERSE, FORMAT = 'dd-mm-yyyy',
-	COMMENT = 'Digite la fecha en formato: dd-mm-aaaa.';
-c5  = formonly.vm_fecha_fin TYPE DATE, REVERSE, FORMAT = 'dd-mm-yyyy',
-	COMMENT = 'Digite la fecha en formato: dd-mm-aaaa.';
-c6  = formonly.vm_moneda TYPE VARCHAR, REVERSE, UPSHIFT,
+c3  = FORMONLY.nom_cta_fin, NOENTRY, REVERSE;
+c4  = FORMONLY.vm_fecha_ini TYPE DATE, REVERSE, FORMAT = 'dd-mm-yyyy', AUTONEXT,
+	COMMENT = 'Digite la Fecha Inicial en formato: dd-mm-aaaa.';
+c5  = FORMONLY.vm_fecha_fin TYPE DATE, REVERSE, FORMAT = 'dd-mm-yyyy', AUTONEXT,
+	COMMENT = 'Digite la Fecha Final en formato: dd-mm-aaaa.';
+c6  = FORMONLY.vm_moneda TYPE VARCHAR, REVERSE, UPSHIFT, AUTONEXT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c7  = formonly.nom_moneda, NOENTRY;
-
+c7  = FORMONLY.nom_moneda, NOENTRY, REVERSE;
+c8  = FORMONLY.vm_tipo_comp TYPE VARCHAR, UPSHIFT, AUTONEXT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c9  = ctbt003.b03_nombre, NOENTRY, UPSHIFT;
+c10 = FORMONLY.vm_subtipo TYPE VARCHAR, UPSHIFT, AUTONEXT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c11 = ctbt004.b04_nombre, NOENTRY, UPSHIFT;
 END

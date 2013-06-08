@@ -1,5 +1,5 @@
-database diteca
-screen
+DATABASE aceros
+SCREEN
 {
 
 
@@ -16,10 +16,10 @@ Fecha de Ingreso: [f002               ]
 }
 
 end
-tables
+TABLES
 gent017
-attributes
-a0   = formonly.g17_codrubro TYPE INTEGER NOT NULL, REVERSE,
+ATTRIBUTES
+a0   = FORMONLY.g17_codrubro TYPE INTEGER NOT NULL, REVERSE,
 	WIDGET = 'FIELD_BMP', CONFIG  = 'lista.bmp F2';
 f000 = gent017.g17_nombre, REVERSE, UPSHIFT;
 a    = gent017.g17_tipo_rubro, REVERSE,AUTONEXT, DEFAULT = 'N', 

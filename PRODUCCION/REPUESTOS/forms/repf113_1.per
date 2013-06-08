@@ -1,72 +1,19 @@
-DATABASE formonly
+DATABASE aceros
 SCREEN
 {
-      Marca: [f001 ] [f101            ]  Tipo: [f004 ] [f104               ]
-  Fam. Vta.: [f002 ] [f102            ] Comp.: [f005 ] [f105               ] 
-    Maquina: [f003 ] [f103                         ] 
-   Solo con clasificacion: [a] A     [b] B     [c] C     [e] E  
-                            [f106                                          ]
-  [f010           |f011                         |f012          |f013          ]
- [f020           |f021                         |f022          |f023          ]
- [f020           |f021                         |f022          |f023          ]
- [f020           |f021                         |f022          |f023          ]
- [f020           |f021                         |f022          |f023          ]
- [f020           |f021                         |f022          |f023          ]
- [f020           |f021                         |f022          |f023          ]
- [f020           |f021                         |f022          |f023          ]
- [f020           |f021                         |f022          |f023          ]
- [f020           |f021                         |f022          |f023          ]
- [f020           |f021                         |f022          |f023          ]
- [f020           |f021                         |f022          |f023          ]
- [f020           |f021                         |f022          |f023          ]
-         Anterior        Actual	              Ult. Ingreso     Clasificacion
-PVP: [f024          |f025          ] Costo: [f028          ]        [z]  
-CPP: [f026          |f027          ] Fecha: [f029      ]
+
+
+                   Marca: [f00   ] [f001                               ]
+
+           Ingresado Por: [f002      ]
+        Fecha de Ingreso: [f003               ]
+
 }
+TABLES rept073
 ATTRIBUTES
-f001 = formonly.r10_linea, 		  WIDGET='FIELD_BMP', CONFIG='lista.bmp F2', UPSHIFT;
-f002 = formonly.r103_familia_vta, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2', UPSHIFT;
-f003 = formonly.r103_maquina,   WIDGET='FIELD_BMP', CONFIG='lista.bmp F2', UPSHIFT;
-f004 = formonly.r10_tipo,		  WIDGET='FIELD_BMP', CONFIG='lista.bmp F2', UPSHIFT;
-f005 = formonly.r103_componente,  WIDGET='FIELD_BMP', CONFIG='lista.bmp F2', UPSHIFT;
-
-f101 = formonly.desc_linea, 	 NOENTRY, UPSHIFT;
-f102 = formonly.desc_familia_vta,NOENTRY, UPSHIFT;
-f103 = formonly.desc_maquina,    NOENTRY, UPSHIFT;
-f104 = formonly.desc_tipo, 		 NOENTRY, UPSHIFT;
-f105 = formonly.desc_componente, NOENTRY, UPSHIFT;
-
-f010 = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-f011 = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-f012 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
-f013 = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
-f020 = formonly.r10_codigo, UPSHIFT, NOENTRY, options='-nolist';
-f021 = formonly.r10_nombre, UPSHIFT, NOENTRY, options='-nolist';
-f022 = formonly.valact  TYPE DECIMAL, FORMAT='###,###,##&.&&', NOENTRY, 
-						UPSHIFT, options='-nolist';
-f023 = formonly.valnue  TYPE DECIMAL, FORMAT='###,###,##&.&&', UPSHIFT, 
-						options='-nolist';
-
-f106 = formonly.num_reg, NOENTRY;
-
-a = formonly.clasif_a, WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
-b = formonly.clasif_b, WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
-c = formonly.clasif_c, WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
-e = formonly.clasif_e, WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
-
-f024 = formonly.precio_ant, REVERSE, NOENTRY, UPSHIFT, FORMAT='###,###,##&.&&';
-f025 = formonly.precio_act, REVERSE, NOENTRY, UPSHIFT, FORMAT='###,###,##&.&&';
-f026 = formonly.costo_ant, REVERSE, NOENTRY, UPSHIFT, FORMAT='###,###,##&.&&';
-f027 = formonly.costo_act, REVERSE, NOENTRY, UPSHIFT, FORMAT='###,###,##&.&&';
-f028 = formonly.ult_costo_compra, REVERSE, NOENTRY, UPSHIFT, 
-		FORMAT='###,###,##&.&&';
-f029 = formonly.ult_fecha_compra, REVERSE, NOENTRY, UPSHIFT, 
-		FORMAT='dd-mm-yyyy';
-
-z = formonly.clas_abc, REVERSE, NOENTRY, UPSHIFT; 
-
-INSTRUCTIONS
-SCREEN RECORD rm_item[12] (formonly.r10_codigo, formonly.r10_nombre, 
-			   			   formonly.valact, formonly.valnue)
-KEYS
-'F5' = 'Ver Item'
+f00  = rept073.r73_marca, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f001 = rept073.r73_desc_marca, AUTONEXT, UPSHIFT, REVERSE;
+f002 = rept073.r73_usuario, REVERSE, NOENTRY, UPSHIFT;
+f003 = rept073.r73_fecing, REVERSE, NOENTRY, UPSHIFT;
+end

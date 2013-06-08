@@ -1,0 +1,66 @@
+DATABASE aceros
+SCREEN 
+{
+
+             Año: [c000]            Mes: [c0] 
+          Moneda: [c1] [c001                ]
+
+ Area de Negocio: [c2] [c002                ]     Tipo Vcto.: [c|c060       ]
+   Zona de Cobro: [c3] [c003                ]                             
+    Tipo Cliente: [c4] [c004                ]                          
+    Tipo Cartera: [c5] [c005                ]
+        Vendedor: [c6] [c052                ]  Rango de Días: [c10] - [c010 ]
+       Localidad: [c7] [c053                ]
+   
+     Ordenar Por:
+           [c051                ]  [a]Ascendente  [d]Descendente
+           [c051                ]  [a]Ascendente  [d]Descendente
+           [c051                ]  [a]Ascendente  [d]Descendente
+
+}
+TABLES
+gent013
+rept001
+ATTRIBUTES
+c000 = FORMONLY.anho TYPE SMALLINT NOT NULL, REVERSE, INCLUDE=(1900 TO 9999);
+c0   = FORMONLY.mes  TYPE SMALLINT NOT NULL, REVERSE, INCLUDE=(1 TO 12);
+c1   = gent013.g13_moneda, REVERSE, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c2   = FORMONLY.areaneg, REVERSE, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c3   = FORMONLY.zona_cobro, REVERSE, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c4   = FORMONLY.tipocli, REVERSE, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c5   = FORMONLY.tipocartera, REVERSE, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c001 = gent013.g13_nombre, REVERSE, UPSHIFT, NOENTRY;
+c002 = FORMONLY.n_areaneg,     NOENTRY;
+c003 = FORMONLY.n_zona_cobro,  NOENTRY;
+c004 = FORMONLY.n_tipocli,     NOENTRY;
+c005 = FORMONLY.n_tipocartera, NOENTRY;
+
+c    = FORMONLY.tipo_vcto TYPE CHAR, DEFAULT='T', REVERSE, AUTONEXT, UPSHIFT,
+	INCLUDE = ('P', 'V', 'T'),
+	COMMENTS = '(P) Por Vencer  (V) Vencidos  (T) Todos';
+c060 = FORMONLY.tit_tipo_vcto,REVERSE,UPSHIFT,NOENTRY;	
+c10  = FORMONLY.dias_ini TYPE SMALLINT, INCLUDE=(NULL, 0 TO 999);
+c010 = FORMONLY.dias_fin TYPE INTEGER, INCLUDE=(NULL, 0 TO 99999);
+
+c7   = FORMONLY.localidad, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c053 = FORMONLY.tit_localidad, UPSHIFT, NOENTRY;
+	
+c051 = FORMONLY.col TYPE VARCHAR NOT NULL, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+a    = FORMONLY.chk_asc TYPE CHAR,  AUTONEXT, INCLUDE = ('S', 'N'), UPSHIFT, 
+	DEFAULT='S', COMMENTS='Ordena ascendentemente.';
+d    = FORMONLY.chk_desc TYPE CHAR, AUTONEXT, INCLUDE = ('S', 'N'), UPSHIFT, 
+	DEFAULT='N', COMMENTS='Ordena descendentemente.';
+c6   = FORMONLY.r01_codigo, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c052 = rept001.r01_nombres, NOENTRY, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_ord[3] (col, chk_asc, chk_desc)

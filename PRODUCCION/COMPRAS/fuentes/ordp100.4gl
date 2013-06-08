@@ -1,12 +1,14 @@
-{*
- * Titulo           : ordp100.4gl - Compañías Configuradas Ordenes de Compras
- * Elaboracion      : 23-ene-2009
- * Autor            : JCM
- * Formato Ejecucion: fglrun ordp100 base módulo commpañía
- *}
-
+------------------------------------------------------------------------------
+-- Titulo           : ordp100.4gl - Compañías Configuradas Ordenes de Compras
+-- Elaboracion      : 14-sep-2001
+-- Autor            : NPC
+-- Formato Ejecucion: fglrun ordp100 base módulo commpañía
+-- Ultima Correccion: 
+-- Motivo Correccion: 
+------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
+DEFINE vm_demonios	VARCHAR(12)
 DEFINE rm_cia		RECORD LIKE ordt000.*
 DEFINE vm_num_rows	SMALLINT
 DEFINE vm_row_current	SMALLINT
@@ -18,11 +20,12 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/ordp100.error')
-CALL fgl_init4js()
+CALL startlog('../logs/errores')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN          -- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
+	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto', 'stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
 LET vg_base     = arg_val(1)
@@ -31,8 +34,8 @@ LET vg_codcia   = arg_val(3)
 LET vg_proceso = 'ordp100'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL control_master()
 
@@ -41,15 +44,31 @@ END MAIN
 
 
 FUNCTION control_master()
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
 CALL fl_nivel_isolation()
 LET vm_max_rows	= 50
-OPEN WINDOW wf AT 3,2 WITH 17 ROWS, 80 COLUMNS
-    ATTRIBUTE(FORM LINE FIRST + 2, COMMENT LINE LAST, MENU LINE FIRST,BORDER,
-	      MESSAGE LINE LAST - 2)
-OPTIONS INPUT WRAP,
-	ACCEPT KEY	F12
-OPEN FORM f_ord FROM "../forms/ordf100_1"
+LET lin_menu = 0
+LET row_ini  = 3
+LET num_rows = 17
+LET num_cols = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW wf AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
+    ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE lin_menu,BORDER,
+	      MESSAGE LINE LAST - 1)
+IF vg_gui = 1 THEN
+	OPEN FORM f_ord FROM "../forms/ordf100_1"
+ELSE
+	OPEN FORM f_ord FROM "../forms/ordf100_1c"
+END IF
 DISPLAY FORM f_ord
 INITIALIZE rm_cia.* TO NULL
 LET vm_num_rows = 0
@@ -68,14 +87,8 @@ MENU 'OPCIONES'
 			CALL control_ingreso()
 		END IF
 		IF vm_num_rows = 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		   END IF
-			
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -88,13 +101,8 @@ MENU 'OPCIONES'
 	COMMAND KEY('C') 'Consultar' 'Consultar un registro. '
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
-			   SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Bloquear') THEN
-		      SHOW OPTION 'Bloquear/Activar'
-		   END IF
+			SHOW OPTION 'Modificar'
+			SHOW OPTION 'Bloquear/Activar'
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -103,13 +111,8 @@ MENU 'OPCIONES'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
-			IF fl_control_permiso_opcion('Modificar') THEN			
-		 	   SHOW OPTION 'Modificar'
-		    END IF 
-
-		   IF fl_control_permiso_opcion('Bloquear') THEN
-			  SHOW OPTION 'Bloquear/Activar'
-		   END IF
+			SHOW OPTION 'Modificar'
+			SHOW OPTION 'Bloquear/Activar'
 		END IF
 		IF vm_row_current <= 1 THEN
                         HIDE OPTION 'Retroceder'
@@ -149,11 +152,14 @@ FUNCTION control_ingreso()
 CALL fl_retorna_usuario()
 INITIALIZE rm_cia.* TO NULL
 LET rm_cia.c00_cuando_ret = 'P'
+IF vg_gui = 0 THEN
+	CALL muestra_cuandoret(rm_cia.c00_cuando_ret)
+END IF
 LET rm_cia.c00_estado     = 'A'
 LET rm_cia.c00_react_mes  = 'S'
 LET rm_cia.c00_valmin_mb  = 0
 LET rm_cia.c00_valmin_ma  = 0
-CLEAR tit_descripcion, tit_cta_recepcion
+CLEAR tit_descripcion
 CALL muestra_estado()
 CALL leer_datos('I')
 IF NOT int_flag THEN
@@ -225,26 +231,39 @@ END FUNCTION
 FUNCTION control_consulta()
 DEFINE cod_aux		LIKE ordt000.c00_compania
 DEFINE nom_aux		LIKE gent001.g01_razonsocial
-DEFINE query		VARCHAR(400)
-DEFINE expr_sql		VARCHAR(400)
+DEFINE query		CHAR(400)
+DEFINE expr_sql		CHAR(400)
 DEFINE num_reg		INTEGER
 
 LET int_flag = 0
 INITIALIZE cod_aux TO NULL
 CLEAR FORM
 CONSTRUCT BY NAME expr_sql ON c00_compania, c00_cuando_ret, 
- 	c00_valmin_mb, c00_valmin_ma, c00_dias_react, 
-	c00_react_mes
+ 	c00_valmin_mb, c00_valmin_ma, c00_dias_react, c00_react_mes
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
 	ON KEY(F2)
 		IF INFIELD(c00_compania) THEN
-			CALL fl_ayuda_companias_compras() RETURNING cod_aux, nom_aux
+			CALL fl_ayuda_companias_compras()
+				RETURNING cod_aux, nom_aux
 			LET int_flag = 0
 			IF cod_aux IS NOT NULL THEN
 				DISPLAY cod_aux TO c00_compania 
 				DISPLAY nom_aux TO tit_descripcion 
 			END IF 
+	END IF
+	AFTER FIELD c00_cuando_ret
+		LET rm_cia.c00_cuando_ret = get_fldbuf(c00_cuando_ret)
+		IF vg_gui = 0 THEN
+			IF rm_cia.c00_cuando_ret IS NOT NULL THEN
+				CALL muestra_cuandoret(rm_cia.c00_cuando_ret)
+			ELSE
+				CLEAR tit_cuando_ret
+			END IF
 		END IF
-		LET int_flag = 0
+	BEFORE CONSTRUCT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 END CONSTRUCT
 IF int_flag THEN
 	IF vm_row_current > 0 THEN
@@ -254,7 +273,9 @@ IF int_flag THEN
 	END IF
 	RETURN
 END IF
-LET query = 'SELECT *, ROWID FROM ordt000 WHERE ' || expr_sql || ' ORDER BY 1'
+LET query = 'SELECT *, ROWID FROM ordt000 ' ||
+		' WHERE ' || expr_sql CLIPPED ||
+		' ORDER BY 1'
 PREPARE cons FROM query	
 DECLARE q_cons CURSOR FOR cons
 LET vm_num_rows = 0
@@ -297,21 +318,23 @@ INPUT BY NAME rm_cia.c00_compania, rm_cia.c00_cuando_ret,
 	rm_cia.c00_dias_react, rm_cia.c00_react_mes
 	WITHOUT DEFAULTS
 	ON KEY(INTERRUPT)
-        IF field_touched(rm_cia.c00_compania, rm_cia.c00_cuando_ret,
-		rm_cia.c00_valmin_mb, rm_cia.c00_valmin_ma,
-		rm_cia.c00_dias_react, rm_cia.c00_react_mes)
-        THEN
-               	LET int_flag = 0
-		CALL fl_mensaje_abandonar_proceso()
-                	RETURNING resp
-              	IF resp = 'Yes' THEN
-			LET int_flag = 1
-                       	CLEAR FORM
-                       	RETURN
-                END IF
-	ELSE
-		RETURN
-	END IF
+	        IF field_touched(rm_cia.c00_compania, rm_cia.c00_cuando_ret,
+			rm_cia.c00_valmin_mb, rm_cia.c00_valmin_ma,
+			rm_cia.c00_dias_react, rm_cia.c00_react_mes)
+	        THEN
+        	       	LET int_flag = 0
+			CALL fl_mensaje_abandonar_proceso()
+	                	RETURNING resp
+        	      	IF resp = 'Yes' THEN
+				LET int_flag = 1
+                       		CLEAR FORM
+	                       	RETURN
+        	        END IF
+		ELSE
+			RETURN
+		END IF
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
 	ON KEY(F2)
 		IF INFIELD(c00_compania) THEN
 			CALL fl_ayuda_compania() RETURNING cod_aux
@@ -320,9 +343,13 @@ INPUT BY NAME rm_cia.c00_compania, rm_cia.c00_cuando_ret,
 			IF cod_aux IS NOT NULL THEN
 				LET rm_cia.c00_compania = cod_aux
 				DISPLAY cod_aux TO c00_compania 
-				DISPLAY rg_cia.g01_razonsocial TO tit_descripcion 
+				DISPLAY rg_cia.g01_razonsocial
+					TO tit_descripcion 
 			END IF 
 		END IF
+	BEFORE INPUT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 	BEFORE FIELD c00_compania
 		IF flag_mant = 'M' THEN 
 			NEXT FIELD NEXT
@@ -332,7 +359,8 @@ INPUT BY NAME rm_cia.c00_compania, rm_cia.c00_cuando_ret,
 			CALL fl_lee_compania(rm_cia.c00_compania)
 				RETURNING rg_cia.*
                         IF rg_cia.g01_compania IS NULL THEN
-                                CALL fgl_winmessage(vg_producto,'Compañía no existe','exclamation')
+                                --CALL fgl_winmessage(vg_producto,'Compañía no existe','exclamation')
+				CALL fl_mostrar_mensaje('Compañía no existe.','exclamation')
                                 NEXT FIELD c00_compania
                         END IF
 			DISPLAY rg_cia.g01_razonsocial TO tit_descripcion
@@ -343,7 +371,8 @@ INPUT BY NAME rm_cia.c00_compania, rm_cia.c00_cuando_ret,
 			CALL fl_lee_compania_orden_compra(rm_cia.c00_compania)
 				RETURNING r_ord.*
 			IF rm_cia.c00_compania = r_ord.c00_compania THEN
-				CALL fgl_winmessage(vg_producto,'Código de comapañía ya existe','exclamation')
+				--CALL fgl_winmessage(vg_producto,'Código de comapañía ya existe','exclamation')
+				CALL fl_mostrar_mensaje('Código de comapañía ya existe.','exclamation')
 				NEXT FIELD c00_compania
                         END IF
                 ELSE
@@ -361,13 +390,20 @@ INPUT BY NAME rm_cia.c00_compania, rm_cia.c00_cuando_ret,
 		IF rg_gen.g00_moneda_alt IS NULL THEN
 			NEXT FIELD NEXT
 		END IF
-
 	AFTER FIELD c00_valmin_ma
 		IF rm_cia.c00_valmin_ma IS NOT NULL THEN
 			CALL fl_retorna_precision_valor(rg_gen.g00_moneda_alt,
  							rm_cia.c00_valmin_ma)
 				RETURNING rm_cia.c00_valmin_ma
 			DISPLAY BY NAME rm_cia.c00_valmin_ma
+		END IF
+	AFTER FIELD c00_cuando_ret
+		IF vg_gui = 0 THEN
+			IF rm_cia.c00_cuando_ret IS NOT NULL THEN
+				CALL muestra_cuandoret(rm_cia.c00_cuando_ret)
+			ELSE
+				CLEAR tit_cuando_ret
+			END IF
 		END IF
 END INPUT
 
@@ -402,10 +438,15 @@ END FUNCTION
 FUNCTION muestra_contadores(row_current, num_rows)
 DEFINE row_current	SMALLINT
 DEFINE num_rows		SMALLINT
+DEFINE nrow                     SMALLINT
                                                                                 
-DISPLAY "" AT 1,1
-DISPLAY row_current, " de ", num_rows AT 1, 69
-                                                                                
+LET nrow = 17
+IF vg_gui = 1 THEN
+	LET nrow = 1
+END IF
+DISPLAY "" AT nrow, 1
+DISPLAY row_current, " de ", num_rows AT nrow, 67
+
 END FUNCTION
 
 
@@ -416,7 +457,8 @@ DEFINE num_registro	INTEGER
 IF vm_num_rows > 0 THEN
 	SELECT * INTO rm_cia.* FROM ordt000 WHERE ROWID=num_registro	
 	IF STATUS = NOTFOUND THEN
-		CALL fgl_winmessage (vg_producto,'No existe registro con índice: ' || vm_row_current,'exclamation')
+		--CALL fgl_winmessage(vg_producto,'No existe registro con índice: ' || vm_row_current,'exclamation')
+		CALL fl_mostrar_mensaje('No existe registro con índice: ' || vm_row_current,'exclamation')
 		RETURN
 	END IF
 	DISPLAY BY NAME rm_cia.c00_compania,
@@ -428,6 +470,9 @@ IF vm_num_rows > 0 THEN
 	CALL fl_lee_compania(rm_cia.c00_compania) RETURNING rg_cia.*
 	DISPLAY rg_cia.g01_razonsocial TO tit_descripcion
 	CALL muestra_estado()
+	IF vg_gui = 0 THEN
+		CALL muestra_cuandoret(rm_cia.c00_cuando_ret)
+	END IF
 ELSE
 	RETURN
 END IF
@@ -500,33 +545,30 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION llamar_visor_teclas()
+DEFINE a		CHAR(1)
 
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
+IF vg_gui = 0 THEN
+	CALL fl_visor_teclas_caracter() RETURNING int_flag 
+	LET a = fgl_getkey()
+	CLOSE WINDOW w_tf
+	LET int_flag = 0
 END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
+
+END FUNCTION
+
+
+
+FUNCTION muestra_cuandoret(cuandoret)
+DEFINE cuandoret	CHAR(1)
+
+CASE cuandoret
+	WHEN 'C'
+		DISPLAY 'COMPRA' TO tit_cuando_ret
+	WHEN 'P'
+		DISPLAY 'PAGO' TO tit_cuando_ret
+	OTHERWISE
+		CLEAR c00_cuando_ret, tit_cuando_ret
+END CASE
 
 END FUNCTION

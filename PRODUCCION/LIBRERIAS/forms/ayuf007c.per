@@ -1,0 +1,28 @@
+DATABASE aceros
+
+SCREEN
+{
+  CONFIGURACION DE COMPANIAS Y LOCALIDADES
+ ----------------------------------------------------------------
+  Compañía                         Localidad   
+ ----------------------------------------------------------------
+ [f001                            |f002                         ] 
+ [f001                            |f002                         ]
+ [f001                            |f002                         ]
+ [f001                            |f002                         ]
+ [f001                            |f002                         ]
+ [f001                            |f002                         ]
+ [f001                            |f002                         ]
+}
+
+TABLES
+gent001
+gent002
+
+ATTRIBUTES
+f001 = g01_razonsocial,REVERSE;
+f002 = g02_nombre,REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh[7](g01_razonsocial, g02_nombre)

@@ -1,0 +1,31 @@
+DATABASE aceros
+SCREEN
+{
+
+ RUBROS DEL CLUB
+
+ [c000    |c001                          |b]
+[c010    |c011                          |c]
+[c010    |c011                          |c]
+[c010    |c011                          |c]
+[c010    |c011                          |c]
+[c010    |c011                          |c]
+[c010    |c011                          |c]
+[c010    |c011                          |c]
+[c010    |c011                          |c]
+[c010    |c011                          |c]
+[c010    |c011                          |c]
+}
+TABLES
+rolt067
+ATTRIBUTES
+c000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b    = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+
+c010 = rolt067.n67_cod_rubro, AUTONEXT, UPSHIFT, REVERSE;
+c011 = rolt067.n67_nombre, AUTONEXT, UPSHIFT, REVERSE;
+c    = rolt067.n67_flag_ident, AUTONEXT, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+SCREEN RECORD rh_rubro_club[10] (n67_cod_rubro, n67_nombre, n67_flag_ident)

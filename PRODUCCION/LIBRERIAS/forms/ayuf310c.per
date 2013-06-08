@@ -1,0 +1,27 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+DETALLE DE ORDENES DE COMPRA CARGADOS A LA O.T.: [c001    ]
+
+ E.  O.C.     Fecha                  Descripción                Valor Total
+[c3|c004  |c005      |c006                                   |c008          ]
+[c3|c004  |c005      |c006                                   |c008          ]
+[c3|c004  |c005      |c006                                   |c008          ]
+[c3|c004  |c005      |c006                                   |c008          ]
+[c3|c004  |c005      |c006                                   |c008          ]
+[c3|c004  |c005      |c006                                   |c008          ]
+					              Total: [c014          ]
+}
+ATTRIBUTES
+c001 = FORMONLY.num_ot, REVERSE;
+c3   = FORMONLY.estado;
+c004 = FORMONLY.orden_compra;
+c005 = FORMONLY.fecha TYPE DATE, FORMAT = 'dd-mm-yyyy';
+c006 = FORMONLY.descripcion;
+c008 = FORMONLY.subtotal TYPE DECIMAL(12,2), FORMAT = '---,---,--&.##';
+c014 = FORMONLY.tot_neto TYPE DECIMAL(12,2), FORMAT = '---,---,--&.##', REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD ra_oc[6] (estado, orden_compra, fecha, descripcion, subtotal)

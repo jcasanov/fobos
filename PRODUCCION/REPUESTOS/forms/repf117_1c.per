@@ -1,0 +1,33 @@
+DATABASE aceros
+SCREEN
+{
+
+               Código: [c002 ]
+        Multiplicador: [c003       ]
+
+  Dscto. Max. Gerente: [c004       ]
+     Dscto. Max. Jefe: [c005       ]      Dscto. Máx. Vendedor: [c007       ]
+
+      Utilidad Mínima: [c008   ]
+  Descuento Promoción: [c009       ]
+   Utilidad Promoción: [c010   ]
+
+        Ingresado Por: [c011      ]   Fecha de Ingreso: [c012               ]
+}
+TABLES
+rept077
+ATTRIBUTES
+c002 = rept077.r77_codigo_util, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c003 = rept077.r77_multiplic, AUTONEXT, REVERSE, UPSHIFT;
+c004 = rept077.r77_dscmax_ger, AUTONEXT, REVERSE, UPSHIFT;
+c005 = rept077.r77_dscmax_jef, AUTONEXT, REVERSE, UPSHIFT;
+c007 = rept077.r77_dscmax_ven, AUTONEXT, REVERSE, UPSHIFT;
+c008 = rept077.r77_util_min, AUTONEXT, REVERSE, UPSHIFT;
+c009 = rept077.r77_desc_promo, AUTONEXT, UPSHIFT;
+c010 = rept077.r77_util_promo, AUTONEXT, UPSHIFT;
+c011 = rept077.r77_usuario, NOENTRY, REVERSE, UPSHIFT;
+c012 = rept077.r77_fecing, NOENTRY, REVERSE, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'

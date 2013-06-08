@@ -1,0 +1,53 @@
+DATABASE aceros
+SCREEN
+{
+
+             Bodega: [c0] [c001                          ]
+        Código Item: [c002           ] [c003                               ]
+                                       [c003                               ]
+             Estado: [c|c004      ]                   Stock Actual: [c012  ]
+
+ ----------------------------------------------------------------------------
+        Item              Descripción               Serie           Estado
+ ----------------------------------------------------------------------------
+ [c005           |c006                      |c007                |c008      ]
+ [c005           |c006                      |c007                |c008      ]
+ [c005           |c006                      |c007                |c008      ]
+ [c005           |c006                      |c007                |c008      ]
+ [c005           |c006                      |c007                |c008      ]
+ [c005           |c006                      |c007                |c008      ]
+ [c005           |c006                      |c007                |c008      ]
+
+ Ingresado Por: [c010      ]          Fecha de Ingreso: [c011               ]
+}
+TABLES
+rept002
+rept010
+rept076
+ATTRIBUTES
+c0   = rept076.r76_bodega, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c001 = rept002.r02_nombre, NOENTRY, REVERSE, UPSHIFT;
+c002 = rept076.r76_item, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c003 = rept010.r10_nombre, NOENTRY, UPSHIFT, REVERSE, WORDWRAP;
+c    = rept076.r76_estado, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = ('A', 'F', 'D', 'E', 'T'), DEFAULT = 'A',
+	COMMENTS = 'A Activo  F Facturado  D Despachado  E Eliminado  T Todos';
+c004 = FORMONLY.tit_estado, NOENTRY, UPSHIFT, REVERSE;
+
+c005 = FORMONLY.r76_item, NOENTRY, UPSHIFT, REVERSE;
+c006 = FORMONLY.r10_nombre, NOENTRY, UPSHIFT, REVERSE;
+c007 = rept076.r76_serie, AUTONEXT, UPSHIFT, REVERSE;
+c008 = FORMONLY.estado, NOENTRY, UPSHIFT, REVERSE;
+
+c010 = rept076.r76_usuario, REVERSE, NOENTRY, UPSHIFT;
+c011 = rept076.r76_fecing, REVERSE, NOENTRY, UPSHIFT;
+
+c012 = FORMONLY.r11_stock_act, NOENTRY, REVERSE, UPSHIFT;
+--c013 = FORMONLY.cont_ser_item, NOENTRY, REVERSE, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_ser[7] (FORMONLY.r76_item, FORMONLY.r10_nombre, r76_serie,
+			FORMONLY.estado)

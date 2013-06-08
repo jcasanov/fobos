@@ -1,0 +1,88 @@
+DATABASE aceros
+SCREEN
+{
+       Estado: [c][c000         ]   Período: [c002      ] - [c003      ]
+        Rubro: [c004] [c005                             ]
+      Proceso: [c006] [c007                             ]
+     Empleado: [c008] [c009                                            ]
+
+ Total Div.: [c052]   Div. Restantes: [c053]                [c050 ] de [c051 ]
+ [c010 |c11|c012|c013                  |c014      |c015        |c016        |e]
+[c020 |c21|c022|c023                  |c024      |c025        |c026        |d]
+[c020 |c21|c022|c023                  |c024      |c025        |c026        |d]
+[c020 |c21|c022|c023                  |c024      |c025        |c026        |d]
+[c020 |c21|c022|c023                  |c024      |c025        |c026        |d]
+[c020 |c21|c022|c023                  |c024      |c025        |c026        |d]
+[c020 |c21|c022|c023                  |c024      |c025        |c026        |d]
+[c020 |c21|c022|c023                  |c024      |c025        |c026        |d]
+[c020 |c21|c022|c023                  |c024      |c025        |c026        |d]
+[c020 |c21|c022|c023                  |c024      |c025        |c026        |d]
+[c020 |c21|c022|c023                  |c024      |c025        |c026        |d]
+[c020 |c21|c022|c023                  |c024      |c025        |c026        |d]
+[c020 |c21|c022|c023                  |c024      |c025        |c026        |d]
+                                        Totales: [c030        |c031        ]
+}
+TABLES
+rolt003
+rolt006
+rolt030
+rolt045
+rolt046
+ATTRIBUTES
+c    = rolt045.n45_estado, UPSHIFT, REVERSE, AUTONEXT,
+	INCLUDE = ('A', 'P', 'T', 'R', 'E', 'V', 'X'),
+	COMMENTS = '(A)Activo (P)Procesado (T)Transf. (R)Redist. (E)Elimi. (V) Vigentes (X)Todos.';
+c000 = FORMONLY.tit_estado, NOENTRY, UPSHIFT, REVERSE;
+c002 = rolt046.n46_fecha_ini, AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Dígite la fecha inicial en formato: dd-mm-aaaa';
+c003 = rolt046.n46_fecha_fin, AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Dígite la fecha final en formato: dd-mm-aaaa';
+c004 = FORMONLY.n45_cod_rubro, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c005 = rolt006.n06_nombre, NOENTRY, UPSHIFT;
+c006 = FORMONLY.n46_cod_liqrol, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c007 = rolt003.n03_nombre, NOENTRY, UPSHIFT;
+c008 = FORMONLY.n45_cod_trab, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c009 = FORMONLY.tit_nombres, NOENTRY, UPSHIFT;
+
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c11  = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c015 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c016 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+e    = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22';
+
+c020 = rolt045.n45_num_prest, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c21  = FORMONLY.cod_rubro, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c022 = rolt030.n30_cod_trab, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c023 = rolt030.n30_nombres, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c024 = FORMONLY.n45_fecha TYPE DATE, NOENTRY, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy', OPTIONS = '-nolist';
+c025 = rolt045.n45_val_prest, NOENTRY, UPSHIFT,
+	FORMAT = '-,---,--&.##', OPTIONS = '-nolist';
+c026 = rolt045.n45_descontado, NOENTRY, UPSHIFT,
+	FORMAT = '-,---,--&.##', OPTIONS = '-nolist';
+d    = FORMONLY.estado, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+
+c050 = FORMONLY.vm_cur_det, NOENTRY, UPSHIFT, REVERSE;
+c051 = FORMONLY.vm_num_det, NOENTRY, UPSHIFT, REVERSE;
+
+c030 = FORMONLY.total_valor TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '-,---,--&.##', OPTIONS = '-nolist';
+c031 = FORMONLY.total_descont TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '-,---,--&.##', OPTIONS = '-nolist';
+
+c052 = FORMONLY.tot_div, NOENTRY, UPSHIFT, COLOR = BLUE WHERE c052 > 0;
+c053 = FORMONLY.sal_div, NOENTRY, UPSHIFT, COLOR = BLUE WHERE c053 > 0;
+END
+KEYS
+F5 = 'Anticipo'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_detalle[12] (n45_num_prest, cod_rubro, n30_cod_trab,
+				n30_nombres, n45_fecha, n45_val_prest,
+				n45_descontado, estado)

@@ -1,0 +1,53 @@
+DATABASE aceros
+SCREEN
+{
+
+                  GENERACION DE CARTA BANCO Y ARCHIVO TEXTO
+                 -----------------------------------------
+
+         Banco Compañía: [c000]     [c001                          ]
+         No. Cta. Banco: [c002           ]
+
+         Código Proceso: [c0]       [c003                          ]
+
+           Rango Fechas: [c004      ]         -         [c005      ]
+
+                   Att.: [c006                                     ]
+                         [c007                                     ]
+
+            Atentamente,
+                         [c008                                     ]
+                         [c009                                     ]
+
+}
+TABLES
+gent008
+gent009
+rolt003
+rolt032
+ATTRIBUTES
+c000 = gent009.g09_banco, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = gent008.g08_nombre, NOENTRY, UPSHIFT, REVERSE;
+c002 = gent009.g09_numero_cta, REVERSE, UPSHIFT, AUTONEXT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c0   = rolt032.n32_cod_liqrol, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Liquidación debe estar CERRADA.';
+c003 = rolt003.n03_nombre, NOENTRY, UPSHIFT, REVERSE;
+c004 = rolt032.n32_fecha_ini, AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Dígite la fecha inicial en formato: dd-mm-aaaa';
+c005 = rolt032.n32_fecha_fin, AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Dígite la fecha final en formato: dd-mm-aaaa';
+c006 = FORMONLY.g09_atencion_rol TYPE VARCHAR NOT NULL,
+	REQUIRED, AUTONEXT, REVERSE,
+	COMMENTS = 'Persona a quien esta dirigida la carta.';
+c007 = FORMONLY.vm_cargo_dir TYPE VARCHAR NOT NULL, REQUIRED, AUTONEXT, REVERSE,
+	COMMENTS = 'Cargo de la persona a quien esta dirigida la carta.';
+c008 = FORMONLY.vm_atentamente1 TYPE VARCHAR NOT NULL,
+	REQUIRED, AUTONEXT, REVERSE,
+	COMMENTS = 'Persona que envía la carta.';
+c009 = FORMONLY.vm_atentamente2 TYPE VARCHAR NOT NULL,
+	REQUIRED, AUTONEXT, REVERSE,
+	COMMENTS = 'Cargo de la persona que envía la carta.';
+END

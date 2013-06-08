@@ -8,6 +8,7 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
+DEFINE vm_nuevoprog     VARCHAR(400)
 DEFINE rm_ctb2		RECORD LIKE ctbt012.*
 DEFINE rm_ctb3		RECORD LIKE ctbt013.*
 DEFINE vm_fecha_ini	DATE
@@ -18,11 +19,11 @@ DEFINE vm_scr_lin       SMALLINT
 DEFINE rm_orden 	ARRAY[10] OF CHAR(4)
 DEFINE vm_columna_1	SMALLINT
 DEFINE vm_columna_2	SMALLINT
-DEFINE vm_cuenta	ARRAY [50] OF RECORD
+DEFINE vm_cuenta	ARRAY[50] OF RECORD
 				cuenta		LIKE gent009.g09_aux_cont,
 				tit_cuenta	VARCHAR(70)
 			END RECORD
-DEFINE rm_det		ARRAY [50] OF RECORD
+DEFINE rm_det		ARRAY[50] OF RECORD
 				b10_descripcion LIKE gent008.g08_nombre,
 				tit_saldo_ini	DECIMAL(14,2),
 				tit_debito	DECIMAL(14,2),
@@ -37,21 +38,21 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/ctbp309.error')
-CALL fgl_init4js()
+CALL startlog('../logs/ctbp309.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN   -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto.', 'stop')
 	EXIT PROGRAM
 END IF
-LET vg_base     = arg_val(1)
-LET vg_modulo   = arg_val(2)
-LET vg_codcia   = arg_val(3)
+LET vg_base    = arg_val(1)
+LET vg_modulo  = arg_val(2)
+LET vg_codcia  = arg_val(3)
 LET vg_proceso = 'ctbp309'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -120,7 +121,7 @@ WHILE TRUE
 		EXIT WHILE
 	END IF
 	LET query = 'SELECT * FROM gent009 ',
-			'WHERE g09_compania = ', vg_codcia, ' AND g09_estado = "A"'
+			'WHERE g09_compania = ', vg_codcia
 	PREPARE deto FROM query
 	DECLARE q_deto CURSOR FOR deto
 	LET vm_num_det = 1
@@ -207,7 +208,7 @@ WHILE TRUE
 		LET int_flag = 0
 		DISPLAY ARRAY rm_det TO rm_det.*
 			BEFORE DISPLAY
-				CALL dialog.keysetlabel('ACCEPT','')
+				--#CALL dialog.keysetlabel('ACCEPT','')
 			BEFORE ROW
 				LET j = arr_curr()
 				LET l = scr_line()
@@ -381,14 +382,12 @@ END FUNCTION
 
 
 FUNCTION ver_movimientos(i)
-DEFINE vm_nuevoprog     VARCHAR(400)
 DEFINE i		SMALLINT
 
 LET vm_nuevoprog = 'cd ..', vg_separador, '..', vg_separador, 'CONTABILIDAD',
 	vg_separador, 'fuentes', vg_separador, '; fglrun ctbp302 ', vg_base,
 	' ', vg_modulo, ' ', vg_codcia, ' ', '"', vm_cuenta[i].cuenta, '"',
 	' ', vm_fecha_ini, ' ', vm_fecha_fin, ' ', '"', rm_ctb2.b12_moneda, '"'
-display vm_nuevoprog
 RUN vm_nuevoprog
 
 END FUNCTION
@@ -398,7 +397,6 @@ END FUNCTION
 FUNCTION imprimir(col1, col2, ord1, ord2)
 DEFINE col1, col2	SMALLINT
 DEFINE ord1, ord2	CHAR(4)
-DEFINE vm_nuevoprog     VARCHAR(400)
 
 LET vm_nuevoprog = 'cd ..', vg_separador, '..', vg_separador, 'CONTABILIDAD',
 	vg_separador, 'fuentes', vg_separador, '; fglrun ctbp407 ', vg_base,
@@ -473,38 +471,5 @@ END IF
 LET descrip = r_g08.g08_nombre CLIPPED, ' (', tipo_des CLIPPED, ' ',
 		numero CLIPPED, ')' 
 RETURN descrip, r_g08.g08_nombre
-
-END FUNCTION
-
-
-
-FUNCTION validar_parametros()
-
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEn
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
 
 END FUNCTION

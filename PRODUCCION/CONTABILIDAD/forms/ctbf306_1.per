@@ -1,52 +1,68 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
-             Año: [c001]                  Formato: [c008       ]
-             Mes: [c2]  [c003      ]     
-          Moneda: [c4]  [c005           ]   Nivel: [a]
+             Año: [c001]       Nivel: [a]       Incluír Diario Cierre Año? [d]
+             Mes: [c2]  [c003      ]            Moneda: [c4] [c005           ]
  Centro de Costo: [c6 ] [c007                          ] 
-
-[c020        |c021                                    |c022              |a2]
-[c020        |c021                                    |c022              |a2]
-[c020        |c021                                    |c022              |a2]
-[c020        |c021                                    |c022              |a2]
-[c020        |c021                                    |c022              |a2]
-[c020        |c021                                    |c022              |a2]
-[c020        |c021                                    |c022              |a2]
-[c020        |c021                                    |c022              |a2]
-[c020        |c021                                    |c022              |a2]
-[c020        |c021                                    |c022              |a2]
-[c020        |c021                                    |c022              |a2]
-[c020        |c021                                    |c022              |a2]
-[c020        |c021                                    |c022              |a2]
-
-                      Utilidad/Pérdida del Ejercicio: [c030              |a3]
+                                                              [c060] de [c061]
+ [c040        |c041                             |c042          |c043          ]
+[c020        |c021                             |c022          |c023          ]
+[c020        |c021                             |c022          |c023          ]
+[c020        |c021                             |c022          |c023          ]
+[c020        |c021                             |c022          |c023          ]
+[c020        |c021                             |c022          |c023          ]
+[c020        |c021                             |c022          |c023          ]
+[c020        |c021                             |c022          |c023          ]
+[c020        |c021                             |c022          |c023          ]
+[c020        |c021                             |c022          |c023          ]
+[c020        |c021                             |c022          |c023          ]
+[c020        |c021                             |c022          |c023          ]
+[c020        |c021                             |c022          |c023          ]
+[c020        |c021                             |c022          |c023          ]
+                             Totales Saldo ==> [c050          |c051          ]
+                              Utilidad/Pérdida del Ejercicio: [c030          ]
 }
 TABLES
 ctbt010
 ATTRIBUTES
-c001 = formonly.ano TYPE SMALLINT, REVERSE;
-c2   = formonly.mes TYPE SMALLINT, INCLUDE = ( 1 TO 12), REVERSE;
-c003 = formonly.tit_mes, NOENTRY;
-c4   = formonly.moneda, REVERSE, UPSHIFT, WIDGET = 'FIELD_BMP', 
+c001 = FORMONLY.ano TYPE SMALLINT, REVERSE;
+c2   = FORMONLY.mes TYPE SMALLINT, INCLUDE = ( 1 TO 12), REVERSE;
+c003 = FORMONLY.tit_mes, NOENTRY;
+c4   = FORMONLY.moneda, REVERSE, UPSHIFT, WIDGET = 'FIELD_BMP', 
        CONFIG = 'lista.bmp F2';
-c005 = formonly.tit_mon, REVERSE, NOENTRY;
-c6   = formonly.ccosto TYPE SMALLINT, WIDGET = 'FIELD_BMP',  CONFIG =
+c005 = FORMONLY.tit_mon, REVERSE, NOENTRY;
+c6   = FORMONLY.ccosto TYPE SMALLINT, WIDGET = 'FIELD_BMP',  CONFIG =
        'lista.bmp F2', COMMENT = 'Deje en blanco para un PyG consolidado';
-c007 = formonly.tit_ccosto, NOENTRY;
-c008 = formonly.formato, AUTONEXT, UPSHIFT, REVERSE, WIDGET = 'RADIO', 
-       CONFIG = 'M Mensual A Acumulado';
+c007 = FORMONLY.tit_ccosto, NOENTRY;
 a    = b10_nivel, REVERSE, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+d    = FORMONLY.diario_cie TYPE CHAR NOT NULL, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N';
+
+c040 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15'; 
+c041 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16'; 
+c042 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17'; 
+c043 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18'; 
+
 c020 = b10_cuenta, OPTIONS = '-nolist';
 c021 = b10_descripcion, OPTIONS = '-nolist';
-c022 = formonly.saldo TYPE DECIMAL(14,2), FORMAT = '###,###,###,##&.##', 
+c022 = FORMONLY.saldo_mes TYPE DECIMAL(14,2), FORMAT = '---,---,--&.##', 
        OPTIONS = '-nolist';
-a2   = formonly.signo, OPTIONS = '-nolist';
-c030 = formonly.saldo_pyg TYPE DECIMAL(14,2), FORMAT = '###,###,###,##&.##', 
+c023 = FORMONLY.saldo TYPE DECIMAL(14,2), FORMAT = '---,---,--&.##', 
+       OPTIONS = '-nolist';
+
+c050 = FORMONLY.tot_saldo_mes TYPE DECIMAL(14,2), FORMAT = '---,---,--&.##',
+	COLOR = RED WHERE c050 < 0;
+c051 = FORMONLY.tot_saldo TYPE DECIMAL(14,2), FORMAT = '---,---,--&.##',
+	COLOR = RED WHERE c051 < 0;
+c030 = FORMONLY.saldo_pyg TYPE DECIMAL(14,2), FORMAT = '---,---,--&.##', 
        OPTIONS = '-nolist', REVERSE;
-a3   = formonly.signo_pyg, OPTIONS = '-nolist', REVERSE;
+c060 = FORMONLY.num_row, NOENTRY, REVERSE;
+c061 = FORMONLY.max_row, NOENTRY, REVERSE;
+END
 INSTRUCTIONS
-SCREEN RECORD rm_pyg[13] (b10_cuenta, b10_descripcion, formonly.saldo,
-			 formonly.signo)
+DELIMITERS '||'
+SCREEN RECORD rm_pyg[13] (b10_cuenta, b10_descripcion, FORMONLY.saldo_mes,
+			 FORMONLY.saldo)
 KEYS
-'F5' = 'Movimientos'
+F5 = 'Movimientos'
+F6 = 'Imprimir'

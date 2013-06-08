@@ -1,0 +1,56 @@
+DATABASE aceros
+SCREEN
+{
+ Estado: [y] [y001         ]               Fechas: [c052      ] - [c053      ]
+                                                   Ver mis Transferencias: [e]
+
+ L No. Origen BO BD   Referencia                      Fecha      No.Destino T
+------------------------------------------------------------------------------
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   |d] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   |d] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   |d] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   |d] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   |d] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   |d] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   |d] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   |d] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   |d] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   |d] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   |d] 
+
+}
+TABLES
+gent002
+rept019
+rept094
+ATTRIBUTES
+y    = FORMONLY.vm_estado TYPE CHAR NOT NULL, UPSHIFT, REVERSE,
+	INCLUDE = ('P','T','D'),
+	COMMENTS = 'P Pendientes   T Transmitidas   D Todas', AUTONEXT; 
+c052 = FORMONLY.vm_fecha_ini TYPE DATE NOT NULL, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Inicial en Formato: dd-mm-aaaa.';
+c053 = FORMONLY.vm_fecha_fin TYPE DATE NOT NULL, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Final en Formato: dd-mm-aaaa.';
+y001 = FORMONLY.tit_estado, REVERSE, NOENTRY;
+e    = FORMONLY.vm_vertrans TYPE CHAR NOT NULL, REQUIRED,
+	AUTONEXT, REVERSE, UPSHIFT, INCLUDE = ('S', 'N'), DEFAULT = 'N',
+	COMMENTS = 'Solo si es que se quiere anular un traspaso.';
+z    = r19_localidad, NOENTRY;
+c2   = r19_cod_tran,  NOENTRY;
+c021 = r19_num_tran,  NOENTRY;
+c3   = r19_bodega_ori,  NOENTRY;
+c4   = r19_bodega_dest, NOENTRY;
+c022 = r19_referencia,  NOENTRY;
+c023 = FORMONLY.r19_fecing TYPE DATE, NOENTRY, FORMAT = 'dd-mm-yyyy';
+c5   = r94_codtra_fin,  NOENTRY;
+c024 = r94_numtra_fin,  NOENTRY;
+d    = r94_traspasada,  NOENTRY;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_tran[11] (r19_localidad,  r19_cod_tran,    r19_num_tran, 
+			   r19_bodega_ori, r19_bodega_dest, r19_referencia,
+			   FORMONLY.r19_fecing, r94_codtra_fin, r94_numtra_fin,
+			   r94_traspasada)

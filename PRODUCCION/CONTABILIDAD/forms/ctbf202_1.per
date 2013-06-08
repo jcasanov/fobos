@@ -1,12 +1,12 @@
-database diteca
-screen 
+DATABASE aceros
+SCREEN 
 {
            Código: [c001       ]                    Estado: [a|c100      ]
       Comprobante: [a0] [c101                          ] 
             Glosa: [c002                               ]
                    [c002                               ]
            Moneda: [a1] [c102           ]   Paridad: [c004               ]                
-      Tope Máximo: [c005]                 Generadas: [c007]
+      Tope Maximo: [c005]                 Generadas: [c007]
      Fecha Inicio: [c006      ]
       Ultimo Num.: [c008    ]
     
@@ -22,10 +22,10 @@ screen
      Ingresado Por: [c009      ]   Fecha de Ingreso: [c010               ]
 }
 end
-tables
+TABLES
 ctbt014
 ctbt015
-attributes
+ATTRIBUTES
 c001 = ctbt014.b14_codigo, REVERSE, NOENTRY;
 a = ctbt014.b14_estado, REVERSE, NOENTRY, 
 	COMMENT='(A) Activo  (B) Bloqueado';
@@ -37,7 +37,7 @@ a1 = ctbt014.b14_moneda, UPSHIFT, AUTONEXT, REVERSE,
 c004 = ctbt014.b14_paridad, REVERSE, NOENTRY, FORMAT='#,###,##&.#########';
 
 c005 = ctbt014.b14_veces_max, REVERSE,
-	COMMENT='Máximo de veces que se generará el diario.';
+	COMMENT='Maximo de veces que se generará el diario.';
 
 c006 = ctbt014.b14_fecha_ini, FORMAT='dd-mm-yyyy', REVERSE,
 	COMMENT='Digite fecha en formato: dd-mm-aaaa';
@@ -50,26 +50,26 @@ c008 = ctbt014.b14_ult_num, NOENTRY,
 c009 = ctbt014.b14_usuario, REVERSE, UPSHIFT, NOENTRY;
 c010 = ctbt014.b14_fecing,  REVERSE,          NOENTRY;
 
-c050 = formonly.tot_debito, NOENTRY, FORMAT='#,###,###,##&.##';
-c051 = formonly.tot_credito, NOENTRY, FORMAT='#,###,###,##&.##';
+c050 = FORMONLY.tot_debito, NOENTRY, FORMAT='#,###,###,##&.##';
+c051 = FORMONLY.tot_credito, NOENTRY, FORMAT='#,###,###,##&.##';
 
 c013 = ctbt015.b15_cuenta, UPSHIFT, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2',
 	OPTIONS='-nolist';
-c015 = formonly.valor_debito, OPTIONS='-nolist', 
+c015 = FORMONLY.valor_debito, OPTIONS='-nolist', 
 	FORMAT='#,###,###,##&.##', INCLUDE=(0 TO 9999999999.99);
-c016 = formonly.valor_credito, OPTIONS='-nolist', 
+c016 = FORMONLY.valor_credito, OPTIONS='-nolist', 
 	FORMAT='#,###,###,##&.##', INCLUDE=(0 TO 9999999999.99);
 
-c100 = formonly.n_estado,    NOENTRY;
-c101 = formonly.n_tipo_comp, NOENTRY;
-c102 = formonly.n_moneda,    NOENTRY;
-c104 = formonly.n_cuenta,    NOENTRY, OPTIONS='-nolist';
+c100 = FORMONLY.n_estado,    NOENTRY;
+c101 = FORMONLY.n_tipo_comp, NOENTRY, REVERSE;
+c102 = FORMONLY.n_moneda,    NOENTRY;
+c104 = FORMONLY.n_cuenta,    NOENTRY, OPTIONS='-nolist';
 
-lbl1 = formonly.bt_cuenta,      WIDGET='BUTTON', CONFIG='F15'; 
-lbl2 = formonly.bt_desc_cuenta, WIDGET='BUTTON', CONFIG='F16'; 
-lbl3 = formonly.bt_debito,      WIDGET='BUTTON', CONFIG='F17';
-lbl4 = formonly.bt_credito,     WIDGET='BUTTON', CONFIG='F18';
+lbl1 = FORMONLY.bt_cuenta,      WIDGET='BUTTON', CONFIG='F15'; 
+lbl2 = FORMONLY.bt_desc_cuenta, WIDGET='BUTTON', CONFIG='F16'; 
+lbl3 = FORMONLY.bt_debito,      WIDGET='BUTTON', CONFIG='F17';
+lbl4 = FORMONLY.bt_credito,     WIDGET='BUTTON', CONFIG='F18';
 end
 
-instructions
-screen record ra_cuenta[6] (b15_cuenta, n_cuenta, valor_debito, valor_credito)
+INSTRUCTIONS
+SCREEN RECORD ra_cuenta[6] (b15_cuenta, n_cuenta, valor_debito, valor_credito)

@@ -1,0 +1,38 @@
+DATABASE aceros
+SCREEN
+{
+
+        Grupos de Activos: [c000] [c001                          ]
+         Tipos de Activos: [c002] [c003                          ]
+
+                Localidad: [c004] [c005                          ]
+
+  Rangos Fechas de Compra: [c006      ]               [c007      ]
+
+                   Estado: [c] [c008                         ]
+
+}
+TABLES
+actt010
+gent002
+ATTRIBUTES
+c000 = FORMONLY.a10_grupo_act, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = FORMONLY.tit_grupo_act, NOENTRY, UPSHIFT;
+c002 = FORMONLY.a10_tipo_act, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = FORMONLY.tit_tipo_act, NOENTRY, UPSHIFT;
+c004 = FORMONLY.a10_localidad, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c005 = gent002.g02_nombre, NOENTRY, UPSHIFT;
+c006 = FORMONLY.vm_fecha_ini TYPE DATE NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha inicial en formato: dd-mm-aaaa';
+c007 = FORMONLY.vm_fecha_fin TYPE DATE NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha final en formato: dd-mm-aaaa';
+c    = actt010.a10_estado, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Presione F2 y escoja el estado del bien (ACTIVO FIJO)';
+c008 = FORMONLY.tit_estado, NOENTRY, UPSHIFT, REVERSE;
+END

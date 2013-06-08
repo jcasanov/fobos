@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------
--- Titulo           : talp407.4gl - Listado de Gastos de Viaje por Mecánico   --
+-- Titulo           : talp407.4gl - Listado de Gastos de Viaje por Mecánico     --
 -- Elaboracion      : 12-ABR-2002					      --
 -- Autor            : GVA						      --
 -- Formato Ejecucion: fglrun talp407 base módulo compañía localidad	      --
@@ -8,6 +8,7 @@
 --------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
+DEFINE vm_demonios	VARCHAR(12)
 DEFINE rm_t23		RECORD LIKE talt023.*
 DEFINE rm_t03		RECORD LIKE talt003.*
 
@@ -32,12 +33,12 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/talp407.error')
-CALL fgl_init4js()
+CALL startlog('../logs/errores')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN   	-- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto.',
-			    'stop')
+	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.','stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
 
@@ -50,8 +51,8 @@ LET vg_proceso = 'talp407'
 
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -60,14 +61,30 @@ END MAIN
 
 
 FUNCTION funcion_master()
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
 CALL fl_nivel_isolation()
-OPEN WINDOW w_mas AT 3,2 WITH 10 ROWS, 80 COLUMNS
-    ATTRIBUTE(FORM LINE FIRST + 2, COMMENT LINE LAST, MENU LINE 0, BORDER,
-	      MESSAGE LINE LAST - 2)
-OPTIONS INPUT NO WRAP,
-	ACCEPT KEY	F12
-OPEN FORM f_rep FROM '../forms/talf407_1'
+LET lin_menu = 0
+LET row_ini  = 3
+LET num_rows = 10
+LET num_cols = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW w_mas AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
+    ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE lin_menu,BORDER,
+	      MESSAGE LINE LAST - 1)
+IF vg_gui = 1 THEN
+	OPEN FORM f_rep FROM '../forms/talf407_1'
+ELSE
+	OPEN FORM f_rep FROM '../forms/talf407_1c'
+END IF
 DISPLAY FORM f_rep
 CALL borrar_cabecera()
 CALL control_reporte()
@@ -77,14 +94,14 @@ END FUNCTION
 
 
 FUNCTION control_reporte()
-DEFINE query		VARCHAR(600)
+DEFINE query		CHAR(600)
 DEFINE comando 		VARCHAR(100)
-
-DEFINE r_report 		RECORD
-	num_gasto		LIKE talt030.t30_num_gasto,
-	ot			LIKE talt023.t23_orden,
-	origen			LIKE talt030.t30_origen,
-	destino			LIKE talt030.t30_destino
+DEFINE r_report 	RECORD
+	orden		LIKE talt023.t23_orden,
+	cliente		LIKE talt023.t23_nom_cliente,
+	fecha		DATE,
+	total_ot	LIKE talt023.t23_tot_neto,
+	estado_ot	LIKE talt023.t23_estado
 	END RECORD
 
 LET vm_top    = 0
@@ -109,42 +126,37 @@ WHILE TRUE
 		CONTINUE WHILE
 	END IF
 
-	LET query = 'SELECT t30_num_gasto, t30_num_ot, t30_origen,',
-			' t30_destino',
-			' FROM talt030, talt032',
-			'WHERE t30_compania  =',vg_codcia,
-			'  AND t30_localidad =',vg_codloc,
-			'  AND t30_moneda    ="',vm_moneda,'"',
-			'  AND t30_estado    = "A"',
-			'  AND DATE(t30_fecing) BETWEEN "',vm_fecha_ini,'"',
-			'  AND "',vm_fecha_fin,'"',
-			'  AND t30_compania  = t32_compania',
-			'  AND t30_localidad = t32_localidad',
-			'  AND t30_num_gasto = t32_num_gasto',
-			'  AND t32_mecanico  =',rm_t03.t03_mecanico
-			 
+	LET query = 'SELECT t30_num_gasto, t30_num_ot, DATE(t23_fecing),',
+			'   t23_tot_neto, t23_estado',
+			'  FROM talt023 ',
+			'WHERE t23_compania  =',vg_codcia,
+			'  AND t23_localidad =',vg_codloc,
+			'  AND t23_moneda = "',vm_moneda,'"',
+			'  AND ',expr_fecha CLIPPED,
+			' ORDER BY 3'
+
 	PREPARE reporte FROM query
 	DECLARE q_reporte CURSOR FOR reporte
 	OPEN    q_reporte
 	FETCH   q_reporte
-
 	IF STATUS = NOTFOUND THEN
 		CLOSE q_reporte
 		FREE  q_reporte
 		CALL fl_mensaje_consulta_sin_registros()
 		CONTINUE WHILE
 	END IF
-
-	START REPORT report_viajes_mecanico TO PIPE comando
+{
+	START REPORT report_ordenes_trabajo TO PIPE comando
 	CLOSE q_reporte
 
 	FOREACH q_reporte INTO r_report.* 
-		OUTPUT TO REPORT report_viajes_mecanico(r_report.*)
+		OUTPUT TO REPORT report_ordenes_trabajo(r_report.*)
 		IF int_flag THEN
 			EXIT FOREACH
 		END IF
 	END FOREACH
-	FINISH REPORT report_viajes_mecanico
+	FINISH REPORT report_ordenes_trabajo
+}
 END WHILE 
 
 END FUNCTION
@@ -163,6 +175,8 @@ INPUT BY NAME rm_t03.t03_mecanico, vm_fecha_ini, vm_fecha_fin, vm_moneda
 	ON KEY(INTERRUPT)
 		LET int_flag = 1
 		RETURN
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
 	ON KEY(F2)
 		IF INFIELD(t03_mecanico) THEN
 			CALL fl_ayuda_mecanicos(vg_codcia, 'T')
@@ -184,13 +198,17 @@ INPUT BY NAME rm_t03.t03_mecanico, vm_fecha_ini, vm_fecha_fin, vm_moneda
 			END IF
 		END IF
 		LET int_flag = 0
+	BEFORE INPUT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 	AFTER FIELD t03_mecanico
 		IF rm_t03.t03_mecanico IS NOT NULL THEN
 			CALL fl_lee_mecanico(vg_codcia, rm_t03.t03_mecanico)	
 				RETURNING r_t03.*
 			IF r_t03.t03_mecanico IS NULL THEN
 				CLEAR nom_mecanico
-				CALL fgl_winmessage(vg_producto,'No existe Mecánico en la Compañía.','exclamation')
+				--CALL fgl_winmessage(vg_producto,'No existe Mecánico en la Compañía.','exclamation')
+				CALL fl_mostrar_mensaje('No existe Mecánico en la Compañía.','exclamation')
 				NEXT FIELD t03_mecanico
 			ELSE
 				LET rm_t03.* = r_t03.*
@@ -204,7 +222,8 @@ INPUT BY NAME rm_t03.t03_mecanico, vm_fecha_ini, vm_fecha_fin, vm_moneda
 			CALL fl_lee_moneda(vm_moneda)
 				RETURNING rm_g13.*
 			IF rm_g13.g13_moneda IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'No existe la moneda en la Compañía.','exclamation')
+				--CALL fgl_winmessage(vg_producto,'No existe la moneda en la Compañía.','exclamation')
+				CALL fl_mostrar_mensaje('No existe la moneda en la Compañía.','exclamation')
 				CLEAR nom_moneda
 				NEXT FIELD vm_moneda
 			ELSE
@@ -226,124 +245,13 @@ INPUT BY NAME rm_t03.t03_mecanico, vm_fecha_ini, vm_fecha_fin, vm_moneda
 			NEXT FIELD vm_moneda
 		END IF
 		IF vm_fecha_fin < vm_fecha_ini THEN
-			CALL fgl_winmessage(vg_producto,'La fecha final debe ser menor a la fecha inicial.','exclamation')
+			--CALL fgl_winmessage(vg_producto,'La fecha final debe ser menor a la fecha inicial.','exclamation')
+			CALL fl_mostrar_mensaje('La fecha final debe ser menor a la fecha inicial.','exclamation')
 			NEXT FIELD vm_fecha_fin
 		END IF
 		LET expr_fecha = 'DATE(t23_fecing) BETWEEN "',vm_fecha_ini,'"', ' AND ', '"',vm_fecha_fin,'"'
 END INPUT
 
-END FUNCTION
-
-
-
-REPORT report_viajes_mecanico(num_gasto, ot, origen, destino)
-DEFINE	num_gasto		LIKE talt030.t30_num_gasto
-DEFINE	ot			LIKE talt023.t23_orden
-DEFINE	origen			LIKE talt030.t30_origen
-DEFINE	destino			LIKE talt030.t30_destino
-
-DEFINE fecha			LIKE talt033.t33_fecha
-DEFINE hora_salida		LIKE talt033.t33_hor_sal_viaje
-DEFINE hora_llegada		LIKE talt033.t33_hor_lleg_dest1
-DEFINE hora_salida_rep		LIKE talt033.t33_hor_sal_rep
-
-DEFINE titulo		VARCHAR(80)
-
-OUTPUT
-	TOP MARGIN	vm_top
-	LEFT MARGIN	vm_left
-	RIGHT MARGIN	vm_right
-	BOTTOM MARGIN	vm_bottom
-	PAGE LENGTH	vm_page
-FORMAT
-PAGE HEADER
-
-	print 'E'; print '&l26A';  -- Indica que voy a trabajar con hojas A4
-	print '&k4S'	                -- Letra condensada (12 cpi)
-
-	CALL fl_justifica_titulo('C',
-				'LISTADO DE GASTOS DE MECANICO EN VIAJES',60)
-		RETURNING titulo
-
-	PRINT COLUMN 1, rg_cia.g01_razonsocial
-	PRINT COLUMN 1, titulo CLIPPED
-	PRINT COLUMN 1, 'Fecha de Impresión: ', TODAY USING 'dd-mm-yyyy',
-			 1 SPACES, TIME,
-		COLUMN 48, 'Página: ', PAGENO USING '&&&'
-
-	SKIP 1 LINES
-
-	print '&k2S'	                -- Letra condensada (16 cpi)
-
-	PRINT COLUMN 01, 'Mecánico:', 
-	      COLUMN 20, fl_justifica_titulo('I',rm_t03.t03_mecanico,6),
-			 '  ', rm_t03.t03_nombres 
-	PRINT COLUMN 01, 'Fecha Inicial:',
-	      COLUMN 20, vm_fecha_ini,
-	      COLUMN 60, 'Fecha Final: ', 
-	      COLUMN 80, vm_fecha_fin
-
-	PRINT COLUMN 01, 'Moneda:  ',
-	      COLUMN 20,  rm_g13.g13_nombre 
-
-	SKIP 1 LINES
-
-ON EVERY ROW
-
-	CALL fl_lee_orden_trabajo(vg_codcia, vg_codloc, ot)
-		RETURNING rm_t23.*
-
-	DECLARE q_talt033 CURSOR FOR
-		SELECT t33_fecha, t33_hor_sal_viaje, t33_hor_lleg_dest1,
-		       t33_hor_sal_rep
-			 FROM talt033 
-			WHERE t33_compania  = vg_codcia
-			  AND t33_localidad = vg_codloc
-			  AND t33_num_gasto = num_gasto 
-	FOREACH q_talt033 INTO fecha, hora_salida, hora_llegada,hora_salida_rep
-		PRINT COLUMN 01, '** HORAS TRABAJO'
-		PRINT COLUMN 10, 'O.T.',
-		      COLUMN 20, 'Origen',
-		      COLUMN 37, 'Destino',
-		      COLUMN 49, 'Fecha',
-		      COLUMN 61, 'Inicio',
-		      COLUMN 68, 'Fin',
-		      COLUMN 75, 'Costo',
-		      COLUMN 85, 'Facturable'
-		PRINT COLUMN 10, '---------------------------------------------------------------------------------'
-		PRINT COLUMN 10, fl_justifica_titulo('I',ot,8),
-		PRINT COLUMN 20, Origen[1,15],
-		      COLUMN 37, Destino[1,15],
-		      COLUMN 49, fecha USING 'dd-mm-yyyy',
-		      COLUMN 61, hora_llegada,
-		      COLUMN 68, hora_salida,
-		CALL control_horas_normales(hora_llegada, hora_salida)
-		CALL control_horas_extras()
-		PRINT COLUMN 61, 'Horas Normales:', 
-
-	END FOREACH
-
-
-ON LAST ROW
-
-END REPORT
-
-
-
-FUNCTION control_horas_normales(hora_ini, hora_fin)
-DEFINE hora_ini		LIKE talt033.t33_hor_sal_viaje
-DEFINE hora_fin		LIKE talt033.t33_hor_sal_viaje
-
-DEFINE horas_normales		DECIMAL(2,0)
-DEFINE hora_extras		DECIMAL(2,0)
-
-IF rm_t03.t03_hora_ini 
-
-END FUNCTION
-
-
-
-FUNCTION control_horas_extras()
 END FUNCTION
 
 
@@ -357,33 +265,14 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION llamar_visor_teclas()
+DEFINE a		CHAR(1)
 
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
+IF vg_gui = 0 THEN
+	CALL fl_visor_teclas_caracter() RETURNING int_flag 
+	LET a = fgl_getkey()
+	CLOSE WINDOW w_tf
+	LET int_flag = 0
 END IF
 
 END FUNCTION

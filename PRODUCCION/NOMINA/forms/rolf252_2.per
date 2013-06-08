@@ -1,0 +1,75 @@
+DATABASE aceros
+SCREEN
+{
+
+                                                        Estado: [c|c000      ]
+
+          Empleado: [c001|c002                                         ]
+
+  Periodo Vacación: [c003      ]  -  [c004      ]      Días Vacaciones: [c009]
+ Per. Real Calculo: [c006      ]  -  [c007      ]     Días Adicionales: [c010]
+ Periodo Gozo Vac.: [c027      ]  -  [c028      ]          Total Días : [c011]
+     Tipo Vacación: [c008      ]              
+                                              
+       Se van a gozar los días adicionales ?: [d]         Días a Gozar: [c005]
+
+          Moneda: [c0] [c012           ]         Total Ganado: [c014         ]
+   Forma de Pago: [c024            ]
+                                               Valor Vacación: [c015         ]
+                                       Adicional x Antiguedad: [c016         ]
+   Banco Empresa                               Otros Ingresos: [c017         ]
+  [c1] [c023                      ]      (-)  Aporte Personal: [c018         ]
+  Cuenta Empresa: [c025           ]      (-) Otros Descuentos: [c019         ]
+ Cuenta Empleado: [c026           ]                             -------------
+                                               Neto a Recibir: [c020         ]
+}
+TABLES
+gent008
+gent013
+rolt030
+rolt039
+ATTRIBUTES
+c    = rolt039.n39_estado, NOENTRY, UPSHIFT, REVERSE;
+c000 = FORMONLY.tit_estado, NOENTRY, UPSHIFT;
+c001 = rolt039.n39_cod_trab, NOENTRY, UPSHIFT, REVERSE;
+c002 = rolt030.n30_nombres, NOENTRY, UPSHIFT, REVERSE;
+c003 = rolt039.n39_periodo_ini, NOENTRY, UPSHIFT, REVERSE,FORMAT = 'dd-mm-yyyy';
+c004 = rolt039.n39_periodo_fin, NOENTRY, UPSHIFT, REVERSE,FORMAT = 'dd-mm-yyyy';
+c006 = rolt039.n39_perini_real, NOENTRY, REVERSE, FORMAT = 'dd-mm-yyyy';
+c007 = rolt039.n39_perfin_real, NOENTRY, REVERSE, FORMAT = 'dd-mm-yyyy';
+c027 = rolt039.n39_fecini_vac, AUTONEXT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Período en que se gozan la vacaciones. Fecha en Formato: dd-mm-aaaa.';
+c028 = rolt039.n39_fecfin_vac, AUTONEXT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Período en que se gozan la vacaciones. Fecha en Formato: dd-mm-aaaa.';
+c008 = rolt039.n39_tipo, AUTONEXT, UPSHIFT, REVERSE, DEFAULT = 'G',
+	WIDGET = 'RADIO', CONFIG = 'G Gozadas P Pagadas';
+c009 = rolt039.n39_dias_vac, NOENTRY, REVERSE;
+c010 = rolt039.n39_dias_adi, NOENTRY, REVERSE;
+c011 = FORMONLY.tot_dias, NOENTRY, REVERSE;
+c0   = rolt039.n39_moneda, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c012 = gent013.g13_nombre, NOENTRY, UPSHIFT, REVERSE;
+c014 = rolt039.n39_tot_ganado, NOENTRY, REVERSE, FORMAT = '##,###,##&.##';
+c015 = rolt039.n39_valor_vaca, NOENTRY, REVERSE, FORMAT = '##,###,##&.##';
+c016 = rolt039.n39_valor_adic, NOENTRY, REVERSE, FORMAT = '##,###,##&.##';
+c017 = rolt039.n39_otros_ing,  NOENTRY, REVERSE, FORMAT = '##,###,##&.##';
+c018 = rolt039.n39_descto_iess,NOENTRY, FORMAT = '##,###,##&.##',
+	COLOR = RED WHERE c018 > 0;
+c019 = rolt039.n39_otros_egr,  NOENTRY, FORMAT = '##,###,##&.##',
+	COLOR = RED WHERE c019 > 0;
+c020 = rolt039.n39_neto,       NOENTRY, REVERSE, FORMAT = '--,---,--&.##';
+c1   = rolt039.n39_bco_empresa, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c023 = gent008.g08_nombre, NOENTRY, UPSHIFT;
+c024 = rolt039.n39_tipo_pago, AUTONEXT, UPSHIFT, REVERSE, DEFAULT = 'E',
+	WIDGET = 'RADIO', CONFIG = 'E Efectivo C Cheque T Transferencia';
+c025 = rolt039.n39_cta_empresa, AUTONEXT, UPSHIFT;
+c026 = rolt039.n39_cta_trabaj, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+d    = rolt039.n39_gozar_adic, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge', DEFAULT = 'S';
+c005 = rolt039.n39_dias_goza, NOENTRY, REVERSE, UPSHIFT,
+	COLOR = BLUE WHERE c005 > 0;
+END
+KEYS
+F5 = 'Ingresos/Dsctos.'

@@ -1,0 +1,28 @@
+DATABASE aceros
+SCREEN
+{
+
+ ESTADOS
+
+ [b|c000                         ]
+[c|c010                         ]
+[c|c010                         ]
+[c|c010                         ]
+[c|c010                         ]
+[c|c010                         ]
+[c|c010                         ]
+[c|c010                         ]
+[c|c010                         ]
+
+}
+TABLES
+actt010
+ATTRIBUTES
+b    = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c000 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+
+c    = actt010.a10_estado, NOENTRY, UPSHIFT, REVERSE;
+c010 = FORMONLY.tit_estado, NOENTRY, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+SCREEN RECORD rm_estado[8] (a10_estado, tit_estado)

@@ -1,56 +1,50 @@
-database diteca
-screen
+DATABASE aceros
+SCREEN
 {
 
-     Moneda: [c1] [c001           ]    Año: [c000]    
-     Bodega: [c2] [c002           ]
-                      ** Unidades **
- [lbl1      |lbl2      |lbl3      |lbl4      |lbl5      ]
-[c011      |c012      |c013      |c014      |c015      ]  
-[c011      |c012      |c013      |c014      |c015      ]  
-[c011      |c012      |c013      |c014      |c015      ]  
-[c011      |c012      |c013      |c014      |c015      ]  
-[c011      |c012      |c013      |c014      |c015      ]  
-[c011      |c012      |c013      |c014      |c015      ]  
-[c011      |c012      |c013      |c014      |c015      ]  
-[c011      |c012      |c013      |c014      |c015      ]  
-[c011      |c012      |c013      |c014      |c015      ]  
-[c011      |c012      |c013      |c014      |c015      ]  
-[c011      |c012      |c013      |c014      |c015      ]  
-[c011      |c012      |c013      |c014      |c015      ]  
-    Total  [c022      |c023      |c024      |c025      ]
+                  DATOS PARA COMPLETAR GUIA DE REMISION
+                  ------------------------------------
+
+  Fecha Iniciación Traslado: [c000      ] No. SRI: [c007              ]
+ Fecha Terminación Traslado: [c001      ]  Aut. SRI: [c010            ]
+        Motivo del Traslado: [c002                              ]
+
+
+
+           Fecha de Emisión: [c003      ]
+           Punto de Partida: [c004                                    ]
+
+     Persona que transporta: [c005                                    ]
+               Cédula / RUC: [c006         ]        Placa: [c014      ]
+               Destinatario: [c011                                    ]
+               Cédula / RUC: [c012         ]
+           Punto de Llegada: [c013                                    ]
+
+              Ingresado Por: [c008      ]  Fecha: [c009               ]
 }
-end
-
-tables
-rept012
-
-attributes
-c1   = rept012.r12_moneda, REVERSE, AUTONEXT, UPSHIFT, WIDGET='FIELD_BMP',
-	CONFIG='lista.bmp F2';
-c001 = formonly.n_moneda, NOENTRY;
-c000 = formonly.anho TYPE SMALLINT NOT NULL, REVERSE, INCLUDE=(1900 TO 9999);
-c2   = formonly.bodega, AUTONEXT, UPSHIFT, WIDGET='FIELD_BMP',
-	CONFIG='lista.bmp F2';
-c002 = formonly.n_bodega, NOENTRY;
-
-c011 = formonly.mes,                            NOENTRY, OPTIONS='-nolist';
-c012 = formonly.unid_vend, FORMAT='##,###,##&', NOENTRY, OPTIONS='-nolist';
-c013 = formonly.unid_dema, FORMAT='##,###,##&', NOENTRY, OPTIONS='-nolist';
-c014 = formonly.unid_perd, FORMAT='##,###,##&', NOENTRY, OPTIONS='-nolist';
-c015 = formonly.subtotal , FORMAT='##,###,##&', NOENTRY, OPTIONS='-nolist';
-
-c022 = formonly.tot_vend , FORMAT='##,###,##&', NOENTRY, REVERSE;
-c023 = formonly.tot_dema , FORMAT='##,###,##&', NOENTRY, REVERSE; 
-c024 = formonly.tot_perd , FORMAT='##,###,##&', NOENTRY, REVERSE; 
-c025 = formonly.total    , FORMAT='##,###,##&', NOENTRY, REVERSE; 
-
-lbl1 = formonly.bt_mes   , WIDGET='BUTTON', CONFIG='F15';
-lbl2 = formonly.bt_vend  , WIDGET='BUTTON', CONFIG='F16';
-lbl3 = formonly.bt_dema  , WIDGET='BUTTON', CONFIG='F17';
-lbl4 = formonly.bt_perd  , WIDGET='BUTTON', CONFIG='F18';
-lbl5 = formonly.bt_total , WIDGET='BUTTON', CONFIG='F19';
-end 
-
-instructions
-screen record r_estat[12] (mes, unid_vend, unid_dema, unid_perd, subtotal)
+TABLES
+rept095
+ATTRIBUTES
+c000 = rept095.r95_fecha_initras, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la fecha de iniciación en formato: dd-mm-aaaa.';
+c001 = rept095.r95_fecha_fintras, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la fecha de terminación en formato: dd-mm-aaaa.';
+c002 = rept095.r95_motivo, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'RADIO',
+	CONFIG = 'V Venta  D Devolución  I Importación  N "Transferencias entre Localidades"',
+	DEFAULT = 'V';
+c003 = rept095.r95_fecha_emi, AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la fecha de emisión en formato: dd-mm-aaaa.';
+c004 = rept095.r95_punto_part, AUTONEXT, UPSHIFT, REVERSE, SCROLL;
+c005 = rept095.r95_persona_guia, AUTONEXT, UPSHIFT, REVERSE, SCROLL;
+c006 = rept095.r95_persona_id, AUTONEXT, UPSHIFT, REVERSE;
+c007 = rept095.r95_num_sri, AUTONEXT, UPSHIFT, REVERSE;
+c010 = rept095.r95_autoriz_sri, AUTONEXT, UPSHIFT, REVERSE;
+c011 = rept095.r95_persona_dest, AUTONEXT, UPSHIFT, REVERSE, SCROLL;
+c012 = rept095.r95_pers_id_dest, AUTONEXT, UPSHIFT, REVERSE;
+c013 = rept095.r95_punto_lleg, AUTONEXT, UPSHIFT, REVERSE, SCROLL;
+c014 = rept095.r95_placa, AUTONEXT, UPSHIFT;
+c008 = rept095.r95_usuario, NOENTRY, UPSHIFT, REVERSE;
+c009 = rept095.r95_fecing, NOENTRY, UPSHIFT, REVERSE;
+END

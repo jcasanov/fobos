@@ -1,0 +1,18 @@
+DATABASE aceros
+SCREEN
+{
+
+
+                                                       Estado: [c] [c001     ]
+
+           Compañía: [c000]  [c002                                ]
+}
+TABLES
+cajt000
+ATTRIBUTES
+c000 = cajt000.j00_compania, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS='Presione F2 para obtener ayuda del campo';
+c    = FORMONLY.tit_est, AUTONEXT, REVERSE, UPSHIFT;
+c001 = FORMONLY.tit_estado_caj, NOENTRY, UPSHIFT;
+c002 = FORMONLY.tit_compania, NOENTRY, REVERSE, UPSHIFT;
+end

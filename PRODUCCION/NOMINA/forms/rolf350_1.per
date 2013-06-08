@@ -1,0 +1,100 @@
+DATABASE aceros
+SCREEN
+{
+ Departamento: [c000 ] [c001                         ]  Estado: [c002        ]
+     Empleado: [c003 ] [c004                         ]
+                                                    Tipo Fecha: [c007        ]
+      Periodo: [c005      ]       -       [c006      ]
+      Desea ver todas las vacaciones ?: [c]      Tipo Vacacion: [c050        ]
+      Desea ver vacaciones pendientes de gozo ?: [d]
+     [c030                                           ]      [c008 ] de [c009 ]
+ [c010|c011                  |c012|c13 |c14 |c15 |c16 |c017       |c018       ]
+[c020|c021                  |c022|c23 |c24 |c25 |c26 |c027       |c028       ]
+[c020|c021                  |c022|c23 |c24 |c25 |c26 |c027       |c028       ]
+[c020|c021                  |c022|c23 |c24 |c25 |c26 |c027       |c028       ]
+[c020|c021                  |c022|c23 |c24 |c25 |c26 |c027       |c028       ]
+[c020|c021                  |c022|c23 |c24 |c25 |c26 |c027       |c028       ]
+[c020|c021                  |c022|c23 |c24 |c25 |c26 |c027       |c028       ]
+[c020|c021                  |c022|c23 |c24 |c25 |c26 |c027       |c028       ]
+[c020|c021                  |c022|c23 |c24 |c25 |c26 |c027       |c028       ]
+[c020|c021                  |c022|c23 |c24 |c25 |c26 |c027       |c028       ]
+[c020|c021                  |c022|c23 |c24 |c25 |c26 |c027       |c028       ]
+[c020|c021                  |c022|c23 |c24 |c25 |c26 |c027       |c028       ]
+[c020|c021                  |c022|c23 |c24 |c25 |c26 |c027       |c028       ]
+                        Totales: [c31 |c32 |c33 |c34 |c035       |c036       ]
+}
+TABLES
+rolt030
+rolt039
+ATTRIBUTES
+c000 = FORMONLY.cod_depto, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = FORMONLY.nom_depto, NOENTRY, UPSHIFT;
+c002 = FORMONLY.estado TYPE CHAR NOT NULL, AUTONEXT, REQUIRED, UPSHIFT,
+	WIDGET = 'RADIO', CONFIG = 'A Activas P Procesadas',
+	INCLUDE = ('A', 'P'), DEFAULT = 'P', REVERSE;
+c003 = FORMONLY.cod_trab, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c004 = FORMONLY.nom_trab, NOENTRY, UPSHIFT;
+c005 = FORMONLY.fecha_ini TYPE DATE NOT NULL, AUTONEXT, REQUIRED, UPSHIFT,
+	REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha inicial en formato: dd-mm-aaaa.';
+c006 = FORMONLY.fecha_fin TYPE DATE NOT NULL, AUTONEXT, REQUIRED, UPSHIFT,
+	REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha final en formato: dd-mm-aaaa.';
+c007 = FORMONLY.tipo_fecha TYPE CHAR NOT NULL, AUTONEXT, REQUIRED, UPSHIFT,
+	WIDGET = 'RADIO', CONFIG = 'V Vacacion C Proceso',
+	INCLUDE = ('V', 'C'), DEFAULT = 'V', REVERSE;
+c050 = FORMONLY.tipo_vac TYPE CHAR NOT NULL, AUTONEXT, REQUIRED, UPSHIFT,
+	WIDGET = 'RADIO', CONFIG = 'G Gozadas P Pagadas',
+	INCLUDE = ('G', 'P'), DEFAULT = 'G', REVERSE;
+c    = FORMONLY.todas_vac TYPE CHAR NOT NULL, AUTONEXT, REQUIRED, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge', INCLUDE = ('S', 'N'),
+	DEFAULT = 'N', REVERSE;
+d    = FORMONLY.dias_pend TYPE CHAR NOT NULL, AUTONEXT, REQUIRED, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge', INCLUDE = ('S', 'N'),
+	DEFAULT = 'N', REVERSE;
+
+c008 = FORMONLY.num_row, NOENTRY, UPSHIFT;
+c009 = FORMONLY.max_row, NOENTRY, UPSHIFT;
+
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c13  = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c14  = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c15  = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c16  = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+c017 = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22';
+c018 = FORMONLY.tit_col9, WIDGET = 'BUTTON', CONFIG = 'F23';
+
+c020 = rolt039.n39_cod_trab, NOENTRY, UPSHIFT;
+c021 = rolt030.n30_nombres, NOENTRY, UPSHIFT;
+c022 = FORMONLY.anio_v TYPE SMALLINT, NOENTRY, UPSHIFT, FORMAT = '&&&&';
+c23  = rolt039.n39_dias_vac, NOENTRY, UPSHIFT, FORMAT = '####';
+c24  = rolt039.n39_dias_adi, NOENTRY, UPSHIFT, FORMAT = '####';
+c25  = FORMONLY.tot_dias TYPE SMALLINT, NOENTRY, UPSHIFT, FORMAT = '####';
+c26  = rolt039.n39_dias_goza, NOENTRY, UPSHIFT, FORMAT = '####';
+c027 = rolt039.n39_tot_ganado, NOENTRY, UPSHIFT, FORMAT = '####,##&.##';
+c028 = rolt039.n39_neto, NOENTRY, UPSHIFT, FORMAT = '####,##&.##';
+
+c030 = FORMONLY.nom_empl, NOENTRY, REVERSE, UPSHIFT;
+c31  = FORMONLY.tot_dias_vac, NOENTRY, UPSHIFT, FORMAT = '####';
+c32  = FORMONLY.tot_dias_adi, NOENTRY, UPSHIFT, FORMAT = '####';
+c33  = FORMONLY.tot_dias_v TYPE SMALLINT, NOENTRY, UPSHIFT, FORMAT = '####';
+c34  = FORMONLY.tot_dias_goza, NOENTRY, UPSHIFT, FORMAT = '####';
+c035 = FORMONLY.tot_ganado, NOENTRY, UPSHIFT, FORMAT = '####,##&.##';
+c036 = FORMONLY.tot_neto, NOENTRY, UPSHIFT, FORMAT = '####,##&.##';
+END
+KEYS
+F5  = 'Comprobante'
+F6  = 'Contabilizacion'
+F7  = 'Vacaciones'
+F8  = 'Dias Gozados'
+F9  = 'Detalle Tot. Gan.'
+F10 = 'Imprimir'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_detalle[12] (n39_cod_trab, n30_nombres, anio_v, n39_dias_vac,
+				n39_dias_adi, tot_dias, n39_dias_goza,
+				n39_tot_ganado, n39_neto)

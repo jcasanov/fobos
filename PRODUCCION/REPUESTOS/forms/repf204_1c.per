@@ -1,0 +1,74 @@
+DATABASE aceros
+SCREEN
+{
+
+         Pedido: [c000      ]   Tipo: [c|c060      ]   Estado: [b|c002      ]
+       División: [c025 ]               Moneda Pedido: [a0] [c010            ]
+      Proveedor: [c003      ] [c004                                         ]
+    Fecha Envío: [c005      ]        Demora: [c006  ]     Seguridad: [c007  ]
+  Fecha Llegada: [c008      ]    Referencia: [c009                          ]
+  Aux. Contable: [c011        ] [c012                                       ]
+
+  Item         Descripción       Cantidad         FOB           Subtotal    
+[c018  ] [c019                 |c020      |c021            |c022            ]
+[c018  ] [c019                 |c020      |c021            |c022            ]
+[c018  ] [c019                 |c020      |c021            |c022            ]
+[c018  ] [c019                 |c020      |c021            |c022            ]
+[c018  ] [c019                 |c020      |c021            |c022            ]
+[c018  ] [c019                 |c020      |c021            |c022            ]
+                               [c026      ]         Total: [c024            ]
+[c027                                              ]
+[c023                                                             ]
+}
+TABLES
+rept016,
+rept017
+ATTRIBUTES
+c000 = rept016.r16_pedido, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c    = rept016.r16_tipo, AUTONEXT, REVERSE, UPSHIFT,
+	INCLUDE = ('S', 'E'), DEFAULT = 'E',
+	COMMENTS = '(S) Sugerido  (E) Emergencia';
+c060 = FORMONLY.tit_tipo,REVERSE,UPSHIFT,NOENTRY;
+b    = rept016.r16_estado, NOENTRY, REVERSE, UPSHIFT,
+	INCLUDE = ('A', 'C', 'R', 'L', 'P'), DEFAULT = 'A',
+	COMMENTS = '(A) Activo  (C) Confirmado  (R) Recibido  (L) Liquidado  (P) Procesado';
+c002 = FORMONLY.tit_estado_rep, NOENTRY, UPSHIFT, REVERSE;
+c025 = rept016.r16_linea, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c003 = rept016.r16_proveedor, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c004 = FORMONLY.tit_proveedor, NOENTRY, REVERSE, UPSHIFT;
+c005 = rept016.r16_fec_envio, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la fecha en formato dd-mm-aaaa';
+c006 = rept016.r16_demora, NOENTRY, REVERSE;
+c007 = rept016.r16_seguridad, NOENTRY, REVERSE;
+c008 = rept016.r16_fec_llegada, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c009 = rept016.r16_referencia, AUTONEXT, REVERSE, UPSHIFT;
+a0   = rept016.r16_moneda, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c010 = FORMONLY.tit_mon_bas, NOENTRY, REVERSE, UPSHIFT;
+c011 = rept016.r16_aux_cont, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c012 = FORMONLY.tit_aux_con, NOENTRY, REVERSE, UPSHIFT;
+
+c018 = rept017.r17_item, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c019 = FORMONLY.tit_descripcion, NOENTRY, REVERSE, UPSHIFT;
+c020 = rept017.r17_cantped, AUTONEXT, INCLUDE = (0 TO 999999.99),
+	REVERSE, FORMAT = '---,--&.##';
+c021 = rept017.r17_fob, AUTONEXT, REVERSE, INCLUDE = (0.01 TO 999999999.9999),
+	FORMAT = '---,---,--&.####';
+c022 = FORMONLY.tit_subtotal TYPE DECIMAL (13,4), REVERSE, NOENTRY,
+	FORMAT = '---,---,--&.####';
+
+c023 = FORMONLY.tit_descri, NOENTRY, REVERSE, UPSHIFT;
+c027 = FORMONLY.tit_clase, NOENTRY, REVERSE, UPSHIFT;
+c024 = FORMONLY.tit_total TYPE DECIMAL (14,4), NOENTRY, REVERSE,
+	FORMAT = '---,---,--&.####';
+c026 = FORMONLY.tot_cant TYPE DECIMAL, NOENTRY, REVERSE, FORMAT = '---,--&.##';
+end
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_repd[6] (r17_item, tit_descripcion, r17_cantped, r17_fob,
+			tit_subtotal)

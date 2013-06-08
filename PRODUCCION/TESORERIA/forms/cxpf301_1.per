@@ -1,4 +1,4 @@
-DATABASE formonly
+DATABASE FORMONLY
 SCREEN
 {
            Moneda: [c3]   [c004          ]   Tipo Vencimiento: [c007          ]
@@ -22,32 +22,32 @@ SCREEN
                             [c040           |c041           |c042           ]
 }   
 ATTRIBUTES
-c3   = formonly.moneda TYPE CHAR NOT NULL, UPSHIFT, AUTONEXT, REQUIRED,
+c3   = FORMONLY.moneda TYPE CHAR NOT NULL, UPSHIFT, AUTONEXT, REQUIRED,
 	WIDGET = "FIELD_BMP", CONFIG = "lista.bmp F2", REVERSE;
-c004 = formonly.tit_mon, NOENTRY;
-c05  = formonly.tipprov, WIDGET = 'FIELD_BMP',
+c004 = FORMONLY.tit_mon, NOENTRY;
+c05  = FORMONLY.tipprov, WIDGET = 'FIELD_BMP',
        CONFIG = 'lista.bmp F2';
-c006 = formonly.tit_tipprov, NOENTRY;
-c007 = formonly.ind_venc TYPE CHAR, UPSHIFT, AUTONEXT, REVERSE,
+c006 = FORMONLY.tit_tipprov, NOENTRY;
+c007 = FORMONLY.ind_venc TYPE CHAR, UPSHIFT, AUTONEXT, REVERSE,
 	WIDGET = 'RADIO', CONFIG = 'V Vencidos P Por_Vencer T Todos';
-c08  = formonly.dias_i TYPE SMALLINT, 
+c08  = FORMONLY.dias_i TYPE SMALLINT, 
        COMMENT = 'Rango días para cartera por vencer o vencida';
-c009 = formonly.dias_f TYPE SMALLINT,
+c009 = FORMONLY.dias_f TYPE SMALLINT,
        COMMENT = 'Rango días para cartera por vencer o vencida';
-c020 = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-c021 = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-c022 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
-c023 = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
-c030 = formonly.nomprov;
-c031 = formonly.por_vencer TYPE DECIMAL(12,2), FORMAT =  '####,###,##&.##';
-c032 = formonly.vencido    TYPE DECIMAL(12,2), FORMAT =  '####,###,##&.##';
-c033 = formonly.tot_saldo  TYPE DECIMAL(12,2), FORMAT =  '####,###,##&.##';
-c040 = formonly.tot_1      TYPE DECIMAL(14,2), FORMAT =  '####,###,##&.##';
-c041 = formonly.tot_2      TYPE DECIMAL(14,2), FORMAT =  '####,###,##&.##';
-c042 = formonly.tot_3      TYPE DECIMAL(14,2), FORMAT =  '####,###,##&.##';
+c020 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c021 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c022 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c023 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c030 = FORMONLY.nomprov;
+c031 = FORMONLY.por_vencer TYPE DECIMAL(12,2), FORMAT =  '####,###,##&.##';
+c032 = FORMONLY.vencido    TYPE DECIMAL(12,2), FORMAT =  '####,###,##&.##';
+c033 = FORMONLY.tot_saldo  TYPE DECIMAL(12,2), FORMAT =  '####,###,##&.##';
+c040 = FORMONLY.tot_1      TYPE DECIMAL(14,2), FORMAT =  '####,###,##&.##';
+c041 = FORMONLY.tot_2      TYPE DECIMAL(14,2), FORMAT =  '####,###,##&.##';
+c042 = FORMONLY.tot_3      TYPE DECIMAL(14,2), FORMAT =  '####,###,##&.##';
 INSTRUCTIONS
 DELIMITERS '  '
-SCREEN RECORD rm_prov[12] (formonly.nomprov,formonly.por_vencer, formonly.vencido,
-			  formonly.tot_saldo)
+SCREEN RECORD rm_prov[12] (FORMONLY.nomprov,formonly.por_vencer, formonly.vencido,
+			  FORMONLY.tot_saldo)
 KEYS
 "F5"="E/C Proveedor"

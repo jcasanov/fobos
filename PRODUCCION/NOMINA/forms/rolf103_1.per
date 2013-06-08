@@ -1,0 +1,55 @@
+DATABASE aceros
+SCREEN
+{
+                                                            [c050] de [c051]
+   [b0 |b1 |b2                            |b3             |b4             |b]
+  [c0 |c1 |c2                            |c3             |c4             |c]
+  [c0 |c1 |c2                            |c3             |c4             |c]
+  [c0 |c1 |c2                            |c3             |c4             |c]
+  [c0 |c1 |c2                            |c3             |c4             |c]
+  [c0 |c1 |c2                            |c3             |c4             |c]
+  [c0 |c1 |c2                            |c3             |c4             |c]
+  [c0 |c1 |c2                            |c3             |c4             |c]
+  [c0 |c1 |c2                            |c3             |c4             |c]
+  [c0 |c1 |c2                            |c3             |c4             |c]
+  [c0 |c1 |c2                            |c3             |c4             |c]
+  [c0 |c1 |c2                            |c3             |c4             |c]
+  [c0 |c1 |c2                            |c3             |c4             |c]
+  [c0 |c1 |c2                            |c3             |c4             |c]
+  [c0 |c1 |c2                            |c3             |c4             |c]
+  [c0 |c1 |c2                            |c3             |c4             |c]
+  [c0 |c1 |c2                            |c3             |c4             |c]
+  [c0 |c1 |c2                            |c3             |c4             |c]
+  [c0 |c1 |c2                            |c3             |c4             |c]
+
+}
+TABLES
+rolt006
+ATTRIBUTES
+		     ---- BOTONES ----
+b0  = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+b1  = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b2  = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+b3  = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+b4  = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+b   = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+	---------------------------------------------
+
+c0  = rolt006.n06_cod_rubro,  UPSHIFT, OPTIONS = '-nolist';
+c1  = rolt006.n06_orden,      UPSHIFT, OPTIONS = '-nolist';
+c2  = rolt006.n06_nombre,     UPSHIFT, OPTIONS = '-nolist';
+c3  = rolt006.n06_nombre_abr, UPSHIFT, OPTIONS = '-nolist';
+c4  = FORMONLY.n06_det_tot    TYPE VARCHAR, UPSHIFT, OPTIONS = '-nolist';
+c   = rolt006.n06_estado,     UPSHIFT, OPTIONS = '-nolist';
+
+c050 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c051 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+END
+KEYS
+F5 = 'Ingresar'
+F6 = 'Modificar'
+F7 = 'Bloquear/Activar'
+INSTRUCTIONS 
+DELIMITERS '||'
+SCREEN RECORD r_detalle[18] (n06_cod_rubro, n06_orden, n06_nombre,
+			     n06_nombre_abr, n06_det_tot, n06_estado)

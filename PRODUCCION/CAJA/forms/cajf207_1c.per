@@ -1,0 +1,80 @@
+DATABASE aceros
+SCREEN 
+{
+
+   Comprobante: [a0|c002        ]                     Estado: [a|c103      ] 
+       No Cta.: [c014           ]       Banco: [c013] [c100                ] 
+        Moneda: [a1] [c101           ]   
+    Referencia: [c010                                                      ]
+Saldo Ant. Ef.: [c015            ]        Saldo Ant. Ch.: [c017            ]
+ Saldo Hoy Ef.: [c003            ]         Saldo Hoy Ch.: [c004            ]
+    Egreso Ef.: [c006            ]        
+ TP  Num.     Num. Cheque       Cuenta Corriente    Ban.     Valor        E
+[a3|c018   |c020           |c021                   |c022|c023            |c]
+[a3|c018   |c020           |c021                   |c022|c023            |c]
+[a3|c018   |c020           |c021                   |c022|c023            |c]
+[a3|c018   |c020           |c021                   |c022|c023            |c]
+[a3|c018   |c020           |c021                   |c022|c023            |c]
+[a3|c018   |c020           |c021                   |c022|c023            |c]
+                                                        [c025            ]     
+         Caja: [c008] [c102              ]
+Ingresado Por: [c016      ]          Fecha de Ingreso: [c007               ]
+}
+TABLES
+cajt010
+cajt011
+ATTRIBUTES
+a0   = cajt010.j10_tipo_fuente, NOENTRY, REVERSE;
+c002 = cajt010.j10_num_fuente, REVERSE, NOENTRY,
+	COMMENTS='Presione F2 para obtener ayuda del campo';
+	
+a    = cajt010.j10_estado, NOENTRY, REVERSE, UPSHIFT,
+	COMMENTS='(P) Procesado  (E) Eliminado';
+	
+a1   = cajt010.j10_moneda, REVERSE, AUTONEXT, UPSHIFT,
+	COMMENTS='Presione F2 para obtener ayuda del campo';
+c006 = cajt010.j10_valor, REVERSE, FORMAT='#,###,###,##&.##',
+	COMMENTS='Digite valor a egresar de caja en efectivo.',
+	INCLUDE=(0 TO 9999999999.99);
+c010 = FORMONLY.j10_referencia NOT NULL, REVERSE, REQUIRED, UPSHIFT;
+c013 = cajt010.j10_banco ,UPSHIFT,
+	COMMENTS='Presione F2 para obtener ayuda del campo' ;
+c014 = cajt010.j10_numero_cta, UPSHIFT, REVERSE,
+	COMMENTS='Presione F2 para obtener ayuda del campo';
+	
+c015 = FORMONLY.saldo_ant_ef TYPE DECIMAL(12,2), 
+	FORMAT='#,###,###,##&.##', NOENTRY, REVERSE;
+c017 = FORMONLY.saldo_ant_ch TYPE DECIMAL(12,2),
+	 FORMAT='#,###,###,##&.##', NOENTRY, REVERSE;
+c003 = FORMONLY.saldo_hoy_ef TYPE DECIMAL(12,2), 
+	FORMAT='#,###,###,##&.##', NOENTRY, REVERSE;
+c004 = FORMONLY.saldo_hoy_ch TYPE DECIMAL(12,2),
+	 FORMAT='#,###,###,##&.##', NOENTRY, REVERSE;
+
+c016 = cajt010.j10_usuario, REVERSE, NOENTRY, UPSHIFT;
+c007 = cajt010.j10_fecing, REVERSE, NOENTRY;
+
+c008 = cajt010.j10_codigo_caja, NOENTRY, REVERSE,
+	COMMENTS='Presione F2 para obtener ayuda del campo';
+a3   = cajt011.j11_tipo_fuente, NOENTRY;
+c018 = cajt011.j11_num_fuente, NOENTRY;
+c020 = cajt011.j11_num_ch_aut, NOENTRY;
+c021 = cajt011.j11_num_cta_tarj, NOENTRY;
+c022 = cajt011.j11_cod_bco_tarj, NOENTRY;
+c023 = cajt011.j11_valor, FORMAT='#,###,###,##&.##', NOENTRY;
+c    = FORMONLY.check TYPE CHAR NOT NULL, INCLUDE =('S','N'), AUTONEXT, UPSHIFT,
+	DEFAULT='N', COMMENTS = 'S Si deposita    N No deposita.';
+
+c025 = FORMONLY.tot_egreso_ch TYPE DECIMAL(12,2), 
+	NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+
+c100 = FORMONLY.n_banco,  NOENTRY;
+c101 = FORMONLY.n_moneda, NOENTRY;
+c102 = FORMONLY.n_caja,   NOENTRY;
+c103 = FORMONLY.n_estado, NOENTRY;
+
+end
+
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD ra_egresos[6] (j11_tipo_fuente, j11_num_fuente, j11_num_ch_aut, j11_num_cta_tarj, j11_cod_bco_tarj, j11_valor, check)

@@ -1,0 +1,17 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+    Fecha Inicial: [c000      ]                   Fecha Final: [c001      ]
+
+}
+ATTRIBUTES
+c000 = FORMONLY.fecha_ini TYPE DATE NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha inicial en formato: dd-mm-aaaa.';
+c001 = FORMONLY.fecha_fin TYPE DATE NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha final en formato: dd-mm-aaaa.';
+END
+INSTRUCTIONS
+DELIMITERS '||'

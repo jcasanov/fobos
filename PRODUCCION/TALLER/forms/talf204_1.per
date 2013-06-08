@@ -1,112 +1,92 @@
-database diteca
-screen size 18 by 78 TITLE " Datos Orden " 
+DATABASE aceros
+SCREEN size 18 by 78 TITLE " Datos Orden " 
 { 
-                                                               [y001] de [y002]
+                                                              [y001] de [y002]
 
                Orden: [c001       ]    	         Estado: [a] [a1         ] 
       Código Cliente: [c005       ]  [c006                               ]
 
-          Tipo Orden: [b] [b1             ]     Subtipo: [c] [c1           ] 
+          Tipo Orden: [b] [b1             ]  Subtipo: [c] [c1                ] 
          Descripción: [c002                                    ]
                       [c002                                    ]
                       [c002                                    ]
-
  	     Sección: [c011] [c0111                            ]  
        Código Asesor: [c012] [c0121                            ]         
-     Código Mecánico: [c013] [c0131                            ]
-
+      Código Técnico: [c013] [c0131                            ]
   Número Presupuesto: [c009       ]          Valor Tope: [c010            ]
 	      Moneda: [a0] [a01         ]       Paridad: [c014         ]
-     Fecha de Cierre: [c044               ]
-       Ingresado Por: [c047      ]     Fecha de Ingreso: [c048               ]
-
-}
-screen size 18 by 78 TITLE " Otros Datos "
-{
-                                                               [y003] de [y004]
-
-    Teléfono Cliente: [c007      ]
-  Código Estadístico: [c008      ]  [c0081                              ]
-
-       Fecha Inicial: [c016      ]          Fecha Final: [c017      ] 
+    Teléfono Cliente: [c007      ]               Modelo: [c070           ]
 
        Forma de Pago: [d              ]      % Impuesto: [c018  ] 
 
-
-      Modelo Máquina: [c019           ] 
-     Número de Serie: [c020                     ]
-	       Placa: [c021      ]                Color: [c022           ]
-
-   	   Horómetro: [c023       ]       Orden Chequeo: [c024       ]
-
+       Fecha Inicial: [c016      ]          Fecha Final: [c017      ] 
+     Fecha de Cierre: [c044               ]
 }
-screen size 18 by 78 TITLE "   Valores   "
+SCREEN size 18 by 78 TITLE "   Valores   "
 {
-                                                               [y005] de [y006]
+                                                              [y005] de [y006]
 
  Factura: [c045         ]                Fecha Factura: [c046               ]
                                        Fecha Anulación: [z050               ]
------------------------------------------------------------------------------
    Orden: [c049       ]   Bruto	      % Dscto.   Val. Dscto.            Neto
 -----------------------------------------------------------------------------
-   Mano Obra Taller: [c025         ]  [c034  ] [c037        ] [c050         ]
+ Mano Obra Servicio: [c025         ]  [c034  ] [c037        ] [c050         ]
  M.O. Cont. Interno: [c027         ]                          [c053         ] 
   Mano Obra Externa: [c026         ]                          [c054         ]
-   Repuestos Taller: [c028         ]  [c035  ] [c038        ] [c051         ] 
+ Repuestos Servicio: [c028         ]  [c035  ] [c038        ] [c051         ] 
  Repuestos Externos: [c029         ]                          [c055         ]
  Rep. Cont. Interno: [c030         ]                          [c056         ]   
   Repuestos Almacén: [c031         ]  [c036  ] [c039        ] [c052         ] 
-           Viáticos: [c060         ]                          [c061         ] 
-        Suministros: [c062         ]                          [c063         ] 
-
-        				        Total Bruto: [c040          ] 
-                                            Total Descuento: [c041          ]
-           			             Valor Impuesto: [c042          ]
-				                 Total Neto: [c043          ]
+   Transp. y Dietas: [c060         ]                          [c061         ] 
+   Otros Materiales: [c062         ]                          [c063         ] 
+        TOTALES PROFORMAS/FACTURAS               Total Bruto: [c040         ] 
+           Subtotal: [c080         ]         Total Descuento: [c041         ]
+     Valor Impuesto: [c081         ]          Valor Impuesto: [c042         ]
+         Total Neto: [c082         ]              Total Neto: [c043         ]
+                                                 Total OT/PR: [c083         ]
+         Ingresado Por: [c047      ]  Fecha de Ingreso: [c048               ]
 }
-end
-tables
+TABLES
 talt023
-attributes
-y001 = formonly.vm_row_current1 TYPE SMALLINT, NOENTRY, FORMAT = '###&';
-y002 = formonly.vm_num_rows1 TYPE SMALLINT, NOENTRY, FORMAT = '###&';
-y003 = formonly.vm_row_current2 TYPE SMALLINT, NOENTRY, FORMAT = '###&';
-y004 = formonly.vm_num_rows2 TYPE SMALLINT, NOENTRY, FORMAT = '###&';
-y005 = formonly.vm_row_current3 TYPE SMALLINT, NOENTRY, FORMAT = '###&';
-y006 = formonly.vm_num_rows3 TYPE SMALLINT, NOENTRY, FORMAT = '###&';
+ATTRIBUTES
+y001 = FORMONLY.vm_row_current1 TYPE SMALLINT, NOENTRY, FORMAT = '###&';
+y002 = FORMONLY.vm_num_rows1 TYPE SMALLINT, NOENTRY, FORMAT = '###&';
+y005 = FORMONLY.vm_row_current3 TYPE SMALLINT, NOENTRY, FORMAT = '###&';
+y006 = FORMONLY.vm_num_rows3 TYPE SMALLINT, NOENTRY, FORMAT = '###&';
 c001 = t23_orden ,REQUIRED,  REVERSE, AUTONEXT  
 	,widget="FIELD_BMP", config="lista.bmp F2";
-a    = talt023.t23_estado, UPSHIFT, AUTONEXT;
-a1   = formonly.tit_estado, REVERSE;
+a    = talt023.t23_estado, UPSHIFT, AUTONEXT,
+	COMMENTS = '(A) Activa  (C) Cerrada  (F) Facturada  (D) Devuelta  (E) Eliminada';
+a1   = FORMONLY.tit_estado;
 c005 = t23_cod_cliente , AUTONEXT  
 	,widget="FIELD_BMP", config="lista.bmp F2",
 	KEY F5="Crear Cliente";
 c006 = talt023.t23_nom_cliente, UPSHIFT, REVERSE, REQUIRED;
 b    = t23_tipo_ot ,REQUIRED,  REVERSE, AUTONEXT, UPSHIFT  
 	,widget="FIELD_BMP", config="lista.bmp F2";
-b1   = formonly.desc_tipo_ot, NOENTRY;
+b1   = FORMONLY.desc_tipo_ot, NOENTRY;
 c    = t23_subtipo_ot , REQUIRED, REVERSE, AUTONEXT, UPSHIFT  
 	,widget="FIELD_BMP", config="lista.bmp F2";
-c1   = formonly.desc_subtipo_ot, NOENTRY;
+c1   = FORMONLY.desc_subtipo_ot, NOENTRY;
 c002 = t23_descripcion, UPSHIFT, WORDWRAP;
-c009 = t23_numpre , AUTONEXT    
+c009 = t23_numpre , AUTONEXT, NOENTRY    
 	,widget="FIELD_BMP", config="lista.bmp F2",
         COMMENT = 'Escoja el Presupuesto';
 c010 = talt023.t23_valor_tope, FORMAT = '###,###,##&.##',
 	COMMENT = 'Valor tope de la O.T. basado en el tipo de O.T.';
 c011 = t23_seccion, REQUIRED,  REVERSE, AUTONEXT    
 	,widget="FIELD_BMP", config="lista.bmp F2";
-c0111= formonly.desc_seccion, NOENTRY;
+c0111= FORMONLY.desc_seccion, NOENTRY;
 c012 = t23_cod_asesor, REQUIRED,  REVERSE, AUTONEXT    
 	,widget="FIELD_BMP", config="lista.bmp F2";
-c0121= formonly.desc_cod_asesor, NOENTRY;
+c0121= FORMONLY.desc_cod_asesor, NOENTRY;
 c013 = t23_cod_mecani, REQUIRED,  REVERSE, AUTONEXT    
 	,widget="FIELD_BMP", config="lista.bmp F2";
-c0131= formonly.desc_cod_mecani, NOENTRY;
+c0131= FORMONLY.desc_cod_mecani, NOENTRY;
 a0   = talt023.t23_moneda, UPSHIFT, REVERSE, REQUIRED, 
-	COMMENT = 'Moneda de la O.T., afectará a la paridad de la moneda alterna'  
+	COMMENT = 'Moneda de la O.T., afectara a la paridad de la moneda alterna'  
 	,widget="FIELD_BMP", config="lista.bmp F2";
-a01  = formonly.desc_moneda, UPSHIFT;
+a01  = FORMONLY.desc_moneda, UPSHIFT;
 c014 = talt023.t23_paridad, NOENTRY;
 c044 = talt023.t23_fec_cierre, FORMAT='dd-mm-yyyy', NOENTRY 
 	,COMMENT = 'Formato dd-mm-aaaa';
@@ -114,31 +94,21 @@ c047 = talt023.t23_usuario, NOENTRY;
 c048 = talt023.t23_fecing, NOENTRY;
 
 c007 = talt023.t23_tel_cliente, UPSHIFT;
-c008 = formonly.t23_codcli_est TYPE INTEGER,REQUIRED,  AUTONEXT  
-	,widget="FIELD_BMP", config="lista.bmp F2"
-	,COMMENT= 'Para casos en que la factura y estadistica se aplicaran a otro cliente';
-c0081= formonly.desc_cliest, NOENTRY; 
+c070 = talt023.t23_modelo, UPSHIFT, AUTONEXT, REVERSE,
+	WIDGET = "FIELD_BMP", CONFIG = "lista.bmp F2";
+--c008 = FORMONLY.t23_codcli_est TYPE INTEGER,REQUIRED,  AUTONEXT  
+--	,widget="FIELD_BMP", config="lista.bmp F2"
+--	,COMMENT= 'Para casos en que la factura y estadistica se aplicaran a otro cliente';
+--c0081= FORMONLY.desc_cliest, NOENTRY; 
 c016 = talt023.t23_fecini, FORMAT='dd-mm-yyyy', REQUIRED 
 	,COMMENT = 'Formato dd-mm-aaaa';
 c017 = talt023.t23_fecfin, FORMAT='dd-mm-yyyy', REQUIRED 
 	,COMMENT = 'Formato dd-mm-aaaa';
-d   = formonly.t23_cont_cred ,AUTONEXT, REVERSE, DEFAULT = 'C', REQUIRED,
+d   = FORMONLY.t23_cont_cred ,AUTONEXT, REVERSE, DEFAULT = 'C', REQUIRED,
 	WIDGET='RADIO', CONFIG='C Contado R Crédito'; 
 c018 = talt023.t23_porc_impto, FORMAT = '##&.##', NOENTRY;
-c019 = talt023.t23_modelo, UPSHIFT, REVERSE, REQUIRED 
-	,widget="FIELD_BMP", config="lista.bmp F2",
-	KEY F6="Ingresar Chasis";
-c020 = talt023.t23_chasis, UPSHIFT, REVERSE, REQUIRED;
-c021 = talt023.t23_placa, UPSHIFT, REVERSE, REQUIRED;
-c022 = talt023.t23_color, UPSHIFT, REVERSE, REQUIRED;
-c023 = formonly.t23_kilometraje TYPE INTEGER 
-	, COMMENT = 'Kilometraje al momento del ingreso del vehículo';
-c024 = formonly.t23_orden_cheq TYPE INTEGER 
-	, COMMENT = 'Orden de Chequeo si la tuviere' 
-	,widget="FIELD_BMP", config="lista.bmp F2";
-
 c025 = talt023.t23_val_mo_tal,  FORMAT = '##,###,##&.##', REQUIRED, REVERSE;
-c034 = talt023.t23_por_mo_tal,  FORMAT = '##&.##', REQUIRED, REVERSE, 
+c034 = talt023.t23_por_mo_tal,  NOENTRY, FORMAT = '##&.##', REQUIRED, REVERSE, 
 	COMMENT='% Dscto. predefinido en el descuento al Cliente o en descuento por la Línea';
 c026 = talt023.t23_val_mo_ext,  FORMAT = '##,###,##&.##', REQUIRED, REVERSE;
 c027 = talt023.t23_val_mo_cti,  FORMAT = '##,###,##&.##', REQUIRED, REVERSE;
@@ -147,33 +117,43 @@ c029 = talt023.t23_val_rp_ext,  FORMAT = '##,###,##&.##', REQUIRED, REVERSE;
 c030 = talt023.t23_val_rp_cti,  FORMAT = '##,###,##&.##', REQUIRED, REVERSE;
 c031 = talt023.t23_val_rp_alm,  FORMAT = '##,###,##&.##', REQUIRED, REVERSE;
 c060 = talt023.t23_val_otros1,  FORMAT = '##,###,##&.##', NOENTRY,  REVERSE;
-c062 = talt023.t23_val_otros2,  FORMAT = '##,###,##&.##', REQUIRED, REVERSE;
-c035 = talt023.t23_por_rp_tal,  FORMAT = '##&.##', REQUIRED, REVERSE,  
+c062 = talt023.t23_val_otros2,  FORMAT = '##,###,##&.##', NOENTRY, REVERSE,
+       COMMENTS = 'Ingrese total compras varias de contado.';
+c035 = talt023.t23_por_rp_tal,  NOENTRY, FORMAT = '##&.##', REQUIRED, REVERSE,  
 	COMMENT='Porcentaje de descuento a los repuestos del taller';
-c036 = talt023.t23_por_rp_alm,  FORMAT = '##&.##', REQUIRED, REVERSE, 
+c036 = talt023.t23_por_rp_alm,  NOENTRY, FORMAT = '##&.##', REQUIRED, REVERSE, 
 	COMMENT='Porcentaje de descuento a los repuestos del almacén';
 c037 = talt023.t23_vde_mo_tal,  FORMAT = '#,###,##&.##';
 c038 = talt023.t23_vde_rp_tal,  FORMAT = '#,###,##&.##';
 c039 = talt023.t23_vde_rp_alm,  FORMAT = '#,###,##&.##';
-c040 = talt023.t23_tot_bruto,   FORMAT = '###,###,##&.##', REVERSE;
+c040 = talt023.t23_tot_bruto,   FORMAT = '##,###,##&.##', REVERSE;
 c041 = talt023.t23_tot_dscto,   FORMAT = '##,###,##&.##';
 c042 = talt023.t23_val_impto,   FORMAT = '##,###,##&.##';
-c043 = talt023.t23_tot_neto,    FORMAT = '###,###,##&.##', REVERSE;
+c043 = talt023.t23_tot_neto,    FORMAT = '##,###,##&.##', REVERSE;
 c045 = talt023.t23_num_factura, FORMAT = '############', REVERSE 
 	,widget="FIELD_BMP", config="lista.bmp F2";
-c046 = talt023.t23_fec_factura, NOENTRY, REVERSE; 
-z050 = formonly.fec_anula TYPE DATETIME YEAR TO SECOND, NOENTRY, REVERSE; 
-c049 = formonly.f_orden, REVERSE;
-c050 = formonly.f_neto_mo_tal,     FORMAT = '##,###,##&.##';
-c051 = formonly.f_neto_rp_tal,     FORMAT = '##,###,##&.##';
-c052 = formonly.f_neto_rp_alm,     FORMAT = '##,###,##&.##';
-c053 = formonly.f_neto_val_mo_cti, FORMAT = '##,###,##&.##';
-c054 = formonly.f_neto_val_mo_ext, FORMAT = '##,###,##&.##';
-c055 = formonly.f_neto_val_rp_ext, FORMAT = '##,###,##&.##';
-c056 = formonly.f_neto_val_rp_cti, FORMAT = '##,###,##&.##';
-c061 = formonly.f_neto_val_otros1, FORMAT = '##,###,##&.##';
-c063 = formonly.f_neto_val_otros2, FORMAT = '##,###,##&.##';
-end
+c046 = talt023.t23_fec_factura, NOENTRY; 
+z050 = FORMONLY.fec_anula TYPE DATETIME YEAR TO SECOND, NOENTRY, REVERSE; 
+c049 = FORMONLY.f_orden, REVERSE;
+c050 = FORMONLY.f_neto_mo_tal,     FORMAT = '##,###,##&.##';
+c051 = FORMONLY.f_neto_rp_tal,     FORMAT = '##,###,##&.##';
+c052 = FORMONLY.f_neto_rp_alm,     FORMAT = '##,###,##&.##';
+c053 = FORMONLY.f_neto_val_mo_cti, FORMAT = '##,###,##&.##';
+c054 = FORMONLY.f_neto_val_mo_ext, FORMAT = '##,###,##&.##';
+c055 = FORMONLY.f_neto_val_rp_ext, FORMAT = '##,###,##&.##';
+c056 = FORMONLY.f_neto_val_rp_cti, FORMAT = '##,###,##&.##';
+c061 = FORMONLY.f_neto_val_otros1, FORMAT = '##,###,##&.##';
+c063 = FORMONLY.f_neto_val_otros2, FORMAT = '##,###,##&.##';
+
+c080 = FORMONLY.tit_subtotal_pr TYPE DECIMAL, UPSHIFT, NOENTRY,
+	FORMAT = '##,###,##&.##';
+c081 = FORMONLY.tit_impuesto_pr TYPE DECIMAL, UPSHIFT, NOENTRY,
+	FORMAT = '##,###,##&.##';
+c082 = FORMONLY.tit_neto_pr TYPE DECIMAL, UPSHIFT, NOENTRY, REVERSE,
+	FORMAT = '##,###,##&.##';
+c083 = FORMONLY.tit_neto_ot_pr TYPE DECIMAL, UPSHIFT, NOENTRY, COLOR = BLUE,
+	FORMAT = '##,###,##&.##';
+END
 
 KEYS
 F5=" "

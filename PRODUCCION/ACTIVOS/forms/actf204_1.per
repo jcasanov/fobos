@@ -1,0 +1,26 @@
+DATABASE aceros
+SCREEN
+{
+
+
+          Este proceso genera el diario contable por la depreciación       
+          mensual de los activos fijos.
+
+
+             Año de proceso: [c000]
+
+              Meses proceso: [c1|c001      ]  -  [c2|c002      ]
+	
+
+}
+TABLES
+actt000
+ATTRIBUTES
+c000 = actt000.a00_anopro, REVERSE, NOENTRY;
+c1   = FORMONLY.vm_mes_ini, REVERSE, AUTONEXT, UPSHIFT, INCLUDE = (1 TO 12),
+	FORMAT = '&&';
+c001 = FORMONLY.tit_mes_ini, REVERSE, NOENTRY, UPSHIFT;
+c2   = FORMONLY.vm_mes_fin, REVERSE, AUTONEXT, UPSHIFT, INCLUDE = (1 TO 12),
+	FORMAT = '&&';
+c002 = FORMONLY.tit_mes_fin, REVERSE, NOENTRY, UPSHIFT;
+END

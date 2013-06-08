@@ -1,0 +1,54 @@
+database aceros
+screen 
+{
+                                               Estado: [a|c104     ]        
+              Almacen: [c001] [c100                                ]
+          Liquidacion: [a0] [c102                                  ]
+         Fecha Inicio: [c002      ]          Fecha Fin: [c003      ]
+
+     [lbl1  |lbl2                                      |lbl3            ]
+    [c004  |c101                                      |c005            ]
+    [c004  |c101                                      |c005            ]
+    [c004  |c101                                      |c005            ]
+    [c004  |c101                                      |c005            ]
+    [c004  |c101                                      |c005            ]
+    [c004  |c101                                      |c005            ]
+    [c004  |c101                                      |c005            ]
+    [c004  |c101                                      |c005            ]
+    [c004  |c101                                      |c005            ]
+    [c004  |c101                                      |c005            ]
+    [c004  |c101                                      |c005            ]
+    [c004  |c101                                      |c005            ]
+                                                      [c103            ]
+}
+end
+tables
+rolt063
+attributes
+c001 = rolt063.n63_cod_almacen, REVERSE, WIDGET='FIELD_BMP', 
+	CONFIG='lista.bmp F2';
+a  = rolt063.n63_estado, REVERSE, UPSHIFT, NOENTRY, AUTONEXT, 
+	INCLUDE=('A', 'P'), COMMENT='A ACTIVO  P PROCESADO';
+a0 = rolt063.n63_cod_liqrol, NOENTRY, REVERSE, WIDGET='FIELD_BMP',
+	CONFIG='lista.bmp F2', UPSHIFT;
+c002 = rolt063.n63_fecha_ini, NOENTRY, FORMAT='dd-mm-yyyy', 
+	COMMENT='Ingrese la fecha en formato: dd-mm-yyyy';
+c003 = rolt063.n63_fecha_fin, NOENTRY, FORMAT='dd-mm-yyyy', 
+	COMMENT='Ingrese la fecha en formato: dd-mm-yyyy';
+
+c100 = formonly.n_almacen, NOENTRY;
+c102 = formonly.n_liqrol,  NOENTRY;
+c103 = formonly.tot_valor, NOENTRY, FORMAT='#,###,###,##&.##';
+c104 = formonly.n_estado,  NOENTRY;
+
+c004 = rolt063.n63_cod_trab, NOENTRY, OPTIONS='-nolist';
+c101 = formonly.n_trab,    NOENTRY, OPTIONS='-nolist';
+c005 = rolt063.n63_valor, OPTIONS='-nolist', FORMAT='#,###,###,##&.##';
+
+lbl1 = formonly.bt_cod_trab,    WIDGET='BUTTON', CONFIG='F15';
+lbl2 = formonly.bt_nom_trab,    WIDGET='BUTTON', CONFIG='F16';
+lbl3 = formonly.bt_valor,       WIDGET='BUTTON', CONFIG='F17';
+end
+
+instructions
+screen record ra_scr[12](n63_cod_trab, n_trab, n63_valor)

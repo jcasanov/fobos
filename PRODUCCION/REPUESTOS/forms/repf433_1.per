@@ -1,0 +1,25 @@
+DATABASE aceros
+SCREEN
+{
+
+                             IMPRIMIR NOTA DE PEDIDO
+                             ----------------------
+
+                         Nota de Pedido: [c000      ]
+
+                  Qué Tipo de Impresión? [c001            ]
+
+
+                       Número de Copias: [c0]
+
+}
+TABLES
+rept081
+ATTRIBUTES
+c000 = rept081.r81_pedido, NOENTRY, UPSHIFT, REVERSE;
+c001 = FORMONLY.vm_imprimir TYPE CHAR NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'RADIO', CONFIG = 'B "Para el Banco" I Interna', DEFAULT = 'I';
+c0   = FORMONLY.vm_num_copia TYPE SMALLINT NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = (1 TO 50), DEFAULT = 1,
+	COMMENTS = 'El número de copia es de 1 hasta maximo 50.';
+END

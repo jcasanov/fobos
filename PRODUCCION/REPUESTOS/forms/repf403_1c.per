@@ -1,0 +1,85 @@
+DATABASE aceros
+SCREEN
+{
+  
+      Moneda: [a0]       [c001           ]
+      Bodega: [a1]       [c002                          ]
+
+   Div. Ini.: [d]        [c004                     ]
+   Div. Fin.: [e]        [c005                     ]
+  Línea Ini.: [f5]       [f054                               ]
+  Línea Fin.: [f6]       [f055                               ]
+  Grupo Ini.: [f55]      [f066                                    ]
+  Grupo Fin.: [f56]      [f067                                    ]
+  Clase Ini.: [f057    ] [f078                                              ]
+  Clase Fin.: [f058    ] [f079                                              ]
+  Marca Ini.: [f59   ]   [f080                               ]
+  Marca Fin.: [f60   ]   [f081                               ]
+
+  Con Stock Total Mayor a Cero?: [c]    Año: [c007]    Mes: [c8] [c071      ]
+
+  Con Stock Local Mayor a Cero?: [g]      Mostrar Precios?: [f]
+
+}
+TABLES
+rept010
+rept011
+rept031
+ATTRIBUTES
+a0   = FORMONLY.vm_moneda NOT NULL, REQUIRED, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c001 = FORMONLY.tit_moneda, NOENTRY, REVERSE, UPSHIFT;
+a1   = FORMONLY.r11_bodega, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c002 = FORMONLY.tit_bodega, NOENTRY, UPSHIFT;
+
+d    = rept010.r10_linea, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c004 = FORMONLY.tit_linea, NOENTRY, REVERSE, UPSHIFT;
+e    = FORMONLY.r10_linea2 NOT NULL, REQUIRED, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c005 = FORMONLY.tit_linea2, NOENTRY, REVERSE, UPSHIFT;
+
+f5   = FORMONLY.r10_sub_linea, AUTONEXT, UPSHIFT, 
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f054 = FORMONLY.tit_sub_linea, NOENTRY, UPSHIFT;
+f6   = FORMONLY.r10_sub_linea2, AUTONEXT, UPSHIFT, 
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f055 = FORMONLY.tit_sub_linea2, NOENTRY, UPSHIFT;
+
+f55  = FORMONLY.r10_cod_grupo, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f066 = FORMONLY.tit_grupo, NOENTRY, UPSHIFT;
+f56  = FORMONLY.r10_cod_grupo2, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f067 = FORMONLY.tit_grupo2, NOENTRY, UPSHIFT;
+
+f057 = FORMONLY.r10_cod_clase, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f078 = FORMONLY.tit_clase, NOENTRY, UPSHIFT;
+f058 = FORMONLY.r10_cod_clase2, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f079 = FORMONLY.tit_clase2, NOENTRY, UPSHIFT;
+
+f59  = FORMONLY.r10_marca, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f080 = FORMONLY.tit_marca, NOENTRY, UPSHIFT;
+f60  = FORMONLY.r10_marca2, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+f081 = FORMONLY.tit_marca2, NOENTRY, UPSHIFT;
+
+c    = FORMONLY.vm_stock_tot TYPE CHAR NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = ('S', 'N'),
+	COMMENTS = '(S) para Sí  (N) para No';
+c007 = rept031.r31_ano, AUTONEXT, REVERSE, UPSHIFT, INCLUDE = (1900 TO 9999);
+c8   = rept031.r31_mes, AUTONEXT, REVERSE, UPSHIFT, INCLUDE = (1 TO 12),
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c071 = FORMONLY.tit_mes, NOENTRY, UPSHIFT, REVERSE;
+
+g    = FORMONLY.vm_stock_loc TYPE CHAR NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = ('S', 'N'),
+	COMMENTS = '(S) para Sí  (N) para No';
+f    = FORMONLY.vm_precios TYPE CHAR NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = ('S', 'N'),
+	COMMENTS = '(S) Sí muestra precios  (N) No muestra precios.';
+END

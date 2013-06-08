@@ -1,4 +1,3 @@
-                                                                                
 -------------------------------------------------------------------------------
 -- Titulo               : genp116.4gl -- Mantenimiento de Motivos 
 --					 Guias de Remision 
@@ -16,15 +15,16 @@ DEFINE vm_r_rows ARRAY[1000] OF INTEGER -- ARREGLO DE ROWID DE FILAS LEIDAS
 DEFINE vm_row_current   SMALLINT        -- FILA CORRIENTE DEL ARREGLO
 DEFINE vm_num_rows      SMALLINT        -- CANTIDAD DE FILAS LEIDAS
 DEFINE vm_max_rows      SMALLINT        -- MAXIMO DE FILAS LEIDAS
-DEFINE vm_demonios      VARCHAR(12)
+
+
 
 MAIN
                                                                                 
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
-CALL fgl_init4js()
+CALL startlog('../logs/genp116.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 2 THEN
      CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto','stop')
@@ -35,7 +35,7 @@ LET vg_modulo   = arg_val(2)
 LET vg_proceso = 'genp116'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
                                                                                 
@@ -63,10 +63,7 @@ MENU 'OPCIONES'
 	COMMAND KEY('I') 'Ingresar' 'Ingresar nuevos registros. '
 		CALL control_ingreso()
 		IF vm_num_rows = 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF
-			
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -83,10 +80,7 @@ MENU 'OPCIONES'
         COMMAND KEY('C') 'Consultar' 'Consultar un registro. '
                 CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF
-			
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -94,10 +88,7 @@ MENU 'OPCIONES'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF
-			
 		END IF
 		IF vm_row_current <= 1 THEN
                         HIDE OPTION 'Retroceder'
@@ -150,7 +141,8 @@ INITIALIZE codigo TO NULL
 CONSTRUCT BY NAME expr_sql ON g19_codigo, g19_nombre, g19_usuario, g19_fecing
 	ON KEY(F2)
 		IF INFIELD(g19_codigo) THEN
-		   CALL fl_ayuda_guias_remision()RETURNING codigo, nombre
+		   CALL fl_ayuda_guias_remision(vg_codcia, vg_codloc, 'T')
+			RETURNING codigo
 		   IF codigo IS NOT NULL THEN
 		      LET rm_grem.g19_codigo = codigo
 		      LET rm_grem.g19_nombre = nombre
@@ -325,7 +317,7 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION no_validar_parametros()
                                                                                 
 CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
 IF rg_mod.g50_modulo IS NULL THEN

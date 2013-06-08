@@ -1,5 +1,5 @@
-database diteca 
-screen 
+DATABASE aceros 
+SCREEN 
 {
       
    Tipo Destino: [a0                  ]      Número Destino: [c002       ]   
@@ -21,10 +21,10 @@ screen
  Ingresado Por: [c016      ]       Total Moneda Factura: [c050             ]
 }
 end
-tables
+TABLES
 cajt010
 cajt011
-attributes
+ATTRIBUTES
 a0 = cajt010.j10_tipo_destino, DEFAULT='PG', WIDGET='RADIO', AUTONEXT,
 	CONFIG='PG "Pago Factura" PA "Pago Anticipo" OI "Otros Ingresos"';
 c002 = cajt010.j10_num_destino, REVERSE;
@@ -51,20 +51,20 @@ c025 = cajt011.j11_num_ch_aut, UPSHIFT,	OPTIONS='-nolist',
 c026 = cajt011.j11_num_cta_tarj, UPSHIFT, SCROLL, OPTIONS='-nolist', 
 	COMMENT='Ingrese el número de la cuenta o de la tarjeta';
 
-c050 = formonly.total_mf, REVERSE, FORMAT='#,###,###,##&.##', NOENTRY; 
-c051 = formonly.n_moneda, NOENTRY;
-c052 = formonly.n_areaneg, NOENTRY;
+c050 = FORMONLY.total_mf, REVERSE, FORMAT='#,###,###,##&.##', NOENTRY; 
+c051 = FORMONLY.n_moneda, NOENTRY;
+c052 = FORMONLY.n_areaneg, NOENTRY;
 
 x1   = cajt010.j10_estado, REVERSE, NOENTRY;
-c100 = formonly.n_estado,  REVERSE, NOENTRY;
+c100 = FORMONLY.n_estado,  REVERSE, NOENTRY;
 
-l1   = formonly.bt_codigo_pago, WIDGET='BUTTON', CONFIG='F15';
-l2   = formonly.bt_moneda,      WIDGET='BUTTON', CONFIG='F16';
-l3   = formonly.bt_bco_tarj, 	WIDGET='BUTTON', CONFIG='F17';
-l4   = formonly.bt_che_aut,     WIDGET='BUTTON', CONFIG='F18';
-l5   = formonly.bt_cta_tarj,    WIDGET='BUTTON', CONFIG='F19';
-l6   = formonly.bt_valor,       WIDGET='BUTTON', CONFIG='F20';
+l1   = FORMONLY.bt_codigo_pago, WIDGET='BUTTON', CONFIG='F15';
+l2   = FORMONLY.bt_moneda,      WIDGET='BUTTON', CONFIG='F16';
+l3   = FORMONLY.bt_bco_tarj, 	WIDGET='BUTTON', CONFIG='F17';
+l4   = FORMONLY.bt_che_aut,     WIDGET='BUTTON', CONFIG='F18';
+l5   = FORMONLY.bt_cta_tarj,    WIDGET='BUTTON', CONFIG='F19';
+l6   = FORMONLY.bt_valor,       WIDGET='BUTTON', CONFIG='F20';
 end
 
-instructions
-screen record ra_j11[7] (j11_codigo_pago, j11_moneda, j11_cod_bco_tarj, j11_num_ch_aut, j11_num_cta_tarj, j11_valor)
+INSTRUCTIONS
+SCREEN RECORD ra_j11[7] (j11_codigo_pago, j11_moneda, j11_cod_bco_tarj, j11_num_ch_aut, j11_num_cta_tarj, j11_valor)

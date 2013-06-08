@@ -47,12 +47,11 @@ DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
 CALL startlog('../logs/errores')
-CALL fgl_init4js()
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 6 THEN   -- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 
-			    'Número de parámetros incorrecto.', 
-			    'stop')
+	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.','stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
 LET vg_base      = arg_val(1)
@@ -67,8 +66,8 @@ LET vg_proceso = 'repp417'
 
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -109,8 +108,7 @@ END FUNCTION
 FUNCTION control_reporte()
 
 DEFINE i,col		SMALLINT
-DEFINE query		VARCHAR(1000)
-DEFINE expr_sql         VARCHAR(600)
+DEFINE query		CHAR(1000)
 DEFINE comando		VARCHAR(100)
 
 DEFINE r_r20		RECORD LIKE rept020.*
@@ -123,9 +121,8 @@ END IF
 
 CALL fl_lee_compania(vg_codcia) RETURNING rm_cia.*
 IF rm_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto,
-		'No existe compañía.',
-		'stop')
+	--CALL fgl_winmessage(vg_producto,'No existe compañía.','stop')
+	CALL fl_mostrar_mensaje('No existe compañía.','stop')
 	EXIT PROGRAM
 END IF
 
@@ -133,50 +130,44 @@ CALL fl_lee_cabecera_transaccion_rep(vg_codcia,    vg_codloc,
 		                     vm_tipo_tran, vm_num_tran)
 	RETURNING rm_r19.*
 IF rm_r19.r19_num_tran IS NULL THEN
-	CALL fgl_winmessage(vg_producto,
-		'No existe devolución de compra local.',
-		'stop')
+	--CALL fgl_winmessage(vg_producto,'No existe devolución de compra local.','stop')
+	CALL fl_mostrar_mensaje('No existe devolución de compra local.','stop')
 	EXIT PROGRAM
 END IF
 
 CALL fl_lee_orden_trabajo(vm_codcia, vm_codloc, rm_r19.r19_ord_trabajo)
 	RETURNING rm_t23.*
 IF rm_t23.t23_orden IS NULL THEN
-	CALL fgl_winmessage(vg_producto,
-		'No existe orden de trabajo.',
-		'stop')
+	--CALL fgl_winmessage(vg_producto,'No existe orden de trabajo.','stop')
+	CALL fl_mostrar_mensaje('No existe orden de trabajo.','stop')
 	EXIT PROGRAM
 END IF 
 
 CALL fl_lee_mecanico(vm_codcia, rm_t23.t23_cod_mecani) RETURNING rm_t03.*
 IF rm_t03.t03_mecanico IS NULL THEN
-	CALL fgl_winmessage(vg_producto,
-		'No existe mecanico.',
-		'stop')
+	--CALL fgl_winmessage(vg_producto,'No existe mecanico.','stop')
+	CALL fl_mostrar_mensaje('No existe mecanico.','stop')
 	EXIT PROGRAM
 END IF
 
 CALL fl_lee_moneda(rm_r19.r19_moneda) RETURNING rm_g13.*
 IF rm_g13.g13_moneda IS NULL THEN
-	CALL fgl_winmessage(vg_producto,
-		'No existe moneda.',
-		'stop')
+	--CALL fgl_winmessage(vg_producto,'No existe moneda.','stop')
+	CALL fl_mostrar_mensaje('No existe moneda.','stop')
 	EXIT PROGRAM
 END IF
 
 CALL fl_lee_vendedor_rep(vg_codcia, rm_r19.r19_vendedor) RETURNING rm_r01.*
 IF rm_r01.r01_codigo IS NULL THEN
-	CALL fgl_winmessage(vg_producto,
-		'No existe vendedor.',
-		'stop')
+	--CALL fgl_winmessage(vg_producto,'No existe vendedor.','stop')
+	CALL fl_mostrar_mensaje('No existe vendedor.','stop')
 	EXIT PROGRAM
 END IF
 
 CALL fl_lee_bodega_rep(vg_codcia, rm_r19.r19_bodega_ori) RETURNING rm_r02.*
 IF rm_r02.r02_codigo IS NULL THEN
-	CALL fgl_winmessage(vg_producto,
-		'No existe bodega.',
-		'stop')
+	--CALL fgl_winmessage(vg_producto,'No existe bodega.','stop')
+	CALL fl_mostrar_mensaje('No existe bodega.','stop')
 	EXIT PROGRAM
 END IF
 
@@ -231,17 +222,17 @@ DEFINE descuento	LIKE rept020.r20_descuento
 DEFINE precio		LIKE rept020.r20_precio
 
 OUTPUT
-	TOP    MARGIN	vm_top
-	LEFT   MARGIN	vm_left
-	RIGHT  MARGIN	vm_right
-	BOTTOM MARGIN	vm_bottom
-	PAGE   LENGTH	vm_page
+	TOP    MARGIN	1
+	LEFT   MARGIN	2
+	RIGHT  MARGIN	90
+	BOTTOM MARGIN	4
+	PAGE   LENGTH	66
 FORMAT
 PAGE HEADER
-	print 'E';
-	print '&l26A';	-- Indica que voy a trabajar con hojas A4
+	--#print 'E';
+	--#print '&l26A';	-- Indica que voy a trabajar con hojas A4
 
-	LET modulo    = "Módulo: Repuestos"
+	LET modulo    = "Módulo: Inventario"
 	LET long      = LENGTH(modulo)
 	IF rm_r19.r19_cod_tran = vm_factura THEN
 		LET documento = 'DEVOLUCIÓN FACTURA # ' || 
@@ -254,14 +245,14 @@ PAGE HEADER
 	CALL fl_justifica_titulo('C', documento CLIPPED, 78)
 		RETURNING titulo
 
-	PRINT COLUMN 1, '&k0S' 
+	PRINT COLUMN 1 --#,'&k0S' 
 	LET titulo = modulo, titulo
 	PRINT COLUMN 1,  rm_cia.g01_razonsocial,
 	      COLUMN 92, "Página: ", PAGENO USING "&&&"
 	PRINT COLUMN 1,  titulo CLIPPED,
 	      COLUMN 92, UPSHIFT(vg_proceso)
 	      
-	print '&k2S' 		-- Letra condensada
+	--#print '&k2S' 		-- Letra condensada
 --	cabecera de la venta al taller
 	PRINT COLUMN 1, fl_justifica_titulo('I', 'Venta No', 17), ': ', 
 			fl_justifica_titulo('I', rm_r19.r19_num_dev, 10),
@@ -327,41 +318,3 @@ ON LAST ROW
 		         rm_r19.r19_tot_neto USING '#,###,###,##&.##'
 
 END REPORT
-
-
-
-FUNCTION validar_parametros()
-
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 
-                            'stop')
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 
-                            'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || 
-                            vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 
-                            'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: ' || 
-                            vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-
-END FUNCTION

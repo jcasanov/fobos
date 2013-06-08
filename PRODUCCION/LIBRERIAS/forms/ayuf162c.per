@@ -1,0 +1,33 @@
+DATABASE aceros
+SCREEN
+{
+
+  REFACTURACION DE TALLER
+ -------------------------------------------------------------------------
+  F. Ori. F. Nue. Fec.Refac.       Cliente        Motivo Refacturación
+ -------------------------------------------------------------------------
+ [c011   |c012   |c013      |c014                |c015                   ]
+ [c011   |c012   |c013      |c014                |c015                   ]
+ [c011   |c012   |c013      |c014                |c015                   ]
+ [c011   |c012   |c013      |c014                |c015                   ]
+ [c011   |c012   |c013      |c014                |c015                   ]
+ [c011   |c012   |c013      |c014                |c015                   ]
+ [c011   |c012   |c013      |c014                |c015                   ]
+ [c011   |c012   |c013      |c014                |c015                   ]
+ [c011   |c012   |c013      |c014                |c015                   ]
+ [c011   |c012   |c013      |c014                |c015                   ]
+
+}
+TABLES
+talt060
+ATTRIBUTES
+c011 = talt060.t60_fac_ant, UPSHIFT;
+c012 = talt060.t60_fac_nue, UPSHIFT;
+c013 = FORMONLY.t60_fecing TYPE DATE, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c014 = talt060.t60_nomcli_nue, UPSHIFT;
+c015 = talt060.t60_motivo_refact, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_reftal[10] (t60_fac_ant, t60_fac_nue, t60_fecing,
+				t60_nomcli_nue, t60_motivo_refact)

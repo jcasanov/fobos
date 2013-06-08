@@ -1,4 +1,4 @@
-------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 -- Titulo           : repp411.4gl - Impresión Ajuste de existencias
 -- Elaboracion      : 07-Ene-2002
 -- Autor            : JCM
@@ -6,28 +6,18 @@
 --		      tipo_tran num_tran
 -- Ultima Correccion: 
 -- Motivo Correccion: 
-------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
-
-DEFINE vm_demonios	VARCHAR(12)
 
 DEFINE vm_tipo_tran	LIKE rept019.r19_cod_tran
 DEFINE vm_num_tran	LIKE rept019.r19_num_tran
-
 DEFINE vm_tipo_ajuste	VARCHAR(15)
 DEFINE vm_ajuste_mas	LIKE rept019.r19_cod_tran
 -- DEFINE vm_ajuste_menos	LIKE rept019.r19_cod_tran
-
 DEFINE rm_cia		RECORD LIKE gent001.*
 DEFINE rm_g13		RECORD LIKE gent013.*
 DEFINE rm_r02		RECORD LIKE rept002.*
 DEFINE rm_r19		RECORD LIKE rept019.*
-
-DEFINE vm_page		SMALLINT	-- PAGE   LENGTH
-DEFINE vm_top		SMALLINT	-- TOP    MARGIN
-DEFINE vm_left		SMALLINT	-- LEFT   MARGIN
-DEFINE vm_right		SMALLINT	-- RIGHT  MARGIN
-DEFINE vm_bottom	SMALLINT	-- BOTTOM MARGIN
 
 
 
@@ -36,28 +26,25 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
-CALL fgl_init4js()
+CALL startlog('../logs/repp411.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 6 THEN   -- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto.', 
-			    'stop')
+	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.','stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
 LET vg_base      = arg_val(1)
 LET vg_modulo    = arg_val(2)
 LET vg_codcia    = arg_val(3)
 LET vg_codloc    = arg_val(4)
-
 LET vm_tipo_tran = arg_val(5)
 LET vm_num_tran  = arg_val(6)
-
-LET vg_proceso = 'repp411'
-
+LET vg_proceso   = 'repp411'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -68,16 +55,8 @@ END MAIN
 FUNCTION funcion_master()
 
 CALL fl_nivel_isolation()
-
 LET vm_ajuste_mas = 'A+'
 -- LET vm_ajuste_menos = 'A-'
-
-LET vm_top    = 1
-LET vm_left   =	2
-LET vm_right  =	90
-LET vm_bottom =	4
-LET vm_page   = 66
-
 CALL control_reporte()
 
 END FUNCTION
@@ -85,59 +64,47 @@ END FUNCTION
 
 
 FUNCTION control_reporte()
-
-DEFINE i,col		SMALLINT
-DEFINE query		VARCHAR(1000)
-DEFINE expr_sql         VARCHAR(600)
+DEFINE query		CHAR(1000)
 DEFINE comando		VARCHAR(100)
-
+DEFINE r_r10		RECORD LIKE rept010.*
 DEFINE r_r20		RECORD LIKE rept020.*
+DEFINE r_r72		RECORD LIKE rept072.*
 DEFINE n_item		LIKE rept010.r10_nombre
 
 CALL fl_control_reportes() RETURNING comando
 IF int_flag THEN
-	EXIT PROGRAM
+	RETURN
 END IF
-
 CALL fl_lee_compania(vg_codcia) RETURNING rm_cia.*
 IF rm_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto,
-		'No existe compañía.',
-		'stop')
+	--CALL fgl_winmessage(vg_producto,'No existe compañía.','stop')
+	CALL fl_mostrar_mensaje('No existe compañía.','stop')
 	EXIT PROGRAM
 END IF
-
 CALL fl_lee_cabecera_transaccion_rep(vg_codcia, vg_codloc, vm_tipo_tran, 
 	vm_num_tran) RETURNING rm_r19.*
 IF rm_r19.r19_num_tran IS NULL THEN
-	CALL fgl_winmessage(vg_producto,
-		'No existe ajuste costo.',
-		'stop')
+	--CALL fgl_winmessage(vg_producto,'No existe ajuste costo.','stop')
+	CALL fl_mostrar_mensaje('No existe ajuste costo.','stop')
 	EXIT PROGRAM
 END IF
-
 IF rm_r19.r19_cod_tran = vm_ajuste_mas THEN
 	LET vm_tipo_ajuste = 'INCREMENTO'
 ELSE
 	LET vm_tipo_ajuste = 'DECREMENTO'
 END IF
-
 CALL fl_lee_moneda(rm_r19.r19_moneda) RETURNING rm_g13.*
 IF rm_g13.g13_moneda IS NULL THEN
-	CALL fgl_winmessage(vg_producto,
-		'No existe moneda.',
-		'stop')
+	--CALL fgl_winmessage(vg_producto,'No existe moneda.','stop')
+	CALL fl_mostrar_mensaje('No existe moneda.','stop')
 	EXIT PROGRAM
 END IF
-
 CALL fl_lee_bodega_rep(vg_codcia, rm_r19.r19_bodega_ori) RETURNING rm_r02.*
 IF rm_r02.r02_codigo IS NULL THEN
-	CALL fgl_winmessage(vg_producto,
-		'No existe bodega.',
-		'stop')
+	--CALL fgl_winmessage(vg_producto,'No existe bodega.','stop')
+	CALL fl_mostrar_mensaje('No existe bodega.','stop')
 	EXIT PROGRAM
 END IF
-
 LET query = 'SELECT rept020.*, r10_nombre FROM rept020, rept010 ',
 	    '	WHERE r20_compania  = ',  vg_codcia,
 	    '  	  AND r20_localidad = ',  vg_codloc,
@@ -146,7 +113,6 @@ LET query = 'SELECT rept020.*, r10_nombre FROM rept020, rept010 ',
 	    '	  AND r10_compania  = r20_compania ',
 	    '	  AND r10_codigo    = r20_item ',
 	    '	ORDER BY r20_orden'
-
 PREPARE deto FROM query
 DECLARE q_deto CURSOR FOR deto
 OPEN  q_deto
@@ -159,10 +125,14 @@ END IF
 CLOSE q_deto
 START REPORT ajuste_existencia TO PIPE comando
 FOREACH q_deto INTO r_r20.*, n_item
+	CALL fl_lee_item(vg_codcia, r_r20.r20_item) RETURNING r_r10.*
+	CALL fl_lee_clase_rep(vg_codcia, r_r10.r10_linea,
+			r_r10.r10_sub_linea, r_r10.r10_cod_grupo,
+			r_r10.r10_cod_clase)
+		RETURNING r_r72.*
 	OUTPUT TO REPORT ajuste_existencia(r_r20.r20_cant_ven,
-				      r_r20.r20_item,
-				      n_item,
-				      r_r20.r20_costo)
+				      r_r20.r20_item, r_r72.r72_desc_clase,
+				      n_item)
 END FOREACH
 FINISH REPORT ajuste_existencia
 
@@ -170,126 +140,88 @@ END FUNCTION
 
 
 
-REPORT ajuste_existencia(cant, item, descripcion, costo)
-
-DEFINE documento	VARCHAR(30)
+REPORT ajuste_existencia(cant, item, clase, descripcion)
+DEFINE cant		LIKE rept020.r20_cant_ven
+DEFINE item		LIKE rept020.r20_item 
+DEFINE clase     	LIKE rept072.r72_desc_clase
+DEFINE descripcion	LIKE rept010.r10_nombre
+DEFINE r_g50		RECORD LIKE gent050.*
+DEFINE documento	VARCHAR(60)
 DEFINE usuario		VARCHAR(10,5)
 DEFINE titulo		VARCHAR(80)
 DEFINE modulo		VARCHAR(40)
-DEFINE i,long		SMALLINT
-
-DEFINE cant		LIKE rept020.r20_cant_ven
-DEFINE item		LIKE rept020.r20_item 
-DEFINE descripcion	LIKE rept010.r10_nombre
-DEFINE costo     	LIKE rept020.r20_costo
+DEFINE numero		VARCHAR(15)
+DEFINE long		SMALLINT
+DEFINE escape		SMALLINT
+DEFINE act_comp, db_c	SMALLINT
+DEFINE desact_comp, db	SMALLINT
 
 OUTPUT
-	TOP    MARGIN	vm_top
-	LEFT   MARGIN	vm_left
-	RIGHT  MARGIN	vm_right
-	BOTTOM MARGIN	vm_bottom
-	PAGE   LENGTH	vm_page
+	TOP    MARGIN	1
+	LEFT   MARGIN	0
+	RIGHT  MARGIN	132
+	BOTTOM MARGIN	3
+	PAGE   LENGTH	44
+
 FORMAT
+
 PAGE HEADER
-	print 'E';
-	print '&l26A'		-- Indica que voy a trabajar con hojas A4
-	LET modulo    = "Módulo: Repuestos"
-	LET long      = LENGTH(modulo)
-	LET documento = 'AJUSTE DE EXISTENCIA # ' || rm_r19.r19_num_tran
+	--print 'E';
+	--print '&l26A';	-- Indica que voy a trabajar con hojas A4
+	LET escape	= 27		# Iniciar sec. impresi¢n
+	LET act_comp	= 15		# Activar Comprimido.
+	LET desact_comp	= 18		# Cancelar Comprimido.
+	CALL fl_lee_modulo(vg_modulo) RETURNING r_g50.*
+	LET modulo      = "MODULO: ", r_g50.g50_nombre[1, 19] CLIPPED
+	LET long        = LENGTH(modulo)
+	LET numero      = rm_r19.r19_num_tran
+	LET documento   = 'COMPROBANTE AJUSTE DE EXISTENCIA No. ', numero
 	CALL fl_justifica_titulo('D', vg_usuario, 10) RETURNING usuario
-	CALL fl_justifica_titulo('C', documento CLIPPED, 68)
+	CALL fl_justifica_titulo('C', documento CLIPPED, 80)
 		RETURNING titulo
-
 	LET titulo = modulo, titulo
-	PRINT COLUMN 1,  rm_cia.g01_razonsocial,
-	      COLUMN 89, "Página: ", PAGENO USING "&&&"
-	PRINT COLUMN 1,  titulo CLIPPED,
-	      COLUMN 89, UPSHIFT(vg_proceso)
-
+	print ASCII escape;
+	print ASCII act_comp
+	PRINT COLUMN 01,  rm_cia.g01_razonsocial,
+	      COLUMN 122, "PAGINA: ", PAGENO USING "&&&"
+	PRINT COLUMN 01,  titulo CLIPPED,
+	      COLUMN 126, UPSHIFT(vg_proceso)
 	SKIP 1 LINES
-	print '&k2S' 		-- Letra condensada
+	--print '&k2S' 		-- Letra condensada
 --	cabecera del ajuste_existencia
-	PRINT COLUMN 1, fl_justifica_titulo('I', 'Tipo Ajuste', 15), ': ',
-			vm_tipo_ajuste
-
-	PRINT COLUMN 1, fl_justifica_titulo('I', 'Bodega', 15), ': ', 
-			rm_r02.r02_codigo, ' ', rm_r02.r02_nombre,
-	      COLUMN 68, fl_justifica_titulo('I', 'Fecha ', 19), 
-	      		': ', DATE(rm_r19.r19_fecing) USING 'dd-mmm-yyyy'
-
-	PRINT COLUMN 1, fl_justifica_titulo('I', 'Moneda', 15), ': ',
+	PRINT COLUMN 25,  fl_justifica_titulo('I', 'TIPO AJUSTE', 15), ': ',
+			vm_tipo_ajuste,
+	      COLUMN 105, 'FECHA DEL AJUSTE: ', DATE(rm_r19.r19_fecing)
+						USING 'dd-mm-yyyy'
+	PRINT COLUMN 25,  fl_justifica_titulo('I', 'BODEGA', 15), ': ', 
+			rm_r02.r02_codigo, ' ', rm_r02.r02_nombre
+	PRINT COLUMN 25,  fl_justifica_titulo('I', 'MONEDA', 15), ': ',
 			rm_g13.g13_nombre
-			
-	PRINT COLUMN 1, fl_justifica_titulo('I', 'Referencia', 15), ': ',
+	PRINT COLUMN 25,  fl_justifica_titulo('I', 'REFERENCIA', 15), ': ',
 	        	rm_r19.r19_referencia
 --
 	SKIP 1 LINES
-	PRINT COLUMN 01, "Fecha impresión: ", TODAY USING "dd-mmm-yyyy", 1 SPACES, TIME,
-	      COLUMN 90, usuario
+	PRINT COLUMN 01, "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy",
+			1 SPACES, TIME,
+	      COLUMN 123, usuario
 	SKIP 1 LINES
-	PRINT COLUMN 1,  'Item',
-	      COLUMN 18, 'Descripción',
-	      COLUMN 55, fl_justifica_titulo('D', 'Cantidad', 10),
-	      COLUMN 65, fl_justifica_titulo('D', 'Costo', 16),
-	      COLUMN 83, fl_justifica_titulo('D', 'Total', 16)
-
-	PRINT COLUMN 1,  '-----------------',
-	      COLUMN 18, '-------------------------------------',
-	      COLUMN 55, '------------',
-	      COLUMN 65, '----------------',
-	      COLUMN 83, '----------------'
+	PRINT "------------------------------------------------------------------------------------------------------------------------------------"
+	PRINT COLUMN 01,  'CODIGO',
+	      COLUMN 09,  'DESCRIPCION',
+	      COLUMN 125, 'CANTIDAD'
+	PRINT "------------------------------------------------------------------------------------------------------------------------------------"
 
 ON EVERY ROW
-	NEED 2 LINES
-	PRINT COLUMN 1,  item,
-	      COLUMN 18, descripcion,
-	      COLUMN 55, cant           USING "##,###,##&",
-	      COLUMN 65, costo          USING "#,###,###,##&.##",
-	      COLUMN 83, (cant * costo) USING "#,###,###,##&.##"
+	NEED 3 LINES
+	PRINT COLUMN 01,  item[1,7],
+	      COLUMN 09,  clase,
+	      COLUMN 60,  descripcion[1,62],
+	      COLUMN 123, cant           USING "---,--&.##"
 	
 ON LAST ROW
-	NEED 2 LINES
-	PRINT COLUMN 83, '----------------'
-	PRINT COLUMN 71, 'Total Ajuste', 
-		         SUM(cant * costo) 
-		         USING '#,###,###,##&.##'
+	PRINT COLUMN 123, '----------'
+	PRINT COLUMN 112, 'TOTAL ==>  ', SUM(cant) USING '---,--&.##';
+	print ASCII escape;
+	print ASCII desact_comp 
 
 END REPORT
-
-
-
-FUNCTION validar_parametros()
-
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 
-                            'stop')
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 
-                            'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || 
-                            vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 
-                            'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: ' || 
-                            vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-
-END FUNCTION

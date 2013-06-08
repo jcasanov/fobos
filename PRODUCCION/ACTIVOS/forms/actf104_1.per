@@ -1,0 +1,118 @@
+DATABASE aceros
+--------------------
+SCREEN TITLE '     Datos      '
+--------------------
+{					
+      						               [   y] de [z   ]
+
+             Codigo del Bien: [a001   ]         Estado: [a|a030        ]
+                 Descripcion: [a002                                    ]
+             Grupo de Activo: [a003  ] [a031                           ]
+              Tipo de Activo: [a004  ] [a032                           ]
+           Años de Vida Util: [a005  ]
+     Porcentaje Depreciacion: [a006  ]
+
+                      Modelo: [a007            ]    
+      		       Serie: [a008                      ]
+         Localidad de Origen: [a009 ] [a033                     ]
+      Numero Orden de Compra: [a010   ]
+                   Localidad: [a011 ] [a034                     ]
+                Departamento: [a012 ] [a035                            ]
+                   Proveedor: [a013 ] [a036                            ]
+             Fecha de Compra: [a014      ]
+
+}
+----------------------
+SCREEN TITLE '    Valores     '
+----------------------
+{							       
+      						               [   x] de [w   ]
+		   	      Moneda: [a0] [a037           ]
+		   Paridad Cambiaria: [a015                ]
+               	               Valor: [a016                ]
+                   Valor Moneda Base: [a017                ]
+                         Responsable: [a018 ] [a038                          ]
+                       Fecha de Baja: [a019      ]
+
+      Valor Depreciacion Moneda Base: [a020          ]
+   Valor Depreciación Moneda Alterna: [a021          ]
+
+      Total Depreciación Moneda Base: [a022          ]
+   Total Depreciación Moneda Alterna: [a023          ]
+                   Total Reexpresión: [a024          ]
+      Total Depreciación Reexpresión: [a025          ]
+                       Ingresado Por: [a026      ]
+                    Fecha de Ingreso: [a027               ]
+}
+END
+
+------
+TABLES
+------
+actt010
+
+----------
+ATTRIBUTES
+----------
+a001 = actt010.a10_codigo_bien, NOENTRY, REVERSE, WIDGET = 'FIELD_BMP',
+				CONFIG = 'lista.bmp F2';
+   a = actt010.a10_estado,      NOENTRY, UPSHIFT, REVERSE;
+a002 = actt010.a10_descripcion, REVERSE, UPSHIFT;
+a003 = actt010.a10_grupo_act,   REVERSE, WIDGET = 'FIELD_BMP',
+			        CONFIG = 'lista.bmp F2';
+a004 = actt010.a10_tipo_act,    REVERSE, WIDGET = 'FIELD_BMP',
+			        CONFIG = 'lista.bmp F2';
+a005 = actt010.a10_anos_util,   NOENTRY, REVERSE;
+a006 = actt010.a10_porc_deprec, NOENTRY, REVERSE;
+a007 = actt010.a10_modelo,      UPSHIFT;
+a008 = actt010.a10_serie,       UPSHIFT;
+a009 = actt010.a10_locali_ori,  REVERSE, WIDGET = 'FIELD_BMP',
+			        CONFIG = 'lista.bmp F2';
+a010 = actt010.a10_numero_oc, NOENTRY;
+a011 = actt010.a10_localidad,   REVERSE, WIDGET = 'FIELD_BMP',
+			        CONFIG = 'lista.bmp F2';
+a012 = actt010.a10_cod_depto,   REVERSE, WIDGET = 'FIELD_BMP',
+			        CONFIG = 'lista.bmp F2';
+a013 = actt010.a10_codprov,     REVERSE, WIDGET = 'FIELD_BMP',
+			        CONFIG = 'lista.bmp F2';
+a014 = actt010.a10_fecha_comp,  REVERSE, FORMAT = 'dd-mm-yyyy',
+				COMMENT = 'Ingrese fecha en formato dd-mm-aaaa';
+------------------------------------------------------------------------
+  a0 = actt010.a10_moneda,      REVERSE, WIDGET = 'FIELD_BMP',
+				CONFIG = 'lista.bmp F2';
+a015 = actt010.a10_paridad,     REVERSE, NOENTRY, REVERSE, 
+				INCLUDE = (0.000000001 TO 999999.999999999),
+       			 	FORMAT = '#,###,##&.#########';
+
+a016 = actt010.a10_valor,       REVERSE, FORMAT = '###,###,##&.##';
+a017 = actt010.a10_valor_mb,    REVERSE, FORMAT = '###,###,##&.##';
+a018 = actt010.a10_responsable, REVERSE, WIDGET = 'FIELD_BMP',
+				CONFIG = 'lista.bmp F2';
+a019 = actt010.a10_fecha_baja,  FORMAT = 'dd-mm-yyyy', 
+				COMMENT = 'Ingrese fecha en formato dd-mm-aaaa';
+a020 = actt010.a10_val_dep_mb,  REVERSE, FORMAT = '###,###,##&.##';
+a021 = actt010.a10_val_dep_ma,  REVERSE, FORMAT = '###,###,##&.##';
+a022 = actt010.a10_tot_dep_mb,  REVERSE, FORMAT = '###,###,##&.##';
+a023 = actt010.a10_tot_dep_ma,  REVERSE, FORMAT = '###,###,##&.##';
+a024 = actt010.a10_tot_reexpr,  REVERSE, FORMAT = '###,###,##&.##';
+a025 = actt010.a10_tot_dep_ree, REVERSE, FORMAT = '###,###,##&.##';
+a026 = actt010.a10_usuario,     REVERSE, NOENTRY;
+a027 = actt010.a10_fecing,      REVERSE, NOENTRY;
+-----------------------------------------------------------------------
+
+a030 = formonly.desc_estado;
+a031 = formonly.desc_grupo_act;
+a032 = formonly.desc_tipo_act;
+a033 = formonly.desc_locali_ori;
+a034 = formonly.desc_localidad;
+a035 = formonly.desc_depto;
+a036 = formonly.desc_prov;
+a037 = formonly.desc_moneda;
+a038 = formonly.desc_responsable;
+--a005 = formonly.desc_anos_util;
+--a006 = formonly.desc_porc_deprec;
+   x = formonly.actual2;
+   w = formonly.final2;
+   y = formonly.actual;
+   z = formonly.final;
+END

@@ -1,0 +1,28 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+                   Período: [c000      ] - [c001      ]
+
+                     Generando Anexo Ventas Guayaquil: [c]
+                         Generando Anexo Ventas Quito: [d]
+                Generando Consolidado Ventas Nacional: [e]
+
+}
+ATTRIBUTES
+c000 = FORMONLY.fecha_ini TYPE DATE NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha inicial en formato: dd-mm-aaaa.';
+c001 = FORMONLY.fecha_fin TYPE DATE NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha final en formato: dd-mm-aaaa.';
+c    = FORMONLY.tipo_gye TYPE CHAR NOT NULL, REQUIRED, NOENTRY, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge',
+	REVERSE, INCLUDE = ('S', 'N'), DEFAULT = 'N';
+d    = FORMONLY.tipo_uio TYPE CHAR NOT NULL, REQUIRED, NOENTRY, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge',
+	REVERSE, INCLUDE = ('S', 'N'), DEFAULT = 'N';
+e    = FORMONLY.tipo_nac TYPE CHAR NOT NULL, REQUIRED, NOENTRY, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge',
+	REVERSE, INCLUDE = ('S', 'N'), DEFAULT = 'N';
+END

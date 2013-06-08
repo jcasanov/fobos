@@ -1,5 +1,5 @@
-database diteca
-screen 
+DATABASE aceros
+SCREEN 
 {
 
               
@@ -14,9 +14,9 @@ screen
             Fecha de Ingreso: [c006               ]
 }
 end
-tables
+TABLES
 gent000
-attributes
+ATTRIBUTES
 a0 = gent000.g00_moneda_base, REVERSE, AUTONEXT, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 a1 = gent000.g00_moneda_alt, AUTONEXT, UPSHIFT,
@@ -25,11 +25,11 @@ c000 = gent000.g00_serial, REVERSE, NOENTRY,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 c001 = gent000.g00_porc_impto, REVERSE, FORMAT = '#&.##';
 c002 = gent000.g00_label_impto, REVERSE, UPSHIFT;
-c003 = formonly.moneda1, NOENTRY;
-a    = gent000.g00_decimal_mb, REVERSE, AUTONEXT, FORMAT = '&', 
-                               INCLUDE = (0,1,2);
-c004 = formonly.moneda2, NOENTRY;
-b    = gent000.g00_decimal_ma, FORMAT = '&', AUTONEXT, INCLUDE = (NULL,0,1,2);
+c003 = FORMONLY.moneda1, NOENTRY;
+a    = gent000.g00_decimal_mb, REVERSE, AUTONEXT, FORMAT = '#&', 
+                               INCLUDE = (0 TO 10);
+c004 = FORMONLY.moneda2, NOENTRY;
+b    = gent000.g00_decimal_ma, FORMAT = '#&', AUTONEXT, INCLUDE = (NULL,0 TO 2);
 c005 = gent000.g00_usuario, REVERSE, NOENTRY, UPSHIFT;
 c006 = gent000.g00_fecing, REVERSE, NOENTRY;
 end

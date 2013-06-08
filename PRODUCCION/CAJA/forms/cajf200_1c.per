@@ -1,0 +1,48 @@
+DATABASE aceros
+SCREEN 
+{
+
+    Fecha Apertura:[c0        ]
+
+           Usuario:[c1        ]
+
+              Caja:[c2                  ]
+   --------------------------------------------------------------------
+        Moneda      Efectivo Apertura Cheque Apertura       Total         
+   --------------------------------------------------------------------
+   [c3             |c4              |c5              |c6              ]
+   [c3             |c4              |c5              |c6              ]
+   [c3             |c4              |c5              |c6              ]
+   [c3             |c4              |c5              |c6              ]
+   [c3             |c4              |c5              |c6              ]
+   [c3             |c4              |c5              |c6              ]
+   [c3             |c4              |c5              |c6              ]
+   [c3             |c4              |c5              |c6              ]
+
+}
+end	
+
+TABLES
+	cajt004
+	cajt005
+	cajt002
+	gent013
+ATTRIBUTES
+
+c0   = cajt004.j04_fecha_aper,  REVERSE, NOENTRY;
+c1   = cajt004.j04_usuario,     REVERSE, NOENTRY;
+c2   = cajt002.j02_nombre_caja, REVERSE, NOENTRY;
+
+c3   = gent013.g13_nombre, REVERSE;
+c4   = cajt005.j05_ef_apertura, REVERSE, FORMAT = "#,###,###,##&.##";
+c5   = cajt005.j05_ch_apertura, REVERSE, FORMAT = "#,###,###,##&.##";
+c6   = FORMONLY.tot_apertura TYPE DECIMAL(12,2), REVERSE,  
+	FORMAT = "#,###,###,##&.##";
+
+end
+
+INSTRUCTIONS
+DELIMITERS "||"
+SCREEN RECORD r_detalle[8] (g13_nombre, j05_ef_apertura, j05_ch_apertura, 
+			    tot_apertura)
+

@@ -1,9 +1,9 @@
-DATABASE formonly
+DATABASE FORMONLY
 SCREEN
 {
-             Pérdidas y Ganancias Año: [c000]  
-                               Moneda: [c0]   [c002          ]
-                      Centro de Costo: [c03]  [c004                      ]
+           Pérdidas y Ganancias Año: [c000]  Incluír Diario Cierre Año ? [d]
+                             Moneda: [c0]   [c002          ]
+                    Centro de Costo: [c03]  [c004                      ]
 [c001                                                                          ]
 [c001                                                                          ]
 [c001                                                                          ]
@@ -26,12 +26,14 @@ SCREEN
 [a]
 }
 ATTRIBUTES
-c000 = formonly.ano TYPE SMALLINT NOT NULL, REQUIRED, REVERSE;
-c0   = formonly.moneda TYPE CHAR NOT NULL ,REQUIRED, REVERSE,
+c000 = FORMONLY.ano TYPE SMALLINT NOT NULL, REQUIRED, REVERSE;
+c0   = FORMONLY.moneda TYPE CHAR NOT NULL ,REQUIRED, REVERSE,
        WIDGET = 'FIELD_BMP',  CONFIG = 'lista.bmp F2';
-c002 = formonly.tit_mon, REVERSE, NOENTRY;
-c03  = formonly.ccosto TYPE SMALLINT, WIDGET = 'FIELD_BMP',  CONFIG =
+c002 = FORMONLY.tit_mon, REVERSE, NOENTRY;
+c03  = FORMONLY.ccosto TYPE SMALLINT, WIDGET = 'FIELD_BMP',  CONFIG =
        'lista.bmp F2', COMMENT = 'Deje en blanco para un PyG consolidado';
-c004 = formonly.tit_ccosto, NOENTRY, REVERSE;
-c001 = formonly.c001, WIDGET = 'Canvas';
-a    = formonly.tecla, AUTONEXT, INVISIBLE;
+c004 = FORMONLY.tit_ccosto, NOENTRY, REVERSE;
+c001 = FORMONLY.c001, WIDGET = 'Canvas';
+a    = FORMONLY.tecla, AUTONEXT, INVISIBLE;
+d    = FORMONLY.diario_cie TYPE CHAR NOT NULL, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N';

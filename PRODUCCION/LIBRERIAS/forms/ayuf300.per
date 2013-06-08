@@ -1,19 +1,21 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
 REPUESTOS DE ALMACEN CARGADOS A LA ORDEN: [c001    ]
 
- [c020      |x1|c021  |c022           |c023|c024          |c025          ]
-[c002      |c3|c004  |c005           |c006|c007          |c008          ]
-[c002      |c3|c004  |c005           |c006|c007          |c008          ]
-[c002      |c3|c004  |c005           |c006|c007          |c008          ]
-[c002      |c3|c004  |c005           |c006|c007          |c008          ]
-[c002      |c3|c004  |c005           |c006|c007          |c008          ]
-[c002      |c3|c004  |c005           |c006|c007          |c008          ]
-					       Subtotal: [c010          ]
-					      Descuento: [c011          ]
-				      Impuesto [c012 ]%: [c013          ]
-					           Neto: [c014          ]
+ [c020      |x1|c021  |c022           |c023   |c024         |c025         ]
+[c002      |c3|c004  |c005           |c006   |c007         |c008         ]
+[c002      |c3|c004  |c005           |c006   |c007         |c008         ]
+[c002      |c3|c004  |c005           |c006   |c007         |c008         ]
+[c002      |c3|c004  |c005           |c006   |c007         |c008         ]
+[c002      |c3|c004  |c005           |c006   |c007         |c008         ]
+[c002      |c3|c004  |c005           |c006   |c007         |c008         ]
+[c002      |c3|c004  |c005           |c006   |c007         |c008         ]
+					      Total Bruto: [c010         ]
+					        Descuento: [c011         ]
+					         Subtotal: [c015         ]
+ 				        Impuesto [c012 ]%: [c013         ]
+					             Neto: [c014         ]
 }
 TABLES
 rept019
@@ -31,14 +33,16 @@ c002 = formonly.fecha TYPE DATE, FORMAT = 'dd-mm-yyyy';
 c3   = r20_cod_tran;
 c004 = r20_num_tran;
 c005 = r20_item;
-c006 = r20_cant_ven, FORMAT = '---&';
-c007 = r20_precio, FORMAT = '---,---,--&.##';
-c008 = formonly.subtotal TYPE DECIMAL(12,2), FORMAT = '---,---,--&.##';
-c010 = formonly.tot_bruto TYPE DECIMAL(12,2), FORMAT = '---,---,--&.##';
-c011 = formonly.tot_dscto TYPE DECIMAL(12,2), FORMAT = '###,###,##&.##';
+c006 = r20_cant_ven, FORMAT = '---&.##';
+c007 = r20_precio, FORMAT = '--,---,--&.##';
+c008 = formonly.subtotal TYPE DECIMAL(12,2), FORMAT = '--,---,--&.##';
+c010 = formonly.tot_bruto TYPE DECIMAL(12,2), FORMAT = '--,---,--&.##';
+c011 = formonly.tot_dscto TYPE DECIMAL(12,2), FORMAT = '--,---,--&.##';
 c012 = r19_porc_impto, FORMAT = '#&.##';
-c013 = formonly.tot_impto TYPE DECIMAL(12,2), FORMAT = '###,###,##&.##';
-c014 = formonly.tot_neto TYPE DECIMAL(12,2), FORMAT = '###,###,##&.##', REVERSE;
+c013 = formonly.tot_impto TYPE DECIMAL(12,2), FORMAT = '--,---,--&.##';
+c014 = formonly.tot_neto TYPE DECIMAL(12,2), FORMAT = '--,---,--&.##', REVERSE;
+c015 = formonly.tot_sub TYPE DECIMAL(12,2), FORMAT = '--,---,--&.##', REVERSE;
+END
 INSTRUCTIONS
-SCREEN RECORD r_rep[6] (formonly.fecha, r20_cod_tran, r20_num_tran, r20_item,
+SCREEN RECORD r_rep[7] (formonly.fecha, r20_cod_tran, r20_num_tran, r20_item,
 			r20_cant_ven, r20_precio, formonly.subtotal)

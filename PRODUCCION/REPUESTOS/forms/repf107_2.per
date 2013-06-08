@@ -1,6 +1,5 @@
-
-database diteca
-screen 
+DATABASE aceros
+SCREEN 
 {
 
 	  Indice de Rotación: [f2] [a1                    ]
@@ -24,17 +23,17 @@ TABLES
 	rept008
 ATTRIBUTES
 		     ---- BOTONES ----
-b0  = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-b1  = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-b2  = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+b0  = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+b1  = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b2  = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
 
 f2 = rept008.r08_rotacion, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-a1   = formonly.nom_rotacion TYPE VARCHAR, NOENTRY;
+a1   = FORMONLY.nom_rotacion TYPE VARCHAR, NOENTRY;
 a0   = rept008.r08_moneda, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
 	COMMENT = ' Moneda Base ó Moneda Alterna. ';
-a2   = formonly.nom_mon TYPE VARCHAR, NOENTRY;
+a2   = FORMONLY.nom_mon TYPE VARCHAR, NOENTRY;
 a    = rept008.r08_cont_cred, REVERSE, 
 	WIDGET = 'RADIO', CONFIG = 'C Contado R Crédito';
 f003 = rept008.r08_monto_ini, REVERSE, FORMAT = '###,###,##&.##',

@@ -1,0 +1,30 @@
+DATABASE aceros
+
+SCREEN
+{
+  RUBROS DE IMPORTACIONES 
+ -----------------------------------
+  Rub   Descripción 		
+ -----------------------------------
+ [c01] [c002                       ] 
+ [c01] [c002                       ]
+ [c01] [c002                       ]
+ [c01] [c002                       ]
+ [c01] [c002                       ]
+ [c01] [c002                       ]
+ [c01] [c002                       ] 
+ [c01] [c002                       ] 
+ [c01] [c002                       ] 
+ [c01] [c002                       ] 
+}
+
+TABLES
+gent017
+
+ATTRIBUTES
+c01 = g17_codrubro,REVERSE;
+c002 = g17_nombre,REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_rubros[10](g17_codrubro, g17_nombre)

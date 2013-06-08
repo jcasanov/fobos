@@ -1,0 +1,17 @@
+DATABASE aceros
+SCREEN
+{
+         
+        Moneda: [c0|c001           ]
+   Observación: [c002                          ]
+
+}
+TABLES
+rept030
+ATTRIBUTES
+c0   = rept030.r30_moneda, NOENTRY, UPSHIFT, REVERSE;
+C001 = FORMONLY.n_moneda, NOENTRY;
+c002 = rept030.r30_observacion, UPSHIFT;
+end
+INSTRUCTIONS
+DELIMITERS '||'

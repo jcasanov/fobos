@@ -1,0 +1,48 @@
+DATABASE aceros
+SCREEN
+{
+
+ ORDENES DE TRABAJO
+-----------------------------------------------------------------------------
+ Ord T.Cod C.     Cliente      Total MO   Total OC  Tot. FA/PR   Total OT  E
+-----------------------------------------------------------------------------
+[c010 |c011 |c012            |c013      |c014      |c015      |c016       |d]
+[c010 |c011 |c012            |c013      |c014      |c015      |c016       |d]
+[c010 |c011 |c012            |c013      |c014      |c015      |c016       |d]
+[c010 |c011 |c012            |c013      |c014      |c015      |c016       |d]
+[c010 |c011 |c012            |c013      |c014      |c015      |c016       |d]
+[c010 |c011 |c012            |c013      |c014      |c015      |c016       |d]
+[c010 |c011 |c012            |c013      |c014      |c015      |c016       |d]
+[c010 |c011 |c012            |c013      |c014      |c015      |c016       |d]
+[c010 |c011 |c012            |c013      |c014      |c015      |c016       |d]
+[c010 |c011 |c012            |c013      |c014      |c015      |c016       |d]
+                 Totales OT: [c020      |c021      |c022      |c023       ]
+[c030                                                         ]
+}
+TABLES
+talt023
+ATTRIBUTES
+c010 = talt023.t23_orden, NOENTRY, UPSHIFT;
+c011 = talt023.t23_cod_cliente, NOENTRY, UPSHIFT;
+c012 = talt023.t23_nom_cliente, NOENTRY, UPSHIFT;
+c013 = talt023.t23_val_mo_tal, NOENTRY, UPSHIFT, FORMAT = '###,##&.##';
+c014 = FORMONLY.tot_oc TYPE DECIMAL, NOENTRY, UPSHIFT, FORMAT = '###,##&.##';
+c015 = FORMONLY.tot_fa TYPE DECIMAL, NOENTRY, UPSHIFT, FORMAT = '###,##&.##';
+c016 = FORMONLY.tot_ot TYPE DECIMAL, NOENTRY, UPSHIFT, FORMAT = '####,##&.##';
+d    = talt023.t23_estado, NOENTRY, UPSHIFT;
+
+c020 = FORMONLY.tot_neto TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '###,##&.##';
+c021 = FORMONLY.total_oc TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '###,##&.##';
+c022 = FORMONLY.total_fa TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '###,##&.##';
+c023 = FORMONLY.total_ot TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '####,##&.##';
+
+c030 = FORMONLY.tit_cliente, NOENTRY, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_ordtal[10] (t23_orden, t23_cod_cliente, t23_nom_cliente,
+			t23_val_mo_tal, tot_oc, tot_fa, tot_ot, t23_estado)

@@ -1,22 +1,20 @@
-
-database diteca
-screen
+DATABASE aceros
+SCREEN
 {
 
 
      Registro N°: [f001       ]
 
-     Línea Venta: [f003 ] [a2                   ]  
+        Division: [f003 ] [a2                   ]  
  Indice Rotación: [a0] [a3                      ]
        Tipo Item: [f004 ] [a4                   ]
       Porcentaje: [f002     ]%		       
 
           Moneda: [b1              ]       Rubro Base: [b               ]
 }
-end
-tables
+TABLES
 rept032
-attributes
+ATTRIBUTES
 f001 = rept032.r32_numreg, REVERSE,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 b1   = rept032.r32_moneda, REVERSE, NOENTRY, 
@@ -26,11 +24,11 @@ b    = rept032.r32_rubro_base, REVERSE, NOENTRY,
 f002 = rept032.r32_porc_fact, REVERSE, FORMAT = '##,##&.##';
 f003 = rept032.r32_linea, REVERSE, NOENTRY,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-a2   = formonly.nom_lin TYPE VARCHAR, NOENTRY;
+a2   = FORMONLY.nom_lin TYPE VARCHAR, NOENTRY;
 a0   = rept032.r32_rotacion, NOENTRY,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-a3   = formonly.nom_rot TYPE VARCHAR, NOENTRY;
+a3   = FORMONLY.nom_rot TYPE VARCHAR, NOENTRY;
 f004 = rept032.r32_tipo_item, NOENTRY,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-a4   = formonly.nom_tipo TYPE VARCHAR, NOENTRY;
+a4   = FORMONLY.nom_tipo TYPE VARCHAR, NOENTRY;
 end

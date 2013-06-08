@@ -1,6 +1,5 @@
-
-DATABASE diteca
-screen
+DATABASE aceros
+SCREEN
 {
   [b0    |b1                                 |b2        |b3              ][b] 
  [c0    |c1                                 |c2        |c3              ][c]
@@ -30,20 +29,20 @@ TABLES
 ATTRIBUTES
 
 		     ---- BOTONES ----
-b0  = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-b1  = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-b2  = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
-b3  = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
-b   = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+b0  = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+b1  = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b2  = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+b3  = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+b   = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
 	---------------------------------------------
 
 c0  = ordt010.c10_numero_oc,   REVERSE, NOENTRY, OPTIONS = '-nolist';
 c1  = cxpt001.p01_nomprov, REVERSE, NOENTRY, OPTIONS = '-nolist';
-c2  = formonly.vm_fecha        TYPE DATE, REVERSE, NOENTRY, 
+c2  = FORMONLY.vm_fecha        TYPE DATE, REVERSE, NOENTRY, 
 			       FORMAT = 'dd-mm-yyyy', OPTIONS = '-nolist';
 c3  = ordt010.c10_tot_compra,  REVERSE, NOENTRY, OPTIONS = '-nolist', 
 			       FORMAT = '#,###,###,##&.##';
-c   = formonly.aprobar,        REVERSE, OPTIONS = '-nolist', DEFAULT = 'A',
+c   = FORMONLY.aprobar, UPSHIFT, REVERSE, OPTIONS = '-nolist', DEFAULT = 'A',
 	WIDGET = 'CHECK', CONFIG = 'P A acknowledge',
 	COMMENT = 'Marque las ordenes de compra que desee aprobar. ';
 

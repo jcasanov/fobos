@@ -1,0 +1,80 @@
+DATABASE aceros
+SCREEN
+{
+  [c000  |c001                                       ]    [c002 ] de [c003 ]
+  [c010      |c011  |c012        |c013        |c014        |c015        |c|d]
+ [c020      |c021  |c022        |c023        |c024        |c025        |e|f]
+ [c020      |c021  |c022        |c023        |c024        |c025        |e|f]
+ [c020      |c021  |c022        |c023        |c024        |c025        |e|f]
+ [c020      |c021  |c022        |c023        |c024        |c025        |e|f]
+ [c020      |c021  |c022        |c023        |c024        |c025        |e|f]
+ [c020      |c021  |c022        |c023        |c024        |c025        |e|f]
+ [c020      |c021  |c022        |c023        |c024        |c025        |e|f]
+ [c020      |c021  |c022        |c023        |c024        |c025        |e|f]
+ [c020      |c021  |c022        |c023        |c024        |c025        |e|f]
+ [c020      |c021  |c022        |c023        |c024        |c025        |e|f]
+ [c020      |c021  |c022        |c023        |c024        |c025        |e|f]
+ [c020      |c021  |c022        |c023        |c024        |c025        |e|f]
+ [c020      |c021  |c022        |c023        |c024        |c025        |e|f]
+ [c020      |c021  |c022        |c023        |c024        |c025        |e|f]
+          Totales: [c030        |c031        |c032        |c033        ]
+
+  [c034                                                                    ]
+  [c034                                                                    ]
+}
+TABLES
+talt023
+ATTRIBUTES
+c000 = talt023.t23_cod_cliente, NOENTRY, UPSHIFT, REVERSE;
+c001 = talt023.t23_nom_cliente, NOENTRY, UPSHIFT, REVERSE;
+
+c002 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c003 = FORMONLY.vm_num_det, NOENTRY, UPSHIFT, REVERSE;
+
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c015 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c    = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+d    = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22';
+
+c020 = FORMONLY.fecha TYPE DATE, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+c021 = talt023.t23_orden, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c022 = talt023.t23_val_mo_tal, NOENTRY, UPSHIFT, FORMAT = '-,---,--&.##',
+	OPTIONS = '-nolist';
+c023 = FORMONLY.tot_oc TYPE DECIMAL(12,2), NOENTRY, UPSHIFT,
+	FORMAT = '-,---,--&.##', OPTIONS = '-nolist';
+c024 = FORMONLY.tot_fa TYPE DECIMAL(12,2), NOENTRY, UPSHIFT,
+	FORMAT = '-,---,--&.##', OPTIONS = '-nolist';
+c025 = FORMONLY.tot_ot TYPE DECIMAL(12,2), NOENTRY, UPSHIFT,
+	FORMAT = '-,---,--&.##', OPTIONS = '-nolist';
+e    = talt023.t23_estado, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+f    = FORMONLY.eliminar TYPE CHAR NOT NULL, REQUIRED, UPSHIFT,
+	DEFAULT = 'N', INCLUDE = ('S', 'N'),
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge', OPTIONS = '-nolist';
+
+c030 = FORMONLY.tot_neto TYPE DECIMAL(12,2), NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '-,---,--&.##';
+c031 = FORMONLY.total_oc TYPE DECIMAL(12,2), NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '-,---,--&.##';
+c032 = FORMONLY.total_fa TYPE DECIMAL(12,2), NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '-,---,--&.##';
+c033 = FORMONLY.total_ot TYPE DECIMAL(12,2), NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '-,---,--&.##';
+
+c034 = talt023.t23_descripcion, NOENTRY, UPSHIFT, REVERSE, WORDWRAP COMPRESS;
+END
+KEYS
+F5  = 'Orden Trabajo'
+F6  = 'Mano de Obra'
+F7  = 'Ordenes Compra'
+F8  = 'Detalle Proforma'
+F9  = 'Eliminar OT'
+F10 = 'Todas'
+F11 = 'Ninguna'
+INSTRUCTIONS
+SCREEN RECORD rm_det[14] (fecha, t23_orden, t23_val_mo_tal, tot_oc, tot_fa,
+				tot_ot, t23_estado, eliminar)

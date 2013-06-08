@@ -1,0 +1,70 @@
+DATABASE aceros
+SCREEN
+{
+   Usuario: [c002      ] [c003                          ]
+    Módulo: [c0]         [c001                ]
+   Proceso: [c004      ] [c005                                              ]
+   Incluir Procesos Por Usuario Sin Permiso ? [g]            [c050] de [c051]
+ [c010      |c011        |c012      |c013                                |c|d]
+[c020      |c021        |c022      |c023                                |e|f]
+[c020      |c021        |c022      |c023                                |e|f]
+[c020      |c021        |c022      |c023                                |e|f]
+[c020      |c021        |c022      |c023                                |e|f]
+[c020      |c021        |c022      |c023                                |e|f]
+[c020      |c021        |c022      |c023                                |e|f]
+[c020      |c021        |c022      |c023                                |e|f]
+[c020      |c021        |c022      |c023                                |e|f]
+[c020      |c021        |c022      |c023                                |e|f]
+[c020      |c021        |c022      |c023                                |e|f]
+[c020      |c021        |c022      |c023                                |e|f]
+[c020      |c021        |c022      |c023                                |e|f]
+[c020      |c021        |c022      |c023                                |e|f]
+[c020      |c021        |c022      |c023                                |e|f]
+
+}
+TABLES
+gent005
+gent050
+gent054
+ATTRIBUTES
+c0   = FORMONLY.g53_modulo, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = FORMONLY.tit_nombre_mod, NOENTRY, UPSHIFT;
+c002 = FORMONLY.g53_usuario, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = gent005.g05_nombres, NOENTRY, UPSHIFT;
+c004 = FORMONLY.g55_proceso, AUTONEXT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c005 = FORMONLY.tit_nombre, NOENTRY, UPSHIFT;
+g    = FORMONLY.vm_incluir_pro TYPE CHAR NOT NULL, REQUIRED, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N';
+
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c    = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+d    = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+c020 = gent005.g05_usuario, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c021 = gent050.g50_nombre, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c022 = gent054.g54_proceso, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c023 = gent054.g54_nombre, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+e    = FORMONLY.asignar_pro TYPE CHAR NOT NULL, REQUIRED, REVERSE, UPSHIFT,
+	OPTIONS = '-nolist',
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S',
+	COMMENTS = 'Permiso para tener acceso al Proceso.';
+f    = FORMONLY.asignar_men TYPE CHAR NOT NULL, REQUIRED, REVERSE, UPSHIFT,
+	OPTIONS = '-nolist',
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S',
+	COMMENTS = 'Permiso para de acceso al Proceso desde Menú Principal.';
+
+c050 = FORMONLY.vm_row_cur, NOENTRY, UPSHIFT, REVERSE;
+c051 = FORMONLY.vm_row_num, NOENTRY, UPSHIFT, REVERSE;
+END
+KEYS
+F5 = 'Permisos'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_permisos[14] (g05_usuario, g50_nombre, g54_proceso, g54_nombre,
+				asignar_pro, asignar_men)

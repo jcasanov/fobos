@@ -1,0 +1,50 @@
+DATABASE aceros
+SCREEN
+{
+
+
+
+ Bodega: [c0] [c001                          ]            Fecha: [c009      ]
+   Item: [c002  ]
+         [c003                                                              ]
+
+                      Buen Estado: [c004     ]
+                  (+)  Incompleto: [c005     ]
+                       Mal Estado: [c006     ]
+                                   -----------
+                            Total: [c007     ]
+
+                     Stock Actual: [c008     ]        Diferencia: [c013     ]
+
+  Usuario: [c010      ]                  Fecha Ingreso: [c011               ]
+                                    Fecha Modificacion: [c012               ]
+
+}
+TABLES
+te_stofis
+rept002
+rept010
+ATTRIBUTES
+c0   = te_stofis.te_bodega, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda.';
+c001 = rept002.r02_nombre, NOENTRY, UPSHIFT, REVERSE;
+c002 = te_stofis.te_item, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda.';
+c003 = rept010.r10_nombre, NOENTRY, REVERSE;
+c004 = te_stofis.te_bueno, AUTONEXT, UPSHIFT, FORMAT = '##,##&.##',
+	INCLUDE = (0 TO 99999.99);
+c005 = te_stofis.te_incompleto, AUTONEXT, UPSHIFT, FORMAT = '##,##&.##',
+	INCLUDE = (0 TO 99999.99);
+c006 = te_stofis.te_mal_est, AUTONEXT, UPSHIFT, FORMAT = '##,##&.##',
+	INCLUDE = (0 TO 99999.99);
+c007 = te_stofis.te_suma, NOENTRY, UPSHIFT, REVERSE, FORMAT = '##,##&.##';
+c008 = te_stofis.te_stock_act, NOENTRY, UPSHIFT, REVERSE, FORMAT = '##,##&.##';
+c009 = te_stofis.te_fecha, NOENTRY, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy';
+c010 = te_stofis.te_usuario, NOENTRY, UPSHIFT, REVERSE;
+c011 = te_stofis.te_fecing, NOENTRY, UPSHIFT, REVERSE;
+c012 = te_stofis.te_fec_modifi, NOENTRY, UPSHIFT;
+c013 = FORMONLY.tit_diferencia TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '--,--&.##';
+END
+INSTRUCTIONS
+DELIMITERS "||"

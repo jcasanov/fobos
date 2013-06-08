@@ -1,0 +1,34 @@
+DATABASE aceros
+SCREEN
+{
+
+
+                                                       Estado: [c|c001     ]
+
+        Código Item: [c002           ] [c003                               ]
+              Marca: [c04   ]          [c005                               ]
+              Color: [c006      ] [c007                                    ]
+
+      Ingresado Por: [c008      ]
+   Fecha de Ingreso: [c009               ]
+
+}
+TABLES rept075, rept010, rept073
+ATTRIBUTES
+c    = rept075.r75_estado, NOENTRY, UPSHIFT, REVERSE,
+	COMMENTS = 'A Activo  E Eliminado';
+c001 = FORMONLY.tit_estado, NOENTRY, UPSHIFT, REVERSE;
+c002 = rept075.r75_item, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c003 = rept010.r10_nombre, NOENTRY, UPSHIFT, REVERSE;
+c04  = rept075.r75_marca, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c005 = rept073.r73_desc_marca, NOENTRY, UPSHIFT, REVERSE;
+c006 = rept075.r75_color, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c007 = rept075.r75_descripcion, AUTONEXT, UPSHIFT, REVERSE;
+c008 = rept075.r75_usuario, REVERSE, NOENTRY, UPSHIFT;
+c009 = rept075.r75_fecing, REVERSE, NOENTRY, UPSHIFT;
+end
+INSTRUCTIONS
+DELIMITERS '||'

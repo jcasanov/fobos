@@ -1,24 +1,26 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
+                                                           [c050 ] de [c051 ]
 
  Tran. Generada: [a4] [c000       ]      Fecha Ingreso: [c014               ]
       Proveedor: [c001       ] [c002                                        ]
-         Moneda: [a1] [c008            ]
+         Moneda: [a1] [c008           ]
  Tipo Documento: [a0] [c010           ]    No. Documento: [c003             ]
      Referencia: [c011                           ] Saldo: [c004             ]
- [a3|c110          |c11|c112            |c113            |c114             |d]
-[a2|c100          |c01|c102            |c103            |c104             |c]
-[a2|c100          |c01|c102            |c103            |c104             |c]
-[a2|c100          |c01|c102            |c103            |c104             |c]
-[a2|c100          |c01|c102            |c103            |c104             |c]
-[a2|c100          |c01|c102            |c103            |c104             |c]
-[a2|c100          |c01|c102            |c103            |c104             |c]
-[a2|c100          |c01|c102            |c103            |c104             |c]
-             Totales: [c012            |c018            |c019             ]
-  Documento: [c015      |c016      |c017] dias
 
-    Usuario: [c013      ]
+                                                           [c052 ] de [c053 ]
+ [a3|c110              |c11|c112           |c113           |c114           |d]
+[a2|c100              |c01|c102           |c103           |c104           |c]
+[a2|c100              |c01|c102           |c103           |c104           |c]
+[a2|c100              |c01|c102           |c103           |c104           |c]
+[a2|c100              |c01|c102           |c103           |c104           |c]
+[a2|c100              |c01|c102           |c103           |c104           |c]
+[a2|c100              |c01|c102           |c103           |c104           |c]
+[a2|c100              |c01|c102           |c103           |c104           |c]
+                 Totales: [c012           |c018           |c019           ]
+
+  Documento: [c015      |c016      |c017] dias        Usuario: [c013      ]
 }
 TABLES
 cxpt020, cxpt021, cxpt022, cxpt023
@@ -43,7 +45,7 @@ c003 = cxpt021.p21_num_doc, AUTONEXT, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
 	COMMENTS = 'Escoja el documento a aplicar';
 c004 = cxpt021.p21_saldo, NOENTRY, REVERSE, FORMAT = '#,###,###,##&.##';
-c011 = cxpt022.p22_referencia, AUTONEXT, UPSHIFT;
+c011 = cxpt022.p22_referencia, AUTONEXT, UPSHIFT, REVERSE;
 
 a3   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
 c110 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
@@ -58,13 +60,13 @@ c100 = cxpt023.p23_num_doc, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
 c01  = cxpt023.p23_div_doc, NOENTRY, UPSHIFT,
 	FORMAT = '#&&', OPTIONS = '-nolist';
 c102 = FORMONLY.tit_saldo_act, NOENTRY, UPSHIFT,
-	FORMAT = '-,---,---,--&.##', INCLUDE = (0.01 TO 9999999999.99),
+	FORMAT = '----,---,--&.##', INCLUDE = (0.01 TO 9999999999.99),
 	OPTIONS = '-nolist';
 c103 = FORMONLY.tit_valor_apl, AUTONEXT, UPSHIFT,
 	COMMENTS = 'El Valor a ajustar es negativo',
-	FORMAT = '-,---,---,--&.##', OPTIONS = '-nolist';
+	FORMAT = '----,---,--&.##', OPTIONS = '-nolist';
 c104 = FORMONLY.tit_saldo_nue, NOENTRY, UPSHIFT,
-	FORMAT = '--,---,---,--&.##', INCLUDE = (0.01 TO 9999999999.99),
+	FORMAT = '----,---,--&.##', INCLUDE = (0.01 TO 9999999999.99),
 	OPTIONS = '-nolist';
 c    = FORMONLY.tit_check, AUTONEXT, UPSHIFT,
 	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N',
@@ -72,11 +74,11 @@ c    = FORMONLY.tit_check, AUTONEXT, UPSHIFT,
 	OPTIONS = '-nolist';
 
 c012 = FORMONLY.tit_total_act, NOENTRY, REVERSE, UPSHIFT,
-	FORMAT = '-,---,---,--&.##';
+	FORMAT = '----,---,--&.##';
 c018 = FORMONLY.tit_total_apl, NOENTRY, REVERSE, UPSHIFT,
-	FORMAT = '-,---,---,--&.##',INCLUDE = (-9999999999.99 TO 0);
+	FORMAT = '----,---,--&.##',INCLUDE = (-9999999999.99 TO 0);
 c019 = FORMONLY.tit_total_nue, NOENTRY, REVERSE, UPSHIFT,
-	FORMAT = '--,---,---,--&.##';
+	FORMAT = '----,---,--&.##';
 c013 = cxpt022.p22_usuario, NOENTRY, REVERSE, UPSHIFT;
 c014 = cxpt022.p22_fecing, NOENTRY, REVERSE, UPSHIFT;
 c015 = cxpt020.p20_fecha_vcto, COLOR = RED WHERE c015 < TODAY,
@@ -85,7 +87,13 @@ c016 = FORMONLY.tit_fecha_vcto, COLOR = RED WHERE c016 = 'VENCIDO',
 	NOENTRY, REVERSE, UPSHIFT;
 c017 = FORMONLY.tit_dias, COLOR = RED WHERE c017 < 0,
 	NOENTRY, REVERSE, FORMAT = '###&';
+
+c050 = FORMONLY.row_cur, NOENTRY, UPSHIFT;
+c051 = FORMONLY.max_cur, NOENTRY, UPSHIFT;
+c052 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c053 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
 END
 INSTRUCTIONS
+DELIMITERS '||'
 SCREEN RECORD rm_aju[7] (p23_tipo_doc, p23_num_doc, p23_div_doc, tit_saldo_act,
 			tit_valor_apl, tit_saldo_nue, tit_check)

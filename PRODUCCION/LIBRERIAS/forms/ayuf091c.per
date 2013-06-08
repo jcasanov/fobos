@@ -1,0 +1,28 @@
+DATABASE aceros
+
+SCREEN
+{
+  COMPANIAS CONFIGURADAS TESORERIA
+ --------------------------------------
+  Código Descripción 	  
+ --------------------------------------
+ [f001] [f002                         ] 
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+}
+
+TABLES
+gent001
+cxpt000
+
+ATTRIBUTES
+f001 = p00_compania,REVERSE;
+f002 = g01_razonsocial,REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_ciates[7](p00_compania, g01_razonsocial)

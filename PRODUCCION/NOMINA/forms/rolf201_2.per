@@ -1,0 +1,81 @@
+database aceros
+screen 
+{
+  Codigo Liquidación: [a0] [c100                                         ] 
+         Año Proceso: [c006  ]           Mes Proceso: [c7|c103           ]
+        Fecha Inicio: [c001      ]         Fecha Fin: [c002      ]
+              Moneda: [a1|c101           ]   Paridad: [c011              ]
+ [lbl1    |lbl2                                     |lbl3   |lbl4  |lbl5 ]
+[c008  ] [c102                                     |c004 ] [c009  |c010  ]
+[c008  ] [c102                                     |c004 ] [c009  |c010  ]
+[c008  ] [c102                                     |c004 ] [c009  |c010  ]
+[c008  ] [c102                                     |c004 ] [c009  |c010  ]
+[c008  ] [c102                                     |c004 ] [c009  |c010  ]
+[c110                  ]
+ [lbl6  |lbl7                          |l1|lbl8         |lbl9            ]
+[c021  |c105                          |a3|c|c106       |c026             ]
+[c021  |c105                          |a3|c|c106       |c026             ]
+[c021  |c105                          |a3|c|c106       |c026             ]
+[c021  |c105                          |a3|c|c106       |c026             ]
+[c021  |c105                          |a3|c|c106       |c026             ]
+[c111                  ]
+
+Ingresado Por: [c015      ]        Fecha de Ingreso: [c016               ]
+}
+end
+tables
+rolt032
+rolt033
+attributes
+a0 = rolt032.n32_cod_liqrol,    REVERSE, AUTONEXT, UPSHIFT, WIDGET='FIELD_BMP', 
+	CONFIG='lista.bmp';
+c100 = formonly.n_liqrol,       NOENTRY;
+c001 = rolt032.n32_fecha_ini,   REVERSE, FORMAT='dd-mm-yyyy', NOENTRY;
+c002 = rolt032.n32_fecha_fin,   REVERSE, FORMAT='dd-mm-yyyy', NOENTRY;
+c006 = rolt032.n32_ano_proceso, REVERSE;
+c7   = rolt032.n32_mes_proceso, REVERSE;
+c103 = formonly.n_mes ,         NOENTRY;
+
+a1 = rolt032.n32_moneda,        REVERSE, NOENTRY;
+c101 = formonly.n_moneda,                NOENTRY;
+c011 = rolt032.n32_paridad,     REVERSE, NOENTRY, FORMAT='#,###,##&.#########';
+
+c015 = rolt032.n32_usuario,     REVERSE, NOENTRY, UPSHIFT;
+c016 = rolt032.n32_fecing,      REVERSE, NOENTRY;
+
+c008 = rolt032.n32_cod_trab,    WIDGET='FIELD_BMP', CONFIG='lista.bmp', 
+	OPTIONS='-nolist', NOENTRY;
+c102 = formonly.n_trab,         OPTIONS='-nolist', NOENTRY;
+c004 = rolt032.n32_cod_depto,   WIDGET='FIELD_BMP', CONFIG='lista.bmp', 
+	OPTIONS='-nolist', NOENTRY;
+c009 = rolt032.n32_dias_trab,   OPTIONS='-nolist', INCLUDE=(0 TO 999999);
+c010 = rolt032.n32_dias_falt,   OPTIONS='-nolist', INCLUDE=(0 TO 999999);
+
+c021 = rolt033.n33_cod_rubro,   OPTIONS='-nolist', NOENTRY;
+c105 = formonly.n_rubro,        OPTIONS='-nolist', NOENTRY;
+a3   = rolt033.n33_det_tot,     OPTIONS='-nolist', NOENTRY;
+c    = rolt033.n33_cant_valor,  OPTIONS='-nolist', NOENTRY;
+c106 = formonly.n_cant_val,     OPTIONS='-nolist', NOENTRY;
+c026 = rolt033.n33_valor,       OPTIONS='-nolist'; 
+
+c110 = formonly.n_dpto,         NOENTRY;
+c111 = formonly.n_tipo,         NOENTRY;
+
+lbl1 = formonly.bt_cod_trab,    WIDGET='BUTTON', CONFIG='F15';
+lbl2 = formonly.bt_nom_trab,    WIDGET='BUTTON', CONFIG='F16';
+lbl3 = formonly.bt_dpto,        WIDGET='BUTTON', CONFIG='F17';
+lbl4 = formonly.bt_dias_trab,   WIDGET='BUTTON', CONFIG='F18';
+lbl5 = formonly.bt_dias_falt,   WIDGET='BUTTON', CONFIG='F19';
+
+lbl6 = formonly.bt_cod_rubro,  WIDGET='BUTTON', CONFIG='F15';
+lbl7 = formonly.bt_nom_rubro,  WIDGET='BUTTON', CONFIG='F16';
+l1   = formonly.bt_tipo,       WIDGET='BUTTON', CONFIG='F17';
+lbl8 = formonly.bt_cant_valor, WIDGET='BUTTON', CONFIG='F18';
+lbl9 = formonly.bt_valor,      WIDGET='BUTTON', CONFIG='F19';
+end
+
+instructions
+screen record ra_n32[5] (n32_cod_trab, n_trab, n32_cod_depto, n32_dias_trab,
+                         n32_dias_falt) 
+screen record ra_n33[5] (n33_cod_rubro, n_rubro, n33_det_tot, n33_cant_valor,
+                         n_cant_val, n33_valor)

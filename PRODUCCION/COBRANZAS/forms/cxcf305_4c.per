@@ -1,0 +1,45 @@
+DATABASE aceros
+SCREEN
+{
+                        DETALLE DE PAGOS Y AJUSTES
+
+ Cliente: [c000                                     ]
+
+ TP  Número TP      Documento     Fec.Eli.  Fec. Pago  Mo     V a l o r
+[c20|c021  |c22|c023             |c024    |c025      |c26|c027            ]
+[c20|c021  |c22|c023             |c024    |c025      |c26|c027            ]
+[c20|c021  |c22|c023             |c024    |c025      |c26|c027            ]
+[c20|c021  |c22|c023             |c024    |c025      |c26|c027            ]
+[c20|c021  |c22|c023             |c024    |c025      |c26|c027            ]
+[c20|c021  |c22|c023             |c024    |c025      |c26|c027            ]
+[c20|c021  |c22|c023             |c024    |c025      |c26|c027            ]
+[c20|c021  |c22|c023             |c024    |c025      |c26|c027            ]
+                                                         [c030            ]
+}
+TABLES 
+cxct001
+cxct022
+cxct023
+ATTRIBUTES
+c000 = z01_nomcli, REVERSE;
+c20  = z23_tipo_trn;
+c021 = z23_num_trn, FORMAT = '#####&';
+c22  = z23_tipo_doc;
+c023 = FORMONLY.num_doc;
+c024 = FORMONLY.z22_fecha_elim TYPE DATE, FORMAT = 'dd-mm-yy',
+	COLOR = RED WHERE c024 IS NULL;
+c025 = z22_fecha_emi, FORMAT = 'dd-mm-yyyy';
+c26  = z22_moneda;
+c027 = FORMONLY.val_pago TYPE DECIMAL(12,2), FORMAT = '-,---,---,--&.##';
+c030 = FORMONLY.tot_pago TYPE DECIMAL(12,2), FORMAT = '-,---,---,--&.##',
+       REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_movc[8] (z23_tipo_trn, z23_num_trn, z23_tipo_doc, 
+			  FORMONLY.num_doc, 
+			  z22_fecha_elim, z22_fecha_emi, z22_moneda, 
+			  FORMONLY.val_pago)
+--KEYS
+--'F5'='Pago Caja'
+--'F6'='Documento'

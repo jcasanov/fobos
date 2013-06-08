@@ -1,0 +1,23 @@
+DATABASE aceros
+SCREEN
+{
+                                                              [c000] de [c001]
+
+       Codigo Estado: [c] [c002                                    ]
+
+             Usuario: [c003      ]     Fecha de Ingreso: [c004               ]
+
+}
+TABLES
+actt006
+ATTRIBUTES
+c000 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c001 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c    = actt006.a06_estado, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = actt006.a06_descripcion, AUTONEXT, UPSHIFT, REVERSE;
+
+c003 = actt006.a06_usuario, NOENTRY, UPSHIFT, REVERSE;
+c004 = actt006.a06_fecing, REVERSE, NOENTRY, UPSHIFT;
+END

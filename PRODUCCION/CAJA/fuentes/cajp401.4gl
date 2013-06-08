@@ -30,12 +30,11 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/cajp401.error')
-CALL fgl_init4js()
+CALL startlog('../logs/cajp401.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 5 THEN     -- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto.', 
-        'stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
 
@@ -49,8 +48,8 @@ LET vg_proceso = 'cajp401'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()
 
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 
 CALL funcion_master()
@@ -76,39 +75,33 @@ LET vm_page   = 30
 CALL fl_lee_cabecera_caja(vg_codcia, vg_codloc, vm_tipo_fuente, vm_sol_cobro) 
 	RETURNING rm_j10.*
 IF rm_j10.j10_num_fuente IS NULL THEN
-	CALL fgl_winmessage(vg_producto,
-		'No existe solicitud de cobro.',
-		'stop')
+	--CALL fgl_winmessage(vg_producto,'No existe solicitud de cobro.','stop')
+	CALL fl_mostrar_mensaje('No existe solicitud de cobro.','stop')
 	EXIT PROGRAM
 END IF
 CALL fl_lee_area_negocio(vg_codcia, rm_j10.j10_areaneg) RETURNING rm_g03.*
 IF rm_g03.g03_areaneg IS NULL THEN
-	CALL fgl_winmessage(vg_producto,
-		'No existe area de negocio.',
-		'stop')
+	--CALL fgl_winmessage(vg_producto,'No existe area de negocio.','stop')
+	CALL fl_mostrar_mensaje('No existe area de negocio.','stop')
 	EXIT PROGRAM
 END IF
 
 CALL fl_lee_solicitud_cobro_cxc(vg_codcia, vg_codloc, vm_sol_cobro)
 	RETURNING rm_z24.*
 IF rm_z24.z24_numero_sol IS NULL THEN
-	CALL fgl_winmessage(vg_producto,
-		'No existe solicitud de cobro.',
-		'stop')
+	--CALL fgl_winmessage(vg_producto,'No existe solicitud de cobro.','stop')
+	CALL fl_mostrar_mensaje('No existe solicitud de cobro.','stop')
 	EXIT PROGRAM
 END IF
 IF rm_z24.z24_tipo = 'P' THEN
-	CALL fgl_winmessage(vg_producto,
-		'La solicitud de cobro es por pago de factura.',
-		'stop')
+	--CALL fgl_winmessage(vg_producto,'La solicitud de cobro es por pago de factura.','stop')
 	EXIT PROGRAM
 END IF
 
 CALL fl_lee_moneda(rm_j10.j10_moneda) RETURNING rm_g13.*
 IF rm_g13.g13_moneda IS NULL THEN
-	CALL fgl_winmessage(vg_producto,
-		'Moneda no existe.',
-		'stop')
+	--CALL fgl_winmessage(vg_producto,'Moneda no existe.','stop')
+	CALL fl_mostrar_mensaje('Moneda no existe.','stop')
 	EXIT PROGRAM
 END IF
 
@@ -121,17 +114,14 @@ END FUNCTION
 FUNCTION control_main_reporte()
 DEFINE comando		VARCHAR(100)
 
-WHILE TRUE
-	CALL fl_control_reportes() RETURNING comando
-	IF int_flag THEN
-		EXIT WHILE
-	END IF
-	CALL fl_lee_compania(vg_codcia) RETURNING rm_cia.*
-
-	START REPORT report_solicitud TO PIPE comando
-		OUTPUT TO REPORT report_solicitud('F') -- Forma de Pago
-	FINISH REPORT report_solicitud
-END WHILE
+CALL fl_control_reportes() RETURNING comando
+IF int_flag THEN
+	RETURN
+END IF
+CALL fl_lee_compania(vg_codcia) RETURNING rm_cia.*
+START REPORT report_solicitud TO PIPE comando
+OUTPUT TO REPORT report_solicitud('F') -- Forma de Pago
+FINISH REPORT report_solicitud
 
 END FUNCTION
 
@@ -150,24 +140,41 @@ DEFINE cod_bco_tarj	LIKE cajt011.j11_cod_bco_tarj
 DEFINE num_ch_aut	LIKE cajt011.j11_num_ch_aut
 DEFINE num_cta_tarj     LIKE cajt011.j11_num_cta_tarj
 DEFINE valor		LIKE cajt011.j11_valor
+DEFINE cont_cred	LIKE cajt001.j01_cont_cred
 
+DEFINE r_g01		RECORD LIKE gent001.*
 DEFINE r_g08		RECORD LIKE gent008.*
 DEFINE r_g10		RECORD LIKE gent010.*
+DEFINE escape		SMALLINT
+DEFINE act_comp, db_c	SMALLINT
+DEFINE desact_comp, db	SMALLINT
 
 OUTPUT
-	TOP    MARGIN	vm_top
-	LEFT   MARGIN	vm_left
-	RIGHT  MARGIN	vm_right
-	BOTTOM MARGIN	vm_bottom
-	PAGE   LENGTH	vm_page
+--	TOP    MARGIN	vm_top
+--	LEFT   MARGIN	vm_left
+--	RIGHT  MARGIN	vm_right
+--	BOTTOM MARGIN	vm_bottom
+--	PAGE   LENGTH	vm_page
+	TOP    MARGIN	1
+	LEFT   MARGIN	0	## 2
+	RIGHT  MARGIN	90
+	BOTTOM MARGIN	3	## 4
+	PAGE   LENGTH	44	## 43
 
 FORMAT
 PAGE HEADER
-	print '@';
-	print 'EDITECA - KOMATSUF'
---	SKIP 1 LINES
+	LET escape	= 27		# Iniciar sec. impresi¢n
+	LET act_comp	= 15		# Activar Comprimido.
+	LET desact_comp	= 18		# Cancelar Comprimido.
+	CALL fl_lee_compania(vg_codcia) RETURNING r_g01.*
+
+	SKIP 1 LINES
+	print ASCII escape;
+	print ASCII act_comp;
+	PRINT 003, r_g01.g01_razonsocial
 	PRINT COLUMN 50, 'COMPROBANTE DE INGRESO No. ',
-		fl_justifica_titulo('I', vm_sol_cobro CLIPPED, 10)
+		rm_j10.j10_tipo_destino, '-',
+		fl_justifica_titulo('I', rm_j10.j10_num_destino CLIPPED, 10)
 	SKIP 1 LINES
 	PRINT COLUMN 10, fl_justifica_titulo('I', 'Cliente', 15), ': ',
 		         rm_j10.j10_nomcli CLIPPED,
@@ -182,6 +189,7 @@ PAGE HEADER
 	PRINT COLUMN 10, 'POR PAGO ANTICIPADO',
 	      COLUMN 86, fl_justifica_titulo('I', 'Valor',  6), ': ',
 			 rm_j10.j10_valor USING '#,###,###,##&.##'
+
 ON EVERY ROW
 	SKIP 1 LINES
 	IF flag = 'F' THEN
@@ -214,8 +222,14 @@ ON EVERY ROW
 				LET n_bco_tarj = r_g08.g08_nombre
 			ELSE
 				IF bco_tarj = 2 THEN
-					CALL fl_lee_tarjeta_credito(
-						cod_bco_tarj) 
+					LET cont_cred = 'C'
+					IF rm_j10.j10_tipo_fuente = 'SC' THEN
+						LET cont_cred = 'R'
+					END IF
+					CALL fl_lee_tarjeta_credito(vg_codcia,
+								cod_bco_tarj,
+								forma_pago,
+								cont_cred)
 						RETURNING r_g10.*
 					LET n_bco_tarj = r_g10.g10_nombre
 				ELSE
@@ -232,6 +246,8 @@ ON EVERY ROW
 		END FOREACH
 		FREE q_fp  
 	END IF
+	print ASCII escape;
+	print ASCII desact_comp 
 
 END REPORT
 
@@ -271,47 +287,3 @@ END CASE
 RETURN ret_val
 
 END FUNCTION
-
-
-
-FUNCTION validar_parametros()
-
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 
-                            'stop')
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 
-                            'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || 
-                            vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 
-                            'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| 
-                            vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_compania <> vg_codcia THEN
-	CALL fgl_winmessage(vg_producto, 'Combinación compañía/localidad no ' ||
-                            'existe ', 'stop')
-	EXIT PROGRAM
-END IF
-
-END FUNCTION
-

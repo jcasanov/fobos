@@ -1,0 +1,45 @@
+DATABASE aceros
+SCREEN
+{
+
+                                                              [c010] de [c011]
+
+
+  Tipo Documento: [c0] [c000           ]  Localidad: [c1] [c001              ]
+
+   Fecha Entrega: [c002      ]            Secuencia: [c003]
+
+ No. Inicial SRI: [c004       ]       No. Final SRI: [c005       ]
+
+                                   No. Días Colchón: [c006       ]
+
+
+         Usuario: [c007      ]     Fecha de Ingreso: [c008               ]
+
+}
+TABLES
+cxct004
+gent002
+gent039
+ATTRIBUTES
+c0   = gent039.g39_tipo_doc, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c000 = cxct004.z04_nombre, NOENTRY, REVERSE, UPSHIFT;
+c1   = gent039.g39_localidad, NOENTRY, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = gent002.g02_nombre, NOENTRY, REVERSE, UPSHIFT;
+c002 = gent039.g39_fec_entrega, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Fecha de Entrega de los Formularios. Formato dd-mm-aaaa';
+c003 = gent039.g39_secuencia, NOENTRY, REVERSE, UPSHIFT;
+c004 = gent039.g39_num_sri_ini, AUTONEXT, REVERSE, UPSHIFT,
+	INCLUDE = (0 TO 999999999);
+c005 = gent039.g39_num_sri_fin, AUTONEXT, REVERSE, UPSHIFT,
+	INCLUDE = (0 TO 999999999);
+c006 = gent039.g39_num_dias_col, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Máximo de días que se estima para el cálculo de facturas.';
+c007 = gent039.g39_usuario, NOENTRY, REVERSE, UPSHIFT;
+c008 = gent039.g39_fecing, NOENTRY, REVERSE, UPSHIFT;
+c010 = FORMONLY.row_current, NOENTRY, UPSHIFT;
+c011 = FORMONLY.num_rows, NOENTRY, UPSHIFT;
+END

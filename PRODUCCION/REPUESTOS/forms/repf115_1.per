@@ -1,26 +1,32 @@
-database diteca
-screen 
+DATABASE aceros
+SCREEN
 {
 
-  Codigo: [c001           ] [c002                          ]
-  Factor: [c004  ]%
 
-  [a] Usar por omision                      Tipo: [c003               ] 
+                                                       Estado: [c|c001     ]
 
+        Código Item: [c002           ] [c003                               ]
+              Marca: [c04   ]          [c005                               ]
+              Color: [c006      ] [c007                                    ]
 
-    Ingresado Por: [c011      ]   Fecha de Ingreso: [c012               ]
+      Ingresado Por: [c008      ]
+   Fecha de Ingreso: [c009               ]
+
 }
-end
-tables
-rept114
-attributes
-c001 = rept114.r114_codigo, REVERSE, UPSHIFT, NOENTRY,
-	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
-c002 = rept114.r114_descripcion, REVERSE, UPSHIFT;
-c004 = rept114.r114_factor, REVERSE, FORMAT='##&.&&';
-a    = rept114.r114_default, WIDGET='CHECK', CONFIG='S N acknowledge', DEFAULT='N';
-c003 = rept114.r114_flag_ident, WIDGET='RADIO', CONFIG='IMP Importacion STO "En Stock"', DEFAULT='IMP';
-c011 = rept114.r114_usuario, REVERSE, UPSHIFT, NOENTRY;
-c012 = rept114.r114_fecing, REVERSE, NOENTRY;
-
+TABLES rept075, rept010, rept073
+ATTRIBUTES
+c    = rept075.r75_estado, NOENTRY, UPSHIFT, REVERSE,
+	COMMENTS = 'A Activo  E Eliminado';
+c001 = FORMONLY.tit_estado, NOENTRY, UPSHIFT, REVERSE;
+c002 = rept075.r75_item, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = rept010.r10_nombre, NOENTRY, UPSHIFT, REVERSE;
+c04  = rept075.r75_marca, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c005 = rept073.r73_desc_marca, NOENTRY, UPSHIFT, REVERSE;
+c006 = rept075.r75_color, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c007 = rept075.r75_descripcion, AUTONEXT, UPSHIFT, REVERSE;
+c008 = rept075.r75_usuario, REVERSE, NOENTRY, UPSHIFT;
+c009 = rept075.r75_fecing, REVERSE, NOENTRY, UPSHIFT;
 end

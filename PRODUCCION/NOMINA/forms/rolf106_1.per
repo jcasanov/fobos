@@ -1,0 +1,65 @@
+DATABASE aceros
+SCREEN
+{
+
+               Proceso: [c0]   [c001                          ]
+                 Rubro: [c002] [c003                          ]
+
+                                                             [c004] de [c005]
+ [c010|c011                               |c012      |c013      |c014        ]
+[c020|c021                               |c022      |c023      |c024        ]
+[c020|c021                               |c022      |c023      |c024        ]
+[c020|c021                               |c022      |c023      |c024        ]
+[c020|c021                               |c022      |c023      |c024        ]
+[c020|c021                               |c022      |c023      |c024        ]
+[c020|c021                               |c022      |c023      |c024        ]
+[c020|c021                               |c022      |c023      |c024        ]
+[c020|c021                               |c022      |c023      |c024        ]
+[c020|c021                               |c022      |c023      |c024        ]
+[c020|c021                               |c022      |c023      |c024        ]
+[c020|c021                               |c022      |c023      |c024        ]
+[c020|c021                               |c022      |c023      |c024        ]
+                                                     Total ==> [c030        ]
+
+   Ingresado Por: [c031      ]        Fecha Ingreso: [c032               ]
+}
+TABLES
+rolt003
+rolt006
+rolt010
+rolt030
+ATTRIBUTES
+c0   = rolt010.n10_cod_liqrol, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = rolt003.n03_nombre, NOENTRY, REVERSE, UPSHIFT;
+c002 = rolt010.n10_cod_rubro, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = rolt006.n06_nombre, NOENTRY, REVERSE, UPSHIFT;
+
+c004 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c005 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+
+c020 = rolt010.n10_cod_trab, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c021 = rolt030.n30_nombres, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c022 = rolt010.n10_fecha_ini, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+c023 = rolt010.n10_fecha_fin, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+c024 = rolt010.n10_valor, AUTONEXT, UPSHIFT, FORMAT = '-,---,--&.##',
+	INCLUDE = (0 TO 9999999.99), OPTIONS = '-nolist';
+
+c030 = FORMONLY.vm_total, NOENTRY, UPSHIFT, REVERSE, FORMAT = '-,---,--&.##';
+
+c031 = rolt010.n10_usuario, NOENTRY, REVERSE, UPSHIFT;
+c032 = rolt010.n10_fecing, NOENTRY, REVERSE, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_det[12] (n10_cod_trab, n30_nombres, n10_fecha_ini,
+			n10_fecha_fin, n10_valor)

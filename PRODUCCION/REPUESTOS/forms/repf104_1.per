@@ -1,5 +1,5 @@
-database diteca
-screen 
+DATABASE aceros
+SCREEN 
 {
 
 
@@ -18,14 +18,14 @@ Unidades Ventas Inicial: [f002  ]      Unidades Ventas Final: [f003  ]
 
 }
 end
-tables
+TABLES
 rept004
-attributes
+ATTRIBUTES
 a0   = rept004.r04_rotacion,REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 f001 = rept004.r04_nombre, REVERSE, UPSHIFT;
 a    = rept004.r04_estado,REVERSE, NOENTRY, UPSHIFT;
-a1   = formonly.tit_estado TYPE VARCHAR, NOENTRY;
+a1   = FORMONLY.tit_estado TYPE VARCHAR, NOENTRY;
 b = rept004.r04_pedido, REVERSE, 
 	WIDGET  = 'CHECK', CONFIG = 'S N acknowedge',
 	COMMENT = 'Se pueden hacer o no pedidos de items pertenecientes a esté índice de rotación';

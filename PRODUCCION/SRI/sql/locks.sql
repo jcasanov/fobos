@@ -1,9 +1,0 @@
-alter table rept093 lock mode row; 
-alter table cajt100  lock mode row; 
-alter table cajt101  lock mode row; 
-alter table cajt102  lock mode row; 
-alter table cxct100  lock mode row; 
-alter table maqt011  lock mode row; 
-alter table maqt013  lock mode row; 
-alter table rept101  lock mode row; 
-alter table rept094  lock mode row; 

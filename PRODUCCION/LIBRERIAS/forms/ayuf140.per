@@ -1,0 +1,40 @@
+DATABASE aceros
+SCREEN
+{
+ ACTIVOS FIJOS
+                                          [c020 ] de [c021 ]
+ [c00|c001|c002  |c003                                    |c]
+[c01|c011|c012  |c013                                    |d]
+[c01|c011|c012  |c013                                    |d]
+[c01|c011|c012  |c013                                    |d]
+[c01|c011|c012  |c013                                    |d]
+[c01|c011|c012  |c013                                    |d]
+[c01|c011|c012  |c013                                    |d]
+[c01|c011|c012  |c013                                    |d]
+[c01|c011|c012  |c013                                    |d]
+[c01|c011|c012  |c013                                    |d]
+[c01|c011|c012  |c013                                    |d]
+
+}
+TABLES
+actt010
+ATTRIBUTES
+c00  = FORMONLY.tit_col1, NOENTRY, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, NOENTRY, WIDGET = 'BUTTON', CONFIG = 'F16';
+c002 = FORMONLY.tit_col3, NOENTRY, WIDGET = 'BUTTON', CONFIG = 'F17';
+c003 = FORMONLY.tit_col4, NOENTRY, WIDGET = 'BUTTON', CONFIG = 'F18';
+c    = FORMONLY.tit_col5, NOENTRY, WIDGET = 'BUTTON', CONFIG = 'F19';
+
+c01  = actt010.a10_grupo_act, NOENTRY, UPSHIFT;
+c011 = actt010.a10_tipo_act, NOENTRY, UPSHIFT;
+c012 = actt010.a10_codigo_bien, NOENTRY, UPSHIFT;
+c013 = actt010.a10_descripcion, NOENTRY, UPSHIFT;
+d    = actt010.a10_estado, NOENTRY, UPSHIFT;
+
+c020 = FORMONLY.num_row, NOENTRY, REVERSE;
+c021 = FORMONLY.max_row, NOENTRY, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_codigo_bien[10] (a10_grupo_act, a10_tipo_act, a10_codigo_bien,
+					a10_descripcion, a10_estado)

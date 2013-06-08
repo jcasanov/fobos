@@ -1,0 +1,25 @@
+database aceros
+screen size 24 by 80
+{
+
+	 Tipo de Activo: [f001  ]
+	         Nombre: [f002                               ]
+
+        Grupo de Activo: [f003  ] [f006                      ]
+
+          Ingresado Por: [f004      ]
+       Fecha de Ingreso: [f005               ]
+}
+end
+tables
+actt002
+attributes
+f001 = actt002.a02_tipo_act, NOENTRY, REVERSE, WIDGET = 'FIELD_BMP',
+       CONFIG = 'lista.bmp F2';
+f002 = actt002.a02_nombre, UPSHIFT;
+f003 = actt002.a02_grupo_act, REVERSE, WIDGET = 'FIELD_BMP',
+       CONFIG = 'lista.bmp F2';
+f004 = actt002.a02_usuario, NOENTRY, REVERSE;
+f005 = actt002.a02_fecing, NOENTRY, REVERSE;
+f006 = formonly.activo, NOENTRY;
+end

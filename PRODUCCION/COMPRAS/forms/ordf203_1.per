@@ -1,6 +1,5 @@
-
-DATABASE diteca
-screen
+DATABASE aceros
+SCREEN
 {
   [b0    |b1                        |b2        |b3  |b4  |b5              ][b] 
  [c0    |c1                        |c2        |c3  |c4  |c5              ][c]
@@ -30,24 +29,24 @@ TABLES
 ATTRIBUTES
 
 		     ---- BOTONES ----
-b0  = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-b1  = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-b2  = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
-b3  = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
-b4  = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
-b5  = formonly.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
-b   = formonly.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+b0  = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+b1  = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b2  = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+b3  = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+b4  = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+b5  = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+b   = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
 	---------------------------------------------
 
 c0  = ordt010.c10_numero_oc,   REVERSE, NOENTRY, OPTIONS = '-nolist';
 c1  = cxpt001.p01_nomprov,     REVERSE, NOENTRY, OPTIONS = '-nolist';
-c2  = formonly.vm_fecha        TYPE DATE, REVERSE, NOENTRY, 
+c2  = FORMONLY.vm_fecha        TYPE DATE, REVERSE, NOENTRY, 
 			       FORMAT = 'dd-mm-yy', OPTIONS = '-nolist';
-c3  = formonly.cant_ped,       NOENTRY, REVERSE, OPTIONS = '-nolist'; 
-c4  = formonly.cant_rec,       NOENTRY, REVERSE, OPTIONS = '-nolist'; 
+c3  = FORMONLY.cant_ped,       NOENTRY, REVERSE, OPTIONS = '-nolist'; 
+c4  = FORMONLY.cant_rec,       NOENTRY, REVERSE, OPTIONS = '-nolist'; 
 c5  = ordt010.c10_tot_compra,  REVERSE, NOENTRY, OPTIONS = '-nolist', 
 			       FORMAT = '#,###,###,##&.##';
-c   = formonly.cerrar,        REVERSE, OPTIONS = '-nolist', DEFAULT = 'P',
+c   = FORMONLY.cerrar,        REVERSE, OPTIONS = '-nolist', DEFAULT = 'P',
 	WIDGET = 'CHECK', CONFIG = 'C P acknowledge', 
 	COMMENT = 'Marque las ordenes de compra que desee cerrar. ';
 

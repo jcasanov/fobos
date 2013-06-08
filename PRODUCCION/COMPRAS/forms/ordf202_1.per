@@ -1,26 +1,26 @@
-DATABASE diteca
-screen
+DATABASE aceros
+SCREEN
 {
  No Recepcion:[c0    ]      	      		   Estado:[a|a1          ] 
 Fecha Ingreso:[c1                  ]	    Fecha de Elim:[a2                 ]
      No Orden:[c2   ][c33                  ]Forma de Pago:[c18           ]
-      Factura:[c4             ]	      
+      Factura:[c4               ]  Fec. Caduc.:[c040      ]
 Num. Aut. SRI:[c100      ]              Serie Comprobante:[c101  ]
               [c] Calcular el impuesto sobre el Subtotal
 
- [b   |b0  |b1             |b2                        |b3   |b4              ]
-[c8  |c9  |c10            |c11                       |c12  |c13             |y]
-[c8  |c9  |c10            |c11                       |c12  |c13             |y]
-[c8  |c9  |c10            |c11                       |c12  |c13             |y]
-[c8  |c9  |c10            |c11                       |c12  |c13             |y]
-[c8  |c9  |c10            |c11                       |c12  |c13             |y]
-[c8  |c9  |c10            |c11                       |c12  |c13             |y]
-[c8  |c9  |c10            |c11                       |c12  |c13             |y]
-[c8  |c9  |c10            |c11                       |c12  |c13             |y]
-          		                          Subtotal:[c14             ]
-					         Descuento:[c15             ]
-   Ingresado Por:[c7        ]                     Impuesto:[c16             ]
-						      Neto:[c17             ]
+ [b    |b0   |b1      |b2                                 |b3   |b4        ]
+[c8   |c9   |c10     |c11                                |c12  |c13       |y]
+[c8   |c9   |c10     |c11                                |c12  |c13       |y]
+[c8   |c9   |c10     |c11                                |c12  |c13       |y]
+[c8   |c9   |c10     |c11                                |c12  |c13       |y]
+[c8   |c9   |c10     |c11                                |c12  |c13       |y]
+[c8   |c9   |c10     |c11                                |c12  |c13       |y]
+[c8   |c9   |c10     |c11                                |c12  |c13       |y]
+[c8   |c9   |c10     |c11                                |c12  |c13       |y]
+          		                              Subtotal:[c14       ]  
+    Diferencia Cuadre:[y057      ]                   Descuento:[c15       ]  
+               Seguro:[y056      ]                    Impuesto:[c16       ]  
+                Flete:[y055      ]                        Neto:[c17       ]  
 }
 end
 TABLES
@@ -35,22 +35,20 @@ a   = ordt013.c13_estado,    REVERSE, NOENTRY;
 a1  = FORMONLY.tit_estado,   REVERSE, NOENTRY;
 a2  = ordt013.c13_fecha_eli, REVERSE, NOENTRY;
 		     ---- BOTONES ----
-b   = formonly.tit_col0, WIDGET = 'BUTTON', CONFIG = 'F14';
-b0  = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-b1  = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-b2  = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
-b3  = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
-b4  = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+b   = FORMONLY.tit_col0, WIDGET = 'BUTTON', CONFIG = 'F14';
+b0  = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+b1  = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b2  = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+b3  = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+b4  = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
 
 c0  = ordt013.c13_num_recep, REVERSE, NOENTRY;  
 c1  = ordt013.c13_fecing,    REVERSE, NOENTRY;  
 c2  = ordt013.c13_numero_oc, REVERSE,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';  
 c4  = ordt013.c13_num_guia, REVERSE, UPSHIFT; 
-c7  = ordt013.c13_usuario,    NOENTRY, UPSHIFT, REVERSE; 
-
 c8  = ordt011.c11_cant_ped, REVERSE, OPTIONS = '-nolist', NOENTRY; 
-c9  = ordt014.c14_cantidad, REVERSE, INCLUDE = (0 TO 9999),
+c9  = ordt014.c14_cantidad, REVERSE, INCLUDE = (0 TO 99999),
 	OPTIONS = '-nolist';
 c10 = ordt014.c14_codigo, REVERSE, UPSHIFT, NOENTRY,
 	OPTIONS = '-nolist';
@@ -58,17 +56,20 @@ c11 = ordt014.c14_descrip,   REVERSE, UPSHIFT, SCROLL, NOENTRY,
 	OPTIONS = '-nolist';
 c12 = ordt014.c14_descuento, REVERSE, NOENTRY,
 	OPTIONS = '-nolist', FORMAT = '#&.##';
-c13 = ordt014.c14_precio,    REVERSE, FORMAT = '#,###,###,##&.##', NOENTRY,
+c13 = ordt014.c14_precio,    REVERSE, FORMAT = '##,##&.###', NOENTRY,
 	OPTIONS = '-nolist';
-y   = formonly.paga_iva, WIDGET='CHECK', CONFIG='S N acknowledge', NOENTRY,
+y   = FORMONLY.paga_iva, WIDGET='CHECK', CONFIG='S N acknowledge', NOENTRY,
 	OPTIONS='-nolist';
 
-c14 = ordt013.c13_tot_bruto,  NOENTRY, FORMAT = '#,###,###,##&.##', REVERSE; 
-c15 = ordt013.c13_tot_dscto,  NOENTRY, FORMAT = '###,###,##&.##'; 
-c16 = ordt013.c13_tot_impto,  NOENTRY, FORMAT = '###,###,##&.##'; 
-c17 = ordt013.c13_tot_recep,  REVERSE, NOENTRY, FORMAT = '#,###,###,##&.##'; 
+c040 = ordt013.c13_fecha_cadu, AUTONEXT, REVERSE, UPSHIFT,FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha en formato: dd-mm-aaaa.';
 
-c33 = formonly.nomprov, REVERSE, NOENTRY; 
+c14 = ordt013.c13_tot_bruto,  NOENTRY, FORMAT = '###,##&.##', REVERSE; 
+c15 = ordt013.c13_tot_dscto,  NOENTRY, FORMAT = '###,##&.##'; 
+c16 = ordt013.c13_tot_impto,  NOENTRY, FORMAT = '###,##&.##'; 
+c17 = ordt013.c13_tot_recep,  REVERSE, NOENTRY, FORMAT = '###,##&.##'; 
+
+c33 = FORMONLY.nomprov, REVERSE, NOENTRY; 
 
 c18 = ordt010.c10_tipo_pago, REVERSE, NOENTRY,
 	WIDGET = 'RADIO', CONFIG = 'C Contado R Crédito';
@@ -76,9 +77,11 @@ c18 = ordt010.c10_tipo_pago, REVERSE, NOENTRY,
 c100 = ordt013.c13_num_aut,    UPSHIFT, REVERSE;
 c101 = ordt013.c13_serie_comp, UPSHIFT, REVERSE;
 
-c    = formonly.vm_calc_iva, WIDGET='CHECK', CONFIG='S D acknowledge', 
+c    = FORMONLY.vm_calc_iva, WIDGET='CHECK', CONFIG='S D acknowledge', 
 	DEFAULT='D', COMMENT='Indique si desea calcular el impuesto sobre el subtotal o sobre el detalle.';
-
+y055 = c13_flete, REQUIRED, INCLUDE = (0 TO 99999999), FORMAT = '###,##&.##';
+y056 = c13_otros, REQUIRED, INCLUDE = (0 TO 99999999), FORMAT = '###,##&.##';	
+y057 = c13_dif_cuadre, FORMAT = '---,--&.##';	 
 INSTRUCTIONS 
 DELIMITERS '||'
 SCREEN RECORD r_detalle[8] (c11_cant_ped, c14_cantidad,  c14_codigo,

@@ -1,14 +1,16 @@
-{*
- * Titulo           : repp219.4gl - Devolución de ventas al taller 
- * Elaboracion      : 06-nov-2001
- * Autor            : JCM
- * Formato Ejecucion: fglrun repp219 base modulo compania localidad
- *			Si se reciben 4 parametros se está ejecutando en 
- *			modo independiente
- *			Si se reciben 6 parametros, se asume que el quinto es
- * 			el codigo de la requisicion (transaccion origen)
- *			y el sexto parametro es el numero de la requisicion
- *}
+------------------------------------------------------------------------------
+-- Titulo           : repp219.4gl - Devolución de ventas al taller 
+-- Elaboracion      : 06-nov-2001
+-- Autor            : JCM
+-- Formato Ejecucion: fglrun repp219 base modulo compania localidad
+--			Si se reciben 4 parametros se está ejecutando en 
+--			modo independiente
+--			Si se reciben 6 parametros, se asume que el quinto es
+-- 			el codigo de la requisicion (transaccion origen)
+--			y el sexto parametro es el numero de la requisicion
+-- Ultima Correccion: 
+-- Motivo Correccion: 
+------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
 DEFINE vm_demonios	VARCHAR(12)
@@ -48,7 +50,9 @@ DEFINE rm_venta ARRAY[100] OF RECORD
 END RECORD
 
 DEFINE rm_datos ARRAY[100] OF RECORD
+	bodega 	 		LIKE rept020.r20_bodega,
 	item  	 		LIKE rept010.r10_nombre,
+	orden  	 		LIKE rept020.r20_orden,
 	costo			LIKE rept020.r20_costo,		-- COSTO ITEM
 	val_dscto		LIKE rept020.r20_val_descto,
 	stock_ant		LIKE rept020.r20_stock_ant
@@ -70,11 +74,11 @@ DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
 CALL startlog('../logs/errores')
-CALL fgl_init4js()
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 AND num_args() <> 6 THEN  -- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto.', 
-                            'stop')
+	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.','stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
 LET vg_base     = arg_val(1)
@@ -95,8 +99,8 @@ IF num_args() = 6 THEN
 	LET vm_num_tran = arg_val(6)
 END IF
 
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -105,19 +109,34 @@ END MAIN
 
 
 FUNCTION funcion_master()
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
 CALL fl_nivel_isolation()
 CALL fl_chequeo_mes_proceso_rep(vg_codcia) RETURNING int_flag 
 IF int_flag THEN
 	RETURN
 END IF
-OPTIONS
-	INPUT WRAP,
-	ACCEPT KEY F12
-OPEN WINDOW w_219 AT 3,2 WITH 22 ROWS, 80 COLUMNS
-	ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE 0,
-		  BORDER, MESSAGE LINE LAST - 2) 
-OPEN FORM f_219 FROM '../forms/repf219_1'
+LET lin_menu = 0
+LET row_ini  = 3
+LET num_rows = 22
+LET num_cols = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW w_219 AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
+	ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE lin_menu,
+		  BORDER, MESSAGE LINE LAST - 1) 
+IF vg_gui = 1 THEN
+	OPEN FORM f_219 FROM '../forms/repf219_1'
+ELSE
+	OPEN FORM f_219 FROM '../forms/repf219_1c'
+END IF
 DISPLAY FORM f_219
 
 LET vm_num_rows = 0
@@ -136,9 +155,8 @@ LET vm_max_ventas = 100
 CALL fl_lee_compania_repuestos(vg_codcia) RETURNING rm_r00.*
 CALL fl_lee_configuracion_taller(vg_codcia) RETURNING rm_t00.*
 IF rm_r00.r00_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 
-		'No existe registro de configuración para esta compañía.',
-		'exclamation')
+	--CALL fgl_winmessage(vg_producto,'No existe registro de configuración para esta compañía.','exclamation')
+	CALL fl_mostrar_mensaje('No existe registro de configuración para esta compañía.','exclamation')
 	EXIT PROGRAM
 END IF
 
@@ -265,10 +283,9 @@ FUNCTION control_ingreso()
 
 DEFINE r_t23		RECORD LIKE talt023.*
 DEFINE r_g13		RECORD LIKE gent013.*
-DEFINE r_g21		RECORD LIKE gent021.*
 
 DEFINE i		SMALLINT
-DEFINE rowid    	SMALLINT
+DEFINE rowid    	INTEGER
 DEFINE intentar		SMALLINT
 DEFINE done		SMALLINT
 
@@ -283,10 +300,6 @@ LET rm_r19.r19_tipo_dev   = vm_dev_tran
 LET rm_r19.r19_flete      = 0
 LET rm_r19.r19_usuario    = vg_usuario
 LET rm_r19.r19_fecing     = CURRENT
-
-CALL fl_lee_cod_transaccion(vm_transaccion) RETURNING r_g21.*
-LET rm_r19.r19_tipo_tran  = r_g21.g21_tipo
-LET rm_r19.r19_calc_costo = r_g21.g21_calc_costo
 
 CALL lee_datos()
 IF INT_FLAG THEN
@@ -422,18 +435,21 @@ FREE  q_t23
 IF vm_transaccion = vm_dev_fact THEN
 	IF vg_codcia = rm_r00.r00_cia_taller THEN
 		ROLLBACK WORK
-		CALL fgl_winmessage(vg_producto, 'La transacción devuelta es una factura, y la compañía del Taller no debe ser la misma que Repuestos', 'stop')
+		--CALL fgl_winmessage(vg_producto,'La transacción devuelta es una factura, y la compañía del Taller no debe ser la misma que Repuestos','stop')
+		CALL fl_mostrar_mensaje('La transacción devuelta es una factura, y la compañía del Taller no debe ser la misma que Inventario.','stop')
 		EXIT PROGRAM
 	END IF
 	IF rm_r00.r00_codcli_tal IS NULL THEN
 		ROLLBACK WORK
-		CALL fgl_winmessage(vg_producto, 'No está configurado el código de cliente para la compañía del Taller', 'stop')
+		--CALL fgl_winmessage(vg_producto,'No está configurado el código de cliente para la compañía del Taller', 'stop')
+		CALL fl_mostrar_mensaje('No está configurado el código de cliente para la compañía del Taller', 'stop')
 		EXIT PROGRAM
 	END IF
 	IF rm_r19.r19_codcli IS NULL OR rm_r19.r19_codcli <> 
 		rm_r00.r00_codcli_tal IS NULL THEN
 		ROLLBACK WORK
-		CALL fgl_winmessage(vg_producto, 'Código cliente en la factura no es del Taller', 'stop')
+		--CALL fgl_winmessage(vg_producto,
+		CALL fl_mostrar_mensaje('Código cliente en la factura no es del Taller', 'stop')
 		EXIT PROGRAM
 	END IF
 	CALL crea_nota_credito()
@@ -483,6 +499,8 @@ INPUT BY NAME rm_r19.r19_cod_tran, rm_r19.r19_tipo_dev, rm_r19.r19_num_dev,
 			LET INT_FLAG = 1
 			RETURN
 		END IF
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
 	ON KEY(F2)
 		IF INFIELD(r19_num_dev) THEN
 			CALL fl_ayuda_venta_taller_rep(vg_codcia, vg_codloc,    
@@ -501,6 +519,8 @@ INPUT BY NAME rm_r19.r19_cod_tran, rm_r19.r19_tipo_dev, rm_r19.r19_num_dev,
 		LET INT_FLAG = 0
 	BEFORE INPUT
 		CALL setea_nombre_botones()
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 	AFTER FIELD r19_num_dev
 		IF rm_r19.r19_num_dev IS NULL THEN
 			INITIALIZE r_r19.* TO NULL
@@ -511,30 +531,23 @@ INPUT BY NAME rm_r19.r19_cod_tran, rm_r19.r19_tipo_dev, rm_r19.r19_num_dev,
 			rm_r19.r19_tipo_dev, rm_r19.r19_num_dev)
 			RETURNING r_r19.*
 		IF r_r19.r19_ord_trabajo IS NULL THEN
-			CALL fgl_winmessage(vg_producto,
-				'La transacción no está asociada a una ' ||
-				'orden de trabajo',
-				'exclamation')
+			--CALL fgl_winmessage(vg_producto,'La transacción no está asociada a una orden de trabajo.','exclamation')
+			CALL fl_mostrar_mensaje('La transacción no está asociada a una orden de trabajo.','exclamation')
 			INITIALIZE r_r19.* TO NULL 
 			CALL muestra_etiquetas(r_r19.*)
 			NEXT FIELD r19_num_dev
 		END IF
 		IF TODAY > date(r_r19.r19_fecing) + rm_t00.t00_dias_dev THEN
-			CALL fgl_winmessage(vg_producto,
-				'Ha excedido el limite de tiempo permitido ' ||
-				'para realizar devoluciones.',
-				'exclamation')
+			--CALL fgl_winmessage(vg_producto,'Ha excedido el limite de tiempo permitido para realizar devoluciones.','exclamation')
+			CALL fl_mostrar_mensaje('Ha excedido el limite de tiempo permitido para realizar devoluciones.','exclamation')
 			INITIALIZE r_r19.* TO NULL 
 			CALL muestra_etiquetas(r_r19.*)
 			NEXT FIELD r19_num_dev
 		END IF
 		IF rm_t00.t00_dev_mes = 'S' THEN
 			IF month(r_r19.r19_fecing) <> month(TODAY) THEN
-				CALL fgl_winmessage(vg_producto,
-					'La devolución debe realizarse ' ||
-					'en el mismo mes en que se realizó ' ||
-					'la venta.',
-					'exclamation')
+				--CALL fgl_winmessage(vg_producto,'La devolución debe realizarse en el mismo mes en que se realizó la venta.','exclamation')
+				CALL fl_mostrar_mensaje('La devolución debe realizarse en el mismo mes en que se realizó la venta.','exclamation')
 				INITIALIZE r_r19.* TO NULL 
 				CALL muestra_etiquetas(r_r19.*)
 				NEXT FIELD r19_num_dev
@@ -543,17 +556,15 @@ INPUT BY NAME rm_r19.r19_cod_tran, rm_r19.r19_tipo_dev, rm_r19.r19_num_dev,
 		CALL fl_lee_orden_trabajo(vg_codcia, vg_codloc, 
 			r_r19.r19_ord_trabajo) RETURNING r_t23.*
 		IF r_t23.t23_orden IS NULL THEN
-			CALL fgl_winmessage(vg_producto,
-				'Orden de trabajo no existe.',
-				'exclamation')
+			--CALL fgl_winmessage(vg_producto,'Orden de trabajo no existe.','exclamation')
+			CALL fl_mostrar_mensaje('Orden de trabajo no existe.','exclamation')
 			INITIALIZE r_r19.* TO NULL
 			CALL muestra_etiquetas(r_r19.*)
 			NEXT FIELD r19_num_dev
 		END IF
 		IF r_t23.t23_estado <> 'A' THEN
-			CALL fgl_winmessage(vg_producto,
-				'Orden de trabajo no está activa.',
-				'exclamation')
+			--CALL fgl_winmessage(vg_producto,'Orden de trabajo no está activa.','exclamation')
+			CALL fl_mostrar_mensaje('Orden de trabajo no está activa.','exclamation')
 			INITIALIZE r_r19.* TO NULL
 			CALL muestra_etiquetas(r_r19.*)
 			NEXT FIELD r19_num_dev
@@ -610,9 +621,8 @@ FOR i = 1 TO vm_indice
 END FOR
 
 IF NOT flag THEN
-	CALL fgl_winmessage(vg_producto, 
-		'Esta factura ya ha sido devuelta por completo.',
-		'exclamation')
+	--CALL fgl_winmessage(vg_producto,'Esta factura ya ha sido devuelta por completo.','exclamation')
+	CALL fl_mostrar_mensaje('Esta factura ya ha sido devuelta por completo.','exclamation')
 	LET INT_FLAG = 1
 	RETURN
 END IF
@@ -635,9 +645,13 @@ WHILE NOT salir
 				LET INT_FLAG = 1
 				EXIT INPUT
 			END IF
+        	ON KEY(F1,CONTROL-W)
+			CALL llamar_visor_teclas()
 		BEFORE INPUT
-			CALL dialog.keysetlabel('INSERT', '')
-			CALL dialog.keysetlabel('DELETE', '')
+			--#CALL dialog.keysetlabel('INSERT', '')
+			--#CALL dialog.keysetlabel('DELETE', '')
+			--#CALL dialog.keysetlabel("F1","")
+			--#CALL dialog.keysetlabel("CONTROL-W","")
 		BEFORE ROW
 			LET i = arr_curr()
 			LET j = scr_line()
@@ -648,11 +662,8 @@ WHILE NOT salir
 				NEXT FIELD r20_cant_dev
 			END IF
 			IF rm_venta[i].cant_dev > rm_venta[i].cant_ven THEN
-				CALL fgl_winmessage(vg_producto,
-					'La cantidad a devolver debe ser ' ||
-					'menor o igual a la cantidad ' ||
-					'despachada.',
-					'exclamation')
+				--CALL fgl_winmessage(vg_producto,'La cantidad a devolver debe ser menor o igual a la cantidad despachada.','exclamation')
+				CALL fl_mostrar_mensaje('La cantidad a devolver debe ser menor o igual a la cantidad despachada.','exclamation')
 				NEXT FIELD r20_cant_dev
 			END IF
 		-------------------------------------------------------------
@@ -681,14 +692,14 @@ END FUNCTION
 
 
 FUNCTION control_consulta()
-
-DEFINE expr_sql		VARCHAR(500)
-DEFINE query		VARCHAR(600)
+DEFINE expr_sql		CHAR(500)
+DEFINE query		CHAR(600)
 
 DEFINE r_r01		RECORD LIKE rept001.*
 DEFINE r_r02		RECORD LIKE rept002.*
 DEFINE r_r19		RECORD LIKE rept019.*
 DEFINE r_t23		RECORD LIKE talt023.*
+DEFINE mensaje		VARCHAR(100)
 
 CLEAR FORM
 
@@ -696,6 +707,8 @@ LET INT_FLAG = 0
 CONSTRUCT BY NAME expr_sql 
 	ON r19_cod_tran, r19_num_tran, r19_tipo_dev, r19_num_dev, 
 	   r19_ord_trabajo, r19_vendedor, r19_bodega_ori, r19_usuario
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
 	ON KEY(F2)
 		IF INFIELD(r19_num_dev) THEN
 			CALL fl_ayuda_venta_taller_rep(vg_codcia, vg_codloc,    
@@ -723,7 +736,7 @@ CONSTRUCT BY NAME expr_sql
 			END IF
 		END IF
 		IF INFIELD(r19_vendedor) THEN
-			CALL fl_ayuda_vendedores(vg_codcia)
+			CALL fl_ayuda_vendedores(vg_codcia, 'A', 'M')
 				RETURNING r_r01.r01_codigo, 
 					  r_r01.r01_nombres
 			IF r_r01.r01_codigo IS NOT NULL THEN
@@ -733,7 +746,7 @@ CONSTRUCT BY NAME expr_sql
 			END IF
 		END IF
 		IF INFIELD(r19_bodega_ori) THEN
-			CALL fl_ayuda_bodegas_rep(vg_codcia, vg_codloc, 'T')
+			CALL fl_ayuda_bodegas_rep(vg_codcia, vg_codloc, 'A', 'T', 'T', 'S', 'V')
 		     		RETURNING r_r02.r02_codigo, 
 					  r_r02.r02_nombre
 		     	IF r_r02.r02_codigo IS NOT NULL THEN
@@ -745,17 +758,19 @@ CONSTRUCT BY NAME expr_sql
 		LET INT_FLAG = 0
 	BEFORE CONSTRUCT
 		CALL setea_nombre_botones()
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 	AFTER FIELD r19_cod_tran
 		LET rm_r19.r19_cod_tran = GET_FLDBUF(r19_cod_tran)
 		IF rm_r19.r19_cod_tran IS NOT NULL THEN
 			IF rm_r19.r19_cod_tran <> vm_dev_req     
 			AND rm_r19.r19_cod_tran <> vm_dev_fact
 			THEN
-         			CALL fgl_winmessage(vg_producto,
-                	                    'El código de la transacción '||
+				LET mensaje = 'El código de la transacción '||
                                             'debe ser ' || vm_dev_req ||
-					    ' o ' || vm_dev_fact || '.',
-                                            'exclamation')
+					    ' o ' || vm_dev_fact || '.'
+         			--CALL fgl_winmessage(vg_producto, mensaje, 'exclamation')
+				CALL fl_mostrar_mensaje(mensaje, 'exclamation')
                         	NEXT FIELD r19_cod_tran
 			END IF 
 		END IF
@@ -765,11 +780,11 @@ CONSTRUCT BY NAME expr_sql
 			IF rm_r19.r19_tipo_dev <> vm_requisicion 
 			AND rm_r19.r19_tipo_dev <> vm_factura
 			THEN
-         			CALL fgl_winmessage(vg_producto,
-                	                    'El código de la venta '||
+				LET mensaje = 'El código de la venta '||
                                             'debe ser ' || vm_requisicion ||
-					    ' o ' || vm_factura || '.',
-                                            'exclamation')
+					    ' o ' || vm_factura || '.'
+         			--CALL fgl_winmessage(vg_producto, mensaje, 'exclamation')
+				CALL fl_mostrar_mensaje(mensaje, 'exclamation')
                         	NEXT FIELD r19_tipo_dev
 			END IF 
 		END IF
@@ -902,7 +917,10 @@ FUNCTION muestra_detalle()
 DEFINE i		SMALLINT
 DEFINE filas_pant	SMALLINT
 
-LET filas_pant = fgl_scr_size('ra_venta')
+--#LET filas_pant = fgl_scr_size('ra_venta')
+IF vg_gui = 0 THEN
+	LET filas_pant = 5
+END IF
 
 FOR i = 1 TO filas_pant 
 	INITIALIZE rm_venta[i].* TO NULL
@@ -954,6 +972,8 @@ FOREACH q_det INTO r_r20.*
 	LET rm_venta[i].precio     = r_r20.r20_precio
 	LET rm_venta[i].total      = r_r20.r20_precio * rm_venta[i].cant_dev 
 
+	LET rm_datos[i].bodega     = r_r20.r20_bodega 
+	LET rm_datos[i].orden      = r_r20.r20_orden  
 	LET rm_datos[i].val_dscto  = 
 		rm_venta[i].total * (r_r20.r20_descuento / 100)
 
@@ -1025,8 +1045,10 @@ END FUNCTION
 
 FUNCTION muestra_contadores()
 
-DISPLAY "" AT 1,1
-DISPLAY vm_row_current, " de ", vm_num_rows AT 1, 68 
+IF vg_gui = 1 THEN
+	DISPLAY "" AT 1,1
+	DISPLAY vm_row_current, " de ", vm_num_rows AT 1, 68 
+END IF
 
 END FUNCTION
 
@@ -1094,7 +1116,7 @@ END FUNCTION
 FUNCTION nextValInSequence()
 
 DEFINE resp		CHAR(6)
-DEFINE retVal 		INTEGER
+DEFINE retVal 		SMALLINT
 
 LET retVal = -1
 WHILE retVal = -1
@@ -1108,10 +1130,9 @@ IF retVal <> -1 THEN
 	 EXIT WHILE
 END IF
 
-CALL fgl_winquestion(vg_producto, 'La tabla de secuencias de transacciones ' ||
-                     'está siendo accesada por otro usuario, espere unos  ' ||
-                     'segundos y vuelva a intentar', 'No', 'Yes|No|Cancel',
-                     'question', 1) RETURNING resp 
+--CALL fgl_winquestion(vg_producto,'La tabla de secuencias de transacciones está siendo accesada por otro usuario, espere unos segundos y vuelva a intentar','No','Yes|No|Cancel','question',1)
+CALL fl_hacer_pregunta('La tabla de secuencias de transacciones está siendo accesada por otro usuario, espere unos segundos y vuelva a intentar','No')
+	RETURNING resp 
 IF resp <> 'Yes' THEN
 	EXIT WHILE	
 END IF
@@ -1126,16 +1147,16 @@ END FUNCTION
 
 FUNCTION setea_nombre_botones()
 
-DISPLAY 'Dev'    TO bt_cant_dev 
-DISPLAY 'Desp'   TO bt_cant_vend
-DISPLAY 'Item'   TO bt_item    
-DISPLAY 'Desc'  TO bt_dscto
-IF vm_tipo_orden = 'P' THEN
-	DISPLAY 'Precio Unit.' TO bt_precio
-ELSE
-	DISPLAY 'Costo Unit.'  TO bt_precio
-END IF
-DISPLAY 'Total'  TO bt_total
+--#DISPLAY 'Dev'    TO bt_cant_dev 
+--#DISPLAY 'Desp'   TO bt_cant_vend
+--#DISPLAY 'Item'   TO bt_item    
+--#DISPLAY 'Desc'   TO bt_dscto
+--#IF vm_tipo_orden = 'P' THEN
+	--#DISPLAY 'Precio Unit.' TO bt_precio
+--#ELSE
+	--#DISPLAY 'Costo Unit.'  TO bt_precio
+--#END IF
+--#DISPLAY 'Total'  TO bt_total
 
 END FUNCTION
 
@@ -1237,10 +1258,9 @@ DEFINE intentar		SMALLINT
 DEFINE resp		CHAR(6)
 
 LET intentar = 1
-CALL fgl_winquestion(vg_producto, 
-		     'Registro bloqueado por otro usuario, desea ' ||
-                     'intentarlo nuevamente', 'No', 'Yes|No', 'question', 1)
-				RETURNING resp
+--CALL fgl_winquestion(vg_producto,'Registro bloqueado por otro usuario, desea intentarlo nuevamente','No','Yes|No','question',1)
+CALL fl_hacer_pregunta('Registro bloqueado por otro usuario, desea intentarlo nuevamente','No')
+	RETURNING resp
 IF resp = 'No' THEN
 	CALL fl_mensaje_abandonar_proceso()
 		 RETURNING resp
@@ -1315,6 +1335,7 @@ FOR i = 1 TO vm_indice
 	LET r_r20.r20_localidad = vg_codloc
 	LET r_r20.r20_cod_tran  = rm_r19.r19_cod_tran
 	LET r_r20.r20_num_tran  = rm_r19.r19_num_tran
+	LET r_r20.r20_bodega    = rm_datos[i].bodega       
 	LET r_r20.r20_item      = rm_venta[i].item       
 
 	-- En r20_cant_ped y r20_cant_ven se graba la cantidad a devolver
@@ -1324,7 +1345,7 @@ FOR i = 1 TO vm_indice
 
 	LET r_r20.r20_fecing     = CURRENT
 
-	LET r_r20.r20_orden      = orden                  
+	LET r_r20.r20_orden      = rm_datos[i].orden                  
 	LET orden = orden + 1
 
 	LET r_r20.r20_cant_ped   = rm_venta[i].cant_dev   
@@ -1361,19 +1382,16 @@ FOR i = 1 TO vm_indice
 	LET r_r20.r20_rotacion   = r_r10.r10_rotacion
 	LET r_r20.r20_fob        = r_r10.r10_fob             
 
-	CALL fl_lee_stock_rep(vg_codcia, rm_r19.r19_bodega_ori, 
+	CALL fl_lee_stock_rep(vg_codcia, r_r20.r20_bodega,
 		rm_venta[i].item) RETURNING r_r11.*
 	LET r_r20.r20_ubicacion  = r_r11.r11_ubicacion
 
 	LET r_r20.r20_precio     = rm_venta[i].precio
 
-	LET r_r20.r20_cant_ent   = rm_venta[i].cant_ven - rm_venta[i].cant_dev  
+	LET r_r20.r20_cant_ent   = 0
 	LET r_r20.r20_costo      = rm_datos[i].costo 
 
 	INSERT INTO rept020 VALUES (r_r20.*)
-
-	CALL fl_proceso_despues_insertar_linea_tr_rep(vg_codcia, vg_codloc, 
-							r_r20.r20_cod_tran, r_r20.r20_num_tran, r_r20.r20_item)
 END FOR 
 
 RETURN done
@@ -1400,7 +1418,7 @@ WHILE (intentar)
 		DECLARE q_r11 CURSOR FOR
 			SELECT * FROM rept011
 				WHERE r11_compania  = vg_codcia
-				AND   r11_bodega    = rm_r19.r19_bodega_ori
+				AND   r11_bodega    = rm_datos[i].bodega
 				AND   r11_item      = rm_venta[i].item
 			FOR UPDATE
 	OPEN  q_r11
@@ -1426,7 +1444,7 @@ IF r_r11.r11_compania IS NOT NULL THEN
 		WHERE CURRENT OF q_r11
 ELSE
 	LET r_r11.r11_compania  = vg_codcia 
-	LET r_r11.r11_bodega    = rm_r19.r19_bodega_ori
+	LET r_r11.r11_bodega    = rm_datos[i].bodega
 	LET r_r11.r11_item      = rm_venta[i].item
 	LET r_r11.r11_ubicacion = 'SN'
 	LET r_r11.r11_stock_ant = 0
@@ -1540,12 +1558,16 @@ FUNCTION control_mostrar_det()
 
 CALL set_count(vm_indice)
 DISPLAY ARRAY rm_venta TO ra_venta.*
-	BEFORE DISPLAY
-		CALL dialog.keysetlabel('ACCEPT', '')
-	AFTER DISPLAY
-		CONTINUE DISPLAY
 	ON KEY(INTERRUPT)
 		EXIT DISPLAY
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
+	--#BEFORE DISPLAY
+		--#CALL dialog.keysetlabel('ACCEPT', '')
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
+	--#AFTER DISPLAY
+		--#CONTINUE DISPLAY
 END DISPLAY
 
 END FUNCTION
@@ -1598,8 +1620,9 @@ IF r_nc.z21_moneda <> rg_gen.g00_moneda_base THEN
 	CALL fl_lee_factor_moneda(r_nc.z21_moneda, rg_gen.g00_moneda_base)
 		RETURNING r.*
 	IF r.g14_serial IS NULL THEN
-		CALL fgl_winmessage(vg_producto, 'No hay factor de conversión','stop')
 		ROLLBACK WORK
+		--CALL fgl_winmessage(vg_producto,'No hay factor de conversión','stop')
+		CALL fl_mostrar_mensaje('No hay factor de conversión.','stop')
 		EXIT PROGRAM
 	END IF
 	LET r_nc.z21_paridad 	= r.g14_tasa
@@ -1667,9 +1690,8 @@ ELSE
 END IF
 
 IF vm_num_rows = 0 THEN
-	CALL fgl_winmessage(vg_producto,
-		'No existen devoluciones para esta requisición.',
-		'info')
+	--CALL fgl_winmessage(vg_producto,'No existen devoluciones para esta requisición.','info')
+	CALL fl_mostrar_mensaje('No existen devoluciones para esta requisición.','info')
 	EXIT PROGRAM
 END IF
 
@@ -1680,10 +1702,16 @@ END FUNCTION
 
 
 FUNCTION control_imprimir()
-
 DEFINE comando		VARCHAR(255)
+DEFINE run_prog		CHAR(10)
 
-	LET comando = 'fglrun repp417 ',vg_base, ' ',
+{-- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE --}
+LET run_prog = 'fglrun '
+IF vg_gui = 0 THEN
+	LET run_prog = 'fglgo '
+END IF
+{--- ---}
+	LET comando = run_prog, 'repp417 ',vg_base, ' ',
 			   vg_modulo, ' ', vg_codcia, ' ',
 			   vg_codloc, ' ',rm_r19.r19_cod_tran, 
 			   rm_r19.r19_num_tran
@@ -1693,38 +1721,14 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION llamar_visor_teclas()
+DEFINE a		CHAR(1)
 
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 
-                            'stop')
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 
-                            'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || 
-                            vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 
-                            'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: ' || 
-                            vg_codloc, 'stop')
-	EXIT PROGRAM
+IF vg_gui = 0 THEN
+	CALL fl_visor_teclas_caracter() RETURNING int_flag 
+	LET a = fgl_getkey()
+	CLOSE WINDOW w_tf
+	LET int_flag = 0
 END IF
 
 END FUNCTION

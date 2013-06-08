@@ -1,0 +1,45 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+   ESTADISTICAS DE ITEMS DIGITADOS VS. ITEMS CONGELADOS
+
+                                            [c030] de [c031]
+ [c0|c001                          |c002    |c003    |c004  ]
+[c1|c011                          |c012    |c013    |c014  ]
+[c1|c011                          |c012    |c013    |c014  ]
+[c1|c011                          |c012    |c013    |c014  ]
+[c1|c011                          |c012    |c013    |c014  ]
+[c1|c011                          |c012    |c013    |c014  ]
+[c1|c011                          |c012    |c013    |c014  ]
+[c1|c011                          |c012    |c013    |c014  ]
+[c1|c011                          |c012    |c013    |c014  ]
+[c1|c011                          |c012    |c013    |c014  ]
+[c1|c011                          |c012    |c013    |c014  ]
+                         Totales: [c020    |c021    |c022  ]
+
+}
+ATTRIBUTES
+c0   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c002 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c003 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c004 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+
+c1   = FORMONLY.bodega, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c011 = FORMONLY.nombre, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c012 = FORMONLY.max_reg, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c013 = FORMONLY.num_reg, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c014 = FORMONLY.porcentaje, NOENTRY, UPSHIFT, FORMAT = '##&.##',
+	OPTIONS = '-nolist';
+
+c020 = FORMONLY.tot_max_reg, NOENTRY, UPSHIFT, REVERSE;
+c021 = FORMONLY.tot_num_reg, NOENTRY, UPSHIFT, REVERSE;
+c022 = FORMONLY.tot_porc, NOENTRY, UPSHIFT, FORMAT = '##&.##', REVERSE;
+
+c030 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c031 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_det_est[10] (bodega, nombre, num_reg, max_reg, porcentaje)

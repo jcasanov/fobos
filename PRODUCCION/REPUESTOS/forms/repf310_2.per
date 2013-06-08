@@ -1,49 +1,50 @@
-DATABASE formonly
+DATABASE FORMONLY
 SCREEN
 {
+
                          MOVIMIENTOS DE ITEMS
 
        Item: [c001            ] [c002                         ] 
      Bodega: [c03                      ]
     Período: [c003      ] - [c04       ]      Moneda: [c05           ]
 
- [c020       |x1|c021         |c022               |c023 |c024          ]
-[c004       |c5|c006         |c007               |c008 |c009          ] 
-[c004       |c5|c006         |c007               |c008 |c009          ] 
-[c004       |c5|c006         |c007               |c008 |c009          ] 
-[c004       |c5|c006         |c007               |c008 |c009          ] 
-[c004       |c5|c006         |c007               |c008 |c009          ] 
-[c004       |c5|c006         |c007               |c008 |c009          ] 
-[c004       |c5|c006         |c007               |c008 |c009          ] 
-[c004       |c5|c006         |c007               |c008 |c009          ] 
-[c004       |c5|c006         |c007               |c008 |c009          ] 
-[c004       |c5|c006         |c007               |c008 |c009          ] 
-                                                 [c010 |c011          ]
+ [c020       |x1|c021         |c022             |c023    |c024         ]
+[c004       |c5|c006       |c007               |c008    |c009         ] 
+[c004       |c5|c006       |c007               |c008    |c009         ] 
+[c004       |c5|c006       |c007               |c008    |c009         ] 
+[c004       |c5|c006       |c007               |c008    |c009         ] 
+[c004       |c5|c006       |c007               |c008    |c009         ] 
+[c004       |c5|c006       |c007               |c008    |c009         ] 
+[c004       |c5|c006       |c007               |c008    |c009         ] 
+[c004       |c5|c006       |c007               |c008    |c009         ] 
+[c004       |c5|c006       |c007               |c008    |c009         ] 
+[c004       |c5|c006       |c007               |c008    |c009         ] 
+                                               [c010    |c011         ]
 }
 ATTRIBUTES
-c001 = formonly.item, REVERSE;
-c002 = formonly.name_item, REVERSE;
-c03  = formonly.tit_bod;
-c003 = formonly.fec_ini TYPE DATE, FORMAT = 'dd-mm-yyyy';
-c04  = formonly.fec_fin TYPE DATE, FORMAT = 'dd-mm-yyyy';
-c05  = formonly.tit_mon;
-c004 = formonly.fecha   TYPE DATE, FORMAT = 'dd-mm-yyyy';
-c5   = formonly.tipo;
-c006 = formonly.numero;
-c007 = formonly.cliente;
-c008 = formonly.unidades TYPE INTEGER, FORMAT = '----&';
-c009 = formonly.valor TYPE DECIMAL(12,2), FORMAT = '---,---,--&.##';
-c010 = formonly.tot_uni TYPE INTEGER, FORMAT = '----&', REVERSE;
-c011 = formonly.tot_val TYPE DECIMAL(12,2), FORMAT = '---,---,--&.##', REVERSE;
-c020 = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-x1   = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-c021 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
-c022 = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
-c023 = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
-c024 = formonly.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c001 = FORMONLY.item, REVERSE;
+c002 = FORMONLY.name_item, REVERSE;
+c03  = FORMONLY.tit_bod;
+c003 = FORMONLY.fec_ini TYPE DATE, FORMAT = 'dd-mm-yyyy';
+c04  = FORMONLY.fec_fin TYPE DATE, FORMAT = 'dd-mm-yyyy';
+c05  = FORMONLY.tit_mon;
+c004 = FORMONLY.fecha   TYPE DATE, FORMAT = 'dd-mm-yyyy';
+c5   = FORMONLY.tipo;
+c006 = FORMONLY.numero;
+c007 = FORMONLY.cliente;
+c008 = FORMONLY.unidades TYPE DECIMAL (8,2), FORMAT = '----&.##';
+c009 = FORMONLY.valor TYPE DECIMAL(12,2), FORMAT = '--,---,--&.##';
+c010 = FORMONLY.tot_uni TYPE INTEGER, FORMAT = '----&.##', REVERSE;
+c011 = FORMONLY.tot_val TYPE DECIMAL(12,2), FORMAT = '--,---,--&.##', REVERSE;
+c020 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+x1   = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c021 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c022 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c023 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c024 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
 INSTRUCTIONS
-SCREEN RECORD r_mov[10] (formonly.fecha, formonly.tipo, formonly.numero, 
-			 formonly.cliente, formonly.unidades, formonly.valor)
+SCREEN RECORD r_mov[10] (FORMONLY.fecha, formonly.tipo, formonly.numero, 
+			 FORMONLY.cliente, formonly.unidades, formonly.valor)
 KEYS
 F5='Comprobante'
 F6='Item'

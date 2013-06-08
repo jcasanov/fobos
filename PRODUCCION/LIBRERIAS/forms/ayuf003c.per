@@ -1,0 +1,29 @@
+DATABASE aceros
+SCREEN
+{
+  IMPUESTOS
+ -------------------------------------
+     Impto.     Descripcion
+ -------------------------------------
+ [c001 ][c000 ][c002                 ]
+ [c001 ][c000 ][c002                 ]
+ [c001 ][c000 ][c002                 ]
+ [c001 ][c000 ][c002                 ]
+ [c001 ][c000 ][c002                 ]
+ [c001 ][c000 ][c002                 ]
+ [c001 ][c000 ][c002                 ]
+ [c001 ][c000 ][c002                 ]
+ [c001 ][c000 ][c002                 ]
+ [c001 ][c000 ][c002                 ]
+}
+TABLES
+gent000
+
+ATTRIBUTES
+c001 = g00_serial,REVERSE;
+c000 = g00_porc_impto,REVERSE;
+c002 = g00_label_impto,REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_imp[10] (g00_serial, g00_porc_impto, g00_label_impto)

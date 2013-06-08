@@ -1,4 +1,3 @@
-
 -------------------------------------------------------------------------------
 -- Titulo               : repp106.4gl -- Mantenimiento de Tipos de Items
 -- Elaboración          : 5-sep-2001
@@ -10,14 +9,16 @@
                                                                                 
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
                                                                                 
-DEFINE rm_item   RECORD LIKE rept006.*
-DEFINE rm_item2  RECORD LIKE rept006.*
-DEFINE vm_r_rows ARRAY[1000] OF INTEGER -- ARREGLO DE ROWID DE FILAS LEIDAS
+DEFINE rm_item		RECORD LIKE rept006.*
+DEFINE rm_item2		RECORD LIKE rept006.*
+DEFINE vm_r_rows	ARRAY[1000] OF INTEGER -- ARREGLO ROWID DE FILAS LEIDAS
 DEFINE vm_row_current   SMALLINT        -- FILA CORRIENTE DEL ARREGLO
 DEFINE vm_num_rows      SMALLINT        -- CANTIDAD DE FILAS LEIDAS
 DEFINE vm_max_rows      SMALLINT        -- MAXIMO DE FILAS LEIDAS
 DEFINE vm_demonios      VARCHAR(12)
 DEFINE vm_flag_mant     CHAR(1)
+
+
 
 MAIN
                                                                                 
@@ -25,18 +26,20 @@ DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
 CALL startlog('../logs/errores')
-CALL fgl_init4js()
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 2 THEN
-     CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto','stop')
-     EXIT PROGRAM
+     	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto','stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
+     	EXIT PROGRAM
 END IF
-LET vg_base     = arg_val(1)
-LET vg_modulo   = arg_val(2)
+LET vg_base    = arg_val(1)
+LET vg_modulo  = arg_val(2)
 LET vg_proceso = 'repp106'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
                                                                                 
@@ -65,10 +68,7 @@ MENU 'OPCIONES'
 	COMMAND KEY('I') 'Ingresar' 'Ingresar nuevos registros. '
 		CALL control_ingreso()
 		IF vm_num_rows = 1 THEN
- 		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-		
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -85,10 +85,7 @@ MENU 'OPCIONES'
 	COMMAND KEY('C') 'Consultar' 'Consultar un registro. '
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-			
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -143,7 +140,7 @@ DEFINE query		VARCHAR(600)
 
 CLEAR FORM
 LET int_flag = 0
-CONSTRUCT BY NAME expr_sql ON r06_codigo, r06_nombre, r06_usuario, r06_fecing
+CONSTRUCT BY NAME expr_sql ON r06_codigo, r06_nombre, r06_usuario
 	ON KEY(F2)
 		IF INFIELD(r06_codigo) THEN
 		     CALL fl_ayuda_tipo_item()
@@ -182,8 +179,8 @@ IF vm_num_rows = 0 THEN
         RETURN
 END IF
 LET vm_row_current = 1
-CALL lee_muestra_registro(vm_r_rows[vm_row_current])
 CALL muestra_contadores(vm_row_current, vm_num_rows)
+CALL lee_muestra_registro(vm_r_rows[vm_row_current])
 
 END FUNCTION
 
@@ -194,9 +191,9 @@ FUNCTION control_ingreso()
 OPTIONS INPUT WRAP
 CLEAR FORM
 INITIALIZE rm_item.* TO NULL
-LET vm_flag_mant          = 'I'
-LET rm_item.r06_fecing     = CURRENT
-LET rm_item.r06_usuario    = vg_usuario
+LET vm_flag_mant        = 'I'
+LET rm_item.r06_fecing  = CURRENT
+LET rm_item.r06_usuario = vg_usuario
 DISPLAY BY NAME rm_item.r06_fecing, rm_item.r06_usuario
 SELECT MAX(r06_codigo) INTO rm_item.r06_codigo FROM rept006
 IF rm_item.r06_codigo IS NULL THEN
@@ -204,8 +201,8 @@ IF rm_item.r06_codigo IS NULL THEN
 END IF
 CALL lee_datos()
 IF NOT int_flag THEN
-        WHENEVER ERROR CONTINUE
         BEGIN WORK
+        WHENEVER ERROR CONTINUE
         INSERT INTO rept006 VALUES (rm_item.*)
         WHENEVER ERROR STOP
         IF status < 0 THEN
@@ -236,19 +233,22 @@ END FUNCTION
 
 FUNCTION control_modificacion()
 
-LET vm_flag_mant      = 'M'
-WHENEVER ERROR CONTINUE
+LET vm_flag_mant = 'M'
 BEGIN WORK
-DECLARE q_up CURSOR FOR SELECT * FROM rept006 WHERE ROWID = vm_r_rows[vm_row_current]
+WHENEVER ERROR CONTINUE
+DECLARE q_up CURSOR FOR
+	SELECT * FROM rept006
+		WHERE ROWID = vm_r_rows[vm_row_current]
 	FOR UPDATE
 OPEN q_up
 FETCH q_up INTO rm_item.*
 IF status < 0 THEN
-	COMMIT WORK
+	ROLLBACK WORK
 	CALL fl_mensaje_bloqueo_otro_usuario()
 	WHENEVER ERROR STOP
 	RETURN
 END IF
+WHENEVER ERROR STOP
 CALL lee_datos()
 IF NOT int_flag THEN
     	UPDATE rept006 SET * = rm_item.*
@@ -256,6 +256,7 @@ IF NOT int_flag THEN
 	COMMIT WORK
 	CALL fl_mensaje_registro_modificado()
 ELSE
+	ROLLBACK WORK
 	CALL lee_muestra_registro(vm_r_rows[vm_row_current])
 END IF
 
@@ -264,15 +265,15 @@ END FUNCTION
 
 
 FUNCTION lee_datos()
-DEFINE           resp      CHAR(6)
-DEFINE           codigo    LIKE rept006.r06_codigo
+DEFINE resp		CHAR(6)
+DEFINE codigo		LIKE rept006.r06_codigo
                                                                                 
 OPTIONS INPUT WRAP
 LET int_flag = 0 
-INPUT BY NAME rm_item.r06_nombre  WITHOUT DEFAULTS
+INPUT BY NAME rm_item.r06_nombre
+	WITHOUT DEFAULTS
         ON KEY(INTERRUPT)
-        	 IF field_touched( rm_item.r06_nombre)
-                 THEN
+        	 IF field_touched(rm_item.r06_nombre) THEN
                         LET int_flag = 0
 			CALL fl_mensaje_abandonar_proceso()
                         	RETURNING resp
@@ -293,8 +294,9 @@ INPUT BY NAME rm_item.r06_nombre  WITHOUT DEFAULTS
 	      SELECT r06_codigo INTO codigo FROM rept006
 	      WHERE  r06_nombre   = rm_item.r06_nombre
 	      IF status <> NOTFOUND THEN
-                 CALL fgl_winmessage (vg_producto, 'El nombre del tipo de item ya ha sido asignado al registro de código  '|| codigo, 'exclamation')
-	         NEXT FIELD r06_nombre  
+                 --CALL fgl_winmessage (vg_producto,'El nombre del tipo de item ya ha sido asignado al registro de código  '|| codigo, 'exclamation')
+		CALL fl_mostrar_mensaje('El nombre del tipo de item ya ha sido asignado al registro de código '|| codigo,'exclamation')
+	      	NEXT FIELD r06_nombre  
               END IF
 END INPUT
 
@@ -326,40 +328,3 @@ DISPLAY "" AT 1,1
 DISPLAY row_current, " de ", num_rows AT 1, 69
                                                                                 
 END FUNCTION
-
-                                                                                
-                                                                                
-FUNCTION validar_parametros()
-                                                                                
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-        CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'sto
-p')
-        EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-        CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'st
-op')
-        EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-     CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 			 'stop')
-     EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-        LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-        CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc,
-			    'stop')
-        EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-      CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 			  'stop')
-      EXIT PROGRAM
-END IF
-                                                                                
-END FUNCTION
-

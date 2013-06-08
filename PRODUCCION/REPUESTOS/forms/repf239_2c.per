@@ -1,0 +1,33 @@
+DATABASE aceros
+SCREEN
+{
+
+   OTROS VALORES INGRESADOS
+   ------------------------
+
+     Usuario     Total Ing.
+ [c010         |c011       ]
+ [c010         |c011       ]
+ [c010         |c011       ]
+ [c010         |c011       ]
+ [c010         |c011       ]
+        Total: [c020       ]
+ Stock Actual: [c021       ]
+   Diferencia: [c022       ]
+
+}
+TABLES
+rept089
+ATTRIBUTES
+c010 = rept089.r89_usuario, NOENTRY, UPSHIFT;
+c011 = rept089.r89_suma, NOENTRY, UPSHIFT, FORMAT = '-###,##&.##';
+
+c020 = FORMONLY.tit_total TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '-###,##&.##';
+c021 = rept089.r89_stock_act, NOENTRY, UPSHIFT, REVERSE, FORMAT = '-###,##&.##';
+c022 = FORMONLY.tit_diferencia TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '----,--&.##';
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_dif[5] (r89_usuario, r89_suma)

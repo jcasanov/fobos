@@ -1,30 +1,30 @@
-DATABASE diteca
-
+DATABASE aceros
 SCREEN
 {
- TRABAJADORES
-----------------------------------------------------
- Código  Nombres
-----------------------------------------------------
-[c01   ] [c002                                    ] 
-[c01   ] [c002                                    ]
-[c01   ] [c002                                    ]
-[c01   ] [c002                                    ]
-[c01   ] [c002                                    ]
-[c01   ] [c002                                    ]
-[c01   ] [c002                                    ] 
-[c01   ] [c002                                    ] 
-[c01   ] [c002                                    ] 
-[c01   ] [c002                                    ] 
-}
+ EMPLEADOS DE LA COMPAÑIA
 
+ [lbl1   |lbl2                           |b]
+[c01    |c002                           |c] 
+[c01    |c002                           |c] 
+[c01    |c002                           |c] 
+[c01    |c002                           |c] 
+[c01    |c002                           |c] 
+[c01    |c002                           |c] 
+[c01    |c002                           |c] 
+[c01    |c002                           |c] 
+[c01    |c002                           |c] 
+[c01    |c002                           |c] 
+
+}
 TABLES
 rolt030
-
 ATTRIBUTES
-c01 = n30_cod_trab;
-c002 = n30_nombres;
+c01  = n30_cod_trab, 		UPSHIFT;
+c002 = n30_nombres,  		UPSHIFT;
+c    = n30_estado,  		UPSHIFT;
+lbl1 = formonly.bt_codigo, 	NOENTRY, WIDGET='BUTTON', CONFIG='F15';
+lbl2 = formonly.bt_nombres,	NOENTRY, WIDGET='BUTTON', CONFIG='F16';
+b    = formonly.bt_estado,	NOENTRY, WIDGET='BUTTON', CONFIG='F17';
 END
-
 INSTRUCTIONS
-SCREEN RECORD rh_trab[10](n30_cod_trab, n30_nombres)
+SCREEN RECORD rh_codigo_empleado[10](n30_cod_trab, n30_nombres, n30_estado)

@@ -1,0 +1,58 @@
+DATABASE aceros
+SCREEN
+{
+                       DETALLE DE PAGOS Y AJUSTES
+                       -------------------------
+
+ Proveedor: [c000  |c001                                                   ]
+
+                                                          [c040 ] de [c041 ]
+ [c1|c011  |c12|c013              |c014      |c015      |c2|c017            ]
+[c4|c021  |c22|c023              |c024      |c025      |c3|c027            ]
+[c4|c021  |c22|c023              |c024      |c025      |c3|c027            ]
+[c4|c021  |c22|c023              |c024      |c025      |c3|c027            ]
+[c4|c021  |c22|c023              |c024      |c025      |c3|c027            ]
+[c4|c021  |c22|c023              |c024      |c025      |c3|c027            ]
+[c4|c021  |c22|c023              |c024      |c025      |c3|c027            ]
+[c4|c021  |c22|c023              |c024      |c025      |c3|c027            ]
+[c4|c021  |c22|c023              |c024      |c025      |c3|c027            ]
+[c4|c021  |c22|c023              |c024      |c025      |c3|c027            ]
+[c4|c021  |c22|c023              |c024      |c025      |c3|c027            ]
+                                               Total ==>  [c030            ]
+}
+TABLES 
+cxpt001
+cxpt022
+cxpt023
+ATTRIBUTES
+c000 = cxpt001.p01_codprov, NOENTRY, REVERSE, UPSHIFT;
+c001 = cxpt001.p01_nomprov, NOENTRY, REVERSE, UPSHIFT;
+c1   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c12  = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c015 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c2   = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+c017 = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22';
+c4   = p23_tipo_trn;
+c021 = p23_num_trn, FORMAT = '#####&';
+c22  = p23_tipo_doc;
+c023 = FORMONLY.num_doc;
+c024 = p22_fecha_elim, FORMAT = 'dd-mm-yyyy', COLOR = RED WHERE c024 IS NULL;
+c025 = p22_fecha_emi, FORMAT = 'dd-mm-yyyy';
+c3   = p22_moneda;
+c027 = FORMONLY.val_pago TYPE DECIMAL(12,2), FORMAT = '-,---,---,--&.##';
+c030 = FORMONLY.tot_pago TYPE DECIMAL(12,2), FORMAT = '-,---,---,--&.##',
+       REVERSE;
+
+c040 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c041 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+END
+KEYS
+F5 = 'Cheque'
+F6 = 'Documento'
+INSTRUCTIONS
+SCREEN RECORD r_movc[10] (p23_tipo_trn, p23_num_trn, p23_tipo_doc,
+			FORMONLY.num_doc, p22_fecha_elim, p22_fecha_emi,
+			p22_moneda, FORMONLY.val_pago)

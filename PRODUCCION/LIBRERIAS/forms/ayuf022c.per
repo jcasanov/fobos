@@ -1,0 +1,37 @@
+DATABASE aceros
+SCREEN
+{
+  CUENTAS BANCARIAS
+ -------------------------------------------------------------------
+  Cod.  Nombre del Banco         T  Cuenta Banco   E Aux.contable E
+ -------------------------------------------------------------------
+ [c010|c011                     |f|c012           |g|c013        |h] 
+ [c010|c011                     |f|c012           |g|c013        |h] 
+ [c010|c011                     |f|c012           |g|c013        |h] 
+ [c010|c011                     |f|c012           |g|c013        |h] 
+ [c010|c011                     |f|c012           |g|c013        |h] 
+ [c010|c011                     |f|c012           |g|c013        |h] 
+ [c010|c011                     |f|c012           |g|c013        |h] 
+ [c010|c011                     |f|c012           |g|c013        |h] 
+ [c010|c011                     |f|c012           |g|c013        |h] 
+ [c010|c011                     |f|c012           |g|c013        |h] 
+
+}
+TABLES
+gent008
+gent009
+ctbt010
+ATTRIBUTES
+c010 = gent008.g08_banco,      NOENTRY, UPSHIFT;
+c011 = gent008.g08_nombre,     NOENTRY, UPSHIFT;
+f    = gent009.g09_tipo_cta,   NOENTRY, UPSHIFT;
+c012 = gent009.g09_numero_cta, NOENTRY, UPSHIFT;
+g    = gent009.g09_estado,     NOENTRY, UPSHIFT;
+c013 = gent009.g09_aux_cont,   NOENTRY, UPSHIFT;
+h    = ctbt010.b10_estado,     NOENTRY, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_ctabco[10] (g08_banco, g08_nombre, g09_tipo_cta,
+				g09_numero_cta, g09_estado, g09_aux_cont,
+				b10_estado)

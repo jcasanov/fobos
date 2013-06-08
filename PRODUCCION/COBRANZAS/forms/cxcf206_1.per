@@ -1,6 +1,7 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
+                                                           [c050 ] de [c051 ]
 
                                                        Estado: [c][c000     ]
 
@@ -51,6 +52,9 @@ c015 = FORMONLY.tit_saldo, NOENTRY, REVERSE, UPSHIFT,
 	FORMAT = '#,###,###,##&.##';
 c016 = cxct026.z26_usuario, NOENTRY, REVERSE, UPSHIFT;
 c017 = cxct026.z26_fecing, NOENTRY, REVERSE, UPSHIFT;
+
+c050 = FORMONLY.num_row, NOENTRY, UPSHIFT;
+c051 = FORMONLY.max_row, NOENTRY, UPSHIFT;
 END
 KEYS
 F5 = 'Ver Documento'

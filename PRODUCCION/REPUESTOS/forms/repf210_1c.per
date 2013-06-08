@@ -1,0 +1,41 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+   No.     Estado            Valor Neto   Valor Anticipo    Monto Crédito
+  [c5     |c6         |c7              |c8              |c9              ]
+  [c5     |c6         |c7              |c8              |c9              ]
+  [c5     |c6         |c7              |c8              |c9              ]
+  [c5     |c6         |c7              |c8              |c9              ]
+  [c5     |c6         |c7              |c8              |c9              ]
+  [c5     |c6         |c7              |c8              |c9              ]
+  [c5     |c6         |c7              |c8              |c9              ]
+  [c5     |c6         |c7              |c8              |c9              ]
+  [c5     |c6         |c7              |c8              |c9              ]
+  [c5     |c6         |c7              |c8              |c9              ]
+  [c5     |c6         |c7              |c8              |c9              ]
+  [c5     |c6         |c7              |c8              |c9              ]
+  [c5     |c6         |c7              |c8              |c9              ]
+  [c5     |c6         |c7              |c8              |c9              ]
+
+                      [c10                              ]
+}
+ATTRIBUTES
+
+c5  = FORMONLY.num_preventa TYPE INTEGER, REVERSE, NOENTRY;
+c6  = FORMONLY.tit_estado TYPE VARCHAR, REVERSE, NOENTRY;
+c7  = FORMONLY.valor_neto TYPE DECIMAL(12,2), NOENTRY, REVERSE, 
+	FORMAT = '#,###,###,##&.##';
+c8  = FORMONLY.valor_anticipos TYPE DECIMAL(12,2), NOENTRY, REVERSE, 
+	FORMAT = '#,###,###,##&.##';
+c9  = FORMONLY.monto_credito TYPE DECIMAL(12,2), NOENTRY, REVERSE, 
+	FORMAT = '#,###,###,##&.##';
+c10 = FORMONLY.nom_cliente TYPE VARCHAR, NOENTRY, REVERSE;
+END
+INSTRUCTIONS 
+DELIMITERS '||'
+SCREEN RECORD r_detalle[14] (num_preventa, tit_estado, valor_neto, valor_anticipos, monto_credito)
+
+--#KEYS
+--#	F7 = 'Forma de Pago'
+--#	F8 = 'Ver Preventa'

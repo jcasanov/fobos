@@ -1,4 +1,4 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
 
@@ -6,16 +6,16 @@ SCREEN
              Banco: [c003][c004                             ]
         No. Cuenta: [c005           ]         No. Cheque: [c006            ]
                                             Valor Cheque: [c024            ]
-        Fecha Caja: [c007      ]               Moneda: [a0][c008           ]
+        Fecha Caja: [c007      ]                Moneda: [a0|c008           ]
    Area de Negocio: [c009  ][c010           ]
 
         Referencia: [c013                          ]
                     [c013                          ]
-         Valor N/D: [c014            ]
-         N/D Banco: [c015      ]          Fecha N/D Banco: [c016      ]
+        Valor Doc.: [c014            ]         Valor N/D: [c050            ]
+         N/D Banco: [c015      ]         Fecha N/D Banco: [c016      ]
            Cartera: [c018  ] [c019                          ]
     Línea de Venta: [c020  ] [c021                          ]
-      N/D Generada: [c017            ]
+     Doc. Generado: [c017            ]
 
            Usuario: [c022      ]       Fecha Ingreso: [c023               ]
 
@@ -38,6 +38,8 @@ c010 = FORMONLY.tit_area, NOENTRY, UPSHIFT;
 c013 = cajt012.j12_referencia, AUTONEXT, REVERSE, UPSHIFT, WORDWRAP COMPRESS;
 c014 = cajt012.j12_valor, AUTONEXT, REVERSE, UPSHIFT,
 	INCLUDE = (0 TO 9999999999.99), FORMAT = '#,###,###,##&.##';
+c050 = FORMONLY.valor_doc TYPE DECIMAL NOT NULL, REQUIRED, AUTONEXT, REVERSE,
+	UPSHIFT, INCLUDE = (0 TO 9999999999.99), FORMAT = '#,###,###,##&.##';
 c015 = cajt012.j12_nd_banco, AUTONEXT, REVERSE, UPSHIFT,
 	COMMENTS = 'Ingresar el número de la nota de dédito que emite el banco';
 c016 = cajt012.j12_nd_fec_bco, AUTONEXT, REVERSE, UPSHIFT,FORMAT = 'dd-mm-yyyy',
@@ -54,3 +56,5 @@ c023 = cajt012.j12_fecing, NOENTRY, REVERSE, UPSHIFT;
 c024 = FORMONLY.tit_valor_che, NOENTRY, REVERSE, UPSHIFT,
 	FORMAT = '#,###,###,##&.##';
 END
+INSTRUCTIONS
+DELIMITERS '||'

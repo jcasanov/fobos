@@ -32,7 +32,7 @@ DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
 CALL startlog('../logs/errores')
-CALL fgl_init4js()
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN          -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
@@ -44,8 +44,8 @@ LET vg_codcia   = arg_val(3)
 LET vg_proceso = 'cxcp309'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL drawinit()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
@@ -94,7 +94,7 @@ DEFINE i		SMALLINT
 LET int_flag = 0
 INPUT BY NAME moneda, fecha_ini, fecha_fin WITHOUT DEFAULTS
 	ON KEY(F2)
-		IF infield(moneda) THEN
+		IF INFIELD(moneda) THEN
                        	CALL fl_ayuda_monedas() RETURNING mon_aux, tit_mon, i
                        	IF mon_aux IS NOT NULL THEN
 				LET moneda = mon_aux
@@ -392,13 +392,13 @@ CALL drawbuttonleft(rm_docfav[2].id_objeto, 'F36')
 LET key_f30 = FGL_KEYVAL("F30")
 INPUT BY NAME tecla
 	BEFORE INPUT
-		CALL dialog.keysetlabel("ACCEPT","")
-		CALL dialog.keysetlabel("F31","")
-		CALL dialog.keysetlabel("F32","")
-		CALL dialog.keysetlabel("F33","")
-		CALL dialog.keysetlabel("F34","")
-		CALL dialog.keysetlabel("F35","")
-		CALL dialog.keysetlabel("F36","")
+		--#CALL dialog.keysetlabel("ACCEPT","")
+		--#CALL dialog.keysetlabel("F31","")
+		--#CALL dialog.keysetlabel("F32","")
+		--#CALL dialog.keysetlabel("F33","")
+		--#CALL dialog.keysetlabel("F34","")
+		--#CALL dialog.keysetlabel("F35","")
+		--#CALL dialog.keysetlabel("F36","")
 	ON KEY(F31,F32,F33,F34,F35,F36)
 		LET i = FGL_LASTKEY() - key_f30
 		CASE 
@@ -462,7 +462,7 @@ LET rm_color[10] = 'blue'
 
 END FUNCTION
 
-FUNCTION validar_parametros()
+FUNCTION no_validar_parametros()
 
 CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
 IF rg_mod.g50_modulo IS NULL THEN

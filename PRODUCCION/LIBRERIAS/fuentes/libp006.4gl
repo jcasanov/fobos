@@ -1,7 +1,6 @@
 GLOBALS "../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl"
 
 DEFINE vm_programa      VARCHAR(12)
-DEFINE rm_orden		RECORD LIKE talt023.*
 DEFINE rm_auxv		RECORD LIKE ctbt043.*
 DEFINE rm_auxc		RECORD LIKE ctbt041.*
 DEFINE rm_auxg		RECORD LIKE ctbt042.*
@@ -23,6 +22,7 @@ DEFINE num_oc		LIKE ordt010.c10_numero_oc
 DEFINE tipo		LIKE ctbt012.b12_tipo_comp
 DEFINE num		LIKE ctbt012.b12_num_comp
 DEFINE num_recep	LIKE ordt013.c13_num_recep
+DEFINE mensaje		VARCHAR(200)
 
 LET vm_compra = num_oc
 CALL fl_lee_compania_contabilidad(cod_cia) RETURNING rm_ctb.*	
@@ -35,8 +35,9 @@ LET vm_indice    = 1
 CALL fl_lee_recepcion_orden_compra(cod_cia, cod_loc, num_oc, num_recep)
 	RETURNING rm_c13.*
 IF rm_c13.c13_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe recepción de compra : ' || num_oc, 'stop')
-	RETURN
+	LET mensaje = 'No existe recepción de compra: ', num_oc CLIPPED
+	CALL fl_mostrar_mensaje(mensaje, 'stop')
+	EXIT PROGRAM
 END IF
 CALL fl_lee_orden_compra(cod_cia, cod_loc, num_oc)
 	RETURNING rm_c10.*
@@ -48,7 +49,8 @@ CREATE TEMP TABLE te_master
 	 te_num_recep		SMALLINT,
 	 te_factura		CHAR(15),
 	 te_cuenta		CHAR(12),
-	 te_glosa		CHAR(35),
+	 --te_glosa		CHAR(35),
+	 te_glosa		CHAR(90),
 	 te_tipo_mov		CHAR(1),
 	 te_valor		DECIMAL(14,2),
 	 te_indice		SMALLINT)
@@ -90,21 +92,39 @@ DEFINE cuenta 		LIKE ctbt013.b13_cuenta
 DEFINE r_c14		RECORD LIKE ordt014.*
 DEFINE r_c02		RECORD LIKE ordt002.*
 DEFINE r_c01		RECORD LIKE ordt001.*
+DEFINE r_c10		RECORD LIKE ordt010.*
 DEFINE r_p28		RECORD LIKE cxpt028.*
 DEFINE r_p02		RECORD LIKE cxpt002.*
 DEFINE r_t01		RECORD LIKE talt001.*
 DEFINE r_t04		RECORD LIKE talt004.*
 DEFINE r_t23		RECORD LIKE talt023.*
+DEFINE r_s23		RECORD LIKE srit023.*
+DEFINE tributa		LIKE srit023.s23_tributa
+DEFINE mensaje		VARCHAR(200)
 
 LET glosa = 'OC: ' || rm_c10.c10_numero_oc USING '<<<<<<' || 
             ' FAC.: '    || rm_c13.c13_factura
-CALL fl_lee_tipo_orden_compra(rm_c10.c10_tipo_orden)
-	RETURNING r_c01.*
+CALL fl_lee_tipo_orden_compra(rm_c10.c10_tipo_orden) RETURNING r_c01.*
+IF r_c01.c01_aux_ot_proc IS NULL THEN
+	LET mensaje = 'El tipo de O.C.: ', rm_c10.c10_tipo_orden USING '<<&',
+			' de la O.C. ', rm_c10.c10_numero_oc USING '<<<<<&',
+			' no tiene auxiliar contable para O.T. en proceso.'
+	CALL fl_mostrar_mensaje(mensaje, 'stop')
+	EXIT PROGRAM
+END IF
+IF r_c01.c01_aux_ot_cost IS NULL THEN
+	LET mensaje = 'El tipo de O.C.: ',rm_c10.c10_tipo_orden USING '<<&',
+		      ' de la O.C. ', rm_c10.c10_numero_oc USING '<<<<<&', 
+		      ' no tiene auxiliar contable para costo de venta.'
+	CALL fl_mostrar_mensaje(mensaje, 'stop')
+	EXIT PROGRAM
+END IF
 CALL fl_lee_orden_trabajo(rm_c10.c10_compania, rm_c10.c10_localidad, 
 			  rm_c10.c10_ord_trabajo)
 	RETURNING r_t23.*
 IF r_t23.t23_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe O.T.: ' || rm_c10.c10_ord_trabajo, 'stop')
+	LET mensaje = 'No existe O.T.: ', rm_c10.c10_ord_trabajo CLIPPED
+	CALL fl_mostrar_mensaje(mensaje, 'stop')
 	EXIT PROGRAM
 END IF
 CALL fl_lee_tipo_vehiculo(r_t23.t23_compania, r_t23.t23_modelo)
@@ -120,11 +140,12 @@ DECLARE qu_tanga CURSOR FOR SELECT * FROM cxpt028
 	      p28_num_ret   = rm_c13.c13_num_ret
 LET tot_ret = 0
 FOREACH qu_tanga INTO r_p28.*
-	CALL fl_lee_tipo_retencion(rm_c13.c13_compania, r_p28.p28_codigo_sri, 
-							   r_p28.p28_tipo_ret,  r_p28.p28_porcentaje)
+	CALL fl_lee_tipo_retencion(rm_c13.c13_compania, r_p28.p28_tipo_ret,
+			   r_p28.p28_porcentaje)
 	RETURNING r_c02.*
 	IF r_c02.c02_compania IS NULL THEN
-		CALL fgl_winmessage(vg_producto, 'No existe tipo retención en ordt002 para compra #: ' || rm_c10.c10_numero_oc, 'stop')
+		LET mensaje = 'No existe tipo retención en ordt002 para compra No.: ', rm_c10.c10_numero_oc CLIPPED
+		CALL fl_mostrar_mensaje(mensaje, 'stop')
 		EXIT PROGRAM
 	END IF
 	LET tot_ret = tot_ret + r_p28.p28_valor_ret
@@ -132,7 +153,8 @@ FOREACH qu_tanga INTO r_p28.*
 	r_p28.p28_valor_ret, glosa, rm_c13.c13_numero_oc, rm_c13.c13_num_recep,
 	rm_c13.c13_factura)
 END FOREACH
-LET rm_c13.c13_tot_bruto = rm_c13.c13_tot_bruto * rm_c10.c10_paridad
+LET rm_c13.c13_tot_bruto = (rm_c13.c13_tot_bruto - rm_C13.c13_dif_cuadre) 
+			    * rm_c10.c10_paridad
 CALL fl_retorna_precision_valor(rg_gen.g00_moneda_base, rm_c13.c13_tot_bruto)
 	RETURNING rm_c13.c13_tot_bruto
 LET rm_c13.c13_tot_dscto = rm_c13.c13_tot_dscto * rm_c10.c10_paridad
@@ -150,15 +172,37 @@ LET val_prov = tot_compra - tot_ret
 CALL fl_lee_auxiliares_generales(rm_c13.c13_compania, rm_c13.c13_localidad)
 	RETURNING rm_auxg.*
 IF rm_auxg.b42_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No hay configuración de auxiliares generales.', 'stop')
+	CALL fl_mostrar_mensaje('No hay configuración de auxiliares generales.', 'stop')
 	EXIT PROGRAM
 END IF
+CALL fl_lee_orden_compra(rm_c13.c13_compania, rm_c13.c13_localidad,
+			rm_c13.c13_numero_oc)
+	RETURNING r_c10.*
+{--
 CALL fl_lee_auxiliares_taller(rm_c13.c13_compania, rm_c13.c13_localidad, 
-	r_t01.t01_grupo_linea)
+				r_t01.t01_grupo_linea, r_c10.c10_porc_impto)
 	RETURNING rm_auxv.*
+--}
+INITIALIZE rm_auxv.* TO NULL
+DECLARE q_b43 CURSOR FOR
+	SELECT * FROM ctbt043
+		WHERE b43_compania   = rm_c13.c13_compania
+		  AND b43_localidad  = rm_c13.c13_localidad
+		  AND b43_porc_impto = r_c10.c10_porc_impto
+OPEN q_b43
+FETCH q_b43 INTO rm_auxv.*
 IF rm_auxv.b43_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No hay configuración de auxiliares contables taller para grupo línea: ' || r_t01.t01_grupo_linea || ' en O/C: ' || rm_c13.c13_numero_oc, 'stop')
+	CLOSE q_b43
+	FREE q_b43
+	LET mensaje = 'No hay configuración de auxiliares contables taller para grupo línea: ', r_t01.t01_grupo_linea CLIPPED, ' en O/C: ', rm_c13.c13_numero_oc CLIPPED
+	CALL fl_mostrar_mensaje(mensaje, 'stop')
+	EXIT PROGRAM
 END IF
+CLOSE q_b43
+CALL fl_retorna_aux_ventas_tal(rm_c13.c13_compania, rm_c13.c13_localidad,
+				rm_auxv.b43_grupo_linea, r_c10.c10_porc_impto,
+				r_t23.t23_cod_cliente)
+	RETURNING rm_auxv.*
 
 IF r_c01.c01_bien_serv = 'B' THEN
 	LET cuenta = rm_auxv.b43_pro_rp_tal
@@ -173,15 +217,31 @@ END IF
 OPEN qu_dcomp
 FETCH qu_dcomp INTO r_c14.*
 IF status = NOTFOUND THEN
-	CALL fgl_winmessage(vg_producto, 'Compra no tiene detalle: ' || rm_c10.c10_numero_oc, 'stop')
+	LET mensaje = 'Compra no tiene detalle: ', rm_c10.c10_numero_oc CLIPPED
+	CALL fl_mostrar_mensaje(mensaje, 'stop')
 	EXIT PROGRAM
 END IF
-CALL fl_genera_detalle_compras(vm_tipo_comp, subtipo, cuenta, 'D',
+--CALL fl_genera_detalle_compras(vm_tipo_comp, subtipo, cuenta, 'D',
+CALL fl_genera_detalle_compras(vm_tipo_comp, subtipo, r_c01.c01_aux_ot_proc,'D',
         rm_c13.c13_tot_bruto, glosa, rm_c13.c13_numero_oc, rm_c13.c13_num_recep,
 	rm_c13.c13_factura)
-CALL fl_genera_detalle_compras(vm_tipo_comp, subtipo, rm_auxg.b42_iva_compra, 
-	'D', rm_c13.c13_tot_impto, glosa, rm_c13.c13_numero_oc, 
-	rm_c13.c13_num_recep, rm_c13.c13_factura)
+LET tributa = 'S'
+IF rm_c13.c13_tot_impto = 0 THEN
+	LET tributa = 'N'
+END IF
+CALL fl_obtener_aux_cont_sust(rm_c13.c13_compania,rm_c10.c10_tipo_orden,tributa)
+	RETURNING r_s23.*
+IF r_s23.s23_aux_cont IS NOT NULL THEN
+	LET r_c01.c01_aux_cont = r_s23.s23_aux_cont
+END IF
+IF r_c01.c01_aux_cont IS NOT NULL THEN 
+	LET rm_auxg.b42_iva_compra = r_c01.c01_aux_cont
+END IF
+IF rm_c10.c10_sustento_sri = 'S' THEN
+	CALL fl_genera_detalle_compras(vm_tipo_comp, subtipo, rm_auxg.b42_iva_compra, 
+		'D', rm_c13.c13_tot_impto, glosa, rm_c13.c13_numero_oc, 
+		rm_c13.c13_num_recep, rm_c13.c13_factura)
+END IF
 IF rm_c10.c10_moneda <> rg_gen.g00_moneda_base THEN
 	LET r_p02.p02_aux_prov_mb = r_p02.p02_aux_prov_ma
 END IF
@@ -202,7 +262,7 @@ DEFINE num_recep	LIKE ordt013.c13_num_recep
 DEFINE factura		LIKE ordt013.c13_factura
 DEFINE num_tran		DECIMAL(15,0)
 DEFINE cuenta		CHAR(12)
-DEFINE glosa		CHAR(35)
+DEFINE glosa		LIKE ctbt013.b13_glosa
 DEFINE tipo_mov		CHAR(1)
 DEFINE valor		DECIMAL(14,2)
 DEFINE indice, i	SMALLINT
@@ -322,3 +382,25 @@ ELSE
 END IF
 
 END FUNCTION		
+
+
+
+FUNCTION fl_obtener_aux_cont_sust(codcia, tipo_oc, tributa)
+DEFINE codcia		LIKE srit023.s23_compania
+DEFINE tipo_oc		LIKE srit023.s23_tipo_orden
+DEFINE tributa		LIKE srit023.s23_tributa
+DEFINE r_s23		RECORD LIKE srit023.*
+
+INITIALIZE r_s23.* TO NULL
+DECLARE q_s23 CURSOR FOR
+	SELECT * FROM srit023
+		WHERE s23_compania   = codcia
+		  AND s23_tipo_orden = tipo_oc
+		  AND s23_tributa    = tributa
+OPEN q_s23
+FETCH q_s23 INTO r_s23.*
+CLOSE q_s23
+FREE q_s23
+RETURN r_s23.*
+
+END FUNCTION

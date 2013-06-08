@@ -1,0 +1,43 @@
+DATABASE aceros
+SCREEN
+{
+
+                    Año: [c000]
+                    Mes: [c1] [c002      ]
+
+              Localidad: [c008] [c009                          ]
+      Grupos de Activos: [c003] [c004                          ]
+       Tipos de Activos: [c005] [c006                          ]
+
+       Codigo de Activo: [c010  ] [c011                                  ]
+
+                 Estado: [c] [c007                             ]
+
+}
+TABLES
+actt006
+actt010
+ATTRIBUTES
+c000 = FORMONLY.vm_anio TYPE SMALLINT NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = (1980 TO 2099);
+c1   = FORMONLY.vm_mes TYPE SMALLINT NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	INCLUDE = (01 TO 12);
+c002 = FORMONLY.tit_mes, NOENTRY, UPSHIFT, REVERSE;
+c003 = FORMONLY.a10_grupo_act, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c004 = FORMONLY.tit_grupo_act, NOENTRY, UPSHIFT;
+c005 = FORMONLY.a10_tipo_act, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c006 = FORMONLY.tit_tipo_act, NOENTRY, UPSHIFT;
+c    = actt010.a10_estado, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Presione F2 y escoja el estado del bien (ACTIVO FIJO)';
+c007 = actt006.a06_descripcion, NOENTRY, UPSHIFT, REVERSE;
+c008 = FORMONLY.a10_localidad, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c009 = FORMONLY.g02_nombre, NOENTRY, UPSHIFT;
+c010 = FORMONLY.a10_codigo_bien, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c011 = FORMONLY.a10_descripcion, NOENTRY, UPSHIFT;
+END

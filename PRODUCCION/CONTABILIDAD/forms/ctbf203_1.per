@@ -1,4 +1,4 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
 
@@ -6,7 +6,7 @@ SCREEN
          Banco: [c001                       ]   No. Cuenta: [c002           ]
         Moneda: [c003           ]
  Fecha Inicial: [c004      ]                         Fecha Final: [c005      ]
-                                         Saldo E/C Banco: [c006              ]
+                                  Saldo Actual E/C Banco: [c006              ]
 
  [c020      |c021             |b0|c022    |c023            |c024            |b]
 [c010      |c011             |a1|c012    |c013            |c014            |c]
@@ -67,7 +67,7 @@ c017 = FORMONLY.tit_total_cre, NOENTRY, REVERSE, FORMAT = '#,###,###,##&.##';
 
 c018 = FORMONLY.referen, NOENTRY, UPSHIFT;
 c019 = ctbt013.b13_glosa, NOENTRY, UPSHIFT;
-END
+end
 KEYS
 F5 = 'Comprobante'
 INSTRUCTIONS

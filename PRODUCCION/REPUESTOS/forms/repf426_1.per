@@ -1,4 +1,4 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
    Pedido: [c000      ]
@@ -30,27 +30,27 @@ rept016
 ATTRIBUTES
 c000 = rept016.r16_pedido, AUTONEXT, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c0   = formonly.nom_diteca TYPE VARCHAR, UPSHIFT, REVERSE;
-c1   = formonly.tel_diteca TYPE VARCHAR, UPSHIFT, REVERSE;
-c2   = formonly.fax_diteca TYPE VARCHAR, UPSHIFT, REVERSE;
-c3   = formonly.contact_1  TYPE VARCHAR, UPSHIFT, REVERSE;
+c0   = FORMONLY.nom_aceros TYPE VARCHAR, UPSHIFT, REVERSE;
+c1   = FORMONLY.tel_aceros TYPE VARCHAR, UPSHIFT, REVERSE;
+c2   = FORMONLY.fax_aceros TYPE VARCHAR, UPSHIFT, REVERSE;
+c3   = FORMONLY.contact_1  TYPE VARCHAR, UPSHIFT, REVERSE;
 
-c4   = formonly.nom_proveedor TYPE VARCHAR, UPSHIFT, REVERSE;
-c5   = formonly.tel_proveedor TYPE VARCHAR, UPSHIFT, REVERSE;
-c6   = formonly.fax_proveedor TYPE VARCHAR, UPSHIFT, REVERSE;
-c7   = formonly.contact_2     TYPE VARCHAR, UPSHIFT, REVERSE;
+c4   = FORMONLY.nom_proveedor TYPE VARCHAR, UPSHIFT, REVERSE;
+c5   = FORMONLY.tel_proveedor TYPE VARCHAR, UPSHIFT, REVERSE;
+c6   = FORMONLY.fax_proveedor TYPE VARCHAR, UPSHIFT, REVERSE;
+c7   = FORMONLY.contact_2     TYPE VARCHAR, UPSHIFT, REVERSE;
 
-c8   = formonly.embarque_1   TYPE VARCHAR, UPSHIFT, REVERSE;
-c9   = formonly.nom_diteca_2 TYPE VARCHAR, UPSHIFT, REVERSE;
-c10  = formonly.pago         TYPE VARCHAR, UPSHIFT, REVERSE;
-c11  = formonly.embarque_2   TYPE VARCHAR, UPSHIFT, REVERSE;
-c12  = formonly.nom_diteca_3 TYPE VARCHAR, UPSHIFT, REVERSE;
+c8   = FORMONLY.embarque_1   TYPE VARCHAR, UPSHIFT, REVERSE;
+c9   = FORMONLY.nom_aceros_2 TYPE VARCHAR, UPSHIFT, REVERSE;
+c10  = FORMONLY.pago         TYPE VARCHAR, UPSHIFT, REVERSE;
+c11  = FORMONLY.embarque_2   TYPE VARCHAR, UPSHIFT, REVERSE;
+c12  = FORMONLY.nom_aceros_3 TYPE VARCHAR, UPSHIFT, REVERSE;
 
-c13  = formonly.declaracion_consular TYPE VARCHAR, AUTONEXT,
+c13  = FORMONLY.declaracion_consular TYPE VARCHAR, AUTONEXT,
 	REVERSE, WORDWRAP;
-c14  = formonly.flete	TYPE DECIMAL(12,2), REVERSE, 
+c14  = FORMONLY.flete	TYPE DECIMAL(12,2), REVERSE, 
 	INCLUDE = (0 TO 999999999.99),	FORMAT = '#,###,###,##&.##';
-c15  = formonly.seguro	TYPE DECIMAL(12,2), REVERSE, 
+c15  = FORMONLY.seguro	TYPE DECIMAL(12,2), REVERSE, 
 	INCLUDE = (0 TO 999999999.99),	FORMAT = '#,###,###,##&.##';
-END
+end
 

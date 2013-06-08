@@ -1,0 +1,51 @@
+DATABASE aceros
+SCREEN
+{
+
+   Pedido: [c000      ]
+       De: [c0                                                              ]
+ Telefono: [c1                       ]              Fax: [c2                ]
+  Contact: [c3                       ]
+     Para: [c4                                                              ]
+ Telefono: [c5                       ]              Fax: [c6                ]
+  Contact: [c7                       ]
+    Flete: [c14             ]			 Seguro: [c15             ]
+ Embarque: [c8               ]
+Documento a la Orden de: [c9                                                ]
+     Pago: [c10              ]                 Embarque: [c11               ]
+Marcas y números: [c12                                                      ]
+Declaración Consular: 
+           [c13     		                                            ]
+           [c13     		                                            ]
+           [c13     		                                            ]
+           [c13     		                                            ]
+           [c13     		                                            ]
+}
+TABLES
+rept016
+ATTRIBUTES
+c000 = rept016.r16_pedido, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c0   = FORMONLY.nom_aceros TYPE VARCHAR, UPSHIFT, REVERSE;
+c1   = FORMONLY.tel_aceros TYPE VARCHAR, UPSHIFT, REVERSE;
+c2   = FORMONLY.fax_aceros TYPE VARCHAR, UPSHIFT, REVERSE;
+c3   = FORMONLY.contact_1  TYPE VARCHAR, UPSHIFT, REVERSE;
+
+c4   = FORMONLY.nom_proveedor TYPE VARCHAR, UPSHIFT, REVERSE;
+c5   = FORMONLY.tel_proveedor TYPE VARCHAR, UPSHIFT, REVERSE;
+c6   = FORMONLY.fax_proveedor TYPE VARCHAR, UPSHIFT, REVERSE;
+c7   = FORMONLY.contact_2     TYPE VARCHAR, UPSHIFT, REVERSE;
+
+c8   = FORMONLY.embarque_1   TYPE VARCHAR, UPSHIFT, REVERSE;
+c9   = FORMONLY.nom_aceros_2 TYPE VARCHAR, UPSHIFT, REVERSE;
+c10  = FORMONLY.pago         TYPE VARCHAR, UPSHIFT, REVERSE;
+c11  = FORMONLY.embarque_2   TYPE VARCHAR, UPSHIFT, REVERSE;
+c12  = FORMONLY.nom_aceros_3 TYPE VARCHAR, UPSHIFT, REVERSE;
+
+c13  = FORMONLY.declaracion_consular TYPE VARCHAR, AUTONEXT,
+	REVERSE, WORDWRAP COMPRESS;
+c14  = FORMONLY.flete	TYPE DECIMAL(12,2), REVERSE, 
+	INCLUDE = (0 TO 999999999.99),	FORMAT = '#,###,###,##&.##';
+c15  = FORMONLY.seguro	TYPE DECIMAL(12,2), REVERSE, 
+	INCLUDE = (0 TO 999999999.99),	FORMAT = '#,###,###,##&.##';
+end

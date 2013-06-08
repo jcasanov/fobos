@@ -1,0 +1,24 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+     Código Proveedor: [c001 ] [c002                                    ]
+
+               Moneda: [c3]    [c004           ]
+ 
+       	         Tipo: [c|c010     ]
+
+}
+ATTRIBUTES
+c001 = FORMONLY.codprov TYPE INTEGER, REVERSE, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c002 = FORMONLY.nomprov,REVERSE ,NOENTRY;
+c3   = FORMONLY.moneda TYPE CHAR NOT NULL, UPSHIFT, AUTONEXT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c004 = FORMONLY.tit_mon,REVERSE ,NOENTRY;
+c    = FORMONLY.tipo TYPE CHAR, REVERSE, AUTONEXT, UPSHIFT,
+	INCLUDE = ('R', 'D'), COMMENTS = '(R) Resumido  (D) Detallado';
+c010 = FORMONLY.tit_tipo,REVERSE,UPSHIFT,NOENTRY;
+END
+INSTRUCTIONS
+DELIMITERS '||'

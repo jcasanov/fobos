@@ -1,0 +1,68 @@
+DATABASE FORMONLY
+SCREEN
+{
+                             DETALLE VENTA ITEM
+                             -----------------
+
+ Item: [c000  |c001                                                  ]
+              [c002                                                  ]
+                                                    [c010 ] de [c011 ]
+ [c20|c0|c021    |c022      |c023         |c024         |c025         ]
+[c30|c1|c031    |c032      |c033         |c034         |c035         ]
+[c30|c1|c031    |c032      |c033         |c034         |c035         ]
+[c30|c1|c031    |c032      |c033         |c034         |c035         ]
+[c30|c1|c031    |c032      |c033         |c034         |c035         ]
+[c30|c1|c031    |c032      |c033         |c034         |c035         ]
+[c30|c1|c031    |c032      |c033         |c034         |c035         ]
+[c30|c1|c031    |c032      |c033         |c034         |c035         ]
+[c30|c1|c031    |c032      |c033         |c034         |c035         ]
+                  Totales: [c040         |c041         |c042         ]
+
+[c043   |c044                                                        ]
+                                          [c045                      ]
+}
+ATTRIBUTES
+c000 = FORMONLY.item, NOENTRY, UPSHIFT, REVERSE;
+c001 = FORMONLY.desc_clase, NOENTRY, UPSHIFT, REVERSE;
+c002 = FORMONLY.desc_item, NOENTRY, UPSHIFT, REVERSE;
+
+c010 = FORMONLY.num_row, NOENTRY, UPSHIFT;
+c011 = FORMONLY.max_row, NOENTRY, UPSHIFT;
+
+c20  = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15'; 
+c0   = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16'; 
+c021 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17'; 
+c022 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18'; 
+c023 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19'; 
+c024 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20'; 
+c025 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21'; 
+
+c30  = FORMONLY.ini_vend, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c1   = FORMONLY.cod_tran, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c031 = FORMONLY.num_tran, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c032 = FORMONLY.fecha, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+c033 = FORMONLY.valor_bruto, NOENTRY, UPSHIFT, FORMAT = '--,---,--&.##',
+	COLOR = RED WHERE c032 < 0, OPTIONS = '-nolist';
+c034 = FORMONLY.valor_desc, NOENTRY, UPSHIFT, FORMAT = '--,---,--&.##',
+	COLOR = RED WHERE c033 < 0, OPTIONS = '-nolist';
+c035 = FORMONLY.subtotal, NOENTRY, UPSHIFT, FORMAT = '--,---,--&.##',
+	COLOR = RED WHERE c034 < 0, OPTIONS = '-nolist';
+
+c040 = FORMONLY.total_bruto, NOENTRY, UPSHIFT, FORMAT = '--,---,--&.##',
+	COLOR = RED WHERE c040 < 0, REVERSE;
+c041 = FORMONLY.total_desc, NOENTRY, UPSHIFT, FORMAT = '--,---,--&.##',
+	COLOR = RED WHERE c041 < 0, REVERSE;
+c042 = FORMONLY.total, NOENTRY, UPSHIFT, FORMAT = '--,---,--&.##',
+	COLOR = RED WHERE c042 < 0, REVERSE;
+c043 = FORMONLY.codcli, NOENTRY, UPSHIFT, REVERSE;
+c044 = FORMONLY.nomcli, NOENTRY, UPSHIFT, REVERSE;
+c045 = FORMONLY.vendedor, NOENTRY, UPSHIFT;
+END
+KEYS
+F5  = 'Transacción'
+F6  = 'E/C Cliente'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_det_tran[8] (ini_vend, cod_tran, num_tran, fecha, valor_bruto,
+				valor_desc, subtotal)

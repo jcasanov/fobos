@@ -1,0 +1,30 @@
+DATABASE aceros
+SCREEN
+{
+ CLASES DE ITEMS
+
+ [lbl1    |lbl2                                              ]
+[c000    |c001                                              ]
+[c000    |c001                                              ]
+[c000    |c001                                              ]
+[c000    |c001                                              ]
+[c000    |c001                                              ]
+[c000    |c001                                              ]
+[c000    |c001                                              ]
+[c000    |c001                                              ]
+[c000    |c001                                              ]
+[c000    |c001                                              ]
+
+}
+TABLES
+rept072
+
+ATTRIBUTES
+c000 = r72_cod_clase,  UPSHIFT;
+c001 = r72_desc_clase, UPSHIFT;
+
+lbl1 = formonly.bt_clase,        NOENTRY, WIDGET='BUTTON', CONFIG='F15';
+lbl2 = formonly.bt_descripcion,  NOENTRY, WIDGET='BUTTON', CONFIG='F16';
+END
+INSTRUCTIONS
+SCREEN RECORD rh_codclase[10] (r72_cod_clase, r72_desc_clase)

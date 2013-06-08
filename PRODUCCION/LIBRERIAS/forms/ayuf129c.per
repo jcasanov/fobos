@@ -1,0 +1,27 @@
+DATABASE aceros
+SCREEN
+{
+  CLASES DE ITEMS
+ -------------------------------------------------------------
+  Clase            Descripción        
+ -------------------------------------------------------------
+ [c000    |c001                                              ]
+ [c000    |c001                                              ]
+ [c000    |c001                                              ]
+ [c000    |c001                                              ]
+ [c000    |c001                                              ]
+ [c000    |c001                                              ]
+ [c000    |c001                                              ]
+ [c000    |c001                                              ]
+ [c000    |c001                                              ]
+ [c000    |c001                                              ]
+}
+TABLES
+rept072
+ATTRIBUTES
+c000 = r72_cod_clase,  UPSHIFT, REVERSE;
+c001 = r72_desc_clase, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_codclase[10] (r72_cod_clase, r72_desc_clase)

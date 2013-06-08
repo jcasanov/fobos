@@ -1,0 +1,89 @@
+DATABASE FORMONLY
+SCREEN
+{
+ Fecha Inicial: [c000      ]                         Fecha Final: [c001      ]
+  Area Negocio: [c0 ]    [c003           ]   Localidad: [c2] [c050           ]
+      Vendedor: [c1 ]    [c004                          ]
+       Cliente: [c005  ] [c006                                               ]
+
+[c007                          ]                            [c008 ] de [c009 ]
+ [c010  |c011          |c012         |c013         |c014         |c015        ]
+[c020  |c021          |c022         |c023         |c024         |c025        ]
+[c020  |c021          |c022         |c023         |c024         |c025        ]
+[c020  |c021          |c022         |c023         |c024         |c025        ]
+[c020  |c021          |c022         |c023         |c024         |c025        ]
+[c020  |c021          |c022         |c023         |c024         |c025        ]
+[c020  |c021          |c022         |c023         |c024         |c025        ]
+[c020  |c021          |c022         |c023         |c024         |c025        ]
+[c020  |c021          |c022         |c023         |c024         |c025        ]
+[c020  |c021          |c022         |c023         |c024         |c025        ]
+[c020  |c021          |c022         |c023         |c024         |c025        ]
+[c020  |c021          |c022         |c023         |c024         |c025        ]
+[c020  |c021          |c022         |c023         |c024         |c025        ]
+[c020  |c021          |c022         |c023         |c024         |c025        ]
+          Totales ==> [c030         |c031         |c032         |c033        ]
+}
+ATTRIBUTES
+c000 = FORMONLY.fecha_ini TYPE DATE NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha inicial en formato: dd-mm-aaaa.';
+c001 = FORMONLY.fecha_fin TYPE DATE NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha final en formato: dd-mm-aaaa.';
+c0   = FORMONLY.area_n TYPE SMALLINT, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = FORMONLY.tit_area, NOENTRY;
+c2   = FORMONLY.localidad, UPSHIFT, AUTONEXT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c050 = FORMONLY.tit_localidad, UPSHIFT, NOENTRY;
+c1   = FORMONLY.vendedor TYPE SMALLINT, UPSHIFT, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c004 = FORMONLY.tit_vendedor, UPSHIFT, NOENTRY;
+c005 = FORMONLY.codcli TYPE INTEGER, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c006 = FORMONLY.nomcli TYPE VARCHAR, NOENTRY, UPSHIFT;
+
+c007 = FORMONLY.tit_precision, NOENTRY, REVERSE; 
+
+c008 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c009 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c015 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+c020 = FORMONLY.cod_cli TYPE INTEGER, NOENTRY, UPSHIFT;
+c021 = FORMONLY.nom_cli TYPE VARCHAR, NOENTRY, UPSHIFT;
+c022 = FORMONLY.valor_vta TYPE DECIMAL, NOENTRY, UPSHIFT,
+	FORMAT = '--,---,--&.##';
+c023 = FORMONLY.valor_apr TYPE DECIMAL, NOENTRY, UPSHIFT,
+	FORMAT = '--,---,--&.##';
+c024 = FORMONLY.valor_cob TYPE DECIMAL, NOENTRY, UPSHIFT,
+	FORMAT = '--,---,--&.##';
+c025 = FORMONLY.valor_dif TYPE DECIMAL, NOENTRY, UPSHIFT,
+	FORMAT = '-,---,--&.##';
+
+c030 = FORMONLY.tot_col1 TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '--,---,--&.##';
+c031 = FORMONLY.tot_col2 TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '--,---,--&.##';
+c032 = FORMONLY.tot_col3 TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '--,---,--&.##';
+c033 = FORMONLY.tot_col4 TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '-,---,--&.##';
+END
+KEYS
+F5  = 'Detalle Venta'
+F6  = 'Detalle Cobranza'
+F7  = 'E/C Cliente'
+F8  = 'Precisión'
+F9  = 'Detalle Inventario'
+F10 = 'Detalle Taller'
+F11 = 'Detalle Sucursal'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_det1[13] (cod_cli, nom_cli, valor_vta, valor_apr, valor_cob,
+				valor_dif)

@@ -1,23 +1,24 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN TITLE ' Datos Proveedor ' 
 {
-                                                              [x001] de [y001]
+                                                             [x001] de [y001]
 
-        Código Proveedor: [c000       ]                Estado: [c] [c0a0     ]
-        Nombre Proveedor: [c001                                    ]
+       Código Proveedor: [c000       ]                 Estado: [c][c0a0     ]
+       Nombre Proveedor: [c001                                              ]
+                         [c001                                              ]
 
               Personería               Documento Identidad: [c012           ]
              [c0b0         ]                                [c0c0           ]
 
 
 
-        Autorización SRI: [c100      ]   Serie Comprobante: [c101  ]
+       Autorización SRI: [c100      ]    Serie Comprobante: [c101  ]
+    Dirección Domicilio: 
+      [c002                                                        ]
+      [c002                                                        ]
+     Teléfono Domicilio: [c004      ]
 
-     Dirección Domicilio: [c002                                    ]
-      Teléfono Domicilio: [c004      ]
-
-                 Usuario: [c014      ]
-        Fecha de Ingreso: [c015               ]
+    Usuario: [c014      ]             Fecha de Ingreso: [c015               ]
 }
 SCREEN TITLE 'Datos Adicionales'
 {
@@ -52,7 +53,7 @@ SCREEN TITLE '    Compañía     '
                                                             Recargo: [c109 ]%
                                                         Días Demora: [c122 ] 
                                                      Días Seguridad: [c123 ] 
-        Clase de Proveedor: [d              ]
+        Clase de Proveedor: [d             ]
 
 
  Aux. Proveed. Moneda Base: [c112        ] [c118                             ]
@@ -65,10 +66,10 @@ cxpt001, cxpt002
 ATTRIBUTES
 c000 = cxpt001.p01_codprov, AUTONEXT, REVERSE,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
-	COMMENTS = 'El sistema asigna código automáticamente';
-c001 = cxpt001.p01_nomprov, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'El sistema asigna código automaticamente';
+c001 = cxpt001.p01_nomprov, AUTONEXT, REVERSE, UPSHIFT,SCROLL,WORDWRAP COMPRESS,
 	COMMENTS = 'Indicar el nombre del proveedor';
-c002 = cxpt001.p01_direccion1, AUTONEXT, REVERSE, UPSHIFT;
+c002 = cxpt001.p01_direccion1, AUTONEXT, REVERSE, UPSHIFT, WORDWRAP COMPRESS;
 c003 = cxpt001.p01_direccion2, AUTONEXT, UPSHIFT;
 c004 = cxpt001.p01_telefono1, AUTONEXT, REVERSE, UPSHIFT;
 c005 = cxpt001.p01_telefono2, AUTONEXT, UPSHIFT;
@@ -87,16 +88,17 @@ c0c0 = cxpt001.p01_tipo_doc, AUTONEXT, REVERSE, UPSHIFT,
 	WIDGET = 'RADIO', CONFIG = 'C Cédula P Pasaporte R Ruc', DEFAULT = 'C';
 c012 = cxpt001.p01_num_doc, REVERSE, FORMAT = '###############';
 c013 = cxpt001.p01_rep_legal, AUTONEXT, UPSHIFT;
-a    = cxpt001.p01_ret_fuente, AUTONEXT, REVERSE, UPSHIFT,
+a    = cxpt001.p01_ret_fuente, REVERSE, UPSHIFT,
 	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S';
-e    = cxpt001.p01_ret_impto, AUTONEXT, REVERSE, UPSHIFT,
+e    = cxpt001.p01_ret_impto, REVERSE, UPSHIFT,
 	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S';
-f    = cxpt001.p01_cont_espe, AUTONEXT, REVERSE, UPSHIFT,
+f    = cxpt001.p01_cont_espe, REVERSE, UPSHIFT,
 	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S',
 	COMMENTS = 'Contribuyente Especial';
 c014 = cxpt001.p01_usuario, NOENTRY, UPSHIFT, REVERSE;
 c015 = cxpt001.p01_fecing, NOENTRY, UPSHIFT, REVERSE;
-c    = FORMONLY.tit_est, NOENTRY, REVERSE, UPSHIFT;
+c    = cxpt001.p01_estado, NOENTRY, REVERSE, UPSHIFT,
+	COMMENTS = '(A) ACTIVO  (B) BLOQUEADO';
 c0a0 = FORMONLY.tit_estado_pro, NOENTRY, UPSHIFT;
 c016 = FORMONLY.tit_pais, NOENTRY, REVERSE, UPSHIFT;
 c017 = FORMONLY.tit_ciudad, NOENTRY, REVERSE, UPSHIFT;
@@ -119,7 +121,7 @@ c122 = cxpt002.p02_dias_demora, AUTONEXT, REVERSE, UPSHIFT,
 c123 = cxpt002.p02_dias_seguri, AUTONEXT, REVERSE, UPSHIFT,
 	INCLUDE = (0 TO 9999);
 d    = cxpt002.p02_int_ext, AUTONEXT, REVERSE, UPSHIFT,
-	WIDGET = 'RADIO', CONFIG = 'I Interno E Externo', DEFAULT = 'E';
+	WIDGET = 'RADIO', CONFIG = 'I Nacional E Extranjero', DEFAULT = 'E';
 c112 = cxpt002.p02_aux_prov_mb, AUTONEXT, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 c113 = cxpt002.p02_aux_prov_ma, AUTONEXT, REVERSE, UPSHIFT,
@@ -142,4 +144,4 @@ x002 = FORMONLY.vm_row_current2, NOENTRY;
 y002 = FORMONLY.vm_num_rows2, NOENTRY;
 x003 = FORMONLY.vm_row_current3, NOENTRY;
 y003 = FORMONLY.vm_num_rows3, NOENTRY;
-END
+end

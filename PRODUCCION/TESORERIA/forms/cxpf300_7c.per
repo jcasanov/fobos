@@ -1,0 +1,40 @@
+DATABASE aceros
+SCREEN
+{
+                   MOVIMIENTOS DE DOCUMENTOS A FAVOR
+
+ Proveedor: [c000                                     ]
+ Documento: [c1][c002          ]
+
+ Tip Número   Fecha            R e f e r e n c i a             V a l o r
+[c15|c016  |c017      |c018                               |c019            ]
+[c15|c016  |c017      |c018                               |c019            ]
+[c15|c016  |c017      |c018                               |c019            ]
+[c15|c016  |c017      |c018                               |c019            ]
+[c15|c016  |c017      |c018                               |c019            ]
+[c15|c016  |c017      |c018                               |c019            ]
+[c15|c016  |c017      |c018                               |c019            ]
+                                                          [c030            ]
+}
+TABLES 
+cxpt001
+cxpt022
+cxpt023
+ATTRIBUTES
+c000 = p01_nomprov, REVERSE;
+c1   = p23_tipo_favor, REVERSE;
+c002 = p23_doc_favor,  REVERSE;
+c15  = p23_tipo_trn;
+c016 = p23_num_trn, FORMAT = '#####&';
+c017 = p22_fecha_emi, FORMAT = 'dd-mm-yyyy';
+c018 = p22_referencia;
+c019 = FORMONLY.val_pago TYPE DECIMAL(12,2), FORMAT = '-,---,---,--&.##';
+c030 = FORMONLY.tot_pago TYPE DECIMAL(12,2), FORMAT = '-,---,---,--&.##',
+       REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_pdoc[7] (p23_tipo_trn, p23_num_trn, p22_fecha_emi,
+			 p22_referencia, FORMONLY.val_pago);
+--KEYS
+--'F5'='Documento'

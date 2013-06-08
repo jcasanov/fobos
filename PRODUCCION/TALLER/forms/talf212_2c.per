@@ -1,0 +1,25 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+  -----------------------------------------------------
+   Código                    Nombre                  C
+  -----------------------------------------------------
+  [c000  ] [c001                                    |c]
+  [c000  ] [c001                                    |c]
+  [c000  ] [c001                                    |c]
+  [c000  ] [c001                                    |c]
+  [c000  ] [c001                                    |c]
+}
+ATTRIBUTES
+c000 = formonly.cod_mecanico, UPSHIFT, AUTONEXT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c001 = formonly.nom_mecanico, UPSHIFT, NOENTRY;
+c    = formonly.check TYPE CHAR, INCLUDE=('S', 'N'), AUTONEXT, UPSHIFT,
+	COMMENTS='Indique quien es el jefe del grupo de trabajo (S o N).';
+
+END
+
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD ra_mecanico[5] (cod_mecanico, nom_mecanico, check)

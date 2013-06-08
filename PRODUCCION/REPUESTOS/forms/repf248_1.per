@@ -1,0 +1,87 @@
+DATABASE aceros
+SCREEN
+{
+                                                            [c000 ] de [c001 ]
+                                                        Estado: [c|c006      ]
+ Composicion: [c002    ]   Codigo Ventas: [c03] [c004                        ]
+        Item: [c007    ] [c008                                               ]
+  Referencia: [c009                                    ]
+      Esta composición tendra trabajo de terceros ?: [d]    [c011 ] de [c012 ]
+ [c020|c021     |c022                            |c023      |c024      |c025  ]
+[c1] [c030   ] [c031                            |c032      |c033      |c034  ]
+[c1] [c030   ] [c031                            |c032      |c033      |c034  ]
+[c1] [c030   ] [c031                            |c032      |c033      |c034  ]
+[c1] [c030   ] [c031                            |c032      |c033      |c034  ]
+[c1] [c030   ] [c031                            |c032      |c033      |c034  ]
+[c1] [c030   ] [c031                            |c032      |c033      |c034  ]
+[c040                               ]
+[c041                               ]
+[c042                                    ]
+[c043                                              ]
+[c044                                                                ]
+  Usuario Modif.: [c045      ]             Fecha Modif.: [c046               ]
+  Usuario Cierre: [c047      ]             Fecha Cierre: [c048               ]
+         Usuario: [c049      ]            Fecha Ingreso: [c050               ]
+}
+TABLES
+rept001
+rept046
+rept047
+ATTRIBUTES
+c000 = FORMONLY.num_cur, NOENTRY, UPSHIFT, REVERSE;
+c001 = FORMONLY.max_cur, NOENTRY, UPSHIFT, REVERSE;
+
+c002 = rept046.r46_composicion, NOENTRY, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c03  = rept046.r46_cod_ventas, NOENTRY, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c004 = rept001.r01_nombres, NOENTRY, UPSHIFT, REVERSE;
+c    = rept046.r46_estado, NOENTRY, UPSHIFT, REVERSE,
+	COMMENTS = 'P En Proceso  C Compuesto';
+c006 = FORMONLY.nom_est, NOENTRY, UPSHIFT;
+c007 = rept046.r46_item_comp, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c008 = rept046.r46_desc_comp, NOENTRY, UPSHIFT, REVERSE;
+c009 = rept046.r46_referencia, AUTONEXT, UPSHIFT, REVERSE, SCROLL;
+d    = rept046.r46_tiene_oc, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge', DEFAULT = 'S',
+	COMMENTS = 'Si desmarca esta composición, no se podra cargar OC cuando se cargue a INVENTARIO.';
+
+c011 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c012 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c020 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15'; 
+c021 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16'; 
+c022 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17'; 
+c023 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18'; 
+c024 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19'; 
+c025 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20'; 
+
+c1   = rept047.r47_bodega_part, NOENTRY, UPSHIFT, OPTIONS = '-nolist',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c030 = rept047.r47_item_part, AUTONEXT, UPSHIFT, OPTIONS = '-nolist',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c031 = rept047.r47_desc_part, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c032 = rept047.r47_cantidad, AUTONEXT, UPSHIFT, FORMAT = '###,##&.##',
+	INCLUDE = (0.01 TO 999999.99), OPTIONS = '-nolist';
+c033 = rept047.r47_costo_part, NOENTRY, UPSHIFT, FORMAT = '###,##&.##',
+	OPTIONS = '-nolist';
+c034 = rept047.r47_marca_p,  NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+
+c040 = rept047.r47_nom_div_p, NOENTRY, UPSHIFT;
+c041 = rept047.r47_desc_sub_p, NOENTRY, UPSHIFT;
+c042 = rept047.r47_desc_grupo_p, NOENTRY, UPSHIFT;
+c043 = rept047.r47_desc_clase_p, NOENTRY, UPSHIFT, REVERSE;
+c044 = FORMONLY.descripcion, NOENTRY, UPSHIFT, REVERSE;
+
+c045 = rept046.r46_usu_modifi, NOENTRY, UPSHIFT;
+c046 = rept046.r46_fec_modifi, NOENTRY, UPSHIFT;
+c047 = rept046.r46_usu_cierre, NOENTRY, UPSHIFT;
+c048 = rept046.r46_fec_cierre, NOENTRY, UPSHIFT;
+c049 = rept046.r46_usuario, NOENTRY, UPSHIFT, REVERSE;
+c050 = rept046.r46_fecing, NOENTRY, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_detalle[6] (r47_bodega_part, r47_item_part, r47_desc_part,
+				r47_cantidad, r47_costo_part, r47_marca_p)

@@ -1,30 +1,34 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
 
-                                                     Estado: [c] [c0b0     ]
+                                                       Estado: [c|c0b0     ]
 
-         Codigo SRI: [c06]
-               Tipo: [c0a0    ]               Porcentaje: [c001     ]
+            Tipo de Retención: [c0a0    ]      
+
+         Porcentaje Retención: [c001     ]
+
+  Descripción de la Retención: [c002                ]
+                                    
+       Base para la Retención: [c008        ]
 
 
-        Descripción: [c002                ]
-          Tipo Base: [c008        ]
 
+            Auxiliar Contable: [c003       ]  [c007                        ]
 
-
-      Aux. Contable: [c003       ]  [c007                        ]
-
-       Usuario: [c004      ]      Fecha de Ingreso: [c005               ]
+                      Usuario: [c004      ]
+             Fecha de Ingreso: [c005               ]
 }
 TABLES
 ordt002
 ATTRIBUTES
+c    = ordt002.c02_estado, REVERSE, NOENTRY, UPSHIFT,
+	COMMENTS = '(A) ACTIVO  (B) BLOQUEADO';
 c0b0 = FORMONLY.tit_estado_ret, NOENTRY;
-c0a0 = ordt002.c02_tipo_ret, AUTONEXT, REVERSE, WIDGET = 'RADIO', 
-	CONFIG = 'F FUENTE I IVA', DEFAULT = 'F',
+c0a0 = ordt002.c02_tipo_ret, AUTONEXT, REVERSE,
+	WIDGET = 'RADIO', CONFIG = 'F FUENTE I IVA', DEFAULT = 'F',
 	COMMENTS = 'Indicar si la retención es en la Fuente o antes del IVA'; 
-c001 = ordt002.c02_porcentaje, REVERSE, FORMAT = '##&.##';
+c001 = ordt002.c02_porcentaje, AUTONEXT, REVERSE, FORMAT = '##&.##';
 c002 = ordt002.c02_nombre, AUTONEXT, UPSHIFT, REVERSE;
 c008 = ordt002.c02_tipo_fuente, AUTONEXT, REVERSE, WIDGET = 'RADIO',
 	CONFIG = 'B Bienes S Servicios T Todos', DEFAULT = 'B',
@@ -33,7 +37,5 @@ c003 = ordt002.c02_aux_cont, AUTONEXT, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 c004 = ordt002.c02_usuario, NOENTRY, REVERSE;
 c005 = ordt002.c02_fecing, NOENTRY, REVERSE;
-c06  = ordt002.c02_codigo_sri, UPSHIFT, REVERSE, AUTONEXT;
 c007 = FORMONLY.tit_aux_con, NOENTRY, UPSHIFT, REVERSE;
-c    = ordt002.c02_estado, REVERSE, NOENTRY, UPSHIFT;
 END

@@ -1,0 +1,42 @@
+DATABASE aceros
+screen
+{
+              AUXILIARES CONTABLES PARA RUBROS DE INGRESOS  
+
+       Código de Rubro: [c001] [c002                           ]
+
+ [c010 |c011                    |c012        |c013                           ] 
+[c020 |c021                    |c022        |c023                           ]
+[c020 |c021                    |c022        |c023                           ]
+[c020 |c021                    |c022        |c023                           ]
+[c020 |c021                    |c022        |c023                           ]
+[c020 |c021                    |c022        |c023                           ]
+[c020 |c021                    |c022        |c023                           ]
+[c020 |c021                    |c022        |c023                           ]
+[c020 |c021                    |c022        |c023                           ]
+[c020 |c021                    |c022        |c023                           ]
+[c020 |c021                    |c022        |c023                           ]
+[c020 |c021                    |c022        |c023                           ]
+[c020 |c021                    |c022        |c023                           ]
+
+} 
+end
+TABLES
+rolt050
+
+ATTRIBUTES
+c001 = formonly.vm_cod_rubro TYPE CHAR NOT NULL, REVERSE, 	
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';  
+c002 = formonly.n06_nombre, REVERSE, NOENTRY;
+c010 = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c020 = n50_cod_depto, NOENTRY, OPTIONS = '-nolist';
+c021 = formonly.tit_depto, NOENTRY, OPTIONS = '-nolist';
+c022 = n50_aux_cont, REQUIRED, OPTIONS = '-nolist';  
+c023 = formonly.tit_cuenta, NOENTRY, OPTIONS = '-nolist';
+INSTRUCTIONS 
+DELIMITERS '||'
+SCREEN RECORD rm_ring[12] (n50_cod_depto, formonly.tit_depto,
+			   n50_aux_cont, formonly.tit_cuenta)

@@ -1,0 +1,28 @@
+DATABASE aceros
+
+SCREEN
+{
+  COMPANIAS CONFIGURADAS CONTABILIDAD
+ --------------------------------------
+  Código Descripción 	  
+ --------------------------------------
+ [f001] [f002                         ] 
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+}
+
+TABLES
+gent001
+ctbt000
+
+ATTRIBUTES
+f001 = b00_compania,REVERSE;
+f002 = g01_razonsocial,REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_ciacon[7](b00_compania, g01_razonsocial)

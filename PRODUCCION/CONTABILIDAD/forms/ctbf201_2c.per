@@ -1,0 +1,33 @@
+DATABASE aceros
+SCREEN
+{
+
+ Cuenta Master: [c001        |c004                                   ]
+
+ -------------------------------------------------------------------
+    Cuentas             Descripción            %         Valor       
+ -------------------------------------------------------------------
+ [c002        |c005                         |c003 |c006            ]
+ [c002        |c005                         |c003 |c006            ]
+ [c002        |c005                         |c003 |c006            ]
+ [c002        |c005                         |c003 |c006            ]
+ [c002        |c005                         |c003 |c006            ]
+                                                  ------------------
+                                                  [c007            ]
+}
+TABLES
+ctbt016
+ATTRIBUTES
+c001 = ctbt016.b16_cta_master, AUTONEXT, REVERSE, NOENTRY;
+c007 = FORMONLY.valor_tot TYPE DECIMAL (12,2), NOENTRY,
+	FORMAT='#,###,###,##&.##';
+c002 = ctbt016.b16_cta_detail, NOENTRY;
+c003 = ctbt016.b16_porcentaje, NOENTRY, FORMAT = '#&.##';
+c004 = FORMONLY.tit_master, NOENTRY, UPSHIFT, REVERSE;
+c005 = FORMONLY.tit_detalle, NOENTRY, UPSHIFT;
+c006 = FORMONLY.valor TYPE DECIMAL (12,2), NOENTRY, FORMAT='#,###,###,##&.##';
+end
+
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_cd[5] (b16_cta_detail, tit_detalle, b16_porcentaje, valor)

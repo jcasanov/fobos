@@ -1,32 +1,26 @@
-database diteca
-screen title ' Facturacion '
+DATABASE aceros
+SCREEN
 {
           Compañía: [f000 ] [b1                        ] Estado: [a|a1        ]
 
    Compañía Taller: [f001 ] [b2                        ]
-    Cliente Taller: [f002 ] [b3                        ]
-  Consumidor Final: [f003 ] [b4                        ]
-
     Bodega Factura: [a0] [a2                           ]
-    Líneas Factura: [c0  ]
-Facturar sin stock: [h]
-Crédito Automático: [e]                  
-    Devolución Mes: [f]                 Días Devolución: [f04]        
 
-        Tipo Costo:[b                  ]    Tipo Margen:[c                  ]
+   Activar control de margenes de utilidad en proformas: [g]
+Días Validéz Precios Proforma: [f02]            Crédito Automatico: [e]
+     Días Expiración Proforma: [f03]                Devolución Mes: [f]
+              Días Devolución: [f04 ]
+               Mes de Proceso: [c020]               Año de Proceso: [c021]    
+
+                   Valor Maximo para Facturas de Consumidor Final: [v001     ] 
+         Codigo Cliente Consumidor Final: [f002 ] [b3                        ]
+        Tipo Costo :[b                 ]    Tipo Margen: [c                  ]
 
 
-    Tipo Descuento:[d                  ]   Tipo Factura: [c1                 ]
+    Tipo Descuento :[d                 ]   Tipo Factura: [c1                 ]
 
 
-}
-screen title '    Otros    '
-{
-   Activar control de márgenes de utilidad en proformas: [g]
-     Días Proforma: [f02] 
-   Expire Proforma: [f03]                
-
-    Mes de Proceso: [c020]               Año de Proceso: [c021]    
+			                 Líneas Factura: [c0  ]
 }
 END 
 
@@ -38,48 +32,45 @@ ATTRIBUTES
 c0   = rept000.r00_numlin_fact, REVERSE, INCLUDE = (1 TO 10000),
 	COMMENTS = 'Número de líneas en la factura.'; 
 c1   = rept000.r00_tipo_fact, REVERSE, WIDGET = 'RADIO', 
-	CONFIG = 'U "Una sola página" M "Múltiples páginas"'; 
+	CONFIG = 'U "Una sola pagina" M "Múltiples páginas"'; 
 
 f000 = rept000.r00_compania, REVERSE,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-b1   = formonly.nom_cia TYPE VARCHAR, NOENTRY;
+b1   = FORMONLY.nom_cia TYPE VARCHAR, NOENTRY;
 a    = rept000.r00_estado, REVERSE, NOENTRY, UPSHIFT;
-a1   = formonly.tit_estado TYPE VARCHAR, NOENTRY;
+a1   = FORMONLY.tit_estado TYPE VARCHAR, NOENTRY;
 
 b    = rept000.r00_tipo_costo,
 	WIDGET = 'RADIO', CONFIG = 'P Promedio U "Ultimo Costo"';
 
 f001 = rept000.r00_cia_taller, REVERSE, 
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-b2   = formonly.nom_cia_tal TYPE VARCHAR, NOENTRY;
+b2   = FORMONLY.nom_cia_tal TYPE VARCHAR, NOENTRY;
 
 f002 = rept000.r00_codcli_tal, REVERSE, 
-	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
-	COMMENT = 'Obligatorio cuando la Compañía Taller es diferente de la Compañía Repuestos.';
-b3   = formonly.nom_cli_tal TYPE VARCHAR, NOENTRY;
-
-f003 = rept000.r00_cliente_final, REVERSE, 
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-b4   = formonly.nom_cli_final TYPE VARCHAR, NOENTRY;
+	--COMMENTS = 'Obligatorio cuando la Compañía Taller es diferente de la Compañía Repuestos.';
+b3   = FORMONLY.nom_cli_tal TYPE VARCHAR, NOENTRY;
 
 c    = rept000.r00_tipo_margen, 
-	WIDGET = 'RADIO', CONFIG = 'L "Línea Venta" I "Indice Rotación"';
+	WIDGET = 'RADIO', CONFIG = 'L "División Venta" I "Indice Rotación"';
 d    = rept000.r00_tipo_descto, 
-	WIDGET = 'RADIO', CONFIG = 'L "Línea Venta" I "Indice Rotación"';
+	WIDGET = 'RADIO', CONFIG = 'L "División Venta" I "Indice Rotación"';
 a0   = rept000.r00_bodega_fact, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-a2   = formonly.nom_bod TYPE VARCHAR, NOENTRY;
+a2   = FORMONLY.nom_bod TYPE VARCHAR, NOENTRY;
 f02  = rept000.r00_dias_prof, REVERSE;
 f03  = rept000.r00_expi_prof, REVERSE;
 e    = rept000.r00_cred_auto,
 	WIDGET = 'CHECK', CONFIG = 'S N acknowledge',
-        COMMENT = 'Compañía otorga crédito automático ?';
-f04  = rept000.r00_dias_dev, REVERSE;
+        COMMENT = 'Compañía otorga crédito automatico ?';
+f04  = rept000.r00_dias_dev, REVERSE, INCLUDE = (0 TO 2600);
 f    = rept000.r00_dev_mes, 
 	WIDGET = 'CHECK', CONFIG = 'S N acknowledge',
         COMMENT = 'Permite Devoluciones dentro del mes corriente ?';
-g    = rept000.r00_contr_prof, WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
-h    = rept000.r00_fact_sstock, WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+g    = rept000.r00_contr_prof,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
 c020 = rept000.r00_mespro, NOENTRY;
 c021 = rept000.r00_anopro, NOENTRY;
+v001 = r00_valmin_ccli, FORMAT = '##,##&.##', INCLUDE = (0 TO 99999), REVERSE;
 END

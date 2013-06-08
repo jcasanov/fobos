@@ -1,7 +1,6 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
-
           Cliente: [c000      ] [c001                                    ]
     Fecha Inicial: [c002      ]                Fecha Término: [c003      ]
 
@@ -29,9 +28,11 @@ c000 = cajt010.j10_codcli, AUTONEXT, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 c001 = cajt010.j10_nomcli, NOENTRY, UPSHIFT;
 c002 = FORMONLY.vm_fecha_ini TYPE DATE NOT NULL, AUTONEXT, REVERSE, UPSHIFT,
-	FORMAT = 'dd-mm-yyyy';
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Inicial en formato dd/mm/aaaa';
 c003 = FORMONLY.vm_fecha_fin TYPE DATE NOT NULL, AUTONEXT, REVERSE, UPSHIFT,
-	FORMAT = 'dd-mm-yyyy';
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Término en formato dd/mm/aaaa';
 
 b0   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
 c022 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
@@ -49,7 +50,7 @@ c015 = cajt011.j11_num_ch_aut, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
 a    = cajt011.j11_protestado, NOENTRY, UPSHIFT,
 	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N',
 	OPTIONS = '-nolist';
-END
+end
 KEYS
 F5 = 'Protesto'
 INSTRUCTIONS

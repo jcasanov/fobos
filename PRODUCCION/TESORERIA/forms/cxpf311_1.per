@@ -1,0 +1,77 @@
+DATABASE FORMONLY
+SCREEN
+{
+     Moneda: [c0] [c002           ]        Tipo Detalle: [c003               ]
+
+ Cartera Edades a la Fecha: [c006      ]
+[c007                          ]
+
+[c050  ] de [c051  ]                 [c008                                   ]
+ [c010 |c011                 |c012    |c013   |c014   |c015   |c016   |c017   ]
+[c020 |c021                 |c022    |c023   |c024   |c025   |c026   |c027   ]
+[c020 |c021                 |c022    |c023   |c024   |c025   |c026   |c027   ]
+[c020 |c021                 |c022    |c023   |c024   |c025   |c026   |c027   ]
+[c020 |c021                 |c022    |c023   |c024   |c025   |c026   |c027   ]
+[c020 |c021                 |c022    |c023   |c024   |c025   |c026   |c027   ]
+[c020 |c021                 |c022    |c023   |c024   |c025   |c026   |c027   ]
+[c020 |c021                 |c022    |c023   |c024   |c025   |c026   |c027   ]
+[c020 |c021                 |c022    |c023   |c024   |c025   |c026   |c027   ]
+[c020 |c021                 |c022    |c023   |c024   |c025   |c026   |c027   ]
+[c020 |c021                 |c022    |c023   |c024   |c025   |c026   |c027   ]
+[c020 |c021                 |c022    |c023   |c024   |c025   |c026   |c027   ]
+[c020 |c021                 |c022    |c023   |c024   |c025   |c026   |c027   ]
+[c020 |c021                 |c022    |c023   |c024   |c025   |c026   |c027   ]
+               Totales ==>  [c030    |c031   |c032   |c033   |c034   |c035   ]
+}
+ATTRIBUTES
+c0   = FORMONLY.moneda TYPE CHAR NOT NULL, UPSHIFT, AUTONEXT, REVERSE, 
+       WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = FORMONLY.tit_mon, REVERSE, NOENTRY;
+c003 = FORMONLY.tipo_detalle TYPE CHAR NOT NULL, UPSHIFT, REVERSE, REQUIRED,
+	WIDGET = 'RADIO', CONFIG = 'P "Por Proveedor"  C "Tipo de Proveedor"  R "Tipo de Cartera"',
+	DEFAULT = 'P';
+c006 = FORMONLY.fecha_cart TYPE DATE NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Fecha que se va a generar la cartera por edades. (dd-mm-yyyy)';
+c007 = FORMONLY.tit_precision; 
+c008 = FORMONLY.tit_edad;
+
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c015 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c016 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+c017 = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22';
+
+c020 = FORMONLY.cod_des;
+c021 = FORMONLY.descripcion;
+c022 = FORMONLY.val_col1 TYPE DECIMAL(14,2), FORMAT = '####,##&';
+c023 = FORMONLY.val_col2 TYPE DECIMAL(14,2), FORMAT = '###,##&';
+c024 = FORMONLY.val_col3 TYPE DECIMAL(14,2), FORMAT = '###,##&';
+c025 = FORMONLY.val_col4 TYPE DECIMAL(14,2), FORMAT = '###,##&';
+c026 = FORMONLY.val_col5 TYPE DECIMAL(14,2), FORMAT = '###,##&';
+c027 = FORMONLY.val_col6 TYPE DECIMAL(14,2), FORMAT = '###,##&';
+
+c030 = FORMONLY.tot_col1 TYPE DECIMAL(14,2), FORMAT = '####,##&', REVERSE;
+c031 = FORMONLY.tot_col2 TYPE DECIMAL(14,2), FORMAT = '###,##&', REVERSE;
+c032 = FORMONLY.tot_col3 TYPE DECIMAL(14,2), FORMAT = '###,##&', REVERSE;
+c033 = FORMONLY.tot_col4 TYPE DECIMAL(14,2), FORMAT = '###,##&', REVERSE;
+c034 = FORMONLY.tot_col5 TYPE DECIMAL(14,2), FORMAT = '###,##&', REVERSE;
+c035 = FORMONLY.tot_col6 TYPE DECIMAL(14,2), FORMAT = '###,##&', REVERSE;
+
+c050 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c051 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+END
+KEYS
+F5 = 'Documentos'
+F6 = "E/C Proveedor"
+F7 = 'Precisión'
+F8 = 'Grafico'
+F9 = 'Imprimir'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_det1[13] (FORMONLY.cod_des, FORMONLY.descripcion,
+			FORMONLY.val_col1, FORMONLY.val_col2, FORMONLY.val_col3,
+			FORMONLY.val_col4, FORMONLY.val_col5, FORMONLY.val_col6)

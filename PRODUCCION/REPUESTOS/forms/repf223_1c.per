@@ -1,0 +1,48 @@
+DATABASE aceros
+SCREEN
+{
+
+     Estado    No.  Total sin IVA   Total Costo     Diferencia   % Util.   C
+ [a0         |a1   |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1   |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1   |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1   |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1   |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1   |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1   |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1   |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1   |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1   |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1   |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1   |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1   |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1   |a2            |a3            |a4            |a5      ][a]
+
+             [a6                                 ]
+}
+TABLES
+	rept023
+ATTRIBUTES
+
+a0  = FORMONLY.tit_estado TYPE VARCHAR, REVERSE, NOENTRY;
+a1  = FORMONLY.num_preventa TYPE INTEGER, REVERSE, NOENTRY;
+a2  = FORMONLY.total_sin_iva TYPE DECIMAL(11,2), FORMAT = '###,###,##&.##',
+	REVERSE, NOENTRY;
+a3  = FORMONLY.total_costo TYPE DECIMAL(11,2), FORMAT = '###,###,##&.##',
+	REVERSE, NOENTRY;
+a4  = FORMONLY.diferencia TYPE DECIMAL(11,2), FORMAT = '---,---,--&.##',
+	REVERSE, NOENTRY;
+a5  = FORMONLY.utilidad TYPE DECIMAL (11,2), FORMAT = '-,--&.##', REVERSE, 
+	NOENTRY;
+a   = FORMONLY.aprobar TYPE CHAR, REVERSE, DEFAULT = 'A', UPSHIFT,
+	INCLUDE = ('P', 'A'),
+	COMMENTS = 'Marque las preventas que desee aprobar. A ó P';
+a6  = r23_nomcli, REVERSE, NOENTRY;
+END
+INSTRUCTIONS 
+DELIMITERS '||'
+SCREEN RECORD r_detalle[14] (tit_estado,  num_preventa, total_sin_iva, 
+			     total_costo, diferencia,   utilidad, aprobar)
+--KEYS
+	--F5 = 'Detalle Preventa'
+	--F6 = 'Ver Preventa'

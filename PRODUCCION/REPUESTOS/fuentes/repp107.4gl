@@ -1,4 +1,3 @@
-
 --------------------------------------------------------------------------------
 -- Titulo           : repp107.4gl - Configuracion descuentos por Linea Venta
 --					/  Indice Rotacion 
@@ -14,18 +13,18 @@ GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 DEFINE vm_demonios	VARCHAR(12)
 
 		---- CONFIGURACION LINEA DE VENTA ----
-DEFINE vm_rows ARRAY[400] OF RECORD            -- REGISTROS DEL MANTENIMIENTO
-	 r07_linea 	LIKE rept007.r07_linea,
-	 r07_moneda 	LIKE rept007.r07_moneda,
-	 r07_cont_cred	LIKE rept007.r07_cont_cred
-	END RECORD
+DEFINE vm_rows		ARRAY[400] OF RECORD   -- REGISTROS DEL MANTENIMIENTO
+				 r07_linea 	LIKE rept007.r07_linea,
+				 r07_moneda 	LIKE rept007.r07_moneda,
+				 r07_cont_cred	LIKE rept007.r07_cont_cred
+			END RECORD
 		--------------------------------------
 		---- CONFIGURACION INDICE DE ROTACION ----
-DEFINE vm_rows_2 ARRAY[400] OF RECORD           -- REGISTROS DEL MANTENIMIENTO
-	 r08_rotacion 	LIKE rept008.r08_rotacion,
-	 r08_moneda 	LIKE rept008.r08_moneda,
-	 r08_cont_cred	LIKE rept008.r08_cont_cred
-	END RECORD
+DEFINE vm_rows_2	ARRAY[400] OF RECORD    -- REGISTROS DEL MANTENIMIENTO
+	 			r08_rotacion 	LIKE rept008.r08_rotacion,
+				r08_moneda 	LIKE rept008.r08_moneda,
+				r08_cont_cred	LIKE rept008.r08_cont_cred
+			END RECORD
 		--------------------------------------
 DEFINE vm_row_current	SMALLINT      -- FILA CORRIENTE DEL ARREGLO LINEA VTA
 DEFINE vm_row_current_2	SMALLINT      -- FILA CORRIENTE DEL ARREGLO IND ROTACION
@@ -67,22 +66,22 @@ DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
 CALL startlog('../logs/errores')
-CALL fgl_init4js()
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN          -- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 
-        'stop')
+	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto','stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
-LET vg_base     = arg_val(1)
-LET vg_modulo   = arg_val(2)
-LET vg_codcia   = arg_val(3)
+LET vg_base    = arg_val(1)
+LET vg_modulo  = arg_val(2)
+LET vg_codcia  = arg_val(3)
 LET vg_proceso = 'repp107'
 
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL control_master()
 
@@ -103,7 +102,7 @@ OPEN WINDOW w_repf107_1 AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2)
 OPEN FORM f_repf107_1 FROM '../forms/repf107_1'
 DISPLAY FORM f_repf107_1 
-CALL control_display_botones()
+CALL control_DISPLAY_botones()
 
 LET vm_num_rows = 0
 LET vm_row_current = 0
@@ -129,7 +128,7 @@ FUNCTION funcion_master()
 
 OPEN FORM f_repf107_1 FROM '../forms/repf107_1'
 DISPLAY FORM f_repf107_1
-CALL control_display_botones()
+CALL control_DISPLAY_botones()
 
 LET vm_num_rows = 0
 LET vm_row_current = 0
@@ -142,9 +141,7 @@ MENU 'OPCIONES'
 	COMMAND KEY('I') 'Ingresar' 'Ingresar nuevos registros.'
 		CALL control_ingreso()
 		IF vm_num_rows <= 1 THEN
-		   IF fl_control_permiso_opcion('Mantenimiento') THEN
 			SHOW OPTION 'Mantenimiento'
-		   END IF
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -153,8 +150,7 @@ MENU 'OPCIONES'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
- 		    SHOW OPTION 'Mantenimiento'
-			
+			SHOW OPTION 'Mantenimiento'
 		END IF
 	COMMAND KEY('M') 'Mantenimiento' 'Mantenimiento a las Configuraciones.'
 		IF vm_num_rows > 0  AND rm_r07.r07_linea IS NOT NULL THEN
@@ -180,8 +176,7 @@ MENU 'OPCIONES'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
-		    SHOW OPTION 'Mantenimiento'
-		
+			SHOW OPTION 'Mantenimiento'
 		END IF
 	COMMAND KEY('A') 'Avanzar' 'Ver siguiente registro'
 		IF vm_row_current < vm_num_rows THEN
@@ -219,7 +214,7 @@ MENU 'OPCIONES'
 		LET vm_row_current = 0
 		CALL muestra_contadores()
 		CLEAR FORM
-		CALL control_display_botones()
+		CALL control_DISPLAY_botones()
 		EXIT MENU
 END MENU
 
@@ -234,7 +229,7 @@ DEFINE i SMALLINT
 
 OPEN FORM f_repf107_2  FROM '../forms/repf107_2'
 DISPLAY FORM f_repf107_2
-CALL control_display_botones()
+CALL control_DISPLAY_botones()
 
 INITIALIZE rm_r08.* TO NULL
 LET vm_num_rows_2 = 0
@@ -248,8 +243,7 @@ MENU 'OPCIONES'
 	COMMAND KEY('I') 'Ingresar' 'Ingresar nuevos registros.'
 		CALL control_ingreso_2()
 		IF vm_num_rows_2 <= 1 THEN
-			  SHOW OPTION 'Mantenimiento'
-		    
+			SHOW OPTION 'Mantenimiento'
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows_2 = 0 THEN
@@ -259,7 +253,6 @@ MENU 'OPCIONES'
 		ELSE
 			SHOW OPTION 'Avanzar'
 			SHOW OPTION 'Mantenimiento'
-		    
 		END IF
 	COMMAND KEY('M') 'Mantenimiento' 'Mantenimiento a las Configuraciones.'
 		IF vm_num_rows_2 > 0  AND rm_r08.r08_rotacion IS NOT NULL THEN
@@ -286,7 +279,6 @@ MENU 'OPCIONES'
 		ELSE
 			SHOW OPTION 'Avanzar'
 			SHOW OPTION 'Mantenimiento'
-		    
 		END IF
 	COMMAND KEY('A') 'Avanzar' 'Ver siguiente registro'
 		IF vm_row_current_2 < vm_num_rows_2 THEN
@@ -324,7 +316,7 @@ MENU 'OPCIONES'
 		LET vm_row_current_2 = 0
 		CALL muestra_contadores_2()
 		CLEAR FORM
-		CALL control_display_botones()
+		CALL control_DISPLAY_botones()
 		EXIT MENU
 END MENU
 
@@ -332,7 +324,7 @@ END FUNCTION
 
 
 
-FUNCTION control_display_botones()
+FUNCTION control_DISPLAY_botones()
 
 DISPLAY 'Monto Inicial'		TO tit_col1
 DISPLAY 'Monto Final'		TO tit_col2
@@ -350,8 +342,8 @@ DEFINE expr_sql		VARCHAR(100)
 DEFINE i		SMALLINT
 DEFINE r_conf	 	RECORD LIKE rept007.*
 
-WHENEVER ERROR CONTINUE
 BEGIN WORK
+WHENEVER ERROR CONTINUE
 DECLARE q_upd CURSOR FOR SELECT * FROM rept007 
 	WHERE r07_compania  = vg_codcia 
 	AND   r07_linea     = rm_r07.r07_linea
@@ -361,12 +353,13 @@ DECLARE q_upd CURSOR FOR SELECT * FROM rept007
 OPEN q_upd
 FETCH q_upd INTO r_conf.*
 CLOSE q_upd
-WHENEVER ERROR STOP
 IF status < 0 THEN
 	ROLLBACK WORK
 	CALL fl_mensaje_bloqueo_otro_usuario()	
+	WHENEVER ERROR STOP
 	RETURN
 END IF
+WHENEVER ERROR STOP
 CALL control_cargar_configuracion_descuentos()
 CALL lee_detalle()
 LET vm_flag_mant = 'M'
@@ -389,9 +382,10 @@ IF NOT int_flag THEN
 	IF arr_count() > 0 THEN
 		CALL fl_mensaje_registro_modificado()
 	ELSE 
-		CALL fgl_winmessage(vg_producto,'Se eliminaron todas las configuraciones de descuentos para esta Línea, Moneda, y Tipo de factura.','exclamation')
+		--CALL fgl_winmessage(vg_producto,'Se eliminaron todas las configuraciones de descuentos para esta Línea, Moneda, y Tipo de factura.','exclamation')
+		CALL fl_mostrar_mensaje('Se eliminaron todas las configuraciones de descuentos para esta Línea, Moneda, y Tipo de factura.','exclamation')
 		CLEAR FORM
-		CALL control_display_botones()
+		CALL control_DISPLAY_botones()
 		LET vm_num_rows    = 0
 		LET vm_row_current = 0
 		CALL muestra_contadores()
@@ -415,12 +409,11 @@ DEFINE expr_sql		VARCHAR(500)
 DEFINE query		VARCHAR(600)
 
 CLEAR FORM
-CALL control_display_botones()
+CALL control_DISPLAY_botones()
 
 LET int_flag = 0
 LET vm_flag_mant = 'C'
-CONSTRUCT BY NAME expr_sql 
-			ON r07_linea, r07_moneda, r07_cont_cred
+CONSTRUCT BY NAME expr_sql ON r07_linea, r07_moneda, r07_cont_cred
 	ON KEY(F2)
                 IF INFIELD(r07_linea) THEN
                      CALL fl_ayuda_lineas_rep(vg_codcia)
@@ -442,11 +435,10 @@ CONSTRUCT BY NAME expr_sql
                      END IF
                 END IF
                 LET int_flag = 0
-		
 END CONSTRUCT
 IF int_flag THEN
 	CLEAR FORM
-	CALL control_display_botones()
+	CALL control_DISPLAY_botones()
 	IF vm_num_rows >0 THEN
 		CALL lee_muestra_registro(vm_rows[vm_row_current].*)
 	END IF
@@ -480,17 +472,18 @@ FOREACH q_conf INTO vm_rows[vm_num_rows].*
 END FOREACH
 LET vm_num_rows = vm_num_rows - 1
 IF vm_num_rows = 0 AND  vm_flag_mant <> 'M' AND vm_flag_mant <> 'I' THEN
-	CALL fgl_winmessage(vg_producto, 'No se encontraron registros con el criterio indicado', 'exclamation')
+	--CALL fgl_winmessage(vg_producto,'No se encontraron registros con el criterio indicado', 'exclamation')
+	CALL fl_mostrar_mensaje('No se encontraron registros con el criterio indicado', 'exclamation')
 	LET vm_row_current = 0
 	CALL muestra_contadores()
         CLEAR FORM
-	CALL control_display_botones()
+	CALL control_DISPLAY_botones()
         RETURN
 END IF
 
 LET vm_row_current = 1
-CALL lee_muestra_registro(vm_rows[vm_row_current].*)
 CALL muestra_contadores()
+CALL lee_muestra_registro(vm_rows[vm_row_current].*)
 
 END FUNCTION
 
@@ -503,7 +496,7 @@ DEFINE r_conf 		RECORD LIKE rept007.*
 
 OPTIONS INPUT WRAP
 CLEAR FORM
-CALL control_display_botones()
+CALL control_DISPLAY_botones()
 
 INITIALIZE rm_r07.* TO NULL
 LET vm_flag_mant         = 'I'
@@ -513,7 +506,7 @@ LET rm_r07.r07_cont_cred = 'C'
 CALL lee_cabecera()
 IF int_flag THEN
 	CLEAR FORM
-	CALL control_display_botones()
+	CALL control_DISPLAY_botones()
 	IF vm_num_rows > 0 THEN
 		CALL lee_muestra_registro(vm_rows[vm_row_current].*)
 	END IF
@@ -521,8 +514,8 @@ IF int_flag THEN
 END IF
 CALL control_cargar_configuracion_descuentos()
 
-WHENEVER ERROR CONTINUE
 BEGIN WORK
+WHENEVER ERROR CONTINUE
 DECLARE q_upd2 CURSOR FOR SELECT * FROM rept007 
 	WHERE r07_compania  = vg_codcia 
 	AND   r07_linea     = rm_r07.r07_linea
@@ -531,17 +524,19 @@ DECLARE q_upd2 CURSOR FOR SELECT * FROM rept007
 	FOR   UPDATE
 OPEN q_upd2
 FETCH q_upd2 INTO r_conf.*
-WHENEVER ERROR STOP
 IF status < 0 THEN
 	ROLLBACK WORK
 	CALL fl_mensaje_bloqueo_otro_usuario()	
+	WHENEVER ERROR STOP
 	RETURN
 END IF
+WHENEVER ERROR STOP
 
 CALL lee_detalle()
 IF int_flag THEN
+	ROLLBACK WORK
 	CLEAR FORM
-	CALL control_display_botones()
+	CALL control_DISPLAY_botones()
 	IF vm_num_rows > 0 THEN
 		CALL lee_muestra_registro(vm_rows[vm_row_current].*)
 	END IF
@@ -581,12 +576,13 @@ ELSE
 	LET vm_rows[vm_num_rows].r07_moneda    = rm_r07.r07_moneda
 	LET vm_rows[vm_num_rows].r07_cont_cred = rm_r07.r07_cont_cred
 	IF arr_count() > 0 THEN
-		CALL fgl_winmessage (vg_producto,'Registro grabado Ok.','info')
+		CALL fl_mensaje_registro_ingresado()
 	ELSE 
 		LET vm_row_current = 0
-		CALL fgl_winmessage(vg_producto,'No existen Configuración de descuentos para la Línea, Moneda, Tipo Factura. ','exclamation')
+		--CALL fgl_winmessage(vg_producto,'No existen Configuración de descuentos para la Línea, Moneda, Tipo Factura. ','exclamation')
+		CALL fl_mostrar_mensaje('No existen Configuración de descuentos para la Línea, Moneda, Tipo Factura.','exclamation')
 		CLEAR FORM
-		CALL control_display_botones()
+		CALL control_DISPLAY_botones()
 	END IF
 END IF
 IF vm_num_rows > 0 THEN
@@ -605,7 +601,7 @@ DEFINE  serial          LIKE rept007.r07_serial
 OPTIONS INPUT WRAP
 LET int_flag = 0
 INPUT BY NAME rm_r07.r07_linea, rm_r07.r07_moneda, rm_r07.r07_cont_cred
-              WITHOUT DEFAULTS
+	WITHOUT DEFAULTS
         ON KEY(INTERRUPT)
                  IF field_touched( rm_r07.r07_linea, rm_r07.r07_moneda)
                  THEN
@@ -615,13 +611,13 @@ INPUT BY NAME rm_r07.r07_linea, rm_r07.r07_moneda, rm_r07.r07_cont_cred
                         IF resp = 'Yes' THEN
                           	 LET int_flag = 1
                            	CLEAR FORM
-				CALL control_display_botones()
+				CALL control_DISPLAY_botones()
                            	RETURN
                         END IF
                 ELSE
                         IF vm_flag_mant = 'I' THEN
                                 CLEAR FORM
-				CALL control_display_botones()
+				CALL control_DISPLAY_botones()
                         END IF
                         RETURN
                 END IF
@@ -651,8 +647,8 @@ INPUT BY NAME rm_r07.r07_linea, rm_r07.r07_moneda, rm_r07.r07_cont_cred
                     CALL fl_lee_linea_rep(vg_codcia, rm_r07.r07_linea)
                                 RETURNING rm_r03.*
                         IF rm_r03.r03_codigo IS NULL THEN
-                                CALL fgl_winmessage (vg_producto, 'La Línea de v
-enta no existe en la compañía ','exclamation')
+                                --CALL fgl_winmessage(vg_producto,'La Línea de venta no existe en la compañía ','exclamation')
+				CALL fl_mostrar_mensaje('La Línea de venta no existe en la compañía.','exclamation')
                                 NEXT FIELD r07_linea
                         END IF
                    DISPLAY rm_r03.r03_nombre TO nom_linea
@@ -664,21 +660,19 @@ enta no existe en la compañía ','exclamation')
                 	CALL fl_lee_moneda(rm_r07.r07_moneda) 
 				RETURNING rm_g13.*
                    	IF rm_g13.g13_moneda IS NULL THEN
-                        	CALL fgl_winmessage(vg_producto,
-				                    'Moneda no existe',
-                                               	    'exclamation')
+                        	--CALL fgl_winmessage(vg_producto,'Moneda no existe.','exclamation')
+				CALL fl_mostrar_mensaje('Moneda no existe.','exclamation')
                         	NEXT FIELD r07_moneda
                    	END IF
                    	IF rm_g13.g13_estado = 'B' THEN
-                        	CALL fgl_winmessage(vg_producto,
-						    'Moneda está bloqueada',
-                                                    'exclamation')
+                        	CALL fl_mensaje_estado_bloqueado()
                         	NEXT FIELD r07_moneda
                    	END IF
 			IF rm_r07.r07_moneda <> rg_gen.g00_moneda_base AND
 			   rm_r07.r07_moneda <> rg_gen.g00_moneda_alt
 			   THEN			   
-				CALL fgl_winmessage(vg_producto,'La moneda ingresada no está configurada como moneda base ni alterna. ','exclamation')
+				--CALL fgl_winmessage(vg_producto,'La moneda ingresada no está configurada como moneda base ni alterna. ','exclamation')
+				CALL fl_mostrar_mensaje('La moneda ingresada no está configurada como moneda base ni alterna.','exclamation')
 				NEXT FIELD r07_moneda
 			END IF
                    	DISPLAY rm_g13.g13_nombre TO nom_mon
@@ -705,7 +699,7 @@ LET int_flag   = 0
 CALL set_count(i)
 INPUT ARRAY r_detalle  WITHOUT DEFAULTS FROM r_detalle.*
 	BEFORE INPUT
-		CALL dialog.keysetlabel('INSERT','')
+		--#CALL dialog.keysetlabel('INSERT','')
         ON KEY(INTERRUPT)
 		LET int_flag = 0
                 CALL fl_mensaje_abandonar_proceso()   
@@ -715,7 +709,7 @@ INPUT ARRAY r_detalle  WITHOUT DEFAULTS FROM r_detalle.*
                 	LET int_flag = 1
 			IF vm_num_rows = 0 THEN
 		            	CLEAR FORM
-				CALL control_display_botones()
+				CALL control_DISPLAY_botones()
 			END IF
 			EXIT INPUT
 		END IF
@@ -738,7 +732,8 @@ INPUT ARRAY r_detalle  WITHOUT DEFAULTS FROM r_detalle.*
 				IF r_detalle[i].r07_monto_ini >=
 				   r_detalle[i].r07_monto_fin 
 				   THEN
-					CALL fgl_winmessage(vg_producto,'El monto inicial debe ser menor al monto final. ','exclamation')
+					--CALL fgl_winmessage(vg_producto,'El monto inicial debe ser menor al monto final. ','exclamation')
+					CALL fl_mostrar_mensaje('El monto inicial debe ser menor al monto final.','exclamation')
 					NEXT FIELD r07_monto_ini
 				END IF 
 			END IF
@@ -749,7 +744,8 @@ INPUT ARRAY r_detalle  WITHOUT DEFAULTS FROM r_detalle.*
 				   r_detalle[k].r07_monto_fin AND 
 				   i <> k 
 				   THEN
-					CALL fgl_winmessage(vg_producto,'No puede ingresar un monto que se encuentre dentro de un rango ya ingresado.','exclamation')
+					--CALL fgl_winmessage(vg_producto,'No puede ingresar un monto que se encuentre dentro de un rango ya ingresado.','exclamation')
+					CALL fl_mostrar_mensaje('No puede ingresar un monto que se encuentre dentro de un rango ya ingresado.','exclamation')
 					NEXT FIELD r07_monto_ini
                			END IF
 			END FOR
@@ -766,7 +762,8 @@ INPUT ARRAY r_detalle  WITHOUT DEFAULTS FROM r_detalle.*
 			IF r_detalle[i].r07_monto_fin <= 
 			   r_detalle[i].r07_monto_ini
 			   THEN
-				CALL fgl_winmessage(vg_producto,'El monto final debe ser mayor al monto inicial. ','exclamation')
+				--CALL fgl_winmessage(vg_producto,'El monto final debe ser mayor al monto inicial. ','exclamation')
+				CALL fl_mostrar_mensaje('El monto final debe ser mayor al monto inicial. ','exclamation')
 				NEXT FIELD r07_monto_fin
 			END IF
 			FOR k = 1 TO arr_count()
@@ -776,7 +773,8 @@ INPUT ARRAY r_detalle  WITHOUT DEFAULTS FROM r_detalle.*
 				   r_detalle[k].r07_monto_fin AND 
 				   i <> k 
 				   THEN
-					CALL fgl_winmessage(vg_producto,'No puede ingresar un monto que se encuentre dentro de un rango ya ingresado.','exclamation')
+					--CALL fgl_winmessage(vg_producto,'No puede ingresar un monto que se encuentre dentro de un rango ya ingresado.','exclamation')
+					CALL fl_mostrar_mensaje('No puede ingresar un monto que se encuentre dentro de un rango ya ingresado.','exclamation')
 					NEXT FIELD r07_monto_fin
                			END IF
 			END FOR
@@ -918,8 +916,8 @@ DEFINE expr_sql		VARCHAR(100)
 DEFINE i		SMALLINT
 DEFINE r_conf	 	RECORD LIKE rept008.*
 
-WHENEVER ERROR CONTINUE
 BEGIN WORK
+WHENEVER ERROR CONTINUE
 DECLARE q_upd_4 CURSOR FOR SELECT * FROM rept008 
 	WHERE r08_compania  = vg_codcia 
 	AND   r08_rotacion     = rm_r08.r08_rotacion
@@ -929,12 +927,13 @@ DECLARE q_upd_4 CURSOR FOR SELECT * FROM rept008
 OPEN q_upd_4
 FETCH q_upd_4 INTO r_conf.*
 CLOSE q_upd_4
-WHENEVER ERROR STOP
 IF status < 0 THEN
 	ROLLBACK WORK
 	CALL fl_mensaje_bloqueo_otro_usuario()	
+	WHENEVER ERROR STOP
 	RETURN
 END IF
+WHENEVER ERROR STOP
 CALL control_cargar_configuracion_descuentos_2()
 CALL lee_detalle_2()
 LET vm_flag_mant = 'M'
@@ -957,9 +956,10 @@ IF NOT int_flag THEN
 	IF arr_count() > 0 THEN
 		CALL fl_mensaje_registro_modificado()
 	ELSE 
-		CALL fgl_winmessage(vg_producto,'Se eliminaron todas las configuracionres de descuentos para esta Línea, Moneda, y Tipo de factura.','exclamation')
+		--CALL fgl_winmessage(vg_producto,'Se eliminaron todas las configuracionres de descuentos para esta Línea, Moneda, y Tipo de factura.','exclamation')
+		CALL fl_mostrar_mensaje('Se eliminaron todas las configuracionres de descuentos para esta Línea, Moneda, y Tipo de factura.','exclamation')
 		CLEAR FORM
-		CALL control_display_botones()
+		CALL control_DISPLAY_botones()
 		LET vm_num_rows_2    = 0
 		LET vm_row_current_2 = 0
 		CALL muestra_contadores_2()
@@ -983,12 +983,11 @@ DEFINE expr_sql		VARCHAR(500)
 DEFINE query		VARCHAR(600)
 
 CLEAR FORM
-CALL control_display_botones()
+CALL control_DISPLAY_botones()
 
 LET int_flag = 0
 LET vm_flag_mant = 'C'
-CONSTRUCT BY NAME expr_sql 
-			ON r08_rotacion, r08_moneda, r08_cont_cred
+CONSTRUCT BY NAME expr_sql ON r08_rotacion, r08_moneda, r08_cont_cred
 	ON KEY(F2)
 		IF INFIELD(r08_rotacion) THEN
 			CALL fl_ayuda_clases(vg_codcia)
@@ -1014,7 +1013,7 @@ CONSTRUCT BY NAME expr_sql
 END CONSTRUCT
 IF int_flag THEN
 	CLEAR FORM
-	CALL control_display_botones()
+	CALL control_DISPLAY_botones()
 	IF vm_num_rows_2 >0 THEN
 		CALL lee_muestra_registro_2(vm_rows_2[vm_row_current_2].*)
 	END IF
@@ -1049,17 +1048,18 @@ END FOREACH
 
 LET vm_num_rows_2 = vm_num_rows_2 - 1
 IF vm_num_rows_2 = 0 AND  vm_flag_mant <> 'M' AND vm_flag_mant <> 'I' THEN
-	CALL fgl_winmessage(vg_producto, 'No se encontraron registros con el criterio indicado', 'exclamation')
+	--CALL fgl_winmessage(vg_producto,'No se encontraron registros con el criterio indicado.', 'exclamation')
+	CALL fl_mostrar_mensaje('No se encontraron registros con el criterio indicado.', 'exclamation')
 	LET vm_row_current_2 = 0
 	CALL muestra_contadores_2()
         CLEAR FORM
-	CALL control_display_botones()
+	CALL control_DISPLAY_botones()
         RETURN
 END IF
 
 LET vm_row_current_2 = 1
-CALL lee_muestra_registro_2(vm_rows_2[vm_row_current_2].*)
 CALL muestra_contadores_2()
+CALL lee_muestra_registro_2(vm_rows_2[vm_row_current_2].*)
 
 END FUNCTION
 
@@ -1072,7 +1072,7 @@ DEFINE r_conf 		RECORD LIKE rept008.*
 
 OPTIONS INPUT WRAP
 CLEAR FORM
-CALL control_display_botones()
+CALL control_DISPLAY_botones()
 
 INITIALIZE rm_r08.* TO NULL
 LET vm_flag_mant         = 'I'
@@ -1082,15 +1082,15 @@ LET rm_r08.r08_cont_cred = 'C'
 CALL lee_cabecera_2()
 IF int_flag THEN
 	CLEAR FORM
-	CALL control_display_botones()
+	CALL control_DISPLAY_botones()
 	IF vm_num_rows_2 > 0 THEN
 		CALL lee_muestra_registro(vm_rows_2[vm_row_current_2].*)
 	END IF
 	RETURN
 END IF
 
-WHENEVER ERROR CONTINUE
 BEGIN WORK
+WHENEVER ERROR CONTINUE
 DECLARE q_upd2_4 CURSOR FOR SELECT * FROM rept008 
 	WHERE r08_compania  = vg_codcia 
 	AND   r08_rotacion     = rm_r08.r08_rotacion
@@ -1099,12 +1099,13 @@ DECLARE q_upd2_4 CURSOR FOR SELECT * FROM rept008
 	FOR   UPDATE
 OPEN q_upd2_4
 FETCH q_upd2_4 INTO r_conf.*
-WHENEVER ERROR STOP
 IF status < 0 THEN
 	ROLLBACK WORK
 	CALL fl_mensaje_bloqueo_otro_usuario()	
+	WHENEVER ERROR STOP
 	RETURN
 END IF
+WHENEVER ERROR STOP
 IF NOT int_flag THEN
 	CALL lee_detalle_2()
 ELSE
@@ -1146,13 +1147,16 @@ IF NOT int_flag THEN
 	LET vm_rows_2[vm_num_rows_2].r08_moneda    = rm_r08.r08_moneda
 	LET vm_rows_2[vm_num_rows_2].r08_cont_cred = rm_r08.r08_cont_cred
 	IF arr_count() > 0 THEN
-		CALL fgl_winmessage (vg_producto,'Registro grabado Ok.','info')
+		CALL fl_mensaje_registro_ingresado()
 	ELSE 
 		LET vm_row_current_2 = 0
-		CALL fgl_winmessage(vg_producto,'No existen Configuración de descuentos para la Línea, Moneda, Tipo Factura. ','exclamation')
+		--CALL fgl_winmessage(vg_producto,'No existen Configuración de descuentos para la Línea, Moneda, Tipo Factura. ','exclamation')
+		CALL fl_mostrar_mensaje('No existen Configuración de descuentos para la Línea, Moneda, Tipo Factura. ','exclamation')
 		CLEAR FORM
-		CALL control_display_botones()
+		CALL control_DISPLAY_botones()
 	END IF
+ELSE
+	ROLLBACK WORK
 END IF
 IF vm_num_rows_2 > 0 THEN
 	CALL lee_muestra_registro_2(vm_rows_2[vm_row_current_2].*)
@@ -1170,7 +1174,7 @@ DEFINE  serial          LIKE rept008.r08_serial
 OPTIONS INPUT WRAP
 LET int_flag = 0
 INPUT BY NAME rm_r08.r08_rotacion, rm_r08.r08_moneda, rm_r08.r08_cont_cred
-              WITHOUT DEFAULTS
+	WITHOUT DEFAULTS
         ON KEY(INTERRUPT)
                  IF field_touched( rm_r08.r08_rotacion, rm_r08.r08_moneda)
                  THEN
@@ -1180,13 +1184,13 @@ INPUT BY NAME rm_r08.r08_rotacion, rm_r08.r08_moneda, rm_r08.r08_cont_cred
                         IF resp = 'Yes' THEN
                            	LET int_flag = 1
                        		CLEAR FORM
-				CALL control_display_botones()
+				CALL control_DISPLAY_botones()
                            	RETURN
                         END IF
                 ELSE
                         IF vm_flag_mant = 'I' THEN
                                 CLEAR FORM
-				CALL control_display_botones()
+				CALL control_DISPLAY_botones()
                         END IF
                         RETURN
                 END IF
@@ -1217,7 +1221,8 @@ INPUT BY NAME rm_r08.r08_rotacion, rm_r08.r08_moneda, rm_r08.r08_cont_cred
                     CALL fl_lee_indice_rotacion(vg_codcia, rm_r08.r08_rotacion)
                                 RETURNING rm_r04.*
                         IF rm_r04.r04_rotacion IS NULL THEN
-                                CALL fgl_winmessage (vg_producto, 'El Indice de Rotación no existe en la Compañía ','exclamation')
+                                --CALL fgl_winmessage (vg_producto,'El Indice de Rotación no existe en la Compañía.','exclamation')
+				CALL fl_mostrar_mensaje('El Indice de Rotación no existe en la Compañía.','exclamation')
                                 NEXT FIELD r08_rotacion
                         END IF
                    DISPLAY rm_r04.r04_nombre TO nom_rotacion
@@ -1229,21 +1234,19 @@ INPUT BY NAME rm_r08.r08_rotacion, rm_r08.r08_moneda, rm_r08.r08_cont_cred
                 	CALL fl_lee_moneda(rm_r08.r08_moneda) 
 				RETURNING rm_g13.*
                    	IF rm_g13.g13_moneda IS NULL THEN
-                        	CALL fgl_winmessage(vg_producto,
-				                    'Moneda no existe',
-                                               	    'exclamation')
+                        	--CALL fgl_winmessage(vg_producto,'Moneda no existe','exclamation')
+				CALL fl_mostrar_mensaje('Moneda no existe.','exclamation')
                         	NEXT FIELD r08_moneda
                    	END IF
                    	IF rm_g13.g13_estado = 'B' THEN
-                        	CALL fgl_winmessage(vg_producto,
-						    'Moneda está bloqueada',
-                                                    'exclamation')
+				CALL fl_mensaje_estado_bloqueado()
                         	NEXT FIELD r08_moneda
                    	END IF
 			IF rm_r08.r08_moneda <> rg_gen.g00_moneda_base AND
 			   rm_r08.r08_moneda <> rg_gen.g00_moneda_alt
 			   THEN			   
-				CALL fgl_winmessage(vg_producto,'La moneda ingresada no está configurada como moneda base ni alterna. ','exclamation')
+				--CALL fgl_winmessage(vg_producto,'La moneda ingresada no está configurada como moneda base ni alterna. ','exclamation')
+				CALL fl_mostrar_mensaje('La moneda ingresada no está configurada como moneda base ni alterna. ','exclamation')
 				NEXT FIELD r08_moneda
 			END IF
                    	DISPLAY rm_g13.g13_nombre TO nom_mon
@@ -1258,7 +1261,7 @@ END FUNCTION
 
 FUNCTION lee_detalle_2()
 DEFINE resp      			CHAR(6)
-DEFINE i,j,k,filas_max,filas_pant       	SMALLINT
+DEFINE i,j,k,filas_max,filas_pant      	SMALLINT
 
 OPTIONS 
 	INPUT WRAP,
@@ -1270,7 +1273,7 @@ LET int_flag   = 0
 CALL set_count(i)
 INPUT ARRAY r_detalle_2  WITHOUT DEFAULTS FROM r_detalle_2.*
 	BEFORE INPUT
-		CALL dialog.keysetlabel('INSERT','')
+		--#CALL dialog.keysetlabel('INSERT','')
         ON KEY(INTERRUPT)
 		LET int_flag = 0
                 CALL fl_mensaje_abandonar_proceso()   
@@ -1280,7 +1283,7 @@ INPUT ARRAY r_detalle_2  WITHOUT DEFAULTS FROM r_detalle_2.*
                 	LET int_flag = 1
 			IF vm_num_rows_2 = 0 THEN
 		            	CLEAR FORM
-				CALL control_display_botones()
+				CALL control_DISPLAY_botones()
 			END IF
 			EXIT INPUT
 		END IF
@@ -1303,7 +1306,8 @@ INPUT ARRAY r_detalle_2  WITHOUT DEFAULTS FROM r_detalle_2.*
 				IF r_detalle_2[i].r08_monto_ini >=
 				   r_detalle_2[i].r08_monto_fin 
 				   THEN
-					CALL fgl_winmessage(vg_producto,'El monto inicial debe ser menor al monto final. ','exclamation')
+					--CALL fgl_winmessage(vg_producto,'El monto inicial debe ser menor al monto final. ','exclamation')
+					CALL fl_mostrar_mensaje('El monto inicial debe ser menor al monto final.','exclamation')
 					NEXT FIELD r08_monto_ini
 				END IF 
 			END IF
@@ -1314,7 +1318,8 @@ INPUT ARRAY r_detalle_2  WITHOUT DEFAULTS FROM r_detalle_2.*
 				   r_detalle_2[k].r08_monto_fin AND 
 				   i <> k 
 				   THEN
-					CALL fgl_winmessage(vg_producto,'No puede ingresar un monto que se encuentre dentro de un rango ya ingresado.','exclamation')
+					--CALL fgl_winmessage(vg_producto,'No puede ingresar un monto que se encuentre dentro de un rango ya ingresado.','exclamation')
+					CALL fl_mostrar_mensaje('No puede ingresar un monto que se encuentre dentro de un rango ya ingresado.','exclamation')
 					NEXT FIELD r08_monto_ini
                			END IF
 			END FOR
@@ -1331,7 +1336,8 @@ INPUT ARRAY r_detalle_2  WITHOUT DEFAULTS FROM r_detalle_2.*
 			IF r_detalle_2[i].r08_monto_fin <= 
 			   r_detalle_2[i].r08_monto_ini
 			   THEN
-				CALL fgl_winmessage(vg_producto,'El monto final debe ser mayor al monto inicial. ','exclamation')
+				--CALL fgl_winmessage(vg_producto,'El monto final debe ser mayor al monto inicial. ','exclamation')
+				CALL fl_mostrar_mensaje('El monto final debe ser mayor al monto inicial. ','exclamation')
 				NEXT FIELD r08_monto_fin
 			END IF
 			FOR k = 1 TO arr_count()
@@ -1341,7 +1347,8 @@ INPUT ARRAY r_detalle_2  WITHOUT DEFAULTS FROM r_detalle_2.*
 				   r_detalle_2[k].r08_monto_fin AND 
 				   i <> k 
 				   THEN
-					CALL fgl_winmessage(vg_producto,'No puede ingresar un monto que se encuentre dentro de un rango ya ingresado.','exclamation')
+					--CALL fgl_winmessage(vg_producto,'No puede ingresar un monto que se encuentre dentro de un rango ya ingresado.','exclamation')
+					CALL fl_mostrar_mensaje('No puede ingresar un monto que se encuentre dentro de un rango ya ingresado.','exclamation')
 					NEXT FIELD r08_monto_fin
                			END IF
 			END FOR
@@ -1469,49 +1476,4 @@ FUNCTION muestra_contadores_2()
 DISPLAY "" AT 1,1
 DISPLAY vm_row_current_2, " de ", vm_num_rows_2 AT 1, 68
                                                                                 
-END FUNCTION
-
---------------------------------------------------------------------------------
-
-
-
-FUNCTION validar_parametros()
-
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 
-                            'stop')
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 
-                            'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || 
-                            vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 
-                            'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| 
-                            vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_compania <> vg_codcia THEN
-	CALL fgl_winmessage(vg_producto, 'Combinación compañía/localidad no ' ||
-                            'existe ', 'stop')
-	EXIT PROGRAM
-END IF
-
 END FUNCTION

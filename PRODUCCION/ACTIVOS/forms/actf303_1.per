@@ -1,0 +1,105 @@
+DATABASE aceros
+SCREEN
+{
+                Periodo: [c000] - [c0]            [c001] - [c1]
+
+              Localidad: [c02] [c003                          ]
+        Grupo de Activo: [c04] [c005                          ]
+         Tipo de Activo: [c06] [c007                          ]
+
+                 Estado:   [c] [c008                          ]
+ [c046                                          ]          [c010 ] de [c011 ]
+ [c2|c3|c4 |c020  |d|c021         |c022          |c023         |c024         ]
+[c5|c6|c7 |c030  |e|c031         |c032          |c033         |c034         ]
+[c5|c6|c7 |c030  |e|c031         |c032          |c033         |c034         ]
+[c5|c6|c7 |c030  |e|c031         |c032          |c033         |c034         ]
+[c5|c6|c7 |c030  |e|c031         |c032          |c033         |c034         ]
+[c5|c6|c7 |c030  |e|c031         |c032          |c033         |c034         ]
+[c5|c6|c7 |c030  |e|c031         |c032          |c033         |c034         ]
+[c5|c6|c7 |c030  |e|c031         |c032          |c033         |c034         ]
+[c5|c6|c7 |c030  |e|c031         |c032          |c033         |c034         ]
+[c5|c6|c7 |c030  |e|c031         |c032          |c033         |c034         ]
+[c5|c6|c7 |c030  |e|c031         |c032          |c033         |c034         ]
+          Totales: [c040         |c041          |c042         |c043         ]
+ Valor Tot.Libros: [c044         ]         Valor Act. Libros: [c045         ]
+}
+TABLES
+actt001
+actt002
+actt006
+actt010
+gent002
+ATTRIBUTES
+c000 = FORMONLY.anio_ini TYPE SMALLINT NOT NULL, REQUIRED, AUTONEXT, REVERSE,
+	FORMAT = '&&&&', INCLUDE = (1950 TO 2099);
+c0   = FORMONLY.mes_ini TYPE SMALLINT NOT NULL, REQUIRED, AUTONEXT, REVERSE,
+	FORMAT = '&&', INCLUDE = (1 TO 12);
+c001 = FORMONLY.anio_fin TYPE SMALLINT NOT NULL, REQUIRED, AUTONEXT, REVERSE,
+	FORMAT = '&&&&', INCLUDE = (1950 TO 2099);
+c1   = FORMONLY.mes_fin TYPE SMALLINT NOT NULL, REQUIRED, AUTONEXT, REVERSE,
+	FORMAT = '&&', INCLUDE = (1 TO 12);
+c02  = FORMONLY.a10_localidad, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = gent002.g02_nombre, NOENTRY, UPSHIFT;
+c04  = FORMONLY.a10_grupo_act, AUTONEXT, UPSHIFT,
+	WIDGET  = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c005 = actt001.a01_nombre, NOENTRY, UPSHIFT;
+c06  = FORMONLY.a10_tipo_act, AUTONEXT, UPSHIFT,
+	WIDGET  = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c007 = actt002.a02_nombre, NOENTRY, UPSHIFT;
+c    = actt010.a10_estado, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Presione F2 y escoja el estado del bien (ACTIVO FIJO)';
+c008 = actt006.a06_descripcion, NOENTRY, UPSHIFT, REVERSE;
+
+c010 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c011 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+
+c2   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c3   = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c4   = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c020 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+d    = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c021 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c022 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+c023 = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22';
+c024 = FORMONLY.tit_col9, WIDGET = 'BUTTON', CONFIG = 'F23';
+
+c5   = FORMONLY.tit_localidad, NOENTRY, UPSHIFT, FORMAT = '&&';
+c6   = FORMONLY.grupo_act, NOENTRY, UPSHIFT, FORMAT = '&&';
+c7   = FORMONLY.tipo_act, NOENTRY, UPSHIFT;
+c030 = actt010.a10_codigo_bien, NOENTRY, UPSHIFT;
+e    = FORMONLY.estado, NOENTRY, UPSHIFT;
+c031 = actt010.a10_valor_mb, NOENTRY, UPSHIFT, FORMAT = '##,###,##&.##';
+c032 = FORMONLY.tot_dep_ant, NOENTRY, UPSHIFT, FORMAT = '((,(((,((&.##)';
+c033 = FORMONLY.tot_dep_act, NOENTRY, UPSHIFT, FORMAT = '##,###,##&.##';
+c034 = actt010.a10_tot_dep_mb, NOENTRY, UPSHIFT, FORMAT = '##,###,##&.##';
+
+c040 = FORMONLY.valor_mb_g, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '##,###,##&.##';
+c041 = FORMONLY.tot_dep_ant_g, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '((,(((,((&.##)';
+c042 = FORMONLY.tot_dep_act_g, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '##,###,##&.##';
+c043 = FORMONLY.tot_dep_mb_g, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '##,###,##&.##';
+
+c044 = FORMONLY.valor_actual, NOENTRY, UPSHIFT, FORMAT = '##,###,##&.##',
+	COLOR = BLUE;
+c045 = FORMONLY.valor_libros, NOENTRY, UPSHIFT, FORMAT = '##,###,##&.##',
+	COLOR = BLUE;
+c046 = FORMONLY.descripcion, NOENTRY, UPSHIFT;
+END
+KEYS
+F5  = 'El Bien'
+F6  = 'Orden Compra'
+F7  = 'Datos'
+F8  = 'Movimientos'
+F9  = 'Movimientos Bien'
+F10 = 'Transacciones'
+F11 = 'Transacciones DP'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_detalle[10] (tit_localidad, grupo_act,tipo_act,a10_codigo_bien,
+				estado, a10_valor_mb, tot_dep_ant, tot_dep_act,
+				a10_tot_dep_mb)

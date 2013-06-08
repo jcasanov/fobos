@@ -1,9 +1,9 @@
-database diteca
-screen size 24 by 80
+DATABASE aceros
+SCREEN size 24 by 80
 {
 
 
-           Modelo de Vehículo: [f001           ]
+                       Modelo: [f001           ]
 
 		        Línea: [f002 ] [a1                          ]
                    Dificultad: [f3]
@@ -12,15 +12,14 @@ screen size 24 by 80
 	     Fecha de Ingreso: [f005               ]
 
 }
-end
-tables
+TABLES
 talt004
-attributes
+ATTRIBUTES
 f001 = talt004.t04_modelo, REVERSE, UPSHIFT, 
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 f002 = talt004.t04_linea, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-a1   = formonly.nom_linea TYPE VARCHAR;
+a1   = FORMONLY.nom_linea TYPE VARCHAR;
 f3   = talt004.t04_dificultad, REVERSE, 
 	COMMENT = ' Grado de dificultad por modelo de vehículo entre 1-10 ';
 f004 = talt004.t04_usuario, REVERSE, NOENTRY;

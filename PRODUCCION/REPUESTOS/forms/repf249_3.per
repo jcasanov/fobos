@@ -1,0 +1,16 @@
+DATABASE aceros
+SCREEN
+{
+        DIGITE BODEGA PARA CARGA EN STOCK
+        --------------------------------
+
+ Bodega: [c0] [c000                          ]
+
+}
+TABLES
+rept002
+ATTRIBUTES
+c0   = FORMONLY.vm_bod_aj TYPE CHAR NOT NULL, REQUIRED, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c000 = rept002.r02_nombre, NOENTRY, UPSHIFT, REVERSE;
+END

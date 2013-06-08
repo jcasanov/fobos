@@ -9,7 +9,6 @@
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
 DEFINE rm_g01		RECORD LIKE gent001.*
-
 DEFINE rm_par RECORD 
 	anho		SMALLINT,
 	mes		SMALLINT,
@@ -48,24 +47,23 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/cxpp400.error')
-CALL fgl_init4js()
+CALL startlog('../logs/cxpp400.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN          -- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 
-		'Número de parámetros incorrecto', 
-		'stop')
+	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto','stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
-LET vg_base     = arg_val(1)
-LET vg_modulo   = arg_val(2)
-LET vg_codcia   = arg_val(3)
-LET vg_codloc   = arg_val(4)
+LET vg_base    = arg_val(1)
+LET vg_modulo  = arg_val(2)
+LET vg_codcia  = arg_val(3)
+LET vg_codloc  = arg_val(4)
 LET vg_proceso = 'cxpp400'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -74,9 +72,12 @@ END MAIN
 
 
 FUNCTION funcion_master()
-
 DEFINE i		SMALLINT
 DEFINE r_g13		RECORD LIKE gent013.*
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
 CALL fl_nivel_isolation()
 
@@ -100,12 +101,24 @@ LET num_ord = 2
 LET rm_ord[1].col      = rm_campos[1].nombre
 LET rm_ord[2].col      = rm_campos[2].nombre
 
-OPEN WINDOW w_mas AT 3,2 WITH 14 ROWS, 80 COLUMNS
-	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE 0, 
-		BORDER, MESSAGE LINE LAST - 2)
-OPTIONS INPUT WRAP,
-	ACCEPT KEY	F12
-OPEN FORM f_rep FROM "../forms/cxpf400_1"
+LET lin_menu = 0
+LET row_ini  = 3
+LET num_rows = 14
+LET num_cols = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW w_mas AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
+	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE lin_menu,
+		  MESSAGE LINE LAST - 1, BORDER) 
+IF vg_gui = 1 THEN
+	OPEN FORM f_rep FROM "../forms/cxpf400_1"
+ELSE
+	OPEN FORM f_rep FROM "../forms/cxpf400_1c"
+END IF
 DISPLAY FORM f_rep
 
 FOR i = 1 TO num_ord
@@ -123,7 +136,7 @@ END FUNCTION
 
 FUNCTION control_reporte()
 DEFINE i,col		SMALLINT
-DEFINE query		VARCHAR(1000)
+DEFINE query		CHAR(1000)
 DEFINE comando		VARCHAR(100)
 DEFINE data_found	SMALLINT
 
@@ -142,6 +155,10 @@ END RECORD
 
 INITIALIZE r_det.* TO NULL 
 
+DISPLAY BY NAME rm_par.*
+IF vg_gui = 0 THEN
+	CALL muestra_tipovcto(rm_par.tipo_vcto)
+END IF
 WHILE TRUE
 	CALL lee_parametros()
 	IF int_flag THEN
@@ -172,9 +189,6 @@ WHILE TRUE
 	START REPORT rep_cartera TO PIPE comando
 	FOREACH	q_deto INTO r_det.*
 		LET data_found = 1
-		IF r_det.saldo =  0 THEN
-			CONTINUE FOREACH
-		END IF
 		OUTPUT TO REPORT rep_cartera(r_det.*)
 	END FOREACH
 	FINISH REPORT rep_cartera
@@ -190,20 +204,19 @@ END FUNCTION
 
 FUNCTION lee_parametros()
 DEFINE i,j,l		SMALLINT
-
 DEFINE dummy		LIKE gent011.g11_tiporeg
-
 DEFINE r_g12		RECORD LIKE gent012.*
 DEFINE r_g13		RECORD LIKE gent013.*
 
 LET INT_FLAG   = 0
-INPUT BY NAME rm_par.* WITHOUT DEFAULTS
+INPUT BY NAME rm_par.anho, rm_par.mes, rm_par.g13_moneda, rm_par.tipoprov,
+	rm_par.tipo_vcto, rm_par.dias_ini, rm_par.dias_fin
+	WITHOUT DEFAULTS
 	ON KEY(INTERRUPT)
-		IF NOT FIELD_TOUCHED(rm_par.*) THEN
-			EXIT PROGRAM
-		END IF
 		LET INT_FLAG = 1 
 		RETURN
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
 	ON KEY(F2)
 		IF INFIELD(g13_moneda) THEN
 			CALL fl_ayuda_monedas() RETURNING r_g13.g13_moneda, 
@@ -228,13 +241,15 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 			END IF
 		END IF
 		LET INT_FLAG = 0
+	BEFORE INPUT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 	AFTER FIELD g13_moneda
 		IF rm_par.g13_moneda IS NOT NULL THEN
 			CALL fl_lee_moneda(rm_par.g13_moneda) RETURNING r_g13.*
 			IF r_g13.g13_moneda IS NULL THEN
-				CALL fgl_winmessage(vg_producto, 
-					'Moneda no existe.', 
-					'exclamation')
+				--CALL fgl_winmessage(vg_producto,'Moneda no existe.','exclamation')
+				CALL fl_mostrar_mensaje('Moneda no existe.','exclamation')
 				NEXT FIELD g13_moneda
 			END IF
 			LET rm_par.g13_nombre = r_g13.g13_nombre
@@ -248,9 +263,8 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 			CALL fl_lee_subtipo_entidad('TP', rm_par.tipoprov)
 				RETURNING r_g12.*
 			IF r_g12.g12_subtipo IS NULL THEN
-				CALL fgl_winmessage(vg_producto, 
-					'Tipo proveedor no existe.', 
-					'exclamation')
+				--CALL fgl_winmessage(vg_producto,'Tipo proveedor no existe.','exclamation')
+				CALL fl_mostrar_mensaje('Tipo proveedor no existe.','exclamation')
 				NEXT FIELD tipoprov
 			END IF
 			LET rm_par.n_tipoprov = r_g12.g12_nombre
@@ -271,19 +285,23 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 				NEXT FIELD NEXT
 			END IF
 		END IF
+	AFTER FIELD tipo_vcto
+		IF vg_gui = 0 THEN
+			IF rm_par.tipo_vcto IS NOT NULL THEN
+				CALL muestra_tipovcto(rm_par.tipo_vcto)
+			ELSE
+				CLEAR tit_tipo_vcto
+			END IF
+		END IF
 	AFTER INPUT
 		IF rm_par.dias_ini IS NOT NULL AND rm_par.dias_fin IS NULL THEN
-			CALL fgl_winmessage(vg_producto,
-				'Si ingresa un rango de días debe ingresar ' ||
-				'ambos valores.',
-				'exclamation')
+			--CALL fgl_winmessage(vg_producto,'Si ingresa un rango de días debe ingresar ambos valores.','exclamation')
+			CALL fl_mostrar_mensaje('Si ingresa un rango de días debe ingresar ambos valores.','exclamation')
 			CONTINUE INPUT
 		END IF
 		IF rm_par.dias_fin IS NOT NULL AND rm_par.dias_ini IS NULL THEN
-			CALL fgl_winmessage(vg_producto,
-				'Si ingresa un rango de días debe ingresar ' ||
-				'ambos valores.',
-				'exclamation')
+			--CALL fgl_winmessage(vg_producto,'Si ingresa un rango de días debe ingresar ambos valores.','exclamation')
+			CALL fl_mostrar_mensaje('Si ingresa un rango de días debe ingresar ambos valores.','exclamation')
 			CONTINUE INPUT
 		END IF
 END INPUT
@@ -293,8 +311,7 @@ END FUNCTION
 
 
 FUNCTION prepare_query_cxpt050()
-
-DEFINE query	 	VARCHAR(1100)
+DEFINE query	 	CHAR(1100)
 DEFINE expr_tipoprov	VARCHAR(30)
 DEFINE expr_vcto	VARCHAR(30)
 DEFINE expr_dias	VARCHAR(60)
@@ -344,8 +361,7 @@ END FUNCTION
 
 
 FUNCTION prepare_query_cxpt020()
-
-DEFINE query	 	VARCHAR(1000)
+DEFINE query	 	CHAR(1000)
 DEFINE expr_tipoprov	VARCHAR(30)
 DEFINE expr_vcto	VARCHAR(30)
 DEFINE expr_dias	VARCHAR(60)
@@ -393,10 +409,8 @@ END FUNCTION
 
 
 FUNCTION full_query(query)
-
-DEFINE query		VARCHAR(1000)
+DEFINE query		CHAR(1000)
 DEFINE order_clause	VARCHAR(150)
-
 DEFINE i		SMALLINT
 DEFINE j		SMALLINT
 
@@ -418,7 +432,7 @@ FOR i = 1 TO num_ord
 	END FOR
 END FOR
 
-LET query = query || order_clause CLIPPED
+LET query = query CLIPPED || order_clause CLIPPED
 
 RETURN query
 
@@ -437,24 +451,24 @@ DEFINE num_doc		LIKE cxpt020.p20_num_doc
 DEFINE dividendo	LIKE cxpt020.p20_dividendo
 DEFINE fecha_emi	LIKE cxpt020.p20_fecha_emi
 DEFINE fecha_vcto	LIKE cxpt020.p20_fecha_vcto
-DEFINE antiguedad	INTEGER
+DEFINE antiguedad	SMALLINT
 DEFINE saldo		LIKE cxpt020.p20_saldo_cap
-
 DEFINE usuario		VARCHAR(19,15)
 DEFINE titulo		VARCHAR(80)
 DEFINE modulo		VARCHAR(40)
 DEFINE i,long		SMALLINT
 
 OUTPUT
-	TOP    MARGIN	vm_top
-	LEFT   MARGIN	vm_left
-	RIGHT  MARGIN	vm_right
-	BOTTOM MARGIN	vm_bottom
-	PAGE   LENGTH	vm_page
+	TOP    MARGIN	1
+	LEFT   MARGIN	2
+	RIGHT  MARGIN	132
+	BOTTOM MARGIN	2
+	PAGE   LENGTH	66
+
 FORMAT
 PAGE HEADER
-	print 'E'; print '&l26A';	-- Indica que voy a trabajar con hojas A4
-	print '&k4S'	                -- Letra (12 cpi)
+	--#print 'E'; --#print '&l26A';	-- Indica que voy a trabajar con hojas A4
+	--#print '&k4S'	                -- Letra (12 cpi)
 	LET modulo  = "Módulo: Tesorería"
 	LET long    = LENGTH(modulo)
 	LET usuario = 'Usuario: ', vg_usuario
@@ -485,16 +499,16 @@ PAGE HEADER
 		END IF
 	END IF
 	
-	IF rm_par.tipoprov IS NOT NULL THEN
+	--#IF rm_par.tipoprov IS NOT NULL THEN
 		PRINT COLUMN 15, "** Tipo de Proveedor: ", rm_par.n_tipoprov
-	END IF
+	--#END IF
 	
 	SKIP 1 LINES
 	PRINT COLUMN 01, "Fecha de Impresión: ", TODAY USING "dd-mm-yyyy", 
 	                 1 SPACES, TIME,
 	      COLUMN 68, usuario
 
-	print '&k2S'	                -- Letra condensada (16 cpi)
+	--#print '&k2S'	                -- Letra condensada (16 cpi)
 	
 	PRINT COLUMN 1,   "Proveedor",
 	      COLUMN 44,  "Ord. C.",
@@ -513,9 +527,8 @@ PAGE HEADER
 	      COLUMN 112, "----------------"
 
 ON EVERY ROW
-
 	PRINT COLUMN 1,   fl_justifica_titulo('D', codprov, 6) CLIPPED,
-			  ' ', fl_justifica_titulo('I', nomprov[1,35], 35) CLIPPED,
+			  ' ', fl_justifica_titulo('I', nomprov, 35) CLIPPED,
 	      COLUMN 44,  fl_justifica_titulo('D', numero_oc, 6) CLIPPED,
 	      COLUMN 52,  tipo_doc, '-', 
 	      		  fl_justifica_titulo('I', num_doc, 15) CLIPPED, '-', 
@@ -528,19 +541,18 @@ ON EVERY ROW
 ON LAST ROW
 	NEED 2 LINES
 	PRINT COLUMN 112, "------------------"
-	PRINT COLUMN 112, SUM(saldo) USING "#,###,###,##&.##", 'E' 
+	PRINT COLUMN 112, SUM(saldo) USING "#,###,###,##&.##"
+			--#, 'E' 
 
 END REPORT
 
 
 
 FUNCTION ordenar_por()
-
 DEFINE i		SMALLINT
 DEFINE j		SMALLINT
 DEFINE asc_ant		CHAR
 DEFINE desc_ant		CHAR
-
 DEFINE campo		VARCHAR(20)
 DEFINE col_ant		VARCHAR(20)
 
@@ -550,6 +562,8 @@ OPTIONS
 
 CALL set_count(num_ord)
 INPUT ARRAY rm_ord WITHOUT DEFAULTS FROM rm_ord.* 
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
 	ON KEY(F2) 
 		IF INFIELD(col) THEN
 			CALL ayuda_campos() RETURNING campo
@@ -559,15 +573,16 @@ INPUT ARRAY rm_ord WITHOUT DEFAULTS FROM rm_ord.*
 			END IF
 		END IF
 	BEFORE INPUT
-		CALL dialog.keysetlabel('INSERT', '')
-		CALL dialog.keysetlabel('DELETE', '')
+		--#CALL dialog.keysetlabel('INSERT', '')
+		--#CALL dialog.keysetlabel('DELETE', '')
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 	BEFORE ROW
 		LET i = arr_curr()
 	AFTER FIELD col
 		IF rm_ord[i].col IS NULL THEN
-			CALL fgl_winmessage(vg_producto,
-				'Debe elegir una columna.',
-				'exclamation')
+			--CALL fgl_winmessage(vg_producto,'Debe elegir una columna.','exclamation')
+			CALL fl_mostrar_mensaje('Debe elegir una columna.','exclamation')
 			NEXT FIELD col	
 		END IF
 		INITIALIZE campo TO NULL
@@ -578,9 +593,8 @@ INPUT ARRAY rm_ord WITHOUT DEFAULTS FROM rm_ord.*
 			END IF
 		END FOR
 		IF campo IS NULL THEN
-			CALL fgl_winmessage(vg_producto,
-				'Campo no existe.',
-				'exclamation')
+			--CALL fgl_winmessage(vg_producto,'Campo no existe.','exclamation')
+			CALL fl_mostrar_mensaje('Campo no existe.','exclamation')
 			NEXT FIELD col
 		END IF
 		DISPLAY rm_ord[i].col TO rm_ord[i].col
@@ -610,10 +624,8 @@ INPUT ARRAY rm_ord WITHOUT DEFAULTS FROM rm_ord.*
 		FOR i = 1 TO num_ord 
 			FOR j = 1 TO num_ord  
 				IF j <> i AND rm_ord[j].col = rm_ord[i].col THEN
-					CALL fgl_winmessage(vg_producto,
-						'No puede ordenar dos veces ' ||
-						'sobre el mismo campo.',
-						'exclamation')
+					--CALL fgl_winmessage(vg_producto,'No puede ordenar dos veces sobre el mismo campo.','exclamation')
+					CALL fl_mostrar_mensaje('No puede ordenar dos veces sobre el mismo campo.','exclamation')
 					CONTINUE INPUT
 				END IF
 			END FOR
@@ -640,7 +652,6 @@ END FUNCTION
 
 
 FUNCTION ayuda_campos()
-
 DEFINE rh_campos	ARRAY[11] OF VARCHAR(20)
 DEFINE i                SMALLINT
 DEFINE filas_max        SMALLINT        ## No. elementos del arreglo
@@ -652,9 +663,15 @@ FOR i = 1 TO num_campos
 END FOR
 
 LET filas_max  = 100
-OPEN WINDOW wh AT 06,15 WITH FORM '../forms/cxpf400_2'
+OPEN WINDOW wh AT 06, 15 WITH 08 ROWS, 25 COLUMNS
         ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST -1, MESSAGE LINE LAST,
                    BORDER)
+IF vg_gui = 1 THEN
+	OPEN FORM f_400_2 FROM '../forms/cxpf400_2'
+ELSE
+	OPEN FORM f_400_2 FROM '../forms/cxpf400_2c'
+END IF
+DISPLAY FORM f_400_2
 LET filas_pant = fgl_scr_size("rh_campos")
 
 CALL set_count(num_campos)
@@ -662,9 +679,14 @@ LET int_flag = 0
 DISPLAY ARRAY rh_campos TO rh_campos.*
         ON KEY(RETURN)
                 EXIT DISPLAY
-	BEFORE ROW
-		LET j = arr_curr()
-		MESSAGE  j, ' de ', num_campos
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
+	--#BEFORE DISPLAY
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
+	--#BEFORE ROW
+		--#LET j = arr_curr()
+		--#MESSAGE  j, ' de ', num_campos
 END DISPLAY
 CLOSE WINDOW wh
 IF int_flag THEN
@@ -678,33 +700,32 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION llamar_visor_teclas()
+DEFINE a		CHAR(1)
 
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
+IF vg_gui = 0 THEN
+	CALL fl_visor_teclas_caracter() RETURNING int_flag 
+	LET a = fgl_getkey()
+	CLOSE WINDOW w_tf
+	LET int_flag = 0
 END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
+
+END FUNCTION
+
+
+
+FUNCTION muestra_tipovcto(tipovcto)
+DEFINE tipovcto		CHAR(1)
+
+CASE tipovcto
+	WHEN 'P'
+		DISPLAY 'POR VENCER' TO tit_tipo_vcto
+	WHEN 'V'
+		DISPLAY 'VENCIDOS' TO tit_tipo_vcto
+	WHEN 'T'
+		DISPLAY 'T O D O S' TO tit_tipo_vcto
+	OTHERWISE
+		CLEAR tipo_vcto, tit_tipo_vcto
+END CASE
 
 END FUNCTION

@@ -1,5 +1,5 @@
-database diteca
-screen
+DATABASE aceros
+SCREEN
 {
 
 
@@ -15,15 +15,15 @@ Actualiza Estadísticas: [d]
       Fecha de Ingreso: [f002               ]
 }
 end
-tables
+TABLES
 gent021
-attributes
+ATTRIBUTES
 a0   = gent021.g21_cod_tran, REVERSE, UPSHIFT, AUTONEXT,
 	WIDGET = 'FIELD_BMP', CONFIG  = 'lista.bmp F2';
 f000 = gent021.g21_nombre, REVERSE, UPSHIFT;
 a    = gent021.g21_estado,REVERSE, UPSHIFT, NOENTRY,
 	 COMMENT = 'A Activo, B Bloqueado';
-aa   = formonly.tit_estado TYPE VARCHAR, UPSHIFT;
+aa   = FORMONLY.tit_estado TYPE VARCHAR, UPSHIFT;
 b    = gent021.g21_tipo, REVERSE, AUTONEXT, REQUIRED, WIDGET = 'RADIO', 
 	CONFIG = 'I Ingreso E Egreso T Transferencia C Costear';
 c    = gent021.g21_calc_costo, REVERSE, REQUIRED, DEFAULT = 'N',
@@ -32,7 +32,7 @@ d    = gent021.g21_act_estad, REVERSE, REQUIRED, DEFAULT = 'N',
 	WIDGET = 'CHECK', CONFIG = 'S N ACKNOWLEDGE'; 
 a1   = gent021.g21_codigo_dev, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG  = 'lista.bmp F2';
-aa1  = formonly.nom_dev TYPE VARCHAR, UPSHIFT, NOENTRY, SCROLL;
+aa1  = FORMONLY.nom_dev TYPE VARCHAR, UPSHIFT, NOENTRY, SCROLL;
 f001 = gent021.g21_usuario, REVERSE, NOENTRY;
 f002 = gent021.g21_fecing, REVERSE, NOENTRY;
 end

@@ -1,58 +1,56 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
+  [c0         |c1    |c2            |c3            |c4            |c5      |  
+ [a0         |a1    |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1    |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1    |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1    |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1    |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1    |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1    |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1    |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1    |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1    |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1    |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1    |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1    |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1    |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1    |a2            |a3            |a4            |a5      ][a]
 
-        Moneda: [c1]   [c002           ]             Estado: [c005         ]    
-  Rango Fechas: [c003      ] - [c004      ]
-      Vendedor: [c05]  [c006                         ]
-
- [c010      |c011  |c012                       |c13|c014      |c015           ]
-[c020      |c021  |c022                       |c23|c024      |c025           ]
-[c020      |c021  |c022                       |c23|c024      |c025           ]
-[c020      |c021  |c022                       |c23|c024      |c025           ]
-[c020      |c021  |c022                       |c23|c024      |c025           ]
-[c020      |c021  |c022                       |c23|c024      |c025           ]
-[c020      |c021  |c022                       |c23|c024      |c025           ]
-[c020      |c021  |c022                       |c23|c024      |c025           ]
-[c020      |c021  |c022                       |c23|c024      |c025           ]
-[c020      |c021  |c022                       |c23|c024      |c025           ]
-[c020      |c021  |c022                       |c23|c024      |c025           ]
-[c020      |c021  |c022                       |c23|c024      |c025           ]
-[c020      |c021  |c022                       |c23|c024      |c025           ]
-[c020      |c021  |c022                       |c23|c024      |c025           ]
-                                                             [c030           ]
+             [a6                                 ]
 }
 TABLES
-rept021
-rept022
+	rept023
 ATTRIBUTES
-c1   = r21_moneda, UPSHIFT, AUTONEXT, REVERSE, WIDGET = 'FIELD_BMP',
-	CONFIG = 'lista.bmp F2';
-c002 = formonly.tit_moneda, NOENTRY, REVERSE;
-c003 = formonly.fecha_ini TYPE DATE, FORMAT = 'dd-mm-yyyy', REVERSE, REQUIRED,
-       COMMENTS = 'Ingrese fecha en formato: dd-mm-aaaa';
-c004 = formonly.fecha_fin TYPE DATE, FORMAT = 'dd-mm-yyyy', REVERSE, REQUIRED,
-       COMMENTS = 'Ingrese fecha en formato: dd-mm-aaaa';
-c005 = formonly.estado, REVERSE, WIDGET = 'RADIO', DEFAULT='T', 
-	   CONFIG = 'T Todas A Aprobadas S "Sin aprobar" F Facturadas';
-c05  = formonly.r21_vendedor, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c006 = formonly.tit_vend, NOENTRY;
-c010 = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-c011 = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-c012 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
-c13  = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
-c014 = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
-c015 = formonly.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
-c020 = formonly.fecha TYPE DATE, FORMAT = 'dd-mm-yyyy';
-c021 = r21_numprof;
-c022 = r21_nomcli;
-c23  = formonly.siglas_vend;
-c024 = formonly.fecha_max TYPE DATE, FORMAT = 'dd-mm-yyyy';
-c025 = r21_tot_neto, FORMAT = '####,###,##&.##';
-c030 = formonly.tot_prof, FORMAT = '####,###,##&.##', REVERSE;
 
-INSTRUCTIONS
+a0  = FORMONLY.tit_estado TYPE VARCHAR, REVERSE, NOENTRY, OPTIONS = '-nolist';
+a1  = FORMONLY.num_preventa TYPE INTEGER, REVERSE, NOENTRY, OPTIONS = '-nolist';
+a2  = FORMONLY.total_sin_iva TYPE DECIMAL(11,2), FORMAT = '###,###,##&.##',
+	REVERSE, NOENTRY, OPTIONS = '-nolist';
+a3  = FORMONLY.total_costo TYPE DECIMAL(11,2), FORMAT = '###,###,##&.##',
+	REVERSE, NOENTRY, OPTIONS = '-nolist';
+a4  = FORMONLY.diferencia TYPE DECIMAL(11,2), FORMAT = '---,---,--&.##',
+	REVERSE, NOENTRY, OPTIONS = '-nolist';
+a5  = FORMONLY.utilidad TYPE DECIMAL (11,2), FORMAT = '---&.##', REVERSE, 
+	NOENTRY, OPTIONS = '-nolist';
+a   = FORMONLY.aprobar, REVERSE, OPTIONS = '-nolist', DEFAULT = 'A',
+	WIDGET = 'CHECK', CONFIG = 'P A acknowledge',
+	COMMENT = 'Marque las preventas que desee aprobar. ';
+a6  = r23_nomcli, REVERSE, NOENTRY;
+		     ---- BOTONES ----
+c0  = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c1  = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c2  = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c3  = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c4  = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c5  = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+	---------------------------------------------
+END
+INSTRUCTIONS 
 DELIMITERS '||'
-SCREEN RECORD rm_prof[13] (formonly.fecha, r21_numprof, r21_nomcli, 
-			   formonly.siglas_vend, formonly.fecha_max, 
-			   r21_tot_neto)
+SCREEN RECORD r_detalle[15] (tit_estado,  num_preventa, total_sin_iva, 
+			     total_costo, diferencia,   utilidad, aprobar)
+KEYS
+	F5 = 'Detalle Preventa'
+	F6 = 'Ver Preventa'

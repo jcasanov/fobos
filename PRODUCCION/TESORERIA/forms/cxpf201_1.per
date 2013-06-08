@@ -1,4 +1,4 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
                                                               [x001] de [y001]
@@ -31,7 +31,7 @@ a0   = cxpt021.p21_tipo_doc, AUTONEXT, REVERSE, UPSHIFT,
 c002 = FORMONLY.tit_tipo_doc, NOENTRY, REVERSE, UPSHIFT;
 c003 = cxpt021.p21_num_doc, AUTONEXT, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
-	COMMENTS = 'Numeración automática en Notas Crédito. Ingreso manual otro No. Doc.';
+	COMMENTS = 'Numeración automatica en Notas Crédito. Ingreso manual otro No. Doc.';
 b01  = cxpt021.p21_subtipo, AUTONEXT, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 c004 = FORMONLY.tit_subtipo, NOENTRY, UPSHIFT;
@@ -48,10 +48,10 @@ c011 = cxpt021.p21_valor, AUTONEXT, REVERSE, INCLUDE = (0 TO 9999999999.99),
 	FORMAT = '#,###,###,##&.##';
 c012 = cxpt021.p21_saldo, AUTONEXT, REVERSE, FORMAT = '#,###,###,##&.##';
 c013 = cxpt021.p21_origen, NOENTRY, REVERSE, UPSHIFT,
-	WIDGET = 'RADIO', CONFIG = 'M Manual A Automático', DEFAULT = 'M';
+	WIDGET = 'RADIO', CONFIG = 'M Manual A Automatico', DEFAULT = 'M';
 c014 = cxpt021.p21_usuario, NOENTRY, REVERSE, UPSHIFT;
 c015 = cxpt021.p21_fecing, NOENTRY, REVERSE, UPSHIFT;
 
 x001 = FORMONLY.vm_num_current1, NOENTRY;
 y001 = FORMONLY.vm_num_rows1, NOENTRY;
-END
+end

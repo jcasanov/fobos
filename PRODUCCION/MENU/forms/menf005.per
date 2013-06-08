@@ -1,24 +1,27 @@
-DATABASE formonly
+DATABASE FORMONLY
 SCREEN
 {
-   [f000             ]                
-------------------------------------------
-   [f001                               ]	
-   [f001                               ]	
-   [f001                               ]	
-   [f001                               ]	
-   [f001                               ]	
-   [f001                               ]	
-   [f001                               ]	
-   [f001                               ]	
-   [f001                               ]	
-   [f001                               ]	
-   [f001                               ]	
+
+                          ==========================
+              =============      MENU PEDIDOS      ==============
+              =           ==========================            =
+              =                                                 =
+              =            [f001                   ]            =
+              =            [f001                   ]            =
+              =            [f001                   ]            =
+              =            [f001                   ]            =
+              =            [f001                   ]            =
+              =                                                 =
+              =            [f001                   ]            =
+              =                                                 =
+              ===================================================
+              =    Ubíquese en la opción y presione <ENTER>     =
+              ===================================================
 }
-attributes
-f000 = formonly.titulo, REVERSE;
-f001 = formonly.opcion;
+
+ATTRIBUTES
+f001 = FORMONLY.opcion;
 INSTRUCTIONS
-DELIMITERS "  "
-SCREEN RECORD r_menu_tal [11] (formonly.opcion)
+DELIMITERS "||"
+SCREEN RECORD r_menu_rep3 [06] (FORMONLY.opcion)
 

@@ -1,0 +1,80 @@
+DATABASE aceros
+SCREEN
+{
+
+  Código Rubro: [c0  ] [c1                            ] Estado: [a|c2        ]
+   Abreviatura: [c3              ] 	         Orden: [c4  ]
+Etiqueta Impr.: [c20             ]
+    Valor Fijo: [c5              ]     Rubro Descuento: [c6  ]
+
+Cantidad Valor: [c7               ]       Tipo Detalle: [c8                  ]
+
+
+
+
+             Calculo: [b]		
+           Imprime ?: [c]	       
+   Ingresa Usuario ?: [d]     Identidad: [c9] [c050                          ]
+Contrato Colectivo ?: [e]
+   Contrato Prest. ?: [f]
+
+       Ingresado Por: [c10       ]     Fecha de Ingreso: [c11                ]
+
+}
+TABLES
+rolt006
+rolt016
+ATTRIBUTES
+c0  = FORMONLY.n06_cod_rubro,  REVERSE, AUTONEXT, UPSHIFT;
+c1  = rolt006.n06_nombre,     REVERSE, UPSHIFT;
+a   = rolt006.n06_estado,     REVERSE, NOENTRY, UPSHIFT;
+c2  = FORMONLY.tit_estado TYPE VARCHAR, NOENTRY;
+
+c3  = rolt006.n06_nombre_abr, REVERSE, UPSHIFT;
+c20 = rolt006.n06_etiq_impr, REVERSE, UPSHIFT,
+	COMMENTS = 'Título de columna en un reporte para este rubro.';
+
+c4  = rolt006.n06_orden,      REVERSE;
+c5  = rolt006.n06_valor_fijo, FORMAT = '#,###,###,##&.##', REVERSE,
+	INCLUDE = (NULL,0 TO 9999999999.99),
+	COMMENTS = 'Digite valor fijo a ser asignado a los roles.';
+c6  = rolt006.n06_rubro_dscto, INCLUDE = (NULL,0 TO 999),
+	COMMENT = 'Sólo para rubros de anticipos a sueldos y comisiones.';
+
+c7  = rolt006.n06_cant_valor, REVERSE, WIDGET = 'RADIO', 
+	CONFIG = 'D Días H Horas P Porcentaje V Valor',
+	COMMENT = 'En relación al campo Valor Fijo';
+
+c8  = rolt006.n06_det_tot, REVERSE, WIDGET = 'RADIO', 
+	CONFIG = 'DI "Detalle Ingresos" DE "Detalle Egresos"';
+
+b   = rolt006.n06_calculo, REVERSE, WIDGET = 'CHECK', 
+	CONFIG = 'S N acknowledge', DEFAULT = 'N',
+	COMMENTS = 'Marque si el rubro va a ser calculado. Si no sera ingreado por el usuario.';
+
+c   = rolt006.n06_imprime_0, REVERSE, WIDGET = 'CHECK', 
+	CONFIG = 'S N acknowledge', DEFAULT = 'N',
+	COMMENTS = 'Marque si el rubro se imprimira en el recibo de pago a pesar de que sea 0.';
+
+d   = rolt006.n06_ing_usuario, REVERSE, WIDGET = 'CHECK', 
+	CONFIG = 'S N acknowledge', DEFAULT = 'N',
+	COMMENTS = 'Marque si el valor del rubro sera ingresado por el usuario.';
+
+e   = rolt006.n06_cont_colect, REVERSE, WIDGET = 'CHECK', 
+	CONFIG = 'S N acknowledge', DEFAULT = 'N';
+
+f   = rolt006.n06_cont_prest, REVERSE, WIDGET = 'CHECK', 
+	CONFIG = 'S N acknowledge', DEFAULT = 'N';
+
+c9   = rolt006.n06_flag_ident, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'HN y HE con su respectivo rubro, los demás para cualquier rubro.';
+c050 = rolt016.n16_descripcion, NOENTRY, UPSHIFT;
+c10  = rolt006.n06_usuario, REVERSE, NOENTRY;
+c11  = rolt006.n06_fecing, REVERSE, NOENTRY;
+END
+KEYS
+F5 = 'Formula'
+F6 = 'Rubro Base'
+F7 = 'Identificación'
+F8 = 'Rubro Anticipos'

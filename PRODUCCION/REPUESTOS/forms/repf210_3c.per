@@ -1,0 +1,69 @@
+DATABASE aceros
+SCREEN 
+{
+
+  No. Pre-Venta: [c0     ]
+        Cliente: [c1   ] [c2                                         ]
+      No. Pagos: [c3   ]                     Interés: [c4   ]%  
+ 	  Plazo: [c5   ]	              Moneda: [c6][c7               ]
+ Fecha 1er Pago: [c8        ]       Días entre pagos: [c9   ]    
+  Total Crédito: [c10             ]   Valor Anticipo: [c11           ]
+
+        Pago  Fec. Vcto. Valor Capital  Valor Interés   Valor Total
+       [c12 |c13       |c14           |c15           |c16            ]
+       [c12 |c13       |c14           |c15           |c16            ]
+       [c12 |c13       |c14           |c15           |c16            ]
+       [c12 |c13       |c14           |c15           |c16            ]
+       [c12 |c13       |c14           |c15           |c16            ]
+       [c12 |c13       |c14           |c15           |c16            ]
+       [c12 |c13       |c14           |c15           |c16            ]
+       [c12 |c13       |c14           |c15           |c16            ]
+       			---------------------------------------------
+		       [c17           |c18           |c19            ]
+}
+TABLES
+	rept023
+	rept025
+	rept026
+	rept027
+ATTRIBUTES
+c0  = rept025.r25_numprev, REVERSE, NOENTRY;
+c1  = rept023.r23_codcli, REVERSE, NOENTRY;
+c2  = rept023.r23_nomcli , REVERSE, UPSHIFT, NOENTRY;
+c3  = rept025.r25_dividendos, REVERSE, INCLUDE = (1 TO 300); 
+c4  = rept025.r25_interes, NOENTRY, REVERSE, INCLUDE = (0.00 TO 99.99), 
+	FORMAT = '#&.##';
+c5  = rept025.r25_plazo, REVERSE, NOENTRY;
+c6  = rept023.r23_moneda, REVERSE, NOENTRY;
+c7  = FORMONLY.nom_moneda TYPE VARCHAR, NOENTRY;
+c8  = FORMONLY.fecha_primer_pago TYPE DATE, REVERSE,
+	FORMAT = 'dd-mm-yyyy', 
+	COMMENTS = 'Digite la fecha en formato dd-mm-aa';
+c9  = FORMONLY.dias_entre_pagos TYPE SMALLINT, REVERSE, 
+	INCLUDE = (1 TO 150);
+c10 = rept025.r25_valor_cred, REVERSE, NOENTRY, 
+	FORMAT = '#,###,###,##&.##';
+c11 = rept025.r25_valor_ant, REVERSE, NOENTRY, 
+	FORMAT = '###,###,##&.##';
+c12 = rept026.r26_dividendo, REVERSE, NOENTRY;
+c13 = rept026.r26_fec_vcto, REVERSE,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la fecha en formato dd-mm-aa';
+c14 = rept026.r26_valor_cap, REVERSE,
+	FORMAT = '###,###,##&.##', INCLUDE = (0.01 TO 999999999.99);
+c15 = rept026.r26_valor_int, REVERSE, NOENTRY,
+	FORMAT = '###,###,##&.##';
+c16 = FORMONLY.total TYPE DECIMAL(11,2), REVERSE, NOENTRY, 
+	FORMAT = '####,###,##&.##';
+c17 = FORMONLY.vm_tot_cap TYPE DECIMAL(11,2), REVERSE, NOENTRY,
+	FORMAT = '###,###,##&.##';
+c18 = FORMONLY.vm_tot_interes TYPE DECIMAL(11,2), REVERSE, NOENTRY,
+	FORMAT = '###,###,##&.##';
+c19 = FORMONLY.vm_total TYPE DECIMAL(11,2), REVERSE, NOENTRY,
+	FORMAT = '####,###,##&.##';
+end
+
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_detalle_3[8] (r26_dividendo, r26_fec_vcto, r26_valor_cap,
+			      r26_valor_int, total)

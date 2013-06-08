@@ -1,0 +1,63 @@
+DATABASE aceros
+SCREEN
+{
+
+                                                              [c011] de [c012]
+
+                  Localidad: [c0] [c000                ]
+             Tipo Documento: [c1] [c001           ]   Forma Pago: [c002      ]
+
+          Secuencia Interna: [c010  ]
+
+           Prefijo Sucursal: [c01]                  Prefijo Punto Venta: [c02]
+
+  No. Control Secuencia SRI: [c003       ]      No. Digitos Doc. SRI: [c004  ]
+
+          Fecha Emision SRI: [c005      ]   Fecha Expiracion SRI: [c006      ]
+
+           No. Autorizacion: [c007           ]
+
+
+                    Usuario: [c008      ]
+
+              Fecha Ingreso: [c009               ]
+
+}
+TABLES
+cxct004
+gent002
+gent037
+ATTRIBUTES
+c0   = gent037.g37_localidad, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista F2',
+	COMMENTS = 'Localidad en que se genera el documento.';
+c000 = gent002.g02_nombre, NOENTRY, UPSHIFT, REVERSE;
+c1   = gent037.g37_tipo_doc, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista F2',
+	COMMENTS = 'Tipo documento que se genera en Localidad antes ingresada.';
+c001 = cxct004.z04_nombre, NOENTRY, UPSHIFT, REVERSE;
+c002 = gent037.g37_cont_cred, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'RADIO', CONFIG = 'C Contado R Credito N Ninguno',
+	COMMENTS = 'Solo en el caso de FACTURAS puede poner Contado o Credito.';
+c010 = gent037.g37_secuencia, NOENTRY, UPSHIFT, REVERSE;
+c01  = gent037.g37_pref_sucurs, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = ('000' TO '999'),
+	COMMENTS = 'Indicativo de la sucursal según el SRI.';
+c02  = gent037.g37_pref_pto_vta, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = ('000' TO '999'),
+	COMMENTS = 'Indicativo del punto de venta según el SRI.';
+c003 = gent037.g37_sec_num_sri, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = (0 TO 999999999),
+	COMMENTS = 'Ingresar un No. antes del numero de documento SRI.';
+c004 = gent037.g37_num_dig_sri, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Numero de digitos del Documento (completo sin pref.) SRI.';
+c005 = gent037.g37_fecha_emi, AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Fecha en formato: dd-mm-aaaa';
+c006 = gent037.g37_fecha_exp, AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Fecha en formato: dd-mm-aaaa';
+c007 = gent037.g37_autorizacion, AUTONEXT, UPSHIFT, REVERSE;
+c008 = gent037.g37_usuario, NOENTRY, UPSHIFT, REVERSE;
+c009 = gent037.g37_fecing, NOENTRY, UPSHIFT, REVERSE;
+c011 = FORMONLY.row_current, NOENTRY, UPSHIFT;
+c012 = FORMONLY.num_rows, NOENTRY, UPSHIFT;
+END

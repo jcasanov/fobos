@@ -1,6 +1,5 @@
-                                                                                
-database diteca
-screen 
+DATABASE aceros
+SCREEN 
 {
 
 
@@ -14,17 +13,17 @@ screen
         Fecha de Ingreso: [c004               ]
 
 }
-end
-tables
+TABLES
 gent013
-attributes
+ATTRIBUTES
 c1   = gent013.g13_moneda,  REVERSE, UPSHIFT, AUTONEXT, 
        WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 c000 = gent013.g13_nombre,  REVERSE, UPSHIFT;
-c    = formonly.g13_estado, NOENTRY, REVERSE;
-c02  = formonly.tit_estado, COMMENT = 'A Activo B Bloqueado';
+c    = FORMONLY.g13_estado, NOENTRY, REVERSE;
+c02  = FORMONLY.tit_estado, COMMENT = 'A Activo B Bloqueado';
 c001 = gent013.g13_simbolo, REVERSE,UPSHIFT;
-c002 = gent013.g13_decimales, REVERSE;
+c002 = gent013.g13_decimales, REVERSE, AUTONEXT, INCLUDE = (0, 1, 2),
+	COMMENTS = 'Número de decimales debe ser: 0, 1 o 2.';
 c003 = gent013.g13_usuario, REVERSE, NOENTRY;
 c004 = gent013.g13_fecing, REVERSE, NOENTRY;
 end

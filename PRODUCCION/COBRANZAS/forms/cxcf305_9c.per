@@ -1,0 +1,41 @@
+DATABASE aceros
+SCREEN
+{
+
+                     CHEQUES POSTFECHADOS
+
+ Cliente: [c004      ][c005                                    ]
+  Moneda: [a0][c001           ]
+
+   Fecha         Banco        Número Cheque     Valor Cheque
+[c010      |c011            |c012            |c013            ]
+[c010      |c011            |c012            |c013            ]
+[c010      |c011            |c012            |c013            ]
+[c010      |c011            |c012            |c013            ]
+[c010      |c011            |c012            |c013            ]
+[c010      |c011            |c012            |c013            ]
+[c010      |c011            |c012            |c013            ]
+[c010      |c011            |c012            |c013            ]
+                                      Total: [c014            ]
+
+}
+TABLES
+cxct026, cxct020, cxct001, gent008
+ATTRIBUTES
+a0   = cxct020.z20_moneda, NOENTRY, REVERSE, UPSHIFT;
+c001 = FORMONLY.tit_moneda, NOENTRY, REVERSE, UPSHIFT;
+c004 = FORMONLY.z26_codcli, NOENTRY, REVERSE, UPSHIFT;
+c005 = FORMONLY.tit_nombre_cli, NOENTRY, REVERSE, UPSHIFT;
+
+c010 = cxct026.z26_fecha_cobro, FORMAT = 'dd-mm-yyyy', NOENTRY, UPSHIFT;
+c011 = gent008.g08_nombre, NOENTRY, UPSHIFT;
+c012 = cxct026.z26_num_cheque, NOENTRY, UPSHIFT;
+c013 = cxct026.z26_valor, NOENTRY, UPSHIFT, FORMAT = '#,###,###,##&.##';
+c014 = FORMONLY.tit_total TYPE DECIMAL (12,2), NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = '#,###,###,##&.##';
+end
+--KEYS
+--F5 = 'Cheque'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_chpf[8] (z26_fecha_cobro, g08_nombre, z26_num_cheque, z26_valor)

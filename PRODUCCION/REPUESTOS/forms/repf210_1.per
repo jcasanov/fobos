@@ -1,51 +1,52 @@
-
-DATABASE diteca
-screen
+DATABASE aceros
+SCREEN
 {
-    [c0   |c1         |c2              |c3              |c4              ]
-   [c5   |c6         |c7              |c8              |c9              ]
-   [c5   |c6         |c7              |c8              |c9              ]
-   [c5   |c6         |c7              |c8              |c9              ]
-   [c5   |c6         |c7              |c8              |c9              ]
-   [c5   |c6         |c7              |c8              |c9              ]
-   [c5   |c6         |c7              |c8              |c9              ]
-   [c5   |c6         |c7              |c8              |c9              ]
-   [c5   |c6         |c7              |c8              |c9              ]
-   [c5   |c6         |c7              |c8              |c9              ]
-   [c5   |c6         |c7              |c8              |c9              ]
-   [c5   |c6         |c7              |c8              |c9              ]
-   [c5   |c6         |c7              |c8              |c9              ]
-   [c5   |c6         |c7              |c8              |c9              ]
-   [c5   |c6         |c7              |c8              |c9              ]
-   [c5   |c6         |c7              |c8              |c9              ]
+   [c0     |c1         |c2              |c3              |c4              ]
+  [c5     |c6         |c7              |c8              |c9              ]
+  [c5     |c6         |c7              |c8              |c9              ]
+  [c5     |c6         |c7              |c8              |c9              ]
+  [c5     |c6         |c7              |c8              |c9              ]
+  [c5     |c6         |c7              |c8              |c9              ]
+  [c5     |c6         |c7              |c8              |c9              ]
+  [c5     |c6         |c7              |c8              |c9              ]
+  [c5     |c6         |c7              |c8              |c9              ]
+  [c5     |c6         |c7              |c8              |c9              ]
+  [c5     |c6         |c7              |c8              |c9              ]
+  [c5     |c6         |c7              |c8              |c9              ]
+  [c5     |c6         |c7              |c8              |c9              ]
+  [c5     |c6         |c7              |c8              |c9              ]
+  [c5     |c6         |c7              |c8              |c9              ]
+  [c5     |c6         |c7              |c8              |c9              ]
 
-                     [c10                              ]
+                      [c10                              ]
 }
-end
 TABLES
 	rept023
 ATTRIBUTES
 
-c5  = formonly.num_preventa TYPE INTEGER, REVERSE, NOENTRY, OPTIONS = '-nolist';
-c6  = formonly.tit_estado TYPE VARCHAR, REVERSE, NOENTRY, 
+c5  = FORMONLY.num_preventa TYPE INTEGER, REVERSE, NOENTRY, OPTIONS = '-nolist';
+c6  = FORMONLY.tit_estado TYPE VARCHAR, REVERSE, NOENTRY, 
 	OPTIONS = '-nolist';
-c7  = formonly.valor_neto TYPE DECIMAL(12,2), NOENTRY, REVERSE, 
+c7  = FORMONLY.valor_neto TYPE DECIMAL(12,2), NOENTRY, REVERSE, 
 	FORMAT = '#,###,###,##&.##', OPTIONS = '-nolist';
-c8  = formonly.valor_anticipos TYPE DECIMAL(12,2), NOENTRY, REVERSE, 
+c8  = FORMONLY.valor_anticipos TYPE DECIMAL(12,2), NOENTRY, REVERSE, 
 	FORMAT = '#,###,###,##&.##', OPTIONS = '-nolist';
-c9  = formonly.monto_credito TYPE DECIMAL(12,2), NOENTRY, REVERSE, 
+c9  = FORMONLY.monto_credito TYPE DECIMAL(12,2), NOENTRY, REVERSE, 
 	FORMAT = '#,###,###,##&.##', OPTIONS = '-nolist';
-c10 = formonly.nom_cliente TYPE VARCHAR, NOENTRY, REVERSE;
+c10 = FORMONLY.nom_cliente TYPE VARCHAR, NOENTRY, REVERSE;
 		     ---- BOTONES ----
-c0  = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-c1  = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-c2  = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
-c3  = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
-c4  = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c0  = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c1  = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c2  = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c3  = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c4  = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
 	---------------------------------------------
+END
 INSTRUCTIONS 
 DELIMITERS '||'
 SCREEN RECORD r_detalle[15] (num_preventa, tit_estado, valor_neto, valor_anticipos, monto_credito)
 
 KEYS
+	F6 = 'Estado Cuenta'
 	F7 = 'Forma de Pago'
+	F8 = 'Ver Preventa'

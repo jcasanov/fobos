@@ -1,0 +1,63 @@
+DATABASE aceros
+SCREEN
+{
+
+   Cliente: [c001 ] [c002                           ]   Moneda: [c03         ] 
+ Domicilio: [c003                                   ] 
+  Teléfono: [c004      ] - [c005      ]	     Saldo a Favor: [c007            ]
+       Fax: [c006       ]		     Saldo Vencido: [c008            ]
+ Localidad: [c050 ] [c051               ] Saldo Por Vencer: [c009            ]
+    Estado: [c011     ]                        Saldo Total: [c010            ]
+                                          Ch. Postfechados: [c099            ]
+ LC Area Neg.  Tp   No. Documento   Fecha Vcto   Estado   Días    S a l d o
+[a1|c030      |c3|c032             |c033      |c034      |c035 |c036         ]
+[a1|c030      |c3|c032             |c033      |c034      |c035 |c036         ]
+[a1|c030      |c3|c032             |c033      |c034      |c035 |c036         ]
+[a1|c030      |c3|c032             |c033      |c034      |c035 |c036         ]
+[a1|c030      |c3|c032             |c033      |c034      |c035 |c036         ]
+[a1|c030      |c3|c032             |c033      |c034      |c035 |c036         ]
+[a1|c030      |c3|c032             |c033      |c034      |c035 |c036         ]
+[a1|c030      |c3|c032             |c033      |c034      |c035 |c036         ]
+[a1|c030      |c3|c032             |c033      |c034      |c035 |c036         ]
+}
+TABLES
+cxct001
+cxct020
+ATTRIBUTES
+c050 = FORMONLY.localidad, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c051 = FORMONLY.tit_localidad, UPSHIFT, NOENTRY;
+c001 = z01_codcli, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+C002 = z01_nomcli, REVERSE;
+c03  = FORMONLY.tit_mon, REVERSE; 
+c003 = z01_direccion1;
+c004 = z01_telefono1;
+c005 = z01_telefono2;
+c006 = z01_fax1;
+c007 = FORMONLY.tot_favor TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##';
+c008 = FORMONLY.tot_vcdo  TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##',
+       COLOR = RED WHERE c008 > 0;
+c009 = FORMONLY.tot_xven  TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##';
+c010 = FORMONLY.tot_saldo TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##', 
+       REVERSE;
+c011 = FORMONLY.tit_estcli;
+c099 = FORMONLY.tot_postfec TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##';
+a1   = FORMONLY.tit_loc, UPSHIFT, NOENTRY;
+c030 = FORMONLY.tit_area;
+c3   = z20_tipo_doc;
+c032 = FORMONLY.num_doc;
+c033 = z20_fecha_vcto, FORMAT = 'dd-mm-yyyy';
+c034 = FORMONLY.tit_estado, COLOR = RED WHERE c034 = 'Vencido';
+c035 = FORMONLY.dias TYPE SMALLINT, FORMAT = '----&',COLOR = RED WHERE c035 < 0;
+c036 = FORMONLY.saldo TYPE DECIMAL(14,2), FORMAT = '--,---,--&.##'; 
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_dcli[9] (FORMONLY.tit_loc, FORMONLY.tit_area, z20_tipo_doc,
+			FORMONLY.num_doc, z20_fecha_vcto, FORMONLY.tit_estado,
+			FORMONLY.dias, FORMONLY.saldo)
+--KEYS
+--"F5"="Ver Factura"
+--"F6"="Movimientos"
+--"F7"="Documento"

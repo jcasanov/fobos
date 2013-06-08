@@ -1,0 +1,43 @@
+DATABASE aceros
+SCREEN
+{
+
+
+     Estado: [c|c000      ]                Moneda: [a0] [c001           ]
+ Tipo Fecha: [d|c008         ]
+                                   Rango de Fecha: [c002      ] - [c003      ]
+
+    Cliente: [c004 ] [c005                                                   ]
+
+  Localidad: [c006 ] [c007                ]
+
+}
+TABLES
+cxct020
+cxct026
+ATTRIBUTES
+c    = cxct026.z26_estado, AUTONEXT, REVERSE, UPSHIFT,
+	INCLUDE = ('A', 'B', 'T'),
+	COMMENTS = '(A) Por Cobrar  (B) Cobrados  (T) T O D O S',
+	DEFAULT = 'A';
+c000 = FORMONLY.tit_estado, REVERSE, UPSHIFT, NOENTRY;
+a0   = cxct020.z20_moneda, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c001 = FORMONLY.tit_moneda, NOENTRY, REVERSE, UPSHIFT;
+c002 = FORMONLY.vm_fecha_ini TYPE DATE, AUTONEXT, UPSHIFT,FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la Fecha Inicial en formato: dd-mm-yyyy';
+c003 = FORMONLY.vm_fecha_fin TYPE DATE, AUTONEXT, UPSHIFT,FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la Fecha Final en formato: dd-mm-yyyy';
+c004 = FORMONLY.z26_codcli, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c005 = FORMONLY.tit_nombre_cli, NOENTRY, UPSHIFT;
+c006 = FORMONLY.localidad, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c007 = FORMONLY.tit_localidad, UPSHIFT, NOENTRY;
+d    = FORMONLY.tipo_fecha TYPE CHAR NOT NULL, REQUIRED, AUTONEXT, REVERSE,
+	UPSHIFT, INCLUDE = ('I', 'C'),
+	COMMENTS = '(I) Fecha Ingreso  (C) Fecha Cobro', DEFAULT = 'C';
+c008 = FORMONLY.tit_tipo_fecha, NOENTRY, REVERSE, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'

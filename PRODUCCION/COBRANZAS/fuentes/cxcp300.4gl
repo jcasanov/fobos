@@ -10,48 +10,51 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE rm_orden ARRAY[10] OF CHAR(4)
+DEFINE rm_orden 	ARRAY[10] OF CHAR(4)
 DEFINE vm_columna_1	SMALLINT
 DEFINE vm_columna_2	SMALLINT
 DEFINE rm_mon		RECORD LIKE gent013.*
-DEFINE num_doc		SMALLINT
-DEFINE num_max_doc	SMALLINT
-DEFINE rm_par RECORD
-		moneda          LIKE gent013.g13_moneda,
-		tit_mon         LIKE gent013.g13_nombre,
-		tipo_doc	LIKE cxct021.z21_tipo_doc,
-		tit_tipo	VARCHAR(30),
-		area_n          LIKE gent003.g03_areaneg,
-		tit_area        LIKE gent003.g03_nombre,
-		fecha_ini	DATE,
-		fecha_fin	DATE,
-		flag_saldo	CHAR(1)
-	END RECORD
-DEFINE rm_ant ARRAY[1500] OF RECORD
-		z21_fecha_emi   LIKE cxct021.z21_fecha_emi,
-		z21_tipo_doc	LIKE cxct021.z21_tipo_doc,
-		z21_num_doc	LIKE cxct021.z21_num_doc,
-		nomcli		LIKE cxct001.z01_nomcli,
-		z21_valor	LIKE cxct021.z21_valor,
-		z21_saldo	LIKE cxct021.z21_saldo
-	END RECORD
-DEFINE rm_aux ARRAY[1500] OF RECORD
-		codcli		LIKE cxct021.z21_codcli,
-		arean		LIKE cxct021.z21_areaneg
-	END RECORD
+DEFINE num_doc		INTEGER
+DEFINE num_max_doc	INTEGER
+DEFINE rm_par 		RECORD
+				moneda          LIKE gent013.g13_moneda,
+				tit_mon         LIKE gent013.g13_nombre,
+				tipo_doc	LIKE cxct021.z21_tipo_doc,
+				tit_tipo	VARCHAR(30),
+				area_n          LIKE gent003.g03_areaneg,
+				tit_area        LIKE gent003.g03_nombre,
+				fecha_ini	DATE,
+				fecha_fin	DATE,
+				flag_saldo	CHAR(1)
+			END RECORD
+DEFINE rm_ant 		ARRAY[30000] OF RECORD
+				z21_fecha_emi   LIKE cxct021.z21_fecha_emi,
+				z21_tipo_doc	LIKE cxct021.z21_tipo_doc,
+				z21_num_doc	LIKE cxct021.z21_num_doc,
+				nomcli		LIKE cxct001.z01_nomcli,
+				z21_valor	LIKE cxct021.z21_valor,
+				z21_saldo	LIKE cxct021.z21_saldo
+			END RECORD
+DEFINE rm_aux		ARRAY[30000] OF RECORD
+				codcli		LIKE cxct021.z21_codcli,
+				arean		LIKE cxct021.z21_areaneg
+			END RECORD
 DEFINE tot_valor	DECIMAL(14,2)
 DEFINE tot_saldo	DECIMAL(14,2)
+
+
 
 MAIN
 	
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
-CALL fgl_init4js()
+CALL startlog('../logs/cxcp300.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 AND num_args() <> 7 THEN     -- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
+	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto', 'stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.', 'stop')
 	EXIT PROGRAM
 END IF
 LET vg_base     = arg_val(1)
@@ -61,8 +64,8 @@ LET vg_codloc   = arg_val(4)
 LET vg_proceso = 'cxcp300'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -72,9 +75,13 @@ END MAIN
 
 FUNCTION funcion_master()
 DEFINE r		RECORD LIKE gent000.*
-DEFINE i		SMALLINT
+DEFINE i		INTEGER
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
-LET num_max_doc = 1500
+LET num_max_doc = 30000
 INITIALIZE rm_par.* TO NULL
 LET rm_par.flag_saldo  = 'S'
 CALL fl_lee_configuracion_facturacion() RETURNING r.*
@@ -87,10 +94,24 @@ ELSE
 END IF
 CALL fl_lee_moneda(rm_par.moneda) RETURNING rm_mon.*
 LET rm_par.tit_mon = rm_mon.g13_nombre
-OPEN WINDOW w_imp AT 3,2 WITH 22 ROWS, 80 COLUMNS
-	ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE FIRST,
-		  BORDER, MESSAGE LINE LAST) 
-OPEN FORM f_par FROM "../forms/cxcf300_1"
+LET lin_menu = 0
+LET row_ini  = 3
+LET num_rows = 22
+LET num_cols = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW w_imp AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
+	ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE lin_menu,
+		  BORDER, MESSAGE LINE LAST - 1) 
+IF vg_gui = 1 THEN
+	OPEN FORM f_par FROM "../forms/cxcf300_1"
+ELSE
+	OPEN FORM f_par FROM "../forms/cxcf300_1c"
+END IF
 DISPLAY FORM f_par
 DISPLAY BY NAME rm_par.*
 CALL titulos_columnas()
@@ -140,15 +161,17 @@ DEFINE tit_tipo		VARCHAR(30)
 DEFINE r_an		RECORD LIKE gent003.*
 DEFINE r_mo		RECORD LIKE gent013.*
 DEFINE r_tip		RECORD LIKE cxct004.*
-DEFINE num		SMALLINT
+DEFINE num		INTEGER
 
 LET int_flag = 0
 INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 	ON KEY(INTERRUPT)
 		CLOSE FORM f_par
 		RETURN
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
 	ON KEY(F2)
-		IF infield(area_n) THEN
+		IF INFIELD(area_n) THEN
 			CALL fl_ayuda_areaneg(vg_codcia) 
 				RETURNING area_aux, tit_area
 			IF area_aux IS NOT NULL THEN
@@ -157,7 +180,7 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
  				DISPLAY BY NAME rm_par.area_n, rm_par.tit_area
 			END IF
 		END IF
-		IF infield(moneda) THEN
+		IF INFIELD(moneda) THEN
 			CALL fl_ayuda_monedas() RETURNING mon_aux, tit_mon, num
 			IF mon_aux IS NOT NULL THEN
 				LET rm_par.moneda  = mon_aux
@@ -165,7 +188,7 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 				DISPLAY BY NAME rm_par.moneda, rm_par.tit_mon
 			END IF
 		END IF
-		IF infield(tipo_doc) THEN
+		IF INFIELD(tipo_doc) THEN
 			CALL fl_ayuda_tipo_documento_cobranzas('F')
 				RETURNING cod_tipo, tit_tipo
 			LET int_flag = 0
@@ -176,12 +199,16 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 			END IF 
 		END IF
 		LET int_flag = 0
+	BEFORE INPUT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 	AFTER FIELD moneda
 		IF rm_par.moneda IS NOT NULL THEN
 			CALL fl_lee_moneda(rm_par.moneda)
 				RETURNING r_mo.*
 			IF r_mo.g13_moneda IS NULL THEN
-				CALL fgl_winmessage(vg_producto, 'No existe moneda', 'exclamation')
+				--CALL fgl_winmessage(vg_producto,'No existe moneda', 'exclamation')
+				CALL fl_mostrar_mensaje('No existe moneda.', 'exclamation')
 				NEXT FIELD moneda
 			END IF
 			LET rm_par.tit_mon = r_mo.g13_nombre 
@@ -195,7 +222,8 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 			CALL fl_lee_area_negocio(vg_codcia, rm_par.area_n)
 				RETURNING r_an.*
 			IF r_an.g03_compania IS NULL THEN
-				CALL fgl_winmessage(vg_producto, 'No existe área de negocio', 'exclamation')
+				--CALL fgl_winmessage(vg_producto,'No existe área de negocio', 'exclamation')
+				CALL fl_mostrar_mensaje('No existe área de negocio', 'exclamation')
 				NEXT FIELD area_n
 			END IF
 			LET rm_par.tit_area = r_an.g03_nombre
@@ -209,11 +237,13 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 			CALL fl_lee_tipo_doc(rm_par.tipo_doc)
 				RETURNING r_tip.* 
 			IF r_tip.z04_tipo_doc IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'Tipo de documento no existe.','exclamation')
+				--CALL fgl_winmessage(vg_producto,'Tipo de documento no existe.','exclamation')
+				CALL fl_mostrar_mensaje('Tipo de documento no existe.','exclamation')
 				NEXT FIELD tipo_doc
 			END IF
 			IF r_tip.z04_tipo <> 'F' THEN
-				CALL fgl_winmessage(vg_producto,'Tipo de documento debe ser a favor.','exclamation')
+				--CALL fgl_winmessage(vg_producto,'Tipo de documento debe ser a favor.','exclamation')
+				CALL fl_mostrar_mensaje('Tipo de documento debe ser a favor.','exclamation')
 				NEXT FIELD tipo_doc
 			END IF
 			LET rm_par.tit_tipo = r_tip.z04_nombre
@@ -224,7 +254,8 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 		END IF
 	AFTER INPUT 
 		IF rm_par.fecha_ini > rm_par.fecha_fin THEN
-			CALL fgl_winmessage(vg_producto, 'Rango incorrecto', 'exclamation')
+			--CALL fgl_winmessage(vg_producto,'Rango incorrecto', 'exclamation')
+			CALL fl_mostrar_mensaje('Rango incorrecto.','exclamation')
 			NEXT FIELD fecha_ini
 		END IF
 		IF rm_par.fecha_ini IS NULL THEN
@@ -239,12 +270,12 @@ END FUNCTION
 
 FUNCTION titulos_columnas()
 
-DISPLAY 'Fecha'          TO tit_col1
-DISPLAY 'T.'             TO tit_col2
-DISPLAY 'Número'         TO tit_col3
-DISPLAY 'C l i e n t e'  TO tit_col4
-DISPLAY 'Valor Original' TO tit_col5
-DISPLAY 'S a l d o'      TO tit_col6
+--#DISPLAY 'Fecha'          TO tit_col1
+--#DISPLAY 'T.'             TO tit_col2
+--#DISPLAY 'Número'         TO tit_col3
+--#DISPLAY 'C l i e n t e'  TO tit_col4
+--#DISPLAY 'Valor Original' TO tit_col5
+--#DISPLAY 'S a l d o'      TO tit_col6
 
 END FUNCTION
 
@@ -257,7 +288,7 @@ DEFINE nomcli		VARCHAR(35)
 DECLARE k_fav CURSOR FOR 
 	SELECT cxct021.*, z01_nomcli FROM cxct021, cxct001
 		WHERE z21_compania  = vg_codcia AND 
-		      z21_localidad = vg_codloc AND
+		      --z21_localidad = vg_codloc AND
 		      z21_fecha_emi BETWEEN rm_par.fecha_ini AND 
 					    rm_par.fecha_fin AND
 		      z21_moneda    = rm_par.moneda AND 
@@ -296,9 +327,10 @@ END FUNCTION
 
 
 FUNCTION muestra_datos()
-DEFINE query		VARCHAR(300)
-DEFINE comando		VARCHAR(300)
-DEFINE i, pos_arr	SMALLINT
+DEFINE query		CHAR(300)
+DEFINE comando		CHAR(300)
+DEFINE i, pos_arr	INTEGER
+DEFINE run_prog		CHAR(10)
 
 WHILE TRUE
 	LET int_flag = 0
@@ -320,29 +352,40 @@ WHILE TRUE
 	DISPLAY BY NAME tot_valor, tot_saldo
 	CALL set_count(i - 1)
 	DISPLAY ARRAY rm_ant TO rm_ant.*
-		BEFORE DISPLAY
-			CALL dialog.keysetlabel("ACCEPT","")
-		AFTER DISPLAY
-			CONTINUE DISPLAY
-		BEFORE ROW
-			LET pos_arr = arr_curr()
-			IF rm_ant[pos_arr].z21_tipo_doc <> 'PA' THEN
-				CALL dialog.keysetlabel("F5","")
-			ELSE
-				CALL dialog.keysetlabel("F5","Pago Caja")
-			END IF
+		--#BEFORE DISPLAY
+			--#CALL dialog.keysetlabel("ACCEPT","")
+			--#CALL dialog.keysetlabel("F1","")
+			--#CALL dialog.keysetlabel("CONTROL-W","")
+		--#AFTER DISPLAY
+			--#CONTINUE DISPLAY
+		--#BEFORE ROW
+			--#LET pos_arr = arr_curr()
+			--#IF rm_ant[pos_arr].z21_tipo_doc <> 'PA' THEN
+				--#CALL dialog.keysetlabel("F5","")
+			--#ELSE
+				--#CALL dialog.keysetlabel("F5","Pago Caja")
+			--#END IF
 		ON KEY(INTERRUPT)
 			EXIT DISPLAY
+        	ON KEY(F1,CONTROL-W)
+			CALL control_visor_teclas_caracter_1() 
 		ON KEY(F5)
+			LET pos_arr = arr_curr()
 			CALL fl_muestra_forma_pago_caja(vg_codcia, vg_codloc, rm_aux[pos_arr].arean, rm_aux[pos_arr].codcli, rm_ant[pos_arr].z21_tipo_doc, rm_ant[pos_arr].z21_num_doc) 
 		ON KEY(F6)
-			LET comando = 'fglrun cxcp201 ' || vg_base || ' ' ||
-			      vg_modulo || ' ' ||
-			      vg_codcia || ' ' || 
-			      vg_codloc || ' ' ||
-			      rm_aux[pos_arr].codcli || ' ' ||
-			      rm_ant[pos_arr].z21_tipo_doc || ' ' ||
-			      rm_ant[pos_arr].z21_num_doc
+			LET pos_arr = arr_curr()
+			{- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE -}
+			LET run_prog = 'fglrun '
+			IF vg_gui = 0 THEN
+				LET run_prog = 'fglgo '
+			END IF
+			{--- ---}
+			LET comando = run_prog || 'cxcp201 ' || vg_base ||
+				' ' || vg_modulo || ' ' || vg_codcia || ' ' || 
+			      	vg_codloc || ' ' ||
+			      	rm_aux[pos_arr].codcli || ' ' ||
+			      	rm_ant[pos_arr].z21_tipo_doc || ' ' ||
+			      	rm_ant[pos_arr].z21_num_doc
 			RUN comando
 		ON KEY(F15)
 			LET i = 1
@@ -388,33 +431,33 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION llamar_visor_teclas()
+DEFINE a		CHAR(1)
 
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
+IF vg_gui = 0 THEN
+	CALL fl_visor_teclas_caracter() RETURNING int_flag 
+	LET a = fgl_getkey()
+	CLOSE WINDOW w_tf
+	LET int_flag = 0
 END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
+
+END FUNCTION
+
+
+
+FUNCTION control_visor_teclas_caracter_1() 
+DEFINE a, fila		INTEGER
+
+CALL fl_visor_teclas_caracter() RETURNING fila
+LET a = fila + 2
+DISPLAY 'Teclas exclusivas de este proceso:' AT a,2 ATTRIBUTE(REVERSE)	
+LET a = a + 1
+DISPLAY '<F5>      Pago Caja'                AT a,2
+DISPLAY  'F5' AT a,3 ATTRIBUTE(REVERSE)
+LET a = a + 1
+DISPLAY '<F6>      Documento'                AT a,2
+DISPLAY  'F6' AT a,3 ATTRIBUTE(REVERSE)
+LET a = fgl_getkey()
+CLOSE WINDOW w_tf
 
 END FUNCTION

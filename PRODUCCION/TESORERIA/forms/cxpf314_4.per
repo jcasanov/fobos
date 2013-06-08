@@ -1,0 +1,53 @@
+DATABASE aceros
+SCREEN
+{
+                 DETALLE DOCUMENTOS A FAVOR  
+                 -------------------------
+
+ Proveedor: [c000  |c001                                     ]
+
+                                              [c040] de [c041]
+ [c010|c011      |c012      |c013            |c014            ]
+[c020|c021      |c022      |c023            |c024            ]
+[c020|c021      |c022      |c023            |c024            ]
+[c020|c021      |c022      |c023            |c024            ]
+[c020|c021      |c022      |c023            |c024            ]
+[c020|c021      |c022      |c023            |c024            ]
+[c020|c021      |c022      |c023            |c024            ]
+[c020|c021      |c022      |c023            |c024            ]
+[c020|c021      |c022      |c023            |c024            ]
+              Totales ==>  [c030            |c031            ]
+
+}
+TABLES
+cxpt001
+cxpt021
+ATTRIBUTES
+c000 = cxpt001.p01_codprov, REVERSE, UPSHIFT, NOENTRY;
+c001 = cxpt001.p01_nomprov, REVERSE, UPSHIFT, NOENTRY;
+
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+
+c020 = p21_tipo_doc;
+c021 = p21_num_doc;
+c022 = p21_fecha_emi, FORMAT = 'dd-mm-yyyy';
+c023 = p21_valor, FORMAT = '#,###,###,##&.##';
+c024 = p21_saldo, FORMAT = '#,###,###,##&.##';
+c030 = FORMONLY.tot_valor TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##',
+       REVERSE;
+c031 = FORMONLY.tot_saldo TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##',
+       REVERSE;
+
+c040 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c041 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+END
+KEYS
+F6 = 'Documento'
+F7 = 'Movimientos'
+INSTRUCTIONS
+SCREEN RECORD r_dda[8] (p21_tipo_doc, p21_num_doc, p21_fecha_emi, p21_valor,
+			p21_saldo)

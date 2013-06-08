@@ -18,29 +18,32 @@ DEFINE vm_max_rows	SMALLINT
 DEFINE vm_r_rows	ARRAY [1000] OF INTEGER
 DEFINE vm_flag		CHAR(1)
 
+
+
 MAIN
 
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
 CALL startlog('../logs/errores')
-CALL fgl_init4js()
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 6 THEN          -- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
+	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto', 'stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.', 'stop')
 	EXIT PROGRAM
 END IF
-LET vg_base     = arg_val(1)
-LET vg_modulo   = arg_val(2)
-LET vg_codcia   = arg_val(3)
-LET vg_codloc   = arg_val(4)
-LET vm_codcli   = arg_val(5)
-LET vm_flag     = arg_val(6)
+LET vg_base    = arg_val(1)
+LET vg_modulo  = arg_val(2)
+LET vg_codcia  = arg_val(3)
+LET vg_codloc  = arg_val(4)
+LET vm_codcli  = arg_val(5)
+LET vm_flag    = arg_val(6)
 LET vg_proceso = 'cxcp106'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL control_master()
 
@@ -50,21 +53,38 @@ END MAIN
 
 FUNCTION control_master()
 DEFINE r_cxc2_aux       RECORD LIKE cxct002.*
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
 CALL fl_nivel_isolation()
 LET vm_max_rows	= 1000
-OPEN WINDOW wf AT 3,2 WITH 20 ROWS, 80 COLUMNS
-    ATTRIBUTE(FORM LINE FIRST + 2, COMMENT LINE LAST, MENU LINE FIRST,BORDER,
-	      MESSAGE LINE LAST - 2)
-OPTIONS INPUT WRAP,
-	ACCEPT KEY	F12
-OPEN FORM f_cxc FROM "../forms/cxcf106_1"
+LET lin_menu = 0
+LET row_ini  = 3
+LET num_rows = 22
+LET num_cols = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW wf AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
+	ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE lin_menu,
+		  BORDER, MESSAGE LINE LAST - 1) 
+IF vg_gui = 1 THEN
+	OPEN FORM f_cxc FROM "../forms/cxcf106_1"
+ELSE
+	OPEN FORM f_cxc FROM "../forms/cxcf106_1c"
+END IF
 DISPLAY FORM f_cxc
 INITIALIZE r_cxc2_aux.* TO NULL
 CALL fl_lee_cliente_localidad(vg_codcia,vg_codloc,vm_codcli)
 	RETURNING r_cxc2_aux.*
 IF r_cxc2_aux.z02_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto,'Ingrese datos del cliente en la compañía.','info')
+	--CALL fgl_winmessage(vg_producto,'Ingrese datos del cliente en la compañía.','stop')
+	CALL fl_mostrar_mensaje('Ingrese datos del cliente en la compañía.','stop')
 	EXIT PROGRAM
 END IF
 INITIALIZE rm_cxc.* TO NULL
@@ -80,14 +100,8 @@ MENU 'OPCIONES'
 			HIDE OPTION 'Modificar'
 			HIDE OPTION 'Consultar'
 		ELSE
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Consultar') THEN
 			SHOW OPTION 'Consultar'
-		   END IF
-		
 			IF vm_num_rows = 1 THEN
 				HIDE OPTION 'Avanzar'
 				HIDE OPTION 'Retroceder'
@@ -108,13 +122,8 @@ MENU 'OPCIONES'
 	COMMAND KEY('I') 'Ingresar' 'Ingresar nuevos registros. '
 		CALL control_ingreso()
 		IF vm_num_rows = 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Consultar') THEN
 			SHOW OPTION 'Consultar'
-		   END IF
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -127,10 +136,7 @@ MENU 'OPCIONES'
 	COMMAND KEY('C') 'Consultar' 'Consultar un registro. '
 		CALL control_consulta('C')
 		IF vm_num_rows <= 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-		
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -138,10 +144,7 @@ MENU 'OPCIONES'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-			
 		END IF
 		IF vm_row_current <= 1 THEN
                         HIDE OPTION 'Retroceder'
@@ -236,7 +239,7 @@ DECLARE q_up CURSOR FOR SELECT * FROM cxct003
 OPEN q_up
 FETCH q_up INTO rm_cxc.*
 IF STATUS < 0 THEN
-	COMMIT WORK
+	ROLLBACK WORK
 	CALL fl_mensaje_bloqueo_otro_usuario()
 	WHENEVER ERROR STOP
 	RETURN
@@ -261,7 +264,6 @@ ELSE
 		CALL mostrar_registro(vm_r_rows[vm_row_current])
 	END IF
 END IF
-WHENEVER ERROR STOP
  
 END FUNCTION
 
@@ -271,8 +273,8 @@ FUNCTION control_consulta(flag)
 DEFINE flag		CHAR(1)
 DEFINE cod_aux          LIKE gent003.g03_areaneg
 DEFINE nom_aux          LIKE gent003.g03_nombre
-DEFINE query		VARCHAR(800)
-DEFINE expr_sql		VARCHAR(800)
+DEFINE query		CHAR(800)
+DEFINE expr_sql		CHAR(800)
 DEFINE num_reg		INTEGER
 
 CLEAR FORM
@@ -283,8 +285,10 @@ IF flag = 'C' THEN
 	CONSTRUCT BY NAME expr_sql ON z03_areaneg, z03_credit_auto,
 		z03_credit_dias, z03_cupocred_mb, z03_dcto_item_c,
 		z03_dcto_item_r, z03_dcto_mano_c, z03_dcto_mano_r
+        	ON KEY(F1,CONTROL-W)
+			CALL llamar_visor_teclas()
 		ON KEY(F2)
-			IF infield(z03_areaneg) THEN
+			IF INFIELD(z03_areaneg) THEN
                 	        CALL fl_ayuda_areaneg(vg_codcia)
                         	        RETURNING cod_aux, nom_aux
 	                        LET int_flag = 0
@@ -293,6 +297,9 @@ IF flag = 'C' THEN
                         	        DISPLAY nom_aux TO tit_area
 	                        END IF
         	        END IF
+		BEFORE CONSTRUCT
+			--#CALL dialog.keysetlabel("F1","")
+			--#CALL dialog.keysetlabel("CONTROL-W","")
 	END CONSTRUCT
 	IF int_flag THEN
 		IF vm_row_current > 0 THEN
@@ -332,6 +339,10 @@ IF vm_num_rows = 0 THEN
 	IF flag = 'C' THEN
 		CALL fl_mensaje_consulta_sin_registros()
 		CLEAR FORM
+	END IF
+	IF vm_flag = 'O' THEN
+		CALL fl_mensaje_consulta_sin_registros()
+		EXIT PROGRAM
 	END IF
 	LET vm_row_current = 0
 	CALL muestra_contadores(vm_row_current, vm_num_rows)
@@ -383,8 +394,10 @@ INPUT BY NAME rm_cxc.z03_areaneg, rm_cxc.z03_credit_auto,
 		ELSE
 			RETURN
 		END IF
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
 	ON KEY(F2)
-		IF infield(z03_areaneg) THEN
+		IF INFIELD(z03_areaneg) THEN
                         CALL fl_ayuda_areaneg(vg_codcia)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
@@ -394,6 +407,9 @@ INPUT BY NAME rm_cxc.z03_areaneg, rm_cxc.z03_credit_auto,
                                 DISPLAY nom_aux TO tit_area
                         END IF
                 END IF
+	BEFORE INPUT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 	BEFORE FIELD z03_areaneg
 		IF flag_mant = 'M' THEN
 			NEXT FIELD NEXT
@@ -409,7 +425,8 @@ INPUT BY NAME rm_cxc.z03_areaneg, rm_cxc.z03_credit_auto,
 				RETURNING r_are.*
                        	DISPLAY r_are.g03_nombre TO tit_area
                         IF r_cxc_aux.z03_areaneg IS NOT NULL THEN
-         			CALL fgl_winmessage(vg_producto,'Area de Negocio ya existe.','exclamation')
+         			--CALL fgl_winmessage(vg_producto,'Area de Negocio ya existe.','exclamation')
+				CALL fl_mostrar_mensaje('Area de Negocio ya existe.','exclamation')
                                 NEXT FIELD z03_areaneg
                         END IF
                 ELSE
@@ -430,8 +447,8 @@ INPUT BY NAME rm_cxc.z03_areaneg, rm_cxc.z03_credit_auto,
                                         IF rm_cxc.z03_cupocred_ma IS NULL
                                         OR rm_cxc.z03_cupocred_ma>9999999999.99
                                         THEN
-                                                CALL fgl_winmessage(vg_producto,
-'El cupo de crédito en moneda base está demasiado grande.', 'exclamation')
+                                                --CALL fgl_winmessage(vg_producto,'El cupo de crédito en moneda base está demasiado grande.','exclamation')
+						CALL fl_mostrar_mensaje('El cupo de crédito en moneda base está demasiado grande.','exclamation')
                                                 NEXT FIELD z03_cupocred_mb
                                         END IF
                                 END IF
@@ -441,7 +458,8 @@ INPUT BY NAME rm_cxc.z03_areaneg, rm_cxc.z03_credit_auto,
 	AFTER INPUT
 		CALL poner_credit_dias() RETURNING resul
 		IF resul = 1 THEN
-			CALL fgl_winmessage(vg_producto,'Crédito de días debe ser mayor a cero, si hay crédito automático.','info')
+			--CALL fgl_winmessage(vg_producto,'Crédito de días debe ser mayor a cero, si hay crédito automático.','info')
+			CALL fl_mostrar_mensaje('Crédito de días debe ser mayor a cero, si hay crédito automático.','info')
 			NEXT FIELD z03_credit_dias
 		END IF
 END INPUT
@@ -493,7 +511,8 @@ CALL mostrar_cliente()
 IF vm_num_rows > 0 THEN
 	SELECT * INTO rm_cxc.* FROM cxct003 WHERE ROWID = num_registro	
 	IF STATUS = NOTFOUND THEN
-		CALL fgl_winmessage (vg_producto,'No existe registro con índice: ' || vm_row_current,'exclamation')
+		--CALL fgl_winmessage (vg_producto,'No existe registro con índice: ' || vm_row_current,'exclamation')
+		CALL fl_mostrar_mensaje('No existe registro con índice: ' || vm_row_current,'exclamation')
 		RETURN
 	END IF
 	DISPLAY BY NAME rm_cxc.z03_areaneg, rm_cxc.z03_credit_auto,
@@ -538,33 +557,14 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION llamar_visor_teclas()
+DEFINE a		CHAR(1)
 
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
+IF vg_gui = 0 THEN
+	CALL fl_visor_teclas_caracter() RETURNING int_flag 
+	LET a = fgl_getkey()
+	CLOSE WINDOW w_tf
+	LET int_flag = 0
 END IF
 
 END FUNCTION

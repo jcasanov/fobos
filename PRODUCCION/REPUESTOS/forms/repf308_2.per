@@ -1,22 +1,22 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
 
   Forma Pago Factura: [f1][f002         ]
-
+                                                       [c50] de [c51]
         Caja: [f003            ]         Detalle Documentos Aplicados:
    Anticipos: [f004            ]         [f10|f011  |f012            ]
      Crédito: [f005            ]        [f20|f021  |f022            ]
                ----------------         [f20|f021  |f022            ]
        Total: [f006            ]        [f20|f021  |f022            ]
 
-          Detalle Caja:      
+          Detalle Caja:                                [c52] de [c53]
           [f30|f031           |f032             |f33|f034            ]
          [f40|f041           |f042             |f43|f044            ]
          [f40|f041           |f042             |f43|f044            ]
          [f40|f041           |f042             |f43|f044            ]
    
-        Detalle Crédito:
+        Detalle Crédito:                               [c54] de [c55]
         [f50|f051      |f052          |f053         |f054            ]
        [f60|f061      |f062          |f063         |f064            ]
        [f60|f061      |f062          |f063         |f064            ]
@@ -29,41 +29,49 @@ rept026
 rept027
 cajt011
 ATTRIBUTES
-f1   = formonly.cod_tran, REVERSE;
-f002 = formonly.num_tran, REVERSE;
-f003 = formonly.val_caja TYPE DECIMAL(12,2), FORMAT = '#,###,###,##&.##';
+f1   = FORMONLY.cod_tran, REVERSE;
+f002 = FORMONLY.num_tran, REVERSE;
+f003 = FORMONLY.val_caja TYPE DECIMAL(12,2), FORMAT = '#,###,###,##&.##';
 f004 = r25_valor_ant, FORMAT = '#,###,###,##&.##';
 f005 = r25_valor_cred, FORMAT = '#,###,###,##&.##';
 f006 = r19_tot_neto, FORMAT = '#,###,###,##&.##';
-f10  = formonly.tit_ant1, WIDGET = 'BUTTON';
-f011 = formonly.tit_ant2, WIDGET = 'BUTTON';
-f012 = formonly.tit_ant3, WIDGET = 'BUTTON';
+f10  = FORMONLY.tit_ant1, WIDGET = 'BUTTON';
+f011 = FORMONLY.tit_ant2, WIDGET = 'BUTTON';
+f012 = FORMONLY.tit_ant3, WIDGET = 'BUTTON';
 f20  = r27_tipo;
 f021 = r27_numero;
 f022 = r27_valor, FORMAT = '#,###,###,##&.##';
-f30  = formonly.tit_caj1, WIDGET = 'BUTTON';
-f031 = formonly.tit_caj2, WIDGET = 'BUTTON';
-f032 = formonly.tit_caj3, WIDGET = 'BUTTON';
-f33  = formonly.tit_caj4, WIDGET = 'BUTTON';
-f034 = formonly.tit_caj5, WIDGET = 'BUTTON';
+f30  = FORMONLY.tit_caj1, WIDGET = 'BUTTON';
+f031 = FORMONLY.tit_caj2, WIDGET = 'BUTTON';
+f032 = FORMONLY.tit_caj3, WIDGET = 'BUTTON';
+f33  = FORMONLY.tit_caj4, WIDGET = 'BUTTON';
+f034 = FORMONLY.tit_caj5, WIDGET = 'BUTTON';
 f40  = j11_codigo_pago;
-f041 = formonly.nombre_bt;
+f041 = FORMONLY.nombre_bt;
 f042 = j11_num_ch_aut;
 f43  = j11_moneda;
 f044 = j11_valor, FORMAT = '#,###,###,##&.##';
-f50  = formonly.tit_cred1, WIDGET = 'BUTTON';
-f051 = formonly.tit_cred2, WIDGET = 'BUTTON';
-f052 = formonly.tit_cred3, WIDGET = 'BUTTON';
-f053 = formonly.tit_cred4, WIDGET = 'BUTTON';
-f054 = formonly.tit_cred5, WIDGET = 'BUTTON';
+f50  = FORMONLY.tit_cred1, WIDGET = 'BUTTON';
+f051 = FORMONLY.tit_cred2, WIDGET = 'BUTTON';
+f052 = FORMONLY.tit_cred3, WIDGET = 'BUTTON';
+f053 = FORMONLY.tit_cred4, WIDGET = 'BUTTON';
+f054 = FORMONLY.tit_cred5, WIDGET = 'BUTTON';
 f60  = r26_dividendo, FORMAT = '&&';
 f061 = r26_fec_vcto, FORMAT = 'dd-mm-yyyy';
 f062 = r26_valor_cap, FORMAT = '###,###,##&.##';
 f063 = r26_valor_int, FORMAT = '##,###,##&.##';
-f064 = formonly.tot_div TYPE DECIMAL(12,2), FORMAT = '#,###,###,##&.##';
+f064 = FORMONLY.tot_div TYPE DECIMAL(12,2), FORMAT = '#,###,###,##&.##';
+
+c50  = FORMONLY.num_ant, NOENTRY;
+c51  = FORMONLY.max_ant, NOENTRY;
+c52  = FORMONLY.num_caj, NOENTRY;
+c53  = FORMONLY.max_caj, NOENTRY;
+c54  = FORMONLY.num_cre, NOENTRY;
+c55  = FORMONLY.max_cre, NOENTRY;
+END
 INSTRUCTIONS
 SCREEN RECORD r_ant[3] (r27_tipo, r27_numero, r27_valor)
-SCREEN RECORD r_caj[3] (j11_codigo_pago, formonly.nombre_bt, j11_num_ch_aut,
+SCREEN RECORD r_caj[3] (j11_codigo_pago, FORMONLY.nombre_bt, j11_num_ch_aut,
 			j11_moneda, j11_valor)
 SCREEN RECORD r_cred[3] (r26_dividendo, r26_fec_vcto, r26_valor_cap, 
-			 r26_valor_int, formonly.tot_div)
+			 r26_valor_int, FORMONLY.tot_div)

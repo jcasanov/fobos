@@ -1,0 +1,26 @@
+DATABASE aceros
+SCREEN
+{
+
+                    FORMA DE PAGO PARA UN EMPLEADO
+                    -----------------------------
+
+ Forma de Pago: [c000            ]  Banco Empresa
+                                    [c1] [c002                       ]
+                                    Cuenta Empresa: [c003           ]
+                                   Cuenta Empleado: [c004           ]
+
+}
+TABLES
+gent008
+rolt048
+ATTRIBUTES
+c1   = rolt048.n48_bco_empresa, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = gent008.g08_nombre, NOENTRY, UPSHIFT;
+c000 = rolt048.n48_tipo_pago, AUTONEXT, UPSHIFT, REVERSE, DEFAULT = 'C',
+	WIDGET = 'RADIO', CONFIG = 'E Efectivo C Cheque T Transferencia';
+c003 = rolt048.n48_cta_empresa, AUTONEXT, UPSHIFT;
+c004 = rolt048.n48_cta_trabaj, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+END

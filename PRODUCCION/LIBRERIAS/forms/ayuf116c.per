@@ -1,0 +1,29 @@
+DATABASE aceros
+SCREEN
+{
+  TRANSACCIONES COBRANZAS
+ --------------------------------------------------
+  TD Número Cliente  
+ --------------------------------------------------
+ [c0|c001  |c002                                  ]
+ [c0|c001  |c002                                  ]
+ [c0|c001  |c002                                  ]
+ [c0|c001  |c002                                  ]
+ [c0|c001  |c002                                  ]
+ [c0|c001  |c002                                  ]
+ [c0|c001  |c002                                  ]
+ [c0|c001  |c002                                  ]
+ [c0|c001  |c002                                  ]
+ [c0|c001  |c002                                  ]
+}
+TABLES
+cxct001
+cxct022
+ATTRIBUTES
+c0   = z22_tipo_trn, UPSHIFT, REVERSE;
+c001 = z22_num_trn, UPSHIFT, REVERSE;
+c002 = z01_nomcli, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_trancob[10](z22_tipo_trn, z22_num_trn, z01_nomcli)

@@ -1,0 +1,15 @@
+DATABASE aceros
+SCREEN
+{
+
+                Período: [c000      ]      -      [c001      ]
+
+}
+TABLES
+rolt038
+ATTRIBUTES
+c000 = rolt038.n38_fecha_ini, AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha inicial en formato: dd-mm-aaaa';
+c001 = rolt038.n38_fecha_fin, AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha final en formato: dd-mm-aaaa';
+END

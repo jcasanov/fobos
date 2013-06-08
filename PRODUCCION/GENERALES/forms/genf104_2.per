@@ -1,5 +1,5 @@
-database diteca
-screen  
+DATABASE aceros
+SCREEN  
 {
                                                                               
 
@@ -19,9 +19,9 @@ screen
 
 }
 end
-tables
+TABLES
 gent005
-attributes
+ATTRIBUTES
 c000 = gent005.g05_nombres, UPSHIFT, REVERSE;
 c001 = gent005.g05_usuario, UPSHIFT, REVERSE,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
@@ -30,9 +30,9 @@ a0 = gent005.g05_grupo, UPSHIFT, REVERSE, AUTONEXT,
 a = gent005.g05_estado, UPSHIFT, REVERSE, AUTONEXT, NOENTRY, 
         COMMENT = 'A ACTIVO   B BLOQUEADO';
 c002 = gent005.g05_clave, INVISIBLE, REVERSE;
-c005 = formonly.clave, REQUIRED, INVISIBLE, REVERSE;
-c003 = formonly.estado, UPSHIFT, NOENTRY; 
-c004 = formonly.grupo1, UPSHIFT, NOENTRY; 
+c005 = FORMONLY.clave, REQUIRED, INVISIBLE, REVERSE;
+c003 = FORMONLY.estado, UPSHIFT, NOENTRY; 
+c004 = FORMONLY.grupo1, UPSHIFT, NOENTRY; 
 c010 = gent005.g05_tipo, WIDGET='RADIO', CONFIG='AG "Administrador General" AM "Administrador de Módulo" UF "Usuario Final"', DEFAULT='UF', AUTONEXT;
 c011 = gent005.g05_menu, DOWNSHIFT;
-c012 = formonly.name_menu;
+c012 = FORMONLY.name_menu;

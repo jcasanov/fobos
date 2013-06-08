@@ -1,0 +1,34 @@
+DATABASE aceros
+SCREEN
+{
+  ORDENES DE DESPACHO
+ ----------------------------------------------------------------------
+  Orden    TP Factura          Fecha       Cliente                  Bd.
+ ----------------------------------------------------------------------
+ [c000    |c0|c002            |c003       |c004                    |c ]
+ [c000    |c0|c002            |c003       |c004                    |c ]
+ [c000    |c0|c002            |c003       |c004                    |c ]
+ [c000    |c0|c002            |c003       |c004                    |c ]
+ [c000    |c0|c002            |c003       |c004                    |c ]
+ [c000    |c0|c002            |c003       |c004                    |c ]
+ [c000    |c0|c002            |c003       |c004                    |c ]
+ [c000    |c0|c002            |c003       |c004                    |c ]
+ [c000    |c0|c002            |c003       |c004                    |c ]
+ [c000    |c0|c002            |c003       |c004                    |c ]
+}
+TABLES
+rept034
+ATTRIBUTES
+c000 = r34_num_ord_des,  UPSHIFT, REVERSE;
+c0   = r34_cod_tran,     UPSHIFT, REVERSE;
+c002 = r34_num_tran,     UPSHIFT, REVERSE;
+c003 = r34_fec_entrega,  UPSHIFT, FORMAT = 'dd-mm-yyyy', 
+       COMMENTS = 'Ingrese fecha en formato: dd-mm-aaaa';
+c004 = r34_entregar_a,   UPSHIFT, REVERSE;
+c    = r34_bodega,       UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_orddespacho[10] ( r34_num_ord_des, r34_cod_tran,
+                                r34_num_tran,    r34_fec_entrega,
+                                r34_entregar_a,  r34_bodega)

@@ -1,31 +1,36 @@
-database diteca
-screen 
+DATABASE aceros
+SCREEN 
 {
 
 
-  Código Vendedor: [f001  ]                              Estado:[a|a1        ]
+      Código Entidad: [f001  ]                           Estado:[a|a1        ]
 
-          Nombres: [f002                          ] 
-        Iniciales: [a2 ]                     Modifica Descuento:[c]
-    Código de Rol: [f003  ]		                   Tipo:[b            ]
+             Nombres: [f002                          ] 
+           Iniciales: [a2 ]                    Modifica Precio:[c]
+       Código de Rol: [f003  ]	                          Tipo:[b            ]
 
-    Ingresado Por: [f004      ]
- Fecha de Ingreso: [f005               ]
+
+   Usuario de Acceso: [f010      ]
+
+       Ingresado Por: [f004      ]
+    Fecha de Ingreso: [f005               ]
 
 }
-end
-tables
+TABLES
 rept001
-attributes
+ATTRIBUTES
 f001 = rept001.r01_codigo, REVERSE, NOENTRY,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-f002 = rept001.r01_nombres, REVERSE, UPSHIFT;
+f002 = rept001.r01_nombres, AUTONEXT, REVERSE, UPSHIFT;
 a2   = rept001.r01_iniciales, REVERSE, UPSHIFT, AUTONEXT;
-a    = rept001.r01_estado, REVERSE, UPSHIFT, NOENTRY;
-a1   = formonly.tit_estado TYPE VARCHAR, NOENTRY;
+a    = rept001.r01_estado, REVERSE, UPSHIFT, NOENTRY,
+	COMMENTS = 'A ACTIVO  B BLOQUEADO';
+a1   = FORMONLY.tit_estado TYPE VARCHAR, NOENTRY;
 b    = rept001.r01_tipo, REVERSE, AUTONEXT, DEFAULT = 'I',
-	WIDGET = 'RADIO', CONFIG = 'I Interno E Externo';
-f003 = rept001.r01_codrol,
+	WIDGET = 'RADIO', CONFIG = 'I Interno E Externo B Bodeguero J Jefe G Gerente';
+f003 = rept001.r01_codrol, UPSHIFT, AUTONEXT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f010 = rept001.r01_user_owner, REVERSE, UPSHIFT, AUTONEXT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 f004 = rept001.r01_usuario, REVERSE, NOENTRY;
 f005 = rept001.r01_fecing, REVERSE, NOENTRY;

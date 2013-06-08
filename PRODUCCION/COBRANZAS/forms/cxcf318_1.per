@@ -1,0 +1,86 @@
+DATABASE FORMONLY
+SCREEN
+{
+        Documento: [c0] [c001           ]             Tipo: [c005        ]
+           Modulo: [c1] [c002                ]
+
+          Periodo: [c003      ] - [c004      ]
+                                                            [c006 ] de [c007 ]
+ [c2|c3|c010             |c011      |c012           |c013        |c014        ]
+[c4|c5|c020             |c021      |c022           |c023        |c024        ]
+[c4|c5|c020             |c021      |c022           |c023        |c024        ]
+[c4|c5|c020             |c021      |c022           |c023        |c024        ]
+[c4|c5|c020             |c021      |c022           |c023        |c024        ]
+[c4|c5|c020             |c021      |c022           |c023        |c024        ]
+[c4|c5|c020             |c021      |c022           |c023        |c024        ]
+[c4|c5|c020             |c021      |c022           |c023        |c024        ]
+[c4|c5|c020             |c021      |c022           |c023        |c024        ]
+[c4|c5|c020             |c021      |c022           |c023        |c024        ]
+[c4|c5|c020             |c021      |c022           |c023        |c024        ]
+[c4|c5|c020             |c021      |c022           |c023        |c024        ]
+[c4|c5|c020             |c021      |c022           |c023        |c024        ]
+[c4|c5|c020             |c021      |c022           |c023        |c024        ]
+ Cli/Prov.: [c030                       ] Totales: [c031        |c032        ]
+}
+ATTRIBUTES
+c0   = FORMONLY.tipo_doc TYPE CHAR, AUTONEXT, UPSHIFT,
+	WIDGET = "FIELD_BMP", CONFIG = "lista.bmp F2";
+c001 = FORMONLY.nom_doc TYPE CHAR, NOENTRY, UPSHIFT;
+c1   = FORMONLY.modulo TYPE CHAR NOT NULL, REQUIRED, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = "FIELD_BMP", CONFIG = "lista.bmp F2";
+c002 = FORMONLY.nom_mod TYPE CHAR, NOENTRY, UPSHIFT, REVERSE;
+c003 = FORMONLY.fecha_ini TYPE DATE NOT NULL, REQUIRED, AUTONEXT, REVERSE,
+	FORMAT = 'dd-mm-yyyy', 
+	COMMENTS = 'Fecha inicial de emision de los documentos. (dd-mm-yyyy)';
+c004 = FORMONLY.fecha_fin TYPE DATE NOT NULL, REQUIRED, AUTONEXT, REVERSE,
+	FORMAT = 'dd-mm-yyyy', 
+	COMMENTS = 'Fecha final de emision de los documentos. (dd-mm-yyyy)';
+c005 = FORMONLY.ind_doc TYPE CHAR NOT NULL, UPSHIFT, AUTONEXT, REVERSE,
+	WIDGET = 'RADIO', CONFIG = 'D Deudor F "A Favor" T "T o d o s"',
+	DEFAULT = 'D';
+
+c006 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c007 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c2   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c3   = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c010 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c011 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c012 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c013 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c014 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+
+c4   = FORMONLY.localidad TYPE SMALLINT, NOENTRY, UPSHIFT, FORMAT = '&&',
+	OPTIONS = '-nolist';
+c5   = FORMONLY.tip_doc TYPE CHAR, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c020 = FORMONLY.num_doc TYPE VARCHAR, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c021 = FORMONLY.fecha TYPE DATE, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+c022 = FORMONLY.nomcli TYPE VARCHAR, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c023 = FORMONLY.valor_doc TYPE DECIMAL, NOENTRY, UPSHIFT,
+	FORMAT = '-,---,--&.##', COLOR = RED WHERE c023 < 0,
+	COLOR = BLACK WHERE c023 = 0, COLOR = BLUE WHERE c023 > 0,
+	OPTIONS = '-nolist';
+c024 = FORMONLY.saldo_doc TYPE DECIMAL, NOENTRY, UPSHIFT,
+	FORMAT = '-,---,--&.##', COLOR = RED WHERE c024 < 0,
+	COLOR = BLACK WHERE c024 = 0, COLOR = BLUE WHERE c024 > 0,
+	OPTIONS = '-nolist';
+
+c030 = FORMONLY.cliprov TYPE VARCHAR, NOENTRY, UPSHIFT, REVERSE;
+c031 = FORMONLY.tot_valor TYPE DECIMAL, NOENTRY, UPSHIFT,
+	FORMAT = '-,---,--&.##', REVERSE;
+c032 = FORMONLY.tot_saldo TYPE DECIMAL, NOENTRY, UPSHIFT,
+	FORMAT = '-,---,--&.##', REVERSE;
+END
+KEYS
+F5  = 'Contabilizacion'
+F6  = 'Forma Pago'
+F7  = 'Movimientos'
+F8  = 'Documento'
+F9  = 'Transaccion'
+F10 = 'Imprimir Compr.'
+F11 = 'Imprimir Listado'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_detalle[13] (localidad, tip_doc, num_doc, fecha, nomcli,
+				valor_doc, saldo_doc)

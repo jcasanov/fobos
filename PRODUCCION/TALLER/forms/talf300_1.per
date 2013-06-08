@@ -1,32 +1,33 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
-            Estado: [a][c000      ]          Moneda: [a0] [c001           ]
-     Fecha Inicial: [c002      ]        Fecha Final: [c003      ]
-    Código Cliente: [c004      ] [c005                                    ]
-            Modelo: [c006           ] [c007                               ]
-  Tipo Orden Trab.: [b] [c008           ]
-
- [c020      |d|c022                         |c023           |c024            ]
-[c010      |c|c012                         |c013           |c014            ]
-[c010      |c|c012                         |c013           |c014            ]
-[c010      |c|c012                         |c013           |c014            ]
-[c010      |c|c012                         |c013           |c014            ]
-[c010      |c|c012                         |c013           |c014            ]
-[c010      |c|c012                         |c013           |c014            ]
-[c010      |c|c012                         |c013           |c014            ]
-[c010      |c|c012                         |c013           |c014            ]
-[c010      |c|c012                         |c013           |c014            ]
-[c010      |c|c012                         |c013           |c014            ]
-[c010      |c|c012                         |c013           |c014            ]
-[c010      |c|c012                         |c013           |c014            ]
-                                                    Total: [c015            ]
+             Estado: [a][c000      ]          Moneda: [a0] [c001           ]
+      Fecha Inicial: [c002      ]        Fecha Final: [c003      ]
+     Código Cliente: [c004      ] [c005                                    ]
+             Modelo: [c006           ] [c007                               ]
+   Tipo Orden Trab.: [b] [c008           ]
+                                                            [c060 ] de [c061 ]
+ [c020      |d|c022  |c023                  |c024          |c025            |f]
+[c010      |c|c012  |c013                  |c014          |c015            |e]
+[c010      |c|c012  |c013                  |c014          |c015            |e]
+[c010      |c|c012  |c013                  |c014          |c015            |e]
+[c010      |c|c012  |c013                  |c014          |c015            |e]
+[c010      |c|c012  |c013                  |c014          |c015            |e]
+[c010      |c|c012  |c013                  |c014          |c015            |e]
+[c010      |c|c012  |c013                  |c014          |c015            |e]
+[c010      |c|c012  |c013                  |c014          |c015            |e]
+[c010      |c|c012  |c013                  |c014          |c015            |e]
+[c010      |c|c012  |c013                  |c014          |c015            |e]
+[c010      |c|c012  |c013                  |c014          |c015            |e]
+[c010      |c|c012  |c013                  |c014          |c015            |e]
+[c030                                      ]       Total: [c031            ]
 }
 TABLES
 talt023
 ATTRIBUTES
-a    = talt023.t23_estado, AUTONEXT, REVERSE, UPSHIFT,
-	COMMENTS = 'Estado: A ACTIVAS C CERRADAS F FACTURADAS E ELIMINADAS D DEVUELTAS';
+a    = FORMONLY.t23_estado, AUTONEXT, REVERSE, UPSHIFT,
+	INCLUDE = ('A', 'C', 'F', 'E', 'D', 'T'),
+	COMMENTS = 'Estado: A ACTIVAS C CERRADAS F FACTURADAS E ELIMINADAS D DEVUELTAS T TODAS';
 c000 = FORMONLY.tit_estado, NOENTRY, UPSHIFT;
 a0   = talt023.t23_moneda, AUTONEXT, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
@@ -48,21 +49,34 @@ d    = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
 c022 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
 c023 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
 c024 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c025 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+f    = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
 
 c010 = FORMONLY.tit_fecha, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
 	OPTIONS = '-nolist';
 c    = FORMONLY.tit_tipo, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
-c012 = talt023.t23_nom_cliente, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
-c013 = FORMONLY.tit_modelo_det, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
-c014 = talt023.t23_tot_neto, NOENTRY, UPSHIFT,
+c012 = talt023.t23_orden, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c013 = talt023.t23_nom_cliente, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c014 = FORMONLY.tit_modelo_det, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c015 = talt023.t23_tot_neto, NOENTRY, UPSHIFT,
 	FORMAT = '#,###,###,##&.##', OPTIONS = '-nolist';
-c015 = FORMONLY.tit_total, NOENTRY, REVERSE, UPSHIFT,
+e    = FORMONLY.estado, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+
+c030 = talt023.t23_descripcion, UPSHIFT, NOENTRY, REVERSE;
+c031 = FORMONLY.tit_total, NOENTRY, REVERSE, UPSHIFT,
 	FORMAT = '#,###,###,##&.##';
+
+c060 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c061 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
 END
 KEYS
-F5 = 'Orden de Trabajo'
-F6 = 'Orden Creada'
-F7 = 'Devolución'
+F5  = 'Contabilización'
+F6  = 'Comprobante'
+F7  = 'Orden Trabajo'
+F8  = 'Mano de Obra'
+F9  = 'Ordenes Compra'
+F10 = 'Detalle Proforma'
+F11 = 'Detalle Inv. Venta'
 INSTRUCTIONS
-SCREEN RECORD rm_det[12] (tit_fecha, tit_tipo, t23_nom_cliente, tit_modelo_det,
-			t23_tot_neto)
+SCREEN RECORD rm_det[12] (tit_fecha, tit_tipo, t23_orden, t23_nom_cliente,
+				tit_modelo_det, t23_tot_neto, estado)

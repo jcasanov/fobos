@@ -1,0 +1,62 @@
+DATABASE aceros
+SCREEN 
+{
+
+         Fecha Inicio: [c002      ]     Estado: [a|c100           ] 
+            Fecha Fin: [c003      ]          Pagado al IESS ? : [c]
+                                                             [c050] de [c051]
+ [lbl1  |lbl2                                 |lbl3            |lbl4         ]
+[c008  |c102                                 |c004            |c103         ]
+[c008  |c102                                 |c004            |c103         ]
+[c008  |c102                                 |c004            |c103         ]
+[c008  |c102                                 |c004            |c103         ]
+[c008  |c102                                 |c004            |c103         ]
+[c008  |c102                                 |c004            |c103         ]
+[c008  |c102                                 |c004            |c103         ]
+[c008  |c102                                 |c004            |c103         ]
+[c008  |c102                                 |c004            |c103         ]
+[c008  |c102                                 |c004            |c103         ]
+[c008  |c102                                 |c004            |c103         ]
+[c008  |c102                                 |c004            |c103         ]
+[c008  |c102                                 |c004            |c103         ]
+                                             [c110            |c111         ]
+}
+TABLES
+rolt038
+ATTRIBUTES
+c002 = rolt038.n38_fecha_ini, REVERSE, NOENTRY, UPSHIFT, FORMAT='dd-mm-yyyy',
+	COMMENT='Ingrese fecha en formato dd-mm-yyyy';
+c003 = rolt038.n38_fecha_fin, REVERSE, NOENTRY, UPSHIFT, FORMAT='dd-mm-yyyy',
+	COMMENT='Ingrese fecha en formato dd-mm-yyyy';
+a     = rolt038.n38_estado, UPSHIFT, REVERSE, NOENTRY, AUTONEXT,
+	INCLUDE=('A', 'P'), COMMENTS = 'A ACTIVA  P PROCESADA';
+c    = rolt038.n38_pago_iess, NOENTRY, UPSHIFT, REVERSE,
+	WIDGET = 'CHECK', CONFIG = 'S N Acknoledge', DEFAULT = 'S';
+c100 = FORMONLY.n_estado, NOENTRY;
+
+c008 = rolt038.n38_cod_trab,    OPTIONS='-nolist', NOENTRY;
+c102 = FORMONLY.n_trab,         OPTIONS='-nolist', NOENTRY;
+c004 = rolt038.n38_ganado_per,  OPTIONS='-nolist', AUTONEXT, UPSHIFT, 
+				FORMAT='#,###,###,##&.##';
+c103 = rolt038.n38_valor_fondo, OPTIONS='-nolist', NOENTRY,
+				FORMAT='##,###,##&.##';
+
+c110 = FORMONLY.tot_ganado,     REVERSE, NOENTRY,  FORMAT='#,###,###,##&.##';
+c111 = FORMONLY.tot_valor,      REVERSE, NOENTRY,  FORMAT='##,###,##&.##';
+                                                                                
+lbl1 = FORMONLY.bt_cod_trab,    WIDGET='BUTTON', CONFIG='F15';
+lbl2 = FORMONLY.bt_nom_trab,    WIDGET='BUTTON', CONFIG='F16';
+lbl3 = FORMONLY.bt_ganado,      WIDGET='BUTTON', CONFIG='F17';
+lbl4 = FORMONLY.bt_valor_fondo, WIDGET='BUTTON', CONFIG='F18';  
+
+c050 = FORMONLY.num_row,	NOENTRY, REVERSE;
+c051 = FORMONLY.max_row,	NOENTRY, REVERSE;
+END
+KEYS
+F5 = 'Insertar'
+F6 = 'Modificar'
+F7 = 'Detalle Tot. Gan.'
+F8 = 'Imprimir'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD ra_scr[13] (n38_cod_trab, n_trab, n38_ganado_per, n38_valor_fondo)

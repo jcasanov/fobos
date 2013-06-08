@@ -1,0 +1,32 @@
+DATABASE aceros
+SCREEN
+{
+
+ ANTICIPOS TRABAJADORES - MODULO CLUB
+
+ [c000    |c001                          |c002 ]
+[c010    |c011                          |c012 ]
+[c010    |c011                          |c012 ]
+[c010    |c011                          |c012 ]
+[c010    |c011                          |c012 ]
+[c010    |c011                          |c012 ]
+[c010    |c011                          |c012 ]
+[c010    |c011                          |c012 ]
+[c010    |c011                          |c012 ]
+[c010    |c011                          |c012 ]
+[c010    |c011                          |c012 ]
+}
+TABLES
+rolt064
+rolt030
+
+ATTRIBUTES
+c000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c002 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c010 = rolt064.n64_num_prest, 	AUTONEXT, UPSHIFT, REVERSE;
+c011 = rolt030.n30_nombres, 	AUTONEXT, UPSHIFT, REVERSE;
+c012 = rolt064.n64_estado, 	AUTONEXT, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+SCREEN RECORD rh_prestamo[10] (n64_num_prest, n30_nombres, n64_estado)

@@ -1,6 +1,7 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
+                                                            [c050 ] de [c051 ]
 
     Tipo Trans.: [a0] [c003           ]  Fec. Ingreso: [c014                 ]
      No. Trans.: [c000       ]                Subtipo: [c04] [c005           ]
@@ -8,18 +9,18 @@ SCREEN
    Area Negocio: [c006] [c007           ]      Moneda: [a1] [c008            ]
        Cobrador: [c009] [c010                         ]
      Referencia: [c011                                ]
- [a3|c110          |c11|c112            |c113            |c114             |d]
-[a2|c100          |c01|c102            |c103            |c104             |c]
-[a2|c100          |c01|c102            |c103            |c104             |c]
-[a2|c100          |c01|c102            |c103            |c104             |c]
-[a2|c100          |c01|c102            |c103            |c104             |c]
-[a2|c100          |c01|c102            |c103            |c104             |c]
-[a2|c100          |c01|c102            |c103            |c104             |c]
-[a2|c100          |c01|c102            |c103            |c104             |c]
-             Totales: [c012            |c018            |c019             ]
-  Documento: [c015      |c016      |c017] dias
+                                                           [c052 ] de [c053 ]
+ [a3|c110           |c11|c112            |c113            |c114            |d]
+[a2|c100           |c01|c102            |c103            |c104            |c]
+[a2|c100           |c01|c102            |c103            |c104            |c]
+[a2|c100           |c01|c102            |c103            |c104            |c]
+[a2|c100           |c01|c102            |c103            |c104            |c]
+[a2|c100           |c01|c102            |c103            |c104            |c]
+[a2|c100           |c01|c102            |c103            |c104            |c]
+[a2|c100           |c01|c102            |c103            |c104            |c]
+              Totales: [c012            |c018            |c019            ]
 
-    Usuario: [c013      ]
+  Documento: [c015      |c016      |c017] dias        Usuario: [c013      ]
 }
 TABLES
 cxct020, cxct022, cxct023
@@ -47,7 +48,7 @@ c008 = FORMONLY.tit_mon_bas, NOENTRY, REVERSE, UPSHIFT;
 c009 = cxct022.z22_cobrador, AUTONEXT, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 c010 = FORMONLY.tit_cobrador, NOENTRY, UPSHIFT;
-c011 = cxct022.z22_referencia, AUTONEXT, UPSHIFT;
+c011 = cxct022.z22_referencia, AUTONEXT, UPSHIFT, REVERSE;
 
 a3   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
 c110 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
@@ -69,7 +70,7 @@ c103 = FORMONLY.tit_valor_apl, AUTONEXT, UPSHIFT,
 	FORMAT = '-,---,---,--&.##',INCLUDE = (-9999999999.99 TO 9999999999.99),
 	OPTIONS = '-nolist';
 c104 = FORMONLY.tit_saldo_nue, NOENTRY, UPSHIFT,
-	FORMAT = '--,---,---,--&.##', INCLUDE = (0.01 TO 9999999999.99),
+	FORMAT = '-,---,---,--&.##', INCLUDE = (0.01 TO 9999999999.99),
 	OPTIONS = '-nolist';
 c    = FORMONLY.tit_check, AUTONEXT, UPSHIFT,
 	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N',
@@ -81,7 +82,7 @@ c012 = FORMONLY.tit_total_act, NOENTRY, REVERSE, UPSHIFT,
 c018 = FORMONLY.tit_total_apl, NOENTRY, REVERSE, UPSHIFT,
 	FORMAT = '-,---,---,--&.##',INCLUDE = (-9999999999.99 TO 9999999999.99);
 c019 = FORMONLY.tit_total_nue, NOENTRY, REVERSE, UPSHIFT,
-	FORMAT = '--,---,---,--&.##';
+	FORMAT = '-,---,---,--&.##';
 c013 = cxct022.z22_usuario, NOENTRY, REVERSE, UPSHIFT;
 c014 = cxct022.z22_fecing, NOENTRY, REVERSE, UPSHIFT;
 c015 = cxct020.z20_fecha_vcto, COLOR = RED WHERE c015 < TODAY,
@@ -90,6 +91,11 @@ c016 = FORMONLY.tit_fecha_vcto, COLOR = RED WHERE c016 = 'VENCIDO',
 	NOENTRY, REVERSE, UPSHIFT;
 c017 = FORMONLY.tit_dias, COLOR = RED WHERE c017 < 0,
 	NOENTRY, REVERSE, FORMAT = '###&';
+
+c050 = FORMONLY.row_cur, NOENTRY, UPSHIFT;
+c051 = FORMONLY.max_cur, NOENTRY, UPSHIFT;
+c052 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c053 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
 END
 INSTRUCTIONS
 SCREEN RECORD rm_aju[7] (z23_tipo_doc, z23_num_doc, z23_div_doc, tit_saldo_act,

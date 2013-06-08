@@ -1,0 +1,28 @@
+DATABASE aceros
+SCREEN
+{
+
+ IDENTIDAD DE RUBROS
+
+ [c0|c001                          ]
+[c1|c011                          ]
+[c1|c011                          ]
+[c1|c011                          ]
+[c1|c011                          ]
+[c1|c011                          ]
+[c1|c011                          ]
+[c1|c011                          ]
+[c1|c011                          ]
+[c1|c011                          ]
+[c1|c011                          ]
+}
+TABLES
+rolt016
+ATTRIBUTES
+c0   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c1   = rolt016.n16_flag_ident, AUTONEXT, UPSHIFT, REVERSE;
+c011 = rolt016.n16_descripcion, AUTONEXT, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+SCREEN RECORD rh_identidad[10] (n16_flag_ident, n16_descripcion)

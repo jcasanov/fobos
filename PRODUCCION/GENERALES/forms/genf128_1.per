@@ -1,4 +1,4 @@
-DATABASE diteca  
+DATABASE aceros  
 -------------
 -------------
 SCREEN
@@ -19,24 +19,24 @@ SCREEN
       Ingresado Por: [c05       ]    Fecha de Ingreso: [c06                ]                                
 }
 end
-tables
+TABLES
 gent050
 gent054
-attributes
-c01 = formonly.g54_modulo, REQUIRED, REVERSE, AUTONEXT, 
+ATTRIBUTES
+c01 = FORMONLY.g54_modulo, REQUIRED, REVERSE, AUTONEXT, 
 		UPSHIFT, widget='FIELD_BMP', config='lista.bmp F2', REVERSE;
-c02 = formonly.nom_modulo, UPSHIFT, NOENTRY ;
+c02 = FORMONLY.nom_modulo, UPSHIFT, NOENTRY ;
 c03 = g54_proceso, DOWNSHIFT, REQUIRED  
 	,widget='FIELD_BMP', config='lista.bmp F2', REVERSE;
 c04 = g54_nombre, UPSHIFT, REQUIRED, REVERSE;
-  c = formonly.g54_tipo, AUTONEXT, REVERSE, DEFAULT='M',
+  c = FORMONLY.g54_tipo, AUTONEXT, REVERSE, DEFAULT='M',
       WIDGET='RADIO', CONFIG='C Consulta R Reporte P Proceso M Mantenimiento E Especial N Menú';
 c07 = g54_estado,  UPSHIFT, REVERSE, WIDGET='RADIO', 
 	CONFIG='A Activo B Bloqueado R Restringido', DEFAULT='A';
 c05 = g54_usuario, NOENTRY, REQUIRED, REVERSE;
 c06 = g54_fecing,  NOENTRY, REQUIRED, REVERSE;
 
-instructions
-delimiters "[]"
+INSTRUCTIONS
+DELIMITERS "[]"
 end
 

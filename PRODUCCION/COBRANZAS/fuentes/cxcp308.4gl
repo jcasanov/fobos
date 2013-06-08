@@ -8,7 +8,6 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_demonios	VARCHAR(12)
 DEFINE rm_par RECORD
 	moneda		LIKE gent013.g13_moneda,
 	tit_mon		VARCHAR(30),
@@ -47,33 +46,35 @@ DEFINE tot_col5		DECIMAL(12,0)
 DEFINE tot_col6		DECIMAL(12,0)
 DEFINE tot_col7		DECIMAL(12,0)
 DEFINE rm_mon		RECORD LIKE gent013.*
-DEFINE vm_max_rows	SMALLINT
-DEFINE vm_num_rows	SMALLINT
-DEFINE vm_num_doc	SMALLINT
-DEFINE vm_max_doc	SMALLINT
-DEFINE vm_num_res	SMALLINT
+DEFINE vm_max_rows	INTEGER
+DEFINE vm_num_rows	INTEGER
+DEFINE vm_num_doc	INTEGER
+DEFINE vm_max_doc	INTEGER
+DEFINE vm_num_res	INTEGER
 DEFINE rm_color ARRAY[10] OF VARCHAR(10)
+
+
 
 MAIN
 	
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
-CALL fgl_init4js()
+CALL startlog('../logs/cxcp308.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN          -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
 	EXIT PROGRAM
 END IF
-LET vg_base     = arg_val(1)
-LET vg_modulo   = arg_val(2)
-LET vg_codcia   = arg_val(3)
+LET vg_base    = arg_val(1)
+LET vg_modulo  = arg_val(2)
+LET vg_codcia  = arg_val(3)
 LET vg_proceso = 'cxcp308'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -104,7 +105,7 @@ OPEN FORM f_cons FROM '../forms/cxcf308_1'
 DISPLAY FORM f_cons
 DISPLAY BY NAME rm_par.moneda, rm_par.tit_mon, rm_par.tipo_detalle
 LET vm_max_rows = 100
-LET vm_max_doc  = 2000
+LET vm_max_doc  = 100000
 CALL carga_colores()
 CALL muestra_titulos()
 CREATE TEMP TABLE tempo_doc 
@@ -231,7 +232,7 @@ INPUT BY NAME rm_par.moneda, rm_par.localidad, rm_par.tipo_detalle
 			EXIT PROGRAM
 		END IF
 	ON KEY(F2)
-		IF infield(localidad) THEN
+		IF INFIELD(localidad) THEN
 			CALL fl_ayuda_localidad(vg_codcia)
 				RETURNING loc_aux, rm_par.tit_local
 			IF loc_aux IS NOT NULL THEN
@@ -239,7 +240,7 @@ INPUT BY NAME rm_par.moneda, rm_par.localidad, rm_par.tipo_detalle
 				DISPLAY BY NAME rm_par.localidad, rm_par.tit_local
 			END IF
 		END IF
-		IF infield(moneda) THEN
+		IF INFIELD(moneda) THEN
 			CALL fl_ayuda_monedas() RETURNING mon_aux,rm_par.tit_mon,
 							  num_dec
 			IF mon_aux IS NOT NULL THEN
@@ -557,8 +558,8 @@ WHILE TRUE
 	LET int_flag = 0
 	DISPLAY ARRAY rm_det TO rm_det.*
 		BEFORE DISPLAY
-			CALL dialog.keysetlabel("ACCEPT","")
-			CALL dialog.keysetlabel("F6","Gráfico")
+			--#CALL dialog.keysetlabel("ACCEPT","")
+			--#CALL dialog.keysetlabel("F6","Gráfico")
 		AFTER DISPLAY
 			CONTINUE DISPLAY
 		ON KEY(INTERRUPT)
@@ -788,31 +789,31 @@ WHILE TRUE
 		LET key_f30 = FGL_KEYVAL("F30")
 		LET int_flag = 0
 		IF filas_procesadas >= max_elementos THEN
-			CALL fgl_keysetlabel("F3","")
+			--#CALL fgl_keysetlabel("F3","")
 		ELSE
-			CALL fgl_keysetlabel("F3","Avanzar")
+			--#CALL fgl_keysetlabel("F3","Avanzar")
 		END IF
 		IF filas_procesadas <= max_barras THEN
-			CALL fgl_keysetlabel("F4","")
+			--#CALL fgl_keysetlabel("F4","")
 		ELSE
-			CALL fgl_keysetlabel("F4","Retroceder")
+			--#CALL fgl_keysetlabel("F4","Retroceder")
 		END IF
 		INPUT BY NAME tecla
 			BEFORE INPUT
 				IF filas_procesadas <= max_barras THEN
-					CALL dialog.keysetlabel("F5","Vencimientos")
+					--#CALL dialog.keysetlabel("F5","Vencimientos")
 				ELSE
-					CALL dialog.keysetlabel("F5","")
+					--#CALL dialog.keysetlabel("F5","")
 				END IF
-				CALL dialog.keysetlabel("ACCEPT","")
-				CALL dialog.keysetlabel("F31","")
-				CALL dialog.keysetlabel("F32","")
-				CALL dialog.keysetlabel("F33","")
-				CALL dialog.keysetlabel("F34","")
-				CALL dialog.keysetlabel("F35","")
-				CALL dialog.keysetlabel("F36","")
-				CALL dialog.keysetlabel("F37","")
-				CALL dialog.keysetlabel("F38","")
+				--#CALL dialog.keysetlabel("ACCEPT","")
+				--#CALL dialog.keysetlabel("F31","")
+				--#CALL dialog.keysetlabel("F32","")
+				--#CALL dialog.keysetlabel("F33","")
+				--#CALL dialog.keysetlabel("F34","")
+				--#CALL dialog.keysetlabel("F35","")
+				--#CALL dialog.keysetlabel("F36","")
+				--#CALL dialog.keysetlabel("F37","")
+				--#CALL dialog.keysetlabel("F38","")
 			ON KEY(F5)
 				IF filas_procesadas <= max_barras THEN
 					IF ind_venc = 'P' THEN
@@ -893,38 +894,5 @@ LET rm_color[07] = 'pink'
 LET rm_color[08] = 'chocolate'
 LET rm_color[09] = 'tomato'
 LET rm_color[10] = 'blue'
-
-END FUNCTION
-
-
-
-FUNCTION validar_parametros()
-
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
 
 END FUNCTION

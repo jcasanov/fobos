@@ -1,0 +1,57 @@
+database aceros
+screen 
+{
+                                                 Estado: [a|c101         ]
+
+        Trabajador: [c001] [c100                                         ]
+     Motivo Salida: [d ] [c020           ]       
+Fecha Notificaci¢n: [c004      ]                 Promedia Comisiones?  [b]      
+      Fecha Salida: [c005      ]                       Cuantos Meses? [c6]
+
+                                     Liquidaci¢n Roles: [c009            ]
+					    Comisiones: [c008            ]
+                                         Decimo Cuarto: [c010            ]
+                                        Decimo Tercero: [c011            ]
+                                      Total Vacaciones: [c012            ]
+				           Total Otros: [c017            ]
+				(-)    Saldo Anticipos: [c018            ]
+
+                            Bonificaci¢n Por Deshaucio: [c013            ] 
+                                         Indemnizaci¢n: [c014            ] 
+                                                        ------------------
+                                        Neto A Recibir: [c016            ]
+}
+end
+tables
+rolt070
+attributes
+c001 = rolt070.n70_cod_trab, REVERSE, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+a = rolt070.n70_estado, REVERSE, NOENTRY, COMMENT='A Activo  P Procesado', UPSHIFT;
+c004 = rolt070.n70_fec_ren, REVERSE, FORMAT='dd-mm-yyyy', 
+	COMMENT='Digite la fecha en formato: dd-mm-aaaa';
+c005 = rolt070.n70_fec_sal, REVERSE, FORMAT='dd-mm-yyyy', 
+	COMMENT='Digite la fecha en formato: dd-mm-aaaa';
+
+b = rolt070.n70_calc_comi,    WIDGET='CHECK', CONFIG='S N acknowledge',
+			      DEFAULT = 'N', AUTONEXT; 
+c6 = rolt070.n70_mes_prom,    REVERSE, FORMAT='#&', INCLUDE=(0 TO 99);
+
+c008 = rolt070.n70_comisiones,    REVERSE, FORMAT='#,###,###,##&.##';
+c009 = rolt070.n70_tot_rol,       NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+c010 = rolt070.n70_tot_dc,        NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+c011 = rolt070.n70_tot_dt,        NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+c012 = rolt070.n70_tot_vaca,      NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+
+c013 = rolt070.n70_bonificacion,  NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+c014 = rolt070.n70_indemnizacion, NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+c016 = rolt070.n70_tot_neto,      NOENTRY, REVERSE, FORMAT='-,---,---,--&.##';
+c017 = rolt070.n70_tot_otros,     NOENTRY, REVERSE, FORMAT='-,---,---,--&.##';
+c018 = rolt070.n70_tot_anticipos, NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+
+d    = rolt070.n70_motivo,     WIDGET='FIELD_BMP', CONFIG='lista.bmp F2',
+			       AUTONEXT, REVERSE; 
+
+c100 = formonly.n30_nombres,   UPSHIFT, REVERSE, NOENTRY;
+c101 = formonly.n_estado,      UPSHIFT, REVERSE, NOENTRY;
+c020 = formonly.n74_descripcion,      UPSHIFT, REVERSE, NOENTRY;	
+end

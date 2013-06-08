@@ -1,0 +1,73 @@
+DATABASE aceros
+SCREEN 
+{
+Localidad Origen: [h1][h002                ]
+ No Tranferencia: [c ][c0       ]               Fecha: [c1                 ]
+   Bodega Origen: [c4] [c5                            ]
+  Bodega Destino: [c6] [c7                            ] 
+      Referencia: [c8                                      ]
+                                                            [c051] de [c052]
+    [b0        |b1        |b2             |b3              |b4              ]
+   [c11       |c12       |c13            |c15             |c16             ]
+   [c11       |c12       |c13            |c15             |c16             ]
+   [c11       |c12       |c13            |c15             |c16             ]
+   [c11       |c12       |c13            |c15             |c16             ]
+   [c11       |c12       |c13            |c15             |c16             ]
+   [c11       |c12       |c13            |c15             |c16             ]
+   [c11       |c12       |c13            |c15             |c16             ]
+ [c070                               ]       Total Costo: [c17             ]
+ [c071                               ]     Ingresado Por: [c18        ] 
+ [c072                                    ]
+ [c073                                              ]
+ [c074                                                            |c075    ]
+}
+TABLES
+rept019
+rept020
+ATTRIBUTES
+		     ---- BOTONES ----
+b0  = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+b1  = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b2  = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+b3  = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+b4  = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+h1  = rept019.r19_localidad, REVERSE, NOENTRY;
+h002 = FORMONLY.tit_local, REVERSE, NOENTRY;
+c   = rept019.r19_cod_tran, REVERSE, NOENTRY;
+c0  = rept019.r19_num_tran, REVERSE, NOENTRY,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c1  = rept019.r19_fecing, REVERSE, NOENTRY;
+c4  = rept019.r19_bodega_ori, REVERSE, UPSHIFT, AUTONEXT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c5  = FORMONLY.nom_bod_ori TYPE VARCHAR, NOENTRY;
+c6  = rept019.r19_bodega_dest, REVERSE, UPSHIFT, AUTONEXT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c7  = FORMONLY.nom_bod_des TYPE VARCHAR, NOENTRY;
+c8  = rept019.r19_referencia, REVERSE, UPSHIFT, SCROLL;
+c11 = rept020.r20_cant_ped, REVERSE, INCLUDE = (0.01 TO 999999.99),
+	OPTIONS = '-nolist',FORMAT = '---,--&.##';
+c12 = rept020.r20_stock_ant, REVERSE, NOENTRY,
+	OPTIONS = '-nolist',FORMAT = '---,--&.##';
+c13 = rept020.r20_item, REVERSE, UPSHIFT, AUTONEXT, OPTIONS = '-nolist';
+c15 = rept020.r20_costo, REVERSE, NOENTRY, FORMAT = '###,###,##&.##',
+	OPTIONS = '-nolist';
+c16 = FORMONLY.subtotal_item TYPE DECIMAL(12,2), REVERSE, NOENTRY, 
+	FORMAT = '#,###,###,##&.##', OPTIONS = '-nolist';
+
+c070 = formonly.descrip_1, NOENTRY;
+c071 = formonly.descrip_2, NOENTRY;
+c072 = formonly.descrip_3, NOENTRY;
+c073 = formonly.descrip_4, NOENTRY;
+c074 = formonly.nom_item,  NOENTRY, REVERSE;
+c075 = formonly.nom_marca, NOENTRY, REVERSE;
+
+c17 = rept019.r19_tot_costo, REVERSE, FORMAT = '#,###,###,##&.##';
+c18 = rept019.r19_usuario, REVERSE, UPSHIFT, NOENTRY;
+
+c051 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c052 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+END
+INSTRUCTIONS
+SCREEN RECORD r_detalle[7] (r20_cant_ped, r20_stock_ant, r20_item, r20_costo,
+				subtotal_item)

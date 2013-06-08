@@ -1,5 +1,5 @@
-database diteca
-screen 
+DATABASE aceros
+SCREEN 
 {
 
 
@@ -18,19 +18,20 @@ screen
 
 }
 end
-tables
+TABLES
 rept013
-attributes
+ATTRIBUTES
 f000 = rept013.r13_serial, REVERSE, NOENTRY,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 a0   = rept013.r13_bodega, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-a3   = formonly.nom_bod TYPE VARCHAR, NOENTRY;
+a3   = FORMONLY.nom_bod TYPE VARCHAR, NOENTRY;
 f002 = rept013.r13_item, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-a2   = formonly.nom_item TYPE VARCHAR, NOENTRY;
-a    = rept013.r13_estado, REVERSE, NOENTRY;
-a4   = formonly.tit_estado TYPE VARCHAR, NOENTRY;
+a2   = FORMONLY.nom_item TYPE VARCHAR, NOENTRY;
+a    = rept013.r13_estado, REVERSE, NOENTRY,UPSHIFT,
+	COMMENTS = 'A ACTIVA  P PROCESADA';
+a4   = FORMONLY.tit_estado TYPE VARCHAR, UPSHIFT,NOENTRY;
 f003 = rept013.r13_cantidad, REVERSE;
 f004 = rept013.r13_referencia, REVERSE, UPSHIFT;
 a1   = rept013.r13_cod_tran, UPSHIFT, NOENTRY;

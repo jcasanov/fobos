@@ -1,0 +1,48 @@
+DATABASE FORMONLY
+SCREEN 
+{
+
+ Empleado: [c000|c001                                       ]
+
+  Detalle de Cancelaciones                     [c10] de [c11]
+  [c010|c011      |c012                          |c013     |c] 
+ [c020|c021      |c022                          |c023     |d] 
+ [c020|c021      |c022                          |c023     |d] 
+ [c020|c021      |c022                          |c023     |d] 
+ [c020|c021      |c022                          |c023     |d] 
+ [c020|c021      |c022                          |c023     |d] 
+                                      Total ==> [c030     ]
+  [c1|c031                        ]
+  Cuenta Empresa: [c032           ] Cta.Empl.: [c033        ]
+
+}
+ATTRIBUTES
+c000 = FORMONLY.n30_cod_trab, NOENTRY, UPSHIFT, REVERSE;
+c001 = FORMONLY.n30_nombres, NOENTRY, UPSHIFT, REVERSE;
+
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F17';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F18';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F19';
+c    = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+c020 = FORMONLY.cod_c,  NOENTRY, OPTIONS = '-nolist';
+c021 = FORMONLY.fecha,  NOENTRY, FORMAT = 'dd-mm-yyyy', OPTIONS = '-nolist';
+c022 = FORMONLY.motivo, NOENTRY, OPTIONS = '-nolist';
+c023 = FORMONLY.valor,  NOENTRY, FORMAT = '##,##&.##', OPTIONS = '-nolist';
+d    = FORMONLY.tipo,   NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+
+c030 = FORMONLY.t_val_canc, REVERSE, NOENTRY, FORMAT = '##,##&.##';
+c1   = FORMONLY.n91_bco_empresa, NOENTRY, UPSHIFT;
+c031 = FORMONLY.g08_nombre, NOENTRY, UPSHIFT;
+c032 = FORMONLY.n91_cta_empresa, NOENTRY, UPSHIFT;
+c033 = FORMONLY.n91_cta_trabaj, NOENTRY, UPSHIFT;
+
+c10  = FORMONLY.num_row, NOENTRY, UPSHIFT;
+c11  = FORMONLY.max_row, NOENTRY, UPSHIFT;
+END
+KEYS
+F5 = 'Cancelacion'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_canc[5] (cod_c, fecha, motivo, valor, tipo)

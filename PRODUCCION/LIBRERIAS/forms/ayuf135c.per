@@ -1,0 +1,32 @@
+DATABASE aceros
+SCREEN
+{
+  CODIGOS SERIES
+ -----------------------------------------------------------------------------
+  Item            Descripción          Serie              Fecha de Ingreso
+ -----------------------------------------------------------------------------
+ [c001           |c002              |c003                |c004               ]
+ [c001           |c002              |c003                |c004               ]
+ [c001           |c002              |c003                |c004               ]
+ [c001           |c002              |c003                |c004               ]
+ [c001           |c002              |c003                |c004               ]
+ [c001           |c002              |c003                |c004               ]
+ [c001           |c002              |c003                |c004               ]
+ [c001           |c002              |c003                |c004               ]
+ [c001           |c002              |c003                |c004               ]
+ [c001           |c002              |c003                |c004               ]
+}
+TABLES
+rept076
+rept010
+
+ATTRIBUTES
+c001 = r76_item, UPSHIFT,REVERSE;
+c002 = r10_nombre, UPSHIFT,REVERSE;
+c003 = r76_serie,UPSHIFT,REVERSE;
+c004 = r76_fecing, UPSHIFT,REVERSE;
+
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_serie[10] (r76_item, r10_nombre, r76_serie, r76_fecing)

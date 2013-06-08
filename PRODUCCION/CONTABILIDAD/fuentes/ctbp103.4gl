@@ -1,27 +1,28 @@
-{*
- * Titulo           : ctbp103.4gl - Mantenimiento de Tipos Comprob. Contables 
- * Elaboracion      : 20-sep-2001
- * Autor            : NPC
- * Formato Ejecucion: fglrun ctbp103 base módulo commpañía
- *}
-
+------------------------------------------------------------------------------
+-- Titulo           : ctbp103.4gl - Mantenimiento de Tipos Comprob. Contables 
+-- Elaboracion      : 20-sep-2001
+-- Autor            : NPC
+-- Formato Ejecucion: fglrun ctbp103 base módulo commpañía
+-- Ultima Correccion: 
+-- Motivo Correccion: 
+------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE rm_ctb			RECORD LIKE ctbt003.*
-DEFINE vm_num_rows		SMALLINT
+DEFINE vm_demonios	VARCHAR(12)
+DEFINE rm_ctb		RECORD LIKE ctbt003.*
+DEFINE vm_num_rows	SMALLINT
 DEFINE vm_row_current	SMALLINT
-DEFINE vm_max_rows		SMALLINT
-DEFINE vm_r_rows		ARRAY [50] OF INTEGER
-
-
+DEFINE vm_max_rows	SMALLINT
+DEFINE vm_r_rows	ARRAY [50] OF INTEGER
 
 MAIN
 
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/ctbp103.error')
-CALL fgl_init4js()
+--CALL startlog('../logs/errores')
+CALL startlog('../logs/ctbp103.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN          -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
@@ -33,8 +34,8 @@ LET vg_codcia   = arg_val(3)
 LET vg_proceso = 'ctbp103'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL control_master()
 
@@ -70,14 +71,8 @@ MENU 'OPCIONES'
 			CALL control_ingreso()
 		END IF
 		IF vm_num_rows = 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		   END IF
-			
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -90,14 +85,8 @@ MENU 'OPCIONES'
 	COMMAND KEY('C') 'Consultar' 'Consultar un registro. '
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		   END IF
-		
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -106,14 +95,8 @@ MENU 'OPCIONES'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		   END IF
-			
 		END IF
 		IF vm_row_current <= 1 THEN
                         HIDE OPTION 'Retroceder'
@@ -159,7 +142,6 @@ LET rm_ctb.b03_estado = 'A'
 CLEAR tit_est
 CLEAR tit_estado_com
 CLEAR tit_modulo
-CLEAR tit_reversa
 CALL muestra_estado()
 CALL leer_datos('I')
 IF NOT int_flag THEN
@@ -210,8 +192,7 @@ END IF
 CALL leer_datos('M')
 IF NOT int_flag THEN
 	UPDATE ctbt003 SET b03_nombre = rm_ctb.b03_nombre,
-					   b03_modulo = rm_ctb.b03_modulo,
-					   b03_tipo_reversa = rm_ctb.b03_tipo_reversa
+			   b03_modulo = rm_ctb.b03_modulo
 			WHERE CURRENT OF q_up
 	CALL fl_mensaje_registro_modificado()
 ELSE
@@ -236,14 +217,11 @@ DEFINE query		VARCHAR(400)
 DEFINE expr_sql		VARCHAR(400)
 DEFINE num_reg		INTEGER
 
-DEFINE r_b03		RECORD LIKE ctbt003.*
-
 LET int_flag = 0
 CLEAR FORM
-CONSTRUCT BY NAME expr_sql ON b03_tipo_comp, b03_nombre, b03_modulo, 
-							  b03_tipo_reversa
+CONSTRUCT BY NAME expr_sql ON b03_tipo_comp, b03_nombre, b03_modulo
 	ON KEY(F2)
-	IF infield(b03_tipo_comp) THEN
+	IF INFIELD(b03_tipo_comp) THEN
 		CALL fl_ayuda_tipos_comprobantes(vg_codcia)
 			RETURNING cod_aux, nom_aux
 		LET int_flag = 0
@@ -252,7 +230,7 @@ CONSTRUCT BY NAME expr_sql ON b03_tipo_comp, b03_nombre, b03_modulo,
 			DISPLAY nom_aux TO b03_nombre
 		END IF 
 	END IF
-	IF infield(b03_modulo) THEN
+	IF INFIELD(b03_modulo) THEN
                 CALL fl_ayuda_modulos()
                 	RETURNING mcod_aux, mnom_aux
                 LET int_flag = 0
@@ -261,15 +239,6 @@ CONSTRUCT BY NAME expr_sql ON b03_tipo_comp, b03_nombre, b03_modulo,
                         DISPLAY mnom_aux TO tit_modulo
                 END IF
         END IF
-		IF infield(b03_tipo_reversa) THEN
-			CALL fl_ayuda_tipos_comprobantes(vg_codcia) 
-				RETURNING r_b03.b03_tipo_comp, r_b03.b03_nombre
-			LET int_flag = 0
-			IF r_b03.b03_tipo_comp IS NOT NULL THEN
-				DISPLAY r_b03.b03_tipo_comp TO b03_tipo_reversa 
-				DISPLAY r_b03.b03_nombre	TO tit_reversa
-			END IF 
-		END IF
 END CONSTRUCT
 IF int_flag THEN
 	IF vm_row_current > 0 THEN
@@ -313,48 +282,41 @@ DEFINE resp		CHAR(6)
 DEFINE r_ctb_aux	RECORD LIKE ctbt003.*
 DEFINE mcod_aux         LIKE gent050.g50_modulo
 DEFINE mnom_aux         LIKE gent050.g50_nombre
-DEFINE r_b03			RECORD LIKE ctbt003.*
 
 LET int_flag = 0
 INITIALIZE r_ctb_aux.* TO NULL
 DISPLAY BY NAME rm_ctb.b03_usuario, rm_ctb.b03_fecing
-INPUT BY NAME rm_ctb.b03_tipo_comp, rm_ctb.b03_nombre, rm_ctb.b03_modulo,
-			  rm_ctb.b03_tipo_reversa
+INPUT BY NAME rm_ctb.b03_tipo_comp,
+	rm_ctb.b03_nombre,
+  	rm_ctb.b03_modulo
 	WITHOUT DEFAULTS
 	ON KEY(INTERRUPT)
-        IF field_touched(rm_ctb.b03_tipo_comp, rm_ctb.b03_nombre,
-						 rm_ctb.b03_modulo, rm_ctb.b03_tipo_reversa)
-		THEN
-        	LET int_flag = 0
-			CALL fl_mensaje_abandonar_proceso() RETURNING resp
-       		IF resp = 'Yes' THEN
-				LET int_flag = 1
-               	CLEAR FORM
-               	RETURN
-			END IF
-		ELSE
-			RETURN
-		END IF
+        IF field_touched(rm_ctb.b03_tipo_comp,
+		rm_ctb.b03_nombre,
+  		rm_ctb.b03_modulo)
+        THEN
+               	LET int_flag = 0
+		CALL fl_mensaje_abandonar_proceso()
+                	RETURNING resp
+              	IF resp = 'Yes' THEN
+			LET int_flag = 1
+                       	CLEAR FORM
+                       	RETURN
+                END IF
+	ELSE
+		RETURN
+	END IF
 	ON KEY(F2)
-		IF infield(b03_modulo) THEN
-			CALL fl_ayuda_modulos() RETURNING mcod_aux, mnom_aux
-			LET int_flag = 0
-            IF mcod_aux IS NOT NULL THEN
-				LET rm_ctb.b03_modulo = mcod_aux
-                DISPLAY BY NAME rm_ctb.b03_modulo
-                DISPLAY mnom_aux TO tit_modulo
-            END IF
-		END IF
-		IF infield(b03_tipo_reversa) THEN
-			CALL fl_ayuda_tipos_comprobantes(vg_codcia) 
-				RETURNING r_b03.b03_tipo_comp, r_b03.b03_nombre
-			LET int_flag = 0
-			IF r_b03.b03_tipo_comp IS NOT NULL THEN
-				LET rm_ctb.b03_tipo_reversa = r_b03.b03_tipo_comp	
-				DISPLAY r_b03.b03_tipo_comp TO b03_tipo_reversa 
-				DISPLAY r_b03.b03_nombre	TO tit_reversa
-			END IF 
-		END IF
+	IF INFIELD(b03_modulo) THEN
+                CALL fl_ayuda_modulos()
+                	RETURNING mcod_aux, mnom_aux
+                LET int_flag = 0
+                IF mcod_aux IS NOT NULL THEN
+			LET rm_ctb.b03_modulo = mcod_aux
+                        DISPLAY BY NAME rm_ctb.b03_modulo
+                        DISPLAY mnom_aux TO tit_modulo
+                END IF
+        END IF
 	BEFORE FIELD b03_tipo_comp
 		IF flag_mant = 'M' THEN
 			NEXT FIELD NEXT
@@ -373,24 +335,6 @@ INPUT BY NAME rm_ctb.b03_tipo_comp, rm_ctb.b03_nombre, rm_ctb.b03_modulo,
 			END IF
 		ELSE
 			CLEAR b03_tipo_comp
-		END IF
-	AFTER FIELD b03_tipo_reversa
-		IF rm_ctb.b03_tipo_reversa IS NOT NULL THEN
-			IF length(rm_ctb.b03_tipo_reversa) < 2 THEN
-				CALL fgl_winmessage(vg_producto,'El tipo debe ser de 2 letras','info')
-				NEXT FIELD b03_tipo_reversa
-			END IF
-			CALL fl_lee_tipo_comprobante_contable(vg_codcia,rm_ctb.b03_tipo_reversa)
-                        	RETURNING r_b03.*
-			IF r_b03.b03_compania IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'Código de tipo de comprobante no existe','exclamation')
-				NEXT FIELD b03_tipo_reversa
-			END IF
-			LET rm_ctb.b03_tipo_reversa = r_b03.b03_tipo_comp
-			DISPLAY BY NAME rm_ctb.b03_tipo_reversa
-			DISPLAY r_b03.b03_nombre TO tit_reversa
-		ELSE
-			CLEAR b03_tipo_reversa, tit_reversa
 		END IF
 	AFTER FIELD b03_modulo
                 IF rm_ctb.b03_modulo IS NOT NULL THEN
@@ -449,7 +393,6 @@ END FUNCTION
 
 FUNCTION mostrar_registro(num_registro)
 DEFINE num_registro	INTEGER
-DEFINE r_b03		RECORD LIKE ctbt003.*
 
 IF vm_num_rows > 0 THEN
 	SELECT * INTO rm_ctb.* FROM ctbt003 WHERE ROWID=num_registro	
@@ -460,14 +403,10 @@ IF vm_num_rows > 0 THEN
 	DISPLAY BY NAME rm_ctb.b03_tipo_comp,
 			rm_ctb.b03_nombre,
   			rm_ctb.b03_modulo,
-			rm_ctb.b03_tipo_reversa,
 			rm_ctb.b03_usuario,
 			rm_ctb.b03_fecing
 	CALL fl_lee_modulo(rm_ctb.b03_modulo) RETURNING rg_mod.*
 	DISPLAY rg_mod.g50_nombre TO tit_modulo
-	CALL fl_lee_tipo_comprobante_contable(vg_codcia,rm_ctb.b03_tipo_reversa)
-		RETURNING r_b03.*
-	DISPLAY r_b03.b03_nombre TO tit_reversa
 	CALL muestra_estado()
 ELSE
 	RETURN
@@ -541,7 +480,7 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION no_validar_parametros()
 
 CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
 IF rg_mod.g50_modulo IS NULL THEN

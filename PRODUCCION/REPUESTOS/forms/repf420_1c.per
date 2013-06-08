@@ -1,0 +1,33 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+              Moneda:[c0] [c1             ] Tipo Transacción:[c2|c20        ]
+
+      Desde la Fecha:[c3        ]             Hasta la Fecha:[c4        ]
+
+Rango Utilidad Desde:[c13       ]       Rango Utilidad Hasta:[c14       ]
+
+}
+
+ATTRIBUTES
+c0  = formonly.vm_moneda , AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c1  = FORMONLY.nom_moneda, NOENTRY, REVERSE;
+
+c3  = FORMONLY.vm_fecha_ini TYPE DATE NOT NULL, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy', COMMENTS = 'Fecha en formato: dd-mm-aaaa';
+c4  = FORMONLY.vm_fecha_fin TYPE DATE NOT NULL, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy', COMMENTS = 'Fecha en formato: dd-mm-aaaa';
+c2  = FORMONLY.vm_tipo_tran TYPE VARCHAR, REVERSE, AUTONEXT, UPSHIFT,
+	INCLUDE = ('FA', 'RQ', 'TO'),
+	COMMENTS = '(FA) Factura  (RQ) Requisición  (TO) Todas'; 
+c20 = FORMONLY.tit_tipo_tran,REVERSE,UPSHIFT,NOENTRY;
+
+c13 = FORMONLY.utilidad_desde TYPE DECIMAL(6,2), REVERSE, FORMAT = '---,--&.##',
+	INCLUDE = (NULL, -999.99 TO 9999.99), COLOR = RED WHERE c13 < 0; 
+c14 = FORMONLY.utilidad_hasta TYPE DECIMAL(6,2), REVERSE, FORMAT = '###,##&.##',
+	INCLUDE = (NULL, 0.00 TO 9999.99); 
+END
+INSTRUCTIONS
+DELIMITERS '||'

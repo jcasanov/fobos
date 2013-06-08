@@ -1,0 +1,81 @@
+DATABASE aceros
+SCREEN
+{
+            Departamento: [c000] [c001                          ]
+                 Periodo: [c002      ]       -       [c003      ]
+
+                                                              [c004] de [c005]
+ [c010 |c011                      |c012         |c013         |c014         |c]
+[c020 |c021                      |c022         |c023         |c024         |d]
+[c020 |c021                      |c022         |c023         |c024         |d]
+[c020 |c021                      |c022         |c023         |c024         |d]
+[c020 |c021                      |c022         |c023         |c024         |d]
+[c020 |c021                      |c022         |c023         |c024         |d]
+[c020 |c021                      |c022         |c023         |c024         |d]
+[c020 |c021                      |c022         |c023         |c024         |d]
+[c020 |c021                      |c022         |c023         |c024         |d]
+[c020 |c021                      |c022         |c023         |c024         |d]
+[c020 |c021                      |c022         |c023         |c024         |d]
+[c020 |c021                      |c022         |c023         |c024         |d]
+[c020 |c021                      |c022         |c023         |c024         |d]
+[c020 |c021                      |c022         |c023         |c024         |d]
+                        Totales: [c030         |c031         |c032         ]
+      [c040                                    ]
+}
+TABLES
+gent034
+rolt030
+rolt032
+ATTRIBUTES
+c000 = FORMONLY.cod_depto TYPE SMALLINT, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = gent034.g34_nombre, NOENTRY, UPSHIFT;
+c002 = FORMONLY.fecha_ini TYPE DATE NOT NULL, REQUIRED, AUTONEXT, REVERSE,
+	UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite fecha inicial en Formato: dd-mm-aaaa.';
+c003 = FORMONLY.fecha_fin TYPE DATE NOT NULL, REQUIRED, AUTONEXT, REVERSE,
+	UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite fecha final en Formato: dd-mm-aaaa.';
+
+c004 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c005 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c    = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+c020 = rolt032.n32_cod_trab, NOENTRY, UPSHIFT, FORMAT = '##&&&',
+	OPTIONS = '-nolist';
+c021 = rolt030.n30_nombres, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c022 = FORMONLY.val1 TYPE DECIMAL, NOENTRY, UPSHIFT,
+	FORMAT = "##,###,##&.##", OPTIONS = '-nolist';
+c023 = FORMONLY.val2 TYPE DECIMAL, NOENTRY, UPSHIFT,
+	FORMAT = "##,###,##&.##", OPTIONS = '-nolist';
+c024 = FORMONLY.val3 TYPE DECIMAL, NOENTRY, UPSHIFT,
+	FORMAT = "##,###,##&.##", OPTIONS = '-nolist';
+d    = rolt030.n30_estado, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+
+c030 = FORMONLY.tot_val1 TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = "##,###,##&.##";
+c031 = FORMONLY.tot_val2 TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = "##,###,##&.##";
+c032 = FORMONLY.tot_val3 TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = "##,###,##&.##";
+
+c040 = FORMONLY.empleado, NOENTRY, UPSHIFT, REVERSE;
+END
+KEYS
+F5  = 'Empleado'
+F6  = 'Totales'
+F7  = 'Detalle Totales'
+F8  = 'Total Ganado'
+F9  = 'Total Ganado Gen.'
+F10 = 'Planilla IESS'
+F11 = 'Imprimir'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_detalle[13] (n32_cod_trab, n30_nombres, val1, val2, val3,
+				n30_estado)

@@ -1,0 +1,36 @@
+DATABASE aceros
+SCREEN
+{
+ EMPLEADOS INACTIVOS QUE PUEDEN RETIRAR FONDO DE CENSATIA
+
+ [c000|c001                                      |c002         ]
+[c010|c011                                      |c012         ]
+[c010|c011                                      |c012         ]
+[c010|c011                                      |c012         ]
+[c010|c011                                      |c012         ]
+[c010|c011                                      |c012         ]
+[c010|c011                                      |c012         ]
+[c010|c011                                      |c012         ]
+[c010|c011                                      |c012         ]
+
+ Desea Incluirlos en esta Poliza o Pagarles el Saldo (S/N)? [c]
+
+}
+TABLES
+rolt030
+rolt080
+ATTRIBUTES
+c000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c002 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+
+c010 = rolt080.n80_cod_trab, NOENTRY, UPSHIFT, REVERSE, OPTIONS = '-nolist';
+c011 = rolt030.n30_nombres, NOENTRY, UPSHIFT, REVERSE, OPTIONS = '-nolist';
+c012 = FORMONLY.saldo, NOENTRY, UPSHIFT, REVERSE, FORMAT = '--,---,--&.##',
+	OPTIONS = '-nolist';
+
+c    = FORMONLY.vm_incluir_trab TYPE CHAR NOT NULL, REQUIRED, UPSHIFT, REVERSE,
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge', DEFAULT = 'S';
+END
+INSTRUCTIONS
+SCREEN RECORD rm_dettrab_inac[8] (n80_cod_trab, n30_nombres, saldo)

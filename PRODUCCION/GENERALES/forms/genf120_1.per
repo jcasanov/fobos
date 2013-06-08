@@ -1,6 +1,6 @@
                                                                                 
-database diteca
-screen size 24 by 80
+DATABASE aceros
+SCREEN size 24 by 80
 {
 
 
@@ -15,10 +15,10 @@ screen size 24 by 80
 
 }
 end
-tables
+TABLES
 gent030
-attributes
-c000 = formonly.g30_pais TYPE INTEGER NOT NULL, REVERSE,
+ATTRIBUTES
+c000 = FORMONLY.g30_pais TYPE INTEGER NOT NULL, REVERSE,
     	  WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 c001 = gent030.g30_nombre, REVERSE, UPSHIFT;
 c01 = gent030.g30_siglas, REVERSE, UPSHIFT, AUTONEXT;

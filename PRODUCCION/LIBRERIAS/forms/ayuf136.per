@@ -1,0 +1,36 @@
+DATABASE aceros
+SCREEN
+{
+ FACTOR DE UTILIDADES
+
+ [lbl01|lbl02   |lbl03   |lbl04   |lbl05   ]
+[c001 |c002    |c003    |c004    |c005    ]
+[c001 |c002    |c003    |c004    |c005    ]
+[c001 |c002    |c003    |c004    |c005    ]
+[c001 |c002    |c003    |c004    |c005    ]
+[c001 |c002    |c003    |c004    |c005    ]
+[c001 |c002    |c003    |c004    |c005    ]
+[c001 |c002    |c003    |c004    |c005    ]
+[c001 |c002    |c003    |c004    |c005    ]
+[c001 |c002    |c003    |c004    |c005    ]
+[c001 |c002    |c003    |c004    |c005    ]
+}
+TABLES
+rept077
+
+ATTRIBUTES
+c001 = r77_codigo_util, UPSHIFT;
+c002 = r77_multiplic,   UPSHIFT;
+c003 = r77_dscmax_ger,  UPSHIFT;
+c004 = r77_dscmax_jef,  UPSHIFT;
+c005 = r77_dscmax_ven,  UPSHIFT;
+
+lbl01 = FORMONLY.bt_codigo_util,	WIDGET='BUTTON', CONFIG='F15';
+lbl02 = FORMONLY.bt_multiplic,		WIDGET='BUTTON', CONFIG='F16';
+lbl03 = FORMONLY.bt_dscmax_ger,		WIDGET='BUTTON', CONFIG='F17';
+lbl04 = FORMONLY.bt_dscmax_jef,		WIDGET='BUTTON', CONFIG='F18';
+lbl05 = FORMONLY.bt_dscmax_ven,		WIDGET='BUTTON', CONFIG='F19';
+
+END
+INSTRUCTIONS
+SCREEN RECORD rh_factor[10] (r77_codigo_util,r77_multiplic,r77_dscmax_ger,r77_dscmax_jef,r77_dscmax_ven)

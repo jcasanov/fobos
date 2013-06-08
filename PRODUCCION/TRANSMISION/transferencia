@@ -1,6 +1,0 @@
-export FGLGUI=0
-sh stock_gye_uio
-INFORMIXSERVER=ol_server
-export INFORMIXSERVER
-fglrun transfer 1
-fglrun transfer 2

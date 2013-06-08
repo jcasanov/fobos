@@ -1,0 +1,37 @@
+DATABASE aceros
+SCREEN
+{
+
+   OTROS VALORES INGRESADOS
+   -----------------------
+
+  [c000         |c001       ]
+ [c010         |c011       ]
+ [c010         |c011       ]
+ [c010         |c011       ]
+ [c010         |c011       ]
+ [c010         |c011       ]
+        Total: [c020       ]
+ Stock Actual: [c021       ]
+   Diferencia: [c022       ]
+
+}
+TABLES
+rept089
+ATTRIBUTES
+c000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+
+c010 = rept089.r89_usuario, NOENTRY, UPSHIFT, REVERSE, OPTIONS = '-nolist';
+c011 = rept089.r89_suma, NOENTRY, UPSHIFT, REVERSE, FORMAT = '##,##&.##',
+	OPTIONS = '-nolist';
+
+c020 = FORMONLY.tit_total TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '##,##&.##';
+c021 = rept089.r89_stock_act, NOENTRY, UPSHIFT, REVERSE, FORMAT = '##,##&.##';
+c022 = FORMONLY.tit_diferencia, NOENTRY, UPSHIFT, REVERSE, FORMAT = '--,--&.##',
+	COLOR = RED WHERE c022 < 0;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_dif[5] (r89_usuario, r89_suma)

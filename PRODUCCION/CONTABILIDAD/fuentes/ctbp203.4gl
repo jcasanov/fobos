@@ -8,7 +8,6 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_demonios	VARCHAR(12)
 DEFINE vm_nuevoprog	VARCHAR(400)
 DEFINE rm_g09		RECORD LIKE gent009.*
 DEFINE rm_b10		RECORD LIKE ctbt010.*
@@ -67,7 +66,7 @@ DEFINE rm_mov_aux	ARRAY [1000] OF RECORD
 				valor		DECIMAL(12,2)
 			END RECORD
 DEFINE vm_flag_det	ARRAY [1000] OF SMALLINT
-DEFINE rm_resu	ARRAY [10] OF RECORD
+DEFINE rm_resu		ARRAY [10] OF RECORD
 				descripcion	VARCHAR(60,0),
 				valor_concil	DECIMAL(12,2)
 			END RECORD
@@ -77,8 +76,9 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
-CALL fgl_init4js()
+--CALL startlog('../logs/errores')
+CALL startlog('../logs/ctbp203.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 AND num_args() <> 4 THEN   -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto.', 'stop')
@@ -90,8 +90,8 @@ LET vg_codcia   = arg_val(3)
 LET vg_proceso = 'ctbp203'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL control_master()
 
@@ -148,35 +148,19 @@ MENU 'OPCIONES'
 			IF vm_num_rows = 0 THEN
 				EXIT PROGRAM
 			END IF
-			IF rm_b30.b30_estado = 'C' THEN
-			   IF fl_control_permiso_opcion('Imprimir') THEN
-			      SHOW OPTION 'Imprimir'
-			   END IF
-				
-			END IF
+			SHOW OPTION 'Imprimir'
 		END IF
 	COMMAND KEY('B') 'Conciliación'	'Conciliación Bancaria.'
 		CALL sub_menu()
 		IF vm_num_rows = 1 THEN
 			IF num_args() <> 4 THEN
-	  		   IF fl_control_permiso_opcion('Modificar') THEN			
 				SHOW OPTION 'Modificar'
-			   END IF 
-	
-			   IF fl_control_permiso_opcion('Eliminar') THEN
 				SHOW OPTION 'Eliminar'
-			   END IF				
-			
+				SHOW OPTION 'Imprimir'
 				IF rm_b30.b30_estado = 'C' THEN
 					SHOW OPTION 'Reaperturar'
-
-					 IF fl_control_permiso_opcion('Imprimir') THEN
-					   SHOW OPTION 'Imprimir'
-					 END IF
-					
 				ELSE
 					HIDE OPTION 'Reaperturar'
-					HIDE OPTION 'Imprimir'
 				END IF
 				SHOW OPTION 'Detalle'
 			END IF
@@ -193,30 +177,19 @@ MENU 'OPCIONES'
 	COMMAND KEY('P') 'Reaperturar'	'Reapertura último registro conciliado.'
 		CALL control_reapertura()
 		HIDE OPTION 'Reaperturar'
-		HIDE OPTION 'Imprimir'
 	COMMAND KEY('E') 'Eliminar'	'Elimina registro no conciliado.'
 		CALL control_eliminacion()
 	COMMAND KEY('C') 'Consultar'	'Consultar un registro.'
 		HIDE OPTION 'Detalle'
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
-
-			IF fl_control_permiso_opcion('Modificar') THEN			
-				SHOW OPTION 'Modificar'
-			END IF 
-	
-			IF fl_control_permiso_opcion('Eliminar') THEN
-				SHOW OPTION 'Eliminar'
-			END IF
+			SHOW OPTION 'Modificar'
+			SHOW OPTION 'Eliminar'
+			SHOW OPTION 'Imprimir'
 			IF rm_b30.b30_estado = 'C' THEN
 				SHOW OPTION 'Reaperturar'
-			   IF fl_control_permiso_opcion('Imprimir') THEN
-			  	SHOW OPTION 'Imprimir'
-			   END IF
-				
 			ELSE
 				HIDE OPTION 'Reaperturar'
-				HIDE OPTION 'Imprimir'
 			END IF
 			SHOW OPTION 'Detalle'
 			HIDE OPTION 'Avanzar'
@@ -224,34 +197,24 @@ MENU 'OPCIONES'
 			IF vm_num_rows = 0 THEN
 				HIDE OPTION 'Modificar'
 				HIDE OPTION 'Eliminar'
+				HIDE OPTION 'Imprimir'
 				IF rm_b30.b30_estado = 'C' THEN
 					SHOW OPTION 'Reaperturar'
-
-					IF fl_control_permiso_opcion('Imprimir') THEN
-			  			SHOW OPTION 'Imprimir'
-			   		END IF
 				ELSE
 					HIDE OPTION 'Reaperturar'
-					HIDE OPTION 'Imprimir'
 				END IF
 				HIDE OPTION 'Detalle'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
 			SHOW OPTION 'Modificar'
+			SHOW OPTION 'Imprimir'
 			IF rm_b30.b30_estado = 'C' THEN
 				SHOW OPTION 'Reaperturar'
-			   IF fl_control_permiso_opcion('Imprimir') THEN
-			   	SHOW OPTION 'Imprimir'
-			   END IF
 			ELSE
 				HIDE OPTION 'Reaperturar'
-				HIDE OPTION 'Imprimir'
 			END IF
-			IF fl_control_permiso_opcion('Eliminar') THEN
-			  	SHOW OPTION 'Eliminar'
-			END IF
-	
+			SHOW OPTION 'Eliminar'
 			SHOW OPTION 'Detalle'
 		END IF
 		IF vm_row_current <= 1 THEN
@@ -273,14 +236,8 @@ MENU 'OPCIONES'
 		END IF
 		IF rm_b30.b30_estado = 'C' THEN
 			SHOW OPTION 'Reaperturar'
-
-		    IF fl_control_permiso_opcion('Imprimir') THEN
-			   SHOW OPTION 'Imprimir'
-		    END IF
-			
 		ELSE
 			HIDE OPTION 'Reaperturar'
-			HIDE OPTION 'Imprimir'
 		END IF
 		SHOW OPTION 'Detalle'
 	COMMAND KEY('R') 'Retroceder' 	'Ver anterior registro.'
@@ -296,10 +253,8 @@ MENU 'OPCIONES'
 		END IF
 		IF rm_b30.b30_estado = 'C' THEN
 			SHOW OPTION 'Reaperturar'
-			SHOW OPTION 'Imprimir'
 		ELSE
 			HIDE OPTION 'Reaperturar'
-			HIDE OPTION 'Imprimir'
 		END IF
 		SHOW OPTION 'Detalle'
 	COMMAND KEY('I') 'Imprimir'
@@ -316,6 +271,7 @@ FUNCTION sub_menu()
 DEFINE resp		CHAR(6)
 DEFINE resul, res	SMALLINT
 
+LET resul = 2		-- SOLO UNA VEZ PARA ENTRAR AL MENU
 MENU 'OPCIONES'
 	BEFORE MENU
 		IF rm_b30.b30_estado = 'E' THEN
@@ -587,7 +543,7 @@ IF NOT int_flag THEN
 	COMMIT WORK
 	CALL fl_mensaje_registro_modificado()
 ELSE
-	COMMIT WORK
+	ROLLBACK WORK
 	CLEAR FORM
 	CALL mostrar_botones_detalle()
 	IF vm_row_current > 0 THEN
@@ -627,7 +583,7 @@ IF num_args() <> 4 THEN
 				END IF 
 			END IF
 			IF INFIELD(b30_numero_cta) THEN
-				CALL fl_ayuda_cuenta_banco(vg_codcia)
+				CALL fl_ayuda_cuenta_banco(vg_codcia, 'T')
 					RETURNING banco, nomban, tipocta, numcta
 				LET int_flag = 0
 				IF banco IS NOT NULL THEN
@@ -753,7 +709,7 @@ DECLARE q_ba2 CURSOR FOR SELECT * FROM ctbt030
 OPEN q_ba2
 FETCH q_ba2 INTO rm_b30.*
 IF STATUS < 0 THEN
-	COMMIT WORK
+	ROLLBACK WORK
 	CALL fl_mensaje_bloqueo_otro_usuario()
 	WHENEVER ERROR STOP
 	RETURN
@@ -858,7 +814,7 @@ DECLARE q_ba CURSOR FOR SELECT * FROM ctbt030
 OPEN q_ba
 FETCH q_ba INTO rm_b30.*
 IF STATUS < 0 THEN
-	COMMIT WORK
+	ROLLBACK WORK
 	CALL fl_mensaje_bloqueo_otro_usuario()
 	WHENEVER ERROR STOP
 	RETURN
@@ -939,7 +895,7 @@ INPUT BY NAME rm_b30.b30_numero_cta, rm_b30.b30_fecha_ini, rm_b30.b30_fecha_fin,
 		END IF
 	ON KEY(F2)
 		IF INFIELD(b30_numero_cta) THEN
-			CALL fl_ayuda_cuenta_banco(vg_codcia)
+			CALL fl_ayuda_cuenta_banco(vg_codcia, 'A')
 				RETURNING banco, nomban, tipocta, numcta
 			LET int_flag = 0
 			IF banco IS NOT NULL THEN
@@ -1051,8 +1007,8 @@ WHILE NOT salir
 			LET int_flag = 0
 		BEFORE INPUT
 			LET vm_scr_lin = fgl_scr_size('r_desp')
-			CALL dialog.keysetlabel('DELETE','')
-			CALL dialog.keysetlabel('INSERT','')
+			--#CALL dialog.keysetlabel('DELETE','')
+			--#CALL dialog.keysetlabel('INSERT','')
 		BEFORE ROW
 	       		LET i = arr_curr()
        			LET j = scr_line()
@@ -1086,7 +1042,7 @@ DECLARE q_up CURSOR FOR SELECT * FROM ctbt030
 OPEN q_up
 FETCH q_up INTO rm_b30.*
 IF STATUS < 0 THEN
-	COMMIT WORK
+	ROLLBACK WORK
 	CALL fl_mensaje_bloqueo_otro_usuario()
 	WHENEVER ERROR STOP
 	RETURN 1
@@ -1166,6 +1122,9 @@ DEFINE fecha		DATE
 
 CALL fl_lee_banco_compania(vg_codcia, rm_b30.b30_banco, rm_b30.b30_numero_cta)
 	RETURNING rm_g09.*
+IF rm_b30.b30_estado <> 'A' THEN
+	RETURN
+END IF
 LET fecha = rm_b30.b30_fecha_fin
 CALL fl_obtiene_saldo_contable(vg_codcia, rm_g09.g09_aux_cont,
 				rm_g09.g09_moneda, fecha, 'A')
@@ -1310,8 +1269,8 @@ LET query = 'SELECT b13_compania, b13_tipo_comp, b13_num_comp, b13_secuencia, ',
 		'b13_valor_aux, b13_num_concil, b13_filtro, b13_fec_proceso, ',
 		'0, 0',
 		' FROM ctbt013 ',
-		' WHERE b13_compania  = ', vg_codcia,
-		'   AND b13_cuenta    = "', num_reg, '"',
+		' WHERE b13_compania     = ', vg_codcia,
+		'   AND b13_cuenta       = "', num_reg, '"',
 	        '   AND b13_fec_proceso <= "', rm_b30.b30_fecha_fin, '"',
 		--expr_concil,
 		' UNION ALL ',
@@ -1320,8 +1279,8 @@ LET query = 'SELECT b13_compania, b13_tipo_comp, b13_num_comp, b13_secuencia, ',
 		' b32_valor_base, b32_valor_aux, b32_num_concil, 0, ',
 		' b32_fec_proceso, b32_num_cheque, 1',
 		'	FROM ctbt032 ',
-		'	WHERE b32_compania  = ', vg_codcia,
-		'  	  AND b32_cuenta    = "', num_reg, '"',
+		'	WHERE b32_compania     = ', vg_codcia,
+		'  	  AND b32_cuenta       = "', num_reg, '"',
 	        '         AND b32_fec_proceso <= "', rm_b30.b30_fecha_fin, '"',
 		--expr_concil2,
 		' ORDER BY 12, 2, 3 '
@@ -1337,11 +1296,15 @@ FOREACH q_cons1 INTO rm_b13.b13_compania, rm_b13.b13_tipo_comp,
 	IF rm_b13.b13_fec_proceso > rm_b30.b30_fecha_fin THEN
 		CONTINUE FOREACH
 	END IF
+
 	-- Parche por arranque de saldos que no debe ser conciliado.
-	IF vm_flag_det = 0 AND YEAR(rm_b13.b13_fec_proceso) <= 2001 THEN
+	IF flag_det = 0 AND YEAR(rm_b13.b13_fec_proceso) <= 2002 AND
+	   (rm_b13.b13_valor_base < -2000 OR rm_b13.b13_valor_base > 2000)
+	THEN
 		CONTINUE FOREACH
 	END IF
 	--
+
 	IF vm_flag_mant = 'I' THEN
 		IF rm_b13.b13_num_concil <> 0 THEN
 			CONTINUE FOREACH
@@ -1471,7 +1434,7 @@ WHILE TRUE
 	CALL set_count(vm_num_det)
 	DISPLAY ARRAY rm_det TO rm_det.*
 		BEFORE DISPLAY
-			CALL dialog.keysetlabel("ACCEPT","")
+			--#CALL dialog.keysetlabel("ACCEPT","")
 			IF flag THEN
 				LET int_flag = 1
 				EXIT DISPLAY
@@ -1657,7 +1620,7 @@ IF vm_num_det = 0 THEN
 END IF
 LET vm_nuevoprog = 'cd ..', vg_separador, '..', vg_separador, 'CONTABILIDAD',
 	vg_separador, 'fuentes', vg_separador, '; fglrun ctbp201 ', vg_base,
-	' ', vg_modulo, ' ', vg_codcia, ' ', vg_codloc, ' "', rm_det[i].b13_tipo_comp, '"',
+	' ', vg_modulo, ' ', vg_codcia, ' ', '"', rm_det[i].b13_tipo_comp, '"',
 	' ', '"', rm_det[i].b13_num_comp, '"'
 RUN vm_nuevoprog
 
@@ -1791,6 +1754,7 @@ UPDATE ctbt030 SET b30_estado       = rm_b30.b30_estado,
 		   b30_fecha_cie    = CURRENT,
 		   b30_tipcomp_gen  = tipo,
 		   b30_numcomp_gen  = rm_b12.b12_num_comp,
+		   b30_saldo_cont   = rm_b30.b30_saldo_cont,
 		   b30_ch_nocob	    = rm_resu[1].valor_concil,
 		   b30_nd_banco	    = rm_resu[2].valor_concil,
 		   b30_nc_banco	    = rm_resu[3].valor_concil,
@@ -1815,6 +1779,7 @@ END FUNCTION
 FUNCTION control_resumen()
 DEFINE resul, i		SMALLINT
 
+CALL obtener_saldo_cont()
 OPEN WINDOW w_res AT 03, 08
         WITH FORM '../forms/ctbf203_3'
         ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MESSAGE LINE LAST, BORDER)
@@ -2081,7 +2046,7 @@ DISPLAY ARRAY rm_mov TO rm_mov.*
         	LET i = arr_curr()
         	LET j = scr_line()
 	BEFORE DISPLAY
-        	CALL dialog.keysetlabel("ACCEPT","")
+        	--#CALL dialog.keysetlabel("ACCEPT","")
 	AFTER DISPLAY
         	CONTINUE DISPLAY
 	ON KEY(INTERRUPT)
@@ -2110,11 +2075,11 @@ DISPLAY ARRAY rm_resu TO rm_resu.*
         	LET i = arr_curr()
         	LET j = scr_line()
 	BEFORE DISPLAY
-        	CALL dialog.keysetlabel("ACCEPT","")
+        	--#CALL dialog.keysetlabel("ACCEPT","")
 		IF rm_b30.b30_estado = 'C' THEN
-   	     		CALL dialog.keysetlabel("F5","")
+   	     		--#CALL dialog.keysetlabel("F5","")
 		ELSE
-   	     		CALL dialog.keysetlabel("F5","Grabar")
+   	     		--#CALL dialog.keysetlabel("F5","Grabar")
 		END IF
 	AFTER DISPLAY
         	CONTINUE DISPLAY
@@ -2228,9 +2193,10 @@ DEFINE i		SMALLINT
 IF rm_det[i].b13_fec_proceso <= rm_b30.b30_fecha_fin THEN
 	IF rm_det[i].conciliado = 'N' THEN
  		IF rm_det[i].b13_tipo_comp    <> 'EG'  AND
-	           rm_referen[i].b13_tipo_doc <> 'CHE' AND
  		   rm_det[i].b13_tipo_comp    <> 'DP'  AND
-	           rm_referen[i].b13_tipo_doc <> 'DEP' THEN
+	          (rm_referen[i].b13_tipo_doc IS NULL OR
+	          (rm_referen[i].b13_tipo_doc <> 'CHE' AND
+	           rm_referen[i].b13_tipo_doc <> 'DEP')) THEN
 			LET rm_resu[5].valor_concil = rm_resu[5].valor_concil +
 			  ((rm_det[i].tit_debito + rm_det[i].tit_credito) * -1)
 		END IF
@@ -2247,9 +2213,10 @@ DEFINE i		SMALLINT
 IF rm_det[i].b13_fec_proceso <= rm_b30.b30_fecha_fin THEN
 	IF rm_det[i].conciliado = 'N' THEN
  		IF rm_det[i].b13_tipo_comp    <> 'EG'  AND
-	           rm_referen[i].b13_tipo_doc <> 'CHE' AND
  		   rm_det[i].b13_tipo_comp    <> 'DP'  AND
-	           rm_referen[i].b13_tipo_doc <> 'DEP' THEN
+	          (rm_referen[i].b13_tipo_doc IS NULL OR
+                  (rm_referen[i].b13_tipo_doc <> 'CHE' AND
+	           rm_referen[i].b13_tipo_doc <> 'DEP')) THEN
 			LET rm_resu[6].valor_concil = rm_resu[6].valor_concil +
 			  ((rm_det[i].tit_debito + rm_det[i].tit_credito) * -1)
 		END IF
@@ -2260,7 +2227,7 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION no_validar_parametros()
 
 CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
 IF rg_mod.g50_modulo IS NULL THEN

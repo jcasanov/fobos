@@ -1,61 +1,59 @@
-DATABASE formonly
+DATABASE FORMONLY
 SCREEN
 {
           Período: [c001      ]  [c002      ]
-           Moneda: [c3]     [c004                ]     [c                ]
+           Moneda: [c3]     [c004                ]
            Bodega: [c5]     [c006                ]                            
-   Línea de Venta: [c007 ]  [c008                ]                            
+         Division: [c007 ]  [c008                ]                            
      Tipo de Item: [c009 ]  [c010                ]
   Indice Rotación: [x1]     [c012                ]
 
- [y1|c030           |c031                     |c032    |c033 |c034          ]
-[c1|c014           |c015                     |c16     |c016 |c017          ]
-[c1|c014           |c015                     |c16     |c016 |c017          ]
-[c1|c014           |c015                     |c16     |c016 |c017          ]
-[c1|c014           |c015                     |c16     |c016 |c017          ]
-[c1|c014           |c015                     |c16     |c016 |c017          ]
-[c1|c014           |c015                     |c16     |c016 |c017          ]
-[c1|c014           |c015                     |c16     |c016 |c017          ]
-[c1|c014           |c015                     |c16     |c016 |c017          ]
-[c1|c014           |c015                     |c16     |c016 |c017          ]
-                                                            [c101          ] 
+ [y1|c030         |c031                     |c032    |c033   |c034          ]
+[c1|c014         |c015                     |c16     |c016   |c017          ]
+[c1|c014         |c015                     |c16     |c016   |c017          ]
+[c1|c014         |c015                     |c16     |c016   |c017          ]
+[c1|c014         |c015                     |c16     |c016   |c017          ]
+[c1|c014         |c015                     |c16     |c016   |c017          ]
+[c1|c014         |c015                     |c16     |c016   |c017          ]
+[c1|c014         |c015                     |c16     |c016   |c017          ]
+[c1|c014         |c015                     |c16     |c016   |c017          ]
+[c1|c014         |c015                     |c16     |c016   |c017          ]
+[c1|c014         |c015                     |c16     |c016   |c017          ]
 }
 ATTRIBUTES
-c001 = formonly.fec_ini TYPE DATE NOT NULL, FORMAT = 'dd-mm-yyyy', COMMENTS =
+c001 = FORMONLY.fec_ini TYPE DATE NOT NULL, FORMAT = 'dd-mm-yyyy', COMMENTS =
        'Ingrese fecha en formato: dd-mm-aa', REVERSE;
-c002 = formonly.fec_fin TYPE DATE NOT NULL, FORMAT = 'dd-mm-yyyy', COMMENTS =
+c002 = FORMONLY.fec_fin TYPE DATE NOT NULL, FORMAT = 'dd-mm-yyyy', COMMENTS =
        'Ingrese fecha en formato: dd-mm-aa', REVERSE;
-c3   = formonly.moneda TYPE CHAR NOT NULL, REVERSE, WIDGET = 'FIELD_BMP', 
+c3   = FORMONLY.moneda TYPE CHAR NOT NULL, REVERSE, WIDGET = 'FIELD_BMP', 
        CONFIG = 'lista.bmp F2', UPSHIFT, AUTONEXT;
-c004 = formonly.tit_mon, NOENTRY;
-c5   = formonly.bodega, UPSHIFT, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+c004 = FORMONLY.tit_mon, NOENTRY;
+c5   = FORMONLY.bodega, UPSHIFT, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
        AUTONEXT;
-c006 = formonly.tit_bod, NOENTRY;
-c007 = formonly.linea, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2', UPSHIFT;
-c008 = formonly.tit_lin, NOENTRY;
-c009 = formonly.tipo_item, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c010 = formonly.tit_tipo_item, NOENTRY;
-x1   = formonly.indrot, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2', UPSHIFT,
+c006 = FORMONLY.tit_bod, NOENTRY;
+c007 = FORMONLY.linea, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2', UPSHIFT;
+c008 = FORMONLY.tit_lin, NOENTRY;
+c009 = FORMONLY.tipo_item, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c010 = FORMONLY.tit_tipo_item, NOENTRY;
+x1   = FORMONLY.indrot, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2', UPSHIFT,
        AUTONEXT;
-c012 = formonly.tit_indrot, NOENTRY;
-c =    formonly.tipo_valor, WIDGET = 'RADIO', CONFIG = 'V "Valor Venta" C "Valor Costo"', DEFAULT='V';
-c1   = formonly.cod_bod, OPTIONS='-nolist';
-c014 = formonly.item, OPTIONS='-nolist';
-c015 = formonly.descri_item, OPTIONS='-nolist';
-c16  = formonly.ult_vta TYPE DATE, FORMAT = 'dd-mm-yy', OPTIONS='-nolist';
-c016 = formonly.unidad TYPE INTEGER, FORMAT = '####&', OPTIONS='-nolist';
-c017 = formonly.valor TYPE DECIMAL(14,2), FORMAT = '--,---,--&.##', OPTIONS='-nolist';
-c101 = formonly.sum_valor TYPE DECIMAL(14,2), FORMAT = '--,---,--&.##';
-y1   = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-c030 = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-c031 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
-c032 = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
-c033 = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
-c034 = formonly.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c012 = FORMONLY.tit_indrot, NOENTRY;
+c1   = FORMONLY.cod_bod;
+c014 = FORMONLY.item;
+c015 = FORMONLY.descri_item;
+c16  = FORMONLY.ult_vta TYPE DATE, FORMAT = 'dd-mm-yy';
+c016 = FORMONLY.unidad TYPE DECIMAL (8,2), FORMAT = '###&.##';
+c017 = FORMONLY.valor TYPE DECIMAL(14,2), FORMAT = '##,###,##&.##';
+y1   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c030 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c031 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c032 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c033 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c034 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
 INSTRUCTIONS
-SCREEN RECORD rm_cons[9] (formonly.cod_bod, formonly.item, 
-			   formonly.descri_item, formonly.ult_vta, 
-			   formonly.unidad, formonly.valor)
+SCREEN RECORD rm_cons[10] (FORMONLY.cod_bod, formonly.item, 
+			   FORMONLY.descri_item, formonly.ult_vta, 
+			   FORMONLY.unidad, formonly.valor)
 KEYS
 F5='Movimientos'
-F6='Gráfico'
+F6='Grafico'

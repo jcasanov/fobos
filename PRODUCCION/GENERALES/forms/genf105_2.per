@@ -1,0 +1,52 @@
+DATABASE aceros
+SCREEN
+{
+
+ IMPRESORA POR BODEGAS
+
+ Impresora: [c000      |c001                          ]
+
+                                 [c002] de [c003]
+           [c0|c010                          |c|d]
+          [c1|c020                          |e|f]
+          [c1|c020                          |e|f]
+          [c1|c020                          |e|f]
+          [c1|c020                          |e|f]
+          [c1|c020                          |e|f]
+          [c1|c020                          |e|f]
+          [c1|c020                          |e|f]
+
+ Ingresado: [c030      ]   Fecha: [c031               ]
+
+}
+TABLES
+gent006
+gent024
+rept002
+ATTRIBUTES
+c000 = gent024.g24_impresora, NOENTRY, UPSHIFT, REVERSE;
+c001 = gent006.g06_nombre, NOENTRY, UPSHIFT, REVERSE, WORDWRAP COMPRESS;
+
+c002 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c003 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c0   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c010 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c    = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+d    = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+
+c1   = gent024.g24_bodega, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c020 = rept002.r02_nombre, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+e    = gent024.g24_imprime, AUTONEXT, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N',
+	OPTIONS = '-nolist';
+f    = FORMONLY.asignada, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N',
+	OPTIONS = '-nolist';
+
+c030 = gent024.g24_usuario, NOENTRY, UPSHIFT, REVERSE;
+c031 = gent024.g24_fecing, NOENTRY, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_impbod[7] (g24_bodega, r02_nombre, g24_imprime, asignada)

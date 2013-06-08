@@ -1,0 +1,56 @@
+DATABASE aceros
+SCREEN
+{
+              Moneda:[c0] [c1             ]  Tipo Transac.: [c2|c20        ]
+      Desde la Fecha:[c3        ]                                           
+      Hasta la Fecha:[c4        ]                                           
+Rango Utilidad Desde:[c13       ]     Rango Utilidad Hasta: [c14       ]
+
+    Fecha   TP      Número     Ven Total sin Impto.   Total Costo  Utilidad 
+[c5        |c6|c7             |c8 |c9              |c10           |c11     ]
+[c5        |c6|c7             |c8 |c9              |c10           |c11     ]
+[c5        |c6|c7             |c8 |c9              |c10           |c11     ]
+[c5        |c6|c7             |c8 |c9              |c10           |c11     ]
+[c5        |c6|c7             |c8 |c9              |c10           |c11     ]
+[c5        |c6|c7             |c8 |c9              |c10           |c11     ]
+[c5        |c6|c7             |c8 |c9              |c10           |c11     ]
+[c5        |c6|c7             |c8 |c9              |c10           |c11     ]
+[c5        |c6|c7             |c8 |c9              |c10           |c11     ]
+[c5        |c6|c7             |c8 |c9              |c10           |c11     ]
+              [c12                                 ]
+}
+TABLES rept019, rept020
+ATTRIBUTES
+c0  = rept019.r19_moneda , AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c1  = FORMONLY.nom_moneda, NOENTRY, REVERSE;
+
+c3  = FORMONLY.vm_fecha_desde TYPE DATE NOT NULL, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy', COMMENTS = 'Fecha en formato: dd-mm-aaaa';
+c4  = FORMONLY.vm_fecha_hasta TYPE DATE NOT NULL, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy', COMMENTS = 'Fecha en formato: dd-mm-aaaa';
+c2  = FORMONLY.vm_tipo_tran TYPE VARCHAR, REVERSE, UPSHIFT, AUTONEXT, 
+	INCLUDE = ('FA', 'RQ', 'TO'),
+	COMMENTS = 'FA Factura  RQ Requisición  TO Todas'; 
+c20 = FORMONLY.tit_tipo_tran,REVERSE,UPSHIFT,NOENTRY;
+c5  = FORMONLY.fecha TYPE DATE, FORMAT = 'dd-mm-yyyy', UPSHIFT;
+c6  = FORMONLY.tipo_tran TYPE VARCHAR, UPSHIFT;
+c7  = FORMONLY.num_tran TYPE DECIMAL(15,0), UPSHIFT;
+c8  = FORMONLY.siglas_vEND TYPE VARCHAR, UPSHIFT;
+c9  = FORMONLY.tot_sin_impto TYPE DECIMAL(12,2),  
+	FORMAT = '#,###,###,##&.##', UPSHIFT;
+c10 = FORMONLY.tot_costo TYPE DECIMAL(11,2),  
+	FORMAT = '###,###,##&.##', UPSHIFT;
+c11 = FORMONLY.utilidad TYPE DECIMAL( 7,2), COLOR =  RED WHERE c11 < 0,
+	COLOR = BLACK WHERE c11 >= 0, FORMAT = '----&.##';
+
+c12 = FORMONLY.nom_cliente TYPE VARCHAR, REVERSE, NOENTRY; 
+c13 = FORMONLY.utilidad_desde TYPE DECIMAL(6,2), REVERSE, FORMAT = '---,--&.##',
+	INCLUDE = (NULL, -999.99 TO 9999.99), COLOR = RED WHERE c13 < 0; 
+c14 = FORMONLY.utilidad_hasta TYPE DECIMAL(6,2), REVERSE, FORMAT = '###,##&.##',
+	INCLUDE = (NULL, 0.00 TO 9999.99); 
+end
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_detalle[10] (fecha, tipo_tran, num_tran, siglas_vend,
+			     tot_sin_impto, tot_costo, utilidad)

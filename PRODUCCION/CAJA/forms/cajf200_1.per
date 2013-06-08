@@ -1,5 +1,5 @@
 
-database diteca
+DATABASE aceros
 SCREEN 
 {
 
@@ -20,7 +20,7 @@ SCREEN
    [c3             |c4               |c5              |c6                ]
 
 }
-END	
+end	
 
 TABLES
 	cajt004
@@ -47,7 +47,7 @@ c5   = cajt005.j05_ch_apertura, REVERSE, FORMAT = '#,###,###,##&.##',
 c6   = FORMONLY.tot_apertura TYPE DECIMAL(12,2), REVERSE,  
 	FORMAT = '#,###,###,##&.##', OPTIONS = '-nolist';
 
-END
+end
 
 INSTRUCTIONS
 SCREEN RECORD r_detalle[8] (g13_nombre, j05_ef_apertura, j05_ch_apertura, 

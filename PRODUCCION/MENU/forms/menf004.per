@@ -1,24 +1,28 @@
-DATABASE formonly
+DATABASE FORMONLY
 SCREEN
 {
-   [f000             ]                
-------------------------------------------
-   [f001                               ]	
-   [f001                               ]	
-   [f001                               ]	
-   [f001                               ]	
-   [f001                               ]	
-   [f001                               ]	
-   [f001                               ]	
-   [f001                               ]	
-   [f001                               ]	
-   [f001                               ]	
-   [f001                               ]	
+                          ==========================
+      =====================   MENU TRANSACCIONES   =====================
+      =                   ==========================                   =
+      =                                                                =
+      =      [f003                 ]      [f003                 ]      =
+      =      [f003                 ]      [f003                 ]      =
+      =      [f003                 ]      [f003                 ]      =
+      =      [f003                 ]      [f003                 ]      =
+      =      [f003                 ]      [f003                 ]      =
+      =      [f003                 ]      [f003                 ]      =
+      =      [f003                 ]      [f003                 ]      =
+      =      [f003                 ]      [f003                 ]      =
+      =      [f003                 ]      [f003                 ]      =
+      =      [f003                 ]      [f003                 ]      =
+      =      [f003                 ]      [f003                 ]      =
+      =      [f003                 ]                                   =
+      =                                                                =
+      ==================================================================
 }
-attributes
-f000 = formonly.titulo, REVERSE;
-f001 = formonly.opcion;
+ATTRIBUTES
+f003 = FORMONLY.opcion;
+END
 INSTRUCTIONS
 DELIMITERS "  "
-SCREEN RECORD r_menu_rep_5 [11] (formonly.opcion)
-
+SCREEN RECORD r_menu_rep2 [23] (FORMONLY.opcion)

@@ -1,4 +1,3 @@
-                                                                                
 -------------------------------------------------------------------------------
 -- Titulo               : repp104.4gl -- Mantenimiento de Indices de Rotacion
 -- Elaboración          : 12-sep-2001
@@ -10,14 +9,16 @@
                                                                                 
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
                                                                                 
-DEFINE rm_irot   RECORD LIKE rept004.*
-DEFINE rm_irot2  RECORD LIKE rept004.*
-DEFINE vm_r_rows ARRAY[1000] OF INTEGER -- ARREGLO DE ROWID DE FILAS LEIDAS
+DEFINE rm_irot		RECORD LIKE rept004.*
+DEFINE rm_irot2		RECORD LIKE rept004.*
+DEFINE vm_r_rows	ARRAY[1000] OF INTEGER -- ARREGLO ROWID DE FILAS LEIDAS
 DEFINE vm_row_current   SMALLINT        -- FILA CORRIENTE DEL ARREGLO
 DEFINE vm_num_rows      SMALLINT        -- CANTIDAD DE FILAS LEIDAS
 DEFINE vm_max_rows      SMALLINT        -- MAXIMO DE FILAS LEIDAS
 DEFINE vm_demonios      VARCHAR(12)
 DEFINE vm_flag_mant     CHAR(1)
+
+
 
 MAIN
                                                                                 
@@ -25,19 +26,21 @@ DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
 CALL startlog('../logs/errores')
-CALL fgl_init4js()
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN
-     CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto','stop')
-     EXIT PROGRAM
+     	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto','stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
+     	EXIT PROGRAM
 END IF
-LET vg_base     = arg_val(1)
-LET vg_modulo   = arg_val(2)
-LET vg_codcia   = arg_val(3)
+LET vg_base    = arg_val(1)
+LET vg_modulo  = arg_val(2)
+LET vg_codcia  = arg_val(3)
 LET vg_proceso = 'repp104'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
                                                                                 
@@ -49,7 +52,7 @@ FUNCTION funcion_master()
 
 CALL fl_nivel_isolation()
 LET vm_max_rows = 1000
-OPEN WINDOW w_irot AT 3,2 WITH 19 ROWS, 80 COLUMNS
+OPEN WINDOW w_irot AT 3, 2 WITH 19 ROWS, 80 COLUMNS
     ATTRIBUTE(FORM LINE FIRST + 2, COMMENT LINE LAST, MENU LINE FIRST,BORDER,
 	      MESSAGE LINE LAST - 2)
 OPEN FORM f_irot FROM '../forms/repf104_1'
@@ -67,14 +70,8 @@ MENU 'OPCIONES'
 	COMMAND KEY('I') 'Ingresar' 'Ingresar nuevos registros. '
 		CALL control_ingreso()
 		IF vm_num_rows = 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		   END IF
-		
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -91,14 +88,8 @@ MENU 'OPCIONES'
 	COMMAND KEY('C') 'Consultar' 'Consultar un registro. '
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		  IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		  END IF
-			
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -106,14 +97,8 @@ MENU 'OPCIONES'
 				HIDE OPTION 'Bloquear/Activar'
 			END IF
 		ELSE
-		   IF fl_control_permiso_opcion('Modificar') THEN			
+			SHOW OPTION 'Avanzar'
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Bloquear') THEN
-			SHOW OPTION 'Bloquear/Activar'
-		   END IF
-		
 			SHOW OPTION 'Bloquear/Activar'
 		END IF
 		IF vm_row_current <= 1 THEN
@@ -164,9 +149,9 @@ DEFINE query		VARCHAR(600)
 
 CLEAR FORM
 LET int_flag = 0
-CONSTRUCT BY NAME expr_sql ON r04_rotacion,r04_nombre, r04_uni_vtai, r04_estado,
-			      r04_uni_vtaf, r04_pedido, r04_dcto_cont,
-			      r04_dcto_cred, r04_usuario, r04_fecing
+CONSTRUCT BY NAME expr_sql ON r04_rotacion, r04_estado, r04_nombre, r04_pedido,
+	r04_uni_vtai, r04_uni_vtaf, r04_meses, r04_porc_uti, r04_dcto_cont,
+	r04_dcto_cred, r04_usuario
 	ON KEY(F2)
 		IF INFIELD(r04_rotacion) THEN
 		     CALL fl_ayuda_clases(vg_codcia)
@@ -205,8 +190,8 @@ IF vm_num_rows = 0 THEN
         RETURN
 END IF
 LET vm_row_current = 1
-CALL lee_muestra_registro(vm_r_rows[vm_row_current])
 CALL muestra_contadores(vm_row_current, vm_num_rows)
+CALL lee_muestra_registro(vm_r_rows[vm_row_current])
 
 END FUNCTION
 
@@ -218,10 +203,10 @@ OPTIONS INPUT WRAP
 CLEAR FORM
 INITIALIZE rm_irot.* TO NULL
 LET vm_flag_mant          = 'I'
-LET rm_irot.r04_compania   = vg_codcia
-LET rm_irot.r04_fecing     = CURRENT
-LET rm_irot.r04_usuario    = vg_usuario
-LET rm_irot.r04_estado     = 'A'
+LET rm_irot.r04_compania  = vg_codcia
+LET rm_irot.r04_fecing    = CURRENT
+LET rm_irot.r04_usuario   = vg_usuario
+LET rm_irot.r04_estado    = 'A'
 LET rm_irot.r04_pedido    = 'S'
 DISPLAY BY NAME rm_irot.r04_fecing, rm_irot.r04_usuario, rm_irot.r04_estado
 DISPLAY 'ACTIVO' TO tit_estado
@@ -253,18 +238,21 @@ IF rm_irot.r04_estado <> 'A' THEN
 	CALL fl_mensaje_estado_bloqueado()
 	RETURN
 END IF
-WHENEVER ERROR CONTINUE
 BEGIN WORK
-DECLARE q_up CURSOR FOR SELECT * FROM rept004 WHERE ROWID = vm_r_rows[vm_row_current]
+WHENEVER ERROR CONTINUE
+DECLARE q_up CURSOR FOR
+	SELECT * FROM rept004
+		WHERE ROWID = vm_r_rows[vm_row_current]
 	FOR UPDATE
 OPEN q_up
 FETCH q_up INTO rm_irot.*
 IF status < 0 THEN
-	COMMIT WORK
+	ROLLBACK WORK
 	CALL fl_mensaje_bloqueo_otro_usuario()
 	WHENEVER ERROR STOP
 	RETURN
 END IF
+WHENEVER ERROR STOP
 LET rm_irot2.r04_nombre = rm_irot.r04_nombre
 CALL lee_datos()
 IF NOT int_flag THEN
@@ -273,6 +261,7 @@ IF NOT int_flag THEN
 	COMMIT WORK
 	CALL fl_mensaje_registro_modificado()
 ELSE
+	ROLLBACK WORK
 	CALL lee_muestra_registro(vm_r_rows[vm_row_current])
 END IF
 
@@ -298,19 +287,20 @@ END IF
 CALL fl_mensaje_seguro_ejecutar_proceso()
 	RETURNING resp
 IF resp = 'Yes' THEN
-WHENEVER ERROR CONTINUE
 	BEGIN WORK
+	WHENEVER ERROR CONTINUE
 	DECLARE q_del CURSOR FOR SELECT * FROM rept004 
 		WHERE ROWID = vm_r_rows[vm_row_current]
 		FOR UPDATE
 	OPEN q_del
 	FETCH q_del INTO rm_irot.*
 	IF status < 0 THEN
-		COMMIT WORK
+		ROLLBACK WORK
 		CALL fl_mensaje_bloqueo_otro_usuario()
 		WHENEVER ERROR STOP
 		RETURN
 	END IF
+	WHENEVER ERROR STOP
 	LET estado = 'B'
 	IF rm_irot.r04_estado <> 'A' THEN
 		LET estado = 'A'
@@ -329,19 +319,21 @@ END FUNCTION
 
 
 FUNCTION lee_datos()
-DEFINE           resp      CHAR(6)
-DEFINE           codigo    LIKE rept004.r04_rotacion
+DEFINE resp		CHAR(6)
+DEFINE codigo		LIKE rept004.r04_rotacion
                                                                                 
 OPTIONS INPUT WRAP
 LET int_flag = 0 
-INPUT BY NAME rm_irot.r04_rotacion, rm_irot.r04_nombre, rm_irot.r04_uni_vtai,
-	      rm_irot.r04_uni_vtaf, rm_irot.r04_meses, rm_irot.r04_porc_uti,
-	      rm_irot.r04_pedido, rm_irot.r04_dcto_cont, rm_irot.r04_dcto_cred
-              WITHOUT DEFAULTS
+INPUT BY NAME rm_irot.r04_rotacion, rm_irot.r04_nombre, rm_irot.r04_pedido,
+	rm_irot.r04_uni_vtai, rm_irot.r04_uni_vtaf, rm_irot.r04_meses,
+	rm_irot.r04_porc_uti, rm_irot.r04_dcto_cont, rm_irot.r04_dcto_cred
+	WITHOUT DEFAULTS
         ON KEY(INTERRUPT)
-        	 IF field_touched(r04_rotacion,  r04_nombre, r04_uni_vtai, 
-				  r04_uni_vtaf,  r04_meses,  r04_porc_uti,
-				  r04_dcto_cont, r04_dcto_cred)
+        	 IF field_touched(rm_irot.r04_rotacion, rm_irot.r04_nombre,
+				  rm_irot.r04_pedido, rm_irot.r04_uni_vtai,
+				  rm_irot.r04_uni_vtaf, rm_irot.r04_meses,
+				  rm_irot.r04_porc_uti, rm_irot.r04_dcto_cont,
+				  rm_irot.r04_dcto_cred)
                  THEN
                         LET int_flag = 0
 			CALL fl_mensaje_abandonar_proceso()
@@ -359,19 +351,22 @@ INPUT BY NAME rm_irot.r04_rotacion, rm_irot.r04_nombre, rm_irot.r04_uni_vtai,
 			END IF
                         RETURN
                 END IF       	
-	BEFORE  FIELD r04_rotacion
+	BEFORE FIELD r04_rotacion
 		IF vm_flag_mant = 'M' THEN
 			NEXT FIELD NEXT
 		END IF
+	AFTER FIELD r04_rotacion
+		IF rm_irot.r04_rotacion IS NOT NULL THEN
+			CALL fl_lee_indice_rotacion(vg_codcia,
+							rm_irot.r04_rotacion)
+				RETURNING rm_irot2.*
+			IF rm_irot2.r04_rotacion IS NOT NULL THEN
+				--CALL fgl_winmessage (vg_producto,'El índice de rotacion ya existe en la compañía','exclamation')
+				CALL fl_mostrar_mensaje('El índice de rotacion ya existe en la compañía.','exclamation')
+				NEXT FIELD r04_rotacion
+			END IF
+		END IF
 	AFTER INPUT
-               IF vm_flag_mant = 'I' THEN
-                    CALL fl_lee_indice_rotacion(vg_codcia, rm_irot.r04_rotacion)
-                                RETURNING rm_irot2.*
-                        IF rm_irot2.r04_rotacion IS NOT NULL THEN
-                                CALL fgl_winmessage (vg_producto, 'El índice de rotacion ya existe en la compañía','exclamation')
-                                NEXT FIELD r04_rotacion
-                        END IF
-               END IF
                IF vm_flag_mant = 'I'  
 	       OR rm_irot2.r04_nombre <> rm_irot.r04_nombre
 	       THEN
@@ -379,7 +374,8 @@ INPUT BY NAME rm_irot.r04_rotacion, rm_irot.r04_nombre, rm_irot.r04_uni_vtai,
 	      		WHERE r04_compania = vg_codcia
 	      		AND   r04_nombre   = rm_irot.r04_nombre
 	      		IF status <> NOTFOUND THEN
-                 		CALL fgl_winmessage (vg_producto, 'El nombre del índice de rotación ya ha sido asignado al registro de codigo  '|| codigo,'exclamation')
+                 		--CALL fgl_winmessage (vg_producto,'El nombre del índice de rotación ya ha sido asignado al registro de codigo '|| codigo, 'exclamation')
+				CALL fl_mostrar_mensaje('El nombre del índice de rotación ya ha sido asignado al registro de codigo '|| codigo, 'exclamation')
 	         		NEXT FIELD r04_nombre  
               		END IF
              	END IF
@@ -421,40 +417,3 @@ DISPLAY "" AT 1,1
 DISPLAY row_current, " de ", num_rows AT 1, 69
                                                                                 
 END FUNCTION
-
-                                                                                
-                                                                                
-FUNCTION validar_parametros()
-                                                                                
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-        CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'sto
-p')
-        EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-        CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'st
-op')
-        EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-     CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 			 'stop')
-     EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-        LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-        CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc,
-			    'stop')
-        EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-      CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 			  'stop')
-      EXIT PROGRAM
-END IF
-                                                                                
-END FUNCTION
-

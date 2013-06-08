@@ -25,7 +25,7 @@ DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
 CALL startlog('../logs/errores')
-CALL fgl_init4js()
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 2 THEN
      CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto','stop')
@@ -36,7 +36,7 @@ LET vg_modulo   = arg_val(2)
 LET vg_proceso = 'genp119'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
                                                                                 
@@ -66,14 +66,8 @@ MENU 'OPCIONES'
 	COMMAND KEY('I') 'Ingresar' 'Ingresar nuevos registros. '
 		CALL control_ingreso()
 		IF vm_num_rows = 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		   END IF
-			
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -90,14 +84,8 @@ MENU 'OPCIONES'
         COMMAND KEY('C') 'Consultar' 'Consultar un registro. '
                 CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-	  	   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-	 	   END IF
-			
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -106,14 +94,8 @@ MENU 'OPCIONES'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		   END IF
-			
 		END IF
 		IF vm_row_current <= 1 THEN
                         HIDE OPTION 'Retroceder'
@@ -146,7 +128,7 @@ MENU 'OPCIONES'
 			SHOW OPTION 'Avanzar'
 			SHOW OPTION 'Retroceder'
 		END IF
-	COMMAND KEY('B') 'Bloquear/Activar' 'Bloquear o activar registro. '
+	COMMAND KEY('E') 'Bloquear/Activar' 'Bloquear o activar registro. '
 		CALL control_bloqueo_activacion()
 	COMMAND KEY('S') 'Salir' 'Salir del programa.  '
 		EXIT MENU
@@ -328,7 +310,6 @@ WHENEVER ERROR CONTINUE
 	CALL lee_muestra_registro(vm_r_rows[vm_row_current])
 END IF
 CALL muestra_contadores(vm_row_current, vm_num_rows)
-CLOSE q_del
 
 END FUNCTION
 
@@ -448,7 +429,7 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION no_validar_parametros()
                                                                                 
 CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
 IF rg_mod.g50_modulo IS NULL THEN

@@ -1,9 +1,11 @@
-{*
- * Titulo           : genp129.4gl - Asignacion de procesos a usuarios 
- * Elaboracion      : 31-ago-2001
- * Autor            : JCM
- * Formato Ejecucion: fglrun genp129 base GE [usuario]
-*}
+------------------------------------------------------------------------------
+-- Titulo           : genp129.4gl - Asignacion de procesos a usuarios 
+-- Elaboracion      : 31-ago-2001
+-- Autor            : JCM
+-- Formato Ejecucion: fglrun genp129 base GE [usuario]
+-- Ultima Correccion: 
+-- Motivo Correccion: 
+------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
 DEFINE vm_usuario		LIKE gent005.g05_usuario
@@ -25,8 +27,8 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/genp129.error')
-CALL fgl_init4js()
+CALL startlog('../logs/errores')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 2 AND num_args() <> 3 THEN  -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 
@@ -43,8 +45,8 @@ LET vg_proceso = 'genp129'
 
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	-- Asigna un valor por default a vg_codloc
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -101,19 +103,8 @@ DEFINE modulo		LIKE gent050.g50_modulo
 DEFINE usr		LIKE gent005.g05_usuario
 DEFINE cia		LIKE gent001.g01_compania 
 
-DEFINE mascara	LIKE gent055.g55_opciones
-
 DEFINE ra_proc ARRAY[1000] OF RECORD
-	p1				CHAR(1),
-	p2				CHAR(1),
-	p3				CHAR(1),
-	p4				CHAR(1),
-	p5				CHAR(1),
-	p6				CHAR(1),
-	p7				CHAR(1),
-	p8				CHAR(1),
-	p9				CHAR(1),
-	p0				CHAR(1),
+	check			CHAR(1),
 	g54_tipo		CHAR(1),
 	g54_proceso		CHAR(15),
 	g54_nombre		CHAR(50)
@@ -125,6 +116,7 @@ DEFINE j		SMALLINT
 DEFINE query		CHAR(500)	## Contiene todo el query preparado
 DEFINE resp		CHAR(6)
 DEFINE modified		CHAR(1)
+DEFINE chk		CHAR(1)		-- Guarda el valor anterior de check
 
 DEFINE filas_max	SMALLINT	## No. elementos del arreglo
 DEFINE filas_pant	SMALLINT	## No. elementos de cada pantalla
@@ -158,11 +150,11 @@ DECLARE q_prcons2 CURSOR FOR prcons2
 LET i = 1
 FOREACH q_prcons2 INTO ra_proc[i].g54_tipo, ra_proc[i].g54_proceso,
        	               ra_proc[i].g54_nombre 
-	CALL split_permission_mask(usr, modulo, ra_proc[i].g54_proceso, cia) 
-		RETURNING ra_proc[i].p1, ra_proc[i].p2, ra_proc[i].p3, 
-		          ra_proc[i].p4, ra_proc[i].p5, ra_proc[i].p6, 
-		          ra_proc[i].p7, ra_proc[i].p8, ra_proc[i].p9, 
-		          ra_proc[i].p0
+	LET ra_proc[i].check = 'S'
+	IF NOT canAccessProcessInCia(usr, modulo, ra_proc[i].g54_proceso, cia) 
+	THEN
+		LET ra_proc[i].check = 'N'
+	END IF
 	LET i = i + 1
 	IF i > filas_max THEN
 		EXIT FOREACH
@@ -179,10 +171,14 @@ WHILE NOT salir
 	LET modified = 0
 	CALL set_count(i)
 	INPUT ARRAY ra_proc WITHOUT DEFAULTS FROM ra_proc.*
-		ATTRIBUTE (INSERT ROW = FALSE, DELETE ROW = FALSE)
 		ON KEY(INTERRUPT)
+			IF NOT modified THEN
+				EXIT INPUT		
+			END IF
+
 			LET INT_FLAG = 0
-			CALL fl_mensaje_abandonar_proceso() RETURNING resp
+			CALL fl_mensaje_abandonar_proceso()
+				RETURNING resp
 			IF resp = 'Yes' THEN
 				LET INT_FLAG = 1   
 				EXIT INPUT 
@@ -199,15 +195,17 @@ WHILE NOT salir
 			LET INT_FLAG = 1
 			EXIT INPUT
 		BEFORE INPUT
-			CALL dialog.keysetlabel('INSERT', '')
-			CALL dialog.keysetlabel('DELETE', '')
-		BEFORE INSERT
-			CANCEL INSERT
-		BEFORE DELETE
-			CANCEL DELETE
+			--#CALL dialog.keysetlabel('INSERT', '')
+			--#CALL dialog.keysetlabel('DELETE', '')
 		BEFORE ROW
 			LET j = arr_curr()
 			MESSAGE j, ' de ', i
+		BEFORE FIELD check 
+			LET chk = ra_proc[j].check
+		AFTER  FIELD check
+			IF chk <> ra_proc[j].check THEN
+				LET modified = 1
+			END IF
 		AFTER INPUT
 			LET salir = 1
 	END INPUT
@@ -217,23 +215,13 @@ WHILE NOT salir
 	END IF
 
 	-- SI SE CONCEDIO O QUITO ALGUN PERMISO AQUI DEBE SER MANEJADO
+	LET j = 0
 	FOR j = 1 TO i
-		IF ra_proc[j].p1 = 'S' OR ra_proc[j].p2 = 'S' OR  
-		   ra_proc[j].p3 = 'S' OR ra_proc[j].p4 = 'S' OR  
-		   ra_proc[j].p5 = 'S' OR ra_proc[j].p6 = 'S' OR  
-		   ra_proc[j].p7 = 'S' OR ra_proc[j].p8 = 'S' OR  
-		   ra_proc[j].p9 = 'S' OR ra_proc[j].p0 = 'S'   
-		THEN
-			CALL form_permission_mask(ra_proc[j].p1, ra_proc[j].p2,
-			                          ra_proc[j].p3, ra_proc[j].p4,
-			                          ra_proc[j].p5, ra_proc[j].p6,
-			                          ra_proc[j].p7, ra_proc[j].p8,
-			                          ra_proc[j].p9, ra_proc[j].p0)
-				RETURNING mascara
+		IF ra_proc[j].check = 'S' THEN
 			CALL grantUserToModuleInCia(usr, modulo, cia)
 			CALL grantUserToProcess(usr, modulo, 
                                                 ra_proc[j].g54_proceso,
-                                       		cia, mascara)
+                                       		cia)
 		ELSE	
 			CALL revokeGrantsToUserInProcess(usr, modulo, 
        		                                         ra_proc[j].g54_proceso,
@@ -308,7 +296,7 @@ INPUT modulo, cia, usr WITHOUT DEFAULTS FROM g54_modulo, compania, usuario
 				DISPLAY cia TO compania
 			END IF
 		END IF
-		IF infield(g54_modulo) THEN
+		IF INFIELD(g54_modulo) THEN
 			CALL fl_ayuda_modulos() 
 				RETURNING modulo, nom_modulo
 			DISPLAY modulo TO g54_modulo
@@ -355,7 +343,7 @@ INPUT modulo, cia, usr WITHOUT DEFAULTS FROM g54_modulo, compania, usuario
 		IF modulo IS NOT NULL THEN
 			CALL fl_lee_modulo(modulo) RETURNING r_mod.*
 			IF r_mod.g50_modulo IS NULL THEN
-				CALL fgl_winmessage(vg_producto, 
+				CALL FGL_WINMESSAGE(vg_producto, 
                          		            'Módulo no existe', 
                                                     'exclamation')
 				CLEAR n_modulo 
@@ -456,24 +444,15 @@ END FUNCTION
 FUNCTION asignaProcesoAUsuarios()
 
 DEFINE ra_proc ARRAY[1000] OF RECORD
-	p1				CHAR(1),
-	p2				CHAR(1),
-	p3				CHAR(1),
-	p4				CHAR(1),
-	p5				CHAR(1),
-	p6				CHAR(1),
-	p7				CHAR(1),
-	p8				CHAR(1),
-	p9				CHAR(1),
-	p0				CHAR(1),
+	check			CHAR(1),
 	g54_tipo		CHAR(1),
 	g54_proceso		CHAR(15),
 	g54_nombre		CHAR(50)
 END RECORD
 
-DEFINE i			SMALLINT
-DEFINE j			SMALLINT
-DEFINE ind			SMALLINT
+DEFINE i		SMALLINT
+DEFINE j		SMALLINT
+DEFINE ind		SMALLINT
 DEFINE salir		SMALLINT
 
 DEFINE query		CHAR(500)	## Contiene todo el query preparado
@@ -482,8 +461,8 @@ DEFINE filas_max	SMALLINT	## No. elementos del arreglo
 DEFINE filas_pant	SMALLINT	## No. elementos de cada pantalla
 
 DEFINE modulo		LIKE gent050.g50_modulo
-DEFINE cia			LIKE gent001.g01_compania
-DEFINE usr			LIKE gent005.g05_usuario
+define cia		like gent001.g01_compania
+define usr		like gent005.g05_usuario
 
 LET filas_max  = 1000
 LET filas_pant = 10
@@ -513,7 +492,7 @@ WHILE TRUE
 	LET i = 1
 	FOREACH q_prcons INTO ra_proc[i].g54_tipo, ra_proc[i].g54_proceso,
                               ra_proc[i].g54_nombre 
-		LET ra_proc[i].p1 = 'N'
+		LET ra_proc[i].check = 'N'
 		LET i = i + 1
 		IF i > filas_max THEN
 			EXIT FOREACH
@@ -530,11 +509,10 @@ WHILE TRUE
 	WHILE NOT salir
 		CALL set_count(i)
 		INPUT ARRAY ra_proc WITHOUT DEFAULTS FROM ra_proc.*
-			ATTRIBUTE(INSERT ROW = FALSE, DELETE ROW = FALSE)
 			BEFORE INPUT  
-				CALL dialog.keysetlabel('ACCEPT', '')
-				CALL dialog.keysetlabel('INSERT', '')
-				CALL dialog.keysetlabel('DELETE', '')
+				--#CALL dialog.keysetlabel('ACCEPT', '')
+				--#CALL dialog.keysetlabel('INSERT', '')
+				--#CALL dialog.keysetlabel('DELETE', '')
 			AFTER INPUT  
 				CONTINUE INPUT  
 			ON KEY(INTERRUPT)
@@ -546,18 +524,16 @@ WHILE TRUE
 				LET i = arr_curr()
 				LET j = scr_line()
 				MESSAGE i, ' de ', ind           
-			AFTER FIELD p1
-				IF ra_proc[i].p1 = 'S' THEN
-					LET ra_proc[i].p1 = 'N'
+			AFTER FIELD check
+				IF ra_proc[i].check = 'S' THEN
+					LET ra_proc[i].check = 'N'
 					DISPLAY ra_proc[i].* TO ra_proc[j].*
-					NEXT FIELD ra_proc[j].p1
+					NEXT FIELD ra_proc[j].check
 				END IF
 			BEFORE INSERT
-				CANCEL INSERT
 				LET i = ind
 				EXIT INPUT
 			BEFORE DELETE
-				CANCEL DELETE
 				LET i = ind
 				EXIT INPUT
 		END INPUT  
@@ -700,9 +676,9 @@ FOREACH q_usu INTO ra_usu[i].usuario
 		  AND g55_modulo   = r_g55.g55_modulo
 		  AND g55_proceso  = r_g55.g55_proceso
 	IF STATUS = NOTFOUND THEN
-		LET ra_usu[i].chk = 'N'
-	ELSE
 		LET ra_usu[i].chk = 'S'
+	ELSE
+		LET ra_usu[i].chk = 'N'
 	END IF
 
 	SELECT * FROM gent053
@@ -732,10 +708,6 @@ LET int_flag = 0
 LET modified = 0
 
 INPUT ARRAY ra_usu WITHOUT DEFAULTS FROM ra_usu_scr.*
-	ATTRIBUTE(INSERT ROW = FALSE, DELETE ROW = FALSE)
-	BEFORE INPUT
-		CALL dialog.keysetlabel('INSERT', '')
-		CALL dialog.keysetlabel('DELETE', '')
 	ON KEY(INTERRUPT)
 		IF NOT modified THEN
 			EXIT INPUT
@@ -748,10 +720,9 @@ INPUT ARRAY ra_usu WITHOUT DEFAULTS FROM ra_usu_scr.*
 			LET INT_FLAG = 1
 			EXIT INPUT
 		END IF
-	BEFORE INSERT
-		CANCEL INSERT
-	BEFORE DELETE
-		CANCEL DELETE
+	BEFORE INPUT
+		--#CALL dialog.keysetlabel('INSERT', '')
+		--#CALL dialog.keysetlabel('DELETE', '')
 	BEFORE ROW
 		LET j = arr_curr()
 	BEFORE FIELD checkbox
@@ -782,7 +753,7 @@ FOR j = 1 TO i
 		CALL grantUserToProcess(ra_usu[j].usuario,
                                         r_g55.g55_modulo,
 		           	        r_g55.g55_proceso,
-                                        r_g55.g55_compania, 'SSSSSSSSSSSSSSS')
+                                        r_g55.g55_compania)
 	ELSE	
 		CALL revokeGrantsToUserInProcess(ra_usu[j].usuario,
                                                  r_g55.g55_modulo,
@@ -803,6 +774,9 @@ FUNCTION grantUserToModule(usuario, modulo)
 DEFINE usuario		LIKE gent005.g05_usuario
 DEFINE modulo 		LIKE gent050.g50_modulo
 
+IF usuario IS NULL THEN
+	RETURN
+END IF
 SELECT * FROM gent052 WHERE g52_modulo = modulo AND g52_usuario = usuario
 IF STATUS = NOTFOUND THEN
 	INSERT INTO gent052 VALUES(modulo, usuario, 'A')
@@ -833,7 +807,7 @@ END FUNCTION
 
 
 
-FUNCTION revokeGrantsToUserInProcess(usuario, modulo, proc, cia)
+FUNCTION grantUserToProcess(usuario, modulo, proc, cia)
 
 DEFINE usuario		LIKE gent005.g05_usuario
 DEFINE modulo 		LIKE gent050.g50_modulo
@@ -847,27 +821,26 @@ LET r_g55.g55_modulo   = modulo
 LET r_g55.g55_proceso  = proc
 LET r_g55.g55_compania = cia
 
-IF canAccessProcessInCia(r_g55.g55_user, r_g55.g55_modulo,
+IF NOT canAccessProcessInCia(r_g55.g55_user, r_g55.g55_modulo,
                              r_g55.g55_proceso, r_g55.g55_compania
                             ) THEN
 	DELETE FROM gent055 
-	 WHERE g55_user     = r_g55.g55_user
-	   AND g55_compania = r_g55.g55_compania
-	   AND g55_modulo   = r_g55.g55_modulo
-	   AND g55_proceso  = r_g55.g55_proceso
+ 		WHERE g55_user     = r_g55.g55_user
+                  AND g55_compania = r_g55.g55_compania
+                  AND g55_modulo   = r_g55.g55_modulo
+                  AND g55_proceso  = r_g55.g55_proceso
 END IF
 
 END FUNCTION
 
 
 
-FUNCTION grantUserToProcess(usuario, modulo, proc, cia, mascara)
+FUNCTION revokeGrantsToUserInProcess(usuario, modulo, proc, cia)
 
 DEFINE usuario		LIKE gent005.g05_usuario
 DEFINE modulo 		LIKE gent050.g50_modulo
-DEFINE proc			LIKE gent054.g54_proceso
-DEFINE cia			LIKE gent001.g01_compania
-DEFINE mascara		LIKE gent055.g55_opciones
+DEFINE proc		LIKE gent054.g54_proceso
+DEFINE cia		LIKE gent001.g01_compania
 
 DEFINE r_g55		RECORD LIKE gent055.*
 
@@ -875,19 +848,12 @@ LET r_g55.g55_user     = usuario
 LET r_g55.g55_modulo   = modulo
 LET r_g55.g55_compania = cia
 LET r_g55.g55_proceso  = proc
-LET r_g55.g55_opciones = mascara 
 LET r_g55.g55_usuario  = vg_usuario
 LET r_g55.g55_fecing   = CURRENT 
 
-IF NOT canAccessProcessInCia(r_g55.g55_user, r_g55.g55_modulo,
+IF canAccessProcessInCia(r_g55.g55_user, r_g55.g55_modulo,
 			     r_g55.g55_proceso, r_g55.g55_compania) THEN
 	INSERT INTO gent055 VALUES (r_g55.*)
-ELSE
-	UPDATE gent055 SET g55_opciones = r_g55.g55_opciones
-	 WHERE g55_user     = r_g55.g55_user
-	   AND g55_modulo   = r_g55.g55_modulo
-	   AND g55_compania = r_g55.g55_compania
-	   AND g55_proceso  = r_g55.g55_proceso 
 END IF
 
 END FUNCTION
@@ -931,84 +897,37 @@ DEFINE proc		LIKE gent054.g54_proceso
 DEFINE cia		LIKE gent001.g01_compania
 
 DEFINE r_g55		RECORD LIKE gent055.*
+DEFINE r_g53		RECORD LIKE gent053.*
 
 DEFINE returnValue	SMALLINT
 
-LET returnValue = 0
-INITIALIZE r_g55.* TO NULL
-SELECT * INTO r_g55.* FROM gent055
-	WHERE g55_user     = usuario
-	  AND g55_compania = cia
-	  AND g55_modulo   = modulo
-	  AND g55_proceso  = proc
-IF r_g55.g55_user IS NOT NULL THEN
+LET r_g55.g55_user     = usuario
+LET r_g55.g55_modulo   = modulo
+LET r_g55.g55_compania = cia
+LET r_g55.g55_proceso  = proc
+SELECT * FROM gent055
+	WHERE g55_user     = r_g55.g55_user
+	  AND g55_compania = r_g55.g55_compania
+	  AND g55_modulo   = r_g55.g55_modulo
+	  AND g55_proceso  = r_g55.g55_proceso
+IF STATUS = NOTFOUND THEN
 	LET returnValue = 1
 ELSE
 	LET returnValue = 0
 END IF
 
+LET r_g53.g53_usuario  = usuario
+LET r_g53.g53_modulo   = modulo
+LET r_g53.g53_compania = cia
 SELECT * FROM gent053
-	WHERE g53_modulo   = modulo
-	  AND g53_compania = cia
-	  AND g53_usuario  = usuario
+	WHERE g53_modulo   = r_g53.g53_modulo
+	  AND g53_compania = r_g53.g53_compania
+	  AND g53_usuario  = r_g53.g53_usuario
 IF STATUS = NOTFOUND THEN
 	LET returnValue = 0
 END IF	
 	
 RETURN returnValue
-
-END FUNCTION
-
-
-
-FUNCTION form_permission_mask(p1, p2, p3, p4, p5, p6, p7, p8, p9, p0)
-DEFINE p1, p2, p3, p4, p5 		CHAR(1)
-DEFINE p6, p7, p8, p9, p0 		CHAR(1)
-DEFINE mascara			LIKE gent055.g55_opciones
-
-LET mascara = 'NNNNNNNNNNNNNNN'
-LET mascara[1]  = p1
-LET mascara[2]  = p2
-LET mascara[3]  = p3
-LET mascara[4]  = p4
-LET mascara[5]  = p5
-LET mascara[6]  = p6
-LET mascara[7]  = p7
-LET mascara[8]  = p8
-LET mascara[9]  = p9
-LET mascara[10] = p0
-
-RETURN mascara
-
-END FUNCTION
-
-
-
-FUNCTION split_permission_mask(usuario, modulo, proc, cia)
-
-DEFINE usuario		LIKE gent005.g05_usuario
-DEFINE modulo 		LIKE gent050.g50_modulo
-DEFINE proc		LIKE gent054.g54_proceso
-DEFINE cia		LIKE gent001.g01_compania
-
-DEFINE r_g55		RECORD LIKE gent055.*
-
-INITIALIZE r_g55.* TO NULL
-SELECT * INTO r_g55.* FROM gent055
-	WHERE g55_user     = usuario
-	  AND g55_compania = cia
-	  AND g55_modulo   = modulo
-	  AND g55_proceso  = proc
-
-IF r_g55.g55_user IS NULL THEN
-	RETURN 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N'
-ELSE
-	RETURN r_g55.g55_opciones[1], r_g55.g55_opciones[2],
-		   r_g55.g55_opciones[3], r_g55.g55_opciones[4],
-		   r_g55.g55_opciones[5], r_g55.g55_opciones[6],
-		   r_g55.g55_opciones[7], r_g55.g55_opciones[8],
-		   r_g55.g55_opciones[9], r_g55.g55_opciones[10]
-END IF
 
 END FUNCTION
 
@@ -1091,13 +1010,16 @@ DEFINE modulo		LIKE gent050.g50_modulo
 DEFINE usuario		LIKE gent005.g05_usuario
 DEFINE cia 		LIKE gent001.g01_compania
 
-DEFINE r_g54		RECORD LIKE gent054.*
+DEFINE r_g55		RECORD LIKE gent055.*
 
-DECLARE qu_processes CURSOR FOR
-	SELECT * FROM gent054 WHERE g54_modulo = modulo
-FOREACH qu_processes INTO r_g54.*
-	CALL grantUserToProcess(usuario, modulo, r_g54.g54_proceso, cia, 'SSSSSSSSSSSSSSS')
-END FOREACH
+LET r_g55.g55_usuario  = usuario
+LET r_g55.g55_modulo   = modulo
+LET r_g55.g55_compania = cia
+
+DELETE FROM gent055 
+	WHERE g55_user     = r_g55.g55_usuario 
+	  AND g55_modulo   = r_g55.g55_modulo 
+	  AND g55_compania = r_g55.g55_compania
 
 END FUNCTION
 
@@ -1172,7 +1094,7 @@ CASE modulo
 	WHEN 'CB'	-- CONTABILIDAD
 		LET tabla = 'ctbt000'
 		LET campo = 'b00_compania'
-	WHEN 'OC'	-- ORDENES DE COMPRAS
+	WHEN 'OC'	-- ???????
 		LET tabla = 'ordt000'
 		LET campo = 'c00_compania'
 	WHEN 'CH'	-- CAJA CHICA
@@ -1184,15 +1106,9 @@ CASE modulo
 	WHEN 'AF'	-- ACTIVOS FIJOS
 		LET tabla = 'actt000'
 		LET campo = 'a00_compania'
-	WHEN 'MA'	-- ACTIVOS FIJOS
-		LET tabla = 'maqt000'
-		LET campo = 'm00_compania'
-	WHEN 'CC'	-- COMISIONES
-		LET tabla = 'cmst000'
-		LET campo = 'c00_compania'
 	OTHERWISE
 		CALL fgl_winmessage(vg_producto, 
-				'Módulo ' || modulo || ' no existe.', 
+				'Módulo ' || modulo || 'no existe.', 
                                 'exclamation')
 		LET INT_FLAG = 1
 END CASE
@@ -1351,7 +1267,6 @@ WHILE NOT salir
 	LET int_flag = 0
 	CALL set_count(num_elm)
 	INPUT ARRAY r_mod WITHOUT DEFAULTS FROM ra_modulo.*
-		ATTRIBUTE(INSERT ROW = FALSE, DELETE ROW = FALSE)	
 		ON KEY(INTERRUPT)
 			LET int_flag = 0
 			CALL fl_mensaje_abandonar_proceso() RETURNING resp
@@ -1373,13 +1288,11 @@ WHILE NOT salir
 			LET i = arr_curr()
 			LET j = scr_line()
 		BEFORE INPUT
-			CALL dialog.keysetlabel('INSERT', '')
-			CALL dialog.keysetlabel('DELETE', '')
-			CALL dialog.keysetlabel('F5', 'Asigna Procesos')
+			--#CALL dialog.keysetlabel('INSERT', '')
+			--#CALL dialog.keysetlabel('DELETE', '')
+			--#CALL dialog.keysetlabel('F5', 'Asigna Procesos')
 		BEFORE INSERT
-			CANCEL INSERT
-		BEFORE DELETE
-			CANCEL DELETE
+			EXIT INPUT
 		BEFORE FIELD check
 			LET chk_ant = r_mod[i].check
 		AFTER  FIELD check
@@ -1457,16 +1370,6 @@ END FUNCTION
 
 FUNCTION setea_botones_f_proc()
 	
-	DISPLAY 'X'			  TO bt_p1
-	DISPLAY 'I'			  TO bt_p2
-	DISPLAY 'M'			  TO bt_p3
-	DISPLAY 'C'			  TO bt_p4
-	DISPLAY 'E'			  TO bt_p5
-	DISPLAY 'P'			  TO bt_p6
-	DISPLAY '1'			  TO bt_p7
-	DISPLAY '2'			  TO bt_p8
-	DISPLAY '3'			  TO bt_p9
-	DISPLAY '4'			  TO bt_p0
 	DISPLAY 'T.'          TO bt_tipo
 	DISPLAY 'Proceso'     TO bt_proceso
 	DISPLAY 'Descripción' TO bt_descripcion
@@ -1475,7 +1378,7 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION no_validar_parametros()
 
 CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
 IF rg_mod.g50_modulo IS NULL THEN

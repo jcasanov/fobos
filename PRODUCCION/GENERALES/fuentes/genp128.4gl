@@ -2,39 +2,40 @@
 -- Titulo           : genp128.4gl - Mantenimiento de Procesos por Módulo 
 -- Elaboracion      : 30-ago-2001
 -- Autor            : RCA
--- Formato Ejecucion: fglrun programa.4gl base modulo
+-- Formato Ejecucion: fglrun programa base modulo
 -- Ultima Correccion: 28-mar-2002 
 -- Motivo Correccion: Para escoger el estado de un radio
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_demonios	VARCHAR(12)
-DEFINE vm_titprog	VARCHAR(50)
-DEFINE vm_rows ARRAY[1000] OF INTEGER  	-- ARREGLO DE ROWID DE FILAS LEIDAS
-DEFINE vm_row_current	SMALLINT	-- FILA CORRIENTE DEL ARREGLO
-DEFINE vm_num_rows	SMALLINT	-- CANTIDAD DE FILAS LEIDAS
-DEFINE vm_max_rows	SMALLINT	-- MAXIMO DE FILAS LEIDAS
+DEFINE vm_rows		ARRAY[1000] OF INTEGER	-- ARREGLO ROWID DE FILAS LEIDAS
+DEFINE vm_row_current	SMALLINT		-- FILA CORRIENTE DEL ARREGLO
+DEFINE vm_num_rows	SMALLINT		-- CANTIDAD DE FILAS LEIDAS
+DEFINE vm_max_rows	SMALLINT		-- MAXIMO DE FILAS LEIDAS
 DEFINE rm_modu		RECORD LIKE gent054.*
 DEFINE r		RECORD LIKE gent050.*
+
+
+
 MAIN
 	
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
-CALL fgl_init4js()
+CALL startlog('../logs/genp128.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 2 THEN          -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
 	EXIT PROGRAM
 END IF
-LET vg_base     = arg_val(1)
-LET vg_modulo   = arg_val(2)
+LET vg_base    = arg_val(1)
+LET vg_modulo  = arg_val(2)
 LET vg_proceso = 'genp128'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -43,14 +44,34 @@ END MAIN
 
 
 FUNCTION funcion_master()
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
-LET vm_max_rows = 1000
-CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
-OPEN WINDOW  w_mod AT 4, 3 WITH FORM '../forms/genf128_1'	
-    ATTRIBUTE(FORM LINE FIRST + 2, COMMENT LINE LAST, MENU LINE FIRST,BORDER,
-	      MESSAGE LINE LAST - 2)
+CALL fl_nivel_isolation()
+LET lin_menu = 0
+LET row_ini  = 3
+LET num_rows = 17
+LET num_cols = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW w_generales AT row_ini, 02 WITH num_rows ROWS, num_cols COLUMNS
+	ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE lin_menu,
+		  BORDER, MESSAGE LINE LAST - 1) 
+IF vg_gui = 1 THEN
+	OPEN FORM f_genf128_1 FROM '../forms/genf128_1'
+ELSE
+	OPEN FORM f_genf128_1 FROM '../forms/genf128_1c'
+END IF
+DISPLAY FORM f_genf128_1
 INITIALIZE rm_modu.* TO NULL
-LET vm_num_rows = 0
+LET vm_max_rows    = 1000
+LET vm_num_rows    = 0
 LET vm_row_current = 0
 CALL muestra_contadores()
 MENU 'PROCESOS'
@@ -66,14 +87,8 @@ MENU 'PROCESOS'
 			CALL control_ingreso()
 		END IF
 		IF vm_num_rows = 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		   END IF
-			
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -90,14 +105,8 @@ MENU 'PROCESOS'
 	COMMAND KEY('C') 'Consultar' 'Consultar un registro'
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		  IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		  END IF
-			
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -106,21 +115,11 @@ MENU 'PROCESOS'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		   END IF
-		
 		END IF
 	COMMAND KEY('A') 'Avanzar' 'Ver siguiente registro'
-		IF vm_row_current < vm_num_rows THEN
-			LET vm_row_current = vm_row_current + 1 
-		END IF	
-		CALL lee_muestra_registro(vm_rows[vm_row_current])
-		CALL muestra_contadores()
+		CALL mostrar_siguiente_registro()
 		IF vm_row_current = vm_num_rows THEN
 			HIDE OPTION 'Avanzar'
 			SHOW OPTION 'Retroceder'
@@ -133,11 +132,7 @@ MENU 'PROCESOS'
                         HIDE OPTION 'Retroceder'
                 END IF
 	COMMAND KEY('R') 'Retroceder'  'Ver anterior registro'
-		IF vm_row_current > 1 THEN
-			LET vm_row_current = vm_row_current - 1 
-		END IF
-		CALL lee_muestra_registro(vm_rows[vm_row_current])
-		CALL muestra_contadores()
+		CALL mostrar_anterior_registro()
 		IF vm_row_current = 1 THEN
 			HIDE OPTION 'Retroceder'
 			SHOW OPTION 'Avanzar'
@@ -161,14 +156,16 @@ DEFINE modulo		LIKE gent050.g50_modulo
 DEFINE nom_modulo	LIKE gent050.g50_nombre
 DEFINE proceso		LIKE gent054.g54_proceso
 DEFINE nom_proceso	LIKE gent054.g54_nombre
-DEFINE expr_sql		VARCHAR(500)
-DEFINE query		VARCHAR(600)
+DEFINE expr_sql		VARCHAR(600)
+DEFINE query		VARCHAR(800)
+
 CLEAR FORM
 LET int_flag = 0
-CONSTRUCT BY NAME expr_sql ON 	g54_modulo, 	g54_proceso, 	
-		--		g54_nombre,
-				g54_tipo, 	g54_estado,
-				g54_usuario,	g54_fecing
+CONSTRUCT BY NAME expr_sql ON g54_modulo, g54_proceso, g54_nombre, g54_tipo,
+	g54_estado, g54_usuario
+	ON KEY(INTERRUPT)
+		LET int_flag = 1
+		EXIT CONSTRUCT
 	ON KEY(F2)
 		IF INFIELD(g54_modulo) THEN
 			CALL fl_ayuda_modulos() RETURNING modulo, nom_modulo  
@@ -179,7 +176,8 @@ CONSTRUCT BY NAME expr_sql ON 	g54_modulo, 	g54_proceso,
 			END IF
 		END IF
 		IF INFIELD(g54_proceso) THEN
-			CALL fl_ayuda_procesos(modulo) RETURNING modulo, proceso, nom_proceso 
+			CALL fl_ayuda_procesos(modulo)
+				RETURNING modulo, proceso, nom_proceso 
 			IF proceso IS NOT NULL THEN
 				LET rm_modu.g54_proceso = proceso
 				LET rm_modu.g54_nombre  = nom_proceso
@@ -188,11 +186,12 @@ CONSTRUCT BY NAME expr_sql ON 	g54_modulo, 	g54_proceso,
 			END IF
 		END IF
 		LET int_flag = 0
-	ON KEY(interrupt)
-		RETURN
 END CONSTRUCT
 IF int_flag THEN
-	CALL lee_muestra_registro(vm_rows[vm_row_current])
+	CLEAR FORM
+	IF vm_num_rows > 0 THEN
+		CALL lee_muestra_registro(vm_rows[vm_row_current])
+	END IF
 	CALL muestra_contadores()
 	RETURN
 END IF
@@ -202,14 +201,17 @@ DECLARE q_modu CURSOR FOR cons
 LET vm_num_rows = 1
 FOREACH q_modu INTO rm_modu.*, vm_rows[vm_num_rows]
 	LET vm_num_rows = vm_num_rows + 1
+	IF vm_num_rows > vm_max_rows THEN
+		EXIT PROGRAM
+	END IF
 END FOREACH
 LET vm_num_rows = vm_num_rows - 1
 IF vm_num_rows = 0 THEN
 	CALL fl_mensaje_consulta_sin_registros()
-      LET vm_row_current = 0
-      CALL muestra_contadores()
-      CLEAR FORM
-      RETURN
+	CLEAR FORM
+	LET vm_row_current = 0
+	CALL muestra_contadores()
+	RETURN
 END IF
 LET vm_row_current = 1
 CLOSE q_modu
@@ -222,33 +224,36 @@ END FUNCTION
   
 
 FUNCTION control_modificacion()
-DEFINE     	flag   CHAR(1)
+DEFINE flag		CHAR(1)
 
-IF rm_modu.g54_estado <> 'A' THEN
+CALL lee_muestra_registro(vm_rows[vm_row_current])
+IF rm_modu.g54_estado = 'B' THEN
 	CALL fl_mensaje_estado_bloqueado()
 	RETURN
 END IF
-
-WHENEVER ERROR CONTINUE
 BEGIN WORK
-DECLARE q_up CURSOR FOR SELECT * FROM gent054 WHERE ROWID = vm_rows[vm_row_current]
+WHENEVER ERROR CONTINUE
+DECLARE q_up CURSOR FOR
+	SELECT * FROM gent054 WHERE ROWID = vm_rows[vm_row_current]
 	FOR UPDATE
 OPEN q_up
 FETCH q_up INTO rm_modu.*
-IF status < 0 THEN
+IF STATUS < 0 THEN
+	ROLLBACK WORK
 	CALL fl_mensaje_bloqueo_otro_usuario()
 	WHENEVER ERROR STOP
-	COMMIT WORK
 	RETURN
 END IF
+WHENEVER ERROR STOP
 CALL ingresa_datos('M')
-IF NOT int_flag THEN
-    	UPDATE gent054 SET * = rm_modu.*
-		WHERE CURRENT OF q_up
-	CALL fl_mensaje_registro_modificado()
-	CALL lee_muestra_registro(vm_rows[vm_row_current])
+IF int_flag THEN
+	ROLLBACK WORK
+	RETURN
 END IF
+UPDATE gent054 SET * = rm_modu.* WHERE CURRENT OF q_up
 COMMIT WORK
+CALL lee_muestra_registro(vm_rows[vm_row_current])
+CALL fl_mensaje_registro_modificado()
 
 END FUNCTION
 
@@ -272,52 +277,67 @@ DECLARE q_blo CURSOR FOR SELECT * FROM gent054 WHERE ROWID = vm_rows[vm_row_curr
 OPEN q_blo
 FETCH q_blo INTO rm_modu.*
 IF status < 0 THEN
+	ROLLBACK WORK
 	CALL fl_mensaje_bloqueo_otro_usuario()
-      WHENEVER ERROR STOP
-      COMMIT WORK
-      RETURN
+	WHENEVER ERROR STOP
+	RETURN
 END IF
+WHENEVER ERROR STOP
 LET mensaje = 'Seguro de bloquear'
 LET estado = 'B'
 IF rm_modu.g54_estado <> 'A' THEN
       LET mensaje = 'Seguro de activar'
       LET estado = 'A'
-END IF	
-CALL fl_mensaje_seguro_ejecutar_proceso()
-      RETURNING resp
-IF resp = 'Yes' THEN
-      UPDATE gent054 set g54_estado = estado WHERE CURRENT OF q_blo
-      DISPLAY 'B' TO g54_estado
-      LET int_flag = 1
-      CALL fl_mensaje_registro_modificado()
-      WHENEVER ERROR STOP	
-      COMMIT WORK
-      CALL lee_muestra_registro(vm_rows[vm_row_current])
 END IF
-
+CALL fl_mensaje_seguro_ejecutar_proceso() RETURNING resp
+IF resp <> 'Yes' THEN
+	ROLLBACK WORK
+	RETURN
+END IF
+UPDATE gent054 set g54_estado = estado WHERE CURRENT OF q_blo
+COMMIT WORK
+DISPLAY 'B' TO g54_estado
+LET int_flag = 1
+CALL lee_muestra_registro(vm_rows[vm_row_current])
 CALL muestra_contadores()
+CALL fl_mensaje_registro_modificado()
 
 END FUNCTION
 
 
 
 FUNCTION control_ingreso()
+DEFINE num_aux		INTEGER
+DEFINE query		VARCHAR(400)
 
 OPTIONS INPUT WRAP
 CLEAR FORM
 INITIALIZE rm_modu.* TO NULL
-LET rm_modu.g54_fecing = CURRENT
+LET rm_modu.g54_fecing  = CURRENT
 LET rm_modu.g54_usuario = vg_usuario 
-LET rm_modu.g54_estado = "A" 
-LET rm_modu.g54_tipo = 'M'
+LET rm_modu.g54_estado  = "A" 
+LET rm_modu.g54_tipo    = 'M'
 DISPLAY BY NAME rm_modu.g54_fecing, rm_modu.g54_usuario, rm_modu.g54_estado
-
 CALL ingresa_datos('I')
 IF NOT int_flag THEN
-	INSERT INTO gent054 VALUES (rm_modu.*)
+	BEGIN WORK
+		INSERT INTO gent054 VALUES (rm_modu.*)
+		LET num_aux = SQLCA.SQLERRD[6] 
+		LET query = 'INSERT INTO gent055 ',
+				' SELECT g05_usuario, ', vg_codcia, ', "',
+					rm_modu.g54_modulo, '", "',
+					rm_modu.g54_proceso CLIPPED, '", "',
+					vg_usuario CLIPPED, '", "',
+					EXTEND (CURRENT, YEAR TO SECOND), '"',
+				' FROM gent005 ',
+				' WHERE g05_estado  = "A" ',
+				'   AND g05_tipo   <> "AG"'
+		PREPARE ins_g55 FROM query
+		EXECUTE ins_g55
+	COMMIT WORK
 	CALL fl_mensaje_registro_ingresado()
 	LET vm_num_rows = vm_num_rows + 1
-	LET vm_rows[vm_num_rows] = SQLCA.SQLERRD[6] 
+	LET vm_rows[vm_num_rows] = num_aux
 	LET vm_row_current = vm_num_rows
 END IF
 IF vm_num_rows > 0 THEN
@@ -411,7 +431,30 @@ END INPUT
                                                                                 
 END FUNCTION
 
- 
+
+
+FUNCTION mostrar_siguiente_registro()
+
+IF vm_row_current < vm_num_rows THEN
+	LET vm_row_current = vm_row_current + 1 
+END IF	
+CALL lee_muestra_registro(vm_rows[vm_row_current])
+CALL muestra_contadores()
+
+END FUNCTION
+
+
+
+FUNCTION mostrar_anterior_registro()
+
+IF vm_row_current > 1 THEN
+	LET vm_row_current = vm_row_current - 1 
+END IF
+CALL lee_muestra_registro(vm_rows[vm_row_current])
+CALL muestra_contadores()
+
+END FUNCTION
+
 
 
 FUNCTION lee_muestra_registro(num_row)
@@ -448,7 +491,7 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION no_validar_parametros()
 
 CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
 IF rg_mod.g50_modulo IS NULL THEN

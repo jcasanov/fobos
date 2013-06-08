@@ -1,0 +1,38 @@
+DATABASE aceros
+SCREEN
+{
+
+ ORDENES DE COMPRAS 
+------------------------------------------------------------------------------
+  O.C.        Tipo       O.T.  Fecha O.C.   Departamento      Solicitado    E
+------------------------------------------------------------------------------
+[c010  |c011           |c012  |c013      |c014            |c015            |d] 
+[c010  |c011           |c012  |c013      |c014            |c015            |d] 
+[c010  |c011           |c012  |c013      |c014            |c015            |d] 
+[c010  |c011           |c012  |c013      |c014            |c015            |d] 
+[c010  |c011           |c012  |c013      |c014            |c015            |d] 
+[c010  |c011           |c012  |c013      |c014            |c015            |d] 
+[c010  |c011           |c012  |c013      |c014            |c015            |d] 
+[c010  |c011           |c012  |c013      |c014            |c015            |d] 
+[c010  |c011           |c012  |c013      |c014            |c015            |d] 
+[c010  |c011           |c012  |c013      |c014            |c015            |d] 
+
+}
+TABLES
+gent034
+ordt001
+ordt010
+ATTRIBUTES
+c010 = ordt010.c10_numero_oc, NOENTRY, UPSHIFT;
+c011 = ordt001.c01_nombre, NOENTRY, UPSHIFT;
+c012 = ordt010.c10_ord_trabajo, NOENTRY, UPSHIFT;
+c013 = FORMONLY.c10_fecing TYPE DATE, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c014 = gent034.g34_nombre, NOENTRY, UPSHIFT;
+c015 = ordt010.c10_solicitado, NOENTRY, UPSHIFT;
+d    = ordt010.c10_estado, NOENTRY, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_ordcom[10] (c10_numero_oc, c01_nombre, c10_ord_trabajo,
+				c10_fecing, g34_nombre,	c10_solicitado,
+				c10_estado)

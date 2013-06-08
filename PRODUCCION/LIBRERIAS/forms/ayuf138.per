@@ -1,0 +1,35 @@
+DATABASE aceros
+SCREEN
+{
+ TIPOS DE ACTIVOS FIJOS
+                        [c020] de [c021]
+ [c00|c001|c002                         ]
+[c01|c011|c012                         ]
+[c01|c011|c012                         ]
+[c01|c011|c012                         ]
+[c01|c011|c012                         ]
+[c01|c011|c012                         ]
+[c01|c011|c012                         ]
+[c01|c011|c012                         ]
+[c01|c011|c012                         ]
+[c01|c011|c012                         ]
+[c01|c011|c012                         ]
+
+}
+TABLES
+actt002
+ATTRIBUTES
+c00  = FORMONLY.tit_col1, NOENTRY, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, NOENTRY, WIDGET = 'BUTTON', CONFIG = 'F16';
+c002 = FORMONLY.tit_col3, NOENTRY, WIDGET = 'BUTTON', CONFIG = 'F17';
+
+c01  = actt002.a02_grupo_act, NOENTRY, UPSHIFT;
+c011 = actt002.a02_tipo_act, NOENTRY, UPSHIFT;
+c012 = actt002.a02_nombre, NOENTRY, UPSHIFT;
+
+c020 = FORMONLY.num_row, NOENTRY, REVERSE;
+c021 = FORMONLY.max_row, NOENTRY, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_tipoact[10] (a02_grupo_act, a02_tipo_act, a02_nombre)

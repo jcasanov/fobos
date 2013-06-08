@@ -8,6 +8,7 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
+DEFINE vm_demonios	VARCHAR(12)
 DEFINE rm_rep		RECORD LIKE rept016.*
 DEFINE rm_cia		RECORD LIKE gent001.*
 
@@ -15,19 +16,19 @@ DEFINE partida_aux	LIKE gent016.g16_partida
 
 DEFINE subtotal_cant	LIKE rept017.r17_cantped
 DEFINE subtotal_peso	DECIMAL(9,3)
-DEFINE subtotal_fob	DECIMAL(14,2)
+DEFINE subtotal_fob	DECIMAL(14,3)
 
 DEFINE total_cant	LIKE rept017.r17_cantped
 DEFINE total_peso	DECIMAL(9,3)
-DEFINE total_fob	DECIMAL(14,2)
+DEFINE total_fob	DECIMAL(14,3)
 
 DEFINE vm_num_partida	SMALLINT	
 
-DEFINE nom_diteca 	LIKE gent001.g01_razonsocial
-DEFINE nom_diteca_2 	LIKE gent001.g01_razonsocial
-DEFINE nom_diteca_3 	LIKE gent001.g01_razonsocial
-DEFINE tel_diteca 	LIKE gent002.g02_telefono1
-DEFINE fax_diteca 	LIKE gent002.g02_fax1
+DEFINE nom_aceros 	LIKE gent001.g01_razonsocial
+DEFINE nom_aceros_2 	LIKE gent001.g01_razonsocial
+DEFINE nom_aceros_3 	LIKE gent001.g01_razonsocial
+DEFINE tel_aceros 	LIKE gent002.g02_telefono1
+DEFINE fax_aceros 	LIKE gent002.g02_fax1
 DEFINE contact_1 	VARCHAR(25)
 DEFINE contact_2 	VARCHAR(25)
 
@@ -39,7 +40,7 @@ DEFINE embarque_1	VARCHAR(20)
 DEFINE embarque_2	VARCHAR(20)
 DEFINE pago		VARCHAR(20)
 
-DEFINE declaracion_consular 	VARCHAR(1000)
+DEFINE declaracion_consular 	CHAR(1000)
 DEFINE flete			DECIMAL(12,2)
 DEFINE seguro			DECIMAL(12,2)
 
@@ -50,10 +51,11 @@ DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
 CALL startlog('../logs/errores')
-CALL fgl_init4js()
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 AND num_args() <> 5 THEN   -- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto.', 'stop')
+	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.', 'stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.', 'stop')
 	EXIT PROGRAM
 END IF
 LET vg_base     = arg_val(1)
@@ -63,8 +65,8 @@ LET vg_codloc   = arg_val(4)
 LET vg_proceso = 'repp426'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -73,14 +75,30 @@ END MAIN
 
 
 FUNCTION funcion_master()
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
 CALL fl_nivel_isolation()
-OPEN WINDOW w_mas AT 3,2 WITH 23 ROWS, 80 COLUMNS
-    ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE 0, BORDER,
-	      MESSAGE LINE LAST - 2)
-OPTIONS INPUT WRAP,
-	ACCEPT KEY	F12
-OPEN FORM f_rep FROM "../forms/repf426_1"
+LET lin_menu = 0
+LET row_ini  = 3
+LET num_rows = 23
+LET num_cols = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW w_mas AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
+	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE lin_menu,
+		  MESSAGE LINE LAST - 1, BORDER) 
+IF vg_gui = 1 THEN
+	OPEN FORM f_rep FROM "../forms/repf426_1"
+ELSE
+	OPEN FORM f_rep FROM "../forms/repf426_1c"
+END IF
 DISPLAY FORM f_rep
 CALL borrar_cabecera()
 CALL control_reporte()
@@ -91,34 +109,39 @@ END FUNCTION
 
 FUNCTION control_reporte()
 DEFINE i,col		SMALLINT
-DEFINE query		VARCHAR(1000)
+DEFINE query		CHAR(1000)
 DEFINE comando		VARCHAR(100)
-
-DEFINE toFile		SMALLINT
-DEFINE resp		CHAR(6)
 
 DEFINE r_report 	RECORD
 	partida 	LIKE gent016.g16_partida,
-	nom_partida 	LIKE gent016.g16_nombre,
+	nom_partida 	LIKE gent016.g16_desc_par,
 	cant		LIKE rept017.r17_cantped,
 	item		LIKE rept017.r17_item,
 	nombre		LIKE rept010.r10_nombre,
 	peso		DECIMAL(9,3),
-	fob		DECIMAL(14,2),
-	tot_fob		DECIMAL(14,2)
+	fob		DECIMAL(14,3),
+	tot_fob		DECIMAL(14,3)
 	END RECORD
 
 INITIALIZE contact_1, contact_2, nom_proveedor, tel_proveedor, fax_proveedor,
-		nom_diteca_2, nom_diteca_3, tel_diteca, fax_diteca,
+		nom_aceros_2, nom_aceros_3, tel_aceros, fax_aceros,
 		flete, seguro TO NULL
 
-LET nom_diteca   = rg_cia.g01_razonsocial
-LET nom_diteca_2 = rg_loc.g02_nombre
-LET nom_diteca_3 = rg_loc.g02_nombre
-LET tel_diteca   = rg_loc.g02_telefono1
-LET fax_diteca   = rg_loc.g02_fax1
+LET nom_aceros   = rg_cia.g01_razonsocial
+LET nom_aceros_2 = rg_loc.g02_nombre
+LET nom_aceros_3 = rg_loc.g02_nombre
+LET tel_aceros   = rg_loc.g02_telefono1
+LET fax_aceros   = rg_loc.g02_fax1
 
-LET declaracion_consular = 'Estas mercaderías viajan por cuenta y riesgo del comprador, cesando la responsabilidad del vendedor al obtener el conocimiento de embarque firmado sin anotaciones. El vendedor no asume ninguna responsabilidad sobre las declaraciones consulares. El vendedor no es responsable por atrasos, falta o deterioros ocasionados por guerra, incendio, inundaciones, huelga o cualquier otro incidente de fuerza mayor.- Esta orden esta sujeta a la confirmación del vendedor después de confirmada no se puede hacer ningun cambio sin conocimiento de ambas partes.'
+LET declaracion_consular = 'Estas mercaderías viajan por cuenta y riesgo del ',
+	'comprador, cesando la responsabilidad del vendedor al obtener el ',
+	'conocimiento de embarque firmado sin anotaciones. El vendedor no ',
+	'asume ninguna responsabilidad sobre las declaraciones consulares. ',
+	'El vendedor no es responsable por atrasos, falta o deterioros ',
+	'ocasionados por guerra, incendio, inundaciones, huelga o cualquier ',
+	'otro incidente de fuerza mayor.- Esta orden esta sujeta a la ',
+	'confirmación del vendedor después de confirmada no se puede hacer ',
+	'ningun cambio sin conocimiento de ambas partes.'
 
 WHILE TRUE
 	INITIALIZE partida_aux TO NULL
@@ -149,8 +172,8 @@ WHILE TRUE
 		END IF
 	END IF
 
-	LET query = 'SELECT r10_partida, g16_nombre, r17_cantped, r17_item, ',
-			' r10_nombre, r17_cantped * r10_peso, r17_fob, ',
+	LET query = 'SELECT r10_partida, g16_desc_par, r17_cantped, r17_item, ',
+			' r10_nombre, r17_cantped * r17_peso, r17_fob, ',
 			' r17_cantped * r17_fob ',
 			'FROM rept017, rept010, gent016 ',
 			'WHERE r17_compania  = ', vg_codcia,
@@ -158,8 +181,7 @@ WHILE TRUE
 			'  AND r17_pedido    = "', rm_rep.r16_pedido, '"',
 			'  AND r17_compania  = r10_compania ',
 			'  AND r17_item      = r10_codigo ',
-			'  AND r10_partida   = g16_partida ',
-			'ORDER BY r10_partida'
+			'  AND r17_partida   = g16_partida '
 
 	PREPARE deto FROM query
 	DECLARE q_deto CURSOR FOR deto
@@ -174,38 +196,6 @@ WHILE TRUE
 		CONTINUE WHILE
 	END IF
 	CLOSE q_deto
-
-	LET toFile = 0
-	FOR i=1 TO LENGTH(comando)
-		IF comando[i, i+4] = 'cat >' THEN
-			LET toFile = 1
-			EXIT FOR
-		END IF 
-	END FOR
-
-	IF toFile = 1 THEN
-		CALL fgl_winquestion(vg_producto,
-		       '¿Desea preparar el archivo para exportar a Excel?',
-		       'Yes','Yes|No','question',1)
-		RETURNING resp
-		IF resp = 'Yes' THEN
-			START REPORT export_nota_pedido TO PIPE comando
-			FOREACH q_deto INTO r_report.*
-				OUTPUT TO REPORT export_nota_pedido(r_report.*)
-			END FOREACH
-			FINISH REPORT export_nota_pedido
-		
-			LET comando = comando[7, 100]
-
-			RUN 'unix2dos ' || comando
-
-			IF num_args() = 5 THEN
-				EXIT WHILE
-			END IF
-			CONTINUE WHILE
-		END IF
-	END IF
-
 	START REPORT report_nota_pedido TO PIPE comando
 	FOREACH q_deto INTO r_report.*
 		OUTPUT TO REPORT report_nota_pedido(r_report.*)
@@ -224,22 +214,23 @@ FUNCTION lee_parametros()
 DEFINE r_rep		RECORD LIKE rept016.*
 DEFINE codpe_aux	LIKE rept016.r16_pedido
 DEFINE r_prov		RECORD LIKE cxpt001.*
-DEFINE r_prov_loc	RECORD LIKE cxpt002.*
 
 OPTIONS INPUT NO WRAP
 INITIALIZE r_rep.*, codpe_aux TO NULL
 LET int_flag = 0
-INPUT BY NAME rm_rep.r16_pedido, nom_diteca, tel_diteca, fax_diteca, contact_1,
+INPUT BY NAME rm_rep.r16_pedido, nom_aceros, tel_aceros, fax_aceros, contact_1,
 		nom_proveedor, tel_proveedor, fax_proveedor, contact_2,
 		flete, seguro,
-		embarque_1, nom_diteca_2, pago, embarque_2, nom_diteca_3,
+		embarque_1, nom_aceros_2, pago, embarque_2, nom_aceros_3,
 		declaracion_consular
 	WITHOUT DEFAULTS
 	ON KEY(INTERRUPT)
 		LET int_flag = 1
 		RETURN
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
 	ON KEY(F2)
-		IF infield(r16_pedido) THEN
+		IF INFIELD(r16_pedido) THEN
 			CALL fl_ayuda_pedidos_rep(vg_codcia, vg_codloc, 'T','T')
 				RETURNING codpe_aux
 			OPTIONS INPUT NO WRAP
@@ -249,13 +240,17 @@ INPUT BY NAME rm_rep.r16_pedido, nom_diteca, tel_diteca, fax_diteca, contact_1,
 				DISPLAY BY NAME rm_rep.r16_pedido
 			END IF
 		END IF
+	BEFORE INPUT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 	AFTER FIELD r16_pedido
 		IF rm_rep.r16_pedido IS NOT NULL THEN
 			CALL fl_lee_pedido_rep(vg_codcia,vg_codloc,
 						rm_rep.r16_pedido)
 				RETURNING r_rep.*
 			IF r_rep.r16_compania IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'Pedido no existe.','exclamation')
+				--CALL fgl_winmessage(vg_producto,'Pedido no existe.','exclamation')
+				CALL fl_mostrar_mensaje('Pedido no existe.','exclamation')
 				NEXT FIELD r16_pedido
 			END IF
 			DISPLAY BY NAME r_rep.r16_pedido
@@ -264,22 +259,18 @@ INPUT BY NAME rm_rep.r16_pedido, nom_diteca, tel_diteca, fax_diteca, contact_1,
 			LET nom_proveedor = r_prov.p01_nomprov
 			LET tel_proveedor = r_prov.p01_telefono1
 			LET fax_proveedor = r_prov.p01_fax1
-			CALL fl_lee_proveedor_localidad(vg_codcia, 
-						vg_codloc,r_rep.r16_proveedor)
-				RETURNING r_prov_loc.*
-			LET contact_2 = r_prov_loc.p02_contacto
 			DISPLAY BY NAME nom_proveedor, tel_proveedor, 
-					fax_proveedor, contact_2
+					fax_proveedor
 		END IF
 	AFTER INPUT 
-		IF nom_diteca IS NULL THEN
-			NEXT FIELD nom_diteca
+		IF nom_aceros IS NULL THEN
+			NEXT FIELD nom_aceros
 		END IF 
-		IF tel_diteca IS NULL THEN
-			NEXT FIELD tel_diteca
+		IF tel_aceros IS NULL THEN
+			NEXT FIELD tel_aceros
 		END IF 
-		IF fax_diteca IS NULL THEN
-			NEXT FIELD fax_diteca
+		IF fax_aceros IS NULL THEN
+			NEXT FIELD fax_aceros
 		END IF 
 		IF contact_1 IS NULL THEN
 			NEXT FIELD contact_1
@@ -299,14 +290,14 @@ INPUT BY NAME rm_rep.r16_pedido, nom_diteca, tel_diteca, fax_diteca, contact_1,
 		IF embarque_1 IS NULL THEN
 			NEXT FIELD embarque_1
 		END IF
-		IF nom_diteca_2 IS NULL THEN
-			NEXT FIELD nom_diteca_2
+		IF nom_aceros_2 IS NULL THEN
+			NEXT FIELD nom_aceros_2
 		END IF
 		IF embarque_2 IS NULL THEN
 			NEXT FIELD embarque_2
 		END IF
-		IF nom_diteca_3 IS NULL THEN
-			NEXT FIELD nom_diteca_3
+		IF nom_aceros_3 IS NULL THEN
+			NEXT FIELD nom_aceros_3
 		END IF
 		IF declaracion_consular IS NULL THEN
 			NEXT FIELD declaracion_consular
@@ -326,13 +317,13 @@ END FUNCTION
 REPORT report_nota_pedido(partida, nom_partida, cant, item, nombre,
 		 	  peso, fob, tot_fob)
 DEFINE partida		LIKE gent016.g16_partida
-DEFINE nom_partida	LIKE gent016.g16_nombre
+DEFINE nom_partida	LIKE gent016.g16_desc_par
 DEFINE cant		LIKE rept017.r17_cantped
 DEFINE item		LIKE rept010.r10_codigo
 DEFINE nombre		LIKE rept010.r10_nombre
 DEFINE peso		DECIMAL(7,3)
-DEFINE fob		DECIMAL(11,2)
-DEFINE tot_fob		DECIMAL(12,2)
+DEFINE fob		DECIMAL(11,3)
+DEFINE tot_fob		DECIMAL(12,3)
 
 DEFINE usuario		VARCHAR(19,15)
 DEFINE titulo		VARCHAR(80)
@@ -344,23 +335,33 @@ DEFINE estado		VARCHAR(10)
 DEFINE proveedor	VARCHAR(50)
 DEFINE r_rep		RECORD LIKE rept016.*
 DEFINE mes 		CHAR(12)
+DEFINE escape		SMALLINT
+DEFINE act_comp, db_c	SMALLINT
+DEFINE desact_comp, db	SMALLINT
 
 OUTPUT
-	TOP MARGIN	0
-	LEFT MARGIN	10
-	RIGHT MARGIN	120
+	TOP MARGIN	1
+	LEFT MARGIN	0
+	RIGHT MARGIN	132
 	BOTTOM MARGIN	4
 	PAGE LENGTH	66
-FORMAT
-PAGE HEADER
-	print 'E'; print '&l26A';  -- Indica que voy a trabajar con hojas A4
-	print '&k4S'	                -- Letra condensada (12 cpi)
 
+FORMAT
+
+PAGE HEADER
+	--print 'E'; --print '&l26A';  -- Indica que voy a trabajar con hojas A4
+	--print '&k4S'	                -- Letra condensada (12 cpi)
+	LET escape	= 27		# Iniciar sec. impresi¢n
+	LET act_comp	= 15		# Activar Comprimido.
+	LET desact_comp	= 18		# Cancelar Comprimido.
 	CALL fl_justifica_titulo('C', 'NOTA DE PEDIDO', 80)
 		RETURNING titulo
+	SKIP 2 LINES
+	print ASCII escape;
+	print ASCII act_comp
 	PRINT COLUMN 1, titulo CLIPPED
 
-	print '&k2S'	                -- Letra condensada (16 cpi)
+	--print '&k2S'	                -- Letra condensada (16 cpi)
 
 	LET mes = fl_retorna_nombre_mes(MONTH(TODAY))
 	PRINT COLUMN 1, 'No Pedido: ', rm_rep.r16_pedido, 
@@ -370,21 +371,21 @@ PAGE HEADER
 
 	SKIP 1 LINES
 
-	PRINT COLUMN 1, 'De: ', nom_diteca
-	PRINT COLUMN 1, 'Teléfono: ', tel_diteca,
-	      COLUMN 50, 'Fax: ', fax_diteca,
-	      COLUMN 75, 'Contact: ', contact_1 
+	PRINT COLUMN 1, 'De: ', nom_aceros
+	PRINT COLUMN 1, 'Teléfono: ', tel_aceros,
+		COLUMN 50, 'Fax: ', fax_aceros,
+		COLUMN 75, 'Contact: ', contact_1 
 	PRINT COLUMN 1, 'Para: ', nom_proveedor
 	PRINT COLUMN 1, 'Teléfono: ', tel_proveedor, 
-	      COLUMN 50, 'Fax: ', fax_proveedor,
-	      COLUMN 75, 'Contact: ', contact_2 
+		COLUMN 50, 'Fax: ', fax_proveedor,
+		COLUMN 75, 'Contact: ', contact_2 
 	PRINT COLUMN 1, 'Embarque: ', embarque_1
-	PRINT COLUMN 1, 'Documento a la orden de: ', nom_diteca_2
+	PRINT COLUMN 1, 'Documento a la orden de: ', nom_aceros_2
 	PRINT COLUMN 1, 'Pago: ', pago
 	PRINT COLUMN 1, 'Embarque: ', embarque_2
-	PRINT COLUMN 1, 'Marcas y números: ', nom_diteca_3
+	PRINT COLUMN 1, 'Marcas y números: ', nom_aceros_3
 	PRINT COLUMN 1, 'Declaración consular: '
-	NEED 10 LINES
+	--#NEED 10 LINES
 	PRINT COLUMN 1, declaracion_consular[1,107]
 	PRINT COLUMN 1, declaracion_consular[108,215]
 	PRINT COLUMN 1, declaracion_consular[216,323]
@@ -404,8 +405,9 @@ PAGE HEADER
 
 ON EVERY ROW
 
-	NEED 5 LINES
 	IF partida_aux IS NULL THEN
+		SKIP 1 LINES
+
 		LET partida_aux = partida
 
 		PRINT COLUMN 1, vm_num_partida USING '&&',". ARANCELARIA",
@@ -413,7 +415,6 @@ ON EVERY ROW
 			COLUMN 56, nom_partida
 	ELSE
 		IF partida_aux <> partida THEN
-			NEED 2 LINES
 
 			LET partida_aux = partida
 			PRINT COLUMN 1,  '------',
@@ -433,20 +434,18 @@ ON EVERY ROW
 
 			LET vm_num_partida = vm_num_partida + 1
 
-			NEED 3 LINES
 			PRINT COLUMN 1, vm_num_partida USING '&&',
 					". ARANCELARIA",
 				COLUMN 39, partida,
 				COLUMN 56, nom_partida
 		END IF
-
 	END IF 
 
 	PRINT COLUMN 1,  cant, --fl_justifica_titulo('C', cant, 4), 
 	      COLUMN 8,  fl_justifica_titulo('D',item,15),
 	      COLUMN 26, nombre[1,20],
 	      COLUMN 48, peso               USING '##,##&.###',
-	      COLUMN 65, fob    	    USING "###,###,##&.##",
+	      COLUMN 65, fob    	    USING "##,###,##&.###",
 	      COLUMN 93, tot_fob            USING "#,###,###,##&.##"
 
 	LET subtotal_cant = subtotal_cant + cant
@@ -459,7 +458,7 @@ ON EVERY ROW
 
 ON LAST ROW
 
-	NEED 2 LINES
+
 	PRINT COLUMN 1,  '------',
 	      COLUMN 48, '-----------',
 	      COLUMN 93, '----------------'
@@ -468,8 +467,9 @@ ON LAST ROW
 	      COLUMN 47, subtotal_peso USING '###,##&.###',
 	      COLUMN 65, 'PRECIO FOB, US $ ',
 	      COLUMN 93, subtotal_fob USING '#,###,###,##&.##'
-	print '&k4S'	                -- Letra condensada (12 cpi)
-	SKIP 1 LINES
+
+	--print '&k4S'	                -- Letra condensada (12 cpi)
+	SKIP 2 LINES
 
 	NEED 10 LINES
 	PRINT COLUMN 17, 'TOTAL KG. ',
@@ -495,64 +495,9 @@ ON LAST ROW
 	PRINT COLUMN 42, '----------------'
 	PRINT COLUMN 17, 'TOTAL VALOR C.I.F.',
 		COLUMN 42, total_fob + flete + seguro
-				USING '#,###,###,##&.##'
-
-END REPORT
-
-
-
-REPORT export_nota_pedido(partida, nom_partida, cant, item, nombre,
-		 	  peso, fob, tot_fob)
-DEFINE partida		LIKE gent016.g16_partida
-DEFINE nom_partida	LIKE gent016.g16_nombre
-DEFINE cant		LIKE rept017.r17_cantped
-DEFINE item		LIKE rept010.r10_codigo
-DEFINE nombre		LIKE rept010.r10_nombre
-DEFINE peso		DECIMAL(7,3)
-DEFINE fob		DECIMAL(11,2)
-DEFINE tot_fob		DECIMAL(12,2)
-
-DEFINE i,long		SMALLINT
-DEFINE r_pro		RECORD LIKE cxpt001.*
-DEFINE tipo_des		VARCHAR(10)
-DEFINE estado		VARCHAR(10)
-DEFINE proveedor	VARCHAR(50)
-DEFINE r_rep		RECORD LIKE rept016.*
-DEFINE mes 		CHAR(12)
-
-OUTPUT
-	TOP MARGIN	0
-	LEFT MARGIN	10
-	RIGHT MARGIN	120
-	BOTTOM MARGIN	4
-	PAGE LENGTH	66
-FORMAT
-
-ON EVERY ROW
-	IF partida_aux IS NULL THEN
-		LET partida_aux = partida
-
-		PRINT COLUMN 1, vm_num_partida USING '&&', '. ARANCELARIA |',
-			        partida, '|', nom_partida
-	ELSE
-
-		IF partida_aux <> partida THEN
-			SKIP 1 LINES
-			LET partida_aux = partida
-			LET vm_num_partida = vm_num_partida + 1
-
-			PRINT COLUMN 1, vm_num_partida USING '&&', 
-                                        '. ARANCELARIA |',
-				        partida, '|', nom_partida
-		END IF
-	END IF 
-
-	PRINT COLUMN 1,  cant, 
-	      '|',       fl_justifica_titulo('D',item,15),
-	      '|',       nombre[1,20],
-	      '|',       peso               USING '##,##&.###',
-	      '|',       fob    	    USING "###,###,##&.##",
-	      '|',       tot_fob            USING "#,###,###,##&.##"
+				USING '#,###,###,##&.##';
+	print ASCII escape;
+	print ASCII desact_comp 
 
 END REPORT
 
@@ -590,33 +535,14 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION llamar_visor_teclas()
+DEFINE a		CHAR(1)
 
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
+IF vg_gui = 0 THEN
+	CALL fl_visor_teclas_caracter() RETURNING int_flag 
+	LET a = fgl_getkey()
+	CLOSE WINDOW w_tf
+	LET int_flag = 0
 END IF
 
 END FUNCTION

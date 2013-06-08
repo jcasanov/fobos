@@ -1,0 +1,36 @@
+DATABASE aceros
+SCREEN 
+{
+
+  Orden        Cliente          Total Neto        Crédito       Dcto. a Favor
+[c000  |c001                |c002            |c003            |c004          ]
+[c000  |c001                |c002            |c003            |c004          ]
+[c000  |c001                |c002            |c003            |c004          ]
+[c000  |c001                |c002            |c003            |c004          ]
+[c000  |c001                |c002            |c003            |c004          ]
+[c000  |c001                |c002            |c003            |c004          ]
+[c000  |c001                |c002            |c003            |c004          ]
+[c000  |c001                |c002            |c003            |c004          ]
+[c000  |c001                |c002            |c003            |c004          ]
+[c000  |c001                |c002            |c003            |c004          ]
+[c000  |c001                |c002            |c003            |c004          ]
+[c000  |c001                |c002            |c003            |c004          ]
+[c000  |c001                |c002            |c003            |c004          ]
+[c000  |c001                |c002            |c003            |c004          ]
+[c000  |c001                |c002            |c003            |c004          ]
+
+}
+TABLES
+talt023,
+talt025
+ATTRIBUTES
+c000 = talt023.t23_orden, NOENTRY, UPSHIFT;
+c001 = talt023.t23_nom_cliente, NOENTRY, UPSHIFT;
+c002 = talt023.t23_tot_neto, NOENTRY, FORMAT = '#,###,###,##&.##';
+c003 = talt025.t25_valor_cred, NOENTRY, FORMAT = '#,###,###,##&.##';
+c004 = talt025.t25_valor_ant, NOENTRY, FORMAT = '###,###,##&.##';
+end
+INSTRUCTIONS
+SCREEN RECORD rm_deto[15] (t23_orden, t23_nom_cliente, t23_tot_neto,
+				t25_valor_cred, t25_valor_ant)
+DELIMITERS '||'

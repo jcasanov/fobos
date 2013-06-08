@@ -1,4 +1,4 @@
-DATABASE diteca
+DATABASE aceros
 
 SCREEN
 {
@@ -27,14 +27,14 @@ ATTRIBUTES
 f001 = r10_codigo, NOENTRY;
 a0   = r32_moneda, REVERSE, NOENTRY;
 a1   = g13_nombre, REVERSE, NOENTRY;
-b    = formonly.num_items TYPE INTEGER, NOENTRY;
-c    = formonly.campo_base TYPE VARCHAR, REVERSE, NOENTRY;
+b    = FORMONLY.num_items TYPE INTEGER, NOENTRY;
+c    = FORMONLY.campo_base TYPE VARCHAR, REVERSE, NOENTRY;
 f002 = r10_nombre, REVERSE, NOENTRY;
-f003 = formonly.precio_antes TYPE DECIMAL(11,2), 
+f003 = FORMONLY.precio_antes TYPE DECIMAL(11,2), 
 	FORMAT = '###,###,##&.##', NOENTRY;
-f004 = formonly.precio_nuevo TYPE DECIMAL(11,2), 
+f004 = FORMONLY.precio_nuevo TYPE DECIMAL(11,2), 
 	FORMAT = '###,###,##&.##', NOENTRY;
-END
+end
 
 INSTRUCTIONS
 SCREEN RECORD r_item_act[10](r10_codigo, r10_nombre, precio_antes, precio_nuevo)

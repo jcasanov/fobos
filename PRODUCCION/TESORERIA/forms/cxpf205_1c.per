@@ -1,0 +1,53 @@
+DATABASE aceros
+SCREEN 
+{
+
+
+    No Orden Pago: [c002       ]                  Estado: [b|c100      ]
+        Proveedor: [c004       ] [c102                                 ]
+            Banco: [c010] [c105                                        ]
+         No. Cta.: [c011           ]   
+           Moneda: [a0] [c103           ] Paridad: [c006               ]
+	  Subtipo: [c009] [c104                        ]    
+       Referencia: [c005                               ]
+
+    Valor a Pagar: [c008            ]
+
+    Ingresado Por: [c013      ]         
+ Fecha de Ingreso: [c014               ]
+}
+TABLES
+cxpt024
+ATTRIBUTES
+c002 = cxpt024.p24_orden_pago, REVERSE, NOENTRY, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c004 = cxpt024.p24_codprov, REVERSE, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+b    = cxpt024.p24_estado, NOENTRY, UPSHIFT, REVERSE,
+	COMMENTS = 'A Activo  P Procesado';
+c005 = cxpt024.p24_referencia, UPSHIFT, REVERSE;
+a0   = cxpt024.p24_moneda, NOENTRY, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c009 = cxpt024.p24_subtipo, REVERSE, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c006 = cxpt024.p24_paridad, NOENTRY, REVERSE, FORMAT='#,###,##&.#########';
+c010 = cxpt024.p24_banco,   REVERSE, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c011 = cxpt024.p24_numero_cta, REVERSE, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c013 = cxpt024.p24_usuario, REVERSE, NOENTRY, UPSHIFT;
+c014 = cxpt024.p24_fecing, REVERSE, NOENTRY;
+
+c008 = cxpt024.p24_total_cap, REVERSE, FORMAT='#,###,###,##&.##';
+
+c100 = FORMONLY.n_estado,    NOENTRY;
+c102 = FORMONLY.n_proveedor, NOENTRY;
+c103 = FORMONLY.n_moneda,    NOENTRY;
+c104 = FORMONLY.n_motivo,    NOENTRY;
+c105 = FORMONLY.n_banco,     NOENTRY;
+end
+INSTRUCTIONS
+DELIMITERS '||'
+
+--KEYS
+--F5 = 'Estado Cuenta'

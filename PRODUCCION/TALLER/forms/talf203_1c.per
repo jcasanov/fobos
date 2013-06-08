@@ -1,0 +1,46 @@
+DATABASE aceros
+SCREEN
+{
+
+ No. Presupuesto: [c002    ] 
+         Cliente: [c014                                     ]
+
+  Can       Item                  Descripción               Precio     Stock
+ [c06|c004           ] [c005                          |c007         |c008   ]
+ [c06|c004           ] [c005                          |c007         |c008   ]
+ [c06|c004           ] [c005                          |c007         |c008   ]
+ [c06|c004           ] [c005                          |c007         |c008   ]
+ [c06|c004           ] [c005                          |c007         |c008   ]
+ [c06|c004           ] [c005                          |c007         |c008   ]
+ [c06|c004           ] [c005                          |c007         |c008   ]
+ [c06|c004           ] [c005                          |c007         |c008   ]
+ [c06|c004           ] [c005                          |c007         |c008   ]
+ [f001                              ]                 ---------------
+ [f002                              ]          Total: [c015         ]
+ [f003                              ]     
+ [c013                                                             ]     
+}
+TABLES talt020, talt022
+ATTRIBUTES
+c002 = talt020.t20_numpre, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c06  = talt022.t22_cantidad, AUTONEXT, INCLUDE = (1 TO 100);
+c004 = talt022.t22_item, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c005 = talt022.t22_descripcion, AUTONEXT, UPSHIFT, REVERSE;
+c007 = talt022.t22_precio, AUTONEXT, INCLUDE = (0.01 TO 999999999.99),
+        FORMAT = '##,###,##&.##';
+c008 = talt022.t22_stock, NOENTRY, FORMAT = '###&.##';
+c015 = FORMONLY.tit_total TYPE DECIMAL (12,2), NOENTRY, REVERSE,
+	INCLUDE = (0 TO 999999999.99),
+        FORMAT = '##,###,##&.##';
+c013 = FORMONLY.tit_descri, NOENTRY, REVERSE, UPSHIFT;
+c014 = FORMONLY.tit_cliente, NOENTRY, REVERSE, UPSHIFT;
+f001 = formonly.descrip_1, NOENTRY;
+f002 = formonly.descrip_2, NOENTRY;
+f003 = formonly.descrip_3, NOENTRY;
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_ta[09] (t22_cantidad,t22_item,t22_descripcion,
+			t22_precio,t22_stock)
+end

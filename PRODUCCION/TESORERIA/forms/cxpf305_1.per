@@ -1,4 +1,4 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
            Moneda: [c0]     [c001           ]       Con Saldo Mayor a 0?: [x]
@@ -25,36 +25,36 @@ SCREEN
 TABLES
 cxpt021
 ATTRIBUTES
-c0   = formonly.moneda TYPE CHAR NOT NULL, UPSHIFT, REVERSE,  
+c0   = FORMONLY.moneda TYPE CHAR NOT NULL, UPSHIFT, REVERSE,  
        WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c001 = formonly.tit_mon, REVERSE, NOENTRY;
-c1   = formonly.tipo_doc, UPSHIFT, 
+c001 = FORMONLY.tit_mon, REVERSE, NOENTRY;
+c1   = FORMONLY.tipo_doc, UPSHIFT, 
        WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c111 = formonly.tit_tipo, NOENTRY;
-c004 = formonly.fecha_ini TYPE DATE, FORMAT = 'dd-mm-yyyy', COMMENTS = 
+c111 = FORMONLY.tit_tipo, NOENTRY;
+c004 = FORMONLY.fecha_ini TYPE DATE, FORMAT = 'dd-mm-yyyy', COMMENTS = 
        'Ingrese fecha en fomato: dd-mm-aa';
-c005 = formonly.fecha_fin TYPE DATE, FORMAT = 'dd-mm-yyyy', COMMENTS = 
+c005 = FORMONLY.fecha_fin TYPE DATE, FORMAT = 'dd-mm-yyyy', COMMENTS = 
        'Ingrese fecha en fomato: dd-mm-aa';
-x    = formonly.flag_saldo TYPE CHAR NOT NULL, REVERSE, UPSHIFT,
+x    = FORMONLY.flag_saldo TYPE CHAR NOT NULL, REVERSE, UPSHIFT,
 	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S';
-c010 = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-v1   = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-c011 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
-c012 = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
-c013 = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
-c014 = formonly.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+v1   = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c011 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c012 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c013 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c014 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
 c020 = p21_fecha_emi, FORMAT = 'dd-mm-yyyy', OPTIONS = '-nolist';
 z1   = p21_tipo_doc, OPTIONS = '-nolist';
 c021 = p21_num_doc, OPTIONS = '-nolist';
-c022 = formonly.nomprov, OPTIONS = '-nolist';
+c022 = FORMONLY.nomprov, OPTIONS = '-nolist';
 c023 = p21_valor, FORMAT = '###,###,##&.##', OPTIONS = '-nolist';
 c024 = p21_saldo, FORMAT = '###,###,##&.##', OPTIONS = '-nolist';
-c030 = formonly.tot_valor TYPE DECIMAL(14,2), FORMAT = '###,###,##&.##',
+c030 = FORMONLY.tot_valor TYPE DECIMAL(14,2), FORMAT = '###,###,##&.##',
        REVERSE;
-c031 = formonly.tot_saldo TYPE DECIMAL(14,2), FORMAT = '###,###,##&.##',
+c031 = FORMONLY.tot_saldo TYPE DECIMAL(14,2), FORMAT = '###,###,##&.##',
        REVERSE;
 INSTRUCTIONS
 SCREEN RECORD rm_ant[13](p21_fecha_emi, p21_tipo_doc, p21_num_doc, 
-			 formonly.nomprov, p21_valor, p21_saldo)
+			 FORMONLY.nomprov, p21_valor, p21_saldo)
 KEYS
 'F6'='Documento'

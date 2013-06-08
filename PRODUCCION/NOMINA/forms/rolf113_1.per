@@ -1,0 +1,69 @@
+DATABASE aceros
+SCREEN
+{
+                                                             [c020] de [c021]
+
+               Compania: [c000] [c001                               ]
+           Dias del Ano: [c002] 
+
+                         Tiempo Maximo para Gozar las Vacaciones: [c022] Anos
+
+  Dias del Ano Vaciones: [c003]                Dias Min. Vac. Parcial: [c004]
+    Ano Inicio Vaciones: [c005]     Generar Diario Contable Vacaciones ?: [c]
+
+  Dias del Ano Anticipo: [c006]    Porcentaje de Interes Anticipo: [c007  ] %
+    Ano Inicio Anticipo: [c008]       Generar Diario Contable Anticipo ?: [d]
+
+                            Tiempo de Gracia para los Anticipos: [c023] Meses
+
+    Dias Ano Utilidades: [c009]
+  Ano Inicio Utilidades: [c010]     Generar Diario Contable Utilidades ?: [e]
+
+          Ingresado Por: [c011      ]    Fecha Ingreso: [c012               ]
+}
+TABLES
+gent001
+rolt090
+ATTRIBUTES
+c000 = rolt090.n90_compania, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = gent001.g01_razonsocial, NOENTRY, UPSHIFT, REVERSE;
+c002 = rolt090.n90_dias_anio, AUTONEXT, UPSHIFT, REVERSE, INCLUDE = (1 TO 366);
+
+c022 = rolt090.n90_tiem_max_vac, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = (1 TO 15);
+c003 = rolt090.n90_dias_ano_vac, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = (1 TO 366);
+c004 = rolt090.n90_dias_min_par, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = (0 TO 120);
+c005 = rolt090.n90_anio_ini_vac, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = (1990 TO 2099);
+c    = rolt090.n90_gen_cont_vac, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge', INCLUDE = ('S', 'N'),
+	DEFAULT = 'S';
+
+c006 = rolt090.n90_dias_ano_ant, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = (1 TO 366);
+c007 = rolt090.n90_porc_int_ant, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = (0 TO 100), FORMAT = '##&.##';
+c008 = rolt090.n90_anio_ini_ant, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = (2003 TO 2099);
+d    = rolt090.n90_gen_cont_ant, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge', INCLUDE = ('S', 'N'),
+	DEFAULT = 'S';
+c023 = rolt090.n90_mes_gra_ant, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = (0 TO 12);
+
+c009 = rolt090.n90_dias_ano_ut, AUTONEXT, UPSHIFT, REVERSE,INCLUDE = (1 TO 366);
+c010 = rolt090.n90_anio_ini_ut, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = (2003 TO 2099);
+e    = rolt090.n90_gen_cont_ut, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge', INCLUDE = ('S', 'N'),
+	DEFAULT = 'S';
+
+c011 = rolt090.n90_usuario, NOENTRY, UPSHIFT, REVERSE;
+c012 = rolt090.n90_fecing, NOENTRY, UPSHIFT, REVERSE;
+
+c020 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c021 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+END

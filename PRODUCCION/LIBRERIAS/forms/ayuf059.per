@@ -1,33 +1,50 @@
-DATABASE diteca
-
+DATABASE aceros
 SCREEN
 {
- TEMPARIO MODELO [c000           ] 
------------------------------------------------------------------
- Tarea          Descripción 		
------------------------------------------------------------------
-[c001        ] [c002                                          ] 
-[c001        ] [c002                                          ]
-[c001        ] [c002                                          ]
-[c001        ] [c002                                          ]
-[c001        ] [c002                                          ]
-[c001        ] [c002                                          ]
-[c001        ] [c002                                          ] 
-[c001        ] [c002                                          ] 
-[c001        ] [c002                                          ] 
-[c001        ] [c002                                          ] 
+ TAREAS PRESUPUESTO - OT
+                                                    [c000] de [c001]
+ [c010  |c011                               |c012 |c013 |c014 |c|d|e] 
+[c020  |c021                               |c022 |c023 |c024 |f|g|h] 
+[c020  |c021                               |c022 |c023 |c024 |f|g|h] 
+[c020  |c021                               |c022 |c023 |c024 |f|g|h] 
+[c020  |c021                               |c022 |c023 |c024 |f|g|h] 
+[c020  |c021                               |c022 |c023 |c024 |f|g|h] 
+[c020  |c021                               |c022 |c023 |c024 |f|g|h] 
+[c020  |c021                               |c022 |c023 |c024 |f|g|h] 
+[c020  |c021                               |c022 |c023 |c024 |f|g|h] 
+[c020  |c021                               |c022 |c023 |c024 |f|g|h] 
+[c020  |c021                               |c022 |c023 |c024 |f|g|h] 
+       [c030                                                       ]
 
 }
-
 TABLES
 talt007
-
 ATTRIBUTES
-c000 = t07_modelo;
-c001 = t07_codtarea, UPSHIFT;
-c002 = t07_nombre, UPSHIFT;
+c000 = FORMONLY.num_rows, NOENTRY, UPSHIFT;
+c001 = FORMONLY.max_rows, NOENTRY, UPSHIFT;
+
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c    = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+d    = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+e    = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22';
+
+c020 = talt007.t07_codtarea, NOENTRY, UPSHIFT;
+c021 = talt007.t07_nombre, NOENTRY, UPSHIFT;
+c022 = talt007.t07_dscmax_ger, NOENTRY, UPSHIFT, FORMAT = "#&.##";
+c023 = talt007.t07_dscmax_jef, NOENTRY, UPSHIFT, FORMAT = "#&.##";
+c024 = talt007.t07_dscmax_ven, NOENTRY, UPSHIFT, FORMAT = "#&.##";
+f    = talt007.t07_modif_desc, NOENTRY, UPSHIFT;
+g    = talt007.t07_tipo, NOENTRY, UPSHIFT;
+h    = talt007.t07_estado, NOENTRY, UPSHIFT;
+
+c030 = FORMONLY.descripcion, NOENTRY, UPSHIFT;
 END
-
 INSTRUCTIONS
-SCREEN RECORD rh_tarea[10](t07_codtarea, t07_nombre)
-
+DELIMITERS '||'
+SCREEN RECORD rh_tarea[10] (t07_codtarea, t07_nombre, t07_dscmax_ger,
+				t07_dscmax_jef, t07_dscmax_ven, t07_modif_desc,
+				t07_tipo, t07_estado)

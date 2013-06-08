@@ -1,0 +1,71 @@
+DATABASE aceros 
+SCREEN 
+{ 
+                                 Comprobante Emitido: [x1|x001             ]
+  TIPO FUENTE          
+  [a0|c056                    ]        Número Fuente: [c002       ]   
+                                     No. Pre-Impreso: [c060            ]
+                                     Area de Negocio: [c03|c052            ]
+                                       Fecha Proceso: [c007                ]
+
+   Cliente: [c004       ][c005                                             ]
+    Moneda: [a1|c051            ]    Valor a Recaudar: [c006            ]
+  FP   Mon Bco/Tarj   Nro. Che./Aut.     Nro. Cta./tarj.        Valor
+ [a5] [a6] [c024  ] [c025           |c026                |c023            ]
+ [a5] [a6] [c024  ] [c025           |c026                |c023            ]
+ [a5] [a6] [c024  ] [c025           |c026                |c023            ]
+ [a5] [a6] [c024  ] [c025           |c026                |c023            ]
+ [a5] [a6] [c024  ] [c025           |c026                |c023            ]
+ --------------------------------------------------------------------------
+                                   Total Moneda Factura: [c050            ]
+ Ingresado Por: [c016      ]                     Vuelto: [c055            ]   
+}
+TABLES
+cajt010
+cajt011
+rept038
+ATTRIBUTES
+a0 = cajt010.j10_tipo_fuente, 	REVERSE, UPSHIFT, DEFAULT = 'PR',
+	INCLUDE = ('PR', 'SC', 'OT', 'OI', 'EC'), AUTONEXT,
+ 	COMMENTS='OT Orden Trabajo  PR Prventa Inv.  SC Solicitud Cobro Cli.' ;
+c056 = FORMONLY.tit_tipo_fuente,REVERSE,UPSHIFT,NOENTRY;
+c002 = cajt010.j10_num_fuente, REVERSE,
+	COMMENTS='Presione F2 para obtener ayuda del campo';
+c060 = FORMONLY.r38_num_sri, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Dígite el Número de Factura Pre-Impresa (SRI)';
+c03  = cajt010.j10_areaneg, NOENTRY;
+c004 = cajt010.j10_codcli, NOENTRY;
+c005 = cajt010.j10_nomcli, REVERSE, UPSHIFT, NOENTRY;
+a1 = cajt010.j10_moneda, NOENTRY, REVERSE, UPSHIFT, AUTONEXT;
+c006 = cajt010.j10_valor, NOENTRY, REVERSE, 
+	FORMAT='#,###,###,##&.##', INCLUDE=(0 TO 9999999999.99);
+c007 = cajt010.j10_fecha_pro, NOENTRY;
+
+c016 = cajt010.j10_usuario, REVERSE, NOENTRY, UPSHIFT;
+
+a5 = cajt011.j11_codigo_pago, UPSHIFT, AUTONEXT, 
+	COMMENTS='Ingrese la forma de pago.';
+a6 = cajt011.j11_moneda, UPSHIFT, AUTONEXT;
+c023 = cajt011.j11_valor, FORMAT='#,###,###,##&.##', 
+	INCLUDE=(0 TO 9999999999.99), COMMENTS =
+        'Presione <F7> para que le aparezca la diferencia.';
+c024 = cajt011.j11_cod_bco_tarj, UPSHIFT,
+	COMMENTS='Ingrese el código del banco o de la tarjeta de crédito';
+c025 = cajt011.j11_num_ch_aut, UPSHIFT,
+	COMMENTS='Ingrese el número del cheque o de la autorización de la tarjeta';
+c026 = cajt011.j11_num_cta_tarj, UPSHIFT,  
+	COMMENTS='Ingrese el número de la cuenta o de la tarjeta';
+
+c050 = FORMONLY.total_mf TYPE DECIMAL(12,2), REVERSE, FORMAT='#,###,###,##&.##', NOENTRY; 
+c055 = FORMONLY.vuelto TYPE DECIMAL(12,2),   REVERSE, FORMAT='#,###,###,##&.##', NOENTRY; 
+c051 = FORMONLY.n_moneda, NOENTRY;
+c052 = FORMONLY.n_areaneg, NOENTRY;
+
+x1   = cajt010.j10_tipo_destino, NOENTRY, REVERSE;
+x001 = cajt010.j10_num_destino,  NOENTRY, REVERSE;
+
+end
+
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD ra_j11[5] (j11_codigo_pago, j11_moneda, j11_cod_bco_tarj, j11_num_ch_aut, j11_num_cta_tarj, j11_valor)

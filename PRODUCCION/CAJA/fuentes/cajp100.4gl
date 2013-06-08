@@ -8,6 +8,7 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
+DEFINE vm_demonios	VARCHAR(12)
 DEFINE rm_caj		RECORD LIKE cajt000.*
 DEFINE vm_num_rows	SMALLINT
 DEFINE vm_row_current	SMALLINT
@@ -19,11 +20,12 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/cajp100.error')
-CALL fgl_init4js()
+CALL startlog('../logs/errores')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN          -- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
+	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.','stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
 LET vg_base     = arg_val(1)
@@ -32,8 +34,8 @@ LET vg_codcia   = arg_val(3)
 LET vg_proceso = 'cajp100'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL control_master()
 
@@ -43,16 +45,37 @@ END MAIN
 
 FUNCTION control_master()
 DEFINE confir		CHAR(6)
+DEFINE lin_menu         SMALLINT
+DEFINE row_ini          SMALLINT
+DEFINE num_rows         SMALLINT
+DEFINE num_cols         SMALLINT
 
 CALL fl_nivel_isolation()
 LET vm_max_rows	= 50
-OPEN WINDOW wf AT 3,2 WITH 10 ROWS, 80 COLUMNS
-    ATTRIBUTE(FORM LINE FIRST + 2, COMMENT LINE LAST, MENU LINE FIRST,BORDER,
-	      MESSAGE LINE LAST - 2)
+LET lin_menu = 0
+LET row_ini  = 3  ## (estandar)
+LET num_rows = 10 ## (WITH 10 rows)
+LET num_cols = 80
+IF vg_gui = 0 THEN
+        LET lin_menu = 1  ## (standar)
+        LET row_ini  = 4  ## (standar)
+        LET num_rows = 20 ## (standar)
+        LET num_cols = 78 ## (standar maximo columnas)
+END IF
+OPEN WINDOW wf AT row_ini,2 WITH num_rows ROWS, num_cols COLUMNS
+    ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE lin_menu, 
+	      BORDER,
+	      MESSAGE LINE LAST - 1)
+
 OPTIONS INPUT WRAP,
 	ACCEPT KEY	F12
-OPEN FORM f_caj FROM "../forms/cajf100_1"
+IF vg_gui = 1 THEN
+        OPEN FORM f_caj FROM '../forms/cajf100_1'
+ELSE
+        OPEN FORM f_caj FROM '../forms/cajf100_1c'
+END IF
 DISPLAY FORM f_caj
+
 INITIALIZE rm_caj.* TO NULL
 LET vm_num_rows = 0
 LET vm_row_current = 0
@@ -69,10 +92,7 @@ MENU 'OPCIONES'
 			CALL control_ingreso()
 		END IF
 		IF vm_num_rows = 1 THEN
-		   IF fl_control_permiso_opcion('Bloquear') THEN
-		  	  SHOW OPTION 'Bloquear/Activar'
-		   END IF
-			
+			SHOW OPTION 'Bloquear/Activar'
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -83,10 +103,7 @@ MENU 'OPCIONES'
 	COMMAND KEY('C') 'Consultar' 'Consultar un registro. '
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
-		   IF fl_control_permiso_opcion('Bloquear') THEN
-				SHOW OPTION 'Bloquear/Activar'
-		   END IF
-			
+			SHOW OPTION 'Bloquear/Activar'
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -94,10 +111,7 @@ MENU 'OPCIONES'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
-		   IF fl_control_permiso_opcion('Bloquear') THEN
-				SHOW OPTION 'Bloquear/Activar'
-		   END IF
-			
+			SHOW OPTION 'Bloquear/Activar'
 		END IF
 		IF vm_row_current <= 1 THEN
                         HIDE OPTION 'Retroceder'
@@ -164,16 +178,25 @@ END FUNCTION
 FUNCTION control_consulta()
 DEFINE cod_aux      	LIKE cajt000.j00_compania
 DEFINE nom_aux      	LIKE gent001.g01_razonsocial
-DEFINE query		VARCHAR(400)
-DEFINE expr_sql		VARCHAR(400)
+DEFINE query		CHAR(400)
+DEFINE expr_sql		CHAR(400)
 DEFINE num_reg		INTEGER
 
 LET int_flag = 0
 INITIALIZE cod_aux TO NULL
 CLEAR FORM
 CONSTRUCT BY NAME expr_sql ON j00_compania
+        BEFORE CONSTRUCT
+                IF vg_gui = 1 THEN
+                        --#CALL dialog.keysetlabel('F1', '')
+                        --#CALL dialog.keysetlabel('CONTROL-W', '')
+                END IF
+        ON KEY(F1,CONTROL-W)
+                IF vg_gui = 0 THEN
+                        CALL control_visor_teclas_caracter_1()
+                END IF
 	ON KEY(F2)
-		IF infield(j00_compania) THEN
+		IF INFIELD(j00_compania) THEN
                 	CALL fl_ayuda_companias_cajagen()
 				RETURNING cod_aux, nom_aux
 			LET int_flag = 0
@@ -191,7 +214,7 @@ IF int_flag THEN
 	END IF
 	RETURN
 END IF
-LET query = 'SELECT *, ROWID FROM cajt000 WHERE ' || expr_sql || ' ORDER BY 1'
+LET query = 'SELECT *, ROWID FROM cajt000 WHERE ' || expr_sql CLIPPED|| ' ORDER BY 1'
 PREPARE cons FROM query	
 DECLARE q_cons CURSOR FOR cons
 LET vm_num_rows = 0
@@ -228,6 +251,15 @@ INITIALIZE r_act_aux.* TO NULL
 INITIALIZE cod_cia_aux TO NULL
 INPUT BY NAME rm_caj.j00_compania
 	WITHOUT DEFAULTS
+        BEFORE INPUT
+                IF vg_gui = 1 THEN
+                        --#CALL dialog.keysetlabel('F1', '')
+                        --#CALL dialog.keysetlabel('CONTROL-W', '')
+                END IF
+        ON KEY(F1,CONTROL-W)
+                IF vg_gui = 0 THEN
+                        CALL control_visor_teclas_caracter_1()
+                END IF
 	ON KEY(INTERRUPT)
         	IF field_touched(rm_caj.j00_compania) THEN
 	               	LET int_flag = 0
@@ -242,7 +274,7 @@ INPUT BY NAME rm_caj.j00_compania
 			RETURN
 		END IF
 	ON KEY(F2)
-		IF infield(j00_compania) THEN
+		IF INFIELD(j00_compania) THEN
                 	CALL fl_ayuda_compania() RETURNING cod_cia_aux
 			LET int_flag = 0
 	                IF cod_cia_aux IS NOT NULL THEN
@@ -258,8 +290,8 @@ INPUT BY NAME rm_caj.j00_compania
                         CALL fl_lee_compania(rm_caj.j00_compania)
                                 RETURNING rg_cia.*
                         IF rg_cia.g01_compania IS NULL THEN
-                                CALL fgl_winmessage(vg_producto,'Compañía no exi
-ste','exclamation')
+                                --CALL fgl_winmessage(vg_producto,'Compañía no existe.','exclamation')
+				CALL fl_mostrar_mensaje('Compañía no existe.','exclamation')
                                 NEXT FIELD j00_compania
                         END IF
                         DISPLAY rg_cia.g01_razonsocial TO tit_compania
@@ -270,7 +302,8 @@ ste','exclamation')
                         CALL fl_lee_compania_caja(rm_caj.j00_compania)
                                 RETURNING r_act_aux.*
                         IF rm_caj.j00_compania = r_act_aux.j00_compania THEN
-                        	CALL fgl_winmessage(vg_producto,'Compañía ya ha sido asignada a caja general','exclamation')
+                        	--CALL fgl_winmessage(vg_producto,'Compañía ya ha sido asignada a caja general','exclamation')
+				CALL fl_mostrar_mensaje('Compañía ya ha sido asignada a caja general.','exclamation')
                                 NEXT FIELD j00_compania
                         END IF
                 ELSE
@@ -324,7 +357,8 @@ DEFINE num_registro		INTEGER
 IF vm_num_rows > 0 THEN
 	SELECT * INTO rm_caj.* FROM cajt000 WHERE ROWID = num_registro	
 	IF STATUS = NOTFOUND THEN 
-		CALL fgl_winmessage (vg_producto,'No existe registro con índice: ' || vm_row_current,'exclamation')
+		--CALL fgl_winmessage (vg_producto,'No existe registro con índice: ' || vm_row_current,'exclamation')
+		CALL fl_mostrar_mensaje('No existe registro con índice: ' || vm_row_current,'exclamation')
 		RETURN
 	END IF
 	DISPLAY BY NAME rm_caj.j00_compania
@@ -402,34 +436,12 @@ DISPLAY rm_caj.j00_estado TO tit_est
 END FUNCTION
 
 
-
-FUNCTION validar_parametros()
-
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-
+FUNCTION control_visor_teclas_caracter_1()
+DEFINE a, fila          INTEGER
+                                                                                
+CALL fl_visor_teclas_caracter() RETURNING fila
+LET a = fila + 2
+LET a = fgl_getkey()
+CLOSE WINDOW w_tf
+                                                                                
 END FUNCTION

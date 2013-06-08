@@ -1,0 +1,62 @@
+DATABASE aceros
+SCREEN 
+{
+
+
+ Código de Proceso:[c0]	[c1                       ]     Estado:[a|c2        ]
+
+  Nombre Abreviado:[c3             ]           
+
+     Día de Inicio:[c5 ]		       Día Final:[c6 ]
+     Mes de Inicio:[c7 |c14        ]	       Mes Final:[c8 |c15         ]
+
+        Valor Fijo:[z001         ]
+       Provisionar:[b]          Beneficiario Liquidación:[c9                ]   
+  Acepta Descuento:[c]
+
+        Frecuencia:[c10            ]        Tipo Calculo:[c11                 ]
+
+
+
+
+
+     Ingresado Por:[c12       ]         Fecha de Ingreso:[c13                ]
+}
+TABLES
+rolt003
+ATTRIBUTES
+
+c0  = rolt003.n03_proceso,   REVERSE, UPSHIFT, AUTONEXT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c1  = rolt003.n03_nombre,    REVERSE, UPSHIFT, SCROLL;
+c3  = rolt003.n03_nombre_abr, REVERSE, UPSHIFT;
+a   = rolt003.n03_estado, REVERSE, UPSHIFT, NOENTRY;
+c2  = formonly.tit_estado TYPE VARCHAR, NOENTRY;
+
+--c4  = rolt003.n03_valor, REVERSE, INCLUDE = (0 TO 9999999999.99), 
+--	FORMAT = '#,###,###,##&.##';
+c5  = rolt003.n03_dia_ini, INCLUDE = (1 TO 31, NULL);
+c6  = rolt003.n03_dia_fin, INCLUDE = (1 TO 31, NULL);
+c7  = rolt003.n03_mes_ini, INCLUDE = (1 TO 12, NULL);
+c14 = formonly.nom_mes TYPE VARCHAR, REVERSE;
+c8  = rolt003.n03_mes_fin, INCLUDE = (1 TO 12, NULL);
+c15 = formonly.nom_mes2 TYPE VARCHAR, REVERSE;
+
+b   = rolt003.n03_provisionar, REVERSE, WIDGET = 'CHECK',
+	CONFIG = 'S N acknowledge';
+c   = rolt003.n03_acep_descto, REVERSE, WIDGET = 'CHECK',
+	CONFIG = 'S N acknowledge';
+c9  = rolt003.n03_benefic_liq, REVERSE, WIDGET = 'RADIO',
+	CONFIG = 'T Trabajador S "Seguro Social"';
+
+c10 = rolt003.n03_frecuencia, REVERSE, WIDGET = 'RADIO', 
+	CONFIG = 'D Diario S Semanal Q Quincenal M Mensual A Anual';
+c11 = rolt003.n03_tipo_calc, REVERSE, WIDGET = 'RADIO',
+	CONFIG = 'L "Liquidación Normal" F "Valor Fijo" S Salario G "Por valor" P "Por Porcentaje"';
+
+c12  = rolt003.n03_usuario, REVERSE, UPSHIFT, NOENTRY;
+c13  = rolt003.n03_fecing, REVERSE, NOENTRY;
+z001 = n03_valor, COMMENTS = 'Ingrese valor en caso que el tipo de calculo sea valor fijo.',
+       FORMAT = '##,###,##&.##', INCLUDE = (0 TO 99999999);
+
+END

@@ -1,13 +1,14 @@
 --------------------------------------------------------------------------------
--- Titulo           : talp405.4gl - Listado de Ordenes de Trabajo	      --
+-- Titulo           : talp405.4gl -LISTADO DE GASTOS POR ORDENES DE TRABAJO
 -- Elaboracion      : 04-ABR-2002					      --
 -- Autor            : GVA						      --
--- Formato Ejecucion: fglrun talp4 base módulo compañía localidad	      --
+-- Formato Ejecucion: fglrun talp405 base módulo compañía localidad	      --
 -- Ultima Correccion: 							      --
 -- Motivo Correccion: 							      --
 --------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
+DEFINE vm_demonios	VARCHAR(12)
 DEFINE rm_t23		RECORD LIKE talt023.*
 
 DEFINE rm_g13		RECORD LIKE gent013.*
@@ -50,11 +51,12 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/talp405.error')
-CALL fgl_init4js()
+CALL startlog('../logs/errores')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN   -- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto.', 'stop')
+	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.', 'stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
 
@@ -67,8 +69,8 @@ LET vg_proceso = 'talp405'
 
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -77,14 +79,30 @@ END MAIN
 
 
 FUNCTION funcion_master()
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
 CALL fl_nivel_isolation()
-OPEN WINDOW w_mas AT 3,2 WITH 13 ROWS, 80 COLUMNS
-    ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE 0, BORDER,
-	      MESSAGE LINE LAST - 2)
-OPTIONS INPUT NO WRAP,
-	ACCEPT KEY	F12
-OPEN FORM f_rep FROM "../forms/talf405_1"
+LET lin_menu = 0
+LET row_ini  = 3
+LET num_rows = 13
+LET num_cols = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW w_mas AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
+    ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE lin_menu,BORDER,
+	      MESSAGE LINE LAST - 1)
+IF vg_gui = 1 THEN
+	OPEN FORM f_rep FROM "../forms/talf405_1"
+ELSE
+	OPEN FORM f_rep FROM "../forms/talf405_1c"
+END IF
 DISPLAY FORM f_rep
 CALL borrar_cabecera()
 CALL control_reporte()
@@ -94,7 +112,7 @@ END FUNCTION
 
 
 FUNCTION control_reporte()
-DEFINE query		VARCHAR(600)
+DEFINE query		CHAR(600)
 DEFINE comando 		VARCHAR(100)
 DEFINE r_report 	RECORD
 	orden		LIKE talt023.t23_orden,
@@ -115,6 +133,9 @@ CALL fl_lee_moneda(vm_moneda) RETURNING rm_g13.*
 DISPLAY rm_g13.g13_nombre TO nom_moneda
 LET vm_fecha_fin = TODAY
 LET vm_estado    = 'F'
+IF vg_gui = 0 THEN
+	CALL muestra_estado(vm_estado)
+END IF
 
 WHILE TRUE
 	LET vm_tot_utilidad = 0
@@ -180,6 +201,8 @@ INPUT BY NAME vm_fecha_ini, vm_fecha_fin, vm_moneda, vm_estado, vm_ot
 	ON KEY(INTERRUPT)
 		LET int_flag = 1
 		RETURN
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
 	ON KEY(F2)
 		IF INFIELD(vm_moneda) THEN
         		CALL fl_ayuda_monedas()
@@ -195,20 +218,25 @@ INPUT BY NAME vm_fecha_ini, vm_fecha_fin, vm_moneda, vm_estado, vm_ot
 			CALL fl_ayuda_orden_trabajo(vg_codcia, vg_codloc, 'T')
 				RETURNING r_t23.t23_orden, r_t23.t23_nom_cliente
 			IF r_t23.t23_orden IS NOT NULL THEN
-				LET rm_t23.t23_orden       = r_t23.t23_orden
+				LET rm_t23.t23_orden = r_t23.t23_orden
+				LET vm_ot            = r_t23.t23_orden
 				LET rm_t23.t23_nom_cliente = 
 							r_t23.t23_nom_cliente
-				DISPLAY BY NAME rm_t23.t23_orden, 
-						rm_t23.t23_nom_cliente
+				DISPLAY rm_t23.t23_orden TO vm_ot 
+				DISPLAY BY NAME rm_t23.t23_nom_cliente
 			END IF	
 		END IF
 		LET int_flag = 0
+	BEFORE INPUT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
 	AFTER FIELD vm_moneda
 		IF vm_moneda IS NOT NULL THEN
 			CALL fl_lee_moneda(vm_moneda)
 				RETURNING rm_g13.*
 			IF rm_g13.g13_moneda IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'No existe la moneda en la Compañía.','exclamation')
+				--CALL fgl_winmessage(vg_producto,'No existe la moneda en la Compañía.','exclamation')
+				CALL fl_mostrar_mensaje('No existe la moneda en la Compañía.','exclamation')
 				CLEAR nom_moneda
 				NEXT FIELD vm_moneda
 			ELSE
@@ -224,16 +252,21 @@ INPUT BY NAME vm_fecha_ini, vm_fecha_fin, vm_moneda, vm_estado, vm_ot
 			CALL fl_lee_orden_trabajo(vg_codcia, vg_codloc, vm_ot) 
 				RETURNING r_t23.*		
 			IF r_t23.t23_orden IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'No existe la Orden de Trabajo en la Compañía.','exclamation')
+				--CALL fgl_winmessage(vg_producto,'No existe la Orden de Trabajo en la Compañía.','exclamation')
+				CALL fl_mostrar_mensaje('No existe la Orden de Trabajo en la Compañía.','exclamation')
 				INITIALIZE rm_t23.* TO NULL
 				CLEAR t23_nom_cliente
-				NEXT FIELD t23_orden
+				NEXT FIELD vm_ot
 			ELSE
 				LET rm_t23.* = r_t23.*
 				DISPLAY BY NAME rm_t23.t23_nom_cliente 
 			END IF
 		ELSE
 			CLEAR t23_nom_cliente
+		END IF
+	AFTER FIELD vm_estado
+		IF vg_gui = 0 THEN
+			CALL muestra_estado(vm_estado)
 		END IF
 	AFTER INPUT 
 		IF vm_ot IS NOT NULL THEN
@@ -251,7 +284,8 @@ INPUT BY NAME vm_fecha_ini, vm_fecha_fin, vm_moneda, vm_estado, vm_ot
 				NEXT FIELD vm_moneda
 			END IF
 			IF vm_fecha_fin < vm_fecha_ini THEN
-				CALL fgl_winmessage(vg_producto,'La fecha final debe ser menor a la fecha inicial.','exclamation')
+				--CALL fgl_winmessage(vg_producto,'La fecha final debe ser menor a la fecha inicial.','exclamation')
+				CALL fl_mostrar_mensaje('La fecha final debe ser menor a la fecha inicial.','exclamation')
 				NEXT FIELD vm_fecha_fin
 			END IF
 			LET expr_ot    = '1=1'
@@ -264,6 +298,9 @@ INPUT BY NAME vm_fecha_ini, vm_fecha_fin, vm_moneda, vm_estado, vm_ot
 				WHEN 'T'
 					LET expr_estado = 't23_estado IN ("A","F","C")'
 			END CASE
+			IF vg_gui = 0 THEN
+				CALL muestra_estado(vm_estado)
+			END IF
 		END IF
 END INPUT
 
@@ -291,17 +328,24 @@ DEFINE i 		SMALLINT
 
 
 OUTPUT
+	{
 	TOP MARGIN	vm_top
 	LEFT MARGIN	vm_left
 	RIGHT MARGIN	vm_right
 	BOTTOM MARGIN	vm_bottom
 	PAGE LENGTH	vm_page
+	}
+	TOP MARGIN	0
+	LEFT MARGIN	20
+	RIGHT MARGIN	90
+	BOTTOM MARGIN	4
+	PAGE LENGTH	66
 FORMAT
 
 PAGE HEADER
-	print 'E'; 
-	print '&l26A';	-- Indica que voy a trabajar con hojas A4
-	print '&k4S'	        -- Letra (12 cpi)
+	--#print 'E'; 
+	--#print '&l26A';	-- Indica que voy a trabajar con hojas A4
+	--#print '&k4S'	        -- Letra (12 cpi)
 
 	CASE estado_ot
 		WHEN 'A'
@@ -317,7 +361,7 @@ PAGE HEADER
 		fl_justifica_titulo('C',
 				'LISTADO DE GASTOS POR ORDENES DE TRABAJO',50)
 
-	print '&k2S'	        -- Letra (16 cpi)
+	--#print '&k2S'	        -- Letra (16 cpi)
 	SKIP 1 LINES
 
 	PRINT COLUMN 1, 'Fecha de Impresión: ',
@@ -462,8 +506,13 @@ DECLARE q_oc CURSOR FOR
 		SKIP 1 LINES
 		CLOSE q_oc
 		FREE  q_oc
-		RETURN
-	END IF
+		{--
+		--#RETURN
+		IF vg_gui = 0 THEN
+			EXIT REPORT
+		END IF
+		--}
+	ELSE
 	CLOSE q_oc
 	
 	LET total_oc = 0
@@ -564,11 +613,12 @@ DECLARE q_oc CURSOR FOR
 	SKIP 1 LINES 
 	
 	PRINT '-------------------------------------------------------------------------------------'
+	END IF
 
 ON LAST ROW
 	SKIP 1 LINES
 
-	print '&k4S'	        -- Letra (12 cpi)
+	--#print '&k4S'	        -- Letra (12 cpi)
 
 	PRINT COLUMN 05, 'Total Ingresos --->',
 	      COLUMN 30, vm_tot_ingresos USING '###,###,###,##&.##' 
@@ -627,33 +677,31 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION llamar_visor_teclas()
+DEFINE a		CHAR(1)
 
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
+IF vg_gui = 0 THEN
+	CALL fl_visor_teclas_caracter() RETURNING int_flag 
+	LET a = fgl_getkey()
+	CLOSE WINDOW w_tf
+	LET int_flag = 0
 END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
+
+END FUNCTION
+
+
+
+FUNCTION muestra_estado(estado)
+DEFINE estado		CHAR(1)
+
+IF estado = 'A' THEN
+	DISPLAY 'ACTIVAS' TO tit_estado
 END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
+IF estado = 'F' THEN
+	DISPLAY 'FACTURADAS' TO tit_estado
 END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
+IF estado = 'T' THEN
+	DISPLAY 'T O D A S' TO tit_estado
 END IF
 
 END FUNCTION

@@ -1,0 +1,28 @@
+DATABASE aceros
+SCREEN
+{
+ CLIENTES GENERALES
+ ---------------------------------------------------
+  Código    Cliente                               E
+ ---------------------------------------------------
+ [c001     |c002                                 |c] 
+ [c001     |c002                                 |c] 
+ [c001     |c002                                 |c] 
+ [c001     |c002                                 |c] 
+ [c001     |c002                                 |c] 
+ [c001     |c002                                 |c] 
+ [c001     |c002                                 |c] 
+ [c001     |c002                                 |c] 
+ [c001     |c002                                 |c] 
+ [c001     |c002                                 |c] 
+}
+TABLES
+cxct001
+ATTRIBUTES
+c001 = z01_codcli, UPSHIFT, REVERSE;
+c002 = z01_nomcli, UPSHIFT, REVERSE;
+c    = z01_estado, UPSHIFT, REVERSE, COMMENTS = '(A) ACTIVO  (B) BLOQUEADO';
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_cligen[10] (z01_codcli, z01_nomcli, z01_estado)

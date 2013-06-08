@@ -1,6 +1,5 @@
-                                                                                
-database diteca
-screen 
+DATABASE aceros
+SCREEN 
 {
 
 
@@ -18,15 +17,15 @@ screen
 
 }
 end
-tables
+TABLES
 gent015
-attributes
+ATTRIBUTES
 c000 = gent015.g15_localidad, REVERSE,
        WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-a    = formonly.nom_loc TYPE VARCHAR, NOENTRY;
+a    = FORMONLY.nom_loc TYPE VARCHAR, NOENTRY;
 c0   = gent015.g15_modulo, REVERSE, UPSHIFT,
        WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-b    = formonly.nom_mod TYPE VARCHAR, NOENTRY;
+b    = FORMONLY.nom_mod TYPE VARCHAR, NOENTRY;
 c1   = gent015.g15_bodega, REVERSE, UPSHIFT;
 c2   = gent015.g15_tipo, REVERSE, UPSHIFT;
 c001 = gent015.g15_nombre,REVERSE, UPSHIFT;

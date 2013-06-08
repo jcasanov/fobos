@@ -1,0 +1,34 @@
+DATABASE aceros
+
+SCREEN
+{
+          ROLES DE USOS VARIOS
+
+ [lb1   |lb12                         |l]
+[c01   |c002                         |a] 
+[c01   |c002                         |a] 
+[c01   |c002                         |a] 
+[c01   |c002                         |a] 
+[c01   |c002                         |a] 
+[c01   |c002                         |a] 
+[c01   |c002                         |a] 
+[c01   |c002                         |a] 
+[c01   |c002                         |a] 
+[c01   |c002                         |a] 
+}
+
+TABLES
+rolt043
+
+ATTRIBUTES
+c01  = n43_num_rol;
+c002 = n43_titulo;
+a = n43_estado;
+
+lb1  = formonly.bt_codigo,      NOENTRY, WIDGET='BUTTON', CONFIG='F15';
+lb12 = formonly.bt_nombre,      NOENTRY, WIDGET='BUTTON', CONFIG='F16';
+l    = formonly.bt_estado,      NOENTRY, WIDGET='BUTTON', CONFIG='F17';
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_usos_varios[10](n43_num_rol, n43_titulo, n43_estado)

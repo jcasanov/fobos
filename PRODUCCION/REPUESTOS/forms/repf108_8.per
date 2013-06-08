@@ -1,0 +1,35 @@
+DATABASE aceros
+SCREEN
+{
+
+            MOVIMIENTOS ITEMS POR BODEGA
+            ---------------------------
+
+   Item: [c002  |c003                               ]
+                [c003                               ]
+ Bodega: [c0]   [c001                          ]
+
+ Rango de Fechas: [c005      ]     -     [c006      ]
+   Stock inicial: [c007         ]
+
+}
+TABLES
+rept010
+ATTRIBUTES
+c0   = FORMONLY.bodega TYPE CHAR, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = FORMONLY.r02_nombre, NOENTRY, UPSHIFT;
+c002 = rept010.r10_codigo, NOENTRY, REVERSE, UPSHIFT;
+c003 = rept010.r10_nombre, NOENTRY, REVERSE, UPSHIFT, WORDWRAP;
+
+c005 = FORMONLY.fecha_ini TYPE DATE NOT NULL, REQUIRED, AUTONEXT,
+	REVERSE, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Inicial en formato dd-mm-aaaa.';
+c006 = FORMONLY.fecha_fin TYPE DATE NOT NULL, REQUIRED, AUTONEXT,
+	REVERSE, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Final en formato dd-mm-aaaa.';
+
+c007 = FORMONLY.vm_stock_inicial TYPE DECIMAL, UPSHIFT, NOENTRY,
+	COLOR = RED WHERE c007 < 0, COLOR = BLUE WHERE c007 > 0,
+	COLOR = BLACK WHERE c007 = 0, FORMAT = '--,---,--&.##';
+END

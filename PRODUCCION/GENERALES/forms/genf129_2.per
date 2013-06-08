@@ -1,4 +1,4 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
  
@@ -7,17 +7,17 @@ SCREEN
        Compañía: [c005] [c006                                    ]
         Usuario: [c003      ] [c004                              ]
 
- [q|r|s|t|u|v|w|x|y|z][l1][l2        |l3                                      ]
-[a|b|c|d|e|f|g|h|i|j][c1][c001      |c002                                    ] 
-[a|b|c|d|e|f|g|h|i|j][c1][c001      |c002                                    ] 
-[a|b|c|d|e|f|g|h|i|j][c1][c001      |c002                                    ] 
-[a|b|c|d|e|f|g|h|i|j][c1][c001      |c002                                    ] 
-[a|b|c|d|e|f|g|h|i|j][c1][c001      |c002                                    ] 
-[a|b|c|d|e|f|g|h|i|j][c1][c001      |c002                                    ] 
-[a|b|c|d|e|f|g|h|i|j][c1][c001      |c002                                    ] 
-[a|b|c|d|e|f|g|h|i|j][c1][c001      |c002                                    ] 
-[a|b|c|d|e|f|g|h|i|j][c1][c001      |c002                                    ] 
-[a|b|c|d|e|f|g|h|i|j][c1][c001      |c002                                    ] 
+        [l1][l2        ][l3                                              ]
+    [c][c1][c001      ][c002                                             ] 
+    [c][c1][c001      ][c002                                             ] 
+    [c][c1][c001      ][c002                                             ] 
+    [c][c1][c001      ][c002                                             ] 
+    [c][c1][c001      ][c002                                             ] 
+    [c][c1][c001      ][c002                                             ] 
+    [c][c1][c001      ][c002                                             ] 
+    [c][c1][c001      ][c002                                             ] 
+    [c][c1][c001      ][c002                                             ] 
+    [c][c1][c001      ][c002                                             ] 
 
 }
 
@@ -25,57 +25,29 @@ TABLES
 gent054
 
 ATTRIBUTES
-a0   = formonly.g54_modulo, UPSHIFT, REQUIRED, REVERSE, AUTONEXT, 
+a0   = FORMONLY.g54_modulo, UPSHIFT, REQUIRED, REVERSE, AUTONEXT, 
 	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
-a    = formonly.p1, DEFAULT='N', AUTONEXT, COMMENT='Ejecutar desde el menu', 
-	WIDGET='CHECK', CONFIG='S N acknowledge', OPTIONS='-nolist';
-b    = formonly.p2, DEFAULT='N', AUTONEXT, COMMENT='Ingresar', 
-	WIDGET='CHECK', CONFIG='S N acknowledge', OPTIONS='-nolist';
-c    = formonly.p3, DEFAULT='N', AUTONEXT, COMMENT='Modificar/Procesar', 
-	WIDGET='CHECK', CONFIG='S N acknowledge', OPTIONS='-nolist';
-d    = formonly.p4, DEFAULT='N', AUTONEXT, COMMENT='Consultar', 
-	WIDGET='CHECK', CONFIG='S N acknowledge', OPTIONS='-nolist';
-e    = formonly.p5, DEFAULT='N', AUTONEXT, COMMENT='Eliminar/Bloquear', 
-	WIDGET='CHECK', CONFIG='S N acknowledge', OPTIONS='-nolist';
-f    = formonly.p6, DEFAULT='N', AUTONEXT, COMMENT='Imprimir', 
-	WIDGET='CHECK', CONFIG='S N acknowledge', OPTIONS='-nolist';
-g    = formonly.p7, DEFAULT='N', AUTONEXT, COMMENT='Adicional 1', 
-	WIDGET='CHECK', CONFIG='S N acknowledge', OPTIONS='-nolist';
-h    = formonly.p8, DEFAULT='N', AUTONEXT, COMMENT='Adicional 2', 
-	WIDGET='CHECK', CONFIG='S N acknowledge', OPTIONS='-nolist';
-i    = formonly.p9, DEFAULT='N', AUTONEXT, COMMENT='Adicional 3', 
-	WIDGET='CHECK', CONFIG='S N acknowledge', OPTIONS='-nolist';
-j    = formonly.p0, DEFAULT='N', AUTONEXT, COMMENT='Adicional 4', 
+c    = FORMONLY.check, DEFAULT='N', AUTONEXT, 
 	WIDGET='CHECK', CONFIG='S N acknowledge', OPTIONS='-nolist';
 c1   = g54_tipo, NOENTRY, OPTIONS='-nolist';
-c000 = formonly.n_modulo, UPSHIFT, REVERSE;
+c000 = FORMONLY.n_modulo, UPSHIFT, REVERSE;
 c001 = g54_proceso, NOENTRY, OPTIONS='-nolist';
 c002 = g54_nombre,  NOENTRY, OPTIONS='-nolist';  
-c003 = formonly.usuario, UPSHIFT, REVERSE, REQUIRED, 
+c003 = FORMONLY.usuario, UPSHIFT, REVERSE, REQUIRED, 
 	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
-c004 = formonly.n_usuario, UPSHIFT, REVERSE;
-c005 = formonly.compania, UPSHIFT, REQUIRED, REVERSE, 
+c004 = FORMONLY.n_usuario, UPSHIFT, REVERSE;
+c005 = FORMONLY.compania, UPSHIFT, REQUIRED, REVERSE, 
 	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
-c006 = formonly.n_compania, UPSHIFT, REVERSE;
+c006 = FORMONLY.n_compania, UPSHIFT, REVERSE;
 
-q   = formonly.bt_p1, WIDGET='BUTTON', CONFIG='F15';
-r   = formonly.bt_p2, WIDGET='BUTTON', CONFIG='F15';
-s   = formonly.bt_p3, WIDGET='BUTTON', CONFIG='F15';
-t   = formonly.bt_p4, WIDGET='BUTTON', CONFIG='F15';
-u   = formonly.bt_p5, WIDGET='BUTTON', CONFIG='F15';
-v   = formonly.bt_p6, WIDGET='BUTTON', CONFIG='F15';
-w   = formonly.bt_p7, WIDGET='BUTTON', CONFIG='F15';
-x   = formonly.bt_p8, WIDGET='BUTTON', CONFIG='F15';
-y   = formonly.bt_p9, WIDGET='BUTTON', CONFIG='F15';
-z   = formonly.bt_p0, WIDGET='BUTTON', CONFIG='F15';
-l1   = formonly.bt_tipo, WIDGET='BUTTON', CONFIG='F16';
-l2   = formonly.bt_proceso, WIDGET='BUTTON', CONFIG='F17';
-l3   = formonly.bt_descripcion, WIDGET='BUTTON', CONFIG='F18';
+l1   = FORMONLY.bt_tipo, WIDGET='BUTTON', CONFIG='F15';
+l2   = FORMONLY.bt_proceso, WIDGET='BUTTON', CONFIG='F16';
+l3   = FORMONLY.bt_descripcion, WIDGET='BUTTON', CONFIG='F17';
 
-END
+end
 
 INSTRUCTIONS
-SCREEN RECORD ra_proc[10](p1, p2, p3, p4, p5, p6, p7, p8, p9, p0, g54_tipo, g54_proceso ,g54_nombre)
+SCREEN RECORD ra_proc[10](check, g54_tipo, g54_proceso ,g54_nombre)
 
 KEYS
 ##F2='Módulos'

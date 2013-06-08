@@ -1,847 +1,668 @@
-{*
- * Titulo           : cxpp209.4gl - Transf. Bancaria por Orden de Pago a 
- *				    Proveedores
- * Elaboracion      : 05-mar-2009
- * Autor            : YEC
- * Formato Ejecucion: fglrun cxpp209 base módulo compañía localidad
- *		      fglrun cxpp209 base módulo compañía localidad orden_pago
- *}
+--------------------------------------------------------------------------------
+-- Titulo           : cxpp209.4gl - Modificación del No. SRI de retenciones
+-- Elaboracion      : 07-Jun-2007
+-- Autor            : NPC
+-- Formato Ejecucion: fglrun cxpp209 base módulo compañía localidad
+-- Ultima Correccion: 
+-- Motivo Correccion: 
+--------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_num_rows	SMALLINT
-DEFINE vm_row_current	SMALLINT
-DEFINE vm_max_rows	SMALLINT
+DEFINE vm_nuevoprog     CHAR(400)
+DEFINE vm_tipo_doc	LIKE gent037.g37_tipo_doc
+DEFINE rm_det		ARRAY[10000] OF RECORD
+				p29_num_ret	LIKE cxpt029.p29_num_ret,
+				p01_nomprov	LIKE cxpt001.p01_nomprov,
+				p27_fecing	DATE,
+				p29_num_sri	LIKE cxpt029.p29_num_sri,
+				p27_estado	LIKE cxpt027.p27_estado
+			END RECORD
 DEFINE vm_max_det       SMALLINT
-DEFINE vm_num_det	SMALLINT
-DEFINE vm_tot_db	DECIMAL(14,2)
-DEFINE vm_tot_cr	DECIMAL(14,2)
-DEFINE rm_ordp		RECORD LIKE cxpt024.*
-DEFINE rm_prov		RECORD LIKE cxpt001.*
-DEFINE rm_mon		RECORD LIKE gent013.*
-DEFINE rm_bco		RECORD LIKE gent009.*
-DEFINE rm_ccomp		RECORD LIKE ctbt012.*
-DEFINE rm_ciacon	RECORD LIKE ctbt000.*
-DEFINE rm_ciapag	RECORD LIKE cxpt000.*
-DEFINE rm_pago		RECORD LIKE cxpt022.*
-DEFINE rm_fav		RECORD LIKE cxpt021.*
-DEFINE rm_ret		RECORD LIKE cxpt027.*
-DEFINE rm_orden ARRAY[10] OF CHAR(4)
+DEFINE vm_num_det       SMALLINT
+DEFINE vm_fecha_ini	DATE
+DEFINE vm_fecha_fin	DATE
+DEFINE rm_orden 	ARRAY[10] OF CHAR(4)
 DEFINE vm_columna_1	SMALLINT
 DEFINE vm_columna_2	SMALLINT
-DEFINE vm_cod_pago	LIKE cxpt022.p22_tipo_trn
-DEFINE vm_cod_aju	LIKE cxpt022.p22_tipo_trn
-DEFINE vm_cod_fav	LIKE cxpt021.p21_tipo_doc
-DEFINE vm_cod_cont	LIKE ctbt012.b12_tipo_comp
-DEFINE vm_num_pago	INTEGER
-DEFINE rm_rows	ARRAY [1000] OF INTEGER
-DEFINE rm_tran		ARRAY [200] OF RECORD
-		b13_cuenta	LIKE ctbt013.b13_cuenta,
-		b10_descripcion	LIKE ctbt010.b10_descripcion,
-		valor_debito	LIKE ctbt013.b13_valor_base,
-		valor_credito	LIKE ctbt013.b13_valor_base
-	END RECORD
+DEFINE vm_size_arr	INTEGER
+
+
 
 MAIN
 
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/cxpp209.error')
-CALL fgl_init4js()
+CALL startlog('../logs/cxpp209.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
-IF num_args() <> 4 AND num_args() <> 5 THEN    -- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
+IF num_args() <> 4 THEN   -- Validar # parametros correcto
+	CALL fl_mostrar_mensaje('Número de parametros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
-LET vg_base     = arg_val(1)
-LET vg_modulo   = arg_val(2)
-LET vg_codcia   = arg_val(3)
-LET vg_codloc   = arg_val(4)
+LET vg_base    = arg_val(1)
+LET vg_modulo  = arg_val(2)
+LET vg_codcia  = arg_val(3)
+LET vg_codloc  = arg_val(4)
 LET vg_proceso = 'cxpp209'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
-CALL control_master()
+CALL funcion_master()
 
 END MAIN
 
 
 
-FUNCTION control_master()
+FUNCTION funcion_master()
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
+DEFINE secuencia	LIKE gent037.g37_secuencia
 
 CALL fl_nivel_isolation()
-CALL fl_chequeo_mes_proceso_cxp(vg_codcia) RETURNING int_flag 
-IF int_flag THEN
-	RETURN
+CREATE TEMP TABLE tmp_sri(
+		p29_num_ret		INTEGER,
+		p01_nomprov		VARCHAR(50),
+		p27_fecing		DATE,
+		p29_num_sri		CHAR(16),
+		p27_estado		CHAR(1)
+	)
+LET vm_tipo_doc = 'RT'
+LET vm_max_det  = 10000
+LET lin_menu    = 0
+LET row_ini     = 3
+LET num_rows    = 22
+LET num_cols    = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
 END IF
-CREATE TEMP TABLE temp_pago 
-	(te_serial		SERIAL,
-	 te_cuenta		CHAR(12),
-	 te_glosa		VARCHAR(35),
-	 te_valor_db		DECIMAL(14,2),
-	 te_valor_cr		DECIMAL(14,2))
-LET vm_max_rows	= 1000
-LET vm_max_det  = 200
-OPEN WINDOW wf AT 3,2 WITH 22 ROWS, 80 COLUMNS
-    ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE 0,BORDER,
-	      MESSAGE LINE LAST - 2)
-OPEN FORM f_ordp FROM "../forms/cxpf209_1"
-DISPLAY FORM f_ordp
-LET vm_num_rows = 0
-LET vm_row_current = 0
-MENU 'OPCIONES'
-	BEFORE MENU
-		CALL control_proceso_orden_pago()
-		IF num_args() = 5 THEN
-			EXIT PROGRAM
-		END IF
-	COMMAND KEY('O') 'Orden Pago'
-		CALL control_proceso_orden_pago()
-	COMMAND KEY('S') 'Salir'
-		EXIT MENU
-END MENU
+OPEN WINDOW w_cxpp209 AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
+    ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE lin_menu,BORDER,
+	      MESSAGE LINE LAST - 1)
+IF vg_gui = 1 THEN
+        OPEN FORM f_cxpf209_1 FROM '../forms/cxpf209_1'
+ELSE
+        OPEN FORM f_cxpf209_1 FROM '../forms/cxpf209_1c'
+END IF
+DISPLAY FORM f_cxpf209_1
+CALL muestra_contadores_det(0)
+CALL borrar_cabecera()
+CALL borrar_detalle()
+CALL mostrar_cabecera_forma()
+CALL control_consulta()
 
 END FUNCTION
 
 
 
-FUNCTION control_proceso_orden_pago()
-DEFINE r		RECORD LIKE gent013.*
+FUNCTION control_consulta()
+DEFINE i,j,col		SMALLINT
+DEFINE query		CHAR(3000)
+DEFINE expr_sql         CHAR(400)
 
-LET vm_cod_pago	= 'PG'
-LET vm_cod_aju	= 'AJ'
-LET vm_cod_fav	= 'PA'
-LET vm_cod_cont	= 'ND'
-DELETE FROM temp_pago
-CLEAR FORM
-CALL muestra_titulos()
-LET int_flag = 0
-INITIALIZE rm_ordp.* TO NULL
-IF num_args() = 5 THEN
-	LET rm_ordp.p24_orden_pago = arg_val(5)
-	DISPLAY BY NAME rm_ordp.p24_orden_pago
-	IF NOT valida_orden_pago(rm_ordp.p24_orden_pago) THEN
-		EXIT PROGRAM
+LET vm_fecha_ini = TODAY
+LET vm_fecha_fin = TODAY
+WHILE TRUE
+	DELETE FROM tmp_sri 
+	LET vm_num_det = 0
+	CALL borrar_detalle()
+	CALL muestra_contadores_det(0)
+	CALL lee_parametros() RETURNING expr_sql
+	IF int_flag = 2 THEN
+		CONTINUE WHILE
 	END IF
-ELSE
-	CALL lee_orden_pago()
-END IF
-IF int_flag THEN
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania_contabilidad(vg_codcia) RETURNING rm_ciacon.*
-IF rm_ciacon.b00_compania IS NULL OR rm_ciacon.b00_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no existe o está bloqueada', 'stop')
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania_tesoreria(vg_codcia) RETURNING rm_ciapag.*
-BEGIN WORK
-WHENEVER ERROR CONTINUE
-DECLARE q_ordp CURSOR FOR
-	SELECT * FROM cxpt024 
-		WHERE p24_compania   = vg_codcia AND 
-		      p24_localidad  = vg_codloc AND 
-		      p24_orden_pago = rm_ordp.p24_orden_pago
-		FOR UPDATE
-OPEN q_ordp
-FETCH q_ordp INTO rm_ordp.*
-IF status < 0 THEN
-	ROLLBACK WORK
-	WHENEVER ERROR STOP
-	CALL fl_mensaje_bloqueo_otro_usuario()
-	RETURN
-END IF
-WHENEVER ERROR STOP
-CALL fl_lee_proveedor(rm_ordp.p24_codprov) RETURNING rm_prov.*
-IF fl_validar_cedruc_dig_ver(rm_prov.p01_tipo_doc, rm_prov.p01_num_doc) = 0 THEN
-	WHENEVER ERROR STOP
-	ROLLBACK WORK
-	RETURN
-END IF
-
-INITIALIZE rm_ccomp.* TO NULL
-LET rm_ccomp.b12_modulo      = vg_modulo
-LET rm_ccomp.b12_tipo_comp   = vm_cod_cont
-LET rm_ccomp.b12_fec_proceso = TODAY
-LET rm_ccomp.b12_glosa   = 'PROVEEDOR : ', rm_prov.p01_nomprov CLIPPED
-IF rm_ccomp.b12_glosa IS NULL THEN
--- OJO
-	LET rm_ccomp.b12_glosa   = 'PROVEEDOR : ', rm_prov.p01_nomprov CLIPPED
---	LET rm_ccomp.b12_glosa   = 'ORDEN DE PAGO # ', rm_ordp.p24_orden_pago
-END IF
-LET rm_ccomp.b12_moneda      = rm_ordp.p24_moneda
-LET rm_ccomp.b12_paridad     = rm_ordp.p24_paridad
-CALL fl_lee_moneda(rm_ordp.p24_moneda) RETURNING r.*
-DISPLAY BY NAME rm_ccomp.b12_tipo_comp, rm_ccomp.b12_fec_proceso,
-		rm_ccomp.b12_glosa,
-		rm_ccomp.b12_moneda,    rm_ccomp.b12_paridad
-DISPLAY r.g13_nombre TO tit_moneda
-CALL prepara_arreglo()
-IF vm_tot_db <> vm_tot_cr OR vm_tot_db + vm_tot_cr = 0 THEN
-	CALL fgl_winmessage(vg_producto, 'Comprobante descuadrado o sin valor', 'stop')
-	CLEAR FORM
-	ROLLBACK WORK
-	CALL muestra_titulos()
-END IF
-IF vm_tot_db <> rm_ordp.p24_total_cap + rm_ordp.p24_total_int OR 
-	vm_tot_cr <> rm_ordp.p24_total_ret + rm_ordp.p24_total_che THEN
-	CALL fgl_winmessage(vg_producto, 'No cuadran valores de cabecera con detalle en la orden de pago', 'stop')
-	CLEAR FORM
-	ROLLBACK WORK
-	CALL muestra_titulos()
-END IF
-CALL ubicarse_en_detalle()
-IF int_flag THEN
-	CLEAR FORM
-	ROLLBACK WORK
-	CALL muestra_titulos()
-	RETURN
-END IF
-CALL genera_comprobante_contable()
-DISPLAY BY NAME rm_ccomp.b12_tipo_comp, rm_ccomp.b12_num_comp
-IF rm_ordp.p24_tipo = 'P' THEN 
-	CALL genera_transaccion(vm_cod_pago)
-ELSE
-	CALL genera_documento_favor()
-END IF
-IF rm_ordp.p24_total_ret > 0 THEN
-	CALL genera_retencion()
-	CALL genera_transaccion(vm_cod_aju)
-END IF
-UPDATE cxpt024 SET p24_estado       = 'P',
-		   p24_medio_pago           = 'T', 
-		   p24_tip_contable = rm_ccomp.b12_tipo_comp,
-		   p24_num_contable = rm_ccomp.b12_num_comp
-	WHERE CURRENT OF q_ordp
-CALL fl_genera_saldos_proveedor(vg_codcia, vg_codloc, rm_ordp.p24_codprov)
-COMMIT WORK
-CALL fl_mayoriza_comprobante(vg_codcia, rm_ccomp.b12_tipo_comp, 
-			     rm_ccomp.b12_num_comp, 'M')
-
-CALL imprimir()
-
-CALL fl_mensaje_registro_ingresado()
-IF num_args() = 5 THEN
-	EXIT PROGRAM
-END IF
+	IF int_flag THEN
+		EXIT WHILE
+	END IF
+	FOR i = 1 TO 10
+		LET rm_orden[i] = '' 
+	END FOR
+	LET vm_columna_1  = 4
+	LET vm_columna_2  = 2
+	LET col           = 4
+	LET rm_orden[col] = 'DESC'
+	LET query = 'INSERT INTO tmp_sri ',
+			' SELECT p27_num_ret, p01_nomprov, ',
+				'DATE(p27_fecing) fecha_pro, p29_num_sri, ',
+				'p27_estado ',
+			' FROM cxpt027, cxpt001, OUTER cxpt029 ',
+			' WHERE p27_compania     = ', vg_codcia,
+			'   AND p27_localidad    = ', vg_codloc,
+			--'   AND p27_estado       = "A"',
+			'   AND DATE(p27_fecing) BETWEEN "', vm_fecha_ini,
+						  '" AND "', vm_fecha_fin,'"',
+			'   AND ', expr_sql CLIPPED, 
+			'   AND p01_codprov      = p27_codprov ',
+			'   AND p29_compania     = p27_compania ',
+			'   AND p29_localidad    = p27_localidad ',
+			'   AND p29_num_ret      = p27_num_ret '
+	PREPARE cons_temp FROM query
+	EXECUTE cons_temp
+	WHILE TRUE
+		LET query = 'SELECT * FROM tmp_sri ',
+			" ORDER BY ", vm_columna_1, ' ', rm_orden[vm_columna_1],
+		    	   	', ', vm_columna_2, ' ', rm_orden[vm_columna_2]
+		PREPARE deto FROM query
+		DECLARE q_deto CURSOR FOR deto
+		LET vm_num_det = 1
+		FOREACH q_deto INTO rm_det[vm_num_det].*
+			LET vm_num_det = vm_num_det + 1
+			IF vm_num_det > vm_max_det THEN
+				CALL fl_mensaje_arreglo_incompleto()
+				EXIT PROGRAM
+			END IF
+		END FOREACH
+		LET vm_num_det = vm_num_det - 1
+		IF vm_num_det = 0 THEN
+			CALL fl_mensaje_consulta_sin_registros()
+			EXIT WHILE
+		END IF
+		CALL set_count(vm_num_det)
+		LET int_flag = 0
+		DISPLAY ARRAY rm_det TO rm_det.*
+			ON KEY(INTERRUPT)
+				LET int_flag = 1
+				EXIT DISPLAY
+        		ON KEY(F1,CONTROL-W)
+				CALL control_visor_teclas_caracter_1() 
+			ON KEY(F5)
+				LET i = arr_curr()
+				LET j = scr_line()
+				IF rm_det[i].p27_estado = 'A' THEN
+					CALL control_modificar(i, j)
+					LET int_flag = 0
+				END IF
+			ON KEY(F6)
+				LET i = arr_curr()
+				LET j = scr_line()
+				CALL ver_retencion(i)
+				LET int_flag = 0
+			ON KEY(F15)
+				LET col = 1
+				EXIT DISPLAY
+			ON KEY(F16)
+				LET col = 2
+				EXIT DISPLAY
+			ON KEY(F17)
+				LET col = 3
+				EXIT DISPLAY
+			ON KEY(F18)
+				LET col = 4
+				EXIT DISPLAY
+			ON KEY(F19)
+				LET col = 5
+				EXIT DISPLAY
+			--#BEFORE DISPLAY
+				--#CALL dialog.keysetlabel('ACCEPT','')
+				--#CALL dialog.keysetlabel("F1","")
+				--#CALL dialog.keysetlabel("CONTROL-W","")
+			--#BEFORE ROW
+				--#LET i = arr_curr()
+				--#LET j = scr_line()
+				--#CALL muestra_contadores_det(i)
+				--#IF rm_det[i].p27_estado = 'A' THEN
+					--#CALL dialog.keysetlabel("F5","Modificar")
+				--#ELSE
+					--#CALL dialog.keysetlabel("F5","")
+				--#END IF
+			--#AFTER DISPLAY 
+				--#CONTINUE DISPLAY
+		END DISPLAY
+		IF int_flag = 1 THEN
+			EXIT WHILE
+		END IF
+		IF col <> vm_columna_1 THEN
+			LET vm_columna_2           = vm_columna_1 
+			LET rm_orden[vm_columna_2] = rm_orden[vm_columna_1]
+			LET vm_columna_1           = col 
+		END IF
+		IF rm_orden[vm_columna_1] = 'ASC' THEN
+			LET rm_orden[vm_columna_1] = 'DESC'
+		ELSE
+			LET rm_orden[vm_columna_1] = 'ASC'
+		END IF
+	END WHILE
+END WHILE
 
 END FUNCTION
-	
-	
 
-FUNCTION lee_orden_pago()
-DEFINE orden		LIKE cxpt024.p24_orden_pago
 
-LET int_flag = 0
+
+FUNCTION lee_parametros()
+DEFINE fecha_ini	DATE
+DEFINE fecha_ini_aux	DATE
+DEFINE fecha_fin	DATE
+DEFINE dia		SMALLINT
+DEFINE expr_sql		CHAR(400)
+DEFINE nulo 		CHAR(1)
+DEFINE mensaje		VARCHAR(250)
+
 OPTIONS INPUT NO WRAP
-INPUT BY NAME rm_ordp.p24_orden_pago WITHOUT DEFAULTS
-	ON KEY(F2)
-		IF infield(p24_orden_pago) THEN
-			CALL fl_ayuda_ordenes_pago_prov(vg_codcia, 
-							vg_codloc, 'A')
-				RETURNING orden
-			IF orden IS NOT NULL THEN
-				LET rm_ordp.p24_orden_pago = orden
-				DISPLAY BY NAME rm_ordp.p24_orden_pago
+INITIALIZE expr_sql, nulo TO NULL
+--LET fecha_ini = TODAY - (TODAY - MDY(01, 01, YEAR(TODAY))) UNITS DAY
+LET fecha_ini = MDY(12, 01, YEAR(TODAY) - 1)
+LET int_flag  = 0
+INPUT BY NAME vm_fecha_ini, vm_fecha_fin
+	WITHOUT DEFAULTS
+	ON KEY(INTERRUPT)
+		LET int_flag = 1
+		EXIT INPUT
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
+	BEFORE INPUT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
+	AFTER FIELD vm_fecha_ini 
+		IF vm_fecha_ini IS NOT NULL THEN
+			IF vm_fecha_ini > TODAY THEN
+				CALL fl_mostrar_mensaje('La fecha inicial no puede ser mayor a la de hoy.','exclamation')
+				NEXT FIELD vm_fecha_ini
 			END IF
-			LET int_flag = 0
+		ELSE
+			LET vm_fecha_ini = TODAY
+			DISPLAY BY NAME vm_fecha_ini
 		END IF
-	AFTER FIELD p24_orden_pago
-		IF rm_ordp.p24_orden_pago IS NOT NULL THEN
-			IF NOT valida_orden_pago(rm_ordp.p24_orden_pago) THEN
-				NEXT FIELD p24_orden_pago
+	AFTER FIELD vm_fecha_fin 
+		IF vm_fecha_fin IS NOT NULL THEN
+			IF vm_fecha_fin > TODAY THEN
+				CALL fl_mostrar_mensaje('La fecha final no puede ser mayor a la de hoy.','exclamation')
+				NEXT FIELD vm_fecha_fin
 			END IF
+		ELSE
+			LET vm_fecha_fin = TODAY
+			DISPLAY BY NAME vm_fecha_fin
+		END IF
+	AFTER INPUT
+		IF vm_fecha_ini > vm_fecha_fin THEN
+			CALL fl_mostrar_mensaje('Fecha inicial debe ser menor a la fecha final.','exclamation')
+			NEXT FIELD vm_fecha_ini
+		END IF
+		IF vm_fecha_ini < fecha_ini THEN
+			LET mensaje = 'La Fecha Inicial no puede ser menor que',
+					' la fecha del ',
+					fecha_ini USING "dd-mm-yyyy", '.'
+			CALL fl_mostrar_mensaje(mensaje CLIPPED, 'exclamation')
+			NEXT FIELD vm_fecha_ini
 		END IF
 END INPUT
-
-END FUNCTION
-
-
-
-FUNCTION muestra_titulos()
-
-DISPLAY 'Cuenta'        TO tit_col1
-DISPLAY 'Descripción'   TO tit_col2
-DISPLAY 'Valor Débito'  TO tit_col3
-DISPLAY 'Valor Crédito' TO tit_col4
-
-END FUNCTION
-
-
-
-FUNCTION prepara_arreglo()
-DEFINE valor		DECIMAL(14,2)
-DEFINE tot_pag		DECIMAL(14,2)
-DEFINE tot_ret		DECIMAL(14,2)
-DEFINE r		RECORD LIKE cxpt002.*
-DEFINE r_pdoc		RECORD LIKE cxpt025.*
-DEFINE r_dret		RECORD LIKE cxpt026.*
-DEFINE r_ret		RECORD LIKE ordt002.*
-DEFINE cuenta		LIKE ctbt010.b10_cuenta
-DEFINE i		SMALLINT
-DEFINE label		VARCHAR(35)
-
-CALL fl_lee_proveedor_localidad(vg_codcia, vg_codloc, rm_ordp.p24_codprov)
-	RETURNING r.*
-LET cuenta = r.p02_aux_prov_mb
-IF rm_ordp.p24_moneda <> rm_ciacon.b00_moneda_base THEN
-	LET cuenta = r.p02_aux_prov_ma
+IF int_flag THEN
+	RETURN nulo
 END IF
-DECLARE q_det CURSOR FOR 
-	SELECT * FROM cxpt025
-		WHERE p25_compania  = vg_codcia AND 
-		      p25_localidad = vg_codloc AND 
-		      p25_orden_pago = rm_ordp.p24_orden_pago
-		ORDER BY p25_secuencia
-LET vm_tot_db = 0
-LET vm_tot_cr = 0
-LET tot_pag   = 0
-LET tot_ret   = 0
-FOREACH q_det INTO r_pdoc.*
-LET label = rm_prov.p01_nomprov[1,15], '/', r_pdoc.p25_tipo_doc, '-', r_pdoc.p25_num_doc CLIPPED
-	LET valor = r_pdoc.p25_valor_cap + r_pdoc.p25_valor_int
-	LET tot_pag = tot_pag + valor
-{
-	LET label = r_pdoc.p25_tipo_doc, '-', r_pdoc.p25_num_doc CLIPPED,
-		    '-', r_pdoc.p25_dividendo USING '&&&'
-}
-	CALL inserta_tabla_temporal(cuenta, valor, label, 'D')
-	LET vm_tot_db = vm_tot_db + valor
-	IF r_pdoc.p25_valor_ret > 0 THEN
-		DECLARE q_ret CURSOR FOR 
-			SELECT * FROM cxpt026
-				WHERE p26_compania   = vg_codcia AND 
-				      p26_localidad  = vg_codloc AND 
-				      p26_orden_pago = rm_ordp.p24_orden_pago AND 
-				      p26_secuencia  = r_pdoc.p25_secuencia
-		FOREACH q_ret INTO r_dret.*
-			LET tot_ret = tot_ret + r_dret.p26_valor_ret
-			CALL fl_lee_tipo_retencion(vg_codcia, r_dret.p26_codigo_sri, r_dret.p26_tipo_ret,
-						   r_dret.p26_porcentaje)
-				RETURNING r_ret.*
-			CALL inserta_tabla_temporal(r_ret.c02_aux_cont, r_dret.p26_valor_ret, label, 'C')
-			LET vm_tot_cr = vm_tot_cr + r_dret.p26_valor_ret
-		END FOREACH
-	END IF
-END FOREACH
-IF rm_ordp.p24_tipo = 'P' AND 
-       (rm_ordp.p24_total_cap + rm_ordp.p24_total_int <> tot_pag OR
-	rm_ordp.p24_total_ret <> tot_ret) THEN
-	ROLLBACK WORK
-	CALL fgl_winmessage(vg_producto, 'No cuadran valores de cabecera contra detalle de la orden de pago', 'stop')
-	EXIT PROGRAM
-END IF
-IF rm_ordp.p24_tipo = 'A' THEN
-	LET cuenta = r.p02_aux_ant_mb
-	IF rm_ordp.p24_moneda <> rm_ciacon.b00_moneda_base THEN
-		LET cuenta = r.p02_aux_ant_ma
-	END IF
-	LET tot_pag = rm_ordp.p24_total_cap + rm_ordp.p24_total_int
-	LET vm_tot_db = tot_pag
-	CALL inserta_tabla_temporal(cuenta, tot_pag, label, 'D')
-END IF
-LET valor = tot_pag - tot_ret
-CALL fl_lee_banco_compania(vg_codcia, rm_ordp.p24_banco, rm_ordp.p24_numero_cta)
-	RETURNING rm_bco.*
-CALL inserta_tabla_temporal(rm_bco.g09_aux_cont, valor, label, 'C')
-LET vm_tot_cr = vm_tot_cr + valor
-DECLARE q_cont CURSOR FOR 
-	SELECT te_serial, te_cuenta, b10_descripcion, te_valor_db, te_valor_cr
-		FROM temp_pago, ctbt010
-		WHERE b10_compania = vg_codcia AND 
-		      te_cuenta    = b10_cuenta
-		ORDER BY 1
-LET i = 1
-FOREACH q_cont INTO valor, rm_tran[i].*
-	LET i = i + 1
-	IF i > vm_max_det THEN
-		EXIT FOREACH
-	END IF
-END FOREACH
-LET vm_num_det = i - 1
-FOR i = 1 TO fgl_scr_size('rm_tran')
-	IF i <= vm_num_det THEN
-		DISPLAY rm_tran[i].* TO rm_tran[i].*
-	END IF
-END FOR
-DISPLAY BY NAME vm_tot_db, vm_tot_cr
-
-END FUNCTION
-
-
-
-FUNCTION inserta_tabla_temporal(cuenta, valor, glosa, tipo_mov)
-DEFINE cuenta		LIKE ctbt010.b10_cuenta
-DEFINE valor		DECIMAL(14,2)
-DEFINE tipo_mov		CHAR(1)
-DEFINE valor_db		DECIMAL(14,2)
-DEFINE valor_cr		DECIMAL(14,2)
-DEFINE glosa		VARCHAR(35)
-
-LET valor_db = 0
-LET valor_cr = 0
-IF tipo_mov = 'D' THEN
-	LET valor_db = valor
-ELSE
-	LET valor_cr = valor
-END IF
-IF rm_ciapag.p00_tipo_egr_gen = 'D' THEN
-	INSERT INTO temp_pago VALUES (0, cuenta, glosa, valor_db, valor_cr)
-ELSE
-	SELECT * FROM temp_pago WHERE te_cuenta = cuenta
-	IF status = NOTFOUND THEN
-		INSERT INTO temp_pago VALUES (0, cuenta, NULL, valor_db, valor_cr)
-	ELSE
-		UPDATE temp_pago SET te_valor_db = te_valor_db + valor_db,
-		                     te_valor_cr = te_valor_cr + valor_cr
-			WHERE te_cuenta = cuenta
-	END IF
-END IF
-
-END FUNCTION
-
-
-
-FUNCTION ubicarse_en_detalle()
-DEFINE comando		VARCHAR(100)
-DEFINE resp		VARCHAR(6)
-
+OPTIONS INPUT WRAP
 LET int_flag = 0
-CALL set_count(vm_num_det)
-DISPLAY ARRAY rm_tran TO rm_tran.*
+CONSTRUCT BY NAME expr_sql ON p01_nomprov, p27_estado
 	ON KEY(INTERRUPT)
-		CALL fl_mensaje_abandonar_proceso() RETURNING resp
-		IF resp = 'Yes' THEN
+		LET int_flag = 2
+		EXIT CONSTRUCT
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
+	BEFORE CONSTRUCT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
+END CONSTRUCT
+IF int_flag = 2 THEN
+	RETURN nulo
+END IF
+RETURN expr_sql
+
+END FUNCTION
+
+
+
+FUNCTION control_modificar(i, j)
+DEFINE i, j		SMALLINT
+DEFINE aux_sri		LIKE cxpt029.p29_num_sri
+DEFINE r_p29		RECORD LIKE cxpt029.*
+DEFINE r_g37		RECORD LIKE gent037.*
+DEFINE sec_sri		LIKE gent037.g37_sec_num_sri
+DEFINE resul		SMALLINT
+DEFINE cuantos		SMALLINT
+
+BEGIN WORK
+	WHENEVER ERROR CONTINUE
+	DECLARE q_modsri2 CURSOR FOR
+		SELECT * FROM cxpt029
+			WHERE p29_compania  = vg_codcia
+			  AND p29_localidad = vg_codloc
+			  AND p29_num_ret   = rm_det[i].p29_num_ret
+		FOR UPDATE
+	OPEN q_modsri2
+	FETCH q_modsri2 INTO r_p29.*
+	IF STATUS < 0 THEN
+		ROLLBACK WORK
+		CALL fl_mostrar_mensaje('Lo siento ahora no puede modificar este No. del SRI, lo tiene bloqueado otro usuario.', 'exclamation')
+		WHENEVER ERROR STOP
+		RETURN
+	END IF
+	DECLARE q_sri CURSOR FOR
+		SELECT * FROM gent037
+			WHERE g37_compania  =  vg_codcia
+			  AND g37_localidad =  vg_codloc
+			  AND g37_tipo_doc  =  vm_tipo_doc
+			{--
+		  	  AND g37_fecha_emi <= DATE(TODAY)
+		  	  AND g37_fecha_exp >= DATE(TODAY)
+			--}
+			  AND g37_secuencia IN
+				(SELECT MAX(g37_secuencia)
+					FROM gent037
+					WHERE g37_compania  = vg_codcia
+					  AND g37_localidad = vg_codloc
+					  AND g37_tipo_doc  = vm_tipo_doc)
+		FOR UPDATE
+	OPEN q_sri
+	FETCH q_sri INTO r_g37.*
+	IF STATUS < 0 THEN
+		ROLLBACK WORK
+		CALL fl_mostrar_mensaje('Lo siento ahora no puede modificar este No. del SRI, porque ésta secuencia se encuentra bloqueada por otro usuario.', 'exclamation')
+		WHENEVER ERROR STOP
+		RETURN
+	END IF
+	WHENEVER ERROR STOP
+	SELECT p29_num_sri INTO rm_det[i].p29_num_sri
+		FROM cxpt029
+		WHERE p29_compania  = vg_codcia
+		  AND p29_localidad = vg_codloc
+		  AND p29_num_ret   = rm_det[i].p29_num_ret
+		  AND p29_num_sri[9,15] IN
+			(SELECT MAX(p29_num_sri[9,15])
+				FROM cxpt029
+				WHERE p29_compania  = vg_codcia
+				  AND p29_localidad = vg_codloc
+		  		  AND p29_num_ret   = rm_det[i].p29_num_ret)
+	OPTIONS INPUT WRAP
+	LET int_flag = 0
+	INPUT rm_det[i].p29_num_sri WITHOUT DEFAULTS FROM rm_det[j].p29_num_sri
+		ON KEY(INTERRUPT)
+			LET rm_det[i].p29_num_sri = aux_sri
+			DISPLAY rm_det[i].p29_num_sri TO rm_det[j].p29_num_sri
 			LET int_flag = 1
-			EXIT DISPLAY
-		END IF
-		LET int_flag = 0
-	ON KEY(F5)
-		IF rm_ordp.p24_tipo = 'P' THEN
-			LET comando = 'fglrun cxpp204 ', vg_base, ' ', 
-				       vg_modulo, ' ', vg_codcia, ' ', 
-				       vg_codloc, ' ', rm_ordp.p24_orden_pago
-		ELSE
-			display 'EN CXCP206 ANTES DEL RUN .. '
-			LET comando = 'fglrun cxpp205 ', vg_base, ' ', 
-				       vg_modulo, ' ', vg_codcia, ' ', 
-				       vg_codloc, ' ', rm_ordp.p24_orden_pago
-		END IF
-		RUN comando	
-END DISPLAY
-
-END FUNCTION
-
-
-
-FUNCTION genera_transaccion(cod_trn)
-DEFINE cod_trn		LIKE cxpt022.p22_tipo_trn
-DEFINE r_dpag		RECORD LIKE cxpt023.*
-DEFINE r_doc		RECORD LIKE cxpt020.*
-DEFINE r_pdoc		RECORD LIKE cxpt025.*
-DEFINE i		SMALLINT
-DEFINE label		VARCHAR(100)
-DEFINE tot_cap		DECIMAL(14,2)
-DEFINE tot_int		DECIMAL(14,2)
-DEFINE tot_mora		DECIMAL(14,2)
-
-SET LOCK MODE TO WAIT 5
-INITIALIZE rm_pago.* TO NULL
-LET rm_pago.p22_num_trn = fl_actualiza_control_secuencias(vg_codcia, vg_codloc,
-		vg_modulo, 'AA', cod_trn)
-IF rm_pago.p22_num_trn <= 0 THEN
-	ROLLBACK WORK
-	EXIT PROGRAM
-END IF
-IF cod_trn = vm_cod_pago THEN
-	LET vm_num_pago = rm_pago.p22_num_trn
-END IF
-LET rm_pago.p22_compania 	= vg_codcia
-LET rm_pago.p22_localidad 	= vg_codloc
-LET rm_pago.p22_codprov 	= rm_ordp.p24_codprov
-LET rm_pago.p22_tipo_trn	= cod_trn
-LET rm_pago.p22_referencia 	= rm_ordp.p24_referencia
-IF rm_pago.p22_referencia IS NULL OR rm_pago.p22_referencia = '' THEN
-	LET rm_pago.p22_referencia = 'ORDEN DE PAGO # ', rm_ordp.p24_orden_pago
-				      USING '####&'
-END IF	
-IF cod_trn = vm_cod_aju THEN
-	LET rm_pago.p22_referencia = 'RETENCIONES ORDEN DE PAGO # ', rm_ordp.p24_orden_pago
-				      USING '####&'
-END IF	
-LET rm_pago.p22_fecha_emi 	= TODAY
-LET rm_pago.p22_moneda 		= rm_ordp.p24_moneda
-LET rm_pago.p22_paridad 	= rm_ordp.p24_paridad
-LET rm_pago.p22_tasa_mora 	= 0
-IF cod_trn = vm_cod_pago THEN
-	LET rm_pago.p22_tasa_mora 	= rm_ordp.p24_tasa_mora
-	LET rm_pago.p22_total_cap 	= (rm_ordp.p24_total_cap - 
-					  rm_ordp.p24_total_ret) * -1
-	LET rm_pago.p22_total_int 	= rm_ordp.p24_total_int * -1
-	LET rm_pago.p22_total_mora 	= rm_ordp.p24_total_mora * -1
-ELSE
-	LET rm_pago.p22_total_cap 	= rm_ordp.p24_total_ret * -1
-	LET rm_pago.p22_total_int 	= 0
-	LET rm_pago.p22_total_mora 	= 0
-END IF
-LET rm_pago.p22_subtipo 	= rm_ordp.p24_subtipo
-LET rm_pago.p22_origen 		= 'A'
-LET rm_pago.p22_orden_pago	= rm_ordp.p24_orden_pago
-LET rm_pago.p22_usuario 	= vg_usuario
-LET rm_pago.p22_fecing 		= CURRENT
-INSERT INTO cxpt022 VALUES (rm_pago.*)
-LET tot_cap  = 0
-LET tot_int  = 0
-LET tot_mora = 0
-LET i = 0
-FOREACH q_det INTO r_pdoc.*
-	IF cod_trn = vm_cod_aju THEN
-		IF r_pdoc.p25_valor_ret = 0 THEN
-			CONTINUE FOREACH
-		END IF
-		LET r_pdoc.p25_valor_cap  = r_pdoc.p25_valor_ret
-		LET r_pdoc.p25_valor_int  = 0
-		LET r_pdoc.p25_valor_mora = 0
-	ELSE
-		LET r_pdoc.p25_valor_cap  = r_pdoc.p25_valor_cap - 
-					    r_pdoc.p25_valor_ret
-	END IF
-	INITIALIZE r_dpag.* TO NULL
-	CALL fl_lee_documento_deudor_cxp(vg_codcia, vg_codloc, 
-		rm_pago.p22_codprov, r_pdoc.p25_tipo_doc, r_pdoc.p25_num_doc,
-		r_pdoc.p25_dividendo)
-		RETURNING r_doc.*
-	IF r_doc.p20_saldo_cap < r_pdoc.p25_valor_cap THEN
-		LET label = 'Saldo capital de documento: ', 
-			     r_pdoc.p25_tipo_doc, '-',
-			     r_pdoc.p25_num_doc CLIPPED,  '-',
-			     r_pdoc.p25_dividendo USING '&&'
-		IF cod_trn = vm_cod_aju THEN
-			LET label = label CLIPPED, ' menor que valor retenido'
-		ELSE
-			LET label = label CLIPPED, ' menor que valor pagado'
-		END IF
+			EXIT INPUT
+	        ON KEY(F1,CONTROL-W)
+			CALL control_visor_teclas_caracter_2() 
+		ON KEY(F5)
+			CALL ver_retencion(i)
+			LET int_flag = 0
+		BEFORE INPUT
+			--#CALL dialog.keysetlabel("F1","")
+			--#CALL dialog.keysetlabel("CONTROL-W","")
+			--#CALL dialog.keysetlabel("F5","Retencion")
+			LET aux_sri = rm_det[i].p29_num_sri
+			CALL validar_num_sri(aux_sri, i, j) RETURNING resul
+			CASE resul
+				WHEN -1
+					LET int_flag = 1
+					EXIT INPUT
+				WHEN 0
+					NEXT FIELD p29_num_sri
+			END CASE
+		AFTER FIELD p29_num_sri
+			IF rm_det[i].p29_num_sri IS NOT NULL THEN
+				CALL validar_num_sri(aux_sri, i, j)
+					RETURNING resul
+				CASE resul
+					WHEN -1
+						LET int_flag = 1
+						EXIT INPUT
+					WHEN 0
+						NEXT FIELD p29_num_sri
+				END CASE
+			ELSE
+				LET rm_det[i].p29_num_sri = aux_sri
+				DISPLAY rm_det[i].p29_num_sri TO
+					rm_det[j].p29_num_sri
+			END IF
+		AFTER INPUT
+			IF rm_det[i].p29_num_sri IS NOT NULL THEN
+				CALL validar_num_sri(aux_sri, i, j)
+					RETURNING resul
+				CASE resul
+					WHEN -1
+						LET int_flag = 1
+						EXIT INPUT
+					WHEN 0
+						NEXT FIELD p29_num_sri
+				END CASE
+			END IF
+	END INPUT
+	IF int_flag THEN
 		ROLLBACK WORK
-		CALL fgl_winmessage(vg_producto, label, 'stop')
-		EXIT PROGRAM
+		RETURN
 	END IF
-	IF r_doc.p20_saldo_int < r_pdoc.p25_valor_int THEN
-		LET label = 'Saldo interés de documento: ', 
-			     r_pdoc.p25_tipo_doc, '-',
-			     r_pdoc.p25_num_doc CLIPPED,  '-',
-			     r_pdoc.p25_dividendo USING '&&'
-		IF cod_trn = vm_cod_aju THEN
-			LET label = label CLIPPED, ' menor que valor retenido'
-		ELSE
-			LET label = label CLIPPED, ' menor que valor pagado'
-		END IF
-		ROLLBACK WORK
-		CALL fgl_winmessage(vg_producto, label, 'stop')
-		EXIT PROGRAM
+	LET cuantos = 8 + r_g37.g37_num_dig_sri
+	LET sec_sri = rm_det[i].p29_num_sri[9, cuantos] USING "########"
+	UPDATE gent037 SET g37_sec_num_sri = sec_sri
+		WHERE g37_compania    = r_g37.g37_compania
+		  AND g37_localidad   = r_g37.g37_localidad
+		  AND g37_tipo_doc    = r_g37.g37_tipo_doc
+		  AND g37_secuencia   = r_g37.g37_secuencia
+		  AND g37_sec_num_sri < sec_sri
+	OPEN q_modsri2
+	FETCH q_modsri2 INTO r_p29.*
+	IF STATUS <> NOTFOUND THEN
+		DELETE FROM cxpt029 WHERE CURRENT OF q_modsri2
 	END IF
-	LET i = i + 1
-    	LET r_dpag.p23_compania 	= vg_codcia
-    	LET r_dpag.p23_localidad 	= vg_codloc
-    	LET r_dpag.p23_codprov 		= rm_pago.p22_codprov
-    	LET r_dpag.p23_tipo_trn 	= rm_pago.p22_tipo_trn
-    	LET r_dpag.p23_num_trn 		= rm_pago.p22_num_trn
-    	LET r_dpag.p23_orden 		= i
-    	LET r_dpag.p23_tipo_doc 	= r_pdoc.p25_tipo_doc
-    	LET r_dpag.p23_num_doc 		= r_pdoc.p25_num_doc
-    	LET r_dpag.p23_div_doc 		= r_pdoc.p25_dividendo
-    	LET r_dpag.p23_valor_cap 	= r_pdoc.p25_valor_cap * -1
-    	LET r_dpag.p23_valor_int 	= r_pdoc.p25_valor_int * -1
-    	LET r_dpag.p23_valor_mora 	= r_pdoc.p25_valor_mora * -1
-    	LET r_dpag.p23_saldo_cap 	= r_doc.p20_saldo_cap
-    	LET r_dpag.p23_saldo_int 	= r_doc.p20_saldo_int
-	LET tot_cap  = tot_cap  + r_pdoc.p25_valor_cap
-	LET tot_int  = tot_int  + r_pdoc.p25_valor_int
-	LET tot_mora = tot_mora + r_pdoc.p25_valor_mora
-	INSERT INTO cxpt023 VALUES (r_dpag.*)
-	UPDATE cxpt020 SET p20_saldo_cap= p20_saldo_cap - r_pdoc.p25_valor_cap,
-	                   p20_saldo_int= p20_saldo_int - r_pdoc.p25_valor_int
-		WHERE p20_compania  = vg_codcia AND 
-		      p20_localidad = vg_codloc AND 
-		      p20_codprov   = r_doc.p20_codprov AND 
-		      p20_tipo_doc  = r_doc.p20_tipo_doc AND 
-		      p20_num_doc   = r_doc.p20_num_doc AND 
-		      p20_dividendo = r_doc.p20_dividendo 
-END FOREACH
+	INSERT INTO cxpt029
+		VALUES (vg_codcia, vg_codloc, rm_det[i].p29_num_ret,
+			rm_det[i].p29_num_sri)
+	SELECT * FROM cxpt032
+		WHERE p32_compania  = vg_codcia
+		  AND p32_localidad = vg_codloc
+		  AND p32_num_ret   = rm_det[i].p29_num_ret
+		  AND p32_tipo_doc  = r_g37.g37_tipo_doc
+		  AND p32_secuencia = r_g37.g37_secuencia
+	IF STATUS = NOTFOUND THEN
+		INSERT INTO cxpt032
+			VALUES (vg_codcia, vg_codloc, rm_det[i].p29_num_ret,
+				r_g37.g37_tipo_doc, r_g37.g37_secuencia)
+	END IF
+	UPDATE tmp_sri
+		SET p29_num_sri = rm_det[i].p29_num_sri
+		WHERE p01_nomprov = rm_det[i].p01_nomprov
+		  AND p29_num_ret = rm_det[i].p29_num_ret
+COMMIT WORK
+CALL fl_mensaje_registro_modificado()
 
 END FUNCTION
 
 
 
-FUNCTION genera_retencion()
-DEFINE r_dpag		RECORD LIKE cxpt023.*
-DEFINE r_doc		RECORD LIKE cxpt020.*
-DEFINE r_pdoc		RECORD LIKE cxpt025.*
-DEFINE r_pret		RECORD LIKE cxpt026.*
-DEFINE r_dret		RECORD LIKE cxpt028.*
-DEFINE i		SMALLINT
-DEFINE tot_ret		DECIMAL(14,2)
+FUNCTION validar_num_sri(aux_sri, i, j)
+DEFINE aux_sri		LIKE cxpt029.p29_num_sri
+DEFINE i, j		SMALLINT
+DEFINE r_g37		RECORD LIKE gent037.*
+DEFINE cont		INTEGER
+DEFINE flag		SMALLINT
 
-SET LOCK MODE TO WAIT 5
-INITIALIZE rm_ret.* TO NULL
-LET rm_ret.p27_num_ret = fl_actualiza_control_secuencias(vg_codcia, vg_codloc,
-		vg_modulo, 'AA', 'RT')
-IF rm_ret.p27_num_ret <= 0 THEN
-	ROLLBACK WORK
-	EXIT PROGRAM
+IF valida_sri(i) THEN
+	CALL fl_validacion_num_sri(vg_codcia, vg_codloc, vm_tipo_doc, 'N',
+					rm_det[i].p29_num_sri)
+		RETURNING r_g37.*, rm_det[i].p29_num_sri, flag
+	CASE flag
+		WHEN -1
+			RETURN -1
+		WHEN 0
+			RETURN  0
+	END CASE
 END IF
-LET rm_ret.p27_compania     = vg_codcia
-LET rm_ret.p27_localidad    = vg_codloc
-LET rm_ret.p27_estado       = 'A'
-LET rm_ret.p27_codprov 	    = rm_ordp.p24_codprov
-LET rm_ret.p27_moneda 	    = rm_ordp.p24_moneda
-LET rm_ret.p27_paridad 	    = rm_ordp.p24_paridad
-LET rm_ret.p27_total_ret    = rm_ordp.p24_total_ret
-LET rm_ret.p27_tip_contable = rm_ccomp.b12_tipo_comp
-LET rm_ret.p27_num_contable = rm_ccomp.b12_num_comp
-LET rm_ret.p27_origen 	    = 'A'
-LET rm_ret.p27_usuario 	    = vg_usuario
-LET rm_ret.p27_fecing 	    = CURRENT
-INSERT INTO cxpt027 VALUES (rm_ret.*)
-LET i = 0
-FOREACH q_det INTO r_pdoc.*
-	IF r_pdoc.p25_valor_ret = 0 THEN
-		CONTINUE FOREACH
+DISPLAY rm_det[i].p29_num_sri TO rm_det[j].p29_num_sri
+IF aux_sri <> rm_det[i].p29_num_sri THEN
+	SELECT COUNT(*) INTO cont FROM cxpt029
+		WHERE p29_compania  = vg_codcia
+		  AND p29_localidad = vg_codloc
+  		  AND p29_num_sri   = rm_det[i].p29_num_sri
+	IF cont > 0 THEN
+		CALL fl_mostrar_mensaje('La secuencia del SRI ' || rm_det[i].p29_num_sri[9,15] || ' ya existe.','exclamation')
+		RETURN 0
 	END IF
-	CALL fl_lee_documento_deudor_cxp(vg_codcia, vg_codloc, 
-		r_pdoc.p25_codprov, r_pdoc.p25_tipo_doc, r_pdoc.p25_num_doc,
-		r_pdoc.p25_dividendo)
-		RETURNING r_doc.*
-	DECLARE q_dret CURSOR FOR SELECT * FROM cxpt026
-		WHERE p26_compania   = vg_codcia AND 
-		      p26_localidad  = vg_codloc AND 
-		      p26_orden_pago = r_pdoc.p25_orden_pago AND 
-		      p26_secuencia  = r_pdoc.p25_secuencia
-	LET tot_ret = 0
-	FOREACH q_dret INTO r_pret.*
-		INITIALIZE r_dret.* TO NULL
-		LET i = i + 1
-		LET tot_ret = tot_ret + r_pret.p26_valor_ret 
-    		LET r_dret.p28_compania 	= vg_codcia
-    		LET r_dret.p28_localidad 	= vg_codloc
-    		LET r_dret.p28_num_ret 		= rm_ret.p27_num_ret
-    		LET r_dret.p28_secuencia 	= i
-    		LET r_dret.p28_codprov 		= rm_ret.p27_codprov
-    		LET r_dret.p28_tipo_doc 	= r_pdoc.p25_tipo_doc
-    		LET r_dret.p28_num_doc 		= r_pdoc.p25_num_doc
-    		LET r_dret.p28_dividendo 	= r_pdoc.p25_dividendo
-    		LET r_dret.p28_valor_fact 	= r_doc.p20_valor_fact
-    		LET r_dret.p28_tipo_ret 	= r_pret.p26_tipo_ret
-    		LET r_dret.p28_porcentaje 	= r_pret.p26_porcentaje
-    		LET r_dret.p28_valor_base 	= r_pret.p26_valor_base
-    		LET r_dret.p28_valor_ret 	= r_pret.p26_valor_ret
-		INSERT INTO cxpt028 VALUES (r_dret.*)
-	END FOREACH
-	IF tot_ret <> r_pdoc.p25_valor_ret THEN
-		ROLLBACK WORK
-		CALL fgl_winmessage(vg_producto, 'Descuadre en retención de cabecera y detalle', 'stop')
-		EXIT PROGRAM
-	END IF
-END FOREACH
-
-END FUNCTION
-
-
-
-FUNCTION genera_documento_favor()
-
-INITIALIZE rm_fav.* TO NULL
-LET rm_fav.p21_num_doc = fl_actualiza_control_secuencias(vg_codcia, vg_codloc,
-		vg_modulo, 'AA', vm_cod_fav)
-IF rm_fav.p21_num_doc <= 0 THEN
-	ROLLBACK WORK
-	EXIT PROGRAM
 END IF
-LET rm_fav.p21_compania 		= vg_codcia
-LET rm_fav.p21_localidad		= vg_codloc
-LET rm_fav.p21_codprov 		= rm_ordp.p24_codprov
-LET rm_fav.p21_tipo_doc 		= vm_cod_fav
-LET rm_fav.p21_referencia 	= rm_ordp.p24_referencia
-IF rm_ordp.p24_referencia IS NULL THEN
-	LET rm_fav.p21_referencia = '.'
-END IF	
-LET rm_fav.p21_fecha_emi 	= TODAY
-LET rm_fav.p21_moneda 		= rm_ordp.p24_moneda
-LET rm_fav.p21_paridad 		= rm_ordp.p24_paridad
-LET rm_fav.p21_valor 		= rm_ordp.p24_total_cap
-LET rm_fav.p21_saldo 		= rm_ordp.p24_total_cap
-LET rm_fav.p21_subtipo 		= rm_ordp.p24_subtipo
-LET rm_fav.p21_origen 		= 'A'
-LET rm_fav.p21_orden_pago	= rm_ordp.p24_orden_pago
-LET rm_fav.p21_usuario 		= vg_usuario
-LET rm_fav.p21_fecing 		= CURRENT
-INSERT INTO cxpt021 VALUES (rm_fav.*)
-
-END FUNCTION
-
-
-
-FUNCTION genera_comprobante_contable()
-DEFINE r		RECORD LIKE ctbt013.*
-DEFINE i		SMALLINT
-DEFINE cuenta		LIKE ctbt010.b10_cuenta
-DEFINE glosa		LIKE ctbt013.b13_glosa
-DEFINE valor_db		LIKE ctbt013.b13_valor_base
-DEFINE valor_cr		LIKE ctbt013.b13_valor_base
-
-LET rm_ccomp.b12_compania 	= vg_codcia
-LET rm_ccomp.b12_tipo_comp 	= vm_cod_cont
-LET rm_ccomp.b12_num_comp 	= fl_numera_comprobante_contable(vg_codcia, 
-					vm_cod_cont, YEAR(TODAY), MONTH(TODAY)) 
-IF rm_ccomp.b12_num_comp <= 0 THEN
-	ROLLBACK WORK
-	EXIT PROGRAM
-END IF
-LET rm_ccomp.b12_estado 	= 'A'
-LET rm_ccomp.b12_origen 	= 'A'
-LET rm_ccomp.b12_usuario 	= vg_usuario
-LET rm_ccomp.b12_fecing 	= CURRENT
-
-INSERT INTO ctbt012 VALUES (rm_ccomp.*) 
-DECLARE q_dte CURSOR FOR SELECT * FROM temp_pago
-	ORDER BY te_serial
---OJO ULTIMO ARREGLO
-FOREACH q_dte INTO i, cuenta, glosa, valor_db, valor_cr
-display 'EN CXPP206 ... GLOSA.. :' ,  glosa
-	INITIALIZE r.* TO NULL 
-    	LET r.b13_compania 	= vg_codcia
-    	LET r.b13_tipo_comp 	= rm_ccomp.b12_tipo_comp
-    	LET r.b13_num_comp      = rm_ccomp.b12_num_comp
-    	LET r.b13_secuencia 	= i
-    	LET r.b13_cuenta 	= cuenta
-	IF cuenta = rm_bco.g09_aux_cont THEN
-    		LET r.b13_tipo_doc 	= 'NDB'
-	END IF
-	IF glosa  IS NULL  THEN
-		LET glosa   = 'PROVEEDOR : ', rm_prov.p01_nomprov CLIPPED
-	END IF
-    	LET r.b13_glosa 	= glosa
-    	LET r.b13_valor_base 	= 0
-    	LET r.b13_valor_aux 	= 0
-	IF valor_db > 0 THEN
-    		LET r.b13_valor_base = valor_db
-	END IF
-	IF valor_cr > 0 THEN
-    		LET r.b13_valor_base = valor_cr * -1
-	END IF
-    	LET r.b13_fec_proceso 	= TODAY
-    	LET r.b13_num_concil 	= 0
-    	LET r.b13_codprov 	= rm_ordp.p24_codprov
-	INSERT INTO ctbt013 VALUES (r.*) 
-END FOREACH
-
-END FUNCTION
-
-
-
-FUNCTION valida_orden_pago(orden)
-DEFINE orden		LIKE cxpt024.p24_orden_pago
-DEFINE r		RECORD LIKE cxpt024.*
-DEFINE icono		CHAR(12)
-
-CALL fl_lee_orden_pago_cxp(vg_codcia, vg_codloc, orden) RETURNING r.*
-LET icono = 'exclamation'
-IF num_args() = 5 THEN
-	LET icono = 'stop'
-END IF
-IF r.p24_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe orden de pago', icono)
-	RETURN 0
-END IF
-LET rm_ordp.* = r.*
-IF rm_ordp.p24_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Orden de pago no está activa', icono)
-	RETURN 0
-END IF
-IF rm_ordp.p24_total_cap + rm_ordp.p24_total_int + rm_ordp.p24_total_ret +
-	rm_ordp.p24_total_che = 0 THEN
-	CALL fgl_winmessage(vg_producto, 'La orden de pago no tiene valor', icono)
-	RETURN 0
-END IF
-{
-IF rm_ordp.p24_medio_pago <> 'T' THEN
-	CALL fgl_winmessage(vg_producto, 'La orden de pago no se cancela con transferencia.', icono)
-	RETURN 0
-END IF
-}
 RETURN 1
 
 END FUNCTION
 
 
 
-FUNCTION imprimir()
+FUNCTION valida_sri(i)
+DEFINE i		SMALLINT
+DEFINE r_g37		RECORD LIKE gent037.*
+DEFINE r_p27		RECORD LIKE cxpt027.*
 
-DEFINE resp			VARCHAR(10)
-DEFINE retenciones		SMALLINT
-DEFINE comando			VARCHAR(250)
-
-LET comando = 'cd ..', vg_separador, '..', vg_separador,
-	      'TESORERIA', vg_separador, 'fuentes', 
-	      vg_separador, '; fglrun cxpp403 ', vg_base, ' ',
-	      'TE', vg_codcia, ' ', vg_codloc, ' ', rm_ccomp.b12_tipo_comp, 
-	      ' ', rm_ccomp.b12_num_comp
-
-RUN comando
-
-SELECT COUNT(*) INTO retenciones FROM cxpt028
-WHERE p28_compania  = rm_ret.p27_compania
-  AND p28_localidad = rm_ret.p27_localidad
-  AND p28_num_ret   = rm_ret.p27_num_ret
-
-IF retenciones = 0 THEN
-	RETURN
-END IF
-
-CALL fgl_winquestion(vg_producto, 'Desea imprimir comprobante de retencion?', 
-	'No', 'Yes|No', 'question', 1) RETURNING resp
-IF resp = 'Yes' THEN
-	LET comando = 'cd ..', vg_separador, '..', vg_separador,
-		      'TESORERIA', vg_separador, 'fuentes', 
-		      vg_separador, '; fglrun cxpp405 ', vg_base, ' ',
-		      'TE', vg_codcia, ' ', vg_codloc,
-		      ' ', rm_ret.p27_num_ret    
-
-	RUN comando
+CALL fl_lee_retencion_cxp(vg_codcia, vg_codloc, rm_det[i].p29_num_ret)
+	RETURNING r_p27.*
+INITIALIZE r_g37.* TO NULL
+SELECT * INTO r_g37.*
+	FROM gent037
+	WHERE g37_compania   = vg_codcia
+	  AND g37_localidad  = vg_codloc
+	  AND g37_tipo_doc   = vm_tipo_doc
+	  AND g37_secuencia IN
+		(SELECT MAX(g37_secuencia)
+			FROM gent037
+			WHERE g37_compania  = vg_codcia
+			  AND g37_localidad = vg_codloc
+			  AND g37_tipo_doc  = vm_tipo_doc)
+IF DATE(r_p27.p27_fecing) >= r_g37.g37_fecha_emi AND
+   DATE(r_p27.p27_fecing) <= r_g37.g37_fecha_exp
+THEN
+	RETURN 1
+ELSE
+	RETURN 0
 END IF
 
 END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION borrar_cabecera()
 
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'stop')
-	EXIT PROGRAM
+CLEAR vm_fecha_ini, vm_fecha_fin
+INITIALIZE vm_fecha_ini, vm_fecha_fin TO NULL
+
+END FUNCTION
+
+
+
+FUNCTION borrar_detalle()
+DEFINE i  		SMALLINT
+
+CALL muestra_contadores_det(0)
+CALL retorna_arreglo()
+
+FOR i = 1 TO vm_size_arr   
+        INITIALIZE rm_det[i].* TO NULL
+        CLEAR rm_det[i].*
+END FOR
+
+END FUNCTION
+
+
+
+FUNCTION muestra_contadores_det(cor)
+DEFINE cor	           SMALLINT
+
+IF vg_gui = 1 THEN
+	DISPLAY "" AT 21, 2
+	DISPLAY cor, " de ", vm_num_det AT 21, 6
 END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'stop')
-	EXIT PROGRAM
+
+END FUNCTION
+
+
+ 
+FUNCTION mostrar_cabecera_forma()
+
+--#DISPLAY 'Retencion'            TO tit_col1
+--#DISPLAY 'Nombre del Proveedor' TO tit_col2
+--#DISPLAY 'Fecha'                TO tit_col3
+--#DISPLAY 'Número del SRI'       TO tit_col4
+--#DISPLAY 'E'                    TO tit_col5
+
+END FUNCTION
+
+
+
+FUNCTION ver_retencion(i)
+DEFINE i		SMALLINT
+DEFINE run_prog		CHAR(10)
+DEFINE r_p27		RECORD LIKE cxpt027.*
+
+LET run_prog = '; fglrun '
+IF vg_gui = 0 THEN
+	LET run_prog = '; fglgo '
 END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 'stop')
-	EXIT PROGRAM
+CALL fl_lee_retencion_cxp(vg_codcia, vg_codloc, rm_det[i].p29_num_ret)
+	RETURNING r_p27.*
+LET vm_nuevoprog = 'cd ..', vg_separador, '..', vg_separador, 'TESORERIA',
+	vg_separador, 'fuentes', vg_separador, run_prog, 'cxpp304 ', vg_base,
+	' TE ', vg_codcia, ' ', vg_codloc, ' ', r_p27.p27_codprov, ' ',
+	rm_det[i].p29_num_ret
+RUN vm_nuevoprog
+
+END FUNCTION
+
+
+
+FUNCTION retorna_arreglo()
+
+--#LET vm_size_arr = fgl_scr_size('rm_det')
+IF vg_gui = 0 THEN
+        LET vm_size_arr = 13
 END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
+
+END FUNCTION
+
+
+
+FUNCTION llamar_visor_teclas()
+DEFINE a		CHAR(1)
+
+IF vg_gui = 0 THEN
+	CALL fl_visor_teclas_caracter() RETURNING int_flag 
+	LET a = fgl_getkey()
+	CLOSE WINDOW w_tf
+	LET int_flag = 0
 END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
+
+END FUNCTION
+
+
+
+FUNCTION control_visor_teclas_caracter_1() 
+DEFINE a, fila		INTEGER
+
+CALL fl_visor_teclas_caracter() RETURNING fila
+LET a = fila + 2
+DISPLAY 'Teclas exclusivas de este proceso:' AT a,2 ATTRIBUTE(REVERSE)	
+LET a = a + 1
+DISPLAY '<F5>      Modificar'                AT a,2
+DISPLAY  'F5' AT a,3 ATTRIBUTE(REVERSE)
+LET a = a + 1
+DISPLAY '<F6>      Retencion'                AT a,2
+DISPLAY  'F6' AT a,3 ATTRIBUTE(REVERSE)
+LET a = fgl_getkey()
+CLOSE WINDOW w_tf
+
+END FUNCTION
+
+
+
+FUNCTION control_visor_teclas_caracter_2() 
+DEFINE a, fila		INTEGER
+
+CALL fl_visor_teclas_caracter() RETURNING fila
+LET a = fila + 2
+DISPLAY 'Teclas exclusivas de este proceso:' AT a,2 ATTRIBUTE(REVERSE)	
+LET a = a + 1
+DISPLAY '<F5>      Retencion'                AT a,2
+DISPLAY  'F5' AT a,3 ATTRIBUTE(REVERSE)
+LET a = fgl_getkey()
+CLOSE WINDOW w_tf
 
 END FUNCTION

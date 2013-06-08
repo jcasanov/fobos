@@ -1,0 +1,101 @@
+DATABASE aceros
+SCREEN
+{
+                    TOTALES LIQUIDACION POR MES EMPLEADOS
+                    ------------------------------------
+     Empleado: [c000] [c001                                         ]
+Depto. Actual: [c002] [c003                          ]   Estado: [c004      ]
+  Año Inicial: [c005]     Mes Inicial: [c0] [c007       ]  Liq. Inicial: [c3]
+    Año Final: [c006]       Mes Final: [c1] [c008       ]    Liq. Final: [c4]
+                                                             [c050] de [c051]
+ [b0  |c010      |c011       |c012       |c013       |c014       |c015       ]
+[c2  |c020      |c021       |c022       |c023       |c024       |c025       ]
+[c2  |c020      |c021       |c022       |c023       |c024       |c025       ]
+[c2  |c020      |c021       |c022       |c023       |c024       |c025       ]
+[c2  |c020      |c021       |c022       |c023       |c024       |c025       ]
+[c2  |c020      |c021       |c022       |c023       |c024       |c025       ]
+[c2  |c020      |c021       |c022       |c023       |c024       |c025       ]
+[c2  |c020      |c021       |c022       |c023       |c024       |c025       ]
+[c2  |c020      |c021       |c022       |c023       |c024       |c025       ]
+[c2  |c020      |c021       |c022       |c023       |c024       |c025       ]
+[c2  |c020      |c021       |c022       |c023       |c024       |c025       ]
+[c2  |c020      |c021       |c022       |c023       |c024       |c025       ]
+[c2  |c020      |c021       |c022       |c023       |c024       |c025       ]
+       Totales: [c052       |c053       |c054       |c055       |c056       ]
+}
+TABLES
+gent034
+rolt030
+rolt032
+ATTRIBUTES
+c000 = FORMONLY.n32_cod_trab, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = rolt030.n30_nombres, NOENTRY, UPSHIFT;
+c002 = FORMONLY.n32_cod_depto, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = gent034.g34_nombre, NOENTRY, UPSHIFT;
+c004 = FORMONLY.tit_estado, NOENTRY, UPSHIFT, REVERSE;
+c005 = FORMONLY.vm_anio_ini TYPE SMALLINT NOT NULL, REQUIRED,
+	INCLUDE = (1980 TO 2099), AUTONEXT, UPSHIFT, REVERSE;
+c006 = FORMONLY.vm_anio_fin TYPE SMALLINT NOT NULL, REQUIRED,
+	INCLUDE = (1980 TO 2099), AUTONEXT, UPSHIFT, REVERSE;
+c0   = FORMONLY.vm_mes_ini TYPE SMALLINT NOT NULL, REQUIRED,
+	INCLUDE = (01 TO 12), AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c007 = FORMONLY.tit_mes_ini, NOENTRY, UPSHIFT, REVERSE;
+c1   = FORMONLY.vm_mes_fin TYPE SMALLINT NOT NULL, REQUIRED,
+	INCLUDE = (01 TO 12), AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c008 = FORMONLY.tit_mes_fin, NOENTRY, UPSHIFT, REVERSE;
+c3   = FORMONLY.vm_codliq_ini TYPE CHAR, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'A partir de que liquidación se quiere consultar el Total Ganado.';
+c4   = FORMONLY.vm_codliq_fin TYPE CHAR, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Hasta que liquidación se quiere consultar el Total Ganado.';
+
+b0   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c010 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c011 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c012 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c013 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c014 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c015 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+
+c2   = rolt032.n32_ano_proceso, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c020 = FORMONLY.nom_mes, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c021 = rolt032.n32_sueldo, NOENTRY, UPSHIFT, REVERSE, FORMAT = '####,##&.##',
+	COLOR = BLUE WHERE c008 > 0, OPTIONS = '-nolist';
+c022 = rolt032.n32_tot_gan, NOENTRY, UPSHIFT, OPTIONS = '-nolist',
+	FORMAT = '####,##&.##';
+c023 = FORMONLY.total_ing TYPE DECIMAL, NOENTRY, UPSHIFT,
+	FORMAT = '####,##&.##', OPTIONS = '-nolist';
+c024 = FORMONLY.total_egr TYPE DECIMAL, NOENTRY, UPSHIFT,
+	FORMAT = '####,##&.##', OPTIONS = '-nolist';
+c025 = FORMONLY.total_net TYPE DECIMAL, NOENTRY, UPSHIFT,
+	FORMAT = '####,##&.##', OPTIONS = '-nolist';
+
+c050 = FORMONLY.i_cor, NOENTRY, UPSHIFT;
+c051 = FORMONLY.max_cor, NOENTRY, UPSHIFT;
+c052 = FORMONLY.total_sueldo TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '####,##&.##', OPTIONS = '-nolist';
+c053 = FORMONLY.total_tot_gan TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '####,##&.##', OPTIONS = '-nolist';
+c054 = FORMONLY.total_ing_gen TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '####,##&.##', OPTIONS = '-nolist';
+c055 = FORMONLY.total_egr_gen TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '####,##&.##', OPTIONS = '-nolist';
+c056 = FORMONLY.total_net_gen TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '####,##&.##', OPTIONS = '-nolist';
+END
+KEYS
+F5  = 'Cabecera'
+F6  = 'Datos Empleado'
+F7  = 'Contabilizacion'
+F8  = 'Otros Valores'
+F9  = 'Totales por Rubro'
+F10 = 'Detalle por Mes'
+F11 = 'Imprimir Listado'
+INSTRUCTIONS
+SCREEN RECORD rm_det_tot2[12] (n32_ano_proceso, nom_mes, n32_sueldo,
+				n32_tot_gan, total_ing, total_egr, total_net)

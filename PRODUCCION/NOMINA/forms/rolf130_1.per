@@ -1,0 +1,45 @@
+database aceros
+screen 
+{
+
+Tipo Afiliacion: [a                        ]
+
+
+   Rubro Aporte: [c000] [c100                                  ]
+   Valor Aporte: [c001            ]     Frecuencia: [b               ]
+   Int. Mensual: [c002  ]
+
+
+     Presidente: [c005                                         ]
+       Tesorero: [c006                                         ]
+
+          Banco: [c032       ] [c033                          ]
+ Cta. Corriente: [c034           ]      Saldo Cta.: [c035            ] 
+
+      Ingresado por: [c003      ] Fecha de Ingreso: [c004               ]
+}
+end
+tables
+rolt060
+attributes
+a = rolt060.n60_tipo_afilia, WIDGET='RADIO', AUTONEXT,
+	CONFIG='O Obligatorio V Voluntario';
+c000 = rolt060.n60_rub_aporte, REVERSE, UPSHIFT, WIDGET='FIELD_BMP', 
+		CONFIG='lista.bmp F2';
+c001 = rolt060.n60_val_aporte, REVERSE, FORMAT='#,###,###,##&.##';
+b = rolt060.n60_frec_aporte, WIDGET='RADIO', AUTONEXT,
+	CONFIG='S Semanal Q Quincenal M Mensual';
+c002 = rolt060.n60_int_mensual, REVERSE, FORMAT='#&.##';
+c003 = rolt060.n60_usuario, UPSHIFT, NOENTRY, REVERSE;
+c004 = rolt060.n60_fecing, REVERSE, NOENTRY;
+
+c100 = formonly.n06_nombre, REVERSE, NOENTRY, UPSHIFT;
+
+c005 = rolt060.n60_presidente, REVERSE, UPSHIFT;
+c006 = rolt060.n60_tesorero, REVERSE, UPSHIFT;
+c032 = rolt060.n60_banco, AUTONEXT, UPSHIFT, REVERSE,
+        WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c033 = FORMONLY.tit_banco, NOENTRY, UPSHIFT, REVERSE;
+c034 = rolt060.n60_numero_cta, AUTONEXT, UPSHIFT, REVERSE;
+c035 = rolt060.n60_saldo_cta, REVERSE, FORMAT='#,###,###,##&.##', NOENTRY;
+end

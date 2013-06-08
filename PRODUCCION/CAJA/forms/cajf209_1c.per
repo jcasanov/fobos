@@ -1,0 +1,43 @@
+DATABASE aceros
+SCREEN
+{
+  Fecha Inicial: [c000      ]                     Fecha Final: [c001      ]
+
+-----------------------------------------------------------------------------
+ TP Número Factura       Nombre del Cliente         Fecha    Número del SRI
+-----------------------------------------------------------------------------
+[c0|c011           |c012                        |c013      |c014            ]
+[c0|c011           |c012                        |c013      |c014            ]
+[c0|c011           |c012                        |c013      |c014            ]
+[c0|c011           |c012                        |c013      |c014            ]
+[c0|c011           |c012                        |c013      |c014            ]
+[c0|c011           |c012                        |c013      |c014            ]
+[c0|c011           |c012                        |c013      |c014            ]
+[c0|c011           |c012                        |c013      |c014            ]
+[c0|c011           |c012                        |c013      |c014            ]
+[c0|c011           |c012                        |c013      |c014            ]
+[c0|c011           |c012                        |c013      |c014            ]
+[c0|c011           |c012                        |c013      |c014            ]
+[c0|c011           |c012                        |c013      |c014            ]
+}
+TABLES
+cajt010
+rept038
+ATTRIBUTES
+c000 = FORMONLY.vm_fecha_ini TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Inicial en formato: dd-mm-aaaa';
+c001 = FORMONLY.vm_fecha_fin TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Final en formato: dd-mm-aaaa';
+c0   = r38_tipo_fuente, NOENTRY, REVERSE, UPSHIFT;
+c011 = r38_num_tran, NOENTRY, REVERSE, UPSHIFT;
+c012 = j10_nomcli, NOENTRY, REVERSE, UPSHIFT;
+c013 = FORMONLY.r19_fecing TYPE DATE, NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy';
+c014 = r38_num_sri, AUTONEXT, REVERSE, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_det[13] (r38_tipo_fuente, r38_num_tran, j10_nomcli, r19_fecing,
+				r38_num_sri)

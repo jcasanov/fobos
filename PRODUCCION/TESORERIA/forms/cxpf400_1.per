@@ -1,5 +1,5 @@
-database diteca
-screen 
+DATABASE aceros
+SCREEN 
 {
 
              Año: [c000]          Mes: [c0]     Tipo Vcto.: [c            ]
@@ -13,31 +13,31 @@ screen
 
 }
 end
-tables
+TABLES
 gent013
 
-attributes
-c000 = formonly.anho TYPE SMALLINT NOT NULL, REVERSE, INCLUDE=(1900 TO 9999);
-c0   = formonly.mes  TYPE SMALLINT NOT NULL, REVERSE, INCLUDE=(1 TO 12);
+ATTRIBUTES
+c000 = FORMONLY.anho TYPE SMALLINT NOT NULL, REVERSE, INCLUDE=(1900 TO 9999);
+c0   = FORMONLY.mes  TYPE SMALLINT NOT NULL, REVERSE, INCLUDE=(1 TO 12);
 c1   = gent013.g13_moneda, REVERSE, AUTONEXT, UPSHIFT, WIDGET='FIELD_BMP', 
 	CONFIG='lista.bmp F2';
-c2   = formonly.tipoprov, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
-c001 = gent013.g13_nombre, NOENTRY;
-c002 = formonly.n_tipoprov, NOENTRY;
+c2   = FORMONLY.tipoprov, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c001 = gent013.g13_nombre,REVERSE, NOENTRY;
+c002 = FORMONLY.n_tipoprov, NOENTRY;
 
-c    = formonly.tipo_vcto, DEFAULT='T', WIDGET='RADIO', 
+c    = FORMONLY.tipo_vcto, DEFAULT='T', WIDGET='RADIO', 
 	CONFIG='P "Por Vencer" V Vencidos T Todos';
 	
-c10  = formonly.dias_ini, INCLUDE=(NULL, 0 TO 999);
-c010 = formonly.dias_fin, INCLUDE=(NULL, 0 TO 99999);
+c10  = FORMONLY.dias_ini, INCLUDE=(NULL, 0 TO 999);
+c010 = FORMONLY.dias_fin, INCLUDE=(NULL, 0 TO 99999);
 	
-c051 = formonly.col TYPE VARCHAR NOT NULL, REVERSE, OPTIONS='-nolist',
+c051 = FORMONLY.col TYPE VARCHAR NOT NULL, REVERSE, OPTIONS='-nolist',
 	UPSHIFT, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
-a    = formonly.chk_asc,  AUTONEXT, WIDGET='CHECK', CONFIG='S N acknowledge', 
+a    = FORMONLY.chk_asc,  AUTONEXT, WIDGET='CHECK', CONFIG='S N acknowledge', 
 	OPTIONS='-nolist', DEFAULT='S', COMMENT='Ordena ascendentemente.';
-d    = formonly.chk_desc, AUTONEXT, WIDGET='CHECK', CONFIG='S N acknowledge', 
+d    = FORMONLY.chk_desc, AUTONEXT, WIDGET='CHECK', CONFIG='S N acknowledge', 
 	OPTIONS='-nolist', DEFAULT='N', COMMENT='Ordena descendentemente.';
 end
 
-instructions
-screen record rm_ord[2] (col, chk_asc, chk_desc)
+INSTRUCTIONS
+SCREEN RECORD rm_ord[2] (col, chk_asc, chk_desc)

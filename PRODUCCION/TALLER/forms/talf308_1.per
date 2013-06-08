@@ -1,0 +1,71 @@
+DATABASE aceros
+SCREEN
+{
+  Factura No.: [c001  ]   OT: [c002  ]   Fecha Factura: [c003               ]
+
+      Cliente: [c004  ][c005                                                ]
+    Dirección: [c006                                ]   Teléfono: [c007     ]
+     Vendedor: [c08][c009                           ]   Impuesto: [c010 ]%
+                                                             [c050] de [c051]
+ [c040                                                         |c041         ]
+[c020                                                         |c021         ]
+[c020                                                         |c021         ]
+[c020                                                         |c021         ]
+[c020                                                         |c021         ]
+[c020                                                         |c021         ]
+[c020                                                         |c021         ]
+[c020                                                         |c021         ]
+[c020                                                         |c021         ]
+                                                 Total Bruto:[c030          ]
+ Anulación/Devolución: [c052  ]                    Descuento:[c031          ]
+                       [c053               ]        Subtotal:[c032          ]
+                                                    Impuesto:[c033          ]
+                                                        Neto:[c034          ]
+}
+TABLES
+cxct001
+rept001
+talt023
+talt028
+talt061
+ATTRIBUTES
+c001 = talt023.t23_num_factura, REVERSE;
+c002 = talt023.t23_orden, REVERSE;
+c003 = talt023.t23_fec_factura, REVERSE;
+c004 = talt023.t23_cod_cliente, REVERSE;
+c005 = talt023.t23_nom_cliente, REVERSE;
+c006 = cxct001.z01_direccion1, REVERSE;
+c007 = talt023.t23_tel_cliente;
+c08  = rept001.r01_codigo, REVERSE;
+c009 = rept001.r01_nombres, REVERSE;
+c010 = talt023.t23_porc_impto, REVERSE;
+
+c040 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c041 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+
+c020 = FORMONLY.descripcion, UPSHIFT;
+c021 = FORMONLY.subtotal TYPE DECIMAL(14,2), FORMAT = "##,###,##&.##";
+
+c030 = talt023.t23_tot_bruto, FORMAT = '###,###,##&.##';
+c031 = FORMONLY.t_descuento TYPE DECIMAL(14,2), FORMAT = "###,###,##&.##";
+c032 = FORMONLY.t_subtotal TYPE DECIMAL(14,2),FORMAT = "###,###,##&.##",REVERSE;
+c033 = FORMONLY.t_impuesto TYPE DECIMAL(14,2), FORMAT = "###,###,##&.##";
+c034 = FORMONLY.t_neto TYPE DECIMAL(14,2), FORMAT = "###,###,##&.##", REVERSE;
+
+c052 = talt028.t28_num_dev,  REVERSE, NOENTRY;
+c053 = talt028.t28_fec_anula, REVERSE, NOENTRY;
+
+c050 = FORMONLY.num_row,   NOENTRY, REVERSE;
+c051 = FORMONLY.max_row,   NOENTRY, REVERSE;
+END
+KEYS
+F5  = 'Forma Pago'
+F6  = 'Orden Trabajo'
+F7  = 'Mano de Obra'
+F8  = 'Ordenes Compra'
+F9  = 'Detalle Proforma'
+F10 = 'Detalle Inv. Venta'
+F11 = 'Anu/Dev OT'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_trn[8] (FORMONLY.descripcion, FORMONLY.subtotal)

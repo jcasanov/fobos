@@ -1,0 +1,55 @@
+DATABASE aceros
+SCREEN
+{
+
+     No Orden:[c0    ] [c1                             ]	
+ No Recepcion:[c2    ]      	     Fecha de Recepción:[c3                  ]
+      Factura:[c4                ]	  Forma de Pago:[c|c060   ]
+                                                                   
+
+  Cant      Código              Descripción         Des %      Precio      
+ [c6  |c7             |c8                          |c9   |c10             ]
+ [c6  |c7             |c8                          |c9   |c10             ]
+ [c6  |c7             |c8                          |c9   |c10             ]
+ [c6  |c7             |c8                          |c9   |c10             ]
+ [c6  |c7             |c8                          |c9   |c10             ]
+ [c6  |c7             |c8                          |c9   |c10             ]
+ [c6  |c7             |c8                          |c9   |c10             ]
+                		                Subtotal:[c11             ]
+			 		       Descuento:[c12             ]
+Ingresado Por:[c15        ]                     Impuesto:[c13             ]
+					            Neto:[c14             ]
+}
+TABLES ordt010, ordt013, ordt014
+ATTRIBUTES
+
+c0  = ordt013.c13_numero_oc, REVERSE, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c1  = FORMONLY.nomprov, REVERSE, NOENTRY;
+c2  = ordt013.c13_num_recep, REVERSE, NOENTRY;  
+c3  = ordt013.c13_fecha_recep, REVERSE, NOENTRY;  
+
+c4  = ordt013.c13_factura, REVERSE, UPSHIFT, NOENTRY; 
+c15 = ordt013.c13_usuario, REVERSE, NOENTRY; 
+
+c6  = ordt014.c14_cantidad, REVERSE;
+c7  = ordt014.c14_codigo, REVERSE, UPSHIFT;
+c8  = ordt014.c14_descrip,   REVERSE;
+c9  = ordt014.c14_descuento, REVERSE, FORMAT = '#&.##';
+c10 = ordt014.c14_precio,    REVERSE, FORMAT = '#,###,###,##&.##';
+
+c11 = ordt013.c13_tot_bruto,  NOENTRY, FORMAT = '#,###,###,##&.##', REVERSE; 
+c12 = ordt013.c13_tot_dscto,  NOENTRY, FORMAT = '#,###,###,##&.##'; 
+c13 = ordt013.c13_tot_impto,  NOENTRY, FORMAT = '#,###,###,##&.##'; 
+c14 = ordt013.c13_tot_recep,  REVERSE, NOENTRY, FORMAT = '#,###,###,##&.##'; 
+
+c   = ordt010.c10_tipo_pago, REVERSE, NOENTRY,UPSHIFT, INCLUDE = ('C', 'R'),
+	COMMENTS = 'C Contado  R Crédito';
+c060 = FORMONLY.tit_tipo_pago,REVERSE,UPSHIFT,NOENTRY;
+end
+
+INSTRUCTIONS 
+DELIMITERS '||'
+SCREEN RECORD r_detalle[7] (c14_cantidad,  c14_codigo, c14_descrip,  
+			    c14_descuento, c14_precio)
+

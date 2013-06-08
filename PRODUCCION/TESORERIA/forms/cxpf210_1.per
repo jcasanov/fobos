@@ -1,0 +1,80 @@
+DATABASE aceros
+SCREEN
+{
+                                                            [c050 ] de [c051 ]
+
+     No Orden: [c000  ]      [c001     ]         Estado: [c|c002      ]
+
+       Moneda: [c1] [c003              ]  Fecha Ingreso: [c004               ]
+    Proveedor: [c010 ] [c011                                        ]
+      Factura: [c005             ]        Num. Aut. SRI: [c006      ]
+                                        Fecha Caducidad: [c040      ]
+ Tipo Factura: [c007 ] [c008           ]       Impuesto: [c009  ]%
+
+                                         Sustenta IVA ?: [d]
+   Referencia: [c012                                                         ]
+ Departamento: [c013 ] [c014                          ]  Usuario: [c015      ]
+
+                               VALORES DE LA FACTURA
+                               --------------------
+
+  Valor Factura antes Iva: [c016         ]              Subtotal: [c017      ] 
+                                                       Descuento: [c019      ] 
+                   Seguro: [c020         ]              Impuesto: [c021      ] 
+    Flete (otros exentos): [c022         ]                  Neto: [c023      ] 
+}
+TABLES
+ordt010
+ordt013
+ATTRIBUTES
+c000 = ordt010.c10_numero_oc, REVERSE, NOENTRY, 
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = FORMONLY.tit_orden TYPE VARCHAR, REVERSE; 
+c    = ordt010.c10_estado, REVERSE, NOENTRY, UPSHIFT,
+	COMMENT = 'Estado: A ACTIVAS, P APROBADAS, C CERRADAS.';
+c002 = FORMONLY.tit_estado TYPE VARCHAR, NOENTRY;
+c1   = ordt010.c10_moneda, REVERSE, UPSHIFT, NOENTRY,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENT = 'Moneda Base ó Moneda Alterna'; 
+c003 = FORMONLY.nom_moneda TYPE VARCHAR, NOENTRY;
+c004 = ordt010.c10_fecing, REVERSE, UPSHIFT, NOENTRY;
+c005 = ordt013.c13_num_guia, REVERSE, UPSHIFT, 
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c006 = ordt013.c13_num_aut, UPSHIFT, REVERSE;
+c007 = ordt010.c10_tipo_orden, REVERSE, INCLUDE = (0 TO 9999),
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c008 = FORMONLY.nom_tipo_orden TYPE VARCHAR, NOENTRY;
+c009 = ordt010.c10_porc_impto, REVERSE, INCLUDE = (0 TO 99.99),
+	FORMAT = '#&.##';
+c010 = ordt010.c10_codprov, REVERSE, INCLUDE = (0 TO 9999),
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c011 = FORMONLY.nom_proveedor TYPE VARCHAR, NOENTRY;
+c012 = ordt010.c10_referencia, REVERSE, UPSHIFT, SCROLL;
+c013 = ordt010.c10_cod_depto, REVERSE, INCLUDE = (0 TO 9999),
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c014 = FORMONLY.nom_departamento TYPE VARCHAR, NOENTRY;
+c015 = ordt010.c10_usuario, NOENTRY, UPSHIFT, REVERSE;
+
+c040 = ordt013.c13_fecha_cadu, AUTONEXT, REVERSE, UPSHIFT,FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha en formato: dd-mm-aaaa.';
+
+c016 = FORMONLY.valor_fact TYPE DECIMAL(10,2) NOT NULL, 
+        FORMAT = '##,###,##&.##', INCLUDE = (0.00 TO 99999999.99), REVERSE, 
+        COMMENTS = 'Ingrese el subtotal antes del iva de la factura del proveedor.';
+c017 = FORMONLY.vm_subtotal TYPE DECIMAL(12,2), REVERSE, 
+	FORMAT = '###,##&.##';
+#c018 = c10_dif_cuadre, NOENTRY, FORMAT = '--,---,--&.##';
+c019 = ordt010.c10_tot_dscto,  NOENTRY, FORMAT = '###,##&.##'; 
+c020 = c10_otros, REQUIRED, INCLUDE = (0 TO 99999999), FORMAT = '##,###,##&.##';
+c021 = ordt010.c10_tot_impto,  NOENTRY, FORMAT = '###,##&.##'; 
+c022 = c10_flete, REQUIRED, INCLUDE = (0 TO 99999999), FORMAT = '##,###,##&.##';
+c023 = ordt010.c10_tot_compra, REVERSE,NOENTRY, FORMAT = '###,##&.##'; 
+
+d    = ordt010.c10_sustento_sri, REVERSE, UPSHIFT, AUTONEXT,
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge', DEFAULT = 'S';
+
+c050 = FORMONLY.vm_row_current, NOENTRY, UPSHIFT;
+c051 = FORMONLY.vm_num_rows, NOENTRY, UPSHIFT;
+END
+INSTRUCTIONS 
+DELIMITERS '||'

@@ -1,0 +1,80 @@
+DATABASE aceros
+SCREEN
+{
+     División: [c]        [c001                               ]
+        Línea: [c2]       [c003                               ]
+        Grupo: [c04]      [c005                                    ]
+        Clase: [c006    ] [c007                                              ]
+        Marca: [c008  ]   [c009                               ]
+ Pendientes Falta de Stock ?: [d]   Sólo Pendientes ?: [e]    [c060] de [c061]
+ Item       Descripción      Stock Pen. Stock Total Stock Local  Max    Min
+[c030  |c031                |c032      |c033       |c034       |c035  |c036  ]
+[c030  |c031                |c032      |c033       |c034       |c035  |c036  ]
+[c030  |c031                |c032      |c033       |c034       |c035  |c036  ]
+[c030  |c031                |c032      |c033       |c034       |c035  |c036  ]
+[c030  |c031                |c032      |c033       |c034       |c035  |c036  ]
+[c030  |c031                |c032      |c033       |c034       |c035  |c036  ]
+[c030  |c031                |c032      |c033       |c034       |c035  |c036  ]
+[c030  |c031                |c032      |c033       |c034       |c035  |c036  ]
+                Totales ==> [c040      |c041       |c042       ]
+[c050                                              ]
+[c051                                                             ]
+}
+TABLES
+rept003
+rept010
+rept070
+rept071
+rept072
+rept073
+ATTRIBUTES
+c    = FORMONLY.r10_linea, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c001 = rept003.r03_nombre, NOENTRY, UPSHIFT;
+c2   = FORMONLY.r10_sub_linea, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c003 = rept070.r70_desc_sub, NOENTRY, UPSHIFT;
+c04  = FORMONLY.r10_cod_grupo, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c005 = rept071.r71_desc_grupo, NOENTRY, UPSHIFT;
+c006 = FORMONLY.r10_cod_clase, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c007 = rept072.r72_desc_clase, NOENTRY, UPSHIFT;
+c008 = FORMONLY.r10_marca, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c009 = rept073.r73_desc_marca, NOENTRY, UPSHIFT;
+d    = FORMONLY.pend_falta TYPE CHAR NOT NULL, REVERSE, UPSHIFT,
+	INCLUDE = ('S', 'N'), DEFAULT = 'S',
+	COMMENTS = 'Marque: muestra Items pendientes entregar sin Stock. Desmarcado: Todos.';
+e    = FORMONLY.pendientes TYPE CHAR NOT NULL, REVERSE, UPSHIFT,
+	INCLUDE = ('S', 'N'), DEFAULT = 'S',
+	COMMENTS = 'Marque: muestra solo Items pendientes de entregar. Desmarcado: Todos.';
+
+c030 = rept010.r10_codigo, NOENTRY, UPSHIFT;
+c031 = rept010.r10_nombre, NOENTRY, UPSHIFT;
+c032 = FORMONLY.stock_pend TYPE DECIMAL NOT NULL, NOENTRY, UPSHIFT, REQUIRED,
+	FORMAT = '---,--&.##';
+c033 = FORMONLY.stock_total TYPE DECIMAL NOT NULL, NOENTRY, UPSHIFT, REQUIRED,
+	FORMAT = '----,--&.##';
+c034 = FORMONLY.stock_local TYPE DECIMAL NOT NULL, NOENTRY, UPSHIFT, REQUIRED,
+	FORMAT = '----,--&.##';
+c035 = rept010.r10_stock_max, NOENTRY, UPSHIFT;
+c036 = rept010.r10_stock_min, NOENTRY, UPSHIFT;
+
+c040 = FORMONLY.tot_stock_pend TYPE DECIMAL NOT NULL, NOENTRY, UPSHIFT,
+	REVERSE, REQUIRED, FORMAT = '---,--&.##';
+c041 = FORMONLY.tot_stock_total TYPE DECIMAL NOT NULL, NOENTRY, UPSHIFT,
+	REVERSE, REQUIRED, FORMAT = '----,--&.##';
+c042 = FORMONLY.tot_stock_local TYPE DECIMAL NOT NULL, NOENTRY, UPSHIFT,
+	REVERSE, REQUIRED, FORMAT = '----,--&.##';
+
+c050 = FORMONLY.descri_clase, NOENTRY, REVERSE, UPSHIFT;
+c051 = FORMONLY.descri_item, NOENTRY, REVERSE, UPSHIFT;
+
+c060 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c061 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_item[8] (r10_codigo, r10_nombre, stock_pend, stock_total,
+				stock_local, r10_stock_max, r10_stock_min)

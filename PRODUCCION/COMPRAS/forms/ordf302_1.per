@@ -1,4 +1,4 @@
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
                 Moneda: [c0] [c1              ]
@@ -37,9 +37,9 @@ c5  = FORMONLY.vm_fecha_fin TYPE DATE, AUTONEXT, UPSHIFT, REVERSE,
 	FORMAT = 'dd-mm-yyyy', 
 	COMMENTS = 'Digite la fecha en formato: dd-mm-aaaa';
 
-b0  = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-b1  = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-b2  = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+b0  = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+b1  = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b2  = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
 
 f0  = cxpt001.p01_codprov, NOENTRY, OPTIONS = '-nolist';
 f1  = cxpt001.p01_nomprov, NOENTRY, OPTIONS = '-nolist';
@@ -47,7 +47,7 @@ f2  = ordt010.c10_tot_compra, NOENTRY, OPTIONS = '-nolist',
 	FORMAT = '###,###,##&.##';
 
 c10 = FORMONLY.total_compra, FORMAT = '#,###,###,##&.##', NOENTRY, REVERSE;
-END
+end
 KEYS
 F5 = 'Detalle'
 INSTRUCTIONS

@@ -1,0 +1,46 @@
+DATABASE aceros
+SCREEN
+{
+
+                       STOCK MAXIMO Y MINIMO
+                       --------------------
+                                                   [c030] de [c031]
+ [c000  |c001                                      |c002   |c003   ]
+[c010  |c011                                      |c012   |c013   ]
+[c010  |c011                                      |c012   |c013   ]
+[c010  |c011                                      |c012   |c013   ]
+[c010  |c011                                      |c012   |c013   ]
+[c010  |c011                                      |c012   |c013   ]
+[c010  |c011                                      |c012   |c013   ]
+[c010  |c011                                      |c012   |c013   ]
+[c010  |c011                                      |c012   |c013   ]
+[c010  |c011                                      |c012   |c013   ]
+[c010  |c011                                      |c012   |c013   ]
+[c020                                             ]
+[c021                                                             ]
+}
+TABLES 
+rept010
+ATTRIBUTES
+c000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c002 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c003 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+
+c010 = rept010.r10_codigo, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c011 = rept010.r10_nombre, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c012 = rept010.r10_stock_max, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c013 = rept010.r10_stock_min, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+
+c020 = FORMONLY.descri_clase, NOENTRY, UPSHIFT, REVERSE;
+c021 = FORMONLY.descri_item, NOENTRY, UPSHIFT, REVERSE;
+
+c030 = FORMONLY.num_row, NOENTRY, REVERSE;
+c031 = FORMONLY.max_row, NOENTRY, REVERSE;
+END
+KEYS
+'F5' = 'Ver Item'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_item_max[10] (r10_codigo, r10_nombre, r10_stock_max,
+				r10_stock_min)

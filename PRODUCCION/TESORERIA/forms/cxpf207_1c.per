@@ -1,0 +1,59 @@
+DATABASE aceros
+SCREEN
+{
+
+                                                     Estado: [c][c000     ]
+   Proveedor: [c001       ] [c002                                         ]
+      Moneda: [a1] [c003           ]         Paridad: [c004               ]
+
+       TD    Documento    Fecha Emi.  Valor Factura   Valor Retención
+      [a0|c011              |c012      |c013            |c014            ]
+      [a0|c011              |c012      |c013            |c014            ]
+      [a0|c011              |c012      |c013            |c014            ]
+      [a0|c011              |c012      |c013            |c014            ]
+      [a0|c011              |c012      |c013            |c014            ]
+      [a0|c011              |c012      |c013            |c014            ]
+      [a0|c011              |c012      |c013            |c014            ]
+      [a0|c011              |c012      |c013            |c014            ]
+      [a0|c011              |c012      |c013            |c014            ]
+                                       Total Retención: [c015            ]
+  Referencia: [c016                               ]
+     Usuario: [c017      ]          Fecha de Ingreso: [c018               ]
+}
+TABLES
+cxpt027, cxpt020
+ATTRIBUTES
+c    = cxpt027.p27_estado, AUTONEXT, REVERSE, UPSHIFT;
+c000 = FORMONLY.tit_estado_pro, NOENTRY, UPSHIFT;
+c001 = cxpt027.p27_codprov, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c002 = FORMONLY.tit_nombre_pro, NOENTRY, REVERSE, UPSHIFT;
+a1   = cxpt027.p27_moneda, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c003 = FORMONLY.tit_moneda, NOENTRY, REVERSE, UPSHIFT;
+c004 = cxpt027.p27_paridad, NOENTRY, REVERSE, INCLUDE = (1 TO 999999.999999999),
+	FORMAT = '#,###,##&.#########';
+
+a0   = cxpt020.p20_tipo_doc, NOENTRY, UPSHIFT;
+c011 = cxpt020.p20_num_doc, NOENTRY, UPSHIFT;
+c012 = cxpt020.p20_fecha_emi, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c013 = cxpt020.p20_valor_fact, NOENTRY, INCLUDE = (0 TO 9999999999.99),
+	FORMAT = '#,###,###,##&.##';
+c014 = FORMONLY.tit_valor_ret TYPE DECIMAL (12,2), NOENTRY,
+	INCLUDE = (0 TO 9999999999.99),	FORMAT = '#,###,###,##&.##';
+
+c015 = FORMONLY.tit_total_ret TYPE DECIMAL (12,2), NOENTRY, REVERSE,
+	INCLUDE = (0 TO 9999999999.99),
+	FORMAT = '#,###,###,##&.##';
+c016 = cxpt020.p20_referencia, NOENTRY, UPSHIFT;
+c017 = cxpt027.p27_usuario, NOENTRY, REVERSE, UPSHIFT;
+c018 = cxpt027.p27_fecing, NOENTRY, REVERSE, UPSHIFT;
+end
+--KEYS
+--F5 = 'Retenciones'
+--F6 = 'Contabilización'
+--F7 = 'Estado Cuenta'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_det[9] (p20_tipo_doc, p20_num_doc, p20_fecha_emi,
+			p20_valor_fact, tit_valor_ret)

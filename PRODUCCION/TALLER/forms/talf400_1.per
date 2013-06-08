@@ -1,46 +1,67 @@
-
-DATABASE diteca
+DATABASE aceros
 SCREEN
 {
 
-           Moneda: [c0] [c1             ]
+             Moneda: [c0] [c1             ]
 
-            Línea: [c7   ] [c8                  ]
+              Línea: [c7   ] [c8                  ]
 
-     Tipo de O.T.: [c4] [c5                                     ]
+       Tipo de O.T.: [c] [c5                                     ]
 
-   Desde la Fecha: [c2        ]      Hasta la Fecha: [c3        ]
+     Desde la Fecha: [c2        ]      Hasta la Fecha: [c3        ]
 
-           Estado: [c6           ]             Tipo: [c006         ]
-
-
+             Estado: [c6           ]             Tipo: [c006         ]
 
 
+
+                                     Listado solo del Taller ?: [f]
+                 Incluir FA/DF de Inventario fuera de fechas ?: [e]
+
+     Ordenar Por:
+             [c051                ]  [a]Ascendente  [d]Descendente
+             [c051                ]  [a]Ascendente  [d]Descendente
+             [c051                ]  [a]Ascendente  [d]Descendente
 }
 TABLES
-	talt023, talt004
+talt023
+talt004
 ATTRIBUTES
 
 c0  = talt023.t23_moneda, REVERSE, UPSHIFT, AUTONEXT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2'; 
-c1  = formonly.nom_mon, NOENTRY;
-c2  = formonly.fecha_desde TYPE DATE, REQUIRED, REVERSE, FORMAT = 'dd-mm-yyyy';
-c3  = formonly.fecha_hasta TYPE DATE, REQUIRED, REVERSE, FORMAT = 'dd-mm-yyyy';
-c4  = talt023.t23_tipo_ot, REVERSE, UPSHIFT, AUTONEXT,
+c1  = FORMONLY.nom_mon, NOENTRY;
+c2  = FORMONLY.fecha_desde TYPE DATE, REQUIRED, REVERSE, FORMAT = 'dd-mm-yyyy';
+c3  = FORMONLY.fecha_hasta TYPE DATE, REQUIRED, REVERSE, FORMAT = 'dd-mm-yyyy';
+c   = talt023.t23_tipo_ot, REVERSE, UPSHIFT, AUTONEXT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2'; 
-c5  = formonly.nom_tipo_ot, NOENTRY;
+c5  = FORMONLY.nom_tipo_ot, REVERSE, NOENTRY;
 
 -- UBICADO POR NPC EL 14-08-2002 para solicitar el estado en la forma
 c6  = talt023.t23_estado, REVERSE, UPSHIFT, AUTONEXT,
-	WIDGET = 'RADIO', CONFIG = 'A Activas C Cerradas F Facturadas D Devueltas', DEFAULT = 'A';
-c7  = talt004.t04_linea, REVERSE, UPSHIFT, AUTONEXT,
+	#WIDGET = 'RADIO', CONFIG = 'A Activas C Cerradas F Facturadas D Devueltas N Anuladas T VENTAS', DEFAULT = 'T';
+	WIDGET = 'RADIO', CONFIG = 'F Facturadas D Devueltas N Anuladas T VENTAS', DEFAULT = 'T';
+c7  = FORMONLY.t04_linea, UPSHIFT, AUTONEXT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2'; 
-c8  = formonly.t01_nombre, NOENTRY;
+c8  = FORMONLY.t01_nombre, NOENTRY;
 --
 
 -- Incluido por NPC el 06-09-2002
 c006 = talt023.t23_cont_cred, AUTONEXT, REVERSE, UPSHIFT,
-	WIDGET = 'RADIO', CONFIG = 'C Contado R Crédito T TODOS', DEFAULT = 'T',
+	WIDGET = 'RADIO', CONFIG = 'C Contado R Crédito T TODAS', DEFAULT = 'T',
 	COMMENTS = 'Indicar si el tipo de orden de trabajo débito o crédito';
+e    = FORMONLY.todo_inv TYPE CHAR NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', INCLUDE = ('S', 'N'),
+	DEFAULT = 'N';
+f    = FORMONLY.solo_tal TYPE CHAR NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', INCLUDE = ('S', 'N'),
+	DEFAULT = 'N';
+c051 = FORMONLY.col TYPE VARCHAR NOT NULL, REVERSE, OPTIONS='-nolist',
+	UPSHIFT, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+a    = FORMONLY.chk_asc,  AUTONEXT, WIDGET='CHECK', CONFIG='S N acknowledge', 
+	OPTIONS='-nolist', DEFAULT='S', COMMENT='Ordena ascendentemente.';
+d    = FORMONLY.chk_desc, AUTONEXT, WIDGET='CHECK', CONFIG='S N acknowledge', 
+	OPTIONS='-nolist', DEFAULT='N', COMMENT='Ordena descendentemente.';
 --
 END
+INSTRUCTIONS
+SCREEN RECORD rm_ord[3] (col, chk_asc, chk_desc)

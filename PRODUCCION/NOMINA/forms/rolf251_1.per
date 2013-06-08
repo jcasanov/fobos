@@ -1,0 +1,16 @@
+DATABASE aceros
+SCREEN
+{
+
+
+                    Año de Proceso: [c002]
+
+                     Mes de Cierre: [c003][c004       ]
+}
+TABLES
+rolt001
+ATTRIBUTES
+c002 = rolt001.n01_ano_proceso, NOENTRY, REVERSE, UPSHIFT;
+c003 = FORMONLY.n01_mes_proceso, AUTONEXT, REVERSE, UPSHIFT, INCLUDE=(1 TO 12);
+c004 = FORMONLY.n_mes, NOENTRY, REVERSE, UPSHIFT;
+end

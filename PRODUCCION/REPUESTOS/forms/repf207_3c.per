@@ -1,0 +1,33 @@
+DATABASE aceros
+SCREEN 
+{
+
+  << Detalle Pedido >>
+
+  ----------------------------------------------------------------------
+    Item   Div.  C. Ped.   C. Rec.         Fob            Subtotal     
+  ----------------------------------------------------------------------
+  [c003  |c007 |c005     |c006     |c004             |c008             ]
+  [c003  |c007 |c005     |c006     |c004             |c008             ]
+  [c003  |c007 |c005     |c006     |c004             |c008             ]
+  [c003  |c007 |c005     |c006     |c004             |c008             ]
+  [c003  |c007 |c005     |c006     |c004             |c008             ]
+  [c003  |c007 |c005     |c006     |c004             |c008             ]
+  ----------------------------------------------------------------------
+                                              Total: [c009             ]
+}
+TABLES
+rept017
+ATTRIBUTES
+c003 = rept017.r17_item, NOENTRY;
+c004 = rept017.r17_fob, NOENTRY, FORMAT='----,---,--&.####';
+c005 = rept017.r17_cantped, NOENTRY, FORMAT='-----&.##';
+c006 = rept017.r17_cantrec, NOENTRY, FORMAT='-----&.##';
+c007 = rept017.r17_linea, NOENTRY;
+c008 = FORMONLY.subtotal TYPE DECIMAL (13,4), NOENTRY,
+	FORMAT='----,---,--&.####';
+c009 = FORMONLY.total TYPE DECIMAL (14,4), NOENTRY, FORMAT='----,---,--&.####';
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD ra_detped[6] (r17_item, r17_linea, r17_cantped, r17_cantrec, r17_fob, subtotal)

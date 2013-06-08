@@ -11,37 +11,39 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE rm_par RECORD
-	localidad	LIKE gent002.g02_localidad,
-	tit_local	LIKE gent002.g02_nombre,
-	ano		SMALLINT,
-	moneda		LIKE gent013.g13_moneda,
-	tit_mon		VARCHAR(30),
-	modelo		LIKE talt004.t04_modelo,
-	tipo_ot		LIKE talt005.t05_tipord,
-	tit_tipo_ot	VARCHAR(30),
-	mes1		CHAR(1),
-	mes2		CHAR(1),
-	mes3		CHAR(1),
-	mes4		CHAR(1),
-	mes5		CHAR(1),
-	mes6		CHAR(1),
-	mes7		CHAR(1),
-	mes8		CHAR(1),
-	mes9		CHAR(1),
-	mes10		CHAR(1),
-	mes11		CHAR(1),
-	mes12		CHAR(1)
-	END RECORD
-DEFINE rm_cons ARRAY[13] OF RECORD
-	tit_rubro	VARCHAR(35),
-	valor_1		DECIMAL(14,2),
-	valor_2		DECIMAL(14,2),
-	valor_3		DECIMAL(14,2),
-	tot_val		DECIMAL(14,2)
-	END RECORD
+DEFINE rm_par		RECORD
+				localidad	LIKE gent002.g02_localidad,
+				tit_local	LIKE gent002.g02_nombre,
+				ano		SMALLINT,
+				moneda		LIKE gent013.g13_moneda,
+				tit_mon		VARCHAR(30),
+				modelo		LIKE talt004.t04_modelo,
+				tipo_ot		LIKE talt005.t05_tipord,
+				tit_tipo_ot	VARCHAR(30),
+				mes1		CHAR(1),
+				mes2		CHAR(1),
+				mes3		CHAR(1),
+				mes4		CHAR(1),
+				mes5		CHAR(1),
+				mes6		CHAR(1),
+				mes7		CHAR(1),
+				mes8		CHAR(1),
+				mes9		CHAR(1),
+				mes10		CHAR(1),
+				mes11		CHAR(1),
+				mes12		CHAR(1)
+			END RECORD
+DEFINE rm_cons		ARRAY[50] OF RECORD
+				tit_rubro	VARCHAR(35),
+				valor_1		DECIMAL(14,2),
+				valor_2		DECIMAL(14,2),
+				valor_3		DECIMAL(14,2),
+				tot_val		DECIMAL(14,2)
+			END RECORD
 DEFINE rm_est		RECORD LIKE talt040.*
 DEFINE rm_mon		RECORD LIKE gent013.*
+DEFINE vm_campo_orden	SMALLINT
+DEFINE vm_tipo_orden	CHAR(4)
 DEFINE vm_num_meses	SMALLINT
 DEFINE vm_num_rubros	SMALLINT
 DEFINE vm_pantallas	SMALLINT
@@ -50,33 +52,35 @@ DEFINE vm_max_rows	SMALLINT
 DEFINE vm_divisor	SMALLINT
 DEFINE vm_ind_ini	SMALLINT
 DEFINE vm_ind_fin	SMALLINT
-DEFINE rm_meses  ARRAY[12] OF SMALLINT
+DEFINE rm_meses		ARRAY[12] OF SMALLINT
 DEFINE t_valor_1	DECIMAL(14,2)
 DEFINE t_valor_2	DECIMAL(14,2)
 DEFINE t_valor_3	DECIMAL(14,2)
 DEFINE t_tot_val	DECIMAL(14,2)
-DEFINE rm_color ARRAY[12] OF VARCHAR(10)
+DEFINE rm_color		ARRAY[12] OF VARCHAR(10)
+
+
 
 MAIN
 	
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/talp310.error')
-CALL fgl_init4js()
+CALL startlog('../logs/talp310.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN          -- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
-LET vg_base     = arg_val(1)
-LET vg_modulo   = arg_val(2)
-LET vg_codcia   = arg_val(3)
+LET vg_base    = arg_val(1)
+LET vg_modulo  = arg_val(2)
+LET vg_codcia  = arg_val(3)
 LET vg_proceso = 'talp310'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -90,37 +94,37 @@ DEFINE r		RECORD LIKE gent000.*
 INITIALIZE rm_par.* TO NULL
 CALL fl_lee_configuracion_facturacion() RETURNING r.*
 CALL fl_retorna_agencia_default(vg_codcia) RETURNING rm_par.localidad
-CALL fl_lee_localidad(vg_codcia, rm_par.localidad) 
-	RETURNING rg_loc.*
+CALL fl_lee_localidad(vg_codcia, rm_par.localidad) RETURNING rg_loc.*
 LET rm_par.tit_local = rg_loc.g02_nombre
 LET rm_par.moneda    = r.g00_moneda_base
 CALL fl_lee_moneda(rm_par.moneda) RETURNING rm_mon.*
 LET rm_par.tit_mon = rm_mon.g13_nombre
 LET rm_par.ano     = YEAR(TODAY)
-LET rm_par.mes1   = 'S'
-LET rm_par.mes2   = 'S'
-LET rm_par.mes3   = 'S'
-LET rm_par.mes4   = 'S'
-LET rm_par.mes5   = 'S'
-LET rm_par.mes6   = 'S'
-LET rm_par.mes7   = 'S'
-LET rm_par.mes8   = 'S'
-LET rm_par.mes9   = 'S'
-LET rm_par.mes10  = 'S'
-LET rm_par.mes11  = 'S'
-LET rm_par.mes12  = 'S'
-OPEN WINDOW w_imp AT 3,2 WITH 22 ROWS, 80 COLUMNS
+LET rm_par.mes1    = 'S'
+LET rm_par.mes2    = 'S'
+LET rm_par.mes3    = 'S'
+LET rm_par.mes4    = 'S'
+LET rm_par.mes5    = 'S'
+LET rm_par.mes6    = 'S'
+LET rm_par.mes7    = 'S'
+LET rm_par.mes8    = 'S'
+LET rm_par.mes9    = 'S'
+LET rm_par.mes10   = 'S'
+LET rm_par.mes11   = 'S'
+LET rm_par.mes12   = 'S'
+OPEN WINDOW w_talf310_1 AT 03, 02 WITH 22 ROWS, 80 COLUMNS
 	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE FIRST,
-		  BORDER, MESSAGE LINE LAST) 
-OPEN FORM f_cons FROM '../forms/talf310_1'
-DISPLAY FORM f_cons
+			BORDER, MESSAGE LINE LAST) 
+OPEN FORM f_talf310_1 FROM '../forms/talf310_1'
+DISPLAY FORM f_talf310_1
+DISPLAY 'R u b r o s' TO tit_rub
 LET vm_max_rows = 50
 WHILE TRUE
 	CALL lee_parametros()
 	IF int_flag THEN
-		RETURN
+		EXIT WHILE
 	END IF
-	LET vm_pant_cor   = 1
+	LET vm_pant_cor = 1
 	CALL obtiene_numero_meses()
 	CALL genera_tabla_temporal()
 	IF int_flag THEN
@@ -131,6 +135,8 @@ WHILE TRUE
 	CALL muestra_consulta()
 	DROP TABLE temp_acum
 END WHILE
+CLOSE WINDOW w_talf310_1
+EXIT PROGRAM
 
 END FUNCTION
 
@@ -148,6 +154,10 @@ DEFINE r_loc		RECORD LIKE gent002.*
 DEFINE r_mod		RECORD LIKE talt004.*
 DEFINE r_tot		RECORD LIKE talt005.*
 
+DISPLAY 'Enero'    TO tit_mes1
+DISPLAY 'Febrero'  TO tit_mes2
+DISPLAY 'Marzo'    TO tit_mes3 
+DISPLAY 'Subtotal' TO tit_subt
 LET int_flag = 0
 DISPLAY BY NAME rm_par.tit_mon
 INPUT BY NAME rm_par.* WITHOUT DEFAULTS
@@ -157,16 +167,15 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 			RETURN
 		END IF
 		LET INT_FLAG = 0
-		CALL FGL_WINQUESTION(vg_producto, 
-                                     'Desea salir de la consulta',
-                                     'No', 'Yes|No|Cancel',
-                                     'question', 1) RETURNING resp
+		--CALL FGL_WINQUESTION(vg_producto,'Desea salir de la consulta','No','Yes|No|Cancel','question',1)
+		CALL fl_hacer_pregunta('Desea salir de la consulta','No')
+			RETURNING resp
 		IF resp = 'Yes' THEN
 			LET INT_FLAG = 1
 			RETURN
 		END IF
 	ON KEY(F2)
-		IF infield(localidad) THEN
+		IF INFIELD(localidad) THEN
 			CALL fl_ayuda_localidad(vg_codcia)
 				RETURNING loc_aux, rm_par.tit_local
 			IF loc_aux IS NOT NULL THEN
@@ -174,7 +183,7 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 				DISPLAY BY NAME rm_par.localidad, rm_par.tit_local
 			END IF
 		END IF
-		IF infield(moneda) THEN
+		IF INFIELD(moneda) THEN
 			CALL fl_ayuda_monedas() RETURNING mon_aux,rm_par.tit_mon,
 							  num_dec
 			IF mon_aux IS NOT NULL THEN
@@ -182,14 +191,14 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 				DISPLAY BY NAME rm_par.moneda, rm_par.tit_mon
 			END IF
 		END IF
-		IF infield(modelo) THEN
+		IF INFIELD(modelo) THEN
 			CALL fl_ayuda_tipos_vehiculos(vg_codcia) RETURNING mod_aux, lin_aux
 			IF mod_aux IS NOT NULL THEN
 				LET rm_par.modelo = mod_aux
 				DISPLAY BY NAME rm_par.modelo
 			END IF
 		END IF
-		IF infield(tipo_ot) THEN
+		IF INFIELD(tipo_ot) THEN
 			CALL fl_ayuda_tipo_orden_trabajo(vg_codcia)
 				RETURNING tip_aux, rm_par.tit_tipo_ot
 			IF tip_aux IS NOT NULL THEN
@@ -202,7 +211,8 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 			CALL fl_lee_localidad(vg_codcia, rm_par.localidad) 
 				RETURNING r_loc.*
 			IF r_loc.g02_localidad IS NULL THEN
-				CALL fgl_winmessage(vg_producto, 'Localidad no existe', 'exclamation')
+				--CALL fgl_winmessage(vg_producto,'Localidad no existe.','exclamation')
+				CALL fl_mostrar_mensaje('Localidad no existe.','exclamation')
 				NEXT FIELD localidad
 			END IF
 			LET rm_par.tit_local = r_loc.g02_nombre
@@ -213,14 +223,16 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 		END IF
 	AFTER FIELD ano
 		IF rm_par.ano > YEAR(TODAY) THEN
-			CALL fgl_winmessage(vg_producto, 'Año incorrecto', 'exclamation')
+			--CALL fgl_winmessage(vg_producto,'Año incorrecto.','exclamation')
+			CALL fl_mostrar_mensaje('Año incorrecto.','exclamation')
 			NEXT FIELD ano
 		END IF
 	AFTER FIELD moneda
 		IF rm_par.moneda IS NOT NULL THEN
 			CALL fl_lee_moneda(rm_par.moneda) RETURNING rm_mon.*
 			IF rm_mon.g13_moneda IS NULL THEN
-				CALL fgl_winmessage(vg_producto, 'Moneda no existe', 'exclamation')
+				--CALL fgl_winmessage(vg_producto,'Moneda no existe', 'exclamation')
+				CALL fl_mostrar_mensaje('Moneda no existe.','exclamation')
 				NEXT FIELD moneda
 			END IF
 			LET rm_par.tit_mon = rm_mon.g13_nombre
@@ -233,7 +245,8 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 		IF rm_par.modelo IS NOT NULL THEN
 			CALL fl_lee_tipo_vehiculo(vg_codcia, rm_par.modelo) RETURNING r_mod.*
 			IF r_mod.t04_modelo IS NULL THEN
-				CALL fgl_winmessage(vg_producto, 'Modelo no existe', 'exclamation')
+				--CALL fgl_winmessage(vg_producto,'Modelo no existe', 'exclamation')
+				CALL fl_mostrar_mensaje('Modelo no existe.','exclamation')
 				NEXT FIELD modelo
 			END IF
 		END IF
@@ -241,7 +254,8 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 		IF rm_par.tipo_ot IS NOT NULL THEN
 			CALL fl_lee_tipo_orden_taller(vg_codcia, rm_par.tipo_ot) RETURNING r_tot.*
 			IF r_tot.t05_compania IS NULL THEN
-				CALL fgl_winmessage(vg_producto, 'Tipo de orden no existe', 'exclamation')
+				--CALL fgl_winmessage(vg_producto,'Tipo de orden no existe', 'exclamation')
+				CALL fl_mostrar_mensaje('Tipo de orden no existe.', 'exclamation')
 				NEXT FIELD tipo_ot
 			END IF
 			LET rm_par.tit_tipo_ot = r_tot.t05_nombre
@@ -257,7 +271,8 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 		   rm_par.mes7  = 'N' AND rm_par.mes8  = 'N' AND
 		   rm_par.mes9  = 'N' AND rm_par.mes10 = 'N' AND
 		   rm_par.mes11 = 'N' AND rm_par.mes12 = 'N' THEN
-			CALL fgl_winmessage(vg_producto, 'Seleccion un mes por lo menos', 'exclamation')
+			--CALL fgl_winmessage(vg_producto,'Seleccion un mes por lo menos', 'exclamation')
+			CALL fl_mostrar_mensaje('Seleccion un mes por lo menos.', 'exclamation')
 			NEXT FIELD mes1
 		END IF
 END INPUT
@@ -465,7 +480,7 @@ LET query = 'SELECT te_num_rubro, te_tit_rubro ',
 		expr_ceros CLIPPED,
 		expr_suma CLIPPED,
 		' FROM temp_acum1 ',
-		' ORDER BY 1'
+		' ORDER BY ', vm_campo_orden, ' ', vm_tipo_orden
 PREPARE cons FROM query
 DECLARE q_cons CURSOR FOR cons
 LET t_valor_1 = 0
@@ -479,6 +494,9 @@ FOREACH q_cons INTO num_rubro, rm_cons[i].*
 	LET t_valor_3 = t_valor_3 + rm_cons[i].valor_3
 	LET t_tot_val = t_tot_val + rm_cons[i].tot_val
 	LET i = i + 1
+	IF i > vm_max_rows THEN
+		EXIT FOREACH
+	END IF
 END FOREACH
 DROP TABLE temp_acum1
 
@@ -487,34 +505,43 @@ END FUNCTION
 
 
 FUNCTION muestra_consulta()
-DEFINE i		SMALLINT
+DEFINE i, j		SMALLINT
+DEFINE nuevo_DISPLAY	SMALLINT
+DEFINE pos_pantalla	SMALLINT
+DEFINE pos_arreglo	SMALLINT
+DEFINE rub_aux		VARCHAR(35)
 
 ERROR " " ATTRIBUTE(NORMAL) 
+LET nuevo_DISPLAY = 0
 CALL set_count(vm_num_rubros)
 WHILE TRUE
 	CALL muestra_nombre_meses()
 	CALL muestra_precision()
 	LET int_flag = 0
-	CALL fgl_keysetlabel('F9','Gráfico')
+	--#CALL fgl_keysetlabel('F9','Grafico')
+	IF vm_pantallas > 1 THEN
+		--#CALL fgl_keysetlabel('F6','Mas Meses')
+	ELSE
+		--#CALL fgl_keysetlabel('F6','')
+	END IF
 	DISPLAY ARRAY rm_cons TO rm_cons.*
-		BEFORE DISPLAY 
-			CALL dialog.keysetlabel("ACCEPT","")
-			CALL dialog.keysetlabel("PREVPAGE","")
-			CALL dialog.keysetlabel("NEXTPAGE","")
-		AFTER DISPLAY 
-			CONTINUE DISPLAY
 		ON KEY(INTERRUPT)
 			EXIT DISPLAY
 		ON KEY(F5)
 			LET i = arr_curr()
 			CALL detalle_ordenes_trabajo(rm_meses[vm_ind_ini])
+			LET int_flag = 0
 		ON KEY(F6)
 			IF vm_pantallas > 1 THEN
-				IF vm_pant_cor = 4 OR vm_pant_cor = vm_pantallas THEN
+				IF vm_pant_cor = 4 OR vm_pant_cor = vm_pantallas
+				THEN
 					LET vm_pant_cor = 1
 				ELSE
 					LET vm_pant_cor = vm_pant_cor + 1
 				END IF
+				LET nuevo_DISPLAY = 1
+				LET pos_pantalla = scr_line()
+				LET pos_arreglo  = arr_curr()
 				CALL carga_arreglo_consulta()
 				EXIT DISPLAY
 			END IF
@@ -534,16 +561,82 @@ WHILE TRUE
 					END IF
 				END IF
 			END IF
+			LET nuevo_DISPLAY = 1
+			LET pos_pantalla = scr_line()
+			LET pos_arreglo  = arr_curr()
 			CALL carga_arreglo_consulta()
 			EXIT DISPLAY
 		ON KEY(F9)
 			CALL muestra_grafico_lineas()
 			LET int_flag = 0
+		ON KEY(F15)
+			LET vm_campo_orden = 1
+			LET int_flag = 2
+			EXIT DISPLAY
+		ON KEY(F16)
+			LET vm_campo_orden = 2
+			LET int_flag = 2
+			EXIT DISPLAY
+		ON KEY(F17)
+			LET vm_campo_orden = 3
+			LET int_flag = 2
+			EXIT DISPLAY
+		ON KEY(F18)
+			LET vm_campo_orden = 4
+			LET int_flag = 2
+			EXIT DISPLAY
+		ON KEY(F19)
+			LET vm_campo_orden = 5
+			LET int_flag = 2
+			EXIT DISPLAY
+		BEFORE DISPLAY 
+			--CALL dialog.keysetlabel("PREVPAGE","")
+			--CALL dialog.keysetlabel("NEXTPAGE","")
+			--#CALL dialog.keysetlabel("RETURN","")
+			--#CALL dialog.keysetlabel("ACCEPT","")
+		BEFORE ROW
+			IF nuevo_DISPLAY THEN
+				CALL dialog.setcurrline(pos_pantalla,pos_arreglo)
+				LET nuevo_DISPLAY = 0
+			END IF
+			LET i = arr_curr()
+			DISPLAY i             TO num_row
+			DISPLAY vm_num_rubros TO max_row
+		AFTER DISPLAY 
+			CONTINUE DISPLAY
 	END DISPLAY
-	IF int_flag THEN
-		RETURN
+	IF int_flag = 1 THEN
+		EXIT WHILE
+	END IF
+	IF int_flag = 2 THEN
+		CALL asigna_orden()
+		LET nuevo_DISPLAY = 1
+		LET pos_pantalla  = scr_line()
+		LET pos_arreglo   = arr_curr()
+		LET rub_aux       = rm_cons[pos_arreglo].tit_rubro
+		CALL carga_arreglo_consulta()
+		IF vm_num_rubros > fgl_scr_size('rm_cons') THEN
+			FOR i = 1 TO vm_num_rubros
+				IF rm_cons[i].tit_rubro = rub_aux THEN
+					LET pos_arreglo = i
+					EXIT FOR
+				END IF
+			END FOR
+		END IF
 	END IF
 END WHILE
+
+END FUNCTION
+
+
+
+FUNCTION asigna_orden()
+
+IF vm_tipo_orden = 'ASC' THEN	
+	LET vm_tipo_orden = 'DESC'
+ELSE
+	LET vm_tipo_orden = 'ASC'
+END IF
 
 END FUNCTION
 
@@ -554,8 +647,9 @@ DEFINE mes		SMALLINT
 DEFINE fec_ini, fec_fin	DATE
 DEFINE num_rows, i	SMALLINT
 DEFINE max_rows		SMALLINT
+DEFINE tot_oc		DECIMAL(14,2)
+DEFINE tot_mo		DECIMAL(14,2)
 DEFINE tot_val		DECIMAL(14,2)
-DEFINE comando		VARCHAR(140)
 DEFINE r_ot		RECORD LIKE talt023.*
 DEFINE columna_act	SMALLINT
 DEFINE columna_ant	SMALLINT
@@ -563,92 +657,90 @@ DEFINE orden_act	CHAR(4)
 DEFINE orden_ant	CHAR(4)
 DEFINE orden		VARCHAR(100)
 DEFINE query		VARCHAR(300)
-DEFINE r_mot ARRAY[2000] OF RECORD
-	fecha		DATE,
-	num_ot		LIKE talt023.t23_orden,
-	num_fa		LIKE talt023.t23_num_factura,
-	nomcli		LIKE talt023.t23_nom_cliente,
-	valor		DECIMAL(14,2)
-	END RECORD
+DEFINE r_mot		ARRAY[2000] OF RECORD
+				fecha		DATE,
+				num_ot		LIKE talt023.t23_orden,
+				num_fa		LIKE talt023.t23_num_factura,
+				val_mo		DECIMAL(14,2),
+				val_oc		DECIMAL(14,2),
+				val_tot		DECIMAL(14,2)
+			END RECORD
+DEFINE r_adi		ARRAY[2000] OF RECORD
+				nomcli		LIKE talt023.t23_nom_cliente,
+				estad		LIKE talt023.t23_estado
+			END RECORD
+DEFINE run_prog		CHAR(10)
 
-CREATE TEMP TABLE temp_ord
-	(te_fecha	DATETIME YEAR TO SECOND,
-	 te_num_ot	INTEGER,
-	 te_num_fa	INTEGER,
-	 te_nomcli	CHAR(40),
-	 te_valor	DECIMAL(14,2))
+CREATE TEMP TABLE tmp_det
+	(
+	 fecha_tran	DATE,
+	 num_tran	INTEGER,
+	 ord_t		INTEGER,
+	 valor_mo	DECIMAL(14,2),
+	 valor_oc	DECIMAL(14,2),
+	 valor_tot	DECIMAL(14,2),
+	 est		CHAR(1),
+	 codcli		INTEGER,
+	 nomcli		VARCHAR(100)
+	)
 LET max_rows = 2000
-OPEN WINDOW w_mov AT 4,5 WITH FORM "../forms/talf310_2"
+OPEN WINDOW w_talf310_2 AT 4,5 WITH FORM "../forms/talf310_2"
 	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MESSAGE LINE LAST, BORDER)
 DISPLAY 'Fecha'         TO tit_col1
 DISPLAY 'Orden'         TO tit_col2
-DISPLAY 'Factura'       TO tit_col3
-DISPLAY 'C l i e n t e' TO tit_col4
-DISPLAY 'V a l o r'     TO tit_col5
+DISPLAY 'Numero'        TO tit_col3
+DISPLAY 'V a l o r  MO' TO tit_col4
+DISPLAY 'V a l o r  OC' TO tit_col5
+DISPLAY 'V a l o r  OT' TO tit_col6
 LET fec_ini = MDY(mes, 01, rm_par.ano)
 LET fec_fin = fec_ini + 1 UNITS MONTH - 1 UNITS DAY
-DISPLAY BY NAME fec_ini, fec_fin, rm_par.moneda,
-	rm_par.tit_mon, rm_par.modelo,
-	rm_par.tipo_ot, rm_par.tit_tipo_ot
+DISPLAY BY NAME fec_ini, fec_fin, rm_par.moneda, rm_par.tit_mon, rm_par.modelo,
+		rm_par.tipo_ot, rm_par.tit_tipo_ot
 LET int_flag = 0
-INPUT BY NAME fec_ini, fec_fin WITHOUT DEFAULTS
+INPUT BY NAME fec_ini, fec_fin
+	WITHOUT DEFAULTS
+	ON KEY(INTERRUPT)
+		LET int_flag = 1
+		EXIT INPUT
 	AFTER INPUT
 		IF fec_ini > fec_fin THEN
-			CALL fgl_winmessage(vg_producto, 'Rango de fechas incorrecto', 'exclamation')
+			CALL fl_mostrar_mensaje('Rango de fechas incorrecto.','exclamation')
 			NEXT FIELD fec_ini
 		END IF
-END INPUT			
+END INPUT
 IF int_flag THEN
 	LET int_flag = 0
-	CLOSE WINDOW w_mov
-	DROP TABLE temp_ord
+	CLOSE WINDOW w_talf310_2
+	DROP TABLE tmp_det
 	RETURN
 END IF
 ERROR "Generando consulta . . . espere por favor." ATTRIBUTE(NORMAL)
-DECLARE q_cab CURSOR FOR 
-	SELECT * FROM talt023
-		WHERE t23_compania  = vg_codcia AND 
-		      t23_estado = 'F' AND
-	              t23_fec_cierre BETWEEN EXTEND(fec_ini, YEAR TO SECOND) AND
-	              EXTEND(fec_fin, YEAR TO SECOND) + 23 UNITS HOUR + 
-		      59 UNITS MINUTE
-LET num_rows = 0
-LET tot_val = 0
-FOREACH q_cab INTO r_ot.*
-	IF rm_par.localidad IS NOT NULL AND 
-		r_ot.t23_localidad <> rm_par.localidad THEN
-		CONTINUE FOREACH
-	END IF
-	IF rm_par.moneda <> r_ot.t23_moneda THEN
-		CONTINUE FOREACH
-	END IF
-	IF rm_par.modelo IS NOT NULL AND r_ot.t23_modelo <> rm_par.modelo THEN
-		CONTINUE FOREACH
-	END IF
-	IF rm_par.tipo_ot IS NOT NULL AND 
-		r_ot.t23_tipo_ot <> rm_par.tipo_ot THEN
-		CONTINUE FOREACH
-	END IF
-	LET num_rows = num_rows + 1
-	INSERT INTO temp_ord VALUES (r_ot.t23_fec_cierre, r_ot.t23_orden,
-	                             r_ot.t23_num_factura, r_ot.t23_nom_cliente,
-	                             r_ot.t23_tot_neto)
-	LET tot_val = tot_val + r_ot.t23_tot_neto
-	IF num_rows = max_rows THEN
-		EXIT FOREACH
-	END IF
-END FOREACH
+CALL preparar_tabla_de_trabajo('F', 1, fec_ini, fec_fin)
+CALL preparar_tabla_de_trabajo('D', 1, fec_ini, fec_fin)
+CALL preparar_tabla_de_trabajo('N', 1, fec_ini, fec_fin)
+CALL preparar_tabla_de_trabajo('D', 2, fec_ini, fec_fin)
+SELECT COUNT(*) INTO num_rows FROM tmp_det
 IF num_rows = 0 THEN
 	CALL fl_mensaje_consulta_sin_registros()
-	CLOSE WINDOW w_mov
-	DROP TABLE temp_ord
+	CLOSE WINDOW w_talf310_2
+	DROP TABLE tmp_det
 	RETURN
 END IF
+SQL
+	SELECT NVL(SUM(valor_mo), 0), NVL(SUM(valor_oc), 0),
+		NVL(SUM(valor_tot), 0)
+		INTO $tot_mo, $tot_oc, $tot_val
+		FROM tmp_det
+END SQL
 LET orden_act = 'DESC'
 LET orden_ant = 'ASC'
 LET columna_act = 1
 LET columna_ant = 4
-DISPLAY BY NAME tot_val
+LET run_prog = '; fglrun '
+IF vg_gui = 0 THEN
+	LET run_prog = '; fglgo '
+END IF
+DISPLAY BY NAME tot_mo, tot_oc, tot_val
 ERROR ' '
 WHILE TRUE
 	IF orden_act = 'ASC' THEN
@@ -658,33 +750,34 @@ WHILE TRUE
 	END IF
 	LET orden = columna_act, ' ', orden_act, ', ', columna_ant, ' ',
 		    orden_ant 
-	LET query = 'SELECT * FROM temp_ord ORDER BY ', orden CLIPPED
+	LET query = 'SELECT fecha_tran, ord_t, num_tran, valor_mo, valor_oc, ',
+				'valor_tot, nomcli, est ',
+			'FROM tmp_det ',
+			'ORDER BY ', orden CLIPPED
 	PREPARE mt FROM query
 	DECLARE q_mt CURSOR FOR mt
 	LET  i = 1
-	FOREACH q_mt INTO r_mot[i].*
+	FOREACH q_mt INTO r_mot[i].*, r_adi[i].*
 		LET i = i + 1
+		IF i > max_rows THEN
+			EXIT FOREACH
+		END IF
 	END FOREACH 
 	LET int_flag = 0
 	CALL set_count(num_rows)
 	DISPLAY ARRAY r_mot TO r_mot.*
-		BEFORE DISPLAY 
-			CALL dialog.keysetlabel("ACCEPT","")
-		AFTER DISPLAY 
-			CONTINUE DISPLAY
-		BEFORE ROW
-			LET i = arr_curr()
-			MESSAGE i, ' de ', num_rows
 		ON KEY(INTERRUPT)
+			LET int_flag = 1
 			EXIT DISPLAY
 		ON KEY(F5)
 			LET i = arr_curr()
-			LET comando = 'cd ', vg_dir_fobos CLIPPED, vg_separador,
-				      'TALLER', vg_separador, 'fuentes; ',
-				      'fglrun talp204 ', vg_base, 
-				      ' TA ', vg_codcia, ' ', vg_codloc, ' ',
-				      r_mot[i].num_ot, ' O'
-			RUN comando
+			CALL fl_ver_orden_trabajo(r_mot[i].num_ot, 'O')
+			LET int_flag = 0
+		ON KEY(F6)
+			LET i = arr_curr()
+			CALL fl_ver_factura_dev_tal(r_mot[i].num_fa,
+							r_adi[i].estad)
+			LET int_flag = 0
 		ON KEY(F15)
 			LET columna_ant = columna_act
 			LET columna_act = 1 
@@ -715,14 +808,214 @@ WHILE TRUE
 			LET orden_ant   = orden_act
 			LET int_flag = 2
 			EXIT DISPLAY
+		BEFORE DISPLAY 
+			--#CALL dialog.keysetlabel("ACCEPT","")
+		BEFORE ROW
+			LET i = arr_curr()
+			DISPLAY i        TO num_row
+			DISPLAY num_rows TO max_row
+			DISPLAY BY NAME r_adi[i].nomcli
+		AFTER DISPLAY 
+			CONTINUE DISPLAY
 	END DISPLAY
 	IF int_flag = 1 THEN
 		EXIT WHILE
 	END IF
 END WHILE
-CLOSE WINDOW w_mov
-DROP TABLE temp_ord
 LET int_flag = 0
+CLOSE WINDOW w_talf310_2
+DROP TABLE tmp_det
+RETURN
+
+END FUNCTION
+
+
+
+FUNCTION preparar_tabla_de_trabajo(flag, tr_ant, fec_ini, fec_fin)
+DEFINE flag		CHAR(1)
+DEFINE tr_ant		SMALLINT
+DEFINE fec_ini, fec_fin	DATE
+DEFINE factor		CHAR(8)
+DEFINE expr_out		CHAR(5)
+DEFINE expr_fec1	VARCHAR(200)
+DEFINE expr_fec2	VARCHAR(200)
+DEFINE query		CHAR(6000)
+
+IF flag = 'F' OR tr_ant = 2 THEN
+	LET expr_fec1 = "   AND DATE(t23_fec_factura) BETWEEN '",
+				fec_ini, "' AND '",
+				fec_fin, "'"
+	LET expr_fec2 = NULL
+	LET expr_out  = 'OUTER'
+END IF
+IF (flag = 'D' OR flag = 'N') AND tr_ant = 1 THEN
+	LET expr_out  = NULL
+	LET expr_fec1 = NULL
+	LET expr_fec2 = "   AND DATE(t28_fec_anula) BETWEEN '",
+				fec_ini, "' AND '",
+				fec_fin, "'"
+END IF
+CASE tr_ant
+	WHEN 1
+		LET factor = ' * (-1) '
+	WHEN 2
+		LET factor = NULL
+END CASE
+LET query = "INSERT INTO tmp_det ",
+		"SELECT CASE WHEN t23_estado = 'D' AND ", tr_ant, " = 1 ",
+			" THEN (SELECT DATE(t28_fec_anula) ",
+				"FROM talt028 ",
+				"WHERE t28_compania  = t23_compania ",
+				"  AND t28_localidad = t23_localidad ",
+				"  AND t28_factura   = t23_num_factura)",
+			" ELSE DATE(t23_fec_factura) ",
+			" END, ",
+			" CASE WHEN t23_estado = 'D' AND ", tr_ant, " = 1 ",
+			" THEN (SELECT t28_num_dev FROM talt028 ",
+				"WHERE t28_compania  = t23_compania ",
+				"  AND t28_localidad = t23_localidad ",
+				"  AND t28_factura   = t23_num_factura)",
+			" ELSE t23_num_factura ",
+			" END, ",
+			" CASE WHEN t23_estado = 'D' ",
+			" THEN (SELECT t28_ot_ant FROM talt028 ",
+				"WHERE t28_compania  = t23_compania ",
+				"  AND t28_localidad = t23_localidad ",
+				"  AND t28_factura   = t23_num_factura)",
+			" ELSE t23_orden ",
+			" END, ",
+		" CASE WHEN t23_estado = 'F' ",
+			" THEN (t23_val_mo_tal - t23_vde_mo_tal) ",
+			" ELSE (t23_val_mo_tal - t23_vde_mo_tal) ",
+							factor CLIPPED,
+		" END, ",
+		" CASE WHEN t23_estado = 'F' THEN ",
+			"(SELECT NVL(SUM(ROUND((c11_precio - c11_val_descto)",
+			" * (1 + c10_recargo / 100), 2)), 0) ",
+			" FROM ordt010, ordt011 ",
+			" WHERE c10_compania    = t23_compania ",
+			"   AND c10_localidad   = t23_localidad ",
+			"   AND c10_ord_trabajo = t23_orden ",
+			"   AND c10_estado      = 'C' ",
+			"   AND c11_compania    = c10_compania ",
+			"   AND c11_localidad   = c10_localidad ",
+			"   AND c11_numero_oc   = c10_numero_oc ",
+			"   AND c11_tipo        = 'S') + ",
+			"(SELECT NVL(SUM(ROUND(((c11_cant_ped * c11_precio)",
+			" - c11_val_descto) * (1 + c10_recargo / 100), 2))",
+			", 0) ",
+			" FROM ordt010, ordt011 ",
+			" WHERE c10_compania    = t23_compania ",
+			"   AND c10_localidad   = t23_localidad ",
+			"   AND c10_ord_trabajo = t23_orden ",
+			"   AND c10_estado      = 'C' ",
+			"   AND c11_compania    = c10_compania ",
+			"   AND c11_localidad   = c10_localidad ",
+			"   AND c11_numero_oc   = c10_numero_oc ",
+			"   AND c11_tipo        = 'B') + ",
+			" CASE WHEN (SELECT COUNT(*) FROM ordt010 ",
+				" WHERE c10_compania    = t23_compania ",
+				"   AND c10_localidad   = t23_localidad ",
+				"   AND c10_ord_trabajo = t23_orden ",
+				"   AND c10_estado      = 'C') = 0 ",
+			" THEN (t23_val_rp_tal + t23_val_rp_ext + ",
+			       "t23_val_rp_cti + t23_val_otros2) ",
+			" ELSE 0.00 ",
+			" END ",
+		" ELSE (t23_val_mo_ext + t23_val_mo_cti + ",
+			"t23_val_rp_tal + t23_val_rp_ext + ",
+			"t23_val_rp_cti + t23_val_otros2) ", factor CLIPPED,
+		" END tot_oc, ",
+		" CASE WHEN t23_estado = 'F' ",
+			" THEN (t23_val_mo_tal - t23_vde_mo_tal) ",
+			" ELSE (t23_val_mo_tal - t23_vde_mo_tal) ",
+							factor CLIPPED,
+		" END + ",
+		" CASE WHEN t23_estado = 'F' THEN ",
+			"(SELECT NVL(SUM(ROUND((c11_precio - c11_val_descto)",
+			" * (1 + c10_recargo / 100), 2)), 0) ",
+			" FROM ordt010, ordt011 ",
+			" WHERE c10_compania    = t23_compania ",
+			"   AND c10_localidad   = t23_localidad ",
+			"   AND c10_ord_trabajo = t23_orden ",
+			"   AND c10_estado      = 'C' ",
+			"   AND c11_compania    = c10_compania ",
+			"   AND c11_localidad   = c10_localidad ",
+			"   AND c11_numero_oc   = c10_numero_oc ",
+			"   AND c11_tipo        = 'S') + ",
+			"(SELECT NVL(SUM(ROUND(((c11_cant_ped * c11_precio)",
+			" - c11_val_descto) * (1 + c10_recargo / 100), 2)),0) ",
+			" FROM ordt010, ordt011 ",
+			" WHERE c10_compania    = t23_compania ",
+			"   AND c10_localidad   = t23_localidad ",
+			"   AND c10_ord_trabajo = t23_orden ",
+			"   AND c10_estado      = 'C' ",
+			"   AND c11_compania    = c10_compania ",
+			"   AND c11_localidad   = c10_localidad ",
+			"   AND c11_numero_oc   = c10_numero_oc ",
+			"   AND c11_tipo        = 'B') + ",
+			" CASE WHEN (SELECT COUNT(*) FROM ordt010 ",
+				" WHERE c10_compania    = t23_compania ",
+				"   AND c10_localidad   = t23_localidad ",
+				"   AND c10_ord_trabajo = t23_orden ",
+				"   AND c10_estado      = 'C') = 0 ",
+			" THEN (t23_val_rp_tal + t23_val_rp_ext + ",
+			       "t23_val_rp_cti + t23_val_otros2) ",
+			" ELSE 0.00 ",
+			" END ",
+		" ELSE (t23_val_mo_ext + t23_val_mo_cti + ",
+			"t23_val_rp_tal + t23_val_rp_ext + ",
+			"t23_val_rp_cti + t23_val_otros2) ", factor CLIPPED,
+		" END, ",
+		" CASE WHEN ", tr_ant, " = 1 THEN t23_estado ELSE 'F' END, ",
+		" t23_cod_cliente, t23_nom_cliente ",
+		" FROM talt023, ", expr_out, " talt028 ",
+		" WHERE t23_compania  = ", vg_codcia,
+		"   AND t23_localidad = ", vg_codloc,
+		"   AND t23_estado    = '", flag, "'",
+		expr_fec1 CLIPPED,
+		"   AND t28_compania  = t23_compania ",
+		"   AND t28_localidad = t23_localidad ",
+		"   AND t28_factura   = t23_num_factura ",
+		expr_fec2 CLIPPED,
+		" GROUP BY 1, 2, 3, 4, 5, 6, 7, 8, 9 "
+PREPARE cons_tmp FROM query
+EXECUTE cons_tmp
+IF tr_ant = 2 THEN
+	LET query = 'DELETE FROM tmp_det ',
+			' WHERE fecha_tran < "', fec_ini, '"',
+			'    OR fecha_tran > "', fec_fin, '"'
+	PREPARE cons_del FROM query
+	EXECUTE cons_del
+	RETURN
+END IF
+LET query = 'SELECT num_tran num_anu, z21_tipo_doc ',
+		' FROM tmp_det, talt028, OUTER cxct021 ',
+		' WHERE est           = "D" ',
+		'   AND t28_compania  = ', vg_codcia,
+		'   AND t28_localidad = ', vg_codloc,
+		'   AND t28_num_dev   = num_tran ',
+		'   AND z21_compania  = t28_compania ',
+		'   AND z21_localidad = t28_localidad ',
+		'   AND z21_tipo_doc  = "NC" ',
+		'   AND z21_areaneg   = 2 ',
+		'   AND z21_cod_tran  = "FA" ',
+		'   AND z21_num_tran  = t28_factura ',
+		' INTO TEMP t2 '
+PREPARE cons_t2 FROM query 
+EXECUTE cons_t2
+CASE flag
+	WHEN 'N' SELECT * FROM t2 WHERE z21_tipo_doc IS NULL INTO TEMP t3
+		 DELETE FROM t2 WHERE z21_tipo_doc IS NULL
+	WHEN 'D' DELETE FROM t2 WHERE z21_tipo_doc IS NOT NULL
+END CASE
+DROP TABLE t2
+IF flag = 'N' THEN
+	UPDATE tmp_det SET est = flag WHERE est = "D"
+		  AND num_tran = (SELECT num_anu FROM t3
+					WHERE num_anu = num_tran)
+	DROP TABLE t3
+END IF
 
 END FUNCTION
 
@@ -1019,19 +1312,19 @@ LET key_f30 = FGL_KEYVAL("F30")
 LET int_flag = 0
 INPUT BY NAME tecla
 	BEFORE INPUT
-		CALL dialog.keysetlabel("ACCEPT","")
-		CALL dialog.keysetlabel("F31","")
-		CALL dialog.keysetlabel("F32","")
-		CALL dialog.keysetlabel("F33","")
-		CALL dialog.keysetlabel("F34","")
-		CALL dialog.keysetlabel("F35","")
-		CALL dialog.keysetlabel("F36","")
-		CALL dialog.keysetlabel("F37","")
-		CALL dialog.keysetlabel("F38","")
-		CALL dialog.keysetlabel("F39","")
-		CALL dialog.keysetlabel("F40","")
-		CALL dialog.keysetlabel("F41","")
-		CALL dialog.keysetlabel("F42","")
+		--#CALL dialog.keysetlabel("ACCEPT","")
+		--#CALL dialog.keysetlabel("F31","")
+		--#CALL dialog.keysetlabel("F32","")
+		--#CALL dialog.keysetlabel("F33","")
+		--#CALL dialog.keysetlabel("F34","")
+		--#CALL dialog.keysetlabel("F35","")
+		--#CALL dialog.keysetlabel("F36","")
+		--#CALL dialog.keysetlabel("F37","")
+		--#CALL dialog.keysetlabel("F38","")
+		--#CALL dialog.keysetlabel("F39","")
+		--#CALL dialog.keysetlabel("F40","")
+		--#CALL dialog.keysetlabel("F41","")
+		--#CALL dialog.keysetlabel("F42","")
 	ON KEY(F31,F32,F33,F34,F35,F36,F37,F38,F39,F40,F41,F42)
 		LET i = FGL_LASTKEY() - key_f30
 		CALL detalle_ordenes_trabajo(i)
@@ -1063,7 +1356,7 @@ LET rm_color[12] = 'black'
 END FUNCTION
 
 
-FUNCTION validar_parametros()
+FUNCTION no_validar_parametros()
 
 CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
 IF rg_mod.g50_modulo IS NULL THEN

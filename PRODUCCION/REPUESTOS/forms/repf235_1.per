@@ -1,0 +1,79 @@
+DATABASE aceros
+SCREEN
+{
+
+    Registro: [c000 ]         Fecha: [c015      ]       Estado: [d|c018     ]
+
+                                            Tipo Carga Archivo: [e|c021     ]
+  Referencia: [c001                                                         ]
+
+    Division: [c]        [c002                               ]
+       Linea: [c2]       [c003                               ]
+       Grupo: [c04]      [c005                                    ]
+       Clase: [c006    ] [c007                                              ]
+       Marca: [c008  ]   [c009                                ]
+
+  Codigo Utilidad: [c010 ]               Partida: [c011           ]
+
+     Nuevo Precio: [c012         ]
+    Porc. Aumento: [c013  ] %            Porc. Decremento: [c014  ] %
+
+    Ingresado Por: [c016      ]          Fecha Ingreso: [c017               ]
+    Reversado Por: [c020      ]          Fecha Revers.: [c019               ]
+
+}
+TABLES 
+rept003
+rept070
+rept071
+rept072
+rept073
+rept085
+ATTRIBUTES
+c000 = rept085.r85_codigo, NOENTRY, REVERSE, UPSHIFT;
+c015 = rept085.r85_fec_camprec, NOENTRY, REVERSE,UPSHIFT,FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la Fecha en formato: dd-mm-aaaa.';
+c001 = rept085.r85_referencia, AUTONEXT, REVERSE, UPSHIFT;
+d    = rept085.r85_estado, NOENTRY, REVERSE, UPSHIFT,
+	COMMENTS = '(A) Activo  (R) Reversado';
+c018 = FORMONLY.tit_estado, NOENTRY, UPSHIFT;
+
+c    = rept085.r85_division, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = rept003.r03_nombre, NOENTRY, UPSHIFT;  
+c2   = rept085.r85_linea, AUTONEXT, UPSHIFT, 
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = rept070.r70_desc_sub, NOENTRY, UPSHIFT;
+c04  = rept085.r85_cod_grupo, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c005 = rept071.r71_desc_grupo, NOENTRY, UPSHIFT;
+c006 = rept085.r85_cod_clase, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c007 = rept072.r72_desc_clase, NOENTRY, UPSHIFT;
+c008 = rept085.r85_marca, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c009 = rept073.r73_desc_marca, NOENTRY, UPSHIFT;
+
+c010 = rept085.r85_cod_util, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c011 = rept085.r85_partida, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c012 = rept085.r85_precio_nue, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = '##,###,##&.##', INCLUDE = (0 TO 40000.00),
+	COMMENTS = 'Precio que se actualizara en todos los items en base a los parametros especif.';
+c013 = rept085.r85_porc_aum, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = '##&.##', INCLUDE = (0 TO 100.00),
+	COMMENTS = 'Incrementa precios a los items en base a los parametros especificados.';
+c014 = rept085.r85_porc_dec, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = '##&.##', INCLUDE = (0 TO 100.00),
+	COMMENTS = 'Decrementa precios a los items en base a los parametros especificados.';
+
+c016 = rept085.r85_usuario, NOENTRY, REVERSE, UPSHIFT;
+c017 = rept085.r85_fecing, NOENTRY, REVERSE, UPSHIFT;
+c019 = rept085.r85_fec_reversa, NOENTRY, UPSHIFT;
+c020 = rept085.r85_usu_reversa, NOENTRY, UPSHIFT;
+
+e    = rept085.r85_tipo_carga, NOENTRY, REVERSE, UPSHIFT,
+	COMMENTS = '(N) En linea  (C) Cargado  (P) Procesado  (E) Eliminado';
+c021 = FORMONLY.tit_tipo_carga, NOENTRY, UPSHIFT;
+END

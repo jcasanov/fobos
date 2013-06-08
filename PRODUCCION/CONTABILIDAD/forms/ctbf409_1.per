@@ -1,38 +1,42 @@
-
+DATABASE FORMONLY
 SCREEN
 {
 
-   Aux. Contable:[c0          ][c1                                      ]
-          Moneda:[c6][c7                        ]
-   Fecha Inicial:[c4        ]     	         Fecha Final:[c5        ]
+   Aux. Contable: [c0          ] [c1                                      ]
+          Moneda: [c6] [c7                        ]
+   Fecha Inicial: [c4        ]                     Fecha Final:[c5        ]
 
-         Cliente:[c2          ][c3                                      ]
-       Proveedor:[c8          ][c9                                      ]
-          Pedido:[c10         ]
+         Cliente: [c2          ] [c3                                      ]
+       Proveedor: [c8          ] [c9                                      ]
+          Pedido: [c10         ]
 
-
+                    Incluir Saldos sin movimientos a la Fecha Inicial?: [c]
+                     Ver solo Saldos sin movimientos a la Fecha Final?: [d]
 
 }
 ATTRIBUTES
+c0  = FORMONLY.vm_cta_inicial TYPE VARCHAR, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c1  = FORMONLY.nom_cta_ini, NOENTRY, REVERSE;
+c2  = FORMONLY.vm_cliente TYPE VARCHAR, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c3  = FORMONLY.nom_cliente, NOENTRY;
+c8  = FORMONLY.vm_proveedor TYPE VARCHAR, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c9  = FORMONLY.nom_proveedor, NOENTRY;
+c10 = FORMONLY.vm_pedido  TYPE VARCHAR, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 
-c0  = formonly.vm_cta_inicial TYPE VARCHAR, REVERSE, UPSHIFT,
-	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c1  = formonly.nom_cta_ini, NOENTRY;
-c2  = formonly.vm_cliente TYPE VARCHAR, UPSHIFT,
-	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c3  = formonly.nom_cliente, NOENTRY;
-c8  = formonly.vm_proveedor TYPE VARCHAR, UPSHIFT,
-	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c9  = formonly.nom_proveedor, NOENTRY;
-c10 = formonly.vm_pedido  TYPE VARCHAR, UPSHIFT,
-	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-
-c4  = formonly.vm_fecha_ini TYPE DATE, REVERSE, FORMAT = 'dd-mm-yyyy',
+c4  = FORMONLY.vm_fecha_ini TYPE DATE, REVERSE, FORMAT = 'dd-mm-yyyy',
 	COMMENT = 'Digite la fecha en formato: dd-mm-aaaa.';
-c5  = formonly.vm_fecha_fin TYPE DATE, REVERSE, FORMAT = 'dd-mm-yyyy',
+c5  = FORMONLY.vm_fecha_fin TYPE DATE, REVERSE, FORMAT = 'dd-mm-yyyy',
 	COMMENT = 'Digite la fecha en formato: dd-mm-aaaa.';
-c6  = formonly.vm_moneda TYPE VARCHAR, REVERSE, UPSHIFT,
+c6  = FORMONLY.vm_moneda TYPE VARCHAR, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c7  = formonly.nom_moneda, NOENTRY;
+c7  = FORMONLY.nom_moneda, NOENTRY, REVERSE;
 
+c   = FORMONLY.vm_incluir TYPE CHAR NOT NULL, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge', INCLUDE = ('S', 'N');
+d   = FORMONLY.vm_ver_saldos TYPE CHAR NOT NULL, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge', INCLUDE = ('S', 'N');
 END

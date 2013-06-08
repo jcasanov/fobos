@@ -1,0 +1,42 @@
+DATABASE aceros
+SCREEN 
+{
+
+                           PARTIDAS Y ARANCELES
+
+ [f001   |f002                                   |f003           ] [f004  ]
+[d001   |d002                                   |d003           ] [d004  ] 
+[d001   |d002                                   |d003           ] [d004  ] 
+[d001   |d002                                   |d003           ] [d004  ] 
+[d001   |d002                                   |d003           ] [d004  ] 
+[d001   |d002                                   |d003           ] [d004  ] 
+[d001   |d002                                   |d003           ] [d004  ] 
+[d001   |d002                                   |d003           ] [d004  ] 
+[d001   |d002                                   |d003           ] [d004  ] 
+[d001   |d002                                   |d003           ] [d004  ] 
+[d001   |d002                                   |d003           ] [d004  ] 
+[d001   |d002                                   |d003           ] [d004  ]    
+[c072                                    ]
+[c073                                              ]
+[c074                                                             ]
+}
+TABLES
+rept017
+ATTRIBUTES
+f001 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+f002 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+f003 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+f004 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+d001 = r17_item, NOENTRY, OPTIONS = '-nolist';
+d002 = formonly.r10_nombre, NOENTRY, OPTIONS = '-nolist';
+d003 = r17_partida, OPTIONS = '-nolist',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+d004 = r17_porc_part, INCLUDE = (0 TO 999.99), OPTIONS = '-nolist';
+c072 = formonly.descrip_3, NOENTRY, REVERSE;
+c073 = formonly.descrip_4, NOENTRY, REVERSE;
+c074 = formonly.nom_item,  NOENTRY, REVERSE;
+INSTRUCTIONS
+SCREEN RECORD rm_pp[11](r17_item, formonly.r10_nombre, r17_partida, 
+			r17_porc_part)
+KEYS 
+	F5 = "Ver Partida"

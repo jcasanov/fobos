@@ -1,13 +1,15 @@
-database diteca
-screen 
+DATABASE aceros
+SCREEN 
 {
 
-             Año: [c000]          Mes: [c0] 
-          Moneda: [c1] [c001              ]
- Area de Negocio: [c2] [c002              ]     Tipo Vcto.: [c            ]
-   Zona de Cobro: [c3] [c003              ]
-    Tipo Cliente: [c4] [c004              ]
-    Tipo Cartera: [c5] [c005              ]  Rango de Días: [c10] - [c010 ]
+             Año: [c000]            Mes: [c0]
+          Moneda: [c1] [c001                ]
+ Area de Negocio: [c2] [c002                ]     Tipo Vcto.: [c            ]
+   Zona de Cobro: [c3] [c003                ]
+    Tipo Cliente: [c4] [c004                ]
+    Tipo Cartera: [c5] [c005                ]
+        Vendedor: [c6] [c052                ]  Rango de Días: [c10] - [c010 ]
+       Localidad: [c7] [c053                ]
    
    Ordenar Por:
            [c051                ]  [a]Ascendente  [d]Descendente
@@ -15,38 +17,43 @@ screen
            [c051                ]  [a]Ascendente  [d]Descendente
 
 }
-end
-tables
+TABLES
 gent013
-
-attributes
-c000 = formonly.anho TYPE SMALLINT NOT NULL, REVERSE, INCLUDE=(1900 TO 9999);
-c0   = formonly.mes  TYPE SMALLINT NOT NULL, REVERSE, INCLUDE=(1 TO 12);
+rept001
+ATTRIBUTES
+c000 = FORMONLY.anho TYPE SMALLINT NOT NULL, REVERSE, INCLUDE=(1900 TO 9999);
+c0   = FORMONLY.mes  TYPE SMALLINT NOT NULL, REVERSE, INCLUDE=(1 TO 12);
 c1   = gent013.g13_moneda, REVERSE, AUTONEXT, UPSHIFT, WIDGET='FIELD_BMP', 
 	CONFIG='lista.bmp F2';
-c2   = formonly.areaneg,     WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
-c3   = formonly.zona_cobro,  WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
-c4   = formonly.tipocli,     WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
-c5   = formonly.tipocartera, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
-c001 = gent013.g13_nombre,     NOENTRY;
-c002 = formonly.n_areaneg,     NOENTRY;
-c003 = formonly.n_zona_cobro,  NOENTRY;
-c004 = formonly.n_tipocli,     NOENTRY;
-c005 = formonly.n_tipocartera, NOENTRY;
+c2   = FORMONLY.areaneg,     WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c3   = FORMONLY.zona_cobro,  WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c4   = FORMONLY.tipocli,     WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c5   = FORMONLY.tipocartera, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c001 = gent013.g13_nombre,UPSHIFT,REVERSE, NOENTRY;
+c002 = FORMONLY.n_areaneg,     NOENTRY;
+c003 = FORMONLY.n_zona_cobro,  NOENTRY;
+c004 = FORMONLY.n_tipocli,     NOENTRY;
+c005 = FORMONLY.n_tipocartera, NOENTRY;
 
-c    = formonly.tipo_vcto, DEFAULT='T', WIDGET='RADIO', 
+c    = FORMONLY.tipo_vcto, DEFAULT='T', WIDGET='RADIO', 
 	CONFIG='P "Por Vencer" V Vencidos T Todos';
 	
-c10  = formonly.dias_ini, INCLUDE=(NULL, 0 TO 999);
-c010 = formonly.dias_fin, INCLUDE=(NULL, 0 TO 99999);
-	
-c051 = formonly.col TYPE VARCHAR NOT NULL, REVERSE, OPTIONS='-nolist',
-	UPSHIFT, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
-a    = formonly.chk_asc,  AUTONEXT, WIDGET='CHECK', CONFIG='S N acknowledge', 
-	OPTIONS='-nolist', DEFAULT='S', COMMENT='Ordena ascendentemente.';
-d    = formonly.chk_desc, AUTONEXT, WIDGET='CHECK', CONFIG='S N acknowledge', 
-	OPTIONS='-nolist', DEFAULT='N', COMMENT='Ordena descendentemente.';
-end
+c10  = FORMONLY.dias_ini, INCLUDE=(NULL, 0 TO 999);
+c010 = FORMONLY.dias_fin, INCLUDE=(NULL, 0 TO 99999);
 
-instructions
-screen record rm_ord[3] (col, chk_asc, chk_desc)
+c7   = FORMONLY.localidad, UPSHIFT, AUTONEXT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c053 = FORMONLY.tit_localidad, UPSHIFT, NOENTRY;
+	
+c051 = FORMONLY.col TYPE VARCHAR NOT NULL, REVERSE, OPTIONS='-nolist',
+	UPSHIFT, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+a    = FORMONLY.chk_asc,  AUTONEXT, WIDGET='CHECK', CONFIG='S N acknowledge', 
+	OPTIONS='-nolist', DEFAULT='S', COMMENT='Ordena ascendentemente.';
+d    = FORMONLY.chk_desc, AUTONEXT, WIDGET='CHECK', CONFIG='S N acknowledge', 
+	OPTIONS='-nolist', DEFAULT='N', COMMENT='Ordena descendentemente.';
+c6   = FORMONLY.r01_codigo, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c052 = rept001.r01_nombres, NOENTRY, UPSHIFT;
+END
+INSTRUCTIONS
+SCREEN RECORD rm_ord[3] (col, chk_asc, chk_desc)

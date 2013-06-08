@@ -1,46 +1,52 @@
-DATABASE formonly
+DATABASE FORMONLY
 SCREEN
 {
-                    DETALLE MANO DE OBRA MECANICOS
+                    DETALLE MANO DE OBRA TECNICOS
 
-       Mecánico: [c001                     ]
-        Período: [c002      ] - [c003      ]
-         Moneda: [c4]     [c005           ]
-         Modelo: [c006           ]
-
- [c040      |c041  |c042         |c043                        |c044          ]
-[c020      |c021  |c022         |c023                        |c024          ]   
-[c020      |c021  |c022         |c023                        |c024          ] 
-[c020      |c021  |c022         |c023                        |c024          ] 
-[c020      |c021  |c022         |c023                        |c024          ] 
-[c020      |c021  |c022         |c023                        |c024          ] 
-[c020      |c021  |c022         |c023                        |c024          ] 
-[c020      |c021  |c022         |c023                        |c024          ] 
-[c020      |c021  |c022         |c023                        |c024          ] 
-[c020      |c021  |c022         |c023                        |c024          ] 
-[c020      |c021  |c022         |c023                        |c024          ] 
-                                                             [c030          ]
+              Técnico: [c001                     ]
+              Período: [c002      ] - [c003      ]
+               Moneda: [c4]      [c005           ]
+               Modelo: [c006           ]
+                                                        [c050] de [c051]
+ [c040      |c041  |c042  |c043                          |c044          ]
+[c020      |c021  |c022  |c023                          |c024          ] 
+[c020      |c021  |c022  |c023                          |c024          ] 
+[c020      |c021  |c022  |c023                          |c024          ] 
+[c020      |c021  |c022  |c023                          |c024          ] 
+[c020      |c021  |c022  |c023                          |c024          ] 
+[c020      |c021  |c022  |c023                          |c024          ] 
+[c020      |c021  |c022  |c023                          |c024          ] 
+[c020      |c021  |c022  |c023                          |c024          ] 
+[c020      |c021  |c022  |c023                          |c024          ] 
+                                                 Total: [c030          ]
 }
 ATTRIBUTES
-c001 = formonly.name_meca, REVERSE;
-c002 = formonly.fec_ini TYPE DATE NOT NULL, REVERSE, FORMAT = 'dd-mm-yyyy';
-c003 = formonly.fec_fin TYPE DATE NOT NULL, REVERSE, FORMAT = 'dd-mm-yyyy';
-c4   = formonly.moneda TYPE CHAR NOT NULL, UPSHIFT, REVERSE, AUTONEXT;
-c005 = formonly.tit_mon;
-c006 = formonly.modelo, UPSHIFT;
-c040 = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-c041 = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-c042 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
-c043 = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
-c044 = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
-c020 = formonly.fecha   TYPE DATE, FORMAT = 'dd-mm-yyyy';
-c021 = formonly.num_ot;
-c022 = formonly.num_fa;
-c023 = formonly.descri_tar;
-c024 = formonly.valor TYPE DECIMAL(12,2), FORMAT = '---,---,--&.##';
-c030 = formonly.tot_val TYPE DECIMAL(12,2), FORMAT = '---,---,--&.##', REVERSE;
-INSTRUCTIONS
-SCREEN RECORD r_mot[10] (formonly.fecha,  formonly.num_ot, formonly.num_fa, 
-			formonly.descri_tar, formonly.valor)
+c001 = FORMONLY.name_meca, REVERSE;
+c002 = FORMONLY.fec_ini TYPE DATE NOT NULL, REVERSE, FORMAT = 'dd-mm-yyyy';
+c003 = FORMONLY.fec_fin TYPE DATE NOT NULL, REVERSE, FORMAT = 'dd-mm-yyyy';
+c4   = FORMONLY.moneda TYPE CHAR NOT NULL, UPSHIFT, REVERSE, AUTONEXT;
+c005 = FORMONLY.tit_mon;
+c006 = FORMONLY.modelo, UPSHIFT;
+
+c040 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c041 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c042 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c043 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c044 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+
+c020 = FORMONLY.fecha   TYPE DATE, FORMAT = 'dd-mm-yyyy';
+c021 = FORMONLY.num_ot;
+c022 = FORMONLY.num_fa;
+c023 = FORMONLY.descri_tar;
+c024 = FORMONLY.valor TYPE DECIMAL(12,2), FORMAT = '---,---,--&.##';
+
+c030 = FORMONLY.tot_val TYPE DECIMAL(12,2), FORMAT = '---,---,--&.##', REVERSE;
+
+c050 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c051 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+END
 KEYS
-F5='Orden'
+F5 = 'Orden Trabajo'
+F6 = 'Comprobante'
+INSTRUCTIONS
+SCREEN RECORD r_mot[9] (fecha, num_ot, num_fa, descri_tar, valor)

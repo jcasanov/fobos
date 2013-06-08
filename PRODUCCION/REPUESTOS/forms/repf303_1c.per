@@ -1,0 +1,35 @@
+DATABASE aceros
+SCREEN
+{
+   No.  Fec. Cier.       Proveedor          FOB Total           Total      
+ [c0   |c1        |c2                   |c3              |c4                ]
+ [c0   |c1        |c2                   |c3              |c4                ]
+ [c0   |c1        |c2                   |c3              |c4                ]
+ [c0   |c1        |c2                   |c3              |c4                ]
+ [c0   |c1        |c2                   |c3              |c4                ]
+ [c0   |c1        |c2                   |c3              |c4                ]
+ [c0   |c1        |c2                   |c3              |c4                ]
+ [c0   |c1        |c2                   |c3              |c4                ]
+ [c0   |c1        |c2                   |c3              |c4                ]
+ [c0   |c1        |c2                   |c3              |c4                ]
+ [c0   |c1        |c2                   |c3              |c4                ]
+ [c0   |c1        |c2                   |c3              |c4                ]
+ [c0   |c1        |c2                   |c3              |c4                ]
+ [c0   |c1        |c2                   |c3              |c4                ]
+ [c0   |c1        |c2                   |c3              |c4                ]
+ [c0   |c1        |c2                   |c3              |c4                ]
+ [c0   |c1        |c2                   |c3              |c4                ]
+}
+TABLES rept028, cxpt001
+ATTRIBUTES
+c0  = rept028.r28_numliq, REVERSE, INCLUDE = (NULL, 1 TO 99999);
+c1  = rept028.r28_fecha_ing, FORMAT = 'dd-mm-yyyy', REVERSE, 
+	COMMENTS = 'Digite la fecha en formato dd-mm-aaaa';
+c2  = cxpt001.p01_nomprov, UPSHIFT, REVERSE;
+c3  = rept028.r28_tot_fob_mb, REVERSE, FORMAT = '###,###,##&.####';
+c4  = rept028.r28_tot_costimp, REVERSE, FORMAT = '#,###,###,##&.####';
+end
+INSTRUCTIONS 
+DELIMITERS '||'
+SCREEN RECORD r_detalle[17] (r28_numliq, r28_fecha_ing, p01_nomprov, 
+			     r28_tot_fob_mb, r28_tot_costimp)

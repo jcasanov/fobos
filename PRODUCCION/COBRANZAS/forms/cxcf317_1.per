@@ -1,0 +1,82 @@
+DATABASE aceros
+SCREEN
+{
+
+ Codigo Caja: [c000  ] [c001                          ]     Tipo: [c002      ]
+     Cliente: [c003  ] [c004                              ]
+     Periodo: [c005      ]  -  [c006      ]
+                                                            [c007 ] de [c008 ]
+ [c0|c010      |c011           |c012           |c013           |c014        |c]
+[c1|c020      |c021           |c022           |c023           |c024        |d]
+[c1|c020      |c021           |c022           |c023           |c024        |d]
+[c1|c020      |c021           |c022           |c023           |c024        |d]
+[c1|c020      |c021           |c022           |c023           |c024        |d]
+[c1|c020      |c021           |c022           |c023           |c024        |d]
+[c1|c020      |c021           |c022           |c023           |c024        |d]
+[c1|c020      |c021           |c022           |c023           |c024        |d]
+[c1|c020      |c021           |c022           |c023           |c024        |d]
+[c1|c020      |c021           |c022           |c023           |c024        |d]
+[c1|c020      |c021           |c022           |c023           |c024        |d]
+[c1|c020      |c021           |c022           |c023           |c024        |d]
+[c1|c020      |c021           |c022           |c023           |c024        |d]
+[c1|c020      |c021           |c022           |c023           |c024        |d]
+[c030                                          ]    Total ==> [c031        ]
+}
+TABLES
+cajt014
+cxct001
+ATTRIBUTES
+c000 = FORMONLY.codcaj TYPE INTEGER, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = FORMONLY.nomcaj TYPE VARCHAR, NOENTRY, UPSHIFT;
+c002 = FORMONLY.cont_cred TYPE CHAR NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, INCLUDE = ('C', 'R', 'T'), DEFAULT = 'R',
+	WIDGET = 'RADIO', CONFIG = 'C Contado R Credito T Todas';
+c003 = FORMONLY.codcli TYPE INTEGER, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c004 = FORMONLY.nomcli TYPE VARCHAR, NOENTRY, UPSHIFT;
+c005 = FORMONLY.fecha_ini TYPE DATE NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite el periodo inicial en formato: dd-mm-aaaa.';
+c006 = FORMONLY.fecha_fin TYPE DATE NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite el periodo final en formato: dd-mm-aaaa.';
+
+c007 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c008 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c0   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c010 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c011 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c012 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c013 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c014 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c    = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+
+c1   = cajt014.j14_localidad, NOENTRY, UPSHIFT, FORMAT = '&&',
+	OPTIONS = '-nolist';
+c020 = cajt014.j14_fecha_emi, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+c021 = cxct001.z01_nomcli, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c022 = cajt014.j14_num_fact_sri, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c023 = cajt014.j14_num_ret_sri, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c024 = cajt014.j14_valor_ret, NOENTRY, UPSHIFT, FORMAT = '#,###,##&.##',
+	OPTIONS = '-nolist';
+d    = cajt014.j14_cont_cred, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+
+c030 = FORMONLY.tit_nomcli, NOENTRY, UPSHIFT, REVERSE;
+c031 = FORMONLY.tot_valor_ret, NOENTRY, REVERSE, FORMAT = '#,###,##&.##';
+END
+KEYS
+F5  = 'Forma de Pago'
+F6  = 'Documento'
+F7  = 'Transaccion'
+F8  = 'Retenciones'
+F9  = 'Factura'
+F10 = 'Contabilizacion'
+F11 = 'Imprimir'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_detalle[13] (j14_localidad, j14_fecha_emi, z01_nomcli,
+				j14_num_fact_sri, j14_num_ret_sri,
+				j14_valor_ret, j14_cont_cred)

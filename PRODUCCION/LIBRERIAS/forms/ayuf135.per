@@ -1,0 +1,36 @@
+DATABASE aceros
+SCREEN
+{
+ CODIGOS SERIES
+
+ [lbl0           |lbl1               |lbl2                |lbl3               ]
+[c001           |c002               |c003                |c004               ]
+[c001           |c002               |c003                |c004               ]
+[c001           |c002               |c003                |c004               ]
+[c001           |c002               |c003                |c004               ]
+[c001           |c002               |c003                |c004               ]
+[c001           |c002               |c003                |c004               ]
+[c001           |c002               |c003                |c004               ]
+[c001           |c002               |c003                |c004               ]
+[c001           |c002               |c003                |c004               ]
+[c001           |c002               |c003                |c004               ]
+}
+TABLES
+rept076
+rept010
+
+ATTRIBUTES
+c001 = r76_item, UPSHIFT,REVERSE,OPTIONS='-nolist';
+c002 = r10_nombre, UPSHIFT,REVERSE,OPTIONS='-nolist';
+c003 = r76_serie,UPSHIFT,REVERSE,OPTIONS='-nolist';
+c004 = FORMONLY.r76_fecing TYPE DATE,FORMAT='dd-mm-yyyy',UPSHIFT,REVERSE,
+	OPTIONS='-nolist';
+
+lbl0 = formonly.bt_item, 	 WIDGET='BUTTON', CONFIG='F15';
+lbl1 = formonly.bt_descripcion,	 WIDGET='BUTTON', CONFIG='F16';
+lbl2 = formonly.bt_serie,        WIDGET='BUTTON', CONFIG='F17';
+lbl3 = formonly.bt_fecha,        WIDGET='BUTTON', CONFIG='F18';
+
+END
+INSTRUCTIONS
+SCREEN RECORD rh_serie[10] (r76_item, r10_nombre, r76_serie, r76_fecing)

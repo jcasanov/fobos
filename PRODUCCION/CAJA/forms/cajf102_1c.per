@@ -1,0 +1,43 @@
+DATABASE aceros
+SCREEN
+{
+
+
+                        Localidad: [c001]  [c005                  ]
+
+                   Código de Caja: [c002]
+                           Nombre: [c003                ]
+
+     Emisión Factura por Bienes ?: [a]
+  Emisión Factura por Servicios ?: [b]
+     Emisión de Ingresos a Caja ?: [c]
+
+        Auxiliar Contable de Caja: [c007        ] [c008                     ]
+
+                  Usuario de Caja: [c004      ] [c006                       ]
+}
+TABLES
+cajt002
+ATTRIBUTES
+c001 = cajt002.j02_localidad, AUTONEXT, REVERSE,
+	COMMENTS='Presione F2 para obtener ayuda del campo';
+c002 = cajt002.j02_codigo_caja, AUTONEXT, REVERSE,
+	COMMENTS='Presione F2 para obtener ayuda del campo';
+c003 = cajt002.j02_nombre_caja, AUTONEXT, REVERSE, UPSHIFT;
+a    = cajt002.j02_pre_ventas, AUTONEXT, REVERSE, UPSHIFT,
+	INCLUDE = ('S','N'), DEFAULT = 'S',
+	COMMENTS = 'Esta caja emite facturas por Bienes';
+b    = cajt002.j02_ordenes, AUTONEXT, REVERSE, UPSHIFT,
+	INCLUDE = ('S','N'), DEFAULT = 'S',
+	COMMENTS = 'Esta caja emite facturas por Servicios';
+c    = cajt002.j02_solicitudes, AUTONEXT, REVERSE, UPSHIFT,
+	INCLUDE = ('S','N'), DEFAULT = 'S',
+	COMMENTS = 'Esta caja emite facturas por Recuperación Cartera';
+c004 = cajt002.j02_usua_caja, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Un mismo usuario no puede estar asignado a mas de una caja';
+c005 = FORMONLY.tit_localidad, NOENTRY, REVERSE, UPSHIFT;
+c006 = FORMONLY.tit_usua_caja, NOENTRY, REVERSE, UPSHIFT;
+c007 = cajt002.j02_aux_cont, AUTONEXT, UPSHIFT, 
+	COMMENTS='Presione F2 para obtener ayuda del campo';
+c008 = FORMONLY.tit_aux_cont, NOENTRY, UPSHIFT;
+end

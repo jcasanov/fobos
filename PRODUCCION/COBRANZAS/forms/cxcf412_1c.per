@@ -1,0 +1,48 @@
+DATABASE FORMONLY
+SCREEN 
+{
+
+               Localidad: [c7] [c053                ]
+                  Moneda: [c1] [c020                ]
+  Tipo Documento a Favor: [c2] [c021                ]
+
+         Area de Negocio: [c3  ] [c022              ]
+                 Cliente: [c004] [c023                                      ]
+	     
+           Fecha Inicial: [c005      ]  
+             Fecha Final: [c006      ]
+
+                   Saldo: [c|c030     ]                Origen: [d|c031      ]
+
+}
+ATTRIBUTES
+c7   = FORMONLY.localidad, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c053 = FORMONLY.tit_localidad, UPSHIFT, NOENTRY;
+c1   = FORMONLY.moneda,	REVERSE, UPSHIFT, AUTONEXT, 
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c2   = FORMONLY.documento, REVERSE, UPSHIFT, AUTONEXT, 
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c3   = FORMONLY.area, REVERSE, UPSHIFT, AUTONEXT, 
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c004 = FORMONLY.cliente, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c005 = FORMONLY.inicial TYPE DATE, REVERSE, FORMAT = 'dd-mm-yyyy', UPSHIFT,
+	COMMENTS = 'Ingrese fecha en formato: dd-mm-aaaa';
+c006 = FORMONLY.final TYPE DATE, REVERSE, FORMAT = 'dd-mm-yyyy', UPSHIFT,
+	COMMENTS = 'Ingrese fecha en formato: dd-mm-aaaa';
+c    = FORMONLY.saldo TYPE CHAR, REVERSE, UPSHIFT, AUTONEXT,
+	INCLUDE = ('S', 'T'), DEFAULT = 'S',
+	COMMENTS = '(S) Saldo > 0  (T) Todo';
+c030 = FORMONLY.tit_saldo,REVERSE,UPSHIFT,NOENTRY;
+d    = FORMONLY.origen_doc TYPE CHAR, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = ('M', 'A', 'T'), DEFAULT = 'M',
+	COMMENTS = '(M) Manual  (A) Automatico  (T) Todos'; 
+c031 = FORMONLY.tit_origen_doc,REVERSE,UPSHIFT,NOENTRY;
+c020 = FORMONLY.desc_moneda, 	REVERSE, UPSHIFT;
+c021 = FORMONLY.desc_documento,REVERSE, UPSHIFT;
+c022 = FORMONLY.desc_area, REVERSE,	UPSHIFT;
+c023 = FORMONLY.desc_cliente,REVERSE,	UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'

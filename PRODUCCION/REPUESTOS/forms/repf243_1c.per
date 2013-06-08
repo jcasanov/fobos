@@ -1,0 +1,51 @@
+DATABASE aceros
+SCREEN
+{
+
+   Fecha Inicial: [c000      ]                      Fecha Final: [c001      ]
+
+                                                           [c030 ] de [c031 ]
+  Guía Remis.     Persona Responsable Guía   Fecha Guía  Número del SRI    E
+ [c010       |c011                          |c012      |c013              |d]
+ [c010       |c011                          |c012      |c013              |d]
+ [c010       |c011                          |c012      |c013              |d]
+ [c010       |c011                          |c012      |c013              |d]
+ [c010       |c011                          |c012      |c013              |d]
+ [c010       |c011                          |c012      |c013              |d]
+ [c010       |c011                          |c012      |c013              |d]
+ [c010       |c011                          |c012      |c013              |d]
+ [c010       |c011                          |c012      |c013              |d]
+ [c010       |c011                          |c012      |c013              |d]
+ [c010       |c011                          |c012      |c013              |d]
+ [c040                                       ][c0|c041    ]  N.E.: [c042    ]
+}
+TABLES
+rept095
+rept096
+rept097
+ATTRIBUTES
+c000 = FORMONLY.vm_fecha_ini TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Inicial en formato: dd-mm-aaaa';
+c001 = FORMONLY.vm_fecha_fin TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Final en formato: dd-mm-aaaa';
+
+c010 = rept095.r95_guia_remision, NOENTRY, UPSHIFT;
+c011 = rept095.r95_persona_guia, NOENTRY, UPSHIFT;
+c012 = FORMONLY.r95_fecing TYPE DATE, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c013 = rept095.r95_num_sri, AUTONEXT, UPSHIFT;
+d    = rept095.r95_estado, NOENTRY, UPSHIFT;
+
+c030 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c031 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c040 = rept095.r95_persona_dest, NOENTRY, UPSHIFT, REVERSE;
+c0   = rept097.r97_cod_tran, NOENTRY, UPSHIFT, REVERSE;
+c041 = rept097.r97_num_tran, NOENTRY, UPSHIFT, REVERSE;
+c042 = rept096.r96_num_entrega, NOENTRY, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_det[11] (r95_guia_remision, r95_persona_guia, r95_fecing,
+				r95_num_sri, r95_estado)

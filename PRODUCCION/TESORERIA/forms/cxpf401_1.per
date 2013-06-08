@@ -1,23 +1,26 @@
-database diteca
-screen 
+DATABASE aceros
+SCREEN 
 {
             
           Moneda: [c1] [c001              ]  Tipo Vcto.: [c            ]
-  Tipo Proveedor: [c2] [c002              ]  
+
+
+
+  Tipo Proveedor: [c2] [c002                                    ]  
    
 
 }
 end
-tables
+TABLES
 gent013
 
-attributes
+ATTRIBUTES
 c1   = gent013.g13_moneda, REVERSE, AUTONEXT, UPSHIFT, WIDGET='FIELD_BMP', 
 	CONFIG='lista.bmp F2';
-c2   = formonly.tipoprov, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
-c001 = gent013.g13_nombre, NOENTRY;
-c002 = formonly.n_tipoprov, NOENTRY;
+c2   = FORMONLY.tipoprov, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c001 = gent013.g13_nombre, REVERSE,NOENTRY;
+c002 = FORMONLY.n_tipoprov, NOENTRY;
 
-c    = formonly.tipo_vcto, DEFAULT='T', WIDGET='RADIO', 
+c    = FORMONLY.tipo_vcto, DEFAULT='T', WIDGET='RADIO', 
 	CONFIG='P "Por Vencer" V Vencidos T Todos';
 end

@@ -1,0 +1,54 @@
+DATABASE aceros
+SCREEN
+{
+   Fecha Inicial: [c004      ]                       Fecha Final: [c005      ]
+  Código Cliente: [c000  ] [c001                                             ]
+                                                            [c006 ] de [c007 ]
+ FA Nu. OT Nu. FA O.  OT D.  Fecha Ref.          Cliente           Total Ref.
+[c020  |c021  |c022  |c023  |c024      |c025                     |c026       ]
+[c020  |c021  |c022  |c023  |c024      |c025                     |c026       ]
+[c020  |c021  |c022  |c023  |c024      |c025                     |c026       ]
+[c020  |c021  |c022  |c023  |c024      |c025                     |c026       ]
+[c020  |c021  |c022  |c023  |c024      |c025                     |c026       ]
+[c020  |c021  |c022  |c023  |c024      |c025                     |c026       ]
+[c020  |c021  |c022  |c023  |c024      |c025                     |c026       ]
+[c020  |c021  |c022  |c023  |c024      |c025                     |c026       ]
+[c020  |c021  |c022  |c023  |c024      |c025                     |c026       ]
+[c020  |c021  |c022  |c023  |c024      |c025                     |c026       ]
+[c020  |c021  |c022  |c023  |c024      |c025                     |c026       ]
+[c020  |c021  |c022  |c023  |c024      |c025                     |c026       ]
+[c020  |c021  |c022  |c023  |c024      |c025                     |c026       ]
+[c030                                  ]               Total ==> [c031       ]
+}
+TABLES
+talt060
+ATTRIBUTES
+c000 = FORMONLY.vm_cliente TYPE CHAR, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c001 = FORMONLY.tit_cliente, NOENTRY, UPSHIFT;
+c004 = FORMONLY.vm_fecha_ini TYPE DATE NOT NULL, REQUIRED,
+	AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Inicial en formato: dd-mm-aaaa';
+c005 = FORMONLY.vm_fecha_fin TYPE DATE NOT NULL, REQUIRED,
+	AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Final en formato: dd-mm-aaaa';
+
+c006 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c007 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+
+c020 = talt060.t60_fac_nue, NOENTRY, UPSHIFT;
+c021 = talt060.t60_ot_nue, NOENTRY, UPSHIFT;
+c022 = talt060.t60_fac_ant, NOENTRY, UPSHIFT;
+c023 = talt060.t60_ot_ant, NOENTRY, UPSHIFT;
+c024 = FORMONLY.t60_fecing TYPE DATE, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c025 = talt060.t60_nomcli_nue, NOENTRY, UPSHIFT;
+c026 = FORMONLY.total_fact TYPE DECIMAL, NOENTRY,UPSHIFT,FORMAT = '####,##&.##';
+
+c030 = talt060.t60_motivo_refact, NOENTRY, UPSHIFT, REVERSE;
+c031 = FORMONLY.total_gen TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '####,##&.##';
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_refact[13] (t60_fac_nue, t60_ot_nue, t60_fac_ant, t60_ot_ant,
+				t60_fecing, t60_nomcli_nue, total_fact)

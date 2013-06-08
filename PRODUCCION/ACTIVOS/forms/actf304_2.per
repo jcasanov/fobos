@@ -1,0 +1,23 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+          SELECCIONE EL TIPO DE LISTADO
+          ----------------------------
+
+               Saldo por Grupo y Cuenta ? : [c]
+        Detalle del Grupo Activos Fijos ? : [d]
+ Detalle Todos los Grupos Activos Fijos ? : [e]
+
+}
+ATTRIBUTES
+c    = FORMONLY.imp_sal TYPE CHAR NOT NULL, REQUIRED, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge', DEFAULT = 'S',
+	INCLUDE = ('S', 'N');
+d    = FORMONLY.imp_det TYPE CHAR NOT NULL, REQUIRED, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge', DEFAULT = 'N',
+	INCLUDE = ('S', 'N');
+e    = FORMONLY.imp_tod TYPE CHAR NOT NULL, REQUIRED, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge', DEFAULT = 'N',
+	INCLUDE = ('S', 'N');
+END

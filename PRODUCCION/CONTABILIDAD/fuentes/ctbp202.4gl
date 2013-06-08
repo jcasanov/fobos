@@ -8,6 +8,7 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
+DEFINE vm_demonios	VARCHAR(12)
 DEFINE vm_nivel_cta	LIKE ctbt001.b01_nivel
 DEFINE vm_diario	LIKE ctbt014.b14_codigo
 
@@ -46,8 +47,9 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
-CALL fgl_init4js()
+--CALL startlog('../logs/errores')
+CALL startlog('../logs/ctbp202.err')
+--#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 AND num_args() <> 4 THEN  -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 
@@ -67,8 +69,8 @@ INITIALIZE vm_diario TO NULL
 IF num_args() = 4 THEN
 	LET vm_diario = arg_val(4)
 END IF
-CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
-CALL validar_parametros()
+--#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
+CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
 
@@ -150,14 +152,8 @@ MENU 'OPCIONES'
 	COMMAND KEY('I') 'Ingresar' 		'Ingresar nuevos registros.'
 		CALL control_ingreso()
 		IF vm_num_rows = 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		   END IF
-			
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -176,14 +172,8 @@ MENU 'OPCIONES'
 		HIDE OPTION 'Detalle'
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		   END IF
-			
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -192,14 +182,8 @@ MENU 'OPCIONES'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
-		   IF fl_control_permiso_opcion('Modificar') THEN			
 			SHOW OPTION 'Modificar'
-		   END IF 
-
-		   IF fl_control_permiso_opcion('Bloquear') THEN
 			SHOW OPTION 'Bloquear/Activar'
-		   END IF
-			
 		END IF
 		IF vm_row_current <= 1 THEN
 			HIDE OPTION 'Retroceder'
@@ -444,6 +428,7 @@ INPUT BY NAME rm_b14.b14_codigo,    rm_b14.b14_tipo_comp,  rm_b14.b14_estado,
 			IF r_b03.b03_tipo_comp IS NOT NULL THEN
 				LET rm_b14.b14_tipo_comp = r_b03.b03_tipo_comp
 				DISPLAY BY NAME rm_b14.b14_tipo_comp
+				DISPLAY r_b03.b03_nombre TO n_tipo_comp
 			END IF
 		END IF
 		IF INFIELD(b14_moneda) THEN
@@ -595,6 +580,7 @@ CONSTRUCT BY NAME expr_sql
 			IF r_b03.b03_tipo_comp IS NOT NULL THEN
 				LET rm_b14.b14_tipo_comp = r_b03.b03_tipo_comp
 				DISPLAY BY NAME rm_b14.b14_tipo_comp
+				DISPLAY r_b03.b03_nombre TO n_tipo_comp
 			END IF
 		END IF
 		IF INFIELD(b14_moneda) THEN
@@ -623,6 +609,7 @@ CONSTRUCT BY NAME expr_sql
 		IF r_b03.b03_estado = 'B' THEN
 			CLEAR n_tipo_comp
 		END IF
+		DISPLAY r_b03.b03_nombre TO n_tipo_comp
 	AFTER FIELD b14_moneda
 		LET rm_b14.b14_moneda = GET_FLDBUF(b14_moneda)
 		IF rm_b14.b14_moneda IS NULL THEN
@@ -769,23 +756,23 @@ END FUNCTION
 
 
 FUNCTION muestra_etiquetas()
-
 DEFINE nom_estado	CHAR(9)
-
 DEFINE r_g13		RECORD LIKE gent013.*
+DEFINE r_b03		RECORD LIKE ctbt003.*
 DEFINE r_b04		RECORD LIKE ctbt004.*
 
-CALL fl_lee_moneda(rm_b14.b14_moneda)		RETURNING r_g13.*
-
+CALL fl_lee_moneda(rm_b14.b14_moneda) RETURNING r_g13.*
+CALL fl_lee_tipo_comprobante_contable(vg_codcia, rm_b14.b14_tipo_comp)
+	RETURNING r_b03.*
 CASE rm_b14.b14_estado 
 	WHEN 'A'
 		LET nom_estado = 'ACTIVO'
 	WHEN 'B'
 		LET nom_estado = 'BLOQUEADO'
 END CASE
-
-DISPLAY nom_estado   		TO n_estado
-DISPLAY r_g13.g13_nombre	TO n_moneda
+DISPLAY nom_estado   	 TO n_estado
+DISPLAY r_g13.g13_nombre TO n_moneda
+DISPLAY r_b03.b03_nombre TO n_tipo_comp
 
 END FUNCTION
 
@@ -1284,7 +1271,7 @@ WHILE NOT salir
 			LET col = 5
 			EXIT DISPLAY
 		BEFORE DISPLAY
-			CALL dialog.keysetlabel('ACCEPT', '')
+			--#CALL dialog.keysetlabel('ACCEPT', '')
 		AFTER DISPLAY
 			CONTINUE DISPLAY
 	END DISPLAY
@@ -1409,7 +1396,7 @@ END FUNCTION
 
 
 
-FUNCTION validar_parametros()
+FUNCTION no_validar_parametros()
 
 CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
 IF rg_mod.g50_modulo IS NULL THEN

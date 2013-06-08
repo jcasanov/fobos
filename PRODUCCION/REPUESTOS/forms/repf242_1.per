@@ -1,0 +1,51 @@
+DATABASE aceros
+SCREEN
+{
+                                                           [c000 ] de [c001 ]
+
+                                                        Estado: [c|c014     ]
+
+   Código Vendedor a Cambiar: [c002] [c003                          ]
+
+       Nuevo Código Vendedor: [c004] [c005                          ]
+
+                     Período: [c006      ]       -       [c007      ]
+
+                     Factura: [c0|c008      ]   Código Sec.: [c011  ]
+
+                     Cliente: [c012  ] [c013                                ]
+
+    Ingresado Por: [c009      ]          Fecha Ingreso: [c010               ]
+
+}
+TABLES
+rept098
+ATTRIBUTES
+c000 = FORMONLY.num_reg, NOENTRY, REVERSE, UPSHIFT;
+c001 = FORMONLY.max_reg, NOENTRY, REVERSE, UPSHIFT;
+
+c    = rept098.r98_estado, NOENTRY, REVERSE, UPSHIFT;
+c014 = FORMONLY.tit_estado, NOENTRY, REVERSE, UPSHIFT;
+c002 = rept098.r98_vend_ant, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = FORMONLY.tit_vend_ant, NOENTRY, REVERSE, UPSHIFT;
+c004 = rept098.r98_vend_nue, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c005 = FORMONLY.tit_vend_nue, NOENTRY, REVERSE, UPSHIFT;
+c006 = rept098.r98_fecha_ini, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite fecha inicial para cambiar un período. dd-mm-aaaa.';
+c007 = rept098.r98_fecha_fin, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite fecha final para cambiar un período. dd-mm-aaaa.';
+c0   = rept098.r98_cod_tran, NOENTRY, UPSHIFT,
+	COMMENTS = 'Ingrese una factura, pero sin digitar el período.';
+c008 = rept098.r98_num_tran, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Ingrese una factura, pero sin digitar el período.';
+c011 = rept098.r98_secuencia, NOENTRY, REVERSE, UPSHIFT;
+c012 = rept098.r98_codcli, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c013 = FORMONLY.tit_nomcli, AUTONEXT, UPSHIFT;
+
+c009 = rept098.r98_usuario, NOENTRY, REVERSE, UPSHIFT;
+c010 = rept098.r98_fecing, NOENTRY, REVERSE, UPSHIFT;
+END
