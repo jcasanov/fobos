@@ -8,7 +8,7 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_programa	VARCHAR(12)
+DEFINE vm_nivel		LIKE ctbt001.b01_nivel
 DEFINE rm_a00		RECORD LIKE actt000.*
 DEFINE vm_num_rows	INTEGER
 DEFINE vm_row_current	INTEGER
@@ -49,6 +49,13 @@ END MAIN
 FUNCTION funcion_master()
 
 CALL fl_nivel_isolation()
+
+SELECT MAX(b01_nivel) INTO vm_nivel FROM ctbt001
+IF vm_nivel IS NULL THEN
+    CALL fl_mostrar_mensaje('No existe ningun nivel de cuenta configurado en la compania.','stop')
+    EXIT PROGRAM
+END IF
+
 LET vm_max_rows	= 1000
 OPEN WINDOW wf AT 3,2 WITH 17 ROWS, 80 COLUMNS
     ATTRIBUTE(FORM LINE FIRST + 2, COMMENT LINE LAST, MENU LINE FIRST,BORDER,
@@ -390,8 +397,8 @@ ste','exclamation')
 				CALL fl_mensaje_estado_bloqueado()
 				NEXT FIELD a00_aux_reexp
 			END IF
-			IF r_ctb_aux.b10_nivel <> 6 THEN
-				CALL fgl_winmessage(vg_producto,'Auxiliar de Reexpresión debe ser del nivel 6','exclamation')
+			IF r_ctb_aux.b10_nivel <> vm_nivel THEN
+				CALL fgl_winmessage(vg_producto,'Auxiliar de Reexpresión debe ser una cuenta de detalle','exclamation')
 				NEXT FIELD a00_aux_reexp
 			END IF
 		ELSE

@@ -2238,8 +2238,8 @@ END FUNCTION
 
 
 FUNCTION fl_ayuda_cuenta_contable(cod_cia, nivel)
-## cuando sea ingreso de cuenta el parametro nivel será = 0, en modificacion
-## de cuentas parametro nivel será = 6
+## Si el parametro nivel es = 0 no se lo incluye en la ayuda
+## de cuentas 
 
 DEFINE rh_ctacon ARRAY[1000] OF RECORD
 	b10_cuenta	LIKE ctbt010.b10_cuenta,

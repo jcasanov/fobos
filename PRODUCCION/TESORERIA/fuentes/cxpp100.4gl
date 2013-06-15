@@ -8,7 +8,7 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_demonios	VARCHAR(12)
+DEFINE vm_nivel		LIKE ctbt001.b01_nivel
 DEFINE rm_cxp		RECORD LIKE cxpt000.*
 DEFINE vm_num_rows	SMALLINT
 DEFINE vm_row_current	SMALLINT
@@ -45,6 +45,13 @@ END MAIN
 FUNCTION control_master()
 
 CALL fl_nivel_isolation()
+
+SELECT MAX(b01_nivel) INTO vm_nivel FROM ctbt001
+IF vm_nivel IS NULL THEN
+    CALL fl_mostrar_mensaje('No existe ningun nivel de cuenta configurado en la compania.','stop')
+    EXIT PROGRAM
+END IF
+
 LET vm_max_rows	= 50
 OPEN WINDOW wf AT 3,2 WITH 17 ROWS, 80 COLUMNS
     ATTRIBUTE(FORM LINE FIRST + 2, COMMENT LINE LAST, MENU LINE FIRST,BORDER,
@@ -440,8 +447,8 @@ INPUT BY NAME rm_cxp.p00_compania, rm_cxp.p00_tipo_egr_gen, rm_cxp.p00_mespro,
                                 CALL fl_mensaje_estado_bloqueado()
                                 NEXT FIELD p00_aux_prov_mb
                         END IF
-			IF r_cta.b10_nivel <> 6 THEN
-				CALL fgl_winmessage(vg_producto,'Nivel de cuenta debe ser solo 6.','exclamation')
+			IF r_cta.b10_nivel <> vm_nivel THEN
+				CALL fgl_winmessage(vg_producto,'Cuenta debe ser de detalle.','exclamation')
 				NEXT FIELD p00_aux_prov_mb
 			END IF
 		ELSE
@@ -466,8 +473,8 @@ INPUT BY NAME rm_cxp.p00_compania, rm_cxp.p00_tipo_egr_gen, rm_cxp.p00_mespro,
                                 CALL fl_mensaje_estado_bloqueado()
                                 NEXT FIELD p00_aux_prov_ma
                         END IF
-			IF r_cta.b10_nivel <> 6 THEN
-				CALL fgl_winmessage(vg_producto,'Nivel de cuenta debe ser solo 6.','exclamation')
+			IF r_cta.b10_nivel <> vm_nivel THEN
+				CALL fgl_winmessage(vg_producto,'Cuenta debe ser de detalle.','exclamation')
 				NEXT FIELD p00_aux_prov_ma
 			END IF
 		ELSE
@@ -492,8 +499,8 @@ INPUT BY NAME rm_cxp.p00_compania, rm_cxp.p00_tipo_egr_gen, rm_cxp.p00_mespro,
                                 CALL fl_mensaje_estado_bloqueado()
                                 NEXT FIELD p00_aux_ant_mb
                         END IF
-			IF r_cta.b10_nivel <> 6 THEN
-				CALL fgl_winmessage(vg_producto,'Nivel de cuenta debe ser solo 6.','exclamation')
+			IF r_cta.b10_nivel <> vm_nivel THEN
+				CALL fgl_winmessage(vg_producto,'Cuenta debe ser de detalle.','exclamation')
 				NEXT FIELD p00_aux_ant_mb
 			END IF
 		ELSE
@@ -518,8 +525,8 @@ INPUT BY NAME rm_cxp.p00_compania, rm_cxp.p00_tipo_egr_gen, rm_cxp.p00_mespro,
                                 CALL fl_mensaje_estado_bloqueado()
                                 NEXT FIELD p00_aux_ant_ma
                         END IF
-			IF r_cta.b10_nivel <> 6 THEN
-				CALL fgl_winmessage(vg_producto,'Nivel de cuenta debe ser solo 6.','exclamation')
+			IF r_cta.b10_nivel <> vm_nivel THEN
+				CALL fgl_winmessage(vg_producto,'Cuenta debe ser de detalle.','exclamation')
 				NEXT FIELD p00_aux_ant_ma
 			END IF
 		ELSE

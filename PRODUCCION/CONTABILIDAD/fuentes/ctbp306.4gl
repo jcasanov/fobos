@@ -478,7 +478,7 @@ CREATE TEMP TABLE temp_conta
 	 te_valor	DECIMAL(14,2))
 LET nivel = 1 
 IF rm_par.ccosto IS NOT NULL THEN
-	LET nivel = 6
+	LET nivel = vm_max_nivel	
 END IF
 FOR i = 1 TO 12
 	LET fecha = MDY(i, 1, rm_par.ano) + 1 UNITS MONTH - 1 UNITS DAY

@@ -35,6 +35,7 @@ DEFINE vm_num_ring	SMALLINT
 DEFINE vm_num_regr	SMALLINT
 DEFINE vm_num_rtra	SMALLINT
 
+DEFINE vm_nivel		LIKE ctbt001.b01_nivel
 
 
 MAIN
@@ -73,6 +74,13 @@ DEFINE num_rows 	SMALLINT
 DEFINE num_cols 	SMALLINT
 
 CALL fl_nivel_isolation()
+
+SELECT MAX(b01_nivel) INTO vm_nivel FROM ctbt001
+IF vm_nivel IS NULL THEN
+    CALL fl_mostrar_mensaje('No existe ningun nivel de cuenta configurado en la compania.','stop')
+    EXIT PROGRAM
+END IF
+
 LET lin_menu = 0          
 LET row_ini  = 3          
 LET num_rows = 22         
@@ -183,7 +191,6 @@ END FUNCTION
 
 FUNCTION control_pago_efectivo()
 DEFINE r_b10		RECORD LIKE ctbt010.*
-DEFINE nivel		LIKE ctbt001.b01_nivel
 DEFINE resul		SMALLINT
 DEFINE lin_menu		SMALLINT
 DEFINE row_ini  	SMALLINT
@@ -205,11 +212,6 @@ OPEN WINDOW w_rol_pag AT row_ini, 5 WITH num_rows ROWS, num_cols COLUMNS
 		  BORDER, MESSAGE LINE LAST)
 OPEN FORM f_pago FROM '../forms/rolf500_4'
 DISPLAY FORM f_pago
-SELECT MAX(b01_nivel) INTO nivel FROM ctbt001
-IF nivel IS NULL THEN
-	CALL fl_mostrar_mensaje('No existe ningun nivel de cuenta configurado en la compania.','stop')
-	EXIT PROGRAM
-END IF
 INITIALIZE rm_n54.* TO NULL
 DECLARE q_n54 CURSOR FOR SELECT * FROM rolt054
 OPEN q_n54
@@ -223,7 +225,7 @@ INPUT BY NAME rm_n54.n54_aux_cont WITHOUT DEFAULTS
 		EXIT INPUT
 	ON KEY(F2)
 		IF INFIELD(n54_aux_cont) THEN
-                        CALL fl_ayuda_cuenta_contable(vg_codcia, nivel)
+                        CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
                                 RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
                         LET int_flag = 0
                         IF r_b10.b10_cuenta IS NOT NULL THEN
@@ -234,7 +236,7 @@ INPUT BY NAME rm_n54.n54_aux_cont WITHOUT DEFAULTS
                 END IF
 	AFTER FIELD n54_aux_cont
                 IF rm_n54.n54_aux_cont IS NOT NULL THEN
-			CALL validar_cuenta(rm_n54.n54_aux_cont, nivel)
+			CALL validar_cuenta(rm_n54.n54_aux_cont)
 				RETURNING resul
 			IF resul = 1 THEN
 				NEXT FIELD n54_aux_cont
@@ -259,9 +261,8 @@ END FUNCTION
 
 
 
-FUNCTION validar_cuenta(aux_cont, nivel)
+FUNCTION validar_cuenta(aux_cont)
 DEFINE aux_cont		LIKE ctbt010.b10_cuenta
-DEFINE nivel		LIKE ctbt001.b01_nivel
 DEFINE r_b10            RECORD LIKE ctbt010.*
 
 CALL fl_lee_cuenta(vg_codcia, aux_cont) RETURNING r_b10.*
@@ -274,8 +275,8 @@ IF r_b10.b10_estado = 'B' THEN
 	CALL fl_mensaje_estado_bloqueado()
 	RETURN 1
 END IF
-IF r_b10.b10_nivel <> nivel THEN
-	CALL fgl_winmessage(vg_producto,'Nivel de cuenta debe ser solo del ultimo.','exclamation')
+IF r_b10.b10_nivel <> vm_nivel THEN
+	CALL fgl_winmessage(vg_producto,'Nivel de cuenta debe ser de detalle.','exclamation')
 	RETURN 1
 END IF
 RETURN 0
@@ -506,8 +507,8 @@ WHILE TRUE
 				LET rm_ring[i].tit_cuenta = r_b10.b10_descripcion 
 				DISPLAY rm_ring[i].tit_cuenta TO
 					rm_ring[j].tit_cuenta
-				IF r_b10.b10_nivel <> '6' THEN
-					CALL fl_mostrar_mensaje('El nivel de la cuenta debe ser de auxiliar.', 'exclamation')
+				IF r_b10.b10_nivel <> vm_nivel THEN
+					CALL fl_mostrar_mensaje('El nivel de la cuenta debe ser de detalle.', 'exclamation')
 					NEXT FIELD n50_aux_cont
 				END IF
 			ELSE
@@ -564,8 +565,8 @@ WHILE TRUE
 				LET rm_regr[i].tit_cuenta = r_b10.b10_descripcion 
 				DISPLAY rm_regr[i].tit_cuenta TO
 					rm_regr[j].tit_cuenta
-				IF r_b10.b10_nivel <> '6' THEN
-					CALL fl_mostrar_mensaje('El nivel de la cuenta debe ser de auxiliar.', 'exclamation')
+				IF r_b10.b10_nivel <> vm_nivel THEN
+					CALL fl_mostrar_mensaje('El nivel de la cuenta debe ser de detalle.', 'exclamation')
 					NEXT FIELD n51_aux_cont
 				END IF
 			ELSE
@@ -628,8 +629,8 @@ WHILE TRUE
 				LET rm_rtra[i].tit_cuenta = r_b10.b10_descripcion 
 				DISPLAY rm_rtra[i].tit_cuenta TO
 					rm_rtra[j].tit_cuenta
-				IF r_b10.b10_nivel <> '6' THEN
-					CALL fl_mostrar_mensaje('El nivel de la cuenta debe ser de auxiliar.', 'exclamation')
+				IF r_b10.b10_nivel <> vm_nivel THEN
+					CALL fl_mostrar_mensaje('El nivel de la cuenta debe ser de detalle.', 'exclamation')
 					NEXT FIELD n52_aux_cont
 				END IF
 			ELSE
