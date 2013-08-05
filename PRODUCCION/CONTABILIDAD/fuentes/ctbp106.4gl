@@ -370,6 +370,7 @@ DISPLAY BY NAME rm_ctb.b10_nivel, rm_ctb.b10_tipo_cta, rm_ctb.b10_tipo_mov,
 INPUT BY NAME rm_ctb.b10_cuenta,
 	rm_ctb.b10_descripcion,
 	rm_ctb.b10_descri_alt,
+    rm_ctb.b10_cuenta_niif,
 	rm_ctb.b10_tipo_mov,
 	rm_ctb.b10_cod_ccosto,
 	rm_ctb.b10_saldo_ma
@@ -378,6 +379,7 @@ INPUT BY NAME rm_ctb.b10_cuenta,
         IF field_touched(rm_ctb.b10_cuenta,
 		rm_ctb.b10_descripcion,
 		rm_ctb.b10_descri_alt,
+        rm_ctb.b10_cuenta_niif,
 		rm_ctb.b10_cod_ccosto,
 		rm_ctb.b10_saldo_ma)
         THEN
@@ -509,7 +511,7 @@ FOR i = 2 TO 5
 			END IF
 		END FOR
 		IF ceros <> 0 THEN
-			CALL fgl_winmessage(vg_producto,'Número de cuenta estáa incorrecto','exclamation')
+			CALL fgl_winmessage(vg_producto,'Número de cuenta está incorrecto','exclamation')
 			RETURN 1
 		END IF 
 	END IF

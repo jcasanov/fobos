@@ -5,6 +5,7 @@ SCREEN
                Número Cuenta: [c001        ]      Estado: [c][c008     ]
                  Descripción: [c002                                    ]
      Descripción Alternativa: [c003                                    ]
+          Número Cuenta NIIF: [c009        ]   
 
                   Tipo Cuenta             Tipo Movimiento 
                  [c0b0        ]            [c0c0        ]
@@ -25,6 +26,7 @@ c001 = ctbt010.b10_cuenta, AUTONEXT, REVERSE, PICTURE = '########XXXX',
 	COMMENTS= 'Indicar el número de la cuenta de mas de 10 caracteres';
 c002 = ctbt010.b10_descripcion, AUTONEXT, REVERSE, UPSHIFT;
 c003 = ctbt010.b10_descri_alt, AUTONEXT, UPSHIFT;
+c009 = ctbt010.b10_cuenta_niif, AUTONEXT, UPSHIFT;
 c0b0 = ctbt010.b10_tipo_cta, NOENTRY, REVERSE, AUTONEXT,
 	WIDGET = 'RADIO', CONFIG = 'B Balance R Resultado', DEFAULT = 'B';
 c0c0 = ctbt010.b10_tipo_mov, REVERSE,AUTONEXT,
