@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131592</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>PASAJE S9H OE9-43 Y JAUJA</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131592</guiaRemision>
+<razonSocialComprador>ARIAS BUITRON JESUS ERNESTO</razonSocialComprador>
+<identificacionComprador>1706739834001</identificacionComprador>
+<totalSinImpuestos>192.90</totalSinImpuestos>
+<totalDescuento>16.51</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>176.39</baseImponible>
+<valor>21.17</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>197.56</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>4573</codigoPrincipal>
+<descripcion>TEE GALV. CLASE 150 DE 1-1/2"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>6.07</precioUnitario>
+<descuento>2.91</descuento>
+<precioTotalSinImpuesto>33.51</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="CIFUNSA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>33.51</baseImponible>
+<valor>4.02</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3744</codigoPrincipal>
+<descripcion>REDUCCION NEGRA CLASE 150 DE 2" x 1-1/2"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>5.10</precioUnitario>
+<descuento>1.53</descuento>
+<precioTotalSinImpuesto>13.77</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="HITACHI" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>13.77</baseImponible>
+<valor>1.65</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6327</codigoPrincipal>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 1-1/2"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>10.03</precioUnitario>
+<descuento>1.60</descuento>
+<precioTotalSinImpuesto>18.46</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="CIFUNSA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>18.46</baseImponible>
+<valor>2.22</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>90272</codigoPrincipal>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 2"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>17.65</precioUnitario>
+<descuento>2.82</descuento>
+<precioTotalSinImpuesto>32.48</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="CIFUNSA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>32.48</baseImponible>
+<valor>3.90</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6318</codigoPrincipal>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 1-1/4"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>9.94</precioUnitario>
+<descuento>1.99</descuento>
+<precioTotalSinImpuesto>17.89</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="HITACHI" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>17.89</baseImponible>
+<valor>2.15</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>92199</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 90° DE 1/2"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>1.14</precioUnitario>
+<descuento>0.55</descuento>
+<precioTotalSinImpuesto>6.29</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="CIFUNSA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.29</baseImponible>
+<valor>0.75</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6323</codigoPrincipal>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 1"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>6.61</precioUnitario>
+<descuento>3.17</descuento>
+<precioTotalSinImpuesto>36.49</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="CIFUNSA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>36.49</baseImponible>
+<valor>4.38</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6312</codigoPrincipal>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 1/2"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>4.86</precioUnitario>
+<descuento>1.94</descuento>
+<precioTotalSinImpuesto>17.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="HITACHI" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>17.50</baseImponible>
+<valor>2.10</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

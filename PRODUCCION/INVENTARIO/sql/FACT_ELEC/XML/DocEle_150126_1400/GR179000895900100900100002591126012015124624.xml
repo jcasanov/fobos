@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025911</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>MEZA GONZALES</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1203302664001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>26/01/2015</fechaIniTransporte>
+<fechaFinTransporte>28/01/2015</fechaFinTransporte>
+<placa>SIN PLACA</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1203302664001</identificacionDestinatario>
+<razonSocialDestinatario>MEZA GONZALES GUIDO</razonSocialDestinatario>
+<dirDestinatario>RETIRAN</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>26/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>6812</codigoInterno>
+<descripcion>LANA DE VIDRIO A GRANEL FUNDA DE 20 KG.</descripcion>
+<cantidad>7.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDIFI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">c-masa@outlook.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0997942426</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">014827</campoAdicional>
+</infoAdicional>
+</guiaRemision>

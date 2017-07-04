@@ -1,0 +1,47 @@
+DATABASE aceros
+SCREEN
+{
+  CODIGOS DEL SRI PARA PORCENTAJES DE RETENCION
+
+  Tipo Retención: [c|c000                ]             Porcentaje: [c001  ] %
+                                                            [c010 ] de [c011 ]
+ -----------------------------------------------------------------------------
+   SRI                Descipcion                    Fec.Ini.P. Fec.Fin.P. E A
+ -----------------------------------------------------------------------------
+ [c030  |c031                                      |c032      |c033      |f|g]
+ [c030  |c031                                      |c032      |c033      |f|g]
+ [c030  |c031                                      |c032      |c033      |f|g]
+ [c030  |c031                                      |c032      |c033      |f|g]
+ [c030  |c031                                      |c032      |c033      |f|g]
+ [c030  |c031                                      |c032      |c033      |f|g]
+ [c030  |c031                                      |c032      |c033      |f|g]
+ [c030  |c031                                      |c032      |c033      |f|g]
+ [c030  |c031                                      |c032      |c033      |f|g]
+ [c030  |c031                                      |c032      |c033      |f|g]
+
+}
+TABLES
+ordt003
+ordt002
+ATTRIBUTES
+c    = ordt003.c03_tipo_ret, NOENTRY, REVERSE, UPSHIFT;
+c000 = ordt002.c02_nombre, NOENTRY, REVERSE, UPSHIFT;
+c001 = ordt003.c03_porcentaje, NOENTRY, REVERSE, UPSHIFT, FORMAT = '##&.##';
+
+c010 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c011 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+
+c030 = ordt003.c03_codigo_sri, NOENTRY, UPSHIFT, REVERSE;
+c031 = ordt003.c03_concepto_ret, NOENTRY, REVERSE;
+c032 = ordt003.c03_fecha_ini_porc, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	REVERSE;
+c033 = ordt003.c03_fecha_fin_porc, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	REVERSE;
+f    = ordt003.c03_estado, NOENTRY, UPSHIFT, REVERSE;
+g    = FORMONLY.imp_asig TYPE CHAR NOT NULL, NOENTRY, UPSHIFT,
+	INCLUDE = ('S', 'N'), REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_sri[10] (c03_codigo_sri, c03_concepto_ret, c03_fecha_ini_porc,
+				c03_fecha_fin_porc, c03_estado, imp_asig)

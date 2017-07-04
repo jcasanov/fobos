@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268228</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>08/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268228</guiaRemision>
+<razonSocialComprador>NAVEDA ARGOTI LUIS ARSECIO</razonSocialComprador>
+<identificacionComprador>1600269508001</identificacionComprador>
+<totalSinImpuestos>245.70</totalSinImpuestos>
+<totalDescuento>27.30</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>245.70</baseImponible>
+<valor>29.48</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>275.18</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>2632</codigoPrincipal>
+<descripcion>CODO PVC ESP-CAM L-R DE 110mm. x 90°</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>13.65</precioUnitario>
+<descuento>27.30</descuento>
+<precioTotalSinImpuesto>245.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>245.70</baseImponible>
+<valor>29.48</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">mangna1@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">062882874</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">044388</campoAdicional>
+</infoAdicional>
+</factura>

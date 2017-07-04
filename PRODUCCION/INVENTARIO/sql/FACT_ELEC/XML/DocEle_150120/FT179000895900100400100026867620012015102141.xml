@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268676</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268676</guiaRemision>
+<razonSocialComprador>IZA ORQUERA PEDRO</razonSocialComprador>
+<identificacionComprador>1706390513001</identificacionComprador>
+<totalSinImpuestos>818.06</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>818.06</baseImponible>
+<valor>98.17</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>916.23</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>61358</codigoPrincipal>
+<descripcion>TUBO GALV. S-UNION ISO II TIPO "F" DE 1-1/2" x 6 m.</descripcion>
+<cantidad>18.00</cantidad>
+<precioUnitario>43.81</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>788.58</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FUJI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>788.58</baseImponible>
+<valor>94.63</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1546</codigoPrincipal>
+<descripcion>BUSHING GALV. CLASE 150 DE 1-1/2" x 1/2"</descripcion>
+<cantidad>8.00</cantidad>
+<precioUnitario>3.08</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>24.64</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>24.64</baseImponible>
+<valor>2.96</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3232</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1-1/2" CORRIDO</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>1.21</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>4.84</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.84</baseImponible>
+<valor>0.58</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">pedroiza@andinanet.net</campoAdicional>
+<campoAdicional nombre="telefono-movil">607069</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">027449</campoAdicional>
+<campoAdicional nombre="Observaciones">TARJETA DINERS 3 MESES SIN INTERESES</campoAdicional>
+</infoAdicional>
+</factura>

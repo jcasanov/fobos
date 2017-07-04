@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268225</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>08/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268225</guiaRemision>
+<razonSocialComprador>JARAMILLO BREILH NELLY DOLORES</razonSocialComprador>
+<identificacionComprador>1703799559</identificacionComprador>
+<totalSinImpuestos>68.09</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>68.09</baseImponible>
+<valor>8.17</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>76.26</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>19966</codigoPrincipal>
+<descripcion>CONTROL DE AIRE 13809-A  BRADY</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>31.38</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>31.38</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>31.38</baseImponible>
+<valor>3.77</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21370</codigoPrincipal>
+<descripcion>VALVULA CHEQUE VC-19 DE 3/4" DE BRONCE TIPO PESADO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>17.03</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>17.03</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HELBER"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>17.03</baseImponible>
+<valor>2.04</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3182</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 3/4" x 3"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>0.62</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1.86</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.86</baseImponible>
+<valor>0.22</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3178</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 3/4" x 2"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>0.51</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1.02</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.02</baseImponible>
+<valor>0.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99960</codigoPrincipal>
+<descripcion>GRIFO PASO RECTO BRONCE ROSCADO EVOLUTION DE 3/4" CABO AMARILLO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>8.12</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>8.12</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FIV"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.12</baseImponible>
+<valor>0.97</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97467</codigoPrincipal>
+<descripcion>TEFLON EN ROLLO 0.07 x 12 mm. x 10 m.</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>0.58</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2.32</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.32</baseImponible>
+<valor>0.28</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6314</codigoPrincipal>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 3/4"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>6.36</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>6.36</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.36</baseImponible>
+<valor>0.76</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">consumidorfinal@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2091188</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">059193</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000269033</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000269033</guiaRemision>
+<razonSocialComprador>TEJENA VARGAS ANGEL ROBERTO</razonSocialComprador>
+<identificacionComprador>1306745082001</identificacionComprador>
+<totalSinImpuestos>285.30</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>285.30</baseImponible>
+<valor>34.24</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>319.54</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5524</codigoPrincipal>
+<descripcion>TUBO NEGRO ASTM A-53  TIPO "T" DE 3" x 5.2mm. x 6.40 m.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>127.32</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>127.32</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>127.32</baseImponible>
+<valor>15.28</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5420</codigoPrincipal>
+<descripcion>TUBO GALV. ASTM A-53   TIPO "T" DE 3" x 6.40 m.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>157.98</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>157.98</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>157.98</baseImponible>
+<valor>18.96</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">roberto-tejana@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2299786</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064403</campoAdicional>
+</infoAdicional>
+</factura>

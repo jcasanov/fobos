@@ -24,7 +24,6 @@ SCREEN TITLE 'Datos Adicionales'
                                                               [x002] de [y002]
 
           Tipo Cliente: [c011  ] [c018                           ]
-
      Dirección Trabajo: [c003                                    ]
       Teléfono Trabajo: [c005      ]
 
@@ -36,7 +35,9 @@ SCREEN TITLE 'Datos Adicionales'
                 Ciudad: [c010       ] [c017                     ]
 
    Representante Legal: [c013                          ]
-      Paga Impuestos ?: [a]
+      Paga Impuestos ?: [a]     Contrib. Especial ?: [e]  Lleva Contab. ?: [f]
+                E-mail: [c100                                              ]
+                        [c100                                              ]
 
 }
 SCREEN TITLE '     Cia/Loc     '
@@ -89,6 +90,11 @@ c012 = cxct001.z01_num_doc_id, REVERSE, FORMAT = '###############';
 c013 = cxct001.z01_rep_legal, AUTONEXT, UPSHIFT;
 a    = cxct001.z01_paga_impto, REVERSE, UPSHIFT,
 	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S';
+e    = cxct002.z02_contr_espe, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S';
+f    = cxct002.z02_oblig_cont, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S';
+c100 = cxct002.z02_email, AUTONEXT, SCROLL, WORDWRAP COMPRESS;
 c014 = cxct001.z01_usuario, NOENTRY, UPSHIFT, REVERSE;
 c015 = cxct001.z01_fecing, NOENTRY, UPSHIFT, REVERSE;
 c    = cxct001.z01_estado, NOENTRY, REVERSE, UPSHIFT,

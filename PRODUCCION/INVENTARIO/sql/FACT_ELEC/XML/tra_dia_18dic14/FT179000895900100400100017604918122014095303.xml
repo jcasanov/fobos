@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176049</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176049</guiaRemision>
+<razonSocialComprador>PROYECTOS INTEGRALES DEL ECUADOR PIL S.A.</razonSocialComprador>
+<identificacionComprador>1791847776001</identificacionComprador>
+<totalSinImpuestos>415.16</totalSinImpuestos>
+<totalDescuento>73.26</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>415.16</baseImponible>
+<valor>49.82</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>464.98</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>92908</codigoPrincipal>
+<descripcion>SACABOCADOS MANUAL R-739BB DE 1/2" A 2" CON RATCHET (31797)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>488.42</precioUnitario>
+<descuento>73.26</descuento>
+<precioTotalSinImpuesto>415.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>415.16</baseImponible>
+<valor>49.82</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2265245</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">040962</campoAdicional>
+</infoAdicional>
+</factura>

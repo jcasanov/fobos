@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268159</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268159</guiaRemision>
+<razonSocialComprador>SERVICIOS TECNICOS ESPECIALIZADOS CORREA MINO CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1792173892001</identificacionComprador>
+<totalSinImpuestos>553.81</totalSinImpuestos>
+<totalDescuento>61.53</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>553.81</baseImponible>
+<valor>66.46</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>620.27</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>97401</codigoPrincipal>
+<descripcion>AMOLADORA ELECTRICA 6088-30 DE 4.2 HP. 15 AMPS 6000 RPM P/DISCO DE 7" Y 9"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>307.67</precioUnitario>
+<descuento>61.53</descuento>
+<precioTotalSinImpuesto>553.81</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>553.81</baseImponible>
+<valor>66.46</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">mminosete@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2355990</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">059692</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,26 @@
+286|DE 8  mm x 12 m                                                       |IP110|
+288|DE 10 mm x  6 m                                                       |IP110|
+290|DE 10 mm x  9 m                                                       |IP110|
+292|DE 10 mm x 12 m                                                       |IP110|
+294|DE 12 mm x  6 m                                                       |IP110|
+296|DE 12 mm x  9 m                                                       |IP110|
+298|DE 12 mm x 12 m                                                       |IP110|
+300|DE 14mm x 6m|IP110|
+302|DE 14 mm x  9 m                                                       |IP110|
+304|DE 14 mm x 12 m                                                       |IP110|
+306|DE 16mm x 6m|IP110|
+308|DE 16 mm x  9 m                                                       |IP110|
+310|DE 16 mm x 12 m                                                       |IP110|
+312|DE 18mm x 6m|IP110|
+314|DE 18 mm x  9 m                                                       |IP110|
+316|DE 18 mm x 12 m                                                       |IP110|
+318|DE 20 mm x  9 m                                                       |IP110|
+320|DE 20 mm x 12 m                                                       |IP110|
+322|DE 22 mm x  9 m                                                       |IP110|
+324|DE 22 mm x 12 m                                                       |IP110|
+326|DE 25 mm x  9 m                                                       |IP110|
+328|DE 25 mm x 12 m                                                       |IP110|
+330|DE 28 mm x  9 m                                                       |IP110|
+332|DE 28 mm x 12 m                                                       |IP110|
+334|DE 32 mm x  9 m                                                       |IP110|
+336|DE 32 mm x 12 m                                                       |IP110|

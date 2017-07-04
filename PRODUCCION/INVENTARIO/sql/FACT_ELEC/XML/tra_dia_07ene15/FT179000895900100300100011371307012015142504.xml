@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113713</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113713</guiaRemision>
+<razonSocialComprador>BORJA CALDERON SEGUNDO OSWALDO</razonSocialComprador>
+<identificacionComprador>0400784831001</identificacionComprador>
+<totalSinImpuestos>119.28</totalSinImpuestos>
+<totalDescuento>13.20</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>119.28</baseImponible>
+<valor>14.31</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>133.59</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102379</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA TEMPO MOCCA PRIMERA</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>10.66</precioUnitario>
+<descuento>7.25</descuento>
+<precioTotalSinImpuesto>35.39</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>35.39</baseImponible>
+<valor>4.25</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102008</codigoPrincipal>
+<descripcion>AZULEJO PARED 20 x 25 ORNAMENTAL AZUL  PRIMERA</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>8.75</precioUnitario>
+<descuento>5.95</descuento>
+<precioTotalSinImpuesto>29.05</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>29.05</baseImponible>
+<valor>3.49</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>94686</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA NOVA PINO PRIMERA</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>9.14</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>54.84</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>54.84</baseImponible>
+<valor>6.58</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">dey_2102@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0999293682</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">063659</campoAdicional>
+</infoAdicional>
+</factura>

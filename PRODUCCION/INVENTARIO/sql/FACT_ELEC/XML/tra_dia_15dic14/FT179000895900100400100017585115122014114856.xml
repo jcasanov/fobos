@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175851</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>CIPRESES N65-150 Y EUCALIPTOS</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175851</guiaRemision>
+<razonSocialComprador>SYNTEKOCOMPANY S.A</razonSocialComprador>
+<identificacionComprador>1792254590001</identificacionComprador>
+<totalSinImpuestos>349.17</totalSinImpuestos>
+<totalDescuento>41.68</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>307.49</baseImponible>
+<valor>36.90</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>344.39</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>6323</codigoPrincipal>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 1"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>6.61</precioUnitario>
+<descuento>0.79</descuento>
+<precioTotalSinImpuesto>5.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="CIFUNSA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.82</baseImponible>
+<valor>0.70</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6327</codigoPrincipal>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 1-1/2"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>10.03</precioUnitario>
+<descuento>2.41</descuento>
+<precioTotalSinImpuesto>17.65</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="CIFUNSA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>17.65</baseImponible>
+<valor>2.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4158</codigoPrincipal>
+<descripcion>TAPON GALV. MACHO CLASE 150 DE 1-1/2"</descripcion>
+<cantidad>7.00</cantidad>
+<precioUnitario>2.37</precioUnitario>
+<descuento>1.99</descuento>
+<precioTotalSinImpuesto>14.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="HITACHI" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>14.60</baseImponible>
+<valor>1.75</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97467</codigoPrincipal>
+<descripcion>TEFLON EN ROLLO 0.07 x 12 mm. x 10 m.</descripcion>
+<cantidad>40.00</cantidad>
+<precioUnitario>0.58</precioUnitario>
+<descuento>2.78</descuento>
+<precioTotalSinImpuesto>20.42</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>20.42</baseImponible>
+<valor>2.45</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96864</codigoPrincipal>
+<descripcion>SELLANTE POLIPROPILENO ENVASE DE 100 CC (AGUA CALIENTE)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>9.89</precioUnitario>
+<descuento>1.19</descuento>
+<precioTotalSinImpuesto>8.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.70</baseImponible>
+<valor>1.04</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>95185</codigoPrincipal>
+<descripcion>VALVULA CHEQUE VC-63 DE 2 1/2" DE BRONCE TIPO PESADO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>104.83</precioUnitario>
+<descuento>15.72</descuento>
+<precioTotalSinImpuesto>89.11</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="HELBERT" valor="HELBER"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>89.11</baseImponible>
+<valor>10.69</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>8798</codigoPrincipal>
+<descripcion>VALVULA COMPUERTA  BRONCE ROSCADA RW-206 DE 2-1/2" 125 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>167.99</precioUnitario>
+<descuento>16.80</descuento>
+<precioTotalSinImpuesto>151.19</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RED WHITE" valor="RED WH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>151.19</baseImponible>
+<valor>18.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

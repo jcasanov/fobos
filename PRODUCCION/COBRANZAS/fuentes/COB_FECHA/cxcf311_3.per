@@ -1,0 +1,28 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+  Tipo Venc.: [c001          ]
+
+
+  Rango 1: [a  ] a [b  ] días  
+  Rango 2: [c  ] a [d  ] días  
+  Rango 3: [e  ] a [f  ] días  
+  Rango 4: [g  ] a [h  ] días  
+  Rango 5:      >= [i  ] días  
+
+}
+ATTRIBUTES
+c001 = FORMONLY.ind_venc TYPE CHAR NOT NULL, REQUIRED, UPSHIFT,REVERSE,AUTONEXT,
+	INCLUDE = ("P", "V"),
+	WIDGET = 'RADIO', CONFIG = 'P "Por Vencer" V "Vencidos"',DEFAULT = 'V'; 
+a    = FORMONLY.rango1_i TYPE SMALLINT NOT NULL, INCLUDE = (0 TO 999);
+b    = FORMONLY.rango1_f TYPE SMALLINT NOT NULL, INCLUDE = (0 TO 999);
+c    = FORMONLY.rango2_i TYPE SMALLINT NOT NULL, INCLUDE = (0 TO 999);
+d    = FORMONLY.rango2_f TYPE SMALLINT NOT NULL, INCLUDE = (0 TO 999);
+e    = FORMONLY.rango3_i TYPE SMALLINT NOT NULL, INCLUDE = (0 TO 999);
+f    = FORMONLY.rango3_f TYPE SMALLINT NOT NULL, INCLUDE = (0 TO 999);
+g    = FORMONLY.rango4_i TYPE SMALLINT NOT NULL, INCLUDE = (0 TO 999);
+h    = FORMONLY.rango4_f TYPE SMALLINT NOT NULL, INCLUDE = (0 TO 999);
+i    = FORMONLY.rango5_i TYPE SMALLINT NOT NULL, INCLUDE = (0 TO 999);
+END

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025155</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>06/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>SERVIVAPOR  CIA.LTDA</razonSocialComprador>
+<identificacionComprador>1791769937001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000025155</numDocModificado>
+<fechaEmisionDocSustento>21/11/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>1407.92</totalSinImpuestos>
+<valorModificacion>1576.87</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>1407.92</baseImponible>
+<valor>168.95</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 266295 SERVIVAPOR REC AJIMENEZ  FC</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>95040</codigoInterno>
+<descripcion>VALVULA DE PISTON  H.F. BRIDADA KVN-II DE 4" 230 PSI 300°C C/EMPAQUE KXGT</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1656.38</precioUnitario>
+<descuento>248.46</descuento>
+<precioTotalSinImpuesto>1407.92</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KLINGE"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1407.92</baseImponible>
+<valor>168.95</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">csalazar@servivapor.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2531191</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">936</campoAdicional>
+</infoAdicional>
+</notaCredito>

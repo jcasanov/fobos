@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000114044</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000114044</guiaRemision>
+<razonSocialComprador>CUMBICOS BETANCOURT EDWIN IVAN</razonSocialComprador>
+<identificacionComprador>1103330195001</identificacionComprador>
+<totalSinImpuestos>705.50</totalSinImpuestos>
+<totalDescuento>124.50</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>705.50</baseImponible>
+<valor>84.66</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>790.16</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>100679</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA TOMEBAMBA SEGUNDA</descripcion>
+<cantidad>100.00</cantidad>
+<precioUnitario>8.30</precioUnitario>
+<descuento>124.50</descuento>
+<precioTotalSinImpuesto>705.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>705.50</baseImponible>
+<valor>84.66</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">iviedcum-974@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2959909</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">057713</campoAdicional>
+<campoAdicional nombre="Observaciones">EC ACABADOS DE LA CONSTRUCCION</campoAdicional>
+</infoAdicional>
+</factura>

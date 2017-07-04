@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104075</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104075</guiaRemision>
+<razonSocialComprador>ECUA INSTALACIONES S. A. ECUAINSTALSA</razonSocialComprador>
+<identificacionComprador>0992857609001</identificacionComprador>
+<totalSinImpuestos>40.46</totalSinImpuestos>
+<totalDescuento>5.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>40.46</baseImponible>
+<valor>4.86</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>45.32</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>98070</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 00346 SDS BITS DE 1/2" X 6-1/4"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>8.37</precioUnitario>
+<descuento>1.84</descuento>
+<precioTotalSinImpuesto>14.90</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>14.90</baseImponible>
+<valor>1.79</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70324</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO SDS-PLUS 1/2" X 6" P/ANCLAJE 007 (01320)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>14.36</precioUnitario>
+<descuento>3.16</descuento>
+<precioTotalSinImpuesto>25.56</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>25.56</baseImponible>
+<valor>3.07</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2050286</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016668</campoAdicional>
+</infoAdicional>
+</factura>

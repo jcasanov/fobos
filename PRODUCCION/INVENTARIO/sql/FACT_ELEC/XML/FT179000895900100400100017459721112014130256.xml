@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000174597</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/11/2014</fechaEmision>
+<dirEstablecimiento>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000174597</guiaRemision>
+<razonSocialComprador>EDIFICIO GALLERY PLAZA</razonSocialComprador>
+<identificacionComprador>1792391474001</identificacionComprador>
+<totalSinImpuestos>164.94</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>164.94</baseImponible>
+<valor>19.79</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>184.73</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>1/32</codigoPrincipal>
+<descripcion>EMPAQUE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>11.61</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>11.61</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="DS-8" valor="DS-8"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>11.61</baseImponible>
+<valor>1.39</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2</codigoPrincipal>
+<descripcion>SERVICIO DE REPARACION BOMBA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>120.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>120.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="DS-8" valor="DS-8"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>120.00</baseImponible>
+<valor>14.40</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>ACLO</codigoPrincipal>
+<descripcion>CAUCHO LOVEJOY L-110</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>33.33</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>33.33</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="DS-8" valor="DS-8"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>33.33</baseImponible>
+<valor>4.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

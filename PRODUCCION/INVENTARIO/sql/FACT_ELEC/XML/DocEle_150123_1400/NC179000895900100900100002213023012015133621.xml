@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000022130</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>PAPELERA NACIONAL S.A.</razonSocialComprador>
+<identificacionComprador>0990017212001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000103635</numDocModificado>
+<fechaEmisionDocSustento>01/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>679.88</totalSinImpuestos>
+<valorModificacion>761.47</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>679.88</baseImponible>
+<valor>81.59</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>REFACTURACION: CAMBIO DE FECHA</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>150261</codigoInterno>
+<descripcion>TARJETA ELECTRONICA 23-35-0312 P/ BASE ELECTROMAGNETICA 4202/4203</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>510.36</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>510.36</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>510.36</baseImponible>
+<valor>61.24</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>101448</codigoInterno>
+<descripcion>CARCASA 28-50-6363 P/MOD-4015</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>97.71</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>97.71</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>97.71</baseImponible>
+<valor>11.73</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>70466</codigoInterno>
+<descripcion>CARBONES 22-18-0702 P/ TALADROS DE DIAMANTE 4005 / 4096</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>11.10</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>11.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>11.10</baseImponible>
+<valor>1.33</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>96914</codigoInterno>
+<descripcion>CABLE DE CORRIENTE 22-64-3050  P/MOTOR 4262-1</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>60.71</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>60.71</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>60.71</baseImponible>
+<valor>7.29</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">martinezh@panasa.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2729006</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">329</campoAdicional>
+</infoAdicional>
+</notaCredito>

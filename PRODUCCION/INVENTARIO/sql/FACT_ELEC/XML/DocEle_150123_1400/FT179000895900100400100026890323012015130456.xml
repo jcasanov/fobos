@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268903</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268903</guiaRemision>
+<razonSocialComprador>CAMPAÒA SUAREZ MIGUEL SERAFIN</razonSocialComprador>
+<identificacionComprador>1802544690001</identificacionComprador>
+<totalSinImpuestos>1.52</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1.52</baseImponible>
+<valor>0.18</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1.70</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>98298</codigoPrincipal>
+<descripcion>ANCLAJE DE CAMISA LOCK-BOLT 05015S HEX. DE 3/8" X 1-7/8" (AS)</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>0.38</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1.52</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.52</baseImponible>
+<valor>0.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">serafin711@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2240550</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">043531</campoAdicional>
+</infoAdicional>
+</factura>

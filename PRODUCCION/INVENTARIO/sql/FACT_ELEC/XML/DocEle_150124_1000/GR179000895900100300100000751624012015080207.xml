@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000007516</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<dirPartida>GUALBERTO PEREZ E1-88 ENTRE MALDONADO Y NAPO</dirPartida>
+<razonSocialTransportista>SERGIO QUINCHE</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>1103687586</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>24/01/2015</fechaIniTransporte>
+<fechaFinTransporte>24/01/2015</fechaFinTransporte>
+<placa>PBX-9975</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1710233295001</identificacionDestinatario>
+<razonSocialDestinatario>HERNANDEZ VILLARROEL NORFA EDIDT</razonSocialDestinatario>
+<dirDestinatario>LULIS VARGAS N12-118 Y JULIO MATOVELLE</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>21/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>100466</codigoInterno>
+<descripcion>AZULEJO PARED 25 x 33 FERRARA AZUL MARINO PRIMERA</descripcion>
+<cantidad>9.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>100470</codigoInterno>
+<descripcion>AZULEJO PARED 25 x 33 FERRARA MARFIL PRIMERA</descripcion>
+<cantidad>16.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>100679</codigoInterno>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA TOMEBAMBA SEGUNDA</descripcion>
+<cantidad>30.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>101209</codigoInterno>
+<descripcion>AZULEJO PARED 25 x 33 FERRARA VERDE BOTELLA  PRIMERA</descripcion>
+<cantidad>9.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>101840</codigoInterno>
+<descripcion>AZULEJO PARED 20 x 25 ROYAL BLANCO  SEGUNDA</descripcion>
+<cantidad>20.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>102136</codigoInterno>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA SANTA ANA PRIMERA</descripcion>
+<cantidad>30.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">yacofernando77@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2280152</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">045632</campoAdicional>
+</infoAdicional>
+</guiaRemision>

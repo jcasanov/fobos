@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>         </secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>16/12/2014</fechaEmision>
+<dirEstablecimiento>LOS NARANJOS Y AV. DE LOS GRA-</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>PROCESADORA NACIONAL DE ALIMENTOS C.A. PRONACA</razonSocialComprador>
+<identificacionComprador>1790319857001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000175707</numDocModificado>
+<fechaEmisionDocSustento>11/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>748.48</totalSinImpuestos>
+<valorModificacion>838.30</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>748.48</baseImponible>
+<valor>89.82</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>POR REFACTURACION. MATERIAL YA ENTREGADO</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>14270</codigoInterno>
+<descripcion>TERRAJA 12R CABEZAL CON TRINQUETE Y DADOS DE 1/2" A 2" (36475)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>748.48</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>748.48</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIDGID" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>748.48</baseImponible>
+<valor>89.82</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3976400</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">28945</campoAdicional>
+</infoAdicional>
+</notaCredito>

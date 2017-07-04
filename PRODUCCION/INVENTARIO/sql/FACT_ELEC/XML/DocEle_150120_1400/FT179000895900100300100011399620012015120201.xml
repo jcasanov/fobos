@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113996</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113996</guiaRemision>
+<razonSocialComprador>ARISKAM SEGURIDAD, SALUD Y AMBIENTE S.A.</razonSocialComprador>
+<identificacionComprador>1792410878001</identificacionComprador>
+<totalSinImpuestos>302.21</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>302.21</baseImponible>
+<valor>0.00</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>302.21</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>606</codigoPrincipal>
+<descripcion>ARMEX 6.25 x 2.40 MTS. R-283 100 x 100 x 6 x 6mm.</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>77.76</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>233.28</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>233.28</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2688</codigoPrincipal>
+<descripcion>CODO PVC DESAGUE DE 75mm. x 90ø ISO E/C</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>2.14</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>6.42</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>6.42</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6482</codigoPrincipal>
+<descripcion>YEE PVC DESAGUE DE 75mm.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>4.14</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>8.28</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>8.28</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2670</codigoPrincipal>
+<descripcion>CODO PVC DESAGUE DE 75mm. x 45ø ISO E/C</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>2.58</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>5.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>5.16</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4103</codigoPrincipal>
+<descripcion>SIFON DESAGUE DE 75mm.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>6.84</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>6.84</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>6.84</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5664</codigoPrincipal>
+<descripcion>TUBO PVC DESAGUE 40 PSI DE 75mm. x 3 Mts. ESPIGA CAMPANA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>10.41</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>10.41</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>10.41</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>32742</codigoPrincipal>
+<descripcion>REJILLA PARA CUBIERTA Y VIGACANAL E593.03.01 CC-125 x 75mm. ALUMINIO P/TERRAZA Y PATIO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>15.91</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>31.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>31.82</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">lnolivos@ariskam.org</campoAdicional>
+<campoAdicional nombre="telefono-movil">2645978</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">062102</campoAdicional>
+<campoAdicional nombre="Observaciones">DINERS 3 MESES.</campoAdicional>
+</infoAdicional>
+</factura>

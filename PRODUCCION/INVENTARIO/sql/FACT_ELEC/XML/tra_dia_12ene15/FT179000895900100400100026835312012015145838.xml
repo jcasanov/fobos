@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268353</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>12/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268353</guiaRemision>
+<razonSocialComprador>MORALES CHAMORRO LUIS GUSTAVO</razonSocialComprador>
+<identificacionComprador>1704404910001</identificacionComprador>
+<totalSinImpuestos>1817.81</totalSinImpuestos>
+<totalDescuento>73.77</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1817.81</baseImponible>
+<valor>218.14</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>2035.95</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5418</codigoPrincipal>
+<descripcion>TUBO GALV. ASTM A-53   TIPO "T" DE 2-1/2" x 6.40 m.  ESPESOR 5 mm.</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>97.33</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>291.99</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>291.99</baseImponible>
+<valor>35.04</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5416</codigoPrincipal>
+<descripcion>TUBO GALV. ASTM A-53   TIPO "T" DE 2" x 6 m.  ESPESOR 3.6 mm.</descripcion>
+<cantidad>13.00</cantidad>
+<precioUnitario>58.89</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>765.57</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>765.57</baseImponible>
+<valor>91.87</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5414</codigoPrincipal>
+<descripcion>TUBO GALV. ASTM A-53   TIPO "T" DE 1-1/2" x 6 m.  ESPESOR 3.6 mm.</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>43.85</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>219.25</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>219.25</baseImponible>
+<valor>26.31</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2067</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 90 GRAD  DE 2-1/2"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>11.77</precioUnitario>
+<descuento>4.24</descuento>
+<precioTotalSinImpuesto>31.07</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>31.07</baseImponible>
+<valor>3.73</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2065</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 90 GRAD  DE 2"</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>6.59</precioUnitario>
+<descuento>7.91</descuento>
+<precioTotalSinImpuesto>57.99</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>57.99</baseImponible>
+<valor>6.96</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2063</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 90 GRAD  DE 1-1/2"</descripcion>
+<cantidad>29.00</cantidad>
+<precioUnitario>4.57</precioUnitario>
+<descuento>15.90</descuento>
+<precioTotalSinImpuesto>116.63</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>116.63</baseImponible>
+<valor>14.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2059</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 90 GRAD  DE 1"</descripcion>
+<cantidad>55.00</cantidad>
+<precioUnitario>3.30</precioUnitario>
+<descuento>21.78</descuento>
+<precioTotalSinImpuesto>159.72</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>159.72</baseImponible>
+<valor>19.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4579</codigoPrincipal>
+<descripcion>TEE GALV. CLASE 150 DE 2-1/2"</descripcion>
+<cantidad>9.00</cantidad>
+<precioUnitario>22.17</precioUnitario>
+<descuento>23.94</descuento>
+<precioTotalSinImpuesto>175.59</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>175.59</baseImponible>
+<valor>21.07</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">inggustavomorales@yahoo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3401805</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">015973</campoAdicional>
+</infoAdicional>
+</factura>

@@ -539,7 +539,8 @@ CALL fl_lee_orden_compra(vg_codcia, vg_codloc, vg_numero_oc)
 			rm_c13.c13_estado,    rm_c13.c13_fecha_eli,
 			rm_c13.c13_dif_cuadre, 
 			rm_c13.c13_flete, rm_c13.c13_otros,
-	      		rm_c13.c13_num_aut,   rm_c13.c13_serie_comp
+	      		rm_c13.c13_fec_aut, rm_c13.c13_num_aut,
+			rm_c13.c13_serie_comp
 
 IF vg_gui = 0 THEN
 	CALL muestra_tipopago(rm_c10.c10_tipo_pago)
@@ -1876,7 +1877,7 @@ LET vm_calc_iva = 'S'
 
 LET int_flag = 0
 INPUT BY NAME rm_c13.c13_numero_oc, rm_c13.c13_num_guia, rm_c13.c13_fecha_cadu,
-	      rm_c13.c13_num_aut,   rm_c13.c13_serie_comp,
+	      rm_c13.c13_fec_aut, rm_c13.c13_num_aut, rm_c13.c13_serie_comp,
 	      vm_calc_iva 
 	      WITHOUT DEFAULTS
 
@@ -1966,7 +1967,7 @@ INPUT BY NAME rm_c13.c13_numero_oc, rm_c13.c13_num_guia, rm_c13.c13_fecha_cadu,
 			END IF
 			DISPLAY rm_p01.p01_nomprov TO nomprov
 			IF oc_ant IS NULL OR oc_ant <> rm_c13.c13_numero_oc THEN
-				LET rm_c13.c13_num_aut    = rm_p01.p01_num_aut
+				LET rm_c13.c13_num_aut   = rm_p01.p01_num_aut
 				LET rm_c13.c13_serie_comp= rm_p01.p01_serie_comp
 				DISPLAY BY NAME rm_c13.c13_num_aut,
 						rm_c13.c13_serie_comp
@@ -2026,16 +2027,29 @@ INPUT BY NAME rm_c13.c13_numero_oc, rm_c13.c13_num_guia, rm_c13.c13_fecha_cadu,
 			DISPLAY BY NAME rm_c13.c13_fecha_cadu
 		END IF
 
+	AFTER FIELD c13_fec_aut
+		IF rm_c13.c13_fec_aut IS NOT NULL THEN
+			IF LENGTH(rm_c13.c13_fec_aut) <> 14 THEN
+				CALL fl_mostrar_mensaje('Numero de Fecha de Autorizacion no tiene completo el total de digitos.', 'exclamation')
+				NEXT FIELD c13_fec_aut
+			END IF
+			IF NOT fl_valida_numeros(rm_c13.c13_fec_aut) THEN
+				NEXT FIELD c13_fec_aut
+			END IF
+		END IF
+
 	AFTER FIELD c13_num_aut
 		IF rm_c13.c13_num_aut IS NOT NULL THEN
 			IF LENGTH(rm_c13.c13_num_aut) <> 10 THEN
 				CALL fl_mostrar_mensaje('Numero de Autorizacion no tiene completo el numero de digitos.', 'exclamation')
 				NEXT FIELD c13_num_aut
 			END IF
+			{-- OJO
 			IF rm_c13.c13_num_aut[1, 1] <> '1' THEN
 				CALL fl_mostrar_mensaje('Numero de Autorizacion es incorrecto.', 'exclamation')
 				NEXT FIELD c13_num_aut
 			END IF
+			--}
 			IF NOT fl_valida_numeros(rm_c13.c13_num_aut) THEN
 				NEXT FIELD c13_num_aut
 			END IF

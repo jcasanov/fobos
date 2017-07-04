@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000041392</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<dirPartida>AV LA PRENSA</dirPartida>
+<razonSocialTransportista>SERVIENTREGA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0991285679001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>12/01/2015</fechaIniTransporte>
+<fechaFinTransporte>12/01/2015</fechaFinTransporte>
+<placa>SER</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1890061385001</identificacionDestinatario>
+<razonSocialDestinatario>ECUATRAN S.A.</razonSocialDestinatario>
+<dirDestinatario>AMBATO</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>09/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>99448</codigoInterno>
+<descripcion>BOMBA HIDR. C/MOTOR ELECTRICO PEJ-1301B DE 1.5 Gl. VMF 1/2 HP. 115/60/1F CONTROL REMOTO</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">compras@ecuatran.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">032754188</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">004595</campoAdicional>
+</infoAdicional>
+</guiaRemision>

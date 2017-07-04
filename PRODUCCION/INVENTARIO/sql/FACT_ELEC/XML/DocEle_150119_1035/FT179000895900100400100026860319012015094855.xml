@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268603</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268603</guiaRemision>
+<razonSocialComprador>DIAZ CLAVIJO JOSE ALBERTO</razonSocialComprador>
+<identificacionComprador>1708242712001</identificacionComprador>
+<totalSinImpuestos>1463.11</totalSinImpuestos>
+<totalDescuento>119.86</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1463.11</baseImponible>
+<valor>175.57</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1638.68</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5502</codigoPrincipal>
+<descripcion>TUBO GALV. S-UNION ISO II TIPO "T" DE 2" x 6 m. ESPESOR 2.65 mm.</descripcion>
+<cantidad>15.00</cantidad>
+<precioUnitario>50.46</precioUnitario>
+<descuento>52.98</descuento>
+<precioTotalSinImpuesto>703.92</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>703.92</baseImponible>
+<valor>84.47</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5416</codigoPrincipal>
+<descripcion>TUBO GALV. ASTM A-53   TIPO "T" DE 2" x 6 m.  ESPESOR 3.6 mm.</descripcion>
+<cantidad>9.00</cantidad>
+<precioUnitario>72.27</precioUnitario>
+<descuento>45.53</descuento>
+<precioTotalSinImpuesto>604.90</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>604.90</baseImponible>
+<valor>72.59</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2065</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 90 GRAD  DE 2"</descripcion>
+<cantidad>16.00</cantidad>
+<precioUnitario>6.59</precioUnitario>
+<descuento>12.65</descuento>
+<precioTotalSinImpuesto>92.79</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>92.79</baseImponible>
+<valor>11.13</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5997</codigoPrincipal>
+<descripcion>UNION GALV. CLASE 150 DE 2"</descripcion>
+<cantidad>13.00</cantidad>
+<precioUnitario>4.43</precioUnitario>
+<descuento>6.91</descuento>
+<precioTotalSinImpuesto>50.68</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>50.68</baseImponible>
+<valor>6.08</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>93572</codigoPrincipal>
+<descripcion>GRIFO ESFERICO BRONCE CROMADO FUTURGAS DE 3/4" (AGUA, GAS Y AIRE)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>9.29</precioUnitario>
+<descuento>1.39</descuento>
+<precioTotalSinImpuesto>7.90</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FIV"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7.90</baseImponible>
+<valor>0.95</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4120</codigoPrincipal>
+<descripcion>TAPON GALV. HEMBRA CLASE 150 DE 1-1/2" REFORZADO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3.32</precioUnitario>
+<descuento>0.40</descuento>
+<precioTotalSinImpuesto>2.92</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.92</baseImponible>
+<valor>0.35</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">joalber_2266@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">086262983</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">047941</campoAdicional>
+</infoAdicional>
+</factura>

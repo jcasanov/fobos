@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092046</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092046</guiaRemision>
+<razonSocialComprador>TORIS GUERRERO EDWIN, ARQ.</razonSocialComprador>
+<identificacionComprador>0903756690</identificacionComprador>
+<totalSinImpuestos>152.45</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>152.45</baseImponible>
+<valor>18.29</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>170.74</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>98554</codigoPrincipal>
+<descripcion>BOMBA CENTRIF STANDARD C-MOTOR MC-50 DE 1/2 HP 115V/60C/1F. (301T0500)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>152.45</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>152.45</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>152.45</baseImponible>
+<valor>18.29</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">arqtoris@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2361907</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">008721</campoAdicional>
+<campoAdicional nombre="Observaciones">ARQTORIS@GMAIL.COM</campoAdicional>
+</infoAdicional>
+</factura>

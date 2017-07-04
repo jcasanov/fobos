@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113749</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>08/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113749</guiaRemision>
+<razonSocialComprador>REMATEIN</razonSocialComprador>
+<identificacionComprador>1704861465001</identificacionComprador>
+<totalSinImpuestos>152.46</totalSinImpuestos>
+<totalDescuento>16.94</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>152.46</baseImponible>
+<valor>18.30</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>170.76</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>92991</codigoPrincipal>
+<descripcion>PEGA PARA CERAMICA BONDEX STANDARD DE 25 KG. CERAMICA</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>5.80</precioUnitario>
+<descuento>2.32</descuento>
+<precioTotalSinImpuesto>20.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INTACO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>20.88</baseImponible>
+<valor>2.51</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100775</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA AMAZONAS BLANCO SEGUNDA</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>7.31</precioUnitario>
+<descuento>14.62</descuento>
+<precioTotalSinImpuesto>131.58</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>131.58</baseImponible>
+<valor>15.79</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">rematein@yahoo.es</campoAdicional>
+<campoAdicional nombre="telefono-movil">636 078</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">026552</campoAdicional>
+</infoAdicional>
+</factura>

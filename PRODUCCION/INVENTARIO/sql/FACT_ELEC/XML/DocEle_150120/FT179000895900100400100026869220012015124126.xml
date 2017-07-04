@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268692</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268692</guiaRemision>
+<razonSocialComprador>CEMEPRO</razonSocialComprador>
+<identificacionComprador>1708360803001</identificacionComprador>
+<totalSinImpuestos>536.22</totalSinImpuestos>
+<totalDescuento>59.58</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>536.22</baseImponible>
+<valor>64.35</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>600.57</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>13628</codigoPrincipal>
+<descripcion>LLAVE DE CADENA C-36 CAPACIDAD HASTA 6" (31330)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>297.90</precioUnitario>
+<descuento>59.58</descuento>
+<precioTotalSinImpuesto>536.22</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>536.22</baseImponible>
+<valor>64.35</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">cemepro1803@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">335818</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">015348</campoAdicional>
+<campoAdicional nombre="Observaciones">CHEQ N: 565 BNCO INTERNACIONAL</campoAdicional>
+</infoAdicional>
+</factura>

@@ -529,7 +529,6 @@ INPUT BY NAME rm_n56.n56_proceso, rm_n56.n56_cod_trab, rm_n56.n56_cod_depto,
 			END IF
 			DISPLAY BY NAME r_n30.n30_nombres
 			IF r_n30.n30_estado <> 'A' AND
-			   r_n30.n30_estado <> 'J' AND
 			   rm_n56.n56_proceso <> 'UT'
 			THEN
 				CALL fl_mensaje_estado_bloqueado()

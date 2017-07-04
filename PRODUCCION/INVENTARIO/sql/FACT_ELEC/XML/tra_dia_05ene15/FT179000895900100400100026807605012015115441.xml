@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268076</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>05/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268076</guiaRemision>
+<razonSocialComprador>COELEC S.C.</razonSocialComprador>
+<identificacionComprador>1791725530001</identificacionComprador>
+<totalSinImpuestos>1130.81</totalSinImpuestos>
+<totalDescuento>484.63</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1130.81</baseImponible>
+<valor>135.70</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1266.51</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>150055</codigoPrincipal>
+<descripcion>MARTILLO DEMOLEDOR 5339-21 14 AMP. SDS-MAX  KIT C/MALETIN</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1516.94</precioUnitario>
+<descuento>455.08</descuento>
+<precioTotalSinImpuesto>1061.86</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1061.86</baseImponible>
+<valor>127.42</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150192</codigoPrincipal>
+<descripcion>CINCEL PARA CEMENTO 00967 SDS-MAX 1" X 12" PLANO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>35.00</precioUnitario>
+<descuento>10.50</descuento>
+<precioTotalSinImpuesto>24.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>24.50</baseImponible>
+<valor>2.94</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98591</codigoPrincipal>
+<descripcion>CINCEL PARA CEMENTO SDS-MAX  CINCEL PUNTERO 12" (965)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>31.75</precioUnitario>
+<descuento>19.05</descuento>
+<precioTotalSinImpuesto>44.45</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>44.45</baseImponible>
+<valor>5.33</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">m.morales@coelecsc.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2752485</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">037987</campoAdicional>
+</infoAdicional>
+</factura>

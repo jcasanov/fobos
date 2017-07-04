@@ -1,0 +1,9 @@
+export LD_ASSUME_KERNEL=2.4.0
+for i in ???p*.4gl
+do
+	if [ "$1" == "aceros" ]; then
+		sh compi $i
+	else
+		fglrun compilar $i
+	fi
+done

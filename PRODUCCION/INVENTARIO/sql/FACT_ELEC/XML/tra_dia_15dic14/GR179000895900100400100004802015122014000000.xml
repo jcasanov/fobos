@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048020</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AMBATO/AV, CIRCUNVALACION Y SEGUNDO QUIR</dirEstablecimiento>
+<dirPartida>AV LA PRENSA</dirPartida>
+<razonSocialTransportista>ACERO COMERCIAL</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>15/12/2014</fechaIniTransporte>
+<fechaFinTransporte>15/12/2014</fechaFinTransporte>
+<placa></placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0502724438001</identificacionDestinatario>
+<razonSocialDestinatario>AQUIETA MASAPANTA HECTOR IVAN</razonSocialDestinatario>
+<dirDestinatario>AMBATO</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>15/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>61791</codigoInterno>
+<descripcion>TANQUE DE PRESION FIBRA DE VIDRIO WM-6/WM0075 ENTREGA DE 5.9 GLS POR CICLO DE 30/50 PSI</descripcion>
+<cantidad>10.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="WELL MATE" valor="WELL M"/>
+<detAdicional nombre="WM-6-WM0075" valor="WM-6-WM0075"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>94171</codigoInterno>
+<descripcion>BOMBA SUMERGIBLE DE 4" SDQP60-150 SISTEMA DE PRESION CONSTANTE (93806015) SD150</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="FRANKLIN PUMPS SYSTEMS" valor="FRANKL"/>
+<detAdicional nombre="SDQP60-150" valor="SDQP60-150"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>96729</codigoInterno>
+<descripcion>BOMBA SUMERGIBLE DE 4" 25SDQP  25 GPM SIST. DE PRESION CONSTANTE (93802501) 215 PIES</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="FRANKLIN PUMPS SYSTEMS" valor="FRANKL"/>
+<detAdicional nombre="SDQ-P25" valor="SDQ-P25"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>97287</codigoInterno>
+<descripcion>BOMBA SUMERGIBLE DE 4" 60FA2S4-PE P/2HP 60 GPM (93616006) 6 ETAPAS</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="FRANKLIN PUMPS SYSTEMS" valor="FRANKL"/>
+<detAdicional nombre="60FA2S4-PE" valor="60FA2S4-PE"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+<campoAdicional nombre="telefono-movil">032450373</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">041894</campoAdicional>
+</infoAdicional>
+</guiaRemision>

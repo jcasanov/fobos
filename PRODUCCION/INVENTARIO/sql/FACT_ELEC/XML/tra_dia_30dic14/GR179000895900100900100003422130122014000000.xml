@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000034221</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>AV. JUAN TANCA MARENGO KM.1.7</dirPartida>
+<razonSocialTransportista>MANUEL MAGALLANES (ACERO COMERCIAL .S.A)</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>0910240910</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>30/12/2014</fechaIniTransporte>
+<fechaFinTransporte>30/12/2014</fechaFinTransporte>
+<placa>  GSC-8976</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0992836652001</identificacionDestinatario>
+<razonSocialDestinatario>CONSORCIO CONSALMED 1</razonSocialDestinatario>
+<dirDestinatario>EN OBRA.HOSPITAL GYE.REC.ARQ.LARREA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>30/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>101106</codigoInterno>
+<descripcion>TUBO ABASTO- LLAVE ANGULAR LAVABO 7589306 CON MANGUERA DE 12"</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="MODELO" valor="SC0075893061BO"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>101107</codigoInterno>
+<descripcion>TUBO ABASTO-LLAVE ANGULAR INODORO 7590306 CON MANGUERA DE 1/2" x 15/16" x 12"</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="MODELO" valor="SC0075903061BO"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>101817</codigoInterno>
+<descripcion>EMPAQUE 1319000 SELLO DE CERA</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="MODELO" valor="1319000"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>27893</codigoInterno>
+<descripcion>TORNILLO 3011000 SET ANCLAJE TAZA PISO WC</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="MODELO" valor="SP003011000100"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>69028</codigoInterno>
+<descripcion>LLAVE TEMPORIZADAS / PRESSMATIC 5763306 LLAVE TEMPORIZADA DE MESA P/ LAVABO CROMO</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="MODELO" valor="SG0057633061BO"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>70747</codigoInterno>
+<descripcion>DESAGUE DE LAVABO SC005903000 1BO 1-1/4" PP DESAGUE CON REJILLA Y SIFON</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="MODELO" valor="SC0059030001BO"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>71680</codigoInterno>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS ELONGADO JS0043751301CE CONSERVER ALARGADO  C/A ARM</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="MODELO" valor="JS0043751301CE"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">alarrea.elot@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2680052</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016395</campoAdicional>
+</infoAdicional>
+</guiaRemision>

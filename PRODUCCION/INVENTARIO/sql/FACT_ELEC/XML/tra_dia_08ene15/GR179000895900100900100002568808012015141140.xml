@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025688</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>SERVIENTREGA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0991285679001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>08/01/2015</fechaIniTransporte>
+<fechaFinTransporte>09/01/2015</fechaFinTransporte>
+<placa>SIN PLACA</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1790008959001</identificacionDestinatario>
+<razonSocialDestinatario>ACERO COMERCIAL ECUATORIANO S.A.</razonSocialDestinatario>
+<dirDestinatario>QUITO MATRIZ AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirDestinatario>
+<motivoTraslado>TRANSFERENCIAS ENTRE LOCALIDADES</motivoTraslado>
+<fechaEmisionDocSustento>08/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>12774</codigoInterno>
+<descripcion>CILINDRO HIDR S-A RC RC-506 50 T 6.25" CARRERA 11.13" ALTURA</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>13942</codigoInterno>
+<descripcion>ROSCADORA MOD-1224 MOTOR 1-1/2 HP 115V 60C CAPACIDAD 1/4" A 4"(26092)</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>14294</codigoInterno>
+<descripcion>CABEZAL/TERRAJA PARA ROSCADORAS ELECTRICAS 811-A UNIVERSAL S/DADOS (97065)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>15668</codigoInterno>
+<descripcion>DADOS PARA TERRAJA MANUAL P/ 12-R DE 1" NPT (37835)</descripcion>
+<cantidad>4.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>45076</codigoInterno>
+<descripcion>MANOMETRO G-2535-L DE GLICERINA 2 1/2" DIAMETRO 0-10000PSI</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>46388</codigoInterno>
+<descripcion>EXTRACTOR MANUAL (SANTIAGO) EP-110 20 TONELADAS 3 BRAZOS</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>99770</codigoInterno>
+<descripcion>TECLE DE PALANCA A CADENA LX-003 COMPACTO DE ALUMINIO DE 250 Kg. 10 PIES DE ELEVACION</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KITO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacionelectronica@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">042683060</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000001</campoAdicional>
+</infoAdicional>
+</guiaRemision>

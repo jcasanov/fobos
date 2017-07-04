@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000114165</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>003-001-000114165</guiaRemision>
+<razonSocialComprador>SILVA ABALOS LUIS</razonSocialComprador>
+<identificacionComprador>0601161813</identificacionComprador>
+<totalSinImpuestos>13.14</totalSinImpuestos>
+<totalDescuento>1.15</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>13.14</baseImponible>
+<valor>1.58</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>14.72</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>95348</codigoPrincipal>
+<descripcion>TEE GALV. CLASE 150 DE 1/2"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1.23</precioUnitario>
+<descuento>0.20</descuento>
+<precioTotalSinImpuesto>2.26</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.26</baseImponible>
+<valor>0.27</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4573</codigoPrincipal>
+<descripcion>TEE GALV. CLASE 150 DE 1-1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>6.07</precioUnitario>
+<descuento>0.49</descuento>
+<precioTotalSinImpuesto>5.58</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.58</baseImponible>
+<valor>0.67</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>10154</codigoPrincipal>
+<descripcion>SELLADOR 2-C-GS-2-11  DE  11 OZ. NEGRO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>5.76</precioUnitario>
+<descuento>0.46</descuento>
+<precioTotalSinImpuesto>5.30</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PERMAT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.30</baseImponible>
+<valor>0.64</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">lasa@u.ecuapuntonet.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">865024</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">011245</campoAdicional>
+</infoAdicional>
+</factura>

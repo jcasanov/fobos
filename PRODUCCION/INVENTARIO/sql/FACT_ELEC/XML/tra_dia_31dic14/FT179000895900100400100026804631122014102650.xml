@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268046</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>31/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268046</guiaRemision>
+<razonSocialComprador>BATEL</razonSocialComprador>
+<identificacionComprador>1711529261001</identificacionComprador>
+<totalSinImpuestos>641.58</totalSinImpuestos>
+<totalDescuento>113.22</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>641.58</baseImponible>
+<valor>76.99</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>718.57</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102393</codigoPrincipal>
+<descripcion>ROTOMARTILLO A BATERIA 2604-22CT M-18 FUEL ATORNILLADOR DE 1/2" - 650 PULG/LB.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>487.94</precioUnitario>
+<descuento>73.19</descuento>
+<precioTotalSinImpuesto>414.75</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>414.75</baseImponible>
+<valor>49.77</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150464</codigoPrincipal>
+<descripcion>ROTOMARTILLO 5380-21 DE 1/2" BROCA LISA SISTEMA AVS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>266.86</precioUnitario>
+<descuento>40.03</descuento>
+<precioTotalSinImpuesto>226.83</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>226.83</baseImponible>
+<valor>27.22</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">diegotonello@batel.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">256758</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064188</campoAdicional>
+</infoAdicional>
+</factura>

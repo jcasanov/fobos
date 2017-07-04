@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048342</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>GARCIA MORENO 580 Y COLON</dirEstablecimiento>
+<dirPartida>GUALBERTO PEREZ E1-88 ENTRE MALDONADO Y NAPO</dirPartida>
+<razonSocialTransportista>SERGIO QUINCHE</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>1103687586</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>17/12/2014</fechaIniTransporte>
+<fechaFinTransporte>17/12/2014</fechaFinTransporte>
+<placa>PBX-9975</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0901818294001</identificacionDestinatario>
+<razonSocialDestinatario>RODRIGUEZ RAMOS WALTER TARQUINO</razonSocialDestinatario>
+<dirDestinatario>AMAGUAÒA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>17/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>100329</codigoInterno>
+<descripcion>AZULEJO PARED 25 x 40 BIONICA BLANCO SEGUNDA</descripcion>
+<cantidad>4.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="RIALTO" valor="RIALTO"/>
+<detAdicional nombre="BIONICA BLANCO" valor="BIONICA BLANCO"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>99362</codigoInterno>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA MACHALILLA BLANCO PRIMERA</descripcion>
+<cantidad>38.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="MACHALILLA BLANCO" valor="MACHALILLA BLANCO"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2877148</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">055695</campoAdicional>
+</infoAdicional>
+</guiaRemision>

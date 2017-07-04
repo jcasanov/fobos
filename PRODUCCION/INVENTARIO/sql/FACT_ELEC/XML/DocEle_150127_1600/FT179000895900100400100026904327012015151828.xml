@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000269043</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>004-001-000269043</guiaRemision>
+<razonSocialComprador>DONOSO ACOSTA CECILIA EULALIA</razonSocialComprador>
+<identificacionComprador>0601102767</identificacionComprador>
+<totalSinImpuestos>31.90</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>31.90</baseImponible>
+<valor>3.83</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>35.73</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>21138</codigoPrincipal>
+<descripcion>SWITCH DE PRESION 15760-A2 DE 40 A 60 PSI  SQUARE D</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>31.90</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>31.90</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>31.90</baseImponible>
+<valor>3.83</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">edonoso55@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2340949</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064408</campoAdicional>
+<campoAdicional nombre="Observaciones">TARJETA DINERS CORRIENTE</campoAdicional>
+</infoAdicional>
+</factura>

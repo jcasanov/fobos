@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000002683</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>06/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000002683</guiaRemision>
+<razonSocialComprador>FOGHINI FIUMI FRANCESCA ANGELA</razonSocialComprador>
+<identificacionComprador>0912139714001</identificacionComprador>
+<totalSinImpuestos>486.43</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>486.43</baseImponible>
+<valor>58.37</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>544.80</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>ZZ</codigoPrincipal>
+<descripcion>DESMONTAGE Y MONTAGE DE BOMBA SUMERGIBLE DE 15HP/230.VOLT/1P</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>400.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>400.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BOMBA"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>400.00</baseImponible>
+<valor>48.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>SERVICIO1</codigoPrincipal>
+<descripcion>50/MTS DE CABLE CONCETRICO 3X14</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>71.42</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>71.42</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BOMBA"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>71.42</baseImponible>
+<valor>8.57</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>SERVICIO2</codigoPrincipal>
+<descripcion>CINTA AUTOFUNDENTE #23</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>12.39</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>12.39</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BOMBA"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>12.39</baseImponible>
+<valor>1.49</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>SERVICIO3</codigoPrincipal>
+<descripcion>3/CINTA AUTOFUNDENTE TEMFLEX</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2.62</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2.62</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BOMBA"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.62</baseImponible>
+<valor>0.31</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">cemadba@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2184062</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016645</campoAdicional>
+</infoAdicional>
+</factura>

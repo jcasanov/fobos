@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025829</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO  COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>SERVIENTREGA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0991285679001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>20/01/2015</fechaIniTransporte>
+<fechaFinTransporte>21/01/2015</fechaFinTransporte>
+<placa>YBA3003</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0702183922001</identificacionDestinatario>
+<razonSocialDestinatario>ECOCOMERCIO</razonSocialDestinatario>
+<dirDestinatario>MACHALA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>19/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>16161</codigoInterno>
+<descripcion>FILTRO PARA ASPIRADORA P/ASPIRADORA DE TODO MODELO (72947)</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>99222</codigoInterno>
+<descripcion>ASPIRADORA SECO Y MOJADO RESIDENCIAL WD-0671 DE 6 Glns. MOTOR DE 2.5HP 120V. (36683)</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>99792</codigoInterno>
+<descripcion>ASPIRADORA SECO Y MOJADO RESIDENCIAL WD-1270 DE 12 Glns. MOTOR DE 5 HP 120V. (40103)</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">info@comerciocompetitivo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2920103</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">008853</campoAdicional>
+</infoAdicional>
+</guiaRemision>

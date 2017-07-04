@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048274</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirEstablecimiento>
+<dirPartida>AV DE LA PRENSA</dirPartida>
+<razonSocialTransportista>SERVIENTREGA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0991285679001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>23/12/2014</fechaIniTransporte>
+<fechaFinTransporte>23/12/2014</fechaFinTransporte>
+<placa>POU-7178</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1790008959001</identificacionDestinatario>
+<razonSocialDestinatario>ACERO COMERCIAL ECUATORIANO S.A.</razonSocialDestinatario>
+<dirDestinatario>ACERO GUAYAQUIL KM 1 AV. JUAN TANCA MARENGO</dirDestinatario>
+<motivoTraslado>TRANSFERENCIAS ENTRE LOCALIDADES</motivoTraslado>
+<fechaEmisionDocSustento>23/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>13894</codigoInterno>
+<descripcion>PRENSA 775 TIPO PORTATIL DE SOPORTE P/MOD-700 (42625)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="MODELO" valor="775 TIPO PORTATIL"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>150477</codigoInterno>
+<descripcion>CINCEL PARA CEMENTO 48-62-6115 SDS PLUS 3/4" x 10" PLANO.</descripcion>
+<cantidad>12.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="MODELO" valor="48-62-6115"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>15666</codigoInterno>
+<descripcion>DADOS PARA TERRAJA MANUAL P/ 12-R DE 3/4" NPT (37830)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="MODELO" valor="PARA 12-R DE 3/4""/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>15702</codigoInterno>
+<descripcion>DADOS PARA TUBOS 2-1/2" A 4" NPT HS P/714-914 (26192)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="MODELO" valor="26192"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>44285</codigoInterno>
+<descripcion>BOMBA CENTRIF STANDARD C-MOTOR DS-8-1 5HP 2 x 1-1/2" 220/440-1-60</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MARK G"/>
+<detAdicional nombre="MODELO" valor="98267959"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>93694</codigoInterno>
+<descripcion>ACEITERA (RECIPIENTE) N.418 COMPLETA (10883)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="MODELO" valor="N.418"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>95220</codigoInterno>
+<descripcion>GRIFERIA DE LAVAPLATOS MONOCONTROL E510.02/06 CR BIG KITCHEN CON MANGUERAS</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="MODELO" valor="95220"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">022454333</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000003</campoAdicional>
+</infoAdicional>
+</guiaRemision>

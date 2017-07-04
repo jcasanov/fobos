@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000007480</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<dirPartida>GUALBERTO PEREZ E1-88 ENTRE MALDONADO Y NAPO</dirPartida>
+<razonSocialTransportista>SERGIO QUINCHE</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>1103687586</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>09/01/2015</fechaIniTransporte>
+<fechaFinTransporte>10/01/2015</fechaFinTransporte>
+<placa>PBX-9975</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1791295706001</identificacionDestinatario>
+<razonSocialDestinatario>ECOFROZ S.A</razonSocialDestinatario>
+<dirDestinatario>PANAMERICA SUR KM. 40</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>09/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>100774</codigoInterno>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA AMAZONAS BLANCO PRIMERA</descripcion>
+<cantidad>28.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>92991</codigoInterno>
+<descripcion>PEGA PARA CERAMICA BONDEX STANDARD DE 25 KG. CERAMICA</descripcion>
+<cantidad>6.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INTACO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>97274</codigoInterno>
+<descripcion>PORCELANA PARA CERAMICA GROUTEX POLIMERO PF S/A BLANCO (2Kg.)</descripcion>
+<cantidad>5.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INTACO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">ecofroz@ecofroz.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">316293-4</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">005159</campoAdicional>
+</infoAdicional>
+</guiaRemision>

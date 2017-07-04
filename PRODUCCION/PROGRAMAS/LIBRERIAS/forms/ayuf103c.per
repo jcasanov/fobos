@@ -1,0 +1,31 @@
+DATABASE aceros
+SCREEN
+{
+  VEHICULOS FACTURADOS
+ -------------------------------------------------------------
+  Código    Cliente                 Vehículo  Modelo     
+ -------------------------------------------------------------
+ [c000    ][c001                   ][c002   ][c003           ]
+ [c000    ][c001                   ][c002   ][c003           ]
+ [c000    ][c001                   ][c002   ][c003           ]
+ [c000    ][c001                   ][c002   ][c003           ]
+ [c000    ][c001                   ][c002   ][c003           ]
+ [c000    ][c001                   ][c002   ][c003           ]
+ [c000    ][c001                   ][c002   ][c003           ]
+ [c000    ][c001                   ][c002   ][c003           ]
+ [c000    ][c001                   ][c002   ][c003           ]
+ [c000    ][c001                   ][c002   ][c003           ]
+}
+TABLES
+veht022
+veht030
+cxct001
+ATTRIBUTES
+c000 = v30_codcli, UPSHIFT, REVERSE;
+c001 = z01_nomcli, UPSHIFT, REVERSE;
+c002 = v22_codigo_veh, UPSHIFT, REVERSE;
+c003 = v22_modelo, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_vehfac[10] (v30_codcli, z01_nomcli, v22_codigo_veh, v22_modelo)

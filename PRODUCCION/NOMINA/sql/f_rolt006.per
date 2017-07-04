@@ -1,0 +1,45 @@
+database acero_gm
+screen size 24 by 80
+{
+n06_cod_rubro      [f000  ]
+n06_nombre         [f001                          ]
+n06_nombre_abr     [f002           ]
+n06_etiq_impr      [f003      ]
+n06_estado         [a]
+n06_orden          [f004  ]
+n06_det_tot        [a0]
+n06_cant_valor     [b]
+n06_calculo        [c]
+n06_ing_usuario    [d]
+n06_imprime_0      [e]
+n06_cont_colect    [f]
+n06_flag_ident     [a1]
+n06_rubro_dscto    [f005  ]
+n06_valor_fijo     [f006          ]
+n06_cont_prest     [g]
+n06_usuario        [f007      ]
+n06_fecing         [f008               ]
+}
+end
+tables
+rolt006
+attributes
+f000 = rolt006.n06_cod_rubro;
+f001 = rolt006.n06_nombre;
+f002 = rolt006.n06_nombre_abr;
+f003 = rolt006.n06_etiq_impr;
+a = rolt006.n06_estado;
+f004 = rolt006.n06_orden;
+a0 = rolt006.n06_det_tot;
+b = rolt006.n06_cant_valor;
+c = rolt006.n06_calculo;
+d = rolt006.n06_ing_usuario;
+e = rolt006.n06_imprime_0;
+f = rolt006.n06_cont_colect;
+a1 = rolt006.n06_flag_ident;
+f005 = rolt006.n06_rubro_dscto;
+f006 = rolt006.n06_valor_fijo;
+g = rolt006.n06_cont_prest;
+f007 = rolt006.n06_usuario;
+f008 = rolt006.n06_fecing;
+end

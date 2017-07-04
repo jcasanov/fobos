@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175961</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>AV. MARISCAL SUCRE N50-26 Y M. VALDIVIES</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175961</guiaRemision>
+<razonSocialComprador>CALORSEC CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1791333918001</identificacionComprador>
+<totalSinImpuestos>9.58</totalSinImpuestos>
+<totalDescuento>1.05</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>9.58</baseImponible>
+<valor>1.15</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>10.73</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>96864</codigoPrincipal>
+<descripcion>SELLANTE POLIPROPILENO ENVASE DE 100 CC (AGUA CALIENTE)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>9.89</precioUnitario>
+<descuento>0.99</descuento>
+<precioTotalSinImpuesto>8.90</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.90</baseImponible>
+<valor>1.07</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3158</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1/2" x 2"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>0.37</precioUnitario>
+<descuento>0.06</descuento>
+<precioTotalSinImpuesto>0.68</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.68</baseImponible>
+<valor>0.08</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2438905</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">031114</campoAdicional>
+</infoAdicional>
+</factura>

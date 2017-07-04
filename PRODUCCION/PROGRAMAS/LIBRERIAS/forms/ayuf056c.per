@@ -1,0 +1,32 @@
+DATABASE aceros
+
+SCREEN
+{
+  ORDENES DE TRABAJO
+ ---------------------------------------------------
+  Orden       Cliente 		
+ ---------------------------------------------------
+ [c001     ] [c002                                 ] 
+ [c001     ] [c002                                 ]
+ [c001     ] [c002                                 ]
+ [c001     ] [c002                                 ]
+ [c001     ] [c002                                 ]
+ [c001     ] [c002                                 ]
+ [c001     ] [c002                                 ] 
+ [c001     ] [c002                                 ] 
+ [c001     ] [c002                                 ] 
+ [c001     ] [c002                                 ] 
+
+}
+
+TABLES
+talt023
+
+ATTRIBUTES
+c001 = t23_orden, UPSHIFT,REVERSE;
+c002 = t23_nom_cliente, UPSHIFT,REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_ordtal[10](t23_orden, t23_nom_cliente)
+

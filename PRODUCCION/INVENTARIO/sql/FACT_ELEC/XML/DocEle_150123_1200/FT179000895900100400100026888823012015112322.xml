@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268888</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268888</guiaRemision>
+<razonSocialComprador>IZA ORQUERA PEDRO</razonSocialComprador>
+<identificacionComprador>1706390513001</identificacionComprador>
+<totalSinImpuestos>79.20</totalSinImpuestos>
+<totalDescuento>6.63</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>79.20</baseImponible>
+<valor>9.50</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>88.70</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5410</codigoPrincipal>
+<descripcion>TUBO GALV. ASTM A-53   TIPO "T" DE 1" x 6 m.  ESPESOR 3.2 mm.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>32.61</precioUnitario>
+<descuento>4.57</descuento>
+<precioTotalSinImpuesto>60.65</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>60.65</baseImponible>
+<valor>7.28</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3196</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1" x 2"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>0.84</precioUnitario>
+<descuento>0.50</descuento>
+<precioTotalSinImpuesto>4.54</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.54</baseImponible>
+<valor>0.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4567</codigoPrincipal>
+<descripcion>TEE GALV. CLASE 150 DE 1"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>3.35</precioUnitario>
+<descuento>1.01</descuento>
+<precioTotalSinImpuesto>9.04</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.04</baseImponible>
+<valor>1.08</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>92013</codigoPrincipal>
+<descripcion>BUSHING GALV. CLASE 150 DE 1" x 1/2"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>1.84</precioUnitario>
+<descuento>0.55</descuento>
+<precioTotalSinImpuesto>4.97</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.97</baseImponible>
+<valor>0.60</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">pedroiza@andinanet.net</campoAdicional>
+<campoAdicional nombre="telefono-movil">607069</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">027449</campoAdicional>
+</infoAdicional>
+</factura>

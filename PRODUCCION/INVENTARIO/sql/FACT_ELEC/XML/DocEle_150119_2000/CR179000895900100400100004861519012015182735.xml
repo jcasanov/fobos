@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comprobanteRetencion id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048615</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoCompRetencion>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionSujetoRetenido>04</tipoIdentificacionSujetoRetenido>
+<razonSocialSujetoRetenido>SUINCO & INGIN CIA. LTDA.</razonSocialSujetoRetenido>
+<identificacionSujetoRetenido>1790886824001</identificacionSujetoRetenido>
+<periodoFiscal>01/2015</periodoFiscal>
+</infoCompRetencion>
+<impuestos>
+<impuesto>
+<codigo>1</codigo>
+<codigoRetencion>312</codigoRetencion>
+<baseImponible>22.19</baseImponible>
+<porcentajeRetener>1.00</porcentajeRetener>
+<valorRetenido>0.22</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>001001000042839</numDocSustento>
+<fechaEmisionDocSustento>13/01/2015</fechaEmisionDocSustento>
+</impuesto>
+<impuesto>
+<codigo>2</codigo>
+<codigoRetencion>1</codigoRetencion>
+<baseImponible>2.66</baseImponible>
+<porcentajeRetener>30.00</porcentajeRetener>
+<valorRetenido>0.80</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>001001000042839</numDocSustento>
+<fechaEmisionDocSustento>13/01/2015</fechaEmisionDocSustento>
+</impuesto>
+</impuestos>
+<infoAdicional>
+<campoAdicional nombre="Email">suinco@cablemodem.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2599591</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">001926</campoAdicional>
+</infoAdicional>
+</comprobanteRetencion>

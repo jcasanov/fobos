@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000022079</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>AVICOLA SAN ISIDRO S.A. AVISID</razonSocialComprador>
+<identificacionComprador>1791924037001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000104092</numDocModificado>
+<fechaEmisionDocSustento>18/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>2701.71</totalSinImpuestos>
+<valorModificacion>3025.92</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>2701.71</baseImponible>
+<valor>324.21</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>REFACTURACION: CAMBIO DE FECHA</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>95283</codigoInterno>
+<descripcion>BOMBA CENTRIF STANDARD C-MOTOR XD-4 DE 1 HP/110/220/60/1F</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>397.31</precioUnitario>
+<descuento>297.98</descuento>
+<precioTotalSinImpuesto>1688.57</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MARK G"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1688.57</baseImponible>
+<valor>202.63</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>95283</codigoInterno>
+<descripcion>BOMBA CENTRIF STANDARD C-MOTOR XD-4 DE 1 HP/110/220/60/1F</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>397.31</precioUnitario>
+<descuento>178.79</descuento>
+<precioTotalSinImpuesto>1013.14</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MARK G"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1013.14</baseImponible>
+<valor>121.58</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">s.cruz@incubadora-anhalzer.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2706042-3</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">7369</campoAdicional>
+</infoAdicional>
+</notaCredito>

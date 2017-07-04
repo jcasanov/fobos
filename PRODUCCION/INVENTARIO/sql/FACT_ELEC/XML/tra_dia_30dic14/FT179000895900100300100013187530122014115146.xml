@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131875</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>30/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131875</guiaRemision>
+<razonSocialComprador>BORJA CALDERON SEGUNDO OSWALDO</razonSocialComprador>
+<identificacionComprador>0400784831001</identificacionComprador>
+<totalSinImpuestos>283.88</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>283.88</baseImponible>
+<valor>34.07</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>317.95</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>97612</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS 4262130 CAMPEON BLANCO C/ASIENTO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>44.44</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>44.44</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>44.44</baseImponible>
+<valor>5.33</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>94537</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA CON PEDESTAL PREPONCHADO JS5710130 SHELBY BLANCO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>21.55</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>21.55</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>21.55</baseImponible>
+<valor>2.59</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97613</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS 4262733 CAMPEON BONE C/ASIENTO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>48.88</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>48.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>48.88</baseImponible>
+<valor>5.87</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>95726</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA CON PEDESTAL PREPONCHADO JS5710733 SHELBY C/P BONE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>23.75</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>23.75</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>23.75</baseImponible>
+<valor>2.85</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97614</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS 4262722 CAMPEON DRESDEN BLUE C/ASIENTO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>48.88</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>48.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>48.88</baseImponible>
+<valor>5.87</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>95482</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA CON PEDESTAL PREPONCHADO JS5710722 SHELBY C/P DRESDEN BLUE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>23.75</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>23.75</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>23.75</baseImponible>
+<valor>2.85</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97615</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS 4262054 CAMPEON VERDE MIST C/ASIENTO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>48.88</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>48.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>48.88</baseImponible>
+<valor>5.87</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>95481</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA CON PEDESTAL PREPONCHADO JS5710054 SHELBY C/P VERDE MIST</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>23.75</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>23.75</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>23.75</baseImponible>
+<valor>2.85</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">dey_2102@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0999293682</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">063659</campoAdicional>
+</infoAdicional>
+</factura>

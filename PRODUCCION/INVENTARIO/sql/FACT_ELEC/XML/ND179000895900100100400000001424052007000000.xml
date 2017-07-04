@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaDebito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>001</estab>
+<ptoEmi>004</ptoEmi>
+<secuencial>000000014</secuencial>
+<dirMatriz>GUALBERTO PEREZ</dirMatriz>
+</infoTributaria>
+<infoNotaDebito>
+<fechaEmision>24/05/2007</fechaEmision>
+<dirEstablecimiento>PANAMERICANA SUR KM.9.1/2</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>PLYWOOD ECUATORIANA S.A.</razonSocialComprador>
+<identificacionComprador>1790007111001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000000014</numDocModificado>
+<fechaEmisionDocSustento>24/05/2007</fechaEmisionDocSustento>
+<totalSinImpuestos>36.23</totalSinImpuestos>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>36.23</baseImponible>
+<valor>4.35</valor>
+</impuesto>
+</impuestos>
+<valorTotal>40.58</valorTotal>
+</infoNotaDebito>
+<motivos>
+<motivo>
+<razon>ANULAR N/C 1598</razon>
+<valor>36.23</valor>
+</motivo>
+</motivos>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+<campoAdicional nombre="telefono-movil">3944460</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">28929</campoAdicional>
+</infoAdicional>
+</notaDebito>

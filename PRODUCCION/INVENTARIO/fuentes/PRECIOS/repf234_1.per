@@ -1,0 +1,73 @@
+DATABASE aceros
+SCREEN
+{
+
+   División: [f]        [f077                               ]
+      Línea: [f5]       [f054                               ]
+      Grupo: [f55]      [f056                                    ]
+      Clase: [f057    ] [f058                                              ]
+      Marca: [c060  ]   [c061                                ]
+
+ [f010    |f011                  |f012         |f013         |f014 |f015   |d]
+[f020  ] [f021                  |f022         |f023         |f024 |f025 ] [c]
+[f020  ] [f021                  |f022         |f023         |f024 |f025 ] [c]
+[f020  ] [f021                  |f022         |f023         |f024 |f025 ] [c]
+[f020  ] [f021                  |f022         |f023         |f024 |f025 ] [c]
+[f020  ] [f021                  |f022         |f023         |f024 |f025 ] [c]
+[f020  ] [f021                  |f022         |f023         |f024 |f025 ] [c]
+[f020  ] [f021                  |f022         |f023         |f024 |f025 ] [c]
+[f020  ] [f021                  |f022         |f023         |f024 |f025 ] [c]
+
+[c077                                              ]
+[c777                                                             ]
+
+}
+TABLES 
+rept010
+ATTRIBUTES
+f    = FORMONLY.linea, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f077 = formonly.tit_division, NOENTRY;  
+f5   = FORMONLY.sub_linea, AUTONEXT, UPSHIFT, 
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f054 = FORMONLY.tit_sub_linea, NOENTRY, UPSHIFT;
+f55  = FORMONLY.cod_grupo, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f056 = FORMONLY.tit_grupo, NOENTRY, UPSHIFT;
+f057 = FORMONLY.cod_clase, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f058 = FORMONLY.tit_clase, NOENTRY, UPSHIFT;
+c060 = FORMONLY.marca, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c061 = FORMONLY.tit_marca, NOENTRY, UPSHIFT;
+
+f010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+f011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+f012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+f013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+f014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+f015 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+d    = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+
+f020 = rept010.r10_codigo, NOENTRY, UPSHIFT, REVERSE, OPTIONS = '-nolist',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f021 = rept010.r10_nombre, NOENTRY, UPSHIFT, REVERSE, OPTIONS = '-nolist';
+f022 = rept010.r10_precio_ant, NOENTRY, REVERSE, FORMAT = '##,###,##&.##',
+	OPTIONS = '-nolist';
+f023 = FORMONLY.precio TYPE DECIMAL(12,2), AUTONEXT, FORMAT = '##,###,##&.##',
+	INCLUDE = (0 TO 999999999.99), REVERSE, OPTIONS = '-nolist';
+f024 = rept010.r10_cod_util, NOENTRY, UPSHIFT, REVERSE, OPTIONS = '-nolist';
+	--WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f025 = FORMONLY.cod_util_nue, AUTONEXT, UPSHIFT, REVERSE, OPTIONS = '-nolist',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c    = FORMONLY.actualiza TYPE CHAR, NOENTRY, REVERSE, OPTIONS = '-nolist',
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+c077 = formonly.descri_clase, REVERSE;
+c777 = formonly.descri_item, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_item[8] (r10_codigo, r10_nombre, r10_precio_ant, precio,
+			r10_cod_util, cod_util_nue, actualiza)
+KEYS
+'F5' = 'Ver Item'

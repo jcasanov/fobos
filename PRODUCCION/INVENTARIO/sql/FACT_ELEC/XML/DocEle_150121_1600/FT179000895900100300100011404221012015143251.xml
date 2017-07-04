@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000114042</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000114042</guiaRemision>
+<razonSocialComprador>GUAMAN ZOILA AGRIPINA</razonSocialComprador>
+<identificacionComprador>1706971643001</identificacionComprador>
+<totalSinImpuestos>1338.92</totalSinImpuestos>
+<totalDescuento>236.28</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1338.92</baseImponible>
+<valor>160.67</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1499.59</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>103144</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA RIVIERA BEIGE PRIMERA</descripcion>
+<cantidad>100.00</cantidad>
+<precioUnitario>8.82</precioUnitario>
+<descuento>132.30</descuento>
+<precioTotalSinImpuesto>749.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>749.70</baseImponible>
+<valor>89.96</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102829</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA GALICIA   PRIMERA</descripcion>
+<cantidad>40.00</cantidad>
+<precioUnitario>10.73</precioUnitario>
+<descuento>64.38</descuento>
+<precioTotalSinImpuesto>364.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>364.82</baseImponible>
+<valor>43.78</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101285</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA COLONCHE  PRIMERA</descripcion>
+<cantidad>30.00</cantidad>
+<precioUnitario>8.80</precioUnitario>
+<descuento>39.60</descuento>
+<precioTotalSinImpuesto>224.40</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>224.40</baseImponible>
+<valor>26.93</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">decoracabados@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2339357</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">055584</campoAdicional>
+<campoAdicional nombre="Observaciones">PIDE SRA. ZOILA</campoAdicional>
+</infoAdicional>
+</factura>

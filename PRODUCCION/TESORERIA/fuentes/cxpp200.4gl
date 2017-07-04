@@ -998,12 +998,10 @@ DEFINE num_comp		LIKE ctbt012.b12_num_comp
 DEFINE comando		CHAR(400)
 DEFINE run_prog		VARCHAR(20)
 
-{-- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE --}
 LET run_prog = '; fglrun '
 IF vg_gui = 0 THEN
 	LET run_prog = '; fglgo '
 END IF
-{--- ---}
 LET comando = 'cd ..', vg_separador, '..', vg_separador, 'CONTABILIDAD',
 	vg_separador, 'fuentes', vg_separador, run_prog, 'ctbp201 ', vg_base,
 	' ', 'CB', ' ', vg_codcia, ' "', tipo_comp, '" ', num_comp

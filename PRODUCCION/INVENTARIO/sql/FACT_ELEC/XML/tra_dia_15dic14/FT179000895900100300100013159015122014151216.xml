@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131590</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>TEODORO GOMEZ DE LA TORRE 720</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131590</guiaRemision>
+<razonSocialComprador>METALURGICA ECUATORIANA C.LTDA</razonSocialComprador>
+<identificacionComprador>1790212734001</identificacionComprador>
+<totalSinImpuestos>369.39</totalSinImpuestos>
+<totalDescuento>44.33</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>325.06</baseImponible>
+<valor>39.01</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>364.07</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>62936</codigoPrincipal>
+<descripcion>MOTOR ELECTRICO 3400-3600 TRIFASICO TEFC (IP55) TE20 DE7.5HP 3600RPM 220/380/440V/60C/3F CERRADO 2POLOS(52126)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>369.39</precioUnitario>
+<descuento>44.33</descuento>
+<precioTotalSinImpuesto>325.06</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="WEG" valor="WEG"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>325.06</baseImponible>
+<valor>39.01</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

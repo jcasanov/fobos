@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091810</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091810</guiaRemision>
+<razonSocialComprador>RIPCONCIV CONSTRUCCIONES CIVILES CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1791344154001</identificacionComprador>
+<totalSinImpuestos>47.03</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>47.03</baseImponible>
+<valor>5.64</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>52.67</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>71868</codigoPrincipal>
+<descripcion>SPUD P62009P-EU-WS1 KIT LOW CONSUMPTOIN URINAL</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>47.03</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>47.03</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>47.03</baseImponible>
+<valor>5.64</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">hcostales@ripconciv.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2922539</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">007274</campoAdicional>
+</infoAdicional>
+</factura>

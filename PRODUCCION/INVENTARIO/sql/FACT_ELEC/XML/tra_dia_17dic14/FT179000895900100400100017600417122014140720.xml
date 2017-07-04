@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176004</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>ARENILLAS 343 Y ZARUMA</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176004</guiaRemision>
+<razonSocialComprador>CATOTA PAUCAR RAMIRO FAUSTO</razonSocialComprador>
+<identificacionComprador>1711154896001</identificacionComprador>
+<totalSinImpuestos>20.94</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>20.94</baseImponible>
+<valor>2.51</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>23.45</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>32222</codigoPrincipal>
+<descripcion>ELEMENTO DE CALENTADOR 1250W 240 V</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>6.18</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>18.54</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="IMPORTADO" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>18.54</baseImponible>
+<valor>2.22</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>32250</codigoPrincipal>
+<descripcion>EMPAQUE TG-27T P/ ELEMENTOS</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>0.80</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2.40</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.40</baseImponible>
+<valor>0.29</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2663-968</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">044156</campoAdicional>
+</infoAdicional>
+</factura>

@@ -35,7 +35,7 @@ CALL startlog('../logs/cxpp413.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN -- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto.', 'stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.', 'stop')
 	EXIT PROGRAM
 END IF
 LET vg_base    = arg_val(1)
@@ -162,7 +162,7 @@ INPUT BY NAME rm_par.*
 		IF rm_par.moneda IS NOT NULL THEN
 			CALL fl_lee_moneda(rm_par.moneda) RETURNING r_g13.*
 			IF r_g13.g13_moneda IS NULL THEN
-				CALL fgl_winmessage(vg_producto, 'No existe moneda.', 'exclamation')
+				CALL fl_mostrar_mensaje('No existe moneda.', 'exclamation')
 				NEXT FIELD moneda
 			END IF
 		ELSE
@@ -222,7 +222,7 @@ INPUT BY NAME rm_par.*
 			CALL fl_lee_subtipo_entidad('TP', rm_par.tipprov)
 				RETURNING r_g12.*
 			IF r_g12.g12_tiporeg IS NULL THEN
-				CALL fgl_winmessage(vg_producto, 'No existe tipo proveedor.', 'exclamation')
+				CALL fl_mostrar_mensaje('No existe tipo proveedor.', 'exclamation')
 				NEXT FIELD tipprov
 			END IF
 			LET rm_par.tit_tipprov = r_g12.g12_nombre 
@@ -236,7 +236,7 @@ INPUT BY NAME rm_par.*
 			CALL fl_lee_subtipo_entidad('CR', rm_par.tipcar)
 				RETURNING r_g12.*
 			IF r_g12.g12_tiporeg IS NULL THEN
-				CALL fgl_winmessage(vg_producto, 'No existe tipo cartera.', 'exclamation')
+				CALL fl_mostrar_mensaje('No existe tipo cartera.', 'exclamation')
 				NEXT FIELD tipcar
 			END IF
 			LET rm_par.tit_tipcar = r_g12.g12_nombre 
@@ -318,7 +318,8 @@ EXECUTE cons_p20
 LET query = 'SELECT p20_compania, p20_localidad, p20_codprov, p01_nomprov,',
 			' p20_tipo_doc, p20_num_doc, p20_dividendo,',
 			' p20_fecha_emi, p20_fecha_vcto,',
-			' (p20_valor_cap + p20_valor_int) valor_doc ',
+			' (p20_valor_cap + p20_valor_int) valor_doc, ',
+			' (p20_saldo_cap + p20_saldo_int) saldo_doc ',
 		' FROM tmp_p20, cxpt001 ',
 		' WHERE p01_codprov = p20_codprov ',
 			expr3 CLIPPED,
@@ -339,7 +340,7 @@ LET query = 'SELECT p20_codprov, p01_nomprov, p20_tipo_doc, p20_num_doc,',
 			' p22_fecha_emi,',
 			' (p22_fecha_emi - p20_fecha_vcto) fecha, valor_doc,',
 			' (p23_valor_cap + p23_valor_int) valor_mov,',
-			' p22_fecing ',
+			' p22_fecing, saldo_doc ',
 		' FROM tmp_doc, cxpt023, cxpt022 ',
 		' WHERE p23_compania     = p20_compania ',
 		'   AND p23_localidad    = p20_localidad ',
@@ -356,6 +357,7 @@ LET query = 'SELECT p20_codprov, p01_nomprov, p20_tipo_doc, p20_num_doc,',
 		' INTO TEMP tmp_mov '
 PREPARE exec_tmp FROM query
 EXECUTE exec_tmp
+CALL control_generar_archivo()
 LET query = 'SELECT * FROM tmp_mov ',
 		' ORDER BY p22_fecing, p01_nomprov, p20_tipo_doc,',
 			' p20_num_doc, p20_dividendo '
@@ -531,3 +533,50 @@ ON LAST ROW
 	print ASCII act_10cpi
 
 END REPORT
+
+
+
+FUNCTION control_generar_archivo()
+DEFINE mensaje		VARCHAR(200)
+DEFINE resp		CHAR(6)
+
+LET int_flag = 0
+CALL fl_hacer_pregunta('Desea generar este listado en archivo ?', 'No')
+	RETURNING resp
+IF resp <> 'Yes' THEN
+	RETURN
+END IF
+SELECT p23_localidad, p23_codprov, p23_tipo_doc, p23_num_doc, p23_div_doc,
+	NVL(SUM(p23_valor_cap + p23_valor_int), 0) valor_pag
+	FROM cxpt022, cxpt023
+	WHERE p22_compania      = vg_codcia
+	  AND p22_localidad     = vg_codloc
+	  AND p22_tipo_trn     <> "AJ"
+	  AND DATE(p22_fecing) <= rm_par.fecha_fin
+	  AND p23_compania      = p22_compania
+	  AND p23_localidad     = p22_localidad
+	  AND p23_codprov       = p22_codprov
+	  AND p23_tipo_trn      = p22_tipo_trn
+	  AND p23_num_trn       = p22_num_trn
+	GROUP BY 1, 2, 3, 4, 5
+	INTO TEMP t1
+UNLOAD TO "../../../tmp/cxpp413.unl"
+	SELECT p20_codprov, p01_nomprov, p20_tipo_doc, p20_num_doc,
+		p20_dividendo, p22_tipo_trn, p22_num_trn, p22_localidad,
+		p20_fecha_emi, p20_fecha_vcto, p22_fecha_emi, fecha, valor_doc,
+		valor_mov, saldo_doc, NVL(valor_pag, 0) valor_pag
+		FROM tmp_mov, OUTER t1
+		WHERE p23_localidad = p22_localidad
+		  AND p23_codprov   = p20_codprov
+		  AND p23_tipo_doc  = p20_tipo_doc
+		  AND p23_num_doc   = p20_num_doc
+		  AND p23_div_doc   = p20_dividendo
+		ORDER BY p01_nomprov, p20_fecha_emi, p20_tipo_doc, p20_num_doc,
+			p20_dividendo
+RUN "mv ../../../tmp/cxpp413.unl $HOME/tmp/"
+LET mensaje = 'Archivo Generado en ', FGL_GETENV("HOME"), '/tmp/cxpp413.unl',
+		' OK.'
+DROP TABLE t1
+CALL fl_mostrar_mensaje(mensaje, 'info')
+
+END FUNCTION

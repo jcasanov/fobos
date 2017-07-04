@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000007517</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<dirPartida>GUALBERTO PEREZ E1-88 ENTRE MALDONADO Y NAPO</dirPartida>
+<razonSocialTransportista>SERGIO QUINCHE</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>1103687586</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>24/01/2015</fechaIniTransporte>
+<fechaFinTransporte>24/01/2015</fechaFinTransporte>
+<placa>PBX-9975</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1706282074001</identificacionDestinatario>
+<razonSocialDestinatario>MUNDIPERNOS</razonSocialDestinatario>
+<dirDestinatario>AV. LOS SHYRIS S/N Y ALTAR</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>21/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>174</codigoInterno>
+<descripcion>CLAVO 2-1/2" x 10</descripcion>
+<cantidad>50.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>178</codigoInterno>
+<descripcion>CLAVO 4" x 6  (CAJA DE 25 Kg.)</descripcion>
+<cantidad>25.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">mundipernos2000@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2331182</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">041603</campoAdicional>
+</infoAdicional>
+</guiaRemision>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000041483</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<dirPartida>AV LA PRENSA N-4514</dirPartida>
+<razonSocialTransportista>ACERO COMERCIAL</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>22/01/2015</fechaIniTransporte>
+<fechaFinTransporte>23/01/2015</fechaFinTransporte>
+<placa>P0Z-801</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1792296528001</identificacionDestinatario>
+<razonSocialDestinatario>INMEPROJECTS INGENIERIA MECANICA Y PROYECTOS CIA. LTDA.</razonSocialDestinatario>
+<dirDestinatario>SEGUN CROQUIZ ADJUNTO</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>22/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>21470</codigoInterno>
+<descripcion>ELECTRODO E-6011-C-13 1/8" ACERO DULCE</descripcion>
+<cantidad>5.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="AGA"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">jose.gamarra@inmeprojects.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">5108598</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">054999</campoAdicional>
+</infoAdicional>
+</guiaRemision>

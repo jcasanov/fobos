@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268239</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>08/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268239</guiaRemision>
+<razonSocialComprador>RAMOS TUQUERRES JOSE RICARDO</razonSocialComprador>
+<identificacionComprador>1003033923001</identificacionComprador>
+<totalSinImpuestos>169.35</totalSinImpuestos>
+<totalDescuento>29.89</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>169.35</baseImponible>
+<valor>20.32</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>189.67</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102364</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-20-7484 SDS PLUS 2CT 9/16" X 10" X 12-1/2"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>15.42</precioUnitario>
+<descuento>4.63</descuento>
+<precioTotalSinImpuesto>26.21</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>26.21</baseImponible>
+<valor>3.15</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150643</codigoPrincipal>
+<descripcion>ANCLAJE EPOXICO 8523SD T308 CARTUCHO DE 22 oz. STANDARD</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>42.10</precioUnitario>
+<descuento>25.26</descuento>
+<precioTotalSinImpuesto>143.14</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>143.14</baseImponible>
+<valor>17.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">perforacionesanclajes1@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">6008413</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">049758</campoAdicional>
+</infoAdicional>
+</factura>

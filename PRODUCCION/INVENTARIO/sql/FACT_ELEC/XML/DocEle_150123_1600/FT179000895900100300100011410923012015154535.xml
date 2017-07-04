@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000114109</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000114109</guiaRemision>
+<razonSocialComprador>STOCK CERAMICA</razonSocialComprador>
+<identificacionComprador>1715082747001</identificacionComprador>
+<totalSinImpuestos>124.42</totalSinImpuestos>
+<totalDescuento>23.39</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>124.42</baseImponible>
+<valor>14.93</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>139.35</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>91926</codigoPrincipal>
+<descripcion>LAVAPLATOS DE ACERO INOXIDABLE 40104010 800.510 1C 1E DER. S/H PARA DESG. C/REBOSO MODULAR</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>58.76</precioUnitario>
+<descuento>8.81</descuento>
+<precioTotalSinImpuesto>49.95</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TEKA V"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>49.95</baseImponible>
+<valor>5.99</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>91927</codigoPrincipal>
+<descripcion>LAVAPLATOS DE ACERO INOXIDABLE 40104011 800.510 1C 1E IZQ. S/H PARA DESG. C/REBOSO MODULAR</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>58.76</precioUnitario>
+<descuento>8.81</descuento>
+<precioTotalSinImpuesto>49.95</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TEKA V"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>49.95</baseImponible>
+<valor>5.99</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70893</codigoPrincipal>
+<descripcion>DESAGUE DE LAVADERO 61001300 VALVULA DE 1-1/2" C/REBOSO REDONDO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>2.81</precioUnitario>
+<descuento>0.84</descuento>
+<precioTotalSinImpuesto>4.78</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TEKA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.78</baseImponible>
+<valor>0.57</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>91471</codigoPrincipal>
+<descripcion>LLAVE DE PARED PICO MOVIL 5660306 SHELBY C/SIFON</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>24.67</precioUnitario>
+<descuento>4.93</descuento>
+<precioTotalSinImpuesto>19.74</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>19.74</baseImponible>
+<valor>2.37</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">javiermalo@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2679949</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">059309</campoAdicional>
+<campoAdicional nombre="Observaciones">PED ING MALO</campoAdicional>
+</infoAdicional>
+</factura>

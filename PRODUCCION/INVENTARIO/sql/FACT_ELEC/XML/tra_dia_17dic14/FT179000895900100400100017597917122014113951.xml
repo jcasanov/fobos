@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175979</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>HIGUERILLAS Y ALONDRAS</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175979</guiaRemision>
+<razonSocialComprador>ASOCIACION CULTURAL ACADEMIA COTOPAXI</razonSocialComprador>
+<identificacionComprador>1790105083001</identificacionComprador>
+<totalSinImpuestos>1722.18</totalSinImpuestos>
+<totalDescuento>208.82</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1722.18</baseImponible>
+<valor>206.66</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1928.84</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>3268</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 2-1/2" CORRIDO</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>5.76</precioUnitario>
+<descuento>11.52</descuento>
+<precioTotalSinImpuesto>103.68</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>103.68</baseImponible>
+<valor>12.44</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3276</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 2-1/2" x 4"</descripcion>
+<cantidad>9.00</cantidad>
+<precioUnitario>9.88</precioUnitario>
+<descuento>8.89</descuento>
+<precioTotalSinImpuesto>80.03</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>80.03</baseImponible>
+<valor>9.60</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3276</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 2-1/2" x 4"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>9.88</precioUnitario>
+<descuento>0.99</descuento>
+<precioTotalSinImpuesto>8.89</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.89</baseImponible>
+<valor>1.07</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3280</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 2-1/2" x 6"</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>10.99</precioUnitario>
+<descuento>21.98</descuento>
+<precioTotalSinImpuesto>197.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>197.82</baseImponible>
+<valor>23.74</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3242</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1-1/2" x 4"</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>2.21</precioUnitario>
+<descuento>2.21</descuento>
+<precioTotalSinImpuesto>19.89</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>19.89</baseImponible>
+<valor>2.39</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3246</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1-1/2" x 6"</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>2.86</precioUnitario>
+<descuento>2.86</descuento>
+<precioTotalSinImpuesto>25.74</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>25.74</baseImponible>
+<valor>3.09</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>95185</codigoPrincipal>
+<descripcion>VALVULA CHEQUE VC-63 DE 2 1/2" DE BRONCE TIPO PESADO</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>104.83</precioUnitario>
+<descuento>47.17</descuento>
+<precioTotalSinImpuesto>267.32</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="HELBERT" valor="HELBER"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>267.32</baseImponible>
+<valor>32.08</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>18786</codigoPrincipal>
+<descripcion>BOMBA CENTRIF MULTIETAPA C-MOTOR HU2P-9 7.5HP 2 ETP 1-1/2 x 1-1/2" 220/380/440/3F/60C.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1132.01</precioUnitario>
+<descuento>113.20</descuento>
+<precioTotalSinImpuesto>1018.81</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARK GRUNDFOS" valor="MARK G"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1018.81</baseImponible>
+<valor>122.26</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">022467411</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">005372</campoAdicional>
+</infoAdicional>
+</factura>

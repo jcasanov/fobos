@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000269020</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000269020</guiaRemision>
+<razonSocialComprador>SARANGO MEDINA MARIA ALEGRIA</razonSocialComprador>
+<identificacionComprador>1102318423001</identificacionComprador>
+<totalSinImpuestos>341.13</totalSinImpuestos>
+<totalDescuento>69.87</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>341.13</baseImponible>
+<valor>40.94</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>382.07</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>103043</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 30 X 30 MONOQUEMA SPINETTO CREMA SEGUNDA</descripcion>
+<cantidad>60.00</cantidad>
+<precioUnitario>6.85</precioUnitario>
+<descuento>69.87</descuento>
+<precioTotalSinImpuesto>341.13</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>341.13</baseImponible>
+<valor>40.94</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">ceramicasvellavista@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0998669900</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">062738</campoAdicional>
+<campoAdicional nombre="Observaciones">N/B</campoAdicional>
+</infoAdicional>
+</factura>

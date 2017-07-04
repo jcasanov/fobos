@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131588</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>GARCIA MORENO 580 Y COLON</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131588</guiaRemision>
+<razonSocialComprador>RODRIGUEZ RAMOS WALTER TARQUINO</razonSocialComprador>
+<identificacionComprador>0901818294001</identificacionComprador>
+<totalSinImpuestos>250.80</totalSinImpuestos>
+<totalDescuento>42.64</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>208.16</baseImponible>
+<valor>24.98</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>233.14</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>94334</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA OLMO PRIMERA</descripcion>
+<cantidad>28.50</cantidad>
+<precioUnitario>8.80</precioUnitario>
+<descuento>42.64</descuento>
+<precioTotalSinImpuesto>208.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="M2" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>208.16</baseImponible>
+<valor>24.98</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

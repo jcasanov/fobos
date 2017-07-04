@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025727</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>CALIZA HUAYCO</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0992351144001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>12/01/2015</fechaIniTransporte>
+<fechaFinTransporte>13/01/2015</fechaFinTransporte>
+<placa>GOX392</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0992351144001</identificacionDestinatario>
+<razonSocialDestinatario>CALIZAS HUAYCO S.A.</razonSocialDestinatario>
+<dirDestinatario>RETIRAN</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>12/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>93055</codigoInterno>
+<descripcion>LLAVE DE IMPACTO 9072-22 DRIVE 1/2" 7AMP 600-1800RPM 1000-2600 GOLPES MALETA</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">amarquez@chuayco.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2992122</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">009889</campoAdicional>
+</infoAdicional>
+</guiaRemision>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113640</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>31/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113640</guiaRemision>
+<razonSocialComprador>MALDONADO HERNANDEZ ANA LUCIA</razonSocialComprador>
+<identificacionComprador>1715735716001</identificacionComprador>
+<totalSinImpuestos>118.66</totalSinImpuestos>
+<totalDescuento>10.34</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>118.66</baseImponible>
+<valor>14.24</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>132.90</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>100695</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS 2238130 CAMPEON PLUS BLANCO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>45.78</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>45.78</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>45.78</baseImponible>
+<valor>5.49</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>68746</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA DE PARED PREPONCHADO 5575130 SHELBY BLANCO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>9.74</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>9.74</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.74</baseImponible>
+<valor>1.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98624</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA MINDO CHOCOLATE PRIMERA</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>10.14</precioUnitario>
+<descuento>10.34</descuento>
+<precioTotalSinImpuesto>50.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>50.50</baseImponible>
+<valor>6.06</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96560</codigoPrincipal>
+<descripcion>PORCELANA PARA CERAMICA GROUTEX POLIMERO PF S/A  ALMENDRA (FUNDA DE 2 KG.)</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>1.58</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>6.32</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INTACO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.32</baseImponible>
+<valor>0.76</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97274</codigoPrincipal>
+<descripcion>PORCELANA PARA CERAMICA GROUTEX POLIMERO PF S/A BLANCO (2Kg.)</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>1.58</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>6.32</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INTACO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.32</baseImponible>
+<valor>0.76</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">cristianrtt_96@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">084502539</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">054570</campoAdicional>
+</infoAdicional>
+</factura>

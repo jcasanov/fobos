@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268801</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268801</guiaRemision>
+<razonSocialComprador>PROMIGPART CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1791754271001</identificacionComprador>
+<totalSinImpuestos>151.56</totalSinImpuestos>
+<totalDescuento>16.84</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>151.56</baseImponible>
+<valor>18.19</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>169.75</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>150643</codigoPrincipal>
+<descripcion>ANCLAJE EPOXICO 8523SD T308 CARTUCHO DE 22 oz. STANDARD</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>42.10</precioUnitario>
+<descuento>16.84</descuento>
+<precioTotalSinImpuesto>151.56</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>151.56</baseImponible>
+<valor>18.19</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">d.grijalva@promigpart.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2893011</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016270</campoAdicional>
+<campoAdicional nombre="Observaciones">SOLICITA SR. LUIS GRIJALVA</campoAdicional>
+</infoAdicional>
+</factura>

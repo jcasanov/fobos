@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092011</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092011</guiaRemision>
+<razonSocialComprador>MERINO ARMIJOS BLANCA GLORIA</razonSocialComprador>
+<identificacionComprador>1101475844</identificacionComprador>
+<totalSinImpuestos>174.28</totalSinImpuestos>
+<totalDescuento>14.77</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>174.28</baseImponible>
+<valor>20.91</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>195.19</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>92006</codigoPrincipal>
+<descripcion>LAVAPLATOS DE ACERO INOXIDABLE 10184812 1600x510 2C 2E S/H P/DESG. C/REBOSO Y 3-1/2" MODULAR</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>171.14</precioUnitario>
+<descuento>13.69</descuento>
+<precioTotalSinImpuesto>157.45</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TEKA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>157.45</baseImponible>
+<valor>18.89</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70893</codigoPrincipal>
+<descripcion>DESAGUE DE LAVADERO 61001300 VALVULA DE 1-1/2" C/REBOSO REDONDO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2.69</precioUnitario>
+<descuento>0.22</descuento>
+<precioTotalSinImpuesto>2.47</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TEKA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.47</baseImponible>
+<valor>0.30</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>95962</codigoPrincipal>
+<descripcion>DESAGUE DE LAVADERO 61001303 PLASTICO 3-1/2" CON CANASTILLA METALICA S/GUIA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>4.94</precioUnitario>
+<descuento>0.40</descuento>
+<precioTotalSinImpuesto>4.54</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TEKA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.54</baseImponible>
+<valor>0.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>71182</codigoPrincipal>
+<descripcion>CONEXION 61001104 CONJUNTO SIFON</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>9.10</precioUnitario>
+<descuento>0.46</descuento>
+<precioTotalSinImpuesto>8.64</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TEKA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.64</baseImponible>
+<valor>1.04</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50462</codigoPrincipal>
+<descripcion>TUBO DE EXTENSION PARA DESAGUE GUIB2-0014 PLASTICO DE 1-1/2" x 5" (GUIA)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>0.59</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INCAME"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.18</baseImponible>
+<valor>0.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">davidssm@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2175630</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016724</campoAdicional>
+</infoAdicional>
+</factura>

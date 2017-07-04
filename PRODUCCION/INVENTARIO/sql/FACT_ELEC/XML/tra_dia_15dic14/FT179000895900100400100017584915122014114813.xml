@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175849</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>27 DE JULIO S4-119 Y G. VALDIVIEZO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175849</guiaRemision>
+<razonSocialComprador>BENALCAZAR CHAVARRIA NORMA VIOLETA</razonSocialComprador>
+<identificacionComprador>1710343185001</identificacionComprador>
+<totalSinImpuestos>129.18</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>129.18</baseImponible>
+<valor>15.50</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>144.68</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>93721</codigoPrincipal>
+<descripcion>ARMEX 6.25 x 2.40 MTS. R-238 100 x 100 x 5.5 x 5.5mm.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>64.59</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>129.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="IDEAL" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>129.18</baseImponible>
+<valor>15.50</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

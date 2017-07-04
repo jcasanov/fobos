@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268244</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>08/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268244</guiaRemision>
+<razonSocialComprador>SEDEMI</razonSocialComprador>
+<identificacionComprador>1791734920001</identificacionComprador>
+<totalSinImpuestos>191.25</totalSinImpuestos>
+<totalDescuento>33.75</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>191.25</baseImponible>
+<valor>22.95</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>214.20</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>98924</codigoPrincipal>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7422SD1 DE 1/2" X 3-3/4"</descripcion>
+<cantidad>250.00</cantidad>
+<precioUnitario>0.90</precioUnitario>
+<descuento>33.75</descuento>
+<precioTotalSinImpuesto>191.25</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>191.25</baseImponible>
+<valor>22.95</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">compras@sedemi.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2093992</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">030547</campoAdicional>
+</infoAdicional>
+</factura>

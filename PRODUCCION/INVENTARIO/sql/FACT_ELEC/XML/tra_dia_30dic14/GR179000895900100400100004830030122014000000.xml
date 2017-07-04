@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048300</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<dirPartida>AV. LA PRENSA N-4514</dirPartida>
+<razonSocialTransportista>SR FERNANDO VACA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>30/12/2014</fechaIniTransporte>
+<fechaFinTransporte>30/12/2014</fechaFinTransporte>
+<placa>PBZ-8801</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1711411098001</identificacionDestinatario>
+<razonSocialDestinatario>BUSTOS VELIZ EDIZON FERNANDO</razonSocialDestinatario>
+<dirDestinatario>CDLA.IESS FUT QUICHUAS Y HUIGRA ESQ.</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>30/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>5520</codigoInterno>
+<descripcion>TUBO NEGRO ASTM A-53  TIPO "T" DE 2" x 6 m.</descripcion>
+<cantidad>5.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="MODELO" valor=" 2"   ASTM"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>5524</codigoInterno>
+<descripcion>TUBO NEGRO ASTM A-53  TIPO "T" DE 3" x 5.2mm. x 6.40 m.</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="MODELO" valor=" 3"  x 5.2 MM"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>5524</codigoInterno>
+<descripcion>TUBO NEGRO ASTM A-53  TIPO "T" DE 3" x 5.2mm. x 6.40 m.</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="MODELO" valor=" 3"  x 5.2 MM"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>5526</codigoInterno>
+<descripcion>TUBO NEGRO ASTM A-53  TIPO "T" DE 4" x 6mm. x 6.40 m.</descripcion>
+<cantidad>5.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="MODELO" valor=" 4" x 6 MM"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">    alianza.jfh@live.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3103359</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">058813</campoAdicional>
+</infoAdicional>
+</guiaRemision>

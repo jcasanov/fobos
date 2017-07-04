@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048050</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento></dirEstablecimiento>
+<dirPartida>AV LA PRENSA</dirPartida>
+<razonSocialTransportista>SERVIENTREGA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0991285679001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>18/12/2014</fechaIniTransporte>
+<fechaFinTransporte>18/12/2014</fechaFinTransporte>
+<placa></placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1802792414001</identificacionDestinatario>
+<razonSocialDestinatario>MEDINA ALBERTO</razonSocialDestinatario>
+<dirDestinatario>AMBATO</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>17/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>102539</codigoInterno>
+<descripcion>AMOLADORA ELECTRICA 6086-30 7" / 9" 6000 RPM</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="MODELO" valor="6086-30"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2440201</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">063959</campoAdicional>
+</infoAdicional>
+</guiaRemision>

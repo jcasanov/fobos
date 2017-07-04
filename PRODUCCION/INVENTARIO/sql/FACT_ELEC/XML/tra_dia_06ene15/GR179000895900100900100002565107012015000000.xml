@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025651</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>TRANCEPER</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>07/01/2015</fechaIniTransporte>
+<fechaFinTransporte>08/01/2015</fechaFinTransporte>
+<placa>YBA3003</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1790008959001</identificacionDestinatario>
+<razonSocialDestinatario>ACERO COMERCIAL ECUATORIANO S.A.</razonSocialDestinatario>
+<dirDestinatario>QUITO MATRIZ AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirDestinatario>
+<motivoTraslado>TRANSFERENCIAS ENTRE LOCALIDADES</motivoTraslado>
+<fechaEmisionDocSustento>06/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>20668</codigoInterno>
+<descripcion>MOTOR ELEC SUMERG DE 4" (2343162604) SJF-3023 DE 3HP 230-3-60</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>20669</codigoInterno>
+<descripcion>MOTOR ELEC SUMERG DE 4" (2243022604) SJF-3021 DE 3HP 230-1-60</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>93629</codigoInterno>
+<descripcion>MOTOR ELEC SUMERG DE 4" 2343188602 4C3F DE 7.5 HP/230V/60/3F</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>95099</codigoInterno>
+<descripcion>MOTOR ELEC SUMERG DE 4" (2243038602) DE 5 HP 230/60/1F</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>96074</codigoInterno>
+<descripcion>MOTOR ELEC SUMERG DE 4" (2343178602) 4C3F DE 5HP 230-3-60</descripcion>
+<cantidad>5.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacionelectrónica@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">042683060</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000001</campoAdicional>
+</infoAdicional>
+</guiaRemision>

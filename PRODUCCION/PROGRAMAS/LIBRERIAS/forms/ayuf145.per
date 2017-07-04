@@ -1,0 +1,30 @@
+DATABASE aceros
+SCREEN
+{
+
+ SEGUROS DEL TRABAJADOR
+
+ [c000    |c001                          |c002 ]
+[c010    |c011                          |c012 ]
+[c010    |c011                          |c012 ]
+[c010    |c011                          |c012 ]
+[c010    |c011                          |c012 ]
+[c010    |c011                          |c012 ]
+[c010    |c011                          |c012 ]
+[c010    |c011                          |c012 ]
+[c010    |c011                          |c012 ]
+[c010    |c011                          |c012 ]
+[c010    |c011                          |c012 ]
+}
+TABLES
+rolt013
+ATTRIBUTES
+c000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c002 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c010 = rolt013.n13_cod_seguro, AUTONEXT, UPSHIFT, REVERSE;
+c011 = rolt013.n13_descripcion, AUTONEXT, UPSHIFT, REVERSE;
+c012 = rolt013.n13_porc_trab, AUTONEXT, UPSHIFT, REVERSE, FORMAT = '#&.##';
+END
+INSTRUCTIONS
+SCREEN RECORD rh_seguro[10] (n13_cod_seguro, n13_descripcion, n13_porc_trab)

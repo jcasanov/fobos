@@ -1,0 +1,28 @@
+DATABASE aceros
+SCREEN
+{
+  ORDENES DE PAGO PROVEEDORES
+ ------------------------------------
+  Orden  Proveedor
+ ------------------------------------
+ [c000 |c001                        ]
+ [c000 |c001                        ]
+ [c000 |c001                        ]
+ [c000 |c001                        ]
+ [c000 |c001                        ]
+ [c000 |c001                        ]
+ [c000 |c001                        ]
+ [c000 |c001                        ]
+ [c000 |c001                        ]
+ [c000 |c001                        ]
+}
+TABLES
+cxpt024
+cxpt001
+ATTRIBUTES
+c000 = p24_orden_pago, REVERSE, UPSHIFT;
+c001 = p01_nomprov, REVERSE, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_pagprov[10] (p24_orden_pago, p01_nomprov)

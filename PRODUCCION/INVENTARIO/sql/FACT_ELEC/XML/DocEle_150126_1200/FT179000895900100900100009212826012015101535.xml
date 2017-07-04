@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092128</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>26/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092128</guiaRemision>
+<razonSocialComprador>CONSTRUTORA NORBERTO ODEBRECHT S.A.</razonSocialComprador>
+<identificacionComprador>0990872015001</identificacionComprador>
+<totalSinImpuestos>908.11</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>908.11</baseImponible>
+<valor>108.97</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1017.08</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99517</codigoPrincipal>
+<descripcion>PRENSA N.460-6 DE CADENA CON TRIPODE 1/8" A 6" (36273)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>543.78</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>543.78</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>543.78</baseImponible>
+<valor>65.25</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>12698</codigoPrincipal>
+<descripcion>CABEZAL NO. 12 R CON DADOS DE 3/4" (37395)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>111.35</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>111.35</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>111.35</baseImponible>
+<valor>13.36</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>12696</codigoPrincipal>
+<descripcion>CABEZAL NO. 12 R CON DADOS DE 1/2" (37390)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>111.48</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>111.48</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>111.48</baseImponible>
+<valor>13.38</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>12700</codigoPrincipal>
+<descripcion>CABEZAL NO. 12 R CON DADOS DE 1" (37400)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>141.50</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>141.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>141.50</baseImponible>
+<valor>16.98</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jrodrig@odebrecht.com</campoAdicional>
+<campoAdicional nombre="Email">johana@odebrecht.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2082047</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000909</campoAdicional>
+<campoAdicional nombre="Observaciones">OC 4947</campoAdicional>
+</infoAdicional>
+</factura>

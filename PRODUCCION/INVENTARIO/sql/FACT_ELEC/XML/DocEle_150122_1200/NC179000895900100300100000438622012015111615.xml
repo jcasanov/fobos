@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000004386</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>VIVAS AULESTIA WILMER ALIRO</razonSocialComprador>
+<identificacionComprador>1710218957001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>003-001-000114011</numDocModificado>
+<fechaEmisionDocSustento>20/01/2015</fechaEmisionDocSustento>
+<totalSinImpuestos>4.54</totalSinImpuestos>
+<valorModificacion>5.08</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>4.54</baseImponible>
+<valor>0.54</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEVOLUCION DE CODIGO 3662 (4)REDUCCIONES</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>3662</codigoInterno>
+<descripcion>REDUCCION GALV. CLASE 150 DE 1-1/2" x 1/2"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>1.29</precioUnitario>
+<descuento>0.62</descuento>
+<precioTotalSinImpuesto>4.54</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.54</baseImponible>
+<valor>0.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">transwvivas@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2675793</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">64350</campoAdicional>
+</infoAdicional>
+</notaCredito>

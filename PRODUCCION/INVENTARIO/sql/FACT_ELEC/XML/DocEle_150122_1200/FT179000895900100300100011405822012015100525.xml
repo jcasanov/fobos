@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000114058</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000114058</guiaRemision>
+<razonSocialComprador>AREVALO SAQUICELA LUIS MARCELO</razonSocialComprador>
+<identificacionComprador>1705244190001</identificacionComprador>
+<totalSinImpuestos>699.21</totalSinImpuestos>
+<totalDescuento>123.39</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>699.21</baseImponible>
+<valor>83.91</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>783.12</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>100679</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA TOMEBAMBA SEGUNDA</descripcion>
+<cantidad>80.00</cantidad>
+<precioUnitario>8.30</precioUnitario>
+<descuento>99.60</descuento>
+<precioTotalSinImpuesto>564.40</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>564.40</baseImponible>
+<valor>67.73</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99479</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA AZTECA ESTANDAR</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>7.93</precioUnitario>
+<descuento>23.79</descuento>
+<precioTotalSinImpuesto>134.81</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>134.81</baseImponible>
+<valor>16.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">marceloarevalo4@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2530313</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">046251</campoAdicional>
+<campoAdicional nombre="Observaciones">PALACIO DE LA BALDOSA</campoAdicional>
+</infoAdicional>
+</factura>

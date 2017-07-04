@@ -1,0 +1,30 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+      Código Cliente: [c001 ] [c002                                    ]
+
+              Moneda: [c3]    [c004           ]
+
+           Localidad: [c051 ] [c052                ]
+
+                Tipo: [c|c010     ]
+
+}
+ATTRIBUTES
+c001 = FORMONLY.codcli TYPE INTEGER NOT NULL, REVERSE, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c002 = FORMONLY.nomcli, UPSHIFT, REVERSE, NOENTRY;
+c3   = FORMONLY.moneda TYPE CHAR NOT NULL, UPSHIFT, AUTONEXT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c004 = FORMONLY.tit_mon, UPSHIFT, REVERSE, NOENTRY;
+c051 = FORMONLY.localidad, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c052 = FORMONLY.tit_localidad, UPSHIFT, NOENTRY;
+c    = FORMONLY.tipo TYPE CHAR NOT NULL, UPSHIFT, AUTONEXT, REVERSE,
+	INCLUDE = ('R', 'D'),
+	COMMENTS = '(R) Resumido  (D) Detallado';
+c010 = FORMONLY.tit_tipo, REVERSE, UPSHIFT, NOENTRY;
+END
+INSTRUCTIONS
+DELIMITERS '||'

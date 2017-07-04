@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268781</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268781</guiaRemision>
+<razonSocialComprador>EMPRESAS PINTO  S.A.</razonSocialComprador>
+<identificacionComprador>1090033944001</identificacionComprador>
+<totalSinImpuestos>22.80</totalSinImpuestos>
+<totalDescuento>3.08</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>22.80</baseImponible>
+<valor>2.74</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>25.54</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>50450</codigoPrincipal>
+<descripcion>TUBO POLIPROPILENO DE 1/2" x 6 m. (AGUA CALIENTE)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>9.30</precioUnitario>
+<descuento>1.12</descuento>
+<precioTotalSinImpuesto>8.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.18</baseImponible>
+<valor>0.98</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50380</codigoPrincipal>
+<descripcion>TEE POLIPROPILENO DE 1/2" (AGUA CALIENTE)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>0.48</precioUnitario>
+<descuento>0.06</descuento>
+<precioTotalSinImpuesto>0.42</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.42</baseImponible>
+<valor>0.05</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50290</codigoPrincipal>
+<descripcion>CODO POLIPROPILENO DE 1/2" x 90 GRAD</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>0.40</precioUnitario>
+<descuento>0.10</descuento>
+<precioTotalSinImpuesto>0.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.70</baseImponible>
+<valor>0.08</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50368</codigoPrincipal>
+<descripcion>TAPON POLIPROPILENO MACHO DE 1/2" MACHO (AGUA CALIENTE)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>0.34</precioUnitario>
+<descuento>0.08</descuento>
+<precioTotalSinImpuesto>0.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.60</baseImponible>
+<valor>0.07</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50338</codigoPrincipal>
+<descripcion>NEPLO POLIPROPILENO DE 1/2" x 15 cm. (AGUA CALIENTE)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>0.36</precioUnitario>
+<descuento>0.04</descuento>
+<precioTotalSinImpuesto>0.32</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.32</baseImponible>
+<valor>0.04</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102044</codigoPrincipal>
+<descripcion>TEFLON EN ROLLO DE 3/4" x 15 m. DENSIDAD 0.40 gr/cm3 PAOLO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.87</precioUnitario>
+<descuento>0.19</descuento>
+<precioTotalSinImpuesto>1.68</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.68</baseImponible>
+<valor>0.20</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3472</codigoPrincipal>
+<descripcion>POLIPEGA ENVASE DE 200 CC.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>3.50</precioUnitario>
+<descuento>0.84</descuento>
+<precioTotalSinImpuesto>6.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.16</baseImponible>
+<valor>0.74</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5662</codigoPrincipal>
+<descripcion>TUBO PVC DESAGUE 40 PSI DE 50mm. x 3 Mts. ESPIGA CAMPANA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>5.39</precioUnitario>
+<descuento>0.65</descuento>
+<precioTotalSinImpuesto>4.74</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.74</baseImponible>
+<valor>0.57</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">echamba@pinto.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">595059/596</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">013740</campoAdicional>
+</infoAdicional>
+</factura>

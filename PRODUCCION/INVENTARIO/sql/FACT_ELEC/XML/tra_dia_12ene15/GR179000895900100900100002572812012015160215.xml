@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025728</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>SERTESA SERVICIOS</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0990502072001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>12/01/2015</fechaIniTransporte>
+<fechaFinTransporte>13/01/2015</fechaFinTransporte>
+<placa>SIN PLACA</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0990502072001</identificacionDestinatario>
+<razonSocialDestinatario>SERTESA SERVICIOS TECNICOS S.A.</razonSocialDestinatario>
+<dirDestinatario>RETIRAN</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>12/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>15698</codigoInterno>
+<descripcion>DADOS PARA TUBOS DE 1/2" A 3/4" HS NPT P/811A-711-815A (47765)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">johnny@sertesa.cc</campoAdicional>
+<campoAdicional nombre="telefono-movil">2281633</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">001332</campoAdicional>
+</infoAdicional>
+</guiaRemision>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091990</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091990</guiaRemision>
+<razonSocialComprador>GENERADORA ROCAFUERTE S.A. GENEROCA</razonSocialComprador>
+<identificacionComprador>0992464119001</identificacionComprador>
+<totalSinImpuestos>417.67</totalSinImpuestos>
+<totalDescuento>73.71</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>417.67</baseImponible>
+<valor>50.12</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>467.79</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99314</codigoPrincipal>
+<descripcion>AMOLADORA ELECTRICA 6117-30 DE 13AMP./110V./2100W/2.9HP./11000 RPM</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>245.69</precioUnitario>
+<descuento>73.71</descuento>
+<precioTotalSinImpuesto>417.67</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>417.67</baseImponible>
+<valor>50.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">luisana.salinas@generoca.com.ec</campoAdicional>
+<campoAdicional nombre="Email">dptcompras#generoca.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">6044238</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">011487</campoAdicional>
+<campoAdicional nombre="Observaciones">OC 0002894</campoAdicional>
+</infoAdicional>
+</factura>

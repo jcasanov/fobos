@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000034051</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>CDLA. LAS ORQUIDEAS, MZ. 1021 SL.15-18</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>WILIAN MITE</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0992502169001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>16/12/2014</fechaIniTransporte>
+<fechaFinTransporte>17/12/2014</fechaFinTransporte>
+<placa></placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0992502169001</identificacionDestinatario>
+<razonSocialDestinatario>C&E INGENIERIA Y CONSTRUCCIONES S.A.</razonSocialDestinatario>
+<dirDestinatario>RETIRAN</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>15/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>101456</codigoInterno>
+<descripcion>BOMBA CENTRIF MULTIETAPA C-MOTOR CR3-11 2HP ROSCADA 220-277D/380-480Y/3/60 (98493506)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="GRUNDFOS" valor="GRUNDF"/>
+<detAdicional nombre="98493506" valor="98493506"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2897793</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">009827</campoAdicional>
+</infoAdicional>
+</guiaRemision>

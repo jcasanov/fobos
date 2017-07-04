@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025195</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>14/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>AQUIETA MASAPANTA HECTOR IVAN</razonSocialComprador>
+<identificacionComprador>0502724438001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000175820</numDocModificado>
+<fechaEmisionDocSustento>15/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>601.31</totalSinImpuestos>
+<valorModificacion>673.47</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>601.31</baseImponible>
+<valor>72.16</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 267432 HECTOR AQUIETA REC AJIMENEZ</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>97287</codigoInterno>
+<descripcion>BOMBA SUMERGIBLE DE 4" 60FA2S4-PE P/2HP 60 GPM (93616006) 6 ETAPAS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>770.91</precioUnitario>
+<descuento>169.60</descuento>
+<precioTotalSinImpuesto>601.31</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>601.31</baseImponible>
+<valor>72.16</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacionelectronica@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">032450373</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">41894</campoAdicional>
+</infoAdicional>
+</notaCredito>

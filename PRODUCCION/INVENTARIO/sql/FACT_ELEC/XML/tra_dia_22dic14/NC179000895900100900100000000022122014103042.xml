@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000016393</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>QUIMPAC ECUADOR S.A. QUIMPACSA</razonSocialComprador>
+<identificacionComprador>0990344760001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000104032</numDocModificado>
+<fechaEmisionDocSustento>16/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>197.28</totalSinImpuestos>
+<valorModificacion>220.95</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>197.28</baseImponible>
+<valor>23.67</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>POR REFACTURACION. MATERIAL YA ENTREGADO</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>92199</codigoInterno>
+<descripcion>CODO GALV. CLASE 150 90° DE 1/2"</descripcion>
+<cantidad>8.00</cantidad>
+<precioUnitario>1.14</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>9.12</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.12</baseImponible>
+<valor>1.09</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>2063</codigoInterno>
+<descripcion>CODO GALV. CLASE 150 90° DE 1-1/2"</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>4.57</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>91.40</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>91.40</baseImponible>
+<valor>10.97</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>4573</codigoInterno>
+<descripcion>TEE GALV. CLASE 150 DE 1-1/2"</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>6.07</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>30.35</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>30.35</baseImponible>
+<valor>3.64</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>6312</codigoInterno>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 1/2"</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>4.86</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>48.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>48.60</baseImponible>
+<valor>5.83</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>91692</codigoInterno>
+<descripcion>UNION GALV. CLASE 150 DE 1/2"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>0.94</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.76</baseImponible>
+<valor>0.45</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>3200</codigoInterno>
+<descripcion>NEPLO GALVANIZADO DE 1" x 3"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>0.94</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.76</baseImponible>
+<valor>0.45</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>3166</codigoInterno>
+<descripcion>NEPLO GALVANIZADO DE 1/2" x 4"</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>0.65</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>6.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.50</baseImponible>
+<valor>0.78</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>3148</codigoInterno>
+<descripcion>NEPLO GALVANIZADO DE 3/8" x 4"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>2.06</precioUnitario>
+<descuento>0.33</descuento>
+<precioTotalSinImpuesto>3.79</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.79</baseImponible>
+<valor>0.45</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">gcampo@quimpac.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2162220</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">4052</campoAdicional>
+</infoAdicional>
+</notaCredito>

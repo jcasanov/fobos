@@ -1,0 +1,14 @@
+export LD_ASSUME_KERNEL=2.4.0
+echo ""
+echo "Iniciando compilación general de FOBOS ..."
+sh compila_all $1
+sh bus_err
+mv errores errores_4js
+if [ "$1" == "aceros" ]; then
+	sh compila_all_4gl $1
+	sh bus_err
+	mv errores errores_4gl
+	vi errores_4js errores_4gl
+else
+	vi errores_4js
+fi

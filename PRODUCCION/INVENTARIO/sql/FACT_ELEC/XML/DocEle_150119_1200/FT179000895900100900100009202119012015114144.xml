@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092021</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092021</guiaRemision>
+<razonSocialComprador>MAQUIDRAZ CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1390143954001</identificacionComprador>
+<totalSinImpuestos>83.25</totalSinImpuestos>
+<totalDescuento>11.35</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>83.25</baseImponible>
+<valor>9.99</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>93.24</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>91692</codigoPrincipal>
+<descripcion>UNION GALV. CLASE 150 DE 1/2"</descripcion>
+<cantidad>40.00</cantidad>
+<precioUnitario>0.94</precioUnitario>
+<descuento>4.51</descuento>
+<precioTotalSinImpuesto>33.09</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>33.09</baseImponible>
+<valor>3.97</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>92199</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 90 GRAD  DE 1/2"</descripcion>
+<cantidad>50.00</cantidad>
+<precioUnitario>1.14</precioUnitario>
+<descuento>6.84</descuento>
+<precioTotalSinImpuesto>50.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>50.16</baseImponible>
+<valor>6.02</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">lalonzo@maquidraz.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">052921285</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">002951</campoAdicional>
+<campoAdicional nombre="Observaciones">PEDIDO PAOLA LOPEZ</campoAdicional>
+</infoAdicional>
+</factura>

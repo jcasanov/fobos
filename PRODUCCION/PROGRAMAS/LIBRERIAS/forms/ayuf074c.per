@@ -1,0 +1,31 @@
+DATABASE aceros
+
+SCREEN
+{
+  ORDENES CHEQUEO 
+ -----------------
+  Orden Chequeo E 
+ -----------------
+ [c01          |c] 
+ [c01          |c] 
+ [c01          |c] 
+ [c01          |c] 
+ [c01          |c] 
+ [c01          |c] 
+ [c01          |c] 
+ [c01          |c] 
+ [c01          |c] 
+ [c01          |c] 
+
+}
+
+TABLES
+veht038
+
+ATTRIBUTES
+c01  = v38_orden_cheq, UPSHIFT,REVERSE;
+c    = v38_estado, UPSHIFT,REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_ordche[10](v38_orden_cheq, v38_estado)

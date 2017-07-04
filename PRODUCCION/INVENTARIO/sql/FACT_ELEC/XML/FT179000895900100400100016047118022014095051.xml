@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000160471</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>18/02/2014</fechaEmision>
+<dirEstablecimiento>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000160471</guiaRemision>
+<razonSocialComprador>PATINO QUIROZ RAUL EDMUNDO</razonSocialComprador>
+<identificacionComprador>0400845699001</identificacionComprador>
+<totalSinImpuestos>21.80</totalSinImpuestos>
+<totalDescuento>0.87</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>20.93</baseImponible>
+<valor>2.51</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>23.44</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>12</codigoPrincipal>
+<descripcion>ALAMBRE GALVANIZADO N.14</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>2.18</precioUnitario>
+<descuento>0.87</descuento>
+<precioTotalSinImpuesto>20.93</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="IDEAL" valor="IDEAL"/>
+<detAdicional nombre="KILO" valor="KILO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>20.93</baseImponible>
+<valor>2.51</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

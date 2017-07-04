@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000047870</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AMAZONAS 1429 Y COLON</dirEstablecimiento>
+<dirPartida>AV LA PRENSA</dirPartida>
+<razonSocialTransportista>ACERO COMERCIAL</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>09/12/2014</fechaIniTransporte>
+<fechaFinTransporte></fechaFinTransporte>
+<placa></placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0300418290</identificacionDestinatario>
+<razonSocialDestinatario>CUESTA DELGADO RICARDO</razonSocialDestinatario>
+<dirDestinatario>INTERNO</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>02/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>21187</codigoInterno>
+<descripcion>TACO FICHER F8 (PAQUETE DE 5)</descripcion>
+<cantidad>4.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="FICHER F8" valor="FICHER F8"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>50293</codigoInterno>
+<descripcion>NEPLO POLIPROPILENO DE 1" CON TUERCA (AGUA CALIENTE)</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="18761" valor="18761"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>92602</codigoInterno>
+<descripcion>GRAPAS PARA FIJACION DE TUBERIA DE 1"</descripcion>
+<cantidad>10.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="DE 1"" valor="DE 1""/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>92664</codigoInterno>
+<descripcion>CABLE ELECTRICO AWG N.10 FLEXIBLE</descripcion>
+<cantidad>120.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="CABLEC" valor="CABLEC"/>
+<detAdicional nombre="AWG N.18" valor="AWG N.18"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>9462</codigoInterno>
+<descripcion>VALVULA DE FLOTADOR DE 1"</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="HELBERT" valor="HELBER"/>
+<detAdicional nombre="HKVF-025" valor="HKVF-025"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>97467</codigoInterno>
+<descripcion>TEFLON EN ROLLO 0.07 x 12 mm. x 10 m.</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="0.07 X 12 MM. X 10 M" valor="0.07 X 12 MM. X 10 M"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+<campoAdicional nombre="telefono-movil">2504030</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">020905</campoAdicional>
+</infoAdicional>
+</guiaRemision>

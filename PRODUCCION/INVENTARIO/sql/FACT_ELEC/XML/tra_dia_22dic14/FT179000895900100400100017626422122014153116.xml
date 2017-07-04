@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176264</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176264</guiaRemision>
+<razonSocialComprador>CADENA HUERTAS BYRON GUSTAVO</razonSocialComprador>
+<identificacionComprador>0400810701</identificacionComprador>
+<totalSinImpuestos>97.47</totalSinImpuestos>
+<totalDescuento>10.83</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>97.47</baseImponible>
+<valor>11.70</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>109.17</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5259</codigoPrincipal>
+<descripcion>TUBERIA PVC DRENAJE DE 110 mm.</descripcion>
+<cantidad>30.00</cantidad>
+<precioUnitario>3.61</precioUnitario>
+<descuento>10.83</descuento>
+<precioTotalSinImpuesto>97.47</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="M"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>97.47</baseImponible>
+<valor>11.70</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2256732</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064161</campoAdicional>
+</infoAdicional>
+</factura>

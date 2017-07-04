@@ -93,7 +93,8 @@ FUNCTION fl_contabiliza_anticipos(subtipo)
 DEFINE tot_efe		DECIMAL(14,2)
 DEFINE tot_otr		DECIMAL(14,2)
 DEFINE tot_ic		DECIMAL(14,2)
-DEFINE glosa       	LIKE ctbt013.b13_glosa
+DEFINE flag		SMALLINT
+DEFINE glosa, glo_aux	LIKE ctbt013.b13_glosa
 DEFINE subtipo		LIKE ctbt012.b12_subtipo
 DEFINE cont_cred	LIKE cajt001.j01_cont_cred
 DEFINE r_an		RECORD LIKE gent003.*
@@ -168,11 +169,18 @@ FOREACH q_dic INTO r_dj.*
 							cont_cred)
 				RETURNING r_j01.*
 			IF r_j01.j01_aux_cont IS NOT NULL THEN
+				LET glo_aux = glosa
+				LET flag    = 0
+				IF r_j01.j01_codigo_pago = 'CT' THEN
+					LET glosa = 'CT'
+					LET flag  = 1
+				END IF
 				CALL fl_genera_detalle_comprob(vm_tipo_comp,
 					subtipo, r_j01.j01_aux_cont, 'D',
 					r_dj.j11_valor,glosa,rm_caja.j10_codcli,
 					rm_caja.j10_tipo_destino,
 					rm_caja.j10_num_destino)
+				LET glosa = glo_aux
 			ELSE
 				CALL fl_mostrar_mensaje('No existe Auxiliar Contable para la Forma de Pago ' || r_dj.j11_codigo_pago || '.', 'stop')
 				EXIT PROGRAM
@@ -187,6 +195,9 @@ IF rm_caja.j10_moneda <> rg_gen.g00_moneda_base THEN
 END IF
 CALL fl_genera_detalle_comprob(vm_tipo_comp, subtipo, rm_auxc.b41_caja_mb, 
         'D', tot_efe, glosa, rm_caja.j10_codcli, rm_caja.j10_tipo_destino, rm_caja.j10_num_destino)
+IF flag = 1 THEN
+	LET glosa = 'CT.TJ'
+END IF
 CALL fl_genera_detalle_comprob(vm_tipo_comp, subtipo, rm_auxc.b41_ant_mb,'H',
 	tot_ic, glosa, rm_caja.j10_codcli, rm_caja.j10_tipo_destino, rm_caja.j10_num_destino)
 
@@ -199,7 +210,8 @@ DEFINE subtipo		LIKE ctbt012.b12_subtipo
 DEFINE tot_efe		DECIMAL(14,2)
 DEFINE tot_ret		DECIMAL(14,2)
 DEFINE tot_ic		DECIMAL(14,2)
-DEFINE glosa       	LIKE ctbt013.b13_glosa
+DEFINE flag		SMALLINT
+DEFINE glosa, glo_aux	LIKE ctbt013.b13_glosa
 DEFINE aux_ret		LIKE ctbt010.b10_cuenta
 DEFINE cont_cred	LIKE cajt001.j01_cont_cred
 DEFINE r_an		RECORD LIKE gent003.*
@@ -298,9 +310,16 @@ FOREACH q_dic INTO r_dj.*
 							   cont_cred)
 					RETURNING r_j01.*
 				IF r_j01.j01_aux_cont IS NOT NULL THEN
+					LET glo_aux = glosa
+					LET flag    = 0
+					IF r_j01.j01_codigo_pago = 'CT' THEN
+						LET glosa = 'CT'
+						LET flag  = 1
+					END IF
 					CALL fl_genera_detalle_comprob(vm_tipo_comp, subtipo, r_j01.j01_aux_cont, 
 					
         				'D', r_dj.j11_valor, glosa, rm_caja.j10_codcli, rm_caja.j10_tipo_destino, rm_caja.j10_num_destino)
+					LET glosa = glo_aux
 				--ELSE
 					--CALL fl_mostrar_mensaje('No existe Auxiliar Contable para la Forma de Pago ' || r_dj.j11_codigo_pago || '.', 'stop')
 				END IF
@@ -377,6 +396,9 @@ IF tot_ret > 0 THEN
 	END FOREACH
 END IF
 --
+IF flag = 1 THEN
+	LET glosa = 'CT.TJ'
+END IF
 CALL fl_genera_detalle_comprob(vm_tipo_comp, subtipo, rm_auxc.b41_cxc_mb,'H',
 	tot_ic, glosa, rm_caja.j10_codcli, rm_caja.j10_tipo_destino, rm_caja.j10_num_destino)
 
@@ -392,7 +414,7 @@ DEFINE codcli		INTEGER
 DEFINE cod_tran		CHAR(2)
 DEFINE num_tran		INTEGER
 DEFINE cuenta		CHAR(12)
-DEFINE glosa		LIKE ctbt013.b13_glosa
+DEFINE glosa, glo_aux	LIKE ctbt013.b13_glosa
 DEFINE tipo_mov		CHAR(1)
 DEFINE valor		DECIMAL(14,2)
 DEFINE indice, i	SMALLINT
@@ -427,15 +449,20 @@ FOREACH q_mast INTO tipo_comp, subtipo, indice
                               z23_tipo_trn  = rm_caja.j10_tipo_destino  AND 
                               z23_num_trn   = rm_caja.j10_num_destino 
 		        ORDER BY z23_orden
-    			LET r_ccomp.b12_glosa = 'PAGO: ', rm_caja.j10_tipo_destino, '-', rm_caja.j10_num_destino USING '<<<<&', '  ***'
+    			LET r_ccomp.b12_glosa = 'PAGO: ',
+					rm_caja.j10_tipo_destino, '-',
+					rm_caja.j10_num_destino USING '<<<<<&',
+					' ***'
+			LET glo_aux = NULL
 			FOREACH q_gva INTO r_z23.*
-				LET r_ccomp.b12_glosa = 
-						r_ccomp.b12_glosa CLIPPED, 
-			    			'  ', 
+				LET glo_aux = glo_aux CLIPPED,
+			    			' ', 
 			    			r_z23.z23_tipo_doc, ' ',
 			    			r_z23.z23_num_doc CLIPPED, '-',
 			    			r_z23.z23_div_doc USING '&&'
 			END FOREACH
+			LET r_ccomp.b12_glosa = r_ccomp.b12_glosa CLIPPED, ' ',
+						glo_aux CLIPPED
 		END IF
     		LET r_ccomp.b12_fec_proceso = rm_caja.j10_fecha_pro
 	ELSE
@@ -471,6 +498,12 @@ FOREACH q_mast INTO tipo_comp, subtipo, indice
     		LET r_dcomp.b13_secuencia 	= i
     		LET r_dcomp.b13_cuenta 		= cuenta
     		LET r_dcomp.b13_glosa 		= glosa
+		IF glosa = 'CT' THEN
+    			LET r_dcomp.b13_glosa = 'COMI.TAR.CRE', glo_aux CLIPPED
+		END IF
+		IF glosa = 'CT.TJ' THEN
+    			LET r_dcomp.b13_glosa = 'CANCELACION:', glo_aux CLIPPED
+		END IF
     		LET r_dcomp.b13_valor_base 	= valor
     		LET r_dcomp.b13_valor_aux 	= 0
     		LET r_dcomp.b13_fec_proceso 	= r_ccomp.b12_fec_proceso

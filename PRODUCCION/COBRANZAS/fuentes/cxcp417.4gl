@@ -211,7 +211,7 @@ INPUT BY NAME rm_par.*
 			END IF
 		END IF
 		IF INFIELD(zona_cobro) THEN
-			CALL fl_ayuda_zona_cobro()
+			CALL fl_ayuda_zona_cobro('T', 'T')
 				RETURNING r_z06.z06_zona_cobro, r_z06.z06_nombre
 			IF r_z06.z06_zona_cobro IS NOT NULL THEN
 				LET rm_par.zona_cobro     = r_z06.z06_zona_cobro
@@ -472,6 +472,7 @@ DEFINE expr8		VARCHAR(250)
 DEFINE expr10, expr11	VARCHAR(100)
 --DEFINE expr12, expr13 	VARCHAR(100)
 DEFINE tabl1		VARCHAR(10)
+DEFINE base_suc		VARCHAR(10)
 DEFINE cuantos		INTEGER
 DEFINE fecing		LIKE cxct022.z22_fecing
 DEFINE areaneg		LIKE cxct020.z20_areaneg
@@ -553,8 +554,24 @@ IF cuantos = 0 THEN
 	CALL fl_mostrar_mensaje('No existen documentos con este criterio de búsqueda.', 'exclamation')
 	RETURN
 END IF
+LET base_suc = 'acero_gc'
+IF vg_codloc > 2 THEN
+	LET base_suc = 'acero_qs'
+END IF
 LET query = 'SELECT t1.*, r01_nombres ',
 		' FROM t1, rept019, rept001 ',
+		' WHERE z20_areaneg      = 1 ',
+		'   AND r19_compania     = z20_compania ',
+		'   AND r19_localidad    = z20_localidad ',
+		'   AND r19_cod_tran     = z20_cod_tran ',
+		'   AND r19_num_tran     = z20_num_tran ',
+		expr9 CLIPPED,
+		'   AND r01_compania     = r19_compania ',
+		'   AND r01_codigo       = r19_vendedor ',
+		' UNION ',
+		' SELECT t1.*, r01_nombres ',
+		' FROM t1, ', base_suc CLIPPED, ':rept019, ',
+			base_suc CLIPPED, ':rept001 ',
 		' WHERE z20_areaneg      = 1 ',
 		'   AND r19_compania     = z20_compania ',
 		'   AND r19_localidad    = z20_localidad ',
@@ -578,9 +595,22 @@ LET query = 'SELECT t1.*, r01_nombres ',
 		' INTO TEMP t2 '
 PREPARE cons_t2 FROM query
 EXECUTE cons_t2
+--
+--DROP TABLE t1
+--
 SELECT * FROM t2 INTO TEMP tmp_z20
+--
+INSERT INTO tmp_z20
+	SELECT a.*, ""
+		FROM t1 a
+		WHERE a.z20_tipo_doc <> 'FA'
 DROP TABLE t1
 DROP TABLE t2
+SELECT UNIQUE tmp_z20.* FROM tmp_z20 INTO TEMP t3
+DROP TABLE tmp_z20
+SELECT * FROM t3 INTO TEMP tmp_z20
+DROP TABLE t3
+--
 SELECT COUNT(*) INTO cuantos FROM tmp_z20 
 IF cuantos = 0 THEN
 	ERROR ' '
@@ -991,6 +1021,12 @@ LET int_flag = 0
 CALL fl_hacer_pregunta('Desea generar este listado en archivo ?', 'No')
 	RETURNING resp
 IF resp <> 'Yes' THEN
+	LET int_flag = 0
+	CALL fl_hacer_pregunta('Desea generar el archivo por semanas ?', 'No')
+		RETURNING resp
+	IF resp = 'Yes' THEN
+		CALL control_generar_archivo_ind()
+	END IF
 	RETURN
 END IF
 {--
@@ -1058,5 +1094,44 @@ LET mensaje = 'Archivo Generado en ', FGL_GETENV("HOME"), '/tmp/cxcp417.unl',
 		' OK.'
 DROP TABLE t1
 CALL fl_mostrar_mensaje(mensaje, 'info')
+
+END FUNCTION
+
+
+
+FUNCTION control_generar_archivo_ind()
+DEFINE mensaje		VARCHAR(200)
+
+SELECT g02_nombre, NVL(z06_nombre, "SIN COBRADOR") cobrador,
+	YEAR(z22_fecha_emi) anio, fp_numero_semana(z22_fecha_emi) semana,
+	--
+	z20_codcli, z01_nomcli, z20_tipo_doc, z20_num_doc, z20_dividendo, z22_fecha_emi,
+	--
+	NVL((valor_mov * (-1)), 0.00) valor_mov
+	FROM tmp_mov, gent002, OUTER (cxct002, cxct006)
+	WHERE z22_tipo_trn   IN ("PG", "AR")
+	  AND g02_compania    = vg_codcia
+	  AND g02_localidad   = z22_localidad
+	  AND z02_compania    = g02_compania
+	  AND z02_localidad   = g02_localidad
+	  AND z02_codcli      = z20_codcli
+	  AND z06_zona_cobro  = z02_zona_cobro
+	--GROUP BY 1, 2, 3, 4, 5
+	GROUP BY 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
+	INTO TEMP t1
+UNLOAD TO "../../../tmp/cxcp417_ind.unl"
+	SELECT g02_nombre, cobrador, anio, semana,
+		--
+		z20_codcli, z01_nomcli, z20_tipo_doc, z20_num_doc, z20_dividendo, z22_fecha_emi,
+		--
+		NVL(SUM(valor_mov), 0.00)
+		FROM t1
+		--GROUP BY 1, 2, 3, 4
+		GROUP BY 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+RUN "mv ../../../tmp/cxcp417_ind.unl $HOME/tmp/"
+LET mensaje = 'Archivo Generado en ', FGL_GETENV("HOME"),'/tmp/cxcp417_ind.unl',
+		' OK.'
+CALL fl_mostrar_mensaje(mensaje, 'info')
+DROP TABLE t1
 
 END FUNCTION

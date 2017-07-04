@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113942</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113942</guiaRemision>
+<razonSocialComprador>CUENCA MERIZALDE JORGE</razonSocialComprador>
+<identificacionComprador>1100670635</identificacionComprador>
+<totalSinImpuestos>401.69</totalSinImpuestos>
+<totalDescuento>44.63</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>401.69</baseImponible>
+<valor>48.20</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>449.89</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>204</codigoPrincipal>
+<descripcion>CORREA "G" DE 80 x 40 x 15 x 3mm. x 6 Mts.</descripcion>
+<cantidad>14.00</cantidad>
+<precioUnitario>31.88</precioUnitario>
+<descuento>44.63</descuento>
+<precioTotalSinImpuesto>401.69</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>401.69</baseImponible>
+<valor>48.20</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">edwardcachetes@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2652517</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064310</campoAdicional>
+</infoAdicional>
+</factura>

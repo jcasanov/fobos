@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025169</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>09/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>INGENIERIA ELECTRONICA Y MECANICA INELAM S.A.</razonSocialComprador>
+<identificacionComprador>1792023092001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000170744</numDocModificado>
+<fechaEmisionDocSustento>03/09/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>19.29</totalSinImpuestos>
+<valorModificacion>21.60</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>19.29</baseImponible>
+<valor>2.31</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 262630 INELAM MAT NO ENTRGD FC</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>3286</codigoInterno>
+<descripcion>NEPLO GALVANIZADO DE 3" CORRIDO</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>6.99</precioUnitario>
+<descuento>1.68</descuento>
+<precioTotalSinImpuesto>19.29</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>19.29</baseImponible>
+<valor>2.31</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacionelectronica@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3281739</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">25523</campoAdicional>
+</infoAdicional>
+</notaCredito>

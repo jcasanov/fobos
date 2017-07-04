@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000103404</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/11/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>009-001-000103404</guiaRemision>
+<razonSocialComprador>DELFINI ESCALA PAOLA</razonSocialComprador>
+<identificacionComprador>0907704803</identificacionComprador>
+<totalSinImpuestos>261.00</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>261.00</baseImponible>
+<valor>31.32</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>292.32</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>SERVICIO1</codigoPrincipal>
+<descripcion>REBOBINAJE DE BOMBA WEG 2HO/220V</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>186.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>186.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ACERO-AUTO" valor="ACERO-"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>186.00</baseImponible>
+<valor>22.32</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>ZZ</codigoPrincipal>
+<descripcion>MANO DE OBRA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>75.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>75.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ACERO-AUTO" valor="ACERO-"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>75.00</baseImponible>
+<valor>9.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

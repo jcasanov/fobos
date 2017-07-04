@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000018741</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>23/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>NETAFIM ECUADOR S.A.</razonSocialComprador>
+<identificacionComprador>1792061520001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000160513</numDocModificado>
+<fechaEmisionDocSustento>18/02/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>1052.05</totalSinImpuestos>
+<valorModificacion>1052.05</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<baseImponible>1052.05</baseImponible>
+<valor>0.00</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 252841 NETAFIM ECUADOR REC AJIMENEZ</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>44280</codigoInterno>
+<descripcion>BOMBA CENTRIF STANDARD C-MOTOR DLG-11-3 15HP 1 ETP. 2-1/2 x 2" 3500RPM 220/380-3-60</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1502.93</precioUnitario>
+<descuento>450.88</descuento>
+<precioTotalSinImpuesto>1052.05</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MARK G"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>1052.05</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">edison.cabrera@netafim.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2805858</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">45155</campoAdicional>
+</infoAdicional>
+</notaCredito>

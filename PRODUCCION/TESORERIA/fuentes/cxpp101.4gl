@@ -20,7 +20,7 @@ DEFINE vm_num_ret       SMALLINT
 DEFINE vm_max_ret       SMALLINT
 DEFINE vm_flag_ret      SMALLINT
 DEFINE vm_flag_mant	CHAR(1)
-DEFINE vm_r_rows	ARRAY [1000] OF INTEGER
+DEFINE vm_r_rows	ARRAY [5000] OF INTEGER
 DEFINE rm_ret		ARRAY [50] OF RECORD 
 				p05_porcentaje	LIKE cxpt005.p05_porcentaje,
 				p05_tipo_ret	LIKE cxpt005.p05_tipo_ret,
@@ -48,10 +48,10 @@ IF num_args() <> 4 AND num_args() <> 5 THEN   -- Validar # parámetros correcto
 	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
 	EXIT PROGRAM
 END IF
-LET vg_base     = arg_val(1)
-LET vg_modulo   = arg_val(2)
-LET vg_codcia   = arg_val(3)
-LET vg_codloc   = arg_val(4)
+LET vg_base    = arg_val(1)
+LET vg_modulo  = arg_val(2)
+LET vg_codcia  = arg_val(3)
+LET vg_codloc  = arg_val(4)
 LET vg_proceso = 'cxpp101'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
@@ -68,7 +68,7 @@ FUNCTION control_master()
 DEFINE i		SMALLINT
 
 CALL fl_nivel_isolation()
-LET vm_max_rows	= 1000
+LET vm_max_rows	= 5000
 LET vm_max_ret	= 50
 OPEN WINDOW wf AT 3,2 WITH 21 ROWS, 80 COLUMNS
     ATTRIBUTE(FORM LINE FIRST + 2, COMMENT LINE LAST, MENU LINE FIRST,BORDER,
@@ -193,9 +193,9 @@ DEFINE r_cta		RECORD LIKE ctbt010.*
 CALL fl_retorna_usuario()
 LET vm_flag_ret = 0
 INITIALIZE rm_p01.*, rm_p02.*, rm_p05.*, r_cia.*, r_cta.* TO NULL
-CLEAR p02_cupocred_ma, tit_codigo_pro, tit_nombre_pro, p01_estado, tit_estado_pro,
-	tit_pais, tit_ciudad, tit_tipo_pro, tit_pro_mb, tit_pro_ma, tit_ant_mb,
-	tit_ant_ma, p01_codprov
+CLEAR p02_cupocred_ma, tit_codigo_pro, tit_nombre_pro, p01_estado,
+	tit_estado_pro, tit_pais, tit_ciudad, tit_tipo_pro, tit_pro_mb,
+	tit_pro_ma, tit_ant_mb, tit_ant_ma, p01_codprov
 CALL fl_lee_compania_tesoreria(vg_codcia) RETURNING r_cia.*
 IF r_cia.p00_estado = 'A' THEN
 	LET rm_p02.p02_aux_prov_mb = r_cia.p00_aux_prov_mb
@@ -218,21 +218,22 @@ LET rm_p01.p01_ret_fuente   = 'S'
 LET rm_p01.p01_ret_impto    = 'S'
 LET rm_p01.p01_cont_espe    = 'N'
 LET rm_p01.p01_estado       = 'A'
+LET rm_p02.p02_tip_cta_prov = 'N'
 LET rm_p01.p01_usuario      = vg_usuario
 LET rm_p01.p01_fecing       = CURRENT
 
-LET rm_p02.p02_compania    = vg_codcia
-LET rm_p02.p02_localidad   = vg_codloc
-LET rm_p02.p02_int_ext     = 'E'
-LET rm_p02.p02_credit_dias = 0
-LET rm_p02.p02_cupocred_mb = 0
-LET rm_p02.p02_cupocred_ma = 0
-LET rm_p02.p02_descuento   = 0
-LET rm_p02.p02_recargo     = 0
-LET rm_p02.p02_dias_demora = 0
-LET rm_p02.p02_dias_seguri = 0
-LET rm_p02.p02_usuario     = rm_p01.p01_usuario
-LET rm_p02.p02_fecing      = rm_p01.p01_fecing
+LET rm_p02.p02_compania     = vg_codcia
+LET rm_p02.p02_localidad    = vg_codloc
+LET rm_p02.p02_int_ext      = 'E'
+LET rm_p02.p02_credit_dias  = 0
+LET rm_p02.p02_cupocred_mb  = 0
+LET rm_p02.p02_cupocred_ma  = 0
+LET rm_p02.p02_descuento    = 0
+LET rm_p02.p02_recargo      = 0
+LET rm_p02.p02_dias_demora  = 0
+LET rm_p02.p02_dias_seguri  = 0
+LET rm_p02.p02_usuario      = rm_p01.p01_usuario
+LET rm_p02.p02_fecing       = rm_p01.p01_fecing
 
 CALL muestra_estado()
 LET vm_flag_mant = 'I'
@@ -271,8 +272,9 @@ END IF
 CALL mostrar_registro(vm_r_rows[vm_row_current])
 BEGIN WORK
 WHENEVER ERROR CONTINUE
-DECLARE q_up CURSOR FOR SELECT * FROM cxpt001
-	WHERE ROWID = vm_r_rows[vm_row_current]
+DECLARE q_up CURSOR FOR
+	SELECT * FROM cxpt001
+		WHERE ROWID = vm_r_rows[vm_row_current]
 	FOR UPDATE
 OPEN q_up
 FETCH q_up INTO rm_p01.*
@@ -282,10 +284,11 @@ IF STATUS < 0 THEN
 	WHENEVER ERROR STOP
 	RETURN
 END IF
-DECLARE q_up2 CURSOR FOR SELECT * FROM cxpt002
-	WHERE p02_compania  = rm_p02.p02_compania 
-   	  AND p02_localidad = rm_p02.p02_localidad
-	  AND p02_codprov   = rm_p01.p01_codprov
+DECLARE q_up2 CURSOR FOR
+	SELECT * FROM cxpt002
+		WHERE p02_compania  = rm_p02.p02_compania 
+	   	  AND p02_localidad = rm_p02.p02_localidad
+		  AND p02_codprov   = rm_p01.p01_codprov
 	FOR UPDATE
 OPEN q_up2
 FETCH q_up2 INTO rm_p02.*
@@ -336,6 +339,7 @@ DEFINE nomt1_aux        LIKE gent012.g12_nombre
 DEFINE nomt2_aux        LIKE gent011.g11_nombre
 DEFINE cod_aux          LIKE ctbt010.b10_cuenta
 DEFINE nom_aux          LIKE ctbt010.b10_descripcion
+DEFINE r_g08		RECORD LIKE gent008.*
 DEFINE query		VARCHAR(1500)
 DEFINE expr_sql		VARCHAR(800)
 DEFINE num_reg		INTEGER
@@ -348,12 +352,13 @@ IF num_args() = 4 THEN
 	CONSTRUCT BY NAME expr_sql ON p01_codprov, p01_estado, p01_nomprov,
 	p01_personeria,	p01_num_doc, p01_tipo_doc, p01_num_aut, p01_serie_comp,
 	p01_direccion1, p01_telefono1, p01_usuario, p01_tipo_prov,
-	p01_direccion2, p01_telefono2, p01_fax1, p01_fax2, p01_casilla,p01_pais,
-	p01_ciudad, p01_rep_legal, p01_ret_fuente, p01_ret_impto, p01_cont_espe,
-	p02_contacto, p02_referencia, p02_credit_dias, p02_cupocred_mb,
-	p02_descuento, p02_recargo, p02_dias_demora, p02_dias_seguri,
-	p02_int_ext, p02_aux_prov_mb, p02_aux_prov_ma, p02_aux_ant_mb,
-	p02_aux_ant_ma
+	p01_direccion2, p01_telefono2, p01_fax1, p01_casilla, p01_fax2,
+	p02_banco_prov, p02_cod_bco_tra, p02_cta_prov, p02_tip_cta_prov,
+	p01_pais, p01_ciudad, p01_rep_legal, p01_ret_fuente, p01_ret_impto,
+	p01_cont_espe, p02_contacto, p02_referencia, p02_credit_dias, p02_email,
+	p02_cupocred_mb, p02_descuento, p02_recargo, p02_dias_demora,
+	p02_dias_seguri, p02_int_ext, p02_aux_prov_mb, p02_aux_prov_ma,
+	p02_aux_ant_mb, p02_aux_ant_ma
 	ON KEY(F2)
 		IF INFIELD(p01_codprov) THEN
                         CALL fl_ayuda_proveedores()
@@ -374,7 +379,7 @@ IF num_args() = 4 THEN
                         END IF
                 END IF
 		IF INFIELD(p01_ciudad) THEN
-                        CALL fl_ayuda_ciudad(codp_aux)
+                        CALL fl_ayuda_ciudad(codp_aux, 0)
                                 RETURNING codc_aux, nomc_aux
                         LET int_flag = 0
                         IF codc_aux IS NOT NULL THEN
@@ -392,6 +397,15 @@ IF num_args() = 4 THEN
                                 DISPLAY nomt1_aux TO tit_tipo_pro
                         END IF
                 END IF
+		IF INFIELD(p02_banco_prov) THEN
+			CALL fl_ayuda_bancos()
+				RETURNING r_g08.g08_banco, r_g08.g08_nombre
+                        LET int_flag = 0
+			IF r_g08.g08_banco IS NOT NULL THEN
+				DISPLAY r_g08.g08_banco TO p02_banco_prov
+				DISPLAY BY NAME r_g08.g08_nombre
+			END IF
+		END IF
 		IF INFIELD(p02_aux_prov_mb) THEN
                         CALL fl_ayuda_cuenta_contable(vg_codcia,vm_nivel)
                                 RETURNING cod_aux, nom_aux
@@ -565,6 +579,7 @@ DEFINE r_pai            RECORD LIKE gent030.*
 DEFINE r_ciu            RECORD LIKE gent031.*
 DEFINE r_car            RECORD LIKE gent012.*
 DEFINE r_mon		RECORD LIKE gent014.*
+DEFINE r_g08		RECORD LIKE gent008.*
 DEFINE codp_aux         LIKE gent030.g30_pais
 DEFINE nomp_aux         LIKE gent030.g30_nombre
 DEFINE codc_aux         LIKE gent031.g31_ciudad
@@ -580,38 +595,46 @@ INITIALIZE r_pai.*, r_ciu.*, r_car.*, r_mon.*, codp_aux, codc_aux,
 	codt1_aux, cod_aux TO NULL
 DISPLAY rm_p01.p01_codprov TO tit_codigo_pro
 DISPLAY rm_p01.p01_nomprov TO tit_nombre_pro
+IF rm_p02.p02_tip_cta_prov IS NULL THEN
+	LET rm_p02.p02_tip_cta_prov = 'N'
+END IF
 DISPLAY BY NAME rm_p01.p01_usuario, rm_p01.p01_fecing, rm_p02.p02_credit_dias,
-		rm_p02.p02_cupocred_mb, rm_p02.p02_cupocred_ma,
-		rm_p02.p02_descuento, rm_p02.p02_recargo,
+		rm_p02.p02_email, rm_p02.p02_cupocred_mb,
+		rm_p02.p02_cupocred_ma, rm_p02.p02_descuento,
+		rm_p02.p02_recargo, rm_p02.p02_tip_cta_prov,
 		rm_p02.p02_dias_demora, rm_p02.p02_dias_seguri,
 	 	rm_p02.p02_aux_prov_mb, rm_p02.p02_aux_prov_ma,
 	 	rm_p02.p02_aux_ant_mb,	rm_p02.p02_aux_ant_ma
 LET int_flag = 0
 INPUT BY NAME rm_p01.p01_nomprov, rm_p01.p01_personeria, rm_p01.p01_num_doc,
 	rm_p01.p01_tipo_doc, rm_p01.p01_num_aut, rm_p01.p01_serie_comp,
-	rm_p01.p01_direccion1, 
-	rm_p01.p01_telefono1, rm_p01.p01_tipo_prov,
+	rm_p01.p01_direccion1, rm_p01.p01_telefono1, rm_p01.p01_tipo_prov,
 	rm_p01.p01_direccion2, rm_p01.p01_telefono2, rm_p01.p01_fax1,
-	rm_p01.p01_fax2, rm_p01.p01_casilla, rm_p01.p01_pais, rm_p01.p01_ciudad,
-	rm_p01.p01_rep_legal, rm_p01.p01_ret_fuente, rm_p01.p01_ret_impto,
-	rm_p01.p01_cont_espe, rm_p02.p02_contacto, rm_p02.p02_referencia,
-	rm_p02.p02_credit_dias, rm_p02.p02_cupocred_mb, rm_p02.p02_descuento,
+	rm_p01.p01_casilla, rm_p01.p01_fax2, rm_p02.p02_banco_prov,
+	rm_p02.p02_cod_bco_tra, rm_p02.p02_cta_prov, rm_p02.p02_tip_cta_prov,
+	rm_p01.p01_pais, rm_p01.p01_ciudad, rm_p01.p01_rep_legal,
+	rm_p01.p01_ret_fuente, rm_p01.p01_ret_impto, rm_p01.p01_cont_espe,
+	rm_p02.p02_contacto, rm_p02.p02_referencia, rm_p02.p02_credit_dias,
+	rm_p02.p02_email, rm_p02.p02_cupocred_mb, rm_p02.p02_descuento,
 	rm_p02.p02_recargo, rm_p02.p02_dias_demora, rm_p02.p02_dias_seguri,
 	rm_p02.p02_int_ext, rm_p02.p02_aux_prov_mb, rm_p02.p02_aux_prov_ma,
 	rm_p02.p02_aux_ant_mb, rm_p02.p02_aux_ant_ma
 	WITHOUT DEFAULTS
 	ON KEY(INTERRUPT)
-        	IF field_touched(rm_p01.p01_nomprov, rm_p01.p01_personeria,
+        	IF FIELD_TOUCHED(rm_p01.p01_nomprov, rm_p01.p01_personeria,
 			rm_p01.p01_num_doc, rm_p01.p01_tipo_doc,
 			rm_p01.p01_num_aut, rm_p01.p01_serie_comp,
 			rm_p01.p01_direccion1, rm_p01.p01_telefono1,
 			rm_p01.p01_tipo_prov, rm_p01.p01_direccion2,
-			rm_p01.p01_telefono2, rm_p01.p01_fax1, rm_p01.p01_fax2,
-			rm_p01.p01_casilla, rm_p01.p01_pais, rm_p01.p01_ciudad,
-			rm_p01.p01_rep_legal, rm_p01.p01_ret_fuente,
-			rm_p01.p01_ret_impto, rm_p01.p01_cont_espe,
-			rm_p02.p02_contacto, rm_p02.p02_referencia,
-			rm_p02.p02_credit_dias, rm_p02.p02_cupocred_mb,
+			rm_p01.p01_telefono2, rm_p01.p01_fax1,
+			rm_p01.p01_casilla, rm_p01.p01_fax2,
+			rm_p02.p02_banco_prov, rm_p02.p02_cod_bco_tra,
+			rm_p02.p02_cta_prov, rm_p02.p02_tip_cta_prov,
+			rm_p01.p01_pais,rm_p01.p01_ciudad, rm_p01.p01_rep_legal,
+			rm_p01.p01_ret_fuente, rm_p01.p01_ret_impto,
+			rm_p01.p01_cont_espe, rm_p02.p02_contacto,
+			rm_p02.p02_referencia, rm_p02.p02_credit_dias,
+			rm_p02.p02_email, rm_p02.p02_cupocred_mb,
 			rm_p02.p02_descuento, rm_p02.p02_recargo,
 			rm_p02.p02_dias_demora, rm_p02.p02_dias_seguri,
 			rm_p02.p02_int_ext, rm_p02.p02_aux_prov_mb,
@@ -619,15 +642,14 @@ INPUT BY NAME rm_p01.p01_nomprov, rm_p01.p01_personeria, rm_p01.p01_num_doc,
 			rm_p02.p02_aux_ant_ma)
         	THEN
                		LET int_flag = 0
-			CALL fl_mensaje_abandonar_proceso()
-                		RETURNING resp
+			CALL fl_mensaje_abandonar_proceso() RETURNING resp
               		IF resp = 'Yes' THEN
 				LET int_flag = 1
                        		CLEAR FORM
-                       		RETURN
+				EXIT INPUT
                 	END IF
 		ELSE
-			RETURN
+			EXIT INPUT
 		END IF
 	ON KEY(F2)
 		IF INFIELD(p01_pais) THEN
@@ -641,7 +663,7 @@ INPUT BY NAME rm_p01.p01_nomprov, rm_p01.p01_personeria, rm_p01.p01_num_doc,
                         END IF
                 END IF
 		IF INFIELD(p01_ciudad) THEN
-                        CALL fl_ayuda_ciudad(rm_p01.p01_pais)
+                        CALL fl_ayuda_ciudad(rm_p01.p01_pais, 0)
                                 RETURNING codc_aux, nomc_aux
                         LET int_flag = 0
                         IF codc_aux IS NOT NULL THEN
@@ -661,6 +683,18 @@ INPUT BY NAME rm_p01.p01_nomprov, rm_p01.p01_personeria, rm_p01.p01_num_doc,
                                 DISPLAY nomt1_aux TO tit_tipo_pro
                         END IF
                 END IF
+		IF INFIELD(p02_banco_prov) THEN
+			CALL fl_ayuda_bancos()
+				RETURNING r_g08.g08_banco, r_g08.g08_nombre
+                        LET int_flag = 0
+			IF r_g08.g08_banco IS NOT NULL THEN
+				LET rm_p02.p02_banco_prov = r_g08.g08_banco
+				CALL retorna_cod_bco_tra()
+				DISPLAY BY NAME rm_p02.p02_banco_prov,
+						r_g08.g08_nombre,
+						rm_p02.p02_cod_bco_tra
+			END IF
+		END IF
 		IF INFIELD(p02_aux_prov_mb) THEN
                         CALL fl_ayuda_cuenta_contable(vg_codcia,vm_nivel)
                                 RETURNING cod_aux, nom_aux
@@ -780,6 +814,41 @@ INPUT BY NAME rm_p01.p01_nomprov, rm_p01.p01_personeria, rm_p01.p01_num_doc,
 		ELSE
 			CLEAR tit_tipo_pro
                 END IF
+	AFTER FIELD p02_banco_prov
+		IF rm_p02.p02_banco_prov IS NOT NULL THEN
+			CALL fl_lee_banco_general(rm_p02.p02_banco_prov)
+				RETURNING r_g08.*
+			IF r_g08.g08_banco IS NULL THEN	
+				CALL fl_mostrar_mensaje('Banco no esta configurado en la compañía.', 'exclamation')
+				NEXT FIELD p02_banco_prov
+			END IF
+			CALL retorna_cod_bco_tra()
+			DISPLAY BY NAME r_g08.g08_nombre,
+					rm_p02.p02_cod_bco_tra
+		ELSE
+			CLEAR g08_nombre, p02_cod_bco_tra
+			LET rm_p02.p02_cod_bco_tra = NULL
+		END IF
+	AFTER FIELD p02_cta_prov
+		IF rm_p02.p02_cta_prov IS NOT NULL THEN
+			IF LENGTH(rm_p02.p02_cta_prov) <> 10 AND
+			   LENGTH(rm_p02.p02_cta_prov) <> 11
+			THEN
+				CALL fl_mostrar_mensaje('Numero de cuenta no tiene completo el numero de digitos. Rellene con CEROS.', 'exclamation')
+				NEXT FIELD p02_cta_prov
+			END IF
+			IF NOT fl_valida_numeros(rm_p02.p02_cta_prov) THEN
+				NEXT FIELD p02_cta_prov
+			END IF
+		END IF
+	AFTER FIELD p02_email
+		IF rm_p02.p02_email IS NOT NULL THEN
+			IF NOT fl_validar_email(rm_p02.p02_email) THEN
+				NEXT FIELD p02_email
+			END IF
+		ELSE
+			CLEAR p02_email
+		END IF
 	AFTER FIELD p02_cupocred_mb
 		IF rm_p02.p02_cupocred_mb IS NOT NULL THEN
 			IF rg_gen.g00_moneda_alt IS NOT NULL
@@ -850,6 +919,20 @@ INPUT BY NAME rm_p01.p01_nomprov, rm_p01.p01_personeria, rm_p01.p01_num_doc,
 			CLEAR  tit_ant_ma
                 END IF
 	AFTER INPUT
+		IF rm_p02.p02_banco_prov IS NOT NULL THEN
+			IF rm_p02.p02_tip_cta_prov = 'N' THEN
+				CALL fl_mostrar_mensaje('Seleccione el tipo de cuenta proveedor.', 'exclamation')
+				CONTINUE INPUT
+			END IF
+			IF rm_p02.p02_cta_prov IS NULL THEN
+				CALL fl_mostrar_mensaje('Digite el número de cuenta del proveedor.', 'exclamation')
+				CONTINUE INPUT
+			END IF
+		END IF
+		IF rm_p02.p02_tip_cta_prov = 'N' THEN
+			LET rm_p02.p02_tip_cta_prov = NULL
+			LET rm_p02.p02_cod_bco_tra  = NULL
+		END IF
 		IF rm_p01.p01_ret_fuente = 'N' AND rm_p01.p01_ret_impto = 'N'
 		AND rm_p01.p01_cont_espe = 'N' THEN
 			CALL fl_mostrar_mensaje('No puede dejar sin retenciones al proveedor. Por favor cheque retencion fuente, retencion impuesto o si contribuyente especial.','exclamation')
@@ -988,7 +1071,7 @@ INPUT ARRAY rm_ret WITHOUT DEFAULTS FROM rm_ret.*
 			FOR k = 1 TO vm_num_ret
 				LET rm_ret[k].* = rm_ret_aux[k].*
 			END FOR
-        		RETURN
+			EXIT INPUT
        	       	END IF	
 	ON KEY(F2)
 		IF INFIELD(rm_ret[i].p05_porcentaje) THEN
@@ -1132,12 +1215,27 @@ END FUNCTION
 
 
 FUNCTION control_grabar()
+DEFINE correo		LIKE cxpt002.p02_email
 DEFINE num_aux		INTEGER
+DEFINE i, lim		SMALLINT
 
 IF vm_num_ret = 0 AND vm_flag_mant <> 'M' THEN
 	CALL fgl_winmessage(vg_producto,'Debe ingresar primero las retenciones del proveedor.','exclamation')
 	RETURN
 END IF
+LET rm_p02.p02_email = rm_p02.p02_email CLIPPED
+LET lim              = LENGTH(rm_p02.p02_email) 
+LET correo           = " "
+FOR i = 1 TO lim
+	IF rm_p02.p02_email[i, i] = "" OR rm_p02.p02_email[i, i] = "€" OR
+	   rm_p02.p02_email[i, i] = " "
+	THEN
+		LET correo = correo CLIPPED, ""
+	ELSE
+		LET correo = correo CLIPPED, rm_p02.p02_email[i, i]
+	END IF
+END FOR
+LET rm_p02.p02_email = correo CLIPPED
 IF rm_p01.p01_codprov IS NULL THEN
 	LET num_aux            = 0 
 	LET rm_p01.p01_fecing  = CURRENT
@@ -1168,42 +1266,47 @@ IF rm_p01.p01_codprov IS NULL THEN
 	CALL fl_mensaje_registro_ingresado()
 ELSE
 	IF vm_flag_mant = 'M' THEN
-		UPDATE cxpt001 SET p01_nomprov    = rm_p01.p01_nomprov, 
-				   p01_personeria = rm_p01.p01_personeria,
-				   p01_num_doc    = rm_p01.p01_num_doc,
-				   p01_tipo_doc   = rm_p01.p01_tipo_doc,
-				   p01_num_aut    = rm_p01.p01_num_aut,
-				   p01_serie_comp = rm_p01.p01_serie_comp,
-				   p01_direccion1 = rm_p01.p01_direccion1, 
-				   p01_telefono1  = rm_p01.p01_telefono1, 
-				   p01_tipo_prov  = rm_p01.p01_tipo_prov,
-				   p01_direccion2 = rm_p01.p01_direccion2, 
-				   p01_telefono2  = rm_p01.p01_telefono2,
-				   p01_fax1       = rm_p01.p01_fax1,
-				   p01_fax2       = rm_p01.p01_fax2,
-				   p01_casilla    = rm_p01.p01_casilla,
-				   p01_pais       = rm_p01.p01_pais,
-				   p01_ciudad     = rm_p01.p01_ciudad,
-				   p01_rep_legal  = rm_p01.p01_rep_legal,
-				   p01_ret_fuente = rm_p01.p01_ret_fuente,
-				   p01_ret_impto  = rm_p01.p01_ret_impto,
-				   p01_cont_espe  = rm_p01.p01_cont_espe
+		UPDATE cxpt001 SET p01_nomprov      = rm_p01.p01_nomprov, 
+				   p01_personeria   = rm_p01.p01_personeria,
+				   p01_num_doc      = rm_p01.p01_num_doc,
+				   p01_tipo_doc     = rm_p01.p01_tipo_doc,
+				   p01_num_aut      = rm_p01.p01_num_aut,
+				   p01_serie_comp   = rm_p01.p01_serie_comp,
+				   p01_direccion1   = rm_p01.p01_direccion1, 
+				   p01_telefono1    = rm_p01.p01_telefono1, 
+				   p01_tipo_prov    = rm_p01.p01_tipo_prov,
+				   p01_direccion2   = rm_p01.p01_direccion2, 
+				   p01_telefono2    = rm_p01.p01_telefono2,
+				   p01_fax1         = rm_p01.p01_fax1,
+				   p01_fax2         = rm_p01.p01_fax2,
+				   p01_casilla      = rm_p01.p01_casilla,
+				   p01_pais         = rm_p01.p01_pais,
+				   p01_ciudad       = rm_p01.p01_ciudad,
+				   p01_rep_legal    = rm_p01.p01_rep_legal,
+				   p01_ret_fuente   = rm_p01.p01_ret_fuente,
+				   p01_ret_impto    = rm_p01.p01_ret_impto,
+				   p01_cont_espe    = rm_p01.p01_cont_espe
 			WHERE CURRENT OF q_up
 		IF rm_p02.p02_codprov IS NOT NULL THEN
 			UPDATE cxpt002 SET
-				p02_contacto    = rm_p02.p02_contacto,
-				p02_referencia  = rm_p02.p02_referencia,
-				p02_credit_dias = rm_p02.p02_credit_dias,
-				p02_cupocred_mb = rm_p02.p02_cupocred_mb,
-				p02_descuento   = rm_p02.p02_descuento,
-				p02_recargo     = rm_p02.p02_recargo,
-				p02_dias_demora = rm_p02.p02_dias_demora,
-			  	p02_dias_seguri = rm_p02.p02_dias_seguri,
-				p02_int_ext     = rm_p02.p02_int_ext,
-				p02_aux_prov_mb = rm_p02.p02_aux_prov_mb,
-				p02_aux_prov_ma = rm_p02.p02_aux_prov_ma,
-				p02_aux_ant_mb  = rm_p02.p02_aux_ant_mb,
-				p02_aux_ant_ma  = rm_p02.p02_aux_ant_ma
+				p02_contacto     = rm_p02.p02_contacto,
+				p02_referencia   = rm_p02.p02_referencia,
+				p02_credit_dias  = rm_p02.p02_credit_dias,
+				p02_cupocred_mb  = rm_p02.p02_cupocred_mb,
+				p02_descuento    = rm_p02.p02_descuento,
+				p02_recargo      = rm_p02.p02_recargo,
+				p02_dias_demora  = rm_p02.p02_dias_demora,
+			  	p02_dias_seguri  = rm_p02.p02_dias_seguri,
+				p02_int_ext      = rm_p02.p02_int_ext,
+				p02_aux_prov_mb  = rm_p02.p02_aux_prov_mb,
+				p02_aux_prov_ma  = rm_p02.p02_aux_prov_ma,
+				p02_aux_ant_mb   = rm_p02.p02_aux_ant_mb,
+				p02_aux_ant_ma   = rm_p02.p02_aux_ant_ma,
+				p02_banco_prov   = rm_p02.p02_banco_prov,
+				p02_cod_bco_tra  = rm_p02.p02_cod_bco_tra,
+				p02_tip_cta_prov = rm_p02.p02_tip_cta_prov,
+				p02_cta_prov     = rm_p02.p02_cta_prov,
+				p02_email        = rm_p02.p02_email
 			      WHERE CURRENT OF q_up2
 		ELSE
 			LET rm_p02.p02_compania  = vg_codcia
@@ -1282,7 +1385,7 @@ DISPLAY row_current TO vm_row_current2
 DISPLAY num_rows    TO vm_num_rows2
 DISPLAY row_current TO vm_row_current1
 DISPLAY num_rows    TO vm_num_rows1
-                                                                                
+
 END FUNCTION
 
 
@@ -1292,6 +1395,7 @@ DEFINE r_pai            RECORD LIKE gent030.*
 DEFINE r_ciu            RECORD LIKE gent031.*
 DEFINE r_car            RECORD LIKE gent012.*
 DEFINE r_cta            RECORD LIKE ctbt010.*
+DEFINE r_g08		RECORD LIKE gent008.*
 DEFINE num_registro	INTEGER
 
 IF vm_num_rows > 0 THEN
@@ -1307,10 +1411,10 @@ IF vm_num_rows > 0 THEN
 			rm_p01.p01_telefono1, rm_p01.p01_tipo_prov,
 			rm_p01.p01_direccion2, rm_p01.p01_telefono2,
 			rm_p01.p01_fax1, rm_p01.p01_fax2, rm_p01.p01_casilla,
-			rm_p01.p01_pais, rm_p01.p01_ciudad,rm_p01.p01_rep_legal,
-			rm_p01.p01_ret_fuente, rm_p01.p01_ret_impto,
-			rm_p01.p01_cont_espe, rm_p01.p01_usuario,
-			rm_p01.p01_fecing
+			rm_p01.p01_pais, rm_p01.p01_ciudad,
+			rm_p01.p01_rep_legal, rm_p01.p01_ret_fuente,
+			rm_p01.p01_ret_impto, rm_p01.p01_cont_espe,
+			rm_p01.p01_usuario, rm_p01.p01_fecing
 	CALL fl_lee_pais(rm_p01.p01_pais) RETURNING r_pai.*
 	DISPLAY r_pai.g30_nombre TO tit_pais
 	CALL fl_lee_ciudad(rm_p01.p01_ciudad) RETURNING r_ciu.*
@@ -1328,12 +1432,15 @@ IF vm_num_rows > 0 THEN
 	DISPLAY rm_p01.p01_codprov TO tit_codigo_pro
 	DISPLAY rm_p01.p01_nomprov TO tit_nombre_pro
 	DISPLAY BY NAME rm_p02.p02_contacto, rm_p02.p02_referencia,
-			rm_p02.p02_credit_dias, rm_p02.p02_cupocred_mb,
-			rm_p02.p02_cupocred_ma, rm_p02.p02_descuento,
-			rm_p02.p02_recargo, rm_p02.p02_dias_demora,
-			rm_p02.p02_dias_seguri, rm_p02.p02_int_ext,
-			rm_p02.p02_aux_prov_mb, rm_p02.p02_aux_prov_ma,
-			rm_p02.p02_aux_ant_mb, rm_p02.p02_aux_ant_ma
+			rm_p02.p02_credit_dias, rm_p02.p02_email,
+			rm_p02.p02_cupocred_mb, rm_p02.p02_cupocred_ma,
+			rm_p02.p02_descuento, rm_p02.p02_recargo,
+			rm_p02.p02_dias_demora, rm_p02.p02_dias_seguri,
+			rm_p02.p02_int_ext, rm_p02.p02_aux_prov_mb,
+			rm_p02.p02_aux_prov_ma, rm_p02.p02_aux_ant_mb,
+			rm_p02.p02_aux_ant_ma, rm_p02.p02_banco_prov,
+			rm_p02.p02_tip_cta_prov, rm_p02.p02_cta_prov,
+			rm_p02.p02_cod_bco_tra
 	CALL fl_lee_cuenta(vg_codcia,rm_p02.p02_aux_prov_mb)
                 RETURNING r_cta.*
         DISPLAY r_cta.b10_descripcion TO tit_pro_mb
@@ -1346,6 +1453,12 @@ IF vm_num_rows > 0 THEN
         CALL fl_lee_cuenta(vg_codcia,rm_p02.p02_aux_ant_ma)
                 RETURNING r_cta.*
         DISPLAY r_cta.b10_descripcion TO tit_ant_ma
+	CALL fl_lee_banco_general(rm_p02.p02_banco_prov) RETURNING r_g08.*
+	DISPLAY BY NAME r_g08.g08_nombre
+	IF rm_p02.p02_tip_cta_prov IS NULL THEN
+		LET rm_p02.p02_tip_cta_prov = 'N'
+		DISPLAY BY NAME rm_p02.p02_tip_cta_prov
+	END IF
 	CALL muestra_estado()
 	CALL cargar_retencion()
 ELSE
@@ -1448,5 +1561,36 @@ DISPLAY ARRAY rm_ret TO rm_ret.*
 	ON KEY(INTERRUPT)
 		EXIT DISPLAY
 END DISPLAY
-                                                                                
+
+END FUNCTION
+
+
+
+FUNCTION retorna_cod_bco_tra()
+DEFINE cod_bco		LIKE cxpt002.p02_cod_bco_tra
+
+LET cod_bco = NULL
+SELECT p06_cod_bco_tra
+	INTO cod_bco
+	FROM cxpt006
+	WHERE p06_compania = rm_p02.p02_compania
+	  AND p06_banco    = rm_p02.p02_banco_prov
+LET rm_p02.p02_cod_bco_tra = cod_bco
+
+END FUNCTION
+
+
+
+FUNCTION fl_validar_email(email)
+DEFINE email		VARCHAR(100)
+
+{
+--IF email[1, 1] < '0' OR email[1, 1] > '9' THEN
+LET lim = LENGTH(email)
+FOR i = 1 TO lim
+	--IF 
+END FOR
+}
+RETURN 1
+
 END FUNCTION

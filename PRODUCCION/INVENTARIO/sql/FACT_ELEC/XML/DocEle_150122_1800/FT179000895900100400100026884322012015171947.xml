@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268843</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268843</guiaRemision>
+<razonSocialComprador>RAMOS LUNA YAMILE KATALINA</razonSocialComprador>
+<identificacionComprador>0401011465</identificacionComprador>
+<totalSinImpuestos>1550.77</totalSinImpuestos>
+<totalDescuento>168.05</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1550.77</baseImponible>
+<valor>186.09</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1736.86</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>96729</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 4" 25SDQP  25 GPM SIST. DE PRESION CONSTANTE (93802501) 215 PIES</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1679.67</precioUnitario>
+<descuento>167.97</descuento>
+<precioTotalSinImpuesto>1511.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1511.70</baseImponible>
+<valor>181.40</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>92570</codigoPrincipal>
+<descripcion>MANOMETRO 0 A 100 PSI CONEX.1/4" DE 2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>10.71</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>10.71</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>10.71</baseImponible>
+<valor>1.29</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21187</codigoPrincipal>
+<descripcion>TACO FICHER F8 (PAQUETE DE 5)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>0.27</precioUnitario>
+<descuento>0.03</descuento>
+<precioTotalSinImpuesto>0.51</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="PAQ"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.51</baseImponible>
+<valor>0.06</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21277</codigoPrincipal>
+<descripcion>TORNILLO TP-1-1/4" (PAQUETE DE 10)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>0.90</precioUnitario>
+<descuento>0.05</descuento>
+<precioTotalSinImpuesto>0.85</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="PAQ"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.85</baseImponible>
+<valor>0.10</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5666</codigoPrincipal>
+<descripcion>TUBO PVC DESAGUE 40 PSI DE 110mm. x 3 Mts. ESPIGA CAMPANA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>13.32</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>13.32</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>13.32</baseImponible>
+<valor>1.60</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5830</codigoPrincipal>
+<descripcion>TUBO PVC ROSCABLE x 6 MTS. DE 1" (320 PSI)</descripcion>
+<cantidad>0.66</cantidad>
+<precioUnitario>20.72</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>13.68</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>13.68</baseImponible>
+<valor>1.64</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">dmantilla13@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3566812</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064305</campoAdicional>
+</infoAdicional>
+</factura>

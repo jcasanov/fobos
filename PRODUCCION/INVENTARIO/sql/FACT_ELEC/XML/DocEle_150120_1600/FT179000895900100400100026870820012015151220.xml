@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268708</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268708</guiaRemision>
+<razonSocialComprador>PROYECTOS MECANICOS PROMEC S. C. C.</razonSocialComprador>
+<identificacionComprador>1790801217001</identificacionComprador>
+<totalSinImpuestos>15.30</totalSinImpuestos>
+<totalDescuento>2.70</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>15.30</baseImponible>
+<valor>1.84</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>17.14</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>98924</codigoPrincipal>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7422SD1 DE 1/2" X 3-3/4"</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>0.90</precioUnitario>
+<descuento>2.70</descuento>
+<precioTotalSinImpuesto>15.30</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>15.30</baseImponible>
+<valor>1.84</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">compras@proyectosmecanicos.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2428500</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">028950</campoAdicional>
+</infoAdicional>
+</factura>

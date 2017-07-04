@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025215</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>CORPORACION ELECTRICA DEL ECUADOR CELEC EP</razonSocialComprador>
+<identificacionComprador>1768152800001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000159530</numDocModificado>
+<fechaEmisionDocSustento>03/02/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>530.70</totalSinImpuestos>
+<valorModificacion>594.38</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>530.70</baseImponible>
+<valor>63.68</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 251913 CELEC PARA VOLVER A FACT YA</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>150223</codigoInterno>
+<descripcion>ROTOMARTILLO 5363-21 SDS DE 1"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>589.67</precioUnitario>
+<descuento>58.97</descuento>
+<precioTotalSinImpuesto>530.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>530.70</baseImponible>
+<valor>63.68</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">juan.cornejo@celec.gob.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">062700220</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">49783</campoAdicional>
+</infoAdicional>
+</notaCredito>

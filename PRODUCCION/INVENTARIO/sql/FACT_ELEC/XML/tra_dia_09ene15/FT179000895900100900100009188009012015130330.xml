@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091880</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>09/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091880</guiaRemision>
+<razonSocialComprador>CORNISACORP S.A.</razonSocialComprador>
+<identificacionComprador>0991338519001</identificacionComprador>
+<totalSinImpuestos>6.82</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>6.82</baseImponible>
+<valor>0.82</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>7.64</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>4718</codigoPrincipal>
+<descripcion>TEE NEGRA CLASE 150 DE 1/4"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1.42</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2.84</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.84</baseImponible>
+<valor>0.34</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2248</codigoPrincipal>
+<descripcion>CODO NEGRO CLASE 150 DE 1/4" x 90°</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1.20</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2.40</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.40</baseImponible>
+<valor>0.29</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4228</codigoPrincipal>
+<descripcion>TAPON NEGRO MACHO CLASE 150 DE 1/4"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>0.79</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1.58</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.58</baseImponible>
+<valor>0.19</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">info@cornisacorpsa.com</campoAdicional>
+<campoAdicional nombre="Email">asist.contabilidad@cornisacorpsa.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">5032520</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">010676</campoAdicional>
+</infoAdicional>
+</factura>

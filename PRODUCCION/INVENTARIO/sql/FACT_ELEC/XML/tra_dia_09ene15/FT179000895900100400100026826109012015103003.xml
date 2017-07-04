@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268261</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>09/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268261</guiaRemision>
+<razonSocialComprador>GEOSUELOS CIA.LTDA</razonSocialComprador>
+<identificacionComprador>1791137043001</identificacionComprador>
+<totalSinImpuestos>505.83</totalSinImpuestos>
+<totalDescuento>56.20</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>505.83</baseImponible>
+<valor>60.70</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>566.53</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>13658</codigoPrincipal>
+<descripcion>LLAVE DE TUBO RECTA NO. 24 (31030)</descripcion>
+<cantidad>7.00</cantidad>
+<precioUnitario>80.29</precioUnitario>
+<descuento>56.20</descuento>
+<precioTotalSinImpuesto>505.83</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>505.83</baseImponible>
+<valor>60.70</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">secretaria@geosuelos.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2461814</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">004778</campoAdicional>
+<campoAdicional nombre="Observaciones">PARA CRUZAR CON NOTA DE CREDITO</campoAdicional>
+</infoAdicional>
+</factura>

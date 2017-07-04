@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025855</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>FABIAN ZHINDON AJILA</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>0914550058</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>22/01/2015</fechaIniTransporte>
+<fechaFinTransporte>23/01/2015</fechaFinTransporte>
+<placa>SIN PLACA</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0992590432001</identificacionDestinatario>
+<razonSocialDestinatario>IELMESA S.A.</razonSocialDestinatario>
+<dirDestinatario>RETIRAN</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>15/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>150170</codigoInterno>
+<descripcion>TALADRO DE BASE ELECTROMAGNETICA 4208-1 INCLUYE MOTOR 4297-1 Y BASE 4203</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>70389</codigoInterno>
+<descripcion>FRESA ANULAR PARA TALADROS MANUALES 44-60-1720 PIN EYECTOR P/CORT.ANUL.DE 1" DE PROFUNDIDAD</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>93767</codigoInterno>
+<descripcion>FRESA ANULAR PARA TALADRO ELECTROMAGNETICO 49-59-0500 DE 1/2" P/PLANCHA DE HASTA 1"</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>93768</codigoInterno>
+<descripcion>FRESA ANULAR PARA TALADRO ELECTROMAGNETICO 49-59-0562 DE 9/16" P/PLANCHA DE HASTA 1"</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>93769</codigoInterno>
+<descripcion>FRESA ANULAR PARA TALADRO ELECTROMAGNETICO 49-59-0625 DE 5/8" P/PLANCHA DE HASTA 1"</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>93771</codigoInterno>
+<descripcion>FRESA ANULAR PARA TALADRO ELECTROMAGNETICO 49-59-0750 DE 3/4" P/ PLANCHA DE HASTA 1"</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>93775</codigoInterno>
+<descripcion>FRESA ANULAR PARA TALADRO ELECTROMAGNETICO 49-59-1000 DE 1" P/PLANCHA DE HASTA 1"</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">ielmesa09@hotmail.com</campoAdicional>
+<campoAdicional nombre="Email">info@ielmesa.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2341853</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">013442</campoAdicional>
+</infoAdicional>
+</guiaRemision>

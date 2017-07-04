@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000034095</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>M MAGALLANES</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>18/12/2014</fechaIniTransporte>
+<fechaFinTransporte>19/12/2014</fechaFinTransporte>
+<placa>GSC8976</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0992106824001</identificacionDestinatario>
+<razonSocialDestinatario>TECHCONSTRUYE S.A.</razonSocialDestinatario>
+<dirDestinatario>PTO STA ANA EDF THE POINT P18</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>16/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>97892</codigoInterno>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7444 SD1 DE 3/4" X 6-1/4"</descripcion>
+<cantidad>78.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="MODELO" valor="7448 SD1"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3883066</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">008010</campoAdicional>
+</infoAdicional>
+</guiaRemision>

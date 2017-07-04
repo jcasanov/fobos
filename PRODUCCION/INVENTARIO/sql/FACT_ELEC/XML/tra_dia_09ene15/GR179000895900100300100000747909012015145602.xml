@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000007479</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<dirPartida>GUALBERTO PEREZ E1-88 ENTRE MALDONADO Y NAPO</dirPartida>
+<razonSocialTransportista>SERGIO QUINCHE</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>1103687586</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>09/01/2015</fechaIniTransporte>
+<fechaFinTransporte>09/01/2015</fechaFinTransporte>
+<placa>PBX-9975</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1705244190001</identificacionDestinatario>
+<razonSocialDestinatario>AREVALO SAQUICELA LUIS MARCELO</razonSocialDestinatario>
+<dirDestinatario>PRENSA Y ESPINOZ POLIT</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>08/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>101499</codigoInterno>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA AGRESTE  SEGUNDA</descripcion>
+<cantidad>96.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>102310</codigoInterno>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA AZTECA GRIS SEGUNDA</descripcion>
+<cantidad>60.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>102834</codigoInterno>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA TESSUTTO CAPUCHINO SEGUNDA</descripcion>
+<cantidad>30.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>90389</codigoInterno>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA COPACABANA DUELA ESTANDAR</descripcion>
+<cantidad>30.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">marceloarevalo4@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2530313</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">046251</campoAdicional>
+</infoAdicional>
+</guiaRemision>

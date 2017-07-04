@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000041388</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<dirPartida>AV. LA PRENSA N-4514</dirPartida>
+<razonSocialTransportista>ACERO COMERCIAL</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>12/01/2015</fechaIniTransporte>
+<fechaFinTransporte>13/01/2015</fechaFinTransporte>
+<placa>PAA-001</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1704404910001</identificacionDestinatario>
+<razonSocialDestinatario>MORALES CHAMORRO LUIS GUSTAVO</razonSocialDestinatario>
+<dirDestinatario>NUESTRAS BODEGAS</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>12/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>2059</codigoInterno>
+<descripcion>CODO GALV. CLASE 150 90 GRAD  DE 1"</descripcion>
+<cantidad>55.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>2063</codigoInterno>
+<descripcion>CODO GALV. CLASE 150 90 GRAD  DE 1-1/2"</descripcion>
+<cantidad>29.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>2065</codigoInterno>
+<descripcion>CODO GALV. CLASE 150 90 GRAD  DE 2"</descripcion>
+<cantidad>10.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>2067</codigoInterno>
+<descripcion>CODO GALV. CLASE 150 90 GRAD  DE 2-1/2"</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>4579</codigoInterno>
+<descripcion>TEE GALV. CLASE 150 DE 2-1/2"</descripcion>
+<cantidad>9.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>5414</codigoInterno>
+<descripcion>TUBO GALV. ASTM A-53   TIPO "T" DE 1-1/2" x 6 m.  ESPESOR 3.6 mm.</descripcion>
+<cantidad>5.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>5416</codigoInterno>
+<descripcion>TUBO GALV. ASTM A-53   TIPO "T" DE 2" x 6 m.  ESPESOR 3.6 mm.</descripcion>
+<cantidad>13.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>5418</codigoInterno>
+<descripcion>TUBO GALV. ASTM A-53   TIPO "T" DE 2-1/2" x 6.40 m.  ESPESOR 5 mm.</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">inggustavomorales@yahoo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3401805</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">015973</campoAdicional>
+</infoAdicional>
+</guiaRemision>

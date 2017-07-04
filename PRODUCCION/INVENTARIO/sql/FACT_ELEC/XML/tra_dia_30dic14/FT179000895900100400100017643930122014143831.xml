@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176439</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>30/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176439</guiaRemision>
+<razonSocialComprador>GUALOTUNA LOACHAMIN CRISTOBAL ALFREDO</razonSocialComprador>
+<identificacionComprador>1707860001</identificacionComprador>
+<totalSinImpuestos>18.05</totalSinImpuestos>
+<totalDescuento>0.95</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>18.05</baseImponible>
+<valor>2.17</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>20.22</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>70098</codigoPrincipal>
+<descripcion>ANCLAJE DE ROSCA INTERNA STEEL DROPIN 6306  PARA ROSCAS DE 3/8"</descripcion>
+<cantidad>50.00</cantidad>
+<precioUnitario>0.38</precioUnitario>
+<descuento>0.95</descuento>
+<precioTotalSinImpuesto>18.05</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>18.05</baseImponible>
+<valor>2.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">hidro_plomec@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0999569276</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">008833</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000007775</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>PANAMERICANA SUR KM. 6</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>FOSFORERA ECUATORIANA  S.A.</razonSocialComprador>
+<identificacionComprador>1790021203001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>003-001-000007775</numDocModificado>
+<fechaEmisionDocSustento>15/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>585.07</totalSinImpuestos>
+<valorModificacion>655.28</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>585.07</baseImponible>
+<valor>70.21</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV. DF-4083 FACT. FA-113094</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>4348</codigoInterno>
+<descripcion>DEV. DF-4083 FACT. FA-113094</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>585.07</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>585.07</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ACERO" valor="ACERO"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>585.07</baseImponible>
+<valor>70.21</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+<campoAdicional nombre="telefono-movil">3080746</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">65</campoAdicional>
+</infoAdicional>
+</notaCredito>

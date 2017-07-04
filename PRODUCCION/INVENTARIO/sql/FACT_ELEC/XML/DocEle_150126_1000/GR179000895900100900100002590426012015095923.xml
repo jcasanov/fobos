@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025904</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>TOBAR GUADALUPE FABIAN MARCELO</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1001798303001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>26/01/2015</fechaIniTransporte>
+<fechaFinTransporte>27/01/2015</fechaFinTransporte>
+<placa>SIN PLACA</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1001798303001</identificacionDestinatario>
+<razonSocialDestinatario>TOBAR GUADALUPE FABIAN MARCELO</razonSocialDestinatario>
+<dirDestinatario>RETIRA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>24/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>2120</codigoInterno>
+<descripcion>CODO GALV. CLASE 150  X 45 GRAD  DE 1-1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>3236</codigoInterno>
+<descripcion>NEPLO GALVANIZADO DE 1-1/2" x 2-1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>3246</codigoInterno>
+<descripcion>NEPLO GALVANIZADO DE 1-1/2" x 6"</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>3248</codigoInterno>
+<descripcion>NEPLO GALVANIZADO DE 1-1/2" x 8"</descripcion>
+<cantidad>4.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">tallerestobar@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2864222</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">014908</campoAdicional>
+</infoAdicional>
+</guiaRemision>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092163</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092163</guiaRemision>
+<razonSocialComprador>JARAMILLO ESPINOZA JORGE OSWALDO</razonSocialComprador>
+<identificacionComprador>0701851909001</identificacionComprador>
+<totalSinImpuestos>2198.52</totalSinImpuestos>
+<totalDescuento>942.23</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>2198.52</baseImponible>
+<valor>263.82</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>2462.34</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>100008</codigoPrincipal>
+<descripcion>AMOLADORA A BATERIA 2680-22 M18 LITHIUM-ION 4-1/2" / 9.000RPM</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>628.15</precioUnitario>
+<descuento>942.23</descuento>
+<precioTotalSinImpuesto>2198.52</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2198.52</baseImponible>
+<valor>263.82</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacion_orocentro@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2972456</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">012971</campoAdicional>
+</infoAdicional>
+</factura>

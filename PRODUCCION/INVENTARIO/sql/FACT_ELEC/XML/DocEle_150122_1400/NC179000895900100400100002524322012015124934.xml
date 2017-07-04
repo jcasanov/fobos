@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025243</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>CARROCERIAS IMCE</razonSocialComprador>
+<identificacionComprador>1801172162001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000174687</numDocModificado>
+<fechaEmisionDocSustento>24/11/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>9650.13</totalSinImpuestos>
+<valorModificacion>10808.15</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>9650.13</baseImponible>
+<valor>1158.02</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 266370 CARROCERIAS IMCE P-VOLVER FAC</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>150513</codigoInterno>
+<descripcion>LIJADORA ELECTRICA 6021-21 ORBITAL P/MADERA</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>110.29</precioUnitario>
+<descuento>39.70</descuento>
+<precioTotalSinImpuesto>180.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>180.88</baseImponible>
+<valor>21.71</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>102027</codigoInterno>
+<descripcion>FLEXOMETRO 48-22-5125 MAGNETICO DE 25 PIES</descripcion>
+<cantidad>48.00</cantidad>
+<precioUnitario>27.81</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1334.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1334.88</baseImponible>
+<valor>160.19</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>97042</codigoInterno>
+<descripcion>PISTOLA DE AIRE CALIENTE 8975-6 DE 11 AMPS. 120V. DOBLE TEMPERATURA 298-537 GRAD C.</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>126.35</precioUnitario>
+<descuento>68.23</descuento>
+<precioTotalSinImpuesto>310.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>310.82</baseImponible>
+<valor>37.30</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>102392</codigoInterno>
+<descripcion>AMOLADORA A BATERIA 2780-22 FUEL M-18 DE 4-1/2" / 5" S/SEGURO DE SWITCH 8500 RPM.</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>553.43</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2213.72</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2213.72</baseImponible>
+<valor>265.65</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>102392</codigoInterno>
+<descripcion>AMOLADORA A BATERIA 2780-22 FUEL M-18 DE 4-1/2" / 5" S/SEGURO DE SWITCH 8500 RPM.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>553.43</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1106.86</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1106.86</baseImponible>
+<valor>132.82</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>101438</codigoInterno>
+<descripcion>CONJUNTO COMBI 2691-22 TALADRO + LLAVE DE IMPACTO</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>547.71</precioUnitario>
+<descuento>295.76</descuento>
+<precioTotalSinImpuesto>1347.37</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1347.37</baseImponible>
+<valor>161.68</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>101295</codigoInterno>
+<descripcion>CAMARA DE MANO DE INSPECCION 2260-21 TERMOGRAFICA DE 160 X 120 PIX LCD 3.5"COLOR 350øC</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3155.60</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3155.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3155.60</baseImponible>
+<valor>378.67</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacion@carroceriasimce.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">032445347</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">46247</campoAdicional>
+</infoAdicional>
+</notaCredito>

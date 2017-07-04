@@ -1,0 +1,5 @@
+for i in `onstat -u|grep ritamora |cut -f 3 -d" "`
+do 
+  onstat -g sql $i
+done
+

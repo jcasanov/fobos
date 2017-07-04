@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113955</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113955</guiaRemision>
+<razonSocialComprador>OCHOA VIVANCO PEPE GUILLERMO</razonSocialComprador>
+<identificacionComprador>1101749818</identificacionComprador>
+<totalSinImpuestos>250.52</totalSinImpuestos>
+<totalDescuento>39.21</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>250.52</baseImponible>
+<valor>30.06</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>280.58</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5997</codigoPrincipal>
+<descripcion>UNION GALV. CLASE 150 DE 2"</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>4.43</precioUnitario>
+<descuento>2.22</descuento>
+<precioTotalSinImpuesto>19.93</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>19.93</baseImponible>
+<valor>2.39</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4571</codigoPrincipal>
+<descripcion>TEE GALV. CLASE 150 DE 2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>10.93</precioUnitario>
+<descuento>1.09</descuento>
+<precioTotalSinImpuesto>9.84</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.84</baseImponible>
+<valor>1.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21378</codigoPrincipal>
+<descripcion>VALVULA CHEQUE VC-50 DE 2" DE BRONCE TIPO PESADO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>86.50</precioUnitario>
+<descuento>10.38</descuento>
+<precioTotalSinImpuesto>76.12</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HELBER"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>76.12</baseImponible>
+<valor>9.13</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>13660</codigoPrincipal>
+<descripcion>LLAVE DE TUBO RECTA NO. 36 (31035)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>170.15</precioUnitario>
+<descuento>25.52</descuento>
+<precioTotalSinImpuesto>144.63</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>144.63</baseImponible>
+<valor>17.36</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">perfochoa@yahoo.es</campoAdicional>
+<campoAdicional nombre="telefono-movil">627475</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">010391</campoAdicional>
+</infoAdicional>
+</factura>

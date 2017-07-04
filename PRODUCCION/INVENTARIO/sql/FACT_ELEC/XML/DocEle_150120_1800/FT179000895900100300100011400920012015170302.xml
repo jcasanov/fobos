@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000114009</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000114009</guiaRemision>
+<razonSocialComprador>TEXTILES TEXSA  S.A.</razonSocialComprador>
+<identificacionComprador>1790013324001</identificacionComprador>
+<totalSinImpuestos>46.99</totalSinImpuestos>
+<totalDescuento>5.24</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>46.99</baseImponible>
+<valor>5.64</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>52.63</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>95348</codigoPrincipal>
+<descripcion>TEE GALV. CLASE 150 DE 1/2"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1.23</precioUnitario>
+<descuento>0.25</descuento>
+<precioTotalSinImpuesto>2.21</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.21</baseImponible>
+<valor>0.27</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99953</codigoPrincipal>
+<descripcion>GRIFO ESFERICO BRONCE CROMADO PERFECTA DE 1/2" CABO ROJO</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>4.25</precioUnitario>
+<descuento>1.28</descuento>
+<precioTotalSinImpuesto>11.47</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FIV"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>11.47</baseImponible>
+<valor>1.38</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>8330</codigoPrincipal>
+<descripcion>LLAVE DE MANGUERA E436.04 BR DE 1/2" PESADA MANIJA EN T</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>10.73</precioUnitario>
+<descuento>2.15</descuento>
+<precioTotalSinImpuesto>19.31</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>19.31</baseImponible>
+<valor>2.32</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6312</codigoPrincipal>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 1/2"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>4.86</precioUnitario>
+<descuento>1.46</descuento>
+<precioTotalSinImpuesto>13.12</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>13.12</baseImponible>
+<valor>1.57</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6020</codigoPrincipal>
+<descripcion>UNION GALV. CLASE 150 DE 1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>0.98</precioUnitario>
+<descuento>0.10</descuento>
+<precioTotalSinImpuesto>0.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.88</baseImponible>
+<valor>0.11</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">repuestos@textilestexsa.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2611138</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">029021</campoAdicional>
+<campoAdicional nombre="Observaciones">SOLICI: SANTIAGO SIMI</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268148</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268148</guiaRemision>
+<razonSocialComprador>LARCO YANEZ CARLOS ENRIQUE</razonSocialComprador>
+<identificacionComprador>1706549852001</identificacionComprador>
+<totalSinImpuestos>40.93</totalSinImpuestos>
+<totalDescuento>5.59</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>40.93</baseImponible>
+<valor>0.00</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>40.93</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>2406</codigoPrincipal>
+<descripcion>CODO PVC ESP-CAM A 90° DE 63mm. ISO</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>1.59</precioUnitario>
+<descuento>1.91</descuento>
+<precioTotalSinImpuesto>13.99</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>13.99</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2400</codigoPrincipal>
+<descripcion>CODO PVC ESP-CAM A 90° DE 32mm. ISO</descripcion>
+<cantidad>25.00</cantidad>
+<precioUnitario>0.38</precioUnitario>
+<descuento>1.14</descuento>
+<precioTotalSinImpuesto>8.36</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>8.36</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2434</codigoPrincipal>
+<descripcion>CODO PVC ESP-CAM A 45ø DE 20mm. ISO</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>0.24</precioUnitario>
+<descuento>0.29</descuento>
+<precioTotalSinImpuesto>2.11</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>2.11</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1324</codigoPrincipal>
+<descripcion>ADAPTADOR PVC ESP-CAM HEMBRA ISO DE 20mm. A 1/2"</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>0.18</precioUnitario>
+<descuento>0.22</descuento>
+<precioTotalSinImpuesto>1.58</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>1.58</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1364</codigoPrincipal>
+<descripcion>ADAPTADOR PVC ESP-CAM MACHO ISO DE 20mm. A 1/2"</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>0.17</precioUnitario>
+<descuento>0.20</descuento>
+<precioTotalSinImpuesto>1.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>1.50</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1368</codigoPrincipal>
+<descripcion>ADAPTADOR PVC ESP-CAM MACHO ISO DE 32mm. A 1"</descripcion>
+<cantidad>12.00</cantidad>
+<precioUnitario>0.36</precioUnitario>
+<descuento>0.52</descuento>
+<precioTotalSinImpuesto>3.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>3.80</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4302</codigoPrincipal>
+<descripcion>TAPON HEMBRA PVC ESP-CAM DE 32mm. ISO</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>0.20</precioUnitario>
+<descuento>0.24</descuento>
+<precioTotalSinImpuesto>1.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>1.76</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2404</codigoPrincipal>
+<descripcion>CODO PVC ESP-CAM A 90° DE 50mm. ISO</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>0.89</precioUnitario>
+<descuento>1.07</descuento>
+<precioTotalSinImpuesto>7.83</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>7.83</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">ingagri@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2417084</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">007007</campoAdicional>
+</infoAdicional>
+</factura>

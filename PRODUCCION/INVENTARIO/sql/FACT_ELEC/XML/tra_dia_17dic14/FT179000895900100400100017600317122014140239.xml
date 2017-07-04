@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176003</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>LA PRENSA 929 Y EDMUNDO CARVAJAL</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176003</guiaRemision>
+<razonSocialComprador>TABANGO CANAREJO SEGUNDO JUAN</razonSocialComprador>
+<identificacionComprador>1704764289001</identificacionComprador>
+<totalSinImpuestos>15.49</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>15.49</baseImponible>
+<valor>1.86</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>17.35</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>58</codigoPrincipal>
+<descripcion>ANGULO LAMINADO x 6 MTS. DE 40mm. x 3mm.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>15.49</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>15.49</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>15.49</baseImponible>
+<valor>1.86</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2278347</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">042548</campoAdicional>
+</infoAdicional>
+</factura>

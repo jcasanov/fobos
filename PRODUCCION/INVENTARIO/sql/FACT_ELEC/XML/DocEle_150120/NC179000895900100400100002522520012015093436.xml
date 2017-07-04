@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025225</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>CONSTRUCTORA VILLACRECES ANDRADE S.A.</razonSocialComprador>
+<identificacionComprador>1791326768001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000175667</numDocModificado>
+<fechaEmisionDocSustento>11/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>2191.37</totalSinImpuestos>
+<valorModificacion>2454.33</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>2191.37</baseImponible>
+<valor>262.96</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 267288 C V ANDRADE P-VOLVER A FACT</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>112</codigoInterno>
+<descripcion>CANAL "U" x 6 MTS. DE 100 x 50 x 3mm.</descripcion>
+<cantidad>45.00</cantidad>
+<precioUnitario>25.28</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1137.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1137.60</baseImponible>
+<valor>136.51</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>5460</codigoInterno>
+<descripcion>TUBO GALVANIZADO (POSTE) TIPO "T" DE 2" (50.8mm.) EXTERIOR 1.8mm. ESPESOR x 6 mts.</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>22.55</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>135.30</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>135.30</baseImponible>
+<valor>16.24</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>102123</codigoInterno>
+<descripcion>PLANCHA DE ZINC DE 2.40 x 0.71 mts. x 0.21mm.</descripcion>
+<cantidad>90.00</cantidad>
+<precioUnitario>4.65</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>418.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>418.50</baseImponible>
+<valor>50.22</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>46310</codigoInterno>
+<descripcion>DISCO DE CORTE 80 EHT 178-2A-24 PS 178 x 3 x 22.2mm. (ACERO)</descripcion>
+<cantidad>30.00</cantidad>
+<precioUnitario>2.34</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>70.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PFERD"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>70.20</baseImponible>
+<valor>8.42</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>616</codigoInterno>
+<descripcion>ARMEX 6.25 x 2.40 MTS. R-84 150 x 150 x 4 x 4mm.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>21.93</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>43.86</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>43.86</baseImponible>
+<valor>5.26</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>96073</codigoInterno>
+<descripcion>MALLA GALVANIZADA TELA DE ALUMINIO (ANTIMOSQUITO) DE 1.20 m. DE ALTO X 50 m.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>146.06</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>146.06</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>146.06</baseImponible>
+<valor>17.53</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>284</codigoInterno>
+<descripcion>GRAPA DE 1-1/4" x 9"</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>1.61</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>16.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>16.10</baseImponible>
+<valor>1.93</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>5664</codigoInterno>
+<descripcion>TUBO PVC DESAGUE 40 PSI DE 75mm. x 3 Mts. ESPIGA CAMPANA</descripcion>
+<cantidad>25.00</cantidad>
+<precioUnitario>8.95</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>223.75</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>223.75</baseImponible>
+<valor>26.85</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">cmaldonado@elitcorp.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2229244/5</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">4289</campoAdicional>
+</infoAdicional>
+</notaCredito>

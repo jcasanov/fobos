@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176097</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176097</guiaRemision>
+<razonSocialComprador>BENAVIDES GRANDA SEGUNDO ANIBAL</razonSocialComprador>
+<identificacionComprador>1704135621001</identificacionComprador>
+<totalSinImpuestos>45.90</totalSinImpuestos>
+<totalDescuento>5.10</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>45.90</baseImponible>
+<valor>5.51</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>51.41</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>69749</codigoPrincipal>
+<descripcion>TORNILLO DE ANCLAJE WEDGE-BOLT ACERO CARBONO 7217  DE 1/2" x 4"</descripcion>
+<cantidad>30.00</cantidad>
+<precioUnitario>1.70</precioUnitario>
+<descuento>5.10</descuento>
+<precioTotalSinImpuesto>45.90</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>45.90</baseImponible>
+<valor>5.51</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">097552429</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">052235</campoAdicional>
+</infoAdicional>
+</factura>

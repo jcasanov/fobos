@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000114018</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000114018</guiaRemision>
+<razonSocialComprador>MEDINA DIAS JAIME ERNESTO</razonSocialComprador>
+<identificacionComprador>1801435668001</identificacionComprador>
+<totalSinImpuestos>8.15</totalSinImpuestos>
+<totalDescuento>0.91</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>8.15</baseImponible>
+<valor>0.98</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>9.13</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5018</codigoPrincipal>
+<descripcion>TEE PVC DESAGUE DE 110mm. x 50mm. ISO E/C</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3.51</precioUnitario>
+<descuento>0.35</descuento>
+<precioTotalSinImpuesto>3.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.16</baseImponible>
+<valor>0.38</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2687</codigoPrincipal>
+<descripcion>CODO PVC DESAGUE DE 50mm. x 90ø ISO E/C</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>1.11</precioUnitario>
+<descuento>0.56</descuento>
+<precioTotalSinImpuesto>4.99</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.99</baseImponible>
+<valor>0.60</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jaime_medinad@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2643975</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">044807</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175964</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>KM DOCE A LLANO GRANDE JOSE MARIA YBRAZ</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175964</guiaRemision>
+<razonSocialComprador>INTERFIBRA S.A.</razonSocialComprador>
+<identificacionComprador>1791255291001</identificacionComprador>
+<totalSinImpuestos>166.27</totalSinImpuestos>
+<totalDescuento>6.93</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>166.27</baseImponible>
+<valor>19.95</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>186.22</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5406</codigoPrincipal>
+<descripcion>TUBO GALV. ASTM A-53   TIPO "T" DE 1/2" x 6 m.  ESPESOR 2.65 mm.</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>17.32</precioUnitario>
+<descuento>6.93</descuento>
+<precioTotalSinImpuesto>166.27</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="TUGALT" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>166.27</baseImponible>
+<valor>19.95</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2823997</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">002688</campoAdicional>
+</infoAdicional>
+</factura>

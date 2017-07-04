@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268837</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268837</guiaRemision>
+<razonSocialComprador>RODRIGUEZ CORREA ROSA AYDE</razonSocialComprador>
+<identificacionComprador>0912756061001</identificacionComprador>
+<totalSinImpuestos>1100.79</totalSinImpuestos>
+<totalDescuento>241.64</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1100.79</baseImponible>
+<valor>132.09</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1232.88</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>97964</codigoPrincipal>
+<descripcion>AMOLADORA ELECTRICA 6130-33 DISCO DE 4-1/2" 7 AMPS./110 V. 11000 RPM S/CARGA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>117.21</precioUnitario>
+<descuento>21.10</descuento>
+<precioTotalSinImpuesto>96.11</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>96.11</baseImponible>
+<valor>11.53</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97401</codigoPrincipal>
+<descripcion>AMOLADORA ELECTRICA 6088-30 DE 4.2 HP. 15 AMPS 6000 RPM P/DISCO DE 7" Y 9"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>307.67</precioUnitario>
+<descuento>55.38</descuento>
+<precioTotalSinImpuesto>252.29</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>252.29</baseImponible>
+<valor>30.27</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99314</codigoPrincipal>
+<descripcion>AMOLADORA ELECTRICA 6117-30 DE 13AMP./110V./2100W/2.9HP./11000 RPM</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>245.69</precioUnitario>
+<descuento>44.22</descuento>
+<precioTotalSinImpuesto>201.47</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>201.47</baseImponible>
+<valor>24.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99313</codigoPrincipal>
+<descripcion>AMOLADORA ELECTRICA 6121-30 DE 11AMP./110V./1400W/1.9HP.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>231.04</precioUnitario>
+<descuento>41.59</descuento>
+<precioTotalSinImpuesto>189.45</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>189.45</baseImponible>
+<valor>22.73</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101474</codigoPrincipal>
+<descripcion>AMOLADORA ELECTRICA 6147-30 DE 11AMP./110V./1100W/ 4-1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>159.07</precioUnitario>
+<descuento>28.63</descuento>
+<precioTotalSinImpuesto>130.44</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>130.44</baseImponible>
+<valor>15.65</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102399</codigoPrincipal>
+<descripcion>AMOLADORA ELECTRICA 6117-33D DE 13 AMPS. 5" 2.9 HP.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>281.75</precioUnitario>
+<descuento>50.72</descuento>
+<precioTotalSinImpuesto>231.03</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>231.03</baseImponible>
+<valor>27.72</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">grupo_fchimg@hotmail.com</campoAdicional>
+<campoAdicional nombre="Email">fmejia@megachimg.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">032420353</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">037170</campoAdicional>
+</infoAdicional>
+</factura>

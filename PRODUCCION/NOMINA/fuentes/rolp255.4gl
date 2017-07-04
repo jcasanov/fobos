@@ -1454,7 +1454,6 @@ DEFINE sec		LIKE ctbt013.b13_secuencia
 DEFINE flag_bco		SMALLINT
 DEFINE r_g09		RECORD LIKE gent009.*
 DEFINE r_b13		RECORD LIKE ctbt013.*
-DEFINE r_n30		RECORD LIKE rolt030.*
 
 INITIALIZE r_b13.* TO NULL
 LET r_b13.b13_compania    = r_b12.b12_compania
@@ -1478,12 +1477,11 @@ IF flag_bco THEN
 		LET r_b13.b13_tipo_doc = 'DEP'
 	END IF
 END IF
-CALL fl_lee_trabajador_roles(vg_codcia, rm_n91.n91_cod_trab) RETURNING r_n30.*
 LET r_b13.b13_cuenta      = cuenta
 LET r_b13.b13_glosa       = 'CAN.ANT.EMP. ',
-				rm_n91.n91_fecha_ant USING "dd-mm-yy", ' ',
 				rm_n91.n91_cod_trab USING "<<&&", ' ',
-				r_n30.n30_nombres CLIPPED
+				rm_n91.n91_periodo_ini USING "dd-mm-yy",' ',
+				rm_n91.n91_periodo_fin USING "dd-mm-yy"
 LET r_b13.b13_valor_base  = 0
 LET r_b13.b13_valor_aux   = 0
 CASE tipo

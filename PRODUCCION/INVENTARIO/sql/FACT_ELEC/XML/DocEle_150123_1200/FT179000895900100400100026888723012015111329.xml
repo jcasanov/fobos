@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268887</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268887</guiaRemision>
+<razonSocialComprador>HIDROSISTEMAS ECUADOR CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1790102076001</identificacionComprador>
+<totalSinImpuestos>5599.30</totalSinImpuestos>
+<totalDescuento>2360.56</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>5599.30</baseImponible>
+<valor>671.92</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>6271.22</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>100604</codigoPrincipal>
+<descripcion>BOMBA CENTRIF MULTIETAPA C-MOTOR FMG DE 10 HP 220/380/440/60C/3F.IP55 2" X 1.1/2" 3ETP. 139mm.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1775.06</precioUnitario>
+<descuento>1065.04</descuento>
+<precioTotalSinImpuesto>2485.08</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FAMAC"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2485.08</baseImponible>
+<valor>298.21</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103276</codigoPrincipal>
+<descripcion>BOMBA CENTRIF MULTIETAPA C-MOTOR FMG 2320 20 HP 230/460/60/3F. 3ETAPAS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2805.90</precioUnitario>
+<descuento>841.77</descuento>
+<precioTotalSinImpuesto>1964.13</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FAMAC"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1964.13</baseImponible>
+<valor>235.70</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>94708</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 4" 90FA5S4-PE P/ 5HP 90 GPM (93619012) 12 ETAPAS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>623.01</precioUnitario>
+<descuento>186.90</descuento>
+<precioTotalSinImpuesto>436.11</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>436.11</baseImponible>
+<valor>52.33</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96074</codigoPrincipal>
+<descripcion>MOTOR ELEC SUMERG DE 4" (2343178602) 4C3F DE 5HP 230-3-60</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>843.84</precioUnitario>
+<descuento>253.15</descuento>
+<precioTotalSinImpuesto>590.69</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>590.69</baseImponible>
+<valor>70.88</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98553</codigoPrincipal>
+<descripcion>BOMBA CENTRIF STANDARD C-MOTOR BP-7 PERIFERICA DE 3/4 HP 115V/60C/1F. (201T0750)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>136.99</precioUnitario>
+<descuento>13.70</descuento>
+<precioTotalSinImpuesto>123.29</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>123.29</baseImponible>
+<valor>14.79</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">hidrosistemasec@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2444067/24</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">003383</campoAdicional>
+</infoAdicional>
+</factura>

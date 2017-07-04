@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268471</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>14/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268471</guiaRemision>
+<razonSocialComprador>AZULEC S.A</razonSocialComprador>
+<identificacionComprador>1791957253001</identificacionComprador>
+<totalSinImpuestos>6318.00</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>6318.00</baseImponible>
+<valor>758.16</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>7076.16</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>704</codigoPrincipal>
+<descripcion>TOL AL CALOR DE 18mm. 1.22 x 2.44 m (421.02 KG.)</descripcion>
+<cantidad>18.00</cantidad>
+<precioUnitario>351.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>6318.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6318.00</baseImponible>
+<valor>758.16</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacion@azul.com.ec</campoAdicional>
+<campoAdicional nombre="Email">diego.chalco@azul.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2977600</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">036359</campoAdicional>
+<campoAdicional nombre="Observaciones">ORDEN DE COMPRA N.-258835</campoAdicional>
+</infoAdicional>
+</factura>

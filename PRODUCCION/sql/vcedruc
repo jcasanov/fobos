@@ -1,0 +1,9 @@
+export ruta1=$PWD
+export ruta2=VENTAS$1
+cd $ruta2
+for i in upcliente*.txt
+do
+	export parametros=$parametros$i
+done
+cd $ruta1
+fglgo verced $parametros > clientes$1.txt

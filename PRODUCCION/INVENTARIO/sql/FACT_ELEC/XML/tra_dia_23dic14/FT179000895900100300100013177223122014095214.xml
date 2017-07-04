@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131772</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>07</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131772</guiaRemision>
+<razonSocialComprador>CONSUMIDOR FINAL</razonSocialComprador>
+<identificacionComprador>9999999999999</identificacionComprador>
+<totalSinImpuestos>63.15</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>63.15</baseImponible>
+<valor>7.58</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>70.73</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>361</codigoPrincipal>
+<descripcion>HIERRO CUADRADO x 6 MTS. DE 11mm.</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>8.12</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>24.36</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>24.36</baseImponible>
+<valor>2.92</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>48</codigoPrincipal>
+<descripcion>ANGULO LAMINADO x 6 MTS. DE 20mm. x 3mm.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>7.44</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>7.44</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7.44</baseImponible>
+<valor>0.89</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5494</codigoPrincipal>
+<descripcion>TUBO GALV. S-UNION ISO II TIPO "T" DE 3/4" x 6 m. ESPESOR 2.3 mm.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>19.50</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>19.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>19.50</baseImponible>
+<valor>2.34</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>560</codigoPrincipal>
+<descripcion>HIERRO REDONDO LISO x 6 MTS. DE 15mm.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>11.85</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>11.85</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>11.85</baseImponible>
+<valor>1.42</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">1790008959001@innobeefactura.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">9999999</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">030739</campoAdicional>
+</infoAdicional>
+</factura>

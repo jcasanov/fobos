@@ -1,0 +1,41 @@
+database acero_gm
+screen size 24 by 80
+{
+n00_serial         [f000       ]
+n00_moneda_pago    [a0]
+n00_dias_mes       [f001  ]
+n00_dias_semana    [f002  ]
+n00_horas_dia      [f003  ]
+n00_salario_min    [f004       ]
+n00_seguro_event   [a]
+n00_uti_trabaj     [f005  ]
+n00_uti_cargas     [f006  ]
+n00_dias_vacac     [f007  ]
+n00_ano_adi_vac    [f008  ]
+n00_dias_adi_va    [f009  ]
+n00_max_vacac      [f010  ]
+n00_max_vac_acum   [f011  ]
+n00_usuario        [f012      ]
+n00_fecing         [f013               ]
+}
+end
+tables
+rolt000
+attributes
+f000 = rolt000.n00_serial;
+a0 = rolt000.n00_moneda_pago;
+f001 = rolt000.n00_dias_mes;
+f002 = rolt000.n00_dias_semana;
+f003 = rolt000.n00_horas_dia;
+f004 = rolt000.n00_salario_min;
+a = rolt000.n00_seguro_event;
+f005 = rolt000.n00_uti_trabaj;
+f006 = rolt000.n00_uti_cargas;
+f007 = rolt000.n00_dias_vacac;
+f008 = rolt000.n00_ano_adi_vac;
+f009 = rolt000.n00_dias_adi_va;
+f010 = rolt000.n00_max_vacac;
+f011 = rolt000.n00_max_vac_acum;
+f012 = rolt000.n00_usuario;
+f013 = rolt000.n00_fecing;
+end

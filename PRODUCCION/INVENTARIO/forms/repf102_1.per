@@ -1,0 +1,41 @@
+DATABASE aceros
+SCREEN size 24 by 80
+{
+
+
+    Código Bodega: [f0]                              Estado: [a][a1        ]
+           Nombre: [f002                          ] 
+
+        Localidad: [a2 ] [a22                     ]    Tipo: [b              ]
+          Factura: [f]			            
+
+
+    Ingresado Por: [f005      ]                        Area: [f003         ]
+ Fecha de Ingreso: [f006               ]
+
+}
+end
+TABLES
+rept002
+ATTRIBUTES
+f0   = rept002.r02_codigo, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f002 = rept002.r02_nombre, REVERSE, UPSHIFT;
+a2   = rept002.r02_localidad, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+a22  = FORMONLY.nom_loc TYPE VARCHAR, NOENTRY;
+a    = rept002.r02_estado, REVERSE, UPSHIFT, NOENTRY,
+	COMMENTS = 'A ACTIVA  B BLOQUEADA';
+a1   = FORMONLY.tit_estado TYPE VARCHAR, NOENTRY;
+b    = rept002.r02_tipo, REVERSE, AUTONEXT, DEFAULT = 'F',
+	WIDGET = 'RADIO', CONFIG = 'F Física L Lógica S "Sin Stock"',
+	 COMMENTS = 'F Física  L Lógica  S Sin Stock';
+f003 = rept002.r02_area, REVERSE, AUTONEXT, DEFAULT = 'R',
+	 WIDGET = 'RADIO', CONFIG = 'R Inventario T Talleres',
+	 COMMENT = 'Seleccione el area a la que pertenece la bodega';
+f    = rept002.r02_factura, REVERSE, DEFAULT = 'N',
+	WIDGET = 'CHECK', CONFIG = 'S N acknowedge', 
+	 COMMENT = '¿ Esta bodega factura ?';
+f005 = rept002.r02_usuario, REVERSE, NOENTRY;
+f006 = rept002.r02_fecing, REVERSE, NOENTRY;
+end

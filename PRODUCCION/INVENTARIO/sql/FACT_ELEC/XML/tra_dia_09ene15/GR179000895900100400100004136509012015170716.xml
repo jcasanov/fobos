@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000041365</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<dirPartida>AV. LA PRENSA N-4514</dirPartida>
+<razonSocialTransportista>SR FERNANDO  VACA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>09/01/2015</fechaIniTransporte>
+<fechaFinTransporte>10/01/2015</fechaFinTransporte>
+<placa>PAA-001</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1790105083001</identificacionDestinatario>
+<razonSocialDestinatario>ASOCIACION CULTURAL ACADEMIA COTOPAXI</razonSocialDestinatario>
+<dirDestinatario>NUESTRAS BODEGAS</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>17/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>2063</codigoInterno>
+<descripcion>CODO GALV. CLASE 150 90° DE 1-1/2"</descripcion>
+<cantidad>44.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>6327</codigoInterno>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 1-1/2"</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>93287</codigoInterno>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 2-1/2"</descripcion>
+<cantidad>6.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacionelectronica@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">022467411</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">005372</campoAdicional>
+</infoAdicional>
+</guiaRemision>

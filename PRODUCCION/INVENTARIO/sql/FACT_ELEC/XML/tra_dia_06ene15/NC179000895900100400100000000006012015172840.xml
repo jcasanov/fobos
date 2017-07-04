@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025151</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>06/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>GANCHOZO FAUBLA SIXTO VINICIO</razonSocialComprador>
+<identificacionComprador>1715531917001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000025151</numDocModificado>
+<fechaEmisionDocSustento>15/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>158.91</totalSinImpuestos>
+<valorModificacion>177.98</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>158.91</baseImponible>
+<valor>19.07</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>POR DEVOLUCION O.T. # 7942</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>102936</codigoInterno>
+<descripcion>CARBONES 14-46-2012 P/TALADRO 2602-20</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>10.14</precioUnitario>
+<descuento>1.52</descuento>
+<precioTotalSinImpuesto>8.62</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.62</baseImponible>
+<valor>1.03</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>98970</codigoInterno>
+<descripcion>SWITCH 23-66-1096 TALADRO MOD. 2601-22</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>43.34</precioUnitario>
+<descuento>19.50</descuento>
+<precioTotalSinImpuesto>110.52</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>110.52</baseImponible>
+<valor>13.26</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>101677</codigoInterno>
+<descripcion>CABLE DE CORRIENTE 22-64-0216 P/ROTOMARTILLO 5375-20</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>12.73</precioUnitario>
+<descuento>1.91</descuento>
+<precioTotalSinImpuesto>10.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>10.82</baseImponible>
+<valor>1.30</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>96538</codigoInterno>
+<descripcion>CARBONES 22-22-1560 P/MOD.6122-30</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>3.52</precioUnitario>
+<descuento>2.11</descuento>
+<precioTotalSinImpuesto>11.97</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>11.97</baseImponible>
+<valor>1.44</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>93914</codigoInterno>
+<descripcion>CARBONES 22-18-0730 P/AMOLADORA 6066-6</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>8.13</precioUnitario>
+<descuento>2.44</descuento>
+<precioTotalSinImpuesto>13.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>13.82</baseImponible>
+<valor>1.66</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>150419</codigoInterno>
+<descripcion>RULIMAN 02-04-0913 P/ AMOLADORA 6066-6</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3.72</precioUnitario>
+<descuento>0.56</descuento>
+<precioTotalSinImpuesto>3.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.16</baseImponible>
+<valor>0.38</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">six_ganchozo@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">098091413</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">62074</campoAdicional>
+</infoAdicional>
+</notaCredito>

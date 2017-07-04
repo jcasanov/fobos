@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000007869</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000007869</guiaRemision>
+<razonSocialComprador>SOCIEDAD PORCINA LOS ANGELES</razonSocialComprador>
+<identificacionComprador>1791833058001</identificacionComprador>
+<totalSinImpuestos>2014.83</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>2014.83</baseImponible>
+<valor>241.78</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>2256.61</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>2</codigoPrincipal>
+<descripcion>***TAPA DE POZO***</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>780.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>780.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="DS-8"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>780.00</baseImponible>
+<valor>93.60</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2</codigoPrincipal>
+<descripcion>SERVICIO INSTALACION BOMBA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1200.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1200.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="DS-8"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1200.00</baseImponible>
+<valor>144.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>SERVICIO1</codigoPrincipal>
+<descripcion>ALQUILER ANDAMIOS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>34.83</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>34.83</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="DS-8"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>34.83</baseImponible>
+<valor>4.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">mledesma@punto.net.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">099481550</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">036973</campoAdicional>
+</infoAdicional>
+</factura>

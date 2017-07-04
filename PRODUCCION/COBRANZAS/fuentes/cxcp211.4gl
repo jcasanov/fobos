@@ -21,8 +21,8 @@ DEFINE rm_par 		RECORD
 				z20_moneda	LIKE cxct020.z20_moneda,
 				g13_nombre	LIKE gent013.g13_nombre,
 				z20_paridad	LIKE cxct020.z20_paridad,
-				z24_cobrador	LIKE cxct024.z24_cobrador,
-				z05_nombres	LIKE cxct005.z05_nombres
+				z24_zona_cobro	LIKE cxct024.z24_zona_cobro,
+				z06_nombre	LIKE cxct006.z06_nombre
 			END RECORD
 DEFINE rm_detalle	ARRAY[20000] OF RECORD
 				z20_localidad	LIKE cxct020.z20_localidad,
@@ -276,7 +276,8 @@ END FUNCTION
 
 FUNCTION lee_parametros()
 DEFINE r_z01		RECORD LIKE cxct001.*
-DEFINE r_z05		RECORD LIKE cxct005.*
+DEFINE r_z02		RECORD LIKE cxct002.*
+DEFINE r_z06		RECORD LIKE cxct006.*
 DEFINE r_g03		RECORD LIKE gent003.*
 DEFINE r_g20		RECORD LIKE gent020.*
 
@@ -298,6 +299,18 @@ INPUT BY NAME rm_par.*
 				LET rm_par.z01_nomcli = r_z01.z01_nomcli
 				DISPLAY BY NAME rm_par.z20_codcli,
 						rm_par.z01_nomcli
+				IF rm_par.tipo_venta <> 'C' THEN
+					CONTINUE INPUT
+				END IF
+				CALL fl_lee_cliente_localidad(vg_codcia,
+							vg_codloc,
+							rm_par.z20_codcli)
+			 		RETURNING r_z02.*
+				LET rm_par.z24_zona_cobro = r_z02.z02_zona_cobro
+				CALL fl_lee_zona_cobro(rm_par.z24_zona_cobro)
+					RETURNING r_z06.*
+				DISPLAY BY NAME rm_par.z24_zona_cobro,
+						r_z06.z06_nombre
 			END IF
 		END IF
 		IF INFIELD(z20_areaneg) THEN
@@ -336,23 +349,46 @@ INPUT BY NAME rm_par.*
 						rm_par.g03_nombre
 			END IF
 		END IF
-		IF INFIELD(z24_cobrador) THEN
+		IF INFIELD(z24_zona_cobro) THEN
 			IF rm_par.tipo_venta = 'C' THEN
 				CONTINUE INPUT
 			END IF
-			CALL fl_ayuda_cobradores(vg_codcia, 'T', 'T', 'A')
-				RETURNING r_z05.z05_codigo, r_z05.z05_nombres
-			IF r_z05.z05_codigo IS NOT NULL THEN
-				LET rm_par.z24_cobrador = r_z05.z05_codigo
-				LET rm_par.Z05_nombres  = r_z05.Z05_nombres
-				DISPLAY BY NAME rm_par.z24_cobrador,
-						rm_par.Z05_nombres
+			IF r_z02.z02_zona_cobro IS NOT NULL THEN
+				CONTINUE INPUT
+			END IF
+			CALL fl_ayuda_zona_cobro('T', 'A')
+				RETURNING r_z06.z06_zona_cobro, r_z06.z06_nombre
+			IF r_z06.z06_zona_cobro IS NOT NULL THEN
+				LET rm_par.z24_zona_cobro = r_z06.z06_zona_cobro
+				LET rm_par.z06_nombre     = r_z06.z06_nombre
+				DISPLAY BY NAME rm_par.z24_zona_cobro,
+						rm_par.z06_nombre
 			END IF
 		END IF
 		LET int_flag = 0
 	BEFORE INPUT
 		--#CALL dialog.keysetlabel("F1","")
 		--#CALL dialog.keysetlabel("CONTROL-W","")
+	BEFORE FIELD z24_zona_cobro
+		IF rm_par.tipo_venta = 'C' THEN
+			LET rm_par.z24_zona_cobro = NULL
+			LET rm_par.z06_nombre     = NULL
+			DISPLAY BY NAME rm_par.z24_zona_cobro, rm_par.z06_nombre
+			CONTINUE INPUT
+		END IF
+		CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc,
+						rm_par.z20_codcli)
+			RETURNING r_z02.*
+		IF r_z02.z02_zona_cobro IS NOT NULL THEN
+			--IF rm_par.z24_zona_cobro <> r_z02.z02_zona_cobro THEN
+				LET rm_par.z24_zona_cobro = r_z02.z02_zona_cobro
+				CALL fl_lee_zona_cobro(rm_par.z24_zona_cobro)
+					RETURNING r_z06.*
+				DISPLAY BY NAME rm_par.z24_zona_cobro,
+						r_z06.z06_nombre
+				CONTINUE INPUT
+			--END IF
+		END IF
 	AFTER FIELD z20_codcli
 		IF rm_par.z20_codcli IS NOT NULL THEN
 			CALL fl_lee_cliente_general(rm_par.z20_codcli)
@@ -373,6 +409,16 @@ INPUT BY NAME rm_par.*
 			--}
 			LET rm_par.z01_nomcli = r_z01.z01_nomcli
 			DISPLAY BY NAME rm_par.z01_nomcli
+			IF rm_par.tipo_venta <> 'C' THEN
+				CONTINUE INPUT
+			END IF
+			CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc,
+							rm_par.z20_codcli)
+		 		RETURNING r_z02.*
+			LET rm_par.z24_zona_cobro = r_z02.z02_zona_cobro
+			CALL fl_lee_zona_cobro(rm_par.z24_zona_cobro)
+				RETURNING r_z06.*
+			DISPLAY BY NAME rm_par.z24_zona_cobro, r_z06.z06_nombre
 		ELSE
 			LET rm_par.z01_nomcli = NULL
 			CLEAR z01_nomcli
@@ -428,42 +474,53 @@ INPUT BY NAME rm_par.*
 		LET rm_par.g03_nombre = r_g03.g03_nombre
 		DISPLAY BY NAME rm_par.z20_areaneg, rm_par.g03_nombre,
 				rm_par.g20_nombre
-	AFTER FIELD z24_cobrador
-		IF rm_par.z24_cobrador IS NULL THEN
-			LET rm_par.Z05_nombres  = NULL
-			DISPLAY BY NAME rm_par.Z05_nombres
-			CONTINUE INPUT
-		END IF
+	AFTER FIELD z24_zona_cobro
 		IF rm_par.tipo_venta = 'C' THEN
-			LET rm_par.z24_cobrador = NULL
-			LET rm_par.Z05_nombres  = NULL
-			DISPLAY BY NAME rm_par.z24_cobrador, rm_par.Z05_nombres
+			LET rm_par.z24_zona_cobro = NULL
+			LET rm_par.z06_nombre     = NULL
+			DISPLAY BY NAME rm_par.z24_zona_cobro, rm_par.z06_nombre
 			CONTINUE INPUT
 		END IF
-		CALL fl_lee_cobrador_cxc(vg_codcia, rm_par.z24_cobrador)
-			RETURNING r_z05.*
-		IF r_z05.z05_codigo IS NULL THEN
-			CALL fl_mostrar_mensaje('Cobrador no existe.', 'exclamation')
-			NEXT FIELD z24_cobrador
+		IF rm_par.z24_zona_cobro IS NULL OR
+		   rm_par.z24_zona_cobro <> r_z02.z02_zona_cobro
+		THEN
+			LET rm_par.z24_zona_cobro = r_z02.z02_zona_cobro
+			CALL fl_lee_zona_cobro(rm_par.z24_zona_cobro)
+				RETURNING r_z06.*
+			LET rm_par.z06_nombre = r_z06.z06_nombre
+			DISPLAY BY NAME rm_par.z24_zona_cobro, r_z06.z06_nombre
+			CONTINUE INPUT
 		END IF
-		IF r_z05.z05_estado = 'B' THEN
+		CALL fl_lee_zona_cobro(rm_par.z24_zona_cobro)
+			RETURNING r_z06.*
+		IF r_z06.z06_zona_cobro IS NULL THEN
+			CALL fl_mostrar_mensaje('Zona de Cobro no existe.', 'exclamation')
+			NEXT FIELD z24_zona_cobro
+		END IF
+		IF r_z06.z06_estado = 'B' THEN
 			CALL fl_mensaje_estado_bloqueado()
-			NEXT FIELD z24_cobrador
+			NEXT FIELD z24_zona_cobro
 		END IF
-		LET rm_par.Z05_nombres = r_z05.Z05_nombres
-		DISPLAY BY NAME rm_par.Z05_nombres
+		LET rm_par.z06_nombre = r_z06.z06_nombre
+		DISPLAY BY NAME rm_par.z06_nombre
 	AFTER INPUT
-		IF rm_par.z24_cobrador IS NULL THEN
+		IF rm_par.z24_zona_cobro IS NULL THEN
 			IF rm_par.tipo_venta = 'C' THEN
-				LET rm_par.z24_cobrador = NULL
-				LET rm_par.Z05_nombres  = NULL
-				DISPLAY BY NAME rm_par.z24_cobrador,
-						rm_par.Z05_nombres
+				LET rm_par.z24_zona_cobro = NULL
+				LET rm_par.z06_nombre     = NULL
+				DISPLAY BY NAME rm_par.z24_zona_cobro,
+						rm_par.z06_nombre
 			ELSE
-				CALL fl_mostrar_mensaje('Digite el Cobrador.', 'exclamation')
-				NEXT FIELD z24_cobrador
+				CALL fl_mostrar_mensaje('Digite la Zona de Cobro.', 'exclamation')
+				CONTINUE INPUT
 			END IF
 		END IF
+		CALL fl_lee_zona_cobro(rm_par.z24_zona_cobro) RETURNING r_z06.*
+		IF r_z06.z06_estado = 'B' THEN
+			CALL fl_mostrar_mensaje('La Zona de Cobro esta con estado BLOQUEADO.', 'exclamation')
+			NEXT FIELD z24_zona_cobro
+		END IF
+		LET rm_par.z06_nombre = r_z06.z06_nombre
 END INPUT
 IF rm_par.tipo_venta IS NULL THEN
 	LET rm_par.tipo_venta = 'T'
@@ -1267,14 +1324,29 @@ DEFINE cod_tr		LIKE cajt010.j10_tipo_destino
 DEFINE num_tr		LIKE cajt010.j10_num_destino
 DEFINE num_s		LIKE rept038.r38_num_sri
 DEFINE tip_d		LIKE rept038.r38_tipo_doc
+DEFINE cod_pag		LIKE cajt091.j91_codigo_pago
 DEFINE query		CHAR(8000)
 DEFINE expr_sql		VARCHAR(100)
 DEFINE expr_tip		VARCHAR(150)
-DEFINE l, lim		INTEGER
+DEFINE expr_par		VARCHAR(200)
+DEFINE l, lim, ctos	INTEGER
 
 CALL retorna_num_fue(i) RETURNING num_f
 CALL retorna_ret_fac(i) RETURNING tipo_f, cod_tr, num_tr, num_s
 IF registros_retenciones(numero_ret, i) = 0 THEN
+	LET cod_pag  = "RT"
+	LET expr_par = '   AND z08_defecto        = "S" '
+	SELECT COUNT(*)
+		INTO ctos
+		FROM gent010
+		WHERE g10_compania = vg_codcia
+		  AND g10_codcobr  = rm_par.z20_codcli
+		  AND g10_estado   = "A"
+	IF ctos > 0 THEN
+		LET cod_pag  = "RJ"
+		LET expr_par = '   AND z08_defecto        = "N" ',
+				'   AND z08_flete          = "N" '
+	END IF
 	CASE tipo_f
 		WHEN "PR" LET tipo_fue = 'B'
 		WHEN "OT" LET tipo_fue = 'S'
@@ -1299,7 +1371,8 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 				'  AND t23_localidad = ', vg_codloc,
 				'  AND t23_orden     = ', num_f, ') > 0) OR ',
 				' ("', tipo_f, '" = "OT" AND ',
-					'c03_tipo_fuente = "T") ',
+					'c03_tipo_fuente = "T") OR "RJ" = "',
+						cod_pag CLIPPED, '"',
 				'THEN z08_tipo_ret ',
 			' END, ',
 			' CASE WHEN ("', tipo_f, '" = "PR" AND ',
@@ -1319,12 +1392,14 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 				'  AND t23_localidad = ', vg_codloc,
 				'  AND t23_orden     = ', num_f, ') > 0) OR ',
 				' ("', tipo_f, '" = "OT" AND ',
-					'c03_tipo_fuente = "T") ',
+					'c03_tipo_fuente = "T") OR "RJ" = "',
+						cod_pag CLIPPED, '"',
 				'THEN z08_porcentaje ',
 			' END, ',
 			' z08_codigo_sri, c03_concepto_ret, ',
 			' CASE WHEN "', tipo_f, '" = "PR" AND ',
-					'c03_tipo_fuente = "B" THEN',
+					'c03_tipo_fuente = "B" OR "RJ" = "',
+						cod_pag CLIPPED, '" THEN',
 			' (SELECT r23_tot_bruto - r23_tot_dscto ',
 				'FROM ', retorna_base_loc() CLIPPED, 'rept023 ',
 				'WHERE r23_compania  = z08_compania ',
@@ -1338,7 +1413,7 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 				'WHERE t23_compania  = z08_compania ',
 				'  AND t23_localidad = ', vg_codloc,
 				'  AND t23_orden     = ', num_f, ') > 0 ',
-				'THEN',
+				'OR "RJ" = "', cod_pag CLIPPED, '" THEN',
 			' (SELECT t23_val_mo_cti ',
 				'FROM talt023 ',
 				'WHERE t23_compania  = z08_compania ',
@@ -1352,7 +1427,7 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 				'WHERE t23_compania  = z08_compania ',
 				'  AND t23_localidad = ', vg_codloc,
 				'  AND t23_orden     = ', num_f, ') > 0 ',
-				'THEN',
+				'OR "RJ" = "', cod_pag CLIPPED, '" THEN',
 			' (SELECT t23_val_mo_tal - t23_vde_mo_tal ',
 				'FROM talt023 ',
 				'WHERE t23_compania  = z08_compania ',
@@ -1360,7 +1435,8 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 				'  AND t23_orden     = ', num_f,
 				')',
 			'      WHEN "', tipo_f, '" = "OT" AND ',
-					'c03_tipo_fuente = "T" THEN ',
+					'c03_tipo_fuente = "T" ',
+				'OR "RJ" = "', cod_pag CLIPPED, '" THEN',
 			' (SELECT t23_tot_bruto - t23_vde_mo_tal ',
 				'FROM talt023 ',
 				'WHERE t23_compania  = z08_compania ',
@@ -1370,7 +1446,8 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 			--' ELSE 0 ',
 			' END, ',
 			' CASE WHEN "', tipo_f, '" = "PR" AND ',
-					'c03_tipo_fuente = "B" THEN',
+					'c03_tipo_fuente = "B" ',
+				'OR "RJ" = "', cod_pag CLIPPED, '" THEN',
 			' (SELECT r23_tot_bruto - r23_tot_dscto ',
 				'FROM ', retorna_base_loc() CLIPPED, 'rept023 ',
 				'WHERE r23_compania  = z08_compania ',
@@ -1384,7 +1461,7 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 				'WHERE t23_compania  = z08_compania ',
 				'  AND t23_localidad = ', vg_codloc,
 				'  AND t23_orden     = ', num_f, ') > 0 ',
-				'THEN',
+				'OR "RJ" = "', cod_pag CLIPPED, '" THEN',
 			' (SELECT t23_val_mo_cti ',
 				'FROM talt023 ',
 				'WHERE t23_compania  = z08_compania ',
@@ -1398,7 +1475,7 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 				'WHERE t23_compania  = z08_compania ',
 				'  AND t23_localidad = ', vg_codloc,
 				'  AND t23_orden     = ', num_f, ') > 0 ',
-				'THEN',
+				'OR "RJ" = "', cod_pag CLIPPED, '" THEN',
 			' (SELECT t23_val_mo_tal - t23_vde_mo_tal ',
 				'FROM talt023 ',
 				'WHERE t23_compania  = z08_compania ',
@@ -1406,7 +1483,8 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 				'  AND t23_orden     = ', num_f,
 				')',
 			'      WHEN "', tipo_f, '" = "OT" AND ',
-					'c03_tipo_fuente = "T" THEN ',
+					'c03_tipo_fuente = "T" ',
+				'OR "RJ" = "', cod_pag CLIPPED, '" THEN',
 			' (SELECT t23_tot_bruto - t23_vde_mo_tal ',
 				'FROM talt023 ',
 				'WHERE t23_compania  = z08_compania ',
@@ -1421,7 +1499,7 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 			' FROM cxct008, ordt003, ordt002, cajt091 ',
 			' WHERE z08_compania       = ', vg_codcia,
 			'   AND z08_codcli         = ', rm_par.z20_codcli,
-			'   AND z08_defecto        = "S" ',
+			expr_par CLIPPED,
 			'   AND c03_compania       = z08_compania ',
 			'   AND c03_tipo_ret       = z08_tipo_ret ',
 			'   AND c03_porcentaje     = z08_porcentaje ',
@@ -1433,7 +1511,7 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 			'   AND c02_porcentaje     = c03_porcentaje ',
 			'   AND c02_estado         = "A" ',
 			'   AND j91_compania       = c02_compania ',
-			'   AND j91_codigo_pago    = "RT" ',
+			'   AND j91_codigo_pago    = "', cod_pag CLIPPED, '"',
 			'   AND j91_cont_cred      = "R" ',
 			'   AND j91_tipo_ret       = c02_tipo_ret ',
 			'   AND j91_porcentaje     = c02_porcentaje ',
@@ -1478,7 +1556,7 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 			'   AND c02_porcentaje     = c03_porcentaje ',
 			'   AND c02_estado         = "A" ',
 			'   AND j91_compania       = c02_compania ',
-			'   AND j91_codigo_pago    = "RT" ',
+			'   AND j91_codigo_pago    = "', cod_pag CLIPPED, '"',
 			'   AND j91_cont_cred      = "R" ',
 			'   AND j91_tipo_ret       = c02_tipo_ret ',
 			'   AND j91_porcentaje     = c02_porcentaje ',
@@ -1546,7 +1624,7 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 			'   AND c02_estado         = "A" ',
 			'   AND c02_tipo_fuente    = "', tipo_fue, '"',
 			'   AND j91_compania       = c02_compania ',
-			'   AND j91_codigo_pago    = "RT" ',
+			'   AND j91_codigo_pago    = "', cod_pag CLIPPED, '"',
 			'   AND j91_cont_cred      = "R" ',
 			'   AND j91_tipo_ret       = c02_tipo_ret ',
 			'   AND j91_porcentaje     = c02_porcentaje '
@@ -1720,10 +1798,12 @@ INPUT BY NAME rm_j14.j14_num_ret_sri, rm_j14.j14_autorizacion,
 			CALL fl_mostrar_mensaje('El numero de la autorizacion ingresado es incorrecto.', 'exclamation')
 			NEXT FIELD j14_autorizacion
 		END IF
+		{-- OJO
 		IF rm_j14.j14_autorizacion[1, 1] <> '1' THEN
 			CALL fl_mostrar_mensaje('Numero de Autorizacion es incorrecto.', 'exclamation')
 			NEXT FIELD j14_autorizacion
 		END IF
+		--}
 		IF NOT fl_valida_numeros(rm_j14.j14_autorizacion) THEN
 			NEXT FIELD j14_autorizacion
 		END IF
@@ -2823,6 +2903,7 @@ BEGIN WORK
 				RETURN 0
 			END IF
 			--IF vg_codloc < 3 OR vg_codloc > 5 THEN
+			--IF vg_codloc <> 2 AND vg_codloc <> 4 THEN
 				CALL generar_egreso_efectivo_caja(r_ret_p.num_ret_s)
 					RETURNING resul, r_j10.*
 				IF NOT resul THEN
@@ -2934,6 +3015,9 @@ END IF
 IF NOT actualiza_caja(r_z24.*) THEN
 	RETURN 0
 END IF
+IF NOT actualiza_zona_cobr_z02(r_z24.*) THEN
+	RETURN 0
+END IF
 LET vm_num_sol = r_z24.z24_numero_sol
 RETURN 1
 
@@ -3022,7 +3106,10 @@ ELSE
 END IF
 LET r_z24.z24_total_int  = 0
 LET r_z24.z24_total_mora = 0
-LET r_z24.z24_cobrador   = rm_par.z24_cobrador
+LET r_z24.z24_zona_cobro = rm_par.z24_zona_cobro
+IF rm_par.tipo_venta = 'C' THEN
+	LET r_z24.z24_zona_cobro = NULL
+END IF
 LET r_z24.z24_subtipo    = 1
 LET r_z24.z24_usuario    = vg_usuario
 LET r_z24.z24_fecing     = CURRENT
@@ -3210,6 +3297,51 @@ ELSE
 END IF
 CLOSE q_j10
 FREE q_j10
+RETURN done
+
+END FUNCTION
+
+
+
+FUNCTION actualiza_zona_cobr_z02(r_z24)
+DEFINE r_z24		RECORD LIKE cxct024.*
+DEFINE intentar		SMALLINT
+DEFINE done    		SMALLINT
+DEFINE r_z02		RECORD LIKE cxct002.*
+
+LET intentar = 1
+LET done = 0
+CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc, r_z24.z24_codcli)
+	RETURNING r_z02.*
+IF r_z02.z02_zona_cobro IS NOT NULL THEN
+	RETURN 1
+END IF
+WHILE (intentar)
+	WHENEVER ERROR CONTINUE
+		DECLARE q_z02 CURSOR FOR
+			SELECT * FROM cxct002
+				WHERE z02_compania  = vg_codcia
+				  AND z02_localidad = vg_codloc
+				  AND z02_codcli    = r_z02.z02_codcli
+			FOR UPDATE
+	WHENEVER ERROR STOP
+	IF STATUS < 0 THEN
+		LET intentar = mensaje_intentar()
+	ELSE
+		LET intentar = 0
+		LET done = 1
+	END IF
+END WHILE
+IF NOT intentar AND NOT done THEN
+	RETURN done
+END IF
+OPEN q_z02
+FETCH q_z02 INTO r_z02.*
+UPDATE cxct002
+	SET z02_zona_cobro = r_z24.z24_zona_cobro
+	WHERE CURRENT OF q_z02
+CLOSE q_z02
+FREE q_z02
 RETURN done
 
 END FUNCTION
@@ -3516,7 +3648,10 @@ LET r_z22.z22_tasa_mora  = 0
 LET r_z22.z22_total_cap  = r_z24.z24_total_cap
 LET r_z22.z22_total_int  = r_z24.z24_total_int
 LET r_z22.z22_total_mora = r_z24.z24_total_mora
-LET r_z22.z22_cobrador 	 = r_z24.z24_cobrador
+LET r_z22.z22_zona_cobro = r_z24.z24_zona_cobro
+IF rm_par.tipo_venta = 'C' THEN
+	LET r_z22.z22_zona_cobro = NULL
+END IF
 LET r_z22.z22_origen     = 'A'
 LET r_z22.z22_usuario    = vg_usuario
 LET r_z22.z22_fecing     = CURRENT + segundo UNITS SECOND

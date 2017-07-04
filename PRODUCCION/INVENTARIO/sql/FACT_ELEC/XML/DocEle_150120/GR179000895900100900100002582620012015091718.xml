@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025826</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>AV. JUAN TANCA MARENGO KM.1.7</dirPartida>
+<razonSocialTransportista>TITO GUTIERREZ (ACERO COMERCIAL .S.A)</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>0909985178</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>20/01/2015</fechaIniTransporte>
+<fechaFinTransporte>20/01/2015</fechaFinTransporte>
+<placa>  GSL.5009</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0923642136001</identificacionDestinatario>
+<razonSocialDestinatario>VELASQUEZ PAEZ ANDRES</razonSocialDestinatario>
+<dirDestinatario>KM.12 VIA A LA COSTA CDLA TERRANOSTRA URB.PERALBES SORL 1-2 (RES.PESANTE) REC. MAESTRO ORAALA TE.0994697812</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>15/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>70916</codigoInterno>
+<descripcion>INODORO RESIDENCIAL UNA PIEZA JSI04835130 STRATOS ELONGADO BLANCO ASTO.EROS INTEGRADO</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>70966</codigoInterno>
+<descripcion>GRIFERIA DE LAVABO 1-H E182/B1 CR ARIZONA CROMO MONOCOMANDO</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>70970</codigoInterno>
+<descripcion>LAVABO VESSEL DE SOBREPONER SS0056911301CW STYLO REGGIO BLANCO</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>71686</codigoInterno>
+<descripcion>INODORO RESIDENCIAL UNA PIEZA JSSI60891301CW JGO WC KINGSLEY ADVANCE BLANCO ALAR.AS.SLOW DOWN</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>99156</codigoInterno>
+<descripcion>GRIFERIA DE LAVABO 1-H E182/B3  FLOW CR</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">andresvelasquez1983@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2246050</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016032</campoAdicional>
+</infoAdicional>
+</guiaRemision>

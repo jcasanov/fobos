@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113729</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>08/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>07</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113729</guiaRemision>
+<razonSocialComprador>CONSUMIDOR FINAL</razonSocialComprador>
+<identificacionComprador>9999999999999</identificacionComprador>
+<totalSinImpuestos>77.18</totalSinImpuestos>
+<totalDescuento>1.16</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>77.18</baseImponible>
+<valor>9.26</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>86.44</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>286</codigoPrincipal>
+<descripcion>HIERRO CORRUGADO  4200 DE 8mm. x 12m</descripcion>
+<cantidad>9.00</cantidad>
+<precioUnitario>5.49</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>49.41</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDEC"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>49.41</baseImponible>
+<valor>5.93</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5460</codigoPrincipal>
+<descripcion>TUBO GALVANIZADO (POSTE) TIPO "T" DE 2" (50.8mm.) EXTERIOR 1.8mm. ESPESOR x 6 mts.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>28.93</precioUnitario>
+<descuento>1.16</descuento>
+<precioTotalSinImpuesto>27.77</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>27.77</baseImponible>
+<valor>3.33</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">consumidorfinal@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">9999999</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">030739</campoAdicional>
+</infoAdicional>
+</factura>

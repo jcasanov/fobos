@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000018749</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>SERVICIOS MISCELANEOS E GONZALEZ SEMEG CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1792229324001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000175460</numDocModificado>
+<fechaEmisionDocSustento>08/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>4039.80</totalSinImpuestos>
+<valorModificacion>4524.58</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>4039.80</baseImponible>
+<valor>484.78</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>POR REFACTURACION. MATERIAL YA ENTREGADO</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>112</codigoInterno>
+<descripcion>CANAL "U" x 6 MTS. DE 100 x 50 x 3mm.</descripcion>
+<cantidad>21.00</cantidad>
+<precioUnitario>26.72</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>561.12</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>561.12</baseImponible>
+<valor>67.33</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>112</codigoInterno>
+<descripcion>CANAL "U" x 6 MTS. DE 100 x 50 x 3mm.</descripcion>
+<cantidad>9.00</cantidad>
+<precioUnitario>26.72</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>240.48</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>240.48</baseImponible>
+<valor>28.86</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>68794</codigoInterno>
+<descripcion>SUPERTECHO - SPT - 1000 - AL DE 20 PIES 6m (ANCHO UTIL 1.05 m.) x 0.30mm</descripcion>
+<cantidad>80.00</cantidad>
+<precioUnitario>34.13</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2730.40</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ROOFTE"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2730.40</baseImponible>
+<valor>327.65</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>90285</codigoInterno>
+<descripcion>CABALLETE SUPERALUM (CUMBREROS) 3 m.. DE LONGITUD ALUMINIO</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>2.89</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>57.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ROOFTE"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>57.80</baseImponible>
+<valor>6.94</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>5362</codigoInterno>
+<descripcion>TUBO ESTRUCTURAL A-3724 TIPO "N" 50 x 50 x 3mm. ESPESOR</descripcion>
+<cantidad>15.00</cantidad>
+<precioUnitario>30.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>450.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>450.00</baseImponible>
+<valor>54.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3944530</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">50867</campoAdicional>
+</infoAdicional>
+</notaCredito>

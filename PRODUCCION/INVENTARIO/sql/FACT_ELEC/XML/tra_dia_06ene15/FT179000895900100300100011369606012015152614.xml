@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113696</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>06/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113696</guiaRemision>
+<razonSocialComprador>GUAMAN ZOILA AGRIPINA</razonSocialComprador>
+<identificacionComprador>1706971643001</identificacionComprador>
+<totalSinImpuestos>804.08</totalSinImpuestos>
+<totalDescuento>128.38</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>804.08</baseImponible>
+<valor>96.49</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>900.57</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>98735</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 AMAZONAS BLANCO PRIMERA</descripcion>
+<cantidad>16.00</cantidad>
+<precioUnitario>10.35</precioUnitario>
+<descuento>24.84</descuento>
+<precioTotalSinImpuesto>140.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>140.76</baseImponible>
+<valor>16.89</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101588</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 40 PORTOFINO MARFIL SEGUNDA</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>11.16</precioUnitario>
+<descuento>16.74</descuento>
+<precioTotalSinImpuesto>94.86</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>94.86</baseImponible>
+<valor>11.38</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100173</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 DIAGO BEIGE PRIMERA</descripcion>
+<cantidad>40.00</cantidad>
+<precioUnitario>11.28</precioUnitario>
+<descuento>67.68</descuento>
+<precioTotalSinImpuesto>383.52</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>383.52</baseImponible>
+<valor>46.02</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103058</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA YANUNCAY AZUL PRIMERA</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>7.66</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>76.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>76.60</baseImponible>
+<valor>9.19</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102835</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA TESSUTTO MOCCA  PRIMERA</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>9.19</precioUnitario>
+<descuento>5.51</descuento>
+<precioTotalSinImpuesto>31.25</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>31.25</baseImponible>
+<valor>3.75</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102136</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA SANTA ANA PRIMERA</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>9.07</precioUnitario>
+<descuento>13.61</descuento>
+<precioTotalSinImpuesto>77.09</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>77.09</baseImponible>
+<valor>9.25</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">decoracabados@hotmai.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2339357</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">055584</campoAdicional>
+</infoAdicional>
+</factura>

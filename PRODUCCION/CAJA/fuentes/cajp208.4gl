@@ -109,7 +109,8 @@ LET vm_otros_ing   = 'OI'
 LET vm_efectivo    = 'EF'
 LET vm_cheque      = 'CH'
 LET vm_ajuste      = 'AJ'
-LET vm_nota_debito = 'ND' 
+--LET vm_nota_debito = 'ND' 
+LET vm_nota_debito = 'DI' 
 
 CALL fl_retorna_caja(vg_codcia, vg_codloc, vg_usuario) RETURNING rm_j02.*
 IF rm_j02.j02_codigo_caja IS NULL THEN

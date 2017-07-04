@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268068</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>05/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268068</guiaRemision>
+<razonSocialComprador>CAICEDO PALACIOS LUIS FERNANDO</razonSocialComprador>
+<identificacionComprador>1801523331001</identificacionComprador>
+<totalSinImpuestos>375.48</totalSinImpuestos>
+<totalDescuento>42.63</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>375.48</baseImponible>
+<valor>45.06</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>420.54</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5995</codigoPrincipal>
+<descripcion>UNION GALV. CLASE 150 DE 1-1/2"</descripcion>
+<cantidad>17.00</cantidad>
+<precioUnitario>2.38</precioUnitario>
+<descuento>4.86</descuento>
+<precioTotalSinImpuesto>35.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>35.60</baseImponible>
+<valor>4.27</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>95185</codigoPrincipal>
+<descripcion>VALVULA CHEQUE VC-63 DE 2 1/2" DE BRONCE TIPO PESADO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>104.83</precioUnitario>
+<descuento>20.97</descuento>
+<precioTotalSinImpuesto>188.69</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HELBER"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>188.69</baseImponible>
+<valor>22.64</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>8798</codigoPrincipal>
+<descripcion>VALVULA COMPUERTA  BRONCE ROSCADA RW-206 DE 2-1/2" 125 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>167.99</precioUnitario>
+<descuento>16.80</descuento>
+<precioTotalSinImpuesto>151.19</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RED WH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>151.19</baseImponible>
+<valor>18.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jp80rodriguez@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0999259164</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">063500</campoAdicional>
+</infoAdicional>
+</factura>

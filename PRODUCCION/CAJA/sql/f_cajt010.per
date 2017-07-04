@@ -1,0 +1,61 @@
+database acero_gm
+screen size 24 by 80
+{
+j10_compania       [f000       ]
+j10_localidad      [f001  ]
+j10_tipo_fuente    [a0]
+j10_num_fuente     [f002       ]
+j10_areaneg        [f003  ]
+j10_estado         [a]
+j10_codcli         [f004       ]
+j10_nomcli         [f005                                              ]
+                   [f006                                              ]
+j10_moneda         [a1]
+j10_valor          [f007          ]
+j10_fecha_pro      [f008               ]
+j10_codigo_caja    [f009  ]
+j10_tipo_destino   [a2]
+j10_num_destino    [f010           ]
+j10_referencia     [f011                                    ]
+                   [f012                                    ]
+                   [f013                                    ]
+j10_banco          [f014       ]
+j10_numero_cta     [f015           ]
+}
+screen
+{
+j10_tip_contable   [a3]
+j10_num_contable   [f016    ]
+j10_usuario        [f017      ]
+j10_fecing         [f018               ]
+}
+end
+tables
+cajt010
+attributes
+f000 = cajt010.j10_compania;
+f001 = cajt010.j10_localidad;
+a0 = cajt010.j10_tipo_fuente;
+f002 = cajt010.j10_num_fuente;
+f003 = cajt010.j10_areaneg;
+a = cajt010.j10_estado;
+f004 = cajt010.j10_codcli;
+f005 = cajt010.j10_nomcli[1,50];
+f006 = cajt010.j10_nomcli[51,100];
+a1 = cajt010.j10_moneda;
+f007 = cajt010.j10_valor;
+f008 = cajt010.j10_fecha_pro;
+f009 = cajt010.j10_codigo_caja;
+a2 = cajt010.j10_tipo_destino;
+f010 = cajt010.j10_num_destino;
+f011 = cajt010.j10_referencia[1,40];
+f012 = cajt010.j10_referencia[41,80];
+f013 = cajt010.j10_referencia[81,120];
+f014 = cajt010.j10_banco;
+f015 = cajt010.j10_numero_cta;
+
+a3 = cajt010.j10_tip_contable;
+f016 = cajt010.j10_num_contable;
+f017 = cajt010.j10_usuario;
+f018 = cajt010.j10_fecing;
+end

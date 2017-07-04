@@ -1,0 +1,30 @@
+DATABASE aceros
+SCREEN
+{
+
+  PROVEEDORES GENERALES
+ ---------------------------------------------------
+  Código    Proveedor                             E
+ ---------------------------------------------------
+ [c001     |c002                                 |c] 
+ [c001     |c002                                 |c] 
+ [c001     |c002                                 |c] 
+ [c001     |c002                                 |c] 
+ [c001     |c002                                 |c] 
+ [c001     |c002                                 |c] 
+ [c001     |c002                                 |c] 
+ [c001     |c002                                 |c] 
+ [c001     |c002                                 |c] 
+ [c001     |c002                                 |c] 
+
+}
+TABLES
+cxpt001
+ATTRIBUTES
+c001 = p01_codprov, UPSHIFT, REVERSE;
+c002 = p01_nomprov, UPSHIFT, REVERSE;
+c    = p01_estado,  UPSHIFT, REVERSE, COMMENTS = '(A) ACTIVO  (B) BLOQUEADO';
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_provee[10] (p01_codprov, p01_nomprov, p01_estado)

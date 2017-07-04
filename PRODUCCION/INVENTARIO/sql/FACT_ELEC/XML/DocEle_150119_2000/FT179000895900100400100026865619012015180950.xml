@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268656</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268656</guiaRemision>
+<razonSocialComprador>CONSTRUCTORA ELECTRICA QUIMBIAMBA & QUIMBIAMBA COELEC CIA. LTDA</razonSocialComprador>
+<identificacionComprador>1791902025001</identificacionComprador>
+<totalSinImpuestos>1517.40</totalSinImpuestos>
+<totalDescuento>267.78</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1517.40</baseImponible>
+<valor>182.09</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1699.49</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>101161</codigoPrincipal>
+<descripcion>ROTOMARTILLO A BATERIA 2604-22 M-18 FUEL DE 1/2" 75 Lbs x Pulg.CUADRADA S/CARBONES</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>595.06</precioUnitario>
+<descuento>267.78</descuento>
+<precioTotalSinImpuesto>1517.40</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1517.40</baseImponible>
+<valor>182.09</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">coelec@andinanet.net</campoAdicional>
+<campoAdicional nombre="telefono-movil">3480179</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">040317</campoAdicional>
+</infoAdicional>
+</factura>

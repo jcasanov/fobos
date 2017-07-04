@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131866</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>30/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131866</guiaRemision>
+<razonSocialComprador>DISPROMAQ S.A</razonSocialComprador>
+<identificacionComprador>1791902092001</identificacionComprador>
+<totalSinImpuestos>12.62</totalSinImpuestos>
+<totalDescuento>1.32</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>12.62</baseImponible>
+<valor>1.51</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>14.13</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>3158</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1/2" x 2"</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>0.37</precioUnitario>
+<descuento>0.30</descuento>
+<precioTotalSinImpuesto>3.40</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.40</baseImponible>
+<valor>0.41</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4150</codigoPrincipal>
+<descripcion>TAPON GALV. MACHO CLASE 150 DE 1/2"</descripcion>
+<cantidad>8.00</cantidad>
+<precioUnitario>0.75</precioUnitario>
+<descuento>0.60</descuento>
+<precioTotalSinImpuesto>5.40</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.40</baseImponible>
+<valor>0.65</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4112</codigoPrincipal>
+<descripcion>TAPON GALV. HEMBRA CLASE 150 DE 1/2" REFORZADO</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>1.06</precioUnitario>
+<descuento>0.42</descuento>
+<precioTotalSinImpuesto>3.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.82</baseImponible>
+<valor>0.46</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">carlosmanuelproano@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0999813173</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">044589</campoAdicional>
+</infoAdicional>
+</factura>

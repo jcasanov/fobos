@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025801</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>TRANCEPER</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>16/01/2015</fechaIniTransporte>
+<fechaFinTransporte>17/01/2015</fechaFinTransporte>
+<placa>SIN PLACA</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1790008959001</identificacionDestinatario>
+<razonSocialDestinatario>ACERO COMERCIAL ECUATORIANO S.A.</razonSocialDestinatario>
+<dirDestinatario>QUITO MATRIZ AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirDestinatario>
+<motivoTraslado>TRANSFERENCIAS ENTRE LOCALIDADES</motivoTraslado>
+<fechaEmisionDocSustento>16/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>101305</codigoInterno>
+<descripcion>TANQUE DE PRESION METALICO PRECARGADO PRECARGADO DE 5 Glns. (604529)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>102025</codigoInterno>
+<descripcion>PISTOLA 2642-21CT DE 20 Oz. P/ENMASILLAR</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>103303</codigoInterno>
+<descripcion>PISTOLA A BATERIA PARA SELLANTES 2641-21CT 	M18 10 OZ. DE ADHESIVO O SILICON</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>15702</codigoInterno>
+<descripcion>DADOS PARA TUBOS 2-1/2" A 4" NPT HS P/714-914 (26192)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>21058</codigoInterno>
+<descripcion>RETENEDOR DE BOMBA 21181A016K-21181A16 P/ BOMBAS MYERS I2CB</descripcion>
+<cantidad>5.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>93733</codigoInterno>
+<descripcion>SIERRA DE SABLE A BATERIA 0719-22 A BATERIA DE 28V/3A/ 0-2000 RPM</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>96496</codigoInterno>
+<descripcion>BOMBA TIPO JET C-MOTOR FVJ15CI DE 1-1/2 HP/115/230/60C/1F VERSAJET (91180015)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacionelectronica@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">042683060</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000001</campoAdicional>
+</infoAdicional>
+</guiaRemision>

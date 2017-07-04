@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131761</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131761</guiaRemision>
+<razonSocialComprador>ROSADO CEVALLOS JORGE RAMON</razonSocialComprador>
+<identificacionComprador>1308518826001</identificacionComprador>
+<totalSinImpuestos>782.06</totalSinImpuestos>
+<totalDescuento>77.35</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>782.06</baseImponible>
+<valor>93.85</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>875.91</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>2069</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 90° DE 3"</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>19.44</precioUnitario>
+<descuento>7.78</descuento>
+<precioTotalSinImpuesto>89.42</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>89.42</baseImponible>
+<valor>10.73</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>91459</codigoPrincipal>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 3"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>48.46</precioUnitario>
+<descuento>23.26</descuento>
+<precioTotalSinImpuesto>267.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>267.50</baseImponible>
+<valor>32.10</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21380</codigoPrincipal>
+<descripcion>VALVULA CHEQUE VC-75 DE 3" DE BRONCE TIPO PESADO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>177.54</precioUnitario>
+<descuento>17.75</descuento>
+<precioTotalSinImpuesto>159.79</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HELBER"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>159.79</baseImponible>
+<valor>19.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>8800</codigoPrincipal>
+<descripcion>VALVULA COMPUERTA  BRONCE ROSCADA RW-206 DE 3" 125 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>232.31</precioUnitario>
+<descuento>23.23</descuento>
+<precioTotalSinImpuesto>209.08</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RED WH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>209.08</baseImponible>
+<valor>25.09</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3286</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 3" CORRIDO</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>6.99</precioUnitario>
+<descuento>3.36</descuento>
+<precioTotalSinImpuesto>38.58</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>38.58</baseImponible>
+<valor>4.63</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1678</codigoPrincipal>
+<descripcion>BUSHING GALV. CLASE 150 DE 3" x 1-1/2"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>9.83</precioUnitario>
+<descuento>1.97</descuento>
+<precioTotalSinImpuesto>17.69</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>17.69</baseImponible>
+<valor>2.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3022133</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">040724</campoAdicional>
+</infoAdicional>
+</factura>

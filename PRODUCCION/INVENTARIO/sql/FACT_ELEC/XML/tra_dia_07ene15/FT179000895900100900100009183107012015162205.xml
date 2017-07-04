@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091831</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091831</guiaRemision>
+<razonSocialComprador>CONSTRUCCIONES Y PROYECTOS MIGUEL ANGEL AUAD C. LTDA.</razonSocialComprador>
+<identificacionComprador>0990806004001</identificacionComprador>
+<totalSinImpuestos>188.12</totalSinImpuestos>
+<totalDescuento>38.53</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>188.12</baseImponible>
+<valor>22.57</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>210.69</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>32093</codigoPrincipal>
+<descripcion>TRITURADOR DE DESPERDICIOS MODELO 55 0.55HP 110V/60C</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>226.65</precioUnitario>
+<descuento>38.53</descuento>
+<precioTotalSinImpuesto>188.12</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IN SIN"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>188.12</baseImponible>
+<valor>22.57</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">aandrade@mac-doros.com</campoAdicional>
+<campoAdicional nombre="Email">rodriguez@mac-obras.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">5113002</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">001268</campoAdicional>
+</infoAdicional>
+</factura>

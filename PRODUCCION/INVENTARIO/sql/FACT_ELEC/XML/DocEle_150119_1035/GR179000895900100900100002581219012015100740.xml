@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025812</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>AV. JUAN TANCA MARENGO KM.1.7</dirPartida>
+<razonSocialTransportista>TITO GUTIERREZ (ACERO COMERCIAL .S.A)</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>19/01/2015</fechaIniTransporte>
+<fechaFinTransporte>19/01/2015</fechaFinTransporte>
+<placa>  GSL-5009</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0992836652001</identificacionDestinatario>
+<razonSocialDestinatario>CONSORCIO CONSALMED 1</razonSocialDestinatario>
+<dirDestinatario>NUEVO HOSPITAL GUAYAQUIL LA 29</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>12/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>69587</codigoInterno>
+<descripcion>TUBO ABASTO PARA LAVABO 1659000 DE 1/2" X 1/2" X 12" DE MALLA INOXIDABLE</descripcion>
+<cantidad>34.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">alarrea.elot@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2680052</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016395</campoAdicional>
+</infoAdicional>
+</guiaRemision>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268166</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268166</guiaRemision>
+<razonSocialComprador>PUMISACHO LEMA WILLAN ALEJANDRO</razonSocialComprador>
+<identificacionComprador>1710361252</identificacionComprador>
+<totalSinImpuestos>299.98</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>299.98</baseImponible>
+<valor>36.00</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>335.98</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>675</codigoPrincipal>
+<descripcion>MALLA CERRAMIENTO 50/10 x 2 m DE ALTO (ROLLO 20m) GALVANIZADA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>241.45</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>241.45</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="ROLLO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>241.45</baseImponible>
+<valor>28.97</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5458</codigoPrincipal>
+<descripcion>TUBO GALVANIZADO (POSTE) TIPO "T" DE 1-1/2" (38.1mm.) EXTERIOR 1.8mm. ESPESOR x 6 mts.</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>19.51</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>58.53</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>58.53</baseImponible>
+<valor>7.02</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">wpumisacho@outlook.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2886381</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">059263</campoAdicional>
+</infoAdicional>
+</factura>

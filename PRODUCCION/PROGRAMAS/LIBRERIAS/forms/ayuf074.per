@@ -1,0 +1,33 @@
+DATABASE aceros
+
+SCREEN
+{
+ ORDENES CHEQUEO 
+
+ [lb11         |b]
+[c01          |c] 
+[c01          |c] 
+[c01          |c] 
+[c01          |c] 
+[c01          |c] 
+[c01          |c] 
+[c01          |c] 
+[c01          |c] 
+[c01          |c] 
+[c01          |c] 
+
+}
+
+TABLES
+veht038
+
+ATTRIBUTES
+c01  = v38_orden_cheq, UPSHIFT;
+c    = v38_estado, UPSHIFT;
+
+lb11 = formonly.bt_orden,        NOENTRY, WIDGET='BUTTON', CONFIG='F15';
+b    = formonly.bt_estado,       NOENTRY, WIDGET='BUTTON', CONFIG='F16';
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_ordche[10](v38_orden_cheq, v38_estado)

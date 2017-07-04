@@ -286,7 +286,7 @@ CONSTRUCT BY NAME expr_sql ON j02_localidad, j02_codigo_caja, j02_nombre_caja,
                         END IF
                 END IF
 		IF INFIELD(j02_usua_caja) THEN
-			CALL fl_ayuda_usuarios()
+			CALL fl_ayuda_usuarios("T")
 				RETURNING codu_aux, nomu_aux
 			LET int_flag = 0
 			IF codu_aux IS NOT NULL THEN
@@ -396,7 +396,7 @@ INPUT BY NAME rm_caj.j02_localidad, rm_caj.j02_nombre_caja,
                         END IF
                 END IF
 		IF INFIELD(j02_usua_caja) THEN
-			CALL fl_ayuda_usuarios()
+			CALL fl_ayuda_usuarios("A")
 				RETURNING codu_aux, nomu_aux
 			LET int_flag = 0
 			IF codu_aux IS NOT NULL THEN

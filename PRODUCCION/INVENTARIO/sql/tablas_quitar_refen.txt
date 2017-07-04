@@ -1,0 +1,12 @@
+rept019		r19_oc_externa
+
+ordt010		c10_factura
+
+ordt013		c13_factura
+		c13_num_guia
+
+cxpt020		p20_num_doc
+
+cxpt023		p23_num_doc
+
+cxpt028		p28_num_doc

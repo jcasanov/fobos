@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113971</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113971</guiaRemision>
+<razonSocialComprador>STOCK CERAMICA</razonSocialComprador>
+<identificacionComprador>1715082747001</identificacionComprador>
+<totalSinImpuestos>506.53</totalSinImpuestos>
+<totalDescuento>101.01</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>506.53</baseImponible>
+<valor>60.78</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>567.31</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>103009</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 QUANTUM NIEVE PRIMERA</descripcion>
+<cantidad>40.00</cantidad>
+<precioUnitario>9.89</precioUnitario>
+<descuento>67.25</descuento>
+<precioTotalSinImpuesto>328.35</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>328.35</baseImponible>
+<valor>39.40</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102945</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 QUANTUM NARANJA PRIMERA</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>9.89</precioUnitario>
+<descuento>16.81</descuento>
+<precioTotalSinImpuesto>82.09</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>82.09</baseImponible>
+<valor>9.85</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>23874</codigoPrincipal>
+<descripcion>LAVAPLATOS DE ACERO INOXIDABLE 10181650 120x50 2P 1E DER. S/H SOBREPONER</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>105.29</precioUnitario>
+<descuento>15.79</descuento>
+<precioTotalSinImpuesto>89.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TEKA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>89.50</baseImponible>
+<valor>10.74</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70893</codigoPrincipal>
+<descripcion>DESAGUE DE LAVADERO 61001300 VALVULA DE 1-1/2" C/REBOSO REDONDO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2.81</precioUnitario>
+<descuento>0.42</descuento>
+<precioTotalSinImpuesto>2.39</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TEKA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.39</baseImponible>
+<valor>0.29</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>95962</codigoPrincipal>
+<descripcion>DESAGUE DE LAVADERO 61001303 PLASTICO 3-1/2" CON CANASTILLA METALICA S/GUIA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>4.94</precioUnitario>
+<descuento>0.74</descuento>
+<precioTotalSinImpuesto>4.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TEKA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.20</baseImponible>
+<valor>0.50</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">javiermalo@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2679949</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">059309</campoAdicional>
+<campoAdicional nombre="Observaciones">PIDE ING. MALO</campoAdicional>
+</infoAdicional>
+</factura>

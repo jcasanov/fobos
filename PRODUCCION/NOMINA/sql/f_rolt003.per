@@ -1,0 +1,41 @@
+database acero_gm
+screen size 24 by 80
+{
+n03_proceso        [a0]
+n03_nombre         [f000                          ]
+n03_nombre_abr     [f001           ]
+n03_estado         [a]
+n03_frecuencia     [b]
+n03_dia_ini        [f002  ]
+n03_mes_ini        [f003  ]
+n03_dia_fin        [f004  ]
+n03_mes_fin        [f005  ]
+n03_tipo_calc      [c]
+n03_valor          [f006          ]
+n03_benefic_liq    [d]
+n03_acep_descto    [e]
+n03_provisionar    [f]
+n03_usuario        [f007      ]
+n03_fecing         [f008               ]
+}
+end
+tables
+rolt003
+attributes
+a0 = rolt003.n03_proceso;
+f000 = rolt003.n03_nombre;
+f001 = rolt003.n03_nombre_abr;
+a = rolt003.n03_estado;
+b = rolt003.n03_frecuencia;
+f002 = rolt003.n03_dia_ini;
+f003 = rolt003.n03_mes_ini;
+f004 = rolt003.n03_dia_fin;
+f005 = rolt003.n03_mes_fin;
+c = rolt003.n03_tipo_calc;
+f006 = rolt003.n03_valor;
+d = rolt003.n03_benefic_liq;
+e = rolt003.n03_acep_descto;
+f = rolt003.n03_provisionar;
+f007 = rolt003.n03_usuario;
+f008 = rolt003.n03_fecing;
+end

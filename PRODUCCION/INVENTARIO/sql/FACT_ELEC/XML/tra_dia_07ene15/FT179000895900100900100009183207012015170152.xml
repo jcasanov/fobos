@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091832</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091832</guiaRemision>
+<razonSocialComprador>ING. CARLOS MOROCHO DUQUE S.A. CM CONSTRUCCIONES</razonSocialComprador>
+<identificacionComprador>0992234903001</identificacionComprador>
+<totalSinImpuestos>601.11</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>601.11</baseImponible>
+<valor>72.13</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>673.24</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>101337</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL UNA PIEZA JSSI6091130  EGO REDONDO ADVANCE BLANCO INT.C/ASTO. S.DOWN</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>112.47</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>224.94</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>224.94</baseImponible>
+<valor>26.99</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70970</codigoPrincipal>
+<descripcion>LAVABO VESSEL DE SOBREPONER SS0056911301CW STYLO REGGIO BLANCO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>48.46</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>48.46</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>48.46</baseImponible>
+<valor>5.82</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99380</codigoPrincipal>
+<descripcion>LAVABO VESSEL DE SOBREPONER 5731130 LUGANO BLANCO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>42.71</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>42.71</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>42.71</baseImponible>
+<valor>5.13</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>71570</codigoPrincipal>
+<descripcion>LLAVE PARA LAVABO E226/06 CR SCALA LEVER</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>41.97</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>83.94</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>83.94</baseImponible>
+<valor>10.07</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>71661</codigoPrincipal>
+<descripcion>DESAGUE DE LAVABO SC0016963061BO DESAGUE DE1 1/4" PUSH BOTTOM P/L</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>8.55</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>17.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>17.10</baseImponible>
+<valor>2.05</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101099</codigoPrincipal>
+<descripcion>TUBO ABASTO- LLAVE ANGULAR LAVABO 7578306  1/2 x 1/2" C/ MANGUERA DE 16"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>6.21</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>12.42</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>12.42</baseImponible>
+<valor>1.49</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>69081</codigoPrincipal>
+<descripcion>SIFON DE LAVABO 4019000 1-1/4" CON ACOPLE EN POLIPROPILENO BLANCO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>2.77</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>5.54</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.54</baseImponible>
+<valor>0.66</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>71727</codigoPrincipal>
+<descripcion>GRIFERIA DE DUCHA E108/D6 CR ELIPSIS MONOCOMANDO-CROMO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>83.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>166.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>166.00</baseImponible>
+<valor>19.92</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">tmunoz@cmconstrucciones.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2776077</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">008600</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,172 @@
+DATABASE aceros
+SCREEN size 18 by 78 TITLE 'Datos Personales'
+{
+                                                             [x001] de [y001]
+
+    Código Trabajador: [c000     ]                      Estado: [a][c001    ]
+    Nombre Trabajador: [c002                                                ]
+
+            Domicilio: [c003                                                ]
+      Telf. Domicilio: [c004           ]    Telf. Familiar: [c005           ]
+  Documento Identidad: [c006           ]   Libreta Militar: [c060           ]
+                       [c008           ]              Sexo: [c007        ]  
+
+     País Nacimiento: [c009      ] [c010                        ]
+   Ciudad Nacimiento: [c011      ] [c012                        ]
+    Fecha Nacimiento: [c013      ]
+        Estado Civil  [c014         ]
+
+
+
+
+}
+SCREEN size 18 by 78 TITLE '    Empresa     '
+{
+                                                             [x002] de [y002]
+
+        Departamento: [c015  ] [c016                          ]
+               Cargo: [c017  ] [c018                          ]
+
+        Ingreso Cía.: [c019      ]         Fecha Reingreso: [c020      ]
+        Fecha Salida: [c021      ]
+            Tipo Rol  [c022        ]             Tipo Pago [c023            ]
+
+
+
+               Banco: [c032       ] [c033                          ]
+    Cuenta Corriente: [c034           ]        Tipo Cuenta [c035          ]
+   Cuenta Trabajador: [c036           ]        Trabajador
+
+       Moneda Sueldo: [a0] [c024           ]   
+              Sueldo: [c025           ]
+         Factor Hora: [c026           ]
+}
+SCREEN size 18 by 78 TITLE '  Otros Datos   '
+{
+                                                             [x003] de [y003]
+
+     Tipo Trabajador  [c027        ]          Tipo Contrato  [c028          ]
+
+
+ Referencia Familiar: [c029                          ]
+
+              Seguro: [c050] [c051                          ]
+
+       Carnet Seguro: [c030           ]    Descto. Seguro ?: [b]
+           Localidad: [c031]             Descto. Impuesto ?: [c]
+
+    Código Sectorial: [c070           ] [c071                               ]
+       Año Sectorial: [c072]            [c071                               ]
+    Fecha Jubilación: [c061      ]       Valor Jub. Patronal: [c062         ]
+
+             Usuario: [c037      ]             Fondo de Reserva Anual ? : [d]
+    Fecha de Ingreso: [c038               ]
+}
+TABLES
+rolt013
+rolt017
+rolt030
+ATTRIBUTES
+c000 = rolt030.n30_cod_trab, AUTONEXT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+a    = rolt030.n30_estado, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS='A ACTIVO  I INACTIVO  J JUBILADO';
+c001 = FORMONLY.tit_estado_tra, NOENTRY, UPSHIFT;
+c002 = rolt030.n30_nombres, AUTONEXT, REVERSE, UPSHIFT;
+c003 = rolt030.n30_domicilio, AUTONEXT, REVERSE, UPSHIFT;
+c004 = rolt030.n30_telef_domic, AUTONEXT;
+c005 = rolt030.n30_telef_fami, AUTONEXT;
+c006 = rolt030.n30_num_doc_id, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = '###############';
+c060 = rolt030.n30_lib_militar, AUTONEXT, UPSHIFT, FORMAT = '###############';
+c007 = rolt030.n30_sexo, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'RADIO', CONFIG = 'M Masculino F Femenino', DEFAULT = 'M';
+c008 = rolt030.n30_tipo_doc_id, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'RADIO', CONFIG = 'C Cédula P Pasaporte', DEFAULT = 'C';
+c009 = rolt030.n30_pais_nac, AUTONEXT, REVERSE, UPSHIFT,
+        WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c010 = FORMONLY.tit_pais, NOENTRY, REVERSE, UPSHIFT;
+c011 = rolt030.n30_ciudad_nac, AUTONEXT, REVERSE, UPSHIFT,
+        WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c012 = FORMONLY.tit_ciudad, NOENTRY, REVERSE, UPSHIFT;
+c013 = rolt030.n30_fecha_nacim, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la fecha en formato dd-mm-aaaa';
+c014 = rolt030.n30_est_civil, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'RADIO',
+	CONFIG = 'C Casado S Soltero U Unido V Viudo D Divorciado',
+	DEFAULT = 'S';
+
+c015 = rolt030.n30_cod_depto, AUTONEXT, REVERSE, UPSHIFT,
+        WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c016 = FORMONLY.tit_departamento, NOENTRY, REVERSE, UPSHIFT;
+c017 = rolt030.n30_cod_cargo, AUTONEXT, REVERSE, UPSHIFT,
+        WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c018 = FORMONLY.tit_cargo, NOENTRY, REVERSE, UPSHIFT;
+c019 = rolt030.n30_fecha_ing, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la fecha en formato dd-mm-aaaa';
+c020 = rolt030.n30_fecha_reing, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la fecha en formato dd-mm-aaaa';
+c021 = rolt030.n30_fecha_sal, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la fecha en formato dd-mm-aaaa';
+c022 = rolt030.n30_tipo_rol, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'RADIO', CONFIG = 'S Semanal Q Quincenal M Mensual',
+	DEFAULT = 'Q';
+c023 = rolt030.n30_tipo_pago, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'RADIO',
+	CONFIG = 'E Efectivo C Cheque T Transferencia', DEFAULT = 'T';
+a0   = rolt030.n30_mon_sueldo, AUTONEXT, REVERSE, UPSHIFT,
+        WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c024 = FORMONLY.tit_mon_bas, NOENTRY, REVERSE, UPSHIFT;
+c025 = rolt030.n30_sueldo_mes, AUTONEXT, REVERSE, INCLUDE = (0 TO 999999999.99),
+	FORMAT = '###,###,##&.##';
+c026 = rolt030.n30_factor_hora, NOENTRY, REVERSE,
+	INCLUDE = (0 TO 9999999.99999), FORMAT = '#,###,##&.#####',
+	COMMENTS = 'Lo que cuesta una hora de trabajo';
+
+c027 = rolt030.n30_tipo_trab, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'RADIO', CONFIG = 'N Normal E Ejecutivo', DEFAULT = 'N';
+c028 = rolt030.n30_tipo_contr, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'RADIO', CONFIG = 'F Fijo H Hora E Eventual', DEFAULT = 'F';
+c029 = rolt030.n30_refer_fami, AUTONEXT, UPSHIFT;
+c030 = rolt030.n30_carnet_seg, AUTONEXT, UPSHIFT;
+b    = rolt030.n30_desc_seguro, AUTONEXT, REVERSE, UPSHIFT,
+        WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S';
+c031 = rolt030.n30_sub_activ, AUTONEXT, UPSHIFT, REVERSE,
+        WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c    = rolt030.n30_desc_impto, AUTONEXT, REVERSE, UPSHIFT,
+        WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N';
+c032 = rolt030.n30_bco_empresa, AUTONEXT, UPSHIFT,
+        WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c033 = FORMONLY.tit_banco, NOENTRY, UPSHIFT;
+c034 = rolt030.n30_cta_empresa, AUTONEXT, UPSHIFT;
+c035 = rolt030.n30_tipo_cta_tra, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'RADIO',
+	CONFIG = 'A Ahorro C Corriente N Ninguno', DEFAULT = 'C';
+c036 = rolt030.n30_cta_trabaj, AUTONEXT, UPSHIFT;
+c037 = rolt030.n30_usuario, NOENTRY, REVERSE, UPSHIFT;
+c038 = rolt030.n30_fecing, NOENTRY, REVERSE, UPSHIFT;
+c050 = rolt030.n30_cod_seguro, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c051 = rolt013.n13_descripcion, NOENTRY, UPSHIFT;
+c070 = rolt030.n30_sectorial, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c071 = rolt017.n17_descripcion, NOENTRY, UPSHIFT, WORDWRAP COMPRESS;
+c072 = rolt030.n30_ano_sect, NOENTRY, UPSHIFT, REVERSE;
+c061 = rolt030.n30_fec_jub, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la fecha (dd-mm-aaaa) de un empleado jubilado.';
+c062 = rolt030.n30_val_jub_pat, AUTONEXT, UPSHIFT, FORMAT = '##,###,##&.##',
+	INCLUDE = (NULL, 0.01 TO 99999999.99),
+	COMMENTS = 'Ingrese el valor jubilación patronal para un empleado jubilado.';
+d    = rolt030.n30_fon_res_anio, AUTONEXT, REVERSE, UPSHIFT,
+        WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S',
+	COMMENTS = 'Desmarque para poder cobrar el Fondo de Reserva Mensual.';
+
+x001 = FORMONLY.vm_row_current1, NOENTRY;
+y001 = FORMONLY.vm_num_rows1, NOENTRY;
+x002 = FORMONLY.vm_row_current2, NOENTRY;
+y002 = FORMONLY.vm_num_rows2, NOENTRY;
+x003 = FORMONLY.vm_row_current3, NOENTRY;
+y003 = FORMONLY.vm_num_rows3, NOENTRY;
+END

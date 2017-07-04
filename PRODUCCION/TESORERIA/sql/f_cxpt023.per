@@ -1,0 +1,41 @@
+database acero_gm
+screen size 24 by 80
+{
+p23_compania       [f000       ]
+p23_localidad      [f001  ]
+p23_codprov        [f002       ]
+p23_tipo_trn       [a0]
+p23_num_trn        [f003       ]
+p23_orden          [f004       ]
+p23_tipo_doc       [a1]
+p23_num_doc        [f005           ]
+p23_div_doc        [f006  ]
+p23_tipo_favor     [a2]
+p23_doc_favor      [f007       ]
+p23_valor_cap      [f008          ]
+p23_valor_int      [f009          ]
+p23_valor_mora     [f010         ]
+p23_saldo_cap      [f011          ]
+p23_saldo_int      [f012          ]
+}
+end
+tables
+cxpt023
+attributes
+f000 = cxpt023.p23_compania;
+f001 = cxpt023.p23_localidad;
+f002 = cxpt023.p23_codprov;
+a0 = cxpt023.p23_tipo_trn;
+f003 = cxpt023.p23_num_trn;
+f004 = cxpt023.p23_orden;
+a1 = cxpt023.p23_tipo_doc;
+f005 = cxpt023.p23_num_doc;
+f006 = cxpt023.p23_div_doc;
+a2 = cxpt023.p23_tipo_favor;
+f007 = cxpt023.p23_doc_favor;
+f008 = cxpt023.p23_valor_cap;
+f009 = cxpt023.p23_valor_int;
+f010 = cxpt023.p23_valor_mora;
+f011 = cxpt023.p23_saldo_cap;
+f012 = cxpt023.p23_saldo_int;
+end

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000041330</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<dirPartida>AV LA PRENSA</dirPartida>
+<razonSocialTransportista>SERVIENTREGA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0991285679001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>05/01/2015</fechaIniTransporte>
+<fechaFinTransporte>05/01/2015</fechaFinTransporte>
+<placa>P</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1791725530001</identificacionDestinatario>
+<razonSocialDestinatario>COELEC S.C.</razonSocialDestinatario>
+<dirDestinatario>STO.DOMINGO</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>05/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>150055</codigoInterno>
+<descripcion>MARTILLO DEMOLEDOR 5339-21 14 AMP. SDS-MAX  KIT C/MALETIN</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>150192</codigoInterno>
+<descripcion>CINCEL PARA CEMENTO 00967 SDS-MAX 1" X 12" PLANO</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>98591</codigoInterno>
+<descripcion>CINCEL PARA CEMENTO SDS-MAX  CINCEL PUNTERO 12" (965)</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">m.morales@coelecsc.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2752485</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">037987</campoAdicional>
+</infoAdicional>
+</guiaRemision>

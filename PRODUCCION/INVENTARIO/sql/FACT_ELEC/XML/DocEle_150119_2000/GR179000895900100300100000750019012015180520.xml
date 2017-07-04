@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000007500</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<dirPartida>GUALBERTO PEREZ E1-88 ENTRE MALDONADO Y NAPO</dirPartida>
+<razonSocialTransportista>SERGIO QUINCHE</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>1103687586</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>19/01/2015</fechaIniTransporte>
+<fechaFinTransporte>20/01/2015</fechaFinTransporte>
+<placa>PBX-9975</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0100943034001</identificacionDestinatario>
+<razonSocialDestinatario>BUENO PESANTEZ EDGAR ROMAN</razonSocialDestinatario>
+<dirDestinatario>AR. DELA PRENSA N67-25 Y RAMON CHIRIBOGA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>19/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>67843</codigoInterno>
+<descripcion>LAVABO DE PORCELANA CON PEDESTAL PREPONCHADO J5586733 CHELSEA BONE</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>92841</codigoInterno>
+<descripcion>LAVABO DE PORCELANA CON PEDESTAL PREPONCHADO J5586065 CHELSEA CHERRY</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>99339</codigoInterno>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS JS002291733 EVOLUTION BONE ASTO. MONTECRISTO</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>99345</codigoInterno>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS JS002291065 EVOLUTION CHERRY ASTO. MONTECRISTO</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">baldosasypisos@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">596569</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">028539</campoAdicional>
+</infoAdicional>
+</guiaRemision>

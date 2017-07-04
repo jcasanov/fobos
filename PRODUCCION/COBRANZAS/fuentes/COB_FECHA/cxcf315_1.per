@@ -1,0 +1,98 @@
+DATABASE FORMONLY
+SCREEN
+{
+          Moneda: [c1] [c002            ]     Tipo Vencimiento: [c011        ]
+ Area de Negocio: [c3] [c004            ]
+    Tipo Cliente: [c5] [c006            ]
+    Tipo Cartera: [c7] [c008            ]    Tipo de Documento: [c015        ]
+       Localidad: [c9] [c010            ]
+  Código Cliente: [c014  ]   Incluir NC Devolución? : [c]
+ Sal. Ant. [c060         ] Incluir Doc. Saldo Cero? : [d]
+  Cartera Del [c012      ] Al [c013      ]                [c054  ] de [c055  ]
+ [y1|c020        |y2|c021              |c022      |c023         |c024         ] 
+[x1|c030        |x2|c031              |c032      |c033         |c034         ] 
+[x1|c030        |x2|c031              |c032      |c033         |c034         ] 
+[x1|c030        |x2|c031              |c032      |c033         |c034         ] 
+[x1|c030        |x2|c031              |c032      |c033         |c034         ] 
+[x1|c030        |x2|c031              |c032      |c033         |c034         ] 
+[x1|c030        |x2|c031              |c032      |c033         |c034         ] 
+[x1|c030        |x2|c031              |c032      |c033         |c034         ] 
+[x1|c030        |x2|c031              |c032      |c033         |c034         ] 
+[x1|c030        |x2|c031              |c032      |c033         |c034         ] 
+[x1|c030        |x2|c031              |c032      |c033         |c034         ] 
+[x1|c030        |x2|c031              |c032      |c033         |c034         ] 
+   Estado: [c035                ]   Totales ==>  [c040         |c041         ]
+}   
+ATTRIBUTES
+c1   = FORMONLY.moneda TYPE CHAR NOT NULL, UPSHIFT, AUTONEXT, REQUIRED, REVERSE,
+	WIDGET = "FIELD_BMP", CONFIG = "lista.bmp F2", REVERSE;
+c002 = FORMONLY.tit_mon, NOENTRY, REVERSE;
+c3   = FORMONLY.area_n TYPE SMALLINT, AUTONEXT, WIDGET = "FIELD_BMP", 
+       CONFIG="lista.bmp F2", COLOR = RED BLINK WHERE a = 0;
+c004 = FORMONLY.tit_area, NOENTRY;
+c5   = FORMONLY.tipcli TYPE SMALLINT, WIDGET = 'FIELD_BMP', 
+       CONFIG = 'lista.bmp F2';
+c006 = FORMONLY.tit_tipcli, NOENTRY;
+c7   = FORMONLY.tipcar TYPE SMALLINT, WIDGET = 'FIELD_BMP', 
+       CONFIG = 'lista.bmp F2';
+c008 = FORMONLY.tit_tipcar, NOENTRY;
+c9   = FORMONLY.localidad, UPSHIFT, AUTONEXT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c010 = FORMONLY.tit_localidad, UPSHIFT, NOENTRY;
+c011 = FORMONLY.ind_venc TYPE CHAR NOT NULL, UPSHIFT, AUTONEXT, REVERSE,
+	WIDGET = 'RADIO', CONFIG = 'V Vencidos P "Por Vencer" T Todos',
+	DEFAULT = 'T';
+c012 = FORMONLY.fecha_emi TYPE DATE, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Fecha en que se emitieron los documentos. (dd-mm-yyyy)';
+c013 = FORMONLY.fecha_cart TYPE DATE NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Fecha que se va a generar el detalle de cartera. (dd-mm-yyyy)';
+c014 = FORMONLY.codcli, UPSHIFT, AUTONEXT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c    = FORMONLY.incluir_nc TYPE CHAR NOT NULL, REQUIRED, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N',
+	COMMENTS = 'Notas de Credito que son de Inventario y del Taller.';
+c015 = FORMONLY.ind_doc TYPE CHAR NOT NULL, UPSHIFT, AUTONEXT, REVERSE,
+	WIDGET = 'RADIO', CONFIG = 'D Deudor F "A Favor" T Todos',
+	DEFAULT = 'D';
+d    = FORMONLY.incluir_sal TYPE CHAR NOT NULL, REQUIRED, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N';
+
+y1   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c020 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+y2   = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c021 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c022 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c023 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c024 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+
+x1   = FORMONLY.cladoc;
+c030 = FORMONLY.numdoc;
+c031 = FORMONLY.nomcli;
+x2   = FORMONLY.locali, FORMAT = '&&';
+c032 = FORMONLY.fecha TYPE DATE, FORMAT = "dd-mm-yyyy";
+c033 = FORMONLY.valor TYPE DECIMAL(12,2), FORMAT =  '--,---,--&.##';
+c034 = FORMONLY.saldo TYPE DECIMAL(12,2), FORMAT =  '--,---,--&.##';
+
+c035 = FORMONLY.tit_venc, REVERSE;
+c040 = FORMONLY.tot_val TYPE DECIMAL(14,2), FORMAT =  '--,---,--&.##';
+c041 = FORMONLY.tot_sal TYPE DECIMAL(14,2), FORMAT =  '--,---,--&.##';
+
+c060 = FORMONLY.vm_saldo_ant TYPE DECIMAL(14,2), FORMAT =  '--,---,--&.##',
+	COLOR = RED WHERE c060 < 0;
+
+c054 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c055 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+END
+KEYS
+F5  = "Ver Factura"
+F6  = "Movimientos"
+F7  = "E/C Cliente"
+F8  = "Documento"
+F9  = "Imprimir Listado"
+F10 = "Contabilización"
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_doc[11] (FORMONLY.cladoc, FORMONLY.numdoc, FORMONLY.locali,
+			FORMONLY.nomcli, FORMONLY.fecha, FORMONLY.valor,
+			FORMONLY.saldo)

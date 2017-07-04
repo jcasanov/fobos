@@ -1,0 +1,60 @@
+DATABASE aceros
+SCREEN
+{
+            Estado: [c|c040      ]           Moneda: [a0] [c001           ]
+                                      Fecha Inicial: [c002      ]
+                                        Fecha Final: [c003      ]
+         Localidad: [c051 ]      [c052                ]
+           Cliente: [c004      ] [c005                                    ]
+
+          Cliente               Banco        Número Cheque    Valor Cheque   
+[c010                    |c011            |c012            |c013            ]
+[c010                    |c011            |c012            |c013            ]
+[c010                    |c011            |c012            |c013            ]
+[c010                    |c011            |c012            |c013            ]
+[c010                    |c011            |c012            |c013            ]
+[c010                    |c011            |c012            |c013            ]
+[c010                    |c011            |c012            |c013            ]
+[c010                    |c011            |c012            |c013            ]
+[c010                    |c011            |c012            |c013            ]
+[c010                    |c011            |c012            |c013            ]
+                                                    Total: [c014            ]
+}
+TABLES
+cxct026, cxct020, cxct001, gent008
+ATTRIBUTES
+c051 = FORMONLY.localidad, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c052 = FORMONLY.tit_localidad, UPSHIFT, NOENTRY;
+c    = cxct026.z26_estado, AUTONEXT, REVERSE, UPSHIFT,
+	INCLUDE = ('A', 'B', 'T'), DEFAULT = 'A',
+	COMMENTS = 'A Activos  B Bloqueados  T TODOS';
+c040 = FORMONLY.tit_estado,REVERSE,UPSHIFT,NOENTRY;
+a0   = cxct020.z20_moneda, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c001 = FORMONLY.tit_moneda, NOENTRY, REVERSE, UPSHIFT;
+c002 = FORMONLY.vm_fecha_ini TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese Fecha Inicial en formato dd-mm-aaaa';
+c003 = FORMONLY.vm_fecha_fin TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese Fecha Final en formato dd-mm-aaaa';
+c004 = FORMONLY.z26_codcli, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c005 = FORMONLY.tit_nombre_cli, NOENTRY, UPSHIFT;
+
+c010 = cxct001.z01_nomcli, NOENTRY, UPSHIFT;
+c011 = gent008.g08_nombre, NOENTRY, UPSHIFT;
+c012 = cxct026.z26_num_cheque, NOENTRY, UPSHIFT;
+c013 = cxct026.z26_valor, NOENTRY, UPSHIFT,
+	FORMAT = '#,###,###,##&.##';
+c014 = FORMONLY.tit_total TYPE DECIMAL (12,2), NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = '#,###,###,##&.##';
+end
+--KEYS
+--F5 = 'Cheque'
+--F6 = 'Documento'
+--F7 = 'Estado Cuenta'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_det[10] (z01_nomcli, g08_nombre, z26_num_cheque, z26_valor)

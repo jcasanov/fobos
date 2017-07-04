@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000021076</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>31/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<razonSocialComprador>YEPEZ AVILA JOSE</razonSocialComprador>
+<identificacionComprador>1705284840</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000021076</numDocModificado>
+<fechaEmisionDocSustento>31/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>596.68</totalSinImpuestos>
+<valorModificacion>668.28</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>596.68</baseImponible>
+<valor>71.60</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 268051 JOSE YEPEZ MAT NO ENTRGD</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>5460</codigoInterno>
+<descripcion>TUBO GALVANIZADO (POSTE) TIPO "T" DE 2" (50.8mm.) EXTERIOR 1.8mm. ESPESOR x 6 mts.</descripcion>
+<cantidad>15.00</cantidad>
+<precioUnitario>28.93</precioUnitario>
+<descuento>30.38</descuento>
+<precioTotalSinImpuesto>403.57</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>403.57</baseImponible>
+<valor>48.43</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>5500</codigoInterno>
+<descripcion>TUBO GALV. S-UNION ISO II TIPO "T" DE 1-1/2" x 6 m. ESPESOR 2.65 mm.</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>41.53</precioUnitario>
+<descuento>14.54</descuento>
+<precioTotalSinImpuesto>193.11</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>193.11</baseImponible>
+<valor>23.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jyepez@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">524450</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">1746</campoAdicional>
+</infoAdicional>
+</notaCredito>

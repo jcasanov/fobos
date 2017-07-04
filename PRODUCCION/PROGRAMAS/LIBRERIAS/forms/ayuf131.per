@@ -1,0 +1,42 @@
+DATABASE aceros
+SCREEN
+{
+ ORDENES DE DESPACHO
+
+ [lbl1    |lb|lbl2            |lbl3       |lbl4                     |l ]
+[c000    |c0|c002            |c003       |c004                     |c ]
+[c000    |c0|c002            |c003       |c004                     |c ]
+[c000    |c0|c002            |c003       |c004                     |c ]
+[c000    |c0|c002            |c003       |c004                     |c ]
+[c000    |c0|c002            |c003       |c004                     |c ]
+[c000    |c0|c002            |c003       |c004                     |c ]
+[c000    |c0|c002            |c003       |c004                     |c ]
+[c000    |c0|c002            |c003       |c004                     |c ]
+[c000    |c0|c002            |c003       |c004                     |c ]
+[c000    |c0|c002            |c003       |c004                     |c ]
+
+}
+TABLES
+rept034
+
+ATTRIBUTES
+c000 = r34_num_ord_des,  UPSHIFT;
+c0   = r34_cod_tran,     UPSHIFT;
+c002 = r34_num_tran,     UPSHIFT;
+c003 = r34_fec_entrega,  UPSHIFT, FORMAT = 'dd-mm-yyyy', 
+       COMMENTS = 'Ingrese fecha en formato: dd-mm-aaaa';
+c004 = r34_entregar_a,   UPSHIFT;
+c    = r34_bodega,       UPSHIFT;
+
+lb   = formonly.bt_tipo,         NOENTRY, WIDGET='BUTTON', CONFIG='F16';
+lbl1 = formonly.bt_orden,        NOENTRY, WIDGET='BUTTON', CONFIG='F15';
+lbl2 = formonly.bt_factura,      NOENTRY, WIDGET='BUTTON', CONFIG='F17';
+lbl3 = formonly.bt_fecha,        NOENTRY, WIDGET='BUTTON', CONFIG='F18';
+lbl4 = formonly.bt_cliente,      NOENTRY, WIDGET='BUTTON', CONFIG='F19';
+l    = formonly.bt_bodega,       NOENTRY, WIDGET='BUTTON', CONFIG='F20';
+
+END
+INSTRUCTIONS
+SCREEN RECORD rh_orddespacho[10] ( r34_num_ord_des, r34_cod_tran,
+                                r34_num_tran,    r34_fec_entrega,
+                                r34_entregar_a,  r34_bodega)

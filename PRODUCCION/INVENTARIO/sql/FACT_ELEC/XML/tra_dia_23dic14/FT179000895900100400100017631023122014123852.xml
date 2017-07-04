@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176310</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176310</guiaRemision>
+<razonSocialComprador>LARCO YANEZ CARLOS ENRIQUE</razonSocialComprador>
+<identificacionComprador>1706549852001</identificacionComprador>
+<totalSinImpuestos>5979.32</totalSinImpuestos>
+<totalDescuento>1328.14</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>5979.32</baseImponible>
+<valor>0.00</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>5979.32</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>100313</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 6" SP-17-15 P/MOTOR DE 6" ARRANQUE ESTR.TRIANG. DE 3" NPT.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3865.04</precioUnitario>
+<descuento>773.01</descuento>
+<precioTotalSinImpuesto>3092.03</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>3092.03</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99412</codigoPrincipal>
+<descripcion>MOTOR ELEC SUMERG DE 6" 6C3F DE 15 HP 230/460/3F (2363138120)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1713.70</precioUnitario>
+<descuento>342.74</descuento>
+<precioTotalSinImpuesto>1370.96</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>1370.96</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>92982</codigoPrincipal>
+<descripcion>CAJA DE CONTROL 5860005000 SUBMONITOR CONT.ELECTRONICO DE 5-200 HP.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>790.40</precioUnitario>
+<descuento>118.56</descuento>
+<precioTotalSinImpuesto>671.84</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>671.84</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>33568</codigoPrincipal>
+<descripcion>CAJA TERMICA COMPLETA GMC 75 DE 34 A 50 AMPERIOS P/ 15HP 220-3-60</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>357.00</precioUnitario>
+<descuento>35.70</descuento>
+<precioTotalSinImpuesto>321.30</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="LG IND"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>321.30</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>61795</codigoPrincipal>
+<descripcion>TANQUE DE PRESION FIBRA DE VIDRIO WM-14WB/WM0180 ENTREGA DE 14.1 GLS POR CICLO DE 30/50 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>581.32</precioUnitario>
+<descuento>58.13</descuento>
+<precioTotalSinImpuesto>523.19</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="WELL M"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>523.19</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">ingagri@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2417084</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">007007</campoAdicional>
+</infoAdicional>
+</factura>

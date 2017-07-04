@@ -1,0 +1,6 @@
+rm files.*
+sh bus_42f
+sh bus_frm
+sh bus_42r
+sh bus_42m
+sh bus_4gi

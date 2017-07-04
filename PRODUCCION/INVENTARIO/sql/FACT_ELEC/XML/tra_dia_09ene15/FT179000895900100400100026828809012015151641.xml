@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268288</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>09/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268288</guiaRemision>
+<razonSocialComprador>ESPINOSA SALAZAR DIEGO XAVIER</razonSocialComprador>
+<identificacionComprador>1705993564001</identificacionComprador>
+<totalSinImpuestos>315.20</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>315.20</baseImponible>
+<valor>37.82</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>353.02</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>69699</codigoPrincipal>
+<descripcion>PISTOLA DE CLAVAR 52007  P2201 UN DISPARO NIVEL 1-4 CAL.22  KIT BLISTER</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>205.20</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>205.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>205.20</baseImponible>
+<valor>24.62</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>69621</codigoPrincipal>
+<descripcion>CLAVO DE CABEZA .300 PARA CEMENTO Y ACERO 50022 DE 3/4" PIN 0.145" CABEZA 0.3" CAJA DE 100 u</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>4.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>40.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="CAJA"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>40.00</baseImponible>
+<valor>4.80</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150638</codigoPrincipal>
+<descripcion>FULMINANTES PARA PISTOLA 50502 CAFE CAL.22 BAJA VEL P/P2201 / P7201</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>7.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>70.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="CIEN"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>70.00</baseImponible>
+<valor>8.40</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">daniel5espinosa@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2225140</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">053613</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025811</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>AV. JUAN TANCA AMARENGO KM.1.7</dirPartida>
+<razonSocialTransportista>TITO GUTIERREZ (ACERO COMERCIAL .S.A)</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>19/01/2015</fechaIniTransporte>
+<fechaFinTransporte>19/01/2015</fechaFinTransporte>
+<placa>  GSL-5009</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0900106816001</identificacionDestinatario>
+<razonSocialDestinatario>AYALA V. MONSERRATT</razonSocialDestinatario>
+<dirDestinatario>CDLA.LOS CEIBOS AV.1ERA.421</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>16/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>26925</codigoInterno>
+<descripcion>TUBO ABASTO- LLAVE ANGULAR LAVABO E262.05 DH-CR FLEXIBLE DE 16"</descripcion>
+<cantidad>6.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>27742</codigoInterno>
+<descripcion>REJILLA E586.00.01 DH CR DE 1-1/2" CROMADA</descripcion>
+<cantidad>4.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>27949</codigoInterno>
+<descripcion>TUBO ABASTO METALICO TRENZADO E269.20.0.1 16" P/LAVABO. P/LLAVE ANGULAR</descripcion>
+<cantidad>8.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>27951</codigoInterno>
+<descripcion>TUBO ABASTO METALICO TRENZADO E269.20.03.0 DH DE 16" DE LAVABO P/ LLAVE DE PASO</descripcion>
+<cantidad>20.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>70896</codigoInterno>
+<descripcion>LLAVE SC0018233061 BL LLAVE ANGULAR P/ MANGUERA DE 1/2" A 1/2"</descripcion>
+<cantidad>6.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>71609</codigoInterno>
+<descripcion>DESAGUE DE LAVABO E2410 RA DH CR DESAGUE 1-1/4" RA/PISTON CROMADO</descripcion>
+<cantidad>4.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>8330</codigoInterno>
+<descripcion>LLAVE DE MANGUERA E436.04 BR DE 1/2" PESADA MANIJA EN T</descripcion>
+<cantidad>12.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">asalcedo@s1wc.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2001119</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">003447</campoAdicional>
+</infoAdicional>
+</guiaRemision>

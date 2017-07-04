@@ -1,0 +1,58 @@
+DATABASE aceros
+SCREEN 
+{
+                    Año: [c012]        Estado: [c|c013         ]       
+
+                                                              [c070] de [c071]
+ [c100                            |c104      |c101      |c102      |c103      ]
+[c050                            |c054      |c051      |c052      |c053      ]
+[c050                            |c054      |c051      |c052      |c053      ]
+[c050                            |c054      |c051      |c052      |c053      ]
+[c050                            |c054      |c051      |c052      |c053      ]
+[c050                            |c054      |c051      |c052      |c053      ]
+[c050                            |c054      |c051      |c052      |c053      ]
+[c050                            |c054      |c051      |c052      |c053      ]
+[c050                            |c054      |c051      |c052      |c053      ]
+[c050                            |c054      |c051      |c052      |c053      ]
+[c050                            |c054      |c051      |c052      |c053      ]
+[c050                            |c054      |c051      |c052      |c053      ]
+[c050                            |c054      |c051      |c052      |c053      ]
+[c050                            |c054      |c051      |c052      |c053      ]
+[c050                            |c054      |c051      |c052      |c053      ]
+[c050                            |c054      |c051      |c052      |c053      ]
+                                 [c064      |c061      |c062      |c063      ]
+}
+TABLES
+rolt084
+ATTRIBUTES
+c012 = rolt084.n84_ano_proceso, UPSHIFT, REVERSE, FORMAT='####';
+
+c    = rolt084.n84_estado, UPSHIFT, REVERSE, NOENTRY, INCLUDE=('A', 'P'),
+		COMMENT='A Activo  P Procesado';
+c013 = FORMONLY.n_estado,  UPSHIFT, REVERSE, NOENTRY;
+
+c100 = FORMONLY.bt_nomtrab,  WIDGET='BUTTON', CONFIG='F15';
+c101 = FORMONLY.bt_imp_real, WIDGET='BUTTON', CONFIG='F16';
+c102 = FORMONLY.bt_imp_ret,  WIDGET='BUTTON', CONFIG='F17';
+c103 = FORMONLY.bt_reten,    WIDGET='BUTTON', CONFIG='F18';
+c104 = FORMONLY.bt_ganado,   WIDGET='BUTTON', CONFIG='F18';
+
+c050 = FORMONLY.n30_nombres, NOENTRY, OPTIONS='-nolist';
+c054 = FORMONLY.ganado,      NOENTRY, OPTIONS='-nolist', FORMAT='###,##&.##';
+c051 = FORMONLY.imp_real,    NOENTRY, OPTIONS='-nolist', FORMAT='###,##&.##';
+c052 = FORMONLY.imp_ret,     NOENTRY, OPTIONS='-nolist', FORMAT='###,##&.##';
+c053 = FORMONLY.reten,       NOENTRY, OPTIONS='-nolist', FORMAT='---,--&.##',
+				COLOR = RED WHERE c053 < 0;
+
+c061 = FORMONLY.tot_imp_real, NOENTRY, FORMAT='###,##&.##', REVERSE;
+c064 = FORMONLY.tot_ganado,   NOENTRY, FORMAT='###,##&.##', REVERSE;
+c062 = FORMONLY.tot_imp_ret,  NOENTRY, FORMAT='###,##&.##', REVERSE;
+c063 = FORMONLY.tot_reten,    NOENTRY, FORMAT='###,##&.##', REVERSE,
+				COLOR = RED WHERE c063 < 0;
+
+c070 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c071 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD ra_scr[15] (n30_nombres, ganado, imp_real, imp_ret, reten)

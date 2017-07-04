@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268234</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>08/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268234</guiaRemision>
+<razonSocialComprador>ENTRIX AMERICAS S.A.</razonSocialComprador>
+<identificacionComprador>1791304160001</identificacionComprador>
+<totalSinImpuestos>1609.38</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1609.38</baseImponible>
+<valor>193.13</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1802.51</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>63076</codigoPrincipal>
+<descripcion>BOMBA CENTRIF STANDARD C-MOTOR DJ-10 10HP 1 ETP. 3 x 2-1/2" 3500RPM 220/440-3-60</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1609.38</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1609.38</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MARK G"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1609.38</baseImponible>
+<valor>193.13</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">ivan.anasi@cardno.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">3237770</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">035373</campoAdicional>
+</infoAdicional>
+</factura>

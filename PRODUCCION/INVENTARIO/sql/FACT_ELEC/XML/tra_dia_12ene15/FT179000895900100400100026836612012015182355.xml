@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268366</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>12/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268366</guiaRemision>
+<razonSocialComprador>MECANICA EXPRESS</razonSocialComprador>
+<identificacionComprador>1716708159001</identificacionComprador>
+<totalSinImpuestos>76.88</totalSinImpuestos>
+<totalDescuento>4.04</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>76.88</baseImponible>
+<valor>9.23</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>86.11</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>68790</codigoPrincipal>
+<descripcion>SUPERTECHO - SPT - 1000 - AL DE 12 PIES 3.60m (ANCHO UTIL 1.05 m.) x 0.30mm</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>23.12</precioUnitario>
+<descuento>2.31</descuento>
+<precioTotalSinImpuesto>43.93</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ROOFTE"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>43.93</baseImponible>
+<valor>5.27</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>68787</codigoPrincipal>
+<descripcion>SUPERTECHO - SPT - 1000 - AL DE 6 PIES 1.80m (ANCHO UTIL 1.05 m.) x 0.30mm</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>11.56</precioUnitario>
+<descuento>1.73</descuento>
+<precioTotalSinImpuesto>32.95</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ROOFTE"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>32.95</baseImponible>
+<valor>3.95</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">contabilidadmecanicaexpress@yahoo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2439600</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">044574</campoAdicional>
+</infoAdicional>
+</factura>

@@ -42,7 +42,7 @@ CALL startlog('../logs/cxcp200.err')
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 AND num_args() <> 8 AND num_args() <> 9 THEN
 	-- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto.', 'stop')
+	CALL fl_mostrar_mensaje( 'Número de parámetros incorrecto.', 'stop')
 	EXIT PROGRAM
 END IF
 LET vg_base    = arg_val(1)
@@ -199,7 +199,7 @@ LET rm_z20.z20_usuario   = vg_usuario
 LET rm_z20.z20_fecing    = CURRENT
 CALL fl_lee_moneda(rm_z20.z20_moneda) RETURNING r_mon.*
 IF r_mon.g13_moneda IS NULL THEN
-        CALL fgl_winmessage(vg_producto,'No existe ninguna moneda base.','stop')
+        CALL fl_mostrar_mensaje('No existe ninguna moneda base.','stop')
         EXIT PROGRAM
 ELSE
         DISPLAY r_mon.g13_nombre TO tit_mon_bas
@@ -247,7 +247,7 @@ IF NOT int_flag THEN
 		  		  AND g37_sec_num_sri < sec_sri
 		END IF
 		IF rm_z20.z20_tipo_doc = 'ND' OR rm_z20.z20_tipo_doc = 'DO' OR
-		   rm_z20.z20_tipo_doc = 'DI'
+		   rm_z20.z20_tipo_doc = 'DI' OR rm_z20.z20_tipo_doc = 'DF'
 		THEN
 			IF NOT generar_secuencia() THEN
 				ROLLBACK WORK
@@ -303,6 +303,9 @@ IF NOT int_flag THEN
 			CALL ver_contabilizacion(r_b12.b12_tipo_comp,
 						r_b12.b12_num_comp)
 		END IF
+	END IF
+	IF rm_z20.z20_tipo_doc = "ND" THEN
+		CALL generar_doc_elec()
 	END IF
 	IF vm_num_rows = vm_max_rows THEN
 		LET vm_num_rows = 1
@@ -660,7 +663,7 @@ INPUT BY NAME rm_z20.z20_codcli, rm_z20.z20_tipo_doc, rm_z20.z20_num_doc,
 		LET fecha_emi = rm_z20.z20_fecha_emi
 	BEFORE FIELD z20_fecha_vcto
 		IF rm_z20.z20_fecha_emi IS NULL THEN
-			CALL fgl_winmessage(vg_producto,'Ingrese la fecha de emisión primero.','info')
+			CALL fl_mostrar_mensaje('Ingrese la fecha de emisión primero.','info')
 			NEXT FIELD z20_fecha_emi
 		END IF
 	BEFORE FIELD z20_tasa_mora
@@ -670,7 +673,7 @@ INPUT BY NAME rm_z20.z20_codcli, rm_z20.z20_tipo_doc, rm_z20.z20_num_doc,
 			CALL fl_lee_cliente_general(rm_z20.z20_codcli)
 		 		RETURNING r_cli_gen.*
 			IF r_cli_gen.z01_codcli IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'Cliente no existe.','exclamation')
+				CALL fl_mostrar_mensaje('Cliente no existe.','exclamation')
 				NEXT FIELD z20_codcli
 			END IF
 			DISPLAY r_cli_gen.z01_nomcli TO tit_nombre_cli
@@ -682,7 +685,7 @@ INPUT BY NAME rm_z20.z20_codcli, rm_z20.z20_tipo_doc, rm_z20.z20_num_doc,
 							rm_z20.z20_codcli)
 		 		RETURNING r_cli.*
 			IF r_cli.z02_compania IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'Cliente no está activado para la compañía.','exclamation')
+				CALL fl_mostrar_mensaje('Cliente no está activado para la compañía.','exclamation')
 				NEXT FIELD z20_codcli
 			END IF
 		ELSE
@@ -693,19 +696,21 @@ INPUT BY NAME rm_z20.z20_codcli, rm_z20.z20_tipo_doc, rm_z20.z20_num_doc,
 			CALL fl_lee_tipo_doc(rm_z20.z20_tipo_doc)
 				RETURNING r_tip.* 
 			IF r_tip.z04_tipo_doc IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'Tipo de documento no existe.','exclamation')
+				CALL fl_mostrar_mensaje('Tipo de documento no existe.','exclamation')
 				NEXT FIELD z20_tipo_doc
 			END IF
 			DISPLAY r_tip.z04_nombre TO tit_tipo_doc
-			IF r_tip.z04_tipo <> 'D' THEN
-				CALL fgl_winmessage(vg_producto,'Tipo de documento debe ser deudor.','exclamation')
+			IF r_tip.z04_tipo <> "D" THEN
+				CALL fl_mostrar_mensaje('Tipo de documento debe ser deudor.','exclamation')
 				NEXT FIELD z20_tipo_doc
 			END IF
-			IF rm_z20.z20_tipo_doc <> 'DO'
-			AND rm_z20.z20_tipo_doc <> 'DI'
-			AND rm_z20.z20_tipo_doc <> 'FA'
-			AND rm_z20.z20_tipo_doc <> 'ND' THEN
-				CALL fgl_winmessage(vg_producto,'Tipo de documento debe ser deudor.','exclamation')
+			IF rm_z20.z20_tipo_doc <> 'DO' AND
+			   rm_z20.z20_tipo_doc <> 'DI' AND
+			   rm_z20.z20_tipo_doc <> 'DF' AND
+			   rm_z20.z20_tipo_doc <> 'FA' AND
+			   rm_z20.z20_tipo_doc <> 'ND'
+			THEN
+				CALL fl_mostrar_mensaje('Tipo de documento debe ser deudor.','exclamation')
 				NEXT FIELD z20_tipo_doc
 			END IF
 			IF r_tip.z04_estado = 'B' THEN
@@ -726,7 +731,7 @@ INPUT BY NAME rm_z20.z20_codcli, rm_z20.z20_tipo_doc, rm_z20.z20_num_doc,
 							rm_z20.z20_subtipo)
 				RETURNING r_sub.*
 			IF r_sub.g12_tiporeg IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'No existe este subtipo de documento.','exclamation')
+				CALL fl_mostrar_mensaje('No existe este subtipo de documento.','exclamation')
 				NEXT FIELD z20_subtipo
 			END IF
 			DISPLAY r_sub.g12_nombre TO tit_subtipo
@@ -736,7 +741,7 @@ INPUT BY NAME rm_z20.z20_codcli, rm_z20.z20_tipo_doc, rm_z20.z20_num_doc,
 			CALL fl_lee_area_negocio(vg_codcia,rm_z20.z20_areaneg)
 				RETURNING r_are.*
 			IF r_are.g03_areaneg IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'Area de Negocio no existe.','exclamation')
+				CALL fl_mostrar_mensaje('Area de Negocio no existe.','exclamation')
 				NEXT FIELD z20_areaneg
 			END IF
 			DISPLAY r_are.g03_nombre TO tit_area
@@ -748,7 +753,7 @@ INPUT BY NAME rm_z20.z20_codcli, rm_z20.z20_tipo_doc, rm_z20.z20_num_doc,
 			IF rm_z20.z20_fecha_emi > TODAY 
 			OR (MONTH(rm_z20.z20_fecha_emi) <> MONTH(TODAY)
 			OR YEAR(rm_z20.z20_fecha_emi) <> YEAR(TODAY)) THEN
-				CALL fgl_winmessage(vg_producto,'La fecha de emisión debe ser de hoy o del presente mes.','exclamation')
+				CALL fl_mostrar_mensaje('La fecha de emisión debe ser de hoy o del presente mes.','exclamation')
 				NEXT FIELD z20_fecha_emi
 			END IF
 		ELSE
@@ -758,7 +763,7 @@ INPUT BY NAME rm_z20.z20_codcli, rm_z20.z20_tipo_doc, rm_z20.z20_num_doc,
 	AFTER FIELD z20_fecha_vcto
 		IF rm_z20.z20_fecha_vcto IS NOT NULL THEN
 			IF rm_z20.z20_fecha_vcto <= rm_z20.z20_fecha_emi THEN
-				CALL fgl_winmessage(vg_producto,'La fecha de vencimiento debe ser mayor a la fecha de emisión.','exclamation')
+				CALL fl_mostrar_mensaje('La fecha de vencimiento debe ser mayor a la fecha de emisión.','exclamation')
 				NEXT FIELD z20_fecha_vcto
 			END IF
 		END IF
@@ -777,7 +782,7 @@ INPUT BY NAME rm_z20.z20_codcli, rm_z20.z20_tipo_doc, rm_z20.z20_num_doc,
 			CALL fl_lee_moneda(rm_z20.z20_moneda)
 				RETURNING r_mon.* 
 			IF r_mon.g13_moneda IS NULL  THEN
-				CALL fgl_winmessage(vg_producto,'Moneda no existe.','exclamation')
+				CALL fl_mostrar_mensaje('Moneda no existe.','exclamation')
 				NEXT FIELD z20_moneda
 			END IF
 			DISPLAY r_mon.g13_nombre TO tit_mon_bas
@@ -792,7 +797,7 @@ INPUT BY NAME rm_z20.z20_codcli, rm_z20.z20_tipo_doc, rm_z20.z20_num_doc,
 							rg_gen.g00_moneda_base)
 					RETURNING r_mon_par.*
 				IF r_mon_par.g14_serial IS NULL THEN
-					CALL fgl_winmessage(vg_producto,'La paridad para está moneda no existe.','exclamation')
+					CALL fl_mostrar_mensaje('La paridad para está moneda no existe.','exclamation')
 					NEXT FIELD z20_moneda
 				END IF
 			END IF
@@ -840,7 +845,7 @@ INPUT BY NAME rm_z20.z20_codcli, rm_z20.z20_tipo_doc, rm_z20.z20_num_doc,
 			CALL fl_lee_subtipo_entidad('CR',rm_z20.z20_cartera)
 				RETURNING r_car.*
 			IF r_car.g12_tiporeg IS NULL  THEN
-				CALL fgl_winmessage(vg_producto,'Cartera no existe.','exclamation')
+				CALL fl_mostrar_mensaje('Cartera no existe.','exclamation')
 				NEXT FIELD z20_cartera
 			END IF
 			DISPLAY r_car.g12_nombre TO tit_cartera
@@ -852,7 +857,7 @@ INPUT BY NAME rm_z20.z20_codcli, rm_z20.z20_tipo_doc, rm_z20.z20_num_doc,
 			CALL fl_lee_grupo_linea(vg_codcia,rm_z20.z20_linea)
 				RETURNING r_lin.*
 			IF r_lin.g20_grupo_linea IS NULL  THEN
-				CALL fgl_winmessage(vg_producto,'Línea de venta no existe.','exclamation')
+				CALL fl_mostrar_mensaje('Línea de venta no existe.','exclamation')
 				NEXT FIELD z20_linea
 			END IF
 			DISPLAY r_lin.g20_nombre TO tit_linea
@@ -930,13 +935,13 @@ INPUT BY NAME rm_z20.z20_codcli, rm_z20.z20_tipo_doc, rm_z20.z20_num_doc,
 			RETURNING r_cxc_aux.*
 		IF r_cxc_aux.z20_compania IS NOT NULL THEN
 			IF rm_z20.z20_num_doc > 0 THEN
-				CALL fgl_winmessage(vg_producto,'Documento ya ha sido ingresado.','exclamation')
+				CALL fl_mostrar_mensaje('Documento ya ha sido ingresado.','exclamation')
 				NEXT FIELD z20_codcli
 			END IF
 		END IF
 		IF rm_z20.z20_subtipo IS NULL THEN
 			IF rm_z20.z20_tipo_doc = 'ND' THEN
-				CALL fgl_winmessage(vg_producto,'Ingrese el subtipo de la Nota de Débito.','exclamation')
+				CALL fl_mostrar_mensaje('Ingrese el subtipo de la Nota de Débito.','exclamation')
 				NEXT FIELD z20_subtipo
 			END IF
 		END IF
@@ -944,12 +949,12 @@ INPUT BY NAME rm_z20.z20_codcli, rm_z20.z20_tipo_doc, rm_z20.z20_num_doc,
 			CALL fl_lee_grupo_linea(vg_codcia,rm_z20.z20_linea)
 				RETURNING r_lin.*
 			IF rm_z20.z20_areaneg <> r_lin.g20_areaneg THEN
-				CALL fgl_winmessage(vg_producto,'La línea no pertenece al área de negocio especificada.','exclamation')
+				CALL fl_mostrar_mensaje('La línea no pertenece al área de negocio especificada.','exclamation')
 				NEXT FIELD z20_linea
 			END IF
 		END IF
 		IF rm_z20.z20_valor_cap + rm_z20.z20_valor_int <= 0 THEN
-			CALL fgl_winmessage(vg_producto,'El documento no puede grabarse con valor capital o valor interés de cero.','exclamation')
+			CALL fl_mostrar_mensaje('El documento no puede grabarse con valor capital o valor interés de cero.','exclamation')
 			NEXT FIELD z20_valor_cap
 		END IF
 		LET rm_z20.z20_saldo_cap = rm_z20.z20_valor_cap
@@ -1283,5 +1288,30 @@ LET comando = 'cd ..', vg_separador, '..', vg_separador, 'CONTABILIDAD',
 	vg_separador, 'fuentes', vg_separador, run_prog, 'ctbp201 ', vg_base,
 	' ', 'CB', ' ', vg_codcia, ' "', tipo_comp, '" ', num_comp
 RUN comando
+
+END FUNCTION
+
+
+
+FUNCTION generar_doc_elec()
+DEFINE comando		VARCHAR(250)
+DEFINE servid		VARCHAR(10)
+DEFINE mensaje		VARCHAR(250)
+
+LET servid  = FGL_GETENV("INFORMIXSERVER")
+CASE servid
+	WHEN "ACGYE01"
+		LET servid = "idsgye01"
+	WHEN "ACUIO01"
+		LET servid = "idsuio01"
+	WHEN "ACUIO02"
+		LET servid = "idsuio02"
+END CASE
+LET comando = "fglgo gen_tra_ele ", vg_base CLIPPED, " ", servid CLIPPED, " ",
+		vg_codcia, " ", vg_codloc, " ", rm_z20.z20_tipo_doc, " ",
+		rm_z20.z20_num_doc, " NDC ", rm_z20.z20_codcli
+RUN comando
+LET mensaje = FGL_GETENV("HOME"), '/tmp/ND_ELEC/'
+CALL fl_mostrar_mensaje('Archivo XML de NOTA DEBITO Generado en: ' || mensaje, 'info')
 
 END FUNCTION

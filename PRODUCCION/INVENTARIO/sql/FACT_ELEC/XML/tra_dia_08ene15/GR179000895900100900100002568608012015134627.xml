@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025686</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>BITRANS</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>08/01/2015</fechaIniTransporte>
+<fechaFinTransporte>09/01/2015</fechaFinTransporte>
+<placa>YBA3003</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1790008959001</identificacionDestinatario>
+<razonSocialDestinatario>ACERO COMERCIAL ECUATORIANO S.A.</razonSocialDestinatario>
+<dirDestinatario>QUITO MATRIZ AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirDestinatario>
+<motivoTraslado>TRANSFERENCIAS ENTRE LOCALIDADES</motivoTraslado>
+<fechaEmisionDocSustento>08/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>100834</codigoInterno>
+<descripcion>BOMBA CENT.AUTOCEB P/AGUAS RESIDUALES C/MOT.DIESEL 3S5 XZR  HATZ  DE 5 HP 3" x 3"</descripcion>
+<cantidad>4.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GORMAN"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>103271</codigoInterno>
+<descripcion>KIT 3SRX-050-95 DE SUCCION 3" NPT P/BOMBA XCI</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GORMAN"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>103272</codigoInterno>
+<descripcion>KIT 3SRX-080-95 DE DESCARGA 3" NPT P/BOMBA XCI</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GORMAN"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>96617</codigoInterno>
+<descripcion>BOMBA CENTRIF AUTOCEB.C/MOTOR A GASOLINA IPT 3S5 XAR  3" C/MOTOR B&S OHV DE 6.5 HP</descripcion>
+<cantidad>10.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GORMAN"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>96744</codigoInterno>
+<descripcion>IMPULSOR DE HIERRO 3S5X-010-95 P/BOMBA XCI</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GORMAN"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>99559</codigoInterno>
+<descripcion>FILTRO DE 15 HP (225930925)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>99560</codigoInterno>
+<descripcion>FILTRO DE 20 HP (225930928)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacionelectronica@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">042683060</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000001</campoAdicional>
+</infoAdicional>
+</guiaRemision>

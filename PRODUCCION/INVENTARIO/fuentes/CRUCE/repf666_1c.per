@@ -1,0 +1,55 @@
+DATABASE aceros
+SCREEN
+{
+  Estado: [y] [y001         ]             Fechas: [c052      ] - [c053      ]
+                                       Localidad: [c0] [c054                ]
+
+  L No. Origen BO BD   Referencia                      Fecha      No.Destino
+ ---------------------------------------------------------------------------
+ [z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   ] 
+ [z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   ] 
+ [z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   ] 
+ [z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   ] 
+ [z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   ] 
+ [z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   ] 
+ [z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   ] 
+ [z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   ] 
+ [z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   ] 
+ [z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   ] 
+ [z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   ] 
+ [z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   ] 
+
+}
+TABLES
+gent002
+rept090
+rept091
+ATTRIBUTES
+y    = FORMONLY.vm_estado TYPE CHAR NOT NULL, UPSHIFT, REVERSE,
+	INCLUDE = ('P','T','D'),
+	COMMENTS = 'P Pendientes   T Transmitidas   D Todas', AUTONEXT; 
+c052 = FORMONLY.vm_fecha_ini TYPE DATE NOT NULL, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Inicial en Formato: dd-mm-aaaa.';
+c053 = FORMONLY.vm_fecha_fin TYPE DATE NOT NULL, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Final en Formato: dd-mm-aaaa.';
+y001 = FORMONLY.tit_estado, REVERSE, NOENTRY;
+c0   = gent002.g02_localidad, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Poner la localidad de donde se recibe la Mercaderia. F2 obtener ayuda.';
+c054 = gent002.g02_nombre, NOENTRY, REVERSE, UPSHIFT;
+z    = r91_localidad, NOENTRY;
+c2   = r91_cod_tran,  NOENTRY;
+c021 = r91_num_tran,  NOENTRY;
+c3   = r91_bodega_ori,  NOENTRY;
+c4   = r91_bodega_dest, NOENTRY;
+c022 = r91_referencia,  NOENTRY;
+c023 = FORMONLY.r91_fecing TYPE DATE, NOENTRY, FORMAT = 'dd-mm-yyyy';
+c5   = r90_codtra_fin,  NOENTRY;
+c024 = r90_numtra_fin,  NOENTRY;
+END
+INSTRUCTIONS
+SCREEN RECORD rm_tran[12] (r91_localidad,  r91_cod_tran,    r91_num_tran, 
+			   r91_bodega_ori, r91_bodega_dest, r91_referencia,
+			   FORMONLY.r91_fecing, r90_codtra_fin, r90_numtra_fin)
+DELIMITERS '||'

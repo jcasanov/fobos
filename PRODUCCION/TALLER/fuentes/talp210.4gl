@@ -87,6 +87,7 @@ IF rm_t60.t60_compania IS NOT NULL THEN
 	DROP TABLE te_transf_gen
 	RETURN
 END IF
+CALL generar_doc_elec()
 CALL fl_hacer_pregunta('Desea ver factura generada','Yes') RETURNING resp
 IF resp = 'Yes' THEN
 	LET param = vg_codloc, ' ', rm_ord.t23_num_factura
@@ -1015,7 +1016,7 @@ DEFINE param		VARCHAR(60)
 DEFINE comando          VARCHAR(250)
 DEFINE run_prog		VARCHAR(10)
 
-{-- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE --}
+{-- --}
 LET run_prog = '; fglrun '
 IF vg_gui = 0 THEN
 	LET run_prog = '; fglgo '
@@ -1061,5 +1062,29 @@ FOREACH q_j90 INTO r_j90.*
 		EXIT FOREACH
 	END IF
 END FOREACH
+
+END FUNCTION
+
+
+
+FUNCTION generar_doc_elec()
+DEFINE comando		VARCHAR(250)
+DEFINE servid		VARCHAR(10)
+DEFINE mensaje		VARCHAR(250)
+
+LET servid  = FGL_GETENV("INFORMIXSERVER")
+CASE servid
+	WHEN "ACGYE01"
+		LET servid = "idsgye01"
+	WHEN "ACUIO01"
+		LET servid = "idsuio01"
+	WHEN "ACUIO02"
+		LET servid = "idsuio02"
+END CASE
+LET comando = "fglgo gen_tra_ele ", vg_base CLIPPED, " ", servid CLIPPED, " ",
+		vg_codcia, " ", vg_codloc, " F ", rm_ord.t23_num_factura, " FAT"
+RUN comando
+LET mensaje = FGL_GETENV("HOME"), '/tmp/FA_ELEC/'
+CALL fl_mostrar_mensaje('Archivo XML de FACTURA TALLER Generado en: ' || mensaje, 'info')
 
 END FUNCTION

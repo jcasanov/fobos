@@ -1,0 +1,33 @@
+. /acero/envfobos.sh
+export ruta=$PWD
+export DIR="$HOME/RESPALDO/DIARIO/"
+cd $DIR
+echo 'Desempaquetando la base de producción ...'
+gzip -fd $1.tar.gz
+echo 'Creando la base de prueba en el directorio ...'
+tar xvf $1.tar
+mkdir $2.exp
+chmod 755 $2.exp
+cp $1.exp/* $2.exp/
+echo 'Creada la base de prueba ...'
+echo 'Empaquetando la base de producción ...'
+gzip $1.tar
+cd $2.exp
+mv $1.sql $2.sql
+sed s/$1/$2/ $2.sql > temporal
+mv temporal $2.sql
+echo 'base de prueba lista para subir ...'
+cd $ruta
+dbaccess $2 -qcr borra
+echo 'Subiendo la base de prueba ...'
+cd $DIR
+dbimport $2 -d datadbs
+sleep 4
+echo 'Poniendo base de prueba en modo transaccional...'
+ontape -s -U $2
+rm -rf $2.exp
+cd $ruta
+cd ../GENERALES
+fglgo act_prueb
+cd $ruta
+dbaccess $2 -qcr up_st

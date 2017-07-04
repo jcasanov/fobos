@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104225</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>30/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104225</guiaRemision>
+<razonSocialComprador>SEREMCORP S.A.</razonSocialComprador>
+<identificacionComprador>0992340975001</identificacionComprador>
+<totalSinImpuestos>495.54</totalSinImpuestos>
+<totalDescuento>55.06</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>495.54</baseImponible>
+<valor>59.46</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>555.00</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>93876</codigoPrincipal>
+<descripcion>TORNILLO EPER-DH C/TACOS</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1.22</precioUnitario>
+<descuento>0.24</descuento>
+<precioTotalSinImpuesto>2.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="PAR"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.20</baseImponible>
+<valor>0.26</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100382</codigoPrincipal>
+<descripcion>VALVULA FLUSH PARA INODORO E365.22 CR STANDARD</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>168.98</precioUnitario>
+<descuento>16.90</descuento>
+<precioTotalSinImpuesto>152.08</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>152.08</baseImponible>
+<valor>18.25</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>68913</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA PARA EMPOTRAR PREPONCHADO E231-BL ELEA OVAL BLANCO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>39.25</precioUnitario>
+<descuento>7.85</descuento>
+<precioTotalSinImpuesto>70.65</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>70.65</baseImponible>
+<valor>8.48</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>71259</codigoPrincipal>
+<descripcion>LLAVE TEMPORIZADAS / PRESSMATIC 0361.01 CR MESON P/ LAVABO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>85.44</precioUnitario>
+<descuento>17.09</descuento>
+<precioTotalSinImpuesto>153.79</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>153.79</baseImponible>
+<valor>18.45</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>26921</codigoPrincipal>
+<descripcion>TUBO ABASTO- LLAVE ANGULAR LAVABO E262.03 DH-CR FLEXIBLE DE 12"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>10.07</precioUnitario>
+<descuento>2.01</descuento>
+<precioTotalSinImpuesto>18.13</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>18.13</baseImponible>
+<valor>2.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>90188</codigoPrincipal>
+<descripcion>URINARIO DE PARED E398-BL QUANTUM BLANCO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>54.83</precioUnitario>
+<descuento>10.97</descuento>
+<precioTotalSinImpuesto>98.69</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>98.69</baseImponible>
+<valor>11.84</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">dhellen23@yahoo.com.mx</campoAdicional>
+<campoAdicional nombre="telefono-movil">2922063</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">007659</campoAdicional>
+</infoAdicional>
+</factura>

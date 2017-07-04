@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000114012</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000114012</guiaRemision>
+<razonSocialComprador>MANZANO CALVACHE LAURA VICENTA</razonSocialComprador>
+<identificacionComprador>1801356153001</identificacionComprador>
+<totalSinImpuestos>68.99</totalSinImpuestos>
+<totalDescuento>9.42</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>68.99</baseImponible>
+<valor>8.28</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>77.27</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>1670</codigoPrincipal>
+<descripcion>BUSHING GALV. CLASE 150 DE 2-1/2" x 1-1/2"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>7.00</precioUnitario>
+<descuento>1.68</descuento>
+<precioTotalSinImpuesto>12.32</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>12.32</baseImponible>
+<valor>1.48</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3232</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1-1/2" CORRIDO</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>1.21</precioUnitario>
+<descuento>0.58</descuento>
+<precioTotalSinImpuesto>4.26</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.26</baseImponible>
+<valor>0.51</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3238</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1-1/2" x 3"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1.59</precioUnitario>
+<descuento>0.38</descuento>
+<precioTotalSinImpuesto>2.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.80</baseImponible>
+<valor>0.34</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1644</codigoPrincipal>
+<descripcion>BUSHING GALV. CLASE 150 DE 1-1/4" x 1"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>2.45</precioUnitario>
+<descuento>0.88</descuento>
+<precioTotalSinImpuesto>6.47</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.47</baseImponible>
+<valor>0.78</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6318</codigoPrincipal>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 1-1/4"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>9.94</precioUnitario>
+<descuento>2.39</descuento>
+<precioTotalSinImpuesto>17.49</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>17.49</baseImponible>
+<valor>2.10</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2061</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 90 GRAD  DE 1-1/4"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>2.97</precioUnitario>
+<descuento>1.43</descuento>
+<precioTotalSinImpuesto>10.45</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>10.45</baseImponible>
+<valor>1.25</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>90414</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1-1/4" x 1-1/2"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>1.20</precioUnitario>
+<descuento>0.58</descuento>
+<precioTotalSinImpuesto>4.22</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.22</baseImponible>
+<valor>0.51</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1668</codigoPrincipal>
+<descripcion>BUSHING GALV. CLASE 150 DE 2-1/2" x 1-1/4"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>6.24</precioUnitario>
+<descuento>1.50</descuento>
+<precioTotalSinImpuesto>10.98</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>10.98</baseImponible>
+<valor>1.32</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">estacionesfull@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2608851</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064327</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092083</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092083</guiaRemision>
+<razonSocialComprador>ALONSO DELGADO MERCEDES</razonSocialComprador>
+<identificacionComprador>1301421291</identificacionComprador>
+<totalSinImpuestos>1781.05</totalSinImpuestos>
+<totalDescuento>314.30</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1781.05</baseImponible>
+<valor>213.73</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1994.78</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>98055</codigoPrincipal>
+<descripcion>BOMBA CENTRIF MULTIETAPA C-MOTOR FMG  DE 6 HP 220/440/60C/1F 2" X 1.1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2095.35</precioUnitario>
+<descuento>314.30</descuento>
+<precioTotalSinImpuesto>1781.05</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FAMAC"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1781.05</baseImponible>
+<valor>213.73</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">ncobea@yahoo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3029842</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016751</campoAdicional>
+<campoAdicional nombre="Observaciones">KM 1.5 VIA MANTA</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104042</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>PTO.STA.ANA,EDF.THE POINT, P.18 OF 1812</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104042</guiaRemision>
+<razonSocialComprador>TECHCONSTRUYE S.A.</razonSocialComprador>
+<identificacionComprador>0992106824001</identificacionComprador>
+<totalSinImpuestos>400.83</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>400.83</baseImponible>
+<valor>48.10</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>448.93</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102402</codigoPrincipal>
+<descripcion>AMOLADORA ELECTRICA 6147-31 11 AMPS. 4-1/2" 1100 W.</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>133.61</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>400.83</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>400.83</baseImponible>
+<valor>48.10</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3883066</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">008010</campoAdicional>
+</infoAdicional>
+</factura>

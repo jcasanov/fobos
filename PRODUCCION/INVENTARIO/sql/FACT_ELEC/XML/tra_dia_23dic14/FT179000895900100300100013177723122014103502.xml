@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131777</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131777</guiaRemision>
+<razonSocialComprador>HIDALGO RUEDA EFRAIN VLADIMIR</razonSocialComprador>
+<identificacionComprador>1712423266001</identificacionComprador>
+<totalSinImpuestos>44.23</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>44.23</baseImponible>
+<valor>5.31</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>49.54</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>92074</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 90° DE 3/4"</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>1.13</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>5.65</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.65</baseImponible>
+<valor>0.68</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>92362</codigoPrincipal>
+<descripcion>TAPON GALV. MACHO CLASE 150 DE 3/4"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>0.63</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1.26</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.26</baseImponible>
+<valor>0.15</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1624</codigoPrincipal>
+<descripcion>BUSHING GALV. CLASE 150 DE 3/4" x 3/8"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>0.74</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2.22</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.22</baseImponible>
+<valor>0.27</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3144</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 3/8" x 3"</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>1.46</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>7.30</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7.30</baseImponible>
+<valor>0.88</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3168</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1/2" x 5"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>0.76</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>4.56</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.56</baseImponible>
+<valor>0.55</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6312</codigoPrincipal>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 1/2"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>4.86</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>19.44</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>19.44</baseImponible>
+<valor>2.33</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6151</codigoPrincipal>
+<descripcion>UNION NEGRA CLASE 150 DE 1/2"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>0.94</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.88</baseImponible>
+<valor>0.23</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1622</codigoPrincipal>
+<descripcion>BUSHING GALV. CLASE 150 DE 1/2" x 3/8"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>0.96</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1.92</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.92</baseImponible>
+<valor>0.23</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">vladyhakiner@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2668306</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">039955</campoAdicional>
+</infoAdicional>
+</factura>

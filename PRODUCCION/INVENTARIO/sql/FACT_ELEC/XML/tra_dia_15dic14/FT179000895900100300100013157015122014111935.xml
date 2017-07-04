@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131570</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>GARCIA MORENO S/N Y JUAN MONTALVO CONOCT</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131570</guiaRemision>
+<razonSocialComprador>SILVA VILLAROEL GILBERTO NAPOLEON</razonSocialComprador>
+<identificacionComprador>1704398526001</identificacionComprador>
+<totalSinImpuestos>404.55</totalSinImpuestos>
+<totalDescuento>68.77</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>335.78</baseImponible>
+<valor>40.29</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>376.07</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>101835</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 42.5 X 42.5 MONOQUEMA SPINETTO CREMA PRIMERA</descripcion>
+<cantidad>44.00</cantidad>
+<precioUnitario>9.00</precioUnitario>
+<descuento>67.32</descuento>
+<precioTotalSinImpuesto>328.68</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIALTO" valor="RIALTO"/>
+<detAdicional nombre="M2" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>328.68</baseImponible>
+<valor>39.44</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101835</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 42.5 X 42.5 MONOQUEMA SPINETTO CREMA PRIMERA</descripcion>
+<cantidad>0.95</cantidad>
+<precioUnitario>9.00</precioUnitario>
+<descuento>1.45</descuento>
+<precioTotalSinImpuesto>7.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIALTO" valor="RIALTO"/>
+<detAdicional nombre="M2" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7.10</baseImponible>
+<valor>0.85</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

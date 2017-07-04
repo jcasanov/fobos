@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104187</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>24/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104187</guiaRemision>
+<razonSocialComprador>CARVAJAL RIOS VICTOR</razonSocialComprador>
+<identificacionComprador>0911029619001</identificacionComprador>
+<totalSinImpuestos>2020.96</totalSinImpuestos>
+<totalDescuento>570.02</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>2020.96</baseImponible>
+<valor>242.52</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>2263.48</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99410</codigoPrincipal>
+<descripcion>MOTOR ELEC SUMERG DE 6" 6C3F DE 7.5 HP 230/460/3F (2363118120)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1348.26</precioUnitario>
+<descuento>296.62</descuento>
+<precioTotalSinImpuesto>1051.64</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1051.64</baseImponible>
+<valor>126.20</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100128</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 6" 6SR 7-100 ACE.INOX.5ETAP.100GPM P/MOT.6" 7.5HP (97160100005)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1242.72</precioUnitario>
+<descuento>273.40</descuento>
+<precioTotalSinImpuesto>969.32</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>969.32</baseImponible>
+<valor>116.32</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">carvajalra1@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2442385</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">006520</campoAdicional>
+</infoAdicional>
+</factura>

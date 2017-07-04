@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000033933</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMEONMERCIAÒL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>SEWRVIENTREGA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0991285679001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>09/12/2014</fechaIniTransporte>
+<fechaFinTransporte>10/12/2014</fechaFinTransporte>
+<placa></placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1790008959001</identificacionDestinatario>
+<razonSocialDestinatario>ACERO COMERCIAL ECUATORIANO S.A.</razonSocialDestinatario>
+<dirDestinatario>QUITO MATRIZ AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirDestinatario>
+<motivoTraslado>TRANSFERENCIAS ENTRE LOCALIDADES</motivoTraslado>
+<fechaEmisionDocSustento>09/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>70327</codigoInterno>
+<descripcion>BROCA PARA CEMENTO SDS-PLUS 3/4" X 12" (00370)</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="POWERS" valor="POWERS"/>
+<detAdicional nombre="370" valor="370"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>93794</codigoInterno>
+<descripcion>FRESA ANULAR PARA TALADRO ELECTROMAGNETICO 49-59-2063 DE 5/8" P/PLANCHA DE HASTA 2"</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="49-59-2063" valor="49-59-2063"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">INFOGYE@ACERO.COM</campoAdicional>
+<campoAdicional nombre="telefono-movil">042683060</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000001</campoAdicional>
+</infoAdicional>
+</guiaRemision>

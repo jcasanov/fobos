@@ -1,0 +1,32 @@
+DATABASE aceros
+SCREEN
+{
+ CODIGOS ELECTRICOS
+
+ [lbl0         |lbl1                                   |l]
+[c001         |c002                                   |c]
+[c001         |c002                                   |c]
+[c001         |c002                                   |c]
+[c001         |c002                                   |c]
+[c001         |c002                                   |c]
+[c001         |c002                                   |c]
+[c001         |c002                                   |c]
+[c001         |c002                                   |c]
+[c001         |c002                                   |c]
+[c001         |c002                                   |c]
+}
+TABLES
+rept074
+
+ATTRIBUTES
+c001 = r74_electrico,  	 UPSHIFT;
+c002 = r74_descripcion,  UPSHIFT;
+c    = r74_estado,     	 UPSHIFT;
+
+lbl0 = formonly.bt_codigo,       WIDGET='BUTTON', CONFIG='F16';
+lbl1 = formonly.bt_descripcion,  WIDGET='BUTTON', CONFIG='F17';
+l    = formonly.bt_estado,       WIDGET='BUTTON', CONFIG='F18';
+
+END
+INSTRUCTIONS
+SCREEN RECORD rh_electrico[10] (r74_electrico, r74_descripcion, r74_estado)

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000016402</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>30/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>MAQUINSUR MAQUINAS Y SUMINISTROS INDUSTRIALES DEL SUR CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>0791710847001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000102480</numDocModificado>
+<fechaEmisionDocSustento>08/10/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>1092.22</totalSinImpuestos>
+<valorModificacion>1223.29</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>1092.22</baseImponible>
+<valor>131.07</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEVOLUCION: MERCACIA DEFECTUOSA</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>93386</codigoInterno>
+<descripcion>BOMBA SUMERG AGUAS NEGRAS AP12-50-11-3 DE 2.5HP/380/440V/3F (96010642) CABLE 10 m..</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1315.93</precioUnitario>
+<descuento>223.71</descuento>
+<precioTotalSinImpuesto>1092.22</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1092.22</baseImponible>
+<valor>131.07</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacionelectronica@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2922713</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">11615</campoAdicional>
+</infoAdicional>
+</notaCredito>

@@ -1,0 +1,81 @@
+DATABASE aceros
+SCREEN 
+{
+     No Solicitud: [c002       ]                  Estado: [b|c100      ]
+          Cliente: [c004       ] [c102                                 ]
+     Area Negocio: [c003  ] [c101            ]
+      Grupo Línea: [c000  ] [c110            ]
+           Moneda: [a0] [c103           ] Paridad: [c006               ]
+         Cobrador: [c011  ] [c104                                      ]
+       Referencia: [c005                               ]
+
+  [a3|c030           |c02|c034            |c033            |c035           ]
+ [a1|c020           |c01|c027            |c026            |c028            ]
+ [a1|c020           |c01|c027            |c026            |c028            ]
+ [a1|c020           |c01|c027            |c026            |c028            ]
+ [a1|c020           |c01|c027            |c026            |c028            ]
+ [a1|c020           |c01|c027            |c026            |c028            ]
+ [a1|c020           |c01|c027            |c026            |c028            ]
+                        [c041            |c040            |c042            ]
+
+ Fecha de Vencimiento: [c023      |c024        ]                         
+
+ Ingresado Por: [c013      ]         Fecha de Ingreso: [c014               ]
+}
+end
+TABLES
+cxct024
+cxct025
+ATTRIBUTES
+c002 = cxct024.z24_numero_sol, REVERSE, NOENTRY, WIDGET='FIELD_BMP',
+	CONFIG='lista.bmp F2';
+c003 = cxct024.z24_areaneg, REVERSE, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c000 = cxct024.z24_linea,UPSHIFT, REVERSE, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c004 = cxct024.z24_codcli, REVERSE, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+b = cxct024.z24_estado, NOENTRY, UPSHIFT, REVERSE;
+c005 = cxct024.z24_referencia, UPSHIFT;
+a0 = cxct024.z24_moneda, REVERSE, UPSHIFT, AUTONEXT,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c006 = cxct024.z24_paridad, NOENTRY, REVERSE, FORMAT='#,###,##&.#########';
+c011 = cxct024.z24_cobrador, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c013 = cxct024.z24_usuario, REVERSE, NOENTRY, UPSHIFT;
+c014 = cxct024.z24_fecing, REVERSE, NOENTRY;
+
+a1 = cxct025.z25_tipo_doc,   NOENTRY, OPTIONS='-nolist';
+c020 = cxct025.z25_num_doc,  NOENTRY, OPTIONS='-nolist';
+c01 = cxct025.z25_dividendo, NOENTRY, OPTIONS='-nolist', FORMAT='&&';
+c026 = z25_valor_int, FORMAT='#,###,###,##&.##', NOENTRY, 
+	OPTIONS='-nolist';
+c027 = z25_valor_cap, FORMAT='#,###,###,##&.##', NOENTRY, 
+	OPTIONS='-nolist';
+c028 = FORMONLY.valor_pagar TYPE DECIMAL(12,2), FORMAT='#,###,###,##&.##',     
+	OPTIONS='-nolist', INCLUDE=(0.0 TO 9999999999.99);
+
+c023 = FORMONLY.z20_fecha_vcto TYPE DATE, COLOR = RED WHERE c023 < TODAY,  
+	FORMAT = 'dd-mm-yyyy', NOENTRY; 
+c024 = FORMONLY.n_estado_vcto, COLOR = RED WHERE c024 = 'Vencido', NOENTRY; 
+a3   = FORMONLY.bt_tipo_doc,   WIDGET = 'BUTTON', CONFIG = 'F15';
+c030 = FORMONLY.bt_nro_doc,    WIDGET = 'BUTTON', CONFIG = 'F16';
+c02  = FORMONLY.bt_dividendo,  WIDGET = 'BUTTON', CONFIG = 'F17';
+c033 = FORMONLY.bt_interes,    WIDGET = 'BUTTON', CONFIG = 'F18';
+c034 = FORMONLY.bt_capital,    WIDGET = 'BUTTON', CONFIG = 'F19';
+c035 = FORMONLY.bt_valor,      WIDGET = 'BUTTON', CONFIG = 'F20';
+
+c040 = z24_total_int, FORMAT='#,###,###,##&.##', NOENTRY; 
+c041 = z24_total_cap, FORMAT='#,###,###,##&.##', NOENTRY; 
+c042 = FORMONLY.tot_val_pagar, FORMAT='#,###,###,##&.##', NOENTRY; 
+
+c100 = FORMONLY.n_estado,REVERSE, NOENTRY;
+c101 = FORMONLY.n_areaneg,REVERSE, NOENTRY;
+c102 = FORMONLY.n_cliente,REVERSE, NOENTRY;
+c103 = FORMONLY.n_moneda,REVERSE, NOENTRY;
+c104 = FORMONLY.n_cobrador, NOENTRY, REVERSE, UPSHIFT;
+c110 = FORMONLY.n_linea,REVERSE,  NOENTRY;
+end
+
+INSTRUCTIONS
+SCREEN RECORD ra_docs[6] (z25_tipo_doc, z25_num_doc, z25_dividendo, z25_valor_int, z25_valor_cap, valor_pagar)
+
+KEYS 
+F5 = 'Todos'

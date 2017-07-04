@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268819</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268819</guiaRemision>
+<razonSocialComprador>AYALA GUARDERAS CARLOS ESTEBAN</razonSocialComprador>
+<identificacionComprador>1711314375</identificacionComprador>
+<totalSinImpuestos>52.76</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>52.76</baseImponible>
+<valor>6.33</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>59.09</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5362</codigoPrincipal>
+<descripcion>TUBO ESTRUCTURAL A-3724 TIPO "N" 50 x 50 x 3mm. ESPESOR</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>50.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>50.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>50.00</baseImponible>
+<valor>6.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>46310</codigoPrincipal>
+<descripcion>DISCO DE CORTE 80 EHT 178-2A-24 PS 178 x 3 x 22.2mm. (ACERO)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2.76</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PFERD"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.76</baseImponible>
+<valor>0.33</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">ceag777@yahoo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2254174</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">054037</campoAdicional>
+<campoAdicional nombre="Observaciones">CHEQ N: 2209 BNCO PACIFICO</campoAdicional>
+</infoAdicional>
+</factura>

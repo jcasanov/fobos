@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268265</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>09/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268265</guiaRemision>
+<razonSocialComprador>PALACIOS DELGADO JUAN LEONARDO</razonSocialComprador>
+<identificacionComprador>0102573334001</identificacionComprador>
+<totalSinImpuestos>667.02</totalSinImpuestos>
+<totalDescuento>113.84</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>667.02</baseImponible>
+<valor>80.04</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>747.06</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>150618</codigoPrincipal>
+<descripcion>CINTA PERFORADA METALICA DE 0.9mm. POR 10 METROS (ROLLO)</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>10.95</precioUnitario>
+<descuento>6.57</descuento>
+<precioTotalSinImpuesto>59.13</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>59.13</baseImponible>
+<valor>7.10</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97867</codigoPrincipal>
+<descripcion>VALVULA CHEQUE H.F. BRIDADA HICH-150 DE 6" CORTINA P/AGUAS NEGRAS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>715.16</precioUnitario>
+<descuento>107.27</descuento>
+<precioTotalSinImpuesto>607.89</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HELBER"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>607.89</baseImponible>
+<valor>72.95</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">P_Pasoc825@hotmail.com</campoAdicional>
+<campoAdicional nombre="Email">p_pfactura@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2836824</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">054917</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000041405</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<dirPartida>AV LA PRENSA</dirPartida>
+<razonSocialTransportista>SERVIENTREGA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0991285679001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>13/01/2015</fechaIniTransporte>
+<fechaFinTransporte>13/01/2015</fechaFinTransporte>
+<placa>SER</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>2100175377001</identificacionDestinatario>
+<razonSocialDestinatario>ROBLES ARMIJOS ANGELA JANETH</razonSocialDestinatario>
+<dirDestinatario>EL COCA / SERVIENTREGA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>13/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>13658</codigoInterno>
+<descripcion>LLAVE DE TUBO RECTA NO. 24 (31030)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>13660</codigoInterno>
+<descripcion>LLAVE DE TUBO RECTA NO. 36 (31035)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>92383</codigoInterno>
+<descripcion>LLAVE AJUSTABLE (INGLESA) N.774  DE 24"   (86932)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">olgamancheno8729@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">062861606</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064236</campoAdicional>
+</infoAdicional>
+</guiaRemision>

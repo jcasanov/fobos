@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131834</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>29/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131834</guiaRemision>
+<razonSocialComprador>SETEPROIN CIA LTDA</razonSocialComprador>
+<identificacionComprador>1791409868001</identificacionComprador>
+<totalSinImpuestos>30.44</totalSinImpuestos>
+<totalDescuento>2.64</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>30.44</baseImponible>
+<valor>3.65</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>34.09</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>70325</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO SDS-PLUS 1/4 X 6-1/4"  (00321)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>5.76</precioUnitario>
+<descuento>0.92</descuento>
+<precioTotalSinImpuesto>10.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>10.60</baseImponible>
+<valor>1.27</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102370</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-20-7931 SDS PLUS 4CT MX4 1/4" X 4" X 6"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>5.39</precioUnitario>
+<descuento>1.72</descuento>
+<precioTotalSinImpuesto>19.84</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>19.84</baseImponible>
+<valor>2.38</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">seteproin_uio@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">672787</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">014474</campoAdicional>
+</infoAdicional>
+</factura>

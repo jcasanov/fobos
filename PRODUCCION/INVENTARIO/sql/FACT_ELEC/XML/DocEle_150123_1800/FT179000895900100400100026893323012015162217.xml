@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268933</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268933</guiaRemision>
+<razonSocialComprador>BOSQUES TROPICALES S.A. BOTROSA</razonSocialComprador>
+<identificacionComprador>0590036528001</identificacionComprador>
+<totalSinImpuestos>216.07</totalSinImpuestos>
+<totalDescuento>38.13</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>216.07</baseImponible>
+<valor>25.93</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>242.00</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102895</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-20-7377 DE 1/2" X 18" SDS PLUS</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>35.13</precioUnitario>
+<descuento>10.54</descuento>
+<precioTotalSinImpuesto>59.72</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>59.72</baseImponible>
+<valor>7.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102346</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-20-7058 SDS PLUS 2CT 11/16" X 6" X 8"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>19.80</precioUnitario>
+<descuento>5.94</descuento>
+<precioTotalSinImpuesto>33.66</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>33.66</baseImponible>
+<valor>4.04</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150168</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-20-7066 SDS 3/4x16x18 CABEZA DOS CORTADORES</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>43.08</precioUnitario>
+<descuento>12.92</descuento>
+<precioTotalSinImpuesto>73.24</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>73.24</baseImponible>
+<valor>8.79</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100053</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-20-7354 DE 3/8" x 10" x 12" SDS PLUS</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>29.09</precioUnitario>
+<descuento>8.73</descuento>
+<precioTotalSinImpuesto>49.45</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>49.45</baseImponible>
+<valor>5.93</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">garciaj@endesabotrosa.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2676700-70</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">053814</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C # 26</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025807</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>AV. JUAN TANCA AMRENGO KM.1.7</dirPartida>
+<razonSocialTransportista>MANUEL MAGALLANES (ACERO COMERCIAL .S.A)</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>0910240910</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>16/01/2015</fechaIniTransporte>
+<fechaFinTransporte>16/01/2015</fechaFinTransporte>
+<placa>  GSC-8976</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0991362355001</identificacionDestinatario>
+<razonSocialDestinatario>CENTRO COMERCIAL LA ROTONDA</razonSocialDestinatario>
+<dirDestinatario>C.C.LA ROTONDA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>14/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>71259</codigoInterno>
+<descripcion>LLAVE TEMPORIZADAS / PRESSMATIC 0361.01 CR MESON P/ LAVABO</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">nathalyandrade@cclarotonda.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">242945 237</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">003332</campoAdicional>
+</infoAdicional>
+</guiaRemision>

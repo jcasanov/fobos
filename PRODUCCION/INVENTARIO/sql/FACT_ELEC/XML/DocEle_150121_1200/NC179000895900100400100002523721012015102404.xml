@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025237</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>ESPINOSA FALCONI OSWALDO ALFONSO</razonSocialComprador>
+<identificacionComprador>1702406982001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000176440</numDocModificado>
+<fechaEmisionDocSustento>30/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>280.88</totalSinImpuestos>
+<valorModificacion>314.59</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>280.88</baseImponible>
+<valor>33.71</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>POR DEVOLUCION O.T. # 8101</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>63114</codigoInterno>
+<descripcion>KIT REPARACION P-TANQUE PRESION 4467 P/TANQUE WM-25</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>311.51</precioUnitario>
+<descuento>31.15</descuento>
+<precioTotalSinImpuesto>280.36</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="WELL M"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>280.36</baseImponible>
+<valor>33.64</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>97467</codigoInterno>
+<descripcion>TEFLON EN ROLLO 0.07 x 12 mm. x 10 m.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>0.58</precioUnitario>
+<descuento>0.06</descuento>
+<precioTotalSinImpuesto>0.52</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.52</baseImponible>
+<valor>0.06</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">alfones@uio.satnet.net</campoAdicional>
+<campoAdicional nombre="telefono-movil">093503503</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">28732</campoAdicional>
+</infoAdicional>
+</notaCredito>

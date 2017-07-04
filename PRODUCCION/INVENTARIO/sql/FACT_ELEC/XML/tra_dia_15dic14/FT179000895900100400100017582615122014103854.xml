@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175826</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>PASAJE SAN PEDRO LOTE 296 Y EL VERGEL</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175826</guiaRemision>
+<razonSocialComprador>SAHI SANCHEZ-HIDALGO ANCLAJES Y FIJACIONES</razonSocialComprador>
+<identificacionComprador>1707172001001</identificacionComprador>
+<totalSinImpuestos>438.45</totalSinImpuestos>
+<totalDescuento>65.78</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>372.67</baseImponible>
+<valor>44.72</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>417.39</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>101448</codigoPrincipal>
+<descripcion>CARCASA 28-50-6363 P/MOD-4015</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>97.71</precioUnitario>
+<descuento>14.66</descuento>
+<precioTotalSinImpuesto>83.05</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>83.05</baseImponible>
+<valor>9.97</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150491</codigoPrincipal>
+<descripcion>ESTATOR DE CAMPO 18-70-0290 P/ MOTOR 4096.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>105.30</precioUnitario>
+<descuento>15.80</descuento>
+<precioTotalSinImpuesto>89.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>89.50</baseImponible>
+<valor>10.74</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70498</codigoPrincipal>
+<descripcion>INDUCIDO 16-70-0320 P/ TALADRO DE DIAMANTE 4096</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>161.80</precioUnitario>
+<descuento>24.27</descuento>
+<precioTotalSinImpuesto>137.53</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>137.53</baseImponible>
+<valor>16.50</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96545</codigoPrincipal>
+<descripcion>RULIMAN 02-04-1229 P/MOD.5196</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>6.90</precioUnitario>
+<descuento>1.04</descuento>
+<precioTotalSinImpuesto>5.86</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.86</baseImponible>
+<valor>0.70</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150283</codigoPrincipal>
+<descripcion>RODAMIENTO 02-04-1041 DE 10X30X9 P/ 4292</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>4.80</precioUnitario>
+<descuento>0.72</descuento>
+<precioTotalSinImpuesto>4.08</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.08</baseImponible>
+<valor>0.49</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150487</codigoPrincipal>
+<descripcion>SELLO DE ACEITE 45-06-0635 DE AGUA P/ MOTOR 4096.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>30.97</precioUnitario>
+<descuento>9.29</descuento>
+<precioTotalSinImpuesto>52.65</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>52.65</baseImponible>
+<valor>6.32</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

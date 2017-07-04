@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268638</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268638</guiaRemision>
+<razonSocialComprador>INGENIERIA Y SERVICIOS AMBIENTALES S.A. ISASA</razonSocialComprador>
+<identificacionComprador>1792335221001</identificacionComprador>
+<totalSinImpuestos>10905.61</totalSinImpuestos>
+<totalDescuento>1211.73</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>10905.61</baseImponible>
+<valor>1308.67</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>12214.28</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>13942</codigoPrincipal>
+<descripcion>ROSCADORA MOD-1224 MOTOR 1-1/2 HP 115V 60C CAPACIDAD 1/4" A 4"(26092)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>12117.34</precioUnitario>
+<descuento>1211.73</descuento>
+<precioTotalSinImpuesto>10905.61</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>10905.61</baseImponible>
+<valor>1308.67</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">alto@isa.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">3801340 41</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">059703</campoAdicional>
+<campoAdicional nombre="Observaciones">LA MITAD SE FINANCIA A 30 Y 45 DIAS CON</campoAdicional>
+</infoAdicional>
+</factura>

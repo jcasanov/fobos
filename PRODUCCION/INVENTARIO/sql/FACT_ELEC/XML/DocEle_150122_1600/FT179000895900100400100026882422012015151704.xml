@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268824</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268824</guiaRemision>
+<razonSocialComprador>CARROCERIAS IMCE</razonSocialComprador>
+<identificacionComprador>1801172162001</identificacionComprador>
+<totalSinImpuestos>266.98</totalSinImpuestos>
+<totalDescuento>14.06</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>266.98</baseImponible>
+<valor>32.04</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>299.02</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99747</codigoPrincipal>
+<descripcion>BROCA PARA METAL Y MADERA 48-89-2305 DE COBALTO DE 1/8"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>5.52</precioUnitario>
+<descuento>1.66</descuento>
+<precioTotalSinImpuesto>31.46</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>31.46</baseImponible>
+<valor>3.78</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102411</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-89-2306 DE COBALTO DE 9/64" THUNDERBOLT</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>3.27</precioUnitario>
+<descuento>0.98</descuento>
+<precioTotalSinImpuesto>18.64</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>18.64</baseImponible>
+<valor>2.24</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102412</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-89-2307 DE COBALTO DE 5/32" THUNDERBOLT</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>3.40</precioUnitario>
+<descuento>1.02</descuento>
+<precioTotalSinImpuesto>19.38</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>19.38</baseImponible>
+<valor>2.33</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99748</codigoPrincipal>
+<descripcion>BROCA PARA METAL Y MADERA 48-89-2309 DE COBALTO DE 3/16"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>4.15</precioUnitario>
+<descuento>1.25</descuento>
+<precioTotalSinImpuesto>23.65</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>23.65</baseImponible>
+<valor>2.84</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98117</codigoPrincipal>
+<descripcion>BROCA PARA METAL Y MADERA 48-89-2313 DE 1/4" DE COBALTO</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>6.73</precioUnitario>
+<descuento>2.02</descuento>
+<precioTotalSinImpuesto>38.36</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>38.36</baseImponible>
+<valor>4.60</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102415</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-89-2317 DE COBALTO DE 5/16" THUNDERBOLT</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>9.49</precioUnitario>
+<descuento>2.85</descuento>
+<precioTotalSinImpuesto>54.09</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>54.09</baseImponible>
+<valor>6.49</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99749</codigoPrincipal>
+<descripcion>BROCA PARA METAL Y MADERA 48-89-2321 DE COBALTO DE 3/8"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>14.28</precioUnitario>
+<descuento>4.28</descuento>
+<precioTotalSinImpuesto>81.40</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>81.40</baseImponible>
+<valor>9.77</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacion@carroceriasimce.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">032445347</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">046247</campoAdicional>
+</infoAdicional>
+</factura>

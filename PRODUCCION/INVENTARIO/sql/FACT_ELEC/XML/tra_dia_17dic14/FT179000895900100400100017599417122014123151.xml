@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175994</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>JOSE PONCE MARTINEZ  NORTE 75111</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175994</guiaRemision>
+<razonSocialComprador>ZUNIGA ALZAMORA EDISON PATRICIO</razonSocialComprador>
+<identificacionComprador>1703793602</identificacionComprador>
+<totalSinImpuestos>39.25</totalSinImpuestos>
+<totalDescuento>2.07</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>39.25</baseImponible>
+<valor>4.71</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>43.96</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>25245</codigoPrincipal>
+<descripcion>SPUD 5278000 FLANGE P/ URINARIO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>20.66</precioUnitario>
+<descuento>2.07</descuento>
+<precioTotalSinImpuesto>39.25</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="EDESA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>39.25</baseImponible>
+<valor>4.71</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2474662</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">056393</campoAdicional>
+</infoAdicional>
+</factura>

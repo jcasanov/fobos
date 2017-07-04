@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176290</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176290</guiaRemision>
+<razonSocialComprador>VALLEJO GONZALEZ JUAN MARTIN</razonSocialComprador>
+<identificacionComprador>1713142261001</identificacionComprador>
+<totalSinImpuestos>36.34</totalSinImpuestos>
+<totalDescuento>3.46</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>36.34</baseImponible>
+<valor>4.36</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>40.70</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>3204</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1" x 4"</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>1.29</precioUnitario>
+<descuento>2.06</descuento>
+<precioTotalSinImpuesto>23.74</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>23.74</baseImponible>
+<valor>2.85</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98131</codigoPrincipal>
+<descripcion>FULMINANTES PARA PISTOLA 50506 CAL. 22  AMARILLO  (100 UNID.)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>7.00</precioUnitario>
+<descuento>1.40</descuento>
+<precioTotalSinImpuesto>12.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="CIEN"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>12.60</baseImponible>
+<valor>1.51</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">juanvallejog@yahoo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2247963</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">056103</campoAdicional>
+</infoAdicional>
+</factura>

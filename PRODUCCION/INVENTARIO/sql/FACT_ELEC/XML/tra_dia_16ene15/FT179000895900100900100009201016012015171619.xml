@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092010</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092010</guiaRemision>
+<razonSocialComprador>AYALA V. MONSERRATT</razonSocialComprador>
+<identificacionComprador>0900106816001</identificacionComprador>
+<totalSinImpuestos>391.23</totalSinImpuestos>
+<totalDescuento>52.63</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>391.23</baseImponible>
+<valor>46.95</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>438.18</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>70896</codigoPrincipal>
+<descripcion>LLAVE SC0018233061 BL LLAVE ANGULAR P/ MANGUERA DE 1/2" A 1/2"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>5.33</precioUnitario>
+<descuento>3.20</descuento>
+<precioTotalSinImpuesto>28.78</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>28.78</baseImponible>
+<valor>3.45</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>71609</codigoPrincipal>
+<descripcion>DESAGUE DE LAVABO E2410 RA DH CR DESAGUE 1-1/4" RA/PISTON CROMADO</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>19.44</precioUnitario>
+<descuento>9.33</descuento>
+<precioTotalSinImpuesto>68.43</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>68.43</baseImponible>
+<valor>8.21</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>27951</codigoPrincipal>
+<descripcion>TUBO ABASTO METALICO TRENZADO E269.20.03.0 DH DE 16" DE LAVABO P/ LLAVE DE PASO</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>4.32</precioUnitario>
+<descuento>10.37</descuento>
+<precioTotalSinImpuesto>76.03</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>76.03</baseImponible>
+<valor>9.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>27949</codigoPrincipal>
+<descripcion>TUBO ABASTO METALICO TRENZADO E269.20.0.1 16" P/LAVABO. P/LLAVE ANGULAR</descripcion>
+<cantidad>8.00</cantidad>
+<precioUnitario>4.32</precioUnitario>
+<descuento>4.15</descuento>
+<precioTotalSinImpuesto>30.41</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>30.41</baseImponible>
+<valor>3.65</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>26925</codigoPrincipal>
+<descripcion>TUBO ABASTO- LLAVE ANGULAR LAVABO E262.05 DH-CR FLEXIBLE DE 16"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>10.64</precioUnitario>
+<descuento>7.66</descuento>
+<precioTotalSinImpuesto>56.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>56.18</baseImponible>
+<valor>6.74</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>27742</codigoPrincipal>
+<descripcion>REJILLA E586.00.01 DH CR DE 1-1/2" CROMADA</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>5.14</precioUnitario>
+<descuento>2.47</descuento>
+<precioTotalSinImpuesto>18.09</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>18.09</baseImponible>
+<valor>2.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>8330</codigoPrincipal>
+<descripcion>LLAVE DE MANGUERA E436.04 BR DE 1/2" PESADA MANIJA EN T</descripcion>
+<cantidad>12.00</cantidad>
+<precioUnitario>10.73</precioUnitario>
+<descuento>15.45</descuento>
+<precioTotalSinImpuesto>113.31</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>113.31</baseImponible>
+<valor>13.60</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">asalcedo@s1wc.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2001119</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">003447</campoAdicional>
+</infoAdicional>
+</factura>

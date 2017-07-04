@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176244</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176244</guiaRemision>
+<razonSocialComprador>JUMBO DIAZ WILLIAM ANTONIO</razonSocialComprador>
+<identificacionComprador>1712419058001</identificacionComprador>
+<totalSinImpuestos>55.80</totalSinImpuestos>
+<totalDescuento>9.46</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>55.80</baseImponible>
+<valor>6.70</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>62.50</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>91926</codigoPrincipal>
+<descripcion>LAVAPLATOS DE ACERO INOXIDABLE 40104010 800.510 1C 1E DER. S/H PARA DESG. C/REBOSO MODULAR</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>58.76</precioUnitario>
+<descuento>8.81</descuento>
+<precioTotalSinImpuesto>49.95</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TEKA V"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>49.95</baseImponible>
+<valor>5.99</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103290</codigoPrincipal>
+<descripcion>TAPA DE TANQUE 7467130  EVOLUTION BLANCO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>6.50</precioUnitario>
+<descuento>0.65</descuento>
+<precioTotalSinImpuesto>5.85</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.85</baseImponible>
+<valor>0.70</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2563294</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">032715</campoAdicional>
+</infoAdicional>
+</factura>

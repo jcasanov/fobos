@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048068</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV.MORAN VALVERDE OE3-191-AV.TNTE.H.ORTI</dirEstablecimiento>
+<dirPartida>GUALBERTO PEREZ E1-88 ENTRE MALDONADO Y NAPO</dirPartida>
+<razonSocialTransportista>SERGIO QUINCHE</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>1103687586</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>03/12/2014</fechaIniTransporte>
+<fechaFinTransporte>03/12/2014</fechaFinTransporte>
+<placa>PBX-9975</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1790160653001</identificacionDestinatario>
+<razonSocialDestinatario>EDESA S. A.</razonSocialDestinatario>
+<dirDestinatario>AV.MORAN VALVERDE OE3-191-AV.TNTE.H.ORTI</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>02/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>3086</codigoInterno>
+<descripcion>NEPLO FLEX DE 1/2"</descripcion>
+<cantidad>45.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="18786" valor="18786"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>50380</codigoInterno>
+<descripcion>TEE POLIPROPILENO DE 1/2" (AGUA CALIENTE)</descripcion>
+<cantidad>40.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="20626" valor="20626"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>50420</codigoInterno>
+<descripcion>UNION POLIPROPILENO DE 2" (AGUA CALIENTE)</descripcion>
+<cantidad>4.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="23398" valor="23398"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>50420</codigoInterno>
+<descripcion>UNION POLIPROPILENO DE 2" (AGUA CALIENTE)</descripcion>
+<cantidad>6.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="23398" valor="23398"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>50432</codigoInterno>
+<descripcion>UNIVERSAL POLIPROPILENO DE 2" (AGUA CALIENTE)</descripcion>
+<cantidad>10.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="23891" valor="23891"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>5836</codigoInterno>
+<descripcion>TUBO PVC ROSCABLE x 6 MTS. DE 2" (200 PSI)</descripcion>
+<cantidad>13.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="22596" valor="22596"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+<campoAdicional nombre="telefono-movil">2671717</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">028722</campoAdicional>
+</infoAdicional>
+</guiaRemision>

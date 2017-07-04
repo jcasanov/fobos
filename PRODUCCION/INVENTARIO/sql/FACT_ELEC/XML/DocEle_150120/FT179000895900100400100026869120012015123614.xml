@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268691</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268691</guiaRemision>
+<razonSocialComprador>CARDENAS VIZCAINO EDISON VICENTE</razonSocialComprador>
+<identificacionComprador>1714264932001</identificacionComprador>
+<totalSinImpuestos>83.85</totalSinImpuestos>
+<totalDescuento>8.83</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>83.85</baseImponible>
+<valor>10.06</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>93.91</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>14384</codigoPrincipal>
+<descripcion>ACEITE PARA EQUIPOS NU CLEAR CLARO (S/ENVASE) (41585)</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>21.01</precioUnitario>
+<descuento>8.40</descuento>
+<precioTotalSinImpuesto>75.64</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="GALON"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>75.64</baseImponible>
+<valor>9.08</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21663</codigoPrincipal>
+<descripcion>ENVASE PLASTICO DESCARTABLE DE 1 Gln.</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>2.16</precioUnitario>
+<descuento>0.43</descuento>
+<precioTotalSinImpuesto>8.21</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.21</baseImponible>
+<valor>0.99</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">ecuavalver-industrial@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2351536</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">061078</campoAdicional>
+</infoAdicional>
+</factura>

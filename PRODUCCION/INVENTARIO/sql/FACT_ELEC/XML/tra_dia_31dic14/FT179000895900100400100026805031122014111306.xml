@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268050</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>31/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268050</guiaRemision>
+<razonSocialComprador>YEPEZ AVILA JOSE</razonSocialComprador>
+<identificacionComprador>1705284840</identificacionComprador>
+<totalSinImpuestos>48.36</totalSinImpuestos>
+<totalDescuento>6.07</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>48.36</baseImponible>
+<valor>5.80</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>54.16</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>58</codigoPrincipal>
+<descripcion>ANGULO LAMINADO x 6 MTS. DE 40mm. x 3mm.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>15.49</precioUnitario>
+<descuento>3.72</descuento>
+<precioTotalSinImpuesto>27.26</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>27.26</baseImponible>
+<valor>3.27</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21470</codigoPrincipal>
+<descripcion>ELECTRODO E-6011-C-13 1/8" ACERO DULCE</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>4.69</precioUnitario>
+<descuento>2.35</descuento>
+<precioTotalSinImpuesto>21.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="AGA"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>21.10</baseImponible>
+<valor>2.53</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jyepez@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">524450</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">001746</campoAdicional>
+</infoAdicional>
+</factura>

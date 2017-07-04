@@ -1,0 +1,44 @@
+cargando los datos en la tablas temporales ...
+cargado los datos en la tablas temporales OK ...
+Se insertaron 02 y se actualizaron 08 GRUPOS en la gent004  OK.
+Se insertaron 07 y se actualizaron 31 USUARIOS en la gent005  OK.
+Se insertaron  68 y se actualizaron 342 PROCESOS en la gent054  OK.
+Se actualizo los permisos del usuario: FOBOS  OK.
+Se actualizo los permisos del usuario: ACEREMPL  OK.
+Se actualizo los permisos del usuario: ACERINTE  OK.
+Se actualizo los permisos del usuario: MARIBANC  OK.
+Se actualizo los permisos del usuario: LOURBANC  OK.
+Se actualizo los permisos del usuario: TYROBOHO  OK.
+Se actualizo los permisos del usuario: MOISCALD  OK.
+Se actualizo los permisos del usuario: HUMBGAON  OK.
+Se actualizo los permisos del usuario: JENNGARC  OK.
+Se actualizo los permisos del usuario: VICTGONZ  OK.
+Se actualizo los permisos del usuario: ALEXLOZA  OK.
+Se actualizo los permisos del usuario: ANGEPERE  OK.
+Se actualizo los permisos del usuario: NANCRODR  OK.
+Se actualizo los permisos del usuario: MATIRUGE  OK.
+Se actualizo los permisos del usuario: LENIRUIZ  OK.
+Se actualizo los permisos del usuario: HSALAZAR  OK.
+Se actualizo los permisos del usuario: HERIVALE  OK.
+Se actualizo los permisos del usuario: CARLVALV  OK.
+Se actualizo los permisos del usuario: WASHVERA  OK.
+Se actualizo los permisos del usuario: PETEWETT  OK.
+Se actualizo los permisos del usuario: RITAMORA  OK.
+Se actualizo los permisos del usuario: RITACEDE  OK.
+Se actualizo los permisos del usuario: MARGSOLO  OK.
+Se actualizo los permisos del usuario: CATAGARC  OK.
+Se actualizo los permisos del usuario: JESEVITE  OK.
+Se actualizo los permisos del usuario: FERNGONZ  OK.
+Se actualizo los permisos del usuario: BOLICORD  OK.
+Se actualizo los permisos del usuario: ALEJRIVE  OK.
+Se actualizo los permisos del usuario: DARWMARC  OK.
+Se actualizo los permisos del usuario: PATRMOLI  OK.
+Se actualizo los permisos del usuario: OSWACEDE  OK.
+Se actualizo los permisos del usuario: E1EBLUHM  OK.
+Se actualizo los permisos del usuario: E1ELINEV  OK.
+Se actualizo los permisos del usuario: INVENTAR  OK.
+Se actualizo los permisos del usuario: DANYSANC  OK.
+Se actualizo los permisos del usuario: E1RICROD  OK.
+Se actualizo los permisos del usuario: E1ALERIO  OK.
+Se actualizo los permisos del usuario: JEFESIST  OK.
+Proceso Terminado  OK.

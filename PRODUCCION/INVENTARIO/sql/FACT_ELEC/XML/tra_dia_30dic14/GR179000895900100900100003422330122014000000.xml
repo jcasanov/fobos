@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000034223</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>INTERNADI DE CONSTRUCCIONES C.A</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1706279518001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>30/12/2014</fechaIniTransporte>
+<fechaFinTransporte>31/12/2014</fechaFinTransporte>
+<placa>GIH110</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1706279518001</identificacionDestinatario>
+<razonSocialDestinatario>INTERANDI DE CONSTRUCCIONES C.A. ICCA</razonSocialDestinatario>
+<dirDestinatario>REFA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>17/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>100072</codigoInterno>
+<descripcion>CADENA LCER2010NP P/TECLE ELECTRICO DE 1 Ton.</descripcion>
+<cantidad>48.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KITO"/>
+<detAdicional nombre="MODELO" valor="LCER2010NP"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>100245</codigoInterno>
+<descripcion>TECLE ELECTRICO A CADENA NER020S DE 2 Ton. 230V/3F VEL.STANDARD S/CADENA Y CABLE</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KITO"/>
+<detAdicional nombre="MODELO" valor="NER020S"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>100326</codigoInterno>
+<descripcion>CADENA LCER2020NP P/TECLE ELECTRICO 3F. DE 2 Y 3 Ton.</descripcion>
+<cantidad>12.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KITO"/>
+<detAdicional nombre="MODELO" valor="LCER2020NP"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>100376</codigoInterno>
+<descripcion>TECLE ELECTRICO A CADENA NER010S DE 1 Ton. 230/460/3F VELOC.STANDARD S/CABLE Y CADENA</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KITO"/>
+<detAdicional nombre="MODELO" valor="NER010S"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>100727</codigoInterno>
+<descripcion>TECLE ELECTRICO A CADENA NER010L DE 1 Ton. 230/3F BAJA VELOC. S/CADENA Y CABLE</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KITO"/>
+<detAdicional nombre="MODELO" valor="NER010L"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>99485</codigoInterno>
+<descripcion>CABLE ELECTRICO 16/6P P/BOTONERA DE TROLLEY (CADA METRO)</descripcion>
+<cantidad>60.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KITO"/>
+<detAdicional nombre="MODELO" valor="16/6P"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacionelectronica@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2281705</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">006082</campoAdicional>
+</infoAdicional>
+</guiaRemision>

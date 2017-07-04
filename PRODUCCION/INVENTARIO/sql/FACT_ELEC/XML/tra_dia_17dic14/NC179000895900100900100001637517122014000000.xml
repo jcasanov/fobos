@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000016375</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>QUISQUIS 1502 Y TULCAN, 2DO.PISO OF.201</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>INTERANDI DE CONSTRUCCIONES C.A. ICCA</razonSocialComprador>
+<identificacionComprador>1706279518001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000016375</numDocModificado>
+<fechaEmisionDocSustento>17/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>19649.85</totalSinImpuestos>
+<valorModificacion>22007.83</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>19649.85</baseImponible>
+<valor>2357.98</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV. DF-13336 FACT. FA-90794</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>22026</codigoInterno>
+<descripcion>DEV. DF-13336 FACT. FA-90794</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>19649.85</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>19649.85</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ACERO" valor="ACERO"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>19649.85</baseImponible>
+<valor>2357.98</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2281705</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">6082</campoAdicional>
+</infoAdicional>
+</notaCredito>

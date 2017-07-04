@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048269</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<dirPartida>AV. LA PRENSA N/4514</dirPartida>
+<razonSocialTransportista>SERVIENTREGA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0991285679001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>23/12/2014</fechaIniTransporte>
+<fechaFinTransporte>23/12/2014</fechaFinTransporte>
+<placa>PAA-001</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1802444388001</identificacionDestinatario>
+<razonSocialDestinatario>PALLO SANCHEZ FAUSTO RODRIGO</razonSocialDestinatario>
+<dirDestinatario>AMBATO</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>22/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>68829</codigoInterno>
+<descripcion>BOMBA TIPO JET C-MOTOR MQ3-45 1 HP 110/1/60 1" (96860195)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="MODELO" valor="96860195"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">851238</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">049001</campoAdicional>
+</infoAdicional>
+</guiaRemision>

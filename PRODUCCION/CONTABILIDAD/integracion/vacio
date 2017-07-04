@@ -1,0 +1,12 @@
+
+	DECLARE qr CURSOR WITH HOLD FOR
+		SELECT * FROM rept040
+		WHERE r40_compania  = r.r19_compania  AND 
+		      r40_localidad = r.r19_localidad AND
+                      r40_cod_tran  = r.r19_cod_tran  AND  
+                      r40_num_tran  = r.r19_num_tran  
+	OPEN qr
+	FETCH qr INTO r_r40.*
+	IF status <> NOTFOUND THEN
+		CONTINUE FOREACH
+	END IF		

@@ -1,0 +1,29 @@
+database acero_gm
+screen size 24 by 80
+{
+r25_compania       [f000       ]
+r25_localidad      [f001  ]
+r25_numprev        [f002       ]
+r25_valor_ant      [f003         ]
+r25_valor_cred     [f004         ]
+r25_interes        [f005  ]
+r25_dividendos     [f006  ]
+r25_plazo          [f007  ]
+r25_cod_tran       [a0]
+r25_num_tran       [f008             ]
+}
+end
+tables
+rept025
+attributes
+f000 = rept025.r25_compania;
+f001 = rept025.r25_localidad;
+f002 = rept025.r25_numprev;
+f003 = rept025.r25_valor_ant;
+f004 = rept025.r25_valor_cred;
+f005 = rept025.r25_interes;
+f006 = rept025.r25_dividendos;
+f007 = rept025.r25_plazo;
+a0 = rept025.r25_cod_tran;
+f008 = rept025.r25_num_tran;
+end

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091823</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091823</guiaRemision>
+<razonSocialComprador>HOLCIM ECUADOR S.A.</razonSocialComprador>
+<identificacionComprador>0990293244001</identificacionComprador>
+<totalSinImpuestos>220.04</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>220.04</baseImponible>
+<valor>26.40</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>246.44</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>101419</codigoPrincipal>
+<descripcion>CARBONES 22-22-1550 P/TALADRO 2602-20</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>8.45</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>33.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>33.80</baseImponible>
+<valor>4.06</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100425</codigoPrincipal>
+<descripcion>SWITCH 23-66-0273 P/TALADRO MOD.2611-20</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>93.12</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>186.24</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>186.24</baseImponible>
+<valor>22.35</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">rodolfo.montero@holcim.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3709000</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">007551</campoAdicional>
+</infoAdicional>
+</factura>

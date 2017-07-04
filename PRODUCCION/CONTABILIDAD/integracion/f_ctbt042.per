@@ -1,0 +1,29 @@
+database acero_gm
+screen size 24 by 80
+{
+b42_compania       [f000       ]
+b42_localidad      [f001  ]
+b42_iva_venta      [f002        ]
+b42_iva_compra     [f003        ]
+b42_iva_import     [f004        ]
+b42_retencion      [f005        ]
+b42_reten_cred     [f006        ]
+b42_flete_comp     [f007        ]
+b42_otros_comp     [f008        ]
+b42_cuadre         [f009        ]
+}
+end
+tables
+ctbt042
+attributes
+f000 = ctbt042.b42_compania;
+f001 = ctbt042.b42_localidad;
+f002 = ctbt042.b42_iva_venta;
+f003 = ctbt042.b42_iva_compra;
+f004 = ctbt042.b42_iva_import;
+f005 = ctbt042.b42_retencion;
+f006 = ctbt042.b42_reten_cred;
+f007 = ctbt042.b42_flete_comp;
+f008 = ctbt042.b42_otros_comp;
+f009 = ctbt042.b42_cuadre;
+end

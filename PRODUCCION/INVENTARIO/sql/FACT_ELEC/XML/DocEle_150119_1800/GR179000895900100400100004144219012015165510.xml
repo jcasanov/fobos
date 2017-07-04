@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000041442</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<dirPartida>AV LA PRENSA</dirPartida>
+<razonSocialTransportista>TRANSDYR</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1791824377001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>19/01/2015</fechaIniTransporte>
+<fechaFinTransporte>19/01/2015</fechaFinTransporte>
+<placa>DYR</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0190005070001</identificacionDestinatario>
+<razonSocialDestinatario>CONTINENTAL TIRE ANDINA S.A</razonSocialDestinatario>
+<dirDestinatario>CUENCA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>19/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>100116</codigoInterno>
+<descripcion>BOMBA CENTRIF MULTIETAPA C-MOTOR CRN32-10-2 40 HP 220-277D/380-480Y -3-60 VERTICAL (96122537)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">daniela.maldonado@conti.com.ec</campoAdicional>
+<campoAdicional nombre="Email">inbox_felectronica@conti.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">072862155</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">039998</campoAdicional>
+</infoAdicional>
+</guiaRemision>

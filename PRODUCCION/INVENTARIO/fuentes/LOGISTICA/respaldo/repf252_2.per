@@ -1,0 +1,36 @@
+DATABASE aceros
+SCREEN
+{
+ GUIAS REMISION PARA HOJA DE RUTA
+
+                       [c0 |c1 ]
+  [c000    |c001                ]
+ [c002  ] [c003                ]
+ [c002  ] [c003                ]
+ [c002  ] [c003                ]
+ [c002  ] [c003                ]
+ [c002  ] [c003                ]
+ [c002  ] [c003                ]
+ [c002  ] [c003                ]
+ [c002  ] [c003                ]
+ [c002  ] [c003                ]
+ [c002  ] [c003                ]
+
+}
+ATTRIBUTES
+c0   = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c1   = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+
+c002 = FORMONLY.num_guia TYPE INTEGER NOT NULL, REQUIRED, UPSHIFT,
+	OPTIONS = '-nolist',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = FORMONLY.num_guia_sri, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+END
+KEYS
+F5 = "Cabecera"
+F6 = "Guía Remisión"
+INSTRUCTIONS
+SCREEN RECORD rm_guias[10] (num_guia, num_guia_sri)

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113772</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>09/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113772</guiaRemision>
+<razonSocialComprador>FERNANDEZ CHANCUSI JUAN PABLO</razonSocialComprador>
+<identificacionComprador>1707312714001</identificacionComprador>
+<totalSinImpuestos>8.76</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>8.76</baseImponible>
+<valor>1.05</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>9.81</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99953</codigoPrincipal>
+<descripcion>GRIFO ESFERICO BRONCE CROMADO PERFECTA DE 1/2" CABO ROJO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>4.25</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>4.25</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FIV"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.25</baseImponible>
+<valor>0.51</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1648</codigoPrincipal>
+<descripcion>BUSHING GALV. CLASE 150 DE 1-1/2" x 1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3.27</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3.27</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.27</baseImponible>
+<valor>0.39</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3642</codigoPrincipal>
+<descripcion>REDUCCION GALV. CLASE 150 DE 1/2" x 1/4"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.24</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1.24</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.24</baseImponible>
+<valor>0.15</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jpablo.fernandez@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3200779</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">050504</campoAdicional>
+<campoAdicional nombre="Observaciones">DINERS CLUB CORRIENTE</campoAdicional>
+</infoAdicional>
+</factura>

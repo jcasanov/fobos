@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000015287</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<dirPartida>GUALBERTO PEREZ E1-88 ENTRE MALDONADO Y NAPO</dirPartida>
+<razonSocialTransportista>SERGIO QUINCHE</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>1103687586</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>23/12/2014</fechaIniTransporte>
+<fechaFinTransporte>23/12/2014</fechaFinTransporte>
+<placa>PBX-9975</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1706971643001</identificacionDestinatario>
+<razonSocialDestinatario>GUAMAN ZOILA AGRIPINA</razonSocialDestinatario>
+<dirDestinatario>SHYRIS Y ALTAR  SANGOLQUI</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>22/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>100260</codigoInterno>
+<descripcion>BALDOSA DE PISO 30 X 30 MONOQUEMA POMPEYA BEIGE PRIMERA</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="MODELO" valor="POMPEYA BEIGE"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>94334</codigoInterno>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA OLMO PRIMERA</descripcion>
+<cantidad>100.50</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="OLMO PREMIUM"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">CONSUMIDORFINAL@ACEROCOMERCIAL.COM</campoAdicional>
+<campoAdicional nombre="telefono-movil">2339357</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">055584</campoAdicional>
+</infoAdicional>
+</guiaRemision>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000041420</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<dirPartida>AV. LA PRENSA N/4514</dirPartida>
+<razonSocialTransportista>SR TAIRO MANZO</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>15/01/2015</fechaIniTransporte>
+<fechaFinTransporte>15/01/2015</fechaFinTransporte>
+<placa>PAB-8801</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1705867255001</identificacionDestinatario>
+<razonSocialDestinatario>FACI CERAMICA</razonSocialDestinatario>
+<dirDestinatario>AV. DE LA PRENSA N64-68 Y SAN CARLOS</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>15/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>102833</codigoInterno>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA TESSUTTO CAPUCHINO PRIMERA</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>102835</codigoInterno>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA TESSUTTO MOCCA  PRIMERA</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">paciceramica@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2590036</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">046653</campoAdicional>
+</infoAdicional>
+</guiaRemision>

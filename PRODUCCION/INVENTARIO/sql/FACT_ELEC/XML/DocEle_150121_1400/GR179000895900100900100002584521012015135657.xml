@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025845</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>AV. JUAN TANCA MARENGO KM.1.7</dirPartida>
+<razonSocialTransportista>JUAN GARCIA ROSADO</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>1201145800</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>21/01/2015</fechaIniTransporte>
+<fechaFinTransporte>21/01/2015</fechaFinTransporte>
+<placa>  RBA-2916</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1201145800</identificacionDestinatario>
+<razonSocialDestinatario>GARCIA ROSADO ARCADIO JUAN</razonSocialDestinatario>
+<dirDestinatario>RETIRO JUAN GARCIA ROSADO</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>21/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>100382</codigoInterno>
+<descripcion>VALVULA FLUSH PARA INODORO E365.22 CR STANDARD</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>101621</codigoInterno>
+<descripcion>LLAVE TEMPORIZADAS / PRESSMATIC E372 CR ECOMATIC P/LAVABO</descripcion>
+<cantidad>4.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>25244</codigoInterno>
+<descripcion>SPUD 5110000 DE 1-1/2" P/TAZA FLUSH</descripcion>
+<cantidad>4.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>48674</codigoInterno>
+<descripcion>LLAVE TEMPORIZADAS / PRESSMATIC O361 CR 1/2" P/ LAVABO</descripcion>
+<cantidad>4.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>99705</codigoInterno>
+<descripcion>DESAGUE DE LAVABO E2460.01 RA DH BLC C/REJILLA Y SIFON DE 1-1/4"</descripcion>
+<cantidad>4.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">rubyg_1991@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">052734948</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016705</campoAdicional>
+</infoAdicional>
+</guiaRemision>

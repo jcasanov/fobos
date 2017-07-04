@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175867</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>AV. 6 DE DICIEMBRE N53-237 Y AV. LOS PIN</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175867</guiaRemision>
+<razonSocialComprador>RILER</razonSocialComprador>
+<identificacionComprador>1790947432001</identificacionComprador>
+<totalSinImpuestos>678.19</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>678.19</baseImponible>
+<valor>81.38</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>759.57</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>94454</codigoPrincipal>
+<descripcion>FILTRO DE ACERO INOXIDABLE IT-404 EN "Y" ROSCADO DE 1-1/2" CLASE 800 PSI</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>60.39</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>241.56</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="INOX TEK" valor="INOX T"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>241.56</baseImponible>
+<valor>28.99</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>94455</codigoPrincipal>
+<descripcion>FILTRO DE ACERO INOXIDABLE IT-404 EN "Y" ROSCADO DE 2" CLASE 800 PSI</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>90.17</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>360.68</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="INOX TEK" valor="INOX T"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>360.68</baseImponible>
+<valor>43.28</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>93105</codigoPrincipal>
+<descripcion>DISCO PARA SIERRA 48-40-4515 DE 8" 42 DIENTES DE CARBURO P/ LA 6370-20/21</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>75.95</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>75.95</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>75.95</baseImponible>
+<valor>9.11</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,30 @@
+DATABASE aceros
+SCREEN
+{
+  PRE-VENTAS VEHICULOS
+ ---------------------------------------------------
+  Número    Cliente                               E
+ ---------------------------------------------------
+ [c001     |c002                                 |c] 
+ [c001     |c002                                 |c] 
+ [c001     |c002                                 |c] 
+ [c001     |c002                                 |c] 
+ [c001     |c002                                 |c] 
+ [c001     |c002                                 |c] 
+ [c001     |c002                                 |c] 
+ [c001     |c002                                 |c] 
+ [c001     |c002                                 |c] 
+ [c001     |c002                                 |c] 
+}
+TABLES
+veht026
+cxct001
+ATTRIBUTES
+c001 = v26_numprev, UPSHIFT, REVERSE;
+c002 = z01_nomcli,  UPSHIFT, REVERSE;
+c    = v26_estado,  UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_preveh[10] (v26_numprev, z01_nomcli, v26_estado)
+

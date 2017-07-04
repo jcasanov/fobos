@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175900</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/12/2014</fechaEmision>
+<dirEstablecimiento>CONOCOTO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175900</guiaRemision>
+<razonSocialComprador>MANTILLA QUINALUISA MARCO RODRIGO</razonSocialComprador>
+<identificacionComprador>1706278684001</identificacionComprador>
+<totalSinImpuestos>7.76</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>7.76</baseImponible>
+<valor>0.93</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>8.69</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99239</codigoPrincipal>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7423 SD1 DE 1/2" X 4-1/2"</descripcion>
+<cantidad>8.00</cantidad>
+<precioUnitario>0.97</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>7.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="POWERS" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7.76</baseImponible>
+<valor>0.93</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2072830</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">057219</campoAdicional>
+</infoAdicional>
+</factura>

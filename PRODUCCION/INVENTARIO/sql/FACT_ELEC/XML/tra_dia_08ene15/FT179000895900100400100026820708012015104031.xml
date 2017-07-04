@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268207</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>08/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268207</guiaRemision>
+<razonSocialComprador>TEXTIL PADILLA E HIJOS TEXPADILLA CIA. LTDA</razonSocialComprador>
+<identificacionComprador>1791770684001</identificacionComprador>
+<totalSinImpuestos>1575.00</totalSinImpuestos>
+<totalDescuento>175.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1575.00</baseImponible>
+<valor>189.00</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1764.00</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102817</codigoPrincipal>
+<descripcion>TANQUE DE PRESION METALICO PRECARGADO PRECARGADO DE 400 L. (96603424)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1750.00</precioUnitario>
+<descuento>175.00</descuento>
+<precioTotalSinImpuesto>1575.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1575.00</baseImponible>
+<valor>189.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">cartera@textilpadilla.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2861087</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016987</campoAdicional>
+</infoAdicional>
+</factura>

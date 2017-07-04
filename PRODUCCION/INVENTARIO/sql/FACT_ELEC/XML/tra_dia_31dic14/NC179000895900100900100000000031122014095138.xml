@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000022054</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>31/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>INSTALACIONES SANITARIAS TECNICAS S.A. INSATEC</razonSocialComprador>
+<identificacionComprador>0992301481001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000022054</numDocModificado>
+<fechaEmisionDocSustento>31/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>6.15</totalSinImpuestos>
+<valorModificacion>6.89</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>6.15</baseImponible>
+<valor>0.74</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEVOLUCION: CLIENTE DIO MAL LA MEDIDA</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>1672</codigoInterno>
+<descripcion>BUSHING GALV. CLASE 150 DE 2-1/2" x 2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>6.91</precioUnitario>
+<descuento>0.76</descuento>
+<precioTotalSinImpuesto>6.15</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.15</baseImponible>
+<valor>0.74</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">insatec.sa@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2820156</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">5460</campoAdicional>
+</infoAdicional>
+</notaCredito>

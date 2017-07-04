@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comprobanteRetencion id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial></razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>             </ruc>
+<estab>   </estab>
+<ptoEmi>   </ptoEmi>
+<secuencial>         </secuencial>
+<dirMatriz></dirMatriz>
+</infoTributaria>
+<infoCompRetencion>
+<fechaEmision>          </fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<contribuyenteEspecial></contribuyenteEspecial>
+<obligadoContabilidad></obligadoContabilidad>
+<tipoIdentificacionSujetoRetenido></tipoIdentificacionSujetoRetenido>
+<razonSocialSujetoRetenido></razonSocialSujetoRetenido>
+<identificacionSujetoRetenido></identificacionSujetoRetenido>
+<periodoFiscal></periodoFiscal>
+</infoCompRetencion>
+<impuestos>
+</impuestos>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil"></campoAdicional>
+<campoAdicional nombre="CodInternoSAP"></campoAdicional>
+</infoAdicional>
+</comprobanteRetencion>

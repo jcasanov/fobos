@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131877</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>30/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131877</guiaRemision>
+<razonSocialComprador>CASA TABANGO CRISTHIAN RIGOBERTO</razonSocialComprador>
+<identificacionComprador>0503844094</identificacionComprador>
+<totalSinImpuestos>1470.44</totalSinImpuestos>
+<totalDescuento>301.18</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1470.44</baseImponible>
+<valor>176.45</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1646.89</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>101830</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA SORAIDA ROBLE SEGUNDA</descripcion>
+<cantidad>101.76</cantidad>
+<precioUnitario>7.58</precioUnitario>
+<descuento>131.13</descuento>
+<precioTotalSinImpuesto>640.21</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>640.21</baseImponible>
+<valor>76.83</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101773</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 TESSUTTO ALMENDRA  PRIMERA</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>10.55</precioUnitario>
+<descuento>35.87</descuento>
+<precioTotalSinImpuesto>175.13</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>175.13</baseImponible>
+<valor>21.02</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101779</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 TESSUTTO MOCCA  PRIMERA</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>10.55</precioUnitario>
+<descuento>35.87</descuento>
+<precioTotalSinImpuesto>175.13</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>175.13</baseImponible>
+<valor>21.02</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101200</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 COLORA NIEVE  PRIMERA</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>9.77</precioUnitario>
+<descuento>33.22</descuento>
+<precioTotalSinImpuesto>162.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>162.18</baseImponible>
+<valor>19.46</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100491</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 MACHALILLA BEIGE PRIMERA</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>9.19</precioUnitario>
+<descuento>31.25</descuento>
+<precioTotalSinImpuesto>152.55</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>152.55</baseImponible>
+<valor>18.31</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101498</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA AGRESTE  PRIMERA</descripcion>
+<cantidad>21.00</cantidad>
+<precioUnitario>9.48</precioUnitario>
+<descuento>33.84</descuento>
+<precioTotalSinImpuesto>165.24</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>165.24</baseImponible>
+<valor>19.83</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">hermi-1950@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2631234</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">062536</campoAdicional>
+</infoAdicional>
+</factura>

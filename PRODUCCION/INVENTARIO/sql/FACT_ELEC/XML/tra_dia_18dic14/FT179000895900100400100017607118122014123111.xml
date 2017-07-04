@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176071</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176071</guiaRemision>
+<razonSocialComprador>SAHI SANCHEZ-HIDALGO ANCLAJES Y FIJACIONES</razonSocialComprador>
+<identificacionComprador>1707172001001</identificacionComprador>
+<totalSinImpuestos>105.40</totalSinImpuestos>
+<totalDescuento>18.60</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>105.40</baseImponible>
+<valor>12.65</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>118.05</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>97894</codigoPrincipal>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7434 SD1 DE 5/8" X 6"</descripcion>
+<cantidad>25.00</cantidad>
+<precioUnitario>2.76</precioUnitario>
+<descuento>10.35</descuento>
+<precioTotalSinImpuesto>58.65</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>58.65</baseImponible>
+<valor>7.04</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150638</codigoPrincipal>
+<descripcion>FULMINANTES PARA PISTOLA 50502 CAFE CAL.22 BAJA VEL P/P2201 / P7201</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>7.00</precioUnitario>
+<descuento>5.25</descuento>
+<precioTotalSinImpuesto>29.75</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="CIEN"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>29.75</baseImponible>
+<valor>3.57</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>69621</codigoPrincipal>
+<descripcion>CLAVO DE CABEZA .300 PARA CEMENTO Y ACERO 50022 DE 3/4" PIN 0.145" CABEZA 0.3" CAJA DE 100 u</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>4.00</precioUnitario>
+<descuento>3.00</descuento>
+<precioTotalSinImpuesto>17.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="CAJA"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>17.00</baseImponible>
+<valor>2.04</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2021623</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">049131</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268851</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268851</guiaRemision>
+<razonSocialComprador>INMEPROJECTS INGENIERIA MECANICA Y PROYECTOS CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1792296528001</identificacionComprador>
+<totalSinImpuestos>62.69</totalSinImpuestos>
+<totalDescuento>8.55</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>62.69</baseImponible>
+<valor>7.52</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>70.21</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>112</codigoPrincipal>
+<descripcion>CANAL "U" x 6 MTS. DE 100 x 50 x 3mm.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>35.62</precioUnitario>
+<descuento>8.55</descuento>
+<precioTotalSinImpuesto>62.69</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>62.69</baseImponible>
+<valor>7.52</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jose.gamarra@inmeprojects.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">5108598</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">054999</campoAdicional>
+<campoAdicional nombre="Observaciones">22012015</campoAdicional>
+</infoAdicional>
+</factura>

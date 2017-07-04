@@ -1,0 +1,31 @@
+database acero_gm
+screen size 24 by 80
+{
+b41_compania       [f000       ]
+b41_localidad      [f001  ]
+b41_modulo         [a0]
+b41_grupo_linea    [f002 ]
+b41_caja_mb        [f003        ]
+b41_caja_me        [f004        ]
+b41_cxc_mb         [f005        ]
+b41_cxc_me         [f006        ]
+b41_ant_mb         [f007        ]
+b41_ant_me         [f008        ]
+b41_intereses      [f009        ]
+}
+end
+tables
+ctbt041
+attributes
+f000 = ctbt041.b41_compania;
+f001 = ctbt041.b41_localidad;
+a0 = ctbt041.b41_modulo;
+f002 = ctbt041.b41_grupo_linea;
+f003 = ctbt041.b41_caja_mb;
+f004 = ctbt041.b41_caja_me;
+f005 = ctbt041.b41_cxc_mb;
+f006 = ctbt041.b41_cxc_me;
+f007 = ctbt041.b41_ant_mb;
+f008 = ctbt041.b41_ant_me;
+f009 = ctbt041.b41_intereses;
+end

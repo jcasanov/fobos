@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176384</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>29/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176384</guiaRemision>
+<razonSocialComprador>ALMACHI BASTIDAS EMPREATRIZ</razonSocialComprador>
+<identificacionComprador>1702551407</identificacionComprador>
+<totalSinImpuestos>70.58</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>70.58</baseImponible>
+<valor>8.47</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>79.05</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>150509</codigoPrincipal>
+<descripcion>PISTON 44-62-0053 P/ ROTOMARTILLO 5339-21.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>15.56</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>15.56</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>15.56</baseImponible>
+<valor>1.87</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97044</codigoPrincipal>
+<descripcion>PISTON 44-82-0074 P/DEMOLEDOR MOD.5342-21</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>22.87</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>22.87</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>22.87</baseImponible>
+<valor>2.74</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>95317</codigoPrincipal>
+<descripcion>PINION 42-76-0015 DE CAMBIO P/TALADRO DE 2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>24.57</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>24.57</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>24.57</baseImponible>
+<valor>2.95</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97956</codigoPrincipal>
+<descripcion>REPUESTO 45-22-0052 PORTA PUNTA P/ROTOMARTILLO MOD.5342-20</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>6.80</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>6.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.80</baseImponible>
+<valor>0.82</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150361</codigoPrincipal>
+<descripcion>ANILLO 34-40-0073 P/ 5339-20</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>0.78</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>0.78</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.78</baseImponible>
+<valor>0.09</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">kokolaa@yahoo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">6036565</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064185</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268113</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>06/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268113</guiaRemision>
+<razonSocialComprador>GUAMAN ZOILA AGRIPINA</razonSocialComprador>
+<identificacionComprador>1706971643001</identificacionComprador>
+<totalSinImpuestos>640.52</totalSinImpuestos>
+<totalDescuento>100.90</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>640.52</baseImponible>
+<valor>76.86</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>717.38</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99902</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 BOLONIA AZUL PRIMERA</descripcion>
+<cantidad>16.00</cantidad>
+<precioUnitario>10.53</precioUnitario>
+<descuento>25.27</descuento>
+<precioTotalSinImpuesto>143.21</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>143.21</baseImponible>
+<valor>17.19</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98749</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 ZARUMA AZUL PRIMERA</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>10.45</precioUnitario>
+<descuento>15.68</descuento>
+<precioTotalSinImpuesto>88.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>88.82</baseImponible>
+<valor>10.66</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102734</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA BALZAR CIELO PRIMERA</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>6.88</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>68.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>68.80</baseImponible>
+<valor>8.26</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101261</codigoPrincipal>
+<descripcion>BALDOSA DE PISO / PARED 35 X 50 FACCIATA OCRE PRIMERA  (CAJA DE 1.58 m2)</descripcion>
+<cantidad>22.12</cantidad>
+<precioUnitario>13.18</precioUnitario>
+<descuento>43.73</descuento>
+<precioTotalSinImpuesto>247.81</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>247.81</baseImponible>
+<valor>29.74</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>90388</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA COPACABANA DUELA PRIMERA</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>10.81</precioUnitario>
+<descuento>16.22</descuento>
+<precioTotalSinImpuesto>91.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>91.88</baseImponible>
+<valor>11.03</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">decoracabados@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2339357</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">055584</campoAdicional>
+</infoAdicional>
+</factura>

@@ -128,6 +128,7 @@ END IF
 WHILE TRUE
 	LET vm_num_det = 0
 	CALL borrar_detalle()
+	CALL mostrar_cabecera_forma()
 	CALL muestra_contadores_det(0, 0)
 	CALL lee_parametros()
 	IF int_flag THEN

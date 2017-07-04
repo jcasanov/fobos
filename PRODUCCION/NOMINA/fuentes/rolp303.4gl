@@ -68,6 +68,7 @@ DEFINE rm_totrub	ARRAY[500] OF RECORD
 				n33_valor	LIKE rolt033.n33_valor
 			END RECORD
 DEFINE rm_n00		RECORD LIKE rolt000.*
+DEFINE rm_n01		RECORD LIKE rolt001.*
 DEFINE rm_n32		RECORD LIKE rolt032.*
 DEFINE vm_trab_t	LIKE rolt032.n32_cod_trab
 DEFINE vm_depto_t	LIKE rolt032.n32_cod_depto
@@ -231,7 +232,6 @@ END FUNCTION
 
 
 FUNCTION cargar_datos_liq()
-DEFINE r_n01		RECORD LIKE rolt001.*
 DEFINE r_n05		RECORD LIKE rolt005.*
 DEFINE r_n32		RECORD LIKE rolt032.*
 DEFINE mensaje		VARCHAR(200)
@@ -242,17 +242,17 @@ IF rm_n00.n00_serial IS NULL THEN
         CALL fl_mostrar_mensaje('No existe configuración general para este módulo.', 'stop')
 	RETURN 1
 END IF
-CALL fl_lee_compania_roles(vg_codcia) RETURNING r_n01.*
-IF r_n01.n01_compania IS NULL THEN
+CALL fl_lee_compania_roles(vg_codcia) RETURNING rm_n01.*
+IF rm_n01.n01_compania IS NULL THEN
         CALL fl_mostrar_mensaje('No existe configuración para esta compañía.', 'stop')
 	RETURN 1
 END IF
-IF r_n01.n01_estado <> 'A' THEN
+IF rm_n01.n01_estado <> 'A' THEN
         CALL fl_mostrar_mensaje('Compañía no está activa.', 'stop')
 	RETURN 1
 END IF
-LET rm_n32.n32_ano_proceso = r_n01.n01_ano_proceso
-LET rm_n32.n32_mes_proceso = r_n01.n01_mes_proceso
+LET rm_n32.n32_ano_proceso = rm_n01.n01_ano_proceso
+LET rm_n32.n32_mes_proceso = rm_n01.n01_mes_proceso
 CALL retorna_mes()
 INITIALIZE r_n05.* TO NULL
 DECLARE q_n05 CURSOR FOR
@@ -403,7 +403,7 @@ INPUT BY NAME rm_n32.n32_cod_liqrol, rm_n32.n32_ano_proceso,
 		END IF
 	AFTER FIELD n32_ano_proceso
 		IF rm_n32.n32_ano_proceso IS NOT NULL THEN
-			IF rm_n32.n32_ano_proceso > YEAR(TODAY) THEN
+			IF rm_n32.n32_ano_proceso > rm_n01.n01_ano_proceso THEN
 				CALL fl_mostrar_mensaje('El año no puede ser mayor al año vigente.', 'exclamation')
 				NEXT FIELD n32_ano_proceso
 			END IF

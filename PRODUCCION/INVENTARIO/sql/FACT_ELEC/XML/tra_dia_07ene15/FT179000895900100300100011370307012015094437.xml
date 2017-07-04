@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113703</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113703</guiaRemision>
+<razonSocialComprador>STOCK CERAMICA</razonSocialComprador>
+<identificacionComprador>1715082747001</identificacionComprador>
+<totalSinImpuestos>529.37</totalSinImpuestos>
+<totalDescuento>108.43</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>529.37</baseImponible>
+<valor>63.52</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>592.89</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99478</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA AZTECA PRIMERA</descripcion>
+<cantidad>50.00</cantidad>
+<precioUnitario>8.80</precioUnitario>
+<descuento>74.80</descuento>
+<precioTotalSinImpuesto>365.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>365.20</baseImponible>
+<valor>43.82</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103009</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 QUANTUM NIEVE PRIMERA</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>9.89</precioUnitario>
+<descuento>33.63</descuento>
+<precioTotalSinImpuesto>164.17</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>164.17</baseImponible>
+<valor>19.70</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">javiermalo@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2679949</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">059309</campoAdicional>
+</infoAdicional>
+</factura>

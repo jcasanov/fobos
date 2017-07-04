@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000016379</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>CDLA. LAS ORQUIDEAS, MZ.33 SL.26</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>ARSACONST S.A.</razonSocialComprador>
+<identificacionComprador>0992659394001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000016379</numDocModificado>
+<fechaEmisionDocSustento>17/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>83.45</totalSinImpuestos>
+<valorModificacion>93.46</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>83.45</baseImponible>
+<valor>10.01</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV. DF-13340 FACT. FA-91159</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>22030</codigoInterno>
+<descripcion>DEV. DF-13340 FACT. FA-91159</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>83.45</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>83.45</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ACERO" valor="ACERO"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>83.45</baseImponible>
+<valor>10.01</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2890122</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">12433</campoAdicional>
+</infoAdicional>
+</notaCredito>

@@ -1,0 +1,31 @@
+DATABASE aceros
+
+SCREEN
+{
+ FACTURAS DE CLIENTES DE TALLER
+-----------------------------------------------
+ Factura         Cliente
+-----------------------------------------------
+[c01          ] [c002                       ] 
+[c01          ] [c002                       ]
+[c01          ] [c002                       ]
+[c01          ] [c002                       ]
+[c01          ] [c002                       ]
+[c01          ] [c002                       ]
+[c01          ] [c002                       ] 
+[c01          ] [c002                       ] 
+[c01          ] [c002                       ] 
+[c01          ] [c002                       ] 
+
+}
+
+TABLES
+talt023
+
+ATTRIBUTES
+c01  = t23_num_factura, UPSHIFT;
+c002 = t23_nom_cliente, UPSHIFT;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_factal[10](t23_num_factura, t23_nom_cliente)

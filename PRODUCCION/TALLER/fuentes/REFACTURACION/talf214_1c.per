@@ -1,0 +1,46 @@
+DATABASE aceros
+SCREEN
+{
+
+                                                             [c020] de [c021]
+
+                            PROCESO DE REFACTURACION
+                            ----------------------- 
+
+       Factura: [c000           ]           Nueva Factura: [c001           ]
+       Cliente: [c002  ] [c003                                              ]
+
+ Nuevo Cliente: [c004  ] [c005                                              ]
+
+        Motivo: [c006                                                       ]
+
+ Orden Trabajo: [c007  ]                       Nueva Orden Trabajo: [c008  ]
+
+
+       Usuario: [c009      ]          Fecha de Ingreso: [c010               ]
+
+}
+TABLES
+talt023
+talt060
+ATTRIBUTES
+c000 = talt060.t60_fac_ant, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Digite el Número de Factura que desea Refacturar. F2 Ayuda';
+c001 = talt060.t60_fac_nue, NOENTRY, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.';
+c002 = talt023.t23_cod_cliente, NOENTRY, UPSHIFT, REVERSE;
+c003 = talt023.t23_nom_cliente, NOENTRY, UPSHIFT, REVERSE;
+c004 = talt060.t60_codcli_nue, AUTONEXT, UPSHIFT,
+	COMMENTS= 'Sólo Código Cliente si desea cambiar Razón Social. F2 Ayuda';
+c005 = talt060.t60_nomcli_nue, AUTONEXT, UPSHIFT;
+c006 = talt060.t60_motivo_refact, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Digite el motivo porque se esta refacturando.';
+c007 = talt060.t60_ot_ant, NOENTRY, UPSHIFT, REVERSE,
+	COMMENTS = 'Número Orden de Trabajo Origen. F2 Ayuda';
+c008 = talt060.t60_ot_nue, NOENTRY, UPSHIFT,
+	COMMENTS = 'Número Orden de Trabajo generada por Refacturación. F2 Ayuda';
+c009 = talt060.t60_usuario, NOENTRY, UPSHIFT, REVERSE;
+c010 = talt060.t60_fecing, NOENTRY, UPSHIFT, REVERSE;
+c020 = FORMONLY.vm_row_current TYPE SMALLINT, NOENTRY, REVERSE, UPSHIFT;
+c021 = FORMONLY.vm_num_rows TYPE SMALLINT, NOENTRY, REVERSE, UPSHIFT;
+END

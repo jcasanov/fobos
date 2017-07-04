@@ -1,0 +1,30 @@
+DATABASE aceros
+
+SCREEN
+{
+  VENDEDORES VEHICULOS
+ ---------------------------------
+  Cod  Nombre
+ ---------------------------------
+ [c01|c002                       ] 
+ [c01|c002                       ] 
+ [c01|c002                       ] 
+ [c01|c002                       ] 
+ [c01|c002                       ] 
+ [c01|c002                       ] 
+ [c01|c002                       ] 
+ [c01|c002                       ] 
+ [c01|c002                       ] 
+ [c01|c002                       ] 
+}
+
+TABLES
+veht001
+
+ATTRIBUTES
+c01  = v01_vendedor,REVERSE;
+c002 = v01_nombres,REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_venveh[10](v01_vendedor, v01_nombres)

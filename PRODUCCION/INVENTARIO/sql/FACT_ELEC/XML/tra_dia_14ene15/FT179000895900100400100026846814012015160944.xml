@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268468</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>14/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268468</guiaRemision>
+<razonSocialComprador>CONSTRUCTORA VILLACRECES ANDRADE S.A.</razonSocialComprador>
+<identificacionComprador>1791326768001</identificacionComprador>
+<totalSinImpuestos>420.90</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>420.90</baseImponible>
+<valor>50.51</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>471.41</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>690</codigoPrincipal>
+<descripcion>TOL AL CALOR DE 4mm. 1.22 x 2.44 m (93.56 KG.)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>83.95</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>167.90</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>167.90</baseImponible>
+<valor>20.15</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>694</codigoPrincipal>
+<descripcion>TOL AL CALOR DE 6mm. 1.22 x 2.44 m (140.34 KG.)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>126.50</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>253.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>253.00</baseImponible>
+<valor>30.36</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">cmaldonado@elitcorp.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2229244/5</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">004289</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C NO. 2014-33217</campoAdicional>
+</infoAdicional>
+</factura>

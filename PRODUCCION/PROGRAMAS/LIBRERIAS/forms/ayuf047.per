@@ -1,0 +1,30 @@
+DATABASE aceros
+
+SCREEN
+{
+ SECCIONES 
+---------------------------------------
+ Código      Descripción 		
+---------------------------------------
+[c01] [c002                         ] 
+[c01] [c002                         ]
+[c01] [c002                         ]
+[c01] [c002                         ]
+[c01] [c002                         ]
+[c01] [c002                         ]
+[c01] [c002                         ] 
+[c01] [c002                         ] 
+[c01] [c002                         ] 
+[c01] [c002                         ] 
+}
+
+TABLES
+talt002
+
+ATTRIBUTES
+c01 = t02_seccion;
+c002 = t02_nombre;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_sectal[10](t02_seccion, t02_nombre)

@@ -1,0 +1,56 @@
+DATABASE aceros
+SCREEN
+{
+                                                              [c000] de [c001]
+
+                                                         Estado: [c|c002     ]
+
+
+              Código de Zona: [c003] [c004                     ]
+
+          Código de Sub-Zona: [c005] [c006                     ]
+
+                        País: [c007] [c008                     ]
+
+                   Provincia: [c009] [c010                     ]
+
+                      Ciudad: [c011] [c012                     ]
+
+               Horas Entrega: [c013]
+
+
+   Ingresado Por: [c014      ]            Fecha Ingreso: [c015               ]
+}
+TABLES
+gent025
+gent030
+gent031
+rept108
+rept109
+ATTRIBUTES
+c000 = FORMONLY.num_reg, NOENTRY, UPSHIFT, REVERSE;
+c001 = FORMONLY.max_reg, NOENTRY, UPSHIFT, REVERSE;
+
+c    = rept109.r109_estado, NOENTRY, UPSHIFT, REVERSE,
+	COMMENTS = '(A) ACTIVO  (B) BLOQUEADO';
+c002 = FORMONLY.tit_estado, NOENTRY, UPSHIFT, REVERSE;
+c003 = rept109.r109_cod_zona, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c004 = rept108.r108_descripcion, NOENTRY, UPSHIFT, REVERSE;
+c005 = rept109.r109_cod_subzona, NOENTRY, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c006 = rept109.r109_descripcion, AUTONEXT, UPSHIFT, REVERSE;
+c007 = rept109.r109_pais, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c008 = gent030.g30_nombre, NOENTRY, UPSHIFT, REVERSE;
+c009 = rept109.r109_divi_poli, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c010 = gent025.g25_nombre, NOENTRY, UPSHIFT, SCROLL;
+c011 = rept109.r109_ciudad, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c012 = gent031.g31_nombre, NOENTRY, UPSHIFT;
+c013 = rept109.r109_horas_entr, AUTONEXT, UPSHIFT, REVERSE,INCLUDE = (0 TO 120);
+
+c014 = rept109.r109_usuario, NOENTRY, UPSHIFT, REVERSE;
+c015 = rept109.r109_fecing, NOENTRY, UPSHIFT, REVERSE;
+END

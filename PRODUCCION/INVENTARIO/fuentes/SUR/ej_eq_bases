@@ -1,0 +1,11 @@
+echo 'Comienza el Proceso de Equiparar ...'
+echo ''
+sh equiparar_bases | tee equiparar_bases.log
+echo ''
+echo ''
+echo 'Ejecutando Proceso de Inserción de Items ...'
+echo ''
+sh insitemcr3
+echo ''
+echo ''
+echo 'Los 2 Procesos Terminados OK.'

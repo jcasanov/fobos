@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091989</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091989</guiaRemision>
+<razonSocialComprador>ENSAMBLAJE PUERTAS METALICAS Y ESTRUCTURAS S.A. L&S</razonSocialComprador>
+<identificacionComprador>0992394390001</identificacionComprador>
+<totalSinImpuestos>209.08</totalSinImpuestos>
+<totalDescuento>23.23</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>209.08</baseImponible>
+<valor>25.09</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>234.17</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>8800</codigoPrincipal>
+<descripcion>VALVULA COMPUERTA  BRONCE ROSCADA RW-206 DE 3" 125 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>232.31</precioUnitario>
+<descuento>23.23</descuento>
+<precioTotalSinImpuesto>209.08</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RED WH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>209.08</baseImponible>
+<valor>25.09</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">compras@ensamblajes.com.ec</campoAdicional>
+<campoAdicional nombre="Email">rgarcia@ensamblajes.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">6005480</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">012288</campoAdicional>
+<campoAdicional nombre="Observaciones">AT ING RONY CRESPIN</campoAdicional>
+</infoAdicional>
+</factura>

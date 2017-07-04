@@ -239,21 +239,21 @@ FUNCTION control_depreciacion()
 BEGIN WORK
 CALL actualiza_actt000()
 CALL genera_depreciacion()
-{--
+--
 CALL genera_contabilizacion()
 UPDATE actt012 SET a12_tipcomp_gen = rm_b12.b12_tipo_comp,
                    a12_numcomp_gen = rm_b12.b12_num_comp
 	WHERE a12_compania    = vg_codcia   AND 
 	      a12_codigo_tran = vm_cod_tran AND
 	      a12_numero_tran BETWEEN vm_tran_ini AND vm_tran_fin	  
---}
+--
 COMMIT WORK
-{--
+--
 IF rm_b12.b12_tipo_comp IS NOT NULL THEN
 	CALL fl_mayoriza_comprobante(vg_codcia, rm_b12.b12_tipo_comp, 
 			rm_b12.b12_num_comp, 'M')
 END IF
---}
+--
 DELETE FROM te_depre WHERE 1 = 1
 
 END FUNCTION
@@ -301,7 +301,6 @@ DECLARE q_ab CURSOR FOR
 		WHERE a10_estado     IN ('S', 'R')
 		  AND a10_valor_mb   > a10_tot_dep_mb
 		  AND a10_val_dep_mb > 0
-		  AND a10_fecha_comp <= MDY (12, 31, 2010) -- cambio 22/03/2012
 		ORDER BY a10_grupo_act, a10_tipo_act, a10_codigo_bien
 LET int_flag = 0
 LET fin_mes  = MDY(rm_a00.a00_mespro, 1, rm_a00.a00_anopro) +
@@ -331,6 +330,50 @@ FOREACH q_ab INTO r_a10.*
 	IF r_a01.a01_depreciable = 'N' THEN
 		CONTINUE FOREACH
 	END IF
+if r_a10.a10_locali_ori = 1 and r_a10.a10_codigo_bien = 313 and
+  (extend(fin_mes, year to month) = '2012-04' or
+   extend(fin_mes, year to month) = '2012-05' or
+   extend(fin_mes, year to month) = '2012-06' or
+   extend(fin_mes, year to month) = '2012-07')
+then
+	continue foreach
+end if
+if r_a10.a10_locali_ori = 3 and r_a10.a10_codigo_bien >= 430 and
+   r_a10.a10_codigo_bien <= 433 and
+  (extend(fin_mes, year to month) = '2012-06' or
+   extend(fin_mes, year to month) = '2012-07')
+then
+	continue foreach
+end if
+if r_a10.a10_codigo_bien = 412 and extend(fin_mes, year to month) = '2011-01'
+then
+	let r_a10.a10_val_dep_mb = 57.7
+end if
+if r_a10.a10_locali_ori = 1 and r_a10.a10_codigo_bien = 313 and
+   extend(fin_mes, year to month) = '2012-08'
+then
+	let r_a10.a10_val_dep_mb = 74.3
+end if
+if r_a10.a10_locali_ori = 3 and r_a10.a10_codigo_bien = 430 and
+   extend(fin_mes, year to month) = '2012-08'
+then
+	let r_a10.a10_val_dep_mb = 34.16
+end if
+if r_a10.a10_locali_ori = 3 and r_a10.a10_codigo_bien = 431 and
+   extend(fin_mes, year to month) = '2012-08'
+then
+	let r_a10.a10_val_dep_mb = 34.16
+end if
+if r_a10.a10_locali_ori = 3 and r_a10.a10_codigo_bien = 432 and
+   extend(fin_mes, year to month) = '2012-08'
+then
+	let r_a10.a10_val_dep_mb = 56.86
+end if
+if r_a10.a10_locali_ori = 3 and r_a10.a10_codigo_bien = 433 and
+   extend(fin_mes, year to month) = '2012-08'
+then
+	let r_a10.a10_val_dep_mb = 56.86
+end if
 	DECLARE q_dpto CURSOR FOR
 		SELECT * FROM actt011
 			WHERE a11_compania    = r_a10.a10_compania

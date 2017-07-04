@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092095</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092095</guiaRemision>
+<razonSocialComprador>INMOBILIARIA LAVIE S.A.</razonSocialComprador>
+<identificacionComprador>0990598967001</identificacionComprador>
+<totalSinImpuestos>189.87</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>189.87</baseImponible>
+<valor>22.78</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>212.65</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>48674</codigoPrincipal>
+<descripcion>LLAVE TEMPORIZADAS / PRESSMATIC O361 CR 1/2" P/ LAVABO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>58.11</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>58.11</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>58.11</baseImponible>
+<valor>6.97</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>71627</codigoPrincipal>
+<descripcion>PISTON 00418700 COMPLETO 1.6 GPF/6.0 LPF</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>52.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>104.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>104.00</baseImponible>
+<valor>12.48</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70670</codigoPrincipal>
+<descripcion>DIAFRAGMA R-107-1C EMPAQUE DE VALVULA</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>6.94</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>27.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>27.76</baseImponible>
+<valor>3.33</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">mantenimiento@elrosado.com</campoAdicional>
+<campoAdicional nombre="Email">edocs@elrosado.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3702400</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">003349</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C.37651 C.C.STO.DOMINGO.</campoAdicional>
+</infoAdicional>
+</factura>

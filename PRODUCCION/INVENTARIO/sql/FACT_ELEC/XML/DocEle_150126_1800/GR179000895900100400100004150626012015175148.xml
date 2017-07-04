@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000041506</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<dirPartida>AV LA PRENSA</dirPartida>
+<razonSocialTransportista>SERVIENTREGA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0991285679001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>26/01/2015</fechaIniTransporte>
+<fechaFinTransporte>26/01/2015</fechaFinTransporte>
+<placa>SERVI</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1791803205001</identificacionDestinatario>
+<razonSocialDestinatario>PROVEEDORES INDUSTRIALES S.C.C.</razonSocialDestinatario>
+<dirDestinatario>STO.DOMINGO</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>26/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>14384</codigoInterno>
+<descripcion>ACEITE PARA EQUIPOS NU CLEAR CLARO (S/ENVASE) (41585)</descripcion>
+<cantidad>5.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="GALON"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>15700</codigoInterno>
+<descripcion>DADOS PARA TUBOS DE 1" A 2" HS NPT P/811A-711-815A (47770)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="JUEGO"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>21666</codigoInterno>
+<descripcion>ENVASE PLASTICO JERRY CAN DE 20 LT</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">yuri_boasa1@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3751360</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">031874</campoAdicional>
+</infoAdicional>
+</guiaRemision>

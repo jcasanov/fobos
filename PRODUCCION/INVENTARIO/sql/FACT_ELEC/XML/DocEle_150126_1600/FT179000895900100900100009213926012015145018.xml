@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092139</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>26/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092139</guiaRemision>
+<razonSocialComprador>TORCAL POWER S.A.</razonSocialComprador>
+<identificacionComprador>0992480394001</identificacionComprador>
+<totalSinImpuestos>5511.26</totalSinImpuestos>
+<totalDescuento>987.36</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>5511.26</baseImponible>
+<valor>661.35</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>6172.61</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>103396</codigoPrincipal>
+<descripcion>HERRAMIENTA RE6 TRES EN UNO  (44343)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>5870.47</precioUnitario>
+<descuento>880.57</descuento>
+<precioTotalSinImpuesto>4989.90</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4989.90</baseImponible>
+<valor>598.79</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100008</codigoPrincipal>
+<descripcion>AMOLADORA A BATERIA 2680-22 M18 LITHIUM-ION 4-1/2" / 9.000RPM</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>628.15</precioUnitario>
+<descuento>106.79</descuento>
+<precioTotalSinImpuesto>521.36</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>521.36</baseImponible>
+<valor>62.56</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">kattyalava@torcalpower.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2658401</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">013071</campoAdicional>
+</infoAdicional>
+</factura>

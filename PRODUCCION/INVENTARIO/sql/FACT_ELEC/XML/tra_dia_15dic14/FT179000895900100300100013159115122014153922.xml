@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131591</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>VARGAS 1129 Y GALAPAGOS</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131591</guiaRemision>
+<razonSocialComprador>ANDINO RENDON ARACELY</razonSocialComprador>
+<identificacionComprador>1204109183001</identificacionComprador>
+<totalSinImpuestos>358.00</totalSinImpuestos>
+<totalDescuento>60.86</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>297.14</baseImponible>
+<valor>35.66</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>332.80</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>101783</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA DAULE AZUL  PRIMERA</descripcion>
+<cantidad>40.00</cantidad>
+<precioUnitario>8.95</precioUnitario>
+<descuento>60.86</descuento>
+<precioTotalSinImpuesto>297.14</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="M2" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>297.14</baseImponible>
+<valor>35.66</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

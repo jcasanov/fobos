@@ -1,0 +1,32 @@
+DATABASE aceros
+
+SCREEN
+{
+ TEMPARIO 
+-----------------------------------------------------------------
+ Tarea          Descripción 		
+-----------------------------------------------------------------
+[c001        ] [c002                                          ] 
+[c001        ] [c002                                          ]
+[c001        ] [c002                                          ]
+[c001        ] [c002                                          ]
+[c001        ] [c002                                          ]
+[c001        ] [c002                                          ]
+[c001        ] [c002                                          ] 
+[c001        ] [c002                                          ] 
+[c001        ] [c002                                          ] 
+[c001        ] [c002                                          ] 
+
+}
+
+TABLES
+talt007
+
+ATTRIBUTES
+c001 = t07_codtarea, UPSHIFT;
+c002 = t07_nombre, UPSHIFT;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_tarea[10](t07_codtarea, t07_nombre)
+

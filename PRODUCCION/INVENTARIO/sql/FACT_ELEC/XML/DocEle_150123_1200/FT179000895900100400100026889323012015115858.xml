@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268893</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268893</guiaRemision>
+<razonSocialComprador>OMNIBUS  B.B.TRANSPORTES  S.A.</razonSocialComprador>
+<identificacionComprador>1790233979001</identificacionComprador>
+<totalSinImpuestos>158.57</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>158.57</baseImponible>
+<valor>19.03</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>177.60</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>97515</codigoPrincipal>
+<descripcion>REPUESTO CONTACTOR ELECTROMAGNETICO 578-97 (P/NER2-010S) MGC23406A1</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>158.57</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>158.57</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KITO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>158.57</baseImponible>
+<valor>19.03</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">andres.andrade@gm.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2977700</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">028899</campoAdicional>
+<campoAdicional nombre="Observaciones">TARJETA DINERS</campoAdicional>
+</infoAdicional>
+</factura>

@@ -238,7 +238,7 @@ DEFINE resp		CHAR(6)
 CALL fl_retorna_usuario()
 INITIALIZE rm_z22.*, rm_z23.*, rm_z20, r_cxc.*, r_mon.* TO NULL
 CLEAR z22_num_trn, tit_nombre_cli, tit_tipo_trn, tit_subtipo, tit_mon_bas,
-	tit_area, tit_cobrador, z20_fecha_vcto, tit_fecha_vcto, tit_dias,
+	tit_area, tit_zoncob, z20_fecha_vcto, tit_fecha_vcto, tit_dias,
 	tit_total_apl, tit_total_act, tit_total_nue, z22_referencia
 FOR i = 1 TO vm_max_elm
 	INITIALIZE rm_aju[i].*, rm_sld[i].* TO NULL
@@ -531,8 +531,8 @@ DEFINE nomst_aux	LIKE gent011.g11_nombre
 DEFINE mone_aux		LIKE gent013.g13_moneda
 DEFINE nomm_aux		LIKE gent013.g13_nombre
 DEFINE deci_aux		LIKE gent013.g13_decimales
-DEFINE codc_aux		LIKE cxct005.z05_codigo
-DEFINE nomc_aux		LIKE cxct005.z05_nombres
+DEFINE codc_aux		LIKE cxct006.z06_zona_cobro
+DEFINE nomc_aux		LIKE cxct006.z06_nombre
 DEFINE query		CHAR(800)
 DEFINE expr_sql		CHAR(600)
 
@@ -543,7 +543,7 @@ INITIALIZE num_trn, codcli, codt_aux, coda_aux, codte_aux, codst_aux,
 LET int_flag = 0
 IF num_args() = 4 THEN
 	CONSTRUCT BY NAME expr_sql ON z22_tipo_trn, z22_fecing, z22_num_trn,
-	z22_subtipo, z22_codcli, z22_areaneg, z22_moneda, z22_cobrador,
+	z22_subtipo, z22_codcli, z22_areaneg, z22_moneda, z22_zona_cobro,
 	z22_referencia, z22_usuario
         ON KEY(F1,CONTROL-W)
 		CALL llamar_visor_teclas()
@@ -602,13 +602,13 @@ IF num_args() = 4 THEN
 				DISPLAY nomm_aux TO tit_mon_bas
 			END IF 
 		END IF
-		IF INFIELD(z22_cobrador) THEN
-			CALL fl_ayuda_cobradores(vg_codcia, 'T', 'T', 'A')
+		IF INFIELD(z22_zona_cobro) THEN
+			CALL fl_ayuda_zona_cobro('T', 'T')
 				RETURNING codc_aux, nomc_aux
 			LET int_flag = 0
 			IF codc_aux IS NOT NULL THEN
-				DISPLAY codc_aux TO z22_cobrador
-				DISPLAY nomc_aux TO tit_cobrador
+				DISPLAY codc_aux TO z22_zona_cobro
+				DISPLAY nomc_aux TO tit_zoncob
 			END IF 
 		END IF
 		BEFORE CONSTRUCT
@@ -677,7 +677,7 @@ DEFINE r_sub		RECORD LIKE gent012.*
 DEFINE r_are		RECORD LIKE gent003.*
 DEFINE r_mon		RECORD LIKE gent013.*
 DEFINE r_mon_par	RECORD LIKE gent014.*
-DEFINE r_cob		RECORD LIKE cxct005.*
+DEFINE r_cob		RECORD LIKE cxct006.*
 DEFINE cod_aux		LIKE cxct002.z02_codcli
 DEFINE nom_aux		LIKE cxct001.z01_nomcli
 DEFINE codt_aux		LIKE cxct004.z04_tipo_doc
@@ -691,8 +691,8 @@ DEFINE noma_aux		LIKE gent003.g03_nombre
 DEFINE mone_aux		LIKE gent013.g13_moneda
 DEFINE nomm_aux		LIKE gent013.g13_nombre
 DEFINE deci_aux		LIKE gent013.g13_decimales
-DEFINE codc_aux		LIKE cxct005.z05_codigo
-DEFINE nomc_aux		LIKE cxct005.z05_nombres
+DEFINE codc_aux		LIKE cxct006.z06_zona_cobro
+DEFINE nomc_aux		LIKE cxct006.z06_nombre
 
 INITIALIZE r_cxc_aux.*, r_cli.*, r_cli_gen.*, r_tip.*, r_sub.*, r_are.*,
 	r_mon.*, r_mon_par.*, cod_aux, codt_aux, coda_aux, codte_aux, codst_aux,
@@ -700,13 +700,13 @@ INITIALIZE r_cxc_aux.*, r_cli.*, r_cli_gen.*, r_tip.*, r_sub.*, r_are.*,
 DISPLAY BY NAME	rm_z22.z22_usuario, rm_z22.z22_fecing
 LET int_flag = 0
 INPUT BY NAME rm_z22.z22_tipo_trn, rm_z22.z22_subtipo, rm_z22.z22_codcli,
-	rm_z22.z22_areaneg, rm_z22.z22_moneda, rm_z22.z22_cobrador,
+	rm_z22.z22_areaneg, rm_z22.z22_moneda, rm_z22.z22_zona_cobro,
 	rm_z22.z22_referencia
 	WITHOUT DEFAULTS
 	ON KEY(INTERRUPT)
 	        IF FIELD_TOUCHED(rm_z22.z22_tipo_trn, rm_z22.z22_subtipo,
 			rm_z22.z22_codcli, rm_z22.z22_areaneg,
-			rm_z22.z22_moneda, rm_z22.z22_cobrador,
+			rm_z22.z22_moneda, rm_z22.z22_zona_cobro,
 			rm_z22.z22_referencia)
 	        THEN
 	               	LET int_flag = 0
@@ -752,6 +752,15 @@ INPUT BY NAME rm_z22.z22_tipo_trn, rm_z22.z22_subtipo, rm_z22.z22_codcli,
 				LET rm_z22.z22_codcli = cod_aux
 				DISPLAY BY NAME rm_z22.z22_codcli 
 				DISPLAY nom_aux TO tit_nombre_cli
+				CALL fl_lee_cliente_localidad(vg_codcia,
+							vg_codloc,
+							rm_z22.z22_codcli)
+			 		RETURNING r_cli.*
+				LET rm_z22.z22_zona_cobro = r_cli.z02_zona_cobro
+				CALL fl_lee_zona_cobro(rm_z22.z22_zona_cobro)
+					RETURNING r_cob.*
+				DISPLAY BY NAME rm_z22.z22_zona_cobro
+				DISPLAY r_cob.z06_nombre TO tit_zoncob	
 			END IF 
 		END IF
 		IF INFIELD(z22_areaneg) THEN
@@ -774,36 +783,50 @@ INPUT BY NAME rm_z22.z22_tipo_trn, rm_z22.z22_subtipo, rm_z22.z22_codcli,
 				DISPLAY nomm_aux TO tit_mon_bas
 			END IF 
 		END IF
-		IF INFIELD(z22_cobrador) THEN
-			CALL fl_ayuda_cobradores(vg_codcia, 'T', 'T', 'A')
+		IF INFIELD(z22_zona_cobro) THEN
+			IF r_cli.z02_zona_cobro IS NOT NULL THEN
+				CONTINUE INPUT
+			END IF
+			CALL fl_ayuda_zona_cobro('T', 'A')
 				RETURNING codc_aux, nomc_aux
 			LET int_flag = 0
 			IF codc_aux IS NOT NULL THEN
-				LET rm_z22.z22_cobrador = codc_aux
-				DISPLAY BY NAME rm_z22.z22_cobrador
-				DISPLAY nomc_aux TO tit_cobrador
+				LET rm_z22.z22_zona_cobro = codc_aux
+				DISPLAY BY NAME rm_z22.z22_zona_cobro
+				DISPLAY nomc_aux TO tit_zoncob
 			END IF 
 		END IF
 	BEFORE INPUT
 		--#CALL dialog.keysetlabel("F1","")
 		--#CALL dialog.keysetlabel("CONTROL-W","")
+	BEFORE FIELD z22_zona_cobro
+		CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc,
+						rm_z22.z22_codcli)
+			RETURNING r_cli.*
+		IF r_cli.z02_zona_cobro IS NOT NULL THEN
+			IF rm_z22.z22_zona_cobro <> r_cli.z02_zona_cobro THEN
+				LET rm_z22.z22_zona_cobro = r_cli.z02_zona_cobro
+				CALL fl_lee_zona_cobro(rm_z22.z22_zona_cobro)
+					RETURNING r_cob.*
+				DISPLAY BY NAME rm_z22.z22_zona_cobro
+				DISPLAY r_cob.z06_nombre TO tit_zoncob	
+				CONTINUE INPUT
+			END IF
+		END IF
 	AFTER FIELD z22_tipo_trn 
 		IF rm_z22.z22_tipo_trn IS NOT NULL THEN
 			CALL fl_lee_tipo_doc(rm_z22.z22_tipo_trn)
 				RETURNING r_tip.* 
 			IF r_tip.z04_tipo_doc IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'Tipo de documento no existe.','exclamation')
 				CALL fl_mostrar_mensaje('Tipo de documento no existe.','exclamation')
 				NEXT FIELD z22_tipo_trn
 			END IF
 			DISPLAY r_tip.z04_nombre TO tit_tipo_trn
 			IF r_tip.z04_tipo <> 'T' THEN
-				--CALL fgl_winmessage(vg_producto,'Tipo de documento debe ser una transacción.','exclamation')
 				CALL fl_mostrar_mensaje('Tipo de documento debe ser una transacción.','exclamation')
 				NEXT FIELD z22_tipo_trn
 			END IF
 			IF r_tip.z04_tipo_doc = 'PG' THEN
-				--CALL fgl_winmessage(vg_producto,'Los pagos no se ajustan, se los hace en caja.','exclamation')
 				CALL fl_mostrar_mensaje('Los pagos no se ajustan, se los hace en caja.','exclamation')
 				NEXT FIELD z22_tipo_trn
 			END IF
@@ -820,7 +843,6 @@ INPUT BY NAME rm_z22.z22_tipo_trn, rm_z22.z22_subtipo, rm_z22.z22_codcli,
 							rm_z22.z22_subtipo)
 				RETURNING r_sub.*
 			IF r_sub.g12_tiporeg IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'No existe este subtipo de documento.','exclamation')
 				CALL fl_mostrar_mensaje('No existe este subtipo de documento.','exclamation')
 				NEXT FIELD z22_subtipo
 			END IF
@@ -831,7 +853,6 @@ INPUT BY NAME rm_z22.z22_tipo_trn, rm_z22.z22_subtipo, rm_z22.z22_codcli,
 			CALL fl_lee_cliente_general(rm_z22.z22_codcli)
 		 		RETURNING r_cli_gen.*
 			IF r_cli_gen.z01_codcli IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'Cliente no existe.','exclamation')
 				CALL fl_mostrar_mensaje('Cliente no existe.','exclamation')
 				NEXT FIELD z22_codcli
 			END IF
@@ -844,10 +865,14 @@ INPUT BY NAME rm_z22.z22_tipo_trn, rm_z22.z22_subtipo, rm_z22.z22_codcli,
 							rm_z22.z22_codcli)
 		 		RETURNING r_cli.*
 			IF r_cli.z02_compania IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'Cliente no está activado para la compañía.','exclamation')
 				CALL fl_mostrar_mensaje('Cliente no está activado para la compañía.','exclamation')
 				NEXT FIELD z22_codcli
 			END IF
+			LET rm_z22.z22_zona_cobro = r_cli.z02_zona_cobro
+			CALL fl_lee_zona_cobro(rm_z22.z22_zona_cobro)
+				RETURNING r_cob.*
+			DISPLAY BY NAME rm_z22.z22_zona_cobro
+			DISPLAY r_cob.z06_nombre TO tit_zoncob	
 		ELSE
 			CLEAR tit_nombre_cli
 		END IF
@@ -856,7 +881,6 @@ INPUT BY NAME rm_z22.z22_tipo_trn, rm_z22.z22_subtipo, rm_z22.z22_codcli,
 			CALL fl_lee_area_negocio(vg_codcia,rm_z22.z22_areaneg)
 				RETURNING r_are.*
 			IF r_are.g03_areaneg IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'Area de Negocio no existe.','exclamation')
 				CALL fl_mostrar_mensaje('Area de Negocio no existe.','exclamation')
 				NEXT FIELD z22_areaneg
 			END IF
@@ -869,7 +893,6 @@ INPUT BY NAME rm_z22.z22_tipo_trn, rm_z22.z22_subtipo, rm_z22.z22_codcli,
 			CALL fl_lee_moneda(rm_z22.z22_moneda)
 				RETURNING r_mon.* 
 			IF r_mon.g13_moneda IS NULL  THEN
-				--CALL fgl_winmessage(vg_producto,'Moneda no existe.','exclamation')
 				CALL fl_mostrar_mensaje('Moneda no existe.','exclamation')
 				NEXT FIELD z22_moneda
 			END IF
@@ -885,7 +908,6 @@ INPUT BY NAME rm_z22.z22_tipo_trn, rm_z22.z22_subtipo, rm_z22.z22_codcli,
 							rg_gen.g00_moneda_base)
 					RETURNING r_mon_par.*
 				IF r_mon_par.g14_serial IS NULL THEN
-					--CALL fgl_winmessage(vg_producto,'La paridad para está moneda no existe.','exclamation')
 					CALL fl_mostrar_mensaje('La paridad para está moneda no existe.','exclamation')
 					NEXT FIELD z22_moneda
 				END IF
@@ -897,19 +919,29 @@ INPUT BY NAME rm_z22.z22_tipo_trn, rm_z22.z22_subtipo, rm_z22.z22_codcli,
 			CALL fl_lee_moneda(rm_z22.z22_moneda) RETURNING r_mon.* 
 			DISPLAY r_mon.g13_nombre TO tit_mon_bas
 		END IF
-	AFTER FIELD z22_cobrador
-		IF rm_z22.z22_cobrador IS NOT NULL THEN
-			CALL fl_lee_cobrador_cxc(vg_codcia,rm_z22.z22_cobrador)
+	AFTER FIELD z22_zona_cobro
+		IF rm_z22.z22_zona_cobro IS NULL OR
+		   rm_z22.z22_zona_cobro <> r_cli.z02_zona_cobro
+		THEN
+			LET rm_z22.z22_zona_cobro = r_cli.z02_zona_cobro
+			CALL fl_lee_zona_cobro(rm_z22.z22_zona_cobro)
 				RETURNING r_cob.*
-			IF r_cob.z05_compania IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'Cobrador no existe.','exclamation')
-				CALL fl_mostrar_mensaje('Cobrador no existe.','exclamation')
-				NEXT FIELD z22_cobrador
-			END IF
-			DISPLAY r_cob.z05_nombres TO tit_cobrador
-		ELSE
-			CLEAR tit_cobrador
+			DISPLAY BY NAME rm_z22.z22_zona_cobro
+			DISPLAY r_cob.z06_nombre TO tit_zoncob	
+			CONTINUE INPUT
 		END IF
+		CALL fl_lee_zona_cobro(rm_z22.z22_zona_cobro) RETURNING r_cob.*
+		IF r_cob.z06_zona_cobro IS NULL THEN
+			CALL fl_mostrar_mensaje('Zona de Cobro no existe.','exclamation')
+			CLEAR tit_zoncob
+			NEXT FIELD z22_zona_cobro
+		END IF
+		IF r_cob.z06_estado = 'B' THEN
+			CALL fl_mensaje_estado_bloqueado()
+			CLEAR tit_zoncob
+			NEXT FIELD z22_zona_cobro
+		END IF
+		DISPLAY r_cob.z06_nombre TO tit_zoncob
 	AFTER INPUT
 		CALL fl_lee_transaccion_cxc(vg_codcia, vg_codloc,
 				rm_z22.z22_codcli, rm_z22.z22_tipo_trn,
@@ -924,6 +956,11 @@ INPUT BY NAME rm_z22.z22_tipo_trn, rm_z22.z22_subtipo, rm_z22.z22_codcli,
 			--CALL fgl_winmessage(vg_producto,'Dígite la referencia del ajuste.','exclamation')
 			CALL fl_mostrar_mensaje('Dígite la referencia del ajuste.','exclamation')
 			NEXT FIELD rm_z22.z22_referencia
+		END IF
+		CALL fl_lee_zona_cobro(rm_z22.z22_zona_cobro) RETURNING r_cob.*
+		IF r_cob.z06_estado = 'B' THEN
+			CALL fl_mostrar_mensaje('La Zona de Cobro esta con estado BLOQUEADO.', 'exclamation')
+			NEXT FIELD z22_zona_cobro
 		END IF
 END INPUT
 
@@ -1256,7 +1293,7 @@ DEFINE r_tip		RECORD LIKE cxct004.*
 DEFINE r_sub		RECORD LIKE gent012.*
 DEFINE r_are		RECORD LIKE gent003.*
 DEFINE r_mon		RECORD LIKE gent013.*
-DEFINE r_cob		RECORD LIKE cxct005.*
+DEFINE r_cob		RECORD LIKE cxct006.*
 
 IF vm_num_rows > 0 THEN
 	DECLARE q_dt CURSOR FOR SELECT * FROM cxct022 WHERE ROWID = num_registro
@@ -1269,7 +1306,7 @@ IF vm_num_rows > 0 THEN
 	DISPLAY BY NAME	rm_z22.z22_num_trn, rm_z22.z22_codcli,
 			rm_z22.z22_tipo_trn, rm_z22.z22_subtipo,
 			rm_z22.z22_areaneg, rm_z22.z22_moneda,
-			rm_z22.z22_cobrador, rm_z22.z22_referencia,
+			rm_z22.z22_zona_cobro, rm_z22.z22_referencia,
                 	rm_z22.z22_usuario, rm_z22.z22_fecing
 	CALL fl_lee_cliente_general(rm_z22.z22_codcli) RETURNING r_cli_gen.*
 	DISPLAY r_cli_gen.z01_nomcli TO tit_nombre_cli
@@ -1282,9 +1319,9 @@ IF vm_num_rows > 0 THEN
 	DISPLAY r_are.g03_nombre TO tit_area
 	CALL fl_lee_moneda(rm_z22.z22_moneda) RETURNING r_mon.* 
 	DISPLAY r_mon.g13_nombre TO tit_mon_bas
-	CALL fl_lee_cobrador_cxc(vg_codcia,rm_z22.z22_cobrador)
+	CALL fl_lee_zona_cobro(rm_z22.z22_zona_cobro)
 		RETURNING r_cob.*
-	DISPLAY r_cob.z05_nombres TO tit_cobrador
+	DISPLAY r_cob.z06_nombre TO tit_zoncob
 	CALL muestra_detalle(rm_z22.z22_num_trn)
 ELSE
 	RETURN
@@ -1616,12 +1653,10 @@ DEFINE i		INTEGER
 DEFINE comando		CHAR(400)
 DEFINE run_prog		VARCHAR(20)
 
-{-- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE --}
 LET run_prog = '; fglrun '
 IF vg_gui = 0 THEN
 	LET run_prog = '; fglgo '
 END IF
-{--- ---}
 LET comando = 'cd ..', vg_separador, '..', vg_separador, 'COBRANZAS',
 	vg_separador, 'fuentes', vg_separador, run_prog, 'cxcp200 ', vg_base,
 	' ', vg_modulo, ' ', vg_codcia, ' ', vg_codloc, ' ', rm_z22.z22_codcli,

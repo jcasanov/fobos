@@ -1,0 +1,12 @@
+export LD_ASSUME_KERNEL=2.4.0
+for i in ???f???_?.per
+do
+	fglform $i
+done
+
+if [ "$1" == "aceros" ]; then
+	for i in ???f???_?c.per
+	do
+		form4gl $i
+	done
+fi

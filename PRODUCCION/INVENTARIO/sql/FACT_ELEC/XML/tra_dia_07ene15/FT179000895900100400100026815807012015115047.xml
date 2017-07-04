@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268158</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268158</guiaRemision>
+<razonSocialComprador>ZABANA FANOUS NABIL</razonSocialComprador>
+<identificacionComprador>1705112660</identificacionComprador>
+<totalSinImpuestos>117.40</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>117.40</baseImponible>
+<valor>14.09</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>131.49</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>50404</codigoPrincipal>
+<descripcion>TUBO POLIPROPILENO DE 1-1/4" x 6 m. (AGUA CALIENTE)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>31.85</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>63.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>63.70</baseImponible>
+<valor>7.64</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21406</codigoPrincipal>
+<descripcion>VALVULA DE PIE VP-32 DE 1-1/4"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>24.22</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>24.22</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HELBER"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>24.22</baseImponible>
+<valor>2.91</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50296</codigoPrincipal>
+<descripcion>CODO POLIPROPILENO DE 1-1/4" x 90ø</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>2.56</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>10.24</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>10.24</baseImponible>
+<valor>1.23</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96864</codigoPrincipal>
+<descripcion>SELLANTE POLIPROPILENO ENVASE DE 100 CC (AGUA CALIENTE)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>9.89</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>9.89</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.89</baseImponible>
+<valor>1.19</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102044</codigoPrincipal>
+<descripcion>TEFLON EN ROLLO DE 3/4" x 15 m. DENSIDAD 0.40 gr/cm3 PAOLO</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>1.87</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>9.35</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.35</baseImponible>
+<valor>1.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">nzabana@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2462860</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064230</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268649</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268649</guiaRemision>
+<razonSocialComprador>AZULEC S.A</razonSocialComprador>
+<identificacionComprador>1791957253001</identificacionComprador>
+<totalSinImpuestos>332.83</totalSinImpuestos>
+<totalDescuento>36.99</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>332.83</baseImponible>
+<valor>39.94</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>372.77</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>150489</codigoPrincipal>
+<descripcion>RULIMAN 02-80-5000 P/ MOTOR 4096 Y 4292-1</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2.27</precioUnitario>
+<descuento>0.23</descuento>
+<precioTotalSinImpuesto>2.04</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.04</baseImponible>
+<valor>0.24</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96967</codigoPrincipal>
+<descripcion>ENGRANAJE 32-10-0051 P/MOTOR MOD.4297-1</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>53.11</precioUnitario>
+<descuento>5.31</descuento>
+<precioTotalSinImpuesto>47.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>47.80</baseImponible>
+<valor>5.74</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150280</codigoPrincipal>
+<descripcion>ENGRANAJE 14-29-0055 P/ 4292</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>23.45</precioUnitario>
+<descuento>2.35</descuento>
+<precioTotalSinImpuesto>21.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>21.10</baseImponible>
+<valor>2.53</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150281</codigoPrincipal>
+<descripcion>PINION 36-66-3751 DE PINION P/ 4292</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>75.47</precioUnitario>
+<descuento>7.55</descuento>
+<precioTotalSinImpuesto>67.92</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>67.92</baseImponible>
+<valor>8.15</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150460</codigoPrincipal>
+<descripcion>PINION 32-75-2581 P/ 4297-1</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>65.08</precioUnitario>
+<descuento>6.51</descuento>
+<precioTotalSinImpuesto>58.57</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>58.57</baseImponible>
+<valor>7.03</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96956</codigoPrincipal>
+<descripcion>EJE 38-50-5490  P/MOTOR MOD.4297-1</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>150.44</precioUnitario>
+<descuento>15.04</descuento>
+<precioTotalSinImpuesto>135.40</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>135.40</baseImponible>
+<valor>16.25</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacion@azul.com.ec</campoAdicional>
+<campoAdicional nombre="Email">diego.chalco@azul.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2977600</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">036359</campoAdicional>
+</infoAdicional>
+</factura>

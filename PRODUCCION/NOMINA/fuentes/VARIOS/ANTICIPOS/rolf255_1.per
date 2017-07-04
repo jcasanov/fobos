@@ -1,0 +1,97 @@
+DATABASE aceros
+SCREEN
+{
+                                                              [c000] de [c001]
+    Cancelacion: [c002 ]                 Fecha Cancelacion: [c003      ]
+       Empleado: [c004 ] [c005                                         ]
+         Motivo: [c006                                                 ]
+  Forma de Pago: [c007            ]         Banco Empresa
+                                            [c1] [c008                       ]
+                                            Cuenta Empresa: [c009           ]
+                                           Cuenta Empleado: [c010           ]
+      [c011] de [c012]                    Valor A Cancelar: [c050           ]
+       [c020 |c021|c2|c023      |c024      |c025         |c026         |d]
+      [c030 |c031|c3|c033      |c034      |c035         |c036         |e]
+      [c030 |c031|c3|c033      |c034      |c035         |c036         |e]
+      [c030 |c031|c3|c033      |c034      |c035         |c036         |e]
+      [c030 |c031|c3|c033      |c034      |c035         |c036         |e]
+      [c030 |c031|c3|c033      |c034      |c035         |c036         |e]
+      [c030 |c031|c3|c033      |c034      |c035         |c036         |e]
+      [c030 |c031|c3|c033      |c034      |c035         |c036         |e]
+      [c030 |c031|c3|c033      |c034      |c035         |c036         |e]
+      [c030 |c031|c3|c033      |c034      |c035         |c036         |e]
+      [c030 |c031|c3|c033      |c034      |c035         |c036         |e]
+  Ingresado por: [c040      ]    Totales: [c041         |c042         ]
+}
+TABLES
+gent008
+rolt030
+rolt045
+rolt091
+rolt092
+ATTRIBUTES
+c000 = FORMONLY.num_cur, NOENTRY, UPSHIFT;
+c001 = FORMONLY.max_cur, NOENTRY, UPSHIFT;
+
+c002 = rolt091.n91_num_ant, NOENTRY, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = rolt091.n91_fecha_ant, NOENTRY, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy';
+c004 = rolt091.n91_cod_trab, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c005 = rolt030.n30_nombres, NOENTRY, UPSHIFT, REVERSE;
+c006 = rolt091.n91_motivo_ant, AUTONEXT, UPSHIFT, REVERSE;
+c007 = rolt091.n91_tipo_pago, AUTONEXT, UPSHIFT, REVERSE, DEFAULT = 'E',
+	WIDGET = 'RADIO', CONFIG = 'E Efectivo C Cheque T Transferencia';
+c1   = rolt091.n91_bco_empresa, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c008 = gent008.g08_nombre, NOENTRY, UPSHIFT;
+c009 = rolt091.n91_cta_empresa, AUTONEXT, UPSHIFT;
+c010 = rolt091.n91_cta_trabaj, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c050 = rolt091.n91_valor_gan, AUTONEXT, UPSHIFT, FORMAT = '##,###,##&.##',
+	INCLUDE = (0.01 TO 99999999.99), COLOR = BLUE WHERE c050 > 0;
+
+c011 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c012 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c020 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c021 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c2   = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c023 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c024 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c025 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c026 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+d    = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22';
+
+c030 = rolt092.n92_num_prest, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c031 = rolt092.n92_secuencia, NOENTRY, UPSHIFT, FORMAT = '##&&',
+	OPTIONS = '-nolist';
+c3   = rolt092.n92_cod_liqrol, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c033 = rolt092.n92_fecha_ini, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+c034 = rolt092.n92_fecha_fin, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+c035 = FORMONLY.valor_div, NOENTRY, UPSHIFT, FORMAT = '##,###,##&.##',
+	OPTIONS = '-nolist';
+c036 = rolt092.n92_valor_pago, AUTONEXT, UPSHIFT, FORMAT = '--,---,--&.##',
+	INCLUDE = (0 TO 99999999.99), OPTIONS = '-nolist';
+e    = FORMONLY.cancelar TYPE CHAR NOT NULL, REQUIRED, UPSHIFT, AUTONEXT,
+	INCLUDE = ('S', 'N'), DEFAULT = 'N',
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge', OPTIONS = '-nolist';
+
+c040 = rolt091.n91_usuario, NOENTRY, REVERSE, UPSHIFT;
+c041 = FORMONLY.tot_val_div, NOENTRY, REVERSE, UPSHIFT,FORMAT = '##,###,##&.##';
+c042 = FORMONLY.tot_val_pag, NOENTRY, REVERSE, UPSHIFT,FORMAT = '--,---,--&.##';
+END
+KEYS
+F5  = 'Pagar'
+F6  = 'Pagar Todos'
+F7  = 'Anticipo'
+F8  = 'Empleado'
+F9  = 'Contabilizacion'
+F10 = 'Imprimir'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_detalle[10] (n92_num_prest, n92_secuencia, n92_cod_liqrol,
+				n92_fecha_ini, n92_fecha_fin, valor_div,
+				n92_valor_pago, cancelar)

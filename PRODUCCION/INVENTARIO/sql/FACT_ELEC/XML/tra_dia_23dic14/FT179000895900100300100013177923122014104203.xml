@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131779</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131779</guiaRemision>
+<razonSocialComprador>STOCK CERAMICA</razonSocialComprador>
+<identificacionComprador>1715082747001</identificacionComprador>
+<totalSinImpuestos>247.18</totalSinImpuestos>
+<totalDescuento>17.34</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>247.18</baseImponible>
+<valor>29.66</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>276.84</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>101262</codigoPrincipal>
+<descripcion>BALDOSA DE PISO / PARED 35 X 50 FACCIATA PIETRA PRIMERA  (CAJA DE 1.58 m2)</descripcion>
+<cantidad>1.58</cantidad>
+<precioUnitario>13.18</precioUnitario>
+<descuento>3.54</descuento>
+<precioTotalSinImpuesto>17.28</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>17.28</baseImponible>
+<valor>2.07</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97826</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS JS4429130 CONSERVER BLANCO ASTO MONTECRISTO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>70.16</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>70.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>70.16</baseImponible>
+<valor>8.42</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>91471</codigoPrincipal>
+<descripcion>LLAVE DE PARED PICO MOVIL 5660306 SHELBY C/SIFON</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>19.73</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>39.46</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>39.46</baseImponible>
+<valor>4.74</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>91845</codigoPrincipal>
+<descripcion>GRIFERIA DE LAVAPLATOS COMPACTA 5775306 SHELBY C/SIFON LLAVE DE MESA</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>21.04</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>42.08</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>42.08</baseImponible>
+<valor>5.05</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>23858</codigoPrincipal>
+<descripcion>LAVAPLATOS DE ACERO INOXIDABLE 100x50 cm. 1 POZO 1 ESC.DER.1H.P/SOBREP.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>92.00</precioUnitario>
+<descuento>13.80</descuento>
+<precioTotalSinImpuesto>78.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TEKA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>78.20</baseImponible>
+<valor>9.38</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">javiermalo@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2679949</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">059309</campoAdicional>
+</infoAdicional>
+</factura>

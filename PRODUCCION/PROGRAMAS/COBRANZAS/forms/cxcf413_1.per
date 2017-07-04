@@ -1,0 +1,40 @@
+DATABASE aceros
+SCREEN 
+
+{
+
+			     Moneda: [c1] [c020             ]
+     	    	   Tipo Transacción: [c2] [c021             ]
+
+   		    Area de Negocio: [c3  ] [c022             ]		
+			    Cliente: [c004] [c023             ]
+	     
+		      Fecha Inicial: [c005      ]  
+            	        Fecha Final: [c006      ]   Origen: [c008          ]
+
+}
+end
+
+ATTRIBUTES
+c1   = FORMONLY.moneda,		REVERSE, UPSHIFT, AUTONEXT, 
+				WIDGET = 'FIELD_BMP',
+				CONFIG = 'lista.bmp F2';
+c2   = FORMONLY.transaccion,	UPSHIFT, WIDGET = 'FIELD_BMP',
+				CONFIG = 'lista.bmp F2';
+c3   = FORMONLY.area,		WIDGET = 'FIELD_BMP',
+				CONFIG = 'lista.bmp F2';   
+c004 = FORMONLY.cliente,	WIDGET = 'FIELD_BMP',
+				CONFIG = 'lista.bmp F2';
+c005 = FORMONLY.inicial TYPE DATE NOT NULL, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENT = 'Ingrese Fecha Inicial en formato: dd-mm-aaaa';
+c006 = FORMONLY.final TYPE DATE NOT NULL, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENT = 'Ingrese Fecha Final en formato: dd-mm-aaaa';
+c008 = FORMONLY.origen_doc,     WIDGET = 'RADIO', CONFIG = "lines=3", AUTONEXT,
+                                CONFIG = 'M Manual A Automatico T Todos',
+                                DEFAULT = 'M';
+c020 = FORMONLY.desc_moneda, 	  REVERSE, UPSHIFT;
+c021 = FORMONLY.desc_transaccion, UPSHIFT;
+c022 = FORMONLY.desc_area, 	  UPSHIFT;
+c023 = FORMONLY.desc_cliente,	  UPSHIFT;
+end
+

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131599</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/12/2014</fechaEmision>
+<dirEstablecimiento>CDLA. CLEMENTE BALLEN</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131599</guiaRemision>
+<razonSocialComprador>CHAVEZ GAVIDIA CARMEN BRILLID</razonSocialComprador>
+<identificacionComprador>0603043894   </identificacionComprador>
+<totalSinImpuestos>19.11</totalSinImpuestos>
+<totalDescuento>0.66</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>18.45</baseImponible>
+<valor>2.21</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>20.66</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>97580</codigoPrincipal>
+<descripcion>AZULEJO PARED 20 X 30 AMATISTA MARRON ESTANDAR</descripcion>
+<cantidad>1.50</cantidad>
+<precioUnitario>7.25</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>10.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIALTO" valor="RIALTO"/>
+<detAdicional nombre="M2" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>10.88</baseImponible>
+<valor>1.31</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>92993</codigoPrincipal>
+<descripcion>PEGA PARA CERAMICA BONDEX PLUS DE 25 KG. CERAMICA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>8.23</precioUnitario>
+<descuento>0.66</descuento>
+<precioTotalSinImpuesto>7.57</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="INTACO" valor="INTACO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7.57</baseImponible>
+<valor>0.91</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3112185</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064057</campoAdicional>
+</infoAdicional>
+</factura>

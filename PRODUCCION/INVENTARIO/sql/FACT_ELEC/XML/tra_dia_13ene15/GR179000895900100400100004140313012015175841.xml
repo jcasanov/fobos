@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000041403</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<dirPartida>AV LA PRENSA</dirPartida>
+<razonSocialTransportista>SERVIENTREGA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0991285679001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>13/01/2015</fechaIniTransporte>
+<fechaFinTransporte>13/01/2015</fechaFinTransporte>
+<placa>SER</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0190115151001</identificacionDestinatario>
+<razonSocialDestinatario>CARTONES NACIONALES S.A.I. CARTOPEL</razonSocialDestinatario>
+<dirDestinatario>CUENCA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>13/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>98465</codigoInterno>
+<descripcion>RETENEDOR DE BOMBA 46513-53 SELLO MECANICO P/BOMBA MOD.T8A3S / T6A3S</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GORMAN"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>98667</codigoInterno>
+<descripcion>IMPULSOR DE HIERRO 38615-087 11010 P/BOMBA MOD.T6 A3S-B</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GORMAN"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">documentos@gcartopel.com</campoAdicional>
+<campoAdicional nombre="Email">fernandoo1@cartopel.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">072860600</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">038931</campoAdicional>
+</infoAdicional>
+</guiaRemision>

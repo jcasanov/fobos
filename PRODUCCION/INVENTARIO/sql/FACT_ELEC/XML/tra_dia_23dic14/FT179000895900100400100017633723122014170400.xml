@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176337</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176337</guiaRemision>
+<razonSocialComprador>CORONEL CADENA LEIFF ARQ.</razonSocialComprador>
+<identificacionComprador>1710717347</identificacionComprador>
+<totalSinImpuestos>4813.74</totalSinImpuestos>
+<totalDescuento>200.58</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>4813.74</baseImponible>
+<valor>577.65</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>5391.39</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>292</codigoPrincipal>
+<descripcion>HIERRO CORRUGADO  4200 DE 10mm. x 12m</descripcion>
+<cantidad>210.00</cantidad>
+<precioUnitario>8.59</precioUnitario>
+<descuento>72.16</descuento>
+<precioTotalSinImpuesto>1731.74</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDEC"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1731.74</baseImponible>
+<valor>207.81</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>304</codigoPrincipal>
+<descripcion>HIERRO CORRUGADO  4200 DE 14mm. x 12m</descripcion>
+<cantidad>174.00</cantidad>
+<precioUnitario>16.81</precioUnitario>
+<descuento>117.00</descuento>
+<precioTotalSinImpuesto>2807.94</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDEC"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2807.94</baseImponible>
+<valor>336.95</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>310</codigoPrincipal>
+<descripcion>HIERRO CORRUGADO  4200 DE 16mm. x 12m</descripcion>
+<cantidad>13.00</cantidad>
+<precioUnitario>21.96</precioUnitario>
+<descuento>11.42</descuento>
+<precioTotalSinImpuesto>274.06</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDEC"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>274.06</baseImponible>
+<valor>32.89</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">leiffco@yahoo.com.ar</campoAdicional>
+<campoAdicional nombre="telefono-movil">093357708</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">042278</campoAdicional>
+</infoAdicional>
+</factura>

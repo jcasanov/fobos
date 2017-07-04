@@ -1,0 +1,58 @@
+DATABASE aceros
+SCREEN
+{
+          Cliente: [c000      ] [c001                                    ]
+    Fecha Inicial: [c002      ]                Fecha Término: [c003      ]
+
+  [b0|c022      |c023                     |c024           |c025           |c]
+ [a0|c012      |c013                     |c014           |c015           |a]
+ [a0|c012      |c013                     |c014           |c015           |a]
+ [a0|c012      |c013                     |c014           |c015           |a]
+ [a0|c012      |c013                     |c014           |c015           |a]
+ [a0|c012      |c013                     |c014           |c015           |a]
+ [a0|c012      |c013                     |c014           |c015           |a]
+ [a0|c012      |c013                     |c014           |c015           |a]
+ [a0|c012      |c013                     |c014           |c015           |a]
+ [a0|c012      |c013                     |c014           |c015           |a]
+ [a0|c012      |c013                     |c014           |c015           |a]
+ [a0|c012      |c013                     |c014           |c015           |a]
+ [a0|c012      |c013                     |c014           |c015           |a]
+ [a0|c012      |c013                     |c014           |c015           |a]
+ [a0|c012      |c013                     |c014           |c015           |a]
+ [a0|c012      |c013                     |c014           |c015           |a]
+}
+TABLES
+cajt010, cajt011, gent008
+ATTRIBUTES
+c000 = cajt010.j10_codcli, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = cajt010.j10_nomcli, NOENTRY, UPSHIFT;
+c002 = FORMONLY.vm_fecha_ini TYPE DATE NOT NULL, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Inicial en formato dd/mm/aaaa';
+c003 = FORMONLY.vm_fecha_fin TYPE DATE NOT NULL, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Término en formato dd/mm/aaaa';
+
+b0   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c022 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c023 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c024 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c025 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c    = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+a0   = cajt010.j10_tipo_destino, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c012 = FORMONLY.j10_fecha_pro, NOENTRY, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy', OPTIONS = '-nolist';
+c013 = gent008.g08_nombre, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c014 = cajt011.j11_num_cta_tarj, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c015 = cajt011.j11_num_ch_aut, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+a    = cajt011.j11_protestado, NOENTRY, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N',
+	OPTIONS = '-nolist';
+end
+KEYS
+F5 = 'Protesto'
+INSTRUCTIONS
+SCREEN RECORD rm_det[15] (j10_tipo_destino, j10_fecha_pro, g08_nombre,
+			j11_num_cta_tarj, j11_num_ch_aut, j11_protestado)

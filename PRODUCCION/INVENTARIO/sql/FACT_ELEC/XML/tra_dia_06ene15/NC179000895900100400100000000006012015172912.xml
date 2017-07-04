@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025153</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>06/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>GANCHOZO FAUBLA SIXTO VINICIO</razonSocialComprador>
+<identificacionComprador>1715531917001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000025153</numDocModificado>
+<fechaEmisionDocSustento>15/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>42.22</totalSinImpuestos>
+<valorModificacion>47.29</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>42.22</baseImponible>
+<valor>5.07</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>POR DEVOLUCION O.T. # 7942</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>98524</codigoInterno>
+<descripcion>INDUCIDO 16-10-5375 P/ROTOMARTILLO 5375-20</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>39.25</precioUnitario>
+<descuento>5.89</descuento>
+<precioTotalSinImpuesto>33.36</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>33.36</baseImponible>
+<valor>4.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>96538</codigoInterno>
+<descripcion>CARBONES 22-22-1560 P/MOD.6122-30</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>3.52</precioUnitario>
+<descuento>1.06</descuento>
+<precioTotalSinImpuesto>5.98</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.98</baseImponible>
+<valor>0.72</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>102340</codigoInterno>
+<descripcion>TAPA 44-66-5379 DEL CARBON P/ROTOMARTILLO MOD.5380-21</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1.00</precioUnitario>
+<descuento>0.30</descuento>
+<precioTotalSinImpuesto>1.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.70</baseImponible>
+<valor>0.20</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>98525</codigoInterno>
+<descripcion>LLAVE 48-66-1357 P/MANDRIL DE ROTOMARTILLO 5375-20</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.39</precioUnitario>
+<descuento>0.21</descuento>
+<precioTotalSinImpuesto>1.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.18</baseImponible>
+<valor>0.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">six_ganchozo@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">098091413</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">62074</campoAdicional>
+</infoAdicional>
+</notaCredito>

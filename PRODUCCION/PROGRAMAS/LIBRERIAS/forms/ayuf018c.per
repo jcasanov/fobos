@@ -1,0 +1,30 @@
+DATABASE aceros
+
+SCREEN
+{
+  CLIENTES
+ ---------------------------------------
+  Código       Nombre 		
+ ---------------------------------------
+ [c01       ] [c002                    ] 
+ [c01       ] [c002                    ]
+ [c01       ] [c002                    ]
+ [c01       ] [c002                    ]
+ [c01       ] [c002                    ]
+ [c01       ] [c002                    ]
+ [c01       ] [c002                    ] 
+ [c01       ] [c002                    ] 
+ [c01       ] [c002                    ] 
+ [c01       ] [c002                    ] 
+}
+
+TABLES
+cxct001
+
+ATTRIBUTES
+c01 = z01_codcli,REVERSE;
+c002 = z01_nomcli,REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_cobr[10](z01_codcli, z01_nomcli)

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092040</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092040</guiaRemision>
+<razonSocialComprador>SALVATIERRA ZAMBRANO MARIBEL</razonSocialComprador>
+<identificacionComprador>1307915718</identificacionComprador>
+<totalSinImpuestos>924.00</totalSinImpuestos>
+<totalDescuento>308.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>924.00</baseImponible>
+<valor>110.88</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1034.88</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>93072</codigoPrincipal>
+<descripcion>TALADRO DE BASE ELECTROMAGNETICA 4297-1 MOTOR 1-1/4" 11.5AMP 500-250RPM P/BASES 4202/4203</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1232.00</precioUnitario>
+<descuento>308.00</descuento>
+<precioTotalSinImpuesto>924.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>924.00</baseImponible>
+<valor>110.88</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">pnreyessantos@hotmail.com</campoAdicional>
+<campoAdicional nombre="Email">jsalvatierra09@hotmail.es</campoAdicional>
+<campoAdicional nombre="telefono-movil">443778</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">015079</campoAdicional>
+</infoAdicional>
+</factura>

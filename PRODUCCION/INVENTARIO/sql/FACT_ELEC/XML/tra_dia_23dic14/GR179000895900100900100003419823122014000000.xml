@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000034198</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>RENOVACION AGRICOLA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0992848510001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>23/12/2014</fechaIniTransporte>
+<fechaFinTransporte>24/12/2014</fechaFinTransporte>
+<placa>GSJ2542</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0992848510001</identificacionDestinatario>
+<razonSocialDestinatario>RENOVACIONES AGRICOLAS S.A. RENAGRICORP</razonSocialDestinatario>
+<dirDestinatario>PUEBLOVIEJO</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>23/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>96828</codigoInterno>
+<descripcion>BOMBA CENTRIF STANDARD C-MOTOR FOX 1-1/2" x 1-1/2" DE 1HP 115/220/1F IP21  ACERO INOX.</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FAMAC"/>
+<detAdicional nombre="MODELO" valor="FOX 1-1/2" X 1-1/2""/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">david.chevez@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2796547</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016402</campoAdicional>
+</infoAdicional>
+</guiaRemision>

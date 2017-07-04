@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000007736</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>21/11/2014</fechaEmision>
+<dirEstablecimiento>AV.MORAN VALVERDE OE3-191-AV.TNTE.H.ORTI</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>EDESA S. A.</razonSocialComprador>
+<identificacionComprador>1790160653001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>003-001-000106031</numDocModificado>
+<fechaEmisionDocSustento>14/08/2012</fechaEmisionDocSustento>
+<totalSinImpuestos>79.28</totalSinImpuestos>
+<valorModificacion>81.69</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>72.94</baseImponible>
+<valor>8.75</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>REF POR PERDIDA NP138366</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>5828</codigoInterno>
+<descripcion>TUBO PVC ROSCABLE x 6 MTS. DE 3/4" (340 PSI)</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>10.54</precioUnitario>
+<descuento>5.06</descuento>
+<precioTotalSinImpuesto>58.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>58.18</baseImponible>
+<valor>6.98</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>50412</codigoInterno>
+<descripcion>UNION POLIPROPILENO DE 3/4" (AGUA CALIENTE)</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>0.50</precioUnitario>
+<descuento>0.24</descuento>
+<precioTotalSinImpuesto>2.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.76</baseImponible>
+<valor>0.33</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>50424</codigoInterno>
+<descripcion>UNIVERSAL POLIPROPILENO DE 3/4" (AGUA CALIENTE)</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>1.68</precioUnitario>
+<descuento>0.40</descuento>
+<precioTotalSinImpuesto>4.64</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.64</baseImponible>
+<valor>0.56</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>50292</codigoInterno>
+<descripcion>CODO POLIPROPILENO DE 3/4" x 90°</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>0.54</precioUnitario>
+<descuento>0.17</descuento>
+<precioTotalSinImpuesto>1.99</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.99</baseImponible>
+<valor>0.24</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>50382</codigoInterno>
+<descripcion>TEE POLIPROPILENO DE 3/4" (AGUA CALIENTE)</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>0.83</precioUnitario>
+<descuento>0.27</descuento>
+<precioTotalSinImpuesto>3.05</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.05</baseImponible>
+<valor>0.37</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>50350</codigoInterno>
+<descripcion>REDUCTOR POLIPROPILENO DE 3/4" A 1/2" (AGUA CALIENTE)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>0.18</precioUnitario>
+<descuento>0.03</descuento>
+<precioTotalSinImpuesto>0.33</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.33</baseImponible>
+<valor>0.04</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>50316</codigoInterno>
+<descripcion>NEPLO POLIPROPILENO DE 3/4" x 6 cm. (AGUA CALIENTE)</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>0.25</precioUnitario>
+<descuento>0.08</descuento>
+<precioTotalSinImpuesto>0.92</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.92</baseImponible>
+<valor>0.11</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>50287</codigoInterno>
+<descripcion>NEPLO POLIPROPILENO DE 1/2" CON TUERCA (AGUA CALIENTE)</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>0.29</precioUnitario>
+<descuento>0.09</descuento>
+<precioTotalSinImpuesto>1.07</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.07</baseImponible>
+<valor>0.13</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</notaCredito>

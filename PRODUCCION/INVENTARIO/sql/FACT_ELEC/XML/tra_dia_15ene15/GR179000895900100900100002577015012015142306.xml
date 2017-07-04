@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025770</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>AV. JUAN TANCA MARENGO KM.1.7</dirPartida>
+<razonSocialTransportista>SERVIENTREGA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0991285679001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>15/01/2015</fechaIniTransporte>
+<fechaFinTransporte>15/01/2015</fechaFinTransporte>
+<placa>  YBA-3003</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1201145800</identificacionDestinatario>
+<razonSocialDestinatario>GARCIA ROSADO ARCADIO JUAN</razonSocialDestinatario>
+<dirDestinatario>BABAHOYO:MALECON ENTRE MARTIN ICAZA Y FORES "FUNDABA" REC. ING.JUAN GARCIA ROSADO TEL.0991948509</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>15/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>100382</codigoInterno>
+<descripcion>VALVULA FLUSH PARA INODORO E365.22 CR STANDARD</descripcion>
+<cantidad>5.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>101331</codigoInterno>
+<descripcion>LLAVE TEMPORIZADAS / PRESSMATIC E360.02  CROMO DE PARED ECOMATIC</descripcion>
+<cantidad>4.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>101932</codigoInterno>
+<descripcion>VALVULA PRESMATIC PARA URINARIO E362.01  CR  ECOMATIC</descripcion>
+<cantidad>6.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>26724</codigoInterno>
+<descripcion>SIFON DE LAVABO E240 RA DE 1-1/4" DH-BL RESINA ACETAL C/ ACOPLE</descripcion>
+<cantidad>4.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>90188</codigoInterno>
+<descripcion>URINARIO DE PARED E398-BL QUANTUM BLANCO</descripcion>
+<cantidad>6.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">rubyg_1991@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">052734948</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016705</campoAdicional>
+</infoAdicional>
+</guiaRemision>

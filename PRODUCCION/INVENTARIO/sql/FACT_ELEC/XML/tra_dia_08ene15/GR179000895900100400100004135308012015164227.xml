@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000041353</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<dirPartida>AV. LA PRENSA N/4514</dirPartida>
+<razonSocialTransportista>SR FERNANDO VACA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>08/01/2015</fechaIniTransporte>
+<fechaFinTransporte>08/01/2015</fechaFinTransporte>
+<placa>PAA-001</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1792313562001</identificacionDestinatario>
+<razonSocialDestinatario>FULL STEEL ACEROS INDUSTRIALES S.A.</razonSocialDestinatario>
+<dirDestinatario>SEGUN CROQUIZ</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>08/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>94523</codigoInterno>
+<descripcion>VALVULA COMPUERTA  ACERO FORJADO BRIDADA IT-411 DE 6" 150 PSI</descripcion>
+<cantidad>4.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INOX T"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>94527</codigoInterno>
+<descripcion>VALVULA COMPUERTA  ACERO FORJADO BRIDADA IT-411 DE 4" 300 PSI</descripcion>
+<cantidad>7.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INOX T"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>94528</codigoInterno>
+<descripcion>VALVULA COMPUERTA  ACERO FORJADO BRIDADA IT-411 DE 6" 300 PSI</descripcion>
+<cantidad>9.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INOX T"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">info@surtiaceros.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">3465434</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">055853</campoAdicional>
+</infoAdicional>
+</guiaRemision>

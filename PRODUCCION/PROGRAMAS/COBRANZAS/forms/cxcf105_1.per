@@ -1,0 +1,27 @@
+DATABASE aceros  
+-------------
+-------------
+SCREEN
+{
+
+	     Código: [c000]
+
+      Monto Inicial: [c001           ]         Monto Final: [c002           ] 
+
+              Plazo: [c03] días 
+
+}
+end
+TABLES
+cxct007
+ATTRIBUTES
+c000 = z07_serial       ,REQUIRED, REVERSE, FORMAT = '###&' 
+	,widget='FIELD_BMP', config='lista.bmp F2';
+c001 = z07_monto_ini 	,REQUIRED, REVERSE, AUTONEXT, FORMAT ='###,###,##&.##'; 
+c002 = z07_monto_fin  	,REQUIRED, REVERSE, AUTONEXT, FORMAT ='###,###,##&.##';
+c03  = z07_plazo_dias   ,REQUIRED, REVERSE, FORMAT = '##&';
+
+INSTRUCTIONS
+DELIMITERS "[]"
+end
+

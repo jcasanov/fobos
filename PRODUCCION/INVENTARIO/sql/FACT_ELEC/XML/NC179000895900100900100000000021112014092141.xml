@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000016278</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>21/11/2014</fechaEmision>
+<dirEstablecimiento>CDLA. ALBORADA III ET., MZ. BS V.12</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>GONZALEZ ABAD DAVID</razonSocialComprador>
+<identificacionComprador>0909562407001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000102584</numDocModificado>
+<fechaEmisionDocSustento>14/10/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>41.38</totalSinImpuestos>
+<valorModificacion>40.78</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>36.41</baseImponible>
+<valor>4.37</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEVOLUCION: CAMBIO DE MODELO</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>69021</codigoInterno>
+<descripcion>LAVABO DE PORCELANA CON PEDESTAL PREPONCHADO E218-BL SIENA BLANCO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>41.38</precioUnitario>
+<descuento>4.97</descuento>
+<precioTotalSinImpuesto>36.41</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>36.41</baseImponible>
+<valor>4.37</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</notaCredito>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268767</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268767</guiaRemision>
+<razonSocialComprador>CLIMEC S.A</razonSocialComprador>
+<identificacionComprador>1791872584001</identificacionComprador>
+<totalSinImpuestos>162.31</totalSinImpuestos>
+<totalDescuento>28.53</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>162.31</baseImponible>
+<valor>19.48</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>181.79</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>43851</codigoPrincipal>
+<descripcion>ESLABON 39950 P/TERRAJA 811-A (39950)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>14.51</precioUnitario>
+<descuento>2.18</descuento>
+<precioTotalSinImpuesto>12.33</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>12.33</baseImponible>
+<valor>1.48</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>15690</codigoPrincipal>
+<descripcion>DADOS PARA TUBOS DE 1" A 2" NPT P/811A-711-815A (47750)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>138.59</precioUnitario>
+<descuento>20.79</descuento>
+<precioTotalSinImpuesto>117.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>117.80</baseImponible>
+<valor>14.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>14385</codigoPrincipal>
+<descripcion>ACEITE PARA EQUIPOS OBSCURO (S/ENVASE) (41610)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>17.79</precioUnitario>
+<descuento>5.34</descuento>
+<precioTotalSinImpuesto>30.24</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="GALON"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>30.24</baseImponible>
+<valor>3.63</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21663</codigoPrincipal>
+<descripcion>ENVASE PLASTICO DESCARTABLE DE 1 Gln.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2.16</precioUnitario>
+<descuento>0.22</descuento>
+<precioTotalSinImpuesto>1.94</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.94</baseImponible>
+<valor>0.23</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">climec2@climec.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">3801152</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">034083</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C# SM-HEE2-004</campoAdicional>
+</infoAdicional>
+</factura>

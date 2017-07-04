@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000041520</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<dirPartida>AV. LA PRENSA N-4514</dirPartida>
+<razonSocialTransportista>ACERO COMERCIAL</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>27/01/2015</fechaIniTransporte>
+<fechaFinTransporte>27/01/2015</fechaFinTransporte>
+<placa>PAA-001</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1102318423001</identificacionDestinatario>
+<razonSocialDestinatario>SARANGO MEDINA MARIA ALEGRIA</razonSocialDestinatario>
+<dirDestinatario>MARISCAL SUCRE N62-101 Y JOSE FIGUEROA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>27/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>103043</codigoInterno>
+<descripcion>BALDOSA DE PISO 30 X 30 MONOQUEMA SPINETTO CREMA SEGUNDA</descripcion>
+<cantidad>60.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">ceramicasvellavista@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0998669900</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">062738</campoAdicional>
+</infoAdicional>
+</guiaRemision>

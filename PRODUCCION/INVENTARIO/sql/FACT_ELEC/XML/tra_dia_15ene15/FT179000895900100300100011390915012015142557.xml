@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113909</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113909</guiaRemision>
+<razonSocialComprador>MARTINEZ MORA MARCO PATRICIO</razonSocialComprador>
+<identificacionComprador>1702022201</identificacionComprador>
+<totalSinImpuestos>26.97</totalSinImpuestos>
+<totalDescuento>2.87</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>26.97</baseImponible>
+<valor>3.24</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>30.21</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>100328</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 40 BIONICA BLANCO PRIMERA</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>11.99</precioUnitario>
+<descuento>2.40</descuento>
+<precioTotalSinImpuesto>21.58</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>21.58</baseImponible>
+<valor>2.59</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>92991</codigoPrincipal>
+<descripcion>PEGA PARA CERAMICA BONDEX STANDARD DE 25 KG. CERAMICA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>5.86</precioUnitario>
+<descuento>0.47</descuento>
+<precioTotalSinImpuesto>5.39</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INTACO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.39</baseImponible>
+<valor>0.65</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">marcopmora@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2664586</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">060331</campoAdicional>
+</infoAdicional>
+</factura>

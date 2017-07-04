@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131730</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131730</guiaRemision>
+<razonSocialComprador>MKD ACABADOS PARA LA CONSTRUCCION</razonSocialComprador>
+<identificacionComprador>1703013431001</identificacionComprador>
+<totalSinImpuestos>173.80</totalSinImpuestos>
+<totalDescuento>35.60</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>173.80</baseImponible>
+<valor>20.86</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>194.66</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>101779</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 TESSUTTO MOCCA  PRIMERA</descripcion>
+<cantidad>16.00</cantidad>
+<precioUnitario>10.55</precioUnitario>
+<descuento>28.70</descuento>
+<precioTotalSinImpuesto>140.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>140.10</baseImponible>
+<valor>16.81</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100481</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA AMAGUANIA BEIGE PRIMERA</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>10.15</precioUnitario>
+<descuento>6.90</descuento>
+<precioTotalSinImpuesto>33.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>33.70</baseImponible>
+<valor>4.04</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2844869</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">058865</campoAdicional>
+</infoAdicional>
+</factura>

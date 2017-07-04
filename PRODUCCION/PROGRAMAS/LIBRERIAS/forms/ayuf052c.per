@@ -1,0 +1,31 @@
+DATABASE aceros
+
+SCREEN
+{
+ CLIENTES GENERALES
+ -------------------------------------------------
+  Código    Cliente
+ -------------------------------------------------
+ [c001     |c002                                 ] 
+ [c001     |c002                                 ] 
+ [c001     |c002                                 ] 
+ [c001     |c002                                 ] 
+ [c001     |c002                                 ] 
+ [c001     |c002                                 ] 
+ [c001     |c002                                 ] 
+ [c001     |c002                                 ] 
+ [c001     |c002                                 ] 
+ [c001     |c002                                 ] 
+}
+
+TABLES
+cxct001
+
+ATTRIBUTES
+c001 = z01_codcli, UPSHIFT,REVERSE;
+c002 = z01_nomcli, UPSHIFT,REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_cligen[10](z01_codcli, z01_nomcli)
+

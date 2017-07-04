@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268935</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268935</guiaRemision>
+<razonSocialComprador>BUSTOS VELIZ EDIZON FERNANDO</razonSocialComprador>
+<identificacionComprador>1711411098001</identificacionComprador>
+<totalSinImpuestos>6300.00</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>6300.00</baseImponible>
+<valor>756.00</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>7056.00</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>91917</codigoPrincipal>
+<descripcion>VIGA UPN 200 x 6 m.. (200 x 75 x 8.5 x 11.5 mm.)</descripcion>
+<cantidad>30.00</cantidad>
+<precioUnitario>210.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>6300.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6300.00</baseImponible>
+<valor>756.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">alianza.jfh@live.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3103359</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">058813</campoAdicional>
+<campoAdicional nombre="Observaciones">PEDIDO PERSONAL</campoAdicional>
+</infoAdicional>
+</factura>

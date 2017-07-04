@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113730</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>08/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113730</guiaRemision>
+<razonSocialComprador>BORJA CALDERON SEGUNDO OSWALDO</razonSocialComprador>
+<identificacionComprador>0400784831001</identificacionComprador>
+<totalSinImpuestos>504.37</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>504.37</baseImponible>
+<valor>60.52</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>564.89</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>92993</codigoPrincipal>
+<descripcion>PEGA PARA CERAMICA BONDEX PLUS DE 25 KG. CERAMICA</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>6.90</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>69.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INTACO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>69.00</baseImponible>
+<valor>8.28</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>92991</codigoPrincipal>
+<descripcion>PEGA PARA CERAMICA BONDEX STANDARD DE 25 KG. CERAMICA</descripcion>
+<cantidad>50.00</cantidad>
+<precioUnitario>4.85</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>242.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INTACO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>242.50</baseImponible>
+<valor>29.10</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96561</codigoPrincipal>
+<descripcion>PORCELANA PARA CERAMICA GROUTEX POLIMERO S/A  CELESTE (FUNDA DE 2 KG.)</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>2.54</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>50.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INTACO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>50.80</baseImponible>
+<valor>6.10</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96788</codigoPrincipal>
+<descripcion>PORCELANA PARA CERAMICA GROUTEX POLIMERO CANELA PF S/ARENA (FUNDA DE  2KG.)</descripcion>
+<cantidad>32.00</cantidad>
+<precioUnitario>1.92</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>61.44</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INTACO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>61.44</baseImponible>
+<valor>7.37</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100372</codigoPrincipal>
+<descripcion>PORCELANA PARA CERAMICA GROUTEX POLIMERO CREMA PF S/A (FUNDA 2kg.)</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>1.66</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>33.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INTACO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>33.20</baseImponible>
+<valor>3.98</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99651</codigoPrincipal>
+<descripcion>PORCELANA PARA CERAMICA GROUTEX POLIMERO PF S/A VERDE OBSCURO (FUNDA DE 2 Kg.)</descripcion>
+<cantidad>17.00</cantidad>
+<precioUnitario>2.79</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>47.43</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INTACO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>47.43</baseImponible>
+<valor>5.69</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">dey_2102@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0999293682</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">063659</campoAdicional>
+</infoAdicional>
+</factura>

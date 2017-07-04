@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104191</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>24/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104191</guiaRemision>
+<razonSocialComprador>PINTURAS Y QUIMICOS DEL ECUADOR PYQ S.A.</razonSocialComprador>
+<identificacionComprador>0992619570001</identificacionComprador>
+<totalSinImpuestos>21.47</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>21.47</baseImponible>
+<valor>2.58</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>24.05</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>45234</codigoPrincipal>
+<descripcion>RETENEDOR DE BOMBA 25271-821 P/ BOMBA 81-1/4A3-B,GMS1DC3-B</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>21.47</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>21.47</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GORMAN"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>21.47</baseImponible>
+<valor>2.58</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">gyagual@qroma.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2100301</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016591</campoAdicional>
+</infoAdicional>
+</factura>

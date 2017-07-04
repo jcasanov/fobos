@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131763</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131763</guiaRemision>
+<razonSocialComprador>FONSECA LOPEZ BLANCA JUDITH</razonSocialComprador>
+<identificacionComprador>1707559082</identificacionComprador>
+<totalSinImpuestos>144.56</totalSinImpuestos>
+<totalDescuento>10.86</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>144.56</baseImponible>
+<valor>17.35</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>161.91</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>100465</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA SUDAMERICA ROSA PRIMERA</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>7.80</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>46.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>46.80</baseImponible>
+<valor>5.62</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98664</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA MINDO BEIGE PRIMERA</descripcion>
+<cantidad>8.00</cantidad>
+<precioUnitario>10.14</precioUnitario>
+<descuento>8.11</descuento>
+<precioTotalSinImpuesto>73.01</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>73.01</baseImponible>
+<valor>8.76</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>92991</codigoPrincipal>
+<descripcion>PEGA PARA CERAMICA BONDEX STANDARD DE 25 KG. CERAMICA</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>5.80</precioUnitario>
+<descuento>2.32</descuento>
+<precioTotalSinImpuesto>20.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INTACO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>20.88</baseImponible>
+<valor>2.51</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96787</codigoPrincipal>
+<descripcion>PORCELANA PARA CERAMICA GROUTEX POLIMERO ARENA PF S/ARENA (FUNDA DE  2KG.)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.99</precioUnitario>
+<descuento>0.20</descuento>
+<precioTotalSinImpuesto>1.79</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INTACO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.79</baseImponible>
+<valor>0.21</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96810</codigoPrincipal>
+<descripcion>PORCELANA PARA CERAMICA GROUTEX POLIMERO PF S/A CARAMELO (2KG.)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2.31</precioUnitario>
+<descuento>0.23</descuento>
+<precioTotalSinImpuesto>2.08</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INTACO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.08</baseImponible>
+<valor>0.25</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0983079548</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064160</campoAdicional>
+</infoAdicional>
+</factura>

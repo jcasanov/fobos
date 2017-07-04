@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000114063</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000114063</guiaRemision>
+<razonSocialComprador>LEVAPAN DEL ECUADOR</razonSocialComprador>
+<identificacionComprador>1790027864001</identificacionComprador>
+<totalSinImpuestos>2002.34</totalSinImpuestos>
+<totalDescuento>353.36</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>2002.34</baseImponible>
+<valor>240.28</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>2242.62</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>97995</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 6" SP-17-9  P/MOTOR DE 6" ARRANQUE DIRECTO  DE 2-1/2" NPT.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2355.70</precioUnitario>
+<descuento>353.36</descuento>
+<precioTotalSinImpuesto>2002.34</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2002.34</baseImponible>
+<valor>240.28</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">rpaez@levapan.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">677011</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">028847</campoAdicional>
+</infoAdicional>
+</factura>

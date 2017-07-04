@@ -1,0 +1,35 @@
+DATABASE aceros
+
+SCREEN
+{
+ CHASIS CLIENTES        [c001                                     ]
+---------------------------------------------------------------------
+ Modelo          Chasís                 Placa      Color 
+---------------------------------------------------------------------
+[c002          ][c003                 ][c004     ][c005           ]
+[c002          ][c003                 ][c004     ][c005           ]
+[c002          ][c003                 ][c004     ][c005           ]
+[c002          ][c003                 ][c004     ][c005           ]
+[c002          ][c003                 ][c004     ][c005           ]
+[c002          ][c003                 ][c004     ][c005           ]
+[c002          ][c003                 ][c004     ][c005           ]
+[c002          ][c003                 ][c004     ][c005           ]
+[c002          ][c003                 ][c004     ][c005           ]
+[c002          ][c003                 ][c004     ][c005           ]
+
+}
+
+TABLES
+talt010
+cxct001
+
+ATTRIBUTES
+c001 = z01_nomcli, UPSHIFT;
+c002 = t10_modelo, UPSHIFT;
+c003 = t10_chasis, UPSHIFT;
+c004 = t10_placa, UPSHIFT;
+c005 = t10_color, UPSHIFT;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_chasis[10](t10_modelo, t10_chasis, t10_placa, t10_color)

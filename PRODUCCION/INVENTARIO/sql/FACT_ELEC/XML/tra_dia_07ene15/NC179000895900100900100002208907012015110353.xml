@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000022089</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>FERRICOMP S.A.</razonSocialComprador>
+<identificacionComprador>0992538678001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000103481</numDocModificado>
+<fechaEmisionDocSustento>24/11/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>303.85</totalSinImpuestos>
+<valorModificacion>340.31</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>303.85</baseImponible>
+<valor>36.46</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>REFACTURACION: CAMBIO DE FECHA</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>69080</codigoInterno>
+<descripcion>REJILLA 2011402 DE PISO 1-1/2" BRONCE CROMADO P/ ROSCAR</descripcion>
+<cantidad>72.00</cantidad>
+<precioUnitario>2.80</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>201.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>201.60</baseImponible>
+<valor>24.19</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>70591</codigoInterno>
+<descripcion>LLAVE DE MANGUERA 2003402 DE 1/2" DE BRONCE LIVIANA</descripcion>
+<cantidad>25.00</cantidad>
+<precioUnitario>4.09</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>102.25</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>102.25</baseImponible>
+<valor>12.27</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacionelectronica@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2282682</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">13656</campoAdicional>
+</infoAdicional>
+</notaCredito>

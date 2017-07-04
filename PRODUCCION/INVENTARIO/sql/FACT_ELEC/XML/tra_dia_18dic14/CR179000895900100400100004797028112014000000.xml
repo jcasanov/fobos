@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comprobanteRetencion id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000047970</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoCompRetencion>
+<fechaEmision>28/11/2014</fechaEmision>
+<dirEstablecimiento>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionSujetoRetenido>04</tipoIdentificacionSujetoRetenido>
+<razonSocialSujetoRetenido>PETROAMAZONAS EP</razonSocialSujetoRetenido>
+<identificacionSujetoRetenido>1768153880001</identificacionSujetoRetenido>
+<periodoFiscal>11/2014</periodoFiscal>
+</infoCompRetencion>
+<impuestos>
+<impuesto>
+<codigo>1</codigo>
+<codigoRetencion>310</codigoRetencion>
+<baseImponible>3306.08</baseImponible>
+<porcentajeRetener>1.00</porcentajeRetener>
+<valorRetenido>33.06</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>004001000173166</numDocSustento>
+<fechaEmisionDocSustento>22/10/2014</fechaEmisionDocSustento>
+</impuesto>
+<impuesto>
+<codigo>1</codigo>
+<codigoRetencion>310</codigoRetencion>
+<baseImponible>1179.38</baseImponible>
+<porcentajeRetener>1.00</porcentajeRetener>
+<valorRetenido>11.79</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>004001000173261</numDocSustento>
+<fechaEmisionDocSustento>24/10/2014</fechaEmisionDocSustento>
+</impuesto>
+</impuestos>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">467-500</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">050427</campoAdicional>
+</infoAdicional>
+</comprobanteRetencion>

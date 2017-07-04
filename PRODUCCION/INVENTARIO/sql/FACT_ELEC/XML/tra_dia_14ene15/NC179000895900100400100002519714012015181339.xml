@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025197</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>14/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>TIRADO ULLOA PEDRO ANTONIO</razonSocialComprador>
+<identificacionComprador>1800811711001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000175516</numDocModificado>
+<fechaEmisionDocSustento>09/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>269.43</totalSinImpuestos>
+<valorModificacion>301.76</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>269.43</baseImponible>
+<valor>32.33</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>POR REFACTURACION. MATERIAL YA ENTREGADO</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>101430</codigoInterno>
+<descripcion>TALADRO A BATERIA 2404-22 M-12 FUEL DE 1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>269.43</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>269.43</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>269.43</baseImponible>
+<valor>32.33</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacionelectronica@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2451458</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">54162</campoAdicional>
+</infoAdicional>
+</notaCredito>

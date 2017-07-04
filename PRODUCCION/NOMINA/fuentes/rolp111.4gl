@@ -462,13 +462,11 @@ WHILE (salir = 0)
 				   (rm_par.valor_aum IS NULL OR
 				    rm_par.valor_aum > 0)
 				THEN
-					{
 					CALL fl_mostrar_mensaje('El nuevo sueldo no pude ser menor o igual al sueldo anterior.', 'exclamation')
 					LET rm_emp[i].sueldo_mes_nue  = 0
 					LET rm_emp[i].factor_hora_nue = 0
 					DISPLAY rm_emp[i].* TO rm_emp[j].*
 					NEXT FIELD sueldo_mes_nue
-					}
 				END IF
 				LET rm_emp[i].factor_hora_nue =
 					rm_emp[i].sueldo_mes_nue /

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025691</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>AV. JUAN TANCA AMRENGO KM.1.7</dirPartida>
+<razonSocialTransportista>GERMAN CORONEL</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>0911665198</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>08/01/2015</fechaIniTransporte>
+<fechaFinTransporte>08/01/2015</fechaFinTransporte>
+<placa>  GRW-2255</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0992340975001</identificacionDestinatario>
+<razonSocialDestinatario>SEREMCORP S.A.</razonSocialDestinatario>
+<dirDestinatario>RETIRO GERMAN CORONEL</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>08/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>100382</codigoInterno>
+<descripcion>VALVULA FLUSH PARA INODORO E365.22 CR STANDARD</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>101932</codigoInterno>
+<descripcion>VALVULA PRESMATIC PARA URINARIO E362.01  CR  ECOMATIC</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>92137</codigoInterno>
+<descripcion>INODORO COMERCIAL PARA FLUSH E151 BL  QUANTUN STANDARD ELONGADO BLANCO</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">dhellen23@yahoo.com.mx</campoAdicional>
+<campoAdicional nombre="telefono-movil">2922063</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">007659</campoAdicional>
+</infoAdicional>
+</guiaRemision>

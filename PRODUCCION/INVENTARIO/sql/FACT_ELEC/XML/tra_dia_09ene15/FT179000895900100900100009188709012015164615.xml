@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091887</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>09/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091887</guiaRemision>
+<razonSocialComprador>CRIOLLO RIVAS SHIRLEY YANINA</razonSocialComprador>
+<identificacionComprador>0925905069001</identificacionComprador>
+<totalSinImpuestos>2.49</totalSinImpuestos>
+<totalDescuento>0.31</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>2.49</baseImponible>
+<valor>0.30</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>2.79</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>96045</codigoPrincipal>
+<descripcion>PALANCA 44-10-0670 DE CAMBIO P/ROTOMARTILLO MOD-5363-21</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2.80</precioUnitario>
+<descuento>0.31</descuento>
+<precioTotalSinImpuesto>2.49</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.49</baseImponible>
+<valor>0.30</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">shirleyojitos86@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2335651</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016240</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131829</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>29/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131829</guiaRemision>
+<razonSocialComprador>GUALLASAMIN CUEVA DIEGO BOLIVAR</razonSocialComprador>
+<identificacionComprador>1714290572001</identificacionComprador>
+<totalSinImpuestos>22.46</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>22.46</baseImponible>
+<valor>2.70</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>25.16</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102762</codigoPrincipal>
+<descripcion>PORCELANA PARA CERAMICA GROUTEX POLIMERO PF S/A CAFE OSCURO  (2KG.)</descripcion>
+<cantidad>8.00</cantidad>
+<precioUnitario>1.82</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>14.56</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INTACO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>14.56</baseImponible>
+<valor>1.75</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99649</codigoPrincipal>
+<descripcion>PORCELANA PARA CERAMICA GROUTEX POLIMERO PF S/A TAUPE (FUNDA DE 2 Kg.)</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>1.58</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>7.90</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INTACO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7.90</baseImponible>
+<valor>0.95</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">diegoguayasamin@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2338846</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">054157</campoAdicional>
+</infoAdicional>
+</factura>

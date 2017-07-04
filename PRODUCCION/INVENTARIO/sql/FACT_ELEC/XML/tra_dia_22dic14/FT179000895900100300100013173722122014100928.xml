@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131737</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131737</guiaRemision>
+<razonSocialComprador>GAMA CONSTRUCCIONES</razonSocialComprador>
+<identificacionComprador>1718113325001</identificacionComprador>
+<totalSinImpuestos>563.71</totalSinImpuestos>
+<totalDescuento>99.47</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>563.71</baseImponible>
+<valor>67.65</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>631.36</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>101201</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 COLORA NIEVE  SEGUNDA</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>8.79</precioUnitario>
+<descuento>26.37</descuento>
+<precioTotalSinImpuesto>149.43</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>149.43</baseImponible>
+<valor>17.93</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101454</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 COLORA NEGRO  PRIMERA</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>9.77</precioUnitario>
+<descuento>8.79</descuento>
+<precioTotalSinImpuesto>49.83</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>49.83</baseImponible>
+<valor>5.98</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101589</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 COLORA SANDIA PRIMERA</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>9.77</precioUnitario>
+<descuento>2.93</descuento>
+<precioTotalSinImpuesto>16.61</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>16.61</baseImponible>
+<valor>1.99</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100492</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 MACHALILLA BEIGE SEGUNDA</descripcion>
+<cantidad>30.00</cantidad>
+<precioUnitario>8.27</precioUnitario>
+<descuento>37.22</descuento>
+<precioTotalSinImpuesto>210.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>210.88</baseImponible>
+<valor>25.31</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103009</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 QUANTUM NIEVE PRIMERA</descripcion>
+<cantidad>0.50</cantidad>
+<precioUnitario>9.89</precioUnitario>
+<descuento>0.74</descuento>
+<precioTotalSinImpuesto>4.21</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.21</baseImponible>
+<valor>0.50</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102943</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 QUANTUM  LIMON PRIMERA</descripcion>
+<cantidad>0.50</cantidad>
+<precioUnitario>9.89</precioUnitario>
+<descuento>0.74</descuento>
+<precioTotalSinImpuesto>4.21</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.21</baseImponible>
+<valor>0.50</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103064</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 QUANTUM NEGRO PRIMERA</descripcion>
+<cantidad>0.50</cantidad>
+<precioUnitario>10.06</precioUnitario>
+<descuento>0.75</descuento>
+<precioTotalSinImpuesto>4.28</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.28</baseImponible>
+<valor>0.51</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100777</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA AMAZONAS BEIGE SEGUNDA</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>7.31</precioUnitario>
+<descuento>21.93</descuento>
+<precioTotalSinImpuesto>124.27</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>124.27</baseImponible>
+<valor>14.91</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0998817065</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">048943</campoAdicional>
+</infoAdicional>
+</factura>

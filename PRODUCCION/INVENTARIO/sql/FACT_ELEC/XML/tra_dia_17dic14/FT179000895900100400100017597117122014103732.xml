@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175971</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>AV.CONQUISTADORES N27-479/GUAPULO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175971</guiaRemision>
+<razonSocialComprador>OCTAVIO ANDRADE YEPEZ CIA.LTDA</razonSocialComprador>
+<identificacionComprador>1791765915001</identificacionComprador>
+<totalSinImpuestos>14.85</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>14.85</baseImponible>
+<valor>1.78</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>16.63</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>3272</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 2-1/2" x 3"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>7.86</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>7.86</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7.86</baseImponible>
+<valor>0.94</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3286</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 3" CORRIDO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>6.99</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>6.99</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.99</baseImponible>
+<valor>0.84</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">523611</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">026582</campoAdicional>
+</infoAdicional>
+</factura>

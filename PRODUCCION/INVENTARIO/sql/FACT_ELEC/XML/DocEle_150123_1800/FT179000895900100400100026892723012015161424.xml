@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268927</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268927</guiaRemision>
+<razonSocialComprador>DANIELCOM EQUIPMENT SUPPLY S.A.</razonSocialComprador>
+<identificacionComprador>1791288777001</identificacionComprador>
+<totalSinImpuestos>3280.81</totalSinImpuestos>
+<totalDescuento>46.98</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>3280.81</baseImponible>
+<valor>393.70</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>3674.51</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>63190</codigoPrincipal>
+<descripcion>ENTENALLA (TORNILLO DE BANCO) F-45 CON PLATO GIRATORIO 4-1/2" (66987)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>313.19</precioUnitario>
+<descuento>46.98</descuento>
+<precioTotalSinImpuesto>266.21</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>266.21</baseImponible>
+<valor>31.95</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>45777</codigoPrincipal>
+<descripcion>CORTATUBO 472-HWS DE 8" A 12" (83170)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1507.30</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3014.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3014.60</baseImponible>
+<valor>361.75</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">fact_electronica@danielcom.com</campoAdicional>
+<campoAdicional nombre="Email">marroyo@danielcom.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2258425</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">007874</campoAdicional>
+<campoAdicional nombre="Observaciones">ORDEN DE COMPRA N.- 7258</campoAdicional>
+</infoAdicional>
+</factura>

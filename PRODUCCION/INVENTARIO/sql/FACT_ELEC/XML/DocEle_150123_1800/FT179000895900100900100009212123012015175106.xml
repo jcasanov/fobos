@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092121</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092121</guiaRemision>
+<razonSocialComprador>ROMERO PINARGOTE CESAR PAQUITO</razonSocialComprador>
+<identificacionComprador>1303164253001</identificacionComprador>
+<totalSinImpuestos>889.86</totalSinImpuestos>
+<totalDescuento>381.37</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>889.86</baseImponible>
+<valor>106.78</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>996.64</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>95099</codigoPrincipal>
+<descripcion>MOTOR ELEC SUMERG DE 4" (2243038602) DE 5 HP 230/60/1F</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>931.32</precioUnitario>
+<descuento>279.40</descuento>
+<precioTotalSinImpuesto>651.92</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>651.92</baseImponible>
+<valor>78.23</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>19587</codigoPrincipal>
+<descripcion>CAJA DE CONTROL (2821138110) CJ-5021 P/ 5HP 230/60/1F</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>339.91</precioUnitario>
+<descuento>101.97</descuento>
+<precioTotalSinImpuesto>237.94</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>237.94</baseImponible>
+<valor>28.55</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">romero.asociado@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2960772</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016308</campoAdicional>
+</infoAdicional>
+</factura>

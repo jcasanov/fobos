@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268863</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268863</guiaRemision>
+<razonSocialComprador>PETROAMAZONAS EP</razonSocialComprador>
+<identificacionComprador>1768153880001</identificacionComprador>
+<totalSinImpuestos>14.22</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>14.22</baseImponible>
+<valor>1.71</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>15.93</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>6150</codigoPrincipal>
+<descripcion>UNION FLEX DE 1/2"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>0.26</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1.04</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.04</baseImponible>
+<valor>0.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>44462</codigoPrincipal>
+<descripcion>CODO AGUAS LLUVIAS PVC BAJANTE DE 90 GRAD</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>2.99</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>5.98</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.98</baseImponible>
+<valor>0.72</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50290</codigoPrincipal>
+<descripcion>CODO POLIPROPILENO DE 1/2" x 90 GRAD</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>0.36</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>7.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7.20</baseImponible>
+<valor>0.86</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacion_electronica@petroamazonas.ec</campoAdicional>
+<campoAdicional nombre="Email">henry_iza@petroamazonas.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">467-500</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">050427</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C 126783</campoAdicional>
+</infoAdicional>
+</factura>

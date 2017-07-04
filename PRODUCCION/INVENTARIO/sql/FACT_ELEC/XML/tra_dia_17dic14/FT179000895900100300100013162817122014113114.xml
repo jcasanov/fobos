@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131628</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>CARIHUAIRAZO # 440 Y MONTECRISTI</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131628</guiaRemision>
+<razonSocialComprador>MULLISOVA CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1791804503001</identificacionComprador>
+<totalSinImpuestos>339.45</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>339.45</baseImponible>
+<valor>40.73</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>380.18</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5460</codigoPrincipal>
+<descripcion>TUBO GALVANIZADO (POSTE) TIPO "T" DE 2" (50.8mm.) EXTERIOR 1.8mm. ESPESOR x 6 mts.</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>28.93</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>173.58</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="TUGALT" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>173.58</baseImponible>
+<valor>20.83</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>69511</codigoPrincipal>
+<descripcion>MALLA CERRAMIENTO 50/10 x 2.50 m DE ALTO  (ROLLO 10m) GALVANIZADA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>165.87</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>165.87</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="IDEAL" valor="IDEAL"/>
+<detAdicional nombre="ROLLO" valor="ROLLO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>165.87</baseImponible>
+<valor>19.90</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3132357</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">027133</campoAdicional>
+</infoAdicional>
+</factura>

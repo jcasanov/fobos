@@ -1,0 +1,49 @@
+DATABASE aceros
+SCREEN
+{
+                                                             [x001] de [y001]
+
+                                                        Estado: [c|c000     ]
+
+      Localidad: [c001] [c002                ]
+
+     Porcentaje: [c003  ] %    Tipo: [c011       ]   Tipo Impto.: [c004     ]
+
+
+    Descripcion: [c005                                    ]
+
+     Desc. Abr.: [c006           ]      Predeterminado para el Sistema ?: [d]
+
+
+  Aux. Contable: [c007        ] [c008                                       ]
+
+
+        Usuario: [c009      ]            Fecha Ingreso: [c010               ]
+}
+TABLES
+gent058
+ATTRIBUTES
+c    = gent058.g58_estado, NOENTRY, UPSHIFT, REVERSE;
+c000 = FORMONLY.tit_estado, NOENTRY, UPSHIFT, REVERSE;
+c001 = gent058.g58_localidad, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = FORMONLY.tit_localidad, NOENTRY, UPSHIFT, REVERSE;
+c003 = gent058.g58_porc_impto, AUTONEXT, UPSHIFT, REVERSE, INCLUDE = (0 TO 100),
+	FORMAT = '##&.##';
+c011 = gent058.g58_tipo, AUTONEXT, UPSHIFT, REVERSE, DEFAULT = 'V',
+	WIDGET = 'RADIO', CONFIG = 'V Venta C Compra';
+c004 = gent058.g58_tipo_impto, AUTONEXT, UPSHIFT, REVERSE, DEFAULT = 'I',
+	WIDGET = 'RADIO', CONFIG = 'I IVA F Fuente';
+c005 = gent058.g58_desc_impto, AUTONEXT, UPSHIFT, REVERSE;
+c006 = gent058.g58_desc_abr, AUTONEXT, UPSHIFT, REVERSE;
+d    = gent058.g58_impto_sist, AUTONEXT, UPSHIFT, REVERSE, DEFAULT = 'N',
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+c007 = gent058.g58_aux_cont, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c008 = FORMONLY.tit_aux_cont, AUTONEXT, UPSHIFT;
+c009 = gent058.g58_usuario, NOENTRY, UPSHIFT, REVERSE;
+c010 = gent058.g58_fecing, NOENTRY, UPSHIFT, REVERSE;
+
+x001 = FORMONLY.num_row, NOENTRY;
+y001 = FORMONLY.max_row, NOENTRY;
+END

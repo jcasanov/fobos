@@ -1,0 +1,84 @@
+DATABASE aceros
+SCREEN 
+{
+
+   Compra Local No: [a0|c002           ]        Fecha: [c029               ]
+   Orden de Compra: [c014      ]               Moneda: [a4|c102            ]
+          Impuesto: [c006 ]%                Descuento: [c007 ] %
+         Proveedor: [c109  |c100                                           ]
+  Autorización SRI: [c099      ]  Ser.Comp.: [c101  ] Fec.Cad.: [c040      ]
+           Factura: [c005           ]  Factor Precio: [c018        ] %
+           Usuario: [c011  ] [c103                      ]
+            Bodega: [a2] [c104                ]           [c050] de [c051]
+    Disponible  Cantidad    Item      Desc   Precio Unit.      Total
+   [c035      |c036      |c033     ] [c045 |c041         |c105           ]
+   [c035      |c036      |c033     ] [c045 |c041         |c105           ]
+   [c035      |c036      |c033     ] [c045 |c041         |c105           ]
+                    Seguro:[y051     ]         Subtotal: [c030           ]
+                     Flete:[y050     ]        Descuento: [c031           ]
+               Dif. Cuadre:[y052     ]         Impuesto: [c023           ]
+       [c073                               ]      Total: [c025           ]
+       [c074                                                             ]
+}
+TABLES
+rept019
+rept020
+ordt010
+ATTRIBUTES
+a0   = rept019.r19_cod_tran, NOENTRY, REVERSE, UPSHIFT;
+c002 = rept019.r19_num_tran, NOENTRY, REVERSE;
+c006 = rept019.r19_porc_impto, NOENTRY, REVERSE, FORMAT='#&.##';
+c007 = rept019.r19_descuento, NOENTRY, REVERSE, FORMAT='#&.##';
+c011 = rept019.r19_vendedor, REVERSE, UPSHIFT;
+c014 = rept019.r19_oc_interna, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c005 = rept019.r19_oc_externa, UPSHIFT, REVERSE, REQUIRED;
+c018 = rept019.r19_fact_venta, UPSHIFT, AUTONEXT, REVERSE,FORMAT='#,###,##&.##';
+a2   = rept019.r19_bodega_ori, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+a4   = rept019.r19_moneda, UPSHIFT, REVERSE, NOENTRY;
+c025 = rept019.r19_tot_neto, NOENTRY, REVERSE, FORMAT='####,###,##&.##';
+c023 = FORMONLY.iva TYPE DECIMAL (12,2), NOENTRY, REVERSE,
+	FORMAT='####,###,##&.##';
+c031 = rept019.r19_tot_dscto, NOENTRY, REVERSE, FORMAT='####,###,##&.##';
+c030 = rept019.r19_tot_bruto, NOENTRY, REVERSE, FORMAT='####,###,##&.##';
+c029 = rept019.r19_fecing, NOENTRY, REVERSE;
+
+c033 = rept020.r20_item, UPSHIFT, REVERSE, NOENTRY,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c035 = rept020.r20_cant_ped, INCLUDE=(0.01 TO 999999.99), FORMAT='###,##&.##',
+	NOENTRY;
+c036 = rept020.r20_cant_ven, INCLUDE=(0.00 TO 999999.99),FORMAT='###,##&.##';
+c041 = r20_precio, FORMAT='#,###,##&.###', NOENTRY;
+c045 = rept020.r20_descuento, FORMAT='#&.##', NOENTRY;
+c105 = FORMONLY.total TYPE DECIMAL (12,2), NOENTRY, FORMAT='####,###,##&.##';
+
+c099 = FORMONLY.vm_num_aut TYPE CHAR NOT NULL,    REVERSE, UPSHIFT, REQUIRED,
+	AUTONEXT;
+c101 = FORMONLY.vm_serie_comp TYPE CHAR NOT NULL, REVERSE, UPSHIFT, REQUIRED,
+	AUTONEXT;
+c040 = FORMONLY.vm_fecha_cadu TYPE DATE NOT NULL, REQUIRED, AUTONEXT, REVERSE,
+	UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha en formato: dd-mm-aaaa.';
+
+c103 = FORMONLY.n_vendedor, NOENTRY, REVERSE;
+c100 = FORMONLY.n_proveedor, NOENTRY;
+c102 = FORMONLY.n_moneda, NOENTRY, REVERSE;
+c104 = FORMONLY.n_bodega, NOENTRY, REVERSE;
+c109 = FORMONLY.cod_proveedor, NOENTRY;
+c073 = formonly.descrip_4, NOENTRY;
+c074 = formonly.nom_item,  NOENTRY, REVERSE;
+y050 = c10_flete, FORMAT = '##,##&.##', INCLUDE = (0 TO 99999999);
+y051 = c10_otros, FORMAT = '##,##&.##', INCLUDE = (0 TO 99999999);
+y052 = c10_dif_cuadre, FORMAT = '--,--&.##';
+
+c050 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c051 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+END
+
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD ra_compra[3] (r20_cant_ped, r20_cant_ven, r20_item, r20_descuento, r20_precio, total)
+
+--KEYS
+--F5 = 'Orden de Compra'

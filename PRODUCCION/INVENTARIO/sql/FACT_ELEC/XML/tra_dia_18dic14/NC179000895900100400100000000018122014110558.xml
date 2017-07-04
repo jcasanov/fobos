@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000018726</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>SERTECPET S.A.</razonSocialComprador>
+<identificacionComprador>1791263308001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000173672</numDocModificado>
+<fechaEmisionDocSustento>05/11/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>3786.75</totalSinImpuestos>
+<valorModificacion>4241.16</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>3786.75</baseImponible>
+<valor>454.41</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 265410 SERTECPET P/VOLVER A FACT  YA</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>12662</codigoInterno>
+<descripcion>BOMBA HIDRAULICA MANUAL P-39 1 VELOCIDAD 40 pulg3 10000 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>474.61</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>474.61</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>474.61</baseImponible>
+<valor>56.95</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>150616</codigoInterno>
+<descripcion>CLAVO DE CABEZA .300 PARA CEMENTO Y ACERO 50026 DE 1" PIN 0.145" CABEZA 0.3" CAJA 100 u</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>4.62</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>9.24</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="PAQ"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.24</baseImponible>
+<valor>1.11</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>99108</codigoInterno>
+<descripcion>DOBLADORA DE TUBOS HB382 CAPACIDAD DE 3/8" A 2" TIP-UP  (36518)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1230.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1230.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1230.00</baseImponible>
+<valor>147.60</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>97487</codigoInterno>
+<descripcion>SACABOCADOS HIDRAULICO HKO-1810 DE 1/2" A 4" CON BOMBA MANUAL " (24587)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2072.90</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2072.90</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2072.90</baseImponible>
+<valor>248.75</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3954900</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">10219</campoAdicional>
+</infoAdicional>
+</notaCredito>

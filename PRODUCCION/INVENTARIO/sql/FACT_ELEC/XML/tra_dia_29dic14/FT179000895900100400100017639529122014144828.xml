@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176395</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>29/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176395</guiaRemision>
+<razonSocialComprador>RULIAUTO</razonSocialComprador>
+<identificacionComprador>1711955797001</identificacionComprador>
+<totalSinImpuestos>66.73</totalSinImpuestos>
+<totalDescuento>7.42</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>66.73</baseImponible>
+<valor>8.01</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>74.74</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>100378</codigoPrincipal>
+<descripcion>DADOS PARA TERRAJA MANUAL DE 3/4"  NPT HSS. P/ACERO INOX. (37920)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>74.15</precioUnitario>
+<descuento>7.42</descuento>
+<precioTotalSinImpuesto>66.73</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>66.73</baseImponible>
+<valor>8.01</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">ruliauto@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2598710</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">031754</campoAdicional>
+</infoAdicional>
+</factura>

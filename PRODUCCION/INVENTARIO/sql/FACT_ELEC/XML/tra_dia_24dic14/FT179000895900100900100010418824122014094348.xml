@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104188</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>24/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104188</guiaRemision>
+<razonSocialComprador>ESPINOZA MURRIETA IVAN</razonSocialComprador>
+<identificacionComprador>0905463238</identificacionComprador>
+<totalSinImpuestos>41.61</totalSinImpuestos>
+<totalDescuento>2.19</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>41.61</baseImponible>
+<valor>4.99</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>46.60</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>6812</codigoPrincipal>
+<descripcion>LANA DE VIDRIO A GRANEL FUNDA DE 20 KG.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>43.80</precioUnitario>
+<descuento>2.19</descuento>
+<precioTotalSinImpuesto>41.61</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDIFI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>41.61</baseImponible>
+<valor>4.99</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">espinoza_ribadeneira@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2289510/9</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">005407</campoAdicional>
+</infoAdicional>
+</factura>

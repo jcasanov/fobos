@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268941</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268941</guiaRemision>
+<razonSocialComprador>AZUL PACIFICO</razonSocialComprador>
+<identificacionComprador>1791772423001</identificacionComprador>
+<totalSinImpuestos>5480.00</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>5480.00</baseImponible>
+<valor>657.60</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>6137.60</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>172</codigoPrincipal>
+<descripcion>CLAVO 2" x 12  (CAJA DE 25 Kg.)</descripcion>
+<cantidad>100.00</cantidad>
+<precioUnitario>1.08</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>108.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>108.00</baseImponible>
+<valor>12.96</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>174</codigoPrincipal>
+<descripcion>CLAVO 2-1/2" x 10</descripcion>
+<cantidad>100.00</cantidad>
+<precioUnitario>1.08</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>108.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>108.00</baseImponible>
+<valor>12.96</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>176</codigoPrincipal>
+<descripcion>CLAVO 3" x 9  (CAJA DE 25 Kg.)</descripcion>
+<cantidad>100.00</cantidad>
+<precioUnitario>1.32</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>132.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>132.00</baseImponible>
+<valor>15.84</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>16</codigoPrincipal>
+<descripcion>ALAMBRE GALVANIZADO N.18</descripcion>
+<cantidad>100.00</cantidad>
+<precioUnitario>1.43</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>143.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>143.00</baseImponible>
+<valor>17.16</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6</codigoPrincipal>
+<descripcion>ALAMBRE GALVANIZADO N.10</descripcion>
+<cantidad>100.00</cantidad>
+<precioUnitario>1.47</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>147.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>147.00</baseImponible>
+<valor>17.64</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>298</codigoPrincipal>
+<descripcion>HIERRO CORRUGADO  4200 DE 12mm. x 12m</descripcion>
+<cantidad>240.00</cantidad>
+<precioUnitario>10.80</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2592.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDEC"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2592.00</baseImponible>
+<valor>311.04</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>292</codigoPrincipal>
+<descripcion>HIERRO CORRUGADO  4200 DE 10mm. x 12m</descripcion>
+<cantidad>300.00</cantidad>
+<precioUnitario>7.50</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2250.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDEC"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2250.00</baseImponible>
+<valor>270.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">azulpaci@tvcable.net.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">3282225</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">023589</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C NO. 2265</campoAdicional>
+</infoAdicional>
+</factura>

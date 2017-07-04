@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176446</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>30/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176446</guiaRemision>
+<razonSocialComprador>SANTAMARIA LUIS ING.</razonSocialComprador>
+<identificacionComprador>1705656880</identificacionComprador>
+<totalSinImpuestos>358.70</totalSinImpuestos>
+<totalDescuento>63.30</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>358.70</baseImponible>
+<valor>43.04</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>401.74</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>97239</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 4" 10FA05P4-2W-115  DE 1/2HP/115/60C/1F  (93781005)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>422.00</precioUnitario>
+<descuento>63.30</descuento>
+<precioTotalSinImpuesto>358.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>358.70</baseImponible>
+<valor>43.04</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">hydromep@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">291181</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">019834</campoAdicional>
+</infoAdicional>
+</factura>

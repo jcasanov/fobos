@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000018758</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>23/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>RODRIGUEZ CORREA ROSA AYDE</razonSocialComprador>
+<identificacionComprador>0912756061001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000131998</numDocModificado>
+<fechaEmisionDocSustento>14/11/2012</fechaEmisionDocSustento>
+<totalSinImpuestos>1558.27</totalSinImpuestos>
+<valorModificacion>1745.26</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>1558.27</baseImponible>
+<valor>186.99</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 226700 ROSA RODRIGUEZ WLUDENIA AJIMN</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>93074</codigoInterno>
+<descripcion>TALADRO DE BASE ELECTROMAGNETICA 4270-21 COMPACTO COMPL. DE 1/2" 9AMP 450RPM CORTE 1-1/2" MALETA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1599.64</precioUnitario>
+<descuento>351.92</descuento>
+<precioTotalSinImpuesto>1247.72</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1247.72</baseImponible>
+<valor>149.73</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>96495</codigoInterno>
+<descripcion>BOMBA TIPO JET C-MOTOR FVJ1C DE 1HP 115/230/60C/1F VERSAJET (91180010)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>375.17</precioUnitario>
+<descuento>82.54</descuento>
+<precioTotalSinImpuesto>292.63</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>292.63</baseImponible>
+<valor>35.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>70389</codigoInterno>
+<descripcion>FRESA ANULAR PARA TALADROS MANUALES 44-60-1720 PIN EYECTOR P/CORT.ANUL.DE 1" DE PROFUNDIDAD</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>22.98</precioUnitario>
+<descuento>5.06</descuento>
+<precioTotalSinImpuesto>17.92</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>17.92</baseImponible>
+<valor>2.15</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">032420353</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">37170</campoAdicional>
+</infoAdicional>
+</notaCredito>

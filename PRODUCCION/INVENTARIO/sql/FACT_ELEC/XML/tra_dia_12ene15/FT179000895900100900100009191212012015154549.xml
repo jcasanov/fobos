@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091912</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>12/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091912</guiaRemision>
+<razonSocialComprador>CALIZAS HUAYCO S.A.</razonSocialComprador>
+<identificacionComprador>0992351144001</identificacionComprador>
+<totalSinImpuestos>381.15</totalSinImpuestos>
+<totalDescuento>47.11</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>381.15</baseImponible>
+<valor>45.74</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>426.89</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>93055</codigoPrincipal>
+<descripcion>LLAVE DE IMPACTO 9072-22 DRIVE 1/2" 7AMP 600-1800RPM 1000-2600 GOLPES MALETA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>428.26</precioUnitario>
+<descuento>47.11</descuento>
+<precioTotalSinImpuesto>381.15</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>381.15</baseImponible>
+<valor>45.74</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">amarquez@chuayco.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2992122</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">009889</campoAdicional>
+<campoAdicional nombre="Observaciones">ORDEN DE COMPRA 6651</campoAdicional>
+</infoAdicional>
+</factura>

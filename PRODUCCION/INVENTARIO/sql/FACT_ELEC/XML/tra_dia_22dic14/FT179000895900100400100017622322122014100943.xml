@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176223</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176223</guiaRemision>
+<razonSocialComprador>HIDROTHERM INGENIERIA Y THERMOHIDRAULICA CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1792054206001</identificacionComprador>
+<totalSinImpuestos>176.90</totalSinImpuestos>
+<totalDescuento>28.86</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>176.90</baseImponible>
+<valor>21.23</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>198.13</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>1644</codigoPrincipal>
+<descripcion>BUSHING GALV. CLASE 150 DE 1-1/4" x 1"</descripcion>
+<cantidad>12.00</cantidad>
+<precioUnitario>2.45</precioUnitario>
+<descuento>3.53</descuento>
+<precioTotalSinImpuesto>25.87</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>25.87</baseImponible>
+<valor>3.10</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1652</codigoPrincipal>
+<descripcion>BUSHING GALV. CLASE 150 DE 1-1/2" x 1"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>3.27</precioUnitario>
+<descuento>2.35</descuento>
+<precioTotalSinImpuesto>17.27</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>17.27</baseImponible>
+<valor>2.07</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99147</codigoPrincipal>
+<descripcion>BUSHING GALV. CLASE 150 DE 2" x 1"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>3.81</precioUnitario>
+<descuento>0.91</descuento>
+<precioTotalSinImpuesto>6.71</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.71</baseImponible>
+<valor>0.81</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99966</codigoPrincipal>
+<descripcion>VALVULA CHEQUE VERTICAL BRONCE 08030 EURA EXPORT DE 1"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>7.96</precioUnitario>
+<descuento>7.16</descuento>
+<precioTotalSinImpuesto>40.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FIV"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>40.60</baseImponible>
+<valor>4.87</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99965</codigoPrincipal>
+<descripcion>VALVULA CHEQUE VERTICAL BRONCE 08030 EURA EXPORT DE 3/4"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>5.95</precioUnitario>
+<descuento>5.36</descuento>
+<precioTotalSinImpuesto>30.34</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FIV"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>30.34</baseImponible>
+<valor>3.64</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>93572</codigoPrincipal>
+<descripcion>GRIFO ESFERICO BRONCE CROMADO FUTURGAS DE 3/4" (AGUA, GAS Y AIRE)</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>9.29</precioUnitario>
+<descuento>8.36</descuento>
+<precioTotalSinImpuesto>47.38</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FIV"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>47.38</baseImponible>
+<valor>5.69</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3194</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1" CORRIDO</descripcion>
+<cantidad>8.00</cantidad>
+<precioUnitario>0.73</precioUnitario>
+<descuento>0.70</descuento>
+<precioTotalSinImpuesto>5.14</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.14</baseImponible>
+<valor>0.62</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3178</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 3/4" x 2"</descripcion>
+<cantidad>8.00</cantidad>
+<precioUnitario>0.51</precioUnitario>
+<descuento>0.49</descuento>
+<precioTotalSinImpuesto>3.59</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.59</baseImponible>
+<valor>0.43</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2418080</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">040101</campoAdicional>
+</infoAdicional>
+</factura>

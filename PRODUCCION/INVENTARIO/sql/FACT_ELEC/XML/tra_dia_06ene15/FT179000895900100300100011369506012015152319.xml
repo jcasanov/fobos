@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113695</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>06/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113695</guiaRemision>
+<razonSocialComprador>PAZMIÒO GUEVARA PAULINA YOLANDA</razonSocialComprador>
+<identificacionComprador>1714440870001</identificacionComprador>
+<totalSinImpuestos>14.32</totalSinImpuestos>
+<totalDescuento>1.59</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>14.32</baseImponible>
+<valor>1.72</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>16.04</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>32742</codigoPrincipal>
+<descripcion>REJILLA PARA CUBIERTA Y VIGACANAL E593.03.01 CC-125 x 75mm. ALUMINIO P/TERRAZA Y PATIO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>15.91</precioUnitario>
+<descuento>1.59</descuento>
+<precioTotalSinImpuesto>14.32</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>14.32</baseImponible>
+<valor>1.72</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">arteccolor@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2653065</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">053403</campoAdicional>
+</infoAdicional>
+</factura>

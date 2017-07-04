@@ -1,0 +1,34 @@
+PARA:	ANL. NELSON PEREDA C.
+FECHA:	20/SEP/2004
+
+
+                         ** PROCESO DE REFACTURACION **
+                         ==============================
+
+1) Diseñar tabla para "Control de Refacturacion" (rept088).
+
+2) Hacer programa que invoque a todos los programas involucrados en el proceso
+   de FACTURACION, una vez hecho los cambios respectivos en dichos programas,
+   para que hagan automaticamente una nueva factura partiendo de la factura que
+   se quire devolver. Ademas deberá grabar un registro de control en la nueva
+   tabla rept088 (Control de Refacturacion).
+
+3) Arreglar el repp217 (Devolucion de Facturas) para que automaticamente genere
+   una Dev/Anul.
+
+4) Arreglar el repp220 (Proformas) para que automaticamente genere una Proforma,
+   partiendo de una Proforma de Origen, incluyendo su Pre-Venta.
+
+5) Arreglar el repp223 (Aprobacion de Pre-Ventas) para que automaticamente
+   apruebe una Pre-Venta.
+
+6) Arreglar el repp210 (Aprobacion de Credito) para que automaticamente genere
+   credito en una Pre-Venta (si su origen tenia credito).
+
+7) Arreglar el cajp203 (Ingresos de Caja) para que automaticamente genere la
+   forma de pago, igual como en el origen de la Pre-Venta que se va facturar
+   nuevamente.
+
+8) Arreglar el repp231 (Generación de Notas de Entregas) para que
+   automaticamente genere una Nota de Entrega (o varias) de las Ordenes de
+   Despacho que se generaron.

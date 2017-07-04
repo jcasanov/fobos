@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000007793</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>30/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>GUAMAN ZOILA AGRIPINA</razonSocialComprador>
+<identificacionComprador>1706971643001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>003-001-000131831</numDocModificado>
+<fechaEmisionDocSustento>29/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>29.99</totalSinImpuestos>
+<valorModificacion>33.59</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>29.99</baseImponible>
+<valor>3.60</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>MATERIAL ROTO</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>99360</codigoInterno>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA MACHALILLA BEIGE PRIMERA</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>8.82</precioUnitario>
+<descuento>5.29</descuento>
+<precioTotalSinImpuesto>29.99</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>29.99</baseImponible>
+<valor>3.60</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">CONSUMIDORFINAL@ACEROCOMERCIAL.COM</campoAdicional>
+<campoAdicional nombre="telefono-movil">2339357</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">55584</campoAdicional>
+</infoAdicional>
+</notaCredito>

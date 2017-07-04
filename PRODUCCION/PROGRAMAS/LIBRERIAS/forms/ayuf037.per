@@ -1,0 +1,30 @@
+DATABASE aceros
+
+SCREEN
+{
+ ZONAS DE COBRO
+------------------------------------
+ Rubro   Descripción 		
+------------------------------------
+[c01] [c002                       ] 
+[c01] [c002                       ]
+[c01] [c002                       ]
+[c01] [c002                       ]
+[c01] [c002                       ]
+[c01] [c002                       ]
+[c01] [c002                       ] 
+[c01] [c002                       ] 
+[c01] [c002                       ] 
+[c01] [c002                       ] 
+}
+
+TABLES
+cxct006
+
+ATTRIBUTES
+c01 = z06_zona_cobro;
+c002 = z06_nombre;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_zoncob[10](z06_zona_cobro, z06_nombre)

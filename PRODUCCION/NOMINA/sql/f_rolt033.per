@@ -1,0 +1,39 @@
+database acero_gm
+screen size 24 by 80
+{
+n33_compania       [f000       ]
+n33_cod_liqrol     [a0]
+n33_fecha_ini      [f001      ]
+n33_fecha_fin      [f002      ]
+n33_cod_trab       [f003       ]
+n33_cod_rubro      [f004  ]
+n33_num_prest      [f005       ]
+n33_prest_club     [f006       ]
+n33_referencia     [f007                ]
+n33_orden          [f008  ]
+n33_det_tot        [a1]
+n33_imprime_0      [a]
+n33_cant_valor     [b]
+n33_horas_porc     [f009   ]
+n33_valor          [f010          ]
+}
+end
+tables
+rolt033
+attributes
+f000 = rolt033.n33_compania;
+a0 = rolt033.n33_cod_liqrol;
+f001 = rolt033.n33_fecha_ini;
+f002 = rolt033.n33_fecha_fin;
+f003 = rolt033.n33_cod_trab;
+f004 = rolt033.n33_cod_rubro;
+f005 = rolt033.n33_num_prest;
+f006 = rolt033.n33_prest_club;
+f007 = rolt033.n33_referencia;
+f008 = rolt033.n33_orden;
+a1 = rolt033.n33_det_tot;
+a = rolt033.n33_imprime_0;
+b = rolt033.n33_cant_valor;
+f009 = rolt033.n33_horas_porc;
+f010 = rolt033.n33_valor;
+end

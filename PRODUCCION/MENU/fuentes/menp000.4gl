@@ -779,6 +779,13 @@ DISPLAY "Colores" 		TO c1500  ## Botón 15 repp115
 DISPLAY "Códigos Eléctricos" 	TO c1600  ## Botón 17 repp117
 DISPLAY "Asignar Cod. Util." 	TO c1700  ## Botón 18 repp232
 DISPLAY "Tipo Ident. Bodega"	TO c1800  ## Botón 19 repp118
+	DISPLAY "Zonas"			TO c1900
+	DISPLAY "Sub-Zonas"		TO c2000
+	DISPLAY "Transporte"		TO c2100
+	DISPLAY "Choferes"		TO c2200
+	DISPLAY "Observación"		TO c2300
+	DISPLAY "Ayudantes"		TO c2400
+	DISPLAY "Empresa Entregas"	TO c2500
 
 
 LET c = fgl_getkey()
@@ -934,6 +941,69 @@ CASE c
 		END IF
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp118 ', vg_base, ' ', 'RE', vg_codcia
 		RUN ejecuta
+		WHEN 19
+			IF NOT fl_control_acceso_proceso_men(vg_usuario,
+								vg_codcia,
+								'RE', 'repp119')
+			THEN
+				EXIT CASE
+			END IF
+			LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp119 ', vg_base, ' "RE" ', vg_codcia, ' ', vg_codloc
+			RUN ejecuta
+		WHEN 20
+			IF NOT fl_control_acceso_proceso_men(vg_usuario,
+								vg_codcia,
+								'RE', 'repp120')
+			THEN
+				EXIT CASE
+			END IF
+			LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp120 ', vg_base, ' "RE" ', vg_codcia, ' ', vg_codloc
+			RUN ejecuta
+		WHEN 21
+			IF NOT fl_control_acceso_proceso_men(vg_usuario,
+								vg_codcia,
+								'RE', 'repp121')
+			THEN
+				EXIT CASE
+			END IF
+			LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp121 ', vg_base, ' "RE" ', vg_codcia, ' ', vg_codloc
+			RUN ejecuta
+		WHEN 22
+			IF NOT fl_control_acceso_proceso_men(vg_usuario,
+								vg_codcia,
+								'RE', 'repp122')
+			THEN
+				EXIT CASE
+			END IF
+			LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp122 ', vg_base, ' "RE" ', vg_codcia, ' ', vg_codloc
+			RUN ejecuta
+		WHEN 23
+			IF NOT fl_control_acceso_proceso_men(vg_usuario,
+								vg_codcia,
+								'RE', 'repp123')
+			THEN
+				EXIT CASE
+			END IF
+			LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp123 ', vg_base, ' "RE" ', vg_codcia, ' ', vg_codloc
+			RUN ejecuta
+		WHEN 24
+			IF NOT fl_control_acceso_proceso_men(vg_usuario,
+								vg_codcia,
+								'RE', 'repp124')
+			THEN
+				EXIT CASE
+			END IF
+			LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp124 ', vg_base, ' "RE" ', vg_codcia, ' ', vg_codloc
+			RUN ejecuta
+		WHEN 25
+			IF NOT fl_control_acceso_proceso_men(vg_usuario,
+								vg_codcia,
+								'RE', 'repp125')
+			THEN
+				EXIT CASE
+			END IF
+			LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp125 ', vg_base, ' "RE" ', vg_codcia, ' ', vg_codloc
+			RUN ejecuta
 	WHEN 0
 		CLOSE WINDOW w_menu_configuracion
 		CALL menu_repuestos()
@@ -985,7 +1055,8 @@ DISPLAY "boton_transaciones"	TO a      ## Picture
 DISPLAY "Proformas"    		TO c100   ## Botón 1  repp220
 DISPLAY "Compra Local"     	TO c200   ## Botón 2  repp214
 DISPLAY "Transferencias"        TO c300   ## Botón 3  repp216
-DISPLAY "Pre-Ventas"		TO c400   ## Botón 4  repp209
+DISPLAY "Transf. para Fact."	TO c400   ## Botón 4  repp251
+--DISPLAY "Pre-Ventas"		TO c400   ## Botón 4  repp209
 --DISPLAY "Composicion Item"	TO c400   ## Boton 4 repp248
 DISPLAY "Dev. Compra Local"	TO c500   ## Botón 5  repp218
 DISPLAY "Items"          	TO c600   ## Botón 6  repp108
@@ -1010,11 +1081,15 @@ DISPLAY "Refacturación"         TO c2200  ## Botón 20 repp237
 DISPLAY "Inventario Físico"     TO c2300  ## Botón 21 repp239 y repp250
 DISPLAY "Pedido Prov. Locales"  TO c2400  ## Botón 22 repp240
 DISPLAY "Tr. Bodega Carcelen"  TO c2500  ## Botón 23 repp667
-DISPLAY "Guías de Remisión"     TO c2600  ## Botón 24 repp241
+--DISPLAY "Guías de Remisión"     TO c2600  ## Botón 24 repp241
+DISPLAY "Logística"             TO c2600  ## Botón 24 repp241
 DISPLAY "Cambiar Vendedor"      TO c2700  ## Botón 25 repp242
 DISPLAY "Corrección GR SRI"     TO c2800  ## Botón 26 repp243
 DISPLAY "Priorizacion Entreg."  TO c2900  ## Boton 27 repp244
 DISPLAY "Tansf. Bodega Cont."   TO c3000  ## Boton 28 repp245
+DISPLAY "Tansf. Especiales"   TO c3000  ## Boton 28 repp245
+
+--DISPLAY "Tansf. Bodega Cont."   TO c3000  ## Boton 28 repp245
 
 --DISPLAY "Generar Inventario"	TO c1500  ## Botón 15 repp225
 --DISPLAY "Ventas al Taller"	TO c1600  ## Botón 16 repp215
@@ -1053,11 +1128,11 @@ CASE d
 		RUN ejecuta
 	WHEN 4
 		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
-							'RE', 'repp209')
+							'RE', 'repp251')
 		THEN
 			EXIT CASE
 		END IF
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp209 ', vg_base, ' ',
+		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp251 ', vg_base, ' ',
 'RE', vg_codcia, vg_codloc
 		RUN ejecuta
 	WHEN 5
@@ -1246,6 +1321,9 @@ CASE d
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp667 ', vg_base, ' ', 'RE', vg_codcia, ' ', vg_codloc
 		RUN ejecuta
 	WHEN 23
+		CLOSE WINDOW w_menu_transacciones
+		CALL menu_logistica()
+	{--
 		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
 							'RE', 'repp241')
 		THEN
@@ -1253,6 +1331,7 @@ CASE d
 		END IF
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp241 ', vg_base, ' ', 'RE', vg_codcia, ' ', vg_codloc
 		RUN ejecuta
+	--}
 	WHEN 24
 		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
 							'RE', 'repp242')
@@ -1278,6 +1357,9 @@ CASE d
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp244 ', vg_base, ' ', 'RE', vg_codcia, ' ', vg_codloc
 		RUN ejecuta
 	WHEN 3014
+		CLOSE WINDOW w_menu_transacciones
+		CALL menu_transferencias()
+		{--
 		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
 							'RE', 'repp245')
 		THEN
@@ -1285,6 +1367,7 @@ CASE d
 		END IF
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp245 ', vg_base, ' ', 'RE', vg_codcia, ' ', vg_codloc
 		RUN ejecuta
+		--}
 	WHEN 0
 		CLOSE WINDOW w_menu_transacciones
 		CALL menu_repuestos()
@@ -1360,6 +1443,100 @@ WHILE TRUE
 			RUN ejecuta
 		WHEN 0
 			CLOSE WINDOW w_menu_composicion_items
+			CALL menu_transacciones_rep()
+	END CASE
+END WHILE
+
+END FUNCTION
+
+
+
+FUNCTION menu_logistica()
+DEFINE d		SMALLINT
+
+WHILE TRUE
+	OPEN WINDOW w_menu_logistica AT 3,2 WITH 22 ROWS, 80 COLUMNS
+		ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE FIRST,
+				BORDER, MESSAGE LINE LAST - 2)
+	OPEN FORM f_menf166 FROM '../forms/menf166'
+	DISPLAY FORM f_menf166
+	DISPLAY "boton_transaciones"	TO a
+	DISPLAY "Guías de Remisión"	TO c100
+	DISPLAY "Control de Ruta"	TO c200
+	DISPLAY "Consulta Cont. Ruta"	TO c300
+	LET d = fgl_getkey()
+	CASE d
+		WHEN 1
+			IF NOT fl_control_acceso_proceso_men(vg_usuario,
+								vg_codcia,
+								'RE', 'repp241')
+			THEN
+				EXIT CASE
+			END IF
+			LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp241 ', vg_base, ' "RE" ', vg_codcia, ' ', vg_codloc
+			RUN ejecuta
+		WHEN 2
+			IF NOT fl_control_acceso_proceso_men(vg_usuario,
+								vg_codcia,
+								'RE', 'repp252')
+			THEN
+				EXIT CASE
+			END IF
+			LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp252 ', vg_base, ' "RE" ', vg_codcia, ' ', vg_codloc
+			RUN ejecuta
+		WHEN 3
+			IF NOT fl_control_acceso_proceso_men(vg_usuario,
+								vg_codcia,
+								'RE', 'repp327')
+			THEN
+				EXIT CASE
+			END IF
+			LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp327 ', vg_base, ' "RE" ', vg_codcia, ' ', vg_codloc
+			RUN ejecuta
+		WHEN 0
+			CLOSE WINDOW w_menu_logistica
+			CALL menu_transacciones_rep()
+	END CASE
+END WHILE
+
+END FUNCTION
+
+
+
+FUNCTION menu_transferencias()
+DEFINE d		SMALLINT
+
+WHILE TRUE
+	OPEN WINDOW w_menu_transf AT 3,2 WITH 22 ROWS, 80 COLUMNS
+		ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE FIRST,
+				BORDER, MESSAGE LINE LAST - 2)
+	OPEN FORM f_menf167 FROM '../forms/menf167'
+	DISPLAY FORM f_menf167
+	DISPLAY "boton_transaciones"	TO a
+	DISPLAY "Tansf. Bodega Cont."   TO c100
+	DISPLAY "Tansf. Bodega C.P."    TO c200
+	LET d = fgl_getkey()
+	CASE d
+		WHEN 1
+			IF NOT fl_control_acceso_proceso_men(vg_usuario,
+								vg_codcia,
+								'RE', 'repp245')
+			THEN
+				EXIT CASE
+			END IF
+			LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp245 ', vg_base, ' "RE" ', vg_codcia, ' ', vg_codloc
+			RUN ejecuta
+		WHEN 2
+			IF NOT fl_control_acceso_proceso_men(vg_usuario,
+								vg_codcia,
+								'RE', 'repp253')
+			THEN
+				EXIT CASE
+			END IF
+			LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp253 ', vg_base, ' "RE" ', vg_codcia, ' ', vg_codloc
+			RUN ejecuta
+		WHEN 0
+			CLOSE WINDOW w_menu_transf
 			CALL menu_transacciones_rep()
 	END CASE
 END WHILE
@@ -2123,6 +2300,7 @@ DISPLAY "Anulación Facturas"	TO c1000  ## Botón 10
 DISPLAY "Refacturación"		TO c1100  ## Botón 11 
 DISPLAY "Elimin. Ord. Trabajo"  TO c1200  ## Boton 12
 DISPLAY "Cierre Mensual"	TO c1300
+DISPLAY "Reg. Tec. Equipos"	TO c1400
 
 LET d = fgl_getkey()
 
@@ -2230,6 +2408,14 @@ CASE d
 			EXIT CASE
 		END IF
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'TALLER', vg_separador, 'fuentes', vg_separador, '; fglrun talp216 ', vg_base, ' ', 'TA', vg_codcia, vg_codloc
+		RUN ejecuta
+	WHEN 14
+		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
+							'TA', 'talp217')
+		THEN
+			EXIT CASE
+		END IF
+		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'TALLER', vg_separador, 'fuentes', vg_separador, '; fglrun talp217 ', vg_base, ' ', 'TA', vg_codcia, vg_codloc
 		RUN ejecuta
 	WHEN 0
 		CLOSE WINDOW w_menu_transacciones
@@ -5333,7 +5519,7 @@ CASE h
 		THEN
 			EXIT CASE
 		END IF
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'ACTIVOS', vg_separador, 'fuentes', vg_separador, '; fglrun actp401 ', vg_base, ' ', 'AF', vg_codcia, vg_codloc
+		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'ACTIVOS', vg_separador, 'fuentes', vg_separador, '; umask 0002; fglrun actp401 ', vg_base, ' ', 'AF', vg_codcia, vg_codloc, ' > $HOME/tmp/actp401.txt '
 		RUN ejecuta
 	WHEN 0
 		CLOSE WINDOW w_menu_reportes
@@ -5595,8 +5781,9 @@ DISPLAY "Distrib. Utilidades"  	TO c800   ## Botón 8  rolp222
 DISPLAY "Fondo Cesantia"  	TO c900   ## Botón 9  menu 
 DISPLAY "Proceso Vacaciones"  	TO c1000  ## Botón 10 menu
 DISPLAY "Impuesto A La Renta" 	TO c1100  ## Botón 11 rolp250
-DISPLAY "Contabilización Rol" 	TO c1200  ## Botón 11 rolp501
+DISPLAY "Acta de Finiquito" 	TO c1200  ## Botón 11 rolp233
 DISPLAY "Genera Archivo IESS"   TO c1300  ## Boton 12 rolp257
+DISPLAY "Contabilización Rol" 	TO c1400  ## Botón 13 rolp501
 
 LET d = fgl_getkey()
 
@@ -5666,11 +5853,11 @@ CASE d
 		RUN ejecuta
 	WHEN 12
 		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
-							'RO', 'rolp501')
+							'RO', 'rolp233')
 		THEN
 			EXIT CASE
 		END IF
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'NOMINA', vg_separador, 'fuentes', vg_separador, '; fglrun rolp501 ', vg_base, ' ', 'RO', vg_codcia
+		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'NOMINA', vg_separador, 'fuentes', vg_separador, '; fglrun rolp233 ', vg_base, ' ', 'RO', vg_codcia
 		RUN ejecuta
 	WHEN 13
 		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
@@ -5679,6 +5866,14 @@ CASE d
 			EXIT CASE
 		END IF
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'NOMINA', vg_separador, 'fuentes', vg_separador, '; fglrun rolp257 ', vg_base, ' ', 'RO', vg_codcia, ' ', vg_codloc
+		RUN ejecuta
+	WHEN 14
+		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
+							'RO', 'rolp501')
+		THEN
+			EXIT CASE
+		END IF
+		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'NOMINA', vg_separador, 'fuentes', vg_separador, '; fglrun rolp501 ', vg_base, ' ', 'RO', vg_codcia
 		RUN ejecuta
 	WHEN 0
 		CLOSE WINDOW w_menu_transacciones
@@ -6565,9 +6760,11 @@ WHILE TRUE
 	DISPLAY "boton_sri"		TO a      ## Picture 
 	DISPLAY "Anexo Ventas"		TO c100   ## Botón 1 srip201
 	DISPLAY "Anexo Compras"		TO c200   ## Botón 2 srip202
-	DISPLAY "Control Doc. SRI"	TO c300   ## Botón 23sgenp141
-	DISPLAY "Control Sec. SRI"	TO c400   ## Botón 24sgenp142
-	DISPLAY "Config.Codigos SRI"	TO c500
+	--DISPLAY "Control Doc. SRI"	TO c300   ## Botón 3 genp141
+	--DISPLAY "Control Sec. SRI"	TO c400   ## Botón 4 genp142
+	DISPLAY "Control Sec. SRI"	TO c300   ## Botón 3 genp144
+	DISPLAY "Config.Codigos SRI"	TO c400   ## Botón 4 srip204
+	DISPLAY "Gen. Doc. Elec."	TO c500   ## Botón 5 srip205
 	LET c = fgl_getkey()
 	CASE c
 		WHEN 1
@@ -6586,6 +6783,7 @@ WHILE TRUE
 			END IF
 			LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'SRI', vg_separador, 'fuentes', vg_separador, '; umask 0002; fglrun srip202 ', vg_base, ' ', 'SR', vg_codcia, ' ', vg_codloc
 			RUN ejecuta
+		{--
 		WHEN 3 
 			IF NOT fl_control_acceso_proceso_men(vg_usuario,
 						vg_codcia, 'GE', 'genp141')
@@ -6602,13 +6800,30 @@ WHILE TRUE
 			END IF
 			LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'GENERALES', vg_separador, 'fuentes', vg_separador, '; fglrun genp142 ', vg_base, ' ', 'GE', vg_codcia, ' ', vg_codloc
 			RUN ejecuta
-		WHEN 5
+		--}
+		WHEN 3
+			IF NOT fl_control_acceso_proceso_men(vg_usuario,
+						vg_codcia, 'GE', 'genp144')
+			THEN
+				EXIT CASE
+			END IF
+			LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'GENERALES', vg_separador, 'fuentes', vg_separador, '; fglrun genp144 ', vg_base, ' ', 'GE', vg_codcia, ' ', vg_codloc
+			RUN ejecuta
+		WHEN 4
 			IF NOT fl_control_acceso_proceso_men(vg_usuario,
 						vg_codcia, 'SR', 'srip204')
 			THEN
 				EXIT CASE
 			END IF
 			LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'SRI', vg_separador, 'fuentes', vg_separador, '; fglrun srip204 ', vg_base, ' ', 'SR', vg_codcia, ' ', vg_codloc
+			RUN ejecuta
+		WHEN 5
+			IF NOT fl_control_acceso_proceso_men(vg_usuario,
+						vg_codcia, 'SR', 'srip205')
+			THEN
+				EXIT CASE
+			END IF
+			LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'SRI', vg_separador, 'fuentes', vg_separador, '; umask 0002; fglrun srip205 ', vg_base, ' ', 'SR', vg_codcia, ' ', vg_codloc
 			RUN ejecuta
 		WHEN 0 
 			CLOSE WINDOW w_menu_sri

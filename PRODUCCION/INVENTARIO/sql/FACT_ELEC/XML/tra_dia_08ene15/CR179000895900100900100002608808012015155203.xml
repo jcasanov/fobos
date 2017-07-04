@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comprobanteRetencion id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000026088</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoCompRetencion>
+<fechaEmision>08/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionSujetoRetenido>04</tipoIdentificacionSujetoRetenido>
+<razonSocialSujetoRetenido>COMERCIALIZADORA IOKARS S.A.</razonSocialSujetoRetenido>
+<identificacionSujetoRetenido>1191738558001</identificacionSujetoRetenido>
+<periodoFiscal>01/2015</periodoFiscal>
+</infoCompRetencion>
+<impuestos>
+<impuesto>
+<codigo>1</codigo>
+<codigoRetencion>312</codigoRetencion>
+<baseImponible>64.50</baseImponible>
+<porcentajeRetener>1.00</porcentajeRetener>
+<valorRetenido>0.65</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>002011000000098</numDocSustento>
+<fechaEmisionDocSustento>08/01/2015</fechaEmisionDocSustento>
+</impuesto>
+<impuesto>
+<codigo>1</codigo>
+<codigoRetencion>307</codigoRetencion>
+<baseImponible>18.90</baseImponible>
+<porcentajeRetener>2.00</porcentajeRetener>
+<valorRetenido>0.38</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>002011000000098</numDocSustento>
+<fechaEmisionDocSustento>08/01/2015</fechaEmisionDocSustento>
+</impuesto>
+</impuestos>
+<infoAdicional>
+<campoAdicional nombre="Email">facturaelectronica@ebox.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">046019261</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">001482</campoAdicional>
+</infoAdicional>
+</comprobanteRetencion>

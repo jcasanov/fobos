@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000034185</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL JTM</dirPartida>
+<razonSocialTransportista>MANUEL MAGALLANEZ</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>0910240910</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>23/12/2014</fechaIniTransporte>
+<fechaFinTransporte>23/12/2014</fechaFinTransporte>
+<placa>GSC-8976</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0991450009001</identificacionDestinatario>
+<razonSocialDestinatario>AMAGUA C.E.M.</razonSocialDestinatario>
+<dirDestinatario>PENDIENTE LA ENTREGA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>18/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>98789</codigoInterno>
+<descripcion>CONTROL DE NIVEL G-0120 ALTO Y BAJO</descripcion>
+<cantidad>19.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="MODELO" valor="G-0120"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">noralma.velez@gripca.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2145421</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">006129</campoAdicional>
+</infoAdicional>
+</guiaRemision>

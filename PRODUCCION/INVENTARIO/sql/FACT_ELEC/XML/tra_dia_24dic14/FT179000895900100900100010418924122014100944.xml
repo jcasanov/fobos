@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104189</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>24/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104189</guiaRemision>
+<razonSocialComprador>PINCAY BAQUE JIMMY CONCEPCION</razonSocialComprador>
+<identificacionComprador>1305085134</identificacionComprador>
+<totalSinImpuestos>338.81</totalSinImpuestos>
+<totalDescuento>41.87</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>338.81</baseImponible>
+<valor>40.66</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>379.47</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>96529</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 4" 25FA3S4-PE P/ 3HP. 25GPM (93822530) 14 ETAPAS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>380.68</precioUnitario>
+<descuento>41.87</descuento>
+<precioTotalSinImpuesto>338.81</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>338.81</baseImponible>
+<valor>40.66</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jimmmypincaybaque@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2983316</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016686</campoAdicional>
+</infoAdicional>
+</factura>

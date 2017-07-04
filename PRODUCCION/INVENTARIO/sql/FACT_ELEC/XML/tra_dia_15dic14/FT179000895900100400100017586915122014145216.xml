@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175869</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>AMAZONAS Y NN.UU.ED.BCO.PREV.3ER.PISO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175869</guiaRemision>
+<razonSocialComprador>OLEODUCTO DE CRUDOS PESADOS (OCP) ECUADOR S.A.</razonSocialComprador>
+<identificacionComprador>1791765362001</identificacionComprador>
+<totalSinImpuestos>1677.10</totalSinImpuestos>
+<totalDescuento>251.57</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1425.53</baseImponible>
+<valor>171.06</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1596.59</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>15698</codigoPrincipal>
+<descripcion>DADOS PARA TUBOS DE 1/2" A 3/4" HS NPT P/811A-711-815A (47765)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>209.66</precioUnitario>
+<descuento>62.90</descuento>
+<precioTotalSinImpuesto>356.42</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIDGID" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>356.42</baseImponible>
+<valor>42.77</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>15661</codigoPrincipal>
+<descripcion>DADOS PARA TUBOS 1/2" A 3/4" H.S. NPT P/ACERO INOX. P/811A-711-815A (47785)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>207.22</precioUnitario>
+<descuento>62.17</descuento>
+<precioTotalSinImpuesto>352.27</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIDGID" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>352.27</baseImponible>
+<valor>42.27</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>15700</codigoPrincipal>
+<descripcion>DADOS PARA TUBOS DE 1" A 2" HS NPT P/811A-711-815A (47770)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>208.13</precioUnitario>
+<descuento>62.44</descuento>
+<precioTotalSinImpuesto>353.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIDGID" valor="RIDGID"/>
+<detAdicional nombre="JUEGO" valor="JUEGO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>353.82</baseImponible>
+<valor>42.46</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>15663</codigoPrincipal>
+<descripcion>DADOS PARA TUBOS 1" A 2" H.S. NPT P/ACERO INOX. P/811A-711-815A (47790)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>213.54</precioUnitario>
+<descuento>32.03</descuento>
+<precioTotalSinImpuesto>181.51</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIDGID" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>181.51</baseImponible>
+<valor>21.78</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>15663</codigoPrincipal>
+<descripcion>DADOS PARA TUBOS 1" A 2" H.S. NPT P/ACERO INOX. P/811A-711-815A (47790)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>213.54</precioUnitario>
+<descuento>32.03</descuento>
+<precioTotalSinImpuesto>181.51</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIDGID" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>181.51</baseImponible>
+<valor>21.78</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268608</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268608</guiaRemision>
+<razonSocialComprador>COELEC S.C.</razonSocialComprador>
+<identificacionComprador>1791725530001</identificacionComprador>
+<totalSinImpuestos>1383.22</totalSinImpuestos>
+<totalDescuento>345.81</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1383.22</baseImponible>
+<valor>165.99</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1549.21</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>95205</codigoPrincipal>
+<descripcion>LLAVE AJUSTABLE (INGLESA) N.768  DE 18"  (86927)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>82.90</precioUnitario>
+<descuento>16.58</descuento>
+<precioTotalSinImpuesto>66.32</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>66.32</baseImponible>
+<valor>7.96</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97527</codigoPrincipal>
+<descripcion>LLAVE DE TUBO RECTA N.814 DE ALUMINIO  14" (31095)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>64.29</precioUnitario>
+<descuento>12.86</descuento>
+<precioTotalSinImpuesto>51.43</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>51.43</baseImponible>
+<valor>6.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97968</codigoPrincipal>
+<descripcion>TERRAJA 12R DE 1/8" A 2" NPT. C/MANGO Y TRINQUETE (36505)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1151.39</precioUnitario>
+<descuento>230.28</descuento>
+<precioTotalSinImpuesto>921.11</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>921.11</baseImponible>
+<valor>110.53</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100603</codigoPrincipal>
+<descripcion>LLAVE DE TUBO RECTA NO.848 CON MANGO DE ALUMINIO (31115)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>430.45</precioUnitario>
+<descuento>86.09</descuento>
+<precioTotalSinImpuesto>344.36</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>344.36</baseImponible>
+<valor>41.32</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">m.morales@coelecsc.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2752485</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">037987</campoAdicional>
+</infoAdicional>
+</factura>

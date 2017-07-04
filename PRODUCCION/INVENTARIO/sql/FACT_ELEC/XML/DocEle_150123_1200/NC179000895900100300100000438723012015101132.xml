@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000004387</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<razonSocialComprador>CRESPO FERNANDEZ CARMEN FILOMENA</razonSocialComprador>
+<identificacionComprador>1702889450</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>003-001-000114079</numDocModificado>
+<fechaEmisionDocSustento>22/01/2015</fechaEmisionDocSustento>
+<totalSinImpuestos>17.02</totalSinImpuestos>
+<valorModificacion>19.06</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>17.02</baseImponible>
+<valor>2.04</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>CAMBIO DE PRODUCTO</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>22802</codigoInterno>
+<descripcion>JUEGO DE ACCESORIOS ADHESIVO 8112130 BLANCO (6 Pzs.)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>14.21</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>14.21</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>14.21</baseImponible>
+<valor>1.71</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>70893</codigoInterno>
+<descripcion>DESAGUE DE LAVADERO 61001300 VALVULA DE 1-1/2" C/REBOSO REDONDO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2.81</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2.81</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TEKA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.81</baseImponible>
+<valor>0.34</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">carmencrespo@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2641563</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">64134</campoAdicional>
+</infoAdicional>
+</notaCredito>

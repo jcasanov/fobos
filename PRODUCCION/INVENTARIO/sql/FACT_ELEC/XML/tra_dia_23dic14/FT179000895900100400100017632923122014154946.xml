@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176329</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176329</guiaRemision>
+<razonSocialComprador>ACERO COMERCIAL ECUATORIANO S.A.</razonSocialComprador>
+<identificacionComprador>1790008959001</identificacionComprador>
+<totalSinImpuestos>126.00</totalSinImpuestos>
+<totalDescuento>67.84</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>126.00</baseImponible>
+<valor>15.12</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>141.12</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102401</codigoPrincipal>
+<descripcion>AMOLADORA ELECTRICA 6146-31 DE DE 11 AMPS. 4-1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>193.84</precioUnitario>
+<descuento>67.84</descuento>
+<precioTotalSinImpuesto>126.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>126.00</baseImponible>
+<valor>15.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">impuestos@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2454334</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000640</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268874</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268874</guiaRemision>
+<razonSocialComprador>SINOHYDRO CORPORATION</razonSocialComprador>
+<identificacionComprador>1792203902001</identificacionComprador>
+<totalSinImpuestos>354.57</totalSinImpuestos>
+<totalDescuento>62.57</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>354.57</baseImponible>
+<valor>42.55</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>397.12</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>96778</codigoPrincipal>
+<descripcion>SWITCH P/ROSCADORA MOD.535 (20123)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>208.57</precioUnitario>
+<descuento>62.57</descuento>
+<precioTotalSinImpuesto>354.57</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>354.57</baseImponible>
+<valor>42.55</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">marlonbowhunter@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3944120</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">052528</campoAdicional>
+<campoAdicional nombre="Observaciones">SOLICITADO SR MARLON GONZALEZ</campoAdicional>
+</infoAdicional>
+</factura>

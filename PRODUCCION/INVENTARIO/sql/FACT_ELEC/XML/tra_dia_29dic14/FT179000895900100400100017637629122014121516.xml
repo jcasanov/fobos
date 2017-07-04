@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176376</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>29/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176376</guiaRemision>
+<razonSocialComprador>MEDINA CASTILLO CONSUELO DE LOURDES</razonSocialComprador>
+<identificacionComprador>1705732228001</identificacionComprador>
+<totalSinImpuestos>22.20</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>22.20</baseImponible>
+<valor>2.66</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>24.86</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>90272</codigoPrincipal>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>17.65</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>17.65</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>17.65</baseImponible>
+<valor>2.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3266</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 2" x 8"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>4.55</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>4.55</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.55</baseImponible>
+<valor>0.55</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">consuelvelectric.cm@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2439471</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">041241</campoAdicional>
+</infoAdicional>
+</factura>

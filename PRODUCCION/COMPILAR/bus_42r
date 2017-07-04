@@ -1,0 +1,1 @@
+find ./*/fuentes/ -name "*.42r" -print > files.42r

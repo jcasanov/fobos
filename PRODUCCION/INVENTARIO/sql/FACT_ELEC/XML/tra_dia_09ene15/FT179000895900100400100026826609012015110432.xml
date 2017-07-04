@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268266</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>09/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268266</guiaRemision>
+<razonSocialComprador>VALENZUELA CAGUANA CHRISTIAN STALIN</razonSocialComprador>
+<identificacionComprador>1716457575001</identificacionComprador>
+<totalSinImpuestos>18.17</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>18.17</baseImponible>
+<valor>2.18</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>20.35</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102358</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-20-7371 SDS PLUS 4CT MX4 1/2" X 4" X 6"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>10.44</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>10.44</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>10.44</baseImponible>
+<valor>1.25</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102371</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-20-7951 SDS PLUS 4CT MX4 3/8" X 4" X 6"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>7.73</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>7.73</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7.73</baseImponible>
+<valor>0.93</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">cristianstalin101@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2394349</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064255</campoAdicional>
+</infoAdicional>
+</factura>

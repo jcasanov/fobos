@@ -1,0 +1,47 @@
+ 
+Obteniendo los Items. Por favor espere ...
+ 
+Procesando los movimientos de los Items. Por favor espere ...
+ 
+ 
+  ERROR ITEM: 18755 99       0.00      -2.00  No. T 2
+ 
+ 
+  ERROR ITEM: 50469 99       0.00      -1.00  No. T 6
+ 
+ 
+  ERROR ITEM: 15518 99       0.00      -1.00  No. T 14
+ 
+ 
+  ERROR ITEM: 15664 99       0.00      -5.00  No. T 37
+ 
+ 
+  ERROR ITEM: 18758 99       0.00      -1.00  No. T 18
+ 
+ 
+  ERROR ITEM: 22024 99       0.00      -1.00  No. T 7
+ 
+ 
+  ERROR ITEM: 30296 99       0.00      -1.00  No. T 1
+ 
+ 
+  ERROR ITEM: 33568 99       0.00      -2.00  No. T 6
+ 
+ 
+  ERROR ITEM: 39668 99       0.00      -1.00  No. T 1
+ 
+ 
+  ERROR ITEM: 46581 99       0.00      -1.00  No. T 1
+ 
+ 
+  ERROR ITEM: 61796 99       0.00      -1.00  No. T 35
+ 
+ 
+  ERROR ITEM: 61798 99       0.00      -2.00  No. T 122
+ 
+ 
+  ERROR ITEM: 742 99       0.00      -1.00  No. T 4
+ 
+ 
+  ERROR ITEM: 7739 99       0.00     -34.00  No. T 16
+ 

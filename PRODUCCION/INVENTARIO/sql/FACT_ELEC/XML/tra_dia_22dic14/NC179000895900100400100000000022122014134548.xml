@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000018747</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>SEDEMI</razonSocialComprador>
+<identificacionComprador>1791734920001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000175000</numDocModificado>
+<fechaEmisionDocSustento>28/11/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>328.14</totalSinImpuestos>
+<valorModificacion>367.52</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>328.14</baseImponible>
+<valor>39.38</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 266655 SEDEMI P/VOLVER A FACT  GG FC</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>93793</codigoInterno>
+<descripcion>FRESA ANULAR PARA TALADRO ELECTROMAGNETICO 49-59-2056 DE 9/16" P/PLANCHA DE HASTA 2"</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>50.33</precioUnitario>
+<descuento>37.75</descuento>
+<precioTotalSinImpuesto>213.90</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>213.90</baseImponible>
+<valor>25.67</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>93792</codigoInterno>
+<descripcion>FRESA ANULAR PARA TALADRO ELECTROMAGNETICO 49-59-2050 DE 1/2" P/PLANCHA DE HASTA 2"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>44.80</precioUnitario>
+<descuento>20.16</descuento>
+<precioTotalSinImpuesto>114.24</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>114.24</baseImponible>
+<valor>13.71</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">info@sedemi.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2093992</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">30547</campoAdicional>
+</infoAdicional>
+</notaCredito>

@@ -1,0 +1,29 @@
+DATABASE aceros
+SCREEN 
+{
+
+          Código: [c000 |c002                                    ]
+
+       Tipo Pago: [c023            ]
+
+
+
+           Banco: [c032       ] [c033                          ]
+  Cta. Corriente: [c034           ]      
+ Cta. Trabajador: [c036           ]     
+
+}
+TABLES
+rolt030
+ATTRIBUTES
+c000 = rolt030.n30_cod_trab, AUTONEXT, REVERSE, NOENTRY;
+c002 = rolt030.n30_nombres, AUTONEXT, REVERSE, UPSHIFT, NOENTRY;
+c023 = rolt030.n30_tipo_pago, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'RADIO',
+	CONFIG = 'E Efectivo C Cheque T Transferencia', DEFAULT = 'T';
+c032 = rolt030.n30_bco_empresa, AUTONEXT, UPSHIFT,
+        WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c033 = FORMONLY.tit_banco, NOENTRY, UPSHIFT;
+c034 = rolt030.n30_cta_empresa, AUTONEXT, UPSHIFT;
+c036 = rolt030.n30_cta_trabaj, AUTONEXT, UPSHIFT;
+END

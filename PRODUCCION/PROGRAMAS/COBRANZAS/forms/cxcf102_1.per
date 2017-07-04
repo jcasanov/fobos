@@ -1,0 +1,34 @@
+DATABASE aceros  
+-------------
+-------------
+SCREEN
+{
+
+     Tipo Documento: [c0]  [c002           ]         Estado: [d] [c003      ]
+    
+               Tipo: [c                ]      
+         				   
+
+
+    Usuario Ingreso: [c004      ]    
+   Fecha de Ingreso: [c005               ]                                
+
+}
+end
+TABLES
+cxct004
+ATTRIBUTES
+c0  = z04_tipo_doc, UPSHIFT, REQUIRED,  REVERSE, AUTONEXT  
+	,widget='FIELD_BMP', config='lista.bmp F2';
+c002 = z04_nombre  	,UPSHIFT, REQUIRED, REVERSE;
+c    = FORMONLY.z04_tipo ,AUTONEXT, REVERSE, DEFAULT = 'D',
+	WIDGET='RADIO', CONFIG='D Deudor F Favor T Transaccion'; 
+d    = z04_estado,	AUTONEXT, UPSHIFT, REVERSE;
+c003 = FORMONLY.tit_estado;
+c004 = z04_usuario	,NOENTRY, REQUIRED, REVERSE;
+c005 = z04_fecing	,NOENTRY, REQUIRED, REVERSE;
+
+INSTRUCTIONS
+DELIMITERS "[]"
+end
+

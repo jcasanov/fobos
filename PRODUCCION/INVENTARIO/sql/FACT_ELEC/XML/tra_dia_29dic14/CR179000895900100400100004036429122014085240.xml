@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comprobanteRetencion id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000040364</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoCompRetencion>
+<fechaEmision>29/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionSujetoRetenido>04</tipoIdentificacionSujetoRetenido>
+<razonSocialSujetoRetenido>MORENO GAVILANEZ JAVIER BAYARDO</razonSocialSujetoRetenido>
+<identificacionSujetoRetenido>0602389223001</identificacionSujetoRetenido>
+<periodoFiscal>12/2014</periodoFiscal>
+</infoCompRetencion>
+<impuestos>
+<impuesto>
+<codigo>1</codigo>
+<codigoRetencion>312</codigoRetencion>
+<baseImponible>257.14</baseImponible>
+<porcentajeRetener>1.00</porcentajeRetener>
+<valorRetenido>2.57</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>002001000000749</numDocSustento>
+<fechaEmisionDocSustento>20/12/2014</fechaEmisionDocSustento>
+</impuesto>
+<impuesto>
+<codigo>2</codigo>
+<codigoRetencion>1</codigoRetencion>
+<baseImponible>30.86</baseImponible>
+<porcentajeRetener>30.00</porcentajeRetener>
+<valorRetenido>9.26</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>002001000000749</numDocSustento>
+<fechaEmisionDocSustento>20/12/2014</fechaEmisionDocSustento>
+</impuesto>
+</impuestos>
+<infoAdicional>
+<campoAdicional nombre="Email">informacionuio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2532016</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">002592</campoAdicional>
+</infoAdicional>
+</comprobanteRetencion>

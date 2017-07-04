@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000269039</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000269039</guiaRemision>
+<razonSocialComprador>GEOPROCONS CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1792462584001</identificacionComprador>
+<totalSinImpuestos>270.78</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>270.78</baseImponible>
+<valor>32.49</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>303.27</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>13658</codigoPrincipal>
+<descripcion>LLAVE DE TUBO RECTA NO. 24 (31030)</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>90.26</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>270.78</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>270.78</baseImponible>
+<valor>32.49</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">contacto@geoprocons.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2909917</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">061538</campoAdicional>
+<campoAdicional nombre="Observaciones">CHEQUE N.-390 PICHINCHA</campoAdicional>
+</infoAdicional>
+</factura>

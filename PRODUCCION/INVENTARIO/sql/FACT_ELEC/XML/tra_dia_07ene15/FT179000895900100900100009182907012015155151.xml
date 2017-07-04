@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091829</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091829</guiaRemision>
+<razonSocialComprador>VASQUEZ VILLENA FIDEL</razonSocialComprador>
+<identificacionComprador>0909179988</identificacionComprador>
+<totalSinImpuestos>138.32</totalSinImpuestos>
+<totalDescuento>7.28</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>138.32</baseImponible>
+<valor>16.60</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>154.92</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>45453</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS ELONGADO 1101033 CENTURY SILVER GRAY ASTO. DORNIER</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>131.50</precioUnitario>
+<descuento>6.58</descuento>
+<precioTotalSinImpuesto>124.92</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>124.92</baseImponible>
+<valor>14.99</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>26935</codigoPrincipal>
+<descripcion>TUBO ABASTO-LLAVE ANGULAR INODORO E266.02 DH-CR FLEXIBLE DE 12"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>10.07</precioUnitario>
+<descuento>0.50</descuento>
+<precioTotalSinImpuesto>9.57</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.57</baseImponible>
+<valor>1.15</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>27306</codigoPrincipal>
+<descripcion>EMPAQUE SC001319000100 CON ANILLO DE CERA P/ WC</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2.47</precioUnitario>
+<descuento>0.12</descuento>
+<precioTotalSinImpuesto>2.35</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.35</baseImponible>
+<valor>0.28</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>27893</codigoPrincipal>
+<descripcion>TORNILLO 3011000 SET ANCLAJE TAZA PISO WC</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.56</precioUnitario>
+<descuento>0.08</descuento>
+<precioTotalSinImpuesto>1.48</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="PAR"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.48</baseImponible>
+<valor>0.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">fidelon_vasquez@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0984997513</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016704</campoAdicional>
+</infoAdicional>
+</factura>

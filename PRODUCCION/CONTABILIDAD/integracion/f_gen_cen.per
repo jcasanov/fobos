@@ -1,0 +1,21 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+                     INTEGRACION CONTABLE ACERO GYE-CENTRO
+
+   Recuerde que debe haber traido la base acero_gc del Servidor del Centro.
+
+
+                               AÑO: [c000]
+
+                               MES: [c001] [c002       ]
+
+}
+ATTRIBUTES
+c000 = FORMONLY.vm_ano TYPE SMALLINT NOT NULL, REVERSE, UPSHIFT, AUTONEXT,
+	INCLUDE = (1980 TO 2099);
+c001 = FORMONLY.vm_mes TYPE SMALLINT NOT NULL, REVERSE, UPSHIFT, AUTONEXT,
+	INCLUDE = (1 TO 12);
+c002 = FORMONLY.tit_mes, NOENTRY, REVERSE, UPSHIFT;
+END

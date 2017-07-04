@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025220</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>RODRIGUEZ CORREA ROSA AYDE</razonSocialComprador>
+<identificacionComprador>0912756061001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000132873</numDocModificado>
+<fechaEmisionDocSustento>28/11/2012</fechaEmisionDocSustento>
+<totalSinImpuestos>1964.94</totalSinImpuestos>
+<valorModificacion>2200.73</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>1964.94</baseImponible>
+<valor>235.79</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 227536 ROSA RODRIGUEZ REC C DL CRUZ</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>94172</codigoInterno>
+<descripcion>BOMBA SUMERGIBLE DE 4" SDQP90-105 SISTEMA DE PRESION CONSTANTE (93809015)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2519.16</precioUnitario>
+<descuento>554.22</descuento>
+<precioTotalSinImpuesto>1964.94</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1964.94</baseImponible>
+<valor>235.79</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">grupo_fchimg@hotmail.com</campoAdicional>
+<campoAdicional nombre="Email">fmejia@megachimg.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">032420353</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">37170</campoAdicional>
+</infoAdicional>
+</notaCredito>

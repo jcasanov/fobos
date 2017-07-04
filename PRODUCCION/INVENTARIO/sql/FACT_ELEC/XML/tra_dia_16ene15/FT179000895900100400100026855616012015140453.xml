@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268556</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268556</guiaRemision>
+<razonSocialComprador>SOCIEDAD PORCINA LOS ANGELES</razonSocialComprador>
+<identificacionComprador>1791833058001</identificacionComprador>
+<totalSinImpuestos>1544.33</totalSinImpuestos>
+<totalDescuento>81.28</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1544.33</baseImponible>
+<valor>185.32</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1729.65</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>21179</codigoPrincipal>
+<descripcion>TAIPE P/INSTALACIONES GRANDE(10 YD.)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>0.78</precioUnitario>
+<descuento>0.08</descuento>
+<precioTotalSinImpuesto>1.48</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.48</baseImponible>
+<valor>0.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>19548</codigoPrincipal>
+<descripcion>CABLE ELECTRICO SUCRE 4 x 3</descripcion>
+<cantidad>100.00</cantidad>
+<precioUnitario>13.78</precioUnitario>
+<descuento>68.90</descuento>
+<precioTotalSinImpuesto>1309.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CABLEC"/>
+<detAdicional nombre="UNIDAD" valor="M"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1309.10</baseImponible>
+<valor>157.09</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>19523</codigoPrincipal>
+<descripcion>CABLE ELECTRICO SUCRE 14 x 3</descripcion>
+<cantidad>100.00</cantidad>
+<precioUnitario>2.34</precioUnitario>
+<descuento>11.70</descuento>
+<precioTotalSinImpuesto>222.30</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CABLEC"/>
+<detAdicional nombre="UNIDAD" valor="M"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>222.30</baseImponible>
+<valor>26.68</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3262</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 2" x 5"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3.25</precioUnitario>
+<descuento>0.16</descuento>
+<precioTotalSinImpuesto>3.09</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.09</baseImponible>
+<valor>0.37</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3256</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 2" x 3"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>2.20</precioUnitario>
+<descuento>0.44</descuento>
+<precioTotalSinImpuesto>8.36</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.36</baseImponible>
+<valor>1.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">mledesma@punto.net.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">099481550</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">036973</campoAdicional>
+</infoAdicional>
+</factura>

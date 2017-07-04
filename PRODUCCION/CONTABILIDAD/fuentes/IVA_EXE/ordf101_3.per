@@ -1,0 +1,36 @@
+DATABASE aceros
+SCREEN
+{
+
+                    CONFIGURACION ICE TIPO ORDEN DE COMPRA
+                    -------------------------------------
+
+    Tipo Orden: [c000] [c001                                                 ]
+
+    Codigo ICE: [c002] [c003  ] %  [c004           ]
+
+   Descripcion: [c005                                                        ]
+
+ Aux. Contable: [c006        ] [c007                                         ]
+
+       Usuario: [c008      ]          Fecha de Ingreso: [c009                ]
+}
+TABLES
+ctbt010
+srit010
+srit024
+ATTRIBUTES
+c000 = FORMONLY.tipo_orden, NOENTRY, REVERSE, UPSHIFT;
+c001 = FORMONLY.descripcion, NOENTRY, REVERSE, UPSHIFT;
+c002 = srit024.s24_codigo, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = srit024.s24_porcentaje_ice, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '##&.##', INCLUDE = (0 TO 100.00);
+c004 = srit024.s24_codigo_impto, NOENTRY, UPSHIFT, REVERSE;
+c005 = srit010.s10_descripcion, NOENTRY, UPSHIFT, REVERSE;
+c006 = srit024.s24_aux_cont, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c007 = ctbt010.b10_descripcion, NOENTRY, UPSHIFT;
+c008 = srit024.s24_usuario, NOENTRY, UPSHIFT, REVERSE;
+c009 = srit024.s24_fecing, NOENTRY, UPSHIFT, REVERSE;
+END

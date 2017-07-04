@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268735</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268735</guiaRemision>
+<razonSocialComprador>ING. MOISES ENCALADA RAMIREZ INMERA C.A.</razonSocialComprador>
+<identificacionComprador>1791190564001</identificacionComprador>
+<totalSinImpuestos>1297.49</totalSinImpuestos>
+<totalDescuento>176.60</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1297.49</baseImponible>
+<valor>155.70</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1453.19</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>94708</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 4" 90FA5S4-PE P/ 5HP 90 GPM (93619012) 12 ETAPAS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>623.01</precioUnitario>
+<descuento>74.76</descuento>
+<precioTotalSinImpuesto>548.25</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>548.25</baseImponible>
+<valor>65.79</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96074</codigoPrincipal>
+<descripcion>MOTOR ELEC SUMERG DE 4" (2343178602) 4C3F DE 5HP 230-3-60</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>843.84</precioUnitario>
+<descuento>101.26</descuento>
+<precioTotalSinImpuesto>742.58</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>742.58</baseImponible>
+<valor>89.11</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1206</codigoPrincipal>
+<descripcion>ABRAZADERA ACERO INOX. DE 4"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>3.23</precioUnitario>
+<descuento>0.52</descuento>
+<precioTotalSinImpuesto>5.94</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.94</baseImponible>
+<valor>0.71</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21179</codigoPrincipal>
+<descripcion>TAIPE P/INSTALACIONES GRANDE(10 YD.)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>0.78</precioUnitario>
+<descuento>0.06</descuento>
+<precioTotalSinImpuesto>0.72</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.72</baseImponible>
+<valor>0.09</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">contabilidad@inmera.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2456814</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">006895</campoAdicional>
+<campoAdicional nombre="Observaciones">O/COMPRA 05</campoAdicional>
+</infoAdicional>
+</factura>

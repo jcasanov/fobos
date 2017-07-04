@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268213</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>08/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>06</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268213</guiaRemision>
+<razonSocialComprador>TIDELTRAL CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>2390003628001</identificacionComprador>
+<totalSinImpuestos>262.50</totalSinImpuestos>
+<totalDescuento>46.32</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>262.50</baseImponible>
+<valor>31.50</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>294.00</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>9466</codigoPrincipal>
+<descripcion>VALVULA DE FLOTADOR DE 2"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>102.94</precioUnitario>
+<descuento>46.32</descuento>
+<precioTotalSinImpuesto>262.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HELBER"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>262.50</baseImponible>
+<valor>31.50</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">aa_tp@tideltral.com.ec</campoAdicional>
+<campoAdicional nombre="Email">ideltral_tp@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2748593</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">050267</campoAdicional>
+</infoAdicional>
+</factura>

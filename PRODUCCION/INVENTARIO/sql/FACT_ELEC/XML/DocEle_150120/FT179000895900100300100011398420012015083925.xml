@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113984</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113984</guiaRemision>
+<razonSocialComprador>TELLO VACA BLANCA</razonSocialComprador>
+<identificacionComprador>1700344987</identificacionComprador>
+<totalSinImpuestos>56.92</totalSinImpuestos>
+<totalDescuento>6.25</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>56.92</baseImponible>
+<valor>6.83</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>63.75</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>100764</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA TIBER BEIGE PRIMERA (CAJA DE 1.92 M2)</descripcion>
+<cantidad>5.75</cantidad>
+<precioUnitario>10.78</precioUnitario>
+<descuento>6.20</descuento>
+<precioTotalSinImpuesto>55.79</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>55.79</baseImponible>
+<valor>6.69</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>68940</codigoPrincipal>
+<descripcion>FLAPPER EHE.1.15-DH FLAPPER P/ HERRAJE COMERCIAL</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.18</precioUnitario>
+<descuento>0.05</descuento>
+<precioTotalSinImpuesto>1.13</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.13</baseImponible>
+<valor>0.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">patyalcocer@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2653 644</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">025250</campoAdicional>
+</infoAdicional>
+</factura>

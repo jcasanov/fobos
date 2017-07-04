@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268209</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>08/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268209</guiaRemision>
+<razonSocialComprador>CONSTRUCTORA QUIROZ</razonSocialComprador>
+<identificacionComprador>1792137403001</identificacionComprador>
+<totalSinImpuestos>134.45</totalSinImpuestos>
+<totalDescuento>14.94</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>134.45</baseImponible>
+<valor>16.13</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>150.58</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>6322</codigoPrincipal>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>20.48</precioUnitario>
+<descuento>2.05</descuento>
+<precioTotalSinImpuesto>18.43</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>18.43</baseImponible>
+<valor>2.21</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2065</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 90° DE 2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>6.59</precioUnitario>
+<descuento>0.66</descuento>
+<precioTotalSinImpuesto>5.93</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.93</baseImponible>
+<valor>0.71</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3690</codigoPrincipal>
+<descripcion>REDUCCION GALV. CLASE 150 DE 3" x 2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>15.58</precioUnitario>
+<descuento>1.56</descuento>
+<precioTotalSinImpuesto>14.02</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>14.02</baseImponible>
+<valor>1.68</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>8998</codigoPrincipal>
+<descripcion>VALVULA CHEQUE HORIZONTAL - VERTICAL RW-236 DE 2" 200 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>98.04</precioUnitario>
+<descuento>9.80</descuento>
+<precioTotalSinImpuesto>88.24</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RED WH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>88.24</baseImponible>
+<valor>10.59</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97467</codigoPrincipal>
+<descripcion>TEFLON EN ROLLO 0.07 x 12 mm. x 10 m.</descripcion>
+<cantidad>15.00</cantidad>
+<precioUnitario>0.58</precioUnitario>
+<descuento>0.87</descuento>
+<precioTotalSinImpuesto>7.83</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7.83</baseImponible>
+<valor>0.94</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">constructoraquiroz@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2040614</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">063120</campoAdicional>
+</infoAdicional>
+</factura>

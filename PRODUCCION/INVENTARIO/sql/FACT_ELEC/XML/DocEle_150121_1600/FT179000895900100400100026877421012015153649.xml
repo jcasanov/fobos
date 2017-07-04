@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268774</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268774</guiaRemision>
+<razonSocialComprador>RODRIGUEZ CORREA ROSA AYDE</razonSocialComprador>
+<identificacionComprador>0912756061001</identificacionComprador>
+<totalSinImpuestos>59.65</totalSinImpuestos>
+<totalDescuento>10.52</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>59.65</baseImponible>
+<valor>7.16</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>66.81</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>96425</codigoPrincipal>
+<descripcion>KIT DE TAPA DE CAJA DE CONEXION P/ UPA 15-90 (00506630)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.94</precioUnitario>
+<descuento>0.29</descuento>
+<precioTotalSinImpuesto>1.65</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.65</baseImponible>
+<valor>0.20</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96424</codigoPrincipal>
+<descripcion>KIT DE SENSOR DE FLUJO P/ UPA 15-90 (00595394)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>59.48</precioUnitario>
+<descuento>8.92</descuento>
+<precioTotalSinImpuesto>50.56</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>50.56</baseImponible>
+<valor>6.07</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96429</codigoPrincipal>
+<descripcion>KIT DE SELECTOR DE VELOCIDADES P/ UPA 15-90 (95050787)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>8.75</precioUnitario>
+<descuento>1.31</descuento>
+<precioTotalSinImpuesto>7.44</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7.44</baseImponible>
+<valor>0.89</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">grupo_fchimg@hotmail.com</campoAdicional>
+<campoAdicional nombre="Email">fmejia@megachimg.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">032420353</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">037170</campoAdicional>
+<campoAdicional nombre="Observaciones">PEDIDO ADJUNTO</campoAdicional>
+</infoAdicional>
+</factura>

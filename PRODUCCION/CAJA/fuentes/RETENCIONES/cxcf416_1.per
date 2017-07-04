@@ -1,0 +1,36 @@
+DATABASE FORMONLY
+SCREEN 
+{
+
+     Codigo Caja: [c006  ] [c007                ]
+
+          Moneda: [c0] [c001              ]
+
+   Fecha Inicial: [c002      ]                   Fecha Final: [c003      ]
+
+         Cliente: [c004 ] [c010                                          ] 
+
+            Tipo: [c005        ]
+
+
+
+}
+ATTRIBUTES
+c0   = FORMONLY.moneda TYPE CHAR NOT NULL, REVERSE, UPSHIFT, 
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2', AUTONEXT;
+c001 = FORMONLY.desc_moneda, REVERSE, UPSHIFT, NOENTRY;
+c002 = FORMONLY.inicial TYPE DATE NOT NULL, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy', AUTONEXT,
+	COMMENTS = 'Ingrese fecha inicial en formato: dd-mm-aaaa';
+c003 = FORMONLY.final TYPE DATE NOT NULL, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy', AUTONEXT,
+	COMMENTS = 'Ingrese fecha final en formato: dd-mm-aaaa';
+c004 = FORMONLY.cliente, UPSHIFT, AUTONEXT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';	
+c010 = FORMONLY.desc_cli, UPSHIFT, NOENTRY;
+c005 = FORMONLY.vm_tipo TYPE CHAR NOT NULL, UPSHIFT, REVERSE,
+	WIDGET = 'RADIO', CONFIG = 'F Facturas P Pagos T Todos', DEFAULT = 'T';
+c006 = FORMONLY.j10_codigo_caja TYPE SMALLINT, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c007 = FORMONLY.j02_nombre_caja TYPE VARCHAR, NOENTRY, UPSHIFT;
+END

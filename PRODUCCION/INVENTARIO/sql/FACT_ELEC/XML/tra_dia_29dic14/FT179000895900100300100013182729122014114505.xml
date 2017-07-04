@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131827</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>29/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131827</guiaRemision>
+<razonSocialComprador>LLUMIQUINGA PITO MARIA CECILIA</razonSocialComprador>
+<identificacionComprador>1709339988001</identificacionComprador>
+<totalSinImpuestos>200.02</totalSinImpuestos>
+<totalDescuento>40.97</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>200.02</baseImponible>
+<valor>24.00</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>224.02</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>98749</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 ZARUMA AZUL PRIMERA</descripcion>
+<cantidad>15.00</cantidad>
+<precioUnitario>10.45</precioUnitario>
+<descuento>26.65</descuento>
+<precioTotalSinImpuesto>130.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>130.10</baseImponible>
+<valor>15.61</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99904</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 BOLONIA MARFIL PRIMERA</descripcion>
+<cantidad>8.00</cantidad>
+<precioUnitario>10.53</precioUnitario>
+<descuento>14.32</descuento>
+<precioTotalSinImpuesto>69.92</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>69.92</baseImponible>
+<valor>8.39</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">electroacabadosmc@yahoo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2864765</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">062094</campoAdicional>
+</infoAdicional>
+</factura>

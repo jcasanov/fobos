@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000034200</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>AV. JUAN TANCA MARENGO KM.1.7</dirPartida>
+<razonSocialTransportista>MANUEL MAGALLANES (ACERO COMERCIAL .S.A)</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>24/12/2014</fechaIniTransporte>
+<fechaFinTransporte>24/12/2014</fechaFinTransporte>
+<placa>  GSC-8976</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0992353074001</identificacionDestinatario>
+<razonSocialDestinatario>SUCORPORACION S.A.</razonSocialDestinatario>
+<dirDestinatario>OBRA:SAN EDUARDO</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>20/08/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>71764</codigoInterno>
+<descripcion>INODORO RESIDENCIAL UNA PIEZA E189-BL ONE PIECE MONACO PLUS BLANCO</descripcion>
+<cantidad>4.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="MODELO" valor="E189-BL"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">arquitectura@sucorporacionsa.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2922024</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">013477</campoAdicional>
+</infoAdicional>
+</guiaRemision>

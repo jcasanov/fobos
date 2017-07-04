@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092026</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092026</guiaRemision>
+<razonSocialComprador>PENA ICAZA CARLOS ARNALDO</razonSocialComprador>
+<identificacionComprador>0903718013001</identificacionComprador>
+<totalSinImpuestos>561.80</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>561.80</baseImponible>
+<valor>67.42</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>629.22</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>68753</codigoPrincipal>
+<descripcion>GRIFERIA DE DUCHA 9031306 CROMO CON DUCHA SHELBY</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>28.09</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>561.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>561.80</baseImponible>
+<valor>67.42</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">cpenaycaza@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2382871</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">013338</campoAdicional>
+<campoAdicional nombre="Observaciones">OBRA: BOSQUES REAL-MILAGRO.</campoAdicional>
+</infoAdicional>
+</factura>

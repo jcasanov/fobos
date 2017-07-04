@@ -1,0 +1,30 @@
+DATABASE aceros
+
+SCREEN
+{
+ ENTIDADES DEL SISTEMA
+-----------------------------------------
+ Código	      Nombre 		
+-----------------------------------------
+[c01       ] [c002                    ] 
+[c01       ] [c002                    ]
+[c01       ] [c002                    ]
+[c01       ] [c002                    ]
+[c01       ] [c002                    ]
+[c01       ] [c002                    ]
+[c01       ] [c002                    ] 
+[c01       ] [c002                    ] 
+[c01       ] [c002                    ] 
+[c01       ] [c002                    ] 
+}
+
+TABLES
+gent011
+
+ATTRIBUTES
+c01 = g11_tiporeg;
+c002 = g11_nombre;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_ent[10](g11_tiporeg, g11_nombre)

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000022133</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>PROCOREX S.A.</razonSocialComprador>
+<identificacionComprador>0992726512001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000092130</numDocModificado>
+<fechaEmisionDocSustento>26/01/2015</fechaEmisionDocSustento>
+<totalSinImpuestos>318.76</totalSinImpuestos>
+<valorModificacion>357.01</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>318.76</baseImponible>
+<valor>38.25</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>REFACTURACION: FACTURADA SIN IVA</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>15674</codigoInterno>
+<descripcion>DADOS PARA TERRAJA MANUAL P/ 12-R DE 2" NPT (37850)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>67.23</precioUnitario>
+<descuento>6.72</descuento>
+<precioTotalSinImpuesto>60.51</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>60.51</baseImponible>
+<valor>7.26</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>92771</codigoInterno>
+<descripcion>CIZALLA CORTAPERNOS S-24 P/ 11mm. (14223)</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>95.65</precioUnitario>
+<descuento>28.70</descuento>
+<precioTotalSinImpuesto>258.25</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>258.25</baseImponible>
+<valor>30.99</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">procorex@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">266450</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">14923</campoAdicional>
+</infoAdicional>
+</notaCredito>

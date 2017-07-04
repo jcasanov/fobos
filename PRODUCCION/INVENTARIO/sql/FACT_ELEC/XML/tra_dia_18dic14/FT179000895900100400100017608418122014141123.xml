@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176084</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176084</guiaRemision>
+<razonSocialComprador>RODRIGUEZ CORREA ROSA AYDE</razonSocialComprador>
+<identificacionComprador>0912756061001</identificacionComprador>
+<totalSinImpuestos>232.80</totalSinImpuestos>
+<totalDescuento>41.09</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>232.80</baseImponible>
+<valor>27.94</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>260.74</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>97247</codigoPrincipal>
+<descripcion>ASPIRADORA SECO Y MOJADO RESIDENCIAL WD-4070 DE  4Gln. 5HP 115V. (31653)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>139.64</precioUnitario>
+<descuento>20.95</descuento>
+<precioTotalSinImpuesto>118.69</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>118.69</baseImponible>
+<valor>14.24</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99222</codigoPrincipal>
+<descripcion>ASPIRADORA SECO Y MOJADO RESIDENCIAL WD-0671 DE 6 Glns. MOTOR DE 2.5HP 120V. (36683)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>134.25</precioUnitario>
+<descuento>20.14</descuento>
+<precioTotalSinImpuesto>114.11</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>114.11</baseImponible>
+<valor>13.69</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">032420353</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">037170</campoAdicional>
+</infoAdicional>
+</factura>

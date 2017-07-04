@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268886</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268886</guiaRemision>
+<razonSocialComprador>EMPRESA PUBLICA METROPOLITANA DE MOVILIDAD Y OBRAS PUBLICAS</razonSocialComprador>
+<identificacionComprador>1768154690001</identificacionComprador>
+<totalSinImpuestos>13446.16</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>13446.16</baseImponible>
+<valor>1613.54</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>15059.70</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5460</codigoPrincipal>
+<descripcion>TUBO GALVANIZADO (POSTE) TIPO "T" DE 2" (50.8mm.) EXTERIOR 1.8mm. ESPESOR x 6 mts.</descripcion>
+<cantidad>330.00</cantidad>
+<precioUnitario>19.79</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>6530.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6530.70</baseImponible>
+<valor>783.68</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5458</codigoPrincipal>
+<descripcion>TUBO GALVANIZADO (POSTE) TIPO "T" DE 1-1/2" (38.1mm.) EXTERIOR 1.8mm. ESPESOR x 6 mts.</descripcion>
+<cantidad>265.00</cantidad>
+<precioUnitario>14.63</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3876.95</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3876.95</baseImponible>
+<valor>465.23</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5508</codigoPrincipal>
+<descripcion>TUBO GALV. S-UNION ISO II TIPO "T" DE 4" x 6 m. ESPESOR 3.6 mm.</descripcion>
+<cantidad>24.00</cantidad>
+<precioUnitario>93.09</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2234.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2234.16</baseImponible>
+<valor>268.10</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5470</codigoPrincipal>
+<descripcion>TUBO GALVANIZADO (POSTE) TIPO "T" DE 4" (114.1mm.) EXTERIOR 2mm. ESPESOR</descripcion>
+<cantidad>14.00</cantidad>
+<precioUnitario>49.12</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>687.68</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>687.68</baseImponible>
+<valor>82.52</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5414</codigoPrincipal>
+<descripcion>TUBO GALV. ASTM A-53   TIPO "T" DE 1-1/2" x 6 m.  ESPESOR 3.6 mm.</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>38.89</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>116.67</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>116.67</baseImponible>
+<valor>14.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jimena.escobar@epmmop.go.ec</campoAdicional>
+<campoAdicional nombre="Email">olga.bonilla@epmmop.go.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2907005</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">054494</campoAdicional>
+<campoAdicional nombre="Observaciones">CERT. 420-GAF-UF-P</campoAdicional>
+</infoAdicional>
+</factura>

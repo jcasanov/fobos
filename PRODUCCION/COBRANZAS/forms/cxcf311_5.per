@@ -9,7 +9,9 @@ SCREEN
 
  Período Vencimiento: [c002      ]      -      [c003      ]
 
-       Incluir TJ ? : [c]
+       Incluir TJ ? : [c]              Origen: [d           ]
+       Saldo Cero ? : [e] 
+
 
 }
 ATTRIBUTES
@@ -24,4 +26,10 @@ c003 = FORMONLY.fec_vcto_fin TYPE DATE, AUTONEXT, UPSHIFT,FORMAT = 'dd-mm-yyyy',
 c    = FORMONLY.incluir_tj TYPE CHAR NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
 	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', INCLUDE = ('S', 'N'),
 	DEFAULT = 'S';
+d    = FORMONLY.origen TYPE CHAR NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'RADIO', CONFIG = 'A Automatico M Manual T "T o d o s"',
+	DEFAULT = 'T';
+e    = FORMONLY.incl_sal_cero TYPE CHAR NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', INCLUDE = ('S', 'N'),
+	DEFAULT = 'N';
 END

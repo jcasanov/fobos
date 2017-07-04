@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175855</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>GARCIA MORENO 580 Y COLON</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175855</guiaRemision>
+<razonSocialComprador>RODRIGUEZ RAMOS WALTER TARQUINO</razonSocialComprador>
+<identificacionComprador>0901818294001</identificacionComprador>
+<totalSinImpuestos>1108.54</totalSinImpuestos>
+<totalDescuento>188.45</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>920.09</baseImponible>
+<valor>110.41</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1030.50</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>94334</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA OLMO PRIMERA</descripcion>
+<cantidad>31.50</cantidad>
+<precioUnitario>8.80</precioUnitario>
+<descuento>47.12</descuento>
+<precioTotalSinImpuesto>230.08</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="M2" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>230.08</baseImponible>
+<valor>27.61</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100329</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 40 BIONICA BLANCO SEGUNDA</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>11.16</precioUnitario>
+<descuento>7.59</descuento>
+<precioTotalSinImpuesto>37.05</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIALTO" valor="RIALTO"/>
+<detAdicional nombre="M2" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>37.05</baseImponible>
+<valor>4.45</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99362</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA MACHALILLA BLANCO PRIMERA</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>8.82</precioUnitario>
+<descuento>29.99</descuento>
+<precioTotalSinImpuesto>146.41</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="M2" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>146.41</baseImponible>
+<valor>17.57</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101832</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 30 X 30 MONOQUEMA SPINETTO CREMA PRIMERA</descripcion>
+<cantidad>76.00</cantidad>
+<precioUnitario>7.36</precioUnitario>
+<descuento>95.09</descuento>
+<precioTotalSinImpuesto>464.27</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIALTO" valor="RIALTO"/>
+<detAdicional nombre="M2" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>464.27</baseImponible>
+<valor>55.71</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101839</codigoPrincipal>
+<descripcion>AZULEJO PARED 20 x 25 ROYAL BLANCO  PRIMERA</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>8.49</precioUnitario>
+<descuento>8.66</descuento>
+<precioTotalSinImpuesto>42.28</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="M2" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>42.28</baseImponible>
+<valor>5.07</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

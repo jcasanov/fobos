@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025701</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>T GUTIERREZ</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>09/01/2015</fechaIniTransporte>
+<fechaFinTransporte>12/01/2015</fechaFinTransporte>
+<placa>GSL5009</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0990551405001</identificacionDestinatario>
+<razonSocialDestinatario>FABRICA DE ENVASES S.A. FADESA</razonSocialDestinatario>
+<dirDestinatario>NOVENA 109 Y DOMINGO COMIN</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>08/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>101316</codigoInterno>
+<descripcion>BOMBA CENTRIFUGA STANDAR S/ MOTOR DN65-32 1PUNTA EJE SELLO BALANCEADO  (98091583)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MARK G"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>71495</codigoInterno>
+<descripcion>MOTOR A DIESEL 3 CILINDROS MOD. 2013 1800 RPM 40 HP C/EMBRAGUE, BATERIA DE 12V.</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PERKIN"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>71532</codigoInterno>
+<descripcion>EQUIPO CONTRA INCENDIOS BASE Y ELEMENTOS DE SUCCION Y DESCARGA</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>71731</codigoInterno>
+<descripcion>TABLERO ELECTRICO SCI MOTOR A DIESEL,ARRANQUE 12VDC JOKEY 3HP M/A Y CARGADOR B.</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>99348</codigoInterno>
+<descripcion>BOMBA CENTRIF MULTIETAPA C-MOTOR KVC 75/506 M220 DE 2HP/230/60C. NPT. (102991180)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">facturaelectronica@fadesa.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2445266</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000419</campoAdicional>
+</infoAdicional>
+</guiaRemision>

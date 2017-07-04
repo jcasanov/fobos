@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comprobanteRetencion id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000003578</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoCompRetencion>
+<fechaEmision>06/11/2014</fechaEmision>
+<dirEstablecimiento>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionSujetoRetenido>04</tipoIdentificacionSujetoRetenido>
+<razonSocialSujetoRetenido>INESTRUCSUR INGENIERIA DE ESTRUCTURAS DE SUR AMERICA CIA. LTDA.</razonSocialSujetoRetenido>
+<identificacionSujetoRetenido>1792427304001</identificacionSujetoRetenido>
+<periodoFiscal>12/2014</periodoFiscal>
+</infoCompRetencion>
+<impuestos>
+<impuesto>
+<codigo>1</codigo>
+<codigoRetencion>309</codigoRetencion>
+<baseImponible>25.74</baseImponible>
+<porcentajeRetener>1.00</porcentajeRetener>
+<valorRetenido>0.26</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>004001000173747</numDocSustento>
+<fechaEmisionDocSustento>06/11/2014</fechaEmisionDocSustento>
+</impuesto>
+</impuestos>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+<campoAdicional nombre="telefono-movil">2550530</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">059894</campoAdicional>
+</infoAdicional>
+</comprobanteRetencion>

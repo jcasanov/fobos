@@ -1,0 +1,5 @@
+ej_query $1 $2 lockmoderowfobos.sql
+sed s/"|"/""/ lmrfobos.sql > temporal
+mv temporal lmrfobos.sql
+ej_query $1 $2 lmrfobos.sql
+echo "La base $1 ha sido puesta sus tablas en modo de bloqueo ROW. OK"

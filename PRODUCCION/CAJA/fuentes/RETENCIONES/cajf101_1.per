@@ -1,0 +1,33 @@
+DATABASE aceros
+SCREEN
+{
+
+     Código de Pago: [c0] [c000                ]     Estado: [c|c003     ]
+
+     Auxiliar Cont.: [c004         ] [c005                               ]
+
+       Tipo de Pago: [d        ]               Es de tipo retencion ?: [e]
+
+
+            Usuario: [c001      ]  Fecha de Ingreso: [c002               ]
+}
+TABLES
+cajt001
+ATTRIBUTES
+c0   = cajt001.j01_codigo_pago, AUTONEXT, REVERSE, UPSHIFT, PICTURE = 'AA',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Indicar las iniciales de la forma de pago';
+c000 = cajt001.j01_nombre, REVERSE, UPSHIFT,
+	COMMENTS = 'Indicar la forma de pago';
+c    = cajt001.j01_estado, NOENTRY, REVERSE, UPSHIFT;
+c001 = cajt001.j01_usuario, NOENTRY, REVERSE, UPSHIFT;
+c002 = cajt001.j01_fecing, NOENTRY, REVERSE, UPSHIFT;
+c003 = FORMONLY.tit_estado_caj, NOENTRY, UPSHIFT;
+c004 = cajt001.j01_aux_cont, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+	#COMMENT='Deje en blanco para lo que se configura vía la integración contable';
+c005 = FORMONLY.n_aux_cont, NOENTRY;
+d    = cajt001.j01_cont_cred, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'RADIO', CONFIG = 'C Contado R Credito', DEFAULT = 'C';
+e    = cajt001.j01_retencion, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge', DEFAULT = 'N';
+END

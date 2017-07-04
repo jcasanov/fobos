@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176061</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176061</guiaRemision>
+<razonSocialComprador>COMERCIAL KYWI S.A.</razonSocialComprador>
+<identificacionComprador>1790041220001</identificacionComprador>
+<totalSinImpuestos>152.17</totalSinImpuestos>
+<totalDescuento>19.13</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>152.17</baseImponible>
+<valor>18.26</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>170.43</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>69621</codigoPrincipal>
+<descripcion>CLAVO DE CABEZA .300 PARA CEMENTO Y ACERO 50022 DE 3/4" PIN 0.145" CABEZA 0.3" CAJA DE 100 u</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>4.00</precioUnitario>
+<descuento>6.00</descuento>
+<precioTotalSinImpuesto>34.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="CAJA"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>34.00</baseImponible>
+<valor>4.08</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150623</codigoPrincipal>
+<descripcion>FULMINANTES PARA PISTOLA 50504 VERDE(3)CAL0.22 P/P7200/P2201 CAJA DE 100 u</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>13.13</precioUnitario>
+<descuento>13.13</descuento>
+<precioTotalSinImpuesto>118.17</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="CIEN"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>118.17</baseImponible>
+<valor>14.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3987900</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">028650</campoAdicional>
+</infoAdicional>
+</factura>

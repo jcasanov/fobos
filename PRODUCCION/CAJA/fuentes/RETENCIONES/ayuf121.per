@@ -1,0 +1,36 @@
+DATABASE aceros
+SCREEN
+{
+ TIPOS RETENCIONES
+
+ [a|c001  |c002                |b|c]
+[d|c011  |c012                |e|f]
+[d|c011  |c012                |e|f]
+[d|c011  |c012                |e|f]
+[d|c011  |c012                |e|f]
+[d|c011  |c012                |e|f]
+[d|c011  |c012                |e|f]
+[d|c011  |c012                |e|f]
+[d|c011  |c012                |e|f]
+[d|c011  |c012                |e|f]
+[d|c011  |c012                |e|f]
+
+}
+TABLES
+ordt002
+ATTRIBUTES
+a    = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c002 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+b    = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c    = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+
+d    = ordt002.c02_tipo_ret, REVERSE, UPSHIFT;
+c011 = ordt002.c02_porcentaje, REVERSE, UPSHIFT;
+c012 = ordt002.c02_nombre, REVERSE, UPSHIFT;
+e    = ordt002.c02_tipo_fuente, REVERSE, UPSHIFT;
+f    = ordt002.c02_estado, REVERSE, UPSHIFT;
+END
+INSTRUCTIONS
+SCREEN RECORD rh_ret[10] (c02_tipo_ret, c02_porcentaje, c02_nombre,
+				c02_tipo_fuente, c02_estado)

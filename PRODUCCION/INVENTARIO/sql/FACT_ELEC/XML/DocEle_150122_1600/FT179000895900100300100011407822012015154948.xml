@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000114078</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>003-001-000114078</guiaRemision>
+<razonSocialComprador>GAMBOY CLELIA ADELA</razonSocialComprador>
+<identificacionComprador>1708119506</identificacionComprador>
+<totalSinImpuestos>18.46</totalSinImpuestos>
+<totalDescuento>2.05</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>18.46</baseImponible>
+<valor>2.22</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>20.68</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>45683</codigoPrincipal>
+<descripcion>CABEZA 103.41.27.0 D ALTA CERAMICA FRIA LINEA DE LUJO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>20.51</precioUnitario>
+<descuento>2.05</descuento>
+<precioTotalSinImpuesto>18.46</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>18.46</baseImponible>
+<valor>2.22</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">stalin_cris@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3008633</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064367</campoAdicional>
+</infoAdicional>
+</factura>

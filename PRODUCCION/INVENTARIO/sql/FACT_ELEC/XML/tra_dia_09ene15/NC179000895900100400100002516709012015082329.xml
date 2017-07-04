@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025167</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>09/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>06</tipoIdentificacionComprador>
+<razonSocialComprador>SULZER CHEMTECH</razonSocialComprador>
+<identificacionComprador>760556372</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000175646</numDocModificado>
+<fechaEmisionDocSustento>10/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>500.00</totalSinImpuestos>
+<valorModificacion>560.00</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>500.00</baseImponible>
+<valor>60.00</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 267267 SULZER CHEMTECH MAT NO ENTRG</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>700</codigoInterno>
+<descripcion>TOL AL CALOR DE 12mm. 1.22 x 2.44 m (260.88 KG.)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>250.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>500.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>500.00</baseImponible>
+<valor>60.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacionelectronica@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2815402555</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">64061</campoAdicional>
+</infoAdicional>
+</notaCredito>

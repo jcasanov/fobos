@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000007848</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>06/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000007848</guiaRemision>
+<razonSocialComprador>GANCHOZO FAUBLA SIXTO VINICIO</razonSocialComprador>
+<identificacionComprador>1715531917001</identificacionComprador>
+<totalSinImpuestos>118.42</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>118.42</baseImponible>
+<valor>14.21</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>132.63</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>2</codigoPrincipal>
+<descripcion>SERVICIO DE REPARACION EQUIPOS MILWAUKEE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>60.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>60.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="DS-8"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>60.00</baseImponible>
+<valor>7.20</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>VG</codigoPrincipal>
+<descripcion>MANDRIL 1/2X1/2 CON LLAVE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>58.42</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>58.42</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="DS-8"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>58.42</baseImponible>
+<valor>7.01</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">six_ganchozo@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">098091413</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">062074</campoAdicional>
+</infoAdicional>
+</factura>

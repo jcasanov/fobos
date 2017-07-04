@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268576</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268576</guiaRemision>
+<razonSocialComprador>SOTO CAIZA VICTOR JAVIER / HIDRO INSTALACIONES CERO FUGAS</razonSocialComprador>
+<identificacionComprador>1803550548001</identificacionComprador>
+<totalSinImpuestos>2566.78</totalSinImpuestos>
+<totalDescuento>378.51</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>2566.78</baseImponible>
+<valor>308.01</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>2874.79</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>96729</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 4" 25SDQP  25 GPM SIST. DE PRESION CONSTANTE (93802501) 215 PIES</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1679.67</precioUnitario>
+<descuento>251.95</descuento>
+<precioTotalSinImpuesto>1427.72</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1427.72</baseImponible>
+<valor>171.33</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>61795</codigoPrincipal>
+<descripcion>TANQUE DE PRESION FIBRA DE VIDRIO WM-14WB/WM0180 ENTREGA DE 14.1 GLS POR CICLO DE 30/50 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>581.32</precioUnitario>
+<descuento>58.13</descuento>
+<precioTotalSinImpuesto>523.19</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="WELL M"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>523.19</baseImponible>
+<valor>62.78</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>61796</codigoPrincipal>
+<descripcion>TANQUE DE PRESION FIBRA DE VIDRIO WM-20WB/WM0235 ENTREGA DE 18.6 GLS POR CICLO DE 30/50 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>684.30</precioUnitario>
+<descuento>68.43</descuento>
+<precioTotalSinImpuesto>615.87</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="WELL M"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>615.87</baseImponible>
+<valor>73.90</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">soto_vj@yahoo.es</campoAdicional>
+<campoAdicional nombre="telefono-movil">089620209</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">053691</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,43 @@
+database aceros
+screen size 24 by 80
+{
+z23_compania       [f000       ]
+z23_localidad      [f001  ]
+z23_codcli         [f002       ]
+z23_tipo_trn       [a0]
+z23_num_trn        [f003       ]
+z23_orden          [f004       ]
+z23_areaneg        [f005  ]
+z23_tipo_doc       [a1]
+z23_num_doc        [f006           ]
+z23_div_doc        [f007  ]
+z23_tipo_favor     [a2]
+z23_doc_favor      [f008       ]
+z23_valor_cap      [f009          ]
+z23_valor_int      [f010          ]
+z23_valor_mora     [f011         ]
+z23_saldo_cap      [f012          ]
+z23_saldo_int      [f013          ]
+}
+end
+tables
+cxct023
+attributes
+f000 = cxct023.z23_compania;
+f001 = cxct023.z23_localidad;
+f002 = cxct023.z23_codcli;
+a0 = cxct023.z23_tipo_trn;
+f003 = cxct023.z23_num_trn;
+f004 = cxct023.z23_orden;
+f005 = cxct023.z23_areaneg;
+a1 = cxct023.z23_tipo_doc;
+f006 = cxct023.z23_num_doc;
+f007 = cxct023.z23_div_doc;
+a2 = cxct023.z23_tipo_favor;
+f008 = cxct023.z23_doc_favor;
+f009 = cxct023.z23_valor_cap;
+f010 = cxct023.z23_valor_int;
+f011 = cxct023.z23_valor_mora;
+f012 = cxct023.z23_saldo_cap;
+f013 = cxct023.z23_saldo_int;
+end

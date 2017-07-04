@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176420</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>30/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176420</guiaRemision>
+<razonSocialComprador>LA CASA DEL PERNO</razonSocialComprador>
+<identificacionComprador>1704998119001</identificacionComprador>
+<totalSinImpuestos>256.77</totalSinImpuestos>
+<totalDescuento>45.33</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>256.77</baseImponible>
+<valor>30.81</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>287.58</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>98070</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 00346 SDS BITS DE 1/2" X 6-1/4"</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>8.37</precioUnitario>
+<descuento>12.56</descuento>
+<precioTotalSinImpuesto>71.14</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>71.14</baseImponible>
+<valor>8.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150684</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 00693 DE 3/8" X 6-1/4" SDS BULK</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>6.24</precioUnitario>
+<descuento>9.36</descuento>
+<precioTotalSinImpuesto>53.04</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>53.04</baseImponible>
+<valor>6.36</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97901</codigoPrincipal>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7420 SD1 DE 1/2" X 2-3/4"</descripcion>
+<cantidad>50.00</cantidad>
+<precioUnitario>0.85</precioUnitario>
+<descuento>6.38</descuento>
+<precioTotalSinImpuesto>36.12</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>36.12</baseImponible>
+<valor>4.33</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99239</codigoPrincipal>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7423 SD1 DE 1/2" X 4-1/2"</descripcion>
+<cantidad>50.00</cantidad>
+<precioUnitario>0.97</precioUnitario>
+<descuento>7.28</descuento>
+<precioTotalSinImpuesto>41.22</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>41.22</baseImponible>
+<valor>4.95</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98301</codigoPrincipal>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7414 SD1 DE 3/8" X 3-1/2"</descripcion>
+<cantidad>100.00</cantidad>
+<precioUnitario>0.65</precioUnitario>
+<descuento>9.75</descuento>
+<precioTotalSinImpuesto>55.25</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>55.25</baseImponible>
+<valor>6.63</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">compras@casadelperno.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2334098</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">049717</campoAdicional>
+</infoAdicional>
+</factura>

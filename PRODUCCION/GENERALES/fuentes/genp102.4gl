@@ -167,7 +167,8 @@ CONSTRUCT BY NAME expr_sql ON  g02_localidad, g02_nombre, g02_abreviacion ,
                   END IF
             END IF
             IF INFIELD(g02_ciudad) THEN
-         	  CALL fl_ayuda_ciudad('00') RETURNING cod_ciudad, desc_ciudad
+         	  CALL fl_ayuda_ciudad('00', 0)
+			RETURNING cod_ciudad, desc_ciudad
                   LET rm_loc.g02_ciudad = cod_ciudad
                   DISPLAY BY NAME rm_loc.g02_ciudad, desc_ciudad 
             END IF
@@ -377,7 +378,8 @@ INPUT BY NAME  	rm_loc.g02_nombre,    rm_loc.g02_abreviacion,
                 WITHOUT DEFAULTS 
 	ON KEY(F2)
             IF INFIELD(g02_ciudad) THEN
-         	  CALL fl_ayuda_ciudad('00') RETURNING cod_ciudad, desc_ciudad
+         	  CALL fl_ayuda_ciudad('00', 0)
+			RETURNING cod_ciudad, desc_ciudad
                   LET rm_loc.g02_ciudad = cod_ciudad
                   DISPLAY BY NAME rm_loc.g02_ciudad, desc_ciudad 
             END IF

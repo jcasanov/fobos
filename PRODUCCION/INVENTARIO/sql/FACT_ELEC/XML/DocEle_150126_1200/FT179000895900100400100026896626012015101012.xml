@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268966</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>26/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268966</guiaRemision>
+<razonSocialComprador>PLACENCIA LLORI CHRISTIAN FABIAN</razonSocialComprador>
+<identificacionComprador>1716918261001</identificacionComprador>
+<totalSinImpuestos>461.92</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>461.92</baseImponible>
+<valor>55.43</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>517.35</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>12756</codigoPrincipal>
+<descripcion>CILINDRO HIDR S-A RC RC-55 5 Ton.  5" CARRERA 8.5" ALTURA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>461.92</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>461.92</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>461.92</baseImponible>
+<valor>55.43</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">llorillerena-4@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0993392971</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">062193</campoAdicional>
+<campoAdicional nombre="Observaciones">TARJETA DINERS 3 MESES</campoAdicional>
+</infoAdicional>
+</factura>

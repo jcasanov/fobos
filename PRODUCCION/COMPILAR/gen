@@ -1,0 +1,6 @@
+rm arch.*
+tar cvfjT arch.42f.bz2 files.42f
+tar cvfjT arch.frm.bz2 files.frm
+tar cvfjT arch.42m.bz2 files.42m
+tar cvfjT arch.42r.bz2 files.42r
+tar cvfjT arch.4gi.bz2 files.4gi

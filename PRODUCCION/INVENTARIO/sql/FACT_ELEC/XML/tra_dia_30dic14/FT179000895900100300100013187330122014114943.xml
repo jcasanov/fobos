@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131873</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>30/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131873</guiaRemision>
+<razonSocialComprador>CONMACO CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>0601708779001</identificacionComprador>
+<totalSinImpuestos>183.63</totalSinImpuestos>
+<totalDescuento>32.41</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>183.63</baseImponible>
+<valor>22.04</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>205.67</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99065</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA PALMIRA NEGRO PRIMERA</descripcion>
+<cantidad>22.00</cantidad>
+<precioUnitario>9.82</precioUnitario>
+<descuento>32.41</descuento>
+<precioTotalSinImpuesto>183.63</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>183.63</baseImponible>
+<valor>22.04</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">ventas@conmaco.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2440478</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">042011</campoAdicional>
+</infoAdicional>
+</factura>

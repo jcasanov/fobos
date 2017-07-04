@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268946</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268946</guiaRemision>
+<razonSocialComprador>HIDALGO GUILCAPI KLEBER ORLANDO</razonSocialComprador>
+<identificacionComprador>0602720542</identificacionComprador>
+<totalSinImpuestos>180.11</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>180.11</baseImponible>
+<valor>21.61</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>201.72</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102286</codigoPrincipal>
+<descripcion>SOPLADOR 0884-20 INALAMBRICO M18</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>180.11</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>180.11</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>180.11</baseImponible>
+<valor>21.61</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">orlando-hidalgo@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3188589</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064379</campoAdicional>
+<campoAdicional nombre="Observaciones">TARJETA AMERICAN EXPRESS</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268338</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>12/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268338</guiaRemision>
+<razonSocialComprador>SUINCO E INGIN.  CIA.LTDA.</razonSocialComprador>
+<identificacionComprador>1790886824001</identificacionComprador>
+<totalSinImpuestos>1006.06</totalSinImpuestos>
+<totalDescuento>206.06</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1006.06</baseImponible>
+<valor>120.73</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1126.79</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>94519</codigoPrincipal>
+<descripcion>VALVULA COMPUERTA  ACERO FORJADO BRIDADA IT-411 DE 2" 150 PSI</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>202.02</precioUnitario>
+<descuento>206.06</descuento>
+<precioTotalSinImpuesto>1006.06</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INOX T"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1006.06</baseImponible>
+<valor>120.73</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">suinco@cablemodem.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2599591</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">029002</campoAdicional>
+<campoAdicional nombre="Observaciones">PED.ING.GODOY</campoAdicional>
+</infoAdicional>
+</factura>

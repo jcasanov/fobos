@@ -1,0 +1,38 @@
+DATABASE aceros
+SCREEN
+{
+ TRANSACCIONES ACTIVOS FIJOS
+
+ [lb|lbl0   |lbl1   |lbl2                          ]
+[c1|c00    |c01    |c002                          ] 
+[c1|c00    |c01    |c002                          ] 
+[c1|c00    |c01    |c002                          ] 
+[c1|c00    |c01    |c002                          ] 
+[c1|c00    |c01    |c002                          ] 
+[c1|c00    |c01    |c002                          ] 
+[c1|c00    |c01    |c002                          ] 
+[c1|c00    |c01    |c002                          ] 
+[c1|c00    |c01    |c002                          ] 
+[c1|c00    |c01    |c002                          ] 
+
+}
+
+TABLES
+actt012
+actt010
+
+ATTRIBUTES
+c1   = a12_codigo_tran, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c00  = a12_numero_tran, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c01  = a12_codigo_bien, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c002 = a12_referencia,  NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+lb   = formonly.bt_codigo_tran, 	NOENTRY, WIDGET='BUTTON', CONFIG='F15';
+lbl0 = formonly.bt_numero_tran, 	NOENTRY, WIDGET='BUTTON', CONFIG='F16';
+lbl1 = formonly.bt_codigo_bien, 	NOENTRY, WIDGET='BUTTON', CONFIG='F17';
+lbl2 = formonly.bt_referencia,	 	NOENTRY, WIDGET='BUTTON', CONFIG='F18';
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_tran_activos[10] (a12_codigo_tran, a12_numero_tran,
+					a12_codigo_bien, a12_referencia)
+

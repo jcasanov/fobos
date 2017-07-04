@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268842</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268842</guiaRemision>
+<razonSocialComprador>HILSEA INVESTMENTS LIMITED</razonSocialComprador>
+<identificacionComprador>1791006356001</identificacionComprador>
+<totalSinImpuestos>2907.34</totalSinImpuestos>
+<totalDescuento>323.04</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>2907.34</baseImponible>
+<valor>348.88</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>3256.22</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99860</codigoPrincipal>
+<descripcion>PAQUETE HIDRAULICO DE CAMARA P/MOD.CR32-5 (96416279)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2795.07</precioUnitario>
+<descuento>279.51</descuento>
+<precioTotalSinImpuesto>2515.56</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2515.56</baseImponible>
+<valor>301.87</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>93044</codigoPrincipal>
+<descripcion>SELLO MECANICO P/CR-32/45/64/90 (96525458)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>435.31</precioUnitario>
+<descuento>43.53</descuento>
+<precioTotalSinImpuesto>391.78</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="JUEGO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>391.78</baseImponible>
+<valor>47.01</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">fernandos@hilsea.com.ec</campoAdicional>
+<campoAdicional nombre="Email">paulv@hilsea.com.ec;anam@hilsea.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2387911</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">029071</campoAdicional>
+<campoAdicional nombre="Observaciones">PEDING.MARCO GODOY</campoAdicional>
+</infoAdicional>
+</factura>

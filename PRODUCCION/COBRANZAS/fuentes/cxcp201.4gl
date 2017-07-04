@@ -309,6 +309,9 @@ IF NOT int_flag THEN
 						r_b12.b12_num_comp)
 		END IF
 	END IF
+	IF rm_z21.z21_tipo_doc = "NC" THEN
+		CALL generar_doc_elec()
+	END IF
 	IF vm_num_rows = vm_max_rows THEN
 		LET vm_num_rows = 1
 	ELSE
@@ -633,7 +636,7 @@ INPUT BY NAME rm_z21.z21_codcli, rm_z21.z21_tipo_doc, flag_impto,
 			CALL fl_lee_cliente_general(rm_z21.z21_codcli)
 		 		RETURNING r_cli_gen.*
 			IF r_cli_gen.z01_codcli IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'Cliente no existe.','exclamation')
+				--CALL fl_mostrar_mensaje('Cliente no existe.','exclamation')
 				CALL fl_mostrar_mensaje('Cliente no existe.','exclamation')
 				NEXT FIELD z21_codcli
 			END IF
@@ -646,7 +649,7 @@ INPUT BY NAME rm_z21.z21_codcli, rm_z21.z21_tipo_doc, flag_impto,
 							rm_z21.z21_codcli)
 		 		RETURNING r_cli.*
 			IF r_cli.z02_compania IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'Cliente no está activado para la compañía.','exclamation')
+				--CALL fl_mostrar_mensaje('Cliente no está activado para la compañía.','exclamation')
 				CALL fl_mostrar_mensaje('Cliente no está activado para la compañía.','exclamation')
 				NEXT FIELD z21_codcli
 			END IF
@@ -659,18 +662,15 @@ INPUT BY NAME rm_z21.z21_codcli, rm_z21.z21_tipo_doc, flag_impto,
 			CALL fl_lee_tipo_doc(rm_z21.z21_tipo_doc)
 				RETURNING r_tip.* 
 			IF r_tip.z04_tipo_doc IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'Tipo de documento no existe.','exclamation')
 				CALL fl_mostrar_mensaje('Tipo de documento no existe.','exclamation')
 				NEXT FIELD z21_tipo_doc
 			END IF
 			DISPLAY r_tip.z04_nombre TO tit_tipo_doc
 			IF r_tip.z04_tipo <> 'F' THEN
-				--CALL fgl_winmessage(vg_producto,'Tipo de documento debe ser a favor.','exclamation')
 				CALL fl_mostrar_mensaje('Tipo de documento debe ser a favor.','exclamation')
 				NEXT FIELD z21_tipo_doc
 			END IF
 			IF rm_z21.z21_tipo_doc = 'PA' THEN
-				--CALL fgl_winmessage(vg_producto,'Los pagos anticipados entran por caja.','exclamation')
 				CALL fl_mostrar_mensaje('Los pagos anticipados entran por caja.','exclamation')
 				NEXT FIELD z21_tipo_doc
 			END IF
@@ -692,7 +692,7 @@ INPUT BY NAME rm_z21.z21_codcli, rm_z21.z21_tipo_doc, flag_impto,
 							rm_z21.z21_subtipo)
 				RETURNING r_sub.*
 			IF r_sub.g12_tiporeg IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'No existe este subtipo de documento.','exclamation')
+				--CALL fl_mostrar_mensaje('No existe este subtipo de documento.','exclamation')
 				CALL fl_mostrar_mensaje('No existe este subtipo de documento.','exclamation')
 				NEXT FIELD z21_subtipo
 			END IF
@@ -703,7 +703,7 @@ INPUT BY NAME rm_z21.z21_codcli, rm_z21.z21_tipo_doc, flag_impto,
 			CALL fl_lee_area_negocio(vg_codcia,rm_z21.z21_areaneg)
 				RETURNING r_are.*
 			IF r_are.g03_areaneg IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'Area de Negocio no existe.','exclamation')
+				--CALL fl_mostrar_mensaje('Area de Negocio no existe.','exclamation')
 				CALL fl_mostrar_mensaje('Area de Negocio no existe.','exclamation')
 				NEXT FIELD z21_areaneg
 			END IF
@@ -719,14 +719,14 @@ INPUT BY NAME rm_z21.z21_codcli, rm_z21.z21_tipo_doc, flag_impto,
 		CALL fl_lee_grupo_linea(vg_codcia, rm_z21.z21_linea)
 			RETURNING r_g20.*
 		IF r_g20.g20_grupo_linea IS NULL THEN
-			--CALL fgl_winmessage(vg_producto,'Grupo de linea no existe.','exclamation')
+			--CALL fl_mostrar_mensaje('Grupo de linea no existe.','exclamation')
 			CALL fl_mostrar_mensaje('Grupo de linea no existe.','exclamation')
 			CLEAR n_linea
 			NEXT FIELD z21_linea
 		END IF
 		IF rm_z21.z21_areaneg IS NOT NULL THEN
 			IF rm_z21.z21_areaneg <> r_g20.g20_areaneg THEN
-				--CALL fgl_winmessage(vg_producto,'El grupo de línea no pertenece al área de negocio.','exclamation')
+				--CALL fl_mostrar_mensaje('El grupo de línea no pertenece al área de negocio.','exclamation')
 				CALL fl_mostrar_mensaje('El grupo de línea no pertenece al área de negocio.','exclamation')
 				CLEAR n_linea
 				NEXT FIELD z21_linea 
@@ -744,7 +744,7 @@ INPUT BY NAME rm_z21.z21_codcli, rm_z21.z21_tipo_doc, flag_impto,
 			CALL fl_lee_moneda(rm_z21.z21_moneda)
 				RETURNING r_mon.* 
 			IF r_mon.g13_moneda IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'Moneda no existe.','exclamation')
+				--CALL fl_mostrar_mensaje('Moneda no existe.','exclamation')
 				CALL fl_mostrar_mensaje('Moneda no existe.','exclamation')
 				NEXT FIELD z21_moneda
 			END IF
@@ -760,7 +760,7 @@ INPUT BY NAME rm_z21.z21_codcli, rm_z21.z21_tipo_doc, flag_impto,
 							rg_gen.g00_moneda_base)
 					RETURNING r_mon_par.*
 				IF r_mon_par.g14_serial IS NULL THEN
-					--CALL fgl_winmessage(vg_producto,'La paridad para está moneda no existe.','exclamation')
+					--CALL fl_mostrar_mensaje('La paridad para está moneda no existe.','exclamation')
 					CALL fl_mostrar_mensaje('La paridad para está moneda no existe.','exclamation')
 					NEXT FIELD z21_moneda
 				END IF
@@ -778,7 +778,6 @@ INPUT BY NAME rm_z21.z21_codcli, rm_z21.z21_tipo_doc, flag_impto,
 			IF rm_z21.z21_fecha_emi > TODAY
 			OR (MONTH(rm_z21.z21_fecha_emi) <> MONTH(TODAY)
 			OR YEAR(rm_z21.z21_fecha_emi) <> YEAR(TODAY)) THEN
-				--CALL fgl_winmessage(vg_producto,'La fecha de emisión debe ser de hoy o del presente mes.','exclamation')
 				CALL fl_mostrar_mensaje('La fecha de emisión debe ser de hoy o del presente mes.','exclamation')
 				NEXT FIELD z21_fecha_emi
 			END IF
@@ -1192,6 +1191,31 @@ LET comando = 'cd ..', vg_separador, '..', vg_separador, 'CONTABILIDAD',
 	vg_separador, 'fuentes', vg_separador, run_prog, 'ctbp201 ', vg_base,
 	' ', 'CB', ' ', vg_codcia, ' "', tipo_comp, '" ', num_comp
 RUN comando
+
+END FUNCTION
+
+
+
+FUNCTION generar_doc_elec()
+DEFINE comando		VARCHAR(250)
+DEFINE servid		VARCHAR(10)
+DEFINE mensaje		VARCHAR(250)
+
+LET servid  = FGL_GETENV("INFORMIXSERVER")
+CASE servid
+	WHEN "ACGYE01"
+		LET servid = "idsgye01"
+	WHEN "ACUIO01"
+		LET servid = "idsuio01"
+	WHEN "ACUIO02"
+		LET servid = "idsuio02"
+END CASE
+LET comando = "fglgo gen_tra_ele ", vg_base CLIPPED, " ", servid CLIPPED, " ",
+		vg_codcia, " ", vg_codloc, " ", rm_z21.z21_tipo_doc, " ",
+		rm_z21.z21_num_doc, " NCC ", rm_z21.z21_codcli
+RUN comando
+LET mensaje = FGL_GETENV("HOME"), '/tmp/NC_ELEC/'
+CALL fl_mostrar_mensaje('Archivo XML de NOTA CREDITO Generado en: ' || mensaje, 'info')
 
 END FUNCTION
 

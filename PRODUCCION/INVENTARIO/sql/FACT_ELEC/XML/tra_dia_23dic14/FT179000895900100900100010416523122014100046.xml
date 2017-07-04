@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104165</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104165</guiaRemision>
+<razonSocialComprador>MARTINEZ TENESACA JOSE FRANCISCO</razonSocialComprador>
+<identificacionComprador>0911586824001</identificacionComprador>
+<totalSinImpuestos>2747.40</totalSinImpuestos>
+<totalDescuento>484.84</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>2747.40</baseImponible>
+<valor>329.69</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>3077.09</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99541</codigoPrincipal>
+<descripcion>BOMBA CENTRIF STANDARD C-MOTOR 5DB1.5-CCMFHF DE 5HP/220V/60/3F 3500RPM IMP.5-3/4"(93190131)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1616.12</precioUnitario>
+<descuento>484.84</descuento>
+<precioTotalSinImpuesto>2747.40</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2747.40</baseImponible>
+<valor>329.69</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">fmt3848@yahoo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2883127</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016683</campoAdicional>
+</infoAdicional>
+</factura>

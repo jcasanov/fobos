@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000034026</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>SBC OFFICE CENTER, PISO 1 OFICINA 1-19,</dirEstablecimiento>
+<dirPartida>AV. JUAN TANCA MARENGO KM.1.7</dirPartida>
+<razonSocialTransportista>MANUEL MAGALLANES (ACERO COMERCCIAL S.A)</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>15/12/2014</fechaIniTransporte>
+<fechaFinTransporte>15/12/2014</fechaFinTransporte>
+<placa>  GSC-8976</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0992780568001</identificacionDestinatario>
+<razonSocialDestinatario>PROMOTORA INMOBILIARIA PORTAL S.A. PROPORTALSA</razonSocialDestinatario>
+<dirDestinatario>URB.BOSQUES DEL RIO-ISLA MOCOLI</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>01/07/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>26935</codigoInterno>
+<descripcion>TUBO ABASTO-LLAVE ANGULAR INODORO E266.02 DH-CR FLEXIBLE DE 12"</descripcion>
+<cantidad>10.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="pend" valor="pend"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>27473</codigoInterno>
+<descripcion>LLAVE ANGULAR E269.01 DH CR P/MANGUERA CON NEPLO Y ROSETA</descripcion>
+<cantidad>20.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="pend" valor="pend"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>68913</codigoInterno>
+<descripcion>LAVABO DE PORCELANA PARA EMPOTRAR PREPONCHADO E231-BL ELEA OVAL BLANCO</descripcion>
+<cantidad>10.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="E231-BL" valor="E231-BL"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>71081</codigoInterno>
+<descripcion>INODORO RESIDENCIAL UNA PIEZA E181 - BL  ISCHIA PLUS BLANCO</descripcion>
+<cantidad>10.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="E181-BL" valor="E181-BL"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>91367</codigoInterno>
+<descripcion>EMPAQUE AC.1 ANILLO DE CERA P/ INODOROS</descripcion>
+<cantidad>10.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="AC.1 ANILLO DE CERA" valor="AC.1 ANILLO DE CERA"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>93876</codigoInterno>
+<descripcion>TORNILLO EPER-DH C/TACOS</descripcion>
+<cantidad>10.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="EPER-DH" valor="EPER-DH"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>99156</codigoInterno>
+<descripcion>GRIFERIA DE LAVABO 1-H E182/B3  FLOW CR</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="E182/B3  FLOW CR" valor="E182/B3  FLOW CR"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>99156</codigoInterno>
+<descripcion>GRIFERIA DE LAVABO 1-H E182/B3  FLOW CR</descripcion>
+<cantidad>8.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="E182/B3  FLOW CR" valor="E182/B3  FLOW CR"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+<campoAdicional nombre="telefono-movil">5100633</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">015218</campoAdicional>
+</infoAdicional>
+</guiaRemision>

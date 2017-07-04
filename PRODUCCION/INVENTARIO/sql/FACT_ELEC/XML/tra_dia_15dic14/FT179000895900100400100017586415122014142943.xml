@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175864</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>CIPRESES N65-150 Y EUCALIPTOS</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175864</guiaRemision>
+<razonSocialComprador>SYNTEKOCOMPANY S.A</razonSocialComprador>
+<identificacionComprador>1792254590001</identificacionComprador>
+<totalSinImpuestos>137.56</totalSinImpuestos>
+<totalDescuento>5.90</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>131.66</baseImponible>
+<valor>15.80</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>147.46</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5418</codigoPrincipal>
+<descripcion>TUBO GALV. ASTM A-53   TIPO "T" DE 2-1/2" x 6.40 m.  ESPESOR 5 mm.</descripcion>
+<cantidad>0.67</cantidad>
+<precioUnitario>131.90</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>88.37</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="TUGALT" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>88.37</baseImponible>
+<valor>10.60</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2067</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 90° DE 2-1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>11.77</precioUnitario>
+<descuento>1.41</descuento>
+<precioTotalSinImpuesto>10.36</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="CIFUNSA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>10.36</baseImponible>
+<valor>1.24</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3272</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 2-1/2" x 3"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>7.86</precioUnitario>
+<descuento>2.83</descuento>
+<precioTotalSinImpuesto>20.75</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>20.75</baseImponible>
+<valor>2.49</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4573</codigoPrincipal>
+<descripcion>TEE GALV. CLASE 150 DE 1-1/2"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>6.07</precioUnitario>
+<descuento>1.46</descuento>
+<precioTotalSinImpuesto>10.68</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="CIFUNSA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>10.68</baseImponible>
+<valor>1.28</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>92340</codigoPrincipal>
+<descripcion>BUSHING GALV. CLASE 150 DE 1/2" x 1/4"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>0.85</precioUnitario>
+<descuento>0.20</descuento>
+<precioTotalSinImpuesto>1.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="CIFUNSA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.50</baseImponible>
+<valor>0.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

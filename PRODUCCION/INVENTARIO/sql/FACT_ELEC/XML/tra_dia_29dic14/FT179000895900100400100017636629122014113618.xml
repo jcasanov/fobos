@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176366</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>29/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176366</guiaRemision>
+<razonSocialComprador>SILVA TORRES WASHINGTON FERNANDO</razonSocialComprador>
+<identificacionComprador>1709689580001</identificacionComprador>
+<totalSinImpuestos>37.82</totalSinImpuestos>
+<totalDescuento>3.42</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>37.82</baseImponible>
+<valor>4.54</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>42.36</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>92199</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 90° DE 1/2"</descripcion>
+<cantidad>12.00</cantidad>
+<precioUnitario>1.14</precioUnitario>
+<descuento>1.09</descuento>
+<precioTotalSinImpuesto>12.59</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>12.59</baseImponible>
+<valor>1.51</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2112</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150  X 45° DE 1/2"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>1.55</precioUnitario>
+<descuento>0.62</descuento>
+<precioTotalSinImpuesto>5.58</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.58</baseImponible>
+<valor>0.67</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99945</codigoPrincipal>
+<descripcion>VALVULA COMPUERTA  BRONCE ROSCADA DE 1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>6.32</precioUnitario>
+<descuento>0.51</descuento>
+<precioTotalSinImpuesto>5.81</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FIV"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.81</baseImponible>
+<valor>0.70</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>92616</codigoPrincipal>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 1/2"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>3.76</precioUnitario>
+<descuento>1.20</descuento>
+<precioTotalSinImpuesto>13.84</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>13.84</baseImponible>
+<valor>1.66</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">wfernandosilva1967@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0992252509</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">063936</campoAdicional>
+</infoAdicional>
+</factura>

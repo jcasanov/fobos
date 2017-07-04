@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176046</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176046</guiaRemision>
+<razonSocialComprador>PEC PROJECT ENGINEERING & CONSTRUCTION CIA. LTDA</razonSocialComprador>
+<identificacionComprador>1791992571001</identificacionComprador>
+<totalSinImpuestos>231.38</totalSinImpuestos>
+<totalDescuento>40.84</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>231.38</baseImponible>
+<valor>27.77</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>259.15</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>13656</codigoPrincipal>
+<descripcion>LLAVE DE TUBO RECTA NO. 18 (31025)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>55.82</precioUnitario>
+<descuento>16.75</descuento>
+<precioTotalSinImpuesto>94.89</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>94.89</baseImponible>
+<valor>11.39</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>13658</codigoPrincipal>
+<descripcion>LLAVE DE TUBO RECTA NO. 24 (31030)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>80.29</precioUnitario>
+<descuento>24.09</descuento>
+<precioTotalSinImpuesto>136.49</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>136.49</baseImponible>
+<valor>16.38</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2380660</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">038525</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000114177</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000114177</guiaRemision>
+<razonSocialComprador>DUQUE ESPARZA MIREYA ALEXANDRA</razonSocialComprador>
+<identificacionComprador>1711849842001</identificacionComprador>
+<totalSinImpuestos>305.32</totalSinImpuestos>
+<totalDescuento>33.93</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>305.32</baseImponible>
+<valor>36.64</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>341.96</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>100695</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS 2238130 CAMPEON PLUS BLANCO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>57.23</precioUnitario>
+<descuento>11.45</descuento>
+<precioTotalSinImpuesto>103.01</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>103.01</baseImponible>
+<valor>12.36</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100696</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS 2238733 CAMPEON PLUS BONE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>62.94</precioUnitario>
+<descuento>6.29</descuento>
+<precioTotalSinImpuesto>56.65</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>56.65</baseImponible>
+<valor>6.80</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>94537</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA CON PEDESTAL PREPONCHADO JS5710130 SHELBY BLANCO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>26.94</precioUnitario>
+<descuento>5.39</descuento>
+<precioTotalSinImpuesto>48.49</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>48.49</baseImponible>
+<valor>5.82</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>95726</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA CON PEDESTAL PREPONCHADO JS5710733 SHELBY C/P BONE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>29.69</precioUnitario>
+<descuento>2.97</descuento>
+<precioTotalSinImpuesto>26.72</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>26.72</baseImponible>
+<valor>3.21</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>26935</codigoPrincipal>
+<descripcion>TUBO ABASTO-LLAVE ANGULAR INODORO E266.02 DH-CR FLEXIBLE DE 12"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>10.07</precioUnitario>
+<descuento>3.02</descuento>
+<precioTotalSinImpuesto>27.19</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>27.19</baseImponible>
+<valor>3.26</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99705</codigoPrincipal>
+<descripcion>DESAGUE DE LAVABO E2460.01 RA DH BLC C/REJILLA Y SIFON DE 1-1/4"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>6.98</precioUnitario>
+<descuento>2.09</descuento>
+<precioTotalSinImpuesto>18.85</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>18.85</baseImponible>
+<valor>2.26</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>91367</codigoPrincipal>
+<descripcion>EMPAQUE AC.1 ANILLO DE CERA P/ INODOROS</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>2.66</precioUnitario>
+<descuento>0.80</descuento>
+<precioTotalSinImpuesto>7.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7.18</baseImponible>
+<valor>0.86</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>42768</codigoPrincipal>
+<descripcion>REJILLA TRADICIONAL E591.01.01 T-75 x 50mm. ALUMINIO</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>3.83</precioUnitario>
+<descuento>1.92</descuento>
+<precioTotalSinImpuesto>17.23</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>17.23</baseImponible>
+<valor>2.07</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">mireyadu@yahoo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2606026</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">058165</campoAdicional>
+</infoAdicional>
+</factura>

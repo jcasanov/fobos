@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048185</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento></dirEstablecimiento>
+<dirPartida>AV LA PRENSA</dirPartida>
+<razonSocialTransportista>SERVIENTREGA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0991285679001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>18/12/2014</fechaIniTransporte>
+<fechaFinTransporte>18/12/2014</fechaFinTransporte>
+<placa></placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1791725530001</identificacionDestinatario>
+<razonSocialDestinatario>COELEC S.C.</razonSocialDestinatario>
+<dirDestinatario>STO.DOMINGO</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>17/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>100326</codigoInterno>
+<descripcion>CADENA LCER2020NP P/TECLE ELECTRICO 3F. DE 2 Y 3 Ton.</descripcion>
+<cantidad>8.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KITO"/>
+<detAdicional nombre="MODELO" valor="LCER2020NP"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>100362</codigoInterno>
+<descripcion>CABLE ELECTRICO 16/4P P/BOTONERA DE TECLE</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KITO"/>
+<detAdicional nombre="MODELO" valor="16/4P"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>100362</codigoInterno>
+<descripcion>CABLE ELECTRICO 16/4P P/BOTONERA DE TECLE</descripcion>
+<cantidad>5.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KITO"/>
+<detAdicional nombre="MODELO" valor="16/4P"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>100374</codigoInterno>
+<descripcion>TECLE ELECTRICO A CADENA NER020L DE 2 Ton. 230/3f BAJA VELOC. S/CADENA Y CABLE</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KITO"/>
+<detAdicional nombre="MODELO" valor="NER020L"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>99802</codigoInterno>
+<descripcion>TROLLEY PTS2030 DE 2-1/2 A 3 Ton.</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KITO"/>
+<detAdicional nombre="MODELO" valor="PTS2030"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2752485</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">037987</campoAdicional>
+</infoAdicional>
+</guiaRemision>

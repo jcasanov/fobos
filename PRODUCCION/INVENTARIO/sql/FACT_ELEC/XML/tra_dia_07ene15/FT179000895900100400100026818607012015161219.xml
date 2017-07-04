@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268186</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268186</guiaRemision>
+<razonSocialComprador>ENCALADA VALAREZO DANIEL ENRIQUE</razonSocialComprador>
+<identificacionComprador>1707874747001</identificacionComprador>
+<totalSinImpuestos>741.85</totalSinImpuestos>
+<totalDescuento>44.94</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>741.85</baseImponible>
+<valor>89.02</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>830.87</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5416</codigoPrincipal>
+<descripcion>TUBO GALV. ASTM A-53   TIPO "T" DE 2" x 6 m.  ESPESOR 3.6 mm.</descripcion>
+<cantidad>7.00</cantidad>
+<precioUnitario>58.89</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>412.23</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>412.23</baseImponible>
+<valor>49.47</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4571</codigoPrincipal>
+<descripcion>TEE GALV. CLASE 150 DE 2"</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>10.93</precioUnitario>
+<descuento>13.12</descuento>
+<precioTotalSinImpuesto>96.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>96.18</baseImponible>
+<valor>11.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2059</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 90° DE 1"</descripcion>
+<cantidad>60.00</cantidad>
+<precioUnitario>3.30</precioUnitario>
+<descuento>23.76</descuento>
+<precioTotalSinImpuesto>174.24</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>174.24</baseImponible>
+<valor>20.91</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4554</codigoPrincipal>
+<descripcion>TEE GALV. CLASE 150 REDUCIDA DE 1-1/4" x 1"</descripcion>
+<cantidad>7.00</cantidad>
+<precioUnitario>6.00</precioUnitario>
+<descuento>5.04</descuento>
+<precioTotalSinImpuesto>36.96</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>36.96</baseImponible>
+<valor>4.44</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3666</codigoPrincipal>
+<descripcion>REDUCCION GALV. CLASE 150 DE 1-1/2" x 1"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3.60</precioUnitario>
+<descuento>0.43</descuento>
+<precioTotalSinImpuesto>3.17</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.17</baseImponible>
+<valor>0.38</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1652</codigoPrincipal>
+<descripcion>BUSHING GALV. CLASE 150 DE 1-1/2" x 1"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3.27</precioUnitario>
+<descuento>0.39</descuento>
+<precioTotalSinImpuesto>2.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.88</baseImponible>
+<valor>0.35</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6003</codigoPrincipal>
+<descripcion>UNION GALV. CLASE 150 DE 1"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>1.70</precioUnitario>
+<descuento>0.61</descuento>
+<precioTotalSinImpuesto>4.49</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.49</baseImponible>
+<valor>0.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5997</codigoPrincipal>
+<descripcion>UNION GALV. CLASE 150 DE 2"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>4.43</precioUnitario>
+<descuento>1.59</descuento>
+<precioTotalSinImpuesto>11.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>11.70</baseImponible>
+<valor>1.40</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">d.encalada@andinanet.net</campoAdicional>
+<campoAdicional nombre="telefono-movil">2251631</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">023520</campoAdicional>
+</infoAdicional>
+</factura>

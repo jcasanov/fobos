@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175827</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>PASAJE SAN PEDRO LOTE 296 Y EL VERGEL</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175827</guiaRemision>
+<razonSocialComprador>SAHI SANCHEZ-HIDALGO ANCLAJES Y FIJACIONES</razonSocialComprador>
+<identificacionComprador>1707172001001</identificacionComprador>
+<totalSinImpuestos>85.51</totalSinImpuestos>
+<totalDescuento>12.83</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>72.68</baseImponible>
+<valor>8.72</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>81.40</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102060</codigoPrincipal>
+<descripcion>CARCASA 23-16-1410 INTERNA P/TALADRO 4297-1</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>65.60</precioUnitario>
+<descuento>9.84</descuento>
+<precioTotalSinImpuesto>55.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>55.76</baseImponible>
+<valor>6.69</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150279</codigoPrincipal>
+<descripcion>PINION 32-60-1041 P/ 4292</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>19.91</precioUnitario>
+<descuento>2.99</descuento>
+<precioTotalSinImpuesto>16.92</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>16.92</baseImponible>
+<valor>2.03</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131813</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>29/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131813</guiaRemision>
+<razonSocialComprador>QUIMBIAMBA IMBAQUINGO MILTON JAVIER</razonSocialComprador>
+<identificacionComprador>1721088571001</identificacionComprador>
+<totalSinImpuestos>855.80</totalSinImpuestos>
+<totalDescuento>150.06</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>855.80</baseImponible>
+<valor>102.70</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>958.50</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>98624</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA MINDO CHOCOLATE PRIMERA</descripcion>
+<cantidad>40.00</cantidad>
+<precioUnitario>10.14</precioUnitario>
+<descuento>60.84</descuento>
+<precioTotalSinImpuesto>344.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>344.76</baseImponible>
+<valor>41.37</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98664</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA MINDO BEIGE PRIMERA</descripcion>
+<cantidad>40.00</cantidad>
+<precioUnitario>10.14</precioUnitario>
+<descuento>60.84</descuento>
+<precioTotalSinImpuesto>344.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>344.76</baseImponible>
+<valor>41.37</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102762</codigoPrincipal>
+<descripcion>PORCELANA PARA CERAMICA GROUTEX POLIMERO PF S/A CAFE OSCURO  (2KG.)</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>1.82</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>5.46</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INTACO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.46</baseImponible>
+<valor>0.66</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>94334</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA OLMO PRIMERA</descripcion>
+<cantidad>21.50</cantidad>
+<precioUnitario>8.80</precioUnitario>
+<descuento>28.38</descuento>
+<precioTotalSinImpuesto>160.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>160.82</baseImponible>
+<valor>19.30</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">ecoceramicas@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0981297433</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">061280</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268763</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268763</guiaRemision>
+<razonSocialComprador>IISAPETROL DEL ECUADOR CIA. LTDA</razonSocialComprador>
+<identificacionComprador>1792000963001</identificacionComprador>
+<totalSinImpuestos>65.59</totalSinImpuestos>
+<totalDescuento>11.58</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>65.59</baseImponible>
+<valor>7.87</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>73.46</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>94113</codigoPrincipal>
+<descripcion>MANGO TRINQUETE OO-R (38540)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>77.17</precioUnitario>
+<descuento>11.58</descuento>
+<precioTotalSinImpuesto>65.59</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>65.59</baseImponible>
+<valor>7.87</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">proyectos@iisa.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2252677</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">044264</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C# 00100003834</campoAdicional>
+</infoAdicional>
+</factura>

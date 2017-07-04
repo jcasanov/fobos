@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092101</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092101</guiaRemision>
+<razonSocialComprador>PAPELERA NACIONAL S.A.</razonSocialComprador>
+<identificacionComprador>0990017212001</identificacionComprador>
+<totalSinImpuestos>52.72</totalSinImpuestos>
+<totalDescuento>5.86</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>52.72</baseImponible>
+<valor>6.33</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>59.05</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>8976</codigoPrincipal>
+<descripcion>VALVULA CHEQUE VERTICAL BRONCE RW-231 DE 1" 200 PSI</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>29.29</precioUnitario>
+<descuento>5.86</descuento>
+<precioTotalSinImpuesto>52.72</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RED WH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>52.72</baseImponible>
+<valor>6.33</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">martinezh@panasa.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2729006</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000329</campoAdicional>
+<campoAdicional nombre="Observaciones">OC 62027</campoAdicional>
+</infoAdicional>
+</factura>

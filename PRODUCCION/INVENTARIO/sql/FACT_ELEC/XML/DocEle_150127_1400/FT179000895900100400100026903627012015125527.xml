@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000269036</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000269036</guiaRemision>
+<razonSocialComprador>CEVALLOS PONCE HECTOR VLADIMIR</razonSocialComprador>
+<identificacionComprador>1700826595001</identificacionComprador>
+<totalSinImpuestos>375.77</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>375.77</baseImponible>
+<valor>45.09</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>420.86</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5416</codigoPrincipal>
+<descripcion>TUBO GALV. ASTM A-53   TIPO "T" DE 2" x 6 m.  ESPESOR 3.6 mm.</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>72.27</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>289.08</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>289.08</baseImponible>
+<valor>34.69</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>93657</codigoPrincipal>
+<descripcion>CODO NEGRO CLASE 150 DE 2" x 90</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>6.59</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>26.36</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>26.36</baseImponible>
+<valor>3.16</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4571</codigoPrincipal>
+<descripcion>TEE GALV. CLASE 150 DE 2"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>10.93</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>32.79</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>32.79</baseImponible>
+<valor>3.93</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96864</codigoPrincipal>
+<descripcion>SELLANTE POLIPROPILENO ENVASE DE 100 CC (AGUA CALIENTE)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>9.89</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>9.89</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.89</baseImponible>
+<valor>1.19</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>90272</codigoPrincipal>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>17.65</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>17.65</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>17.65</baseImponible>
+<valor>2.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">omndatacs@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2755121</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064366</campoAdicional>
+<campoAdicional nombre="Observaciones">CH/ PACIFICO N.- 93</campoAdicional>
+</infoAdicional>
+</factura>

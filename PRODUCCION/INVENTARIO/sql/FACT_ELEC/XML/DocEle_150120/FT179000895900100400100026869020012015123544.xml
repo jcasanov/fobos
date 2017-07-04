@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268690</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268690</guiaRemision>
+<razonSocialComprador>BUSTOS VELIZ EDIZON FERNANDO</razonSocialComprador>
+<identificacionComprador>1711411098001</identificacionComprador>
+<totalSinImpuestos>2943.73</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>2943.73</baseImponible>
+<valor>353.25</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>3296.98</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>698</codigoPrincipal>
+<descripcion>TOL AL CALOR DE 9mm. 1.22 x 2.44 m (210.51 KG.)</descripcion>
+<cantidad>9.00</cantidad>
+<precioUnitario>276.56</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2489.04</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2489.04</baseImponible>
+<valor>298.68</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>694</codigoPrincipal>
+<descripcion>TOL AL CALOR DE 6mm. 1.22 x 2.44 m (140.34 KG.)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>123.20</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>123.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>123.20</baseImponible>
+<valor>14.78</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>292</codigoPrincipal>
+<descripcion>HIERRO CORRUGADO  4200 DE 10mm. x 12m</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>7.51</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>30.04</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDEC"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>30.04</baseImponible>
+<valor>3.60</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>90282</codigoPrincipal>
+<descripcion>TUBO ESTRUCTURAL A-3724 TIPO "N" 100 x 100 x 3mm.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>66.25</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>66.25</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>66.25</baseImponible>
+<valor>7.95</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>865</codigoPrincipal>
+<descripcion>VIGA UPN 160 x 6 m (160 x 65 x 7.5 x 10.5 mm)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>235.20</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>235.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>235.20</baseImponible>
+<valor>28.22</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">alianza.jfh@live.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3103359</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">058813</campoAdicional>
+<campoAdicional nombre="Observaciones">PEDIDO PERSONAL</campoAdicional>
+</infoAdicional>
+</factura>

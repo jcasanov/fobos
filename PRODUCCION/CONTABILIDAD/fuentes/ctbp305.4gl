@@ -32,13 +32,13 @@ DEFINE rm_par		RECORD
 				tit_mon		LIKE gent013.g13_nombre,
 				b10_nivel	LIKE ctbt010.b10_nivel
 			END RECORD
-DEFINE rm_act		ARRAY[2000] OF RECORD 
+DEFINE rm_act		ARRAY[8000] OF RECORD 
 				b10_cuenta	LIKE ctbt010.b10_cuenta,
 				b10_descripcion	LIKE ctbt010.b10_descripcion,
 				saldo_act	DECIMAL(14,2),
 				signo_act	CHAR(2)
 			END RECORD
-DEFINE rm_pas		ARRAY[2000] OF RECORD 
+DEFINE rm_pas		ARRAY[8000] OF RECORD 
 				b10_cuenta	LIKE ctbt010.b10_cuenta,
 				b10_descripcion	LIKE ctbt010.b10_descripcion,
 				saldo_pas	DECIMAL(14,2),
@@ -78,7 +78,7 @@ FUNCTION control_master()
 DEFINE comando		VARCHAR(100)
 DEFINE r_mon		RECORD LIKE gent013.*
 
-LET vm_max_rows	= 2000
+LET vm_max_rows	= 8000
 OPEN WINDOW wf AT 3,2 WITH 22 ROWS, 80 COLUMNS
     ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE 30,BORDER,
 	      MESSAGE LINE LAST - 2)
@@ -214,12 +214,32 @@ FOREACH q_ctas INTO r_ctas.*
 	IF r_ctas.b10_cuenta[1,1] = '1' THEN
 		IF r_ctas.b10_nivel = 1 THEN
 			LET tit_activo = r_ctas.b10_descripcion
-			LET val_activo = fl_obtiene_saldo_contable(vg_codcia, r_ctas.b10_cuenta, rm_par.moneda, fecha, 'A')
+			--IF rm_par.ano < 2012 THEN
+				LET val_activo = fl_obtiene_saldo_contable(vg_codcia,
+					r_ctas.b10_cuenta, rm_par.moneda,
+					fecha, 'A')
+			{--
+			ELSE
+				LET val_activo = saldo_cuenta_sin_cierre(
+						r_ctas.b10_cuenta, fecha,
+						r_ctas.b10_nivel)
+			END IF
+			--}
 			LET signo_activo = obtiene_signo_contable(val_activo)
 		END IF
 		LET rm_act[vm_num_act].b10_cuenta      = r_ctas.b10_cuenta
 		LET rm_act[vm_num_act].b10_descripcion = r_ctas.b10_descripcion
-		LET rm_act[vm_num_act].saldo_act       = fl_obtiene_saldo_contable(vg_codcia, r_ctas.b10_cuenta, rm_par.moneda, fecha, 'A')
+		--IF rm_par.ano < 2012 THEN
+			LET rm_act[vm_num_act].saldo_act       =
+			fl_obtiene_saldo_contable(vg_codcia, r_ctas.b10_cuenta,
+						rm_par.moneda, fecha, 'A')
+		{--
+		ELSE
+			LET rm_act[vm_num_act].saldo_act       =
+				saldo_cuenta_sin_cierre(r_ctas.b10_cuenta,
+							fecha, r_ctas.b10_nivel)
+		END IF
+		--}
 		LET rm_act[vm_num_act].signo_act       = 
 			    obtiene_signo_contable(rm_act[vm_num_act].saldo_act)
 		IF vm_num_act > vm_max_rows THEN
@@ -239,7 +259,17 @@ FOREACH q_ctas INTO r_ctas.*
 					 r_ctas.b10_descripcion CLIPPED
 			LET tit_pasivo = fl_justifica_titulo('I', tit_pasivo,50)
 			--IF r_ctas.b10_cuenta[1, 1] <> '3' THEN
-				LET saldo = fl_obtiene_saldo_contable(vg_codcia, r_ctas.b10_cuenta, rm_par.moneda, fecha, 'A')
+			--IF rm_par.ano < 2012 THEN
+				LET saldo = fl_obtiene_saldo_contable(vg_codcia,
+						r_ctas.b10_cuenta,
+						rm_par.moneda, fecha, 'A')
+			{--
+			ELSE
+				LET saldo = saldo_cuenta_sin_cierre(
+							r_ctas.b10_cuenta,
+							fecha, r_ctas.b10_nivel)
+			END IF
+			--}
 			{--
 			ELSE
 				LET fec_ini = MDY(MONTH(fecha), 1, YEAR(fecha))
@@ -250,7 +280,10 @@ FOREACH q_ctas INTO r_ctas.*
 					LET fec_fin = TODAY
 					LET flag    = 'A'
 				END IF
-				CALL fl_obtener_saldo_cuentas_patrimonio(vg_codcia, r_ctas.b10_cuenta, rm_par.moneda, fec_ini, fec_fin, flag)
+				CALL fl_obtener_saldo_cuentas_patrimonio(
+						vg_codcia, r_ctas.b10_cuenta,
+						rm_par.moneda, fec_ini, fec_fin,
+						flag)
 					RETURNING val1, val2
 				LET saldo = val1 + val2
 			END IF
@@ -260,7 +293,18 @@ FOREACH q_ctas INTO r_ctas.*
 		LET rm_pas[vm_num_pas].b10_cuenta      = r_ctas.b10_cuenta
 		LET rm_pas[vm_num_pas].b10_descripcion = r_ctas.b10_descripcion
 		--IF r_ctas.b10_cuenta[1, 1] <> '3' THEN
-			LET rm_pas[vm_num_pas].saldo_pas = fl_obtiene_saldo_contable(vg_codcia, r_ctas.b10_cuenta, rm_par.moneda, fecha, 'A')
+		--IF rm_par.ano < 2012 THEN
+			LET rm_pas[vm_num_pas].saldo_pas =
+				fl_obtiene_saldo_contable(vg_codcia,
+					r_ctas.b10_cuenta, rm_par.moneda,
+					fecha, 'A')
+		{--
+		ELSE
+			LET rm_pas[vm_num_pas].saldo_pas =
+				saldo_cuenta_sin_cierre(r_ctas.b10_cuenta,
+							fecha, r_ctas.b10_nivel)
+		END IF
+		--}
 		{--
 		ELSE
 			LET fec_ini = MDY(MONTH(fecha), 1, YEAR(fecha))
@@ -271,7 +315,9 @@ FOREACH q_ctas INTO r_ctas.*
 				LET fec_fin = TODAY
 				LET flag    = 'A'
 			END IF
-			CALL fl_obtener_saldo_cuentas_patrimonio(vg_codcia, r_ctas.b10_cuenta, rm_par.moneda, fec_ini, fec_fin, flag)
+			CALL fl_obtener_saldo_cuentas_patrimonio(vg_codcia,
+					r_ctas.b10_cuenta, rm_par.moneda,
+					fec_ini, fec_fin, flag)
 				RETURNING val1, val2
 			LET rm_pas[vm_num_pas].saldo_pas = val1 + val2
 		END IF
@@ -310,13 +356,16 @@ DEFINE i		SMALLINT
 CALL set_count(vm_num_act)
 LET int_flag = 0
 DISPLAY ARRAY rm_act TO rm_act.*
+	ON KEY(F5)
+		LET i = arr_curr()
+		CALL control_movimientos(rm_act[i].b10_cuenta) 
 	BEFORE DISPLAY
 		IF vm_suicheo THEN
 			CALL dialog.setcurrline(vm_act_pos_pant,vm_act_pos_arr)
 		END IF
-	ON KEY(F5)
+	BEFORE ROW
 		LET i = arr_curr()
-		CALL control_movimientos(rm_act[i].b10_cuenta) 
+		CALL muestra_contadores(i, vm_num_act, 0, vm_num_pas)
 END DISPLAY
 IF NOT int_flag THEN
 	LET vm_suicheo = 1
@@ -334,13 +383,16 @@ DEFINE i		SMALLINT
 CALL set_count(vm_num_pas)
 LET int_flag = 0
 DISPLAY ARRAY rm_pas TO rm_pas.*
+	ON KEY(F5)
+		LET i = arr_curr()
+		CALL control_movimientos(rm_pas[i].b10_cuenta) 
 	BEFORE DISPLAY
 		IF vm_suicheo THEN
 			CALL dialog.setcurrline(vm_pas_pos_pant,vm_pas_pos_arr)
 		END IF
-	ON KEY(F5)
+	BEFORE ROW
 		LET i = arr_curr()
-		CALL control_movimientos(rm_pas[i].b10_cuenta) 
+		CALL muestra_contadores(0, vm_num_act, i, vm_num_pas)
 END DISPLAY
 IF NOT int_flag THEN
 	LET vm_suicheo = 1
@@ -393,5 +445,50 @@ IF valor > 0 THEN
 	RETURN 'Db'
 END IF
 RETURN '  '
+
+END FUNCTION
+
+
+
+FUNCTION saldo_cuenta_sin_cierre(cuenta, fecha, nivel)
+DEFINE cuenta		LIKE ctbt010.b10_cuenta
+DEFINE fecha		LIKE ctbt012.b12_fec_proceso
+DEFINE nivel		LIKE ctbt010.b10_nivel
+DEFINE expr_cta		VARCHAR(200)
+DEFINE query		CHAR(2000)
+DEFINE saldo		DECIMAL(12,2)
+
+{
+CASE nivel
+	WHEN 1 LET expr_cta = "   AND b11_cuenta[1, 1]  = '", cuenta[1, 1], "'"
+	WHEN 2 LET expr_cta = "   AND b11_cuenta[1, 2]  = '", cuenta[1, 2], "'"
+	WHEN 3 LET expr_cta = "   AND b11_cuenta[1, 4]  = '", cuenta[1, 4], "'"
+	WHEN 4 LET expr_cta = "   AND b11_cuenta[1, 6]  = '", cuenta[1, 6], "'"
+	WHEN 5 LET expr_cta = "   AND b11_cuenta[1, 8]  = '", cuenta[1, 8], "'"
+	WHEN 6 LET expr_cta = "   AND b11_cuenta        = '", cuenta CLIPPED,"'"
+END CASE
+}
+LET query = "SELECT NVL(b11_db_ano_ant - b11_cr_ano_ant, 0.00) saldo ",
+		" FROM t_bal_gen ",
+		" WHERE b11_compania = ", vg_codcia,
+		"   AND b11_cuenta   = '", cuenta, "'",
+		"   AND b11_moneda   = 'DO' ",
+		"   AND b11_ano      = ", rm_par.ano,
+		" INTO TEMP t1 "
+PREPARE exec_t1 FROM query
+EXECUTE exec_t1
+SELECT * INTO saldo FROM t1
+DROP TABLE t1
+RETURN saldo
+
+END FUNCTION
+
+
+
+FUNCTION muestra_contadores(num_rowc, max_rowc, num_rowd, max_rowd)
+DEFINE num_rowc, max_rowc	SMALLINT
+DEFINE num_rowd, max_rowd	SMALLINT
+
+DISPLAY BY NAME num_rowc, max_rowc, num_rowd, max_rowd
 
 END FUNCTION

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104039</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>QUISQUIS 1502 Y TULCAN, 2DO.PISO OF.201</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104039</guiaRemision>
+<razonSocialComprador>INTERANDI DE CONSTRUCCIONES C.A. ICCA</razonSocialComprador>
+<identificacionComprador>1706279518001</identificacionComprador>
+<totalSinImpuestos>19649.85</totalSinImpuestos>
+<totalDescuento>3467.61</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>19649.85</baseImponible>
+<valor>2357.98</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>22007.83</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>100727</codigoPrincipal>
+<descripcion>TECLE ELECTRICO A CADENA NER010L DE 1 Ton. 230/3F BAJA VELOC. S/CADENA Y CABLE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3375.05</precioUnitario>
+<descuento>506.26</descuento>
+<precioTotalSinImpuesto>2868.79</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="KITO" valor="KITO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2868.79</baseImponible>
+<valor>344.25</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100376</codigoPrincipal>
+<descripcion>TECLE ELECTRICO A CADENA NER010S DE 1 Ton. 230/460/3F VELOC.STANDARD S/CABLE Y CADENA</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>3375.05</precioUnitario>
+<descuento>1518.77</descuento>
+<precioTotalSinImpuesto>8606.38</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="KITO" valor="KITO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8606.38</baseImponible>
+<valor>1032.77</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100072</codigoPrincipal>
+<descripcion>CADENA LCER2010NP P/TECLE ELECTRICO DE 1 Ton.</descripcion>
+<cantidad>48.00</cantidad>
+<precioUnitario>56.96</precioUnitario>
+<descuento>410.11</descuento>
+<precioTotalSinImpuesto>2323.97</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="KITO" valor="KITO"/>
+<detAdicional nombre="M" valor="M"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2323.97</baseImponible>
+<valor>278.88</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100326</codigoPrincipal>
+<descripcion>CADENA LCER2020NP P/TECLE ELECTRICO 3F. DE 2 Y 3 Ton.</descripcion>
+<cantidad>12.00</cantidad>
+<precioUnitario>87.58</precioUnitario>
+<descuento>157.64</descuento>
+<precioTotalSinImpuesto>893.32</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="KITO" valor="KITO"/>
+<detAdicional nombre="M" valor="M"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>893.32</baseImponible>
+<valor>107.20</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99485</codigoPrincipal>
+<descripcion>CABLE ELECTRICO 16/6P P/BOTONERA DE TROLLEY (CADA METRO)</descripcion>
+<cantidad>60.00</cantidad>
+<precioUnitario>19.92</precioUnitario>
+<descuento>179.28</descuento>
+<precioTotalSinImpuesto>1015.92</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="KITO" valor="KITO"/>
+<detAdicional nombre="M" valor="M"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1015.92</baseImponible>
+<valor>121.91</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100245</codigoPrincipal>
+<descripcion>TECLE ELECTRICO A CADENA NER020S DE 2 Ton. 230V/3F VEL.STANDARD S/CADENA Y CABLE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>4637.02</precioUnitario>
+<descuento>695.55</descuento>
+<precioTotalSinImpuesto>3941.47</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="KITO" valor="KITO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3941.47</baseImponible>
+<valor>472.98</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2281705</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">006082</campoAdicional>
+</infoAdicional>
+</factura>

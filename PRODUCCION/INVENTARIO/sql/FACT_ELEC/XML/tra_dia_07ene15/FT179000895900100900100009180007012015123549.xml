@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091800</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091800</guiaRemision>
+<razonSocialComprador>DISTRIBUIDORA DURAN DISDURAN S.A.</razonSocialComprador>
+<identificacionComprador>0991516948001</identificacionComprador>
+<totalSinImpuestos>194.57</totalSinImpuestos>
+<totalDescuento>26.53</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>194.57</baseImponible>
+<valor>23.35</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>217.92</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>26355</codigoPrincipal>
+<descripcion>GRIFERIA DE DUCHA E109/29 CR CROMO EURO STYLE</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>44.22</precioUnitario>
+<descuento>26.53</descuento>
+<precioTotalSinImpuesto>194.57</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>194.57</baseImponible>
+<valor>23.35</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">disduran@yahoo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2863554</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">009699</campoAdicional>
+</infoAdicional>
+</factura>

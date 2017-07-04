@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268623</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268623</guiaRemision>
+<razonSocialComprador>RAZA ACOSTA GALO FERNANDO</razonSocialComprador>
+<identificacionComprador>1702489145001</identificacionComprador>
+<totalSinImpuestos>510.84</totalSinImpuestos>
+<totalDescuento>56.76</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>510.84</baseImponible>
+<valor>61.30</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>572.14</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>70100</codigoPrincipal>
+<descripcion>ANCLAJE DE ROSCA INTERNA STEEL DROPIN 6320  PARA ROSCAS DE 5/8"</descripcion>
+<cantidad>430.00</cantidad>
+<precioUnitario>1.32</precioUnitario>
+<descuento>56.76</descuento>
+<precioTotalSinImpuesto>510.84</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>510.84</baseImponible>
+<valor>61.30</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">torniperno.galoraza@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2484776</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">053044</campoAdicional>
+<campoAdicional nombre="Observaciones">CEL 0995619292</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comprobanteRetencion id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000040376</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoCompRetencion>
+<fechaEmision>29/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionSujetoRetenido>04</tipoIdentificacionSujetoRetenido>
+<razonSocialSujetoRetenido>HOTEL SANGAY CA.</razonSocialSujetoRetenido>
+<identificacionSujetoRetenido>1890056829001</identificacionSujetoRetenido>
+<periodoFiscal>12/2014</periodoFiscal>
+</infoCompRetencion>
+<impuestos>
+<impuesto>
+<codigo>1</codigo>
+<codigoRetencion>341</codigoRetencion>
+<baseImponible>418.00</baseImponible>
+<porcentajeRetener>2.00</porcentajeRetener>
+<valorRetenido>8.36</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>001001000116919</numDocSustento>
+<fechaEmisionDocSustento>23/12/2014</fechaEmisionDocSustento>
+</impuesto>
+</impuestos>
+<infoAdicional>
+<campoAdicional nombre="Email">info@sangayspahotel.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2740056</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">002913</campoAdicional>
+</infoAdicional>
+</comprobanteRetencion>

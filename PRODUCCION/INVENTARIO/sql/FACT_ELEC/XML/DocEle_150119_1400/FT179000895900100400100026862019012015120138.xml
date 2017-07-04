@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268620</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268620</guiaRemision>
+<razonSocialComprador>LOPEZ VARGAS MILTON EDUARDO</razonSocialComprador>
+<identificacionComprador>1801667807001</identificacionComprador>
+<totalSinImpuestos>1631.55</totalSinImpuestos>
+<totalDescuento>135.28</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1631.55</baseImponible>
+<valor>195.79</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1827.34</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102399</codigoPrincipal>
+<descripcion>AMOLADORA ELECTRICA 6117-33D DE 13 AMPS. 5" 2.9 HP.</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>219.77</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>659.31</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>659.31</baseImponible>
+<valor>79.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102390</codigoPrincipal>
+<descripcion>SIERRA DE SABLE A BATERIA 2420-21 M-12 HACKZALL C/1 BATERIA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>197.79</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>197.79</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>197.79</baseImponible>
+<valor>23.73</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150598</codigoPrincipal>
+<descripcion>LIJADORA ELECTRICA 6020-21 14000 OPM 120V / 3 AMPS.</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>88.54</precioUnitario>
+<descuento>53.12</descuento>
+<precioTotalSinImpuesto>301.04</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>301.04</baseImponible>
+<valor>36.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98539</codigoPrincipal>
+<descripcion>TALADRO ELECTRICO MANUAL 5375-20  7.5 AMPS. 110 V  2700RPM DE 1/2"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>132.99</precioUnitario>
+<descuento>79.79</descuento>
+<precioTotalSinImpuesto>452.17</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>452.17</baseImponible>
+<valor>54.26</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102427</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-89-2718 DE OXIDO NEGRO DE  3/16" THUNDERBOLT</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>1.49</precioUnitario>
+<descuento>0.75</descuento>
+<precioTotalSinImpuesto>6.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.70</baseImponible>
+<valor>0.80</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102427</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-89-2718 DE OXIDO NEGRO DE  3/16" THUNDERBOLT</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>1.49</precioUnitario>
+<descuento>0.60</descuento>
+<precioTotalSinImpuesto>5.36</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.36</baseImponible>
+<valor>0.64</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102431</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-89-2722 DE OXIDO NEGRO DE  1/4" THUNDERBOLT</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>2.04</precioUnitario>
+<descuento>1.02</descuento>
+<precioTotalSinImpuesto>9.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.18</baseImponible>
+<valor>1.10</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">carroceriasml@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">032442324</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">062902</campoAdicional>
+</infoAdicional>
+</factura>

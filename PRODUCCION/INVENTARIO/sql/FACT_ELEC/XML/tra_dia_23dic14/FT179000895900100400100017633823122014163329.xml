@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176338</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176338</guiaRemision>
+<razonSocialComprador>FLORALP SA</razonSocialComprador>
+<identificacionComprador>1090067563001</identificacionComprador>
+<totalSinImpuestos>276.12</totalSinImpuestos>
+<totalDescuento>30.68</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>276.12</baseImponible>
+<valor>33.13</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>309.25</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>97695</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE PARA PILETAS US 16 DE 1/6 HP 115V/60C/1F (505085)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>193.54</precioUnitario>
+<descuento>19.35</descuento>
+<precioTotalSinImpuesto>174.19</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>174.19</baseImponible>
+<valor>20.90</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>15664</codigoPrincipal>
+<descripcion>DADOS PARA TERRAJA MANUAL P/ 12-R DE 1/2" NPT (37825)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>56.63</precioUnitario>
+<descuento>11.33</descuento>
+<precioTotalSinImpuesto>101.93</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>101.93</baseImponible>
+<valor>12.23</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">otito@floralp-sa.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">062651150</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">022502</campoAdicional>
+</infoAdicional>
+</factura>

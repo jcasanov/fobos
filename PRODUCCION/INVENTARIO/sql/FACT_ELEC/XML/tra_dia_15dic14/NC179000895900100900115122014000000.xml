@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>         </secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>AV 18 DE AGOSTO Y 10 DE AGOSTO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>ILUSTRE MUNICIPALIDAD DE SANTA ELENA</razonSocialComprador>
+<identificacionComprador>0960001540001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado></numDocModificado>
+<fechaEmisionDocSustento>15/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>1336.38</totalSinImpuestos>
+<valorModificacion>1496.75</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>1336.38</baseImponible>
+<valor>160.37</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV. DF-13330 FACT. FA-90329</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>22020</codigoInterno>
+<descripcion>DEV. DF-13330 FACT. FA-90329</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1336.38</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1336.38</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ACERO" valor="ACERO"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1336.38</baseImponible>
+<valor>160.37</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+<campoAdicional nombre="telefono-movil">2940869</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">16318</campoAdicional>
+</infoAdicional>
+</notaCredito>

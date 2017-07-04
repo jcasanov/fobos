@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268717</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268717</guiaRemision>
+<razonSocialComprador>LACTEOS SAN ANTONIO C.A.</razonSocialComprador>
+<identificacionComprador>0390011024001</identificacionComprador>
+<totalSinImpuestos>101.93</totalSinImpuestos>
+<totalDescuento>17.99</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>101.93</baseImponible>
+<valor>12.23</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>114.16</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>16382</codigoPrincipal>
+<descripcion>INSERTO E-1666-X JUEGO DE 3 PZS. P/MODELO 535 (44715)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>119.92</precioUnitario>
+<descuento>17.99</descuento>
+<precioTotalSinImpuesto>101.93</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>101.93</baseImponible>
+<valor>12.23</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">pablo.vivar@nutrileche.com.ec</campoAdicional>
+<campoAdicional nombre="Email">mauro.padron@nutrileche.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">072233145</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">040336</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C# 18076</campoAdicional>
+</infoAdicional>
+</factura>

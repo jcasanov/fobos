@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175856</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>ISLA ISABELA 610 E ISLA ESPANOLA</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175856</guiaRemision>
+<razonSocialComprador>GUTIERREZ REINOSO VLADIMIR ALEXANDER</razonSocialComprador>
+<identificacionComprador>0502236615001</identificacionComprador>
+<totalSinImpuestos>165.60</totalSinImpuestos>
+<totalDescuento>24.84</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>140.76</baseImponible>
+<valor>16.89</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>157.65</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>97894</codigoPrincipal>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7434 SD1 DE 5/8" X 6"</descripcion>
+<cantidad>60.00</cantidad>
+<precioUnitario>2.76</precioUnitario>
+<descuento>24.84</descuento>
+<precioTotalSinImpuesto>140.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="POWERS" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>140.76</baseImponible>
+<valor>16.89</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

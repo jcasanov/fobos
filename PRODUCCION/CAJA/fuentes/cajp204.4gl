@@ -179,6 +179,7 @@ LET rm_cpag.z22_total_cap 	= rm_csol.z24_total_cap
 LET rm_cpag.z22_total_int 	= rm_csol.z24_total_int
 LET rm_cpag.z22_total_mora 	= rm_csol.z24_total_mora
 LET rm_cpag.z22_cobrador 	= rm_csol.z24_cobrador
+LET rm_cpag.z22_zona_cobro 	= rm_csol.z24_zona_cobro
 LET rm_cpag.z22_subtipo 	= NULL
 LET rm_cpag.z22_origen 		= 'A'
 LET rm_cpag.z22_fecha_elim	= NULL

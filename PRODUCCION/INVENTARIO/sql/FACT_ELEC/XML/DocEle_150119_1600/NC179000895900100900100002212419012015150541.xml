@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000022124</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>ROMERO SANCHEZ RAQUEL</razonSocialComprador>
+<identificacionComprador>0702738782001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000091894</numDocModificado>
+<fechaEmisionDocSustento>10/01/2015</fechaEmisionDocSustento>
+<totalSinImpuestos>46.48</totalSinImpuestos>
+<valorModificacion>52.06</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>46.48</baseImponible>
+<valor>5.58</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEVOLUCION: MATERIAL INCORRECTO</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>97306</codigoInterno>
+<descripcion>IMPULSOR DE HIERRO P/BOMBA MOD. DLG 8 (27205290401)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>52.23</precioUnitario>
+<descuento>5.75</descuento>
+<precioTotalSinImpuesto>46.48</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MARK G"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>46.48</baseImponible>
+<valor>5.58</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">raquel-romero@live.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">099658261</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">14507</campoAdicional>
+</infoAdicional>
+</notaCredito>

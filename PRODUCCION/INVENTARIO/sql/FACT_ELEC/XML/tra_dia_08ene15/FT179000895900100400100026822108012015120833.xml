@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268221</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>08/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268221</guiaRemision>
+<razonSocialComprador>MONTALUISA PANCHI EDWIN PATRICIO</razonSocialComprador>
+<identificacionComprador>0501443816001</identificacionComprador>
+<totalSinImpuestos>339.55</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>339.55</baseImponible>
+<valor>40.75</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>380.30</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>2065</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 90° DE 2"</descripcion>
+<cantidad>7.00</cantidad>
+<precioUnitario>6.59</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>46.13</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>46.13</baseImponible>
+<valor>5.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5997</codigoPrincipal>
+<descripcion>UNION GALV. CLASE 150 DE 2"</descripcion>
+<cantidad>8.00</cantidad>
+<precioUnitario>4.43</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>35.44</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>35.44</baseImponible>
+<valor>4.25</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>90272</codigoPrincipal>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 2"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>17.65</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>35.30</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>35.30</baseImponible>
+<valor>4.24</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5999</codigoPrincipal>
+<descripcion>UNION GALV. CLASE 150 DE 3"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>12.42</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>49.68</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>49.68</baseImponible>
+<valor>5.96</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21378</codigoPrincipal>
+<descripcion>VALVULA CHEQUE VC-50 DE 2" DE BRONCE TIPO PESADO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>86.50</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>173.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HELBER"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>173.00</baseImponible>
+<valor>20.76</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">pmonta65@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2974886</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">043450</campoAdicional>
+</infoAdicional>
+</factura>

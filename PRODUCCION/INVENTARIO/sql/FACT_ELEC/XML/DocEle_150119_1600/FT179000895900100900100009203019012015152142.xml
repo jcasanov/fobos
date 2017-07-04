@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092030</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092030</guiaRemision>
+<razonSocialComprador>CARVAJAL RIOS VICTOR</razonSocialComprador>
+<identificacionComprador>0911029619001</identificacionComprador>
+<totalSinImpuestos>577.32</totalSinImpuestos>
+<totalDescuento>71.36</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>577.32</baseImponible>
+<valor>69.28</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>646.60</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>20662</codigoPrincipal>
+<descripcion>MOTOR ELEC SUMERG DE 4" (2243019204S) SJF-2021 DE 2HP 230-1-60</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>457.43</precioUnitario>
+<descuento>50.32</descuento>
+<precioTotalSinImpuesto>407.11</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>407.11</baseImponible>
+<valor>48.85</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>19578</codigoPrincipal>
+<descripcion>CAJA DE CONTROL (2823018110) CJ-2021 P/ 2HP 230/60/1F</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>191.25</precioUnitario>
+<descuento>21.04</descuento>
+<precioTotalSinImpuesto>170.21</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>170.21</baseImponible>
+<valor>20.43</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">carvajalra1@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2442385</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">006520</campoAdicional>
+<campoAdicional nombre="Observaciones">SUCRE 1513 ENTRE ANTEPARA Y GARCIA MOREN</campoAdicional>
+</infoAdicional>
+</factura>

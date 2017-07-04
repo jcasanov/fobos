@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000103992</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>PQUE.EMPRESARIAL COLON,EDF.METROPARK P.1</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000103992</guiaRemision>
+<razonSocialComprador>PROCESADORA NACIONAL DE ALIMENTOS C.A. PRONACA</razonSocialComprador>
+<identificacionComprador>1790319857001</identificacionComprador>
+<totalSinImpuestos>4.90</totalSinImpuestos>
+<totalDescuento>0.69</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>4.21</baseImponible>
+<valor>0.51</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>4.72</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>6152</codigoPrincipal>
+<descripcion>UNION FLEX DE 3/4"</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>0.31</precioUnitario>
+<descuento>0.22</descuento>
+<precioTotalSinImpuesto>1.33</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.33</baseImponible>
+<valor>0.16</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6150</codigoPrincipal>
+<descripcion>UNION FLEX DE 1/2"</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>0.29</precioUnitario>
+<descuento>0.20</descuento>
+<precioTotalSinImpuesto>1.25</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.25</baseImponible>
+<valor>0.15</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50330</codigoPrincipal>
+<descripcion>NEPLO POLIPROPILENO DE 1" x 10 cm. (AGUA CALIENTE)</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>0.38</precioUnitario>
+<descuento>0.27</descuento>
+<precioTotalSinImpuesto>1.63</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.63</baseImponible>
+<valor>0.20</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

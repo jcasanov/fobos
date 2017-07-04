@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092074</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092074</guiaRemision>
+<razonSocialComprador>VASQUEZ CALDERON MARCO VINICIO</razonSocialComprador>
+<identificacionComprador>0301099123</identificacionComprador>
+<totalSinImpuestos>14.98</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>14.98</baseImponible>
+<valor>1.80</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>16.78</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>101321</codigoPrincipal>
+<descripcion>TUBO VENTURI 400B0611 P/ BOMBA HB</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.98</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1.98</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.98</baseImponible>
+<valor>0.24</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99821</codigoPrincipal>
+<descripcion>DIFUSOR DE PLASTICO 400B0701 P/BOMBAS HB</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>8.58</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>8.58</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.58</baseImponible>
+<valor>1.03</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99820</codigoPrincipal>
+<descripcion>ACOPLE BOQUILLA 400B0600 P/BOMBAS HB</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>4.42</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>4.42</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.42</baseImponible>
+<valor>0.53</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">vinicio_marco@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">072255045</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016732</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113744</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>08/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113744</guiaRemision>
+<razonSocialComprador>TEXTILES TEXSA  S.A.</razonSocialComprador>
+<identificacionComprador>1790013324001</identificacionComprador>
+<totalSinImpuestos>50.54</totalSinImpuestos>
+<totalDescuento>5.62</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>50.54</baseImponible>
+<valor>6.06</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>56.60</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>92019</codigoPrincipal>
+<descripcion>CODO NEGRO CLASE 150 DE 1/2" x 90ø</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1.14</precioUnitario>
+<descuento>0.23</descuento>
+<precioTotalSinImpuesto>2.05</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.05</baseImponible>
+<valor>0.25</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6374</codigoPrincipal>
+<descripcion>UNIVERSAL CONICA NEGRA CLASE 150 DE 2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>18.95</precioUnitario>
+<descuento>1.90</descuento>
+<precioTotalSinImpuesto>17.05</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>17.05</baseImponible>
+<valor>2.05</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3096</codigoPrincipal>
+<descripcion>NEPLO FLEX DE 2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3.02</precioUnitario>
+<descuento>0.30</descuento>
+<precioTotalSinImpuesto>2.72</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.72</baseImponible>
+<valor>0.33</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>91969</codigoPrincipal>
+<descripcion>LLAVE DE PARED PICO MOVIL E420/71 CR CAPRI CROMO PICO BAJO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>26.41</precioUnitario>
+<descuento>2.64</descuento>
+<precioTotalSinImpuesto>23.77</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>23.77</baseImponible>
+<valor>2.85</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50290</codigoPrincipal>
+<descripcion>CODO POLIPROPILENO DE 1/2" x 90°</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>0.40</precioUnitario>
+<descuento>0.24</descuento>
+<precioTotalSinImpuesto>2.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.16</baseImponible>
+<valor>0.26</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50422</codigoPrincipal>
+<descripcion>UNIVERSAL POLIPROPILENO DE 1/2" (AGUA CALIENTE)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>0.89</precioUnitario>
+<descuento>0.18</descuento>
+<precioTotalSinImpuesto>1.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.60</baseImponible>
+<valor>0.19</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50410</codigoPrincipal>
+<descripcion>UNION POLIPROPILENO DE 1/2" (AGUA CALIENTE)</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>0.44</precioUnitario>
+<descuento>0.13</descuento>
+<precioTotalSinImpuesto>1.19</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.19</baseImponible>
+<valor>0.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">sandrade@textilestexsa.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2611138</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">029021</campoAdicional>
+</infoAdicional>
+</factura>

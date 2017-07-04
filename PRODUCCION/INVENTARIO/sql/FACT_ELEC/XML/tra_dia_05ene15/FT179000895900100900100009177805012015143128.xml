@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091778</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>05/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091778</guiaRemision>
+<razonSocialComprador>ANDRADE LOPEZ JULIO ENRIQUE</razonSocialComprador>
+<identificacionComprador>1713156139001</identificacionComprador>
+<totalSinImpuestos>86.48</totalSinImpuestos>
+<totalDescuento>7.52</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>86.48</baseImponible>
+<valor>10.38</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>96.86</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>95515</codigoPrincipal>
+<descripcion>SWITCH DE PRESION 9013 FRG-2 DE 70 A 100 PSI</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>47.00</precioUnitario>
+<descuento>7.52</descuento>
+<precioTotalSinImpuesto>86.48</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>86.48</baseImponible>
+<valor>10.38</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">JEAL1713@HOTMAIL.COM</campoAdicional>
+<campoAdicional nombre="telefono-movil">0998984551</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016698</campoAdicional>
+</infoAdicional>
+</factura>

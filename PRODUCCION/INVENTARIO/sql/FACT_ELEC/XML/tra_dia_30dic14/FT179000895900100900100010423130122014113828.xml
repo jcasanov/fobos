@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104231</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>30/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104231</guiaRemision>
+<razonSocialComprador>EGUEZ RUIZ ERNESTO GUILLERMO</razonSocialComprador>
+<identificacionComprador>0907388268001</identificacionComprador>
+<totalSinImpuestos>235.22</totalSinImpuestos>
+<totalDescuento>29.22</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>235.22</baseImponible>
+<valor>28.23</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>263.45</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>101631</codigoPrincipal>
+<descripcion>COCINETA DE ACERO INOXIDABLE 40207110  E60.3 4G AI  60X51CM.  A GAS ENCENDIDO ELEC  110V. 60 Hz</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>204.88</precioUnitario>
+<descuento>24.59</descuento>
+<precioTotalSinImpuesto>180.29</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TEKA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>180.29</baseImponible>
+<valor>21.63</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>69055</codigoPrincipal>
+<descripcion>LAVAPLATOS DE ACERO INOXIDABLE 40101067 80.50 1C 1E DER. PARA DESG. C/REBOSO SOBREPONER</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>51.40</precioUnitario>
+<descuento>4.11</descuento>
+<precioTotalSinImpuesto>47.29</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TEKA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>47.29</baseImponible>
+<valor>5.67</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70893</codigoPrincipal>
+<descripcion>DESAGUE DE LAVADERO 61001300 VALVULA DE 1-1/2" C/REBOSO REDONDO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2.69</precioUnitario>
+<descuento>0.22</descuento>
+<precioTotalSinImpuesto>2.47</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TEKA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.47</baseImponible>
+<valor>0.30</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50462</codigoPrincipal>
+<descripcion>TUBO DE EXTENSION PARA DESAGUE GUIB2-0014 PLASTICO DE 1-1/2" x 5" (GUIA)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>0.59</precioUnitario>
+<descuento>0.06</descuento>
+<precioTotalSinImpuesto>0.53</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INCAME"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.53</baseImponible>
+<valor>0.06</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>68865</codigoPrincipal>
+<descripcion>SIFON DE LAVADERO 4018000 DE 1-1/2" PP CON ACOPLE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>4.88</precioUnitario>
+<descuento>0.24</descuento>
+<precioTotalSinImpuesto>4.64</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.64</baseImponible>
+<valor>0.56</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">e_eguez@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">6006709</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016692</campoAdicional>
+</infoAdicional>
+</factura>

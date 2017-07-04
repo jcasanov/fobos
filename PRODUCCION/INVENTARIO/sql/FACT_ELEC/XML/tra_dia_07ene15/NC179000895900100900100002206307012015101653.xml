@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000022063</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>EXPALSA EXPORTADORA DE ALIMENTOS S.A.</razonSocialComprador>
+<identificacionComprador>0990637679001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000104239</numDocModificado>
+<fechaEmisionDocSustento>30/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>114.95</totalSinImpuestos>
+<valorModificacion>128.74</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>114.95</baseImponible>
+<valor>13.79</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>REFACTURACION: CAMBIO DE FECHA</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>98789</codigoInterno>
+<descripcion>CONTROL DE NIVEL G-0120 ALTO Y BAJO</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>24.20</precioUnitario>
+<descuento>6.05</descuento>
+<precioTotalSinImpuesto>114.95</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>114.95</baseImponible>
+<valor>13.79</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jose_silva@expalsa.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2804200</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">589</campoAdicional>
+</infoAdicional>
+</notaCredito>

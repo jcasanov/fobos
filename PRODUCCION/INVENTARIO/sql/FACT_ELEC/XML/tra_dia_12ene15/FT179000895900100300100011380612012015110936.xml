@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113806</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>12/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113806</guiaRemision>
+<razonSocialComprador>TEXTILES TEXSA  S.A.</razonSocialComprador>
+<identificacionComprador>1790013324001</identificacionComprador>
+<totalSinImpuestos>62.79</totalSinImpuestos>
+<totalDescuento>6.97</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>62.79</baseImponible>
+<valor>7.53</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>70.32</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>92015</codigoPrincipal>
+<descripcion>CODO NEGRO CLASE 150 DE 1" x 90ø</descripcion>
+<cantidad>14.00</cantidad>
+<precioUnitario>2.86</precioUnitario>
+<descuento>4.00</descuento>
+<precioTotalSinImpuesto>36.04</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>36.04</baseImponible>
+<valor>4.32</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6368</codigoPrincipal>
+<descripcion>UNIVERSAL CONICA NEGRA CLASE 150 DE 1"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>7.43</precioUnitario>
+<descuento>2.97</descuento>
+<precioTotalSinImpuesto>26.75</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>26.75</baseImponible>
+<valor>3.21</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">sandrade@textilestexsa.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2611138</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">029021</campoAdicional>
+<campoAdicional nombre="Observaciones">SOLICITADO POR SANTIAGO SIMI.</campoAdicional>
+</infoAdicional>
+</factura>

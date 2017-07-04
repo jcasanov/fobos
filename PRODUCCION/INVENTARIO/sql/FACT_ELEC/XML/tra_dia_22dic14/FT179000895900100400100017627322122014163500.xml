@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176273</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176273</guiaRemision>
+<razonSocialComprador>INGENIERIA AVANZADA EN TECNOLOGIA EATEC S.A.</razonSocialComprador>
+<identificacionComprador>1792041236001</identificacionComprador>
+<totalSinImpuestos>56.66</totalSinImpuestos>
+<totalDescuento>7.74</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>56.66</baseImponible>
+<valor>6.80</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>63.46</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>50300</codigoPrincipal>
+<descripcion>CODO POLIPROPILENO DE 2" x 90ø</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>4.87</precioUnitario>
+<descuento>2.34</descuento>
+<precioTotalSinImpuesto>17.14</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>17.14</baseImponible>
+<valor>2.06</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50290</codigoPrincipal>
+<descripcion>CODO POLIPROPILENO DE 1/2" x 90°</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>0.40</precioUnitario>
+<descuento>0.19</descuento>
+<precioTotalSinImpuesto>1.41</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.41</baseImponible>
+<valor>0.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50310</codigoPrincipal>
+<descripcion>CODO POLIPROPILENO DE 2" x 45ø</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>5.70</precioUnitario>
+<descuento>1.37</descuento>
+<precioTotalSinImpuesto>10.03</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>10.03</baseImponible>
+<valor>1.20</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50390</codigoPrincipal>
+<descripcion>TEE POLIPROPILENO DE 2" (AGUA CALIENTE)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>5.23</precioUnitario>
+<descuento>1.26</descuento>
+<precioTotalSinImpuesto>9.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.20</baseImponible>
+<valor>1.10</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50369</codigoPrincipal>
+<descripcion>REDUCTOR POLIPROPILENO DE 2" A 1/2" (AGUA CALIENTE)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2.60</precioUnitario>
+<descuento>0.31</descuento>
+<precioTotalSinImpuesto>2.29</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.29</baseImponible>
+<valor>0.27</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50299</codigoPrincipal>
+<descripcion>NEPLO POLIPROPILENO DE 2" CON TUERCA (AGUA CALIENTE)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>2.48</precioUnitario>
+<descuento>0.60</descuento>
+<precioTotalSinImpuesto>4.36</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.36</baseImponible>
+<valor>0.52</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50432</codigoPrincipal>
+<descripcion>UNIVERSAL POLIPROPILENO DE 2" (AGUA CALIENTE)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>8.49</precioUnitario>
+<descuento>1.02</descuento>
+<precioTotalSinImpuesto>7.47</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7.47</baseImponible>
+<valor>0.90</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50428</codigoPrincipal>
+<descripcion>UNIVERSAL POLIPROPILENO DE 1-1/4" (AGUA CALIENTE)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>5.41</precioUnitario>
+<descuento>0.65</descuento>
+<precioTotalSinImpuesto>4.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.76</baseImponible>
+<valor>0.57</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">5009000</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">045954</campoAdicional>
+</infoAdicional>
+</factura>

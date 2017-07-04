@@ -1,0 +1,75 @@
+DATABASE aceros
+SCREEN
+{
+
+  Periodo: [c000      ] - [c001      ]  Tipo Fuente [a0                      ]
+
+ Transac.: [c002      ]   [c003            ]
+
+  Cliente: [c004  ] [c005                                                    ]
+                                                            [c008 ] de [c009 ]
+ [c010      |c011    |c012                  |c0|c013             |c014        ]
+[c020      |c021    |c022                  |c1|c023             |c024        ]
+[c020      |c021    |c022                  |c1|c023             |c024        ]
+[c020      |c021    |c022                  |c1|c023             |c024        ]
+[c020      |c021    |c022                  |c1|c023             |c024        ]
+[c020      |c021    |c022                  |c1|c023             |c024        ]
+[c020      |c021    |c022                  |c1|c023             |c024        ]
+[c020      |c021    |c022                  |c1|c023             |c024        ]
+[c020      |c021    |c022                  |c1|c023             |c024        ]
+[c020      |c021    |c022                  |c1|c023             |c024        ]
+[c020      |c021    |c022                  |c1|c023             |c024        ]
+[c020      |c021    |c022                  |c1|c023             |c024        ]
+[c020      |c021    |c022                  |c1|c023             |c024        ]
+                                                    Totales ==> [c030        ]
+}
+TABLES
+cajt010
+cajt011
+ATTRIBUTES
+c000 = FORMONLY.fecha_ini TYPE DATE NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha inicial en formato: dd-mm-aaaa.';
+c001 = FORMONLY.fecha_fin TYPE DATE NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha final en formato: dd-mm-aaaa.';
+a0   = FORMONLY.tipo_fuente TYPE CHAR NOT NULL, REQUIRED, AUTONEXT, REVERSE,
+	WIDGET = 'RADIO',
+	CONFIG = 'OT "Orden de Trabajo" PR "Preventa de Inventario" SC "Solicitudes de Cobro"',
+	UPSHIFT, INCLUDE = ("PR", "OT", "SC"), DEFAULT = 'PR';
+c002 = FORMONLY.num_destino TYPE CHAR, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = FORMONLY.num_sri TYPE CHAR, AUTONEXT, UPSHIFT;
+c004 = FORMONLY.codcli TYPE INTEGER, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c005 = FORMONLY.nomcli TYPE VARCHAR, NOENTRY, UPSHIFT;
+
+c008 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c009 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c0   = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c013 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c014 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+c020 = FORMONLY.fecha TYPE DATE, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c021 = cajt010.j10_num_destino, NOENTRY, UPSHIFT;
+c022 = cajt010.j10_nomcli, NOENTRY, UPSHIFT;
+c1   = cajt011.j11_codigo_pago, NOENTRY, UPSHIFT;
+c023 = cajt011.j11_num_ch_aut, NOENTRY, UPSHIFT;
+c024 = cajt011.j11_valor, NOENTRY, UPSHIFT, FORMAT = '#,###,##&.##';
+
+c030 = FORMONLY.tot_valor TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '#,###,##&.##';
+END
+KEYS
+F5 = 'Factura'
+F6 = 'Retenciones'
+F7 = 'Modificar Ret.'
+F8 = 'Imprimir'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_detalle[12] (fecha, j10_num_destino, j10_nomcli,
+				j11_codigo_pago, j11_num_ch_aut, j11_valor)

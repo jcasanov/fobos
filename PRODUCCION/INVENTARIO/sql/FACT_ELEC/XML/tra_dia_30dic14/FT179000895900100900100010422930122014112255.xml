@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104229</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>30/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104229</guiaRemision>
+<razonSocialComprador>MANZO ROSADO TAIRO</razonSocialComprador>
+<identificacionComprador>1202973879</identificacionComprador>
+<totalSinImpuestos>197.54</totalSinImpuestos>
+<totalDescuento>78.88</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>197.54</baseImponible>
+<valor>23.70</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>221.24</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>98805</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL UNA PIEZA JSI06043130 EGO REDONDO BLANCO INTEGRADO ASTO.IMPULSE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>127.45</precioUnitario>
+<descuento>38.24</descuento>
+<precioTotalSinImpuesto>89.21</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>89.21</baseImponible>
+<valor>10.71</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>91534</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS 1260733 NOVO  BONE ASTO.MONTECRISTO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>72.03</precioUnitario>
+<descuento>21.61</descuento>
+<precioTotalSinImpuesto>50.42</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>50.42</baseImponible>
+<valor>6.05</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>91441</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA PARA EMPOTRAR PREPONCHADO 6541130 BOCARATON PETITE BLANCO (130)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>28.17</precioUnitario>
+<descuento>8.45</descuento>
+<precioTotalSinImpuesto>19.72</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>19.72</baseImponible>
+<valor>2.37</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>69099</codigoPrincipal>
+<descripcion>LLAVE PARA LAVABO E226/26-CR LUMINA CROMO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>19.52</precioUnitario>
+<descuento>4.88</descuento>
+<precioTotalSinImpuesto>14.64</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>14.64</baseImponible>
+<valor>1.76</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99705</codigoPrincipal>
+<descripcion>DESAGUE DE LAVABO E2460.01 RA DH BLC C/REJILLA Y SIFON DE 1-1/4"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>6.98</precioUnitario>
+<descuento>1.40</descuento>
+<precioTotalSinImpuesto>5.58</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.58</baseImponible>
+<valor>0.67</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>26925</codigoPrincipal>
+<descripcion>TUBO ABASTO- LLAVE ANGULAR LAVABO E262.05 DH-CR FLEXIBLE DE 16"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>10.64</precioUnitario>
+<descuento>2.13</descuento>
+<precioTotalSinImpuesto>8.51</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.51</baseImponible>
+<valor>1.02</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>26935</codigoPrincipal>
+<descripcion>TUBO ABASTO-LLAVE ANGULAR INODORO E266.02 DH-CR FLEXIBLE DE 12"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>10.07</precioUnitario>
+<descuento>2.01</descuento>
+<precioTotalSinImpuesto>8.06</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.06</baseImponible>
+<valor>0.97</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>27893</codigoPrincipal>
+<descripcion>TORNILLO 3011000 SET ANCLAJE TAZA PISO WC</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.56</precioUnitario>
+<descuento>0.16</descuento>
+<precioTotalSinImpuesto>1.40</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="PAR"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.40</baseImponible>
+<valor>0.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">walt_1961@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0999816942</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016691</campoAdicional>
+</infoAdicional>
+</factura>

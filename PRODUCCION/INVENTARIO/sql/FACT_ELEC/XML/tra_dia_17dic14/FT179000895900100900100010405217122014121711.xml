@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104052</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>EL RECREO, ET. 1A. MZ. 128 V. 34</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104052</guiaRemision>
+<razonSocialComprador>ALVAREZ SALAZAR MANUEL OCTAVIO</razonSocialComprador>
+<identificacionComprador>0301220968001</identificacionComprador>
+<totalSinImpuestos>2.68</totalSinImpuestos>
+<totalDescuento>0.30</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>2.68</baseImponible>
+<valor>0.32</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>3.00</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>4722</codigoPrincipal>
+<descripcion>TEE NEGRA CLASE 150 DE 1/2"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1.49</precioUnitario>
+<descuento>0.30</descuento>
+<precioTotalSinImpuesto>2.68</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="HITACHI" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.68</baseImponible>
+<valor>0.32</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2670977</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">007053</campoAdicional>
+</infoAdicional>
+</factura>

@@ -260,18 +260,21 @@ END FUNCTION
 
 
 
-FUNCTION fl_ayuda_ciudad(pais)
-DEFINE rh ARRAY[100] OF RECORD
+FUNCTION fl_ayuda_ciudad(pais, divi_poli)
+DEFINE pais		LIKE gent031.g31_pais
+DEFINE divi_poli	LIKE gent031.g31_divi_poli
+DEFINE rh ARRAY[500] OF RECORD
    	g31_ciudad      LIKE gent031.g31_ciudad,
         g31_nombre      LIKE gent031.g31_nombre
         END RECORD
-DEFINE i                SMALLINT
+DEFINE i, j             SMALLINT
 DEFINE filas_max        SMALLINT        ## No. elementos del arreglo
 DEFINE filas_pant       SMALLINT        ## No. elementos de cada pantalla
-DEFINE j	SMALLINT
-DEFINE pais		LIKE gent031.g31_pais
-                                                                                
-LET filas_max  = 100
+DEFINE query		CHAR(600)
+DEFINE expr_pai		VARCHAR(100)
+DEFINE expr_div		VARCHAR(100)
+
+LET filas_max  = 500
 OPEN WINDOW wh AT 06, 39 WITH 15 ROWS, 40 COLUMNS
         ATTRIBUTE(FORM LINE FIRST, COMMENT LINE OFF, MESSAGE LINE LAST, BORDER)
 IF vg_gui = 1 THEN
@@ -284,10 +287,24 @@ LET filas_pant = fgl_scr_size('rh')
 LET int_flag = 0
 MESSAGE 'Seleccionando datos..' 
 -----
-IF pais = '00' THEN
-DECLARE qh_ciu1 CURSOR FOR
-        SELECT g31_ciudad, g31_nombre FROM gent031
-        ORDER BY 2
+LET expr_pai = NULL
+IF pais > 0 THEN
+	LET expr_pai = 'WHERE g31_pais = ', pais
+END IF
+LET expr_div = NULL
+IF divi_poli > 0 AND pais = 0 THEN
+	LET expr_div = 'WHERE g31_divi_poli = ', divi_poli
+END IF
+IF divi_poli > 0 AND pais > 0 THEN
+	LET expr_div = '  AND g31_divi_poli = ', divi_poli
+END IF
+LET query = 'SELECT g31_ciudad, g31_nombre ',
+		'FROM gent031 ',
+		expr_pai CLIPPED,
+		expr_div CLIPPED,
+		' ORDER BY 2 '
+PREPARE cons_cui FROM query
+DECLARE qh_ciu1 CURSOR FOR cons_cui
 LET i = 1
 FOREACH qh_ciu1 INTO rh[i].*
         LET i = i + 1
@@ -295,22 +312,7 @@ FOREACH qh_ciu1 INTO rh[i].*
                 EXIT FOREACH
                                                                                         END IF
 END FOREACH
-END IF
 ----- 
-IF pais <> '00' THEN
-DECLARE qh_ciu2 CURSOR FOR
-        SELECT g31_ciudad, g31_nombre FROM gent031
-		WHERE g31_pais = pais
-        ORDER BY 2
-LET i = 1
-FOREACH qh_ciu2 INTO rh[i].*
-        LET i = i + 1
-        IF i > filas_max THEN
-                EXIT FOREACH
-                                                                                        END IF
-END FOREACH
-END IF
-------
 LET i = i - 1
 IF i = 0 THEN
         CALL fl_mensaje_consulta_sin_registros()
@@ -1017,19 +1019,35 @@ END FUNCTION
 
 
 
-FUNCTION fl_ayuda_usuarios()
-DEFINE rh_usua ARRAY[100] OF RECORD
-        g05_usuario       	LIKE gent005.g05_usuario,
-        g05_nombres      	LIKE gent005.g05_nombres
-        END RECORD
-DEFINE i                SMALLINT
-DEFINE filas_max        SMALLINT        ## No. elementos del arreglo
-DEFINE filas_pant       SMALLINT        ## No. elementos de cada pantalla
-DEFINE j	SMALLINT
-                                                                                
-LET filas_max  = 100
-OPEN WINDOW w_usua AT 06, 38 WITH 15 ROWS, 41 COLUMNS
-        ATTRIBUTE(FORM LINE FIRST, COMMENT LINE OFF, MESSAGE LINE LAST, BORDER)
+FUNCTION fl_ayuda_usuarios(estado)
+DEFINE estado		LIKE gent005.g05_estado
+DEFINE rh_usua		ARRAY[1000] OF RECORD
+				g05_usuario	LIKE gent005.g05_usuario,
+				g05_nombres	LIKE gent005.g05_nombres,
+				g05_grupo	LIKE gent005.g05_grupo,
+				g05_tipo	LIKE gent005.g05_tipo,
+				g05_estado	LIKE gent005.g05_estado
+			END RECORD
+DEFINE query		CHAR(800)
+DEFINE expr_sql		CHAR(400)
+DEFINE expr_est		VARCHAR(100)
+DEFINE i, j, max_row	SMALLINT
+DEFINE filas_pant	SMALLINT
+DEFINE num_fil		SMALLINT
+DEFINE rm_orden		ARRAY[10] OF CHAR(4)
+DEFINE vm_columna_1	SMALLINT
+DEFINE vm_columna_2	SMALLINT
+DEFINE col, salir	SMALLINT
+DEFINE primera		SMALLINT
+DEFINE r_g05		RECORD LIKE gent005.*
+
+LET max_row = 1000
+LET num_fil = 14
+IF vg_gui = 0 THEN
+	LET num_fil = 15
+END IF
+OPEN WINDOW w_usua AT 06, 27 WITH num_fil ROWS, 52 COLUMNS
+	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE OFF, MESSAGE LINE LAST, BORDER)
 IF vg_gui = 1 THEN
 	OPEN FORM f_ayuf014 FROM '../../../PRODUCCION/LIBRERIAS/forms/ayuf014'
 ELSE
@@ -1037,43 +1055,139 @@ ELSE
 END IF
 DISPLAY FORM f_ayuf014
 LET filas_pant = fgl_scr_size('rh_usua')
-LET int_flag = 0
-MESSAGE 'Seleccionando datos..' 
-DECLARE qh_usua CURSOR FOR
-        SELECT g05_usuario, g05_nombres FROM gent005
-        ORDER BY 1
-LET i = 1
-FOREACH qh_usua INTO rh_usua[i].*
-        LET i = i + 1
-        IF i > filas_max THEN
-                EXIT FOREACH
-        END IF
-END FOREACH
-LET i = i - 1
-IF i = 0 THEN
-        CALL fl_mensaje_consulta_sin_registros()
-        CLOSE WINDOW w_usua
-        INITIALIZE rh_usua[1].* TO NULL
-        RETURN rh_usua[1].g05_usuario, rh_usua[1].g05_nombres
+--#DISPLAY "Usuario"	TO tit_col1
+--#DISPLAY "Nombre"	TO tit_col2
+--#DISPLAY "GR"		TO tit_col3
+--#DISPLAY "TP"		TO tit_col4
+--#DISPLAY "E"		TO tit_col5
+LET expr_est = NULL
+IF estado <> 'T' THEN
+	LET expr_est = '   AND g05_estado   = "', estado, '"'
 END IF
-IF vg_gui = 0 THEN
-	MESSAGE "                      "
+LET primera = 1
+WHILE TRUE
+	IF NOT primera THEN
+		MESSAGE 'Digite condicion-búsqueda y presione (F12)'
+		LET int_flag = 0
+		CONSTRUCT BY NAME expr_sql ON g05_usuario, g05_nombres,
+						g05_grupo, g05_tipo
+		IF int_flag THEN
+			CLOSE WINDOW w_usua
+			EXIT WHILE
+		END IF
+	ELSE
+		LET expr_sql = ' 1 = 1'
+	END IF
+	LET primera = 0
+	MESSAGE 'Seleccionando datos . . . espere por favor.'
+	LET vm_columna_1 = 1
+	LET vm_columna_2 = 2
+	LET rm_orden[vm_columna_1] = 'ASC'
+	INITIALIZE col TO NULL
+	LET salir = 0
+	WHILE NOT salir
+		LET query = 'SELECT * FROM gent005 ',
+				'WHERE ', expr_sql CLIPPED, ' ',
+					expr_est CLIPPED,
+				' ORDER BY ', vm_columna_1, ' ',
+					rm_orden[vm_columna_1],
+					', ', vm_columna_2, ' ',
+					rm_orden[vm_columna_2]
+		PREPARE quer_usua FROM query
+		DECLARE qh_usua CURSOR FOR quer_usua
+		LET i = 1
+		FOREACH qh_usua INTO r_g05.*
+			LET rh_usua[i].g05_usuario = r_g05.g05_usuario
+			LET rh_usua[i].g05_nombres = r_g05.g05_nombres
+			LET rh_usua[i].g05_grupo   = r_g05.g05_grupo
+			LET rh_usua[i].g05_tipo    = r_g05.g05_tipo
+			LET rh_usua[i].g05_estado  = r_g05.g05_estado
+			LET i = i + 1
+			IF i > max_row THEN
+				EXIT FOREACH
+			END IF
+		END FOREACH
+		LET i = i - 1
+		IF i = 0 THEN	
+		        CALL fl_mensaje_consulta_sin_registros()
+			LET i     = 0
+			LET salir = 1
+			EXIT WHILE
+		END IF
+		MESSAGE '                                           '
+		LET int_flag = 0
+		CALL set_count(i)
+		DISPLAY ARRAY rh_usua TO rh_usua.*
+			ON KEY(RETURN)
+				LET salir = 1
+				EXIT DISPLAY
+			ON KEY(F2)
+				LET int_flag = 4
+				FOR i = 1 TO filas_pant
+					CLEAR rh_usua[i].*
+				END FOR
+				EXIT DISPLAY
+			ON KEY(F15)
+				LET col = 1
+				EXIT DISPLAY
+			ON KEY(F16)
+				LET col = 2
+				EXIT DISPLAY
+			ON KEY(F17)
+				LET col = 3
+				EXIT DISPLAY
+			ON KEY(F18)
+				LET col = 5
+				EXIT DISPLAY
+			ON KEY(F19)
+				IF estado = 'T' THEN
+					LET col = 4
+					EXIT DISPLAY
+				END IF
+			--#BEFORE ROW
+				--#LET j = arr_curr()
+				--#DISPLAY j TO num_rows
+				--#DISPLAY i TO max_rows
+			--#AFTER DISPLAY
+				--#LET salir = 1
+		END DISPLAY
+		IF int_flag = 4 OR int_flag = 1 AND col IS NULL THEN
+			EXIT WHILE
+		END IF
+		IF col IS NOT NULL AND NOT salir THEN
+			IF col <> vm_columna_1 THEN
+				LET vm_columna_2           = vm_columna_1
+				LET rm_orden[vm_columna_2] =
+							rm_orden[vm_columna_1]
+				LET vm_columna_1           = col
+			END IF
+			IF rm_orden[vm_columna_1] = 'ASC' THEN
+				LET rm_orden[vm_columna_1] = 'DESC'
+			ELSE
+				LET rm_orden[vm_columna_1] = 'ASC'
+			END IF
+			INITIALIZE col TO NULL
+		END IF
+	END WHILE
+	IF i = 0 THEN
+		CONTINUE WHILE
+	END IF
+	IF NOT salir AND int_flag = 4 THEN
+		CONTINUE WHILE
+	END IF
+	IF int_flag <> 4 THEN
+		CLOSE WINDOW w_usua
+		EXIT WHILE
+	END IF
+	FOR i = 1 TO filas_pant
+		CLEAR rh_usua[i].*
+	END FOR
+END WHILE
+IF int_flag <> 0 THEN
+	INITIALIZE rh_usua[1].* TO NULL
+	RETURN rh_usua[1].g05_usuario, rh_usua[1].g05_nombres
 END IF
-CALL set_count(i)
-LET int_flag = 0
-DISPLAY ARRAY rh_usua TO rh_usua.*
-        ON KEY(RETURN)
-                EXIT DISPLAY
-	--#BEFORE ROW
-		--#LET j = arr_curr()
-		--#MESSAGE  j, ' de ', i
-END DISPLAY
-CLOSE WINDOW w_usua
-IF int_flag THEN
-        INITIALIZE rh_usua[1].* TO NULL
-        RETURN rh_usua[1].g05_usuario, rh_usua[1].g05_nombres
-END IF
-LET  i = arr_curr()
+LET i = arr_curr()
 RETURN rh_usua[i].g05_usuario, rh_usua[i].g05_nombres
 
 END FUNCTION
@@ -1973,13 +2087,16 @@ DEFINE rh_guia 		ARRAY[10000] OF RECORD
 			r95_guia_remision	LIKE rept095.r95_guia_remision,
 			r95_num_sri		LIKE rept095.r95_num_sri,
 			r95_persona_dest	LIKE rept095.r95_persona_dest,
+			r95_fecha_emi		LIKE rept095.r95_fecha_emi,
 			r95_motivo		LIKE rept095.r95_motivo,
 			r95_estado		LIKE rept095.r95_estado
         		END RECORD
 DEFINE i, j, col, salir	SMALLINT
 DEFINE filas_max	SMALLINT        ## No. elementos del arreglo
 DEFINE filas_pant	SMALLINT        ## No. elementos de cada pantalla
-DEFINE query		CHAR(500)	## Contiene todo el query preparado
+DEFINE query		CHAR(2000)	## Contiene todo el query preparado
+DEFINE expr_sql		CHAR(800)
+DEFINE expr_rut		CHAR(400)
 DEFINE expr_est		VARCHAR(100)
 DEFINE rm_orden		ARRAY[10] OF CHAR(4)
 DEFINE vm_columna_1	SMALLINT
@@ -1987,15 +2104,18 @@ DEFINE vm_columna_2	SMALLINT
 DEFINE col_ini		SMALLINT
 DEFINE fil_max		SMALLINT
 DEFINE col_max		SMALLINT
+DEFINE primera		SMALLINT
+DEFINE comando          VARCHAR(250)
+DEFINE run_prog		CHAR(10)
 
 LET filas_max = 10000
-LET col_ini   = 16
+LET col_ini   = 05
 LET fil_max   = 14
-LET col_max   = 63
+LET col_max   = 74
 IF vg_gui = 0 THEN
 	LET col_ini = 15
 	LET fil_max = 16
-	LET col_max = 62
+	LET col_max = 73
 END IF
 OPEN WINDOW w_guia AT 06, col_ini WITH fil_max ROWS, col_max COLUMNS
         ATTRIBUTE(FORM LINE FIRST, COMMENT LINE OFF, MESSAGE LINE LAST, BORDER)
@@ -2005,101 +2125,170 @@ ELSE
 	OPEN FORM f_ayuf025 FROM '../../../PRODUCCION/LIBRERIAS/forms/ayuf025c'
 END IF
 DISPLAY FORM f_ayuf025
---#DISPLAY 'Guía'		TO bt_guia
---#DISPLAY 'Número SRI'		TO bt_sri
---#DISPLAY 'Destinatario'	TO bt_dest
---#DISPLAY 'M'			TO bt_moti
---#DISPLAY 'E'			TO bt_esta
+--#DISPLAY 'Guía'		TO tit_col1
+--#DISPLAY 'Número SRI'		TO tit_col2
+--#DISPLAY 'Destinatario'	TO tit_col3
+--#DISPLAY 'Fecha Emi.'		TO tit_col4
+--#DISPLAY 'M'			TO tit_col5
+--#DISPLAY 'E'			TO tit_col6
 LET filas_pant = fgl_scr_size('rh_guia')
-LET int_flag = 0
-MESSAGE 'Seleccionando datos..'
 LET expr_est = NULL
+LET expr_rut = NULL
 IF estado <> 'T' THEN
+	IF estado = 'R' THEN
+		LET expr_rut = '   AND NOT EXISTS ',
+					'(SELECT 1 FROM rept114 ',
+				'WHERE r114_compania      = r95_compania ',
+				'  AND r114_localidad     = r95_localidad ',
+				'  AND r114_guia_remision = r95_guia_remision ',
+				'  AND r114_estado        = "E")'
+		LET estado   = 'C'
+	END IF
 	LET expr_est = '   AND r95_estado    = "', estado, '"'
 END IF
-LET vm_columna_1 = 1
-LET vm_columna_2 = 2
-LET rm_orden[vm_columna_1] = 'DESC'
-INITIALIZE col TO NULL
-LET salir = 0
-WHILE NOT salir
-	LET query = "SELECT r95_guia_remision, r95_num_sri, r95_persona_dest, ",
-			"r95_motivo, r95_estado ",
-			" FROM rept095 ",
-			" WHERE r95_compania  = ", codcia, 
-			"   AND r95_localidad = ", codloc,
-			expr_est CLIPPED,
+LET primera = 1
+WHILE TRUE
+	--IF NOT primera THEN
+		MESSAGE 'Digite condicion-búsqueda y presione (F12)'
+		LET int_flag = 0
+		CONSTRUCT BY NAME expr_sql ON r95_guia_remision, r95_num_sri,
+				r95_persona_dest, r95_fecha_emi, r95_motivo
+		IF int_flag THEN
+			CLOSE WINDOW w_guia
+			EXIT WHILE
+		END IF
+	{--
+	ELSE
+		LET expr_sql = ' 1 = 1'
+	END IF
+	--}
+	LET primera = 0
+	MESSAGE 'Seleccionando datos . . . espere por favor.'
+	LET vm_columna_1 = 4
+	LET vm_columna_2 = 1
+	LET rm_orden[vm_columna_1] = 'DESC'
+	INITIALIZE col TO NULL
+	LET salir = 0
+	WHILE NOT salir
+		LET query = "SELECT r95_guia_remision, r95_num_sri, ",
+				"r95_persona_dest, r95_fecha_emi, r95_motivo, ",
+				"r95_estado ",
+				" FROM rept095 ",
+				" WHERE r95_compania  = ", codcia, 
+				"   AND r95_localidad = ", codloc,
+				expr_est CLIPPED,
+				"  AND ", expr_sql CLIPPED,
+				expr_rut CLIPPED,
 			" ORDER BY ", vm_columna_1, " ", rm_orden[vm_columna_1],
 				", ", vm_columna_2, " ", rm_orden[vm_columna_2]
-	PREPARE guiasrep FROM query
-	DECLARE qh_guia CURSOR FOR guiasrep
-	LET i = 1
-	FOREACH qh_guia INTO rh_guia[i].*
-	        LET i = i + 1
-	        IF i > filas_max THEN
-	                EXIT FOREACH
-	        END IF
-	END FOREACH
-	LET i = i - 1
-	IF i = 0 THEN
-	        CALL fl_mensaje_consulta_sin_registros()
-	        CLOSE WINDOW w_guia
-	        INITIALIZE rh_guia[1].* TO NULL
-	        RETURN rh_guia[1].r95_guia_remision
-	END IF
-	IF vg_gui = 0 THEN
-		MESSAGE "                      "
-	END IF
-	CALL set_count(i)
-	LET int_flag = 0
-	DISPLAY ARRAY rh_guia TO rh_guia.*
-        	ON KEY(RETURN)
-	                LET salir = 1
-	                EXIT DISPLAY
-	        ON KEY(F15)
-	                LET col = 1
-	                EXIT DISPLAY
-	        ON KEY(F16)
-        	        LET col = 2
-	                EXIT DISPLAY
-	        ON KEY(F17)
-        	        LET col = 3
-	                EXIT DISPLAY
-	        ON KEY(F18)
-        	        LET col = 4
-	                EXIT DISPLAY
-	        ON KEY(F19)
-			IF estado = 'T' THEN
-	        	        LET col = 5
+		PREPARE guiasrep FROM query
+		DECLARE qh_guia CURSOR FOR guiasrep
+		LET i = 1
+		FOREACH qh_guia INTO rh_guia[i].*
+	        	LET i = i + 1
+		        IF i > filas_max THEN
+		                EXIT FOREACH
+	        	END IF
+		END FOREACH
+		LET i = i - 1
+		IF i = 0 THEN
+		        CALL fl_mensaje_consulta_sin_registros()
+		        CLOSE WINDOW w_guia
+		        INITIALIZE rh_guia[1].* TO NULL
+		        RETURN rh_guia[1].r95_guia_remision
+		END IF
+		IF vg_gui = 0 THEN
+			MESSAGE "                                           "
+		END IF
+		LET int_flag = 0
+		CALL set_count(i)
+		DISPLAY ARRAY rh_guia TO rh_guia.*
+			ON KEY(RETURN)
+				LET salir = 1
+				EXIT DISPLAY
+			ON KEY(F2)
+				LET int_flag = 4
+				FOR i = 1 TO filas_pant
+					CLEAR rh_guia[i].*
+				END FOR
+				EXIT DISPLAY
+			ON KEY(F5)
+				LET run_prog = '; fglrun '
+				IF vg_gui = 0 THEN
+					LET run_prog = '; fglgo '
+				END IF
+				LET comando  = 'cd ..', vg_separador, '..',
+						vg_separador, 'REPUESTOS',
+						vg_separador, 'fuentes',
+						vg_separador, run_prog CLIPPED,
+						' repp241 ', vg_base, ' ',
+						vg_modulo, ' ', codcia, ' ',
+						codloc, ' ',
+						rh_guia[j].r95_guia_remision
+				RUN comando
+				LET int_flag = 0
+		        ON KEY(F15)
+		                LET col = 1
 		                EXIT DISPLAY
+		        ON KEY(F16)
+        		        LET col = 2
+	        	        EXIT DISPLAY
+		        ON KEY(F17)
+        		        LET col = 3
+	        	        EXIT DISPLAY
+		        ON KEY(F18)
+        		        LET col = 4
+	        	        EXIT DISPLAY
+		        ON KEY(F19)
+        		        LET col = 5
+	        	        EXIT DISPLAY
+		        ON KEY(F20)
+				IF estado = 'T' THEN
+		        	        LET col = 6
+			                EXIT DISPLAY
+				END IF
+			--#BEFORE ROW
+				--#LET j = arr_curr()
+				--#MESSAGE  j, ' de ', i
+			--#BEFORE DISPLAY
+				--#CALL dialog.keysetlabel('RETURN', '')
+				--#CALL dialog.keysetlabel('F5','Guía Remisión')
+		        --#AFTER DISPLAY
+		                --#LET salir = 1
+		END DISPLAY
+		IF int_flag = 4 OR int_flag = 1 AND col IS NULL THEN
+			EXIT WHILE
+		END IF
+		IF col IS NOT NULL AND NOT salir THEN
+			IF col <> vm_columna_1 THEN
+				LET vm_columna_2           = vm_columna_1
+				LET rm_orden[vm_columna_2] =
+							rm_orden[vm_columna_1]
+				LET vm_columna_1           = col
 			END IF
-		--#BEFORE ROW
-			--#LET j = arr_curr()
-			--#MESSAGE  j, ' de ', i
-		--#BEFORE DISPLAY
-			--#CALL dialog.keysetlabel('RETURN', '')
-	        --#AFTER DISPLAY
-	                --#LET salir = 1
-	END DISPLAY
-	IF int_flag AND col IS NULL THEN
+			IF rm_orden[vm_columna_1] = 'ASC' THEN
+				LET rm_orden[vm_columna_1] = 'DESC'
+			ELSE
+				LET rm_orden[vm_columna_1] = 'ASC'
+			END IF
+			INITIALIZE col TO NULL
+		END IF
+	END WHILE
+	IF i = 0 THEN
+		CONTINUE WHILE
+	END IF
+	IF NOT salir AND int_flag = 4 THEN
+		CONTINUE WHILE
+	END IF
+	IF int_flag <> 4 THEN
+		CLOSE WINDOW w_guia
 		EXIT WHILE
 	END IF
-	IF col IS NOT NULL AND NOT salir THEN
-		IF col <> vm_columna_1 THEN
-			LET vm_columna_2           = vm_columna_1
-			LET rm_orden[vm_columna_2] = rm_orden[vm_columna_1]
-			LET vm_columna_1           = col
-		END IF
-		IF rm_orden[vm_columna_1] = 'ASC' THEN
-			LET rm_orden[vm_columna_1] = 'DESC'
-		ELSE
-			LET rm_orden[vm_columna_1] = 'ASC'
-		END IF
-		INITIALIZE col TO NULL
-	END IF
+	FOR i = 1 TO filas_pant
+		CLEAR rh_guia[i].*
+	END FOR
 END WHILE
-CLOSE WINDOW w_guia
-IF int_flag THEN
+IF int_flag <> 0 THEN
         INITIALIZE rh_guia[1].* TO NULL
         RETURN rh_guia[1].r95_guia_remision
 END IF
@@ -2623,6 +2812,10 @@ IF r_par.tipo_ident >= '0' AND r_par.tipo_ident <= '9' THEN
 			LET expr_t_i = '   AND r02_tipo_ident IN ("C", "R") '
 		WHEN '5'
 			LET expr_t_i = '   AND r02_tipo_ident IN ("C", "V") '
+		WHEN '6'
+			LET expr_t_i = '   AND r02_tipo_ident IN ("V", "X") '
+		WHEN '7'
+			LET expr_t_i = '   AND r02_tipo_ident IN ("Y", "V") '
 		OTHERWISE
 			CALL fl_mostrar_mensaje('El tipo identificacion de bodega solo puede ser C, R, I o V.', 'info')
 			CLOSE WINDOW wh_bode
@@ -3164,70 +3357,6 @@ END FUNCTION
 
 
 
-
-FUNCTION fl_ayuda_zona_cobro()
-DEFINE rh_zoncob ARRAY[100] OF RECORD
-   	z06_zona_cobro      	LIKE cxct006.z06_zona_cobro,
-        z06_nombre      	LIKE cxct006.z06_nombre
-        END RECORD
-DEFINE i                SMALLINT
-DEFINE filas_max        SMALLINT        ## No. elementos del arreglo
-DEFINE filas_pant       SMALLINT        ## No. elementos de cada pantalla
-DEFINE j	SMALLINT
-                                                                                
-LET filas_max  = 100
-OPEN WINDOW wh_zoncob AT 06, 42 WITH 15 ROWS, 37 COLUMNS
-        ATTRIBUTE(FORM LINE FIRST, COMMENT LINE OFF, MESSAGE LINE LAST, BORDER)
-IF vg_gui = 1 THEN
-	OPEN FORM f_ayuf037 FROM '../../../PRODUCCION/LIBRERIAS/forms/ayuf037'
-ELSE
-	OPEN FORM f_ayuf037 FROM '../../../PRODUCCION/LIBRERIAS/forms/ayuf037c'
-END IF
-DISPLAY FORM f_ayuf037
-LET filas_pant = fgl_scr_size('rh_zoncob')
-LET int_flag = 0
-MESSAGE 'Seleccionando datos..' 
-DECLARE q_zoncob CURSOR FOR
-        SELECT z06_zona_cobro, z06_nombre FROM cxct006
-        ORDER BY 2
-LET i = 1
-FOREACH q_zoncob INTO rh_zoncob[i].*
-        LET i = i + 1
-        IF i > filas_max THEN
-                EXIT FOREACH
-                                                                                        END IF
-END FOREACH
-LET i = i - 1
-IF i = 0 THEN
-        CALL fl_mensaje_consulta_sin_registros()
-        CLOSE WINDOW wh_zoncob
-        INITIALIZE rh_zoncob[1].* TO NULL
-        RETURN rh_zoncob[1].z06_zona_cobro, rh_zoncob[1].z06_nombre
-END IF
-IF vg_gui = 0 THEN
-	MESSAGE "                      "
-END IF
-CALL set_count(i)
-LET int_flag = 0
-DISPLAY ARRAY rh_zoncob TO rh_zoncob.*
-        ON KEY(RETURN)
-                EXIT DISPLAY
-	--#BEFORE ROW
-		--#LET j = arr_curr()
-		--#MESSAGE  j, ' de ', i
-END DISPLAY
-CLOSE WINDOW wh_zoncob
-IF int_flag THEN
-        INITIALIZE rh_zoncob[1].* TO NULL
-        RETURN rh_zoncob[1].z06_zona_cobro, rh_zoncob[1].z06_nombre
-END IF
-LET  i = arr_curr()
-RETURN rh_zoncob[i].z06_zona_cobro, rh_zoncob[i].z06_nombre
-
-END FUNCTION
-
-
-
 FUNCTION fl_ayuda_vendedores(cod_cia, estado, tipo_vend)
 DEFINE cod_cia 		LIKE rept001.r01_compania
 DEFINE estado 		LIKE rept001.r01_estado
@@ -3606,6 +3735,184 @@ IF int_flag THEN
 END IF
 LET  i = arr_curr()
 RETURN rh_trab[i].n30_cod_trab, rh_trab[i].n30_nombres
+
+END FUNCTION
+
+
+
+FUNCTION fl_ayuda_zona_cobro(comision, estado)
+DEFINE comision		LIKE cxct006.z06_comision
+DEFINE estado		LIKE cxct006.z06_estado
+DEFINE rh_zoncob	ARRAY[1000] OF RECORD
+				z06_zona_cobro	LIKE cxct006.z06_zona_cobro,
+				z06_nombre	LIKE cxct006.z06_nombre,
+				z06_comision	LIKE cxct006.z06_comision,
+				z06_estado	LIKE cxct006.z06_estado
+			END RECORD
+DEFINE query		CHAR(800)
+DEFINE expr_sql		CHAR(400)
+DEFINE expr_est		VARCHAR(100)
+DEFINE expr_com		VARCHAR(100)
+DEFINE i, j, max_row	SMALLINT
+DEFINE filas_pant	SMALLINT
+DEFINE num_fil		SMALLINT
+DEFINE rm_orden		ARRAY[10] OF CHAR(4)
+DEFINE vm_columna_1	SMALLINT
+DEFINE vm_columna_2	SMALLINT
+DEFINE col, salir	SMALLINT
+DEFINE primera		SMALLINT
+DEFINE r_z06		RECORD LIKE cxct006.*
+
+LET max_row = 1000
+LET num_fil = 14
+IF vg_gui = 0 THEN
+	LET num_fil = 15
+END IF
+OPEN WINDOW wh_zoncob AT 06, 34 WITH num_fil ROWS, 45 COLUMNS
+	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE OFF, MESSAGE LINE LAST, BORDER)
+IF vg_gui = 1 THEN
+	OPEN FORM f_ayuf037 FROM '../../../PRODUCCION/LIBRERIAS/forms/ayuf037'
+ELSE
+	OPEN FORM f_ayuf037 FROM '../../../PRODUCCION/LIBRERIAS/forms/ayuf037c'
+END IF
+DISPLAY FORM f_ayuf037
+LET filas_pant = fgl_scr_size('rh_zoncob')
+--#DISPLAY "Zona"		TO tit_col1
+--#DISPLAY "Descripcion"	TO tit_col2
+--#DISPLAY "C"			TO tit_col3
+--#DISPLAY "E"			TO tit_col4
+LET expr_est = NULL
+IF estado <> 'T' THEN
+	LET expr_est = '   AND z06_estado   = "', estado, '"'
+END IF
+LET expr_com = NULL
+IF comision <> 'T' THEN
+	LET expr_com = '   AND z06_comision = "', comision, '"'
+END IF
+LET primera = 1
+WHILE TRUE
+	IF NOT primera THEN
+		MESSAGE 'Digite condicion-búsqueda y presione (F12)'
+		LET int_flag = 0
+		CONSTRUCT BY NAME expr_sql ON z06_zona_cobro, z06_nombre,
+						z06_comision
+		IF int_flag THEN
+			CLOSE WINDOW wh_zoncob
+			EXIT WHILE
+		END IF
+	ELSE
+		LET expr_sql = ' 1 = 1'
+	END IF
+	LET primera = 0
+	MESSAGE 'Seleccionando datos . . . espere por favor.'
+	LET vm_columna_1 = 2
+	LET vm_columna_2 = 3
+	LET rm_orden[vm_columna_1] = 'ASC'
+	INITIALIZE col TO NULL
+	LET salir = 0
+	WHILE NOT salir
+		LET query = 'SELECT * FROM cxct006 ',
+				'WHERE ', expr_sql CLIPPED, ' ',
+					expr_est CLIPPED,
+					expr_com CLIPPED,
+				' ORDER BY ', vm_columna_1, ' ',
+					rm_orden[vm_columna_1],
+					', ', vm_columna_2, ' ',
+					rm_orden[vm_columna_2]
+		PREPARE zoncob FROM query
+		DECLARE q_zoncob CURSOR FOR zoncob
+		LET i = 1
+		FOREACH q_zoncob INTO r_z06.*
+			LET rh_zoncob[i].z06_zona_cobro = r_z06.z06_zona_cobro
+			LET rh_zoncob[i].z06_nombre     = r_z06.z06_nombre
+			LET rh_zoncob[i].z06_comision   = r_z06.z06_comision
+			LET rh_zoncob[i].z06_estado     = r_z06.z06_estado
+			LET i = i + 1
+			IF i > max_row THEN
+				EXIT FOREACH
+			END IF
+		END FOREACH
+		LET i = i - 1
+		IF i = 0 THEN	
+		        CALL fl_mensaje_consulta_sin_registros()
+			LET i     = 0
+			LET salir = 1
+			EXIT WHILE
+		END IF
+		MESSAGE '                                           '
+		LET int_flag = 0
+		CALL set_count(i)
+		DISPLAY ARRAY rh_zoncob TO rh_zoncob.*
+			ON KEY(RETURN)
+				LET salir = 1
+				EXIT DISPLAY
+			ON KEY(F2)
+				LET int_flag = 4
+				FOR i = 1 TO filas_pant
+					CLEAR rh_zoncob[i].*
+				END FOR
+				EXIT DISPLAY
+			ON KEY(F15)
+				LET col = 1
+				EXIT DISPLAY
+			ON KEY(F16)
+				LET col = 2
+				EXIT DISPLAY
+			ON KEY(F17)
+				IF comision = 'T' THEN
+					LET col = 3
+					EXIT DISPLAY
+				END IF
+			ON KEY(F18)
+				IF estado = 'T' THEN
+					LET col = 4
+					EXIT DISPLAY
+				END IF
+			--#BEFORE ROW
+				--#LET j = arr_curr()
+				--#DISPLAY j TO num_rows
+				--#DISPLAY i TO max_rows
+			--#AFTER DISPLAY
+				--#LET salir = 1
+		END DISPLAY
+		IF int_flag = 4 OR int_flag = 1 AND col IS NULL THEN
+			EXIT WHILE
+		END IF
+		IF col IS NOT NULL AND NOT salir THEN
+			IF col <> vm_columna_1 THEN
+				LET vm_columna_2           = vm_columna_1
+				LET rm_orden[vm_columna_2] =
+							rm_orden[vm_columna_1]
+				LET vm_columna_1           = col
+			END IF
+			IF rm_orden[vm_columna_1] = 'ASC' THEN
+				LET rm_orden[vm_columna_1] = 'DESC'
+			ELSE
+				LET rm_orden[vm_columna_1] = 'ASC'
+			END IF
+			INITIALIZE col TO NULL
+		END IF
+	END WHILE
+	IF i = 0 THEN
+		CONTINUE WHILE
+	END IF
+	IF NOT salir AND int_flag = 4 THEN
+		CONTINUE WHILE
+	END IF
+	IF int_flag <> 4 THEN
+		CLOSE WINDOW wh_zoncob
+		EXIT WHILE
+	END IF
+	FOR i = 1 TO filas_pant
+		CLEAR rh_zoncob[i].*
+	END FOR
+END WHILE
+IF int_flag <> 0 THEN
+	INITIALIZE rh_zoncob[1].* TO NULL
+	RETURN rh_zoncob[1].z06_zona_cobro, rh_zoncob[1].z06_nombre
+END IF
+LET i = arr_curr()
+RETURN rh_zoncob[i].z06_zona_cobro, rh_zoncob[i].z06_nombre
 
 END FUNCTION
 
@@ -17303,15 +17610,19 @@ END FUNCTION
 
 
 
-FUNCTION fl_ayuda_sectorial()
-DEFINE rh_sectorial	ARRAY[100] OF RECORD
+FUNCTION fl_ayuda_sectorial(codcia, ano_sect, tipo)
+DEFINE codcia		LIKE rolt017.n17_compania
+DEFINE ano_sect		LIKE rolt017.n17_ano_sect
+DEFINE tipo		CHAR(1)
+DEFINE rh_sectorial	ARRAY[200] OF RECORD
 				n17_sectorial	LIKE rolt017.n17_sectorial,
 				n17_descripcion	LIKE rolt017.n17_descripcion,
 				n17_valor	LIKE rolt017.n17_valor
 			END RECORD
+DEFINE ano_aux		LIKE rolt017.n17_ano_sect
 DEFINE i, j		SMALLINT
-DEFINE query		CHAR(600)
-DEFINE expr_sql		CHAR(300)
+DEFINE query		CHAR(800)
+DEFINE expr_sql		CHAR(500)
 DEFINE rm_orden         ARRAY[10] OF CHAR(4)
 DEFINE vm_columna_1     SMALLINT
 DEFINE vm_columna_2     SMALLINT
@@ -17319,9 +17630,9 @@ DEFINE col              SMALLINT
 DEFINE filas_max	SMALLINT
 DEFINE salir		SMALLINT
 
-OPTIONS INPUT WRAP,
+OPTIONS INPUT NO WRAP,
 	ACCEPT KEY 	F12
-OPEN WINDOW w_sectorial AT 06, 22 WITH 15 ROWS, 58 COLUMNS
+OPEN WINDOW w_sectorial AT 06, 12 WITH 15 ROWS, 68 COLUMNS
         ATTRIBUTE(FORM LINE FIRST, COMMENT LINE OFF, MESSAGE LINE LAST, BORDER)
 IF vg_gui = 1 THEN
 	OPEN FORM f_ayuf149 FROM '../../../PRODUCCION/LIBRERIAS/forms/ayuf149'
@@ -17329,7 +17640,7 @@ ELSE
 	OPEN FORM f_ayuf149 FROM '../../../PRODUCCION/LIBRERIAS/forms/ayuf149c'
 END IF
 DISPLAY FORM f_ayuf149
-LET filas_max = 100
+LET filas_max = 200
 FOR i = 1 TO 10
         LET rm_orden[i] = 'ASC'
 END FOR
@@ -17338,6 +17649,28 @@ END FOR
 --#DISPLAY 'Valor'		TO tit_col3
 WHILE TRUE
 	--#MESSAGE 'Digite condicion-búsqueda y presione (F12)'
+	IF tipo = 'C' THEN
+		LET int_flag = 0
+		INPUT BY NAME ano_sect
+			WITHOUT DEFAULTS
+			ON KEY(INTERRUPT)
+				LET int_flag = 1
+				EXIT INPUT
+			BEFORE FIELD ano_sect
+				LET ano_aux = ano_sect
+			AFTER FIELD ano_sect
+				IF ano_sect IS NULL THEN
+					LET ano_sect = ano_aux
+					DISPLAY BY NAME ano_sect
+				END IF
+		END INPUT
+		IF int_flag THEN
+			CLOSE WINDOW w_sectorial
+			EXIT WHILE
+		END IF
+	ELSE
+		DISPLAY BY NAME ano_sect
+	END IF
 	LET int_flag = 0
 	CONSTRUCT BY NAME expr_sql ON n17_sectorial, n17_descripcion, n17_valor
 	IF int_flag THEN
@@ -17353,7 +17686,9 @@ WHILE TRUE
 		LET query = 'SELECT n17_sectorial, n17_descripcion, ',
 				' n17_valor ',
 				' FROM rolt017 ',
-				' WHERE ', expr_sql CLIPPED,
+				' WHERE n17_compania = ', codcia,
+				'   AND n17_ano_sect = ', ano_sect,
+				'   AND ', expr_sql CLIPPED,
                     		' ORDER BY ', vm_columna_1, ' ',
 					rm_orden[vm_columna_1], ', ',
 					vm_columna_2, ' ',rm_orden[vm_columna_2]
@@ -17436,11 +17771,12 @@ WHILE TRUE
 	END IF
 END WHILE
 IF int_flag <> 0 THEN
-	INITIALIZE rh_sectorial[1].* TO NULL
-	RETURN rh_sectorial[1].n17_sectorial, rh_sectorial[1].n17_descripcion
+	INITIALIZE ano_sect, rh_sectorial[1].* TO NULL
+	RETURN ano_sect, rh_sectorial[1].n17_sectorial,
+		rh_sectorial[1].n17_descripcion
 END IF
 LET i = arr_curr()
-RETURN rh_sectorial[i].n17_sectorial, rh_sectorial[i].n17_descripcion
+RETURN ano_sect, rh_sectorial[i].n17_sectorial, rh_sectorial[i].n17_descripcion
 
 END FUNCTION
 
@@ -22002,5 +22338,1789 @@ IF int_flag <> 0 THEN
 END IF
 LET i = arr_curr()
 RETURN rh_tipo_ident[i].r09_tipo_ident, rh_tipo_ident[i].r09_descripcion
+
+END FUNCTION
+
+
+
+FUNCTION fl_ayuda_transaccion_remota(cod_cia, tip_tran)
+DEFINE cod_cia		LIKE rept090.r90_compania
+DEFINE tip_tran		LIKE rept090.r90_cod_tran
+DEFINE cod_loc		LIKE rept090.r90_localidad
+DEFINE rh_transac	ARRAY[20000] OF RECORD
+			   	r90_cod_tran   	LIKE rept090.r90_cod_tran,
+			   	r90_num_tran   	LIKE rept090.r90_num_tran,
+			   	r91_nomcli     	LIKE rept091.r91_nomcli,
+			   	r90_fecing	DATE,
+				g02_abreviacion	LIKE gent002.g02_abreviacion
+			END RECORD
+DEFINE rh_loc		ARRAY[20000] OF LIKE rept090.r90_localidad
+DEFINE expr_tran	VARCHAR(100)
+DEFINE criterio		CHAR(800)	## Contiene el CONSTRUCT del usuario
+DEFINE query		CHAR(2500)	## Contiene todo el query preparado
+DEFINE filas_max, i, j	SMALLINT	## No. elementos del arreglo
+DEFINE filas_pant	SMALLINT	## No. elementos de cada pantalla
+DEFINE rm_orden		ARRAY[10] OF CHAR(4)
+DEFINE vm_columna_1	SMALLINT
+DEFINE vm_columna_2	SMALLINT
+DEFINE col, salir	SMALLINT
+DEFINE fil_ini, fil_fin	SMALLINT
+DEFINE col_ini, col_fin	SMALLINT
+DEFINE primera		SMALLINT
+
+LET fil_ini = 6
+LET col_ini = 12
+LET fil_fin = 14
+LET col_fin = 67
+IF vg_gui = 0 THEN
+	LET fil_ini = 5
+	LET col_ini = 11
+	LET fil_fin = 16
+	LET col_fin = 68
+END IF
+OPTIONS INPUT WRAP,
+	ACCEPT KEY 	F12
+OPEN WINDOW w_ayuf177 AT fil_ini, col_ini WITH fil_fin ROWS, col_fin COLUMNS
+        ATTRIBUTE(FORM LINE FIRST, COMMENT LINE OFF, MESSAGE LINE LAST, BORDER)
+IF vg_gui = 1 THEN
+	OPEN FORM f_ayuf177 FROM '../../../PRODUCCION/LIBRERIAS/forms/ayuf177'
+ELSE
+	OPEN FORM f_ayuf177 FROM '../../../PRODUCCION/LIBRERIAS/forms/ayuf177c'
+END IF
+DISPLAY FORM f_ayuf177
+LET filas_max  = 20000
+LET filas_pant = fgl_scr_size('rh_transac')
+--#DISPLAY 'TP'		TO tit_col1
+--#DISPLAY 'Número'	TO tit_col2
+IF tip_tran = "FA" OR tip_tran = "DF" OR tip_tran = "AF" THEN
+	--#DISPLAY 'Cliente'	TO tit_col3
+ELSE
+	IF tip_tran = "CL" OR tip_tran = "DC" THEN
+		--#DISPLAY 'Proveedor'   TO tit_col3
+	ELSE
+		--#DISPLAY 'Descripcion' TO tit_col3
+	END IF
+END IF
+--#DISPLAY 'Fecha'	TO tit_col4
+--#DISPLAY 'Localidad'	TO tit_col5
+LET primera = 1
+WHILE TRUE
+	--#MESSAGE "Digite condicion-búsqueda y presione (F12)"
+	IF tip_tran <> '00' THEN 
+		DISPLAY tip_tran TO r90_cod_tran
+	END IF
+	IF NOT primera THEN
+		LET int_flag = 0
+		CONSTRUCT BY NAME criterio ON r90_num_tran, r91_nomcli,
+				r90_fecing, g02_abreviacion
+		IF int_flag THEN
+			CLOSE WINDOW w_ayuf177
+			EXIT WHILE
+		END IF
+	ELSE
+		LET criterio = " 1 = 1 "
+	END IF
+	LET primera = 0
+	MESSAGE "Seleccionando datos .."
+	LET expr_tran = NULL
+	IF tip_tran <> '00' THEN 
+		LET expr_tran = "   AND r90_cod_tran  = '", tip_tran, "'"
+	END IF
+	LET vm_columna_1           = 2
+	LET vm_columna_2           = 4
+	LET rm_orden[vm_columna_1] = 'DESC'
+	LET rm_orden[vm_columna_2] = 'ASC'
+	INITIALIZE col TO NULL
+	LET salir = 0
+	WHILE NOT salir
+		LET query = "SELECT UNIQUE r90_cod_tran, r90_num_tran, ",
+					"CASE WHEN r90_cod_tran IN ('FA', ",
+						"'DF', 'AF', 'DC', 'CL') ",
+						"THEN r91_nomcli ",
+						"ELSE r91_referencia ",
+					"END, ",
+					"DATE(r90_fecing), g02_abreviacion, ",
+					"r90_localidad ",
+				" FROM rept090, rept091, rept092, gent002",
+				" WHERE r90_compania  = ", cod_cia,
+				expr_tran CLIPPED,
+				"   AND ", criterio CLIPPED,
+				"   AND r91_compania  = r90_compania ",
+				"   AND r91_localidad = r90_localidad ",
+				"   AND r91_cod_tran  = r90_cod_tran ",
+				"   AND r91_num_tran  = r90_num_tran ",
+				"   AND r92_compania  = r91_compania ",
+				"   AND r92_localidad = r91_localidad ",
+				"   AND r92_cod_tran  = r91_cod_tran ",
+				"   AND r92_num_tran  = r91_num_tran ",
+				"   AND r92_cant_ven  > ",
+					"NVL((SELECT SUM(r68_cantidad) ",
+					"FROM rept068 ",
+					"WHERE r68_compania  = r92_compania ",
+					"  AND r68_localidad = r92_localidad ",
+					"  AND r68_cod_tran  = r92_cod_tran ",
+					"  AND r68_num_tran  = r92_num_tran),0) ",
+				"   AND g02_compania  = r91_compania ",
+				"   AND g02_localidad = r91_localidad ",
+				" ORDER BY ", vm_columna_1, " ",
+					rm_orden[vm_columna_1], ", ",
+					vm_columna_2, " ",rm_orden[vm_columna_2]
+		PREPARE transac1_2 FROM query
+		DECLARE q_transac1_2 CURSOR FOR transac1_2
+		LET i = 1
+		FOREACH q_transac1_2 INTO rh_transac[i].*, rh_loc[i]
+	        	LET i = i + 1
+	        	IF i > filas_max THEN
+	                	EXIT FOREACH
+	       	 	END IF
+		END FOREACH
+		LET i = i - 1
+		IF i = 0 THEN
+	        	CALL fl_mensaje_consulta_sin_registros()
+			LET salir = 0
+			LET i     = 0
+			EXIT WHILE
+		END IF
+		IF vg_gui = 0 THEN
+			MESSAGE "                      "
+		END IF
+		CALL set_count(i)
+		LET int_flag = 0
+		DISPLAY ARRAY rh_transac TO rh_transac.*
+			ON KEY(F2)
+				LET int_flag = 4
+		                FOR i = 1 TO filas_pant
+                	                CLEAR rh_transac[i].*
+	                        END FOR
+				EXIT DISPLAY
+			ON KEY(RETURN)
+                        	LET salir = 1
+                        	EXIT DISPLAY
+			ON KEY(F16)
+                        	LET col = 2
+                        	EXIT DISPLAY
+                	ON KEY(F17)
+                        	LET col = 3
+                        	EXIT DISPLAY
+                	ON KEY(F18)
+                        	LET col = 4
+                        	EXIT DISPLAY
+                	ON KEY(F19)
+                        	LET col = 5
+                        	EXIT DISPLAY
+			--#BEFORE ROW
+				--#LET j = arr_curr()
+				--#MESSAGE j, ' de ', i
+                	--#AFTER DISPLAY
+                        	--#LET salir = 1
+		END DISPLAY
+        	IF int_flag = 4  OR int_flag = 1 AND col IS NULL THEN
+                	EXIT WHILE
+        	END IF
+        	IF col IS NOT NULL AND NOT salir THEN
+                	IF col <> vm_columna_1 THEN
+                        	LET vm_columna_2           = vm_columna_1
+                        	LET rm_orden[vm_columna_2] =
+							rm_orden[vm_columna_1]
+                       		LET vm_columna_1           = col
+                	END IF
+                	IF rm_orden[vm_columna_1] = 'ASC' THEN
+                        	LET rm_orden[vm_columna_1] = 'DESC'
+                	ELSE
+                        	LET rm_orden[vm_columna_1] = 'ASC'
+                	END IF
+                	INITIALIZE col TO NULL
+        	END IF
+	END WHILE
+	IF i = 0 THEN
+        	CONTINUE WHILE
+	END IF
+	IF NOT salir AND int_flag = 4 THEN
+        	CONTINUE WHILE
+	END IF
+	IF int_flag <> 4 THEN
+		CLOSE WINDOW w_ayuf177
+		EXIT WHILE
+	END IF
+	FOR i = 1 TO filas_pant
+		CLEAR rh_transac[i].*
+	END FOR
+END WHILE
+IF int_flag <> 0 THEN
+	INITIALIZE rh_transac[1].*, rh_loc[1] TO NULL
+	RETURN rh_loc[1], rh_transac[1].r90_cod_tran,rh_transac[1].r90_num_tran,
+		rh_transac[1].r91_nomcli
+END IF
+LET i = arr_curr()
+RETURN rh_loc[i], rh_transac[i].r90_cod_tran, rh_transac[i].r90_num_tran,
+	rh_transac[i].r91_nomcli
+
+END FUNCTION
+
+
+
+FUNCTION fl_ayuda_zonas(codcia, codloc, estado)
+DEFINE codcia		LIKE rept108.r108_compania
+DEFINE codloc		LIKE rept108.r108_localidad
+DEFINE estado		LIKE rept108.r108_estado
+DEFINE rh_zona		ARRAY[500] OF RECORD
+				r108_cod_zona	LIKE rept108.r108_cod_zona,
+				r108_descripcion LIKE rept108.r108_descripcion,
+				r108_estado	LIKE rept108.r108_estado
+			END RECORD
+DEFINE query		CHAR(800)
+DEFINE expr_sql		CHAR(400)
+DEFINE expr_est		VARCHAR(100)
+DEFINE i, j, max_row	SMALLINT
+DEFINE filas_pant	SMALLINT
+DEFINE num_fil		SMALLINT
+DEFINE rm_orden		ARRAY[10] OF CHAR(4)
+DEFINE vm_columna_1	SMALLINT
+DEFINE vm_columna_2	SMALLINT
+DEFINE col, salir	SMALLINT
+DEFINE primera		SMALLINT
+DEFINE r_r108		RECORD LIKE rept108.*
+
+LET filas_pant = 10
+LET max_row    = 500
+LET num_fil    = 14
+IF vg_gui = 0 THEN
+	LET num_fil = 15
+END IF
+OPEN WINDOW wh_zona AT 06, 29 WITH num_fil ROWS, 50 COLUMNS
+        ATTRIBUTE(FORM LINE FIRST, COMMENT LINE OFF, MESSAGE LINE LAST, BORDER)
+IF vg_gui = 1 THEN
+	OPEN FORM f_ayuf178 FROM '../../../PRODUCCION/LIBRERIAS/forms/ayuf178'
+ELSE
+	OPEN FORM f_ayuf178 FROM '../../../PRODUCCION/LIBRERIAS/forms/ayuf178c'
+END IF
+DISPLAY FORM f_ayuf178
+--#DISPLAY "Zona"		TO tit_col1
+--#DISPLAY 'Descripción'	TO tit_col2
+--#DISPLAY "E"			TO tit_col3
+LET expr_est = NULL
+IF estado <> 'T' THEN
+	LET expr_est = '  AND r108_estado   = "', estado, '"'
+END IF
+LET primera = 1
+WHILE TRUE
+	IF NOT primera THEN
+		MESSAGE 'Digite condicion-búsqueda y presione (F12)'
+		LET int_flag = 0
+		CONSTRUCT BY NAME expr_sql ON r108_cod_zona, r108_descripcion
+		IF int_flag THEN
+			CLOSE WINDOW wh_zona
+			EXIT WHILE
+		END IF
+	ELSE
+		LET expr_sql = ' 1 = 1'
+	END IF
+	LET primera = 0
+	MESSAGE 'Seleccionando datos . . . espere por favor.'
+	LET vm_columna_1 = 5
+	LET vm_columna_2 = 3
+	LET rm_orden[vm_columna_1] = 'ASC'
+	INITIALIZE col TO NULL
+	LET salir = 0
+	WHILE NOT salir
+		LET query = 'SELECT * FROM rept108 ',
+				'WHERE r108_compania  = ', codcia,
+				'  AND r108_localidad = ', codloc,
+				expr_est CLIPPED,
+				'  AND ', expr_sql CLIPPED,
+			' ORDER BY ', vm_columna_1, ' ', rm_orden[vm_columna_1],
+				', ', vm_columna_2, ' ', rm_orden[vm_columna_2]
+		PREPARE cons_zona FROM query
+		DECLARE q_cons_zona CURSOR FOR cons_zona
+		LET i = 1
+		FOREACH q_cons_zona INTO r_r108.*
+			LET rh_zona[i].r108_cod_zona    = r_r108.r108_cod_zona
+			LET rh_zona[i].r108_descripcion =r_r108.r108_descripcion
+			LET rh_zona[i].r108_estado      = r_r108.r108_estado
+			LET i = i + 1
+			IF i > max_row THEN
+				EXIT FOREACH
+			END IF
+		END FOREACH
+		LET i = i - 1
+		IF i = 0 THEN	
+		        CALL fl_mensaje_consulta_sin_registros()
+			LET i = 0
+			LET salir = 1
+			EXIT WHILE
+		END IF
+		MESSAGE '                                           '
+		LET int_flag = 0
+		CALL set_count(i)
+		DISPLAY ARRAY rh_zona TO rh_zona.*
+			ON KEY(RETURN)
+				LET salir = 1
+				EXIT DISPLAY
+			ON KEY(F2)
+				LET int_flag = 4
+				FOR i = 1 TO filas_pant
+					CLEAR rh_zona[i].*
+				END FOR
+				EXIT DISPLAY
+			ON KEY(F15)
+				LET col = 3
+				EXIT DISPLAY
+			ON KEY(F16)
+				LET col = 5
+				EXIT DISPLAY
+			ON KEY(F17)
+				IF estado = 'T' THEN
+					LET col = 4
+					EXIT DISPLAY
+				END IF
+			--#BEFORE ROW
+				--#LET j = arr_curr()
+				--#DISPLAY j TO num_row
+				--#DISPLAY i TO max_row
+			--#AFTER DISPLAY
+				--#LET salir = 1
+		END DISPLAY
+		IF int_flag = 4 OR int_flag = 1 AND col IS NULL THEN
+			EXIT WHILE
+		END IF
+		IF col IS NOT NULL AND NOT salir THEN
+			IF col <> vm_columna_1 THEN
+				LET vm_columna_2           = vm_columna_1
+				LET rm_orden[vm_columna_2] =
+							rm_orden[vm_columna_1]
+				LET vm_columna_1           = col
+			END IF
+			IF rm_orden[vm_columna_1] = 'ASC' THEN
+				LET rm_orden[vm_columna_1] = 'DESC'
+			ELSE
+				LET rm_orden[vm_columna_1] = 'ASC'
+			END IF
+			INITIALIZE col TO NULL
+		END IF
+	END WHILE
+	IF i = 0 THEN
+		CONTINUE WHILE
+	END IF
+	IF NOT salir AND int_flag = 4 THEN
+		CONTINUE WHILE
+	END IF
+	IF int_flag <> 4 THEN
+		CLOSE WINDOW wh_zona
+		EXIT WHILE
+	END IF
+	FOR i = 1 TO filas_pant
+		CLEAR rh_zona[i].*
+	END FOR
+END WHILE
+IF int_flag <> 0 THEN
+	INITIALIZE rh_zona[1].* TO NULL
+        RETURN rh_zona[1].r108_cod_zona, rh_zona[1].r108_descripcion
+END IF
+LET i = arr_curr()
+RETURN rh_zona[i].r108_cod_zona, rh_zona[i].r108_descripcion
+
+END FUNCTION
+
+
+
+FUNCTION fl_ayuda_subzonas(codcia, codloc, zona, estado)
+DEFINE codcia		LIKE rept109.r109_compania
+DEFINE codloc		LIKE rept109.r109_localidad
+DEFINE zona		LIKE rept109.r109_cod_zona
+DEFINE estado		LIKE rept109.r109_estado
+DEFINE rh_subzona	ARRAY[500] OF RECORD
+				r109_cod_zona	LIKE rept109.r109_cod_zona,
+				r109_cod_subzona LIKE rept109.r109_cod_subzona,
+				r109_descripcion LIKE rept109.r109_descripcion,
+				r109_estado	LIKE rept109.r109_estado
+			END RECORD
+DEFINE query		CHAR(800)
+DEFINE expr_sql		CHAR(400)
+DEFINE expr_zon		VARCHAR(100)
+DEFINE expr_est		VARCHAR(100)
+DEFINE i, j, max_row	SMALLINT
+DEFINE filas_pant	SMALLINT
+DEFINE num_fil		SMALLINT
+DEFINE rm_orden		ARRAY[10] OF CHAR(4)
+DEFINE vm_columna_1	SMALLINT
+DEFINE vm_columna_2	SMALLINT
+DEFINE col, salir	SMALLINT
+DEFINE primera		SMALLINT
+DEFINE r_r109		RECORD LIKE rept109.*
+
+LET filas_pant = 10
+LET max_row    = 500
+LET num_fil    = 14
+IF vg_gui = 0 THEN
+	LET num_fil = 15
+END IF
+OPEN WINDOW wh_subzona AT 06, 25 WITH num_fil ROWS, 54 COLUMNS
+        ATTRIBUTE(FORM LINE FIRST, COMMENT LINE OFF, MESSAGE LINE LAST, BORDER)
+IF vg_gui = 1 THEN
+	OPEN FORM f_ayuf179 FROM '../../../PRODUCCION/LIBRERIAS/forms/ayuf179'
+ELSE
+	OPEN FORM f_ayuf179 FROM '../../../PRODUCCION/LIBRERIAS/forms/ayuf179c'
+END IF
+DISPLAY FORM f_ayuf179
+--#DISPLAY "Zona"		TO tit_col1
+--#DISPLAY "Sub."		TO tit_col2
+--#DISPLAY 'Descripción'	TO tit_col3
+--#DISPLAY "E"			TO tit_col4
+LET expr_zon = NULL
+IF zona <> 0 THEN
+	LET expr_zon = '  AND r109_cod_zona = ', zona
+END IF
+LET expr_est = NULL
+IF estado <> 'T' THEN
+	LET expr_est = '  AND r109_estado   = "', estado, '"'
+END IF
+LET primera = 1
+WHILE TRUE
+	IF NOT primera THEN
+		MESSAGE 'Digite condicion-búsqueda y presione (F12)'
+		LET int_flag = 0
+		CONSTRUCT BY NAME expr_sql ON r109_cod_zona, r109_cod_subzona,
+						r109_descripcion
+		IF int_flag THEN
+			CLOSE WINDOW wh_subzona
+			EXIT WHILE
+		END IF
+	ELSE
+		LET expr_sql = ' 1 = 1'
+	END IF
+	LET primera = 0
+	MESSAGE 'Seleccionando datos . . . espere por favor.'
+	LET vm_columna_1 = 6
+	LET vm_columna_2 = 3
+	LET rm_orden[vm_columna_1] = 'ASC'
+	INITIALIZE col TO NULL
+	LET salir = 0
+	WHILE NOT salir
+		LET query = 'SELECT * FROM rept109 ',
+				'WHERE r109_compania  = ', codcia,
+				'  AND r109_localidad = ', codloc,
+				expr_zon CLIPPED,
+				expr_est CLIPPED,
+				'  AND ', expr_sql CLIPPED,
+			' ORDER BY ', vm_columna_1, ' ', rm_orden[vm_columna_1],
+				', ', vm_columna_2, ' ', rm_orden[vm_columna_2]
+		PREPARE cons_subzona FROM query
+		DECLARE q_cons_subzona CURSOR FOR cons_subzona
+		LET i = 1
+		FOREACH q_cons_subzona INTO r_r109.*
+			LET rh_subzona[i].r109_cod_zona    = r_r109.r109_cod_zona
+			LET rh_subzona[i].r109_cod_subzona =r_r109.r109_cod_subzona
+			LET rh_subzona[i].r109_descripcion =r_r109.r109_descripcion
+			LET rh_subzona[i].r109_estado      = r_r109.r109_estado
+			LET i = i + 1
+			IF i > max_row THEN
+				EXIT FOREACH
+			END IF
+		END FOREACH
+		LET i = i - 1
+		IF i = 0 THEN	
+		        CALL fl_mensaje_consulta_sin_registros()
+			LET i = 0
+			LET salir = 1
+			EXIT WHILE
+		END IF
+		MESSAGE '                                           '
+		LET int_flag = 0
+		CALL set_count(i)
+		DISPLAY ARRAY rh_subzona TO rh_subzona.*
+			ON KEY(RETURN)
+				LET salir = 1
+				EXIT DISPLAY
+			ON KEY(F2)
+				LET int_flag = 4
+				FOR i = 1 TO filas_pant
+					CLEAR rh_subzona[i].*
+				END FOR
+				EXIT DISPLAY
+			ON KEY(F15)
+				LET col = 3
+				EXIT DISPLAY
+			ON KEY(F16)
+				LET col = 4
+				EXIT DISPLAY
+			ON KEY(F17)
+				LET col = 6
+				EXIT DISPLAY
+			ON KEY(F18)
+				IF estado = 'T' THEN
+					LET col = 5
+					EXIT DISPLAY
+				END IF
+			--#BEFORE ROW
+				--#LET j = arr_curr()
+				--#DISPLAY j TO num_row
+				--#DISPLAY i TO max_row
+			--#AFTER DISPLAY
+				--#LET salir = 1
+		END DISPLAY
+		IF int_flag = 4 OR int_flag = 1 AND col IS NULL THEN
+			EXIT WHILE
+		END IF
+		IF col IS NOT NULL AND NOT salir THEN
+			IF col <> vm_columna_1 THEN
+				LET vm_columna_2           = vm_columna_1
+				LET rm_orden[vm_columna_2] =
+							rm_orden[vm_columna_1]
+				LET vm_columna_1           = col
+			END IF
+			IF rm_orden[vm_columna_1] = 'ASC' THEN
+				LET rm_orden[vm_columna_1] = 'DESC'
+			ELSE
+				LET rm_orden[vm_columna_1] = 'ASC'
+			END IF
+			INITIALIZE col TO NULL
+		END IF
+	END WHILE
+	IF i = 0 THEN
+		CONTINUE WHILE
+	END IF
+	IF NOT salir AND int_flag = 4 THEN
+		CONTINUE WHILE
+	END IF
+	IF int_flag <> 4 THEN
+		CLOSE WINDOW wh_subzona
+		EXIT WHILE
+	END IF
+	FOR i = 1 TO filas_pant
+		CLEAR rh_subzona[i].*
+	END FOR
+END WHILE
+IF int_flag <> 0 THEN
+	INITIALIZE rh_subzona[1].* TO NULL
+        RETURN rh_subzona[1].r109_cod_subzona, rh_subzona[1].r109_descripcion
+END IF
+LET i = arr_curr()
+RETURN rh_subzona[i].r109_cod_subzona, rh_subzona[i].r109_descripcion
+
+END FUNCTION
+
+
+
+FUNCTION fl_ayuda_transporte(codcia, codloc, estado)
+DEFINE codcia		LIKE rept110.r110_compania
+DEFINE codloc		LIKE rept110.r110_localidad
+DEFINE estado		LIKE rept110.r110_estado
+DEFINE rh_trans		ARRAY[500] OF RECORD
+				r110_cod_trans	LIKE rept110.r110_cod_trans,
+				r110_descripcion LIKE rept110.r110_descripcion,
+				r110_estado	LIKE rept110.r110_estado
+			END RECORD
+DEFINE query		CHAR(800)
+DEFINE expr_sql		CHAR(400)
+DEFINE expr_est		VARCHAR(100)
+DEFINE i, j, max_row	SMALLINT
+DEFINE filas_pant	SMALLINT
+DEFINE num_fil		SMALLINT
+DEFINE rm_orden		ARRAY[10] OF CHAR(4)
+DEFINE vm_columna_1	SMALLINT
+DEFINE vm_columna_2	SMALLINT
+DEFINE col, salir	SMALLINT
+DEFINE primera		SMALLINT
+DEFINE r_r110		RECORD LIKE rept110.*
+
+LET filas_pant = 10
+LET max_row    = 500
+LET num_fil    = 14
+IF vg_gui = 0 THEN
+	LET num_fil = 15
+END IF
+OPEN WINDOW wh_trans AT 06, 29 WITH num_fil ROWS, 50 COLUMNS
+        ATTRIBUTE(FORM LINE FIRST, COMMENT LINE OFF, MESSAGE LINE LAST, BORDER)
+IF vg_gui = 1 THEN
+	OPEN FORM f_ayuf180 FROM '../../../PRODUCCION/LIBRERIAS/forms/ayuf180'
+ELSE
+	OPEN FORM f_ayuf180 FROM '../../../PRODUCCION/LIBRERIAS/forms/ayuf180c'
+END IF
+DISPLAY FORM f_ayuf180
+--#DISPLAY "Tran"		TO tit_col1
+--#DISPLAY 'Descripción'	TO tit_col2
+--#DISPLAY "E"			TO tit_col3
+LET expr_est = NULL
+IF estado <> 'T' THEN
+	LET expr_est = '  AND r110_estado   = "', estado, '"'
+END IF
+LET primera = 1
+WHILE TRUE
+	IF NOT primera THEN
+		MESSAGE 'Digite condicion-búsqueda y presione (F12)'
+		LET int_flag = 0
+		CONSTRUCT BY NAME expr_sql ON r110_cod_trans, r110_descripcion
+		IF int_flag THEN
+			CLOSE WINDOW wh_trans
+			EXIT WHILE
+		END IF
+	ELSE
+		LET expr_sql = ' 1 = 1'
+	END IF
+	LET primera = 0
+	MESSAGE 'Seleccionando datos . . . espere por favor.'
+	LET vm_columna_1 = 5
+	LET vm_columna_2 = 3
+	LET rm_orden[vm_columna_1] = 'ASC'
+	INITIALIZE col TO NULL
+	LET salir = 0
+	WHILE NOT salir
+		LET query = 'SELECT * FROM rept110 ',
+				'WHERE r110_compania  = ', codcia,
+				'  AND r110_localidad = ', codloc,
+				expr_est CLIPPED,
+				'  AND ', expr_sql CLIPPED,
+			' ORDER BY ', vm_columna_1, ' ', rm_orden[vm_columna_1],
+				', ', vm_columna_2, ' ', rm_orden[vm_columna_2]
+		PREPARE cons_trans FROM query
+		DECLARE q_cons_trans CURSOR FOR cons_trans
+		LET i = 1
+		FOREACH q_cons_trans INTO r_r110.*
+			LET rh_trans[i].r110_cod_trans   = r_r110.r110_cod_trans
+			LET rh_trans[i].r110_descripcion=r_r110.r110_descripcion
+			LET rh_trans[i].r110_estado      = r_r110.r110_estado
+			LET i = i + 1
+			IF i > max_row THEN
+				EXIT FOREACH
+			END IF
+		END FOREACH
+		LET i = i - 1
+		IF i = 0 THEN	
+		        CALL fl_mensaje_consulta_sin_registros()
+			LET i = 0
+			LET salir = 1
+			EXIT WHILE
+		END IF
+		MESSAGE '                                           '
+		LET int_flag = 0
+		CALL set_count(i)
+		DISPLAY ARRAY rh_trans TO rh_trans.*
+			ON KEY(RETURN)
+				LET salir = 1
+				EXIT DISPLAY
+			ON KEY(F2)
+				LET int_flag = 4
+				FOR i = 1 TO filas_pant
+					CLEAR rh_trans[i].*
+				END FOR
+				EXIT DISPLAY
+			ON KEY(F15)
+				LET col = 3
+				EXIT DISPLAY
+			ON KEY(F16)
+				LET col = 5
+				EXIT DISPLAY
+			ON KEY(F17)
+				IF estado = 'T' THEN
+					LET col = 4
+					EXIT DISPLAY
+				END IF
+			--#BEFORE ROW
+				--#LET j = arr_curr()
+				--#DISPLAY j TO num_row
+				--#DISPLAY i TO max_row
+			--#AFTER DISPLAY
+				--#LET salir = 1
+		END DISPLAY
+		IF int_flag = 4 OR int_flag = 1 AND col IS NULL THEN
+			EXIT WHILE
+		END IF
+		IF col IS NOT NULL AND NOT salir THEN
+			IF col <> vm_columna_1 THEN
+				LET vm_columna_2           = vm_columna_1
+				LET rm_orden[vm_columna_2] =
+							rm_orden[vm_columna_1]
+				LET vm_columna_1           = col
+			END IF
+			IF rm_orden[vm_columna_1] = 'ASC' THEN
+				LET rm_orden[vm_columna_1] = 'DESC'
+			ELSE
+				LET rm_orden[vm_columna_1] = 'ASC'
+			END IF
+			INITIALIZE col TO NULL
+		END IF
+	END WHILE
+	IF i = 0 THEN
+		CONTINUE WHILE
+	END IF
+	IF NOT salir AND int_flag = 4 THEN
+		CONTINUE WHILE
+	END IF
+	IF int_flag <> 4 THEN
+		CLOSE WINDOW wh_trans
+		EXIT WHILE
+	END IF
+	FOR i = 1 TO filas_pant
+		CLEAR rh_trans[i].*
+	END FOR
+END WHILE
+IF int_flag <> 0 THEN
+	INITIALIZE rh_trans[1].* TO NULL
+        RETURN rh_trans[1].r110_cod_trans, rh_trans[1].r110_descripcion
+END IF
+LET i = arr_curr()
+RETURN rh_trans[i].r110_cod_trans, rh_trans[i].r110_descripcion
+
+END FUNCTION
+
+
+
+FUNCTION fl_ayuda_chofer(codcia, codloc, trans, estado)
+DEFINE codcia		LIKE rept111.r111_compania
+DEFINE codloc		LIKE rept111.r111_localidad
+DEFINE trans		LIKE rept111.r111_cod_trans
+DEFINE estado		LIKE rept111.r111_estado
+DEFINE rh_chofer	ARRAY[500] OF RECORD
+				r111_cod_trans	LIKE rept111.r111_cod_trans,
+				r111_cod_chofer LIKE rept111.r111_cod_chofer,
+				r111_nombre	LIKE rept111.r111_nombre,
+				r111_estado	LIKE rept111.r111_estado
+			END RECORD
+DEFINE query		CHAR(1000)
+DEFINE expr_sql		CHAR(400)
+DEFINE expr_tra		VARCHAR(100)
+DEFINE expr_est		VARCHAR(100)
+DEFINE i, j, max_row	SMALLINT
+DEFINE filas_pant	SMALLINT
+DEFINE num_fil		SMALLINT
+DEFINE rm_orden		ARRAY[10] OF CHAR(4)
+DEFINE vm_columna_1	SMALLINT
+DEFINE vm_columna_2	SMALLINT
+DEFINE col, salir	SMALLINT
+DEFINE primera		SMALLINT
+DEFINE r_r111		RECORD LIKE rept111.*
+
+LET filas_pant = 10
+LET max_row    = 500
+LET num_fil    = 14
+IF vg_gui = 0 THEN
+	LET num_fil = 15
+END IF
+OPEN WINDOW wh_chofer AT 06, 25 WITH num_fil ROWS, 54 COLUMNS
+        ATTRIBUTE(FORM LINE FIRST, COMMENT LINE OFF, MESSAGE LINE LAST, BORDER)
+IF vg_gui = 1 THEN
+	OPEN FORM f_ayuf181 FROM '../../../PRODUCCION/LIBRERIAS/forms/ayuf181'
+ELSE
+	OPEN FORM f_ayuf181 FROM '../../../PRODUCCION/LIBRERIAS/forms/ayuf181c'
+END IF
+DISPLAY FORM f_ayuf181
+--#DISPLAY "Tran"	TO tit_col1
+--#DISPLAY "Cod."	TO tit_col2
+--#DISPLAY 'Nombre'	TO tit_col3
+--#DISPLAY "E"		TO tit_col4
+LET expr_tra = NULL
+IF trans <> 0 THEN
+	LET expr_tra = '  AND r111_cod_trans = ', trans
+END IF
+LET expr_est = NULL
+IF estado <> 'T' THEN
+	LET expr_est = '  AND r111_estado    = "', estado, '"'
+END IF
+LET primera = 1
+WHILE TRUE
+	IF NOT primera THEN
+		MESSAGE 'Digite condicion-búsqueda y presione (F12)'
+		LET int_flag = 0
+		CONSTRUCT BY NAME expr_sql ON r111_cod_trans, r111_cod_chofer,
+						r111_nombre
+		IF int_flag THEN
+			CLOSE WINDOW wh_chofer
+			EXIT WHILE
+		END IF
+	ELSE
+		LET expr_sql = ' 1 = 1'
+	END IF
+	LET primera = 0
+	MESSAGE 'Seleccionando datos . . . espere por favor.'
+	LET vm_columna_1 = 6
+	LET vm_columna_2 = 3
+	LET rm_orden[vm_columna_1] = 'ASC'
+	INITIALIZE col TO NULL
+	LET salir = 0
+	WHILE NOT salir
+		LET query = 'SELECT * FROM rept111 ',
+				'WHERE r111_compania  = ', codcia,
+				'  AND r111_localidad = ', codloc,
+				expr_tra CLIPPED,
+				expr_est CLIPPED,
+				'  AND ', expr_sql CLIPPED,
+			' ORDER BY ', vm_columna_1, ' ', rm_orden[vm_columna_1],
+				', ', vm_columna_2, ' ', rm_orden[vm_columna_2]
+		PREPARE cons_chofer FROM query
+		DECLARE q_cons_chofer CURSOR FOR cons_chofer
+		LET i = 1
+		FOREACH q_cons_chofer INTO r_r111.*
+			LET rh_chofer[i].r111_cod_trans  = r_r111.r111_cod_trans
+			LET rh_chofer[i].r111_cod_chofer =r_r111.r111_cod_chofer
+			LET rh_chofer[i].r111_nombre     = r_r111.r111_nombre
+			LET rh_chofer[i].r111_estado     = r_r111.r111_estado
+			LET i = i + 1
+			IF i > max_row THEN
+				EXIT FOREACH
+			END IF
+		END FOREACH
+		LET i = i - 1
+		IF i = 0 THEN	
+		        CALL fl_mensaje_consulta_sin_registros()
+			LET i = 0
+			LET salir = 1
+			EXIT WHILE
+		END IF
+		MESSAGE '                                           '
+		LET int_flag = 0
+		CALL set_count(i)
+		DISPLAY ARRAY rh_chofer TO rh_chofer.*
+			ON KEY(RETURN)
+				LET salir = 1
+				EXIT DISPLAY
+			ON KEY(F2)
+				LET int_flag = 4
+				FOR i = 1 TO filas_pant
+					CLEAR rh_chofer[i].*
+				END FOR
+				EXIT DISPLAY
+			ON KEY(F15)
+				LET col = 3
+				EXIT DISPLAY
+			ON KEY(F16)
+				LET col = 4
+				EXIT DISPLAY
+			ON KEY(F17)
+				LET col = 6
+				EXIT DISPLAY
+			ON KEY(F18)
+				IF estado = 'T' THEN
+					LET col = 5
+					EXIT DISPLAY
+				END IF
+			--#BEFORE ROW
+				--#LET j = arr_curr()
+				--#DISPLAY j TO num_row
+				--#DISPLAY i TO max_row
+			--#AFTER DISPLAY
+				--#LET salir = 1
+		END DISPLAY
+		IF int_flag = 4 OR int_flag = 1 AND col IS NULL THEN
+			EXIT WHILE
+		END IF
+		IF col IS NOT NULL AND NOT salir THEN
+			IF col <> vm_columna_1 THEN
+				LET vm_columna_2           = vm_columna_1
+				LET rm_orden[vm_columna_2] =
+							rm_orden[vm_columna_1]
+				LET vm_columna_1           = col
+			END IF
+			IF rm_orden[vm_columna_1] = 'ASC' THEN
+				LET rm_orden[vm_columna_1] = 'DESC'
+			ELSE
+				LET rm_orden[vm_columna_1] = 'ASC'
+			END IF
+			INITIALIZE col TO NULL
+		END IF
+	END WHILE
+	IF i = 0 THEN
+		CONTINUE WHILE
+	END IF
+	IF NOT salir AND int_flag = 4 THEN
+		CONTINUE WHILE
+	END IF
+	IF int_flag <> 4 THEN
+		CLOSE WINDOW wh_chofer
+		EXIT WHILE
+	END IF
+	FOR i = 1 TO filas_pant
+		CLEAR rh_chofer[i].*
+	END FOR
+END WHILE
+IF int_flag <> 0 THEN
+	INITIALIZE rh_chofer[1].* TO NULL
+        RETURN rh_chofer[1].r111_cod_chofer, rh_chofer[1].r111_nombre
+END IF
+LET i = arr_curr()
+RETURN rh_chofer[i].r111_cod_chofer, rh_chofer[i].r111_nombre
+
+END FUNCTION
+
+
+
+FUNCTION fl_ayuda_obsers(codcia, codloc, tipo, estado)
+DEFINE codcia		LIKE rept112.r112_compania
+DEFINE codloc		LIKE rept112.r112_localidad
+DEFINE tipo		LIKE rept112.r112_tipo
+DEFINE estado		LIKE rept112.r112_estado
+DEFINE rh_obser		ARRAY[500] OF RECORD
+				r112_cod_obser	LIKE rept112.r112_cod_obser,
+				r112_descripcion LIKE rept112.r112_descripcion,
+				r112_tipo	LIKE rept112.r112_tipo,
+				r112_estado	LIKE rept112.r112_estado
+			END RECORD
+DEFINE query		CHAR(1200)
+DEFINE expr_sql		CHAR(800)
+DEFINE expr_tip		VARCHAR(100)
+DEFINE expr_est		VARCHAR(100)
+DEFINE i, j, max_row	SMALLINT
+DEFINE filas_pant	SMALLINT
+DEFINE num_fil		SMALLINT
+DEFINE rm_orden		ARRAY[10] OF CHAR(4)
+DEFINE vm_columna_1	SMALLINT
+DEFINE vm_columna_2	SMALLINT
+DEFINE col, salir	SMALLINT
+DEFINE primera		SMALLINT
+DEFINE r_r112		RECORD LIKE rept112.*
+
+LET filas_pant = 10
+LET max_row    = 500
+LET num_fil    = 14
+IF vg_gui = 0 THEN
+	LET num_fil = 15
+END IF
+OPEN WINDOW wh_obser AT 06, 27 WITH num_fil ROWS, 52 COLUMNS
+        ATTRIBUTE(FORM LINE FIRST, COMMENT LINE OFF, MESSAGE LINE LAST, BORDER)
+IF vg_gui = 1 THEN
+	OPEN FORM f_ayuf182 FROM '../../../PRODUCCION/LIBRERIAS/forms/ayuf182'
+ELSE
+	OPEN FORM f_ayuf182 FROM '../../../PRODUCCION/LIBRERIAS/forms/ayuf182c'
+END IF
+DISPLAY FORM f_ayuf182
+--#DISPLAY "Cod."		TO tit_col1
+--#DISPLAY 'Observación'	TO tit_col2
+--#DISPLAY "T"			TO tit_col3
+--#DISPLAY "E"			TO tit_col4
+LET expr_est = NULL
+IF estado <> 'T' THEN
+	LET expr_est = '  AND r112_estado   = "', estado, '"'
+END IF
+LET expr_tip = NULL
+IF tipo <> 'T' THEN
+	LET expr_tip = '  AND r112_tipo     = "', tipo, '"'
+END IF
+LET primera = 1
+WHILE TRUE
+	IF NOT primera THEN
+		MESSAGE 'Digite condicion-búsqueda y presione (F12)'
+		LET int_flag = 0
+		CONSTRUCT BY NAME expr_sql ON r112_cod_obser, r112_descripcion
+		IF int_flag THEN
+			CLOSE WINDOW wh_obser
+			EXIT WHILE
+		END IF
+	ELSE
+		LET expr_sql = ' 1 = 1'
+	END IF
+	LET primera = 0
+	MESSAGE 'Seleccionando datos . . . espere por favor.'
+	LET vm_columna_1 = 5
+	LET vm_columna_2 = 3
+	LET rm_orden[vm_columna_1] = 'ASC'
+	INITIALIZE col TO NULL
+	LET salir = 0
+	WHILE NOT salir
+		LET query = 'SELECT * FROM rept112 ',
+				'WHERE r112_compania  = ', codcia,
+				'  AND r112_localidad = ', codloc,
+				expr_est CLIPPED,
+				'  AND ', expr_sql CLIPPED,
+			' ORDER BY ', vm_columna_1, ' ', rm_orden[vm_columna_1],
+				', ', vm_columna_2, ' ', rm_orden[vm_columna_2]
+		PREPARE cons_obser FROM query
+		DECLARE q_cons_obser CURSOR FOR cons_obser
+		LET i = 1
+		FOREACH q_cons_obser INTO r_r112.*
+			LET rh_obser[i].r112_cod_obser   = r_r112.r112_cod_obser
+			LET rh_obser[i].r112_descripcion=r_r112.r112_descripcion
+			LET rh_obser[i].r112_tipo        = r_r112.r112_tipo
+			LET rh_obser[i].r112_estado      = r_r112.r112_estado
+			LET i = i + 1
+			IF i > max_row THEN
+				EXIT FOREACH
+			END IF
+		END FOREACH
+		LET i = i - 1
+		IF i = 0 THEN	
+		        CALL fl_mensaje_consulta_sin_registros()
+			LET i = 0
+			LET salir = 1
+			EXIT WHILE
+		END IF
+		MESSAGE '                                           '
+		LET int_flag = 0
+		CALL set_count(i)
+		DISPLAY ARRAY rh_obser TO rh_obser.*
+			ON KEY(RETURN)
+				LET salir = 1
+				EXIT DISPLAY
+			ON KEY(F2)
+				LET int_flag = 4
+				FOR i = 1 TO filas_pant
+					CLEAR rh_obser[i].*
+				END FOR
+				EXIT DISPLAY
+			ON KEY(F15)
+				LET col = 3
+				EXIT DISPLAY
+			ON KEY(F16)
+				LET col = 5
+				EXIT DISPLAY
+			ON KEY(F17)
+				LET col = 6
+				EXIT DISPLAY
+			ON KEY(F18)
+				IF estado = 'T' THEN
+					LET col = 4
+					EXIT DISPLAY
+				END IF
+			--#BEFORE ROW
+				--#LET j = arr_curr()
+				--#DISPLAY j TO num_row
+				--#DISPLAY i TO max_row
+			--#AFTER DISPLAY
+				--#LET salir = 1
+		END DISPLAY
+		IF int_flag = 4 OR int_flag = 1 AND col IS NULL THEN
+			EXIT WHILE
+		END IF
+		IF col IS NOT NULL AND NOT salir THEN
+			IF col <> vm_columna_1 THEN
+				LET vm_columna_2           = vm_columna_1
+				LET rm_orden[vm_columna_2] =
+							rm_orden[vm_columna_1]
+				LET vm_columna_1           = col
+			END IF
+			IF rm_orden[vm_columna_1] = 'ASC' THEN
+				LET rm_orden[vm_columna_1] = 'DESC'
+			ELSE
+				LET rm_orden[vm_columna_1] = 'ASC'
+			END IF
+			INITIALIZE col TO NULL
+		END IF
+	END WHILE
+	IF i = 0 THEN
+		CONTINUE WHILE
+	END IF
+	IF NOT salir AND int_flag = 4 THEN
+		CONTINUE WHILE
+	END IF
+	IF int_flag <> 4 THEN
+		CLOSE WINDOW wh_obser
+		EXIT WHILE
+	END IF
+	FOR i = 1 TO filas_pant
+		CLEAR rh_obser[i].*
+	END FOR
+END WHILE
+IF int_flag <> 0 THEN
+	INITIALIZE rh_obser[1].* TO NULL
+        RETURN rh_obser[1].r112_cod_obser, rh_obser[1].r112_descripcion
+END IF
+LET i = arr_curr()
+RETURN rh_obser[i].r112_cod_obser, rh_obser[i].r112_descripcion
+
+END FUNCTION
+
+
+
+FUNCTION fl_ayuda_hoja_ruta(codcia, codloc, estado)
+DEFINE codcia		LIKE rept113.r113_compania
+DEFINE codloc		LIKE rept113.r113_localidad
+DEFINE estado		LIKE rept113.r113_estado
+DEFINE rh_hojrut	ARRAY[10000] OF RECORD
+				r113_num_hojrut	LIKE rept113.r113_num_hojrut,
+				r110_descripcion LIKE rept110.r110_descripcion,
+				r111_nombre	LIKE rept111.r111_nombre,
+				r113_observacion LIKE rept113.r113_observacion,
+				r113_fecha	LIKE rept113.r113_fecha,
+				r113_estado	LIKE rept113.r113_estado
+			END RECORD
+DEFINE query		CHAR(2000)
+DEFINE expr_sql		CHAR(800)
+DEFINE expr_est		VARCHAR(100)
+DEFINE i, j, max_row	SMALLINT
+DEFINE filas_pant	SMALLINT
+DEFINE num_fil		SMALLINT
+DEFINE rm_orden		ARRAY[10] OF CHAR(4)
+DEFINE vm_columna_1	SMALLINT
+DEFINE vm_columna_2	SMALLINT
+DEFINE col, salir	SMALLINT
+DEFINE primera		SMALLINT
+DEFINE r_r113		RECORD LIKE rept113.*
+
+LET filas_pant = 10
+LET max_row    = 10000
+LET num_fil    = 14
+IF vg_gui = 0 THEN
+	LET num_fil = 15
+END IF
+OPEN WINDOW wh_hojrut AT 06, 02 WITH num_fil ROWS, 78 COLUMNS
+        ATTRIBUTE(FORM LINE FIRST, COMMENT LINE OFF, MESSAGE LINE LAST, BORDER)
+IF vg_gui = 1 THEN
+	OPEN FORM f_ayuf183 FROM '../../../PRODUCCION/LIBRERIAS/forms/ayuf183'
+ELSE
+	OPEN FORM f_ayuf183 FROM '../../../PRODUCCION/LIBRERIAS/forms/ayuf183c'
+END IF
+DISPLAY FORM f_ayuf183
+--#DISPLAY "Hoja Ruta"		TO tit_col1
+--#DISPLAY "Transporte"		TO tit_col2
+--#DISPLAY "Chofer"		TO tit_col3
+--#DISPLAY "Observación"	TO tit_col4
+--#DISPLAY "Fecha"		TO tit_col5
+--#DISPLAY "E"			TO tit_col6
+LET expr_est = NULL
+IF estado <> 'T' THEN
+	LET expr_est = '  AND r113_estado    = "', estado, '"'
+END IF
+LET primera = 1
+WHILE TRUE
+	IF NOT primera THEN
+		MESSAGE 'Digite condicion-búsqueda y presione (F12)'
+		LET int_flag = 0
+		CONSTRUCT BY NAME expr_sql ON r113_num_hojrut, r113_fecha,
+						r113_observacion
+		IF int_flag THEN
+			CLOSE WINDOW wh_hojrut
+			EXIT WHILE
+		END IF
+	ELSE
+		LET expr_sql = ' 1 = 1'
+	END IF
+	LET primera = 0
+	MESSAGE 'Seleccionando datos . . . espere por favor.'
+	LET vm_columna_1 = 5
+	LET vm_columna_2 = 1
+	LET rm_orden[vm_columna_1] = 'ASC'
+	INITIALIZE col TO NULL
+	LET salir = 0
+	WHILE NOT salir
+		LET query = 'SELECT r113_num_hojrut, r110_descripcion, ',
+				'r111_nombre, r113_observacion, r113_fecha, ',
+				'r113_estado ',
+				'FROM rept113, rept110, rept111 ',
+				'WHERE r113_compania   = ', codcia,
+				'  AND r113_localidad  = ', codloc,
+				expr_est CLIPPED,
+				'  AND r110_compania   = r113_compania ',
+				'  AND r110_localidad  = r113_localidad ',
+				'  AND r110_cod_trans  = r113_cod_trans ',
+				'  AND r111_compania   = r113_compania ',
+				'  AND r111_localidad  = r113_localidad ',
+				'  AND r111_cod_trans  = r113_cod_trans ',
+				'  AND r111_cod_chofer = r113_cod_chofer ',
+				'  AND ', expr_sql CLIPPED,
+			' ORDER BY ', vm_columna_1, ' ', rm_orden[vm_columna_1],
+				', ', vm_columna_2, ' ', rm_orden[vm_columna_2]
+		PREPARE cons_hojrut FROM query
+		DECLARE q_cons_hojrut CURSOR FOR cons_hojrut
+		LET i = 1
+		FOREACH q_cons_hojrut INTO rh_hojrut[i].*
+			LET i = i + 1
+			IF i > max_row THEN
+				EXIT FOREACH
+			END IF
+		END FOREACH
+		LET i = i - 1
+		IF i = 0 THEN	
+		        CALL fl_mensaje_consulta_sin_registros()
+			LET i = 0
+			LET salir = 1
+			EXIT WHILE
+		END IF
+		MESSAGE '                                           '
+		LET int_flag = 0
+		CALL set_count(i)
+		DISPLAY ARRAY rh_hojrut TO rh_hojrut.*
+			ON KEY(RETURN)
+				LET salir = 1
+				EXIT DISPLAY
+			ON KEY(F2)
+				LET int_flag = 4
+				FOR i = 1 TO filas_pant
+					CLEAR rh_hojrut[i].*
+				END FOR
+				EXIT DISPLAY
+			ON KEY(F15)
+				LET col = 1
+				EXIT DISPLAY
+			ON KEY(F16)
+				LET col = 2
+				EXIT DISPLAY
+			ON KEY(F17)
+				LET col = 3
+				EXIT DISPLAY
+			ON KEY(F18)
+				LET col = 4
+				EXIT DISPLAY
+			ON KEY(F19)
+				LET col = 5
+				EXIT DISPLAY
+			ON KEY(F20)
+				IF estado = 'T' THEN
+					LET col = 6
+					EXIT DISPLAY
+				END IF
+			--#BEFORE ROW
+				--#LET j = arr_curr()
+				--#DISPLAY j TO num_row
+				--#DISPLAY i TO max_row
+			--#AFTER DISPLAY
+				--#LET salir = 1
+		END DISPLAY
+		IF int_flag = 4 OR int_flag = 1 AND col IS NULL THEN
+			EXIT WHILE
+		END IF
+		IF col IS NOT NULL AND NOT salir THEN
+			IF col <> vm_columna_1 THEN
+				LET vm_columna_2           = vm_columna_1
+				LET rm_orden[vm_columna_2] =
+							rm_orden[vm_columna_1]
+				LET vm_columna_1           = col
+			END IF
+			IF rm_orden[vm_columna_1] = 'ASC' THEN
+				LET rm_orden[vm_columna_1] = 'DESC'
+			ELSE
+				LET rm_orden[vm_columna_1] = 'ASC'
+			END IF
+			INITIALIZE col TO NULL
+		END IF
+	END WHILE
+	IF i = 0 THEN
+		CONTINUE WHILE
+	END IF
+	IF NOT salir AND int_flag = 4 THEN
+		CONTINUE WHILE
+	END IF
+	IF int_flag <> 4 THEN
+		CLOSE WINDOW wh_hojrut
+		EXIT WHILE
+	END IF
+	FOR i = 1 TO filas_pant
+		CLEAR rh_hojrut[i].*
+	END FOR
+END WHILE
+IF int_flag <> 0 THEN
+	INITIALIZE rh_hojrut[1].* TO NULL
+        RETURN rh_hojrut[1].r113_num_hojrut
+END IF
+LET i = arr_curr()
+RETURN rh_hojrut[i].r113_num_hojrut
+
+END FUNCTION
+
+
+
+FUNCTION fl_ayuda_ayudante(codcia, codloc, trans, estado)
+DEFINE codcia		LIKE rept115.r115_compania
+DEFINE codloc		LIKE rept115.r115_localidad
+DEFINE trans		LIKE rept115.r115_cod_trans
+DEFINE estado		LIKE rept115.r115_estado
+DEFINE rh_ayudante	ARRAY[500] OF RECORD
+				r115_cod_trans	LIKE rept115.r115_cod_trans,
+				r115_cod_ayud	LIKE rept115.r115_cod_ayud,
+				r115_nombre	LIKE rept115.r115_nombre,
+				r115_estado	LIKE rept115.r115_estado
+			END RECORD
+DEFINE query		CHAR(1000)
+DEFINE expr_sql		CHAR(400)
+DEFINE expr_tra		VARCHAR(100)
+DEFINE expr_est		VARCHAR(100)
+DEFINE i, j, max_row	SMALLINT
+DEFINE filas_pant	SMALLINT
+DEFINE num_fil		SMALLINT
+DEFINE rm_orden		ARRAY[10] OF CHAR(4)
+DEFINE vm_columna_1	SMALLINT
+DEFINE vm_columna_2	SMALLINT
+DEFINE col, salir	SMALLINT
+DEFINE primera		SMALLINT
+DEFINE r_r115		RECORD LIKE rept115.*
+
+LET filas_pant = 10
+LET max_row    = 500
+LET num_fil    = 14
+IF vg_gui = 0 THEN
+	LET num_fil = 15
+END IF
+OPEN WINDOW wh_ayud AT 06, 25 WITH num_fil ROWS, 54 COLUMNS
+        ATTRIBUTE(FORM LINE FIRST, COMMENT LINE OFF, MESSAGE LINE LAST, BORDER)
+IF vg_gui = 1 THEN
+	OPEN FORM f_ayuf184 FROM '../../../PRODUCCION/LIBRERIAS/forms/ayuf184'
+ELSE
+	OPEN FORM f_ayuf184 FROM '../../../PRODUCCION/LIBRERIAS/forms/ayuf184c'
+END IF
+DISPLAY FORM f_ayuf184
+--#DISPLAY "Tran"	TO tit_col1
+--#DISPLAY "Cod."	TO tit_col2
+--#DISPLAY 'Nombre'	TO tit_col3
+--#DISPLAY "E"		TO tit_col4
+LET expr_tra = NULL
+IF trans <> 0 THEN
+	LET expr_tra = '  AND r115_cod_trans = ', trans
+END IF
+LET expr_est = NULL
+IF estado <> 'T' THEN
+	LET expr_est = '  AND r115_estado    = "', estado, '"'
+END IF
+LET primera = 1
+WHILE TRUE
+	IF NOT primera THEN
+		MESSAGE 'Digite condicion-búsqueda y presione (F12)'
+		LET int_flag = 0
+		CONSTRUCT BY NAME expr_sql ON r115_cod_trans, r115_cod_ayud,
+						r115_nombre
+		IF int_flag THEN
+			CLOSE WINDOW wh_ayud
+			EXIT WHILE
+		END IF
+	ELSE
+		LET expr_sql = ' 1 = 1'
+	END IF
+	LET primera = 0
+	MESSAGE 'Seleccionando datos . . . espere por favor.'
+	LET vm_columna_1 = 6
+	LET vm_columna_2 = 3
+	LET rm_orden[vm_columna_1] = 'ASC'
+	INITIALIZE col TO NULL
+	LET salir = 0
+	WHILE NOT salir
+		LET query = 'SELECT * FROM rept115 ',
+				'WHERE r115_compania  = ', codcia,
+				'  AND r115_localidad = ', codloc,
+				expr_tra CLIPPED,
+				expr_est CLIPPED,
+				'  AND ', expr_sql CLIPPED,
+			' ORDER BY ', vm_columna_1, ' ', rm_orden[vm_columna_1],
+				', ', vm_columna_2, ' ', rm_orden[vm_columna_2]
+		PREPARE cons_ayud FROM query
+		DECLARE q_cons_ayud CURSOR FOR cons_ayud
+		LET i = 1
+		FOREACH q_cons_ayud INTO r_r115.*
+			LET rh_ayudante[i].r115_cod_trans  = r_r115.r115_cod_trans
+			LET rh_ayudante[i].r115_cod_ayud   =r_r115.r115_cod_ayud
+			LET rh_ayudante[i].r115_nombre     = r_r115.r115_nombre
+			LET rh_ayudante[i].r115_estado     = r_r115.r115_estado
+			LET i = i + 1
+			IF i > max_row THEN
+				EXIT FOREACH
+			END IF
+		END FOREACH
+		LET i = i - 1
+		IF i = 0 THEN	
+		        CALL fl_mensaje_consulta_sin_registros()
+			LET i = 0
+			LET salir = 1
+			EXIT WHILE
+		END IF
+		MESSAGE '                                           '
+		LET int_flag = 0
+		CALL set_count(i)
+		DISPLAY ARRAY rh_ayudante TO rh_ayudante.*
+			ON KEY(RETURN)
+				LET salir = 1
+				EXIT DISPLAY
+			ON KEY(F2)
+				LET int_flag = 4
+				FOR i = 1 TO filas_pant
+					CLEAR rh_ayudante[i].*
+				END FOR
+				EXIT DISPLAY
+			ON KEY(F15)
+				LET col = 3
+				EXIT DISPLAY
+			ON KEY(F16)
+				LET col = 4
+				EXIT DISPLAY
+			ON KEY(F17)
+				LET col = 6
+				EXIT DISPLAY
+			ON KEY(F18)
+				IF estado = 'T' THEN
+					LET col = 5
+					EXIT DISPLAY
+				END IF
+			--#BEFORE ROW
+				--#LET j = arr_curr()
+				--#DISPLAY j TO num_row
+				--#DISPLAY i TO max_row
+			--#AFTER DISPLAY
+				--#LET salir = 1
+		END DISPLAY
+		IF int_flag = 4 OR int_flag = 1 AND col IS NULL THEN
+			EXIT WHILE
+		END IF
+		IF col IS NOT NULL AND NOT salir THEN
+			IF col <> vm_columna_1 THEN
+				LET vm_columna_2           = vm_columna_1
+				LET rm_orden[vm_columna_2] =
+							rm_orden[vm_columna_1]
+				LET vm_columna_1           = col
+			END IF
+			IF rm_orden[vm_columna_1] = 'ASC' THEN
+				LET rm_orden[vm_columna_1] = 'DESC'
+			ELSE
+				LET rm_orden[vm_columna_1] = 'ASC'
+			END IF
+			INITIALIZE col TO NULL
+		END IF
+	END WHILE
+	IF i = 0 THEN
+		CONTINUE WHILE
+	END IF
+	IF NOT salir AND int_flag = 4 THEN
+		CONTINUE WHILE
+	END IF
+	IF int_flag <> 4 THEN
+		CLOSE WINDOW wh_ayud
+		EXIT WHILE
+	END IF
+	FOR i = 1 TO filas_pant
+		CLEAR rh_ayudante[i].*
+	END FOR
+END WHILE
+IF int_flag <> 0 THEN
+	INITIALIZE rh_ayudante[1].* TO NULL
+        RETURN rh_ayudante[1].r115_cod_ayud, rh_ayudante[1].r115_nombre
+END IF
+LET i = arr_curr()
+RETURN rh_ayudante[i].r115_cod_ayud, rh_ayudante[i].r115_nombre
+
+END FUNCTION
+
+
+
+FUNCTION fl_ayuda_cia_entrega(codcia, codloc, tipo, estado)
+DEFINE codcia		LIKE rept116.r116_compania
+DEFINE codloc		LIKE rept116.r116_localidad
+DEFINE tipo		LIKE rept116.r116_tipo
+DEFINE estado		LIKE rept116.r116_estado
+DEFINE rh_cia_ent	ARRAY[500] OF RECORD
+				r116_cia_trans	LIKE rept116.r116_cia_trans,
+				r116_razon_soc	LIKE rept116.r116_razon_soc,
+				tit_estado	VARCHAR(10),
+				r116_estado	LIKE rept116.r116_estado
+			END RECORD
+DEFINE query		CHAR(1000)
+DEFINE expr_sql		CHAR(400)
+DEFINE expr_est		VARCHAR(100)
+DEFINE expr_tip		VARCHAR(100)
+DEFINE i, j, max_row	SMALLINT
+DEFINE filas_pant	SMALLINT
+DEFINE num_fil		SMALLINT
+DEFINE rm_orden		ARRAY[10] OF CHAR(4)
+DEFINE vm_columna_1	SMALLINT
+DEFINE vm_columna_2	SMALLINT
+DEFINE col, salir	SMALLINT
+DEFINE primera		SMALLINT
+
+LET filas_pant = 10
+LET max_row    = 500
+LET num_fil    = 14
+IF vg_gui = 0 THEN
+	LET num_fil = 15
+END IF
+OPEN WINDOW wh_ciaent AT 06, 25 WITH num_fil ROWS, 54 COLUMNS
+        ATTRIBUTE(FORM LINE FIRST, COMMENT LINE OFF, MESSAGE LINE LAST, BORDER)
+IF vg_gui = 1 THEN
+	OPEN FORM f_ayuf185 FROM '../../../PRODUCCION/LIBRERIAS/forms/ayuf185'
+ELSE
+	OPEN FORM f_ayuf185 FROM '../../../PRODUCCION/LIBRERIAS/forms/ayuf185c'
+END IF
+DISPLAY FORM f_ayuf185
+--#DISPLAY "Cod."	TO tit_col1
+--#DISPLAY 'Nombre'	TO tit_col2
+--#DISPLAY "Tipo"	TO tit_col3
+--#DISPLAY "E"		TO tit_col4
+LET expr_tip = NULL
+IF tipo <> 'T' THEN
+	LET expr_tip = '  AND r116_tipo      = "', tipo, '"'
+END IF
+LET expr_est = NULL
+IF estado <> 'T' THEN
+	LET expr_est = '  AND r116_estado    = "', estado, '"'
+END IF
+LET primera = 1
+WHILE TRUE
+	IF NOT primera THEN
+		MESSAGE 'Digite condicion-búsqueda y presione (F12)'
+		LET int_flag = 0
+		CONSTRUCT BY NAME expr_sql ON r116_cia_trans, r116_razon_soc
+		IF int_flag THEN
+			CLOSE WINDOW wh_ciaent
+			EXIT WHILE
+		END IF
+	ELSE
+		LET expr_sql = ' 1 = 1'
+	END IF
+	LET primera = 0
+	MESSAGE 'Seleccionando datos . . . espere por favor.'
+	LET vm_columna_1 = 1
+	LET vm_columna_2 = 2
+	LET rm_orden[vm_columna_1] = 'ASC'
+	INITIALIZE col TO NULL
+	LET salir = 0
+	WHILE NOT salir
+		LET query = 'SELECT r116_cia_trans, r116_razon_soc, ',
+				'CASE WHEN r116_tipo = "E" THEN "EXTERNO" ',
+				'     WHEN r116_tipo = "I" THEN "INTERNO" ',
+				'END, ',
+				'r116_estado ',
+				'FROM rept116 ',
+				'WHERE r116_compania  = ', codcia,
+				'  AND r116_localidad = ', codloc,
+				expr_est CLIPPED,
+				expr_tip CLIPPED,
+				'  AND ', expr_sql CLIPPED,
+			' ORDER BY ', vm_columna_1, ' ', rm_orden[vm_columna_1],
+				', ', vm_columna_2, ' ', rm_orden[vm_columna_2]
+		PREPARE cons_ciaent FROM query
+		DECLARE q_cons_ciaent CURSOR FOR cons_ciaent
+		LET i = 1
+		FOREACH q_cons_ciaent INTO rh_cia_ent[i].*
+			LET i = i + 1
+			IF i > max_row THEN
+				EXIT FOREACH
+			END IF
+		END FOREACH
+		LET i = i - 1
+		IF i = 0 THEN	
+		        CALL fl_mensaje_consulta_sin_registros()
+			LET i = 0
+			LET salir = 1
+			EXIT WHILE
+		END IF
+		MESSAGE '                                           '
+		LET int_flag = 0
+		CALL set_count(i)
+		DISPLAY ARRAY rh_cia_ent TO rh_cia_ent.*
+			ON KEY(RETURN)
+				LET salir = 1
+				EXIT DISPLAY
+			ON KEY(F2)
+				LET int_flag = 4
+				FOR i = 1 TO filas_pant
+					CLEAR rh_cia_ent[i].*
+				END FOR
+				EXIT DISPLAY
+			ON KEY(F15)
+				LET col = 1
+				EXIT DISPLAY
+			ON KEY(F16)
+				LET col = 2
+				EXIT DISPLAY
+			ON KEY(F17)
+				IF tipo = 'T' THEN
+					LET col = 3
+					EXIT DISPLAY
+				END IF
+			ON KEY(F18)
+				IF estado = 'T' THEN
+					LET col = 4
+					EXIT DISPLAY
+				END IF
+			--#BEFORE ROW
+				--#LET j = arr_curr()
+				--#DISPLAY j TO num_row
+				--#DISPLAY i TO max_row
+			--#AFTER DISPLAY
+				--#LET salir = 1
+		END DISPLAY
+		IF int_flag = 4 OR int_flag = 1 AND col IS NULL THEN
+			EXIT WHILE
+		END IF
+		IF col IS NOT NULL AND NOT salir THEN
+			IF col <> vm_columna_1 THEN
+				LET vm_columna_2           = vm_columna_1
+				LET rm_orden[vm_columna_2] =
+							rm_orden[vm_columna_1]
+				LET vm_columna_1           = col
+			END IF
+			IF rm_orden[vm_columna_1] = 'ASC' THEN
+				LET rm_orden[vm_columna_1] = 'DESC'
+			ELSE
+				LET rm_orden[vm_columna_1] = 'ASC'
+			END IF
+			INITIALIZE col TO NULL
+		END IF
+	END WHILE
+	IF i = 0 THEN
+		CONTINUE WHILE
+	END IF
+	IF NOT salir AND int_flag = 4 THEN
+		CONTINUE WHILE
+	END IF
+	IF int_flag <> 4 THEN
+		CLOSE WINDOW wh_ciaent
+		EXIT WHILE
+	END IF
+	FOR i = 1 TO filas_pant
+		CLEAR rh_cia_ent[i].*
+	END FOR
+END WHILE
+IF int_flag <> 0 THEN
+	INITIALIZE rh_cia_ent[1].* TO NULL
+        RETURN rh_cia_ent[1].r116_cia_trans, rh_cia_ent[1].r116_razon_soc
+END IF
+LET i = arr_curr()
+RETURN rh_cia_ent[i].r116_cia_trans, rh_cia_ent[i].r116_razon_soc
+
+END FUNCTION
+
+
+
+FUNCTION fl_ayuda_division_politica(pais)
+DEFINE pais		LIKE gent025.g25_pais
+DEFINE rh_div_pol	ARRAY[500] OF RECORD
+				g25_divi_poli	LIKE gent025.g25_divi_poli,
+				g25_nombre	LIKE gent025.g25_nombre,
+				g25_region	LIKE gent025.g25_region,
+				g25_siglas	LIKE gent025.g25_siglas
+			END RECORD
+DEFINE r_g30		RECORD LIKE gent030.*
+DEFINE query		CHAR(1000)
+DEFINE expr_sql		CHAR(400)
+DEFINE i, j, max_row	SMALLINT
+DEFINE filas_pant	SMALLINT
+DEFINE num_fil		SMALLINT
+DEFINE rm_orden		ARRAY[10] OF CHAR(4)
+DEFINE vm_columna_1	SMALLINT
+DEFINE vm_columna_2	SMALLINT
+DEFINE col, salir	SMALLINT
+DEFINE primera		SMALLINT
+
+LET filas_pant = 10
+LET max_row    = 500
+LET num_fil    = 15
+IF vg_gui = 0 THEN
+	LET num_fil = 16
+END IF
+OPEN WINDOW wh_divpol AT 06, 21 WITH num_fil ROWS, 58 COLUMNS
+        ATTRIBUTE(FORM LINE FIRST, COMMENT LINE OFF, MESSAGE LINE LAST, BORDER)
+IF vg_gui = 1 THEN
+	OPEN FORM f_ayuf186 FROM '../../../PRODUCCION/LIBRERIAS/forms/ayuf186'
+ELSE
+	OPEN FORM f_ayuf186 FROM '../../../PRODUCCION/LIBRERIAS/forms/ayuf186c'
+END IF
+DISPLAY FORM f_ayuf186
+INITIALIZE r_g30.* TO NULL
+SELECT * INTO r_g30.*
+	FROM gent030
+	WHERE g30_pais = pais
+DISPLAY pais TO g25_pais
+DISPLAY BY NAME r_g30.g30_nombre
+--#DISPLAY "Cod."	TO tit_col1
+--#DISPLAY 'Nombre'	TO tit_col2
+--#DISPLAY "Región"	TO tit_col3
+--#DISPLAY "Sig."	TO tit_col4
+LET primera = 1
+WHILE TRUE
+	IF NOT primera THEN
+		MESSAGE 'Digite condicion-búsqueda y presione (F12)'
+		LET int_flag = 0
+		CONSTRUCT BY NAME expr_sql ON g25_divi_poli, g25_nombre,
+						g25_region, g25_siglas
+		IF int_flag THEN
+			CLOSE WINDOW wh_divpol
+			EXIT WHILE
+		END IF
+	ELSE
+		LET expr_sql = ' 1 = 1'
+	END IF
+	LET primera = 0
+	MESSAGE 'Seleccionando datos . . . espere por favor.'
+	LET vm_columna_1 = 1
+	LET vm_columna_2 = 2
+	LET rm_orden[vm_columna_1] = 'ASC'
+	INITIALIZE col TO NULL
+	LET salir = 0
+	WHILE NOT salir
+		LET query = 'SELECT g25_divi_poli, g25_nombre, g25_region, ',
+					'g25_siglas ',
+				'FROM gent025 ',
+				'WHERE g25_pais = ', pais,
+				'  AND ', expr_sql CLIPPED,
+			' ORDER BY ', vm_columna_1, ' ', rm_orden[vm_columna_1],
+				', ', vm_columna_2, ' ', rm_orden[vm_columna_2]
+		PREPARE cons_divpol FROM query
+		DECLARE q_cons_divpol CURSOR FOR cons_divpol
+		LET i = 1
+		FOREACH q_cons_divpol INTO rh_div_pol[i].*
+			LET i = i + 1
+			IF i > max_row THEN
+				EXIT FOREACH
+			END IF
+		END FOREACH
+		LET i = i - 1
+		IF i = 0 THEN	
+		        CALL fl_mensaje_consulta_sin_registros()
+			LET i = 0
+			LET salir = 1
+			EXIT WHILE
+		END IF
+		MESSAGE '                                           '
+		LET int_flag = 0
+		CALL set_count(i)
+		DISPLAY ARRAY rh_div_pol TO rh_div_pol.*
+			ON KEY(RETURN)
+				LET salir = 1
+				EXIT DISPLAY
+			ON KEY(F2)
+				LET int_flag = 4
+				FOR i = 1 TO filas_pant
+					CLEAR rh_div_pol[i].*
+				END FOR
+				EXIT DISPLAY
+			ON KEY(F15)
+				LET col = 1
+				EXIT DISPLAY
+			ON KEY(F16)
+				LET col = 2
+				EXIT DISPLAY
+			ON KEY(F17)
+				LET col = 3
+				EXIT DISPLAY
+			ON KEY(F18)
+				LET col = 4
+				EXIT DISPLAY
+			--#BEFORE ROW
+				--#LET j = arr_curr()
+				--#DISPLAY j TO num_row
+				--#DISPLAY i TO max_row
+			--#AFTER DISPLAY
+				--#LET salir = 1
+		END DISPLAY
+		IF int_flag = 4 OR int_flag = 1 AND col IS NULL THEN
+			EXIT WHILE
+		END IF
+		IF col IS NOT NULL AND NOT salir THEN
+			IF col <> vm_columna_1 THEN
+				LET vm_columna_2           = vm_columna_1
+				LET rm_orden[vm_columna_2] =
+							rm_orden[vm_columna_1]
+				LET vm_columna_1           = col
+			END IF
+			IF rm_orden[vm_columna_1] = 'ASC' THEN
+				LET rm_orden[vm_columna_1] = 'DESC'
+			ELSE
+				LET rm_orden[vm_columna_1] = 'ASC'
+			END IF
+			INITIALIZE col TO NULL
+		END IF
+	END WHILE
+	IF i = 0 THEN
+		CONTINUE WHILE
+	END IF
+	IF NOT salir AND int_flag = 4 THEN
+		CONTINUE WHILE
+	END IF
+	IF int_flag <> 4 THEN
+		CLOSE WINDOW wh_divpol
+		EXIT WHILE
+	END IF
+	FOR i = 1 TO filas_pant
+		CLEAR rh_div_pol[i].*
+	END FOR
+END WHILE
+IF int_flag <> 0 THEN
+	INITIALIZE rh_div_pol[1].* TO NULL
+        RETURN rh_div_pol[1].g25_divi_poli, rh_div_pol[1].g25_nombre
+END IF
+LET i = arr_curr()
+RETURN rh_div_pol[i].g25_divi_poli, rh_div_pol[i].g25_nombre
 
 END FUNCTION

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268561</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268561</guiaRemision>
+<razonSocialComprador>SOCIEDAD PORCINA LOS ANGELES</razonSocialComprador>
+<identificacionComprador>1791833058001</identificacionComprador>
+<totalSinImpuestos>499.89</totalSinImpuestos>
+<totalDescuento>26.30</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>499.89</baseImponible>
+<valor>59.99</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>559.88</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>103040</codigoPrincipal>
+<descripcion>REDUCCION GALV. CLASE 150 DE 4" x 2" AS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>25.00</precioUnitario>
+<descuento>1.25</descuento>
+<precioTotalSinImpuesto>23.75</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>23.75</baseImponible>
+<valor>2.85</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21179</codigoPrincipal>
+<descripcion>TAIPE P/INSTALACIONES GRANDE(10 YD.)</descripcion>
+<cantidad>7.00</cantidad>
+<precioUnitario>0.78</precioUnitario>
+<descuento>0.27</descuento>
+<precioTotalSinImpuesto>5.19</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.19</baseImponible>
+<valor>0.62</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103285</codigoPrincipal>
+<descripcion>CINTA AUTOSOLDABLE 130C MARCA 3M 19mm X 9.1m.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>16.90</precioUnitario>
+<descuento>1.69</descuento>
+<precioTotalSinImpuesto>32.11</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>32.11</baseImponible>
+<valor>3.85</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>19526</codigoPrincipal>
+<descripcion>CABLE ELECTRICO SUCRE 12 x 2</descripcion>
+<cantidad>100.00</cantidad>
+<precioUnitario>2.48</precioUnitario>
+<descuento>12.40</descuento>
+<precioTotalSinImpuesto>235.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CABLEC"/>
+<detAdicional nombre="UNIDAD" valor="M"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>235.60</baseImponible>
+<valor>28.27</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96864</codigoPrincipal>
+<descripcion>SELLANTE POLIPROPILENO ENVASE DE 100 CC (AGUA CALIENTE)</descripcion>
+<cantidad>12.00</cantidad>
+<precioUnitario>9.89</precioUnitario>
+<descuento>5.93</descuento>
+<precioTotalSinImpuesto>112.75</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>112.75</baseImponible>
+<valor>13.53</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2065</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 90 GRAD  DE 2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>6.59</precioUnitario>
+<descuento>0.33</descuento>
+<precioTotalSinImpuesto>6.26</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.26</baseImponible>
+<valor>0.75</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>8796</codigoPrincipal>
+<descripcion>VALVULA COMPUERTA  BRONCE ROSCADA RW-206 DE 2" 125 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>88.66</precioUnitario>
+<descuento>4.43</descuento>
+<precioTotalSinImpuesto>84.23</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RED WH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>84.23</baseImponible>
+<valor>10.11</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">mledesma@punto.net.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">099481550</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">036973</campoAdicional>
+</infoAdicional>
+</factura>

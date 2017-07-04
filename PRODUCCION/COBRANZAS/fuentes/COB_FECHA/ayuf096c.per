@@ -1,0 +1,30 @@
+DATABASE aceros
+SCREEN
+{
+
+  CAJAS DEL SISTEMA
+ --------------------------------------
+  Cód.      Descripción       Usuario
+ --------------------------------------
+ [c010|c011                |c012      ] 
+ [c010|c011                |c012      ] 
+ [c010|c011                |c012      ] 
+ [c010|c011                |c012      ] 
+ [c010|c011                |c012      ] 
+ [c010|c011                |c012      ] 
+ [c010|c011                |c012      ] 
+ [c010|c011                |c012      ] 
+ [c010|c011                |c012      ] 
+ [c010|c011                |c012      ] 
+
+}
+TABLES
+cajt002
+ATTRIBUTES
+c010 = cajt002.j02_codigo_caja, NOENTRY, UPSHIFT;
+c011 = cajt002.j02_nombre_caja, NOENTRY, UPSHIFT;
+c012 = cajt002.j02_usua_caja, NOENTRY, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_cajas[10] (j02_codigo_caja, j02_nombre_caja, j02_usua_caja)

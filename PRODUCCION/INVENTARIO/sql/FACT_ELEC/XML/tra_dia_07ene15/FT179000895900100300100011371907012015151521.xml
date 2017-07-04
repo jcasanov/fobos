@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113719</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113719</guiaRemision>
+<razonSocialComprador>ACERIA DEL ECUADOR CA ADELCA.</razonSocialComprador>
+<identificacionComprador>1790004724001</identificacionComprador>
+<totalSinImpuestos>526.78</totalSinImpuestos>
+<totalDescuento>3.18</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>526.78</baseImponible>
+<valor>63.21</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>589.99</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5514</codigoPrincipal>
+<descripcion>TUBO NEGRO ASTM A-53  TIPO "T" DE 1" x 6 m.</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>21.84</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>218.40</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>218.40</baseImponible>
+<valor>26.21</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5502</codigoPrincipal>
+<descripcion>TUBO GALV. S-UNION ISO II TIPO "T" DE 2" x 6 m. ESPESOR 2.65 mm.</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>44.41</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>177.64</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>177.64</baseImponible>
+<valor>21.32</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5500</codigoPrincipal>
+<descripcion>TUBO GALV. S-UNION ISO II TIPO "T" DE 1-1/2" x 6 m. ESPESOR 2.65 mm.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>36.55</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>73.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>73.10</baseImponible>
+<valor>8.77</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5494</codigoPrincipal>
+<descripcion>TUBO GALV. S-UNION ISO II TIPO "T" DE 3/4" x 6 m. ESPESOR 2.3 mm.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>17.16</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>34.32</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>34.32</baseImponible>
+<valor>4.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3690</codigoPrincipal>
+<descripcion>REDUCCION GALV. CLASE 150 DE 3" x 2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>15.58</precioUnitario>
+<descuento>1.87</descuento>
+<precioTotalSinImpuesto>13.71</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>13.71</baseImponible>
+<valor>1.65</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3678</codigoPrincipal>
+<descripcion>REDUCCION GALV. CLASE 150 DE 2" x 1-1/2"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>5.46</precioUnitario>
+<descuento>1.31</descuento>
+<precioTotalSinImpuesto>9.61</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.61</baseImponible>
+<valor>1.15</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">recibo-electronico@adelca.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2792136</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">028583</campoAdicional>
+</infoAdicional>
+</factura>

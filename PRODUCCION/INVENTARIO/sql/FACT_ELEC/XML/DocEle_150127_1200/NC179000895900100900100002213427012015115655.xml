@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000022134</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>JARAMILLO ESPINOZA JORGE OSWALDO</razonSocialComprador>
+<identificacionComprador>0701851909001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000101963</numDocModificado>
+<fechaEmisionDocSustento>15/09/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>2615.49</totalSinImpuestos>
+<valorModificacion>2929.35</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>2615.49</baseImponible>
+<valor>313.86</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEVOLUCION: NO LA NECESITA</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>99549</codigoInterno>
+<descripcion>BOMBA CENTRIF STANDARD C-MOTOR 20HC42575-CCMHAA 20HP/220V/60C/3F 3575RPM IMP.7"(11042575141)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3736.41</precioUnitario>
+<descuento>1120.92</descuento>
+<precioTotalSinImpuesto>2615.49</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2615.49</baseImponible>
+<valor>313.86</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacion_orocentro@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2972456</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">12971</campoAdicional>
+</infoAdicional>
+</notaCredito>

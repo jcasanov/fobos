@@ -243,13 +243,11 @@ INPUT BY NAME rm_par.n33_cod_rubro WITHOUT DEFAULTS
                         CALL fl_mensaje_abandonar_proceso() RETURNING resp
                         IF resp = 'Yes' THEN
                                 LET int_flag = 1
-                                CLEAR FORM
-                                RETURN
+				EXIT INPUT
                         END IF
 		ELSE
                         LET int_flag = 1
-                        CLEAR FORM
-			RETURN
+			EXIT INPUT
                 END IF
        ON KEY(F2)
                 IF INFIELD(n33_cod_rubro) THEN
@@ -296,6 +294,18 @@ e.','exclamation')
 			END IF
 			LET rm_par.n33_cod_rubro = r_n06.n06_cod_rubro
 			LET rm_par.n_rubro       = r_n06.n06_nombre
+			SELECT * FROM rolt011
+				WHERE n11_compania   = vg_codcia
+				  AND n11_cod_liqrol = rm_par.n32_cod_liqrol
+				  AND n11_cod_rubro  = r_n06.n06_cod_rubro
+			IF STATUS = NOTFOUND THEN
+				INITIALIZE rm_par.n33_cod_rubro, rm_par.n_rubro
+					TO NULL
+				DISPLAY r_n06.n06_nombre TO n_rubro
+                                CALL fl_mostrar_mensaje('El rubro no esta asignado a esta quincena.', 'exclamation')
+				DISPLAY BY NAME rm_par.*
+                                NEXT FIELD n33_cod_rubro
+			END IF
                 ELSE
 			INITIALIZE rm_par.n33_cod_rubro TO NULL
 			INITIALIZE rm_par.n_rubro TO NULL
@@ -569,10 +579,10 @@ INPUT BY NAME rm_par.n32_cod_liqrol, rm_par.n32_ano_proceso,
 			CALL fl_mensaje_abandonar_proceso() RETURNING resp
 			IF resp = 'Yes' THEN
 				LET int_flag = 1
-				RETURN
+				EXIT INPUT
 			END IF
 		ELSE
-			RETURN
+			EXIT INPUT
 		END IF       	
 	ON KEY(F2)
 		IF INFIELD(n32_cod_liqrol) THEN

@@ -1,0 +1,30 @@
+DATABASE aceros
+
+SCREEN
+{
+ BODEGAS 
+-----------------------------------
+ Código      Descripción 		
+-----------------------------------
+[c01] [c002                    ] 
+[c01] [c002                    ]
+[c01] [c002                    ]
+[c01] [c002                    ]
+[c01] [c002                    ]
+[c01] [c002                    ]
+[c01] [c002                    ] 
+[c01] [c002                    ] 
+[c01] [c002                    ] 
+[c01] [c002                    ] 
+}
+
+TABLES
+rept002
+
+ATTRIBUTES
+c01 = r02_codigo;
+c002 = r02_nombre;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_bode[10](r02_codigo, r02_nombre)

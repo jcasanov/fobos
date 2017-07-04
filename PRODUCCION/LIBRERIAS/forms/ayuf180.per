@@ -1,0 +1,34 @@
+DATABASE aceros
+SCREEN
+{
+ TRANSPORTES
+                                   [c02] de [c03]
+ [c000|c001                                    |b]
+[c010|c011                                    |c]
+[c010|c011                                    |c]
+[c010|c011                                    |c]
+[c010|c011                                    |c]
+[c010|c011                                    |c]
+[c010|c011                                    |c]
+[c010|c011                                    |c]
+[c010|c011                                    |c]
+[c010|c011                                    |c]
+[c010|c011                                    |c]
+
+}
+TABLES
+rept110
+ATTRIBUTES
+c02  = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c03  = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b    = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+
+c010 = rept110.r110_cod_trans, UPSHIFT, REVERSE;
+c011 = rept110.r110_descripcion, UPSHIFT, REVERSE;
+c    = rept110.r110_estado, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+SCREEN RECORD rh_trans[10] (r110_cod_trans, r110_descripcion, r110_estado)

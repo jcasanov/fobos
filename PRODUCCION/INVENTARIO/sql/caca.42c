@@ -1,0 +1,26 @@
+#line 1 "caca.42c"
+#include "f2c/f2cRts0.h"
+#include "f2c/f2cRts1.h"
+#include "f2c/r_glob.h"
+extern int f2cVersion_2;
+
+static int* f2cVersionRef=&f2cVersion_2;
+
+
+
+
+
+extern int P_main(int);
+CHAR_CONST(CC_0,"HOLA MUNDO");
+
+int P_main(int argC){
+  OP_FUNCTION_BEGIN;
+  OP_FUNCTION_DEBUG(P_main);
+  {
+    {
+      op_pushC(&CC_0);
+    }
+    OP_CALL(rts_display,1,0,"caca.4gl",2);
+  }
+  OP_FUNCTION_END;
+}

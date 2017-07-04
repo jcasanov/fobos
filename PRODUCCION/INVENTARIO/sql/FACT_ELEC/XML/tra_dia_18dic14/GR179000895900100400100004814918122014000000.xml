@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048149</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento></dirEstablecimiento>
+<dirPartida>AV LA PRENSA</dirPartida>
+<razonSocialTransportista>ACERO COMERCIAL</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>18/12/2014</fechaIniTransporte>
+<fechaFinTransporte>18/12/2014</fechaFinTransporte>
+<placa></placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1792259363001</identificacionDestinatario>
+<razonSocialDestinatario>PROCESOS Y FLUIDOS PROFLUX CIA. LTDA.</razonSocialDestinatario>
+<dirDestinatario>INTERNO</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>08/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>50298</codigoInterno>
+<descripcion>CODO POLIPROPILENO DE 1-1/2" x 90ø</descripcion>
+<cantidad>6.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="MODELO" valor="16459"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>50300</codigoInterno>
+<descripcion>CODO POLIPROPILENO DE 2" x 90ø</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="MODELO" valor="16467"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>50390</codigoInterno>
+<descripcion>TEE POLIPROPILENO DE 2" (AGUA CALIENTE)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="MODELO" valor="20505"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>50430</codigoInterno>
+<descripcion>UNIVERSAL POLIPROPILENO DE 1-1/2" (AGUA CALIENTE)</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="MODELO" valor="23844"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>5834</codigoInterno>
+<descripcion>TUBO PVC ROSCABLE x 6 MTS. DE 1-1/2" (240 PSI)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="MODELO" valor="22592"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>5836</codigoInterno>
+<descripcion>TUBO PVC ROSCABLE x 6 MTS. DE 2" (200 PSI)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="MODELO" valor="22596"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2535523</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">051443</campoAdicional>
+</infoAdicional>
+</guiaRemision>

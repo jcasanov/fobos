@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176305</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176305</guiaRemision>
+<razonSocialComprador>ENNOTEX.</razonSocialComprador>
+<identificacionComprador>1791082206001</identificacionComprador>
+<totalSinImpuestos>63.86</totalSinImpuestos>
+<totalDescuento>6.87</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>63.86</baseImponible>
+<valor>7.66</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>71.52</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>3242</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1-1/2" x 4"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2.21</precioUnitario>
+<descuento>0.18</descuento>
+<precioTotalSinImpuesto>2.03</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.03</baseImponible>
+<valor>0.24</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3242</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1-1/2" x 4"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2.21</precioUnitario>
+<descuento>0.18</descuento>
+<precioTotalSinImpuesto>2.03</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.03</baseImponible>
+<valor>0.24</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3398</codigoPrincipal>
+<descripcion>NEPLO NEGRO DE 1" x 6"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.67</precioUnitario>
+<descuento>0.13</descuento>
+<precioTotalSinImpuesto>1.54</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.54</baseImponible>
+<valor>0.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3398</codigoPrincipal>
+<descripcion>NEPLO NEGRO DE 1" x 6"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.67</precioUnitario>
+<descuento>0.13</descuento>
+<precioTotalSinImpuesto>1.54</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.54</baseImponible>
+<valor>0.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3394</codigoPrincipal>
+<descripcion>NEPLO NEGRO DE 1" x 4"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1.29</precioUnitario>
+<descuento>0.21</descuento>
+<precioTotalSinImpuesto>2.37</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.37</baseImponible>
+<valor>0.28</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>94454</codigoPrincipal>
+<descripcion>FILTRO DE ACERO INOXIDABLE IT-404 EN "Y" ROSCADO DE 1-1/2" CLASE 800 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>60.39</precioUnitario>
+<descuento>6.04</descuento>
+<precioTotalSinImpuesto>54.35</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INOX T"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>54.35</baseImponible>
+<valor>6.52</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">info@ennotex.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2481972</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">003463</campoAdicional>
+</infoAdicional>
+</factura>

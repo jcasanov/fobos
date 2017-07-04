@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025863</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>MACIAS ORELLANA BOLIVAR</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0913390050001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>22/01/2015</fechaIniTransporte>
+<fechaFinTransporte>23/01/2015</fechaFinTransporte>
+<placa>SIN PLACA</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0913390050001</identificacionDestinatario>
+<razonSocialDestinatario>MACIAS ORELLANA BOLIVAR XAVIER</razonSocialDestinatario>
+<dirDestinatario>RETIRA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>22/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>101035</codigoInterno>
+<descripcion>BOMBA SUMERGIBLE DE 6" 375STS20D6B-0564 PARA MOTOR DE 20 HP (97060375305)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">manixavi_08@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2030849</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">015748</campoAdicional>
+</infoAdicional>
+</guiaRemision>

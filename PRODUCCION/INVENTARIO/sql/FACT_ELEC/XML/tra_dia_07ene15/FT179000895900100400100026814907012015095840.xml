@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268149</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268149</guiaRemision>
+<razonSocialComprador>LARCO YANEZ CARLOS ENRIQUE</razonSocialComprador>
+<identificacionComprador>1706549852001</identificacionComprador>
+<totalSinImpuestos>15.86</totalSinImpuestos>
+<totalDescuento>2.17</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>15.86</baseImponible>
+<valor>0.00</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>15.86</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>1374</codigoPrincipal>
+<descripcion>ADAPTADOR PVC ESP-CAM MACHO ISO DE 63mm. A 2"</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>1.61</precioUnitario>
+<descuento>0.97</descuento>
+<precioTotalSinImpuesto>7.08</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>7.08</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1368</codigoPrincipal>
+<descripcion>ADAPTADOR PVC ESP-CAM MACHO ISO DE 32mm. A 1"</descripcion>
+<cantidad>13.00</cantidad>
+<precioUnitario>0.36</precioUnitario>
+<descuento>0.56</descuento>
+<precioTotalSinImpuesto>4.12</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>4.12</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1328</codigoPrincipal>
+<descripcion>ADAPTADOR PVC ESP-CAM HEMBRA ISO DE 32mm. A 1"</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>0.53</precioUnitario>
+<descuento>0.64</descuento>
+<precioTotalSinImpuesto>4.66</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>4.66</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">ingagri@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2417084</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">007007</campoAdicional>
+</infoAdicional>
+</factura>

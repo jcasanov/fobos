@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113946</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113946</guiaRemision>
+<razonSocialComprador>MANZANO CALVACHE LAURA VICENTA</razonSocialComprador>
+<identificacionComprador>1801356153001</identificacionComprador>
+<totalSinImpuestos>3016.14</totalSinImpuestos>
+<totalDescuento>366.97</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>3016.14</baseImponible>
+<valor>361.94</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>3378.08</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>90395</codigoPrincipal>
+<descripcion>BOMBA CENTRIF STANDARD C-MOTOR DLG-11-1 15 HP 2-1/2" x 2" 1ETP 220/440/1F. 3500 RPM</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2287.81</precioUnitario>
+<descuento>343.17</descuento>
+<precioTotalSinImpuesto>1944.64</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MARK G"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1944.64</baseImponible>
+<valor>233.36</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5418</codigoPrincipal>
+<descripcion>TUBO GALV. ASTM A-53   TIPO "T" DE 2-1/2" x 6.40 m.  ESPESOR 5 mm.</descripcion>
+<cantidad>9.00</cantidad>
+<precioUnitario>99.66</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>896.94</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>896.94</baseImponible>
+<valor>107.63</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2067</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 90 GRAD  DE 2-1/2"</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>11.77</precioUnitario>
+<descuento>14.12</descuento>
+<precioTotalSinImpuesto>103.58</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>103.58</baseImponible>
+<valor>12.43</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1682</codigoPrincipal>
+<descripcion>BUSHING GALV. CLASE 150 DE 3" x 2-1/2"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>9.83</precioUnitario>
+<descuento>2.36</descuento>
+<precioTotalSinImpuesto>17.30</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>17.30</baseImponible>
+<valor>2.08</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5993</codigoPrincipal>
+<descripcion>UNION GALV. CLASE 150 DE 2-1/2"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>10.00</precioUnitario>
+<descuento>4.80</descuento>
+<precioTotalSinImpuesto>35.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>35.20</baseImponible>
+<valor>4.22</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1670</codigoPrincipal>
+<descripcion>BUSHING GALV. CLASE 150 DE 2-1/2" x 1-1/2"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>7.00</precioUnitario>
+<descuento>2.52</descuento>
+<precioTotalSinImpuesto>18.48</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>18.48</baseImponible>
+<valor>2.22</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">estacionesfull@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2608851</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064327</campoAdicional>
+</infoAdicional>
+</factura>

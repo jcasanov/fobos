@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092070</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092070</guiaRemision>
+<razonSocialComprador>ANCHUNDIA VINCES JUAN CARLOS</razonSocialComprador>
+<identificacionComprador>1308917705</identificacionComprador>
+<totalSinImpuestos>4086.99</totalSinImpuestos>
+<totalDescuento>721.23</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>4086.99</baseImponible>
+<valor>490.44</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>4577.43</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>98057</codigoPrincipal>
+<descripcion>BOMBA CENTRIF MULTIETAPA C-MOTOR FMG VZ DE 12.5 HP 220/380/440/60C/3F. 2" X 1.1/2"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>2404.11</precioUnitario>
+<descuento>721.23</descuento>
+<precioTotalSinImpuesto>4086.99</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FAMAC"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4086.99</baseImponible>
+<valor>490.44</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jcmateriales2010@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2440352</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016741</campoAdicional>
+<campoAdicional nombre="Observaciones">OFICINA SERVIENTREGA PORTOVIEJO VIA MANT</campoAdicional>
+</infoAdicional>
+</factura>

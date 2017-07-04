@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268263</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>09/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268263</guiaRemision>
+<razonSocialComprador>SERVIVAPOR  CIA.LTDA</razonSocialComprador>
+<identificacionComprador>1791769937001</identificacionComprador>
+<totalSinImpuestos>264.08</totalSinImpuestos>
+<totalDescuento>29.34</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>264.08</baseImponible>
+<valor>31.69</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>295.77</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>44303</codigoPrincipal>
+<descripcion>COQUILLA LANA DE VIDRIO C-ALUMINIO 2" x 1" x 0.90 m.</descripcion>
+<cantidad>34.00</cantidad>
+<precioUnitario>8.63</precioUnitario>
+<descuento>29.34</descuento>
+<precioTotalSinImpuesto>264.08</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDIFI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>264.08</baseImponible>
+<valor>31.69</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">csalazar@servivapor.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2531191</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000936</campoAdicional>
+<campoAdicional nombre="Observaciones">O/COPRA 3473</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268193</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268193</guiaRemision>
+<razonSocialComprador>AVS. INGENIERIA CIA LTDA</razonSocialComprador>
+<identificacionComprador>1791400097001</identificacionComprador>
+<totalSinImpuestos>831.68</totalSinImpuestos>
+<totalDescuento>146.77</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>831.68</baseImponible>
+<valor>99.80</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>931.48</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>14385</codigoPrincipal>
+<descripcion>ACEITE PARA EQUIPOS OBSCURO (S/ENVASE) (41610)</descripcion>
+<cantidad>55.00</cantidad>
+<precioUnitario>17.79</precioUnitario>
+<descuento>146.77</descuento>
+<precioTotalSinImpuesto>831.68</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="GALON"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>831.68</baseImponible>
+<valor>99.80</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">fjara@avsingenieria.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2827937</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">007389</campoAdicional>
+</infoAdicional>
+</factura>

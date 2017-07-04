@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091991</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091991</guiaRemision>
+<razonSocialComprador>PARRA SUAREZ MIGUEL ANTONIO</razonSocialComprador>
+<identificacionComprador>0904895562001</identificacionComprador>
+<totalSinImpuestos>1096.58</totalSinImpuestos>
+<totalDescuento>224.60</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1096.58</baseImponible>
+<valor>131.59</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1228.17</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>44278</codigoPrincipal>
+<descripcion>BOMBA CENTRIF STANDARD C-MOTOR DLG-10-3 10HP 1 ETP. 2-1/2 x 2" 3500RPM 220/380/460//3F/60</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1321.18</precioUnitario>
+<descuento>224.60</descuento>
+<precioTotalSinImpuesto>1096.58</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MARK G"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1096.58</baseImponible>
+<valor>131.59</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">miguelantonioparra99@gmail.com</campoAdicional>
+<campoAdicional nombre="Email">miguelparra99@ymail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2834743</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">012515</campoAdicional>
+</infoAdicional>
+</factura>

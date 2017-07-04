@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048018</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV. DE LA PRENSA N44-50 Y EDMUNDO CARVAJ</dirEstablecimiento>
+<dirPartida>AV. LA PRENSA N/4514</dirPartida>
+<razonSocialTransportista>ACERO COMERCIAL</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>15/12/2014</fechaIniTransporte>
+<fechaFinTransporte>15/12/2014</fechaFinTransporte>
+<placa></placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1790389944001</identificacionDestinatario>
+<razonSocialDestinatario>COMERCIAL IMPORTADORA VILLAYALA CIA. LTDA.</razonSocialDestinatario>
+<dirDestinatario>LA PRENSA N44-50 Y E. CARVAJAL</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>15/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>101988</codigoInterno>
+<descripcion>PORTADUCHA 310.B1.15.0  CR  SOPORTE DUCHA MANUAL</descripcion>
+<cantidad>40.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="310.B1.15.0  CR  SOP" valor="310.B1.15.0  CR  SOP"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>27473</codigoInterno>
+<descripcion>LLAVE ANGULAR E269.01 DH CR P/MANGUERA CON NEPLO Y ROSETA</descripcion>
+<cantidad>5.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="E269.01 DH CR" valor="E269.01 DH CR"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>50422</codigoInterno>
+<descripcion>UNIVERSAL POLIPROPILENO DE 1/2" (AGUA CALIENTE)</descripcion>
+<cantidad>24.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="23885" valor="23885"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>91853</codigoInterno>
+<descripcion>DUCHA 5888306 DUCHA C/BRAZO Y ROSETA CROMO SEGMENTO ECONOMICO</descripcion>
+<cantidad>29.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="EDESA" valor="EDESA"/>
+<detAdicional nombre="5888306" valor="5888306"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>96804</codigoInterno>
+<descripcion>VOLANTE 103.27.14 02CR MANIJA FIORI CROMO</descripcion>
+<cantidad>40.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="103.27.14 02CR" valor="103.27.14 02CR"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+<campoAdicional nombre="telefono-movil">2455619</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">011636</campoAdicional>
+</infoAdicional>
+</guiaRemision>

@@ -1,0 +1,21 @@
+DATABASE aceros
+SCREEN 
+{
+
+		
+                      Moneda: [c0] [c006           ]
+
+               Fecha Inicial: [c001      ]  
+
+                 Fecha Final: [c002      ]
+
+}
+ATTRIBUTES
+c0   = FORMONLY.moneda, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c006 = FORMONLY.nombre, NOENTRY, UPSHIFT, REVERSE;
+c001 = FORMONLY.inicial, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENT = 'Ingrese fecha en formato: dd-mm-aaaa';
+c002 = FORMONLY.final, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENT = 'Ingrese fecha en formato: dd-mm-aaaa';
+END

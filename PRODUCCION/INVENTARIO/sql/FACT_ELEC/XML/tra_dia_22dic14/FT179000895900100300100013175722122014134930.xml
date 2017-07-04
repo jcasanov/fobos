@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131757</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131757</guiaRemision>
+<razonSocialComprador>CONGREGACION LA PROVIDENCIA COLEGIO LA             PROVIDENCIA</razonSocialComprador>
+<identificacionComprador>1791778286001</identificacionComprador>
+<totalSinImpuestos>210.24</totalSinImpuestos>
+<totalDescuento>8.76</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>210.24</baseImponible>
+<valor>25.23</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>235.47</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>600</codigoPrincipal>
+<descripcion>ARMEX 6.25 x 2.40 MTS. R-126 100 x 100 x 4 x 4mm.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>36.50</precioUnitario>
+<descuento>2.92</descuento>
+<precioTotalSinImpuesto>70.08</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>70.08</baseImponible>
+<valor>8.41</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>600</codigoPrincipal>
+<descripcion>ARMEX 6.25 x 2.40 MTS. R-126 100 x 100 x 4 x 4mm.</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>36.50</precioUnitario>
+<descuento>5.84</descuento>
+<precioTotalSinImpuesto>140.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>140.16</baseImponible>
+<valor>16.82</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2650244</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064157</campoAdicional>
+</infoAdicional>
+</factura>

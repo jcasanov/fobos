@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131704</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131704</guiaRemision>
+<razonSocialComprador>ALVEAR ALVEAR ILDA PATRICIA</razonSocialComprador>
+<identificacionComprador>1712033701001</identificacionComprador>
+<totalSinImpuestos>112.26</totalSinImpuestos>
+<totalDescuento>22.99</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>112.26</baseImponible>
+<valor>13.47</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>125.73</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102585</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA VENTO SEGUNDA</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>9.59</precioUnitario>
+<descuento>4.89</descuento>
+<precioTotalSinImpuesto>23.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>23.88</baseImponible>
+<valor>2.87</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102186</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA PORTO GEOMETRICO BEIGE PRIMERA</descripcion>
+<cantidad>11.00</cantidad>
+<precioUnitario>9.68</precioUnitario>
+<descuento>18.10</descuento>
+<precioTotalSinImpuesto>88.38</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>88.38</baseImponible>
+<valor>10.61</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2683883</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">062528</campoAdicional>
+</infoAdicional>
+</factura>

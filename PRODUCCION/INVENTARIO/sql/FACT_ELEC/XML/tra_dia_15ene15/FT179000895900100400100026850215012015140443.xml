@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268502</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268502</guiaRemision>
+<razonSocialComprador>CONSISA.- CONST.ING.SANITARIA</razonSocialComprador>
+<identificacionComprador>1790682919001</identificacionComprador>
+<totalSinImpuestos>80.05</totalSinImpuestos>
+<totalDescuento>8.90</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>80.05</baseImponible>
+<valor>9.61</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>89.66</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>14385</codigoPrincipal>
+<descripcion>ACEITE PARA EQUIPOS OBSCURO (S/ENVASE) (41610)</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>17.79</precioUnitario>
+<descuento>8.90</descuento>
+<precioTotalSinImpuesto>80.05</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="GALON"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>80.05</baseImponible>
+<valor>9.61</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">instalacionessanitarias@andinanet.net</campoAdicional>
+<campoAdicional nombre="Email">mcueva@andinanet.net</campoAdicional>
+<campoAdicional nombre="telefono-movil">2442717</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">004117</campoAdicional>
+<campoAdicional nombre="Observaciones">SOLICITADO SR RODRIGO CUCHIPARTE</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000004377</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>ATU (ARTICULOS DE ACERO S.A.)</razonSocialComprador>
+<identificacionComprador>1790038092001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>003-001-000131632</numDocModificado>
+<fechaEmisionDocSustento>17/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>24.43</totalSinImpuestos>
+<valorModificacion>27.36</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>24.43</baseImponible>
+<valor>2.93</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>REF POR FECHA NP 139240</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>1622</codigoInterno>
+<descripcion>BUSHING GALV. CLASE 150 DE 1/2" x 3/8"</descripcion>
+<cantidad>15.00</cantidad>
+<precioUnitario>0.96</precioUnitario>
+<descuento>1.44</descuento>
+<precioTotalSinImpuesto>12.96</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>12.96</baseImponible>
+<valor>1.56</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>92340</codigoInterno>
+<descripcion>BUSHING GALV. CLASE 150 DE 1/2" x 1/4"</descripcion>
+<cantidad>15.00</cantidad>
+<precioUnitario>0.85</precioUnitario>
+<descuento>1.28</descuento>
+<precioTotalSinImpuesto>11.47</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>11.47</baseImponible>
+<valor>1.38</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infoatu@atu.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">554477 648</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">28573</campoAdicional>
+</infoAdicional>
+</notaCredito>

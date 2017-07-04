@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104208</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>29/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104208</guiaRemision>
+<razonSocialComprador>VELEZ ILLESCAS FERNANDO MAURICIO</razonSocialComprador>
+<identificacionComprador>0102312063001</identificacionComprador>
+<totalSinImpuestos>173.27</totalSinImpuestos>
+<totalDescuento>19.25</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>173.27</baseImponible>
+<valor>20.79</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>194.06</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>98554</codigoPrincipal>
+<descripcion>BOMBA CENTRIF STANDARD C-MOTOR MC-50 DE 1/2 HP 115V/60C/1F. (301T0500)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>152.45</precioUnitario>
+<descuento>16.77</descuento>
+<precioTotalSinImpuesto>135.68</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>135.68</baseImponible>
+<valor>16.28</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21404</codigoPrincipal>
+<descripcion>VALVULA DE PIE VP-25 DE 1" 200 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>15.87</precioUnitario>
+<descuento>1.27</descuento>
+<precioTotalSinImpuesto>14.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HELBER"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>14.60</baseImponible>
+<valor>1.75</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98789</codigoPrincipal>
+<descripcion>CONTROL DE NIVEL G-0120 ALTO Y BAJO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>24.20</precioUnitario>
+<descuento>1.21</descuento>
+<precioTotalSinImpuesto>22.99</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>22.99</baseImponible>
+<valor>2.76</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">fmviop@yahoo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">072815688</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016688</campoAdicional>
+</infoAdicional>
+</factura>

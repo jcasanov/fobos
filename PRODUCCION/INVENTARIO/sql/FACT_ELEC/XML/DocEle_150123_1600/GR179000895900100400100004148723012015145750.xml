@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000041487</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<dirPartida>AV. LA PRENSA N-4514</dirPartida>
+<razonSocialTransportista>SERVIENTREGA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0991285679001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>23/01/2015</fechaIniTransporte>
+<fechaFinTransporte>23/01/2015</fechaFinTransporte>
+<placa>PAA-001</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1001930278001</identificacionDestinatario>
+<razonSocialDestinatario>MONTALVO ERAZO JHADIRA MARYCIELO</razonSocialDestinatario>
+<dirDestinatario>AV JAIME RIBADENEIRA 577 Y PEDRO MONCAYO</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>21/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>103263</codigoInterno>
+<descripcion>ALUMINIO LISO DE 2 x 1 MTS. DE 0.4 mm.</descripcion>
+<cantidad>4.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>103264</codigoInterno>
+<descripcion>VARILLA DE ACERO INOXIDABLE SOLIDA DE 3/8" X 6m.</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">multimangueras_ibarra@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">062955321</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">037327</campoAdicional>
+</infoAdicional>
+</guiaRemision>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268136</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>06/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268136</guiaRemision>
+<razonSocialComprador>COPROPIETARIOS DE EL PORTAL DEL BOSQUE</razonSocialComprador>
+<identificacionComprador>1790947068001</identificacionComprador>
+<totalSinImpuestos>36.50</totalSinImpuestos>
+<totalDescuento>3.17</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>36.50</baseImponible>
+<valor>4.38</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>40.88</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>218</codigoPrincipal>
+<descripcion>CORREA "G" DE 200 x 50 x 15 x 2mm. x 6 Mts.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>39.67</precioUnitario>
+<descuento>3.17</descuento>
+<precioTotalSinImpuesto>36.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>36.50</baseImponible>
+<valor>4.38</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">mauropalacios@yahoo.es</campoAdicional>
+<campoAdicional nombre="telefono-movil">923235</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016522</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,62 @@
+DATABASE aceros
+SCREEN
+{
+
+             Bodega: [c4|c005                        ]  Estado: [c|c001      ] 
+    Número de Orden: [c000      ]                Factura: [c2|c003           ]  
+     Bodega Entrega: [z1|z002                        ] 
+   Fecha de Entrega: [c006      ]
+ Persona a Entregar: [c007                                    ]
+  Dirección Entrega: [c008                                                   ]
+                     [c008                                                   ]
+                                                           [c050] de [c051]
+     Item                  Descripción               Cant.Desp. Cant. Ent.
+   [c020   |c021                                    |c022      |c023      ]
+   [c020   |c021                                    |c022      |c023      ]
+   [c020   |c021                                    |c022      |c023      ]
+   [c020   |c021                                    |c022      |c023      ]
+   [c020   |c021                                    |c022      |c023      ]
+   [c071                               ]   Totales: [c030      |c031      ]
+   [c072                                    ]
+   [c073                                              ]
+   [c074                                                             ]
+}
+TABLES rept034, rept035, rept010
+ATTRIBUTES
+c000 = rept034.r34_num_ord_des, REVERSE, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c    = rept034.r34_estado, REVERSE, NOENTRY, UPSHIFT;
+z1   = FORMONLY.vm_bodega_real TYPE CHAR NOT NULL, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Solo para ventas sin stock, ingrese la bodega real de donde se entrega.';
+z002 = FORMONLY.tit_bodega_real, REVERSE, NOENTRY;       
+c001 = FORMONLY.tit_estado_rep, REVERSE, NOENTRY, UPSHIFT;
+c2   = rept034.r34_cod_tran, REVERSE, NOENTRY, UPSHIFT;
+c003 = rept034.r34_num_tran, REVERSE, NOENTRY, UPSHIFT;
+c4   = rept034.r34_bodega, REVERSE, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c005 = FORMONLY.tit_bodega, REVERSE, NOENTRY, UPSHIFT;
+c006 = rept034.r34_fec_entrega, REVERSE, AUTONEXT, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Fecha con formato:dd-mm-aaaa';
+c007 = rept034.r34_entregar_a, REVERSE, AUTONEXT, UPSHIFT;
+c008 = rept034.r34_entregar_en, REVERSE, AUTONEXT, UPSHIFT, WORDWRAP;
+
+c020 = rept035.r35_item, NOENTRY, UPSHIFT, REVERSE;
+c021 = rept010.r10_nombre, NOENTRY, UPSHIFT, REVERSE;
+c022 = rept035.r35_cant_des, NOENTRY, UPSHIFT, REVERSE,
+	COMMENTS = 'Cantidad que se despacha',FORMAT = '###,##&.##';
+c023 = rept035.r35_cant_ent, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Cantidad que se entrega debe ser menor o igual a la cantidad despachada',FORMAT = '###,##&.##', INCLUDE = (0.00 TO 999999.99);
+c030 = FORMONLY.vm_total_des TYPE DECIMAL (8,2), FORMAT = '###,##&.##', REVERSE;
+c031 = FORMONLY.vm_total_ent TYPE DECIMAL (8,2), FORMAT = '###,##&.##', REVERSE;
+c071 = FORMONLY.descrip_2, NOENTRY;
+c072 = FORMONLY.descrip_3, NOENTRY;
+c073 = FORMONLY.descrip_4, NOENTRY;
+c074 = FORMONLY.nom_item,  NOENTRY, REVERSE;
+
+c050 = FORMONLY.num_row,     NOENTRY, REVERSE;
+c051 = FORMONLY.vm_num_repd, NOENTRY, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_desp[5] (r35_item, r10_nombre, r35_cant_des, r35_cant_ent)

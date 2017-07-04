@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268587</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268587</guiaRemision>
+<razonSocialComprador>PADILLA PEREZ NANCY GEOVANNA</razonSocialComprador>
+<identificacionComprador>1720620986001</identificacionComprador>
+<totalSinImpuestos>151.83</totalSinImpuestos>
+<totalDescuento>16.87</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>151.83</baseImponible>
+<valor>18.22</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>170.05</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>98367</codigoPrincipal>
+<descripcion>BOTONERA SWD2110-AB1 P/MOD.MR2-020S P/TROLLEY DE 4 BOTONES</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>84.35</precioUnitario>
+<descuento>16.87</descuento>
+<precioTotalSinImpuesto>151.83</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KITO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>151.83</baseImponible>
+<valor>18.22</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">ferreteriapadillasanjuan@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2036560</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064323</campoAdicional>
+</infoAdicional>
+</factura>

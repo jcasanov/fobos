@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000034077</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1. VIA MONTECRISTI - MANTA</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>GERMAN ARIAS DE LA ROSA</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>1202595110</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>17/12/2014</fechaIniTransporte>
+<fechaFinTransporte>18/12/2014</fechaFinTransporte>
+<placa></placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1391794495001</identificacionDestinatario>
+<razonSocialDestinatario>MONTECRISTI GOLF COURSE S.A. MONTECRISTIGOLF</razonSocialDestinatario>
+<dirDestinatario>MANTECRISTI</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>17/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>19587</codigoInterno>
+<descripcion>CAJA DE CONTROL (2821138110) CJ-5021 P/ 5HP 230/60/1F</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="FRANKLIN" valor="FRANKL"/>
+<detAdicional nombre="pend" valor="pend"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>21378</codigoInterno>
+<descripcion>VALVULA CHEQUE VC-50 DE 2" DE BRONCE TIPO PESADO</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="HELBERT" valor="HELBER"/>
+<detAdicional nombre="pend" valor="pend"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>94708</codigoInterno>
+<descripcion>BOMBA SUMERGIBLE DE 4" 90FA5S4-PE P/ 5HP 90 GPM (93619012) 12 ETAPAS</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="FRANKLIN PUMPS SYSTEMS" valor="FRANKL"/>
+<detAdicional nombre="90FA5S4-PE" valor="90FA5S4-PE"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>95099</codigoInterno>
+<descripcion>MOTOR ELEC SUMERG DE 4" (2243038602) DE 5 HP 230/60/1F</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="FRANKLIN" valor="FRANKL"/>
+<detAdicional nombre="2243038602" valor="2243038602"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">052310437</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016537</campoAdicional>
+</infoAdicional>
+</guiaRemision>

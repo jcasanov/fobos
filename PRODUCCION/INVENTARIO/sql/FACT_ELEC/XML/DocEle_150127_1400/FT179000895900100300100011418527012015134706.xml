@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000114185</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000114185</guiaRemision>
+<razonSocialComprador>GUAMAN ZOILA AGRIPINA</razonSocialComprador>
+<identificacionComprador>1706971643001</identificacionComprador>
+<totalSinImpuestos>1545.35</totalSinImpuestos>
+<totalDescuento>272.71</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1545.35</baseImponible>
+<valor>185.44</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1730.79</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>101832</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 30 X 30 MONOQUEMA SPINETTO CREMA PRIMERA</descripcion>
+<cantidad>100.00</cantidad>
+<precioUnitario>7.36</precioUnitario>
+<descuento>110.40</descuento>
+<precioTotalSinImpuesto>625.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>625.60</baseImponible>
+<valor>75.07</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101829</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA SORAIDA ROBLE PRIMERA</descripcion>
+<cantidad>101.76</cantidad>
+<precioUnitario>8.15</precioUnitario>
+<descuento>124.40</descuento>
+<precioTotalSinImpuesto>704.94</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>704.94</baseImponible>
+<valor>84.59</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99904</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 BOLONIA MARFIL PRIMERA</descripcion>
+<cantidad>24.00</cantidad>
+<precioUnitario>10.53</precioUnitario>
+<descuento>37.91</descuento>
+<precioTotalSinImpuesto>214.81</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>214.81</baseImponible>
+<valor>25.78</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">decoracabados@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2339357</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">055584</campoAdicional>
+<campoAdicional nombre="Observaciones">DECOR ACABADOS</campoAdicional>
+</infoAdicional>
+</factura>

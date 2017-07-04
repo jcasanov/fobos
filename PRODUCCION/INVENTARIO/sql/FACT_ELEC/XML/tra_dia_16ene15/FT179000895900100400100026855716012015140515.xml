@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268557</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268557</guiaRemision>
+<razonSocialComprador>SOCIEDAD PORCINA LOS ANGELES</razonSocialComprador>
+<identificacionComprador>1791833058001</identificacionComprador>
+<totalSinImpuestos>546.77</totalSinImpuestos>
+<totalDescuento>0.18</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>546.77</baseImponible>
+<valor>65.61</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>612.38</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102973</codigoPrincipal>
+<descripcion>TABLERO ELECTRICO DE CONTROL PARA BOMBA DE 3 HP 220V 2F</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>470.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>470.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>470.00</baseImponible>
+<valor>56.40</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103289</codigoPrincipal>
+<descripcion>CINTA AISLANTE SUPER 33 DE PVC</descripcion>
+<cantidad>7.00</cantidad>
+<precioUnitario>5.33</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>37.31</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>37.31</baseImponible>
+<valor>4.48</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103294</codigoPrincipal>
+<descripcion>UNION A COMPRESION 1/0 P/CABLE ELECTRICO</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>1.60</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>32.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>32.00</baseImponible>
+<valor>3.84</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99953</codigoPrincipal>
+<descripcion>GRIFO ESFERICO BRONCE CROMADO PERFECTA DE 1/2" CABO ROJO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>4.25</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>4.25</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FIV"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.25</baseImponible>
+<valor>0.51</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3166</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1/2" x 4"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>0.65</precioUnitario>
+<descuento>0.03</descuento>
+<precioTotalSinImpuesto>0.62</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.62</baseImponible>
+<valor>0.07</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3218</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1-1/4" x 3"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.30</precioUnitario>
+<descuento>0.07</descuento>
+<precioTotalSinImpuesto>1.23</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.23</baseImponible>
+<valor>0.15</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21187</codigoPrincipal>
+<descripcion>TACO FICHER F8 (PAQUETE DE 5)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>0.27</precioUnitario>
+<descuento>0.03</descuento>
+<precioTotalSinImpuesto>0.51</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="PAQ"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.51</baseImponible>
+<valor>0.06</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21277</codigoPrincipal>
+<descripcion>TORNILLO TP-1-1/4" (PAQUETE DE 10)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>0.90</precioUnitario>
+<descuento>0.05</descuento>
+<precioTotalSinImpuesto>0.85</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="PAQ"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.85</baseImponible>
+<valor>0.10</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">mledesma@punto.net.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">099481550</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">036973</campoAdicional>
+</infoAdicional>
+</factura>

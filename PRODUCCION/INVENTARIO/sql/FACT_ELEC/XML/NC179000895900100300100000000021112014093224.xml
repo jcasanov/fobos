@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000007739</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>21/11/2014</fechaEmision>
+<dirEstablecimiento>AV.MORAN VALVERDE OE3-191-AV.TNTE.H.ORTI</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>EDESA S. A.</razonSocialComprador>
+<identificacionComprador>1790160653001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>003-001-000097850</numDocModificado>
+<fechaEmisionDocSustento>06/03/2012</fechaEmisionDocSustento>
+<totalSinImpuestos>557.15</totalSinImpuestos>
+<valorModificacion>580.34</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>518.16</baseImponible>
+<valor>62.18</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>REF POR FALLA EN EL PRECIO</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>5668</codigoInterno>
+<descripcion>TUBO PVC DESAGUE 40 PSI DE 160mm. x 3 Mts. ESPIGA CAMPANA</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>26.12</precioUnitario>
+<descuento>18.28</descuento>
+<precioTotalSinImpuesto>242.92</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>242.92</baseImponible>
+<valor>29.15</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>4918</codigoInterno>
+<descripcion>TEE PVC DESAGUE DE 160mm. ISO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>12.49</precioUnitario>
+<descuento>1.75</descuento>
+<precioTotalSinImpuesto>23.23</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>23.23</baseImponible>
+<valor>2.79</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>2693</codigoInterno>
+<descripcion>CODO PVC DESAGUE DE 160mm. x 90ø ISO C/C</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>10.24</precioUnitario>
+<descuento>2.87</descuento>
+<precioTotalSinImpuesto>38.09</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>38.09</baseImponible>
+<valor>4.57</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>2675</codigoInterno>
+<descripcion>CODO PVC DESAGUE DE 160mm. x 45° ISO C/C</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>20.27</precioUnitario>
+<descuento>8.51</descuento>
+<precioTotalSinImpuesto>113.11</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>113.11</baseImponible>
+<valor>13.57</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>2672</codigoInterno>
+<descripcion>CODO PVC DESAGUE DE 110mm. x 45ø ISO E/C</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>3.77</precioUnitario>
+<descuento>2.64</descuento>
+<precioTotalSinImpuesto>35.06</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>35.06</baseImponible>
+<valor>4.21</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>2690</codigoInterno>
+<descripcion>CODO PVC DESAGUE DE 110mm. x 90ø ISO E/C</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>2.66</precioUnitario>
+<descuento>0.74</descuento>
+<precioTotalSinImpuesto>9.90</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.90</baseImponible>
+<valor>1.19</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>5666</codigoInterno>
+<descripcion>TUBO PVC DESAGUE 40 PSI DE 110mm. x 3 Mts. ESPIGA CAMPANA</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>12.01</precioUnitario>
+<descuento>4.20</descuento>
+<precioTotalSinImpuesto>55.85</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>55.85</baseImponible>
+<valor>6.70</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</notaCredito>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025764</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>T GUTIERREZ</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>14/01/2015</fechaIniTransporte>
+<fechaFinTransporte>15/01/2015</fechaFinTransporte>
+<placa>GSL5009</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1710931997001</identificacionDestinatario>
+<razonSocialDestinatario>CEDEÒO CORNEJO JUDITH LYNEETTE</razonSocialDestinatario>
+<dirDestinatario>KM 12.5 VIA A LA COSTA - TERRANOSTRA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>12/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>101456</codigoInterno>
+<descripcion>BOMBA CENTRIF MULTIETAPA C-MOTOR CR3-11 2HP ROSCADA 220-277D/380-480Y/3/60 (98493506)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>102963</codigoInterno>
+<descripcion>BOMBA CENTRIFUGA STANDAR S/ MOTOR NK65-200/219 Y1F2AE-SBAQE  (96604233)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>71191</codigoInterno>
+<descripcion>SWITCH DE PRESION PRESOSTATO DE 4 A 12 BAR DIF 0.5-1.6 BAR</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>71280</codigoInterno>
+<descripcion>TABLERO ELECTRICO SCI DE 60HP/220V.3F. ARRANQUE Y-D JOCKEY DE 4HP.3F MAN. AUT.</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>71532</codigoInterno>
+<descripcion>EQUIPO CONTRA INCENDIOS BASE Y ELEMENTOS DE SUCCION Y DESCARGA</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>71852</codigoInterno>
+<descripcion>MOTOR ELECTRICO 3400-3600 MONOFASICO TEFC (IP55) DE 60 HP. 3600 RPM. 220/440V/60C/3F.</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="SIEMEN"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">lcedeno@mbi.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">046009266</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016440</campoAdicional>
+</infoAdicional>
+</guiaRemision>

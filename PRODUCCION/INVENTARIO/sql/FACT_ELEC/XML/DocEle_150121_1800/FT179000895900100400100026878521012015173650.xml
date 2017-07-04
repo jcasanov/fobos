@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268785</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268785</guiaRemision>
+<razonSocialComprador>FERREMOTORS CIA LTDA</razonSocialComprador>
+<identificacionComprador>1791358139001</identificacionComprador>
+<totalSinImpuestos>409.48</totalSinImpuestos>
+<totalDescuento>72.26</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>409.48</baseImponible>
+<valor>49.14</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>458.62</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>13658</codigoPrincipal>
+<descripcion>LLAVE DE TUBO RECTA NO. 24 (31030)</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>80.29</precioUnitario>
+<descuento>72.26</descuento>
+<precioTotalSinImpuesto>409.48</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>409.48</baseImponible>
+<valor>49.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">ferremotors@andinanet.net</campoAdicional>
+<campoAdicional nombre="telefono-movil">2482130</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">005335</campoAdicional>
+<campoAdicional nombre="Observaciones">SOLICITA RUBEN DELGADO</campoAdicional>
+</infoAdicional>
+</factura>

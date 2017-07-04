@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268092</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>06/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268092</guiaRemision>
+<razonSocialComprador>MORALES CHAMORRO LUIS GUSTAVO</razonSocialComprador>
+<identificacionComprador>1704404910001</identificacionComprador>
+<totalSinImpuestos>333.86</totalSinImpuestos>
+<totalDescuento>41.49</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>333.86</baseImponible>
+<valor>40.06</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>373.92</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>92617</codigoPrincipal>
+<descripcion>BUSHING GALV. CLASE 150 DE 1-1/2" x 1"</descripcion>
+<cantidad>18.00</cantidad>
+<precioUnitario>2.85</precioUnitario>
+<descuento>6.16</descuento>
+<precioTotalSinImpuesto>45.14</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>45.14</baseImponible>
+<valor>5.42</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>90272</codigoPrincipal>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 2"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>17.65</precioUnitario>
+<descuento>4.24</descuento>
+<precioTotalSinImpuesto>31.06</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>31.06</baseImponible>
+<valor>3.73</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>8796</codigoPrincipal>
+<descripcion>VALVULA COMPUERTA  BRONCE ROSCADA RW-206 DE 2" 125 PSI</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>88.66</precioUnitario>
+<descuento>17.73</descuento>
+<precioTotalSinImpuesto>159.59</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RED WH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>159.59</baseImponible>
+<valor>19.15</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4573</codigoPrincipal>
+<descripcion>TEE GALV. CLASE 150 DE 1-1/2"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>6.07</precioUnitario>
+<descuento>4.37</descuento>
+<precioTotalSinImpuesto>32.05</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>32.05</baseImponible>
+<valor>3.85</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2896</codigoPrincipal>
+<descripcion>CRUZ GALV. CLASE 150 DE 1-1/2"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>13.01</precioUnitario>
+<descuento>4.68</descuento>
+<precioTotalSinImpuesto>34.35</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>34.35</baseImponible>
+<valor>4.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>10154</codigoPrincipal>
+<descripcion>SELLADOR 2-C-GS-2-11  DE  11 OZ. NEGRO</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>5.76</precioUnitario>
+<descuento>2.07</descuento>
+<precioTotalSinImpuesto>15.21</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PERMAT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>15.21</baseImponible>
+<valor>1.83</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102044</codigoPrincipal>
+<descripcion>TEFLON EN ROLLO DE 3/4" x 15 m. DENSIDAD 0.40 gr/cm3 PAOLO</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>1.87</precioUnitario>
+<descuento>2.24</descuento>
+<precioTotalSinImpuesto>16.46</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>16.46</baseImponible>
+<valor>1.98</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">inggustavomorales@yahoo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3401805</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">015973</campoAdicional>
+</infoAdicional>
+</factura>

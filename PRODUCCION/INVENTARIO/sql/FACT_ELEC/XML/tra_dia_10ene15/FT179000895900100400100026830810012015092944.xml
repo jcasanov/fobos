@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268308</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>10/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268308</guiaRemision>
+<razonSocialComprador>VILLEGAS CABRERA IRENE CARMEN</razonSocialComprador>
+<identificacionComprador>1001259595</identificacionComprador>
+<totalSinImpuestos>37.94</totalSinImpuestos>
+<totalDescuento>4.22</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>37.94</baseImponible>
+<valor>4.55</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>42.49</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>13700</codigoPrincipal>
+<descripcion>MACHUELO DE ROSCA NPT INTERIOR E-5116 DE 3/4" (35835)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>42.16</precioUnitario>
+<descuento>4.22</descuento>
+<precioTotalSinImpuesto>37.94</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>37.94</baseImponible>
+<valor>4.55</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">hidrotanque2010@yahoo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">226469</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">003109</campoAdicional>
+</infoAdicional>
+</factura>

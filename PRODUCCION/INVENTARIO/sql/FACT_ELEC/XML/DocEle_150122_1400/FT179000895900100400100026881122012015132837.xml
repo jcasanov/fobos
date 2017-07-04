@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268811</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268811</guiaRemision>
+<razonSocialComprador>PUENTE VILLARRUEL PATRICIO RAMIRO</razonSocialComprador>
+<identificacionComprador>1708887425</identificacionComprador>
+<totalSinImpuestos>62.60</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>62.60</baseImponible>
+<valor>7.51</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>70.11</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>97444</codigoPrincipal>
+<descripcion>DESTAPADOR DE DESAGUES K-6 MANUAL DE 6"  CABEZAL DE BULBO  (59797)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>62.60</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>62.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>62.60</baseImponible>
+<valor>7.51</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">multidestapes1965@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2626289</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">058497</campoAdicional>
+<campoAdicional nombre="Observaciones">VISA BNCO PICHINCHA 3 MESES</campoAdicional>
+</infoAdicional>
+</factura>

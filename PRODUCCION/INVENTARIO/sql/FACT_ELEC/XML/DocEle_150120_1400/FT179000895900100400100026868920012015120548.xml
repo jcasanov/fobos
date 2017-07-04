@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268689</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268689</guiaRemision>
+<razonSocialComprador>AZULEC S.A</razonSocialComprador>
+<identificacionComprador>1791957253001</identificacionComprador>
+<totalSinImpuestos>63.17</totalSinImpuestos>
+<totalDescuento>11.15</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>63.17</baseImponible>
+<valor>7.58</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>70.75</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>93779</codigoPrincipal>
+<descripcion>FRESA ANULAR PARA TALADRO ELECTROMAGNETICO 49-59-1250 DE 1-1/4" P/ PLANCHA DE HASTA 1"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>74.32</precioUnitario>
+<descuento>11.15</descuento>
+<precioTotalSinImpuesto>63.17</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>63.17</baseImponible>
+<valor>7.58</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacion@azul.com.ec</campoAdicional>
+<campoAdicional nombre="Email">diego.chalco@azul.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2977600</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">036359</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C: 258896</campoAdicional>
+</infoAdicional>
+</factura>

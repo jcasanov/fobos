@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268907</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268907</guiaRemision>
+<razonSocialComprador>INTEGRATEL GROUP SOCIEDAD CIVIL Y COMERCIAL</razonSocialComprador>
+<identificacionComprador>1792256402001</identificacionComprador>
+<totalSinImpuestos>1351.19</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1351.19</baseImponible>
+<valor>162.14</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1513.33</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5460</codigoPrincipal>
+<descripcion>TUBO GALVANIZADO (POSTE) TIPO "T" DE 2" (50.8mm.) EXTERIOR 1.8mm. ESPESOR x 6 mts.</descripcion>
+<cantidad>31.00</cantidad>
+<precioUnitario>22.55</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>699.05</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>699.05</baseImponible>
+<valor>83.89</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>69511</codigoPrincipal>
+<descripcion>MALLA CERRAMIENTO 50/10 x 2.50 m DE ALTO  (ROLLO 10m) GALVANIZADA</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>149.28</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>597.12</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="ROLLO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>597.12</baseImponible>
+<valor>71.65</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>380</codigoPrincipal>
+<descripcion>PLETINA DE 12 x 6mm. x 6 Mts.</descripcion>
+<cantidad>7.00</cantidad>
+<precioUnitario>4.86</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>34.02</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>34.02</baseImponible>
+<valor>4.08</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21474</codigoPrincipal>
+<descripcion>ELECTRODO E-6011-C-13 3/16" ACERO DULCE</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>4.20</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>21.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="AGA"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>21.00</baseImponible>
+<valor>2.52</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">asistente@integratelecuador.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2900595</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">058663</campoAdicional>
+</infoAdicional>
+</factura>

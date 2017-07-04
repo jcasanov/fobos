@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131870</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>30/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131870</guiaRemision>
+<razonSocialComprador>ACABADOS DE LA CONSTRUCCION VILLAFUERTE</razonSocialComprador>
+<identificacionComprador>1713231841001</identificacionComprador>
+<totalSinImpuestos>243.27</totalSinImpuestos>
+<totalDescuento>42.93</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>243.27</baseImponible>
+<valor>29.19</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>272.46</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>101350</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 FERRARA BURDEOS  PRIMERA</descripcion>
+<cantidad>30.00</cantidad>
+<precioUnitario>9.54</precioUnitario>
+<descuento>42.93</descuento>
+<precioTotalSinImpuesto>243.27</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>243.27</baseImponible>
+<valor>29.19</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">acvillaf@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3061635</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">046473</campoAdicional>
+</infoAdicional>
+</factura>

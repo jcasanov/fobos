@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268078</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>05/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268078</guiaRemision>
+<razonSocialComprador>PAEZ VELEZ JORGE DAVID</razonSocialComprador>
+<identificacionComprador>1716820848001</identificacionComprador>
+<totalSinImpuestos>164.78</totalSinImpuestos>
+<totalDescuento>33.75</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>164.78</baseImponible>
+<valor>19.77</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>184.55</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>100259</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA NAPOLES WHITE PRIMERA (1.92 m2 C/CAJA)</descripcion>
+<cantidad>19.20</cantidad>
+<precioUnitario>10.34</precioUnitario>
+<descuento>33.75</descuento>
+<precioTotalSinImpuesto>164.78</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>164.78</baseImponible>
+<valor>19.77</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">JORDAVPAEZ@HOTMAIL.COM</campoAdicional>
+<campoAdicional nombre="telefono-movil">2418077</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">046646</campoAdicional>
+</infoAdicional>
+</factura>

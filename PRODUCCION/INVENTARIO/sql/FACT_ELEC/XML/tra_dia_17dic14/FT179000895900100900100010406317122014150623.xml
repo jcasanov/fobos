@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104063</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>EUROPA S/N Y FRANCIA</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104063</guiaRemision>
+<razonSocialComprador>HIDROBO VASQUEZ RICARDO</razonSocialComprador>
+<identificacionComprador>0102158201001</identificacionComprador>
+<totalSinImpuestos>1866.92</totalSinImpuestos>
+<totalDescuento>230.75</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1866.92</baseImponible>
+<valor>224.03</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>2090.95</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102797</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 6" SSI 85 GPM P/7.5 HP (61650702040082)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>749.41</precioUnitario>
+<descuento>82.44</descuento>
+<precioTotalSinImpuesto>666.97</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANKLIN PUMPS SYSTEMS" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>666.97</baseImponible>
+<valor>80.04</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99410</codigoPrincipal>
+<descripcion>MOTOR ELEC SUMERG DE 6" 6C3F DE 7.5 HP 230/460/3F (2363118120)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1348.26</precioUnitario>
+<descuento>148.31</descuento>
+<precioTotalSinImpuesto>1199.95</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANKLIN" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1199.95</baseImponible>
+<valor>143.99</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">032522192</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">015417</campoAdicional>
+</infoAdicional>
+</factura>

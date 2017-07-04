@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092076</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092076</guiaRemision>
+<razonSocialComprador>GARCES CALDERON CARLOS</razonSocialComprador>
+<identificacionComprador>1302272180</identificacionComprador>
+<totalSinImpuestos>202.67</totalSinImpuestos>
+<totalDescuento>17.23</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>202.67</baseImponible>
+<valor>24.32</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>226.99</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>23935</codigoPrincipal>
+<descripcion>LAVAPLATOS DE ACERO INOXIDABLE 11119010 CLASSIC 2C 86x50cm MODULAR INCLUYE VALVULA 3-1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>209.62</precioUnitario>
+<descuento>16.77</descuento>
+<precioTotalSinImpuesto>192.85</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TEKA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>192.85</baseImponible>
+<valor>23.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50462</codigoPrincipal>
+<descripcion>TUBO DE EXTENSION PARA DESAGUE GUIB2-0014 PLASTICO DE 1-1/2" x 5" (GUIA)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>0.59</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INCAME"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.18</baseImponible>
+<valor>0.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>71182</codigoPrincipal>
+<descripcion>CONEXION 61001104 CONJUNTO SIFON</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>9.10</precioUnitario>
+<descuento>0.46</descuento>
+<precioTotalSinImpuesto>8.64</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TEKA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.64</baseImponible>
+<valor>1.04</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">carlosgarces_88@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2520293</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016731</campoAdicional>
+</infoAdicional>
+</factura>

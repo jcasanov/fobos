@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113743</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>08/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113743</guiaRemision>
+<razonSocialComprador>TEXTILES TEXSA  S.A.</razonSocialComprador>
+<identificacionComprador>1790013324001</identificacionComprador>
+<totalSinImpuestos>6.92</totalSinImpuestos>
+<totalDescuento>0.77</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>6.92</baseImponible>
+<valor>0.83</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>7.75</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99953</codigoPrincipal>
+<descripcion>GRIFO ESFERICO BRONCE CROMADO PERFECTA DE 1/2" CABO ROJO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>4.25</precioUnitario>
+<descuento>0.43</descuento>
+<precioTotalSinImpuesto>3.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FIV"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.82</baseImponible>
+<valor>0.46</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50369</codigoPrincipal>
+<descripcion>REDUCTOR POLIPROPILENO DE 2" A 1/2" (AGUA CALIENTE)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2.60</precioUnitario>
+<descuento>0.26</descuento>
+<precioTotalSinImpuesto>2.34</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.34</baseImponible>
+<valor>0.28</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50314</codigoPrincipal>
+<descripcion>NEPLO POLIPROPILENO DE 1/2" x 6 cm. (AGUA CALIENTE)</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>0.21</precioUnitario>
+<descuento>0.08</descuento>
+<precioTotalSinImpuesto>0.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.76</baseImponible>
+<valor>0.09</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">sandrade@textilestexsa.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2611138</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">029021</campoAdicional>
+</infoAdicional>
+</factura>

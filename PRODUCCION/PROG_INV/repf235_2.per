@@ -1,0 +1,55 @@
+DATABASE aceros
+SCREEN
+{
+
+                  DATOS ANTES DE LA ACTUALIZACION         [c030]de[c031]
+          -----------------------------------------------
+  [c000   |c001         |c002         |c003               |c004         ]
+ [c010   |c011         |c012         |c013               |c014         ]
+ [c010   |c011         |c012         |c013               |c014         ]
+ [c010   |c011         |c012         |c013               |c014         ]
+ [c010   |c011         |c012         |c013               |c014         ]
+ [c010   |c011         |c012         |c013               |c014         ]
+ [c010   |c011         |c012         |c013               |c014         ]
+ [c010   |c011         |c012         |c013               |c014         ]
+ [c010   |c011         |c012         |c013               |c014         ]
+ [c010   |c011         |c012         |c013               |c014         ]
+ [c010   |c011         |c012         |c013               |c014         ]
+ [c010   |c011         |c012         |c013               |c014         ]
+
+ [c020                                              ]
+ [c021                                                                 ]
+
+}
+TABLES
+rept010
+rept072
+rept086
+ATTRIBUTES
+c000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c002 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c003 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c004 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+
+c010 = rept086.r86_item, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c011 = rept086.r86_precio_mb, NOENTRY, UPSHIFT, OPTIONS = '-nolist',
+	FORMAT = '##,###,##&.##';
+c012 = rept086.r86_precio_ant, NOENTRY, UPSHIFT, OPTIONS = '-nolist',
+	FORMAT = '##,###,##&.##';
+c013 = FORMONLY.r86_fec_camprec, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c014 = rept086.r86_precio_nue, NOENTRY, UPSHIFT, OPTIONS = '-nolist',
+	FORMAT = '##,###,##&.##';
+
+c020 = rept072.r72_desc_clase, NOENTRY, REVERSE, UPSHIFT;
+c021 = rept010.r10_nombre, NOENTRY, REVERSE, UPSHIFT;
+
+c030 = FORMONLY.cur_row, NOENTRY, REVERSE, UPSHIFT;
+c031 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+END
+KEYS
+F5 = 'Datos Item'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_detalle[11] (r86_item, r86_precio_mb, r86_precio_ant,
+				r86_fec_camprec, r86_precio_nue)

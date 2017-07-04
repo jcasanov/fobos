@@ -9,8 +9,6 @@
 
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_demonios	VARCHAR(12)
-
 DEFINE rm_orden ARRAY[10] OF CHAR(4)
 DEFINE vm_columna_1	SMALLINT
 DEFINE vm_columna_2	SMALLINT
@@ -47,7 +45,7 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
+CALL startlog('../logs/ordp201.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN          -- Validar # parámetros correcto

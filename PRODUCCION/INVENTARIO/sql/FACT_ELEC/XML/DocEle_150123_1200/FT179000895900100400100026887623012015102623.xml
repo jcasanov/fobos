@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268876</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268876</guiaRemision>
+<razonSocialComprador>NCSISTELCORP S.A</razonSocialComprador>
+<identificacionComprador>0992731931001</identificacionComprador>
+<totalSinImpuestos>39.07</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>39.07</baseImponible>
+<valor>4.69</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>43.76</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>1752</codigoPrincipal>
+<descripcion>BUSHING NEGRO CLASE 150 DE 3" x 2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>9.04</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>9.04</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.04</baseImponible>
+<valor>1.08</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6146</codigoPrincipal>
+<descripcion>UNION NEGRA CLASE 150 DE 3"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>12.80</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>12.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>12.80</baseImponible>
+<valor>1.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102044</codigoPrincipal>
+<descripcion>TEFLON EN ROLLO DE 3/4" x 15 m. DENSIDAD 0.40 gr/cm3 PAOLO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1.87</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3.74</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.74</baseImponible>
+<valor>0.45</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96864</codigoPrincipal>
+<descripcion>SELLANTE POLIPROPILENO ENVASE DE 100 CC (AGUA CALIENTE)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>9.89</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>9.89</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.89</baseImponible>
+<valor>1.19</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98924</codigoPrincipal>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7422SD1 DE 1/2" X 3-3/4"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>0.90</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.60</baseImponible>
+<valor>0.43</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">ncsistel@gye.satnet.net</campoAdicional>
+<campoAdicional nombre="telefono-movil">S/N</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">063166</campoAdicional>
+</infoAdicional>
+</factura>

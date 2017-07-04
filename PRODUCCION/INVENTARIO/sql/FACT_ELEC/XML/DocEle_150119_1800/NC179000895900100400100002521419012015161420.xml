@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025214</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>JAVIER DIEZ COMUNICACION VISUAL CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1792012058001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000268399</numDocModificado>
+<fechaEmisionDocSustento>13/01/2015</fechaEmisionDocSustento>
+<totalSinImpuestos>1480.50</totalSinImpuestos>
+<valorModificacion>1658.16</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>1480.50</baseImponible>
+<valor>177.66</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 268399 JAVIER DIEZ P-VOLVER  FCT  FC</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>96148</codigoInterno>
+<descripcion>TALADRO ELECTRICO MANUAL 1854-1 DE 3/4" COMPACTO 120V/10A. 0-450 RPM</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1210.34</precioUnitario>
+<descuento>60.52</descuento>
+<precioTotalSinImpuesto>1149.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1149.82</baseImponible>
+<valor>137.98</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>14384</codigoInterno>
+<descripcion>ACEITE PARA EQUIPOS NU CLEAR CLARO (S/ENVASE) (41585)</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>21.01</precioUnitario>
+<descuento>10.51</descuento>
+<precioTotalSinImpuesto>94.54</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="GALON"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>94.54</baseImponible>
+<valor>11.34</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>21666</codigoInterno>
+<descripcion>ENVASE PLASTICO JERRY CAN DE 20 LT</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>9.00</precioUnitario>
+<descuento>0.90</descuento>
+<precioTotalSinImpuesto>8.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.10</baseImponible>
+<valor>0.97</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>15741</codigoInterno>
+<descripcion>DADOS PARA PERNOS DE 7/8" HS ALTA VELOCIDAD UNC (48255)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>253.38</precioUnitario>
+<descuento>25.34</descuento>
+<precioTotalSinImpuesto>228.04</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="JUEGO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>228.04</baseImponible>
+<valor>27.36</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">angel.flores@javierdiez.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2899565</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">39906</campoAdicional>
+</infoAdicional>
+</notaCredito>

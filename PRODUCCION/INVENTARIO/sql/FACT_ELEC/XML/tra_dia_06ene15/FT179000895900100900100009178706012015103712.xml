@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091787</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>06/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091787</guiaRemision>
+<razonSocialComprador>CONSTRUPERSA & CONSTRUCCIONES S.A.</razonSocialComprador>
+<identificacionComprador>1291739799001</identificacionComprador>
+<totalSinImpuestos>896.60</totalSinImpuestos>
+<totalDescuento>150.64</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>896.60</baseImponible>
+<valor>107.59</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1004.19</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99572</codigoPrincipal>
+<descripcion>BOMBA DOSIFICADORA DDE 6-10B-PP/V/C  (97721056)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>644.68</precioUnitario>
+<descuento>90.26</descuento>
+<precioTotalSinImpuesto>554.42</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>554.42</baseImponible>
+<valor>66.53</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97136</codigoPrincipal>
+<descripcion>TANQUE 100 P/BOMBAS DME-1-2 / DMS (96489271)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>402.56</precioUnitario>
+<descuento>60.38</descuento>
+<precioTotalSinImpuesto>342.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>342.18</baseImponible>
+<valor>41.06</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">t1coperez79@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0980078219</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016700</campoAdicional>
+</infoAdicional>
+</factura>

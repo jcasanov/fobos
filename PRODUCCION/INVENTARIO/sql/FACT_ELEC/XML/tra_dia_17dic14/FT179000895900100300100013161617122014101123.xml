@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131616</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>JUAN TORRES OE2-55 Y GALO MOLINA</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131616</guiaRemision>
+<razonSocialComprador>FERRI-VALVULAS</razonSocialComprador>
+<identificacionComprador>1706882212001</identificacionComprador>
+<totalSinImpuestos>37.23</totalSinImpuestos>
+<totalDescuento>6.57</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>37.23</baseImponible>
+<valor>4.47</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>41.70</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>1708</codigoPrincipal>
+<descripcion>BUSHING NEGRO CLASE 150 DE 1" x 1/2"</descripcion>
+<cantidad>30.00</cantidad>
+<precioUnitario>1.46</precioUnitario>
+<descuento>6.57</descuento>
+<precioTotalSinImpuesto>37.23</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="HITACHI" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>37.23</baseImponible>
+<valor>4.47</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2646912</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">033165</campoAdicional>
+</infoAdicional>
+</factura>

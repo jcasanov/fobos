@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268841</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268841</guiaRemision>
+<razonSocialComprador>GUEVARA ALVARADO MARIO ALFONSO</razonSocialComprador>
+<identificacionComprador>1709121246001</identificacionComprador>
+<totalSinImpuestos>311.70</totalSinImpuestos>
+<totalDescuento>17.01</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>311.70</baseImponible>
+<valor>37.40</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>349.10</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>560</codigoPrincipal>
+<descripcion>HIERRO REDONDO LISO x 6 MTS. DE 15mm.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>11.85</precioUnitario>
+<descuento>0.95</descuento>
+<precioTotalSinImpuesto>10.90</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>10.90</baseImponible>
+<valor>1.31</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>286</codigoPrincipal>
+<descripcion>HIERRO CORRUGADO  4200 DE 8mm. x 12m</descripcion>
+<cantidad>50.00</cantidad>
+<precioUnitario>5.49</precioUnitario>
+<descuento>10.98</descuento>
+<precioTotalSinImpuesto>263.52</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDEC"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>263.52</baseImponible>
+<valor>31.62</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>94950</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150  X 45 GRAD  DE 3"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>21.18</precioUnitario>
+<descuento>5.08</descuento>
+<precioTotalSinImpuesto>37.28</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>37.28</baseImponible>
+<valor>4.47</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">asistente.gama@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2285705</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">042657</campoAdicional>
+<campoAdicional nombre="Observaciones">SOLICITA JULIA CUYO</campoAdicional>
+</infoAdicional>
+</factura>

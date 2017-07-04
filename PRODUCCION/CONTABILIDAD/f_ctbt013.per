@@ -1,0 +1,39 @@
+database acero_gm
+screen size 24 by 80
+{
+b13_compania       [f000       ]
+b13_tipo_comp      [a0]
+b13_num_comp       [f001    ]
+b13_secuencia      [f002  ]
+b13_cuenta         [f003        ]
+b13_tipo_doc       [a1 ]
+b13_glosa          [f004                               ]
+b13_valor_base     [f005            ]
+b13_valor_aux      [f006            ]
+b13_num_concil     [f007       ]
+b13_filtro         [f008       ]
+b13_fec_proceso    [f009      ]
+b13_codcli         [f010       ]
+b13_codprov        [f011       ]
+b13_pedido         [f012      ]
+}
+end
+tables
+ctbt013
+attributes
+f000 = ctbt013.b13_compania;
+a0 = ctbt013.b13_tipo_comp;
+f001 = ctbt013.b13_num_comp;
+f002 = ctbt013.b13_secuencia;
+f003 = ctbt013.b13_cuenta;
+a1 = ctbt013.b13_tipo_doc;
+f004 = ctbt013.b13_glosa;
+f005 = ctbt013.b13_valor_base;
+f006 = ctbt013.b13_valor_aux;
+f007 = ctbt013.b13_num_concil;
+f008 = ctbt013.b13_filtro;
+f009 = ctbt013.b13_fec_proceso;
+f010 = ctbt013.b13_codcli;
+f011 = ctbt013.b13_codprov;
+f012 = ctbt013.b13_pedido;
+end

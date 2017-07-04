@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113694</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>06/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113694</guiaRemision>
+<razonSocialComprador>CHAMBA AVILA JOSELYN DANIELA</razonSocialComprador>
+<identificacionComprador>1719434803001</identificacionComprador>
+<totalSinImpuestos>317.03</totalSinImpuestos>
+<totalDescuento>64.94</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>317.03</baseImponible>
+<valor>38.04</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>355.07</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102377</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA QUANTUM NIEVE SEGUNDA</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>8.84</precioUnitario>
+<descuento>30.06</descuento>
+<precioTotalSinImpuesto>146.74</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>146.74</baseImponible>
+<valor>17.61</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101454</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 COLORA NEGRO  PRIMERA</descripcion>
+<cantidad>17.00</cantidad>
+<precioUnitario>9.77</precioUnitario>
+<descuento>28.24</descuento>
+<precioTotalSinImpuesto>137.85</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>137.85</baseImponible>
+<valor>16.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101589</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 COLORA SANDIA PRIMERA</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>9.77</precioUnitario>
+<descuento>6.64</descuento>
+<precioTotalSinImpuesto>32.44</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>32.44</baseImponible>
+<valor>3.89</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jaime.jarrin@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2582985</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">061714</campoAdicional>
+</infoAdicional>
+</factura>

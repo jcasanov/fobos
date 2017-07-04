@@ -9,24 +9,15 @@
 
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_rows		ARRAY[1000] OF INTEGER 	-- ARREGLO ROWID DE FILAS LEIDAS
+DEFINE vm_demonios	VARCHAR(12)
+
+DEFINE vm_rows ARRAY[1000] OF INTEGER  	-- ARREGLO DE ROWID DE FILAS LEIDAS
 DEFINE vm_row_current	SMALLINT	-- FILA CORRIENTE DEL ARREGLO
 DEFINE vm_num_rows	SMALLINT	-- CANTIDAD DE FILAS LEIDAS
 DEFINE vm_max_rows      SMALLINT        -- MAXIMO DE FILAS LEIDAS
-DEFINE rm_imp		RECORD LIKE gent006.*
-DEFINE rm_impbod	ARRAY[1000] OF RECORD
-				g24_bodega	LIKE gent024.g24_bodega,
-				r02_nombre	LIKE rept002.r02_nombre,
-				g24_imprime	LIKE gent024.g24_imprime,
-				asignada	CHAR(1)
-			END RECORD
-DEFINE rm_user		ARRAY[1000] OF RECORD
-				g24_usuario	LIKE gent024.g24_usuario,
-				g24_fecing	LIKE gent024.g24_fecing
-			END RECORD
-DEFINE vm_num_det	SMALLINT
-DEFINE vm_max_det	SMALLINT
 
+
+DEFINE rm_imp		RECORD LIKE gent006.*
 
 
 MAIN
@@ -34,7 +25,7 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/genp105.err')
+CALL startlog('../logs/errores')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 2 THEN          -- Validar # parámetros correcto
@@ -45,6 +36,7 @@ END IF
 LET vg_base     = arg_val(1)
 LET vg_modulo   = arg_val(2)
 LET vg_proceso = 'genp105'
+
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	-- Asigna un valor por default a vg_codloc
 				-- que luego puede ser reemplazado si se 
@@ -62,15 +54,17 @@ FUNCTION control_master()
 
 CALL fl_nivel_isolation()
 LET vm_max_rows = 1000
-OPEN WINDOW w_genf105_1 AT 03, 02 WITH 14 ROWS, 80 COLUMNS
-	ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE 0, BORDER,
-			MESSAGE LINE LAST) 
-OPEN FORM f_genf105_1 FROM '../forms/genf105_1'
-DISPLAY FORM f_genf105_1
-LET vm_num_rows    = 0
+OPTIONS
+	INPUT WRAP,
+	ACCEPT KEY F12
+OPEN WINDOW w_prn AT 3,2 WITH 14 ROWS, 80 COLUMNS
+	ATTRIBUTE(FORM LINE FIRST + 2, COMMENT LINE LAST, MENU LINE FIRST,
+		  BORDER, MESSAGE LINE LAST - 2) 
+OPEN FORM f_prn FROM '../forms/genf105_1'
+DISPLAY FORM f_prn
+
+LET vm_num_rows = 0
 LET vm_row_current = 0
-LET vm_num_det     = 0
-LET vm_max_det     = 1000
 INITIALIZE rm_imp.* TO NULL
 CALL muestra_contadores()
 
@@ -79,7 +73,6 @@ MENU 'OPCIONES'
 		HIDE OPTION 'Avanzar'
 		HIDE OPTION 'Retroceder'
 		HIDE OPTION 'Modificar'
-		HIDE OPTION 'Impresora/Bodega'
 	COMMAND KEY('I') 'Ingresar' 		'Ingresar nuevos registros.'
 		IF vm_num_rows = vm_max_rows THEN
 			CALL fl_mensaje_arreglo_lleno()
@@ -88,7 +81,6 @@ MENU 'OPCIONES'
 		END IF
 		IF vm_num_rows = 1 THEN
 			SHOW OPTION 'Modificar'
-			SHOW OPTION 'Impresora/Bodega'
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -102,23 +94,18 @@ MENU 'OPCIONES'
 		CALL control_consulta()
 		IF vm_num_rows <= 1 THEN
 			SHOW OPTION 'Modificar'
-			SHOW OPTION 'Impresora/Bodega'
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
 				HIDE OPTION 'Modificar'
-				HIDE OPTION 'Impresora/Bodega'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
 			SHOW OPTION 'Modificar'
-			SHOW OPTION 'Impresora/Bodega'
 		END IF
 		IF vm_row_current <= 1 THEN
                         HIDE OPTION 'Retroceder'
                 END IF
-	COMMAND KEY('B') 'Impresora/Bodega'	'Asignar impresora por bodega.'
-		CALL control_asignar_impresora_bodegas()
 	COMMAND KEY('A') 'Avanzar' 		'Ver siguiente registro.'
 		CALL siguiente_registro()
 		IF vm_row_current = vm_num_rows THEN
@@ -186,17 +173,17 @@ END IF
 
 CALL lee_muestra_registro(vm_rows[vm_row_current])
 
-BEGIN WORK
 WHENEVER ERROR CONTINUE
+BEGIN WORK
 DECLARE q_upd CURSOR FOR 
 	SELECT * FROM gent006 WHERE ROWID = vm_rows[vm_row_current]
 	FOR UPDATE
 OPEN q_upd
 FETCH q_upd INTO rm_imp.*
+WHENEVER ERROR STOP
 IF STATUS < 0 THEN
-	ROLLBACK WORK
 	CALL fl_mensaje_bloqueo_otro_usuario()
-	WHENEVER ERROR STOP
+	ROLLBACK WORK
 	RETURN
 END IF  
 
@@ -205,13 +192,15 @@ CALL lee_datos('M')
 IF INT_FLAG THEN
 	ROLLBACK WORK
 	CALL lee_muestra_registro(vm_rows[vm_row_current])
-	WHENEVER ERROR STOP
+	CLOSE q_upd
+	FREE  q_upd
 	RETURN
 END IF 
-WHENEVER ERROR STOP
+
 UPDATE gent006 SET * = rm_imp.* WHERE CURRENT OF q_upd
 COMMIT WORK
-CALL lee_muestra_registro(vm_rows[vm_row_current])
+CLOSE q_upd
+FREE  q_upd
 CALL fl_mensaje_registro_modificado()
 
 END FUNCTION
@@ -219,10 +208,12 @@ END FUNCTION
 
 
 FUNCTION control_consulta()
+
 DEFINE expr_sql			VARCHAR(500)
 DEFINE query			VARCHAR(600)
 DEFINE impresora		LIKE gent006.g06_impresora
 DEFINE n_imp			LIKE gent006.g06_nombre
+
 DEFINE r_imp			RECORD LIKE gent006.*
 
 CLEAR FORM
@@ -416,183 +407,42 @@ END FUNCTION
 
 
 
-FUNCTION control_asignar_impresora_bodegas()
-DEFINE r_g06		RECORD LIKE gent006.*
+FUNCTION no_validar_parametros()
 
-OPEN WINDOW w_genf105_2 AT 05, 13
-        WITH FORM '../forms/genf105_2'
-        ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MESSAGE LINE LAST,
-                   BORDER)
-DISPLAY "BD"		TO tit_col1
-DISPLAY "Nombre Bodega"	TO tit_col2
-DISPLAY "I"		TO tit_col3
-DISPLAY "A"		TO tit_col4
-DISPLAY rm_imp.g06_impresora TO g24_impresora
-CALL fl_lee_impresora(rm_imp.g06_impresora) RETURNING r_g06.*
-DISPLAY BY NAME r_g06.g06_nombre
-CALL cargar_detalle()
-IF vm_num_det = 0 THEN
-	CALL fl_mensaje_consulta_sin_registros()
-	LET int_flag = 0
-	CLOSE WINDOW w_genf105_2
-	RETURN
+CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
+IF rg_mod.g50_modulo IS NULL THEN
+	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 
+                            'stop')
+	EXIT PROGRAM
 END IF
-CALL asignar_impresora_bodegas()
-IF int_flag THEN
-	LET int_flag = 0
-	CLOSE WINDOW w_genf105_2
-	RETURN
+CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
+IF rg_cia.g01_compania IS NULL THEN
+	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 
+                            'stop')
+	EXIT PROGRAM
 END IF
-BEGIN WORK
-	IF NOT grabar_impresora_bodegas() THEN
-		ROLLBACK WORK
-		LET int_flag = 0
-		CLOSE WINDOW w_genf105_2
-		RETURN
-	END IF
-COMMIT WORK
-CALL fl_mostrar_mensaje('Impresora asignada a Bodegas. OK', 'info')
-LET int_flag = 0
-CLOSE WINDOW w_genf105_2
-RETURN
-
-END FUNCTION
-
-
-
-FUNCTION cargar_detalle()
-DEFINE query		CHAR(1500)
-DEFINE i		SMALLINT
-
-FOR i = 1 TO vm_max_det
-	INITIALIZE rm_impbod[i].*, rm_user[i].* TO NULL
-END FOR
-LET query = 'SELECT NVL(g24_bodega, r02_codigo) bodega, r02_nombre nombre, ',
-		'NVL(g24_imprime, "N") imprime, ',
-		'CASE WHEN g24_bodega IS NOT NULL ',
-			'THEN "S" ',
-			'ELSE "N" ',
-		'END asignada, NVL(g24_usuario, "', vg_usuario CLIPPED, '"), ',
-		'NVL(g24_fecing, CURRENT) ',
-		' FROM rept002, OUTER gent024 ',
-		' WHERE r02_compania  = ', vg_codcia,
-		'   AND r02_localidad = ', vg_codloc,
-		'   AND r02_tipo      = "F" ',
-		'   AND r02_area      = "R" ',
-		'   AND r02_estado    = "A" ',
-		'   AND g24_compania  = r02_compania ',
-		'   AND g24_bodega    = r02_codigo ',
-		'   AND g24_impresora = "', rm_imp.g06_impresora, '"',
-		' ORDER BY 4 DESC, 1 ASC, 2 ASC'
-PREPARE cons_g24 FROM query
-DECLARE q_g24 CURSOR FOR cons_g24
-LET vm_num_det = 1
-FOREACH q_g24 INTO rm_impbod[vm_num_det].*, rm_user[vm_num_det].*
-	LET vm_num_det = vm_num_det + 1
-	IF vm_num_det > vm_max_det THEN
-		EXIT FOREACH
-	END IF
-END FOREACH
-LET vm_num_det = vm_num_det - 1
-
-END FUNCTION
-
-
-
-FUNCTION asignar_impresora_bodegas()
-DEFINE resp		CHAR(6)
-DEFINE i, j		SMALLINT
-
-DISPLAY vm_num_det TO max_row
-LET int_flag = 0
-CALL set_count(vm_num_det)
-INPUT ARRAY rm_impbod WITHOUT DEFAULTS FROM rm_impbod.*
-	ON KEY(INTERRUPT)
-		LET int_flag = 0
-		CALL fl_mensaje_abandonar_proceso() RETURNING resp
-		IF resp = 'Yes' THEN
-			LET int_flag = 1
-			EXIT INPUT
-		END IF
-	BEFORE INPUT
-		--#CALL dialog.keysetlabel("INSERT","")
-		--#CALL dialog.keysetlabel("DELETE","")
-	BEFORE INSERT
-		--#CANCEL INSERT
-	BEFORE DELETE
-		--#CANCEL DELETE
-	BEFORE ROW
-		LET i = arr_curr()
-		LET j = scr_line()
-		DISPLAY i TO num_row
-		DISPLAY BY NAME rm_user[i].*
-	AFTER INPUT
-		LET j = 0
-		FOR i = 1 TO vm_num_det
-			IF rm_impbod[i].asignada = 'S' THEN
-				LET j = j + 1
-			END IF
-		END FOR
-		IF j = 0 THEN
-			CALL fl_mostrar_mensaje('Al menos debe seleccionar una bodega.', 'info')
-			--CONTINUE INPUT
-		END IF
-END INPUT
-
-END FUNCTION
-
-
-
-FUNCTION grabar_impresora_bodegas()
-DEFINE i, resul		SMALLINT
-
-LET resul = 1
-FOR i = 1 TO vm_num_det
-	IF rm_impbod[i].asignada = 'N' THEN
-		WHENEVER ERROR CONTINUE
-		DELETE FROM gent024
-			WHERE g24_compania  = vg_codcia
-			  AND g24_bodega    = rm_impbod[i].g24_bodega
-			  AND g24_impresora = rm_imp.g06_impresora
-		IF STATUS <> 0 THEN
-			WHENEVER ERROR STOP
-			CALL fl_mostrar_mensaje('No se puede borrar el registro Bodega: ' || rm_impbod[i].g24_bodega || ' Impresora: ' || rm_imp.g06_impresora || '. LLAME AL ADMINISTRADOR.', 'exclamation')
-			LET resul = 0
-			EXIT FOR
-		END IF
-		CONTINUE FOR
-	END IF
-	SELECT * FROM gent024
-		WHERE g24_compania  = vg_codcia
-		  AND g24_bodega    = rm_impbod[i].g24_bodega
-		  AND g24_impresora = rm_imp.g06_impresora
-	IF STATUS = NOTFOUND THEN
-		WHENEVER ERROR CONTINUE
-		INSERT INTO gent024
-			VALUES (vg_codcia, rm_impbod[i].g24_bodega,
-				rm_imp.g06_impresora, rm_impbod[i].g24_imprime,
-				vg_usuario, CURRENT)
-		IF STATUS <> 0 THEN
-			WHENEVER ERROR STOP
-			CALL fl_mostrar_mensaje('No se puede insertar el registro Bodega: ' || rm_impbod[i].g24_bodega || ' Impresora: ' || rm_imp.g06_impresora || '. LLAME AL ADMINISTRADOR.', 'exclamation')
-			LET resul = 0
-			EXIT FOR
-		END IF
-	ELSE
-		WHENEVER ERROR CONTINUE
-		UPDATE gent024
-			SET g24_imprime = rm_impbod[i].g24_imprime
-			WHERE g24_compania  = vg_codcia
-			  AND g24_bodega    = rm_impbod[i].g24_bodega
-			  AND g24_impresora = rm_imp.g06_impresora
-		IF STATUS <> 0 THEN
-			WHENEVER ERROR STOP
-			CALL fl_mostrar_mensaje('No se puede actualizar el registro Bodega: ' || rm_impbod[i].g24_bodega || ' Impresora: ' || rm_imp.g06_impresora || '. LLAME AL ADMINISTRADOR.', 'exclamation')
-			LET resul = 0
-			EXIT FOR
-		END IF
-	END IF
-END FOR
-RETURN resul
-
+IF rg_cia.g01_estado <> 'A' THEN
+	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || 
+                            vg_codcia, 'stop')
+	EXIT PROGRAM
+END IF
+IF vg_codloc IS NULL THEN
+	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
+END IF
+CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
+IF rg_loc.g02_localidad IS NULL THEN
+	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 
+                            'stop')
+	EXIT PROGRAM
+END IF
+IF rg_loc.g02_estado <> 'A' THEN
+	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| 
+                            vg_codloc, 'stop')
+	EXIT PROGRAM
+END IF
+IF rg_loc.g02_compania <> vg_codcia THEN
+	CALL fgl_winmessage(vg_producto, 'Combinación compañía/localidad no ' ||
+                            'existe ', 'stop')
+	EXIT PROGRAM
+END IF
 END FUNCTION

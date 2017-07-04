@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268606</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268606</guiaRemision>
+<razonSocialComprador>COELEC S.C.</razonSocialComprador>
+<identificacionComprador>1791725530001</identificacionComprador>
+<totalSinImpuestos>880.15</totalSinImpuestos>
+<totalDescuento>220.03</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>880.15</baseImponible>
+<valor>105.62</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>985.77</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>13016</codigoPrincipal>
+<descripcion>CORTATUBO 2-A DE 1/8" A 2" (32820)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>195.30</precioUnitario>
+<descuento>39.06</descuento>
+<precioTotalSinImpuesto>156.24</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>156.24</baseImponible>
+<valor>18.75</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>13018</codigoPrincipal>
+<descripcion>CORTATUBO 4-S HD DESDE 2" A 4" (32840)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>480.77</precioUnitario>
+<descuento>96.15</descuento>
+<precioTotalSinImpuesto>384.62</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>384.62</baseImponible>
+<valor>46.15</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>13038</codigoPrincipal>
+<descripcion>CORTATUBO 150-HD DESDE 1/8 A 1-1/8" (31627)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>35.06</precioUnitario>
+<descuento>7.01</descuento>
+<precioTotalSinImpuesto>28.05</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>28.05</baseImponible>
+<valor>3.37</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>13622</codigoPrincipal>
+<descripcion>LLAVE DE CADENA C-14 CAPACIDAD HASTA 2" (31315)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>79.33</precioUnitario>
+<descuento>15.87</descuento>
+<precioTotalSinImpuesto>63.46</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>63.46</baseImponible>
+<valor>7.62</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>13624</codigoPrincipal>
+<descripcion>LLAVE DE CADENA C-18 CAPACIDAD HASTA 4" (31320)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>120.67</precioUnitario>
+<descuento>24.13</descuento>
+<precioTotalSinImpuesto>96.54</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>96.54</baseImponible>
+<valor>11.58</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>13626</codigoPrincipal>
+<descripcion>LLAVE DE CADENA C-24 CAPACIDAD HASTA 5" (31325)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>145.30</precioUnitario>
+<descuento>29.06</descuento>
+<precioTotalSinImpuesto>116.24</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>116.24</baseImponible>
+<valor>13.95</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>13627</codigoPrincipal>
+<descripcion>LLAVE AJUSTABLE (INGLESA) N.756 DE 6"     (86902)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>24.40</precioUnitario>
+<descuento>4.88</descuento>
+<precioTotalSinImpuesto>19.52</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>19.52</baseImponible>
+<valor>2.34</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>13646</codigoPrincipal>
+<descripcion>LLAVE DE TUBO RECTA NO. 6 (31000)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>19.35</precioUnitario>
+<descuento>3.87</descuento>
+<precioTotalSinImpuesto>15.48</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>15.48</baseImponible>
+<valor>1.86</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">m.morales@coelecsc.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2752485</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">037987</campoAdicional>
+</infoAdicional>
+</factura>

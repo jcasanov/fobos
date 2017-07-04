@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000041470</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirEstablecimiento>
+<dirPartida>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirPartida>
+<razonSocialTransportista>LUIS CRIOLLO</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>1002060240</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>22/01/2015</fechaIniTransporte>
+<fechaFinTransporte>22/01/2015</fechaFinTransporte>
+<placa>PBA-5345</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1768153880001</identificacionDestinatario>
+<razonSocialDestinatario>PETROAMAZONAS EP</razonSocialDestinatario>
+<dirDestinatario>BODEGAS PETROAMAZONAS CARCELEN</dirDestinatario>
+<motivoTraslado>TRANSFERENCIAS ENTRE LOCALIDADES</motivoTraslado>
+<fechaEmisionDocSustento>22/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>12</codigoInterno>
+<descripcion>ALAMBRE GALVANIZADO N.14</descripcion>
+<cantidad>600.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>16</codigoInterno>
+<descripcion>ALAMBRE GALVANIZADO N.18</descripcion>
+<cantidad>600.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>292</codigoInterno>
+<descripcion>HIERRO CORRUGADO  4200 DE 10mm. x 12m</descripcion>
+<cantidad>50.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDEC"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>298</codigoInterno>
+<descripcion>HIERRO CORRUGADO  4200 DE 12mm. x 12m</descripcion>
+<cantidad>200.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDEC"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>304</codigoInterno>
+<descripcion>HIERRO CORRUGADO  4200 DE 14mm. x 12m</descripcion>
+<cantidad>100.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDEC"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>310</codigoInterno>
+<descripcion>HIERRO CORRUGADO  4200 DE 16mm. x 12m</descripcion>
+<cantidad>200.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDEC"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>624</codigoInterno>
+<descripcion>ARMEX 6.25 x 2.40 MTS. R-188 150 x 150 x 6 x 6mm.</descripcion>
+<cantidad>100.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>628</codigoInterno>
+<descripcion>ARMEX 6.25 x 2.40 MTS. R-335 150 x 150 x 8 x 8mm.</descripcion>
+<cantidad>100.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacionelectronica@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">022454333</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000003</campoAdicional>
+<campoAdicional nombre="Proceso-Orden">130046</campoAdicional>
+</infoAdicional>
+</guiaRemision>

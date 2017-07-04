@@ -1,0 +1,31 @@
+DATABASE aceros
+
+SCREEN
+{
+ DOCUMENTOS FUENTES BANCOS
+-------------------------------
+ Tipo  Descripción
+-------------------------------
+[c0 ] [c001                 ]
+[c0 ] [c001                 ]
+[c0 ] [c001                 ]
+[c0 ] [c001                 ]
+[c0 ] [c001                 ]
+[c0 ] [c001                 ]
+[c0 ] [c001                 ]
+[c0 ] [c001                 ]
+[c0 ] [c001                 ]
+[c0 ] [c001                 ]
+}
+
+TABLES
+ctbt007
+
+ATTRIBUTES
+
+c0   = b07_tipo_doc, UPSHIFT ;
+c001 = b07_nombre, UPSHIFT;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_docbco[10](b07_tipo_doc, b07_nombre)

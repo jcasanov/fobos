@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048250</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento></dirEstablecimiento>
+<dirPartida>AV LA PRENSA N/4514</dirPartida>
+<razonSocialTransportista>ACERO COMERCIAL</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>22/12/2014</fechaIniTransporte>
+<fechaFinTransporte>22/12/2014</fechaFinTransporte>
+<placa>PAA-001</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1704404910001</identificacionDestinatario>
+<razonSocialDestinatario>MORALES CHAMORRO LUIS GUSTAVO</razonSocialDestinatario>
+<dirDestinatario>SEGUN CROQUIZ</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>20/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>5414</codigoInterno>
+<descripcion>TUBO GALV. ASTM A-53   TIPO "T" DE 1-1/2" x 6 m.  ESPESOR 3.6 mm.</descripcion>
+<cantidad>6.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="MODELO" valor=" 1-1/2" x 6 M"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>5416</codigoInterno>
+<descripcion>TUBO GALV. ASTM A-53   TIPO "T" DE 2" x 6 m.  ESPESOR 3.6 mm.</descripcion>
+<cantidad>10.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="MODELO" valor=" 2" x 6 M"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>5496</codigoInterno>
+<descripcion>TUBO GALV. S-UNION ISO II TIPO "T" DE 1" x 6 m. ESPESOR 2.5 mm.</descripcion>
+<cantidad>10.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="MODELO" valor=" 1"    ISO II"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3401805</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">015973</campoAdicional>
+</infoAdicional>
+</guiaRemision>

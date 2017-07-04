@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000114005</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000114005</guiaRemision>
+<razonSocialComprador>GARCIA VEGA TATIANA DANIELA</razonSocialComprador>
+<identificacionComprador>1719343988001</identificacionComprador>
+<totalSinImpuestos>35.50</totalSinImpuestos>
+<totalDescuento>3.94</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>35.50</baseImponible>
+<valor>4.26</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>39.76</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5826</codigoPrincipal>
+<descripcion>TUBO PVC ROSCABLE x 6 MTS. DE 1/2" (420 PSI)</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>8.10</precioUnitario>
+<descuento>3.24</descuento>
+<precioTotalSinImpuesto>29.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>29.16</baseImponible>
+<valor>3.50</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50380</codigoPrincipal>
+<descripcion>TEE POLIPROPILENO DE 1/2" (AGUA CALIENTE)</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>0.48</precioUnitario>
+<descuento>0.24</descuento>
+<precioTotalSinImpuesto>2.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.16</baseImponible>
+<valor>0.26</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97467</codigoPrincipal>
+<descripcion>TEFLON EN ROLLO 0.07 x 12 mm. x 10 m.</descripcion>
+<cantidad>8.00</cantidad>
+<precioUnitario>0.58</precioUnitario>
+<descuento>0.46</descuento>
+<precioTotalSinImpuesto>4.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.18</baseImponible>
+<valor>0.50</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">vicentegarciamiraflores@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3217026</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064282</campoAdicional>
+</infoAdicional>
+</factura>

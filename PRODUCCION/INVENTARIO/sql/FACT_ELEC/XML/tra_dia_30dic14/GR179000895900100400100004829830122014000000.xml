@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048298</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<dirPartida>AV. LA PRENSA N/4514</dirPartida>
+<razonSocialTransportista>ACERO COMERCIAL</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>30/12/2014</fechaIniTransporte>
+<fechaFinTransporte>30/12/2014</fechaFinTransporte>
+<placa>PAA-001</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1791821580001</identificacionDestinatario>
+<razonSocialDestinatario>EASYSOFT S.A.</razonSocialDestinatario>
+<dirDestinatario>COREA 126 Y AV. AMAZONAS</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>19/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>61793</codigoInterno>
+<descripcion>TANQUE DE PRESION FIBRA DE VIDRIO WM-9/WM0120 ENTREGA DE 8.9 GLS POR CICLO DE 30/50 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="WELL M"/>
+<detAdicional nombre="MODELO" valor="WM-9-WM0120"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>94169</codigoInterno>
+<descripcion>BOMBA SUMERGIBLE DE 4" SDQP35-140 SISTEMA DE PRESION CONSTANTE (93803575)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="MODELO" valor="SDQP35-140"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacionelectronica@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2441000</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">049355</campoAdicional>
+</infoAdicional>
+</guiaRemision>

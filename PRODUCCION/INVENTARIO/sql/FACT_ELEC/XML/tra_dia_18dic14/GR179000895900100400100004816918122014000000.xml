@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048169</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento></dirEstablecimiento>
+<dirPartida>AV LA PRENSA</dirPartida>
+<razonSocialTransportista>ACERO COMERCIAL</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>18/12/2014</fechaIniTransporte>
+<fechaFinTransporte>18/12/2014</fechaFinTransporte>
+<placa></placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1712419058001</identificacionDestinatario>
+<razonSocialDestinatario>JUMBO DIAZ WILLIAM ANTONIO</razonSocialDestinatario>
+<dirDestinatario>INTERNO</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>11/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>100774</codigoInterno>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA AMAZONAS BLANCO PRIMERA</descripcion>
+<cantidad>20.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="AMAZONAS BLANCO"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>101279</codigoInterno>
+<descripcion>INODORO RESIDENCIAL UNA PIEZA JSPI60917331CW EGO ADVANCE REDONDO BONE ASTO. EROS</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="MODELO" valor="JSPI60917331CW EGO"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>101916</codigoInterno>
+<descripcion>CONEXION E245.01 RA DH BL DOBLE 1-1/2" BLANCA</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="MODELO" valor="E245.01 RA DH BL DOB"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>26732</codigoInterno>
+<descripcion>TUBO ABASTO- LLAVE ANGULAR LAVABO E262.02 DH-CR DE COBRE 12" (PAR)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="MODELO" valor="E262.02  DH-CR"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>68746</codigoInterno>
+<descripcion>LAVABO DE PORCELANA DE PARED PREPONCHADO 5575130 SHELBY BLANCO</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="MODELO" valor="5575130"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>91967</codigoInterno>
+<descripcion>LLAVE DE PARED PICO MOVIL E420.01/71 CR CAPRI CROMO PICO ALTO</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="MODELO" valor="E420.01/71 CR"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>97612</codigoInterno>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS 4262130 CAMPEON BLANCO C/ASIENTO</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="MODELO" valor="4262130"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2563294</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">032715</campoAdicional>
+</infoAdicional>
+</guiaRemision>

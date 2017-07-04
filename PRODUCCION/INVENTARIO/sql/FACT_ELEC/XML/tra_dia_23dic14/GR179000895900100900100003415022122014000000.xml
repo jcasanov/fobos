@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000034150</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>FLAVIO ZAA NAVARRETO</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>0910886118</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>22/12/2014</fechaIniTransporte>
+<fechaFinTransporte>23/12/2014</fechaFinTransporte>
+<placa>GXI915</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1768152800001</identificacionDestinatario>
+<razonSocialDestinatario>CELEC EP</razonSocialDestinatario>
+<dirDestinatario>RE</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>19/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>101749</codigoInterno>
+<descripcion>BOMBA HIDR. ACCIONADA POR AIRE COMPRIMIDO PARA TENSADO ATP-1500 21750 PSI 1 Gl</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="MODELO" valor="ATP-1500"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2870000</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">012137</campoAdicional>
+</infoAdicional>
+</guiaRemision>

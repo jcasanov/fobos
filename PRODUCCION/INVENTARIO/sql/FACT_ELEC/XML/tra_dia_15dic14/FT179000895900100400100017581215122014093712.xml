@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175812</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>ATAHUALPA 189 Y AMERICA</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175812</guiaRemision>
+<razonSocialComprador>RODRIGUEZ TACO VICTOR HUGO</razonSocialComprador>
+<identificacionComprador>1702279330001</identificacionComprador>
+<totalSinImpuestos>244.64</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>244.64</baseImponible>
+<valor>29.36</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>274.00</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>97613</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS 4262733 CAMPEON BONE C/ASIENTO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>48.88</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>97.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="EDESA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>97.76</baseImponible>
+<valor>11.73</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>68747</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA PARA EMPOTRAR PREPONCHADO 6590733 OAKBROOK BONE</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>33.12</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>66.24</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="BRIGGS" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>66.24</baseImponible>
+<valor>7.95</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>68945</codigoPrincipal>
+<descripcion>URINARIO DE PARED 7756733 COLBY PLUS BONE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>54.52</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>54.52</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="EDESA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>54.52</baseImponible>
+<valor>6.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101106</codigoPrincipal>
+<descripcion>TUBO ABASTO- LLAVE ANGULAR LAVABO 7589306 CON MANGUERA DE 12"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>6.58</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>13.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="EDESA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>13.16</baseImponible>
+<valor>1.58</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101107</codigoPrincipal>
+<descripcion>TUBO ABASTO-LLAVE ANGULAR INODORO 7590306 CON MANGUERA DE 1/2" x 15/16" x 12"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>6.48</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>12.96</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="EDESA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>12.96</baseImponible>
+<valor>1.56</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

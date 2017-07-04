@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000269015</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000269015</guiaRemision>
+<razonSocialComprador>CONSTRUCTORA CAZAR HNOS. CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1790816427001</identificacionComprador>
+<totalSinImpuestos>518.40</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>518.40</baseImponible>
+<valor>62.21</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>580.61</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>624</codigoPrincipal>
+<descripcion>ARMEX 6.25 x 2.40 MTS. R-188 150 x 150 x 6 x 6mm.</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>46.72</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>467.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>467.20</baseImponible>
+<valor>56.06</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>18</codigoPrincipal>
+<descripcion>ALAMBRE NEGRO N.18</descripcion>
+<cantidad>40.00</cantidad>
+<precioUnitario>1.28</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>51.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>51.20</baseImponible>
+<valor>6.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">constructoracazar@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2444109</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">031830</campoAdicional>
+<campoAdicional nombre="Observaciones">PROYECTO ALESSANDRA PEDIDO TELEF.</campoAdicional>
+</infoAdicional>
+</factura>

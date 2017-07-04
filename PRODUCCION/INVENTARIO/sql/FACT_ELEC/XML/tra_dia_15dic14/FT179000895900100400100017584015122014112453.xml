@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175840</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>27 DE JULIO S4-119 Y G. VALDIVIEZO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175840</guiaRemision>
+<razonSocialComprador>BENALCAZAR CHAVARRIA NORMA VIOLETA</razonSocialComprador>
+<identificacionComprador>1710343185001</identificacionComprador>
+<totalSinImpuestos>411.03</totalSinImpuestos>
+<totalDescuento>61.43</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>349.60</baseImponible>
+<valor>41.95</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>391.55</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>93694</codigoPrincipal>
+<descripcion>ACEITERA (RECIPIENTE) N.418 COMPLETA (10883)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>364.69</precioUnitario>
+<descuento>54.70</descuento>
+<precioTotalSinImpuesto>309.99</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIDGID" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>309.99</baseImponible>
+<valor>37.20</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>14384</codigoPrincipal>
+<descripcion>ACEITE PARA EQUIPOS NU CLEAR CLARO (S/ENVASE) (41585)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>21.01</precioUnitario>
+<descuento>6.30</descuento>
+<precioTotalSinImpuesto>35.72</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIDGID" valor="RIDGID"/>
+<detAdicional nombre="GALON" valor="GALON"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>35.72</baseImponible>
+<valor>4.29</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21663</codigoPrincipal>
+<descripcion>ENVASE PLASTICO DESCARTABLE DE 1 Gln.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>2.16</precioUnitario>
+<descuento>0.43</descuento>
+<precioTotalSinImpuesto>3.89</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.89</baseImponible>
+<valor>0.47</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

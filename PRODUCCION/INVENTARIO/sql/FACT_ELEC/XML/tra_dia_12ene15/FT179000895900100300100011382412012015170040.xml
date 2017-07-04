@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113824</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>12/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113824</guiaRemision>
+<razonSocialComprador>RIOS SHUNTA PAUL ANTONIO</razonSocialComprador>
+<identificacionComprador>0501982029001</identificacionComprador>
+<totalSinImpuestos>38.68</totalSinImpuestos>
+<totalDescuento>6.14</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>38.68</baseImponible>
+<valor>4.64</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>43.32</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>3184</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 3/4" x 3-1/2"</descripcion>
+<cantidad>9.00</cantidad>
+<precioUnitario>0.69</precioUnitario>
+<descuento>0.62</descuento>
+<precioTotalSinImpuesto>5.59</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.59</baseImponible>
+<valor>0.67</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99960</codigoPrincipal>
+<descripcion>GRIFO PASO RECTO BRONCE ROSCADO EVOLUTION DE 3/4" CABO AMARILLO</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>8.12</precioUnitario>
+<descuento>3.65</descuento>
+<precioTotalSinImpuesto>20.71</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FIV"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>20.71</baseImponible>
+<valor>2.49</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3648</codigoPrincipal>
+<descripcion>REDUCCION GALV. CLASE 150 DE 3/4" x 1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.48</precioUnitario>
+<descuento>0.18</descuento>
+<precioTotalSinImpuesto>1.30</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.30</baseImponible>
+<valor>0.16</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99959</codigoPrincipal>
+<descripcion>GRIFO PASO RECTO BRONCE ROSCADO EVOLUTION DE 1/2" CABO AMARILLO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>6.45</precioUnitario>
+<descuento>0.97</descuento>
+<precioTotalSinImpuesto>5.48</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FIV"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.48</baseImponible>
+<valor>0.66</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3166</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1/2" x 4"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>0.65</precioUnitario>
+<descuento>0.07</descuento>
+<precioTotalSinImpuesto>0.58</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.58</baseImponible>
+<valor>0.07</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>92074</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 90 GRAD  DE 3/4"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.13</precioUnitario>
+<descuento>0.11</descuento>
+<precioTotalSinImpuesto>1.02</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.02</baseImponible>
+<valor>0.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4604</codigoPrincipal>
+<descripcion>TEE GALV. CLASE 150 DE 3/4"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>2.27</precioUnitario>
+<descuento>0.54</descuento>
+<precioTotalSinImpuesto>4.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.00</baseImponible>
+<valor>0.48</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">rpaul_a@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0991193029</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064017</campoAdicional>
+<campoAdicional nombre="Observaciones">SOLICITADO POR ING PAUL RIOS.</campoAdicional>
+</infoAdicional>
+</factura>

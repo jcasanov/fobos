@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000034201</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>CARVAJAL RIOS</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0911029619001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>24/12/2014</fechaIniTransporte>
+<fechaFinTransporte>25/12/2014</fechaFinTransporte>
+<placa>YBA3003</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0911029619001</identificacionDestinatario>
+<razonSocialDestinatario>CARVAJAL RIOS VICTOR</razonSocialDestinatario>
+<dirDestinatario>RETIRAN</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>24/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>100128</codigoInterno>
+<descripcion>BOMBA SUMERGIBLE DE 6" 6SR 7-100 ACE.INOX.5ETAP.100GPM P/MOT.6" 7.5HP (97160100005)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="MODELO" valor="97160100005"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>99410</codigoInterno>
+<descripcion>MOTOR ELEC SUMERG DE 6" 6C3F DE 7.5 HP 230/460/3F (2363118120)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="MODELO" valor="2363118120"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">carvajalra1@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2442385</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">006520</campoAdicional>
+</infoAdicional>
+</guiaRemision>

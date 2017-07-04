@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131701</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131701</guiaRemision>
+<razonSocialComprador>CRESPO FERNANDEZ CARMEN FILOMENA</razonSocialComprador>
+<identificacionComprador>1702889450</identificacionComprador>
+<totalSinImpuestos>63.36</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>63.36</baseImponible>
+<valor>7.60</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>70.96</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>98888</codigoPrincipal>
+<descripcion>GRIFERIA DE LAVAPLATOS 5915306 CORVUS 8" C/ SIFON DE MESA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>35.22</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>35.22</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>35.22</baseImponible>
+<valor>4.23</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>26927</codigoPrincipal>
+<descripcion>TUBO ABASTO- LLAVE ANGULAR LAVABO E262.06 DH-CR FLEXIBLE DE 16" (PAR)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>20.86</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>20.86</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>20.86</baseImponible>
+<valor>2.50</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70893</codigoPrincipal>
+<descripcion>DESAGUE DE LAVADERO 61001300 VALVULA DE 1-1/2" C/REBOSO REDONDO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2.81</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2.81</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TEKA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.81</baseImponible>
+<valor>0.34</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50462</codigoPrincipal>
+<descripcion>TUBO DE EXTENSION PARA DESAGUE GUIB2-0014 PLASTICO DE 1-1/2" x 5" (GUIA)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>0.70</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>0.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INCAME"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.70</baseImponible>
+<valor>0.08</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>26726</codigoPrincipal>
+<descripcion>SIFON DE LAVADERO E240 RA DE 1-1/2" DH-BL RESINA ACETAL CON ACOPLE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3.77</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3.77</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.77</baseImponible>
+<valor>0.45</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2641563</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064134</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000269009</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000269009</guiaRemision>
+<razonSocialComprador>ACERO COMERCIAL ECUATORIANO S.A.</razonSocialComprador>
+<identificacionComprador>1790008959001</identificacionComprador>
+<totalSinImpuestos>1.03</totalSinImpuestos>
+<totalDescuento>0.55</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1.03</baseImponible>
+<valor>0.12</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1.15</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>48540</codigoPrincipal>
+<descripcion>ANILLO - O-RING 25154-135 DE VITON BOMBAS GMS 2 / NM 3</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.58</precioUnitario>
+<descuento>0.55</descuento>
+<precioTotalSinImpuesto>1.03</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GORMAN"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.03</baseImponible>
+<valor>0.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">bviteri@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2454334</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000640</campoAdicional>
+<campoAdicional nombre="Observaciones">PARA COMPLETAR COD.98960 GHS3NP10-B</campoAdicional>
+</infoAdicional>
+</factura>

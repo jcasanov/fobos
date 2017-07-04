@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176355</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>29/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176355</guiaRemision>
+<razonSocialComprador>HERRERA CALVOPIÒA OLGUER PATRICIO</razonSocialComprador>
+<identificacionComprador>1707099329001</identificacionComprador>
+<totalSinImpuestos>431.46</totalSinImpuestos>
+<totalDescuento>32.47</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>431.46</baseImponible>
+<valor>51.78</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>483.24</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>96092</codigoPrincipal>
+<descripcion>VIGA-COLUMNA ARMEX x 6.50 MTS. VC-9 DE 15 X 25 X 12mm.</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>39.65</precioUnitario>
+<descuento>11.10</descuento>
+<precioTotalSinImpuesto>147.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>147.50</baseImponible>
+<valor>17.70</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>298</codigoPrincipal>
+<descripcion>HIERRO CORRUGADO  4200 DE 12mm. x 12m</descripcion>
+<cantidad>11.00</cantidad>
+<precioUnitario>12.35</precioUnitario>
+<descuento>9.51</descuento>
+<precioTotalSinImpuesto>126.34</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDEC"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>126.34</baseImponible>
+<valor>15.16</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>286</codigoPrincipal>
+<descripcion>HIERRO CORRUGADO  4200 DE 8mm. x 12m</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>5.49</precioUnitario>
+<descuento>1.92</descuento>
+<precioTotalSinImpuesto>25.53</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDEC"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>25.53</baseImponible>
+<valor>3.06</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>304</codigoPrincipal>
+<descripcion>HIERRO CORRUGADO  4200 DE 14mm. x 12m</descripcion>
+<cantidad>8.00</cantidad>
+<precioUnitario>16.81</precioUnitario>
+<descuento>9.41</descuento>
+<precioTotalSinImpuesto>125.07</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDEC"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>125.07</baseImponible>
+<valor>15.01</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>18</codigoPrincipal>
+<descripcion>ALAMBRE NEGRO N.18</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>1.51</precioUnitario>
+<descuento>0.53</descuento>
+<precioTotalSinImpuesto>7.02</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7.02</baseImponible>
+<valor>0.84</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">olguerpatricio@hotmailcom</campoAdicional>
+<campoAdicional nombre="telefono-movil">099495192</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">042824</campoAdicional>
+</infoAdicional>
+</factura>

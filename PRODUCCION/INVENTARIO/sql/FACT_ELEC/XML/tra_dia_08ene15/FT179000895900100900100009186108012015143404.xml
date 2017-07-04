@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091861</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>08/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091861</guiaRemision>
+<razonSocialComprador>SEREMCORP S.A.</razonSocialComprador>
+<identificacionComprador>0992340975001</identificacionComprador>
+<totalSinImpuestos>400.51</totalSinImpuestos>
+<totalDescuento>44.51</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>400.51</baseImponible>
+<valor>48.06</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>448.57</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>92137</codigoPrincipal>
+<descripcion>INODORO COMERCIAL PARA FLUSH E151 BL  QUANTUN STANDARD ELONGADO BLANCO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>82.89</precioUnitario>
+<descuento>16.58</descuento>
+<precioTotalSinImpuesto>149.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>149.20</baseImponible>
+<valor>17.90</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100382</codigoPrincipal>
+<descripcion>VALVULA FLUSH PARA INODORO E365.22 CR STANDARD</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>168.98</precioUnitario>
+<descuento>16.90</descuento>
+<precioTotalSinImpuesto>152.08</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>152.08</baseImponible>
+<valor>18.25</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101932</codigoPrincipal>
+<descripcion>VALVULA PRESMATIC PARA URINARIO E362.01  CR  ECOMATIC</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>55.13</precioUnitario>
+<descuento>11.03</descuento>
+<precioTotalSinImpuesto>99.23</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>99.23</baseImponible>
+<valor>11.91</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">dhellen23@yahoo.com.mx</campoAdicional>
+<campoAdicional nombre="telefono-movil">2922063</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">007659</campoAdicional>
+</infoAdicional>
+</factura>

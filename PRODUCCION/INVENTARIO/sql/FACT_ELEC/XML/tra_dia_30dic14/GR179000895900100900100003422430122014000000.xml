@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000034224</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>AV. JUAN TANCA MARENGO KM.1.7</dirPartida>
+<razonSocialTransportista>SERVIENTREGA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0991285679001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>30/12/2014</fechaIniTransporte>
+<fechaFinTransporte>30/12/2014</fechaFinTransporte>
+<placa> YBA-3003</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0992234903001</identificacionDestinatario>
+<razonSocialDestinatario>ING. CARLOS MOROCHO DUQUE S.A. CM CONSTRUCCIONES</razonSocialDestinatario>
+<dirDestinatario>CIUDAD PUNTA CARNERO KM.3.5 VIA PUNTA CARNERO KM. 3.50 REC. FREDDY SUAREZ TEL.0992062154</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>29/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>101099</codigoInterno>
+<descripcion>TUBO ABASTO- LLAVE ANGULAR LAVABO 7578306  1/2 x 1/2" C/ MANGUERA DE 16"</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="MODELO" valor="SC0075783061BO"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>101337</codigoInterno>
+<descripcion>INODORO RESIDENCIAL UNA PIEZA JSSI6091130  EGO REDONDO ADVANCE BLANCO INT.C/ASTO. S.DOWN</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="MODELO" valor="JSSI6091130  EGO ADV"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>69081</codigoInterno>
+<descripcion>SIFON DE LAVABO 4019000 1-1/4" CON ACOPLE EN POLIPROPILENO BLANCO</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="MODELO" valor="SC0040190001BO"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>70970</codigoInterno>
+<descripcion>LAVABO VESSEL DE SOBREPONER SS0056911301CW STYLO REGGIO BLANCO</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="MODELO" valor="SS0056911301CW"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>71570</codigoInterno>
+<descripcion>LLAVE PARA LAVABO E226/06 CR SCALA LEVER</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="MODELO" valor="E226/06 CR SCALA LEV"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>71661</codigoInterno>
+<descripcion>DESAGUE DE LAVABO SC0016963061BO DESAGUE DE1 1/4" PUSH BOTTOM P/L</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="MODELO" valor="SC0016963061BO"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>71727</codigoInterno>
+<descripcion>GRIFERIA DE DUCHA E108/D6 CR ELIPSIS MONOCOMANDO-CROMO</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="MODELO" valor="E108/D6 CR"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>99380</codigoInterno>
+<descripcion>LAVABO VESSEL DE SOBREPONER 5731130 LUGANO BLANCO</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="MODELO" valor="SS0057311301CW"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">tmunoz@cmconstrucciones.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2776077</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">008600</campoAdicional>
+</infoAdicional>
+</guiaRemision>

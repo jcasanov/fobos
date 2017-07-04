@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025779</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>AV. JUAN TANCA MARENGO KM.1.7</dirPartida>
+<razonSocialTransportista>MANUEL MAGALLANES (ACERO COMERCIAL .S.A)</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>0910240910</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>16/01/2015</fechaIniTransporte>
+<fechaFinTransporte>16/01/2015</fechaFinTransporte>
+<placa>  GSC-8976</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0991284192001</identificacionDestinatario>
+<razonSocialDestinatario>PORTONOVO S.A.</razonSocialDestinatario>
+<dirDestinatario>CIUDAD CELESTE MZ.3 SL.15-SAMBORONDON KM O/C.200003882-OBRA:LA BRISA-MZ-3 SOLAR 15</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>15/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>26724</codigoInterno>
+<descripcion>SIFON DE LAVABO E240 RA DE 1-1/4" DH-BL RESINA ACETAL C/ ACOPLE</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>26925</codigoInterno>
+<descripcion>TUBO ABASTO- LLAVE ANGULAR LAVABO E262.05 DH-CR FLEXIBLE DE 16"</descripcion>
+<cantidad>5.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>27742</codigoInterno>
+<descripcion>REJILLA E586.00.01 DH CR DE 1-1/2" CROMADA</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>27951</codigoInterno>
+<descripcion>TUBO ABASTO METALICO TRENZADO E269.20.03.0 DH DE 16" DE LAVABO P/ LLAVE DE PASO</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>62024</codigoInterno>
+<descripcion>DUCHA TELEFONO E118/27 CR CROMO FIORI</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>67542</codigoInterno>
+<descripcion>DESAGUE DE LAVABO E2460 RA DH BLC DESAGUE C/ REJILLA</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>67553</codigoInterno>
+<descripcion>LAVABO DE PORCELANA PARA EMPOTRAR PREPONCHADO E231-BO ELEA OVAL BONE PREMARCADO</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>71775</codigoInterno>
+<descripcion>GRIFERIA DE LAVABO 1-H E181.03/D6 CR VESSEL-ELIPSIS CROMO</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">proyectos@portonovo.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2232239</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">010917</campoAdicional>
+</infoAdicional>
+</guiaRemision>

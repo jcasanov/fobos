@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000114100</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000114100</guiaRemision>
+<razonSocialComprador>CAZA ROBAYO ENRIQUE FABRICIO</razonSocialComprador>
+<identificacionComprador>1713396388001</identificacionComprador>
+<totalSinImpuestos>47.00</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>47.00</baseImponible>
+<valor>5.64</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>52.64</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>44312</codigoPrincipal>
+<descripcion>COQUILLA LANA DE VIDRIO C-ALUMINIO 4" x 1" x 0.90 m.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>12.69</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>25.38</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDIFI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>25.38</baseImponible>
+<valor>3.05</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>15508</codigoPrincipal>
+<descripcion>CUCHILLA PARA CORTATUBO F-514 P/MOD.2A/44S/360 (33100)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>10.81</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>21.62</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>21.62</baseImponible>
+<valor>2.59</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jadira.cahuasqui@contelserv.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2975378</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">048945</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113998</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113998</guiaRemision>
+<razonSocialComprador>CHISAGUANO FLORES MARIO</razonSocialComprador>
+<identificacionComprador>0501983092001</identificacionComprador>
+<totalSinImpuestos>41.13</totalSinImpuestos>
+<totalDescuento>4.58</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>41.13</baseImponible>
+<valor>4.94</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>46.07</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>44013</codigoPrincipal>
+<descripcion>TANQUE POLIETILENO (STANDARD) ECONOMICO DE 55 GLNS.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>35.49</precioUnitario>
+<descuento>3.55</descuento>
+<precioTotalSinImpuesto>31.94</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>31.94</baseImponible>
+<valor>3.83</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3384</codigoPrincipal>
+<descripcion>NEPLO NEGRO DE 1" CORRIDO</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>0.73</precioUnitario>
+<descuento>0.37</descuento>
+<precioTotalSinImpuesto>3.28</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.28</baseImponible>
+<valor>0.39</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3194</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1" CORRIDO</descripcion>
+<cantidad>9.00</cantidad>
+<precioUnitario>0.73</precioUnitario>
+<descuento>0.66</descuento>
+<precioTotalSinImpuesto>5.91</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.91</baseImponible>
+<valor>0.71</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">mariochflores@yahoo.es</campoAdicional>
+<campoAdicional nombre="telefono-movil">097638004</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">045843</campoAdicional>
+</infoAdicional>
+</factura>

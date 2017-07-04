@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048283</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<dirPartida>AV. LA PRENSA N-4514</dirPartida>
+<razonSocialTransportista>ACERO COMERCIAL</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>29/12/2014</fechaIniTransporte>
+<fechaFinTransporte>29/12/2014</fechaFinTransporte>
+<placa>PAA-001</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1768086400001</identificacionDestinatario>
+<razonSocialDestinatario>EMPRESA PUBLICA MUNICIPAL DE AGUA POTABLE ALCANTARILLADO Y ASEO CAYAMBE EMAPAAC E.P</razonSocialDestinatario>
+<dirDestinatario>BODEGA DEL CLIENTE EN CAYAMBE</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>23/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>100198</codigoInterno>
+<descripcion>DESTAPADOR DE DESAGUES A GASOLINA KJ-3100 P/DESAG. DE 2" A 10" 3000 PSI DE PRESION (37413)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="MODELO" valor="37413"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>13063</codigoInterno>
+<descripcion>DESTAPADOR DE DESAGUES A GASOLINA K-1000 TUBERIA DE 8"-24" DE 6HP (84295)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="MODELO" valor="84295"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>90354</codigoInterno>
+<descripcion>JET VAC H-32 P/ MODELOS KJ (67187)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="MODELO" valor="67187"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">emapcay@yahoo.com.ar</campoAdicional>
+<campoAdicional nombre="telefono-movil">2360052</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064173</campoAdicional>
+</infoAdicional>
+</guiaRemision>

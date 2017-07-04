@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131666</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>CARLOS MANTILLA N13-300 Y GERANIOS</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131666</guiaRemision>
+<razonSocialComprador>MORA ARCOS EDISON KEVIN</razonSocialComprador>
+<identificacionComprador>0401314646001</identificacionComprador>
+<totalSinImpuestos>153.38</totalSinImpuestos>
+<totalDescuento>31.42</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>153.38</baseImponible>
+<valor>18.41</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>171.79</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102311</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA AZTECA VERDE PRIMERA</descripcion>
+<cantidad>21.00</cantidad>
+<precioUnitario>8.80</precioUnitario>
+<descuento>31.42</descuento>
+<precioTotalSinImpuesto>153.38</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="M2" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>153.38</baseImponible>
+<valor>18.41</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2845955</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064036</campoAdicional>
+</infoAdicional>
+</factura>

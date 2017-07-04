@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268352</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>12/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268352</guiaRemision>
+<razonSocialComprador>SAHI SANCHEZ-HIDALGO ANCLAJES Y FIJACIONES</razonSocialComprador>
+<identificacionComprador>1707172001001</identificacionComprador>
+<totalSinImpuestos>174.42</totalSinImpuestos>
+<totalDescuento>30.78</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>174.42</baseImponible>
+<valor>20.93</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>195.35</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>69699</codigoPrincipal>
+<descripcion>PISTOLA DE CLAVAR 52007  P2201 UN DISPARO NIVEL 1-4 CAL.22  KIT BLISTER</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>205.20</precioUnitario>
+<descuento>30.78</descuento>
+<precioTotalSinImpuesto>174.42</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>174.42</baseImponible>
+<valor>20.93</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">sahi_fijaciones@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2021623</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">049131</campoAdicional>
+<campoAdicional nombre="Observaciones">SOLICITA ING.TELMO SANCHEZ</campoAdicional>
+</infoAdicional>
+</factura>

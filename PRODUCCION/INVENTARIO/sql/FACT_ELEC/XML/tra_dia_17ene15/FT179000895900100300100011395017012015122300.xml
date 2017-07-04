@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113950</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113950</guiaRemision>
+<razonSocialComprador>DUQUE ESPARZA MIREYA ALEXANDRA</razonSocialComprador>
+<identificacionComprador>1711849842001</identificacionComprador>
+<totalSinImpuestos>281.02</totalSinImpuestos>
+<totalDescuento>31.23</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>281.02</baseImponible>
+<valor>33.72</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>314.74</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99910</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 30 X 30 MONOQUEMA BOLONIA AZUL SEGUNDA</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>9.28</precioUnitario>
+<descuento>4.64</descuento>
+<precioTotalSinImpuesto>41.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>41.76</baseImponible>
+<valor>5.01</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100481</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA AMAGUANIA BEIGE PRIMERA</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>10.15</precioUnitario>
+<descuento>4.06</descuento>
+<precioTotalSinImpuesto>36.54</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>36.54</baseImponible>
+<valor>4.38</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99492</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 MINDO BEIGE PRIMERA</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>10.26</precioUnitario>
+<descuento>5.13</descuento>
+<precioTotalSinImpuesto>46.17</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>46.17</baseImponible>
+<valor>5.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102313</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA MODERNO PRIMERA</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>10.66</precioUnitario>
+<descuento>5.33</descuento>
+<precioTotalSinImpuesto>47.97</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>47.97</baseImponible>
+<valor>5.76</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102218</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 MACHALILLA CREMA PRIMERA</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>9.19</precioUnitario>
+<descuento>2.76</descuento>
+<precioTotalSinImpuesto>24.81</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>24.81</baseImponible>
+<valor>2.98</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>92991</codigoPrincipal>
+<descripcion>PEGA PARA CERAMICA BONDEX STANDARD DE 25 KG. CERAMICA</descripcion>
+<cantidad>8.00</cantidad>
+<precioUnitario>5.86</precioUnitario>
+<descuento>4.69</descuento>
+<precioTotalSinImpuesto>42.19</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INTACO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>42.19</baseImponible>
+<valor>5.06</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99495</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 MINDO CHOCOLATE ESTANDAR</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>9.24</precioUnitario>
+<descuento>4.62</descuento>
+<precioTotalSinImpuesto>41.58</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>41.58</baseImponible>
+<valor>4.99</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">mireyadu@yahoo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2606026</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">058165</campoAdicional>
+</infoAdicional>
+</factura>

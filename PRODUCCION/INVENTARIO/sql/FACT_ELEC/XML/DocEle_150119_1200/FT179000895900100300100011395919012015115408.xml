@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113959</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113959</guiaRemision>
+<razonSocialComprador>IEPESA.</razonSocialComprador>
+<identificacionComprador>1790018911001</identificacionComprador>
+<totalSinImpuestos>36.67</totalSinImpuestos>
+<totalDescuento>4.07</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>36.67</baseImponible>
+<valor>4.40</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>41.07</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>3204</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1" x 4"</descripcion>
+<cantidad>16.00</cantidad>
+<precioUnitario>1.29</precioUnitario>
+<descuento>2.06</descuento>
+<precioTotalSinImpuesto>18.58</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>18.58</baseImponible>
+<valor>2.23</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4567</codigoPrincipal>
+<descripcion>TEE GALV. CLASE 150 DE 1"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>3.35</precioUnitario>
+<descuento>2.01</descuento>
+<precioTotalSinImpuesto>18.09</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>18.09</baseImponible>
+<valor>2.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">documentosproveedores@iepesaplasticos.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">674274</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000116</campoAdicional>
+<campoAdicional nombre="Observaciones">OC.19886</campoAdicional>
+</infoAdicional>
+</factura>

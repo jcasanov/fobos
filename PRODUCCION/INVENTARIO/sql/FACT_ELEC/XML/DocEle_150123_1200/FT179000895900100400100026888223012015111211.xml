@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268882</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268882</guiaRemision>
+<razonSocialComprador>CONSTRUCTORA VILLACRECES ANDRADE S.A.</razonSocialComprador>
+<identificacionComprador>1791326768001</identificacionComprador>
+<totalSinImpuestos>25.17</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>25.17</baseImponible>
+<valor>3.02</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>28.19</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>50380</codigoPrincipal>
+<descripcion>TEE POLIPROPILENO DE 1/2" (AGUA CALIENTE)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>0.41</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>0.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.82</baseImponible>
+<valor>0.10</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50290</codigoPrincipal>
+<descripcion>CODO POLIPROPILENO DE 1/2" x 90 GRAD</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>0.34</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1.02</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.02</baseImponible>
+<valor>0.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97879</codigoPrincipal>
+<descripcion>NEPLO POLIPROPILENO DE 1/2" x 8 cm. (AGUA CALIENTE)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>0.22</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>0.44</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.44</baseImponible>
+<valor>0.05</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50287</codigoPrincipal>
+<descripcion>NEPLO POLIPROPILENO DE 1/2" CON TUERCA (AGUA CALIENTE)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>0.26</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>0.26</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.26</baseImponible>
+<valor>0.03</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50450</codigoPrincipal>
+<descripcion>TUBO POLIPROPILENO DE 1/2" x 6 m. (AGUA CALIENTE)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>7.99</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>7.99</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7.99</baseImponible>
+<valor>0.96</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2687</codigoPrincipal>
+<descripcion>CODO PVC DESAGUE DE 50mm. x 90ø ISO E/C</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>0.92</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1.84</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.84</baseImponible>
+<valor>0.22</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4912</codigoPrincipal>
+<descripcion>TEE PVC DESAGUE DE 50mm. ISO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>0.73</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1.46</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.46</baseImponible>
+<valor>0.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>92289</codigoPrincipal>
+<descripcion>KALIPEGA ENVASE DE 946 CC.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>11.34</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>11.34</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>11.34</baseImponible>
+<valor>1.36</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">cmaldonado@elitcorp.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2229244/5</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">004289</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C NO.2014-32712</campoAdicional>
+</infoAdicional>
+</factura>

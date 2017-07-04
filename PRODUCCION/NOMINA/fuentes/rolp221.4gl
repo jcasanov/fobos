@@ -1343,8 +1343,8 @@ UPDATE rolt005 SET n05_activo = 'N'
 
 DECLARE q_prest CURSOR FOR
 	SELECT * FROM rolt037
-        	WHERE n37_compania  = vg_codcia
-		  AND n37_proceso   = vm_proceso
+        	WHERE n37_compania = vg_codcia
+		  AND n37_proceso  = vm_proceso
 		  AND n37_fecha_ini = vm_r_rows[vm_row_current].n36_fecha_ini
 		  AND n37_fecha_fin = vm_r_rows[vm_row_current].n36_fecha_fin
 
@@ -1375,24 +1375,12 @@ FOREACH q_prest INTO r_n37.*
 		WHERE n58_compania  = r_n37.n37_compania
 		  AND n58_num_prest = r_n37.n37_num_prest
 		  AND n58_proceso   = r_n37.n37_proceso
-
 	UPDATE rolt046 SET n46_saldo = n46_valor - r_n37.n37_valor
         	WHERE n46_compania   = vg_codcia
 		  AND n46_num_prest  = r_n37.n37_num_prest
 		  AND n46_cod_liqrol = vm_proceso
 		  AND n46_fecha_ini  = vm_r_rows[vm_row_current].n36_fecha_ini
 		  AND n46_fecha_fin  = vm_r_rows[vm_row_current].n36_fecha_fin
-		  AND n46_saldo      = r_n37.n37_valor
-
-	UPDATE rolt046
-		SET n46_saldo = n46_valor - (r_n37.n37_valor + n46_saldo)
-        	WHERE n46_compania   = vg_codcia
-		  AND n46_num_prest  = r_n37.n37_num_prest
-		  AND n46_cod_liqrol = vm_proceso
-		  AND n46_fecha_ini  = vm_r_rows[vm_row_current].n36_fecha_ini
-		  AND n46_fecha_fin  = vm_r_rows[vm_row_current].n36_fecha_fin
-		  AND n46_saldo      > 0
-		  AND n46_saldo      < r_n37.n37_valor
 
 	UPDATE rolt045 SET n45_descontado = n45_descontado + r_n37.n37_valor,
 			   n45_estado     = r_n45.n45_estado
@@ -1809,8 +1797,7 @@ CREATE TEMP TABLE tmp_rol_ban
 		tipo_cuenta		CHAR(3),
 		cuenta_empleado		CHAR(11),
 		tipo_doc_id		CHAR(1),
-		num_doc_id		VARCHAR(13),
-		--num_doc_id		DECIMAL(13,0),
+		num_doc_id		DECIMAL(13,0),
 		empleado		VARCHAR(40),
 		direccion		VARCHAR(40),
 		ciudad			VARCHAR(20),

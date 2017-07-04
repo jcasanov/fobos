@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131625</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>CHURA S16-28 Y GUADUAL</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131625</guiaRemision>
+<razonSocialComprador>UNAUCHO AGUAYO LUIS GILBERTO</razonSocialComprador>
+<identificacionComprador>1710976422</identificacionComprador>
+<totalSinImpuestos>116.64</totalSinImpuestos>
+<totalDescuento>12.96</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>116.64</baseImponible>
+<valor>14.00</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>130.64</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102127</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA PORTO BEIGE PRIMERA</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>10.06</precioUnitario>
+<descuento>10.06</descuento>
+<precioTotalSinImpuesto>90.54</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="M2" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>90.54</baseImponible>
+<valor>10.86</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>92991</codigoPrincipal>
+<descripcion>PEGA PARA CERAMICA BONDEX STANDARD DE 25 KG. CERAMICA</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>5.80</precioUnitario>
+<descuento>2.90</descuento>
+<precioTotalSinImpuesto>26.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="INTACO" valor="INTACO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>26.10</baseImponible>
+<valor>3.13</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2688451</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">063136</campoAdicional>
+</infoAdicional>
+</factura>

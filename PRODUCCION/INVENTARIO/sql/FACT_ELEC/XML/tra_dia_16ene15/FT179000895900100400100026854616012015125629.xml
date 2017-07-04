@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268546</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268546</guiaRemision>
+<razonSocialComprador>PROCESADORA NACIONAL DE ALIMENTOS C.A. PRONACA</razonSocialComprador>
+<identificacionComprador>1790319857001</identificacionComprador>
+<totalSinImpuestos>45.01</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>45.01</baseImponible>
+<valor>5.40</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>50.41</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>50368</codigoPrincipal>
+<descripcion>TAPON POLIPROPILENO MACHO DE 1/2" MACHO (AGUA CALIENTE)</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>0.29</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1.45</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.45</baseImponible>
+<valor>0.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103197</codigoPrincipal>
+<descripcion>PICO DE GRIFERIA DE LAVADERO 420.01.3E.02  CR  PICO COCINA COMPLETO</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>14.52</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>43.56</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>43.56</baseImponible>
+<valor>5.23</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacionelectronica@pronaca.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3976400</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">028945</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C# 100032368</campoAdicional>
+</infoAdicional>
+</factura>

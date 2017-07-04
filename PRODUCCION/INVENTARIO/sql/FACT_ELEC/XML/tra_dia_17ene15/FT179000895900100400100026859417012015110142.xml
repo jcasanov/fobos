@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268594</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268594</guiaRemision>
+<razonSocialComprador>ESCOBAR VELASCO ROSEMARY</razonSocialComprador>
+<identificacionComprador>1002948154001</identificacionComprador>
+<totalSinImpuestos>1222.77</totalSinImpuestos>
+<totalDescuento>135.87</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1222.77</baseImponible>
+<valor>146.73</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1369.50</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>94704</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 4" 60FA3S4-PE P/ 3HP 60 GPM (93616008) 8 ETAPAS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>482.78</precioUnitario>
+<descuento>48.28</descuento>
+<precioTotalSinImpuesto>434.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>434.50</baseImponible>
+<valor>52.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>20669</codigoPrincipal>
+<descripcion>MOTOR ELEC SUMERG DE 4" (2243022604) SJF-3021 DE 3HP 230-1-60</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>642.85</precioUnitario>
+<descuento>64.29</descuento>
+<precioTotalSinImpuesto>578.56</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>578.56</baseImponible>
+<valor>69.43</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>19583</codigoPrincipal>
+<descripcion>CAJA DE CONTROL (2823028110) CJ-3021 P/ 3HP 230/60/1F</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>233.01</precioUnitario>
+<descuento>23.30</descuento>
+<precioTotalSinImpuesto>209.71</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>209.71</baseImponible>
+<valor>25.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">fgarcesmera@yahoo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2781087</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">055759</campoAdicional>
+<campoAdicional nombre="Observaciones">P/CRUCE CON DEPOSITO</campoAdicional>
+</infoAdicional>
+</factura>

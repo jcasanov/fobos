@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>         </secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>16/12/2014</fechaEmision>
+<dirEstablecimiento>AV. REPUBLICA DEL SALVADOR N34-140 ENTRE</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>SERVICIOS MISCELANEOS E GONZALEZ SEMEG CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1792229324001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000175806</numDocModificado>
+<fechaEmisionDocSustento>12/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>4208.50</totalSinImpuestos>
+<valorModificacion>4713.52</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>4208.50</baseImponible>
+<valor>505.02</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>POR REFACTURACION. MATERIAL YA ENTREGADO</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>5460</codigoInterno>
+<descripcion>TUBO GALVANIZADO (POSTE) TIPO "T" DE 2" (50.8mm.) EXTERIOR 1.8mm. ESPESOR x 6 mts.</descripcion>
+<cantidad>125.00</cantidad>
+<precioUnitario>22.55</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2818.75</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="TUGALT" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2818.75</baseImponible>
+<valor>338.25</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>5458</codigoInterno>
+<descripcion>TUBO GALVANIZADO (POSTE) TIPO "T" DE 1-1/2" (38.1mm.) EXTERIOR 1.8mm. ESPESOR x 6 mts.</descripcion>
+<cantidad>85.00</cantidad>
+<precioUnitario>16.35</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1389.75</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="TUGALT" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1389.75</baseImponible>
+<valor>166.77</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3944530</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">50867</campoAdicional>
+</infoAdicional>
+</notaCredito>

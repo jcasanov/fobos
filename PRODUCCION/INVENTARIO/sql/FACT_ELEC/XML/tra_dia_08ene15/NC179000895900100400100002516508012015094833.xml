@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025165</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>08/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>DANIELCOM EQUIPMENT SUPPLY S.A.</razonSocialComprador>
+<identificacionComprador>1791288777001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000174110</numDocModificado>
+<fechaEmisionDocSustento>12/11/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>104.33</totalSinImpuestos>
+<valorModificacion>116.85</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>104.33</baseImponible>
+<valor>12.52</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 265827 DANIELCOM P-VOLVER A FAC FC</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>97897</codigoInterno>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7424 SD1 DE 1/2" X 5-1/2"</descripcion>
+<cantidad>75.00</cantidad>
+<precioUnitario>1.11</precioUnitario>
+<descuento>12.49</descuento>
+<precioTotalSinImpuesto>70.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>70.76</baseImponible>
+<valor>8.49</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>98135</codigoInterno>
+<descripcion>ANCLAJE EPOXICO 0500SD PE1000 + DUAL CARTRIDGE DE 13 Onzas</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>39.50</precioUnitario>
+<descuento>5.93</descuento>
+<precioTotalSinImpuesto>33.57</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>33.57</baseImponible>
+<valor>4.03</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">fact_electronica@danielcom.com</campoAdicional>
+<campoAdicional nombre="Email">arroyo@danielcom.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2258425</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">7874</campoAdicional>
+</infoAdicional>
+</notaCredito>

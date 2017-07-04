@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092119</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092119</guiaRemision>
+<razonSocialComprador>PAZMINO MAZACON ELIZABETH</razonSocialComprador>
+<identificacionComprador>1204618308</identificacionComprador>
+<totalSinImpuestos>1591.38</totalSinImpuestos>
+<totalDescuento>682.02</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1591.38</baseImponible>
+<valor>190.97</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1782.35</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>97525</codigoPrincipal>
+<descripcion>BOMBA TIPO JET C-MOTOR HB-100S DE 1 HP/115V/60C. (401T1000)</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>227.34</precioUnitario>
+<descuento>682.02</descuento>
+<precioTotalSinImpuesto>1591.38</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1591.38</baseImponible>
+<valor>190.97</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">electron78@hotmail.es</campoAdicional>
+<campoAdicional nombre="telefono-movil">052973679</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">013613</campoAdicional>
+</infoAdicional>
+</factura>

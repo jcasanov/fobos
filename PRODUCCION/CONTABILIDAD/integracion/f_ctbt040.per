@@ -1,0 +1,37 @@
+database acero_gm
+screen size 24 by 80
+{
+b40_compania       [f000       ]
+b40_localidad      [f001  ]
+b40_modulo         [a0]
+b40_bodega         [a1]
+b40_grupo_linea    [f002 ]
+b40_venta          [f003        ]
+b40_descuento      [f004        ]
+b40_dev_venta      [f005        ]
+b40_costo_venta    [f006        ]
+b40_dev_costo      [f007        ]
+b40_inventario     [f008        ]
+b40_transito       [f009        ]
+b40_ajustes        [f010        ]
+b40_flete          [f011        ]
+}
+end
+tables
+ctbt040
+attributes
+f000 = ctbt040.b40_compania;
+f001 = ctbt040.b40_localidad;
+a0 = ctbt040.b40_modulo;
+a1 = ctbt040.b40_bodega;
+f002 = ctbt040.b40_grupo_linea;
+f003 = ctbt040.b40_venta;
+f004 = ctbt040.b40_descuento;
+f005 = ctbt040.b40_dev_venta;
+f006 = ctbt040.b40_costo_venta;
+f007 = ctbt040.b40_dev_costo;
+f008 = ctbt040.b40_inventario;
+f009 = ctbt040.b40_transito;
+f010 = ctbt040.b40_ajustes;
+f011 = ctbt040.b40_flete;
+end

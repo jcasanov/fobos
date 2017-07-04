@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268650</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268650</guiaRemision>
+<razonSocialComprador>AZULEC S.A</razonSocialComprador>
+<identificacionComprador>1791957253001</identificacionComprador>
+<totalSinImpuestos>108.13</totalSinImpuestos>
+<totalDescuento>12.01</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>108.13</baseImponible>
+<valor>12.98</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>121.11</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>97957</codigoPrincipal>
+<descripcion>MANDRIL - PORTABROCA PARA TALADRO 45-34-0115 ENCASTRE P/CONO MORSE DE TALADRO MOD.4297-1/4292-1</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>120.14</precioUnitario>
+<descuento>12.01</descuento>
+<precioTotalSinImpuesto>108.13</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>108.13</baseImponible>
+<valor>12.98</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacion@azul.com.ec</campoAdicional>
+<campoAdicional nombre="Email">diego.chalco@azul.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2977600</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">036359</campoAdicional>
+</infoAdicional>
+</factura>

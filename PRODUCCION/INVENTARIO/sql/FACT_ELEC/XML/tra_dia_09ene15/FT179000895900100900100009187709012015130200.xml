@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091877</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>09/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091877</guiaRemision>
+<razonSocialComprador>CARVAGU S.A.</razonSocialComprador>
+<identificacionComprador>0991434879001</identificacionComprador>
+<totalSinImpuestos>1589.84</totalSinImpuestos>
+<totalDescuento>397.46</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1589.84</baseImponible>
+<valor>190.78</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1780.62</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>50471</codigoPrincipal>
+<descripcion>BOMBA SUMERG AGUAS NEGRAS 3MW30-23 3HP 230-3-60 3500RPM</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1987.30</precioUnitario>
+<descuento>397.46</descuento>
+<precioTotalSinImpuesto>1589.84</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1589.84</baseImponible>
+<valor>190.78</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">romina.romero@carvagu.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2073793</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">010755</campoAdicional>
+<campoAdicional nombre="Observaciones">S/C 3012-2014-12</campoAdicional>
+</infoAdicional>
+</factura>

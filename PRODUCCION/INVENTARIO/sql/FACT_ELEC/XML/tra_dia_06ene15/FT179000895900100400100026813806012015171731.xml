@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268138</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>06/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268138</guiaRemision>
+<razonSocialComprador>CUMBICOS BETANCOURT LIVIA ALEXANDRA</razonSocialComprador>
+<identificacionComprador>1717429458001</identificacionComprador>
+<totalSinImpuestos>522.31</totalSinImpuestos>
+<totalDescuento>106.99</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>522.31</baseImponible>
+<valor>62.68</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>584.99</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>100487</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA AMAGUANIA TERRACOTA PRIMERA</descripcion>
+<cantidad>50.00</cantidad>
+<precioUnitario>10.15</precioUnitario>
+<descuento>86.28</descuento>
+<precioTotalSinImpuesto>421.22</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>421.22</baseImponible>
+<valor>50.55</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100479</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA AMAGUANIA AZUL PRIMERA</descripcion>
+<cantidad>12.00</cantidad>
+<precioUnitario>10.15</precioUnitario>
+<descuento>20.71</descuento>
+<precioTotalSinImpuesto>101.09</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>101.09</baseImponible>
+<valor>12.13</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">decorestilo@yahoo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2286312</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">039693</campoAdicional>
+</infoAdicional>
+</factura>

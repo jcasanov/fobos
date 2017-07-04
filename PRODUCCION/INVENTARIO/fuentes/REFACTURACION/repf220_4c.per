@@ -1,0 +1,49 @@
+DATABASE aceros    
+SCREEN             
+{                  
+
+  Stock Item: [b001   ]
+ [b002                                        ]
+ [c5 ] de [c6 ]
+  Bodegas Locales:
+ [c1|c002                          |c003      ]
+ [c1|c002                          |c003      ]
+ [c1|c002                          |c003      ]
+ [c1|c002                          |c003      ]
+ [c1|c002                          |c003      ]
+                    Total Local:   [c004      ]
+ [c7 ] de [c8 ]
+  Bodegas Remotas:                          
+ [d1|d002                          |d003      ]
+ [d1|d002                          |d003      ]
+ [d1|d002                          |d003      ]
+ [d1|d002                          |d003      ]
+ [d1|d002                          |d003      ]
+                  Total Remotas:   [d004      ]
+                 Total Nacional:   [d005      ]
+}
+TABLES
+rept010
+rept011
+ATTRIBUTES
+b001 = FORMONLY.codigo, REVERSE;
+b002 = r10_nombre, REVERSE;
+c1   = FORMONLY.bod_loc;
+c002 = FORMONLY.nom_bod_loc;
+c003 = FORMONLY.stock_loc TYPE DECIMAL(8,2), FORMAT = '---,--&.##' ;
+c004 = FORMONLY.tot_stock_loc TYPE DECIMAL(8,2), FORMAT = '---,--&.##', REVERSE;
+d1   = FORMONLY.bod_rem;                                                             
+d002 = FORMONLY.nom_bod_rem;                
+d003 = FORMONLY.stock_rem TYPE DECIMAL(8,2), FORMAT = '---,--&.##';
+d004 = FORMONLY.tot_stock_rem TYPE DECIMAL(8,2), FORMAT = '---,--&.##', REVERSE;
+d005 = FORMONLY.tot_stock_gen TYPE DECIMAL(8,2), FORMAT = '---,--&.##', REVERSE;
+
+c5   = FORMONLY.num_row_l, NOENTRY, REVERSE;
+c6   = FORMONLY.max_row_l, NOENTRY, REVERSE;
+c7   = FORMONLY.num_row_r, NOENTRY, REVERSE;
+c8   = FORMONLY.max_row_r, NOENTRY, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_loc[5] (FORMONLY.bod_loc, FORMONLY.nom_bod_loc, FORMONLY.stock_loc)
+SCREEN RECORD r_rem[5] (FORMONLY.bod_rem, FORMONLY.nom_bod_rem, FORMONLY.stock_rem)                                                                          

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025180</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>10/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>UNIVERSIDAD DE LAS AMERICAS</razonSocialComprador>
+<identificacionComprador>1791362845001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000174623</numDocModificado>
+<fechaEmisionDocSustento>21/11/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>387.02</totalSinImpuestos>
+<valorModificacion>433.46</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>387.02</baseImponible>
+<valor>46.44</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 266308 UNIVERSIDAD DLS AMER AJIMENEZ</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>99480</codigoInterno>
+<descripcion>TALADRO A BATERIA 2602-22 V18 LI-Ion COMPACTO KIT</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>387.02</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>387.02</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>387.02</baseImponible>
+<valor>46.44</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">admisiones@udla.edu.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">3970000</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">22184</campoAdicional>
+</infoAdicional>
+</notaCredito>

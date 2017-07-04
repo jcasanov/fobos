@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268273</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>09/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268273</guiaRemision>
+<razonSocialComprador>SUPERINTENDENCIA DE CONTROL DEL PODER DE MERCADO</razonSocialComprador>
+<identificacionComprador>1768166940001</identificacionComprador>
+<totalSinImpuestos>21.69</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>21.69</baseImponible>
+<valor>2.60</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>24.29</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>1372</codigoPrincipal>
+<descripcion>ADAPTADOR PVC ESP-CAM MACHO ISO DE 50mm. A 1-1/2"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>0.89</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1.78</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.78</baseImponible>
+<valor>0.21</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2404</codigoPrincipal>
+<descripcion>CODO PVC ESP-CAM A 90° DE 50mm. ISO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>0.89</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1.78</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.78</baseImponible>
+<valor>0.21</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50332</codigoPrincipal>
+<descripcion>NEPLO POLIPROPILENO DE 1-1/4" x 10 cm. (AGUA CALIENTE)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1.45</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2.90</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.90</baseImponible>
+<valor>0.35</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>94404</codigoPrincipal>
+<descripcion>BUSHING DE ACERO INOXIDABLE DE 1-1/2" x 1-1/4"  NPT  ASTM-A351-CF8M</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>5.88</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>5.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INOX T"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.88</baseImponible>
+<valor>0.71</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102044</codigoPrincipal>
+<descripcion>TEFLON EN ROLLO DE 3/4" x 15 m. DENSIDAD 0.40 gr/cm3 PAOLO</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>1.87</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>9.35</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.35</baseImponible>
+<valor>1.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">comunicacion@sepm.gob.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2550440</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064257</campoAdicional>
+</infoAdicional>
+</factura>

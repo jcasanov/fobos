@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268535</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268535</guiaRemision>
+<razonSocialComprador>CONSTRUCTORA VILLACRECES ANDRADE S.A.</razonSocialComprador>
+<identificacionComprador>1791326768001</identificacionComprador>
+<totalSinImpuestos>5905.97</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>5905.97</baseImponible>
+<valor>708.72</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>6614.69</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>694</codigoPrincipal>
+<descripcion>TOL AL CALOR DE 6mm. 1.22 x 2.44 m (140.34 KG.)</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>122.39</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>367.17</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>367.17</baseImponible>
+<valor>44.06</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>422</codigoPrincipal>
+<descripcion>PLETINA DE 25 x 6mm. x 6 m</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>8.45</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>25.35</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>25.35</baseImponible>
+<valor>3.04</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>416</codigoPrincipal>
+<descripcion>PLETINA DE 25 x 3mm. x 6 m</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>4.23</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>21.15</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>21.15</baseImponible>
+<valor>2.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>688</codigoPrincipal>
+<descripcion>TOL AL CALOR DE 3mm. 1.22 x 2.44 m (70.17 KG.)</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>62.80</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>188.40</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>188.40</baseImponible>
+<valor>22.61</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>554</codigoPrincipal>
+<descripcion>HIERRO REDONDO LISO x 6 MTS. DE 8mm.</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>2.79</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>13.95</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>13.95</baseImponible>
+<valor>1.67</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>474</codigoPrincipal>
+<descripcion>PLETINA DE 50 x 3mm. x 6 m</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>8.45</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>50.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>50.70</baseImponible>
+<valor>6.08</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>68</codigoPrincipal>
+<descripcion>ANGULO LAMINADO x 6 MTS. DE 50mm. x 6mm.</descripcion>
+<cantidad>130.00</cantidad>
+<precioUnitario>39.29</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>5107.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5107.70</baseImponible>
+<valor>612.92</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5414</codigoPrincipal>
+<descripcion>TUBO GALV. ASTM A-53   TIPO "T" DE 1-1/2" x 6 m.  ESPESOR 3.6 mm.</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>43.85</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>131.55</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>131.55</baseImponible>
+<valor>15.79</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">cmaldonado@elitcorp.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2229244/5</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">004289</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C 2014-34025</campoAdicional>
+</infoAdicional>
+</factura>

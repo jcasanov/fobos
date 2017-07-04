@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268216</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>08/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268216</guiaRemision>
+<razonSocialComprador>ESPINOSA VITERI FREED STHVENS</razonSocialComprador>
+<identificacionComprador>1711744381001</identificacionComprador>
+<totalSinImpuestos>58.20</totalSinImpuestos>
+<totalDescuento>4.43</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>58.20</baseImponible>
+<valor>6.98</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>65.18</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5159</codigoPrincipal>
+<descripcion>TUBO DE ACERO CUADRADO 3/4" x 1.1mm. ESPESOR</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>7.23</precioUnitario>
+<descuento>0.58</descuento>
+<precioTotalSinImpuesto>13.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>13.88</baseImponible>
+<valor>1.67</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5350</codigoPrincipal>
+<descripcion>TUBO ESTRUCTURAL A-3724 TIPO "N" 25 x 25 x 2mm. ESPESOR</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>18.02</precioUnitario>
+<descuento>2.88</descuento>
+<precioTotalSinImpuesto>33.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>33.16</baseImponible>
+<valor>3.98</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21470</codigoPrincipal>
+<descripcion>ELECTRODO E-6011-C-13 1/8" ACERO DULCE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>4.69</precioUnitario>
+<descuento>0.23</descuento>
+<precioTotalSinImpuesto>4.46</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="AGA"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.46</baseImponible>
+<valor>0.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96315</codigoPrincipal>
+<descripcion>DISCO ABRASIVO 49-94-4505  DE 4-1/2" TIPO 27</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>2.48</precioUnitario>
+<descuento>0.74</descuento>
+<precioTotalSinImpuesto>6.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.70</baseImponible>
+<valor>0.80</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">freedsth@live.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3217089</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064238</campoAdicional>
+</infoAdicional>
+</factura>

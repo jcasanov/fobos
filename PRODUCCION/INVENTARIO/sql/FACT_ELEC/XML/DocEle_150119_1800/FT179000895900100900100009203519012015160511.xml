@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092035</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092035</guiaRemision>
+<razonSocialComprador>ECOCOMERCIO</razonSocialComprador>
+<identificacionComprador>0702183922001</identificacionComprador>
+<totalSinImpuestos>602.67</totalSinImpuestos>
+<totalDescuento>66.97</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>602.67</baseImponible>
+<valor>72.32</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>674.99</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99792</codigoPrincipal>
+<descripcion>ASPIRADORA SECO Y MOJADO RESIDENCIAL WD-1270 DE 12 Glns. MOTOR DE 5 HP 120V. (40103)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>166.58</precioUnitario>
+<descuento>33.32</descuento>
+<precioTotalSinImpuesto>299.84</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>299.84</baseImponible>
+<valor>35.98</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99222</codigoPrincipal>
+<descripcion>ASPIRADORA SECO Y MOJADO RESIDENCIAL WD-0671 DE 6 Glns. MOTOR DE 2.5HP 120V. (36683)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>134.25</precioUnitario>
+<descuento>26.85</descuento>
+<precioTotalSinImpuesto>241.65</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>241.65</baseImponible>
+<valor>29.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>16161</codigoPrincipal>
+<descripcion>FILTRO PARA ASPIRADORA P/ASPIRADORA DE TODO MODELO (72947)</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>22.66</precioUnitario>
+<descuento>6.80</descuento>
+<precioTotalSinImpuesto>61.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>61.18</baseImponible>
+<valor>7.34</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">info@comerciocompetitivo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2920103</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">008853</campoAdicional>
+</infoAdicional>
+</factura>

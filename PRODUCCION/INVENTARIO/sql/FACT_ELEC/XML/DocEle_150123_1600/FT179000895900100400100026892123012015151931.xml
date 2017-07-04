@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268921</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268921</guiaRemision>
+<razonSocialComprador>DISTRIBUIDORA DE MATERIALES DE CONSTRUCCION DISMACONCOBRE CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1792238447001</identificacionComprador>
+<totalSinImpuestos>1137.11</totalSinImpuestos>
+<totalDescuento>155.07</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1137.11</baseImponible>
+<valor>136.45</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1273.56</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>44295</codigoPrincipal>
+<descripcion>COQUILLA LANA DE VIDRIO C-ALUMINIO 1/2" x 1" x 0.90 m.</descripcion>
+<cantidad>58.00</cantidad>
+<precioUnitario>4.61</precioUnitario>
+<descuento>32.09</descuento>
+<precioTotalSinImpuesto>235.29</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDIFI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>235.29</baseImponible>
+<valor>28.23</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>44296</codigoPrincipal>
+<descripcion>COQUILLA LANA DE VIDRIO C-ALUMINIO 3/4" x 1" x 0.90 m.</descripcion>
+<cantidad>210.00</cantidad>
+<precioUnitario>4.88</precioUnitario>
+<descuento>122.98</descuento>
+<precioTotalSinImpuesto>901.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDIFI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>901.82</baseImponible>
+<valor>108.22</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">dismacon@netlife.ec</campoAdicional>
+<campoAdicional nombre="Email">ventas4@dismacon.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2228315</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">052810</campoAdicional>
+<campoAdicional nombre="Observaciones">PEDIDO POR SR.CAIBE</campoAdicional>
+</infoAdicional>
+</factura>

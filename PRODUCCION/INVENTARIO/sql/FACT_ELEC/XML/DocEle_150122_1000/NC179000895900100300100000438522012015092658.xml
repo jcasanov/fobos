@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000004385</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>ORDO EZ ASIMBAYA JUAN CARLOS</razonSocialComprador>
+<identificacionComprador>1711243608001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>003-001-000114053</numDocModificado>
+<fechaEmisionDocSustento>22/01/2015</fechaEmisionDocSustento>
+<totalSinImpuestos>12.14</totalSinImpuestos>
+<valorModificacion>13.60</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>12.14</baseImponible>
+<valor>1.46</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>MATERIAL NO ES LA MEDIDA INDICADA</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>21486</codigoInterno>
+<descripcion>ELECTRODO E-7018-B-10 3/16" ACERO DULCE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>6.33</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>6.33</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="AGA"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.33</baseImponible>
+<valor>0.76</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>21488</codigoInterno>
+<descripcion>ELECTRODO E-6013-R-15 1/8" ACERO DULCE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>5.81</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>5.81</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="AGA"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.81</baseImponible>
+<valor>0.70</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jcoa0911@yahoo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0987727644</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">64358</campoAdicional>
+</infoAdicional>
+</notaCredito>

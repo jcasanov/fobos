@@ -1,0 +1,208 @@
+DATABASE aceros
+SCREEN TITLE '  Datos Ventas   ' 
+{
+                                                             [x001] de [y001]
+
+          Compania: [c000]  [c001                                    ]
+         Localidad: [c002]  [c003                ]
+       Grupo Linea: [c004 ] [c005                          ]
+      Impuesto (%): [c006 ] [c007                ]
+
+                             Auxiliares Contables
+                             -------------------
+ Mano Obra Interna: [c008        ] [c009                                    ]
+ Mano Obra Externa: [c010        ] [c011                                    ]
+ M.O.Cont. Interno: [c012        ] [c013                                    ]
+ Repuestos Servic.: [c014        ] [c015                                    ]
+ Repuestos Externo: [c016        ] [c017                                    ]
+ Rep.Cont. Interno: [c018        ] [c019                                    ]
+ Repuestos Almacen: [c020        ] [c021                                    ]
+ Otros1 Materiales: [c022        ] [c023                                    ]
+ Otros2 Materiales: [c024        ] [c025                                    ]
+ Dev. M.O. Interna: [c026        ] [c027                                    ]
+}
+SCREEN TITLE '  Datos Costos   ' 
+{
+                                                             [x002] de [y002]
+
+ Dev. M.O. Externa: [c028        ] [c029                                    ]
+ Dev. M.O.C.Inter.: [c030        ] [c031                                    ]
+ Dev. Rep. Servic.: [c032        ] [c033                                    ]
+ Dev. Rep. Externo: [c034        ] [c035                                    ]
+ Dev. Rep.Co. Int.: [c036        ] [c037                                    ]
+ Dev. Rep. Almacen: [c038        ] [c039                                    ]
+ Dev. Otros1 Mate.: [c040        ] [c041                                    ]
+ Dev. Otros2 Mate.: [c042        ] [c043                                    ]
+ Cos. M.O. Interna: [c044        ] [c045                                    ]
+ Cos. M.O. Externa: [c046        ] [c047                                    ]
+ Cos. M.O.C.Inter.: [c048        ] [c049                                    ]
+ Cos. Rep. Servic.: [c050        ] [c051                                    ]
+ Cos. Rep. Externo: [c052        ] [c053                                    ]
+ Cos. Rep.Co. Int.: [c054        ] [c055                                    ]
+ Cos. Rep. Almacen: [c056        ] [c057                                    ]
+ Cos. Otros1 Mate.: [c058        ] [c059                                    ]
+ Cos. Otros2 Mate.: [c060        ] [c061                                    ]
+}
+SCREEN TITLE 'Datos Adicionales'
+{
+                                                             [x003] de [y003]
+
+ Pro. M.O. Interna: [c062        ] [c063                                    ]
+ Pro. M.O. Externa: [c064        ] [c065                                    ]
+ Pro. M.O.C.Inter.: [c066        ] [c067                                    ]
+ Pro. Rep. Servic.: [c068        ] [c069                                    ]
+ Pro. Rep. Externo: [c070        ] [c071                                    ]
+ Pro. Rep.Co. Int.: [c072        ] [c073                                    ]
+ Pro. Rep. Almacen: [c074        ] [c075                                    ]
+ Pro. Otros1 Mate.: [c076        ] [c077                                    ]
+ Pro. Otros2 Mate.: [c078        ] [c079                                    ]
+
+ Des. M.O. Interna: [c080        ] [c081                                    ]
+ Des. Rep. Servic.: [c082        ] [c083                                    ]
+ Des. Rep. Almacen: [c084        ] [c085                                    ]
+}
+TABLES
+ctbt043
+ATTRIBUTES
+c000 = ctbt043.b43_compania, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = FORMONLY.tit_compania, NOENTRY, UPSHIFT, REVERSE;
+c002 = ctbt043.b43_localidad, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = FORMONLY.tit_localidad, NOENTRY, UPSHIFT, REVERSE;
+c004 = ctbt043.b43_grupo_linea, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c005 = FORMONLY.tit_grupo_linea, NOENTRY, UPSHIFT, REVERSE;
+c006 = ctbt043.b43_porc_impto, AUTONEXT, UPSHIFT, REVERSE, FORMAT = '#&.##',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	INCLUDE = (0 TO 99.99);
+c007 = FORMONLY.tit_porc_impto, NOENTRY, UPSHIFT, REVERSE;
+
+c008 = ctbt043.b43_vta_mo_tal, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c009 = FORMONLY.tit_vta_mo_tal, NOENTRY, UPSHIFT, REVERSE;
+c010 = ctbt043.b43_vta_mo_ext, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c011 = FORMONLY.tit_vta_mo_ext, NOENTRY, UPSHIFT, REVERSE;
+c012 = ctbt043.b43_vta_mo_cti, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c013 = FORMONLY.tit_vta_mo_cti, NOENTRY, UPSHIFT, REVERSE;
+c014 = ctbt043.b43_vta_rp_tal, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c015 = FORMONLY.tit_vta_rp_tal, NOENTRY, UPSHIFT, REVERSE;
+c016 = ctbt043.b43_vta_rp_ext, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c017 = FORMONLY.tit_vta_rp_ext, NOENTRY, UPSHIFT, REVERSE;
+c018 = ctbt043.b43_vta_rp_cti, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c019 = FORMONLY.tit_vta_rp_cti, NOENTRY, UPSHIFT, REVERSE;
+c020 = ctbt043.b43_vta_rp_alm, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c021 = FORMONLY.tit_vta_rp_alm, NOENTRY, UPSHIFT, REVERSE;
+c022 = ctbt043.b43_vta_otros1, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c023 = FORMONLY.tit_vta_otros1, NOENTRY, UPSHIFT, REVERSE;
+c024 = ctbt043.b43_vta_otros2, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c025 = FORMONLY.tit_vta_otros2, NOENTRY, UPSHIFT, REVERSE;
+c026 = ctbt043.b43_dvt_mo_tal, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c027 = FORMONLY.tit_dvt_mo_tal, NOENTRY, UPSHIFT;
+
+c028 = ctbt043.b43_dvt_mo_ext, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c029 = FORMONLY.tit_dvt_mo_ext, NOENTRY, UPSHIFT;
+c030 = ctbt043.b43_dvt_mo_cti, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c031 = FORMONLY.tit_dvt_mo_cti, NOENTRY, UPSHIFT;
+c032 = ctbt043.b43_dvt_rp_tal, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c033 = FORMONLY.tit_dvt_rp_tal, NOENTRY, UPSHIFT;
+c034 = ctbt043.b43_dvt_rp_ext, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c035 = FORMONLY.tit_dvt_rp_ext, NOENTRY, UPSHIFT;
+c036 = ctbt043.b43_dvt_rp_cti, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c037 = FORMONLY.tit_dvt_rp_cti, NOENTRY, UPSHIFT;
+c038 = ctbt043.b43_dvt_rp_alm, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c039 = FORMONLY.tit_dvt_rp_alm, NOENTRY, UPSHIFT;
+c040 = ctbt043.b43_dvt_otros1, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c041 = FORMONLY.tit_dvt_otros1, NOENTRY, UPSHIFT;
+c042 = ctbt043.b43_dvt_otros2, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c043 = FORMONLY.tit_dvt_otros2, NOENTRY, UPSHIFT;
+c044 = ctbt043.b43_cos_mo_tal, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c045 = FORMONLY.tit_cos_mo_tal, NOENTRY, UPSHIFT;
+c046 = ctbt043.b43_cos_mo_ext, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c047 = FORMONLY.tit_cos_mo_ext, NOENTRY, UPSHIFT;
+c048 = ctbt043.b43_cos_mo_cti, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c049 = FORMONLY.tit_cos_mo_cti, NOENTRY, UPSHIFT;
+c050 = ctbt043.b43_cos_rp_tal, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c051 = FORMONLY.tit_cos_rp_tal, NOENTRY, UPSHIFT;
+c052 = ctbt043.b43_cos_rp_ext, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c053 = FORMONLY.tit_cos_rp_ext, NOENTRY, UPSHIFT;
+c054 = ctbt043.b43_cos_rp_cti, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c055 = FORMONLY.tit_cos_rp_cti, NOENTRY, UPSHIFT;
+c056 = ctbt043.b43_cos_rp_alm, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c057 = FORMONLY.tit_cos_rp_alm, NOENTRY, UPSHIFT;
+c058 = ctbt043.b43_cos_otros1, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c059 = FORMONLY.tit_cos_otros1, NOENTRY, UPSHIFT;
+c060 = ctbt043.b43_cos_otros2, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c061 = FORMONLY.tit_cos_otros2, NOENTRY, UPSHIFT;
+
+c062 = ctbt043.b43_pro_mo_tal, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c063 = FORMONLY.tit_pro_mo_tal, NOENTRY, UPSHIFT;
+c064 = ctbt043.b43_pro_mo_ext, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c065 = FORMONLY.tit_pro_mo_ext, NOENTRY, UPSHIFT;
+c066 = ctbt043.b43_pro_mo_cti, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c067 = FORMONLY.tit_pro_mo_cti, NOENTRY, UPSHIFT;
+c068 = ctbt043.b43_pro_rp_tal, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c069 = FORMONLY.tit_pro_rp_tal, NOENTRY, UPSHIFT;
+c070 = ctbt043.b43_pro_rp_ext, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c071 = FORMONLY.tit_pro_rp_ext, NOENTRY, UPSHIFT;
+c072 = ctbt043.b43_pro_rp_cti, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c073 = FORMONLY.tit_pro_rp_cti, NOENTRY, UPSHIFT;
+c074 = ctbt043.b43_pro_rp_alm, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c075 = FORMONLY.tit_pro_rp_alm, NOENTRY, UPSHIFT;
+c076 = ctbt043.b43_pro_otros1, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c077 = FORMONLY.tit_pro_otros1, NOENTRY, UPSHIFT;
+c078 = ctbt043.b43_pro_otros2, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c079 = FORMONLY.tit_pro_otros2, NOENTRY, UPSHIFT;
+
+c080 = ctbt043.b43_des_mo_tal, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c081 = FORMONLY.tit_des_mo_tal, NOENTRY, UPSHIFT, REVERSE;
+c082 = ctbt043.b43_des_rp_tal, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c083 = FORMONLY.tit_des_rp_tal, NOENTRY, UPSHIFT, REVERSE;
+c084 = ctbt043.b43_des_rp_alm, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c085 = FORMONLY.tit_des_rp_alm, NOENTRY, UPSHIFT, REVERSE;
+
+x001 = FORMONLY.vm_row_current, NOENTRY;
+y001 = FORMONLY.vm_num_rows, NOENTRY;
+x002 = FORMONLY.vm_row_current2, NOENTRY;
+y002 = FORMONLY.vm_num_rows2, NOENTRY;
+x003 = FORMONLY.vm_row_current3, NOENTRY;
+y003 = FORMONLY.vm_num_rows3, NOENTRY;
+END

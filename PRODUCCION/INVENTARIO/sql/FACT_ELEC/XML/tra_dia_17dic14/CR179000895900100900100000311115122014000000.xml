@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comprobanteRetencion id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000003111</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoCompRetencion>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionSujetoRetenido>04</tipoIdentificacionSujetoRetenido>
+<razonSocialSujetoRetenido>CSIZMADIA GERGELY TIBOR</razonSocialSujetoRetenido>
+<identificacionSujetoRetenido>1704406238001</identificacionSujetoRetenido>
+<periodoFiscal>12/2014</periodoFiscal>
+</infoCompRetencion>
+<impuestos>
+<impuesto>
+<codigo>1</codigo>
+<codigoRetencion>312</codigoRetencion>
+<baseImponible>1160.97</baseImponible>
+<porcentajeRetener>1.00</porcentajeRetener>
+<valorRetenido>11.60</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>009001000104002</numDocSustento>
+<fechaEmisionDocSustento>15/12/2014</fechaEmisionDocSustento>
+</impuesto>
+</impuestos>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2387938</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000134</campoAdicional>
+</infoAdicional>
+</comprobanteRetencion>

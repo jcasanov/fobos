@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000022080</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>CUBIERTAS DEL ECUADOR KU-BIEC S. A.</razonSocialComprador>
+<identificacionComprador>1791299035001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000102839</numDocModificado>
+<fechaEmisionDocSustento>27/10/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>479.58</totalSinImpuestos>
+<valorModificacion>537.13</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>479.58</baseImponible>
+<valor>57.55</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>REFACTURACION: CAMBIO DE FECHA</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>93076</codigoInterno>
+<descripcion>SIERRA CIRCULAR 6370-21 CORTE SECO DE METAL 13 AMP DISCO DE 8" C/ MALETIN</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>563.50</precioUnitario>
+<descuento>140.88</descuento>
+<precioTotalSinImpuesto>422.62</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>422.62</baseImponible>
+<valor>50.71</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>93105</codigoInterno>
+<descripcion>DISCO PARA SIERRA 48-40-4515 DE 8" 42 DIENTES DE CARBURO P/ LA 6370-20/21</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>75.95</precioUnitario>
+<descuento>18.99</descuento>
+<precioTotalSinImpuesto>56.96</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>56.96</baseImponible>
+<valor>6.84</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">esalas@kubiec.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2150300</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">6925</campoAdicional>
+</infoAdicional>
+</notaCredito>

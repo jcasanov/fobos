@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091992</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091992</guiaRemision>
+<razonSocialComprador>FABRICA DE ENVASES S.A. FADESA</razonSocialComprador>
+<identificacionComprador>0990551405001</identificacionComprador>
+<totalSinImpuestos>183.79</totalSinImpuestos>
+<totalDescuento>19.98</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>183.79</baseImponible>
+<valor>22.05</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>205.84</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>97612</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS 4262130 CAMPEON BLANCO C/ASIENTO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>51.24</precioUnitario>
+<descuento>10.25</descuento>
+<precioTotalSinImpuesto>92.23</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>92.23</baseImponible>
+<valor>11.07</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101107</codigoPrincipal>
+<descripcion>TUBO ABASTO-LLAVE ANGULAR INODORO 7590306 CON MANGUERA DE 1/2" x 15/16" x 12"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>7.62</precioUnitario>
+<descuento>1.52</descuento>
+<precioTotalSinImpuesto>13.72</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>13.72</baseImponible>
+<valor>1.65</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>27306</codigoPrincipal>
+<descripcion>EMPAQUE SC001319000100 CON ANILLO DE CERA P/ WC</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>2.47</precioUnitario>
+<descuento>0.25</descuento>
+<precioTotalSinImpuesto>4.69</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.69</baseImponible>
+<valor>0.56</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>27893</codigoPrincipal>
+<descripcion>TORNILLO 3011000 SET ANCLAJE TAZA PISO WC</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1.56</precioUnitario>
+<descuento>0.16</descuento>
+<precioTotalSinImpuesto>2.96</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="PAR"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.96</baseImponible>
+<valor>0.36</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>68746</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA DE PARED PREPONCHADO CS0057101301CE SHELBY BLANCO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>11.22</precioUnitario>
+<descuento>2.24</descuento>
+<precioTotalSinImpuesto>20.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>20.20</baseImponible>
+<valor>2.42</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>24129</codigoPrincipal>
+<descripcion>URINARIO DE PARED 7756130 COLBY PLUS BLANCO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>55.55</precioUnitario>
+<descuento>5.56</descuento>
+<precioTotalSinImpuesto>49.99</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>49.99</baseImponible>
+<valor>6.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturaelectronica@fadesa.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2445266</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000419</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C.0114996-SOLICIT.POR SR. GONZALO CRUZ</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025168</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>09/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>CYFOIL CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1791804619001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000175870</numDocModificado>
+<fechaEmisionDocSustento>15/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>1584.00</totalSinImpuestos>
+<valorModificacion>1774.08</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>1584.00</baseImponible>
+<valor>190.08</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 267479 CYFOIL CIA MAT NO ENTRG Y NFA</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>5456</codigoInterno>
+<descripcion>TUBO GALVANIZADO (POSTE) TIPO "T" DE 1-1/4" (31.8mm.) EXTERIOR 1.8mm. ESPESOR</descripcion>
+<cantidad>26.00</cantidad>
+<precioUnitario>13.20</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>343.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>343.20</baseImponible>
+<valor>41.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>5456</codigoInterno>
+<descripcion>TUBO GALVANIZADO (POSTE) TIPO "T" DE 1-1/4" (31.8mm.) EXTERIOR 1.8mm. ESPESOR</descripcion>
+<cantidad>94.00</cantidad>
+<precioUnitario>13.20</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1240.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1240.80</baseImponible>
+<valor>148.90</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacion@cyfoil.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">6018634/35</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">35383</campoAdicional>
+</infoAdicional>
+</notaCredito>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176434</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>30/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176434</guiaRemision>
+<razonSocialComprador>BUSTOS VELIZ EDIZON FERNANDO</razonSocialComprador>
+<identificacionComprador>1711411098001</identificacionComprador>
+<totalSinImpuestos>1559.90</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1559.90</baseImponible>
+<valor>187.19</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1747.09</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5524</codigoPrincipal>
+<descripcion>TUBO NEGRO ASTM A-53  TIPO "T" DE 3" x 5.2mm. x 6.40 m.</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>109.90</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>549.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>549.50</baseImponible>
+<valor>65.94</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5520</codigoPrincipal>
+<descripcion>TUBO NEGRO ASTM A-53  TIPO "T" DE 2" x 6 m.</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>49.28</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>246.40</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>246.40</baseImponible>
+<valor>29.57</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5526</codigoPrincipal>
+<descripcion>TUBO NEGRO ASTM A-53  TIPO "T" DE 4" x 6mm. x 6.40 m.</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>152.80</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>764.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>764.00</baseImponible>
+<valor>91.68</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">    alianza.jfh@live.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3103359</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">058813</campoAdicional>
+</infoAdicional>
+</factura>

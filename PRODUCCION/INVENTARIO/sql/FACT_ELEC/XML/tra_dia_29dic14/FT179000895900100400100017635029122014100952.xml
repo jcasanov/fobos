@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176350</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>29/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176350</guiaRemision>
+<razonSocialComprador>MAINCOPETRO</razonSocialComprador>
+<identificacionComprador>1791775309001</identificacionComprador>
+<totalSinImpuestos>115.85</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>115.85</baseImponible>
+<valor>13.90</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>129.75</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>14384</codigoPrincipal>
+<descripcion>ACEITE PARA EQUIPOS NU CLEAR CLARO (S/ENVASE) (41585)</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>21.01</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>105.05</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="GALON"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>105.05</baseImponible>
+<valor>12.61</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21663</codigoPrincipal>
+<descripcion>ENVASE PLASTICO DESCARTABLE DE 1 Gln.</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>2.16</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>10.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>10.80</baseImponible>
+<valor>1.30</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">lbozamaincopetro@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2435540</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">027347</campoAdicional>
+</infoAdicional>
+</factura>

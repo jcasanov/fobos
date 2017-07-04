@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131839</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>29/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131839</guiaRemision>
+<razonSocialComprador>RIOS SHUNTA PAUL ANTONIO</razonSocialComprador>
+<identificacionComprador>0501982029001</identificacionComprador>
+<totalSinImpuestos>353.13</totalSinImpuestos>
+<totalDescuento>48.15</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>353.13</baseImponible>
+<valor>42.38</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>395.51</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>33568</codigoPrincipal>
+<descripcion>CAJA TERMICA COMPLETA GMC 75 DE 34 A 50 AMPERIOS P/ 15HP 220-3-60</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>357.00</precioUnitario>
+<descuento>42.84</descuento>
+<precioTotalSinImpuesto>314.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="LG IND"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>314.16</baseImponible>
+<valor>37.70</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2128</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150  X 45° DE 4"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>44.28</precioUnitario>
+<descuento>5.31</descuento>
+<precioTotalSinImpuesto>38.97</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>38.97</baseImponible>
+<valor>4.68</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">rpaul_a@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0991193029</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064017</campoAdicional>
+</infoAdicional>
+</factura>

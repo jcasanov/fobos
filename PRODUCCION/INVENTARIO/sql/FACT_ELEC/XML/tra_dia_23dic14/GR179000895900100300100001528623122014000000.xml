@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000015286</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<dirPartida>GUALBERTO PEREZ E1-88 ENTRE MALDONADO Y NAPO</dirPartida>
+<razonSocialTransportista>SERGIO QUINCHE</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>1103687586</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>23/12/2014</fechaIniTransporte>
+<fechaFinTransporte>23/12/2014</fechaFinTransporte>
+<placa>PBX-9975</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1705007233001</identificacionDestinatario>
+<razonSocialDestinatario>AREVALO MARCILLO BEATRIZ ELENA</razonSocialDestinatario>
+<dirDestinatario>BODEGA INCHALILLO</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>22/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>26923</codigoInterno>
+<descripcion>TUBO ABASTO- LLAVE ANGULAR LAVABO E262.04 DH-CR FLEXIBLE DE 12" (PAR)</descripcion>
+<cantidad>10.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="MODELO" valor="E262.04 DH-CR"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>68746</codigoInterno>
+<descripcion>LAVABO DE PORCELANA DE PARED PREPONCHADO 5575130 SHELBY BLANCO</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="MODELO" valor="5575130"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>92841</codigoInterno>
+<descripcion>LAVABO DE PORCELANA CON PEDESTAL PREPONCHADO J5586065 CHELSEA CHERRY</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="MODELO" valor="J5576065"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>94334</codigoInterno>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA OLMO PRIMERA</descripcion>
+<cantidad>21.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="OLMO PREMIUM"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>94799</codigoInterno>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA NOVA PINO ESTANDAR</descripcion>
+<cantidad>11.50</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="NOVA PINO"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>97612</codigoInterno>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS 4262130 CAMPEON BLANCO C/ASIENTO</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="MODELO" valor="4262130"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>99345</codigoInterno>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS JS002291065 EVOLUTION CHERRY ASTO. MONTECRISTO</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="MODELO" valor="JS002291065"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2334749</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">047615</campoAdicional>
+</infoAdicional>
+</guiaRemision>

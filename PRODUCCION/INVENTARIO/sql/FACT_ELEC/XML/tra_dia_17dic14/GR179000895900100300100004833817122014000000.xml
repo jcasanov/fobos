@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048338</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>GEOVANNY CALLES S/N Y LUIS VACARI</dirEstablecimiento>
+<dirPartida>GUALBERTO PEREZ E1-88 ENTRE MALDONADO Y NAPO</dirPartida>
+<razonSocialTransportista>SERGIO QUINCHE</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>1103687586</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>17/12/2014</fechaIniTransporte>
+<fechaFinTransporte>17/12/2014</fechaFinTransporte>
+<placa>PBX-9975</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1721088571001</identificacionDestinatario>
+<razonSocialDestinatario>QUIMBIAMBA IMBAQUINGO MILTON JAVIER</razonSocialDestinatario>
+<dirDestinatario>GEOVANNY CALLE VIA A MARIANAS</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>15/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>102762</codigoInterno>
+<descripcion>PORCELANA PARA CERAMICA GROUTEX POLIMERO PF S/A CAFE OSCURO  (2KG.)</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="INTACO" valor="INTACO"/>
+<detAdicional nombre="GROUTEX POLIMERO PF" valor="GROUTEX POLIMERO PF"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>98665</codigoInterno>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA MINDO BEIGE ESTANDAR</descripcion>
+<cantidad>8.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="MINDO BEIGE STANDARD" valor="MINDO BEIGE STANDARD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0981297433</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">061280</campoAdicional>
+</infoAdicional>
+</guiaRemision>

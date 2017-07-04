@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000034038</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV. GUILLERMO PAREJA, EDF. SOLBANCO</dirEstablecimiento>
+<dirPartida>AV. JUAN TANCA MARENGO KM.1.7</dirPartida>
+<razonSocialTransportista>MANUEL MAGALLANES (ACERO COMERCIAL .S.A)</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>15/12/2014</fechaIniTransporte>
+<fechaFinTransporte>15/12/2014</fechaFinTransporte>
+<placa>  GSC-8976</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0990215456001</identificacionDestinatario>
+<razonSocialDestinatario>CONSTRUCTORA THALIA VICTORIA S.A.</razonSocialDestinatario>
+<dirDestinatario>VIA A LA COSTA URB:PORTAL AL SOL</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>09/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>26073</codigoInterno>
+<descripcion>GRIFERIA DE DUCHA E109/26 CR "LUMINA" CROMO</descripcion>
+<cantidad>21.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="E109/26-CR" valor="E109/26-CR"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>26129</codigoInterno>
+<descripcion>GRIFERIA DE LAVABO 4" E192/26 CR   "LUMINA" CROMO</descripcion>
+<cantidad>20.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="E192/26-CR" valor="E192/26-CR"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>41797</codigoInterno>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS ELONGADO E138-BO NAPOLI BONE</descripcion>
+<cantidad>30.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="E138-BO" valor="E138-BO"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+<campoAdicional nombre="telefono-movil">2273222</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">002833</campoAdicional>
+</infoAdicional>
+</guiaRemision>

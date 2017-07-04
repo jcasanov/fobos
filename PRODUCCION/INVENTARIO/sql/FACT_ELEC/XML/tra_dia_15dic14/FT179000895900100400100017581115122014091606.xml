@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175811</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>PANAMERICANA NORTE N73-170</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175811</guiaRemision>
+<razonSocialComprador>AUTOELEVACION CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1792019761001</identificacionComprador>
+<totalSinImpuestos>3625.17</totalSinImpuestos>
+<totalDescuento>47.11</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>3578.06</baseImponible>
+<valor>429.37</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>4007.43</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>103117</codigoPrincipal>
+<descripcion>FLEXOMETRO 48-22-5225 MAGNETICO DE 8 m.</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>38.30</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>153.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>153.20</baseImponible>
+<valor>18.38</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103124</codigoPrincipal>
+<descripcion>FLEXOMETRO 42-22-5306 DE 5 Metros, UNIDAD EN PIES/PULGADAS</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>29.53</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>118.12</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>118.12</baseImponible>
+<valor>14.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>93817</codigoPrincipal>
+<descripcion>MANDRIL - PORTABROCA PARA TALADRO 49-22-1550 KIT DE MANDRIL Y ADAPT. 3/4" A 1-1/4" MT P/TALADRO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>158.55</precioUnitario>
+<descuento>23.78</descuento>
+<precioTotalSinImpuesto>134.77</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>134.77</baseImponible>
+<valor>16.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150170</codigoPrincipal>
+<descripcion>TALADRO DE BASE ELECTROMAGNETICA 4208-1 INCLUYE MOTOR 4297-1 Y BASE 4203</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2408.62</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2408.62</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2408.62</baseImponible>
+<valor>289.03</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150078</codigoPrincipal>
+<descripcion>BROCAS JUEGOS 48-89-1105 TITANIO HS METAL (20 Pzs.)</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>46.65</precioUnitario>
+<descuento>23.33</descuento>
+<precioTotalSinImpuesto>209.92</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>209.92</baseImponible>
+<valor>25.19</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102392</codigoPrincipal>
+<descripcion>AMOLADORA A BATERIA 2780-22 FUEL M-18 DE 4-1/2" / 5" S/SEGURO DE SWITCH 8500 RPM.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>553.43</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>553.43</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>553.43</baseImponible>
+<valor>66.41</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000269021</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000269021</guiaRemision>
+<razonSocialComprador>CUMBICOS BETANCOURT EDWIN IVAN</razonSocialComprador>
+<identificacionComprador>1103330195001</identificacionComprador>
+<totalSinImpuestos>1288.84</totalSinImpuestos>
+<totalDescuento>227.45</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1288.84</baseImponible>
+<valor>154.66</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1443.50</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102218</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 MACHALILLA CREMA PRIMERA</descripcion>
+<cantidad>51.00</cantidad>
+<precioUnitario>9.19</precioUnitario>
+<descuento>70.30</descuento>
+<precioTotalSinImpuesto>398.39</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>398.39</baseImponible>
+<valor>47.81</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100775</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA AMAZONAS BLANCO SEGUNDA</descripcion>
+<cantidad>60.00</cantidad>
+<precioUnitario>7.31</precioUnitario>
+<descuento>65.79</descuento>
+<precioTotalSinImpuesto>372.81</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>372.81</baseImponible>
+<valor>44.74</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100479</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA AMAGUANIA AZUL PRIMERA</descripcion>
+<cantidad>30.00</cantidad>
+<precioUnitario>10.15</precioUnitario>
+<descuento>45.68</descuento>
+<precioTotalSinImpuesto>258.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>258.82</baseImponible>
+<valor>31.06</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100489</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA AMAGUANIA VERDE PRIMERA</descripcion>
+<cantidad>30.00</cantidad>
+<precioUnitario>10.15</precioUnitario>
+<descuento>45.68</descuento>
+<precioTotalSinImpuesto>258.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>258.82</baseImponible>
+<valor>31.06</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">iviedcum-974@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2959909</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">057713</campoAdicional>
+<campoAdicional nombre="Observaciones">PIDE SR. CUMBICOS</campoAdicional>
+</infoAdicional>
+</factura>

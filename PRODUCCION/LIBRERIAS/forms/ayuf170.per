@@ -3,21 +3,20 @@ SCREEN
 {
  CODIGOS DEL SRI PARA PORCENTAJES DE RETENCION
 
- Tipo Retención: [c|c000                ]
-     Porcentaje: [c001  ] %                                [c010 ] de [c011 ]
- [c020  |c021                                    |c022      |c023      |d|e|f]
-[c030  |c031                                    |c032      |c033      |g|h|i]
-[c030  |c031                                    |c032      |c033      |g|h|i]
-[c030  |c031                                    |c032      |c033      |g|h|i]
-[c030  |c031                                    |c032      |c033      |g|h|i]
-[c030  |c031                                    |c032      |c033      |g|h|i]
-[c030  |c031                                    |c032      |c033      |g|h|i]
-[c030  |c031                                    |c032      |c033      |g|h|i]
-[c030  |c031                                    |c032      |c033      |g|h|i]
-[c030  |c031                                    |c032      |c033      |g|h|i]
-[c030  |c031                                    |c032      |c033      |g|h|i]
-       [c040                                                          ]
-       [c040                                                          ]
+ Tipo Retención: [c|c000                ]              Porcentaje: [c001  ] %
+
+                                                           [c010 ] de [c011 ]
+ [c020  |c021                                      |c022      |c023      |d|e]
+[c030  |c031                                      |c032      |c033      |f|g]
+[c030  |c031                                      |c032      |c033      |f|g]
+[c030  |c031                                      |c032      |c033      |f|g]
+[c030  |c031                                      |c032      |c033      |f|g]
+[c030  |c031                                      |c032      |c033      |f|g]
+[c030  |c031                                      |c032      |c033      |f|g]
+[c030  |c031                                      |c032      |c033      |f|g]
+[c030  |c031                                      |c032      |c033      |f|g]
+[c030  |c031                                      |c032      |c033      |f|g]
+[c030  |c031                                      |c032      |c033      |f|g]
 
 }
 TABLES
@@ -37,7 +36,6 @@ c022 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
 c023 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
 d    = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
 e    = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
-f    = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
 
 c030 = ordt003.c03_codigo_sri, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
 c031 = ordt003.c03_concepto_ret, NOENTRY, SCROLL, OPTIONS = '-nolist';
@@ -45,16 +43,11 @@ c032 = ordt003.c03_fecha_ini_porc, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
 	OPTIONS = '-nolist';
 c033 = ordt003.c03_fecha_fin_porc, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
 	OPTIONS = '-nolist';
-g    = ordt003.c03_tipo_fuente, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
-h    = ordt003.c03_estado, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
-i    = FORMONLY.imp_asig, NOENTRY, UPSHIFT,
+f    = ordt003.c03_estado, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+g    = FORMONLY.imp_asig, NOENTRY, UPSHIFT,
 	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N',
 	INCLUDE = ('S', 'N'), OPTIONS = '-nolist';
-
-c040 = FORMONLY.concepto, NOENTRY, REVERSE, UPSHIFT, WORDWRAP COMPRESS;
 END
 INSTRUCTIONS
-DELIMITERS '||'
 SCREEN RECORD rh_sri[10] (c03_codigo_sri, c03_concepto_ret, c03_fecha_ini_porc,
-				c03_fecha_fin_porc, c03_tipo_fuente, c03_estado,
-				imp_asig)
+				c03_fecha_fin_porc, c03_estado, imp_asig)

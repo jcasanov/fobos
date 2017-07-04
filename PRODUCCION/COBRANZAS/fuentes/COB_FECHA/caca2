@@ -1,0 +1,146 @@
+FUNCTION muestra_detalle()
+DEFINE i, col		INTEGER
+DEFINE cod_aux		INTEGER
+DEFINE pos_pan, pos_arr	INTEGER
+DEFINE flag_p, flag_d	SMALLINT
+DEFINE col1, col2	SMALLINT
+DEFINE pos1, pos2	CHAR(4)
+DEFINE comando		VARCHAR(100)
+
+LET pos_pan = 1
+LET pos_arr = 1
+LET col     = vm_columna_1
+LET col1    = vm_columna_1
+LET col2    = vm_columna_2
+LET pos1    = rm_orden[col1]
+LET pos2    = rm_orden[col2]
+LET flag_p  = 0
+LET flag_d  = 0
+CALL muestrar_contadores_det(0, vm_num_rows)
+WHILE TRUE
+	LET int_flag = 0
+	CALL set_count(vm_num_rows)
+	DISPLAY ARRAY rm_det TO rm_det.*
+		ON KEY(INTERRUPT)
+			EXIT DISPLAY
+		ON KEY(F5)
+			LET i = arr_curr()
+			CALL muestra_documentos(rm_det[i].cod_des,
+						rm_par.ind_venc,
+						rm_det[i].cod_loc)
+			RUN comando
+		ON KEY(F6)
+			CALL control_precision()
+			LET pos_pan        = scr_line()
+			LET pos_arr        = arr_curr()
+			LET col            = col1
+			LET vm_columna_1   = col1
+			LET vm_columna_2   = col2
+			LET rm_orden[col1] = pos1
+			LET rm_orden[col2] = pos2
+			LET flag_p         = 1
+			EXIT DISPLAY
+		ON KEY(F7)
+			CALL muestra_grafico_barras()
+		ON KEY(F8)
+			CALL control_imprimir()
+		ON KEY(F15)
+			LET col      = 1
+			LET int_flag = 2
+			EXIT DISPLAY
+		ON KEY(F16)
+			LET col      = 2
+			LET int_flag = 2
+			EXIT DISPLAY
+		ON KEY(F17)
+			LET col      = 3
+			LET int_flag = 2
+			EXIT DISPLAY
+		ON KEY(F18)
+			LET col      = 4
+			LET int_flag = 2
+			EXIT DISPLAY
+		ON KEY(F19)
+			LET col      = 5
+			LET int_flag = 2
+			EXIT DISPLAY
+		ON KEY(F20)
+			LET col      = 6
+			LET int_flag = 2
+			EXIT DISPLAY
+		ON KEY(F21)
+			LET col      = 7
+			LET int_flag = 2
+			EXIT DISPLAY
+		ON KEY(F22)
+			LET col      = 8
+			LET int_flag = 2
+			EXIT DISPLAY
+		ON KEY(F23)
+			LET col      = 9
+			LET int_flag = 2
+			EXIT DISPLAY
+		BEFORE DISPLAY
+			--#CALL dialog.keysetlabel("ACCEPT","")
+			CALL dialog.setcurrline(pos_pan, pos_arr)
+			CALL muestrar_contadores_det(pos_arr, vm_num_rows)
+		BEFORE ROW
+			LET i = arr_curr()
+			CALL muestrar_contadores_det(i, vm_num_rows)
+			IF flag_d THEN
+				CALL dialog.setcurrline(pos_pan, pos_arr)
+				CALL muestrar_contadores_det(pos_arr,
+								vm_num_rows)
+				LET flag_d = 0
+			END IF
+		AFTER DISPLAY
+			CONTINUE DISPLAY
+	END DISPLAY
+	IF int_flag = 1 THEN
+		EXIT WHILE
+	END IF
+	IF col <> vm_columna_1 THEN
+		LET vm_columna_2           = vm_columna_1 
+		LET rm_orden[vm_columna_2] = rm_orden[vm_columna_1]
+		LET vm_columna_1           = col
+	END IF
+	IF rm_orden[vm_columna_1] = 'ASC' THEN
+		LET rm_orden[vm_columna_1] = 'DESC'
+	ELSE
+		LET rm_orden[vm_columna_1] = 'ASC'
+	END IF
+	CASE flag_p
+		WHEN 1
+			LET col            = col1
+			LET vm_columna_1   = col1
+			LET vm_columna_2   = col2
+			LET rm_orden[col1] = pos1
+			LET rm_orden[col2] = pos2
+			LET flag_p         = 0
+		WHEN 0
+			LET col1   = vm_columna_1
+			LET col2   = vm_columna_2
+			LET pos1   = rm_orden[col1]
+			LET pos2   = rm_orden[col2]
+			LET flag_d = 1
+	END CASE
+	IF flag_d THEN
+		LET pos_pan = scr_line()
+		LET pos_arr = arr_curr()
+		LET cod_aux = rm_det[pos_arr].cod_des
+	END IF
+	CALL carga_arreglo_trabajo()
+	IF flag_d THEN
+		IF vm_num_rows > fgl_scr_size('rm_det') THEN
+			FOR i = 1 TO vm_num_rows
+				IF cod_aux = rm_det[i].cod_des THEN
+					LET pos_arr = i
+					EXIT FOR
+				END IF
+			END FOR
+		END IF
+	END IF
+END WHILE
+CALL muestrar_contadores_det(0, vm_num_rows)
+
+END FUNCTION

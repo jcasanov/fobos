@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000007783</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>12 DE OCTUBRE Y ROCA</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>TRIBOILGAS</razonSocialComprador>
+<identificacionComprador>1791330943001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>003-001-000131543</numDocModificado>
+<fechaEmisionDocSustento>15/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>68.35</totalSinImpuestos>
+<valorModificacion>76.55</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>68.35</baseImponible>
+<valor>8.20</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>CAMBIO DIRECCION CLIENTE</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>93105</codigoInterno>
+<descripcion>DISCO PARA SIERRA 48-40-4515 DE 8" 42 DIENTES DE CARBURO P/ LA 6370-20/21</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>75.95</precioUnitario>
+<descuento>7.60</descuento>
+<precioTotalSinImpuesto>68.35</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>68.35</baseImponible>
+<valor>8.20</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">238695</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">16421</campoAdicional>
+</infoAdicional>
+</notaCredito>

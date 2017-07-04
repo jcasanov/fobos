@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comprobanteRetencion id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048488</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoCompRetencion>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionSujetoRetenido>04</tipoIdentificacionSujetoRetenido>
+<razonSocialSujetoRetenido>BECERRA VALBUENA CLAUDIA DEL PILAR</razonSocialSujetoRetenido>
+<identificacionSujetoRetenido>1721919742001</identificacionSujetoRetenido>
+<periodoFiscal>01/2015</periodoFiscal>
+</infoCompRetencion>
+<impuestos>
+<impuesto>
+<codigo>1</codigo>
+<codigoRetencion>312</codigoRetencion>
+<baseImponible>233.60</baseImponible>
+<porcentajeRetener>1.00</porcentajeRetener>
+<valorRetenido>2.34</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>002001000002045</numDocSustento>
+<fechaEmisionDocSustento>06/01/2015</fechaEmisionDocSustento>
+</impuesto>
+<impuesto>
+<codigo>2</codigo>
+<codigoRetencion>1</codigoRetencion>
+<baseImponible>28.03</baseImponible>
+<porcentajeRetener>30.00</porcentajeRetener>
+<valorRetenido>8.41</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>002001000002045</numDocSustento>
+<fechaEmisionDocSustento>06/01/2015</fechaEmisionDocSustento>
+</impuesto>
+</impuestos>
+<infoAdicional>
+<campoAdicional nombre="Email">claudia.becerra@diamantbec.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">6001264</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">002929</campoAdicional>
+</infoAdicional>
+</comprobanteRetencion>

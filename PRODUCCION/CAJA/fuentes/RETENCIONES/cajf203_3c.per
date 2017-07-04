@@ -1,0 +1,44 @@
+DATABASE aceros
+SCREEN
+{
+            DETALLE SOLICITUD COBRO (FACTURAS)
+            ---------------------------------
+
+  No. Solicitud: [c000  ]
+        Cliente: [c003  |c004                            ]
+                                          [c008] de [c009]
+  LC TP   Numero       Numero SRI   Fecha Emi. Valor Ret.
+ [c2|c3|c030       |c031           |c032      |c033      ]
+ [c2|c3|c030       |c031           |c032      |c033      ]
+ [c2|c3|c030       |c031           |c032      |c033      ]
+ [c2|c3|c030       |c031           |c032      |c033      ]
+ [c2|c3|c030       |c031           |c032      |c033      ]
+                                    Total ==> [c040      ]
+}
+TABLES
+cxct001
+cxct020
+cxct025
+ATTRIBUTES
+c000 = cxct025.z25_numero_sol, NOENTRY, UPSHIFT, REVERSE;
+c003 = cxct020.z20_codcli, NOENTRY, UPSHIFT;
+c004 = cxct001.z01_nomcli, NOENTRY, UPSHIFT;
+
+c008 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c009 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c2   = cxct020.z20_localidad, NOENTRY, UPSHIFT, FORMAT = '&&';
+c3   = cxct020.z20_tipo_doc, NOENTRY, UPSHIFT;
+c030 = FORMONLY.num_doc TYPE VARCHAR, NOENTRY, UPSHIFT;
+c031 = FORMONLY.num_sri TYPE VARCHAR, UPSHIFT, NOENTRY;
+c032 = cxct020.z20_fecha_emi, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c033 = FORMONLY.valor_ret TYPE DECIMAL NOT NULL, NOENTRY, UPSHIFT,
+	FORMAT = '###,##&.##', INCLUDE = (0 TO 999999.99);
+
+c040 = FORMONLY.tot_ret TYPE DECIMAL NOT NULL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '###,##&.##';
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_detsol[5] (z20_localidad, z20_tipo_doc, num_doc, num_sri,
+				z20_fecha_emi, valor_ret)

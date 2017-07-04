@@ -1,0 +1,32 @@
+DATABASE aceros
+SCREEN
+{
+  DOCUMENTOS A FAVOR DE PROVEEDORES EN TESORERIA
+ ----------------------------------------------------------
+  Nombre                       Documento    Saldo       Mo 
+ ----------------------------------------------------------
+ [c001                       ][c0][c002   ][c003      ][c1]
+ [c001                       ][c0][c002   ][c003      ][c1]
+ [c001                       ][c0][c002   ][c003      ][c1]
+ [c001                       ][c0][c002   ][c003      ][c1]
+ [c001                       ][c0][c002   ][c003      ][c1]
+ [c001                       ][c0][c002   ][c003      ][c1]
+ [c001                       ][c0][c002   ][c003      ][c1]
+ [c001                       ][c0][c002   ][c003      ][c1]
+ [c001                       ][c0][c002   ][c003      ][c1]
+ [c001                       ][c0][c002   ][c003      ][c1]
+}
+TABLES
+cxpt021
+cxpt001
+ATTRIBUTES
+c001 = p01_nomprov, UPSHIFT, REVERSE;
+c0   = p21_tipo_doc, UPSHIFT, REVERSE;
+c002 = p21_num_doc, UPSHIFT, REVERSE;
+c003 = p21_saldo, UPSHIFT, REVERSE;
+c1   = p21_moneda, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_favortes[10] (p01_nomprov, p21_tipo_doc, p21_num_doc,
+				p21_saldo, p21_moneda)

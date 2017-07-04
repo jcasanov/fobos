@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048141</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento></dirEstablecimiento>
+<dirPartida>AV LA PRENSA</dirPartida>
+<razonSocialTransportista>ACERO COMERCIAL</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>18/12/2014</fechaIniTransporte>
+<fechaFinTransporte>18/12/2014</fechaFinTransporte>
+<placa></placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1792270537001</identificacionDestinatario>
+<razonSocialDestinatario>INYCOFYI INGENIERIA Y CONSTRUCCIONES S.A.</razonSocialDestinatario>
+<dirDestinatario>INTERNO</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>10/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>16</codigoInterno>
+<descripcion>ALAMBRE GALVANIZADO N.18</descripcion>
+<cantidad>80.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="MODELO" valor="NRO. 18"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>5670</codigoInterno>
+<descripcion>TUBO PVC DESAGUE 40 PSI DE 200mm. x 6 Mts. ESPIGA CAMPANA</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="MODELO" valor="23049"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>606</codigoInterno>
+<descripcion>ARMEX 6.25 x 2.40 MTS. R-283 100 x 100 x 6 x 6mm.</descripcion>
+<cantidad>5.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="MODELO" valor="R-283 100 x 100"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">6008444</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">052719</campoAdicional>
+</infoAdicional>
+</guiaRemision>

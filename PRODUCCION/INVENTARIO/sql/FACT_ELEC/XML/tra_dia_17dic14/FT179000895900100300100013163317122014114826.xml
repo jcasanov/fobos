@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131633</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>GARCIA MORENO 580 Y COLON</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131633</guiaRemision>
+<razonSocialComprador>RODRIGUEZ RAMOS WALTER TARQUINO</razonSocialComprador>
+<identificacionComprador>0901818294001</identificacionComprador>
+<totalSinImpuestos>315.23</totalSinImpuestos>
+<totalDescuento>64.57</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>315.23</baseImponible>
+<valor>37.83</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>353.06</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99362</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA MACHALILLA BLANCO PRIMERA</descripcion>
+<cantidad>38.00</cantidad>
+<precioUnitario>8.82</precioUnitario>
+<descuento>56.98</descuento>
+<precioTotalSinImpuesto>278.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="M2" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>278.18</baseImponible>
+<valor>33.38</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100329</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 40 BIONICA BLANCO SEGUNDA</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>11.16</precioUnitario>
+<descuento>7.59</descuento>
+<precioTotalSinImpuesto>37.05</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIALTO" valor="RIALTO"/>
+<detAdicional nombre="M2" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>37.05</baseImponible>
+<valor>4.45</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2877148</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">055695</campoAdicional>
+</infoAdicional>
+</factura>

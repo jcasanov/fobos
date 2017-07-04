@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025698</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>T GUTIERREZ</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>09/01/2015</fechaIniTransporte>
+<fechaFinTransporte>10/01/2015</fechaFinTransporte>
+<placa>GSL5009</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0990169640001</identificacionDestinatario>
+<razonSocialDestinatario>INDUSTRIA ANDINA DE TRANSFORMADORES S.A.</razonSocialDestinatario>
+<dirDestinatario>KM 10.5 VIA DAULE</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>09/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>70388</codigoInterno>
+<descripcion>BROCA PARA CEMENTO 48-20-7490 (PAQ.DE 5 UNID.) SDS DE 3/16-1/4-5/16-3/8 Y 1/2</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="JUEGO"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>97901</codigoInterno>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7420 SD1 DE 1/2" X 2-3/4"</descripcion>
+<cantidad>50.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>98294</codigoInterno>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7410 SD1  DE 3/8" X 2-1/4"</descripcion>
+<cantidad>50.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">ventas@inatra.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3702700</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">004200</campoAdicional>
+</infoAdicional>
+</guiaRemision>

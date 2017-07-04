@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000034030</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>SERVIENTREGA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0991285679001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>15/12/2014</fechaIniTransporte>
+<fechaFinTransporte>16/12/2014</fechaFinTransporte>
+<placa></placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1790008959001</identificacionDestinatario>
+<razonSocialDestinatario>ACERO COMERCIAL ECUATORIANO S.A.</razonSocialDestinatario>
+<dirDestinatario>QUITO MATRIZ AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirDestinatario>
+<motivoTraslado>TRANSFERENCIAS ENTRE LOCALIDADES</motivoTraslado>
+<fechaEmisionDocSustento>15/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>100374</codigoInterno>
+<descripcion>TECLE ELECTRICO A CADENA NER020L DE 2 Ton. 230/3f BAJA VELOC. S/CADENA Y CABLE</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="KITO" valor="KITO"/>
+<detAdicional nombre="NER020L" valor="NER020L"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>15664</codigoInterno>
+<descripcion>DADOS PARA TERRAJA MANUAL P/ 12-R DE 1/2" NPT (37825)</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="RIDGID" valor="RIDGID"/>
+<detAdicional nombre="pend" valor="pend"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>15666</codigoInterno>
+<descripcion>DADOS PARA TERRAJA MANUAL P/ 12-R DE 3/4" NPT (37830)</descripcion>
+<cantidad>8.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="RIDGID" valor="RIDGID"/>
+<detAdicional nombre="pend" valor="pend"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>92982</codigoInterno>
+<descripcion>CAJA DE CONTROL 5860005000 SUBMONITOR CONT.ELECTRONICO DE 5-200 HP.</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="FRANKLIN" valor="FRANKL"/>
+<detAdicional nombre="SUBMONITOR" valor="SUBMONITOR"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">INFOGYE@ACERO.COM</campoAdicional>
+<campoAdicional nombre="telefono-movil">042683060</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000001</campoAdicional>
+</infoAdicional>
+</guiaRemision>

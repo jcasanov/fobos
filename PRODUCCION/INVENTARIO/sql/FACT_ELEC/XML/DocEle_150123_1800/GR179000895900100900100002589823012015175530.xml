@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025898</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>O CEDEÒO</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>23/01/2015</fechaIniTransporte>
+<fechaFinTransporte>24/01/2015</fechaFinTransporte>
+<placa>ADS680</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1710931997001</identificacionDestinatario>
+<razonSocialDestinatario>CEDEÒO CORNEJO JUDITH LYNEETTE</razonSocialDestinatario>
+<dirDestinatario>KM 12.5 VIA A LA COSTA - TERRANOSTRA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>21/11/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>71224</codigoInterno>
+<descripcion>TABLERO ELECTRICO P/DOS BOMBAS DE 2HP/220V/1F ALTERNADO M/A Y SUPERVISOR DE FASE</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>71476</codigoInterno>
+<descripcion>TABLERO ELECTRICO P/2 BOMBAS DE 1.5HP 220V/1F ALTERNANTE CRITICO</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">lcedeno@mbi.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">046009266</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016440</campoAdicional>
+</infoAdicional>
+</guiaRemision>

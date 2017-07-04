@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104089</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104089</guiaRemision>
+<razonSocialComprador>EPAM EMPRESA PUBLICA CANTONAL DE AGUA POTABLE, ALCANTARILLADO, MANEJO PLUVIAL Y DEPURACION DE RES</razonSocialComprador>
+<identificacionComprador>1360064440001</identificacionComprador>
+<totalSinImpuestos>139842.74</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>139842.74</baseImponible>
+<valor>16781.13</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>156623.87</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>103092</codigoPrincipal>
+<descripcion>BOMBA SUMERG AGUAS NEGRAS S2.100.200.1000.4.70M.C.332.GND.103KW/60C. ARR.DELTA (95113084)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>49985.45</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>99970.90</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>99970.90</baseImponible>
+<valor>11996.51</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103093</codigoPrincipal>
+<descripcion>BASE DE BOMBAS AUTO ACOPLE DN200 (96641489)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>2181.66</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>4363.32</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4363.32</baseImponible>
+<valor>523.60</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103094</codigoPrincipal>
+<descripcion>KIT SENSOR DE FLUJO  WIO (96294840)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>840.22</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1680.44</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1680.44</baseImponible>
+<valor>201.65</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103095</codigoPrincipal>
+<descripcion>CONTROL IO 113 (98097390)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1159.99</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2319.98</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2319.98</baseImponible>
+<valor>278.40</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103096</codigoPrincipal>
+<descripcion>KIT DE PRESION CONSTANTE CU 3X380-500V IP21  110KW  212A (96754649)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>14004.62</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>28009.24</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>28009.24</baseImponible>
+<valor>3361.11</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103097</codigoPrincipal>
+<descripcion>CONTROL Y/D 2x3x70+3G35/3mm2</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1749.43</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3498.86</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3498.86</baseImponible>
+<valor>419.86</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">052621300</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">013316</campoAdicional>
+</infoAdicional>
+</factura>

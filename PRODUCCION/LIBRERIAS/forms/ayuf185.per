@@ -1,0 +1,37 @@
+DATABASE aceros
+SCREEN
+{
+ COMPAÒIAS ENTREGAS
+                                        [c02] de [c03]
+ [c000|c001                                 |c002   |b]
+[c010|c011                                 |c012   |c]
+[c010|c011                                 |c012   |c]
+[c010|c011                                 |c012   |c]
+[c010|c011                                 |c012   |c]
+[c010|c011                                 |c012   |c]
+[c010|c011                                 |c012   |c]
+[c010|c011                                 |c012   |c]
+[c010|c011                                 |c012   |c]
+[c010|c011                                 |c012   |c]
+[c010|c011                                 |c012   |c]
+
+}
+TABLES
+rept116
+ATTRIBUTES
+c02  = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c03  = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c002 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+b    = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+
+c010 = rept116.r116_cia_trans, UPSHIFT, REVERSE;
+c011 = rept116.r116_razon_soc, UPSHIFT, REVERSE;
+c012 = FORMONLY.tit_tipo, UPSHIFT, REVERSE;
+c    = rept116.r116_estado, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+SCREEN RECORD rh_cia_ent[10] (r116_cia_trans, r116_razon_soc, tit_tipo,
+				r116_estado)

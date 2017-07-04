@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092023</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092023</guiaRemision>
+<razonSocialComprador>CABRERA VERDESOTO JESSICA TECNIAGUA</razonSocialComprador>
+<identificacionComprador>1204141103001</identificacionComprador>
+<totalSinImpuestos>401.77</totalSinImpuestos>
+<totalDescuento>113.32</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>401.77</baseImponible>
+<valor>48.21</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>449.98</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99844</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 4" 25JS15P4-PE P/1-1/2 HP 25 GPM (93752520)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>515.09</precioUnitario>
+<descuento>113.32</descuento>
+<precioTotalSinImpuesto>401.77</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>401.77</baseImponible>
+<valor>48.21</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">teg.cabrera@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2763772</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">011444</campoAdicional>
+</infoAdicional>
+</factura>

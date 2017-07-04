@@ -1,0 +1,31 @@
+DATABASE aceros
+
+SCREEN
+{
+  SUBTIPOS DE ENTIDADES
+ ----------------------------------------------
+  Tipo  Subtipo  Nombre 		
+ ----------------------------------------------
+ [c01] [c02]    [c002                         ] 
+ [c01] [c02]    [c002                         ]
+ [c01] [c02]    [c002                         ]
+ [c01] [c02]    [c002                         ]
+ [c01] [c02]    [c002                         ]
+ [c01] [c02]    [c002                         ]
+ [c01] [c02]    [c002                         ] 
+ [c01] [c02]    [c002                         ] 
+ [c01] [c02]    [c002                         ] 
+ [c01] [c02]    [c002                         ] 
+}
+
+TABLES
+gent012
+
+ATTRIBUTES
+c01 = g12_tiporeg,REVERSE;
+c02 = g12_subtipo,REVERSE;
+c002 = g12_nombre,REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_subtip[10](g12_tiporeg, g12_subtipo, g12_nombre)

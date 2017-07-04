@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000018744</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>PEC PROJECT ENGINEERING & CONSTRUCTION CIA. LTDA</razonSocialComprador>
+<identificacionComprador>1791992571001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000175287</numDocModificado>
+<fechaEmisionDocSustento>03/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>768.74</totalSinImpuestos>
+<valorModificacion>860.99</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>768.74</baseImponible>
+<valor>92.25</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 266923 PEC PROJECT REC W.LUDENIA FC</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>15663</codigoInterno>
+<descripcion>DADOS PARA TUBOS 1" A 2" H.S. NPT P/ACERO INOX. P/811A-711-815A (47790)</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>213.54</precioUnitario>
+<descuento>85.42</descuento>
+<precioTotalSinImpuesto>768.74</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>768.74</baseImponible>
+<valor>92.25</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2380660</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">38525</campoAdicional>
+</infoAdicional>
+</notaCredito>

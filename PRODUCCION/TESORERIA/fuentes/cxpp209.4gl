@@ -68,7 +68,7 @@ CREATE TEMP TABLE tmp_sri(
 		p29_num_ret		INTEGER,
 		p01_nomprov		VARCHAR(50),
 		p27_fecing		DATE,
-		p29_num_sri		CHAR(16),
+		p29_num_sri		CHAR(21),
 		p27_estado		CHAR(1)
 	)
 LET vm_tipo_doc = 'RT'

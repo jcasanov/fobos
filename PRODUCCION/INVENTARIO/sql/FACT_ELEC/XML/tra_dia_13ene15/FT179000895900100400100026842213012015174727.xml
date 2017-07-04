@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268422</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>13/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268422</guiaRemision>
+<razonSocialComprador>MEZA ESCALANTE ALVARO MIGUEL</razonSocialComprador>
+<identificacionComprador>1712210275001</identificacionComprador>
+<totalSinImpuestos>53.24</totalSinImpuestos>
+<totalDescuento>5.92</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>53.24</baseImponible>
+<valor>6.39</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>59.63</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>98524</codigoPrincipal>
+<descripcion>INDUCIDO 16-10-5375 P/ROTOMARTILLO 5375-20</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>39.25</precioUnitario>
+<descuento>3.93</descuento>
+<precioTotalSinImpuesto>35.32</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>35.32</baseImponible>
+<valor>4.24</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98525</codigoPrincipal>
+<descripcion>LLAVE 48-66-1357 P/MANDRIL DE ROTOMARTILLO 5375-20</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.39</precioUnitario>
+<descuento>0.14</descuento>
+<precioTotalSinImpuesto>1.25</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.25</baseImponible>
+<valor>0.15</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103228</codigoPrincipal>
+<descripcion>CARCASA MOTOR 31-50-5375  P/ MOD. 5375-20</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>8.22</precioUnitario>
+<descuento>0.82</descuento>
+<precioTotalSinImpuesto>7.40</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7.40</baseImponible>
+<valor>0.89</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96538</codigoPrincipal>
+<descripcion>CARBONES 22-22-1560 P/MOD.6122-30</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>3.64</precioUnitario>
+<descuento>0.73</descuento>
+<precioTotalSinImpuesto>6.55</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.55</baseImponible>
+<valor>0.79</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102340</codigoPrincipal>
+<descripcion>TAPA 44-66-5379 DEL CARBON P/ROTOMARTILLO MOD.5380-21</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1.00</precioUnitario>
+<descuento>0.20</descuento>
+<precioTotalSinImpuesto>1.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.80</baseImponible>
+<valor>0.22</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101692</codigoPrincipal>
+<descripcion>TUERCA 05-88-1500 DEL MANDRIL P/ROTOMARTILLO 5375-20</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.02</precioUnitario>
+<descuento>0.10</descuento>
+<precioTotalSinImpuesto>0.92</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.92</baseImponible>
+<valor>0.11</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">alvaromeza9@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">032518309</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">050223</campoAdicional>
+</infoAdicional>
+</factura>

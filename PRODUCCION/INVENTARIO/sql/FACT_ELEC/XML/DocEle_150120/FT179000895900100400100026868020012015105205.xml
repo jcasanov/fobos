@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268680</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268680</guiaRemision>
+<razonSocialComprador>SUINCO E INGIN.  CIA.LTDA.</razonSocialComprador>
+<identificacionComprador>1790886824001</identificacionComprador>
+<totalSinImpuestos>179.05</totalSinImpuestos>
+<totalDescuento>24.14</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>179.05</baseImponible>
+<valor>21.49</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>200.54</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5492</codigoPrincipal>
+<descripcion>TUBO GALV. S-UNION ISO II TIPO "T" DE 1/2" x 6 m. ESPESOR 2 mm.</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>10.56</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>42.24</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>42.24</baseImponible>
+<valor>5.07</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>8330</codigoPrincipal>
+<descripcion>LLAVE DE MANGUERA E436.04 BR DE 1/2" PESADA MANIJA EN T</descripcion>
+<cantidad>15.00</cantidad>
+<precioUnitario>10.73</precioUnitario>
+<descuento>24.14</descuento>
+<precioTotalSinImpuesto>136.81</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>136.81</baseImponible>
+<valor>16.42</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">suinco@cablemodem.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2599591</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">029002</campoAdicional>
+<campoAdicional nombre="Observaciones">PEDIDO ING. GODOY</campoAdicional>
+</infoAdicional>
+</factura>

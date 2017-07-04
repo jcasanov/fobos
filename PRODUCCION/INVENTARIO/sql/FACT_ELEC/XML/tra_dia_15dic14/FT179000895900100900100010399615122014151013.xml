@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000103996</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>VILLA CLUB ET BOREAL MZ 9 V 925</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>009-001-000103996</guiaRemision>
+<razonSocialComprador>FLORES GUEVARA ANGELA</razonSocialComprador>
+<identificacionComprador>0900346172   </identificacionComprador>
+<totalSinImpuestos>285.13</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>285.13</baseImponible>
+<valor>34.22</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>319.35</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>41797</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS ELONGADO E138-BO NAPOLI BONE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>145.07</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>145.07</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>145.07</baseImponible>
+<valor>17.41</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>91288</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA CON PEDESTAL PREPONCHADO E227-BO BARI  BONE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>47.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>47.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>47.00</baseImponible>
+<valor>5.64</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70966</codigoPrincipal>
+<descripcion>GRIFERIA DE LAVABO 1-H E182/B1 CR ARIZONA CROMO MONOCOMANDO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>65.79</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>65.79</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>65.79</baseImponible>
+<valor>7.89</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>27473</codigoPrincipal>
+<descripcion>LLAVE ANGULAR E269.01 DH CR P/MANGUERA CON NEPLO Y ROSETA</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>6.66</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>13.32</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>13.32</baseImponible>
+<valor>1.60</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>26935</codigoPrincipal>
+<descripcion>TUBO ABASTO-LLAVE ANGULAR INODORO E266.02 DH-CR FLEXIBLE DE 12"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>10.07</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>10.07</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>10.07</baseImponible>
+<valor>1.21</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>91367</codigoPrincipal>
+<descripcion>EMPAQUE AC.1 ANILLO DE CERA P/ INODOROS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2.66</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2.66</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.66</baseImponible>
+<valor>0.32</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>93876</codigoPrincipal>
+<descripcion>TORNILLO EPER-DH C/TACOS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.22</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1.22</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="PAR" valor="PAR"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.22</baseImponible>
+<valor>0.15</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

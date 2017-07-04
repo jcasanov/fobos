@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000034173</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>MARTINEZ</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>0911586824</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>23/12/2014</fechaIniTransporte>
+<fechaFinTransporte>24/12/2014</fechaFinTransporte>
+<placa>GSC1135</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0911586824</identificacionDestinatario>
+<razonSocialDestinatario>MARTINEZ TENESACA FRANCISCO</razonSocialDestinatario>
+<dirDestinatario>RETIRAN</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>20/11/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>101456</codigoInterno>
+<descripcion>BOMBA CENTRIF MULTIETAPA C-MOTOR CR3-11 2HP ROSCADA 220-277D/380-480Y/3/60 (98493506)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="MODELO" valor="98493506"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>92660</codigoInterno>
+<descripcion>BOMBA CENTRIF STANDARD C-MOTOR GA-13 25HP 3 x 2-1/2 3500 RPM 220/440/3F/60C</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MARK G"/>
+<detAdicional nombre="MODELO" valor="76 MM"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2286926</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">009555</campoAdicional>
+</infoAdicional>
+</guiaRemision>

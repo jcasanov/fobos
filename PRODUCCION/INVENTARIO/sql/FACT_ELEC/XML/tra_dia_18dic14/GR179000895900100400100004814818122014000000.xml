@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048148</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento></dirEstablecimiento>
+<dirPartida>AV LA PRENSA</dirPartida>
+<razonSocialTransportista>ACERO COMERCIAL</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>18/12/2014</fechaIniTransporte>
+<fechaFinTransporte>18/12/2014</fechaFinTransporte>
+<placa></placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1792063639001</identificacionDestinatario>
+<razonSocialDestinatario>INCORVALDI S.A.</razonSocialDestinatario>
+<dirDestinatario>INTERNO</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>08/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>2114</codigoInterno>
+<descripcion>CODO GALV. CLASE 150  X 45° DE 3/4"</descripcion>
+<cantidad>30.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="MODELO" valor="DE  3/4" X 45°"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>3178</codigoInterno>
+<descripcion>NEPLO GALVANIZADO DE 3/4" x 2"</descripcion>
+<cantidad>10.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="MODELO" valor=" DE 3/4" x 2""/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>3188</codigoInterno>
+<descripcion>NEPLO GALVANIZADO DE 3/4" x 5"</descripcion>
+<cantidad>10.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="MODELO" valor=" DE 3/4"  x 5""/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>4604</codigoInterno>
+<descripcion>TEE GALV. CLASE 150 DE 3/4"</descripcion>
+<cantidad>25.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="MODELO" valor="TEE"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>5408</codigoInterno>
+<descripcion>TUBO GALV. ASTM A-53   TIPO "T" DE 3/4" x 6 m.  ESPESOR 2.65 mm.</descripcion>
+<cantidad>15.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="MODELO" valor=" 3/4" x 6 M"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>6321</codigoInterno>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 3/4"</descripcion>
+<cantidad>10.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="MODELO" valor=" DE 3/4""/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>92074</codigoInterno>
+<descripcion>CODO GALV. CLASE 150 90° DE 3/4"</descripcion>
+<cantidad>30.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="MODELO" valor="DE 3/4""/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>95324</codigoInterno>
+<descripcion>UNION GALV. CLASE 150 DE 3/4"</descripcion>
+<cantidad>20.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="MODELO" valor="DE 3/4""/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2242150</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064030</campoAdicional>
+</infoAdicional>
+</guiaRemision>

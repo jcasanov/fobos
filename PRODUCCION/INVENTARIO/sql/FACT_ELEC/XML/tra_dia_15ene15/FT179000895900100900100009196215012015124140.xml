@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091962</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091962</guiaRemision>
+<razonSocialComprador>DELGADO MONTANO ROBERTO CARLOS</razonSocialComprador>
+<identificacionComprador>1309628699</identificacionComprador>
+<totalSinImpuestos>368.02</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>368.02</baseImponible>
+<valor>44.16</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>412.18</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>69310</codigoPrincipal>
+<descripcion>LAVAPLATOS DE ACERO INOXIDABLE 11107029 STYLO 2C 83x48.5cm MODULAR INCLUYE VALVULA 3-1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>135.12</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>135.12</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TEKA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>135.12</baseImponible>
+<valor>16.21</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>71686</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL UNA PIEZA JSSI60891301CW JGO WC KINGSLEY ADVANCE BLANCO ALAR.AS.SLOW DOWN</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>227.95</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>227.95</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>227.95</baseImponible>
+<valor>27.35</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>26726</codigoPrincipal>
+<descripcion>SIFON DE LAVADERO E240 RA DE 1-1/2" DH-BL RESINA ACETAL CON ACOPLE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3.77</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3.77</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.77</baseImponible>
+<valor>0.45</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50462</codigoPrincipal>
+<descripcion>TUBO DE EXTENSION PARA DESAGUE GUIB2-0014 PLASTICO DE 1-1/2" x 5" (GUIA)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>0.59</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INCAME"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.18</baseImponible>
+<valor>0.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">chello_2_1@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0994131176</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016726</campoAdicional>
+</infoAdicional>
+</factura>

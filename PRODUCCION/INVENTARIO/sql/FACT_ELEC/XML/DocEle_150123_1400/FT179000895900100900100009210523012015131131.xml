@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092105</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092105</guiaRemision>
+<razonSocialComprador>FUNDACION NAHIM ISAIAS BARQUET</razonSocialComprador>
+<identificacionComprador>0990973547001</identificacionComprador>
+<totalSinImpuestos>291.27</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>291.27</baseImponible>
+<valor>34.95</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>326.22</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>71431</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA CON PEDESTAL PREPONCHADO E213-BL ROMA BLANCO C/COLUMNA</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>30.09</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>90.27</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>90.27</baseImponible>
+<valor>10.83</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>71570</codigoPrincipal>
+<descripcion>LLAVE PARA LAVABO E226/06 CR SCALA LEVER</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>49.38</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>148.14</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>148.14</baseImponible>
+<valor>17.78</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99705</codigoPrincipal>
+<descripcion>DESAGUE DE LAVABO E2460.01 RA DH BLC C/REJILLA Y SIFON DE 1-1/4"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>6.98</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>20.94</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>20.94</baseImponible>
+<valor>2.51</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>26925</codigoPrincipal>
+<descripcion>TUBO ABASTO- LLAVE ANGULAR LAVABO E262.05 DH-CR FLEXIBLE DE 16"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>10.64</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>31.92</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>31.92</baseImponible>
+<valor>3.83</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">nahimisaias@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">042330691</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016749</campoAdicional>
+<campoAdicional nombre="Observaciones">BANOS CONSULTORIOS</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048131</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento></dirEstablecimiento>
+<dirPartida>AV LA PRENSA</dirPartida>
+<razonSocialTransportista>ACERO COMERCIAL</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>18/12/2014</fechaIniTransporte>
+<fechaFinTransporte>18/12/2014</fechaFinTransporte>
+<placa></placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1792229324001</identificacionDestinatario>
+<razonSocialDestinatario>SERVICIOS MISCELANEOS E GONZALEZ SEMEG CIA. LTDA.</razonSocialDestinatario>
+<dirDestinatario>INTERNO</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>08/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>112</codigoInterno>
+<descripcion>CANAL "U" x 6 MTS. DE 100 x 50 x 3mm.</descripcion>
+<cantidad>9.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="MODELO" valor="DE 100  x 50 x"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>112</codigoInterno>
+<descripcion>CANAL "U" x 6 MTS. DE 100 x 50 x 3mm.</descripcion>
+<cantidad>21.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="MODELO" valor="DE 100  x 50 x"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>5362</codigoInterno>
+<descripcion>TUBO ESTRUCTURAL A-3724 TIPO "N" 50 x 50 x 3mm. ESPESOR</descripcion>
+<cantidad>15.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="MODELO" valor="50 x 50 x 3 mm"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>68794</codigoInterno>
+<descripcion>SUPERTECHO - SPT - 1000 - AL DE 20 PIES 6m (ANCHO UTIL 1.05 m.) x 0.30mm</descripcion>
+<cantidad>80.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ROOFTE"/>
+<detAdicional nombre="MODELO" valor="5.610.100.600"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>90285</codigoInterno>
+<descripcion>CABALLETE SUPERALUM (CUMBREROS) 3 m.. DE LONGITUD ALUMINIO</descripcion>
+<cantidad>20.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ROOFTE"/>
+<detAdicional nombre="MODELO" valor="3 M. DE LONGITU"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3944530</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">050867</campoAdicional>
+</infoAdicional>
+</guiaRemision>

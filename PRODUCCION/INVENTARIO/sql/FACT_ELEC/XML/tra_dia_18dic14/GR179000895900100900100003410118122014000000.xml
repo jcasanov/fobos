@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000034101</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>AV. JUAN TANCA MARENGO KM.1.7</dirPartida>
+<razonSocialTransportista>MANUEL MAGALLANES (ACERO COMERCIAL .S.A)</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>18/12/2014</fechaIniTransporte>
+<fechaFinTransporte>18/12/2014</fechaFinTransporte>
+<placa>  GSC-8976</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0791739942001</identificacionDestinatario>
+<razonSocialDestinatario>JARAMILLO MINAYA</razonSocialDestinatario>
+<dirDestinatario>KM  4.5  VIA SAMBORONDON URB: ALMERIA VILLA 19 FAMILIA JARAMILLO</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>15/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>23931</codigoInterno>
+<descripcion>LAVAPLATOS DE ACERO INOXIDABLE 10119011 CLASSIC 1C 1E 86X50cm MODULAR REV. C/VALVULA 3-1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TEKA"/>
+<detAdicional nombre="MODELO" valor="CLASSIC 1C"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>23937</codigoInterno>
+<descripcion>LAVAPLATOS DE ACERO INOXIDABLE 10119007 CLASSIC 2C 1E 116x50cm MODULAR REV.C/VALVULA 3-1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TEKA"/>
+<detAdicional nombre="MODELO" valor="CLASSIC 2C"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>50462</codigoInterno>
+<descripcion>TUBO DE EXTENSION PARA DESAGUE GUIB2-0014 PLASTICO DE 1-1/2" x 5" (GUIA)</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INCAME"/>
+<detAdicional nombre="MODELO" valor="pend"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>68865</codigoInterno>
+<descripcion>SIFON DE LAVADERO 4018000 DE 1-1/2" PP CON ACOPLE</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="MODELO" valor="SC0040180001BO"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>69054</codigoInterno>
+<descripcion>COCINETA DE ACERO INOXIDABLE 40220030 E/70 5G AI TR 68X50cm. A GAS ENCEN.ELEC. 110V.60Hz INOX</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TEKA"/>
+<detAdicional nombre="MODELO" valor="40220030"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>70934</codigoInterno>
+<descripcion>GRIFERIA DE LAVAPLATOS COMPACTA E425.05/B2 CR NEW PORT DE MESA S/SIFON</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="MODELO" valor="E425.05/B2 CR"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>95106</codigoInterno>
+<descripcion>GRIFERIA DE LAVAPLATOS COMPACTA E425.05/26 CR LLAVE DE MESA P/COCINA LUMINA</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="MODELO" valor="E425.05/26 CR"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">ROSSANA_MINAYA58@HOTMAIL.COM</campoAdicional>
+<campoAdicional nombre="telefono-movil">2838755</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016655</campoAdicional>
+</infoAdicional>
+</guiaRemision>

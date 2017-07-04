@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048236</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento></dirEstablecimiento>
+<dirPartida>AV LA PRENSA</dirPartida>
+<razonSocialTransportista>SERVIENTREGA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0991285679001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>22/12/2014</fechaIniTransporte>
+<fechaFinTransporte>22/12/2014</fechaFinTransporte>
+<placa>P</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0101288223001</identificacionDestinatario>
+<razonSocialDestinatario>ABAD SARMIENTO RENE ANTONIO</razonSocialDestinatario>
+<dirDestinatario>A CUENCA POR SERVIENETREGA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>22/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>61791</codigoInterno>
+<descripcion>TANQUE DE PRESION FIBRA DE VIDRIO WM-6/WM0075 ENTREGA DE 5.9 GLS POR CICLO DE 30/50 PSI</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="WELL M"/>
+<detAdicional nombre="MODELO" valor="WM-6-WM0075"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>61793</codigoInterno>
+<descripcion>TANQUE DE PRESION FIBRA DE VIDRIO WM-9/WM0120 ENTREGA DE 8.9 GLS POR CICLO DE 30/50 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="WELL M"/>
+<detAdicional nombre="MODELO" valor="WM-9-WM0120"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>61796</codigoInterno>
+<descripcion>TANQUE DE PRESION FIBRA DE VIDRIO WM-20WB/WM0235 ENTREGA DE 18.6 GLS POR CICLO DE 30/50 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="WELL M"/>
+<detAdicional nombre="MODELO" valor="WM-20WB-WM0235"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>61798</codigoInterno>
+<descripcion>TANQUE DE PRESION FIBRA DE VIDRIO WM-35WB/WM0450 ENTREGA DE 35.9 GLS POR CICLO DE 30/50 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="WELL M"/>
+<detAdicional nombre="MODELO" valor="WM0450"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>97239</codigoInterno>
+<descripcion>BOMBA SUMERGIBLE DE 4" 10FA05P4-2W-115  DE 1/2HP/115/60C/1F  (93781005)</descripcion>
+<cantidad>5.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="MODELO" valor="93781005"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">cimaproveedores@gmailcom</campoAdicional>
+<campoAdicional nombre="telefono-movil">072884560</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">017756</campoAdicional>
+</infoAdicional>
+</guiaRemision>

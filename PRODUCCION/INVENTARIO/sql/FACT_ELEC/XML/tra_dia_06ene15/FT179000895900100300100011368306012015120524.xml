@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113683</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>06/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113683</guiaRemision>
+<razonSocialComprador>CASTRO TIPAN JUAN CARLOS</razonSocialComprador>
+<identificacionComprador>1710734938</identificacionComprador>
+<totalSinImpuestos>120.72</totalSinImpuestos>
+<totalDescuento>10.49</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>120.72</baseImponible>
+<valor>14.49</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>135.21</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>206</codigoPrincipal>
+<descripcion>CORREA "G" DE 100 x 50 x 15 x 2mm. x 6 Mts.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>27.03</precioUnitario>
+<descuento>4.32</descuento>
+<precioTotalSinImpuesto>49.74</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>49.74</baseImponible>
+<valor>5.97</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>68788</codigoPrincipal>
+<descripcion>SUPERTECHO - SPT - 1000 - AL DE 8 PIES 2.40m (ANCHO UTIL 1.05 m.) x 0.30mm</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>15.43</precioUnitario>
+<descuento>6.17</descuento>
+<precioTotalSinImpuesto>70.98</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ROOFTE"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>70.98</baseImponible>
+<valor>8.52</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">juancarlos castro@dileaunamigo.tv</campoAdicional>
+<campoAdicional nombre="telefono-movil">2346995</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064224</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,39 @@
+DATABASE aceros
+SCREEN
+{
+ REFACTURACION DE INVENTARIO
+
+ [c0|c001   |c002   |c003      |c004                |c005                ]
+[c1|c011   |c012   |c013      |c014                |c015                ]
+[c1|c011   |c012   |c013      |c014                |c015                ]
+[c1|c011   |c012   |c013      |c014                |c015                ]
+[c1|c011   |c012   |c013      |c014                |c015                ]
+[c1|c011   |c012   |c013      |c014                |c015                ]
+[c1|c011   |c012   |c013      |c014                |c015                ]
+[c1|c011   |c012   |c013      |c014                |c015                ]
+[c1|c011   |c012   |c013      |c014                |c015                ]
+[c1|c011   |c012   |c013      |c014                |c015                ]
+[c1|c011   |c012   |c013      |c014                |c015                ]
+
+}
+TABLES
+rept088
+ATTRIBUTES
+c0   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c002 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c003 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c004 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c005 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+c1   = rept088.r88_cod_fact, UPSHIFT, NOENTRY;
+c011 = rept088.r88_num_fact, UPSHIFT;
+c012 = rept088.r88_num_fact_nue, UPSHIFT;
+c013 = FORMONLY.r88_fecing TYPE DATE, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c014 = rept088.r88_nomcli_nue, UPSHIFT;
+c015 = rept088.r88_motivo_refact, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_refinv[10] (r88_cod_fact, r88_num_fact, r88_num_fact_nue,
+				r88_fecing, r88_nomcli_nue, r88_motivo_refact)

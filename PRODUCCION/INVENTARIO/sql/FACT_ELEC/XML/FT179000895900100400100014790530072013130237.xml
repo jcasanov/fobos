@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000147905</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>30/07/2013</fechaEmision>
+<dirEstablecimiento>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000147905</guiaRemision>
+<razonSocialComprador>CONSTRUCTORA NACIONAL S.A.</razonSocialComprador>
+<identificacionComprador>1790295567001</identificacionComprador>
+<totalSinImpuestos>2824.37</totalSinImpuestos>
+<totalDescuento>423.65</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>2400.72</baseImponible>
+<valor>288.09</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>2688.81</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>18986</codigoPrincipal>
+<descripcion>BOMBA SUMERG AGUAS NEGRAS WHR10-21C 1HP 230-1-60</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1041.03</precioUnitario>
+<descuento>156.15</descuento>
+<precioTotalSinImpuesto>884.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MYERS" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>884.88</baseImponible>
+<valor>106.19</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>90042</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 4" ST10-20 P/ MOTOR DE 1HP 20GPM</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>355.79</precioUnitario>
+<descuento>53.37</descuento>
+<precioTotalSinImpuesto>302.42</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MYERS" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>302.42</baseImponible>
+<valor>36.29</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>18992</codigoPrincipal>
+<descripcion>BOMBA SUMERG AGUAS NEGRAS WHR20H-21 2HP 230-1-60</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1427.55</precioUnitario>
+<descuento>214.13</descuento>
+<precioTotalSinImpuesto>1213.42</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MYERS" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1213.42</baseImponible>
+<valor>145.61</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

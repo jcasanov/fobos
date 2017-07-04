@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268861</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268861</guiaRemision>
+<razonSocialComprador>PETROAMAZONAS EP</razonSocialComprador>
+<identificacionComprador>1768153880001</identificacionComprador>
+<totalSinImpuestos>44470.26</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>44470.26</baseImponible>
+<valor>5336.43</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>49806.69</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>97643</codigoPrincipal>
+<descripcion>HIERRO CORRUGADO  4200 DE 12mm. x 12m</descripcion>
+<cantidad>3023.00</cantidad>
+<precioUnitario>10.79</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>32618.17</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NOVACE"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>32618.17</baseImponible>
+<valor>3914.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97644</codigoPrincipal>
+<descripcion>HIERRO CORRUGADO  4200 DE 14mm. x 12m</descripcion>
+<cantidad>75.00</cantidad>
+<precioUnitario>14.69</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1101.75</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NOVACE"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1101.75</baseImponible>
+<valor>132.21</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97641</codigoPrincipal>
+<descripcion>HIERRO CORRUGADO  4200 DE 8mm. x 12m</descripcion>
+<cantidad>2051.00</cantidad>
+<precioUnitario>4.81</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>9865.31</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NOVACE"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9865.31</baseImponible>
+<valor>1183.84</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>92991</codigoPrincipal>
+<descripcion>PEGA PARA CERAMICA BONDEX STANDARD DE 25 KG. CERAMICA</descripcion>
+<cantidad>79.00</cantidad>
+<precioUnitario>5.22</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>412.38</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INTACO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>412.38</baseImponible>
+<valor>49.49</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>551</codigoPrincipal>
+<descripcion>HIERRO REDONDO LISO x 5.90 M. DE 6mm.</descripcion>
+<cantidad>345.00</cantidad>
+<precioUnitario>1.37</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>472.65</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>472.65</baseImponible>
+<valor>56.72</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacion_electronica@petroamazonas.ec</campoAdicional>
+<campoAdicional nombre="Email">henry_iza@petroamazonas.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">467-500</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">050427</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C 127916</campoAdicional>
+</infoAdicional>
+</factura>

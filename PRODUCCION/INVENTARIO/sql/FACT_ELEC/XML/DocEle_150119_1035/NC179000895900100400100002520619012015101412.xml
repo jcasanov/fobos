@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025206</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>CONTINENTAL TIRE ANDINA S.A</razonSocialComprador>
+<identificacionComprador>0190005070001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000172417</numDocModificado>
+<fechaEmisionDocSustento>06/10/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>102.64</totalSinImpuestos>
+<valorModificacion>114.96</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>102.64</baseImponible>
+<valor>12.32</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>POR REFACTURACION. MATERIAL YA ENTREGADO</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>14384</codigoInterno>
+<descripcion>ACEITE PARA EQUIPOS NU CLEAR CLARO (S/ENVASE) (41585)</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>21.01</precioUnitario>
+<descuento>10.51</descuento>
+<precioTotalSinImpuesto>94.54</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="GALON"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>94.54</baseImponible>
+<valor>11.34</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>21666</codigoInterno>
+<descripcion>ENVASE PLASTICO JERRY CAN DE 20 LT</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>9.00</precioUnitario>
+<descuento>0.90</descuento>
+<precioTotalSinImpuesto>8.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.10</baseImponible>
+<valor>0.97</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">daniela.maldonado@conti.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">072862155</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">39998</campoAdicional>
+</infoAdicional>
+</notaCredito>

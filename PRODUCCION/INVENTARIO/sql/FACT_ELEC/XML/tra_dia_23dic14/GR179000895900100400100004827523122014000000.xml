@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048275</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<dirPartida>AV LA PRENSA N/4514</dirPartida>
+<razonSocialTransportista>T R A N S E R P E T</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>23/12/2014</fechaIniTransporte>
+<fechaFinTransporte>24/12/2014</fechaFinTransporte>
+<placa>PAC-1979</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1103366587001</identificacionDestinatario>
+<razonSocialDestinatario>GAONA SANCHEZ MARIA AUGUSTA</razonSocialDestinatario>
+<dirDestinatario> T U L C A N   SR  HOLGER FUERTES CEL 0999148679</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>22/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>20161</codigoInterno>
+<descripcion>ELECTRODO ELECTRODO TIPO PENDULO</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="MODELO" valor="ELECTRODO TIPO"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>21382</codigoInterno>
+<descripcion>VALVULA CHEQUE VC-100 DE 4" DE BRONCE TIPO PESADO</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HELBER"/>
+<detAdicional nombre="MODELO" valor="DE 4""/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>3314</codigoInterno>
+<descripcion>NEPLO GALVANIZADO DE 4" x 8"</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="MODELO" valor=" DE 4" x 8""/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>5422</codigoInterno>
+<descripcion>TUBO GALV. ASTM A-53   TIPO "T" DE 4" x 6.40 m. ESPESOR 5.2 mm.</descripcion>
+<cantidad>7.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="MODELO" valor=" 4" x 6.40 M"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>5999</codigoInterno>
+<descripcion>UNION GALV. CLASE 150 DE 3"</descripcion>
+<cantidad>8.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="MODELO" valor=" 3""/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">375238</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">047090</campoAdicional>
+</infoAdicional>
+</guiaRemision>

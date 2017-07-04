@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176099</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176099</guiaRemision>
+<razonSocialComprador>SORIA SORIA JAIME</razonSocialComprador>
+<identificacionComprador>0501070551</identificacionComprador>
+<totalSinImpuestos>35.16</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>35.16</baseImponible>
+<valor>4.22</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>39.38</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5414</codigoPrincipal>
+<descripcion>TUBO GALV. ASTM A-53   TIPO "T" DE 1-1/2" x 6 m.  ESPESOR 3.6 mm.</descripcion>
+<cantidad>0.17</cantidad>
+<precioUnitario>56.67</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>9.63</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.63</baseImponible>
+<valor>1.16</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3238</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1-1/2" x 3"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>1.59</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>6.36</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.36</baseImponible>
+<valor>0.76</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3232</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1-1/2" CORRIDO</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>1.21</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3.63</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.63</baseImponible>
+<valor>0.44</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3244</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1-1/2" x 5"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>2.54</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>5.08</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.08</baseImponible>
+<valor>0.61</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3246</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1-1/2" x 6"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>2.86</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>5.72</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.72</baseImponible>
+<valor>0.69</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3214</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1-1/4" x 2"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>1.21</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3.63</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.63</baseImponible>
+<valor>0.44</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3158</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1/2" x 2"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>0.37</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1.11</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.11</baseImponible>
+<valor>0.13</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">5132740</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">036430</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,34 @@
+DATABASE aceros
+SCREEN
+{
+
+  REFACTURACION DE INVENTARIO
+ -------------------------------------------------------------------------
+  TP F. Ori. F. Nue. Fec.Refac.       Cliente        Motivo Refacturación
+ -------------------------------------------------------------------------
+ [c1|c011   |c012   |c013      |c014                |c015                ]
+ [c1|c011   |c012   |c013      |c014                |c015                ]
+ [c1|c011   |c012   |c013      |c014                |c015                ]
+ [c1|c011   |c012   |c013      |c014                |c015                ]
+ [c1|c011   |c012   |c013      |c014                |c015                ]
+ [c1|c011   |c012   |c013      |c014                |c015                ]
+ [c1|c011   |c012   |c013      |c014                |c015                ]
+ [c1|c011   |c012   |c013      |c014                |c015                ]
+ [c1|c011   |c012   |c013      |c014                |c015                ]
+ [c1|c011   |c012   |c013      |c014                |c015                ]
+
+}
+TABLES
+rept088
+ATTRIBUTES
+c1   = rept088.r88_cod_fact, UPSHIFT, NOENTRY;
+c011 = rept088.r88_num_fact, UPSHIFT;
+c012 = rept088.r88_num_fact_nue, UPSHIFT;
+c013 = FORMONLY.r88_fecing TYPE DATE, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c014 = rept088.r88_nomcli_nue, UPSHIFT;
+c015 = rept088.r88_motivo_refact, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_refinv[10] (r88_cod_fact, r88_num_fact, r88_num_fact_nue,
+				r88_fecing, r88_nomcli_nue, r88_motivo_refact)

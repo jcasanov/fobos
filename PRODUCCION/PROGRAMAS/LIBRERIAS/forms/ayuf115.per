@@ -1,0 +1,36 @@
+DATABASE aceros
+
+SCREEN
+{
+ ORDENES DE COMPRAS 
+----------------------------------------------------------------------------
+ O.C.    Tipo             Departamento             Solicitado 		
+----------------------------------------------------------------------------
+[c0   |c001           |c002                   |c003                       ] 
+[c0   |c001           |c002                   |c003                       ] 
+[c0   |c001           |c002                   |c003                       ] 
+[c0   |c001           |c002                   |c003                       ] 
+[c0   |c001           |c002                   |c003                       ] 
+[c0   |c001           |c002                   |c003                       ] 
+[c0   |c001           |c002                   |c003                       ] 
+[c0   |c001           |c002                   |c003                       ] 
+[c0   |c001           |c002                   |c003                       ] 
+[c0   |c001           |c002                   |c003                       ] 
+
+
+}
+
+TABLES
+ordt010
+ordt001
+gent034
+
+ATTRIBUTES
+c0   = c10_numero_oc, UPSHIFT;
+c001 = c01_nombre, UPSHIFT;
+c002 = g34_nombre, UPSHIFT;
+c003 = c10_solicitado, UPSHIFT;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_ordcom[10](c10_numero_oc, c01_nombre, g34_nombre, c10_solicitado)

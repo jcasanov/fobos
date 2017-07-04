@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000004389</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>24/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<razonSocialComprador>NUNIEZ SANAMBAY GABRIEL ARMANDO</razonSocialComprador>
+<identificacionComprador>1722266523</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>003-001-000114133</numDocModificado>
+<fechaEmisionDocSustento>24/01/2015</fechaEmisionDocSustento>
+<totalSinImpuestos>42.48</totalSinImpuestos>
+<valorModificacion>47.58</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>42.48</baseImponible>
+<valor>5.10</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>NO EXISTE EL MATERIAL</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>101454</codigoInterno>
+<descripcion>AZULEJO PARED 25 x 33 COLORA NEGRO  PRIMERA</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>9.77</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>39.08</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>39.08</baseImponible>
+<valor>4.69</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>99596</codigoInterno>
+<descripcion>PORCELANA PARA CERAMICA GROUTEX POLIMERO PF S/A NEGRO (FUNDA DE 2 Kg.)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3.40</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3.40</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INTACO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.40</baseImponible>
+<valor>0.41</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">armandons90@htomail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3138558</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">64387</campoAdicional>
+</infoAdicional>
+</notaCredito>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104046</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1. VIA MONTECRISTI - MANTA</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104046</guiaRemision>
+<razonSocialComprador>MONTECRISTI GOLF COURSE S.A. MONTECRISTIGOLF</razonSocialComprador>
+<identificacionComprador>1391794495001</identificacionComprador>
+<totalSinImpuestos>3530.91</totalSinImpuestos>
+<totalDescuento>430.57</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>3530.91</baseImponible>
+<valor>423.71</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>3954.62</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>94708</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 4" 90FA5S4-PE P/ 5HP 90 GPM (93619012) 12 ETAPAS</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>623.01</precioUnitario>
+<descuento>137.06</descuento>
+<precioTotalSinImpuesto>1108.96</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANKLIN PUMPS SYSTEMS" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1108.96</baseImponible>
+<valor>133.08</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>95099</codigoPrincipal>
+<descripcion>MOTOR ELEC SUMERG DE 4" (2243038602) DE 5 HP 230/60/1F</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>931.32</precioUnitario>
+<descuento>204.89</descuento>
+<precioTotalSinImpuesto>1657.75</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANKLIN" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1657.75</baseImponible>
+<valor>198.93</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>19587</codigoPrincipal>
+<descripcion>CAJA DE CONTROL (2821138110) CJ-5021 P/ 5HP 230/60/1F</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>339.91</precioUnitario>
+<descuento>74.78</descuento>
+<precioTotalSinImpuesto>605.04</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANKLIN" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>605.04</baseImponible>
+<valor>72.60</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21378</codigoPrincipal>
+<descripcion>VALVULA CHEQUE VC-50 DE 2" DE BRONCE TIPO PESADO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>86.50</precioUnitario>
+<descuento>13.84</descuento>
+<precioTotalSinImpuesto>159.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="HELBERT" valor="HELBER"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>159.16</baseImponible>
+<valor>19.10</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">052310437</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016537</campoAdicional>
+</infoAdicional>
+</factura>

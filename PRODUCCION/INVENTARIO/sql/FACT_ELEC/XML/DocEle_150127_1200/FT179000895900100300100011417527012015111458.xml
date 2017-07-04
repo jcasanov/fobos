@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000114175</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000114175</guiaRemision>
+<razonSocialComprador>CUMBICOS BETANCOURT EDWIN IVAN</razonSocialComprador>
+<identificacionComprador>1103330195001</identificacionComprador>
+<totalSinImpuestos>505.66</totalSinImpuestos>
+<totalDescuento>89.24</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>505.66</baseImponible>
+<valor>60.68</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>566.34</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>100481</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA AMAGUANIA BEIGE PRIMERA</descripcion>
+<cantidad>30.00</cantidad>
+<precioUnitario>10.15</precioUnitario>
+<descuento>45.68</descuento>
+<precioTotalSinImpuesto>258.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>258.82</baseImponible>
+<valor>31.06</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>95924</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA FORTE AZUL PRIMERA</descripcion>
+<cantidad>30.00</cantidad>
+<precioUnitario>9.68</precioUnitario>
+<descuento>43.56</descuento>
+<precioTotalSinImpuesto>246.84</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>246.84</baseImponible>
+<valor>29.62</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">iviedcum-974@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2959909</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">057713</campoAdicional>
+<campoAdicional nombre="Observaciones">EC ACABADOS DE LA CONSTRUCCIOM</campoAdicional>
+</infoAdicional>
+</factura>

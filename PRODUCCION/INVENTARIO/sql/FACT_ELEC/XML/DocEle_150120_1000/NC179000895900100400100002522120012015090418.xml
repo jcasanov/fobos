@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025221</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>CONSTRUCTORA VILLACRECES ANDRADE S.A.</razonSocialComprador>
+<identificacionComprador>1791326768001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000175299</numDocModificado>
+<fechaEmisionDocSustento>03/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>6734.44</totalSinImpuestos>
+<valorModificacion>7542.57</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>6734.44</baseImponible>
+<valor>808.13</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 266935 CVANDRADE P-VOLVER A FACT YA</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>100395</codigoInterno>
+<descripcion>ESCALERILLA DE HIERRO DE 1-1/4" x 1/8"   1.22 x 2.44 m.</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>336.20</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3362.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3362.00</baseImponible>
+<valor>403.44</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>98230</codigoInterno>
+<descripcion>ANGULO LAMINADO x 6 MTS. DE 50 x 3 mm. GALVANIZADO</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>51.98</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1039.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1039.60</baseImponible>
+<valor>124.75</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>562</codigoInterno>
+<descripcion>HIERRO REDONDO LISO x 6 MTS. DE 18mm.</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>14.16</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>70.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>70.80</baseImponible>
+<valor>8.50</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>99105</codigoInterno>
+<descripcion>TOL AL CALOR DE 20 mm. 1.22 x 2.44 m.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>484.10</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>484.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>484.10</baseImponible>
+<valor>58.09</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>91917</codigoInterno>
+<descripcion>VIGA UPN 200 x 6 m.. (200 x 75 x 8.5 x 11.5 mm.)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>214.46</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>214.46</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>214.46</baseImponible>
+<valor>25.74</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>852</codigoInterno>
+<descripcion>VIGA UPN 100 x 6 m (100 x 50 x 6 x 8.5 mm)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>101.70</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>203.40</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>203.40</baseImponible>
+<valor>24.41</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>702</codigoInterno>
+<descripcion>TOL AL CALOR DE 15mm. 1.22 x 2.44 m (350.85 KG.)</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>397.76</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1193.28</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1193.28</baseImponible>
+<valor>143.19</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>21470</codigoInterno>
+<descripcion>ELECTRODO E-6011-C-13 1/8" ACERO DULCE</descripcion>
+<cantidad>40.00</cantidad>
+<precioUnitario>4.17</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>166.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="AGA"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>166.80</baseImponible>
+<valor>20.02</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">cmaldonado@elitcorp.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2229244/5</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">4289</campoAdicional>
+</infoAdicional>
+</notaCredito>

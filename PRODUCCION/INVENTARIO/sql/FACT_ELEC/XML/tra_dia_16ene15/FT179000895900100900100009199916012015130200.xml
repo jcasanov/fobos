@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091999</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091999</guiaRemision>
+<razonSocialComprador>DUFEMUR S.A.</razonSocialComprador>
+<identificacionComprador>0992703512001</identificacionComprador>
+<totalSinImpuestos>1871.74</totalSinImpuestos>
+<totalDescuento>224.80</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1871.74</baseImponible>
+<valor>224.61</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>2096.35</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>18783</codigoPrincipal>
+<descripcion>BOMBA CENTRIF MULTIETAPA C-MOTOR HU2-M-8-1 5HP 2 ETP 1-1/2 x 1-1/2" 220/440-1-60</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1515.22</precioUnitario>
+<descuento>166.67</descuento>
+<precioTotalSinImpuesto>1348.55</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MARK G"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1348.55</baseImponible>
+<valor>161.83</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>61795</codigoPrincipal>
+<descripcion>TANQUE DE PRESION FIBRA DE VIDRIO WM-14WB/WM0180 ENTREGA DE 14.1 GLS POR CICLO DE 30/50 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>581.32</precioUnitario>
+<descuento>58.13</descuento>
+<precioTotalSinImpuesto>523.19</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="WELL M"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>523.19</baseImponible>
+<valor>62.78</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jrodriguez@administracion.bahia-muyuyo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3830400</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016730</campoAdicional>
+<campoAdicional nombre="Observaciones">ING. VERONICA DIAZ</campoAdicional>
+</infoAdicional>
+</factura>

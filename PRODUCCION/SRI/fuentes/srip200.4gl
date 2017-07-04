@@ -248,7 +248,7 @@ LET query = 'SELECT s21_localidad loc, s21_ident_cli tipocli, ',
 			's21_monto_iva impuesto, s21_monto_ret_rent ret ',
 		' FROM srit021 ',
 		' WHERE s21_compania  = ', vg_codcia,
-		expr_loc CLIPPED,
+		--expr_loc CLIPPED,
 		'   AND s21_anio      = ', YEAR(rm_par.fecha_fin),
 		'   AND s21_mes       = ', MONTH(rm_par.fecha_fin),
 		' INTO TEMP ', tabla CLIPPED
@@ -424,7 +424,7 @@ END FUNCTION
 
 
 FUNCTION generar_anexo_tabla_temporal()
-DEFINE query		CHAR(50000)
+DEFINE query		CHAR(55000)
 DEFINE base1, base2	VARCHAR(30)
 DEFINE codloc		LIKE srit021.s21_localidad
 DEFINE codloc1, codloc2	LIKE srit021.s21_localidad
@@ -490,12 +490,13 @@ END FUNCTION
 
 
 FUNCTION query_anexo_ventas(base1, base2, codloc, codloc1, codloc2)
-DEFINE query		CHAR(22000)
+DEFINE query		CHAR(22500)
 DEFINE base1, base2	VARCHAR(30)
 DEFINE codloc		LIKE srit021.s21_localidad
 DEFINE codloc1, codloc2	LIKE srit021.s21_localidad
 
-LET query = 'SELECT "18" tipodoc, r19_localidad loc, "9999" codcli, ',
+LET query = 'SELECT "18" tipodoc, r19_localidad loc, ',
+		'"9999" codcli, ',
 		'CASE WHEN r19_codcli = 99 ',
 			'THEN "9999999999999" ',
 		     'WHEN (SELECT DISTINCT z01_tipo_doc_id ',
@@ -546,7 +547,8 @@ LET query = 'SELECT "18" tipodoc, r19_localidad loc, "9999" codcli, ',
 			'EXTEND(DATE("', rm_par.fecha_fin, '"), YEAR TO MONTH)',
 		' GROUP BY 1, 2, 3, 4, 5, 11 ',
 	'UNION ALL ',
-	'SELECT "18" tipodoc, r19_localidad loc, "9999" codcli, ',
+	'SELECT "18" tipodoc, r19_localidad loc, ',
+		'"9999" codcli, ',
 		'CASE WHEN r19_codcli = 99 ',
 			'THEN "9999999999999" ',
 		     'WHEN (SELECT DISTINCT z01_tipo_doc_id ',
@@ -597,7 +599,8 @@ LET query = 'SELECT "18" tipodoc, r19_localidad loc, "9999" codcli, ',
 			'EXTEND(DATE("', rm_par.fecha_fin, '"), YEAR TO MONTH)',
 		' GROUP BY 1, 2, 3, 4, 5, 11 ',
 	'UNION ALL ',
-	'SELECT "18" tipodoc, t23_localidad loc, "9999" codcli, ',
+	'SELECT "18" tipodoc, t23_localidad loc, ',
+		' "9999" codcli, ',
 		'CASE WHEN t23_cod_cliente = 99 ',
 			'THEN "9999999999999" ',
 		     'WHEN (SELECT DISTINCT z01_tipo_doc_id ',
@@ -824,7 +827,8 @@ LET query = 'SELECT "18" tipodoc, r19_localidad loc, "9999" codcli, ',
 		'EXTEND(DATE("', rm_par.fecha_fin, '"), YEAR TO MONTH) ',
 	' GROUP BY 1, 2, 3, 4, 5, 11 ',
 	'UNION ALL ',
-	'SELECT "04" tipodoc, r19_localidad loc, "9999" codcli, ',
+	'SELECT "04" tipodoc, r19_localidad loc, ',
+		' "9999" codcli, ',
 		'CASE WHEN r19_codcli = 99 ',
 			'THEN "9999999999999" ',
 		     'WHEN (SELECT DISTINCT z01_tipo_doc_id ',
@@ -868,7 +872,8 @@ LET query = 'SELECT "18" tipodoc, r19_localidad loc, "9999" codcli, ',
 			'EXTEND(DATE("', rm_par.fecha_fin, '"), YEAR TO MONTH)',
 		' GROUP BY 1, 2, 3, 4, 5, 11 ',
 	'UNION ALL ',
-	'SELECT "04" tipodoc, r19_localidad loc, "9999" codcli, ',
+	'SELECT "04" tipodoc, r19_localidad loc, ',
+		' "9999" codcli, ',
 		'CASE WHEN r19_codcli = 99 ',
 			'THEN "9999999999999" ',
 		     'WHEN (SELECT DISTINCT z01_tipo_doc_id ',
@@ -912,7 +917,8 @@ LET query = 'SELECT "18" tipodoc, r19_localidad loc, "9999" codcli, ',
 			'EXTEND(DATE("', rm_par.fecha_fin, '"), YEAR TO MONTH)',
 		' GROUP BY 1, 2, 3, 4, 5, 11 ',
 	'UNION ALL ',
-	'SELECT "04" tipodoc, t23_localidad loc, "9999" codcli, ',
+	'SELECT "04" tipodoc, t23_localidad loc, ',
+		' "9999" codcli, ',
 		'CASE WHEN t23_cod_cliente = 99 ',
 			'THEN "9999999999999" ',
 		     'WHEN (SELECT DISTINCT z01_tipo_doc_id ',
@@ -1058,7 +1064,8 @@ LET query = 'SELECT "18" tipodoc, r19_localidad loc, "9999" codcli, ',
 	'  AND DATE(t23_fec_factura) <  DATE(t28_fec_anula) ',
 	'GROUP BY 1, 2, 3, 4, 5, 11 ',
 	'UNION ALL ',
-	'SELECT "04" tipodoc, z21_localidad loc, "9999" codcli, ',
+	'SELECT "04" tipodoc, z21_localidad loc, ',
+		' "9999" codcli, ',
 	'CASE WHEN z21_codcli = 99 ',
 		'THEN "9999999999999" ',
 	     'WHEN z01_tipo_doc_id = "R" AND LENGTH(z01_num_doc_id) = 13 ',
@@ -1092,7 +1099,8 @@ LET query = 'SELECT "18" tipodoc, r19_localidad loc, "9999" codcli, ',
 		'EXTEND(DATE("', rm_par.fecha_fin, '"), YEAR TO MONTH) ',
 	'GROUP BY 1, 2, 3, 4, 5 ',
 	'UNION ALL ',
-	'SELECT "05" tipodoc, z20_localidad loc, "9999" codcli, ',
+	'SELECT "05" tipodoc, z20_localidad loc, ',
+		' "9999" codcli, ',
 	'CASE WHEN z20_codcli = 99 ',
 		'THEN "9999999999999" ',
 	     'WHEN z01_tipo_doc_id = "R" AND LENGTH(z01_num_doc_id) = 13 ',
@@ -1189,7 +1197,7 @@ END FUNCTION
 FUNCTION generar_s21(tabla, codloc)
 DEFINE tabla		VARCHAR(10)
 DEFINE codloc		LIKE srit021.s21_localidad
-DEFINE query		CHAR(1500)
+DEFINE query		CHAR(2000)
 DEFINE expr_loc		VARCHAR(100)
 
 BEGIN WORK
@@ -1200,7 +1208,7 @@ IF rm_par.tipo_nac = 'S' THEN
 END IF
 LET query = 'DELETE FROM srit021 ',
 		'WHERE s21_compania  = ', vg_codcia,
-		expr_loc CLIPPED,
+		--expr_loc CLIPPED,
 		'  AND s21_anio      = ', YEAR(rm_par.fecha_fin),
 		'  AND s21_mes       = ', MONTH(rm_par.fecha_fin),
 		--'  AND s21_estado    = "G"'
@@ -1228,15 +1236,19 @@ LET query = 'INSERT INTO srit021 ',
 		'  s21_cod_ret_ivaser, s21_mon_ret_ivaser, s21_ret_presuntivo,',
 		'  s21_concepto_ret, s21_base_imp_renta, s21_porc_ret_renta,',
 		'  s21_monto_ret_rent, s21_estado, s21_usuario, s21_fecing) ',
-		' SELECT ', vg_codcia, ', loc, ', YEAR(rm_par.fecha_fin), ', ',
-			MONTH(rm_par.fecha_fin),', LPAD(tipocli, 2, 0), docid,',
+		' SELECT ', vg_codcia, ', loc, ', YEAR(rm_par.fecha_fin),
+			', ', MONTH(rm_par.fecha_fin),
+			', LPAD(tipocli, 2, 0), docid,',
 			' tipodoc, "', rm_par.fecha_fin, '", ndocs, "',
 			rm_par.fecha_fin, '", subtotal, "N", subtotalGrav, ',
 			'"2", impuesto, 0.00, "0", 0.00, 0.00, "0", 0.00, ',
 			'0.00, "0", 0.00, "N", "000", 0.00, 0.00, ret, "G", "',
 			UPSHIFT(vg_usuario) CLIPPED, '", CURRENT ',
 			' FROM ', tabla CLIPPED,
-			expr_loc CLIPPED
+			--expr_loc CLIPPED,
+			' GROUP BY 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, ',
+			'15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, ',
+			'28, 29, 30, 31, 32 '
 PREPARE exec_s21 FROM query
 EXECUTE exec_s21
 WHENEVER ERROR STOP
@@ -1251,10 +1263,13 @@ DEFINE tabla		VARCHAR(5)
 DEFINE tab_tmp		VARCHAR(10)
 DEFINE query		CHAR(500)
 
+{--
 LET query = 'SELECT CASE WHEN loc IN (1, 2) THEN 1 ',
 				'WHEN loc IN (3, 4, 5) THEN 3 ',
 				'ELSE loc ',
-			'END loc, ',
+			'END loc, loc loc2, ',
+--}
+LET query = 'SELECT loc, ',
 		'CASE WHEN ret > 0 ',
 				'THEN "18" ',
 			'WHEN ret < 0 ',
@@ -1272,6 +1287,10 @@ LET query = 'SELECT CASE WHEN loc IN (1, 2) THEN 1 ',
 		'SUM(total) total, ',
 		'SUM(ABS(ret)) ret ',
 		' FROM ', tabla CLIPPED,
+		{
+		' GROUP BY 1, 2, 3, 4, 5, 6 ',
+		' ORDER BY 6 ',
+		}
 		' GROUP BY 1, 2, 3, 4, 5 ',
 		' ORDER BY 5 ',
 		' INTO TEMP ', tab_tmp CLIPPED
@@ -1580,58 +1599,122 @@ DEFINE r_reg		RECORD
 				nomcli		LIKE cxct001.z01_nomcli
 			END RECORD
 DEFINE r_s21		RECORD LIKE srit021.*
+DEFINE local		LIKE srit021.s21_localidad
+DEFINE codestab		INTEGER
+DEFINE numestabruc	INTEGER
+DEFINE totalventas	DECIMAL(12,2)
 DEFINE query		CHAR(1000)
 DEFINE registro		CHAR(4000)
 DEFINE expr_loc		VARCHAR(100)
-DEFINE tabla		VARCHAR(10)
+DEFINE base, tabla	VARCHAR(10)
 
-LET expr_loc = ' WHERE loc = ', codloc
+LET expr_loc  = ' WHERE loc = ', codloc
 CASE tip_ane
 	WHEN 'G' LET tabla = 'tmp_ane1'
 	WHEN 'Q' LET tabla = 'tmp_ane2'
 	WHEN 'N' LET tabla = 'tmp_ane3'
 		 LET expr_loc = NULL
 END CASE
+LET query = 'SELECT loc, NVL(SUM(subtotalgrav + subtotal), 0) totvta ',
+		' FROM ', tabla CLIPPED,
+		' WHERE tipodoc <> "04" ',
+		' GROUP BY 1 ',
+		' UNION ',
+		' SELECT loc, NVL(SUM((subtotalgrav + subtotal) * (-1)), 0) totvta ',
+		' FROM ', tabla CLIPPED,
+		' WHERE tipodoc = "04" ',
+		' GROUP BY 1 ',
+		'INTO TEMP tmp_tot '
+PREPARE exec_tot FROM query
+EXECUTE exec_tot
+SELECT NVL(SUM(totvta), 0) INTO totalventas FROM tmp_tot
 LET query = 'SELECT tipocli tip_cr, docid, tipodoc, SUM(ndocs), 0.00, ',
 			'SUM(subtotal), SUM(subtotalgrav), SUM(impuesto), ',
 			'0.00, SUM(ABS(ret)) ',
 		' FROM ', tabla CLIPPED,
-		expr_loc CLIPPED,
+		--expr_loc CLIPPED,
 		' GROUP BY 1, 2, 3, 5, 9 ',
 		' ORDER BY docid '
 PREPARE cons_ane_xml FROM query
 DECLARE q_s21 CURSOR FOR cons_ane_xml
-DISPLAY '<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>'
+DISPLAY '<?xml version="1.0" encoding="UTF-8"?>'
 DISPLAY '<iva>'
 IF vg_codcia = 1 THEN
-	DISPLAY '<numeroRuc>1790008959001</numeroRuc>'
-	DISPLAY '<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>'
+	DISPLAY '<TipoIDInformante>R</TipoIDInformante>'
+	DISPLAY '<IdInformante>1790008959001</IdInformante>'
+	DISPLAY '<razonSocial>ACERO COMERCIAL ECUATORIANO SA</razonSocial>'
 ELSE
 	DISPLAY '<numeroRuc>1790217515001</numeroRuc>'
-	DISPLAY '<razonSocial>SERMACO S.A.</razonSocial>'
+	DISPLAY '<razonSocial>SERMACO SA</razonSocial>'
 END IF
-DISPLAY '<anio>', YEAR(rm_par.fecha_fin), '</anio>'
-DISPLAY '<mes>', MONTH(rm_par.fecha_fin) USING "&&", '</mes>'
-DISPLAY '<compras>'
-DISPLAY '</compras>'
+DISPLAY '<Anio>', YEAR(rm_par.fecha_fin) USING "&&&&", '</Anio>'
+DISPLAY '<Mes>', MONTH(rm_par.fecha_fin) USING "&&", '</Mes>'
+SELECT COUNT(UNIQUE loc) INTO numestabruc FROM tmp_tot
+DISPLAY '<numEstabRuc>', numestabruc USING "&&&", '</numEstabRuc>'
+DISPLAY '<totalVentas>', totalVentas USING "<<<<<<<<&.&&", '</totalVentas>'
+DISPLAY '<codigoOperativo>IVA</codigoOperativo>'
+--DISPLAY '<compras></compras>'
 LET registro = '<ventas>'
 FOREACH q_s21 INTO r_reg.*
 	LET registro = registro CLIPPED, '<detalleVentas>',
 		'<tpIdCliente>', r_reg.tip_cr USING "&&", '</tpIdCliente>',
 		'<idCliente>', r_reg.docid, '</idCliente>',
-		'<tipoComprobante>', r_reg.tipodoc, '</tipoComprobante>',
-		'<numeroComprobantes>', r_reg.ndocs, '</numeroComprobantes> ',
-		'<baseNoGraIva>', r_reg.basenograiva, '</baseNoGraIva> ',
-		'<baseImponible>', r_reg.baseimponible, '</baseImponible> ',
-		'<baseImpGrav>', r_reg.baseimpgrav, '</baseImpGrav> ',
-		'<montoIva>', r_reg.impuesto, '</montoIva> ',
-		'<valorRetIva>', r_reg.valorretiva, '</valorRetIva> ',
-		'<valorRetRenta>', r_reg.ret, '</valorRetRenta> '
+		'<tipoComprobante>', r_reg.tipodoc USING "&&",
+		'</tipoComprobante>',
+		'<numeroComprobantes>', r_reg.ndocs USING "<<<&",
+		'</numeroComprobantes>',
+		'<baseNoGraIva>', r_reg.basenograiva USING "<<<<<<<<&.&&",
+		'</baseNoGraIva>',
+		'<baseImponible>', r_reg.baseimponible USING "<<<<<<<<&.&&",
+		'</baseImponible>',
+		'<baseImpGrav>', r_reg.baseimpgrav USING "<<<<<<<<&.&&",
+		'</baseImpGrav>',
+		'<montoIva>', r_reg.impuesto USING "<<<<<<<<&.&&",
+		'</montoIva>',
+		'<valorRetIva>', r_reg.valorretiva USING "<<<<<<<<&.&&",
+		'</valorRetIva>',
+		'<valorRetRenta>', r_reg.ret USING "<<<<<<<<&.&&",
+		'</valorRetRenta> '
 	LET registro = registro CLIPPED, '</detalleVentas>'
 	DISPLAY registro CLIPPED
 	LET registro = ' '
 END FOREACH
 DISPLAY '</ventas>'
+DISPLAY '<ventasEstablecimiento>'
+DECLARE q_tot CURSOR FOR
+	SELECT loc, NVL(SUM(totvta), 0)
+		FROM tmp_tot
+		GROUP BY 1
+		ORDER BY 1
+FOREACH q_tot INTO local, totalventas
+	LET base = NULL
+	IF local = 4 THEN
+		LET base = 'acero_qs:'
+	END IF
+	LET query = 'SELECT MAX(g37_pref_sucurs) codestab ',
+			' FROM ', base CLIPPED, 'gent037 ',
+			' WHERE g37_compania   = ', vg_codcia,
+			'   AND g37_localidad  = ', local,
+			'   AND g37_tipo_doc   = "FA" ',
+			'   AND g37_secuencia IN ',
+			' (SELECT MAX(g37_secuencia) ',
+				' FROM ', base CLIPPED, 'gent037 ',
+				' WHERE g37_compania  = ', vg_codcia,
+				'   AND g37_localidad = ', local,
+				'   AND g37_tipo_doc  = "FA") ',
+			'INTO TEMP t1 '
+	PREPARE exec_t1_2 FROM query
+	EXECUTE exec_t1_2
+	SELECT * INTO codestab FROM t1
+	DROP TABLE t1
+	DISPLAY '<ventaEst>'
+	DISPLAY '<codEstab>', codestab USING "&&&", '</codEstab>'
+	DISPLAY '<ventasEstab>', totalventas USING "<<<<<<<<&.&&"
+	DISPLAY '</ventasEstab>'
+	DISPLAY '</ventaEst>'
+END FOREACH
+DROP TABLE tmp_tot
+DISPLAY '</ventasEstablecimiento>'
 DISPLAY '</iva>'
 --CALL fl_mostrar_mensaje('Archivo XML de ventas generado OK.', 'info')
 

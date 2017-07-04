@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268551</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268551</guiaRemision>
+<razonSocialComprador>HIDALGO SAAVEDRA GUSTAVO</razonSocialComprador>
+<identificacionComprador>1703407658001</identificacionComprador>
+<totalSinImpuestos>529.94</totalSinImpuestos>
+<totalDescuento>93.52</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>529.94</baseImponible>
+<valor>63.59</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>593.53</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>95293</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 4" 60FA5S4-PE P/5HP 60GPM (93616013) DE 13 ETAPAS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>623.46</precioUnitario>
+<descuento>93.52</descuento>
+<precioTotalSinImpuesto>529.94</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>529.94</baseImponible>
+<valor>63.59</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">shidalgogustavo@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2896771</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">042060</campoAdicional>
+<campoAdicional nombre="Observaciones">SOLICITA ING. GUSTAVO HIDALGO</campoAdicional>
+</infoAdicional>
+</factura>

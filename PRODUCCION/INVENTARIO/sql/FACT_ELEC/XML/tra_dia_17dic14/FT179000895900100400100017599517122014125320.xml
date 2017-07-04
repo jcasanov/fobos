@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175995</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>AV.OCCIDENTAL N 51-67 Y ANTONIO ROMAN</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175995</guiaRemision>
+<razonSocialComprador>JURADO TAPIA CESAR HERNAN</razonSocialComprador>
+<identificacionComprador>0602284838001</identificacionComprador>
+<totalSinImpuestos>373.74</totalSinImpuestos>
+<totalDescuento>65.96</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>373.74</baseImponible>
+<valor>44.85</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>418.59</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99629</codigoPrincipal>
+<descripcion>CUCHILLA PARA CORTATUBO E-4266 P/MOD.466S/468S (75557)</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>27.35</precioUnitario>
+<descuento>41.03</descuento>
+<precioTotalSinImpuesto>232.47</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIDGID" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>232.47</baseImponible>
+<valor>27.90</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>15510</codigoPrincipal>
+<descripcion>CUCHILLA PARA CORTATUBO F-515 P/MOD.4S/44S/466S/466HWS/468S/468HWS/472HWS (33120)</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>16.62</precioUnitario>
+<descuento>24.93</descuento>
+<precioTotalSinImpuesto>141.27</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIDGID" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>141.27</baseImponible>
+<valor>16.95</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2453692</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">042645</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268669</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268669</guiaRemision>
+<razonSocialComprador>CARTONES NACIONALES S.A.I. CARTOPEL</razonSocialComprador>
+<identificacionComprador>0190115151001</identificacionComprador>
+<totalSinImpuestos>162.03</totalSinImpuestos>
+<totalDescuento>18.01</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>162.03</baseImponible>
+<valor>19.44</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>181.47</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>46624</codigoPrincipal>
+<descripcion>KIT REPARACION PARA BOMBA P391K2 DE BOMBA P-391 y P-392</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>99.25</precioUnitario>
+<descuento>9.93</descuento>
+<precioTotalSinImpuesto>89.32</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>89.32</baseImponible>
+<valor>10.72</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>14380</codigoPrincipal>
+<descripcion>ACEITE HIDRAULICO HF-104 AZUL ANTIESPUMANTE DESOXIDANTE S/ENVASE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>29.53</precioUnitario>
+<descuento>2.95</descuento>
+<precioTotalSinImpuesto>26.58</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>26.58</baseImponible>
+<valor>3.19</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>93002</codigoPrincipal>
+<descripcion>VALVULA HIDRAULICA CHEQUE DA8802900SR P/ BOMBA P-392</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>24.71</precioUnitario>
+<descuento>2.47</descuento>
+<precioTotalSinImpuesto>22.24</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>22.24</baseImponible>
+<valor>2.67</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>93003</codigoPrincipal>
+<descripcion>VALVULA DE ALIVIO DA5493900SR DE BYPASS P/ BOMBA P-392</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>26.55</precioUnitario>
+<descuento>2.66</descuento>
+<precioTotalSinImpuesto>23.89</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>23.89</baseImponible>
+<valor>2.87</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">documentos@gcartopel.com</campoAdicional>
+<campoAdicional nombre="Email">fernandoo1@cartopel.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">072860600</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">038931</campoAdicional>
+</infoAdicional>
+</factura>

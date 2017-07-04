@@ -1,0 +1,36 @@
+DATABASE aceros
+
+SCREEN
+{
+  DOCUMENTOS A FAVOR DE CLIENTES EN COBRANZAS
+ -----------------------------------------------------------------
+  Cliente                     TP Número  Saldo      Mo Area
+ -----------------------------------------------------------------
+ [c001                       |c0|c002   |c003      |c1|c004      ]
+ [c001                       |c0|c002   |c003      |c1|c004      ]
+ [c001                       |c0|c002   |c003      |c1|c004      ]
+ [c001                       |c0|c002   |c003      |c1|c004      ]
+ [c001                       |c0|c002   |c003      |c1|c004      ]
+ [c001                       |c0|c002   |c003      |c1|c004      ]
+ [c001                       |c0|c002   |c003      |c1|c004      ]
+ [c001                       |c0|c002   |c003      |c1|c004      ]
+ [c001                       |c0|c002   |c003      |c1|c004      ]
+ [c001                       |c0|c002   |c003      |c1|c004      ]
+}
+
+TABLES
+cxct021
+cxct001
+gent003
+
+ATTRIBUTES
+c001 = z01_nomcli, UPSHIFT,REVERSE;
+c0   = z21_tipo_doc, UPSHIFT,REVERSE;
+c002 = z21_num_doc, UPSHIFT,REVERSE;
+c003 = z21_saldo, UPSHIFT,REVERSE;
+c1   = z21_moneda, UPSHIFT,REVERSE;
+c004 = g03_abreviacion, UPSHIFT,REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_favorcob[10]( z01_nomcli, z21_tipo_doc, z21_num_doc, z21_saldo, z21_moneda, g03_abreviacion)

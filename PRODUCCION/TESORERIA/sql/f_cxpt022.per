@@ -1,0 +1,55 @@
+database acero_gm
+screen size 24 by 80
+{
+p22_compania       [f000       ]
+p22_localidad      [f001  ]
+p22_codprov        [f002       ]
+p22_tipo_trn       [a0]
+p22_num_trn        [f003       ]
+p22_referencia     [f004                               ]
+p22_fecha_emi      [f005      ]
+p22_moneda         [a1]
+p22_paridad        [f006              ]
+p22_tasa_mora      [f007  ]
+p22_total_cap      [f008          ]
+p22_total_int      [f009          ]
+p22_total_mora     [f010          ]
+p22_subtipo        [f011  ]
+p22_origen         [a]
+p22_fecha_elim     [f012      ]
+p22_tiptrn_elim    [a2]
+p22_numtrn_elim    [f013       ]
+p22_orden_pago     [f014       ]
+p22_usuario        [f015      ]
+}
+screen
+{
+p22_fecing         [f016               ]
+}
+end
+tables
+cxpt022
+attributes
+f000 = cxpt022.p22_compania;
+f001 = cxpt022.p22_localidad;
+f002 = cxpt022.p22_codprov;
+a0 = cxpt022.p22_tipo_trn;
+f003 = cxpt022.p22_num_trn;
+f004 = cxpt022.p22_referencia;
+f005 = cxpt022.p22_fecha_emi;
+a1 = cxpt022.p22_moneda;
+f006 = cxpt022.p22_paridad;
+f007 = cxpt022.p22_tasa_mora;
+f008 = cxpt022.p22_total_cap;
+f009 = cxpt022.p22_total_int;
+f010 = cxpt022.p22_total_mora;
+f011 = cxpt022.p22_subtipo;
+a = cxpt022.p22_origen;
+f012 = cxpt022.p22_fecha_elim;
+a2 = cxpt022.p22_tiptrn_elim;
+f013 = cxpt022.p22_numtrn_elim;
+f014 = cxpt022.p22_orden_pago;
+f015 = cxpt022.p22_usuario;
+
+f016 = cxpt022.p22_fecing;
+end

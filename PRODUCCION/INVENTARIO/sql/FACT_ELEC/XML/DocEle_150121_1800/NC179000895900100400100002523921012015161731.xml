@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025239</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<razonSocialComprador>MARQUEZ ROBALINO CARLOS ING.</razonSocialComprador>
+<identificacionComprador>1708194343</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000268705</numDocModificado>
+<fechaEmisionDocSustento>20/01/2015</fechaEmisionDocSustento>
+<totalSinImpuestos>79.14</totalSinImpuestos>
+<valorModificacion>88.64</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>79.14</baseImponible>
+<valor>9.50</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 268705 CARLOS MARQUEZ P/VOLVER A FAC</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>102283</codigoInterno>
+<descripcion>CARGADOR 49-24-2310 INALAMBRICO DE ALIMENTACION DE 12 V.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>45.01</precioUnitario>
+<descuento>2.25</descuento>
+<precioTotalSinImpuesto>42.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>42.76</baseImponible>
+<valor>5.13</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>103117</codigoInterno>
+<descripcion>FLEXOMETRO 48-22-5225 MAGNETICO DE 8 m.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>38.30</precioUnitario>
+<descuento>1.92</descuento>
+<precioTotalSinImpuesto>36.38</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>36.38</baseImponible>
+<valor>4.37</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">cmarquez@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2323082</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">35851</campoAdicional>
+</infoAdicional>
+</notaCredito>

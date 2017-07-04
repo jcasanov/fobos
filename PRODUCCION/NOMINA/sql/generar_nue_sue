@@ -1,0 +1,4 @@
+ej_query ACGYE01 acero_gm nuevo_sueldo_iess.sql
+sed -e "1,$ s/;$//g" nuevosue.txt > nuevosue2.txt
+mv nuevosue2.txt nuevosue.txt 
+unix2dos nuevosue.txt

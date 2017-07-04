@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000041518</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<dirPartida>AV. LA PRENSA N-4514</dirPartida>
+<razonSocialTransportista>ACERO COMERCIAL</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>27/01/2015</fechaIniTransporte>
+<fechaFinTransporte>27/01/2015</fechaFinTransporte>
+<placa>POZ-801</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1792238447001</identificacionDestinatario>
+<razonSocialDestinatario>DISTRIBUIDORA DE MATERIALES DE CONSTRUCCION DISMACONCOBRE CIA. LTDA.</razonSocialDestinatario>
+<dirDestinatario>VALLADOLID N24-611 Y AV. LA CORUÒA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>27/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>69385</codigoInterno>
+<descripcion>BOMBA CENTRIF. MONOETAPA DE RECIRCULACION UPS25-62 0.12KW 220-1-60 (59546515)</descripcion>
+<cantidad>4.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>92945</codigoInterno>
+<descripcion>BOMBA CENTRIF. MONOETAPA DE RECIRCULACION UPS25-42 110/60C/1F (59544186)</descripcion>
+<cantidad>4.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>92946</codigoInterno>
+<descripcion>BOMBA CENTRIF. MONOETAPA DE RECIRCULACION UPS25-62 110/60C/1F (59546314)</descripcion>
+<cantidad>4.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">dismacon@netlife.ec</campoAdicional>
+<campoAdicional nombre="Email">ventas4@dismacon.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2228315</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">052810</campoAdicional>
+</infoAdicional>
+</guiaRemision>

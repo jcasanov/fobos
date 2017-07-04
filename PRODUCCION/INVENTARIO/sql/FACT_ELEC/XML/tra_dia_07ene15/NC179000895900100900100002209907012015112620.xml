@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000022099</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>HOLCIM ECUADOR S.A.</razonSocialComprador>
+<identificacionComprador>0990293244001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000103514</numDocModificado>
+<fechaEmisionDocSustento>25/11/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>979.04</totalSinImpuestos>
+<valorModificacion>1096.52</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>979.04</baseImponible>
+<valor>117.48</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>REFACTURACION: CAMBIO DE FECHA</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>102852</codigoInterno>
+<descripcion>CONECTOR ER1ES1523 P/TECLE NER050L DE 5 Ton.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>93.84</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>187.68</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KITO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>187.68</baseImponible>
+<valor>22.52</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>102853</codigoInterno>
+<descripcion>REPUESTO ER1BS9511 RECEPTACULO DEL CONECTOR P/TECLE NER050L DE 5 Ton.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>44.52</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>89.04</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KITO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>89.04</baseImponible>
+<valor>10.68</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>102854</codigoInterno>
+<descripcion>REPUESTO ER1ES9107 CUBIERTA DEL VENTILADOR P/TECLE NER050L DE 5 Ton.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>136.82</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>273.64</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KITO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>273.64</baseImponible>
+<valor>32.84</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>98354</codigoInterno>
+<descripcion>BOTONERA SWD2100-AA1 DE 3 MANDOS P/MOD.NER2</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>66.71</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>66.71</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KITO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>66.71</baseImponible>
+<valor>8.01</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>98357</codigoInterno>
+<descripcion>REPUESTO ER2CS-25231  ENCHUFE P/MOD.ER2-010S</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>129.61</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>129.61</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KITO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>129.61</baseImponible>
+<valor>15.55</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>98358</codigoInterno>
+<descripcion>REPUESTO CONECTOR P/CABLE HEMBRA ECP2304-AD1</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>82.50</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>82.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KITO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>82.50</baseImponible>
+<valor>9.90</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>98352</codigoInterno>
+<descripcion>REPUESTO CONECTOR P/CABLE MACHO ECP2108-AA1</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>83.80</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>83.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KITO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>83.80</baseImponible>
+<valor>10.06</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>98353</codigoInterno>
+<descripcion>REPUESTO ER2CS-25641 ENCHUFE P/MOD.ER2-020S</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>66.06</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>66.06</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KITO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>66.06</baseImponible>
+<valor>7.93</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">rodolfo.montero@holcim.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3709000</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">7551</campoAdicional>
+</infoAdicional>
+</notaCredito>

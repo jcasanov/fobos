@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175953</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>AV.DE LOS SHYRIS N32-218 Y AV.ELOY ALFAR</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175953</guiaRemision>
+<razonSocialComprador>A&O CONSULTORES ASOCIADOS CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1791815416001</identificacionComprador>
+<totalSinImpuestos>155.36</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>155.36</baseImponible>
+<valor>18.64</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>174.00</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>3256</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 2" x 3"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>2.20</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>8.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.80</baseImponible>
+<valor>1.06</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2065</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 90° DE 2"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>6.59</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>13.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="CIFUNSA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>13.18</baseImponible>
+<valor>1.58</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4571</codigoPrincipal>
+<descripcion>TEE GALV. CLASE 150 DE 2"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>10.93</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>21.86</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="CIFUNSA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>21.86</baseImponible>
+<valor>2.62</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6322</codigoPrincipal>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 2"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>20.48</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>81.92</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="HITACHI" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>81.92</baseImponible>
+<valor>9.83</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3096</codigoPrincipal>
+<descripcion>NEPLO FLEX DE 2"</descripcion>
+<cantidad>8.00</cantidad>
+<precioUnitario>3.02</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>24.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>24.16</baseImponible>
+<valor>2.90</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97467</codigoPrincipal>
+<descripcion>TEFLON EN ROLLO 0.07 x 12 mm. x 10 m.</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>0.58</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2.32</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.32</baseImponible>
+<valor>0.28</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21179</codigoPrincipal>
+<descripcion>TAIPE P/INSTALACIONES GRANDE(10 YD.)</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>0.78</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3.12</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.12</baseImponible>
+<valor>0.37</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3825592</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">057575</campoAdicional>
+</infoAdicional>
+</factura>

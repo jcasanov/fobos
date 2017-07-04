@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000015294</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<dirPartida>GUALBERTO PEREZ E1-88 ENTRE MALDONADO Y NAPO</dirPartida>
+<razonSocialTransportista>ACERO COMERCIAL</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>23/12/2014</fechaIniTransporte>
+<fechaFinTransporte>23/12/2014</fechaFinTransporte>
+<placa>ACERO</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1718113325001</identificacionDestinatario>
+<razonSocialDestinatario>GAMA CONSTRUCCIONES</razonSocialDestinatario>
+<dirDestinatario>GEOVANNY CALLES  VIA A MARIANAS</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>22/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>101135</codigoInterno>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA CEREZO SEGUNDA</descripcion>
+<cantidad>20.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="CEREZO SEGUNDA"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>101198</codigoInterno>
+<descripcion>AZULEJO PARED 25 x 33 COLORA LIMON  PRIMERA</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="COLORA LIMON  PRIMER"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>101251</codigoInterno>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA PASTAZA NEGRO  SEGUNDA</descripcion>
+<cantidad>6.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="PASTAZA NEGRO  SEGUN"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>102225</codigoInterno>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA PASTAZA ROJO SEGUNDA</descripcion>
+<cantidad>6.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="PASTAZA ROJO SEGUNDA"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>102306</codigoInterno>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA PASTAZA  AZUL  SEGUNDA</descripcion>
+<cantidad>6.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="PASTAZA  AZUL  SEGUN"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>102308</codigoInterno>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA PASTAZA GRIS  SEGUNDA</descripcion>
+<cantidad>6.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="PASTAZA GRIS  SEGUND"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>27133</codigoInterno>
+<descripcion>LLAVE DE CAMPANOLA CON DUCHA E479.120/18 CR (4479.120/18) JIMMY CROMO</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="MODELO" valor="E479.120/18 CR"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0998817065</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">048943</campoAdicional>
+</infoAdicional>
+</guiaRemision>

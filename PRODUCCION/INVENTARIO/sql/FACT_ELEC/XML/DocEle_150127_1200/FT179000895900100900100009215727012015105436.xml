@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092157</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092157</guiaRemision>
+<razonSocialComprador>COMPANIA DE ELABORADOS DE CAFE EL CAFE C.A.</razonSocialComprador>
+<identificacionComprador>1390059694001</identificacionComprador>
+<totalSinImpuestos>5155.41</totalSinImpuestos>
+<totalDescuento>637.19</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>5155.41</baseImponible>
+<valor>618.65</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>5774.06</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>100117</codigoPrincipal>
+<descripcion>PAQUETE HIDRAULICO P/CR 32-10-2   (96416926)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>5792.60</precioUnitario>
+<descuento>637.19</descuento>
+<precioTotalSinImpuesto>5155.41</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5155.41</baseImponible>
+<valor>618.65</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jgarcia@cafeelcafe.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2658278</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">002921</campoAdicional>
+<campoAdicional nombre="Observaciones">COMPLEMENTO DE OC 72310-G</campoAdicional>
+</infoAdicional>
+</factura>

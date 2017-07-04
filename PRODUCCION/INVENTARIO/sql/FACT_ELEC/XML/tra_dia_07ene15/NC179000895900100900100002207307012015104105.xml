@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000022073</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>CONSORCIO PUERTO LIMPIO</razonSocialComprador>
+<identificacionComprador>0992646535001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000104142</numDocModificado>
+<fechaEmisionDocSustento>22/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>3398.57</totalSinImpuestos>
+<valorModificacion>3806.40</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>3398.57</baseImponible>
+<valor>407.83</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>REFACTURACION: CAMBIO DE FECHA</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>47825</codigoInterno>
+<descripcion>BOMBA CENTRIF AUTOCEB DE ALU PARA PTO O3H1-GL 3" GIRO C-R P/ TOMA DE FUERZA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3818.62</precioUnitario>
+<descuento>420.05</descuento>
+<precioTotalSinImpuesto>3398.57</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GORMAN"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3398.57</baseImponible>
+<valor>407.83</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">iguaman@puertolimpio.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">6005935</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">13717</campoAdicional>
+</infoAdicional>
+</notaCredito>

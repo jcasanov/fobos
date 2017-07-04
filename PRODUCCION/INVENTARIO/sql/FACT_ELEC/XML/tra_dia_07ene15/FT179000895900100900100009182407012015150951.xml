@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091824</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091824</guiaRemision>
+<razonSocialComprador>ROMARQUE S.A.</razonSocialComprador>
+<identificacionComprador>0992761334001</identificacionComprador>
+<totalSinImpuestos>122.76</totalSinImpuestos>
+<totalDescuento>6.46</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>122.76</baseImponible>
+<valor>14.73</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>137.49</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>67762</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA CON PEDESTAL PREPONCHADO E227-BL BARI  BLANCO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>42.60</precioUnitario>
+<descuento>4.26</descuento>
+<precioTotalSinImpuesto>80.94</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>80.94</baseImponible>
+<valor>9.71</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>26973</codigoPrincipal>
+<descripcion>LLAVE PARA LAVABO E220/29 CR EUROSTYLE   CROMO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>10.71</precioUnitario>
+<descuento>1.07</descuento>
+<precioTotalSinImpuesto>20.35</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>20.35</baseImponible>
+<valor>2.44</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>27951</codigoPrincipal>
+<descripcion>TUBO ABASTO METALICO TRENZADO E269.20.03.0 DH DE 16" DE LAVABO P/ LLAVE DE PASO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>4.32</precioUnitario>
+<descuento>0.43</descuento>
+<precioTotalSinImpuesto>8.21</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.21</baseImponible>
+<valor>0.99</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99705</codigoPrincipal>
+<descripcion>DESAGUE DE LAVABO E2460.01 RA DH BLC C/REJILLA Y SIFON DE 1-1/4"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>6.98</precioUnitario>
+<descuento>0.70</descuento>
+<precioTotalSinImpuesto>13.26</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>13.26</baseImponible>
+<valor>1.59</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">anigle@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0968806614</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016693</campoAdicional>
+</infoAdicional>
+</factura>

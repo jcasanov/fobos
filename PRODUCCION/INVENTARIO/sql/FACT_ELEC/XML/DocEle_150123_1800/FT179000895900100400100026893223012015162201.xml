@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268932</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268932</guiaRemision>
+<razonSocialComprador>BOSQUES TROPICALES S.A. BOTROSA</razonSocialComprador>
+<identificacionComprador>0590036528001</identificacionComprador>
+<totalSinImpuestos>491.50</totalSinImpuestos>
+<totalDescuento>86.73</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>491.50</baseImponible>
+<valor>58.98</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>550.48</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>93775</codigoPrincipal>
+<descripcion>FRESA ANULAR PARA TALADRO ELECTROMAGNETICO 49-59-1000 DE 1" P/PLANCHA DE HASTA 1"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>58.21</precioUnitario>
+<descuento>17.46</descuento>
+<precioTotalSinImpuesto>98.96</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>98.96</baseImponible>
+<valor>11.88</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>93787</codigoPrincipal>
+<descripcion>FRESA ANULAR PARA TALADRO ELECTROMAGNETICO 49-59-1750 DE 1-3/4" P/PLANCHA DE HASTA 1"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>143.67</precioUnitario>
+<descuento>43.10</descuento>
+<precioTotalSinImpuesto>244.24</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>244.24</baseImponible>
+<valor>29.31</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>93779</codigoPrincipal>
+<descripcion>FRESA ANULAR PARA TALADRO ELECTROMAGNETICO 49-59-1250 DE 1-1/4" P/ PLANCHA DE HASTA 1"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>74.32</precioUnitario>
+<descuento>22.30</descuento>
+<precioTotalSinImpuesto>126.34</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>126.34</baseImponible>
+<valor>15.16</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70389</codigoPrincipal>
+<descripcion>FRESA ANULAR PARA TALADROS MANUALES 44-60-1720 PIN EYECTOR P/CORT.ANUL.DE 1" DE PROFUNDIDAD</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>25.83</precioUnitario>
+<descuento>3.87</descuento>
+<precioTotalSinImpuesto>21.96</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>21.96</baseImponible>
+<valor>2.64</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">garciaj@endesabotrosa.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2676700-70</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">053814</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C # 26</campoAdicional>
+</infoAdicional>
+</factura>

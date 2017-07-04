@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176415</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>30/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176415</guiaRemision>
+<razonSocialComprador>HIDALGO ORTIZ GUSTAVO NICOLAS</razonSocialComprador>
+<identificacionComprador>1712587979001</identificacionComprador>
+<totalSinImpuestos>838.19</totalSinImpuestos>
+<totalDescuento>93.13</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>838.19</baseImponible>
+<valor>100.58</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>938.77</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>95099</codigoPrincipal>
+<descripcion>MOTOR ELEC SUMERG DE 4" (2243038602) DE 5 HP 230/60/1F</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>931.32</precioUnitario>
+<descuento>93.13</descuento>
+<precioTotalSinImpuesto>838.19</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>838.19</baseImponible>
+<valor>100.58</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">hidalgogustavo@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2896771</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">056244</campoAdicional>
+</infoAdicional>
+</factura>

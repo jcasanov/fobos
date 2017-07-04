@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048262</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<dirPartida>AV. LA PRENSA N/4514</dirPartida>
+<razonSocialTransportista>ACERO COMERCIAL</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>23/12/2014</fechaIniTransporte>
+<fechaFinTransporte>23/12/2014</fechaFinTransporte>
+<placa>PBA-8801</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1790105083001</identificacionDestinatario>
+<razonSocialDestinatario>ASOCIACION CULTURAL ACADEMIA COTOPAXI</razonSocialDestinatario>
+<dirDestinatario>NUESTRAS BODEGAS</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>17/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>2063</codigoInterno>
+<descripcion>CODO GALV. CLASE 150 90° DE 1-1/2"</descripcion>
+<cantidad>16.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="MODELO" valor="DE 1-1/2" x 90°"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>2067</codigoInterno>
+<descripcion>CODO GALV. CLASE 150 90° DE 2-1/2"</descripcion>
+<cantidad>70.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="MODELO" valor="2-1/2" x 90°"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>2124</codigoInterno>
+<descripcion>CODO GALV. CLASE 150  X 45° DE 2-1/2"</descripcion>
+<cantidad>10.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="MODELO" valor="CODO GALVANIZAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>6327</codigoInterno>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 1-1/2"</descripcion>
+<cantidad>7.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="MODELO" valor=" DE 1-1/2""/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>93287</codigoInterno>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 2-1/2"</descripcion>
+<cantidad>4.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="MODELO" valor="2-1/2""/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">022467411</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">005372</campoAdicional>
+</infoAdicional>
+</guiaRemision>

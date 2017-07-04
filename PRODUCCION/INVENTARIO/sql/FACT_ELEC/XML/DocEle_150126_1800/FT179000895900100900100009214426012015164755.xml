@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092144</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>26/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092144</guiaRemision>
+<razonSocialComprador>CONSTRUCCIONES Y PROYECTOS MIGUEL ANGEL AUAD C. LTDA.</razonSocialComprador>
+<identificacionComprador>0990806004001</identificacionComprador>
+<totalSinImpuestos>325.25</totalSinImpuestos>
+<totalDescuento>36.14</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>325.25</baseImponible>
+<valor>39.03</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>364.28</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>94626</codigoPrincipal>
+<descripcion>LAVACOPA DE ACERO INOXIDABLE 10125004 BE 34.37 BAJO MESON INCLUYE VALVULA 3 1/2</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>68.04</precioUnitario>
+<descuento>6.80</descuento>
+<precioTotalSinImpuesto>61.24</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TEKA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>61.24</baseImponible>
+<valor>7.35</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>95368</codigoPrincipal>
+<descripcion>LAVABO VESSEL DE SOBREPONER E243.BL AMADEUS BLANCO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>86.30</precioUnitario>
+<descuento>17.26</descuento>
+<precioTotalSinImpuesto>155.34</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>155.34</baseImponible>
+<valor>18.64</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103442</codigoPrincipal>
+<descripcion>GRIFERIA DE LAVAPLATOS MONOCONTROL E511.01/D3E CR  JGO. MONOCOMANDO P/COCINA CR</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>120.75</precioUnitario>
+<descuento>12.08</descuento>
+<precioTotalSinImpuesto>108.67</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>108.67</baseImponible>
+<valor>13.04</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">aandrade@mac-doros.com</campoAdicional>
+<campoAdicional nombre="Email">crodriguez@mac-obras.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">5113002</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">001268</campoAdicional>
+<campoAdicional nombre="Observaciones">OBRA:BAQUERIZO HIDALGO</campoAdicional>
+</infoAdicional>
+</factura>

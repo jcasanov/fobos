@@ -1,0 +1,50 @@
+DATABASE aceros
+SCREEN
+{
+
+  Novedades del ARCHIVO:
+ [c032                                                                  ]
+
+                                                       [c030 ] de [c031 ]
+  [c000   |c001                              |c002                       ]
+ [c010   |c011                              |c012                       ]
+ [c010   |c011                              |c012                       ]
+ [c010   |c011                              |c012                       ]
+ [c010   |c011                              |c012                       ]
+ [c010   |c011                              |c012                       ]
+ [c010   |c011                              |c012                       ]
+ [c010   |c011                              |c012                       ]
+ [c010   |c011                              |c012                       ]
+ [c010   |c011                              |c012                       ]
+ [c010   |c011                              |c012                       ]
+ [c020                                              ]     Marca: [c023  ]
+ [c021                                                                  ]
+
+}
+TABLES
+rept010
+rept072
+rept086
+ATTRIBUTES
+c032 = FORMONLY.novedades, NOENTRY, UPSHIFT, COLOR = RED WHERE c032 IS NOT NULL;
+
+c000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c002 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+
+c010 = rept086.r86_item, NOENTRY, UPSHIFT;
+c011 = FORMONLY.nom_item, NOENTRY, UPSHIFT;
+c012 = FORMONLY.comentarios, NOENTRY, UPSHIFT;
+
+c020 = rept072.r72_desc_clase, NOENTRY, UPSHIFT;
+c021 = rept010.r10_nombre, NOENTRY, UPSHIFT;
+c023 = rept010.r10_marca, NOENTRY, UPSHIFT;
+
+c030 = FORMONLY.cur_row, NOENTRY, UPSHIFT, REVERSE;
+c031 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+END
+KEYS
+F5 = 'Datos Item'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_det_nov[10] (r86_item, nom_item, comentarios)

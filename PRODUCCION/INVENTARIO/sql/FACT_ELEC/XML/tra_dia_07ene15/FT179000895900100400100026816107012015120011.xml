@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268161</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268161</guiaRemision>
+<razonSocialComprador>MANOSALVAS ARAGON FRANCISCO EUGENIO RAMIRO</razonSocialComprador>
+<identificacionComprador>1701759621001</identificacionComprador>
+<totalSinImpuestos>357.08</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>357.08</baseImponible>
+<valor>42.85</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>399.93</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>606</codigoPrincipal>
+<descripcion>ARMEX 6.25 x 2.40 MTS. R-283 100 x 100 x 6 x 6mm.</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>77.76</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>311.04</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>311.04</baseImponible>
+<valor>37.32</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5712</codigoPrincipal>
+<descripcion>TUBO PVC PRESION ESP-CAM x 6 MTS. DE 90mm. 145 PSI ISO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>38.27</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>38.27</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>38.27</baseImponible>
+<valor>4.59</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4780</codigoPrincipal>
+<descripcion>TEE PVC PRESION CAM-CAM-ESP-CAM DE 90mm. ISO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>7.77</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>7.77</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7.77</baseImponible>
+<valor>0.93</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">frama44@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2924159</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">051034</campoAdicional>
+</infoAdicional>
+</factura>

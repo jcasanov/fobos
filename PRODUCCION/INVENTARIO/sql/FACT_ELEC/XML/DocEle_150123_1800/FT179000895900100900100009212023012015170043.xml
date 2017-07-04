@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092120</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092120</guiaRemision>
+<razonSocialComprador>ZAMBRANO ZAMBRANO MARIA FERNANDA</razonSocialComprador>
+<identificacionComprador>1303799991</identificacionComprador>
+<totalSinImpuestos>784.56</totalSinImpuestos>
+<totalDescuento>95.14</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>784.56</baseImponible>
+<valor>94.15</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>878.71</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102863</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA CON PEDESTAL PREPONCHADO E217-BL SIENA BLANCO MEDIO PEDESTAL</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>47.55</precioUnitario>
+<descuento>9.51</descuento>
+<precioTotalSinImpuesto>85.59</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>85.59</baseImponible>
+<valor>10.27</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70781</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL UNA PIEZA E179-BL MONACO C/ASTO. BLANCO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>145.61</precioUnitario>
+<descuento>29.12</descuento>
+<precioTotalSinImpuesto>262.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>262.10</baseImponible>
+<valor>31.45</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99140</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL UNA PIEZA JSSI6047733  EGO ELONGADO BONE ASTO. SLOW DOWN INT.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>179.33</precioUnitario>
+<descuento>43.04</descuento>
+<precioTotalSinImpuesto>315.62</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>315.62</baseImponible>
+<valor>37.87</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>71347</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA CON PEDESTAL PREPONCHADO JSP057267331CB NEW SIBILA BONE C/P LARGO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>67.36</precioUnitario>
+<descuento>13.47</descuento>
+<precioTotalSinImpuesto>121.25</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>121.25</baseImponible>
+<valor>14.55</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">afernanda_rodriguez@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0989499223</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016754</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000034071</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM. 16,5 VIA A DAULE</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>M MAGALLANES</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>17/12/2014</fechaIniTransporte>
+<fechaFinTransporte>18/12/2014</fechaFinTransporte>
+<placa>GSC8976</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0990344760001</identificacionDestinatario>
+<razonSocialDestinatario>QUIMPAC ECUADOR S.A. QUIMPACSA</razonSocialDestinatario>
+<dirDestinatario>KM. 16,5 VIA A DAULE</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>16/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>1622</codigoInterno>
+<descripcion>BUSHING GALV. CLASE 150 DE 1/2" x 3/8"</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="HITACHI" valor="HITACH"/>
+<detAdicional nombre="pend" valor="pend"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>1652</codigoInterno>
+<descripcion>BUSHING GALV. CLASE 150 DE 1-1/2" x 1"</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="HITACHI" valor="HITACH"/>
+<detAdicional nombre="pend" valor="pend"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>1720</codigoInterno>
+<descripcion>BUSHING NEGRO CLASE 150 DE 1-1/2" x 1/2"</descripcion>
+<cantidad>4.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="HITACHI" valor="HITACH"/>
+<detAdicional nombre="pend" valor="pend"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>21386</codigoInterno>
+<descripcion>VALVULA CHEQUE HORIZONTAL - VERTICAL CAP-15 DE 1-1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MYERS" valor="MYERS"/>
+<detAdicional nombre="pend" valor="pend"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>5995</codigoInterno>
+<descripcion>UNION GALV. CLASE 150 DE 1-1/2"</descripcion>
+<cantidad>6.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="CIFUNSA" valor="CIFUNS"/>
+<detAdicional nombre="pend" valor="pend"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>6327</codigoInterno>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 1-1/2"</descripcion>
+<cantidad>5.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="CIFUNSA" valor="CIFUNS"/>
+<detAdicional nombre="pend" valor="pend"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>99953</codigoInterno>
+<descripcion>GRIFO ESFERICO BRONCE CROMADO PERFECTA DE 1/2" CABO ROJO</descripcion>
+<cantidad>6.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="FIV" valor="FIV"/>
+<detAdicional nombre="1/2"" valor="1/2""/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>99956</codigoInterno>
+<descripcion>GRIFO ESFERICO BRONCE CROMADO PERFECTA DE 1-1/2" CABO ROJO</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="FIV" valor="FIV"/>
+<detAdicional nombre="1-1/2"" valor="1-1/2""/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2162220</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">004052</campoAdicional>
+</infoAdicional>
+</guiaRemision>

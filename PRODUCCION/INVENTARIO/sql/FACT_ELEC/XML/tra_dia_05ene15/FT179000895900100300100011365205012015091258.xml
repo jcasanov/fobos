@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113652</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>05/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113652</guiaRemision>
+<razonSocialComprador>CHAMBA AVILA JOSELYN DANIELA</razonSocialComprador>
+<identificacionComprador>1719434803001</identificacionComprador>
+<totalSinImpuestos>483.18</totalSinImpuestos>
+<totalDescuento>98.96</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>483.18</baseImponible>
+<valor>57.98</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>541.16</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>101830</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA SORAIDA ROBLE SEGUNDA</descripcion>
+<cantidad>76.80</cantidad>
+<precioUnitario>7.58</precioUnitario>
+<descuento>98.96</descuento>
+<precioTotalSinImpuesto>483.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>483.18</baseImponible>
+<valor>57.98</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jaime.jarrin@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2582985</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">061714</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000015301</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<dirPartida>GUALBERTO PEREZ E1-88 ENTRE MALDONADO Y NAPO</dirPartida>
+<razonSocialTransportista>SERGIO QUINCHE</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>1103687586</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>30/12/2014</fechaIniTransporte>
+<fechaFinTransporte>30/12/2014</fechaFinTransporte>
+<placa>PBX-9975</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1102318423001</identificacionDestinatario>
+<razonSocialDestinatario>SARANGO MEDINA MARIA ALEGRIA</razonSocialDestinatario>
+<dirDestinatario>MARISCAL SUCRE N62-101 Y JOSE FIGUEROA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>29/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>100777</codigoInterno>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA AMAZONAS BEIGE SEGUNDA</descripcion>
+<cantidad>20.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="AMAZONAS BEIGE"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>102864</codigoInterno>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA BALZAR KAKI PRIMERA</descripcion>
+<cantidad>30.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="BALZAR KAKI PRIMERA"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>99069</codigoInterno>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA PALMIRA CHOCOLATE ESTANDAR</descripcion>
+<cantidad>40.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="99069"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">ceramicasvellavista@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0998669900</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">062738</campoAdicional>
+</infoAdicional>
+</guiaRemision>

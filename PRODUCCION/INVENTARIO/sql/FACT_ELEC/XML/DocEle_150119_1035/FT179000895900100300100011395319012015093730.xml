@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113953</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113953</guiaRemision>
+<razonSocialComprador>DUQUE ESPARZA MIREYA ALEXANDRA</razonSocialComprador>
+<identificacionComprador>1711849842001</identificacionComprador>
+<totalSinImpuestos>142.39</totalSinImpuestos>
+<totalDescuento>15.83</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>142.39</baseImponible>
+<valor>17.09</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>159.48</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>103009</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 QUANTUM NIEVE PRIMERA</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>9.89</precioUnitario>
+<descuento>4.95</descuento>
+<precioTotalSinImpuesto>44.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>44.50</baseImponible>
+<valor>5.34</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102306</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA PASTAZA  AZUL  SEGUNDA</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>8.66</precioUnitario>
+<descuento>2.60</descuento>
+<precioTotalSinImpuesto>23.38</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>23.38</baseImponible>
+<valor>2.81</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100764</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA TIBER BEIGE PRIMERA (CAJA DE 1.92 M2)</descripcion>
+<cantidad>7.68</cantidad>
+<precioUnitario>10.78</precioUnitario>
+<descuento>8.28</descuento>
+<precioTotalSinImpuesto>74.51</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>74.51</baseImponible>
+<valor>8.94</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">mireyadu@yahoo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2606026</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">058165</campoAdicional>
+</infoAdicional>
+</factura>

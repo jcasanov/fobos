@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025839</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>AV. JUAN TANCA MARENGO KM.1.7</dirPartida>
+<razonSocialTransportista>GINGER MONTES (ACERO COMERCIAL .S.A)</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>0924751514</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>21/01/2015</fechaIniTransporte>
+<fechaFinTransporte>21/01/2015</fechaFinTransporte>
+<placa> ......</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0907581219</identificacionDestinatario>
+<razonSocialDestinatario>SUQUINAHUA DE LA CUADRA MERCY</razonSocialDestinatario>
+<dirDestinatario>LLEVO GINGER MONTES AL CLIENTE</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>20/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>101925</codigoInterno>
+<descripcion>GRIFERIA DE LAVABO 1-H E181/B1  CR  ARIZONA  MONOM. DES. REJILLA</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>71582</codigoInterno>
+<descripcion>GRIFERIA DE DUCHA E312/B1 CR MONOC. P/DUCHA DUCHA MANUAL ARIZONA</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>90415</codigoInterno>
+<descripcion>GRIFERIA DE BIDET CON SPRAY VERTICAL E299/84 CR CHESS CROMO</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>90431</codigoInterno>
+<descripcion>GRIFERIA DE LAVABO 8" E201/84 CR CHESS CROMO</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">charlesg51@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2451693</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016733</campoAdicional>
+</infoAdicional>
+</guiaRemision>

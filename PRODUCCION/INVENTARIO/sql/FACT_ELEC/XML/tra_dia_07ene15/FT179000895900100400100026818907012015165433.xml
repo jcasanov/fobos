@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268189</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268189</guiaRemision>
+<razonSocialComprador>VALLEJO GUERRA GINA FERNANDA</razonSocialComprador>
+<identificacionComprador>1717314593001</identificacionComprador>
+<totalSinImpuestos>125.64</totalSinImpuestos>
+<totalDescuento>22.16</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>125.64</baseImponible>
+<valor>15.08</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>140.72</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>97894</codigoPrincipal>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7434 SD1 DE 5/8" X 6"</descripcion>
+<cantidad>36.00</cantidad>
+<precioUnitario>2.76</precioUnitario>
+<descuento>14.90</descuento>
+<precioTotalSinImpuesto>84.46</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>84.46</baseImponible>
+<valor>10.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97896</codigoPrincipal>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7432 SD1 DE 5/8" X 4-1/2"</descripcion>
+<cantidad>18.00</cantidad>
+<precioUnitario>1.79</precioUnitario>
+<descuento>4.83</descuento>
+<precioTotalSinImpuesto>27.39</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>27.39</baseImponible>
+<valor>3.29</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99239</codigoPrincipal>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7423 SD1 DE 1/2" X 4-1/2"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>0.97</precioUnitario>
+<descuento>0.87</descuento>
+<precioTotalSinImpuesto>4.95</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.95</baseImponible>
+<valor>0.59</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98301</codigoPrincipal>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7414 SD1 DE 3/8" X 3-1/2"</descripcion>
+<cantidad>16.00</cantidad>
+<precioUnitario>0.65</precioUnitario>
+<descuento>1.56</descuento>
+<precioTotalSinImpuesto>8.84</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.84</baseImponible>
+<valor>1.06</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">ventas@imporpernos.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2430658</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">052227</campoAdicional>
+</infoAdicional>
+</factura>

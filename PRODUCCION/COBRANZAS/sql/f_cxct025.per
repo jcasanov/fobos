@@ -1,0 +1,31 @@
+database acero_gm
+screen size 24 by 80
+{
+z25_compania       [f000       ]
+z25_localidad      [f001  ]
+z25_numero_sol     [f002       ]
+z25_orden          [f003       ]
+z25_codcli         [f004       ]
+z25_tipo_doc       [a0]
+z25_num_doc        [f005           ]
+z25_dividendo      [f006  ]
+z25_valor_cap      [f007          ]
+z25_valor_int      [f008          ]
+z25_valor_mora     [f009         ]
+}
+end
+tables
+cxct025
+attributes
+f000 = cxct025.z25_compania;
+f001 = cxct025.z25_localidad;
+f002 = cxct025.z25_numero_sol;
+f003 = cxct025.z25_orden;
+f004 = cxct025.z25_codcli;
+a0 = cxct025.z25_tipo_doc;
+f005 = cxct025.z25_num_doc;
+f006 = cxct025.z25_dividendo;
+f007 = cxct025.z25_valor_cap;
+f008 = cxct025.z25_valor_int;
+f009 = cxct025.z25_valor_mora;
+end

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176278</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176278</guiaRemision>
+<razonSocialComprador>INGENIERIA AVANZADA EN TECNOLOGIA EATEC S.A.</razonSocialComprador>
+<identificacionComprador>1792041236001</identificacionComprador>
+<totalSinImpuestos>522.78</totalSinImpuestos>
+<totalDescuento>71.28</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>522.78</baseImponible>
+<valor>62.73</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>585.51</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>6480</codigoPrincipal>
+<descripcion>YEE PVC DESAGUE DE 50mm.</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>1.71</precioUnitario>
+<descuento>2.05</descuento>
+<precioTotalSinImpuesto>15.05</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>15.05</baseImponible>
+<valor>1.81</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6228</codigoPrincipal>
+<descripcion>UNION PVC DESAGUE DE 50mm. ISO</descripcion>
+<cantidad>30.00</cantidad>
+<precioUnitario>0.99</precioUnitario>
+<descuento>3.56</descuento>
+<precioTotalSinImpuesto>26.14</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>26.14</baseImponible>
+<valor>3.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4061</codigoPrincipal>
+<descripcion>SIFON DESAGUE DE 50mm.</descripcion>
+<cantidad>32.00</cantidad>
+<precioUnitario>3.81</precioUnitario>
+<descuento>14.63</descuento>
+<precioTotalSinImpuesto>107.29</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>107.29</baseImponible>
+<valor>12.87</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5666</codigoPrincipal>
+<descripcion>TUBO PVC DESAGUE 40 PSI DE 110mm. x 3 Mts. ESPIGA CAMPANA</descripcion>
+<cantidad>15.00</cantidad>
+<precioUnitario>13.32</precioUnitario>
+<descuento>23.98</descuento>
+<precioTotalSinImpuesto>175.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>175.82</baseImponible>
+<valor>21.10</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5664</codigoPrincipal>
+<descripcion>TUBO PVC DESAGUE 40 PSI DE 75mm. x 3 Mts. ESPIGA CAMPANA</descripcion>
+<cantidad>15.00</cantidad>
+<precioUnitario>10.41</precioUnitario>
+<descuento>18.74</descuento>
+<precioTotalSinImpuesto>137.41</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>137.41</baseImponible>
+<valor>16.49</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>92288</codigoPrincipal>
+<descripcion>POLIPEGA ENVASE DE 3785 CC.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>42.94</precioUnitario>
+<descuento>5.15</descuento>
+<precioTotalSinImpuesto>37.79</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>37.79</baseImponible>
+<valor>4.53</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3468</codigoPrincipal>
+<descripcion>POLILIMPIA ENVASE DE 1 GALON</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>26.45</precioUnitario>
+<descuento>3.17</descuento>
+<precioTotalSinImpuesto>23.28</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>23.28</baseImponible>
+<valor>2.79</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">5009000</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">045954</campoAdicional>
+</infoAdicional>
+</factura>

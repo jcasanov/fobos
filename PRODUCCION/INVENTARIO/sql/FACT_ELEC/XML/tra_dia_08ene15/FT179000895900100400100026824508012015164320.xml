@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268245</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>08/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268245</guiaRemision>
+<razonSocialComprador>ANDRANGO INLAGO RAFAEL FERNANDO</razonSocialComprador>
+<identificacionComprador>1002553558001</identificacionComprador>
+<totalSinImpuestos>1261.16</totalSinImpuestos>
+<totalDescuento>66.38</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1261.16</baseImponible>
+<valor>151.34</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1412.50</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>69381</codigoPrincipal>
+<descripcion>BOMBA CENTRIF MULTIETAPA C-MOTOR CHI12-10 1.5HP/115/230/1/60 A.I.316 (4F504570) BQQE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1327.54</precioUnitario>
+<descuento>66.38</descuento>
+<precioTotalSinImpuesto>1261.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1261.16</baseImponible>
+<valor>151.34</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jorgeloveandrango@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0993559070</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064248</campoAdicional>
+</infoAdicional>
+</factura>

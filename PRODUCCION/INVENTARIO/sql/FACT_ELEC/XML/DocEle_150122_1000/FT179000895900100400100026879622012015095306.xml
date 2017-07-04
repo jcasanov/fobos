@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268796</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268796</guiaRemision>
+<razonSocialComprador>GALARRAGA TAMAYO CARLOS ROBERTO</razonSocialComprador>
+<identificacionComprador>1709219990001</identificacionComprador>
+<totalSinImpuestos>37.30</totalSinImpuestos>
+<totalDescuento>6.58</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>37.30</baseImponible>
+<valor>4.48</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>41.78</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>96001</codigoPrincipal>
+<descripcion>DISCO PARA SIERRA 48-40-4150 DE 8-1/4" Y 24 DIENTES P/MADERA</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>21.94</precioUnitario>
+<descuento>6.58</descuento>
+<precioTotalSinImpuesto>37.30</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>37.30</baseImponible>
+<valor>4.48</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">ventasbopel@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2451381</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064361</campoAdicional>
+</infoAdicional>
+</factura>

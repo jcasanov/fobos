@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268108</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>06/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268108</guiaRemision>
+<razonSocialComprador>JARRIN CHIRIBOGA SANTIAGO ERNESTO</razonSocialComprador>
+<identificacionComprador>1700594144001</identificacionComprador>
+<totalSinImpuestos>1186.75</totalSinImpuestos>
+<totalDescuento>209.43</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1186.75</baseImponible>
+<valor>142.41</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1329.16</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>70375</codigoPrincipal>
+<descripcion>ROTOMARTILLO 5359-21 SDS DE 1-1/8" 7.4AMP 0-980RPM 0-4200 GOLPES (MALETIN)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>640.14</precioUnitario>
+<descuento>96.02</descuento>
+<precioTotalSinImpuesto>544.12</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>544.12</baseImponible>
+<valor>65.29</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99313</codigoPrincipal>
+<descripcion>AMOLADORA ELECTRICA 6121-30 DE 11AMP./110V./1400W/1.9HP.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>231.04</precioUnitario>
+<descuento>34.66</descuento>
+<precioTotalSinImpuesto>196.38</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>196.38</baseImponible>
+<valor>23.57</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103110</codigoPrincipal>
+<descripcion>ROTOMARTILLO A BATERIA 2607-22 DE 18V.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>525.00</precioUnitario>
+<descuento>78.75</descuento>
+<precioTotalSinImpuesto>446.25</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>446.25</baseImponible>
+<valor>53.55</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">santiago@jarrin.se</campoAdicional>
+<campoAdicional nombre="telefono-movil">2274934</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">050162</campoAdicional>
+</infoAdicional>
+</factura>

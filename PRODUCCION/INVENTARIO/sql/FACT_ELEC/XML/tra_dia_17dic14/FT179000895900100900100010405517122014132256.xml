@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104055</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>LA LIBERTAD-ELEODORO SOLORZANO Y CLL.11</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104055</guiaRemision>
+<razonSocialComprador>GOBIERNO AUTONOMO DESCENTRALIZADO MUNICIPAL DEL CANTON LA LIBERTAD</razonSocialComprador>
+<identificacionComprador>0960006340001</identificacionComprador>
+<totalSinImpuestos>265.93</totalSinImpuestos>
+<totalDescuento>32.87</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>265.93</baseImponible>
+<valor>31.91</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>297.84</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99485</codigoPrincipal>
+<descripcion>CABLE ELECTRICO 16/6P P/BOTONERA DE TROLLEY (CADA METRO)</descripcion>
+<cantidad>15.00</cantidad>
+<precioUnitario>19.92</precioUnitario>
+<descuento>32.87</descuento>
+<precioTotalSinImpuesto>265.93</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="KITO" valor="KITO"/>
+<detAdicional nombre="M" valor="M"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>265.93</baseImponible>
+<valor>31.91</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3711925</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">015996</campoAdicional>
+</infoAdicional>
+</factura>

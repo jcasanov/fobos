@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000016390</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>VIVIENDAS VICOLINCI S.A.</razonSocialComprador>
+<identificacionComprador>0990179883001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000016390</numDocModificado>
+<fechaEmisionDocSustento>22/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>182.77</totalSinImpuestos>
+<valorModificacion>204.70</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>182.77</baseImponible>
+<valor>21.93</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV. DF-13351 FACT. FA-91642</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>22042</codigoInterno>
+<descripcion>DEV. DF-13351 FACT. FA-91642</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>182.77</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>182.77</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ACERO"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>182.77</baseImponible>
+<valor>21.93</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2235631</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">11985</campoAdicional>
+</infoAdicional>
+</notaCredito>

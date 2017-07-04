@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268569</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268569</guiaRemision>
+<razonSocialComprador>OLEAGINOSAS DEL CASTILLO OLEOCASTILLO S.A.</razonSocialComprador>
+<identificacionComprador>1791800486001</identificacionComprador>
+<totalSinImpuestos>214.82</totalSinImpuestos>
+<totalDescuento>23.88</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>214.82</baseImponible>
+<valor>25.78</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>240.60</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99165</codigoPrincipal>
+<descripcion>KIT DE REPARACION P/ CM 1/3/5  (96932397)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>96.28</precioUnitario>
+<descuento>9.63</descuento>
+<precioTotalSinImpuesto>86.65</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>86.65</baseImponible>
+<valor>10.40</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102389</codigoPrincipal>
+<descripcion>KIT DE REPARACION P/ CM 1/3/5  (97690016)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>76.85</precioUnitario>
+<descuento>7.69</descuento>
+<precioTotalSinImpuesto>69.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>69.16</baseImponible>
+<valor>8.30</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101634</codigoPrincipal>
+<descripcion>IMPULSOR DE ACERO INOX. P/CM-5 (97690626)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>65.57</precioUnitario>
+<descuento>6.56</descuento>
+<precioTotalSinImpuesto>59.01</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>59.01</baseImponible>
+<valor>7.08</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">fpalma@ales.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2402600</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">022669</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C# 5210</campoAdicional>
+</infoAdicional>
+</factura>

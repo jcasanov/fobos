@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104073</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104073</guiaRemision>
+<razonSocialComprador>CHIANG GONZALES FABIAN</razonSocialComprador>
+<identificacionComprador>0909164659</identificacionComprador>
+<totalSinImpuestos>187.73</totalSinImpuestos>
+<totalDescuento>20.72</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>187.73</baseImponible>
+<valor>22.53</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>210.26</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>69290</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS E152-BO GINEBRA ELONGADO BONE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>135.64</precioUnitario>
+<descuento>13.56</descuento>
+<precioTotalSinImpuesto>122.08</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>122.08</baseImponible>
+<valor>14.65</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>91288</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA CON PEDESTAL PREPONCHADO E227-BO BARI  BONE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>47.00</precioUnitario>
+<descuento>4.70</descuento>
+<precioTotalSinImpuesto>42.30</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>42.30</baseImponible>
+<valor>5.08</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>91367</codigoPrincipal>
+<descripcion>EMPAQUE AC.1 ANILLO DE CERA P/ INODOROS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2.66</precioUnitario>
+<descuento>0.27</descuento>
+<precioTotalSinImpuesto>2.39</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.39</baseImponible>
+<valor>0.29</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>93876</codigoPrincipal>
+<descripcion>TORNILLO EPER-DH C/TACOS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.22</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1.22</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="PAR"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.22</baseImponible>
+<valor>0.15</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>67558</codigoPrincipal>
+<descripcion>TUBO ABASTO METALICO TRENZADO E275.02.20.0 DH MANGUERA 12" P/LLAVE ANGULAR</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3.73</precioUnitario>
+<descuento>0.37</descuento>
+<precioTotalSinImpuesto>3.36</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.36</baseImponible>
+<valor>0.40</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>41321</codigoPrincipal>
+<descripcion>JUEGO DE ACCESORIOS ADHESIVO E579.15-BO  DURFIX 6 Pzs. BONE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>18.20</precioUnitario>
+<descuento>1.82</descuento>
+<precioTotalSinImpuesto>16.38</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>16.38</baseImponible>
+<valor>1.97</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2852742</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016666</campoAdicional>
+</infoAdicional>
+</factura>

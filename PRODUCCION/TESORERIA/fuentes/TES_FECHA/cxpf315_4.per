@@ -1,0 +1,75 @@
+DATABASE aceros
+SCREEN
+{
+                       MOVIMIENTOS EN CONTABILIDAD
+                       --------------------------
+
+ Proveedor: [c000  |c001                                                     ]
+   Período: [c002      ] - [c003      ]           Moneda: [c0|c004           ]
+                                    Saldo Anterior Cobranpas: [c005          ]
+[c006  ] de [c007  ]             Saldo Anterior Contabilidad: [c008          ]
+ [c1|c010    |c011      |c012                   |c013          |c014          ]
+[c2|c020    |c021      |c022                   |c023          |c024          ]
+[c2|c020    |c021      |c022                   |c023          |c024          ]
+[c2|c020    |c021      |c022                   |c023          |c024          ]
+[c2|c020    |c021      |c022                   |c023          |c024          ]
+[c2|c020    |c021      |c022                   |c023          |c024          ]
+[c2|c020    |c021      |c022                   |c023          |c024          ]
+[c2|c020    |c021      |c022                   |c023          |c024          ]
+                                   Totales ==> [c030          |c031          ]
+
+                                        Saldo en Contabilidad [c032          ]
+                                  (+/-)    Saldo en Cobranpas [c033          ]
+                                                              --------------- 
+                                                   Diferencia [c034          ]
+}
+TABLES
+cxpt001
+ctbt013
+ATTRIBUTES
+c000 = cxpt001.p01_codprov, NOENTRY, UPSHIFT, REVERSE;
+c001 = cxpt001.p01_nomprov, NOENTRY, UPSHIFT, REVERSE;
+c002 = FORMONLY.fecha_ini, NOENTRY, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy';
+c003 = FORMONLY.fecha_fin, NOENTRY, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy';
+c0   = FORMONLY.moneda, NOENTRY, UPSHIFT, REVERSE;
+c004 = FORMONLY.tit_mon, NOENTRY, UPSHIFT, REVERSE;
+c005 = FORMONLY.sal_ini_tes, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '---,---,--&.##',
+	COLOR = RED WHERE c005 < 0;
+c006 = FORMONLY.num_row, NOENTRY, UPSHIFT;
+c007 = FORMONLY.max_row, NOENTRY, UPSHIFT;
+c008 = FORMONLY.sal_ini_con, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '---,---,--&.##',
+	COLOR = RED WHERE c008 < 0;
+
+c1   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c010 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c011 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c012 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c013 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c014 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+c2   = ctbt013.b13_tipo_comp, NOENTRY, UPSHIFT;
+c020 = ctbt013.b13_num_comp, NOENTRY, UPSHIFT;
+c021 = ctbt013.b13_fec_proceso, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c022 = ctbt013.b13_glosa, NOENTRY, UPSHIFT;
+c023 = FORMONLY.val_db, NOENTRY, UPSHIFT, FORMAT = '---,---,--&.##';
+c024 = FORMONLY.val_cr, NOENTRY, UPSHIFT, FORMAT = '---,---,--&.##';
+
+c030 = FORMONLY.tot_val_db, NOENTRY, UPSHIFT, FORMAT = '---,---,--&.##',
+	COLOR = RED WHERE c030 < 0;
+c031 = FORMONLY.tot_val_cr, NOENTRY, UPSHIFT, FORMAT = '---,---,--&.##',
+	COLOR = RED WHERE c031 < 0;
+
+c032 = FORMONLY.saldo_cont, NOENTRY, UPSHIFT, REVERSE,FORMAT = '---,---,--&.##';
+c033 = FORMONLY.saldo_tes, NOENTRY, UPSHIFT, REVERSE, FORMAT = '---,---,--&.##';
+
+c034 = FORMONLY.val_des, NOENTRY, UPSHIFT, FORMAT = '---,---,--&.##',
+	COLOR = RED WHERE c034 < 0;
+END
+KEYS
+F5 = "Diario Contable"
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_cont[7] (b13_tipo_comp, b13_num_comp, b13_fec_proceso,b13_glosa,
+				val_db, val_cr)

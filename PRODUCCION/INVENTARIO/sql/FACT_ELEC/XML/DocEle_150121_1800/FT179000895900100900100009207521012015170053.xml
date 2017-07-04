@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092075</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092075</guiaRemision>
+<razonSocialComprador>AUTOMOTORES Y ANEXOS S.A.</razonSocialComprador>
+<identificacionComprador>1790014797001</identificacionComprador>
+<totalSinImpuestos>527.45</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>527.45</baseImponible>
+<valor>63.29</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>590.74</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>95164</codigoPrincipal>
+<descripcion>KIT DE MANTENIMIENTO P/ CR3-9 (96455095)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>260.03</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>260.03</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>260.03</baseImponible>
+<valor>31.20</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>69424</codigoPrincipal>
+<descripcion>KIT DE REPARACION BOMBAS CR KIT DE CIERRE MECANICO HQQE CR1/1s/3/5 (96455086)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>267.42</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>267.42</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="JUEGO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>267.42</baseImponible>
+<valor>32.09</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jucapiba9@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3802900</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">004298</campoAdicional>
+</infoAdicional>
+</factura>

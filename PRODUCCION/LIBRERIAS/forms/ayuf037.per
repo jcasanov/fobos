@@ -1,30 +1,37 @@
 DATABASE aceros
-
 SCREEN
 {
  ZONAS DE COBRO
-------------------------------------
- Rubro   Descripción 		
-------------------------------------
-[c01] [c002                       ] 
-[c01] [c002                       ]
-[c01] [c002                       ]
-[c01] [c002                       ]
-[c01] [c002                       ]
-[c01] [c002                       ]
-[c01] [c002                       ] 
-[c01] [c002                       ] 
-[c01] [c002                       ] 
-[c01] [c002                       ] 
+                           [c000] de [c001]
+ [c010  |c011                          |c|d] 
+[c020  |c021                          |e|f] 
+[c020  |c021                          |e|f] 
+[c020  |c021                          |e|f] 
+[c020  |c021                          |e|f] 
+[c020  |c021                          |e|f] 
+[c020  |c021                          |e|f] 
+[c020  |c021                          |e|f] 
+[c020  |c021                          |e|f] 
+[c020  |c021                          |e|f] 
+[c020  |c021                          |e|f] 
 }
-
 TABLES
 cxct006
-
 ATTRIBUTES
-c01 = z06_zona_cobro;
-c002 = z06_nombre;
-END
+c000 = FORMONLY.num_rows, NOENTRY, UPSHIFT, REVERSE;
+c001 = FORMONLY.max_rows, NOENTRY, UPSHIFT, REVERSE;
 
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c    = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+d    = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+
+c020 = cxct006.z06_zona_cobro, NOENTRY, UPSHIFT;
+c021 = cxct006.z06_nombre, NOENTRY, UPSHIFT;
+e    = cxct006.z06_comision, NOENTRY, UPSHIFT;
+f    = cxct006.z06_estado, NOENTRY, UPSHIFT;
+END
 INSTRUCTIONS
-SCREEN RECORD rh_zoncob[10](z06_zona_cobro, z06_nombre)
+DELIMITERS '||'
+SCREEN RECORD rh_zoncob[10] (z06_zona_cobro, z06_nombre, z06_comision,
+				z06_estado)

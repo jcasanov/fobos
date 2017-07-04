@@ -1,0 +1,30 @@
+DATABASE aceros
+
+SCREEN
+{
+ TIPOS DOCUMENTOS 
+--------------------------
+ Tipo     Descripcion
+--------------------------
+[c01] [c002            ] 
+[c01] [c002            ]
+[c01] [c002            ]
+[c01] [c002            ]
+[c01] [c002            ]
+[c01] [c002            ]
+[c01] [c002            ] 
+[c01] [c002            ] 
+[c01] [c002            ] 
+[c01] [c002            ] 
+}
+
+TABLES
+cxpt004
+
+ATTRIBUTES
+c01 = p04_tipo_doc;
+c002 = p04_nombre;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_tipdocte[10](p04_tipo_doc, p04_nombre)

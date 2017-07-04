@@ -1,0 +1,63 @@
+database acero_gm
+screen size 24 by 80
+{
+n32_compania       [f000       ]
+n32_cod_liqrol     [a0]
+n32_fecha_ini      [f001      ]
+n32_fecha_fin      [f002      ]
+n32_cod_trab       [f003       ]
+n32_estado         [a]
+n32_cod_depto      [f004  ]
+n32_sueldo         [f005         ]
+n32_ano_proceso    [f006  ]
+n32_mes_proceso    [f007  ]
+n32_orden          [f008  ]
+n32_dias_trab      [f009  ]
+n32_dias_falt      [f010  ]
+n32_tot_gan        [f011          ]
+n32_tot_ing        [f012          ]
+n32_tot_egr        [f013          ]
+n32_tot_neto       [f014          ]
+n32_moneda         [a1]
+n32_paridad        [f015              ]
+n32_tipo_pago      [b]
+}
+screen
+{
+n32_bco_empresa    [f016       ]
+n32_cta_empresa    [f017           ]
+n32_cta_trabaj     [f018           ]
+n32_usuario        [f019      ]
+n32_fecing         [f020               ]
+}
+end
+tables
+rolt032
+attributes
+f000 = rolt032.n32_compania;
+a0 = rolt032.n32_cod_liqrol;
+f001 = rolt032.n32_fecha_ini;
+f002 = rolt032.n32_fecha_fin;
+f003 = rolt032.n32_cod_trab;
+a = rolt032.n32_estado;
+f004 = rolt032.n32_cod_depto;
+f005 = rolt032.n32_sueldo;
+f006 = rolt032.n32_ano_proceso;
+f007 = rolt032.n32_mes_proceso;
+f008 = rolt032.n32_orden;
+f009 = rolt032.n32_dias_trab;
+f010 = rolt032.n32_dias_falt;
+f011 = rolt032.n32_tot_gan;
+f012 = rolt032.n32_tot_ing;
+f013 = rolt032.n32_tot_egr;
+f014 = rolt032.n32_tot_neto;
+a1 = rolt032.n32_moneda;
+f015 = rolt032.n32_paridad;
+b = rolt032.n32_tipo_pago;
+
+f016 = rolt032.n32_bco_empresa;
+f017 = rolt032.n32_cta_empresa;
+f018 = rolt032.n32_cta_trabaj;
+f019 = rolt032.n32_usuario;
+f020 = rolt032.n32_fecing;
+end

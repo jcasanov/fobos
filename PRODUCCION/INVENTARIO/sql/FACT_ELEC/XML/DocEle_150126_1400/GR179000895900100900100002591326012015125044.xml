@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025913</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>SERVIENTREGA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0991285679001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>26/01/2015</fechaIniTransporte>
+<fechaFinTransporte>27/01/2015</fechaFinTransporte>
+<placa>YBA3003</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1390013643001</identificacionDestinatario>
+<razonSocialDestinatario>INDUSTRIAS DE ENLATADOS ALIMENTICIOS CIA. LTDA. IDEAL</razonSocialDestinatario>
+<dirDestinatario>MANTA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>26/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>100406</codigoInterno>
+<descripcion>BOMBA SUMERG AGUAS NEGRAS SL1.80.100.75.4.60F 10HP 230/3F-60 SOLID. 80mm (96973062)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>100409</codigoInterno>
+<descripcion>BASE DE BOMBAS AUTO ACOPLE DN100 (96090994)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>103102</codigoInterno>
+<descripcion>CONTROL DE NIVEL RFSN-10 115 13 AMP (P/AGUAS NEGRAS)  (599119)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>71453</codigoInterno>
+<descripcion>TABLERO ELECTRICO P/B SUMEG DE 10HP/220V.1F  SUPERV. VOLT. VOLT., AMP. S. DE NIVEL M/A</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">comprobanteselectronicos@ideal-manta.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">052310377</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016743</campoAdicional>
+</infoAdicional>
+</guiaRemision>

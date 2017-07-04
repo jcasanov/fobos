@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131801</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131801</guiaRemision>
+<razonSocialComprador>ZAPATA ZAPATA LAURA MARTHA</razonSocialComprador>
+<identificacionComprador>1709283939001</identificacionComprador>
+<totalSinImpuestos>159.79</totalSinImpuestos>
+<totalDescuento>17.75</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>159.79</baseImponible>
+<valor>19.17</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>178.96</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>21380</codigoPrincipal>
+<descripcion>VALVULA CHEQUE VC-75 DE 3" DE BRONCE TIPO PESADO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>177.54</precioUnitario>
+<descuento>17.75</descuento>
+<precioTotalSinImpuesto>159.79</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HELBER"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>159.79</baseImponible>
+<valor>19.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">powerparts2008@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2615974</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">062635</campoAdicional>
+</infoAdicional>
+</factura>

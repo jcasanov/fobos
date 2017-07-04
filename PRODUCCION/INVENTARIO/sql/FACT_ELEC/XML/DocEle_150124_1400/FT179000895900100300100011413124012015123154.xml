@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000114131</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>24/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000114131</guiaRemision>
+<razonSocialComprador>ACERIA DEL ECUADOR CA ADELCA.</razonSocialComprador>
+<identificacionComprador>1790004724001</identificacionComprador>
+<totalSinImpuestos>5040.76</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>5040.76</baseImponible>
+<valor>604.89</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>5645.65</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>103403</codigoPrincipal>
+<descripcion>TUBO VAPOR ASTM 106 0 A53 S-COSTURA CED.80 DE 1-1/2"</descripcion>
+<cantidad>697.20</cantidad>
+<precioUnitario>7.23</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>5040.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="M"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5040.76</baseImponible>
+<valor>604.89</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">recibo-electronico@adelca.com</campoAdicional>
+<campoAdicional nombre="Email">dgualotunia@adelca.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3968100</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">028583</campoAdicional>
+<campoAdicional nombre="Observaciones">SOLICITADO POR DIANA GUALOTUNA.</campoAdicional>
+</infoAdicional>
+</factura>

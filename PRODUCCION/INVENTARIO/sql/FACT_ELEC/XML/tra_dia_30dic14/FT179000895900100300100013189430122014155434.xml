@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131894</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>30/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131894</guiaRemision>
+<razonSocialComprador>ROMAN RISCO NANCY VIRGINIA</razonSocialComprador>
+<identificacionComprador>1714719612001</identificacionComprador>
+<totalSinImpuestos>217.59</totalSinImpuestos>
+<totalDescuento>38.41</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>217.59</baseImponible>
+<valor>26.11</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>243.70</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>90471</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS 11161065 CENTURY CHERRY (65) ASTO.MONTECRISTO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>89.10</precioUnitario>
+<descuento>13.37</descuento>
+<precioTotalSinImpuesto>75.73</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>75.73</baseImponible>
+<valor>9.09</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>26935</codigoPrincipal>
+<descripcion>TUBO ABASTO-LLAVE ANGULAR INODORO E266.02 DH-CR FLEXIBLE DE 12"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>10.07</precioUnitario>
+<descuento>3.02</descuento>
+<precioTotalSinImpuesto>17.12</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>17.12</baseImponible>
+<valor>2.05</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>27470</codigoPrincipal>
+<descripcion>LLAVE ANGULAR E269 DH CR DE 1/2"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>5.54</precioUnitario>
+<descuento>1.66</descuento>
+<precioTotalSinImpuesto>9.42</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.42</baseImponible>
+<valor>1.13</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>26724</codigoPrincipal>
+<descripcion>SIFON DE LAVABO E240 RA DE 1-1/4" DH-BL RESINA ACETAL C/ ACOPLE</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>4.41</precioUnitario>
+<descuento>1.32</descuento>
+<precioTotalSinImpuesto>7.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7.50</baseImponible>
+<valor>0.90</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>67542</codigoPrincipal>
+<descripcion>DESAGUE DE LAVABO E2460 RA DH BLC DESAGUE C/ REJILLA</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>2.85</precioUnitario>
+<descuento>0.86</descuento>
+<precioTotalSinImpuesto>4.84</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.84</baseImponible>
+<valor>0.58</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>22261</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS E111-P-GR LIDO PLUS GRIS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>71.53</precioUnitario>
+<descuento>10.73</descuento>
+<precioTotalSinImpuesto>60.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>60.80</baseImponible>
+<valor>7.30</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>95800</codigoPrincipal>
+<descripcion>GRIFERIA DE LAVABO 4" E191/26 CR LUMINA CROMO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>44.71</precioUnitario>
+<descuento>6.71</descuento>
+<precioTotalSinImpuesto>38.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>38.00</baseImponible>
+<valor>4.56</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>27306</codigoPrincipal>
+<descripcion>EMPAQUE 1318000 CON ANILLO DE CERA P/ WC</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>2.46</precioUnitario>
+<descuento>0.74</descuento>
+<precioTotalSinImpuesto>4.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.18</baseImponible>
+<valor>0.50</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">gmoyaveloz@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3112993</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">055510</campoAdicional>
+</infoAdicional>
+</factura>

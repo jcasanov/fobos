@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comprobanteRetencion id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048517</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoCompRetencion>
+<fechaEmision>12/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionSujetoRetenido>04</tipoIdentificacionSujetoRetenido>
+<razonSocialSujetoRetenido>SERVICIO MITSUBISHI</razonSocialSujetoRetenido>
+<identificacionSujetoRetenido>1708025372001</identificacionSujetoRetenido>
+<periodoFiscal>01/2015</periodoFiscal>
+</infoCompRetencion>
+<impuestos>
+<impuesto>
+<codigo>1</codigo>
+<codigoRetencion>307</codigoRetencion>
+<baseImponible>638.00</baseImponible>
+<porcentajeRetener>2.00</porcentajeRetener>
+<valorRetenido>12.76</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>002001000000371</numDocSustento>
+<fechaEmisionDocSustento>12/01/2015</fechaEmisionDocSustento>
+</impuesto>
+<impuesto>
+<codigo>2</codigo>
+<codigoRetencion>2</codigoRetencion>
+<baseImponible>76.56</baseImponible>
+<porcentajeRetener>70.00</porcentajeRetener>
+<valorRetenido>53.59</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>002001000000371</numDocSustento>
+<fechaEmisionDocSustento>12/01/2015</fechaEmisionDocSustento>
+</impuesto>
+</impuestos>
+<infoAdicional>
+<campoAdicional nombre="Email">jpescobar@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2504 440</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000844</campoAdicional>
+</infoAdicional>
+</comprobanteRetencion>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000114105</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000114105</guiaRemision>
+<razonSocialComprador>PLYWOOD ECUATORIANA S.A.</razonSocialComprador>
+<identificacionComprador>1790007111001</identificacionComprador>
+<totalSinImpuestos>5.76</totalSinImpuestos>
+<totalDescuento>0.64</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>5.76</baseImponible>
+<valor>0.69</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>6.45</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>92085</codigoPrincipal>
+<descripcion>UNION GALV. CLASE 150 DE 1-1/4"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1.91</precioUnitario>
+<descuento>0.38</descuento>
+<precioTotalSinImpuesto>3.44</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.44</baseImponible>
+<valor>0.41</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3204</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1" x 4"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1.29</precioUnitario>
+<descuento>0.26</descuento>
+<precioTotalSinImpuesto>2.32</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.32</baseImponible>
+<valor>0.28</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">greyes@platayuc.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">676847</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">028929</campoAdicional>
+<campoAdicional nombre="Observaciones">SOLICITADO POR SR RAUL CONSTANTE.</campoAdicional>
+</infoAdicional>
+</factura>

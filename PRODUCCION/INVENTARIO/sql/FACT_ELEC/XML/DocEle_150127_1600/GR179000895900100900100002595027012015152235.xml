@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025950</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>SERVIENTREGA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0991285679001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>27/01/2015</fechaIniTransporte>
+<fechaFinTransporte>28/01/2015</fechaFinTransporte>
+<placa>YBA3003</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0701851909001</identificacionDestinatario>
+<razonSocialDestinatario>JARAMILLO ESPINOZA JORGE OSWALDO</razonSocialDestinatario>
+<dirDestinatario>MACHALA OJO RECIBE JESSICA INIGUEZ O YELENA INIGUEZ</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>27/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>99548</codigoInterno>
+<descripcion>BOMBA CENTRIF STANDARD C-MOTOR 15HC42575-CCMGFA 15HP/220V/60C/3F 3575RPM IMP.6.5(11042575131)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacion_orocentro@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2972456</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">012971</campoAdicional>
+</infoAdicional>
+</guiaRemision>

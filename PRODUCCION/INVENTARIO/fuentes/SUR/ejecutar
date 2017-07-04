@@ -1,0 +1,9 @@
+sh ej_eq_bases | tee ej_eq_bases.log
+rm descar_jer.sql
+rm ejecutar
+rm ej_eq_bases
+rm equiparar_bases
+rm equipbase
+rm equipbase.4go
+rm insitemcr3
+rm insitemcr3.4go

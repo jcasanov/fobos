@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000114036</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000114036</guiaRemision>
+<razonSocialComprador>PLASTEX  S.A.</razonSocialComprador>
+<identificacionComprador>1790013006001</identificacionComprador>
+<totalSinImpuestos>222.67</totalSinImpuestos>
+<totalDescuento>23.85</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>222.67</baseImponible>
+<valor>26.72</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>249.39</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>694</codigoPrincipal>
+<descripcion>TOL AL CALOR DE 6mm. 1.22 x 2.44 m (140.34 KG.)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>198.23</precioUnitario>
+<descuento>19.82</descuento>
+<precioTotalSinImpuesto>178.41</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>178.41</baseImponible>
+<valor>21.41</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3662</codigoPrincipal>
+<descripcion>REDUCCION GALV. CLASE 150 DE 1-1/2" x 1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.29</precioUnitario>
+<descuento>0.13</descuento>
+<precioTotalSinImpuesto>1.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.16</baseImponible>
+<valor>0.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3306</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 4" x 3-1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>11.08</precioUnitario>
+<descuento>1.11</descuento>
+<precioTotalSinImpuesto>9.97</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.97</baseImponible>
+<valor>1.20</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3310</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 4" x 5"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>13.56</precioUnitario>
+<descuento>1.36</descuento>
+<precioTotalSinImpuesto>12.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>12.20</baseImponible>
+<valor>1.46</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5492</codigoPrincipal>
+<descripcion>TUBO GALV. S-UNION ISO II TIPO "T" DE 1/2" x 6 m. ESPESOR 2 mm.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>13.63</precioUnitario>
+<descuento>0.55</descuento>
+<precioTotalSinImpuesto>13.08</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>13.08</baseImponible>
+<valor>1.57</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>92199</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 90 GRAD  DE 1/2"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1.14</precioUnitario>
+<descuento>0.23</descuento>
+<precioTotalSinImpuesto>2.05</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.05</baseImponible>
+<valor>0.25</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99959</codigoPrincipal>
+<descripcion>GRIFO PASO RECTO BRONCE ROSCADO EVOLUTION DE 1/2" CABO AMARILLO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>6.45</precioUnitario>
+<descuento>0.65</descuento>
+<precioTotalSinImpuesto>5.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FIV"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.80</baseImponible>
+<valor>0.70</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">comprasplastex@.net.ec</campoAdicional>
+<campoAdicional nombre="Email">piniga@plastexec.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">677018</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000340</campoAdicional>
+<campoAdicional nombre="Observaciones">SOLIC. ING. IÒIGA</campoAdicional>
+</infoAdicional>
+</factura>

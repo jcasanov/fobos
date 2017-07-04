@@ -1,0 +1,76 @@
+DATABASE aceros
+SCREEN
+{
+
+                                                              [c000] de [c001]
+
+                  Localidad: [c0] [c002                ]
+             Tipo Documento: [c1] [c003           ]   Forma Pago: [c004      ]
+
+          Secuencia Interna: [c005]
+
+           Prefijo Sucursal: [c006]          Prefijo Punto Venta: [c007]
+
+  No. Control Secuencia SRI: [c008      ]      No. Dig. Doc. SRI: [c009]
+          Fecha Emision SRI: [c010      ]   Fecha Expiracion SRI: [c011      ]
+           No. Autorizacion: [c012           ]
+
+              Fecha Entrega: [c013      ]       No. Días Colchón: [c014]
+
+       No. Sec. Inicial SRI: [c015      ]     No. Sec. Final SRI: [c016      ]
+
+
+         Usuario: [c017      ]         Fecha de Ingreso: [c018               ]
+
+}
+TABLES
+cxct004
+gent002
+gent037
+gent039
+ATTRIBUTES
+c000 = FORMONLY.num_reg, NOENTRY, UPSHIFT;
+c001 = FORMONLY.max_reg, NOENTRY, UPSHIFT;
+
+c0   = gent037.g37_localidad, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista F2',
+	COMMENTS = 'Localidad en que se genera el documento.';
+c002 = gent002.g02_nombre, NOENTRY, UPSHIFT, REVERSE;
+c1   = gent037.g37_tipo_doc, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista F2',
+	COMMENTS = 'Tipo documento que se genera en Localidad antes ingresada.';
+c003 = cxct004.z04_nombre, NOENTRY, UPSHIFT, REVERSE;
+c004 = gent037.g37_cont_cred, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'RADIO', CONFIG = 'C Contado R Credito N Ninguno',
+	COMMENTS = 'Solo en el caso de FACTURAS puede poner Contado o Credito.';
+c005 = gent037.g37_secuencia, NOENTRY, UPSHIFT, REVERSE;
+c006  = gent037.g37_pref_sucurs, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = ('000' TO '999'),
+	COMMENTS = 'Indicativo de la sucursal según el SRI.';
+c007  = gent037.g37_pref_pto_vta, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = ('000' TO '999'),
+	COMMENTS = 'Indicativo del punto de venta según el SRI.';
+c008 = gent037.g37_sec_num_sri, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = (0 TO 999999999),
+	COMMENTS = 'Ingresar un No. antes del numero de documento SRI.';
+c009 = gent037.g37_num_dig_sri, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Numero de digitos del Documento (completo sin pref.) SRI.';
+c010 = gent037.g37_fecha_emi, AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Fecha en formato: dd-mm-aaaa';
+c011 = gent037.g37_fecha_exp, AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Fecha en formato: dd-mm-aaaa';
+c012 = gent037.g37_autorizacion, AUTONEXT, UPSHIFT, REVERSE;
+
+c013 = gent039.g39_fec_entrega, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Fecha de Entrega de los Formularios. Formato dd-mm-aaaa';
+c014 = gent039.g39_num_dias_col, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Máximo de días que se estima para el cálculo de facturas.';
+c015 = gent039.g39_num_sri_ini, AUTONEXT, REVERSE, UPSHIFT,
+	INCLUDE = (0 TO 999999999);
+c016 = gent039.g39_num_sri_fin, AUTONEXT, REVERSE, UPSHIFT,
+	INCLUDE = (0 TO 999999999);
+
+c017 = gent037.g37_usuario, NOENTRY, UPSHIFT, REVERSE;
+c018 = gent037.g37_fecing, NOENTRY, UPSHIFT, REVERSE;
+END

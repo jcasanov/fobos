@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268637</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268637</guiaRemision>
+<razonSocialComprador>BLUHM KUSKE JUAN PEDRO</razonSocialComprador>
+<identificacionComprador>1700411240</identificacionComprador>
+<totalSinImpuestos>18.81</totalSinImpuestos>
+<totalDescuento>4.70</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>18.81</baseImponible>
+<valor>2.26</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>21.07</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>96370</codigoPrincipal>
+<descripcion>JUEGO DE HERRAJES PARA INODORO SPMD5197000 UNIVERSAL C/MANIJA PLASTICA CROMADA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>8.48</precioUnitario>
+<descuento>1.70</descuento>
+<precioTotalSinImpuesto>6.78</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.78</baseImponible>
+<valor>0.81</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>26921</codigoPrincipal>
+<descripcion>TUBO ABASTO- LLAVE ANGULAR LAVABO E262.03 DH-CR FLEXIBLE DE 12"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>10.71</precioUnitario>
+<descuento>2.14</descuento>
+<precioTotalSinImpuesto>8.57</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.57</baseImponible>
+<valor>1.03</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101924</codigoPrincipal>
+<descripcion>TUBO ABASTO METALICO TRENZADO E275.02.20.0.1  DH CR  16"  P/INOD. P/LLAVE ANGULAR</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>4.32</precioUnitario>
+<descuento>0.86</descuento>
+<precioTotalSinImpuesto>3.46</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.46</baseImponible>
+<valor>0.42</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">madriano@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2454333</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">028601</campoAdicional>
+<campoAdicional nombre="Observaciones">PEDIDO CASA QUITO TENIS</campoAdicional>
+</infoAdicional>
+</factura>

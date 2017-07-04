@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175848</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>PANAMERICA SUR KM. 40</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175848</guiaRemision>
+<razonSocialComprador>ECOFROZ  S.A</razonSocialComprador>
+<identificacionComprador>1791295706001</identificacionComprador>
+<totalSinImpuestos>2078.35</totalSinImpuestos>
+<totalDescuento>311.76</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1766.59</baseImponible>
+<valor>211.99</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1978.58</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99411</codigoPrincipal>
+<descripcion>MOTOR ELEC SUMERG DE 6" 6C3F DE 10 HP 230/460/3F (2363128120)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1499.97</precioUnitario>
+<descuento>225.00</descuento>
+<precioTotalSinImpuesto>1274.97</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANKLIN" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1274.97</baseImponible>
+<valor>153.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102800</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 6" SSI 150 GPM P/ 7.5 HP (616300402020082)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>578.38</precioUnitario>
+<descuento>86.76</descuento>
+<precioTotalSinImpuesto>491.62</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANKLIN PUMPS SYSTEMS" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>491.62</baseImponible>
+<valor>58.99</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

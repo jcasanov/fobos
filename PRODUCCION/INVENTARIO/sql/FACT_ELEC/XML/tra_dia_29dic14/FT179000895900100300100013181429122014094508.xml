@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131814</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>29/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131814</guiaRemision>
+<razonSocialComprador>GRANDA JARAMILLO MARCO</razonSocialComprador>
+<identificacionComprador>0702177007</identificacionComprador>
+<totalSinImpuestos>23.85</totalSinImpuestos>
+<totalDescuento>1.66</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>23.85</baseImponible>
+<valor>2.86</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>26.71</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5188</codigoPrincipal>
+<descripcion>TUBO DE ACERO REDONDO 1" x 0.9mm. ESPESOR</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>5.80</precioUnitario>
+<descuento>0.23</descuento>
+<precioTotalSinImpuesto>5.57</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.57</baseImponible>
+<valor>0.67</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>56</codigoPrincipal>
+<descripcion>ANGULO LAMINADO x 6 MTS. DE 30mm. x 4mm.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>15.02</precioUnitario>
+<descuento>1.20</descuento>
+<precioTotalSinImpuesto>13.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>13.82</baseImponible>
+<valor>1.66</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21470</codigoPrincipal>
+<descripcion>ELECTRODO E-6011-C-13 1/8" ACERO DULCE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>4.69</precioUnitario>
+<descuento>0.23</descuento>
+<precioTotalSinImpuesto>4.46</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="AGA"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.46</baseImponible>
+<valor>0.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">grandapublicidad1@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3333333</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">017028</campoAdicional>
+</infoAdicional>
+</factura>

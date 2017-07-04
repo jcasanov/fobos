@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131759</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131759</guiaRemision>
+<razonSocialComprador>AYMESA S.A.</razonSocialComprador>
+<identificacionComprador>1790023931001</identificacionComprador>
+<totalSinImpuestos>57.40</totalSinImpuestos>
+<totalDescuento>6.38</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>57.40</baseImponible>
+<valor>6.89</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>64.29</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>50294</codigoPrincipal>
+<descripcion>CODO POLIPROPILENO DE 1" x 90ø</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>1.35</precioUnitario>
+<descuento>1.35</descuento>
+<precioTotalSinImpuesto>12.15</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>12.15</baseImponible>
+<valor>1.46</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50454</codigoPrincipal>
+<descripcion>TUBO POLIPROPILENO DE 1" x 6 m. (AGUA CALIENTE)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>21.80</precioUnitario>
+<descuento>4.36</descuento>
+<precioTotalSinImpuesto>39.24</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>39.24</baseImponible>
+<valor>4.71</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50384</codigoPrincipal>
+<descripcion>TEE POLIPROPILENO DE 1" (AGUA CALIENTE)</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>1.67</precioUnitario>
+<descuento>0.67</descuento>
+<precioTotalSinImpuesto>6.01</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.01</baseImponible>
+<valor>0.72</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">aboada@aymesa.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2673166</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">028582</campoAdicional>
+</infoAdicional>
+</factura>

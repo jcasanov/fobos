@@ -1,0 +1,31 @@
+DATABASE aceros
+
+SCREEN
+{
+  CODIGO VEHICULOS CLIENTES
+ -----------------------------------------------------------------
+  Código                     Cliente
+ -----------------------------------------------------------------
+ [c01                      ][c002                                ] 
+ [c01                      ][c002                                ]
+ [c01                      ][c002                                ]
+ [c01                      ][c002                                ]
+ [c01                      ][c002                                ]
+ [c01                      ][c002                                ]
+ [c01                      ][c002                                ] 
+ [c01                      ][c002                                ] 
+ [c01                      ][c002                                ] 
+ [c01                      ][c002                                ] 
+
+}
+
+TABLES
+talt023
+
+ATTRIBUTES
+c01  = t23_modelo, UPSHIFT,REVERSE;
+c002 = t23_nom_cliente, UPSHIFT,REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_codveh[10](t23_modelo, t23_nom_cliente)

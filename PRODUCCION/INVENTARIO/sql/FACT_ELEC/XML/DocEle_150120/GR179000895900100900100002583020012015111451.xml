@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025830</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>SALVATIERRA ZAMBRANO</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>1307915718</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>20/01/2015</fechaIniTransporte>
+<fechaFinTransporte>21/01/2015</fechaFinTransporte>
+<placa>SIN PLACA</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1307915718</identificacionDestinatario>
+<razonSocialDestinatario>SALVATIERRA ZAMBRANO MARIBEL</razonSocialDestinatario>
+<dirDestinatario>RETIRA OMAR</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>20/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>93072</codigoInterno>
+<descripcion>TALADRO DE BASE ELECTROMAGNETICA 4297-1 MOTOR 1-1/4" 11.5AMP 500-250RPM P/BASES 4202/4203</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">pnreyessantos@hotmail.com</campoAdicional>
+<campoAdicional nombre="Email">jsalvatierra09@hotmail.es</campoAdicional>
+<campoAdicional nombre="telefono-movil">443778</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">015079</campoAdicional>
+</infoAdicional>
+</guiaRemision>

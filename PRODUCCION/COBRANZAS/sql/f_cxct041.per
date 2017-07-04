@@ -1,0 +1,25 @@
+database acero_gm
+screen size 24 by 80
+{
+z41_compania       [f000       ]
+z41_localidad      [f001  ]
+z41_codcli         [f002       ]
+z41_tipo_doc       [a0]
+z41_num_doc        [f003           ]
+z41_dividendo      [f004       ]
+z41_tipo_comp      [a1]
+z41_num_comp       [f005    ]
+}
+end
+tables
+cxct041
+attributes
+f000 = cxct041.z41_compania;
+f001 = cxct041.z41_localidad;
+f002 = cxct041.z41_codcli;
+a0 = cxct041.z41_tipo_doc;
+f003 = cxct041.z41_num_doc;
+f004 = cxct041.z41_dividendo;
+a1 = cxct041.z41_tipo_comp;
+f005 = cxct041.z41_num_comp;
+end

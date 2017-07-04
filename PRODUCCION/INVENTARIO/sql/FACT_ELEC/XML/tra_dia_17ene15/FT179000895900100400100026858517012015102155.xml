@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268585</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268585</guiaRemision>
+<razonSocialComprador>COMERCIAL IMPORTADORA VILLAYALA CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1790389944001</identificacionComprador>
+<totalSinImpuestos>157.26</totalSinImpuestos>
+<totalDescuento>23.50</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>157.26</baseImponible>
+<valor>18.87</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>176.13</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>50382</codigoPrincipal>
+<descripcion>TEE POLIPROPILENO DE 3/4" (AGUA CALIENTE)</descripcion>
+<cantidad>30.00</cantidad>
+<precioUnitario>0.90</precioUnitario>
+<descuento>3.51</descuento>
+<precioTotalSinImpuesto>23.49</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>23.49</baseImponible>
+<valor>2.82</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50290</codigoPrincipal>
+<descripcion>CODO POLIPROPILENO DE 1/2" x 90 GRAD</descripcion>
+<cantidad>100.00</cantidad>
+<precioUnitario>0.40</precioUnitario>
+<descuento>5.20</descuento>
+<precioTotalSinImpuesto>34.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>34.80</baseImponible>
+<valor>4.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50380</codigoPrincipal>
+<descripcion>TEE POLIPROPILENO DE 1/2" (AGUA CALIENTE)</descripcion>
+<cantidad>60.00</cantidad>
+<precioUnitario>0.48</precioUnitario>
+<descuento>3.74</descuento>
+<precioTotalSinImpuesto>25.06</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>25.06</baseImponible>
+<valor>3.01</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50350</codigoPrincipal>
+<descripcion>REDUCTOR POLIPROPILENO DE 3/4" A 1/2" (AGUA CALIENTE)</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>0.20</precioUnitario>
+<descuento>0.52</descuento>
+<precioTotalSinImpuesto>3.48</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.48</baseImponible>
+<valor>0.42</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50351</codigoPrincipal>
+<descripcion>REDUCTOR POLIPROPILENO DE 1" A 1/2" (AGUA CALIENTE)</descripcion>
+<cantidad>12.00</cantidad>
+<precioUnitario>0.98</precioUnitario>
+<descuento>1.53</descuento>
+<precioTotalSinImpuesto>10.23</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>10.23</baseImponible>
+<valor>1.23</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97467</codigoPrincipal>
+<descripcion>TEFLON EN ROLLO 0.07 x 12 mm. x 10 m.</descripcion>
+<cantidad>100.00</cantidad>
+<precioUnitario>0.58</precioUnitario>
+<descuento>7.54</descuento>
+<precioTotalSinImpuesto>50.46</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>50.46</baseImponible>
+<valor>6.06</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50412</codigoPrincipal>
+<descripcion>UNION POLIPROPILENO DE 3/4" (AGUA CALIENTE)</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>0.56</precioUnitario>
+<descuento>0.73</descuento>
+<precioTotalSinImpuesto>4.87</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.87</baseImponible>
+<valor>0.58</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50412</codigoPrincipal>
+<descripcion>UNION POLIPROPILENO DE 3/4" (AGUA CALIENTE)</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>0.56</precioUnitario>
+<descuento>0.73</descuento>
+<precioTotalSinImpuesto>4.87</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.87</baseImponible>
+<valor>0.58</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">villacres_freddy@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2455619</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">011636</campoAdicional>
+<campoAdicional nombre="Observaciones">PEDIDO ADJUNTO</campoAdicional>
+</infoAdicional>
+</factura>

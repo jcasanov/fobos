@@ -1,0 +1,32 @@
+DATABASE aceros
+SCREEN
+{
+DETALLE MANO DE OBRA DE LA ORDEN: [c001   ]
+
+       D e s c r i p c i ó n                     T.Opt. T.Real   Valor Tarea 
+[c002                                           |c003  |c004  |c005         ] 
+[c002                                           |c003  |c004  |c005         ] 
+[c002                                           |c003  |c004  |c005         ] 
+[c002                                           |c003  |c004  |c005         ] 
+[c002                                           |c003  |c004  |c005         ] 
+[c002                                           |c003  |c004  |c005         ] 
+[c002                                           |c003  |c004  |c005         ] 
+[c002                                           |c003  |c004  |c005         ] 
+ Mecánico: [c010                          ]                   [c011         ] 
+[c012                                                        ]
+}
+TABLES
+talt024
+ATTRIBUTES
+c001 = t24_orden, REVERSE;
+c002 = t24_descripcion;
+c003 = t24_puntos_opti;
+c004 = t24_puntos_real;
+c005 = t24_valor_tarea, FORMAT = '##,###,##&.##';
+c010 = formonly.nombres;
+c011 = formonly.tot_tareas TYPE DECIMAL(12,2), FORMAT='##,###,##&.##', REVERSE;
+c012 = formonly.descri_tar;
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_mo[8] (t24_descripcion, t24_puntos_opti, t24_puntos_real, 
+	               t24_valor_tarea)

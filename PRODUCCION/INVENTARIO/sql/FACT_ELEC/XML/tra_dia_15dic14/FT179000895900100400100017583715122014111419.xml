@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175837</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento> AV. RAFAEL ANDRADE Y GREGORIO URAPARI</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175837</guiaRemision>
+<razonSocialComprador>GOBIERNO AUTONOMO DESCENTRALIZADO MUNICIPAL DEL CANTON LORETO</razonSocialComprador>
+<identificacionComprador>1560001830001</identificacionComprador>
+<totalSinImpuestos>22113.00</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>22113.00</baseImponible>
+<valor>2653.56</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>24766.56</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>71492</codigoPrincipal>
+<descripcion>REMOLQUE P/DESTAPADORAS TOPO 4500 DE DOS EJES PARA KJ-3100 / K-1000</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>5966.81</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>5966.81</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5966.81</baseImponible>
+<valor>716.02</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100198</codigoPrincipal>
+<descripcion>DESTAPADOR DE DESAGUES A GASOLINA KJ-3100 P/DESAG. DE 2" A 10" 3000 PSI DE PRESION (37413)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>9719.94</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>9719.94</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIDGID" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9719.94</baseImponible>
+<valor>1166.39</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>13063</codigoPrincipal>
+<descripcion>DESTAPADOR DE DESAGUES A GASOLINA K-1000 TUBERIA DE 8"-24" DE 6HP (84295)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>5919.30</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>5919.30</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIDGID" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5919.30</baseImponible>
+<valor>710.32</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>90354</codigoPrincipal>
+<descripcion>JET VAC H-32 P/ MODELOS KJ (67187)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>506.95</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>506.95</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIDGID" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>506.95</baseImponible>
+<valor>60.83</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

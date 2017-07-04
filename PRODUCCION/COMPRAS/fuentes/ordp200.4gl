@@ -2997,7 +2997,9 @@ LET rm_c10.c10_estado = 'E'
 DISPLAY BY NAME rm_c10.c10_estado
 UPDATE ordt010 SET c10_estado = 'E'
 	WHERE CURRENT OF qu_by
-CALL muestra_etiquetas()
+--CALL muestra_etiquetas()
+CALL lee_muestra_registro(vm_rows[vm_row_current])
+CALL fl_mostrar_mensaje('Registro Eliminado OK.', 'info')
 COMMIT WORK
 
 END FUNCTION	

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268618</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268618</guiaRemision>
+<razonSocialComprador>GUERRA COLOMA ALEX SHUSEP</razonSocialComprador>
+<identificacionComprador>1712896644001</identificacionComprador>
+<totalSinImpuestos>237.96</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>237.96</baseImponible>
+<valor>28.56</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>266.52</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102054</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL UNA PIEZA JSI06093130  EGO ADVANCE BLANCO ALARGADO C/A. EROS</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>118.98</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>237.96</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>237.96</baseImponible>
+<valor>28.56</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">konstrucciones2000@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2288492</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">056388</campoAdicional>
+<campoAdicional nombre="Observaciones">PIDE SRA YADIRA</campoAdicional>
+</infoAdicional>
+</factura>

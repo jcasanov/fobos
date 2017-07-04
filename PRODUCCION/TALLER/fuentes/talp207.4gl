@@ -305,7 +305,7 @@ IF rm_ord.t23_estado = 'C' AND r_tip.t05_factura = 'S' THEN
         ---------------------------------------------------------------------
 	}
 	COMMIT WORK
-	CALL fl_mostrar_mensaje('Orden ha sido ACTIVADA Ok.', 'info')
+	CALL fl_mostrar_mensaje('Orden ha sido ACTIVADA Ok.', 'exclamation')
 	CALL muestra_cabecera(rm_ord.t23_orden)
 ELSE
 	ROLLBACK WORK

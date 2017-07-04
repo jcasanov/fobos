@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000103979</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>AV 18 DE AGOSTO Y 10 DE AGOSTO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000103979</guiaRemision>
+<razonSocialComprador>ILUSTRE MUNICIPALIDAD DE SANTA ELENA</razonSocialComprador>
+<identificacionComprador>0960001540001</identificacionComprador>
+<totalSinImpuestos>1336.38</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1336.38</baseImponible>
+<valor>160.37</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1496.75</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99429</codigoPrincipal>
+<descripcion>TROLLEY PTS2020 DE 1/1-2 A 2 Ton.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>415.90</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>415.90</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="KITO" valor="KITO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>415.90</baseImponible>
+<valor>49.91</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99430</codigoPrincipal>
+<descripcion>TECLE MANUAL A CADENA CF020-10 DE 2 Ton. 3 m. DE ELEVACION</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>408.48</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>408.48</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="KITO" valor="KITO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>408.48</baseImponible>
+<valor>49.02</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99830</codigoPrincipal>
+<descripcion>CADENA LCCF010 P/TECLE MANUAL DE 1 Y 2 Ton.</descripcion>
+<cantidad>16.00</cantidad>
+<precioUnitario>32.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>512.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="KITO" valor="KITO"/>
+<detAdicional nombre="M" valor="M"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>512.00</baseImponible>
+<valor>61.44</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

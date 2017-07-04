@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104237</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>30/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104237</guiaRemision>
+<razonSocialComprador>ZAMORA VERA ROSA DEL CARMEN</razonSocialComprador>
+<identificacionComprador>1300744792001</identificacionComprador>
+<totalSinImpuestos>35.32</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>35.32</baseImponible>
+<valor>4.24</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>39.56</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>13648</codigoPrincipal>
+<descripcion>LLAVE DE TUBO RECTA NO. 8 (31005)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>18.70</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>18.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>18.70</baseImponible>
+<valor>2.24</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>15510</codigoPrincipal>
+<descripcion>CUCHILLA PARA CORTATUBO F-515 P/MOD.4S/44S/466S/466HWS/468S/468HWS/472HWS (33120)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>16.62</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>16.62</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>16.62</baseImponible>
+<valor>1.99</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">hosteria.chim@yahoo.es</campoAdicional>
+<campoAdicional nombre="telefono-movil">032966290</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">015782</campoAdicional>
+</infoAdicional>
+</factura>

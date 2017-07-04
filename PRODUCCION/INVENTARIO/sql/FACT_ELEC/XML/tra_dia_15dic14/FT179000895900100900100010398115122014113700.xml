@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000103981</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>KM  4.5  VIA SAMBORONDON</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000103981</guiaRemision>
+<razonSocialComprador>JARAMILLO MINAYA</razonSocialComprador>
+<identificacionComprador>0791739942001</identificacionComprador>
+<totalSinImpuestos>605.21</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>605.21</baseImponible>
+<valor>72.63</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>677.84</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>70781</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL UNA PIEZA E179-BL MONACO C/ASTO. BLANCO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>145.61</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>291.22</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>291.22</baseImponible>
+<valor>34.95</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>26925</codigoPrincipal>
+<descripcion>TUBO ABASTO- LLAVE ANGULAR LAVABO E262.05 DH-CR FLEXIBLE DE 16"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>10.64</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>21.28</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>21.28</baseImponible>
+<valor>2.55</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>71344</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA BAJO MESON E235-BL MARA BLANCO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>46.95</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>93.90</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>93.90</baseImponible>
+<valor>11.27</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99205</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS E117-P-BL MILAN DOBLE DESCARGA BLANCO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>80.43</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>80.43</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>80.43</baseImponible>
+<valor>9.65</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>41713</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA CON PEDESTAL PREPONCHADO E208-BL GALA BLANCO PREMARCADO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>35.16</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>35.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>35.16</baseImponible>
+<valor>4.22</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>26935</codigoPrincipal>
+<descripcion>TUBO ABASTO-LLAVE ANGULAR INODORO E266.02 DH-CR FLEXIBLE DE 12"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>10.07</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>10.07</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>10.07</baseImponible>
+<valor>1.21</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>26921</codigoPrincipal>
+<descripcion>TUBO ABASTO- LLAVE ANGULAR LAVABO E262.03 DH-CR FLEXIBLE DE 12"</descripcion>
+<cantidad>7.00</cantidad>
+<precioUnitario>10.07</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>70.49</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>70.49</baseImponible>
+<valor>8.46</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>91367</codigoPrincipal>
+<descripcion>EMPAQUE AC.1 ANILLO DE CERA P/ INODOROS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2.66</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2.66</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.66</baseImponible>
+<valor>0.32</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

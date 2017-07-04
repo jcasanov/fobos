@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131694</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131694</guiaRemision>
+<razonSocialComprador>CORPORACION ELECTRICA DEL ECUADOR CELEC EP</razonSocialComprador>
+<identificacionComprador>1768152800001</identificacionComprador>
+<totalSinImpuestos>850.02</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>850.02</baseImponible>
+<valor>102.00</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>952.02</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>46624</codigoPrincipal>
+<descripcion>KIT REPARACION PARA BOMBA P391K2 DE BOMBA P-391 y P-392</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>93.46</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>186.92</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>186.92</baseImponible>
+<valor>22.43</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>16981</codigoPrincipal>
+<descripcion>PISTON CR333040SR PISTON P/BOMBA P-392</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>96.55</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>96.55</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>96.55</baseImponible>
+<valor>11.59</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>14380</codigoPrincipal>
+<descripcion>ACEITE HIDRAULICO HF-104 AZUL ANTIESPUMANTE DESOXIDANTE S/ENVASE</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>26.60</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>53.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>53.20</baseImponible>
+<valor>6.38</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>45076</codigoPrincipal>
+<descripcion>MANOMETRO G-2535-L DE GLICERINA 2 1/2" DIAMETRO 0-10000PSI</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>128.45</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>128.45</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>128.45</baseImponible>
+<valor>15.41</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>95384</codigoPrincipal>
+<descripcion>MANGUERA HIDRAULICA HC-9206 DE GOMA REFORZADA DE 6' DE LARGO 3/8" NPT</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>167.74</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>335.48</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>335.48</baseImponible>
+<valor>40.26</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>93002</codigoPrincipal>
+<descripcion>VALVULA HIDRAULICA CHEQUE DA8802900SR P/ BOMBA P-392</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>24.71</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>49.42</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>49.42</baseImponible>
+<valor>5.93</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2190342</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">049783</campoAdicional>
+</infoAdicional>
+</factura>

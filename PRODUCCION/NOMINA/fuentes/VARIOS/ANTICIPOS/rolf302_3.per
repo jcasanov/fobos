@@ -1,0 +1,28 @@
+DATABASE aceros
+SCREEN
+{
+
+                   PARAMETROS PARA ANTICIPOS
+                   ------------------------
+
+  Empleado: [c000][c001                                             ]
+
+    Estado: [c][c002         ]  Período: [c003      ] - [c004      ]
+
+}
+TABLES
+rolt030
+rolt045
+rolt046
+ATTRIBUTES
+c000 = rolt045.n45_cod_trab, NOENTRY, UPSHIFT, REVERSE;
+c001 = rolt030.n30_nombres, NOENTRY, UPSHIFT, REVERSE;
+c    = rolt045.n45_estado, UPSHIFT, REVERSE,
+	INCLUDE = ('A', 'P', 'T', 'R', 'E', 'V', 'X'),
+	COMMENTS = '(A)Act. (P)Proc. (T)Transf. (R)Redist. (E)Elimi. (V) Vigentes (X)Todos.';
+c002 = FORMONLY.tit_estado, NOENTRY, UPSHIFT, REVERSE;
+c003 = rolt046.n46_fecha_ini, AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Dígite la fecha inicial en formato: dd-mm-aaaa';
+c004 = rolt046.n46_fecha_fin, AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Dígite la fecha final en formato: dd-mm-aaaa';
+END

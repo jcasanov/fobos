@@ -1,4 +1,4 @@
-------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 -- Titulo           : cxcp206.4gl - Mantenimiento de cheques postfechados 
 -- Elaboracion      : 12-dic-2001
 -- Autor            : NPC
@@ -6,7 +6,7 @@
 --			[cliente] [banco] [numero_cuenta] [numero_cheque]
 -- Ultima Correccion: 
 -- Motivo Correccion: 
-------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
 DEFINE vm_nuevoprog	CHAR(400)

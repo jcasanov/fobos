@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268122</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>06/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268122</guiaRemision>
+<razonSocialComprador>AREVALO SAQUICELA LUIS MARCELO</razonSocialComprador>
+<identificacionComprador>1705244190001</identificacionComprador>
+<totalSinImpuestos>148.29</totalSinImpuestos>
+<totalDescuento>26.17</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>148.29</baseImponible>
+<valor>17.79</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>166.08</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102310</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA AZTECA GRIS SEGUNDA</descripcion>
+<cantidad>22.00</cantidad>
+<precioUnitario>7.93</precioUnitario>
+<descuento>26.17</descuento>
+<precioTotalSinImpuesto>148.29</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>148.29</baseImponible>
+<valor>17.79</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">marceloarevalo4@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2530313</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">046251</campoAdicional>
+</infoAdicional>
+</factura>

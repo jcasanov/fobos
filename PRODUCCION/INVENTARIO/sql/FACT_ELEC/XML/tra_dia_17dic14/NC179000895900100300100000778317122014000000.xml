@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000007783</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>PEDRO PONCE CARRASCO E8-06 Y DIEGO ALMA</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>TRIBOILGAS</razonSocialComprador>
+<identificacionComprador>1791330943001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>003-001-000007783</numDocModificado>
+<fechaEmisionDocSustento>17/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>68.35</totalSinImpuestos>
+<valorModificacion>76.55</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>68.35</baseImponible>
+<valor>8.20</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV. DF-4089 FACT. FA-113291</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>4354</codigoInterno>
+<descripcion>DEV. DF-4089 FACT. FA-113291</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>68.35</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>68.35</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ACERO" valor="ACERO"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>68.35</baseImponible>
+<valor>8.20</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3956540</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">16421</campoAdicional>
+</infoAdicional>
+</notaCredito>

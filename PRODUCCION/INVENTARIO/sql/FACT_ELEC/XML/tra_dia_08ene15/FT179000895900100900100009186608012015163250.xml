@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091866</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>08/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091866</guiaRemision>
+<razonSocialComprador>CABLESFERRO S.A.</razonSocialComprador>
+<identificacionComprador>0992735252001</identificacionComprador>
+<totalSinImpuestos>377.86</totalSinImpuestos>
+<totalDescuento>46.54</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>377.86</baseImponible>
+<valor>45.34</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>423.20</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>69699</codigoPrincipal>
+<descripcion>PISTOLA DE CLAVAR 52007  P2201 UN DISPARO NIVEL 1-4 CAL.22  KIT BLISTER</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>205.20</precioUnitario>
+<descuento>45.14</descuento>
+<precioTotalSinImpuesto>365.26</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>365.26</baseImponible>
+<valor>43.83</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98131</codigoPrincipal>
+<descripcion>FULMINANTES PARA PISTOLA 50506 CAL. 22  AMARILLO  (100 UNID.)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>7.00</precioUnitario>
+<descuento>1.40</descuento>
+<precioTotalSinImpuesto>12.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="CIEN"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>12.60</baseImponible>
+<valor>1.51</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">lino.izquieta@cablesa-ec.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">046001879</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016535</campoAdicional>
+</infoAdicional>
+</factura>

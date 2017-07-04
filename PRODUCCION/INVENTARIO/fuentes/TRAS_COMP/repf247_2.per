@@ -1,0 +1,39 @@
+DATABASE FORMONLY
+SCREEN 
+{
+
+  TRANSACCIONES GENERADAS
+                                                        [c03] de [c04]
+  [c000       |c0|c001                                    |c002       ]     
+ [c1|c011    |c2|c013                                    |c3|c014    ] 
+ [c1|c011    |c2|c013                                    |c3|c014    ] 
+ [c1|c011    |c2|c013                                    |c3|c014    ] 
+ [c1|c011    |c2|c013                                    |c3|c014    ] 
+ [c1|c011    |c2|c013                                    |c3|c014    ] 
+ [c1|c011    |c2|c013                                    |c3|c014    ] 
+ [c1|c011    |c2|c013                                    |c3|c014    ] 
+ [c1|c011    |c2|c013                                    |c3|c014    ] 
+}
+ATTRIBUTES
+c000 = FORMONLY.tit_col1, WIDGET='BUTTON', CONFIG='F15';
+c0   = FORMONLY.tit_col2, WIDGET='BUTTON', CONFIG='F16';
+c001 = FORMONLY.tit_col3, WIDGET='BUTTON', CONFIG='F17';
+c002 = FORMONLY.tit_col4, WIDGET='BUTTON', CONFIG='F18';
+
+c03  = FORMONLY.num_row, REVERSE, NOENTRY, UPSHIFT;
+c04  = FORMONLY.max_row, REVERSE, NOENTRY, UPSHIFT;
+
+c1   = FORMONLY.cod_tran, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c011 = FORMONLY.num_tran, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c2   = FORMONLY.bodega, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c013 = FORMONLY.referencia, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c3   = FORMONLY.tipo_comp, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c014 = FORMONLY.num_comp, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+END
+KEYS
+F5 = 'Contabilizacion'
+F6 = 'Transaccion'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_det[8] (cod_tran, num_tran, bodega, referencia, tipo_comp,
+			num_comp)

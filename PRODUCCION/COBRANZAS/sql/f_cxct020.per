@@ -1,0 +1,69 @@
+database aceros
+screen size 24 by 80
+{
+z20_compania       [f000       ]
+z20_localidad      [f001  ]
+z20_codcli         [f002       ]
+z20_tipo_doc       [a0]
+z20_num_doc        [f003           ]
+z20_dividendo      [f004  ]
+z20_areaneg        [f005  ]
+z20_referencia     [f006                               ]
+z20_fecha_emi      [f007      ]
+z20_fecha_vcto     [f008      ]
+z20_tasa_int       [f009  ]
+z20_tasa_mora      [f010  ]
+z20_moneda         [a1]
+z20_paridad        [f011              ]
+z20_val_impto      [f012         ]
+z20_valor_cap      [f013          ]
+z20_valor_int      [f014          ]
+z20_saldo_cap      [f015          ]
+z20_saldo_int      [f016          ]
+z20_cartera        [f017  ]
+}
+screen
+{
+z20_linea          [f018 ]
+z20_subtipo        [f019  ]
+z20_origen         [a]
+z20_cod_tran       [a2]
+z20_num_tran       [f020             ]
+z20_num_sri        [f021            ]
+z20_usuario        [f022      ]
+z20_fecing         [f023               ]
+}
+end
+tables
+cxct020
+attributes
+f000 = cxct020.z20_compania;
+f001 = cxct020.z20_localidad;
+f002 = cxct020.z20_codcli;
+a0 = cxct020.z20_tipo_doc;
+f003 = cxct020.z20_num_doc;
+f004 = cxct020.z20_dividendo;
+f005 = cxct020.z20_areaneg;
+f006 = cxct020.z20_referencia;
+f007 = cxct020.z20_fecha_emi;
+f008 = cxct020.z20_fecha_vcto;
+f009 = cxct020.z20_tasa_int;
+f010 = cxct020.z20_tasa_mora;
+a1 = cxct020.z20_moneda;
+f011 = cxct020.z20_paridad;
+f012 = cxct020.z20_val_impto;
+f013 = cxct020.z20_valor_cap;
+f014 = cxct020.z20_valor_int;
+f015 = cxct020.z20_saldo_cap;
+f016 = cxct020.z20_saldo_int;
+f017 = cxct020.z20_cartera;
+
+f018 = cxct020.z20_linea;
+f019 = cxct020.z20_subtipo;
+a = cxct020.z20_origen;
+a2 = cxct020.z20_cod_tran;
+f020 = cxct020.z20_num_tran;
+f021 = cxct020.z20_num_sri;
+f022 = cxct020.z20_usuario;
+f023 = cxct020.z20_fecing;
+end

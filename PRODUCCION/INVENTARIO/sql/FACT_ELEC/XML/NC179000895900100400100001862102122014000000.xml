@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000018621</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>02/12/2014</fechaEmision>
+<dirEstablecimiento>AVDA QUEVEDO 147 Y GALAPAGOS</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>ANDINO CARRERA JOSE</razonSocialComprador>
+<identificacionComprador>1708571524001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000018621</numDocModificado>
+<fechaEmisionDocSustento>02/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>490.47</totalSinImpuestos>
+<valorModificacion>549.33</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>490.47</baseImponible>
+<valor>58.86</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DSCTO ADICIONAL DC14120035</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>25006</codigoInterno>
+<descripcion>DSCTO ADICIONAL DC14120035</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>490.47</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>490.47</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ACERO" valor="ACERO"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>490.47</baseImponible>
+<valor>58.86</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+<campoAdicional nombre="telefono-movil">2753432</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">37615</campoAdicional>
+</infoAdicional>
+</notaCredito>

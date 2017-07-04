@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113948</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113948</guiaRemision>
+<razonSocialComprador>CASA TABANGO CRISTHIAN RIGOBERTO</razonSocialComprador>
+<identificacionComprador>0503844094</identificacionComprador>
+<totalSinImpuestos>251.61</totalSinImpuestos>
+<totalDescuento>51.53</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>251.61</baseImponible>
+<valor>30.19</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>281.80</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>100774</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA AMAZONAS BLANCO PRIMERA</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>8.11</precioUnitario>
+<descuento>13.79</descuento>
+<precioTotalSinImpuesto>67.31</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>67.31</baseImponible>
+<valor>8.08</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102310</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA AZTECA GRIS SEGUNDA</descripcion>
+<cantidad>24.00</cantidad>
+<precioUnitario>7.93</precioUnitario>
+<descuento>32.35</descuento>
+<precioTotalSinImpuesto>157.97</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>157.97</baseImponible>
+<valor>18.96</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102312</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA AZTECA VERDE SEGUNDA</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>7.93</precioUnitario>
+<descuento>5.39</descuento>
+<precioTotalSinImpuesto>26.33</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>26.33</baseImponible>
+<valor>3.16</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">hermi-1950@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2631234</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">062536</campoAdicional>
+<campoAdicional nombre="Observaciones">PED SRA CECY</campoAdicional>
+</infoAdicional>
+</factura>

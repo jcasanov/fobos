@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131795</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131795</guiaRemision>
+<razonSocialComprador>AVESCA AVICOLA ECUATORIANA CA</razonSocialComprador>
+<identificacionComprador>1790021408001</identificacionComprador>
+<totalSinImpuestos>1112.58</totalSinImpuestos>
+<totalDescuento>165.19</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1112.58</baseImponible>
+<valor>133.51</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1246.09</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>20669</codigoPrincipal>
+<descripcion>MOTOR ELEC SUMERG DE 4" (2243022604) SJF-3021 DE 3HP 230-1-60</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>642.85</precioUnitario>
+<descuento>77.14</descuento>
+<precioTotalSinImpuesto>565.71</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>565.71</baseImponible>
+<valor>67.89</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96529</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 4" 25FA3S4-PE P/ 3HP. 25GPM (93822530) 14 ETAPAS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>380.68</precioUnitario>
+<descuento>57.10</descuento>
+<precioTotalSinImpuesto>323.58</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>323.58</baseImponible>
+<valor>38.83</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21179</codigoPrincipal>
+<descripcion>TAIPE P/INSTALACIONES GRANDE(10 YD.)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>0.60</precioUnitario>
+<descuento>0.06</descuento>
+<precioTotalSinImpuesto>0.54</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.54</baseImponible>
+<valor>0.06</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1204</codigoPrincipal>
+<descripcion>ABRAZADERA ACERO INOX. DE 3"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>2.81</precioUnitario>
+<descuento>0.67</descuento>
+<precioTotalSinImpuesto>4.95</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.95</baseImponible>
+<valor>0.59</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>94409</codigoPrincipal>
+<descripcion>NEPLO HEXAGONAL DE ACERO INOXIDABLE DE 1-1/4"  NPT  ASTM-A351-CF8M</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>5.33</precioUnitario>
+<descuento>0.80</descuento>
+<precioTotalSinImpuesto>4.53</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INOX T"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.53</baseImponible>
+<valor>0.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>19583</codigoPrincipal>
+<descripcion>CAJA DE CONTROL (2823028110) CJ-3021 P/ 3HP 230/60/1F</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>233.01</precioUnitario>
+<descuento>27.96</descuento>
+<precioTotalSinImpuesto>205.05</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>205.05</baseImponible>
+<valor>24.61</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1662</codigoPrincipal>
+<descripcion>BUSHING GALV. CLASE 150 DE 2" x 1-1/4"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>4.37</precioUnitario>
+<descuento>0.66</descuento>
+<precioTotalSinImpuesto>3.71</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.71</baseImponible>
+<valor>0.45</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6030</codigoPrincipal>
+<descripcion>UNION GALV. CLASE 150 DE 2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>5.31</precioUnitario>
+<descuento>0.80</descuento>
+<precioTotalSinImpuesto>4.51</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.51</baseImponible>
+<valor>0.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">controltributario@avesca.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2317008</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">014163</campoAdicional>
+</infoAdicional>
+</factura>

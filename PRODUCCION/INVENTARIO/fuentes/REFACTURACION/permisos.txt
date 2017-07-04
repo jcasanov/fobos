@@ -1,0 +1,20 @@
+* ESTOS SON LOS PROGRAMAS QUE DEBEN TENER PERMISOS LOS USUARIOS QUE UTILIZARAN
+  EL PROCESO DE REFACTURACION
+
+	- cajp203		Ingresos de Caja
+	- menp000		Menu Principal PHOBOS
+	- menp000c		Menu Principal PHOBOS (Terminal)
+	- repp210		Aprobación Crédito Inventario
+	- repp211		Proceso de Facturación
+	- repp217		Devolución de Facturas
+	- repp220		Proforma
+	- repp223		Aprobación de Pre-Ventas
+	- repp231		Generación de Notas de Entrega
+	- repp237		PROCESO DE REFACTURACION
+	- repp308		Consulta de Comprobantes
+	- repp314		Consulta Notas de Entrega
+	- repp401		Impresión de Devolución/Anulación
+	- repp419		Impresión de Proforma
+	- repp410		Impresión de Facturas
+	- repp431		Impresión Ordenes de Despacho
+	- repp432		Impresión Notas de Entrega

@@ -1,30 +1,40 @@
-                                                                                
 DATABASE aceros
 SCREEN
 {
+                                                              [c000] de [c001]
 
+                     Ciudad: [c002] [c003                     ]
 
-		      Código: [c000]
-		
-	              Nombre: [c001                           ]
-	      Código de País: [c01] [c002                     ]
-	              Siglas: [c02]
+                       País: [c004] [c005                     ]
+
+                  Provincia: [c006] [c007                     ]
+
+              Siglas Ciudad: [c08]
 	
-               Ingresado Por: [c003       ]
-            Fecha de ingreso: [c004               ]
+
+   Ingresado Por: [c009       ]           Fecha Ingreso: [c010               ]
 
 }
-end
 TABLES
+gent025
+gent030
 gent031
 ATTRIBUTES
-c000 = FORMONLY.g31_ciudad TYPE INTEGER NOT NULL, REVERSE,
-    	  WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c01 = gent031.g31_pais, REVERSE, UPSHIFT,
-    	  WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c002 = FORMONLY.nom_pais, UPSHIFT;
-c001 = gent031.g31_nombre, REVERSE, UPSHIFT;
-c02 = gent031.g31_siglas, REVERSE, UPSHIFT, AUTONEXT;
-c003 = gent031.g31_usuario, REVERSE, UPSHIFT, NOENTRY;
-c004 = gent031.g31_fecing, REVERSE, NOENTRY;
-end
+c000 = FORMONLY.num_reg, NOENTRY, UPSHIFT, REVERSE;
+c001 = FORMONLY.max_reg, NOENTRY, UPSHIFT, REVERSE;
+
+c002 = FORMONLY.g31_ciudad TYPE INTEGER NOT NULL, REQUIRED,
+	NOENTRY, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = gent031.g31_nombre, AUTONEXT, REVERSE, UPSHIFT;
+c004 = gent031.g31_pais, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c005 = gent030.g30_nombre, NOENTRY, UPSHIFT, REVERSE;
+c006 = gent031.g31_divi_poli, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c007 = gent025.g25_nombre, NOENTRY, UPSHIFT, SCROLL;
+c08  = gent031.g31_siglas, AUTONEXT, REVERSE, UPSHIFT;
+
+c009 = gent031.g31_usuario, NOENTRY, UPSHIFT, REVERSE;
+c010 = gent031.g31_fecing, NOENTRY, UPSHIFT, REVERSE;
+END

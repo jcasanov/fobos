@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092156</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092156</guiaRemision>
+<razonSocialComprador>COMPANIA DE ELABORADOS DE CAFE EL CAFE C.A.</razonSocialComprador>
+<identificacionComprador>1390059694001</identificacionComprador>
+<totalSinImpuestos>9407.39</totalSinImpuestos>
+<totalDescuento>495.13</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>9407.39</baseImponible>
+<valor>1128.89</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>10536.28</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>103383</codigoPrincipal>
+<descripcion>BOMBA CENTRIF MULTIETAPA C-MOTOR CRN15-12 A-FGJ-G-E-HQQE 25 HP 266/460-3-60 VERTICAL (96503888)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>9902.52</precioUnitario>
+<descuento>495.13</descuento>
+<precioTotalSinImpuesto>9407.39</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9407.39</baseImponible>
+<valor>1128.89</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jgarcia@cafeelcafe.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2658278</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">002921</campoAdicional>
+<campoAdicional nombre="Observaciones">OC 66737-M</campoAdicional>
+</infoAdicional>
+</factura>

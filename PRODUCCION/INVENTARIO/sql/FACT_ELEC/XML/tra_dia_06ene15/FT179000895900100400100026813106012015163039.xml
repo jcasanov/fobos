@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268131</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>06/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268131</guiaRemision>
+<razonSocialComprador>SERVIVAPOR  CIA.LTDA</razonSocialComprador>
+<identificacionComprador>1791769937001</identificacionComprador>
+<totalSinImpuestos>209.39</totalSinImpuestos>
+<totalDescuento>36.95</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>209.39</baseImponible>
+<valor>25.13</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>234.52</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>94476</codigoPrincipal>
+<descripcion>GRIFO ESFERICO ACERO INOX. BRIDADO IT-211 DE 3/4" BRIDA ANSI 150 PSI AISI-316</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>79.48</precioUnitario>
+<descuento>23.84</descuento>
+<precioTotalSinImpuesto>135.12</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INOX T"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>135.12</baseImponible>
+<valor>16.21</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>94477</codigoPrincipal>
+<descripcion>GRIFO ESFERICO ACERO INOX. BRIDADO IT-211 DE 1" BRIDA ANSI 150 PSI AISI-316</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>87.38</precioUnitario>
+<descuento>13.11</descuento>
+<precioTotalSinImpuesto>74.27</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INOX T"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>74.27</baseImponible>
+<valor>8.91</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">csalazar@servivapor.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2531191</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000936</campoAdicional>
+</infoAdicional>
+</factura>

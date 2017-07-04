@@ -1,0 +1,31 @@
+DATABASE aceros
+SCREEN
+{
+ ORDENES DE PAGO PROVEEDORES
+
+ [lbl1 |lbl2                        ]
+[c000 |c001                        ]
+[c000 |c001                        ]
+[c000 |c001                        ]
+[c000 |c001                        ]
+[c000 |c001                        ]
+[c000 |c001                        ]
+[c000 |c001                        ]
+[c000 |c001                        ]
+[c000 |c001                        ]
+[c000 |c001                        ]
+
+}
+TABLES
+cxpt024
+cxpt001
+
+ATTRIBUTES
+c000 = p24_orden_pago, UPSHIFT;
+c001 = p01_nomprov, UPSHIFT;
+
+lbl1 = formonly.bt_orden,     NOENTRY, WIDGET='BUTTON', CONFIG='F15';
+lbl2 = formonly.bt_proveedor, NOENTRY, WIDGET='BUTTON', CONFIG='F16';
+END
+INSTRUCTIONS
+SCREEN RECORD rh_pagprov[10] (p24_orden_pago, p01_nomprov)

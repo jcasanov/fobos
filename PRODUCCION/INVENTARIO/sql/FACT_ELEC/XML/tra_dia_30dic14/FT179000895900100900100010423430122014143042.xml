@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104234</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>30/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104234</guiaRemision>
+<razonSocialComprador>ROMERO UZHO MIGUEL</razonSocialComprador>
+<identificacionComprador>0703697375001</identificacionComprador>
+<totalSinImpuestos>816.55</totalSinImpuestos>
+<totalDescuento>167.24</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>816.55</baseImponible>
+<valor>97.99</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>914.54</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102808</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 6" SSI 260 GPM P/ 20 HP DE 6 ETP. (616420602040082)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>983.79</precioUnitario>
+<descuento>167.24</descuento>
+<precioTotalSinImpuesto>816.55</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>816.55</baseImponible>
+<valor>97.99</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">miguelromero_31@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0982613925</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">015485</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,11 @@
+for i in ???f???.per
+do
+	fglform $i
+done
+
+if [ "$1" == "aceros" ]; then
+	for i in ???f???c.per
+	do
+		form4gl $i
+	done
+fi

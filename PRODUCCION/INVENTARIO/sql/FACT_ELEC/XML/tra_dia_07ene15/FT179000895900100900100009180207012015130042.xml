@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091802</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091802</guiaRemision>
+<razonSocialComprador>INDUSTUX S.A.</razonSocialComprador>
+<identificacionComprador>0992786256001</identificacionComprador>
+<totalSinImpuestos>14.96</totalSinImpuestos>
+<totalDescuento>1.66</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>14.96</baseImponible>
+<valor>1.80</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>16.76</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>15510</codigoPrincipal>
+<descripcion>CUCHILLA PARA CORTATUBO F-515 P/MOD.4S/44S/466S/466HWS/468S/468HWS/472HWS (33120)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>16.62</precioUnitario>
+<descuento>1.66</descuento>
+<precioTotalSinImpuesto>14.96</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>14.96</baseImponible>
+<valor>1.80</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">industuxsa@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">042453600</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">015033</campoAdicional>
+</infoAdicional>
+</factura>

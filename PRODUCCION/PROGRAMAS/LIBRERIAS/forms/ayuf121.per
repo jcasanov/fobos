@@ -1,0 +1,27 @@
+DATABASE aceros
+SCREEN
+{
+ TIPOS RETENCIONES
+----------------------------------
+ T    %      Descripción
+----------------------------------
+[a][c001   ][c002               ]
+[a][c001   ][c002               ]
+[a][c001   ][c002               ]
+[a][c001   ][c002               ]
+[a][c001   ][c002               ]
+[a][c001   ][c002               ]
+[a][c001   ][c002               ]
+[a][c001   ][c002               ]
+[a][c001   ][c002               ]
+[a][c001   ][c002               ]
+
+}
+TABLES
+ordt002
+ATTRIBUTES
+a    = c02_tipo_ret;
+c001 = c02_porcentaje;
+c002 = c02_nombre;
+INSTRUCTIONS
+SCREEN RECORD rh_ret[10] (c02_tipo_ret, c02_porcentaje, c02_nombre)

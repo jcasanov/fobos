@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091878</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>09/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091878</guiaRemision>
+<razonSocialComprador>EUROFISH S.A.</razonSocialComprador>
+<identificacionComprador>1390149219001</identificacionComprador>
+<totalSinImpuestos>564.63</totalSinImpuestos>
+<totalDescuento>69.79</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>564.63</baseImponible>
+<valor>67.76</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>632.39</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>93515</codigoPrincipal>
+<descripcion>SELLO MECANICO P/ BOMBA CR-10/15/20   (96511844)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>317.21</precioUnitario>
+<descuento>69.79</descuento>
+<precioTotalSinImpuesto>564.63</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>564.63</baseImponible>
+<valor>67.76</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">cgomez@eurofish.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2578730</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">011233</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C 001-001-000005697</campoAdicional>
+</infoAdicional>
+</factura>

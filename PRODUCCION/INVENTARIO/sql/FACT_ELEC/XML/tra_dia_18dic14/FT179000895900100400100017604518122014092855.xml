@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176045</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176045</guiaRemision>
+<razonSocialComprador>INMEPROJECTS INGENIERIA MECANICA Y PROYECTOS CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1792296528001</identificacionComprador>
+<totalSinImpuestos>3061.18</totalSinImpuestos>
+<totalDescuento>540.21</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>3061.18</baseImponible>
+<valor>367.34</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>3428.52</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>100201</codigoPrincipal>
+<descripcion>PRENSA N.460-12 DE CADENA CON TRIPODE 1/8" A 12" (36278)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>872.20</precioUnitario>
+<descuento>130.83</descuento>
+<precioTotalSinImpuesto>741.37</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>741.37</baseImponible>
+<valor>88.96</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101243</codigoPrincipal>
+<descripcion>REPUESTO SOPORTE P/RANURADORA DE RODILLO MOD.965 (83380)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>567.46</precioUnitario>
+<descuento>85.12</descuento>
+<precioTotalSinImpuesto>482.34</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>482.34</baseImponible>
+<valor>57.88</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>13660</codigoPrincipal>
+<descripcion>LLAVE DE TUBO RECTA NO. 36 (31035)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>170.15</precioUnitario>
+<descuento>25.52</descuento>
+<precioTotalSinImpuesto>144.63</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>144.63</baseImponible>
+<valor>17.36</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>13658</codigoPrincipal>
+<descripcion>LLAVE DE TUBO RECTA NO. 24 (31030)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>80.29</precioUnitario>
+<descuento>12.04</descuento>
+<precioTotalSinImpuesto>68.25</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>68.25</baseImponible>
+<valor>8.19</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>13656</codigoPrincipal>
+<descripcion>LLAVE DE TUBO RECTA NO. 18 (31025)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>55.82</precioUnitario>
+<descuento>16.75</descuento>
+<precioTotalSinImpuesto>94.89</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>94.89</baseImponible>
+<valor>11.39</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70375</codigoPrincipal>
+<descripcion>ROTOMARTILLO 5359-21 SDS DE 1-1/8" 7.4AMP 0-980RPM 0-4200 GOLPES (MALETIN)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>640.14</precioUnitario>
+<descuento>96.02</descuento>
+<precioTotalSinImpuesto>544.12</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>544.12</baseImponible>
+<valor>65.29</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>15700</codigoPrincipal>
+<descripcion>DADOS PARA TUBOS DE 1" A 2" HS NPT P/811A-711-815A (47770)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>208.13</precioUnitario>
+<descuento>31.22</descuento>
+<precioTotalSinImpuesto>176.91</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="JUEGO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>176.91</baseImponible>
+<valor>21.23</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>90342</codigoPrincipal>
+<descripcion>DADOS PARA TUBOS 2-1/2" A 4" NPT HS P/415 (99545)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>951.38</precioUnitario>
+<descuento>142.71</descuento>
+<precioTotalSinImpuesto>808.67</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>808.67</baseImponible>
+<valor>97.04</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">5108598</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">054999</campoAdicional>
+</infoAdicional>
+</factura>

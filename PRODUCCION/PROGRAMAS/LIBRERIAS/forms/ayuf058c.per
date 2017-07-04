@@ -1,0 +1,30 @@
+DATABASE aceros
+
+SCREEN
+{
+  LINEAS VEHICULOS 
+ ----------------------------------
+  Cod.    Descripción 		
+ ----------------------------------
+ [c01  ] [c002                    ] 
+ [c01  ] [c002                    ]
+ [c01  ] [c002                    ]
+ [c01  ] [c002                    ]
+ [c01  ] [c002                    ]
+ [c01  ] [c002                    ]
+ [c01  ] [c002                    ] 
+ [c01  ] [c002                    ] 
+ [c01  ] [c002                    ] 
+ [c01  ] [c002                    ] 
+}
+
+TABLES
+veht003
+
+ATTRIBUTES
+c01  = v03_linea,REVERSE;
+c002 = v03_nombre,REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_linveh[10](v03_linea, v03_nombre)

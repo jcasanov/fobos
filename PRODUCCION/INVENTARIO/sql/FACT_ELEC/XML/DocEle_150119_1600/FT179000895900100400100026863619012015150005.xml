@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268636</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268636</guiaRemision>
+<razonSocialComprador>INMEPROJECTS INGENIERIA MECANICA Y PROYECTOS CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1792296528001</identificacionComprador>
+<totalSinImpuestos>544.12</totalSinImpuestos>
+<totalDescuento>96.02</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>544.12</baseImponible>
+<valor>65.29</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>609.41</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>70375</codigoPrincipal>
+<descripcion>ROTOMARTILLO 5359-21 SDS DE 1-1/8" 7.4AMP 0-980RPM 0-4200 GOLPES (MALETIN)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>640.14</precioUnitario>
+<descuento>96.02</descuento>
+<precioTotalSinImpuesto>544.12</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>544.12</baseImponible>
+<valor>65.29</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jose.gamarra@inmeprojects.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">5108598</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">054999</campoAdicional>
+<campoAdicional nombre="Observaciones">ROTOMARTILLO OC# 19012015</campoAdicional>
+</infoAdicional>
+</factura>

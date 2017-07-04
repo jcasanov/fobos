@@ -1,0 +1,7 @@
+ruta=$PWD
+cd $HOME/PRODUCCION/TRAB_EXTRA/FOBOS/INVENTARIO/fuentes/
+echo " "
+echo "Comparando Stock de $1 en $4. Por favor espere ..."
+fglgo veristo $1 $2 $3 $4 $5
+echo " "
+cd $ruta

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104236</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>30/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104236</guiaRemision>
+<razonSocialComprador>PROYECSA-PROYECTOS DEL ECUADOR S.A.</razonSocialComprador>
+<identificacionComprador>0991356835001</identificacionComprador>
+<totalSinImpuestos>77.70</totalSinImpuestos>
+<totalDescuento>9.60</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>77.70</baseImponible>
+<valor>9.32</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>87.02</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>97958</codigoPrincipal>
+<descripcion>BROCA 48-89-2742 DE 5/8" SILVER & DEMING HSS P/METAL</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>19.61</precioUnitario>
+<descuento>6.47</descuento>
+<precioTotalSinImpuesto>52.36</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>52.36</baseImponible>
+<valor>6.28</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102415</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-89-2317 DE COBALTO DE 5/16" THUNDERBOLT</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>9.49</precioUnitario>
+<descuento>3.13</descuento>
+<precioTotalSinImpuesto>25.34</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>25.34</baseImponible>
+<valor>3.04</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">proyecsa2000@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2217050</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">011688</campoAdicional>
+</infoAdicional>
+</factura>

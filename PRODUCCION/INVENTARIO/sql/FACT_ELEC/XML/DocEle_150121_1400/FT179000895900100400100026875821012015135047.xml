@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268758</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268758</guiaRemision>
+<razonSocialComprador>ABAD SARMIENTO RENE ANTONIO</razonSocialComprador>
+<identificacionComprador>0101288223001</identificacionComprador>
+<totalSinImpuestos>1203.05</totalSinImpuestos>
+<totalDescuento>515.59</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1203.05</baseImponible>
+<valor>144.37</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1347.42</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>94720</codigoPrincipal>
+<descripcion>BOMBA SUMERG AGUAS NEGRAS SW-150 CON MOTOR DE 1-1/2HP/230/60/1F (520306) 20FT CABLE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1718.64</precioUnitario>
+<descuento>515.59</descuento>
+<precioTotalSinImpuesto>1203.05</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1203.05</baseImponible>
+<valor>144.37</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">cimaproveedores@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">072884560</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">017756</campoAdicional>
+</infoAdicional>
+</factura>

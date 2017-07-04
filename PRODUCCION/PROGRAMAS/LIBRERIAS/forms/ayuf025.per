@@ -1,0 +1,30 @@
+DATABASE aceros
+
+SCREEN
+{
+ GUIAS DE REMISION
+-----------------------------------------
+ Código	           Nombre 		
+-----------------------------------------
+[c01  ] [c002                         ] 
+[c01  ] [c002                         ]
+[c01  ] [c002                         ]
+[c01  ] [c002                         ]
+[c01  ] [c002                         ]
+[c01  ] [c002                         ]
+[c01  ] [c002                         ]            
+[c01  ] [c002                         ] 
+[c01  ] [c002                         ] 
+[c01  ] [c002                         ] 
+}
+
+TABLES
+gent019
+
+ATTRIBUTES
+c01 = g19_codigo;
+c002 = g19_nombre;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_guia[10](g19_codigo, g19_nombre)

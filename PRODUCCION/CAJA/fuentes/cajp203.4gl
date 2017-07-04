@@ -424,6 +424,7 @@ END FUNCTION
 FUNCTION lee_datos_cabecera()
 DEFINE tipo_fuente	LIKE cajt010.j10_tipo_fuente
 DEFINE r_z01		RECORD LIKE cxct001.*
+DEFINE r_z02		RECORD LIKE cxct002.*
 DEFINE r_j10		RECORD LIKE cajt010.*
 DEFINE r_r23		RECORD LIKE rept023.* 	-- Preventa Repuestos
 DEFINE r_v26		RECORD LIKE veht026.* 	-- Preventa Vehiculos
@@ -591,6 +592,15 @@ INPUT BY NAME rm_j10.j10_tipo_fuente, rm_j10.j10_num_fuente, rm_r38.r38_num_sri
 		END IF
 		CASE rm_j10.j10_tipo_fuente
 			WHEN 'PR'
+				CALL fl_lee_cliente_localidad(vg_codcia,
+						vg_codloc, r_j10.j10_codcli)
+					RETURNING r_z02.*
+				IF r_z02.z02_email IS NULL THEN	
+					CALL fl_mostrar_mensaje('Cliente no tiene registrado el correo electrónico para esta localidad.','exclamation')
+					NEXT FIELD j10_num_fuente
+				ELSE
+					CALL fl_mostrar_mensaje('Cliente tiene registrado este correo electrónico para esta localidad: ' || r_z02.z02_email CLIPPED || '.', 'info')
+				END IF
 				CALL fl_lee_preventa_rep(vg_codcia, vg_codloc,
 					r_j10.j10_num_fuente) RETURNING r_r23.*
 				IF r_r23.r23_numprev IS NULL THEN
@@ -657,6 +667,15 @@ INPUT BY NAME rm_j10.j10_tipo_fuente, rm_j10.j10_num_fuente, rm_r38.r38_num_sri
 					NEXT FIELD j10_num_fuente
 				END IF
 			WHEN 'OT'
+				CALL fl_lee_cliente_localidad(vg_codcia,
+						vg_codloc, r_j10.j10_codcli)
+					RETURNING r_z02.*
+				IF r_z02.z02_email IS NULL THEN	
+					CALL fl_mostrar_mensaje('Cliente no tiene registrado el correo electrónico para esta localidad.','exclamation')
+					NEXT FIELD j10_num_fuente
+				ELSE
+					CALL fl_mostrar_mensaje('Cliente tiene registrado este correo electrónico para esta localidad: ' || r_z02.z02_email CLIPPED || '.', 'info')
+				END IF
 				CALL fl_lee_orden_trabajo(vg_codcia, vg_codloc,
 					r_j10.j10_num_fuente) RETURNING r_t23.*
 				IF r_t23.t23_orden IS NULL THEN
@@ -1365,7 +1384,7 @@ INPUT ARRAY rm_j11 WITHOUT DEFAULTS FROM ra_j11.*
 			NEXT FIELD j11_codigo_pago
 		END IF
 		IF r_j01.j01_estado = 'B' THEN
-			CALL fl_mostrar_mensaje('Forma de Pago esta Bloqueada.','exclamation')
+			CALL fl_mostrar_mensaje('Forma de Pago esta BLOQUEADA.','exclamation')
 			NEXT FIELD j11_codigo_pago
 		END IF
 		LET rm_j11[i].moneda = rm_j10.j10_moneda
@@ -1391,8 +1410,8 @@ INPUT ARRAY rm_j11 WITHOUT DEFAULTS FROM ra_j11.*
 						cont_cred)
 		THEN
 			IF cont_cred = 'R' THEN
-				CALL fl_mostrar_mensaje('LAS RETENCIONES DE CLIENTES SOLO SE PUEDEN INGRESAR POR DIGITACION DE RETENCIONES.', 'info')
-				NEXT FIELD j11_codigo_pago
+				--CALL fl_mostrar_mensaje('LAS RETENCIONES DE CLIENTES SOLO SE PUEDEN INGRESAR POR DIGITACION DE RETENCIONES.', 'info')
+				--NEXT FIELD j11_codigo_pago
 			END IF
 			CALL detalle_retenciones(i, j, 'I')
 			IF rm_j10.j10_tipo_fuente = 'SC' THEN
@@ -1459,11 +1478,17 @@ INPUT ARRAY rm_j11 WITHOUT DEFAULTS FROM ra_j11.*
 			CONTINUE INPUT
 		END IF
 		LET bco_tarj = banco_tarjeta(rm_j11[i].forma_pago)
-		IF bco_tarj IS NULL OR bco_tarj = 3 THEN
+		IF (bco_tarj IS NULL OR bco_tarj = 3) AND
+		  (rm_j11[i].forma_pago <> 'RE' AND
+		   rm_j11[i].forma_pago <> 'CT')
+		THEN
 			INITIALIZE rm_j11[i].cod_bco_tarj TO NULL
 			CLEAR ra_j11[j].j11_cod_bco_tarj
 		END IF
-		IF bco_tarj = 1 THEN
+		IF bco_tarj = 1 AND
+		  (rm_j11[i].forma_pago <> 'RE' AND
+		   rm_j11[i].forma_pago <> 'CT')
+		THEN
 			CALL fl_lee_banco_general(rm_j11[i].cod_bco_tarj)
 				RETURNING r_g08.* 
 			IF r_g08.g08_banco IS NULL THEN
@@ -1478,7 +1503,7 @@ INPUT ARRAY rm_j11 WITHOUT DEFAULTS FROM ra_j11.*
 							cont_cred)
 				RETURNING r_g10.* 
 			IF r_g10.g10_estado = 'B' THEN
-				CALL fl_mostrar_mensaje('Tarjeta de Crédito esta Bloqueada.', 'exclamation')
+				CALL fl_mostrar_mensaje('Tarjeta de Crédito esta BLOQUEADA.', 'exclamation')
 				NEXT FIELD j11_cod_bco_tarj
 			END IF
 			IF r_g10.g10_tarjeta IS NULL THEN
@@ -1494,7 +1519,7 @@ INPUT ARRAY rm_j11 WITHOUT DEFAULTS FROM ra_j11.*
 			CALL fl_lee_cuenta(vg_codcia, r_z02.z02_aux_clte_mb)
 				RETURNING r_b10.*
 			IF r_b10.b10_estado = 'B' THEN
-				CALL fl_mostrar_mensaje('La cuenta contable de esta Tarjeta de Credito esta Bloqueada.', 'exclamation')
+				CALL fl_mostrar_mensaje('La cuenta contable de esta Tarjeta de Credito esta BLOQUEADA.', 'exclamation')
 				NEXT FIELD j11_cod_bco_tarj
 			END IF
 		END IF
@@ -1591,8 +1616,10 @@ INPUT ARRAY rm_j11 WITHOUT DEFAULTS FROM ra_j11.*
 		LET tiene_rt = 0
 		LET vm_indice = arr_count()
 		FOR i = 1 TO vm_indice 
-			IF banco_tarjeta(rm_j11[i].forma_pago) = 1
-			OR banco_tarjeta(rm_j11[i].forma_pago) = 2 
+			IF (banco_tarjeta(rm_j11[i].forma_pago) = 1 OR
+			    banco_tarjeta(rm_j11[i].forma_pago) = 2) AND
+			   (rm_j11[i].forma_pago <> 'RE' AND
+			    rm_j11[i].forma_pago <> 'CT')
 			THEN
 				IF rm_j11[i].cod_bco_tarj IS NULL THEN
 					CALL fl_mostrar_mensaje('Debe ingresar el código del banco o de la tarjeta.','exclamation')
@@ -1741,6 +1768,8 @@ CASE forma_pago
 	WHEN 'DB' LET ret_val = 1 
 	WHEN 'CD' LET ret_val = 1 
 	WHEN 'DA' LET ret_val = 1 
+	WHEN 'CT' LET ret_val = 1 
+	WHEN 'RE' LET ret_val = 1 
 	
 	WHEN 'TJ' LET ret_val = 2
 	
@@ -3088,10 +3117,12 @@ INPUT BY NAME rm_j14.j14_num_ret_sri, rm_j14.j14_autorizacion,
 			CALL fl_mostrar_mensaje('El numero de la autorizacion ingresado es incorrecto.', 'exclamation')
 			NEXT FIELD j14_autorizacion
 		END IF
+		{-- OJO
 		IF rm_j14.j14_autorizacion[1, 1] <> '1' THEN
 			CALL fl_mostrar_mensaje('Numero de Autorizacion es incorrecto.', 'exclamation')
 			NEXT FIELD j14_autorizacion
 		END IF
+		--}
 		IF NOT fl_valida_numeros(rm_j14.j14_autorizacion) THEN
 			NEXT FIELD j14_autorizacion
 		END IF
@@ -5118,7 +5149,9 @@ CASE rm_j10.j10_tipo_fuente
 END CASE
 
 IF comando IS NOT NULL THEN
+	-- OJO NO IMPRIMIR
 	RUN comando
+	--
 	IF rm_j10.j10_tipo_fuente = 'PR' THEN
 		--IF r_r23.r23_num_ot IS NULL THEN
 			LET comando = NULL
@@ -5137,7 +5170,9 @@ IF comando IS NOT NULL THEN
 				      vg_base, ' RE ', vg_codcia, ' ',
 				      vg_codloc, ' "', r_r34.r34_bodega, '" ',
 				      r_r34.r34_num_ord_des 
+				-- OJO NO IMPRIMIR
 				RUN comando
+				--
 			END FOREACH
 		--END IF 
 	END IF 
@@ -5147,7 +5182,9 @@ IF comando IS NOT NULL THEN
 			      vg_separador, run_prog, 'talp408 ', vg_base, ' ',
 			      'TA', ' ', vg_codcia, ' ', vg_codloc, ' ',
 			      r_t23.t23_orden
+		-- OJO NO IMPRIMIR
 		RUN comando
+		--
 	END IF 
 END IF
 

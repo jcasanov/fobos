@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025814</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>KU BIET</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1791299035001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>19/01/2015</fechaIniTransporte>
+<fechaFinTransporte>20/01/2015</fechaFinTransporte>
+<placa>SIN PLACA</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1791299035001</identificacionDestinatario>
+<razonSocialDestinatario>CUBIERTAS DEL ECUADOR KU-BIEC S. A.</razonSocialDestinatario>
+<dirDestinatario>RETIRA ING ESTRADA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>19/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>93076</codigoInterno>
+<descripcion>SIERRA CIRCULAR 6370-21 CORTE SECO DE METAL 13 AMP DISCO DE 8" C/ MALETIN</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>93105</codigoInterno>
+<descripcion>DISCO PARA SIERRA 48-40-4515 DE 8" 42 DIENTES DE CARBURO P/ LA 6370-20/21</descripcion>
+<cantidad>8.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">esalas@kubiec.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2150300</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">006925</campoAdicional>
+</infoAdicional>
+</guiaRemision>

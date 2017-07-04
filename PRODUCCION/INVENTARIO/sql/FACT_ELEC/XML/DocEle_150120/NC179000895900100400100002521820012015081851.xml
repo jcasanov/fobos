@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025218</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>PALACIOS DELGADO JUAN LEONARDO</razonSocialComprador>
+<identificacionComprador>0102573334001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000176294</numDocModificado>
+<fechaEmisionDocSustento>23/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>117.30</totalSinImpuestos>
+<valorModificacion>131.38</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>117.30</baseImponible>
+<valor>14.08</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 267881 JUAN PALACIOS RECIB WLUDENIA</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>97894</codigoInterno>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7434 SD1 DE 5/8" X 6"</descripcion>
+<cantidad>50.00</cantidad>
+<precioUnitario>2.76</precioUnitario>
+<descuento>20.70</descuento>
+<precioTotalSinImpuesto>117.30</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>117.30</baseImponible>
+<valor>14.08</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">P_Pasoc825@hotmail.com</campoAdicional>
+<campoAdicional nombre="Email">p_pfactura@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2836824</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">54917</campoAdicional>
+</infoAdicional>
+</notaCredito>

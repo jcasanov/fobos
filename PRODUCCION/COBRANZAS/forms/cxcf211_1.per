@@ -7,7 +7,7 @@ SCREEN
   Area Negocio: [c002  ] [c003           ]
    Grupo Linea: [c004  ] [c005                          ]
                     Se devolvera dinero al cliente ?: [e]     Rezagadas ?: [f]
-      Cobrador: [c011  ] [c012                          ]   [c008 ] de [c009 ]
+    Zona Cobro: [c011  ] [c012                          ]   [c008 ] de [c009 ]
  [c0|c1|c020     |c021      |c022      |c023        |c024        |c025      |c]
 [c2|c3|c030     |c031      |c032      |c033        |c034        |c035      |d]
 [c2|c3|c030     |c031      |c032      |c033        |c034        |c035      |d]
@@ -25,7 +25,7 @@ SCREEN
 }
 TABLES
 cxct001
-cxct005
+cxct006
 cxct020
 cxct024
 gent003
@@ -55,9 +55,9 @@ f    = FORMONLY.rezagadas TYPE CHAR NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
 	REVERSE, INCLUDE = ('S', 'N'), DEFAULT = 'N',
 	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge',
 	COMMENTS = 'Sólo sera utilizado en FACTURAS DECLARADAS SIN RETENCION.';
-c011 = cxct024.z24_cobrador, AUTONEXT, UPSHIFT,
+c011 = cxct024.z24_zona_cobro, AUTONEXT, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c012 = cxct005.z05_nombres, NOENTRY, UPSHIFT;
+c012 = cxct006.z06_nombre, NOENTRY, UPSHIFT;
 
 c008 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
 c009 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;

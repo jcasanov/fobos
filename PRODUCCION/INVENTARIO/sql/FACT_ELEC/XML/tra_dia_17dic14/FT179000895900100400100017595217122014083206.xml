@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175952</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>AV. 6 DE DICIEMBRE N53-230 Y LOS PINOS</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175952</guiaRemision>
+<razonSocialComprador>ROSALES NAULA INDIRA ELIZABETH</razonSocialComprador>
+<identificacionComprador>1711744530001</identificacionComprador>
+<totalSinImpuestos>82.58</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>82.58</baseImponible>
+<valor>9.91</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>92.49</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99338</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS JS002291130 EVOLUTION BLANCO ASTO. MONTECRISTO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>56.02</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>56.02</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="EDESA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>56.02</baseImponible>
+<valor>6.72</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>67841</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA CON PEDESTAL PREPONCHADO J5586130 CHELSEA BLANCO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>26.56</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>26.56</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="EDESA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>26.56</baseImponible>
+<valor>3.19</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2416657</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">052150</campoAdicional>
+</infoAdicional>
+</factura>

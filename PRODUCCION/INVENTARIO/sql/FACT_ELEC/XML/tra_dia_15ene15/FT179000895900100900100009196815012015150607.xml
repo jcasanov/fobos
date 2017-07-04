@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091968</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091968</guiaRemision>
+<razonSocialComprador>INDUSTRIAL PESQUERA JUNIN S.A. / JUNSA</razonSocialComprador>
+<identificacionComprador>0990695520001</identificacionComprador>
+<totalSinImpuestos>2037.74</totalSinImpuestos>
+<totalDescuento>226.42</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>2037.74</baseImponible>
+<valor>244.53</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>2282.27</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>45177</codigoPrincipal>
+<descripcion>BOMBA DE ENGRANAJE GMS. S/ MOTOR GMS 1 DE3-B SELLO MEC.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1132.08</precioUnitario>
+<descuento>226.42</descuento>
+<precioTotalSinImpuesto>2037.74</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GORMAN"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2037.74</baseImponible>
+<valor>244.53</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">fhidalgo@junsa.com.ec</campoAdicional>
+<campoAdicional nombre="Email">glara@junsa.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2158464</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">012529</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C 8195</campoAdicional>
+</infoAdicional>
+</factura>

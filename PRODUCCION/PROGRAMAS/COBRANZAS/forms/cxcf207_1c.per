@@ -1,0 +1,48 @@
+DATABASE aceros
+SCREEN
+{
+          Cliente: [c000      ] [c001                                    ]
+    Fecha Inicial: [c002      ]                Fecha Término: [c003      ]
+
+  TD Fecha Emi.           Banco              No. Cuenta     No. Cheque    P 
+ [a0|c012      |c013                     |c014           |c015           |a]
+ [a0|c012      |c013                     |c014           |c015           |a]
+ [a0|c012      |c013                     |c014           |c015           |a]
+ [a0|c012      |c013                     |c014           |c015           |a]
+ [a0|c012      |c013                     |c014           |c015           |a]
+ [a0|c012      |c013                     |c014           |c015           |a]
+ [a0|c012      |c013                     |c014           |c015           |a]
+ [a0|c012      |c013                     |c014           |c015           |a]
+ [a0|c012      |c013                     |c014           |c015           |a]
+ [a0|c012      |c013                     |c014           |c015           |a]
+ [a0|c012      |c013                     |c014           |c015           |a]
+ [a0|c012      |c013                     |c014           |c015           |a]
+ [a0|c012      |c013                     |c014           |c015           |a]
+}
+TABLES
+cajt010, cajt011, gent008
+ATTRIBUTES
+c000 = cajt010.j10_codcli, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c001 = cajt010.j10_nomcli, NOENTRY, UPSHIFT;
+c002 = FORMONLY.vm_fecha_ini TYPE DATE NOT NULL, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy';
+c003 = FORMONLY.vm_fecha_fin TYPE DATE NOT NULL, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy';
+
+a0   = cajt010.j10_tipo_destino, NOENTRY, UPSHIFT;
+c012 = FORMONLY.j10_fecha_pro TYPE DATE, NOENTRY, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy';
+c013 = gent008.g08_nombre, NOENTRY, UPSHIFT;
+c014 = cajt011.j11_num_cta_tarj, NOENTRY, UPSHIFT;
+c015 = cajt011.j11_num_ch_aut, NOENTRY, UPSHIFT;
+a    = cajt011.j11_protestado, NOENTRY, UPSHIFT,
+	INCLUDE = ('S', 'N'), DEFAULT = 'N',
+	COMMENTS = '(S) si es protestado (N) si no lo es';
+end
+--KEYS
+--F5 = 'Protesto'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_det[13] (j10_tipo_destino, j10_fecha_pro, g08_nombre,
+			j11_num_cta_tarj, j11_num_ch_aut, j11_protestado)

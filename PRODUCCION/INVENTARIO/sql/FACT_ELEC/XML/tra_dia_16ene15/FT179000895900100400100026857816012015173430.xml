@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268578</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268578</guiaRemision>
+<razonSocialComprador>NOVACERO S.A.</razonSocialComprador>
+<identificacionComprador>0590038601001</identificacionComprador>
+<totalSinImpuestos>356.17</totalSinImpuestos>
+<totalDescuento>62.85</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>356.17</baseImponible>
+<valor>42.74</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>398.91</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>95999</codigoPrincipal>
+<descripcion>RECTIFICADORA 5194 DE 4.5 AMP. 120V.  DE 1/8" A 1/4" 21000 RPM</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>419.02</precioUnitario>
+<descuento>62.85</descuento>
+<precioTotalSinImpuesto>356.17</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>356.17</baseImponible>
+<valor>42.74</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">pinchav@novacero.com</campoAdicional>
+<campoAdicional nombre="Email">chavezje@novacero.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3981900</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">024819</campoAdicional>
+<campoAdicional nombre="Observaciones">ORDEN JC-1058</campoAdicional>
+</infoAdicional>
+</factura>

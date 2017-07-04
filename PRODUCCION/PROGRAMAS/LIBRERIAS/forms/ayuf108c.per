@@ -1,0 +1,28 @@
+DATABASE aceros
+SCREEN
+{
+  PROFORMAS DE REPUESTOS
+ ---------------------------------------------------
+  Número      Cliente 				
+ ---------------------------------------------------
+ [c001     ] [c002                                 ]
+ [c001     ] [c002                                 ]
+ [c001     ] [c002                                 ]
+ [c001     ] [c002                                 ]
+ [c001     ] [c002                                 ]
+ [c001     ] [c002                                 ]
+ [c001     ] [c002                                 ]
+ [c001     ] [c002                                 ]
+ [c001     ] [c002                                 ]
+ [c001     ] [c002                                 ]
+}
+TABLES
+rept021
+ATTRIBUTES
+c001 = r21_numprof, UPSHIFT, REVERSE;
+c002 = r21_nomcli,  UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_prorep[10] (r21_numprof, r21_nomcli)
+

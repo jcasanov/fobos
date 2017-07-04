@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268670</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268670</guiaRemision>
+<razonSocialComprador>CONSTRUCTORA VILLACRECES ANDRADE S.A.</razonSocialComprador>
+<identificacionComprador>1791326768001</identificacionComprador>
+<totalSinImpuestos>6907.58</totalSinImpuestos>
+<totalDescuento>701.36</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>6907.58</baseImponible>
+<valor>828.91</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>7736.49</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>44998</codigoPrincipal>
+<descripcion>BOMBA HIDRAULICA MANUAL P-392 2 VELOCIDADES 55 Pulg3 10000 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>620.55</precioUnitario>
+<descuento>62.06</descuento>
+<precioTotalSinImpuesto>558.49</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>558.49</baseImponible>
+<valor>67.02</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>12801</codigoPrincipal>
+<descripcion>CILINDRO HIDR S-A RSM RSM-50 5 T 0.25" CARRERA 1.28" ALTURA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>418.90</precioUnitario>
+<descuento>41.89</descuento>
+<precioTotalSinImpuesto>377.01</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>377.01</baseImponible>
+<valor>45.24</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>12803</codigoPrincipal>
+<descripcion>CILINDRO HIDR S-A RSM RSM-100 10 T 0.44" CARRERA 1.69" ALTURA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>596.21</precioUnitario>
+<descuento>59.62</descuento>
+<precioTotalSinImpuesto>536.59</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>536.59</baseImponible>
+<valor>64.39</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>12799</codigoPrincipal>
+<descripcion>CILINDRO HIDR S-A RSM RSM-200 20 T 0.44" CARRERA 2.03" ALTURA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>997.99</precioUnitario>
+<descuento>99.80</descuento>
+<precioTotalSinImpuesto>898.19</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>898.19</baseImponible>
+<valor>107.78</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>68663</codigoPrincipal>
+<descripcion>CILINDRO HIDR S-A RSM RSM-1000 100 T 0.63" CARRERA 3.38" ALTURA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2477.28</precioUnitario>
+<descuento>247.73</descuento>
+<precioTotalSinImpuesto>2229.55</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2229.55</baseImponible>
+<valor>267.55</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>45031</codigoPrincipal>
+<descripcion>CILINDRO HIDR S-A RCS RCS-101 10 T 1.50" CARRERA 3.47" ALTURA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>595.39</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>595.39</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>595.39</baseImponible>
+<valor>71.45</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>45033</codigoPrincipal>
+<descripcion>CILINDRO HIDR S-A RCS RCS-201 20 T 1.75" CARRERA 3.88" ALTURA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>886.52</precioUnitario>
+<descuento>88.65</descuento>
+<precioTotalSinImpuesto>797.87</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>797.87</baseImponible>
+<valor>95.74</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>45035</codigoPrincipal>
+<descripcion>CILINDRO HIDR S-A RCS RCS-302 30 T 2.44" CARRERA 4.63" ALTURA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1016.10</precioUnitario>
+<descuento>101.61</descuento>
+<precioTotalSinImpuesto>914.49</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>914.49</baseImponible>
+<valor>109.74</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">cmaldonado@elitcorp.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2229244/5</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">004289</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C 2014-21245</campoAdicional>
+</infoAdicional>
+</factura>

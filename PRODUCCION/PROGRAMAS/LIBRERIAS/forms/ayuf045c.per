@@ -1,0 +1,28 @@
+DATABASE aceros
+
+SCREEN
+{
+  COMPANIAS DE TALLER
+ --------------------------------------
+  Cod.	 Descripción 	  
+ --------------------------------------
+ [f001] [f002                         ] 
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+}
+
+TABLES
+talt000
+gent001
+
+ATTRIBUTES
+f001 = t00_compania,REVERSE;
+f002 = g01_razonsocial,REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_ciatal[7](t00_compania, g01_razonsocial)

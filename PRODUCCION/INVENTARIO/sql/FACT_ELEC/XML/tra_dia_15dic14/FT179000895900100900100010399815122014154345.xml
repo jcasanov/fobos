@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000103998</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>CDLA. GUANGALA, MZ. 20 V. 7</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000103998</guiaRemision>
+<razonSocialComprador>CARVAJAL RIOS VICTOR</razonSocialComprador>
+<identificacionComprador>0911029619001</identificacionComprador>
+<totalSinImpuestos>1778.29</totalSinImpuestos>
+<totalDescuento>391.22</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1387.07</baseImponible>
+<valor>166.45</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1553.52</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>95099</codigoPrincipal>
+<descripcion>MOTOR ELEC SUMERG DE 4" (2243038602) DE 5 HP 230/60/1F</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>931.32</precioUnitario>
+<descuento>204.89</descuento>
+<precioTotalSinImpuesto>726.43</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANKLIN" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>726.43</baseImponible>
+<valor>87.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96530</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 4" 25FA5S4-PE P/ 5HP. 25GPM (93822535) 23 ETAPAS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>507.06</precioUnitario>
+<descuento>111.55</descuento>
+<precioTotalSinImpuesto>395.51</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANKLIN PUMPS SYSTEMS" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>395.51</baseImponible>
+<valor>47.46</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>19587</codigoPrincipal>
+<descripcion>CAJA DE CONTROL (2821138110) CJ-5021 P/ 5HP 230/60/1F</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>339.91</precioUnitario>
+<descuento>74.78</descuento>
+<precioTotalSinImpuesto>265.13</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANKLIN" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>265.13</baseImponible>
+<valor>31.82</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

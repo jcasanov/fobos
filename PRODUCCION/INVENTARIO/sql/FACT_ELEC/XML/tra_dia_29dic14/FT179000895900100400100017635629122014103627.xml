@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176356</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>29/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176356</guiaRemision>
+<razonSocialComprador>HIDROSISTEMAS ECUADOR CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1790102076001</identificacionComprador>
+<totalSinImpuestos>2520.36</totalSinImpuestos>
+<totalDescuento>1080.15</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>2520.36</baseImponible>
+<valor>302.44</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>2822.80</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>90397</codigoPrincipal>
+<descripcion>BOMBA CENTRIF STANDARD C-MOTOR DVR-13-3 25 HP 1ETP 2-1/2 x 2"  220/440/3F. 3500 RPM</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2586.41</precioUnitario>
+<descuento>775.92</descuento>
+<precioTotalSinImpuesto>1810.49</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MARK G"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1810.49</baseImponible>
+<valor>217.26</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98600</codigoPrincipal>
+<descripcion>BOMBA CENTRIF MULTIETAPA C-MOTOR KVC 70/1206  4HP/220V/277D/380/480Y/3F/60C. NPT. (102991480)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1014.10</precioUnitario>
+<descuento>304.23</descuento>
+<precioTotalSinImpuesto>709.87</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>709.87</baseImponible>
+<valor>85.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"> hidrosistemasec@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2444067/24</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">003383</campoAdicional>
+</infoAdicional>
+</factura>

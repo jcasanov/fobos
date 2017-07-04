@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025677</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>AV. JUAN TANCA MARENGO KM.1.7</dirPartida>
+<razonSocialTransportista>SERVIENTREGA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0991285679001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>08/01/2015</fechaIniTransporte>
+<fechaFinTransporte>08/01/2015</fechaFinTransporte>
+<placa> YBA-3003</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0992234903001</identificacionDestinatario>
+<razonSocialDestinatario>ING. CARLOS MOROCHO DUQUE S.A. CM CONSTRUCCIONES</razonSocialDestinatario>
+<dirDestinatario>MATERIAL EN ENTREGADO CON GUIA 34225 DEL 30 DE 12-2014 LLEVO SERVIENTREGA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>07/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>101099</codigoInterno>
+<descripcion>TUBO ABASTO- LLAVE ANGULAR LAVABO 7578306  1/2 x 1/2" C/ MANGUERA DE 16"</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>101337</codigoInterno>
+<descripcion>INODORO RESIDENCIAL UNA PIEZA JSSI6091130  EGO REDONDO ADVANCE BLANCO INT.C/ASTO. S.DOWN</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>68897</codigoInterno>
+<descripcion>LAVABO DE PORCELANA PARA EMPOTRAR PREPONCHADO 6590130 OAKBROOK BLANCO</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>69081</codigoInterno>
+<descripcion>SIFON DE LAVABO 4019000 1-1/4" CON ACOPLE EN POLIPROPILENO BLANCO</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>71661</codigoInterno>
+<descripcion>DESAGUE DE LAVABO SC0016963061BO DESAGUE DE1 1/4" PUSH BOTTOM P/L</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">tmunoz@cmconstrucciones.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2776077</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">008600</campoAdicional>
+</infoAdicional>
+</guiaRemision>

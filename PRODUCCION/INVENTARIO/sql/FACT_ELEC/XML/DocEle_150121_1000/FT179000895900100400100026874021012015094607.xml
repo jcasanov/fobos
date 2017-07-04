@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268740</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268740</guiaRemision>
+<razonSocialComprador>DISTRIBUIDORA DE MATERIALES DE CONSTRUCCION DISMACONCOBRE CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1792238447001</identificacionComprador>
+<totalSinImpuestos>4495.61</totalSinImpuestos>
+<totalDescuento>1926.69</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>4495.61</baseImponible>
+<valor>539.47</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>5035.08</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>94169</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 4" SDQP35-140 SISTEMA DE PRESION CONSTANTE (93803575)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1920.92</precioUnitario>
+<descuento>1152.55</descuento>
+<precioTotalSinImpuesto>2689.29</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2689.29</baseImponible>
+<valor>322.71</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98138</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE PARA PILETAS 5-ASP  1200 GPH. 1" NPT 115V./60C/1F. 10  AZUL (505300)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>271.15</precioUnitario>
+<descuento>162.69</descuento>
+<precioTotalSinImpuesto>379.61</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>379.61</baseImponible>
+<valor>45.55</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98142</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE PARA PILETAS PE-2.5F-PW  475 GPH. 115V/60C/1F. 15  (566612)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>145.15</precioUnitario>
+<descuento>87.09</descuento>
+<precioTotalSinImpuesto>203.21</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>203.21</baseImponible>
+<valor>24.39</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98141</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE PARA PILETAS PE-2H-PW  300 GPH. 115V/60C/1F. 6  (566609)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>107.86</precioUnitario>
+<descuento>64.72</descuento>
+<precioTotalSinImpuesto>151.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>151.00</baseImponible>
+<valor>18.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>63086</codigoPrincipal>
+<descripcion>BOMBA CENTRIF MULTIETAPA C-MOTOR HU2-P-9-1 DE 7.5HP 2ETP 1-1/2" x 1-1/2" 3500RPM 220/440-1-60</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1532.14</precioUnitario>
+<descuento>459.64</descuento>
+<precioTotalSinImpuesto>1072.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MARK G"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1072.50</baseImponible>
+<valor>128.70</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">dismacon@netlife.ec</campoAdicional>
+<campoAdicional nombre="Email">ventas4@dismacon.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2228315</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">052810</campoAdicional>
+<campoAdicional nombre="Observaciones">PEEDIDO POR SR.CAIBE</campoAdicional>
+</infoAdicional>
+</factura>

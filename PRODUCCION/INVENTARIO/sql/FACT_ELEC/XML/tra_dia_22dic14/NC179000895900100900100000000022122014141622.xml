@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000016389</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>VIVIENDAS VICOLINCI S.A.</razonSocialComprador>
+<identificacionComprador>0990179883001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000104109</numDocModificado>
+<fechaEmisionDocSustento>19/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>227.18</totalSinImpuestos>
+<valorModificacion>254.44</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>227.18</baseImponible>
+<valor>27.26</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>POR DEVOLUCION O.T. # 3409</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>4574</codigoInterno>
+<descripcion>TEE GALV. CLASE 150 REDUCIDA DE 2-1/2" x 2" REFORZADA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>23.23</precioUnitario>
+<descuento>2.56</descuento>
+<precioTotalSinImpuesto>20.67</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>20.67</baseImponible>
+<valor>2.48</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>1636</codigoInterno>
+<descripcion>BUSHING GALV. CLASE 150 DE 1-1/4" x 1/4"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2.24</precioUnitario>
+<descuento>0.25</descuento>
+<precioTotalSinImpuesto>1.99</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.99</baseImponible>
+<valor>0.24</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>1765</codigoInterno>
+<descripcion>BUSHING NEGRO CLASE 150 DE 2" x 1-1/4"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3.49</precioUnitario>
+<descuento>0.28</descuento>
+<precioTotalSinImpuesto>3.21</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.21</baseImponible>
+<valor>0.39</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>98493</codigoInterno>
+<descripcion>MANOMETRO ROSCA NPT 1/4" DE 0 A 200 PSI DE GLICERINA ESFERA DE 63mm.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>31.50</precioUnitario>
+<descuento>2.52</descuento>
+<precioTotalSinImpuesto>28.98</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>28.98</baseImponible>
+<valor>3.48</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>71191</codigoInterno>
+<descripcion>SWITCH DE PRESION PRESOSTATO DE 4 A 12 BAR DIF 0.5-1.6 BAR</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>169.22</precioUnitario>
+<descuento>8.46</descuento>
+<precioTotalSinImpuesto>160.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>160.76</baseImponible>
+<valor>19.29</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>95032</codigoInterno>
+<descripcion>GRIFO ESFERICO BRONCE CROMADO FUTURGAS DE 3/8" (AGUA,GAS Y AIRE)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3.93</precioUnitario>
+<descuento>0.43</descuento>
+<precioTotalSinImpuesto>3.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FIV"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.50</baseImponible>
+<valor>0.42</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>4732</codigoInterno>
+<descripcion>TEE NEGRA CLASE 150 DE 2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>9.07</precioUnitario>
+<descuento>1.00</descuento>
+<precioTotalSinImpuesto>8.07</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.07</baseImponible>
+<valor>0.97</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2235631</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">11985</campoAdicional>
+</infoAdicional>
+</notaCredito>

@@ -1,0 +1,44 @@
+DATABASE aceros
+SCREEN
+{
+
+                    CONF. RETENCIONES POR TIPO DE PAGO
+                    ----------------------------------
+
+  Tipo Ret.: [c002  |c|c003                ]
+                                                           [c11] de [c12]
+  Ti    Forma de Pago  Tipo Pago    Cuenta          Nombre de Cuenta
+ [c1] [c030           |d|c031   |c032        ] [c033                    ]
+ [c1] [c030           |d|c031   |c032        ] [c033                    ]
+ [c1] [c030           |d|c031   |c032        ] [c033                    ]
+ [c1] [c030           |d|c031   |c032        ] [c033                    ]
+ [c1] [c030           |d|c031   |c032        ] [c033                    ]
+
+}
+TABLES
+cajt001
+ctbt010
+ordt002
+cajt091
+ATTRIBUTES
+c002 = ordt002.c02_porcentaje, NOENTRY, UPSHIFT, FORMAT = '##&.##';
+c    = ordt002.c02_tipo_ret, NOENTRY, UPSHIFT, INCLUDE = ('F', 'I');
+c003 = ordt002.c02_nombre, NOENTRY, UPSHIFT;
+
+c11  = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c12  = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+
+c1   = cajt091.j91_codigo_pago, AUTONEXT, UPSHIFT,
+	COMMENTS='Presione F2 para obtener ayuda del campo';
+c030 = cajt001.j01_nombre, NOENTRY, UPSHIFT;
+d    = cajt091.j91_cont_cred, AUTONEXT, UPSHIFT, INCLUDE = ('C', 'R'),
+	COMMENTS = 'C Contado  R Credito';
+c031 = FORMONLY.tit_cont_cred, NOENTRY, UPSHIFT;
+c032 = cajt091.j91_aux_cont, AUTONEXT, UPSHIFT,
+	COMMENTS='Presione F2 para obtener ayuda del campo';
+c033 = ctbt010.b10_descripcion, NOENTRY, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_detj91[5] (j91_codigo_pago, j01_nombre, j91_cont_cred,
+				tit_cont_cred, j91_aux_cont, b10_descripcion)

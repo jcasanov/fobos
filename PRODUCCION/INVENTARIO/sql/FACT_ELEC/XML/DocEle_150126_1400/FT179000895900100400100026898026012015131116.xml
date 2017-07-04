@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268980</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>26/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268980</guiaRemision>
+<razonSocialComprador>H.O.V. HOTELERA QUITO  S.A.</razonSocialComprador>
+<identificacionComprador>1790580113001</identificacionComprador>
+<totalSinImpuestos>23.51</totalSinImpuestos>
+<totalDescuento>3.20</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>23.51</baseImponible>
+<valor>2.82</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>26.33</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>416</codigoPrincipal>
+<descripcion>PLETINA DE 25 x 3mm. x 6 m</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>5.04</precioUnitario>
+<descuento>1.81</descuento>
+<precioTotalSinImpuesto>13.31</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>13.31</baseImponible>
+<valor>1.60</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>398</codigoPrincipal>
+<descripcion>PLETINA DE 19 x 3mm. x 6 m</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>4.00</precioUnitario>
+<descuento>0.48</descuento>
+<precioTotalSinImpuesto>3.52</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.52</baseImponible>
+<valor>0.42</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>558</codigoPrincipal>
+<descripcion>HIERRO REDONDO LISO x 6 MTS. DE 12mm.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>7.59</precioUnitario>
+<descuento>0.91</descuento>
+<precioTotalSinImpuesto>6.68</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.68</baseImponible>
+<valor>0.80</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">cchamba@swissuio.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2567600</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">028800</campoAdicional>
+</infoAdicional>
+</factura>

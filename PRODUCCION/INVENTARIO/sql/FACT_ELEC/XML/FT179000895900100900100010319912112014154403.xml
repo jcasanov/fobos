@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000103199</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>12/11/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000103199</guiaRemision>
+<razonSocialComprador>AUTOMOTORES Y ANEXOS S.A.</razonSocialComprador>
+<identificacionComprador>1790014797001</identificacionComprador>
+<totalSinImpuestos>701.99</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>701.99</baseImponible>
+<valor>84.24</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>786.23</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>SERVICIO1</codigoPrincipal>
+<descripcion>TABLERO PLASTICO GRIS 30X20X16CM</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>40.27</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>40.27</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ACERO-AUTO" valor="ACERO-"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>40.27</baseImponible>
+<valor>4.83</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>SERVICIO10</codigoPrincipal>
+<descripcion>PRENSA ESTOPA PG-13</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3.01</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3.01</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ACERO-AUTO" valor="ACERO-"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.01</baseImponible>
+<valor>0.36</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>SERVICIO11</codigoPrincipal>
+<descripcion>SUCRE N°4X10AWG</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>43.95</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>43.95</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ACERO-AUTO" valor="ACERO-"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>43.95</baseImponible>
+<valor>5.27</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>SERVICIO2</codigoPrincipal>
+<descripcion>CONTACTOR 38AMP 220V</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>84.34</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>84.34</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ACERO-AUTO" valor="ACERO-"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>84.34</baseImponible>
+<valor>10.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>SERVICIO3</codigoPrincipal>
+<descripcion>RELE TERMICO 23-28 A P/3RT202</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>61.80</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>61.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ACERO-AUTO" valor="ACERO-"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>61.80</baseImponible>
+<valor>7.42</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>SERVICIO4</codigoPrincipal>
+<descripcion>BREAKER 3 POLOS 40AMP 240/380V</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>25.62</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>25.62</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ACERO-AUTO" valor="ACERO-"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>25.62</baseImponible>
+<valor>3.07</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>SERVICIO5</codigoPrincipal>
+<descripcion>BORNERA SIEMENS 1 POLO 32AMP</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>13.09</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>13.09</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ACERO-AUTO" valor="ACERO-"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>13.09</baseImponible>
+<valor>1.57</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>SERVICIO6</codigoPrincipal>
+<descripcion>TOPE P/BORNERA - SIEMENS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>4.30</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>4.30</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ACERO-AUTO" valor="ACERO-"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.30</baseImponible>
+<valor>0.52</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>SERVICIO7</codigoPrincipal>
+<descripcion>SELECCIONADOR PARA FUS.CILIND.10X38</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3.39</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3.39</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ACERO-AUTO" valor="ACERO-"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.39</baseImponible>
+<valor>0.41</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>SERVICIO8</codigoPrincipal>
+<descripcion>FUSIBLE 10X38MM 6AMP 500V-CSV</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3.97</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3.97</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ACERO-AUTO" valor="ACERO-"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.97</baseImponible>
+<valor>0.48</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>SERVICIO9</codigoPrincipal>
+<descripcion>RIEL DIN 35MM ACERO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3.25</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3.25</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ACERO-AUTO" valor="ACERO-"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.25</baseImponible>
+<valor>0.39</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>ZZ</codigoPrincipal>
+<descripcion>2 BRIDAS DE 2 " CEL 40</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>35.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>35.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ACERO-AUTO" valor="ACERO-"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>35.00</baseImponible>
+<valor>4.20</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>ZZ</codigoPrincipal>
+<descripcion>GRIFO ESFERICO DE 1" CANT. 3</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>30.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>30.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ACERO-AUTO" valor="ACERO-"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>30.00</baseImponible>
+<valor>3.60</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>ZZ</codigoPrincipal>
+<descripcion>MANO DE OBRA DE INSTALACION</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>220.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>220.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ACERO-AUTO" valor="ACERO-"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>220.00</baseImponible>
+<valor>26.40</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>ZZ</codigoPrincipal>
+<descripcion>TUBERIAS DE 1 " Y NEPLOS Y ACCESORIOS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>130.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>130.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ACERO-AUTO" valor="ACERO-"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>130.00</baseImponible>
+<valor>15.60</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

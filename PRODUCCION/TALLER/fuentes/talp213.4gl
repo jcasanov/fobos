@@ -2043,6 +2043,7 @@ IF rm_r21.r21_numprof IS NULL THEN
 	LET rm_r21.r21_numprof = 1  
 END IF                            
 LET rm_r21.r21_fecing = CURRENT  
+LET rm_r21.r21_trans_fact = 'N'
 INSERT INTO rept021 VALUES (rm_r21.*) 
 IF num_args() = 6 AND arg_val(6) = 'A' THEN
 	RETURN 1
@@ -2238,6 +2239,7 @@ DEFINE r_r24		RECORD LIKE rept024.*
 DEFINE salir		SMALLINT            
 DEFINE query		CHAR(500)   
 DEFINE expr_costo	VARCHAR(100)
+DEFINE r_z02		RECORD LIKE cxct002.* 
 DEFINE r_r02		RECORD LIKE rept002.* 
 DEFINE r_r10		RECORD LIKE rept010.*
 DEFINE orden		SMALLINT  
@@ -2293,6 +2295,14 @@ IF flag_error THEN
 	RETURN
 END IF
 --}
+CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc, rm_r21.r21_codcli)
+	RETURNING r_z02.*
+IF r_z02.z02_email IS NULL THEN	
+	CALL fl_mostrar_mensaje('Cliente no tiene registrado el correo electrónico para esta localidad.','exclamation')
+	RETURN
+ELSE
+	CALL fl_mostrar_mensaje('Cliente tiene registrado este correo electrónico para esta localidad: ' || r_z02.z02_email CLIPPED || '.', 'info')
+END IF
 IF num_args() = 4 THEN
 	CALL fl_hacer_pregunta('Esta seguro de convertir en preventa esta proforma','No')
 		RETURNING resp

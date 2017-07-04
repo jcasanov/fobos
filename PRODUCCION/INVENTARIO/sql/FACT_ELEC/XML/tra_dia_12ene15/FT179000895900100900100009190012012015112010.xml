@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091900</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>12/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091900</guiaRemision>
+<razonSocialComprador>MAQUIDRAZ CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1390143954001</identificacionComprador>
+<totalSinImpuestos>400.58</totalSinImpuestos>
+<totalDescuento>171.68</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>400.58</baseImponible>
+<valor>48.07</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>448.65</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>61791</codigoPrincipal>
+<descripcion>TANQUE DE PRESION FIBRA DE VIDRIO WM-6/WM0075 ENTREGA DE 5.9 GLS POR CICLO DE 30/50 PSI</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>286.13</precioUnitario>
+<descuento>171.68</descuento>
+<precioTotalSinImpuesto>400.58</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="WELL M"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>400.58</baseImponible>
+<valor>48.07</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">lalonzo@maquidraz.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">052921285</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">002951</campoAdicional>
+<campoAdicional nombre="Observaciones">SEGUN CORREO  AIDA RIVAS</campoAdicional>
+</infoAdicional>
+</factura>

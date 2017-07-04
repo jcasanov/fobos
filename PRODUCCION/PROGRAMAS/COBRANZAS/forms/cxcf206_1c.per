@@ -1,0 +1,58 @@
+DATABASE aceros
+SCREEN
+{
+
+                                                        Estado: [c|c000     ]
+
+          Cliente: [c001       ] [c002                                      ]
+            Banco: [c003] [c004                             ]
+       No. Cuenta: [c005            ]          No. Cheque: [c006            ]
+     Valor Cheque: [c007            ]      Fecha de Cobro: [c008      ]
+
+       Referencia: [c009                                    ]
+
+  Area de Negocio: [c010  ] [c011           ]
+   Tipo documento: [a0] [c012           ]   No. documento: [c013            ]
+        Dividendo: [c014 ]                Saldo Documento: [c015            ]
+
+          Usuario: [c016      ]
+    Fecha Ingreso: [c017               ]
+}
+TABLES
+cxct026
+ATTRIBUTES
+c    = cxct026.z26_estado, NOENTRY, REVERSE, UPSHIFT,
+	COMMENTS = 'Estado: A ACTIVO B BLOQUEADO';
+c000 = FORMONLY.tit_estado_che, NOENTRY, UPSHIFT;
+c001 = cxct026.z26_codcli, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c002 = FORMONLY.tit_nombre_cli, NOENTRY, REVERSE, UPSHIFT;
+c003 = cxct026.z26_banco, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c004 = FORMONLY.tit_banco, NOENTRY, REVERSE, UPSHIFT;
+c005 = cxct026.z26_num_cta, AUTONEXT, REVERSE, UPSHIFT;
+c006 = cxct026.z26_num_cheque, AUTONEXT, REVERSE, UPSHIFT;
+c007 = cxct026.z26_valor, AUTONEXT, REVERSE, UPSHIFT,
+	INCLUDE = (0 TO 9999999999.99), FORMAT = '#,###,###,##&.##';
+c008 = cxct026.z26_fecha_cobro, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la fecha en formato dd-mm-aaaa';
+c009 = cxct026.z26_referencia, AUTONEXT, REVERSE, UPSHIFT;
+c010 = cxct026.z26_areaneg, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c011 = FORMONLY.tit_area, NOENTRY, REVERSE, UPSHIFT;
+a0   = cxct026.z26_tipo_doc, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c012 = FORMONLY.tit_tipo_doc, NOENTRY, REVERSE, UPSHIFT;
+c013 = cxct026.z26_num_doc, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c014 = cxct026.z26_dividendo, AUTONEXT, REVERSE, UPSHIFT, FORMAT = '###&&';
+c015 = FORMONLY.tit_saldo TYPE DECIMAL (12,2), NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = '#,###,###,##&.##';
+c016 = cxct026.z26_usuario, NOENTRY, REVERSE, UPSHIFT;
+c017 = cxct026.z26_fecing, NOENTRY, REVERSE, UPSHIFT;
+end
+INSTRUCTIONS
+DELIMITERS '||'
+--KEYS
+--F5 = 'Ver Documento'

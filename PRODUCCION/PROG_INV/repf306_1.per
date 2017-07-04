@@ -1,0 +1,63 @@
+DATABASE aceros
+SCREEN
+{
+        Moneda: [c1]   [c002           ]                 [y001           ]
+  Rango Fechas: [c003      ] - [c004      ]
+      Vendedor: [c05]  [c006                         ]
+
+ [c010      |c011  |c012                       |c13|c014      |c015        ][x]
+[c020      |c021  |c022                       |c23|c024      |c025        ][y]
+[c020      |c021  |c022                       |c23|c024      |c025        ][y]
+[c020      |c021  |c022                       |c23|c024      |c025        ][y]
+[c020      |c021  |c022                       |c23|c024      |c025        ][y]
+[c020      |c021  |c022                       |c23|c024      |c025        ][y]
+[c020      |c021  |c022                       |c23|c024      |c025        ][y]
+[c020      |c021  |c022                       |c23|c024      |c025        ][y]
+[c020      |c021  |c022                       |c23|c024      |c025        ][y]
+[c020      |c021  |c022                       |c23|c024      |c025        ][y]
+[c020      |c021  |c022                       |c23|c024      |c025        ][y]
+[c020      |c021  |c022                       |c23|c024      |c025        ][y]
+[c020      |c021  |c022                       |c23|c024      |c025        ][y]
+[c020      |c021  |c022                       |c23|c024      |c025        ][y]
+                                                             [c030        ]
+
+
+}
+TABLES
+rept021
+rept022
+ATTRIBUTES
+c1   = r21_moneda, UPSHIFT, AUTONEXT, REVERSE, WIDGET = 'FIELD_BMP',
+	CONFIG = 'lista.bmp F2';
+c002 = FORMONLY.tit_moneda, NOENTRY, REVERSE;
+c003 = FORMONLY.fecha_ini TYPE DATE, FORMAT = 'dd-mm-yyyy',
+       COMMENTS = 'Ingrese fecha en formato: dd-mm-aaaa';
+c004 = FORMONLY.fecha_fin TYPE DATE, FORMAT = 'dd-mm-yyyy',
+       COMMENTS = 'Ingrese fecha en formato: dd-mm-aaaa';
+c05  = FORMONLY.r21_vendedor, WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c006 = FORMONLY.tit_vend, NOENTRY;
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c13  = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c015 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+x    = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+c020 = FORMONLY.fecha TYPE DATE, FORMAT = 'dd-mm-yyyy', OPTIONS = '-nolist';
+c021 = r21_numprof, UPSHIFT, OPTIONS = '-nolist';
+c022 = r21_nomcli, UPSHIFT, OPTIONS = '-nolist';
+c23  = FORMONLY.siglas_vend, OPTIONS = '-nolist';
+c024 = FORMONLY.fecha_max TYPE DATE, FORMAT = 'dd-mm-yyyy', OPTIONS = '-nolist';
+c025 = r21_tot_neto, FORMAT = '#,###,##&.##', OPTIONS = '-nolist';
+c030 = FORMONLY.tot_prof, FORMAT = '#,###,##&.##', REVERSE;
+y001 = formonly.flag_fact, WIDGET = 'RADIO', 
+	CONFIG = 'T Todas  F Facturadas  N No_Facturadas', DEFAULT = 'T';
+y    = formonly.ind_fact, NOENTRY, OPTIONS = '-nolist';
+
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_prof[13] (FORMONLY.fecha, r21_numprof, r21_nomcli, 
+			   FORMONLY.siglas_vend, formonly.fecha_max, 
+			   r21_tot_neto, ind_fact)
+
+KEYS F5 = "Proforma"

@@ -240,7 +240,6 @@ LET num_lin     = i + j + 2
 LET t_descuento = rm_t23.t23_tot_dscto
 LET t_subtotal  = rm_t23.t23_tot_bruto - rm_t23.t23_tot_dscto
 LET t_neto      = rm_t23.t23_tot_neto
-#LET t_impuesto  = t_neto - (t_subtotal - t_descuento)
 LET t_impuesto  = rm_t23.t23_val_impto
 DISPLAY BY NAME rm_t23.t23_tot_bruto, t_descuento, t_subtotal, t_impuesto,t_neto
 --#DISPLAY 'D e s c r i p c i ó n' TO tit_col1

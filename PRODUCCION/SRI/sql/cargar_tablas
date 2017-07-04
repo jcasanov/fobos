@@ -1,0 +1,35 @@
+# ORDEN DE CARGA DE LAS TABLAS DEL MODULO SRI #
+# ------------------------------------------- #
+
+# $1 = BASE EN LA QUE SE CARGA EL MODULO
+
+dbaccess $1 srit000
+dbaccess $1 srit001
+dbaccess $1 srit002
+dbaccess $1 srit003
+dbaccess $1 srit004
+dbaccess $1 srit005
+dbaccess $1 srit006
+
+dbaccess $1 srit007
+
+dbaccess $1 srit008
+
+dbaccess $1 srit009
+
+dbaccess $1 srit010
+
+dbaccess $1 srit011
+dbaccess $1 srit012
+dbaccess $1 srit013
+dbaccess $1 srit014
+
+dbaccess $1 srit015
+dbaccess $1 srit016
+dbaccess $1 srit017
+
+dbaccess $1 srit018
+dbaccess $1 srit019
+dbaccess $1 srit020
+
+dbaccess $1 srit021

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268914</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268914</guiaRemision>
+<razonSocialComprador>ARSREDEMPTOR S.A.</razonSocialComprador>
+<identificacionComprador>1792297486001</identificacionComprador>
+<totalSinImpuestos>121.26</totalSinImpuestos>
+<totalDescuento>10.54</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>121.26</baseImponible>
+<valor>14.55</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>135.81</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>6814</codigoPrincipal>
+<descripcion>LANA DE VIDRIO PLANCHAS DE 1" x 2.50 x O.65 m.</descripcion>
+<cantidad>14.00</cantidad>
+<precioUnitario>4.88</precioUnitario>
+<descuento>5.47</descuento>
+<precioTotalSinImpuesto>62.85</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDIFI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>62.85</baseImponible>
+<valor>7.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6816</codigoPrincipal>
+<descripcion>LANA DE VIDRIO PLANCHAS DE 1-1/2" x 2.50 x 0.65 m.</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>7.32</precioUnitario>
+<descuento>3.51</descuento>
+<precioTotalSinImpuesto>40.41</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDIFI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>40.41</baseImponible>
+<valor>4.85</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6818</codigoPrincipal>
+<descripcion>LANA DE VIDRIO PLANCHAS DE 2" x 2.50 x 0.65 m.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>9.78</precioUnitario>
+<descuento>1.56</descuento>
+<precioTotalSinImpuesto>18.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDIFI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>18.00</baseImponible>
+<valor>2.16</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">ars_redemptor@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3491676</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064373</campoAdicional>
+</infoAdicional>
+</factura>

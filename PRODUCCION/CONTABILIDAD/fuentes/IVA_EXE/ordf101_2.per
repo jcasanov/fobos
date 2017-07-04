@@ -1,0 +1,57 @@
+DATABASE aceros
+SCREEN
+{
+
+                    SUSTENTOS SRI POR TIPO ORDEN DE COMPRA
+                    -------------------------------------
+
+   Tipo Orden: [c002|c003                                                    ]
+ Sustento SRI: [c000|c001                                                    ]
+                    [c001                                                    ]
+                                                              [c004] de [c005]
+ [c020|c021|c022                  |c023          |c024                      |c]
+[c030|c2] [c031                  |c032        ] [c033                      |d]
+[c030|c2] [c031                  |c032        ] [c033                      |d]
+[c030|c2] [c031                  |c032        ] [c033                      |d]
+[c030|c2] [c031                  |c032        ] [c033                      |d]
+[c030|c2] [c031                  |c032        ] [c033                      |d]
+
+      Usuario: [c040      ]           Fecha de Ingreso: [c041                ]
+}
+TABLES
+ctbt010
+srit006
+srit023
+ATTRIBUTES
+c000 = FORMONLY.sustento_sri, NOENTRY, REVERSE, UPSHIFT;
+c001 = FORMONLY.tit_sustento_sri, NOENTRY, REVERSE, UPSHIFT, WORDWRAP;
+c002 = FORMONLY.tipo_orden, NOENTRY, REVERSE, UPSHIFT;
+c003 = FORMONLY.descripcion, NOENTRY, REVERSE, UPSHIFT;
+
+c004 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c005 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+
+c020 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c021 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c022 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c023 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c024 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c    = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+c030 = srit023.s23_secuencia, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c2   = srit023.s23_sustento_sri, AUTONEXT, UPSHIFT, OPTIONS = '-nolist',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c031 = srit006.s06_descripcion, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c032 = srit023.s23_aux_cont, AUTONEXT, UPSHIFT, OPTIONS = '-nolist',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c033 = ctbt010.b10_descripcion, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+d    = srit023.s23_tributa, NOENTRY, UPSHIFT, OPTIONS = '-nolist',
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge', DEFAULT = 'S';
+
+c040 = srit023.s23_usuario, NOENTRY, UPSHIFT, REVERSE;
+c041 = srit023.s23_fecing, NOENTRY, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_sust[5] (s23_secuencia, s23_sustento_sri, s06_descripcion,
+				s23_aux_cont, b10_descripcion, s23_tributa)

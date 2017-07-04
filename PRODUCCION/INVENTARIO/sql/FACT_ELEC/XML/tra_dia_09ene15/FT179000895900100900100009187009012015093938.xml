@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091870</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>09/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091870</guiaRemision>
+<razonSocialComprador>OCANA LOPEZ JACQUELINE ELIZABETH</razonSocialComprador>
+<identificacionComprador>1310493778001</identificacionComprador>
+<totalSinImpuestos>388.82</totalSinImpuestos>
+<totalDescuento>68.61</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>388.82</baseImponible>
+<valor>46.66</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>435.48</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>20662</codigoPrincipal>
+<descripcion>MOTOR ELEC SUMERG DE 4" (2243019204S) SJF-2021 DE 2HP 230-1-60</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>457.43</precioUnitario>
+<descuento>68.61</descuento>
+<precioTotalSinImpuesto>388.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>388.82</baseImponible>
+<valor>46.66</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">josvem2@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0992425067</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016710</campoAdicional>
+<campoAdicional nombre="Observaciones">MOTOR 4PUL 2HP</campoAdicional>
+</infoAdicional>
+</factura>

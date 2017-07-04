@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268163</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268163</guiaRemision>
+<razonSocialComprador>ALMEIDA CASTRO VICTOR OCTAVIO</razonSocialComprador>
+<identificacionComprador>0401045943001</identificacionComprador>
+<totalSinImpuestos>166.74</totalSinImpuestos>
+<totalDescuento>29.42</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>166.74</baseImponible>
+<valor>20.01</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>186.75</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>49007</codigoPrincipal>
+<descripcion>IMPULSOR DE HIERRO 27205485101 DE 179mm. P/ DS-10</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>196.16</precioUnitario>
+<descuento>29.42</descuento>
+<precioTotalSinImpuesto>166.74</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MARK G"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>166.74</baseImponible>
+<valor>20.01</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">tresa_valmeida@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3265565</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">046691</campoAdicional>
+</infoAdicional>
+</factura>

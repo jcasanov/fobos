@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113978</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113978</guiaRemision>
+<razonSocialComprador>CARTAGENOVA ESPINOZA JAIME RAUL</razonSocialComprador>
+<identificacionComprador>1711748614001</identificacionComprador>
+<totalSinImpuestos>364.88</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>364.88</baseImponible>
+<valor>43.79</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>408.67</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>68793</codigoPrincipal>
+<descripcion>SUPERTECHO - SPT - 1000 - AL DE 18 PIES 5.40m (ANCHO UTIL 1.05 m.)  x 0.30mm</descripcion>
+<cantidad>7.00</cantidad>
+<precioUnitario>34.68</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>242.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ROOFTE"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>242.76</baseImponible>
+<valor>29.13</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>68789</codigoPrincipal>
+<descripcion>SUPERTECHO - SPT - 1000 - AL DE 10 PIES 3.00m (ANCHO UTIL 1.05 m.) x 0.30mm</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>19.28</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>77.12</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ROOFTE"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>77.12</baseImponible>
+<valor>9.25</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>68794</codigoPrincipal>
+<descripcion>SUPERTECHO - SPT - 1000 - AL DE 20 PIES 6m (ANCHO UTIL 1.05 m.) x 0.30mm</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>38.55</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>38.55</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ROOFTE"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>38.55</baseImponible>
+<valor>4.63</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>7089</codigoPrincipal>
+<descripcion>ACCESORIOS DE FIJACION PERNO B LARGO 2-1/2" AUTOPERFORANTE 10 Unid.</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>1.29</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>6.45</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ROOFTE"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.45</baseImponible>
+<valor>0.77</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">cartagenovaj@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2233658</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">045180</campoAdicional>
+<campoAdicional nombre="Observaciones">PACIDICARD</campoAdicional>
+</infoAdicional>
+</factura>

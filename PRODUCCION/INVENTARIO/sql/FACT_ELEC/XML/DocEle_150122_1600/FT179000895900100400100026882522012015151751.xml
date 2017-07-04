@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268825</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268825</guiaRemision>
+<razonSocialComprador>CARROCERIAS IMCE</razonSocialComprador>
+<identificacionComprador>1801172162001</identificacionComprador>
+<totalSinImpuestos>8315.25</totalSinImpuestos>
+<totalDescuento>403.69</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>8315.25</baseImponible>
+<valor>997.83</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>9313.08</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>150513</codigoPrincipal>
+<descripcion>LIJADORA ELECTRICA 6021-21 ORBITAL P/MADERA</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>110.29</precioUnitario>
+<descuento>39.70</descuento>
+<precioTotalSinImpuesto>180.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>180.88</baseImponible>
+<valor>21.71</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97042</codigoPrincipal>
+<descripcion>PISTOLA DE AIRE CALIENTE 8975-6 DE 11 AMPS. 120V. DOBLE TEMPERATURA 298-537 GRAD C.</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>126.35</precioUnitario>
+<descuento>68.23</descuento>
+<precioTotalSinImpuesto>310.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>310.82</baseImponible>
+<valor>37.30</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102392</codigoPrincipal>
+<descripcion>AMOLADORA A BATERIA 2780-22 FUEL M-18 DE 4-1/2" / 5" S/SEGURO DE SWITCH 8500 RPM.</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>553.43</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3320.58</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3320.58</baseImponible>
+<valor>398.47</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101438</codigoPrincipal>
+<descripcion>CONJUNTO COMBI 2691-22 TALADRO + LLAVE DE IMPACTO</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>547.71</precioUnitario>
+<descuento>295.76</descuento>
+<precioTotalSinImpuesto>1347.37</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1347.37</baseImponible>
+<valor>161.68</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101295</codigoPrincipal>
+<descripcion>CAMARA DE MANO DE INSPECCION 2260-21 TERMOGRAFICA DE 160 X 120 PIX LCD 3.5"COLOR 350øC</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3155.60</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3155.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3155.60</baseImponible>
+<valor>378.67</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacion@carroceriasimce.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">032445347</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">046247</campoAdicional>
+</infoAdicional>
+</factura>

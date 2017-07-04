@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025782</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>M MAGALLANES</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>16/01/2015</fechaIniTransporte>
+<fechaFinTransporte>17/01/2015</fechaFinTransporte>
+<placa>GSC8976</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0992464119001</identificacionDestinatario>
+<razonSocialDestinatario>GENERADORA ROCAFUERTE S.A. GENEROCA</razonSocialDestinatario>
+<dirDestinatario>KM 19 VIA A LA COSTA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>16/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>99314</codigoInterno>
+<descripcion>AMOLADORA ELECTRICA 6117-30 DE 13AMP./110V./2100W/2.9HP./11000 RPM</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">luisana.salinas@generoca.com.ec</campoAdicional>
+<campoAdicional nombre="Email">dptcompras#generoca.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">6044238</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">011487</campoAdicional>
+</infoAdicional>
+</guiaRemision>

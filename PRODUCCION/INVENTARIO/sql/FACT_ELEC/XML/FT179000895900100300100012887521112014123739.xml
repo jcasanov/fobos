@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000128875</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/11/2014</fechaEmision>
+<dirEstablecimiento>GARCIA MORENO S/N Y JUAN MONTALVO CONOCT</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000128875</guiaRemision>
+<razonSocialComprador>SILVA VILLAROEL GILBERTO NAPOLEON</razonSocialComprador>
+<identificacionComprador>1704398526001</identificacionComprador>
+<totalSinImpuestos>382.26</totalSinImpuestos>
+<totalDescuento>64.98</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>317.28</baseImponible>
+<valor>38.07</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>355.35</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>70905</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 CRISTAL BEIGE PRIMERA</descripcion>
+<cantidad>14.00</cantidad>
+<precioUnitario>10.92</precioUnitario>
+<descuento>25.99</descuento>
+<precioTotalSinImpuesto>126.89</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIALTO" valor="RIALTO"/>
+<detAdicional nombre="M2" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>126.89</baseImponible>
+<valor>15.23</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101779</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 TESSUTTO MOCCA  PRIMERA</descripcion>
+<cantidad>0.50</cantidad>
+<precioUnitario>10.55</precioUnitario>
+<descuento>0.90</descuento>
+<precioTotalSinImpuesto>4.38</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="M2" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.38</baseImponible>
+<valor>0.53</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101779</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 TESSUTTO MOCCA  PRIMERA</descripcion>
+<cantidad>13.50</cantidad>
+<precioUnitario>10.55</precioUnitario>
+<descuento>24.21</descuento>
+<precioTotalSinImpuesto>118.22</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="M2" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>118.22</baseImponible>
+<valor>14.19</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101777</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 TESSUTTO CAPUCHINO  PRIMERA</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>10.55</precioUnitario>
+<descuento>10.76</descuento>
+<precioTotalSinImpuesto>52.54</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="M2" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>52.54</baseImponible>
+<valor>6.30</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102835</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA TESSUTTO MOCCA  PRIMERA</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>9.19</precioUnitario>
+<descuento>3.12</descuento>
+<precioTotalSinImpuesto>15.26</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="M2" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>15.26</baseImponible>
+<valor>1.83</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

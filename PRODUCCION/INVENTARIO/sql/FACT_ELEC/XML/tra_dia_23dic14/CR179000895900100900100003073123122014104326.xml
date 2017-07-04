@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comprobanteRetencion id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000030731</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoCompRetencion>
+<fechaEmision>23/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionSujetoRetenido>04</tipoIdentificacionSujetoRetenido>
+<razonSocialSujetoRetenido>TEKA ECUADOR S.A.</razonSocialSujetoRetenido>
+<identificacionSujetoRetenido>1791883144001</identificacionSujetoRetenido>
+<periodoFiscal>12/2014</periodoFiscal>
+</infoCompRetencion>
+<impuestos>
+<impuesto>
+<codigo>1</codigo>
+<codigoRetencion>312</codigoRetencion>
+<baseImponible>203.00</baseImponible>
+<porcentajeRetener>1.00</porcentajeRetener>
+<valorRetenido>2.03</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>001001000078770</numDocSustento>
+<fechaEmisionDocSustento>09/12/2014</fechaEmisionDocSustento>
+</impuesto>
+</impuestos>
+<infoAdicional>
+<campoAdicional nombre="Email">cobranzas@teka.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2100311</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000291</campoAdicional>
+</infoAdicional>
+</comprobanteRetencion>

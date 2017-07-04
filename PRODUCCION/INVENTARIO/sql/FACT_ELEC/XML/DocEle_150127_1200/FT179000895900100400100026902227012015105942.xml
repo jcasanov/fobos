@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000269022</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000269022</guiaRemision>
+<razonSocialComprador>INESTRUCSUR INGENIERIA DE ESTRUCTURAS DE SUR AMERICA CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1792427304001</identificacionComprador>
+<totalSinImpuestos>86.36</totalSinImpuestos>
+<totalDescuento>15.24</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>86.36</baseImponible>
+<valor>10.36</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>96.72</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>93773</codigoPrincipal>
+<descripcion>FRESA ANULAR PARA TALADRO ELECTROMAGNETICO 49-59-0875 DE 7/8" P/PLANCHA DE HASTA 1"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>50.80</precioUnitario>
+<descuento>15.24</descuento>
+<precioTotalSinImpuesto>86.36</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>86.36</baseImponible>
+<valor>10.36</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">kbunce@hcc.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2550530</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">059894</campoAdicional>
+<campoAdicional nombre="Observaciones">ORDEN DE COMPRA N.- 3467</campoAdicional>
+</infoAdicional>
+</factura>

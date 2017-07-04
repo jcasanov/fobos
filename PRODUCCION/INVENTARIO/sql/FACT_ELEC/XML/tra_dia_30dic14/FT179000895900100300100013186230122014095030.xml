@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131862</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>30/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131862</guiaRemision>
+<razonSocialComprador>STOCK CERAMICA</razonSocialComprador>
+<identificacionComprador>1715082747001</identificacionComprador>
+<totalSinImpuestos>440.16</totalSinImpuestos>
+<totalDescuento>90.15</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>440.16</baseImponible>
+<valor>52.82</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>492.98</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102541</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA ZAMARA BALSA PRIMERA</descripcion>
+<cantidad>9.00</cantidad>
+<precioUnitario>9.68</precioUnitario>
+<descuento>14.81</descuento>
+<precioTotalSinImpuesto>72.31</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>72.31</baseImponible>
+<valor>8.68</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102547</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA TEMPO MARFIL  PRIMERA</descripcion>
+<cantidad>1.50</cantidad>
+<precioUnitario>10.66</precioUnitario>
+<descuento>2.72</descuento>
+<precioTotalSinImpuesto>13.27</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>13.27</baseImponible>
+<valor>1.59</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103055</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA FACHALETA TEJA  PRIMERA</descripcion>
+<cantidad>40.00</cantidad>
+<precioUnitario>10.68</precioUnitario>
+<descuento>72.62</descuento>
+<precioTotalSinImpuesto>354.58</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>354.58</baseImponible>
+<valor>42.55</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">javiermalo@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2679949</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">059309</campoAdicional>
+</infoAdicional>
+</factura>

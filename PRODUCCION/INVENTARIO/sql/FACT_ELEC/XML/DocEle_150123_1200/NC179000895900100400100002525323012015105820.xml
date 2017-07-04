@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025253</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>DANIELCOM EQUIPMENT SUPPLY S.A.</razonSocialComprador>
+<identificacionComprador>1791288777001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000175115</numDocModificado>
+<fechaEmisionDocSustento>01/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>1328.28</totalSinImpuestos>
+<valorModificacion>1487.67</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>1328.28</baseImponible>
+<valor>159.39</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 266765 DANIELCOM P/VOLVER A FAC  FC</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>99313</codigoInterno>
+<descripcion>AMOLADORA ELECTRICA 6121-30 DE 11AMP./110V./1400W/1.9HP.</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>180.21</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>540.63</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>540.63</baseImponible>
+<valor>64.88</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>102539</codigoInterno>
+<descripcion>AMOLADORA ELECTRICA 6086-30 7" / 9" 6000 RPM</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>165.27</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>495.81</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>495.81</baseImponible>
+<valor>59.50</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>101430</codigoInterno>
+<descripcion>TALADRO A BATERIA 2404-22 M-12 FUEL DE 1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>291.84</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>291.84</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>291.84</baseImponible>
+<valor>35.02</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">fact_electronica@danielcom.com</campoAdicional>
+<campoAdicional nombre="Email">marroyo@danielcom.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2258425</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">7874</campoAdicional>
+</infoAdicional>
+</notaCredito>

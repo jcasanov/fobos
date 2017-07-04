@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176089</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176089</guiaRemision>
+<razonSocialComprador>ACERO COMERCIAL ECUATORIANO S.A.</razonSocialComprador>
+<identificacionComprador>1790008959001</identificacionComprador>
+<totalSinImpuestos>294.46</totalSinImpuestos>
+<totalDescuento>158.56</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>294.46</baseImponible>
+<valor>35.34</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>329.80</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102561</codigoPrincipal>
+<descripcion>TALADRO A BATERIA 2415-20 M12 LITHIUM-ION 3/8" TALADRO EN ANGULO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>146.51</precioUnitario>
+<descuento>102.56</descuento>
+<precioTotalSinImpuesto>190.46</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>190.46</baseImponible>
+<valor>22.86</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101437</codigoPrincipal>
+<descripcion>BATERIA 48-11-2411 DE 12 V. (KIT DE 2 UNIDADES)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>116.53</precioUnitario>
+<descuento>40.79</descuento>
+<precioTotalSinImpuesto>75.74</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="JUEGO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>75.74</baseImponible>
+<valor>9.09</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102470</codigoPrincipal>
+<descripcion>JUEGO 48-22-2018 DE DESTORNILLADORES DE 8 PZS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>43.47</precioUnitario>
+<descuento>15.21</descuento>
+<precioTotalSinImpuesto>28.26</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>28.26</baseImponible>
+<valor>3.39</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2454334</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000640</campoAdicional>
+</infoAdicional>
+</factura>

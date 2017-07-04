@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176091</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176091</guiaRemision>
+<razonSocialComprador>RAUL PARREÒO - INSSAHIPA</razonSocialComprador>
+<identificacionComprador>0501448633001</identificacionComprador>
+<totalSinImpuestos>183.38</totalSinImpuestos>
+<totalDescuento>39.03</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>183.38</baseImponible>
+<valor>22.01</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>205.39</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>20015</codigoPrincipal>
+<descripcion>DIFUSOR DE PLASTICO 14379-B001 P/ BOMBAS HJA-75 - HJA-100-QD75 Y QD 100</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>28.01</precioUnitario>
+<descuento>12.32</descuento>
+<precioTotalSinImpuesto>43.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>43.70</baseImponible>
+<valor>5.24</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>15668</codigoPrincipal>
+<descripcion>DADOS PARA TERRAJA MANUAL P/ 12-R DE 1" NPT (37835)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>62.50</precioUnitario>
+<descuento>18.75</descuento>
+<precioTotalSinImpuesto>106.25</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>106.25</baseImponible>
+<valor>12.75</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99147</codigoPrincipal>
+<descripcion>BUSHING GALV. CLASE 150 DE 2" x 1"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>3.81</precioUnitario>
+<descuento>1.37</descuento>
+<precioTotalSinImpuesto>10.06</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>10.06</baseImponible>
+<valor>1.21</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>94736</codigoPrincipal>
+<descripcion>PLATO DE DESGASTE 13069B-501 P/ QD-75/100</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>14.98</precioUnitario>
+<descuento>6.59</descuento>
+<precioTotalSinImpuesto>23.37</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>23.37</baseImponible>
+<valor>2.80</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">032804310</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">001908</campoAdicional>
+</infoAdicional>
+</factura>

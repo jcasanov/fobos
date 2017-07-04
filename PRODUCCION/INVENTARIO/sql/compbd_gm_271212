@@ -1,0 +1,34 @@
+ 
+Obteniendo los Items. Por favor espere ...
+ 
+Procesando los movimientos de los Items. Por favor espere ...
+ 
+ Verificando Bodega: 60
+ 
+   ERROR ITEM: 93771 60       0.00       2.00  No. T 60
+ 
+  Existen 1 ITEMS diferentes, stock con Kardex en BODEGA 60
+ 
+ Verificando Bodega: 62
+ Verificando Bodega: 64
+ Verificando Bodega: 98
+ Verificando Bodega: 99
+ 
+   ERROR ITEM: 92908 99      -1.00       0.00  No. T 12
+ 
+  Existen 1 ITEMS diferentes, stock con Kardex en BODEGA 99
+ 
+ Verificando Bodega: D0
+ Verificando Bodega: D2
+ Verificando Bodega: D4
+ Verificando Bodega: DG
+ Verificando Bodega: E0
+ Verificando Bodega: E2
+ Verificando Bodega: EB
+ Verificando Bodega: GC
+ Verificando Bodega: SP
+ 
+Existen un total de 2 de ITEMS diferentes, stock con el Kardex.
+Se verificaron 14 Bodegas.
+ 
+Proceso Terminado Ok.

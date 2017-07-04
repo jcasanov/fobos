@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091995</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091995</guiaRemision>
+<razonSocialComprador>GARCES CALDERON CARLOS</razonSocialComprador>
+<identificacionComprador>1302272180</identificacionComprador>
+<totalSinImpuestos>156.67</totalSinImpuestos>
+<totalDescuento>17.40</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>156.67</baseImponible>
+<valor>18.80</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>175.47</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>69290</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS E152-BO GINEBRA ELONGADO BONE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>135.64</precioUnitario>
+<descuento>13.56</descuento>
+<precioTotalSinImpuesto>122.08</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>122.08</baseImponible>
+<valor>14.65</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>27955</codigoPrincipal>
+<descripcion>TUBO ABASTO METALICO TRENZADO E275.02.03.0 DH 12" P/INODORO. P/LLAVE DE PASO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3.73</precioUnitario>
+<descuento>0.37</descuento>
+<precioTotalSinImpuesto>3.36</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.36</baseImponible>
+<valor>0.40</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>91367</codigoPrincipal>
+<descripcion>EMPAQUE AC.1 ANILLO DE CERA P/ INODOROS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2.66</precioUnitario>
+<descuento>0.27</descuento>
+<precioTotalSinImpuesto>2.39</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.39</baseImponible>
+<valor>0.29</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>93876</codigoPrincipal>
+<descripcion>TORNILLO EPER-DH C/TACOS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.22</precioUnitario>
+<descuento>0.12</descuento>
+<precioTotalSinImpuesto>1.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="PAR"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.10</baseImponible>
+<valor>0.13</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>69099</codigoPrincipal>
+<descripcion>LLAVE PARA LAVABO E226/26-CR LUMINA CROMO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>19.52</precioUnitario>
+<descuento>1.95</descuento>
+<precioTotalSinImpuesto>17.57</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>17.57</baseImponible>
+<valor>2.11</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99705</codigoPrincipal>
+<descripcion>DESAGUE DE LAVABO E2460.01 RA DH BLC C/REJILLA Y SIFON DE 1-1/4"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>6.98</precioUnitario>
+<descuento>0.70</descuento>
+<precioTotalSinImpuesto>6.28</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.28</baseImponible>
+<valor>0.75</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>27951</codigoPrincipal>
+<descripcion>TUBO ABASTO METALICO TRENZADO E269.20.03.0 DH DE 16" DE LAVABO P/ LLAVE DE PASO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>4.32</precioUnitario>
+<descuento>0.43</descuento>
+<precioTotalSinImpuesto>3.89</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.89</baseImponible>
+<valor>0.47</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">carlosgarces_88@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2520293</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016731</campoAdicional>
+</infoAdicional>
+</factura>

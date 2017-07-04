@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176237</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176237</guiaRemision>
+<razonSocialComprador>SALAZAR ANGEL MARIA HELENA</razonSocialComprador>
+<identificacionComprador>1714156187001</identificacionComprador>
+<totalSinImpuestos>2362.32</totalSinImpuestos>
+<totalDescuento>666.29</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>2362.32</baseImponible>
+<valor>283.48</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>2645.80</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>98094</codigoPrincipal>
+<descripcion>BOMBA CENTRIF MULTIETAPA C-MOTOR CM5-4 ARGE 1-1/4" X 1" 2.3 HP 220/50/60/3F AQQE (96806891)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1042.12</precioUnitario>
+<descuento>458.53</descuento>
+<precioTotalSinImpuesto>1625.71</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1625.71</baseImponible>
+<valor>195.09</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98699</codigoPrincipal>
+<descripcion>BOMBA CENTRIF MULTIETAPA C-MOTOR CM3-6 ASGE  1" X 1" 1.7HP 220/440V/60/3F AVBE (96935599)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>944.37</precioUnitario>
+<descuento>207.76</descuento>
+<precioTotalSinImpuesto>736.61</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>736.61</baseImponible>
+<valor>88.39</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3564120</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">059547</campoAdicional>
+</infoAdicional>
+</factura>

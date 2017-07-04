@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000022108</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>09/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>COLEGIO TECNICO DE AGRONOMIA PABLO WEBER CUBILLO</razonSocialComprador>
+<identificacionComprador>0968574380001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000091884</numDocModificado>
+<fechaEmisionDocSustento>09/01/2015</fechaEmisionDocSustento>
+<totalSinImpuestos>3.89</totalSinImpuestos>
+<valorModificacion>4.36</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>3.89</baseImponible>
+<valor>0.47</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEVOLUCION: MATERIAL INCORRECTO</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>1662</codigoInterno>
+<descripcion>BUSHING GALV. CLASE 150 DE 2" x 1-1/4"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>4.37</precioUnitario>
+<descuento>0.48</descuento>
+<precioTotalSinImpuesto>3.89</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.89</baseImponible>
+<valor>0.47</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">colpabloweber@hotmail.es</campoAdicional>
+<campoAdicional nombre="telefono-movil">2064210</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">14253</campoAdicional>
+</infoAdicional>
+</notaCredito>

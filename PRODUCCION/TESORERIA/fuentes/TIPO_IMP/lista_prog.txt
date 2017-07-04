@@ -1,0 +1,17 @@
+./COMPRAS/fuentes/ordp202.4gl
+./REPUESTOS/fuentes/repp214.4gl
+./TESORERIA/fuentes/cxpp101.4gl
+./TESORERIA/fuentes/cxpp202.4gl
+./TESORERIA/fuentes/cxpp204.4gl
+./TESORERIA/fuentes/cxpp207.4gl
+./CAJA/fuentes/cajp202.4gl
+./TESORERIA/fuentes/cxpp206.4gl
+./COMPRAS/fuentes/ordp204.4gl
+./LIBRERIAS/fuentes/libp002.4gl
+./LIBRERIAS/fuentes/libp006.4gl
+./REPUESTOS/fuentes/repp218.4gl
+./TALLER/fuentes/talp211.4gl
+./TESORERIA/fuentes/cxpp300.4gl
+./TESORERIA/fuentes/cxpp304.4gl
+./TESORERIA/fuentes/cxpp405.4gl
+./TESORERIA/fuentes/cxpp410.4gl

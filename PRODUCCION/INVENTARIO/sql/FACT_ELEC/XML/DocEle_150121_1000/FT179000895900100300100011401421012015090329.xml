@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000114014</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000114014</guiaRemision>
+<razonSocialComprador>TEXTILES TEXSA  S.A.</razonSocialComprador>
+<identificacionComprador>1790013324001</identificacionComprador>
+<totalSinImpuestos>94.67</totalSinImpuestos>
+<totalDescuento>7.20</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>94.67</baseImponible>
+<valor>11.36</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>106.03</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>92016</codigoPrincipal>
+<descripcion>TEE NEGRA CLASE 150 DE 1"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>3.35</precioUnitario>
+<descuento>0.67</descuento>
+<precioTotalSinImpuesto>6.03</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.03</baseImponible>
+<valor>0.72</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6368</codigoPrincipal>
+<descripcion>UNIVERSAL CONICA NEGRA CLASE 150 DE 1"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>7.43</precioUnitario>
+<descuento>2.97</descuento>
+<precioTotalSinImpuesto>26.75</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>26.75</baseImponible>
+<valor>3.21</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99961</codigoPrincipal>
+<descripcion>GRIFO PASO RECTO BRONCE ROSCADO EVOLUTION DE 1" CABO AMARILLO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>15.83</precioUnitario>
+<descuento>1.58</descuento>
+<precioTotalSinImpuesto>14.25</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FIV"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>14.25</baseImponible>
+<valor>1.71</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5514</codigoPrincipal>
+<descripcion>TUBO NEGRO ASTM A-53  TIPO "T" DE 1" x 6 m.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>24.81</precioUnitario>
+<descuento>1.98</descuento>
+<precioTotalSinImpuesto>47.64</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>47.64</baseImponible>
+<valor>5.72</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">repuestos@textilestexsa.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2611138</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">029021</campoAdicional>
+<campoAdicional nombre="Observaciones">SOLICITADO POR SANTIAGO SIMI.</campoAdicional>
+</infoAdicional>
+</factura>

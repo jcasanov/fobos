@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comprobanteRetencion id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048550</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoCompRetencion>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionSujetoRetenido>04</tipoIdentificacionSujetoRetenido>
+<razonSocialSujetoRetenido>EMPROCOL S.A.</razonSocialSujetoRetenido>
+<identificacionSujetoRetenido>1791166892001</identificacionSujetoRetenido>
+<periodoFiscal>01/2015</periodoFiscal>
+</infoCompRetencion>
+<impuestos>
+<impuesto>
+<codigo>1</codigo>
+<codigoRetencion>308</codigoRetencion>
+<baseImponible>53.44</baseImponible>
+<porcentajeRetener>2.00</porcentajeRetener>
+<valorRetenido>1.07</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>001002000010728</numDocSustento>
+<fechaEmisionDocSustento>13/01/2015</fechaEmisionDocSustento>
+</impuesto>
+<impuesto>
+<codigo>2</codigo>
+<codigoRetencion>2</codigoRetencion>
+<baseImponible>6.41</baseImponible>
+<porcentajeRetener>70.00</porcentajeRetener>
+<valorRetenido>4.49</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>001002000010728</numDocSustento>
+<fechaEmisionDocSustento>13/01/2015</fechaEmisionDocSustento>
+</impuesto>
+</impuestos>
+<infoAdicional>
+<campoAdicional nombre="Email">pagos@grandhotelsantodomingo.com</campoAdicional>
+<campoAdicional nombre="Email">contabilidad@grandhotelsantodomingo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2767 947</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">001838</campoAdicional>
+</infoAdicional>
+</comprobanteRetencion>

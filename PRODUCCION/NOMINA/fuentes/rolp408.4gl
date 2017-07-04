@@ -919,7 +919,7 @@ LET query = 'SELECT a.n32_cod_trab AS cod_trab, n30_num_doc_id AS cedula, ',
 		'   AND a.n32_estado     <> "E" ',
 		'   AND n30_compania      = a.n32_compania ',
 		'   AND n30_cod_trab      = a.n32_cod_trab ',
-		--'   and n30_cod_trab     <> 170 ',
+		'   and n30_cod_trab     <> 170 ',
 		' GROUP BY 1, 2, 3, 5, 6 ',
 		' INTO TEMP t1 '
 PREPARE exec_tmp FROM query

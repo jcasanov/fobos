@@ -7,7 +7,7 @@ SCREEN
 
   Proveedor: [c002] [c102                                   ]
   
-  Tipo Vencimiento: [c003        ]    Tipo Pago: [c004      ]
+ Tipo Vcto.: [c003        ]      Tipo Pago: [c004           ]
 
 
 
@@ -31,5 +31,5 @@ c102 = cxpt001.p01_nomprov, NOENTRY, UPSHIFT;
 c003 = FORMONLY.tipo_vcto, WIDGET='RADIO', 
 	CONFIG='V Vencidos P "Por Vencer" T Todos';
 c004 = FORMONLY.tipo_pago, UPSHIFT, DEFAULT = 'C',
-	WIDGET='RADIO', CONFIG='C Cheque E Efectivo';
+	WIDGET='RADIO', CONFIG='E Efectivo C Cheque T Transferencia';
 END

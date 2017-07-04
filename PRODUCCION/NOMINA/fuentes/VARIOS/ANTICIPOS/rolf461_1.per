@@ -1,0 +1,27 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+    Periodo Anticipos: [c000] - [c1|c002      ]
+
+             Empleado: [c003 ] [c004                                    ]
+
+     Mostrar listado de descuentos para un solo proceso de nomina ? : [c]
+                Mostrar listado de totales por procesos de nomina ? : [d]
+}
+ATTRIBUTES
+c000 = FORMONLY.anio TYPE SMALLINT NOT NULL, REQUIRED, AUTONEXT, REVERSE,
+	UPSHIFT, INCLUDE = (2003 TO 2099);
+c1   = FORMONLY.mes TYPE SMALLINT NOT NULL, REQUIRED, AUTONEXT, REVERSE,
+	UPSHIFT, INCLUDE = (1 TO 12);
+c002 = FORMONLY.tit_mes TYPE CHAR NOT NULL, NOENTRY, REVERSE;
+c003 = FORMONLY.cod_trab TYPE INTEGER, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c004 = FORMONLY.nom_trab TYPE VARCHAR, NOENTRY, UPSHIFT;
+c    = FORMONLY.listado TYPE CHAR NOT NULL, REQUIRED, AUTONEXT, REVERSE,UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge', INCLUDE = ('S', 'N'),
+	DEFAULT = 'S';
+d    = FORMONLY.list_tot TYPE CHAR NOT NULL, REQUIRED, AUTONEXT,REVERSE,UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge', INCLUDE = ('S', 'N'),
+	DEFAULT = 'S';
+END

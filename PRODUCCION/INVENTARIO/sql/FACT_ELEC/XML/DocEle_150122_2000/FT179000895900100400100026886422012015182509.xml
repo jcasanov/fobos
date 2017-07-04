@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268864</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268864</guiaRemision>
+<razonSocialComprador>PETROAMAZONAS EP</razonSocialComprador>
+<identificacionComprador>1768153880001</identificacionComprador>
+<totalSinImpuestos>236.78</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>236.78</baseImponible>
+<valor>28.41</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>265.19</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>2687</codigoPrincipal>
+<descripcion>CODO PVC DESAGUE DE 50mm. x 90ø ISO E/C</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>0.58</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3.48</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.48</baseImponible>
+<valor>0.42</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2672</codigoPrincipal>
+<descripcion>CODO PVC DESAGUE DE 110mm. x 45ø ISO E/C</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>3.81</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>7.62</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7.62</baseImponible>
+<valor>0.91</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2690</codigoPrincipal>
+<descripcion>CODO PVC DESAGUE DE 110mm. x 90ø ISO E/C</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>2.80</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>16.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>16.80</baseImponible>
+<valor>2.02</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5294</codigoPrincipal>
+<descripcion>TUBO FLEX BAJA DENSIDAD DE 1/2" 125 PSI</descripcion>
+<cantidad>200.00</cantidad>
+<precioUnitario>0.88</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>176.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="M"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>176.00</baseImponible>
+<valor>21.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3772</codigoPrincipal>
+<descripcion>REDUCCION PVC DESAGUE DE 110mm. x 50mm. ISO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>2.67</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>5.34</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.34</baseImponible>
+<valor>0.64</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4061</codigoPrincipal>
+<descripcion>SIFON DESAGUE DE 50mm.</descripcion>
+<cantidad>7.00</cantidad>
+<precioUnitario>3.36</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>23.52</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>23.52</baseImponible>
+<valor>2.82</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>44461</codigoPrincipal>
+<descripcion>SOPORTE AGUAS LLUVIAS DE CANALON PVC DECORATIVO</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>0.67</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>4.02</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.02</baseImponible>
+<valor>0.48</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacion_electronica@petroamazonas.ec</campoAdicional>
+<campoAdicional nombre="Email">henry_iza@petroamazonas.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">467-500</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">050427</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C 126783</campoAdicional>
+</infoAdicional>
+</factura>

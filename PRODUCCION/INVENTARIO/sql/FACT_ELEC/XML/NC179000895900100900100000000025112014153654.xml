@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000016286</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>25/11/2014</fechaEmision>
+<dirEstablecimiento>C.C. DICENTRO, LOCAL 25</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>CONSTRUCTORA COVIGON C.A.</razonSocialComprador>
+<identificacionComprador>0990817987001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000103350</numDocModificado>
+<fechaEmisionDocSustento>19/11/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>2470.46</totalSinImpuestos>
+<valorModificacion>2766.92</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>2470.46</baseImponible>
+<valor>296.46</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEVOLUCION: CAMBIO DE MATERIAL</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>42780</codigoInterno>
+<descripcion>REJILLA TRADICIONAL E591.07.01 H-100 x 75mm. ALUMINIO</descripcion>
+<cantidad>95.00</cantidad>
+<precioUnitario>4.92</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>467.40</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>467.40</baseImponible>
+<valor>56.09</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>91553</codigoInterno>
+<descripcion>LAVAPLATOS DE ACERO INOXIDABLE 40101102 100.50 1C 1E DER.PARA DESG. C/REBOSO SOBREPONER</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>47.81</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>956.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="TEKA VENEZUELA" valor="TEKA V"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>956.20</baseImponible>
+<valor>114.74</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>91554</codigoInterno>
+<descripcion>LAVAPLATOS DE ACERO INOXIDABLE 40101103 100.50 1C 1E IZQ. PARA DESG.C/REBOSO SOBREPONER</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>47.81</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>956.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="TEKA VENEZUELA" valor="TEKA V"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>956.20</baseImponible>
+<valor>114.74</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>69056</codigoInterno>
+<descripcion>LAVAPLATOS DE ACERO INOXIDABLE 40101068 80.50 1C 1E IZQ. PARA DESG. C/REBOSO SOBREPONER</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>45.33</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>90.66</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="TEKA" valor="TEKA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>90.66</baseImponible>
+<valor>10.88</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</notaCredito>

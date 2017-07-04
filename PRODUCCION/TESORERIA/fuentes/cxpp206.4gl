@@ -188,6 +188,9 @@ WHENEVER ERROR STOP
 IF rm_ordp.p24_banco = 0 THEN
 	LET vm_cod_cont	= 'DC'
 END IF
+IF rm_ordp.p24_subtipo = 1 THEN
+	LET vm_cod_cont	= 'DP'
+END IF
 CALL fl_lee_proveedor(rm_ordp.p24_codprov) RETURNING rm_prov.*
 INITIALIZE rm_ccomp.* TO NULL
 LET rm_ccomp.b12_modulo      = vg_modulo
@@ -196,6 +199,9 @@ LET rm_ccomp.b12_fec_proceso = TODAY
 LET rm_ccomp.b12_benef_che   = rm_prov.p01_nomprov
 IF rm_ordp.p24_banco = 0 THEN
 	LET rm_ccomp.b12_benef_che = NULL
+END IF
+IF rm_ordp.p24_subtipo = 1 THEN
+	LET rm_ccomp.b12_subtipo = 70
 END IF
 LET rm_ccomp.b12_glosa       = rm_ordp.p24_referencia
 IF rm_ccomp.b12_glosa IS NULL THEN
@@ -270,7 +276,11 @@ COMMIT WORK
 CALL fl_mayoriza_comprobante(vg_codcia, rm_ccomp.b12_tipo_comp, 
 			     rm_ccomp.b12_num_comp, 'M')
 
-CALL imprimir()
+CALL control_imprimir_comprobante()
+
+IF rm_ordp.p24_subtipo = 1 THEN
+	CALL control_transferencia_banco()
+END IF
 
 CALL fl_mensaje_registro_ingresado()
 IF num_args() = 5 THEN
@@ -337,7 +347,7 @@ INPUT BY NAME rm_ccomp.b12_num_cheque, rm_ccomp.b12_glosa
 			DISPLAY BY NAME rm_ccomp.b12_glosa
 		END IF
 	AFTER FIELD b12_num_cheque
-		IF rm_ordp.p24_banco = 0 THEN
+		IF rm_ordp.p24_banco = 0 OR rm_ordp.p24_subtipo = 1 THEN
 			LET rm_ccomp.b12_num_cheque = NULL
 			DISPLAY BY NAME rm_ccomp.b12_num_cheque
 			CONTINUE INPUT
@@ -821,6 +831,7 @@ FOREACH q_det INTO r_pdoc.*
     		LET r_dret.p28_tipo_ret 	= r_pret.p26_tipo_ret
     		LET r_dret.p28_porcentaje 	= r_pret.p26_porcentaje
     		LET r_dret.p28_codigo_sri       = r_pret.p26_codigo_sri
+    		LET r_dret.p28_fecha_ini_porc   = r_pret.p26_fecha_ini_porc
     		LET r_dret.p28_valor_base 	= r_pret.p26_valor_base
     		LET r_dret.p28_valor_ret 	= r_pret.p26_valor_ret
 		INSERT INTO cxpt028 VALUES (r_dret.*)
@@ -1171,10 +1182,15 @@ FOREACH q_dte INTO i, cuenta, glosa, valor_db, valor_cr
 	END IF
 	IF cuenta = rm_bco.g09_aux_cont THEN
 		LET r.b13_glosa = rm_prov.p01_nomprov[1,25] CLIPPED
-		IF rm_ordp.p24_banco > 0 THEN
+		IF rm_ordp.p24_banco > 0 AND rm_ordp.p24_subtipo IS NULL THEN
     			LET r.b13_tipo_doc = 'CHE'
 			LET r.b13_glosa = r.b13_glosa CLIPPED, ' Ch. ',
 					rm_ccomp.b12_num_cheque USING '<<<&&&&#'
+		END IF
+		IF rm_ordp.p24_subtipo IS NOT NULL THEN
+    			LET r.b13_tipo_doc = 'DEP'
+			LET r.b13_glosa    = r.b13_glosa CLIPPED,
+						'. TRANSFERENCIA '
 		END IF
 	END IF
     	LET r.b13_valor_base 	= 0
@@ -1228,18 +1244,16 @@ END FUNCTION
 
 
 
-FUNCTION imprimir()
+FUNCTION control_imprimir_comprobante()
 DEFINE resp			VARCHAR(10)
 DEFINE retenciones		SMALLINT
 DEFINE comando			VARCHAR(250)
 DEFINE run_prog			CHAR(10)
 
-{-- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE --}
 LET run_prog = '; fglrun '
 IF vg_gui = 0 THEN
 	LET run_prog = '; fglgo '
 END IF
-{--- ---}
 LET comando = 'cd ..', vg_separador, '..', vg_separador,
 	      'TESORERIA', vg_separador, 'fuentes', 
 	      vg_separador, run_prog, 'cxpp403 ', vg_base, ' ',
@@ -1292,6 +1306,409 @@ ELSE
 	       vg_codloc, ' ', rm_ordp.p24_orden_pago
 END IF
 RUN comando	
+
+END FUNCTION
+
+
+
+FUNCTION control_transferencia_banco()
+DEFINE r_reg		RECORD
+		tipo_reg		CHAR(5),	-- "BZDET"
+		secuencia		INTEGER,	-- SEC.No.FILAS ARCH (6)
+		cod_benefi		CHAR(18),	-- CODIGO PROV
+		tipo_doc_id		CHAR(1),	-- C/R/P
+		num_doc_id		CHAR(14),	-- CED/RUC/PAS
+		nom_prov		CHAR(60),	-- p01_nomprov
+		for_pago		CHAR(3),	-- CUE - CHE/COB/IMP/PEF
+		cod_pais		CHAR(3),	-- SIEMPRE: 001
+		cod_banco		CHAR(2),	-- 34
+		tipo_cta		CHAR(2),	-- 03
+		num_cta			CHAR(20),	-- PON CTA. COR. Y BLANC
+		cod_mon			CHAR(1),	-- SIEMPRE: 1
+		valor_pago		CHAR(15),	-- NO PONER CEROS
+		concepto		CHAR(60),	-- REFERENCIA
+		num_comprob		CHAR(15),	-- NUM. UNICO
+		num_comp_ret		CHAR(15),	-- SIN GUIONES
+		num_comp_iva		CHAR(15),	-- SIN GUIONES
+		num_fact_sri		CHAR(20),	-- NORMAL
+		cod_grupo		CHAR(10),	-- EN BLANCO
+		desc_grupo		CHAR(50),	-- EN BLANCO
+		dir_prov		CHAR(50),	-- p01_direccion1
+		tel_prov		CHAR(20),	-- p01_telefono1
+		cod_servicio		CHAR(3),	-- SIEMPRE: PRO
+		autorizacion_sri	CHAR(10),	-- AUTORIZ. SRI
+		fecha_validez		CHAR(10),	-- AAAAMMDD Y BLANCO
+		referencia		CHAR(10),	-- EN BLANCO
+		control_hor_ate		CHAR(1),	-- EN BLANCO
+		cod_emp_bco		CHAR(5),	-- ASIGNADO POR EL BCO
+		cod_sub_emp_bco		CHAR(6),	-- EN BLANCO
+		sub_motivo_pag		CHAR(3)		-- SIEMPRE: RPA
+			END RECORD
+DEFINE query 		CHAR(6000)
+DEFINE comando		VARCHAR(200)
+DEFINE nom_arch		VARCHAR(100)
+DEFINE mensaje		VARCHAR(200)
+DEFINE secuen		INTEGER
+
+CREATE TEMP TABLE tmp_arc_biz
+	(
+		tipo_reg		CHAR(5),	-- "BZDET"
+		secuencia		SERIAL,		-- SEC.No.FILAS ARCH (6)
+		cod_benefi		CHAR(18),	-- CODIGO PROV
+		tipo_doc_id		CHAR(1),	-- C/R/P
+		num_doc_id		CHAR(14),	-- CED/RUC/PAS
+		nom_prov		CHAR(60),	-- p01_nomprov
+		for_pago		CHAR(3),	-- CUE - CHE/COB/IMP/PEF
+		cod_pais		CHAR(3),	-- SIEMPRE: 001
+		cod_banco		CHAR(2),	-- 34
+		tipo_cta		CHAR(2),	-- 03
+		num_cta			CHAR(20),	-- PON CTA. COR. Y BLANC
+		cod_mon			CHAR(1),	-- SIEMPRE: 1
+		valor_pago		CHAR(15),	-- NO PONER CEROS
+		concepto		CHAR(60),	-- REFERENCIA
+		num_comprob		CHAR(15),	-- NUM. UNICO
+		num_comp_ret		CHAR(15),	-- SIN GUIONES
+		num_comp_iva		CHAR(15),	-- SIN GUIONES
+		num_fact_sri		CHAR(20),	-- NORMAL
+		cod_grupo		CHAR(10),	-- EN BLANCO
+		desc_grupo		CHAR(50),	-- EN BLANCO
+		dir_prov		CHAR(50),	-- p01_direccion1
+		tel_prov		CHAR(20),	-- p01_telefono1
+		cod_servicio		CHAR(3),	-- SIEMPRE: PRO
+		autorizacion_sri	CHAR(10),	-- AUTORIZ. SRI
+		fecha_validez		CHAR(10),	-- AAAAMMDD Y BLANCO
+		referencia		CHAR(10),	-- EN BLANCO
+		control_hor_ate		CHAR(1),	-- EN BLANCO
+		cod_emp_bco		CHAR(5),	-- ASIGNADO POR EL BCO
+		cod_sub_emp_bco		CHAR(6),	-- EN BLANCO
+		sub_motivo_pag		CHAR(3)		-- SIEMPRE: RPA
+	)
+
+{--
+LET query = 'SELECT "BZDET" AS tip_arch, ',
+		'LPAD(p01_codprov, 18, 0) AS codprov, ',
+		'p01_tipo_doc AS tip_d_id, ',
+		--'LPAD(p01_num_doc, 15 + (14 - LENGTH(p01_num_doc)), 0) AS num_d_id, ',
+		'RPAD(p01_num_doc, 14, " ") AS num_d_id, ',
+		'RPAD(p01_nomprov[1, 60], 60, " ") AS nomprov, ',
+		--'"CUE" AS for_pag, ',
+		'CASE WHEN p02_cod_bco_tra = "34" ',
+			'THEN "CUE" ',
+			'ELSE "COB" ',
+		'END AS for_pag, ',
+		'"001" AS codpais, ',
+		'RPAD(p02_cod_bco_tra, 2, " ") AS cod_bco, ',
+		'CASE WHEN p02_tip_cta_prov = "C" THEN "03" ',
+		'     WHEN p02_tip_cta_prov = "A" THEN "04" ',
+		'     ELSE "  " ',
+		'END AS tip_cta, ',
+		--'LPAD(p02_cta_prov, 15 + (20 - LENGTH(p02_cta_prov)), " ") AS numcta, ',
+		'LPAD(p02_cta_prov, 11, 0) AS numcta, ',
+		'"1" AS codmon, ',
+		'REPLACE(REPLACE(LPAD(p23_valor_cap, 16, 0), ".",',
+			' ""), "-", "0") AS val_pago, ',
+		--'LPAD(c10_referencia[1, 60], 60, " ") AS concep, ',
+		'"                                                         +@." AS concep, ',
+		--'LPAD(REPLACE(TRIM(c13_num_guia), "-", ""), 15, 0) AS num_com, ',
+		'LPAD(TRIM("', rm_ccomp.b12_num_comp, '"), 15, 0) AS num_com, ',
+		'NVL((SELECT LPAD(REPLACE(p29_num_sri, "-", ""), 15, 0) ',
+			'FROM cxpt028, cxpt027, cxpt029 ',
+			'WHERE p28_compania  = p20_compania ',
+			'  AND p28_localidad = p20_localidad ',
+			'  AND p28_codprov   = p20_codprov ',
+			'  AND p28_tipo_doc  = p20_tipo_doc ',
+			'  AND p28_num_doc   = p20_num_doc ',
+			'  AND p28_dividendo = 1 ',
+			'  AND p28_secuencia = 1 ',
+			'  AND p28_tipo_ret  = "F" ',
+			'  AND p27_compania  = p28_compania ',
+			'  AND p27_localidad = p28_localidad ',
+			'  AND p27_num_ret   = p28_num_ret ',
+			'  AND p27_estado    = "A" ',
+			'  AND p29_compania  = p27_compania ',
+			'  AND p29_localidad = p27_localidad ',
+			'  AND p29_num_ret   = p27_num_ret),0) AS numcompret, ',
+		'NVL((SELECT LPAD(REPLACE(p29_num_sri, "-", ""), 15, 0) ',
+			'FROM cxpt028, cxpt027, cxpt029 ',
+			'WHERE p28_compania  = p20_compania ',
+			'  AND p28_localidad = p20_localidad ',
+			'  AND p28_codprov   = p20_codprov ',
+			'  AND p28_tipo_doc  = p20_tipo_doc ',
+			'  AND p28_num_doc   = p20_num_doc ',
+			'  AND p28_dividendo = 1 ',
+			'  AND p28_secuencia = 1 ',
+			'  AND p28_tipo_ret  = "I" ',
+			'  AND p27_compania  = p28_compania ',
+			'  AND p27_localidad = p28_localidad ',
+			'  AND p27_num_ret   = p28_num_ret ',
+			'  AND p27_estado    = "A" ',
+			'  AND p29_compania  = p27_compania ',
+			'  AND p29_localidad = p27_localidad ',
+			'  AND p29_num_ret   = p27_num_ret),0) AS numcompiva, ',
+		'LPAD(REPLACE(TRIM(c13_factura), "-", ""), 15 + ',
+			'(20 - LENGTH(REPLACE(TRIM(c13_factura), "-", ""))), ',
+			'0) AS num_fac, ',
+		'"       +@." AS cod_gr, ',
+		'"                                               +@." AS des_gr, ',
+		'RPAD(p01_direccion1[1, 60], 61, " ") AS dirprov, ',
+		'RPAD(p01_telefono1, 11 + (20 - LENGTH(p01_telefono1)), ',
+			'" ") AS telprov, ',
+		'"PRO" AS cod_serv, ',
+		'LPAD(c13_num_aut, 10, " ") AS autoriz, ',
+		'LPAD(REPLACE(TO_CHAR(c13_fecha_cadu, "%Y/%m/%d") || "", "/",',
+				' ""), 10, " ") AS fec_validez, ',
+		'"       +@." AS referen, ',
+		'"N" AS cont_hor_ate, ',
+		'04607 AS codempbco, ',
+		'"   +@." AS codsub_empbco, ',
+		'"RPA" AS sub_mot_pag ',
+		'FROM cxpt022, cxpt023, cxpt020, cxpt002, cxpt001, ordt010, ',
+			'ordt013 ',
+		'WHERE p22_compania   = ', vg_codcia,
+		'  AND p22_localidad  = ', vg_codloc,
+		'  AND p22_codprov    = ', rm_ordp.p24_codprov,
+		'  AND p22_tipo_trn   = "PG" ',
+		'  AND p22_orden_pago = ', rm_ordp.p24_orden_pago,
+		'  AND p23_compania   = p22_compania ',
+		'  AND p23_localidad  = p22_localidad ',
+		'  AND p23_codprov    = p22_codprov ',
+		'  AND p23_tipo_trn   = p22_tipo_trn ',
+		'  AND p23_num_trn    = p22_num_trn ',
+		'  AND p20_compania   = p23_compania ',
+		'  AND p20_localidad  = p23_localidad ',
+		'  AND p20_codprov    = p23_codprov ',
+		'  AND p20_tipo_doc   = p23_tipo_doc ',
+		'  AND p20_num_doc    = p23_num_doc ',
+		'  AND p20_dividendo  = p23_div_doc ',
+		'  AND p02_compania   = p20_compania ',
+		'  AND p02_localidad  = p20_localidad ',
+		'  AND p02_codprov    = p20_codprov ',
+		'  AND p01_codprov    = p02_codprov ',
+		'  AND c10_compania   = p20_compania ',
+		'  AND c10_localidad  = p20_localidad ',
+		'  AND c10_numero_oc  = p20_numero_oc ',
+		'  AND c13_compania   = c10_compania ',
+		'  AND c13_localidad  = c10_localidad ',
+		'  AND c13_numero_oc  = c10_numero_oc ',
+		'  AND c13_estado     = "A" ',
+		'INTO TEMP t1 '
+--}
+LET query = 'SELECT "BZDET" AS tip_arch, ',
+		'LPAD(p01_codprov, 18, 0) AS codprov, ',
+		'p01_tipo_doc AS tip_d_id, ',
+		'RPAD(p01_num_doc, 14, " ") AS num_d_id, ',
+		'RPAD(p01_nomprov[1, 60], 60, " ") AS nomprov, ',
+		'CASE WHEN p02_cod_bco_tra = "34" ',
+			'THEN "CUE" ',
+			'ELSE "COB" ',
+		'END AS for_pag, ',
+		'"001" AS codpais, ',
+		'RPAD(p02_cod_bco_tra, 2, " ") AS cod_bco, ',
+		'CASE WHEN p02_tip_cta_prov = "C" THEN "03" ',
+		'     WHEN p02_tip_cta_prov = "A" THEN "04" ',
+		'     ELSE "  " ',
+		'END AS tip_cta, ',
+		'LPAD(p02_cta_prov, 11, 0) AS numcta, ',
+		'"1" AS codmon, ',
+		'ROUND(SUM(NVL(p23_valor_cap, 0)), 2) AS val_pago, ',
+		--'REPLACE(REPLACE(LPAD(p23_valor_cap, 16, 0), ".", ""), "-", "0") AS val_pago, ',
+		'"                                                         +@." AS concep, ',
+		'LPAD(TRIM("', rm_ccomp.b12_num_comp, '"), 15, 0) AS num_com, ',
+		'"000000000000000" AS numcompret, ',
+		'"000000000000000" AS numcompiva, ',
+		'"000000000000000" AS num_fac, ',
+		'"       +@." AS cod_gr, ',
+		'"                                               +@." AS des_gr, ',
+		'RPAD(p01_direccion1[1, 60], 61, " ") AS dirprov, ',
+		'RPAD(p01_telefono1, 11 + (20 - LENGTH(p01_telefono1)), ',
+			'" ") AS telprov, ',
+		'"PRO" AS cod_serv, ',
+		--'LPAD(c13_num_aut, 10, " ") AS autoriz, ',
+		'"0000000000" AS autoriz, ',
+		'LPAD(REPLACE(TO_CHAR(c13_fecha_cadu, "%Y/%m/%d") || "", "/",',
+				' ""), 10, " ") AS fec_validez, ',
+		'"       +@." AS referen, ',
+		'"N" AS cont_hor_ate, ',
+		'04607 AS codempbco, ',
+		'"   +@." AS codsub_empbco, ',
+		'"RPA" AS sub_mot_pag ',
+		'FROM cxpt022, cxpt023, cxpt020, cxpt002, cxpt001, ordt010, ',
+			'ordt013 ',
+		'WHERE p22_compania   = ', vg_codcia,
+		'  AND p22_localidad  = ', vg_codloc,
+		'  AND p22_codprov    = ', rm_ordp.p24_codprov,
+		'  AND p22_tipo_trn   = "PG" ',
+		'  AND p22_orden_pago = ', rm_ordp.p24_orden_pago,
+		'  AND p23_compania   = p22_compania ',
+		'  AND p23_localidad  = p22_localidad ',
+		'  AND p23_codprov    = p22_codprov ',
+		'  AND p23_tipo_trn   = p22_tipo_trn ',
+		'  AND p23_num_trn    = p22_num_trn ',
+		'  AND p20_compania   = p23_compania ',
+		'  AND p20_localidad  = p23_localidad ',
+		'  AND p20_codprov    = p23_codprov ',
+		'  AND p20_tipo_doc   = p23_tipo_doc ',
+		'  AND p20_num_doc    = p23_num_doc ',
+		'  AND p20_dividendo  = p23_div_doc ',
+		'  AND p02_compania   = p20_compania ',
+		'  AND p02_localidad  = p20_localidad ',
+		'  AND p02_codprov    = p20_codprov ',
+		'  AND p01_codprov    = p02_codprov ',
+		'  AND c10_compania   = p20_compania ',
+		'  AND c10_localidad  = p20_localidad ',
+		'  AND c10_numero_oc  = p20_numero_oc ',
+		'  AND c13_compania   = c10_compania ',
+		'  AND c13_localidad  = c10_localidad ',
+		'  AND c13_numero_oc  = c10_numero_oc ',
+		'  AND c13_estado     = "A" ',
+		'GROUP BY 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, ',
+			'17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29 ',
+		'INTO TEMP tmp_t1 '
+PREPARE exec_dat FROM query
+EXECUTE exec_dat
+LET query = 'SELECT tip_arch, codprov, tip_d_id, num_d_id, nomprov, for_pag, ',
+		'codpais, cod_bco, tip_cta, numcta, codmon, ',
+		'REPLACE(REPLACE(LPAD(val_pago, 16, 0), ".", ""), "-",',
+			' "0") AS val_pago, ',
+		'concep, num_com, numcompret, numcompiva, num_fac, cod_gr, ',
+		'des_gr, dirprov, telprov, cod_serv, autoriz, fec_validez, ',
+		'referen, cont_hor_ate, codempbco, codsub_empbco, sub_mot_pag ',
+		'FROM tmp_t1 ',
+		'INTO TEMP t1 '
+PREPARE exec_dat2 FROM query
+EXECUTE exec_dat2
+DROP TABLE tmp_t1
+LET query = 'INSERT INTO tmp_arc_biz ',
+		'(tipo_reg, secuencia, cod_benefi, tipo_doc_id, num_doc_id, ',
+		'nom_prov, for_pago, cod_pais, cod_banco, tipo_cta, num_cta, ',
+		'cod_mon, valor_pago, concepto, num_comprob, num_comp_ret, ',
+		'num_comp_iva, num_fact_sri, cod_grupo, desc_grupo, dir_prov, ',
+		'tel_prov, cod_servicio, autorizacion_sri, fecha_validez, ',
+		'referencia, control_hor_ate, cod_emp_bco, cod_sub_emp_bco, ',
+		'sub_motivo_pag) ',
+		'SELECT tip_arch, 0, codprov, tip_d_id, num_d_id, nomprov, ',
+			'for_pag, codpais, cod_bco, tip_cta, numcta, codmon, ',
+			'val_pago, RPAD(concep, 60, " "), num_com, ',
+			{--
+			'CASE WHEN numcompret = "0" ',
+				'THEN LPAD(numcompret, 15, 0) ',
+				'ELSE ',
+				'CASE WHEN LENGTH(numcompret) = 13 ',
+					'THEN LPAD(numcompret, 17, 0) ',
+					'ELSE LPAD(numcompret, 15, 0) ',
+				'END ',
+			'END AS numcompret, ',
+			'CASE WHEN numcompiva = "0" ',
+				'THEN LPAD(numcompiva, 15, 0) ',
+				'ELSE ',
+				'CASE WHEN LENGTH(numcompiva) = 13 ',
+					'THEN LPAD(numcompiva, 17, 0) ',
+					'ELSE LPAD(numcompiva, 15, 0) ',
+				'END ',
+			'END AS numcompiva, ',
+			--}
+			'"000000000000000", "000000000000000", ',
+		--'num_fac, RPAD(cod_gr, 10, " "), RPAD(des_gr, 50, " "), ',
+		'"000000000000000", RPAD(cod_gr, 10, " "), ',
+		'RPAD(des_gr, 50, " "), ',
+		'dirprov, telprov, cod_serv, autoriz, fec_validez, ',
+		'RPAD(referen, 10, " "), cont_hor_ate, LPAD(codempbco, 5, 0), ',
+		'RPAD(codsub_empbco, 6, " "), sub_mot_pag ',
+		'FROM t1 '
+PREPARE exec_ins_tab FROM query
+EXECUTE exec_ins_tab
+DROP TABLE t1
+INITIALIZE r_reg.* TO NULL
+DECLARE q_t1 CURSOR FOR
+	SELECT * FROM tmp_arc_biz
+		ORDER BY 2
+FOREACH q_t1 INTO r_reg.*
+	IF r_reg.nom_prov[58, 60] IS NULL OR r_reg.nom_prov[58, 60] = "   "
+	THEN
+		LET r_reg.nom_prov[58, 60] = "+@."
+	END IF
+	IF r_reg.dir_prov[48, 50] IS NULL OR r_reg.dir_prov[48, 50] = "   "
+	THEN
+		LET r_reg.dir_prov[48, 50] = "+@."
+	END IF
+	IF r_reg.tel_prov[18, 20] IS NULL OR r_reg.tel_prov[18, 20] = "   "
+	THEN
+		LET r_reg.tel_prov[18, 20] = "+@."
+	END IF
+	IF r_reg.num_cta[18, 20] IS NULL OR r_reg.num_cta[18, 20] = "   "
+	THEN
+		LET r_reg.num_cta[18, 20] = "+@."
+	END IF
+	IF r_reg.num_doc_id[12, 14] IS NULL OR r_reg.num_doc_id[12, 14] = "   "
+	THEN
+		LET r_reg.num_doc_id[12, 14] = "+@."
+	END IF
+	IF r_reg.num_doc_id[14, 14] IS NULL OR r_reg.num_doc_id[14, 14] = " "
+	THEN
+		LET r_reg.num_doc_id[14, 14] = "@"
+	END IF
+	{--
+	IF r_reg.cod_banco[3, 3] IS NULL OR r_reg.cod_banco[3, 3] = " "
+	THEN
+		LET r_reg.cod_banco[3, 3] = "@"
+	END IF
+	--}
+	UPDATE tmp_arc_biz
+		SET nom_prov         = r_reg.nom_prov,
+		    dir_prov         = r_reg.dir_prov,
+		    tel_prov         = r_reg.tel_prov,
+		    num_cta          = r_reg.num_cta,
+		    num_doc_id       = r_reg.num_doc_id,
+		    cod_banco        = r_reg.cod_banco,
+		    autorizacion_sri = "       +@.",
+		    fecha_validez    = "       +@."
+		WHERE secuencia = r_reg.secuencia
+END FOREACH
+UNLOAD TO "../../../tmp/arch_tr_pago.txt" DELIMITER "|"
+SELECT tipo_reg, LPAD(secuencia, 6, 0) AS secuencia, cod_benefi, tipo_doc_id,
+	num_doc_id, nom_prov, for_pago, cod_pais, cod_banco, tipo_cta, num_cta,
+	cod_mon, valor_pago, concepto, num_comprob, num_comp_ret,
+	num_comp_iva, num_fact_sri, RPAD(cod_grupo, 10, " ") AS cod_grupo,
+	RPAD(desc_grupo, 50, " ") AS desc_grupo, dir_prov, tel_prov,
+	cod_servicio, autorizacion_sri, fecha_validez,
+	RPAD(referencia, 10, " ") AS referencia, control_hor_ate,
+	cod_emp_bco, RPAD(cod_sub_emp_bco, 6, " ") AS cod_sub_emp_bco,
+	sub_motivo_pag
+	FROM tmp_arc_biz
+	--GROUP BY 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30
+DROP TABLE tmp_arc_biz
+SELECT COUNT(p24_subtipo)
+	INTO secuen
+	FROM cxpt024
+	WHERE p24_compania      = vg_codcia
+	  AND p24_localidad     = vg_codloc
+	  AND p24_orden_pago   <= rm_ordp.p24_orden_pago
+	  AND DATE(p24_fecing)  = DATE(rm_ordp.p24_fecing)
+IF secuen = 0 THEN
+	LET secuen = 1
+END IF
+LET nom_arch = "ACEROCOM", DATE(rm_ordp.p24_fecing) USING "yyyy",
+		DATE(rm_ordp.p24_fecing) USING "mm",
+		DATE(rm_ordp.p24_fecing) USING "dd",
+		secuen USING "&&&&"
+LET nom_arch = nom_arch CLIPPED, ".BIZ"
+LET mensaje  = 'Archivo ', nom_arch CLIPPED, ' Generado ', FGL_GETENV("HOME"),
+		'/tmp/  OK'
+LET comando  = 'sed -e "s/+@./   /g" ../../../tmp/arch_tr_pago.txt > ../../../tmp/temporal.txt'
+RUN comando
+LET comando  = 'sed -e "s/@/ /g" ../../../tmp/temporal.txt > ../../../tmp/temporal2.txt'
+RUN comando
+LET comando  = 'sed -e "s/|//g" ../../../tmp/temporal2.txt > ../../../tmp/temporal.txt'
+RUN comando
+LET comando  = "mv ../../../tmp/temporal.txt ../../../tmp/temporal2.txt"
+RUN comando
+LET comando  = "mv ../../../tmp/temporal2.txt ../../../tmp/arch_tr_pago.txt"
+RUN comando
+LET comando  = "mv ../../../tmp/arch_tr_pago.txt $HOME/tmp/", nom_arch CLIPPED
+RUN comando
+LET comando  = "unix2dos $HOME/tmp/", nom_arch CLIPPED
+RUN comando
+CALL fl_mostrar_mensaje(mensaje, 'info')
 
 END FUNCTION
 

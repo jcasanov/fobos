@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091879</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>09/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091879</guiaRemision>
+<razonSocialComprador>LA FABRIL S.A.</razonSocialComprador>
+<identificacionComprador>1390012949001</identificacionComprador>
+<totalSinImpuestos>73.68</totalSinImpuestos>
+<totalDescuento>8.93</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>73.68</baseImponible>
+<valor>8.84</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>82.52</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>70736</codigoPrincipal>
+<descripcion>MANOMETRO ROSCA NPT 1/4" 0-100 PSI DE GLICERINA ESF. 2.5"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>42.92</precioUnitario>
+<descuento>5.15</descuento>
+<precioTotalSinImpuesto>37.77</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ASHCRO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>37.77</baseImponible>
+<valor>4.53</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21138</codigoPrincipal>
+<descripcion>SWITCH DE PRESION 15760-A2 DE 40 A 60 PSI  SQUARE D</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>31.90</precioUnitario>
+<descuento>3.51</descuento>
+<precioTotalSinImpuesto>28.39</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>28.39</baseImponible>
+<valor>3.41</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97467</codigoPrincipal>
+<descripcion>TEFLON EN ROLLO 0.07 x 12 mm. x 10 m.</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>0.58</precioUnitario>
+<descuento>0.17</descuento>
+<precioTotalSinImpuesto>2.73</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.73</baseImponible>
+<valor>0.33</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50384</codigoPrincipal>
+<descripcion>TEE POLIPROPILENO DE 1" (AGUA CALIENTE)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.67</precioUnitario>
+<descuento>0.10</descuento>
+<precioTotalSinImpuesto>1.57</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.57</baseImponible>
+<valor>0.19</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2250</codigoPrincipal>
+<descripcion>CODO NEGRO CLASE 150 DE 3/8" x 90°</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.16</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.16</baseImponible>
+<valor>0.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3148</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 3/8" x 4"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2.06</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2.06</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.06</baseImponible>
+<valor>0.25</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jortiz@lafabril.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2920091</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">002092</campoAdicional>
+</infoAdicional>
+</factura>

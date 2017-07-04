@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000016390</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>VIVIENDAS VICOLINCI S.A.</razonSocialComprador>
+<identificacionComprador>0990179883001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000104108</numDocModificado>
+<fechaEmisionDocSustento>19/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>182.77</totalSinImpuestos>
+<valorModificacion>204.70</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>182.77</baseImponible>
+<valor>21.93</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>POR DEVOLUCION O.T. # 3409</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>21378</codigoInterno>
+<descripcion>VALVULA CHEQUE VC-50 DE 2" DE BRONCE TIPO PESADO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>86.50</precioUnitario>
+<descuento>6.92</descuento>
+<precioTotalSinImpuesto>79.58</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HELBER"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>79.58</baseImponible>
+<valor>9.55</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>1744</codigoInterno>
+<descripcion>BUSHING NEGRO CLASE 150 DE 2-1/2" x 2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>6.27</precioUnitario>
+<descuento>0.69</descuento>
+<precioTotalSinImpuesto>5.58</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.58</baseImponible>
+<valor>0.67</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>4244</codigoInterno>
+<descripcion>TAPON NEGRO MACHO CLASE 150 DE 2-1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>4.84</precioUnitario>
+<descuento>0.53</descuento>
+<precioTotalSinImpuesto>4.31</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.31</baseImponible>
+<valor>0.52</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>95185</codigoInterno>
+<descripcion>VALVULA CHEQUE VC-63 DE 2 1/2" DE BRONCE TIPO PESADO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>104.83</precioUnitario>
+<descuento>11.53</descuento>
+<precioTotalSinImpuesto>93.30</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HELBER"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>93.30</baseImponible>
+<valor>11.20</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2235631</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">11985</campoAdicional>
+</infoAdicional>
+</notaCredito>

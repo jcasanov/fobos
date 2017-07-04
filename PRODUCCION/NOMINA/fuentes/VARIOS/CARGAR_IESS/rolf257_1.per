@@ -1,0 +1,82 @@
+DATABASE aceros
+SCREEN
+{
+                                                              [c013] de [c014]
+
+ T. Arch.: [c0] [c001                             ]           Tipo IESS: [c02]
+  Archivo: [c003             ]   Periodo: [c004] - [c5]  Estado: [c|c006     ]
+ P. Carga: [c007] - [c8]  RUC Patronal: [c009           ]     Sucursal: [c010]
+
+                                                              [c011] de [c012]
+ [c020      |c021   |c022                             |c023      |c024      |d]
+[c030      |c031 ] [c032                             |c033      |c034      |e]
+[c030      |c031 ] [c032                             |c033      |c034      |e]
+[c030      |c031 ] [c032                             |c033      |c034      |e]
+[c030      |c031 ] [c032                             |c033      |c034      |e]
+[c030      |c031 ] [c032                             |c033      |c034      |e]
+[c030      |c031 ] [c032                             |c033      |c034      |e]
+[c030      |c031 ] [c032                             |c033      |c034      |e]
+[c030      |c031 ] [c032                             |c033      |c034      |e]
+[c030      |c031 ] [c032                             |c033      |c034      |e]
+[c030      |c031 ] [c032                             |c033      |c034      |e]
+                                              Total: [c040      |c041      ]
+        Usuario Ingreso: [c042      ] - [c043               ]
+         Usuario Cierre: [c044      ] - [c045               ]
+}
+TABLES
+rolt022
+rolt026
+rolt027
+rolt030
+ATTRIBUTES
+c0   = rolt026.n26_codigo_arch, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = rolt022.n22_descripcion, NOENTRY, UPSHIFT, REVERSE;
+c02  = rolt026.n26_tipo_arch, NOENTRY, UPSHIFT, REVERSE;
+c003 = rolt026.n26_nombre_arch, AUTONEXT, DOWNSHIFT, REVERSE;
+c004 = rolt026.n26_ano_proceso, AUTONEXT, UPSHIFT, REVERSE;
+c5   = rolt026.n26_mes_proceso, AUTONEXT, UPSHIFT, REVERSE, INCLUDE = (1 TO 12);
+c    = rolt026.n26_estado, NOENTRY, UPSHIFT, REVERSE;
+c006 = FORMONLY.tit_estado, NOENTRY, UPSHIFT, REVERSE;
+c007 = rolt026.n26_ano_carga, NOENTRY, UPSHIFT, REVERSE;
+c8   = rolt026.n26_mes_carga, NOENTRY, UPSHIFT, REVERSE;
+c009 = rolt026.n26_ruc_patronal, NOENTRY, UPSHIFT, REVERSE;
+c010 = rolt026.n26_sucursal, NOENTRY, UPSHIFT, REVERSE;
+
+c011 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c012 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c013 = FORMONLY.vm_row_current, NOENTRY, UPSHIFT, REVERSE;
+c014 = FORMONLY.vm_num_rows, NOENTRY, UPSHIFT, REVERSE;
+
+c020 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c021 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c022 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c023 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c024 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+d    = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+c030 = rolt027.n27_cedula_trab, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c031 = rolt027.n27_cod_trab, AUTONEXT, UPSHIFT, OPTIONS = '-nolist',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c032 = rolt030.n30_nombres, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c033 = rolt027.n27_valor_ext, NOENTRY, UPSHIFT, INCLUDE = (0 TO 999999.99),
+	FORMAT = "###,##&.##", OPTIONS = '-nolist';
+c034 = rolt027.n27_valor_adi, AUTONEXT, UPSHIFT, INCLUDE = (0 TO 999999.99),
+	FORMAT = "###,##&.##", OPTIONS = '-nolist';
+e    = rolt027.n27_tipo_causa, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+
+c040 = FORMONLY.total_valor_ext, NOENTRY, UPSHIFT,REVERSE,FORMAT = "###,##&.##";
+c041 = FORMONLY.total_valor_adi, NOENTRY, UPSHIFT,REVERSE,FORMAT = "###,##&.##";
+
+c042 = rolt026.n26_usuario, NOENTRY, UPSHIFT, REVERSE;
+c043 = rolt026.n26_fecing, NOENTRY, UPSHIFT, REVERSE;
+c044 = rolt026.n26_usua_cierre, NOENTRY, UPSHIFT;
+c045 = rolt026.n26_fec_cierre, NOENTRY, UPSHIFT;
+END
+KEYS
+F5 = 'Eliminar'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_detalle[10] (n27_cedula_trab, n27_cod_trab, n30_nombres,
+				n27_valor_ext, n27_valor_adi, n27_tipo_causa)

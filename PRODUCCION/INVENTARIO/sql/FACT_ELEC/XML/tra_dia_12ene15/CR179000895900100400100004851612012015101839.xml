@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comprobanteRetencion id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048516</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoCompRetencion>
+<fechaEmision>12/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionSujetoRetenido>04</tipoIdentificacionSujetoRetenido>
+<razonSocialSujetoRetenido>QBE SEGUROS COLONIAL S.A.</razonSocialSujetoRetenido>
+<identificacionSujetoRetenido>1791240014001</identificacionSujetoRetenido>
+<periodoFiscal>01/2015</periodoFiscal>
+</infoCompRetencion>
+<impuestos>
+<impuesto>
+<codigo>1</codigo>
+<codigoRetencion>322</codigoRetencion>
+<baseImponible>85.38</baseImponible>
+<porcentajeRetener>0.10</porcentajeRetener>
+<valorRetenido>0.09</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>001003002113209</numDocSustento>
+<fechaEmisionDocSustento>08/01/2015</fechaEmisionDocSustento>
+</impuesto>
+</impuestos>
+<infoAdicional>
+<campoAdicional nombre="Email">icisneros@tecniseguros.com.ec</campoAdicional>
+<campoAdicional nombre="Email">vlara@tecniseguros.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2263795</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">001433</campoAdicional>
+</infoAdicional>
+</comprobanteRetencion>

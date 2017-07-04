@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268955</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>24/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268955</guiaRemision>
+<razonSocialComprador>MANZO ROSADO TYRON MANUEL</razonSocialComprador>
+<identificacionComprador>1202973879</identificacionComprador>
+<totalSinImpuestos>66.03</totalSinImpuestos>
+<totalDescuento>13.53</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>66.03</baseImponible>
+<valor>7.92</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>73.95</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99360</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA MACHALILLA BEIGE PRIMERA</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>8.82</precioUnitario>
+<descuento>9.00</descuento>
+<precioTotalSinImpuesto>43.92</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>43.92</baseImponible>
+<valor>5.27</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97244</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 OSIRIS BEIGE ESTANDAR</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>8.88</precioUnitario>
+<descuento>4.53</descuento>
+<precioTotalSinImpuesto>22.11</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>22.11</baseImponible>
+<valor>2.65</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">lidohibe@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3333333</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">026148</campoAdicional>
+</infoAdicional>
+</factura>

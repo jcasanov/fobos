@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025865</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>AV. JUAN TANCA AMRENGO KM.1.7</dirPartida>
+<razonSocialTransportista>PEDRO ESPINOZA</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>0901584631</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>22/01/2015</fechaIniTransporte>
+<fechaFinTransporte>22/01/2015</fechaFinTransporte>
+<placa>000</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0907581219</identificacionDestinatario>
+<razonSocialDestinatario>SUQUINAHUA DE LA CUADRA MERCY</razonSocialDestinatario>
+<dirDestinatario>RETIRO PEDRO ESPINOZA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>22/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>90415</codigoInterno>
+<descripcion>GRIFERIA DE BIDET CON SPRAY VERTICAL E299/84 CR CHESS CROMO</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>90446</codigoInterno>
+<descripcion>GRIFERIA DE TINA E103/84 CR CHESS CROMO</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">charlesg51@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2451693</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016733</campoAdicional>
+</infoAdicional>
+</guiaRemision>

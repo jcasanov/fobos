@@ -1,0 +1,85 @@
+database acero_gm
+screen size 24 by 80
+{
+c10_compania       [f000       ]
+c10_localidad      [f001  ]
+c10_numero_oc      [f002       ]
+c10_tipo_orden     [f003       ]
+c10_cod_depto      [f004  ]
+c10_solicitado     [f005                     ]
+c10_estado         [a]
+c10_codprov        [f006       ]
+c10_atencion       [f007                     ]
+c10_referencia     [f008                                    ]
+                   [f009                                    ]
+                   [f010                                    ]
+c10_usua_aprob     [f011      ]
+c10_fecha_aprob    [f012               ]
+c10_fecha_entre    [f013               ]
+c10_ord_trabajo    [f014       ]
+c10_recargo        [f015  ]
+c10_porc_descto    [f016  ]
+c10_porc_impto     [f017  ]
+c10_moneda         [a0]
+}
+screen
+{
+c10_paridad        [f018              ]
+c10_precision      [f019  ]
+c10_tipo_pago      [b]
+c10_interes        [f020  ]
+c10_tot_repto      [f021          ]
+c10_tot_mano       [f022          ]
+c10_tot_dscto      [f023         ]
+c10_dif_cuadre     [f024      ]
+c10_tot_impto      [f025         ]
+c10_tot_compra     [f026          ]
+c10_flete          [f027         ]
+c10_otros          [f028         ]
+c10_factura        [f029           ]
+c10_fecha_fact     [f030      ]
+c10_usuario        [f031      ]
+c10_fecing         [f032               ]
+}
+end
+tables
+ordt010
+attributes
+f000 = ordt010.c10_compania;
+f001 = ordt010.c10_localidad;
+f002 = ordt010.c10_numero_oc;
+f003 = ordt010.c10_tipo_orden;
+f004 = ordt010.c10_cod_depto;
+f005 = ordt010.c10_solicitado;
+a = ordt010.c10_estado;
+f006 = ordt010.c10_codprov;
+f007 = ordt010.c10_atencion;
+f008 = ordt010.c10_referencia[1,40];
+f009 = ordt010.c10_referencia[41,80];
+f010 = ordt010.c10_referencia[81,120];
+f011 = ordt010.c10_usua_aprob;
+f012 = ordt010.c10_fecha_aprob;
+f013 = ordt010.c10_fecha_entre;
+f014 = ordt010.c10_ord_trabajo;
+f015 = ordt010.c10_recargo;
+f016 = ordt010.c10_porc_descto;
+f017 = ordt010.c10_porc_impto;
+a0 = ordt010.c10_moneda;
+
+f018 = ordt010.c10_paridad;
+f019 = ordt010.c10_precision;
+b = ordt010.c10_tipo_pago;
+f020 = ordt010.c10_interes;
+f021 = ordt010.c10_tot_repto;
+f022 = ordt010.c10_tot_mano;
+f023 = ordt010.c10_tot_dscto;
+f024 = ordt010.c10_dif_cuadre;
+f025 = ordt010.c10_tot_impto;
+f026 = ordt010.c10_tot_compra;
+f027 = ordt010.c10_flete;
+f028 = ordt010.c10_otros;
+f029 = ordt010.c10_factura;
+f030 = ordt010.c10_fecha_fact;
+f031 = ordt010.c10_usuario;
+f032 = ordt010.c10_fecing;
+end

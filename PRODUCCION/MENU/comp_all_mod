@@ -1,0 +1,7 @@
+cd fuentes/
+sh comp_4gl $1
+cd ..
+cd forms/
+sh comp_form $1
+cd ..
+echo 'Todo el modulo compilado Ok. '

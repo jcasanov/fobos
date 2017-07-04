@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268642</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268642</guiaRemision>
+<razonSocialComprador>INFINITO CONSTRUCCIONES INFICONS S.A.</razonSocialComprador>
+<identificacionComprador>1792373271001</identificacionComprador>
+<totalSinImpuestos>393.18</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>393.18</baseImponible>
+<valor>47.18</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>440.36</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5518</codigoPrincipal>
+<descripcion>TUBO NEGRO ASTM A-53  TIPO "T" DE 1-1/2" x 6 m.</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>42.61</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>127.83</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>127.83</baseImponible>
+<valor>15.34</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1586</codigoPrincipal>
+<descripcion>BRIDA ROSCADA NEGRA C-PERNOS DE 1-1/2"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>4.37</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>26.22</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>26.22</baseImponible>
+<valor>3.15</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4218</codigoPrincipal>
+<descripcion>TAPON NEGRO HEMBRA CLASE 150 DE 1-1/2" LISO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>3.43</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>6.86</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.86</baseImponible>
+<valor>0.82</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4158</codigoPrincipal>
+<descripcion>TAPON GALV. MACHO CLASE 150 DE 1-1/2"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>2.37</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>14.22</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>14.22</baseImponible>
+<valor>1.71</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2896</codigoPrincipal>
+<descripcion>CRUZ GALV. CLASE 150 DE 1-1/2"</descripcion>
+<cantidad>11.00</cantidad>
+<precioUnitario>13.01</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>143.11</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>143.11</baseImponible>
+<valor>17.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4532</codigoPrincipal>
+<descripcion>TEE GALV. 4 VIAS CLASE 150 DE 1-1/2"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>9.30</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>37.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>37.20</baseImponible>
+<valor>4.46</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6028</codigoPrincipal>
+<descripcion>UNION GALV. CLASE 150 DE 1-1/2"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>3.43</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>20.58</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>20.58</baseImponible>
+<valor>2.47</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3430</codigoPrincipal>
+<descripcion>NEPLO NEGRO DE 1-1/2" x 6"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>2.86</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>17.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>17.16</baseImponible>
+<valor>2.06</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jpsuarez@infinity-home.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3324082</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064337</campoAdicional>
+<campoAdicional nombre="Observaciones">JUAN PABLO SUAREZ / 0984056501</campoAdicional>
+</infoAdicional>
+</factura>

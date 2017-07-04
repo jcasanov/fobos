@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000047910</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV ALBERTO ZAMBRANO Y 9 DE OCTUBRE</dirEstablecimiento>
+<dirPartida>AV LA PRENSA</dirPartida>
+<razonSocialTransportista>SERVIENTREGA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0991285679001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>09/12/2014</fechaIniTransporte>
+<fechaFinTransporte></fechaFinTransporte>
+<placa></placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1691716305001</identificacionDestinatario>
+<razonSocialDestinatario>GIUFERVY CIA LTDA</razonSocialDestinatario>
+<dirDestinatario>PUYO</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>08/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>102393</codigoInterno>
+<descripcion>ROTOMARTILLO A BATERIA 2604-22CT M-18 FUEL ATORNILLADOR DE 1/2" - 650 PULG/LB.</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="2604-22CT" valor="2604-22CT"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>102401</codigoInterno>
+<descripcion>AMOLADORA ELECTRICA 6146-31 DE DE 11 AMPS. 4-1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="6146-31" valor="6146-31"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>102402</codigoInterno>
+<descripcion>AMOLADORA ELECTRICA 6147-31 11 AMPS. 4-1/2" 1100 W.</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="6147-31" valor="6147-31"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>102403</codigoInterno>
+<descripcion>AMOLADORA ELECTRICA 6161-33 DE 13 AMPS. 6" 9000 RPM</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="6161-33" valor="6161-33"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>102539</codigoInterno>
+<descripcion>AMOLADORA ELECTRICA 6086-30 7" / 9" 6000 RPM</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="6086-30" valor="6086-30"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>103117</codigoInterno>
+<descripcion>FLEXOMETRO 48-22-5225 MAGNETICO DE 8 m.</descripcion>
+<cantidad>4.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="48-22-5225" valor="48-22-5225"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+<campoAdicional nombre="telefono-movil">2886269</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">063307</campoAdicional>
+</infoAdicional>
+</guiaRemision>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268730</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268730</guiaRemision>
+<razonSocialComprador>EMPRESA ELECTRICA REGIONAL NORTE S.A. EMELNORTE</razonSocialComprador>
+<identificacionComprador>1090051721001</identificacionComprador>
+<totalSinImpuestos>20776.00</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>20776.00</baseImponible>
+<valor>2493.12</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>23269.12</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>69705</codigoPrincipal>
+<descripcion>PISTOLA DE CLAVAR 52019  PA3500 SEMIAUTOMATICA NIVEL 2-5 CAL. 0.27 KIT LUJO</descripcion>
+<cantidad>14.00</cantidad>
+<precioUnitario>559.84</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>7837.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7837.76</baseImponible>
+<valor>940.53</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97802</codigoPrincipal>
+<descripcion>FULMINANTES PARA PISTOLA 50630  ROJO CAL.27 TIRA DE 10 P/P3500 - PA3500</descripcion>
+<cantidad>5000.00</cantidad>
+<precioUnitario>1.01</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>5050.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="DEC"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5050.00</baseImponible>
+<valor>606.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99476</codigoPrincipal>
+<descripcion>ROTOMARTILLO 5262-21 SDS DE 7/8" 7.0 AMP 120V. 0-1500 RPM 0-5625 GOLPES (MALETIN)</descripcion>
+<cantidad>11.00</cantidad>
+<precioUnitario>349.84</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3848.24</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3848.24</baseImponible>
+<valor>461.79</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150635</codigoPrincipal>
+<descripcion>CLAVO DE CABEZA .300 PARA CEMENTO Y ACERO 50034 DE 1-1/2" PIN 0.145" CABEZA DE 0.3" (CAJA DE 100 UNID)</descripcion>
+<cantidad>500.00</cantidad>
+<precioUnitario>8.08</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>4040.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="CIEN"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4040.00</baseImponible>
+<valor>484.80</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">cbenalcazar@emelnorte.com</campoAdicional>
+<campoAdicional nombre="Email">faveiga@emelnorte.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">06641287</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">021735</campoAdicional>
+<campoAdicional nombre="Observaciones">SIE-EENORTE-208-2014</campoAdicional>
+</infoAdicional>
+</factura>

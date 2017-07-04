@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175978</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>LOS ALAMOS 1630 Y 6 DE DICIEMBRE</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175978</guiaRemision>
+<razonSocialComprador>LINCANGO GUACHAMIN WASHINGTON BOLIVAR</razonSocialComprador>
+<identificacionComprador>1707817225001</identificacionComprador>
+<totalSinImpuestos>886.90</totalSinImpuestos>
+<totalDescuento>98.54</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>886.90</baseImponible>
+<valor>106.43</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>993.33</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>95043</codigoPrincipal>
+<descripcion>CINCEL PARA CEMENTO 48-62-4075 CINCEL PUNTERO 12"</descripcion>
+<cantidad>8.00</cantidad>
+<precioUnitario>14.30</precioUnitario>
+<descuento>11.44</descuento>
+<precioTotalSinImpuesto>102.96</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>102.96</baseImponible>
+<valor>12.36</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70382</codigoPrincipal>
+<descripcion>BROCA DE DIAMANTE 48-16-6013 DE 6" PREMIUM  P/CONCRETO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>871.04</precioUnitario>
+<descuento>87.10</descuento>
+<precioTotalSinImpuesto>783.94</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>783.94</baseImponible>
+<valor>94.07</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2406705</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">050882</campoAdicional>
+</infoAdicional>
+</factura>

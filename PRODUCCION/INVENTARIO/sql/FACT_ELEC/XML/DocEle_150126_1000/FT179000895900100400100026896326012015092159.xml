@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268963</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>26/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268963</guiaRemision>
+<razonSocialComprador>ACERO COMERCIAL ECUATORIANO S.A.</razonSocialComprador>
+<identificacionComprador>1790008959001</identificacionComprador>
+<totalSinImpuestos>20.80</totalSinImpuestos>
+<totalDescuento>11.20</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>20.80</baseImponible>
+<valor>2.50</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>23.30</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>103118</codigoPrincipal>
+<descripcion>FLEXOMETRO 48-22-5216 MAGNETICO DE 5 m.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>32.00</precioUnitario>
+<descuento>11.20</descuento>
+<precioTotalSinImpuesto>20.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>20.80</baseImponible>
+<valor>2.50</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">bviteri@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2454334</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000640</campoAdicional>
+<campoAdicional nombre="Observaciones">OBSEQUIO F.268579 CONS.ELECT.QUIMBIAMBA</campoAdicional>
+</infoAdicional>
+</factura>

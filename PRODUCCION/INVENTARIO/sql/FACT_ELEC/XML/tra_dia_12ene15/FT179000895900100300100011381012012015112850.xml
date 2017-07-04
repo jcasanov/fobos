@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113810</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>12/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113810</guiaRemision>
+<razonSocialComprador>ACERIA DEL ECUADOR CA ADELCA.</razonSocialComprador>
+<identificacionComprador>1790004724001</identificacionComprador>
+<totalSinImpuestos>8.45</totalSinImpuestos>
+<totalDescuento>1.15</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>8.45</baseImponible>
+<valor>1.01</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>9.46</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>1634</codigoPrincipal>
+<descripcion>BUSHING GALV. CLASE 150 DE 1" x 3/4"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>1.60</precioUnitario>
+<descuento>1.15</descuento>
+<precioTotalSinImpuesto>8.45</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.45</baseImponible>
+<valor>1.01</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">recibo-electronico@adelca.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2792136</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">028583</campoAdicional>
+<campoAdicional nombre="Observaciones">SOLICITA:SRTA.DIANA GUALOTUÒA</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,30 @@
+DATABASE aceros
+
+SCREEN
+{
+  CENTROS DE COSTOS
+ --------------------------------
+  Cod.  Nombre 		
+ --------------------------------
+ [c01] [c002                    ] 
+ [c01] [c002                    ]
+ [c01] [c002                    ]
+ [c01] [c002                    ]
+ [c01] [c002                    ]
+ [c01] [c002                    ]
+ [c01] [c002                    ] 
+ [c01] [c002                    ] 
+ [c01] [c002                    ] 
+ [c01] [c002                    ] 
+}
+
+TABLES
+gent033
+
+ATTRIBUTES
+c01 = g33_cod_ccosto,REVERSE;
+c002 = g33_nombre,REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_cco[10](g33_cod_ccosto, g33_nombre)

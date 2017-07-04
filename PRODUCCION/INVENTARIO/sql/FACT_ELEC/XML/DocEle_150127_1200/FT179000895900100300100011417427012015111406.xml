@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000114174</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000114174</guiaRemision>
+<razonSocialComprador>GUALLASAMIN CUEVA DIEGO BOLIVAR</razonSocialComprador>
+<identificacionComprador>1714290572001</identificacionComprador>
+<totalSinImpuestos>575.96</totalSinImpuestos>
+<totalDescuento>101.64</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>575.96</baseImponible>
+<valor>69.12</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>645.08</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99014</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA AMALUZA PRIMERA</descripcion>
+<cantidad>30.00</cantidad>
+<precioUnitario>10.32</precioUnitario>
+<descuento>46.44</descuento>
+<precioTotalSinImpuesto>263.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>263.16</baseImponible>
+<valor>31.58</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101832</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 30 X 30 MONOQUEMA SPINETTO CREMA PRIMERA</descripcion>
+<cantidad>50.00</cantidad>
+<precioUnitario>7.36</precioUnitario>
+<descuento>55.20</descuento>
+<precioTotalSinImpuesto>312.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>312.80</baseImponible>
+<valor>37.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">diegoguayasamin@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2338846</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">054157</campoAdicional>
+<campoAdicional nombre="Observaciones">CERAMICA & DISENIO</campoAdicional>
+</infoAdicional>
+</factura>

@@ -374,6 +374,10 @@ DEFINE exp_gru		VARCHAR(100)
 DEFINE exp_tip		VARCHAR(100)
 DEFINE exp_loc		VARCHAR(100)
 DEFINE cuantos		INTEGER
+DEFINE campov		VARCHAR(15)
+DEFINE campot		VARCHAR(15)
+DEFINE campov1		VARCHAR(15)
+DEFINE campot1		VARCHAR(15)
 
 LET exp_gru = NULL
 IF rm_a10.a10_grupo_act IS NOT NULL THEN
@@ -387,14 +391,29 @@ LET exp_loc = NULL
 IF rm_a10.a10_localidad IS NOT NULL THEN
 	LET exp_loc = '   AND a10_localidad    = ', rm_a10.a10_localidad
 END IF
+LET campov = 'a10_valor_mb'
+LET campot = '0.00'
+IF YEAR(vm_fecha_fin) < 2011 THEN
+	LET campov = 'a10_valor'
+	LET campot = 'a10_tot_dep_mb'
+END IF
+LET campov1 = campov
+LET campot1 = campot
+IF vm_fecha_fin > MDY(01, 13, 2013) THEN
+	LET campov1 = 'a10_valor_mb'
+	LET campot1 = 'a10_tot_dep_mb'
+END IF
 IF rm_a10.a10_estado <> 'X' THEN
 	LET query = 'SELECT a10_grupo_act, a10_tipo_act, a10_cod_depto, ',
 			'a10_estado, a10_codigo_bien, a10_descripcion, ',
 			'a10_fecha_comp, a10_codprov, a10_porc_deprec, ',
-			'a10_moneda, a10_valor_mb, a10_tot_dep_mb, ',
-			'(a10_valor_mb - a10_tot_dep_mb) valor_actual ',
+			'a10_moneda, ', campov CLIPPED, ' a10_valor_mb, ',
+			campot CLIPPED, ' a10_tot_dep_mb, ',
+			'(', campov CLIPPED, ' - ', campot CLIPPED,
+			') valor_actual ',
 			' FROM actt010 ',
 			' WHERE a10_compania    = ', vg_codcia, ' ',
+			'   AND a10_estado     <> "C"',
 			exp_loc CLIPPED, ' ',
 			exp_gru CLIPPED, ' ',
 			exp_tip CLIPPED, ' ',
@@ -402,6 +421,22 @@ IF rm_a10.a10_estado <> 'X' THEN
 						'" AND "', vm_fecha_fin, '"',
 			fl_retorna_expr_estado_act(vg_codcia, rm_a10.a10_estado,
 							0) CLIPPED,
+		' UNION ',
+		'SELECT a10_grupo_act, a10_tipo_act, a10_cod_depto, ',
+			'a10_estado, a10_codigo_bien, a10_descripcion, ',
+			'a10_fecha_comp, a10_codprov, a10_porc_deprec, ',
+			'a10_moneda, ', campov1 CLIPPED, ' a10_valor_mb, ',
+			'0.00 a10_tot_dep_mb, ',
+			'(', campov1 CLIPPED, ' - ', campot1 CLIPPED,
+			') valor_actual ',
+			' FROM actt010 ',
+			' WHERE a10_compania    = ', vg_codcia, ' ',
+			'   AND a10_estado      = "C"',
+			exp_loc CLIPPED, ' ',
+			exp_gru CLIPPED, ' ',
+			exp_tip CLIPPED, ' ',
+			'   AND a10_fecha_comp BETWEEN "', vm_fecha_ini,
+						'" AND "', vm_fecha_fin, '"',
 			' INTO TEMP tmp_act '
 	PREPARE exec_act FROM query
 	EXECUTE exec_act
@@ -416,8 +451,21 @@ END IF
 SELECT UNIQUE a12_compania cia, a12_codigo_bien cod_bien, DATE(a12_fecing) fecha
 	FROM actt012
 	WHERE a12_compania      = vg_codcia
-	  AND a12_codigo_tran  IN ("BA", "VE", "BV")
+	  AND a12_codigo_tran  IN ("BA", "VE", "BV", "ES")
 	  AND DATE(a12_fecing) <= vm_fecha_fin
+UNION
+SELECT UNIQUE a.a12_compania cia, a.a12_codigo_bien cod_bien,
+	DATE(a.a12_fecing) fec_baj
+	FROM actt012 a
+	WHERE a.a12_compania      = vg_codcia
+	  AND a.a12_codigo_tran  IN ("AA", "AD")
+	  AND DATE(a.a12_fecing) BETWEEN MDY(01, 03, 2011)
+				     AND vm_fecha_fin
+	  AND NOT EXISTS
+		(SELECT 1 FROM actt012 b
+			WHERE b.a12_compania    = a.a12_compania
+			  AND b.a12_codigo_tran = "RV"
+			  AND b.a12_codigo_bien = a.a12_codigo_bien)
 	INTO TEMP tmp_baj
 LET query = 'SELECT * FROM actt010 ',
 		' WHERE a10_compania     = ', vg_codcia,
@@ -435,7 +483,8 @@ PREPARE exec_a10 FROM query
 EXECUTE exec_a10
 LET query = 'SELECT a.* FROM actt012 a ',
 		' WHERE a.a12_compania      = ', vg_codcia,
-	  	'   AND a.a12_codigo_tran  NOT IN ("EG", "BA", "VE", "BV") ',
+	  	'   AND a.a12_codigo_tran  NOT IN ("EG", "BA", "VE", "BV", ',
+							'"AA", "AD", "ES") ',
 		'   AND a.a12_codigo_bien  IN ',
 				'(SELECT a10_codigo_bien ',
 				'FROM tmp_a10 ',
@@ -450,7 +499,18 @@ LET query = 'SELECT a.* FROM actt012 a ',
 		' UNION ',
 		' SELECT a.* FROM actt012 a ',
 			' WHERE a.a12_compania      = ', vg_codcia,
-			'   AND a.a12_codigo_tran  <> "EG" ',
+			'   AND a.a12_codigo_tran   = "AD" ',
+			'   AND a.a12_codigo_bien  IN ',
+				'(SELECT a10_codigo_bien ',
+				'FROM tmp_a10 ',
+				'WHERE a10_compania  = a.a12_compania ',
+				'  AND a10_grupo_act = 2) ',
+			'   AND a.a12_valor_mb      > 0 ',
+			'   AND DATE(a.a12_fecing) <= "', vm_fecha_fin, '"',
+		' UNION ',
+		' SELECT a.* FROM actt012 a ',
+			' WHERE a.a12_compania      = ', vg_codcia,
+			'   AND a.a12_codigo_tran  NOT IN ("EG", "AA") ',
 			'   AND a.a12_codigo_bien  IN ',
 				'(SELECT a10_codigo_bien ',
 				'FROM tmp_a10 ',
@@ -464,10 +524,10 @@ EXECUTE exec_a12
 LET query = 'SELECT a10_compania, a10_localidad, a10_grupo_act, a10_tipo_act, ',
 			'a10_cod_depto, a10_codigo_bien, a10_estado, ',
 			'a10_descripcion, a10_fecha_comp, a10_codprov, ',
-			'a10_moneda, a10_valor_mb, a10_porc_deprec, ',
-			'a10_val_dep_mb, ',
+			'a10_moneda, ', campov CLIPPED, ' a10_valor_mb, ',
+			'a10_porc_deprec, a10_val_dep_mb, ',
 			'NVL(SUM(a12_valor_mb) * (-1), 0) tot_dep_ant, ',
-			'a10_tot_dep_mb ',
+			campot CLIPPED, ' a10_tot_dep_mb ',
 		' FROM tmp_a10, tmp_a12 ',
 		' WHERE a12_compania     = a10_compania ',
 		'   AND a12_codigo_bien  = a10_codigo_bien ',
@@ -477,9 +537,10 @@ LET query = 'SELECT a10_compania, a10_localidad, a10_grupo_act, a10_tipo_act, ',
 		' SELECT a10_compania, a10_localidad, a10_grupo_act, ',
 			'a10_tipo_act, a10_cod_depto, a10_codigo_bien, ',
 			'a10_estado, a10_descripcion, a10_fecha_comp, ',
-			'a10_codprov, a10_moneda, a10_valor_mb, ',
-			'a10_porc_deprec, a10_val_dep_mb, 0.00 tot_dep_ant, ',
-			'a10_tot_dep_mb ',
+			'a10_codprov, a10_moneda, ', campov CLIPPED,
+			' a10_valor_mb, a10_porc_deprec, a10_val_dep_mb, ',
+			'0.00 tot_dep_ant, ',
+			campot CLIPPED, ' a10_tot_dep_mb ',
 		' FROM tmp_a10, tmp_a12 ',
 		' WHERE a12_compania     = a10_compania ',
 		'   AND a12_codigo_bien  = a10_codigo_bien ',
@@ -524,41 +585,50 @@ PREPARE expresion FROM query
 EXECUTE expresion
 DROP TABLE tmp_a12
 DROP TABLE t1
-SELECT a10_grupo_act, a10_tipo_act, a10_cod_depto, a10_codigo_bien, a10_estado,
-	a10_descripcion, a10_fecha_comp, a10_codprov, a10_moneda, a10_valor_mb,
-	a10_porc_deprec, a10_val_dep_mb, NVL(tot_dep_ant, 0) tot_dep_ant,
-	NVL(SUM(tot_dep_act), 0) tot_dep_act, a10_tot_dep_mb
-	FROM t2
-	GROUP BY 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15
-	UNION
-	SELECT a10_grupo_act, a10_tipo_act, a10_cod_depto, a10_codigo_bien,
-		a10_estado, a10_descripcion, a10_fecha_comp, a10_codprov,
-		a10_moneda, a10_valor_mb, a10_porc_deprec, a10_val_dep_mb,
-		0.00 tot_dep_ant, 0.00 tot_dep_act, a10_tot_dep_mb
-		FROM tmp_a10
-		WHERE a10_grupo_act = 1
-		  AND NOT EXISTS
-			(SELECT 1 FROM t2
-				WHERE t2.a10_codigo_bien =
-					tmp_a10.a10_codigo_bien)
-	UNION
-	SELECT a10_grupo_act, a10_tipo_act, a10_cod_depto, a10_codigo_bien,
-		a10_estado, a10_descripcion, a10_fecha_comp, a10_codprov,
-		a10_moneda, a10_valor_mb, a10_porc_deprec, a10_val_dep_mb,
-		0.00 tot_dep_ant, 0.00 tot_dep_act, a10_tot_dep_mb
-		FROM tmp_a10, actt012 a
-		WHERE a.a12_compania      = a10_compania
-		  AND a.a12_codigo_tran   = 'IN'
-		  AND a.a12_codigo_bien   = a10_codigo_bien
-		  AND DATE(a.a12_fecing) <= vm_fecha_fin
-			  AND NOT EXISTS
-				(SELECT UNIQUE b.a12_codigo_tran
-				FROM actt012 b
-				WHERE b.a12_compania      = a.a12_compania
-		  		  AND b.a12_codigo_tran   = 'DP'
-		  		  AND b.a12_codigo_bien   = a.a12_codigo_bien
-				  AND DATE(b.a12_fecing) >= vm_fecha_ini)
-	INTO TEMP t3
+LET query = 'SELECT a10_grupo_act, a10_tipo_act, a10_cod_depto, ',
+			'a10_codigo_bien, a10_estado, a10_descripcion, ',
+			'a10_fecha_comp, a10_codprov, a10_moneda, ',
+			'a10_valor_mb, a10_porc_deprec, a10_val_dep_mb, ',
+			'NVL(tot_dep_ant, 0) tot_dep_ant, ',
+			'NVL(SUM(tot_dep_act), 0) tot_dep_act, a10_tot_dep_mb ',
+		'FROM t2 ',
+		'GROUP BY 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15 ',
+		'UNION ',
+		'SELECT a10_grupo_act, a10_tipo_act, a10_cod_depto, ',
+			'a10_codigo_bien, a10_estado, a10_descripcion, ',
+			'a10_fecha_comp, a10_codprov, a10_moneda, ',
+			campov CLIPPED, ' a10_valor_mb, a10_porc_deprec, ',
+			'a10_val_dep_mb, 0.00 tot_dep_ant, 0.00 tot_dep_act, ',
+			campot CLIPPED, ' a10_tot_dep_mb ',
+			'FROM tmp_a10 ',
+			'WHERE a10_grupo_act = 1 ',
+			'  AND NOT EXISTS ',
+			'(SELECT 1 FROM t2 ',
+				'WHERE t2.a10_codigo_bien = ',
+					'tmp_a10.a10_codigo_bien) ',
+		'UNION ',
+		'SELECT a10_grupo_act, a10_tipo_act, a10_cod_depto, ',
+			'a10_codigo_bien, a10_estado, a10_descripcion, ',
+			'a10_fecha_comp, a10_codprov, a10_moneda, ',
+			campov CLIPPED, ' a10_valor_mb, a10_porc_deprec, ',
+			'a10_val_dep_mb, 0.00 tot_dep_ant, 0.00 tot_dep_act, ',
+			campot CLIPPED, ' a10_tot_dep_mb ',
+			'FROM tmp_a10, actt012 a ',
+			'WHERE a.a12_compania      = a10_compania ',
+			'  AND a.a12_codigo_tran   = "IN"',
+			'  AND a.a12_codigo_bien   = a10_codigo_bien ',
+			'  AND DATE(a.a12_fecing) <= "', vm_fecha_fin, '"',
+			'  AND NOT EXISTS ',
+				'(SELECT UNIQUE b.a12_codigo_tran ',
+				'FROM actt012 b ',
+				'WHERE b.a12_compania      = a.a12_compania ',
+		  		'  AND b.a12_codigo_tran   = "DP"',
+		  		'  AND b.a12_codigo_bien   = a.a12_codigo_bien',
+				'  AND DATE(b.a12_fecing) >= "',
+							vm_fecha_ini, '") ',
+		'INTO TEMP t3 '
+PREPARE exec_t3 FROM query
+EXECUTE exec_t3
 DROP TABLE tmp_a10
 DROP TABLE t2
 SELECT a10_grupo_act, a10_tipo_act, a10_cod_depto, a10_codigo_bien, a10_estado,
@@ -574,6 +644,7 @@ LET query = 'SELECT a10_grupo_act, a10_tipo_act, a10_cod_depto, ',
 			'a10_fecha_comp, a10_codprov, a10_moneda, ',
 			'CASE WHEN NVL((SELECT 1 FROM tmp_baj ',
 					'WHERE cod_bien  = a10_codigo_bien ',
+					'  AND cod_bien <> 418 ',
 					'  AND fecha    <= "',
 							vm_fecha_fin, '"), ',
 					'0) = 0 ',
@@ -584,6 +655,7 @@ LET query = 'SELECT a10_grupo_act, a10_tipo_act, a10_cod_depto, ',
 			'tot_dep_act, ',
 			'CASE WHEN NVL((SELECT 1 FROM tmp_baj ',
 					'WHERE cod_bien  = a10_codigo_bien ',
+					'  AND cod_bien <> 418 ',
 					'  AND fecha    <= "',
 							vm_fecha_fin, '"), ',
 					'0) = 0 ',

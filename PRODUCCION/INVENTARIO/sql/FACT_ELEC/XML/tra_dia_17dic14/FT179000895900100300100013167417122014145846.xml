@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131674</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>CDLA IBARRA CALLE 6 OE9-88DI</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131674</guiaRemision>
+<razonSocialComprador>NICOLALDE PADILLA JUAN CARLOS</razonSocialComprador>
+<identificacionComprador>1712245354001</identificacionComprador>
+<totalSinImpuestos>46.59</totalSinImpuestos>
+<totalDescuento>6.36</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>46.59</baseImponible>
+<valor>5.59</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>52.18</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>1708</codigoPrincipal>
+<descripcion>BUSHING NEGRO CLASE 150 DE 1" x 1/2"</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>1.46</precioUnitario>
+<descuento>1.75</descuento>
+<precioTotalSinImpuesto>12.85</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="HITACHI" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>12.85</baseImponible>
+<valor>1.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1622</codigoPrincipal>
+<descripcion>BUSHING GALV. CLASE 150 DE 1/2" x 3/8"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>0.96</precioUnitario>
+<descuento>0.69</descuento>
+<precioTotalSinImpuesto>5.07</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="HITACHI" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.07</baseImponible>
+<valor>0.61</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1694</codigoPrincipal>
+<descripcion>BUSHING NEGRO CLASE 150 DE 3/8" x 1/4"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>0.94</precioUnitario>
+<descuento>0.68</descuento>
+<precioTotalSinImpuesto>4.96</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="HITACHI" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.96</baseImponible>
+<valor>0.60</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3204</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1" x 4"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>1.29</precioUnitario>
+<descuento>0.62</descuento>
+<precioTotalSinImpuesto>4.54</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.54</baseImponible>
+<valor>0.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3206</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1" x 5"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>1.50</precioUnitario>
+<descuento>0.72</descuento>
+<precioTotalSinImpuesto>5.28</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.28</baseImponible>
+<valor>0.63</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3210</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1" x 8"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>2.05</precioUnitario>
+<descuento>0.74</descuento>
+<precioTotalSinImpuesto>5.41</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.41</baseImponible>
+<valor>0.65</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3208</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1" x 6"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1.67</precioUnitario>
+<descuento>0.40</descuento>
+<precioTotalSinImpuesto>2.94</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.94</baseImponible>
+<valor>0.35</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3126</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1/4" CORRIDO</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>0.63</precioUnitario>
+<descuento>0.76</descuento>
+<precioTotalSinImpuesto>5.54</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.54</baseImponible>
+<valor>0.66</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2632174</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">045709</campoAdicional>
+</infoAdicional>
+</factura>

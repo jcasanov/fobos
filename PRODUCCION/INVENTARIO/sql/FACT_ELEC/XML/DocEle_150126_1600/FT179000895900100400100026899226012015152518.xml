@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268992</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>26/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268992</guiaRemision>
+<razonSocialComprador>INCOAYAM CIA LTDA</razonSocialComprador>
+<identificacionComprador>1791434110001</identificacionComprador>
+<totalSinImpuestos>92.99</totalSinImpuestos>
+<totalDescuento>16.41</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>92.99</baseImponible>
+<valor>11.16</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>104.15</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>150623</codigoPrincipal>
+<descripcion>FULMINANTES PARA PISTOLA 50504 VERDE(3)CAL0.22 P/P7200/P2201 CAJA DE 100 u</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>7.88</precioUnitario>
+<descuento>5.91</descuento>
+<precioTotalSinImpuesto>33.49</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="CIEN"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>33.49</baseImponible>
+<valor>4.02</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150638</codigoPrincipal>
+<descripcion>FULMINANTES PARA PISTOLA 50502 CAFE CAL.22 BAJA VEL P/P2201 / P7201</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>7.00</precioUnitario>
+<descuento>10.50</descuento>
+<precioTotalSinImpuesto>59.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="CIEN"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>59.50</baseImponible>
+<valor>7.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">asistente@incoayam.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2806300</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">005939</campoAdicional>
+</infoAdicional>
+</factura>

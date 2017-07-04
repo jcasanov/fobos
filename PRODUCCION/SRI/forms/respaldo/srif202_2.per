@@ -1,0 +1,28 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+ Tipo Ordenamiento
+ [c010|c011             ]
+[c000|c001             ]
+[c000|c001             ]
+[c000|c001             ]
+[c000|c001             ]
+[c000|c001             ]
+[c000|c001             ]
+[c000|c001             ]
+[c000|c001             ]
+[c000|c001             ]
+[c000|c001             ]
+
+}
+ATTRIBUTES
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+
+c000 = FORMONLY.num_cols, NOENTRY, UPSHIFT;
+c001 = FORMONLY.des_cols, NOENTRY, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_colord[10] (num_cols, des_cols) 

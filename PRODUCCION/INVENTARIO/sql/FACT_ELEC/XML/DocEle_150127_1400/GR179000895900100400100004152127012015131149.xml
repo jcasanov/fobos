@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000041521</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<dirPartida>AV. LA PRENSA N-4514</dirPartida>
+<razonSocialTransportista>ACERO COMERCIAL</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>27/01/2015</fechaIniTransporte>
+<fechaFinTransporte>28/01/2015</fechaFinTransporte>
+<placa>P0Z-801</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1712896644001</identificacionDestinatario>
+<razonSocialDestinatario>GUERRA COLOMA ALEX SHUSEP</razonSocialDestinatario>
+<dirDestinatario>VARGAS Y CALDAS CONSTRUCC. 2000</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>27/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>101829</codigoInterno>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA SORAIDA ROBLE PRIMERA</descripcion>
+<cantidad>101.76</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>103043</codigoInterno>
+<descripcion>BALDOSA DE PISO 30 X 30 MONOQUEMA SPINETTO CREMA SEGUNDA</descripcion>
+<cantidad>100.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">konstrucciones2000@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2288492</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">056388</campoAdicional>
+</infoAdicional>
+</guiaRemision>

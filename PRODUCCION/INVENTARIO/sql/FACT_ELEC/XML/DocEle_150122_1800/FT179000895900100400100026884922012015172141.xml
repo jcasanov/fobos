@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268849</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268849</guiaRemision>
+<razonSocialComprador>RAMOS LUNA YAMILE KATALINA</razonSocialComprador>
+<identificacionComprador>0401011465</identificacionComprador>
+<totalSinImpuestos>40.42</totalSinImpuestos>
+<totalDescuento>2.13</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>40.42</baseImponible>
+<valor>4.85</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>45.27</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>6321</codigoPrincipal>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 3/4"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>4.80</precioUnitario>
+<descuento>0.24</descuento>
+<precioTotalSinImpuesto>4.56</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.56</baseImponible>
+<valor>0.55</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2059</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 90 GRAD  DE 1"</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>3.30</precioUnitario>
+<descuento>0.83</descuento>
+<precioTotalSinImpuesto>15.67</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>15.67</baseImponible>
+<valor>1.88</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2038</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 X 90 GRAD  REDUCIDO DE 1/2" x 1/4"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>2.42</precioUnitario>
+<descuento>0.24</descuento>
+<precioTotalSinImpuesto>4.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.60</baseImponible>
+<valor>0.55</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2048</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 X 90 GRAD  REDUCIDO DE 1" x 3/4"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>4.19</precioUnitario>
+<descuento>0.21</descuento>
+<precioTotalSinImpuesto>3.98</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.98</baseImponible>
+<valor>0.48</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4567</codigoPrincipal>
+<descripcion>TEE GALV. CLASE 150 DE 1"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>3.35</precioUnitario>
+<descuento>0.34</descuento>
+<precioTotalSinImpuesto>6.36</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.36</baseImponible>
+<valor>0.76</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>95348</codigoPrincipal>
+<descripcion>TEE GALV. CLASE 150 DE 1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.23</precioUnitario>
+<descuento>0.06</descuento>
+<precioTotalSinImpuesto>1.17</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.17</baseImponible>
+<valor>0.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>92013</codigoPrincipal>
+<descripcion>BUSHING GALV. CLASE 150 DE 1" x 1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.84</precioUnitario>
+<descuento>0.09</descuento>
+<precioTotalSinImpuesto>1.75</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.75</baseImponible>
+<valor>0.21</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1644</codigoPrincipal>
+<descripcion>BUSHING GALV. CLASE 150 DE 1-1/4" x 1"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2.45</precioUnitario>
+<descuento>0.12</descuento>
+<precioTotalSinImpuesto>2.33</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.33</baseImponible>
+<valor>0.28</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">dmantilla13@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3566812</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064305</campoAdicional>
+</infoAdicional>
+</factura>

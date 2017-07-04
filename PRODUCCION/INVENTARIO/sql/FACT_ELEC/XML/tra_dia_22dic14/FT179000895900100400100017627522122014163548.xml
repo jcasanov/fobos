@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176275</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176275</guiaRemision>
+<razonSocialComprador>INGENIERIA AVANZADA EN TECNOLOGIA EATEC S.A.</razonSocialComprador>
+<identificacionComprador>1792041236001</identificacionComprador>
+<totalSinImpuestos>273.51</totalSinImpuestos>
+<totalDescuento>37.30</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>273.51</baseImponible>
+<valor>32.82</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>306.33</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>2672</codigoPrincipal>
+<descripcion>CODO PVC DESAGUE DE 110mm. x 45ø ISO E/C</descripcion>
+<cantidad>15.00</cantidad>
+<precioUnitario>4.32</precioUnitario>
+<descuento>7.78</descuento>
+<precioTotalSinImpuesto>57.02</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>57.02</baseImponible>
+<valor>6.84</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2690</codigoPrincipal>
+<descripcion>CODO PVC DESAGUE DE 110mm. x 90ø ISO E/C</descripcion>
+<cantidad>8.00</cantidad>
+<precioUnitario>3.18</precioUnitario>
+<descuento>3.05</descuento>
+<precioTotalSinImpuesto>22.39</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>22.39</baseImponible>
+<valor>2.69</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3770</codigoPrincipal>
+<descripcion>REDUCCION PVC DESAGUE DE 75mm. x 50mm. ISO</descripcion>
+<cantidad>14.00</cantidad>
+<precioUnitario>1.98</precioUnitario>
+<descuento>3.33</descuento>
+<precioTotalSinImpuesto>24.39</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>24.39</baseImponible>
+<valor>2.93</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6232</codigoPrincipal>
+<descripcion>UNION PVC DESAGUE DE 110mm. ISO</descripcion>
+<cantidad>25.00</cantidad>
+<precioUnitario>1.96</precioUnitario>
+<descuento>5.88</descuento>
+<precioTotalSinImpuesto>43.12</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>43.12</baseImponible>
+<valor>5.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2686</codigoPrincipal>
+<descripcion>CODO PVC DESAGUE DE 50mm. x 90ø ISO C/C</descripcion>
+<cantidad>30.00</cantidad>
+<precioUnitario>1.08</precioUnitario>
+<descuento>3.89</descuento>
+<precioTotalSinImpuesto>28.51</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>28.51</baseImponible>
+<valor>3.42</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2668</codigoPrincipal>
+<descripcion>CODO PVC DESAGUE DE 50mm. x 45° ISO E/C</descripcion>
+<cantidad>40.00</cantidad>
+<precioUnitario>1.17</precioUnitario>
+<descuento>5.62</descuento>
+<precioTotalSinImpuesto>41.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>41.18</baseImponible>
+<valor>4.94</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2670</codigoPrincipal>
+<descripcion>CODO PVC DESAGUE DE 75mm. x 45ø ISO E/C</descripcion>
+<cantidad>15.00</cantidad>
+<precioUnitario>2.58</precioUnitario>
+<descuento>4.64</descuento>
+<precioTotalSinImpuesto>34.06</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>34.06</baseImponible>
+<valor>4.09</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6230</codigoPrincipal>
+<descripcion>UNION PVC DESAGUE DE 75mm. ISO</descripcion>
+<cantidad>15.00</cantidad>
+<precioUnitario>1.73</precioUnitario>
+<descuento>3.11</descuento>
+<precioTotalSinImpuesto>22.84</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>22.84</baseImponible>
+<valor>2.74</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">5009000</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">045954</campoAdicional>
+</infoAdicional>
+</factura>

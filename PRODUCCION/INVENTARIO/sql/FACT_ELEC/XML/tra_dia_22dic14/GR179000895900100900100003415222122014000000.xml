@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000034152</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>AV. JUAN TANCA MARENGO KM.1.7</dirPartida>
+<razonSocialTransportista>SRVIENTREGA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0991285679001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>22/12/2014</fechaIniTransporte>
+<fechaFinTransporte>22/12/2014</fechaFinTransporte>
+<placa>....</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0992167572001</identificacionDestinatario>
+<razonSocialDestinatario>INDELAME S.A.</razonSocialDestinatario>
+<dirDestinatario>BASE NAVAL DE JARAMIJO -BYRON SOLIS CEL.0967858130</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>10/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>60269</codigoInterno>
+<descripcion>LLAVE DE CAMPANOLA CON DUCHA E479.120/26-CR LUMINA (26) CROMO</descripcion>
+<cantidad>14.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="MODELO" valor="E479.120/26-CR"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>67553</codigoInterno>
+<descripcion>LAVABO DE PORCELANA PARA EMPOTRAR PREPONCHADO E231-BO ELEA OVAL BONE PREMARCADO</descripcion>
+<cantidad>6.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="MODELO" valor="E231-BO"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>71591</codigoInterno>
+<descripcion>LAVABO DE PORCELANA CON PEDESTAL PREPONCHADO E213-BO ROMA BONE C/COLUMNA</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="MODELO" valor="E213-BO"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>90188</codigoInterno>
+<descripcion>URINARIO DE PARED E398-BL QUANTUM BLANCO</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="MODELO" valor="E398-BL"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>91363</codigoInterno>
+<descripcion>LLAVE DE MANGUERA E439.13.X BR 1/2" BRONCE GRANALLADA</descripcion>
+<cantidad>8.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="MODELO" valor="E439.13.X BR 1/2""/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>95371</codigoInterno>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS E112-E-BO ROMA ECON. BONE</descripcion>
+<cantidad>8.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="MODELO" valor="E112-E-BO  ROMA ECON"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0994866868</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016622</campoAdicional>
+</infoAdicional>
+</guiaRemision>

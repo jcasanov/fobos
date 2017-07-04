@@ -1,0 +1,35 @@
+DATABASE aceros  
+-------------
+-------------
+SCREEN
+{
+
+             Código: [c01] [c02                         ] 
+    
+               Tipo: [c             ]          Estado: [d] [c04       ]
+         				   Código Rol: [c03   ]
+
+    Usuario Ingreso: [c05       ]    Fecha de Ingreso: [c06                ]                                
+
+}
+end
+TABLES
+cxct005
+ATTRIBUTES
+c01 = z05_codigo 	,REQUIRED,  REVERSE, AUTONEXT, 
+	FORMAT  = '###'
+	,widget='FIELD_BMP', config='lista.bmp F2';
+c02 = z05_nombres 	,UPSHIFT, REQUIRED, REVERSE;
+c   = FORMONLY.z05_tipo ,AUTONEXT, REVERSE, DEFAULT = 'E',
+	WIDGET='RADIO', CONFIG='E Ejecutivo C Cobrador'; 
+c03 = z05_codrol  	,UPSHIFT , AUTONEXT
+	,widget='FIELD_BMP', config='lista.bmp F2';
+d   = z05_estado,	AUTONEXT, UPSHIFT, REVERSE;
+c04 = FORMONLY.tit_estado;
+c05 = z05_usuario	,NOENTRY, REQUIRED, REVERSE;
+c06 = z05_fecing	,NOENTRY, REQUIRED, REVERSE;
+
+INSTRUCTIONS
+DELIMITERS "[]"
+end
+

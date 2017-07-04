@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000047909</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV ALBERTO ZAMBRANO Y 9 DE OCTUBRE</dirEstablecimiento>
+<dirPartida>AV LA PRENSA</dirPartida>
+<razonSocialTransportista>SERVIENTREGA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0991285679001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>09/12/2014</fechaIniTransporte>
+<fechaFinTransporte></fechaFinTransporte>
+<placa></placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1691716305001</identificacionDestinatario>
+<razonSocialDestinatario>GIUFERVY CIA LTDA</razonSocialDestinatario>
+<dirDestinatario>SUS BODEGAS DEL PUYO</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>08/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>102439</codigoInterno>
+<descripcion>BROCA PARA CEMENTO 48-89-2730 DE OXIDO NEGRO DE  3/8" THUNDERBOLT</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="48-89-2730" valor="48-89-2730"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>102447</codigoInterno>
+<descripcion>BROCA PARA CEMENTO 48-89-2738 DE OXIDO NEGRO DE  1/2" THUNDERBOLT</descripcion>
+<cantidad>6.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="48-89-2738" valor="48-89-2738"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>102459</codigoInterno>
+<descripcion>REPUESTO 48-22-1900 100 HOJAS EXTRAIBLES P/USO GENERAL</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="48-22-1900" valor="48-22-1900"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>102538</codigoInterno>
+<descripcion>TALADRO ELECTRICO MANUAL 0240-20 DE 3/8" 2800 RPM</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="0240-20" valor="0240-20"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>98539</codigoInterno>
+<descripcion>TALADRO ELECTRICO MANUAL 5375-20  7.5 AMPS. 110 V  2700RPM DE 1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="5375-20" valor="5375-20"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+<campoAdicional nombre="telefono-movil">2886269</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">063307</campoAdicional>
+</infoAdicional>
+</guiaRemision>

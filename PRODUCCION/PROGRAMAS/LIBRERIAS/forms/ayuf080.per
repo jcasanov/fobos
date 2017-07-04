@@ -1,0 +1,37 @@
+DATABASE aceros
+
+SCREEN
+{
+ VENTAS PERDIDAS 
+
+ [lbl|lbl2          |lbl3                            ]
+[c0 |c001          |c002                            ]
+[c0 |c001          |c002                            ]
+[c0 |c001          |c002                            ]
+[c0 |c001          |c002                            ]
+[c0 |c001          |c002                            ]
+[c0 |c001          |c002                            ]
+[c0 |c001          |c002                            ]
+[c0 |c001          |c002                            ]
+[c0 |c001          |c002                            ]
+[c0 |c001          |c002                            ]
+
+}
+
+TABLES
+rept013
+rept010
+
+ATTRIBUTES
+
+c0   = r13_serial, NOENTRY ;
+c001 = r13_item,   UPSHIFT;
+c002 = r10_nombre, UPSHIFT;
+
+lbl  = formonly.bt_serial,     NOENTRY, WIDGET='BUTTON', CONFIG='F15';
+lbl2 = formonly.bt_item,       NOENTRY, WIDGET='BUTTON', CONFIG='F16';
+lbl3 = formonly.bt_nombre,     NOENTRY, WIDGET='BUTTON', CONFIG='F17';
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_vtaper[10](r13_serial, r13_item, r10_nombre)

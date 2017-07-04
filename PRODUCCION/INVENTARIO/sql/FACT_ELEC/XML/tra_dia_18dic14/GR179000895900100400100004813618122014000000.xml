@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048136</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento></dirEstablecimiento>
+<dirPartida>AV LA PRENSA</dirPartida>
+<razonSocialTransportista>ACERO COMERCIAL</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>18/12/2014</fechaIniTransporte>
+<fechaFinTransporte>18/12/2014</fechaFinTransporte>
+<placa></placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1711314318</identificacionDestinatario>
+<razonSocialDestinatario>OSORIO GONGORA GALO HERNAN</razonSocialDestinatario>
+<dirDestinatario>INTERNO</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>09/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>298</codigoInterno>
+<descripcion>HIERRO CORRUGADO  4200 DE 12mm. x 12m</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDEC"/>
+<detAdicional nombre="MODELO" valor="DE 12mm x 12m"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>376</codigoInterno>
+<descripcion>PLETINA DE 12 x 4mm. x 6 Mts.</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="MODELO" valor="DE 12 x 4  mm"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>418</codigoInterno>
+<descripcion>PLETINA DE 25 x 4mm. x 6 m</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="MODELO" valor="DE 25 x 4 mm"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>48</codigoInterno>
+<descripcion>ANGULO LAMINADO x 6 MTS. DE 20mm. x 3mm.</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="MODELO" valor="DE 20 mm x 3 mm"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>50450</codigoInterno>
+<descripcion>TUBO POLIPROPILENO DE 1/2" x 6 m. (AGUA CALIENTE)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="MODELO" valor="22615"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>61151</codigoInterno>
+<descripcion>PLANCHA TRASLUCIDA P.V.C. 1.83 x 0.92 m.. (P7 ETERNIT) COLOR  MARFIL</descripcion>
+<cantidad>4.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="AJOVER"/>
+<detAdicional nombre="MODELO" valor="1.83x0.92m (P7"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>92993</codigoInterno>
+<descripcion>PEGA PARA CERAMICA BONDEX PLUS DE 25 KG. CERAMICA</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INTACO"/>
+<detAdicional nombre="MODELO" valor="BONDEX PLUS DE 25 KG"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>97274</codigoInterno>
+<descripcion>PORCELANA PARA CERAMICA GROUTEX POLIMERO PF S/A BLANCO (2Kg.)</descripcion>
+<cantidad>9.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INTACO"/>
+<detAdicional nombre="MODELO" valor="GROUTEX POLIMERO S/A"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3341848</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">060426</campoAdicional>
+</infoAdicional>
+</guiaRemision>

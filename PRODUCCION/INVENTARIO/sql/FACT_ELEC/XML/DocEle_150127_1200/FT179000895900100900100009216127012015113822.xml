@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092161</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092161</guiaRemision>
+<razonSocialComprador>PAMAO S.A.</razonSocialComprador>
+<identificacionComprador>0992590955001</identificacionComprador>
+<totalSinImpuestos>396.48</totalSinImpuestos>
+<totalDescuento>43.80</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>396.48</baseImponible>
+<valor>47.58</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>444.06</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>91929</codigoPrincipal>
+<descripcion>LAVAPLATOS DE ACERO INOXIDABLE 10104310 950.510 1C 1E IZQ. S/H P/DESG. C/REBOSO MODULAR</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>89.70</precioUnitario>
+<descuento>35.88</descuento>
+<precioTotalSinImpuesto>322.92</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TEKA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>322.92</baseImponible>
+<valor>38.75</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70893</codigoPrincipal>
+<descripcion>DESAGUE DE LAVADERO 61001300 VALVULA DE 1-1/2" C/REBOSO REDONDO</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>2.69</precioUnitario>
+<descuento>1.08</descuento>
+<precioTotalSinImpuesto>9.68</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TEKA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.68</baseImponible>
+<valor>1.16</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50462</codigoPrincipal>
+<descripcion>TUBO DE EXTENSION PARA DESAGUE GUIB2-0014 PLASTICO DE 1-1/2" x 5" (GUIA)</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>0.59</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2.36</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INCAME"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.36</baseImponible>
+<valor>0.28</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>26726</codigoPrincipal>
+<descripcion>SIFON DE LAVADERO E240 RA DE 1-1/2" DH-BL RESINA ACETAL CON ACOPLE</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>3.77</precioUnitario>
+<descuento>1.51</descuento>
+<precioTotalSinImpuesto>13.57</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>13.57</baseImponible>
+<valor>1.63</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>27473</codigoPrincipal>
+<descripcion>LLAVE ANGULAR E269.01 DH CR P/MANGUERA CON NEPLO Y ROSETA</descripcion>
+<cantidad>8.00</cantidad>
+<precioUnitario>6.66</precioUnitario>
+<descuento>5.33</descuento>
+<precioTotalSinImpuesto>47.95</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>47.95</baseImponible>
+<valor>5.75</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">guitran@gye.satnet.net</campoAdicional>
+<campoAdicional nombre="telefono-movil">2236349</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">014785</campoAdicional>
+</infoAdicional>
+</factura>

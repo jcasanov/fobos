@@ -1,0 +1,70 @@
+DATABASE aceros
+SCREEN
+{
+        Empleado: [c001  ] [c002                                       ]
+          Estado: [c000         ]
+
+                                    Periodo: [c003      ] - [c004      ]
+                                                              [c050] de [c051]
+ [c010|c011                          |c012      |c013      |c014|c015         ]
+[c020|c021                          |c022      |c023      |c024|c025         ]
+[c020|c021                          |c022      |c023      |c024|c025         ]
+[c020|c021                          |c022      |c023      |c024|c025         ]
+[c020|c021                          |c022      |c023      |c024|c025         ]
+[c020|c021                          |c022      |c023      |c024|c025         ]
+[c020|c021                          |c022      |c023      |c024|c025         ]
+[c020|c021                          |c022      |c023      |c024|c025         ]
+[c020|c021                          |c022      |c023      |c024|c025         ]
+[c020|c021                          |c022      |c023      |c024|c025         ]
+[c020|c021                          |c022      |c023      |c024|c025         ]
+[c020|c021                          |c022      |c023      |c024|c025         ]
+[c020|c021                          |c022      |c023      |c024|c025         ]
+[c020|c021                          |c022      |c023      |c024|c025         ]
+                                                  Valor Total: [c030         ]
+}
+TABLES
+rolt030
+rolt039
+ATTRIBUTES
+c000 = rolt039.n39_estado, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'RADIO', CONFIG = 'X Pendientes A "En Proceso" P Procesadas';
+c001 = FORMONLY.n39_cod_trab, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = rolt030.n30_nombres, NOENTRY, UPSHIFT;
+c003 = FORMONLY.vm_fecha_ini TYPE DATE, AUTONEXT, UPSHIFT,FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Formato: dd-mm-aaaa. Solo digitar fecha inicial cuando el estado es PROCESADAS.';
+c004 = FORMONLY.vm_fecha_fin TYPE DATE, AUTONEXT, UPSHIFT,FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Formato: dd-mm-aaaa. Solo digitar fecha final cuando el estado es PROCESADAS.';
+
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c015 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+c020 = FORMONLY.cod_trab, NOENTRY, UPSHIFT, OPTIONS =  '-nolist';
+c021 = FORMONLY.nombres, NOENTRY, UPSHIFT, OPTIONS =  '-nolist';
+c022 = rolt039.n39_periodo_ini, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS =  '-nolist';
+c023 = rolt039.n39_periodo_fin, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS =  '-nolist';
+c024 = rolt039.n39_dias_vac, NOENTRY, UPSHIFT, OPTIONS =  '-nolist';
+c025 = rolt039.n39_valor_vaca, NOENTRY, UPSHIFT, FORMAT = '##,###,##&.##',
+	OPTIONS =  '-nolist';
+
+c030 = FORMONLY.vm_total, NOENTRY, UPSHIFT, REVERSE, FORMAT = '##,###,##&.##';
+c050 = FORMONLY.vm_row_cur, NOENTRY, UPSHIFT, REVERSE;
+c051 = FORMONLY.vm_num_det, NOENTRY, UPSHIFT, REVERSE;
+END
+KEYS
+F5  = 'Generar Vacación'
+F6  = 'Liquidación'
+F7  = 'Empleado'
+F8  = 'Contabilización'
+F9  = 'Imprimir Comprob'
+F10 = 'Dias Gozados'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_detvac[13] (cod_trab, nombres, n39_periodo_ini,n39_periodo_fin,
+				n39_dias_vac, n39_valor_vaca)

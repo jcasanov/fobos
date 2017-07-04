@@ -1,0 +1,20 @@
+DATABASE aceros
+SCREEN 
+
+{
+		
+	              Fecha Inicial: [c001      ]  
+            	        Fecha Final: [c002      ]
+
+		  	     Estado: [c010         ]
+}
+
+ATTRIBUTES
+c001 = FORMONLY.inicial, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENT = 'Ingrese fecha en formato: dd-mm-aaaa';
+c002 = FORMONLY.final, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENT = 'Ingrese fecha en formato: dd-mm-aaaa';
+c010 = FORMONLY.estado, WIDGET = 'RADIO', REVERSE, 
+	CONFIG = 'A Activos B Bloqueados T Todos', DEFAULT = 'A', AUTONEXT;
+end
+

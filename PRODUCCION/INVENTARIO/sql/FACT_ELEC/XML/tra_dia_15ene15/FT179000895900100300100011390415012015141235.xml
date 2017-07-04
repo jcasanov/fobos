@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113904</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113904</guiaRemision>
+<razonSocialComprador>FERRETERIA MACON</razonSocialComprador>
+<identificacionComprador>1704803921001</identificacionComprador>
+<totalSinImpuestos>265.93</totalSinImpuestos>
+<totalDescuento>46.93</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>265.93</baseImponible>
+<valor>31.91</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>297.84</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>101779</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 TESSUTTO MOCCA  PRIMERA</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>10.55</precioUnitario>
+<descuento>3.17</descuento>
+<precioTotalSinImpuesto>17.93</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>17.93</baseImponible>
+<valor>2.15</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101775</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 TESSUTTO CANELA  PRIMERA</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>10.55</precioUnitario>
+<descuento>3.17</descuento>
+<precioTotalSinImpuesto>17.93</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>17.93</baseImponible>
+<valor>2.15</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102834</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA TESSUTTO CAPUCHINO SEGUNDA</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>8.27</precioUnitario>
+<descuento>7.44</descuento>
+<precioTotalSinImpuesto>42.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>42.18</baseImponible>
+<valor>5.06</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102832</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA TESSUTTO CANELA SEGUNDA</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>8.27</precioUnitario>
+<descuento>7.44</descuento>
+<precioTotalSinImpuesto>42.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>42.18</baseImponible>
+<valor>5.06</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102836</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA TESSUTTO MOCCA  SEGUNDA</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>8.27</precioUnitario>
+<descuento>7.44</descuento>
+<precioTotalSinImpuesto>42.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>42.18</baseImponible>
+<valor>5.06</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100487</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA AMAGUANIA TERRACOTA PRIMERA</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>10.15</precioUnitario>
+<descuento>6.09</descuento>
+<precioTotalSinImpuesto>34.51</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>34.51</baseImponible>
+<valor>4.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100481</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA AMAGUANIA BEIGE PRIMERA</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>10.15</precioUnitario>
+<descuento>6.09</descuento>
+<precioTotalSinImpuesto>34.51</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>34.51</baseImponible>
+<valor>4.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100479</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA AMAGUANIA AZUL PRIMERA</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>10.15</precioUnitario>
+<descuento>6.09</descuento>
+<precioTotalSinImpuesto>34.51</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>34.51</baseImponible>
+<valor>4.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">macontnc@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2598142</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">046444</campoAdicional>
+<campoAdicional nombre="Observaciones">PED SRA MANOLITA</campoAdicional>
+</infoAdicional>
+</factura>

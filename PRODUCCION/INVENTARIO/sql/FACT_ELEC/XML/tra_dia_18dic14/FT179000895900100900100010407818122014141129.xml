@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104078</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104078</guiaRemision>
+<razonSocialComprador>LEON MAIGONE FREDDY ADOLFO</razonSocialComprador>
+<identificacionComprador>0907820054</identificacionComprador>
+<totalSinImpuestos>462.17</totalSinImpuestos>
+<totalDescuento>61.61</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>462.17</baseImponible>
+<valor>55.46</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>517.63</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>96495</codigoPrincipal>
+<descripcion>BOMBA TIPO JET C-MOTOR FVJ1C DE 1HP 115/230/60C/1F VERSAJET (91180010)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>410.73</precioUnitario>
+<descuento>61.61</descuento>
+<precioTotalSinImpuesto>349.12</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>349.12</baseImponible>
+<valor>41.89</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70790</codigoPrincipal>
+<descripcion>TANQUE DE PRESION VERTICAL GALVANIZADO DE 60 GAL 1.00m x 0.56m</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>113.05</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>113.05</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ALMETA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>113.05</baseImponible>
+<valor>13.57</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2371823</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016671</campoAdicional>
+</infoAdicional>
+</factura>

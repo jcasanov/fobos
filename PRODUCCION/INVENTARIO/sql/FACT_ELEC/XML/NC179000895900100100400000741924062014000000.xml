@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>001</estab>
+<ptoEmi>004</ptoEmi>
+<secuencial>000007419</secuencial>
+<dirMatriz>GUALBERTO PEREZ</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>24/06/2014</fechaEmision>
+<dirEstablecimiento>VARGAS N11-253 Y GENERAL BRICEÑO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>CUMBICOS BETANCOURT LIVIA ALEXANDRA</razonSocialComprador>
+<identificacionComprador>1717429458001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>003-001-000007419</numDocModificado>
+<fechaEmisionDocSustento>24/06/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>1.81</totalSinImpuestos>
+<valorModificacion>2.03</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>1.81</baseImponible>
+<valor>0.22</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DSCTO EN FACT 123606</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>2299</codigoInterno>
+<descripcion>DSCTO EN FACT 123606</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.81</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1.81</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ACERO" valor="ACERO"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.81</baseImponible>
+<valor>0.22</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+<campoAdicional nombre="telefono-movil">2286312</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">39693</campoAdicional>
+</infoAdicional>
+</notaCredito>

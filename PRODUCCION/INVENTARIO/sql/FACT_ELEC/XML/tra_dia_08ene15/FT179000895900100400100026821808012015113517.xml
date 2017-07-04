@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268218</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>08/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268218</guiaRemision>
+<razonSocialComprador>METALTRONIC S.A.</razonSocialComprador>
+<identificacionComprador>1790090302001</identificacionComprador>
+<totalSinImpuestos>569.03</totalSinImpuestos>
+<totalDescuento>100.42</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>569.03</baseImponible>
+<valor>68.28</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>637.31</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>93731</codigoPrincipal>
+<descripcion>TALADRO ELECTRICO MANUAL 0299-20 DE 1/2" 120V/8A/ 0-850 RPM</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>223.15</precioUnitario>
+<descuento>100.42</descuento>
+<precioTotalSinImpuesto>569.03</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>569.03</baseImponible>
+<valor>68.28</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">proveedores@metaltronic.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2480366</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">028872</campoAdicional>
+</infoAdicional>
+</factura>

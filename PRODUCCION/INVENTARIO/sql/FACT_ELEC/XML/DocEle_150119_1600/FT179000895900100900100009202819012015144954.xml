@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092028</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092028</guiaRemision>
+<razonSocialComprador>ZAVALA ARGUELLO FREDDY</razonSocialComprador>
+<identificacionComprador>0910522127001</identificacionComprador>
+<totalSinImpuestos>755.71</totalSinImpuestos>
+<totalDescuento>133.36</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>755.71</baseImponible>
+<valor>90.69</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>846.40</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>44289</codigoPrincipal>
+<descripcion>BOMBA CENTRIF STANDARD C-MOTOR DS-9-3 7.5HP 2 x 1-1/2" 220/440/3/60</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>889.07</precioUnitario>
+<descuento>133.36</descuento>
+<precioTotalSinImpuesto>755.71</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MARK G"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>755.71</baseImponible>
+<valor>90.69</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">freddyzavalaservicorp@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2676418</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">011317</campoAdicional>
+</infoAdicional>
+</factura>

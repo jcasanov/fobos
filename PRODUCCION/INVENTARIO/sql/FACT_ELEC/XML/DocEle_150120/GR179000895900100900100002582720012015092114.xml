@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025827</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL JTM</dirPartida>
+<razonSocialTransportista>SANTANA ARTEAGA WILSON ADALBERTO</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>1306805324</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>20/01/2015</fechaIniTransporte>
+<fechaFinTransporte>20/01/2015</fechaFinTransporte>
+<placa>GSH-773</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1306805324001</identificacionDestinatario>
+<razonSocialDestinatario>SANTANA ARTEAGA WILSON ADALBERTO</razonSocialDestinatario>
+<dirDestinatario>RETIRA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>20/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>101023</codigoInterno>
+<descripcion>BOMBA SUMERGIBLE DE 6" 275STS15D6X-0464  PARA MOTOR DE 15 HP (97060275004)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>21382</codigoInterno>
+<descripcion>VALVULA CHEQUE VC-100 DE 4" DE BRONCE TIPO PESADO</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HELBER"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">wsanta_2@yahoo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2490172</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">014342</campoAdicional>
+</infoAdicional>
+</guiaRemision>

@@ -1,0 +1,6 @@
+#time fglgo igualr11 ACGYE01 0 T | tee igualr11_todos.log
+
+sh igualr11_gm_todos
+sh igualr11_gc_todos
+sh igualr11_qm_todos
+sh igualr11_qs_todos

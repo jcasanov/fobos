@@ -1,0 +1,27 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+           Localidad: [c051 ] [c052                ]
+
+      Código Cliente: [c001 ] [c002                                    ]
+
+              Moneda: [c3]    [c004           ]
+
+     	        Tipo: [c005          ]    
+
+}
+ATTRIBUTES
+c001 = FORMONLY.codcli TYPE INTEGER NOT NULL, REVERSE, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = FORMONLY.nomcli, UPSHIFT, REVERSE, NOENTRY;
+c3   = FORMONLY.moneda TYPE CHAR NOT NULL, UPSHIFT, AUTONEXT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c051 = FORMONLY.localidad, UPSHIFT, AUTONEXT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c052 = FORMONLY.tit_localidad, UPSHIFT, NOENTRY;
+c004 = FORMONLY.tit_mon, UPSHIFT, REVERSE, NOENTRY;
+c005 = FORMONLY.tipo TYPE CHAR NOT NULL, REVERSE, UPSHIFT,
+	WIDGET = 'RADIO', CONFIG = 'R Resumido  D Detallado',
+	COMMENTS = 'Escoja el tipo de impresión del Estado de Cuenta.';
+END

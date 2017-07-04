@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113742</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>08/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113742</guiaRemision>
+<razonSocialComprador>UMCO S.A.</razonSocialComprador>
+<identificacionComprador>1790007499001</identificacionComprador>
+<totalSinImpuestos>258.03</totalSinImpuestos>
+<totalDescuento>27.51</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>258.03</baseImponible>
+<valor>30.96</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>288.99</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>92019</codigoPrincipal>
+<descripcion>CODO NEGRO CLASE 150 DE 1/2" x 90ø</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>1.14</precioUnitario>
+<descuento>0.68</descuento>
+<precioTotalSinImpuesto>6.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.16</baseImponible>
+<valor>0.74</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3182</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 3/4" x 3"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>0.62</precioUnitario>
+<descuento>0.19</descuento>
+<precioTotalSinImpuesto>1.67</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.67</baseImponible>
+<valor>0.20</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>12696</codigoPrincipal>
+<descripcion>CABEZAL NO. 12 R CON DADOS DE 1/2" (37390)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>111.48</precioUnitario>
+<descuento>16.72</descuento>
+<precioTotalSinImpuesto>94.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>94.76</baseImponible>
+<valor>11.37</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5584</codigoPrincipal>
+<descripcion>TUBO NEGRO S-UNION ISO I TIPO "F" DE 1" x 6 m.</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>27.80</precioUnitario>
+<descuento>6.67</descuento>
+<precioTotalSinImpuesto>104.53</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FUJI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>104.53</baseImponible>
+<valor>12.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5580</codigoPrincipal>
+<descripcion>TUBO NEGRO S-UNION ISO I TIPO "F" DE 1/2" x 6 m.</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>13.54</precioUnitario>
+<descuento>3.25</descuento>
+<precioTotalSinImpuesto>50.91</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FUJI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>50.91</baseImponible>
+<valor>6.11</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">mrodriguez@umcoecuador.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2655718</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">028741</campoAdicional>
+</infoAdicional>
+</factura>

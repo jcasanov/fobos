@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048296</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<dirPartida>AV. LA PRENSA N/4514</dirPartida>
+<razonSocialTransportista>SR FERNANDO VACA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>30/12/2014</fechaIniTransporte>
+<fechaFinTransporte>30/12/2014</fechaFinTransporte>
+<placa>PAA-001</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1102318423001</identificacionDestinatario>
+<razonSocialDestinatario>SARANGO MEDINA MARIA ALEGRIA</razonSocialDestinatario>
+<dirDestinatario>MARISCAL SUCRE N62-101 Y JOSE FIGUEROA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>29/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>100774</codigoInterno>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA AMAZONAS BLANCO PRIMERA</descripcion>
+<cantidad>30.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="AMAZONAS BLANCO"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>101613</codigoInterno>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA COLONCHE ROBLE  PRIMERA</descripcion>
+<cantidad>16.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="COLONCHE ROBLE  PRIM"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>101830</codigoInterno>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA SORAIDA ROBLE SEGUNDA</descripcion>
+<cantidad>57.60</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="MODELO" valor="SORAIDA ROBLE SEGUND"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>96868</codigoInterno>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA DALI BEIGE ESTANDAR</descripcion>
+<cantidad>6.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="DALI BEIGE COMERCIAL"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>99479</codigoInterno>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA AZTECA ESTANDAR</descripcion>
+<cantidad>40.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="AZTECA STANDARD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">ceramicasvellavista@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0998669900</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">062738</campoAdicional>
+</infoAdicional>
+</guiaRemision>

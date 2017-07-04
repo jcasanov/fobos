@@ -1,0 +1,77 @@
+database acero_gm
+screen size 24 by 80
+{
+r23_compania       [f000       ]
+r23_localidad      [f001  ]
+r23_numprev        [f002       ]
+r23_estado         [a]
+r23_grupo_linea    [f003 ]
+r23_ped_cliente    [f004      ]
+r23_cont_cred      [b]
+r23_referencia     [f005                                    ]
+r23_codcli         [f006       ]
+r23_nomcli         [f007                                              ]
+r23_dircli         [f008                                    ]
+r23_telcli         [f009      ]
+r23_cedruc         [f010           ]
+r23_ord_compra     [f011           ]
+r23_vendedor       [f012  ]
+r23_descuento      [f013  ]
+r23_porc_impto     [f014  ]
+r23_bodega         [a0]
+r23_moneda         [a1]
+r23_paridad        [f015              ]
+}
+screen
+{
+r23_precision      [f016  ]
+r23_tot_costo      [f017          ]
+r23_tot_bruto      [f018          ]
+r23_tot_dscto      [f019         ]
+r23_tot_neto       [f020          ]
+r23_flete          [f021         ]
+r23_cod_tran       [a2]
+r23_num_tran       [f022             ]
+r23_numprof        [f023       ]
+r23_num_ot         [f024       ]
+r23_usuario        [f025      ]
+r23_fecing         [f026               ]
+}
+end
+tables
+rept023
+attributes
+f000 = rept023.r23_compania;
+f001 = rept023.r23_localidad;
+f002 = rept023.r23_numprev;
+a = rept023.r23_estado;
+f003 = rept023.r23_grupo_linea;
+f004 = rept023.r23_ped_cliente;
+b = rept023.r23_cont_cred;
+f005 = rept023.r23_referencia;
+f006 = rept023.r23_codcli;
+f007 = rept023.r23_nomcli;
+f008 = rept023.r23_dircli;
+f009 = rept023.r23_telcli;
+f010 = rept023.r23_cedruc;
+f011 = rept023.r23_ord_compra;
+f012 = rept023.r23_vendedor;
+f013 = rept023.r23_descuento;
+f014 = rept023.r23_porc_impto;
+a0 = rept023.r23_bodega;
+a1 = rept023.r23_moneda;
+f015 = rept023.r23_paridad;
+
+f016 = rept023.r23_precision;
+f017 = rept023.r23_tot_costo;
+f018 = rept023.r23_tot_bruto;
+f019 = rept023.r23_tot_dscto;
+f020 = rept023.r23_tot_neto;
+f021 = rept023.r23_flete;
+a2 = rept023.r23_cod_tran;
+f022 = rept023.r23_num_tran;
+f023 = rept023.r23_numprof;
+f024 = rept023.r23_num_ot;
+f025 = rept023.r23_usuario;
+f026 = rept023.r23_fecing;
+end

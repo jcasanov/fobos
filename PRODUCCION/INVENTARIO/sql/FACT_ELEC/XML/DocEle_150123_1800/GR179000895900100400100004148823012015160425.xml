@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000041488</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<dirPartida>AV LA PRENSA N-4514</dirPartida>
+<razonSocialTransportista>ACERO COMERCIAL</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>23/01/2015</fechaIniTransporte>
+<fechaFinTransporte>24/01/2015</fechaFinTransporte>
+<placa>PAZ-001</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1792238447001</identificacionDestinatario>
+<razonSocialDestinatario>DISTRIBUIDORA DE MATERIALES DE CONSTRUCCION DISMACONCOBRE CIA. LTDA.</razonSocialDestinatario>
+<dirDestinatario>VALLADOLID N24-611 Y AV. LA CORUÒA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>23/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>44295</codigoInterno>
+<descripcion>COQUILLA LANA DE VIDRIO C-ALUMINIO 1/2" x 1" x 0.90 m.</descripcion>
+<cantidad>58.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDIFI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>44296</codigoInterno>
+<descripcion>COQUILLA LANA DE VIDRIO C-ALUMINIO 3/4" x 1" x 0.90 m.</descripcion>
+<cantidad>210.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDIFI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">dismacon@netlife.ec</campoAdicional>
+<campoAdicional nombre="Email">ventas4@dismacon.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2228315</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">052810</campoAdicional>
+</infoAdicional>
+</guiaRemision>

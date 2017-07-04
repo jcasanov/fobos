@@ -251,7 +251,7 @@ PAGE HEADER
         PRINT COLUMN 002, '-----------------------------------------------------------------------------------------------------------------------------------'
 
 ON EVERY ROW
-	NEED 3 LINES
+	NEED 2 LINES
 	PRINT COLUMN 002, r_rol.cod_trab USING '##&&',
 	      COLUMN 008, r_rol.nom_trab CLIPPED,
 	      COLUMN 050, r_rol.dias_trab USING "###&&",
@@ -264,7 +264,6 @@ ON EVERY ROW
 	      COLUMN 119, r_rol.valor_neto USING '###,###,##&.##'
 
 ON LAST ROW 
-	NEED 2 LINES
 	PRINT COLUMN 050, '-----',
 	      COLUMN 056, '--------------',  
 	      COLUMN 071, '---',  

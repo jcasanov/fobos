@@ -1,0 +1,82 @@
+DATABASE aceros
+SCREEN 
+{
+
+                 Anio: [c000]                   Estado: [a|c100     ] 
+   Valor Trabajadores: [c002 ] %  [c008             ]   [c115             ] 
+         Valor Cargas: [c003 ] %  [c009             ]
+                                  -------------------   
+     Valor a Repartir: [z099 ] %  [c001             ]
+[c052                                    ]  Dias: [c053]      [c050] de [c051]
+ [lbl2                   |lbl3        |c0|lbl4       |lbl5       |lbl6        ]
+[c102                   |c004        |c1|c005       |c006       |c007        ]
+[c102                   |c004        |c1|c005       |c006       |c007        ]
+[c102                   |c004        |c1|c005       |c006       |c007        ]
+[c102                   |c004        |c1|c005       |c006       |c007        ]
+[c102                   |c004        |c1|c005       |c006       |c007        ]
+[c102                   |c004        |c1|c005       |c006       |c007        ]
+[c102                   |c004        |c1|c005       |c006       |c007        ]
+[c102                   |c004        |c1|c005       |c006       |c007        ]
+[c102                   |c004        |c1|c005       |c006       |c007        ]
+[c102                   |c004        |c1|c005       |c006       |c007        ]
+[c102                   |c004        |c1|c005       |c006       |c007        ]
+[c102                   |c004        |c1|c005       |c006       |c007        ]
+            Totales ==> [c110        ]  [c111       |c113       |c112        ]
+}
+end
+tables
+rolt041
+rolt042
+attributes
+c000 = rolt041.n41_ano,         REVERSE, NOENTRY;
+a    = rolt041.n41_estado,      REVERSE, NOENTRY, AUTONEXT, UPSHIFT,
+				INCLUDE=('A', 'P'), 
+				COMMENTS='A ACTIVO  P PROCESADO';
+c100 = FORMONLY.n_estado,	NOENTRY;
+c002 = rolt041.n41_porc_trabaj, REVERSE, FORMAT='#&.##', NOENTRY;
+c003 = rolt041.n41_porc_cargas, REVERSE, FORMAT='#&.##', NOENTRY;
+c001 = FORMONLY.valor_repart,   NOENTRY, REVERSE, FORMAT='##,###,###,##&.##';
+c008 = rolt041.n41_val_trabaj,  REVERSE, FORMAT='##,###,###,##&.##', AUTONEXT;
+c009 = rolt041.n41_val_cargas,  REVERSE, FORMAT='##,###,###,##&.##', AUTONEXT;
+
+c102 = FORMONLY.n_trab,         OPTIONS='-nolist', NOENTRY, 
+				COLOR = RED WHERE c007 < 0;
+c004 = rolt042.n42_val_trabaj,  OPTIONS='-nolist', FORMAT='#,###,##&.##',
+				AUTONEXT, COLOR = RED WHERE c007 < 0,
+				INCLUDE = (0 TO 9999999.99);
+c1   = rolt042.n42_num_cargas,  OPTIONS='-nolist', FORMAT='#&', 
+				NOENTRY, COLOR = RED WHERE c007 < 0;
+c005 = rolt042.n42_val_cargas,  OPTIONS='-nolist', FORMAT='###,##&.##', 
+				AUTONEXT, COLOR = RED WHERE c007 < 0,
+				INCLUDE = (0 TO 9999999.99);
+c006 = rolt042.n42_descuentos,   OPTIONS='-nolist', FORMAT='###,##&.##', 
+				NOENTRY, COLOR = RED WHERE c007 < 0;
+c007 = FORMONLY.subtotal,       OPTIONS='-nolist', FORMAT='-,---,--&.##',
+				NOENTRY, COLOR = RED WHERE c007 < 0;
+
+c110 = FORMONLY.tot_val_trabaj, NOENTRY, REVERSE, FORMAT='#,###,##&.##';
+c111 = FORMONLY.tot_val_cargas, NOENTRY, REVERSE, FORMAT='###,##&.##';
+c112 = FORMONLY.tot_valor,      NOENTRY, REVERSE, FORMAT='#,###,##&.##';
+c113 = FORMONLY.tot_dsctos,  NOENTRY, REVERSE, FORMAT='###,##&.##';
+
+
+c115 = rolt041.n41_util_bonif,  REVERSE, WIDGET='RADIO', 
+	CONFIG='U Utilidades B Bonificación'; 
+
+z099 = FORMONLY.tot_porc TYPE DECIMAL(5,2), FORMAT = '#&.##';
+
+lbl2 = FORMONLY.bt_nom_trab,    WIDGET='BUTTON', CONFIG='F16';
+lbl3 = FORMONLY.bt_val_trabaj,  WIDGET='BUTTON', CONFIG='F17';
+c0   = FORMONLY.bt_num_cargas,  WIDGET='BUTTON', CONFIG='F18';
+lbl4 = FORMONLY.bt_val_cargas,  WIDGET='BUTTON', CONFIG='F19';
+lbl5 = FORMONLY.bt_descuentos,  WIDGET='BUTTON', CONFIG='F20';
+lbl6 = FORMONLY.bt_subtotal,    WIDGET='BUTTON', CONFIG='F21';
+
+c050 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c051 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+c052 = FORMONLY.nom_trab, NOENTRY, REVERSE, UPSHIFT;
+c053 = rolt042.n42_dias_trab, NOENTRY, UPSHIFT, COLOR = BLUE;
+END
+INSTRUCTIONS
+SCREEN RECORD ra_scr[12] (n_trab, n42_val_trabaj, n42_num_cargas,n42_val_cargas,
+				n42_descuentos, subtotal) 

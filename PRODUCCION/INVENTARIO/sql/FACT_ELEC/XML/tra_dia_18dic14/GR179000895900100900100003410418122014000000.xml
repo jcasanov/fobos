@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000034104</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>AV. JUAN TANCA MARENGO KM.1.7</dirPartida>
+<razonSocialTransportista>MANUEL MAGALLANES (ACERO COMERCIAL .S.A)</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>18/12/2014</fechaIniTransporte>
+<fechaFinTransporte>18/12/2014</fechaFinTransporte>
+<placa>  GSC-8976</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0791739942001</identificacionDestinatario>
+<razonSocialDestinatario>JARAMILLO MINAYA</razonSocialDestinatario>
+<dirDestinatario>URB. ALMERIA V.19 FAM. JARAMILLO</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>18/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>100758</codigoInterno>
+<descripcion>ACCESORIO ADA SC002659306 BARRA DE APOYO MEDIANA</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="MODELO" valor="SC0026593061CW"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>47145</codigoInterno>
+<descripcion>GRIFERIA CON DUCHA TELEFONO E118.07/26 CR "LUMINA" CROMO</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="MODELO" valor="E118.07/26-CR"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">ROSSANA_MINAYA58@HOTMAIL.COM</campoAdicional>
+<campoAdicional nombre="telefono-movil">2838755</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016655</campoAdicional>
+</infoAdicional>
+</guiaRemision>

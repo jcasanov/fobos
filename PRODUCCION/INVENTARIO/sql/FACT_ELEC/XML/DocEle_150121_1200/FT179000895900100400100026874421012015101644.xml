@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268744</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268744</guiaRemision>
+<razonSocialComprador>PATECA</razonSocialComprador>
+<identificacionComprador>1790032337001</identificacionComprador>
+<totalSinImpuestos>51.81</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>51.81</baseImponible>
+<valor>6.22</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>58.03</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>97896</codigoPrincipal>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7432 SD1 DE 5/8" X 4-1/2"</descripcion>
+<cantidad>12.00</cantidad>
+<precioUnitario>1.79</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>21.48</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>21.48</baseImponible>
+<valor>2.58</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>94644</codigoPrincipal>
+<descripcion>DISCO DE CORTE 49-94-1415 DE 14" x 3/32" x 1" P/HIERRO</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>7.19</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>21.57</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>21.57</baseImponible>
+<valor>2.59</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>95796</codigoPrincipal>
+<descripcion>DISCO ABRASIVO 49-94-4500 DE CORTE DE 4-1/2"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>2.19</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>8.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.76</baseImponible>
+<valor>1.05</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">lromero@pateca.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2277666</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">022358</campoAdicional>
+</infoAdicional>
+</factura>

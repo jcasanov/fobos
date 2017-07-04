@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175899</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/12/2014</fechaEmision>
+<dirEstablecimiento>GERARDO CHIRIBOGA N52-69 Y ALGARROBOS</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175899</guiaRemision>
+<razonSocialComprador>SOLGAR</razonSocialComprador>
+<identificacionComprador>1709478109001</identificacionComprador>
+<totalSinImpuestos>17.39</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>17.39</baseImponible>
+<valor>2.09</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>19.48</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>3432</codigoPrincipal>
+<descripcion>NEPLO NEGRO DE 1-1/2" x 8"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3.40</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3.40</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.40</baseImponible>
+<valor>0.41</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3398</codigoPrincipal>
+<descripcion>NEPLO NEGRO DE 1" x 6"</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>1.67</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>8.35</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.35</baseImponible>
+<valor>1.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3382</codigoPrincipal>
+<descripcion>NEPLO NEGRO DE 3/4" x 8"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>1.41</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>5.64</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.64</baseImponible>
+<valor>0.68</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2408478</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">031859</campoAdicional>
+</infoAdicional>
+</factura>

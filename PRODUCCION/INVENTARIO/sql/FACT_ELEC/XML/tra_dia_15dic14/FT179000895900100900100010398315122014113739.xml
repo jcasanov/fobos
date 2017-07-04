@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000103983</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>KM  4.5  VIA SAMBORONDON</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000103983</guiaRemision>
+<razonSocialComprador>JARAMILLO MINAYA</razonSocialComprador>
+<identificacionComprador>0791739942001</identificacionComprador>
+<totalSinImpuestos>832.70</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>832.70</baseImponible>
+<valor>99.92</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>932.62</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>23931</codigoPrincipal>
+<descripcion>LAVAPLATOS DE ACERO INOXIDABLE 10119011 CLASSIC 1C 1E 86X50cm MODULAR REV. C/VALVULA 3-1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>141.16</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>141.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="TEKA" valor="TEKA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>141.16</baseImponible>
+<valor>16.94</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>23937</codigoPrincipal>
+<descripcion>LAVAPLATOS DE ACERO INOXIDABLE 10119007 CLASSIC 2C 1E 116x50cm MODULAR REV.C/VALVULA 3-1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>234.51</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>234.51</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="TEKA" valor="TEKA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>234.51</baseImponible>
+<valor>28.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>69054</codigoPrincipal>
+<descripcion>COCINETA DE ACERO INOXIDABLE 40220030 E/70 5G AI TR 68X50cm. A GAS ENCEN.ELEC. 110V.60Hz INOX</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>372.20</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>372.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="TEKA" valor="TEKA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>372.20</baseImponible>
+<valor>44.66</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70934</codigoPrincipal>
+<descripcion>GRIFERIA DE LAVAPLATOS COMPACTA E425.05/B2 CR NEW PORT DE MESA S/SIFON</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>36.86</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>36.86</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>36.86</baseImponible>
+<valor>4.42</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>95106</codigoPrincipal>
+<descripcion>GRIFERIA DE LAVAPLATOS COMPACTA E425.05/26 CR LLAVE DE MESA P/COCINA LUMINA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>31.56</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>31.56</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>31.56</baseImponible>
+<valor>3.79</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>68865</codigoPrincipal>
+<descripcion>SIFON DE LAVADERO 4018000 DE 1-1/2" PP CON ACOPLE</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>4.88</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>14.64</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="EDESA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>14.64</baseImponible>
+<valor>1.76</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50462</codigoPrincipal>
+<descripcion>TUBO DE EXTENSION PARA DESAGUE GUIB2-0014 PLASTICO DE 1-1/2" x 5" (GUIA)</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>0.59</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1.77</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="INCAMEP" valor="INCAME"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.77</baseImponible>
+<valor>0.21</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

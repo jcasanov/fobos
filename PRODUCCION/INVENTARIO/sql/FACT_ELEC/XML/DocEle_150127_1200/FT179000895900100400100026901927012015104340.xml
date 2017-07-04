@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000269019</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000269019</guiaRemision>
+<razonSocialComprador>ECUATORIANA DE MANGUERAS ECUAMANGUERAS CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1790483967001</identificacionComprador>
+<totalSinImpuestos>130.22</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>130.22</baseImponible>
+<valor>15.63</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>145.85</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5514</codigoPrincipal>
+<descripcion>TUBO NEGRO ASTM A-53  TIPO "T" DE 1" x 6 m.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>24.81</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>49.62</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>49.62</baseImponible>
+<valor>5.95</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>92016</codigoPrincipal>
+<descripcion>TEE NEGRA CLASE 150 DE 1"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3.35</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3.35</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.35</baseImponible>
+<valor>0.40</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>92015</codigoPrincipal>
+<descripcion>CODO NEGRO CLASE 150 DE 1" x 90ø</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>2.86</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>14.30</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>14.30</baseImponible>
+<valor>1.72</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2280</codigoPrincipal>
+<descripcion>CODO NEGRO CLASE 150 DE 1" x 45 GRAD</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2.42</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2.42</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.42</baseImponible>
+<valor>0.29</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>94492</codigoPrincipal>
+<descripcion>GRIFO ESFERICO ACERO INOX. ROSCADO IT-207 DE 1" 3000 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>54.91</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>54.91</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INOX T"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>54.91</baseImponible>
+<valor>6.59</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6381</codigoPrincipal>
+<descripcion>UNIVERSAL CONICA NEGRA CLASE 150 DE 1"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>5.62</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>5.62</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.62</baseImponible>
+<valor>0.67</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">contabilidad@ecuamangueras.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2474863</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">012597</campoAdicional>
+<campoAdicional nombre="Observaciones">CH:19983 BAN.PICHINCHA</campoAdicional>
+</infoAdicional>
+</factura>

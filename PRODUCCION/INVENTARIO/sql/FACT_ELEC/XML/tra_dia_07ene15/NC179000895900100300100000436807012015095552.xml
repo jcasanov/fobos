@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000004368</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>ATU (ARTICULOS DE ACERO S.A.)</razonSocialComprador>
+<identificacionComprador>1790038092001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>003-001-000129195</numDocModificado>
+<fechaEmisionDocSustento>05/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>564.37</totalSinImpuestos>
+<valorModificacion>632.09</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>564.37</baseImponible>
+<valor>67.72</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>REF POR FECHA   NP 139241</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>101431</codigoInterno>
+<descripcion>ATORNILLADORA A BATERIA 2402-22 M-12 FUEL DE 1/4"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>331.98</precioUnitario>
+<descuento>99.59</descuento>
+<precioTotalSinImpuesto>564.37</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>564.37</baseImponible>
+<valor>67.72</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infoatu@atu.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">554477 648</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">28573</campoAdicional>
+</infoAdicional>
+</notaCredito>

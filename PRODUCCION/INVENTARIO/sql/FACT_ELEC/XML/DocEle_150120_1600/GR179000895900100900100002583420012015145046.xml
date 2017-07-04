@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025834</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>HUGO GARCIA BARRIENTOS</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0991074953001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>20/01/2015</fechaIniTransporte>
+<fechaFinTransporte>21/01/2015</fechaFinTransporte>
+<placa>GIP159</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0991074953001</identificacionDestinatario>
+<razonSocialDestinatario>ECUATORIANA DE FLUIDOS ECUAFLUID S.A.</razonSocialDestinatario>
+<dirDestinatario>RETIRAN</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>20/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>99354</codigoInterno>
+<descripcion>BOMBA CENTRIF MULTIETAPA C-MOTOR KVC 45/1206 DE 2.5HP M220/230/60C. 32 mm. NPT. (102991440)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">ecuaflud@gye.satnet.net</campoAdicional>
+<campoAdicional nombre="telefono-movil">2291174</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">003303</campoAdicional>
+</infoAdicional>
+</guiaRemision>

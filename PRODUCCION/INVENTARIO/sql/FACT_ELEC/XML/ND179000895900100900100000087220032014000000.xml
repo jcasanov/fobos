@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaDebito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000000872</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoNotaDebito>
+<fechaEmision>20/03/2014</fechaEmision>
+<dirEstablecimiento>KM. 4,5 VIA DURAN TAMBO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>MEXICHEM ECUADOR S.A.</razonSocialComprador>
+<identificacionComprador>0990003769001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000000872</numDocModificado>
+<fechaEmisionDocSustento>20/03/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>496.32</totalSinImpuestos>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>496.32</baseImponible>
+<valor>59.56</valor>
+</impuesto>
+</impuestos>
+<valorTotal>555.88</valorTotal>
+</infoNotaDebito>
+<motivos>
+<motivo>
+<razon>PARA ANULAR N/C.21138/15452 FA DEVU</razon>
+<valor>496.32</valor>
+</motivo>
+</motivos>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+<campoAdicional nombre="telefono-movil">2802020</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">345</campoAdicional>
+</infoAdicional>
+</notaDebito>

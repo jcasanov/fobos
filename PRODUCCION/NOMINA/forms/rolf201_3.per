@@ -1,0 +1,49 @@
+DATABASE aceros
+SCREEN
+{
+
+            VALORES EXTRAS EMPLEADOS PARA ACTUALIZACION  
+            ------------------------------------------
+
+                                                  [c030] de [c031]
+  [c000|c001                                         |c002     |c0]
+ [c010|c011                                         |c012     |c1]
+ [c010|c011                                         |c012     |c1]
+ [c010|c011                                         |c012     |c1]
+ [c010|c011                                         |c012     |c1]
+ [c010|c011                                         |c012     |c1]
+ [c010|c011                                         |c012     |c1]
+ [c010|c011                                         |c012     |c1]
+ [c010|c011                                         |c012     |c1]
+ [c010|c011                                         |c012     |c1]
+ [c010|c011                                         |c012     |c1]
+
+                                  [c020                          ]
+
+}
+TABLES
+rolt006
+rolt030
+ATTRIBUTES
+c000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c002 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c0   = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+
+c010 = rolt030.n30_cod_trab, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c011 = rolt030.n30_nombres, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c012 = FORMONLY.val_rub, AUTONEXT, UPSHIFT, OPTIONS = '-nolist',
+	FORMAT = '##,##&.##';
+c1   = rolt006.n06_flag_ident, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+
+c020 = FORMONLY.nom_rub, NOENTRY, REVERSE, UPSHIFT;
+
+c030 = FORMONLY.cur_row, NOENTRY, REVERSE, UPSHIFT;
+c031 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+END
+KEYS
+F5 = 'Datos Empleado'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_det_arch[10] (n30_cod_trab, n30_nombres, val_rub,
+				n06_flag_ident)

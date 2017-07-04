@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268105</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>06/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268105</guiaRemision>
+<razonSocialComprador>LINCANGO GUACHAMIN WASHINGTON BOLIVAR</razonSocialComprador>
+<identificacionComprador>1707817225001</identificacionComprador>
+<totalSinImpuestos>146.94</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>146.94</baseImponible>
+<valor>17.63</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>164.57</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102356</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-20-7225 SDS PLUS 4CT 7/8" X 6" X 8"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>36.08</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>72.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>72.16</baseImponible>
+<valor>8.66</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70330</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO SDS-PLUS 7/8" X 12" (00376)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>37.39</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>74.78</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>74.78</baseImponible>
+<valor>8.97</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">wi_li29@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2406705</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">050882</campoAdicional>
+</infoAdicional>
+</factura>

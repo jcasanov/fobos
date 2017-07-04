@@ -1,0 +1,20 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+        GENERAR REPORTE
+        --------------
+
+   Incluir Doc. A Favor ? [c]
+
+ Tipo de Reporte: [c000        ]
+
+
+}
+ATTRIBUTES
+c    = FORMONLY.vm_incluir_nc TYPE CHAR NOT NULL, REQUIRED, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S',
+	COMMENTS = 'Imprime Notas de Credito.';
+c000 = FORMONLY.vm_imprimir TYPE CHAR NOT NULL, UPSHIFT, REVERSE,
+	WIDGET = 'RADIO', CONFIG = 'R Resumido D Detallado', DEFAULT = 'R';
+END

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268474</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>14/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268474</guiaRemision>
+<razonSocialComprador>RILER</razonSocialComprador>
+<identificacionComprador>1790947432001</identificacionComprador>
+<totalSinImpuestos>372.24</totalSinImpuestos>
+<totalDescuento>35.33</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>372.24</baseImponible>
+<valor>44.67</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>416.91</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>1642</codigoPrincipal>
+<descripcion>BUSHING GALV. CLASE 150 DE 1-1/4" x 3/4"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>2.49</precioUnitario>
+<descuento>0.50</descuento>
+<precioTotalSinImpuesto>4.48</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.48</baseImponible>
+<valor>0.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2065</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 90 GRAD  DE 2"</descripcion>
+<cantidad>37.00</cantidad>
+<precioUnitario>6.59</precioUnitario>
+<descuento>19.51</descuento>
+<precioTotalSinImpuesto>224.32</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>224.32</baseImponible>
+<valor>26.92</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2046</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 X 90 GRAD  REDUCIDO DE 1" x 1/2"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>2.71</precioUnitario>
+<descuento>1.08</descuento>
+<precioTotalSinImpuesto>9.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.76</baseImponible>
+<valor>1.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3648</codigoPrincipal>
+<descripcion>REDUCCION GALV. CLASE 150 DE 3/4" x 1/2"</descripcion>
+<cantidad>24.00</cantidad>
+<precioUnitario>1.48</precioUnitario>
+<descuento>3.55</descuento>
+<precioTotalSinImpuesto>31.97</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>31.97</baseImponible>
+<valor>3.84</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4120</codigoPrincipal>
+<descripcion>TAPON GALV. HEMBRA CLASE 150 DE 1-1/2" REFORZADO</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>3.32</precioUnitario>
+<descuento>3.32</descuento>
+<precioTotalSinImpuesto>29.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>29.88</baseImponible>
+<valor>3.59</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>94829</codigoPrincipal>
+<descripcion>TAPON GALV. HEMBRA CLASE 150 DE 2"</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>2.74</precioUnitario>
+<descuento>2.19</descuento>
+<precioTotalSinImpuesto>25.21</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>25.21</baseImponible>
+<valor>3.03</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4154</codigoPrincipal>
+<descripcion>TAPON GALV. MACHO CLASE 150 DE 1"</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>1.28</precioUnitario>
+<descuento>1.28</descuento>
+<precioTotalSinImpuesto>11.52</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>11.52</baseImponible>
+<valor>1.38</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4150</codigoPrincipal>
+<descripcion>TAPON GALV. MACHO CLASE 150 DE 1/2"</descripcion>
+<cantidad>52.00</cantidad>
+<precioUnitario>0.75</precioUnitario>
+<descuento>3.90</descuento>
+<precioTotalSinImpuesto>35.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>35.10</baseImponible>
+<valor>4.21</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">riler@andinanet.net</campoAdicional>
+<campoAdicional nombre="telefono-movil">2813410</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">003659</campoAdicional>
+<campoAdicional nombre="Observaciones">CHEQUE N.-909174</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025638</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>TITO GUTIERREZ</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>06/01/2015</fechaIniTransporte>
+<fechaFinTransporte>07/01/2015</fechaFinTransporte>
+<placa>GSL5009</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0990293244001</identificacionDestinatario>
+<razonSocialDestinatario>HOLCIM ECUADOR S.A.</razonSocialDestinatario>
+<dirDestinatario>KM. 19 VIA A LA COSTA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>05/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>100009</codigoInterno>
+<descripcion>LLAVE DE IMPACTO A BATERIA 2652-22 M18 LTHIUM-ION 1/2" / 2.200RPM</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>103118</codigoInterno>
+<descripcion>FLEXOMETRO 48-22-5216 MAGNETICO DE 5 m.</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">rodolfo.montero@holcim.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3709000</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">007551</campoAdicional>
+</infoAdicional>
+</guiaRemision>

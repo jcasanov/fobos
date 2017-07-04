@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268418</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>13/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268418</guiaRemision>
+<razonSocialComprador>MONTALVO ERAZO JHADIRA MARYCIELO</razonSocialComprador>
+<identificacionComprador>1001930278001</identificacionComprador>
+<totalSinImpuestos>590.48</totalSinImpuestos>
+<totalDescuento>103.24</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>590.48</baseImponible>
+<valor>70.86</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>661.34</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99792</codigoPrincipal>
+<descripcion>ASPIRADORA SECO Y MOJADO RESIDENCIAL WD-1270 DE 12 Glns. MOTOR DE 5 HP 120V. (40103)</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>166.58</precioUnitario>
+<descuento>99.95</descuento>
+<precioTotalSinImpuesto>566.37</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>566.37</baseImponible>
+<valor>67.96</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>92016</codigoPrincipal>
+<descripcion>TEE NEGRA CLASE 150 DE 1"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>3.35</precioUnitario>
+<descuento>1.61</descuento>
+<precioTotalSinImpuesto>11.79</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>11.79</baseImponible>
+<valor>1.41</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1708</codigoPrincipal>
+<descripcion>BUSHING NEGRO CLASE 150 DE 1" x 1/2"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>1.46</precioUnitario>
+<descuento>0.70</descuento>
+<precioTotalSinImpuesto>5.14</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.14</baseImponible>
+<valor>0.62</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1702</codigoPrincipal>
+<descripcion>BUSHING NEGRO CLASE 150 DE 3/4" x 1/2"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1.06</precioUnitario>
+<descuento>0.25</descuento>
+<precioTotalSinImpuesto>1.87</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.87</baseImponible>
+<valor>0.22</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3368</codigoPrincipal>
+<descripcion>NEPLO NEGRO DE 3/4" CORRIDO</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>0.43</precioUnitario>
+<descuento>0.21</descuento>
+<precioTotalSinImpuesto>1.51</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.51</baseImponible>
+<valor>0.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4236</codigoPrincipal>
+<descripcion>TAPON NEGRO MACHO CLASE 150 DE 1"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>1.44</precioUnitario>
+<descuento>0.52</descuento>
+<precioTotalSinImpuesto>3.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.80</baseImponible>
+<valor>0.46</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">multimangueras_ibarra@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">062955321</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">037327</campoAdicional>
+<campoAdicional nombre="Observaciones">PEDIDO ADJUNTO</campoAdicional>
+</infoAdicional>
+</factura>

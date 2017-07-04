@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000007851</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000007851</guiaRemision>
+<razonSocialComprador>TERRAFERTIL S.A.</razonSocialComprador>
+<identificacionComprador>1791993020001</identificacionComprador>
+<totalSinImpuestos>217.82</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>217.82</baseImponible>
+<valor>26.14</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>243.96</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>2</codigoPrincipal>
+<descripcion>SERVICIO REPARACION BOMBA DE AGUA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>60.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>60.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="DS-8"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>60.00</baseImponible>
+<valor>7.20</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>119060</codigoPrincipal>
+<descripcion>PERNO HEX G-2 Y RODELA PLANA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.82</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="DS-8"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.82</baseImponible>
+<valor>0.22</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>SERVICIO1</codigoPrincipal>
+<descripcion>CONFECCION ACOPLE A. I.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>156.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>156.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="DS-8"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>156.00</baseImponible>
+<valor>18.72</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">tesoreria@terra-fertil.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2675365</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">037560</campoAdicional>
+</infoAdicional>
+</factura>

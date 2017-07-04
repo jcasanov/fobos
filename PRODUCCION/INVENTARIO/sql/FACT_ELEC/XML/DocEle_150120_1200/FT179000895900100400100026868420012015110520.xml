@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268684</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268684</guiaRemision>
+<razonSocialComprador>RODRIGUEZ TOBAR EDISON MOISES</razonSocialComprador>
+<identificacionComprador>1715043038001</identificacionComprador>
+<totalSinImpuestos>138.28</totalSinImpuestos>
+<totalDescuento>15.37</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>138.28</baseImponible>
+<valor>16.59</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>154.87</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>98539</codigoPrincipal>
+<descripcion>TALADRO ELECTRICO MANUAL 5375-20  7.5 AMPS. 110 V  2700RPM DE 1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>132.99</precioUnitario>
+<descuento>13.30</descuento>
+<precioTotalSinImpuesto>119.69</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>119.69</baseImponible>
+<valor>14.36</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>13648</codigoPrincipal>
+<descripcion>LLAVE DE TUBO RECTA NO. 8 (31005)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>20.66</precioUnitario>
+<descuento>2.07</descuento>
+<precioTotalSinImpuesto>18.59</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>18.59</baseImponible>
+<valor>2.23</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">redshark316@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0987569517</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064347</campoAdicional>
+</infoAdicional>
+</factura>

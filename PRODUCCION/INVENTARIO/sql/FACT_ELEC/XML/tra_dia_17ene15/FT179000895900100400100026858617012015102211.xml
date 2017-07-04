@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268586</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268586</guiaRemision>
+<razonSocialComprador>COMERCIAL IMPORTADORA VILLAYALA CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1790389944001</identificacionComprador>
+<totalSinImpuestos>146.32</totalSinImpuestos>
+<totalDescuento>25.48</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>146.32</baseImponible>
+<valor>17.56</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>163.88</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>8809</codigoPrincipal>
+<descripcion>VALVULA COMPUERTA  LATON ROSCADA RW-273 DE 1/2" 125 PSI</descripcion>
+<cantidad>12.00</cantidad>
+<precioUnitario>13.10</precioUnitario>
+<descuento>23.58</descuento>
+<precioTotalSinImpuesto>133.62</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RED WH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>133.62</baseImponible>
+<valor>16.03</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50372</codigoPrincipal>
+<descripcion>TAPON POLIPROPILENO MACHO DE 1" MACHO (AGUA CALIENTE)</descripcion>
+<cantidad>12.00</cantidad>
+<precioUnitario>0.70</precioUnitario>
+<descuento>1.09</descuento>
+<precioTotalSinImpuesto>7.31</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7.31</baseImponible>
+<valor>0.88</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50287</codigoPrincipal>
+<descripcion>NEPLO POLIPROPILENO DE 1/2" CON TUERCA (AGUA CALIENTE)</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>0.31</precioUnitario>
+<descuento>0.81</descuento>
+<precioTotalSinImpuesto>5.39</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.39</baseImponible>
+<valor>0.65</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">villacres_freddy@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2455619</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">011636</campoAdicional>
+<campoAdicional nombre="Observaciones">PEDIDO ADJUNTO</campoAdicional>
+</infoAdicional>
+</factura>

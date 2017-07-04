@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268342</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>12/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268342</guiaRemision>
+<razonSocialComprador>COIMPEXA CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1791330463001</identificacionComprador>
+<totalSinImpuestos>437.01</totalSinImpuestos>
+<totalDescuento>48.55</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>437.01</baseImponible>
+<valor>52.44</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>489.45</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>69727</codigoPrincipal>
+<descripcion>TORNILLO DE ANCLAJE WEDGE-BOLT ACERO CARBONO 7244  DE 1/2" x 3"</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>1.40</precioUnitario>
+<descuento>2.80</descuento>
+<precioTotalSinImpuesto>25.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>25.20</baseImponible>
+<valor>3.02</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97901</codigoPrincipal>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7420 SD1 DE 1/2" X 2-3/4"</descripcion>
+<cantidad>90.00</cantidad>
+<precioUnitario>0.85</precioUnitario>
+<descuento>7.65</descuento>
+<precioTotalSinImpuesto>68.85</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>68.85</baseImponible>
+<valor>8.26</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102372</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-20-7971 SDS PLUS 4CT MX4 1/2" X 4" X 6"</descripcion>
+<cantidad>18.00</cantidad>
+<precioUnitario>10.44</precioUnitario>
+<descuento>18.79</descuento>
+<precioTotalSinImpuesto>169.13</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>169.13</baseImponible>
+<valor>20.30</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99071</codigoPrincipal>
+<descripcion>BROCA PARA METAL Y MADERA 48-89-2329 DE COBALTO DE 1/2"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>20.29</precioUnitario>
+<descuento>12.17</descuento>
+<precioTotalSinImpuesto>109.57</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>109.57</baseImponible>
+<valor>13.15</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99749</codigoPrincipal>
+<descripcion>BROCA PARA METAL Y MADERA 48-89-2321 DE COBALTO DE 3/8"</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>14.28</precioUnitario>
+<descuento>7.14</descuento>
+<precioTotalSinImpuesto>64.26</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>64.26</baseImponible>
+<valor>7.71</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">coimpexa@coimpexa.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">255884</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016021</campoAdicional>
+<campoAdicional nombre="Observaciones">CHEQ N: 1475 BNCO INTERNACIONALOS</campoAdicional>
+</infoAdicional>
+</factura>

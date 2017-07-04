@@ -1686,12 +1686,10 @@ FUNCTION ver_documento_a_favor()
 DEFINE comando		CHAR(400)
 DEFINE run_prog		VARCHAR(20)
 
-{-- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE --}
 LET run_prog = '; fglrun '
 IF vg_gui = 0 THEN
 	LET run_prog = '; fglgo '
 END IF
-{--- ---}
 LET comando = 'cd ..', vg_separador, '..', vg_separador, 'COBRANZAS',
 	vg_separador, 'fuentes', vg_separador, run_prog, 'cxcp201 ', vg_base,
 	' ', vg_modulo, ' ', vg_codcia, ' ', vg_codloc, ' ', rm_z21.z21_codcli,
@@ -1708,12 +1706,10 @@ DEFINE i		INTEGER
 DEFINE comando		CHAR(400)
 DEFINE run_prog		VARCHAR(20)
 
-{-- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE --}
 LET run_prog = '; fglrun '
 IF vg_gui = 0 THEN
 	LET run_prog = '; fglgo '
 END IF
-{--- ---}
 LET comando = 'cd ..', vg_separador, '..', vg_separador, 'COBRANZAS',
 	vg_separador, 'fuentes', vg_separador, run_prog, 'cxcp200 ', vg_base,
 	' ', vg_modulo, ' ', vg_codcia, ' ', vg_codloc, ' ', rm_z22.z22_codcli,

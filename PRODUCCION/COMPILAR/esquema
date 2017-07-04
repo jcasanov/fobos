@@ -1,0 +1,10 @@
+echo "Generando nuevo esquema $1 ... "
+if [ "$1" == "aceros" ]; then
+	fglschema aceros
+else
+	if [ "$1" == "diteca" ]; then
+		fglschema diteca
+	else
+		echo "No se puede generar esquema sin especificar la base ... "
+	fi
+fi

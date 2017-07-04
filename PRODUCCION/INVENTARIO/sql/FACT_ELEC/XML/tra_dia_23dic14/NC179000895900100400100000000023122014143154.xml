@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000018761</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>23/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>BAGANT ECUATORIANA CIA.LTDA.</razonSocialComprador>
+<identificacionComprador>1790322491001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000175135</numDocModificado>
+<fechaEmisionDocSustento>02/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>1882.40</totalSinImpuestos>
+<valorModificacion>2108.29</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>1882.40</baseImponible>
+<valor>225.89</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>POR REFACTURACION. MATERIAL YA ENTREGADO</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>101432</codigoInterno>
+<descripcion>LLAVE DE IMPACTO A BATERIA 2453-22 M-12 FUEL DE 1/4"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>301.73</precioUnitario>
+<descuento>45.26</descuento>
+<precioTotalSinImpuesto>256.47</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>256.47</baseImponible>
+<valor>30.78</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>101432</codigoInterno>
+<descripcion>LLAVE DE IMPACTO A BATERIA 2453-22 M-12 FUEL DE 1/4"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>301.73</precioUnitario>
+<descuento>90.52</descuento>
+<precioTotalSinImpuesto>512.94</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>512.94</baseImponible>
+<valor>61.55</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>101529</codigoInterno>
+<descripcion>LLAVE DE IMPACTO A BATERIA 2655-22 M18 FUELO 1/2"  0-2,400 RPM</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>606.28</precioUnitario>
+<descuento>181.88</descuento>
+<precioTotalSinImpuesto>1030.68</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1030.68</baseImponible>
+<valor>123.68</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>103120</codigoInterno>
+<descripcion>PUNTAS 48-32-4402 JUEGO COMPLETO P/ATORNILLADORA</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>32.28</precioUnitario>
+<descuento>14.53</descuento>
+<precioTotalSinImpuesto>82.31</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>82.31</baseImponible>
+<valor>9.88</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">nazateb@bagant.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2420740</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">3242</campoAdicional>
+</infoAdicional>
+</notaCredito>

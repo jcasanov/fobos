@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092153</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092153</guiaRemision>
+<razonSocialComprador>INDUSTRIAL Y AGRICOLA CAÒAS C.A.</razonSocialComprador>
+<identificacionComprador>0990230986001</identificacionComprador>
+<totalSinImpuestos>3896.30</totalSinImpuestos>
+<totalDescuento>687.58</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>3896.30</baseImponible>
+<valor>467.56</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>4363.86</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>93628</codigoPrincipal>
+<descripcion>MOTOR ELEC SUMERG DE 6" 2261129020 6C3F DE 10 HP/230V/60C/1F</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1460.11</precioUnitario>
+<descuento>438.03</descuento>
+<precioTotalSinImpuesto>2482.19</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2482.19</baseImponible>
+<valor>297.86</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>19593</codigoPrincipal>
+<descripcion>CAJA DE CONTROL (2822029330) CB10231 P/ 10HP 230/60/1F</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>831.83</precioUnitario>
+<descuento>249.55</descuento>
+<precioTotalSinImpuesto>1414.11</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1414.11</baseImponible>
+<valor>169.69</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">azamora@ersa.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2441000</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">007121</campoAdicional>
+</infoAdicional>
+</factura>

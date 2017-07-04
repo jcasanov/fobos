@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091949</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>14/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091949</guiaRemision>
+<razonSocialComprador>DEL RIO MIRANDA JUAN CARLOS</razonSocialComprador>
+<identificacionComprador>0907385264001</identificacionComprador>
+<totalSinImpuestos>26.76</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>26.76</baseImponible>
+<valor>3.21</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>29.97</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102617</codigoPrincipal>
+<descripcion>LLAVE AJUSTABLE (INGLESA) OMC-B0108 DE 15"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>11.62</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>11.62</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FIXMAN"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>11.62</baseImponible>
+<valor>1.39</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102618</codigoPrincipal>
+<descripcion>LLAVE AJUSTABLE (INGLESA) OMC-B0109 DE 18"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>15.14</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>15.14</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FIXMAN"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>15.14</baseImponible>
+<valor>1.82</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jcdelriom@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2176090</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016725</campoAdicional>
+</infoAdicional>
+</factura>

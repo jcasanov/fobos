@@ -8,20 +8,19 @@ SCREEN
 Saldo Ant. Ef.: [c015            ]        Saldo Ant. Ch.: [c017            ]
  Saldo Hoy Ef.: [c003            ]         Saldo Hoy Ch.: [c004            ]
     Egreso Ef.: [c006            ]        
-
- [l1|l2     |l3             |l4                     |l5  |l6              |l]
-[a3|c018   |c020           |c021                   |c022|c023            |c]
-[a3|c018   |c020           |c021                   |c022|c023            |c]
-[a3|c018   |c020           |c021                   |c022|c023            |c]
-[a3|c018   |c020           |c021                   |c022|c023            |c]
-[a3|c018   |c020           |c021                   |c022|c023            |c]
-[a3|c018   |c020           |c021                   |c022|c023            |c]
-[a3|c018   |c020           |c021                   |c022|c023            |c]
+                                                          [c050 ] de [c051 ]
+ [l1|l2     |l3          |l4              |l5 |l6        |l7              |l]
+[a3|c018   |c020        |c021            |c22|c023      |c024            |c]
+[a3|c018   |c020        |c021            |c22|c023      |c024            |c]
+[a3|c018   |c020        |c021            |c22|c023      |c024            |c]
+[a3|c018   |c020        |c021            |c22|c023      |c024            |c]
+[a3|c018   |c020        |c021            |c22|c023      |c024            |c]
+[a3|c018   |c020        |c021            |c22|c023      |c024            |c]
+[a3|c018   |c020        |c021            |c22|c023      |c024            |c]
                                                         [c025            ]     
          Caja: [c008] [c102              ]
 Ingresado Por: [c016      ]          Fecha de Ingreso: [c007               ]
 }
-end
 TABLES
 cajt010
 cajt011
@@ -58,8 +57,10 @@ a3   = cajt011.j11_tipo_fuente,  OPTIONS='-nolist', NOENTRY;
 c018 = cajt011.j11_num_fuente,   OPTIONS='-nolist', NOENTRY;
 c020 = cajt011.j11_num_ch_aut,   OPTIONS='-nolist', NOENTRY;
 c021 = cajt011.j11_num_cta_tarj, OPTIONS='-nolist', NOENTRY;
-c022 = cajt011.j11_cod_bco_tarj, OPTIONS='-nolist', NOENTRY;
-c023 = cajt011.j11_valor, FORMAT='#,###,###,##&.##', OPTIONS='-nolist', 
+c22  = cajt011.j11_cod_bco_tarj, OPTIONS='-nolist', NOENTRY;
+c023 = FORMONLY.j10_fecha_pro TYPE DATE, OPTIONS='-nolist',
+	FORMAT='dd-mm-yyyy', NOENTRY;
+c024 = cajt011.j11_valor, FORMAT='#,###,###,##&.##', OPTIONS='-nolist', 
 	NOENTRY;
 c    = FORMONLY.check, WIDGET='CHECK', CONFIG='S N acknowledge', AUTONEXT,
 	DEFAULT='N', OPTIONS='-nolist';
@@ -76,9 +77,14 @@ l2 = FORMONLY.bt_num,     WIDGET='BUTTON', CONFIG='F16';
 l3 = FORMONLY.bt_cheque,  WIDGET='BUTTON', CONFIG='F17';
 l4 = FORMONLY.bt_cta_cte, WIDGET='BUTTON', CONFIG='F18';
 l5 = FORMONLY.bt_banco,   WIDGET='BUTTON', CONFIG='F19';
-l6 = FORMONLY.bt_valor,   WIDGET='BUTTON', CONFIG='F20';
-l  = FORMONLY.bt_check,   WIDGET='BUTTON', CONFIG='F21';
-end
+l6 = FORMONLY.bt_fecha,   WIDGET='BUTTON', CONFIG='F20';
+l7 = FORMONLY.bt_valor,   WIDGET='BUTTON', CONFIG='F21';
+l  = FORMONLY.bt_check,   WIDGET='BUTTON', CONFIG='F22';
 
+c050 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c051 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+END
 INSTRUCTIONS
-SCREEN RECORD ra_egresos[7] (j11_tipo_fuente, j11_num_fuente, j11_num_ch_aut, j11_num_cta_tarj, j11_cod_bco_tarj, j11_valor, check)
+SCREEN RECORD ra_egresos[7] (j11_tipo_fuente, j11_num_fuente, j11_num_ch_aut,
+				j11_num_cta_tarj, j11_cod_bco_tarj,
+				j10_fecha_pro, j11_valor, check)

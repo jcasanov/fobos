@@ -71,22 +71,23 @@ DEFINE r_doc		RECORD
 				sustento	LIKE srit023.s23_sustento_sri,
 				idtipo		CHAR(2),
 				idprov		LIKE cxpt001.p01_num_doc,
-				tc		CHAR(1),
+				tc		LIKE srit019.s19_tipo_comp,
 				estableci	CHAR(3),
 				pemision	CHAR(3),
 				--secuencia	CHAR(10),
 				secuencia	LIKE cxpt020.p20_num_doc,
-				aut		LIKE ordt013.c13_num_aut,
+				--aut		LIKE ordt013.c13_num_aut,
+				aut		VARCHAR(40),
 				fecha_reg	CHAR(10),
 				fecha_emi	CHAR(10),
 				fecha_cad	CHAR(10),
-				base_sin	VARCHAR(15),
-				base_con	VARCHAR(15),
-				base_ice	VARCHAR(15),
-				porc_iva	VARCHAR(1),
-				porc_ice	VARCHAR(5,2),
-				monto_iva	VARCHAR(18),
-				monto_ice	VARCHAR(18),
+				base_sin	DECIMAL(12,2),
+				base_con	DECIMAL(12,2),
+				base_ice	DECIMAL(12,2),
+				porc_iva	DECIMAL(12,2),
+				porc_ice	DECIMAL(5,2),
+				monto_iva	DECIMAL(12,2),
+				monto_ice	DECIMAL(12,2),
 				bienesBase	VARCHAR(40),
 				bienesPorc	VARCHAR(40),
 				bienesValor	VARCHAR(40),
@@ -107,8 +108,10 @@ DEFINE r_adi		RECORD
 DEFINE r_g01		RECORD LIKE gent001.*
 DEFINE r_g02		RECORD LIKE gent002.*
 DEFINE fecha		DATETIME YEAR TO MONTH
-DEFINE registro		CHAR(10100)
-DEFINE query		CHAR(21000)
+DEFINE registro		CHAR(11600)
+DEFINE query		CHAR(21500)
+DEFINE salida		CHAR(1500)
+DEFINE primera		SMALLINT
 
 LET fecha = EXTEND(MDY(mes, 01, anio), YEAR TO MONTH)
 LET query = 'SELECT NVL((SELECT UNIQUE p28_num_ret ',
@@ -144,7 +147,10 @@ LET query = 'SELECT NVL((SELECT UNIQUE p28_num_ret ',
 			'THEN c10_factura[11,', long_dig, '] ',
 			'ELSE c10_factura[9,', long_dig, '] ',
 		'END secuencia, ',
-		'c13_num_aut aut, ',
+		'CASE WHEN c13_fec_aut IS NULL ',
+			'THEN c13_num_aut ',
+			'ELSE TRIM(c13_fec_aut) || TRIM(p01_num_doc) || TRIM(c13_num_aut) ',
+		'END aut, ',
 		'TO_CHAR(c13_fecha_recep, "%d/%m/%Y") fecha_reg, ', 
 		'TO_CHAR(c13_fecha_recep, "%d/%m/%Y") fecha_emi, ',
 		'TO_CHAR(TODAY,"%m/%Y") fecha_cad, ',
@@ -338,6 +344,7 @@ LET query = 'SELECT NVL((SELECT UNIQUE p28_num_ret ',
 	'  AND c10_localidad  = c13_localidad ',
 	'  AND c10_numero_oc  = c13_numero_oc ',
 	--'  and c10_factura    = "001-001-0202903"',
+	--'  and c10_factura    = "001-001-0187740"',
 	'  AND c10_compania   = p20_compania ',
 	'  AND c10_localidad  = p20_localidad ',
 	'  AND c10_numero_oc  = p20_numero_oc ',
@@ -532,6 +539,7 @@ LET query = 'SELECT NVL((SELECT UNIQUE p28_num_ret ',
 		'  AND p20_tipo_doc  = "FA" ',
 		'  AND p20_compania  = ', vg_codcia,
 		--'  and p20_num_doc   = "001-001-0202903"',
+		--'  and p20_num_doc   = "001-001-0187740"',
 		'  AND p20_numero_oc IS NULL ',
 		'  AND EXTEND(p20_fecha_emi, YEAR TO MONTH) = "', fecha, '"',
 	'INTO TEMP t1 '
@@ -539,9 +547,10 @@ PREPARE exec_t1 FROM query
 EXECUTE exec_t1
 SELECT p20_codprov codp, p20_tipo_doc tp, p20_num_doc num_d, COUNT(*) tot_reg
 	FROM t1
-	WHERE sec = 'NR'
+	WHERE sec           = 'NR'
+	  AND p20_dividendo > 1
 	GROUP BY 1, 2, 3
-	HAVING COUNT(*) > 1
+	--HAVING COUNT(*) > 1
 	INTO TEMP t2
 SELECT UNIQUE codp, tp, num_d, sec sec_rt
 	FROM t1, t2
@@ -577,36 +586,40 @@ SELECT g02_numruc, g01_razonsocial, g02_direccion, g02_telefono1, g02_fax1,
 	  AND g02_compania  = g01_compania
 	  AND g02_localidad = vg_codloc
 DISPLAY '<?xml version="1.0" encoding="UTF-8" ?>'
-DISPLAY '<iva xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
-DISPLAY '<numeroRuc>', r_g02.g02_numruc CLIPPED, '</numeroRuc>'
-DISPLAY '<razonSocial>', r_g01.g01_razonsocial CLIPPED, '</razonSocial>'
-DISPLAY '<direccionMatriz>', r_g02.g02_direccion CLIPPED, '</direccionMatriz>'
-DISPLAY '<telefono>', r_g02.g02_telefono1 CLIPPED, '</telefono>'
-DISPLAY '<fax>', r_g02.g02_fax1 CLIPPED, '</fax>'
-DISPLAY '<email>', r_g02.g02_correo CLIPPED, '</email>'
-DISPLAY '<tpIdRepre>C</tpIdRepre>'
-DISPLAY '<idRepre>', r_g01.g01_cedrepl CLIPPED, '</idRepre>'
-DISPLAY '<rucContador>1700401100001</rucContador>'
-DISPLAY '<anio>', anio USING "&&&&", '</anio>'
-DISPLAY '<mes>', mes USING "&&", '</mes>'
+DISPLAY '<iva>'
+DISPLAY '<TipoIDInformante>R</TipoIDInformante>'
+DISPLAY '<IdInformante>', r_g02.g02_numruc CLIPPED, '</IdInformante>'
+DISPLAY '<razonSocial>ACERO COMERCIAL ECUATORIANO SA</razonSocial>'
+DISPLAY '<Anio>', anio USING "&&&&", '</Anio>'
+DISPLAY '<Mes>', mes USING "&&", '</Mes>'
+DISPLAY '<totalVentas>0.00</totalVentas>'
+DISPLAY '<codigoOperativo>IVA</codigoOperativo>'
 PREPARE cons FROM query
 DECLARE q_cons CURSOR FOR cons
-LET registro    = '<compras>'
 LET num_ret_ant = NULL
+LET salida      = NULL
+LET primera     = 1
 FOREACH q_cons INTO r_doc.*, r_adi.*
-	LET registro = registro CLIPPED, '<detalleCompras>'
+	IF primera THEN
+		LET registro = '<compras>', '<detalleCompras>'
+	ELSE
+		LET registro = '<detalleCompras>'
+	END IF
+	{--
 	IF num_args() = 8 THEN
 		LET registro = registro CLIPPED,
 			'<codProv>', r_adi.proveedor USING "<<<<<<&",
 			'</codProv>',
 			'<nomProv>', r_adi.nomprov CLIPPED, '</nomProv>'
 	END IF
+	--}
 	LET registro = registro CLIPPED,
-			'<codSustento>', r_doc.sustento, '</codSustento>',
-			'<devIva>N</devIva>',
+			'<codSustento>', r_doc.sustento USING "&&",
+			'</codSustento>',
 			'<tpIdProv>', r_doc.idtipo CLIPPED, '</tpIdProv>',
 			'<idProv>', r_doc.idprov[1,13] CLIPPED, '</idProv>',
-			'<tipoComprobante>', r_doc.tc, '</tipoComprobante>'
+			'<tipoComprobante>', r_doc.tc USING "&&",
+			'</tipoComprobante>'
 			IF vg_codcia = 1 THEN
 				LET registro = registro CLIPPED,
 				'<fechaRegistro>', r_doc.fecha_reg CLIPPED,
@@ -633,68 +646,67 @@ FOREACH q_cons INTO r_doc.*, r_adi.*
 				'</fechaEmision>'
 			END IF
 			LET registro = registro CLIPPED,
-			'<autorizacion>', r_doc.aut, '</autorizacion>'
-			IF vg_codcia = 1 THEN
+			'<autorizacion>', r_doc.aut, '</autorizacion>',
+			'<baseNoGraIva>0.00</baseNoGraIva>',
+			'<baseImponible>',r_doc.base_sin USING "<<<<<<<<&.&&",
+			'</baseImponible>',
+			'<baseImpGrav>', r_doc.base_con USING "<<<<<<<<&.&&",
+			'</baseImpGrav>',
+			'<montoIce>', r_doc.monto_ice USING "<<<<<<<<&.&&",
+			'</montoIce>',
+			'<montoIva>', r_doc.monto_iva USING "<<<<<<<<&.&&",
+			'</montoIva>',
+			'<valorRetBienes>',
+				r_doc.bienesValor USING "<<<<<<<<&.&&",
+			'</valorRetBienes>'
+			IF r_doc.tc <> '03' THEN
 				LET registro = registro CLIPPED,
-				'<fechaCaducidad>', r_doc.fecha_cad CLIPPED,
-				'</fechaCaducidad>'
+				'<valorRetServicios>',
+					r_doc.serviciosValor
+							USING "<<<<<<<<&.&&",
+				'</valorRetServicios>',
+				'<valRetServ100>0.00</valRetServ100>'
 			ELSE
 				LET registro = registro CLIPPED,
-				'<fechaCaducidad>', mes USING "&&", '/',
-							anio USING "&&&&",
-				'</fechaCaducidad>'
+				'<valorRetServicios>0.00</valorRetServicios>',
+				'<valRetServ100>',
+					r_doc.serviciosValor
+							USING "<<<<<<<<&.&&",
+				'</valRetServ100>'
 			END IF
 			LET registro = registro CLIPPED,
-			'<baseImponible>', r_doc.base_sin CLIPPED, '</baseImponible>',
-			'<baseImpGrav>', r_doc.base_con CLIPPED, '</baseImpGrav>',
-			'<porcentajeIva>', r_doc.porc_iva, '</porcentajeIva>',
-			'<montoIva>', r_doc.monto_iva CLIPPED, '</montoIva>',
-			'<baseImpIce>', r_doc.base_ice CLIPPED, '</baseImpIce>',
-			'<porcentajeIce>', r_doc.porc_ice, '</porcentajeIce>',
-			'<montoIce>', r_doc.monto_ice CLIPPED, '</montoIce>',
-			'<montoIvaBienes>',r_doc.bienesBase CLIPPED,'</montoIvaBienes>',
-			'<porRetBienes>',r_doc.bienesPorc CLIPPED, '</porRetBienes>',
-			'<valorRetBienes>', r_doc.bienesValor CLIPPED,
-			'</valorRetBienes>',
-			'<montoIvaServicios>', r_doc.serviciosBase CLIPPED,
-			'</montoIvaServicios>',
-			'<porRetServicios>', r_doc.serviciosPorc CLIPPED,
-			'</porRetServicios>',
-			'<valorRetServicios>', r_doc.serviciosValor CLIPPED,
-			'</valorRetServicios>',
-			'<air>', at_air(r_adi.*) CLIPPED, '</air>',
--- ESTE PEDACITO SOLO SI HAY RETENCIONES
-			datos_ret(r_adi.*, 'F') CLIPPED,
-			datos_ret(r_adi.*, 'I') CLIPPED,
--- CUANDO NO HAY RETENCION USAR DESDE AQUI
-			'<docModificado>0</docModificado>',
-			'<fechaEmiModificado>00/00/0000</fechaEmiModificado>',
-			'<estabModificado>000</estabModificado>',
-			'<ptoEmiModificado>000</ptoEmiModificado>',
-			'<secModificado>0000000</secModificado>',
-			'<autModificado>0000000000</autModificado>',
-			'<montoTituloOneroso>0.00</montoTituloOneroso>',
-			'<montoTituloGratuito>0.00</montoTituloGratuito>',
-			'</detalleCompras>'
+			'<pagoExterior>',
+				'<pagoLocExt>01</pagoLocExt>',
+				'<paisEfecPago>NA</paisEfecPago>',
+				'<aplicConvDobTrib>NA</aplicConvDobTrib>',
+				'<pagExtSujRetNorLeg>NA</pagExtSujRetNorLeg>',
+ 			'</pagoExterior>',
+			'<formasDePago>',
+				'<formaPago>02</formaPago>',
+			'</formasDePago>'
+	LET salida = at_air(r_adi.*) CLIPPED
+	IF salida IS NOT NULL THEN
+		LET registro = registro CLIPPED,
+			'<air>', salida CLIPPED, '</air>'
+	END IF
+	LET salida = NULL
+	LET salida = datos_ret(r_adi.*, 'F') CLIPPED
+	IF salida IS NOT NULL THEN
+		LET registro = registro CLIPPED, salida CLIPPED
+	END IF
+	LET salida = NULL
+	LET salida = datos_ret(r_adi.*, 'I') CLIPPED
+	IF salida IS NOT NULL THEN
+		LET registro = registro CLIPPED, salida CLIPPED
+	END IF
+	LET salida = NULL
+	LET registro = registro CLIPPED, '</detalleCompras>'
 	DISPLAY registro CLIPPED
-	LET registro = ' '
+	LET primera     = 0
+	LET registro    = NULL
 	LET num_ret_ant = NULL
 END FOREACH
 DISPLAY '</compras>'
-DISPLAY '<ventas>'
-DISPLAY '</ventas>'
-DISPLAY '<importaciones>'
-DISPLAY '</importaciones>'
-DISPLAY '<exportaciones>'
-DISPLAY '</exportaciones>'
-DISPLAY '<recap>'
-DISPLAY '</recap>'
-DISPLAY '<fideicomisos>'
-DISPLAY '</fideicomisos>'
-DISPLAY '<anulados>'
-DISPLAY '</anulados>'
-DISPLAY '<rendFinancieros>'
-DISPLAY '</rendFinancieros>'
 DISPLAY '</iva>'
 DROP TABLE t1
 DROP TABLE t3
@@ -711,14 +723,14 @@ DEFINE numero		LIKE cxpt020.p20_num_doc
 --DEFINE divid		LIKE cxpt020.p20_dividendo
 DEFINE tempo		CHAR(160)
 DEFINE salida		CHAR(1500)
-DEFINE query		CHAR(2000)
+DEFINE query		CHAR(2500)
 
 LET tempo  = NULL
 LET salida = ' '
 LET query  = 'SELECT "<detalleAir><codRetAir>" || TRIM(NVL(p28_codigo_sri, "307"))',
 			' || "</codRetAir> " || "<baseImpAir>" || ',
-			'p28_valor_base || "</baseImpAir> " ',
-			'|| "<porcentajeAir>" || p28_porcentaje || ',
+			'CASE WHEN p28_codigo_sri = "322" THEN ROUND(p28_valor_base * p28_porcentaje, 2) ELSE p28_valor_base END || "</baseImpAir>" ',
+			'|| "<porcentajeAir>" || CASE WHEN p28_codigo_sri = "322" THEN 1.00 ELSE p28_porcentaje END || ',
 			'"</porcentajeAir>" ||  "<valRetAir>" || p28_valor_ret',
 			' || "</valRetAir></detalleAir>" ',
 			' FROM cxpt027, cxpt028, cxpt020, ordt002 ',
@@ -746,6 +758,9 @@ DECLARE q_cons_air CURSOR FOR cons_air
 FOREACH q_cons_air INTO tempo
 	LET salida = salida CLIPPED, tempo CLIPPED
 END FOREACH
+IF salida = ' ' THEN
+	LET salida = NULL
+END IF
 RETURN salida
 
 END FUNCTION

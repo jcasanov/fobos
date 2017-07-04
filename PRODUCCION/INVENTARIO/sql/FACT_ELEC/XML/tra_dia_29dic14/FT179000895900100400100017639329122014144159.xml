@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176393</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>29/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176393</guiaRemision>
+<razonSocialComprador>CALVACHE BARROS JOSE VICENTE</razonSocialComprador>
+<identificacionComprador>1705689451001</identificacionComprador>
+<totalSinImpuestos>56.25</totalSinImpuestos>
+<totalDescuento>6.25</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>56.25</baseImponible>
+<valor>6.75</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>63.00</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>15668</codigoPrincipal>
+<descripcion>DADOS PARA TERRAJA MANUAL P/ 12-R DE 1" NPT (37835)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>62.50</precioUnitario>
+<descuento>6.25</descuento>
+<precioTotalSinImpuesto>56.25</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>56.25</baseImponible>
+<valor>6.75</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jcalvachemainsa@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2402541</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">028616</campoAdicional>
+</infoAdicional>
+</factura>

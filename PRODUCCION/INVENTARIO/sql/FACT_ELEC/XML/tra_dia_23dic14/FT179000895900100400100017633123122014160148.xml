@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176331</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176331</guiaRemision>
+<razonSocialComprador>M.G.MANTENIMIENTO</razonSocialComprador>
+<identificacionComprador>1705138533001</identificacionComprador>
+<totalSinImpuestos>221.79</totalSinImpuestos>
+<totalDescuento>19.29</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>221.79</baseImponible>
+<valor>26.61</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>248.40</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>101368</codigoPrincipal>
+<descripcion>CALENTADOR DE AGUA 220 V AISLADO 20 GL. 220V. C/TERMOMETRO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>230.10</precioUnitario>
+<descuento>18.41</descuento>
+<precioTotalSinImpuesto>211.69</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>211.69</baseImponible>
+<valor>25.40</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3648</codigoPrincipal>
+<descripcion>REDUCCION GALV. CLASE 150 DE 3/4" x 1/2"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>1.48</precioUnitario>
+<descuento>0.36</descuento>
+<precioTotalSinImpuesto>4.08</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.08</baseImponible>
+<valor>0.49</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>10154</codigoPrincipal>
+<descripcion>SELLADOR 2-C-GS-2-11  DE  11 OZ. NEGRO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>5.76</precioUnitario>
+<descuento>0.46</descuento>
+<precioTotalSinImpuesto>5.30</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PERMAT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.30</baseImponible>
+<valor>0.64</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21179</codigoPrincipal>
+<descripcion>TAIPE P/INSTALACIONES GRANDE(10 YD.)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>0.78</precioUnitario>
+<descuento>0.06</descuento>
+<precioTotalSinImpuesto>0.72</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.72</baseImponible>
+<valor>0.09</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">mario.guerrero@mgautomotriz.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2595745</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">020198</campoAdicional>
+</infoAdicional>
+</factura>

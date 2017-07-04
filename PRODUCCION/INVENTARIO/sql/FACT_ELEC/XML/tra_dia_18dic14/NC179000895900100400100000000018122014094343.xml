@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000018723</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>SINCHIGUANO QUIMBITA SEGUNDO EDISON</razonSocialComprador>
+<identificacionComprador>1710104645001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000175903</numDocModificado>
+<fechaEmisionDocSustento>16/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>6.24</totalSinImpuestos>
+<valorModificacion>6.99</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>6.24</baseImponible>
+<valor>0.75</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 267509 SEGUNDO SINCHIGUANO W.LUDENIA</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>1668</codigoInterno>
+<descripcion>BUSHING GALV. CLASE 150 DE 2-1/2" x 1-1/4"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>6.24</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>6.24</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.24</baseImponible>
+<valor>0.75</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2828177</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">39713</campoAdicional>
+</infoAdicional>
+</notaCredito>

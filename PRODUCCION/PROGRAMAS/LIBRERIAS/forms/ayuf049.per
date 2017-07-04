@@ -1,0 +1,30 @@
+DATABASE aceros
+
+SCREEN
+{
+ MODELOS DE VEHICULOS 
+---------------------------
+ Modelo           Línea
+---------------------------
+[c01           ] [c002 ] 
+[c01           ] [c002 ]
+[c01           ] [c002 ]
+[c01           ] [c002 ]
+[c01           ] [c002 ]
+[c01           ] [c002 ]
+[c01           ] [c002 ] 
+[c01           ] [c002 ] 
+[c01           ] [c002 ] 
+[c01           ] [c002 ] 
+}
+
+TABLES
+talt004
+
+ATTRIBUTES
+c01  = t04_modelo;
+c002 = t04_linea;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_tipveh[10](t04_modelo, t04_linea)

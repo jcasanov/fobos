@@ -1,0 +1,58 @@
+DATABASE aceros
+SCREEN 
+{
+
+       Empleado: [c003|c100                                        ]
+         Depto.: [c004|c101                                        ]
+      Tipo Pago: [b|c102           ]
+
+          Banco: [c016|c103                                        ]
+   Cta. Empresa: [c017           ]  Cta. Empleado: [c018           ]
+
+   Total del Periodo: [c011            ]    Cargas: [c012          ]  
+
+   [lbl1    |lbl2                         |lbl3    |lbl4            ]
+  [c025  ] [c110                         |c026    |c028            ]
+  [c025  ] [c110                         |c026    |c028            ]
+  [c025  ] [c110                         |c026    |c028            ]
+  [c025  ] [c110                         |c026    |c028            ]
+                	    (-) Total Descuentos: [c111            ]
+  			 	                  ------------------ 		
+                                 Valor A Recibir: [c014            ]
+}
+TABLES
+rolt042
+rolt049
+ATTRIBUTES
+c003 = rolt042.n42_cod_trab, NOENTRY, REVERSE;
+c004 = rolt042.n42_cod_depto, NOENTRY, REVERSE;
+c011 = rolt042.n42_val_trabaj, NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+c012 = rolt042.n42_val_cargas, NOENTRY, REVERSE, FORMAT='###,###,##&.##';
+c014 = FORMONLY.subtotal, NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+b    = rolt042.n42_tipo_pago, NOENTRY, REVERSE;
+
+c016 = rolt042.n42_bco_empresa, NOENTRY, REVERSE;
+c017 = rolt042.n42_cta_empresa, NOENTRY, REVERSE;
+c018 = rolt042.n42_cta_trabaj, NOENTRY, REVERSE;
+
+c025 = rolt049.n49_cod_rubro, OPTIONS='-nolist', WIDGET='FIELD_BMP', 
+                              CONFIG='lista.bmp F2';
+c110 = FORMONLY.n_rubro,      OPTIONS='-nolist', NOENTRY;
+c026 = rolt049.n49_num_prest, OPTIONS='-nolist', NOENTRY;
+c028 = rolt049.n49_valor,     OPTIONS='-nolist', FORMAT="#,###,###,##&.##",
+			      INCLUDE=(0 TO 9999999999.99);
+
+c100 = FORMONLY.n_trab,      NOENTRY, UPSHIFT;
+c101 = FORMONLY.n_depto,     NOENTRY, UPSHIFT;
+c102 = FORMONLY.n_tipo_pago, NOENTRY, UPSHIFT;
+c103 = FORMONLY.n_banco,     NOENTRY, UPSHIFT;
+c111 = FORMONLY.tot_valor,   NOENTRY, FORMAT="#,###,###,##&.##";
+
+lbl1 = FORMONLY.bt_cod_rubro, WIDGET='BUTTON', CONFIG='F15';
+lbl2 = FORMONLY.bt_nom_rubro, WIDGET='BUTTON', CONFIG='F16';
+lbl3 = FORMONLY.bt_num_prest, WIDGET='BUTTON', CONFIG='F18';  
+lbl4 = FORMONLY.bt_valor,     WIDGET='BUTTON', CONFIG='F17';
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD ra_desc[4] (n49_cod_rubro, n_rubro, n49_num_prest, n49_valor)

@@ -1,0 +1,31 @@
+DATABASE aceros
+
+SCREEN
+{
+ SUBTIPOS DE TRANSACCIONES 
+----------------------------------------
+ Código   Descripción 		
+----------------------------------------
+[c01] [c02] [c002                    ] 
+[c01] [c02] [c002                    ]
+[c01] [c02] [c002                    ]
+[c01] [c02] [c002                    ]
+[c01] [c02] [c002                    ]
+[c01] [c02] [c002                    ]
+[c01] [c02] [c002                    ] 
+[c01] [c02] [c002                    ] 
+[c01] [c02] [c002                    ] 
+[c01] [c02] [c002                    ] 
+}
+
+TABLES
+gent022
+
+ATTRIBUTES
+c01  = g22_cod_tran;
+c02  = g22_cod_subtipo;
+c002 = g22_nombre;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_subtran[10](g22_cod_tran, g22_cod_subtipo, g22_nombre)

@@ -1,37 +1,27 @@
 DATABASE aceros
 SCREEN
 {
-                  RETENCIONES PROVEEDOR
- --------------------------------------------------------
+            RETENCIONES
+ -------------------------------------
   Proveedor: [c000       ]
- [c001                                                  ]
-                                           [c10] de [c11]
-  [c016    |c|c017                   |c018    |c019      ]
- [c002  ] [a|c003                   |c004  ] [c005      ]
- [c002  ] [a|c003                   |c004  ] [c005      ]
- [c002  ] [a|c003                   |c004  ] [c005      ]
- [c002  ] [a|c003                   |c004  ] [c005      ]
- [c002  ] [a|c003                   |c004  ] [c005      ]
- [c002  ] [a|c003                   |c004  ] [c005      ]
+ [c001                               ]
 
- [c020                                                  ]
- [c020                                                  ]
- [c020                                                  ]
+  [c016   ][c|c017                   ]
+ [c002  ] [a|c003                   ]
+ [c002  ] [a|c003                   ]
+ [c002  ] [a|c003                   ]
+ [c002  ] [a|c003                   ]
+ [c002  ] [a|c003                   ]
 
 }
 TABLES
 cxpt005
-ordt003
 ATTRIBUTES
 c000 = cxpt005.p05_codprov, NOENTRY, REVERSE, UPSHIFT;
 c001 = FORMONLY.tit_proveedor, NOENTRY, REVERSE, UPSHIFT;
-
 c016 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
 c    = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
 c017 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
-c018 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
-c019 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
-
 c002 = cxpt005.p05_porcentaje, AUTONEXT, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
 	INCLUDE = (0 TO 100), FORMAT = '##&.##', OPTIONS = '-nolist',
@@ -40,17 +30,6 @@ a    = cxpt005.p05_tipo_ret, AUTONEXT, UPSHIFT,
 	INCLUDE = ('F','I'), OPTIONS = '-nolist',
 	COMMENTS = 'F Fuente o I IVA';
 c003 = FORMONLY.tit_tipo_ret, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
-c004 = cxpt005.p05_codigo_sri, AUTONEXT, UPSHIFT, OPTIONS = '-nolist',
-	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c005 = cxpt005.p05_fecha_ini_porc, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
-	OPTIONS = '-nolist';
-
-c10  = FORMONLY.num_rows, NOENTRY, UPSHIFT, REVERSE;
-c11  = FORMONLY.max_rows, NOENTRY, UPSHIFT, REVERSE;
-
-c020 = ordt003.c03_concepto_ret, NOENTRY, REVERSE, UPSHIFT, WORDWRAP COMPRESS;
-END
+end
 INSTRUCTIONS
-DELIMITERS '||'
-SCREEN RECORD rm_ret[6] (p05_porcentaje, p05_tipo_ret, tit_tipo_ret,
-				p05_codigo_sri, p05_fecha_ini_porc)
+SCREEN RECORD rm_ret[5] (p05_porcentaje,p05_tipo_ret,tit_tipo_ret)

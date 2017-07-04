@@ -1,0 +1,41 @@
+DATABASE aceros
+SCREEN
+{
+ COBRADORES/RECAUDADORES
+                                    [c000] de [c001]
+ [c010  |c011                          |c012  |c|d|e] 
+[c020  |c021                          |c022  |f|g|h] 
+[c020  |c021                          |c022  |f|g|h] 
+[c020  |c021                          |c022  |f|g|h] 
+[c020  |c021                          |c022  |f|g|h] 
+[c020  |c021                          |c022  |f|g|h] 
+[c020  |c021                          |c022  |f|g|h] 
+[c020  |c021                          |c022  |f|g|h] 
+[c020  |c021                          |c022  |f|g|h] 
+[c020  |c021                          |c022  |f|g|h] 
+[c020  |c021                          |c022  |f|g|h] 
+}
+TABLES
+cxct005
+ATTRIBUTES
+c000 = FORMONLY.num_rows, NOENTRY, UPSHIFT, REVERSE;
+c001 = FORMONLY.max_rows, NOENTRY, UPSHIFT, REVERSE;
+
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c    = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+d    = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+e    = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+c020 = cxct005.z05_codigo, NOENTRY, UPSHIFT;
+c021 = cxct005.z05_nombres, NOENTRY, UPSHIFT;
+c022 = cxct005.z05_codrol, NOENTRY, UPSHIFT;
+f    = cxct005.z05_tipo, NOENTRY, UPSHIFT;
+g    = cxct005.z05_comision, NOENTRY, UPSHIFT;
+h    = cxct005.z05_estado, NOENTRY, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_cobra[10] (z05_codigo, z05_nombres, z05_codrol, z05_tipo,
+				z05_comision, z05_estado)

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000002690</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>09/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000002690</guiaRemision>
+<razonSocialComprador>CONSERVAS ISABEL ECUATORIANA S.A.</razonSocialComprador>
+<identificacionComprador>1390050352001</identificacionComprador>
+<totalSinImpuestos>416.81</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>416.81</baseImponible>
+<valor>50.02</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>466.83</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>ZZ</codigoPrincipal>
+<descripcion>CINTA AUTOFUNDENTE Y AISLANTE 3M</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>16.01</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>16.01</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="100M"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>16.01</baseImponible>
+<valor>1.92</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>ZZ</codigoPrincipal>
+<descripcion>ELECTRODO TIPO PENDULO SIEMENS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>28.31</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>28.31</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="100M"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>28.31</baseImponible>
+<valor>3.40</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>ZZ</codigoPrincipal>
+<descripcion>MANO DE OBRA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>350.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>350.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="100M"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>350.00</baseImponible>
+<valor>42.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>ZZ</codigoPrincipal>
+<descripcion>NEPLO 2"X4"ACERO INOXIDABLE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>22.49</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>22.49</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="100M"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>22.49</baseImponible>
+<valor>2.70</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">npesantes@isabel.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">052381461</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">006270</campoAdicional>
+</infoAdicional>
+</factura>

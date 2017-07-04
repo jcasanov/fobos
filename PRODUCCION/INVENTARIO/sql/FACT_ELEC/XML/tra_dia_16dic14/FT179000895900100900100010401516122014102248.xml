@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104015</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/12/2014</fechaEmision>
+<dirEstablecimiento>VIA SAMBORONDON KM 3.3 AV PRINCIPAL S/N</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104015</guiaRemision>
+<razonSocialComprador>CONSTRUCTORA CONALBA S.A.</razonSocialComprador>
+<identificacionComprador>0991088415001</identificacionComprador>
+<totalSinImpuestos>9979.80</totalSinImpuestos>
+<totalDescuento>666.85</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>9312.95</baseImponible>
+<valor>1117.55</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>10430.50</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102962</codigoPrincipal>
+<descripcion>BOMBA CENTRIFUGA STANDAR S/ MOTOR NK50-200/219 Y1F2AE-SBAQE  (96604219)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1837.86</precioUnitario>
+<descuento>202.16</descuento>
+<precioTotalSinImpuesto>1635.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="GRUNDFOS" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1635.70</baseImponible>
+<valor>196.28</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101551</codigoPrincipal>
+<descripcion>MOTOR ELECTRICO 284TS FF30E1AS DS-3FFP DE 30 HP 3600RPM 208/230/460/3F.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2494.18</precioUnitario>
+<descuento>274.36</descuento>
+<precioTotalSinImpuesto>2219.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NIDEC MOTOR" valor="NIDEC"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2219.82</baseImponible>
+<valor>266.38</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101456</codigoPrincipal>
+<descripcion>BOMBA CENTRIF MULTIETAPA C-MOTOR CR3-11 2HP ROSCADA 220-277D/380-480Y/3/60 (98493506)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1730.26</precioUnitario>
+<descuento>190.33</descuento>
+<precioTotalSinImpuesto>1539.93</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="GRUNDFOS" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1539.93</baseImponible>
+<valor>184.79</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>71532</codigoPrincipal>
+<descripcion>EQUIPO CONTRA INCENDIOS BASE Y ELEMENTOS DE SUCCION Y DESCARGA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2355.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2355.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2355.00</baseImponible>
+<valor>282.60</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>71105</codigoPrincipal>
+<descripcion>TABLERO ELECTRICO SCI DE 40HP/220V.3F. ARRANQUE Y-D JOCKEY DE 5HP.3F MAN. AUT.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1562.50</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1562.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1562.50</baseImponible>
+<valor>187.50</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2833800</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">005447</campoAdicional>
+</infoAdicional>
+</factura>

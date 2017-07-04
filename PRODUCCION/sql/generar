@@ -1,0 +1,9 @@
+export loc=$1
+export anio_ini=$2
+export anio_fin=$3
+export mes_ini=$4
+export mes_fin=$5
+rm -rf VENTAS$anio_ini
+mkdir VENTAS$anio_ini
+fglgo gen $loc $anio_ini $anio_fin $mes_ini $mes_fin
+echo "Proceso Terminado Ok."

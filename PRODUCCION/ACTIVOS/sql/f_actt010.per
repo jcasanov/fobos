@@ -1,0 +1,73 @@
+database acero_gm
+screen size 24 by 80
+{
+a10_compania       [f000       ]
+a10_codigo_bien    [f001       ]
+a10_estado         [a]
+a10_descripcion    [f002                                    ]
+a10_grupo_act      [f003  ]
+a10_tipo_act       [f004  ]
+a10_anos_util      [f005  ]
+a10_porc_deprec    [f006  ]
+a10_modelo         [f007           ]
+a10_serie          [f008                     ]
+a10_locali_ori     [f009  ]
+a10_numero_oc      [f010       ]
+a10_localidad      [f011  ]
+a10_cod_depto      [f012  ]
+a10_codprov        [f013       ]
+a10_fecha_comp     [f014      ]
+a10_moneda         [a0]
+a10_paridad        [f015              ]
+a10_valor          [f016          ]
+a10_valor_mb       [f017          ]
+}
+screen
+{
+a10_responsable    [f018  ]
+a10_fecha_baja     [f019      ]
+a10_val_dep_mb     [f020         ]
+a10_val_dep_ma     [f021         ]
+a10_tot_dep_mb     [f022          ]
+a10_tot_dep_ma     [f023          ]
+a10_tot_reexpr     [f024          ]
+a10_tot_dep_ree    [f025          ]
+a10_usuario        [f026      ]
+a10_fecing         [f027               ]
+}
+end
+tables
+actt010
+attributes
+f000 = actt010.a10_compania;
+f001 = actt010.a10_codigo_bien;
+a = actt010.a10_estado;
+f002 = actt010.a10_descripcion;
+f003 = actt010.a10_grupo_act;
+f004 = actt010.a10_tipo_act;
+f005 = actt010.a10_anos_util;
+f006 = actt010.a10_porc_deprec;
+f007 = actt010.a10_modelo;
+f008 = actt010.a10_serie;
+f009 = actt010.a10_locali_ori;
+f010 = actt010.a10_numero_oc;
+f011 = actt010.a10_localidad;
+f012 = actt010.a10_cod_depto;
+f013 = actt010.a10_codprov;
+f014 = actt010.a10_fecha_comp;
+a0 = actt010.a10_moneda;
+f015 = actt010.a10_paridad;
+f016 = actt010.a10_valor;
+f017 = actt010.a10_valor_mb;
+
+f018 = actt010.a10_responsable;
+f019 = actt010.a10_fecha_baja;
+f020 = actt010.a10_val_dep_mb;
+f021 = actt010.a10_val_dep_ma;
+f022 = actt010.a10_tot_dep_mb;
+f023 = actt010.a10_tot_dep_ma;
+f024 = actt010.a10_tot_reexpr;
+f025 = actt010.a10_tot_dep_ree;
+f026 = actt010.a10_usuario;
+f027 = actt010.a10_fecing;
+end

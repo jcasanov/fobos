@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268997</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>26/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268997</guiaRemision>
+<razonSocialComprador>PRODUCTOS GUADALUPE PROGUADALUPE CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1792033764001</identificacionComprador>
+<totalSinImpuestos>2493.97</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>2493.97</baseImponible>
+<valor>299.28</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>2793.25</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>90325</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 4" SS50-50 P/ MOTOR DE 5 HP 50GPM</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1098.90</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1098.90</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1098.90</baseImponible>
+<valor>131.87</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>95099</codigoPrincipal>
+<descripcion>MOTOR ELEC SUMERG DE 4" (2243038602) DE 5 HP 230/60/1F</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>931.32</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>931.32</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>931.32</baseImponible>
+<valor>111.76</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>20161</codigoPrincipal>
+<descripcion>ELECTRODO ELECTRODO TIPO PENDULO</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>8.85</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>26.55</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>26.55</baseImponible>
+<valor>3.19</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>19587</codigoPrincipal>
+<descripcion>CAJA DE CONTROL (2821138110) CJ-5021 P/ 5HP 230/60/1F</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>339.91</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>339.91</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>339.91</baseImponible>
+<valor>40.79</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3096</codigoPrincipal>
+<descripcion>NEPLO FLEX DE 2"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>3.02</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>9.06</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.06</baseImponible>
+<valor>1.09</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50390</codigoPrincipal>
+<descripcion>TEE POLIPROPILENO DE 2" (AGUA CALIENTE)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>5.23</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>5.23</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.23</baseImponible>
+<valor>0.63</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>19963</codigoPrincipal>
+<descripcion>CONTROL DE NIVEL 3UG09 SENSOR DE NIVEL P/ SONDAS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>83.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>83.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>83.00</baseImponible>
+<valor>9.96</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">productosguadalupe@msn.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2300116</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">056043</campoAdicional>
+<campoAdicional nombre="Observaciones">T CREDITO</campoAdicional>
+</infoAdicional>
+</factura>

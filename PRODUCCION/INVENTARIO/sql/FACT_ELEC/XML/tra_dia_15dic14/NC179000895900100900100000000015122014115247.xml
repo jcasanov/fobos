@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>         </secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>LOMAS DE URDESA, CALLE AVILES 202</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>SOLUCIONES DE INGENIERIA CIVIL EFICACES S.A. SICE</razonSocialComprador>
+<identificacionComprador>0992633026001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000103239</numDocModificado>
+<fechaEmisionDocSustento>13/11/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>197.94</totalSinImpuestos>
+<valorModificacion>221.69</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>197.94</baseImponible>
+<valor>23.75</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>POR REFACTURACION. MATERIAL YA ENTREGADO</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>71811</codigoInterno>
+<descripcion>JABONERA SC0028383061 CW DISPENSADOR DE JABON DE 500 ml.</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>19.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>57.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="BRIGGS" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>57.00</baseImponible>
+<valor>6.84</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>100758</codigoInterno>
+<descripcion>ACCESORIO ADA SC002659306 BARRA DE APOYO MEDIANA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>30.18</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>30.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="BRIGGS" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>30.18</baseImponible>
+<valor>3.62</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>100761</codigoInterno>
+<descripcion>ACCESORIO ADA SC002694306 BARRA DE APOYO ABATIBLE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>110.76</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>110.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="BRIGGS" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>110.76</baseImponible>
+<valor>13.29</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+<campoAdicional nombre="telefono-movil">0425037322</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">15051</campoAdicional>
+</infoAdicional>
+</notaCredito>

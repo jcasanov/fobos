@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268757</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268757</guiaRemision>
+<razonSocialComprador>PERFILPLAST DEL ECUADOR S.A.</razonSocialComprador>
+<identificacionComprador>1790275388001</identificacionComprador>
+<totalSinImpuestos>44.49</totalSinImpuestos>
+<totalDescuento>3.87</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>44.49</baseImponible>
+<valor>5.34</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>49.83</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>3282</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 2-1/2" x 8"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>12.09</precioUnitario>
+<descuento>3.87</descuento>
+<precioTotalSinImpuesto>44.49</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>44.49</baseImponible>
+<valor>5.34</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">contacto@perfilplastdelecuador.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2472839</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">030754</campoAdicional>
+</infoAdicional>
+</factura>

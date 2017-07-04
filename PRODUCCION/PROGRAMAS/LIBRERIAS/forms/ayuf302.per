@@ -1,0 +1,41 @@
+DATABASE aceros
+SCREEN
+{
+                    DETALLE DE PAGO EN CAJA
+
+           Cliente: [c000                                     ]
+ Documento Emitido: [c1|c002           ]
+
+ [c010|c011              |c012              |c13|c014            ]
+[c020|c021              |c022              |c23|c024            ]
+[c020|c021              |c022              |c23|c024            ]
+[c020|c021              |c022              |c23|c024            ]
+[c020|c021              |c022              |c23|c024            ]
+                     Total en[c030          ]: [c031            ]
+
+}
+TABLES 
+cxct001
+cajt011
+ATTRIBUTES
+c000 = z01_nomcli, REVERSE;
+c1   = formonly.tip_doc, REVERSE;
+c002 = formonly.num_doc, REVERSE;
+c010 = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c13  = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c020 = j11_codigo_pago;
+c021 = formonly.nombre_bt;
+c022 = j11_num_ch_aut;
+c23  = j11_moneda;
+c024 = j11_valor, FORMAT = '-,---,---,--&.##';
+c030 = formonly.tit_mon;
+c031 = formonly.tot_pago TYPE DECIMAL(12,2), FORMAT = '#,###,###,##&.##',
+       REVERSE;
+INSTRUCTIONS
+SCREEN RECORD r_pagc[4]  (j11_codigo_pago, formonly.nombre_bt, j11_num_ch_aut,
+			  j11_moneda, j11_valor)
+KEYS
+'F5'='Doc. Cancelados'

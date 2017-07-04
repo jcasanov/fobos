@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268575</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268575</guiaRemision>
+<razonSocialComprador>RILER</razonSocialComprador>
+<identificacionComprador>1790947432001</identificacionComprador>
+<totalSinImpuestos>62.32</totalSinImpuestos>
+<totalDescuento>6.92</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>62.32</baseImponible>
+<valor>7.48</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>69.80</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>98926</codigoPrincipal>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7430SD1 DE 5/8" X 3-1/2"</descripcion>
+<cantidad>8.00</cantidad>
+<precioUnitario>1.58</precioUnitario>
+<descuento>1.26</descuento>
+<precioTotalSinImpuesto>11.38</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>11.38</baseImponible>
+<valor>1.37</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70308</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 08809 SDS-MAX DE 5/8" x 13"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>56.60</precioUnitario>
+<descuento>5.66</descuento>
+<precioTotalSinImpuesto>50.94</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>50.94</baseImponible>
+<valor>6.11</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">riler@andinanet.net</campoAdicional>
+<campoAdicional nombre="telefono-movil">2813410</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">003659</campoAdicional>
+<campoAdicional nombre="Observaciones">CHEQUE N.-909194 PICHINCHA</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131604</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/12/2014</fechaEmision>
+<dirEstablecimiento>FELIPE CARCELEN 129 Y A. SALAS</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131604</guiaRemision>
+<razonSocialComprador>OLMEDO GRANDA EDGAR GUSTAVO</razonSocialComprador>
+<identificacionComprador>1801406602   </identificacionComprador>
+<totalSinImpuestos>28.91</totalSinImpuestos>
+<totalDescuento>2.31</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>26.60</baseImponible>
+<valor>3.19</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>29.79</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>40744</codigoPrincipal>
+<descripcion>COQUILLA LANA VIDRIO 3/4" x 1" x 0.90 m.</descripcion>
+<cantidad>7.00</cantidad>
+<precioUnitario>4.13</precioUnitario>
+<descuento>2.31</descuento>
+<precioTotalSinImpuesto>26.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ANDIFIBRAS" valor="ANDIFI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>26.60</baseImponible>
+<valor>3.19</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">959201</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">008827</campoAdicional>
+</infoAdicional>
+</factura>

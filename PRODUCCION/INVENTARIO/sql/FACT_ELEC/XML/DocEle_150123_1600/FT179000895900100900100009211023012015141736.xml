@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092110</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092110</guiaRemision>
+<razonSocialComprador>CHICA CELI TONNY ALIX</razonSocialComprador>
+<identificacionComprador>0701214850001</identificacionComprador>
+<totalSinImpuestos>1177.96</totalSinImpuestos>
+<totalDescuento>241.27</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1177.96</baseImponible>
+<valor>141.36</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1319.32</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>101559</codigoPrincipal>
+<descripcion>VALVULA DE GUILLOTINA HIERRO FUNDIDO EX DN 200 DE 8" CLASE 150</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1419.23</precioUnitario>
+<descuento>241.27</descuento>
+<precioTotalSinImpuesto>1177.96</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ORBINO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1177.96</baseImponible>
+<valor>141.36</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">tonnyalix@yahoo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0984128930</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016327</campoAdicional>
+</infoAdicional>
+</factura>

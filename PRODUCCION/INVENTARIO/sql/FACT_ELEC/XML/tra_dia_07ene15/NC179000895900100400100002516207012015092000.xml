@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025162</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>TERRAFERTIL S.A.</razonSocialComprador>
+<identificacionComprador>1791993020001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000174971</numDocModificado>
+<fechaEmisionDocSustento>27/11/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>217.82</totalSinImpuestos>
+<valorModificacion>243.96</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>217.82</baseImponible>
+<valor>26.14</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEVOLUCION TALLER</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>08084</codigoInterno>
+<descripcion>TOTAL OTROS REPUESTOS, MATERIALES Y MANO DE OBRA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>217.82</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>217.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="DS-8"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>217.82</baseImponible>
+<valor>26.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">tesoreria@terra-fertil.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2675365</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">37560</campoAdicional>
+</infoAdicional>
+</notaCredito>

@@ -245,6 +245,17 @@ IF NOT done THEN
 	RETURN
 END IF
 
+LET done = actualiza_zona_cobr_z02()
+IF NOT done THEN
+	ROLLBACK WORK
+	IF vm_num_rows > 0 THEN
+		CALL lee_muestra_registro(vm_rows[vm_row_current])
+	ELSE
+		CLEAR FORM
+	END IF
+	RETURN
+END IF
+
 COMMIT WORK
 
 LET vm_num_rows = vm_num_rows + 1
@@ -306,6 +317,13 @@ IF NOT done THEN
 	RETURN
 END IF
 
+LET done = actualiza_zona_cobr_z02()
+IF NOT done THEN
+	ROLLBACK WORK
+	CALL lee_muestra_registro(vm_rows[vm_row_current])
+	RETURN
+END IF
+
 COMMIT WORK
 CLOSE q_upd
 FREE  q_upd
@@ -324,7 +342,7 @@ DEFINE r_g20		RECORD LIKE gent020.*
 DEFINE r_g03		RECORD LIKE gent003.*
 DEFINE r_z01		RECORD LIKE cxct001.*
 DEFINE r_z02		RECORD LIKE cxct002.*
-DEFINE r_z05		RECORD LIKE cxct005.*
+DEFINE r_z06		RECORD LIKE cxct006.*
 DEFINE r_mon		RECORD LIKE gent013.*
 DEFINE r_g12		RECORD LIKE gent012.*
 DEFINE dummy		LIKE gent011.g11_nombre
@@ -332,14 +350,14 @@ DEFINE dummy		LIKE gent011.g11_nombre
 LET INT_FLAG = 0
 INPUT BY NAME rm_z24.z24_codcli,     rm_z24.z24_areaneg,   rm_z24.z24_linea,
               rm_z24.z24_estado,     rm_z24.z24_moneda,    rm_z24.z24_subtipo,  
-	      rm_z24.z24_cobrador,   rm_z24.z24_referencia,rm_z24.z24_total_cap,
+	      rm_z24.z24_zona_cobro,   rm_z24.z24_referencia,rm_z24.z24_total_cap,
 	      rm_z24.z24_usuario,    rm_z24.z24_fecing 
 	WITHOUT DEFAULTS
 	ON KEY (INTERRUPT)
 		IF NOT FIELD_TOUCHED(rm_z24.z24_codcli, rm_z24.z24_areaneg,
 				     rm_z24.z24_linea, rm_z24.z24_estado,
 				     rm_z24.z24_moneda, rm_z24.z24_subtipo,
-				     rm_z24.z24_cobrador, rm_z24.z24_referencia,
+				     rm_z24.z24_zona_cobro, rm_z24.z24_referencia,
 				     rm_z24.z24_total_cap, rm_z24.z24_usuario,
 				     rm_z24.z24_fecing)
 		THEN
@@ -384,6 +402,15 @@ INPUT BY NAME rm_z24.z24_codcli,     rm_z24.z24_areaneg,   rm_z24.z24_linea,
                   		LET rm_z24.z24_codcli = r_z01.z01_codcli
                  		DISPLAY BY NAME rm_z24.z24_codcli  
 				DISPLAY r_z01.z01_nomcli TO n_cliente
+				CALL fl_lee_cliente_localidad(vg_codcia,
+							vg_codloc,
+							rm_z24.z24_codcli)
+			 		RETURNING r_z02.*
+				LET rm_z24.z24_zona_cobro = r_z02.z02_zona_cobro
+				CALL fl_lee_zona_cobro(rm_z24.z24_zona_cobro)
+					RETURNING r_z06.*
+				DISPLAY BY NAME rm_z24.z24_zona_cobro
+				DISPLAY r_z06.z06_nombre TO n_zoncob	
 			END IF
 		END IF
 		IF INFIELD(z24_moneda) THEN
@@ -406,20 +433,37 @@ INPUT BY NAME rm_z24.z24_codcli,     rm_z24.z24_areaneg,   rm_z24.z24_linea,
 				DISPLAY r_g12.g12_nombre TO n_motivo
 			END IF
 		END IF
-		IF INFIELD(z24_cobrador) THEN
-			CALL fl_ayuda_cobradores(vg_codcia, 'T', 'T', 'A') 
-					RETURNING r_z05.z05_codigo,
-						  r_z05.z05_nombres
-			IF r_z05.z05_codigo IS NOT NULL THEN
-				LET rm_z24.z24_cobrador = r_z05.z05_codigo
-				DISPLAY BY NAME rm_z24.z24_cobrador
-				DISPLAY r_z05.Z05_nombres TO n_cobrador
+		IF INFIELD(z24_zona_cobro) THEN
+			IF r_z02.z02_zona_cobro IS NOT NULL THEN
+				CONTINUE INPUT
+			END IF
+			CALL fl_ayuda_zona_cobro('T', 'A') 
+					RETURNING r_z06.z06_zona_cobro,
+						  r_z06.z06_nombre
+			IF r_z06.z06_zona_cobro IS NOT NULL THEN
+				LET rm_z24.z24_zona_cobro = r_z06.z06_zona_cobro
+				DISPLAY BY NAME rm_z24.z24_zona_cobro
+				DISPLAY r_z06.z06_nombre TO n_zoncob
 			END IF
 		END IF
 		LET INT_FLAG = 0
 	BEFORE INPUT
 		--#CALL dialog.keysetlabel("F1","")
 		--#CALL dialog.keysetlabel("CONTROL-W","")
+	BEFORE FIELD z24_zona_cobro
+		CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc,
+						rm_z24.z24_codcli)
+			RETURNING r_z02.*
+		IF r_z02.z02_zona_cobro IS NOT NULL THEN
+			IF rm_z24.z24_zona_cobro <> r_z02.z02_zona_cobro THEN
+				LET rm_z24.z24_zona_cobro = r_z02.z02_zona_cobro
+				CALL fl_lee_zona_cobro(rm_z24.z24_zona_cobro)
+					RETURNING r_z06.*
+				DISPLAY BY NAME rm_z24.z24_zona_cobro
+				DISPLAY r_z06.z06_nombre TO n_zoncob	
+				CONTINUE INPUT
+			END IF
+		END IF
 	AFTER FIELD z24_areaneg
 		IF rm_z24.z24_areaneg IS NULL THEN
 			CLEAR n_areaneg
@@ -485,6 +529,11 @@ INPUT BY NAME rm_z24.z24_codcli,     rm_z24.z24_areaneg,   rm_z24.z24_linea,
 				CALL fl_mostrar_mensaje('Cliente no está activado para esta localidad.', 'exclamation')
 				NEXT FIELD z24_codcli
 			END IF
+			LET rm_z24.z24_zona_cobro = r_z02.z02_zona_cobro
+			CALL fl_lee_zona_cobro(rm_z24.z24_zona_cobro)
+				RETURNING r_z06.*
+			DISPLAY BY NAME rm_z24.z24_zona_cobro
+			DISPLAY r_z06.z06_nombre TO n_zoncob	
 		END IF
 	AFTER FIELD z24_moneda
 		IF rm_z24.z24_moneda IS NULL THEN
@@ -541,32 +590,42 @@ INPUT BY NAME rm_z24.z24_codcli,     rm_z24.z24_areaneg,   rm_z24.z24_linea,
 			NEXT FIELD z24_subtipo
 		END IF
 		DISPLAY r_g12.g12_nombre TO n_motivo
-	AFTER FIELD z24_cobrador
-		IF rm_z24.z24_cobrador IS NULL THEN
-			CLEAR n_cobrador
+	AFTER FIELD z24_zona_cobro
+		IF rm_z24.z24_zona_cobro IS NULL OR
+		   rm_z24.z24_zona_cobro <> r_z02.z02_zona_cobro
+		THEN
+			LET rm_z24.z24_zona_cobro = r_z02.z02_zona_cobro
+			CALL fl_lee_zona_cobro(rm_z24.z24_zona_cobro)
+				RETURNING r_z06.*
+			DISPLAY BY NAME rm_z24.z24_zona_cobro
+			DISPLAY r_z06.z06_nombre TO n_zoncob	
 			CONTINUE INPUT
 		END IF
-		CALL fl_lee_cobrador_cxc(vg_codcia, rm_z24.z24_cobrador)
-			RETURNING r_z05.*
-		IF r_z05.z05_codigo IS NULL THEN
-			CALL fl_mostrar_mensaje('Cobrador no existe.','exclamation')
-			CLEAR n_cobrador
-			NEXT FIELD z24_cobrador
+		CALL fl_lee_zona_cobro(rm_z24.z24_zona_cobro) RETURNING r_z06.*
+		IF r_z06.z06_zona_cobro IS NULL THEN
+			CALL fl_mostrar_mensaje('Zona de Cobro no existe.','exclamation')
+			CLEAR n_zoncob
+			NEXT FIELD z24_zona_cobro
 		END IF
-		IF r_z05.z05_estado = 'B' THEN
+		IF r_z06.z06_estado = 'B' THEN
 			CALL fl_mensaje_estado_bloqueado()
-			CLEAR n_cobrador
-			NEXT FIELD z24_cobrador
+			CLEAR n_zoncob
+			NEXT FIELD z24_zona_cobro
 		END IF
-		DISPLAY r_z05.z05_nombres TO n_cobrador	
+		DISPLAY r_z06.z06_nombre TO n_zoncob	
 	AFTER INPUT
-		IF rm_z24.z24_cobrador IS NULL THEN
-			CALL fl_mostrar_mensaje('Digite el Cobrador.', 'exclamation')
-			NEXT FIELD z24_cobrador
+		IF rm_z24.z24_zona_cobro IS NULL THEN
+			CALL fl_mostrar_mensaje('Digite la Zona de Cobro.', 'exclamation')
+			NEXT FIELD z24_zona_cobro
 		END IF
 		LET rm_z24.z24_total_cap = 
 			fl_retorna_precision_valor(rm_z24.z24_moneda,
 						   rm_z24.z24_total_cap)
+		CALL fl_lee_zona_cobro(rm_z24.z24_zona_cobro) RETURNING r_z06.*
+		IF r_z06.z06_estado = 'B' THEN
+			CALL fl_mostrar_mensaje('La Zona de Cobro esta con estado BLOQUEADO.', 'exclamation')
+			NEXT FIELD z24_zona_cobro
+		END IF
 END INPUT
 
 END FUNCTION
@@ -580,7 +639,7 @@ DEFINE r_g20		RECORD LIKE gent020.*
 DEFINE r_g03		RECORD LIKE gent003.*
 DEFINE r_z01		RECORD LIKE cxct001.*
 DEFINE r_z02		RECORD LIKE cxct002.*
-DEFINE r_z05		RECORD LIKE cxct005.*
+DEFINE r_z06		RECORD LIKE cxct006.*
 DEFINE r_z24		RECORD LIKE cxct024.*
 DEFINE r_mon		RECORD LIKE gent013.*
 DEFINE r_g12		RECORD LIKE gent012.*
@@ -591,7 +650,7 @@ LET int_flag = 0
 IF num_args() = 4 THEN
 	CONSTRUCT BY NAME expr_sql 
 		ON z24_numero_sol, z24_estado, z24_codcli, z24_areaneg,
-			z24_linea, z24_moneda, z24_subtipo, z24_cobrador,
+			z24_linea, z24_moneda, z24_subtipo, z24_zona_cobro,
 			z24_referencia, z24_total_cap, z24_usuario
         ON KEY(F1,CONTROL-W)
 		CALL llamar_visor_teclas()
@@ -653,14 +712,14 @@ IF num_args() = 4 THEN
 				DISPLAY r_mon.g13_nombre TO n_moneda
 			END IF	
 		END IF
-		IF INFIELD(z24_cobrador) THEN
-			CALL fl_ayuda_cobradores(vg_codcia, 'T', 'T', 'A') 
-					RETURNING r_z05.z05_codigo,
-						  r_z05.z05_nombres
-			IF r_z05.z05_codigo IS NOT NULL THEN
-				LET rm_z24.z24_cobrador = r_z05.z05_codigo
-				DISPLAY BY NAME rm_z24.z24_cobrador
-				DISPLAY r_z05.Z05_nombres TO n_cobrador
+		IF INFIELD(z24_zona_cobro) THEN
+			CALL fl_ayuda_zona_cobro('T', 'T') 
+					RETURNING r_z06.z06_zona_cobro,
+						  r_z06.z06_nombre
+			IF r_z06.z06_zona_cobro IS NOT NULL THEN
+				LET rm_z24.z24_zona_cobro = r_z06.z06_zona_cobro
+				DISPLAY BY NAME rm_z24.z24_zona_cobro
+				DISPLAY r_z06.z06_nombre TO n_zoncob
 			END IF
 		END IF
 		LET INT_FLAG = 0
@@ -751,19 +810,18 @@ IF num_args() = 4 THEN
 			CLEAR n_motivo
 		END IF
 		DISPLAY r_g12.g12_nombre TO n_motivo
-	AFTER FIELD z24_cobrador
-		LET rm_z24.z24_cobrador = GET_FLDBUF(z24_cobrador)
-		IF rm_z24.z24_cobrador IS NULL THEN
-			CLEAR n_cobrador
+	AFTER FIELD z24_zona_cobro
+		LET rm_z24.z24_zona_cobro = GET_FLDBUF(z24_zona_cobro)
+		IF rm_z24.z24_zona_cobro IS NULL THEN
+			CLEAR n_zoncob
 			CONTINUE CONSTRUCT
 		END IF
-		CALL fl_lee_cobrador_cxc(vg_codcia, rm_z24.z24_cobrador)
-			RETURNING r_z05.*
-		IF r_z05.z05_codigo IS NULL THEN
-			CLEAR n_cobrador
+		CALL fl_lee_zona_cobro(rm_z24.z24_zona_cobro) RETURNING r_z06.*
+		IF r_z06.z06_zona_cobro IS NULL THEN
+			CLEAR n_zoncob
 		END IF
-		IF r_z05.z05_estado = 'B' THEN
-			CLEAR n_cobrador
+		IF r_z06.z06_estado = 'B' THEN
+			CLEAR n_zoncob
 		END IF
 	END CONSTRUCT
 	IF int_flag THEN
@@ -832,7 +890,7 @@ DISPLAY BY NAME rm_z24.z24_numero_sol,
 		rm_z24.z24_total_cap,
 		rm_z24.z24_moneda,     
 		rm_z24.z24_subtipo,
-		rm_z24.z24_cobrador,  
+		rm_z24.z24_zona_cobro,  
 		rm_z24.z24_paridad,
 		rm_z24.z24_usuario,
 		rm_z24.z24_fecing   
@@ -888,11 +946,10 @@ END FUNCTION
 
 
 FUNCTION muestra_etiquetas()
-
 DEFINE r_g20		RECORD LIKE gent020.*
 DEFINE r_g03		RECORD LIKE gent003.*
 DEFINE r_z01		RECORD LIKE cxct001.*
-DEFINE r_z05		RECORD LIKE cxct005.*
+DEFINE r_z06		RECORD LIKE cxct006.*
 DEFINE r_g13		RECORD LIKE gent013.*
 DEFINE r_g12		RECORD LIKE gent012.*
 
@@ -908,7 +965,7 @@ CALL fl_lee_area_negocio(vg_codcia, rm_z24.z24_areaneg) RETURNING r_g03.*
 CALL fl_lee_cliente_general(rm_z24.z24_codcli) RETURNING r_z01.*
 CALL fl_lee_moneda(rm_z24.z24_moneda) RETURNING r_g13.*
 CALL fl_lee_subtipo_entidad(vm_entidad, rm_z24.z24_subtipo) RETURNING r_g12.*
-CALL fl_lee_cobrador_cxc(vg_codcia, rm_z24.z24_cobrador) RETURNING r_z05.*
+CALL fl_lee_zona_cobro(rm_z24.z24_zona_cobro) RETURNING r_z06.*
 
 DISPLAY nom_estado TO n_estado
 DISPLAY r_g20.g20_nombre  TO n_linea
@@ -916,7 +973,7 @@ DISPLAY r_g03.g03_nombre  TO n_areaneg
 DISPLAY r_z01.z01_nomcli  TO n_cliente
 DISPLAY r_g13.g13_nombre  TO n_moneda
 DISPLAY r_g12.g12_nombre  TO n_motivo
-DISPLAY r_z05.z05_nombres TO n_cobrador
+DISPLAY r_z06.z06_nombre  TO n_zoncob
 
 END FUNCTION
 
@@ -1049,6 +1106,50 @@ FETCH q_j10 INTO r_j10.*
 CLOSE q_j10
 FREE q_j10
 
+RETURN done
+
+END FUNCTION
+
+
+
+FUNCTION actualiza_zona_cobr_z02()
+DEFINE intentar		SMALLINT
+DEFINE done    		SMALLINT
+DEFINE r_z02		RECORD LIKE cxct002.*
+
+LET intentar = 1
+LET done = 0
+CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc, rm_z24.z24_codcli)
+	RETURNING r_z02.*
+IF r_z02.z02_zona_cobro IS NOT NULL THEN
+	RETURN 1
+END IF
+WHILE (intentar)
+	WHENEVER ERROR CONTINUE
+		DECLARE q_z02 CURSOR FOR
+			SELECT * FROM cxct002
+				WHERE z02_compania  = vg_codcia
+				  AND z02_localidad = vg_codloc
+				  AND z02_codcli    = r_z02.z02_codcli
+			FOR UPDATE
+	WHENEVER ERROR STOP
+	IF STATUS < 0 THEN
+		LET intentar = mensaje_intentar()
+	ELSE
+		LET intentar = 0
+		LET done = 1
+	END IF
+END WHILE
+IF NOT intentar AND NOT done THEN
+	RETURN done
+END IF
+OPEN q_z02
+FETCH q_z02 INTO r_z02.*
+UPDATE cxct002
+	SET z02_zona_cobro = rm_z24.z24_zona_cobro
+	WHERE CURRENT OF q_z02
+CLOSE q_z02
+FREE q_z02
 RETURN done
 
 END FUNCTION

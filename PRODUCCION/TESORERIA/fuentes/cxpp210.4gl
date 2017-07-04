@@ -693,12 +693,22 @@ IF i = 1 THEN
 	DISPLAY BY NAME fecha_pago, dias_pagos, tot_cap, tot_int, tot_sub
 END IF
 
+CALL control_ingreso_forma_pago_oc()
+
+IF int_flag THEN
+	ROLLBACK WORK
+	CLOSE WINDOW w_200_2
+	WHENEVER ERROR STOP
+	RETURN
+END IF
 WHENEVER ERROR STOP
 
 CALL control_cargar_detalle_forma_pago()
 
 IF rm_c10.c10_interes > 0 THEN
 	CALL control_DISPLAY_ordt012(pagos)
+ELSE
+	CALL control_lee_detalle_forma_pago()
 END IF
 
 CALL control_insert_ordt012()
@@ -873,8 +883,6 @@ LET tot_int = 0
 LET tot_sub = 0
 LET valor   = rm_c10.c10_tot_compra
 
-LET pagos   = 1
-
 FOR i = 1 TO pagos
 
 	LET r_detalle_2[i].c12_valor_int = valor * 
@@ -934,6 +942,167 @@ END FOR
 		LET vm_filas_pant = pagos
 	END IF 
 
+
+END FUNCTION
+
+
+
+FUNCTION control_ingreso_forma_pago_oc()
+
+LET int_flag = 0
+INPUT BY NAME pagos, rm_c10.c10_interes, fecha_pago, dias_pagos 
+	      WITHOUT DEFAULTS
+	ON KEY(INTERRUPT)
+		LET int_flag = 0
+	{--
+		IF r_detalle_2[1].c12_dividendo IS NOT NULL THEN
+			LET int_flag = 1
+			EXIT INPUT
+		END IF
+	--}
+
+		CALL fl_mostrar_mensaje('Debe especificar la forma de pago de esta orden de compra.','exclamation')
+		CONTINUE INPUT
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
+		
+	BEFORE INPUT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
+	AFTER FIELD fecha_pago
+		IF fecha_pago < TODAY THEN
+			CALL fl_mostrar_mensaje('Debe ingresar una fecha mayor o igual a la de hoy.','exclamation')
+			NEXT FIELD fecha_pago
+		END IF
+
+	AFTER FIELD pagos
+		IF pagos IS NOT NULL AND dias_pagos IS NOT NULL THEN
+			LET tot_dias = pagos * dias_pagos
+			DISPLAY BY NAME tot_dias
+		END IF
+
+	AFTER FIELD dias_pagos
+		IF pagos IS NOT NULL AND dias_pagos IS NOT NULL THEN
+			LET tot_dias = pagos * dias_pagos
+			DISPLAY BY NAME tot_dias
+		END IF
+
+	AFTER INPUT 
+		IF int_flag THEN
+			EXIT INPUT
+		END IF
+		IF pagos IS NULL THEN
+			CALL fl_mostrar_mensaje('Debe ingresar el número de pagos para generar el detalle.','exclamation')
+			NEXT FIELD pagos
+		END IF
+			
+		IF fecha_pago IS NULL THEN
+			CALL fl_mostrar_mensaje('Debe ingresar la fecha del primer pago de la orden de compra.','exclamation')
+			NEXT FIELD fecha_pago
+		END IF
+
+		IF dias_pagos IS NULL THEN
+			CALL fl_mostrar_mensaje('Debe ingresar el número de días entre pagos para generar el detalle.','exclamation')
+			NEXT FIELD dias_pagos
+		END IF
+			
+END INPUT
+
+END FUNCTION
+
+
+
+FUNCTION control_lee_detalle_forma_pago()
+DEFINE resp 		CHAR(6)
+DEFINE i,j,k		SMALLINT
+DEFINE fecha_aux 	LIKE rept026.r26_fec_vcto
+DEFINE salirinp		SMALLINT
+
+
+OPTIONS
+	INSERT KEY F30,
+	DELETE KEY F40
+
+LET salirinp = 0
+WHILE TRUE
+
+	LET int_flag = 0
+	CALL set_count(pagos) 
+
+	INPUT ARRAY r_detalle_2 WITHOUT DEFAULTS FROM r_detalle_2.*
+
+		BEFORE INPUT 
+			--#CALL dialog.keysetlabel ('INSERT','')
+			--#CALL dialog.keysetlabel ('DELETE','')
+			--#CALL dialog.keysetlabel("F1","")
+			--#CALL dialog.keysetlabel("CONTROL-W","")
+
+		ON KEY(INTERRUPT)
+			LET int_flag = 0
+			CONTINUE INPUT
+
+        	ON KEY(F1,CONTROL-W)
+			CALL llamar_visor_teclas()
+
+		BEFORE ROW
+			LET i = arr_curr()
+			LET j = scr_line()
+
+		BEFORE INSERT
+			EXIT INPUT
+
+		BEFORE FIELD c12_fecha_vcto
+			LET fecha_aux = r_detalle_2[i].c12_fecha_vcto
+
+		AFTER FIELD c12_fecha_vcto
+			IF r_detalle_2[i].c12_fecha_vcto IS NULL THEN
+				LET r_detalle_2[i].c12_fecha_vcto = fecha_aux
+				DISPLAY r_detalle_2[i].c12_fecha_vcto TO
+					r_detalle_2[j].c12_fecha_vcto
+			END IF
+
+		AFTER FIELD c12_valor_cap
+			IF r_detalle_2[i].c12_valor_cap IS NOT NULL THEN
+				CALL calcula_interes()
+			ELSE 
+				NEXT FIELD c12_valor_cap
+			END IF
+
+		AFTER INPUT
+			FOR k = 1 TO arr_count() - 1
+				IF r_detalle_2[k].c12_fecha_vcto >=
+				   r_detalle_2[k + 1].c12_fecha_vcto
+				   THEN
+					CALL fl_mostrar_mensaje('Existen fechas que resultan menores a las ingresadas anteriormente en los pagos.','exclamation')
+					EXIT INPUT
+				END IF
+			END FOR	
+
+			IF tot_cap > tot_compra THEN
+				CALL fl_mostrar_mensaje('El total del valor capital es mayor al total de la deuda.','exclamation')
+				EXIT INPUT
+			END IF
+
+			IF tot_cap < tot_compra THEN
+				CALL fl_mostrar_mensaje('El total del valor capital es menor al total de la deuda.','exclamation')
+				EXIT INPUT
+			END IF
+
+			LET tot_dias = r_detalle_2[pagos].c12_fecha_vcto - TODAY 	
+			DISPLAY BY NAME tot_dias
+
+			IF vg_gui = 1 THEN
+				EXIT WHILE
+			ELSE
+		 		LET salirinp = 1
+				EXIT INPUT
+			END IF
+	END INPUT
+	IF salirinp = 1 THEN
+		EXIT WHILE
+	END IF	
+
+END WHILE	
 
 END FUNCTION
 
@@ -1290,16 +1459,16 @@ LET int_flag = 0
 CALL calcula_totales(vm_num_detalles,1)
 --DISPLAY BY NAME rm_c10.c10_dif_cuadre, rm_c10.c10_usuario
 DISPLAY BY NAME rm_c10.c10_usuario
-INPUT BY NAME rm_c10.c10_codprov, rm_c13.c13_num_guia, rm_c13.c13_num_aut,
-	rm_c13.c13_fecha_cadu,
+INPUT BY NAME rm_c10.c10_codprov, rm_c13.c13_num_guia, rm_c13.c13_fec_aut,
+	rm_c13.c13_num_aut, rm_c13.c13_fecha_cadu,
 	rm_c10.c10_tipo_orden, rm_c10.c10_porc_impto, rm_c10.c10_sustento_sri,
 	rm_c10.c10_referencia, rm_c10.c10_cod_depto, valor_fact,
 	rm_c10.c10_otros, rm_c10.c10_flete
 	WITHOUT DEFAULTS
 	ON KEY (INTERRUPT)
 		IF NOT FIELD_TOUCHED(rm_c10.c10_codprov, rm_c13.c13_num_guia,
-				rm_c13.c13_num_aut, rm_c13.c13_fecha_cadu,
-				rm_c10.c10_tipo_orden,
+				rm_c13.c13_fec_aut, rm_c13.c13_num_aut,
+				rm_c13.c13_fecha_cadu, rm_c10.c10_tipo_orden,
 				rm_c10.c10_porc_impto, rm_c10.c10_codprov,
 				rm_c10.c10_sustento_sri,
 				rm_c10.c10_referencia, rm_c10.c10_cod_depto,
@@ -1528,7 +1697,7 @@ INPUT BY NAME rm_c10.c10_codprov, rm_c13.c13_num_guia, rm_c13.c13_num_aut,
 			END IF
 			DISPLAY rm_p01.p01_nomprov TO nom_proveedor
 			IF rm_c13.c13_num_aut IS NULL THEN
-				LET rm_c13.c13_num_aut    = rm_p01.p01_num_aut
+				LET rm_c13.c13_num_aut   = rm_p01.p01_num_aut
 				LET rm_c13.c13_serie_comp= rm_p01.p01_serie_comp
 				DISPLAY BY NAME rm_c13.c13_num_aut
 			END IF
@@ -1569,16 +1738,28 @@ INPUT BY NAME rm_c10.c10_codprov, rm_c13.c13_num_guia, rm_c13.c13_num_aut,
 				--RETURNING rm_c13.c13_fecha_cadu
 			DISPLAY BY NAME rm_c13.c13_fecha_cadu
 		END IF
+	AFTER FIELD c13_fec_aut
+		IF rm_c13.c13_fec_aut IS NOT NULL THEN
+			IF LENGTH(rm_c13.c13_fec_aut) <> 14 THEN
+				CALL fl_mostrar_mensaje('Numero de Fecha de Autorizacion no tiene completo el total de digitos.', 'exclamation')
+				NEXT FIELD c13_fec_aut
+			END IF
+			IF NOT fl_valida_numeros(rm_c13.c13_fec_aut) THEN
+				NEXT FIELD c13_fec_aut
+			END IF
+		END IF
 	AFTER FIELD c13_num_aut
 		IF rm_c13.c13_num_aut IS NOT NULL THEN
 			IF LENGTH(rm_c13.c13_num_aut) <> 10 THEN
 				CALL fl_mostrar_mensaje('Numero de Autorizacion no tiene completo el numero de digitos.', 'exclamation')
 				NEXT FIELD c13_num_aut
 			END IF
+			{-- OJO
 			IF rm_c13.c13_num_aut[1, 1] <> '1' THEN
 				CALL fl_mostrar_mensaje('Numero de Autorizacion es incorrecto.', 'exclamation')
 				NEXT FIELD c13_num_aut
 			END IF
+			--}
 			IF NOT fl_valida_numeros(rm_c13.c13_num_aut) THEN
 				NEXT FIELD c13_num_aut
 			END IF
@@ -2015,7 +2196,8 @@ DISPLAY BY NAME rm_c10.c10_numero_oc, rm_c10.c10_estado,  rm_c10.c10_moneda,
 		rm_c10.c10_tot_impto,  rm_c10.c10_flete, rm_c10.c10_otros,
 		valor_fact, rm_c10.c10_usuario,
  --rm_c10.c10_dif_cuadre,
-		rm_c13.c13_num_guia, rm_c13.c13_num_aut, rm_c13.c13_fecha_cadu
+		rm_c13.c13_num_guia, rm_c13.c13_fec_aut, rm_c13.c13_num_aut,
+		rm_c13.c13_fecha_cadu
 
 IF vg_gui = 0 THEN
 	CALL muestra_tipopago(rm_c10.c10_tipo_pago)

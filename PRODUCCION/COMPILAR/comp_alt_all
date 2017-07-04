@@ -1,0 +1,10 @@
+export LD_ASSUME_KERNEL=2.4.0
+cd LIBRERIAS/fuentes/
+echo 'Generando esquema ...'
+sh esquema $1
+echo 'Compilando y pasando las LIBRERIAS...'
+sh copia
+cd ../../
+sh compila_maldito $1
+echo 'Todo el proceso termino OK.'
+

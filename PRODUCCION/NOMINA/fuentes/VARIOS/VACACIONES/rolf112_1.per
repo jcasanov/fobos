@@ -1,0 +1,64 @@
+DATABASE aceros
+SCREEN
+{
+               Estado: [c|c000     ]                       [c020] de [c021]
+
+              Proceso: [c0]     [c001                          ]
+             Empleado: [c002  ] [c003                                     ]
+         Departamento: [c004]   [c005                          ]
+  
+      Cta. Valor Deb.: [c006        ] [c007                               ]
+   Cta. Valor D. Adi.: [c008        ] [c009                               ]
+ 
+      Cta. Otros Ing.: [c010        ] [c011                               ]
+
+         Cta. Aportes: [c012        ] [c013                               ]
+
+      Cta. Otros Egr.: [c014        ] [c015                               ]
+
+      Cta. Valor Neto: [c016        ] [c017                               ]
+
+
+        Ingresado Por: [c018      ]   Fecha Ingreso: [c019                ]
+
+}
+TABLES
+gent034
+rolt003
+rolt030
+rolt056
+ATTRIBUTES
+c    = rolt056.n56_estado, NOENTRY, REVERSE, UPSHIFT;
+c000 = FORMONLY.tit_estado, NOENTRY, REVERSE, UPSHIFT;
+c0   = rolt056.n56_proceso, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = rolt003.n03_nombre, NOENTRY, REVERSE, UPSHIFT;
+c002 = rolt056.n56_cod_trab, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = rolt030.n30_nombres, NOENTRY, REVERSE, UPSHIFT;
+c004 = rolt056.n56_cod_depto, NOENTRY, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c005 = gent034.g34_nombre, NOENTRY, REVERSE, UPSHIFT;
+c006 = rolt056.n56_aux_val_vac, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c007 = FORMONLY.tit_aux_val_vac, NOENTRY, REVERSE, UPSHIFT;
+c008 = rolt056.n56_aux_val_adi, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c009 = FORMONLY.tit_aux_val_adi, NOENTRY, UPSHIFT;
+c010 = rolt056.n56_aux_otr_ing, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c011 = FORMONLY.tit_aux_otr_ing, NOENTRY, UPSHIFT;
+c012 = rolt056.n56_aux_iess, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c013 = FORMONLY.tit_aux_iess, NOENTRY, UPSHIFT;
+c014 = rolt056.n56_aux_otr_egr, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c015 = FORMONLY.tit_aux_otr_egr, NOENTRY, UPSHIFT;
+c016 = rolt056.n56_aux_banco, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c017 = FORMONLY.tit_aux_banco, NOENTRY, REVERSE, UPSHIFT;
+c018 = rolt056.n56_usuario, NOENTRY, REVERSE, UPSHIFT;
+c019 = rolt056.n56_fecing, NOENTRY, REVERSE, UPSHIFT;
+c020 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c021 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+END

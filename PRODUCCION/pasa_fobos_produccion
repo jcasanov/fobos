@@ -1,0 +1,26 @@
+export DIR=$PWD
+cd $DIR
+for i in ACTIVOS CAJA COBRANZAS COMPRAS CONTABILIDAD GENERALES LIBRERIAS INVENTARIO TALLER TESORERIA NOMINA
+do
+	cd $i
+	cd fuentes
+	echo $PWD
+	export modulo=$i
+	if [ "$i" == "INVENTARIO" ]; then
+		export modulo="REPUESTOS"
+	fi
+	for j in *.4gl
+	do
+		echo "Copiando $i/fuentes/$j a $HOME/PRODUCCION/$modulo/fuentes/"
+		cp $j $HOME/PRODUCCION/$modulo/fuentes/
+	done
+	cd ../forms
+	for j in *.per
+	do
+		echo "Copiando $i/forms/$j a $HOME/PRODUCCION/$modulo/forms/"
+		cp $j $HOME/PRODUCCION/$modulo/forms/
+	done
+	cd ../..
+done
+echo " "
+echo "Copiado todo el FOBOS en $HOME/PRODUCCION/ Ok."

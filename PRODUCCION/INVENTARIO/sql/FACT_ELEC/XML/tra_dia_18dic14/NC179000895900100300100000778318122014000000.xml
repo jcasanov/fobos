@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000007783</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>ALVEAR ALVEAR ILDA PATRICIA</razonSocialComprador>
+<identificacionComprador>1712033701001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>003-001-000007783</numDocModificado>
+<fechaEmisionDocSustento>18/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>26.54</totalSinImpuestos>
+<valorModificacion>29.72</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>26.54</baseImponible>
+<valor>3.18</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV. DF-4090 FACT. FA-113132</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>4355</codigoInterno>
+<descripcion>DEV. DF-4090 FACT. FA-113132</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>26.54</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>26.54</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ACERO"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>26.54</baseImponible>
+<valor>3.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2683883</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">62528</campoAdicional>
+</infoAdicional>
+</notaCredito>

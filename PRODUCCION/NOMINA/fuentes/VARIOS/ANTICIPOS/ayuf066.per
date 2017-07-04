@@ -1,0 +1,31 @@
+DATABASE aceros
+SCREEN
+{
+ PROVEEDORES GENERALES
+
+ [lbl1     |lbl2                                 |c]
+[c001     |c002                                 |d] 
+[c001     |c002                                 |d] 
+[c001     |c002                                 |d] 
+[c001     |c002                                 |d] 
+[c001     |c002                                 |d] 
+[c001     |c002                                 |d] 
+[c001     |c002                                 |d] 
+[c001     |c002                                 |d] 
+[c001     |c002                                 |d] 
+[c001     |c002                                 |d] 
+
+}
+TABLES
+cxpt001
+ATTRIBUTES
+c001 = p01_codprov, UPSHIFT;
+c002 = p01_nomprov, UPSHIFT;
+d    = p01_estado, UPSHIFT, COMMENTS = '(A) ACTIVO  (B) BLOQUEADO';
+
+lbl1 = formonly.bt_codigo,    NOENTRY, WIDGET='BUTTON', CONFIG='F15';
+lbl2 = formonly.bt_proveedor, NOENTRY, WIDGET='BUTTON', CONFIG='F16';
+c    = formonly.bt_estado,    NOENTRY, WIDGET='BUTTON', CONFIG='F17';
+END
+INSTRUCTIONS
+SCREEN RECORD rh_provee[10] (p01_codprov, p01_nomprov, p01_estado)

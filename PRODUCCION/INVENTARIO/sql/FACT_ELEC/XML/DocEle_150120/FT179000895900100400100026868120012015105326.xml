@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268681</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268681</guiaRemision>
+<razonSocialComprador>RODRIGUEZ TOBAR EDISON MOISES</razonSocialComprador>
+<identificacionComprador>1715043038001</identificacionComprador>
+<totalSinImpuestos>28.68</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>28.68</baseImponible>
+<valor>3.44</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>32.12</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99308</codigoPrincipal>
+<descripcion>SWITCH 31-92-0015 BOTON P/ AMOLADORA MOD.6130-33</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>0.76</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>0.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.76</baseImponible>
+<valor>0.09</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99284</codigoPrincipal>
+<descripcion>MANIJA 31-92-0020 DESLIZANTE P/AMOLADORA MOD. 6130-33</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>0.76</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>0.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.76</baseImponible>
+<valor>0.09</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99307</codigoPrincipal>
+<descripcion>SWITCH 23-66-0385 P/ AMOLADORA MOD.6130-33</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>5.99</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>5.99</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.99</baseImponible>
+<valor>0.72</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98526</codigoPrincipal>
+<descripcion>MANDRIL - PORTABROCA PARA TALADRO 48-66-1356 P/ROTOMARTILLO 5375-20</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>18.76</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>18.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>18.76</baseImponible>
+<valor>2.25</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101692</codigoPrincipal>
+<descripcion>TUERCA 05-88-1500 DEL MANDRIL P/ROTOMARTILLO 5375-20</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.02</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1.02</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.02</baseImponible>
+<valor>0.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98525</codigoPrincipal>
+<descripcion>LLAVE 48-66-1357 P/MANDRIL DE ROTOMARTILLO 5375-20</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.39</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1.39</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.39</baseImponible>
+<valor>0.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">redshark316@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0987569517</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064347</campoAdicional>
+<campoAdicional nombre="Observaciones">T / C DINERS</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000016388</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>VIVIENDAS VICOLINCI S.A.</razonSocialComprador>
+<identificacionComprador>0990179883001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000104110</numDocModificado>
+<fechaEmisionDocSustento>19/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>14.10</totalSinImpuestos>
+<valorModificacion>15.79</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>14.10</baseImponible>
+<valor>1.69</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>POR DEVOLUCION O.T. # 3409</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>2910</codigoInterno>
+<descripcion>CRUZ NEGRA CLASE 150 DE 3/8"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>4.17</precioUnitario>
+<descuento>0.46</descuento>
+<precioTotalSinImpuesto>3.71</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.71</baseImponible>
+<valor>0.45</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>3348</codigoInterno>
+<descripcion>NEPLO NEGRO DE 3/8" x 6"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>3.20</precioUnitario>
+<descuento>0.51</descuento>
+<precioTotalSinImpuesto>5.89</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.89</baseImponible>
+<valor>0.71</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>2084</codigoInterno>
+<descripcion>CODO GALV. CLASE 150 90° DE 3/8"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1.12</precioUnitario>
+<descuento>0.25</descuento>
+<precioTotalSinImpuesto>1.99</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.99</baseImponible>
+<valor>0.24</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>1694</codigoInterno>
+<descripcion>BUSHING NEGRO CLASE 150 DE 3/8" x 1/4"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>0.94</precioUnitario>
+<descuento>0.31</descuento>
+<precioTotalSinImpuesto>2.51</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.51</baseImponible>
+<valor>0.30</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2235631</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">11985</campoAdicional>
+</infoAdicional>
+</notaCredito>

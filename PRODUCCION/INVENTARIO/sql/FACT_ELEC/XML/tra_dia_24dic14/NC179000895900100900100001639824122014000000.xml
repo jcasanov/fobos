@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000016398</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>24/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>SUCORPORACION S.A.</razonSocialComprador>
+<identificacionComprador>0992353074001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000016398</numDocModificado>
+<fechaEmisionDocSustento>24/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>34.12</totalSinImpuestos>
+<valorModificacion>38.21</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>34.12</baseImponible>
+<valor>4.09</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV. DF-13357 FACT. FA-88502</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>22048</codigoInterno>
+<descripcion>DEV. DF-13357 FACT. FA-88502</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>34.12</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>34.12</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ACERO"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>34.12</baseImponible>
+<valor>4.09</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">arquitectura@sucorporacionsa.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2922024</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">13477</campoAdicional>
+</infoAdicional>
+</notaCredito>

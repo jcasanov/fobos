@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268999</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>26/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268999</guiaRemision>
+<razonSocialComprador>USCA PENAFIEL EDGAR ENRIQUE</razonSocialComprador>
+<identificacionComprador>0601895220001</identificacionComprador>
+<totalSinImpuestos>740.59</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>740.59</baseImponible>
+<valor>88.87</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>829.46</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99379</codigoPrincipal>
+<descripcion>DESTAPADOR DE DESAGUES ELECTRICO K-45AF-7  120V. DE 3/4 A 2-1/2"  (36008)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>740.59</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>740.59</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>740.59</baseImponible>
+<valor>88.87</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">davito@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0995019033</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064397</campoAdicional>
+<campoAdicional nombre="Observaciones">AMERICAN EXPRESS 6 MESES</campoAdicional>
+</infoAdicional>
+</factura>

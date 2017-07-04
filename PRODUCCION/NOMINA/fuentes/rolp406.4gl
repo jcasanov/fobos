@@ -309,7 +309,6 @@ END FUNCTION
 
 FUNCTION preparar_query()
 
-display rm_n32.n32_cod_liqrol[1, 1]
 IF rm_n32.n32_cod_liqrol[1, 1] = 'M' OR rm_n32.n32_cod_liqrol[1, 1] = 'Q'
    OR rm_n32.n32_cod_liqrol[1, 1] = 'S'
 THEN
@@ -348,7 +347,6 @@ THEN
 	END IF
 END IF
 IF rm_n32.n32_cod_liqrol = 'DT' OR rm_n32.n32_cod_liqrol = 'DC' THEN
-display 'entro'
 	UNLOAD TO "carta_bco_dec.unl"
 		SELECT n36_cta_trabaj, n36_valor_neto, n30_nombres
 			FROM rolt036, rolt030
@@ -391,10 +389,12 @@ END FUNCTION
 
 REPORT reporte_carta()
 DEFINE r_g13		RECORD LIKE gent013.*
+DEFINE r_n03		RECORD LIKE rolt003.*
 DEFINE valor1		VARCHAR(80)
 DEFINE valor2		VARCHAR(80)
 DEFINE tot_neto		VARCHAR(15)
 DEFINE mes		VARCHAR(11)
+DEFINE pal		VARCHAR(6)
 DEFINE i, lim		SMALLINT
 
 OUTPUT
@@ -429,19 +429,31 @@ ON EVERY ROW
 	CALL valor_letras_formato(fl_retorna_letras(rm_g09.g09_moneda,
 					vm_tot_neto))
 		RETURNING valor1, valor2
-	IF (LENGTH(valor1) <= 27) AND valor2 IS NULL THEN
+	IF (LENGTH(valor1) > 74) OR valor2 IS NULL THEN
 		LET valor1 = " (", valor1, ")."
 	ELSE
-		LET valor1 = " (", valor1
-		LET valor2 = valor2, "). "
+		LET valor1 = " (", valor1, valor2, "). "
+		LET valor2 = NULL
+		--LET valor2 = valor2, "). "
 	END IF
 	PRINT COLUMN 001, "Favor acreditar en las cuentas de los empleados segun detalle del archivo "
 	PRINT COLUMN 001, "adjunto."
 	SKIP 1 LINES
-	PRINT COLUMN 001, "El valor total de acreditacion es: ",
-	      COLUMN 036, r_g13.g13_simbolo, " ",
+	CALL fl_lee_proceso_roles(rm_n32.n32_cod_liqrol) RETURNING r_n03.*
+	IF r_n03.n03_proceso[1, 1] = 'Q' THEN
+		LET pal = "la "
+	END IF
+	IF r_n03.n03_proceso[1, 1] = 'D' THEN
+		LET pal = "el "
+	END IF
+	IF r_n03.n03_proceso[1, 1] = 'U' THEN
+		LET pal = "las "
+	END IF
+	PRINT COLUMN 001, "El valor total de acreditacion que corresponde a ",
+		pal CLIPPED, " ", r_n03.n03_nombre CLIPPED, " es: "
+	PRINT COLUMN 001, r_g13.g13_simbolo, " ",
 		fl_justifica_titulo('I', tot_neto, 13) CLIPPED,	valor1
-	PRINT COLUMN 001, valor2, "De la cuenta corriente ",
+	PRINT COLUMN 001, valor2 CLIPPED, "De la cuenta corriente ",
 		rm_g09.g09_numero_cta CLIPPED, "."
 	SKIP 2 LINES
 	PRINT COLUMN 001, "Por su atencion, anticipamos nuestro agradecimiento."

@@ -622,7 +622,7 @@ IF num_args() <> 3 THEN
 				      g05_tipo, g05_grupo
 		ON KEY(F2)
 			IF INFIELD(g05_usuario) THEN
-				CALL fl_ayuda_usuarios()
+				CALL fl_ayuda_usuarios("T")
 					RETURNING usuario, nombre
 				IF usuario IS NOT NULL THEN
 					LET rm_g05.g05_usuario = usuario

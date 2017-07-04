@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268840</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268840</guiaRemision>
+<razonSocialComprador>GUEVARA ALVARADO MARIO ALFONSO</razonSocialComprador>
+<identificacionComprador>1709121246001</identificacionComprador>
+<totalSinImpuestos>4623.72</totalSinImpuestos>
+<totalDescuento>79.47</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>4623.72</baseImponible>
+<valor>554.85</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>5178.57</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5420</codigoPrincipal>
+<descripcion>TUBO GALV. ASTM A-53   TIPO "T" DE 3" x 6.40 m.</descripcion>
+<cantidad>26.00</cantidad>
+<precioUnitario>127.30</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3309.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3309.80</baseImponible>
+<valor>397.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4581</codigoPrincipal>
+<descripcion>TEE GALV. CLASE 150 DE 3"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>26.03</precioUnitario>
+<descuento>3.12</descuento>
+<precioTotalSinImpuesto>22.91</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>22.91</baseImponible>
+<valor>2.75</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2069</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 90 GRAD  DE 3"</descripcion>
+<cantidad>8.00</cantidad>
+<precioUnitario>19.44</precioUnitario>
+<descuento>18.66</descuento>
+<precioTotalSinImpuesto>136.86</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>136.86</baseImponible>
+<valor>16.42</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5422</codigoPrincipal>
+<descripcion>TUBO GALV. ASTM A-53   TIPO "T" DE 4" x 6.40 m. ESPESOR 5.2 mm.</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>182.78</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>731.12</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>731.12</baseImponible>
+<valor>87.73</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5999</codigoPrincipal>
+<descripcion>UNION GALV. CLASE 150 DE 3"</descripcion>
+<cantidad>27.00</cantidad>
+<precioUnitario>12.42</precioUnitario>
+<descuento>40.24</descuento>
+<precioTotalSinImpuesto>295.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>295.10</baseImponible>
+<valor>35.41</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>91459</codigoPrincipal>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 3"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>48.46</precioUnitario>
+<descuento>17.45</descuento>
+<precioTotalSinImpuesto>127.93</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>127.93</baseImponible>
+<valor>15.35</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">asistente.gama@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2285705</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">042657</campoAdicional>
+</infoAdicional>
+</factura>

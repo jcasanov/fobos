@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048339</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>PANAMERICANA SUR KM. 6</dirEstablecimiento>
+<dirPartida>GUALBERTO PEREZ E1-88 ENTRE MALDONADO Y NAPO</dirPartida>
+<razonSocialTransportista>SERGIO QUINCHE</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>1103687586</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>17/12/2014</fechaIniTransporte>
+<fechaFinTransporte>17/12/2014</fechaFinTransporte>
+<placa>PBX-9975</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1790021203001</identificacionDestinatario>
+<razonSocialDestinatario>FOSFORERA ECUATORIANA  S.A.</razonSocialDestinatario>
+<dirDestinatario>PANAMERICANA SUR KM. 6</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>15/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>2693</codigoInterno>
+<descripcion>CODO PVC DESAGUE DE 160mm. x 90ø ISO C/C</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="16979" valor="16979"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>2693</codigoInterno>
+<descripcion>CODO PVC DESAGUE DE 160mm. x 90ø ISO C/C</descripcion>
+<cantidad>4.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="16979" valor="16979"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>4918</codigoInterno>
+<descripcion>TEE PVC DESAGUE DE 160mm. ISO</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="21256" valor="21256"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>5668</codigoInterno>
+<descripcion>TUBO PVC DESAGUE 40 PSI DE 160mm. x 3 Mts. ESPIGA CAMPANA</descripcion>
+<cantidad>4.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="23042" valor="23042"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>6234</codigoInterno>
+<descripcion>UNION PVC DESAGUE DE 160mm. ISO</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="23820" valor="23820"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3080746</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000065</campoAdicional>
+</infoAdicional>
+</guiaRemision>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000114153</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>26/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>003-001-000114153</guiaRemision>
+<razonSocialComprador>HERNANDEZ GUZMAN ANGEL RAMIRO</razonSocialComprador>
+<identificacionComprador>0502367246</identificacionComprador>
+<totalSinImpuestos>38.43</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>38.43</baseImponible>
+<valor>4.61</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>43.04</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>94336</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 42.5 X 42.5 MONOQUEMA JERICO AZUL PRIMERA</descripcion>
+<cantidad>2.90</cantidad>
+<precioUnitario>8.50</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>24.65</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>24.65</baseImponible>
+<valor>2.96</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99714</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 42.5 X 42.5 MONOQUEMA SIRACUSA AZUL PRIMERA</descripcion>
+<cantidad>1.45</cantidad>
+<precioUnitario>9.50</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>13.78</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>13.78</baseImponible>
+<valor>1.65</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">ahernandez@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">087129260</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">042111</campoAdicional>
+</infoAdicional>
+</factura>

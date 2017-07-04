@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092002</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092002</guiaRemision>
+<razonSocialComprador>EQUIDOR S.A.</razonSocialComprador>
+<identificacionComprador>0990331243001</identificacionComprador>
+<totalSinImpuestos>436.70</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>436.70</baseImponible>
+<valor>52.40</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>489.10</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>41384</codigoPrincipal>
+<descripcion>CERRADURA PRINCIPAL 440E -US-26D ECLIPSE CROMO MATE</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>25.44</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>152.64</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KWIKSE"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>152.64</baseImponible>
+<valor>18.32</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>41382</codigoPrincipal>
+<descripcion>CERRADURA DORMITORIO 400E -US-26D ECLIPSE CROMO MATE</descripcion>
+<cantidad>14.00</cantidad>
+<precioUnitario>20.29</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>284.06</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KWIKSE"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>284.06</baseImponible>
+<valor>34.09</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jpenafiel@equidor.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2206120</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000645</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C.2015010002 TORRE A JARDINES</campoAdicional>
+</infoAdicional>
+</factura>

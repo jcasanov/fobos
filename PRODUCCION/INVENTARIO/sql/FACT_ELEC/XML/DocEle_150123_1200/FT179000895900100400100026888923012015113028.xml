@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268889</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268889</guiaRemision>
+<razonSocialComprador>BALDEON MURILLO MANUEL GENARO</razonSocialComprador>
+<identificacionComprador>0600069058</identificacionComprador>
+<totalSinImpuestos>325.10</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>325.10</baseImponible>
+<valor>39.01</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>364.11</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>61791</codigoPrincipal>
+<descripcion>TANQUE DE PRESION FIBRA DE VIDRIO WM-6/WM0075 ENTREGA DE 5.9 GLS POR CICLO DE 30/50 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>286.13</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>286.13</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="WELL M"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>286.13</baseImponible>
+<valor>34.34</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5830</codigoPrincipal>
+<descripcion>TUBO PVC ROSCABLE x 6 MTS. DE 1" (320 PSI)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>20.72</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>20.72</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>20.72</baseImponible>
+<valor>2.49</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50318</codigoPrincipal>
+<descripcion>NEPLO POLIPROPILENO DE 1" x 6 cm. (AGUA CALIENTE)</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>0.31</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>0.93</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.93</baseImponible>
+<valor>0.11</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50330</codigoPrincipal>
+<descripcion>NEPLO POLIPROPILENO DE 1" x 10 cm. (AGUA CALIENTE)</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>0.38</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1.14</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.14</baseImponible>
+<valor>0.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50293</codigoPrincipal>
+<descripcion>NEPLO POLIPROPILENO DE 1" CON TUERCA (AGUA CALIENTE)</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>0.74</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2.22</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.22</baseImponible>
+<valor>0.27</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50426</codigoPrincipal>
+<descripcion>UNIVERSAL POLIPROPILENO DE 1" (AGUA CALIENTE)</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>3.72</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>11.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>11.16</baseImponible>
+<valor>1.34</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>92013</codigoPrincipal>
+<descripcion>BUSHING GALV. CLASE 150 DE 1" x 1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.84</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1.84</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.84</baseImponible>
+<valor>0.22</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1620</codigoPrincipal>
+<descripcion>BUSHING GALV. CLASE 150 DE 1/2" x 1/4"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>0.96</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>0.96</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.96</baseImponible>
+<valor>0.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">gmbaldeon@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2594240</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">025526</campoAdicional>
+<campoAdicional nombre="Observaciones">CH:467 BAN.PICHINCHA</campoAdicional>
+</infoAdicional>
+</factura>

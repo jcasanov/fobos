@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000114001</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000114001</guiaRemision>
+<razonSocialComprador>FOSFORERA ECUATORIANA  S.A.</razonSocialComprador>
+<identificacionComprador>1790021203001</identificacionComprador>
+<totalSinImpuestos>92.25</totalSinImpuestos>
+<totalDescuento>8.87</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>92.25</baseImponible>
+<valor>11.07</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>103.32</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99959</codigoPrincipal>
+<descripcion>GRIFO PASO RECTO BRONCE ROSCADO EVOLUTION DE 1/2" CABO AMARILLO</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>6.45</precioUnitario>
+<descuento>3.10</descuento>
+<precioTotalSinImpuesto>35.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FIV"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>35.60</baseImponible>
+<valor>4.27</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>92199</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 90 GRAD  DE 1/2"</descripcion>
+<cantidad>15.00</cantidad>
+<precioUnitario>1.14</precioUnitario>
+<descuento>1.37</descuento>
+<precioTotalSinImpuesto>15.73</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>15.73</baseImponible>
+<valor>1.89</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2112</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150  X 45 GRAD  DE 1/2"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>1.55</precioUnitario>
+<descuento>0.93</descuento>
+<precioTotalSinImpuesto>8.37</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.37</baseImponible>
+<valor>1.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6312</codigoPrincipal>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 1/2"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>4.86</precioUnitario>
+<descuento>2.92</descuento>
+<precioTotalSinImpuesto>26.24</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>26.24</baseImponible>
+<valor>3.15</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3158</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1/2" x 2"</descripcion>
+<cantidad>8.00</cantidad>
+<precioUnitario>0.37</precioUnitario>
+<descuento>0.24</descuento>
+<precioTotalSinImpuesto>2.72</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.72</baseImponible>
+<valor>0.33</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3166</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1/2" x 4"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>0.65</precioUnitario>
+<descuento>0.31</descuento>
+<precioTotalSinImpuesto>3.59</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.59</baseImponible>
+<valor>0.43</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">maguilar@fesa.la</campoAdicional>
+<campoAdicional nombre="Email">rplaza@fesa.la</campoAdicional>
+<campoAdicional nombre="telefono-movil">3080746</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000065</campoAdicional>
+<campoAdicional nombre="Observaciones">OC:588 SR LUIS RIOS</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025722</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>TITO GUTIERREZ</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>13/01/2015</fechaIniTransporte>
+<fechaFinTransporte>14/01/2015</fechaFinTransporte>
+<placa>GSL5009</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0990817987001</identificacionDestinatario>
+<razonSocialDestinatario>CONSTRUCTORA COVIGON C.A.</razonSocialDestinatario>
+<dirDestinatario>SALINAS</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>08/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>101456</codigoInterno>
+<descripcion>BOMBA CENTRIF MULTIETAPA C-MOTOR CR3-11 2HP ROSCADA 220-277D/380-480Y/3/60 (98493506)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>102962</codigoInterno>
+<descripcion>BOMBA CENTRIFUGA STANDAR S/ MOTOR NK50-200/219 Y1F2AE-SBAQE  (96604219)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>71552</codigoInterno>
+<descripcion>TABLERO ELECTRICO SCI DE 40HP/220V.3F. ARRANQUE Y-D JOCKEY DE 3HP.3F MAN. AUT. NORMADO</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">compras2@covigon.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2922152</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">007186</campoAdicional>
+</infoAdicional>
+</guiaRemision>

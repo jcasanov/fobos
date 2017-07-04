@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comprobanteRetencion id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000040123</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoCompRetencion>
+<fechaEmision>08/12/2014</fechaEmision>
+<dirEstablecimiento>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionSujetoRetenido>04</tipoIdentificacionSujetoRetenido>
+<razonSocialSujetoRetenido>METALICAS NACIONAL C.LTDA.</razonSocialSujetoRetenido>
+<identificacionSujetoRetenido>1790497445001</identificacionSujetoRetenido>
+<periodoFiscal>12/2014</periodoFiscal>
+</infoCompRetencion>
+<impuestos>
+<impuesto>
+<codigo>1</codigo>
+<codigoRetencion>312</codigoRetencion>
+<baseImponible>2005.96</baseImponible>
+<porcentajeRetener>1.00</porcentajeRetener>
+<valorRetenido>20.06</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>001001000002198</numDocSustento>
+<fechaEmisionDocSustento>01/12/2014</fechaEmisionDocSustento>
+</impuesto>
+<impuesto>
+<codigo>2</codigo>
+<codigoRetencion>1</codigoRetencion>
+<baseImponible>240.72</baseImponible>
+<porcentajeRetener>30.00</porcentajeRetener>
+<valorRetenido>72.22</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>001001000002198</numDocSustento>
+<fechaEmisionDocSustento>01/12/2014</fechaEmisionDocSustento>
+</impuesto>
+</impuestos>
+<infoAdicional>
+<campoAdicional nombre="Email">metalicasnacional@yahoo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2647299</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">001208</campoAdicional>
+</infoAdicional>
+</comprobanteRetencion>

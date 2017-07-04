@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000034206</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>AV. JUAN TANCA MARENGO KM.1.7</dirPartida>
+<razonSocialTransportista>ANGEL CHRISTIAN AGUAR GOMEZ</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>0916243520</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>24/12/2014</fechaIniTransporte>
+<fechaFinTransporte>24/12/2014</fechaFinTransporte>
+<placa>.....</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0991088415001</identificacionDestinatario>
+<razonSocialDestinatario>CONSTRUCTORA CONALBA S.A.</razonSocialDestinatario>
+<dirDestinatario>RETIRO ANGEL CHRISTIAN AGUAR GOMEZ</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>16/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>71844</codigoInterno>
+<descripcion>GRIFERIA DE DUCHA E109/39 CR LIBBY</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="MODELO" valor="E109/39 CR LIBBY"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">ventas@conalba.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2833800</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">005447</campoAdicional>
+</infoAdicional>
+</guiaRemision>

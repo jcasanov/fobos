@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comprobanteRetencion id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000030655</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoCompRetencion>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionSujetoRetenido>04</tipoIdentificacionSujetoRetenido>
+<razonSocialSujetoRetenido>NARANJO CHACON ANDREA JANETH</razonSocialSujetoRetenido>
+<identificacionSujetoRetenido>0923346928001</identificacionSujetoRetenido>
+<periodoFiscal>12/2014</periodoFiscal>
+</infoCompRetencion>
+<impuestos>
+<impuesto>
+<codigo>1</codigo>
+<codigoRetencion>341</codigoRetencion>
+<baseImponible>33.00</baseImponible>
+<porcentajeRetener>2.00</porcentajeRetener>
+<valorRetenido>0.66</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>001001000034766</numDocSustento>
+<fechaEmisionDocSustento>17/12/2014</fechaEmisionDocSustento>
+</impuesto>
+<impuesto>
+<codigo>2</codigo>
+<codigoRetencion>2</codigoRetencion>
+<baseImponible>3.96</baseImponible>
+<porcentajeRetener>70.00</porcentajeRetener>
+<valorRetenido>2.77</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>001001000034766</numDocSustento>
+<fechaEmisionDocSustento>17/12/2014</fechaEmisionDocSustento>
+</impuesto>
+</impuestos>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">042235190</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">001158</campoAdicional>
+</infoAdicional>
+</comprobanteRetencion>

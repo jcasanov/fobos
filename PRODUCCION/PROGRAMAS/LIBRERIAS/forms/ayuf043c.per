@@ -1,0 +1,30 @@
+DATABASE aceros
+
+SCREEN
+{
+  UNIDADES DE MEDIDA 
+ -------------------
+  Tipo       Siglas
+ -------------------
+ [c01    ]  [c02] 
+ [c01    ]  [c02]
+ [c01    ]  [c02]
+ [c01    ]  [c02]
+ [c01    ]  [c02]
+ [c01    ]  [c02]
+ [c01    ]  [c02] 
+ [c01    ]  [c02] 
+ [c01    ]  [c02] 
+ [c01    ]  [c02] 
+}
+
+TABLES
+rept005
+
+ATTRIBUTES
+c01 = r05_codigo,REVERSE;
+c02 = r05_siglas,REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_unimed[10](r05_codigo, r05_siglas)

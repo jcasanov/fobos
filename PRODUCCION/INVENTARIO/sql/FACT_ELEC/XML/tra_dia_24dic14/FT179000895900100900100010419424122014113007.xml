@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104194</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>24/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104194</guiaRemision>
+<razonSocialComprador>CORPORACION EL ROSADO S.A.</razonSocialComprador>
+<identificacionComprador>0990004196001</identificacionComprador>
+<totalSinImpuestos>226.00</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>226.00</baseImponible>
+<valor>27.12</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>253.12</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>71627</codigoPrincipal>
+<descripcion>PISTON 00418700 COMPLETO 1.6 GPF/6.0 LPF</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>52.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>156.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>156.00</baseImponible>
+<valor>18.72</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>71715</codigoPrincipal>
+<descripcion>PISTON 00418900 CARTUCHO ACCIONAMIENTO</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>17.50</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>70.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>70.00</baseImponible>
+<valor>8.40</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">mantenimiento@elrosado.com</campoAdicional>
+<campoAdicional nombre="Email">edocs@elrosado.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2322555</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">002615</campoAdicional>
+</infoAdicional>
+</factura>

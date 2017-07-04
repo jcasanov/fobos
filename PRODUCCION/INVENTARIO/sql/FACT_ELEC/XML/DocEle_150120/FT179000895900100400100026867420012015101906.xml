@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268674</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268674</guiaRemision>
+<razonSocialComprador>SALAS ROBERTO NICOLAS</razonSocialComprador>
+<identificacionComprador>1704380623001</identificacionComprador>
+<totalSinImpuestos>107.10</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>107.10</baseImponible>
+<valor>12.85</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>119.95</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>654</codigoPrincipal>
+<descripcion>MALLA GALVANIZADA 2" x 1" x 0.76 m DE ANCHO</descripcion>
+<cantidad>30.00</cantidad>
+<precioUnitario>3.57</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>107.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="M"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>107.10</baseImponible>
+<valor>12.85</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">robenisa@yahoo.es</campoAdicional>
+<campoAdicional nombre="telefono-movil">2242936</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">036718</campoAdicional>
+<campoAdicional nombre="Observaciones">P/CRUCE CON PAGO ANTICIPADO</campoAdicional>
+</infoAdicional>
+</factura>

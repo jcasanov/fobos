@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268299</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>09/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268299</guiaRemision>
+<razonSocialComprador>CORPRANCAGUA CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1792371449001</identificacionComprador>
+<totalSinImpuestos>24.57</totalSinImpuestos>
+<totalDescuento>2.73</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>24.57</baseImponible>
+<valor>2.95</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>27.52</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>21187</codigoPrincipal>
+<descripcion>TACO FICHER F8 (PAQUETE DE 5)</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>0.27</precioUnitario>
+<descuento>0.11</descuento>
+<precioTotalSinImpuesto>0.97</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="PAQ"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.97</baseImponible>
+<valor>0.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21277</codigoPrincipal>
+<descripcion>TORNILLO TP-1-1/4" (PAQUETE DE 10)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>0.90</precioUnitario>
+<descuento>0.18</descuento>
+<precioTotalSinImpuesto>1.62</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="PAQ"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.62</baseImponible>
+<valor>0.19</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>19538</codigoPrincipal>
+<descripcion>CABLE ELECTRICO NO.12 DE ELECTRODOS</descripcion>
+<cantidad>30.00</cantidad>
+<precioUnitario>0.71</precioUnitario>
+<descuento>2.13</descuento>
+<precioTotalSinImpuesto>19.17</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CABLEC"/>
+<detAdicional nombre="UNIDAD" valor="M"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>19.17</baseImponible>
+<valor>2.30</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21179</codigoPrincipal>
+<descripcion>TAIPE P/INSTALACIONES GRANDE(10 YD.)</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>0.78</precioUnitario>
+<descuento>0.31</descuento>
+<precioTotalSinImpuesto>2.81</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.81</baseImponible>
+<valor>0.34</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">eromero@corprancagua.com</campoAdicional>
+<campoAdicional nombre="Email">mailto:mtopon@corprancagua.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2240002</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">058469</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268130</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>06/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268130</guiaRemision>
+<razonSocialComprador>CHAMBA AVILA JOSELYN DANIELA</razonSocialComprador>
+<identificacionComprador>1719434803001</identificacionComprador>
+<totalSinImpuestos>209.93</totalSinImpuestos>
+<totalDescuento>43.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>209.93</baseImponible>
+<valor>25.19</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>235.12</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102233</codigoPrincipal>
+<descripcion>BALDOSA DE PISO / PARED 35 X 50 FACCIATA ARENA  PRIMERA</descripcion>
+<cantidad>18.96</cantidad>
+<precioUnitario>13.34</precioUnitario>
+<descuento>43.00</descuento>
+<precioTotalSinImpuesto>209.93</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>209.93</baseImponible>
+<valor>25.19</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jaime.jarrin@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2582985</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">061714</campoAdicional>
+</infoAdicional>
+</factura>

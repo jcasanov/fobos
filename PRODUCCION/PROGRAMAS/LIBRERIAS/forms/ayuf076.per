@@ -1,0 +1,30 @@
+DATABASE aceros
+
+SCREEN
+{
+ TIPOS DE COMPROBANTES 
+----------------------------------
+      Descripción
+----------------------------------
+[c0] [c002                     ]
+[c0] [c002                     ]
+[c0] [c002                     ]
+[c0] [c002                     ]
+[c0] [c002                     ]
+[c0] [c002                     ]
+[c0] [c002                     ] 
+[c0] [c002                     ] 
+[c0] [c002                     ] 
+[c0] [c002                     ] 
+}
+
+TABLES
+ctbt003
+
+ATTRIBUTES
+c0   = b03_tipo_comp, UPSHIFT;
+c002 = b03_nombre, UPSHIFT;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_tipcomp[10](b03_tipo_comp, b03_nombre)

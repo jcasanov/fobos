@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000004384</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>PRODUCTOS INDUSTRIALES Y FERRETEROS [P.I.F.]</razonSocialComprador>
+<identificacionComprador>1705265351001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>003-001-000114015</numDocModificado>
+<fechaEmisionDocSustento>21/01/2015</fechaEmisionDocSustento>
+<totalSinImpuestos>164.61</totalSinImpuestos>
+<valorModificacion>184.36</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>164.61</baseImponible>
+<valor>19.75</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>LAS CAÒUELAS NO TIENEN ALUMINIO</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>44300</codigoInterno>
+<descripcion>COQUILLA LANA DE VIDRIO C-ALUMINIO 1" x 1" x 0.90 m.</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>5.60</precioUnitario>
+<descuento>5.60</descuento>
+<precioTotalSinImpuesto>50.40</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDIFI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>50.40</baseImponible>
+<valor>6.05</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>44312</codigoInterno>
+<descripcion>COQUILLA LANA DE VIDRIO C-ALUMINIO 4" x 1" x 0.90 m.</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>12.69</precioUnitario>
+<descuento>12.69</descuento>
+<precioTotalSinImpuesto>114.21</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDIFI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>114.21</baseImponible>
+<valor>13.71</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">imporpif@andinanet.net</campoAdicional>
+<campoAdicional nombre="telefono-movil">2648116</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">12974</campoAdicional>
+</infoAdicional>
+</notaCredito>

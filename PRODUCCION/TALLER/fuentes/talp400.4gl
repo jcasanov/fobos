@@ -346,9 +346,11 @@ INPUT BY NAME rm_t23.t23_moneda, rm_t04.t04_linea, rm_t23.t23_tipo_ot,
 		IF fecha_hasta IS NULL THEN
 			NEXT FIELD fecha_hasta
 		END IF
+		{--
 		IF rm_t23.t23_tipo_ot IS NULL THEN
 			NEXT FIELD t04_linea
 		END IF
+		--}
 END INPUT
 IF solo_tal = 'S' THEN
 	LET todo_inv = 'N'
@@ -535,6 +537,7 @@ DEFINE expr_out		CHAR(5)
 DEFINE expr_fec1	VARCHAR(200)
 DEFINE expr_fec2	VARCHAR(200)
 DEFINE expr_est		VARCHAR(100)
+DEFINE expr_tip_tal	VARCHAR(100)
 DEFINE expr_vta_tal	VARCHAR(100)
 DEFINE query		CHAR(9000)
 
@@ -559,6 +562,10 @@ CASE tr_ant
 	WHEN 2
 		LET factor = NULL
 END CASE
+LET expr_tip_tal = NULL
+IF rm_t23.t23_tipo_ot IS NOT NULL THEN
+	LET expr_tip_tal = "   AND t23_tipo_ot   = '", rm_t23.t23_tipo_ot, "'"
+END IF
 LET expr_vta_tal = NULL
 IF rm_t23.t23_cont_cred <> 'T' THEN
 	LET expr_vta_tal = "   AND t23_cont_cred = '", rm_t23.t23_cont_cred, "'"
@@ -700,6 +707,7 @@ LET query = "INSERT INTO tmp_det ",
 		" WHERE t23_compania  = ", vg_codcia,
 		"   AND t23_localidad = ", vg_codloc,
 		expr_est CLIPPED,
+		expr_tip_tal CLIPPED,
 		expr_vta_tal CLIPPED,
 		expr_fec1 CLIPPED,
 		"   AND t28_compania  = t23_compania ",
@@ -925,8 +933,12 @@ PAGE HEADER
 	ELSE
 		PRINT 'T O D A S'
 	END IF
-	PRINT COLUMN 067, '** TIPO DE ORDEN : ', rm_t23.t23_tipo_ot, ' ',
-						 r_t05.t05_nombre
+	IF rm_t23.t23_tipo_ot IS NOT NULL THEN
+		PRINT COLUMN 067, '** TIPO DE ORDEN : ', rm_t23.t23_tipo_ot,' ',
+							 r_t05.t05_nombre
+	ELSE
+		PRINT 'T O D O S  L O S  T I P O S'
+	END IF
 	PRINT COLUMN 067, '** ESTADO        : ', rm_t23.t23_estado, ' ',
 						 nom_estado;
 	IF solo_tal = 'S' THEN

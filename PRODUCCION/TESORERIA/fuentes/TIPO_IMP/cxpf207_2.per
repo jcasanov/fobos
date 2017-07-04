@@ -1,0 +1,60 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+       Proveedor: [c000                                        ]
+       Documento: [a0][c020           ]
+                                      Valor Bienes: [c001            ]
+                                   Valor Servicios: [c002            ]
+                                          Impuesto: [c003            ]
+                                                    ------------------
+                                        Valor Neto: [c004            ]
+   [c051] de [c052]
+    [lbl1          |lbl6  |lbl2|lbl3          |lbl4  |lbl5            ]   
+ [c|c010          |c009  |c005|c006          |c007  |c008            ]
+ [c|c010          |c009  |c005|c006          |c007  |c008            ]
+ [c|c010          |c009  |c005|c006          |c007  |c008            ]
+ [c|c010          |c009  |c005|c006          |c007  |c008            ]
+ [c|c010          |c009  |c005|c006          |c007  |c008            ]
+                                                    ------------------
+                                 Total Retenciones: [c011            ]
+ [c050                                                               ]
+
+}
+ATTRIBUTES
+a0   = FORMONLY.tit_tipo, NOENTRY, REVERSE, UPSHIFT;
+c020 = FORMONLY.tit_num, NOENTRY, REVERSE, UPSHIFT;
+c000 = FORMONLY.n_proveedor, NOENTRY, REVERSE, UPSHIFT;
+c001 = FORMONLY.val_bienes, AUTONEXT, REVERSE, FORMAT = '#,###,###,##&.##';
+c002 = FORMONLY.val_servi, AUTONEXT, REVERSE, FORMAT = '#,###,###,##&.##';
+c003 = FORMONLY.val_impto, NOENTRY, REVERSE, FORMAT = '#,###,###,##&.##';
+c004 = FORMONLY.val_neto, NOENTRY, REVERSE, FORMAT = '#,###,###,##&.##';
+
+c005 = FORMONLY.tipo_ret, NOENTRY, OPTIONS = '-nolist';
+c006 = FORMONLY.val_base, FORMAT = '##,###,##&.##',
+	OPTIONS = '-nolist';
+c007 = FORMONLY.porc, NOENTRY, FORMAT = '##&.##', OPTIONS='-nolist';
+c008 = FORMONLY.subtotal, NOENTRY, FORMAT = '#,###,###,##&.##',
+	OPTIONS = '-nolist';
+c010 = FORMONLY.n_retencion, NOENTRY, OPTIONS = '-nolist';
+c009 = FORMONLY.c_sri, NOENTRY, OPTIONS = '-nolist';
+
+c011 = FORMONLY.tot_ret, NOENTRY, REVERSE, FORMAT = '#,###,###,##&.##';
+
+c    = FORMONLY.check, WIDGET = 'CHECK', CONFIG = 'S N acknowledge',
+	AUTONEXT, DEFAULT = 'N', OPTIONS = '-nolist';
+	
+lbl1 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F15';
+lbl6 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F16';
+lbl2 = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F17';
+lbl3 = FORMONLY.tit_col9, WIDGET = 'BUTTON', CONFIG = 'F18';
+lbl4 = FORMONLY.tit_col10, WIDGET = 'BUTTON', CONFIG = 'F19';
+lbl5 = FORMONLY.tit_col11, WIDGET = 'BUTTON', CONFIG = 'F20';
+c050 = FORMONLY.tit_codigo_sri, NOENTRY, REVERSE;
+
+c051 = FORMONLY.num_rows, NOENTRY, REVERSE;
+c052 = FORMONLY.max_rows, NOENTRY, REVERSE;
+END
+INSTRUCTIONS
+SCREEN RECORD ra_ret[5] (check, n_retencion, c_sri, tipo_ret, val_base, porc,
+				subtotal)

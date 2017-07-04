@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176067</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176067</guiaRemision>
+<razonSocialComprador>SERTECPET S.A.</razonSocialComprador>
+<identificacionComprador>1791263308001</identificacionComprador>
+<totalSinImpuestos>3786.75</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>3786.75</baseImponible>
+<valor>454.41</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>4241.16</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>150616</codigoPrincipal>
+<descripcion>CLAVO DE CABEZA .300 PARA CEMENTO Y ACERO 50026 DE 1" PIN 0.145" CABEZA 0.3" CAJA 100 u</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>4.62</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>9.24</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="PAQ"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.24</baseImponible>
+<valor>1.11</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>12662</codigoPrincipal>
+<descripcion>BOMBA HIDRAULICA MANUAL P-39 1 VELOCIDAD 40 pulg3 10000 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>474.61</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>474.61</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>474.61</baseImponible>
+<valor>56.95</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97487</codigoPrincipal>
+<descripcion>SACABOCADOS HIDRAULICO HKO-1810 DE 1/2" A 4" CON BOMBA MANUAL " (24587)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2072.90</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2072.90</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2072.90</baseImponible>
+<valor>248.75</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99108</codigoPrincipal>
+<descripcion>DOBLADORA DE TUBOS HB382 CAPACIDAD DE 3/8" A 2" TIP-UP  (36518)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1230.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1230.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1230.00</baseImponible>
+<valor>147.60</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3954900</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">010219</campoAdicional>
+</infoAdicional>
+</factura>

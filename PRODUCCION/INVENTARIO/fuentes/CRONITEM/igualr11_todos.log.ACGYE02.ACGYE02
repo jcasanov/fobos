@@ -1,0 +1,574 @@
+Iniciando proceso de igualar rept011 nacional (Remoto) ...
+ 
+Descargando rept011 de acero_gm ACGYE01 ...
+Descargada rept011 de acero_gm ACGYE01 ...
+ 
+Creando tabla temporal temp_r11 ...
+Creada tabla temporal temp_r11 ...
+ 
+Cargando tabla temporal temp_r11 para el proceso ...
+Cargada tabla temporal temp_r11 ...
+ 
+Procesando Actualización rept011 de acero_gm ACGYE01 en acero_gc ACGYE02. Espere ...
+ 
+Procesando rept011 para borrar en acero_gc ACGYE02 ...
+  Total registros en temp_r11 es de 15759
+  Total registros de rept011 en acero_gc ACGYE02 es de 15759
+Se Procesaron 0 registros rept011. OK
+No se Borró ningun registros en la rept011. OK
+ 
+Procesando temp_r11 para insertar en rept011 ...
+Se Procesaron 0 registros rept011. OK
+No se Insertó ningun registros en la rept011. OK
+ 
+Borrando la tabla temporal ...
+ 
+Descargando rept011 de acero_gm ACGYE01 ...
+Descargada rept011 de acero_gm ACGYE01 ...
+ 
+Creando tabla temporal temp_r11 ...
+Creada tabla temporal temp_r11 ...
+ 
+Cargando tabla temporal temp_r11 para el proceso ...
+Cargada tabla temporal temp_r11 ...
+ 
+Procesando Actualización rept011 de acero_gm ACGYE01 en acero_qm ACUIO01. Espere ...
+ 
+Procesando rept011 para borrar en acero_qm ACUIO01 ...
+  Total registros en temp_r11 es de 15759
+  Total registros de rept011 en acero_qm ACUIO01 es de 15759
+Se Procesaron 0 registros rept011. OK
+No se Borró ningun registros en la rept011. OK
+ 
+Procesando temp_r11 para insertar en rept011 ...
+Se Procesaron 0 registros rept011. OK
+No se Insertó ningun registros en la rept011. OK
+ 
+Borrando la tabla temporal ...
+ 
+Descargando rept011 de acero_gm ACGYE01 ...
+Descargada rept011 de acero_gm ACGYE01 ...
+ 
+Creando tabla temporal temp_r11 ...
+Creada tabla temporal temp_r11 ...
+ 
+Cargando tabla temporal temp_r11 para el proceso ...
+Cargada tabla temporal temp_r11 ...
+ 
+Procesando Actualización rept011 de acero_gm ACGYE01 en acero_qs ACUIO02. Espere ...
+ 
+Procesando rept011 para borrar en acero_qs ACUIO02 ...
+  Total registros en temp_r11 es de 15759
+  Total registros de rept011 en acero_qs ACUIO02 es de 15759
+Se Procesaron 0 registros rept011. OK
+No se Borró ningun registros en la rept011. OK
+ 
+Procesando temp_r11 para insertar en rept011 ...
+Se Procesaron 0 registros rept011. OK
+No se Insertó ningun registros en la rept011. OK
+ 
+Borrando la tabla temporal ...
+ 
+Proceso Terminado OK.
+Iniciando proceso de igualar rept011 nacional (Remoto) ...
+ 
+Descargando rept011 de acero_gc ACGYE02 ...
+Descargada rept011 de acero_gc ACGYE02 ...
+ 
+Creando tabla temporal temp_r11 ...
+Creada tabla temporal temp_r11 ...
+ 
+Cargando tabla temporal temp_r11 para el proceso ...
+Cargada tabla temporal temp_r11 ...
+ 
+Procesando Actualización rept011 de acero_gc ACGYE02 en acero_gm ACGYE01. Espere ...
+ 
+Procesando rept011 para borrar en acero_gm ACGYE01 ...
+  Total registros en temp_r11 es de 6052
+  Total registros de rept011 en acero_gm ACGYE01 es de 6062
+Borrando registro rept011 en acero_gm ACGYE01: 70 91861
+Borrando registro rept011 en acero_gm ACGYE01: 70 91971
+Borrando registro rept011 en acero_gm ACGYE01: 70 91966
+Borrando registro rept011 en acero_gm ACGYE01: 70 46567
+Borrando registro rept011 en acero_gm ACGYE01: 70 22889
+Borrando registro rept011 en acero_gm ACGYE01: 70 69457
+Borrando registro rept011 en acero_gm ACGYE01: 70 69475
+Borrando registro rept011 en acero_gm ACGYE01: 70 91964
+Borrando registro rept011 en acero_gm ACGYE01: 70 60554
+Borrando registro rept011 en acero_gm ACGYE01: 70 50136
+Se Procesaron 10 registros rept011. OK
+Se Borraron 10 registros en rept011. OK
+ 
+Procesando temp_r11 para insertar en rept011 ...
+Se Procesaron 0 registros rept011. OK
+No se Insertó ningun registros en la rept011. OK
+ 
+Borrando la tabla temporal ...
+ 
+Descargando rept011 de acero_gc ACGYE02 ...
+Descargada rept011 de acero_gc ACGYE02 ...
+ 
+Creando tabla temporal temp_r11 ...
+Creada tabla temporal temp_r11 ...
+ 
+Cargando tabla temporal temp_r11 para el proceso ...
+Cargada tabla temporal temp_r11 ...
+ 
+Procesando Actualización rept011 de acero_gc ACGYE02 en acero_qm ACUIO01. Espere ...
+ 
+Procesando rept011 para borrar en acero_qm ACUIO01 ...
+  Total registros en temp_r11 es de 6052
+  Total registros de rept011 en acero_qm ACUIO01 es de 6052
+Se Procesaron 0 registros rept011. OK
+No se Borró ningun registros en la rept011. OK
+ 
+Procesando temp_r11 para insertar en rept011 ...
+Se Procesaron 0 registros rept011. OK
+No se Insertó ningun registros en la rept011. OK
+ 
+Borrando la tabla temporal ...
+ 
+Descargando rept011 de acero_gc ACGYE02 ...
+Descargada rept011 de acero_gc ACGYE02 ...
+ 
+Creando tabla temporal temp_r11 ...
+Creada tabla temporal temp_r11 ...
+ 
+Cargando tabla temporal temp_r11 para el proceso ...
+Cargada tabla temporal temp_r11 ...
+ 
+Procesando Actualización rept011 de acero_gc ACGYE02 en acero_qs ACUIO02. Espere ...
+ 
+Procesando rept011 para borrar en acero_qs ACUIO02 ...
+  Total registros en temp_r11 es de 6052
+  Total registros de rept011 en acero_qs ACUIO02 es de 6052
+Se Procesaron 0 registros rept011. OK
+No se Borró ningun registros en la rept011. OK
+ 
+Procesando temp_r11 para insertar en rept011 ...
+Se Procesaron 0 registros rept011. OK
+No se Insertó ningun registros en la rept011. OK
+ 
+Borrando la tabla temporal ...
+ 
+Proceso Terminado OK.
+Iniciando proceso de igualar rept011 nacional (Remoto) ...
+ 
+Descargando rept011 de acero_qm ACUIO01 ...
+Descargada rept011 de acero_qm ACUIO01 ...
+ 
+Creando tabla temporal temp_r11 ...
+Creada tabla temporal temp_r11 ...
+ 
+Cargando tabla temporal temp_r11 para el proceso ...
+Cargada tabla temporal temp_r11 ...
+ 
+Procesando Actualización rept011 de acero_qm ACUIO01 en acero_gm ACGYE01. Espere ...
+ 
+Procesando rept011 para borrar en acero_gm ACGYE01 ...
+  Total registros en temp_r11 es de 36757
+  Total registros de rept011 en acero_gm ACGYE01 es de 36681
+Se Procesaron 0 registros rept011. OK
+No se Borró ningun registros en la rept011. OK
+ 
+Procesando temp_r11 para insertar en rept011 ...
+Insertando registro rept011 en acero_gm ACGYE01: 13 21532
+Insertando registro rept011 en acero_gm ACGYE01: 17 1014
+Insertando registro rept011 en acero_gm ACGYE01: 17 1030
+Insertando registro rept011 en acero_gm ACGYE01: 17 1038
+Insertando registro rept011 en acero_gm ACGYE01: 17 1052
+Insertando registro rept011 en acero_gm ACGYE01: 17 1056
+Insertando registro rept011 en acero_gm ACGYE01: 18 92656
+Insertando registro rept011 en acero_gm ACGYE01: 18 92658
+Insertando registro rept011 en acero_gm ACGYE01: 40 26193
+Insertando registro rept011 en acero_gm ACGYE01: 40 27158
+Insertando registro rept011 en acero_gm ACGYE01: 13 92796
+Insertando registro rept011 en acero_gm ACGYE01: 17 92660
+Insertando registro rept011 en acero_gm ACGYE01: 17 92661
+Insertando registro rept011 en acero_gm ACGYE01: 18 92786
+Insertando registro rept011 en acero_gm ACGYE01: 17 1010
+Insertando registro rept011 en acero_gm ACGYE01: 17 1046
+Insertando registro rept011 en acero_gm ACGYE01: 17 1060
+Insertando registro rept011 en acero_gm ACGYE01: 18 20531
+Insertando registro rept011 en acero_gm ACGYE01: 18 91935
+Insertando registro rept011 en acero_gm ACGYE01: 18 92785
+Insertando registro rept011 en acero_gm ACGYE01: 17 1066
+Insertando registro rept011 en acero_gm ACGYE01: 17 1080
+Insertando registro rept011 en acero_gm ACGYE01: 17 1090
+Insertando registro rept011 en acero_gm ACGYE01: 13 21542
+Insertando registro rept011 en acero_gm ACGYE01: 13 21558
+Insertando registro rept011 en acero_gm ACGYE01: 17 1022
+Insertando registro rept011 en acero_gm ACGYE01: 17 1076
+Insertando registro rept011 en acero_gm ACGYE01: 17 92658
+Insertando registro rept011 en acero_gm ACGYE01: 17 92659
+Insertando registro rept011 en acero_gm ACGYE01: 18 20540
+Insertando registro rept011 en acero_gm ACGYE01: 18 49009
+Insertando registro rept011 en acero_gm ACGYE01: 18 92660
+Insertando registro rept011 en acero_gm ACGYE01: 14 92797
+Insertando registro rept011 en acero_gm ACGYE01: 17 1036
+Insertando registro rept011 en acero_gm ACGYE01: 17 1058
+Insertando registro rept011 en acero_gm ACGYE01: 17 1086
+Insertando registro rept011 en acero_gm ACGYE01: 17 92656
+Insertando registro rept011 en acero_gm ACGYE01: 18 63070
+Insertando registro rept011 en acero_gm ACGYE01: 13 21508
+Insertando registro rept011 en acero_gm ACGYE01: 17 1012
+Insertando registro rept011 en acero_gm ACGYE01: 17 1044
+Insertando registro rept011 en acero_gm ACGYE01: 17 1048
+Insertando registro rept011 en acero_gm ACGYE01: 17 1074
+Insertando registro rept011 en acero_gm ACGYE01: 17 1096
+Insertando registro rept011 en acero_gm ACGYE01: 17 1116
+Insertando registro rept011 en acero_gm ACGYE01: 17 1126
+Insertando registro rept011 en acero_gm ACGYE01: 17 92657
+Insertando registro rept011 en acero_gm ACGYE01: 18 92662
+Insertando registro rept011 en acero_gm ACGYE01: DQ 20695
+Insertando registro rept011 en acero_gm ACGYE01: 13 21630
+Insertando registro rept011 en acero_gm ACGYE01: 14 92791
+Insertando registro rept011 en acero_gm ACGYE01: 17 1054
+Insertando registro rept011 en acero_gm ACGYE01: 17 1088
+Insertando registro rept011 en acero_gm ACGYE01: 18 20549
+Insertando registro rept011 en acero_gm ACGYE01: 18 49007
+Insertando registro rept011 en acero_gm ACGYE01: 18 92657
+Insertando registro rept011 en acero_gm ACGYE01: 18 92659
+Insertando registro rept011 en acero_gm ACGYE01: 40 41165
+Insertando registro rept011 en acero_gm ACGYE01: 14 12832
+Insertando registro rept011 en acero_gm ACGYE01: 15 92799
+Insertando registro rept011 en acero_gm ACGYE01: 17 91935
+Insertando registro rept011 en acero_gm ACGYE01: 18 63074
+Insertando registro rept011 en acero_gm ACGYE01: 18 63096
+Insertando registro rept011 en acero_gm ACGYE01: 18 92661
+Insertando registro rept011 en acero_gm ACGYE01: 17 1042
+Insertando registro rept011 en acero_gm ACGYE01: 17 1092
+Insertando registro rept011 en acero_gm ACGYE01: 17 1128
+Insertando registro rept011 en acero_gm ACGYE01: 18 92791
+Insertando registro rept011 en acero_gm ACGYE01: 14 92798
+Insertando registro rept011 en acero_gm ACGYE01: 15 69025
+Insertando registro rept011 en acero_gm ACGYE01: 17 1028
+Insertando registro rept011 en acero_gm ACGYE01: 17 1050
+Insertando registro rept011 en acero_gm ACGYE01: 17 1078
+Insertando registro rept011 en acero_gm ACGYE01: 17 1084
+Insertando registro rept011 en acero_gm ACGYE01: 17 998
+Insertando registro rept011 en acero_gm ACGYE01: 18 18793
+Se Procesaron 76 registros rept011. OK
+Se Insertaron 76 registros en rept011. OK
+ 
+Borrando la tabla temporal ...
+ 
+Descargando rept011 de acero_qm ACUIO01 ...
+Descargada rept011 de acero_qm ACUIO01 ...
+ 
+Creando tabla temporal temp_r11 ...
+Creada tabla temporal temp_r11 ...
+ 
+Cargando tabla temporal temp_r11 para el proceso ...
+Cargada tabla temporal temp_r11 ...
+ 
+Procesando Actualización rept011 de acero_qm ACUIO01 en acero_gc ACGYE02. Espere ...
+ 
+Procesando rept011 para borrar en acero_gc ACGYE02 ...
+  Total registros en temp_r11 es de 36757
+  Total registros de rept011 en acero_gc ACGYE02 es de 36635
+Se Procesaron 0 registros rept011. OK
+No se Borró ningun registros en la rept011. OK
+ 
+Procesando temp_r11 para insertar en rept011 ...
+Insertando registro rept011 en acero_gc ACGYE02: 13 21532
+Insertando registro rept011 en acero_gc ACGYE02: 15 23710
+Insertando registro rept011 en acero_gc ACGYE02: 15 24436
+Insertando registro rept011 en acero_gc ACGYE02: 15 25712
+Insertando registro rept011 en acero_gc ACGYE02: 17 1014
+Insertando registro rept011 en acero_gc ACGYE02: 17 1030
+Insertando registro rept011 en acero_gc ACGYE02: 17 1038
+Insertando registro rept011 en acero_gc ACGYE02: 17 1052
+Insertando registro rept011 en acero_gc ACGYE02: 17 1056
+Insertando registro rept011 en acero_gc ACGYE02: 18 92656
+Insertando registro rept011 en acero_gc ACGYE02: 18 92658
+Insertando registro rept011 en acero_gc ACGYE02: 40 26193
+Insertando registro rept011 en acero_gc ACGYE02: 40 27158
+Insertando registro rept011 en acero_gc ACGYE02: TB 11785
+Insertando registro rept011 en acero_gc ACGYE02: 14 18913
+Insertando registro rept011 en acero_gc ACGYE02: 15 24866
+Insertando registro rept011 en acero_gc ACGYE02: 15 27060
+Insertando registro rept011 en acero_gc ACGYE02: 15 41332
+Insertando registro rept011 en acero_gc ACGYE02: 17 92660
+Insertando registro rept011 en acero_gc ACGYE02: 17 92661
+Insertando registro rept011 en acero_gc ACGYE02: 18 92786
+Insertando registro rept011 en acero_gc ACGYE02: DQ 2069
+Insertando registro rept011 en acero_gc ACGYE02: TB 20633
+Insertando registro rept011 en acero_gc ACGYE02: 17 1010
+Insertando registro rept011 en acero_gc ACGYE02: 17 1046
+Insertando registro rept011 en acero_gc ACGYE02: 17 1060
+Insertando registro rept011 en acero_gc ACGYE02: 18 20531
+Insertando registro rept011 en acero_gc ACGYE02: 18 91935
+Insertando registro rept011 en acero_gc ACGYE02: 18 92785
+Insertando registro rept011 en acero_gc ACGYE02: DQ 2071
+Insertando registro rept011 en acero_gc ACGYE02: 14 8300
+Insertando registro rept011 en acero_gc ACGYE02: 15 27222
+Insertando registro rept011 en acero_gc ACGYE02: 15 41566
+Insertando registro rept011 en acero_gc ACGYE02: 17 1066
+Insertando registro rept011 en acero_gc ACGYE02: 17 1080
+Insertando registro rept011 en acero_gc ACGYE02: 17 1090
+Insertando registro rept011 en acero_gc ACGYE02: 11 2986
+Insertando registro rept011 en acero_gc ACGYE02: 13 21542
+Insertando registro rept011 en acero_gc ACGYE02: 13 21558
+Insertando registro rept011 en acero_gc ACGYE02: 14 4654
+Insertando registro rept011 en acero_gc ACGYE02: 15 25037
+Insertando registro rept011 en acero_gc ACGYE02: 17 1022
+Insertando registro rept011 en acero_gc ACGYE02: 17 1076
+Insertando registro rept011 en acero_gc ACGYE02: 17 92658
+Insertando registro rept011 en acero_gc ACGYE02: 17 92659
+Insertando registro rept011 en acero_gc ACGYE02: 18 20540
+Insertando registro rept011 en acero_gc ACGYE02: 18 49009
+Insertando registro rept011 en acero_gc ACGYE02: 18 92660
+Insertando registro rept011 en acero_gc ACGYE02: TB 19188
+Insertando registro rept011 en acero_gc ACGYE02: 14 92797
+Insertando registro rept011 en acero_gc ACGYE02: 15 25709
+Insertando registro rept011 en acero_gc ACGYE02: 15 25737
+Insertando registro rept011 en acero_gc ACGYE02: 15 28740
+Insertando registro rept011 en acero_gc ACGYE02: 15 32472
+Insertando registro rept011 en acero_gc ACGYE02: 15 41564
+Insertando registro rept011 en acero_gc ACGYE02: 17 1036
+Insertando registro rept011 en acero_gc ACGYE02: 17 1058
+Insertando registro rept011 en acero_gc ACGYE02: 17 1086
+Insertando registro rept011 en acero_gc ACGYE02: 17 7165
+Insertando registro rept011 en acero_gc ACGYE02: 17 92656
+Insertando registro rept011 en acero_gc ACGYE02: 18 63070
+Insertando registro rept011 en acero_gc ACGYE02: 13 21508
+Insertando registro rept011 en acero_gc ACGYE02: 15 24434
+Insertando registro rept011 en acero_gc ACGYE02: 15 24620
+Insertando registro rept011 en acero_gc ACGYE02: 15 24636
+Insertando registro rept011 en acero_gc ACGYE02: 17 1012
+Insertando registro rept011 en acero_gc ACGYE02: 17 1044
+Insertando registro rept011 en acero_gc ACGYE02: 17 1048
+Insertando registro rept011 en acero_gc ACGYE02: 17 1074
+Insertando registro rept011 en acero_gc ACGYE02: 17 1096
+Insertando registro rept011 en acero_gc ACGYE02: 17 1116
+Insertando registro rept011 en acero_gc ACGYE02: 17 1126
+Insertando registro rept011 en acero_gc ACGYE02: 17 92657
+Insertando registro rept011 en acero_gc ACGYE02: 18 92662
+Insertando registro rept011 en acero_gc ACGYE02: DQ 20695
+Insertando registro rept011 en acero_gc ACGYE02: 13 21630
+Insertando registro rept011 en acero_gc ACGYE02: 14 1742
+Insertando registro rept011 en acero_gc ACGYE02: 14 92791
+Insertando registro rept011 en acero_gc ACGYE02: 15 24634
+Insertando registro rept011 en acero_gc ACGYE02: 15 25135
+Insertando registro rept011 en acero_gc ACGYE02: 15 27132
+Insertando registro rept011 en acero_gc ACGYE02: 15 28106
+Insertando registro rept011 en acero_gc ACGYE02: 17 1054
+Insertando registro rept011 en acero_gc ACGYE02: 17 1088
+Insertando registro rept011 en acero_gc ACGYE02: 18 20549
+Insertando registro rept011 en acero_gc ACGYE02: 18 49007
+Insertando registro rept011 en acero_gc ACGYE02: 18 92657
+Insertando registro rept011 en acero_gc ACGYE02: 18 92659
+Insertando registro rept011 en acero_gc ACGYE02: 18 92790
+Insertando registro rept011 en acero_gc ACGYE02: 40 41165
+Insertando registro rept011 en acero_gc ACGYE02: DQ 2102
+Insertando registro rept011 en acero_gc ACGYE02: TB 20610
+Insertando registro rept011 en acero_gc ACGYE02: TB 20688
+Insertando registro rept011 en acero_gc ACGYE02: 14 12832
+Insertando registro rept011 en acero_gc ACGYE02: 14 912
+Insertando registro rept011 en acero_gc ACGYE02: 15 27308
+Insertando registro rept011 en acero_gc ACGYE02: 15 31884
+Insertando registro rept011 en acero_gc ACGYE02: 15 92799
+Insertando registro rept011 en acero_gc ACGYE02: 17 91935
+Insertando registro rept011 en acero_gc ACGYE02: 18 63074
+Insertando registro rept011 en acero_gc ACGYE02: 18 63096
+Insertando registro rept011 en acero_gc ACGYE02: 18 92661
+Insertando registro rept011 en acero_gc ACGYE02: TB 20689
+Insertando registro rept011 en acero_gc ACGYE02: 15 92778
+Insertando registro rept011 en acero_gc ACGYE02: 17 1042
+Insertando registro rept011 en acero_gc ACGYE02: 17 1092
+Insertando registro rept011 en acero_gc ACGYE02: 17 1128
+Insertando registro rept011 en acero_gc ACGYE02: 18 92791
+Insertando registro rept011 en acero_gc ACGYE02: TB 18950
+Insertando registro rept011 en acero_gc ACGYE02: 14 92790
+Insertando registro rept011 en acero_gc ACGYE02: 14 92798
+Insertando registro rept011 en acero_gc ACGYE02: 15 25133
+Insertando registro rept011 en acero_gc ACGYE02: 15 27986
+Insertando registro rept011 en acero_gc ACGYE02: 15 69025
+Insertando registro rept011 en acero_gc ACGYE02: 17 1028
+Insertando registro rept011 en acero_gc ACGYE02: 17 1050
+Insertando registro rept011 en acero_gc ACGYE02: 17 1078
+Insertando registro rept011 en acero_gc ACGYE02: 17 1084
+Insertando registro rept011 en acero_gc ACGYE02: 17 998
+Insertando registro rept011 en acero_gc ACGYE02: 18 18793
+Insertando registro rept011 en acero_gc ACGYE02: DQ 2100
+Insertando registro rept011 en acero_gc ACGYE02: TB 3174
+Se Procesaron 122 registros rept011. OK
+Se Insertaron 122 registros en rept011. OK
+ 
+Borrando la tabla temporal ...
+ 
+Descargando rept011 de acero_qm ACUIO01 ...
+Descargada rept011 de acero_qm ACUIO01 ...
+ 
+Creando tabla temporal temp_r11 ...
+Creada tabla temporal temp_r11 ...
+ 
+Cargando tabla temporal temp_r11 para el proceso ...
+Cargada tabla temporal temp_r11 ...
+ 
+Procesando Actualización rept011 de acero_qm ACUIO01 en acero_qs ACUIO02. Espere ...
+ 
+Procesando rept011 para borrar en acero_qs ACUIO02 ...
+  Total registros en temp_r11 es de 36757
+  Total registros de rept011 en acero_qs ACUIO02 es de 36679
+Se Procesaron 0 registros rept011. OK
+No se Borró ningun registros en la rept011. OK
+ 
+Procesando temp_r11 para insertar en rept011 ...
+Insertando registro rept011 en acero_qs ACUIO02: 13 21532
+Insertando registro rept011 en acero_qs ACUIO02: 17 1014
+Insertando registro rept011 en acero_qs ACUIO02: 17 1030
+Insertando registro rept011 en acero_qs ACUIO02: 17 1038
+Insertando registro rept011 en acero_qs ACUIO02: 17 1052
+Insertando registro rept011 en acero_qs ACUIO02: 17 1056
+Insertando registro rept011 en acero_qs ACUIO02: 18 92656
+Insertando registro rept011 en acero_qs ACUIO02: 18 92658
+Insertando registro rept011 en acero_qs ACUIO02: 40 26193
+Insertando registro rept011 en acero_qs ACUIO02: 40 27158
+Insertando registro rept011 en acero_qs ACUIO02: 13 92796
+Insertando registro rept011 en acero_qs ACUIO02: 17 92660
+Insertando registro rept011 en acero_qs ACUIO02: 17 92661
+Insertando registro rept011 en acero_qs ACUIO02: 18 92786
+Insertando registro rept011 en acero_qs ACUIO02: 17 1010
+Insertando registro rept011 en acero_qs ACUIO02: 17 1046
+Insertando registro rept011 en acero_qs ACUIO02: 17 1060
+Insertando registro rept011 en acero_qs ACUIO02: 18 20531
+Insertando registro rept011 en acero_qs ACUIO02: 18 91935
+Insertando registro rept011 en acero_qs ACUIO02: 18 92785
+Insertando registro rept011 en acero_qs ACUIO02: 17 1066
+Insertando registro rept011 en acero_qs ACUIO02: 17 1080
+Insertando registro rept011 en acero_qs ACUIO02: 17 1090
+Insertando registro rept011 en acero_qs ACUIO02: 13 21542
+Insertando registro rept011 en acero_qs ACUIO02: 13 21558
+Insertando registro rept011 en acero_qs ACUIO02: 14 4654
+Insertando registro rept011 en acero_qs ACUIO02: 17 1022
+Insertando registro rept011 en acero_qs ACUIO02: 17 1076
+Insertando registro rept011 en acero_qs ACUIO02: 17 92658
+Insertando registro rept011 en acero_qs ACUIO02: 17 92659
+Insertando registro rept011 en acero_qs ACUIO02: 18 20540
+Insertando registro rept011 en acero_qs ACUIO02: 18 49009
+Insertando registro rept011 en acero_qs ACUIO02: 18 92660
+Insertando registro rept011 en acero_qs ACUIO02: 14 92797
+Insertando registro rept011 en acero_qs ACUIO02: 17 1036
+Insertando registro rept011 en acero_qs ACUIO02: 17 1058
+Insertando registro rept011 en acero_qs ACUIO02: 17 1086
+Insertando registro rept011 en acero_qs ACUIO02: 17 92656
+Insertando registro rept011 en acero_qs ACUIO02: 18 63070
+Insertando registro rept011 en acero_qs ACUIO02: 13 21508
+Insertando registro rept011 en acero_qs ACUIO02: 17 1012
+Insertando registro rept011 en acero_qs ACUIO02: 17 1044
+Insertando registro rept011 en acero_qs ACUIO02: 17 1048
+Insertando registro rept011 en acero_qs ACUIO02: 17 1074
+Insertando registro rept011 en acero_qs ACUIO02: 17 1096
+Insertando registro rept011 en acero_qs ACUIO02: 17 1116
+Insertando registro rept011 en acero_qs ACUIO02: 17 1126
+Insertando registro rept011 en acero_qs ACUIO02: 17 92657
+Insertando registro rept011 en acero_qs ACUIO02: 18 92662
+Insertando registro rept011 en acero_qs ACUIO02: DQ 20695
+Insertando registro rept011 en acero_qs ACUIO02: 13 21630
+Insertando registro rept011 en acero_qs ACUIO02: 14 92791
+Insertando registro rept011 en acero_qs ACUIO02: 17 1054
+Insertando registro rept011 en acero_qs ACUIO02: 17 1088
+Insertando registro rept011 en acero_qs ACUIO02: 18 20549
+Insertando registro rept011 en acero_qs ACUIO02: 18 49007
+Insertando registro rept011 en acero_qs ACUIO02: 18 92657
+Insertando registro rept011 en acero_qs ACUIO02: 18 92659
+Insertando registro rept011 en acero_qs ACUIO02: 40 41165
+Insertando registro rept011 en acero_qs ACUIO02: 14 12832
+Insertando registro rept011 en acero_qs ACUIO02: 14 912
+Insertando registro rept011 en acero_qs ACUIO02: 15 92799
+Insertando registro rept011 en acero_qs ACUIO02: 17 91935
+Insertando registro rept011 en acero_qs ACUIO02: 18 63074
+Insertando registro rept011 en acero_qs ACUIO02: 18 63096
+Insertando registro rept011 en acero_qs ACUIO02: 18 92661
+Insertando registro rept011 en acero_qs ACUIO02: 17 1042
+Insertando registro rept011 en acero_qs ACUIO02: 17 1092
+Insertando registro rept011 en acero_qs ACUIO02: 17 1128
+Insertando registro rept011 en acero_qs ACUIO02: 18 92791
+Insertando registro rept011 en acero_qs ACUIO02: 14 92798
+Insertando registro rept011 en acero_qs ACUIO02: 15 69025
+Insertando registro rept011 en acero_qs ACUIO02: 17 1028
+Insertando registro rept011 en acero_qs ACUIO02: 17 1050
+Insertando registro rept011 en acero_qs ACUIO02: 17 1078
+Insertando registro rept011 en acero_qs ACUIO02: 17 1084
+Insertando registro rept011 en acero_qs ACUIO02: 17 998
+Insertando registro rept011 en acero_qs ACUIO02: 18 18793
+Se Procesaron 78 registros rept011. OK
+Se Insertaron 78 registros en rept011. OK
+ 
+Borrando la tabla temporal ...
+ 
+Proceso Terminado OK.
+Iniciando proceso de igualar rept011 nacional (Remoto) ...
+ 
+Descargando rept011 de acero_qs ACUIO02 ...
+Descargada rept011 de acero_qs ACUIO02 ...
+ 
+Creando tabla temporal temp_r11 ...
+Creada tabla temporal temp_r11 ...
+ 
+Cargando tabla temporal temp_r11 para el proceso ...
+Cargada tabla temporal temp_r11 ...
+ 
+Procesando Actualización rept011 de acero_qs ACUIO02 en acero_gm ACGYE01. Espere ...
+ 
+Procesando rept011 para borrar en acero_gm ACGYE01 ...
+  Total registros en temp_r11 es de 6883
+  Total registros de rept011 en acero_gm ACGYE01 es de 6883
+Se Procesaron 0 registros rept011. OK
+No se Borró ningun registros en la rept011. OK
+ 
+Procesando temp_r11 para insertar en rept011 ...
+Se Procesaron 0 registros rept011. OK
+No se Insertó ningun registros en la rept011. OK
+ 
+Borrando la tabla temporal ...
+ 
+Descargando rept011 de acero_qs ACUIO02 ...
+Descargada rept011 de acero_qs ACUIO02 ...
+ 
+Creando tabla temporal temp_r11 ...
+Creada tabla temporal temp_r11 ...
+ 
+Cargando tabla temporal temp_r11 para el proceso ...
+Cargada tabla temporal temp_r11 ...
+ 
+Procesando Actualización rept011 de acero_qs ACUIO02 en acero_gc ACGYE02. Espere ...
+ 
+Procesando rept011 para borrar en acero_gc ACGYE02 ...
+  Total registros en temp_r11 es de 6883
+  Total registros de rept011 en acero_gc ACGYE02 es de 6883
+Se Procesaron 0 registros rept011. OK
+No se Borró ningun registros en la rept011. OK
+ 
+Procesando temp_r11 para insertar en rept011 ...
+Se Procesaron 0 registros rept011. OK
+No se Insertó ningun registros en la rept011. OK
+ 
+Borrando la tabla temporal ...
+ 
+Descargando rept011 de acero_qs ACUIO02 ...
+Descargada rept011 de acero_qs ACUIO02 ...
+ 
+Creando tabla temporal temp_r11 ...
+Creada tabla temporal temp_r11 ...
+ 
+Cargando tabla temporal temp_r11 para el proceso ...
+Cargada tabla temporal temp_r11 ...
+ 
+Procesando Actualización rept011 de acero_qs ACUIO02 en acero_qm ACUIO01. Espere ...
+ 
+Procesando rept011 para borrar en acero_qm ACUIO01 ...
+  Total registros en temp_r11 es de 6883
+  Total registros de rept011 en acero_qm ACUIO01 es de 6883
+Se Procesaron 0 registros rept011. OK
+No se Borró ningun registros en la rept011. OK
+ 
+Procesando temp_r11 para insertar en rept011 ...
+Se Procesaron 0 registros rept011. OK
+No se Insertó ningun registros en la rept011. OK
+ 
+Borrando la tabla temporal ...
+ 
+Proceso Terminado OK.

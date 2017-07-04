@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092044</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>06</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092044</guiaRemision>
+<razonSocialComprador>MARINA BREEZE S.A.</razonSocialComprador>
+<identificacionComprador>2490004206001</identificacionComprador>
+<totalSinImpuestos>46.96</totalSinImpuestos>
+<totalDescuento>5.80</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>46.96</baseImponible>
+<valor>5.64</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>52.60</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102063</codigoPrincipal>
+<descripcion>PORTACARBON 22-18-5262 P/TALADRO 5262-20</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>26.38</precioUnitario>
+<descuento>5.80</descuento>
+<precioTotalSinImpuesto>46.96</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>46.96</baseImponible>
+<valor>5.64</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">marina-breeze@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">6009872</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">015518</campoAdicional>
+</infoAdicional>
+</factura>

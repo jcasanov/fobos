@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268045</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>31/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268045</guiaRemision>
+<razonSocialComprador>ELIZAGARAY CABRAL JORGE ING.</razonSocialComprador>
+<identificacionComprador>1708871379</identificacionComprador>
+<totalSinImpuestos>18.93</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>18.93</baseImponible>
+<valor>2.27</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>21.20</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>100052</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-20-7351 DE 3/8" x 4" x 6" SDS PLUS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>12.23</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>12.23</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>12.23</baseImponible>
+<valor>1.47</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100057</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-20-7432 DE 1/4" x 6" x 8" SDS 2 CORTADORES</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>6.70</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>6.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.70</baseImponible>
+<valor>0.80</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jelizagaray@aceroandes.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">259279</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">004098</campoAdicional>
+</infoAdicional>
+</factura>

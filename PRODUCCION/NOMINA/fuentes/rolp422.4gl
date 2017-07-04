@@ -2,7 +2,7 @@
 -- Titulo           : rolp422.4gl - Listado proyección de jubilados
 -- Elaboracion      : 26-Nov-2003
 -- Autor            : NPC
--- Formato Ejecucion: fglrun rolp422 base módulo compañía [año]
+-- Formato Ejecucion: fglrun rolp422 base módulo compañía [año] [mes]
 -- Ultima Correccion: 
 -- Motivo Correccion:
 --------------------------------------------------------------------------------
@@ -12,6 +12,7 @@ GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 DEFINE rm_g01		RECORD LIKE gent001.*
 DEFINE rm_g02		RECORD LIKE gent002.*
 DEFINE vm_anio		LIKE rolt032.n32_ano_proceso
+DEFINE vm_mes		LIKE rolt032.n32_mes_proceso
 DEFINE anio_ini		LIKE rolt032.n32_ano_proceso
 DEFINE anio_tope_min	LIKE rolt032.n32_ano_proceso
 DEFINE num_empl		SMALLINT
@@ -27,7 +28,7 @@ CLEAR SCREEN
 CALL startlog('../logs/rolp422.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
-IF num_args() <> 3 AND num_args() <> 4 THEN	-- Validar # parametros correcto
+IF num_args() <> 3 AND num_args() <> 5 THEN	-- Validar # parametros correcto
 	CALL fl_mostrar_mensaje('Numero de parametros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
@@ -91,7 +92,7 @@ IF num_args() <> 3 THEN
 END IF
 LET lin_menu = 0
 LET row_ini  = 3
-LET num_rows = 6
+LET num_rows = 8
 LET num_cols = 80
 IF vg_gui = 0 THEN
 	LET lin_menu = 1
@@ -109,6 +110,7 @@ ELSE
 END IF
 DISPLAY FORM f_rol
 LET vm_anio = YEAR(TODAY)
+LET vm_mes  = MONTH(TODAY)
 WHILE TRUE
 	CALL lee_parametros()
 	IF int_flag THEN
@@ -126,6 +128,7 @@ END FUNCTION
 FUNCTION control_reporte_llamada()
 
 LET vm_anio = arg_val(4)
+LET vm_mes  = arg_val(5)
 CALL imprimir()
 DROP TABLE temp_jubilado
 
@@ -148,16 +151,19 @@ END FUNCTION
 
 FUNCTION lee_parametros()
 DEFINE anio		LIKE rolt032.n32_ano_proceso
+DEFINE mes		LIKE rolt032.n32_mes_proceso
 DEFINE mensaje		VARCHAR(100)
 
 LET int_flag = 0
-INPUT BY NAME vm_anio
+INPUT BY NAME vm_anio, vm_mes
 	WITHOUT DEFAULTS
 	ON KEY(INTERRUPT)
 		LET int_flag = 1
 		RETURN
 	BEFORE FIELD vm_anio
 		LET anio = vm_anio
+	BEFORE FIELD vm_mes
+		LET mes = vm_mes
 	AFTER FIELD vm_anio
 		IF vm_anio IS NOT NULL THEN
 			IF vm_anio > YEAR(TODAY) THEN
@@ -167,6 +173,16 @@ INPUT BY NAME vm_anio
 		ELSE
 			LET vm_anio = anio
 			DISPLAY BY NAME vm_anio
+		END IF
+	AFTER FIELD vm_mes
+		IF vm_mes IS NOT NULL THEN
+			IF vm_mes > MONTH(TODAY) THEN
+				CALL fl_mostrar_mensaje('El mes no puede ser mayor al mes vigente.', 'exclamation')
+				NEXT FIELD vm_mes
+			END IF
+		ELSE
+			LET vm_mes = mes
+			DISPLAY BY NAME vm_mes
 		END IF
 	AFTER INPUT
 		IF vm_anio < anio_tope_min THEN
@@ -201,6 +217,8 @@ DEFINE r_report		RECORD
 			END RECORD
 DEFINE r_g35		RECORD LIKE gent035.*
 DEFINE r_n30		RECORD LIKE rolt030.*
+DEFINE fec_ini		LIKE rolt032.n32_fecha_ini
+DEFINE fec_fin		LIKE rolt032.n32_fecha_fin
 DEFINE query		CHAR(800)
 DEFINE fecha		DATE
 DEFINE dias		SMALLINT
@@ -243,19 +261,27 @@ FOREACH q_rolt030 INTO r_n30.*
 	END IF
 	CALL fl_retorna_anios_meses_dias(fecha, r_n30.n30_fecha_nacim)
 		RETURNING r_report.anios_edad, r_report.mes_edad, dias
+	LET fec_ini = MDY(vm_mes, 01, anio_ini)
+	LET fec_fin = MDY(vm_mes, 01, vm_anio) + 1 UNITS MONTH - 1 UNITS DAY
 	SELECT ROUND(((SUM(n32_tot_neto) / 5) / 12), 2) INTO r_report.prom_mes
 		FROM rolt032
 		WHERE n32_compania      = r_n30.n30_compania
+		  AND n32_fecha_ini    >= fec_ini
+		  AND n32_fecha_fin    <= fec_fin
 		  AND n32_cod_trab      = r_n30.n30_cod_trab
 		  AND n32_estado        = 'C'
+		{--
 		  AND (n32_ano_proceso >= anio_ini
 			AND n32_ano_proceso <= vm_anio)
+		--}
 	SELECT ROUND(((SUM(n32_tot_neto) / 5)/ 12),2) INTO r_report.prom_mes_vig
 		FROM rolt032
-		WHERE n32_compania    = r_n30.n30_compania
-		  AND n32_cod_trab    = r_n30.n30_cod_trab
-		  AND n32_estado      = 'C'
-		  AND n32_ano_proceso = vm_anio
+		WHERE n32_compania   = r_n30.n30_compania
+		  AND n32_fecha_ini >= fec_ini
+		  AND n32_fecha_fin <= fec_fin
+		  AND n32_cod_trab   = r_n30.n30_cod_trab
+		  AND n32_estado     = 'C'
+		  --AND n32_ano_proceso = vm_anio
 	CALL fl_lee_cargo(r_n30.n30_compania, r_n30.n30_cod_cargo)
 		RETURNING r_g35.*
 	LET r_report.cargo = r_g35.g35_nombre
@@ -335,7 +361,8 @@ PAGE HEADER
 	LET titulo = "JUBILACION CORRESPONDIENTE AL ANIO ", vm_anio USING '<<<<'
 	CALL fl_justifica_titulo('I', titulo, 80)
 		RETURNING titulo
-	LET mes_aux = fl_retorna_nombre_mes(MONTH(TODAY))
+	--LET mes_aux = fl_retorna_nombre_mes(MONTH(TODAY))
+	LET mes_aux = fl_retorna_nombre_mes(vm_mes)
 	LET mes     = ' '
 	LET j       = 1
 	FOR i = 1 TO LENGTH(mes_aux)
@@ -389,7 +416,7 @@ ON EVERY ROW
 	PRINT COLUMN 001, r_report.cod_trab		USING "&&&&",
 	      COLUMN 007, r_report.nombres,
 	      COLUMN 058, r_report.cedula		USING "&&&&&&&&&&",
-	      COLUMN 076, r_report.ced_seg		USING "&&&&&&&&&&",
+	      COLUMN 076, r_report.ced_seg		USING "&&&&&&&&&&&&&&&",
 	      COLUMN 094, r_report.fecha_ing 		USING "dd-mm-yyyy",
 	      COLUMN 107, r_report.fecha_nacim 		USING "dd-mm-yyyy",
 	      COLUMN 122, r_report.diez_anios,

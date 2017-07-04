@@ -126,7 +126,7 @@ INPUT BY NAME rm_g53.g53_usuario, rm_g53.g53_modulo, rm_g55.g55_proceso,
 		EXIT INPUT
         ON KEY(F2)
 		IF INFIELD(g53_usuario) THEN
-			CALL fl_ayuda_usuarios()
+			CALL fl_ayuda_usuarios("A")
 				RETURNING r_g05.g05_usuario, r_g05.g05_nombres
 			IF r_g05.g05_usuario IS NOT NULL THEN
 				LET rm_g53.g53_usuario = r_g05.g05_usuario

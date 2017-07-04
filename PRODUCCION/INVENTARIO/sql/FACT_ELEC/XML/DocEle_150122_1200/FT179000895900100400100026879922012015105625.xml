@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268799</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268799</guiaRemision>
+<razonSocialComprador>SENALEX CIA. LTDA..</razonSocialComprador>
+<identificacionComprador>0190168417001</identificacionComprador>
+<totalSinImpuestos>3004.87</totalSinImpuestos>
+<totalDescuento>85.92</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>3004.87</baseImponible>
+<valor>360.58</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>3365.45</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>101430</codigoPrincipal>
+<descripcion>TALADRO A BATERIA 2404-22 M-12 FUEL DE 1/2"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>291.84</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>583.68</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>583.68</baseImponible>
+<valor>70.04</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>93076</codigoPrincipal>
+<descripcion>SIERRA CIRCULAR 6370-21 CORTE SECO DE METAL 13 AMP DISCO DE 8" C/ MALETIN</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>439.53</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>439.53</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>439.53</baseImponible>
+<valor>52.74</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103048</codigoPrincipal>
+<descripcion>ROTOMARTILLO A BATERIA 2712-22 M18 FUEL DE 1" SDS</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>753.28</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1506.56</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1506.56</baseImponible>
+<valor>180.79</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97042</codigoPrincipal>
+<descripcion>PISTOLA DE AIRE CALIENTE 8975-6 DE 11 AMPS. 120V. DOBLE TEMPERATURA 298-537 GRAD C.</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>126.35</precioUnitario>
+<descuento>85.92</descuento>
+<precioTotalSinImpuesto>419.48</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>419.48</baseImponible>
+<valor>50.34</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102027</codigoPrincipal>
+<descripcion>FLEXOMETRO 48-22-5125 MAGNETICO DE 25 PIES</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>27.81</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>55.62</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>55.62</baseImponible>
+<valor>6.67</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">info@senalx.com</campoAdicional>
+<campoAdicional nombre="Email">cbarreto@senalx.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">072864911</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">040094</campoAdicional>
+<campoAdicional nombre="Observaciones">PEDIDO ADJUNTO</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175818</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento> AV. GENERAL RUMIÑAHUI S/N Y AV. SIMON</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175818</guiaRemision>
+<razonSocialComprador>SINDESECUADOR S.A</razonSocialComprador>
+<identificacionComprador>1792147220001</identificacionComprador>
+<totalSinImpuestos>933.99</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>933.99</baseImponible>
+<valor>112.08</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1046.07</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>150374</codigoPrincipal>
+<descripcion>RECTIFICADORA 5196 11 AMP. DE 1/8"-1/4" 14.500 RPM</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>424.26</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>424.26</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>424.26</baseImponible>
+<valor>50.91</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101430</codigoPrincipal>
+<descripcion>TALADRO A BATERIA 2404-22 M-12 FUEL DE 1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>291.84</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>291.84</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>291.84</baseImponible>
+<valor>35.02</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99753</codigoPrincipal>
+<descripcion>SIERRA CIRCULAR 6177-20 DE MESA CORTE ABRASIVO 3.2HP/120V/3700RPM DISCO 14"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>217.89</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>217.89</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>217.89</baseImponible>
+<valor>26.15</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

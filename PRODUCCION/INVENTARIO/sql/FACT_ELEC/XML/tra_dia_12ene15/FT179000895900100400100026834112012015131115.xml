@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268341</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>12/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268341</guiaRemision>
+<razonSocialComprador>ALIMENTOS SUPERIOR ALSUPERIOR S.A.</razonSocialComprador>
+<identificacionComprador>1790022765001</identificacionComprador>
+<totalSinImpuestos>578.22</totalSinImpuestos>
+<totalDescuento>33.47</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>578.22</baseImponible>
+<valor>69.39</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>647.61</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102403</codigoPrincipal>
+<descripcion>AMOLADORA ELECTRICA 6161-33 DE 13 AMPS. 6" 9000 RPM</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>194.27</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>388.54</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>388.54</baseImponible>
+<valor>46.62</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>93731</codigoPrincipal>
+<descripcion>TALADRO ELECTRICO MANUAL 0299-20 DE 1/2" 120V/8A/ 0-850 RPM</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>223.15</precioUnitario>
+<descuento>33.47</descuento>
+<precioTotalSinImpuesto>189.68</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>189.68</baseImponible>
+<valor>22.76</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">consuelo_carvajal@gruposuperior.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2368180</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">007118</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C#4918</campoAdicional>
+</infoAdicional>
+</factura>

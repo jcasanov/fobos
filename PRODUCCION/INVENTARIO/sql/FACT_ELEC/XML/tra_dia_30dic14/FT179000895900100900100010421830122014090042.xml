@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104218</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>30/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104218</guiaRemision>
+<razonSocialComprador>CONSORCIO CONSALMED 1</razonSocialComprador>
+<identificacionComprador>0992836652001</identificacionComprador>
+<totalSinImpuestos>434.44</totalSinImpuestos>
+<totalDescuento>59.24</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>434.44</baseImponible>
+<valor>52.13</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>486.57</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>69028</codigoPrincipal>
+<descripcion>LLAVE TEMPORIZADAS / PRESSMATIC 5763306 LLAVE TEMPORIZADA DE MESA P/ LAVABO CROMO</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>43.12</precioUnitario>
+<descuento>15.52</descuento>
+<precioTotalSinImpuesto>113.84</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>113.84</baseImponible>
+<valor>13.66</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70747</codigoPrincipal>
+<descripcion>DESAGUE DE LAVABO SC005903000 1BO 1-1/4" PP DESAGUE CON REJILLA Y SIFON</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>5.83</precioUnitario>
+<descuento>2.10</descuento>
+<precioTotalSinImpuesto>15.39</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>15.39</baseImponible>
+<valor>1.85</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101106</codigoPrincipal>
+<descripcion>TUBO ABASTO- LLAVE ANGULAR LAVABO 7589306 CON MANGUERA DE 12"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>7.74</precioUnitario>
+<descuento>2.79</descuento>
+<precioTotalSinImpuesto>20.43</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>20.43</baseImponible>
+<valor>2.45</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>71680</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS ELONGADO JS0043751301CE CONSERVER ALARGADO  C/A ARM</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>96.35</precioUnitario>
+<descuento>34.69</descuento>
+<precioTotalSinImpuesto>254.36</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>254.36</baseImponible>
+<valor>30.52</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101107</codigoPrincipal>
+<descripcion>TUBO ABASTO-LLAVE ANGULAR INODORO 7590306 CON MANGUERA DE 1/2" x 15/16" x 12"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>7.62</precioUnitario>
+<descuento>2.74</descuento>
+<precioTotalSinImpuesto>20.12</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>20.12</baseImponible>
+<valor>2.41</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>27893</codigoPrincipal>
+<descripcion>TORNILLO 3011000 SET ANCLAJE TAZA PISO WC</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>1.56</precioUnitario>
+<descuento>0.56</descuento>
+<precioTotalSinImpuesto>4.12</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="PAR"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.12</baseImponible>
+<valor>0.49</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101817</codigoPrincipal>
+<descripcion>EMPAQUE 1319000 SELLO DE CERA</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>2.34</precioUnitario>
+<descuento>0.84</descuento>
+<precioTotalSinImpuesto>6.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.18</baseImponible>
+<valor>0.74</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">alarrea.elot@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2680052</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016395</campoAdicional>
+</infoAdicional>
+</factura>

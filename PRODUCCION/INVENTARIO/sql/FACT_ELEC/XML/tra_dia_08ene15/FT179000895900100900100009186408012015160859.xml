@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091864</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>08/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091864</guiaRemision>
+<razonSocialComprador>POLCARAT S.A.</razonSocialComprador>
+<identificacionComprador>0992550716001</identificacionComprador>
+<totalSinImpuestos>195.80</totalSinImpuestos>
+<totalDescuento>24.20</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>195.80</baseImponible>
+<valor>23.50</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>219.30</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>98558</codigoPrincipal>
+<descripcion>BOMBA TIPO JET C-MOTOR HB-120S DE 1.2 HP 220V/60C/1F. (401T1201)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>220.00</precioUnitario>
+<descuento>24.20</descuento>
+<precioTotalSinImpuesto>195.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>195.80</baseImponible>
+<valor>23.50</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">educa121.1979@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2414337</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016708</campoAdicional>
+</infoAdicional>
+</factura>

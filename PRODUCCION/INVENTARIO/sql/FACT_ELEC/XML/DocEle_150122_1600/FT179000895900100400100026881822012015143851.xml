@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268818</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268818</guiaRemision>
+<razonSocialComprador>GOBIERNO AUTONOMO DESCENTRALIZADO MUNICIPAL DEL CANTON GONZALO PIZARRO</razonSocialComprador>
+<identificacionComprador>1560001240001</identificacionComprador>
+<totalSinImpuestos>20962.00</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>20962.00</baseImponible>
+<valor>2515.44</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>23477.44</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>71492</codigoPrincipal>
+<descripcion>REMOLQUE P/DESTAPADORAS TOPO 4500 DE DOS EJES PARA KJ-3100 / K-1000</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>5500.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>5500.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5500.00</baseImponible>
+<valor>660.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100198</codigoPrincipal>
+<descripcion>DESTAPADOR DE DESAGUES A GASOLINA KJ-3100 P/DESAG. DE 2" A 10" 3000 PSI DE PRESION (37413)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>8475.04</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>8475.04</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8475.04</baseImponible>
+<valor>1017.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>13063</codigoPrincipal>
+<descripcion>DESTAPADOR DE DESAGUES A GASOLINA K-1000 TUBERIA DE 8"-24" DE 6HP (84295)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>6647.06</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>6647.06</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6647.06</baseImponible>
+<valor>797.65</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>90354</codigoPrincipal>
+<descripcion>JET VAC H-32 P/ MODELOS KJ (67187)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>339.90</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>339.90</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>339.90</baseImponible>
+<valor>40.79</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jaq_tri@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">06234088</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064267</campoAdicional>
+<campoAdicional nombre="Observaciones">SIE-GADMCGP-006-2014</campoAdicional>
+</infoAdicional>
+</factura>

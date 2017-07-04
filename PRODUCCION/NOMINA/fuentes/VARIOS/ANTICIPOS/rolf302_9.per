@@ -1,0 +1,42 @@
+DATABASE aceros
+SCREEN
+{
+
+                      LIQUIDACIONES DE EMPLEADOS POR RUBRO
+                      -----------------------------------
+
+     Empleado: [c000] [c001                                         ]
+
+Depto. Actual: [c002] [c003                          ]
+
+  Año Inicial: [c005]     Mes Inicial: [c0] [c007       ]  Liq. Inicial: [c3]
+
+    Año Final: [c006]       Mes Final: [c1] [c008       ]    Liq. Final: [c4]
+}
+ATTRIBUTES
+c000 = FORMONLY.n32_cod_trab, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = FORMONLY.n30_nombres, NOENTRY, UPSHIFT;
+c002 = FORMONLY.n32_cod_depto, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = FORMONLY.g34_nombre, NOENTRY, UPSHIFT;
+c005 = FORMONLY.vm_anio_ini TYPE SMALLINT NOT NULL, REQUIRED,
+	INCLUDE = (1980 TO 2099), AUTONEXT, UPSHIFT, REVERSE;
+c006 = FORMONLY.vm_anio_fin TYPE SMALLINT NOT NULL, REQUIRED,
+	INCLUDE = (1980 TO 2099), AUTONEXT, UPSHIFT, REVERSE;
+c0   = FORMONLY.vm_mes_ini TYPE SMALLINT NOT NULL, REQUIRED,
+	INCLUDE = (01 TO 12), AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c007 = FORMONLY.tit_mes_ini, NOENTRY, UPSHIFT, REVERSE;
+c1   = FORMONLY.vm_mes_fin TYPE SMALLINT NOT NULL, REQUIRED,
+	INCLUDE = (01 TO 12), AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c008 = FORMONLY.tit_mes_fin, NOENTRY, UPSHIFT, REVERSE;
+c3   = FORMONLY.vm_codliq_ini TYPE CHAR, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'A partir de que liquidación se quiere consultar el Total Ganado.';
+c4   = FORMONLY.vm_codliq_fin TYPE CHAR, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Hasta que liquidación se quiere consultar el Total Ganado.';
+
+END

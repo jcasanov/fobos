@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268054</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>31/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268054</guiaRemision>
+<razonSocialComprador>PROTECOMPU</razonSocialComprador>
+<identificacionComprador>1791241398001</identificacionComprador>
+<totalSinImpuestos>1084.12</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1084.12</baseImponible>
+<valor>130.09</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1214.21</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>14294</codigoPrincipal>
+<descripcion>CABEZAL/TERRAJA PARA ROSCADORAS ELECTRICAS 811-A UNIVERSAL S/DADOS (97065)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>519.62</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>519.62</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>519.62</baseImponible>
+<valor>62.35</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>15696</codigoPrincipal>
+<descripcion>DADOS PARA TUBOS DE 1/4" A 3/8" HS NPT P/811A-711-815A (47760)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>201.98</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>201.98</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>201.98</baseImponible>
+<valor>24.24</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>15698</codigoPrincipal>
+<descripcion>DADOS PARA TUBOS DE 1/2" A 3/4" HS NPT P/811A-711-815A (47765)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>209.66</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>209.66</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>209.66</baseImponible>
+<valor>25.16</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>14384</codigoPrincipal>
+<descripcion>ACEITE PARA EQUIPOS NU CLEAR CLARO (S/ENVASE) (41585)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>21.01</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>42.02</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="GALON"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>42.02</baseImponible>
+<valor>5.04</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21663</codigoPrincipal>
+<descripcion>ENVASE PLASTICO DESCARTABLE DE 1 Gln.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>2.16</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>4.32</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.32</baseImponible>
+<valor>0.52</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98298</codigoPrincipal>
+<descripcion>ANCLAJE DE CAMISA LOCK-BOLT 05015S HEX. DE 3/8" X 1-7/8" (AS)</descripcion>
+<cantidad>200.00</cantidad>
+<precioUnitario>0.38</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>76.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>76.00</baseImponible>
+<valor>9.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70320</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO SDS-PLUS  5/8" X 8" (00697)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>16.75</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>16.75</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>16.75</baseImponible>
+<valor>2.01</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100063</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-20-7473 DE 1/2" x 8" x 10" SDS 2 CORTADORES</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>13.77</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>13.77</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>13.77</baseImponible>
+<valor>1.65</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">administracion@protecompu.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2485890</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">006259</campoAdicional>
+</infoAdicional>
+</factura>

@@ -69,7 +69,7 @@ CREATE TEMP TABLE tmp_sri(
 		z21_num_doc		INTEGER,
 		z01_nomcli		VARCHAR(50),
 		z21_fecing		DATE,
-		z21_num_sri		CHAR(16),
+		z21_num_sri		CHAR(21),
 		z21_codcli		INTEGER
 	)
 LET vm_max_det = 10000
@@ -468,7 +468,7 @@ IF valida_sri(i) THEN
 END IF
 DISPLAY rm_det[i].z21_num_sri TO rm_det[j].z21_num_sri
 {--
-IF LENGTH(rm_det[i].z21_num_sri) < 15 THEN
+IF LENGTH(rm_det[i].z21_num_sri) < 17 THEN
 	CALL fl_mostrar_mensaje('Digite completo el número del SRI.','exclamation')
 	RETURN r_g37.*, 0
 END IF
@@ -479,7 +479,7 @@ IF aux_sri <> rm_det[i].z21_num_sri THEN
 		  AND z21_localidad = vg_codloc
   		  AND z21_num_sri   = rm_det[i].z21_num_sri
 	IF cont > 0 THEN
-		CALL fl_mostrar_mensaje('La secuencia del SRI ' || rm_det[i].z21_num_sri[9,15] || ' ya existe.','exclamation')
+		CALL fl_mostrar_mensaje('La secuencia del SRI ' || rm_det[i].z21_num_sri[9,17] || ' ya existe.','exclamation')
 		RETURN r_g37.*, 0
 	END IF
 END IF

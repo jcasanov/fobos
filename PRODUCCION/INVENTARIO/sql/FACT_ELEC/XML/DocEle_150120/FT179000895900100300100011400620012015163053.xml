@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000114006</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000114006</guiaRemision>
+<razonSocialComprador>PINTO BAEZ PAUL SANTIAGO</razonSocialComprador>
+<identificacionComprador>1711537751001</identificacionComprador>
+<totalSinImpuestos>229.01</totalSinImpuestos>
+<totalDescuento>19.91</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>229.01</baseImponible>
+<valor>27.48</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>256.49</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>7508</codigoPrincipal>
+<descripcion>PANEL PLYCEM 1.22 x 2.44 m.X 14mm. (BASE DE TECHO)</descripcion>
+<cantidad>7.00</cantidad>
+<precioUnitario>35.56</precioUnitario>
+<descuento>19.91</descuento>
+<precioTotalSinImpuesto>229.01</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLYCEM"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>229.01</baseImponible>
+<valor>27.48</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">paulspb@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0995869913</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">045241</campoAdicional>
+</infoAdicional>
+</factura>

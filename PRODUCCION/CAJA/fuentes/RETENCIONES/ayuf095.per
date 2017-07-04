@@ -1,0 +1,34 @@
+DATABASE aceros
+SCREEN
+{
+ FORMAS DE PAGO EN CAJA
+
+ [c001  |c002                |b|c]
+[c011  |c012                |e|f]
+[c011  |c012                |e|f]
+[c011  |c012                |e|f]
+[c011  |c012                |e|f]
+[c011  |c012                |e|f]
+[c011  |c012                |e|f]
+[c011  |c012                |e|f]
+[c011  |c012                |e|f]
+[c011  |c012                |e|f]
+[c011  |c012                |e|f]
+
+}
+TABLES
+cajt001
+ATTRIBUTES
+c001 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c002 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b    = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c    = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+
+c011 = cajt001.j01_codigo_pago, REVERSE, UPSHIFT;
+c012 = cajt001.j01_nombre, REVERSE, UPSHIFT;
+e    = cajt001.j01_cont_cred, REVERSE, UPSHIFT;
+f    = cajt001.j01_estado, REVERSE, UPSHIFT;
+END
+INSTRUCTIONS
+SCREEN RECORD rh_forpago[10] (j01_codigo_pago, j01_nombre, j01_cont_cred,
+				j01_estado)

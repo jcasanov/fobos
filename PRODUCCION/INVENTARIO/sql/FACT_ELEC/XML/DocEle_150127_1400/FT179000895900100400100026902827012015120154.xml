@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000269028</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000269028</guiaRemision>
+<razonSocialComprador>VALLEJO RENGIFO PAUL ANDRES</razonSocialComprador>
+<identificacionComprador>1716983307001</identificacionComprador>
+<totalSinImpuestos>503.88</totalSinImpuestos>
+<totalDescuento>88.92</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>503.88</baseImponible>
+<valor>60.47</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>564.35</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>100009</codigoPrincipal>
+<descripcion>LLAVE DE IMPACTO A BATERIA 2652-22 M18 LTHIUM-ION 1/2" / 2.200RPM</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>592.80</precioUnitario>
+<descuento>88.92</descuento>
+<precioTotalSinImpuesto>503.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>503.88</baseImponible>
+<valor>60.47</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">pvallejo@ecuatools.com</campoAdicional>
+<campoAdicional nombre="Email">gaguirre@ecuatools.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2257508</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">050079</campoAdicional>
+<campoAdicional nombre="Observaciones">CHQUE BCO PACIFICO 4780</campoAdicional>
+</infoAdicional>
+</factura>

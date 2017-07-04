@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000034029</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>GUAYAS, ISIDRO AYORA S/N</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>SERVIENTREGA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0991285679001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>15/12/2014</fechaIniTransporte>
+<fechaFinTransporte>16/12/2014</fechaFinTransporte>
+<placa></placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1791924037001</identificacionDestinatario>
+<razonSocialDestinatario>AVICOLA SAN ISIDRO S.A. AVISID</razonSocialDestinatario>
+<dirDestinatario>ISODRO AYORA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>15/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>102402</codigoInterno>
+<descripcion>AMOLADORA ELECTRICA 6147-31 11 AMPS. 4-1/2" 1100 W.</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="6147-31" valor="6147-31"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>102405</codigoInterno>
+<descripcion>BROCAS JUEGOS 48-89-0012 DE TITANIO THUNDERBOLT ( 29 PZS. )</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="48-89-0012" valor="48-89-0012"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>103118</codigoInterno>
+<descripcion>FLEXOMETRO 48-22-5216 MAGNETICO DE 5 m.</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="48-22-5216" valor="48-22-5216"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+<campoAdicional nombre="telefono-movil">2706042-3</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">007369</campoAdicional>
+</infoAdicional>
+</guiaRemision>

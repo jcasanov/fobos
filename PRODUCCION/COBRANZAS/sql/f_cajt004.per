@@ -1,0 +1,25 @@
+database acero_gm
+screen size 24 by 80
+{
+j04_compania       [f000       ]
+j04_localidad      [f001  ]
+j04_codigo_caja    [f002  ]
+j04_fecha_aper     [f003      ]
+j04_secuencia      [f004  ]
+j04_fecha_cierre   [f005               ]
+j04_usuario        [f006      ]
+j04_fecing         [f007               ]
+}
+end
+tables
+cajt004
+attributes
+f000 = cajt004.j04_compania;
+f001 = cajt004.j04_localidad;
+f002 = cajt004.j04_codigo_caja;
+f003 = cajt004.j04_fecha_aper;
+f004 = cajt004.j04_secuencia;
+f005 = cajt004.j04_fecha_cierre;
+f006 = cajt004.j04_usuario;
+f007 = cajt004.j04_fecing;
+end

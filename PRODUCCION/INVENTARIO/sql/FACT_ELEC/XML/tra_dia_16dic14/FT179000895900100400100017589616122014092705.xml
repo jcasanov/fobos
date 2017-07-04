@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175896</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/12/2014</fechaEmision>
+<dirEstablecimiento> LAGO AGRIO / 10 DE AGOSTO 308 Y 24 DE M</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175896</guiaRemision>
+<razonSocialComprador>JIMENEZ AGUIRRE RUBEN DARIO</razonSocialComprador>
+<identificacionComprador>1710534874001</identificacionComprador>
+<totalSinImpuestos>4116.54</totalSinImpuestos>
+<totalDescuento>617.48</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>3499.06</baseImponible>
+<valor>419.89</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>3918.95</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>100401</codigoPrincipal>
+<descripcion>BOMBA CENTRIF AUTOCEB.C/MOTOR A GASOLINA 13D1-GX270 DE 3" C/MOTOR HONDA DE 9 HP</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>4116.54</precioUnitario>
+<descuento>617.48</descuento>
+<precioTotalSinImpuesto>3499.06</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="GORMAN RUPP" valor="GORMAN"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3499.06</baseImponible>
+<valor>419.89</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">062835348</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">044206</campoAdicional>
+</infoAdicional>
+</factura>

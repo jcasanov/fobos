@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176322</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176322</guiaRemision>
+<razonSocialComprador>INMOBILIARIA AGROPECUARIA</razonSocialComprador>
+<identificacionComprador>1791854756001</identificacionComprador>
+<totalSinImpuestos>374.79</totalSinImpuestos>
+<totalDescuento>51.11</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>374.79</baseImponible>
+<valor>44.97</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>419.76</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>2067</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 90° DE 2-1/2"</descripcion>
+<cantidad>18.00</cantidad>
+<precioUnitario>11.77</precioUnitario>
+<descuento>25.42</descuento>
+<precioTotalSinImpuesto>186.44</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>186.44</baseImponible>
+<valor>22.37</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4579</codigoPrincipal>
+<descripcion>TEE GALV. CLASE 150 DE 2-1/2"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>22.17</precioUnitario>
+<descuento>10.64</descuento>
+<precioTotalSinImpuesto>78.04</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>78.04</baseImponible>
+<valor>9.36</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3284</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 2-1/2" x 10"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>13.00</precioUnitario>
+<descuento>3.12</descuento>
+<precioTotalSinImpuesto>22.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>22.88</baseImponible>
+<valor>2.75</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3272</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 2-1/2" x 3"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>7.86</precioUnitario>
+<descuento>5.66</descuento>
+<precioTotalSinImpuesto>41.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>41.50</baseImponible>
+<valor>4.98</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3280</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 2-1/2" x 6"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>10.99</precioUnitario>
+<descuento>2.64</descuento>
+<precioTotalSinImpuesto>19.34</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>19.34</baseImponible>
+<valor>2.32</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2063</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 90° DE 1-1/2"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>4.57</precioUnitario>
+<descuento>3.29</descuento>
+<precioTotalSinImpuesto>24.13</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>24.13</baseImponible>
+<valor>2.90</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3232</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1-1/2" CORRIDO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.21</precioUnitario>
+<descuento>0.15</descuento>
+<precioTotalSinImpuesto>1.06</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.06</baseImponible>
+<valor>0.13</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3238</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1-1/2" x 3"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.59</precioUnitario>
+<descuento>0.19</descuento>
+<precioTotalSinImpuesto>1.40</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.40</baseImponible>
+<valor>0.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">iasa1@inmobiliaria-agropecuaria.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">442197</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000088</campoAdicional>
+</infoAdicional>
+</factura>

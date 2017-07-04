@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000114136</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>26/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000114136</guiaRemision>
+<razonSocialComprador>FOSFORERA ECUATORIANA  S.A.</razonSocialComprador>
+<identificacionComprador>1790021203001</identificacionComprador>
+<totalSinImpuestos>119.32</totalSinImpuestos>
+<totalDescuento>13.27</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>119.32</baseImponible>
+<valor>14.32</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>133.64</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>6486</codigoPrincipal>
+<descripcion>YEE PVC DESAGUE DE 160mm.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>14.58</precioUnitario>
+<descuento>1.46</descuento>
+<precioTotalSinImpuesto>13.12</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>13.12</baseImponible>
+<valor>1.57</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2675</codigoPrincipal>
+<descripcion>CODO PVC DESAGUE DE 160mm. x 45 GRAD  ISO C/C</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>21.01</precioUnitario>
+<descuento>10.51</descuento>
+<precioTotalSinImpuesto>94.54</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>94.54</baseImponible>
+<valor>11.34</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4918</codigoPrincipal>
+<descripcion>TEE PVC DESAGUE DE 160mm. ISO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>12.96</precioUnitario>
+<descuento>1.30</descuento>
+<precioTotalSinImpuesto>11.66</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>11.66</baseImponible>
+<valor>1.40</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">maguilar@fesa.la</campoAdicional>
+<campoAdicional nombre="Email">rplaza@fesa.la</campoAdicional>
+<campoAdicional nombre="telefono-movil">3080746</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000065</campoAdicional>
+<campoAdicional nombre="Observaciones">ORDEN DE COMPRA :629</campoAdicional>
+</infoAdicional>
+</factura>

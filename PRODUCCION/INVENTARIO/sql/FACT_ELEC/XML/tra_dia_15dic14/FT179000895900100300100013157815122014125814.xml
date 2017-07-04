@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131578</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>AYAPAMBA OE2-01 Y LLACAO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131578</guiaRemision>
+<razonSocialComprador>ACABADOS DE LA CONSTRUCCION VILLAFUERTE</razonSocialComprador>
+<identificacionComprador>1713231841001</identificacionComprador>
+<totalSinImpuestos>671.19</totalSinImpuestos>
+<totalDescuento>96.17</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>575.02</baseImponible>
+<valor>69.00</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>644.02</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>100487</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA AMAGUANIA TERRACOTA PRIMERA</descripcion>
+<cantidad>1.50</cantidad>
+<precioUnitario>10.15</precioUnitario>
+<descuento>2.28</descuento>
+<precioTotalSinImpuesto>12.95</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="M2" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>12.95</baseImponible>
+<valor>1.55</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100487</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA AMAGUANIA TERRACOTA PRIMERA</descripcion>
+<cantidad>34.50</cantidad>
+<precioUnitario>10.15</precioUnitario>
+<descuento>52.53</descuento>
+<precioTotalSinImpuesto>297.65</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="M2" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>297.65</baseImponible>
+<valor>35.72</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102835</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA TESSUTTO MOCCA  PRIMERA</descripcion>
+<cantidad>30.00</cantidad>
+<precioUnitario>9.19</precioUnitario>
+<descuento>41.36</descuento>
+<precioTotalSinImpuesto>234.34</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="M2" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>234.34</baseImponible>
+<valor>28.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>61022</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA PARA EMPOTRAR 1 H. OAKBROOK BLANCO (130)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>30.09</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>30.09</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="BRIGGS" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>30.09</baseImponible>
+<valor>3.61</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

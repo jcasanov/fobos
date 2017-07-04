@@ -72,7 +72,7 @@ END MAIN
 
 
 FUNCTION funcion_master()
-DEFINE query 		CHAR(1200)
+DEFINE query 		CHAR(3000)
 DEFINE comando          VARCHAR(100)
 DEFINE estado		CHAR(1)
 DEFINE s_documento	VARCHAR(50)
@@ -185,7 +185,22 @@ WHILE (TRUE)
 	IF rm_par.localidad IS NOT NULL THEN
 		LET expr_loc = ' z21_localidad = ', rm_par.localidad  
 	END IF
-	LET query = 'SELECT z21_localidad, z21_fecha_emi, z01_nomcli, ',
+	LET query = 'SELECT z21_localidad, z21_fecha_emi, ',
+		'NVL(CASE WHEN z21_areaneg = 1 THEN ',
+			'(SELECT r19_nomcli ',
+				'FROM rept019 ',
+				'WHERE r19_compania  = z21_compania ',
+				'  AND r19_localidad = z21_localidad ',
+				'  AND r19_cod_tran  = z21_cod_tran ',
+				'  AND r19_num_tran  = z21_num_tran) ',
+			'WHEN z21_areaneg = 2 THEN ',
+			'(SELECT t23_nom_cliente ',
+				'FROM talt023 ',
+				'WHERE t23_compania    = z21_compania ',
+				'  AND t23_localidad   = z21_localidad ',
+				'  AND t23_num_factura = z21_num_tran ',
+				'  AND t23_estado      = "D") ',
+			'END, z01_nomcli), ',
 		' z21_referencia, z21_origen, g03_abreviacion, z21_tipo_doc, ',
 		' z21_num_doc, z21_cod_tran, z21_num_tran, z21_num_sri, ',
 		' z21_valor, z21_saldo ',

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000016378</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>CDLA. LAS ORQUIDEAS, MZ.33 SL.26</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>ARSACONST S.A.</razonSocialComprador>
+<identificacionComprador>0992659394001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000103602</numDocModificado>
+<fechaEmisionDocSustento>01/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>9.27</totalSinImpuestos>
+<valorModificacion>10.38</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>9.27</baseImponible>
+<valor>1.11</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEVOLUCION: CAMBIO DE MATERIAL</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>68865</codigoInterno>
+<descripcion>SIFON DE LAVADERO 4018000 DE 1-1/2" PP CON ACOPLE</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>4.88</precioUnitario>
+<descuento>0.49</descuento>
+<precioTotalSinImpuesto>9.27</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="EDESA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.27</baseImponible>
+<valor>1.11</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2890122</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">12433</campoAdicional>
+</infoAdicional>
+</notaCredito>

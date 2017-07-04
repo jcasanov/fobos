@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268097</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>06/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268097</guiaRemision>
+<razonSocialComprador>INDECAUCHO</razonSocialComprador>
+<identificacionComprador>1090077887001</identificacionComprador>
+<totalSinImpuestos>1283.33</totalSinImpuestos>
+<totalDescuento>142.59</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1283.33</baseImponible>
+<valor>154.00</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1437.33</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>94719</codigoPrincipal>
+<descripcion>BOMBA SUMERG AGUAS NEGRAS SW-100 CON MOTOR DE 1HP/230/60/1F (514620) 20 FT CABLE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1425.92</precioUnitario>
+<descuento>142.59</descuento>
+<precioTotalSinImpuesto>1283.33</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1283.33</baseImponible>
+<valor>154.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">vescobar@indpcaucho.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">443240</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">001854</campoAdicional>
+</infoAdicional>
+</factura>

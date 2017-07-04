@@ -1,0 +1,56 @@
+
+
+        cia         loc marca          tot_item 
+
+          1           1 POWERS              316
+          1           2 POWERS              316
+          1           3 POWERS              316
+          1           4 POWERS              316
+          2           6 POWERS              316
+          2           7 POWERS              316
+
+
+        cia         loc marca          tot_item 
+
+          2           7 POWERS              316
+
+
+             ttt 
+
+             315
+
+
+r10_compania  (constant) r10_codigo      r10_marca 
+
+
+
+      (count(*)) 
+
+               0
+
+
+        cia marca      tot_item_fin 
+
+          1 POWERS              316
+          2 POWERS              316
+
+
+        cia      ite_uni_beg 
+
+          1              316
+          2              316
+
+
+             cca 
+
+             316
+
+
+             cca 
+
+               0
+
+
+             cca 
+
+             316

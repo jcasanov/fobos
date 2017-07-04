@@ -1,0 +1,125 @@
+0.994^
+19^77^1^[]^
+19^^
+
+    Registro:                 Fecha:                    Estado:              
+
+  Referencia:                                                                
+
+    Division:                                                 
+       Linea:                                                 
+       Grupo:                                                      
+       Clase:                                                                
+       Marca:                                                  
+
+  Codigo Utilidad:                       Partida:                  
+
+     Nuevo Precio:                
+    Porc. Aumento:          %            Porc. Decremento:          %
+
+    Ingresado Por:                       Fecha Ingreso:                      
+                                         Fecha Revers.:                      
+
+formFields 23
+ff0^1^1^15^0^5^1^0^0^1^1569^16^0^2^^^^^^^Entry^^^0^^^
+15^1^5^
+ff1^2^1^38^0^10^1^0^0^1^1569^16^0^7^^Digite la Fecha en formato: dd-mm-aaaa.^^^dd-mm-yyyy^^Entry^^^0^^^
+38^1^10^
+ff2^3^3^15^0^61^1^0^0^1^1570^16^0^13^^^^^^^Entry^^^0^^^
+15^3^61^
+ff3^4^1^65^0^1^1^0^0^1^1569^16^0^0^^(A) Activo  (R) Reversado^^^^^Entry^^^0^^^
+65^1^1^
+ff4^1^1^67^0^9^1^0^0^1^513^-32768^0^0^^^^^^^Entry^^^0^^^
+67^1^9^
+ff5^5^5^15^0^1^1^0^0^1^512^-32768^0^0^^^^^^^FIELD_BMP^^lista.bmp F2^0^^^
+15^5^1^
+ff6^1^5^26^0^35^1^0^0^1^1569^-32768^0^13^^^^^^^Entry^^^0^^^
+26^5^35^
+ff7^6^6^15^0^2^1^0^0^1^514^-32768^0^0^^^^^^^FIELD_BMP^^lista.bmp F2^0^^^
+15^6^2^
+ff8^1^6^26^0^35^1^0^0^1^1569^-32768^0^13^^^^^^^Entry^^^0^^^
+26^6^35^
+ff9^7^7^15^0^3^1^0^0^1^514^-32768^0^0^^^^^^^FIELD_BMP^^lista.bmp F2^0^^^
+15^7^3^
+ff10^1^7^26^0^40^1^0^0^1^1569^-32768^0^13^^^^^^^Entry^^^0^^^
+26^7^40^
+ff11^8^8^15^0^8^1^0^0^1^514^-32768^0^0^^^^^^^FIELD_BMP^^lista.bmp F2^0^^^
+15^8^8^
+ff12^1^8^26^0^50^1^0^0^1^1569^-32768^0^13^^^^^^^Entry^^^0^^^
+26^8^50^
+ff13^9^9^15^0^6^1^0^0^1^514^-32768^0^0^^^^^^^FIELD_BMP^^lista.bmp F2^0^^^
+15^9^6^
+ff14^1^9^26^0^36^1^0^0^1^1569^-32768^0^13^^^^^^^Entry^^^0^^^
+26^9^36^
+ff15^10^11^20^0^5^1^0^0^1^514^-32768^0^0^^^^^^^FIELD_BMP^^lista.bmp F2^0^^^
+20^11^5^
+ff16^11^11^51^0^15^1^0^0^1^514^-32768^0^13^^^^^^^FIELD_BMP^^lista.bmp F2^0^^^
+51^11^15^
+ff17^12^13^20^0^13^1^0^0^1^1570^16^0^5^^Precio que se actualizara en todos los items en base a los parametros especif.^^0:40000.00^##,###,##&.##^^Entry^^^0^^^
+20^13^13^
+ff18^13^14^20^0^6^1^0^0^1^1570^16^0^5^^Incrementa precios a los items en base a los parametros especificados.^^0:100.00^##&.##^^Entry^^^0^^^
+20^14^6^
+ff19^14^14^60^0^6^1^0^0^1^1570^16^0^5^^Decrementa precios a los items en base a los parametros especificados.^^0:100.00^##&.##^^Entry^^^0^^^
+60^14^6^
+ff20^15^16^20^0^10^1^0^0^1^1569^16^0^13^^^^^^^Entry^^^0^^^
+20^16^10^
+ff21^16^16^57^0^19^1^0^0^1^1569^16^0^10^^^^^^^Entry^^^0^^sqlLen=3594^
+57^16^19^
+ff22^17^17^57^0^19^1^0^0^1^513^-32768^0^10^^^^^^^Entry^^^0^^sqlLen=3594^
+57^17^19^
+aliasses 23
+r85_codigo^ff0^
+r85_fec_camprec^ff1^
+r85_referencia^ff2^
+r85_estado^ff3^
+tit_estado^ff4^
+r85_division^ff5^
+r03_nombre^ff6^
+r85_linea^ff7^
+r70_desc_sub^ff8^
+r85_cod_grupo^ff9^
+r71_desc_grupo^ff10^
+r85_cod_clase^ff11^
+r72_desc_clase^ff12^
+r85_marca^ff13^
+r73_desc_marca^ff14^
+r85_cod_util^ff15^
+r85_partida^ff16^
+r85_precio_nue^ff17^
+r85_porc_aum^ff18^
+r85_porc_dec^ff19^
+r85_usuario^ff20^
+r85_fecing^ff21^
+r85_fec_reversa^ff22^
+screenRecords 7
+rept003^1^0^1^1^0^0^0^0^
+r03_nombre^ff6^
+rept070^1^0^1^1^0^0^0^0^
+r70_desc_sub^ff8^
+rept071^1^0^1^1^0^0^0^0^
+r71_desc_grupo^ff10^
+rept072^1^0^1^1^0^0^0^0^
+r72_desc_clase^ff12^
+rept073^1^0^1^1^0^0^0^0^
+r73_desc_marca^ff14^
+rept085^17^0^1^1^0^0^0^0^
+r85_codigo^ff0^
+r85_fec_camprec^ff1^
+r85_referencia^ff2^
+r85_estado^ff3^
+r85_division^ff5^
+r85_linea^ff7^
+r85_cod_grupo^ff9^
+r85_cod_clase^ff11^
+r85_marca^ff13^
+r85_cod_util^ff15^
+r85_partida^ff16^
+r85_precio_nue^ff17^
+r85_porc_aum^ff18^
+r85_porc_dec^ff19^
+r85_usuario^ff20^
+r85_fecing^ff21^
+r85_fec_reversa^ff22^
+formonly^1^0^1^1^0^0^0^0^
+tit_estado^ff4^
+keyLabels 0

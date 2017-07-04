@@ -1,0 +1,45 @@
+. /acero/envfobos.sh
+export ruta=$INFORMIXSERVER
+export INFORMIXSERVER=ACGYE01
+MSG_FA=`fglgo veri_doc acero_gm 1 1 30 FA`
+MSG_NV=`fglgo veri_doc acero_gm 1 1 30 NV`
+MSG_NC=`fglgo veri_doc acero_gm 1 1 30 NC`
+MSG_ND=`fglgo veri_doc acero_gm 1 1 30 ND`
+MSG_SRI_FA=`fglgo docsri acero_gm 1 FA`
+MSG_SRI_NV=`fglgo docsri acero_gm 1 NV`
+MSG_SRI_NC=`fglgo docsri acero_gm 1 NC`
+
+if [ "$MSG_FA" ]; then
+echo $MSG_FA|smbclient  -I 192.168.4.98 -M fobosadmin
+echo $MSG_FA|mail -s "ALERTA !!!"  nelson
+fi
+
+if [ "$MSG_NV" ]; then
+echo $MSG_NV|smbclient  -I 192.168.4.98 -M fobosadmin
+echo $MSG_NV|mail -s "ALERTA !!!"  nelson
+fi
+
+if [ "$MSG_NC" ]; then
+echo $MSG_NC|smbclient  -I 192.168.4.98 -M fobosadmin
+echo $MSG_NC|mail -s "ALERTA !!!"  nelson
+fi
+
+if [ "$MSG_ND" ]; then
+echo $MSG_ND|smbclient  -I 192.168.4.98 -M fobosadmin
+echo $MSG_ND|mail -s "ALERTA !!!"  nelson
+fi
+
+if [ "$MSG_SRI_FA" ]; then
+echo $MSG_SRI_FA|smbclient  -I 192.168.4.98 -M fobosadmin
+echo $MSG_SRI_FA|mail -s "ALERTA !!!"  nelson
+fi
+
+if [ "$MSG_SRI_NV" ]; then
+echo $MSG_SRI_NV|smbclient  -I 192.168.4.98 -M fobosadmin
+echo $MSG_SRI_NV|mail -s "ALERTA !!!"  nelson
+fi
+
+if [ "$MSG_SRI_NC" ]; then
+echo $MSG_SRI_NC|smbclient  -I 192.168.4.98 -M fobosadmin
+echo $MSG_SRI_NC|mail -s "ALERTA !!!"  nelson
+fi

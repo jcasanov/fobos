@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113716</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113716</guiaRemision>
+<razonSocialComprador>ACERIA DEL ECUADOR CA ADELCA.</razonSocialComprador>
+<identificacionComprador>1790004724001</identificacionComprador>
+<totalSinImpuestos>499.37</totalSinImpuestos>
+<totalDescuento>88.13</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>499.37</baseImponible>
+<valor>59.92</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>559.29</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99887</codigoPrincipal>
+<descripcion>TECLE DE PALANCA A CADENA LB020-5  CON MANGO CAPACIDAD DE 2 Ton. 1.5 m. DE ELEVACION</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>587.50</precioUnitario>
+<descuento>88.13</descuento>
+<precioTotalSinImpuesto>499.37</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KITO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>499.37</baseImponible>
+<valor>59.92</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">recibo-electronico@adelca.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2792136</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">028583</campoAdicional>
+</infoAdicional>
+</factura>

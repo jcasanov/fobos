@@ -1,0 +1,21 @@
+database acero_gm
+screen size 24 by 80
+{
+z60_compania       [f000       ]
+z60_localidad      [f001  ]
+z60_fecha_carga    [f002      ]
+z60_fecha_arran    [f003      ]
+z60_usuario        [f004      ]
+z60_fecing         [f005               ]
+}
+end
+tables
+cxct060
+attributes
+f000 = cxct060.z60_compania;
+f001 = cxct060.z60_localidad;
+f002 = cxct060.z60_fecha_carga;
+f003 = cxct060.z60_fecha_arran;
+f004 = cxct060.z60_usuario;
+f005 = cxct060.z60_fecing;
+end

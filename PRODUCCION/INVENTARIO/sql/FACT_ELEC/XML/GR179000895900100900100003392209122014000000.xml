@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000033922</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>VICTOR EMILIO ESTRADA 114 Y BALSAMOS</dirEstablecimiento>
+<dirPartida>AV. JUAN TANCA MARENGO KM,1.7</dirPartida>
+<razonSocialTransportista>MAGALI MORLA</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>0911084572</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>09/12/2014</fechaIniTransporte>
+<fechaFinTransporte>09/12/2014</fechaFinTransporte>
+<placa>PQL-387</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0992672870001</identificacionDestinatario>
+<razonSocialDestinatario>CONSTRUCTORA TORRES ASOCIADOS JTMM S.A.</razonSocialDestinatario>
+<dirDestinatario>RETIRO MAGALI MORLA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>09/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>70800</codigoInterno>
+<descripcion>LLAVE PARA LAVABO E220/B2-CR  NEW PORT CROMO</descripcion>
+<cantidad>5.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="E220/B2-CR" valor="E220/B2-CR"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+<campoAdicional nombre="telefono-movil">2889469</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016608</campoAdicional>
+</infoAdicional>
+</guiaRemision>

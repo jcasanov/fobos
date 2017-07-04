@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000034157</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>AV. JUAN TANCA MARENGO KM.1.7</dirPartida>
+<razonSocialTransportista>SERVIENTREGA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0991285679001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>22/12/2014</fechaIniTransporte>
+<fechaFinTransporte>22/12/2014</fechaFinTransporte>
+<placa>...</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0992167572001</identificacionDestinatario>
+<razonSocialDestinatario>INDELAME S.A.</razonSocialDestinatario>
+<dirDestinatario>BASE MAVAL DE JARAMIJO - BYRON SOLIS CEL.0967858130</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>05/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>70890</codigoInterno>
+<descripcion>CERRADURA DORMITORIO 808-S/S ET DE MANILLA CROMO SATINADO</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CERRAD"/>
+<detAdicional nombre="MODELO" valor="808-S/S ET DE MANILL"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>70890</codigoInterno>
+<descripcion>CERRADURA DORMITORIO 808-S/S ET DE MANILLA CROMO SATINADO</descripcion>
+<cantidad>68.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CERRAD"/>
+<detAdicional nombre="MODELO" valor="808-S/S ET DE MANILL"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>71513</codigoInterno>
+<descripcion>CERRADURA BANIO 808-S/S-BK CROMO SATINADO</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CERRAD"/>
+<detAdicional nombre="MODELO" valor="808-S/S-BK"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>71513</codigoInterno>
+<descripcion>CERRADURA BANIO 808-S/S-BK CROMO SATINADO</descripcion>
+<cantidad>10.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CERRAD"/>
+<detAdicional nombre="MODELO" valor="808-S/S-BK"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0994866868</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016622</campoAdicional>
+</infoAdicional>
+</guiaRemision>

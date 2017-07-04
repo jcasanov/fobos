@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268982</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>26/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268982</guiaRemision>
+<razonSocialComprador>MORALES CHAMORRO LUIS GUSTAVO</razonSocialComprador>
+<identificacionComprador>1704404910001</identificacionComprador>
+<totalSinImpuestos>74.55</totalSinImpuestos>
+<totalDescuento>11.63</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>74.55</baseImponible>
+<valor>8.95</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>83.50</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>1585</codigoPrincipal>
+<descripcion>BUSHING GALV. CLASE 150 DE 2" x 1-1/2"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>3.49</precioUnitario>
+<descuento>0.70</descuento>
+<precioTotalSinImpuesto>6.28</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.28</baseImponible>
+<valor>0.75</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1732</codigoPrincipal>
+<descripcion>BUSHING NEGRO CLASE 150 DE 2" x 1"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3.96</precioUnitario>
+<descuento>0.59</descuento>
+<precioTotalSinImpuesto>3.37</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.37</baseImponible>
+<valor>0.40</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1652</codigoPrincipal>
+<descripcion>BUSHING GALV. CLASE 150 DE 1-1/2" x 1"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>3.27</precioUnitario>
+<descuento>2.94</descuento>
+<precioTotalSinImpuesto>16.68</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>16.68</baseImponible>
+<valor>2.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>10154</codigoPrincipal>
+<descripcion>SELLADOR 2-C-GS-2-11  DE  11 OZ. NEGRO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>5.76</precioUnitario>
+<descuento>1.73</descuento>
+<precioTotalSinImpuesto>9.79</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PERMAT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.79</baseImponible>
+<valor>1.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97801</codigoPrincipal>
+<descripcion>FULMINANTES PARA PISTOLA 50626 AMARILLO CAL.0.27 EN TIRA DE 10 UNID P/PA3500</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>0.95</precioUnitario>
+<descuento>1.90</descuento>
+<precioTotalSinImpuesto>17.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="DEC"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>17.10</baseImponible>
+<valor>2.05</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>69621</codigoPrincipal>
+<descripcion>CLAVO DE CABEZA .300 PARA CEMENTO Y ACERO 50022 DE 3/4" PIN 0.145" CABEZA 0.3" CAJA DE 100 u</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>4.00</precioUnitario>
+<descuento>1.20</descuento>
+<precioTotalSinImpuesto>6.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="CAJA"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.80</baseImponible>
+<valor>0.82</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70098</codigoPrincipal>
+<descripcion>ANCLAJE DE ROSCA INTERNA STEEL DROPIN 6306  PARA ROSCAS DE 3/8"</descripcion>
+<cantidad>45.00</cantidad>
+<precioUnitario>0.38</precioUnitario>
+<descuento>2.57</descuento>
+<precioTotalSinImpuesto>14.53</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>14.53</baseImponible>
+<valor>1.74</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">inggustavomorales@yahoo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3401805</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">015973</campoAdicional>
+<campoAdicional nombre="Observaciones">CHEQUE DEL PICHINCHA N.-5955</campoAdicional>
+</infoAdicional>
+</factura>

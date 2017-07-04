@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268885</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268885</guiaRemision>
+<razonSocialComprador>EMPRESA PUBLICA METROPOLITANA DE MOVILIDAD Y OBRAS PUBLICAS</razonSocialComprador>
+<identificacionComprador>1768154690001</identificacionComprador>
+<totalSinImpuestos>21486.69</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>21486.69</baseImponible>
+<valor>2578.40</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>24065.09</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5356</codigoPrincipal>
+<descripcion>TUBO ESTRUCTURAL A-3724 TIPO "N" 40 x 40 x 3mm. ESPESOR</descripcion>
+<cantidad>11.00</cantidad>
+<precioUnitario>41.13</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>452.43</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>452.43</baseImponible>
+<valor>54.29</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5362</codigoPrincipal>
+<descripcion>TUBO ESTRUCTURAL A-3724 TIPO "N" 50 x 50 x 3mm. ESPESOR</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>50.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>100.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>100.00</baseImponible>
+<valor>12.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>90282</codigoPrincipal>
+<descripcion>TUBO ESTRUCTURAL A-3724 TIPO "N" 100 x 100 x 3mm.</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>106.49</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>425.96</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>425.96</baseImponible>
+<valor>51.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>530</codigoPrincipal>
+<descripcion>PLETINA DE 100 x 6mm. x 6 Mts.</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>46.60</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>279.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>279.60</baseImponible>
+<valor>33.55</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>68</codigoPrincipal>
+<descripcion>ANGULO LAMINADO x 6 MTS. DE 50mm. x 6mm.</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>46.78</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>187.12</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>187.12</baseImponible>
+<valor>22.45</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>694</codigoPrincipal>
+<descripcion>TOL AL CALOR DE 6mm. 1.22 x 2.44 m (140.34 KG.)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>140.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>280.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>280.00</baseImponible>
+<valor>33.60</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21470</codigoPrincipal>
+<descripcion>ELECTRODO E-6011-C-13 1/8" ACERO DULCE</descripcion>
+<cantidad>230.00</cantidad>
+<precioUnitario>4.69</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1078.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="AGA"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1078.70</baseImponible>
+<valor>129.44</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>69511</codigoPrincipal>
+<descripcion>MALLA CERRAMIENTO 50/10 x 2.50 m DE ALTO  (ROLLO 10m) GALVANIZADA</descripcion>
+<cantidad>128.00</cantidad>
+<precioUnitario>145.96</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>18682.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="ROLLO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>18682.88</baseImponible>
+<valor>2241.95</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jimena.escobar@epmmop.go.ec</campoAdicional>
+<campoAdicional nombre="Email">olga.bonilla@epmmop.go.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2907005</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">054494</campoAdicional>
+<campoAdicional nombre="Observaciones">CERT. 420 GAF-UF-P</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000016387</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>VIVIENDAS VICOLINCI S.A.</razonSocialComprador>
+<identificacionComprador>0990179883001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000104107</numDocModificado>
+<fechaEmisionDocSustento>19/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>41.92</totalSinImpuestos>
+<valorModificacion>46.95</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>41.92</baseImponible>
+<valor>5.03</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEVOLUCION: CLIENTE CAMBIO DE SERVICIO</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>3692</codigoInterno>
+<descripcion>REDUCCION GALV. CLASE 150 DE 3" x 2-1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>15.58</precioUnitario>
+<descuento>1.71</descuento>
+<precioTotalSinImpuesto>13.87</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>13.87</baseImponible>
+<valor>1.66</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>6374</codigoInterno>
+<descripcion>UNIVERSAL CONICA NEGRA CLASE 150 DE 2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>18.95</precioUnitario>
+<descuento>2.08</descuento>
+<precioTotalSinImpuesto>16.87</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>16.87</baseImponible>
+<valor>2.02</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>4732</codigoInterno>
+<descripcion>TEE NEGRA CLASE 150 DE 2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>9.07</precioUnitario>
+<descuento>1.00</descuento>
+<precioTotalSinImpuesto>8.07</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.07</baseImponible>
+<valor>0.97</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>4160</codigoInterno>
+<descripcion>TAPON GALV. MACHO CLASE 150 DE 2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3.50</precioUnitario>
+<descuento>0.39</descuento>
+<precioTotalSinImpuesto>3.11</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.11</baseImponible>
+<valor>0.37</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2235631</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">11985</campoAdicional>
+</infoAdicional>
+</notaCredito>

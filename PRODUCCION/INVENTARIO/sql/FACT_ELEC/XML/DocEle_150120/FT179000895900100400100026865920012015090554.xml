@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268659</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268659</guiaRemision>
+<razonSocialComprador>PROINDUPET CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1792228425001</identificacionComprador>
+<totalSinImpuestos>2072.43</totalSinImpuestos>
+<totalDescuento>230.27</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>2072.43</baseImponible>
+<valor>248.69</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>2321.12</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>91402</codigoPrincipal>
+<descripcion>LLAVE DE TUBO RECTA NO.836 CON MANGO DE ALUMINIO (31110)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>229.30</precioUnitario>
+<descuento>45.86</descuento>
+<precioTotalSinImpuesto>412.74</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>412.74</baseImponible>
+<valor>49.53</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>13660</codigoPrincipal>
+<descripcion>LLAVE DE TUBO RECTA NO. 36 (31035)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>170.15</precioUnitario>
+<descuento>34.03</descuento>
+<precioTotalSinImpuesto>306.27</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>306.27</baseImponible>
+<valor>36.75</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>13662</codigoPrincipal>
+<descripcion>LLAVE DE TUBO RECTA NO. 48 (31040)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>321.45</precioUnitario>
+<descuento>64.29</descuento>
+<precioTotalSinImpuesto>578.61</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>578.61</baseImponible>
+<valor>69.43</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100603</codigoPrincipal>
+<descripcion>LLAVE DE TUBO RECTA NO.848 CON MANGO DE ALUMINIO (31115)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>430.45</precioUnitario>
+<descuento>86.09</descuento>
+<precioTotalSinImpuesto>774.81</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>774.81</baseImponible>
+<valor>92.98</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">proindupet@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">062881865</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">052259</campoAdicional>
+<campoAdicional nombre="Observaciones">ORDEN DE COMPRA N.-3134</campoAdicional>
+</infoAdicional>
+</factura>

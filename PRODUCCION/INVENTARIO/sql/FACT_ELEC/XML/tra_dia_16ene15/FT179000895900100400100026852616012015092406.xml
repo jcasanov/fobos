@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268526</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268526</guiaRemision>
+<razonSocialComprador>ZALDUMBIDE NAVIA DAVID FRANCISCO</razonSocialComprador>
+<identificacionComprador>1712453479</identificacionComprador>
+<totalSinImpuestos>569.47</totalSinImpuestos>
+<totalDescuento>63.28</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>569.47</baseImponible>
+<valor>68.34</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>637.81</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>101258</codigoPrincipal>
+<descripcion>HORNO 41575310  HL  830 220 V.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>632.75</precioUnitario>
+<descuento>63.28</descuento>
+<precioTotalSinImpuesto>569.47</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TEKA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>569.47</baseImponible>
+<valor>68.34</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">dfzn2003@yahoo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0987017668</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064278</campoAdicional>
+<campoAdicional nombre="Observaciones">DFZN2003@YAHOO.COM</campoAdicional>
+</infoAdicional>
+</factura>

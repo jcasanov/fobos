@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048186</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento></dirEstablecimiento>
+<dirPartida>AV LA PRENSA</dirPartida>
+<razonSocialTransportista>SERVIENTREGA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0991285679001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>18/12/2014</fechaIniTransporte>
+<fechaFinTransporte>18/12/2014</fechaFinTransporte>
+<placa></placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1791725530001</identificacionDestinatario>
+<razonSocialDestinatario>COELEC S.C.</razonSocialDestinatario>
+<dirDestinatario>STO.DOMINGO</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>18/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>102781</codigoInterno>
+<descripcion>CORTACABLE 2472-21XC DE 600 MCM.</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="MODELO" valor="2472-21XC"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>13646</codigoInterno>
+<descripcion>LLAVE DE TUBO RECTA NO. 6 (31000)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="MODELO" valor="NO.6"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>13648</codigoInterno>
+<descripcion>LLAVE DE TUBO RECTA NO. 8 (31005)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="MODELO" valor="NO.8"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>13652</codigoInterno>
+<descripcion>LLAVE DE TUBO RECTA NO. 12 (31015)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="MODELO" valor="NO.12"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>13656</codigoInterno>
+<descripcion>LLAVE DE TUBO RECTA NO. 18 (31025)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="MODELO" valor="NO.18"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2752485</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">037987</campoAdicional>
+</infoAdicional>
+</guiaRemision>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000004365</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>ATU (ARTICULOS DE ACERO S.A.)</razonSocialComprador>
+<identificacionComprador>1790038092001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>003-001-000131585</numDocModificado>
+<fechaEmisionDocSustento>16/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>14.58</totalSinImpuestos>
+<valorModificacion>16.33</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>14.58</baseImponible>
+<valor>1.75</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>REF POR FECHA NP 139239</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>3206</codigoInterno>
+<descripcion>NEPLO GALVANIZADO DE 1" x 5"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>1.50</precioUnitario>
+<descuento>0.60</descuento>
+<precioTotalSinImpuesto>5.40</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.40</baseImponible>
+<valor>0.65</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>6136</codigoInterno>
+<descripcion>UNION NEGRA CLASE 150 DE 1-1/4"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>2.55</precioUnitario>
+<descuento>1.02</descuento>
+<precioTotalSinImpuesto>9.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.18</baseImponible>
+<valor>1.10</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infoatu@atu.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">554477 648</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">28573</campoAdicional>
+</infoAdicional>
+</notaCredito>

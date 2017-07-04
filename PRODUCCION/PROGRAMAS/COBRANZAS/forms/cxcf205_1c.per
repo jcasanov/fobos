@@ -1,0 +1,51 @@
+DATABASE aceros
+SCREEN 
+{
+
+
+     No Solicitud: [c002       ]                  Estado: [b|c100      ]
+          Cliente: [c004       ] [c102                                 ]
+     Area Negocio: [c003  ] [c101            ]
+      Grupo Línea: [c000  ] [c110            ]
+           Moneda: [a0] [c103           ] Paridad: [c006               ]
+	  Subtipo: [c009] [c104                        ]    
+       Referencia: [c005                               ]
+
+    Valor a Pagar: [c008            ]
+
+    Ingresado Por: [c013      ]         
+ Fecha de Ingreso: [c014               ]
+}
+TABLES
+cxct024
+ATTRIBUTES
+c002 = cxct024.z24_numero_sol, REVERSE, NOENTRY, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c003 = cxct024.z24_areaneg, REVERSE, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c000 = cxct024.z24_linea, REVERSE, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c004 = cxct024.z24_codcli, REVERSE, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+b = cxct024.z24_estado, NOENTRY, UPSHIFT, REVERSE;
+c005 = cxct024.z24_referencia, UPSHIFT;
+a0 = cxct024.z24_moneda, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c009 = cxct024.z24_subtipo, REVERSE, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c006 = cxct024.z24_paridad, NOENTRY, REVERSE, FORMAT='#,###,##&.#########';
+c013 = cxct024.z24_usuario, REVERSE, NOENTRY, UPSHIFT;
+c014 = cxct024.z24_fecing, REVERSE, NOENTRY;
+
+c008 = cxct024.z24_total_cap, REVERSE, FORMAT='#,###,###,##&.##';
+
+c100 = FORMONLY.n_estado, NOENTRY;
+c101 = FORMONLY.n_areaneg, NOENTRY;
+c102 = FORMONLY.n_cliente, NOENTRY;
+c103 = FORMONLY.n_moneda, NOENTRY;
+c104 = FORMONLY.n_motivo, NOENTRY;
+c110 = FORMONLY.n_linea,  NOENTRY;
+end
+
+INSTRUCTIONS
+DELIMITERS '||'

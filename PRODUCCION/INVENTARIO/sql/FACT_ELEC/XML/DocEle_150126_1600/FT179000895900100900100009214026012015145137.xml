@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092140</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>26/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092140</guiaRemision>
+<razonSocialComprador>RIMACORP S.A.</razonSocialComprador>
+<identificacionComprador>0992427221001</identificacionComprador>
+<totalSinImpuestos>689.63</totalSinImpuestos>
+<totalDescuento>194.52</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>689.63</baseImponible>
+<valor>82.76</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>772.39</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>70388</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-20-7490 (PAQ.DE 5 UNID.) SDS DE 3/16-1/4-5/16-3/8 Y 1/2</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>29.70</precioUnitario>
+<descuento>32.67</descuento>
+<precioTotalSinImpuesto>115.83</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="JUEGO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>115.83</baseImponible>
+<valor>13.90</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100048</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-20-7240 DE 1" x 8" x 10" SDS 4 CORTADORES.</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>59.76</precioUnitario>
+<descuento>65.74</descuento>
+<precioTotalSinImpuesto>233.06</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>233.06</baseImponible>
+<valor>27.97</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102347</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-20-7063 SDS PLUS 2CT 3/4" X 8" X 10"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>21.17</precioUnitario>
+<descuento>18.63</descuento>
+<precioTotalSinImpuesto>66.05</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>66.05</baseImponible>
+<valor>7.93</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102354</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-20-7210 SDS PLUS 4CT 3/4" X 6" X 8"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>28.36</precioUnitario>
+<descuento>24.96</descuento>
+<precioTotalSinImpuesto>88.48</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>88.48</baseImponible>
+<valor>10.62</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102355</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-20-7215 SDS PLUS 4CT 3/4" X 10" X 12"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>31.64</precioUnitario>
+<descuento>27.84</descuento>
+<precioTotalSinImpuesto>98.72</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>98.72</baseImponible>
+<valor>11.85</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70330</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO SDS-PLUS 7/8" X 12" (00376)</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>37.39</precioUnitario>
+<descuento>24.68</descuento>
+<precioTotalSinImpuesto>87.49</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>87.49</baseImponible>
+<valor>10.50</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">asistentegerencial@rimacorp.com</campoAdicional>
+<campoAdicional nombre="Email">secretaria@rimacorp.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">5001103</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016042</campoAdicional>
+<campoAdicional nombre="Observaciones">ATT. SRTA. CASSANDRA ARAY</campoAdicional>
+</infoAdicional>
+</factura>

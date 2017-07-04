@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268057</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>05/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268057</guiaRemision>
+<razonSocialComprador>PROCESADORA NACIONAL DE ALIMENTOS C.A. PRONACA</razonSocialComprador>
+<identificacionComprador>1790319857001</identificacionComprador>
+<totalSinImpuestos>1760.21</totalSinImpuestos>
+<totalDescuento>310.63</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1760.21</baseImponible>
+<valor>211.23</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1971.44</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>93630</codigoPrincipal>
+<descripcion>MOTOR ELEC SUMERG DE 4" 2343288602 4C3F DE 7.5 HP/380/460/60C/3F</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1035.42</precioUnitario>
+<descuento>310.63</descuento>
+<precioTotalSinImpuesto>1760.21</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1760.21</baseImponible>
+<valor>211.23</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacionelectronica@pronaca.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3976400</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">028945</campoAdicional>
+</infoAdicional>
+</factura>

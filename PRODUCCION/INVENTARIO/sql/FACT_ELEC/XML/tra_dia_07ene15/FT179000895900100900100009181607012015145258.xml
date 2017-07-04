@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091816</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091816</guiaRemision>
+<razonSocialComprador>PENA NAVAS ARNALDO</razonSocialComprador>
+<identificacionComprador>0900621939001</identificacionComprador>
+<totalSinImpuestos>295.38</totalSinImpuestos>
+<totalDescuento>36.95</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>295.38</baseImponible>
+<valor>35.45</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>330.83</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>98556</codigoPrincipal>
+<descripcion>BOMBA TIPO JET C-MOTOR HB-100S DE 1 HP 220V/60/1F. (401T100-01)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>225.72</precioUnitario>
+<descuento>24.83</descuento>
+<precioTotalSinImpuesto>200.89</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>200.89</baseImponible>
+<valor>24.11</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>19968</codigoPrincipal>
+<descripcion>CONTROL DE AIRE 14446-A COMPLETO BRADY</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>48.50</precioUnitario>
+<descuento>5.34</descuento>
+<precioTotalSinImpuesto>43.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>43.16</baseImponible>
+<valor>5.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70678</codigoPrincipal>
+<descripcion>MANOMETRO ROSCA NPT 1/4" 0-150 PSI DE GLICERINA ESF. 2.5"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>38.60</precioUnitario>
+<descuento>4.63</descuento>
+<precioTotalSinImpuesto>33.97</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ASHCRO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>33.97</baseImponible>
+<valor>4.08</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21134</codigoPrincipal>
+<descripcion>SWITCH DE PRESION 15760-A DE 20 A 40 PSI SQUARE D</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>19.51</precioUnitario>
+<descuento>2.15</descuento>
+<precioTotalSinImpuesto>17.36</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>17.36</baseImponible>
+<valor>2.08</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">arnalpenavas@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2203463</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">002195</campoAdicional>
+</infoAdicional>
+</factura>

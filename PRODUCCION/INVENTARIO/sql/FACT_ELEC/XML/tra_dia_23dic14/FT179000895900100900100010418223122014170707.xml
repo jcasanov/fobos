@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104182</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104182</guiaRemision>
+<razonSocialComprador>COMPAÒIA ANONIMA CLINICA GUAYAQUIL SERVICIOS MEDICOS S.A.</razonSocialComprador>
+<identificacionComprador>0990050368001</identificacionComprador>
+<totalSinImpuestos>10919.86</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>10919.86</baseImponible>
+<valor>1310.38</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>12230.24</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102962</codigoPrincipal>
+<descripcion>BOMBA CENTRIFUGA STANDAR S/ MOTOR NK50-200/219 Y1F2AE-SBAQE  (96604219)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1837.86</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1837.86</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1837.86</baseImponible>
+<valor>220.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>71861</codigoPrincipal>
+<descripcion>MOTOR ELECTRICO MEMHU UL 40HP 3600RPM 220/460/3F.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3056.01</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3056.01</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MARATH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3056.01</baseImponible>
+<valor>366.72</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>68834</codigoPrincipal>
+<descripcion>BOMBA CENTRIF MULTIETAPA C-MOTOR CR3-17 3HP 220-277D/380/480Y/3F/60C VERTICAL (96517827)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2108.49</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2108.49</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2108.49</baseImponible>
+<valor>253.02</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>71869</codigoPrincipal>
+<descripcion>TABLERO ELECTRICO SCI DE 40HP/220V.3F. ARRANQUE Y-D JOCKEY DE 3HP.3F MAN. AUT.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1562.50</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1562.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1562.50</baseImponible>
+<valor>187.50</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>71532</codigoPrincipal>
+<descripcion>EQUIPO CONTRA INCENDIOS BASE Y ELEMENTOS DE SUCCION Y DESCARGA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2355.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2355.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2355.00</baseImponible>
+<valor>282.60</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">mrendon@clinicaguayaquil.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2563555</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">003228</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000269038</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>004-001-000269038</guiaRemision>
+<razonSocialComprador>CHIRIBOGA CORDOVES DIEGO FERNANDO</razonSocialComprador>
+<identificacionComprador>0600075683</identificacionComprador>
+<totalSinImpuestos>355.52</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>355.52</baseImponible>
+<valor>42.66</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>398.18</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>671</codigoPrincipal>
+<descripcion>MALLA CERRAMIENTO 50/10 x 1.50 m DE ALTO (ROLLO 20m) GALVANIZADA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>202.22</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>202.22</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="ROLLO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>202.22</baseImponible>
+<valor>24.27</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>62499</codigoPrincipal>
+<descripcion>GAVION ESTANDAR ELECTROSOLDADO 2 x 1 x 0.50 m.</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>30.66</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>153.30</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>153.30</baseImponible>
+<valor>18.40</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">diegochiribogac@hotmai.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2249386</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">044567</campoAdicional>
+<campoAdicional nombre="Observaciones">CHEQUE PRODUBANCO N.-4362</campoAdicional>
+</infoAdicional>
+</factura>

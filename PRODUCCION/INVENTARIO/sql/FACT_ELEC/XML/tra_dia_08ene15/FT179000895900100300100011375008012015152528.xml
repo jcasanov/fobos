@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113750</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>08/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113750</guiaRemision>
+<razonSocialComprador>GAVILANES QUIROGA EVELIN MARITZA</razonSocialComprador>
+<identificacionComprador>1720142445</identificacionComprador>
+<totalSinImpuestos>328.90</totalSinImpuestos>
+<totalDescuento>28.60</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>328.90</baseImponible>
+<valor>39.47</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>368.37</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>101370</codigoPrincipal>
+<descripcion>CALENTADOR DE AGUA 220 V AISLADO 40 GL. 220V. C/TERMOMETRO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>357.50</precioUnitario>
+<descuento>28.60</descuento>
+<precioTotalSinImpuesto>328.90</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>328.90</baseImponible>
+<valor>39.47</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">evelingavilanes_86@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2654530</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064243</campoAdicional>
+</infoAdicional>
+</factura>

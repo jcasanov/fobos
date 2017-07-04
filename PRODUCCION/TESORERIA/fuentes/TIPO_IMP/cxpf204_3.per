@@ -1,0 +1,78 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+      Proveedor: [c000|c001                                    ]
+      Documento: [a1|c006           ]          Dividendo : [c01]     
+----------------------------------------------------------------------
+   Valor Bienes: [c007            ]
+Valor Servicios: [c008            ]
+         I.V.A.: [c009            ]
+                 ------------------
+     Total Neto: [c010            ]  Valor a Pagar: [c018            ]
+          
+   [c051] de [c052]
+    [lbl1          |lbl6  |lbl2|lbl3          |lbl4  |lbl5            ]   
+ [c|c015          |c020  |c011|c012          |c013  |c014            ]
+ [c|c015          |c020  |c011|c012          |c013  |c014            ]
+ [c|c015          |c020  |c011|c012          |c013  |c014            ]
+ [c|c015          |c020  |c011|c012          |c013  |c014            ]
+ [c|c015          |c020  |c011|c012          |c013  |c014            ]
+                                                    ------------------
+                                 Total Retenciones: [c017            ]
+                                  Valor del Cheque: [c016            ]
+ [c050                                                               ]
+}
+END   
+
+ATTRIBUTES
+c000 = FORMONLY.cod_proveedor, REVERSE,               NOENTRY;
+c001 = FORMONLY.n_proveedor,   REVERSE,               NOENTRY;
+a1   = FORMONLY.tipo_doc,      REVERSE,               NOENTRY;
+c006 = FORMONLY.num_doc,       REVERSE,               NOENTRY;
+c01  = FORMONLY.dividendo,     REVERSE, FORMAT='#&&', NOENTRY;
+	
+c007 = FORMONLY.val_bienes,           REVERSE, FORMAT='#,###,###,##&.##',
+	INCLUDE=(0 TO 9999999999.99),
+	COMMENT='Valor bienes de la factura.';
+c008 = FORMONLY.val_servi,            REVERSE, FORMAT='#,###,###,##&.##',
+	INCLUDE=(0 TO 9999999999.99),
+	COMMENT='Valor servicios de la factura.';
+c009 = FORMONLY.val_impto,   NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+c010 = FORMONLY.val_neto,    NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+c011 = FORMONLY.tipo_ret,    NOENTRY, OPTIONS='-nolist';
+c012 = FORMONLY.val_base,    NOENTRY, FORMAT='##,###,##&.##',
+	OPTIONS='-nolist';
+c013 = FORMONLY.porc,        NOENTRY, FORMAT='##&.##',
+	OPTIONS='-nolist';
+c014 = FORMONLY.subtotal,    NOENTRY, FORMAT='#,###,###,##&.##',
+	OPTIONS='-nolist';
+c015 = FORMONLY.n_retencion, NOENTRY, OPTIONS='-nolist';
+c020 = FORMONLY.c_sri, NOENTRY, OPTIONS = '-nolist';
+
+c016 = FORMONLY.val_cheque,  NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+c017 = FORMONLY.tot_ret,     NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+c018 = FORMONLY.val_pagar,            REVERSE, FORMAT='#,###,###,##&.##',
+	INCLUDE=(0 TO 9999999999.99);
+
+c    = FORMONLY.check,	     WIDGET='CHECK', CONFIG='S N acknowledge',
+	AUTONEXT, DEFAULT='N', OPTIONS='-nolist';
+	
+lbl1 = FORMONLY.bt_nom_ret,  WIDGET='BUTTON', CONFIG='F15';
+lbl6 = FORMONLY.bt_sri,      WIDGET='BUTTON', CONFIG='F16';
+lbl2 = FORMONLY.bt_tipo_ret, WIDGET='BUTTON', CONFIG='F17';
+lbl3 = FORMONLY.bt_base,     WIDGET='BUTTON', CONFIG='F18';
+lbl4 = FORMONLY.bt_porc,     WIDGET='BUTTON', CONFIG='F19';
+lbl5 = FORMONLY.bt_valor,    WIDGET='BUTTON', CONFIG='F20';
+
+c050 = FORMONLY.tit_codigo_sri, NOENTRY, REVERSE;
+
+c051 = FORMONLY.num_rows, NOENTRY, REVERSE;
+c052 = FORMONLY.max_rows, NOENTRY, REVERSE;
+END
+KEYS
+F5 = 'Valor a Pagar'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD ra_ret[5] (check, n_retencion, c_sri, tipo_ret, val_base, porc,
+				subtotal)

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comprobanteRetencion id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000040310</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoCompRetencion>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionSujetoRetenido>04</tipoIdentificacionSujetoRetenido>
+<razonSocialSujetoRetenido>MONICA DEL ROCIO ROMERO DIAZ</razonSocialSujetoRetenido>
+<identificacionSujetoRetenido>1706321096001</identificacionSujetoRetenido>
+<periodoFiscal>12/2014</periodoFiscal>
+</infoCompRetencion>
+<impuestos>
+<impuesto>
+<codigo>1</codigo>
+<codigoRetencion>307</codigoRetencion>
+<baseImponible>99.20</baseImponible>
+<porcentajeRetener>2.00</porcentajeRetener>
+<valorRetenido>1.98</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>001001000001653</numDocSustento>
+<fechaEmisionDocSustento>22/12/2014</fechaEmisionDocSustento>
+</impuesto>
+<impuesto>
+<codigo>2</codigo>
+<codigoRetencion>2</codigoRetencion>
+<baseImponible>11.90</baseImponible>
+<porcentajeRetener>70.00</porcentajeRetener>
+<valorRetenido>8.33</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>001001000001653</numDocSustento>
+<fechaEmisionDocSustento>22/12/2014</fechaEmisionDocSustento>
+</impuesto>
+</impuestos>
+<infoAdicional>
+<campoAdicional nombre="Email">mromero-azzafrancatering@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2412 717</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">001436</campoAdicional>
+</infoAdicional>
+</comprobanteRetencion>

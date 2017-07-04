@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113973</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113973</guiaRemision>
+<razonSocialComprador>MEDRANO ANDINO ALISON MISHELL</razonSocialComprador>
+<identificacionComprador>1723299119001</identificacionComprador>
+<totalSinImpuestos>187.78</totalSinImpuestos>
+<totalDescuento>38.46</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>187.78</baseImponible>
+<valor>22.53</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>210.31</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102008</codigoPrincipal>
+<descripcion>AZULEJO PARED 20 x 25 ORNAMENTAL AZUL  PRIMERA</descripcion>
+<cantidad>12.00</cantidad>
+<precioUnitario>8.75</precioUnitario>
+<descuento>17.85</descuento>
+<precioTotalSinImpuesto>87.15</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>87.15</baseImponible>
+<valor>10.46</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102223</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA PASTAZA NARANJA SEGUNDA</descripcion>
+<cantidad>14.00</cantidad>
+<precioUnitario>8.66</precioUnitario>
+<descuento>20.61</descuento>
+<precioTotalSinImpuesto>100.63</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>100.63</baseImponible>
+<valor>12.08</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">alitomedrano1995@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2956997</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">062207</campoAdicional>
+</infoAdicional>
+</factura>

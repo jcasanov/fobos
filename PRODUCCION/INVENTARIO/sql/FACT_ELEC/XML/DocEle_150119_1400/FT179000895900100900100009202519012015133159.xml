@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092025</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092025</guiaRemision>
+<razonSocialComprador>CARRENO FALARRAGA JUAN FRANCISCO</razonSocialComprador>
+<identificacionComprador>1311879066001</identificacionComprador>
+<totalSinImpuestos>426.94</totalSinImpuestos>
+<totalDescuento>87.45</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>426.94</baseImponible>
+<valor>51.23</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>478.17</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>20668</codigoPrincipal>
+<descripcion>MOTOR ELEC SUMERG DE 4" (2343162604) SJF-3023 DE 3HP 230-3-60</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>514.39</precioUnitario>
+<descuento>87.45</descuento>
+<precioTotalSinImpuesto>426.94</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>426.94</baseImponible>
+<valor>51.23</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">juanfrank777@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">052623412</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016642</campoAdicional>
+</infoAdicional>
+</factura>

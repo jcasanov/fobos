@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268254</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>09/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268254</guiaRemision>
+<razonSocialComprador>EDIACERO S.A. EDIFICACIONES INDUSTRIALES EN ACERO</razonSocialComprador>
+<identificacionComprador>1792434432001</identificacionComprador>
+<totalSinImpuestos>175.16</totalSinImpuestos>
+<totalDescuento>30.91</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>175.16</baseImponible>
+<valor>21.02</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>196.18</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>93777</codigoPrincipal>
+<descripcion>FRESA ANULAR PARA TALADRO ELECTROMAGNETICO 49-59-1125 DE 1-1/8" P/PLANCHA DE HASTA 1"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>68.69</precioUnitario>
+<descuento>30.91</descuento>
+<precioTotalSinImpuesto>175.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>175.16</baseImponible>
+<valor>21.02</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">schavez@ediacero.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">022531318</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">061287</campoAdicional>
+</infoAdicional>
+</factura>

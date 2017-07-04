@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176258</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176258</guiaRemision>
+<razonSocialComprador>PALLO SANCHEZ FAUSTO RODRIGO</razonSocialComprador>
+<identificacionComprador>1802444388001</identificacionComprador>
+<totalSinImpuestos>3254.96</totalSinImpuestos>
+<totalDescuento>887.02</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>3254.96</baseImponible>
+<valor>390.60</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>3645.56</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>68829</codigoPrincipal>
+<descripcion>BOMBA TIPO JET C-MOTOR MQ3-45 1 HP 110/1/60 1" (96860195)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>804.29</precioUnitario>
+<descuento>120.64</descuento>
+<precioTotalSinImpuesto>683.65</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>683.65</baseImponible>
+<valor>82.04</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>68829</codigoPrincipal>
+<descripcion>BOMBA TIPO JET C-MOTOR MQ3-45 1 HP 110/1/60 1" (96860195)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>804.29</precioUnitario>
+<descuento>120.64</descuento>
+<precioTotalSinImpuesto>683.65</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>683.65</baseImponible>
+<valor>82.04</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96496</codigoPrincipal>
+<descripcion>BOMBA TIPO JET C-MOTOR FVJ15CI DE 1-1/2 HP/115/230/60C/1F VERSAJET (91180015)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>584.91</precioUnitario>
+<descuento>87.74</descuento>
+<precioTotalSinImpuesto>497.17</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>497.17</baseImponible>
+<valor>59.66</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98559</codigoPrincipal>
+<descripcion>EQUIPO DE BOMBA TIPO JET BP-5A DE 1/2 HP 115V.C/TANQ. DE PRESION DE 6 Gln.(501P0500)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>224.46</precioUnitario>
+<descuento>134.68</descuento>
+<precioTotalSinImpuesto>314.24</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>314.24</baseImponible>
+<valor>37.71</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99814</codigoPrincipal>
+<descripcion>EQUIPO DE BOMBA TIPO JET HB100 521J1000 SW DE 1HP 115V.C/TANQUE DE PRESION DE 19 Gln.</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>440.87</precioUnitario>
+<descuento>396.78</descuento>
+<precioTotalSinImpuesto>925.83</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>925.83</baseImponible>
+<valor>111.10</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>68826</codigoPrincipal>
+<descripcion>BOMBA CENTRIF MONOETAPA DE AUMENTO DE PRESION UPA15-90/160 0.1HP 110-1-60 (59539518)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>176.96</precioUnitario>
+<descuento>26.54</descuento>
+<precioTotalSinImpuesto>150.42</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>150.42</baseImponible>
+<valor>18.05</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">851238</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">049001</campoAdicional>
+</infoAdicional>
+</factura>

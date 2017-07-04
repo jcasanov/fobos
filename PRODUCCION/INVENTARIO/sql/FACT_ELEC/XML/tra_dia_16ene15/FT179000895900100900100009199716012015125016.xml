@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091997</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091997</guiaRemision>
+<razonSocialComprador>MOREIRA PALMA ANGEL AGAPITO</razonSocialComprador>
+<identificacionComprador>1304252180001</identificacionComprador>
+<totalSinImpuestos>248.61</totalSinImpuestos>
+<totalDescuento>30.73</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>248.61</baseImponible>
+<valor>29.83</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>278.44</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99753</codigoPrincipal>
+<descripcion>SIERRA CIRCULAR 6177-20 DE MESA CORTE ABRASIVO 3.2HP/120V/3700RPM DISCO 14"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>279.34</precioUnitario>
+<descuento>30.73</descuento>
+<precioTotalSinImpuesto>248.61</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>248.61</baseImponible>
+<valor>29.83</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">angel.artemodul@yahoo.es</campoAdicional>
+<campoAdicional nombre="telefono-movil">550476</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016505</campoAdicional>
+</infoAdicional>
+</factura>

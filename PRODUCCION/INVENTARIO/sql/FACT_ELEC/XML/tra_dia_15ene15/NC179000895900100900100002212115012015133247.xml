@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000022121</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>15/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>JUNTA DE BENEFICENCIA DE GUAYAQUIL</razonSocialComprador>
+<identificacionComprador>0990967946001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000103600</numDocModificado>
+<fechaEmisionDocSustento>01/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>198.10</totalSinImpuestos>
+<valorModificacion>221.87</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>198.10</baseImponible>
+<valor>23.77</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEVOLUCION: POR CAMBIO DE FECHA</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>71124</codigoInterno>
+<descripcion>GRIFERIA DE LAVAPLATOS MONOCONTROL 6356306 LIVORNO JGO MONOMANDO COCINA/DUCHA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>247.62</precioUnitario>
+<descuento>49.52</descuento>
+<precioTotalSinImpuesto>198.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>198.10</baseImponible>
+<valor>23.77</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">mmejias@jbgye.org.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">324060 241</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">759</campoAdicional>
+</infoAdicional>
+</notaCredito>

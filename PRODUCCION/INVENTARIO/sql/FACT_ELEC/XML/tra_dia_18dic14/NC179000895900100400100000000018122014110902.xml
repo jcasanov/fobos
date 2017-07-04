@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000018727</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>SERTECPET S.A.</razonSocialComprador>
+<identificacionComprador>1791263308001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000172424</numDocModificado>
+<fechaEmisionDocSustento>06/10/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>823.22</totalSinImpuestos>
+<valorModificacion>922.01</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>823.22</baseImponible>
+<valor>98.79</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 264219 SERTECPET P-VOLVER A FACT YA</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>63194</codigoInterno>
+<descripcion>ENTENALLA (TORNILLO DE BANCO) F-60 CON PLATO GIRATORIO 6"  APERTURA DE 8.8" (66997)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>431.92</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>431.92</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>431.92</baseImponible>
+<valor>51.83</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>13880</codigoInterno>
+<descripcion>PRENSA NO. 27 DE BANCO CON HORQUILLA DE 1/8" A 6" (40110)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>391.30</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>391.30</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>391.30</baseImponible>
+<valor>46.96</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3954900</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">10219</campoAdicional>
+</infoAdicional>
+</notaCredito>

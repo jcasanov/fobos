@@ -6,7 +6,7 @@ SCREEN
      Area Negocio: [c003  ] [c101            ]
       Grupo Línea: [c000  ] [c110            ]
            Moneda: [a0] [c103           ] Paridad: [c006               ]
-         Cobrador: [c011  ] [c104                                      ]
+       Zona Cobro: [c011  ] [c104                                      ]
        Referencia: [c005                               ]
 
   [a3|c030           |c02|c034            |c033            |c035           ]
@@ -22,7 +22,6 @@ SCREEN
 
  Ingresado Por: [c013      ]         Fecha de Ingreso: [c014               ]
 }
-end
 TABLES
 cxct024
 cxct025
@@ -37,7 +36,7 @@ c005 = cxct024.z24_referencia, UPSHIFT;
 a0 = cxct024.z24_moneda, REVERSE, UPSHIFT, AUTONEXT,
 	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
 c006 = cxct024.z24_paridad, NOENTRY, REVERSE, FORMAT='#,###,##&.#########';
-c011 = cxct024.z24_cobrador, AUTONEXT, UPSHIFT, REVERSE,
+c011 = cxct024.z24_zona_cobro, AUTONEXT, UPSHIFT, REVERSE,
 	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
 c013 = cxct024.z24_usuario, REVERSE, NOENTRY, UPSHIFT;
 c014 = cxct024.z24_fecing, REVERSE, NOENTRY;
@@ -70,10 +69,9 @@ c100 = FORMONLY.n_estado,REVERSE, NOENTRY;
 c101 = FORMONLY.n_areaneg,REVERSE, NOENTRY;
 c102 = FORMONLY.n_cliente,REVERSE, NOENTRY;
 c103 = FORMONLY.n_moneda,REVERSE, NOENTRY;
-c104 = FORMONLY.n_cobrador, NOENTRY, REVERSE, UPSHIFT;
+c104 = FORMONLY.n_zoncob, NOENTRY, REVERSE, UPSHIFT;
 c110 = FORMONLY.n_linea,REVERSE,  NOENTRY;
-end
-
+END
 INSTRUCTIONS
 SCREEN RECORD ra_docs[6] (z25_tipo_doc, z25_num_doc, z25_dividendo, z25_valor_int, z25_valor_cap, valor_pagar)
 

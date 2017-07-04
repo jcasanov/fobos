@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268879</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268879</guiaRemision>
+<razonSocialComprador>VALENCIA SALVADOR ROBERTO XAVIER</razonSocialComprador>
+<identificacionComprador>1710060391001</identificacionComprador>
+<totalSinImpuestos>1935.60</totalSinImpuestos>
+<totalDescuento>101.88</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1935.60</baseImponible>
+<valor>232.27</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>2167.87</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>94169</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 4" SDQP35-140 SISTEMA DE PRESION CONSTANTE (93803575)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1920.92</precioUnitario>
+<descuento>96.05</descuento>
+<precioTotalSinImpuesto>1824.87</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1824.87</baseImponible>
+<valor>218.98</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99406</codigoPrincipal>
+<descripcion>TANQUE DE PRESION METALICO PRECARGADO PRECARGADO DE 2.1 Glns. (604452)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>116.56</precioUnitario>
+<descuento>5.83</descuento>
+<precioTotalSinImpuesto>110.73</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>110.73</baseImponible>
+<valor>13.29</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">robertoxvalencia@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3401376</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064370</campoAdicional>
+<campoAdicional nombre="Observaciones">P/EMITIR CHEQUE</campoAdicional>
+</infoAdicional>
+</factura>

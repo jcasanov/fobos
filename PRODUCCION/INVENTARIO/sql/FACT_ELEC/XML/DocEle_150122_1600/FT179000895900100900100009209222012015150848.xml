@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092092</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092092</guiaRemision>
+<razonSocialComprador>ZAMBRANO REPETTO RICARDO</razonSocialComprador>
+<identificacionComprador>0911193183</identificacionComprador>
+<totalSinImpuestos>353.61</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>353.61</baseImponible>
+<valor>42.43</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>396.04</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>103404</codigoPrincipal>
+<descripcion>DUCHA E128.12A CR MANUAL C/ BARRAL VALS II CROMO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>76.80</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>76.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>76.80</baseImponible>
+<valor>9.22</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103419</codigoPrincipal>
+<descripcion>GRIFERIA DE DUCHA E106.05/06 CR MONOCOMADO P/DUCHA-TINA S/D SCALA LEVER CROMO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>91.86</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>91.86</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>91.86</baseImponible>
+<valor>11.02</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103440</codigoPrincipal>
+<descripcion>GRIFERIA DE BIDET CON SPRAY VERTICAL E299/14 CR SAINT MARTIN CRMO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>184.95</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>184.95</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>184.95</baseImponible>
+<valor>22.19</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">rzambrano@constructoraprohorizon.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">046007663</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016675</campoAdicional>
+</infoAdicional>
+</factura>

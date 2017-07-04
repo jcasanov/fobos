@@ -74,8 +74,7 @@ IF STATUS = NOTFOUND THEN
 	INSERT INTO global
 		VALUES (file, '', 'globales', '../../LIBRERIAS/fuentes/')
 	FOR i = 0 TO 6
-		IF file[4, 5] <> "p2" AND file[4, 5] <> "p5"
-		   AND file[4, 5] <> "p6" THEN
+		IF file[4, 5] <> "p2" THEN
 			IF i > 1 THEN
 				EXIT FOR
 			END IF

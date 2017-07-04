@@ -1,0 +1,35 @@
+DATABASE aceros
+
+SCREEN
+{
+ DOCUMENTOS DEUDORES A PROVEEDORES EN TESORERIA
+-------------------------------------------------------------------------
+ Proveedor                   Documento          Div Saldo            Mo 
+-------------------------------------------------------------------------
+[c001                       |c0|c002           |c01|c003            |c1]
+[c001                       |c0|c002           |c01|c003            |c1]
+[c001                       |c0|c002           |c01|c003            |c1]
+[c001                       |c0|c002           |c01|c003            |c1]
+[c001                       |c0|c002           |c01|c003            |c1]
+[c001                       |c0|c002           |c01|c003            |c1]
+[c001                       |c0|c002           |c01|c003            |c1]
+[c001                       |c0|c002           |c01|c003            |c1]
+[c001                       |c0|c002           |c01|c003            |c1]
+[c001                       |c0|c002           |c01|c003            |c1]
+}
+
+TABLES
+cxpt020
+cxpt001
+
+ATTRIBUTES
+c001 = p01_nomprov, UPSHIFT;
+c0   = p20_tipo_doc, UPSHIFT;
+c002 = p20_num_doc, UPSHIFT;
+c01  = p20_dividendo, UPSHIFT, FORMAT = '#&&';
+c003 = p20_saldo_cap, UPSHIFT, FORMAT = '#,###,###,##&.##';
+c1   = p20_moneda, UPSHIFT;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_deudates[10](p01_nomprov, p20_tipo_doc, p20_num_doc, p20_dividendo, p20_saldo_cap, p20_moneda)

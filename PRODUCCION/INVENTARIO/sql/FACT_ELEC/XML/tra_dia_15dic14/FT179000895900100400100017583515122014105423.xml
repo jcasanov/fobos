@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175835</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>AV. DE LA PRENSA N44-50 Y EDMUNDO CARVAJ</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175835</guiaRemision>
+<razonSocialComprador>COMERCIAL IMPORTADORA VILLAYALA CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1790389944001</identificacionComprador>
+<totalSinImpuestos>444.26</totalSinImpuestos>
+<totalDescuento>73.46</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>370.80</baseImponible>
+<valor>44.50</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>415.30</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>50422</codigoPrincipal>
+<descripcion>UNIVERSAL POLIPROPILENO DE 1/2" (AGUA CALIENTE)</descripcion>
+<cantidad>24.00</cantidad>
+<precioUnitario>0.89</precioUnitario>
+<descuento>2.56</descuento>
+<precioTotalSinImpuesto>18.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>18.80</baseImponible>
+<valor>2.26</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96804</codigoPrincipal>
+<descripcion>VOLANTE 103.27.14 02CR MANIJA FIORI CROMO</descripcion>
+<cantidad>40.00</cantidad>
+<precioUnitario>3.36</precioUnitario>
+<descuento>20.16</descuento>
+<precioTotalSinImpuesto>114.24</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>114.24</baseImponible>
+<valor>13.71</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101988</codigoPrincipal>
+<descripcion>PORTADUCHA 310.B1.15.0  CR  SOPORTE DUCHA MANUAL</descripcion>
+<cantidad>40.00</cantidad>
+<precioUnitario>3.48</precioUnitario>
+<descuento>20.88</descuento>
+<precioTotalSinImpuesto>118.32</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>118.32</baseImponible>
+<valor>14.20</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>27473</codigoPrincipal>
+<descripcion>LLAVE ANGULAR E269.01 DH CR P/MANGUERA CON NEPLO Y ROSETA</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>6.66</precioUnitario>
+<descuento>6.66</descuento>
+<precioTotalSinImpuesto>26.64</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANZ VIEGENER" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>26.64</baseImponible>
+<valor>3.20</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>91853</codigoPrincipal>
+<descripcion>DUCHA 5888306 DUCHA C/BRAZO Y ROSETA CROMO SEGMENTO ECONOMICO</descripcion>
+<cantidad>29.00</cantidad>
+<precioUnitario>4.00</precioUnitario>
+<descuento>23.20</descuento>
+<precioTotalSinImpuesto>92.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="EDESA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>92.80</baseImponible>
+<valor>11.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

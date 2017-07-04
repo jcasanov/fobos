@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104156</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104156</guiaRemision>
+<razonSocialComprador>SANCHEZ COCHANCELA ANGEL FLORENCIO</razonSocialComprador>
+<identificacionComprador>0102907151001</identificacionComprador>
+<totalSinImpuestos>34.58</totalSinImpuestos>
+<totalDescuento>3.37</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>34.58</baseImponible>
+<valor>4.15</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>38.73</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>98927</codigoPrincipal>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7436SD1 DE 5/8" X 7"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>2.65</precioUnitario>
+<descuento>0.42</descuento>
+<precioTotalSinImpuesto>4.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.88</baseImponible>
+<valor>0.59</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98927</codigoPrincipal>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7436SD1 DE 5/8" X 7"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>2.65</precioUnitario>
+<descuento>1.27</descuento>
+<precioTotalSinImpuesto>14.63</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>14.63</baseImponible>
+<valor>1.76</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70320</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO SDS-PLUS  5/8" X 8" (00697)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>16.75</precioUnitario>
+<descuento>1.68</descuento>
+<precioTotalSinImpuesto>15.07</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>15.07</baseImponible>
+<valor>1.81</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0991819707</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">014319</campoAdicional>
+</infoAdicional>
+</factura>

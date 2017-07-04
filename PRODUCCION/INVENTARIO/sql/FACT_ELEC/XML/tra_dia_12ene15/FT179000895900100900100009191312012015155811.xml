@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091913</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>12/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091913</guiaRemision>
+<razonSocialComprador>SERTESA SERVICIOS TECNICOS S.A.</razonSocialComprador>
+<identificacionComprador>0990502072001</identificacionComprador>
+<totalSinImpuestos>188.69</totalSinImpuestos>
+<totalDescuento>20.97</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>188.69</baseImponible>
+<valor>22.64</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>211.33</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>15698</codigoPrincipal>
+<descripcion>DADOS PARA TUBOS DE 1/2" A 3/4" HS NPT P/811A-711-815A (47765)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>209.66</precioUnitario>
+<descuento>20.97</descuento>
+<precioTotalSinImpuesto>188.69</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>188.69</baseImponible>
+<valor>22.64</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">johnny@sertesa.cc</campoAdicional>
+<campoAdicional nombre="telefono-movil">2281633</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">001332</campoAdicional>
+<campoAdicional nombre="Observaciones">ORDEN DE COMPRA.2866</campoAdicional>
+</infoAdicional>
+</factura>

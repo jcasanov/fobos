@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091907</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>12/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091907</guiaRemision>
+<razonSocialComprador>CEDEÒO CORNEJO JUDITH LYNEETTE</razonSocialComprador>
+<identificacionComprador>1710931997001</identificacionComprador>
+<totalSinImpuestos>15311.65</totalSinImpuestos>
+<totalDescuento>6562.14</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>15311.65</baseImponible>
+<valor>1837.40</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>17149.05</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99257</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 6" SP-95-4  P/MOTOR DE 6"  ESTRELLA TRIANGULO DE 5" NPT.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>4895.50</precioUnitario>
+<descuento>1468.65</descuento>
+<precioTotalSinImpuesto>3426.85</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3426.85</baseImponible>
+<valor>411.22</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>93637</codigoPrincipal>
+<descripcion>MOTOR ELEC SUMERG DE 6" 2367278125 6C6F DE 40 HP/230V/60C/3F</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3296.18</precioUnitario>
+<descuento>988.85</descuento>
+<precioTotalSinImpuesto>2307.33</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2307.33</baseImponible>
+<valor>276.88</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97930</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 8" SP-160-3 P/MOTOR 8" ARRANQUE DIRECTO DE 6" NPT</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>6208.15</precioUnitario>
+<descuento>1862.45</descuento>
+<precioTotalSinImpuesto>4345.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4345.70</baseImponible>
+<valor>521.48</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97670</codigoPrincipal>
+<descripcion>MOTOR ELEC SUMERG DE 8" 8F-75463 DE 75HP 460/60/3F ARR. EST.TRIAN. (2396238621)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>7473.96</precioUnitario>
+<descuento>2242.19</descuento>
+<precioTotalSinImpuesto>5231.77</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5231.77</baseImponible>
+<valor>627.81</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">lcedeno@mbi.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">046009266</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016440</campoAdicional>
+</infoAdicional>
+</factura>

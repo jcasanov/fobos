@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091799</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091799</guiaRemision>
+<razonSocialComprador>CONSORCIO CONSALMED 1</razonSocialComprador>
+<identificacionComprador>0992836652001</identificacionComprador>
+<totalSinImpuestos>106.58</totalSinImpuestos>
+<totalDescuento>14.53</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>106.58</baseImponible>
+<valor>12.79</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>119.37</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>103291</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA DE PARED PREPONCHADO CS0066191300CB WITHMAN BLANCO</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>40.37</precioUnitario>
+<descuento>14.53</descuento>
+<precioTotalSinImpuesto>106.58</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>106.58</baseImponible>
+<valor>12.79</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">alarrea.elot@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2680052</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016395</campoAdicional>
+</infoAdicional>
+</factura>

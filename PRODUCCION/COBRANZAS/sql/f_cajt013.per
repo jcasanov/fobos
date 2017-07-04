@@ -1,0 +1,25 @@
+database acero_gm
+screen size 24 by 80
+{
+j13_compania       [f000       ]
+j13_localidad      [f001  ]
+j13_codigo_caja    [f002  ]
+j13_fecha          [f003      ]
+j13_moneda         [a0]
+j13_trn_generada   [a1]
+j13_codigo_pago    [a2]
+j13_valor          [f004          ]
+}
+end
+tables
+cajt013
+attributes
+f000 = cajt013.j13_compania;
+f001 = cajt013.j13_localidad;
+f002 = cajt013.j13_codigo_caja;
+f003 = cajt013.j13_fecha;
+a0 = cajt013.j13_moneda;
+a1 = cajt013.j13_trn_generada;
+a2 = cajt013.j13_codigo_pago;
+f004 = cajt013.j13_valor;
+end

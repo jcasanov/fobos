@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000015983</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>26/08/2014</fechaEmision>
+<dirEstablecimiento>URDENOR 1 MZ. 109 V. 9</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>SUCORPORACION S.A.</razonSocialComprador>
+<identificacionComprador>0992353074001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000015983</numDocModificado>
+<fechaEmisionDocSustento>26/08/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>10.00</totalSinImpuestos>
+<valorModificacion>11.20</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>10.00</baseImponible>
+<valor>1.20</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DESC.ADIC.AUT. CESAR YANEZ</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>21654</codigoInterno>
+<descripcion>DESC.ADIC.AUT. CESAR YANEZ</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>10.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>10.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ACERO" valor="ACERO"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>10.00</baseImponible>
+<valor>1.20</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+<campoAdicional nombre="telefono-movil">2922024</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">13477</campoAdicional>
+</infoAdicional>
+</notaCredito>

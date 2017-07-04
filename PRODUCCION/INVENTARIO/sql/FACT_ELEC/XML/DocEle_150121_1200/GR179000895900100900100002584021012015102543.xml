@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025840</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMEERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>RAFAEL CUESTA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790319857001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>21/01/2015</fechaIniTransporte>
+<fechaFinTransporte>22/01/2015</fechaFinTransporte>
+<placa>GOM0481</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1790319857001</identificacionDestinatario>
+<razonSocialDestinatario>PROCESADORA NACIONAL DE ALIMENTOS C.A. PRONACA</razonSocialDestinatario>
+<dirDestinatario>RE</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>21/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>4770</codigoInterno>
+<descripcion>TEE PVC PRESION CAM-CAM-ESP-CAM DE 25mm. ISO</descripcion>
+<cantidad>6.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>50304</codigoInterno>
+<descripcion>CODO POLIPROPILENO DE 3/4" x 45ø</descripcion>
+<cantidad>44.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>50328</codigoInterno>
+<descripcion>NEPLO POLIPROPILENO DE 3/4" x 10 cm. (AGUA CALIENTE)</descripcion>
+<cantidad>10.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>5826</codigoInterno>
+<descripcion>TUBO PVC ROSCABLE x 6 MTS. DE 1/2" (420 PSI)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>6150</codigoInterno>
+<descripcion>UNION FLEX DE 1/2"</descripcion>
+<cantidad>10.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">cima@pronaca.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2130100</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">002058</campoAdicional>
+</infoAdicional>
+</guiaRemision>

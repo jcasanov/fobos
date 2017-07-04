@@ -305,6 +305,8 @@ CALL datos_defaults_z02()
 LET rm_z01.z01_personeria  = 'N'
 LET rm_z01.z01_tipo_doc_id = 'C'
 LET rm_z01.z01_paga_impto  = 'S'
+LET rm_z02.z02_contr_espe  = 'N'
+LET rm_z02.z02_oblig_cont  = 'N'
 LET rm_z01.z01_estado      = 'A'
 LET rm_z01.z01_usuario     = vg_usuario
 LET rm_z01.z01_fecing      = CURRENT
@@ -446,6 +448,7 @@ IF num_args() = 4 THEN
 	z01_telefono1, z01_usuario,
 	z01_tipo_clte, z01_direccion2, z01_telefono2, z01_fax1, z01_fax2,
 	z01_casilla, z01_pais, z01_ciudad, z01_rep_legal, z01_paga_impto,
+	z02_contr_espe, z02_oblig_cont, z02_email,
 	z02_localidad, z02_contacto, z02_referencia, z02_credit_auto,
 	z02_credit_dias, z02_cupocred_mb, z02_dcto_item_c, z02_dcto_item_r,
 	z02_dcto_mano_c, z02_dcto_mano_r, z02_cheques, z02_zona_venta,
@@ -471,7 +474,7 @@ IF num_args() = 4 THEN
                         END IF
                 END IF
 		IF INFIELD(z01_ciudad) THEN
-                        CALL fl_ayuda_ciudad(codp_aux)
+                        CALL fl_ayuda_ciudad(codp_aux, 0)
                                 RETURNING codc_aux, nomc_aux
                         LET int_flag = 0
                         IF codc_aux IS NOT NULL THEN
@@ -508,7 +511,7 @@ IF num_args() = 4 THEN
                         END IF
                 END IF
 		IF INFIELD(z02_zona_cobro) THEN
-                        CALL fl_ayuda_zona_cobro()
+                        CALL fl_ayuda_zona_cobro('T', 'T')
                                 RETURNING codzc_aux, nomzc_aux
                         LET int_flag = 0
                         IF codzc_aux IS NOT NULL THEN
@@ -654,7 +657,9 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 	rm_z01.z01_telefono1, rm_z01.z01_tipo_clte, rm_z01.z01_direccion2,
 	rm_z01.z01_telefono2, rm_z01.z01_fax1, rm_z01.z01_fax2,
 	rm_z01.z01_casilla, rm_z01.z01_pais, rm_z01.z01_ciudad,
-	rm_z01.z01_rep_legal, rm_z01.z01_paga_impto, rm_z02.z02_contacto,
+	rm_z01.z01_rep_legal, rm_z01.z01_paga_impto,
+	rm_z02.z02_contr_espe, rm_z02.z02_oblig_cont, rm_z02.z02_email,
+	rm_z02.z02_contacto,
 	rm_z02.z02_referencia, rm_z02.z02_credit_auto, rm_z02.z02_credit_dias,
 	rm_z02.z02_cupocred_mb, rm_z02.z02_dcto_item_c, rm_z02.z02_dcto_item_r,
 	rm_z02.z02_dcto_mano_c, rm_z02.z02_dcto_mano_r, rm_z02.z02_cheques,
@@ -669,7 +674,10 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 			rm_z01.z01_direccion2, rm_z01.z01_telefono2,
 			rm_z01.z01_fax1, rm_z01.z01_fax2, rm_z01.z01_casilla,
 			rm_z01.z01_pais, rm_z01.z01_ciudad,rm_z01.z01_rep_legal,
-			rm_z01.z01_paga_impto, rm_z02.z02_contacto,
+			rm_z01.z01_paga_impto,
+			rm_z02.z02_contr_espe, rm_z02.z02_oblig_cont,
+			rm_z02.z02_email,
+			rm_z02.z02_contacto,
 			rm_z02.z02_referencia, rm_z02.z02_credit_auto,
 			rm_z02.z02_credit_dias, rm_z02.z02_cupocred_mb,
 			rm_z02.z02_dcto_item_c, rm_z02.z02_dcto_item_r,
@@ -711,7 +719,7 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
                         END IF
                 END IF
 		IF INFIELD(z01_ciudad) THEN
-                        CALL fl_ayuda_ciudad(rm_z01.z01_pais)
+                        CALL fl_ayuda_ciudad(rm_z01.z01_pais, 0)
                                 RETURNING codc_aux, nomc_aux
                         LET int_flag = 0
                         IF codc_aux IS NOT NULL THEN
@@ -732,7 +740,10 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
                         END IF
                 END IF
 		IF INFIELD(z02_zona_venta) THEN
-			IF rm_g05.g05_tipo = 'UF' THEN
+			--IF rm_g05.g05_tipo = 'UF' THEN
+			IF rm_g05.g05_grupo <> 'AD' AND rm_g05.g05_grupo <> 'GE'
+			   AND rm_g05.g05_grupo <> 'SI' AND vm_flag_mant = 'M'
+			THEN
 				CONTINUE INPUT
 			END IF
                         CALL fl_ayuda_zona_venta(vg_codcia)
@@ -745,10 +756,13 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
                         END IF
                 END IF
 		IF INFIELD(z02_zona_cobro) THEN
-			IF rm_g05.g05_tipo = 'UF' THEN
+			--IF rm_g05.g05_tipo = 'UF' THEN
+			IF rm_g05.g05_grupo <> 'AD' AND rm_g05.g05_grupo <> 'GE'
+			   AND rm_g05.g05_grupo <> 'SI' AND vm_flag_mant = 'M'
+			THEN
 				CONTINUE INPUT
 			END IF
-                        CALL fl_ayuda_zona_cobro()
+                        CALL fl_ayuda_zona_cobro('T', 'A')
                                 RETURNING codzc_aux, nomzc_aux
                         LET int_flag = 0
                         IF codzc_aux IS NOT NULL THEN
@@ -994,6 +1008,30 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 			LET rm_z01.z01_paga_impto = r_aux.z01_paga_impto
 		END IF
 		DISPLAY BY NAME rm_z01.z01_paga_impto
+	BEFORE FIELD z02_contr_espe
+		IF vm_flag_mant = 'M' AND rm_g05.g05_tipo = 'UF' THEN
+			LET r_aux2.z02_contr_espe = rm_z02.z02_contr_espe
+		END IF
+	AFTER FIELD z02_contr_espe
+		IF rm_g05.g05_tipo = 'UF' THEN
+			LET rm_z02.z02_contr_espe = 'S'
+		END IF
+		IF vm_flag_mant = 'M' AND rm_g05.g05_tipo = 'UF' THEN
+			LET rm_z02.z02_contr_espe = r_aux2.z02_contr_espe
+		END IF
+		DISPLAY BY NAME rm_z02.z02_contr_espe
+	BEFORE FIELD z02_oblig_cont
+		IF vm_flag_mant = 'M' AND rm_g05.g05_tipo = 'UF' THEN
+			LET r_aux2.z02_oblig_cont = rm_z02.z02_oblig_cont
+		END IF
+	AFTER FIELD z02_oblig_cont
+		IF rm_g05.g05_tipo = 'UF' THEN
+			LET rm_z02.z02_oblig_cont = 'S'
+		END IF
+		IF vm_flag_mant = 'M' AND rm_g05.g05_tipo = 'UF' THEN
+			LET rm_z02.z02_oblig_cont = r_aux2.z02_oblig_cont
+		END IF
+		DISPLAY BY NAME rm_z02.z02_oblig_cont
 	AFTER FIELD z01_tipo_clte
                 IF rm_z01.z01_tipo_clte IS NOT NULL THEN
                         CALL fl_lee_subtipo_entidad('CL', rm_z01.z01_tipo_clte)
@@ -1041,11 +1079,17 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 		END IF
 		DISPLAY BY NAME rm_z02.z02_cheques
 	BEFORE FIELD z02_zona_venta
-		IF vm_flag_mant = 'M' AND rm_g05.g05_tipo = 'UF' THEN
+		--IF vm_flag_mant = 'M' AND rm_g05.g05_tipo = 'UF' THEN
+		IF rm_g05.g05_grupo <> 'AD' AND rm_g05.g05_grupo <> 'GE'
+		   AND rm_g05.g05_grupo <> 'SI' AND vm_flag_mant = 'M'
+		THEN
 			LET r_aux2.z02_zona_venta = rm_z02.z02_zona_venta
 		END IF
 	AFTER FIELD z02_zona_venta
-		IF rm_g05.g05_tipo = 'UF' THEN
+		--IF rm_g05.g05_tipo = 'UF' THEN
+		IF rm_g05.g05_grupo <> 'AD' AND rm_g05.g05_grupo <> 'GE'
+		   AND rm_g05.g05_grupo <> 'SI' AND vm_flag_mant = 'M'
+		THEN
 			LET rm_z02.z02_zona_venta = NULL
 			IF vm_flag_mant = 'M' THEN
 				LET rm_z02.z02_zona_venta =r_aux2.z02_zona_venta
@@ -1068,11 +1112,17 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 			CLEAR tit_zona_vta
 		END IF
 	BEFORE FIELD z02_zona_cobro
-		IF vm_flag_mant = 'M' AND rm_g05.g05_tipo = 'UF' THEN
+		--IF vm_flag_mant = 'M' AND rm_g05.g05_tipo = 'UF' THEN
+		IF rm_g05.g05_grupo <> 'AD' AND rm_g05.g05_grupo <> 'GE'
+		   AND rm_g05.g05_grupo <> 'SI' AND vm_flag_mant = 'M'
+		THEN
 			LET r_aux2.z02_zona_cobro = rm_z02.z02_zona_cobro
 		END IF
 	AFTER FIELD z02_zona_cobro
-		IF rm_g05.g05_tipo = 'UF' THEN
+		--IF rm_g05.g05_tipo = 'UF' THEN
+		IF rm_g05.g05_grupo <> 'AD' AND rm_g05.g05_grupo <> 'GE'
+		   AND rm_g05.g05_grupo <> 'SI' AND vm_flag_mant = 'M'
+		THEN
 			LET rm_z02.z02_zona_cobro = NULL
 			IF vm_flag_mant = 'M' THEN
 				LET rm_z02.z02_zona_cobro =r_aux2.z02_zona_cobro
@@ -1088,6 +1138,10 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 				RETURNING r_zon_cob.*
 			IF r_zon_cob.z06_zona_cobro IS NULL THEN
 				CALL fgl_winmessage(vg_producto,'Zona de venta no existe','exclamation')
+				NEXT FIELD z02_zona_cobro
+			END IF
+			IF r_zon_cob.z06_estado = 'B' THEN
+				CALL fl_mensaje_estado_bloqueado()
 				NEXT FIELD z02_zona_cobro
 			END IF
 			DISPLAY r_zon_cob.z06_nombre TO tit_zona_cob
@@ -1551,8 +1605,8 @@ DISPLAY BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli,
 		rm_z01.z01_direccion2, rm_z01.z01_telefono2,
 		rm_z01.z01_fax1, rm_z01.z01_fax2, rm_z01.z01_casilla,
 		rm_z01.z01_pais, rm_z01.z01_ciudad,rm_z01.z01_rep_legal,
-		rm_z01.z01_paga_impto, rm_z01.z01_usuario,
-		rm_z01.z01_fecing
+		rm_z01.z01_paga_impto,
+		rm_z01.z01_usuario, rm_z01.z01_fecing
 CALL fl_lee_pais(rm_z01.z01_pais) RETURNING r_pai.*
 DISPLAY r_pai.g30_nombre TO tit_pais
 CALL fl_lee_ciudad(rm_z01.z01_ciudad) RETURNING r_ciu.*
@@ -1569,7 +1623,10 @@ IF STATUS = NOTFOUND THEN
 END IF
 DISPLAY rm_z01.z01_codcli TO tit_codigo_cli
 DISPLAY rm_z01.z01_nomcli TO tit_nombre_cli
+CALL poner_SI_NO_S_N(1)
 DISPLAY BY NAME rm_z02.z02_localidad, rm_z02.z02_contacto,
+		rm_z02.z02_contr_espe, rm_z02.z02_oblig_cont,
+		rm_z02.z02_email,
 		rm_z02.z02_referencia, rm_z02.z02_credit_auto,
 		rm_z02.z02_credit_dias, rm_z02.z02_cupocred_mb,
 		rm_z02.z02_cupocred_ma, rm_z02.z02_dcto_item_c,
@@ -1647,12 +1704,28 @@ END FUNCTION
 
 
 FUNCTION control_grabar()
+DEFINE correo		LIKE cxct002.z02_email
 DEFINE num_aux		INTEGER
+DEFINE i, lim		SMALLINT
 
 IF vm_num_ret = 0 AND vm_flag_mant <> 'I' THEN
 	CALL fl_mostrar_mensaje('Debe ingresar primero las retenciones del cliente.', 'exclamation')
 	RETURN
 END IF
+CALL poner_SI_NO_S_N(0)
+LET rm_z02.z02_email = rm_z02.z02_email CLIPPED
+LET lim              = LENGTH(rm_z02.z02_email) 
+LET correo           = " "
+FOR i = 1 TO lim
+	IF rm_z02.z02_email[i, i] = "" OR rm_z02.z02_email[i, i] = "€" OR
+	   rm_z02.z02_email[i, i] = " "
+	THEN
+		LET correo = correo CLIPPED, ""
+	ELSE
+		LET correo = correo CLIPPED, rm_z02.z02_email[i, i]
+	END IF
+END FOR
+LET rm_z02.z02_email = correo CLIPPED
 IF vm_flag_mant = 'I' THEN
 	LET rm_z02.z02_codcli = rm_z01.z01_codcli
 	LET rm_z01.z01_fecing = CURRENT
@@ -1719,7 +1792,10 @@ ELSE
 				    z02_aux_clte_mb = rm_z02.z02_aux_clte_mb,
 				    z02_aux_clte_ma = rm_z02.z02_aux_clte_ma,
 				    z02_aux_ant_mb  = rm_z02.z02_aux_ant_mb,
-				    z02_aux_ant_ma  = rm_z02.z02_aux_ant_ma
+				    z02_aux_ant_ma  = rm_z02.z02_aux_ant_ma,
+				    z02_contr_espe  = rm_z02.z02_contr_espe,
+				    z02_oblig_cont  = rm_z02.z02_oblig_cont,
+				    z02_email       = rm_z02.z02_email
 				--WHERE CURRENT OF q_up2
 				WHERE z02_compania = vg_codcia
 				  AND z02_codcli   = rm_z01.z01_codcli
@@ -1740,6 +1816,7 @@ ELSE
 	END IF
 END IF
 DELETE FROM tmp_z09
+CALL poner_SI_NO_S_N(1)
  
 END FUNCTION
 
@@ -1842,6 +1919,7 @@ CLEAR z02_localidad, tit_localidad,
 CALL datos_defaults_z02()
 CALL leer_datos_z02()
 IF NOT int_flag THEN
+	CALL poner_SI_NO_S_N(0)
 	LET rm_z02.z02_compania = vg_codcia
 	LET rm_z02.z02_codcli   = rm_z01.z01_codcli
 	LET rm_z02.z02_fecing   = CURRENT
@@ -1850,6 +1928,7 @@ IF NOT int_flag THEN
 	LET vm_r_cli[vm_row_current].codcli = rm_z02.z02_codcli
 	CALL muestra_contadores(vm_row_current, vm_num_rows)
 	CALL fl_mostrar_mensaje('Cliente activiado para localidad ' || rm_z02.z02_localidad, 'info')
+	CALL poner_SI_NO_S_N(1)
 ELSE
 	CLEAR FORM
 	IF vm_row_current > 0 THEN
@@ -1931,7 +2010,10 @@ INPUT BY NAME rm_z02.z02_localidad, rm_z02.z02_contacto, rm_z02.z02_referencia,
 			END IF
                 END IF
 		IF INFIELD(z02_zona_venta) THEN
-			IF rm_g05.g05_tipo = 'UF' THEN
+			--IF rm_g05.g05_tipo = 'UF' THEN
+			IF rm_g05.g05_grupo <> 'AD' AND rm_g05.g05_grupo <> 'GE'
+			   AND rm_g05.g05_grupo <> 'SI' AND vm_flag_mant = 'M'
+			THEN
 				CONTINUE INPUT
 			END IF
                         CALL fl_ayuda_zona_venta(vg_codcia)
@@ -1944,10 +2026,13 @@ INPUT BY NAME rm_z02.z02_localidad, rm_z02.z02_contacto, rm_z02.z02_referencia,
                         END IF
                 END IF
 		IF INFIELD(z02_zona_cobro) THEN
-			IF rm_g05.g05_tipo = 'UF' THEN
+			--IF rm_g05.g05_tipo = 'UF' THEN
+			IF rm_g05.g05_grupo <> 'AD' AND rm_g05.g05_grupo <> 'GE'
+			   AND rm_g05.g05_grupo <> 'SI' AND vm_flag_mant = 'M'
+			THEN
 				CONTINUE INPUT
 			END IF
-                        CALL fl_ayuda_zona_cobro()
+                        CALL fl_ayuda_zona_cobro('T', 'A')
                                 RETURNING codzc_aux, nomzc_aux
                         LET int_flag = 0
                         IF codzc_aux IS NOT NULL THEN
@@ -2066,11 +2151,17 @@ INPUT BY NAME rm_z02.z02_localidad, rm_z02.z02_contacto, rm_z02.z02_referencia,
 		END IF
 		DISPLAY BY NAME rm_z02.z02_cheques
 	BEFORE FIELD z02_zona_venta
-		IF vm_flag_mant = 'M' AND rm_g05.g05_tipo = 'UF' THEN
+		--IF vm_flag_mant = 'M' AND rm_g05.g05_tipo = 'UF' THEN
+		IF rm_g05.g05_grupo <> 'AD' AND rm_g05.g05_grupo <> 'GE'
+		   AND rm_g05.g05_grupo <> 'SI' AND vm_flag_mant = 'M'
+		THEN
 			LET r_aux2.z02_zona_venta = rm_z02.z02_zona_venta
 		END IF
 	AFTER FIELD z02_zona_venta
-		IF rm_g05.g05_tipo = 'UF' THEN
+		--IF rm_g05.g05_tipo = 'UF' THEN
+		IF rm_g05.g05_grupo <> 'AD' AND rm_g05.g05_grupo <> 'GE'
+		   AND rm_g05.g05_grupo <> 'SI' AND vm_flag_mant = 'M'
+		THEN
 			LET rm_z02.z02_zona_venta = NULL
 			IF vm_flag_mant = 'M' THEN
 				LET rm_z02.z02_zona_venta =r_aux2.z02_zona_venta
@@ -2093,11 +2184,17 @@ INPUT BY NAME rm_z02.z02_localidad, rm_z02.z02_contacto, rm_z02.z02_referencia,
 			CLEAR tit_zona_vta
 		END IF
 	BEFORE FIELD z02_zona_cobro
-		IF vm_flag_mant = 'M' AND rm_g05.g05_tipo = 'UF' THEN
+		--IF vm_flag_mant = 'M' AND rm_g05.g05_tipo = 'UF' THEN
+		IF rm_g05.g05_grupo <> 'AD' AND rm_g05.g05_grupo <> 'GE'
+		   AND rm_g05.g05_grupo <> 'SI' AND vm_flag_mant = 'M'
+		THEN
 			LET r_aux2.z02_zona_cobro = rm_z02.z02_zona_cobro
 		END IF
 	AFTER FIELD z02_zona_cobro
-		IF rm_g05.g05_tipo = 'UF' THEN
+		--IF rm_g05.g05_tipo = 'UF' THEN
+		IF rm_g05.g05_grupo <> 'AD' AND rm_g05.g05_grupo <> 'GE'
+		   AND rm_g05.g05_grupo <> 'SI' AND vm_flag_mant = 'M'
+		THEN
 			LET rm_z02.z02_zona_cobro = NULL
 			IF vm_flag_mant = 'M' THEN
 				LET rm_z02.z02_zona_cobro =r_aux2.z02_zona_cobro
@@ -2113,6 +2210,10 @@ INPUT BY NAME rm_z02.z02_localidad, rm_z02.z02_contacto, rm_z02.z02_referencia,
 				RETURNING r_z06.*
 			IF r_z06.z06_zona_cobro IS NULL THEN
 				CALL fgl_winmessage(vg_producto,'Zona de venta no existe','exclamation')
+				NEXT FIELD z02_zona_cobro
+			END IF
+			IF r_z06.z06_estado = 'B' THEN
+				CALL fl_mensaje_estado_bloqueado()
 				NEXT FIELD z02_zona_cobro
 			END IF
 			DISPLAY r_z06.z06_nombre TO tit_zona_cob
@@ -3276,5 +3377,39 @@ CASE cont_cred
 	WHEN 'R' LET tit_cont_cred = 'CREDITO'
 END CASE
 RETURN tit_cont_cred
+
+END FUNCTION
+
+
+
+FUNCTION poner_SI_NO_S_N(flag)
+DEFINE flag		SMALLINT
+
+CASE flag
+	WHEN 0  IF rm_z02.z02_contr_espe = "S" THEN
+			LET rm_z02.z02_contr_espe = "SI"
+		END IF
+		IF rm_z02.z02_oblig_cont = "S" THEN
+			LET rm_z02.z02_oblig_cont = "SI"
+		END IF
+		IF rm_z02.z02_contr_espe = "N" THEN
+			LET rm_z02.z02_contr_espe = "NO"
+		END IF
+		IF rm_z02.z02_oblig_cont = "N" THEN
+			LET rm_z02.z02_oblig_cont = "NO"
+		END IF
+	WHEN 1  IF rm_z02.z02_contr_espe = "SI" THEN
+			LET rm_z02.z02_contr_espe = "S"
+		END IF
+		IF rm_z02.z02_oblig_cont = "SI" THEN
+			LET rm_z02.z02_oblig_cont = "S"
+		END IF
+		IF rm_z02.z02_contr_espe = "NO" THEN
+			LET rm_z02.z02_contr_espe = "N"
+		END IF
+		IF rm_z02.z02_oblig_cont = "NO" THEN
+			LET rm_z02.z02_oblig_cont = "N"
+		END IF
+END CASE
 
 END FUNCTION

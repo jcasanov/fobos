@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131671</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>GASPAR ESPARZA S16-65 Y AV. AJAVI</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131671</guiaRemision>
+<razonSocialComprador>VARGAS TAPIA MARIO ORLANDO</razonSocialComprador>
+<identificacionComprador>0501173512001</identificacionComprador>
+<totalSinImpuestos>41.86</totalSinImpuestos>
+<totalDescuento>1.74</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>41.86</baseImponible>
+<valor>5.02</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>46.88</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>16</codigoPrincipal>
+<descripcion>ALAMBRE GALVANIZADO N.18</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>2.18</precioUnitario>
+<descuento>1.74</descuento>
+<precioTotalSinImpuesto>41.86</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="IDEAL" valor="IDEAL"/>
+<detAdicional nombre="KILO" valor="KILO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>41.86</baseImponible>
+<valor>5.02</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2731650</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">050581</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268276</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>09/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268276</guiaRemision>
+<razonSocialComprador>INYCOFYI INGENIERIA Y CONSTRUCCIONES S.A.</razonSocialComprador>
+<identificacionComprador>1792270537001</identificacionComprador>
+<totalSinImpuestos>250.00</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>250.00</baseImponible>
+<valor>30.00</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>280.00</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>700</codigoPrincipal>
+<descripcion>TOL AL CALOR DE 12mm. 1.22 x 2.44 m (260.88 KG.)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>250.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>250.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>250.00</baseImponible>
+<valor>30.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">ctrujillo@fyi.com.ec</campoAdicional>
+<campoAdicional nombre="Email">dayala@fyi.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">6008444</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">052719</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C  NO. 2537</campoAdicional>
+</infoAdicional>
+</factura>

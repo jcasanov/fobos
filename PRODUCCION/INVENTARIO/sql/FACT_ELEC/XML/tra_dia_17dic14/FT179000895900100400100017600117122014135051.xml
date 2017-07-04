@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176001</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>AV. ESMERALDAS 405 Y RIO CAJONES/SANTO D</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176001</guiaRemision>
+<razonSocialComprador>COELEC S.C.</razonSocialComprador>
+<identificacionComprador>1791725530001</identificacionComprador>
+<totalSinImpuestos>3573.03</totalSinImpuestos>
+<totalDescuento>1531.31</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>3573.03</baseImponible>
+<valor>428.76</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>4001.79</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>100374</codigoPrincipal>
+<descripcion>TECLE ELECTRICO A CADENA NER020L DE 2 Ton. 230/3f BAJA VELOC. S/CADENA Y CABLE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3628.50</precioUnitario>
+<descuento>1088.55</descuento>
+<precioTotalSinImpuesto>2539.95</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="KITO" valor="KITO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2539.95</baseImponible>
+<valor>304.79</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99802</codigoPrincipal>
+<descripcion>TROLLEY PTS2030 DE 2-1/2 A 3 Ton.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>609.20</precioUnitario>
+<descuento>182.76</descuento>
+<precioTotalSinImpuesto>426.44</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="KITO" valor="KITO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>426.44</baseImponible>
+<valor>51.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100326</codigoPrincipal>
+<descripcion>CADENA LCER2020NP P/TECLE ELECTRICO 3F. DE 2 Y 3 Ton.</descripcion>
+<cantidad>8.00</cantidad>
+<precioUnitario>87.58</precioUnitario>
+<descuento>210.19</descuento>
+<precioTotalSinImpuesto>490.45</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="KITO" valor="KITO"/>
+<detAdicional nombre="M" valor="M"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>490.45</baseImponible>
+<valor>58.85</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100362</codigoPrincipal>
+<descripcion>CABLE ELECTRICO 16/4P P/BOTONERA DE TECLE</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>20.75</precioUnitario>
+<descuento>31.13</descuento>
+<precioTotalSinImpuesto>72.62</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="KITO" valor="KITO"/>
+<detAdicional nombre="M" valor="M"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>72.62</baseImponible>
+<valor>8.71</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100362</codigoPrincipal>
+<descripcion>CABLE ELECTRICO 16/4P P/BOTONERA DE TECLE</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>20.75</precioUnitario>
+<descuento>18.68</descuento>
+<precioTotalSinImpuesto>43.57</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="KITO" valor="KITO"/>
+<detAdicional nombre="M" valor="M"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>43.57</baseImponible>
+<valor>5.23</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2752485</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">037987</campoAdicional>
+</infoAdicional>
+</factura>

@@ -296,7 +296,7 @@ INPUT BY NAME rm_b10.b10_cuenta, vm_fecha_ini, vm_fecha_fin, rm_b12.b12_moneda
 		IF vm_fecha_fin IS NOT NULL THEN
 			IF vm_fecha_fin > TODAY THEN
 				CALL fgl_winmessage(vg_producto,'La fecha de término no puede ser mayor a la de hoy.','exclamation')
-				--NEXT FIELD vm_fecha_fin
+				NEXT FIELD vm_fecha_fin
 			END IF
 		ELSE
 			LET vm_fecha_fin = fecha_fin

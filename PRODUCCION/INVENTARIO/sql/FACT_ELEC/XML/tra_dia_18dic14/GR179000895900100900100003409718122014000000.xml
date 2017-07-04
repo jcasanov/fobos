@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000034097</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>AV. JUAN TANCA MARENGO KM.1.7</dirPartida>
+<razonSocialTransportista>JOSE ELIZALDE</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>1101352530</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>18/12/2014</fechaIniTransporte>
+<fechaFinTransporte>18/12/2014</fechaFinTransporte>
+<placa></placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0990018677001</identificacionDestinatario>
+<razonSocialDestinatario>INMOBILIARIA HELVETIA S.A.</razonSocialDestinatario>
+<dirDestinatario>RETIRO JOSE ELIZALDE</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>18/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>24639</codigoInterno>
+<descripcion>JABONERA E168.01/77 CR MILENIUM CROMO C/ TORNILLOS</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="MODELO" valor="E168.01/77 CR"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>46025</codigoInterno>
+<descripcion>PORTAROLLO E167.01/77 CR MILENIUM CROMO CON TORNILLOS</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="MODELO" valor="E167.01/77 CR"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>48435</codigoInterno>
+<descripcion>TOALLERO DE BARRA E164.01/77 CR MILENIUM CROMO RECTA DE 60 cm. C/ TORNILLOS</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="MODELO" valor="E164.01/77 CR"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2681990 26</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">001287</campoAdicional>
+</infoAdicional>
+</guiaRemision>

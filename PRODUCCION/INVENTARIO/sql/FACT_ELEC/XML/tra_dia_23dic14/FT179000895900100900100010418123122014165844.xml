@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104181</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104181</guiaRemision>
+<razonSocialComprador>RENOVACIONES AGRICOLAS S.A. RENAGRICORP</razonSocialComprador>
+<identificacionComprador>0992848510001</identificacionComprador>
+<totalSinImpuestos>822.72</totalSinImpuestos>
+<totalDescuento>145.19</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>822.72</baseImponible>
+<valor>98.73</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>921.45</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>96828</codigoPrincipal>
+<descripcion>BOMBA CENTRIF STANDARD C-MOTOR FOX 1-1/2" x 1-1/2" DE 1HP 115/220/1F IP21  ACERO INOX.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>967.91</precioUnitario>
+<descuento>145.19</descuento>
+<precioTotalSinImpuesto>822.72</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FAMAC"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>822.72</baseImponible>
+<valor>98.73</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">david.chevez@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2796547</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016402</campoAdicional>
+</infoAdicional>
+</factura>

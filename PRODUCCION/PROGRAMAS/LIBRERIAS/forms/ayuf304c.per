@@ -1,0 +1,22 @@
+DATABASE aceros
+SCREEN
+{
+
+              SELECCIONAR DISPOSITIVO DE IMPRESION
+
+ Enviar Impresión a: [c] Impresora
+                         Pantalla
+
+          Impresora: [c001      ] [c002                      ]
+
+}
+TABLES
+gent007, gent006
+ATTRIBUTES
+c    = FORMONLY.tit_impresion TYPE CHAR, AUTONEXT, REVERSE, UPSHIFT,
+	INCLUDE = ('I', 'P'), DEFAULT = 'P',
+	COMMENTS = '(I) Impresora  (P) Pantalla';
+c001 = FORMONLY.g07_impresora, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c002 = gent006.g06_nombre, NOENTRY, UPSHIFT;
+END

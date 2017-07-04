@@ -389,6 +389,9 @@ LET vm_rows[vm_num_rows] = rowid
 
 CALL fl_mayoriza_comprobante(vg_codcia, rm_b12.b12_tipo_comp, 
 			     rm_b12.b12_num_comp, 'M')
+IF vg_codcia <> 3 THEN
+	--CALL mayoriza_cta_balance_sin_cierre(rm_b12.b12_tipo_comp, rm_b12.b12_num_comp, 'M')
+END IF
 
 CALL lee_muestra_registro(vm_rows[vm_row_current])
 CALL muestra_contadores()
@@ -480,6 +483,9 @@ COMMIT WORK
 IF rm_b12.b12_estado = 'M' THEN
 	CALL fl_mayoriza_comprobante(vg_codcia, rm_b12.b12_tipo_comp, 
 				     rm_b12.b12_num_comp, 'D')
+	IF vg_codcia <> 3 THEN
+		--CALL mayoriza_cta_balance_sin_cierre(rm_b12.b12_tipo_comp, rm_b12.b12_num_comp, 'D')
+	END IF
 END IF
 
 BEGIN WORK
@@ -519,8 +525,12 @@ COMMIT WORK
 
 CALL fl_mayoriza_comprobante(vg_codcia, rm_b12.b12_tipo_comp, 
 			     rm_b12.b12_num_comp, 'M')
+IF vg_codcia <> 3 THEN
+	--CALL mayoriza_cta_balance_sin_cierre(rm_b12.b12_tipo_comp, rm_b12.b12_num_comp, 'M')
+END IF
 
 DISPLAY BY NAME rm_b12.b12_fec_modifi
+CALL lee_muestra_registro(vm_rows[vm_row_current])
 CALL fl_mensaje_registro_modificado()
 
 END FUNCTION
@@ -1881,6 +1891,9 @@ END IF
 IF rm_b12.b12_estado = 'M' THEN
 	CALL fl_mayoriza_comprobante(vg_codcia, rm_b12.b12_tipo_comp, 
 				     rm_b12.b12_num_comp, 'D')
+	IF vg_codcia <> 3 THEN
+		--CALL mayoriza_cta_balance_sin_cierre(rm_b12.b12_tipo_comp, rm_b12.b12_num_comp, 'D')
+	END IF
 END IF
 BEGIN WORK
 WHENEVER ERROR CONTINUE
@@ -1908,7 +1921,7 @@ IF NOT done THEN
 END IF
 COMMIT WORK
 CALL lee_muestra_registro(vm_rows[vm_row_current])
-CALL fl_mensaje_registro_modificado()
+CALL fl_mostrar_mensaje('Registro Eliminado Ok.', 'info')
 
 END FUNCTION
 
@@ -1925,8 +1938,10 @@ SELECT * INTO r_p24.* FROM cxpt024
 	  AND p24_tip_contable = rm_b12.b12_tipo_comp
 	  AND p24_num_contable = rm_b12.b12_num_comp
 --IF rm_b12.b12_tipo_comp = vm_egreso AND rm_b12.b12_origen = 'A' THEN
-IF (r_p24.p24_tip_contable = vm_egreso OR r_p24.p24_tip_contable = 'DC') AND
-    rm_b12.b12_origen = 'A'
+IF (r_p24.p24_tip_contable = vm_egreso OR
+    r_p24.p24_tip_contable = 'DC' OR
+    r_p24.p24_tip_contable = 'DP') AND
+    rm_b12.b12_origen      = 'A'
 THEN
 	-- Si el comprobante se origino en una orden de pago deben restaurarse 
 	-- los saldos de los documentos envueltos y deben eliminarse las 
@@ -2018,18 +2033,41 @@ LET r_p22.p22_origen     = 'A'
 LET r_p22.p22_usuario    = vg_usuario    
 LET r_p22.p22_fecing     = CURRENT
 INSERT INTO cxpt022 VALUES(r_p22.*)
+{--
+SELECT p23_codprov codprov, p23_tipo_doc td, p23_num_doc num, p23_div_doc div_d
+	FROM cxpt022, cxpt023
+	WHERE p22_compania   = r_p24.p24_compania
+	  AND p22_localidad  = r_p24.p24_localidad
+	  AND p22_orden_pago = r_p24.p24_orden_pago
+	  AND p23_compania   = p22_compania
+	  AND p23_localidad  = p22_localidad
+	  AND p23_codprov    = p22_codprov
+	  AND p23_tipo_trn   = p22_tipo_trn
+	  AND p23_num_trn    = p22_num_trn
+	GROUP BY p23_codprov, p23_tipo_doc, p23_num_doc, p23_div_doc
+	INTO TEMP t1
+--}
 DECLARE q_aj1 CURSOR FOR 
 	SELECT p23_tipo_doc, p23_num_doc, p23_div_doc,
                SUM(p23_valor_cap), SUM(p23_valor_int)
-                FROM cxpt022, cxpt023
-                WHERE p22_compania   = r_p24.p24_compania
-                  AND p22_localidad  = r_p24.p24_localidad
-                  AND p22_orden_pago = r_p24.p24_orden_pago
-                  AND p23_compania   = p22_compania
-                  AND p23_localidad  = p22_localidad
-                  AND p23_codprov    = p22_codprov
-                  AND p23_tipo_trn   = p22_tipo_trn
-                  AND p23_num_trn    = p22_num_trn
+		{--
+                FROM cxpt023, t1
+                WHERE p23_compania  = r_p24.p24_compania
+                  AND p23_localidad = r_p24.p24_localidad
+                  AND p23_codprov   = codprov
+		  AND p23_tipo_doc  = td
+                  AND p23_num_doc   = num
+		  AND p23_div_doc   = div_d
+		--}
+		FROM cxpt022, cxpt023
+		WHERE p22_compania   = r_p24.p24_compania
+		  AND p22_localidad  = r_p24.p24_localidad
+		  AND p22_orden_pago = r_p24.p24_orden_pago
+		  AND p23_compania   = p22_compania
+		  AND p23_localidad  = p22_localidad
+		  AND p23_codprov    = p22_codprov
+		  AND p23_tipo_trn   = p22_tipo_trn
+		  AND p23_num_trn    = p22_num_trn
                 GROUP BY p23_tipo_doc, p23_num_doc, p23_div_doc
 LET orden = 1
 FOREACH q_aj1 INTO tipo_doc, num_doc, div_doc, val_cap, val_int 
@@ -2078,6 +2116,7 @@ FOREACH q_aj1 INTO tipo_doc, num_doc, div_doc, val_cap, val_int
 		CALL fl_mostrar_mensaje('No se pudo actualizar los documentos.','exclamation')
 		LET done = 0
 		SET LOCK MODE TO NOT WAIT
+		--DROP TABLE t1
 		EXIT FOREACH
 	END IF
 	UPDATE cxpt020 SET p20_saldo_cap = p20_saldo_cap + val_cap,
@@ -2094,6 +2133,7 @@ UPDATE cxpt022 SET * = r_p22.*
 	  AND p22_codprov   = r_p22.p22_codprov
 	  AND p22_tipo_trn  = r_p22.p22_tipo_trn
 	  AND p22_num_trn   = r_p22.p22_num_trn
+--DROP TABLE t1
 RETURN done
 
 END FUNCTION
@@ -2979,6 +3019,75 @@ FUNCTION muestra_contadores_det(num_row, max_row)
 DEFINE num_row, max_row	SMALLINT
 
 DISPLAY BY NAME num_row, max_row
+
+END FUNCTION
+
+
+
+FUNCTION mayoriza_cta_balance_sin_cierre(tip_comp, num_comp, flag_m)
+DEFINE tip_comp		LIKE ctbt012.b12_tipo_comp
+DEFINE num_comp		LIKE ctbt012.b12_num_comp
+DEFINE flag_m		CHAR(1)
+DEFINE r_b12		RECORD LIKE ctbt012.*
+DEFINE query		CHAR(1500)
+DEFINE signo		CHAR(1)
+
+CALL fl_lee_comprobante_contable(vg_codcia, tip_comp, num_comp)
+	RETURNING r_b12.*
+IF YEAR(r_b12.b12_fec_proceso) < 2011 THEN
+	RETURN
+END IF
+LET query = 'SELECT b13_cuenta cta, (YEAR(b13_fec_proceso) + 1) anio, ',
+			'CASE WHEN b13_valor_base >= 0 ',
+				'THEN b13_valor_base ',
+				'ELSE 0.00 ',
+			'END val_db, ',
+			'CASE WHEN b13_valor_base < 0 ',
+				'THEN b13_valor_base * (-1) ',
+				'ELSE 0.00 ',
+			'END val_cr ',
+		' FROM ctbt013 ',
+		' WHERE b13_compania      = ', r_b12.b12_compania,
+		'   AND b13_tipo_comp     = "', r_b12.b12_tipo_comp, '"',
+		'   AND b13_num_comp      = "', r_b12.b12_num_comp, '"',
+		'   AND b13_cuenta[1, 1] IN ("1", "2", "3") ',
+		' INTO TEMP t1 '
+PREPARE exec_t1 FROM query
+EXECUTE exec_t1
+CASE flag_m
+	WHEN 'M' LET signo = '+'
+	WHEN 'D' LET signo = '-'
+END CASE
+LET query = 'UPDATE t_bal_gen ',
+		' SET b11_db_ano_ant = b11_db_ano_ant ', signo,
+				' NVL((SELECT val_db ',
+					'FROM t1 ',
+					'WHERE cta  = b11_cuenta ',
+					'  AND anio = b11_ano), 0.00), ',
+		'     b11_cr_ano_ant = b11_cr_ano_ant ', signo,
+				' NVL((SELECT val_cr ',
+					'FROM t1 ',
+					'WHERE cta  = b11_cuenta ',
+					'  AND anio = b11_ano), 0.00) ',
+	' WHERE b11_compania  = ', r_b12.b12_compania,
+	'   AND EXISTS ',
+		'(SELECT 1 FROM t1 ',
+			'WHERE cta  = b11_cuenta ',
+			'  AND anio = b11_ano) '
+BEGIN WORK
+	WHENEVER ERROR CONTINUE
+	SET LOCK MODE TO WAIT 20
+	PREPARE exec_bal_gen FROM query
+	EXECUTE exec_bal_gen
+	IF STATUS < 0 THEN
+		WHENEVER ERROR STOP
+		ROLLBACK WORK
+		CALL fl_mostrar_mensaje('Error al actualizar tabla temporal de saldos de balance. Por Favor Llame al Administrador. ', 'exclamation')
+		RETURN
+	END IF
+	WHENEVER ERROR STOP
+COMMIT WORK
+DROP TABLE t1
 
 END FUNCTION
 

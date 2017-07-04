@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131596</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>TIOCAJAS E4-38 Y PEDRO PEREZ</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131596</guiaRemision>
+<razonSocialComprador>CARRERA VILLA GEORGE ANTONIO</razonSocialComprador>
+<identificacionComprador>1801917020   </identificacionComprador>
+<totalSinImpuestos>75.62</totalSinImpuestos>
+<totalDescuento>5.76</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>69.86</baseImponible>
+<valor>8.38</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>78.24</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>360</codigoPrincipal>
+<descripcion>HIERRO CUADRADO x 6 MTS. DE 9mm.</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>6.14</precioUnitario>
+<descuento>1.96</descuento>
+<precioTotalSinImpuesto>22.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>22.60</baseImponible>
+<valor>2.71</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>374</codigoPrincipal>
+<descripcion>PLETINA DE 12 x 3mm. x 6 m</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>2.66</precioUnitario>
+<descuento>1.06</descuento>
+<precioTotalSinImpuesto>12.24</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>12.24</baseImponible>
+<valor>1.47</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50</codigoPrincipal>
+<descripcion>ANGULO LAMINADO x 6 MTS. DE 25mm. x 3mm.</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>9.46</precioUnitario>
+<descuento>2.27</descuento>
+<precioTotalSinImpuesto>26.11</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>26.11</baseImponible>
+<valor>3.13</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21470</codigoPrincipal>
+<descripcion>ELECTRODO E-6011-C-13 1/8" ACERO DULCE</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>4.69</precioUnitario>
+<descuento>0.47</descuento>
+<precioTotalSinImpuesto>8.91</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="AGA" valor="AGA"/>
+<detAdicional nombre="KILO" valor="KILO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.91</baseImponible>
+<valor>1.07</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

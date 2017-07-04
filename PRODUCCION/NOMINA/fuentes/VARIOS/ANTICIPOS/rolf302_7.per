@@ -1,0 +1,81 @@
+DATABASE aceros
+SCREEN
+{
+                         TOTALES DE ROLES POR RUBRO
+                         -------------------------
+
+         Periodo: [c006      ] - [c007      ]    Liquidaciones: [c008]
+    Departamento: [c000|c001                          ]
+           Cargo: [c002|c003                          ]
+        Empleado: [c004|c005                                         ]
+
+ Ingresos                  [c52] de [c53]    Descuentos        [c54] de [c55]
+ [c10|c011          |f011   |c012        ]   [c13|c014          |c015        ] 
+[c20|c021          |f021   |c022        ]   [c23|c024          |c025        ]
+[c20|c021          |f021   |c022        ]   [c23|c024          |c025        ]
+[c20|c021          |f021   |c022        ]   [c23|c024          |c025        ]
+[c20|c021          |f021   |c022        ]   [c23|c024          |c025        ]
+[c20|c021          |f021   |c022        ]   [c23|c024          |c025        ]
+[c20|c021          |f021   |c022        ]   [c23|c024          |c025        ]
+[c20|c021          |f021   |c022        ]   [c23|c024          |c025        ]
+
+          Total Ingresos:  [c062        ]    Total Descuentos: [c063        ]
+              Total Neto:  [c064        ]        Total Ganado: [c065        ]
+}
+TABLES
+gent034
+gent035
+rolt003
+rolt030
+rolt032
+ATTRIBUTES
+c000 = rolt030.n30_cod_depto, NOENTRY, UPSHIFT;
+c001 = gent034.g34_nombre, NOENTRY, UPSHIFT;
+c002 = rolt030.n30_cod_cargo, NOENTRY, UPSHIFT;
+c003 = gent035.g35_nombre, NOENTRY, UPSHIFT;
+c004 = rolt030.n30_cod_trab, NOENTRY, UPSHIFT, REVERSE;
+c005 = rolt030.n30_nombres, NOENTRY, UPSHIFT, REVERSE;
+c006 = rolt032.n32_fecha_ini, NOENTRY, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy';
+c007 = rolt032.n32_fecha_fin, NOENTRY, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy';
+c008 = FORMONLY.tot_trab, NOENTRY, REVERSE, UPSHIFT,COLOR = BLUE WHERE c008 > 0;
+
+c10  = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+f011 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c012 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+
+c20  = FORMONLY.codrub_h, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c021 = FORMONLY.nomrub_h, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+f021 = FORMONLY.valaux_h, NOENTRY, OPTIONS = '-nolist', FORMAT = '####&.#';
+c022 = FORMONLY.valrub_h TYPE DECIMAL NOT NULL, REQUIRED, UPSHIFT,
+	INCLUDE = (0 TO 99999999.99), FORMAT = '#,###,##&.##',
+	OPTIONS = '-nolist';
+
+c13  = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F19';
+c015 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+c23  = FORMONLY.codrub_d, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c024 = FORMONLY.nomrub_d, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c025 = FORMONLY.valrub_d TYPE DECIMAL NOT NULL, REQUIRED, UPSHIFT,
+	INCLUDE = (0 TO 99999999.99), FORMAT = '#,###,##&.##',
+	OPTIONS = '-nolist';
+
+c062 = FORMONLY.total_ing TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '-,---,--&.##';
+c063 = FORMONLY.total_egr TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '-,---,--&.##';
+c064 = FORMONLY.total_net TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '-,---,--&.##';
+c065 = FORMONLY.total_gan TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '-,---,--&.##', COLOR = BLUE WHERE c065 > 0;
+
+c52  = FORMONLY.ini_h, NOENTRY, UPSHIFT;
+c53  = FORMONLY.fin_h, NOENTRY, UPSHIFT;
+c54  = FORMONLY.ini_d, NOENTRY, UPSHIFT;
+c55  = FORMONLY.fin_d, NOENTRY, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_toting[7] (codrub_h, nomrub_h, valaux_h, valrub_h)
+SCREEN RECORD rm_totdes[7] (codrub_d, nomrub_d, valrub_d)

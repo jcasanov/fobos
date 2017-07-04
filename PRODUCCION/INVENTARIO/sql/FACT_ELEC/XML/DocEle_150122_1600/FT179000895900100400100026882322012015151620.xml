@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268823</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268823</guiaRemision>
+<razonSocialComprador>CARROCERIAS IMCE</razonSocialComprador>
+<identificacionComprador>1801172162001</identificacionComprador>
+<totalSinImpuestos>141.93</totalSinImpuestos>
+<totalDescuento>7.47</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>141.93</baseImponible>
+<valor>17.03</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>158.96</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102423</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-89-2714 DE OXIDO NEGRO DE 1/8" THUNDERBOLT</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>1.91</precioUnitario>
+<descuento>0.57</descuento>
+<precioTotalSinImpuesto>10.89</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>10.89</baseImponible>
+<valor>1.31</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102424</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-89-2715 DE OXIDO NEGRO DE 9/64" THUNDERBOLT</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>1.21</precioUnitario>
+<descuento>0.36</descuento>
+<precioTotalSinImpuesto>6.90</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.90</baseImponible>
+<valor>0.83</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102425</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-89-2716 DE OXIDO NEGRO DE 5/32" THUNDERBOLT</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>1.29</precioUnitario>
+<descuento>0.39</descuento>
+<precioTotalSinImpuesto>7.35</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7.35</baseImponible>
+<valor>0.88</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102427</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-89-2718 DE OXIDO NEGRO DE  3/16" THUNDERBOLT</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>1.49</precioUnitario>
+<descuento>0.45</descuento>
+<precioTotalSinImpuesto>8.49</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.49</baseImponible>
+<valor>1.02</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102431</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-89-2722 DE OXIDO NEGRO DE  1/4" THUNDERBOLT</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>2.04</precioUnitario>
+<descuento>0.61</descuento>
+<precioTotalSinImpuesto>11.63</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>11.63</baseImponible>
+<valor>1.40</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102435</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-89-2726 DE OXIDO NEGRO DE  5/16" THUNDERBOLT</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>2.99</precioUnitario>
+<descuento>0.90</descuento>
+<precioTotalSinImpuesto>17.04</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>17.04</baseImponible>
+<valor>2.04</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102439</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-89-2730 DE OXIDO NEGRO DE  3/8" THUNDERBOLT</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>4.18</precioUnitario>
+<descuento>1.25</descuento>
+<precioTotalSinImpuesto>23.83</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>23.83</baseImponible>
+<valor>2.86</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102447</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-89-2738 DE OXIDO NEGRO DE  1/2" THUNDERBOLT</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>9.79</precioUnitario>
+<descuento>2.94</descuento>
+<precioTotalSinImpuesto>55.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>55.80</baseImponible>
+<valor>6.70</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacion@carroceriasimce.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">032445347</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">046247</campoAdicional>
+</infoAdicional>
+</factura>

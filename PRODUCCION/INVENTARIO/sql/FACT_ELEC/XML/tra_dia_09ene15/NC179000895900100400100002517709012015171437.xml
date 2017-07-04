@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025177</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>09/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>TEXTILES DEL PACIFICO  CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1790313352001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000175999</numDocModificado>
+<fechaEmisionDocSustento>17/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>1321.59</totalSinImpuestos>
+<valorModificacion>1480.18</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>1321.59</baseImponible>
+<valor>158.59</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 267604 TEXTILS DL PACIFICO C DL CRUZ</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>44280</codigoInterno>
+<descripcion>BOMBA CENTRIF STANDARD C-MOTOR DLG-11-3 15HP 1 ETP. 2-1/2 x 2" 3500RPM 220/380-3-60</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1554.81</precioUnitario>
+<descuento>233.22</descuento>
+<precioTotalSinImpuesto>1321.59</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MARK G"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1321.59</baseImponible>
+<valor>158.59</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">importaciones@texpac.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">476733/656</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">4406</campoAdicional>
+</infoAdicional>
+</notaCredito>

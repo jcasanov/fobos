@@ -1,0 +1,49 @@
+database acero_gm
+screen size 24 by 80
+{
+z01_codcli         [f000       ]
+z01_estado         [a]
+z01_nomcli         [f001                                              ]
+z01_direccion1     [f002                                    ]
+z01_direccion2     [f003                                    ]
+z01_telefono1      [f004      ]
+z01_telefono2      [f005      ]
+z01_fax1           [f006       ]
+z01_fax2           [f007       ]
+z01_casilla        [f008      ]
+z01_pais           [f009       ]
+z01_ciudad         [f010       ]
+z01_tipo_clte      [f011  ]
+z01_personeria     [b]
+z01_tipo_doc_id    [c]
+z01_num_doc_id     [f012           ]
+z01_rep_legal      [f013                          ]
+z01_paga_impto     [d]
+z01_usuario        [f014      ]
+z01_fecing         [f015               ]
+}
+end
+tables
+cxct001
+attributes
+f000 = cxct001.z01_codcli;
+a = cxct001.z01_estado;
+f001 = cxct001.z01_nomcli;
+f002 = cxct001.z01_direccion1;
+f003 = cxct001.z01_direccion2;
+f004 = cxct001.z01_telefono1;
+f005 = cxct001.z01_telefono2;
+f006 = cxct001.z01_fax1;
+f007 = cxct001.z01_fax2;
+f008 = cxct001.z01_casilla;
+f009 = cxct001.z01_pais;
+f010 = cxct001.z01_ciudad;
+f011 = cxct001.z01_tipo_clte;
+b = cxct001.z01_personeria;
+c = cxct001.z01_tipo_doc_id;
+f012 = cxct001.z01_num_doc_id;
+f013 = cxct001.z01_rep_legal;
+d = cxct001.z01_paga_impto;
+f014 = cxct001.z01_usuario;
+f015 = cxct001.z01_fecing;
+end

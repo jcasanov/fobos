@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268836</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268836</guiaRemision>
+<razonSocialComprador>MARESA</razonSocialComprador>
+<identificacionComprador>1790279901001</identificacionComprador>
+<totalSinImpuestos>854.30</totalSinImpuestos>
+<totalDescuento>94.92</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>854.30</baseImponible>
+<valor>102.52</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>956.82</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>12662</codigoPrincipal>
+<descripcion>BOMBA HIDRAULICA MANUAL P-39 1 VELOCIDAD 40 pulg3 10000 PSI</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>474.61</precioUnitario>
+<descuento>94.92</descuento>
+<precioTotalSinImpuesto>854.30</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>854.30</baseImponible>
+<valor>102.52</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">dcaceres@maresa.com.ec</campoAdicional>
+<campoAdicional nombre="Email">dpalacios@maresa.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2998100</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">028862</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C # 330189</campoAdicional>
+</infoAdicional>
+</factura>

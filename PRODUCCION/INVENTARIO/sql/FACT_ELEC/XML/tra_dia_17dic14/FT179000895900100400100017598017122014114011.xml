@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175980</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>HIGUERILLAS Y ALONDRAS</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175980</guiaRemision>
+<razonSocialComprador>ASOCIACION CULTURAL ACADEMIA COTOPAXI</razonSocialComprador>
+<identificacionComprador>1790105083001</identificacionComprador>
+<totalSinImpuestos>1333.04</totalSinImpuestos>
+<totalDescuento>149.45</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1333.04</baseImponible>
+<valor>159.96</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1493.00</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>33573</codigoPrincipal>
+<descripcion>CAJA TERMICA COMPLETA GMC 40 DE 18 A 26 AMPERIOS P/ 7.5 HP</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>221.00</precioUnitario>
+<descuento>22.10</descuento>
+<precioTotalSinImpuesto>198.90</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="LG IND." valor="LG IND"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>198.90</baseImponible>
+<valor>23.87</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>61795</codigoPrincipal>
+<descripcion>TANQUE DE PRESION FIBRA DE VIDRIO WM-14WB/WM0180 ENTREGA DE 14.1 GLS POR CICLO DE 30/50 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>581.32</precioUnitario>
+<descuento>58.13</descuento>
+<precioTotalSinImpuesto>523.19</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="WELL MATE" valor="WELL M"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>523.19</baseImponible>
+<valor>62.78</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>8798</codigoPrincipal>
+<descripcion>VALVULA COMPUERTA  BRONCE ROSCADA RW-206 DE 2-1/2" 125 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>167.99</precioUnitario>
+<descuento>16.80</descuento>
+<precioTotalSinImpuesto>151.19</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RED WHITE" valor="RED WH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>151.19</baseImponible>
+<valor>18.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21414</codigoPrincipal>
+<descripcion>VALVULA DE PIE VP-75 DE 3"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>118.82</precioUnitario>
+<descuento>17.82</descuento>
+<precioTotalSinImpuesto>101.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="HELBERT" valor="HELBER"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>101.00</baseImponible>
+<valor>12.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70730</codigoPrincipal>
+<descripcion>MANOMETRO ROSCA NPT 1/4" 0-230 PSI DE GLICERINA ESF. 2.5"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>38.50</precioUnitario>
+<descuento>3.85</descuento>
+<precioTotalSinImpuesto>34.65</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ASHCROTF" valor="ASHCRO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>34.65</baseImponible>
+<valor>4.16</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5420</codigoPrincipal>
+<descripcion>TUBO GALV. ASTM A-53   TIPO "T" DE 3" x 6.40 m.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>157.98</precioUnitario>
+<descuento>11.06</descuento>
+<precioTotalSinImpuesto>146.92</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="TUGALT" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>146.92</baseImponible>
+<valor>17.63</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>91459</codigoPrincipal>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 3"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>48.46</precioUnitario>
+<descuento>14.54</descuento>
+<precioTotalSinImpuesto>130.84</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="CIFUNSA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>130.84</baseImponible>
+<valor>15.70</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>94084</codigoPrincipal>
+<descripcion>SWITCH DE PRESION DE 115 - 150 PSI REGULABLE DIF 30 PSI (21JA1EWW/21EA/11)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>51.50</precioUnitario>
+<descuento>5.15</descuento>
+<precioTotalSinImpuesto>46.35</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>46.35</baseImponible>
+<valor>5.56</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">022467411</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">005372</campoAdicional>
+</infoAdicional>
+</factura>

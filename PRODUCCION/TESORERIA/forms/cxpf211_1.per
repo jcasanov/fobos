@@ -2,23 +2,23 @@ DATABASE aceros
 SCREEN
 {
 
-                                                          [c014 ] de [c015 ]
+                                                          [c016 ] de [c017 ]
 
      Orden de Compra: [c000  ]                        Compra Local: [c001  ]
 
            Proveedor: [c002  ] [c003                                       ]
-         No. Factura: [c004              ]       Num. Aut. SRI: [c005      ]
-                                               Fecha Caducidad: [c006      ]
+         No. Factura: [c004              ]   Fec. Aut. SRI: [c005          ]
+                                             Num. Aut. SRI: [c006      ]
+                                           Fecha Caducidad: [c007      ]
 
+     Proveedor Nuevo: [c008  ] [c009                                       ]
 
-     Proveedor Nuevo: [c007  ] [c008                                       ]
+   No. Factura Nueva: [c010              ] F. Aut.SRI Nue.: [c011          ]
+                                       Num. Aut. SRI Nuevo: [c012      ]
 
-   No. Factura Nuevo: [c009              ] Num. Aut. SRI Nuevo: [c010      ]
+                                     Fecha Caducidad Nueva: [c013      ]
 
-                                         Fecha Caducidad Nueva: [c011      ]
-
-
-             Usuario: [c012      ]      Fecha Ingreso: [c013               ]
+             Usuario: [c014      ]      Fecha Ingreso: [c015               ]
 
 }
 TABLES
@@ -32,18 +32,21 @@ c002 = cxpt033.p33_cod_prov_ant, NOENTRY, UPSHIFT, REVERSE,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 c003 = cxpt033.p33_nom_prov_ant, NOENTRY, UPSHIFT, REVERSE;
 c004 = cxpt033.p33_num_fac_ant, NOENTRY, UPSHIFT, REVERSE;
-c005 = cxpt033.p33_num_aut_ant, NOENTRY, UPSHIFT, REVERSE;
-c006 = cxpt033.p33_fec_cad_ant, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
-c007 = cxpt033.p33_cod_prov_nue, AUTONEXT, UPSHIFT,
+c005 = cxpt033.p33_fec_aut_ant, UPSHIFT, NOENTRY, REVERSE;
+c006 = cxpt033.p33_num_aut_ant, NOENTRY, UPSHIFT, REVERSE;
+c007 = cxpt033.p33_fec_cad_ant, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c008 = cxpt033.p33_cod_prov_nue, AUTONEXT, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c008 = cxpt033.p33_nom_prov_nue, NOENTRY, UPSHIFT;
-c009 = cxpt033.p33_num_fac_nue, AUTONEXT, UPSHIFT;
-c010 = cxpt033.p33_num_aut_nue, AUTONEXT, UPSHIFT;
-c011 = cxpt033.p33_fec_cad_nue, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+c009 = cxpt033.p33_nom_prov_nue, NOENTRY, UPSHIFT;
+c010 = cxpt033.p33_num_fac_nue, AUTONEXT, UPSHIFT;
+c011 = cxpt033.p33_fec_aut_nue, UPSHIFT, AUTONEXT,
+	COMMENTS = "Digite este campo para AUTORIZACIONES con # DE AUT. MAYOR A DIEZ DIGITOS.";
+c012 = cxpt033.p33_num_aut_nue, AUTONEXT, UPSHIFT;
+c013 = cxpt033.p33_fec_cad_nue, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
 	COMMENTS = 'Digite la fecha en formato: dd-mm-aaaa.';
-c012 = cxpt033.p33_usuario, NOENTRY, UPSHIFT, REVERSE;
-c013 = cxpt033.p33_fecing, NOENTRY, UPSHIFT, REVERSE;
+c014 = cxpt033.p33_usuario, NOENTRY, UPSHIFT, REVERSE;
+c015 = cxpt033.p33_fecing, NOENTRY, UPSHIFT, REVERSE;
 
-c014 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
-c015 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+c016 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c017 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
 END

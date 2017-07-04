@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176388</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>29/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176388</guiaRemision>
+<razonSocialComprador>ENERGYPETROL  S.A</razonSocialComprador>
+<identificacionComprador>1791403916001</identificacionComprador>
+<totalSinImpuestos>364.40</totalSinImpuestos>
+<totalDescuento>40.49</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>364.40</baseImponible>
+<valor>43.73</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>408.13</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>93774</codigoPrincipal>
+<descripcion>FRESA ANULAR PARA TALADRO ELECTROMAGNETICO 49-59-0937 DE 15/16" P/PLANCHA DE HASTA 1"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>54.26</precioUnitario>
+<descuento>21.70</descuento>
+<precioTotalSinImpuesto>195.34</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>195.34</baseImponible>
+<valor>23.44</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>93771</codigoPrincipal>
+<descripcion>FRESA ANULAR PARA TALADRO ELECTROMAGNETICO 49-59-0750 DE 3/4" P/ PLANCHA DE HASTA 1"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>44.69</precioUnitario>
+<descuento>17.88</descuento>
+<precioTotalSinImpuesto>160.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>160.88</baseImponible>
+<valor>19.31</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150358</codigoPrincipal>
+<descripcion>LIQUIDO REFRIGERANTE 49-32-0081 DE 16 oz P/ TALADRO ELECTROMAGNETICO.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>9.09</precioUnitario>
+<descuento>0.91</descuento>
+<precioTotalSinImpuesto>8.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.18</baseImponible>
+<valor>0.98</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">isabel_sanchez@energypetrol.net</campoAdicional>
+<campoAdicional nombre="telefono-movil">2923064</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">006870</campoAdicional>
+</infoAdicional>
+</factura>

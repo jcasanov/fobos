@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025224</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>CONSTRUCTORA VILLACRECES ANDRADE S.A.</razonSocialComprador>
+<identificacionComprador>1791326768001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000173886</numDocModificado>
+<fechaEmisionDocSustento>10/11/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>4003.62</totalSinImpuestos>
+<valorModificacion>4484.05</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>4003.62</baseImponible>
+<valor>480.43</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 265611 C.V ANDRADE P-VOLVER A FAC YA</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>5</codigoInterno>
+<descripcion>ALAMBRE DE PUA MOTTO ROJO ROLLO DE 500 m</descripcion>
+<cantidad>13.00</cantidad>
+<precioUnitario>43.31</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>563.03</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="ROLLO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>563.03</baseImponible>
+<valor>67.56</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>5458</codigoInterno>
+<descripcion>TUBO GALVANIZADO (POSTE) TIPO "T" DE 1-1/2" (38.1mm.) EXTERIOR 1.8mm. ESPESOR x 6 mts.</descripcion>
+<cantidad>113.00</cantidad>
+<precioUnitario>14.63</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1653.19</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1653.19</baseImponible>
+<valor>198.38</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>172</codigoInterno>
+<descripcion>CLAVO 2" x 12  (CAJA DE 25 Kg.)</descripcion>
+<cantidad>22.50</cantidad>
+<precioUnitario>1.36</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>30.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>30.60</baseImponible>
+<valor>3.67</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>16</codigoInterno>
+<descripcion>ALAMBRE GALVANIZADO N.18</descripcion>
+<cantidad>100.00</cantidad>
+<precioUnitario>1.95</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>195.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>195.00</baseImponible>
+<valor>23.40</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>101159</codigoInterno>
+<descripcion>TOL GALVANIZADO DE 4mm. 1.22 x 2.44 m.</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>240.80</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1444.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1444.80</baseImponible>
+<valor>173.38</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>174</codigoInterno>
+<descripcion>CLAVO 2-1/2" x 10</descripcion>
+<cantidad>25.00</cantidad>
+<precioUnitario>1.38</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>34.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>34.50</baseImponible>
+<valor>4.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>176</codigoInterno>
+<descripcion>CLAVO 3" x 9  (CAJA DE 25 Kg.)</descripcion>
+<cantidad>25.00</cantidad>
+<precioUnitario>1.65</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>41.25</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>41.25</baseImponible>
+<valor>4.95</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>178</codigoInterno>
+<descripcion>CLAVO 4" x 6  (CAJA DE 25 Kg.)</descripcion>
+<cantidad>25.00</cantidad>
+<precioUnitario>1.65</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>41.25</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>41.25</baseImponible>
+<valor>4.95</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">cmaldonado@elitcorp.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2229244/5</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">4289</campoAdicional>
+</infoAdicional>
+</notaCredito>

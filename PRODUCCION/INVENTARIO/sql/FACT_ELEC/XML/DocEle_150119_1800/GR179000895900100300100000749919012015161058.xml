@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000007499</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<dirPartida>GUALBERTO PEREZ E1-88 ENTRE MALDONADO Y NAPO</dirPartida>
+<razonSocialTransportista>SERGIO QUINCHE</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>1103687586</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>19/01/2015</fechaIniTransporte>
+<fechaFinTransporte>19/01/2015</fechaFinTransporte>
+<placa>PBX-9975</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1711748614001</identificacionDestinatario>
+<razonSocialDestinatario>CARTAGENOVA ESPINOZA JAIME RAUL</razonSocialDestinatario>
+<dirDestinatario>CUERO Y CAICEDO OE3-315 Y RUIZ DE CASTIL</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>19/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>68789</codigoInterno>
+<descripcion>SUPERTECHO - SPT - 1000 - AL DE 10 PIES 3.00m (ANCHO UTIL 1.05 m.) x 0.30mm</descripcion>
+<cantidad>4.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ROOFTE"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>68793</codigoInterno>
+<descripcion>SUPERTECHO - SPT - 1000 - AL DE 18 PIES 5.40m (ANCHO UTIL 1.05 m.)  x 0.30mm</descripcion>
+<cantidad>7.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ROOFTE"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>68794</codigoInterno>
+<descripcion>SUPERTECHO - SPT - 1000 - AL DE 20 PIES 6m (ANCHO UTIL 1.05 m.) x 0.30mm</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ROOFTE"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>7089</codigoInterno>
+<descripcion>ACCESORIOS DE FIJACION PERNO B LARGO 2-1/2" AUTOPERFORANTE 10 Unid.</descripcion>
+<cantidad>5.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ROOFTE"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">cartagenovaj@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2233658</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">045180</campoAdicional>
+</infoAdicional>
+</guiaRemision>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000034028</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>CDLA UNIVERSITARIA KM 1.5 AV. PRINCIPAL</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>DICK COELLO ROJAS</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0917825416001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>15/12/2014</fechaIniTransporte>
+<fechaFinTransporte>16/12/2014</fechaFinTransporte>
+<placa>GEA-1296</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0968598800001</identificacionDestinatario>
+<razonSocialDestinatario>EMPRESA PUBLICA DE PRODUCCION Y DESARROLLO ESTRATêGICO DE LA UNIVERSIDAD ESTATAL DE MILAGRO</razonSocialDestinatario>
+<dirDestinatario>MILAGRO</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>08/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>102804</codigoInterno>
+<descripcion>BOMBA SUMERGIBLE DE 6" SSI 225 GPM P/ 15 HP DE 6 ETP. (616360602040082)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="FRANKLIN PUMPS SYSTEMS" valor="FRANKL"/>
+<detAdicional nombre="616360602040082" valor="616360602040082"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>19591</codigoInterno>
+<descripcion>CAJA DE CONTROL (2822039330) CB15231 P/ 15HP 230/60/1F</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="FRANKLIN" valor="FRANKL"/>
+<detAdicional nombre="pend" valor="pend"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>20703</codigoInterno>
+<descripcion>MOTOR ELEC SUMERG DE 6" (2261138020) 6F-15231 DE 15HP/230/60/1F</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="FRANKLIN" valor="FRANKL"/>
+<detAdicional nombre="23661A235" valor="23661A235"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+<campoAdicional nombre="telefono-movil">2715053</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016630</campoAdicional>
+</infoAdicional>
+</guiaRemision>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113723</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113723</guiaRemision>
+<razonSocialComprador>ATU (ARTICULOS DE ACERO S.A.)</razonSocialComprador>
+<identificacionComprador>1790038092001</identificacionComprador>
+<totalSinImpuestos>14.58</totalSinImpuestos>
+<totalDescuento>1.62</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>14.58</baseImponible>
+<valor>1.75</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>16.33</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>3206</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1" x 5"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>1.50</precioUnitario>
+<descuento>0.45</descuento>
+<precioTotalSinImpuesto>4.05</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.05</baseImponible>
+<valor>0.49</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6136</codigoPrincipal>
+<descripcion>UNION NEGRA CLASE 150 DE 1-1/4"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>2.55</precioUnitario>
+<descuento>1.02</descuento>
+<precioTotalSinImpuesto>9.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.18</baseImponible>
+<valor>1.10</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3396</codigoPrincipal>
+<descripcion>NEPLO NEGRO DE 1" x 5"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.50</precioUnitario>
+<descuento>0.15</descuento>
+<precioTotalSinImpuesto>1.35</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.35</baseImponible>
+<valor>0.16</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infoatu@atu.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">554477 648</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">028573</campoAdicional>
+</infoAdicional>
+</factura>

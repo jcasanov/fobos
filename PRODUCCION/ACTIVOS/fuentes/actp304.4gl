@@ -273,7 +273,7 @@ LET query = ' SELECT grupo, nom_gru, NVL(SUM(a12_valor_mb), 0) saldo_ini, ',
 		'   AND a10_estado       <> "B" ',
 		'   AND a12_compania      = a10_compania ',
 		'   AND a12_codigo_bien   = a10_codigo_bien ',
-		'   AND YEAR(a12_fecing)  = ', YEAR(fec_ini - 1 UNITS YEAR),
+		'   AND YEAR(a12_fecing) <= ', YEAR(fec_ini - 1 UNITS YEAR),
 		'   AND a12_valor_mb      < 0 ',
 		' GROUP BY 1, 2, 4, 5 ',
 		' INTO TEMP t2 '
@@ -285,12 +285,12 @@ SELECT grupo, nom_gru, NVL(SUM(saldo_ini), 0) saldo_ini,
 	GROUP BY 1, 2
 	INTO TEMP t3
 DROP TABLE t2
-SELECT t1.grupo, t1.nom_gru, NVL((t1.saldo_ini + t3.saldo_ini), 0) saldo_ini,
-	NVL((t1.valor_ing + t3.valor_ing), 0) valor_ing,
-	NVL((t1.valor_egr + t3.valor_egr), 0) valor_egr,
-	NVL((t1.saldo_ini + t3.saldo_ini + t1.valor_ing + t3.valor_ing +
-		t1.valor_egr + t3.valor_egr), 0) saldo_fin
-	FROM t1, t3
+SELECT t1.grupo, t1.nom_gru, t1.saldo_ini + NVL(t3.saldo_ini, 0) saldo_ini,
+	t1.valor_ing + NVL(t3.valor_ing, 0) valor_ing,
+	t1.valor_egr + NVL(t3.valor_egr, 0) valor_egr,
+	t1.saldo_ini + NVL(t3.saldo_ini, 0) + t1.valor_ing +
+	NVL(t3.valor_ing, 0) + t1.valor_egr + NVL(t3.valor_egr, 0) saldo_fin
+	FROM t1, OUTER t3
 	WHERE t1.grupo = t3.grupo
 	INTO TEMP tmp_mov
 DROP TABLE t1
@@ -371,6 +371,15 @@ SELECT t1.grupo, t1.cuenta, NVL(SUM(t1.sal_ant), 0) sal_ant,
 	FROM t1, OUTER t2
 	WHERE t1.grupo  = t2.grupo
 	  AND t1.cuenta = t2.cuenta
+	GROUP BY 1, 2
+UNION
+SELECT t2.grupo, t2.cuenta, NVL(SUM(t1.sal_ant), 0) sal_ant,
+	NVL(SUM(t2.val_db), 0) val_db, NVL(SUM(t2.val_cr), 0) val_cr,
+	NVL(SUM(NVL(t1.sal_ant, 0) + NVL(t2.val_db, 0) +
+	NVL(t2.val_cr, 0)), 0) sal_fin
+	FROM t2, OUTER t1
+	WHERE t2.grupo  = t1.grupo
+	  AND t2.cuenta = t1.cuenta
 	GROUP BY 1, 2
 UNION
 SELECT grupo, '12010101002', 0.00, 0.00, 0.00, 0.00

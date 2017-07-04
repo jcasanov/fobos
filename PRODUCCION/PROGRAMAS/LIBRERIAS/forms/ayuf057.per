@@ -1,0 +1,32 @@
+DATABASE aceros
+
+SCREEN
+{
+ VENDEDORES VEHICULOS
+
+ [lb1|lb12                       ]
+[c01|c002                       ] 
+[c01|c002                       ] 
+[c01|c002                       ] 
+[c01|c002                       ] 
+[c01|c002                       ] 
+[c01|c002                       ] 
+[c01|c002                       ] 
+[c01|c002                       ] 
+[c01|c002                       ] 
+[c01|c002                       ] 
+}
+
+TABLES
+veht001
+
+ATTRIBUTES
+c01  = v01_vendedor;
+c002 = v01_nombres;
+
+lb1  = formonly.bt_codigo,      NOENTRY, WIDGET='BUTTON', CONFIG='F15';
+lb12 = formonly.bt_nombre,      NOENTRY, WIDGET='BUTTON', CONFIG='F16';
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_venveh[10](v01_vendedor, v01_nombres)

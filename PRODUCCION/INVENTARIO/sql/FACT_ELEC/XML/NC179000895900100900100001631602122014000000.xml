@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000016316</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>02/12/2014</fechaEmision>
+<dirEstablecimiento>URB.SAN EDUARDO, AV. J.RODRIGUEZ B. 20-6</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>INTERNATIONAL WATER SERVICES (GUAYAQUIL) INTERAGUA C. LTDA.</razonSocialComprador>
+<identificacionComprador>0992153563001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000016316</numDocModificado>
+<fechaEmisionDocSustento>02/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>16.54</totalSinImpuestos>
+<valorModificacion>18.52</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>16.54</baseImponible>
+<valor>1.98</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DESCUENTOS</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>21970</codigoInterno>
+<descripcion>DESCUENTOS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>16.54</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>16.54</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ACERO" valor="ACERO"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>16.54</baseImponible>
+<valor>1.98</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+<campoAdicional nombre="telefono-movil">2874030</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">4437</campoAdicional>
+</infoAdicional>
+</notaCredito>

@@ -2027,11 +2027,13 @@ SELECT * FROM tmp_cta WHERE cuenta = r_p00.p00_aux_prov_mb
 IF STATUS = NOTFOUND THEN
 	INSERT INTO tmp_cta VALUES (r_p00.p00_aux_prov_mb)
 END IF
+{--
 INSERT INTO tmp_cta SELECT UNIQUE p02_aux_ant_mb FROM cxpt002
 SELECT * FROM tmp_cta WHERE cuenta = r_p00.p00_aux_ant_mb
 IF STATUS = NOTFOUND THEN
 	INSERT INTO tmp_cta VALUES (r_p00.p00_aux_ant_mb)
 END IF
+--}
 DISPLAY BY NAME r_p01.p01_codprov, r_p01.p01_nomprov
 LET expr_prov1 = '   AND p23_codprov     = ', r_p01.p01_codprov
 LET expr_prov2 = '   AND b13_codprov     = ', r_p01.p01_codprov

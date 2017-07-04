@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268496</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268496</guiaRemision>
+<razonSocialComprador>DISTRIBUIDORA DE MATERIALES DE CONSTRUCCION DISMACONCOBRE CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1792238447001</identificacionComprador>
+<totalSinImpuestos>3279.06</totalSinImpuestos>
+<totalDescuento>447.14</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>3279.06</baseImponible>
+<valor>393.49</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>3672.55</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>44302</codigoPrincipal>
+<descripcion>COQUILLA LANA DE VIDRIO C-ALUMINIO 1-1/4" x 1" x 0.90 m.</descripcion>
+<cantidad>140.00</cantidad>
+<precioUnitario>6.30</precioUnitario>
+<descuento>105.84</descuento>
+<precioTotalSinImpuesto>776.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDIFI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>776.16</baseImponible>
+<valor>93.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>44300</codigoPrincipal>
+<descripcion>COQUILLA LANA DE VIDRIO C-ALUMINIO 1" x 1" x 0.90 m.</descripcion>
+<cantidad>30.00</cantidad>
+<precioUnitario>5.60</precioUnitario>
+<descuento>20.16</descuento>
+<precioTotalSinImpuesto>147.84</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDIFI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>147.84</baseImponible>
+<valor>17.74</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>44296</codigoPrincipal>
+<descripcion>COQUILLA LANA DE VIDRIO C-ALUMINIO 3/4" x 1" x 0.90 m.</descripcion>
+<cantidad>265.00</cantidad>
+<precioUnitario>4.88</precioUnitario>
+<descuento>155.18</descuento>
+<precioTotalSinImpuesto>1138.02</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDIFI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1138.02</baseImponible>
+<valor>136.56</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>44295</codigoPrincipal>
+<descripcion>COQUILLA LANA DE VIDRIO C-ALUMINIO 1/2" x 1" x 0.90 m.</descripcion>
+<cantidad>300.00</cantidad>
+<precioUnitario>4.61</precioUnitario>
+<descuento>165.96</descuento>
+<precioTotalSinImpuesto>1217.04</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDIFI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1217.04</baseImponible>
+<valor>146.04</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">dismacon@netlife.ec</campoAdicional>
+<campoAdicional nombre="Email">ventas4@dismacon.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2228315</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">052810</campoAdicional>
+<campoAdicional nombre="Observaciones">PEDIDO SRTA NATALIA BAÒO</campoAdicional>
+</infoAdicional>
+</factura>

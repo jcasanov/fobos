@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176447</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>30/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176447</guiaRemision>
+<razonSocialComprador>SUMINISTROS Y MATENIMIENTOS DE EQUIPOS PETROLEROS SYMEP S.A</razonSocialComprador>
+<identificacionComprador>0891716486001</identificacionComprador>
+<totalSinImpuestos>2573.66</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>2573.66</baseImponible>
+<valor>308.84</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>2882.50</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5422</codigoPrincipal>
+<descripcion>TUBO GALV. ASTM A-53   TIPO "T" DE 4" x 6.40 m. ESPESOR 5.2 mm.</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>234.91</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2349.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2349.10</baseImponible>
+<valor>281.89</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4580</codigoPrincipal>
+<descripcion>TEE GALV. CLASE 150 REDUCIDA DE 4" x 1-1/2" REFORZADA</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>56.14</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>112.28</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>112.28</baseImponible>
+<valor>13.47</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4578</codigoPrincipal>
+<descripcion>TEE GALV. CLASE 150 REDUCIDA DE 4" x 1" REFORZADA</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>56.14</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>112.28</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>112.28</baseImponible>
+<valor>13.47</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">administracion@symep.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2700501</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">048618</campoAdicional>
+</infoAdicional>
+</factura>

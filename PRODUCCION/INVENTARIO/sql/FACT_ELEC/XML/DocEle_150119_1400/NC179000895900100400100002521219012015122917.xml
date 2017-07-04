@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025212</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>MEGAPLOTEC CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1891752233001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000175482</numDocModificado>
+<fechaEmisionDocSustento>08/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>664.91</totalSinImpuestos>
+<valorModificacion>744.70</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>664.91</baseImponible>
+<valor>79.79</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 267108 MEGAPLOTEC CIA  REC M.CHAVEZ</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>31271</codigoInterno>
+<descripcion>CALENTADOR DE AGUA 220 V PORCELANIZADO E DE 40 GL. C/VALV. DE SEGURIDAD</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>782.25</precioUnitario>
+<descuento>117.34</descuento>
+<precioTotalSinImpuesto>664.91</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CALORE"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>664.91</baseImponible>
+<valor>79.79</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacionelectronica@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">032820012</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">61458</campoAdicional>
+</infoAdicional>
+</notaCredito>

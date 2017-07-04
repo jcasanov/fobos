@@ -1,0 +1,51 @@
+DATABASE aceros
+SCREEN
+{
+                   MOVIMIENTOS DE DOCUMENTOS A FAVOR
+                   --------------------------------
+
+ Proveedor: [c000  |c001                                                   ]
+ Documento: [c1|c002          ]
+                                                            [c040] de [c041]
+ [c10|c011  |c012      |c013                               |c014            ]
+[c15|c016  |c017      |c018                               |c019            ]
+[c15|c016  |c017      |c018                               |c019            ]
+[c15|c016  |c017      |c018                               |c019            ]
+[c15|c016  |c017      |c018                               |c019            ]
+[c15|c016  |c017      |c018                               |c019            ]
+[c15|c016  |c017      |c018                               |c019            ]
+[c15|c016  |c017      |c018                               |c019            ]
+[c15|c016  |c017      |c018                               |c019            ]
+                                               Total ==>  [c030            ]
+}
+TABLES 
+cxpt001
+cxpt022
+cxpt023
+ATTRIBUTES
+c000 = cxpt001.p01_codprov, NOENTRY, UPSHIFT, REVERSE;
+c001 = cxpt001.p01_nomprov, NOENTRY, UPSHIFT, REVERSE;
+c1   = cxpt023.p23_tipo_favor, NOENTRY, UPSHIFT, REVERSE;
+c002 = cxpt023.p23_doc_favor, NOENTRY, UPSHIFT, REVERSE;
+c10  = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c15  = p23_tipo_trn;
+c016 = p23_num_trn, FORMAT = '#####&';
+c017 = p22_fecha_emi, FORMAT = 'dd-mm-yyyy';
+c018 = p22_referencia;
+c019 = FORMONLY.val_pago TYPE DECIMAL(12,2), FORMAT = '-,---,---,--&.##';
+c030 = FORMONLY.tot_pago TYPE DECIMAL(12,2), FORMAT = '-,---,---,--&.##',
+       REVERSE;
+
+c040 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c041 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+END
+KEYS
+F5 = 'Cheque'
+F6 = 'Documento'
+INSTRUCTIONS
+SCREEN RECORD r_pdoc[8] (p23_tipo_trn, p23_num_trn, p22_fecha_emi,
+			 p22_referencia, FORMONLY.val_pago);

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000004373</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>ACERIA DEL ECUADOR CA ADELCA.</razonSocialComprador>
+<identificacionComprador>1790004724001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>003-001-000128647</numDocModificado>
+<fechaEmisionDocSustento>12/11/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>1216.28</totalSinImpuestos>
+<valorModificacion>1362.23</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>1216.28</baseImponible>
+<valor>145.95</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>REF POR FECHA NP 138574</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>44998</codigoInterno>
+<descripcion>BOMBA HIDRAULICA MANUAL P-392 2 VELOCIDADES 55 Pulg3 10000 PSI</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>620.55</precioUnitario>
+<descuento>24.82</descuento>
+<precioTotalSinImpuesto>1216.28</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1216.28</baseImponible>
+<valor>145.95</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">recibo-electronico@adelca.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2792136</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">28583</campoAdicional>
+</infoAdicional>
+</notaCredito>

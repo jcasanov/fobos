@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092097</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092097</guiaRemision>
+<razonSocialComprador>IELMESA S.A.</razonSocialComprador>
+<identificacionComprador>0992590432001</identificacionComprador>
+<totalSinImpuestos>316.50</totalSinImpuestos>
+<totalDescuento>33.35</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>316.50</baseImponible>
+<valor>37.98</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>354.48</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>93817</codigoPrincipal>
+<descripcion>MANDRIL - PORTABROCA PARA TALADRO 49-22-1550 KIT DE MANDRIL Y ADAPT. 3/4" A 1-1/4" MT P/TALADRO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>158.55</precioUnitario>
+<descuento>23.78</descuento>
+<precioTotalSinImpuesto>134.77</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>134.77</baseImponible>
+<valor>16.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>93735</codigoPrincipal>
+<descripcion>ADAPTADOR 49-57-0025 EN ACOPLES MORSE P/4292-1/4297-1</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>191.30</precioUnitario>
+<descuento>9.57</descuento>
+<precioTotalSinImpuesto>181.73</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>181.73</baseImponible>
+<valor>21.81</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">ielmesa09@hotmail.com</campoAdicional>
+<campoAdicional nombre="Email">info@ielmesa.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2341853</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">013442</campoAdicional>
+<campoAdicional nombre="Observaciones">ATT.GEOCONDA VILLARREAL</campoAdicional>
+</infoAdicional>
+</factura>

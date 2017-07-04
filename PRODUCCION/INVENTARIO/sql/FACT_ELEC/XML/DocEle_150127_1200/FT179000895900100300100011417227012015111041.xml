@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000114172</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000114172</guiaRemision>
+<razonSocialComprador>JEREZ ECHEVERRIA MARIA DEL CARMEN</razonSocialComprador>
+<identificacionComprador>1711983872001</identificacionComprador>
+<totalSinImpuestos>53.45</totalSinImpuestos>
+<totalDescuento>10.95</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>53.45</baseImponible>
+<valor>6.41</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>59.86</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>98625</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA MINDO CHOCOLATE ESTANDAR</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>9.12</precioUnitario>
+<descuento>9.30</descuento>
+<precioTotalSinImpuesto>45.42</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>45.42</baseImponible>
+<valor>5.45</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>93584</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA COTOPAXI ROSA PRIMERA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>9.68</precioUnitario>
+<descuento>1.65</descuento>
+<precioTotalSinImpuesto>8.03</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.03</baseImponible>
+<valor>0.96</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">acabadosdelaconstruccion_mc@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2280198</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">040871</campoAdicional>
+</infoAdicional>
+</factura>

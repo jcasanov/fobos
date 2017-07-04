@@ -288,10 +288,6 @@ DEFINE dias_trab	SMALLINT
 
 DEFINE estado		CHAR(1)
 
-DEFINE dias_a, num_m	SMALLINT
-DEFINE ult_dia		SMALLINT
-DEFINE factor		DECIMAL(18, 10)
-
 LET estado = 'A'
 INITIALIZE cod_trab TO NULL
 IF num_args() = 5 AND arg_val(5) = 'F' THEN
@@ -465,69 +461,17 @@ FOREACH q_trab INTO r_n30.*
 				fl_retorna_precision_valor(r_n30.n30_mon_sueldo,
 					total_ganado)    
 		ELSE
-			{-- FORMULA ORIGINAL
+			{--
 			LET r_n36.n36_valor_bruto = 
 				fl_retorna_precision_valor(r_n30.n30_mon_sueldo,
 					((total_ganado / 12 * meses_trab) +
 					 (total_ganado / rm_n90.n90_dias_anio
 					* dias_trab)))
 			--}
-			{-- FORMULA CON NUMERO DE DIAS
 			LET r_n36.n36_valor_bruto =
 				fl_retorna_precision_valor(r_n30.n30_mon_sueldo,
 					((total_ganado / rm_n90.n90_dias_anio)
 					* ((fecha_fin - fecha_ini) + 1)))
-			--}
-			-- FORMULA CON 360 DIAS
-			IF ((fecha_fin - fecha_ini) + 1) < rm_n90.n90_dias_anio
-			THEN
-				LET num_m  = MONTH(fecha_fin)
-				IF YEAR(fecha_ini) < YEAR(fecha_fin) THEN
-					LET num_m  = num_m
-					IF MONTH(fecha_ini) <> 12 THEN
-						LET num_m  = num_m +
-							(12 - MONTH(MDY(
-							MONTH(fecha_ini), 01,
-							YEAR(fecha_ini))
-							+ 1 UNITS MONTH)) + 1
-					END IF
-				ELSE
-					LET num_m  = (num_m -
-						MONTH(MDY(
-							MONTH(fecha_ini), 01,
-							YEAR(fecha_ini))
-							+ 1 UNITS MONTH)) + 1
-				END IF
-				LET dias_a = (num_m * rm_n00.n00_dias_mes)
-				IF DAY(fecha_ini) > rm_n00.n00_dias_mes THEN
-					LET dias_a = dias_a +
-							rm_n00.n00_dias_mes
-				ELSE
-					LET ult_dia = DAY(MDY(MONTH(fecha_ini),
-							01, YEAR(fecha_ini))
-							+ 1 UNITS MONTH
-							- 1 UNITS DAY)
-					IF (ult_dia > rm_n00.n00_dias_mes) OR
-					   (MONTH(fecha_ini) = 2)
-					THEN
-						LET ult_dia =rm_n00.n00_dias_mes
-					END IF
-					LET dias_a = dias_a +
-						(ult_dia - DAY(fecha_ini)) + 1
-				END IF
-				LET factor = (total_ganado / 12
-						/ rm_n00.n00_dias_mes)
-				LET r_n36.n36_valor_bruto =
-				fl_retorna_precision_valor(r_n30.n30_mon_sueldo,
-					(dias_a * factor))
---display r_n36.n36_cod_trab, ' ' , fecha_ini, ' ', fecha_fin, ' ', num_m, ' ', dias_a, ' ', factor, ' ', r_n36.n36_valor_bruto
---display ' '
-			ELSE
-				LET r_n36.n36_valor_bruto = 
-				fl_retorna_precision_valor(r_n30.n30_mon_sueldo,
-					total_ganado)    
-			END IF
-			--
 		END IF
 	ELSE
 		LET r_n36.n36_valor_bruto = 

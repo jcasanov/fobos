@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131738</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131738</guiaRemision>
+<razonSocialComprador>GAMA CONSTRUCCIONES</razonSocialComprador>
+<identificacionComprador>1718113325001</identificacionComprador>
+<totalSinImpuestos>111.66</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>111.66</baseImponible>
+<valor>13.40</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>125.06</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>97614</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS 4262722 CAMPEON DRESDEN BLUE C/ASIENTO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>47.41</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>47.41</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>47.41</baseImponible>
+<valor>5.69</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>48064</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA DE PARED PREPONCHADO 5575722  SHELBY AZUL DRESDEN</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>10.41</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>10.41</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>10.41</baseImponible>
+<valor>1.25</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100695</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS 2238130 CAMPEON PLUS BLANCO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>44.40</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>44.40</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>44.40</baseImponible>
+<valor>5.33</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>68746</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA DE PARED PREPONCHADO 5575130 SHELBY BLANCO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>9.44</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>9.44</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.44</baseImponible>
+<valor>1.13</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0998817065</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">048943</campoAdicional>
+</infoAdicional>
+</factura>

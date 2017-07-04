@@ -1,4 +1,4 @@
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 -- Titulo           : cxcp416.4gl - Listado de Retenciones
 -- Elaboración      : 15-Feb-2003
 -- Autor            : NPC
@@ -73,8 +73,6 @@ DEFINE r_z22		RECORD LIKE cxct022.*
 DEFINE r_t23		RECORD LIKE talt023.*
 DEFINE cod_tran		LIKE rept019.r19_cod_tran
 DEFINE num_tran		LIKE rept019.r19_num_tran
-DEFINE base_imp		LIKE cajt014.j14_base_imp
-DEFINE fec_pro		LIKE ctbt012.b12_fec_proceso
 DEFINE query 		CHAR(1700)
 DEFINE comando          VARCHAR(100)
 DEFINE lin_menu		SMALLINT
@@ -83,12 +81,8 @@ DEFINE num_rows 	SMALLINT
 DEFINE num_cols 	SMALLINT
 DEFINE subtotal		DECIMAL(14,2)
 DEFINE imprime		CHAR(1)
-DEFINE registro		CHAR(400)
-DEFINE enter		SMALLINT
-DEFINE resp		CHAR(6)
 
 CALL fl_nivel_isolation()
-LET enter    = 13
 LET lin_menu = 0
 LET row_ini  = 3
 LET num_rows = 14
@@ -118,8 +112,6 @@ WHILE (TRUE)
 	IF int_flag = 1 THEN
 		EXIT WHILE
 	END IF
-	CALL fl_hacer_pregunta('Desea generar también un archivo de texto ?', 'No')
-		RETURNING resp
 	CALL fl_control_reportes() RETURNING comando
 	IF int_flag THEN
 		CONTINUE WHILE
@@ -200,8 +192,7 @@ WHILE (TRUE)
 				RETURNING r_r38.cod_tran, r_r38.num_tran
 		END IF
 		IF r_j10.j10_tipo_fuente = "SC" THEN
-			CALL retorna_factura_ret(r_j11.*, r_j10.j10_areaneg,
-						r_j10.j10_codcli,
+			CALL retorna_factura_ret(r_j11.*, r_j10.j10_codcli,
 						r_j10.j10_tipo_destino,
 						r_j10.j10_num_destino)
 				RETURNING r_r38.cod_tran, r_r38.num_tran
@@ -263,99 +254,10 @@ WHILE (TRUE)
 			END IF
 			LET rm_consulta.fecha_factura = r_t23.t23_fec_factura
 			LET rm_consulta.valor_base    = r_t23.t23_tot_bruto -
-						        r_t23.t23_vde_mo_tal
+						        r_t23.t23_tot_dscto
 		END IF
 		IF r_j10.j10_tipo_destino <> "PG" THEN
 			CALL retorna_sri(r_r38.*)
-		END IF
-		SELECT NVL(SUM(j14_base_imp), 0)
-			INTO base_imp
-			FROM cajt014
-			WHERE j14_compania     = r_j11.j11_compania
-			  AND j14_localidad    = r_j11.j11_localidad
-			  AND j14_tipo_fuente  = r_j11.j11_tipo_fuente
-			  AND j14_num_fuente   = r_j11.j11_num_fuente
-			  AND j14_secuencia    = r_j11.j11_secuencia
-			  AND j14_codigo_pago  = r_j11.j11_codigo_pago
-			  AND j14_num_ret_sri  = r_j11.j11_num_ch_aut
-			  AND j14_num_fact_sri = rm_consulta.num_factura_sri
-		IF rm_consulta.valor_base <> base_imp THEN
-			LET rm_consulta.valor_base = base_imp
-		END IF
-		IF resp = 'Yes' THEN
-			IF r_j10.j10_tipo_fuente = "SC" THEN
-				SELECT b12_fec_proceso
-					INTO fec_pro
-					FROM cxct040, ctbt012
-					WHERE z40_compania  = r_j10.j10_compania
-					  AND z40_localidad =
-							r_j10.j10_localidad
-					  AND z40_codcli    = r_j10.j10_codcli
-					  AND z40_tipo_doc  =
-							r_j10.j10_tipo_destino
-					  AND z40_num_doc   =
-							r_j10.j10_num_destino
-					  AND b12_compania  = z40_compania
-					  AND b12_tipo_comp = z40_tipo_comp
-					  AND b12_num_comp  = z40_num_comp
-			END IF
-			IF r_j10.j10_tipo_fuente = "PR" THEN
-				SELECT b12_fec_proceso
-					INTO fec_pro
-					FROM rept040, ctbt012
-					WHERE r40_compania  = r_j10.j10_compania
-					  AND r40_localidad  =
-							r_j10.j10_localidad
-					  AND r40_cod_tran   =
-							r_j10.j10_tipo_destino
-					  AND r40_num_tran   =
-							r_j10.j10_num_destino
-					  AND b12_compania   = r40_compania
-					  AND b12_tipo_comp  = r40_tipo_comp
-					  AND b12_num_comp   = r40_num_comp
-					  AND b12_subtipo   IN (8, 52)
-			END IF
-			IF r_j10.j10_tipo_fuente = "OT" THEN
-				SELECT b12_fec_proceso
-					INTO fec_pro
-					FROM talt050, ctbt012
-					WHERE t50_compania  = r_j10.j10_compania
-					  AND t50_localidad  =
-							r_j10.j10_localidad
-					  AND t50_orden      =
-							r_j10.j10_num_fuente
-					  AND b12_compania   = t50_compania
-					  AND b12_tipo_comp  = t50_tipo_comp
-					  AND b12_num_comp   = t50_num_comp
-					  AND b12_subtipo    = 41
-			END IF
-			LET registro = rm_consulta.ruc_ced CLIPPED, '|',
-					rm_consulta.cliente CLIPPED, '|',
-					DATE(rm_consulta.fecha_retencion)
-						USING "mm/dd/yyyy", '|',
-					rm_consulta.num_retencion CLIPPED, '|',
-					DATE(rm_consulta.fecha_factura)
-						USING "mm/dd/yyyy", '|',
-					fec_pro USING "mm/dd/yyyy"
-				IF r_j10.j10_tipo_destino = "PG" OR
-				   r_j10.j10_tipo_destino = "PR"
-				THEN
-					LET registro = registro CLIPPED, '|',
-						r_j10.j10_tipo_destino, '|', 
-						r_j10.j10_num_destino
-				ELSE
-					LET registro = registro CLIPPED, '|FA|',
-					rm_consulta.num_factura_sri CLIPPED,
-					'|', r_r38.num_tran USING "<<<<<<<&",'|'
-				END IF
-				LET registro = registro CLIPPED, '|',
-					rm_consulta.valor_base, '|',
-					rm_consulta.valor_retencion
-			IF vg_gui = 1 THEN
-				--#DISPLAY registro CLIPPED,ASCII(enter)
-			ELSE
-				DISPLAY registro CLIPPED
-			END IF
 		END IF
 		OUTPUT TO REPORT reporte_retenciones()
 	END FOREACH
@@ -370,15 +272,14 @@ END FUNCTION
 
 
 
-FUNCTION retorna_factura_ret(r_j11, areaneg, codcli, cod_tran, num_tran)
+FUNCTION retorna_factura_ret(r_j11, codcli, cod_tran, num_tran)
 DEFINE r_j11		RECORD LIKE cajt011.*
 DEFINE codcli		LIKE rept019.r19_codcli
-DEFINE areaneg		LIKE cajt010.j10_areaneg
 DEFINE cod_tran		LIKE rept019.r19_cod_tran
 DEFINE num_tran		LIKE rept019.r19_num_tran
 
 DECLARE q_j14 CURSOR FOR
-	SELECT j14_cod_tran, j14_num_tran, j14_base_imp
+	SELECT j14_cod_tran, j14_num_tran
 		FROM cajt014
 		WHERE j14_compania    = r_j11.j11_compania
 		  AND j14_localidad   =	r_j11.j11_localidad
@@ -386,13 +287,10 @@ DECLARE q_j14 CURSOR FOR
 		  AND j14_num_fuente  =	r_j11.j11_num_fuente
 		  AND j14_secuencia   =	r_j11.j11_secuencia
 OPEN q_j14
-FETCH q_j14 INTO cod_tran, num_tran, rm_consulta.valor_base
+FETCH q_j14 INTO cod_tran, num_tran
 CLOSE q_j14
 FREE q_j14
-IF areaneg <> 2 THEN
-	CALL retorna_factura(codcli, cod_tran, num_tran)
-		RETURNING cod_tran, num_tran
-END IF
+CALL retorna_factura(codcli, cod_tran, num_tran) RETURNING cod_tran, num_tran
 RETURN cod_tran, num_tran
 
 END FUNCTION
@@ -657,8 +555,8 @@ PAGE HEADER
 	PRINT COLUMN 01,  '------------------------------------------------------------------------------------------------------------------------------------'
 	PRINT COLUMN 01,  'RUC/CEDULA',
 	      COLUMN 17,  'CLIENTE',
-	      COLUMN 52,  'FECH. RET.',
-	      COLUMN 63,  'No. RETENCION',
+	      COLUMN 54,  'FECH. RET.',
+	      COLUMN 65,  'No. RETENCION',
 	      COLUMN 81,  'FEC. FACT.',
 	      COLUMN 92,  'FACTURA SRI',
 	      COLUMN 109, '   VALOR BASE',
@@ -668,9 +566,9 @@ PAGE HEADER
 ON EVERY ROW
 	NEED 3 LINES
 	PRINT COLUMN 01,  rm_consulta.ruc_ced, 
-	      COLUMN 17,  rm_consulta.cliente[1, 34],
-	      COLUMN 52,  DATE(rm_consulta.fecha_retencion) USING 'dd-mm-yyyy',
-	      COLUMN 63,  rm_consulta.num_retencion CLIPPED,
+	      COLUMN 17,  rm_consulta.cliente[1, 36],
+	      COLUMN 54,  DATE(rm_consulta.fecha_retencion) USING 'dd-mm-yyyy',
+	      COLUMN 65,  rm_consulta.num_retencion,
 	      COLUMN 81,  DATE(rm_consulta.fecha_factura)   USING 'dd-mm-yyyy',
 	      COLUMN 92,  rm_consulta.num_factura_sri,
 	      COLUMN 109, rm_consulta.valor_base	USING '##,###,##&.##',

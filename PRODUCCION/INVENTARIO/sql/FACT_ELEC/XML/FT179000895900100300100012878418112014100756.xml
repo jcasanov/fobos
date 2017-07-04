@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000128784</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>18/11/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000128784</guiaRemision>
+<razonSocialComprador>LOPEZ DIAZ HOLGUER DAVID</razonSocialComprador>
+<identificacionComprador>1724463979001</identificacionComprador>
+<totalSinImpuestos>958.70</totalSinImpuestos>
+<totalDescuento>138.27</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>820.43</baseImponible>
+<valor>98.45</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>918.88</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>101264</codigoPrincipal>
+<descripcion>BALDOSA DE PISO / PARED 35 X 50 FACCIATA BEIGE SEGUNDA  (CAJA DE 1.58 m2)</descripcion>
+<cantidad>63.20</cantidad>
+<precioUnitario>12.25</precioUnitario>
+<descuento>116.13</descuento>
+<precioTotalSinImpuesto>658.07</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIALTO" valor="RIALTO"/>
+<detAdicional nombre="M2" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>658.07</baseImponible>
+<valor>78.97</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>92993</codigoPrincipal>
+<descripcion>PEGA PARA CERAMICA BONDEX PLUS DE 25 KG. CERAMICA</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>8.23</precioUnitario>
+<descuento>19.75</descuento>
+<precioTotalSinImpuesto>144.85</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="INTACO" valor="INTACO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>144.85</baseImponible>
+<valor>17.38</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96787</codigoPrincipal>
+<descripcion>PORCELANA PARA CERAMICA GROUTEX POLIMERO ARENA PF S/ARENA (FUNDA DE  2KG.)</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>1.99</precioUnitario>
+<descuento>2.39</descuento>
+<precioTotalSinImpuesto>17.51</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="INTACO" valor="INTACO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>17.51</baseImponible>
+<valor>2.10</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

@@ -87,7 +87,11 @@ CREATE TEMP TABLE tmp_detalle_prov(
 		valor_dscto	DECIMAL(11,2),
 		subtotal	DECIMAL(14,2),
 		valor_impto	DECIMAL(11,2),
-		valor_neto	DECIMAL(12,2)
+		valor_neto	DECIMAL(12,2),
+		porc_iva	DECIMAL(5,2),
+		val_ret_iva	DECIMAL(11,2),
+		porc_fte	DECIMAL(5,2),
+		val_ret_fte	DECIMAL(11,2)
 	)
 CALL fl_nivel_isolation()
 CALL campos_forma()
@@ -144,11 +148,11 @@ END FUNCTION
 
 FUNCTION control_reporte()
 DEFINE col		SMALLINT
-DEFINE query		CHAR(1100)
+DEFINE query		CHAR(4000)
 DEFINE comando		VARCHAR(100)
 DEFINE comando1		VARCHAR(100)
 DEFINE resp		CHAR(6)
-DEFINE registro		CHAR(400)
+DEFINE registro		CHAR(700)
 DEFINE enter		SMALLINT
 DEFINE data_found	SMALLINT
 DEFINE r_det		RECORD 
@@ -165,7 +169,11 @@ DEFINE r_det		RECORD
 				valor_dscto	LIKE ordt010.c10_tot_dscto,
 				subtotal	DECIMAL(14,2),
 				valor_impto	LIKE ordt010.c10_tot_impto,
-				valor_neto	LIKE ordt010.c10_tot_compra
+				valor_neto	LIKE ordt010.c10_tot_compra,
+				porc_iva	LIKE cxpt028.p28_porcentaje,
+				val_ret_iva	LIKE cxpt028.p28_valor_ret,
+				porc_fte	LIKE cxpt028.p28_porcentaje,
+				val_ret_fte	LIKE cxpt028.p28_valor_ret
 			END RECORD
 DEFINE r_prov		RECORD 
 				codprov		LIKE cxpt001.p01_codprov,
@@ -179,7 +187,11 @@ DEFINE r_prov		RECORD
 				valor_dscto	LIKE ordt010.c10_tot_dscto,
 				subtotal	DECIMAL(14,2),
 				valor_impto	LIKE ordt010.c10_tot_impto,
-				valor_neto	LIKE ordt010.c10_tot_compra
+				valor_neto	LIKE ordt010.c10_tot_compra,
+				porc_iva	LIKE cxpt028.p28_porcentaje,
+				val_ret_iva	LIKE cxpt028.p28_valor_ret,
+				porc_fte	LIKE cxpt028.p28_porcentaje,
+				val_ret_fte	LIKE cxpt028.p28_valor_ret
 			END RECORD
 DEFINE r_p01		RECORD LIKE cxpt001.*
 DEFINE r_c10		RECORD LIKE ordt010.*
@@ -235,7 +247,9 @@ WHILE TRUE
 					r_det.flete, r_det.otros,
 					r_det.valor_bruto, r_det.valor_dscto,
 					r_det.subtotal, r_det.valor_impto,
-					r_det.valor_neto)
+					r_det.valor_neto, r_det.porc_iva,
+					r_det.val_ret_iva, r_det.porc_fte,
+					r_det.val_ret_fte)
 		ELSE
 			UPDATE tmp_detalle_prov
 					SET flete       = flete + r_det.flete,
@@ -249,7 +263,11 @@ WHILE TRUE
 					    valor_impto = valor_impto +
 							  r_det.valor_impto,
 					    valor_neto  = valor_neto +
-							  r_det.valor_neto
+							  r_det.valor_neto,
+					    val_ret_iva = r_det.val_ret_iva +
+							  r_det.val_ret_iva,
+					    val_ret_fte = r_det.val_ret_fte +
+							  r_det.val_ret_fte
 				WHERE codprov = r_p01.p01_codprov
 		END IF
 		IF rm_par.tipo_reporte <> 'R' THEN
@@ -275,7 +293,15 @@ WHILE TRUE
 						r_det.valor_impto
 						USING "###,##&.##", '|',
 						r_det.valor_neto
-						USING "#,###,##&.##"
+						USING "#,###,##&.##", '|',
+						r_det.porc_iva
+						USING "##&.##", '|',
+						r_det.val_ret_iva
+						USING "###,##&.##", '|',
+						r_det.porc_fte
+						USING "##&.##", '|',
+						r_det.val_ret_fte
+						USING "###,##&.##"
 				IF vg_gui = 1 THEN
 					--#DISPLAY registro CLIPPED,ASCII(enter)
 				ELSE
@@ -321,7 +347,12 @@ WHILE TRUE
 					USING "#,###,##&.##", '|',
 					r_prov.valor_impto USING "###,##&.##",
 					'|', r_prov.valor_neto
-					USING "#,###,##&.##"
+					USING "#,###,##&.##", '|',
+					r_prov.porc_iva USING "##&.##", '|',
+					r_prov.val_ret_iva
+					USING "###,##&.##", '|',
+					r_prov.porc_fte USING "##&.##", '|',
+					r_prov.val_ret_fte USING "###,##&.##"
 			IF vg_gui = 1 THEN
 				--#DISPLAY registro CLIPPED, ASCII(enter)
 			ELSE
@@ -566,7 +597,7 @@ END FUNCTION
 
 
 FUNCTION prepare_query()
-DEFINE query	 	CHAR(1100)
+DEFINE query	 	CHAR(4000)
 DEFINE expr_estado	VARCHAR(30)
 DEFINE expr_aux_cont	VARCHAR(50)
 DEFINE expr_tipo_oc	VARCHAR(30)
@@ -608,7 +639,59 @@ LET query = 'SELECT DATE(c10_fecing), c10_estado, c01_nombre, c10_numero_oc, ',
 	    	  ' c10_otros, (c10_tot_repto + c10_tot_mano), c10_tot_dscto,', 
  		  ' (c10_tot_repto + c10_tot_mano) - c10_tot_dscto + ',
 		  ' c10_dif_cuadre + c10_otros, ',
-	    	  ' c10_tot_impto, c10_tot_compra ',
+	    	  ' c10_tot_impto, c10_tot_compra, ',
+		  ' (SELECT SUM(p28_porcentaje) ',
+			'FROM cxpt028, cxpt027 ',
+			'WHERE p28_compania  = c10_compania ',
+			'  AND p28_localidad = c10_localidad ',
+			'  AND p28_codprov   = c10_codprov ',
+			'  AND p28_tipo_doc  = "FA" ',
+			'  AND p28_num_doc   = c10_factura ',
+			'  AND p28_dividendo = 1 ',
+			'  AND p28_tipo_ret  = "I" ',
+			'  AND p27_compania  = p28_compania ',
+			'  AND p27_localidad = p28_localidad ',
+			'  AND p27_num_ret   = p28_num_ret ',
+			'  AND p27_estado    = "A") porc_iva, ',
+		  ' (SELECT SUM(p28_valor_ret) ',
+			'FROM cxpt028, cxpt027 ',
+			'WHERE p28_compania  = c10_compania ',
+			'  AND p28_localidad = c10_localidad ',
+			'  AND p28_codprov   = c10_codprov ',
+			'  AND p28_tipo_doc  = "FA" ',
+			'  AND p28_num_doc   = c10_factura ',
+			'  AND p28_dividendo = 1 ',
+			'  AND p28_tipo_ret  = "I" ',
+			'  AND p27_compania  = p28_compania ',
+			'  AND p27_localidad = p28_localidad ',
+			'  AND p27_num_ret   = p28_num_ret ',
+			'  AND p27_estado    = "A") val_ret_iva, ',
+		  ' (SELECT SUM(p28_porcentaje) ',
+			'FROM cxpt028, cxpt027 ',
+			'WHERE p28_compania  = c10_compania ',
+			'  AND p28_localidad = c10_localidad ',
+			'  AND p28_codprov   = c10_codprov ',
+			'  AND p28_tipo_doc  = "FA" ',
+			'  AND p28_num_doc   = c10_factura ',
+			'  AND p28_dividendo = 1 ',
+			'  AND p28_tipo_ret  = "F" ',
+			'  AND p27_compania  = p28_compania ',
+			'  AND p27_localidad = p28_localidad ',
+			'  AND p27_num_ret   = p28_num_ret ',
+			'  AND p27_estado    = "A") porc_fte, ',
+		  ' (SELECT SUM(p28_valor_ret) ',
+			'FROM cxpt028, cxpt027 ',
+			'WHERE p28_compania  = c10_compania ',
+			'  AND p28_localidad = c10_localidad ',
+			'  AND p28_codprov   = c10_codprov ',
+			'  AND p28_tipo_doc  = "FA" ',
+			'  AND p28_num_doc   = c10_factura ',
+			'  AND p28_dividendo = 1 ',
+			'  AND p28_tipo_ret  = "F" ',
+			'  AND p27_compania  = p28_compania ',
+			'  AND p27_localidad = p28_localidad ',
+			'  AND p27_num_ret   = p28_num_ret ',
+			'  AND p27_estado    = "A") val_ret_fte ',
 	      ' FROM ordt010, ordt001, gent034, cxpt001 ',
 	      ' WHERE c10_compania   = ', vg_codcia, 
 	        ' AND c10_localidad  = ', vg_codloc,
@@ -631,10 +714,9 @@ END FUNCTION
 
 
 FUNCTION full_query(query)
-DEFINE query		CHAR(1100)
+DEFINE query		CHAR(4000)
 DEFINE order_clause	VARCHAR(150)
-DEFINE i		SMALLINT
-DEFINE j		SMALLINT
+DEFINE i, j		SMALLINT
 
 LET order_clause = ' ORDER BY '
 FOR i = 1 TO num_ord
@@ -674,7 +756,11 @@ DEFINE r_det		RECORD
  				valor_dscto	LIKE ordt010.c10_tot_dscto,
  				subtotal	DECIMAL(14,2),
  				valor_impto	LIKE ordt010.c10_tot_impto,
- 				valor_neto	LIKE ordt010.c10_tot_compra
+ 				valor_neto	LIKE ordt010.c10_tot_compra,
+				porc_iva	LIKE cxpt028.p28_porcentaje,
+				val_ret_iva	LIKE cxpt028.p28_valor_ret,
+				porc_fte	LIKE cxpt028.p28_porcentaje,
+				val_ret_fte	LIKE cxpt028.p28_valor_ret
 			END RECORD
 DEFINE r_b10		RECORD LIKE ctbt010.*
 DEFINE usuario		VARCHAR(19,15)
@@ -829,7 +915,11 @@ DEFINE r_prov		RECORD
 				valor_dscto	LIKE ordt010.c10_tot_dscto,
 				subtotal	DECIMAL(14,2),
 				valor_impto	LIKE ordt010.c10_tot_impto,
-				valor_neto	LIKE ordt010.c10_tot_compra
+				valor_neto	LIKE ordt010.c10_tot_compra,
+				porc_iva	LIKE cxpt028.p28_porcentaje,
+				val_ret_iva	LIKE cxpt028.p28_valor_ret,
+				porc_fte	LIKE cxpt028.p28_porcentaje,
+				val_ret_fte	LIKE cxpt028.p28_valor_ret
 			END RECORD
 DEFINE r_b10		RECORD LIKE ctbt010.*
 DEFINE usuario		VARCHAR(19,15)

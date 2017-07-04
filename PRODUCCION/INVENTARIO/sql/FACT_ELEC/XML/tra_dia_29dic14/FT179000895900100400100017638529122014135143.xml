@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176385</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>29/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176385</guiaRemision>
+<razonSocialComprador>GOBIERNO AUTONOMO DESCENTRALIZADO MUNICIPAL FRANCISCO DE ORELLANA</razonSocialComprador>
+<identificacionComprador>1560000780001</identificacionComprador>
+<totalSinImpuestos>11172.75</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>11172.75</baseImponible>
+<valor>1340.73</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>12513.48</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>69372</codigoPrincipal>
+<descripcion>BOMBA CENTRIF MULTIETAPA C-MOTOR CR15-9 20 HP  220/440V./60C/3F  VERTICAL  (96503826)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>6830.96</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>6830.96</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6830.96</baseImponible>
+<valor>819.72</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>20669</codigoPrincipal>
+<descripcion>MOTOR ELEC SUMERG DE 4" (2243022604) SJF-3021 DE 3HP 230-1-60</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>440.27</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>440.27</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>440.27</baseImponible>
+<valor>52.83</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>33562</codigoPrincipal>
+<descripcion>CAJA TERMICA COMPLETA GMC 32 DE 12 A 18 AMPERIOS P/ 5HP 220-3-60</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>145.90</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>145.90</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="LG IND"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>145.90</baseImponible>
+<valor>17.51</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>19583</codigoPrincipal>
+<descripcion>CAJA DE CONTROL (2823028110) CJ-3021 P/ 3HP 230/60/1F</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>165.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>165.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>165.00</baseImponible>
+<valor>19.80</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>44283</codigoPrincipal>
+<descripcion>BOMBA CENTRIF STANDARD C-MOTOR DF-7-1 3HP 1 ETP. 1-1/2 x 1" 110/220-1-60 3500RPM</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>552.56</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1657.68</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MARK G"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1657.68</baseImponible>
+<valor>198.92</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>33566</codigoPrincipal>
+<descripcion>CAJA TERMICA COMPLETA GMC 50 DE 28 A 40 AMPERIOS P/ 10HP 220-3-60</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>212.14</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>212.14</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="LG IND"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>212.14</baseImponible>
+<valor>25.46</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>33573</codigoPrincipal>
+<descripcion>CAJA TERMICA COMPLETA GMC 40 DE 18 A 26 AMPERIOS P/ 7.5 HP</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>243.10</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>243.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="LG IND"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>243.10</baseImponible>
+<valor>29.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>91935</codigoPrincipal>
+<descripcion>BOMBA CENTRIF MULTIETAPA C-MOTOR HU3P-10-1 10HP 3ETP. 1-1/2" x 1" 3500 RPM 220/440/60/1F</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1477.70</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1477.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MARK G"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1477.70</baseImponible>
+<valor>177.32</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">   gadmunicipalfranciscodeorellana@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">062999060</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">025418</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268835</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268835</guiaRemision>
+<razonSocialComprador>RAMOS TUQUERRES JOSE RICARDO</razonSocialComprador>
+<identificacionComprador>1003033923001</identificacionComprador>
+<totalSinImpuestos>276.24</totalSinImpuestos>
+<totalDescuento>48.76</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>276.24</baseImponible>
+<valor>33.15</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>309.39</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>101349</codigoPrincipal>
+<descripcion>ANCLAJE EPOXICO 08605 PURE 50 PLUS CARTUCHO DE 21 oz.</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>34.25</precioUnitario>
+<descuento>30.83</descuento>
+<precioTotalSinImpuesto>174.67</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>174.67</baseImponible>
+<valor>20.96</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70297</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 08847 SDS-MAX DE 1-1/4 x 23"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>119.50</precioUnitario>
+<descuento>17.93</descuento>
+<precioTotalSinImpuesto>101.57</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>101.57</baseImponible>
+<valor>12.19</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">perforacionesanclajes1@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">6008413</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">049758</campoAdicional>
+</infoAdicional>
+</factura>

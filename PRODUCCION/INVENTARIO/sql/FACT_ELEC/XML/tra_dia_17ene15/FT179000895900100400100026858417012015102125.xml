@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268584</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268584</guiaRemision>
+<razonSocialComprador>COMERCIAL IMPORTADORA VILLAYALA CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1790389944001</identificacionComprador>
+<totalSinImpuestos>522.33</totalSinImpuestos>
+<totalDescuento>68.86</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>522.33</baseImponible>
+<valor>62.68</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>585.01</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>2687</codigoPrincipal>
+<descripcion>CODO PVC DESAGUE DE 50mm. x 90ø ISO E/C</descripcion>
+<cantidad>50.00</cantidad>
+<precioUnitario>1.11</precioUnitario>
+<descuento>7.22</descuento>
+<precioTotalSinImpuesto>48.28</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>48.28</baseImponible>
+<valor>5.79</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2668</codigoPrincipal>
+<descripcion>CODO PVC DESAGUE DE 50mm. x 45 GRAD  ISO E/C</descripcion>
+<cantidad>30.00</cantidad>
+<precioUnitario>1.17</precioUnitario>
+<descuento>4.56</descuento>
+<precioTotalSinImpuesto>30.54</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>30.54</baseImponible>
+<valor>3.66</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>8330</codigoPrincipal>
+<descripcion>LLAVE DE MANGUERA E436.04 BR DE 1/2" PESADA MANIJA EN T</descripcion>
+<cantidad>12.00</cantidad>
+<precioUnitario>10.73</precioUnitario>
+<descuento>12.88</descuento>
+<precioTotalSinImpuesto>115.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>115.88</baseImponible>
+<valor>13.91</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>8382</codigoPrincipal>
+<descripcion>LLAVE DE PASO E471.04 DE 1/2" BRONCE MANIJA REDONDA</descripcion>
+<cantidad>12.00</cantidad>
+<precioUnitario>9.74</precioUnitario>
+<descuento>11.69</descuento>
+<precioTotalSinImpuesto>105.19</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>105.19</baseImponible>
+<valor>12.62</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50368</codigoPrincipal>
+<descripcion>TAPON POLIPROPILENO MACHO DE 1/2" MACHO (AGUA CALIENTE)</descripcion>
+<cantidad>30.00</cantidad>
+<precioUnitario>0.34</precioUnitario>
+<descuento>1.33</descuento>
+<precioTotalSinImpuesto>8.87</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.87</baseImponible>
+<valor>1.06</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21626</codigoPrincipal>
+<descripcion>SOLDADURA DE ESTANIO 3mm. C/FUNDENTE 50/50 (ROLLO 0.25 KG.)</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>4.28</precioUnitario>
+<descuento>2.14</descuento>
+<precioTotalSinImpuesto>19.26</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HERCUL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>19.26</baseImponible>
+<valor>2.31</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50452</codigoPrincipal>
+<descripcion>TUBO POLIPROPILENO DE 3/4" x 6 m. (AGUA CALIENTE)</descripcion>
+<cantidad>15.00</cantidad>
+<precioUnitario>13.89</precioUnitario>
+<descuento>27.09</descuento>
+<precioTotalSinImpuesto>181.26</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>181.26</baseImponible>
+<valor>21.75</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50292</codigoPrincipal>
+<descripcion>CODO POLIPROPILENO DE 3/4" x 90 GRAD</descripcion>
+<cantidad>25.00</cantidad>
+<precioUnitario>0.60</precioUnitario>
+<descuento>1.95</descuento>
+<precioTotalSinImpuesto>13.05</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>13.05</baseImponible>
+<valor>1.57</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">villacres_freddy@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2455619</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">011636</campoAdicional>
+<campoAdicional nombre="Observaciones">PEDIDO ADJUNTO</campoAdicional>
+</infoAdicional>
+</factura>

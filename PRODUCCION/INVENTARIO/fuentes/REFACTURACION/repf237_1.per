@@ -1,0 +1,51 @@
+DATABASE aceros
+SCREEN
+{
+
+                                                             [c010] de [c011]
+
+                            PROCESO DE REFACTURACION
+                            ----------------------- 
+
+       Factura: [c0][c000           ]   Nueva Factura: [c1][c001           ]
+       Cliente: [c007  ] [c008                                              ]
+
+ Nuevo Cliente: [c002  ] [c003                                              ]
+
+        Motivo: [c004                                                       ]
+
+ Orden Trabajo: [c009  ]
+
+
+       Usuario: [c005      ]          Fecha de Ingreso: [c006               ]
+
+}
+TABLES
+rept019
+rept088
+ATTRIBUTES
+c0   = rept088.r88_cod_fact, NOENTRY, UPSHIFT, REVERSE;
+c000 = rept088.r88_num_fact, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Digite el Número de Factura que desea Refacturar.';
+c1   = rept088.r88_cod_fact_nue, NOENTRY, UPSHIFT;
+c001 = rept088.r88_num_fact_nue, NOENTRY, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c007 = rept019.r19_codcli, NOENTRY, UPSHIFT, REVERSE;
+c008 = rept019.r19_nomcli, NOENTRY, UPSHIFT, REVERSE;
+c002 = rept088.r88_codcli_nue, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Ingrese sólo el Código Cliente si desea cambiar Razón Social.';
+c003 = rept088.r88_nomcli_nue, AUTONEXT, UPSHIFT;
+c004 = rept088.r88_motivo_refact, AUTONEXT, UPSHIFT, REVERSE, SCROLL,
+	COMMENTS = 'Digite el motivo porque se esta refacturando.';
+c009 = rept088.r88_ord_trabajo, NOENTRY, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Número Orden de Trabajo Refacturada.';
+c005 = rept088.r88_usuario, NOENTRY, UPSHIFT, REVERSE;
+c006 = rept088.r88_fecing, NOENTRY, UPSHIFT, REVERSE;
+c010 = FORMONLY.vm_row_current TYPE SMALLINT, NOENTRY, REVERSE, UPSHIFT;
+c011 = FORMONLY.vm_num_rows TYPE SMALLINT, NOENTRY, REVERSE, UPSHIFT;
+END
+KEYS
+F5 = 'Factura Origen'

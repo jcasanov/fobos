@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176291</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176291</guiaRemision>
+<razonSocialComprador>ORDEN HOSPITALARIA DE SAN JUAN DE DIOS EN EL ECUADOR</razonSocialComprador>
+<identificacionComprador>1791274210001</identificacionComprador>
+<totalSinImpuestos>332.30</totalSinImpuestos>
+<totalDescuento>36.56</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>332.30</baseImponible>
+<valor>39.88</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>372.18</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>93515</codigoPrincipal>
+<descripcion>SELLO MECANICO P/ BOMBA CR-10/15/20   (96511844)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>317.21</precioUnitario>
+<descuento>31.72</descuento>
+<precioTotalSinImpuesto>285.49</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>285.49</baseImponible>
+<valor>34.26</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>95509</codigoPrincipal>
+<descripcion>COJINETE 6308 - 2RS C3</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>32.50</precioUnitario>
+<descuento>3.25</descuento>
+<precioTotalSinImpuesto>29.25</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>29.25</baseImponible>
+<valor>3.51</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96815</codigoPrincipal>
+<descripcion>COJINETE 6206-2RS P/ MOTOR WEG</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>16.25</precioUnitario>
+<descuento>1.30</descuento>
+<precioTotalSinImpuesto>14.95</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>14.95</baseImponible>
+<valor>1.79</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97467</codigoPrincipal>
+<descripcion>TEFLON EN ROLLO 0.07 x 12 mm. x 10 m.</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>0.58</precioUnitario>
+<descuento>0.29</descuento>
+<precioTotalSinImpuesto>2.61</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.61</baseImponible>
+<valor>0.31</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">director.ejecutivo@crsjd.org</campoAdicional>
+<campoAdicional nombre="telefono-movil">2280542</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">008581</campoAdicional>
+</infoAdicional>
+</factura>

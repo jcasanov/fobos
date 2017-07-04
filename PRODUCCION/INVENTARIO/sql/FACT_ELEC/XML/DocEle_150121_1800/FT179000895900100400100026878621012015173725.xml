@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268786</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268786</guiaRemision>
+<razonSocialComprador>HIDROTHERM INGENIERIA Y THERMOHIDRAULICA CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1792054206001</identificacionComprador>
+<totalSinImpuestos>2840.65</totalSinImpuestos>
+<totalDescuento>434.96</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>2840.65</baseImponible>
+<valor>340.88</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>3181.53</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>94708</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 4" 90FA5S4-PE P/ 5HP 90 GPM (93619012) 12 ETAPAS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>623.01</precioUnitario>
+<descuento>93.45</descuento>
+<precioTotalSinImpuesto>529.56</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>529.56</baseImponible>
+<valor>63.55</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96074</codigoPrincipal>
+<descripcion>MOTOR ELEC SUMERG DE 4" (2343178602) 4C3F DE 5HP 230-3-60</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>843.84</precioUnitario>
+<descuento>101.26</descuento>
+<precioTotalSinImpuesto>742.58</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>742.58</baseImponible>
+<valor>89.11</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102255</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 4" 60FA7S4-PE P/7.5HP 60GPM (93616017)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>773.34</precioUnitario>
+<descuento>116.00</descuento>
+<precioTotalSinImpuesto>657.34</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>657.34</baseImponible>
+<valor>78.88</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>93629</codigoPrincipal>
+<descripcion>MOTOR ELEC SUMERG DE 4" 2343188602 4C3F DE 7.5 HP/230V/60/3F</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1035.42</precioUnitario>
+<descuento>124.25</descuento>
+<precioTotalSinImpuesto>911.17</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>911.17</baseImponible>
+<valor>109.34</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">hidro-contabilidad@yahoo.es</campoAdicional>
+<campoAdicional nombre="telefono-movil">2418080</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">040101</campoAdicional>
+</infoAdicional>
+</factura>

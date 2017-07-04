@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268772</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268772</guiaRemision>
+<razonSocialComprador>ABAD SARMIENTO RENE ANTONIO</razonSocialComprador>
+<identificacionComprador>0101288223001</identificacionComprador>
+<totalSinImpuestos>3481.78</totalSinImpuestos>
+<totalDescuento>1307.53</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>3481.78</baseImponible>
+<valor>417.81</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>3899.59</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>20662</codigoPrincipal>
+<descripcion>MOTOR ELEC SUMERG DE 4" (2243019204S) SJF-2021 DE 2HP 230-1-60</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>457.43</precioUnitario>
+<descuento>137.23</descuento>
+<precioTotalSinImpuesto>320.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>320.20</baseImponible>
+<valor>38.42</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>20663</codigoPrincipal>
+<descripcion>MOTOR ELEC SUMERG DE 4" (2343159204S) SJF-2023 DE 2HP 230-3-60</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>399.46</precioUnitario>
+<descuento>119.84</descuento>
+<precioTotalSinImpuesto>279.62</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>279.62</baseImponible>
+<valor>33.55</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>44289</codigoPrincipal>
+<descripcion>BOMBA CENTRIF STANDARD C-MOTOR DS-9-3 7.5HP 2 x 1-1/2" 220/440/3/60</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>889.07</precioUnitario>
+<descuento>533.44</descuento>
+<precioTotalSinImpuesto>1244.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MARK G"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1244.70</baseImponible>
+<valor>149.36</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>61793</codigoPrincipal>
+<descripcion>TANQUE DE PRESION FIBRA DE VIDRIO WM-9/WM0120 ENTREGA DE 8.9 GLS POR CICLO DE 30/50 PSI</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>448.86</precioUnitario>
+<descuento>215.45</descuento>
+<precioTotalSinImpuesto>682.27</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="WELL M"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>682.27</baseImponible>
+<valor>81.87</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>61791</codigoPrincipal>
+<descripcion>TANQUE DE PRESION FIBRA DE VIDRIO WM-6/WM0075 ENTREGA DE 5.9 GLS POR CICLO DE 30/50 PSI</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>286.13</precioUnitario>
+<descuento>137.34</descuento>
+<precioTotalSinImpuesto>434.92</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="WELL M"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>434.92</baseImponible>
+<valor>52.19</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>61796</codigoPrincipal>
+<descripcion>TANQUE DE PRESION FIBRA DE VIDRIO WM-20WB/WM0235 ENTREGA DE 18.6 GLS POR CICLO DE 30/50 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>684.30</precioUnitario>
+<descuento>164.23</descuento>
+<precioTotalSinImpuesto>520.07</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="WELL M"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>520.07</baseImponible>
+<valor>62.41</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">cimaproveedores@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">072884560</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">017756</campoAdicional>
+</infoAdicional>
+</factura>

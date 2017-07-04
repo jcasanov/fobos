@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268128</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>06/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268128</guiaRemision>
+<razonSocialComprador>DISTRIBUIDORA DE MATERIALES DE CONSTRUCCION DISMACONCOBRE CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1792238447001</identificacionComprador>
+<totalSinImpuestos>2433.63</totalSinImpuestos>
+<totalDescuento>331.85</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>2433.63</baseImponible>
+<valor>292.04</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>2725.67</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>44304</codigoPrincipal>
+<descripcion>COQUILLA LANA DE VIDRIO C-ALUMINIO 1-1/2" x 1" x 0.90 m.</descripcion>
+<cantidad>69.00</cantidad>
+<precioUnitario>6.86</precioUnitario>
+<descuento>56.80</descuento>
+<precioTotalSinImpuesto>416.54</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDIFI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>416.54</baseImponible>
+<valor>49.98</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>44302</codigoPrincipal>
+<descripcion>COQUILLA LANA DE VIDRIO C-ALUMINIO 1-1/4" x 1" x 0.90 m.</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>6.30</precioUnitario>
+<descuento>3.02</descuento>
+<precioTotalSinImpuesto>22.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDIFI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>22.18</baseImponible>
+<valor>2.66</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>44300</codigoPrincipal>
+<descripcion>COQUILLA LANA DE VIDRIO C-ALUMINIO 1" x 1" x 0.90 m.</descripcion>
+<cantidad>126.00</cantidad>
+<precioUnitario>5.60</precioUnitario>
+<descuento>84.67</descuento>
+<precioTotalSinImpuesto>620.93</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDIFI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>620.93</baseImponible>
+<valor>74.51</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>44296</codigoPrincipal>
+<descripcion>COQUILLA LANA DE VIDRIO C-ALUMINIO 3/4" x 1" x 0.90 m.</descripcion>
+<cantidad>80.00</cantidad>
+<precioUnitario>4.88</precioUnitario>
+<descuento>46.85</descuento>
+<precioTotalSinImpuesto>343.55</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDIFI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>343.55</baseImponible>
+<valor>41.23</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>44295</codigoPrincipal>
+<descripcion>COQUILLA LANA DE VIDRIO C-ALUMINIO 1/2" x 1" x 0.90 m.</descripcion>
+<cantidad>254.00</cantidad>
+<precioUnitario>4.61</precioUnitario>
+<descuento>140.51</descuento>
+<precioTotalSinImpuesto>1030.43</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDIFI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1030.43</baseImponible>
+<valor>123.65</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">dismacon@netlife.ec</campoAdicional>
+<campoAdicional nombre="Email">entas4@dismacon.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2228315</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">052810</campoAdicional>
+</infoAdicional>
+</factura>

@@ -32,9 +32,9 @@ c0  = talt023.t23_moneda, REVERSE, UPSHIFT, AUTONEXT,
 c1  = FORMONLY.nom_mon, NOENTRY;
 c2  = FORMONLY.fecha_desde TYPE DATE, REQUIRED, REVERSE, FORMAT = 'dd-mm-yyyy';
 c3  = FORMONLY.fecha_hasta TYPE DATE, REQUIRED, REVERSE, FORMAT = 'dd-mm-yyyy';
-c   = talt023.t23_tipo_ot, REVERSE, UPSHIFT, AUTONEXT,
+c   = FORMONLY.t23_tipo_ot, UPSHIFT, AUTONEXT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2'; 
-c5  = FORMONLY.nom_tipo_ot, REVERSE, NOENTRY;
+c5  = FORMONLY.nom_tipo_ot, NOENTRY, UPSHIFT;
 
 -- UBICADO POR NPC EL 14-08-2002 para solicitar el estado en la forma
 c6  = talt023.t23_estado, REVERSE, UPSHIFT, AUTONEXT,

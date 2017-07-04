@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000018706</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>AMAGASI DEL INCA</dirEstablecimiento>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<razonSocialComprador>PRIETO BRICENO LIVIO ANTOLIN</razonSocialComprador>
+<identificacionComprador>1100555828   </identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000167123</numDocModificado>
+<fechaEmisionDocSustento>24/06/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>10.92</totalSinImpuestos>
+<valorModificacion>11.01</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>9.83</baseImponible>
+<valor>1.18</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 259202 LIVIO PRIETO REC L.BRAVO  FC</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>2254</codigoInterno>
+<descripcion>CODO NEGRO CLASE 150 DE 3/4" x 90°</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>1.53</precioUnitario>
+<descuento>0.46</descuento>
+<precioTotalSinImpuesto>4.13</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="HITACHI" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.13</baseImponible>
+<valor>0.50</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>4724</codigoInterno>
+<descripcion>TEE NEGRA CLASE 150 DE 3/4"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>2.11</precioUnitario>
+<descuento>0.63</descuento>
+<precioTotalSinImpuesto>5.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="HITACHI" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.70</baseImponible>
+<valor>0.68</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+<campoAdicional nombre="telefono-movil">2815248</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">29881</campoAdicional>
+</infoAdicional>
+</notaCredito>

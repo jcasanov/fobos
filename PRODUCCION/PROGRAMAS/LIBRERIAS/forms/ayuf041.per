@@ -1,0 +1,31 @@
+DATABASE aceros
+
+SCREEN
+{
+ PLAZOS DE CREDITO
+----------------------------------------------
+ Código    Monto Inicial    Monto Final
+----------------------------------------------
+[c01   ] [c002           ] [c003           ] 
+[c01   ] [c002           ] [c003           ]
+[c01   ] [c002           ] [c003           ]
+[c01   ] [c002           ] [c003           ]
+[c01   ] [c002           ] [c003           ]
+[c01   ] [c002           ] [c003           ]
+[c01   ] [c002           ] [c003           ]
+[c01   ] [c002           ] [c003           ]
+[c01   ] [c002           ] [c003           ]
+[c01   ] [c002           ] [c003           ]
+}
+
+TABLES
+cxct007
+
+ATTRIBUTES
+c01 = z07_serial;
+c002 = z07_monto_ini;
+c003 = z07_monto_fin;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_cred[10](z07_serial, z07_monto_ini, z07_monto_fin)

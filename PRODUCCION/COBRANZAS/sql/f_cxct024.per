@@ -1,0 +1,47 @@
+database acero_gm
+screen size 24 by 80
+{
+z24_compania       [f000       ]
+z24_localidad      [f001  ]
+z24_numero_sol     [f002       ]
+z24_areaneg        [f003  ]
+z24_linea          [f004 ]
+z24_codcli         [f005       ]
+z24_tipo           [a]
+z24_estado         [b]
+z24_referencia     [f006                               ]
+z24_moneda         [a0]
+z24_paridad        [f007              ]
+z24_tasa_mora      [f008  ]
+z24_total_cap      [f009          ]
+z24_total_int      [f010          ]
+z24_total_mora     [f011         ]
+z24_cobrador       [f012  ]
+z24_subtipo        [f013  ]
+z24_usuario        [f014      ]
+z24_fecing         [f015               ]
+}
+end
+tables
+cxct024
+attributes
+f000 = cxct024.z24_compania;
+f001 = cxct024.z24_localidad;
+f002 = cxct024.z24_numero_sol;
+f003 = cxct024.z24_areaneg;
+f004 = cxct024.z24_linea;
+f005 = cxct024.z24_codcli;
+a = cxct024.z24_tipo;
+b = cxct024.z24_estado;
+f006 = cxct024.z24_referencia;
+a0 = cxct024.z24_moneda;
+f007 = cxct024.z24_paridad;
+f008 = cxct024.z24_tasa_mora;
+f009 = cxct024.z24_total_cap;
+f010 = cxct024.z24_total_int;
+f011 = cxct024.z24_total_mora;
+f012 = cxct024.z24_cobrador;
+f013 = cxct024.z24_subtipo;
+f014 = cxct024.z24_usuario;
+f015 = cxct024.z24_fecing;
+end

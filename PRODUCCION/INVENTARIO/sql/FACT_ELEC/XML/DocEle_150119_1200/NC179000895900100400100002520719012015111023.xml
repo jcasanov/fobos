@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025207</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>LOPEZ VARGAS MILTON EDUARDO</razonSocialComprador>
+<identificacionComprador>1801667807001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000174906</numDocModificado>
+<fechaEmisionDocSustento>27/11/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>174.42</totalSinImpuestos>
+<valorModificacion>195.35</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>174.42</baseImponible>
+<valor>20.93</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 266565 MILTON LOPEZ WLUDEN Y VOLV FA</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>102435</codigoInterno>
+<descripcion>BROCA PARA CEMENTO 48-89-2726 DE OXIDO NEGRO DE  5/16" THUNDERBOLT</descripcion>
+<cantidad>12.00</cantidad>
+<precioUnitario>2.99</precioUnitario>
+<descuento>3.59</descuento>
+<precioTotalSinImpuesto>32.29</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>32.29</baseImponible>
+<valor>3.87</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>102435</codigoInterno>
+<descripcion>BROCA PARA CEMENTO 48-89-2726 DE OXIDO NEGRO DE  5/16" THUNDERBOLT</descripcion>
+<cantidad>8.00</cantidad>
+<precioUnitario>2.99</precioUnitario>
+<descuento>2.39</descuento>
+<precioTotalSinImpuesto>21.53</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>21.53</baseImponible>
+<valor>2.58</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>102439</codigoInterno>
+<descripcion>BROCA PARA CEMENTO 48-89-2730 DE OXIDO NEGRO DE  3/8" THUNDERBOLT</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>4.18</precioUnitario>
+<descuento>4.18</descuento>
+<precioTotalSinImpuesto>37.62</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>37.62</baseImponible>
+<valor>4.51</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>102445</codigoInterno>
+<descripcion>BROCA PARA CEMENTO 48-89-2736 DE OXIDO NEGRO DE 15/32" THUNDERBOLT</descripcion>
+<cantidad>8.00</cantidad>
+<precioUnitario>9.22</precioUnitario>
+<descuento>7.38</descuento>
+<precioTotalSinImpuesto>66.38</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>66.38</baseImponible>
+<valor>7.97</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>102445</codigoInterno>
+<descripcion>BROCA PARA CEMENTO 48-89-2736 DE OXIDO NEGRO DE 15/32" THUNDERBOLT</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>9.22</precioUnitario>
+<descuento>1.84</descuento>
+<precioTotalSinImpuesto>16.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>16.60</baseImponible>
+<valor>1.99</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">carroceriasml@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">032442324</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">62902</campoAdicional>
+</infoAdicional>
+</notaCredito>

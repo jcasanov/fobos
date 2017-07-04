@@ -1,0 +1,31 @@
+DATABASE aceros
+
+SCREEN
+{
+  MONEDAS
+ --------------------------------
+  Código Nombre           Símbolo
+ --------------------------------
+ [c001] [c002           ][c003  ]
+ [c001] [c002           ][c003  ]
+ [c001] [c002           ][c003  ]
+ [c001] [c002           ][c003  ]
+ [c001] [c002           ][c003  ]
+ [c001] [c002           ][c003  ]
+ [c001] [c002           ][c003  ]
+ [c001] [c002           ][c003  ]
+ [c001] [c002           ][c003  ]
+ [c001] [c002           ][c003  ]
+}
+
+TABLES
+gent013
+
+ATTRIBUTES
+c001 = g13_moneda,REVERSE;
+c002 = g13_nombre,REVERSE;
+c003 = g13_simbolo,REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_mon[10](g13_moneda, g13_nombre, g13_simbolo)

@@ -271,6 +271,7 @@ FUNCTION preparar_query(tipo)
 DEFINE tipo		CHAR(1)
 DEFINE r_n32		RECORD LIKE rolt032.*
 DEFINE r_n36		RECORD LIKE rolt036.*
+DEFINE r_n42		RECORD LIKE rolt042.*
 DEFINE r_n48		RECORD LIKE rolt048.*
 DEFINE nombres		LIKE rolt030.n30_nombres
 DEFINE query		CHAR(800)
@@ -299,6 +300,12 @@ IF rm_n32.n32_cod_liqrol = 'DT' OR rm_n32.n32_cod_liqrol = 'DC' THEN
 		LET liq   = 'el décimo cuarto.'
 	END IF
 END IF
+IF rm_n32.n32_cod_liqrol = 'UT' THEN
+	LET tabla = 'rolt042'
+	LET pre   = 'n42'
+	LET codl  = '_proceso'
+	LET liq   = ' las utilidades.'
+END IF
 IF rm_n32.n32_cod_liqrol = 'JU' THEN
 	LET tabla = 'rolt048'
 	LET pre   = 'n48'
@@ -324,7 +331,7 @@ LET query = 'SELECT ', tabla, '.*, n30_nombres FROM ', tabla, ', rolt030 ',
 		'   AND ', pre, codl, ' = "', rm_n32.n32_cod_liqrol, '"',
 		'   AND ', pre, '_fecha_ini  = "', rm_n32.n32_fecha_ini, '"',
 		'   AND ', pre, '_fecha_fin  = "', rm_n32.n32_fecha_fin, '"',
-		'   AND ', pre, '_estado     <> "E" ',
+		--'   AND ', pre, '_estado     <> "E" ',
 		expr_tipo CLIPPED,
 		'   AND ', pre, '_compania   = n30_compania ',
 		'   AND ', pre, '_cod_trab   = n30_cod_trab ',
@@ -341,6 +348,11 @@ IF rm_n32.n32_cod_liqrol = 'DT' OR rm_n32.n32_cod_liqrol = 'DC' THEN
 	OPEN q_n36
 	FETCH q_n36 INTO r_n36.*, nombres
 END IF
+IF rm_n32.n32_cod_liqrol = 'UT' THEN
+	DECLARE q_n42 CURSOR FOR reporte
+	OPEN q_n42
+	FETCH q_n42 INTO r_n42.*, nombres
+END IF
 IF rm_n32.n32_cod_liqrol = 'JU' THEN
 	DECLARE q_n48 CURSOR FOR reporte
 	OPEN q_n48
@@ -355,6 +367,10 @@ IF STATUS = NOTFOUND THEN
 	IF rm_n32.n32_cod_liqrol = 'DT' OR rm_n32.n32_cod_liqrol = 'DC' THEN
 		CLOSE q_n36
 		FREE q_n36
+	END IF
+	IF rm_n32.n32_cod_liqrol = 'UT' THEN
+		CLOSE q_n42
+		FREE q_n42
 	END IF
 	IF rm_n32.n32_cod_liqrol = 'JU' THEN
 		CLOSE q_n48

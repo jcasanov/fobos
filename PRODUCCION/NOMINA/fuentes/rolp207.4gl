@@ -225,7 +225,6 @@ MENU 'OPCIONES'
 		HIDE OPTION 'Retroceder'
 		HIDE OPTION 'Modificar'
 		HIDE OPTION 'Cerrar'
-		HIDE OPTION 'Reabrir'
 		HIDE OPTION 'Imprimir'
 		HIDE OPTION 'Recibo de Pago'
 		HIDE OPTION 'Informe Min.'
@@ -251,19 +250,11 @@ MENU 'OPCIONES'
 		END IF
        	COMMAND KEY('M') 'Modificar' 'Modificar registro corriente. '
 		CALL control_modificacion()
-      	COMMAND KEY('X') 'Reabrir' 'Reabre el Decimo Tercero. '
-		CALL control_reabrir()
-		IF rm_n05.n05_proceso IS NULL THEN
-			SHOW OPTION 'Modificar'
-			SHOW OPTION 'Cerrar'
-			HIDE OPTION 'Reabrir'
-		END IF
       	COMMAND KEY('U') 'Cerrar' 'Cierra el rol activo. '
 		CALL control_cerrar()
 		IF rm_n05.n05_proceso IS NULL THEN
 			HIDE OPTION 'Modificar'
 			HIDE OPTION 'Cerrar'
-			SHOW OPTION 'Reabrir'
 		END IF
 	COMMAND KEY('C') 'Consultar' 'Consultar un registro. '
 		CALL control_consulta()
@@ -273,11 +264,11 @@ MENU 'OPCIONES'
 			IF vm_num_rows = 0 THEN
 				HIDE OPTION 'Modificar'
 				HIDE OPTION 'Cerrar'
-				HIDE OPTION 'Reabrir'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
 			SHOW OPTION 'Modificar'
+			SHOW OPTION 'Cerrar'
 		END IF
 		IF vm_row_current <= 1 THEN
                         HIDE OPTION 'Retroceder'
@@ -285,11 +276,9 @@ MENU 'OPCIONES'
 		IF rm_par.n36_estado = 'A' THEN
 			SHOW OPTION 'Modificar'
 			SHOW OPTION 'Cerrar'
-			HIDE OPTION 'Reabrir'
 		ELSE
 			HIDE OPTION 'Modificar'
 			HIDE OPTION 'Cerrar'
-			SHOW OPTION 'Reabrir'
 		END IF
 		IF vm_num_rows > 0 THEN
 			SHOW OPTION 'Imprimir'
@@ -321,11 +310,9 @@ MENU 'OPCIONES'
 		IF rm_par.n36_estado = 'A' THEN
 			SHOW OPTION 'Modificar'
 			SHOW OPTION 'Cerrar'
-			HIDE OPTION 'Reabrir'
 		ELSE
 			HIDE OPTION 'Modificar'
 			HIDE OPTION 'Cerrar'
-			SHOW OPTION 'Reabrir'
 		END IF
 		IF vm_num_rows > 0 THEN
 			SHOW OPTION 'Detalle'
@@ -344,11 +331,9 @@ MENU 'OPCIONES'
 		IF rm_par.n36_estado = 'A' THEN
 			SHOW OPTION 'Modificar'
 			SHOW OPTION 'Cerrar'
-			HIDE OPTION 'Reabrir'
 		ELSE
 			HIDE OPTION 'Modificar'
 			HIDE OPTION 'Cerrar'
-			SHOW OPTION 'Reabrir'
 		END IF
 		IF vm_num_rows > 0 THEN
 			SHOW OPTION 'Detalle'
@@ -1210,204 +1195,6 @@ END FUNCTION
 
 
 
-FUNCTION control_reabrir()
-DEFINE r_n36		RECORD LIKE rolt036.*
-DEFINE r_n37		RECORD LIKE rolt037.*
-DEFINE r_n45		RECORD LIKE rolt045.*
-DEFINE r_n53		RECORD LIKE rolt053.*
-DEFINE fec_ult		LIKE rolt036.n36_fecha_fin
-DEFINE resp		VARCHAR(6)
-DEFINE neg		INTEGER
-DEFINE estado 		CHAR(1)
-DEFINE query		VARCHAR(500)
-
-IF vm_num_rows = 0 THEN
-	CALL fl_mensaje_consultar_primero()
-	RETURN
-END IF
-CALL mostrar_registro(vm_row_current)
-
-IF rm_par.n36_estado = 'A' THEN
-	CALL fl_mostrar_mensaje('Este rol ya ha sido activado.', 'stop')
-	RETURN
-END IF
-
-INITIALIZE rm_n05.* TO NULL 
-SELECT * INTO rm_n05.* FROM rolt005
-	WHERE n05_compania = vg_codcia
-	  AND n05_activo   = 'S' 
-
-IF rm_n05.n05_compania IS NULL AND rm_n05.n05_proceso <> vm_proceso THEN
-	CALL fl_mostrar_mensaje('Existe un proceso de rol activo, por lo que no se puede reabrir el décimo tercero.', 'exclamation')
-	RETURN
-END IF
-
-LET fec_ult = NULL
-SQL
-	SELECT NVL(MAX(n36_fecha_fin), TODAY)
-		INTO $fec_ult
-		FROM rolt036
-       		WHERE n36_compania = $vg_codcia
-		  AND n36_proceso  = $vm_proceso
-END SQL
-
-IF vm_r_rows[vm_row_current].n36_fecha_fin <> fec_ult THEN
-	CALL fl_mostrar_mensaje('Solo se puede reabrir el último décimo tercero procesado y no contabilizado.', 'exclamation')
-	RETURN
-END IF
-
-INITIALIZE r_n53.* TO NULL
-SELECT * INTO r_n53.*
-	FROM rolt053
-       	WHERE n53_compania   = vg_codcia
-	  AND n53_cod_liqrol = vm_proceso
-	  AND n53_fecha_ini  = vm_r_rows[vm_row_current].n36_fecha_ini
-	  AND n53_fecha_fin  = vm_r_rows[vm_row_current].n36_fecha_fin
-
-IF r_n53.n53_tipo_comp IS NOT NULL THEN
-	CALL fl_mostrar_mensaje('No se puede reabrir este décimo tercero porque esta contabilizado.', 'exclamation')
-	RETURN
-END IF
-
-IF num_args() <> 7 THEN
-	--CALL fl_mensaje_seguro_ejecutar_proceso() RETURNING resp
-	CALL fl_hacer_pregunta('Esta seguro de reabrir el décimo tercero ?', 'No')
-		RETURNING resp
-	IF resp = 'No' THEN
-	        LET int_flag = 0
-	        RETURN
-	END IF
-END IF
-
-SELECT COUNT(n36_cod_trab)
-	INTO neg
-	FROM rolt036
-       	WHERE n36_compania   = vg_codcia
-	  AND n36_proceso    = vm_proceso
-	  AND n36_fecha_ini  = vm_r_rows[vm_row_current].n36_fecha_ini
-	  AND n36_fecha_fin  = vm_r_rows[vm_row_current].n36_fecha_fin
-	  AND n36_valor_neto < 0
-	
-IF neg > 0 THEN
-	CALL fl_mostrar_mensaje('Existen empleados con valor a recibir negativo, por favor corrija y vuelva a intentar.', 'info')
-	RETURN
-END IF
-
-BEGIN WORK
-
-LET query = 'SELECT * FROM rolt036 ',
-        	' WHERE n36_compania  =  ', vg_codcia,
-		'   AND n36_proceso   = "', vm_proceso, '"',
-		'   AND n36_fecha_ini = DATE(', 
-			vm_r_rows[vm_row_current].n36_fecha_ini, ')',
-	  	'   AND n36_fecha_fin = DATE(', 
-			vm_r_rows[vm_row_current].n36_fecha_fin,')'
-IF num_args() = 7 THEN
-	LET query = query, '   AND n36_cod_trab  = ', arg_val(6)
-END IF
-LET query = query, ' FOR UPDATE '
-
-WHENEVER ERROR CONTINUE
-PREPARE reab_cons FROM query
-DECLARE q_reab CURSOR FOR reab_cons 
-OPEN q_reab
-FETCH q_reab INTO r_n36.*
-IF STATUS < 0 THEN
-        ROLLBACK WORK
-        WHENEVER ERROR STOP
-        CALL fl_mensaje_bloqueo_otro_usuario()
-        RETURN
-END IF
-WHENEVER ERROR STOP
-
-LET estado = 'A'
-IF num_args() = 7 AND arg_val(7) = 'F' THEN
-	LET estado = 'F'
-END IF
--- Se actualiza n36_fecing con la fecha en que se cerro el registro
--- para determinar en que quincena se pago
-UPDATE rolt036 SET n36_estado = estado,
-                   n36_fecing = CURRENT
-        WHERE n36_compania = vg_codcia
-	  AND n36_proceso  = vm_proceso
-	  AND n36_fecha_ini = vm_r_rows[vm_row_current].n36_fecha_ini
-	  AND n36_fecha_fin = vm_r_rows[vm_row_current].n36_fecha_fin
-          AND n36_estado    = 'P'
-
-UPDATE rolt005 SET n05_activo = 'S'
-	WHERE n05_compania = vg_codcia
-	  AND n05_proceso  = vm_proceso 
-	  AND n05_activo   = 'N'
-
-DECLARE q_prest CURSOR FOR
-	SELECT * FROM rolt037
-        	WHERE n37_compania = vg_codcia
-		  AND n37_proceso  = vm_proceso
-		  AND n37_fecha_ini = vm_r_rows[vm_row_current].n36_fecha_ini
-		  AND n37_fecha_fin = vm_r_rows[vm_row_current].n36_fecha_fin
-
-FOREACH q_prest INTO r_n37.*
-	IF num_args() = 7 THEN
-		IF arg_val(6) <> r_n37.n37_cod_trab THEN
-			CONTINUE FOREACH
-		END IF
-	END IF
-	IF r_n37.n37_num_prest IS NOT NULL THEN
-		CALL fl_lee_cab_prestamo_roles(vg_codcia, r_n37.n37_num_prest)
-			RETURNING r_n45.*
-		IF r_n45.n45_compania IS NULL THEN
-			ROLLBACK WORK
-			CALL fl_mostrar_mensaje('No existe préstamo: ' || 
-						 r_n37.n37_num_prest, 'stop')
-			EXIT PROGRAM
-		END IF
-	END IF
-	IF r_n45.n45_sal_prest_ant = 0 THEN
-		LET r_n45.n45_estado = 'A' 
-	ELSE
-		LET r_n45.n45_estado = 'R' 
-	END IF
-	UPDATE rolt058
-		SET n58_div_act    = n58_div_act - 1,
-		    n58_saldo_dist = n58_saldo_dist + r_n37.n37_valor
-		WHERE n58_compania  = r_n37.n37_compania
-		  AND n58_num_prest = r_n37.n37_num_prest
-		  AND n58_proceso   = r_n37.n37_proceso
-
-	UPDATE rolt046
-		SET n46_saldo = (r_n37.n37_valor + n46_saldo)
-        	WHERE n46_compania   = vg_codcia
-		  AND n46_num_prest  = r_n37.n37_num_prest
-		  AND n46_cod_liqrol = vm_proceso
-		  AND n46_fecha_ini  = vm_r_rows[vm_row_current].n36_fecha_ini
-		  AND n46_fecha_fin  = vm_r_rows[vm_row_current].n36_fecha_fin
-
-	UPDATE rolt045
-		SET n45_descontado = n45_descontado - r_n37.n37_valor,
-		    n45_estado     = r_n45.n45_estado
-        	WHERE n45_compania  = vg_codcia
-		  AND n45_num_prest = r_n37.n37_num_prest
-		  AND n45_cod_rubro = r_n37.n37_cod_rubro
-		  AND n45_cod_trab  = r_n37.n37_cod_trab
-END FOREACH
-
-COMMIT WORK
-
-INITIALIZE rm_n05.* TO NULL 
-SELECT * INTO rm_n05.* FROM rolt005
-	WHERE n05_compania = vg_codcia
-	  AND n05_activo   = 'S' 
-
-IF num_args() <> 7 THEN
-	CALL mostrar_registro(vm_row_current)	
-	CALL muestra_contadores(vm_row_current, vm_num_rows)
-	CALL fl_mensaje_registro_modificado()
-END IF
-
-END FUNCTION
-
-
-
 FUNCTION control_cerrar()
 DEFINE r_n36		RECORD LIKE rolt036.*
 DEFINE r_n37		RECORD LIKE rolt037.*
@@ -1436,8 +1223,7 @@ IF num_args() <> 7 THEN
 	END IF
 END IF
 
-SELECT COUNT(n36_cod_trab)
-	INTO neg
+SELECT count(n36_cod_trab) INTO neg
 	FROM rolt036
        	WHERE n36_compania   = vg_codcia
 	  AND n36_proceso    = vm_proceso
@@ -1496,14 +1282,14 @@ UPDATE rolt005 SET n05_activo = 'N'
 	  AND n05_proceso  = vm_proceso 
 	  AND n05_activo   = 'S'
 
-DECLARE q_prest2 CURSOR FOR
+DECLARE q_prest CURSOR FOR
 	SELECT * FROM rolt037
         	WHERE n37_compania = vg_codcia
 		  AND n37_proceso  = vm_proceso
 		  AND n37_fecha_ini = vm_r_rows[vm_row_current].n36_fecha_ini
 		  AND n37_fecha_fin = vm_r_rows[vm_row_current].n36_fecha_fin
 
-FOREACH q_prest2 INTO r_n37.*
+FOREACH q_prest INTO r_n37.*
 	IF num_args() = 7 THEN
 		IF arg_val(6) <> r_n37.n37_cod_trab THEN
 			CONTINUE FOREACH
@@ -1902,8 +1688,7 @@ CREATE TEMP TABLE tmp_rol_ban
 		tipo_cuenta		CHAR(3),
 		cuenta_empleado		CHAR(11),
 		tipo_doc_id		CHAR(1),
-		num_doc_id		VARCHAR(13),
-		--num_doc_id		DECIMAL(13,0),
+		num_doc_id		DECIMAL(13,0),
 		empleado		VARCHAR(40),
 		direccion		VARCHAR(40),
 		ciudad			VARCHAR(20),

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175862</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>CAPITAN EDMINDO CHIRIBOGA N46-118 Y ZAMO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175862</guiaRemision>
+<razonSocialComprador>LUNA RIOFRIO GUSTAVO ENRIQUE</razonSocialComprador>
+<identificacionComprador>1703033991   </identificacionComprador>
+<totalSinImpuestos>22.75</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>22.75</baseImponible>
+<valor>2.73</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>25.48</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>92871</codigoPrincipal>
+<descripcion>TUBO GALVANIZADO (POSTE) FUJI 1-1/2" x 6 Mts.  (38.1mm. EXTERIOR) TIPO ECONOMICO 1.8mm. ESPESOR</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>22.75</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>22.75</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FUJI" valor="FUJI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>22.75</baseImponible>
+<valor>2.73</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092068</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092068</guiaRemision>
+<razonSocialComprador>PLACASDELSUR S.A.</razonSocialComprador>
+<identificacionComprador>0992548371001</identificacionComprador>
+<totalSinImpuestos>489.00</totalSinImpuestos>
+<totalDescuento>60.44</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>489.00</baseImponible>
+<valor>58.68</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>547.68</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>18811</codigoPrincipal>
+<descripcion>BOMBA CENTRIF STANDARD C-MOTOR DB-7-3 3 HP 2x1-1/2 220/380-3-60</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>549.44</precioUnitario>
+<descuento>60.44</descuento>
+<precioTotalSinImpuesto>489.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MARK G"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>489.00</baseImponible>
+<valor>58.68</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">ventas@bosch.com.ec</campoAdicional>
+<campoAdicional nombre="Email">ricardo.menendez@grupoberlin.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2204000</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">010384</campoAdicional>
+<campoAdicional nombre="Observaciones">RICARDO MENENDEZ</campoAdicional>
+</infoAdicional>
+</factura>

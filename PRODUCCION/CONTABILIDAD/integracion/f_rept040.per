@@ -1,0 +1,21 @@
+database acero_gm
+screen size 24 by 80
+{
+r40_compania       [f000       ]
+r40_localidad      [f001  ]
+r40_cod_tran       [a0]
+r40_num_tran       [f002             ]
+r40_tipo_comp      [a1]
+r40_num_comp       [f003    ]
+}
+end
+tables
+rept040
+attributes
+f000 = rept040.r40_compania;
+f001 = rept040.r40_localidad;
+a0 = rept040.r40_cod_tran;
+f002 = rept040.r40_num_tran;
+a1 = rept040.r40_tipo_comp;
+f003 = rept040.r40_num_comp;
+end

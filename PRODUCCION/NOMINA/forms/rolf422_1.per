@@ -5,10 +5,14 @@ SCREEN
 
                                Anio: [c000]
 
+                                Mes: [c1]
+
 
 }
 ATTRIBUTES
 c000 = FORMONLY.vm_anio TYPE SMALLINT NOT NULL, REQUIRED, REVERSE, UPSHIFT,
 	INCLUDE = (1980 TO 2099),
 	COMMENTS = 'Ingrese un año que este cerrado o el vigente.';
+c1   = FORMONLY.vm_mes TYPE SMALLINT NOT NULL, REQUIRED, REVERSE, UPSHIFT,
+	INCLUDE = (1 TO 12);
 END

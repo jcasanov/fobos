@@ -1,0 +1,55 @@
+database acero_gm
+screen size 24 by 80
+{
+b12_compania       [f000       ]
+b12_tipo_comp      [a0]
+b12_num_comp       [f001    ]
+b12_estado         [a]
+b12_subtipo        [f002  ]
+b12_glosa          [f003                                        ]
+                   [f004                                        ]
+                   [f005                                      ]
+b12_benef_che      [f006                                    ]
+b12_num_cheque     [f007       ]
+b12_origen         [b]
+b12_moneda         [a1]
+b12_paridad        [f008              ]
+b12_fec_proceso    [f009      ]
+b12_fec_reversa    [f010      ]
+b12_tip_reversa    [a2]
+b12_num_reversa    [f011    ]
+b12_fec_modifi     [f012               ]
+b12_modulo         [a3]
+b12_usuario        [f013      ]
+}
+screen
+{
+b12_fecing         [f014               ]
+}
+end
+tables
+ctbt012
+attributes
+f000 = ctbt012.b12_compania;
+a0 = ctbt012.b12_tipo_comp;
+f001 = ctbt012.b12_num_comp;
+a = ctbt012.b12_estado;
+f002 = ctbt012.b12_subtipo;
+f003 = ctbt012.b12_glosa[1,44];
+f004 = ctbt012.b12_glosa[45,88];
+f005 = ctbt012.b12_glosa[89,130];
+f006 = ctbt012.b12_benef_che;
+f007 = ctbt012.b12_num_cheque;
+b = ctbt012.b12_origen;
+a1 = ctbt012.b12_moneda;
+f008 = ctbt012.b12_paridad;
+f009 = ctbt012.b12_fec_proceso;
+f010 = ctbt012.b12_fec_reversa;
+a2 = ctbt012.b12_tip_reversa;
+f011 = ctbt012.b12_num_reversa;
+f012 = ctbt012.b12_fec_modifi;
+a3 = ctbt012.b12_modulo;
+f013 = ctbt012.b12_usuario;
+
+f014 = ctbt012.b12_fecing;
+end

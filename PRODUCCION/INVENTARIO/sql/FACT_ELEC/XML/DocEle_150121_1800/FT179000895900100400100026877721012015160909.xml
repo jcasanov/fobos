@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268777</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268777</guiaRemision>
+<razonSocialComprador>SUMINISTROS SUMGONZA S.A.</razonSocialComprador>
+<identificacionComprador>1792306639001</identificacionComprador>
+<totalSinImpuestos>496.76</totalSinImpuestos>
+<totalDescuento>109.04</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>496.76</baseImponible>
+<valor>59.61</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>556.37</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>18922</codigoPrincipal>
+<descripcion>BOMBA TIPO JET C-MOTOR HJ-100-S 1 HP 115/230-1-60 CON SWITCH DE PRESION</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>605.80</precioUnitario>
+<descuento>109.04</descuento>
+<precioTotalSinImpuesto>496.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>496.76</baseImponible>
+<valor>59.61</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">comercializacion@sumhidrogg.comsumhidrogg@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2865173</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">062837</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C# 1011</campoAdicional>
+</infoAdicional>
+</factura>

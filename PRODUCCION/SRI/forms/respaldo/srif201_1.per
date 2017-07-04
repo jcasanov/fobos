@@ -1,0 +1,67 @@
+DATABASE aceros
+SCREEN
+{
+           Estado: [f|c030      ]                           [x000 ] de [y000 ]
+        Localidad: [c0] [c001                ]     Año: [c002]     Mes: [c003]
+  No. Id. Cliente: [a0]       Cédula/RUC: [c004         ]     Tipo Comp.: [a1]
+
+ Fecha Reg. Cont.: [c005      ]                  No. Comp. Emi.: [c006       ]
+ Fecha Emi. Venta: [c007      ]          Base Imp. Tarifa 0%: [c008          ]
+   IVA Presuntivo: [a]                  Base Imp Grabada IVA: [c009          ]
+
+     Código % IVA: [b]                             Monto IVA: [c010          ]
+    Base Imp. ICE: [c011          ]             Código % ICE: [a2]
+        Monto ICE: [c012          ]         Monto IVA Bienes: [c013          ]
+                                 Código Retención IVA Bienes: [c]
+
+ Monto Ret.IVA B.: [c014          ]      Monto IVA Servicios: [c015          ]
+                              Código Retención IVA Servicios: [d]
+ Monto Ret.IVA S.: [c016          ]     Retención Presuntivo: [e]
+    Concepto Ret.: [c017 ]              Base Imponible Renta: [c018          ]
+     % Ret. Renta: [c019   ]           Monto Retención Renta: [c020          ]
+
+          Usuario: [c021      ]           Fecha Ingreso: [c022               ]
+}
+TABLES
+srit021
+ATTRIBUTES
+c0   = srit021.s21_localidad, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = FORMONLY.tit_localidad, NOENTRY, UPSHIFT, REVERSE;
+c002 = srit021.s21_anio, AUTONEXT, UPSHIFT, REVERSE;
+c003 = srit021.s21_mes, AUTONEXT, UPSHIFT, REVERSE;
+a0   = srit021.s21_ident_cli, AUTONEXT, UPSHIFT, REVERSE;
+c004 = srit021.s21_num_doc_id, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+a1   = srit021.s21_tipo_comp, AUTONEXT, UPSHIFT, REVERSE;
+c005 = srit021.s21_fecha_reg_cont, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy';
+c006 = srit021.s21_num_comp_emi, AUTONEXT, UPSHIFT, REVERSE;
+c007 = srit021.s21_fecha_emi_vta, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy';
+c008 = srit021.s21_base_imp_tar_0, AUTONEXT, UPSHIFT, REVERSE;
+a    = srit021.s21_iva_presuntivo, AUTONEXT, UPSHIFT, REVERSE;
+c009 = srit021.s21_bas_imp_gr_iva, AUTONEXT, UPSHIFT, REVERSE;
+b    = srit021.s21_cod_porc_iva, AUTONEXT, UPSHIFT, REVERSE;
+c010 = srit021.s21_monto_iva, AUTONEXT, UPSHIFT, REVERSE;
+c011 = srit021.s21_base_imp_ice, AUTONEXT, UPSHIFT, REVERSE;
+a2   = srit021.s21_cod_porc_ice, AUTONEXT, UPSHIFT, REVERSE;
+c012 = srit021.s21_monto_ice, AUTONEXT, UPSHIFT, REVERSE;
+c013 = srit021.s21_monto_iva_bie, AUTONEXT, UPSHIFT, REVERSE;
+c    = srit021.s21_cod_ret_ivabie, AUTONEXT, UPSHIFT, REVERSE;
+c014 = srit021.s21_mon_ret_ivabie, AUTONEXT, UPSHIFT, REVERSE;
+c015 = srit021.s21_monto_iva_ser, AUTONEXT, UPSHIFT, REVERSE;
+d    = srit021.s21_cod_ret_ivaser, AUTONEXT, UPSHIFT, REVERSE;
+c016 = srit021.s21_mon_ret_ivaser, AUTONEXT, UPSHIFT, REVERSE;
+e    = srit021.s21_ret_presuntivo, AUTONEXT, UPSHIFT, REVERSE;
+c017 = srit021.s21_concepto_ret, AUTONEXT, UPSHIFT, REVERSE;
+c018 = srit021.s21_base_imp_renta, AUTONEXT, UPSHIFT, REVERSE;
+c019 = srit021.s21_porc_ret_renta, AUTONEXT, UPSHIFT, REVERSE;
+c020 = srit021.s21_monto_ret_rent, AUTONEXT, UPSHIFT, REVERSE;
+f    = srit021.s21_estado, NOENTRY, UPSHIFT, REVERSE;
+c030 = FORMONLY.tit_estado, NOENTRY, UPSHIFT, REVERSE;
+c021 = srit021.s21_usuario, NOENTRY, UPSHIFT, REVERSE;
+c022 = srit021.s21_fecing, NOENTRY, UPSHIFT, REVERSE;
+x000 = FORMONLY.numrow, NOENTRY, UPSHIFT, REVERSE;
+y000 = FORMONLY.maxrow, NOENTRY, UPSHIFT, REVERSE;
+END

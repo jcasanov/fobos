@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268119</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>06/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268119</guiaRemision>
+<razonSocialComprador>TECNOLOGIA TOTAL TECTOTAL CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1791265416001</identificacionComprador>
+<totalSinImpuestos>60.63</totalSinImpuestos>
+<totalDescuento>8.27</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>60.63</baseImponible>
+<valor>7.28</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>67.91</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>4112</codigoPrincipal>
+<descripcion>TAPON GALV. HEMBRA CLASE 150 DE 1/2" REFORZADO</descripcion>
+<cantidad>65.00</cantidad>
+<precioUnitario>1.06</precioUnitario>
+<descuento>8.27</descuento>
+<precioTotalSinImpuesto>60.63</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>60.63</baseImponible>
+<valor>7.28</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">diana.cueva@tectotal.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">264848/9</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">005604</campoAdicional>
+</infoAdicional>
+</factura>

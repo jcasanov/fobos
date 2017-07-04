@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000004370</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>ACERIA DEL ECUADOR CA ADELCA.</razonSocialComprador>
+<identificacionComprador>1790004724001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>003-001-000129297</numDocModificado>
+<fechaEmisionDocSustento>10/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>171.68</totalSinImpuestos>
+<valorModificacion>192.28</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>171.68</baseImponible>
+<valor>20.60</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>REF POR FECHA  NP 138805</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>15696</codigoInterno>
+<descripcion>DADOS PARA TUBOS DE 1/4" A 3/8" HS NPT P/811A-711-815A (47760)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>201.98</precioUnitario>
+<descuento>30.30</descuento>
+<precioTotalSinImpuesto>171.68</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>171.68</baseImponible>
+<valor>20.60</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">recibo-electronico@adelca.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2792136</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">28583</campoAdicional>
+</infoAdicional>
+</notaCredito>

@@ -1,0 +1,50 @@
+DATABASE aceros
+SCREEN
+{
+                    Códigos del SRI en Tipos de Impuesto
+                    ------------------------------------
+
+  Tipo Retención: [c|c000                ]              Porcentaje: [c001  ] %
+
+                                                            [c010 ] de [c011 ]
+  C. SRI                   Descripción              Fecha Ini. Fecha Fin. I E
+ [c030  |c031                                      |c032      |c033      |f|g]
+ [c030  |c031                                      |c032      |c033      |f|g]
+ [c030  |c031                                      |c032      |c033      |f|g]
+ [c030  |c031                                      |c032      |c033      |f|g]
+ [c030  |c031                                      |c032      |c033      |f|g]
+ [c030  |c031                                      |c032      |c033      |f|g]
+ [c030  |c031                                      |c032      |c033      |f|g]
+ [c030  |c031                                      |c032      |c033      |f|g]
+
+  Usuario que Modificó: [c040      ]      Fecha: [c041               ]
+   Usuario que Eliminó: [c042      ]      Fecha: [c043               ]
+}
+TABLES
+ordt003
+ordt002
+ATTRIBUTES
+c    = ordt003.c03_tipo_ret, NOENTRY, REVERSE, UPSHIFT;
+c000 = ordt002.c02_nombre, NOENTRY, REVERSE, UPSHIFT;
+c001 = ordt003.c03_porcentaje, NOENTRY, REVERSE, UPSHIFT, FORMAT = '##&.##';
+
+c010 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c011 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+
+c030 = ordt003.c03_codigo_sri, NOENTRY, UPSHIFT;
+c031 = ordt003.c03_concepto_ret, NOENTRY;
+c032 = ordt003.c03_fecha_ini_porc, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c033 = ordt003.c03_fecha_fin_porc, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+f    = ordt003.c03_ingresa_proc, UPSHIFT, INCLUDE = ('S', 'N'), DEFAULT = 'N',
+	COMMENTS = 'Seleccione si código del SRI ingresa porcentaje o no.';
+g    = ordt003.c03_estado, NOENTRY, UPSHIFT;
+
+c040 = ordt003.c03_usuario_modifi, NOENTRY, UPSHIFT;
+c041 = ordt003.c03_fecha_modifi, NOENTRY, UPSHIFT;
+c042 = ordt003.c03_usuario_elimin, NOENTRY, UPSHIFT;
+c043 = ordt003.c03_fecha_elimin, NOENTRY, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_retsri[8] (c03_codigo_sri, c03_concepto_ret,c03_fecha_ini_porc,
+			c03_fecha_fin_porc, c03_ingresa_proc, c03_estado)

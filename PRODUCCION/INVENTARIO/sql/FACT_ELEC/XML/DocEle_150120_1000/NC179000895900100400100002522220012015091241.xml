@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025222</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>CONSTRUCTORA VILLACRECES ANDRADE S.A.</razonSocialComprador>
+<identificacionComprador>1791326768001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000175656</numDocModificado>
+<fechaEmisionDocSustento>11/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>13505.53</totalSinImpuestos>
+<valorModificacion>15126.19</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>13505.53</baseImponible>
+<valor>1620.66</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 267277 CV ANDRADE P-VOLVER A FACT FC</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>5</codigoInterno>
+<descripcion>ALAMBRE DE PUA MOTTO ROJO ROLLO DE 500 m</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>43.31</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>216.55</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="ROLLO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>216.55</baseImponible>
+<valor>25.99</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>5470</codigoInterno>
+<descripcion>TUBO GALVANIZADO (POSTE) TIPO "T" DE 4" (114.1mm.) EXTERIOR 2mm. ESPESOR</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>59.44</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>118.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>118.88</baseImponible>
+<valor>14.27</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>558</codigoInterno>
+<descripcion>HIERRO REDONDO LISO x 6 MTS. DE 12mm.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>6.45</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>12.90</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>12.90</baseImponible>
+<valor>1.55</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>16</codigoInterno>
+<descripcion>ALAMBRE GALVANIZADO N.18</descripcion>
+<cantidad>600.00</cantidad>
+<precioUnitario>1.89</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1134.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1134.00</baseImponible>
+<valor>136.08</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>12</codigoInterno>
+<descripcion>ALAMBRE GALVANIZADO N.14</descripcion>
+<cantidad>880.00</cantidad>
+<precioUnitario>1.89</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1663.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1663.20</baseImponible>
+<valor>199.58</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>99116</codigoInterno>
+<descripcion>ANGULO LAMINADO x 6 MTS. DE 50mm. x 6mm. GALVANIZADO</descripcion>
+<cantidad>100.00</cantidad>
+<precioUnitario>72.25</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>7225.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7225.00</baseImponible>
+<valor>867.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>101618</codigoInterno>
+<descripcion>ANGULO LAMINADO x 6 MTS. DE 30 X 4 mm. GALVANIZADO</descripcion>
+<cantidad>100.00</cantidad>
+<precioUnitario>30.05</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3005.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3005.00</baseImponible>
+<valor>360.60</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>99044</codigoInterno>
+<descripcion>ANGULO LAMINADO x 6 MTS. DE 75 X 6 mm. GALVANIZADO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>65.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>130.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>130.00</baseImponible>
+<valor>15.60</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">cmaldonado@elitcorp.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2229244/5</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">4289</campoAdicional>
+</infoAdicional>
+</notaCredito>

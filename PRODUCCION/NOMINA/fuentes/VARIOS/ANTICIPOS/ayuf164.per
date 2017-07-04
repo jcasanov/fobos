@@ -1,0 +1,34 @@
+DATABASE aceros
+SCREEN
+{
+ SUSTENTOS TRIBUTARIOS
+
+                                                           [c020] de [c021]
+ [c0|c001                                                                  ]
+[c1|c011                                                                  ]
+[c1|c011                                                                  ]
+[c1|c011                                                                  ]
+[c1|c011                                                                  ]
+[c1|c011                                                                  ]
+[c1|c011                                                                  ]
+[c1|c011                                                                  ]
+[c1|c011                                                                  ]
+[c1|c011                                                                  ]
+[c1|c011                                                                  ]
+
+}
+TABLES
+srit006
+ATTRIBUTES
+c0   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+
+c1   = srit006.s06_codigo, NOENTRY, UPSHIFT;
+c011 = srit006.s06_descripcion, NOENTRY, UPSHIFT;
+
+c020 = FORMONLY.num_row, NOENTRY, UPSHIFT;
+c021 = FORMONLY.max_row, NOENTRY, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_sust[10] (s06_codigo, s06_descripcion)

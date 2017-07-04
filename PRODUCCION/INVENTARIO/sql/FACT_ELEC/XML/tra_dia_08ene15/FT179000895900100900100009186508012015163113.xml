@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091865</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>08/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091865</guiaRemision>
+<razonSocialComprador>COMERCIALIZADORA MURILLO COMMUR S.A.</razonSocialComprador>
+<identificacionComprador>0992107251001</identificacionComprador>
+<totalSinImpuestos>175.01</totalSinImpuestos>
+<totalDescuento>19.45</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>175.01</baseImponible>
+<valor>21.00</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>196.01</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99322</codigoPrincipal>
+<descripcion>KIT REPARACION P-TANQUE PRESION CH3133-3 AIR CELL P/TANQUE WM6-QC</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>194.46</precioUnitario>
+<descuento>19.45</descuento>
+<precioTotalSinImpuesto>175.01</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="WELL M"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>175.01</baseImponible>
+<valor>21.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">gmurillo@commursa.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2402911</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">004322</campoAdicional>
+</infoAdicional>
+</factura>

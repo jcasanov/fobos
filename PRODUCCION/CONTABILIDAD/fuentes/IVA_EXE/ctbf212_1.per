@@ -1,0 +1,58 @@
+DATABASE aceros
+SCREEN
+{
+                                                             [x003] de [y003]
+
+          Compañía: [c022]  [c075                                    ]
+         Localidad: [c023]  [c076                ]
+
+                             Auxiliares Contables
+                             -------------------
+
+         IVA Venta: [c024        ] [c077                                    ]
+        IVA Compra: [c025        ] [c078                                    ]
+   IVA Importación: [c026        ] [c079                                    ]
+         Retención: [c027        ] [c080                                    ]
+ Retención Crédito: [c028        ] [c081                                    ]
+      Flete Compra: [c029        ] [c082                                    ]
+      Compra Otros: [c030        ] [c083                                    ]
+            Cuadre: [c031        ] [c084                                    ]
+
+}
+TABLES
+ctbt042
+ATTRIBUTES
+c022 = ctbt042.b42_compania, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c075 = FORMONLY.tit_compania, NOENTRY, UPSHIFT, REVERSE;
+c023 = ctbt042.b42_localidad, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c076 = FORMONLY.tit_localidad, NOENTRY, UPSHIFT, REVERSE;
+c024 = ctbt042.b42_iva_venta, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c077 = FORMONLY.tit_iva_venta, NOENTRY, UPSHIFT, REVERSE;
+c025 = ctbt042.b42_iva_compra, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c078 = FORMONLY.tit_iva_compra, NOENTRY, UPSHIFT, REVERSE;
+c026 = ctbt042.b42_iva_import, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c079 = FORMONLY.tit_iva_import, NOENTRY, UPSHIFT;
+c027 = ctbt042.b42_retencion, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c080 = FORMONLY.tit_retencion, NOENTRY, UPSHIFT, REVERSE;
+c028 = ctbt042.b42_reten_cred, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c081 = FORMONLY.tit_reten_cred, NOENTRY, UPSHIFT;
+c029 = ctbt042.b42_flete_comp, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c082 = FORMONLY.tit_flete_comp, NOENTRY, UPSHIFT;
+c030 = ctbt042.b42_otros_comp, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c083 = FORMONLY.tit_otros_comp, NOENTRY, UPSHIFT;
+c031 = ctbt042.b42_cuadre, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c084 = FORMONLY.tit_cuadre, NOENTRY, UPSHIFT;
+
+x003 = FORMONLY.vm_row_current, NOENTRY;
+y003 = FORMONLY.vm_num_rows, NOENTRY;
+END

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176254</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176254</guiaRemision>
+<razonSocialComprador>TEXTILES EL RAYO S.A.</razonSocialComprador>
+<identificacionComprador>1790389219001</identificacionComprador>
+<totalSinImpuestos>91.70</totalSinImpuestos>
+<totalDescuento>9.34</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>91.70</baseImponible>
+<valor>11.00</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>102.70</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>94496</codigoPrincipal>
+<descripcion>GRIFO ESFERICO ROSCADO EN ACERO AL CARBONO IT-301E DE 3/4" 1000 PSI (TRES CUERPOS)</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>19.52</precioUnitario>
+<descuento>5.86</descuento>
+<precioTotalSinImpuesto>52.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INOX T"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>52.70</baseImponible>
+<valor>6.32</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3374</codigoPrincipal>
+<descripcion>NEPLO NEGRO DE 3/4" x 3"</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>0.62</precioUnitario>
+<descuento>0.25</descuento>
+<precioTotalSinImpuesto>2.85</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.85</baseImponible>
+<valor>0.34</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6159</codigoPrincipal>
+<descripcion>UNION NEGRA CLASE 150 DE 3/4"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>0.90</precioUnitario>
+<descuento>0.14</descuento>
+<precioTotalSinImpuesto>1.66</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.66</baseImponible>
+<valor>0.20</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3382</codigoPrincipal>
+<descripcion>NEPLO NEGRO DE 3/4" x 8"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.41</precioUnitario>
+<descuento>0.11</descuento>
+<precioTotalSinImpuesto>1.30</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.30</baseImponible>
+<valor>0.16</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4724</codigoPrincipal>
+<descripcion>TEE NEGRA CLASE 150 DE 3/4"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>2.11</precioUnitario>
+<descuento>0.42</descuento>
+<precioTotalSinImpuesto>3.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.80</baseImponible>
+<valor>0.46</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3376</codigoPrincipal>
+<descripcion>NEPLO NEGRO DE 3/4" x 4"</descripcion>
+<cantidad>8.00</cantidad>
+<precioUnitario>0.85</precioUnitario>
+<descuento>0.54</descuento>
+<precioTotalSinImpuesto>6.26</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.26</baseImponible>
+<valor>0.75</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2293</codigoPrincipal>
+<descripcion>CODO NEGRO CLASE 150 DE 3/4" x 90ø</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>1.19</precioUnitario>
+<descuento>0.48</descuento>
+<precioTotalSinImpuesto>5.47</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.47</baseImponible>
+<valor>0.66</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97144</codigoPrincipal>
+<descripcion>UNIVERSAL CONICA NEGRA CLASE 150 DE 3/4"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>4.80</precioUnitario>
+<descuento>1.54</descuento>
+<precioTotalSinImpuesto>17.66</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>17.66</baseImponible>
+<valor>2.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">cosorio@elrayo.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2824797</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">004802</campoAdicional>
+</infoAdicional>
+</factura>

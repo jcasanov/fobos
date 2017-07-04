@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176243</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176243</guiaRemision>
+<razonSocialComprador>GAONA SANCHEZ MARIA AUGUSTA</razonSocialComprador>
+<identificacionComprador>1103366587001</identificacionComprador>
+<totalSinImpuestos>1699.46</totalSinImpuestos>
+<totalDescuento>68.48</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1699.46</baseImponible>
+<valor>203.94</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1903.40</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5422</codigoPrincipal>
+<descripcion>TUBO GALV. ASTM A-53   TIPO "T" DE 4" x 6.40 m. ESPESOR 5.2 mm.</descripcion>
+<cantidad>7.00</cantidad>
+<precioUnitario>182.78</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1279.46</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1279.46</baseImponible>
+<valor>153.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5999</codigoPrincipal>
+<descripcion>UNION GALV. CLASE 150 DE 3"</descripcion>
+<cantidad>8.00</cantidad>
+<precioUnitario>12.42</precioUnitario>
+<descuento>11.92</descuento>
+<precioTotalSinImpuesto>87.44</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>87.44</baseImponible>
+<valor>10.49</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21382</codigoPrincipal>
+<descripcion>VALVULA CHEQUE VC-100 DE 4" DE BRONCE TIPO PESADO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>346.45</precioUnitario>
+<descuento>51.97</descuento>
+<precioTotalSinImpuesto>294.48</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HELBER"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>294.48</baseImponible>
+<valor>35.34</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>20161</codigoPrincipal>
+<descripcion>ELECTRODO ELECTRODO TIPO PENDULO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>8.85</precioUnitario>
+<descuento>1.77</descuento>
+<precioTotalSinImpuesto>15.93</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>15.93</baseImponible>
+<valor>1.91</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>20161</codigoPrincipal>
+<descripcion>ELECTRODO ELECTRODO TIPO PENDULO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>8.85</precioUnitario>
+<descuento>0.89</descuento>
+<precioTotalSinImpuesto>7.96</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7.96</baseImponible>
+<valor>0.96</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3314</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 4" x 8"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>16.12</precioUnitario>
+<descuento>1.93</descuento>
+<precioTotalSinImpuesto>14.19</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>14.19</baseImponible>
+<valor>1.70</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">375238</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">047090</campoAdicional>
+</infoAdicional>
+</factura>

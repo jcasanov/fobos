@@ -1,0 +1,33 @@
+##
+# $1 = Es la base donde se cargaran los datos
+# $2 = Crear el módulo: (M) crea (X) omite
+# $3 = Borrar tablas existentes: (B) borra (Y) omite
+# $4 = Carga inicial de programas: (T) todos (X) omite
+# $5 = Genera carga inicial completa: (T) completa (Z) parcial
+##
+
+if [ "$2" == "M" ] || [ "$5" == "T" ]; then
+	echo "Creando módulo en tabla de configuración ..."
+	dbaccess $1 modulo.sql
+	echo " "
+fi
+
+if [ "$3" == "B" ] || [ "$5" == "T" ]; then
+	echo "Borrando tablas creadas anteriormente del módulo SRI ..."
+	dbaccess $1 borrar_tablas.sql
+	echo " "
+fi
+
+echo "Creando tablas del módulo SRI ..."
+sh cargar_tablas $1
+echo " "
+
+if [ "$4" == "P" ] || [ "$5" == "T" ]; then
+	echo "Carga inicial de programas del módulo SRI ..."
+	dbaccess $1 carga_prog.sql
+	echo " "
+fi
+
+echo "Carga inicial de las tablas del módulo SRI ..."
+dbaccess $1 car_ini.sql
+echo "Carga inicial del módulo del SRI terminada OK."

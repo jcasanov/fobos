@@ -1,0 +1,48 @@
+DATABASE aceros
+SCREEN
+{
+                    CONF. RETENCIONES POR TIPO DE PAGO
+                    ---------------------------------
+
+ Tipo Ret.: [c002  |c|c003                ]
+                                                           [c11] de [c12]
+  [c0  |c020           |c021     |c022          |c023                    ]
+ [c1] [c030           |d|c031   |c032        ] [c033                    ]
+ [c1] [c030           |d|c031   |c032        ] [c033                    ]
+ [c1] [c030           |d|c031   |c032        ] [c033                    ]
+ [c1] [c030           |d|c031   |c032        ] [c033                    ]
+ [c1] [c030           |d|c031   |c032        ] [c033                    ]
+}
+TABLES
+cajt001
+ctbt010
+ordt002
+cajt091
+ATTRIBUTES
+c002 = ordt002.c02_porcentaje, NOENTRY, UPSHIFT, FORMAT = '##&.##';
+c    = ordt002.c02_tipo_ret, NOENTRY, UPSHIFT, INCLUDE = ('F', 'I');
+c003 = ordt002.c02_nombre, NOENTRY, SCROLL, UPSHIFT;
+
+c11  = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c12  = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+
+c0   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c020 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c021 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c022 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c023 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+
+c1   = cajt091.j91_codigo_pago, AUTONEXT, UPSHIFT, OPTIONS = '-nolist',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c030 = cajt001.j01_nombre, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+d    = cajt091.j91_cont_cred, AUTONEXT, UPSHIFT, INCLUDE = ('C', 'R'),
+	COMMENTS = 'C Contado  R Credito', OPTIONS = '-nolist';
+c031 = FORMONLY.tit_cont_cred, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c032 = cajt091.j91_aux_cont, AUTONEXT, UPSHIFT, OPTIONS = '-nolist',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c033 = ctbt010.b10_descripcion, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_detj91[5] (j91_codigo_pago, j01_nombre, j91_cont_cred,
+				tit_cont_cred, j91_aux_cont, b10_descripcion)

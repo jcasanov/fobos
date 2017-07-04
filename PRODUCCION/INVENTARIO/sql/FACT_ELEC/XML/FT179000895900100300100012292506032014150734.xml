@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000122925</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>06/03/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000122925</guiaRemision>
+<razonSocialComprador>NICOLALDE PADILLA JUAN CARLOS</razonSocialComprador>
+<identificacionComprador>1712245354001</identificacionComprador>
+<totalSinImpuestos>93.58</totalSinImpuestos>
+<totalDescuento>9.05</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>84.53</baseImponible>
+<valor>10.14</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>94.67</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>4216</codigoPrincipal>
+<descripcion>TAPON NEGRO HEMBRA CLASE 150 DE 1-1/4" LISO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>3.18</precioUnitario>
+<descuento>0.64</descuento>
+<precioTotalSinImpuesto>5.72</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="HITACHI" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.72</baseImponible>
+<valor>0.69</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21374</codigoPrincipal>
+<descripcion>VALVULA CHEQUE VC-32 DE 1-1/4" DE BRONCE TIPO PESADO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>38.58</precioUnitario>
+<descuento>3.86</descuento>
+<precioTotalSinImpuesto>34.72</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="HELBERT" valor="HELBER"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>34.72</baseImponible>
+<valor>4.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21406</codigoPrincipal>
+<descripcion>VALVULA DE PIE VP-32 DE 1-1/4"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>24.22</precioUnitario>
+<descuento>2.42</descuento>
+<precioTotalSinImpuesto>21.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="HELBERT" valor="HELBER"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>21.80</baseImponible>
+<valor>2.62</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>93571</codigoPrincipal>
+<descripcion>GRIFO ESFERICO BRONCE CROMADO FUTURGAS DE 1/2" (AGUA,GAS Y AIRE)</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>5.18</precioUnitario>
+<descuento>1.24</descuento>
+<precioTotalSinImpuesto>14.30</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FIV" valor="FIV"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>14.30</baseImponible>
+<valor>1.72</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1714</codigoPrincipal>
+<descripcion>BUSHING NEGRO CLASE 150 DE 1-1/4" x 1/2"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>2.22</precioUnitario>
+<descuento>0.89</descuento>
+<precioTotalSinImpuesto>7.99</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="HITACHI" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7.99</baseImponible>
+<valor>0.96</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

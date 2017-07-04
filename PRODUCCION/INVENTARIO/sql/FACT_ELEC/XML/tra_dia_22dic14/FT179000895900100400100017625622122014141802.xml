@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176256</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176256</guiaRemision>
+<razonSocialComprador>TEXTILES EL RAYO S.A.</razonSocialComprador>
+<identificacionComprador>1790389219001</identificacionComprador>
+<totalSinImpuestos>9.31</totalSinImpuestos>
+<totalDescuento>0.81</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>9.31</baseImponible>
+<valor>1.12</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>10.43</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>3368</codigoPrincipal>
+<descripcion>NEPLO NEGRO DE 3/4" CORRIDO</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>0.43</precioUnitario>
+<descuento>0.14</descuento>
+<precioTotalSinImpuesto>1.58</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.58</baseImponible>
+<valor>0.19</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3370</codigoPrincipal>
+<descripcion>NEPLO NEGRO DE 3/4" x 2"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>0.51</precioUnitario>
+<descuento>0.24</descuento>
+<precioTotalSinImpuesto>2.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.82</baseImponible>
+<valor>0.34</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3372</codigoPrincipal>
+<descripcion>NEPLO NEGRO DE 3/4" x 2-1/2"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>0.58</precioUnitario>
+<descuento>0.28</descuento>
+<precioTotalSinImpuesto>3.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.20</baseImponible>
+<valor>0.38</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3374</codigoPrincipal>
+<descripcion>NEPLO NEGRO DE 3/4" x 3"</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>0.62</precioUnitario>
+<descuento>0.15</descuento>
+<precioTotalSinImpuesto>1.71</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.71</baseImponible>
+<valor>0.21</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">cosorio@elrayo.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2824797</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">004802</campoAdicional>
+</infoAdicional>
+</factura>

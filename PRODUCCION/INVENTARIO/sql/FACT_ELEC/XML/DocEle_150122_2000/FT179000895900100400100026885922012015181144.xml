@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268859</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268859</guiaRemision>
+<razonSocialComprador>PETROAMAZONAS EP</razonSocialComprador>
+<identificacionComprador>1768153880001</identificacionComprador>
+<totalSinImpuestos>9452.95</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>9452.95</baseImponible>
+<valor>1134.35</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>10587.30</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102993</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA VASCO PRIMERA</descripcion>
+<cantidad>419.00</cantidad>
+<precioUnitario>8.68</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3636.92</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3636.92</baseImponible>
+<valor>436.43</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98749</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 ZARUMA AZUL PRIMERA</descripcion>
+<cantidad>112.00</cantidad>
+<precioUnitario>9.41</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1053.92</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1053.92</baseImponible>
+<valor>126.47</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>92917</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA CRETA AZUL PRIMERA</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>8.71</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>87.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>87.10</baseImponible>
+<valor>10.45</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102734</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA BALZAR CIELO PRIMERA</descripcion>
+<cantidad>30.00</cantidad>
+<precioUnitario>8.11</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>243.30</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>243.30</baseImponible>
+<valor>29.20</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97553</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA DALI AZUL PRIMERA</descripcion>
+<cantidad>40.00</cantidad>
+<precioUnitario>9.27</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>370.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>370.80</baseImponible>
+<valor>44.50</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100489</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA AMAGUANIA VERDE PRIMERA</descripcion>
+<cantidad>15.00</cantidad>
+<precioUnitario>9.14</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>137.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>137.10</baseImponible>
+<valor>16.45</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>90388</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA COPACABANA DUELA PRIMERA</descripcion>
+<cantidad>337.00</cantidad>
+<precioUnitario>9.73</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3279.01</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3279.01</baseImponible>
+<valor>393.48</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101787</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA DAULE VERDE  PRIMERA</descripcion>
+<cantidad>80.00</cantidad>
+<precioUnitario>8.06</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>644.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>644.80</baseImponible>
+<valor>77.38</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacion_electronica@petroamazonas.ec</campoAdicional>
+<campoAdicional nombre="Email">henry_iza@petroamazonas.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">467-500</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">050427</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C 127916</campoAdicional>
+</infoAdicional>
+</factura>

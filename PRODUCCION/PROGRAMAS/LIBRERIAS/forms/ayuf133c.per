@@ -1,0 +1,28 @@
+DATABASE aceros
+SCREEN
+{
+  CODIGOS ELECTRICOS
+ ---------------------------------------------------------
+  Código          Descripción                           E
+ ---------------------------------------------------------
+ [c001         |c002                                   |c]
+ [c001         |c002                                   |c]
+ [c001         |c002                                   |c]
+ [c001         |c002                                   |c]
+ [c001         |c002                                   |c]
+ [c001         |c002                                   |c]
+ [c001         |c002                                   |c]
+ [c001         |c002                                   |c]
+ [c001         |c002                                   |c]
+ [c001         |c002                                   |c]
+}
+TABLES
+rept074
+ATTRIBUTES
+c001 = r74_electrico,  UPSHIFT, REVERSE;
+c002 = r74_descripcion,     UPSHIFT, REVERSE;
+c    = r74_estado,     UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_electrico[10] (r74_electrico, r74_descripcion, r74_estado)

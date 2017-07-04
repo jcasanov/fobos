@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000269001</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>26/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000269001</guiaRemision>
+<razonSocialComprador>PAZMINO ALOMIA EDWIN MARCELO</razonSocialComprador>
+<identificacionComprador>0602155236001</identificacionComprador>
+<totalSinImpuestos>723.09</totalSinImpuestos>
+<totalDescuento>108.22</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>723.09</baseImponible>
+<valor>86.77</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>809.86</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>44281</codigoPrincipal>
+<descripcion>BOMBA CENTRIF STANDARD C-MOTOR DF-7-3 3HP 1 ETP 1-1/2 x 1" 220/380-3-60 3500RPM</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>721.45</precioUnitario>
+<descuento>108.22</descuento>
+<precioTotalSinImpuesto>613.23</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MARK G"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>613.23</baseImponible>
+<valor>73.59</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>48996</codigoPrincipal>
+<descripcion>IMPULSOR DE HIERRO 27161681102 DE 239mm. P/ DVR</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>109.86</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>109.86</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MARK G"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>109.86</baseImponible>
+<valor>13.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">emparepresentaciones@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">032967403</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">059050</campoAdicional>
+<campoAdicional nombre="Observaciones">PEDIDO POR EDWIN PAZMIÒO</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000015290</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<dirPartida>GUALBERTO PEREZ E1-88 ENTRE MALDONADO Y NAPO</dirPartida>
+<razonSocialTransportista>SERGIO QUINCHE</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>1103687586</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>23/12/2014</fechaIniTransporte>
+<fechaFinTransporte>23/12/2014</fechaFinTransporte>
+<placa>PBX-9975</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1718113325001</identificacionDestinatario>
+<razonSocialDestinatario>GAMA CONSTRUCCIONES</razonSocialDestinatario>
+<dirDestinatario>GEOVANNY CALLES VIA A MARIANAS</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>22/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>100479</codigoInterno>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA AMAGUANIA AZUL PRIMERA</descripcion>
+<cantidad>6.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="AMAGUANIA AZUL"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>100481</codigoInterno>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA AMAGUANIA BEIGE PRIMERA</descripcion>
+<cantidad>6.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="AMAGUANIA BEIGE"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>100485</codigoInterno>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA AMAGUANIA ROSA PRIMERA</descripcion>
+<cantidad>6.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="AMAGUANIA ROSA"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>90389</codigoInterno>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA COPACABANA DUELA ESTANDAR</descripcion>
+<cantidad>10.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="COPACABANA DUEL"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>94334</codigoInterno>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA OLMO PRIMERA</descripcion>
+<cantidad>51.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="OLMO PREMIUM"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>96868</codigoInterno>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA DALI BEIGE ESTANDAR</descripcion>
+<cantidad>6.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="DALI BEIGE COMERCIAL"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>97555</codigoInterno>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA DALI ROSA  PRIMERA</descripcion>
+<cantidad>6.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="DALI ROSA  EXPORTACI"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>97556</codigoInterno>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA DALI VERDE PRIMERA</descripcion>
+<cantidad>6.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="DALI VERDE EXPORTACI"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0998817065</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">048943</campoAdicional>
+</infoAdicional>
+</guiaRemision>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025636</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>AV. JUAN TANCA MARENGO KM.1.7</dirPartida>
+<razonSocialTransportista>MANUEL MAGALLANES (ACERO COMERCIAL .S.A)</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>0910240910</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>06/01/2015</fechaIniTransporte>
+<fechaFinTransporte>06/01/2015</fechaFinTransporte>
+<placa>  GSC-8976</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0992538678001</identificacionDestinatario>
+<razonSocialDestinatario>FERRICOMP S.A.</razonSocialDestinatario>
+<dirDestinatario>OBRA:BODEGAS DE LA RIOJA O/C.FR-122014-001800 ETAPA ALMERIA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>22/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>68746</codigoInterno>
+<descripcion>LAVABO DE PORCELANA DE PARED PREPONCHADO CS0057101301CE SHELBY BLANCO</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>69080</codigoInterno>
+<descripcion>REJILLA 2011402 DE PISO 1-1/2" BRONCE CROMADO P/ ROSCAR</descripcion>
+<cantidad>71.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>70591</codigoInterno>
+<descripcion>LLAVE DE MANGUERA 2003402 DE 1/2" DE BRONCE LIVIANA</descripcion>
+<cantidad>25.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>70747</codigoInterno>
+<descripcion>DESAGUE DE LAVABO SC005903000 1BO 1-1/4" PP DESAGUE CON REJILLA Y SIFON</descripcion>
+<cantidad>85.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>71357</codigoInterno>
+<descripcion>DESAGUE DE LAVABO 2157000BL DE 1-1/2" C/ REJILLA EN POLIPROPILENO</descripcion>
+<cantidad>25.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>91471</codigoInterno>
+<descripcion>LLAVE DE PARED PICO MOVIL 5660306 SHELBY C/SIFON</descripcion>
+<cantidad>25.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>97566</codigoInterno>
+<descripcion>TUBO ABASTO- LLAVE ANGULAR LAVABO 1826306 MANGUERA FLEXIBLE DE 16" PAR</descripcion>
+<cantidad>44.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacionelectronica@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2282682</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">013656</campoAdicional>
+</infoAdicional>
+</guiaRemision>

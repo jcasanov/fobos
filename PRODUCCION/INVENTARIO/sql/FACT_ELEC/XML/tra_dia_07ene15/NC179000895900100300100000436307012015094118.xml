@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000004363</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>ACERIA DEL ECUADOR CA ADELCA.</razonSocialComprador>
+<identificacionComprador>1790004724001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>003-001-000131662</numDocModificado>
+<fechaEmisionDocSustento>18/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>104.45</totalSinImpuestos>
+<valorModificacion>116.98</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>104.45</baseImponible>
+<valor>12.53</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>REFACTURACION POR FECHA NP 139247</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>99406</codigoInterno>
+<descripcion>TANQUE DE PRESION METALICO PRECARGADO PRECARGADO DE 2.1 Glns. (604452)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>116.56</precioUnitario>
+<descuento>17.48</descuento>
+<precioTotalSinImpuesto>99.08</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>99.08</baseImponible>
+<valor>11.89</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>3742</codigoInterno>
+<descripcion>REDUCCION NEGRA CLASE 150 DE 2" x 1-1/4"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>5.04</precioUnitario>
+<descuento>0.76</descuento>
+<precioTotalSinImpuesto>4.28</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.28</baseImponible>
+<valor>0.51</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>3214</codigoInterno>
+<descripcion>NEPLO GALVANIZADO DE 1-1/4" x 2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.21</precioUnitario>
+<descuento>0.12</descuento>
+<precioTotalSinImpuesto>1.09</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.09</baseImponible>
+<valor>0.13</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">recibo-electronico@adelca.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2792136</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">28583</campoAdicional>
+</infoAdicional>
+</notaCredito>

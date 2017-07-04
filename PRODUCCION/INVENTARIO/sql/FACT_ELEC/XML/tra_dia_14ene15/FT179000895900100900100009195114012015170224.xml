@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091951</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>14/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091951</guiaRemision>
+<razonSocialComprador>POWER TECH ENGINEERS</razonSocialComprador>
+<identificacionComprador>0992697369001</identificacionComprador>
+<totalSinImpuestos>759.80</totalSinImpuestos>
+<totalDescuento>84.42</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>759.80</baseImponible>
+<valor>91.18</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>850.98</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>100201</codigoPrincipal>
+<descripcion>PRENSA N.460-12 DE CADENA CON TRIPODE 1/8" A 12" (36278)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>844.22</precioUnitario>
+<descuento>84.42</descuento>
+<precioTotalSinImpuesto>759.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>759.80</baseImponible>
+<valor>91.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">juan.gongora@ptei.net</campoAdicional>
+<campoAdicional nombre="telefono-movil">0984363972</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016722</campoAdicional>
+<campoAdicional nombre="Observaciones">ATT.ING.JUAN GONGORA</campoAdicional>
+</infoAdicional>
+</factura>

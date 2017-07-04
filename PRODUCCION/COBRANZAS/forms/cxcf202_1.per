@@ -7,7 +7,7 @@ SCREEN
      No. Trans.: [c000       ]                Subtipo: [c04] [c005           ]
         Cliente: [c001       ] [c002                                         ]
    Area Negocio: [c006] [c007           ]      Moneda: [a1] [c008            ]
-       Cobrador: [c009] [c010                         ]
+     Zona Cobro: [c009] [c010                         ]
      Referencia: [c011                                ]
                                                            [c052 ] de [c053 ]
  [a3|c110           |c11|c112            |c113            |c114            |d]
@@ -45,9 +45,9 @@ c007 = FORMONLY.tit_area, NOENTRY, REVERSE, UPSHIFT;
 a1   = cxct022.z22_moneda, AUTONEXT, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 c008 = FORMONLY.tit_mon_bas, NOENTRY, REVERSE, UPSHIFT;
-c009 = cxct022.z22_cobrador, AUTONEXT, UPSHIFT,
+c009 = cxct022.z22_zona_cobro, AUTONEXT, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c010 = FORMONLY.tit_cobrador, NOENTRY, UPSHIFT;
+c010 = FORMONLY.tit_zoncob, NOENTRY, UPSHIFT;
 c011 = cxct022.z22_referencia, AUTONEXT, UPSHIFT, REVERSE;
 
 a3   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113902</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113902</guiaRemision>
+<razonSocialComprador>FERRETERIA MACON</razonSocialComprador>
+<identificacionComprador>1704803921001</identificacionComprador>
+<totalSinImpuestos>1137.26</totalSinImpuestos>
+<totalDescuento>97.82</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1137.26</baseImponible>
+<valor>136.47</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1273.73</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102136</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA SANTA ANA PRIMERA</descripcion>
+<cantidad>40.00</cantidad>
+<precioUnitario>6.93</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>277.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>277.20</baseImponible>
+<valor>33.26</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98737</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA AYANGUE ROSA PRIMERA</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>7.56</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>151.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>151.20</baseImponible>
+<valor>18.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103295</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA YANUNCAY VERDE PRIMERA</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>7.73</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>154.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>154.60</baseImponible>
+<valor>18.55</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103145</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA RIVIERA BEIGE SEGUNDA</descripcion>
+<cantidad>50.00</cantidad>
+<precioUnitario>7.95</precioUnitario>
+<descuento>59.63</descuento>
+<precioTotalSinImpuesto>337.87</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>337.87</baseImponible>
+<valor>40.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103055</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA FACHALETA TEJA  PRIMERA</descripcion>
+<cantidad>7.50</cantidad>
+<precioUnitario>10.68</precioUnitario>
+<descuento>12.02</descuento>
+<precioTotalSinImpuesto>68.08</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>68.08</baseImponible>
+<valor>8.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102966</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA FACHALETA LADRILLO SEGUNDA</descripcion>
+<cantidad>7.50</cantidad>
+<precioUnitario>9.61</precioUnitario>
+<descuento>10.81</descuento>
+<precioTotalSinImpuesto>61.27</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>61.27</baseImponible>
+<valor>7.35</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>94157</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA RAFAELA AZUL ESTANDAR</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>10.24</precioUnitario>
+<descuento>15.36</descuento>
+<precioTotalSinImpuesto>87.04</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>87.04</baseImponible>
+<valor>10.44</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">macontnc@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2598142</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">046444</campoAdicional>
+<campoAdicional nombre="Observaciones">PED SRA MANOLITA</campoAdicional>
+</infoAdicional>
+</factura>

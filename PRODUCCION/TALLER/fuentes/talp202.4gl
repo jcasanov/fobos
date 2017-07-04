@@ -447,6 +447,9 @@ INPUT ARRAY rm_detalle WITHOUT DEFAULTS FROM rm_detalle.*
 	BEFORE INPUT
 		--#CALL dialog.keysetlabel("F1","")
 		--#CALL dialog.keysetlabel("CONTROL-W","")
+		--#IF num_args() <> 4 THEN
+			--#CALL dialog.keysetlabel("INTERRUPT","Regresar")
+		--#END IF
 	BEFORE ROW
 		LET i = arr_curr()
 		LET j = scr_line()
@@ -809,6 +812,9 @@ DISPLAY ARRAY rm_detalle TO rm_detalle.*
 	--#BEFORE DISPLAY
 		--#CALL dialog.keysetlabel("ACCEPT","")
 		--#CALL dialog.keysetlabel("F1","")
+		--#IF num_args() <> 4 THEN
+			--#CALL dialog.keysetlabel("INTERRUPT","Regresar")
+		--#END IF
 		--#CALL dialog.keysetlabel("CONTROL-W","")
 	--#AFTER DISPLAY
 		--#CONTINUE DISPLAY
@@ -890,7 +896,8 @@ FUNCTION calcular_total()
 
 LET rm_t20.t20_total_neto = rm_t20.t20_total_mo + rm_t20.t20_total_rp +
 			    rm_t20.t20_mano_ext + rm_t20.t20_total_impto +
-			    rm_t20.t20_otros_mat + rm_t20.t20_gastos
+			    rm_t20.t20_otros_mat + rm_t20.t20_gastos -
+			    rm_t20.t20_vde_mo_tal
 
 END FUNCTION
 

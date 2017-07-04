@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000269012</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000269012</guiaRemision>
+<razonSocialComprador>GRAIMAN CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>0190122271001</identificacionComprador>
+<totalSinImpuestos>371.46</totalSinImpuestos>
+<totalDescuento>65.55</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>371.46</baseImponible>
+<valor>44.58</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>416.04</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>45015</codigoPrincipal>
+<descripcion>BOMBA HIDRAULICA MANUAL P-141 1 VELOCIDAD 20 Pulg3 10000 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>437.01</precioUnitario>
+<descuento>65.55</descuento>
+<precioTotalSinImpuesto>371.46</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>371.46</baseImponible>
+<valor>44.58</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">dochoa@graiman.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">072862255</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">046583</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C# OM15000021</campoAdicional>
+</infoAdicional>
+</factura>

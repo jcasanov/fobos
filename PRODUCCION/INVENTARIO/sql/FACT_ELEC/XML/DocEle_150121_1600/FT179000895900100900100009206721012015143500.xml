@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092067</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092067</guiaRemision>
+<razonSocialComprador>MEDINA SANTILLAN JONNATHAN MAURICIO</razonSocialComprador>
+<identificacionComprador>0919388058001</identificacionComprador>
+<totalSinImpuestos>6162.13</totalSinImpuestos>
+<totalDescuento>1262.13</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>6162.13</baseImponible>
+<valor>739.46</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>6901.59</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>101146</codigoPrincipal>
+<descripcion>TECLE ELECTRICO A CADENA NER030C  DE 3 Ton. 230/3F BAJA VELOC. S/CADENA Y CABLE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>4036.46</precioUnitario>
+<descuento>686.20</descuento>
+<precioTotalSinImpuesto>3350.26</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KITO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3350.26</baseImponible>
+<valor>402.03</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100326</codigoPrincipal>
+<descripcion>CADENA LCER2020NP P/TECLE ELECTRICO 3F. DE 2 Y 3 Ton.</descripcion>
+<cantidad>38.00</cantidad>
+<precioUnitario>87.58</precioUnitario>
+<descuento>565.77</descuento>
+<precioTotalSinImpuesto>2762.27</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KITO"/>
+<detAdicional nombre="UNIDAD" valor="M"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2762.27</baseImponible>
+<valor>331.47</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99485</codigoPrincipal>
+<descripcion>CABLE ELECTRICO 16/6P P/BOTONERA DE TROLLEY (CADA METRO)</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>19.92</precioUnitario>
+<descuento>10.16</descuento>
+<precioTotalSinImpuesto>49.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KITO"/>
+<detAdicional nombre="UNIDAD" valor="M"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>49.60</baseImponible>
+<valor>5.95</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">eecuaelevadores@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2309345</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">015171</campoAdicional>
+</infoAdicional>
+</factura>

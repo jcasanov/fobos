@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268679</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268679</guiaRemision>
+<razonSocialComprador>CASAMAR</razonSocialComprador>
+<identificacionComprador>1792386799001</identificacionComprador>
+<totalSinImpuestos>3180.00</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>3180.00</baseImponible>
+<valor>381.60</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>3561.60</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>69569</codigoPrincipal>
+<descripcion>LAVAPLATOS DE ACERO INOXIDABLE 10125047 TU 33.18-R 2P 84.5x47cm BAJO MESON INCL.VALV. 3-1/2"</descripcion>
+<cantidad>12.00</cantidad>
+<precioUnitario>265.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3180.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TEKA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3180.00</baseImponible>
+<valor>381.60</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">metroeje@metroeje.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3564408</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">063405</campoAdicional>
+<campoAdicional nombre="Observaciones">ATN. JENNY RUIZ (PRECIO ESPECIAL)</campoAdicional>
+</infoAdicional>
+</factura>

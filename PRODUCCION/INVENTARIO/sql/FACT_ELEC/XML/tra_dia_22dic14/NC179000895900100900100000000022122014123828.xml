@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000016386</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>ACERO COMERCIAL ECUATORIANO S.A.</razonSocialComprador>
+<identificacionComprador>1790008959001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000103798</numDocModificado>
+<fechaEmisionDocSustento>05/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>173.83</totalSinImpuestos>
+<valorModificacion>194.69</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>173.83</baseImponible>
+<valor>20.86</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEVOLUCION: NO LE SIRVIO PARA SU ACTIVID</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>93769</codigoInterno>
+<descripcion>FRESA ANULAR PARA TALADRO ELECTROMAGNETICO 49-59-0625 DE 5/8" P/PLANCHA DE HASTA 1"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>40.87</precioUnitario>
+<descuento>14.30</descuento>
+<precioTotalSinImpuesto>26.57</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>26.57</baseImponible>
+<valor>3.19</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>93770</codigoInterno>
+<descripcion>FRESA ANULAR PARA TALADRO ELECTROMAGNETICO 49-59-0687 DE 11/16" P/PLANCHA DE HASTA 1"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>42.04</precioUnitario>
+<descuento>14.71</descuento>
+<precioTotalSinImpuesto>27.33</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>27.33</baseImponible>
+<valor>3.28</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>93771</codigoInterno>
+<descripcion>FRESA ANULAR PARA TALADRO ELECTROMAGNETICO 49-59-0750 DE 3/4" P/ PLANCHA DE HASTA 1"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>44.69</precioUnitario>
+<descuento>15.64</descuento>
+<precioTotalSinImpuesto>29.05</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>29.05</baseImponible>
+<valor>3.49</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>93774</codigoInterno>
+<descripcion>FRESA ANULAR PARA TALADRO ELECTROMAGNETICO 49-59-0937 DE 15/16" P/PLANCHA DE HASTA 1"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>54.26</precioUnitario>
+<descuento>18.99</descuento>
+<precioTotalSinImpuesto>35.27</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>35.27</baseImponible>
+<valor>4.23</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>93776</codigoInterno>
+<descripcion>FRESA ANULAR PARA TALADRO ELECTROMAGNETICO 49-59-1062 DE 1-1/16" P/PLANCHA DE HASTA 1"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>59.72</precioUnitario>
+<descuento>20.90</descuento>
+<precioTotalSinImpuesto>38.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>38.82</baseImponible>
+<valor>4.66</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>70389</codigoInterno>
+<descripcion>FRESA ANULAR PARA TALADROS MANUALES 44-60-1720 PIN EYECTOR P/CORT.ANUL.DE 1" DE PROFUNDIDAD</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>25.83</precioUnitario>
+<descuento>9.04</descuento>
+<precioTotalSinImpuesto>16.79</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>16.79</baseImponible>
+<valor>2.01</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">credito@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2683060</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">101</campoAdicional>
+</infoAdicional>
+</notaCredito>

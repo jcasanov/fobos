@@ -1,0 +1,27 @@
+DATABASE aceros
+SCREEN
+{
+  LIQ. REPUESTOS
+ ----------------
+  Liquidación  E     
+ ----------------
+ [c01       ] [c] 
+ [c01       ] [c]
+ [c01       ] [c]
+ [c01       ] [c]
+ [c01       ] [c]
+ [c01       ] [c]
+ [c01       ] [c]
+ [c01       ] [c]
+ [c01       ] [c]
+ [c01       ] [c]
+}
+TABLES
+rept028
+ATTRIBUTES
+c01  = r28_numliq, UPSHIFT, REVERSE;
+c    = r28_estado, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_liqrep[10] (r28_numliq, r28_estado)

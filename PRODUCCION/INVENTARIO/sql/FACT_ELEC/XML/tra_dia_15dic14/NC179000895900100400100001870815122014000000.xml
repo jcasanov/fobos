@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000018708</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento> AV. RAFAEL ANDRADE Y GREGORIO URAPARI</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>GOBIERNO AUTONOMO DESCENTRALIZADO MUNICIPAL DEL CANTON LORETO</razonSocialComprador>
+<identificacionComprador>1560001830001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000018708</numDocModificado>
+<fechaEmisionDocSustento>15/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>22113.00</totalSinImpuestos>
+<valorModificacion>24766.56</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>22113.00</baseImponible>
+<valor>2653.56</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV. DF-21022 FACT. FA-267409</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>25089</codigoInterno>
+<descripcion>DEV. DF-21022 FACT. FA-267409</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>22113.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>22113.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ACERO" valor="ACERO"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>22113.00</baseImponible>
+<valor>2653.56</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+<campoAdicional nombre="telefono-movil">06-2893239</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">24302</campoAdicional>
+</infoAdicional>
+</notaCredito>

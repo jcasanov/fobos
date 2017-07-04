@@ -3,33 +3,35 @@ SCREEN
 {
  GUIAS DE REMISION
 
- [c000  |c001              |c002                          |c|d]
-[c010  |c011              |c012                          |e|f]
-[c010  |c011              |c012                          |e|f]
-[c010  |c011              |c012                          |e|f]
-[c010  |c011              |c012                          |e|f]
-[c010  |c011              |c012                          |e|f]
-[c010  |c011              |c012                          |e|f]
-[c010  |c011              |c012                          |e|f]
-[c010  |c011              |c012                          |e|f]
-[c010  |c011              |c012                          |e|f]
-[c010  |c011              |c012                          |e|f]
+ [c000  |c001              |c002                          |c003      |c|d]
+[c010  |c011              |c012                          |c013      |e|f]
+[c010  |c011              |c012                          |c013      |e|f]
+[c010  |c011              |c012                          |c013      |e|f]
+[c010  |c011              |c012                          |c013      |e|f]
+[c010  |c011              |c012                          |c013      |e|f]
+[c010  |c011              |c012                          |c013      |e|f]
+[c010  |c011              |c012                          |c013      |e|f]
+[c010  |c011              |c012                          |c013      |e|f]
+[c010  |c011              |c012                          |c013      |e|f]
+[c010  |c011              |c012                          |c013      |e|f]
 }
 TABLES
 rept095
 ATTRIBUTES
-c000 = FORMONLY.bt_guia, WIDGET = 'BUTTON', CONFIG = 'F15';
-c001 = FORMONLY.bt_sri,  WIDGET = 'BUTTON', CONFIG = 'F16';
-c002 = FORMONLY.bt_dest, WIDGET = 'BUTTON', CONFIG = 'F17';
-c    = FORMONLY.bt_moti, WIDGET = 'BUTTON', CONFIG = 'F18';
-d    = FORMONLY.bt_esta, WIDGET = 'BUTTON', CONFIG = 'F19';
+c000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c002 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c003 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c    = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+d    = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
 
 c010 = rept095.r95_guia_remision, NOENTRY, UPSHIFT;
 c011 = rept095.r95_num_sri, NOENTRY, UPSHIFT;
 c012 = rept095.r95_persona_dest, NOENTRY, UPSHIFT;
+c013 = rept095.r95_fecha_emi, NOENTRY, UPSHIFT, FORMAT = "dd-mm-yyyy";
 e    = rept095.r95_motivo, NOENTRY, UPSHIFT;
 f    = rept095.r95_estado, NOENTRY, UPSHIFT;
 END
 INSTRUCTIONS
 SCREEN RECORD rh_guia[10] (r95_guia_remision, r95_num_sri, r95_persona_dest,
-				r95_motivo, r95_estado)
+				r95_fecha_emi, r95_motivo, r95_estado)

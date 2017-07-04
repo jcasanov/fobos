@@ -41,7 +41,6 @@ DEFINE vm_max_rows	SMALLINT
 DEFINE vm_num_rows	SMALLINT
 DEFINE rm_j10		RECORD LIKE cajt010.*
 DEFINE rm_j14		RECORD LIKE cajt014.*
-DEFINE rm_s00   	RECORD LIKE srit000.*
 DEFINE rm_detret	ARRAY[50] OF RECORD
 				j14_tipo_ret	LIKE cajt014.j14_tipo_ret,
 				j14_porc_ret	LIKE cajt014.j14_porc_ret,
@@ -50,11 +49,7 @@ DEFINE rm_detret	ARRAY[50] OF RECORD
 				j14_base_imp	LIKE cajt014.j14_base_imp,
 				j14_valor_ret	LIKE cajt014.j14_valor_ret
 			END RECORD
-DEFINE fec_ini_por	ARRAY[50] OF RECORD
-				fec_i_p		LIKE cajt014.j14_fec_ini_porc,
-				cod_tran	LIKE cajt014.j14_cod_tran,
-				num_tran	LIKE cajt014.j14_num_tran
-			END RECORD
+DEFINE fec_ini_por	ARRAY[50] OF LIKE cajt014.j14_fec_ini_porc
 DEFINE vm_num_ret	SMALLINT
 DEFINE vm_max_ret	SMALLINT
 DEFINE tot_base_imp	DECIMAL(12,2)
@@ -97,15 +92,10 @@ DEFINE num_rows 	SMALLINT
 DEFINE num_cols 	SMALLINT
 
 CALL fl_nivel_isolation()
-CALL fl_lee_configuracion_sri(vg_codcia) RETURNING rm_s00.*
-IF rm_s00.s00_compania IS NULL THEN
-	CALL fl_mostrar_mensaje('No existe configurada la compania de SRI.', 'stop')
-	RETURN
-END IF
 CREATE TEMP TABLE tmp_ret
 	(
 		cod_pago		CHAR(2),
-		num_ret_sri		CHAR(21),
+		num_ret_sri		CHAR(16),
 		autorizacion		VARCHAR(15,10),
 		fecha_emi		DATE,
 		tipo_ret		CHAR(1),
@@ -115,9 +105,7 @@ CREATE TEMP TABLE tmp_ret
 		base_imp		DECIMAL(12,2),
 		valor_ret		DECIMAL(12,2),
 		fec_ini_porc		DATE,
-		cod_tran		CHAR(2),
-		num_tran		DECIMAL(15,0),
-		num_fac_sri		CHAR(21)
+		num_fac_sri		CHAR(16)
 	)
 LET lin_menu = 0
 LET row_ini  = 3
@@ -370,14 +358,13 @@ END FUNCTION
 
 
 FUNCTION ejecutar_carga_datos_temp()
-DEFINE query		CHAR(3500)
+DEFINE query		CHAR(3000)
 DEFINE tabla		VARCHAR(15)
 DEFINE expr_tip		VARCHAR(100)
 DEFINE expr_cli		VARCHAR(100)
 DEFINE expr_num		VARCHAR(100)
 DEFINE expr_sri		CHAR(400)
 DEFINE expr_fec		CHAR(200)
-DEFINE expr_ret		CHAR(400)
 DEFINE cuantos		INTEGER
 
 ERROR 'Generando consulta . . . espere por favor' ATTRIBUTE(NORMAL)
@@ -409,16 +396,6 @@ IF rm_par.num_sri IS NOT NULL THEN
 			'   AND r38_num_sri         = "',
 						rm_par.num_sri CLIPPED, '"'
 END IF
-LET expr_ret = NULL
-IF rm_par.tipo_fuente <> 'SC' THEN
-	LET expr_ret = '   AND EXISTS ',
-			'(SELECT 1 FROM cajt014 ',
-				'WHERE j14_compania  = j10_compania ',
-				'  AND j14_localidad = j10_localidad ',
-				'  AND j14_tipo_fue  = j10_tipo_fuente ',
-				'  AND j14_cod_tran  = j10_tipo_destino ',
-				'  AND j14_num_tran  = j10_num_destino) '
-END IF
 LET query = ' SELECT UNIQUE DATE(j10_fecha_pro) fecha_fact, j10_num_destino,',
 			' j10_nomcli, j11_codigo_pago, j11_num_ch_aut,',
 			' j11_valor, j10_codcli, j10_num_fuente,',
@@ -441,7 +418,6 @@ LET query = ' SELECT UNIQUE DATE(j10_fecha_pro) fecha_fact, j10_num_destino,',
 				'   AND j01_codigo_pago  = j11_codigo_pago ',
 				'   AND j01_cont_cred   IN ("C", "R") ',
 				'   AND j01_retencion    = "S") ',
-		expr_ret CLIPPED,
 		' INTO TEMP tmp_det '
 PREPARE exec_tmp FROM query
 EXECUTE exec_tmp
@@ -835,7 +811,7 @@ IF cuantos <= 1 THEN
 							rm_j10.j10_num_fuente)
 				RETURNING r_t23.*
 			LET valor_bruto = r_t23.t23_tot_bruto -
-						r_t23.t23_vde_mo_tal
+						r_t23.t23_tot_dscto
 			LET valor_impto = r_t23.t23_val_impto
 			LET subtotal    = valor_bruto + valor_impto
 			LET flete       = NULL
@@ -908,7 +884,7 @@ ELSE
 		INSERT INTO tmp_ret
 			VALUES(codigo_pago, rm_j14.j14_num_ret_sri,
 				rm_j14.j14_autorizacion, rm_j14.j14_fecha_emi,
-				rm_detret[i].*, fec_ini_por[i].*,
+				rm_detret[i].*, fec_ini_por[i],
 				rm_j14.j14_num_fact_sri)
 	END FOR
 	CALL grabar_detalle_retencion(codigo_pago, posi, tipo_llamada)
@@ -979,14 +955,14 @@ END FUNCTION
 
 FUNCTION cargar_retenciones(codigo_pago)
 DEFINE codigo_pago	LIKE cajt001.j01_codigo_pago
-DEFINE query		CHAR(8000)
+DEFINE query		CHAR(6000)
 
 IF registros_retenciones(codigo_pago) = 0 THEN
 	CALL query_principal_retenciones(codigo_pago) RETURNING query
 ELSE
 	LET query = 'SELECT num_ret_sri, autorizacion, fecha_emi, tipo_ret,',
 			' porc_ret, codigo_sri, concepto_ret, base_imp,',
-			' valor_ret, fec_ini_porc, cod_tran, num_tran ',
+			' valor_ret, fec_ini_porc ',
 			' FROM tmp_ret ',
 			' WHERE cod_pago = "', codigo_pago, '"'
 END IF
@@ -995,19 +971,13 @@ DECLARE q_cons_ret CURSOR FOR cons_ret
 LET vm_num_ret = 1
 FOREACH q_cons_ret INTO rm_j14.j14_num_ret_sri, rm_j14.j14_autorizacion,
 			rm_j14.j14_fecha_emi, rm_detret[vm_num_ret].*,
-			fec_ini_por[vm_num_ret].*
-	IF rm_detret[vm_num_ret].j14_tipo_ret IS NULL THEN
-		CONTINUE FOREACH
-	END IF
+			fec_ini_por[vm_num_ret]
 	IF registros_retenciones(codigo_pago) = 0 THEN
 		IF LENGTH(rm_detret[vm_num_ret].j14_codigo_sri) < 2 THEN
 			INITIALIZE rm_j14.* TO NULL
 			LET rm_detret[vm_num_ret].j14_codigo_sri   = NULL
 			LET rm_detret[vm_num_ret].c03_concepto_ret = NULL
 		END IF
-	END IF
-	IF LENGTH(rm_j14.j14_num_ret_sri) < 14 THEN
-		LET rm_j14.j14_num_ret_sri = NULL
 	END IF
 	LET vm_num_ret = vm_num_ret + 1
 	IF vm_num_ret > vm_max_ret THEN
@@ -1029,30 +999,28 @@ DEFINE flag		SMALLINT
 DECLARE q_ret3 CURSOR FOR
 	SELECT j14_num_ret_sri, j14_autorizacion, j14_fecha_emi, j14_tipo_ret,
 		j14_porc_ret, j14_codigo_sri, c03_concepto_ret, j14_base_imp,
-		j14_valor_ret, j14_sec_ret, j14_fec_ini_porc, j14_cod_tran,
-		j14_num_tran, j14_num_fact_sri
+		j14_valor_ret, j14_sec_ret, j14_fec_ini_porc, j14_num_fact_sri
 		FROM cajt014, ordt003
-		WHERE j14_compania       = vg_codcia
-		  AND j14_localidad      = vg_codloc
-		  AND j14_tipo_fuente    = rm_j10.j10_tipo_fuente
-		  AND j14_num_fuente     = rm_j10.j10_num_fuente
-		  AND j14_codigo_pago    = codigo_pago
-		  AND c03_compania       = j14_compania
-		  AND c03_tipo_ret       = j14_tipo_ret
-		  AND c03_porcentaje     = j14_porc_ret
-		  AND c03_codigo_sri     = j14_codigo_sri
+		WHERE j14_compania    = vg_codcia
+		  AND j14_localidad   = vg_codloc
+		  AND j14_tipo_fuente = rm_j10.j10_tipo_fuente
+		  AND j14_num_fuente  = rm_j10.j10_num_fuente
+		  AND j14_codigo_pago = codigo_pago
+		  AND c03_compania    = j14_compania
+		  AND c03_tipo_ret    = j14_tipo_ret
+		  AND c03_porcentaje  = j14_porc_ret
+		  AND c03_codigo_sri  = j14_codigo_sri
 		  AND c03_fecha_ini_porc = j14_fec_ini_porc
 		ORDER BY j14_sec_ret
 LET vm_num_ret = 1
 FOREACH q_ret3 INTO rm_j14.j14_num_ret_sri, rm_j14.j14_autorizacion,
 			rm_j14.j14_fecha_emi, rm_detret[vm_num_ret].*, sec,
-			fec_ini_por[vm_num_ret].*, rm_j14.j14_num_fact_sri
+			fec_ini_por[vm_num_ret], rm_j14.j14_num_fact_sri
 	IF flag THEN
 		INSERT INTO tmp_ret
 			VALUES(codigo_pago, rm_j14.j14_num_ret_sri,
 				rm_j14.j14_autorizacion, rm_j14.j14_fecha_emi,
-				rm_detret[vm_num_ret].*,
-				fec_ini_por[vm_num_ret].*,
+				rm_detret[vm_num_ret].*,fec_ini_por[vm_num_ret],
 				rm_j14.j14_num_fact_sri)
 	END IF
 	LET vm_num_ret = vm_num_ret + 1
@@ -1092,178 +1060,69 @@ END FUNCTION
 FUNCTION query_principal_retenciones(codigo_pago)
 DEFINE codigo_pago	LIKE cajt001.j01_codigo_pago
 DEFINE tipo_fue		LIKE ordt002.c02_tipo_fuente
-DEFINE query		CHAR(8000)
+DEFINE query		CHAR(6000)
 
 CASE rm_j10.j10_tipo_fuente
 	WHEN "PR" LET tipo_fue = 'B'
 	WHEN "OT" LET tipo_fue = 'S'
 END CASE
-LET query = 'SELECT "", "", "", ',
-		' CASE WHEN ("', rm_j10.j10_tipo_fuente, '" = "PR" AND ',
-				'c03_tipo_fuente = "B") OR',
-			' ("', rm_j10.j10_tipo_fuente, '" = "OT" AND ',
-				'c03_tipo_fuente = "B" AND ',
-			'(SELECT t23_val_mo_cti ',
-				'FROM talt023 ',
-				'WHERE t23_compania  = z08_compania ',
-				'  AND t23_localidad = ', rm_j10.j10_localidad,
-				'  AND t23_orden     = ', rm_j10.j10_num_fuente,
-						') > 0) OR ',
-				' ("', rm_j10.j10_tipo_fuente, '" = "OT" AND ',
-					'c03_tipo_fuente = "S" AND ',
-				'(SELECT t23_val_mo_tal ',
-				'FROM talt023 ',
-				'WHERE t23_compania  = z08_compania ',
-				'  AND t23_localidad = ', rm_j10.j10_localidad,
-				'  AND t23_orden     = ', rm_j10.j10_num_fuente,
-						') > 0) OR ',
-				' ("', rm_j10.j10_tipo_fuente, '" = "OT" AND ',
-					'c03_tipo_fuente = "T") ',
-				'THEN z08_tipo_ret ',
-			' END, ',
-		' CASE WHEN ("', rm_j10.j10_tipo_fuente, '" = "PR" AND ',
-				'c03_tipo_fuente = "B") OR',
-			' ("', rm_j10.j10_tipo_fuente, '" = "OT" AND ',
-					'c03_tipo_fuente = "B" AND ',
-				'(SELECT t23_val_mo_cti ',
-				'FROM talt023 ',
-				'WHERE t23_compania  = z08_compania ',
-				'  AND t23_localidad = ', rm_j10.j10_localidad,
-				'  AND t23_orden     = ', rm_j10.j10_num_fuente,
-						') > 0) OR ',
-				' ("', rm_j10.j10_tipo_fuente, '" = "OT" AND ',
-					'c03_tipo_fuente = "S" AND ',
-				'(SELECT t23_val_mo_tal ',
-				'FROM talt023 ',
-				'WHERE t23_compania  = z08_compania ',
-				'  AND t23_localidad = ', rm_j10.j10_localidad,
-				'  AND t23_orden     = ', rm_j10.j10_num_fuente,
-						') > 0) OR ',
-				' ("', rm_j10.j10_tipo_fuente, '" = "OT" AND ',
-					'c03_tipo_fuente = "T") ',
-				'THEN z08_porcentaje ',
-			' END, ',
-		' z08_codigo_sri, c03_concepto_ret, ',
-		' CASE WHEN "', rm_j10.j10_tipo_fuente, '" = "PR" AND ',
-				'c03_tipo_fuente = "B" THEN',
+LET query = 'SELECT "", "", "", z08_tipo_ret, z08_porcentaje,',
+		' "", "",',
+		' CASE WHEN "', rm_j10.j10_tipo_fuente, '" = "PR" THEN',
 		' (SELECT r23_tot_bruto - r23_tot_dscto ',
 			'FROM rept023 ',
 			'WHERE r23_compania  = z08_compania ',
 			'  AND r23_localidad = ', rm_j10.j10_localidad,
 			'  AND r23_numprev   = ', rm_j10.j10_num_fuente,
 			')',
-			'      WHEN "', rm_j10.j10_tipo_fuente, '" = "OT" AND ',
-					'c03_tipo_fuente = "B" AND ',
-				'(SELECT t23_val_mo_cti ',
-				'FROM talt023 ',
-				'WHERE t23_compania  = z08_compania ',
-				'  AND t23_localidad = ', rm_j10.j10_localidad,
-				'  AND t23_orden     = ', rm_j10.j10_num_fuente,
-						') > 0 ',
-				'THEN',
-			' (SELECT t23_val_mo_cti ',
-				'FROM talt023 ',
-				'WHERE t23_compania  = z08_compania ',
-				'  AND t23_localidad = ', rm_j10.j10_localidad,
-				'  AND t23_orden     = ', rm_j10.j10_num_fuente,
-				')',
-			'      WHEN "', rm_j10.j10_tipo_fuente, '" = "OT" AND ',
-					'c03_tipo_fuente = "S" AND ',
-				'(SELECT t23_val_mo_tal ',
-				'FROM talt023 ',
-				'WHERE t23_compania  = z08_compania ',
-				'  AND t23_localidad = ', rm_j10.j10_localidad,
-				'  AND t23_orden     = ', rm_j10.j10_num_fuente,
-						') > 0 ',
-				'THEN',
-			' (SELECT t23_val_mo_tal - t23_vde_mo_tal ',
-				'FROM talt023 ',
-				'WHERE t23_compania  = z08_compania ',
-				'  AND t23_localidad = ', rm_j10.j10_localidad,
-				'  AND t23_orden     = ', rm_j10.j10_num_fuente,
-				')',
-			'      WHEN "', rm_j10.j10_tipo_fuente, '" = "OT" AND ',
-					'c03_tipo_fuente = "T" THEN ',
-			' (SELECT t23_tot_bruto - t23_vde_mo_tal ',
-				'FROM talt023 ',
-				'WHERE t23_compania  = z08_compania ',
-				'  AND t23_localidad = ', rm_j10.j10_localidad,
-				'  AND t23_orden     = ', rm_j10.j10_num_fuente,
-				')',
-		--' ELSE 0 ',
+			'      WHEN "', rm_j10.j10_tipo_fuente, '" = "OT" THEN',
+		' (SELECT t23_tot_bruto - t23_tot_dscto ',
+			'FROM talt023 ',
+			'WHERE t23_compania  = z08_compania ',
+			'  AND t23_localidad = ', rm_j10.j10_localidad,
+			'  AND t23_orden     = ', rm_j10.j10_num_fuente,
+			')',
+		' ELSE 0 ',
 		' END, ',
-		' CASE WHEN "', rm_j10.j10_tipo_fuente, '" = "PR" AND ',
-				'c03_tipo_fuente = "B" THEN',
+		' CASE WHEN "', rm_j10.j10_tipo_fuente, '" = "PR" THEN',
 		' (SELECT r23_tot_bruto - r23_tot_dscto ',
 			'FROM rept023 ',
 			'WHERE r23_compania  = z08_compania ',
 			'  AND r23_localidad = ', rm_j10.j10_localidad,
 			'  AND r23_numprev   = ', rm_j10.j10_num_fuente,
 			')',
-			'      WHEN "', rm_j10.j10_tipo_fuente, '" = "OT" AND ',
-					'c03_tipo_fuente = "B" AND ',
-				'(SELECT t23_val_mo_cti ',
-				'FROM talt023 ',
-				'WHERE t23_compania  = z08_compania ',
-				'  AND t23_localidad = ', rm_j10.j10_localidad,
-				'  AND t23_orden     = ', rm_j10.j10_num_fuente,
-						') > 0 ',
-				'THEN',
-			' (SELECT t23_val_mo_cti ',
-				'FROM talt023 ',
-				'WHERE t23_compania  = z08_compania ',
-				'  AND t23_localidad = ', rm_j10.j10_localidad,
-				'  AND t23_orden     = ', rm_j10.j10_num_fuente,
-				')',
-			'      WHEN "', rm_j10.j10_tipo_fuente, '" = "OT" AND ',
-					'c03_tipo_fuente = "S" AND ',
-				'(SELECT t23_val_mo_tal ',
-				'FROM talt023 ',
-				'WHERE t23_compania  = z08_compania ',
-				'  AND t23_localidad = ', rm_j10.j10_localidad,
-				'  AND t23_orden     = ', rm_j10.j10_num_fuente,
-						') > 0 ',
-				'THEN',
-			' (SELECT t23_val_mo_tal - t23_vde_mo_tal ',
-				'FROM talt023 ',
-				'WHERE t23_compania  = z08_compania ',
-				'  AND t23_localidad = ', rm_j10.j10_localidad,
-				'  AND t23_orden     = ', rm_j10.j10_num_fuente,
-				')',
-			'      WHEN "', rm_j10.j10_tipo_fuente, '" = "OT" AND ',
-					'c03_tipo_fuente = "T" THEN ',
-			' (SELECT t23_tot_bruto - t23_vde_mo_tal ',
-				'FROM talt023 ',
-				'WHERE t23_compania  = z08_compania ',
-				'  AND t23_localidad = ', rm_j10.j10_localidad,
-				'  AND t23_orden     = ', rm_j10.j10_num_fuente,
-				')',
-		--' ELSE 0 ',
+			'      WHEN "', rm_j10.j10_tipo_fuente, '" = "OT" THEN',
+		' (SELECT t23_tot_bruto - t23_tot_dscto ',
+			'FROM talt023 ',
+			'WHERE t23_compania  = z08_compania ',
+			'  AND t23_localidad = ', rm_j10.j10_localidad,
+			'  AND t23_orden     = ', rm_j10.j10_num_fuente,
+			')',
+		' ELSE 0 ',
 		' END * (c02_porcentaje / 100), z08_fecha_ini_porc ',
 		' FROM cxct008, ordt003, ordt002, cajt091 ',
-		' WHERE z08_compania       = ', vg_codcia,
-		'   AND z08_codcli         = ', rm_j10.j10_codcli,
-		'   AND z08_defecto        = "S" ',
-		'   AND c03_compania       = z08_compania ',
-		'   AND c03_tipo_ret       = z08_tipo_ret ',
-		'   AND c03_porcentaje     = z08_porcentaje ',
-		'   AND c03_codigo_sri     = z08_codigo_sri ',
+		' WHERE z08_compania    = ', vg_codcia,
+		'   AND z08_codcli      = ', rm_j10.j10_codcli,
+		'   AND z08_defecto     = "S" ',
+		'   AND c03_compania    = z08_compania ',
+		'   AND c03_tipo_ret    = z08_tipo_ret ',
+		'   AND c03_porcentaje  = z08_porcentaje ',
+		'   AND c03_codigo_sri  = z08_codigo_sri ',
 		'   AND c03_fecha_ini_porc = z08_fecha_ini_porc ',
-		'   AND c03_estado         = "A" ',
-		'   AND c02_compania       = c03_compania ',
-		'   AND c02_tipo_ret       = c03_tipo_ret ',
-		'   AND c02_porcentaje     = c03_porcentaje ',
-		'   AND c02_estado         = "A" ',
-		'   AND j91_compania       = c02_compania ',
-		'   AND j91_codigo_pago    = "', codigo_pago, '"',
-		'   AND j91_cont_cred      = "C" ',
-		'   AND j91_tipo_ret       = c02_tipo_ret ',
-		'   AND j91_porcentaje     = c02_porcentaje ',
+		'   AND c03_estado      = "A" ',
+		'   AND c02_compania    = c03_compania ',
+		'   AND c02_tipo_ret    = c03_tipo_ret ',
+		'   AND c02_porcentaje  = c03_porcentaje ',
+		'   AND c02_estado      = "A" ',
+		'   AND j91_compania    = c02_compania ',
+		'   AND j91_codigo_pago = "', codigo_pago, '"',
+		'   AND j91_cont_cred   = "C" ',
+		'   AND j91_tipo_ret    = c02_tipo_ret ',
+		'   AND j91_porcentaje  = c02_porcentaje ',
 	' UNION ',
 	' SELECT "", "", "", z08_tipo_ret, z08_porcentaje,',
 		' c03_codigo_sri, c03_concepto_ret,',
-		' CASE WHEN "', rm_j10.j10_tipo_fuente, '" = "PR" AND ',
-				'c03_tipo_fuente = "B" THEN',
+		' CASE WHEN "', rm_j10.j10_tipo_fuente, '" = "PR" THEN',
 		' (SELECT r23_flete ',
 			'FROM rept023 ',
 			'WHERE r23_compania  = z08_compania ',
@@ -1272,8 +1131,7 @@ LET query = 'SELECT "", "", "", ',
 			')',
 		' ELSE 0 ',
 		' END, ',
-		' CASE WHEN "', rm_j10.j10_tipo_fuente, '" = "PR" AND ',
-				'c03_tipo_fuente = "B" THEN',
+		' CASE WHEN "', rm_j10.j10_tipo_fuente, '" = "PR" THEN',
 		' (SELECT r23_flete ',
 			'FROM rept023 ',
 			'WHERE r23_compania  = z08_compania ',
@@ -1283,24 +1141,24 @@ LET query = 'SELECT "", "", "", ',
 		' ELSE 0 ',
 		' END * (c02_porcentaje / 100), z08_fecha_ini_porc ',
 		' FROM cxct008, ordt003, ordt002, cajt091 ',
-		' WHERE z08_compania       = ', vg_codcia,
-		'   AND z08_codcli         = ', rm_j10.j10_codcli,
-		'   AND z08_flete          = "S" ',
-		'   AND c03_compania       = z08_compania ',
-		'   AND c03_tipo_ret       = z08_tipo_ret ',
-		'   AND c03_porcentaje     = z08_porcentaje ',
-		'   AND c03_codigo_sri     = z08_codigo_sri ',
+		' WHERE z08_compania    = ', vg_codcia,
+		'   AND z08_codcli      = ', rm_j10.j10_codcli,
+		'   AND z08_flete       = "S" ',
+		'   AND c03_compania    = z08_compania ',
+		'   AND c03_tipo_ret    = z08_tipo_ret ',
+		'   AND c03_porcentaje  = z08_porcentaje ',
+		'   AND c03_codigo_sri  = z08_codigo_sri ',
 		'   AND c03_fecha_ini_porc = z08_fecha_ini_porc ',
-		'   AND c03_estado         = "A" ',
-		'   AND c02_compania       = c03_compania ',
-		'   AND c02_tipo_ret       = c03_tipo_ret ',
-		'   AND c02_porcentaje     = c03_porcentaje ',
-		'   AND c02_estado         = "A" ',
-		'   AND j91_compania       = c02_compania ',
-		'   AND j91_codigo_pago    = "', codigo_pago, '"',
-		'   AND j91_cont_cred      = "C" ',
-		'   AND j91_tipo_ret       = c02_tipo_ret ',
-		'   AND j91_porcentaje     = c02_porcentaje ',
+		'   AND c03_estado      = "A" ',
+		'   AND c02_compania    = c03_compania ',
+		'   AND c02_tipo_ret    = c03_tipo_ret ',
+		'   AND c02_porcentaje  = c03_porcentaje ',
+		'   AND c02_estado      = "A" ',
+		'   AND j91_compania    = c02_compania ',
+		'   AND j91_codigo_pago = "', codigo_pago, '"',
+		'   AND j91_cont_cred   = "C" ',
+		'   AND j91_tipo_ret    = c02_tipo_ret ',
+		'   AND j91_porcentaje  = c02_porcentaje ',
 		'   AND EXISTS (SELECT 1 FROM rept023 ',
 			'WHERE r23_compania  = z08_compania ',
 			'  AND r23_localidad = ', rm_j10.j10_localidad,
@@ -1309,8 +1167,7 @@ LET query = 'SELECT "", "", "", ',
 	' UNION ',
 	' SELECT "", "", "", z08_tipo_ret, z08_porcentaje,',
 		' c03_codigo_sri, c03_concepto_ret,',
-		' CASE WHEN "', rm_j10.j10_tipo_fuente, '" = "PR" AND ',
-				'c03_tipo_fuente = "B" THEN',
+		' CASE WHEN "', rm_j10.j10_tipo_fuente, '" = "PR" THEN',
 		' (SELECT r23_tot_neto - r23_tot_bruto + ',
 					'r23_tot_dscto - r23_flete ',
 			'FROM rept023 ',
@@ -1327,8 +1184,7 @@ LET query = 'SELECT "", "", "", ',
 			')',
 		' ELSE 0 ',
 		' END, ',
-		' CASE WHEN "', rm_j10.j10_tipo_fuente, '" = "PR" AND ',
-				'c03_tipo_fuente = "B" THEN',
+		' CASE WHEN "', rm_j10.j10_tipo_fuente, '" = "PR" THEN',
 		' (SELECT r23_tot_neto - r23_tot_bruto + ',
 				'r23_tot_dscto - r23_flete ',
 			'FROM rept023 ',
@@ -1346,25 +1202,25 @@ LET query = 'SELECT "", "", "", ',
 		' ELSE 0 ',
 		' END * (c02_porcentaje / 100), z08_fecha_ini_porc ',
 		' FROM cxct008, ordt003, ordt002, cajt091 ',
-		' WHERE z08_compania       = ', vg_codcia,
-		'   AND z08_codcli         = ', rm_j10.j10_codcli,
-		'   AND z08_tipo_ret       = "I" ',
-		'   AND c03_compania       = z08_compania ',
-		'   AND c03_tipo_ret       = z08_tipo_ret ',
-		'   AND c03_porcentaje     = z08_porcentaje ',
-		'   AND c03_codigo_sri     = z08_codigo_sri ',
+		' WHERE z08_compania    = ', vg_codcia,
+		'   AND z08_codcli      = ', rm_j10.j10_codcli,
+		'   AND z08_tipo_ret    = "I" ',
+		'   AND c03_compania    = z08_compania ',
+		'   AND c03_tipo_ret    = z08_tipo_ret ',
+		'   AND c03_porcentaje  = z08_porcentaje ',
+		'   AND c03_codigo_sri  = z08_codigo_sri ',
 		'   AND c03_fecha_ini_porc = z08_fecha_ini_porc ',
-		'   AND c03_estado         = "A" ',
-		'   AND c02_compania       = c03_compania ',
-		'   AND c02_tipo_ret       = c03_tipo_ret ',
-		'   AND c02_porcentaje     = c03_porcentaje ',
-		'   AND c02_estado         = "A" ',
-		'   AND c02_tipo_fuente    = "', tipo_fue, '"',
-		'   AND j91_compania       = c02_compania ',
-		'   AND j91_codigo_pago    = "', codigo_pago, '"',
-		'   AND j91_cont_cred      = "C" ',
-		'   AND j91_tipo_ret       = c02_tipo_ret ',
-		'   AND j91_porcentaje     = c02_porcentaje '
+		'   AND c03_estado      = "A" ',
+		'   AND c02_compania    = c03_compania ',
+		'   AND c02_tipo_ret    = c03_tipo_ret ',
+		'   AND c02_porcentaje  = c03_porcentaje ',
+		'   AND c02_estado      = "A" ',
+		'   AND c02_tipo_fuente = "', tipo_fue, '"',
+		'   AND j91_compania    = c02_compania ',
+		'   AND j91_codigo_pago = "', codigo_pago, '"',
+		'   AND j91_cont_cred   = "C" ',
+		'   AND j91_tipo_ret    = c02_tipo_ret ',
+		'   AND j91_porcentaje  = c02_porcentaje '
 RETURN query
 
 END FUNCTION
@@ -1376,16 +1232,11 @@ DEFINE codigo_pago	LIKE cajt001.j01_codigo_pago
 DEFINE posi		SMALLINT
 DEFINE tipo_llamada	CHAR(1)
 DEFINE valor_fact	DECIMAL(14,2)
-DEFINE fec_emi		LIKE cajt014.j14_fecha_emi
 DEFINE salir		SMALLINT
 
-LET fec_emi = NULL
-IF tipo_llamada = 'M' THEN
-	LET fec_emi = rm_j14.j14_fecha_emi
-END IF
 LET salir = 0
 WHILE NOT salir
-	CALL lee_cabecera_ret(posi, tipo_llamada, fec_emi)
+	CALL lee_cabecera_ret(posi, tipo_llamada)
 	IF int_flag THEN
 		OPTIONS INPUT WRAP
 		EXIT WHILE
@@ -1401,12 +1252,12 @@ END FUNCTION
 
 
 
-FUNCTION lee_cabecera_ret(posi, tipo_llamada, fec_emi)
+FUNCTION lee_cabecera_ret(posi, tipo_llamada)
 DEFINE posi		SMALLINT
 DEFINE tipo_llamada	CHAR(1)
-DEFINE fec_emi		LIKE cajt014.j14_fecha_emi
 DEFINE r_j14		RECORD LIKE cajt014.*
 DEFINE num_ret		LIKE cajt014.j14_num_ret_sri
+DEFINE fec_emi		LIKE cajt014.j14_fecha_emi
 DEFINE resp		CHAR(6)
 DEFINE fecha		DATE
 DEFINE fecha_min	DATE
@@ -1421,9 +1272,11 @@ IF tipo_llamada = 'I' THEN
 		LET rm_j14.j14_fecha_emi   = TODAY
 	END IF
 END IF
-LET num_ret = NULL
+LET num_ret                = NULL
+LET fec_emi                = NULL
 IF tipo_llamada = 'M' THEN
 	LET num_ret = rm_j14.j14_num_ret_sri
+	LET fec_emi = rm_j14.j14_fecha_emi
 END IF
 LET int_flag = 0
 INPUT BY NAME rm_j14.j14_num_ret_sri, rm_j14.j14_autorizacion,
@@ -1519,8 +1372,7 @@ INPUT BY NAME rm_j14.j14_num_ret_sri, rm_j14.j14_autorizacion,
 			NEXT FIELD j14_autorizacion
 		END IF
 	AFTER FIELD j14_fecha_emi
-		IF rm_j14.j14_fecha_emi <> fecha AND rm_par.tipo_fuente = 'SC'
-		THEN
+		IF rm_j14.j14_fecha_emi IS NULL THEN
 			LET rm_j14.j14_fecha_emi = fecha
 			DISPLAY BY NAME rm_j14.j14_fecha_emi
 		END IF
@@ -1539,21 +1391,12 @@ INPUT BY NAME rm_j14.j14_num_ret_sri, rm_j14.j14_autorizacion,
 				NEXT FIELD j14_fecha_emi
 			END IF
 		END IF
-		LET fecha_min  = fec_emi
-		LET dias_tope  = rm_s00.s00_dias_ret
-		IF rm_par.tipo_fuente <> 'SC' THEN
-			LET dias_tope = 4
-		END IF
-		{--
+		LET fecha_min  = DATE(rm_j10.j10_fecha_pro)
+		LET dias_tope  = 45
+		--LET fecha_tope = fecha_min + (dias_tope + 1) UNITS DAY
 		LET fecha_tope = (MDY(MONTH(fecha_min), 01, YEAR(fecha_min))
 				+ 1 UNITS MONTH - 1 UNITS DAY)
 				+ (dias_tope + 1) UNITS DAY
-		--}
-		LET fecha_tope = fecha_min + (dias_tope + 1) UNITS DAY
-		IF rm_j14.j14_fecha_emi > TODAY THEN
-			CALL fl_mostrar_mensaje('La fecha de retencion no puede ser mayor a la fecha de hoy.', 'exclamation')
-			NEXT FIELD j14_fecha_emi
-		END IF
 		IF rm_j14.j14_fecha_emi < fecha_min THEN
 			LET mensaje = 'La fecha de emision del comprobante no',
 					' puede ser menor que la fecha de',
@@ -1562,7 +1405,6 @@ INPUT BY NAME rm_j14.j14_num_ret_sri, rm_j14.j14_autorizacion,
 			CALL fl_mostrar_mensaje(mensaje, 'exclamation')
 			NEXT FIELD j14_fecha_emi
 		END IF
-		{--
 		IF (MDY(MONTH(fecha_min), 01, YEAR(fecha_min)) + 1 UNITS MONTH
 			- 1 UNITS DAY) < (TODAY - (dias_tope + 1) UNITS DAY)
 		THEN
@@ -1572,7 +1414,6 @@ INPUT BY NAME rm_j14.j14_num_ret_sri, rm_j14.j14_autorizacion,
 			CALL fl_mostrar_mensaje(mensaje, 'exclamation')
 			NEXT FIELD j14_fecha_emi
 		END IF
-		--}
 		IF rm_j14.j14_fecha_emi > fecha_tope THEN
 			LET mensaje = 'La fecha de emision del comprobante no',
 					' puede ser mayor que la fecha ',
@@ -1593,10 +1434,7 @@ DEFINE valor_fact	DECIMAL(14,2)
 DEFINE r_z09		RECORD LIKE cxct009.*
 DEFINE r_c02		RECORD LIKE ordt002.*
 DEFINE r_c03		RECORD LIKE ordt003.*
-DEFINE cod_sri		LIKE cajt014.j14_codigo_sri
 DEFINE base_imp		LIKE cajt014.j14_base_imp
-DEFINE porc_ret		LIKE cajt014.j14_porc_ret
-DEFINE val_ret		LIKE cajt014.j14_valor_ret
 DEFINE resp		CHAR(6)
 DEFINE i, j, l, k	SMALLINT
 DEFINE salir, flag_c	SMALLINT
@@ -1635,14 +1473,13 @@ INPUT ARRAY rm_detret WITHOUT DEFAULTS FROM rm_detret.*
 						rm_j10.j10_codcli,
 						rm_detret[i].j14_tipo_ret,
 						rm_detret[i].j14_porc_ret)
-					RETURNING rm_detret[i].j14_codigo_sri,
-							fec_ini_por[i].fec_i_p
+					RETURNING rm_detret[i].j14_codigo_sri
 				END IF
 				CALL fl_lee_codigos_sri(vg_codcia,
 						rm_detret[i].j14_tipo_ret,
 						rm_detret[i].j14_porc_ret,
 						rm_detret[i].j14_codigo_sri,
-						fec_ini_por[i].fec_i_p)
+						fec_ini_por[i])
 					RETURNING r_c03.*
 				LET rm_detret[i].c03_concepto_ret =
 							r_c03.c03_concepto_ret
@@ -1660,8 +1497,7 @@ INPUT ARRAY rm_detret WITHOUT DEFAULTS FROM rm_detret.*
 			IF r_c03.c03_codigo_sri IS NOT NULL THEN
 				LET rm_detret[i].j14_codigo_sri =
 							r_c03.c03_codigo_sri
-				LET fec_ini_por[i].fec_i_p        =
-							r_c03.c03_fecha_ini_porc
+				LET fec_ini_por[i] = r_c03.c03_fecha_ini_porc
 				LET rm_detret[i].c03_concepto_ret =
 							r_c03.c03_concepto_ret
 				DISPLAY rm_detret[i].* TO rm_detret[j].*
@@ -1673,14 +1509,8 @@ INPUT ARRAY rm_detret WITHOUT DEFAULTS FROM rm_detret.*
 		EXIT INPUT
 	BEFORE INPUT
 		--#CALL dialog.keysetlabel("F1","")
-		--#CALL dialog.keysetlabel("INSERT","")
-		--#CALL dialog.keysetlabel("DELETE","")
 		--#CALL dialog.keysetlabel("CONTROL-W","")
 		--#CALL dialog.keysetlabel("F5","Cabecera")
-	--#BEFORE INSERT
-		--#CANCEL INSERT
-	--#BEFORE DELETE
-		--#CANCEL DELETE
 	BEFORE ROW
 		LET i = arr_curr()
 		LET j = scr_line()
@@ -1690,22 +1520,7 @@ INPUT ARRAY rm_detret WITHOUT DEFAULTS FROM rm_detret.*
 		END IF
 		CALL muestra_contadores_det(i, max_row)
 		CALL calcular_tot_retencion(max_row)
-	BEFORE FIELD j14_porc_ret
-		LET porc_ret = rm_detret[i].j14_porc_ret
-	BEFORE FIELD j14_codigo_sri
-		LET cod_sri = rm_detret[i].j14_codigo_sri
-	BEFORE FIELD j14_base_imp
-		LET base_imp = rm_detret[i].j14_base_imp
-	BEFORE FIELD j14_valor_ret
-		LET val_ret = rm_detret[i].j14_valor_ret
 	AFTER FIELD j14_porc_ret
-		IF rm_detret[i].j14_porc_ret IS NULL OR
-		   porc_ret <> rm_detret[i].j14_porc_ret
-		THEN
-			LET rm_detret[i].j14_porc_ret = porc_ret
-			DISPLAY rm_detret[i].j14_porc_ret TO
-				rm_detret[j].j14_porc_ret
-		END IF
 		SELECT UNIQUE j91_tipo_ret
 			INTO rm_detret[i].j14_tipo_ret
 			FROM cajt091
@@ -1730,14 +1545,13 @@ INPUT ARRAY rm_detret WITHOUT DEFAULTS FROM rm_detret.*
 						rm_j10.j10_codcli,
 						rm_detret[i].j14_tipo_ret,
 						rm_detret[i].j14_porc_ret)
-					RETURNING rm_detret[i].j14_codigo_sri,
-							fec_ini_por[i].fec_i_p
+					RETURNING rm_detret[i].j14_codigo_sri
 			END IF
 			CALL fl_lee_codigos_sri(vg_codcia,
 						rm_detret[i].j14_tipo_ret,
 						rm_detret[i].j14_porc_ret,
 						rm_detret[i].j14_codigo_sri,
-						fec_ini_por[i].fec_i_p)
+						fec_ini_por[i])
 				RETURNING r_c03.*
 			LET rm_detret[i].c03_concepto_ret =
 							r_c03.c03_concepto_ret
@@ -1747,37 +1561,39 @@ INPUT ARRAY rm_detret WITHOUT DEFAULTS FROM rm_detret.*
 		END IF
 		DISPLAY rm_detret[i].j14_tipo_ret TO rm_detret[j].j14_tipo_ret
 	AFTER FIELD j14_codigo_sri
-		IF rm_detret[i].j14_codigo_sri IS NULL THEN
-			LET rm_detret[i].j14_codigo_sri = cod_sri
-			DISPLAY rm_detret[i].j14_codigo_sri TO
-				rm_detret[j].j14_codigo_sri
-		END IF
-		CALL fl_lee_codigos_sri(vg_codcia, rm_detret[i].j14_tipo_ret,
-					rm_detret[i].j14_porc_ret,
-					rm_detret[i].j14_codigo_sri,
-					fec_ini_por[i].fec_i_p)
-			RETURNING r_c03.*
-		IF r_c03.c03_compania IS NULL THEN
-			CALL fl_mostrar_mensaje('No existe configurado este codigo del SRI.', 'exclamation')
-			NEXT FIELD j14_codigo_sri
-			END IF
-		IF r_c03.c03_estado <> 'A' THEN
-			CALL fl_mostrar_mensaje('El codigo del SRI esta bloqueado.', 'exclamation')
-			NEXT FIELD j14_codigo_sri
-		END IF
-		LET rm_detret[i].c03_concepto_ret = r_c03.c03_concepto_ret
-		IF NOT tiene_aux_cont_retencion(codigo_pago, 'C', 0) THEN
-			CALL fl_lee_det_retencion_cli(vg_codcia,
-					rm_j10.j10_codcli,
-					rm_detret[i].j14_tipo_ret,
-					rm_detret[i].j14_porc_ret,
-					rm_detret[i].j14_codigo_sri,
-					fec_ini_por[i].fec_i_p, codigo_pago,'C')
-				RETURNING r_z09.*
-			IF r_z09.z09_aux_cont IS NULL THEN
-				CALL fl_mostrar_mensaje('No existe auxiliar contable para este codigo de SRI en este tipo de retencion.', 'exclamation')
+		IF rm_detret[i].j14_codigo_sri IS NOT NULL THEN
+			CALL fl_lee_codigos_sri(vg_codcia,
+						rm_detret[i].j14_tipo_ret,
+						rm_detret[i].j14_porc_ret,
+						rm_detret[i].j14_codigo_sri,
+						fec_ini_por[i])
+				RETURNING r_c03.*
+			IF r_c03.c03_compania IS NULL THEN
+				CALL fl_mostrar_mensaje('No existe configurado este codigo del SRI.', 'exclamation')
 				NEXT FIELD j14_codigo_sri
 			END IF
+			IF r_c03.c03_estado <> 'A' THEN
+				CALL fl_mostrar_mensaje('El codigo del SRI esta bloqueado.', 'exclamation')
+				NEXT FIELD j14_codigo_sri
+			END IF
+			LET rm_detret[i].c03_concepto_ret =
+							r_c03.c03_concepto_ret
+			IF NOT tiene_aux_cont_retencion(codigo_pago, 'C', 0)
+			THEN
+				CALL fl_lee_det_retencion_cli(vg_codcia,
+						rm_j10.j10_codcli,
+						rm_detret[i].j14_tipo_ret,
+						rm_detret[i].j14_porc_ret,
+						rm_detret[i].j14_codigo_sri,
+						fec_ini_por[i],codigo_pago, 'C')
+					RETURNING r_z09.*
+				IF r_z09.z09_aux_cont IS NULL THEN
+					CALL fl_mostrar_mensaje('No existe auxiliar contable para este codigo de SRI en este tipo de retencion.', 'exclamation')
+					NEXT FIELD j14_codigo_sri
+				END IF
+			END IF
+		ELSE
+			LET rm_detret[i].c03_concepto_ret = NULL
 		END IF
 		DISPLAY rm_detret[i].c03_concepto_ret TO
 			rm_detret[j].c03_concepto_ret
@@ -1789,24 +1605,12 @@ INPUT ARRAY rm_detret WITHOUT DEFAULTS FROM rm_detret.*
 		CALL calcular_tot_retencion(max_row)
 	AFTER FIELD j14_base_imp
 		LET flag_c = 0
-		IF rm_detret[i].j14_base_imp IS NULL OR
-		   rm_detret[i].j14_base_imp <> base_imp
-		THEN
-			LET rm_detret[i].j14_base_imp = base_imp
-			DISPLAY rm_detret[i].j14_base_imp TO
-				rm_detret[j].j14_base_imp
+		IF rm_detret[i].j14_base_imp <> base_imp THEN
 			LET flag_c = 1
 		END IF
 		CALL calcular_retencion(i, j, flag_c)
 		CALL calcular_tot_retencion(max_row)
 	AFTER FIELD j14_valor_ret
-		IF rm_detret[i].j14_valor_ret IS NULL OR
-		   rm_detret[i].j14_valor_ret <> val_ret
-		THEN
-			LET rm_detret[i].j14_valor_ret = val_ret
-			DISPLAY rm_detret[i].j14_valor_ret TO
-				rm_detret[j].j14_valor_ret
-		END IF
 		CALL calcular_retencion(i, j, 0)
 		CALL calcular_tot_retencion(max_row)
 	AFTER DELETE
@@ -1826,12 +1630,7 @@ INPUT ARRAY rm_detret WITHOUT DEFAULTS FROM rm_detret.*
 				    rm_detret[k].j14_porc_ret) AND
 				   (rm_detret[l].j14_codigo_sri =
 				    rm_detret[k].j14_codigo_sri) AND
-				   (fec_ini_por[l].fec_i_p =
-				    fec_ini_por[k].fec_i_p) AND
-				   (fec_ini_por[l].cod_tran =
-				    fec_ini_por[k].cod_tran) AND
-				   (fec_ini_por[l].num_tran =
-				    fec_ini_por[k].num_tran)
+				   (fec_ini_por[l] = fec_ini_por[k])
 				THEN
 					CALL fl_mostrar_mensaje('Existen un mismo tipo de porcentaje y codigo del SRI mas de una vez en el detalle.', 'exclamation')
 					CONTINUE INPUT
@@ -1849,7 +1648,7 @@ INPUT ARRAY rm_detret WITHOUT DEFAULTS FROM rm_detret.*
 		LET resul = 0
 		FOR l = 1 TO vm_num_ret
 			IF rm_detret[l].j14_codigo_sri IS NULL OR
-			   fec_ini_por[l].fec_i_p IS NULL
+			   fec_ini_por[l] IS NULL
 			THEN
 				LET resul = 1
 				EXIT FOR
@@ -2000,39 +1799,37 @@ DEFINE codcli		LIKE cxct008.z08_codcli
 DEFINE tipo_ret		LIKE cxct008.z08_tipo_ret
 DEFINE porc_ret		LIKE cxct008.z08_porcentaje
 DEFINE cod_sri		LIKE cxct008.z08_codigo_sri
-DEFINE fec_ini		LIKE ordt003.c03_fecha_ini_porc
-DEFINE query		CHAR(1200)
+DEFINE query		CHAR(1000)
 
-INITIALIZE cod_sri, fec_ini TO NULL
-LET query = 'SELECT c03_codigo_sri, c03_fecha_ini_porc, ',
-		' CASE WHEN z08_codcli IS NULL ',
+INITIALIZE cod_sri TO NULL
+LET query = 'SELECT c03_codigo_sri, ',
+		' CASE WHEN z08_codcli IS NOT NULL ',
 			' THEN "S" ',
 			' ELSE "N" ',
 		' END defecto ',
 		' FROM ordt003, OUTER cxct008 ',
-		' WHERE c03_compania       = ', codcia,
-		'   AND c03_tipo_ret       = "', tipo_ret, '"',
-		'   AND c03_porcentaje     = ', porc_ret,
-		'   AND c03_estado         = "A"',
-		'   AND z08_compania       = c03_compania ',
-		'   AND z08_codcli         = ', codcli,
-		'   AND z08_tipo_ret       = c03_tipo_ret ',
-		'   AND z08_porcentaje     = c03_porcentaje ',
-		'   AND z08_codigo_sri     = c03_codigo_sri ',
+		' WHERE c03_compania   = ', codcia,
+		'   AND c03_tipo_ret   = "', tipo_ret, '"',
+		'   AND c03_porcentaje = ', porc_ret,
+		'   AND c03_estado     = "A"',
+		'   AND z08_compania   = c03_compania ',
+		'   AND z08_codcli     = ', codcli,
+		'   AND z08_tipo_ret   = c03_tipo_ret ',
+		'   AND z08_porcentaje = c03_porcentaje ',
+		'   AND z08_codigo_sri = c03_codigo_sri ',
 		'   AND z08_fecha_ini_porc = c03_fecha_ini_porc ',
-		'   AND c03_fecha_fin_porc IS NULL ',
 		' INTO TEMP t1 '
 PREPARE exec_t1 FROM query
 EXECUTE exec_t1
 DECLARE q_sri2 CURSOR FOR
-	SELECT c03_codigo_sri, c03_fecha_ini_porc
+	SELECT c03_codigo_sri
 		FROM t1 WHERE defecto = "S"
 OPEN q_sri2
-FETCH q_sri2 INTO cod_sri, fec_ini
+FETCH q_sri2 INTO cod_sri
 CLOSE q_sri2
 FREE q_sri2
 DROP TABLE t1
-RETURN cod_sri, fec_ini
+RETURN cod_sri
 
 END FUNCTION
 
@@ -2054,16 +1851,15 @@ DEFINE r_r19		RECORD LIKE rept019.*
 DEFINE r_t23		RECORD LIKE talt023.*
 DEFINE usuario		LIKE gent005.g05_usuario
 DEFINE codloc		LIKE rept019.r19_localidad
-DEFINE cod_tr		LIKE rept019.r19_cod_tran
-DEFINE num_tr		LIKE rept019.r19_num_tran
+DEFINE cod_tran		LIKE rept019.r19_cod_tran
+DEFINE num_tran		LIKE rept019.r19_num_tran
 
 IF registros_retenciones(codigo_pago) = 0 THEN
 	RETURN
 END IF
 DECLARE q_ret2 CURSOR FOR
 	SELECT num_ret_sri, autorizacion, fecha_emi, tipo_ret, porc_ret,
-		codigo_sri, concepto_ret, base_imp, valor_ret, fec_ini_porc,
-		cod_tran, num_tran
+		codigo_sri, concepto_ret, base_imp, valor_ret, fec_ini_porc
 		FROM tmp_ret
 		WHERE cod_pago = codigo_pago
 SELECT j14_sec_ret sec_r, j14_num_fact_sri num_fr, j14_fec_emi_fact fec_ef,
@@ -2139,7 +1935,7 @@ IF tipo_llamada = 'M' THEN
 END IF
 LET i = 1
 FOREACH q_ret2 INTO r_j14.j14_num_ret_sri, r_j14.j14_autorizacion,
-			r_j14.j14_fecha_emi, rm_detret[i].*, fec_ini_por[i].*
+			r_j14.j14_fecha_emi, rm_detret[i].*, fec_ini_por[i]
 	LET r_j14.j14_compania     = vg_codcia
 	LET r_j14.j14_localidad    = rm_j10.j10_localidad
 	LET r_j14.j14_tipo_fuente  = rm_j10.j10_tipo_fuente
@@ -2151,12 +1947,12 @@ FOREACH q_ret2 INTO r_j14.j14_num_ret_sri, r_j14.j14_autorizacion,
 	LET r_j14.j14_cedruc       = r_z01.z01_num_doc_id
 	LET r_j14.j14_razon_social = rm_j10.j10_nomcli
 	CALL datos_factura()
-		RETURNING cuantos, codloc, cod_tr, num_tr, valor
-	IF cod_tr IS NOT NULL AND rm_j10.j10_tipo_fuente <> 'SC' THEN
+		RETURNING cuantos, codloc, cod_tran, num_tran, valor
+	IF cod_tran IS NOT NULL THEN
 		CASE rm_j10.j10_areaneg
 			WHEN 1
 				CALL lee_factura_inv(vg_codcia, codloc,
-							cod_tr, num_tr)
+							cod_tran, num_tran)
 					RETURNING r_r19.*
 				CALL obtener_num_sri('PR', r_r19.r19_num_tran,0)
 					RETURNING r_j14.j14_num_fact_sri
@@ -2181,7 +1977,7 @@ FOREACH q_ret2 INTO r_j14.j14_num_ret_sri, r_j14.j14_autorizacion,
 	LET r_j14.j14_tipo_ret     = rm_detret[i].j14_tipo_ret
 	LET r_j14.j14_porc_ret     = rm_detret[i].j14_porc_ret
 	LET r_j14.j14_codigo_sri   = rm_detret[i].j14_codigo_sri
-	LET r_j14.j14_fec_ini_porc = fec_ini_por[i].fec_i_p
+	LET r_j14.j14_fec_ini_porc = fec_ini_por[i]
 	LET r_j14.j14_base_imp     = rm_detret[i].j14_base_imp
 	LET r_j14.j14_valor_ret    = rm_detret[i].j14_valor_ret
 	IF rm_j10.j10_tipo_fuente <> 'SC' THEN
@@ -2515,9 +2311,6 @@ IF rm_par.tipo_fuente = 'SC' THEN
 				  AND z21_tipo_doc  = rm_j10.j10_tipo_destino
 				  AND z21_num_doc   = rm_j10.j10_num_destino
 	END CASE
-	LET codloc   = NULL
-	LET cod_tran = NULL
-	LET num_tran = NULL
 	IF cuantos = 1 THEN
 		CASE rm_j10.j10_tipo_destino
 			WHEN 'PG'
@@ -2533,7 +2326,7 @@ IF rm_par.tipo_fuente = 'SC' THEN
 					  AND z23_num_trn   =
 							rm_j10.j10_num_destino
 			WHEN 'PR'
-				SELECT UNIQUE z23_localidad, z20_cod_tran, z20_num_tran
+				SELECT z23_localidad, z20_cod_tran, z20_num_tran
 					INTO codloc, cod_tran, num_tran
 					FROM cxct023, cxct020
 					WHERE z23_compania  = vg_codcia
@@ -2552,6 +2345,9 @@ IF rm_par.tipo_fuente = 'SC' THEN
 					  AND z20_dividendo = z23_div_doc
 		END CASE
 	ELSE
+		LET codloc   = NULL
+		LET cod_tran = NULL
+		LET num_tran = NULL
 		LET valor    = NULL
 		IF rm_j10.j10_tipo_destino = 'PG' THEN
 			CALL fl_lee_transaccion_cxc(vg_codcia,

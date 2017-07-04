@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092108</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092108</guiaRemision>
+<razonSocialComprador>FUNDACION NAHIM ISAIAS BARQUET</razonSocialComprador>
+<identificacionComprador>0990973547001</identificacionComprador>
+<totalSinImpuestos>405.72</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>405.72</baseImponible>
+<valor>48.69</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>454.41</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>22509</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS ELONGADO 4325130 ALTIMA  BLANCO (130) AS. COUNTRY CLUB</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>71.01</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>142.02</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>142.02</baseImponible>
+<valor>17.04</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>26935</codigoPrincipal>
+<descripcion>TUBO ABASTO-LLAVE ANGULAR INODORO E266.02 DH-CR FLEXIBLE DE 12"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>10.07</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>20.14</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>20.14</baseImponible>
+<valor>2.42</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>93876</codigoPrincipal>
+<descripcion>TORNILLO EPER-DH C/TACOS</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1.22</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2.44</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="PAR"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.44</baseImponible>
+<valor>0.29</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>90188</codigoPrincipal>
+<descripcion>URINARIO DE PARED E398-BL QUANTUM BLANCO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>54.83</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>54.83</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>54.83</baseImponible>
+<valor>6.58</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101932</codigoPrincipal>
+<descripcion>VALVULA PRESMATIC PARA URINARIO E362.01  CR  ECOMATIC</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>55.13</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>55.13</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>55.13</baseImponible>
+<valor>6.62</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>23912</codigoPrincipal>
+<descripcion>LAVAPLATOS DE ACERO INOXIDABLE 10108009 REDONDO ERC 45cm. 1P MODULAR INCLUYE VALVULA 3 1/2</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>65.58</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>131.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TEKA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>131.16</baseImponible>
+<valor>15.74</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">nahimisaias@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">042330691</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016749</campoAdicional>
+<campoAdicional nombre="Observaciones">BANOS USUARIOS</campoAdicional>
+</infoAdicional>
+</factura>

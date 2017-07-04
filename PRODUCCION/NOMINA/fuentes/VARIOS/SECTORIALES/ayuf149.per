@@ -1,0 +1,32 @@
+DATABASE aceros
+SCREEN
+{
+
+ CODIGOS SECTORIAL AÒO: [c013]
+
+ [c000           |c001                               |c002         ]
+[c010           |c011                               |c012         ]
+[c010           |c011                               |c012         ]
+[c010           |c011                               |c012         ]
+[c010           |c011                               |c012         ]
+[c010           |c011                               |c012         ]
+[c010           |c011                               |c012         ]
+[c010           |c011                               |c012         ]
+[c010           |c011                               |c012         ]
+[c010           |c011                               |c012         ]
+[c010           |c011                               |c012         ]
+}
+TABLES
+rolt017
+ATTRIBUTES
+c000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c002 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.ano_sect NOT NULL, REQUIRED, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = (2003 TO 2099);
+c010 = rolt017.n17_sectorial, AUTONEXT, UPSHIFT, REVERSE;
+c011 = rolt017.n17_descripcion, AUTONEXT, UPSHIFT, REVERSE;
+c012 = rolt017.n17_valor, AUTONEXT, UPSHIFT, REVERSE, FORMAT = '--,---,--&.##';
+END
+INSTRUCTIONS
+SCREEN RECORD rh_sectorial[10] (n17_sectorial, n17_descripcion, n17_valor)

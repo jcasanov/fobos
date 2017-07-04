@@ -1,0 +1,12 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+             Año de Cierre: [c002]
+             Mes de Cierre: [c003] [c004       ]
+}
+ATTRIBUTES
+c002 = FORMONLY.anho, REVERSE, UPSHIFT, NOENTRY;
+c003 = FORMONLY.mes, AUTONEXT, REVERSE, INCLUDE = (1 TO 12), NOENTRY;
+c004 = FORMONLY.tit_mes, NOENTRY, REVERSE, UPSHIFT;
+end

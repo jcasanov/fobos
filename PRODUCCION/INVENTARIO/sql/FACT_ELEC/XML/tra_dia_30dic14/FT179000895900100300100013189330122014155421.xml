@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131893</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>30/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131893</guiaRemision>
+<razonSocialComprador>ROMAN RISCO NANCY VIRGINIA</razonSocialComprador>
+<identificacionComprador>1714719612001</identificacionComprador>
+<totalSinImpuestos>97.87</totalSinImpuestos>
+<totalDescuento>17.27</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>97.87</baseImponible>
+<valor>11.74</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>109.61</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>91961</codigoPrincipal>
+<descripcion>GRIFERIA DE LAVABO 4" E191/71 CR CAPRI CROMO C/DESAGUE Y SIFON</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>34.05</precioUnitario>
+<descuento>5.11</descuento>
+<precioTotalSinImpuesto>28.94</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>28.94</baseImponible>
+<valor>3.47</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>25537</codigoPrincipal>
+<descripcion>DUCHA TELEFONO E118/29-CR EURO STYLE (29) CROMO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>33.21</precioUnitario>
+<descuento>4.98</descuento>
+<precioTotalSinImpuesto>28.23</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>28.23</baseImponible>
+<valor>3.39</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70751</codigoPrincipal>
+<descripcion>JUEGO DE ACCESORIOS 1656306 JUEGO COMPLETO LINEA DESIGN CROMO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>47.88</precioUnitario>
+<descuento>7.18</descuento>
+<precioTotalSinImpuesto>40.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="JUEGO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>40.70</baseImponible>
+<valor>4.88</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">gmoyaveloz@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3112993</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">055510</campoAdicional>
+</infoAdicional>
+</factura>

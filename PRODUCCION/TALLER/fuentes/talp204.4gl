@@ -597,7 +597,6 @@ END IF
 --LET rm_orden.t23_modelo = "SERVICIOS"
 LET rm_orden.t23_usu_modifi = vg_usuario
 LET rm_orden.t23_fec_modifi = CURRENT
-CALL fl_totaliza_orden_taller(rm_orden.*) RETURNING rm_orden.*
 UPDATE talt023 SET * = rm_orden.* WHERE CURRENT OF q_up
 IF rm_orden.t23_cod_cliente IS NOT NULL THEN
 	CALL fl_lee_cliente_general(rm_orden.t23_cod_cliente) RETURNING r_z01.*
@@ -623,9 +622,6 @@ IF rm_orden.t23_cod_cliente IS NOT NULL THEN
 			  AND r19_referencia[1, 5] = "O.T.:"
 		CALL actualizar_proformas(r_z01.*, 'O')
 		CALL actualizar_proformas(r_z01.*, 'P')
-		IF NOT eliminar_preventa_anterior() THEN
-			RETURN
-		END IF
 		UPDATE talt020
 			SET t20_cod_cliente = r_z01.z01_codcli, 
 		            t20_nom_cliente = r_z01.z01_nomcli,
@@ -716,90 +712,6 @@ LET exec_up = exec_up CLIPPED,
 				num_ot_p CLIPPED, ')'
 PREPARE ex_up2 FROM exec_up
 EXECUTE ex_up2
-
-END FUNCTION
-
-
-
-FUNCTION eliminar_preventa_anterior()
-DEFINE r_j10		RECORD LIKE cajt010.*
-DEFINE r_r23		RECORD LIKE rept023.*
-DEFINE r_r24		RECORD LIKE rept024.*
-DEFINE flag, i		SMALLINT
-
-LET flag = 1
-INITIALIZE r_r23.* TO NULL
-SELECT r23_numprev
-	FROM rept023
-	WHERE r23_compania  = vg_codcia
-	  AND r23_localidad = vg_codloc
-	  AND r23_num_ot    = rm_orden.t23_orden
-	INTO TEMP te_qulazo
-WHENEVER ERROR CONTINUE
-DECLARE q_elimpre CURSOR FOR
-	SELECT * FROM rept023
-		WHERE r23_compania  = vg_codcia
-		  AND r23_localidad = vg_codloc
-		  AND r23_numprev   IN (SELECT r23_numprev FROM te_qulazo)
-	FOR UPDATE
-OPEN q_elimpre
-FETCH q_elimpre INTO r_r23.*
-IF STATUS < 0 THEN
-	DROP TABLE te_qulazo
-	ROLLBACK WORK
-	LET flag = 0
-	CLOSE q_elimpre
-	WHENEVER ERROR STOP
-	CALL fl_mensaje_bloqueo_otro_usuario()
-	RETURN flag
-END IF
-WHENEVER ERROR STOP
-IF r_r23.r23_compania IS NULL THEN
-	CLOSE q_elimpre
-	DROP TABLE te_qulazo
-	RETURN flag
-END IF
-FOREACH q_elimpre INTO r_r23.*
-	IF r_r23.r23_cod_tran IS NOT NULL THEN
-		CONTINUE FOREACH
-	END IF
-	CALL fl_lee_cabecera_caja(r_r23.r23_compania, r_r23.r23_localidad, 'PR',
-					r_r23.r23_numprev)
-		RETURNING r_j10.*
-	IF r_j10.j10_tipo_destino IS NULL THEN
-		DELETE FROM cajt011 
-			WHERE j11_compania    = r_j10.j10_compania 
-			  AND j11_localidad   = r_j10.j10_localidad 
-			  AND j11_tipo_fuente =	r_j10.j10_tipo_fuente 
-			  AND j11_num_fuente  =	r_j10.j10_num_fuente 
-		DELETE FROM cajt010 
-			WHERE j10_compania    = r_j10.j10_compania 
-			  AND j10_localidad   = r_j10.j10_localidad 
-			  AND j10_tipo_fuente =	r_j10.j10_tipo_fuente 
-			  AND j10_num_fuente  =	r_j10.j10_num_fuente 
-	END IF
-	DELETE FROM rept027
-		WHERE r27_compania  = r_r23.r23_compania
-		  AND r27_localidad = r_r23.r23_localidad
-		  AND r27_numprev   = r_r23.r23_numprev
-	DELETE FROM rept026
-		WHERE r26_compania  = r_r23.r23_compania
-		  AND r26_localidad = r_r23.r23_localidad
-		  AND r26_numprev   = r_r23.r23_numprev
-	DELETE FROM rept025
-		WHERE r25_compania  = r_r23.r23_compania
-		  AND r25_localidad = r_r23.r23_localidad
-		  AND r25_numprev   = r_r23.r23_numprev
-	DELETE FROM rept024
-		WHERE r24_compania  = r_r23.r23_compania
-		  AND r24_localidad = r_r23.r23_localidad
-		  AND r24_numprev   = r_r23.r23_numprev
-	DELETE FROM rept023 WHERE CURRENT OF q_elimpre
-END FOREACH
-DROP TABLE te_qulazo
-CLOSE q_elimpre
-FREE q_elimpre
-RETURN flag
 
 END FUNCTION
 
@@ -1622,7 +1534,6 @@ FUNCTION llama_totalizar()
 	DISPLAY BY NAME rm_orden.t23_tot_dscto
 	DISPLAY BY NAME rm_orden.t23_val_impto
 	DISPLAY BY NAME rm_orden.t23_tot_neto
-
 END FUNCTION
 
 
@@ -2404,18 +2315,6 @@ END FUNCTION
 
 
 
-FUNCTION imprimir_transferencia(cod_tran, num_tran)
-DEFINE cod_tran		LIKE rept019.r19_cod_tran
-DEFINE num_tran		LIKE rept019.r19_num_tran
-DEFINE param		VARCHAR(100)
-
-LET param = '"', cod_tran, '" ', num_tran
-CALL fl_ejecuta_comando('REPUESTOS', 'RE', 'repp415', param, 1)
-
-END FUNCTION
-
-
-
 FUNCTION muestra_movimientos_documento_cxc(codcia, codloc, codcli, tipo_doc,
 						num_doc, dividendo, areaneg)
 DEFINE codcia		LIKE gent001.g01_compania
@@ -2934,8 +2833,6 @@ FOREACH qu_transf INTO r_transf.*
 		LET mensaje = 'Se genero la transferencia: ',
 				r_r19.r19_num_tran USING "<<<<<<&", '.'
 		CALL fl_mostrar_mensaje(mensaje CLIPPED, 'info')
-		CALL imprimir_transferencia(r_r19.r19_cod_tran,
-						r_r19.r19_num_tran)
 	END IF
 END FOREACH
 DROP TABLE t_r19
@@ -3211,8 +3108,6 @@ FOREACH qu_transf2 INTO r_transf.*
 		LET mensaje = 'Se genero la transferencia de traspaso',
 				': ', r_r19.r19_num_tran USING "<<<<<<&", '.'
 		CALL fl_mostrar_mensaje(mensaje CLIPPED, 'info')
-		CALL imprimir_transferencia(r_r19.r19_cod_tran,
-						r_r19.r19_num_tran)
 	END IF
 END FOREACH
 DROP TABLE tmp_tr

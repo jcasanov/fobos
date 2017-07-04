@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000018708</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>LORETO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>MUNICIPIO DE LORETO</razonSocialComprador>
+<identificacionComprador>1560001830001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000175796</numDocModificado>
+<fechaEmisionDocSustento>12/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>22113.00</totalSinImpuestos>
+<valorModificacion>24766.56</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>22113.00</baseImponible>
+<valor>2653.56</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>F.ENT.: 53510 23477</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>71492</codigoInterno>
+<descripcion>REMOLQUE P/DESTAPADORAS TOPO 4500 DE DOS EJES PARA KJ-3100 / K-1000</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>5966.81</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>5966.81</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5966.81</baseImponible>
+<valor>716.02</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>100198</codigoInterno>
+<descripcion>DESTAPADOR DE DESAGUES A GASOLINA KJ-3100 P/DESAG. DE 2" A 10" 3000 PSI DE PRESION (37413)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>9719.94</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>9719.94</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIDGID" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9719.94</baseImponible>
+<valor>1166.39</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>13063</codigoInterno>
+<descripcion>DESTAPADOR DE DESAGUES A GASOLINA K-1000 TUBERIA DE 8"-24" DE 6HP (84295)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>5919.30</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>5919.30</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIDGID" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5919.30</baseImponible>
+<valor>710.32</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>90354</codigoInterno>
+<descripcion>JET VAC H-32 P/ MODELOS KJ (67187)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>506.95</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>506.95</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIDGID" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>506.95</baseImponible>
+<valor>60.83</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+<campoAdicional nombre="telefono-movil">881598</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">24302</campoAdicional>
+</infoAdicional>
+</notaCredito>

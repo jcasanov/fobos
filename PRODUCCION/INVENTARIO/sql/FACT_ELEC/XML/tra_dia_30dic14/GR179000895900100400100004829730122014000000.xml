@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048297</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<dirPartida>AV. LA PRENSA N/4514</dirPartida>
+<razonSocialTransportista>ACERO COMERCIAL</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>30/12/2014</fechaIniTransporte>
+<fechaFinTransporte>30/12/2014</fechaFinTransporte>
+<placa>PAA-001</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1706971643001</identificacionDestinatario>
+<razonSocialDestinatario>GUAMAN ZOILA AGRIPINA</razonSocialDestinatario>
+<dirDestinatario>RUMINAHUI SHYRIS Y ALTAR SANGOLQUI</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>29/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>100260</codigoInterno>
+<descripcion>BALDOSA DE PISO 30 X 30 MONOQUEMA POMPEYA BEIGE PRIMERA</descripcion>
+<cantidad>10.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="MODELO" valor="POMPEYA BEIGE"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>100487</codigoInterno>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA AMAGUANIA TERRACOTA PRIMERA</descripcion>
+<cantidad>10.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="AMAGUANIA TERRACOTA"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>103144</codigoInterno>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA RIVIERA BEIGE PRIMERA</descripcion>
+<cantidad>40.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="RIVIERA BEIGE PRIMER"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>97553</codigoInterno>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA DALI AZUL PRIMERA</descripcion>
+<cantidad>10.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="DALI AZUL"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>99360</codigoInterno>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA MACHALILLA BEIGE PRIMERA</descripcion>
+<cantidad>41.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="MACHALILLA BEIGE"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">CONSUMIDORFINAL@ACEROCOMERCIAL.COM</campoAdicional>
+<campoAdicional nombre="telefono-movil">2339357</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">055584</campoAdicional>
+</infoAdicional>
+</guiaRemision>

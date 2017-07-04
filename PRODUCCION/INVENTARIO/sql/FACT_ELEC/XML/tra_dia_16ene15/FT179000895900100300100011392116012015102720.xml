@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113921</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113921</guiaRemision>
+<razonSocialComprador>ARISKAM SEGURIDAD, SALUD Y AMBIENTE S.A.</razonSocialComprador>
+<identificacionComprador>1792410878001</identificacionComprador>
+<totalSinImpuestos>308.75</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>308.75</baseImponible>
+<valor>37.05</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>345.80</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>716</codigoPrincipal>
+<descripcion>TOL AL CALOR RELIEVE DE 2.3mm. 1.22 x 2.44 m</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>130.10</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>260.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>260.20</baseImponible>
+<valor>31.22</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5159</codigoPrincipal>
+<descripcion>TUBO DE ACERO CUADRADO 3/4" x 1.1mm. ESPESOR</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>7.23</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>14.46</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>14.46</baseImponible>
+<valor>1.74</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>374</codigoPrincipal>
+<descripcion>PLETINA DE 12 x 3mm. x 6 m</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>2.66</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>10.64</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>10.64</baseImponible>
+<valor>1.28</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21470</codigoPrincipal>
+<descripcion>ELECTRODO E-6011-C-13 1/8" ACERO DULCE</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>4.69</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>23.45</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="AGA"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>23.45</baseImponible>
+<valor>2.81</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">lnolivos@ariskam.org</campoAdicional>
+<campoAdicional nombre="telefono-movil">2645978</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">062102</campoAdicional>
+<campoAdicional nombre="Observaciones">DINERS. 3 MESES SIN INTERESES</campoAdicional>
+</infoAdicional>
+</factura>

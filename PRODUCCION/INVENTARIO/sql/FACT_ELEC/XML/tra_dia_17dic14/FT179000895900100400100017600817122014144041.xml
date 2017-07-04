@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176008</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>LAS CASAS</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176008</guiaRemision>
+<razonSocialComprador>VERA CEDENO MAIRA JANETH</razonSocialComprador>
+<identificacionComprador>1306395573001</identificacionComprador>
+<totalSinImpuestos>219.67</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>219.67</baseImponible>
+<valor>26.36</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>246.03</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>44409</codigoPrincipal>
+<descripcion>TANQUE POLIETILENO (STANDARD) APILABLE 1000 LT</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>180.88</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>180.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>180.88</baseImponible>
+<valor>21.71</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98789</codigoPrincipal>
+<descripcion>CONTROL DE NIVEL G-0120 ALTO Y BAJO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>24.20</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>24.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="IMPORTADO" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>24.20</baseImponible>
+<valor>2.90</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>93572</codigoPrincipal>
+<descripcion>GRIFO ESFERICO BRONCE CROMADO FUTURGAS DE 3/4" (AGUA, GAS Y AIRE)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>9.29</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>9.29</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FIV" valor="FIV"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.29</baseImponible>
+<valor>1.11</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>62029</codigoPrincipal>
+<descripcion>ADAPTADOR POLIPROPILENO DE 3/4"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>2.43</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>4.86</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.86</baseImponible>
+<valor>0.58</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50358</codigoPrincipal>
+<descripcion>TAPON POLIPROPILENO HEMBRA DE 3/4" HEMBRA (AGUA CALIENTE)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>0.44</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>0.44</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.44</baseImponible>
+<valor>0.05</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3211540</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064126</campoAdicional>
+</infoAdicional>
+</factura>

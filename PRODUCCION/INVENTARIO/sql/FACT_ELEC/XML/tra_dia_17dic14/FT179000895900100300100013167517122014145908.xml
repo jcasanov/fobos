@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131675</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>CDLA IBARRA CALLE 6 OE9-88DI</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131675</guiaRemision>
+<razonSocialComprador>NICOLALDE PADILLA JUAN CARLOS</razonSocialComprador>
+<identificacionComprador>1712245354001</identificacionComprador>
+<totalSinImpuestos>57.87</totalSinImpuestos>
+<totalDescuento>7.88</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>57.87</baseImponible>
+<valor>6.94</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>64.81</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>3136</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 3/8" CORRIDO</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>0.85</precioUnitario>
+<descuento>1.02</descuento>
+<precioTotalSinImpuesto>7.48</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7.48</baseImponible>
+<valor>0.90</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2294</codigoPrincipal>
+<descripcion>CODO NEGRO CACHIMBA CLASE 150 DE 1/4"</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>1.45</precioUnitario>
+<descuento>1.74</descuento>
+<precioTotalSinImpuesto>12.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="HITACHI" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>12.76</baseImponible>
+<valor>1.53</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2082</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 90° DE 1/4"</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>1.25</precioUnitario>
+<descuento>1.50</descuento>
+<precioTotalSinImpuesto>11.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="HITACHI" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>11.00</baseImponible>
+<valor>1.32</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4718</codigoPrincipal>
+<descripcion>TEE NEGRA CLASE 150 DE 1/4"</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>1.42</precioUnitario>
+<descuento>1.70</descuento>
+<precioTotalSinImpuesto>12.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="HITACHI" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>12.50</baseImponible>
+<valor>1.50</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4722</codigoPrincipal>
+<descripcion>TEE NEGRA CLASE 150 DE 1/2"</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>1.49</precioUnitario>
+<descuento>0.89</descuento>
+<precioTotalSinImpuesto>6.56</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="HITACHI" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.56</baseImponible>
+<valor>0.79</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3172</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1/2" x 8"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>1.06</precioUnitario>
+<descuento>0.76</descuento>
+<precioTotalSinImpuesto>5.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.60</baseImponible>
+<valor>0.67</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3154</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 1/2" CORRIDO</descripcion>
+<cantidad>8.00</cantidad>
+<precioUnitario>0.28</precioUnitario>
+<descuento>0.27</descuento>
+<precioTotalSinImpuesto>1.97</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.97</baseImponible>
+<valor>0.24</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2632174</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">045709</campoAdicional>
+</infoAdicional>
+</factura>

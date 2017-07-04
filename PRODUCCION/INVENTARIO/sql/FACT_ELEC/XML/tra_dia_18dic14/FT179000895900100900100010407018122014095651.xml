@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104070</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104070</guiaRemision>
+<razonSocialComprador>INMOBILIARIA HELVETIA S.A.</razonSocialComprador>
+<identificacionComprador>0990018677001</identificacionComprador>
+<totalSinImpuestos>226.53</totalSinImpuestos>
+<totalDescuento>39.98</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>226.53</baseImponible>
+<valor>27.18</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>253.71</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>48435</codigoPrincipal>
+<descripcion>TOALLERO DE BARRA E164.01/77 CR MILENIUM CROMO RECTA DE 60 cm. C/ TORNILLOS</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>35.96</precioUnitario>
+<descuento>16.18</descuento>
+<precioTotalSinImpuesto>91.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>91.70</baseImponible>
+<valor>11.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>24639</codigoPrincipal>
+<descripcion>JABONERA E168.01/77 CR MILENIUM CROMO C/ TORNILLOS</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>19.78</precioUnitario>
+<descuento>17.80</descuento>
+<precioTotalSinImpuesto>100.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>100.88</baseImponible>
+<valor>12.11</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>46025</codigoPrincipal>
+<descripcion>PORTAROLLO E167.01/77 CR MILENIUM CROMO CON TORNILLOS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>20.17</precioUnitario>
+<descuento>3.03</descuento>
+<precioTotalSinImpuesto>17.14</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>17.14</baseImponible>
+<valor>2.06</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>24639</codigoPrincipal>
+<descripcion>JABONERA E168.01/77 CR MILENIUM CROMO C/ TORNILLOS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>19.78</precioUnitario>
+<descuento>2.97</descuento>
+<precioTotalSinImpuesto>16.81</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>16.81</baseImponible>
+<valor>2.02</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2681990 26</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">001287</campoAdicional>
+</infoAdicional>
+</factura>

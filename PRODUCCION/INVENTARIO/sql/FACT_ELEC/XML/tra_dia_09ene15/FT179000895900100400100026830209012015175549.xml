@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268302</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>09/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268302</guiaRemision>
+<razonSocialComprador>SEDEMI</razonSocialComprador>
+<identificacionComprador>1791734920001</identificacionComprador>
+<totalSinImpuestos>2703.84</totalSinImpuestos>
+<totalDescuento>477.15</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>2703.84</baseImponible>
+<valor>324.46</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>3028.30</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>12664</codigoPrincipal>
+<descripcion>BOMBA HIDRAULICA MANUAL P-80 2 VELOCIDADES 134Pulg3 10000 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>826.82</precioUnitario>
+<descuento>124.02</descuento>
+<precioTotalSinImpuesto>702.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>702.80</baseImponible>
+<valor>84.34</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>12774</codigoPrincipal>
+<descripcion>CILINDRO HIDR S-A RC RC-506 50 T 6.25" CARRERA 11.13" ALTURA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1778.11</precioUnitario>
+<descuento>266.72</descuento>
+<precioTotalSinImpuesto>1511.39</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1511.39</baseImponible>
+<valor>181.37</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96097</codigoPrincipal>
+<descripcion>MANGUERA HIDRAULICA HC-7210 DE 10' 3/8" NPT C/CH-604</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>276.20</precioUnitario>
+<descuento>41.43</descuento>
+<precioTotalSinImpuesto>234.77</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>234.77</baseImponible>
+<valor>28.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>45076</codigoPrincipal>
+<descripcion>MANOMETRO G-2535-L DE GLICERINA 2 1/2" DIAMETRO 0-10000PSI</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>128.45</precioUnitario>
+<descuento>19.27</descuento>
+<precioTotalSinImpuesto>109.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>109.18</baseImponible>
+<valor>13.10</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>14434</codigoPrincipal>
+<descripcion>ADAPTADOR PARA MANOMETRO GA-3 MACHO 3/8 NPT- HEMBRA 3/8 NPT SALIDA MANOM. 1/4"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>96.25</precioUnitario>
+<descuento>14.44</descuento>
+<precioTotalSinImpuesto>81.81</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>81.81</baseImponible>
+<valor>9.82</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>14412</codigoPrincipal>
+<descripcion>ACOPLE DE MANGUERA C-604 ALTO FLUJO COMPL. H-M 3/8" NPT CON 2 TAPAS CD-411</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>75.16</precioUnitario>
+<descuento>11.27</descuento>
+<precioTotalSinImpuesto>63.89</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>63.89</baseImponible>
+<valor>7.67</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">compras@sedemi.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2093992</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">030547</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C: 2015-011</campoAdicional>
+</infoAdicional>
+</factura>

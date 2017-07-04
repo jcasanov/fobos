@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------
--- Titulo           : talp403.4gl - Impresion Comprobante de Factura 
+-- Titulo           : talp403.4gl - Impresion Comprobante de Facturas Taller
 -- Elaboracion      : 01-feb-2002
 -- Autor            : JCM
 -- Formato Ejecucion: fglrun talp403 BD MODULO COMPANIA LOCALIDAD FACTURA
@@ -183,7 +183,7 @@ SELECT UNIQUE t24_codtarea
 	WHERE t24_compania  = vg_codcia
 	  AND t24_localidad = vg_codloc
 	  AND t24_orden     = rm_t23.t23_orden
-	  AND t24_codtarea  = "3"
+	  AND t24_codtarea  IN ("3", "4")
 IF vm_tarea_sem IS NULL THEN
 	LET tope = ((rm_r00.r00_numlin_fact * 2) - 6)
 ELSE
@@ -213,6 +213,7 @@ END FUNCTION
 
 
 REPORT comprobante_factura()
+DEFINE r_z02		RECORD LIKE cxct002.*
 DEFINE r_j10		RECORD LIKE cajt010.*
 DEFINE r_j11		RECORD LIKE cajt011.*
 DEFINE r_t20		RECORD LIKE talt020.*
@@ -239,8 +240,15 @@ DEFINE factura		VARCHAR(15)
 DEFINE label_letras	VARCHAR(130)
 DEFINE num_lin		INTEGER
 DEFINE escape		SMALLINT
-DEFINE act_comp, db_c	SMALLINT
-DEFINE desact_comp, db	SMALLINT
+DEFINE act_comp		SMALLINT
+DEFINE desact_comp	SMALLINT
+DEFINE act_10cpi	SMALLINT
+DEFINE act_12cpi	SMALLINT
+DEFINE act_dob1		SMALLINT
+DEFINE act_dob2		SMALLINT
+DEFINE des_dob		SMALLINT
+DEFINE act_neg		SMALLINT
+DEFINE des_neg		SMALLINT
 
 OUTPUT
 	TOP MARGIN	1
@@ -257,9 +265,16 @@ PAGE HEADER
 	LET escape	= 27		# Iniciar sec. impresi¢n
 	LET act_comp	= 15		# Activar Comprimido.
 	LET desact_comp	= 18		# Cancelar Comprimido.
-	LET subtotal  = rm_t23.t23_tot_bruto - rm_t23.t23_tot_dscto
-	LET impuesto  = rm_t23.t23_val_impto
-	LET valor_pag = rm_t23.t23_tot_neto
+	LET act_10cpi	= 80		# Comprimido 10 CPI.
+	LET act_12cpi	= 77		# Comprimido 12 CPI.
+	LET act_dob1	= 87		# Activar Doble Ancho (inicio)
+	LET act_dob2	= 49		# Activar Doble Ancho (final)
+	LET des_dob	= 48		# Desactivar Doble Ancho
+	LET act_neg	= 71		# Activar negrita.
+	LET des_neg	= 72		# Desactivar negrita.
+	LET subtotal    = rm_t23.t23_tot_bruto - rm_t23.t23_tot_dscto
+	LET impuesto    = rm_t23.t23_val_impto
+	LET valor_pag   = rm_t23.t23_tot_neto
 	CALL fl_justifica_titulo('I', vg_usuario, 10) RETURNING usuario
 --	print '&k2S' 		-- Letra condensada
 	LET fecha_vcto = NULL
@@ -303,61 +318,71 @@ PAGE HEADER
 			LET valor_tarj = valor_tarj + r_j11.j11_valor
 		END IF
 	END FOREACH
-	LET factura  = rm_t23.t23_num_factura
+	LET factura = rm_t23.t23_num_factura USING "&&&&&&&&&"
 	CALL fl_lee_presupuesto_taller(vg_codcia, vg_codloc, rm_t23.t23_numpre)
 		RETURNING r_t20.*
 	SKIP 2 LINES
 	print ASCII escape;
 	print ASCII act_comp
-	PRINT COLUMN 27,  "ALMACEN : ", rm_loc.g02_nombre,
-	      COLUMN 99,  "No. FA ", factura;
+	--20/05/2014
+	--PRINT COLUMN 27,  "ALMACEN : ", rm_loc.g02_nombre,
+	PRINT COLUMN 052, ASCII escape, ASCII act_12cpi, ASCII escape,
+			ASCII act_dob1, ASCII act_dob2,
+			ASCII escape, ASCII act_neg,
+			"FACTURA No. ", rm_loc.g02_serie_cia USING "&&&", "-",
+			rm_loc.g02_serie_loc USING "&&&", "-", factura;
 	IF vm_tarea_sem IS NULL THEN
-		PRINT " TALLER"
+		PRINT " TALLER";
 	ELSE
-		PRINT " "
+		PRINT " ";
 	END IF
+	PRINT ASCII escape, ASCII act_dob1, ASCII des_dob,
+		ASCII escape, ASCII act_10cpi, ASCII escape, ASCII des_neg,
+		ASCII escape, ASCII act_comp
 	SKIP 2 LINES
-	PRINT COLUMN 01,  "CLIENTE (", rm_t23.t23_cod_cliente
+	PRINT COLUMN 001, "CLIENTE (", rm_t23.t23_cod_cliente
 					USING "&&&&&", ") : ",
 					rm_t23.t23_nom_cliente[1, 100] CLIPPED
-	PRINT COLUMN 01,  "CEDULA/RUC      : ", rm_t23.t23_cedruc;
+	PRINT COLUMN 001, "CEDULA/RUC      : ", rm_t23.t23_cedruc;
 	IF vm_tarea_sem IS NULL THEN
-		PRINT COLUMN 67,  "No. ORDEN TRABAJO: ", rm_t23.t23_orden
+		PRINT COLUMN 067, "No. ORDEN TRABAJO: ", rm_t23.t23_orden
 						USING "&&&&&&&";
 	ELSE
-		PRINT COLUMN 67, " ";
+		PRINT COLUMN 067, " ";
 	END IF
 	PRINT COLUMN 106, "EFECTIVO  : ", valor_efec USING "###,###,##&.##"
-	PRINT COLUMN 01,  "DIRECCION       : ", rm_t23.t23_dir_cliente,
-	      COLUMN 67,  "FECHA FACTURA    : ", DATE(rm_t23.t23_fec_factura) 
+	PRINT COLUMN 001, "DIRECCION       : ", rm_t23.t23_dir_cliente,
+	      COLUMN 067, ASCII escape, ASCII act_neg,
+		"FECHA FACTURA    : ", DATE(rm_t23.t23_fec_factura) 
 			 			USING "dd-mm-yyyy",
-	      COLUMN 106, "CHEQUES   : ", valor_cheq USING "###,###,##&.##"
-	PRINT COLUMN 01,  "TELEFONO        : ", rm_t23.t23_tel_cliente,
-	      COLUMN 67,  "FECHA VENCIMIENTO: ", DATE(fecha_vcto)
+		ASCII escape, ASCII des_neg,
+	      COLUMN 110, "CHEQUES   : ", valor_cheq USING "###,###,##&.##"
+	PRINT COLUMN 001, "TELEFONO        : ", rm_t23.t23_tel_cliente,
+	      COLUMN 067, "FECHA VENCIMIENTO: ", DATE(fecha_vcto)
 			 			USING "dd-mm-yyyy",
 	      COLUMN 106, "TARJETAS  : ", valor_tarj USING "###,###,##&.##"
-	PRINT COLUMN 01,  "OBSER. PRESUP.  : ", r_t20.t20_observaciones;
+	PRINT COLUMN 001, "OBSER. PRESUP.  : ", r_t20.t20_observaciones;
 	IF vm_tarea_sem IS NULL THEN
-		PRINT COLUMN 67, "TECNICO(ASESOR)  : ",rm_t03.t03_nombres[1,19];
+		PRINT COLUMN 067,"TECNICO(ASESOR)  : ",rm_t03.t03_nombres[1,19];
 	ELSE
-		PRINT COLUMN 67, " ";
+		PRINT COLUMN 067, " ";
 	END IF
 	PRINT COLUMN 106, "RETENCION : ", valor_rete USING "###,###,##&.##"
-	PRINT COLUMN 67,  "USUARIO          : ", usuario,
+	PRINT COLUMN 067, "USUARIO          : ", usuario,
 	      COLUMN 106, "CREDITO   : ", valor_cred USING "###,###,##&.##"
 	--PRINT COLUMN 01,  "FECHA IMPRESION : ", DATE(TODAY) USING 'dd-mm-yyyy',
 		--1 SPACES, TIME,
 	      --COLUMN 125, UPSHIFT(vg_proceso)
-	SKIP 2 LINES
-	--PRINT "------------------------------------------------------------------------------------------------------------------------------------"
-	PRINT COLUMN 11,  "DESCRIPCION";
+	SKIP 1 LINES
+	PRINT "------------------------------------------------------------------------------------------------------------------------------------"
+	PRINT COLUMN 011, "DESCRIPCION";
 	IF vm_tarea_sem IS NOT NULL THEN
-		PRINT COLUMN 96, "VALOR UNITARIO";
+		PRINT COLUMN 096, "VALOR UNITARIO";
 	ELSE
-		PRINT COLUMN 96, " ";
+		PRINT COLUMN 096, " ";
 	END IF
 	PRINT COLUMN 121, "VALOR TOTAL"
-	--PRINT "------------------------------------------------------------------------------------------------------------------------------------"
+	PRINT "------------------------------------------------------------------------------------------------------------------------------------"
 	SKIP 1 LINES
 
 ON EVERY ROW
@@ -418,10 +443,14 @@ ON EVERY ROW
 		END IF
 	END FOREACH
 	SKIP 1 LINES
-	PRINT COLUMN 11,  "TOTAL DE MANO DE OBRA",
+	PRINT COLUMN 011, "TOTAL DE MANO DE OBRA",
 	      COLUMN 118, rm_t23.t23_val_mo_tal		USING '###,###,##&.##'
 	ELSE
-	PRINT COLUMN 11, "SEMINARIO: OPTIMIZACION ENERGETICA EN SISTEMAS CON VAPOR"
+	IF vm_tarea_sem = "3" THEN
+	PRINT COLUMN 011, "SEMINARIO: OPTIMIZACION ENERGETICA EN SISTEMAS CON VAPOR"
+	ELSE
+	PRINT COLUMN 011, "SEMINARIO: OPTIMIZACION SISTEMAS DE CONTROL EN CALDERAS ACUOTUBULARES"
+	END IF
 		SKIP 1 LINES
 	END IF
 	SELECT COUNT(*) INTO num_lin FROM talt024
@@ -459,40 +488,73 @@ ON EVERY ROW
 	END IF
 	IF vm_tarea_sem IS NULL THEN
 		SKIP 1 LINES
-		PRINT COLUMN 11,  "TOTAL MATERIAL Y REPUESTOS ",
+		PRINT COLUMN 011, "TOTAL MATERIAL Y REPUESTOS ",
 			rm_cia.g01_razonsocial CLIPPED,
 			" (VER FACTURAS ADJUNTAS)"
 	END IF
 	
 PAGE TRAILER
 	--NEED 4 LINES
-	LET label_letras = fl_retorna_letras(rm_t23.t23_moneda, valor_pag)
+	--LET label_letras = fl_retorna_letras(rm_t23.t23_moneda, valor_pag)
+	CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc,
+					rm_t23.t23_cod_cliente)
+		RETURNING r_z02.*
 	SKIP 2 LINES
 	--PRINT COLUMN 02,  "SOMOS CONTRIBUYENTES ESPECIALES D.G.R. #39",
 	--PRINT COLUMN 02, "SOMOS CONTRIBUYENTES ESPECIALES, RESOLUCION No. 5368",
-	PRINT COLUMN 50,  "-------------------------",
-	      COLUMN 99,  "TOTAL BRUTO",
-	      COLUMN 116, rm_t23.t23_tot_bruto	USING "#,###,###,##&.##"
-	PRINT COLUMN 50,  " RECIBI FACTURA ORIGINAL ",
-	      COLUMN 100, "DESCUENTOS",
-	      COLUMN 118, rm_t23.t23_tot_dscto	USING "###,###,##&.##"
+	--PRINT COLUMN 50,  "-------------------------",
+	PRINT COLUMN 002, ASCII escape, ASCII act_12cpi, ASCII escape,
+			ASCII act_dob1, ASCII act_dob2,
+			ASCII escape, ASCII act_neg,
+	      COLUMN 008, "COPIA SIN DERECHO A CREDITO TRIBUTARIO",
+		ASCII escape, ASCII act_dob1, ASCII des_dob,
+		ASCII escape, ASCII act_10cpi, ASCII escape, ASCII des_neg,
+		ASCII escape, ASCII act_comp,
+	      COLUMN 085, "TOTAL BRUTO",
+	      COLUMN 105, rm_t23.t23_tot_bruto	USING "#,###,###,##&.##"
+	{--
 	IF vg_codloc = 6 OR vg_codloc = 7 THEN
 		PRINT COLUMN 006, "www.herramientasyanclajes.com";
 	ELSE
 		PRINT COLUMN 006, "w w w . a c e r o c o m e r c i a l . c o m";
 	END IF
-	PRINT COLUMN 102, "SUBTOTAL",
-	      COLUMN 118, subtotal		USING "###,###,##&.##"
+	PRINT COLUMN 50,  " RECIBI FACTURA ORIGINAL ",
+	--}
+	PRINT COLUMN 002, "Estimado cliente: Su comprobante electronico ",
+			"usted lo recibira en su cuenta de correo:",
+	      COLUMN 096, "DESCUENTOS",
+	      COLUMN 118, rm_t23.t23_tot_dscto	USING "###,###,##&.##"
+	PRINT COLUMN 002, ASCII escape, ASCII act_neg,
+			r_z02.z02_email CLIPPED, '.',
+			ASCII escape, ASCII des_neg,
+	      COLUMN 100, "SUBTOTAL",
+	      COLUMN 122, subtotal		USING "###,###,##&.##"
+	{--
 	IF mensaje_fa_ant IS NOT NULL THEN
 		PRINT COLUMN 006, mensaje_fa_ant CLIPPED;
 	END IF
-	PRINT COLUMN 95,  "I. V. A. (", rm_t23.t23_porc_impto USING "#&", ") %",
+	--}
+	PRINT COLUMN 002, "Tambien podra consultar y descargar sus ",
+			"comprobantes electronicos a traves del portal",
+	      COLUMN 096, "I. V. A. (", rm_t23.t23_porc_impto USING "#&", ") %",
 	      COLUMN 118, impuesto		USING "###,###,##&.##"
-	PRINT COLUMN 82,  "GASTOS MOVILIZACION Y DIETAS",
-	      COLUMN 118, rm_t23.t23_val_otros1	USING "###,###,##&.##"
-	PRINT COLUMN 02,  "SON: ", label_letras[1,87],
-	      COLUMN 97,  "VALOR A PAGAR",
-	      COLUMN 116, valor_pag		USING "#,###,###,##&.##";
+	PRINT COLUMN 002, "web ",
+			ASCII escape, ASCII act_neg,
+			"https://innobeefactura.com.",
+			ASCII escape, ASCII des_neg,
+			" Sus datos para el primer acceso son Usuario: ",
+	      COLUMN 100, "GASTOS MOVILIZ. Y DIETAS",
+	      COLUMN 126, rm_t23.t23_val_otros1	USING "###,##&.##"
+	--PRINT COLUMN 02,  "SON: ", label_letras[1,87],
+	PRINT COLUMN 002, ASCII escape, ASCII act_neg,
+			rm_t23.t23_cedruc CLIPPED, "@innobeefactura.com",
+			ASCII escape, ASCII des_neg,
+			" y su Clave: ",
+			ASCII escape, ASCII act_neg,
+			rm_t23.t23_cedruc CLIPPED, ".",
+			ASCII escape, ASCII des_neg,
+	      COLUMN 104, "VALOR A PAGAR",
+	      COLUMN 124, valor_pag		USING "#,###,###,##&.##";
 	print ASCII escape;
 	print ASCII desact_comp 
 

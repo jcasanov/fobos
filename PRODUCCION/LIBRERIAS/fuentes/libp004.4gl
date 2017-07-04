@@ -1025,8 +1025,8 @@ FOREACH q_mast2 INTO tipo_comp, subtipo, indice
 	IF rm_caja.j10_tipo_destino = 'PR' OR rm_caja.j10_tipo_destino = 'PG'
 	THEN
 		LET r_ccomp.b12_glosa = 'PAGO: ', rm_caja.j10_tipo_destino, '-',
-					rm_caja.j10_num_destino USING '<<<<&',
-					'  ***'
+					rm_caja.j10_num_destino USING '<<<<<&',
+					' ***'
 	END IF
 	PREPARE cons_z23 FROM query
 	DECLARE q_z23 CURSOR FOR cons_z23

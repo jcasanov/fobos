@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176423</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>30/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176423</guiaRemision>
+<razonSocialComprador>SILVA VILLAROEL GILBERTO NAPOLEON</razonSocialComprador>
+<identificacionComprador>1704398526001</identificacionComprador>
+<totalSinImpuestos>297.40</totalSinImpuestos>
+<totalDescuento>60.91</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>297.40</baseImponible>
+<valor>35.69</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>333.09</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102233</codigoPrincipal>
+<descripcion>BALDOSA DE PISO / PARED 35 X 50 FACCIATA ARENA  PRIMERA</descripcion>
+<cantidad>26.86</cantidad>
+<precioUnitario>13.34</precioUnitario>
+<descuento>60.91</descuento>
+<precioTotalSinImpuesto>297.40</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>297.40</baseImponible>
+<valor>35.69</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">paulsilva1978@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2073171</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">047382</campoAdicional>
+</infoAdicional>
+</factura>

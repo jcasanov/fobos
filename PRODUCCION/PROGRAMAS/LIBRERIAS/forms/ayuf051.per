@@ -1,0 +1,33 @@
+DATABASE aceros
+
+SCREEN
+{
+ SUBTIPOS DE ORDENES DE TRABAJO
+------------------------------------------------
+ Tipo O.T.       Subtipo       Nombre 		
+------------------------------------------------
+[c001           ] [c] [c002                   ] 
+[c001           ] [c] [c002                   ]
+[c001           ] [c] [c002                   ]
+[c001           ] [c] [c002                   ]
+[c001           ] [c] [c002                   ]
+[c001           ] [c] [c002                   ]
+[c001           ] [c] [c002                   ] 
+[c001           ] [c] [c002                   ] 
+[c001           ] [c] [c002                   ] 
+[c001           ] [c] [c002                   ] 
+}
+
+TABLES
+talt005
+talt006
+
+ATTRIBUTES
+c001 = t05_nombre;
+c    = t06_subtipo;
+c002 = t06_nombre;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_subord[10](t05_nombre, t06_subtipo, t06_nombre)
+

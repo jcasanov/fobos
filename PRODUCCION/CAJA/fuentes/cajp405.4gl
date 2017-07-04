@@ -402,7 +402,7 @@ DEFINE j11_num_ch_aut		LIKE cajt011.j11_num_ch_aut
 DEFINE j11_num_cta_tarj		LIKE cajt011.j11_num_cta_tarj
 DEFINE j11_moneda		LIKE cajt011.j11_moneda
 DEFINE j11_valor		LIKE cajt011.j11_valor
-DEFINE cont_cred		LIKE cajt001.j01_cont_cred
+DEFINE j11_cont_cred		LIKE cajt011.j11_cont_cred
 DEFINE usuario			VARCHAR(19,10)
 DEFINE titulo			VARCHAR(80)
 DEFINE modulo			VARCHAR(40)

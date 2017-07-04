@@ -1,0 +1,44 @@
+DATABASE aceros
+SCREEN
+{
+REPUESTOS DE ALMACEN CARGADOS A LA ORDEN: [c001    ]
+
+ [c020      |x1|c021  |c022           |c023   |c024         |c025         ]
+[c002      |c3|c004  |c005           |c006   |c007         |c008         ]
+[c002      |c3|c004  |c005           |c006   |c007         |c008         ]
+[c002      |c3|c004  |c005           |c006   |c007         |c008         ]
+[c002      |c3|c004  |c005           |c006   |c007         |c008         ]
+[c002      |c3|c004  |c005           |c006   |c007         |c008         ]
+[c002      |c3|c004  |c005           |c006   |c007         |c008         ]
+					         Subtotal: [c010         ]
+					        Descuento: [c011         ]
+ 				        Impuesto [c012 ]%: [c013         ]
+					             Neto: [c014         ]
+}
+TABLES
+rept019
+rept020
+ATTRIBUTES
+c001 = formonly.num_ot, REVERSE;
+c020 = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+x1   = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c021 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c022 = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c023 = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c024 = formonly.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c025 = formonly.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+c002 = formonly.fecha TYPE DATE, FORMAT = 'dd-mm-yyyy';
+c3   = r20_cod_tran;
+c004 = r20_num_tran;
+c005 = r20_item;
+c006 = r20_cant_ven, FORMAT = '---&.##';
+c007 = r20_precio, FORMAT = '--,---,--&.##';
+c008 = formonly.subtotal TYPE DECIMAL(12,2), FORMAT = '--,---,--&.##';
+c010 = formonly.tot_bruto TYPE DECIMAL(12,2), FORMAT = '--,---,--&.##';
+c011 = formonly.tot_dscto TYPE DECIMAL(12,2), FORMAT = '##,###,##&.##';
+c012 = r19_porc_impto, FORMAT = '#&.##';
+c013 = formonly.tot_impto TYPE DECIMAL(12,2), FORMAT = '##,###,##&.##';
+c014 = formonly.tot_neto TYPE DECIMAL(12,2), FORMAT = '##,###,##&.##', REVERSE;
+INSTRUCTIONS
+SCREEN RECORD r_rep[6] (formonly.fecha, r20_cod_tran, r20_num_tran, r20_item,
+			r20_cant_ven, r20_precio, formonly.subtotal)

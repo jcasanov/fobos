@@ -1,30 +1,39 @@
 DATABASE aceros
-
 SCREEN
 {
  USUARIOS
------------------------------------------
- Código	      Nombre 		
------------------------------------------
-[c01       ] [c002                    ] 
-[c01       ] [c002                    ]
-[c01       ] [c002                    ]
-[c01       ] [c002                    ]
-[c01       ] [c002                    ]
-[c01       ] [c002                    ]
-[c01       ] [c002                    ] 
-[c01       ] [c002                    ] 
-[c01       ] [c002                    ] 
-[c01       ] [c002                    ] 
+                                   [c000] de [c001]
+ [c010      |c011                          |c0|c1|c] 
+[c020      |c021                          |c2|c3|d] 
+[c020      |c021                          |c2|c3|d] 
+[c020      |c021                          |c2|c3|d] 
+[c020      |c021                          |c2|c3|d] 
+[c020      |c021                          |c2|c3|d] 
+[c020      |c021                          |c2|c3|d] 
+[c020      |c021                          |c2|c3|d] 
+[c020      |c021                          |c2|c3|d] 
+[c020      |c021                          |c2|c3|d] 
+[c020      |c021                          |c2|c3|d] 
 }
-
 TABLES
 gent005
-
 ATTRIBUTES
-c01 = g05_usuario;
-c002 = g05_nombres;
-END
+c000 = FORMONLY.num_rows, NOENTRY, UPSHIFT, REVERSE;
+c001 = FORMONLY.max_rows, NOENTRY, UPSHIFT, REVERSE;
 
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c0   = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c1   = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c    = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+
+c020 = gent005.g05_usuario, NOENTRY, UPSHIFT;
+c021 = gent005.g05_nombres, NOENTRY, UPSHIFT;
+c2   = gent005.g05_grupo, NOENTRY, UPSHIFT;
+c3   = gent005.g05_tipo, NOENTRY, UPSHIFT;
+d    = gent005.g05_estado, NOENTRY, UPSHIFT;
+END
 INSTRUCTIONS
-SCREEN RECORD rh_usua[10](g05_usuario, g05_nombres)
+DELIMITERS '||'
+SCREEN RECORD rh_usua[10] (g05_usuario, g05_nombres, g05_grupo, g05_tipo,
+				g05_estado)

@@ -1,0 +1,101 @@
+database acero_gm
+screen size 24 by 80
+{
+n30_compania       [f000       ]
+n30_cod_trab       [f001       ]
+n30_estado         [a]
+n30_nombres        [f002                                         ]
+n30_fecha_ing      [f003      ]
+n30_fecha_reing    [f004      ]
+n30_fecha_sal      [f005      ]
+n30_mon_sueldo     [a0]
+n30_sueldo_mes     [f006         ]
+n30_factor_hora    [f007          ]
+n30_tipo_trab      [b]
+n30_tipo_contr     [c]
+n30_tipo_rol       [d]
+n30_cod_cargo      [f008  ]
+n30_cod_depto      [f009  ]
+n30_pais_nac       [f010       ]
+n30_ciudad_nac     [f011       ]
+n30_fecha_nacim    [f012      ]
+n30_sexo           [e]
+n30_est_civil      [f]
+}
+screen
+{
+n30_domicilio      [f013                                    ]
+n30_telef_domic    [f014           ]
+n30_telef_fami     [f015           ]
+n30_refer_fami     [f016                          ]
+n30_tipo_doc_id    [g]
+n30_num_doc_id     [f017           ]
+n30_carnet_seg     [f018           ]
+n30_sub_activ      [f019      ]
+n30_tipo_pago      [h]
+n30_bco_empresa    [f020       ]
+n30_cta_empresa    [f021           ]
+n30_tipo_cta_tra   [i]
+n30_cta_trabaj     [f022           ]
+n30_desc_seguro    [j]
+n30_desc_impto     [k]
+n30_cod_seguro     [f023  ]
+n30_sectorial      [f024      ]
+n30_lib_militar    [f025           ]
+n30_fec_jub        [f026      ]
+n30_val_jub_pat    [f027          ]
+}
+screen
+{
+n30_usuario        [f028      ]
+n30_fecing         [f029               ]
+}
+end
+tables
+rolt030
+attributes
+f000 = rolt030.n30_compania;
+f001 = rolt030.n30_cod_trab;
+a = rolt030.n30_estado;
+f002 = rolt030.n30_nombres;
+f003 = rolt030.n30_fecha_ing;
+f004 = rolt030.n30_fecha_reing;
+f005 = rolt030.n30_fecha_sal;
+a0 = rolt030.n30_mon_sueldo;
+f006 = rolt030.n30_sueldo_mes;
+f007 = rolt030.n30_factor_hora;
+b = rolt030.n30_tipo_trab;
+c = rolt030.n30_tipo_contr;
+d = rolt030.n30_tipo_rol;
+f008 = rolt030.n30_cod_cargo;
+f009 = rolt030.n30_cod_depto;
+f010 = rolt030.n30_pais_nac;
+f011 = rolt030.n30_ciudad_nac;
+f012 = rolt030.n30_fecha_nacim;
+e = rolt030.n30_sexo;
+f = rolt030.n30_est_civil;
+
+f013 = rolt030.n30_domicilio;
+f014 = rolt030.n30_telef_domic;
+f015 = rolt030.n30_telef_fami;
+f016 = rolt030.n30_refer_fami;
+g = rolt030.n30_tipo_doc_id;
+f017 = rolt030.n30_num_doc_id;
+f018 = rolt030.n30_carnet_seg;
+f019 = rolt030.n30_sub_activ;
+h = rolt030.n30_tipo_pago;
+f020 = rolt030.n30_bco_empresa;
+f021 = rolt030.n30_cta_empresa;
+i = rolt030.n30_tipo_cta_tra;
+f022 = rolt030.n30_cta_trabaj;
+j = rolt030.n30_desc_seguro;
+k = rolt030.n30_desc_impto;
+f023 = rolt030.n30_cod_seguro;
+f024 = rolt030.n30_sectorial;
+f025 = rolt030.n30_lib_militar;
+f026 = rolt030.n30_fec_jub;
+f027 = rolt030.n30_val_jub_pat;
+
+f028 = rolt030.n30_usuario;
+f029 = rolt030.n30_fecing;
+end

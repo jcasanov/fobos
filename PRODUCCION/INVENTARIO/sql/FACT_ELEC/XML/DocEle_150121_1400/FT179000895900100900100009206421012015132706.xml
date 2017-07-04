@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092064</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092064</guiaRemision>
+<razonSocialComprador>SEREMCORP S.A.</razonSocialComprador>
+<identificacionComprador>0992340975001</identificacionComprador>
+<totalSinImpuestos>82.32</totalSinImpuestos>
+<totalDescuento>10.18</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>82.32</baseImponible>
+<valor>9.88</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>92.20</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>98591</codigoPrincipal>
+<descripcion>CINCEL PARA CEMENTO SDS-MAX  CINCEL PUNTERO 12" (965)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>31.75</precioUnitario>
+<descuento>6.99</descuento>
+<precioTotalSinImpuesto>56.51</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>56.51</baseImponible>
+<valor>6.78</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150472</codigoPrincipal>
+<descripcion>CINCEL PARA CEMENTO 48-62-4079 SDS MAX 1" x 12" PLANO.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>14.50</precioUnitario>
+<descuento>3.19</descuento>
+<precioTotalSinImpuesto>25.81</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>25.81</baseImponible>
+<valor>3.10</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">dhellen23@yahoo.com.mx</campoAdicional>
+<campoAdicional nombre="telefono-movil">2922063</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">007659</campoAdicional>
+</infoAdicional>
+</factura>

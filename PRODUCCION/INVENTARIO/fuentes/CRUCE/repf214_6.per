@@ -1,0 +1,21 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+         TRANSACCION A IMPRIMIR
+         ---------------------
+
+  Transacción: [a0] [c000           ]
+
+    Impresión: [c001                ]
+
+
+
+}
+ATTRIBUTES
+a0   = FORMONLY.cod_tran, NOENTRY, UPSHIFT, REVERSE;
+c000 = FORMONLY.num_tran, NOENTRY, UPSHIFT, REVERSE;
+c001 = FORMONLY.impresion TYPE CHAR NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'RADIO', CONFIG = 'C "Compra Local" T Transferencias X "T O D A S"',
+	COMMENTS = 'Escoja tipo transacción a Imprimir.';
+END

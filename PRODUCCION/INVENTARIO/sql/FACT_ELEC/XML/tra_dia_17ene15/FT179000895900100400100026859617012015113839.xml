@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268596</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268596</guiaRemision>
+<razonSocialComprador>QUIMBIAMBA IMBAQUINGO MILTON JAVIER</razonSocialComprador>
+<identificacionComprador>1721088571001</identificacionComprador>
+<totalSinImpuestos>141.01</totalSinImpuestos>
+<totalDescuento>24.88</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>141.01</baseImponible>
+<valor>16.92</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>157.93</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>100268</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA NAPOLES WHITE SEGUNDA ( CAJA DE 1.92 m2 )</descripcion>
+<cantidad>17.28</cantidad>
+<precioUnitario>9.60</precioUnitario>
+<descuento>24.88</descuento>
+<precioTotalSinImpuesto>141.01</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>141.01</baseImponible>
+<valor>16.92</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">ecoceramicas@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0981297433</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">061280</campoAdicional>
+</infoAdicional>
+</factura>

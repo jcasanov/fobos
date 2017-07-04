@@ -1,0 +1,36 @@
+DATABASE aceros
+SCREEN
+{
+ CLIENTES POR LOCALIDAD
+
+ [lb11     |lbl2                                 |lbl3           ]
+[c001     |c002                                 |c003           ]
+[c001     |c002                                 |c003           ]
+[c001     |c002                                 |c003           ]
+[c001     |c002                                 |c003           ]
+[c001     |c002                                 |c003           ]
+[c001     |c002                                 |c003           ]
+[c001     |c002                                 |c003           ]
+[c001     |c002                                 |c003           ]
+[c001     |c002                                 |c003           ]
+[c001     |c002                                 |c003           ]
+
+}
+
+TABLES
+cxct001
+cxct002
+
+ATTRIBUTES
+c001 = z02_codcli, UPSHIFT;
+c002 = z01_nomcli, UPSHIFT;
+c003 = z01_num_doc_id, UPSHIFT;
+
+lb11 = formonly.bt_codigo,       NOENTRY, WIDGET='BUTTON', CONFIG='F15';
+lbl2 = formonly.bt_nombre,       NOENTRY, WIDGET='BUTTON', CONFIG='F16';
+lbl3 = formonly.bt_cedruc,       NOENTRY, WIDGET='BUTTON', CONFIG='F17';
+
+INSTRUCTIONS
+SCREEN RECORD rh_cliloc[10](z02_codcli, z01_nomcli, z01_num_doc_id)
+
+END

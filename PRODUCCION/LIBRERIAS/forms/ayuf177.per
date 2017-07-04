@@ -1,0 +1,38 @@
+DATABASE aceros
+SCREEN
+{
+ TRANSACCIONES DE OTRA LOCALIDAD
+
+ [c0|c001    |c002                          |c003      |c004      ]
+[c1|c011    |c012                          |c013      |c014      ]
+[c1|c011    |c012                          |c013      |c014      ]
+[c1|c011    |c012                          |c013      |c014      ]
+[c1|c011    |c012                          |c013      |c014      ]
+[c1|c011    |c012                          |c013      |c014      ]
+[c1|c011    |c012                          |c013      |c014      ]
+[c1|c011    |c012                          |c013      |c014      ]
+[c1|c011    |c012                          |c013      |c014      ]
+[c1|c011    |c012                          |c013      |c014      ]
+[c1|c011    |c012                          |c013      |c014      ]
+
+}
+TABLES
+gent002
+rept090
+rept091
+ATTRIBUTES
+c0   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c002 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c003 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c004 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F90';
+
+c1   = rept090.r90_cod_tran, UPSHIFT, NOENTRY;
+c011 = rept090.r90_num_tran, UPSHIFT;
+c012 = rept091.r91_nomcli, UPSHIFT;
+c013 = FORMONLY.r90_fecing TYPE DATE, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c014 = gent002.g02_abreviacion, UPSHIFT, NOENTRY;
+END
+INSTRUCTIONS
+SCREEN RECORD rh_transac[10] (r90_cod_tran, r90_num_tran, r91_nomcli,
+				r90_fecing, g02_abreviacion)

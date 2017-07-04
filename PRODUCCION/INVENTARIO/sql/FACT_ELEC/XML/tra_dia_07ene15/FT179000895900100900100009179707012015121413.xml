@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091797</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091797</guiaRemision>
+<razonSocialComprador>ARSACONST S.A.</razonSocialComprador>
+<identificacionComprador>0992659394001</identificacionComprador>
+<totalSinImpuestos>199.20</totalSinImpuestos>
+<totalDescuento>22.14</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>199.20</baseImponible>
+<valor>23.90</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>223.10</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>101817</codigoPrincipal>
+<descripcion>EMPAQUE 1319000 SELLO DE CERA</descripcion>
+<cantidad>13.00</cantidad>
+<precioUnitario>2.34</precioUnitario>
+<descuento>3.04</descuento>
+<precioTotalSinImpuesto>27.38</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>27.38</baseImponible>
+<valor>3.29</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70747</codigoPrincipal>
+<descripcion>DESAGUE DE LAVABO SC005903000 1BO 1-1/4" PP DESAGUE CON REJILLA Y SIFON</descripcion>
+<cantidad>11.00</cantidad>
+<precioUnitario>5.83</precioUnitario>
+<descuento>6.41</descuento>
+<precioTotalSinImpuesto>57.72</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>57.72</baseImponible>
+<valor>6.93</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>69080</codigoPrincipal>
+<descripcion>REJILLA 2011402 DE PISO 1-1/2" BRONCE CROMADO P/ ROSCAR</descripcion>
+<cantidad>11.00</cantidad>
+<precioUnitario>4.07</precioUnitario>
+<descuento>4.48</descuento>
+<precioTotalSinImpuesto>40.29</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>40.29</baseImponible>
+<valor>4.83</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>69586</codigoPrincipal>
+<descripcion>TUBO ABASTO PARA INODORO 1658000 DE 16" DE MALLA INOXIDABLE</descripcion>
+<cantidad>14.00</cantidad>
+<precioUnitario>3.39</precioUnitario>
+<descuento>4.75</descuento>
+<precioTotalSinImpuesto>42.71</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>42.71</baseImponible>
+<valor>5.13</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>27951</codigoPrincipal>
+<descripcion>TUBO ABASTO METALICO TRENZADO E269.20.03.0 DH DE 16" DE LAVABO P/ LLAVE DE PASO</descripcion>
+<cantidad>8.00</cantidad>
+<precioUnitario>4.32</precioUnitario>
+<descuento>3.46</descuento>
+<precioTotalSinImpuesto>31.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>31.10</baseImponible>
+<valor>3.73</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">arsaconst.sa@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2890122</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">012433</campoAdicional>
+</infoAdicional>
+</factura>

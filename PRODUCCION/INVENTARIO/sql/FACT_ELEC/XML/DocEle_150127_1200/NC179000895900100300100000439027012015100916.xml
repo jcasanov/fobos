@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000004390</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>MIRANDA ROMERO ELVIA ASUNCION</razonSocialComprador>
+<identificacionComprador>0601493968001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>003-001-000114170</numDocModificado>
+<fechaEmisionDocSustento>27/01/2015</fechaEmisionDocSustento>
+<totalSinImpuestos>8.16</totalSinImpuestos>
+<valorModificacion>9.14</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>8.16</baseImponible>
+<valor>0.98</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>MATERIAL NO ES LO QUE NECESITA LA CLIENT</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>3770</codigoInterno>
+<descripcion>REDUCCION PVC DESAGUE DE 75mm. x 50mm. ISO</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>1.98</precioUnitario>
+<descuento>0.71</descuento>
+<precioTotalSinImpuesto>5.23</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.23</baseImponible>
+<valor>0.63</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>2687</codigoInterno>
+<descripcion>CODO PVC DESAGUE DE 50mm. x 90 GRAD ISO E/C</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>1.11</precioUnitario>
+<descuento>0.40</descuento>
+<precioTotalSinImpuesto>2.93</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.93</baseImponible>
+<valor>0.35</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">miel2412romero@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0987819245</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">62042</campoAdicional>
+</infoAdicional>
+</notaCredito>

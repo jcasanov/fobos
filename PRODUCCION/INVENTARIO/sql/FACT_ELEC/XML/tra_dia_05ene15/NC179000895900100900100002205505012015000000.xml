@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000022055</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>05/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>SUCORPORACION S.A.</razonSocialComprador>
+<identificacionComprador>0992353074001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000022055</numDocModificado>
+<fechaEmisionDocSustento>05/01/2015</fechaEmisionDocSustento>
+<totalSinImpuestos>29.60</totalSinImpuestos>
+<valorModificacion>33.15</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>29.60</baseImponible>
+<valor>3.55</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DESCUENTOS</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>22055</codigoInterno>
+<descripcion>DESCUENTOS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>29.60</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>29.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ACERO"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>29.60</baseImponible>
+<valor>3.55</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">arquitectura@sucorporacionsa.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2922024</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">13477</campoAdicional>
+</infoAdicional>
+</notaCredito>

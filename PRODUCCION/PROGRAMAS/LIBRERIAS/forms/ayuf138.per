@@ -1,0 +1,33 @@
+DATABASE aceros
+
+SCREEN
+{
+ TIPOS DE ACTIVOS FIJOS
+
+ [lbl1   |lbl2                           ]
+[c01    |c002                           ] 
+[c01    |c002                           ] 
+[c01    |c002                           ] 
+[c01    |c002                           ] 
+[c01    |c002                           ] 
+[c01    |c002                           ] 
+[c01    |c002                           ] 
+[c01    |c002                           ] 
+[c01    |c002                           ] 
+[c01    |c002                           ] 
+
+}
+
+TABLES
+actt002
+
+ATTRIBUTES
+c01  = a02_tipo_act, UPSHIFT;
+c002 = a02_nombre, UPSHIFT;
+lbl1 = formonly.bt_tipoact,      NOENTRY, WIDGET='BUTTON', CONFIG='F15';
+lbl2 = formonly.bt_nombre,	 NOENTRY, WIDGET='BUTTON', CONFIG='F16';
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_tipoact[10](a02_tipo_act, a02_nombre)
+

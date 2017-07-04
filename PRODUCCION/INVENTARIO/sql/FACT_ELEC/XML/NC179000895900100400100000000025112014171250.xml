@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>         </secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>25/11/2014</fechaEmision>
+<dirEstablecimiento>ANTONIO HERRERA LOTE 30 Y JOSE BERRUTIET</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>MARIA ELENA SOLIS</razonSocialComprador>
+<identificacionComprador>1801652866001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000174777</numDocModificado>
+<fechaEmisionDocSustento>25/11/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>295.80</totalSinImpuestos>
+<valorModificacion>331.30</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>295.80</baseImponible>
+<valor>35.50</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 266445 MARIA SOLIS MAT NO ENTRGD FC</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>616</codigoInterno>
+<descripcion>ARMEX 6.25 x 2.40 MTS. R-84 150 x 150 x 4 x 4mm.</descripcion>
+<cantidad>12.00</cantidad>
+<precioUnitario>24.65</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>295.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="IDEAL" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>295.80</baseImponible>
+<valor>35.50</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</notaCredito>

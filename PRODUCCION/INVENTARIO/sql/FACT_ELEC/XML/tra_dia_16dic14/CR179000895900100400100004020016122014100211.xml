@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comprobanteRetencion id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000040200</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoCompRetencion>
+<fechaEmision>16/12/2014</fechaEmision>
+<dirEstablecimiento>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionSujetoRetenido>04</tipoIdentificacionSujetoRetenido>
+<razonSocialSujetoRetenido>C.A.ECUATORIANA DE CERAMICA</razonSocialSujetoRetenido>
+<identificacionSujetoRetenido>1790013235001</identificacionSujetoRetenido>
+<periodoFiscal>12/2014</periodoFiscal>
+</infoCompRetencion>
+<impuestos>
+<impuesto>
+<codigo>1</codigo>
+<codigoRetencion>312</codigoRetencion>
+<baseImponible>1769.58</baseImponible>
+<porcentajeRetener>1.00</porcentajeRetener>
+<valorRetenido>17.70</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>003001000193708</numDocSustento>
+<fechaEmisionDocSustento>08/12/2014</fechaEmisionDocSustento>
+</impuesto>
+</impuestos>
+<infoAdicional>
+<campoAdicional nombre="Email">mayracevallos@cermosa.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">032967797</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000028</campoAdicional>
+</infoAdicional>
+</comprobanteRetencion>

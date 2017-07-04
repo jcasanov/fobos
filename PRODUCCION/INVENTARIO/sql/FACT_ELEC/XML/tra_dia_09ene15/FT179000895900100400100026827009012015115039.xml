@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268270</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>09/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268270</guiaRemision>
+<razonSocialComprador>OCAMPO A. HOLGUER R.</razonSocialComprador>
+<identificacionComprador>1700124967001</identificacionComprador>
+<totalSinImpuestos>25.42</totalSinImpuestos>
+<totalDescuento>2.82</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>25.42</baseImponible>
+<valor>3.05</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>28.47</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>92906</codigoPrincipal>
+<descripcion>RESORTE P/ LLAVE DE TUBO N.36 (31730)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>13.52</precioUnitario>
+<descuento>1.35</descuento>
+<precioTotalSinImpuesto>12.17</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>12.17</baseImponible>
+<valor>1.46</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>15518</codigoPrincipal>
+<descripcion>CUCHILLA PARA CORTATUBO E-3469 P/MOD.104/150 (33185)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>7.36</precioUnitario>
+<descuento>1.47</descuento>
+<precioTotalSinImpuesto>13.25</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>13.25</baseImponible>
+<valor>1.59</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">holguerocampoa@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2263217</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000903</campoAdicional>
+</infoAdicional>
+</factura>

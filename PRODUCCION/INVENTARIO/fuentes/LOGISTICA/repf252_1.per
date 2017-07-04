@@ -1,0 +1,100 @@
+DATABASE aceros
+SCREEN
+{
+                                                            [c000 ] de [c001 ]
+   Hoja de Ruta: [c002   ]      Fecha: [c003      ]     Estado: [c|c004      ]
+     Transporte: [c005] [c006                          ] Placa: [c007        ]
+         Chofer: [c008] [c009                                    ]
+       Ayudante: [c017] [c018                                    ]
+    Observación: [c012                                 ]  Area: [c0] [c019   ]
+    Kilometraje: [c013   ] - [c014   ]                      [c015 ] de [c016 ]
+ [c020    |c021 |c022 |c023                        |c024                      ]
+[c030  ] [c031 |c032 |c033                      ] [c034                      ]
+[c030  ] [c031 |c032 |c033                      ] [c034                      ]
+[c030  ] [c031 |c032 |c033                      ] [c034                      ]
+[c030  ] [c031 |c032 |c033                      ] [c034                      ]
+[c030  ] [c031 |c032 |c033                      ] [c034                      ]
+[c030  ] [c031 |c032 |c033                      ] [c034                      ]
+[c030  ] [c031 |c032 |c033                      ] [c034                      ]
+
+ Ruta [c040              |c041                     |c042                     ]
+
+   Ingresado Por: [c043      ]            Fecha Ingreso: [c044               ]
+     Cerrado Por: [c045      ]            Fecha Cierre : [c046               ]
+   Eliminado Por: [c047      ]            Fecha Elimin.: [c048               ]
+}
+TABLES
+rept095
+rept108
+rept109
+rept110
+rept111
+rept113
+rept114
+rept115
+gent003
+ATTRIBUTES
+c000 = FORMONLY.num_reg, NOENTRY, UPSHIFT, REVERSE;
+c001 = FORMONLY.max_reg, NOENTRY, UPSHIFT, REVERSE;
+
+c002 = rept113.r113_num_hojrut, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = rept113.r113_fecha, NOENTRY, UPSHIFT, REVERSE, FORMAT = "dd-mm-yyyy",
+	COMMENTS = 'Digite la fecha en formato: dd-mm-aaaa.';
+c    = rept113.r113_estado, NOENTRY, UPSHIFT, REVERSE,
+	COMMENTS = '(A) ACTIVO  (C) CERRADO  (E) ELIMINADO';
+c004 = FORMONLY.tit_estado, NOENTRY, UPSHIFT, REVERSE;
+c005 = rept113.r113_cod_trans, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c006 = rept110.r110_descripcion, NOENTRY, UPSHIFT, REVERSE;
+c007 = rept110.r110_placa, NOENTRY, UPSHIFT, REVERSE;
+c008 = rept113.r113_cod_chofer, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c009 = rept111.r111_nombre, NOENTRY, UPSHIFT, REVERSE;
+c017 = rept113.r113_cod_ayud, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c018 = rept115.r115_nombre, NOENTRY, UPSHIFT;
+c012 = rept113.r113_observacion, AUTONEXT, UPSHIFT;
+c0   = rept113.r113_areaneg, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c019 = gent003.g03_nombre, NOENTRY, UPSHIFT, REVERSE;
+c013 = rept113.r113_km_ini, AUTONEXT, UPSHIFT, REVERSE,INCLUDE = (0 TO 9999999);
+c014 = rept113.r113_km_fin, AUTONEXT, UPSHIFT;
+
+c015 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c016 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c020 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c021 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F17';
+c022 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F18';
+c023 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F19';
+c024 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+c030 = rept114.r114_guia_remision, AUTONEXT, UPSHIFT, OPTIONS = '-nolist',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c031 = FORMONLY.r114_hora_lleg, REQUIRED, 
+	AUTONEXT, UPSHIFT, FORMAT = 'hh:mm', OPTIONS = '-nolist';
+c032 = FORMONLY.r114_hora_sali, REQUIRED,
+	AUTONEXT, UPSHIFT, FORMAT = 'hh:mm', OPTIONS = '-nolist';
+c033 = FORMONLY.r112_descripcion, AUTONEXT, UPSHIFT, SCROLL,OPTIONS = '-nolist',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c034 = rept114.r114_recibido_por, AUTONEXT, UPSHIFT, SCROLL,OPTIONS = '-nolist';
+
+c040 = rept095.r95_num_sri, NOENTRY, REVERSE, UPSHIFT;
+c041 = rept108.r108_descripcion, NOENTRY, REVERSE, UPSHIFT;
+c042 = rept109.r109_descripcion, NOENTRY, REVERSE, UPSHIFT;
+
+c043 = rept113.r113_usuario, NOENTRY, UPSHIFT, REVERSE;
+c044 = rept113.r113_fecing, NOENTRY, UPSHIFT, REVERSE;
+c045 = rept113.r113_usu_cierre, NOENTRY, UPSHIFT;
+c046 = rept113.r113_fec_cierre, NOENTRY, UPSHIFT;
+c047 = rept113.r113_usu_elim, NOENTRY, UPSHIFT;
+c048 = rept113.r113_fec_elim, NOENTRY, UPSHIFT;
+END
+KEYS
+F5 = 'Guía Remisión'
+F6 = 'Imprimir'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_hoja[7] (r114_guia_remision, r114_hora_lleg, r114_hora_sali,
+			r112_descripcion, r114_recibido_por)

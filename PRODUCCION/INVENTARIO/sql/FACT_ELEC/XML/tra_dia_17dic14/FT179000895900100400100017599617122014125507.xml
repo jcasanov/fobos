@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175996</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>LUCIANO ANDRADE MARIN LOTE 24</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175996</guiaRemision>
+<razonSocialComprador>IDEGUIAR  CIA. LTDA</razonSocialComprador>
+<identificacionComprador>1791359364001</identificacionComprador>
+<totalSinImpuestos>1127.70</totalSinImpuestos>
+<totalDescuento>25.83</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1127.70</baseImponible>
+<valor>135.32</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1263.02</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>101161</codigoPrincipal>
+<descripcion>ROTOMARTILLO A BATERIA 2604-22 M-18 FUEL DE 1/2" 75 Lbs x Pulg.CUADRADA S/CARBONES</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>464.15</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>928.30</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>928.30</baseImponible>
+<valor>111.40</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150518</codigoPrincipal>
+<descripcion>HOJA DE SIERRA 48-42-5121 3" BI-METAL 18 DIENTES HASTA 1/8" PAQ. 5 UNID.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>10.06</precioUnitario>
+<descuento>1.01</descuento>
+<precioTotalSinImpuesto>9.05</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="PAQ" valor="PAQ"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.05</baseImponible>
+<valor>1.09</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101434</codigoPrincipal>
+<descripcion>HERRAMIENTA 48-22-1902 CUCHILLA PLEGABLE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>23.93</precioUnitario>
+<descuento>2.39</descuento>
+<precioTotalSinImpuesto>21.54</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>21.54</baseImponible>
+<valor>2.58</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98926</codigoPrincipal>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7430SD1 DE 5/8" X 3-1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.58</precioUnitario>
+<descuento>0.24</descuento>
+<precioTotalSinImpuesto>1.34</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="POWERS" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.34</baseImponible>
+<valor>0.16</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98292</codigoPrincipal>
+<descripcion>ANCLAJE DE CAMISA LOCK-BOLT 05038S HEX. DE 5/8" X 3"  (AS)</descripcion>
+<cantidad>25.00</cantidad>
+<precioUnitario>1.02</precioUnitario>
+<descuento>3.83</descuento>
+<precioTotalSinImpuesto>21.67</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="POWERS" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>21.67</baseImponible>
+<valor>2.60</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102352</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-20-7200 SDS PLUS 4CT 5/8" X 6" X 8"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>19.46</precioUnitario>
+<descuento>5.84</descuento>
+<precioTotalSinImpuesto>33.08</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>33.08</baseImponible>
+<valor>3.97</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103117</codigoPrincipal>
+<descripcion>FLEXOMETRO 48-22-5225 MAGNETICO DE 8 m.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>38.30</precioUnitario>
+<descuento>3.83</descuento>
+<precioTotalSinImpuesto>34.47</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>34.47</baseImponible>
+<valor>4.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102470</codigoPrincipal>
+<descripcion>JUEGO 48-22-2018 DE DESTORNILLADORES DE 8 PZS</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>43.47</precioUnitario>
+<descuento>8.69</descuento>
+<precioTotalSinImpuesto>78.25</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>78.25</baseImponible>
+<valor>9.39</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2901380</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">012176</campoAdicional>
+</infoAdicional>
+</factura>

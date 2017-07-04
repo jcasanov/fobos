@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113905</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113905</guiaRemision>
+<razonSocialComprador>LEMA TACO SEGUNDO CARLOS</razonSocialComprador>
+<identificacionComprador>1705043337</identificacionComprador>
+<totalSinImpuestos>60.71</totalSinImpuestos>
+<totalDescuento>4.77</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>60.71</baseImponible>
+<valor>7.29</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>68.00</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>68788</codigoPrincipal>
+<descripcion>SUPERTECHO - SPT - 1000 - AL DE 8 PIES 2.40m (ANCHO UTIL 1.05 m.) x 0.30mm</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>15.43</precioUnitario>
+<descuento>1.23</descuento>
+<precioTotalSinImpuesto>14.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ROOFTE"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>14.20</baseImponible>
+<valor>1.70</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>68794</codigoPrincipal>
+<descripcion>SUPERTECHO - SPT - 1000 - AL DE 20 PIES 6m (ANCHO UTIL 1.05 m.) x 0.30mm</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>38.55</precioUnitario>
+<descuento>3.08</descuento>
+<precioTotalSinImpuesto>35.47</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ROOFTE"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>35.47</baseImponible>
+<valor>4.26</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5174</codigoPrincipal>
+<descripcion>TUBO DE ACERO RECTANGULAR 1-1/2" x 3/4" x 1.1mm. (40x20mm.)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>11.50</precioUnitario>
+<descuento>0.46</descuento>
+<precioTotalSinImpuesto>11.04</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>11.04</baseImponible>
+<valor>1.32</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">carloslemat@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0998858958</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">063462</campoAdicional>
+</infoAdicional>
+</factura>

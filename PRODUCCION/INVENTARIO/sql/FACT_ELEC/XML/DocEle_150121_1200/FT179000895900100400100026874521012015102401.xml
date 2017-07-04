@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268745</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268745</guiaRemision>
+<razonSocialComprador>ACLIMATIC CIA LTDA</razonSocialComprador>
+<identificacionComprador>1791800850001</identificacionComprador>
+<totalSinImpuestos>93.98</totalSinImpuestos>
+<totalDescuento>7.28</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>93.98</baseImponible>
+<valor>11.28</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>105.26</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>61382</codigoPrincipal>
+<descripcion>TUBO NEGRO S-UNION ISO II TIPO "F" DE 3/4" x 6 m.</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>15.49</precioUnitario>
+<descuento>1.86</descuento>
+<precioTotalSinImpuesto>44.61</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FUJI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>44.61</baseImponible>
+<valor>5.35</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2278</codigoPrincipal>
+<descripcion>CODO NEGRO CLASE 150 DE 3/4" x 45 GRAD</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>1.58</precioUnitario>
+<descuento>0.95</descuento>
+<precioTotalSinImpuesto>8.53</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.53</baseImponible>
+<valor>1.02</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103399</codigoPrincipal>
+<descripcion>BUSHING NEGRO CLASE 150 DE 1" X 3/4"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1.51</precioUnitario>
+<descuento>0.24</descuento>
+<precioTotalSinImpuesto>2.78</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.78</baseImponible>
+<valor>0.33</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1702</codigoPrincipal>
+<descripcion>BUSHING NEGRO CLASE 150 DE 3/4" x 1/2"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1.06</precioUnitario>
+<descuento>0.21</descuento>
+<precioTotalSinImpuesto>1.91</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.91</baseImponible>
+<valor>0.23</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2398</codigoPrincipal>
+<descripcion>CODO PVC ESP-CAM A 90 GRAD  DE 25mm. ISO</descripcion>
+<cantidad>70.00</cantidad>
+<precioUnitario>0.24</precioUnitario>
+<descuento>1.68</descuento>
+<precioTotalSinImpuesto>15.12</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>15.12</baseImponible>
+<valor>1.81</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>10154</codigoPrincipal>
+<descripcion>SELLADOR 2-C-GS-2-11  DE  11 OZ. NEGRO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>5.76</precioUnitario>
+<descuento>1.15</descuento>
+<precioTotalSinImpuesto>10.37</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PERMAT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>10.37</baseImponible>
+<valor>1.24</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3086</codigoPrincipal>
+<descripcion>NEPLO FLEX DE 1/2"</descripcion>
+<cantidad>25.00</cantidad>
+<precioUnitario>0.29</precioUnitario>
+<descuento>0.73</descuento>
+<precioTotalSinImpuesto>6.52</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.52</baseImponible>
+<valor>0.78</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1326</codigoPrincipal>
+<descripcion>ADAPTADOR PVC ESP-CAM HEMBRA ISO DE 25mm. A 3/4"</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>0.23</precioUnitario>
+<descuento>0.46</descuento>
+<precioTotalSinImpuesto>4.14</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.14</baseImponible>
+<valor>0.50</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">asiscontabilidad2.uio@aclimatic.net</campoAdicional>
+<campoAdicional nombre="telefono-movil">6001159</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">020773</campoAdicional>
+<campoAdicional nombre="Observaciones">ORDEN N.-5024</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092041</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092041</guiaRemision>
+<razonSocialComprador>SUQUINAHUA DE LA CUADRA MERCY</razonSocialComprador>
+<identificacionComprador>0907581219</identificacionComprador>
+<totalSinImpuestos>1054.38</totalSinImpuestos>
+<totalDescuento>245.50</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1054.38</baseImponible>
+<valor>126.53</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1180.91</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>41616</codigoPrincipal>
+<descripcion>BIDET PARA SPRAY VERTICAL E345-BL POMPEYA BLANCO</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>96.50</precioUnitario>
+<descuento>43.43</descuento>
+<precioTotalSinImpuesto>246.07</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>246.07</baseImponible>
+<valor>29.53</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>71582</codigoPrincipal>
+<descripcion>GRIFERIA DE DUCHA E312/B1 CR MONOC. P/DUCHA DUCHA MANUAL ARIZONA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>186.53</precioUnitario>
+<descuento>37.31</descuento>
+<precioTotalSinImpuesto>149.22</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>149.22</baseImponible>
+<valor>17.91</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101925</codigoPrincipal>
+<descripcion>GRIFERIA DE LAVABO 1-H E181/B1  CR  ARIZONA  MONOM. DES. REJILLA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>50.01</precioUnitario>
+<descuento>10.00</descuento>
+<precioTotalSinImpuesto>40.01</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>40.01</baseImponible>
+<valor>4.80</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>90431</codigoPrincipal>
+<descripcion>GRIFERIA DE LAVABO 8" E201/84 CR CHESS CROMO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>267.71</precioUnitario>
+<descuento>107.08</descuento>
+<precioTotalSinImpuesto>428.34</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>428.34</baseImponible>
+<valor>51.40</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>90415</codigoPrincipal>
+<descripcion>GRIFERIA DE BIDET CON SPRAY VERTICAL E299/84 CR CHESS CROMO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>238.42</precioUnitario>
+<descuento>47.68</descuento>
+<precioTotalSinImpuesto>190.74</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>190.74</baseImponible>
+<valor>22.89</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">charlesg51@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2451693</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016733</campoAdicional>
+</infoAdicional>
+</factura>

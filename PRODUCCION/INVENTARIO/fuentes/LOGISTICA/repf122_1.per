@@ -1,0 +1,39 @@
+DATABASE aceros
+SCREEN
+{
+                                                              [c000] de [c001]
+
+                                                         Estado: [c|c002     ]
+
+
+     Código Transporte: [c003] [c004                                    ]
+
+      Código de Chofer: [c005] [c006                                    ]
+
+         Código de Rol: [c007  ]
+
+
+   Ingresado Por: [c008      ]            Fecha Ingreso: [c009               ]
+}
+TABLES
+rept110
+rept111
+ATTRIBUTES
+c000 = FORMONLY.num_reg, NOENTRY, UPSHIFT, REVERSE;
+c001 = FORMONLY.max_reg, NOENTRY, UPSHIFT, REVERSE;
+
+c    = rept111.r111_estado, NOENTRY, UPSHIFT, REVERSE,
+	COMMENTS = '(A) ACTIVO  (B) BLOQUEADO';
+c002 = FORMONLY.tit_estado, NOENTRY, UPSHIFT, REVERSE;
+c003 = rept111.r111_cod_trans, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c004 = rept110.r110_descripcion, NOENTRY, UPSHIFT, REVERSE;
+c005 = rept111.r111_cod_chofer, NOENTRY, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c006 = rept111.r111_nombre, AUTONEXT, UPSHIFT, REVERSE, SCROLL;
+c007 = rept111.r111_cod_trab, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+
+c008 = rept111.r111_usuario, NOENTRY, UPSHIFT, REVERSE;
+c009 = rept111.r111_fecing, NOENTRY, UPSHIFT, REVERSE;
+END

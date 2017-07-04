@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113808</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>12/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113808</guiaRemision>
+<razonSocialComprador>JEREZ ECHEVERRIA MARIA DEL CARMEN</razonSocialComprador>
+<identificacionComprador>1711983872001</identificacionComprador>
+<totalSinImpuestos>89.06</totalSinImpuestos>
+<totalDescuento>18.24</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>89.06</baseImponible>
+<valor>10.69</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>99.75</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>92545</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA ENDURO COBRE PRIMERA</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>11.53</precioUnitario>
+<descuento>11.76</descuento>
+<precioTotalSinImpuesto>57.42</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>57.42</baseImponible>
+<valor>6.89</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>60139</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 MIRAGE VERDE PRIMERA</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>9.53</precioUnitario>
+<descuento>6.48</descuento>
+<precioTotalSinImpuesto>31.64</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>31.64</baseImponible>
+<valor>3.80</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">acabadosdelaconstruccion_mc@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2280198</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">040871</campoAdicional>
+</infoAdicional>
+</factura>

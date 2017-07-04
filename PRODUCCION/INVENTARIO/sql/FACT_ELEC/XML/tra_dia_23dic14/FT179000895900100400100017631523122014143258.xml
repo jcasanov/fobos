@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176315</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176315</guiaRemision>
+<razonSocialComprador>BAGANT ECUATORIANA CIA.LTDA.</razonSocialComprador>
+<identificacionComprador>1790322491001</identificacionComprador>
+<totalSinImpuestos>1882.40</totalSinImpuestos>
+<totalDescuento>332.19</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1882.40</baseImponible>
+<valor>225.89</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>2108.29</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>101432</codigoPrincipal>
+<descripcion>LLAVE DE IMPACTO A BATERIA 2453-22 M-12 FUEL DE 1/4"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>301.73</precioUnitario>
+<descuento>45.26</descuento>
+<precioTotalSinImpuesto>256.47</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>256.47</baseImponible>
+<valor>30.78</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101432</codigoPrincipal>
+<descripcion>LLAVE DE IMPACTO A BATERIA 2453-22 M-12 FUEL DE 1/4"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>301.73</precioUnitario>
+<descuento>90.52</descuento>
+<precioTotalSinImpuesto>512.94</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>512.94</baseImponible>
+<valor>61.55</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101529</codigoPrincipal>
+<descripcion>LLAVE DE IMPACTO A BATERIA 2655-22 M18 FUELO 1/2"  0-2,400 RPM</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>606.28</precioUnitario>
+<descuento>181.88</descuento>
+<precioTotalSinImpuesto>1030.68</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1030.68</baseImponible>
+<valor>123.68</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103120</codigoPrincipal>
+<descripcion>PUNTAS 48-32-4402 JUEGO COMPLETO P/ATORNILLADORA</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>32.28</precioUnitario>
+<descuento>14.53</descuento>
+<precioTotalSinImpuesto>82.31</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>82.31</baseImponible>
+<valor>9.88</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">nazateb@bagant.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2420740</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">003242</campoAdicional>
+</infoAdicional>
+</factura>

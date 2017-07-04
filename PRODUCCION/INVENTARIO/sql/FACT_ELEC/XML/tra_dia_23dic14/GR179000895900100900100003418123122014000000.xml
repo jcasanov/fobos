@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000034181</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>AV. JUAN TANCA AMRENGO KM.1.7</dirPartida>
+<razonSocialTransportista>MANUEL MAGALLANES (ACERO COMERCIAL S.A)</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>23/12/2014</fechaIniTransporte>
+<fechaFinTransporte>23/12/2014</fechaFinTransporte>
+<placa>  GSC-8976</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0992538678001</identificacionDestinatario>
+<razonSocialDestinatario>FERRICOMP S.A.</razonSocialDestinatario>
+<dirDestinatario>OBRA:BODEGAS DE LA RIOJA O/C FR122014-001798 ETAPA ALMERIA BLOQUE 10</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>22/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>27306</codigoInterno>
+<descripcion>EMPAQUE SC001319000100 CON ANILLO DE CERA P/ WC</descripcion>
+<cantidad>63.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="MODELO" valor="SC001318000100"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>27893</codigoInterno>
+<descripcion>TORNILLO 3011000 SET ANCLAJE TAZA PISO WC</descripcion>
+<cantidad>63.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="MODELO" valor="SP003011000100"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>61319</codigoInterno>
+<descripcion>LLAVE PARA LAVABO 9002306 CROMO SHELBY</descripcion>
+<cantidad>63.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="MODELO" valor="SG0090023061BO"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>68876</codigoInterno>
+<descripcion>LAVABO DE PORCELANA DE PARED PREPONCHADO 5575733 SHELBY BONE</descripcion>
+<cantidad>28.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="MODELO" valor="CS0057107331CE"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>96233</codigoInterno>
+<descripcion>TUBO ABASTO-LLAVE ANGULAR INODORO 1824306 ACERO CROMADO MANGUERA DE 16"</descripcion>
+<cantidad>63.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="MODELO" valor="SC0018243061BL"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>97612</codigoInterno>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS 4262130 CAMPEON BLANCO C/ASIENTO</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="MODELO" valor="JS0042621301B0"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2282682</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">013656</campoAdicional>
+</infoAdicional>
+</guiaRemision>

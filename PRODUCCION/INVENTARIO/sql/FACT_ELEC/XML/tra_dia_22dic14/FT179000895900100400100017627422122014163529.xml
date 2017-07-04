@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176274</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176274</guiaRemision>
+<razonSocialComprador>INGENIERIA AVANZADA EN TECNOLOGIA EATEC S.A.</razonSocialComprador>
+<identificacionComprador>1792041236001</identificacionComprador>
+<totalSinImpuestos>84.36</totalSinImpuestos>
+<totalDescuento>11.02</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>84.36</baseImponible>
+<valor>10.12</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>94.48</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>92297</codigoPrincipal>
+<descripcion>TUBO POLIPROPILENO DE 2" x 6 MTS. CUATRITUBO ROSC.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>51.72</precioUnitario>
+<descuento>6.21</descuento>
+<precioTotalSinImpuesto>45.51</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>45.51</baseImponible>
+<valor>5.46</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97467</codigoPrincipal>
+<descripcion>TEFLON EN ROLLO 0.07 x 12 mm. x 10 m.</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>0.58</precioUnitario>
+<descuento>0.70</descuento>
+<precioTotalSinImpuesto>5.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.10</baseImponible>
+<valor>0.61</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50344</codigoPrincipal>
+<descripcion>NEPLO POLIPROPILENO DE 1-1/4" x 15 cm. (AGUA CALIENTE)</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>3.35</precioUnitario>
+<descuento>1.21</descuento>
+<precioTotalSinImpuesto>8.84</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.84</baseImponible>
+<valor>1.06</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50326</codigoPrincipal>
+<descripcion>NEPLO POLIPROPILENO DE 1/2" x 10 cm. (AGUA CALIENTE)</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>0.30</precioUnitario>
+<descuento>0.11</descuento>
+<precioTotalSinImpuesto>0.79</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>0.79</baseImponible>
+<valor>0.09</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>8815</codigoPrincipal>
+<descripcion>VALVULA COMPUERTA  LATON ROSCADA RW-273 DE 1-1/4" 125 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>22.19</precioUnitario>
+<descuento>2.22</descuento>
+<precioTotalSinImpuesto>19.97</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RED WH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>19.97</baseImponible>
+<valor>2.40</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50336</codigoPrincipal>
+<descripcion>NEPLO POLIPROPILENO DE 2" x 10 cm. (AGUA CALIENTE)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>2.36</precioUnitario>
+<descuento>0.57</descuento>
+<precioTotalSinImpuesto>4.15</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.15</baseImponible>
+<valor>0.50</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">5009000</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">045954</campoAdicional>
+</infoAdicional>
+</factura>

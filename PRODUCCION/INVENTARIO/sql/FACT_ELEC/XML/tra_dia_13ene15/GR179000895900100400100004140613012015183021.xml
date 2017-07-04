@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000041406</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<dirPartida>AV. LA PRENSA N-4514</dirPartida>
+<razonSocialTransportista>ACERO COMERCIAL</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>13/01/2015</fechaIniTransporte>
+<fechaFinTransporte>14/01/2015</fechaFinTransporte>
+<placa>PAA-001</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1790105709001</identificacionDestinatario>
+<razonSocialDestinatario>WEATHERFORD SOUTH AMERICA L.L.C.</razonSocialDestinatario>
+<dirDestinatario>BODEGAS TRANSPORTE TRANSVERACRUZ</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>13/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>67822</codigoInterno>
+<descripcion>VIGA HEB 300 x 6 m (300 x 300 x 11 x 19 mm)</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">ProveedoresWeatherford.Quito@LA.weatherford.comProveedoresWeatherford.Coca@LA.weatherford.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3942400</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000405</campoAdicional>
+</infoAdicional>
+</guiaRemision>

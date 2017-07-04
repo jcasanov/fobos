@@ -1,0 +1,23 @@
+database acero_gm
+screen size 24 by 80
+{
+r26_compania       [f000       ]
+r26_localidad      [f001  ]
+r26_numprev        [f002       ]
+r26_dividendo      [f003  ]
+r26_valor_cap      [f004         ]
+r26_valor_int      [f005         ]
+r26_fec_vcto       [f006      ]
+}
+end
+tables
+rept026
+attributes
+f000 = rept026.r26_compania;
+f001 = rept026.r26_localidad;
+f002 = rept026.r26_numprev;
+f003 = rept026.r26_dividendo;
+f004 = rept026.r26_valor_cap;
+f005 = rept026.r26_valor_int;
+f006 = rept026.r26_fec_vcto;
+end

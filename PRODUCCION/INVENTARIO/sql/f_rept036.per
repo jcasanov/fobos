@@ -1,0 +1,37 @@
+database acero_gm
+screen size 24 by 80
+{
+r36_compania       [f000       ]
+r36_localidad      [f001  ]
+r36_bodega         [a0]
+r36_num_entrega    [f002       ]
+r36_num_ord_des    [f003       ]
+r36_estado         [a]
+r36_fec_entrega    [f004      ]
+r36_entregar_a     [f005                                    ]
+r36_entregar_en    [f006                                    ]
+                   [f007                                    ]
+                   [f008                                    ]
+r36_bodega_real    [a1]
+r36_usuario        [f009      ]
+r36_fecing         [f010               ]
+}
+end
+tables
+rept036
+attributes
+f000 = rept036.r36_compania;
+f001 = rept036.r36_localidad;
+a0 = rept036.r36_bodega;
+f002 = rept036.r36_num_entrega;
+f003 = rept036.r36_num_ord_des;
+a = rept036.r36_estado;
+f004 = rept036.r36_fec_entrega;
+f005 = rept036.r36_entregar_a;
+f006 = rept036.r36_entregar_en[1,40];
+f007 = rept036.r36_entregar_en[41,80];
+f008 = rept036.r36_entregar_en[81,120];
+a1 = rept036.r36_bodega_real;
+f009 = rept036.r36_usuario;
+f010 = rept036.r36_fecing;
+end

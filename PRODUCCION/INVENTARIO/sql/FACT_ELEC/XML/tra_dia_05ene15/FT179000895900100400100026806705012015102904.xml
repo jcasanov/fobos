@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268067</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>05/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268067</guiaRemision>
+<razonSocialComprador>CAICEDO PALACIOS LUIS FERNANDO</razonSocialComprador>
+<identificacionComprador>1801523331001</identificacionComprador>
+<totalSinImpuestos>1298.76</totalSinImpuestos>
+<totalDescuento>177.10</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1298.76</baseImponible>
+<valor>155.85</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1454.61</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>2067</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 90° DE 2-1/2"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>11.77</precioUnitario>
+<descuento>8.47</descuento>
+<precioTotalSinImpuesto>62.15</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>62.15</baseImponible>
+<valor>7.46</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2063</codigoPrincipal>
+<descripcion>CODO GALV. CLASE 150 90° DE 1-1/2"</descripcion>
+<cantidad>48.00</cantidad>
+<precioUnitario>4.57</precioUnitario>
+<descuento>26.32</descuento>
+<precioTotalSinImpuesto>193.04</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>193.04</baseImponible>
+<valor>23.16</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4579</codigoPrincipal>
+<descripcion>TEE GALV. CLASE 150 DE 2-1/2"</descripcion>
+<cantidad>16.00</cantidad>
+<precioUnitario>22.17</precioUnitario>
+<descuento>42.57</descuento>
+<precioTotalSinImpuesto>312.15</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>312.15</baseImponible>
+<valor>37.46</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100622</codigoPrincipal>
+<descripcion>BUSHING GALV. CLASE 150 DE 4" x 2-1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>11.38</precioUnitario>
+<descuento>1.37</descuento>
+<precioTotalSinImpuesto>10.01</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>10.01</baseImponible>
+<valor>1.20</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1670</codigoPrincipal>
+<descripcion>BUSHING GALV. CLASE 150 DE 2-1/2" x 1-1/2"</descripcion>
+<cantidad>16.00</cantidad>
+<precioUnitario>7.00</precioUnitario>
+<descuento>13.44</descuento>
+<precioTotalSinImpuesto>98.56</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>98.56</baseImponible>
+<valor>11.83</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>93287</codigoPrincipal>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 2-1/2"</descripcion>
+<cantidad>13.00</cantidad>
+<precioUnitario>29.79</precioUnitario>
+<descuento>46.47</descuento>
+<precioTotalSinImpuesto>340.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>340.80</baseImponible>
+<valor>40.90</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6327</codigoPrincipal>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 1-1/2"</descripcion>
+<cantidad>17.00</cantidad>
+<precioUnitario>10.03</precioUnitario>
+<descuento>20.46</descuento>
+<precioTotalSinImpuesto>150.05</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>150.05</baseImponible>
+<valor>18.01</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5993</codigoPrincipal>
+<descripcion>UNION GALV. CLASE 150 DE 2-1/2"</descripcion>
+<cantidad>15.00</cantidad>
+<precioUnitario>10.00</precioUnitario>
+<descuento>18.00</descuento>
+<precioTotalSinImpuesto>132.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>132.00</baseImponible>
+<valor>15.84</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jp80rodriguez@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0999259164</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">063500</campoAdicional>
+</infoAdicional>
+</factura>

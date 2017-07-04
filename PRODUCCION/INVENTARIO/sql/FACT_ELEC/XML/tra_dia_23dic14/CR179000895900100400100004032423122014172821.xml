@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comprobanteRetencion id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000040324</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoCompRetencion>
+<fechaEmision>23/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionSujetoRetenido>04</tipoIdentificacionSujetoRetenido>
+<razonSocialSujetoRetenido>PAREJA TORRES ROSA IRENE</razonSocialSujetoRetenido>
+<identificacionSujetoRetenido>1706318530001</identificacionSujetoRetenido>
+<periodoFiscal>12/2014</periodoFiscal>
+</infoCompRetencion>
+<impuestos>
+<impuesto>
+<codigo>1</codigo>
+<codigoRetencion>341</codigoRetencion>
+<baseImponible>7032.10</baseImponible>
+<porcentajeRetener>2.00</porcentajeRetener>
+<valorRetenido>140.64</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>001001000000673</numDocSustento>
+<fechaEmisionDocSustento>23/12/2014</fechaEmisionDocSustento>
+</impuesto>
+<impuesto>
+<codigo>2</codigo>
+<codigoRetencion>2</codigoRetencion>
+<baseImponible>843.85</baseImponible>
+<porcentajeRetener>70.00</porcentajeRetener>
+<valorRetenido>590.70</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>001001000000673</numDocSustento>
+<fechaEmisionDocSustento>23/12/2014</fechaEmisionDocSustento>
+</impuesto>
+</impuestos>
+<infoAdicional>
+<campoAdicional nombre="Email">informacionuio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2595579</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">002914</campoAdicional>
+</infoAdicional>
+</comprobanteRetencion>

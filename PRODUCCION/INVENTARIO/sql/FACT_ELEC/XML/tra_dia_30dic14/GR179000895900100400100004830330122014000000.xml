@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048303</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<dirPartida>AV. LA PRENSA N/4514</dirPartida>
+<razonSocialTransportista>SERVIENTREGA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0991285679001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>30/12/2014</fechaIniTransporte>
+<fechaFinTransporte>30/12/2014</fechaFinTransporte>
+<placa>PAA-001</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>2390003628001</identificacionDestinatario>
+<razonSocialDestinatario>TIDELTRAL CIA. LTDA.</razonSocialDestinatario>
+<dirDestinatario>STO.DOMINGO</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>30/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>21378</codigoInterno>
+<descripcion>VALVULA CHEQUE VC-50 DE 2" DE BRONCE TIPO PESADO</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HELBER"/>
+<detAdicional nombre="MODELO" valor="DE 2""/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>9154</codigoInterno>
+<descripcion>VALVULA DE GLOBO CONICA RW-213 DE 2" 150 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RED WH"/>
+<detAdicional nombre="MODELO" valor="RW-213  CONICA"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>95293</codigoInterno>
+<descripcion>BOMBA SUMERGIBLE DE 4" 60FA5S4-PE P/5HP 60GPM (93616013) DE 13 ETAPAS</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="MODELO" valor="60FA5S4-PE"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>96074</codigoInterno>
+<descripcion>MOTOR ELEC SUMERG DE 4" (2343178602) 4C3F DE 5HP 230-3-60</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="MODELO" valor="(2343178602)"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">balanzasjm1@yahoo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2748593</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">050267</campoAdicional>
+</infoAdicional>
+</guiaRemision>

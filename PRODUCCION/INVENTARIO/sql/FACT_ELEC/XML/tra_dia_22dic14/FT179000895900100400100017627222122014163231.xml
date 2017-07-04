@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176272</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176272</guiaRemision>
+<razonSocialComprador>RAMOS TUQUERRES JOSE RICARDO</razonSocialComprador>
+<identificacionComprador>1003033923001</identificacionComprador>
+<totalSinImpuestos>545.87</totalSinImpuestos>
+<totalDescuento>96.33</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>545.87</baseImponible>
+<valor>65.50</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>611.37</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>150643</codigoPrincipal>
+<descripcion>ANCLAJE EPOXICO 8523SD T308 CARTUCHO DE 22 oz. STANDARD</descripcion>
+<cantidad>12.00</cantidad>
+<precioUnitario>42.10</precioUnitario>
+<descuento>75.78</descuento>
+<precioTotalSinImpuesto>429.42</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>429.42</baseImponible>
+<valor>51.53</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101349</codigoPrincipal>
+<descripcion>ANCLAJE EPOXICO 08605 PURE 50 PLUS CARTUCHO DE 21 oz.</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>34.25</precioUnitario>
+<descuento>20.55</descuento>
+<precioTotalSinImpuesto>116.45</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>116.45</baseImponible>
+<valor>13.97</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">6008413</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">049758</campoAdicional>
+</infoAdicional>
+</factura>

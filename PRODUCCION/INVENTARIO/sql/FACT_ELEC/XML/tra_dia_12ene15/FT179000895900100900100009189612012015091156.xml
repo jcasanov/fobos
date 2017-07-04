@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091896</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>12/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091896</guiaRemision>
+<razonSocialComprador>OROZCO RAMIREZ VICENTE</razonSocialComprador>
+<identificacionComprador>0901193185</identificacionComprador>
+<totalSinImpuestos>35.88</totalSinImpuestos>
+<totalDescuento>4.44</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>35.88</baseImponible>
+<valor>4.31</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>40.19</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>48890</codigoPrincipal>
+<descripcion>TUBO VENTURI 25886-A-406</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>17.14</precioUnitario>
+<descuento>1.89</descuento>
+<precioTotalSinImpuesto>15.25</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>15.25</baseImponible>
+<valor>1.83</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>19498</codigoPrincipal>
+<descripcion>BOQUILLA 12367-A P/ BOMBAS HJ-50</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>23.18</precioUnitario>
+<descuento>2.55</descuento>
+<precioTotalSinImpuesto>20.63</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>20.63</baseImponible>
+<valor>2.48</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">fvillavicencio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2827383</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016703</campoAdicional>
+</infoAdicional>
+</factura>

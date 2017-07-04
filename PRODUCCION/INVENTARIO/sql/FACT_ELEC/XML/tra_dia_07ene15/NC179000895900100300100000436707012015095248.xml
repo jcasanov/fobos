@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000004367</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>ATU (ARTICULOS DE ACERO S.A.)</razonSocialComprador>
+<identificacionComprador>1790038092001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>003-001-000129194</numDocModificado>
+<fechaEmisionDocSustento>05/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>115.91</totalSinImpuestos>
+<valorModificacion>129.82</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>115.91</baseImponible>
+<valor>13.91</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>REF POR FECHA NP 139242</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>102538</codigoInterno>
+<descripcion>TALADRO ELECTRICO MANUAL 0240-20 DE 3/8" 2800 RPM</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>136.37</precioUnitario>
+<descuento>20.46</descuento>
+<precioTotalSinImpuesto>115.91</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>115.91</baseImponible>
+<valor>13.91</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infoatu@atu.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">554477 648</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">28573</campoAdicional>
+</infoAdicional>
+</notaCredito>

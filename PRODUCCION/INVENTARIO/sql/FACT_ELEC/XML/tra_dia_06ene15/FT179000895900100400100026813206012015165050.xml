@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268132</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>06/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268132</guiaRemision>
+<razonSocialComprador>PATECA</razonSocialComprador>
+<identificacionComprador>1790032337001</identificacionComprador>
+<totalSinImpuestos>1584.68</totalSinImpuestos>
+<totalDescuento>279.66</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1584.68</baseImponible>
+<valor>190.16</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1774.84</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>93074</codigoPrincipal>
+<descripcion>TALADRO DE BASE ELECTROMAGNETICA 4270-21 COMPACTO COMPL. DE 1/2" 9AMP 450RPM CORTE 1-1/2" MALETA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1815.84</precioUnitario>
+<descuento>272.38</descuento>
+<precioTotalSinImpuesto>1543.46</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1543.46</baseImponible>
+<valor>185.22</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99239</codigoPrincipal>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7423 SD1 DE 1/2" X 4-1/2"</descripcion>
+<cantidad>50.00</cantidad>
+<precioUnitario>0.97</precioUnitario>
+<descuento>7.28</descuento>
+<precioTotalSinImpuesto>41.22</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>41.22</baseImponible>
+<valor>4.95</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">lromero@pateca.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2277666</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">022358</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025194</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>14/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>COELEC S.C.</razonSocialComprador>
+<identificacionComprador>1791725530001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000176257</numDocModificado>
+<fechaEmisionDocSustento>22/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>729.48</totalSinImpuestos>
+<valorModificacion>817.02</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>729.48</baseImponible>
+<valor>87.54</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 267847 COELEC S.C RECIBE AJIMENEZ FC</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>98094</codigoInterno>
+<descripcion>BOMBA CENTRIF MULTIETAPA C-MOTOR CM5-4 ARGE 1-1/4" X 1" 2.3 HP 220/50/60/3F AQQE (96806891)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1042.12</precioUnitario>
+<descuento>312.64</descuento>
+<precioTotalSinImpuesto>729.48</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>729.48</baseImponible>
+<valor>87.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">m.morales@coelecsc.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2752485</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">37987</campoAdicional>
+</infoAdicional>
+</notaCredito>

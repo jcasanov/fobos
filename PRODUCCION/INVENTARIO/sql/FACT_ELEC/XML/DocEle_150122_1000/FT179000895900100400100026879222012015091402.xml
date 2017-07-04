@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268792</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268792</guiaRemision>
+<razonSocialComprador>LARCO YANEZ CARLOS ENRIQUE</razonSocialComprador>
+<identificacionComprador>1706549852001</identificacionComprador>
+<totalSinImpuestos>392.10</totalSinImpuestos>
+<totalDescuento>68.49</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>392.10</baseImponible>
+<valor>0.00</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>392.10</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99814</codigoPrincipal>
+<descripcion>EQUIPO DE BOMBA TIPO JET HB100 521J1000 SW DE 1HP 115V.C/TANQUE DE PRESION DE 19 Gln.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>440.87</precioUnitario>
+<descuento>66.13</descuento>
+<precioTotalSinImpuesto>374.74</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>374.74</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>62031</codigoPrincipal>
+<descripcion>ADAPTADOR POLIPROPILENO DE 1"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>4.71</precioUnitario>
+<descuento>1.13</descuento>
+<precioTotalSinImpuesto>8.29</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>8.29</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1328</codigoPrincipal>
+<descripcion>ADAPTADOR PVC ESP-CAM HEMBRA ISO DE 32mm. A 1"</descripcion>
+<cantidad>15.00</cantidad>
+<precioUnitario>0.53</precioUnitario>
+<descuento>0.95</descuento>
+<precioTotalSinImpuesto>7.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>7.00</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4772</codigoPrincipal>
+<descripcion>TEE PVC PRESION CAM-CAM-ESP-CAM DE 32mm. ISO</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>0.47</precioUnitario>
+<descuento>0.28</descuento>
+<precioTotalSinImpuesto>2.07</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>2.07</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">ingeagri@hotmail.com</campoAdicional>
+<campoAdicional nombre="Email">ingelarco@yahoo.es</campoAdicional>
+<campoAdicional nombre="telefono-movil">2417084</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">007007</campoAdicional>
+<campoAdicional nombre="Observaciones">CHEQUE</campoAdicional>
+</infoAdicional>
+</factura>

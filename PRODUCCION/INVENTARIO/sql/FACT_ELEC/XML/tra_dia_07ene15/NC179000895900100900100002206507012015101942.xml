@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000022065</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>FABRICA DE ENVASES S.A. FADESA</razonSocialComprador>
+<identificacionComprador>0990551405001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000104184</numDocModificado>
+<fechaEmisionDocSustento>23/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>17442.37</totalSinImpuestos>
+<valorModificacion>19535.45</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>17442.37</baseImponible>
+<valor>2093.08</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>REFACTURACION: CAMBIO DE FECHA</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>71495</codigoInterno>
+<descripcion>MOTOR A DIESEL 3 CILINDROS MOD. 2013 1800 RPM 40 HP C/EMBRAGUE, BATERIA DE 12V.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>10543.36</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>10543.36</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PERKIN"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>10543.36</baseImponible>
+<valor>1265.20</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>101316</codigoInterno>
+<descripcion>BOMBA CENTRIFUGA STANDAR S/ MOTOR DN65-32 1PUNTA EJE SELLO BALANCEADO  (98091583)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2354.53</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2354.53</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MARK G"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2354.53</baseImponible>
+<valor>282.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>99348</codigoInterno>
+<descripcion>BOMBA CENTRIF MULTIETAPA C-MOTOR KVC 75/506 M220 DE 2HP/230/60C. NPT. (102991180)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>995.75</precioUnitario>
+<descuento>99.58</descuento>
+<precioTotalSinImpuesto>896.17</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>896.17</baseImponible>
+<valor>107.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>71731</codigoInterno>
+<descripcion>TABLERO ELECTRICO SCI MOTOR A DIESEL,ARRANQUE 12VDC JOKEY 3HP M/A Y CARGADOR B.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1198.31</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1198.31</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1198.31</baseImponible>
+<valor>143.80</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>71532</codigoInterno>
+<descripcion>EQUIPO CONTRA INCENDIOS BASE Y ELEMENTOS DE SUCCION Y DESCARGA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2450.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2450.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2450.00</baseImponible>
+<valor>294.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturaelectronica@fadesa.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2445266</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">419</campoAdicional>
+</infoAdicional>
+</notaCredito>

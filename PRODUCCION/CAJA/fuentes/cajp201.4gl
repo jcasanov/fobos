@@ -289,7 +289,7 @@ END FOR
 COMMIT WORK
 CALL fl_mostrar_mensaje('La caja ha sido reaperturada.', 'info')
 CALL fl_verificar_dias_validez_sri(vg_codcia, vg_codloc, 'FA')
-CALL fl_verificar_dias_validez_sri(vg_codcia, vg_codloc, 'NV')
+--CALL fl_verificar_dias_validez_sri(vg_codcia, vg_codloc, 'NV')
 RETURN 1
 
 END FUNCTION

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268530</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268530</guiaRemision>
+<razonSocialComprador>PRODUCTOS FAMILIA SANCELA DEL ECUADOR S.A</razonSocialComprador>
+<identificacionComprador>1791314379001</identificacionComprador>
+<totalSinImpuestos>1498.24</totalSinImpuestos>
+<totalDescuento>264.39</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1498.24</baseImponible>
+<valor>179.79</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1678.03</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>150054</codigoPrincipal>
+<descripcion>ROTOMARTILLO 5342-21 2" SDS-MAX ROTOMARTILLO-DEMOLEDOR (KIT C/MALETIN)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1762.63</precioUnitario>
+<descuento>264.39</descuento>
+<precioTotalSinImpuesto>1498.24</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1498.24</baseImponible>
+<valor>179.79</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">manueltc@familia.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2484360</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">018377</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C# 4501283625</campoAdicional>
+</infoAdicional>
+</factura>

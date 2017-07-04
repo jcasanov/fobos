@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268312</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>10/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268312</guiaRemision>
+<razonSocialComprador>ANSHA LEMA SEGUNDO AUGUSTO</razonSocialComprador>
+<identificacionComprador>1705132205001</identificacionComprador>
+<totalSinImpuestos>526.80</totalSinImpuestos>
+<totalDescuento>48.15</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>526.80</baseImponible>
+<valor>63.22</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>590.02</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5584</codigoPrincipal>
+<descripcion>TUBO NEGRO S-UNION ISO I TIPO "F" DE 1" x 6 m.</descripcion>
+<cantidad>15.00</cantidad>
+<precioUnitario>27.80</precioUnitario>
+<descuento>29.19</descuento>
+<precioTotalSinImpuesto>387.81</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FUJI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>387.81</baseImponible>
+<valor>46.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4672</codigoPrincipal>
+<descripcion>TEE NEGRA CLASE 150 DE 2" x 1"</descripcion>
+<cantidad>15.00</cantidad>
+<precioUnitario>9.21</precioUnitario>
+<descuento>16.58</descuento>
+<precioTotalSinImpuesto>121.57</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>121.57</baseImponible>
+<valor>14.59</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1736</codigoPrincipal>
+<descripcion>BUSHING NEGRO CLASE 150 DE 2" x 1-1/2"</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>3.96</precioUnitario>
+<descuento>2.38</descuento>
+<precioTotalSinImpuesto>17.42</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>17.42</baseImponible>
+<valor>2.09</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">agus-a45@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3152517</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">047523</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000002694</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>09/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000002694</guiaRemision>
+<razonSocialComprador>SUMMA PROYECTOS C.A.</razonSocialComprador>
+<identificacionComprador>0991312501001</identificacionComprador>
+<totalSinImpuestos>194.15</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>194.15</baseImponible>
+<valor>23.30</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>217.45</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>ZZ</codigoPrincipal>
+<descripcion>15/MTS DE CABLE CONCETRICO 3X14</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>23.81</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>23.81</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ACERO-"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>23.81</baseImponible>
+<valor>2.86</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>ZZ</codigoPrincipal>
+<descripcion>2/CONTROLES DE NIVEL</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>36.96</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>36.96</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ACERO-"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>36.96</baseImponible>
+<valor>4.44</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>ZZ</codigoPrincipal>
+<descripcion>2/TEE GALV. DE  1/4"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>4.18</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>4.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ACERO-"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.18</baseImponible>
+<valor>0.50</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>ZZ</codigoPrincipal>
+<descripcion>8/NEPLOS DE 1/4" X 2 1/2" Y 3"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>9.20</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>9.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ACERO-"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.20</baseImponible>
+<valor>1.10</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>ZZ</codigoPrincipal>
+<descripcion>MANO DE OBRA - ESTACION # 1</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>60.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>60.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ACERO-"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>60.00</baseImponible>
+<valor>7.20</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>ZZ</codigoPrincipal>
+<descripcion>MANO DE OBRA - ESTACION # 2</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>60.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>60.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ACERO-"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>60.00</baseImponible>
+<valor>7.20</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">mzavala@summaproyectos.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2158130</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">003720</campoAdicional>
+</infoAdicional>
+</factura>

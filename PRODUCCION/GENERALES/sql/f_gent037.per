@@ -1,0 +1,35 @@
+database acero_gm
+screen size 24 by 80
+{
+g37_compania       [f000       ]
+g37_localidad      [f001  ]
+g37_tipo_doc       [a0]
+g37_secuencia      [f002  ]
+g37_pref_sucurs    [a1 ]
+g37_pref_pto_vta   [a2 ]
+g37_sec_num_sri    [f003       ]
+g37_cont_cred      [a]
+g37_num_dig_sri    [f004  ]
+g37_fecha_emi      [f005      ]
+g37_fecha_exp      [f006      ]
+g37_usuario        [f007      ]
+g37_fecing         [f008               ]
+}
+end
+tables
+gent037
+attributes
+f000 = gent037.g37_compania;
+f001 = gent037.g37_localidad;
+a0 = gent037.g37_tipo_doc;
+f002 = gent037.g37_secuencia;
+a1 = gent037.g37_pref_sucurs;
+a2 = gent037.g37_pref_pto_vta;
+f003 = gent037.g37_sec_num_sri;
+a = gent037.g37_cont_cred;
+f004 = gent037.g37_num_dig_sri;
+f005 = gent037.g37_fecha_emi;
+f006 = gent037.g37_fecha_exp;
+f007 = gent037.g37_usuario;
+f008 = gent037.g37_fecing;
+end

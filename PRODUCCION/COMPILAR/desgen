@@ -1,0 +1,11 @@
+bzip2 -fd arch.42f.bz2
+bzip2 -fd arch.frm.bz2
+bzip2 -fd arch.42m.bz2
+bzip2 -fd arch.42r.bz2
+bzip2 -fd arch.4gi.bz2
+
+tar xvf arch.42f
+tar xvf arch.frm
+tar xvf arch.42m
+tar xvf arch.42r
+tar xvf arch.4gi

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000034140</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCIAL J T MARENGO KM 1.7</dirPartida>
+<razonSocialTransportista>M MAGALLANES</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>22/12/2014</fechaIniTransporte>
+<fechaFinTransporte>23/12/2014</fechaFinTransporte>
+<placa>GSC8976</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0904277738001</identificacionDestinatario>
+<razonSocialDestinatario>GUIM LOQUI EMILIO LEONARDO</razonSocialDestinatario>
+<dirDestinatario>RETIRAN</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>05/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>71191</codigoInterno>
+<descripcion>SWITCH DE PRESION PRESOSTATO DE 4 A 12 BAR DIF 0.5-1.6 BAR</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="MODELO" valor="PRESOSTATO DE 4 A 12"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>71724</codigoInterno>
+<descripcion>TABLERO ELECTRICO SCI BOMBA DE 15HP/220V.1F. BOMBA JOCKEY DE 3HP. M/A</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="MODELO" valor="SCI BOMBA DE 15HP/22"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>99354</codigoInterno>
+<descripcion>BOMBA CENTRIF MULTIETAPA C-MOTOR KVC 45/1206 DE 2.5HP M220/230/60C. 32 mm. NPT. (102991440)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="MODELO" valor="102991440"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2684522</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">012782</campoAdicional>
+</infoAdicional>
+</guiaRemision>

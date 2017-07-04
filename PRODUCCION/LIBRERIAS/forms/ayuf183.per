@@ -1,0 +1,43 @@
+DATABASE aceros
+SCREEN
+{
+ HOJAS DE RUTA
+                                                           [c000 ] de [c001 ]
+ [c010   |c011           |c012               |c013              |c014      |b]
+[c020   |c021           |c022               |c023              |c024      |c]
+[c020   |c021           |c022               |c023              |c024      |c]
+[c020   |c021           |c022               |c023              |c024      |c]
+[c020   |c021           |c022               |c023              |c024      |c]
+[c020   |c021           |c022               |c023              |c024      |c]
+[c020   |c021           |c022               |c023              |c024      |c]
+[c020   |c021           |c022               |c023              |c024      |c]
+[c020   |c021           |c022               |c023              |c024      |c]
+[c020   |c021           |c022               |c023              |c024      |c]
+[c020   |c021           |c022               |c023              |c024      |c]
+
+}
+TABLES
+rept110
+rept111
+rept113
+ATTRIBUTES
+c000 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c001 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+b    = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+
+c020 = rept113.r113_num_hojrut, UPSHIFT, REVERSE;
+c021 = rept110.r110_descripcion, UPSHIFT, REVERSE;
+c022 = rept111.r111_nombre, UPSHIFT, REVERSE;
+c023 = rept113.r113_observacion, UPSHIFT, REVERSE;
+c024 = rept113.r113_fecha, UPSHIFT, REVERSE, FORMAT = "dd-mm-yyyy";
+c    = rept113.r113_estado, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+SCREEN RECORD rh_hojrut[10] (r113_num_hojrut, r110_descripcion, r111_nombre,
+				r113_observacion, r113_fecha, r113_estado)

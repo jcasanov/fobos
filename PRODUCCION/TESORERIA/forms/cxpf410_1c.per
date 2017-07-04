@@ -10,14 +10,7 @@ SCREEN
 
   Tipo O. Compra: [c1] [c006           ]
 
- Tipo Porcentaje: [c|c007 ] [c008                ]
-
-      Codigo SRI: [c011   ] [c012                                          ]
-
- Fecha Ini. Porc: [c013      ]
-
-                         Agrupado por Proveedor ? : [e]
-                        Agrupado por Codigo SRI ? : [f]
+ Tipo Porcentaje: [c] [c007 ] [c008                ]
 
 }
 ATTRIBUTES
@@ -34,22 +27,10 @@ c010 = FORMONLY.desc_prov;
 c1   = FORMONLY.tipo_oc TYPE CHAR, AUTONEXT, UPSHIFT,
 	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
 c006 = FORMONLY.desc_tipo, NOENTRY, UPSHIFT;
-c    = FORMONLY.tipo_porc TYPE CHAR, AUTONEXT, UPSHIFT,
-	INCLUDE = ('F', 'I', NULL),
-	COMMENTS = '(F) FUENTE  (I) IVA';
+c    = FORMONLY.tipo_porc TYPE CHAR, AUTONEXT, UPSHIFT;
 c007 = FORMONLY.valor_porc, AUTONEXT, UPSHIFT,
 	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
 c008 = FORMONLY.desc_porc, NOENTRY, UPSHIFT;
-c011 = FORMONLY.cod_sri TYPE CHAR, AUTONEXT, UPSHIFT,
-	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
-c012 = FORMONLY.des_sri TYPE CHAR, NOENTRY;
-c013 = FORMONLY.fec_ini_por TYPE DATE, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
-e    = FORMONLY.agrup_p TYPE CHAR NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
-	REVERSE, INCLUDE = ('S', 'N'),
-	COMMENTS = '(S) Si  o (N) No.', DEFAULT = 'N';
-f    = FORMONLY.agrup_s TYPE CHAR NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
-	REVERSE, INCLUDE = ('S', 'N'),
-	COMMENTS = '(S) Si  o (N) No.', DEFAULT = 'N';
 END
 INSTRUCTIONS
 DELIMITERS '||'

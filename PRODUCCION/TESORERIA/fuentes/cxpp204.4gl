@@ -1632,6 +1632,10 @@ LET rm_p24.p24_moneda     = r_g13.g13_moneda
 LET rm_p24.p24_banco      = banco
 LET rm_p24.p24_numero_cta = r_g09.g09_numero_cta
 
+IF tipo_pago = "T" THEN
+	LET rm_p24.p24_subtipo = 1
+END IF
+
 IF proveedor IS NOT NULL THEN
 	LET rm_p24.p24_codprov = proveedor
 	LET condicion = ' AND p20_codprov = ' || proveedor
@@ -2354,10 +2358,12 @@ FUNCTION muestra_tipopago(tipopago)
 DEFINE tipopago		CHAR(1)
 
 CASE tipopago
-	WHEN 'C'
-		DISPLAY 'CHEQUE'   TO tit_tipo_pago
 	WHEN 'E'
 		DISPLAY 'EFECTIVO' TO tit_tipo_pago
+	WHEN 'C'
+		DISPLAY 'CHEQUE'   TO tit_tipo_pago
+	WHEN 'T'
+		DISPLAY 'TRANSFERENCIA' TO tit_tipo_pago
 	OTHERWISE
 		CLEAR tipo_pago, tit_tipo_pago
 END CASE

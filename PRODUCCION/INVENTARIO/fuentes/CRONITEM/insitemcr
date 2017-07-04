@@ -1,0 +1,17 @@
+. /acero/envfobos.sh
+echo " "
+fecini=`date`
+echo "INICIO: INSERTA ITEM. $fecini"
+fglgo insitemcr acero_qm ACUIO01 acero_gm ACGYE01 $1
+fglgo insitemcr acero_gm ACGYE01 acero_qm ACUIO01 $1
+
+fglgo insitemcr acero_gm ACGYE01 acero_gc ACGYE01 $1
+
+fglgo ins_ser 1 acero_gm ACGYE01 sermaco_gm segye01 $1
+fglgo ins_ser 2 sermaco_gm segye01 acero_gm ACGYE01 $1
+
+fglgo ins_ser 1 acero_gm ACGYE01 sermaco_qm seuio01 $1
+fglgo ins_ser 2 sermaco_qm seuio01 acero_gm ACGYE01 $1
+fecfin=`date`
+echo "FIN: INSERTA ITEM. $fecfin"
+echo " "

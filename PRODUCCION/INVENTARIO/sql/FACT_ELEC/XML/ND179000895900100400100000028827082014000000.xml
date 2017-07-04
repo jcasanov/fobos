@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaDebito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000000288</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaDebito>
+<fechaEmision>27/08/2014</fechaEmision>
+<dirEstablecimiento>LUIS MADERA 1-64 Y AV. 17 DE JULIO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>MONTAJES Y FUNDICIONES INDUSTRIALES ANTONIO VASQUEZ</razonSocialComprador>
+<identificacionComprador>1000689065001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000000288</numDocModificado>
+<fechaEmisionDocSustento>27/08/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>276.67</totalSinImpuestos>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>276.67</baseImponible>
+<valor>33.20</valor>
+</impuesto>
+</impuestos>
+<valorTotal>309.87</valorTotal>
+</infoNotaDebito>
+<motivos>
+<motivo>
+<razon>DR14074225 ACTUALIZ FECHA AUT YAV</razon>
+<valor>276.67</valor>
+</motivo>
+</motivos>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+<campoAdicional nombre="telefono-movil">062950717</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">7150</campoAdicional>
+</infoAdicional>
+</notaDebito>

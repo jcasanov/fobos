@@ -1344,8 +1344,8 @@ INPUT BY NAME rm_n45.n45_cod_rubro, rm_n45.n45_cod_trab, rm_n45.n45_val_prest,
 					MONTH TO DAY)
 				THEN
 					CALL fl_mostrar_mensaje('No puede Redistribuír el saldo anterior, ya que el proceso ' || r_n05.n05_proceso || ' ' || r_n03.n03_nombre CLIPPED || ' esta abierto y no esta contabilizado, ademas la fecha de hoy es posterior a la fecha de cierre.', 'exclamation')
-					--LET int_flag = 1
-					--RETURN
+					LET int_flag = 1
+					RETURN
 				END IF
 			END IF
 		ELSE
@@ -2975,8 +2975,6 @@ CASE flag
 		END IF
 		CALL retorna_fecha_proc(cod_liqrol, anio, mes)
 			RETURNING fecha_ini, fecha_fin
-		CALL retorna_fecha_proc_anual_gracia(fecha_ini, fecha_fin)
-			RETURNING fecha_ini, fecha_fin
 		LET val_prest  = rm_dettotpre[posi].n58_valor_dist
 		LET num_div    = rm_dettotpre[posi].n58_num_div
 END CASE
@@ -3626,11 +3624,6 @@ FUNCTION retorna_ano_mes(ano, mes)
 DEFINE ano		LIKE rolt032.n32_ano_proceso
 DEFINE mes		LIKE rolt032.n32_mes_proceso
 
-{--
-IF EXTEND(MDY(mes, 01, ano), YEAR TO MONTH) = EXTEND(TODAY, YEAR TO MONTH) THEN
-	RETURN ano, mes
-END IF
---}
 LET mes = mes + 1
 IF mes > 12 THEN
 	LET mes = 1
@@ -3655,27 +3648,6 @@ IF mes > 12 THEN
 	LET ano = ano + 1
 END IF
 RETURN ano, mes
-
-END FUNCTION 
-
-
-
-FUNCTION retorna_fecha_proc_anual_gracia(fecha_ini, fecha_fin)
-DEFINE fecha_ini	DATE
-DEFINE fecha_fin	DATE
-DEFINE fecha		DATE
-DEFINE anio, mes	SMALLINT
-
-IF rm_n45.n45_mes_gracia = 0 THEN
-	RETURN fecha_ini, fecha_fin
-END IF
-CALL retorna_ano_mes_gracia(YEAR(TODAY), MONTH(TODAY)) RETURNING anio, mes
-LET fecha = MDY(mes, 01, anio)
-IF EXTEND(fecha, YEAR TO MONTH) > EXTEND(fecha_fin, YEAR TO MONTH) THEN
-	LET fecha_ini = fecha_fin + 1 UNITS DAY
-	LET fecha_fin = fecha_fin + 1 UNITS YEAR
-END IF
-RETURN fecha_ini, fecha_fin
 
 END FUNCTION 
 
@@ -3869,8 +3841,6 @@ IF cod_liqrol <> 'VA' AND cod_liqrol <> 'VP' THEN
 						r_n03.n03_dia_ini, YEAR(fecha))
 			LET fecha_fin = fecha_ini + 1 UNITS YEAR - 1 UNITS DAY
 		END IF
-		CALL retorna_fecha_proc_anual_gracia(fecha_ini, fecha_fin)
-			RETURNING fecha_ini, fecha_fin
 	END IF
 	IF anio <= YEAR(TODAY) AND cod_liqrol = 'UT' THEN
 		LET anio = NULL
@@ -4472,7 +4442,7 @@ BEGIN WORK
 	UPDATE rolt045
 		SET n45_tipo_pago   = tipo_pago,
 		    n45_bco_empresa = rm_n45.n45_bco_empresa,
-		    n45_cta_empresa = rm_n45.n45_cta_empresa,
+		    n45_bco_empresa = rm_n45.n45_bco_empresa,
 		    n45_cta_trabaj  = rm_n45.n45_cta_trabaj
 		WHERE CURRENT OF q_cont
 	IF STATUS < 0 THEN

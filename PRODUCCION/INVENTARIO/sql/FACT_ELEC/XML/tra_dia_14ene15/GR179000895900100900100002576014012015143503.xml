@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025760</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>AV. JUAN TANCA MARENGO KM.1.7</dirPartida>
+<razonSocialTransportista>MIGUEL CANCHINGRE</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>0917150146</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>14/01/2015</fechaIniTransporte>
+<fechaFinTransporte>14/01/2015</fechaFinTransporte>
+<placa>  GRX-4237</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0991087427001</identificacionDestinatario>
+<razonSocialDestinatario>TRAVERSO & PEREZ CONSTRUCCIONES C.A. TECEPE</razonSocialDestinatario>
+<dirDestinatario>RETIRO MIGUEL CANCHINGRE</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>13/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>26103</codigoInterno>
+<descripcion>GRIFERIA DE DUCHA E109/71 CR CAPRI CROMO</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">servicioalcliente@traverso-perez.com</campoAdicional>
+<campoAdicional nombre="Email">compras@traverso-perez.com;kluzureaga@traverso-perez.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2888293</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">008618</campoAdicional>
+</infoAdicional>
+</guiaRemision>

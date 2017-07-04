@@ -301,6 +301,7 @@ BEGIN WORK
 	--CALL actualiza_ot_x_oc(rm_t28.t28_ot_ant)
 	CALL actualiza_ot_x_oc(rm_t28.t28_ot_nue)
 COMMIT WORK
+CALL generar_doc_elec()
 CALL control_imprimir()
 LET mens_anul = 'Devuelta'
 IF DATE(rm_t28.t28_fec_factura) = TODAY THEN
@@ -312,6 +313,7 @@ SELECT * INTO r_z21.*
 	FROM cxct021
 	WHERE z21_compania  = vg_codcia
 	  AND z21_localidad = vg_codloc
+	  AND z21_codcli    = rm_t23.t23_cod_cliente
 	  AND z21_cod_tran  = 'FA'
 	  AND z21_num_tran  = rm_t23.t23_num_factura
 IF r_z21.z21_compania IS NOT NULL THEN
@@ -409,6 +411,7 @@ BEGIN WORK
 	--CALL actualiza_ot_x_oc(rm_t28.t28_ot_ant)
 	CALL actualiza_ot_x_oc(rm_t28.t28_ot_nue)
 COMMIT WORK
+CALL generar_doc_elec()
 CALL control_imprimir()
 LET mens_anul = 'Devuelta'
 IF DATE(rm_t28.t28_fec_factura) = TODAY THEN
@@ -1180,7 +1183,7 @@ END IF
 LET r_nc.z21_val_impto 	= rm_t23.t23_val_impto
 LET r_nc.z21_valor 	= valor_credito
 LET r_nc.z21_saldo 	= valor_credito
-LET r_nc.z21_num_sri    = "."
+CALL generar_num_sri() RETURNING r_nc.z21_num_sri
 LET r_nc.z21_subtipo 	= 1
 LET r_nc.z21_origen 	= 'A'
 LET r_nc.z21_usuario 	= vg_usuario
@@ -2300,6 +2303,59 @@ END FUNCTION
 
 
 
+FUNCTION generar_num_sri()
+DEFINE r_g37		RECORD LIKE gent037.*
+DEFINE num_sri		LIKE cxct021.z21_num_sri
+DEFINE sec_sri		LIKE gent037.g37_sec_num_sri
+DEFINE cuantos		SMALLINT
+
+WHENEVER ERROR CONTINUE
+DECLARE q_sri CURSOR FOR
+	SELECT * FROM gent037
+		WHERE g37_compania   = vg_codcia
+		  AND g37_localidad  = vg_codloc
+		  AND g37_tipo_doc   = "NC"
+  		  AND g37_cont_cred  = "N"
+		  AND g37_secuencia IN
+		(SELECT MAX(g37_secuencia)
+			FROM gent037
+			WHERE g37_compania  = vg_codcia
+			  AND g37_localidad = vg_codloc
+			  AND g37_tipo_doc  = "NC")
+	FOR UPDATE
+OPEN q_sri
+FETCH q_sri INTO r_g37.*
+IF STATUS < 0 THEN
+	ROLLBACK WORK
+	CALL fl_mostrar_mensaje('Lo siento ahora no puede modificar este No. del SRI, porque ésta secuencia se encuentra bloqueada por otro usuario.','stop')
+	WHENEVER ERROR STOP
+	EXIT PROGRAM
+END IF
+LET num_sri = r_g37.g37_pref_sucurs, '-', r_g37.g37_pref_pto_vta, '-',
+			r_g37.g37_sec_num_sri + 1 USING "&&&&&&&&&"
+LET cuantos = 8 + r_g37.g37_num_dig_sri
+LET sec_sri = num_sri[9, cuantos] USING "########"
+WHENEVER ERROR CONTINUE
+UPDATE gent037
+	SET g37_sec_num_sri = sec_sri
+	WHERE g37_compania     = r_g37.g37_compania
+	  AND g37_localidad    = r_g37.g37_localidad
+	  AND g37_tipo_doc     = r_g37.g37_tipo_doc
+	  AND g37_secuencia    = r_g37.g37_secuencia
+	  AND g37_sec_num_sri <= sec_sri
+IF STATUS < 0 THEN
+	ROLLBACK WORK
+	CALL fl_mostrar_mensaje('No se pudo actualizar el No. del SRI en el control de secuencias SRI. Por favor llame al administrador.','stop')
+	WHENEVER ERROR STOP
+	EXIT PROGRAM
+END IF
+WHENEVER ERROR STOP
+RETURN num_sri
+
+END FUNCTION
+
+
+
 FUNCTION control_imprimir()
 DEFINE r_t28		RECORD LIKE talt028.*
 DEFINE param		VARCHAR(60)
@@ -2323,6 +2379,30 @@ DEFINE param		VARCHAR(100)
 
 LET param = numero_oc
 CALL ejecuta_comando('COMPRAS', 'OC', 'ordp200 ', param)
+
+END FUNCTION
+
+
+
+FUNCTION generar_doc_elec()
+DEFINE comando		VARCHAR(250)
+DEFINE servid		VARCHAR(10)
+DEFINE mensaje		VARCHAR(250)
+
+LET servid  = FGL_GETENV("INFORMIXSERVER")
+CASE servid
+	WHEN "ACGYE01"
+		LET servid = "idsgye01"
+	WHEN "ACUIO01"
+		LET servid = "idsuio01"
+	WHEN "ACUIO02"
+		LET servid = "idsuio02"
+END CASE
+LET comando = "fglgo gen_tra_ele ", vg_base CLIPPED, " ", servid CLIPPED, " ",
+		vg_codcia, " ", vg_codloc, " D ", rm_t28.t28_num_dev, " NCT "
+RUN comando
+LET mensaje = FGL_GETENV("HOME"), '/tmp/NC_ELEC/'
+CALL fl_mostrar_mensaje('Archivo XML de DEVOLUCION Generado en: ' || mensaje, 'info')
 
 END FUNCTION
 

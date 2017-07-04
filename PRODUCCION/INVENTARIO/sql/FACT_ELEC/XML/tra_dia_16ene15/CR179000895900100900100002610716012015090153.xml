@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comprobanteRetencion id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000026107</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoCompRetencion>
+<fechaEmision>16/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionSujetoRetenido>04</tipoIdentificacionSujetoRetenido>
+<razonSocialSujetoRetenido>ASSESSJURIDIC S.A.</razonSocialSujetoRetenido>
+<identificacionSujetoRetenido>0992876247001</identificacionSujetoRetenido>
+<periodoFiscal>01/2015</periodoFiscal>
+</infoCompRetencion>
+<impuestos>
+<impuesto>
+<codigo>1</codigo>
+<codigoRetencion>303</codigoRetencion>
+<baseImponible>60.00</baseImponible>
+<porcentajeRetener>10.00</porcentajeRetener>
+<valorRetenido>6.00</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>001001000000080</numDocSustento>
+<fechaEmisionDocSustento>16/01/2015</fechaEmisionDocSustento>
+</impuesto>
+<impuesto>
+<codigo>2</codigo>
+<codigoRetencion>3</codigoRetencion>
+<baseImponible>7.20</baseImponible>
+<porcentajeRetener>100.00</porcentajeRetener>
+<valorRetenido>7.20</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>001001000000080</numDocSustento>
+<fechaEmisionDocSustento>16/01/2015</fechaEmisionDocSustento>
+</impuesto>
+</impuestos>
+<infoAdicional>
+<campoAdicional nombre="Email">ilianadeaycart@hotmail.com</campoAdicional>
+<campoAdicional nombre="Email">sara_flores20@outlook.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">5000587</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">001534</campoAdicional>
+</infoAdicional>
+</comprobanteRetencion>

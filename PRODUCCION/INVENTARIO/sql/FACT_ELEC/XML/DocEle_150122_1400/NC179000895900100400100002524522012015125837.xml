@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025245</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>CARROCERIAS IMCE</razonSocialComprador>
+<identificacionComprador>1801172162001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000174685</numDocModificado>
+<fechaEmisionDocSustento>24/11/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>266.98</totalSinImpuestos>
+<valorModificacion>299.02</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>266.98</baseImponible>
+<valor>32.04</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 266368 CARROCERIAS IMCE P-VOLVER FAC</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>99747</codigoInterno>
+<descripcion>BROCA PARA METAL Y MADERA 48-89-2305 DE COBALTO DE 1/8"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>5.52</precioUnitario>
+<descuento>1.66</descuento>
+<precioTotalSinImpuesto>31.46</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>31.46</baseImponible>
+<valor>3.78</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>102411</codigoInterno>
+<descripcion>BROCA PARA CEMENTO 48-89-2306 DE COBALTO DE 9/64" THUNDERBOLT</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>3.27</precioUnitario>
+<descuento>0.98</descuento>
+<precioTotalSinImpuesto>18.64</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>18.64</baseImponible>
+<valor>2.24</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>102412</codigoInterno>
+<descripcion>BROCA PARA CEMENTO 48-89-2307 DE COBALTO DE 5/32" THUNDERBOLT</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>3.40</precioUnitario>
+<descuento>1.02</descuento>
+<precioTotalSinImpuesto>19.38</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>19.38</baseImponible>
+<valor>2.33</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>99748</codigoInterno>
+<descripcion>BROCA PARA METAL Y MADERA 48-89-2309 DE COBALTO DE 3/16"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>4.15</precioUnitario>
+<descuento>1.25</descuento>
+<precioTotalSinImpuesto>23.65</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>23.65</baseImponible>
+<valor>2.84</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>98117</codigoInterno>
+<descripcion>BROCA PARA METAL Y MADERA 48-89-2313 DE 1/4" DE COBALTO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>6.73</precioUnitario>
+<descuento>0.67</descuento>
+<precioTotalSinImpuesto>12.79</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>12.79</baseImponible>
+<valor>1.53</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>98117</codigoInterno>
+<descripcion>BROCA PARA METAL Y MADERA 48-89-2313 DE 1/4" DE COBALTO</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>6.73</precioUnitario>
+<descuento>1.35</descuento>
+<precioTotalSinImpuesto>25.57</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>25.57</baseImponible>
+<valor>3.07</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>102415</codigoInterno>
+<descripcion>BROCA PARA CEMENTO 48-89-2317 DE COBALTO DE 5/16" THUNDERBOLT</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>9.49</precioUnitario>
+<descuento>2.85</descuento>
+<precioTotalSinImpuesto>54.09</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>54.09</baseImponible>
+<valor>6.49</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>99749</codigoInterno>
+<descripcion>BROCA PARA METAL Y MADERA 48-89-2321 DE COBALTO DE 3/8"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>14.28</precioUnitario>
+<descuento>4.28</descuento>
+<precioTotalSinImpuesto>81.40</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>81.40</baseImponible>
+<valor>9.77</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacion@carroceriasimce.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">032445347</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">46247</campoAdicional>
+</infoAdicional>
+</notaCredito>

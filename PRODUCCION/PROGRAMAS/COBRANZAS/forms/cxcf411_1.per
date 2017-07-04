@@ -1,0 +1,52 @@
+DATABASE FORMONLY
+SCREEN 
+{
+
+                  Moneda: [c1] [c020             ]
+  Tipo Documento a Favor: [c2] [c021             ]     Origen de la N/C:
+                                                       [c050           ]
+         Area de Negocio: [c3  ] [c022             ]
+
+
+                 Cliente: [c004 ] [c023                               ]
+	     
+           Fecha Inicial: [c005      ]        Fecha Final: [c006      ]
+
+                   Saldo: [c007         ]          Origen: [c008          ]
+
+
+
+}
+
+ATTRIBUTES
+c1   = FORMONLY.moneda,		REVERSE, UPSHIFT, AUTONEXT, 
+				WIDGET = 'FIELD_BMP',
+				CONFIG = 'lista.bmp F2';
+c2   = FORMONLY.documento,	UPSHIFT, WIDGET = 'FIELD_BMP',
+				CONFIG = 'lista.bmp F2';
+c3   = FORMONLY.area,		WIDGET = 'FIELD_BMP',
+				CONFIG = 'lista.bmp F2';   
+c004 = FORMONLY.cliente,	WIDGET = 'FIELD_BMP',
+				CONFIG = 'lista.bmp F2';
+c005 = FORMONLY.inicial, 	REVERSE, FORMAT = 'dd-mm-yyyy',
+				COMMENT = 'Ingrese fecha en formato: dd-mm-aaaa';
+c006 = FORMONLY.final, 		REVERSE, FORMAT = 'dd-mm-yyyy',
+				COMMENT = 'Ingrese fecha en formato: dd-mm-aaaa';
+--c007 = FORMONLY.saldo, 		FORMAT = '##,###,##&.##';
+c007 = FORMONLY.saldo,		WIDGET = 'RADIO',
+				CONFIG = 'S "Saldo > 0" T "T o d o"',
+				DEFAULT = 'S';
+--c008 = FORMONLY.origen_doc,	WIDGET = 'COMBO', CONFIG = "lines=3", 
+--			      INCLUDE =("Manual    ","Automatico","T o d o s ");
+c008 = FORMONLY.origen_doc,	WIDGET = 'RADIO', CONFIG = "lines=3", AUTONEXT,
+				CONFIG = 'M Manual A Automatico T Todos', 
+				DEFAULT = 'M';
+c050 = FORMONLY.origen_nc TYPE CHAR NOT NULL, REVERSE, UPSHIFT,
+	WIDGET = 'RADIO', CONFIG = 'A Anulacion D Devolucion T "T o d o"',
+	COMMENTS = 'Valido solo para Notas de Credito.';
+c020 = FORMONLY.desc_moneda, 	REVERSE, UPSHIFT;
+c021 = FORMONLY.desc_documento, UPSHIFT;
+c022 = FORMONLY.desc_area, 	UPSHIFT;
+c023 = FORMONLY.desc_cliente,	UPSHIFT;
+end
+

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>004042818</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirEstablecimiento>
+<dirPartida>AV DE LA PRENSA</dirPartida>
+<razonSocialTransportista>ACERO COMERCIAL</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>18/12/2014</fechaIniTransporte>
+<fechaFinTransporte>18/12/2014</fechaFinTransporte>
+<placa></placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1790008959001</identificacionDestinatario>
+<razonSocialDestinatario>ACERO COMERCIAL ECUATORIANO S.A.</razonSocialDestinatario>
+<dirDestinatario>ACERO SUR GUALBERTO PEREZ</dirDestinatario>
+<motivoTraslado>TRANSFERENCIAS ENTRE LOCALIDADES</motivoTraslado>
+<fechaEmisionDocSustento>18/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>100202</codigoInterno>
+<descripcion>NIVEL LASER (36253)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="MODELO" valor="36253"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>102233</codigoInterno>
+<descripcion>BALDOSA DE PISO / PARED 35 X 50 FACCIATA ARENA  PRIMERA</descripcion>
+<cantidad>23.70</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="MODELO" valor="FACCIATA ARENA  PRIM"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>102234</codigoInterno>
+<descripcion>BALDOSA DE PISO / PARED 35 X 50 FACCIATA ARENA SEGUNDA</descripcion>
+<cantidad>12.64</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="MODELO" valor="FACCIATA ARENA SEGUN"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>102543</codigoInterno>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA ZAMARA  TEKA  PRIMERA</descripcion>
+<cantidad>60.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="ZAMARA  TEKA  PRIMER"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>103287</codigoInterno>
+<descripcion>TANQUE DE INODORO 4429088 CONSERVER AZUL LAKE</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="MODELO" valor="4429088 CONSERVER AZ"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>398</codigoInterno>
+<descripcion>PLETINA DE 19 x 3mm. x 6 m</descripcion>
+<cantidad>16.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="MODELO" valor="DE 19 x 3 mm"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>63086</codigoInterno>
+<descripcion>BOMBA CENTRIF MULTIETAPA C-MOTOR HU2-P-9-1 DE 7.5HP 2ETP 1-1/2" x 1-1/2" 3500RPM 220/440-1-60</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MARK G"/>
+<detAdicional nombre="MODELO" valor="98268250"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>99597</codigoInterno>
+<descripcion>PORCELANA PARA CERAMICA GROUTEX POLIMERO PF S/A TERRACOTA (FUNDA DE 2 Kg.)</descripcion>
+<cantidad>20.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INTACO"/>
+<detAdicional nombre="MODELO" valor="99597"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">022454333</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000003</campoAdicional>
+</infoAdicional>
+</guiaRemision>

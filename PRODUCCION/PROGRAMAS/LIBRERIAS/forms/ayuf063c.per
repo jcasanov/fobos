@@ -1,0 +1,30 @@
+DATABASE aceros
+SCREEN
+{
+  PRESUPUESTOS DE TALLER
+ -------------------------------------------------------------
+  Presup   Cliente  Nombre
+ -------------------------------------------------------------
+ [c01   ] [c001  ] [c002                                     ] 
+ [c01   ] [c001  ] [c002                                     ] 
+ [c01   ] [c001  ] [c002                                     ] 
+ [c01   ] [c001  ] [c002                                     ] 
+ [c01   ] [c001  ] [c002                                     ] 
+ [c01   ] [c001  ] [c002                                     ] 
+ [c01   ] [c001  ] [c002                                     ] 
+ [c01   ] [c001  ] [c002                                     ] 
+ [c01   ] [c001  ] [c002                                     ] 
+ [c01   ] [c001  ] [c002                                     ] 
+}
+
+TABLES
+talt020
+
+ATTRIBUTES
+c01  = t20_numpre,REVERSE;
+c001 = t20_cod_cliente,REVERSE;
+c002 = t20_nom_cliente,REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_pretal[10](t20_numpre, t20_cod_cliente, t20_nom_cliente)

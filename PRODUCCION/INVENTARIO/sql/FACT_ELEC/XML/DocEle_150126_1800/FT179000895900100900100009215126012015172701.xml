@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092151</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>26/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092151</guiaRemision>
+<razonSocialComprador>GUSTAVO CAMACHO COMERCIO Y SEGURIDAD S.A.</razonSocialComprador>
+<identificacionComprador>0992108290001</identificacionComprador>
+<totalSinImpuestos>919.48</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>919.48</baseImponible>
+<valor>110.34</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1029.82</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99753</codigoPrincipal>
+<descripcion>SIERRA CIRCULAR 6177-20 DE MESA CORTE ABRASIVO 3.2HP/120V/3700RPM DISCO 14"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>279.34</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>279.34</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>279.34</baseImponible>
+<valor>33.52</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70375</codigoPrincipal>
+<descripcion>ROTOMARTILLO 5359-21 SDS DE 1-1/8" 7.4AMP 0-980RPM 0-4200 GOLPES (MALETIN)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>640.14</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>640.14</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>640.14</baseImponible>
+<valor>76.82</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jgcmcompany@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2265352</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">012149</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000022096</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>FERRICOMP S.A.</razonSocialComprador>
+<identificacionComprador>0992538678001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000104140</numDocModificado>
+<fechaEmisionDocSustento>22/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>7198.11</totalSinImpuestos>
+<valorModificacion>8061.88</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>7198.11</baseImponible>
+<valor>863.77</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>REFACTURACION: CAMBIO DE FECHA</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>97825</codigoInterno>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS JS4429733 CONSERVER BONE ASTO.MONTECRISTO</descripcion>
+<cantidad>82.00</cantidad>
+<precioUnitario>65.52</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>5372.64</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5372.64</baseImponible>
+<valor>644.72</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>97612</codigoInterno>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS 4262130 CAMPEON BLANCO C/ASIENTO</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>45.79</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>137.37</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>137.37</baseImponible>
+<valor>16.48</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>27306</codigoInterno>
+<descripcion>EMPAQUE SC001319000100 CON ANILLO DE CERA P/ WC</descripcion>
+<cantidad>85.00</cantidad>
+<precioUnitario>1.80</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>153.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>153.00</baseImponible>
+<valor>18.36</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>27893</codigoInterno>
+<descripcion>TORNILLO 3011000 SET ANCLAJE TAZA PISO WC</descripcion>
+<cantidad>60.00</cantidad>
+<precioUnitario>1.20</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>72.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="PAR"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>72.00</baseImponible>
+<valor>8.64</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>27893</codigoInterno>
+<descripcion>TORNILLO 3011000 SET ANCLAJE TAZA PISO WC</descripcion>
+<cantidad>25.00</cantidad>
+<precioUnitario>1.20</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>30.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="PAR"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>30.00</baseImponible>
+<valor>3.60</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>96233</codigoInterno>
+<descripcion>TUBO ABASTO-LLAVE ANGULAR INODORO 1824306 ACERO CROMADO MANGUERA DE 16"</descripcion>
+<cantidad>85.00</cantidad>
+<precioUnitario>5.84</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>496.40</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>496.40</baseImponible>
+<valor>59.57</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>61319</codigoInterno>
+<descripcion>LLAVE PARA LAVABO 9002306 CROMO SHELBY</descripcion>
+<cantidad>85.00</cantidad>
+<precioUnitario>8.29</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>704.65</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>704.65</baseImponible>
+<valor>84.56</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>68876</codigoInterno>
+<descripcion>LAVABO DE PORCELANA DE PARED PREPONCHADO 5575733 SHELBY BONE</descripcion>
+<cantidad>21.00</cantidad>
+<precioUnitario>11.05</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>232.05</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>232.05</baseImponible>
+<valor>27.85</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacionelectronica@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2282682</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">13656</campoAdicional>
+</infoAdicional>
+</notaCredito>

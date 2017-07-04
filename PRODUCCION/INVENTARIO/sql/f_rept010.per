@@ -1,0 +1,125 @@
+database acero_gm
+screen size 24 by 80
+{
+r10_compania       [f000       ]
+r10_codigo         [f001           ]
+r10_nombre         [f002                               ]
+                   [f003                               ]
+r10_estado         [a]
+r10_tipo           [f004  ]
+r10_peso           [f005     ]
+r10_uni_med        [f006   ]
+r10_cantpaq        [f007      ]
+r10_cantveh        [f008      ]
+r10_partida        [f009           ]
+r10_modelo         [f010                ]
+r10_cod_pedido     [f011                ]
+r10_cod_comerc     [f012           ]
+r10_cod_util       [f013 ]
+r10_linea          [f014 ]
+r10_sub_linea      [a0]
+r10_cod_grupo      [f015]
+r10_cod_clase      [f016    ]
+r10_marca          [f017  ]
+}
+screen
+{
+r10_rotacion       [a1]
+r10_paga_impto     [b]
+r10_fob            [f018           ]
+r10_monfob         [a2]
+r10_precio_mb      [f019         ]
+r10_precio_ma      [f020         ]
+r10_costo_mb       [f021         ]
+r10_costo_ma       [f022         ]
+r10_costult_mb     [f023         ]
+r10_costult_ma     [f024         ]
+r10_costrepo_mb    [f025         ]
+r10_usu_cosrepo    [f026      ]
+r10_fec_cosrepo    [f027               ]
+r10_cantped        [f028      ]
+r10_cantback       [f029      ]
+r10_comentarios    [f030                                    ]
+                   [f031                                    ]
+                   [f032                                    ]
+r10_precio_ant     [f033         ]
+r10_fec_camprec    [f034               ]
+}
+screen
+{
+r10_proveedor      [f035       ]
+r10_filtro         [f036      ]
+r10_electrico      [f037         ]
+r10_color          [f038      ]
+r10_serie_lote     [c]
+r10_stock_max      [f039       ]
+r10_stock_min      [f040       ]
+r10_vol_cuft       [f041   ]
+r10_dias_mant      [f042       ]
+r10_dias_inv       [f043       ]
+r10_sec_item       [f044       ]
+r10_usuario        [f045      ]
+r10_fecing         [f046               ]
+r10_feceli         [f047               ]
+}
+end
+tables
+rept010
+attributes
+f000 = rept010.r10_compania;
+f001 = rept010.r10_codigo;
+f002 = rept010.r10_nombre[1,35];
+f003 = rept010.r10_nombre[36,70];
+a = rept010.r10_estado;
+f004 = rept010.r10_tipo;
+f005 = rept010.r10_peso;
+f006 = rept010.r10_uni_med;
+f007 = rept010.r10_cantpaq;
+f008 = rept010.r10_cantveh;
+f009 = rept010.r10_partida;
+f010 = rept010.r10_modelo;
+f011 = rept010.r10_cod_pedido;
+f012 = rept010.r10_cod_comerc;
+f013 = rept010.r10_cod_util;
+f014 = rept010.r10_linea;
+a0 = rept010.r10_sub_linea;
+f015 = rept010.r10_cod_grupo;
+f016 = rept010.r10_cod_clase;
+f017 = rept010.r10_marca;
+
+a1 = rept010.r10_rotacion;
+b = rept010.r10_paga_impto;
+f018 = rept010.r10_fob;
+a2 = rept010.r10_monfob;
+f019 = rept010.r10_precio_mb;
+f020 = rept010.r10_precio_ma;
+f021 = rept010.r10_costo_mb;
+f022 = rept010.r10_costo_ma;
+f023 = rept010.r10_costult_mb;
+f024 = rept010.r10_costult_ma;
+f025 = rept010.r10_costrepo_mb;
+f026 = rept010.r10_usu_cosrepo;
+f027 = rept010.r10_fec_cosrepo;
+f028 = rept010.r10_cantped;
+f029 = rept010.r10_cantback;
+f030 = rept010.r10_comentarios[1,40];
+f031 = rept010.r10_comentarios[41,80];
+f032 = rept010.r10_comentarios[81,120];
+f033 = rept010.r10_precio_ant;
+f034 = rept010.r10_fec_camprec;
+
+f035 = rept010.r10_proveedor;
+f036 = rept010.r10_filtro;
+f037 = rept010.r10_electrico;
+f038 = rept010.r10_color;
+c = rept010.r10_serie_lote;
+f039 = rept010.r10_stock_max;
+f040 = rept010.r10_stock_min;
+f041 = rept010.r10_vol_cuft;
+f042 = rept010.r10_dias_mant;
+f043 = rept010.r10_dias_inv;
+f044 = rept010.r10_sec_item;
+f045 = rept010.r10_usuario;
+f046 = rept010.r10_fecing;
+f047 = rept010.r10_feceli;
+end

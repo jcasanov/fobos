@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092127</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>26/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092127</guiaRemision>
+<razonSocialComprador>INDUSTRIA ANDINA DE TRANSFORMADORES S.A.</razonSocialComprador>
+<identificacionComprador>0990169640001</identificacionComprador>
+<totalSinImpuestos>2065.77</totalSinImpuestos>
+<totalDescuento>688.59</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>2065.77</baseImponible>
+<valor>247.89</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>2313.66</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99979</codigoPrincipal>
+<descripcion>CADENA LCER2025NP  P/ TECLES ELECTRICOS DE 5 Ton.</descripcion>
+<cantidad>18.00</cantidad>
+<precioUnitario>153.02</precioUnitario>
+<descuento>688.59</descuento>
+<precioTotalSinImpuesto>2065.77</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KITO"/>
+<detAdicional nombre="UNIDAD" valor="M"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2065.77</baseImponible>
+<valor>247.89</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">ventas@inatra.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3702700</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">004200</campoAdicional>
+<campoAdicional nombre="Observaciones">AT. ING JON OROZCO</campoAdicional>
+</infoAdicional>
+</factura>

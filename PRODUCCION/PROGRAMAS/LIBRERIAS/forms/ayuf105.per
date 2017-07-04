@@ -1,0 +1,59 @@
+DATABASE aceros
+SCREEN
+{
+  Division: [y]        [f001                          ]
+     Linea: [c2]       [f002                               ]
+     Grupo: [c02]      [f003                                    ]
+     Clase: [c011    ] [f004                                              ]
+     Marca: [c012  ]   [f005                               ]
+   [g01|g001   |g002                               |g003     |g04|g005    ]
+  [c06|c01    |c001                               |c003     |c0 |c004    ]
+  [c06|c01    |c001                               |c003     |c0 |c004    ]
+  [c06|c01    |c001                               |c003     |c0 |c004    ]
+  [c06|c01    |c001                               |c003     |c0 |c004    ]
+  [c06|c01    |c001                               |c003     |c0 |c004    ]
+  [c06|c01    |c001                               |c003     |c0 |c004    ]
+  [c06|c01    |c001                               |c003     |c0 |c004    ]
+  [c06|c01    |c001                               |c003     |c0 |c004    ]
+  [c06|c01    |c001                               |c003     |c0 |c004    ]
+  [c050                                                             ]
+}
+
+TABLES
+rept010
+rept011
+
+ATTRIBUTES
+y    = FORMONLY.r10_linea,UPSHIFT,
+	WIDGET = 'FIELD_BMP',CONFIG = 'lista.bmp F2';
+f001 = FORMONLY.descri_linea;
+c2   = FORMONLY.r10_sub_linea,UPSHIFT,
+	WIDGET = 'FIELD_BMP',CONFIG = 'lista.bmp F2';
+f002 = FORMONLY.descri_sub_linea;
+c02  = FORMONLY.r10_cod_grupo,UPSHIFT,
+	WIDGET = 'FIELD_BMP',CONFIG = 'lista.bmp F2';
+f003 = FORMONLY.descri_cod_grupo;
+c011 = FORMONLY.r10_cod_clase,UPSHIFT,
+	WIDGET = 'FIELD_BMP',CONFIG = 'lista.bmp F2';
+f004 = FORMONLY.descri_cod_clase;
+c012 = FORMONLY.r10_marca,UPSHIFT,
+	WIDGET = 'FIELD_BMP',CONFIG = 'lista.bmp F2';
+f005 = FORMONLY.descri_marca;
+c06  = r10_sec_item , UPSHIFT, INCLUDE = (0 TO 10000);
+c01  = r10_codigo , UPSHIFT;
+c001 = r10_nombre , UPSHIFT;
+c003 = r10_precio_mb , FORMAT = '##,##&.##';
+c0   = r11_bodega, UPSHIFT;
+c004 = r11_stock_act , UPSHIFT, FORMAT = '####&.##';
+g01  =  FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+g001 =  FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+g002 =  FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+g003 =  FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+g04  =  FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+g005 =  FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c050 = FORMONLY.tit_descripcion, REVERSE, NOENTRY;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_reppre[09] (r10_sec_item, r10_codigo, r10_nombre,r10_precio_mb,
+				r11_bodega, r11_stock_act)

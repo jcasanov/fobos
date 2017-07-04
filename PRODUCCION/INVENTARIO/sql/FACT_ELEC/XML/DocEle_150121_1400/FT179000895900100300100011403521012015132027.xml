@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000114035</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000114035</guiaRemision>
+<razonSocialComprador>RUIZ AGUDELO CESAR HERMOGENES</razonSocialComprador>
+<identificacionComprador>1700571373001</identificacionComprador>
+<totalSinImpuestos>2117.75</totalSinImpuestos>
+<totalDescuento>279.75</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>2117.75</baseImponible>
+<valor>254.13</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>2371.88</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>103295</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA YANUNCAY VERDE PRIMERA</descripcion>
+<cantidad>50.00</cantidad>
+<precioUnitario>7.55</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>377.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>377.50</baseImponible>
+<valor>45.30</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103058</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA YANUNCAY AZUL PRIMERA</descripcion>
+<cantidad>50.00</cantidad>
+<precioUnitario>7.49</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>374.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>374.50</baseImponible>
+<valor>44.94</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98625</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA MINDO CHOCOLATE ESTANDAR</descripcion>
+<cantidad>50.00</cantidad>
+<precioUnitario>9.12</precioUnitario>
+<descuento>77.52</descuento>
+<precioTotalSinImpuesto>378.48</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>378.48</baseImponible>
+<valor>45.42</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102310</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA AZTECA GRIS SEGUNDA</descripcion>
+<cantidad>50.00</cantidad>
+<precioUnitario>7.93</precioUnitario>
+<descuento>67.41</descuento>
+<precioTotalSinImpuesto>329.09</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>329.09</baseImponible>
+<valor>39.49</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102312</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA AZTECA VERDE SEGUNDA</descripcion>
+<cantidad>50.00</cantidad>
+<precioUnitario>7.93</precioUnitario>
+<descuento>67.41</descuento>
+<precioTotalSinImpuesto>329.09</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>329.09</baseImponible>
+<valor>39.49</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99479</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA AZTECA ESTANDAR</descripcion>
+<cantidad>50.00</cantidad>
+<precioUnitario>7.93</precioUnitario>
+<descuento>67.41</descuento>
+<precioTotalSinImpuesto>329.09</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>329.09</baseImponible>
+<valor>39.49</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">innovaceramica@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2297649</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064324</campoAdicional>
+<campoAdicional nombre="Observaciones">INNOVACERAMICA</campoAdicional>
+</infoAdicional>
+</factura>

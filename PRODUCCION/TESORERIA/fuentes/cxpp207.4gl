@@ -205,6 +205,7 @@ DEFINE r_cxp_aux	RECORD LIKE cxpt020.*
 DEFINE l,retenciones	SMALLINT
 DEFINE cont_p		SMALLINT
 DEFINE valor_ret	DECIMAL(12,2)
+DEFINE r_p02		RECORD LIKE cxpt002.*
 DEFINE r_p27		RECORD LIKE cxpt027.*
 DEFINE r_b00		RECORD LIKE ctbt000.*
 DEFINE r_b12		RECORD LIKE ctbt012.*
@@ -314,6 +315,13 @@ WHILE TRUE
 					--#CALL fl_mostrar_mensaje('Comprobante ya tiene retención.','exclamation')
 					--#CONTINUE DISPLAY
 				--#END IF
+				CALL fl_lee_proveedor_localidad(vg_codcia,
+						vg_codloc, rm_p27.p27_codprov)
+					RETURNING r_p02.*
+				--#IF r_p02.p02_email IS NULL THEN
+					--#CALL fl_mostrar_mensaje('El Proveedor no tiene configurado la cuenta de correo, configuresela en el mantenimiento de proveedores.','exclamation')
+					--#CONTINUE DISPLAY
+				--#END IF
 				IF l = 0 THEN
 					LET tot_ret = 0
 					SELECT COUNT(*) INTO ind_ret
@@ -394,6 +402,7 @@ WHILE TRUE
 							RETURNING r_p27.*
 						  CALL imprime_retenciones(
 									r_p27.*)
+						CALL generar_doc_elec(r_p27.p27_num_ret)
 						  CALL fl_mensaje_registro_ingresado()
 						  LET int_flag = 0
 						END IF
@@ -1048,7 +1057,7 @@ WHILE NOT salir
 			       	       	r_ret[j].porc,
 			       	       	r_ret[j].val_base,    
 			       	       	r_ret[j].subtotal, r_ret[j].c_sri,
-					fec_ini_porc[i])
+					fec_ini_porc[j])
 		END IF
 	END FOR
 	IF int_flag THEN
@@ -1337,7 +1346,8 @@ DEFINE r_reten		RECORD
 				porc		DECIMAL(5,2),
 				val_base	DECIMAL(12,2),
 				subtotal 	DECIMAL(12,2),
-				codi_sri	VARCHAR(15,6)
+				codi_sri	VARCHAR(15,6),
+				fec_ini_por	DATE
 			END RECORD
 DEFINE dividendo	LIKE cxpt020.p20_dividendo
 DEFINE saldo		DECIMAL(12,2)
@@ -1409,14 +1419,15 @@ FOREACH q_tmpret2 INTO r_reten.tipo_doc, r_reten.num_doc
 			CONTINUE FOREACH
 		END IF
 		WHILE saldo >= r_reten.subtotal
-			LET r_p28.p28_secuencia  = orden
-			LET orden = orden + 1
-			LET r_p28.p28_dividendo  = dividendo
-			LET r_p28.p28_tipo_ret   = r_reten.tipo_ret
-			LET r_p28.p28_porcentaje = r_reten.porc
-			LET r_p28.p28_valor_base = r_reten.val_base
-			LET r_p28.p28_valor_ret  = r_reten.subtotal
-			LET r_p28.p28_codigo_sri = r_reten.codi_sri
+			LET r_p28.p28_secuencia      = orden
+			LET orden                    = orden + 1
+			LET r_p28.p28_dividendo      = dividendo
+			LET r_p28.p28_tipo_ret       = r_reten.tipo_ret
+			LET r_p28.p28_porcentaje     = r_reten.porc
+			LET r_p28.p28_valor_base     = r_reten.val_base
+			LET r_p28.p28_valor_ret      = r_reten.subtotal
+			LET r_p28.p28_codigo_sri     = r_reten.codi_sri
+			LET r_p28.p28_fecha_ini_porc = r_reten.fec_ini_por
 			INSERT INTO cxpt028 VALUES(r_p28.*)
 			LET done = 1
 			LET saldo = saldo - r_reten.subtotal
@@ -1580,7 +1591,7 @@ IF validar = 1 THEN
 		  AND p29_localidad = vg_codloc
   		  AND p29_num_sri   = rm_p29.p29_num_sri
 	IF cont > 0 THEN
-		CALL fl_mostrar_mensaje('La secuencia del SRI ' || rm_p29.p29_num_sri[9,15] || ' ya existe.','exclamation')
+		CALL fl_mostrar_mensaje('La secuencia del SRI ' || rm_p29.p29_num_sri[9,21] || ' ya existe.','exclamation')
 		RETURN 0
 	END IF
 END IF
@@ -2144,6 +2155,31 @@ CALL fl_mostrar_mensaje('Procesados Códigos del SRI.', 'info')
 CLOSE WINDOW w_cxpf204_6
 LET int_flag = 0
 RETURN 1
+
+END FUNCTION
+
+
+
+FUNCTION generar_doc_elec(num_ret)
+DEFINE num_ret		LIKE cxpt027.p27_num_ret
+DEFINE comando		VARCHAR(250)
+DEFINE servid		VARCHAR(10)
+DEFINE mensaje		VARCHAR(250)
+
+LET servid  = FGL_GETENV("INFORMIXSERVER")
+CASE servid
+	WHEN "ACGYE01"
+		LET servid = "idsgye01"
+	WHEN "ACUIO01"
+		LET servid = "idsuio01"
+	WHEN "ACUIO02"
+		LET servid = "idsuio02"
+END CASE
+LET comando = "fglgo gen_tra_ele ", vg_base CLIPPED, " ", servid CLIPPED, " ",
+		vg_codcia, " ", vg_codloc, " CR ", num_ret, " RTP"
+RUN comando
+LET mensaje = FGL_GETENV("HOME"), '/tmp/RT_ELEC/'
+CALL fl_mostrar_mensaje('Archivo XML de RETENCIONES Generado en: ' || mensaje, 'info')
 
 END FUNCTION
 

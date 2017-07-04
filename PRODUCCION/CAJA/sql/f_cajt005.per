@@ -1,0 +1,33 @@
+database acero_gm
+screen size 24 by 80
+{
+j05_compania       [f000       ]
+j05_localidad      [f001  ]
+j05_codigo_caja    [f002  ]
+j05_fecha_aper     [f003      ]
+j05_secuencia      [f004  ]
+j05_moneda         [a0]
+j05_ef_apertura    [f005          ]
+j05_ch_apertura    [f006          ]
+j05_ef_ing_dia     [f007          ]
+j05_ch_ing_dia     [f008          ]
+j05_ef_egr_dia     [f009          ]
+j05_ch_egr_dia     [f010          ]
+}
+end
+tables
+cajt005
+attributes
+f000 = cajt005.j05_compania;
+f001 = cajt005.j05_localidad;
+f002 = cajt005.j05_codigo_caja;
+f003 = cajt005.j05_fecha_aper;
+f004 = cajt005.j05_secuencia;
+a0 = cajt005.j05_moneda;
+f005 = cajt005.j05_ef_apertura;
+f006 = cajt005.j05_ch_apertura;
+f007 = cajt005.j05_ef_ing_dia;
+f008 = cajt005.j05_ch_ing_dia;
+f009 = cajt005.j05_ef_egr_dia;
+f010 = cajt005.j05_ch_egr_dia;
+end

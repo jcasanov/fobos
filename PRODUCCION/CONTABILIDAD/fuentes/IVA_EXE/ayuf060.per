@@ -1,0 +1,31 @@
+DATABASE aceros
+SCREEN
+{
+ TIPOS ORDENES DE COMPRA
+
+ [c000|c001                                    |b]
+[c010|c011                                    |c]
+[c010|c011                                    |c]
+[c010|c011                                    |c]
+[c010|c011                                    |c]
+[c010|c011                                    |c]
+[c010|c011                                    |c]
+[c010|c011                                    |c]
+[c010|c011                                    |c]
+[c010|c011                                    |c]
+[c010|c011                                    |c]
+
+}
+TABLES
+ordt001
+ATTRIBUTES
+c000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b    = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+
+c010 = c01_tipo_orden, UPSHIFT, REVERSE;
+c011 = c01_nombre, UPSHIFT, REVERSE;
+c    = c01_estado, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+SCREEN RECORD rh_oc[10] (c01_tipo_orden, c01_nombre, c01_estado)

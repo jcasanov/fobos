@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000016377</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>PTO.STA.ANA,EDF.THE POINT, P.18 OF 1812</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>TECHCONSTRUYE S.A.</razonSocialComprador>
+<identificacionComprador>0992106824001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000103772</numDocModificado>
+<fechaEmisionDocSustento>05/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>40.18</totalSinImpuestos>
+<valorModificacion>45.00</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>40.18</baseImponible>
+<valor>4.82</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>POR REFACTURACION. MATERIAL YA ENTREGADO</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>18152</codigoInterno>
+<descripcion>TAPA E-1493-1 DE CARBONES P/MODELO 535 (44545)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>16.94</precioUnitario>
+<descuento>1.69</descuento>
+<precioTotalSinImpuesto>15.25</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIDGID" valor="RIDGID"/>
+<detAdicional nombre="PAR" valor="PAR"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>15.25</baseImponible>
+<valor>1.83</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>15152</codigoInterno>
+<descripcion>CARBON E-1491-144-1 (2 PZ) P/ROSACDORA 300 Y 535 (44540)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>27.70</precioUnitario>
+<descuento>2.77</descuento>
+<precioTotalSinImpuesto>24.93</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIDGID" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>24.93</baseImponible>
+<valor>2.99</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3883066</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">8010</campoAdicional>
+</infoAdicional>
+</notaCredito>

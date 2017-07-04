@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268989</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>26/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268989</guiaRemision>
+<razonSocialComprador>NOVACERO S.A.</razonSocialComprador>
+<identificacionComprador>0590038601001</identificacionComprador>
+<totalSinImpuestos>140.98</totalSinImpuestos>
+<totalDescuento>15.67</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>140.98</baseImponible>
+<valor>16.92</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>157.90</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>14380</codigoPrincipal>
+<descripcion>ACEITE HIDRAULICO HF-104 AZUL ANTIESPUMANTE DESOXIDANTE S/ENVASE</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>29.53</precioUnitario>
+<descuento>14.77</descuento>
+<precioTotalSinImpuesto>132.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>132.88</baseImponible>
+<valor>15.95</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21666</codigoPrincipal>
+<descripcion>ENVASE PLASTICO JERRY CAN DE 20 LT</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>9.00</precioUnitario>
+<descuento>0.90</descuento>
+<precioTotalSinImpuesto>8.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.10</baseImponible>
+<valor>0.97</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">compras_ec@novacero.com</campoAdicional>
+<campoAdicional nombre="Email">chavezje@novacero.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3981900</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">024819</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C# VK 1029</campoAdicional>
+</infoAdicional>
+</factura>

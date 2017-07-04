@@ -1,0 +1,34 @@
+DATABASE aceros
+SCREEN
+{
+ TIPOS DE ZONAS
+                                   [c02] de [c03]
+ [c000|c001                                    |b]
+[c010|c011                                    |c]
+[c010|c011                                    |c]
+[c010|c011                                    |c]
+[c010|c011                                    |c]
+[c010|c011                                    |c]
+[c010|c011                                    |c]
+[c010|c011                                    |c]
+[c010|c011                                    |c]
+[c010|c011                                    |c]
+[c010|c011                                    |c]
+
+}
+TABLES
+rept108
+ATTRIBUTES
+c02  = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c03  = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b    = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+
+c010 = rept108.r108_cod_zona, UPSHIFT, REVERSE;
+c011 = rept108.r108_descripcion, UPSHIFT, REVERSE;
+c    = rept108.r108_estado, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+SCREEN RECORD rh_zona[10] (r108_cod_zona, r108_descripcion, r108_estado)

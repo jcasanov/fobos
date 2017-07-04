@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comprobanteRetencion id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000040205</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoCompRetencion>
+<fechaEmision>16/12/2014</fechaEmision>
+<dirEstablecimiento>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionSujetoRetenido>04</tipoIdentificacionSujetoRetenido>
+<razonSocialSujetoRetenido>SANDRA CISNEROS TORRES (HOTEL SANDMELIS)</razonSocialSujetoRetenido>
+<identificacionSujetoRetenido>1709673832001</identificacionSujetoRetenido>
+<periodoFiscal>12/2014</periodoFiscal>
+</infoCompRetencion>
+<impuestos>
+<impuesto>
+<codigo>1</codigo>
+<codigoRetencion>307</codigoRetencion>
+<baseImponible>44.51</baseImponible>
+<porcentajeRetener>2.00</porcentajeRetener>
+<valorRetenido>0.89</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>001001000009077</numDocSustento>
+<fechaEmisionDocSustento>09/12/2014</fechaEmisionDocSustento>
+</impuesto>
+<impuesto>
+<codigo>2</codigo>
+<codigoRetencion>2</codigoRetencion>
+<baseImponible>5.34</baseImponible>
+<porcentajeRetener>70.00</porcentajeRetener>
+<valorRetenido>3.74</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>001001000009077</numDocSustento>
+<fechaEmisionDocSustento>09/12/2014</fechaEmisionDocSustento>
+</impuesto>
+</impuestos>
+<infoAdicional>
+<campoAdicional nombre="Email">sandra@sandmelis.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2461 225</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">001446</campoAdicional>
+</infoAdicional>
+</comprobanteRetencion>

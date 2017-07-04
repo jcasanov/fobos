@@ -1,4 +1,4 @@
---------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 -- Titulo           : cxcp311.4gl - Consulta Acumulados Cartera por fecha
 -- Elaboracion      : 28-Jul-2005
 -- Autor            : NPC
@@ -31,7 +31,9 @@ DEFINE rm_par2 		RECORD
 				fec_emi_fin	DATE,
 				fec_vcto_ini	DATE,
 				fec_vcto_fin	DATE,
-				incluir_tj	CHAR(1)
+				incluir_tj	CHAR(1),
+				origen		CHAR(1),
+				incl_sal_cero	CHAR(1)
 			END RECORD
 DEFINE rm_det1		ARRAY[32766] OF RECORD
 				cod_des		INTEGER,
@@ -124,9 +126,15 @@ CREATE TEMP TABLE tempo_doc
 	 cladoc		CHAR(2),
 	 numdoc		CHAR(13),
 	 dividendo	SMALLINT,
+	 cod_tran	CHAR(2),
+	 num_tran	DECIMAL(15,0),
 	 codcli		INTEGER,
-	 fecha		DATE,
-	 valor 		DECIMAL(12,2))
+	 fec_emi	DATE,
+	 fecha_vcto	DATE,
+	 valor 		DECIMAL(12,2),
+	 saldo 		DECIMAL(12,2))
+CREATE INDEX tmp_pk 
+	ON tempo_doc(localidad, codcli, cladoc, numdoc)
 CREATE TEMP TABLE tempo_acum
 	(cod_loc	SMALLINT,
 	 codigo		INTEGER,
@@ -150,13 +158,23 @@ LET vm_divisor          = 1
 LET rm_par.rango1_i     = 1
 LET rm_par.rango1_f     = 30
 LET rm_par.rango2_i     = 31
+LET rm_par.rango2_f     = 90
+LET rm_par.rango3_i     = 91
+LET rm_par.rango3_f     = 180
+LET rm_par.rango4_i     = 181
+LET rm_par.rango4_f     = 360
+LET rm_par.rango5_i     = 361
+{--
 LET rm_par.rango2_f     = 60
 LET rm_par.rango3_i     = 61
 LET rm_par.rango3_f     = 90
 LET rm_par.rango4_i     = 91
 LET rm_par.rango4_f     = 180
 LET rm_par.rango5_i     = 181
-LET rm_par2.incluir_tj  = 'S'
+--}
+LET rm_par2.incluir_tj    = 'S'
+LET rm_par2.origen        = 'T'
+LET rm_par2.incl_sal_cero = "N"
 CALL pantalla_principal()
 LET vm_num_res = 0
 CALL carga_colores()
@@ -169,6 +187,7 @@ MENU "OPCIONES"
 		HIDE OPTION 'Decimales'
 		HIDE OPTION 'Imprimir'
 		HIDE OPTION 'Archivo'
+		HIDE OPTION 'Arch. Indicador'
 		CALL control_consulta()
 		IF vm_num_doc > 0 AND NOT int_flag THEN
 			CALL control_detalle()
@@ -179,6 +198,11 @@ MENU "OPCIONES"
 			SHOW OPTION 'Decimales'
 			SHOW OPTION 'Imprimir'
 			SHOW OPTION 'Archivo'
+			IF rm_par.tipo_detalle = 'P' THEN
+				SHOW OPTION 'Arch. Indicador'
+			ELSE
+				HIDE OPTION 'Arch. Indicador'
+			END IF
 		END IF
 	COMMAND KEY("C") "Consultar"
 		CALL control_consulta()
@@ -190,6 +214,11 @@ MENU "OPCIONES"
 			HIDE OPTION 'Decimales'
 			HIDE OPTION 'Imprimir'
 			HIDE OPTION 'Archivo'
+			IF rm_par.tipo_detalle = 'P' THEN
+				SHOW OPTION 'Arch. Indicador'
+			ELSE
+				HIDE OPTION 'Arch. Indicador'
+			END IF
 		ELSE
 			SHOW OPTION 'Detalle'
 			SHOW OPTION 'Precisión'
@@ -198,6 +227,11 @@ MENU "OPCIONES"
 			SHOW OPTION 'Decimales'
 			SHOW OPTION 'Imprimir'
 			SHOW OPTION 'Archivo'
+			IF rm_par.tipo_detalle = 'P' THEN
+				SHOW OPTION 'Arch. Indicador'
+			ELSE
+				HIDE OPTION 'Arch. Indicador'
+			END IF
 		END IF
 		IF vm_num_doc > 0 AND NOT int_flag THEN
 			CALL control_detalle()
@@ -218,6 +252,10 @@ MENU "OPCIONES"
 		CALL control_imprimir()
 	COMMAND KEY('X') 'Archivo'
 		CALL control_archivo()
+	COMMAND KEY('Y') 'Arch. Indicador'
+		CALL control_archivo_indicador()
+	COMMAND KEY('Z') 'Arch. Crediticio'
+		CALL control_archivo_crediticio()
 	COMMAND KEY('S') 'Salir'
 		EXIT MENU
 END MENU
@@ -392,7 +430,7 @@ END FUNCTION
 
 FUNCTION lee_parametros2()
 
-OPEN WINDOW w_cxcf311_5 AT 06, 10 WITH FORM "../forms/cxcf311_5" 
+OPEN WINDOW w_cxcf311_5 AT 06, 12 WITH FORM "../forms/cxcf311_5" 
 	ATTRIBUTE(BORDER, COMMENT LINE LAST, FORM LINE FIRST)
 LET int_flag = 0
 INPUT BY NAME rm_par2.*
@@ -586,7 +624,8 @@ DEFINE subquery1	CHAR(1500)
 DEFINE subquery2	CHAR(500)
 DEFINE expr_loc		VARCHAR(100)
 DEFINE expr1, expr2	VARCHAR(100)
-DEFINE expr3		CHAR(200)
+DEFINE expr3		VARCHAR(200)
+DEFINE expr4		VARCHAR(100)
 
 ERROR "Procesando documentos con saldos . . . espere por favor." ATTRIBUTE(NORMAL)
 DELETE FROM tempo_doc
@@ -647,10 +686,16 @@ IF rm_par2.incluir_tj = 'N' THEN
 	LET expr3 = '   AND NOT EXISTS (SELECT g10_codcobr FROM gent010 ',
 					' WHERE g10_codcobr = z01_codcli) '
 END IF
+LET expr4 = NULL
+IF rm_par2.origen <> 'T' THEN
+	LET expr4 = '   AND z20_origen = "', rm_par2.origen, '"'
+END IF
 LET query = 'INSERT INTO tempo_doc ',
 		' SELECT z20_localidad, z20_areaneg, z20_cartera, ',
 			'z01_tipo_clte, z20_tipo_doc, z20_num_doc, ',
-			'z20_dividendo, z20_codcli, z20_fecha_vcto, ',
+			'z20_dividendo, z20_cod_tran, z20_num_tran, ',
+			'z20_codcli, z20_fecha_emi, z20_fecha_vcto, ',
+			'(z20_valor_cap + z20_valor_int), ',
 			' NVL(', subquery1 CLIPPED, ', ',
 			' CASE WHEN z20_fecha_emi <= "', vm_fecha_ini, '"',
 				' THEN z20_saldo_cap + z20_saldo_int - ',
@@ -665,10 +710,13 @@ LET query = 'INSERT INTO tempo_doc ',
 		'   AND z01_codcli     = z20_codcli ',
 			expr1 CLIPPED,
 			expr2 CLIPPED,
-			expr3 CLIPPED
+			expr3 CLIPPED,
+			expr4 CLIPPED
 PREPARE stmnt1 FROM query
 EXECUTE stmnt1
-DELETE FROM tempo_doc WHERE valor = 0
+IF rm_par2.incl_sal_cero = "N" THEN
+	DELETE FROM tempo_doc WHERE saldo = 0
+END IF
 SELECT COUNT(*) INTO vm_num_doc FROM tempo_doc 
 ERROR ' '
 
@@ -730,7 +778,13 @@ CALL subquery_pven_venc('5', campo, rm_par.rango4_i, rm_par.rango4_f)
 CALL subquery_pven_venc('6', campo, rm_par.rango5_i, 0)
 LET query = 'INSERT INTO tempo_acum ',
 		 'SELECT localidad, ', campo CLIPPED, ', descri, ',
-			'(SELECT NVL(SUM(val1), 0) ',
+{--
+IF rm_par.tipo_detalle = 'P' THEN
+	LET query = query CLIPPED, ' fecha_vcto, '
+END IF
+LET query = query CLIPPED,
+--}
+			' (SELECT NVL(SUM(val1), 0) ',
 				' FROM t1 ',
 				' WHERE cod1 = ', campo CLIPPED,
 				'   AND loc1 = localidad), ',
@@ -757,6 +811,15 @@ LET query = 'INSERT INTO tempo_acum ',
 			' FROM tempo_doc, tmp_des ',
 				expr_sql CLIPPED,
 			' GROUP BY 1, 2, 3'
+{--
+IF rm_par.tipo_detalle = 'P' THEN
+	LET query = query CLIPPED,
+			' GROUP BY 1, 2, 3, 4'
+ELSE
+	LET query = query CLIPPED,
+			' GROUP BY 1, 2, 3'
+END IF
+--}
 PREPARE cons FROM query
 EXECUTE cons
 DROP TABLE tmp_des
@@ -791,13 +854,13 @@ DEFINE expr_sql		VARCHAR(200)
 IF rm_par.ind_venc = 'V' THEN
 	LET sig1 = '>='
 	LET sig2 = '<'
-	LET cfe1 = "fecha"
+	LET cfe1 = "fecha_vcto"
 	LET cfe2 = '"', rm_par.fecha_cart, '"'
 ELSE
 	LET sig1 = '<'
 	LET sig2 = '>='
 	LET cfe1 = '"', rm_par.fecha_cart, '"'
-	LET cfe2 = "fecha"
+	LET cfe2 = "fecha_vcto"
 END IF
 LET expr_sql = NULL
 LET maxmen   = sig1
@@ -811,12 +874,12 @@ IF rango_i > 0 OR rango_f > 0 THEN
 	LET expr_sql = '   AND ', cfe2 CLIPPED, expr_fec CLIPPED
 END IF
 LET subquery = 'SELECT localidad loc', indicador, ', ', campo CLIPPED,
-			' cod', indicador, ', NVL(SUM(valor), 0) val',indicador,
+			' cod', indicador, ', NVL(SUM(saldo), 0) val',indicador,
 		' FROM tempo_doc ',
-		' WHERE fecha  ', maxmen CLIPPED, ' "', rm_par.fecha_cart, '"',
+		' WHERE fecha_vcto ', maxmen CLIPPED,' "',rm_par.fecha_cart,'"',
 		expr_sql CLIPPED,
 		' GROUP BY 1, 2 ',
-		' HAVING SUM(valor) > 0 ',
+		' HAVING SUM(saldo) > 0 ',
 		' INTO TEMP t', indicador
 PREPARE exec_tmp FROM subquery
 EXECUTE exec_tmp
@@ -979,6 +1042,16 @@ WHILE TRUE
 			CALL control_imprimir()
 		ON KEY(F10)
 			CALL control_archivo()
+		ON KEY(F11)
+			IF rm_par.tipo_detalle <> 'P' THEN
+				CONTINUE DISPLAY
+			END IF
+			CALL control_archivo_indicador()
+		ON KEY(CONTROL-W)
+			IF rm_par.tipo_detalle <> 'P' THEN
+				CONTINUE DISPLAY
+			END IF
+			CALL control_archivo_crediticio()
 		ON KEY(F15)
 			LET col      = 1
 			LET int_flag = 2
@@ -1018,6 +1091,13 @@ WHILE TRUE
 		BEFORE DISPLAY
 			--#CALL dialog.keysetlabel("ACCEPT","")
 			CALL dialog.keysetlabel("F10","Archivo")
+			IF rm_par.tipo_detalle <> 'P' THEN
+				CALL dialog.keysetlabel("F11","")
+				CALL dialog.keysetlabel("CONTROL-W","")
+			ELSE
+				CALL dialog.keysetlabel("F11","Arch. Indicador")
+				CALL dialog.keysetlabel("CONTROL-W","Arch. Crediticio")
+			END IF
 			CALL dialog.setcurrline(pos_pan, pos_arr)
 			CALL muestrar_contadores_det(pos_arr, vm_num_rows)
 		BEFORE ROW
@@ -1149,6 +1229,16 @@ WHILE TRUE
 			CALL control_imprimir()
 		ON KEY(F10)
 			CALL control_archivo()
+		ON KEY(F11)
+			IF rm_par.tipo_detalle <> 'P' THEN
+				CONTINUE DISPLAY
+			END IF
+			CALL control_archivo_indicador()
+		ON KEY(CONTROL-W)
+			IF rm_par.tipo_detalle <> 'P' THEN
+				CONTINUE DISPLAY
+			END IF
+			CALL control_archivo_crediticio()
 		ON KEY(F15)
 			LET col      = 1
 			LET int_flag = 2
@@ -1184,6 +1274,13 @@ WHILE TRUE
 		BEFORE DISPLAY
 			--#CALL dialog.keysetlabel("ACCEPT","")
 			CALL dialog.keysetlabel("F10","Archivo")
+			IF rm_par.tipo_detalle <> 'P' THEN
+				CALL dialog.keysetlabel("F11","")
+				CALL dialog.keysetlabel("CONTROL-W","")
+			ELSE
+				CALL dialog.keysetlabel("F11","Arch. Indicador")
+				CALL dialog.keysetlabel("CONTROL-W","Arch. Crediticio")
+			END IF
 			CALL dialog.setcurrline(pos_pan, pos_arr)
 			CALL muestrar_contadores_det(pos_arr, vm_num_rows)
 			DISPLAY rm_descrip[pos_arr] TO descripcion
@@ -1812,5 +1909,276 @@ RUN "mv /tmp/cxcp311.unl $HOME/tmp/cxcp311.unl"
 LET mensaje = FGL_GETENV("HOME"), '/tmp/cxcp311.unl'
 CALL fl_mostrar_mensaje('Archivo Generado en: ' || mensaje, 'info')
 ERROR ' '
+
+END FUNCTION
+
+
+
+FUNCTION control_archivo_indicador()
+DEFINE query		CHAR(5500)
+DEFINE mensaje		VARCHAR(100)
+
+ERROR 'Generando Archivo cxcp311_ind.unl ... por favor espere'
+LET query = 'SELECT g02_nombre loc, NVL(z06_nombre, "SIN COBRADOR") cobra, ',
+		'fp_numero_semana("', rm_par.fecha_cart, '") num_sem, ',
+		'SUM(val_col1) por_vencer, ',
+		'SUM(val_col2) venc_30, ',
+		'SUM(val_col3) venc_60, ',
+		'SUM(val_col4) venc_90, ',
+		'SUM(val_col5) venc_180, ',
+		'SUM(val_col6) venc_mas ',
+		' FROM tempo_acum, gent002, cxct002, OUTER cxct006 ',
+		' WHERE g02_compania   = ', vg_codcia,
+		'   AND g02_localidad  = cod_loc ',
+		'   AND z02_compania   = g02_compania ',
+		'   AND z02_localidad  = g02_localidad ',
+		'   AND z02_codcli     = codigo ',
+		'   AND z02_zona_cobro = z06_zona_cobro ',
+		' GROUP BY 1, 2, 3 ',
+		' INTO TEMP t1 '
+PREPARE exec_t1 FROM query
+EXECUTE exec_t1
+UNLOAD TO "../../../tmp/cxcp311_ind.unl"
+	SELECT * FROM t1
+		ORDER BY 3 ASC, 2 ASC
+DROP TABLE t1
+RUN "mv ../../../tmp/cxcp311_ind.unl $HOME/tmp/"
+LET mensaje = FGL_GETENV("HOME"), '/tmp/cxcp311_ind.unl'
+CALL fl_mostrar_mensaje('Archivo de Indicadores Generado en: ' || mensaje, 'info')
+ERROR ' '
+
+END FUNCTION
+
+
+
+FUNCTION control_archivo_crediticio()
+DEFINE query		CHAR(10000)
+DEFINE mensaje		VARCHAR(200)
+
+IF rm_par2.fec_emi_ini IS NULL THEN
+	CALL fl_mostrar_mensaje('No se ha seleccionado un periodo de emisión en los filtros adicionales para generar este tipo de archivo.', 'exclamation')
+	RETURN
+END IF
+ERROR 'Generando Archivo Crediticio. Por favor espere ... '
+LET query = "SELECT 'SR01609' AS cod_ent, ",
+		"TO_CHAR(DATE('", rm_par2.fec_emi_fin,
+				"'), '%m/%d/%Y') AS fec_corte, ",
+		"CASE WHEN z01_tipo_doc_id = 'P' ",
+			"THEN CASE WHEN LENGTH(z01_num_doc_id) = 13 ",
+					"THEN 'R' ",
+					"ELSE 'E' ",
+				"END ",
+			"ELSE z01_tipo_doc_id ",
+		"END AS tipo_id, ",
+		"CASE WHEN z01_tipo_doc_id = 'C' ",
+			"THEN LPAD(z01_num_doc_id, 10, 0) ",
+			"ELSE LPAD(z01_num_doc_id, 13, 0) ",
+		"END AS cedruc, ",
+		"z01_nomcli AS cliente, ",
+		"z01_personeria AS cla_suj, ",
+		"(SELECT codigo ",
+			"FROM gent031, gent025, provincia ",
+			"WHERE g31_ciudad    = z01_ciudad ",
+			"  AND g31_pais      = z01_pais ",
+			"  AND g25_pais      = g31_pais ",
+			"  AND g25_divi_poli = g31_divi_poli ",
+			"  AND pais          = g25_pais ",
+			"  AND cod_phobos    = g25_divi_poli) AS cod_prov, ",
+		"(SELECT b.codigo ",
+			"FROM gent031, gent025, canton b ",
+			"WHERE g31_ciudad    = z01_ciudad ",
+			"  AND g31_pais      = z01_pais ",
+			"  AND g25_pais      = g31_pais ",
+			"  AND g25_divi_poli = g31_divi_poli ",
+			"  AND b.pais        = g25_pais ",
+			"  AND b.divi_poli   = g25_divi_poli ",
+			"  AND b.cod_phobos  = g31_ciudad) AS cod_cant, ",
+		"'' AS cod_parroq, ",
+		"'' AS sexo, ",
+		"'' AS est_civ, ",
+		"'' AS ori_ing, ",
+		"NVL(CASE WHEN areaneg = 1 THEN ",
+			"(SELECT r38_num_sri ",
+			" FROM rept038 ",
+			" WHERE r38_compania     = ", vg_codcia,
+			"   AND r38_localidad    = a.localidad ",
+			"   AND r38_tipo_doc    IN ('FA', 'NV') ",
+			"   AND r38_tipo_fuente  = 'PR' ",
+			"   AND r38_cod_tran     = a.cod_tran ",
+			"   AND r38_num_tran     = a.num_tran) ",
+		"WHEN areaneg = 2 THEN ",
+			"(SELECT r38_num_sri ",
+			" FROM rept038 ",
+			" WHERE r38_compania     = ", vg_codcia,
+			"   AND r38_localidad    = a.localidad ",
+			"   AND r38_tipo_doc    IN ('FA', 'NV') ",
+			"   AND r38_tipo_fuente  = 'OT' ",
+			"   AND r38_cod_tran     = a.cod_tran ",
+			"   AND r38_num_tran     = a.num_tran) ",
+		"END, ",
+		"NVL(CASE WHEN localidad = 4 THEN ",
+			"(SELECT r38_num_sri ",
+			" FROM acero_qs:rept038 ",
+			" WHERE r38_compania     = ", vg_codcia,
+			"   AND r38_localidad    = a.localidad ",
+			"   AND r38_tipo_doc    IN ('FA', 'NV') ",
+			"   AND r38_tipo_fuente  = 'PR' ",
+			"   AND r38_cod_tran     = a.cod_tran ",
+			"   AND r38_num_tran     = a.num_tran) ",
+		"END, a.numdoc)) AS num_ope, ",
+		"(SELECT SUM(b.valor) ",
+			"FROM tempo_doc b ",
+			"WHERE b.localidad = a.localidad ",
+			"  AND b.codcli    = a.codcli ",
+			"  AND b.cladoc    = a.cladoc ",
+			"  AND b.numdoc    = a.numdoc) AS val_ope, ",
+		"NVL((SELECT SUM(b.saldo) ",
+			"FROM tempo_doc b ",
+			"WHERE b.localidad = a.localidad ",
+			"  AND b.codcli    = a.codcli ",
+			"  AND b.cladoc    = a.cladoc ",
+			"  AND b.numdoc    = a.numdoc), 0.00) AS sal_ope, ",
+		--"a.valor AS val_ope, ",
+		--"a.saldo AS sal_ope, ",
+		"TO_CHAR(a.fec_emi, '%m/%d/%Y') AS fecha_conc, ",
+		"TO_CHAR((SELECT MAX(b.fecha_vcto) ",
+				"FROM tempo_doc b ",
+				"WHERE b.localidad = a.localidad ",
+				"  AND b.codcli    = a.codcli ",
+				"  AND b.cladoc    = a.cladoc ",
+				"  AND b.numdoc    = a.numdoc), ",
+		"'%m/%d/%Y') AS fec_vcto, ",
+		"TO_CHAR(a.fecha_vcto, '%m/%d/%Y') AS fec_exi, ",
+		"((SELECT MAX(b.fecha_vcto) ",
+			"FROM tempo_doc b ",
+			"WHERE b.localidad = a.localidad ",
+			"  AND b.codcli    = a.codcli ",
+			"  AND b.cladoc    = a.cladoc ",
+			"  AND b.numdoc    = a.numdoc) ",
+			"- a.fec_emi) AS plazo_op, ",
+		"(a.fecha_vcto - a.fec_emi) AS perioc_pag, ",
+		"CASE WHEN a.saldo > 0 AND (DATE('", rm_par2.fec_emi_fin,
+				"') - a.fecha_vcto) > 0 ",
+			"THEN (DATE('", rm_par2.fec_emi_fin,
+				"') - a.fecha_vcto) ",
+			"ELSE 0 ",
+		"END AS dias_mor, ",
+		"CASE WHEN a.saldo > 0 AND (DATE('", rm_par2.fec_emi_fin,
+				"') - a.fecha_vcto) > 0 ",
+			"THEN a.saldo ",
+			"ELSE 0 ",
+		"END AS monto_mor, ",
+		"0.00 AS int_mor, ",
+		case_pven_venc('P',rm_par.rango1_i - 1,rm_par.rango1_f) CLIPPED,
+		" AS por_venc_30, ",
+		case_pven_venc('P', rm_par.rango2_i, rm_par.rango2_f) CLIPPED,
+		" AS por_venc_90, ",
+		case_pven_venc('P', rm_par.rango3_i, rm_par.rango3_f) CLIPPED,
+		" AS por_venc_180, ",
+		case_pven_venc('P', rm_par.rango4_i, rm_par.rango4_f) CLIPPED,
+		" AS por_venc_360, ",
+		case_pven_venc('P', rm_par.rango5_i, 0) CLIPPED,
+		" AS por_venc_m_360, ",
+		case_pven_venc('V', rm_par.rango1_i, rm_par.rango1_f) CLIPPED,
+		" AS venc_30, ",
+		case_pven_venc('V', rm_par.rango2_i, rm_par.rango2_f) CLIPPED,
+		" AS venc_90, ",
+		case_pven_venc('V', rm_par.rango3_i, rm_par.rango3_f) CLIPPED,
+		" AS venc_180, ",
+		case_pven_venc('V', rm_par.rango4_i, rm_par.rango4_f) CLIPPED,
+		" AS venc_360, ",
+		case_pven_venc('V', rm_par.rango5_i, 0) CLIPPED,
+		" AS venc_m_360, ",
+		"0.00 AS val_dem_jud, ",
+		"0.00 AS cart_cast, ",
+		"a.valor AS cuot_cred, ",
+		"CASE WHEN NVL((SELECT SUM(b.saldo) ",
+			"FROM tempo_doc b ",
+			"WHERE b.localidad = a.localidad ",
+			"  AND b.codcli    = a.codcli ",
+			"  AND b.cladoc    = a.cladoc ",
+			"  AND b.numdoc    = a.numdoc), 0.00) = 0 ",
+		"THEN ",
+		"NVL((SELECT TO_CHAR(DATE(MAX(z22_fecing)), '%m/%d/%Y') ",
+		" FROM cxct023, cxct022 ",
+		" WHERE z23_compania  = ", vg_codcia,
+		"   AND z23_localidad = a.localidad ",
+		"   AND z23_codcli    = a.codcli ",
+		"   AND z23_tipo_doc  = a.cladoc ",
+		"   AND z23_num_doc   = a.numdoc ",
+		"   AND z23_div_doc   = a.dividendo ",
+		"   AND z22_compania  = z23_compania ",
+		"   AND z22_localidad = z23_localidad ",
+		"   AND z22_codcli    = z23_codcli ",
+		"   AND z22_tipo_trn  = z23_tipo_trn ",
+		"   AND z22_num_trn   = z23_num_trn), '') ",
+		"ELSE '' ",
+		"END AS fec_canc, ",
+		"CASE WHEN a.saldo = 0 ",
+			"THEN 'C' ",
+			"ELSE '' ",
+		"END AS for_canc ",
+		"FROM tempo_doc a, cxct001, cxct002 ",
+		"WHERE a.cladoc      = 'FA' ",
+		"  AND z01_codcli    = a.codcli ",
+		"  AND z02_compania  = ", vg_codcia,
+		"  AND z02_localidad = a.localidad ",
+		"  AND z02_codcli    = z01_codcli ",
+		"INTO TEMP t1 "
+PREPARE exec_arch_cred FROM query
+EXECUTE exec_arch_cred
+UNLOAD TO "/tmp/cxcp311_cre.txt"
+	SELECT * FROM t1
+		ORDER BY 5 ASC, 16 ASC, 17 ASC, 14 ASC
+RUN "mv /tmp/cxcp311_cre.txt $HOME/tmp/cxcp311_cre.txt"
+LET mensaje = FGL_GETENV("HOME"), '/tmp/cxcp311_cre.txt'
+DROP TABLE t1
+CALL fl_mostrar_mensaje('Archivo Crediticio Generado en: ' || mensaje, 'info')
+ERROR ' '
+
+END FUNCTION
+
+
+
+FUNCTION case_pven_venc(ind_pv, rango_i, rango_f)
+DEFINE ind_pv		CHAR(1)
+DEFINE rango_i	 	SMALLINT
+DEFINE rango_f  	SMALLINT
+DEFINE expr_case	CHAR(300)
+DEFINE maxmen		VARCHAR(2)
+DEFINE sig1, sig2	VARCHAR(2)
+DEFINE cfe1, cfe2	VARCHAR(15)
+DEFINE expr_fec		VARCHAR(100)
+DEFINE expr_sql		VARCHAR(200)
+
+IF ind_pv = 'V' THEN
+	LET sig1 = '>='
+	LET sig2 = '<'
+	LET cfe1 = "fecha_vcto"
+	LET cfe2 = '"', rm_par.fecha_cart, '"'
+ELSE
+	LET sig1 = '<'
+	LET sig2 = '>='
+	LET cfe1 = '"', rm_par.fecha_cart, '"'
+	LET cfe2 = "fecha_vcto"
+END IF
+LET expr_sql = NULL
+LET maxmen   = sig1
+IF rango_i > 0 OR rango_f > 0 THEN
+	LET maxmen   = sig2
+	LET expr_fec = ' - ', cfe1 CLIPPED, ' BETWEEN ', rango_i, ' AND ',
+			rango_f
+	IF rango_f = 0 THEN
+		LET expr_fec = ' - ', cfe1 CLIPPED, ' >= ', rango_i
+	END IF
+	LET expr_sql = ' AND ', cfe2 CLIPPED, expr_fec CLIPPED
+END IF
+LET expr_case = 'CASE WHEN fecha_vcto ', maxmen CLIPPED, ' "',
+					rm_par.fecha_cart, '"',
+			expr_sql CLIPPED,
+			' THEN saldo',
+			' ELSE 0.00',
+		' END '
+RETURN expr_case CLIPPED
 
 END FUNCTION

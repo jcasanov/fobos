@@ -1,0 +1,2 @@
+fglrun compilar $1
+fglgo compilar_4gl $1

@@ -1,0 +1,79 @@
+DATABASE aceros
+SCREEN
+{
+                                                            [c050 ] de [c051 ]
+    Tipo Trans.: [a0] [c003           ]  Fec. Ingreso: [c014                 ]
+     No. Trans.: [c000       ]                Subtipo: [c04] [c005           ]
+      Proveedor: [c001       ] [c002                                         ]
+         Moneda: [a1] [c008            ]
+     Referencia: [c011                                ]
+                                                           [c052 ] de [c053 ]
+ TD    Documento    Div   Saldo Actual    Valor a Ajustar    Saldo Nuevo   C
+[a2|c100           |c01|c102            |c103            |c104            |c]
+[a2|c100           |c01|c102            |c103            |c104            |c]
+[a2|c100           |c01|c102            |c103            |c104            |c]
+[a2|c100           |c01|c102            |c103            |c104            |c]
+[a2|c100           |c01|c102            |c103            |c104            |c]
+[a2|c100           |c01|c102            |c103            |c104            |c]
+[a2|c100           |c01|c102            |c103            |c104            |c]
+[a2|c100           |c01|c102            |c103            |c104            |c]
+              Totales: [c012            |c018            |c019            ]
+  Documento: [c015      |c016      |c017] dias        Usuario: [c013      ]
+}
+TABLES
+cxpt020, cxpt022, cxpt023
+ATTRIBUTES
+c000 = cxpt022.p22_num_trn, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo. No. de Trans. del ajuste';
+c001 = cxpt022.p22_codprov, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c002 = FORMONLY.tit_nombre_pro, NOENTRY, REVERSE, UPSHIFT;
+a0   = cxpt022.p22_tipo_trn, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo. Tipo Trans. del ajuste';
+c003 = FORMONLY.tit_tipo_trn, NOENTRY, REVERSE, UPSHIFT;
+c04  = cxpt022.p22_subtipo, AUTONEXT, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c005 = FORMONLY.tit_subtipo, NOENTRY, UPSHIFT;
+a1   = cxpt022.p22_moneda, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c008 = FORMONLY.tit_mon_bas, NOENTRY, REVERSE, UPSHIFT;
+c011 = cxpt022.p22_referencia, AUTONEXT, UPSHIFT, REVERSE;
+
+a2   = cxpt023.p23_tipo_doc, NOENTRY, UPSHIFT;
+c100 = cxpt023.p23_num_doc, NOENTRY, UPSHIFT;
+c01  = cxpt023.p23_div_doc, NOENTRY, UPSHIFT, FORMAT = '#&&';
+c102 = FORMONLY.tit_saldo_act TYPE DECIMAL(12,2), NOENTRY, UPSHIFT,
+	FORMAT = '-,---,---,--&.##', INCLUDE = (0.01 TO 9999999999.99);
+c103 = FORMONLY.tit_valor_apl TYPE DECIMAL(12,2), AUTONEXT, UPSHIFT,
+	COMMENTS = 'Valor negativo disminuye el saldo, Valor sin signo incrementa el saldo',
+	FORMAT = '-,---,---,--&.##',INCLUDE = (-9999999999.99 TO 9999999999.99);
+c104 = FORMONLY.tit_saldo_nue TYPE DECIMAL(12,2), NOENTRY, UPSHIFT,
+	FORMAT = '-,---,---,--&.##', INCLUDE = (0.01 TO 9999999999.99);
+c    = FORMONLY.tit_check TYPE CHAR, AUTONEXT, UPSHIFT,
+	INCLUDE = ('S', 'N'), DEFAULT = 'N',
+	COMMENTS = 'Click para ajustar todo el valor';
+
+c012 = FORMONLY.tit_total_act TYPE DECIMAL(12,2), NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = '-,---,---,--&.##';
+c018 = FORMONLY.tit_total_apl TYPE DECIMAL(12,2), NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = '-,---,---,--&.##',INCLUDE = (-9999999999.99 TO 9999999999.99);
+c019 = FORMONLY.tit_total_nue TYPE DECIMAL(12,2), NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = '-,---,---,--&.##';
+c013 = cxpt022.p22_usuario, NOENTRY, REVERSE, UPSHIFT;
+c014 = cxpt022.p22_fecing, NOENTRY, REVERSE, UPSHIFT;
+c015 = cxpt020.p20_fecha_vcto, COLOR = RED WHERE c015 < TODAY,
+	FORMAT = 'dd-mm-yyyy', NOENTRY, UPSHIFT;
+c016 = FORMONLY.tit_fecha_vcto TYPE DATE, COLOR = RED WHERE c016 = 'VENCIDO',
+	NOENTRY, REVERSE, UPSHIFT;
+c017 = FORMONLY.tit_dias TYPE INTEGER, COLOR = RED WHERE c017 < 0,
+	NOENTRY, REVERSE, FORMAT = '###&';
+
+c050 = FORMONLY.row_cur, NOENTRY, UPSHIFT;
+c051 = FORMONLY.max_cur, NOENTRY, UPSHIFT;
+c052 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c053 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_aju[8] (p23_tipo_doc, p23_num_doc, p23_div_doc, tit_saldo_act,
+			tit_valor_apl, tit_saldo_nue, tit_check)

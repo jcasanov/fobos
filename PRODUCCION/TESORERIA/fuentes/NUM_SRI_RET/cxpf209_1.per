@@ -1,0 +1,55 @@
+DATABASE aceros
+SCREEN
+{
+
+     Fecha Inicial: [c000      ]                  Fecha Final: [c001      ]
+
+ [c020       |c021                             |c022      |c023            |c]
+[c010       |c011                             |c012      |c013            |d]
+[c010       |c011                             |c012      |c013            |d]
+[c010       |c011                             |c012      |c013            |d]
+[c010       |c011                             |c012      |c013            |d]
+[c010       |c011                             |c012      |c013            |d]
+[c010       |c011                             |c012      |c013            |d]
+[c010       |c011                             |c012      |c013            |d]
+[c010       |c011                             |c012      |c013            |d]
+[c010       |c011                             |c012      |c013            |d]
+[c010       |c011                             |c012      |c013            |d]
+[c010       |c011                             |c012      |c013            |d]
+[c010       |c011                             |c012      |c013            |d]
+[c010       |c011                             |c012      |c013            |d]
+[c010       |c011                             |c012      |c013            |d]
+[c010       |c011                             |c012      |c013            |d]
+
+}
+TABLES
+cxpt001
+cxpt027
+cxpt029
+ATTRIBUTES
+c000 = FORMONLY.vm_fecha_ini TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Inicial en formato: dd-mm-aaaa';
+c001 = FORMONLY.vm_fecha_fin TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Final en formato: dd-mm-aaaa';
+
+c020 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c021 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c022 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c023 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c    = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+
+c010 = cxpt029.p29_num_ret, NOENTRY, REVERSE, UPSHIFT, OPTIONS = '-nolist';
+c011 = cxpt001.p01_nomprov, NOENTRY, REVERSE, UPSHIFT, OPTIONS = '-nolist';
+c012 = FORMONLY.p27_fecing TYPE DATE, NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy', OPTIONS = '-nolist';
+c013 = cxpt029.p29_num_sri, AUTONEXT, REVERSE, UPSHIFT, OPTIONS = '-nolist';
+d    = cxpt027.p27_estado, NOENTRY, REVERSE, UPSHIFT, OPTIONS = '-nolist';
+END
+KEYS
+F5 = 'Modificar'
+F6 = 'Documento'
+INSTRUCTIONS
+SCREEN RECORD rm_det[15] (p29_num_ret, p01_nomprov, p27_fecing, p29_num_sri,
+				p27_estado)

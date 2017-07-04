@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268167</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268167</guiaRemision>
+<razonSocialComprador>SMELECOM SERVICIOS MECANICOS, ELECTRICOS Y COMERCIALIZACION CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1891742661001</identificacionComprador>
+<totalSinImpuestos>699.94</totalSinImpuestos>
+<totalDescuento>123.45</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>699.94</baseImponible>
+<valor>83.99</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>783.93</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>16382</codigoPrincipal>
+<descripcion>INSERTO E-1666-X JUEGO DE 3 PZS. P/MODELO 535 (44715)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>119.92</precioUnitario>
+<descuento>35.98</descuento>
+<precioTotalSinImpuesto>203.86</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>203.86</baseImponible>
+<valor>24.46</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>14384</codigoPrincipal>
+<descripcion>ACEITE PARA EQUIPOS NU CLEAR CLARO (S/ENVASE) (41585)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>21.01</precioUnitario>
+<descuento>3.15</descuento>
+<precioTotalSinImpuesto>17.86</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="GALON"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>17.86</baseImponible>
+<valor>2.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21663</codigoPrincipal>
+<descripcion>ENVASE PLASTICO DESCARTABLE DE 1 Gln.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2.16</precioUnitario>
+<descuento>0.26</descuento>
+<precioTotalSinImpuesto>1.90</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.90</baseImponible>
+<valor>0.23</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99314</codigoPrincipal>
+<descripcion>AMOLADORA ELECTRICA 6117-30 DE 13AMP./110V./2100W/2.9HP./11000 RPM</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>245.69</precioUnitario>
+<descuento>73.71</descuento>
+<precioTotalSinImpuesto>417.67</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>417.67</baseImponible>
+<valor>50.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100645</codigoPrincipal>
+<descripcion>CARBONES 22-18-2240 P/AMOLADORA MOD.6121-30 / 6146-30</descripcion>
+<cantidad>12.00</cantidad>
+<precioUnitario>5.75</precioUnitario>
+<descuento>10.35</descuento>
+<precioTotalSinImpuesto>58.65</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>58.65</baseImponible>
+<valor>7.04</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">smelecom.alex@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">093590162</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">055343</campoAdicional>
+</infoAdicional>
+</factura>

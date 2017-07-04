@@ -1,0 +1,56 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+        Proveedor: [c000                                       ]
+        Documento: [a0][c020           ]
+                                      Valor Bienes: [c001            ]
+                                   Valor Servicios: [c002            ]
+                                          Impuesto: [c003            ]
+                                                    ------------------
+                                        Valor Neto: [c004            ]
+   [c051] de [c052]
+     Descripción    SRI   Tipo   Valor Base   Porc.      Subtotal
+ [c|c010          |c009  |c005|c006          |c007  |c008            ]
+ [c|c010          |c009  |c005|c006          |c007  |c008            ]
+ [c|c010          |c009  |c005|c006          |c007  |c008            ]
+ [c|c010          |c009  |c005|c006          |c007  |c008            ]
+ [c|c010          |c009  |c005|c006          |c007  |c008            ]
+                                                    ------------------
+                                 Total Retenciones: [c011            ]
+ [c050                                                               ]
+}
+ATTRIBUTES
+a0   = FORMONLY.tit_tipo, NOENTRY, REVERSE, UPSHIFT;
+c020 = FORMONLY.tit_num, NOENTRY, REVERSE, UPSHIFT;
+c000 = FORMONLY.n_proveedor, NOENTRY, REVERSE, UPSHIFT;
+c001 = FORMONLY.val_bienes TYPE DECIMAL (12,2), AUTONEXT, REVERSE,
+	FORMAT = '#,###,###,##&.##';
+c002 = FORMONLY.val_servi TYPE DECIMAL (12,2), AUTONEXT, REVERSE,
+	FORMAT = '#,###,###,##&.##';
+c003 = FORMONLY.val_impto TYPE DECIMAL (12,2), NOENTRY, REVERSE,
+	FORMAT = '#,###,###,##&.##';
+c004 = FORMONLY.val_neto TYPE DECIMAL (12,2), NOENTRY, REVERSE,
+	FORMAT = '#,###,###,##&.##';
+
+c005 = FORMONLY.tipo_ret, NOENTRY;
+c006 = FORMONLY.val_base TYPE DECIMAL (12,2), FORMAT = '###,###,##&.##';
+c007 = FORMONLY.porc TYPE DECIMAL (6,2), NOENTRY, FORMAT = '##&.##';
+c008 = FORMONLY.subtotal TYPE DECIMAL (12,2), NOENTRY,
+	FORMAT = '#,###,###,##&.##';
+c009 = FORMONLY.c_sri, NOENTRY, UPSHIFT;
+c010 = FORMONLY.n_retencion, NOENTRY;
+
+c011 = FORMONLY.tot_ret TYPE DECIMAL (12,2), NOENTRY, REVERSE,
+	FORMAT = '#,###,###,##&.##';
+
+c    = FORMONLY.check TYPE CHAR, INCLUDE = ('S', 'N'), AUTONEXT, DEFAULT = 'N';
+c050 = FORMONLY.tit_codigo_sri, NOENTRY, REVERSE;
+
+c051 = FORMONLY.num_rows, NOENTRY, REVERSE;
+c052 = FORMONLY.max_rows, NOENTRY, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD ra_ret[5] (check, n_retencion, c_sri, tipo_ret, val_base, porc,
+				subtotal)

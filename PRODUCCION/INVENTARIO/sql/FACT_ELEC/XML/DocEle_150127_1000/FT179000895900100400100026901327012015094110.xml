@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000269013</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000269013</guiaRemision>
+<razonSocialComprador>PEREZ NAVARRETE PEDRO PABLO</razonSocialComprador>
+<identificacionComprador>1706394390001</identificacionComprador>
+<totalSinImpuestos>235.58</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>235.58</baseImponible>
+<valor>28.27</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>263.85</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>98867</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL UNA PIEZA JSI06047733 EGO ELONGADO BONE INTEGR. ASTO. DORNIER</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>124.11</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>124.11</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>124.11</baseImponible>
+<valor>14.89</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>95774</codigoPrincipal>
+<descripcion>TINA DE ACERO ESMALTADO 4516733 TINA NUEVA EUROPA BONE 1.50 x 0.70 SIN DESAGUE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>111.47</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>111.47</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>111.47</baseImponible>
+<valor>13.38</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">macon2_perez@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2426124</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">054898</campoAdicional>
+</infoAdicional>
+</factura>

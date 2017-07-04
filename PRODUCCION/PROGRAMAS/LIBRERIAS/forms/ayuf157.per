@@ -1,0 +1,42 @@
+DATABASE aceros
+SCREEN
+{
+
+ POLIZAS FONDO DE CENSATIA
+
+ [c000           |c001      |c0|c002         |c003         |c004         |b]
+[c010           |c011      |c1|c012         |c013         |c014         |c]
+[c010           |c011      |c1|c012         |c013         |c014         |c]
+[c010           |c011      |c1|c012         |c013         |c014         |c]
+[c010           |c011      |c1|c012         |c013         |c014         |c]
+[c010           |c011      |c1|c012         |c013         |c014         |c]
+[c010           |c011      |c1|c012         |c013         |c014         |c]
+[c010           |c011      |c1|c012         |c013         |c014         |c]
+[c010           |c011      |c1|c012         |c013         |c014         |c]
+[c010           |c011      |c1|c012         |c013         |c014         |c]
+[c010           |c011      |c1|c012         |c013         |c014         |c]
+
+}
+TABLES
+rolt081
+ATTRIBUTES
+c000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c0   = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c002 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c003 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c004 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+b    = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+
+c010 = rolt081.n81_num_poliza, NOENTRY, UPSHIFT, REVERSE;
+c011 = rolt081.n81_fec_vcto, NOENTRY, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy';
+c1   = rolt081.n81_moneda, NOENTRY, UPSHIFT, REVERSE;
+c012 = FORMONLY.capital, NOENTRY, UPSHIFT, REVERSE, FORMAT = '--,---,--&.##';
+c013 = rolt081.n81_val_int, NOENTRY, UPSHIFT, REVERSE, FORMAT = '--,---,--&.##';
+c014 = rolt081.n81_val_dscto, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '--,---,--&.##';
+c    = rolt081.n81_estado, NOENTRY, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+SCREEN RECORD rh_poliza [10] (n81_num_poliza, n81_fec_vcto, n81_moneda, capital,
+				n81_val_int, n81_val_dscto, n81_estado)

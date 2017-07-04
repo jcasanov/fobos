@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131863</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>30/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131863</guiaRemision>
+<razonSocialComprador>MKD ACABADOS PARA LA CONSTRUCCION</razonSocialComprador>
+<identificacionComprador>1703013431001</identificacionComprador>
+<totalSinImpuestos>129.21</totalSinImpuestos>
+<totalDescuento>26.47</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>129.21</baseImponible>
+<valor>15.51</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>144.72</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>93019</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA ZIPAQUIRA NOGAL ESTANDAR</descripcion>
+<cantidad>16.00</cantidad>
+<precioUnitario>9.73</precioUnitario>
+<descuento>26.47</descuento>
+<precioTotalSinImpuesto>129.21</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>129.21</baseImponible>
+<valor>15.51</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">z_aguilar61@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2844869</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">058865</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,6 @@
+MSG_FA=`fglgo veri_doc acero_gm 1 1 333 FA`
+echo "valor["$MSG_FA"]"
+
+if [ "$MSG_FA" ]; then
+ echo "III";
+fi

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025174</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>09/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>PROINDUPET CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1792228425001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000175659</numDocModificado>
+<fechaEmisionDocSustento>11/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>268.11</totalSinImpuestos>
+<valorModificacion>300.28</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>268.11</baseImponible>
+<valor>32.17</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 267280 PROINDUPET REC A.JIMENEZ FC</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>13628</codigoInterno>
+<descripcion>LLAVE DE CADENA C-36 CAPACIDAD HASTA 6" (31330)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>297.90</precioUnitario>
+<descuento>29.79</descuento>
+<precioTotalSinImpuesto>268.11</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>268.11</baseImponible>
+<valor>32.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacionelectronica@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">062881865</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">52259</campoAdicional>
+</infoAdicional>
+</notaCredito>

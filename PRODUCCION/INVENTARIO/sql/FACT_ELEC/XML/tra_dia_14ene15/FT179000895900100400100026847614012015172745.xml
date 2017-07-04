@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268476</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>14/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268476</guiaRemision>
+<razonSocialComprador>PERUGACHI GALIANO PABLO XAVIER</razonSocialComprador>
+<identificacionComprador>1721489456</identificacionComprador>
+<totalSinImpuestos>137.53</totalSinImpuestos>
+<totalDescuento>58.96</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>137.53</baseImponible>
+<valor>16.50</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>154.03</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>100646</codigoPrincipal>
+<descripcion>INDUCIDO 16-10-0850 P/AMOLADORA 6121-30 / 6146-30</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>53.96</precioUnitario>
+<descuento>16.19</descuento>
+<precioTotalSinImpuesto>37.77</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>37.77</baseImponible>
+<valor>4.53</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101858</codigoPrincipal>
+<descripcion>CARBONES DE 7.7 x 14 x 16 mm P/MOD.6117-30</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>3.58</precioUnitario>
+<descuento>2.15</descuento>
+<precioTotalSinImpuesto>5.01</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.01</baseImponible>
+<valor>0.60</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101446</codigoPrincipal>
+<descripcion>RULIMAN 02-04-1567 P/TALADRO 1660-1</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>6.45</precioUnitario>
+<descuento>1.94</descuento>
+<precioTotalSinImpuesto>4.51</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.51</baseImponible>
+<valor>0.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96724</codigoPrincipal>
+<descripcion>ENGRANAJE 32-75-2701 P/TALADRO MOD.1660-1</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>14.30</precioUnitario>
+<descuento>4.29</descuento>
+<precioTotalSinImpuesto>10.01</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>10.01</baseImponible>
+<valor>1.20</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96723</codigoPrincipal>
+<descripcion>EJE 38-50-5430 P/TALADRO MOD.1660-1</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>50.10</precioUnitario>
+<descuento>15.03</descuento>
+<precioTotalSinImpuesto>35.07</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>35.07</baseImponible>
+<valor>4.21</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96725</codigoPrincipal>
+<descripcion>ENGRANAJE 36-66-2252 P/TALADRO MOD.1660-1</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>25.95</precioUnitario>
+<descuento>7.79</descuento>
+<precioTotalSinImpuesto>18.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>18.16</baseImponible>
+<valor>2.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150507</codigoPrincipal>
+<descripcion>ESTATOR DE CAMPO 18-30-1040 P/ ROTOMARTILLO 5315-21.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>36.89</precioUnitario>
+<descuento>11.07</descuento>
+<precioTotalSinImpuesto>25.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>25.82</baseImponible>
+<valor>3.10</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100651</codigoPrincipal>
+<descripcion>RODAMIENTO 02-04-0620 P/AMOLADORA 6121-30</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.68</precioUnitario>
+<descuento>0.50</descuento>
+<precioTotalSinImpuesto>1.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.18</baseImponible>
+<valor>0.14</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">pperugachi@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">084153057</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">057457</campoAdicional>
+</infoAdicional>
+</factura>

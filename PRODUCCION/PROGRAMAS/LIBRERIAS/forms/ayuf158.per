@@ -1,0 +1,27 @@
+DATABASE aceros
+
+SCREEN
+{
+ MOTIVOS SALIDA TRABAJADOR
+ ----------------------------------------
+  Código	        Descripción 	  
+ ----------------------------------------
+ [f001] [f002                         ] 
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+}
+
+TABLES
+rolt074
+
+ATTRIBUTES
+f001 = n74_serial;
+f002 = n74_descripcion;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_motiv[7](n74_serial, n74_descripcion)

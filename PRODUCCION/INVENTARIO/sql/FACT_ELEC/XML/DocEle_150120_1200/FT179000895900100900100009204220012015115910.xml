@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092042</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092042</guiaRemision>
+<razonSocialComprador>COMERCIAL CORDERO</razonSocialComprador>
+<identificacionComprador>0101981231001</identificacionComprador>
+<totalSinImpuestos>140.61</totalSinImpuestos>
+<totalDescuento>17.39</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>140.61</baseImponible>
+<valor>16.87</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>157.48</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>97901</codigoPrincipal>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7420 SD1 DE 1/2" X 2-3/4"</descripcion>
+<cantidad>50.00</cantidad>
+<precioUnitario>0.85</precioUnitario>
+<descuento>4.68</descuento>
+<precioTotalSinImpuesto>37.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>37.82</baseImponible>
+<valor>4.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97895</codigoPrincipal>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7433 SD1 DE 5/8" X 5"</descripcion>
+<cantidad>25.00</cantidad>
+<precioUnitario>1.86</precioUnitario>
+<descuento>5.12</descuento>
+<precioTotalSinImpuesto>41.38</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>41.38</baseImponible>
+<valor>4.97</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97894</codigoPrincipal>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7434 SD1 DE 5/8" X 6"</descripcion>
+<cantidad>25.00</cantidad>
+<precioUnitario>2.76</precioUnitario>
+<descuento>7.59</descuento>
+<precioTotalSinImpuesto>61.41</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>61.41</baseImponible>
+<valor>7.37</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">comercial-cordero@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2868909</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">005893</campoAdicional>
+<campoAdicional nombre="Observaciones">ORDEN DE COMPRA 679</campoAdicional>
+</infoAdicional>
+</factura>

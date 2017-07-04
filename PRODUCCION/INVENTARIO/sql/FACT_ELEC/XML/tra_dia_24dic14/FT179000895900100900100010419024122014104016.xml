@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104190</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>24/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104190</guiaRemision>
+<razonSocialComprador>LOZANO PENA BOLIVAR</razonSocialComprador>
+<identificacionComprador>0911847473001</identificacionComprador>
+<totalSinImpuestos>1653.84</totalSinImpuestos>
+<totalDescuento>291.86</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1653.84</baseImponible>
+<valor>198.46</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1852.30</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>20703</codigoPrincipal>
+<descripcion>MOTOR ELEC SUMERG DE 6" (2261138020) 6F-15231 DE 15HP/230/60/1F</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1945.70</precioUnitario>
+<descuento>291.86</descuento>
+<precioTotalSinImpuesto>1653.84</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1653.84</baseImponible>
+<valor>198.46</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">h.ingenioso@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2709131</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">013146</campoAdicional>
+</infoAdicional>
+</factura>

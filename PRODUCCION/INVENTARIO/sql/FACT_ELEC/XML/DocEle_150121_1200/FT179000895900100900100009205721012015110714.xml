@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092057</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092057</guiaRemision>
+<razonSocialComprador>JUNTA DE BENEFICENCIA DE GUAYAQUIL</razonSocialComprador>
+<identificacionComprador>0990967946001</identificacionComprador>
+<totalSinImpuestos>3215.31</totalSinImpuestos>
+<totalDescuento>465.42</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>3215.31</baseImponible>
+<valor>385.84</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>3601.15</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>63076</codigoPrincipal>
+<descripcion>BOMBA CENTRIF STANDARD C-MOTOR DJ-10 10HP 1 ETP. 3 x 2-1/2" 3500RPM 220/440-3-60</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1609.38</precioUnitario>
+<descuento>241.41</descuento>
+<precioTotalSinImpuesto>1367.97</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MARK G"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1367.97</baseImponible>
+<valor>164.16</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>61798</codigoPrincipal>
+<descripcion>TANQUE DE PRESION FIBRA DE VIDRIO WM-35WB/WM0450 ENTREGA DE 35.9 GLS POR CICLO DE 30/50 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1169.50</precioUnitario>
+<descuento>175.43</descuento>
+<precioTotalSinImpuesto>994.07</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="WELL M"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>994.07</baseImponible>
+<valor>119.29</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>71379</codigoPrincipal>
+<descripcion>MANOMETRO ROSCA NPT 1/4" 0-100 PSI DE GLICERINA ESF. 2 1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>38.50</precioUnitario>
+<descuento>1.93</descuento>
+<precioTotalSinImpuesto>36.57</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ASHCRO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>36.57</baseImponible>
+<valor>4.39</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>71721</codigoPrincipal>
+<descripcion>TABLERO ELECTRICO 10HP/220V.3F 230/3F  M/A</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>828.55</precioUnitario>
+<descuento>41.43</descuento>
+<precioTotalSinImpuesto>787.12</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>787.12</baseImponible>
+<valor>94.45</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21138</codigoPrincipal>
+<descripcion>SWITCH DE PRESION 15760-A2 DE 40 A 60 PSI  SQUARE D</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>34.80</precioUnitario>
+<descuento>5.22</descuento>
+<precioTotalSinImpuesto>29.58</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>29.58</baseImponible>
+<valor>3.55</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">mmejias@jbgye.org.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">324060 241</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000759</campoAdicional>
+<campoAdicional nombre="Observaciones">ALEX LANDIVAR</campoAdicional>
+</infoAdicional>
+</factura>

@@ -2,16 +2,15 @@ DATABASE aceros
 SCREEN
 {
   CARGAS FAMILIARES
-  Trabajador: [c000  ]
-              [c001                                                      ]
+  Trabajador: [c000       ]
+              [c001                                    ]
 
-                                                            [c50] de [c51]
- [c010      |c011   |c012                            |c013     |c014      ]
-[a|c002    |c003 ] [c004                            |b|c005   |c006      ]
-[a|c002    |c003 ] [c004                            |b|c005   |c006      ]
-[a|c002    |c003 ] [c004                            |b|c005   |c006      ]
-[a|c002    |c003 ] [c004                            |b|c005   |c006      ]
-[a|c002    |c003 ] [c004                            |b|c005   |c006      ]
+  [c016      |c017                          |c018      ]
+ [a|c002    |c003                          |c004      ]
+ [a|c002    |c003                          |c004      ]
+ [a|c002    |c003                          |c004      ]
+ [a|c002    |c003                          |c004      ]
+ [a|c002    |c003                          |c004      ]
 
 }
 TABLES
@@ -19,33 +18,17 @@ rolt031
 ATTRIBUTES
 c000 = rolt031.n31_cod_trab, NOENTRY, REVERSE, UPSHIFT;
 c001 = FORMONLY.tit_trabajador, NOENTRY, REVERSE, UPSHIFT;
-
-c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
-c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
-c014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
-
+c016 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c017 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c018 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
 a    = rolt031.n31_tipo_carga, AUTONEXT, UPSHIFT,
 	INCLUDE = ('H','E'), OPTIONS = '-nolist',
-	COMMENTS = 'Digite H para Hijo o Hija. E si Conyugue';
+	COMMENTS = 'Ingrese H si Hijo o Hija. E si Conyugue';
 c002 = FORMONLY.tit_carga, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
-c003 = rolt031.n31_cod_trab_e, AUTONEXT, UPSHIFT, OPTIONS = '-nolist',
-	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
-	COMMENTS = 'Digite codigo trabajador si tiene relación carga';
-c004 = rolt031.n31_nombres, AUTONEXT, UPSHIFT, OPTIONS = '-nolist';
-b    = FORMONLY.estado_civ, AUTONEXT, UPSHIFT, INCLUDE = ('C', 'U', NULL),
-	OPTIONS = '-nolist',
-	COMMENTS = 'Digite C Casado  U Unido, cuando el tipo sea E';
-c005 = FORMONLY.tit_estado_civ, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
-c006 = rolt031.n31_fecha_nacim, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+c003 = rolt031.n31_nombres, AUTONEXT, UPSHIFT, OPTIONS = '-nolist';
+c004 = rolt031.n31_fecha_nacim, AUTONEXT, FORMAT = 'dd-mm-yyyy',
 	OPTIONS = '-nolist',
 	COMMENTS = 'Ingrese la fecha en formato dd-mm-aaaa';
-
-c50  = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
-c51  = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
 END
 INSTRUCTIONS
-DELIMITERS '||'
-SCREEN RECORD rm_car[5] (n31_tipo_carga, tit_carga, n31_cod_trab_e, n31_nombres,
-				estado_civ, tit_estado_civ, n31_fecha_nacim)
+SCREEN RECORD rm_car[5] (n31_tipo_carga,tit_carga,n31_nombres,n31_fecha_nacim)

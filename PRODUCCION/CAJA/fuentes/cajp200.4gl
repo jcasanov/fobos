@@ -272,6 +272,7 @@ DEFINE r_j05		RECORD LIKE cajt005.*
 BEGIN WORK
 WHENEVER ERROR CONTINUE
 	CALL borrar_fuentes_no_procesados()
+	CALL evaluar_proformas_vta_perdida()
 WHENEVER ERROR STOP
 LET rm_j04.j04_secuencia   = 1
 LET rm_j04.j04_compania    = vg_codcia
@@ -357,11 +358,12 @@ END IF
 SELECT j10_compania cia, j10_localidad loc, j10_tipo_fuente tipo_f,
 	j10_num_fuente num_f
 	FROM cajt010
-	WHERE j10_compania     = vg_codcia
-	  AND j10_localidad    = vg_codloc
-	  AND j10_estado       = 'A'
+	WHERE j10_compania      = vg_codcia
+	  AND j10_localidad     = vg_codloc
+	  AND j10_estado       IN ('A', 'P')
+	  --AND j10_estado        = 'A'
 	  AND j10_tipo_destino IS NULL
-	  AND DATE(j10_fecing) < TODAY
+	  AND DATE(j10_fecing) <= TODAY
 	INTO TEMP tmp_j10
 IF r_j02.j02_pre_ventas = 'S' THEN
 	CALL borra_preventa()
@@ -386,10 +388,10 @@ DELETE FROM cajt010
 DROP TABLE tmp_j10
 SELECT p24_compania cia, p24_localidad loc, p24_orden_pago ord_pag
 	FROM cxpt024
-	WHERE p24_compania     = vg_codcia
-	  AND p24_localidad    = vg_codloc
-	  AND p24_estado       = 'A'
-	  AND DATE(p24_fecing) < TODAY
+	WHERE p24_compania      = vg_codcia
+	  AND p24_localidad     = vg_codloc
+	  AND p24_estado        = 'A'
+	  AND DATE(p24_fecing) <= TODAY
 	INTO TEMP tmp_p24
 SELECT COUNT(*) INTO cuantos FROM tmp_p24
 IF cuantos = 0 THEN
@@ -424,14 +426,12 @@ FUNCTION borra_preventa()
 DEFINE cuantos		INTEGER
 
 SELECT r23_compania cia, r23_localidad loc, r23_numprev num_p
-	FROM tmp_j10, rept023
-	WHERE tipo_f            = "PR"
-	  AND r23_compania      = cia
-	  AND r23_localidad     = loc
-	  AND r23_numprev       = num_f
+	FROM rept023
+	WHERE r23_compania      = vg_codcia
+	  AND r23_localidad     = vg_codloc
 	  AND r23_estado       <> "F"
 	  AND r23_cod_tran     IS NULL
-	  AND DATE(r23_fecing) < TODAY
+	  AND DATE(r23_fecing)  < TODAY
 	INTO TEMP tmp_r23
 SELECT COUNT(*) INTO cuantos FROM tmp_r23
 IF cuantos = 0 THEN
@@ -495,6 +495,106 @@ DELETE FROM cxct024
 		  	  AND tmp_j10.loc    = cxct024.z24_localidad
 			  AND tmp_j10.tipo_f = "SC"
 		          AND tmp_j10.num_f  = cxct024.z24_numero_sol)
+
+END FUNCTION
+
+
+
+FUNCTION evaluar_proformas_vta_perdida()
+DEFINE cuantos		INTEGER
+DEFINE mensaje		VARCHAR(200)
+
+SELECT r21_compania AS cia,
+	r21_localidad AS loc,
+	r21_numprof AS numprof,
+	r21_dias_prof AS dias_f,
+	r21_fecing AS fecing
+	FROM rept021
+	WHERE r21_compania      = vg_codcia
+	  AND r21_localidad     = vg_codloc
+	  AND r21_cod_tran     IS NULL
+	  AND r21_num_presup   IS NULL
+	  AND r21_num_ot       IS NULL
+	  AND DATE(r21_fecing) BETWEEN TODAY -
+		(SELECT r00_expi_prof * 2
+			FROM rept000
+			WHERE r00_compania = r21_compania) UNITS DAY
+				   AND TODAY -
+		(SELECT r00_expi_prof + 1
+			FROM rept000
+			WHERE r00_compania = r21_compania) UNITS DAY
+	  AND YEAR(r21_fecing) >= 2014
+	INTO TEMP t1
+SELECT COUNT(*) INTO cuantos FROM t1
+IF cuantos = 0 THEN
+	DROP TABLE t1
+	RETURN
+END IF
+SELECT r02_codigo AS bod
+	FROM rept002
+	WHERE r02_compania   = vg_codcia
+	  AND r02_localidad  = vg_codloc
+	  AND r02_estado     = "A"
+	  AND r02_area       = "R"
+	  AND r02_tipo_ident = "P"
+	INTO TEMP tmp_bod
+SELECT t1.*, r22_item AS item
+	FROM t1, rept022
+	WHERE r22_compania  = cia
+	  AND r22_localidad = loc
+	  AND r22_numprof   = numprof
+	  AND r22_bodega    NOT IN (SELECT bod FROM tmp_bod)
+	INTO TEMP tmp_prof
+DROP TABLE t1
+SELECT COUNT(*) INTO cuantos FROM tmp_prof
+IF cuantos = 0 THEN
+	RETURN
+END IF
+SELECT 1 AS cia, (SELECT bod FROM tmp_bod) AS bod, item, "S/N" AS ubic,
+	0.00 AS sto_ant, 0.00 AS sto_act, 0.00 AS ing_d, 0.00 AS egr_d
+	FROM tmp_prof
+	GROUP BY 1, 2, 3, 4, 5, 6, 7, 8
+	INTO TEMP t1
+SELECT * FROM t1
+	WHERE NOT EXISTS
+		(SELECT 1 FROM rept011
+			WHERE r11_compania = cia
+			  AND r11_bodega   = bod
+			  AND r11_item     = item)
+	INTO TEMP tmp_ite
+DROP TABLE t1
+SELECT COUNT(*) INTO cuantos FROM tmp_ite
+IF cuantos > 0 THEN
+	LET mensaje = "Se van a insertar ", cuantos USING "<<<<<<#",
+			" ítems con stock CERO en el maestro de existencias",
+			" para la bodega de VENTAS PERDIDAS."
+	INSERT INTO rept011
+		(r11_compania, r11_bodega, r11_item, r11_ubicacion,
+		 r11_stock_ant, r11_stock_act, r11_ing_dia, r11_egr_dia)
+		SELECT * FROM tmp_ite
+	CALL fl_mostrar_mensaje(mensaje CLIPPED, "info")
+END IF
+DROP TABLE tmp_ite
+UPDATE rept022
+	SET r22_bodega = (SELECT bod FROM tmp_bod)
+	WHERE r22_compania   = vg_codcia
+	  AND r22_localidad  = vg_codloc
+	  AND r22_numprof   IN
+		(SELECT UNIQUE numprof
+			FROM tmp_prof
+			WHERE cia = r22_compania
+			  AND loc = r22_localidad)
+DROP TABLE tmp_bod
+SELECT COUNT(UNIQUE numprof) INTO cuantos FROM tmp_prof
+IF cuantos IS NULL THEN
+	LET cuantos = 0
+END IF
+DROP TABLE tmp_prof
+IF cuantos > 0 THEN
+	LET mensaje = "Se actualizaron ", cuantos USING "<<<<<<#",
+			" proformas como VENTAS PERDIDAS."
+	CALL fl_mostrar_mensaje(mensaje CLIPPED, "info")
+END IF
 
 END FUNCTION
 

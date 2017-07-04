@@ -219,8 +219,10 @@ DEFINE sep_pun		VARCHAR(4)
 DEFINE label_letras	VARCHAR(130)
 DEFINE num_lin		INTEGER
 DEFINE escape		SMALLINT
-DEFINE act_comp, db_c	SMALLINT
-DEFINE desact_comp, db	SMALLINT
+DEFINE act_comp		SMALLINT
+DEFINE desact_comp	SMALLINT
+DEFINE act_neg		SMALLINT
+DEFINE des_neg		SMALLINT
 
 OUTPUT
 	TOP MARGIN	1
@@ -237,6 +239,8 @@ PAGE HEADER
 	LET escape	= 27		# Iniciar sec. impresi¢n
 	LET act_comp	= 15		# Activar Comprimido.
 	LET desact_comp	= 18		# Cancelar Comprimido.
+	LET act_neg	= 71		# Activar negrita.
+	LET des_neg	= 72		# Desactivar negrita.
 	LET subtotal  = rm_dev.t23_tot_bruto - rm_dev.t23_tot_dscto
 	LET impuesto  = rm_dev.t23_val_impto
 	LET valor_pag = rm_dev.t23_tot_neto
@@ -282,7 +286,7 @@ PAGE HEADER
 				LET valor_rete = valor_rete + r_j11.j11_valor
 		END CASE
 	END FOREACH
-	LET factura  = rm_dev.t23_num_factura
+	LET factura  = rm_dev.t23_num_factura USING "&&&&&&&&&"
 	CALL fl_lee_presupuesto_taller(vg_codcia, vg_codloc, rm_dev.t23_numpre)
 		RETURNING r_t20.*
 	CALL fl_lee_modulo(vg_modulo) RETURNING r_g50.*
@@ -317,7 +321,11 @@ PAGE HEADER
 	PRINT COLUMN 01,  titulo CLIPPED,
 	      COLUMN 126, UPSHIFT(vg_proceso)
 	SKIP 2 LINES
-	PRINT COLUMN 01,  "FACTURA ", tipo_docum2, sep_pun, factura, " TALLER",
+	PRINT COLUMN 01,  ASCII escape, ASCII act_neg,
+			"FACTURA ", tipo_docum2, sep_pun,
+			' - ', rm_loc.g02_serie_cia USING "&&&", "-",
+			rm_loc.g02_serie_loc USING "&&&", "-",
+			factura, " TALLER", ASCII escape, ASCII des_neg,
 	      COLUMN 67,  "FECHA ", tipo_docum, " ", sep_pun,
 			DATE(rm_t28.t28_fec_anula) USING "dd-mm-yyyy"
 	PRINT COLUMN 01,  "CLIENTE (", rm_dev.t23_cod_cliente

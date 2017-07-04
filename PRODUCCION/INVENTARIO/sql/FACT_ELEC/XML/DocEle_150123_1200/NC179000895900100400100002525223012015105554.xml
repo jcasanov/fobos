@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025252</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>INYCOFYI INGENIERIA Y CONSTRUCCIONES S.A.</razonSocialComprador>
+<identificacionComprador>1792270537001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000173584</numDocModificado>
+<fechaEmisionDocSustento>04/11/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>12554.84</totalSinImpuestos>
+<valorModificacion>14061.42</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>12554.84</baseImponible>
+<valor>1506.58</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 265326 INYCOFYI PARA VOLVER A FACT</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>320</codigoInterno>
+<descripcion>HIERRO CORRUGADO  4200 DE 20mm. x 12m</descripcion>
+<cantidad>120.00</cantidad>
+<precioUnitario>30.20</precioUnitario>
+<descuento>36.24</descuento>
+<precioTotalSinImpuesto>3587.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDEC"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3587.76</baseImponible>
+<valor>430.53</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>310</codigoInterno>
+<descripcion>HIERRO CORRUGADO  4200 DE 16mm. x 12m</descripcion>
+<cantidad>178.00</cantidad>
+<precioUnitario>19.32</precioUnitario>
+<descuento>34.39</descuento>
+<precioTotalSinImpuesto>3404.57</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDEC"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3404.57</baseImponible>
+<valor>408.55</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>298</codigoInterno>
+<descripcion>HIERRO CORRUGADO  4200 DE 12mm. x 12m</descripcion>
+<cantidad>270.00</cantidad>
+<precioUnitario>10.87</precioUnitario>
+<descuento>29.35</descuento>
+<precioTotalSinImpuesto>2905.55</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDEC"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2905.55</baseImponible>
+<valor>348.67</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>292</codigoInterno>
+<descripcion>HIERRO CORRUGADO  4200 DE 10mm. x 12m</descripcion>
+<cantidad>355.00</cantidad>
+<precioUnitario>7.56</precioUnitario>
+<descuento>26.84</descuento>
+<precioTotalSinImpuesto>2656.96</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDEC"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2656.96</baseImponible>
+<valor>318.84</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">ctrujillo@fyi.com.ec</campoAdicional>
+<campoAdicional nombre="Email">dayala@fyi.com.ec;contabilidad@fyi.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">6008444</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">52719</campoAdicional>
+</infoAdicional>
+</notaCredito>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial></razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>             </ruc>
+<estab>   </estab>
+<ptoEmi>   </ptoEmi>
+<secuencial>         </secuencial>
+<dirMatriz></dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>          </fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<tipoIdentificacionComprador></tipoIdentificacionComprador>
+<razonSocialComprador></razonSocialComprador>
+<identificacionComprador></identificacionComprador>
+<contribuyenteEspecial></contribuyenteEspecial>
+<obligadoContabilidad></obligadoContabilidad>
+<codDocModificado></codDocModificado>
+<numDocModificado></numDocModificado>
+<fechaEmisionDocSustento></fechaEmisionDocSustento>
+<totalSinImpuestos>             </totalSinImpuestos>
+<valorModificacion>             </valorModificacion>
+<moneda></moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo></codigo>
+<codigoPorcentaje></codigoPorcentaje>
+<baseImponible>             </baseImponible>
+<valor>             </valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo></motivo>
+</infoNotaCredito>
+<detalles>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacionelectronica@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil"></campoAdicional>
+<campoAdicional nombre="CodInternoSAP"></campoAdicional>
+</infoAdicional>
+</notaCredito>

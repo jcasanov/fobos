@@ -1,0 +1,21 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+ Período: [c000] - [c0]        [c001] - [c1]
+
+}
+ATTRIBUTES
+c000 = FORMONLY.anio_ini TYPE SMALLINT NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, INCLUDE = (2000 TO 2030),
+	COMMENTS = 'Digite el año inicial en formato: aaaa.';
+c0   = FORMONLY.mes_ini TYPE SMALLINT NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, INCLUDE = (1 TO 12), FORMAT = '&&',
+	COMMENTS = 'Digite el mes inicial en formato: mm.';
+c001 = FORMONLY.anio_fin TYPE SMALLINT NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, INCLUDE = (2000 TO 2030),
+	COMMENTS = 'Digite el año final en formato: aaaa.';
+c1   = FORMONLY.mes_fin TYPE SMALLINT NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, INCLUDE = (1 TO 12), FORMAT = '&&',
+	COMMENTS = 'Digite el mes final en formato: mm.';
+END

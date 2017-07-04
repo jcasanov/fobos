@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092129</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>26/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092129</guiaRemision>
+<razonSocialComprador>INDUSTRIAS DE ENLATADOS ALIMENTICIOS CIA. LTDA. IDEAL</razonSocialComprador>
+<identificacionComprador>1390013643001</identificacionComprador>
+<totalSinImpuestos>8979.13</totalSinImpuestos>
+<totalDescuento>1351.99</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>8979.13</baseImponible>
+<valor>1077.50</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>10056.63</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>100406</codigoPrincipal>
+<descripcion>BOMBA SUMERG AGUAS NEGRAS SL1.80.100.75.4.60F 10HP 230/3F-60 SOLID. 80mm (96973062)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>8005.60</precioUnitario>
+<descuento>1200.84</descuento>
+<precioTotalSinImpuesto>6804.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6804.76</baseImponible>
+<valor>816.57</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100409</codigoPrincipal>
+<descripcion>BASE DE BOMBAS AUTO ACOPLE DN100 (96090994)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>930.12</precioUnitario>
+<descuento>139.52</descuento>
+<precioTotalSinImpuesto>790.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>790.60</baseImponible>
+<valor>94.87</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103102</codigoPrincipal>
+<descripcion>CONTROL DE NIVEL RFSN-10 115 13 AMP (P/AGUAS NEGRAS)  (599119)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>77.50</precioUnitario>
+<descuento>11.63</descuento>
+<precioTotalSinImpuesto>65.87</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>65.87</baseImponible>
+<valor>7.90</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>71453</codigoPrincipal>
+<descripcion>TABLERO ELECTRICO P/B SUMEG DE 10HP/220V.1F  SUPERV. VOLT. VOLT., AMP. S. DE NIVEL M/A</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1317.90</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1317.90</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1317.90</baseImponible>
+<valor>158.15</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">comprobanteselectronicos@ideal-manta.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">052310377</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016743</campoAdicional>
+<campoAdicional nombre="Observaciones">ING. MARCOS WALKER</campoAdicional>
+</infoAdicional>
+</factura>

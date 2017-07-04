@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000114060</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000114060</guiaRemision>
+<razonSocialComprador>ETERNIT ECUATORIANA S.A.</razonSocialComprador>
+<identificacionComprador>0990000964001</identificacionComprador>
+<totalSinImpuestos>233.75</totalSinImpuestos>
+<totalDescuento>25.98</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>233.75</baseImponible>
+<valor>28.05</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>261.80</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>208</codigoPrincipal>
+<descripcion>CORREA "G" DE 100 x 50 x 15 x 3mm. x 6 Mts.</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>39.35</precioUnitario>
+<descuento>11.81</descuento>
+<precioTotalSinImpuesto>106.24</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>106.24</baseImponible>
+<valor>12.75</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101894</codigoPrincipal>
+<descripcion>CORREA "G" DE 150 x 50 x 20 x 4 mm. x 6 m.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>70.84</precioUnitario>
+<descuento>14.17</descuento>
+<precioTotalSinImpuesto>127.51</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>127.51</baseImponible>
+<valor>15.30</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">acastillo@elementia.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2690994</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">028738</campoAdicional>
+<campoAdicional nombre="Observaciones">ORDEN DE COMPRA: 5600575731.</campoAdicional>
+</infoAdicional>
+</factura>

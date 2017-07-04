@@ -1,0 +1,3 @@
+ej_query $1 $2 obt_alter_idxdbs.sql
+ej_query $1 $2 rename_index.sql
+ej_query $1 $2 alter_idxdbs.sql

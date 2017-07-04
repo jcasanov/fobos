@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176428</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>30/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176428</guiaRemision>
+<razonSocialComprador>EDIFICIO EL KALIFA</razonSocialComprador>
+<identificacionComprador>1791983548001</identificacionComprador>
+<totalSinImpuestos>1632.45</totalSinImpuestos>
+<totalDescuento>282.29</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1632.45</baseImponible>
+<valor>195.89</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1828.34</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>95888</codigoPrincipal>
+<descripcion>BOMBA SUMERG AGUAS LLUVIAS SE-200  DE 2 HP/230/60/3F  (520251)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1857.74</precioUnitario>
+<descuento>278.66</descuento>
+<precioTotalSinImpuesto>1579.08</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1579.08</baseImponible>
+<valor>189.49</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5836</codigoPrincipal>
+<descripcion>TUBO PVC ROSCABLE x 6 MTS. DE 2" (200 PSI)</descripcion>
+<cantidad>0.50</cantidad>
+<precioUnitario>41.44</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>20.72</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>20.72</baseImponible>
+<valor>2.49</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3256</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 2" x 3"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2.20</precioUnitario>
+<descuento>0.22</descuento>
+<precioTotalSinImpuesto>1.98</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.98</baseImponible>
+<valor>0.24</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3264</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 2" x 6"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3.77</precioUnitario>
+<descuento>0.38</descuento>
+<precioTotalSinImpuesto>3.39</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.39</baseImponible>
+<valor>0.41</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6322</codigoPrincipal>
+<descripcion>UNIVERSAL CONICA GALV. CLASE 150 DE 2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>20.48</precioUnitario>
+<descuento>2.05</descuento>
+<precioTotalSinImpuesto>18.43</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>18.43</baseImponible>
+<valor>2.21</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>1680</codigoPrincipal>
+<descripcion>BUSHING GALV. CLASE 150 DE 3" x 2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>9.83</precioUnitario>
+<descuento>0.98</descuento>
+<precioTotalSinImpuesto>8.85</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.85</baseImponible>
+<valor>1.06</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">juandiegoherreramolina@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3270156</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064059</campoAdicional>
+</infoAdicional>
+</factura>

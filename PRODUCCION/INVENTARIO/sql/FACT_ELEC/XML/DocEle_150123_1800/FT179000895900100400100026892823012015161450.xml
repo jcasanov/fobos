@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268928</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268928</guiaRemision>
+<razonSocialComprador>DANIELCOM EQUIPMENT SUPPLY S.A.</razonSocialComprador>
+<identificacionComprador>1791288777001</identificacionComprador>
+<totalSinImpuestos>1315.46</totalSinImpuestos>
+<totalDescuento>232.15</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1315.46</baseImponible>
+<valor>157.86</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1473.32</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>92908</codigoPrincipal>
+<descripcion>SACABOCADOS MANUAL R-739BB DE 1/2" A 2" CON RATCHET (31797)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>488.42</precioUnitario>
+<descuento>146.53</descuento>
+<precioTotalSinImpuesto>830.31</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>830.31</baseImponible>
+<valor>99.64</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99517</codigoPrincipal>
+<descripcion>PRENSA N.460-6 DE CADENA CON TRIPODE 1/8" A 6" (36273)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>570.77</precioUnitario>
+<descuento>85.62</descuento>
+<precioTotalSinImpuesto>485.15</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>485.15</baseImponible>
+<valor>58.22</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">fact_electronica@danielcom.com</campoAdicional>
+<campoAdicional nombre="Email">marroyo@danielcom.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2258425</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">007874</campoAdicional>
+<campoAdicional nombre="Observaciones">ORDEN DE COMPRA N.- 7260</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091768</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>31/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091768</guiaRemision>
+<razonSocialComprador>PAZMINO MAZACON ELIZABETH</razonSocialComprador>
+<identificacionComprador>1204618308</identificacionComprador>
+<totalSinImpuestos>1180.41</totalSinImpuestos>
+<totalDescuento>505.90</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1180.41</baseImponible>
+<valor>141.65</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1322.06</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>150477</codigoPrincipal>
+<descripcion>CINCEL PARA CEMENTO 48-62-6115 SDS PLUS 3/4" x 10" PLANO.</descripcion>
+<cantidad>12.00</cantidad>
+<precioUnitario>13.81</precioUnitario>
+<descuento>49.72</descuento>
+<precioTotalSinImpuesto>116.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>116.00</baseImponible>
+<valor>13.92</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150476</codigoPrincipal>
+<descripcion>CINCEL PARA CEMENTO 48-62-6110 SDS PLUS 10" PUNTERO</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>14.00</precioUnitario>
+<descuento>16.80</descuento>
+<precioTotalSinImpuesto>39.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>39.20</baseImponible>
+<valor>4.70</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96532</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 4" 25FV1P4 2W 230 DE 1HP 25 GPM (95402520) PLASTIC 6 ETAPAS</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>514.48</precioUnitario>
+<descuento>308.69</descuento>
+<precioTotalSinImpuesto>720.27</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>720.27</baseImponible>
+<valor>86.43</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96533</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 4" 25FA1P4 2W 230 DE 1HP 25 GPM (93782520) PLASTIC</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>435.63</precioUnitario>
+<descuento>130.69</descuento>
+<precioTotalSinImpuesto>304.94</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>304.94</baseImponible>
+<valor>36.59</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">electron78@hotmail.es</campoAdicional>
+<campoAdicional nombre="telefono-movil">052973679</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">013613</campoAdicional>
+</infoAdicional>
+</factura>

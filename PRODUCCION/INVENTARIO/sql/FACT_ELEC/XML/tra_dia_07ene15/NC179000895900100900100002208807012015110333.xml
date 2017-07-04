@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000022088</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>FERRICOMP S.A.</razonSocialComprador>
+<identificacionComprador>0992538678001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000103480</numDocModificado>
+<fechaEmisionDocSustento>24/11/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>2208.06</totalSinImpuestos>
+<valorModificacion>2473.03</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>2208.06</baseImponible>
+<valor>264.97</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>REFACTURACION: CAMBIO DE FECHA</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>68746</codigoInterno>
+<descripcion>LAVABO DE PORCELANA DE PARED PREPONCHADO CS0057101301CE SHELBY BLANCO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>8.95</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>8.95</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.95</baseImponible>
+<valor>1.07</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>95726</codigoInterno>
+<descripcion>LAVABO DE PORCELANA CON PEDESTAL PREPONCHADO JS5710733 SHELBY C/P BONE</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>21.84</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>87.36</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>87.36</baseImponible>
+<valor>10.48</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>95726</codigoInterno>
+<descripcion>LAVABO DE PORCELANA CON PEDESTAL PREPONCHADO JS5710733 SHELBY C/P BONE</descripcion>
+<cantidad>35.00</cantidad>
+<precioUnitario>21.84</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>764.40</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>764.40</baseImponible>
+<valor>91.73</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>70747</codigoInterno>
+<descripcion>DESAGUE DE LAVABO SC005903000 1BO 1-1/4" PP DESAGUE CON REJILLA Y SIFON</descripcion>
+<cantidad>87.00</cantidad>
+<precioUnitario>4.37</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>380.19</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>380.19</baseImponible>
+<valor>45.62</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>97566</codigoInterno>
+<descripcion>TUBO ABASTO- LLAVE ANGULAR LAVABO 1826306 MANGUERA FLEXIBLE DE 16" PAR</descripcion>
+<cantidad>44.00</cantidad>
+<precioUnitario>11.64</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>512.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>512.16</baseImponible>
+<valor>61.46</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>91471</codigoInterno>
+<descripcion>LLAVE DE PARED PICO MOVIL 5660306 SHELBY C/SIFON</descripcion>
+<cantidad>19.00</cantidad>
+<precioUnitario>16.50</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>313.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>313.50</baseImponible>
+<valor>37.62</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>91471</codigoInterno>
+<descripcion>LLAVE DE PARED PICO MOVIL 5660306 SHELBY C/SIFON</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>16.50</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>99.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>99.00</baseImponible>
+<valor>11.88</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>71357</codigoInterno>
+<descripcion>DESAGUE DE LAVABO 2157000BL DE 1-1/2" C/ REJILLA EN POLIPROPILENO</descripcion>
+<cantidad>25.00</cantidad>
+<precioUnitario>1.70</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>42.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>42.50</baseImponible>
+<valor>5.10</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacionelectronica@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2282682</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">13656</campoAdicional>
+</infoAdicional>
+</notaCredito>

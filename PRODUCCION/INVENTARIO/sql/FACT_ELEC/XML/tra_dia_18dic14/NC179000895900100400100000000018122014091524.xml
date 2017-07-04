@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000018722</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>MIRANDA ALBAN JOSE EDUARDO</razonSocialComprador>
+<identificacionComprador>1801509371001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000174912</numDocModificado>
+<fechaEmisionDocSustento>27/11/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>1638.29</totalSinImpuestos>
+<valorModificacion>1834.88</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>1638.29</baseImponible>
+<valor>196.59</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 266571 J.MIRANDA REC MP WL Y NUEV F.</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>102539</codigoInterno>
+<descripcion>AMOLADORA ELECTRICA 6086-30 7" / 9" 6000 RPM</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>165.27</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>495.81</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>495.81</baseImponible>
+<valor>59.50</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>96167</codigoInterno>
+<descripcion>TALADRO ELECTRICO MANUAL 0200-20 DE 3/8" 120V. 7A. DE 0-1200 RPM.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>259.35</precioUnitario>
+<descuento>77.81</descuento>
+<precioTotalSinImpuesto>440.89</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>440.89</baseImponible>
+<valor>52.91</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>102538</codigoInterno>
+<descripcion>TALADRO ELECTRICO MANUAL 0240-20 DE 3/8" 2800 RPM</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>136.37</precioUnitario>
+<descuento>40.91</descuento>
+<precioTotalSinImpuesto>231.83</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>231.83</baseImponible>
+<valor>27.82</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>102026</codigoInterno>
+<descripcion>NAVAJA 48-22-1901 PLEGABLE FASTBACK</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>20.11</precioUnitario>
+<descuento>2.01</descuento>
+<precioTotalSinImpuesto>18.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>18.10</baseImponible>
+<valor>2.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>96000</codigoInterno>
+<descripcion>PULIDORA 5460-6 DE 11 AMPS. 120V. P/7" Y 9"  1750 RPM.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>373.70</precioUnitario>
+<descuento>56.06</descuento>
+<precioTotalSinImpuesto>317.64</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>317.64</baseImponible>
+<valor>38.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>102415</codigoInterno>
+<descripcion>BROCA PARA CEMENTO 48-89-2317 DE COBALTO DE 5/16" THUNDERBOLT</descripcion>
+<cantidad>9.00</cantidad>
+<precioUnitario>9.49</precioUnitario>
+<descuento>8.54</descuento>
+<precioTotalSinImpuesto>76.87</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>76.87</baseImponible>
+<valor>9.22</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>99748</codigoInterno>
+<descripcion>BROCA PARA METAL Y MADERA 48-89-2309 DE COBALTO DE 3/16"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>4.15</precioUnitario>
+<descuento>0.83</descuento>
+<precioTotalSinImpuesto>7.47</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7.47</baseImponible>
+<valor>0.90</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>99747</codigoInterno>
+<descripcion>BROCA PARA METAL Y MADERA 48-89-2305 DE COBALTO DE 1/8"</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>5.52</precioUnitario>
+<descuento>5.52</descuento>
+<precioTotalSinImpuesto>49.68</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>49.68</baseImponible>
+<valor>5.96</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">032855173</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">40588</campoAdicional>
+</infoAdicional>
+</notaCredito>

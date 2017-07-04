@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092162</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092162</guiaRemision>
+<razonSocialComprador>PROCOREX S.A.</razonSocialComprador>
+<identificacionComprador>0992726512001</identificacionComprador>
+<totalSinImpuestos>318.76</totalSinImpuestos>
+<totalDescuento>35.42</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>318.76</baseImponible>
+<valor>38.25</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>357.01</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>15674</codigoPrincipal>
+<descripcion>DADOS PARA TERRAJA MANUAL P/ 12-R DE 2" NPT (37850)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>67.23</precioUnitario>
+<descuento>6.72</descuento>
+<precioTotalSinImpuesto>60.51</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>60.51</baseImponible>
+<valor>7.26</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>92771</codigoPrincipal>
+<descripcion>CIZALLA CORTAPERNOS S-24 P/ 11mm. (14223)</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>95.65</precioUnitario>
+<descuento>28.70</descuento>
+<precioTotalSinImpuesto>258.25</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>258.25</baseImponible>
+<valor>30.99</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">procorex@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">266450</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">014923</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268770</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268770</guiaRemision>
+<razonSocialComprador>SOCIEDAD AGRICOLA COMERCIAL FICOA CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1791833538001</identificacionComprador>
+<totalSinImpuestos>34.80</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>34.80</baseImponible>
+<valor>4.18</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>38.98</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>21136</codigoPrincipal>
+<descripcion>SWITCH DE PRESION 15760-A1 DE 30 A 50 PSI  SQUARE D</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>34.80</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>34.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>34.80</baseImponible>
+<valor>4.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">ficoacialtda@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2485970</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">032303</campoAdicional>
+<campoAdicional nombre="Observaciones">CHEQUE N.-2346 PRODUBANCO</campoAdicional>
+</infoAdicional>
+</factura>

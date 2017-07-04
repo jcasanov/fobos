@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comprobanteRetencion id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000026049</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoCompRetencion>
+<fechaEmision>11/01/2013</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionSujetoRetenido>04</tipoIdentificacionSujetoRetenido>
+<razonSocialSujetoRetenido>INMOBILIARIA LOS PINOS</razonSocialSujetoRetenido>
+<identificacionSujetoRetenido>0990002487001</identificacionSujetoRetenido>
+<periodoFiscal>12/2014</periodoFiscal>
+</infoCompRetencion>
+<impuestos>
+<impuesto>
+<codigo>1</codigo>
+<codigoRetencion>312</codigoRetencion>
+<baseImponible>92.87</baseImponible>
+<porcentajeRetener>1.00</porcentajeRetener>
+<valorRetenido>0.93</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>009001000087063</numDocSustento>
+<fechaEmisionDocSustento>11/01/2013</fechaEmisionDocSustento>
+</impuesto>
+<impuesto>
+<codigo>1</codigo>
+<codigoRetencion>307</codigoRetencion>
+<baseImponible>80.00</baseImponible>
+<porcentajeRetener>2.00</porcentajeRetener>
+<valorRetenido>1.60</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>009001000087063</numDocSustento>
+<fechaEmisionDocSustento>11/01/2013</fechaEmisionDocSustento>
+</impuesto>
+</impuestos>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+<campoAdicional nombre="telefono-movil">5012073</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">003212</campoAdicional>
+</infoAdicional>
+</comprobanteRetencion>

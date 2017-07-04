@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131587</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>GEOVANNY CALLE LOTE 1 VIA A MARIANAS</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131587</guiaRemision>
+<razonSocialComprador>PEREZ NAVARRETE PEDRO PABLO</razonSocialComprador>
+<identificacionComprador>1706394390001</identificacionComprador>
+<totalSinImpuestos>1896.23</totalSinImpuestos>
+<totalDescuento>276.77</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1619.46</baseImponible>
+<valor>194.34</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1813.80</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>94335</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA OLMO ESTANDAR</descripcion>
+<cantidad>36.00</cantidad>
+<precioUnitario>7.93</precioUnitario>
+<descuento>42.82</descuento>
+<precioTotalSinImpuesto>242.66</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="M2" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>242.66</baseImponible>
+<valor>29.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99361</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA MACHALILLA BEIGE ESTANDAR</descripcion>
+<cantidad>13.50</cantidad>
+<precioUnitario>7.95</precioUnitario>
+<descuento>16.10</descuento>
+<precioTotalSinImpuesto>91.23</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="M2" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>91.23</baseImponible>
+<valor>10.95</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99363</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA MACHALILLA BLANCO ESTANDAR</descripcion>
+<cantidad>60.00</cantidad>
+<precioUnitario>7.95</precioUnitario>
+<descuento>71.55</descuento>
+<precioTotalSinImpuesto>405.45</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="M2" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>405.45</baseImponible>
+<valor>48.65</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100678</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA TOMEBAMBA PRIMERA</descripcion>
+<cantidad>40.00</cantidad>
+<precioUnitario>9.22</precioUnitario>
+<descuento>55.32</descuento>
+<precioTotalSinImpuesto>313.48</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="M2" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>313.48</baseImponible>
+<valor>37.62</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97555</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA DALI ROSA  PRIMERA</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>10.30</precioUnitario>
+<descuento>30.90</descuento>
+<precioTotalSinImpuesto>175.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="M2" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>175.10</baseImponible>
+<valor>21.01</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>103009</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 QUANTUM NIEVE PRIMERA</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>9.89</precioUnitario>
+<descuento>29.67</descuento>
+<precioTotalSinImpuesto>168.13</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="M2" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>168.13</baseImponible>
+<valor>20.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100268</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA NAPOLES WHITE SEGUNDA ( CAJA DE 1.92 m2 )</descripcion>
+<cantidad>21.12</cantidad>
+<precioUnitario>9.60</precioUnitario>
+<descuento>30.41</descuento>
+<precioTotalSinImpuesto>172.34</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIALTO" valor="RIALTO"/>
+<detAdicional nombre="M2" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>172.34</baseImponible>
+<valor>20.68</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>24129</codigoPrincipal>
+<descripcion>URINARIO DE PARED 7756130 COLBY PLUS BLANCO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>51.07</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>51.07</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="EDESA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>51.07</baseImponible>
+<valor>6.13</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

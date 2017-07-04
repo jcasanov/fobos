@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268639</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268639</guiaRemision>
+<razonSocialComprador>GAVILANES ARIAS LIVIA DEL ROCIO</razonSocialComprador>
+<identificacionComprador>1709460248001</identificacionComprador>
+<totalSinImpuestos>7.32</totalSinImpuestos>
+<totalDescuento>1.50</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>7.32</baseImponible>
+<valor>0.88</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>8.20</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>103144</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA RIVIERA BEIGE PRIMERA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>8.82</precioUnitario>
+<descuento>1.50</descuento>
+<precioTotalSinImpuesto>7.32</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7.32</baseImponible>
+<valor>0.88</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">francks@hotmail.es</campoAdicional>
+<campoAdicional nombre="telefono-movil">2480368</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">055177</campoAdicional>
+</infoAdicional>
+</factura>

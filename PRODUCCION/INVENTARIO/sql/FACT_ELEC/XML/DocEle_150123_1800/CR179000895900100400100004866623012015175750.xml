@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comprobanteRetencion id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048666</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoCompRetencion>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionSujetoRetenido>04</tipoIdentificacionSujetoRetenido>
+<razonSocialSujetoRetenido>VILLACIS MERINO DIEGO RODRIGO</razonSocialSujetoRetenido>
+<identificacionSujetoRetenido>1709211286001</identificacionSujetoRetenido>
+<periodoFiscal>01/2015</periodoFiscal>
+</infoCompRetencion>
+<impuestos>
+<impuesto>
+<codigo>1</codigo>
+<codigoRetencion>312</codigoRetencion>
+<baseImponible>432.00</baseImponible>
+<porcentajeRetener>1.00</porcentajeRetener>
+<valorRetenido>4.32</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>002001000000815</numDocSustento>
+<fechaEmisionDocSustento>22/01/2015</fechaEmisionDocSustento>
+</impuesto>
+<impuesto>
+<codigo>2</codigo>
+<codigoRetencion>1</codigoRetencion>
+<baseImponible>51.84</baseImponible>
+<porcentajeRetener>30.00</porcentajeRetener>
+<valorRetenido>15.55</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>002001000000815</numDocSustento>
+<fechaEmisionDocSustento>22/01/2015</fechaEmisionDocSustento>
+</impuesto>
+</impuestos>
+<infoAdicional>
+<campoAdicional nombre="Email">diego.villacis@alfapck.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">6013426</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">002485</campoAdicional>
+</infoAdicional>
+</comprobanteRetencion>

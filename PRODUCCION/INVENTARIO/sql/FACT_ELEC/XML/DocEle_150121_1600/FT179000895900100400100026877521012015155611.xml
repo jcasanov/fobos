@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268775</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268775</guiaRemision>
+<razonSocialComprador>LIZARRALDE PUYO ROBERTO</razonSocialComprador>
+<identificacionComprador>1707271142001</identificacionComprador>
+<totalSinImpuestos>48.73</totalSinImpuestos>
+<totalDescuento>5.42</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>48.73</baseImponible>
+<valor>5.85</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>54.58</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5259</codigoPrincipal>
+<descripcion>TUBERIA PVC DRENAJE DE 110 mm.</descripcion>
+<cantidad>15.00</cantidad>
+<precioUnitario>3.61</precioUnitario>
+<descuento>5.42</descuento>
+<precioTotalSinImpuesto>48.73</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="M"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>48.73</baseImponible>
+<valor>5.85</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">robertolizarralde88@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2453205</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000844</campoAdicional>
+<campoAdicional nombre="Observaciones">CH:6917 BAN.PACIFICO</campoAdicional>
+</infoAdicional>
+</factura>

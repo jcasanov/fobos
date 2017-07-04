@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176294</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176294</guiaRemision>
+<razonSocialComprador>PALACIOS DELGADO JUAN LEONARDO</razonSocialComprador>
+<identificacionComprador>0102573334001</identificacionComprador>
+<totalSinImpuestos>774.59</totalSinImpuestos>
+<totalDescuento>135.94</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>774.59</baseImponible>
+<valor>92.95</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>867.54</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>97891</codigoPrincipal>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7446 SD1 DE 3/4" X 7"</descripcion>
+<cantidad>64.00</cantidad>
+<precioUnitario>3.40</precioUnitario>
+<descuento>32.64</descuento>
+<precioTotalSinImpuesto>184.96</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>184.96</baseImponible>
+<valor>22.20</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97894</codigoPrincipal>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7434 SD1 DE 5/8" X 6"</descripcion>
+<cantidad>61.00</cantidad>
+<precioUnitario>2.76</precioUnitario>
+<descuento>25.25</descuento>
+<precioTotalSinImpuesto>143.11</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>143.11</baseImponible>
+<valor>17.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98301</codigoPrincipal>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7414 SD1 DE 3/8" X 3-1/2"</descripcion>
+<cantidad>30.00</cantidad>
+<precioUnitario>0.65</precioUnitario>
+<descuento>2.93</descuento>
+<precioTotalSinImpuesto>16.57</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>16.57</baseImponible>
+<valor>1.99</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98927</codigoPrincipal>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7436SD1 DE 5/8" X 7"</descripcion>
+<cantidad>13.00</cantidad>
+<precioUnitario>2.65</precioUnitario>
+<descuento>5.17</descuento>
+<precioTotalSinImpuesto>29.28</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>29.28</baseImponible>
+<valor>3.51</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98927</codigoPrincipal>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7436SD1 DE 5/8" X 7"</descripcion>
+<cantidad>48.00</cantidad>
+<precioUnitario>2.65</precioUnitario>
+<descuento>19.08</descuento>
+<precioTotalSinImpuesto>108.12</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>108.12</baseImponible>
+<valor>12.97</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99239</codigoPrincipal>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7423 SD1 DE 1/2" X 4-1/2"</descripcion>
+<cantidad>150.00</cantidad>
+<precioUnitario>0.97</precioUnitario>
+<descuento>21.83</descuento>
+<precioTotalSinImpuesto>123.67</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>123.67</baseImponible>
+<valor>14.84</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150609</codigoPrincipal>
+<descripcion>ANCLAJE EPOXICO 8486SD DE 12oz AC100</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>44.10</precioUnitario>
+<descuento>26.46</descuento>
+<precioTotalSinImpuesto>149.94</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>149.94</baseImponible>
+<valor>17.99</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150323</codigoPrincipal>
+<descripcion>DISPENSADORES DE ADHESIVO 8437 PARA POWER-STICK</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>21.52</precioUnitario>
+<descuento>2.58</descuento>
+<precioTotalSinImpuesto>18.94</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>18.94</baseImponible>
+<valor>2.27</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">P_Pasoc825@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2836824</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">054917</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268794</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268794</guiaRemision>
+<razonSocialComprador>PAEZ VELEZ JORGE DAVID</razonSocialComprador>
+<identificacionComprador>1716820848001</identificacionComprador>
+<totalSinImpuestos>250.01</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>250.01</baseImponible>
+<valor>30.00</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>280.01</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>61022</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA PARA EMPOTRAR 1 H. OAKBROOK BLANCO (130)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>30.08</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>60.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>60.16</baseImponible>
+<valor>7.22</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>69028</codigoPrincipal>
+<descripcion>LLAVE TEMPORIZADAS / PRESSMATIC 5763306 LLAVE TEMPORIZADA DE MESA P/ LAVABO CROMO</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>37.97</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>189.85</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>189.85</baseImponible>
+<valor>22.78</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jordavpaez@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2418077</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">046646</campoAdicional>
+</infoAdicional>
+</factura>

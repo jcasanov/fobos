@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comprobanteRetencion id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048635</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoCompRetencion>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionSujetoRetenido>04</tipoIdentificacionSujetoRetenido>
+<razonSocialSujetoRetenido>SERVIENTREGA ECUADOR S.A.</razonSocialSujetoRetenido>
+<identificacionSujetoRetenido>0991285679001</identificacionSujetoRetenido>
+<periodoFiscal>01/2015</periodoFiscal>
+</infoCompRetencion>
+<impuestos>
+<impuesto>
+<codigo>1</codigo>
+<codigoRetencion>310</codigoRetencion>
+<baseImponible>1959.90</baseImponible>
+<porcentajeRetener>1.00</porcentajeRetener>
+<valorRetenido>19.60</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>001001000356282</numDocSustento>
+<fechaEmisionDocSustento>19/01/2015</fechaEmisionDocSustento>
+</impuesto>
+<impuesto>
+<codigo>1</codigo>
+<codigoRetencion>341</codigoRetencion>
+<baseImponible>207.99</baseImponible>
+<porcentajeRetener>2.00</porcentajeRetener>
+<valorRetenido>4.16</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>001001000356282</numDocSustento>
+<fechaEmisionDocSustento>19/01/2015</fechaEmisionDocSustento>
+</impuesto>
+</impuestos>
+<infoAdicional>
+<campoAdicional nombre="Email">monica.gonzalez@servientrega.com.ec</campoAdicional>
+<campoAdicional nombre="Email"> yagnna.molina@servientrega.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2313103</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">001056</campoAdicional>
+</infoAdicional>
+</comprobanteRetencion>

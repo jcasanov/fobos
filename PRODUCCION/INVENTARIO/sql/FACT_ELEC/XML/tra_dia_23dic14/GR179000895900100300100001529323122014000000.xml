@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000015293</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<dirPartida>GUALBERTO PEREZ E1-88 ENTRE MALDONADO</dirPartida>
+<razonSocialTransportista>ACERO COMERCIAL</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>23/12/2014</fechaIniTransporte>
+<fechaFinTransporte>23/12/2014</fechaFinTransporte>
+<placa>ACERO</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1718113325001</identificacionDestinatario>
+<razonSocialDestinatario>GAMA CONSTRUCCIONES</razonSocialDestinatario>
+<dirDestinatario>GEOVANNY CALLES VIA A MARIANAS</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>22/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>100492</codigoInterno>
+<descripcion>AZULEJO PARED 25 x 33 MACHALILLA BEIGE SEGUNDA</descripcion>
+<cantidad>30.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="MACHALILLA BEIGE"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>100777</codigoInterno>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA AMAZONAS BEIGE SEGUNDA</descripcion>
+<cantidad>20.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="AMAZONAS BEIGE"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>101201</codigoInterno>
+<descripcion>AZULEJO PARED 25 x 33 COLORA NIEVE  SEGUNDA</descripcion>
+<cantidad>20.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="COLORA NIEVE  SEGUND"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>101454</codigoInterno>
+<descripcion>AZULEJO PARED 25 x 33 COLORA NEGRO  PRIMERA</descripcion>
+<cantidad>6.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="COLORA NEGRO  PRIMER"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>101589</codigoInterno>
+<descripcion>AZULEJO PARED 25 x 33 COLORA SANDIA PRIMERA</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="COLORA SANDIA PRIMER"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>102943</codigoInterno>
+<descripcion>AZULEJO PARED 25 x 33 QUANTUM  LIMON PRIMERA</descripcion>
+<cantidad>0.50</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="QUANTUM  LIMON PRIME"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>103009</codigoInterno>
+<descripcion>AZULEJO PARED 25 x 33 QUANTUM NIEVE PRIMERA</descripcion>
+<cantidad>0.50</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="QUANTUM NIEVE PRIMER"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>103064</codigoInterno>
+<descripcion>AZULEJO PARED 25 x 33 QUANTUM NEGRO PRIMERA</descripcion>
+<cantidad>0.50</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="MODELO" valor="QUANTUM NEGRO PRIMER"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0998817065</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">048943</campoAdicional>
+</infoAdicional>
+</guiaRemision>

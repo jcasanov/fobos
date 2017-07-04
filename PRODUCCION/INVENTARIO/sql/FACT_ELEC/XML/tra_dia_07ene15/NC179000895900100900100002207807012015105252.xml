@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000022078</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>ACERIAS NACIONALES DEL ECUADOR S. A.</razonSocialComprador>
+<identificacionComprador>0990001340001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000104219</numDocModificado>
+<fechaEmisionDocSustento>30/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>711.47</totalSinImpuestos>
+<valorModificacion>796.85</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>711.47</baseImponible>
+<valor>85.38</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>REFACTURACION: CAMBIO DE FECHA</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>44287</codigoInterno>
+<descripcion>BOMBA CENTRIF STANDARD C-MOTOR DS-8-3 5HP 2 x 1-1/2" 220/380/460/60C/3F</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>799.41</precioUnitario>
+<descuento>87.94</descuento>
+<precioTotalSinImpuesto>711.47</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MARK G"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>711.47</baseImponible>
+<valor>85.38</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">info@andec.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">3713590</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">1204</campoAdicional>
+</infoAdicional>
+</notaCredito>

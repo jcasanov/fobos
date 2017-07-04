@@ -1,0 +1,33 @@
+export LD_ASSUME_KERNEL=2.4.0
+export DIR=$PWD
+cd $DIR
+if [ "$1" != "aceros" ]; then
+	export l="VEHICULOS"
+else
+	export l=""
+fi
+for i in ACTIVOS CAJA COBRANZAS COMPRAS CONTABILIDAD GENERALES LIBRERIAS MENU REPUESTOS TALLER TESORERIA NOMINA SRI $l
+do
+	cd $i
+	cd fuentes
+	echo $PWD
+	for j in ???p*.4gl
+	do
+		echo "Compilando 4gl Caracter $i $j"
+		fglgo compilar_4gl $j
+	done
+	cd ../forms
+	if [ "$i" == "LIBRERIAS" ] || [ "$i" == "MENU" ]; then
+		sh comp_form $1
+	else
+		if [ "$i" != "ACTIVOS" ] && [ "$i" != "NOMINA" ]; then
+			for j in ???f???_?c.per
+			do
+				form4gl $j
+			done
+		fi
+	fi
+	cd ../..
+done
+echo "Compilado todo FOBOS en 4gl  Ok."
+echo ""

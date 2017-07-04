@@ -1,0 +1,128 @@
+DATABASE aceros
+SCREEN
+{
+     Departamento: [c000 |c001                          ]
+         Empleado: [c002 |c003                                    ]
+ Valores Decimos/Utilidades                                       [c6] de [c7]
+ [c040|c8|c041            |c042        |c043        |c044        |c045        ]
+[c050|c9|c051            |c052        |c053        |c054        |c055        ]
+[c050|c9|c051            |c052        |c053        |c054        |c055        ]
+[c050|c9|c051            |c052        |c053        |c054        |c055        ]
+                Totales: [c060        |c061        |c062        |c063        ]
+ Valores de las Vacaciones                                        [d0] de [d1]
+ [c070|c71|c72|c73|c74|c75|c076        |c077        |c078        |c079        ]
+[c080|c81|c82|c83|c84|c85|c086        |c087        |c088        |c089        ]
+[c080|c81|c82|c83|c84|c85|c086        |c087        |c088        |c089        ]
+[c080|c81|c82|c83|c84|c85|c086        |c087        |c088        |c089        ]
+                Totales: [c090        |c091        |c092        |c093        ]
+
+ Resumen por Procesos      [c0] de [c1]     Fondos de Reserva     [c2] de [c3]
+ [c4|c010                 |c011        ]    [c012   |c013        |c014        ]
+[c5|c020                 |c021        ]    [c022   |c023        |c024        ]
+[c5|c020                 |c021        ]    [c022   |c023        |c024        ]
+[c5|c020                 |c021        ]    [c022   |c023        |c024        ]
+                  Total: [c030        ]            [c031        |c032        ]
+}
+TABLES
+gent034
+rolt030
+ATTRIBUTES
+c000 = rolt030.n30_cod_depto, NOENTRY, UPSHIFT, REVERSE;
+c001 = gent034.g34_nombre, NOENTRY, UPSHIFT, REVERSE;
+c002 = rolt030.n30_cod_trab, NOENTRY, UPSHIFT, REVERSE;
+c003 = rolt030.n30_nombres, NOENTRY, UPSHIFT, REVERSE;
+
+c0   = FORMONLY.num_row1, NOENTRY, UPSHIFT;
+c1   = FORMONLY.max_row1, NOENTRY, UPSHIFT;
+c2   = FORMONLY.num_row2, NOENTRY, UPSHIFT;
+c3   = FORMONLY.max_row2, NOENTRY, UPSHIFT;
+c6   = FORMONLY.num_row3, NOENTRY, UPSHIFT;
+c7   = FORMONLY.max_row3, NOENTRY, UPSHIFT;
+d0   = FORMONLY.num_row4, NOENTRY, UPSHIFT;
+d1   = FORMONLY.max_row4, NOENTRY, UPSHIFT;
+
+c4   = FORMONLY.tit_col1,  WIDGET = 'BUTTON', CONFIG = 'F15';
+c010 = FORMONLY.tit_col2,  WIDGET = 'BUTTON', CONFIG = 'F16';
+c011 = FORMONLY.tit_col3,  WIDGET = 'BUTTON', CONFIG = 'F17';
+
+c012 = FORMONLY.tit_col4,  WIDGET = 'BUTTON', CONFIG = 'F18';
+c013 = FORMONLY.tit_col5,  WIDGET = 'BUTTON', CONFIG = 'F19';
+c014 = FORMONLY.tit_col6,  WIDGET = 'BUTTON', CONFIG = 'F20';
+
+c040 = FORMONLY.tit_col7,  WIDGET = 'BUTTON', CONFIG = 'F21';
+c8   = FORMONLY.tit_col8,  WIDGET = 'BUTTON', CONFIG = 'F22';
+c041 = FORMONLY.tit_col9,  WIDGET = 'BUTTON', CONFIG = 'F23';
+c042 = FORMONLY.tit_col10, WIDGET = 'BUTTON', CONFIG = 'F24';
+c043 = FORMONLY.tit_col11, WIDGET = 'BUTTON', CONFIG = 'F25';
+c044 = FORMONLY.tit_col12, WIDGET = 'BUTTON', CONFIG = 'F26';
+c045 = FORMONLY.tit_col13, WIDGET = 'BUTTON', CONFIG = 'F27';
+
+c070 = FORMONLY.tit_col14, WIDGET = 'BUTTON', CONFIG = 'F28';
+c71  = FORMONLY.tit_col15, WIDGET = 'BUTTON', CONFIG = 'F29';
+c72  = FORMONLY.tit_col16, WIDGET = 'BUTTON', CONFIG = 'F30';
+c73  = FORMONLY.tit_col17, WIDGET = 'BUTTON', CONFIG = 'F31';
+c74  = FORMONLY.tit_col18, WIDGET = 'BUTTON', CONFIG = 'F32';
+c75  = FORMONLY.tit_col19, WIDGET = 'BUTTON', CONFIG = 'F33';
+c076 = FORMONLY.tit_col20, WIDGET = 'BUTTON', CONFIG = 'F34';
+c077 = FORMONLY.tit_col21, WIDGET = 'BUTTON', CONFIG = 'F35';
+c078 = FORMONLY.tit_col22, WIDGET = 'BUTTON', CONFIG = 'F36';
+c079 = FORMONLY.tit_col23, WIDGET = 'BUTTON', CONFIG = 'F37';
+
+c5   = FORMONLY.tot_cod TYPE CHAR, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c020 = FORMONLY.tot_des TYPE CHAR, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c021 = FORMONLY.tot_val TYPE DECIMAL, NOENTRY, UPSHIFT, FORMAT = '-,---,--&.##',
+	OPTIONS = '-nolist';
+
+c022 = FORMONLY.fon_fecha TYPE DATE, NOENTRY, UPSHIFT, FORMAT = 'yyyy-mm',
+	OPTIONS = '-nolist';
+c023 = FORMONLY.fon_gana TYPE DECIMAL, NOENTRY, UPSHIFT,FORMAT = '#,###,##&.##',
+	OPTIONS = '-nolist';
+c024 = FORMONLY.fon_neto TYPE DECIMAL, NOENTRY, UPSHIFT,FORMAT = '-,---,--&.##',
+	OPTIONS = '-nolist';
+
+c050 = FORMONLY.dec_anio TYPE SMALLINT, NOENTRY, UPSHIFT;
+c9   = FORMONLY.dec_cod TYPE CHAR, NOENTRY, UPSHIFT;
+c051 = FORMONLY.dec_des TYPE CHAR, NOENTRY, UPSHIFT;
+c052 = FORMONLY.dec_gana TYPE DECIMAL, NOENTRY, UPSHIFT,FORMAT = '#,###,##&.##';
+c053 = FORMONLY.dec_brut TYPE DECIMAL, NOENTRY, UPSHIFT,FORMAT = '#,###,##&.##';
+c054 = FORMONLY.dec_desc TYPE DECIMAL, NOENTRY, UPSHIFT,FORMAT = '#,###,##&.##';
+c055 = FORMONLY.dec_neto TYPE DECIMAL, NOENTRY, UPSHIFT,FORMAT = '-,---,--&.##';
+
+c080 = FORMONLY.vac_anio TYPE SMALLINT, NOENTRY, UPSHIFT;
+c81  = FORMONLY.vac_dvac TYPE SMALLINT, NOENTRY, UPSHIFT, FORMAT = '###';
+c82  = FORMONLY.vac_dadi TYPE SMALLINT, NOENTRY, UPSHIFT, FORMAT = '###';
+c83  = FORMONLY.vac_dtot TYPE SMALLINT, NOENTRY, UPSHIFT, FORMAT = '###';
+c84  = FORMONLY.vac_dgoz TYPE SMALLINT, NOENTRY, UPSHIFT, FORMAT = '###';
+c85  = FORMONLY.vac_dpen TYPE SMALLINT, NOENTRY, UPSHIFT, FORMAT = '##&';
+c086 = FORMONLY.vac_gana TYPE DECIMAL, NOENTRY, UPSHIFT,FORMAT = '#,###,##&.##';
+c087 = FORMONLY.vac_brut TYPE DECIMAL, NOENTRY, UPSHIFT,FORMAT = '#,###,##&.##';
+c088 = FORMONLY.vac_desc TYPE DECIMAL, NOENTRY, UPSHIFT,FORMAT = '#,###,##&.##';
+c089 = FORMONLY.vac_neto TYPE DECIMAL, NOENTRY, UPSHIFT,FORMAT = '-,---,--&.##';
+
+c030 = FORMONLY.total01 TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '-,---,--&.##';
+c031 = FORMONLY.total02 TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '#,###,##&.##';
+c032 = FORMONLY.total03 TYPE DECIMAL, NOENTRY, UPSHIFT, REVERSE,
+	FORMAT = '-,---,--&.##';
+c060 = FORMONLY.total04 TYPE DECIMAL, NOENTRY, UPSHIFT, FORMAT = '#,###,##&.##';
+c061 = FORMONLY.total05 TYPE DECIMAL, NOENTRY, UPSHIFT, FORMAT = '#,###,##&.##';
+c062 = FORMONLY.total06 TYPE DECIMAL, NOENTRY, UPSHIFT, FORMAT = '#,###,##&.##';
+c063 = FORMONLY.total07 TYPE DECIMAL, NOENTRY, UPSHIFT, FORMAT = '-,---,--&.##';
+c090 = FORMONLY.total08 TYPE DECIMAL, NOENTRY, UPSHIFT, FORMAT = '#,###,##&.##';
+c091 = FORMONLY.total09 TYPE DECIMAL, NOENTRY, UPSHIFT, FORMAT = '#,###,##&.##';
+c092 = FORMONLY.total10 TYPE DECIMAL, NOENTRY, UPSHIFT, FORMAT = '#,###,##&.##';
+c093 = FORMONLY.total11 TYPE DECIMAL, NOENTRY, UPSHIFT, FORMAT = '-,---,--&.##';
+END
+KEYS
+F5 = 'Comprobante'
+F6 = 'Contabilizacion'
+F7 = 'Dias Gozados'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_dettot[3] (tot_cod, tot_des, tot_val)
+SCREEN RECORD rm_detfon[3] (fon_fecha, fon_gana, fon_neto)
+SCREEN RECORD rm_detdec[3] (dec_anio, dec_cod, dec_des, dec_gana, dec_brut,
+			dec_desc, dec_neto)
+SCREEN RECORD rm_detvac[3] (vac_anio, vac_dvac, vac_dadi, vac_dtot, vac_dgoz,
+			vac_dpen, vac_gana, vac_brut, vac_desc, vac_neto)

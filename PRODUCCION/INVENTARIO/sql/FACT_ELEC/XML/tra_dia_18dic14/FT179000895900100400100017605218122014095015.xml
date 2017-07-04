@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176052</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176052</guiaRemision>
+<razonSocialComprador>SUMINISTROS INDUSTRIALES PETROLEROS SIPETROL S.A.</razonSocialComprador>
+<identificacionComprador>0990815232001</identificacionComprador>
+<totalSinImpuestos>1940.79</totalSinImpuestos>
+<totalDescuento>214.12</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1940.79</baseImponible>
+<valor>232.89</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>2173.68</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>18771</codigoPrincipal>
+<descripcion>BOMBA CENTRIF AUTOCEB C-MOTOR QP-50 5 HP 230V/60C/1F 1 ETAPA AUTOCEBANTE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1762.53</precioUnitario>
+<descuento>176.25</descuento>
+<precioTotalSinImpuesto>1586.28</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1586.28</baseImponible>
+<valor>190.35</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3096</codigoPrincipal>
+<descripcion>NEPLO FLEX DE 2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3.02</precioUnitario>
+<descuento>0.30</descuento>
+<precioTotalSinImpuesto>2.72</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.72</baseImponible>
+<valor>0.33</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3272</codigoPrincipal>
+<descripcion>NEPLO GALVANIZADO DE 2-1/2" x 3"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>7.86</precioUnitario>
+<descuento>0.63</descuento>
+<precioTotalSinImpuesto>7.23</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7.23</baseImponible>
+<valor>0.87</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3692</codigoPrincipal>
+<descripcion>REDUCCION GALV. CLASE 150 DE 3" x 2-1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>15.58</precioUnitario>
+<descuento>1.56</descuento>
+<precioTotalSinImpuesto>14.02</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>14.02</baseImponible>
+<valor>1.68</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3098</codigoPrincipal>
+<descripcion>NEPLO FLEX DE 3"</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>13.11</precioUnitario>
+<descuento>2.62</descuento>
+<precioTotalSinImpuesto>23.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>23.60</baseImponible>
+<valor>2.83</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>33566</codigoPrincipal>
+<descripcion>CAJA TERMICA COMPLETA GMC 50 DE 28 A 40 AMPERIOS P/ 10HP 220-3-60</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>229.00</precioUnitario>
+<descuento>22.90</descuento>
+<precioTotalSinImpuesto>206.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="LG IND"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>206.10</baseImponible>
+<valor>24.73</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98789</codigoPrincipal>
+<descripcion>CONTROL DE NIVEL G-0120 ALTO Y BAJO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>24.20</precioUnitario>
+<descuento>1.21</descuento>
+<precioTotalSinImpuesto>22.99</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>22.99</baseImponible>
+<valor>2.76</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21378</codigoPrincipal>
+<descripcion>VALVULA CHEQUE VC-50 DE 2" DE BRONCE TIPO PESADO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>86.50</precioUnitario>
+<descuento>8.65</descuento>
+<precioTotalSinImpuesto>77.85</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HELBER"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>77.85</baseImponible>
+<valor>9.34</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3957659</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">035147</campoAdicional>
+</infoAdicional>
+</factura>

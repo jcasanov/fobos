@@ -1,0 +1,93 @@
+DATABASE aceros
+SCREEN
+{
+                                                          [c052  ] de [c053  ]
+   Cliente: [c001  |c002                            ]   Moneda: [c03         ] 
+ Domicilio: [c003                                   ]                          
+  Teléfono: [c004       ] - [c005       ]     Saldo a Favor [c007            ]
+       Fax: [c006       ]		      Saldo Vencido [c008            ]
+ Localidad: [c050  |c051                ]  Saldo Por Vencer [c009            ]
+    Estado: [c011      ]                        Saldo Total [c010            ]
+   Período: [c054      ] - [c055      ]    Ch. Postfechados [c099            ]
+      Saldo Anterior [c080            ]                   [c056  ] de [c057  ]
+ [x1|c1|c2|c022         |c023      |c024      |c025      |c026  |c027         ]
+[a1|c3|c4|c032         |c033      |c034      |c035      |c036  |c037         ]
+[a1|c3|c4|c032         |c033      |c034      |c035      |c036  |c037         ]
+[a1|c3|c4|c032         |c033      |c034      |c035      |c036  |c037         ]
+[a1|c3|c4|c032         |c033      |c034      |c035      |c036  |c037         ]
+[a1|c3|c4|c032         |c033      |c034      |c035      |c036  |c037         ]
+[a1|c3|c4|c032         |c033      |c034      |c035      |c036  |c037         ]
+[a1|c3|c4|c032         |c033      |c034      |c035      |c036  |c037         ]
+[a1|c3|c4|c032         |c033      |c034      |c035      |c036  |c037         ]
+[a1|c3|c4|c032         |c033      |c034      |c035      |c036  |c037         ]
+[a1|c3|c4|c032         |c033      |c034      |c035      |c036  |c037         ]
+                                                    Total ==>  [c058         ]
+}
+TABLES
+cxct001
+cxct020
+ATTRIBUTES
+c050 = FORMONLY.localidad, UPSHIFT, NOENTRY;
+c051 = FORMONLY.tit_localidad, UPSHIFT, NOENTRY;
+c001 = cxct001.z01_codcli, UPSHIFT, NOENTRY, REVERSE;
+C002 = cxct001.z01_nomcli, REVERSE;
+c03  = FORMONLY.tit_mon, REVERSE; 
+c003 = z01_direccion1;
+c004 = z01_telefono1;
+c005 = z01_telefono2;
+c006 = z01_fax1;
+c007 = FORMONLY.tot_favor TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##';
+c008 = FORMONLY.tot_vcdo  TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##',
+       COLOR = RED WHERE c008 > 0;
+c009 = FORMONLY.tot_xven  TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##';
+c010 = FORMONLY.tot_saldo TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##', 
+       REVERSE;
+c011 = FORMONLY.tit_estcli;
+c099 = FORMONLY.tot_postfec TYPE DECIMAL(14,2), FORMAT = '#,###,###,##&.##';
+c054 = FORMONLY.fecha_emi, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c055 = FORMONLY.fecha_cart, NOENTRY, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy';
+
+x1   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c1   = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c2   = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c022 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c023 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c024 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c025 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+c026 = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22';
+c027 = FORMONLY.tit_col9, WIDGET = 'BUTTON', CONFIG = 'F23';
+
+a1   = FORMONLY.tit_loc, UPSHIFT, NOENTRY, FORMAT = '&&', OPTIONS = '-nolist';
+c3   = FORMONLY.tit_area, FORMAT = '&&', OPTIONS = '-nolist';
+c4   = cxct020.z20_tipo_doc, OPTIONS = '-nolist';
+c032 = FORMONLY.num_doc, OPTIONS = '-nolist';
+c033 = cxct020.z20_fecha_emi, FORMAT = 'dd-mm-yyyy', OPTIONS = '-nolist';
+c034 = cxct020.z20_fecha_vcto, FORMAT = 'dd-mm-yyyy', OPTIONS = '-nolist';
+c035 = FORMONLY.tit_estado, COLOR = RED WHERE c035 = 'Vencido',
+	COLOR = BLUE WHERE c035 = 'Cancelado', OPTIONS = '-nolist';
+c036 = FORMONLY.dias, FORMAT = '-----&', COLOR = RED WHERE c036 < 0,
+	COLOR = BLUE WHERE c036 >= 0 AND c035 = 'Cancelado',OPTIONS = '-nolist';
+c037 = FORMONLY.saldo TYPE DECIMAL(14,2), FORMAT = '--,---,--&.##', OPTIONS = '-nolist'; 
+
+c052 = FORMONLY.num_cur, NOENTRY, UPSHIFT;
+c053 = FORMONLY.max_cur, NOENTRY, UPSHIFT;
+
+c056 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c057 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c058 = FORMONLY.tot_sal TYPE DECIMAL(14,2), FORMAT = '--,---,--&.##', REVERSE; 
+
+c080 = FORMONLY.vm_sal_inicob TYPE DECIMAL(14,2), FORMAT = '-,---,---,--&.##',
+	REVERSE; 
+END
+KEYS
+F5 = "Ver Factura"
+F6 = "Movimientos"
+F7 = "Documento"
+F8 = "Cobranza vs. Cont."
+F9 = "Imprimir"
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_dcli[10] (FORMONLY.tit_loc, FORMONLY.tit_area, z20_tipo_doc,
+			FORMONLY.num_doc, z20_fecha_emi, z20_fecha_vcto,
+			FORMONLY.tit_estado, FORMONLY.dias, FORMONLY.saldo)

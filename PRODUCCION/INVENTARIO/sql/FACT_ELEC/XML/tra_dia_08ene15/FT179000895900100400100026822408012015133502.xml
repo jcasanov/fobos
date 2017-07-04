@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268224</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>08/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268224</guiaRemision>
+<razonSocialComprador>FABARA SANCHEZ JORGE VINICIO</razonSocialComprador>
+<identificacionComprador>1706895073001</identificacionComprador>
+<totalSinImpuestos>123.72</totalSinImpuestos>
+<totalDescuento>5.61</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>123.72</baseImponible>
+<valor>14.85</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>138.57</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5466</codigoPrincipal>
+<descripcion>TUBO GALVANIZADO (POSTE) TIPO "T" DE 2-7/8" (73mm. ) EXTERIOR 2mm. ESPESOR</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>44.47</precioUnitario>
+<descuento>1.78</descuento>
+<precioTotalSinImpuesto>42.69</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>42.69</baseImponible>
+<valor>5.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5464</codigoPrincipal>
+<descripcion>TUBO GALVANIZADO (POSTE) TIPO "T" DE 2-1/2" (63.5mm.) EXTERIOR 2mm. ESPESOR</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>36.95</precioUnitario>
+<descuento>2.96</descuento>
+<precioTotalSinImpuesto>70.94</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>70.94</baseImponible>
+<valor>8.51</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98298</codigoPrincipal>
+<descripcion>ANCLAJE DE CAMISA LOCK-BOLT 05015S HEX. DE 3/8" X 1-7/8" (AS)</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>0.38</precioUnitario>
+<descuento>0.15</descuento>
+<precioTotalSinImpuesto>3.65</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.65</baseImponible>
+<valor>0.44</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102894</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-20-8821 DE 3/8" X 6"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>7.16</precioUnitario>
+<descuento>0.72</descuento>
+<precioTotalSinImpuesto>6.44</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.44</baseImponible>
+<valor>0.77</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jorgefabara@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2527520</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">041326</campoAdicional>
+</infoAdicional>
+</factura>

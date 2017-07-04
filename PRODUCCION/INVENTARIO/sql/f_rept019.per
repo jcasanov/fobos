@@ -1,0 +1,89 @@
+database acero_gm
+screen size 24 by 80
+{
+r19_compania       [f000       ]
+r19_localidad      [f001  ]
+r19_cod_tran       [a0]
+r19_num_tran       [f002             ]
+r19_cod_subtipo    [f003       ]
+r19_cont_cred      [a]
+r19_ped_cliente    [f004      ]
+r19_referencia     [f005                                    ]
+r19_codcli         [f006       ]
+r19_nomcli         [f007                                              ]
+                   [f008                                              ]
+r19_dircli         [f009                                    ]
+r19_telcli         [f010      ]
+r19_cedruc         [f011           ]
+r19_vendedor       [f012  ]
+r19_oc_externa     [f013           ]
+r19_oc_interna     [f014       ]
+r19_ord_trabajo    [f015       ]
+r19_descuento      [f016  ]
+r19_porc_impto     [f017  ]
+}
+screen
+{
+r19_tipo_dev       [a1]
+r19_num_dev        [f018             ]
+r19_bodega_ori     [a2]
+r19_bodega_dest    [a3]
+r19_fact_costo     [f019       ]
+r19_fact_venta     [f020       ]
+r19_moneda         [a4]
+r19_paridad        [f021              ]
+r19_precision      [f022  ]
+r19_tot_costo      [f023          ]
+r19_tot_bruto      [f024          ]
+r19_tot_dscto      [f025         ]
+r19_tot_neto       [f026          ]
+r19_flete          [f027         ]
+r19_numliq         [f028       ]
+r19_num_ret        [f029       ]
+r19_usuario        [f030      ]
+r19_fecing         [f031               ]
+}
+end
+tables
+rept019
+attributes
+f000 = rept019.r19_compania;
+f001 = rept019.r19_localidad;
+a0 = rept019.r19_cod_tran;
+f002 = rept019.r19_num_tran;
+f003 = rept019.r19_cod_subtipo;
+a = rept019.r19_cont_cred;
+f004 = rept019.r19_ped_cliente;
+f005 = rept019.r19_referencia;
+f006 = rept019.r19_codcli;
+f007 = rept019.r19_nomcli[1,50];
+f008 = rept019.r19_nomcli[51,100];
+f009 = rept019.r19_dircli;
+f010 = rept019.r19_telcli;
+f011 = rept019.r19_cedruc;
+f012 = rept019.r19_vendedor;
+f013 = rept019.r19_oc_externa;
+f014 = rept019.r19_oc_interna;
+f015 = rept019.r19_ord_trabajo;
+f016 = rept019.r19_descuento;
+f017 = rept019.r19_porc_impto;
+
+a1 = rept019.r19_tipo_dev;
+f018 = rept019.r19_num_dev;
+a2 = rept019.r19_bodega_ori;
+a3 = rept019.r19_bodega_dest;
+f019 = rept019.r19_fact_costo;
+f020 = rept019.r19_fact_venta;
+a4 = rept019.r19_moneda;
+f021 = rept019.r19_paridad;
+f022 = rept019.r19_precision;
+f023 = rept019.r19_tot_costo;
+f024 = rept019.r19_tot_bruto;
+f025 = rept019.r19_tot_dscto;
+f026 = rept019.r19_tot_neto;
+f027 = rept019.r19_flete;
+f028 = rept019.r19_numliq;
+f029 = rept019.r19_num_ret;
+f030 = rept019.r19_usuario;
+f031 = rept019.r19_fecing;
+end

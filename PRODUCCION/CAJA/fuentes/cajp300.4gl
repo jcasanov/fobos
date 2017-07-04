@@ -21,16 +21,16 @@ DEFINE rm_orden 	ARRAY[10] OF CHAR(4)
 DEFINE vm_columna_1	SMALLINT
 DEFINE vm_columna_2	SMALLINT
 DEFINE vm_size_arr	INTEGER
-DEFINE rm_det		ARRAY [1000] OF RECORD
+DEFINE rm_det		ARRAY [32766] OF RECORD
 				j10_fecha_pro	DATE,
 				j10_nomcli	LIKE cajt010.j10_nomcli,
 				j10_tipo_destino LIKE cajt010.j10_tipo_destino,
 				j10_num_destino	LIKE cajt010.j10_num_destino,
+				j10_referencia	LIKE cajt010.j10_referencia,
 				j11_codigo_pago	LIKE cajt011.j11_codigo_pago,
-				j11_moneda	LIKE cajt011.j11_moneda,
 				j11_valor	LIKE cajt011.j11_valor
 			END RECORD
-DEFINE rm_cajs		ARRAY[1000] OF RECORD
+DEFINE rm_cajs		ARRAY[32766] OF RECORD
 				j10_compania	LIKE cajt010.j10_compania,
 				j10_localidad	LIKE cajt010.j10_localidad,
 				j10_tipo_fuente	LIKE cajt010.j10_tipo_fuente,
@@ -47,7 +47,6 @@ CALL startlog('../logs/cajp300.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN   -- Validar # parámetros correcto
-	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.', 'stop')
 	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
@@ -74,7 +73,7 @@ DEFINE num_rows 	SMALLINT
 DEFINE num_cols 	SMALLINT
 
 CALL fl_nivel_isolation()
-LET vm_max_det = 1000
+LET vm_max_det = 32766
 LET lin_menu = 0
 LET row_ini  = 3
 LET num_rows = 22
@@ -106,12 +105,11 @@ END FUNCTION
 
 
 FUNCTION control_consulta()
-DEFINE i,j,col		SMALLINT
-DEFINE query		CHAR(7000)
-DEFINE expr_sql         CHAR(400)
-DEFINE expr_sql2        VARCHAR(100)
-DEFINE expr_sql3        CHAR(400)
-DEFINE expr		CHAR(10)
+DEFINE i, j, col	SMALLINT
+DEFINE query		CHAR(600)
+DEFINE expr_sql01	VARCHAR(200)
+DEFINE expr_sql02	VARCHAR(100)
+DEFINE expr_sql03	CHAR(600)
 DEFINE cuantos		SMALLINT
 DEFINE tipo_comp	LIKE ctbt012.b12_tipo_comp
 DEFINE num_comp		LIKE ctbt012.b12_num_comp
@@ -138,18 +136,14 @@ WHILE TRUE
 	LET vm_num_det = 0
 	CALL borrar_detalle()
 	CALL muestra_contadores_det(0, vm_num_det)
-	CALL lee_parametros() RETURNING expr_sql, expr_sql3
+	CALL lee_parametros() RETURNING expr_sql01, expr_sql02, expr_sql03
 	IF int_flag = 2 THEN
 		CONTINUE WHILE
 	END IF
 	IF int_flag THEN
 		EXIT WHILE
 	END IF
-	IF rm_caj.j10_codigo_caja IS NOT NULL THEN
-		LET expr_sql2 ='  AND j10_codigo_caja = ',rm_caj.j10_codigo_caja
-	ELSE
-		INITIALIZE expr_sql2 TO NULL
-	END IF
+	CALL ejecuta_query_consulta(expr_sql01, expr_sql02, expr_sql03)
 	FOR i = 1 TO 10
 		LET rm_orden[i] = '' 
 	END FOR
@@ -158,70 +152,7 @@ WHILE TRUE
 	LET vm_columna_2 = 2
 	LET col          = 1
 	WHILE TRUE
-		IF expr_sql <> ' 1=1' OR expr_sql3 = ' 1=1' THEN
-		LET query = 'SELECT DATE(j10_fecha_pro), j10_nomcli, ',
-			'j10_tipo_destino, j10_num_destino, ',
-			'CASE WHEN (j10_tipo_fuente = "EC" AND j10_valor > 0)',
-				' THEN "EF" ',
-			'END, ',
-			'CASE WHEN (j10_tipo_fuente = "EC" AND j10_valor > 0)',
-				' THEN "DO" ',
-			'END, ',
-			'CASE WHEN (j10_tipo_fuente = "EC" AND j10_valor > 0)',
-				' THEN j10_valor * (-1) ',
-			'     WHEN (j10_tipo_fuente <> "EC")',
-				' THEN j10_valor ',
-			'END, ',
-			'j10_compania, j10_localidad, j10_tipo_fuente, ',
-			'j10_num_fuente, j10_codcli ',
-			'FROM cajt010 ',
-			'WHERE j10_compania      = ', vg_codcia,
-			'  AND j10_localidad     = ', vg_codloc,
-			--'  AND j10_tipo_destino <> "FA" ',
-			'  AND j10_tipo_fuente   = "EC" ',
-			'  AND j10_estado        = "P" ',
-			'  AND ', expr_sql CLIPPED, 
-			expr_sql2 CLIPPED, 
-			'  AND DATE(j10_fecha_pro) BETWEEN "', vm_fecha_ini,
-			'" AND "', vm_fecha_fin, '"',
-			' UNION '
-				LET expr  = 'OUTER'
-			ELSE
-				LET query = NULL
-				LET expr  = NULL
-			END IF
-			LET query = query CLIPPED,
-			' SELECT DATE(j10_fecha_pro), j10_nomcli, ',
-			'j10_tipo_destino, j10_num_destino, ',
-			'CASE WHEN (j10_tipo_fuente = "EC" AND j10_banco = 0)',
-				' THEN "EF" ',
-				' ELSE j11_codigo_pago ',
-			'END, ',
-			'CASE WHEN (j10_tipo_fuente = "EC" AND j10_banco = 0)',
-				' THEN "DO" ',
-				' ELSE j11_moneda ',
-			'END, ',
-			'CASE WHEN (j10_tipo_fuente = "EC" AND j10_banco = 0)',
-				' THEN j10_valor * (-1) ',
-				' ELSE j11_valor ',
-			'END, ',
-			'j10_compania, j10_localidad, j10_tipo_fuente, ',
-			'j10_num_fuente, j10_codcli ',
-			'FROM cajt010, ', expr CLIPPED, ' cajt011 ',
-			'WHERE j10_compania     = ', vg_codcia,
-			'  AND j10_localidad    = ', vg_codloc,
-			--'  AND j10_tipo_destino = "FA" ',
-			'  AND j10_tipo_fuente <> "EC" ',
-			'  AND j10_estado       = "P" ',
-			'  AND ', expr_sql CLIPPED, 
-			'  AND ', expr_sql3 CLIPPED, 
-			expr_sql2 CLIPPED, 
-			'  AND DATE(j10_fecha_pro) BETWEEN "', vm_fecha_ini,
-			'" AND "', vm_fecha_fin, '"',
-			'  AND j10_compania     = j11_compania ',
-			'  AND j10_localidad    = j11_localidad ',
-			'  AND j10_tipo_fuente  = j11_tipo_fuente ',
-			'  AND j10_num_fuente   = j11_num_fuente ',
+		LET query = 'SELECT * FROM tmp_caj ',
 			' ORDER BY ', vm_columna_1, ' ', rm_orden[vm_columna_1],
 			       	', ', vm_columna_2, ' ', rm_orden[vm_columna_2]
 		PREPARE deto FROM query
@@ -235,6 +166,7 @@ WHILE TRUE
 		END FOREACH
 		LET vm_num_det = vm_num_det - 1
 		IF vm_num_det = 0 THEN
+			DROP TABLE tmp_caj
 			CALL fl_mensaje_consulta_sin_registros()
 			EXIT WHILE
 		END IF
@@ -242,42 +174,6 @@ WHILE TRUE
 		CALL set_count(vm_num_det)
 		LET int_flag = 0
 		DISPLAY ARRAY rm_det TO rm_det.*
-			--#BEFORE DISPLAY
-				--#CALL dialog.keysetlabel('ACCEPT','')
-				--#CALL dialog.keysetlabel("F1","")
-				--#CALL dialog.keysetlabel("CONTROL-W","")
-			--#BEFORE ROW
-				--#LET i = arr_curr()
-				--#LET j = scr_line()
-				--#CALL muestra_contadores_det(i, vm_num_det)
-				--#IF rm_det[i].j10_tipo_destino = 'EC' THEN
-					--#CALL dialog.keysetlabel("F5", "")
-				--#ELSE
-					--#CALL dialog.keysetlabel("F5", "Forma de Pago")
-				--#END IF
-				--#IF rm_det[i].j10_tipo_destino = 'FA' OR 
-				   --#rm_det[i].j10_tipo_destino = 'PG' OR
-				   --#rm_det[i].j10_tipo_destino = 'PR' OR
-				   --#rm_det[i].j10_tipo_destino = 'PA' OR
-				   --#rm_det[i].j10_tipo_destino = 'EC' THEN
-					--#CALL dialog.keysetlabel("F6", "Comprobante")
-				--#ELSE
-					--#CALL dialog.keysetlabel("F6","")
-				--#END IF
-				--#CALL contar_comprobantes(
-						--#rm_cajs[i].j10_tipo_fuente,
-						--#rm_cajs[i].j10_num_fuente, 
-						--#rm_det[i].j10_tipo_destino,
-						--#rm_det[i].j10_num_destino
-					--#) RETURNING cuantos
-							
-				--#IF cuantos > 0 THEN
-					--#CALL dialog.keysetlabel('F8', 'Contabilización')
-				--#ELSE
-					--#CALL dialog.keysetlabel('F8', '')
-				--#END IF
-			--#AFTER DISPLAY 
-				--#CONTINUE DISPLAY
 			ON KEY(INTERRUPT)
 				LET int_flag = 1
 				EXIT DISPLAY
@@ -286,18 +182,26 @@ WHILE TRUE
 			ON KEY(F5)
 				LET i = arr_curr()
 				LET j = scr_line()
-				CALL ver_forma_pago(i)
-				LET int_flag = 0
+				IF rm_det[i].j10_tipo_destino <> 'EC' THEN
+					CALL ver_forma_pago(i)
+					LET int_flag = 0
+				END IF
 			ON KEY(F6)
 				LET i = arr_curr()
 				LET j = scr_line()
-				CALL fl_ver_comprobantes_emitidos_caja(
-					rm_cajs[i].j10_tipo_fuente, 
-					rm_cajs[i].j10_num_fuente, 
-				        rm_det[i].j10_tipo_destino, 
-				        rm_det[i].j10_num_destino, 
-				        rm_cajs[i].j10_codcli)
-				LET int_flag = 0
+				IF rm_det[i].j10_tipo_destino = 'FA' OR 
+				   rm_det[i].j10_tipo_destino = 'PG' OR
+				   rm_det[i].j10_tipo_destino = 'PR' OR
+				   rm_det[i].j10_tipo_destino = 'PA' OR
+				   rm_det[i].j10_tipo_destino = 'EC' THEN
+					CALL fl_ver_comprobantes_emitidos_caja(
+						rm_cajs[i].j10_tipo_fuente, 
+						rm_cajs[i].j10_num_fuente, 
+					        rm_det[i].j10_tipo_destino, 
+					        rm_det[i].j10_num_destino, 
+					        rm_cajs[i].j10_codcli)
+					LET int_flag = 0
+				END IF
 			ON KEY(F7)
 				LET i = arr_curr()
 				LET j = scr_line()
@@ -340,8 +244,47 @@ WHILE TRUE
 			ON KEY(F21)
 				LET col = 7
 				EXIT DISPLAY
+			--#BEFORE DISPLAY
+				--#CALL dialog.keysetlabel('ACCEPT','')
+				--#CALL dialog.keysetlabel("F1","")
+				--#CALL dialog.keysetlabel("CONTROL-W","")
+			--#BEFORE ROW
+				--#LET i = arr_curr()
+				--#LET j = scr_line()
+				--#CALL muestra_contadores_det(i, vm_num_det)
+				--#IF rm_det[i].j10_tipo_destino = 'EC' THEN
+					--#CALL dialog.keysetlabel("F5", "")
+				--#ELSE
+					--#CALL dialog.keysetlabel("F5", "Forma de Pago")
+				--#END IF
+				--#IF rm_det[i].j10_tipo_destino = 'FA' OR 
+				   --#rm_det[i].j10_tipo_destino = 'PG' OR
+				   --#rm_det[i].j10_tipo_destino = 'PR' OR
+				   --#rm_det[i].j10_tipo_destino = 'PA' OR
+				   --#rm_det[i].j10_tipo_destino = 'EC' THEN
+					--#CALL dialog.keysetlabel("F6", "Comprobante")
+				--#ELSE
+					--#CALL dialog.keysetlabel("F6","")
+				--#END IF
+				--#CALL contar_comprobantes(
+						--#rm_cajs[i].j10_tipo_fuente,
+						--#rm_cajs[i].j10_num_fuente, 
+						--#rm_det[i].j10_tipo_destino,
+						--#rm_det[i].j10_num_destino
+					--#) RETURNING cuantos
+							
+				--#IF cuantos > 0 THEN
+					--#CALL dialog.keysetlabel('F8', 'Contabilización')
+				--#ELSE
+					--#CALL dialog.keysetlabel('F8', '')
+				--#END IF
+				--#DISPLAY rm_det[i].j10_nomcli TO nomcli
+				--#DISPLAY rm_det[i].j10_referencia TO referencia
+			--#AFTER DISPLAY 
+				--#CONTINUE DISPLAY
 		END DISPLAY
 		IF int_flag = 1 THEN
+			DROP TABLE tmp_caj
 			EXIT WHILE
 		END IF
 		IF col <> vm_columna_1 THEN
@@ -361,17 +304,166 @@ END FUNCTION
 
 
 
+FUNCTION ejecuta_query_consulta(expr_sql01, expr_sql02, expr_sql03)
+DEFINE expr_sql01	VARCHAR(200)
+DEFINE expr_sql02	VARCHAR(100)
+DEFINE expr_sql03	CHAR(600)
+DEFINE query		CHAR(7000)
+DEFINE expr_caj		VARCHAR(100)
+DEFINE expr_fec		VARCHAR(200)
+DEFINE expr_sql		CHAR(500)
+DEFINE con_union	SMALLINT
+DEFINE lim, pos		SMALLINT
+
+LET expr_caj = NULL
+IF rm_caj.j10_codigo_caja IS NOT NULL THEN
+	LET expr_caj = '  AND j10_codigo_caja     = ', rm_caj.j10_codigo_caja
+END IF
+LET expr_fec = '  AND DATE(j10_fecha_pro) BETWEEN "', vm_fecha_ini, '"',
+					' AND "', vm_fecha_fin, '"'
+LET expr_sql = NULL
+IF expr_sql01 IS NOT NULL THEN
+	LET expr_sql = '  AND ', expr_sql01 CLIPPED
+END IF
+LET con_union = 1
+IF expr_sql02 <> ' 1=1' THEN
+	LET lim = LENGTH(expr_sql02)
+	LET pos = lim - 4
+	IF expr_sql02[pos, lim] = "EC" THEN
+		LET con_union = 0
+	END IF
+END IF
+LET query = NULL
+IF con_union THEN
+	LET query = 'SELECT DATE(j10_fecha_pro) AS fec_pro, ',
+			'j10_nomcli AS nomcli, ',
+			'j10_tipo_destino AS tip_des, ',
+			'j10_num_destino, ',
+			'j10_referencia, ',
+			'j11_codigo_pago, ',
+			'j11_valor, ',
+			'j10_compania AS cia, ',
+			'j10_localidad AS loc, ',
+			'j10_tipo_fuente AS tip_fue, ',
+			'j10_num_fuente AS num_fue, ',
+			'j10_codcli AS codcli ',
+		'FROM cajt010, cajt011 ',
+		'WHERE j10_compania         = ', vg_codcia,
+		'  AND j10_localidad        = ', vg_codloc,
+		'  AND j10_tipo_fuente     <> "EC" ',
+		'  AND j10_estado           = "P" ',
+		expr_caj CLIPPED,
+		expr_fec CLIPPED,
+		expr_sql CLIPPED,
+		'  AND ', expr_sql02 CLIPPED,
+		'  AND j11_compania         = j10_compania ',
+		'  AND j11_localidad        = j10_localidad ',
+		'  AND j11_tipo_fuente      = j10_tipo_fuente ',
+		'  AND j11_num_fuente       = j10_num_fuente ',
+		' UNION ALL'
+END IF
+LET query = query CLIPPED,
+		' SELECT DATE(j10_fecha_pro) AS fec_pro, ',
+			'j10_nomcli AS nomcli, ',
+			'j10_tipo_destino AS tip_des, ',
+			'j10_num_destino, ',
+			'j10_referencia, ',
+			'j11_codigo_pago, ',
+			'SUM(j11_valor * (-1)) AS j11_valor, ',
+			'j10_compania AS cia, ',
+			'j10_localidad AS loc, ',
+			'j10_tipo_fuente AS tip_fue, ',
+			'j10_num_fuente AS num_fue, ',
+			'j10_codcli AS codcli ',
+		'FROM cajt010, cajt011 ',
+		'WHERE j10_compania         = ', vg_codcia,
+		'  AND j10_localidad        = ', vg_codloc,
+		'  AND j10_tipo_fuente      = "EC" ',
+		'  AND j10_estado           = "P" ',
+		'  AND j10_valor            > 0 ',
+		expr_caj CLIPPED,
+		expr_fec CLIPPED,
+		expr_sql CLIPPED,
+		'  AND ', expr_sql02 CLIPPED,
+		'  AND j11_compania         = j10_compania ',
+		'  AND j11_localidad        = j10_localidad ',
+		'  AND j11_num_egreso       = j10_num_fuente ',
+		' GROUP BY 1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12 ',
+		' UNION ALL',
+		' SELECT DATE(j10_fecha_pro) AS fec_pro, ',
+			'j10_nomcli AS nomcli, ',
+			'j10_tipo_destino AS tip_des, ',
+			'j10_num_destino, ',
+			'j10_referencia, ',
+			'CASE WHEN (j10_tipo_fuente = "EC" AND j10_valor > 0) ',
+				'THEN "EF" ',
+			     'WHEN (j10_tipo_fuente = "EC" AND j10_valor = 0) ',
+				'THEN ',
+				'(SELECT UNIQUE j11_codigo_pago ',
+				'FROM cajt011 ',
+				'WHERE j11_compania   = j10_compania ',
+				'  AND j11_localidad  = j10_localidad ',
+				'  AND j11_num_egreso = j10_num_fuente) ',
+			'END AS j11_codigo_pago, ',
+			'CASE WHEN (j10_tipo_fuente = "EC" AND j10_valor > 0) ',
+				'THEN j10_valor * (-1) ',
+			     'WHEN (j10_tipo_fuente = "EC" AND j10_valor = 0) ',
+				'THEN ',
+				'NVL((SELECT SUM(j11_valor * (-1)) ',
+				'FROM cajt011 ',
+				'WHERE j11_compania   = j10_compania ',
+				'  AND j11_localidad  = j10_localidad ',
+				'  AND j11_num_egreso = j10_num_fuente), 0) ',
+			'END AS j11_valor, ',
+			'j10_compania AS cia, ',
+			'j10_localidad AS loc, ',
+			'j10_tipo_fuente AS tip_fue, ',
+			'j10_num_fuente AS num_fue, ',
+			'j10_codcli AS codcli ',
+		'FROM cajt010 ',
+		'WHERE j10_compania        = ', vg_codcia,
+		'  AND j10_localidad       = ', vg_codloc,
+		'  AND j10_estado          = "P" ',
+		expr_caj CLIPPED,
+		expr_fec CLIPPED,
+		expr_sql CLIPPED,
+		'  AND ', expr_sql02 CLIPPED,
+		'  AND NOT EXISTS ',
+			'(SELECT 1 FROM cajt011 ',
+				'WHERE j11_compania    = j10_compania ',
+				'  AND j11_localidad   = j10_localidad ',
+				'  AND j11_tipo_fuente = j10_tipo_fuente ',
+				'  AND j11_num_fuente  = j10_num_fuente) ',
+		' INTO TEMP t1 '
+PREPARE exec_tmp FROM query
+EXECUTE exec_tmp
+LET query = 'SELECT fec_pro, nomcli, tip_des, j10_num_destino AS num_des, ',
+			'j10_referencia AS referencia, ',
+			'j11_codigo_pago AS cod_pag, j11_valor AS val_trn, ',
+			'cia, loc, tip_fue, num_fue, codcli ',
+		'FROM t1 ',
+		'WHERE ', expr_sql03 CLIPPED,
+		' INTO TEMP tmp_caj '
+PREPARE exec_tmp02 FROM query
+EXECUTE exec_tmp02
+DROP TABLE t1
+
+END FUNCTION
+
+
+
 FUNCTION lee_parametros()
 DEFINE r_caj		RECORD LIKE cajt002.*
 DEFINE cod_aux		LIKE cajt002.j02_codigo_caja
 DEFINE nom_aux		LIKE cajt002.j02_nombre_caja
 DEFINE fecha_ini	DATE
 DEFINE fecha_fin	DATE
-DEFINE expr_sql		CHAR(400)
-DEFINE expr_sql3	CHAR(400)
+DEFINE expr_sql01	VARCHAR(200)
+DEFINE expr_sql02	VARCHAR(100)
+DEFINE expr_sql03	CHAR(600)
 
 OPTIONS INPUT NO WRAP
-INITIALIZE cod_aux, expr_sql, expr_sql3 TO NULL
+INITIALIZE cod_aux, expr_sql01, expr_sql02, expr_sql03 TO NULL
 LET int_flag = 0
 INPUT BY NAME rm_caj.j10_codigo_caja, vm_fecha_ini, vm_fecha_fin
 	WITHOUT DEFAULTS
@@ -425,7 +517,6 @@ INPUT BY NAME rm_caj.j10_codigo_caja, vm_fecha_ini, vm_fecha_fin
 							rm_caj.j10_codigo_caja)
                         	RETURNING r_caj.*
 			IF r_caj.j02_compania IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'Código de Caja no existe.','exclamation')
 				CALL fl_mostrar_mensaje('Código de Caja no existe.','exclamation')
 				NEXT FIELD j10_codigo_caja
 			END IF
@@ -436,7 +527,6 @@ INPUT BY NAME rm_caj.j10_codigo_caja, vm_fecha_ini, vm_fecha_fin
 	AFTER FIELD vm_fecha_ini 
 		IF vm_fecha_ini IS NOT NULL THEN
 			IF vm_fecha_ini > TODAY THEN
-				--CALL fgl_winmessage(vg_producto,'La fecha de inicio no puede ser mayor a la de hoy.','exclamation')
 				CALL fl_mostrar_mensaje('La fecha de inicio no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD vm_fecha_ini
 			END IF
@@ -447,7 +537,6 @@ INPUT BY NAME rm_caj.j10_codigo_caja, vm_fecha_ini, vm_fecha_fin
 	AFTER FIELD vm_fecha_fin 
 		IF vm_fecha_fin IS NOT NULL THEN
 			IF vm_fecha_fin > TODAY THEN
-				--CALL fgl_winmessage(vg_producto,'La fecha de término no puede ser mayor a la de hoy.','exclamation')
 				CALL fl_mostrar_mensaje('La fecha de término no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD vm_fecha_fin
 			END IF
@@ -457,15 +546,14 @@ INPUT BY NAME rm_caj.j10_codigo_caja, vm_fecha_ini, vm_fecha_fin
 		END IF
 	AFTER INPUT
 		IF vm_fecha_ini > vm_fecha_fin THEN
-			--CALL fgl_winmessage(vg_producto,'Fecha inicial debe ser menor a fecha final.','exclamation')
 			CALL fl_mostrar_mensaje('Fecha inicial debe ser menor a fecha final.','exclamation')
 			NEXT FIELD vm_fecha_ini
 		END IF
 END INPUT
 IF int_flag THEN
-	RETURN expr_sql, expr_sql3
+	RETURN expr_sql01, expr_sql02, expr_sql03
 END IF
-CONSTRUCT BY NAME expr_sql ON j10_nomcli, j10_tipo_destino
+CONSTRUCT BY NAME expr_sql01 ON j10_nomcli
 	ON KEY(INTERRUPT)
 		LET int_flag = 2
 		EXIT CONSTRUCT
@@ -476,10 +564,10 @@ CONSTRUCT BY NAME expr_sql ON j10_nomcli, j10_tipo_destino
 		--#CALL dialog.keysetlabel("CONTROL-W","")
 END CONSTRUCT
 IF int_flag THEN
-	RETURN expr_sql, expr_sql3
+	RETURN expr_sql01, expr_sql02, expr_sql03
 END IF
-OPTIONS INPUT WRAP
-CONSTRUCT BY NAME expr_sql3 ON j11_codigo_pago, j11_moneda, j11_valor
+OPTIONS INPUT NO WRAP
+CONSTRUCT BY NAME expr_sql02 ON j10_tipo_destino
 	ON KEY(INTERRUPT)
 		LET int_flag = 2
 		EXIT CONSTRUCT
@@ -489,7 +577,22 @@ CONSTRUCT BY NAME expr_sql3 ON j11_codigo_pago, j11_moneda, j11_valor
 		--#CALL dialog.keysetlabel("F1","")
 		--#CALL dialog.keysetlabel("CONTROL-W","")
 END CONSTRUCT
-RETURN expr_sql, expr_sql3
+IF int_flag THEN
+	RETURN expr_sql01, expr_sql02, expr_sql03
+END IF
+OPTIONS INPUT WRAP
+CONSTRUCT BY NAME expr_sql03 ON j10_num_destino, j10_referencia,
+				j11_codigo_pago, j11_valor
+	ON KEY(INTERRUPT)
+		LET int_flag = 2
+		EXIT CONSTRUCT
+        ON KEY(F1,CONTROL-W)
+		CALL llamar_visor_teclas()
+	BEFORE CONSTRUCT
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
+END CONSTRUCT
+RETURN expr_sql01, expr_sql02, expr_sql03
 
 END FUNCTION
 
@@ -509,11 +612,11 @@ DEFINE i  		SMALLINT
 
 CALL muestra_contadores_det(0, 0)
 CALL retorna_arreglo()
-
 FOR i = 1 TO vm_size_arr   
         INITIALIZE rm_det[i].*, rm_cajs[i].* TO NULL
         CLEAR rm_det[i].*
 END FOR
+CLEAR nomcli, referencia, vm_total
 
 END FUNCTION
 
@@ -531,11 +634,11 @@ END FUNCTION
 FUNCTION mostrar_cabecera_forma()
 
 --#DISPLAY 'Fecha'              TO tit_col1
---#DISPLAY 'Cliente/Referencia' TO tit_col2
---#DISPLAY 'DO'                 TO tit_col3
+--#DISPLAY 'Cliente/Descripción' TO tit_col2
+--#DISPLAY 'CT'                 TO tit_col3
 --#DISPLAY 'Número'             TO tit_col4
---#DISPLAY 'TP'                 TO tit_col5
---#DISPLAY 'Mo'                 TO tit_col6
+--#DISPLAY 'Referencia'		TO tit_col5
+--#DISPLAY 'FP'                 TO tit_col6
 --#DISPLAY 'Valor'              TO tit_col7
 
 END FUNCTION
@@ -584,7 +687,6 @@ IF vg_gui = 0 THEN
 END IF
 CASE tipo_fuente
         WHEN 'PV'
-                --CALL fgl_winmessage(vg_producto,'Opcion no habilitada.','exclamation')
 		CALL fl_mostrar_mensaje('Opcion no habilitada.','exclamation')
 
         WHEN 'PR'
@@ -657,14 +759,22 @@ DEFINE comando 		VARCHAR(255)
 DEFINE tipo_comp	LIKE ctbt012.b12_tipo_comp
 DEFINE num_comp		LIKE ctbt012.b12_num_comp
 DEFINE run_prog		CHAR(10)
+DEFINE base		CHAR(40)
 
+IF FGL_GETENV("INFORMIXSERVER") = "ACUIO02" THEN
+	RETURN
+END IF
 LET run_prog = '; fglrun '
 IF vg_gui = 0 THEN
 	LET run_prog = '; fglgo '
 END IF
+LET base = vg_base
+IF base_servi() IS NOT NULL THEN
+	LET base = 'acero_qm'
+END IF
 LET comando = 'cd ..', vg_separador, '..', vg_separador,
 	      'CONTABILIDAD', vg_separador, 'fuentes', 
-	      vg_separador, run_prog, 'ctbp201 ', vg_base, ' ',
+	      vg_separador, run_prog, 'ctbp201 ', base CLIPPED, ' ',
 	      'CB ', vg_codcia, ' ', tipo_comp, ' ', num_comp
 
 RUN comando
@@ -734,31 +844,26 @@ END FUNCTION
 
 FUNCTION mostrar_comp_contable(tipo_fuente, num_fuente, tipo_destino, 
 			       num_destino)
-
 DEFINE tipo_fuente	LIKE cajt010.j10_tipo_fuente
 DEFINE num_fuente	LIKE cajt010.j10_num_fuente
 DEFINE tipo_destino	LIKE cajt010.j10_tipo_destino
 DEFINE num_destino	LIKE cajt010.j10_num_destino
+DEFINE r_det 		ARRAY[50] OF RECORD
+				tipo_comp	LIKE ctbt012.b12_tipo_comp,
+				num_comp	LIKE ctbt012.b12_num_comp,
+				fecha		LIKE ctbt012.b12_fec_proceso,
+				subtipo		LIKE ctbt004.b04_nombre
+			END RECORD
 DEFINE r_j10		RECORD LIKE cajt010.*
-
-DEFINE query 		CHAR(500)
-
-DEFINE i       	 	SMALLINT
-
-DEFINE max_rows		SMALLINT
-DEFINE r_det ARRAY[50] OF RECORD
-	tipo_comp		LIKE ctbt012.b12_tipo_comp,
-	num_comp		LIKE ctbt012.b12_num_comp,
-	fecha			LIKE ctbt012.b12_fec_proceso,
-	subtipo			LIKE ctbt004.b04_nombre
-END RECORD
+DEFINE query 		CHAR(800)
+DEFINE i, max_rows	SMALLINT
 DEFINE lin_menu		SMALLINT
 DEFINE row_ini  	SMALLINT
 DEFINE num_rows 	SMALLINT
 DEFINE num_cols 	SMALLINT
+DEFINE servi		CHAR(40)
 
 LET max_rows = 50
-
 INITIALIZE query TO NULL
 CASE tipo_fuente
 	WHEN 'PR'
@@ -817,18 +922,24 @@ CASE tipo_fuente
 		            '     AND b04_compania  = b12_compania ',
 		            '     AND b04_subtipo   = b12_subtipo '
 	WHEN 'EC'
+		LET servi = base_servi()
+		IF servi IS NOT NULL THEN
+			LET servi = servi CLIPPED, ':'
+		END IF
 		LET query = 'SELECT j10_tip_contable, j10_num_contable, ',
 				'   b12_fec_proceso, b04_nombre ',
-			    '	FROM cajt010, ctbt012, OUTER ctbt004 ',
-			    ' 	WHERE j10_compania  = ', vg_codcia,
-			    '	  AND j10_localidad = ', vg_codloc,
+			    '	FROM cajt010, ', servi CLIPPED,
+					'ctbt012, OUTER ', servi CLIPPED,
+						'ctbt004 ',
+			    ' 	WHERE j10_compania     = ', vg_codcia,
+			    '	  AND j10_localidad    = ', vg_codloc,
 			    '	  AND j10_tipo_destino = "', tipo_destino, '"',
 			    '     AND j10_num_destino  = "', num_destino,  '"',
-		  	    '     AND b12_compania  = j10_compania ',
-		            '     AND b12_tipo_comp = j10_tip_contable ',
-		            '     AND b12_num_comp  = j10_num_contable ',
-		            '     AND b04_compania  = b12_compania ',
-		            '     AND b04_subtipo   = b12_subtipo '
+		  	    '     AND b12_compania     = j10_compania ',
+		            '     AND b12_tipo_comp    = j10_tip_contable ',
+		            '     AND b12_num_comp     = j10_num_contable ',
+		            '     AND b04_compania     = b12_compania ',
+		            '     AND b04_subtipo      = b12_subtipo '
 	WHEN 'OI'
 		LET query = 'SELECT j10_tip_contable, j10_num_contable, ',
 				'   b12_fec_proceso, b04_nombre ',
@@ -940,6 +1051,26 @@ FOR i = 1 TO vm_num_det
 	END IF
 END FOR
 DISPLAY BY NAME vm_total
+
+END FUNCTION
+
+
+
+FUNCTION base_servi()
+DEFINE bas_ser		CHAR(40)
+
+LET bas_ser = FGL_GETENV("INFORMIXSERVER")
+IF FGL_GETENV("INFORMIXSERVER") = "ACUIO02" OR
+   FGL_GETENV("INFORMIXSERVER") = "idsuio02"
+THEN
+	LET bas_ser = 'idsuio01'
+END IF
+IF vg_base = 'acero_qs' THEN
+	LET bas_ser = 'acero_qm@', bas_ser CLIPPED
+ELSE
+	LET bas_ser = NULL
+END IF
+RETURN bas_ser
 
 END FUNCTION
 

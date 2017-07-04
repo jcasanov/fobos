@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000022136</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>CHICA CELI TONNY ALIX</razonSocialComprador>
+<identificacionComprador>0701214850001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000101621</numDocModificado>
+<fechaEmisionDocSustento>28/08/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>2029.65</totalSinImpuestos>
+<valorModificacion>2273.21</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>2029.65</baseImponible>
+<valor>243.56</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEVOLUCION: CAMBIO DE MERCADERIA</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>101557</codigoInterno>
+<descripcion>VALVULA DE GUILLOTINA HIERRO FUNDIDO EX DN 100 DE 4" CLASE 150</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>760.17</precioUnitario>
+<descuento>250.86</descuento>
+<precioTotalSinImpuesto>2029.65</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ORBINO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2029.65</baseImponible>
+<valor>243.56</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">tonnyalix@yahoo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0984128930</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">16327</campoAdicional>
+</infoAdicional>
+</notaCredito>

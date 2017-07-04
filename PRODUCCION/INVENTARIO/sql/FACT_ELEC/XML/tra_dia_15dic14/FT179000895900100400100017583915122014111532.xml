@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175839</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>CONDORCUNGA OE9-485 Y GUATEMALA</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175839</guiaRemision>
+<razonSocialComprador>GUEVARA ALVARADO MARIO ALFONSO</razonSocialComprador>
+<identificacionComprador>1709121246001</identificacionComprador>
+<totalSinImpuestos>276.17</totalSinImpuestos>
+<totalDescuento>27.62</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>248.55</baseImponible>
+<valor>29.83</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>278.38</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>15664</codigoPrincipal>
+<descripcion>DADOS PARA TERRAJA MANUAL P/ 12-R DE 1/2" NPT (37825)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>53.87</precioUnitario>
+<descuento>5.39</descuento>
+<precioTotalSinImpuesto>48.48</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIDGID" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>48.48</baseImponible>
+<valor>5.82</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102372</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-20-7971 SDS PLUS 4CT MX4 1/2" X 4" X 6"</descripcion>
+<cantidad>15.00</cantidad>
+<precioUnitario>10.44</precioUnitario>
+<descuento>15.66</descuento>
+<precioTotalSinImpuesto>140.94</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>140.94</baseImponible>
+<valor>16.91</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150618</codigoPrincipal>
+<descripcion>CINTA PERFORADA METALICA DE 0.9mm. POR 10 METROS (ROLLO)</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>10.95</precioUnitario>
+<descuento>6.57</descuento>
+<precioTotalSinImpuesto>59.13</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="NACIONAL" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>59.13</baseImponible>
+<valor>7.10</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

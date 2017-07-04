@@ -1,0 +1,22 @@
+export DIR=$PWD
+cd $DIR
+for i in ACTIVOS CAJA COBRANZAS COMPRAS CONTABILIDAD GENERALES LIBRERIAS MENU REPUESTOS TALLER TESORERIA NOMINA
+do
+	cd $i
+	cd fuentes
+	echo $PWD
+	for j in *.4gl
+	do
+		echo "Copiando $i/fuentes/$j a srvgyere:$HOME/PRODUCCION/$i/fuentes/"
+		rcp $j srvgyere:$HOME/PRODUCCION/$i/fuentes/
+	done
+	cd ../forms
+	for j in *.per
+	do
+		echo "Copiando $i/forms/$j a srvgyere:$HOME/PRODUCCION/$i/forms/"
+		rcp $j srvgyere:$HOME/PRODUCCION/$i/forms/
+	done
+	cd ../..
+done
+echo " "
+echo "Copiado todo el FOBOS en srvgyere:$HOME/PRODUCCION/  Ok."

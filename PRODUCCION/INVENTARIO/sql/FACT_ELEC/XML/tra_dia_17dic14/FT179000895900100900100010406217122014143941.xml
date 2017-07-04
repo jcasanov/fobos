@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104062</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>AV. CARLOS J. AROSEMENA, KM. 2,5</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104062</guiaRemision>
+<razonSocialComprador>BARBASETI S.A.</razonSocialComprador>
+<identificacionComprador>0991134832001</identificacionComprador>
+<totalSinImpuestos>203.81</totalSinImpuestos>
+<totalDescuento>27.79</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>203.81</baseImponible>
+<valor>24.46</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>228.27</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>70678</codigoPrincipal>
+<descripcion>MANOMETRO ROSCA NPT 1/4" 0-150 PSI DE GLICERINA ESF. 2.5"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>38.60</precioUnitario>
+<descuento>27.79</descuento>
+<precioTotalSinImpuesto>203.81</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ASHCROTF" valor="ASHCRO"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>203.81</baseImponible>
+<valor>24.46</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2206120</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">012360</campoAdicional>
+</infoAdicional>
+</factura>

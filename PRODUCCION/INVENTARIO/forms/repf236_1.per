@@ -1,0 +1,62 @@
+DATABASE aceros
+SCREEN
+{
+   Estado: [c020        ]   Fecha Cambio Precios: [c021      ] - [c022      ]
+
+
+                                                             [c030] de [c031]
+ [c000  |c001                                        |c002      |c003      |c]
+[c010  |c011                                        |c012      |c013      |d]
+[c010  |c011                                        |c012      |c013      |d]
+[c010  |c011                                        |c012      |c013      |d]
+[c010  |c011                                        |c012      |c013      |d]
+[c010  |c011                                        |c012      |c013      |d]
+[c010  |c011                                        |c012      |c013      |d]
+[c010  |c011                                        |c012      |c013      |d]
+[c010  |c011                                        |c012      |c013      |d]
+[c010  |c011                                        |c012      |c013      |d]
+[c010  |c011                                        |c012      |c013      |d]
+[c010  |c011                                        |c012      |c013      |d]
+[c010  |c011                                        |c012      |c013      |d]
+[c010  |c011                                        |c012      |c013      |d]
+[c010  |c011                                        |c012      |c013      |d]
+
+}
+TABLES
+rept085
+ATTRIBUTES
+c020 = FORMONLY.estado TYPE CHAR NOT NULL, REQUIRED, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'RADIO', CONFIG = 'A Activas R Reversadas T "T O D A S"',
+	DEFAULT = 'A';
+c021 = FORMONLY.fecha_ini TYPE DATE NOT NULL, REQUIRED, AUTONEXT, REVERSE,
+	UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la Fecha Inicial en formato: dd-mm-aaaa.';
+c022 = FORMONLY.fecha_fin TYPE DATE NOT NULL, REQUIRED, AUTONEXT, REVERSE,
+	UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la Fecha Final en formato: dd-mm-aaaa.';
+
+c000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c002 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c003 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c    = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+
+c010 = rept085.r85_codigo, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c011 = rept085.r85_referencia, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c012 = rept085.r85_usuario, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c013 = rept085.r85_fec_camprec, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+d    = rept085.r85_estado, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+
+c030 = FORMONLY.cur_row, NOENTRY, REVERSE, UPSHIFT;
+c031 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+END
+KEYS
+F5 = 'Cabecera'
+F6 = 'Reversar'
+F7 = 'Detalle'
+F8 = 'Detalle Items'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_detalle[14] (r85_codigo, r85_referencia, r85_usuario,
+				r85_fec_camprec, r85_estado)

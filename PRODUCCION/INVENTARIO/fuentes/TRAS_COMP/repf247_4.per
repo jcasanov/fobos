@@ -1,0 +1,67 @@
+DATABASE aceros
+SCREEN
+{
+ DETALLE STOCK ITEM ORIGEN PARA CAMBIO DE CODIGO
+  Item: [b001   ]
+ [b002                                                   ]
+ [c5 ] de [c6 ]
+  [x1|x2                            |x3        |x4        ]
+ [c1|c002                          |c003      |c004      ]
+ [c1|c002                          |c003      |c004      ]
+ [c1|c002                          |c003      |c004      ]
+ [c1|c002                          |c003      |c004      ]
+ [c1|c002                          |c003      |c004      ]
+                    Total Local:   [c005      |c006      ] 
+ [c7 ] de [c8 ]
+  [y1|y2                            |y3        ]
+ [d1|d002                          |d003      ]  STOCK DE 
+ [d1|d002                          |d003      ]
+ [d1|d002                          |d003      ]    OTRAS 
+ [d1|d002                          |d003      ]
+ [d1|d002                          |d003      ]   BODEGAS 
+                  Total Remotas:   [d004      ]
+                 Total Nacional:   [d005      ]
+}
+TABLES
+rept010
+rept011
+ATTRIBUTES
+x1   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+x2   = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+x3   = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+x4   = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+
+y1   = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+y2   = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+y3   = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+
+b001 = FORMONLY.codigo, REVERSE;
+b002 = r10_nombre, REVERSE;
+
+c1   = FORMONLY.bod_loc, NOENTRY, UPSHIFT;
+c002 = FORMONLY.nom_bod_loc, NOENTRY, UPSHIFT;
+c003 = FORMONLY.stock_loc TYPE DECIMAL(8,2), FORMAT = '---,--&.##',
+	COLOR = RED WHERE c003 < 0, NOENTRY, UPSHIFT;
+c004 = FORMONLY.cant_loc TYPE DECIMAL(8,2), FORMAT = '###,##&.##',
+	AUTONEXT, INCLUDE = (0.01 TO 999999.99);
+c005 = FORMONLY.tot_stock_loc TYPE DECIMAL(8,2), FORMAT = '---,--&.##', REVERSE;
+c006 = FORMONLY.tot_cant_loc TYPE DECIMAL(8,2), FORMAT = '---,--&.##', REVERSE;
+
+d1   = FORMONLY.bod_rem;
+d002 = FORMONLY.nom_bod_rem;
+d003 = FORMONLY.stock_rem TYPE DECIMAL(8,2), FORMAT = '---,--&.##',
+	COLOR = RED WHERE d003 < 0;
+d004 = FORMONLY.tot_stock_rem TYPE DECIMAL(8,2), FORMAT = '---,--&.##', REVERSE;
+d005 = FORMONLY.tot_stock_gen TYPE DECIMAL(8,2), FORMAT = '---,--&.##', REVERSE;
+
+c5   = FORMONLY.num_row_l, NOENTRY;
+c6   = FORMONLY.max_row_l, NOENTRY;
+c7   = FORMONLY.num_row_r, NOENTRY;
+c8   = FORMONLY.max_row_r, NOENTRY;
+END
+KEYS
+F5 = 'Remotas'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD r_loc2[5] (bod_loc, nom_bod_loc, stock_loc, cant_loc)
+SCREEN RECORD r_rem[5] (bod_rem, nom_bod_rem, stock_rem)                                                                          

@@ -1,0 +1,37 @@
+DATABASE aceros
+SCREEN
+{
+
+ Ingresos/Dsctos. por Vacaciones     [c0 ] de [c1 ]
+ [c000|c001                          |c002         ]
+[c010|c011                          |c012         ]
+[c010|c011                          |c012         ]
+[c010|c011                          |c012         ]
+[c010|c011                          |c012         ]
+[c010|c011                          |c012         ]
+[c010|c011                          |c012         ]
+[c010|c011                          |c012         ]
+[c010|c011                          |c012         ]
+                             Total: [c020         ]
+
+}
+TABLES
+rolt006
+rolt040
+ATTRIBUTES
+c000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c002 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+
+c010 = rolt040.n40_cod_rubro, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c011 = rolt006.n06_nombre, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c012 = rolt040.n40_valor, AUTONEXT, UPSHIFT, FORMAT = '--,---,--&.##',
+	OPTIONS = '-nolist';
+
+c020 = FORMONLY.total_rubro,NOENTRY, UPSHIFT, REVERSE, FORMAT = '--,---,--&.##';
+c0   = FORMONLY.cur_rub, NOENTRY, UPSHIFT, REVERSE;
+c1   = FORMONLY.vm_num_rub, NOENTRY, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_descto[8] (n40_cod_rubro, n06_nombre, n40_valor)

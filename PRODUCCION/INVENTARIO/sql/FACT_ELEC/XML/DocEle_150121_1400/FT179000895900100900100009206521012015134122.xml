@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092065</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092065</guiaRemision>
+<razonSocialComprador>GARCIA ROSADO ARCADIO JUAN</razonSocialComprador>
+<identificacionComprador>1201145800</identificacionComprador>
+<totalSinImpuestos>930.05</totalSinImpuestos>
+<totalDescuento>102.53</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>930.05</baseImponible>
+<valor>111.61</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1041.66</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>100382</codigoPrincipal>
+<descripcion>VALVULA FLUSH PARA INODORO E365.22 CR STANDARD</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>168.98</precioUnitario>
+<descuento>50.69</descuento>
+<precioTotalSinImpuesto>456.25</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>456.25</baseImponible>
+<valor>54.75</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>25244</codigoPrincipal>
+<descripcion>SPUD 5110000 DE 1-1/2" P/TAZA FLUSH</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>1.80</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>7.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7.20</baseImponible>
+<valor>0.86</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101621</codigoPrincipal>
+<descripcion>LLAVE TEMPORIZADAS / PRESSMATIC E372 CR ECOMATIC P/LAVABO</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>64.52</precioUnitario>
+<descuento>25.81</descuento>
+<precioTotalSinImpuesto>232.27</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>232.27</baseImponible>
+<valor>27.87</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99705</codigoPrincipal>
+<descripcion>DESAGUE DE LAVABO E2460.01 RA DH BLC C/REJILLA Y SIFON DE 1-1/4"</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>6.98</precioUnitario>
+<descuento>2.79</descuento>
+<precioTotalSinImpuesto>25.13</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>25.13</baseImponible>
+<valor>3.02</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>48674</codigoPrincipal>
+<descripcion>LLAVE TEMPORIZADAS / PRESSMATIC O361 CR 1/2" P/ LAVABO</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>58.11</precioUnitario>
+<descuento>23.24</descuento>
+<precioTotalSinImpuesto>209.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>209.20</baseImponible>
+<valor>25.10</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">rubyg_1991@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">052734948</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016705</campoAdicional>
+<campoAdicional nombre="Observaciones">SE CRUZA CON DEVOLUCION Y DIF.COBR.</campoAdicional>
+</infoAdicional>
+</factura>

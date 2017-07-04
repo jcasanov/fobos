@@ -1,0 +1,30 @@
+DATABASE aceros
+SCREEN
+{
+ GRUPOS DE ITEMS
+
+ [lbl1 |lbl2                                   ]
+[c000 |c001                                    ]
+[c000 |c001                                    ]
+[c000 |c001                                    ]
+[c000 |c001                                    ]
+[c000 |c001                                    ]
+[c000 |c001                                    ]
+[c000 |c001                                    ]
+[c000 |c001                                    ]
+[c000 |c001                                    ]
+[c000 |c001                                    ]
+
+}
+TABLES
+rept071
+
+ATTRIBUTES
+c000 = r71_cod_grupo, UPSHIFT;
+c001 = r71_desc_grupo, UPSHIFT;
+
+lbl1 = formonly.bt_grupo,        NOENTRY, WIDGET='BUTTON', CONFIG='F15';
+lbl2 = formonly.bt_descripcion,  NOENTRY, WIDGET='BUTTON', CONFIG='F16';
+END
+INSTRUCTIONS
+SCREEN RECORD rh_codgrupo[10] (r71_cod_grupo, r71_desc_grupo)

@@ -78,10 +78,16 @@ CALL fl_control_reportes() RETURNING comando
 IF int_flag THEN
 	EXIT PROGRAM
 END IF
-SELECT * FROM cxpt028
-	WHERE p28_compania  = vg_codcia
-	  AND p28_localidad = vg_codloc
-	  AND p28_num_ret   = vm_num_ret
+SELECT cxpt028.*, c03_concepto_ret
+	FROM cxpt028, OUTER ordt003
+	WHERE p28_compania       = vg_codcia
+	  AND p28_localidad      = vg_codloc
+	  AND p28_num_ret        = vm_num_ret
+	  AND c03_compania       = p28_compania
+	  AND c03_tipo_ret       = p28_tipo_ret
+	  AND c03_porcentaje     = p28_porcentaje
+	  AND c03_codigo_sri     = p28_codigo_sri
+	  AND c03_fecha_ini_porc = p28_fecha_ini_porc
 	INTO TEMP tmp_ret
 SELECT COUNT(*) INTO cuantos FROM tmp_ret WHERE p28_tipo_ret = 'F'
 IF cuantos = 0 THEN
@@ -110,8 +116,24 @@ END FUNCTION
 
 
 FUNCTION control_main_reporte(comando)
-DEFINE r_p28_i		RECORD LIKE cxpt028.*
-DEFINE r_p28_f		RECORD LIKE cxpt028.*
+DEFINE r_p28_i, r_p28_f	RECORD
+				p28_compania	LIKE cxpt028.p28_compania,
+				p28_localidad	LIKE cxpt028.p28_localidad,
+				p28_num_ret	LIKE cxpt028.p28_num_ret,
+				p28_secuencia	LIKE cxpt028.p28_secuencia,
+				p28_codprov	LIKE cxpt028.p28_codprov,
+				p28_tipo_doc	LIKE cxpt028.p28_tipo_doc,
+				p28_num_doc	LIKE cxpt028.p28_num_doc,
+				p28_dividendo	LIKE cxpt028.p28_dividendo,
+				p28_valor_fact	LIKE cxpt028.p28_valor_fact,
+				p28_tipo_ret	LIKE cxpt028.p28_tipo_ret,
+				p28_porcentaje	LIKE cxpt028.p28_porcentaje,
+				p28_codigo_sri	LIKE cxpt028.p28_codigo_sri,
+				p28_fecha_ini_porc LIKE cxpt028.p28_fecha_ini_porc,
+				p28_valor_base	LIKE cxpt028.p28_valor_base,
+				p28_valor_ret	LIKE cxpt028.p28_valor_ret,
+				c03_concepto_ret LIKE ordt003.c03_concepto_ret
+			END RECORD
 DEFINE comando		VARCHAR(100)
 DEFINE query		CHAR(400)
 
@@ -152,9 +174,9 @@ LET vm_tot_lin_imp = 0
 FOREACH q_p28_f INTO r_p28_f.*
 	LET vm_tot_lin_imp = vm_tot_lin_imp + 1
 END FOREACH
-LET vm_lim_i = 4
+LET vm_lim_i = 2
 IF vm_tot_lin_imp = 0 THEN
-	LET vm_lim_i = 8
+	LET vm_lim_i = 12
 END IF
 OPEN q_p28_f
 LET vm_lin	 = 0
@@ -180,7 +202,7 @@ LET vm_lin_imp	 = 0
 LET vm_total_val = 0
 LET vm_salto_fin = 2
 IF vm_tot_lin_imp = 0 THEN
-	LET vm_salto_fin = 10
+	LET vm_salto_fin = 12
 END IF
 LET unavez = 1
 WHILE TRUE     	
@@ -240,13 +262,36 @@ END FUNCTION
 
 
 REPORT report_retencion(r_iva_fuente)
-DEFINE r_iva_fuente	RECORD LIKE cxpt028.*            
-DEFINE r_c02		RECORD LIKE ordt002.*            
+DEFINE r_iva_fuente	RECORD
+				p28_compania	LIKE cxpt028.p28_compania,
+				p28_localidad	LIKE cxpt028.p28_localidad,
+				p28_num_ret	LIKE cxpt028.p28_num_ret,
+				p28_secuencia	LIKE cxpt028.p28_secuencia,
+				p28_codprov	LIKE cxpt028.p28_codprov,
+				p28_tipo_doc	LIKE cxpt028.p28_tipo_doc,
+				p28_num_doc	LIKE cxpt028.p28_num_doc,
+				p28_dividendo	LIKE cxpt028.p28_dividendo,
+				p28_valor_fact	LIKE cxpt028.p28_valor_fact,
+				p28_tipo_ret	LIKE cxpt028.p28_tipo_ret,
+				p28_porcentaje	LIKE cxpt028.p28_porcentaje,
+				p28_codigo_sri	LIKE cxpt028.p28_codigo_sri,
+				p28_fecha_ini_porc LIKE cxpt028.p28_fecha_ini_porc,
+				p28_valor_base	LIKE cxpt028.p28_valor_base,
+				p28_valor_ret	LIKE cxpt028.p28_valor_ret,
+				c03_concepto_ret LIKE ordt003.c03_concepto_ret
+			END RECORD
+DEFINE r_c02		RECORD LIKE ordt002.*
+DEFINE r_p02		RECORD LIKE cxpt002.*
 DEFINE des_tip		VARCHAR(15)
 DEFINE codigo_var	VARCHAR(20)
 DEFINE escape, i	SMALLINT
-DEFINE act_comp, db_c	SMALLINT
-DEFINE desact_comp, db	SMALLINT
+DEFINE act_comp		SMALLINT
+DEFINE desact_comp	SMALLINT
+DEFINE act_10cpi	SMALLINT
+DEFINE act_12cpi	SMALLINT
+DEFINE act_dob1		SMALLINT
+DEFINE act_dob2		SMALLINT
+DEFINE des_dob		SMALLINT
 DEFINE act_neg, des_neg	SMALLINT
 
 OUTPUT
@@ -265,25 +310,67 @@ PAGE HEADER
 	LET escape	= 27		# Iniciar sec. impresi¢n
 	LET act_comp	= 15		# Activar Comprimido.
 	LET desact_comp	= 18		# Cancelar Comprimido.
+	LET act_10cpi	= 80		# Comprimido 10 CPI.
+	LET act_12cpi	= 77		# Comprimido 12 CPI.
+	LET act_dob1	= 87		# Activar Doble Ancho (inicio)
+	LET act_dob2	= 49		# Activar Doble Ancho (final)
+	LET des_dob	= 48		# Desactivar Doble Ancho
 	LET act_neg	= 71		# Activar la negrita
 	LET des_neg	= 72		# Desactivar la negrita
-	SKIP 3 LINES
 	print ASCII escape;
 	print ASCII act_comp;
-	print ASCII escape;
-	print ASCII act_neg
-	PRINT COLUMN 21,  rm_p01.p01_codprov USING "&&&&&&",
-	      COLUMN 28,  nomprov1 CLIPPED
-	PRINT COLUMN 21,  nomprov2 CLIPPED,
-	      COLUMN 97,  DATE(rm_p27.p27_fecing) USING "dd-mm-yyyy"
-	PRINT COLUMN 21,  rm_p01.p01_num_doc
-	PRINT COLUMN 21,  rm_p01.p01_direccion1[1,40],
-	      COLUMN 83,  "No. INTERNO: ",
-	      COLUMN 97,  rm_p27.p27_num_ret	  USING "<<<<<<<<"
-	PRINT COLUMN 02,  "TELEFONO: ",
-	      COLUMN 21,  rm_p01.p01_telefono1 CLIPPED
-	PRINT COLUMN 21,  YEAR(TODAY) USING "####"
-	SKIP 3 LINES
+	PRINT COLUMN 001, ASCII escape, ASCII act_12cpi, ASCII escape,
+			ASCII act_dob1, ASCII act_dob2,
+			ASCII escape, ASCII act_neg,
+	      COLUMN 030, "COMPROBANTE DE RETENCION PROVEEDORES",
+		ASCII escape, ASCII act_dob1, ASCII des_dob,
+		ASCII escape, ASCII act_10cpi,
+		ASCII escape, ASCII des_neg,
+		ASCII escape, ASCII act_comp
+	SKIP 1 LINES
+	PRINT COLUMN 001, "PROVEEDOR          : ",
+	      COLUMN 021, rm_p01.p01_codprov USING "&&&&&&",
+	      COLUMN 028, nomprov1 CLIPPED
+	PRINT COLUMN 001, "NOMBRE PROVEEDOR   : ",
+	      COLUMN 021, nomprov2 CLIPPED,
+	      COLUMN 081, ASCII escape, ASCII act_neg,
+		"FECHA DE EMISION: ",
+	      COLUMN 097, DATE(rm_p27.p27_fecing) USING "dd-mm-yyyy",
+		ASCII escape, ASCII des_neg,
+		ASCII escape, ASCII act_comp
+	PRINT COLUMN 001, "R.U.C. o C.I.      : ",
+	      COLUMN 021, rm_p01.p01_num_doc
+	PRINT COLUMN 001, "DIRECCION PROVEEDOR: ",
+	      COLUMN 021, rm_p01.p01_direccion1[1,40],
+	      COLUMN 081, ASCII escape, ASCII act_neg,
+		"RETENCION No.   : ",
+	      COLUMN 097, rm_loc.g02_serie_cia USING "&&&", "-",
+		rm_loc.g02_serie_loc USING "&&&", "-",
+		rm_p27.p27_num_ret USING "&&&&&&&&&",
+		ASCII escape, ASCII des_neg,
+		ASCII escape, ASCII act_comp
+	PRINT COLUMN 001, "TELEFONO           : ",
+	      COLUMN 021, rm_p01.p01_telefono1 CLIPPED
+	PRINT COLUMN 001, "EJERCICIO FISCAL   : ",
+	      COLUMN 021, YEAR(TODAY) USING "####"
+	--SKIP 3 LINES
+	PRINT COLUMN 001, ASCII escape, ASCII act_12cpi, ASCII escape,
+			ASCII act_dob1, ASCII act_dob2,
+			ASCII escape, ASCII act_neg,
+	      COLUMN 036, "IMPUESTO A LA RENTA",
+		ASCII escape, ASCII act_dob1, ASCII des_dob,
+		ASCII escape, ASCII act_10cpi,
+		ASCII escape, ASCII des_neg,
+		ASCII escape, ASCII act_comp
+	PRINT COLUMN 001, "------------------------------------------------------------------------------------------------------------------------------------"
+	PRINT COLUMN 001, "TIPO COMP.",
+	      COLUMN 017, "CODIGO",
+	      COLUMN 035, "NUMERO DOCUMENTO",
+	      COLUMN 060, "BASE IMPONIBLE",
+	      COLUMN 077, "PORC.",
+	      COLUMN 088, "CONCEPTO",
+	      COLUMN 114, "VALOR RETENIDO"
+	PRINT COLUMN 001, "------------------------------------------------------------------------------------------------------------------------------------"
 	--print '&k2S' 		-- Letra condensada (16 cpi)
 
 ON EVERY ROW
@@ -300,17 +387,38 @@ ON EVERY ROW
 				--SKIP 1 LINES
 				PRINT ' '
 			END FOR
-			LET unavez = 0
 		END IF
 {--
 		IF paginas AND vm_lin_imp = 1 THEN
 			LET unavez = 1
 		END IF
 --}
+		IF unavez THEN
+			PRINT COLUMN 001, ASCII escape, ASCII act_12cpi,
+				ASCII escape,
+				ASCII act_dob1, ASCII act_dob2,
+				ASCII escape, ASCII act_neg,
+			      COLUMN 042, "I. V. A.",
+				ASCII escape, ASCII act_dob1, ASCII des_dob,
+				ASCII escape, ASCII act_10cpi,
+				ASCII escape, ASCII des_neg,
+				ASCII escape, ASCII act_comp
+			PRINT COLUMN 001, "------------------------------------------------------------------------------------------------------------------------------------"
+			PRINT COLUMN 001, "TIPO COMP.",
+			      COLUMN 017, "CODIGO",
+			      COLUMN 035, "NUMERO DOCUMENTO",
+			      COLUMN 060, "BASE IMPONIBLE",
+			      COLUMN 077, "PORC.",
+			      COLUMN 088, "CONCEPTO",
+			      COLUMN 114, "VALOR RETENIDO"
+			PRINT COLUMN 001, "------------------------------------------------------------------------------------------------------------------------------------"
+			LET unavez = 0
+		END IF
 	END IF
 	IF r_iva_fuente.p28_tipo_ret = 'F' THEN
 		LET codigo_var = '       ', r_iva_fuente.p28_codigo_sri CLIPPED
 	END IF
+	--
 	CALL fl_lee_tipo_retencion(vg_codcia, r_iva_fuente.p28_tipo_ret,
 					r_iva_fuente.p28_porcentaje)
 		RETURNING r_c02.*
@@ -322,11 +430,13 @@ ON EVERY ROW
 		WHEN 'T'
 			LET des_tip = 'BIEN/SERVICIO'
 	END CASE
-	PRINT COLUMN 02,  "FACTURA", " ", codigo_var CLIPPED,
-	      COLUMN 35,  r_iva_fuente.p28_num_doc,
-	      COLUMN 60,  r_iva_fuente.p28_valor_base	USING "###,###,##&.##",
-	      COLUMN 77,  r_iva_fuente.p28_porcentaje	USING "##&.##",
-	      COLUMN 88,  des_tip,
+	--
+	--LET des_tip = r_iva_fuente.c03_concepto_ret
+	PRINT COLUMN 002, "FACTURA", " ", codigo_var CLIPPED,
+	      COLUMN 035, r_iva_fuente.p28_num_doc,
+	      COLUMN 060, r_iva_fuente.p28_valor_base	USING "###,###,##&.##",
+	      COLUMN 077, r_iva_fuente.p28_porcentaje	USING "##&.##",
+	      COLUMN 088, des_tip,
 	      COLUMN 114, r_iva_fuente.p28_valor_ret	USING "###,###,##&.##"
 	LET vm_total_val = vm_total_val + r_iva_fuente.p28_valor_ret
 	LET vm_tot_val_g = vm_tot_val_g + r_iva_fuente.p28_valor_ret
@@ -334,6 +444,11 @@ ON EVERY ROW
 		FOR i = 1 TO vm_max_lin_imp - vm_lin_imp
 			SKIP 1 LINES
 		END FOR
+		IF r_iva_fuente.p28_tipo_ret = 'F' THEN
+			PRINT COLUMN 089, "TOTAL RETENIDO IMP. RTA.";
+		ELSE
+			PRINT COLUMN 090, "TOTAL RETENIDO I. V. A.";
+		END IF
 		PRINT COLUMN 114, vm_total_val		USING "###,###,##&.##"
 	END IF
 
@@ -341,10 +456,41 @@ ON LAST ROW
 	FOR i = 1 TO vm_salto_fin
 		SKIP 1 LINES
 	END FOR
-	PRINT COLUMN 114, vm_tot_val_g			USING "###,###,##&.##";
+	PRINT COLUMN 096, "TOTAL RETENCIONES",
+	      COLUMN 114, vm_tot_val_g			USING "###,###,##&.##"
+
+PAGE TRAILER
+	CALL fl_lee_proveedor_localidad(vg_codcia, vg_codloc,
+					rm_p01.p01_codprov)
+		RETURNING r_p02.*
+	PRINT COLUMN 002, ASCII escape, ASCII act_12cpi, ASCII escape,
+			ASCII act_dob1, ASCII act_dob2,
+			ASCII escape, ASCII act_neg,
+	      COLUMN 008, "COPIA SIN DERECHO A CREDITO TRIBUTARIO",
+		ASCII escape, ASCII act_dob1, ASCII des_dob,
+		ASCII escape, ASCII act_10cpi,
+		ASCII escape, ASCII des_neg,
+		ASCII escape, ASCII act_comp
+	PRINT COLUMN 002, "Estimado cliente: Su comprobante electronico ",
+			"usted lo recibira en su cuenta de correo:"
+	PRINT COLUMN 002, ASCII escape, ASCII act_neg,
+			r_p02.p02_email CLIPPED, '.',
+			ASCII escape, ASCII des_neg
+	PRINT COLUMN 002, "Tambien podra consultar y descargar sus ",
+			"comprobantes electronicos a traves del portal"
+	PRINT COLUMN 002, "web ",
+			ASCII escape, ASCII act_neg,
+			"https://innobeefactura.com.",
+			ASCII escape, ASCII des_neg,
+			" Sus datos para el primer acceso son Usuario: "
+	PRINT COLUMN 002, ASCII escape, ASCII act_neg,
+			rm_p01.p01_num_doc CLIPPED, "@innobeefactura.com",
+			ASCII escape, ASCII des_neg,
+			" y su Clave: ",
+			ASCII escape, ASCII act_neg,
+			rm_p01.p01_num_doc CLIPPED, ".",
+			ASCII escape, ASCII des_neg;
 	print ASCII escape;
-	print ASCII desact_comp;
-	print ASCII escape;
-	print ASCII des_neg
+	print ASCII desact_comp
 	
 END REPORT

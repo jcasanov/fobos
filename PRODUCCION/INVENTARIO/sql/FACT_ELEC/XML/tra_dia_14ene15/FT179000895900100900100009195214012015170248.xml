@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091952</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>14/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091952</guiaRemision>
+<razonSocialComprador>CENTRO COMERCIAL LA ROTONDA</razonSocialComprador>
+<identificacionComprador>0991362355001</identificacionComprador>
+<totalSinImpuestos>76.90</totalSinImpuestos>
+<totalDescuento>8.54</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>76.90</baseImponible>
+<valor>9.23</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>86.13</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>71259</codigoPrincipal>
+<descripcion>LLAVE TEMPORIZADAS / PRESSMATIC 0361.01 CR MESON P/ LAVABO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>85.44</precioUnitario>
+<descuento>8.54</descuento>
+<precioTotalSinImpuesto>76.90</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>76.90</baseImponible>
+<valor>9.23</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">nathalyandrade@cclarotonda.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">242945 237</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">003332</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C.002-01-15/BAÒOS MUJERES.</campoAdicional>
+</infoAdicional>
+</factura>

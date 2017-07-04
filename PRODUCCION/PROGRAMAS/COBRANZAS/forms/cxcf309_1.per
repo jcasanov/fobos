@@ -1,0 +1,34 @@
+DATABASE FORMONLY
+SCREEN
+{
+                    Moneda: [c0] [c000        ]
+   Rango Fechas por Vencer: [c001      ] - [c002      ]
+[c003                                                                          ]
+[c003                                                                          ]
+[c003                                                                          ]
+[c003                                                                          ]
+[c003                                                                          ]
+[c003                                                                          ]
+[c003                                                                          ]
+[c003                                                                          ]
+[c003                                                                          ]
+[c003                                                                          ]
+[c003                                                                          ]
+[c003                                                                          ]
+[c003                                                                          ]
+[c003                                                                          ]
+[c003                                                                          ]
+[c003                                                                          ]
+[c003                                                                          ]
+[c003                                                                          ]
+[c003                                                                          ]
+[a]
+}
+ATTRIBUTES
+c0   = FORMONLY.moneda TYPE CHAR NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+       WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c000 = FORMONLY.tit_mon, REVERSE;
+c001 = FORMONLY.fecha_ini TYPE DATE NOT NULL, FORMAT = 'dd-mm-yyyy', REVERSE;
+c002 = FORMONLY.fecha_fin TYPE DATE NOT NULL, FORMAT = 'dd-mm-yyyy', REVERSE;
+c003 = FORMONLY.c001, WIDGET = 'Canvas';
+a    = FORMONLY.tecla, AUTONEXT, INVISIBLE;

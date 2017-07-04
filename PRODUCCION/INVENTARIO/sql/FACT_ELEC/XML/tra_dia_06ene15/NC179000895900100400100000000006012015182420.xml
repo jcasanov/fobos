@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025154</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>06/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>NETAFIM ECUADOR S.A.</razonSocialComprador>
+<identificacionComprador>1792061520001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000025154</numDocModificado>
+<fechaEmisionDocSustento>06/01/2015</fechaEmisionDocSustento>
+<totalSinImpuestos>156.93</totalSinImpuestos>
+<valorModificacion>156.93</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<baseImponible>156.93</baseImponible>
+<valor>0.00</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 268103 NETAFIM ECUADOR MAT NO ENTRGD</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>49007</codigoInterno>
+<descripcion>IMPULSOR DE HIERRO 27205485101 DE 179mm. P/ DS-10</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>196.16</precioUnitario>
+<descuento>39.23</descuento>
+<precioTotalSinImpuesto>156.93</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MARK G"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>156.93</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">evelyne.cartagena@netafim.ec</campoAdicional>
+<campoAdicional nombre="Email">avid.meneses@netafim.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2805858</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">45155</campoAdicional>
+</infoAdicional>
+</notaCredito>

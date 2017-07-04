@@ -1,0 +1,56 @@
+DATABASE FORMONLY
+SCREEN 
+{
+		
+          Moneda: [c0] [c001           ]
+
+   Fecha Inicial: [c002      ]                   Fecha Final: [c003      ]
+
+       Proveedor: [c004  ] [c005                                         ] 
+
+  Tipo O. Compra: [c1] [c006           ]
+
+ Tipo Porcentaje: [c] [c007 ] [c008                ]
+
+      Codigo SRI: [c011   ] [c012                                          ]
+                            [c012                                          ]
+ Fecha Ini. Porc: [c013      ]
+
+                         Agrupado por Proveedor ? : [e]
+                        Agrupado por Codigo SRI ? : [f]
+
+}
+ATTRIBUTES
+c0   = FORMONLY.moneda TYPE CHAR NOT NULL, REVERSE, UPSHIFT, 
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2', AUTONEXT;
+c001 = FORMONLY.desc_moneda, NOENTRY, UPSHIFT, REVERSE;
+c002 = FORMONLY.inicial TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy', 
+	COMMENTS = 'Ingrese fecha inicial en formato: dd-mm-aaaa';
+c003 = FORMONLY.final TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese fecha final en formato: dd-mm-aaaa';
+c004 = FORMONLY.proveedor TYPE INTEGER, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';	
+c005 = FORMONLY.desc_prov, NOENTRY, UPSHIFT;
+c1   = FORMONLY.tipo_oc TYPE CHAR, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';	
+c006 = FORMONLY.desc_tipo, NOENTRY, UPSHIFT;
+c    = FORMONLY.tipo_porc TYPE CHAR, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	INCLUDE = ('F', 'I', NULL),
+	COMMENTS = '(F) FUENTE  (I) IVA';
+c007 = FORMONLY.valor_porc, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c008 = FORMONLY.desc_porc, NOENTRY, UPSHIFT;
+c011 = FORMONLY.cod_sri TYPE CHAR, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c012 = FORMONLY.des_sri TYPE CHAR, NOENTRY, WORDWRAP COMPRESS;
+c013 = FORMONLY.fec_ini_por TYPE DATE, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+e    = FORMONLY.agrup_p TYPE CHAR NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, INCLUDE = ('S', 'N'),
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge', DEFAULT = 'N';
+f    = FORMONLY.agrup_s TYPE CHAR NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, INCLUDE = ('S', 'N'),
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge', DEFAULT = 'N';
+END

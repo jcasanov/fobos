@@ -1,0 +1,25 @@
+DATABASE aceros
+SCREEN
+{
+  COMPANIAS CONFIGURADAS VEHICULOS
+ --------------------------------------
+  Código  Descripción 	  
+ --------------------------------------
+ [f001] [f002                         ] 
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+}
+TABLES
+gent001
+veht001
+ATTRIBUTES
+f001 = v01_compania, REVERSE;
+f002 = g01_razonsocial, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_ciaveh[7] (v01_compania, g01_razonsocial)

@@ -1,0 +1,39 @@
+database acero_gm
+screen size 24 by 80
+{
+c11_compania       [f000       ]
+c11_localidad      [f001  ]
+c11_numero_oc      [f002       ]
+c11_secuencia      [f003  ]
+c11_tipo           [a]
+c11_cant_ped       [f004      ]
+c11_cant_rec       [f005      ]
+c11_codigo         [f006           ]
+c11_descrip        [f007                          ]
+                   [f008                          ]
+c11_descuento      [f009  ]
+c11_paga_iva       [b]
+c11_val_descto     [f010        ]
+c11_val_impto      [f011        ]
+c11_precio         [f012           ]
+}
+end
+tables
+ordt011
+attributes
+f000 = ordt011.c11_compania;
+f001 = ordt011.c11_localidad;
+f002 = ordt011.c11_numero_oc;
+f003 = ordt011.c11_secuencia;
+a = ordt011.c11_tipo;
+f004 = ordt011.c11_cant_ped;
+f005 = ordt011.c11_cant_rec;
+f006 = ordt011.c11_codigo;
+f007 = ordt011.c11_descrip[1,30];
+f008 = ordt011.c11_descrip[31,60];
+f009 = ordt011.c11_descuento;
+b = ordt011.c11_paga_iva;
+f010 = ordt011.c11_val_descto;
+f011 = ordt011.c11_val_impto;
+f012 = ordt011.c11_precio;
+end

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091862</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>08/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091862</guiaRemision>
+<razonSocialComprador>ING. CARLOS MOROCHO DUQUE S.A. CM CONSTRUCCIONES</razonSocialComprador>
+<identificacionComprador>0992234903001</identificacionComprador>
+<totalSinImpuestos>38.47</totalSinImpuestos>
+<totalDescuento>4.28</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>38.47</baseImponible>
+<valor>4.62</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>43.09</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>103375</codigoPrincipal>
+<descripcion>GRIFERIA DE LAVABO 1-H SG0082183061CW  SCARLET LLAVE SENCILLA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>42.75</precioUnitario>
+<descuento>4.28</descuento>
+<precioTotalSinImpuesto>38.47</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>38.47</baseImponible>
+<valor>4.62</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">tmunoz@cmconstrucciones.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2776077</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">008600</campoAdicional>
+</infoAdicional>
+</factura>

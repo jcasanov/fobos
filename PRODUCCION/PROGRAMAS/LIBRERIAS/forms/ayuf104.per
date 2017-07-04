@@ -1,0 +1,31 @@
+DATABASE aceros
+
+SCREEN
+{
+ LIQUIDACIONES VEHICULOS
+---------------------------
+ Pedido       Liquidación
+---------------------------
+[c01       ] [c002 ] [c] 
+[c01       ] [c002 ] [c]
+[c01       ] [c002 ] [c]
+[c01       ] [c002 ] [c]
+[c01       ] [c002 ] [c]
+[c01       ] [c002 ] [c]
+[c01       ] [c002 ] [c]
+[c01       ] [c002 ] [c]
+[c01       ] [c002 ] [c]
+[c01       ] [c002 ] [c]
+}
+
+TABLES
+veht036
+
+ATTRIBUTES
+c01  = v36_pedido, UPSHIFT;
+c002 = v36_numliq, UPSHIFT;
+c    = v36_estado, UPSHIFT;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_liqveh[10](v36_pedido, v36_numliq, v36_estado)

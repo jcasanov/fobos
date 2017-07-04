@@ -1,0 +1,76 @@
+DATABASE aceros
+SCREEN
+{
+    Estado: [d001            ]           Fechas: [c052      ] - [c053      ]
+                                      Localidad: [c0] [c054                ]
+
+                                                            [c050] de [c051]
+ [y|f1|f011   |f2|f3|f014                             |f015      |f4|f016   ] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   ] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   ] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   ] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   ] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   ] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   ] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   ] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   ] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   ] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   ] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   ] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   ] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   ] 
+[z|c2|c021   |c3|c4|c022                             |c023      |c5|c024   ] 
+}
+TABLES
+gent002
+rept090
+rept091
+ATTRIBUTES
+d001 = FORMONLY.vm_estado, REVERSE, WIDGET = 'RADIO',
+	CONFIG = 'P Pendientes T Transmitidas D Todas'; 
+c052 = FORMONLY.vm_fecha_ini TYPE DATE NOT NULL, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Inicial en Formato: dd-mm-aaaa.';
+c053 = FORMONLY.vm_fecha_fin TYPE DATE NOT NULL, AUTONEXT, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Final en Formato: dd-mm-aaaa.';
+c0   = gent002.g02_localidad, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Poner solo la localidad de donde se recibe la Mercaderia.';
+c054 = gent002.g02_nombre, NOENTRY, REVERSE, UPSHIFT;
+
+y    = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+f1   = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+f011 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+f2   = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+f3   = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+f014 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+f015 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+f4   = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22';
+f016 = FORMONLY.tit_col9, WIDGET = 'BUTTON', CONFIG = 'F23';
+
+z    = r91_localidad, NOENTRY, OPTIONS = '-nolist';
+c2   = r91_cod_tran,  NOENTRY, OPTIONS = '-nolist';
+c021 = r91_num_tran,  NOENTRY, OPTIONS = '-nolist';
+c3   = r91_bodega_ori,  NOENTRY, OPTIONS = '-nolist';
+c4   = r91_bodega_dest, NOENTRY, OPTIONS = '-nolist';
+c022 = r91_referencia,  NOENTRY, OPTIONS = '-nolist';
+c023 = FORMONLY.r91_fecing TYPE DATE, NOENTRY, FORMAT = 'dd-mm-yyyy', 
+       OPTIONS = '-nolist';
+c5   = r90_codtra_fin,  NOENTRY, OPTIONS = '-nolist';
+c024 = r90_numtra_fin,  NOENTRY, OPTIONS = '-nolist';
+
+c050 = FORMONLY.num_cur TYPE SMALLINT, NOENTRY, REVERSE, UPSHIFT;
+c051 = FORMONLY.vm_num_rows TYPE SMALLINT, NOENTRY, REVERSE, UPSHIFT;
+END
+
+KEYS 
+F5 = 'Origen'
+F6 = 'Destino'
+F7 = 'Transmitir'
+
+INSTRUCTIONS
+SCREEN RECORD rm_tran[14] (r91_localidad,  r91_cod_tran,    r91_num_tran, 
+			   r91_bodega_ori, r91_bodega_dest, r91_referencia,
+			   FORMONLY.r91_fecing, r90_codtra_fin,  
+			   r90_numtra_fin)

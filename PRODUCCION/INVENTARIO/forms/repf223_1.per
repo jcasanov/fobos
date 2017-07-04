@@ -1,0 +1,62 @@
+DATABASE aceros
+SCREEN
+{
+    Cliente: [a6                                  ]
+   Vendedor: [a7                            ]
+                                                           [c050] de [c051]
+  [c0         |c1    |c2            |c3            |c4            |c5      |  
+ [a0         |a1    |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1    |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1    |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1    |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1    |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1    |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1    |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1    |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1    |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1    |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1    |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1    |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1    |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1    |a2            |a3            |a4            |a5      ][a]
+ [a0         |a1    |a2            |a3            |a4            |a5      ][a]
+
+}
+TABLES
+	rept023,
+	rept001
+ATTRIBUTES
+
+a0  = FORMONLY.tit_estado TYPE VARCHAR, REVERSE, NOENTRY, OPTIONS = '-nolist';
+a1  = FORMONLY.num_preventa TYPE INTEGER, REVERSE, NOENTRY, OPTIONS = '-nolist';
+a2  = FORMONLY.total_sin_iva TYPE DECIMAL(11,2), FORMAT = '###,###,##&.##',
+	REVERSE, NOENTRY, OPTIONS = '-nolist';
+a3  = FORMONLY.total_costo TYPE DECIMAL(11,2), FORMAT = '###,###,##&.##',
+	REVERSE, NOENTRY, OPTIONS = '-nolist';
+a4  = FORMONLY.diferencia TYPE DECIMAL(11,2), FORMAT = '---,---,--&.##',
+	REVERSE, NOENTRY, OPTIONS = '-nolist';
+a5  = FORMONLY.utilidad TYPE DECIMAL (11,2), FORMAT = '---&.##', REVERSE, 
+	NOENTRY, OPTIONS = '-nolist';
+a   = FORMONLY.aprobar, REVERSE, OPTIONS = '-nolist', DEFAULT = 'A',
+	WIDGET = 'CHECK', CONFIG = 'P A acknowledge',
+	COMMENT = 'Marque las preventas que desee aprobar. ';
+a6  = r23_nomcli, NOENTRY, REVERSE, UPSHIFT;
+a7  = r01_nombres, NOENTRY, UPSHIFT;
+c050 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c051 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+		     ---- BOTONES ----
+c0  = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c1  = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c2  = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c3  = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c4  = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c5  = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+	---------------------------------------------
+END
+INSTRUCTIONS 
+DELIMITERS '||'
+SCREEN RECORD r_detalle[15] (tit_estado,  num_preventa, total_sin_iva, 
+			     total_costo, diferencia,   utilidad, aprobar)
+KEYS
+	F5 = 'Detalle Preventa'
+	F6 = 'Ver Preventa'

@@ -9,7 +9,6 @@
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
 DEFINE vm_proceso 	LIKE rolt003.n03_proceso
-DEFINE rm_loc		RECORD LIKE gent002.*
 DEFINE rm_n00		RECORD LIKE rolt000.*  
 DEFINE rm_n01		RECORD LIKE rolt001.*  
 DEFINE rm_n03		RECORD LIKE rolt003.*  
@@ -109,12 +108,6 @@ CREATE TEMP TABLE tmp_descuentos (
 	n49_num_prest		INTEGER,
 	n49_valor		DECIMAL(12, 2)
 )
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rm_loc.*
-IF rm_loc.g02_compania IS NULL THEN
-	DROP TABLE tmp_descuentos
-	CALL fl_mostrar_mensaje('No existe localidad.','stop')
-	EXIT PROGRAM
-END IF
 -- AQUI SE DEFINEN VALORES DE VARIABLES GLOBALES
 LET vm_max_rows = 200
 LET vm_maxelm   = 1000
@@ -122,7 +115,6 @@ LET vm_maxdesc  = 100
 LET vm_proceso  = 'UT'
 CALL fl_lee_compania_roles(vg_codcia) RETURNING rm_n01.*
 IF rm_n01.n01_compania IS NULL THEN
-	DROP TABLE tmp_descuentos
 	CALL fl_mostrar_mensaje(
 		'No existe configuración para esta compañía.',
 		'stop')
@@ -209,7 +201,6 @@ MENU 'OPCIONES'
 		HIDE OPTION 'Mantenimiento'
                 HIDE OPTION 'Generar'
 		HIDE OPTION 'Informe Min.'
-		HIDE OPTION 'Archivo Banco'
 		LET opcion = utilidades_entregadas()
                 IF rm_n05.n05_proceso IS NULL THEN
                 	SHOW OPTION 'Generar'
@@ -290,12 +281,9 @@ MENU 'OPCIONES'
 			SHOW OPTION 'Recibo de Pago'
 			SHOW OPTION 'Informe Min.'
 			SHOW OPTION 'Detalle'
-			SHOW OPTION 'Archivo Banco'
 		END IF
 	COMMAND KEY('D') 'Detalle' 'Consulta el detalle del registro actual. '
 		CALL control_detalle()
-	COMMAND KEY('B') 'Archivo Banco' 'Genera archivo para depositar Banco.'
-		CALL generar_archivo()
 	COMMAND KEY('I') 'Imprimir' 'Imprime un registro. '
 		CALL control_imprimir()
 	COMMAND KEY('P') 'Recibo de Pago' 'Imprime los recibos de pago. '
@@ -322,8 +310,11 @@ MENU 'OPCIONES'
 			HIDE OPTION 'Cerrar'
 		END IF
 		IF vm_num_rows > 0 THEN
-			SHOW OPTION 'Detalle'
-			SHOW OPTION 'Archivo Banco'
+			IF vm_filas_pant < vm_numelm THEN
+				SHOW OPTION 'Detalle'
+			ELSE
+				HIDE OPTION 'Detalle'
+			END IF
 		END IF
 	COMMAND KEY('R') 'Retroceder'  'Ver anterior registro. '
 		CALL muestra_anterior_registro()
@@ -345,8 +336,11 @@ MENU 'OPCIONES'
 			HIDE OPTION 'Cerrar'
 		END IF
 		IF vm_num_rows > 0 THEN
-			SHOW OPTION 'Detalle'
-			SHOW OPTION 'Archivo Banco'
+			IF vm_filas_pant < vm_numelm THEN
+				SHOW OPTION 'Detalle'
+			ELSE
+				HIDE OPTION 'Detalle'
+			END IF
 		END IF
 	COMMAND KEY('S') 'Salir' 'Salir del programa. '
 		EXIT MENU
@@ -485,8 +479,7 @@ DISPLAY ARRAY rm_scr TO ra_scr.*
 		LET i = arr_curr()
 		CALL muestra_etiquetas(i, vm_numelm)
 END DISPLAY
-CALL muestra_contadores_det(0, vm_numelm)
-CALL mostrar_salir_det()
+CLEAR nom_trab, n42_dias_trab
 	
 END FUNCTION
 
@@ -534,8 +527,7 @@ DISPLAY ARRAY rm_scr TO ra_scr.*
 	AFTER DISPLAY
 		CONTINUE DISPLAY
 END DISPLAY
-CALL muestra_contadores_det(0, vm_numelm)
-CALL mostrar_salir_det()
+CLEAR nom_trab, n42_dias_trab
 LET int_flag = 0
 
 END FUNCTION
@@ -755,9 +747,6 @@ FOR i = 1 TO vm_numelm
 END FOR
 COMMIT WORK
 CALL fl_mensaje_registro_modificado()
-IF vm_row_current > 0 THEN
-	CALL mostrar_registro(vm_r_rows[vm_row_current])
-END IF
 
 END FUNCTION
 
@@ -1036,30 +1025,19 @@ FOREACH q_prest INTO r_n49.*
 	UPDATE rolt046
 		SET n46_saldo = n46_valor - r_n49.n49_valor
         	WHERE n46_compania   = vg_codcia
-		  AND n46_num_prest  = r_n49.n49_num_prest
+		  AND n46_num_prest  = r_n45.n45_num_prest
 		  AND n46_cod_liqrol = vm_proceso
 		  AND n46_fecha_ini  = fecha_ini 
 		  AND n46_fecha_fin  = fecha_fin
-		  AND n46_saldo      = r_n49.n49_valor
-	UPDATE rolt046
-		SET n46_saldo = n46_valor - (r_n49.n49_valor + n46_saldo)
-        	WHERE n46_compania   = vg_codcia
-		  AND n46_num_prest  = r_n49.n49_num_prest
-		  AND n46_cod_liqrol = vm_proceso
-		  AND n46_fecha_ini  = fecha_ini 
-		  AND n46_fecha_fin  = fecha_fin
-		  AND n46_saldo      > 0
-		  AND n46_saldo      < r_n49.n49_valor
 	UPDATE rolt045
 		SET n45_descontado = n45_descontado + r_n49.n49_valor,
 		    n45_estado     = r_n45.n45_estado
        		WHERE n45_compania   = vg_codcia
-		  AND n45_num_prest  = r_n49.n49_num_prest
-		  AND n45_cod_rubro  = r_n49.n49_cod_rubro
+		  AND n45_num_prest  = r_n45.n45_num_prest
 		  AND n45_cod_trab   = vm_cod_trab[i].n42_cod_trab
 	     	  AND n45_estado    IN ('A', 'R')
-		  AND n45_val_prest + n45_valor_int +
-			n45_sal_prest_ant - n45_descontado > 0
+		  AND n45_val_prest + n45_valor_int + n45_sal_prest_ant
+			 - n45_descontado > 0
 END FOREACH
 
 END FUNCTION
@@ -1091,7 +1069,7 @@ THEN
 END IF
 INITIALIZE rm_par.* TO NULL
 IF rm_n01.n01_estado <> 'A' THEN
-	CALL fl_mostrar_mensaje('Compañía no esta activa.', 'stop')
+	CALL fl_mostrar_mensaje('Compañía no está activa.', 'stop')
 	EXIT PROGRAM
 END IF
 LET rm_par.n41_ano         = rm_n01.n01_ano_proceso - 1
@@ -1110,7 +1088,8 @@ IF utilidades_entregadas() = 2 THEN
 	END IF
 END IF
 IF utilidades_entregadas() = 0 THEN
-	CALL fl_mostrar_mensaje('Ya existe una liquidación cerrada, consúltela.', 'exclamation')
+	CALL fl_mostrar_mensaje(
+		'Ya existe una liquidación cerrada, consúltela.', 'exclamation')
 	RETURN
 END IF
 LET fecha_ini = MDY(rm_n03.n03_mes_ini, rm_n03.n03_dia_ini, rm_par.n41_ano)
@@ -1185,7 +1164,6 @@ FUNCTION genera_novedades()
 DEFINE r_trab		RECORD 
 				cod_trab	LIKE rolt042.n42_cod_trab,
 				nombres		LIKE rolt030.n30_nombres,
-				estado		LIKE rolt030.n30_estado,
 				fecha_ing	LIKE rolt030.n30_fecha_ing,
 				fecha_reing	LIKE rolt030.n30_fecha_reing,
 				fecha_sal	LIKE rolt030.n30_fecha_sal,
@@ -1211,16 +1189,12 @@ DEFINE tot_valor	DECIMAL(22,10)
 DEFINE tot_dias		INTEGER
 DEFINE tot_dias_cargas	INTEGER
 DEFINE tot_cargas, i	SMALLINT
-DEFINE n_dias, ult_dia	SMALLINT
 DEFINE factor_dias	DECIMAL(28, 20)
 DEFINE factor_cargas	DECIMAL(28, 20)
-DEFINE fec		DATE
-DEFINE query		CHAR(3000)
 
 CREATE TEMP TABLE te_trab (
 	cod_trab		INTEGER,
 	nombres			VARCHAR(45,25),
-	estado			CHAR(1),
 	fecha_ing		DATE,
 	fecha_reing		DATE,
 	fecha_sal		DATE,
@@ -1249,67 +1223,33 @@ CREATE TEMP TABLE tmp_desctos
 		saldo		DECIMAL(22,10)
 	)
 
-{--
-LET query = 'INSERT INTO te_trab ',
-		'SELECT n30_cod_trab, n30_nombres, n30_estado, n30_fecha_ing, ',
-			'n30_fecha_reing, n30_fecha_sal, n30_cod_depto, ',
-			'CASE WHEN n30_estado = "I" ',
-				'THEN "C" ',
-				'ELSE n30_tipo_pago ',
-			'END, n30_bco_empresa, n30_cta_empresa, ',
-			'CASE WHEN n30_estado = "I" ',
-				'THEN "" ',
-				'ELSE n30_cta_trabaj ',
-			'END, 0, 0, 0 ',
-			' FROM rolt030 ',
-			' WHERE n30_compania    = ', vg_codcia,
-			'   AND n30_fecha_ing  <= "',
-				DATE(MDY(rm_n03.n03_mes_fin, rm_n03.n03_dia_fin,
-					 rm_par.n41_ano)), '"',
-			'   AND n30_fecha_sal  IS NULL ',
-			'   AND n30_tipo_contr  = "F" ',
-			'   AND n30_estado     <> "J" ',
-			'   AND n30_tipo_trab   = "N" ',
-			'   AND n30_fec_jub    IS NULL '
-PREPARE exec_tmp1 FROM query
-EXECUTE exec_tmp1
 INSERT INTO te_trab
-	SELECT n30_cod_trab, n30_nombres, n30_estado, n30_fecha_ing,
-		n30_fecha_reing, n30_fecha_sal, n30_cod_depto, n30_tipo_pago,
-		n30_bco_empresa, n30_cta_empresa, n30_cta_trabaj, 0, 0, 0  
+	SELECT n30_cod_trab,  n30_nombres,   n30_fecha_ing, n30_fecha_reing,
+	       n30_fecha_sal, n30_cod_depto, n30_tipo_pago, n30_bco_empresa,
+	       n30_cta_empresa, n30_cta_trabaj, 0, 0, 0  
 		FROM rolt030 
 		WHERE n30_compania    = vg_codcia
-		  AND n30_fecha_sal  >= MDY(rm_n03.n03_mes_ini,
-					rm_n03.n03_dia_ini, rm_par.n41_ano)
+		  AND n30_fecha_ing  <= MDY(rm_n03.n03_mes_fin,
+					rm_n03.n03_dia_fin, rm_par.n41_ano)
+		  AND n30_fecha_sal  IS NULL
 		  AND n30_tipo_contr  = 'F'
-		  AND n30_estado      = 'J'
+		  AND n30_estado     <> 'J'
 		  AND n30_tipo_trab   = 'N'
-		  AND n30_fec_jub    IS NOT NULL
-LET query = 'INSERT INTO te_trab ',
-		'SELECT n30_cod_trab, n30_nombres, n30_estado, n30_fecha_ing, ',
-			'n30_fecha_reing, n30_fecha_sal, n30_cod_depto, ',
-			'CASE WHEN n30_estado = "I" ',
-				'THEN "C" ',
-				'ELSE n30_tipo_pago ',
-			'END, n30_bco_empresa, n30_cta_empresa, ',
-			'CASE WHEN n30_estado = "I" ',
-				'THEN "" ',
-				'ELSE n30_cta_trabaj ',
-			'END, 0, 0, 0 ',
-			' FROM rolt030 ',
-			' WHERE n30_compania    = ', vg_codcia,
-			'   AND n30_fecha_ing  <= "',
-				DATE(MDY(rm_n03.n03_mes_fin, rm_n03.n03_dia_fin,
-					 rm_par.n41_ano)), '"',
-			'   AND n30_fecha_sal  <= "',
-				DATE(MDY(rm_n03.n03_mes_fin, rm_n03.n03_dia_fin,
-					 rm_par.n41_ano + 1)), '"',
-			'   AND n30_tipo_contr  = "F" ',
-			'   AND n30_estado     <> "J" ',
-			'   AND n30_tipo_trab   = "N" ',
-			'   AND n30_fec_jub    IS NULL '
-PREPARE exec_tmp2 FROM query
-EXECUTE exec_tmp2
+		  AND n30_fec_jub    IS NULL
+INSERT INTO te_trab
+	SELECT n30_cod_trab,  n30_nombres,   n30_fecha_ing, n30_fecha_reing,
+	       n30_fecha_sal, n30_cod_depto, n30_tipo_pago, n30_bco_empresa,
+	       n30_cta_empresa, n30_cta_trabaj, 0, 0, 0  
+		FROM rolt030 
+		WHERE n30_compania    = vg_codcia
+		  AND n30_fecha_ing  <= MDY(rm_n03.n03_mes_fin,
+					rm_n03.n03_dia_fin, rm_par.n41_ano)
+		  AND n30_fecha_sal  <= MDY(rm_n03.n03_mes_fin,
+					rm_n03.n03_dia_fin, rm_par.n41_ano + 1)
+		  AND n30_tipo_contr  = 'F'
+		  AND n30_estado     <> 'J'
+		  AND n30_tipo_trab   = 'N'
+		  AND n30_fec_jub    IS NULL
 DELETE FROM te_trab
 	WHERE fecha_reing > MDY(rm_n03.n03_mes_fin, rm_n03.n03_dia_fin,
 				rm_par.n41_ano)
@@ -1319,21 +1259,15 @@ DELETE FROM te_trab
 	AND (fecha_reing IS NULL OR 
 	     fecha_reing > MDY(rm_n03.n03_mes_fin, rm_n03.n03_dia_fin,
 				rm_par.n41_ano))
-DELETE FROM te_trab 
-	WHERE te_trab.fecha_sal         < MDY(rm_n03.n03_mes_ini,
-						rm_n03.n03_dia_ini,
-						rm_par.n41_ano)
-	  AND YEAR(te_trab.fecha_reing) = YEAR(te_trab.fecha_sal)
---}
-LET fecha_ini       = MDY(rm_n03.n03_mes_ini, rm_n03.n03_dia_ini,rm_par.n41_ano)
-LET fecha_fin       = MDY(rm_n03.n03_mes_fin, rm_n03.n03_dia_fin,rm_par.n41_ano)
-CALL cargar_tabla_temp(0, 0)
 DECLARE q_te_trab CURSOR FOR SELECT * FROM te_trab ORDER BY nombres 
 LET tot_dias        = 0
 LET tot_cargas      = 0
 LET tot_dias_cargas = 0
+LET fecha_ini       = MDY(rm_n03.n03_mes_ini, rm_n03.n03_dia_ini,rm_par.n41_ano)
+LET fecha_fin       = MDY(rm_n03.n03_mes_fin, rm_n03.n03_dia_fin,rm_par.n41_ano)
 FOREACH q_te_trab INTO r_trab.*
-	--CALL retorna_num_cargas(r_trab.cod_trab, fecha_fin) RETURNING r_trab.num_cargas
+	CALL retorna_num_cargas(r_trab.cod_trab, fecha_fin)
+		RETURNING r_trab.num_cargas
 	LET fecha_ing = r_trab.fecha_ing
 	IF r_trab.fecha_reing IS NOT NULL THEN
 		LET fecha_ing = r_trab.fecha_reing
@@ -1349,44 +1283,10 @@ FOREACH q_te_trab INTO r_trab.*
 			LET fecha_sal = r_trab.fecha_sal 
 		END IF
 	END IF
-	--LET r_trab.dias_trab = fecha_sal - fecha_ing + 1
-	{--
-	LET r_trab.dias_trab = retorna_num_meses(fecha_ing, fecha_sal)
-				* rm_n00.n00_dias_mes
-	LET n_dias           = rm_n00.n00_dias_mes
-	IF ((DAY(r_trab.fecha_ing) > 1 AND
-	     YEAR(r_trab.fecha_ing) = rm_par.n41_ano) OR
-	    (DAY(r_trab.fecha_reing) > 1 AND
-	     YEAR(r_trab.fecha_reing) = rm_par.n41_ano)) AND
-	   r_trab.estado <> 'J'
-	THEN
-		LET fec = r_trab.fecha_ing
-		IF r_trab.fecha_reing IS NOT NULL THEN
-			LET fec = r_trab.fecha_reing
-		END IF
-		LET ult_dia = DAY(MDY(MONTH(fec), 01, YEAR(fec))
-				+ 1 UNITS MONTH - 1 UNITS DAY)
-		IF ult_dia > rm_n00.n00_dias_mes THEN
-			LET ult_dia = rm_n00.n00_dias_mes
-		END IF
-		LET n_dias = ult_dia - DAY(fec) + 1
-	END IF
-	IF YEAR(r_trab.fecha_sal) = rm_par.n41_ano AND r_trab.estado = 'I' THEN
-		LET n_dias = DAY(r_trab.fecha_sal)
-		IF (n_dias > rm_n00.n00_dias_mes) OR
-		   (MONTH(r_trab.fecha_sal) = 2 AND DAY(r_trab.fecha_sal) >= 28)
-		THEN
-			LET n_dias = rm_n00.n00_dias_mes
-		END IF
-	END IF
-	LET r_trab.dias_trab = r_trab.dias_trab + n_dias
+	LET r_trab.dias_trab = fecha_sal - fecha_ing + 1
 	IF r_trab.dias_trab > rm_n90.n90_dias_ano_ut THEN
 		LET r_trab.dias_trab = rm_n90.n90_dias_ano_ut
 	END IF
-	--}
-	if r_trab.cod_trab = 455 then
-		let r_trab.dias_trab = 24
-	end if
 	CALL insertar_descuentos(r_trab.cod_trab, fecha_ini, fecha_fin)
 	SELECT NVL(SUM(saldo), 0)
 		INTO r_trab.descuentos
@@ -1466,7 +1366,7 @@ FOREACH q_te_trab INTO r_trab.*
 	END IF
 END FOREACH
 LET vm_numelm = vm_numelm - 1
---CALL distribuir_picos(1, vm_numelm)
+CALL distribuir_picos(1, vm_numelm)
 DROP TABLE te_trab
 DROP TABLE tmp_desctos
 SELECT * INTO rm_n05.*
@@ -1523,8 +1423,7 @@ DISPLAY ARRAY rm_scr TO ra_scr.*
 		LET i = arr_curr()
 		CALL muestra_etiquetas(i, vm_numelm)
 END DISPLAY
-CALL muestra_contadores_det(0, vm_numelm)
-CALL mostrar_salir_det()
+CLEAR nom_trab, n42_dias_trab
 	
 END FUNCTION
 
@@ -1536,23 +1435,6 @@ DEFINE ini, lim		SMALLINT
 DEFINE r_trab		RECORD 
 				cod_trab	LIKE rolt042.n42_cod_trab,
 				nombres		LIKE rolt030.n30_nombres,
-				estado		LIKE rolt030.n30_estado,
-				fecha_ing	LIKE rolt030.n30_fecha_ing,
-				fecha_reing	LIKE rolt030.n30_fecha_reing,
-				fecha_sal	LIKE rolt030.n30_fecha_sal,
-				cod_depto	LIKE rolt030.n30_cod_depto,
-				tipo_pago	LIKE rolt042.n42_tipo_pago,
-				bco_empresa	LIKE rolt042.n42_bco_empresa,
-				cta_empresa	LIKE rolt042.n42_cta_empresa,
-				cta_trabaj	LIKE rolt042.n42_cta_trabaj,
-				dias_trab	INTEGER,
-				num_cargas	INTEGER,
-				descuentos	DECIMAL(22,10)
-			END RECORD
-DEFINE r_trab_aux	RECORD 
-				cod_trab	LIKE rolt042.n42_cod_trab,
-				nombres		LIKE rolt030.n30_nombres,
-				estado		LIKE rolt030.n30_estado,
 				fecha_ing	LIKE rolt030.n30_fecha_ing,
 				fecha_reing	LIKE rolt030.n30_fecha_reing,
 				fecha_sal	LIKE rolt030.n30_fecha_sal,
@@ -1575,14 +1457,11 @@ DEFINE fecha_fin	LIKE rolt042.n42_fecha_fin
 DEFINE tot_dias		INTEGER
 DEFINE tot_dias_cargas	INTEGER
 DEFINE tot_cargas	SMALLINT
-DEFINE n_dias, ult_dia	SMALLINT
 DEFINE factor_dias	DECIMAL(28, 20)
 DEFINE factor_cargas	DECIMAL(28, 20)
-DEFINE fec		DATE
 DEFINE query		CHAR(3000)
 
 IF rm_par.n41_estado = 'P' THEN
-	ROLLBACK WORK
 	CALL fl_mostrar_mensaje('No se puede modificar. La liquidación ya fue procesada.', 'stop')
 	EXIT PROGRAM
 END IF
@@ -1627,7 +1506,6 @@ CALL fl_lee_proceso_roles(vm_proceso) RETURNING rm_n03.*
 CREATE TEMP TABLE te_trab (
 	cod_trab		INTEGER,
 	nombres			VARCHAR(45,25),
-	estado			CHAR(1),
 	fecha_ing		DATE,
 	fecha_reing		DATE,
 	fecha_sal		DATE,
@@ -1654,67 +1532,33 @@ CREATE TEMP TABLE tmp_desctos
 		n06_imprime_0	CHAR(1),
 		saldo		DECIMAL(22,10)
 	)
-{--
-LET query = 'INSERT INTO te_trab ',
-		'SELECT n30_cod_trab, n30_nombres, n30_estado, n30_fecha_ing, ',
-			'n30_fecha_reing, n30_fecha_sal, n30_cod_depto, ',
-			'CASE WHEN n30_estado = "I" ',
-				'THEN "C" ',
-				'ELSE n30_tipo_pago ',
-			'END, n30_bco_empresa, n30_cta_empresa, ',
-			'CASE WHEN n30_estado = "I" ',
-				'THEN "" ',
-				'ELSE n30_cta_trabaj ',
-			'END, 0, 0, 0 ',
-			' FROM rolt030 ',
-			' WHERE n30_compania    = ', vg_codcia,
-			'   AND n30_fecha_ing  <= "',
-				DATE(MDY(rm_n03.n03_mes_fin, rm_n03.n03_dia_fin,
-					 rm_par.n41_ano)), '"',
-			'   AND n30_fecha_sal  IS NULL ',
-			'   AND n30_tipo_contr  = "F" ',
-			'   AND n30_estado     <> "J" ',
-			'   AND n30_tipo_trab   = "N" ',
-			'   AND n30_fec_jub    IS NULL '
-PREPARE exec_tmp3 FROM query
-EXECUTE exec_tmp3
 INSERT INTO te_trab
-	SELECT n30_cod_trab, n30_nombres, n30_estado, n30_fecha_ing,
-		n30_fecha_reing, n30_fecha_sal, n30_cod_depto, n30_tipo_pago,
-		n30_bco_empresa, n30_cta_empresa, n30_cta_trabaj, 0, 0, 0  
+	SELECT n30_cod_trab,  n30_nombres,   n30_fecha_ing, n30_fecha_reing,
+	       n30_fecha_sal, n30_cod_depto, n30_tipo_pago, n30_bco_empresa,
+	       n30_cta_empresa, n30_cta_trabaj, 0, 0, 0  
 		FROM rolt030 
 		WHERE n30_compania    = vg_codcia
-		  AND n30_fecha_sal  >= MDY(rm_n03.n03_mes_ini,
-					rm_n03.n03_dia_ini, rm_par.n41_ano)
+		  AND n30_fecha_ing  <= MDY(rm_n03.n03_mes_fin,
+					rm_n03.n03_dia_fin, rm_par.n41_ano)
+		  AND n30_fecha_sal  IS NULL
 		  AND n30_tipo_contr  = 'F'
-		  AND n30_estado      = 'J'
+		  AND n30_estado     <> 'J'
 		  AND n30_tipo_trab   = 'N'
-		  AND n30_fec_jub    IS NOT NULL
-LET query = 'INSERT INTO te_trab ',
-		'SELECT n30_cod_trab, n30_nombres, n30_estado, n30_fecha_ing, ',
-			'n30_fecha_reing, n30_fecha_sal, n30_cod_depto, ',
-			'CASE WHEN n30_estado = "I" ',
-				'THEN "C" ',
-				'ELSE n30_tipo_pago ',
-			'END, n30_bco_empresa, n30_cta_empresa, ',
-			'CASE WHEN n30_estado = "I" ',
-				'THEN "" ',
-				'ELSE n30_cta_trabaj ',
-			'END, 0, 0, 0 ',
-			' FROM rolt030 ',
-			' WHERE n30_compania    = ', vg_codcia,
-			'   AND n30_fecha_ing  <= "',
-				DATE(MDY(rm_n03.n03_mes_fin, rm_n03.n03_dia_fin,
-					 rm_par.n41_ano)), '"',
-			'   AND n30_fecha_sal  <= "',
-				DATE(MDY(rm_n03.n03_mes_fin, rm_n03.n03_dia_fin,
-					 rm_par.n41_ano + 1)), '"',
-			'   AND n30_tipo_contr  = "F" ',
-			'   AND n30_estado     <> "J" ',
-			'   AND n30_tipo_trab   = "N" ',
-			'   AND n30_fec_jub    IS NULL '
-PREPARE exec_tmp4 FROM query
-EXECUTE exec_tmp4
+		  AND n30_fec_jub    IS NULL
+INSERT INTO te_trab
+	SELECT n30_cod_trab,  n30_nombres,   n30_fecha_ing, n30_fecha_reing,
+	       n30_fecha_sal, n30_cod_depto, n30_tipo_pago, n30_bco_empresa,
+	       n30_cta_empresa, n30_cta_trabaj, 0, 0, 0  
+		FROM rolt030 
+		WHERE n30_compania    = vg_codcia
+		  AND n30_fecha_ing  <= MDY(rm_n03.n03_mes_fin,
+					rm_n03.n03_dia_fin, rm_par.n41_ano)
+		  AND n30_fecha_sal  <= MDY(rm_n03.n03_mes_fin,
+					rm_n03.n03_dia_fin, rm_par.n41_ano + 1)
+		  AND n30_tipo_contr  = 'F'
+		  AND n30_estado     <> 'J'
+		  AND n30_tipo_trab   = 'N'
+		  AND n30_fec_jub    IS NULL
 DELETE FROM te_trab
 	WHERE fecha_reing > MDY(rm_n03.n03_mes_fin, rm_n03.n03_dia_fin,
 				rm_par.n41_ano)
@@ -1724,17 +1568,15 @@ DELETE FROM te_trab
 	AND (fecha_reing IS NULL OR 
 	     fecha_reing > MDY(rm_n03.n03_mes_fin, rm_n03.n03_dia_fin,
 				rm_par.n41_ano))
---}
-LET fecha_ini       = r_n42.n42_fecha_ini
-LET fecha_fin       = r_n42.n42_fecha_fin
-CALL cargar_tabla_temp(1, cod_trab)
 DECLARE q_te_trab2 CURSOR FOR SELECT * FROM te_trab ORDER BY nombres 
 LET tot_dias        = 0
 LET tot_cargas      = 0
 LET tot_dias_cargas = 0
+LET fecha_ini       = r_n42.n42_fecha_ini
+LET fecha_fin       = r_n42.n42_fecha_fin
 FOREACH q_te_trab2 INTO r_trab.*
-	--CALL retorna_num_cargas(r_trab.cod_trab, r_n42.n42_fecha_fin)
-	--	RETURNING r_trab.num_cargas
+	CALL retorna_num_cargas(r_trab.cod_trab, r_n42.n42_fecha_fin)
+		RETURNING r_trab.num_cargas
 	LET fecha_ing = r_trab.fecha_ing
 	IF r_trab.fecha_reing IS NOT NULL THEN
 		LET fecha_ing = r_trab.fecha_reing
@@ -1750,54 +1592,15 @@ FOREACH q_te_trab2 INTO r_trab.*
 			LET fecha_sal = r_trab.fecha_sal 
 		END IF
 	END IF
-	--LET r_trab.dias_trab = fecha_sal - fecha_ing + 1
-	{--
-	LET r_trab.dias_trab = retorna_num_meses(fecha_ing, fecha_sal)
-				* rm_n00.n00_dias_mes
-	LET n_dias           = rm_n00.n00_dias_mes
-	IF ((DAY(r_trab.fecha_ing) > 1 AND
-	     YEAR(r_trab.fecha_ing) = rm_par.n41_ano) OR
-	    (DAY(r_trab.fecha_reing) > 1 AND
-	     YEAR(r_trab.fecha_reing) = rm_par.n41_ano)) AND
-	   r_trab.estado <> 'J'
-	THEN
-		LET fec = r_trab.fecha_ing
-		IF r_trab.fecha_reing IS NOT NULL THEN
-			LET fec = r_trab.fecha_reing
-		END IF
-		LET ult_dia = DAY(MDY(MONTH(fec), 01, YEAR(fec))
-				+ 1 UNITS MONTH - 1 UNITS DAY)
-		IF ult_dia > rm_n00.n00_dias_mes THEN
-			LET ult_dia = rm_n00.n00_dias_mes
-		END IF
-		LET n_dias = ult_dia - DAY(fec) + 1
-	END IF
-	IF YEAR(r_trab.fecha_sal) = rm_par.n41_ano AND r_trab.estado = 'I' THEN
-		LET n_dias = DAY(r_trab.fecha_sal)
-		IF (n_dias > rm_n00.n00_dias_mes) OR
-		   (MONTH(r_trab.fecha_sal) = 2 AND DAY(r_trab.fecha_sal) >= 28)
-		THEN
-			LET n_dias = rm_n00.n00_dias_mes
-		END IF
-	END IF
-	LET r_trab.dias_trab = r_trab.dias_trab + n_dias
+	LET r_trab.dias_trab = fecha_sal - fecha_ing + 1
 	IF r_trab.dias_trab > rm_n90.n90_dias_ano_ut THEN
 		LET r_trab.dias_trab = rm_n90.n90_dias_ano_ut
 	END IF
-	--}
 	LET tot_dias         = tot_dias + r_trab.dias_trab 
 	LET tot_dias_cargas  = tot_dias_cargas + (r_trab.dias_trab
 							* r_trab.num_cargas)
 	LET tot_cargas       = tot_cargas + r_trab.num_cargas
-	IF num_args() = 6 THEN
-		IF r_trab.cod_trab = cod_trab THEN
-			LET r_trab_aux.* = r_trab.*
-		END IF
-	END IF
 END FOREACH
-IF num_args() = 6 THEN
-	LET r_trab.* = r_trab_aux.*
-END IF
 LET factor_dias   = rm_par.n41_val_trabaj / tot_dias
 LET factor_cargas = rm_par.n41_val_cargas / tot_dias_cargas
 CALL insertar_descuentos(r_n30.n30_cod_trab, fecha_ini, fecha_fin)
@@ -1833,170 +1636,7 @@ INSERT INTO rolt042 VALUES(r_n42.*)
 INSERT INTO rolt049 SELECT * FROM tmp_desctos WHERE cod_trab = cod_trab
 DROP TABLE te_trab
 DROP TABLE tmp_desctos
---CALL distribuir_picos(ini, lim)
-
-END FUNCTION
-
-
-
-FUNCTION cargar_tabla_temp(flag, cod_trab)
-DEFINE flag		SMALLINT
-DEFINE cod_trab		LIKE rolt042.n42_cod_trab
-DEFINE query		CHAR(10000)
-DEFINE expr_f_i_c	CHAR(600)
-DEFINE expr_carg	CHAR(700)
-DEFINE expr_trab	VARCHAR(100)
-DEFINE expr_f_i		VARCHAR(250)
-DEFINE expr_f_f		VARCHAR(250)
-DEFINE subquery		VARCHAR(150)
-
-LET expr_trab = NULL
-IF flag THEN
-	LET expr_trab = '   AND n30_cod_trab = ', cod_trab
-END IF
-LET expr_carg = 'NVL((CASE WHEN (n30_est_civil = "C" OR n30_est_civil = "U") ',
-			'THEN (SELECT COUNT(n31_secuencia) ',
-			'FROM rolt031 ',
-			'WHERE n31_compania           = n30_compania ',
-			'  AND n31_cod_trab           = n30_cod_trab ',
-			'  AND n31_tipo_carga        <> "H" ',
-			'  AND YEAR(n31_fecha_nacim) <= ', rm_par.n41_ano, ') ',
-			'ELSE 0 ',
-		'END + ',
-		'(SELECT COUNT(n31_secuencia) ',
-			'FROM rolt031 ',
-			'WHERE n31_compania     = n30_compania ',
-			'  AND n31_cod_trab     = n30_cod_trab ',
-			'  AND n31_tipo_carga   = "H" ',
-			'  AND n31_fecha_nacim >= DATE(MDY(',rm_n03.n03_mes_fin,
-						', ', rm_n03.n03_dia_fin,
-						', ', rm_par.n41_ano, ') ',
-					'- 19 UNITS YEAR + 1 UNITS DAY) ',
-			'  AND n31_fecha_nacim <= DATE(MDY(',rm_n03.n03_mes_fin,
-						', ', rm_n03.n03_dia_fin,
-						', ', rm_par.n41_ano, ')))), ',
-		'0) AS carga, '
-LET expr_f_i   = 'CASE WHEN NVL(n30_fecha_reing, n30_fecha_ing) < ',
-				'MDY(n03_mes_ini, n03_dia_ini, ',
-					rm_par.n41_ano, ') ',
-			'THEN MDY(n03_mes_ini, n03_dia_ini, ', rm_par.n41_ano,
-				') ',
-			'ELSE NVL(n30_fecha_reing, n30_fecha_ing) ',
-		'END '
-LET expr_f_f   = 'CASE WHEN n30_fecha_sal > MDY(n03_mes_fin, n03_dia_fin, ',
-							rm_par.n41_ano, ') ',
-			'THEN MDY(n03_mes_fin, n03_dia_fin, ', rm_par.n41_ano,
-				') ',
-			'ELSE n30_fecha_sal ',
-		'END '
-LET subquery   = '(SELECT n00_dias_mes ',
-			'FROM rolt000 ',
-			'WHERE n00_serial = n30_compania) '
-LET expr_f_i_c = 'CASE WHEN NVL(n30_fecha_reing, n30_fecha_ing) < ',
-				'MDY(n03_mes_ini, n03_dia_ini, ',
-					rm_par.n41_ano, ') ',
-			'THEN MDY(n03_mes_ini, n03_dia_ini, ', rm_par.n41_ano,
-				') ',
-			'ELSE MDY(MONTH(NVL(n30_fecha_reing, n30_fecha_ing)), ',
-				'CASE WHEN DAY(NVL(n30_fecha_reing, ',
-						'n30_fecha_ing)) = 31 ',
-					'THEN ', subquery CLIPPED, ' ',
-					'ELSE DAY(NVL(n30_fecha_reing, ',
-							'n30_fecha_ing)) ',
-				'END, ', rm_par.n41_ano, ') ',
-	    	'END '
-LET query = 'SELECT n30_cod_trab, n30_nombres, n30_estado, n30_fecha_ing, ',
-			'n30_fecha_reing, n30_fecha_sal, n30_cod_depto, ',
-			'n30_tipo_pago, n30_bco_empresa, n30_cta_empresa, ',
-			'n30_cta_trabaj, ',
-			'((n03_mes_fin - MONTH(', expr_f_i CLIPPED, ')) * ',
-				subquery CLIPPED, ') + ',
-			'(', subquery CLIPPED, ' - ',
-			'DAY(', expr_f_i_c CLIPPED, ') + 1) AS dias, ',
-			expr_carg CLIPPED, ' 0 dcto ',
-		'FROM rolt030, rolt003 ',
-		'WHERE n30_compania             = ', vg_codcia,
-			expr_trab CLIPPED,
-		'  AND n30_estado               = "A" ',
-		'  AND ((YEAR(n30_fecha_ing)   <= ', rm_par.n41_ano,
-		'  AND   n30_fecha_sal         IS NULL) ',
-		'   OR  (YEAR(n30_fecha_reing) <= ', rm_par.n41_ano,
-		'  AND   n30_fecha_sal         IS NOT NULL)) ',
-		'  AND n30_tipo_contr           = "F" ',
-		'  AND n30_tipo_trab            = "N" ',
-		'  AND n30_fec_jub             IS NULL ',
-		'  AND n03_proceso              = "', vm_proceso, '"',
-	' UNION ',
-	'SELECT n30_cod_trab, n30_nombres, n30_estado, n30_fecha_ing, ',
-			'n30_fecha_reing, n30_fecha_sal, n30_cod_depto, ',
-			'n30_tipo_pago, n30_bco_empresa, n30_cta_empresa, ',
-			'n30_cta_trabaj, ',
-			'CASE WHEN (MONTH(', expr_f_f CLIPPED, ') - 1) >= ',
-					'MONTH(', expr_f_i CLIPPED, ') ',
-				'THEN (((MONTH(', expr_f_f CLIPPED, ') - 1) - ',
-					'MONTH(', expr_f_i CLIPPED, ')) * ',
-					subquery CLIPPED, ') + ',
-					'(', subquery CLIPPED, ' - ',
-					'DAY(', expr_f_i_c CLIPPED, ') + 1) ',
-				'ELSE 0 ',
-			'END + ',
-			'CASE WHEN DAY(', expr_f_f CLIPPED, ') = 31 ',
-				'THEN ', subquery CLIPPED, ' ',
-				'ELSE DAY(', expr_f_f CLIPPED, ') - ',
-					'CASE WHEN MONTH(', expr_f_i CLIPPED,
-									') = ',
-						'MONTH(', expr_f_f CLIPPED,') ',
-						'THEN DAY(', expr_f_i_c CLIPPED,
-							 ') - 1 ',
-						'ELSE 0 ',
-					'END ',
-			'END + ',
-			'CASE WHEN (MONTH(', expr_f_f CLIPPED, ') = 02 AND ',
-				'EXTEND(', expr_f_f CLIPPED,
-					', MONTH TO DAY) = ',
-				'EXTEND(MDY(MONTH(', expr_f_f CLIPPED,'), 01, ',
-						'YEAR(', expr_f_f CLIPPED,')) ',
-					'+ 1 UNITS MONTH - 1 UNITS DAY, ',
-					'MONTH TO DAY)) ',
-				'THEN CASE WHEN MOD(', rm_par.n41_ano,
-						', 4) = 0 ',
-						'THEN 1 ',
-						'ELSE 2 ',
-					'END ',
-				'ELSE 0 ',
-			'END AS dias, ',
-			expr_carg CLIPPED, ' 0 dcto ',
-		'FROM rolt030, rolt003 ',
-		'WHERE n30_compania         = ', vg_codcia,
-			expr_trab CLIPPED,
-		'  AND n30_estado           = "I" ',
-		'  AND YEAR(n30_fecha_sal) >= ', rm_par.n41_ano,
-		'  AND YEAR(n30_fecha_sal) <= YEAR(TODAY) ',
-		'  AND n30_tipo_contr       = "F" ',
-		'  AND n30_tipo_trab        = "N" ',
-	 	'  AND n30_fec_jub         IS NULL ',
-		'  AND n03_proceso          = "', vm_proceso, '"',
-		' INTO TEMP t1 '
-PREPARE exec_temp FROM query
-EXECUTE exec_temp
-INSERT INTO te_trab SELECT * FROM t1
-DROP TABLE t1
-
-END FUNCTION
-
-
-
-FUNCTION retorna_num_meses(fecha1, fecha2)
-DEFINE fecha1, fecha2	DATE
-DEFINE num_mes		SMALLINT
-
-LET num_mes = MONTH(fecha1) + 1
-IF num_mes > MONTH(fecha2) THEN
-	LET num_mes = 0
-ELSE
-	LET num_mes = MONTH(fecha2) - num_mes + 1
-END IF
-RETURN num_mes
+CALL distribuir_picos(ini, lim)
 
 END FUNCTION
 
@@ -2207,7 +1847,6 @@ FOR l = ini TO lim
 			    n42_val_cargas = rm_scr[l].n42_val_cargas
 			WHERE n42_compania = vg_codcia
 			  AND n42_cod_trab = vm_cod_trab[l].n42_cod_trab
-			  AND n42_ano      = rm_par.n41_ano
 		EXIT FOR
 	END IF
 END FOR
@@ -2301,25 +1940,6 @@ FUNCTION muestra_contadores_det(num_row, max_row)
 DEFINE num_row, max_row	SMALLINT
 
 DISPLAY BY NAME num_row, max_row
-
-END FUNCTION
-
-
-
-FUNCTION mostrar_salir_det()
-DEFINE i, lim		SMALLINT
-
-FOR i = 1 TO vm_filas_pant
-	CLEAR ra_scr[i].*
-END FOR
-LET lim = vm_numelm
-IF lim > vm_filas_pant THEN
-	LET lim = vm_filas_pant
-END IF
-FOR i = 1 TO lim
-	DISPLAY rm_scr[i].* TO ra_scr[i].*
-END FOR
-CLEAR nom_trab, n42_dias_trab
 
 END FUNCTION
 
@@ -2664,145 +2284,3 @@ LET comando = 'cd ..', vg_separador, '..', vg_separador, modulo, vg_separador,
 RUN comando
 
 END FUNCTION
-
-
-
-FUNCTION generar_archivo()
-DEFINE query 		CHAR(6000)
-DEFINE archivo		VARCHAR(100)
-DEFINE mensaje		VARCHAR(200)
-DEFINE nom_mes		VARCHAR(10)
-DEFINE r_g31		RECORD LIKE gent031.*
-DEFINE r_n41		RECORD LIKE rolt041.*
-
-CREATE TEMP TABLE tmp_rol_ban
-	(
-		tipo_pago		CHAR(2),
-		cuenta_empresa		CHAR(10),
-		secuencia		SERIAL,
-		comp_pago		CHAR(5),
-		cod_trab		CHAR(6),
-		moneda			CHAR(3),
-		valor			VARCHAR(13),
-		forma_pago		CHAR(3),
-		codi_banco		CHAR(4),
-		tipo_cuenta		CHAR(3),
-		cuenta_empleado		CHAR(11),
-		tipo_doc_id		CHAR(1),
-		--num_doc_id		DECIMAL(13,0),
-		num_doc_id		VARCHAR(13),
-		empleado		VARCHAR(40),
-		direccion		VARCHAR(40),
-		ciudad			VARCHAR(20),
-		telefono		VARCHAR(10),
-		local_cobro		VARCHAR(10),
-		referencia		VARCHAR(30),
-		referencia_adic		VARCHAR(30)
-	)
-
-LET query = 'SELECT "PA" AS tip_pag, g09_numero_cta AS cuenta_empr,',
-			' 0 AS secu, "" AS comp_p,n42_cod_trab AS cod_emp, ',
-			'g13_simbolo AS mone, ',
-			'TRUNC((n42_val_trabaj + n42_val_cargas - ',
-				'n42_descuentos) * 100, 0) AS',
-			' neto_rec, "CTA" AS for_pag, "0040" AS cod_ban,',
-			' CASE WHEN n30_tipo_cta_tra = "A"',
-				' THEN "AHO"',
-				' ELSE "CTE"',
-			' END AS tipo_c, n42_cta_trabaj AS cuenta_empl,',
-			' n30_tipo_doc_id AS tipo_id,',
-			' CASE WHEN n42_cod_trab = 24 AND ', vg_codloc, ' = 1 ',
-				' THEN "0920503067"',
-				' ELSE n30_num_doc_id',
-			' END AS cedula,',
-			' CASE WHEN n42_cod_trab = 24 AND ', vg_codloc, ' = 1 ',
-				' THEN "CHILA RUA EMILIANO FRANCISCO"',
-				' ELSE n30_nombres',
-			' END AS empleados, n30_domicilio AS direc,',
-			' g31_nombre AS ciudad_emp, n30_telef_domic AS fono,',
-			' "" AS loc_cob, n03_nombre AS refer1,',
-			' CASE',
-				' WHEN MONTH(n41_fecing) = 01 THEN "ENERO"',
-				' WHEN MONTH(n41_fecing) = 02 THEN "FEBRERO"',
-				' WHEN MONTH(n41_fecing) = 03 THEN "MARZO"',
-				' WHEN MONTH(n41_fecing) = 04 THEN "ABRIL"',
-				' WHEN MONTH(n41_fecing) = 05 THEN "MAYO"',
-				' WHEN MONTH(n41_fecing) = 06 THEN "JUNIO"',
-				' WHEN MONTH(n41_fecing) = 07 THEN "JULIO"',
-				' WHEN MONTH(n41_fecing) = 08 THEN "AGOSTO"',
-				' WHEN MONTH(n41_fecing) = 09 THEN "SEPTIEMBRE"',
-				' WHEN MONTH(n41_fecing) = 10 THEN "OCTUBRE"',
-				' WHEN MONTH(n41_fecing) = 11 THEN "NOVIEMBRE"',
-				' WHEN MONTH(n41_fecing) = 12 THEN "DICIEMBRE"',
-			' END || "-" || LPAD(n41_ano, 4, 0) AS refer2',
-		' FROM rolt041, rolt042, rolt030, gent009, gent013, gent031,',
-			' rolt003 ',
-		' WHERE n41_compania    = ', vg_codcia,
-		'   AND n41_proceso     = "', vm_proceso, '"',
-		'   AND n41_ano         = ', rm_par.n41_ano,
-		'   AND n41_estado     <> "E"',
-		'   AND n42_compania    = n41_compania ',
-		'   AND n42_proceso     = n41_proceso ',
-		'   AND n42_fecha_ini   = n41_fecha_ini ',
-		'   AND n42_fecha_fin   = n41_fecha_fin ',
-		'   AND n42_tipo_pago   = "T"',
-		'   AND (n42_val_trabaj + n42_val_cargas - n42_descuentos) > 0',
-  		'   AND n30_compania    = n42_compania ',
-		'   AND n30_cod_trab    = n42_cod_trab ',
-		'   AND g09_compania    = n42_compania ',
-		'   AND g09_banco       = n42_bco_empresa ',
-		'   AND n03_proceso     = n42_proceso ',
-		'   AND g13_moneda      = n41_moneda ',
-		'   AND g31_ciudad      = n30_ciudad_nac ',
-		' ORDER BY 14 ',
-		' INTO TEMP t1 '
-PREPARE exec_dat FROM query
-EXECUTE exec_dat
-LET query = 'INSERT INTO tmp_rol_ban ',
-		'(tipo_pago, cuenta_empresa, secuencia, comp_pago, cod_trab,',
-		' moneda, valor, forma_pago, codi_banco, tipo_cuenta,',
-		' cuenta_empleado, tipo_doc_id, num_doc_id, empleado,',
-		' direccion, ciudad, telefono, local_cobro, referencia,',
-		' referencia_adic) ',
-		' SELECT * FROM t1 '
-PREPARE exec_tmp FROM query
-EXECUTE exec_tmp
-DROP TABLE t1
-LET query = 'SELECT tipo_pago, cuenta_empresa, secuencia, comp_pago, cod_trab,',
-		' "USD" moneda, LPAD(valor, 13, 0) valor, forma_pago,',
-		' codi_banco, tipo_cuenta,',
-		' LPAD(cuenta_empleado, 11, 0) cta_emp, tipo_doc_id,',
-		' LPAD(num_doc_id, 13, 0) num_doc_id,',
-		' REPLACE(empleado, "ñ", "N") empleado,',
-		' "" direccion, "" ciudad, "" telefono, "" local_cobro,',
-		' "ROL DE PAGO" referencia, referencia_adic',
-		' FROM tmp_rol_ban ',
-		' INTO TEMP t1 '
-PREPARE exec_t1 FROM query
-EXECUTE exec_t1
-DROP TABLE tmp_rol_ban
-UNLOAD TO "../../../tmp/rol_pag.txt" DELIMITER "	"
-	SELECT * FROM t1
-		ORDER BY secuencia
-INITIALIZE r_n41.* TO NULL
-SELECT * INTO r_n41.*
-	FROM rolt041
-	WHERE n41_compania  = vg_codcia
-	  AND n41_proceso   = vm_proceso
-	  AND n41_ano       = rm_par.n41_ano
-	  AND n41_estado   <> "E"
-LET nom_mes = UPSHIFT(fl_justifica_titulo('I',
-			fl_retorna_nombre_mes(MONTH(r_n41.n41_fecing)), 11))
-LET archivo = "ACRE_", rm_loc.g02_nombre[1, 3] CLIPPED, "_",
-		vm_proceso, nom_mes[1, 3] CLIPPED,
-		YEAR(r_n41.n41_fecing) USING "####", "_"
-CALL fl_lee_ciudad(rm_loc.g02_ciudad) RETURNING r_g31.*
-LET archivo = archivo CLIPPED, r_g31.g31_siglas CLIPPED, ".txt"
-LET mensaje = 'Archivo ', archivo CLIPPED, ' Generado ', FGL_GETENV("HOME"),
-		'/tmp/  OK'
-LET archivo = "mv ../../../tmp/rol_pag.txt $HOME/tmp/", archivo CLIPPED
-RUN archivo
-DROP TABLE t1
-CALL fl_mostrar_mensaje(mensaje, 'info')
-
-END FUNCTION 

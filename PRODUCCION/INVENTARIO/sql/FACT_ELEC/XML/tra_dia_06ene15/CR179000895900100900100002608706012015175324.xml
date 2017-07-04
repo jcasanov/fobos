@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comprobanteRetencion id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000026087</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoCompRetencion>
+<fechaEmision>06/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionSujetoRetenido>04</tipoIdentificacionSujetoRetenido>
+<razonSocialSujetoRetenido>JAIME CERON LESTER AGUSTIN</razonSocialSujetoRetenido>
+<identificacionSujetoRetenido>1303166373001</identificacionSujetoRetenido>
+<periodoFiscal>01/2015</periodoFiscal>
+</infoCompRetencion>
+<impuestos>
+<impuesto>
+<codigo>1</codigo>
+<codigoRetencion>307</codigoRetencion>
+<baseImponible>220.00</baseImponible>
+<porcentajeRetener>2.00</porcentajeRetener>
+<valorRetenido>4.40</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>009001000026087</numDocSustento>
+<fechaEmisionDocSustento>06/01/2015</fechaEmisionDocSustento>
+</impuesto>
+<impuesto>
+<codigo>2</codigo>
+<codigoRetencion>2</codigoRetencion>
+<baseImponible>26.40</baseImponible>
+<porcentajeRetener>70.00</porcentajeRetener>
+<valorRetenido>18.48</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>009001000026087</numDocSustento>
+<fechaEmisionDocSustento>06/01/2015</fechaEmisionDocSustento>
+</impuesto>
+</impuestos>
+<infoAdicional>
+<campoAdicional nombre="Email">lester130331@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0997229040</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">001542</campoAdicional>
+</infoAdicional>
+</comprobanteRetencion>

@@ -1,0 +1,3 @@
+export LD_ASSUME_KERNEL=2.4.0
+fglrun compilar $1
+fglgo compilar_4gl $1

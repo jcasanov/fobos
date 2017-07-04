@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176361</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>29/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176361</guiaRemision>
+<razonSocialComprador>WEATHERFORD SOUTH AMERICA L.L.C.</razonSocialComprador>
+<identificacionComprador>1790105709001</identificacionComprador>
+<totalSinImpuestos>237.77</totalSinImpuestos>
+<totalDescuento>26.42</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>237.77</baseImponible>
+<valor>28.53</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>266.30</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>13892</codigoPrincipal>
+<descripcion>PRENSA BC-410 DE CADENA 1/8" A 4" (40195)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>264.19</precioUnitario>
+<descuento>26.42</descuento>
+<precioTotalSinImpuesto>237.77</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>237.77</baseImponible>
+<valor>28.53</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">proveedoresweatherfor.quito@la.weatherfor.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3942400</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000405</campoAdicional>
+</infoAdicional>
+</factura>

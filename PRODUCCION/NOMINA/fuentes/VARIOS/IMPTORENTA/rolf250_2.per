@@ -1,0 +1,44 @@
+DATABASE aceros
+SCREEN 
+{
+             Año: [c020]            Estado: [c|c021         ]       
+      Trabajador: [c000|c001                                ]
+
+                  Ing. Roles: [c002            ]
+                Dec. Tercero: [c003            ]
+                 Dec. Cuarto: [c004            ]
+                  Utilidades: [c006            ]
+                  Vacaciones: [c008            ]
+                      Varios: [c007            ]
+
+                    I.E.S.S.: [c009            ]
+
+              Bonificaciones: [c005            ]
+              Otros Ingresos: [c012            ]
+                              -----------------
+              Total Ingresos: [c013            ]
+}
+TABLES
+rolt084
+ATTRIBUTES
+c020 = rolt084.n84_ano_proceso, NOENTRY, REVERSE, FORMAT='####';
+c    = rolt084.n84_estado, UPSHIFT, REVERSE, NOENTRY;
+c021 = FORMONLY.n_estado,  UPSHIFT, REVERSE, NOENTRY;
+c000 = FORMONLY.cod_trab,     NOENTRY, REVERSE;
+c001 = FORMONLY.n30_nombres,  NOENTRY, REVERSE;
+
+c002 = FORMONLY.ing_roles,    NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+c003 = FORMONLY.dec_tercero,  NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+c004 = FORMONLY.dec_cuarto,   NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+c006 = FORMONLY.util,         NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+c008 = FORMONLY.vacaciones,   NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+c007 = FORMONLY.varios,       NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+c009 = FORMONLY.iess,         NOENTRY, COLOR = RED, FORMAT='#,###,###,##&.##';
+
+c005 = rolt084.n84_bonificacion, AUTONEXT, REVERSE, FORMAT='#,###,###,##&.##',
+	COMMENTS = 'Bonificaciones y valores fuera del rol.';
+c012 = rolt084.n84_otros_ing, AUTONEXT, REVERSE, FORMAT='#,###,###,##&.##',
+	COMMENTS = 'Otros ingresos y movilizacion.';
+
+c013 = FORMONLY.tot_ing,      NOENTRY, COLOR = BLUE, FORMAT='#,###,###,##&.##';
+END

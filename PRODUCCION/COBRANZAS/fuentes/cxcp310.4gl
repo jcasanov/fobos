@@ -331,7 +331,7 @@ INPUT BY NAME rm_par.*
 			END IF
 		END IF
 		IF INFIELD(zona_cobro) THEN
-			CALL fl_ayuda_zona_cobro()
+			CALL fl_ayuda_zona_cobro('T', 'T')
 				RETURNING r_z06.z06_zona_cobro, r_z06.z06_nombre
 			IF r_z06.z06_zona_cobro IS NOT NULL THEN
 				LET rm_par.zona_cobro     = r_z06.z06_zona_cobro

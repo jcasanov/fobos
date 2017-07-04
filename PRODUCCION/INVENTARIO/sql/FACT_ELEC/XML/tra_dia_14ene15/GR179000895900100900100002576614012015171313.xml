@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025766</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<dirPartida>ACERO COMERCILA JTM</dirPartida>
+<razonSocialTransportista>JUAN JARAMILLO DELGADO</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>0992697369</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>14/01/2015</fechaIniTransporte>
+<fechaFinTransporte>14/01/2015</fechaFinTransporte>
+<placa>MCM-570</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0992697369001</identificacionDestinatario>
+<razonSocialDestinatario>POWER TECH ENGINEERS</razonSocialDestinatario>
+<dirDestinatario>RETIRA SR.JUAN JARAMILLO DELGADO</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>14/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>100201</codigoInterno>
+<descripcion>PRENSA N.460-12 DE CADENA CON TRIPODE 1/8" A 12" (36278)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">juan.gongora@ptei.net</campoAdicional>
+<campoAdicional nombre="telefono-movil">0984363972</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016722</campoAdicional>
+</infoAdicional>
+</guiaRemision>

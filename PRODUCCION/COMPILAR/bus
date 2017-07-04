@@ -1,0 +1,5 @@
+for i in `find . -name "*.per" -print`
+do
+#echo $i
+grep -l deimos $i
+done

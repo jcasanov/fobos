@@ -1,0 +1,27 @@
+DATABASE aceros
+
+SCREEN
+{
+  COMPANIAS
+ --------------------------------------
+  Cod.	 Descripción 	  
+ --------------------------------------
+ [f001] [f002                         ] 
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+ [f001] [f002                         ]
+}
+
+TABLES
+gent001
+
+ATTRIBUTES
+f001 = g01_compania,REVERSE ;
+f002 = g01_razonsocial,REVERSE ;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_cia[7](g01_compania, g01_razonsocial)

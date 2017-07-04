@@ -1546,7 +1546,7 @@ DEFINE r_det		RECORD
 				total_egr	DECIMAL(14,2),
 				total_net	DECIMAL(14,2)
 			END RECORD
-DEFINE query		CHAR(3000)
+DEFINE query		CHAR(2000)
 DEFINE expr_fec_i	VARCHAR(100)
 DEFINE expr_fec_f	VARCHAR(100)
 DEFINE expr_trab	VARCHAR(100)
@@ -2004,8 +2004,8 @@ IF vg_gui = 0 THEN
 	LET run_prog = '; fglgo '
 END IF
 LET comando = 'cd ..', vg_separador, '..', vg_separador, modulo, vg_separador,
-		'fuentes', vg_separador, '; umask 0002', run_prog, prog,
-		vg_base, ' ', mod, ' ', vg_codcia, ' ', param
+		'fuentes', vg_separador, run_prog, prog, vg_base, ' ', mod, ' ',
+		vg_codcia, ' ', param
 RUN comando
 
 END FUNCTION
@@ -4464,11 +4464,6 @@ CASE flag
 		CALL fl_lee_trabajador_roles(vg_codcia, cod_trab)
 			RETURNING r_n30.*
 END CASE
-IF num_args() = 8 THEN
-	IF rm_n32.n32_cod_trab IS NULL OR rm_n32.n32_cod_trab = 0 THEN
-		LET rm_n32.n32_cod_trab = r_n30.n30_cod_trab
-	END IF
-END IF
 IF flag <> 0 THEN
 	CALL fl_lee_departamento(vg_codcia, r_n30.n30_cod_depto)
 		RETURNING r_g34.*
@@ -4572,7 +4567,7 @@ CASE tipo_imp
 	WHEN 'L'
 		LET prog  = 'rolp416 '
 		LET param = ' "XX" "', fecha_ini, '" "', fecha_fin, '" ',
-				tipo_rub, ' > $HOME/tmp/rolp416.txt '
+				tipo_rub
 	WHEN 'C'
 		LET prog  = 'rolp405 '
 		LET param = ' "', fecha_ini, '" "', fecha_fin, '" "XX" '

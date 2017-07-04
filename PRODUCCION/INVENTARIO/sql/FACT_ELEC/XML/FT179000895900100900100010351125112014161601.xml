@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000103511</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>25/11/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000103511</guiaRemision>
+<razonSocialComprador>HOLCIM ECUADOR S.A.</razonSocialComprador>
+<identificacionComprador>0990293244001</identificacionComprador>
+<totalSinImpuestos>336.57</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>336.57</baseImponible>
+<valor>40.39</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>376.96</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>ZZ</codigoPrincipal>
+<descripcion>CAMBIO DE ACEITE (EP2 MULTIFAK)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>71.07</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>71.07</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ACERO-AUTO" valor="ACERO-"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>71.07</baseImponible>
+<valor>8.53</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>ZZ</codigoPrincipal>
+<descripcion>FABRICACION E INSTALACION DE RESORTES</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>45.50</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>45.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ACERO-AUTO" valor="ACERO-"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>45.50</baseImponible>
+<valor>5.46</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>ZZ</codigoPrincipal>
+<descripcion>MANO DE OBRA Y REPARACION DE BASTIDOR</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>220.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>220.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ACERO-AUTO" valor="ACERO-"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>220.00</baseImponible>
+<valor>26.40</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

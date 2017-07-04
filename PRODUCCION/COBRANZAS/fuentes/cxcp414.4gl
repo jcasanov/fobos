@@ -161,6 +161,7 @@ DEFINE r_rep		RECORD
 DEFINE r_r01		RECORD LIKE rept001.*
 DEFINE r_r02		RECORD LIKE rept002.*
 DEFINE r_r38		RECORD LIKE rept038.*
+DEFINE r_z02		RECORD LIKE cxct002.*
 DEFINE documento	VARCHAR(60)
 DEFINE tipo_docum	VARCHAR(10)
 DEFINE subtotal		DECIMAL(14,2)
@@ -170,8 +171,15 @@ DEFINE factura		VARCHAR(15)
 DEFINE num_nc		VARCHAR(10)
 DEFINE label_letras	VARCHAR(100)
 DEFINE escape		SMALLINT
-DEFINE act_comp, db_c	SMALLINT
-DEFINE desact_comp, db	SMALLINT
+DEFINE act_comp		SMALLINT
+DEFINE desact_comp	SMALLINT
+DEFINE act_10cpi	SMALLINT
+DEFINE act_12cpi	SMALLINT
+DEFINE act_dob1		SMALLINT
+DEFINE act_dob2		SMALLINT
+DEFINE des_dob		SMALLINT
+DEFINE act_neg		SMALLINT
+DEFINE des_neg		SMALLINT
 
 OUTPUT
 	TOP MARGIN	1
@@ -190,12 +198,21 @@ PAGE HEADER
 	LET escape	= 27		# Iniciar sec. impresi¢n
 	LET act_comp	= 15		# Activar Comprimido.
 	LET desact_comp	= 18		# Cancelar Comprimido.
+	LET act_10cpi	= 80		# Comprimido 10 CPI.
+	LET act_12cpi	= 77		# Comprimido 12 CPI.
+	LET act_dob1	= 87		# Activar Doble Ancho (inicio)
+	LET act_dob2	= 49		# Activar Doble Ancho (final)
+	LET des_dob	= 48		# Desactivar Doble Ancho
+	LET act_neg	= 71		# Activar negrita.
+	LET des_neg	= 72		# Desactivar negrita.
 	LET tipo_docum  = "DEVOLUCION"
 	IF rm_z21.z21_cod_tran = 'AF' THEN
 		LET tipo_docum  = "ANULACION"
 	END IF
-	LET documento   = "COMPROBANTE " || tipo_docum || " FACTURA No. " ||
-					rm_z21.z21_num_tran CLIPPED
+	LET documento   = "COMPROBANTE ", tipo_docum CLIPPED, " FACTURA No. ",
+				rm_loc.g02_serie_cia USING "&&&", "-",
+				rm_loc.g02_serie_loc USING "&&&", "-",
+				rm_z21.z21_num_tran USING "&&&&&&&&&"
 	LET subtotal  = rm_r19.r19_tot_bruto - rm_r19.r19_tot_dscto
 	LET impuesto  = rm_z21.z21_val_impto
 	LET valor_pag = rm_z21.z21_valor
@@ -210,16 +227,22 @@ PAGE HEADER
 		  AND r38_tipo_fuente = 'PR'
 		  AND r38_cod_tran    = rm_r19.r19_tipo_dev
 		  AND r38_num_tran    = rm_r19.r19_num_dev
-	LET factura   = rm_r19.r19_num_dev
-	LET num_nc    = rm_z21.z21_num_doc
+	LET factura   = rm_r19.r19_num_dev USING "&&&&&&&&&"
+	LET num_nc    = rm_z21.z21_num_doc USING "&&&&&&&&&"
 	SKIP 3 LINES
 	print ASCII escape;
 	print ASCII act_comp
-	PRINT COLUMN 117, "No. ", num_nc
-	PRINT COLUMN 27,  documento,
+	PRINT COLUMN 102, ASCII escape, ASCII act_neg,
+			"N/C No. ", rm_loc.g02_serie_cia USING "&&&", "-",
+			rm_loc.g02_serie_loc USING "&&&", "-",
+			num_nc, ASCII escape, ASCII des_neg
+	PRINT COLUMN 027, ASCII escape, ASCII act_neg,
+			documento, ASCII escape, ASCII des_neg,
 	      COLUMN 104, "FECHA EMI. N/C : ", rm_z21.z21_fecha_emi
 			 			USING "dd-mm-yyyy"
-	PRINT COLUMN 27,  "ALMACEN : ", rm_loc.g02_nombre
+	print ASCII escape;
+	print ASCII act_comp;
+	PRINT COLUMN 29,  "ALMACEN : ", rm_loc.g02_nombre
 	SKIP 1 LINES
 	PRINT COLUMN 06,  "CLIENTE (", rm_r19.r19_codcli USING "&&&&&", ") : ",
 					rm_r19.r19_nomcli[1, 100] CLIPPED
@@ -257,20 +280,48 @@ ON EVERY ROW
 	
 PAGE TRAILER
 	--NEED 4 LINES
-	LET label_letras = fl_retorna_letras(rm_z21.z21_moneda, valor_pag)
-	PRINT COLUMN 96,  "VALOR P.V.P.",
-	      COLUMN 116, rm_r19.r19_tot_bruto	USING "#,###,###,##&.##"
-	PRINT COLUMN 96,  "DESCUENTOS",
+	--LET label_letras = fl_retorna_letras(rm_z21.z21_moneda, valor_pag)
+	CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc, rm_r19.r19_codcli)
+		RETURNING r_z02.*
+	PRINT COLUMN 002, ASCII escape, ASCII act_12cpi, ASCII escape,
+			ASCII act_dob1, ASCII act_dob2,
+			ASCII escape, ASCII act_neg,
+	      COLUMN 008, "COPIA SIN DERECHO A CREDITO TRIBUTARIO",
+		ASCII escape, ASCII act_dob1, ASCII des_dob,
+		ASCII escape, ASCII act_10cpi, ASCII escape, ASCII des_neg,
+		ASCII escape, ASCII act_comp,
+	      COLUMN 085, "VALOR P.V.P.",
+	      COLUMN 105, rm_r19.r19_tot_bruto	USING "#,###,###,##&.##"
+	PRINT COLUMN 002, "Estimado cliente: Su comprobante electronico ",
+			"usted lo recibira en su cuenta de correo:",
+	      COLUMN 096,  "DESCUENTOS",
 	      COLUMN 118, rm_r19.r19_tot_dscto	USING "###,###,##&.##"
-	PRINT COLUMN 96,  "SUBTOTAL",
-	      COLUMN 118, subtotal		USING "###,###,##&.##"
-	PRINT COLUMN 96,  "I. V. A. (", rm_r19.r19_porc_impto USING "#&", ") %",
+	PRINT COLUMN 002, ASCII escape, ASCII act_neg,
+			r_z02.z02_email CLIPPED, '.',
+			ASCII escape, ASCII des_neg,
+	      COLUMN 100, "SUBTOTAL",
+	      COLUMN 122, subtotal		USING "###,###,##&.##"
+	PRINT COLUMN 002, "Tambien podra consultar y descargar sus ",
+			"comprobantes electronicos a traves del portal",
+	      COLUMN 096, "I. V. A. (", rm_r19.r19_porc_impto USING "#&", ") %",
 	      COLUMN 118, impuesto		USING "###,###,##&.##"
-	PRINT COLUMN 96,  "TRANSPORTE",
-	      COLUMN 118, rm_r19.r19_flete	USING "###,###,##&.##"
-	PRINT COLUMN 06,  "SON: ", label_letras[1,90],
-	      COLUMN 96,  "VALOR A PAGAR",
-	      COLUMN 116, valor_pag		USING "#,###,###,##&.##";
+	PRINT COLUMN 002, "web ",
+			ASCII escape, ASCII act_neg,
+			"https://innobeefactura.com.",
+			ASCII escape, ASCII des_neg,
+			" Sus datos para el primer acceso son Usuario: ",
+	      COLUMN 100,  "TRANSPORTE",
+	      COLUMN 122, rm_r19.r19_flete	USING "###,###,##&.##"
+	--PRINT COLUMN 06,  "SON: ", label_letras[1,90],
+	PRINT COLUMN 002, ASCII escape, ASCII act_neg,
+			rm_r19.r19_cedruc CLIPPED, "@innobeefactura.com",
+			ASCII escape, ASCII des_neg,
+			" y su Clave: ",
+			ASCII escape, ASCII act_neg,
+			rm_r19.r19_cedruc CLIPPED, ".",
+			ASCII escape, ASCII des_neg,
+	      COLUMN 104,  "VALOR A PAGAR",
+	      COLUMN 124, valor_pag		USING "#,###,###,##&.##";
 	print ASCII escape;
 	print ASCII desact_comp 
 
@@ -279,12 +330,20 @@ END REPORT
 
 
 REPORT report_nota_cre2()
+DEFINE r_z02		RECORD LIKE cxct002.*
 DEFINE valor_pag	DECIMAL(14,2)
 DEFINE num_nc		VARCHAR(10)
 DEFINE label_letras	VARCHAR(100)
 DEFINE escape		SMALLINT
-DEFINE act_comp, db_c	SMALLINT
-DEFINE desact_comp, db	SMALLINT
+DEFINE act_comp		SMALLINT
+DEFINE desact_comp	SMALLINT
+DEFINE act_10cpi	SMALLINT
+DEFINE act_12cpi	SMALLINT
+DEFINE act_dob1		SMALLINT
+DEFINE act_dob2		SMALLINT
+DEFINE des_dob		SMALLINT
+DEFINE act_neg		SMALLINT
+DEFINE des_neg		SMALLINT
 
 OUTPUT
 	TOP MARGIN	1
@@ -300,16 +359,28 @@ PAGE HEADER
 	LET escape	= 27		# Iniciar sec. impresi¢n
 	LET act_comp	= 15		# Activar Comprimido.
 	LET desact_comp	= 18		# Cancelar Comprimido.
+	LET act_10cpi	= 80		# Comprimido 10 CPI.
+	LET act_12cpi	= 77		# Comprimido 12 CPI.
+	LET act_dob1	= 87		# Activar Doble Ancho (inicio)
+	LET act_dob2	= 49		# Activar Doble Ancho (final)
+	LET des_dob	= 48		# Desactivar Doble Ancho
+	LET act_neg	= 71		# Activar negrita.
+	LET des_neg	= 72		# Desactivar negrita.
 	--LET db 	    	= "\033W1"      # Activar doble ancho.
 	--LET db_c    	= "\033W0"      # Cancelar doble ancho.
 	LET valor_pag = rm_z21.z21_valor
-	LET num_nc    = rm_z21.z21_num_doc
+	LET num_nc    = rm_z21.z21_num_doc USING "&&&&&&&&&"
 	SKIP 3 LINES
 	print ASCII escape;
 	print ASCII act_comp
-	PRINT COLUMN 117, "No. ", num_nc
-	PRINT COLUMN 104, "FECHA EMI. N/C : ", rm_z21.z21_fecha_emi
-			 			USING "dd/mm/yyyy"
+	PRINT COLUMN 110, ASCII escape, ASCII act_neg,
+			"No. ", rm_loc.g02_serie_cia USING "&&&", "-",
+			rm_loc.g02_serie_loc USING "&&&", "-",
+			num_nc, ASCII escape, ASCII des_neg
+	print ASCII escape;
+	print ASCII act_comp;
+	PRINT COLUMN 106, "FECHA EMI. N/C : ", rm_z21.z21_fecha_emi
+			 			USING "dd-mm-yyyy"
 	PRINT COLUMN 27,  "ALMACEN : ", rm_loc.g02_nombre
 	SKIP 1 LINES
 	PRINT COLUMN 06,  "CLIENTE       : ", rm_r19.r19_nomcli[1, 100] CLIPPED
@@ -326,7 +397,15 @@ PAGE HEADER
 
 ON EVERY ROW
 	--OJO
-	NEED 2 LINES
+	NEED 5 LINES
+	PRINT COLUMN 002, ASCII escape, ASCII act_12cpi, ASCII escape,
+			ASCII act_dob1, ASCII act_dob2,
+			ASCII escape, ASCII act_neg,
+	      COLUMN 008, "COPIA SIN DERECHO A CREDITO TRIBUTARIO",
+		ASCII escape, ASCII act_dob1, ASCII des_dob,
+		ASCII escape, ASCII act_10cpi, ASCII escape, ASCII des_neg,
+		ASCII escape, ASCII act_comp
+	SKIP 2 LINES
 	PRINT COLUMN 13,  "VALOR BRUTO DE N/C",
 	      COLUMN 118, rm_z21.z21_valor - rm_z21.z21_val_impto
 				USING '###,###,##&.##'
@@ -335,11 +414,32 @@ ON EVERY ROW
 	
 PAGE TRAILER
 	--NEED 4 LINES
-	LET label_letras = fl_retorna_letras(rm_z21.z21_moneda, valor_pag)
-	SKIP 1 LINES
-	PRINT COLUMN 06,  "SON: ", label_letras[1,90],
-	      COLUMN 96,  "VALOR A PAGAR",
-	      COLUMN 116, valor_pag		USING "#,###,###,##&.##";
+	--LET label_letras = fl_retorna_letras(rm_z21.z21_moneda, valor_pag)
+	CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc, rm_r19.r19_codcli)
+		RETURNING r_z02.*
+	--SKIP 1 LINES
+	--PRINT COLUMN 06,  "SON: ", label_letras[1,90],
+	PRINT COLUMN 002, "Estimado cliente: Su comprobante electronico ",
+			"usted lo recibira en su cuenta de correo:"
+	PRINT COLUMN 002, ASCII escape, ASCII act_neg,
+			r_z02.z02_email CLIPPED, '.',
+			ASCII escape, ASCII des_neg,
+	      COLUMN 100, "VALOR A PAGAR",
+	      COLUMN 120, valor_pag		USING "#,###,###,##&.##"
+	PRINT COLUMN 002, "Tambien podra consultar y descargar sus ",
+			"comprobantes electronicos a traves del portal"
+	PRINT COLUMN 002, "web ",
+			ASCII escape, ASCII act_neg,
+			"https://innobeefactura.com.",
+			ASCII escape, ASCII des_neg,
+			" Sus datos para el primer acceso son Usuario: "
+	PRINT COLUMN 002, ASCII escape, ASCII act_neg,
+			rm_r19.r19_cedruc CLIPPED, "@innobeefactura.com",
+			ASCII escape, ASCII des_neg,
+			" y su Clave: ",
+			ASCII escape, ASCII act_neg,
+			rm_r19.r19_cedruc CLIPPED, ".",
+			ASCII escape, ASCII des_neg;
 	print ASCII escape;
 	print ASCII desact_comp 
 

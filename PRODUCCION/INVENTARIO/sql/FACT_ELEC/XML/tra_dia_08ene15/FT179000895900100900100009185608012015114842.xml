@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091856</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>08/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091856</guiaRemision>
+<razonSocialComprador>CONSTRUCTORA CONALBA S.A.</razonSocialComprador>
+<identificacionComprador>0991088415001</identificacionComprador>
+<totalSinImpuestos>319.97</totalSinImpuestos>
+<totalDescuento>63.14</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>319.97</baseImponible>
+<valor>38.40</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>358.37</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99134</codigoPrincipal>
+<descripcion>GRIFERIA DE LAVABO 8" E201/39 CR LIBBY</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>224.59</precioUnitario>
+<descuento>31.44</descuento>
+<precioTotalSinImpuesto>193.15</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>193.15</baseImponible>
+<valor>23.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>71844</codigoPrincipal>
+<descripcion>GRIFERIA DE DUCHA E109/39 CR LIBBY</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>158.52</precioUnitario>
+<descuento>31.70</descuento>
+<precioTotalSinImpuesto>126.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>126.82</baseImponible>
+<valor>15.22</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">ventas@conalba.com</campoAdicional>
+<campoAdicional nombre="Email">macias@conalba.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2833800</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">005447</campoAdicional>
+</infoAdicional>
+</factura>

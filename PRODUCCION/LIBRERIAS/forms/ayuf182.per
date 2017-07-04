@@ -1,0 +1,37 @@
+DATABASE aceros
+SCREEN
+{
+ TIPOS OBSERVACION
+                                     [c02] de [c03]
+ [c000|c001                                    |b|c]
+[c010|c011                                    |d|e]
+[c010|c011                                    |d|e]
+[c010|c011                                    |d|e]
+[c010|c011                                    |d|e]
+[c010|c011                                    |d|e]
+[c010|c011                                    |d|e]
+[c010|c011                                    |d|e]
+[c010|c011                                    |d|e]
+[c010|c011                                    |d|e]
+[c010|c011                                    |d|e]
+
+}
+TABLES
+rept112
+ATTRIBUTES
+c02  = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c03  = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+b    = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c    = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+
+c010 = rept112.r112_cod_obser, UPSHIFT, REVERSE;
+c011 = rept112.r112_descripcion, UPSHIFT, REVERSE;
+d    = rept112.r112_tipo, UPSHIFT, REVERSE;
+e    = rept112.r112_estado, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+SCREEN RECORD rh_obser[10] (r112_cod_obser, r112_descripcion, r112_tipo,
+				r112_estado)

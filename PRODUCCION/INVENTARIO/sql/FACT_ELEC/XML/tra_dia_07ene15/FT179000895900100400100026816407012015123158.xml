@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268164</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268164</guiaRemision>
+<razonSocialComprador>PEREZ ARMAS LUIS ANTONIO</razonSocialComprador>
+<identificacionComprador>1708514847001</identificacionComprador>
+<totalSinImpuestos>577.40</totalSinImpuestos>
+<totalDescuento>100.79</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>577.40</baseImponible>
+<valor>69.29</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>646.69</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>13636</codigoPrincipal>
+<descripcion>LLAVE DE CADENA NO.3235 CAPACIDAD DESDE 1-1/2" A 8" (92680)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>659.47</precioUnitario>
+<descuento>98.92</descuento>
+<precioTotalSinImpuesto>560.55</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>560.55</baseImponible>
+<valor>67.27</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>48808</codigoPrincipal>
+<descripcion>CUCHILLA PARA CORTATUBO E-4546 P/CORTATUBO 150/205 (33190)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>9.36</precioUnitario>
+<descuento>1.87</descuento>
+<precioTotalSinImpuesto>16.85</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>16.85</baseImponible>
+<valor>2.02</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">la_services@yahoo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2321605</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">005752</campoAdicional>
+</infoAdicional>
+</factura>

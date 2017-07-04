@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000018757</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>23/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>QUIMBIAMBA IMBAQUINGO MILTON JAVIER</razonSocialComprador>
+<identificacionComprador>1721088571001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000176200</numDocModificado>
+<fechaEmisionDocSustento>20/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>215.73</totalSinImpuestos>
+<valorModificacion>241.62</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>215.73</baseImponible>
+<valor>25.89</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 267791 MILTON QUIMBIAMBA MAT NO RET</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>101991</codigoInterno>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA RUMIPAMBA AZUL  PRIMERA</descripcion>
+<cantidad>27.00</cantidad>
+<precioUnitario>9.40</precioUnitario>
+<descuento>38.07</descuento>
+<precioTotalSinImpuesto>215.73</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>215.73</baseImponible>
+<valor>25.89</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0981297433</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">61280</campoAdicional>
+</infoAdicional>
+</notaCredito>

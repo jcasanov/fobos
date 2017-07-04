@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000269005</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>26/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000269005</guiaRemision>
+<razonSocialComprador>DYGOIL  CIA.LTDA.</razonSocialComprador>
+<identificacionComprador>1790802736001</identificacionComprador>
+<totalSinImpuestos>953.56</totalSinImpuestos>
+<totalDescuento>157.25</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>953.56</baseImponible>
+<valor>114.43</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1067.99</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>70555</codigoPrincipal>
+<descripcion>BOMBA TIPO JET C-MOTOR QD50S  DE 1/2 HP 115/230-1-60 (LX)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>267.21</precioUnitario>
+<descuento>40.08</descuento>
+<precioTotalSinImpuesto>227.13</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>227.13</baseImponible>
+<valor>27.26</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>90313</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 4" ST10-25 P/ MOTOR DE 1 HP</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>531.10</precioUnitario>
+<descuento>79.67</descuento>
+<precioTotalSinImpuesto>451.43</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>451.43</baseImponible>
+<valor>54.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>94203</codigoPrincipal>
+<descripcion>MOTOR ELEC SUMERG DE 4" DE 1 HP 115V/1F/60C (2545189003S)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>312.50</precioUnitario>
+<descuento>37.50</descuento>
+<precioTotalSinImpuesto>275.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>275.00</baseImponible>
+<valor>33.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">secretaria@dygoil.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2440316</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">028691</campoAdicional>
+<campoAdicional nombre="Observaciones">ORDEN N.-00009072</campoAdicional>
+</infoAdicional>
+</factura>

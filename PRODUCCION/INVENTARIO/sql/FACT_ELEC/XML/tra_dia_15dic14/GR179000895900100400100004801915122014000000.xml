@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048019</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>GARCIA MORENO 580 Y COLON</dirEstablecimiento>
+<dirPartida>AV. LA PRENSA N-4514</dirPartida>
+<razonSocialTransportista>ACERO COMERCIAL</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>15/12/2014</fechaIniTransporte>
+<fechaFinTransporte>15/12/2014</fechaFinTransporte>
+<placa></placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0901818294001</identificacionDestinatario>
+<razonSocialDestinatario>RODRIGUEZ RAMOS WALTER TARQUINO</razonSocialDestinatario>
+<dirDestinatario>GARCIA MORENO Y COLON AMAGUANIA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>15/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>100329</codigoInterno>
+<descripcion>AZULEJO PARED 25 x 40 BIONICA BLANCO SEGUNDA</descripcion>
+<cantidad>4.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="RIALTO" valor="RIALTO"/>
+<detAdicional nombre="BIONICA BLANCO" valor="BIONICA BLANCO"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>101832</codigoInterno>
+<descripcion>BALDOSA DE PISO 30 X 30 MONOQUEMA SPINETTO CREMA PRIMERA</descripcion>
+<cantidad>76.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="RIALTO" valor="RIALTO"/>
+<detAdicional nombre="SPINETTO CREMA PRIME" valor="SPINETTO CREMA PRIME"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>101839</codigoInterno>
+<descripcion>AZULEJO PARED 20 x 25 ROYAL BLANCO  PRIMERA</descripcion>
+<cantidad>6.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="ROYAL BLANCO  PRIMER" valor="ROYAL BLANCO  PRIMER"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>94334</codigoInterno>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA OLMO PRIMERA</descripcion>
+<cantidad>31.50</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="OLMO PREMIUM" valor="OLMO PREMIUM"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>99362</codigoInterno>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA MACHALILLA BLANCO PRIMERA</descripcion>
+<cantidad>20.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="MACHALILLA BLANCO" valor="MACHALILLA BLANCO"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+<campoAdicional nombre="telefono-movil">2877148</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">055695</campoAdicional>
+</infoAdicional>
+</guiaRemision>

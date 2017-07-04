@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comprobanteRetencion id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048547</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoCompRetencion>
+<fechaEmision>15/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionSujetoRetenido>04</tipoIdentificacionSujetoRetenido>
+<razonSocialSujetoRetenido>BMI DEL ECUADOR COMPAÒIA DE SEGUROS DE VISA S.A.</razonSocialSujetoRetenido>
+<identificacionSujetoRetenido>1791301692001</identificacionSujetoRetenido>
+<periodoFiscal>01/2015</periodoFiscal>
+</infoCompRetencion>
+<impuestos>
+<impuesto>
+<codigo>1</codigo>
+<codigoRetencion>322</codigoRetencion>
+<baseImponible>471.00</baseImponible>
+<porcentajeRetener>0.10</porcentajeRetener>
+<valorRetenido>0.47</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>001010000000137</numDocSustento>
+<fechaEmisionDocSustento>15/01/2015</fechaEmisionDocSustento>
+</impuesto>
+</impuestos>
+<infoAdicional>
+<campoAdicional nombre="Email">icisneros@tecniseguros.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">333 0111</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">001785</campoAdicional>
+</infoAdicional>
+</comprobanteRetencion>

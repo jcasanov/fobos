@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268361</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>12/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268361</guiaRemision>
+<razonSocialComprador>PRODUCTOS FAMILIA SANCELA DEL ECUADOR S.A</razonSocialComprador>
+<identificacionComprador>1791314379001</identificacionComprador>
+<totalSinImpuestos>1603.51</totalSinImpuestos>
+<totalDescuento>282.98</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1603.51</baseImponible>
+<valor>192.42</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1795.93</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>45026</codigoPrincipal>
+<descripcion>CILINDRO HIDR S-A RC RC-252 25 T 2.00" CARRERA 6.50" ALTURA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>873.50</precioUnitario>
+<descuento>131.03</descuento>
+<precioTotalSinImpuesto>742.47</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>742.47</baseImponible>
+<valor>89.10</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>44998</codigoPrincipal>
+<descripcion>BOMBA HIDRAULICA MANUAL P-392 2 VELOCIDADES 55 Pulg3 10000 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>620.55</precioUnitario>
+<descuento>93.08</descuento>
+<precioTotalSinImpuesto>527.47</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>527.47</baseImponible>
+<valor>63.30</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>95384</codigoPrincipal>
+<descripcion>MANGUERA HIDRAULICA HC-9206 DE GOMA REFORZADA DE 6' DE LARGO 3/8" NPT</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>167.74</precioUnitario>
+<descuento>25.16</descuento>
+<precioTotalSinImpuesto>142.58</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>142.58</baseImponible>
+<valor>17.11</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>45076</codigoPrincipal>
+<descripcion>MANOMETRO G-2535-L DE GLICERINA 2 1/2" DIAMETRO 0-10000PSI</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>128.45</precioUnitario>
+<descuento>19.27</descuento>
+<precioTotalSinImpuesto>109.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>109.18</baseImponible>
+<valor>13.10</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>14434</codigoPrincipal>
+<descripcion>ADAPTADOR PARA MANOMETRO GA-3 MACHO 3/8 NPT- HEMBRA 3/8 NPT SALIDA MANOM. 1/4"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>96.25</precioUnitario>
+<descuento>14.44</descuento>
+<precioTotalSinImpuesto>81.81</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ENERPA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>81.81</baseImponible>
+<valor>9.82</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">manueltc@familia.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2484360</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">018377</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C# 4501282550</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048049</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento></dirEstablecimiento>
+<dirPartida>AV LA PRENSA</dirPartida>
+<razonSocialTransportista>SERVIENTREGA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0991285679001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>18/12/2014</fechaIniTransporte>
+<fechaFinTransporte>18/12/2014</fechaFinTransporte>
+<placa></placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0501448633001</identificacionDestinatario>
+<razonSocialDestinatario>RAUL PARREÒO - INSSAHIPA</razonSocialDestinatario>
+<dirDestinatario>LATACUNGA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>18/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>15668</codigoInterno>
+<descripcion>DADOS PARA TERRAJA MANUAL P/ 12-R DE 1" NPT (37835)</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="MODELO" valor="PARA 12-R DE 1""/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>20015</codigoInterno>
+<descripcion>DIFUSOR DE PLASTICO 14379-B001 P/ BOMBAS HJA-75 - HJA-100-QD75 Y QD 100</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="MODELO" valor="14379-B001"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>94736</codigoInterno>
+<descripcion>PLATO DE DESGASTE 13069B-501 P/ QD-75/100</descripcion>
+<cantidad>2.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="MODELO" valor="13069B-501"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>99147</codigoInterno>
+<descripcion>BUSHING GALV. CLASE 150 DE 2" x 1"</descripcion>
+<cantidad>3.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="MODELO" valor="99147"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">032804310</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">001908</campoAdicional>
+</infoAdicional>
+</guiaRemision>

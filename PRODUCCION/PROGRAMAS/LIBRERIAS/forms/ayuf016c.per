@@ -1,0 +1,30 @@
+DATABASE aceros
+
+SCREEN
+{
+  IMPRESORAS
+ ---------------------------------------
+  Código       Nombre 		
+ ---------------------------------------
+ [c01       ] [c002                    ] 
+ [c01       ] [c002                    ]
+ [c01       ] [c002                    ]
+ [c01       ] [c002                    ]
+ [c01       ] [c002                    ]
+ [c01       ] [c002                    ]
+ [c01       ] [c002                    ] 
+ [c01       ] [c002                    ] 
+ [c01       ] [c002                    ] 
+ [c01       ] [c002                    ] 
+}
+
+TABLES
+gent006
+
+ATTRIBUTES
+c01 = g06_impresora,REVERSE;
+c002 = g06_nombre,REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_impr[10](g06_impresora, g06_nombre)

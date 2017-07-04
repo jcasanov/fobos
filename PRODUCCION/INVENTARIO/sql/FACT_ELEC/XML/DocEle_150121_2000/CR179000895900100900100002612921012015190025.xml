@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comprobanteRetencion id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000026129</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoCompRetencion>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionSujetoRetenido>04</tipoIdentificacionSujetoRetenido>
+<razonSocialSujetoRetenido>F.V. AREA ANDINA S.A.</razonSocialSujetoRetenido>
+<identificacionSujetoRetenido>1790208087001</identificacionSujetoRetenido>
+<periodoFiscal>01/2015</periodoFiscal>
+</infoCompRetencion>
+<impuestos>
+<impuesto>
+<codigo>1</codigo>
+<codigoRetencion>312</codigoRetencion>
+<baseImponible>31.43</baseImponible>
+<porcentajeRetener>1.00</porcentajeRetener>
+<valorRetenido>0.31</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>001001000269765</numDocSustento>
+<fechaEmisionDocSustento>19/01/2015</fechaEmisionDocSustento>
+</impuesto>
+<impuesto>
+<codigo>2</codigo>
+<codigoRetencion>1</codigoRetencion>
+<baseImponible>3.77</baseImponible>
+<porcentajeRetener>30.00</porcentajeRetener>
+<valorRetenido>1.13</valorRetenido>
+<codDocSustento>01</codDocSustento>
+<numDocSustento>001001000269765</numDocSustento>
+<fechaEmisionDocSustento>19/01/2015</fechaEmisionDocSustento>
+</impuesto>
+</impuestos>
+<infoAdicional>
+<campoAdicional nombre="Email">cbermeo@fvecuador.com</campoAdicional>
+<campoAdicional nombre="Email">hponce@fvecuador.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2884610</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000057</campoAdicional>
+</infoAdicional>
+</comprobanteRetencion>

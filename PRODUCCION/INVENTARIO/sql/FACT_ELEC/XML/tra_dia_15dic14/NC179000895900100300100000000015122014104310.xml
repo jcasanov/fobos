@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000007775</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>PANAMERICANA SUR KM. 6</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>FOSFORERA ECUATORIANA  S.A.</razonSocialComprador>
+<identificacionComprador>1790021203001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>003-001-000129203</numDocModificado>
+<fechaEmisionDocSustento>05/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>650.09</totalSinImpuestos>
+<valorModificacion>655.28</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>585.07</baseImponible>
+<valor>70.21</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>REF POR CAMBIO DE ITEMS</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>4920</codigoInterno>
+<descripcion>TEE PVC DESAGUE DE 200mm. ISO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>44.29</precioUnitario>
+<descuento>4.43</descuento>
+<precioTotalSinImpuesto>39.86</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>39.86</baseImponible>
+<valor>4.78</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>2694</codigoInterno>
+<descripcion>CODO PVC DESAGUE DE 200mm. x 90ø ISO E/C</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>44.15</precioUnitario>
+<descuento>22.08</descuento>
+<precioTotalSinImpuesto>198.67</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>198.67</baseImponible>
+<valor>23.84</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>6236</codigoInterno>
+<descripcion>UNION PVC DESAGUE DE 200mm. ISO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>22.93</precioUnitario>
+<descuento>4.59</descuento>
+<precioTotalSinImpuesto>41.27</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>41.27</baseImponible>
+<valor>4.95</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>5670</codigoInterno>
+<descripcion>TUBO PVC DESAGUE 40 PSI DE 200mm. x 6 Mts. ESPIGA CAMPANA</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>73.76</precioUnitario>
+<descuento>29.50</descuento>
+<precioTotalSinImpuesto>265.54</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>265.54</baseImponible>
+<valor>31.86</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>2694</codigoInterno>
+<descripcion>CODO PVC DESAGUE DE 200mm. x 90ø ISO E/C</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>44.15</precioUnitario>
+<descuento>4.42</descuento>
+<precioTotalSinImpuesto>39.73</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="PLASTIGAMA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>39.73</baseImponible>
+<valor>4.77</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+<campoAdicional nombre="telefono-movil">3080746</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">65</campoAdicional>
+</infoAdicional>
+</notaCredito>

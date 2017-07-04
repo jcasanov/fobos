@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048341</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>SHYRIS Y ALTAR VIA A AMAGUANA</dirEstablecimiento>
+<dirPartida>GUALBERTO PEREZ E1-88 ENTRE MALDONADO Y NAPO</dirPartida>
+<razonSocialTransportista>SERGIO QUINCHE</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>1103687586</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>17/12/2014</fechaIniTransporte>
+<fechaFinTransporte>18/12/2014</fechaFinTransporte>
+<placa>PBX-9975</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1706971643001</identificacionDestinatario>
+<razonSocialDestinatario>GUAMAN ZOILA AGRIPINA</razonSocialDestinatario>
+<dirDestinatario>SHYRIS Y ALTAR  SANGOLQUI</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>15/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>100487</codigoInterno>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA AMAGUANIA TERRACOTA PRIMERA</descripcion>
+<cantidad>16.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="AMAGUANIA TERRACOTA" valor="AMAGUANIA TERRACOTA"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>100489</codigoInterno>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA AMAGUANIA VERDE PRIMERA</descripcion>
+<cantidad>6.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="AMAGUANIA VERDE" valor="AMAGUANIA VERDE"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>100678</codigoInterno>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA TOMEBAMBA PRIMERA</descripcion>
+<cantidad>10.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="TOMEBAMBA PRIMERA" valor="TOMEBAMBA PRIMERA"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>101152</codigoInterno>
+<descripcion>AZULEJO PARED 25 x 33 SALINAS KAKI PRIMERA</descripcion>
+<cantidad>20.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="SALINAS KAKI PRIMERA" valor="SALINAS KAKI PRIMERA"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>101285</codigoInterno>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA COLONCHE  PRIMERA</descripcion>
+<cantidad>51.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="COLONCHE  PRIMERA" valor="COLONCHE  PRIMERA"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>98067</codigoInterno>
+<descripcion>AZULEJO PARED 25 x 33 CRISTAL ROSA SEGUNDA</descripcion>
+<cantidad>10.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="RIALTO" valor="RIALTO"/>
+<detAdicional nombre="CRISTAL ROSA STANDAR" valor="CRISTAL ROSA STANDAR"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>98735</codigoInterno>
+<descripcion>AZULEJO PARED 25 x 33 AMAZONAS BLANCO PRIMERA</descripcion>
+<cantidad>20.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="AMAZONAS BLANCO" valor="AMAZONAS BLANCO"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2339357</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">055584</campoAdicional>
+</infoAdicional>
+</guiaRemision>

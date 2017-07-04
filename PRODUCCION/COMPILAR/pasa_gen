@@ -1,0 +1,23 @@
+export LD_ASSUME_KERNEL=2.4.0
+echo 'generando los "g4js4gl_2" ...'
+fglpc g4js4gl_2.4gl
+
+for i in *.err
+do
+	if [ "$i" == "g4js4gl_2.err" ]; then
+		exit;
+	fi
+done
+
+cp g4js4gl_2.* ACTIVOS/fuentes
+cp g4js4gl_2.* CAJA/fuentes
+cp g4js4gl_2.* COBRANZAS/fuentes
+cp g4js4gl_2.* COMPRAS/fuentes
+cp g4js4gl_2.* CONTABILIDAD/fuentes
+cp g4js4gl_2.* GENERALES/fuentes
+cp g4js4gl_2.* MENU/fuentes
+cp g4js4gl_2.* REPUESTOS/fuentes
+cp g4js4gl_2.* TALLER/fuentes
+cp g4js4gl_2.* TESORERIA/fuentes
+cp g4js4gl_2.* NOMINA/fuentes
+cp g4js4gl_2.* SRI/fuentes

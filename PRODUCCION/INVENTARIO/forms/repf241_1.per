@@ -1,0 +1,107 @@
+DATABASE aceros
+SCREEN
+{
+                                                            [c050 ] de [c051 ]
+   Guía Remisión: [c014      ]  Estado: [d|c016     ]  Trans.: [c4|c015     ]
+         No. SRI: [c007              ]           Aut. SRI: [c010             ]
+ Fec. Ini. Tras.: [c000      ]               Fecha Ter. Traslado: [c001      ]
+ Motivo Traslado: [c|c002                            ] Fec. Emi.: [c003      ]
+   Punto Partida: [c004                                                      ]
+  Persona Trans.: [c005                                 ]  Placa: [c080      ]
+    Destinatario: [c011                                                      ]
+ Cédula/RUC Tra.: [c006         ]            Cédula/RUC Dest.: [c012         ]
+   Punto Llegada: [c013                                                      ]
+                                                            [c060 ] de [c061 ]
+ [c0|c020    |c1|c021  |c022    |c023    |c024      |c025  |c026              ]
+[c2|c030  ] [c3|c031  |c032  ] [c033  ] [c034      |c035  |c036              ]
+[c2|c030  ] [c3|c031  |c032  ] [c033  ] [c034      |c035  |c036              ]
+[c2|c030  ] [c3|c031  |c032  ] [c033  ] [c034      |c035  |c036              ]
+[c2|c030  ] [c3|c031  |c032  ] [c033  ] [c034      |c035  |c036              ]
+[c2|c030  ] [c3|c031  |c032  ] [c033  ] [c034      |c035  |c036              ]
+[c075                                              ]
+[c076                                                               |c077    ]
+   Ingresado Por: [c008      ]            Fecha Ingreso: [c009               ]
+}
+TABLES
+rept010
+rept020
+rept036
+rept095
+rept097
+ATTRIBUTES
+c014 = rept095.r95_guia_remision, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+d    = rept095.r95_estado, NOENTRY, UPSHIFT, REVERSE;
+c016 = FORMONLY.tit_estado, NOENTRY, UPSHIFT, REVERSE;
+c4   = rept097.r97_cod_tran, AUTONEXT, UPSHIFT, COLOR = BLUE,
+	COMMENTS = '(FA) FACTURA  (TR) TRANSFERENCIAS';
+c015 = FORMONLY.r97_num_tran, AUTONEXT, UPSHIFT, COLOR = BLUE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c000 = rept095.r95_fecha_initras, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la fecha de iniciación en formato: dd-mm-aaaa.';
+c001 = rept095.r95_fecha_fintras, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la fecha de terminación en formato: dd-mm-aaaa.';
+c    = rept095.r95_motivo, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = ('V', 'D', 'I', 'N'),	DEFAULT = 'V',
+	COMMENTS = '(V) Venta (D) Devolución (I) Importación (N) Transferencias entre Localidades';
+c002 = FORMONLY.tit_motivo, NOENTRY, UPSHIFT, REVERSE;
+c003 = rept095.r95_fecha_emi, AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la fecha de emisión en formato: dd-mm-aaaa.';
+c004 = rept095.r95_punto_part, AUTONEXT, UPSHIFT, REVERSE, SCROLL;
+c005 = rept095.r95_persona_guia, AUTONEXT, UPSHIFT, REVERSE, SCROLL;
+c006 = rept095.r95_persona_id, AUTONEXT, UPSHIFT, REVERSE;
+c007 = rept095.r95_num_sri, AUTONEXT, UPSHIFT, REVERSE;
+c010 = rept095.r95_autoriz_sri, AUTONEXT, UPSHIFT, REVERSE;
+c011 = rept095.r95_persona_dest, AUTONEXT, UPSHIFT, REVERSE, SCROLL;
+c012 = rept095.r95_pers_id_dest, AUTONEXT, UPSHIFT, REVERSE;
+c013 = rept095.r95_punto_lleg, AUTONEXT, UPSHIFT, REVERSE, SCROLL;
+
+c0   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c020 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c1   = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c021 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c022 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c023 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c024 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+c025 = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22';
+c026 = FORMONLY.tit_col9, WIDGET = 'BUTTON', CONFIG = 'F23';
+
+c2   = rept020.r20_cod_tran, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c030 = rept020.r20_num_tran, AUTONEXT, UPSHIFT, OPTIONS = '-nolist',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c3   = rept036.r36_bodega_real, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c031 = rept036.r36_num_ord_des, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c032 = rept036.r36_num_entrega, AUTONEXT, UPSHIFT, OPTIONS = '-nolist',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c033 = rept020.r20_item, AUTONEXT, UPSHIFT, OPTIONS = '-nolist',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c034 = rept020.r20_cant_ven, NOENTRY, UPSHIFT, FORMAT = '---,--&.##',
+	OPTIONS = '-nolist';
+c035 = rept010.r10_uni_med, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c036 = rept010.r10_nombre, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c080 = rept095.r95_placa, AUTONEXT, UPSHIFT;
+
+c050 = FORMONLY.num_reg, NOENTRY, UPSHIFT, REVERSE;
+c051 = FORMONLY.max_reg, NOENTRY, UPSHIFT, REVERSE;
+c060 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c061 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c075 = FORMONLY.descrip_3, NOENTRY;
+c076 = FORMONLY.nom_item TYPE VARCHAR, REVERSE, NOENTRY;
+c077 = FORMONLY.nom_marca, NOENTRY, REVERSE;
+
+c008 = rept095.r95_usuario, NOENTRY, UPSHIFT, REVERSE;
+c009 = rept095.r95_fecing, NOENTRY, UPSHIFT, REVERSE;
+END
+KEYS
+F5 = 'Factura'
+F6 = 'Transferencia'
+F7 = 'Orden Despacho'
+F8 = 'Nota de Entrega'
+F9 = 'Imprimir'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_guia[5] (r20_cod_tran, r20_num_tran, r36_bodega_real,
+				r36_num_ord_des, r36_num_entrega, r20_item,
+				r20_cant_ven, r10_uni_med, r10_nombre)

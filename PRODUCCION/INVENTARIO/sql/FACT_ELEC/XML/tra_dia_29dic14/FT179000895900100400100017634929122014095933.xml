@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176349</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>29/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176349</guiaRemision>
+<razonSocialComprador>INMOBILIARIA INTERNAC. CORBAL.</razonSocialComprador>
+<identificacionComprador>1790577325001</identificacionComprador>
+<totalSinImpuestos>1462.74</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1462.74</baseImponible>
+<valor>175.53</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1638.27</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>90184</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL UNA PIEZA E184-BL BELLINI ELONGADO BLANCO</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>209.67</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1258.02</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1258.02</baseImponible>
+<valor>150.96</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>71344</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA BAJO MESON E235-BL MARA BLANCO</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>34.12</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>204.72</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>204.72</baseImponible>
+<valor>24.57</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">contabilida3@corbal.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2450719/22</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">000382</campoAdicional>
+</infoAdicional>
+</factura>

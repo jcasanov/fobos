@@ -108,7 +108,6 @@ MENU 'OPCIONES'
 		HIDE OPTION 'Cerrar Archivo'
 		HIDE OPTION 'Eliminar Archivo'
 		HIDE OPTION 'Detalle'
-		HIDE OPTION 'Reabrir Archivo'
 	COMMAND KEY('G') 'Generar' 'Genera el archivo de carga. '
 		CALL control_generar()
 		IF vm_num_rows = 1 THEN
@@ -123,18 +122,11 @@ MENU 'OPCIONES'
 				END IF
 				IF rm_n26.n26_estado <> 'G' THEN
 					HIDE OPTION 'Cerrar Archivo'
-					HIDE OPTION 'Modificar'
 				ELSE
 					SHOW OPTION 'Cerrar Archivo'
-					SHOW OPTION 'Modificar'
 				END IF
 			END IF
 			SHOW OPTION 'Detalle'
-		END IF
-		IF rm_n26.n26_estado = 'C' THEN
-			SHOW OPTION 'Reabrir Archivo'
-		ELSE
-			HIDE OPTION 'Reabrir Archivo'
 		END IF
 		IF vm_row_current > 1 THEN
 			SHOW OPTION 'Retroceder'
@@ -150,27 +142,18 @@ MENU 'OPCIONES'
 			SHOW OPTION 'Modificar'
 			SHOW OPTION 'Bajar Archivo'
 			SHOW OPTION 'Detalle'
-			IF rm_n26.n26_estado = 'C' THEN
-				SHOW OPTION 'Reabrir Archivo'
-			ELSE
-				HIDE OPTION 'Reabrir Archivo'
-			END IF
 			IF rm_n26.n26_estado IS NOT NULL THEN
 				IF rm_n26.n26_estado = 'E' THEN
 					HIDE OPTION 'Eliminar Archivo'
 					HIDE OPTION 'Bajar Archivo'
 				ELSE
-					IF rm_n26.n26_estado <> 'C' THEN
-						SHOW OPTION 'Eliminar Archivo'
-					END IF
+					SHOW OPTION 'Eliminar Archivo'
 					SHOW OPTION 'Bajar Archivo'
 				END IF
 				IF rm_n26.n26_estado <> 'G' THEN
 					HIDE OPTION 'Cerrar Archivo'
-					HIDE OPTION 'Modificar'
 				ELSE
 					SHOW OPTION 'Cerrar Archivo'
-					SHOW OPTION 'Modificar'
 				END IF
 			END IF
 			HIDE OPTION 'Avanzar'
@@ -178,37 +161,38 @@ MENU 'OPCIONES'
 			IF vm_num_rows = 0 THEN
 				HIDE OPTION 'Modificar'
 				HIDE OPTION 'Bajar Archivo'
-				HIDE OPTION 'Eliminar Archivo'
-				HIDE OPTION 'Bajar Archivo'
-				HIDE OPTION 'Cerrar Archivo'
-				HIDE OPTION 'Reabrir Archivo'
+				IF rm_n26.n26_estado IS NOT NULL THEN
+					IF rm_n26.n26_estado = 'E' THEN
+						HIDE OPTION 'Eliminar Archivo'
+						HIDE OPTION 'Bajar Archivo'
+					ELSE
+						SHOW OPTION 'Eliminar Archivo'
+						SHOW OPTION 'Bajar Archivo'
+					END IF
+					IF rm_n26.n26_estado <> 'G' THEN
+						HIDE OPTION 'Cerrar Archivo'
+					ELSE
+						SHOW OPTION 'Cerrar Archivo'
+					END IF
+				END IF
 				HIDE OPTION 'Detalle'
 			END IF
 		ELSE
 			SHOW OPTION 'Avanzar'
 			SHOW OPTION 'Bajar Archivo'
 			SHOW OPTION 'Modificar'
-			IF rm_n26.n26_estado = 'C' THEN
-				SHOW OPTION 'Reabrir Archivo'
-			ELSE
-				HIDE OPTION 'Reabrir Archivo'
-			END IF
 			IF rm_n26.n26_estado IS NOT NULL THEN
 				IF rm_n26.n26_estado = 'E' THEN
 					HIDE OPTION 'Eliminar Archivo'
 					HIDE OPTION 'Bajar Archivo'
 				ELSE
-					IF rm_n26.n26_estado <> 'C' THEN
-						SHOW OPTION 'Eliminar Archivo'
-					END IF
+					SHOW OPTION 'Eliminar Archivo'
 					SHOW OPTION 'Bajar Archivo'
 				END IF
 				IF rm_n26.n26_estado <> 'G' THEN
 					HIDE OPTION 'Cerrar Archivo'
-					HIDE OPTION 'Modificar'
 				ELSE
 					SHOW OPTION 'Cerrar Archivo'
-					SHOW OPTION 'Modificar'
 				END IF
 			END IF
 			SHOW OPTION 'Detalle'
@@ -219,36 +203,13 @@ MENU 'OPCIONES'
        	COMMAND KEY('B') 'Bajar Archivo' 'Baja Archivo corriente. '
 		CALL bajar_archivo()
        	COMMAND KEY('P') 'Cerrar Archivo' 'Cerrar Archivo registro corriente. '
-		CALL control_cierre_reapertura('C')
+		CALL control_cierre()
 		IF rm_n26.n26_estado <> 'G' THEN
 			HIDE OPTION 'Eliminar Archivo'
 			HIDE OPTION 'Cerrar Archivo'
-			HIDE OPTION 'Modificar'
 		ELSE
 			SHOW OPTION 'Eliminar Archivo'
 			SHOW OPTION 'Cerrar Archivo'
-			SHOW OPTION 'Modificar'
-		END IF
-		IF rm_n26.n26_estado = 'C' THEN
-			SHOW OPTION 'Reabrir Archivo'
-		ELSE
-			HIDE OPTION 'Reabrir Archivo'
-		END IF
-	COMMAND KEY('X') 'Reabrir Archivo' 'Reabrir el último archivo de carga cerrado.'
-		CALL control_cierre_reapertura('R')
-		IF rm_n26.n26_estado <> 'G' THEN
-			HIDE OPTION 'Eliminar Archivo'
-			HIDE OPTION 'Cerrar Archivo'
-			HIDE OPTION 'Modificar'
-		ELSE
-			SHOW OPTION 'Eliminar Archivo'
-			SHOW OPTION 'Cerrar Archivo'
-			SHOW OPTION 'Modificar'
-		END IF
-		IF rm_n26.n26_estado = 'C' THEN
-			SHOW OPTION 'Reabrir Archivo'
-		ELSE
-			HIDE OPTION 'Reabrir Archivo'
 		END IF
        	COMMAND KEY('E') 'Eliminar Archivo' 'Eliminar Archivo corriente. '
 		CALL control_eliminar()
@@ -256,26 +217,10 @@ MENU 'OPCIONES'
 			HIDE OPTION 'Eliminar Archivo'
 			HIDE OPTION 'Bajar Archivo'
 			HIDE OPTION 'Cerrar Archivo'
-			HIDE OPTION 'Modificar'
 		ELSE
 			SHOW OPTION 'Eliminar Archivo'
 			SHOW OPTION 'Bajar Archivo'
 			SHOW OPTION 'Cerrar Archivo'
-			SHOW OPTION 'Modificar'
-		END IF
-		IF rm_n26.n26_estado <> 'G' THEN
-			HIDE OPTION 'Eliminar Archivo'
-			HIDE OPTION 'Cerrar Archivo'
-			HIDE OPTION 'Modificar'
-		ELSE
-			SHOW OPTION 'Eliminar Archivo'
-			SHOW OPTION 'Cerrar Archivo'
-			SHOW OPTION 'Modificar'
-		END IF
-		IF rm_n26.n26_estado = 'C' THEN
-			SHOW OPTION 'Reabrir Archivo'
-		ELSE
-			HIDE OPTION 'Reabrir Archivo'
 		END IF
         COMMAND KEY('D') 'Detalle'   'Se ubica en el detalle.'
 		IF vm_num_rows > 0 THEN
@@ -295,10 +240,8 @@ MENU 'OPCIONES'
 		END IF 
 		IF rm_n26.n26_estado <> 'G' THEN
 			HIDE OPTION 'Cerrar Archivo'
-			HIDE OPTION 'Modificar'
 		ELSE
 			SHOW OPTION 'Cerrar Archivo'
-			SHOW OPTION 'Modificar'
 		END IF
 		IF rm_n26.n26_estado = 'E' THEN
 			HIDE OPTION 'Eliminar Archivo'
@@ -306,11 +249,6 @@ MENU 'OPCIONES'
 		ELSE
 			SHOW OPTION 'Eliminar Archivo'
 			SHOW OPTION 'Bajar Archivo'
-		END IF
-		IF rm_n26.n26_estado = 'C' THEN
-			SHOW OPTION 'Reabrir Archivo'
-		ELSE
-			HIDE OPTION 'Reabrir Archivo'
 		END IF
 	COMMAND KEY('R') 'Retroceder' 		'Ver anterior registro.'
 		CALL muestra_anterior_registro()
@@ -324,10 +262,8 @@ MENU 'OPCIONES'
 		END IF
 		IF rm_n26.n26_estado <> 'G' THEN
 			HIDE OPTION 'Cerrar Archivo'
-			HIDE OPTION 'Modificar'
 		ELSE
 			SHOW OPTION 'Cerrar Archivo'
-			SHOW OPTION 'Modificar'
 		END IF
 		IF rm_n26.n26_estado = 'E' THEN
 			HIDE OPTION 'Eliminar Archivo'
@@ -335,11 +271,6 @@ MENU 'OPCIONES'
 		ELSE
 			SHOW OPTION 'Eliminar Archivo'
 			SHOW OPTION 'Bajar Archivo'
-		END IF
-		IF rm_n26.n26_estado = 'C' THEN
-			SHOW OPTION 'Reabrir Archivo'
-		ELSE
-			HIDE OPTION 'Reabrir Archivo'
 		END IF
 	COMMAND KEY('S') 'Salir'    		'Salir del programa.'
 		EXIT MENU
@@ -522,7 +453,7 @@ END IF
 LET query = 'SELECT *, ROWID FROM rolt026 ',
 		' WHERE n26_compania = ', vg_codcia,
 		'   AND ', expr_sql CLIPPED,
-		' ORDER BY 2 DESC, 3 DESC ' CLIPPED
+		' ORDER BY 2 ' CLIPPED
 PREPARE cons FROM query	
 DECLARE q_cons CURSOR FOR cons
 LET vm_num_rows = 0
@@ -552,44 +483,13 @@ END FUNCTION
 
 
 
-FUNCTION control_cierre_reapertura(flag)
-DEFINE flag		CHAR(1)
-DEFINE mensaje		VARCHAR(200)
+FUNCTION control_cierre()
 DEFINE resp		CHAR(6)
-DEFINE fec_ult		DATETIME YEAR TO MONTH
-DEFINE fec_car		DATETIME YEAR TO MONTH
 
 CALL mostrar_registro(vm_r_rows[vm_row_current])
-IF rm_n26.n26_estado <> 'G' AND flag = 'C' THEN
-	CALL fl_mostrar_mensaje('Solo puede cerrar un archivo que esté generado.', 'exclamation')
+IF rm_n26.n26_estado <> 'G' THEN
+	CALL fl_mostrar_mensaje('Solo puede cerrar un archivo que este generado.', 'exclamation')
 	RETURN
-END IF
-IF rm_n26.n26_estado <> 'C' AND flag = 'R' THEN
-	CALL fl_mostrar_mensaje('Solo puede reabrir un archivo que esté cerrado.', 'exclamation')
-	RETURN
-END IF
-IF flag = 'R' THEN
-	INITIALIZE fec_ult, fec_car TO NULL
-	SQL
-		SELECT EXTEND(NVL(MAX(MDY(n26_mes_proceso, 01,n26_ano_proceso)),
-				TODAY), YEAR TO MONTH),
-			EXTEND(NVL(MAX(MDY(n26_mes_carga, 01, n26_ano_carga)),
-				TODAY), YEAR TO MONTH)
-			INTO $fec_ult, $fec_car
-			FROM rolt026
-			WHERE n26_compania = $vg_codcia
-			  AND n26_estado   = 'C'
-	END SQL
-	IF fec_ult <> EXTEND(MDY(rm_n26.n26_mes_proceso, 01,
-				rm_n26.n26_ano_proceso),
-				YEAR TO MONTH) AND
-	   fec_car <> EXTEND(MDY(rm_n26.n26_mes_carga, 01,
-				rm_n26.n26_ano_carga),
-				YEAR TO MONTH)
-	THEN
-		CALL fl_mostrar_mensaje('Solo puede reabrir el último archivo que esté cerrado.', 'exclamation')
-		RETURN
-	END IF
 END IF
 BEGIN WORK
 WHENEVER ERROR CONTINUE
@@ -612,35 +512,20 @@ IF STATUS < 0 THEN
 	RETURN
 END IF
 WHENEVER ERROR STOP
-CASE flag
-	WHEN 'C' LET mensaje = 'Esta seguro que desea cerrar este archivo ?'
-	WHEN 'R' LET mensaje = 'Esta seguro que desea reabrir este archivo ?'
-END CASE
 LET int_flag = 0
-CALL fl_hacer_pregunta(mensaje, 'Yes') RETURNING resp
+CALL fl_hacer_pregunta('Esta seguro que desea cerrar este archivo ?', 'Yes')
+	RETURNING resp
 IF resp <> 'Yes' THEN
 	ROLLBACK WORK
 	RETURN
 END IF
-CASE flag
-	WHEN 'C' LET rm_n26.n26_estado = 'C'
-	WHEN 'R' LET rm_n26.n26_estado = 'G'
-END CASE
+LET rm_n26.n26_estado = 'C'
 WHENEVER ERROR CONTINUE
-CASE flag
-	WHEN 'C'
-		UPDATE rolt026
-			SET n26_estado      = rm_n26.n26_estado,
-			    n26_usua_cierre = vg_usuario,
-			    n26_fec_cierre  = CURRENT
-			WHERE CURRENT OF q_cierre
-	WHEN 'R'
-		UPDATE rolt026
-			SET n26_estado      = rm_n26.n26_estado,
-			    n26_usua_cierre = NULL,
-			    n26_fec_cierre  = NULL
-			WHERE CURRENT OF q_cierre
-END CASE
+UPDATE rolt026
+	SET n26_estado      = rm_n26.n26_estado,
+	    n26_usua_cierre = vg_usuario,
+	    n26_fec_cierre  = CURRENT
+	WHERE CURRENT OF q_cierre
 IF STATUS < 0 THEN
 	ROLLBACK WORK
 	WHENEVER ERROR STOP
@@ -650,11 +535,7 @@ END IF
 WHENEVER ERROR STOP
 COMMIT WORK
 CALL muestrar_reg()
-CASE flag
-	WHEN 'C' LET mensaje = 'El archivo ha sido cerrado.'
-	WHEN 'R' LET mensaje = 'El archivo ha sido reabierto.'
-END CASE
-CALL fl_mostrar_mensaje(mensaje, 'info')
+CALL fl_mostrar_mensaje('El archivo ha sido cerrado.', 'info')
 
 END FUNCTION
 
@@ -753,7 +634,7 @@ IF genera_tabla_temp_si_existe_rolt026() THEN
 	RETURN 1
 END IF
 ERROR 'Generando Archivo extras.txt, por favor espere ...'
-LET fecha_ini = MDY(rm_n26.n26_mes_proceso, 01, rm_n26.n26_ano_proceso)
+LET fecha_ini = MDY(rm_n26.n26_mes_carga, 01, rm_n26.n26_ano_carga)
 LET fecha_fin = fecha_ini + 1 UNITS MONTH - 1 UNITS DAY
 {--
 SELECT UNIQUE n32_cod_liqrol
@@ -911,13 +792,9 @@ SELECT * FROM rolt033
 	  AND n33_valor       > 0
 	INTO TEMP tmp_n33
 LET query = 'SELECT "', rm_n26.n26_ruc_patronal, '" ruc, "',
-		rm_n26.n26_sucursal, '" sucursal, ', rm_n26.n26_ano_proceso,
-		' anio, LPAD(', rm_n26.n26_mes_proceso, ', 2, 0) mes, "',
-		rm_n26.n26_tipo_arch, '" tipo, ',
-		'CASE WHEN n30_cod_trab = 170 AND ', vg_codloc, ' = 1 ',
-			'THEN n30_carnet_seg ',
-			'ELSE n30_num_doc_id ',
-		'END cedula, ',
+		rm_n26.n26_sucursal, '" sucursal, ', rm_n26.n26_ano_carga,
+		' anio, LPAD(', rm_n26.n26_mes_carga, ', 2, 0) mes, "',
+		rm_n26.n26_tipo_arch, '" tipo, n30_num_doc_id cedula, ',
 		'(SUM(NVL((SELECT SUM(n33_valor) ',
 			'FROM tmp_n33 ',
 		  	'WHERE n33_compania    = a.n32_compania ',
@@ -1164,27 +1041,10 @@ END FUNCTION
 FUNCTION datos_defaults_cab()
 DEFINE r_g02		RECORD LIKE gent002.*
 DEFINE fecha		LIKE rolt032.n32_fecha_fin
-DEFINE fec_ult		DATETIME YEAR TO MONTH
-DEFINE fec_car		DATETIME YEAR TO MONTH
 
 LET rm_n26.n26_compania     = vg_codcia
 LET rm_n26.n26_ano_proceso  = YEAR(TODAY)
 LET rm_n26.n26_mes_proceso  = MONTH(TODAY)
-INITIALIZE fec_ult, fec_car TO NULL
-SQL
-	SELECT EXTEND(NVL(MAX(MDY(n26_mes_proceso, 01, n26_ano_proceso)
-			+ 1 UNITS MONTH), TODAY), YEAR TO MONTH),
-		EXTEND(NVL(MAX(MDY(n26_mes_carga, 01, n26_ano_carga)
-			+ 1 UNITS MONTH), TODAY), YEAR TO MONTH)
-		INTO $fec_ult, $fec_car
-		FROM rolt026
-		WHERE n26_compania = $vg_codcia
-		  AND n26_estado   = 'C'
-END SQL
-IF fec_ult IS NOT NULL THEN
-	LET rm_n26.n26_ano_proceso = YEAR(fec_ult)
-	LET rm_n26.n26_mes_proceso = MONTH(fec_ult)
-END IF
 LET rm_n26.n26_estado       = 'G'
 CALL fl_lee_localidad(rm_n26.n26_compania, vg_codloc) RETURNING r_g02.*
 LET rm_n26.n26_ruc_patronal = r_g02.g02_numruc
@@ -1197,10 +1057,6 @@ SELECT NVL(MAX(n32_fecha_fin), TODAY)
 	  AND n32_estado     = "C"
 LET rm_n26.n26_ano_carga    = YEAR(fecha)
 LET rm_n26.n26_mes_carga    = MONTH(fecha)
-IF fec_car IS NOT NULL THEN
-	LET rm_n26.n26_ano_carga = YEAR(fec_car)
-	LET rm_n26.n26_mes_carga = MONTH(fec_car)
-END IF
 LET rm_n26.n26_total_ext    = 0
 LET rm_n26.n26_total_adi    = 0
 LET rm_n26.n26_total_net    = 0
@@ -1477,10 +1333,6 @@ INPUT ARRAY rm_detalle WITHOUT DEFAULTS FROM rm_detalle.*
 			CONTINUE INPUT
 		END IF
 		CALL mostrar_total()
-		IF rm_detalle[1].n27_cod_trab IS NULL THEN
-			CALL fl_mostrar_mensaje('Al menos debe digitar un empleado.', 'exclamation')
-			CONTINUE INPUT
-		END IF
 END INPUT
 IF int_flag THEN
 	RETURN
@@ -1701,10 +1553,9 @@ CASE flag
 				LET query = query CLIPPED, ' ',
 				'causa, "X", "", "", "", "" ',
 				' FROM rolt030, t2 ',
-				' WHERE  n30_compania    = ', vg_codcia,
-				'   AND (n30_num_doc_id  = cedula ',
-				'    OR  n30_carnet_seg  = cedula) ',
-				'   AND  n30_estado     <> "J"',
+				' WHERE n30_compania    = ', vg_codcia,
+				'   AND n30_num_doc_id  = cedula ',
+				'   AND n30_estado     <> "J"',
 				' ORDER BY 3'
 	WHEN 2
 		LET query = 'SELECT n27_cedula_trab, n27_cod_trab, ',

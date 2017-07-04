@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000018704</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>AMAGASI DEL INCA</dirEstablecimiento>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<razonSocialComprador>PRIETO BRICENO LIVIO ANTOLIN</razonSocialComprador>
+<identificacionComprador>1100555828   </identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000018704</numDocModificado>
+<fechaEmisionDocSustento>15/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>6.31</totalSinImpuestos>
+<valorModificacion>7.07</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>6.31</baseImponible>
+<valor>0.76</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV. DF-21019 FACT. FA-259847</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>25086</codigoInterno>
+<descripcion>DEV. DF-21019 FACT. FA-259847</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>6.31</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>6.31</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="ACERO" valor="ACERO"/>
+<detAdicional nombre="UNI" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.31</baseImponible>
+<valor>0.76</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+<campoAdicional nombre="telefono-movil">2815248</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">29881</campoAdicional>
+</infoAdicional>
+</notaCredito>

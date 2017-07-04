@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268139</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>06/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268139</guiaRemision>
+<razonSocialComprador>GANCHOZO FAUBLA SIXTO VINICIO</razonSocialComprador>
+<identificacionComprador>1715531917001</identificacionComprador>
+<totalSinImpuestos>194.41</totalSinImpuestos>
+<totalDescuento>34.31</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>194.41</baseImponible>
+<valor>23.33</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>217.74</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102936</codigoPrincipal>
+<descripcion>CARBONES 14-46-2012 P/TALADRO 2602-20</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>10.14</precioUnitario>
+<descuento>1.52</descuento>
+<precioTotalSinImpuesto>8.62</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.62</baseImponible>
+<valor>1.03</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98970</codigoPrincipal>
+<descripcion>SWITCH 23-66-1096 TALADRO MOD. 2601-22</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>43.34</precioUnitario>
+<descuento>19.50</descuento>
+<precioTotalSinImpuesto>110.52</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>110.52</baseImponible>
+<valor>13.26</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101677</codigoPrincipal>
+<descripcion>CABLE DE CORRIENTE 22-64-0216 P/ROTOMARTILLO 5375-20</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>12.73</precioUnitario>
+<descuento>1.91</descuento>
+<precioTotalSinImpuesto>10.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>10.82</baseImponible>
+<valor>1.30</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96538</codigoPrincipal>
+<descripcion>CARBONES 22-22-1560 P/MOD.6122-30</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>3.52</precioUnitario>
+<descuento>2.11</descuento>
+<precioTotalSinImpuesto>11.97</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>11.97</baseImponible>
+<valor>1.44</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>93914</codigoPrincipal>
+<descripcion>CARBONES 22-18-0730 P/AMOLADORA 6066-6</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>8.13</precioUnitario>
+<descuento>2.44</descuento>
+<precioTotalSinImpuesto>13.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>13.82</baseImponible>
+<valor>1.66</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150419</codigoPrincipal>
+<descripcion>RULIMAN 02-04-0913 P/ AMOLADORA 6066-6</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3.72</precioUnitario>
+<descuento>0.56</descuento>
+<precioTotalSinImpuesto>3.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.16</baseImponible>
+<valor>0.38</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70550</codigoPrincipal>
+<descripcion>TAPA PARA CARBONES 23-44-0170 P/ AMOLADORA 6066-6</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1.26</precioUnitario>
+<descuento>0.38</descuento>
+<precioTotalSinImpuesto>2.14</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.14</baseImponible>
+<valor>0.26</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>98524</codigoPrincipal>
+<descripcion>INDUCIDO 16-10-5375 P/ROTOMARTILLO 5375-20</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>39.25</precioUnitario>
+<descuento>5.89</descuento>
+<precioTotalSinImpuesto>33.36</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>33.36</baseImponible>
+<valor>4.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">six_ganchozo@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">098091413</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">062074</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,29 @@
+database acero_gm
+screen size 24 by 80
+{
+n07_cod_rubro      [f000  ]
+n07_tipo_calc      [a]
+n07_operacion      [b]
+n07_factor         [f001  ]
+n07_valor_max      [f002         ]
+n07_valor_min      [f003         ]
+n07_ganado_max     [f004         ]
+n07_sum_liq_ant    [c]
+n07_usuario        [f005      ]
+n07_fecing         [f006               ]
+}
+end
+tables
+rolt007
+attributes
+f000 = rolt007.n07_cod_rubro;
+a = rolt007.n07_tipo_calc;
+b = rolt007.n07_operacion;
+f001 = rolt007.n07_factor;
+f002 = rolt007.n07_valor_max;
+f003 = rolt007.n07_valor_min;
+f004 = rolt007.n07_ganado_max;
+c = rolt007.n07_sum_liq_ant;
+f005 = rolt007.n07_usuario;
+f006 = rolt007.n07_fecing;
+end

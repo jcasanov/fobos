@@ -1,0 +1,36 @@
+DATABASE aceros
+SCREEN
+{
+
+ TRANSACCIONES DEL CLUB
+
+ [c0|c001      |c002                          |c003         ]
+[c1|c011      |c012                          |c013         ]
+[c1|c011      |c012                          |c013         ]
+[c1|c011      |c012                          |c013         ]
+[c1|c011      |c012                          |c013         ]
+[c1|c011      |c012                          |c013         ]
+[c1|c011      |c012                          |c013         ]
+[c1|c011      |c012                          |c013         ]
+[c1|c011      |c012                          |c013         ]
+[c1|c011      |c012                          |c013         ]
+[c1|c011      |c012                          |c013         ]
+
+}
+TABLES
+rolt030
+rolt068
+ATTRIBUTES
+c0   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c002 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c003 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+
+c1   = rolt068.n68_cod_tran, AUTONEXT, UPSHIFT, REVERSE;
+c011 = rolt068.n68_num_tran, AUTONEXT, UPSHIFT, REVERSE;
+c012 = rolt030.n30_nombres, AUTONEXT, UPSHIFT, REVERSE;
+c013 = rolt068.n68_valor, AUTONEXT, UPSHIFT, REVERSE, FORMAT = '##,###,##&.##';
+END
+INSTRUCTIONS
+SCREEN RECORD rh_tran_club[10] (n68_cod_tran, n68_num_tran, n30_nombres,
+				n68_valor)

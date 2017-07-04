@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268628</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268628</guiaRemision>
+<razonSocialComprador>CONSORCIO SERVINPET</razonSocialComprador>
+<identificacionComprador>1792005760001</identificacionComprador>
+<totalSinImpuestos>124.12</totalSinImpuestos>
+<totalDescuento>13.79</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>124.12</baseImponible>
+<valor>14.89</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>139.01</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>70499</codigoPrincipal>
+<descripcion>INDUCIDO 16-70-0375 P/ TALADRO DE BASE ELECTROMAG. 4292-1 / 4297-1</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>126.21</precioUnitario>
+<descuento>12.62</descuento>
+<precioTotalSinImpuesto>113.59</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>113.59</baseImponible>
+<valor>13.63</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96545</codigoPrincipal>
+<descripcion>RULIMAN 02-04-1229 P/MOD.5196</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>6.90</precioUnitario>
+<descuento>0.69</descuento>
+<precioTotalSinImpuesto>6.21</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.21</baseImponible>
+<valor>0.75</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150283</codigoPrincipal>
+<descripcion>RODAMIENTO 02-04-1041 DE 10X30X9 P/ 4292</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>4.80</precioUnitario>
+<descuento>0.48</descuento>
+<precioTotalSinImpuesto>4.32</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.32</baseImponible>
+<valor>0.52</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">contabilidad@servinpet.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3652349</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">048879</campoAdicional>
+</infoAdicional>
+</factura>

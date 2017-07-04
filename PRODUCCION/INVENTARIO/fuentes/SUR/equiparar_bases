@@ -1,0 +1,26 @@
+echo 'Descargando las tablas maestras ...'
+echo ''
+dbaccess acero_qm -qcr descar_jer
+echo 'Empaquetando ...'
+echo ''
+gzip *.txt
+gzip equipbase
+gzip equipbase.4go
+echo 'Enviando al SUR ...'
+echo ''
+rcp *.gz sur:/acero/fobos/CORRECCIONES/GYE_13JUL2004/
+echo 'Desempaquetando ...'
+echo ''
+rsh sur gzip -f -d /acero/fobos/CORRECCIONES/GYE_13JUL2004/*.gz
+echo 'Ejecutando Proceso ...'
+echo ''
+echo ''
+rsh sur /acero/fobos/CORRECCIONES/GYE_13JUL2004/equipbase | tee equipbase.log
+echo ' Trayendo los LOG del SUR ...'
+echo ''
+rsh sur gzip /acero/fobos/CORRECCIONES/GYE_13JUL2004/*.log
+rcp sur:/acero/fobos/CORRECCIONES/GYE_13JUL2004/*.log.gz .
+rsh sur rm -f -r /acero/fobos/CORRECCIONES/GYE_13JUL2004/*.log.gz
+rsh sur rm -f -r /acero/fobos/CORRECCIONES/GYE_13JUL2004/*.txt
+rsh sur rm -f -r /acero/fobos/CORRECCIONES/GYE_13JUL2004/equipbase*
+gzip -f -d *.gz

@@ -99,12 +99,20 @@ END FUNCTION
 
 
 REPORT report_nota_deb()
+DEFINE r_z02		RECORD LIKE cxct002.*
 DEFINE valor_pag	DECIMAL(14,2)
 DEFINE num_db		VARCHAR(10)
 DEFINE label_letras	VARCHAR(100)
 DEFINE escape		SMALLINT
-DEFINE act_comp, db_c	SMALLINT
-DEFINE desact_comp, db	SMALLINT
+DEFINE act_comp		SMALLINT
+DEFINE desact_comp	SMALLINT
+DEFINE act_10cpi	SMALLINT
+DEFINE act_12cpi	SMALLINT
+DEFINE act_dob1		SMALLINT
+DEFINE act_dob2		SMALLINT
+DEFINE des_dob		SMALLINT
+DEFINE act_neg		SMALLINT
+DEFINE des_neg		SMALLINT
 
 OUTPUT
 	TOP MARGIN	1
@@ -121,15 +129,27 @@ PAGE HEADER
 	LET escape	= 27		# Iniciar sec. impresi¢n
 	LET act_comp	= 15		# Activar Comprimido.
 	LET desact_comp	= 18		# Cancelar Comprimido.
+	LET act_10cpi	= 80		# Comprimido 10 CPI.
+	LET act_12cpi	= 77		# Comprimido 12 CPI.
+	LET act_dob1	= 87		# Activar Doble Ancho (inicio)
+	LET act_dob2	= 49		# Activar Doble Ancho (final)
+	LET des_dob	= 48		# Desactivar Doble Ancho
+	LET act_neg	= 71		# Activar negrita.
+	LET des_neg	= 72		# Desactivar negrita.
 	--LET db 	    	= "\033W1"      # Activar doble ancho.
 	--LET db_c    	= "\033W0"      # Cancelar doble ancho.
 	LET valor_pag = rm_z20.z20_valor_cap + rm_z20.z20_valor_int
-	LET num_db    = rm_z20.z20_num_doc
+	LET num_db    = rm_z20.z20_num_doc USING "&&&&&&&&&"
 	SKIP 4 LINES
 	print ASCII escape;
 	print ASCII act_comp
-	PRINT COLUMN 117, "No. ", num_db
-	PRINT COLUMN 104, "FECHA EMI. N/D : ", rm_z20.z20_fecha_emi
+	PRINT COLUMN 110, ASCII escape, ASCII act_neg,
+			"No. ", rm_loc.g02_serie_cia USING "&&&", "-",
+			rm_loc.g02_serie_loc USING "&&&", "-",
+			num_db, ASCII escape, ASCII des_neg
+	print ASCII escape;
+	print ASCII act_comp;
+	PRINT COLUMN 106, "FECHA EMI. N/D : ", rm_z20.z20_fecha_emi
 			 			USING "dd-mm-yyyy"
 	PRINT COLUMN 27,  "ALMACEN : ", rm_loc.g02_nombre
 	SKIP 1 LINES
@@ -148,7 +168,15 @@ PAGE HEADER
 
 ON EVERY ROW
 	--OJO
-	NEED 2 LINES
+	NEED 5 LINES
+	PRINT COLUMN 002, ASCII escape, ASCII act_12cpi, ASCII escape,
+			ASCII act_dob1, ASCII act_dob2,
+			ASCII escape, ASCII act_neg,
+	      COLUMN 008, "COPIA SIN DERECHO A CREDITO TRIBUTARIO",
+		ASCII escape, ASCII act_dob1, ASCII des_dob,
+		ASCII escape, ASCII act_10cpi, ASCII escape, ASCII des_neg,
+		ASCII escape, ASCII act_comp
+	SKIP 2 LINES
 	PRINT COLUMN 13,  "VALOR BRUTO DE N/D",
 	      COLUMN 118, valor_pag - rm_z20.z20_val_impto
 				USING '###,###,##&.##'
@@ -159,10 +187,31 @@ ON EVERY ROW
 	
 PAGE TRAILER
 	--NEED 4 LINES
-	LET label_letras = fl_retorna_letras(rm_z20.z20_moneda, valor_pag)
-	PRINT COLUMN 06,  "SON: ", label_letras[1,90],
-	      COLUMN 96,  "VALOR A PAGAR",
-	      COLUMN 116, valor_pag		USING "#,###,###,##&.##";
+	CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc, rm_r19.r19_codcli)
+		RETURNING r_z02.*
+	--LET label_letras = fl_retorna_letras(rm_z20.z20_moneda, valor_pag)
+	--PRINT COLUMN 06,  "SON: ", label_letras[1,90],
+	PRINT COLUMN 002, "Estimado cliente: Su comprobante electronico ",
+			"usted lo recibira en su cuenta de correo:"
+	PRINT COLUMN 002, ASCII escape, ASCII act_neg,
+			r_z02.z02_email CLIPPED, '.',
+			ASCII escape, ASCII des_neg,
+	      COLUMN 100, "VALOR A PAGAR",
+	      COLUMN 120, valor_pag		USING "#,###,###,##&.##"
+	PRINT COLUMN 002, "Tambien podra consultar y descargar sus ",
+			"comprobantes electronicos a traves del portal"
+	PRINT COLUMN 002, "web ",
+			ASCII escape, ASCII act_neg,
+			"https://innobeefactura.com.",
+			ASCII escape, ASCII des_neg,
+			" Sus datos para el primer acceso son Usuario: "
+	PRINT COLUMN 002, ASCII escape, ASCII act_neg,
+			rm_r19.r19_cedruc CLIPPED, "@innobeefactura.com",
+			ASCII escape, ASCII des_neg,
+			" y su Clave: ",
+			ASCII escape, ASCII act_neg,
+			rm_r19.r19_cedruc CLIPPED, ".",
+			ASCII escape, ASCII des_neg;
 	print ASCII escape;
 	print ASCII desact_comp 
 
@@ -175,8 +224,8 @@ DEFINE valor_pag	DECIMAL(14,2)
 DEFINE num_db		VARCHAR(10)
 DEFINE label_letras	VARCHAR(100)
 DEFINE escape		SMALLINT
-DEFINE act_comp, db_c	SMALLINT
-DEFINE desact_comp, db	SMALLINT
+DEFINE act_comp		SMALLINT
+DEFINE desact_comp	SMALLINT
 
 OUTPUT
 	TOP MARGIN	1

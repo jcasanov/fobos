@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104010</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/12/2014</fechaEmision>
+<dirEstablecimiento>AV. DE LA MARINA, PTO.MARITIMO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104010</guiaRemision>
+<razonSocialComprador>CONTECON GUAYAQUIL S.A. CGSA</razonSocialComprador>
+<identificacionComprador>0992506717001</identificacionComprador>
+<totalSinImpuestos>89.47</totalSinImpuestos>
+<totalDescuento>9.84</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>79.63</baseImponible>
+<valor>9.56</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>89.19</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>150587</codigoPrincipal>
+<descripcion>TUERCA DEL DISCO 48-66-0975 BOQUILLA DE 1/4" P/ DISCO DE AMOLADORA RECTA 5192.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>25.20</precioUnitario>
+<descuento>5.54</descuento>
+<precioTotalSinImpuesto>44.86</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>44.86</baseImponible>
+<valor>5.38</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150347</codigoPrincipal>
+<descripcion>MANDRIL - PORTABROCA PARA TALADRO 48-66-5185 P/ TALADRO 5378-20</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>35.28</precioUnitario>
+<descuento>3.88</descuento>
+<precioTotalSinImpuesto>31.40</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>31.40</baseImponible>
+<valor>3.77</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150436</codigoPrincipal>
+<descripcion>TORNILLO 05-80-0430 A&M P/ 5378-20</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3.79</precioUnitario>
+<descuento>0.42</descuento>
+<precioTotalSinImpuesto>3.37</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.37</baseImponible>
+<valor>0.40</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">046006300</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">009100</campoAdicional>
+</infoAdicional>
+</factura>

@@ -32,6 +32,7 @@ DEFINE vm_row_current	SMALLINT	-- FILA CORRIENTE DEL ARREGLO
 DEFINE vm_num_rows	SMALLINT	-- CANTIDAD DE FILAS LEIDAS
 
 DEFINE vm_max_rows	SMALLINT
+DEFINE vm_eg_mix	SMALLINT
 --
 -- DEFINE RECORD(S) HERE
 --
@@ -47,12 +48,13 @@ DEFINE saldo_hoy_ch		LIKE cajt005.j05_ch_apertura
 
 DEFINE vm_ind_egr		SMALLINT
 DEFINE vm_max_egr		SMALLINT
-DEFINE rm_egresos		ARRAY[1000] OF RECORD
+DEFINE rm_egresos		ARRAY[32767] OF RECORD
 				       tipo_fuente LIKE cajt011.j11_tipo_fuente,
 					num_fuente LIKE cajt011.j11_num_fuente,
 					num_ch	   LIKE cajt011.j11_num_ch_aut,
 					num_cta	  LIKE cajt011.j11_num_cta_tarj,
 					cod_bco	  LIKE cajt011.j11_cod_bco_tarj,
+					fecha	   DATE,
 					valor	   LIKE cajt011.j11_valor,
 					check	   CHAR(1)
 				END RECORD
@@ -136,7 +138,7 @@ LET vm_che_cp   = 'CP'
 LET vm_cheque   = 'CH'
 LET vm_efectivo = 'EF'
 
-LET vm_max_egr  = 1000
+LET vm_max_egr  = 32767
 LET vm_max_rows = 1000
 
 CALL setea_nombre_botones_f1()
@@ -151,6 +153,7 @@ CREATE TEMP TABLE tmp_detalle(
 	num_cheque		VARCHAR(15),
 	num_cta    		VARCHAR(25),
 	cod_bco			SMALLINT,
+	fecha			DATE,
 	valor			DECIMAL(12,2),
 	egresa			CHAR(1)
 );
@@ -340,7 +343,7 @@ IF rm_j04.j04_codigo_caja IS NULL THEN
 END IF
 
 CALL lee_datos('I')
-IF INT_FLAG THEN
+IF int_flag THEN
 	ROLLBACK WORK
 	IF vm_num_rows = 0 THEN
 		CLEAR FORM
@@ -359,7 +362,7 @@ CALL abre_cursor_caja()
 		LET int_flag = 1
 	END IF
 --END IF
-IF INT_FLAG THEN
+IF int_flag THEN
 	ROLLBACK WORK
 	IF vm_num_rows = 0 THEN
 		CLEAR FORM
@@ -400,26 +403,30 @@ CALL actualiza_acumulados_tipo_transaccion('I')
 INITIALIZE r_b12.* TO NULL
 
 CALL fl_lee_compania_contabilidad(vg_codcia) RETURNING r_b00.*
---IF r_b00.b00_inte_online = 'S' THEN
-	CALL contabilizacion_online() RETURNING r_b12.*
-	IF int_flag THEN
-		IF vm_num_rows = 0 THEN
-			CLEAR FORM
-		ELSE	
-			CALL lee_muestra_registro(vm_rows[vm_row_current])
+IF vg_codloc <> 2 AND vg_codloc <> 4 THEN
+	--IF r_b00.b00_inte_online = 'S' THEN
+		CALL contabilizacion_online() RETURNING r_b12.*
+		IF int_flag THEN
+			IF vm_num_rows = 0 THEN
+				CLEAR FORM
+			ELSE	
+				CALL lee_muestra_registro(vm_rows[vm_row_current])
+			END IF
+			ROLLBACK WORK
+			RETURN 
 		END IF
-		ROLLBACK WORK
-		RETURN 
-	END IF
---END IF
+	--END IF
+END IF
 
 COMMIT WORK
 
-IF r_b12.b12_compania IS NOT NULL AND r_b00.b00_mayo_online = 'S' THEN
-	CALL fl_mayoriza_comprobante(r_b12.b12_compania, r_b12.b12_tipo_comp,
-				     r_b12.b12_num_comp, 'M')
+IF vg_codloc <> 2 AND vg_codloc <> 4 THEN
+	IF r_b12.b12_compania IS NOT NULL AND r_b00.b00_mayo_online = 'S' THEN
+		CALL fl_mayoriza_comprobante(r_b12.b12_compania,
+						r_b12.b12_tipo_comp,
+						r_b12.b12_num_comp, 'M')
+	END IF
 END IF
-
 IF vm_num_rows = vm_max_rows THEN
 	LET vm_num_rows = 1
 ELSE
@@ -429,6 +436,7 @@ LET vm_row_current = vm_num_rows
 LET vm_rows[vm_num_rows] = rowid
 
 CALL muestra_contadores()
+CALL lee_muestra_registro(vm_rows[vm_row_current])
 CALL fl_mensaje_registro_ingresado()
 
 END FUNCTION
@@ -436,20 +444,18 @@ END FUNCTION
 
 
 FUNCTION lee_datos(flag)
-
 DEFINE flag 		CHAR(1)
 DEFINE resp 		CHAR(6)
-
 DEFINE nro_cta		LIKE gent009.g09_numero_cta
 DEFINE dummy		LIKE gent008.g08_nombre
 DEFINE moneda		LIKE gent013.g13_moneda
-
 DEFINE r_g08		RECORD LIKE gent008.*
 DEFINE r_g09		RECORD LIKE gent009.*
 DEFINE r_b10		RECORD LIKE ctbt010.*
 DEFINE r_mon		RECORD LIKE gent013.*
 
-LET INT_FLAG = 0
+LET vm_eg_mix = 0
+LET int_flag  = 0
 INPUT BY NAME rm_j10.j10_tipo_fuente, rm_j10.j10_num_fuente, rm_j10.j10_fecing,
 	      rm_j10.j10_numero_cta,  rm_j10.j10_banco, rm_j10.j10_moneda,
 	      rm_j10.j10_referencia,  saldo_ant_ef, saldo_ant_ch, saldo_hoy_ef, 
@@ -463,10 +469,10 @@ INPUT BY NAME rm_j10.j10_tipo_fuente, rm_j10.j10_num_fuente, rm_j10.j10_fecing,
 			RETURN
 		END IF
 
-		LET INT_FLAG = 0
+		LET int_flag = 0
 		CALL fl_mensaje_abandonar_proceso() RETURNING resp
 		IF resp = 'Yes' THEN
-			LET INT_FLAG = 1
+			LET int_flag = 1
 			RETURN
 		END IF
         ON KEY(F1,CONTROL-W)
@@ -505,7 +511,7 @@ INPUT BY NAME rm_j10.j10_tipo_fuente, rm_j10.j10_num_fuente, rm_j10.j10_fecing,
 				DISPLAY r_mon.g13_nombre TO n_moneda
 			END IF
 		END IF
-		LET INT_FLAG = 0
+		LET int_flag = 0
 	BEFORE INPUT
 		--#CALL dialog.keysetlabel("F1","")
 		--#CALL dialog.keysetlabel("CONTROL-W","")
@@ -575,7 +581,7 @@ INPUT BY NAME rm_j10.j10_tipo_fuente, rm_j10.j10_num_fuente, rm_j10.j10_fecing,
 			DISPLAY r_mon.g13_nombre TO n_moneda
 			
 			CALL obtener_saldos()
-			IF INT_FLAG THEN
+			IF int_flag THEN
 				RETURN
 			END IF
 				   
@@ -603,7 +609,7 @@ INPUT BY NAME rm_j10.j10_tipo_fuente, rm_j10.j10_num_fuente, rm_j10.j10_fecing,
 			ELSE
 				DISPLAY r_mon.g13_nombre TO n_moneda
 				CALL obtener_saldos()
-				IF INT_FLAG THEN
+				IF int_flag THEN
 					RETURN
 				END IF
 				   
@@ -634,7 +640,7 @@ INPUT BY NAME rm_j10.j10_tipo_fuente, rm_j10.j10_num_fuente, rm_j10.j10_fecing,
 			NEXT FIELD j10_valor
 		END IF
 END INPUT
-IF INT_FLAG THEN
+IF int_flag THEN
 	RETURN
 END IF
 
@@ -645,7 +651,7 @@ END FUNCTION
 FUNCTION obtener_saldos()
 
 IF NOT caja_aperturada(rm_j10.j10_moneda) THEN
-	LET INT_FLAG = 1
+	LET int_flag = 1
 	RETURN
 END IF
 			
@@ -679,7 +685,7 @@ DEFINE r_g09			RECORD LIKE gent009.*
 
 CLEAR FORM
 
-LET INT_FLAG = 0
+LET int_flag = 0
 CONSTRUCT BY NAME expr_sql 
 	ON j10_num_fuente, j10_estado, j10_numero_cta,
 	   j10_banco, j10_moneda, j10_referencia, j10_valor, 
@@ -731,14 +737,14 @@ CONSTRUCT BY NAME expr_sql
 				DISPLAY r_g13.g13_nombre TO n_moneda
 			END IF
 		END IF
-		LET INT_FLAG = 0
+		LET int_flag = 0
 	BEFORE CONSTRUCT
 		CALL setea_nombre_botones_f1()
 		--#CALL dialog.keysetlabel("F1","")
 		--#CALL dialog.keysetlabel("CONTROL-W","")
 END CONSTRUCT
 
-IF INT_FLAG THEN
+IF int_flag THEN
 	IF vm_num_rows = 0 THEN
 		CLEAR FORM
 	ELSE	
@@ -781,42 +787,31 @@ END FUNCTION
 
 
 FUNCTION control_elimina()
-
 DEFINE resp    		CHAR(6)
 DEFINE estado		CHAR(1)
 DEFINE r_j02		RECORD LIKE cajt002.*
-
 DEFINE tot_egr_ch	DECIMAL(12,2)
-
 DEFINE num_fuente 	LIKE cajt010.j10_num_fuente
 
 LET int_flag = 0
 CALL fl_retorna_caja(vg_codcia, vg_codloc, vg_usuario) RETURNING r_j02.*
 IF r_j02.j02_codigo_caja IS NULL THEN
-	--CALL fgl_winmessage(vg_producto,'No hay una caja asignada al usuario ' || vg_usuario || '.','stop')
 	CALL fl_mostrar_mensaje('No hay una caja asignada al usuario ' || vg_usuario || '.','stop')
 	EXIT PROGRAM
 END IF
-
 IF vm_num_rows = 0 THEN
 	CALL fl_mensaje_consultar_primero()
 	RETURN
 END IF
-
 CALL lee_muestra_registro(vm_rows[vm_row_current])
-
 IF rm_j10.j10_estado = 'E' THEN
-	--CALL fgl_winmessage(vg_producto,'Este registro ya ha sido eliminado.','exclamation')
 	CALL fl_mostrar_mensaje('Este registro ya ha sido eliminado.','exclamation')
 	RETURN
 END IF
-
 IF DATE(rm_j10.j10_fecha_pro) <> TODAY THEN
-	--CALL fgl_winmessage(vg_producto,'Solo puede eliminar egresos realizados hoy.','exclamation')
 	CALL fl_mostrar_mensaje('Solo puede eliminar egresos realizados hoy.','exclamation')
 	RETURN
 END IF
-
 INITIALIZE rm_j04.* TO NULL
 SELECT * INTO rm_j04.* FROM cajt004
 	WHERE j04_compania    = vg_codcia
@@ -833,7 +828,6 @@ SELECT * INTO rm_j04.* FROM cajt004
 
 IF rm_j04.j04_codigo_caja IS NULL THEN
 	ROLLBACK WORK
-	--CALL fgl_winmessage(vg_producto,'La caja no está aperturada.','exclamation')
 	CALL fl_mostrar_mensaje('La caja no está aperturada.','exclamation')
 	IF vm_num_rows > 0 THEN
 		CALL lee_muestra_registro(vm_rows[vm_row_current])
@@ -842,18 +836,16 @@ IF rm_j04.j04_codigo_caja IS NULL THEN
 	END IF
 	RETURN
 END IF
-
 IF NOT caja_aperturada(rm_j10.j10_moneda) THEN
-	--CALL fgl_winmessage(vg_producto,'No puede eliminar egresos de una caja cerrada.','exclamation')
 	CALL fl_mostrar_mensaje('No puede eliminar egresos de una caja cerrada.','exclamation')
 	RETURN
 END IF
-		
 CALL fl_mensaje_seguro_ejecutar_proceso() RETURNING resp
 IF resp = 'Yes' THEN
-
-	CALL fl_mayoriza_comprobante(vg_codcia, rm_j10.j10_tip_contable, 					     rm_j10.j10_num_contable, 'D')
-
+	IF vg_codloc <> 2 AND vg_codloc <> 4 THEN
+		CALL fl_mayoriza_comprobante(vg_codcia, rm_j10.j10_tip_contable,
+						rm_j10.j10_num_contable, 'D')
+	END IF
 	SET LOCK MODE TO WAIT 10
 	WHENEVER ERROR CONTINUE
 	BEGIN WORK
@@ -878,10 +870,10 @@ IF resp = 'Yes' THEN
 	
 	CALL actualiza_acumulados_caja('D')
 	CALL actualiza_acumulados_tipo_transaccion('D')
-	CALL elimina_comprobante_contable()
-
+	IF vg_codloc <> 2 AND vg_codloc <> 4 THEN
+		CALL elimina_comprobante_contable()
+	END IF
 	UPDATE cajt010 SET j10_estado = estado WHERE CURRENT OF q_del
-	
 	LET num_fuente = rm_j10.j10_num_fuente
 	INITIALIZE rm_j10.j10_num_fuente TO NULL
 	CALL actualiza_detalle()
@@ -1010,13 +1002,14 @@ END FUNCTION
 
 FUNCTION setea_nombre_botones_f1()
 
---#DISPLAY 'Tp'		TO		bt_tipo
---#DISPLAY 'Num.'		TO		bt_num
---#DISPLAY 'Num. Cheque'	TO		bt_cheque
---#DISPLAY 'Cta. Cte.'	TO		bt_cta_cte
---#DISPLAY 'Ban.'		TO 		bt_banco
---#DISPLAY 'Valor'		TO 		bt_valor
---#DISPLAY 'E'		TO		bt_check
+--#DISPLAY 'Tp'			TO bt_tipo
+--#DISPLAY 'Num.Fue.'		TO bt_num
+--#DISPLAY 'Num. Cheque'	TO bt_cheque
+--#DISPLAY 'Cta. Cte.'		TO bt_cta_cte
+--#DISPLAY 'Bco'		TO bt_banco
+--#DISPLAY 'Fecha Pro.'		TO bt_fecha
+--#DISPLAY 'Valor'		TO bt_valor
+--#DISPLAY 'E'			TO bt_check
 
 END FUNCTION
 
@@ -1049,7 +1042,8 @@ DEFINE query		CHAR(3000)
 DELETE FROM tmp_detalle
 
 LET query = ' SELECT j11_tipo_fuente, j11_num_fuente, j11_num_ch_aut, ',
-		'j11_num_cta_tarj, j11_cod_bco_tarj, j11_valor, "N" n_eg',
+		'j11_num_cta_tarj, j11_cod_bco_tarj, ',
+		'DATE(j10_fecha_pro) j10_fecha_pro, j11_valor, "N" n_eg',
 		' FROM cajt010, cajt011 ',
 		' WHERE j10_compania    = ', vg_codcia,
 		'   AND j10_localidad   = ', vg_codloc,
@@ -1147,23 +1141,23 @@ WHILE NOT salir
                 LET i = i + 1
                 IF i > vm_max_egr THEN
                 	CALL fl_mensaje_arreglo_incompleto()
-                	LET INT_FLAG = 1
+                	LET int_flag = 1
                         RETURN
                 END IF
         END FOREACH
         
         LET i = 1
         LET j = 1
-        LET INT_FLAG = 0
+        LET int_flag = 0
 	IF vm_ind_egr > 0 THEN
 		CALL set_count(vm_ind_egr)
 	END IF
 	INPUT ARRAY rm_egresos WITHOUT DEFAULTS FROM ra_egresos.*
 		ON KEY(INTERRUPT)
-			LET INT_FLAG = 0
+			LET int_flag = 0
 			CALL fl_mensaje_abandonar_proceso() RETURNING resp
 			IF resp = 'Yes' THEN
-				LET INT_FLAG = 1
+				LET int_flag = 1
 				EXIT INPUT
 			END IF
 	        ON KEY(F1,CONTROL-W)
@@ -1189,6 +1183,9 @@ WHILE NOT salir
 		ON KEY(F21)
 			LET col = 7
 			EXIT INPUT
+		ON KEY(F22)
+			LET col = 8
+			EXIT INPUT
 		BEFORE INPUT
 			--#CALL dialog.keysetlabel('INSERT', '')
 			--#CALL dialog.keysetlabel('DELETE', '')
@@ -1197,6 +1194,7 @@ WHILE NOT salir
 		BEFORE ROW
 			LET i = arr_curr()
 			LET j = scr_line()
+			CALL muestra_contadores_det(i, vm_ind_egr)
 		BEFORE FIELD check
 			LET c = rm_egresos[i].check
 		AFTER FIELD check
@@ -1232,13 +1230,23 @@ WHILE NOT salir
 				IF m= 1 THEN
 					LET salir = 1
 				ELSE 
-					--CALL fgl_winmessage(vg_producto,'No ha digistado ningun valor de egreso.','exclamation')
-					CALL fl_mostrar_mensaje('No ha digistado ningun valor de egreso.','exclamation')
+					CALL fl_mostrar_mensaje('No ha digitado ningun valor de egreso.','exclamation')
 					CONTINUE INPUT
 				END IF	
 			END IF	
+			IF rm_j10.j10_valor > 0 THEN
+				LET m = 0
+				FOR k = 1 TO vm_ind_egr 
+					IF rm_egresos[k].check = 'S' THEN
+						LET m = m + 1	 
+					END IF
+				END FOR 
+				IF m > 0 THEN
+					LET vm_eg_mix = 1
+				END IF
+			END IF
 	END INPUT
-	IF INT_FLAG THEN
+	IF int_flag THEN
 		RETURN
 	END IF
 
@@ -1255,7 +1263,17 @@ WHILE NOT salir
         	END IF
 		INITIALIZE col TO NULL
 	END IF
-END WHILE	
+END WHILE
+CALL muestra_contadores_det(0, vm_ind_egr)
+
+END FUNCTION
+
+
+
+FUNCTION muestra_contadores_det(num_row, max_row)
+DEFINE num_row, max_row	SMALLINT
+
+DISPLAY BY NAME num_row, max_row
 
 END FUNCTION
 
@@ -1462,6 +1480,7 @@ END FOREACH
 SELECT SUM(valor) INTO tot_egr_ch FROM tmp_detalle WHERE egresa = 'S'
 
 DISPLAY tot_egr_ch TO tot_egreso_ch
+CALL muestra_contadores_det(0, vm_ind_egr)
 
 END FUNCTION
 
@@ -1472,13 +1491,18 @@ FUNCTION lee_detalle()
 DELETE FROM tmp_detalle
 
 INSERT INTO tmp_detalle
-	SELECT j11_tipo_fuente, j11_num_fuente, j11_num_ch_aut, 
-	       j11_num_cta_tarj, j11_cod_bco_tarj, j11_valor, 'S'
-	 	FROM cajt011 
-	 	WHERE j11_compania    = vg_codcia
-	 	  AND j11_localidad   = vg_codloc
-	 	  AND j11_num_egreso  = rm_j10.j10_num_fuente
+	SELECT j11_tipo_fuente, j11_num_fuente, j11_num_ch_aut,
+		j11_num_cta_tarj, j11_cod_bco_tarj, DATE(j10_fecha_pro),
+		j11_valor, 'S'
+	 	FROM cajt011, cajt010
+	 	WHERE j11_compania     = vg_codcia
+	 	  AND j11_localidad    = vg_codloc
+	 	  AND j11_num_egreso   = rm_j10.j10_num_fuente
 	 	  AND j11_codigo_pago IN (vm_cheque)
+		  AND j10_compania     = j11_compania
+		  AND j10_localidad    = j11_localidad
+		  AND j10_tipo_fuente  = j11_tipo_fuente
+		  AND j10_num_fuente   = j11_num_fuente
 	       
 SELECT COUNT(*) INTO vm_ind_egr FROM tmp_detalle
 
@@ -1487,7 +1511,6 @@ END FUNCTION
 
 
 FUNCTION control_detalle()
-
 DEFINE i		SMALLINT
 DEFINE j		SMALLINT
 DEFINE col              SMALLINT
@@ -1518,7 +1541,7 @@ WHILE NOT salir
         
         LET i = 1
         LET j = 1
-        LET INT_FLAG = 0
+        LET int_flag = 0
 	CALL set_count(vm_ind_egr)
 	DISPLAY ARRAY rm_egresos TO ra_egresos.*
 		ON KEY(INTERRUPT)
@@ -1546,17 +1569,24 @@ WHILE NOT salir
 		ON KEY(F21)
 			LET col = 7
 			EXIT DISPLAY
+		ON KEY(F22)
+			LET col = 8
+			EXIT DISPLAY
 		--#BEFORE DISPLAY
 			--#CALL dialog.keysetlabel("F1","")
 			--#CALL dialog.keysetlabel("CONTROL-W","")
 			--#CALL dialog.keysetlabel('ACCEPT', '')
 			--#CALL setea_nombre_botones_f1()
+		--#BEFORE ROW
+			--#LET i = arr_curr()
+			--#LET j = scr_line()
+			--#CALL muestra_contadores_det(i, vm_ind_egr)
 		--#AFTER DISPLAY
 			--#CONTINUE DISPLAY
 	END DISPLAY
-	IF INT_FLAG THEN
+	IF int_flag THEN
 		LET salir = 1
-		LET INT_FLAG = 0
+		LET int_flag = 0
 		CONTINUE WHILE
 	END IF
 
@@ -1573,19 +1603,18 @@ WHILE NOT salir
         	END IF
 		INITIALIZE col TO NULL
 	END IF
-END WHILE	
+END WHILE
+CALL muestra_contadores_det(0, vm_ind_egr)
 
 END FUNCTION
 
 
 
 FUNCTION mensaje_intentar()
-
 DEFINE intentar		SMALLINT
 DEFINE resp		CHAR(6)
 
 LET intentar = 1
---CALL fgl_winquestion(vg_producto,'Registro bloqueado por otro usuario, desea intentarlo nuevamente','No','Yes|No','question',1)
 CALL fl_hacer_pregunta('Registro bloqueado por otro usuario, desea intentarlo nuevamente','No')
 	RETURNING resp
 IF resp = 'No' THEN
@@ -1615,7 +1644,6 @@ SELECT ROWID INTO vm_rows[vm_num_rows]
 	  AND j10_num_fuente  = vm_num_fuente
 
 IF STATUS = NOTFOUND THEN
-	--CALL fgl_winmessage(vg_producto,'No existe forma de pago.','exclamation')
 	CALL fl_mostrar_mensaje('No existe forma de pago.','exclamation')
 	EXIT PROGRAM	
 ELSE
@@ -1627,7 +1655,6 @@ END FUNCTION
 
 
 FUNCTION elimina_comprobante_contable()
-
 DEFINE r_b12		RECORD LIKE ctbt012.*
 
 INITIALIZE r_b12.* TO NULL
@@ -1649,11 +1676,9 @@ IF STATUS < 0 THEN
 	EXIT PROGRAM
 END IF
 WHENEVER ERROR STOP
-
 IF STATUS <> NOTFOUND THEN
 	UPDATE ctbt012 SET b12_estado = 'E' WHERE CURRENT OF q_ctb
 END IF
-
 SET LOCK MODE TO NOT WAIT
 CLOSE q_ctb
 FREE  q_ctb
@@ -1680,7 +1705,6 @@ FETCH q_j05 INTO rm_j05.*
 WHENEVER ERROR STOP
 IF STATUS = NOTFOUND THEN 
 	ROLLBACK WORK
-	--CALL fgl_winmessage(vg_producto,'La caja no está aperturada.','exclamation')
 	CALL fl_mostrar_mensaje('La caja no está aperturada.','exclamation')
 	IF vm_num_rows > 0 THEN
 		CALL lee_muestra_registro(vm_rows[vm_row_current])
@@ -1705,7 +1729,6 @@ END FUNCTION
 
 
 FUNCTION contabilizacion_online()
-
 DEFINE r_g09		RECORD LIKE gent009.*
 DEFINE r_b41		RECORD LIKE ctbt041.*
 DEFINE r_b12		RECORD LIKE ctbt012.*
@@ -1716,7 +1739,6 @@ DEFINE r_ctas	ARRAY[25] OF RECORD
 	valor_db	LIKE ctbt013.b13_valor_base,
 	valor_cr	LIKE ctbt013.b13_valor_base
 END RECORD
-
 DEFINE i, j, col	SMALLINT
 DEFINE max_rows		SMALLINT
 DEFINE salir		SMALLINT
@@ -1725,10 +1747,8 @@ DEFINE last_lvl_cta	LIKE ctbt001.b01_nivel
 DEFINE cuenta      	LIKE ctbt010.b10_cuenta
 DEFINE debito		LIKE ctbt013.b13_valor_base
 DEFINE credito		LIKE ctbt013.b13_valor_base
-
 DEFINE tot_debito	LIKE ctbt013.b13_valor_base
 DEFINE tot_credito	LIKE ctbt013.b13_valor_base
-
 DEFINE resp 		VARCHAR(6)
 DEFINE query		CHAR(250)
 DEFINE orden 		ARRAY[10] OF CHAR(4)
@@ -1742,7 +1762,6 @@ END FOR
 LET columna_1 = 1
 LET columna_2 = 2
 LET col       = 2
-
 CREATE TEMP TABLE tmp_cuenta(
 	te_cuenta	CHAR(12),
 	te_descripcion  CHAR(30),
@@ -1753,11 +1772,8 @@ CREATE TEMP TABLE tmp_cuenta(
 	-- 'F' -> Fijo, no puede ser elminado
 	-- 'V' -> Variable, se puede eliminar
 );
-
 LET max_rows = 25
-
 INITIALIZE r_b12.* TO NULL
-
 OPEN WINDOW w_207_2 AT 5,3 WITH 14 ROWS, 77 COLUMNS
     ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, BORDER, MESSAGE LINE LAST)
 IF vg_gui = 1 THEN
@@ -1766,29 +1782,24 @@ ELSE
         OPEN FORM f_207_2 FROM '../forms/cajf207_2c'
 END IF
 DISPLAY FORM f_207_2
-
 --#DISPLAY 'Cuenta' 		TO bt_cuenta
 --#DISPLAY 'Descripción'	TO bt_descripcion
 --#DISPLAY 'Débito'		TO bt_valor_db
 --#DISPLAY 'Crédito'		TO bt_valor_cr
-
 SELECT SUM(valor) INTO tot_egr FROM tmp_detalle WHERE egresa = 'S'
 IF tot_egr IS NULL THEN
 	LET tot_egr = 0
 END IF
 LET tot_egr = tot_egr + rm_j10.j10_valor
-
 INITIALIZE r_b41.* TO NULL
 DECLARE q_aux CURSOR FOR
 	SELECT * FROM ctbt041 WHERE b41_compania  = vg_codcia
 				AND b41_localidad = vg_codloc
-
 OPEN  q_aux
 FETCH q_aux INTO r_b41.*
 CLOSE q_aux
 FREE  q_aux
 IF STATUS = NOTFOUND THEN
-	--CALL fgl_winmessage(vg_producto,'No se han configurado las cuentas de Caja.','exclamation')
 	CALL fl_mostrar_mensaje('No se han configurado las cuentas de Caja.','exclamation')
 	LET int_flag = 1
 	CLOSE WINDOW w_207_2
@@ -1810,20 +1821,16 @@ IF rm_j10.j10_moneda = rg_gen.g00_moneda_base THEN
 ELSE
 	LET cuenta = r_b41.b41_caja_me
 END IF
-
 CALL inserta_tabla_temporal(cuenta, 0, tot_egr, 'V') 
 	RETURNING tot_debito, tot_credito
-
 IF rm_j10.j10_banco IS NOT NULL THEN
 	CALL fl_lee_banco_compania(vg_codcia, rm_j10.j10_banco, 
 		rm_j10.j10_numero_cta) RETURNING r_g09.*
 	CALL inserta_tabla_temporal(r_g09.g09_aux_cont, tot_egr, 0, 'F') 
 		RETURNING tot_debito, tot_credito
 END IF
-
 SELECT MAX(b01_nivel) INTO last_lvl_cta FROM ctbt001
 IF last_lvl_cta IS NULL THEN
-	--CALL fgl_winmessage(vg_producto,'No se ha configurado el plan de cuentas, no puede haber contabilización en línea.','exclamation')
 	CALL fl_mostrar_mensaje('No se ha configurado el plan de cuentas, no puede haber contabilización en línea.','exclamation')
 	LET int_flag = 1
 	CLOSE WINDOW w_207_2
@@ -1881,7 +1888,7 @@ WHILE NOT salir
 						TO r_ctas[j].n_cuenta
 				END IF	
 			END IF
-			LET INT_FLAG = 0	
+			LET int_flag = 0	
 		ON KEY(F15)
 			LET col = 1	
 			EXIT INPUT
@@ -2111,14 +2118,11 @@ END FUNCTION
 
 
 FUNCTION inserta_tabla_temporal(cuenta, valor_db, valor_cr, flag)
-
 DEFINE cuenta		LIKE ctbt013.b13_cuenta
 DEFINE valor_db		LIKE ctbt013.b13_valor_base
 DEFINE valor_cr		LIKE ctbt013.b13_valor_base
 DEFINE flag		CHAR(1)
-
 DEFINE query		CHAR(255)
-
 DEFINE tot_debito	LIKE ctbt013.b13_valor_base
 DEFINE tot_credito	LIKE ctbt013.b13_valor_base
 
@@ -2164,11 +2168,9 @@ CASE flag
 				WHERE te_cuenta = cuenta
 		END IF
 END CASE
-
 SELECT SUM(te_valor_db), SUM(te_valor_cr) 
 	INTO tot_debito, tot_credito 
 	FROM tmp_cuenta
-
 RETURN tot_debito, tot_credito
 
 END FUNCTION
@@ -2176,28 +2178,21 @@ END FUNCTION
 
 
 FUNCTION genera_comprobante_contable(tipo_comp)
-
 DEFINE r_b00		RECORD LIKE ctbt000.*
 DEFINE r_b03		RECORD LIKE ctbt003.*
 DEFINE r_b12		RECORD LIKE ctbt012.*
-
 DEFINE tipo_comp	LIKE ctbt003.b03_tipo_comp
-
 DEFINE glosa 		LIKE ctbt013.b13_glosa
 DEFINE query		CHAR(500)
 DEFINE expr_valor	CHAR(100)
 
 CALL fl_lee_compania_contabilidad(vg_codcia) RETURNING r_b00.*
-
 CALL fl_lee_tipo_comprobante_contable(vg_codcia, tipo_comp) RETURNING r_b03.*
 IF r_b03.b03_compania IS NULL THEN
-	--CALL fgl_winmessage(vg_producto,'No existe tipo de comprobante para Egreso de caja: ' || tipo_comp,'exclamation')
 	CALL fl_mostrar_mensaje('No existe tipo de comprobante para Egreso de caja: ' || tipo_comp,'exclamation')
 	RETURN r_b12.*
 END IF
-
 LET glosa = rm_j10.j10_tipo_destino || ' - ' || rm_j10.j10_num_destino 
-
 INITIALIZE r_b12.* TO NULL
 LET r_b12.b12_compania    = vg_codcia  
 -- OjO confirmar
@@ -2205,6 +2200,26 @@ LET r_b12.b12_tipo_comp   = r_b03.b03_tipo_comp
 LET r_b12.b12_num_comp    = fl_numera_comprobante_contable(vg_codcia,
                             	r_b12.b12_tipo_comp, YEAR(TODAY), MONTH(TODAY))
 LET r_b12.b12_estado      = 'A' 
+IF rm_j10.j10_valor > 0 THEN
+	CASE vg_codloc
+		WHEN 1 LET r_b12.b12_subtipo = 71
+		WHEN 3 LET r_b12.b12_subtipo = 73
+		WHEN 4 LET r_b12.b12_subtipo = 75
+	END CASE
+ELSE
+	CASE vg_codloc
+		WHEN 1 LET r_b12.b12_subtipo = 72
+		WHEN 3 LET r_b12.b12_subtipo = 74
+		WHEN 4 LET r_b12.b12_subtipo = 76
+	END CASE
+END IF
+IF vm_eg_mix THEN
+	CASE vg_codloc
+		WHEN 1 LET r_b12.b12_subtipo = 77
+		WHEN 3 LET r_b12.b12_subtipo = 78
+		WHEN 4 LET r_b12.b12_subtipo = 79
+	END CASE
+END IF
 LET r_b12.b12_glosa       = rm_j10.j10_referencia
 LET r_b12.b12_origen      = 'A' 
 LET r_b12.b12_moneda      = rm_j10.j10_moneda
@@ -2215,9 +2230,7 @@ LET r_b12.b12_fec_proceso = TODAY
 LET r_b12.b12_modulo      = r_b03.b03_modulo
 LET r_b12.b12_usuario     = vg_usuario 
 LET r_b12.b12_fecing      = CURRENT
-
 INSERT INTO ctbt012 VALUES(r_b12.*)
-
 --
 IF r_b12.b12_moneda = r_b00.b00_moneda_base THEN
 	LET expr_valor = ' (te_valor_cr * (-1)), 0 '
@@ -2226,7 +2239,6 @@ ELSE
 			 '), (te_valor_cr * (-1))'
 END IF
 --
-
 LET query = 'INSERT INTO ctbt013 (b13_compania, b13_tipo_comp, b13_num_comp, ',
 	    '			  b13_secuencia, b13_cuenta, b13_tipo_doc,',
 	    '			  b13_glosa, b13_valor_base, b13_valor_aux, ',
@@ -2240,7 +2252,6 @@ LET query = 'INSERT INTO ctbt013 (b13_compania, b13_tipo_comp, b13_num_comp, ',
 	    '		WHERE te_valor_cr > 0 '
 PREPARE stmnt3 FROM query
 EXECUTE stmnt3
-
 --
 IF r_b12.b12_moneda = r_b00.b00_moneda_base THEN
 	LET expr_valor = ' te_valor_db, 0 '
@@ -2262,14 +2273,12 @@ LET query = 'INSERT INTO ctbt013 (b13_compania, b13_tipo_comp, b13_num_comp, ',
 	    '		WHERE te_valor_db > 0 '
 PREPARE stmnt4 FROM query
 EXECUTE stmnt4
-
 UPDATE cajt010 SET j10_tip_contable = r_b12.b12_tipo_comp,
 		   j10_num_contable = r_b12.b12_num_comp
 	WHERE j10_compania    = rm_j10.j10_compania
 	  AND j10_localidad   = rm_j10.j10_localidad
 	  AND j10_tipo_fuente = rm_j10.j10_tipo_fuente
 	  AND j10_num_fuente  = rm_j10.j10_num_fuente
-
 RETURN r_b12.*
 
 END FUNCTION
@@ -2277,11 +2286,9 @@ END FUNCTION
 
 
 FUNCTION calcula_paridad(moneda_ori, moneda_dest)
-
 DEFINE moneda_ori	LIKE gent013.g13_moneda
 DEFINE moneda_dest	LIKE gent013.g13_moneda
 DEFINE paridad		LIKE gent014.g14_tasa       
-
 DEFINE r_g14		RECORD LIKE gent014.*
 
 IF moneda_ori = moneda_dest THEN
@@ -2290,14 +2297,12 @@ ELSE
 	CALL fl_lee_factor_moneda(moneda_ori, moneda_dest) 
 		RETURNING r_g14.*
 	IF r_g14.g14_serial IS NULL THEN
-		--CALL fgl_winmessage(vg_producto,'No existe factor de conversión para esta moneda.','exclamation')
 		CALL fl_mostrar_mensaje('No existe factor de conversión para esta moneda.','exclamation')
 		INITIALIZE paridad TO NULL
 	ELSE
 		LET paridad = r_g14.g14_tasa 
 	END IF
 END IF
-
 RETURN paridad
 
 END FUNCTION
@@ -2308,12 +2313,10 @@ FUNCTION imprimir()
 DEFINE comando 		CHAR(300)
 DEFINE run_prog		CHAR(10)
 
-{-- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE --}
 LET run_prog = '; fglrun '
 IF vg_gui = 0 THEN
 	LET run_prog = '; fglgo '
 END IF
-{--- ---}
 LET comando = 'cd ..', vg_separador, '..', vg_separador,
 	      'CAJA', vg_separador, 'fuentes', 
 	      vg_separador, run_prog, 'cajp404 ', 
@@ -2327,6 +2330,7 @@ END FUNCTION
 
 
 FUNCTION retorna_arreglo()
+
 --#LET vm_size_arr = fgl_scr_size('ra_egresos')
 IF vg_gui = 0 THEN
         LET vm_size_arr = 6

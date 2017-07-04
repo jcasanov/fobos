@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025227</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>CONSTRUCTORA VILLACRECES ANDRADE S.A.</razonSocialComprador>
+<identificacionComprador>1791326768001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000170897</numDocModificado>
+<fechaEmisionDocSustento>04/09/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>2383.09</totalSinImpuestos>
+<valorModificacion>2669.06</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>2383.09</baseImponible>
+<valor>285.97</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 262768 C.V.ANDRADE P-VOLVER A FAC YA</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>700</codigoInterno>
+<descripcion>TOL AL CALOR DE 12mm. 1.22 x 2.44 m (260.88 KG.)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>350.75</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>701.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>701.50</baseImponible>
+<valor>84.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>174</codigoInterno>
+<descripcion>CLAVO 2-1/2" x 10</descripcion>
+<cantidad>50.00</cantidad>
+<precioUnitario>1.34</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>67.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>67.00</baseImponible>
+<valor>8.04</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>176</codigoInterno>
+<descripcion>CLAVO 3" x 9  (CAJA DE 25 Kg.)</descripcion>
+<cantidad>50.00</cantidad>
+<precioUnitario>1.61</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>80.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>80.50</baseImponible>
+<valor>9.66</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>180</codigoInterno>
+<descripcion>CLAVO 5" x 5  (CAJA DE 25 Kg.)</descripcion>
+<cantidad>50.00</cantidad>
+<precioUnitario>1.74</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>87.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="KILO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>87.00</baseImponible>
+<valor>10.44</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>30348</codigoInterno>
+<descripcion>BROCHA TIPO "X" BLANCA DE 3"</descripcion>
+<cantidad>24.00</cantidad>
+<precioUnitario>2.83</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>67.92</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="WILSON"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>67.92</baseImponible>
+<valor>8.15</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>93792</codigoInterno>
+<descripcion>FRESA ANULAR PARA TALADRO ELECTROMAGNETICO 49-59-2050 DE 1/2" P/PLANCHA DE HASTA 2"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>44.80</precioUnitario>
+<descuento>40.32</descuento>
+<precioTotalSinImpuesto>228.48</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>228.48</baseImponible>
+<valor>27.42</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>93775</codigoInterno>
+<descripcion>FRESA ANULAR PARA TALADRO ELECTROMAGNETICO 49-59-1000 DE 1" P/PLANCHA DE HASTA 1"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>83.45</precioUnitario>
+<descuento>50.07</descuento>
+<precioTotalSinImpuesto>450.63</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>450.63</baseImponible>
+<valor>54.08</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>93804</codigoInterno>
+<descripcion>FRESA ANULAR PARA TALADRO ELECTROMAGNETICO 49-59-2125 DE 1-1/4" P/PLANCHA DE HASTA 2"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>129.64</precioUnitario>
+<descuento>77.78</descuento>
+<precioTotalSinImpuesto>700.06</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>700.06</baseImponible>
+<valor>84.01</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">cmaldonado@elitcorp.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2229244/5</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">4289</campoAdicional>
+</infoAdicional>
+</notaCredito>

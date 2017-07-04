@@ -1,0 +1,32 @@
+DATABASE aceros
+
+SCREEN
+{
+ NIVELES DE CUENTAS 
+------------------------------------------
+ Nivel   Descripción            Ini Fin
+------------------------------------------
+[c01   ][c000                ] [c1] [c2]
+[c01   ][c000                ] [c1] [c2]
+[c01   ][c000                ] [c1] [c2]
+[c01   ][c000                ] [c1] [c2]
+[c01   ][c000                ] [c1] [c2]
+[c01   ][c000                ] [c1] [c2]
+[c01   ][c000                ] [c1] [c2]
+[c01   ][c000                ] [c1] [c2]
+[c01   ][c000                ] [c1] [c2]
+[c01   ][c000                ] [c1] [c2]
+}
+
+TABLES
+ctbt001
+
+ATTRIBUTES
+c01  = b01_nivel, UPSHIFT;
+c000 = b01_nombre, UPSHIFT;
+c1 = b01_posicion_i, UPSHIFT;
+c2 = b01_posicion_f, UPSHIFT;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_nivcta[10](b01_nivel, b01_nombre, b01_posicion_i, b01_posicion_f)

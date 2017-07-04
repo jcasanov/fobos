@@ -1,0 +1,1 @@
+find ./*/forms/ -name "*.42f" -print > files.42f

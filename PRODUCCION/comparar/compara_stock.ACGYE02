@@ -1,0 +1,32 @@
+# PARAMETROS:
+# compara_stock {localidad}  x  : localidad vs todos, 
+#                                 x flag para q corra solo esa localidad
+# compara_stock 0 T       : compara todos contra todos.
+
+#Comparador de acero_gm en las otras bases ...
+if [ "$1" == "1" ] || [ "$2" == "T" ]; then
+	sh ej_prog acero_gm ACGYE01 1 acero_qm ACUIO01 | tee compara_gm_qm.log
+	sh ej_prog acero_gm ACGYE01 1 acero_qs ACUIO02 | tee compara_gm_qs.log
+	sh ej_prog acero_gm ACGYE01 1 acero_gc acgye02 | tee compara_gm_gc.log
+fi
+
+#Comparador de acero_gc en las otras bases ...
+if [ "$1" == "2" ] || [ "$2" == "T" ]; then
+	sh ej_prog acero_gc acgye02 2 acero_qm ACUIO01 | tee compara_gc_qm.log
+	sh ej_prog acero_gc acgye02 2 acero_qs ACUIO02 | tee compara_gc_qs.log
+	sh ej_prog acero_gc acgye02 2 acero_gm ACGYE01 | tee compara_gc_gc.log
+fi
+
+#Comparador de acero_qm en las otras bases ...
+if [ "$1" == "3" ] || [ "$2" == "T" ]; then
+	sh ej_prog acero_qm ACUIO01 3 acero_gm ACGYE01 | tee compara_qm_gm.log
+	sh ej_prog acero_qm ACUIO01 3 acero_gc acgye02 | tee compara_qm_gc.log
+	sh ej_prog acero_qm ACUIO01 3 acero_qs ACUIO02 | tee compara_qm_qs.log
+fi
+
+#Comparador de acero_qs en las otras bases ...
+if [ "$1" == "4" ] || [ "$2" == "T" ]; then
+	sh ej_prog acero_qs ACUIO02 4 acero_gm ACGYE01 | tee compara_qs_gm.log
+	sh ej_prog acero_qs ACUIO02 4 acero_gc acgye02 | tee compara_qs_gc.log
+	sh ej_prog acero_qs ACUIO02 4 acero_qm ACUIO01 | tee compara_qs_qm.log
+fi

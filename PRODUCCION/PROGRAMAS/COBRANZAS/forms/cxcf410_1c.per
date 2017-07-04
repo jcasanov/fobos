@@ -1,0 +1,21 @@
+DATABASE FORMONLY
+SCREEN 
+{
+
+		
+                      Moneda: [c0] [c006           ]
+
+               Fecha Inicial: [c001      ]  
+
+                 Fecha Final: [c002      ]
+
+}
+ATTRIBUTES
+c0   = FORMONLY.moneda, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c006 = FORMONLY.nombre, NOENTRY, UPSHIFT, REVERSE;
+c001 = FORMONLY.inicial TYPE DATE, REVERSE, FORMAT = 'dd-mm-yyyy', UPSHIFT,
+	COMMENTS = 'Ingrese fecha en formato: dd-mm-aaaa';
+c002 = FORMONLY.final TYPE DATE, REVERSE, FORMAT = 'dd-mm-yyyy', UPSHIFT,
+	COMMENTS = 'Ingrese fecha en formato: dd-mm-aaaa';
+END

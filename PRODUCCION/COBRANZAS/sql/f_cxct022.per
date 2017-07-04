@@ -1,0 +1,57 @@
+database aceros
+screen size 24 by 80
+{
+z22_compania       [f000       ]
+z22_localidad      [f001  ]
+z22_codcli         [f002       ]
+z22_tipo_trn       [a0]
+z22_num_trn        [f003       ]
+z22_areaneg        [f004  ]
+z22_referencia     [f005                               ]
+z22_fecha_emi      [f006      ]
+z22_moneda         [a1]
+z22_paridad        [f007              ]
+z22_tasa_mora      [f008  ]
+z22_total_cap      [f009          ]
+z22_total_int      [f010          ]
+z22_total_mora     [f011          ]
+z22_cobrador       [f012  ]
+z22_subtipo        [f013  ]
+z22_origen         [a]
+z22_fecha_elim     [f014               ]
+z22_tiptrn_elim    [a2]
+z22_numtrn_elim    [f015       ]
+}
+screen
+{
+z22_usuario        [f016      ]
+z22_fecing         [f017               ]
+}
+end
+tables
+cxct022
+attributes
+f000 = cxct022.z22_compania;
+f001 = cxct022.z22_localidad;
+f002 = cxct022.z22_codcli;
+a0 = cxct022.z22_tipo_trn;
+f003 = cxct022.z22_num_trn;
+f004 = cxct022.z22_areaneg;
+f005 = cxct022.z22_referencia;
+f006 = cxct022.z22_fecha_emi;
+a1 = cxct022.z22_moneda;
+f007 = cxct022.z22_paridad;
+f008 = cxct022.z22_tasa_mora;
+f009 = cxct022.z22_total_cap;
+f010 = cxct022.z22_total_int;
+f011 = cxct022.z22_total_mora;
+f012 = cxct022.z22_cobrador;
+f013 = cxct022.z22_subtipo;
+a = cxct022.z22_origen;
+f014 = cxct022.z22_fecha_elim;
+a2 = cxct022.z22_tiptrn_elim;
+f015 = cxct022.z22_numtrn_elim;
+
+f016 = cxct022.z22_usuario;
+f017 = cxct022.z22_fecing;
+end

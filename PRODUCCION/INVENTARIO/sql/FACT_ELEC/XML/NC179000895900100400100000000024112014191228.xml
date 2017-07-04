@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000018586</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>24/11/2014</fechaEmision>
+<dirEstablecimiento>IGNACIO SANTA MARIA N35-60 Y AV. REPUBLI</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>AGROSISTEMAS DEL ECUADOR S.C.C.</razonSocialComprador>
+<identificacionComprador>1792130476001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000173252</numDocModificado>
+<fechaEmisionDocSustento>24/10/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>1819.83</totalSinImpuestos>
+<valorModificacion>1419.47</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<baseImponible>1419.47</baseImponible>
+<valor>0.00</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 265002 AGROSISTEMAS REC MPERALTA  FC</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>102000</codigoInterno>
+<descripcion>BOMBA CENTRIF MULTIETAPA C-MOTOR CR5-7 A-FGJ-A-E-HQQE 3X266/460/60C (98504555)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1819.83</precioUnitario>
+<descuento>400.36</descuento>
+<precioTotalSinImpuesto>1419.47</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="GRUNDFOS" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>1419.47</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</notaCredito>

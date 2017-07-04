@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268648</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268648</guiaRemision>
+<razonSocialComprador>AZULEC S.A</razonSocialComprador>
+<identificacionComprador>1791957253001</identificacionComprador>
+<totalSinImpuestos>674.95</totalSinImpuestos>
+<totalDescuento>75.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>674.95</baseImponible>
+<valor>80.99</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>755.94</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>70499</codigoPrincipal>
+<descripcion>INDUCIDO 16-70-0375 P/ TALADRO DE BASE ELECTROMAG. 4292-1 / 4297-1</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>126.21</precioUnitario>
+<descuento>12.62</descuento>
+<precioTotalSinImpuesto>113.59</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>113.59</baseImponible>
+<valor>13.63</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96983</codigoPrincipal>
+<descripcion>ESTATOR DE CAMPO 18-70-0320 P/TALADRO MOD.4292-1 / 4297-1</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>79.53</precioUnitario>
+<descuento>7.95</descuento>
+<precioTotalSinImpuesto>71.58</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>71.58</baseImponible>
+<valor>8.59</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150283</codigoPrincipal>
+<descripcion>RODAMIENTO 02-04-1041 DE 10X30X9 P/ 4292</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>4.80</precioUnitario>
+<descuento>0.48</descuento>
+<precioTotalSinImpuesto>4.32</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.32</baseImponible>
+<valor>0.52</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150489</codigoPrincipal>
+<descripcion>RULIMAN 02-80-5000 P/ MOTOR 4096 Y 4292-1</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2.27</precioUnitario>
+<descuento>0.23</descuento>
+<precioTotalSinImpuesto>2.04</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.04</baseImponible>
+<valor>0.24</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>95690</codigoPrincipal>
+<descripcion>PINION 32-40-1581 INTERMEDIO P/TALADRO 4297-1</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>26.78</precioUnitario>
+<descuento>2.68</descuento>
+<precioTotalSinImpuesto>24.10</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>24.10</baseImponible>
+<valor>2.89</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150261</codigoPrincipal>
+<descripcion>TARJETA ELECTRONICA 23-35-0312 P/ BASE ELECTROMAGNETICA 4202/4203</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>510.36</precioUnitario>
+<descuento>51.04</descuento>
+<precioTotalSinImpuesto>459.32</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>459.32</baseImponible>
+<valor>55.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacion@azul.com.ec</campoAdicional>
+<campoAdicional nombre="Email">diego.chalco@azul.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2977600</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">036359</campoAdicional>
+</infoAdicional>
+</factura>

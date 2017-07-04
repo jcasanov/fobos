@@ -14,9 +14,6 @@ Código Tarea No Codificada: [a0]
       Requisiciones Taller: [d]
 
 	   Días Devolución: [f05]             Devolución Mes:[c]
-  Dias Validez Presupuesto: [c020]
-       Dias Eliminacion OT: [c021]         Eliminacion OT dentro mes ?: [e]
-              Anio Proceso: [c022]                         Mes Proceso: [c0]
 
 }
 TABLES talt000
@@ -47,13 +44,4 @@ c    = talt000.t00_dev_mes, REVERSE, UPSHIFT, AUTONEXT, INCLUDE = ('S', 'N'),
 	COMMENTS = 'Devolución unicamente dentro del mes corriente a la venta del vehículo';
 d    = talt000.t00_req_tal, REVERSE, UPSHIFT, AUTONEXT, INCLUDE = ('S', 'N'),
 	COMMENTS = 'Presione si taller se alimenta de requisiciones de almacén';
-
-c020 = talt000.t00_dias_pres, AUTONEXT, REVERSE, UPSHIFT, INCLUDE = (0 TO 1000),
-	COMMENTS = 'Tiempo de duracion presupuestos sin conversion a OT.'; 
-c021 = talt000.t00_dias_elim, AUTONEXT, REVERSE, UPSHIFT, INCLUDE = (0 TO 1000),
-	COMMENTS = 'Tiempo de duracion OT sin facturar.'; 
-e    = talt000.t00_elim_mes, AUTONEXT, REVERSE, UPSHIFT, INCLUDE = ('S', 'N'),
-	COMMENTS = 'Si desea que se eliminen OT sin facturar en el cierr de mes.';
-c022 = talt000.t00_anopro, NOENTRY, REVERSE, UPSHIFT, INCLUDE = (2003 TO 2099);
-c0   = talt000.t00_mespro, NOENTRY, REVERSE, UPSHIFT, INCLUDE = (1 TO 12);
-END
+end

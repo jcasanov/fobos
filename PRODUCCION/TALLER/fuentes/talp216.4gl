@@ -723,8 +723,6 @@ FOREACH qu_transf INTO r_transf.*
 					r_r19.r19_num_tran USING "<<<<<<&", '.'
 			CALL fl_mostrar_mensaje(mensaje CLIPPED, 'info')
 		END IF
-		CALL imprimir_transferencia(r_r19.r19_cod_tran,
-						r_r19.r19_num_tran)
 	END IF
 END FOREACH
 DROP TABLE t_r19
@@ -1003,8 +1001,6 @@ FOREACH qu_transf2 INTO r_transf.*
 				': ', r_r19.r19_num_tran USING "<<<<<<&", '.'
 			CALL fl_mostrar_mensaje(mensaje CLIPPED, 'info')
 		END IF
-		CALL imprimir_transferencia(r_r19.r19_cod_tran,
-						r_r19.r19_num_tran)
 	END IF
 END FOREACH
 DROP TABLE tmp_tr
@@ -2180,17 +2176,5 @@ IF STATUS <> 0 THEN
 END IF
 WHENEVER ERROR STOP
 RETURN 1
-
-END FUNCTION
-
-
-
-FUNCTION imprimir_transferencia(cod_tran, num_tran)
-DEFINE cod_tran		LIKE rept019.r19_cod_tran
-DEFINE num_tran		LIKE rept019.r19_num_tran
-DEFINE param		VARCHAR(100)
-
-LET param = '"', cod_tran, '" ', num_tran
-CALL fl_ejecuta_comando('REPUESTOS', 'RE', 'repp415', param, 1)
 
 END FUNCTION

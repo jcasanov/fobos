@@ -8,20 +8,9 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_nuevoprog     VARCHAR(400)
-DEFINE rm_ctb2		RECORD LIKE ctbt012.*
-DEFINE rm_ctb3		RECORD LIKE ctbt013.*
-DEFINE vm_fecha_ini	DATE
-DEFINE vm_fecha_fin	DATE
-DEFINE vm_max_det       SMALLINT
-DEFINE vm_num_det       SMALLINT
-DEFINE vm_scr_lin       SMALLINT
-DEFINE rm_orden 	ARRAY[10] OF CHAR(4)
-DEFINE vm_columna_1	SMALLINT
-DEFINE vm_columna_2	SMALLINT
 DEFINE vm_cuenta	ARRAY[50] OF RECORD
 				cuenta		LIKE gent009.g09_aux_cont,
-				tit_cuenta	VARCHAR(70)
+				tit_cuenta	VARCHAR(80)
 			END RECORD
 DEFINE rm_det		ARRAY[50] OF RECORD
 				b10_descripcion LIKE gent008.g08_nombre,
@@ -30,6 +19,17 @@ DEFINE rm_det		ARRAY[50] OF RECORD
 				tit_credito	DECIMAL(14,2),
 				tit_saldo	DECIMAL(14,2)
 			END RECORD
+DEFINE vm_nuevoprog     VARCHAR(400)
+DEFINE rm_b12		RECORD LIKE ctbt012.*
+--DEFINE rm_b13	RECORD LIKE ctbt013.*
+DEFINE vm_fecha_ini	DATE
+DEFINE vm_fecha_fin	DATE
+DEFINE vm_max_det       SMALLINT
+DEFINE vm_num_det       SMALLINT
+DEFINE vm_scr_lin       SMALLINT
+DEFINE rm_orden 	ARRAY[10] OF CHAR(4)
+DEFINE vm_columna_1	SMALLINT
+DEFINE vm_columna_2	SMALLINT
 
 
 
@@ -62,29 +62,34 @@ END MAIN
 
 FUNCTION funcion_master()
 
-CREATE TEMP TABLE temp_saldos(
-	descripcion	VARCHAR(30),
-	saldo_ini	DECIMAL(14,2),
-	debito		DECIMAL(14,2),
-	credito		DECIMAL(14,2),
-	saldo_fin	DECIMAL(14,2),
-	cuenta		CHAR(12),
-	cuenta_des	VARCHAR(70))
+CREATE TEMP TABLE temp_saldos
+	(
+		descripcion	VARCHAR(30),
+		saldo_ini	DECIMAL(14,2),
+		debito		DECIMAL(14,2),
+		credito		DECIMAL(14,2),
+		saldo_fin	DECIMAL(14,2),
+		cuenta		CHAR(12),
+		cuenta_des	VARCHAR(70)
+	)
 CALL fl_nivel_isolation()
 LET vm_max_det = 50
-OPEN WINDOW w_mas AT 3,2 WITH 22 ROWS, 80 COLUMNS
-    ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE 0, BORDER,
-	      MESSAGE LINE LAST - 2)
+OPEN WINDOW w_ctbp309 AT 03, 02 WITH 22 ROWS, 80 COLUMNS
+	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE 0, BORDER,
+			MESSAGE LINE LAST - 2)
 OPTIONS INPUT WRAP,
 	ACCEPT KEY	F12
-OPEN FORM f_ctb FROM "../forms/ctbf309_1"
-DISPLAY FORM f_ctb
+OPEN FORM f_ctbf309 FROM "../forms/ctbf309_1"
+DISPLAY FORM f_ctbf309
 LET vm_scr_lin = 0
 CALL muestra_contadores_det(0)
 CALL borrar_cabecera()
 CALL borrar_detalle()
 CALL mostrar_cabecera_forma()
 CALL control_consulta()
+DROP TABLE temp_saldos
+CLOSE WINDOW w_ctbp309
+EXIT PROGRAM
 
 END FUNCTION
 
@@ -104,13 +109,13 @@ DEFINE credito		DECIMAL(14,2)
 
 LET vm_fecha_ini       = TODAY
 LET vm_fecha_fin       = TODAY
-LET rm_ctb2.b12_moneda = rg_gen.g00_moneda_base
-CALL fl_lee_moneda(rm_ctb2.b12_moneda) RETURNING r_mon.*
+LET rm_b12.b12_moneda = rg_gen.g00_moneda_base
+CALL fl_lee_moneda(rm_b12.b12_moneda) RETURNING r_mon.*
 IF r_mon.g13_moneda IS NULL THEN
        	CALL fgl_winmessage(vg_producto,'Moneda no existe moneda base.','stop')
         EXIT PROGRAM
 END IF
-DISPLAY BY NAME rm_ctb2.b12_moneda, vm_fecha_ini, vm_fecha_fin
+DISPLAY BY NAME rm_b12.b12_moneda, vm_fecha_ini, vm_fecha_fin
 DISPLAY r_mon.g13_nombre TO tit_moneda
 WHILE TRUE
 	LET vm_num_det = 0
@@ -120,43 +125,87 @@ WHILE TRUE
 	IF int_flag THEN
 		EXIT WHILE
 	END IF
-	LET query = 'SELECT * FROM gent009 ',
-			'WHERE g09_compania = ', vg_codcia
+	IF vg_codloc = 3 THEN
+		LET query = 'SELECT g09_banco, g09_tipo_cta, g09_numero_cta, ',
+				'g09_aux_cont ',
+			'FROM gent009 ',
+			'WHERE g09_compania = ', vg_codcia,
+			'  AND g09_banco    NOT IN (26, 43) ',
+			'UNION ',
+			'SELECT g09_banco, g09_tipo_cta, g09_numero_cta, ',
+				'g09_aux_cont ',
+			'FROM gent009 ',
+			'WHERE g09_compania = ', vg_codcia,
+			'  AND g09_banco    = 43 ',
+			'  AND g09_estado   = "A" '
+	ELSE
+		LET query = 'SELECT g09_banco, g09_tipo_cta, g09_numero_cta, ',
+				'g09_aux_cont ',
+			'FROM gent009 ',
+			'WHERE g09_compania = ', vg_codcia,
+			'  AND g09_banco    NOT IN (19, 1) ',
+			'UNION ',
+			'SELECT g09_banco, g09_tipo_cta, g09_numero_cta, ',
+				'g09_aux_cont ',
+			'FROM gent009 ',
+			'WHERE g09_compania = ', vg_codcia,
+			'  AND g09_banco    = 1 ',
+			'  AND g09_estado   = "A" '
+	END IF
 	PREPARE deto FROM query
 	DECLARE q_deto CURSOR FOR deto
 	LET vm_num_det = 1
-	FOREACH q_deto INTO r_g09.*
-		LET query2 = 'SELECT * FROM ctbt013 ',
-				'WHERE b13_compania = ', vg_codcia,
-				'  AND b13_cuenta   = "',r_g09.g09_aux_cont,'"',
+	FOREACH q_deto INTO r_g09.g09_banco, r_g09.g09_tipo_cta,
+				r_g09.g09_numero_cta, r_g09.g09_aux_cont
+		LET query2 = 'SELECT NVL(SUM(CASE WHEN b13_valor_base >= 0 ',
+					'THEN b13_valor_base ',
+					'ELSE 0.00 ',
+				'END), 0) AS val_db, ',
+				'NVL(SUM(CASE WHEN b13_valor_base < 0 ',
+					'THEN b13_valor_base ',
+					'ELSE 0.00 ',
+				'END), 0) AS val_cr ',
+				'FROM ctbt013, ctbt012 ',
+				'WHERE b13_compania    = ', vg_codcia,
+				'  AND b13_cuenta      = "', r_g09.g09_aux_cont,
+							'"',
 				'  AND b13_fec_proceso BETWEEN "', vm_fecha_ini,
-				'" AND "', vm_fecha_fin, '"',
-				' ORDER BY b13_fec_proceso '
+							'" AND "', vm_fecha_fin,
+							'" ',
+				'  AND b12_compania    = b13_compania ',
+				'  AND b12_tipo_comp   = b13_tipo_comp ',
+				'  AND b12_num_comp    = b13_num_comp ',
+				'  AND b12_estado      = "M" '
+				--' ORDER BY b13_fec_proceso '
 		PREPARE deto2 FROM query2
 		DECLARE q_deto2 CURSOR FOR deto2
+		OPEN q_deto2
+		FETCH q_deto2 INTO debito, credito
+		{--
 		LET debito  = 0
 		LET credito = 0
-		FOREACH q_deto2 INTO rm_ctb3.*
+		FOREACH q_deto2 INTO rm_b13.*
 			CALL fl_lee_comprobante_contable(vg_codcia,
-					rm_ctb3.b13_tipo_comp,
-					rm_ctb3.b13_num_comp)
+					rm_b13.b13_tipo_comp,
+					rm_b13.b13_num_comp)
 				RETURNING r_b12.*
 			IF r_b12.b12_estado = "E"
-			  OR r_b12.b12_moneda <> rm_ctb2.b12_moneda THEN
+			  OR r_b12.b12_moneda <> rm_b12.b12_moneda THEN
 				CONTINUE FOREACH
 			END IF
 			CALL obtener_valores_deb_cre(debito, credito)
 				RETURNING debito, credito
 		END FOREACH
+		--}
 		LET vm_cuenta[vm_num_det].cuenta   = r_g09.g09_aux_cont
 		CALL nombre_banco(r_g09.g09_banco, r_g09.g09_tipo_cta,
-				r_g09.g09_numero_cta)
+				r_g09.g09_numero_cta, r_g09.g09_aux_cont)
 			RETURNING vm_cuenta[vm_num_det].tit_cuenta, nom_banco
 		LET rm_det[vm_num_det].b10_descripcion = nom_banco
 		LET fecha = vm_fecha_ini - 1 UNITS DAY
 		CALL fl_obtiene_saldo_contable(vg_codcia,
 				vm_cuenta[vm_num_det].cuenta,
-				rm_ctb2.b12_moneda, fecha, 'A')
+				rm_b12.b12_moneda, fecha, 'A')
 			RETURNING rm_det[vm_num_det].tit_saldo_ini
 		LET rm_det[vm_num_det].tit_debito  = debito 
 		LET rm_det[vm_num_det].tit_credito = credito
@@ -187,9 +236,9 @@ WHILE TRUE
 		LET rm_orden[i] = '' 
 	END FOR
 	LET rm_orden[1]  = 'ASC'
-	LET vm_columna_1 = 5
-	LET vm_columna_2 = 1
-	LET col          = 5
+	LET vm_columna_1 = 1
+	LET vm_columna_2 = 5
+	LET col          = 1
 	WHILE TRUE
 		LET query = 'SELECT * FROM temp_saldos ',
 			     " ORDER BY ", vm_columna_1, ' ',
@@ -274,37 +323,37 @@ DEFINE fecha_fin	DATE
 
 INITIALIZE mone_aux, r_mon.* TO NULL
 LET int_flag = 0
-INPUT BY NAME rm_ctb2.b12_moneda, vm_fecha_ini, vm_fecha_fin
+INPUT BY NAME rm_b12.b12_moneda, vm_fecha_ini, vm_fecha_fin
 	WITHOUT DEFAULTS
 	ON KEY(INTERRUPT)
 		LET int_flag = 1
 		RETURN
 	ON KEY(F2)
-		IF INFIELD(rm_ctb2.b12_moneda) THEN
+		IF INFIELD(rm_b12.b12_moneda) THEN
        	       		CALL fl_ayuda_monedas()
                        		RETURNING mone_aux, nomm_aux, deci_aux
     			LET int_flag = 0
                	       	IF mone_aux IS NOT NULL THEN
-                      	      	LET rm_ctb2.b12_moneda = mone_aux
-                       		DISPLAY BY NAME rm_ctb2.b12_moneda
+                      	      	LET rm_b12.b12_moneda = mone_aux
+                       		DISPLAY BY NAME rm_b12.b12_moneda
                        		DISPLAY nomm_aux TO tit_moneda
                        	END IF
        	        END IF
 	BEFORE FIELD vm_fecha_fin
 		LET fecha_fin = vm_fecha_fin
 	AFTER FIELD b12_moneda
-            	IF rm_ctb2.b12_moneda IS NOT NULL THEN
-	        	CALL fl_lee_moneda(rm_ctb2.b12_moneda)
+            	IF rm_b12.b12_moneda IS NOT NULL THEN
+	        	CALL fl_lee_moneda(rm_b12.b12_moneda)
 				RETURNING r_mon.*
 	              	IF r_mon.g13_moneda IS NULL THEN
  	                      	CALL fgl_winmessage(vg_producto,'Moneda no existe.','exclamation')
         	               	NEXT FIELD b12_moneda
                        	END IF
 	        ELSE
-        	       	LET rm_ctb2.b12_moneda = rg_gen.g00_moneda_base
-                       	CALL fl_lee_moneda(rm_ctb2.b12_moneda)
+        	       	LET rm_b12.b12_moneda = rg_gen.g00_moneda_base
+                       	CALL fl_lee_moneda(rm_b12.b12_moneda)
 				RETURNING r_mon.*
-	               	DISPLAY BY NAME rm_ctb2.b12_moneda
+	               	DISPLAY BY NAME rm_b12.b12_moneda
         	END IF
                	DISPLAY r_mon.g13_nombre TO tit_moneda
 	AFTER FIELD vm_fecha_ini 
@@ -338,7 +387,7 @@ END FUNCTION
 FUNCTION borrar_cabecera()
 
 CLEAR b12_moneda, tit_moneda, vm_fecha_ini, vm_fecha_fin
-INITIALIZE rm_ctb2.* TO NULL
+INITIALIZE rm_b12.* TO NULL
 
 END FUNCTION
 
@@ -387,7 +436,7 @@ DEFINE i		SMALLINT
 LET vm_nuevoprog = 'cd ..', vg_separador, '..', vg_separador, 'CONTABILIDAD',
 	vg_separador, 'fuentes', vg_separador, '; fglrun ctbp302 ', vg_base,
 	' ', vg_modulo, ' ', vg_codcia, ' ', '"', vm_cuenta[i].cuenta, '"',
-	' ', vm_fecha_ini, ' ', vm_fecha_fin, ' ', '"', rm_ctb2.b12_moneda, '"'
+	' ', vm_fecha_ini, ' ', vm_fecha_fin, ' ', '"', rm_b12.b12_moneda, '"'
 RUN vm_nuevoprog
 
 END FUNCTION
@@ -400,7 +449,7 @@ DEFINE ord1, ord2	CHAR(4)
 
 LET vm_nuevoprog = 'cd ..', vg_separador, '..', vg_separador, 'CONTABILIDAD',
 	vg_separador, 'fuentes', vg_separador, '; fglrun ctbp407 ', vg_base,
-	' ', vg_modulo, ' ', vg_codcia, ' "', rm_ctb2.b12_moneda, '" ',
+	' ', vg_modulo, ' ', vg_codcia, ' "', rm_b12.b12_moneda, '" ',
 	vm_fecha_ini, ' ', vm_fecha_fin, ' ', col1, ' ', col2, ' "', ord1,
 	'" "', ord2, '"'
 RUN vm_nuevoprog
@@ -409,26 +458,28 @@ END FUNCTION
 
 
 
+{--
 FUNCTION obtener_valores_deb_cre(deb, cred)
 DEFINE deb		DECIMAL(14,2)
 DEFINE cred		DECIMAL(14,2)
 
-IF rm_ctb2.b12_moneda = rg_gen.g00_moneda_base THEN
-	IF rm_ctb3.b13_valor_base >= 0 THEN
-		LET deb  = deb  + rm_ctb3.b13_valor_base
+IF rm_b12.b12_moneda = rg_gen.g00_moneda_base THEN
+	IF rm_b13.b13_valor_base >= 0 THEN
+		LET deb  = deb  + rm_b13.b13_valor_base
 	ELSE
-		LET cred = cred + rm_ctb3.b13_valor_base
+		LET cred = cred + rm_b13.b13_valor_base
 	END IF
 ELSE
-	IF rm_ctb3.b13_valor_aux >= 0 THEN
-		LET deb  = deb  + rm_ctb3.b13_valor_aux
+	IF rm_b13.b13_valor_aux >= 0 THEN
+		LET deb  = deb  + rm_b13.b13_valor_aux
 	ELSE
-		LET cred = cred + rm_ctb3.b13_valor_aux
+		LET cred = cred + rm_b13.b13_valor_aux
 	END IF
 END IF
 RETURN deb, cred
 
 END FUNCTION
+--}
 
 
 
@@ -455,13 +506,14 @@ END FUNCTION
 
 
 
-FUNCTION nombre_banco(banco, tipo_cta, numero)
+FUNCTION nombre_banco(banco, tipo_cta, numero, cta)
 DEFINE banco		LIKE gent009.g09_banco
 DEFINE tipo_cta		LIKE gent009.g09_tipo_cta
 DEFINE numero		LIKE gent009.g09_numero_cta
+DEFINE cta		LIKE gent009.g09_aux_cont
 DEFINE r_g08		RECORD LIKE gent008.*
 DEFINE tipo_des		VARCHAR(10)
-DEFINE descrip		VARCHAR(70)
+DEFINE descrip		VARCHAR(80)
 
 CALL fl_lee_banco_general(banco) RETURNING r_g08.*
 LET tipo_des = 'Cta. Aho. '
@@ -469,7 +521,7 @@ IF tipo_cta = 'C' THEN
 	LET tipo_des = 'Cta. Cte. '
 END IF
 LET descrip = r_g08.g08_nombre CLIPPED, ' (', tipo_des CLIPPED, ' ',
-		numero CLIPPED, ')' 
+		numero CLIPPED, ' (', cta CLIPPED, '))' 
 RETURN descrip, r_g08.g08_nombre
 
 END FUNCTION

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048170</secuencial>
+<dirMatriz>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>MARISCAL SUCRE N62-101 Y JOSE FIGUEROA</dirEstablecimiento>
+<dirPartida>GUALBERTO PEREZ E1-88 ENTRE MALDONADO Y NAPO</dirPartida>
+<razonSocialTransportista>SERGIO QUINCHE</razonSocialTransportista>
+<tipoIdentificacionTransportista>05</tipoIdentificacionTransportista>
+<rucTransportista>1103687586</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>15/12/2014</fechaIniTransporte>
+<fechaFinTransporte>16/12/2014</fechaFinTransporte>
+<placa>PBX-9975</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1102318423001</identificacionDestinatario>
+<razonSocialDestinatario>SARANGO MEDINA MARIA ALEGRIA</razonSocialDestinatario>
+<dirDestinatario>MARISCAL SUCRE N62-101 Y JOSE FIGUEROA</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>15/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>100774</codigoInterno>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA AMAZONAS BLANCO PRIMERA</descripcion>
+<cantidad>30.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="AMAZONAS BLANCO" valor="AMAZONAS BLANCO"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>102377</codigoInterno>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA QUANTUM NIEVE SEGUNDA</descripcion>
+<cantidad>20.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="QUANTUM NIEVE SEGUND" valor="QUANTUM NIEVE SEGUND"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>102378</codigoInterno>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA QUANTUM NEGRO  SEGUNDA</descripcion>
+<cantidad>20.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="QUANTUM NEGRO  SEGUN" valor="QUANTUM NEGRO  SEGUN"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>94334</codigoInterno>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA OLMO PRIMERA</descripcion>
+<cantidad>45.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="OLMO PREMIUM" valor="OLMO PREMIUM"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>98736</codigoInterno>
+<descripcion>AZULEJO PARED 25 x 33 AMAZONAS BLANCO ESTANDAR</descripcion>
+<cantidad>30.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="ECUACERAMICA" valor="ECUACE"/>
+<detAdicional nombre="AMAZONAS BLANCO" valor="AMAZONAS BLANCO"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+<campoAdicional nombre="telefono-movil">0998669900</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">062738</campoAdicional>
+</infoAdicional>
+</guiaRemision>

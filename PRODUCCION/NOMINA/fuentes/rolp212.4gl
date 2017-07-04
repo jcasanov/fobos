@@ -1889,7 +1889,7 @@ DEFINE r_g31		RECORD LIKE gent031.*
 CREATE TEMP TABLE tmp_rol_ban
 	(
 		tipo_pago		CHAR(2),
-		cuenta_empresa		CHAR(10),
+		cuenta_empresa		CHAR(11),
 		secuencia		SERIAL,
 		comp_pago		CHAR(5),
 		cod_trab		CHAR(6),
@@ -1914,7 +1914,7 @@ CREATE TEMP TABLE tmp_rol_ban
 LET query = 'SELECT "PA" AS tip_pag, g09_numero_cta AS cuenta_empr,',
 			' 0 AS secu, "" AS comp_p,n44_cod_trab AS cod_emp, ',
 			'g13_simbolo AS mone,TRUNC(n44_valor * 100, 0) AS',
-			' neto_rec, "CTA" AS for_pag, "0040" AS cod_ban,',
+			' neto_rec, "CTA" AS for_pag, "0036" AS cod_ban,',
 			' CASE WHEN n30_tipo_cta_tra = "A"',
 				' THEN "AHO"',
 				' ELSE "CTE"',
@@ -1956,6 +1956,7 @@ LET query = 'SELECT "PA" AS tip_pag, g09_numero_cta AS cuenta_empr,',
 		'   AND n30_cod_trab = n44_cod_trab ',
 		'   AND g09_compania = n44_compania ',
 		'   AND g09_banco    = n44_bco_empresa ',
+		'   AND g09_numero_cta = n44_cta_empresa ',
 		'   AND n03_proceso  = "', vm_proceso, '"',
 		'   AND g13_moneda   = n43_moneda ',
 		'   AND g31_ciudad   = n30_ciudad_nac ',
@@ -1969,7 +1970,9 @@ LET query = 'INSERT INTO tmp_rol_ban ',
 		' cuenta_empleado, tipo_doc_id, num_doc_id, empleado,',
 		' direccion, ciudad, telefono, local_cobro, referencia,',
 		' referencia_adic) ',
-		' SELECT * FROM t1 '
+		' SELECT * FROM t1 ',
+		' group by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,',
+			' 16, 17, 18, 19, 20'
 PREPARE exec_tmp FROM query
 EXECUTE exec_tmp
 DROP TABLE t1

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268331</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>12/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268331</guiaRemision>
+<razonSocialComprador>ANDINO RENDON ARACELY</razonSocialComprador>
+<identificacionComprador>1204109183001</identificacionComprador>
+<totalSinImpuestos>210.50</totalSinImpuestos>
+<totalDescuento>43.11</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>210.50</baseImponible>
+<valor>25.26</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>235.76</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>101777</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 TESSUTTO CAPUCHINO  PRIMERA</descripcion>
+<cantidad>12.00</cantidad>
+<precioUnitario>10.55</precioUnitario>
+<descuento>21.52</descuento>
+<precioTotalSinImpuesto>105.08</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>105.08</baseImponible>
+<valor>12.61</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101200</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 COLORA NIEVE  PRIMERA</descripcion>
+<cantidad>13.00</cantidad>
+<precioUnitario>9.77</precioUnitario>
+<descuento>21.59</descuento>
+<precioTotalSinImpuesto>105.42</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>105.42</baseImponible>
+<valor>12.65</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">arita_andino@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2288566</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">039689</campoAdicional>
+</infoAdicional>
+</factura>

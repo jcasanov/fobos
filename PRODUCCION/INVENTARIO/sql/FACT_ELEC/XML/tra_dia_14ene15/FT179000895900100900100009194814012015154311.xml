@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091948</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>14/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091948</guiaRemision>
+<razonSocialComprador>INMOBILIARIA LAVIE S.A.</razonSocialComprador>
+<identificacionComprador>0990598967001</identificacionComprador>
+<totalSinImpuestos>180.32</totalSinImpuestos>
+<totalDescuento>15.68</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>180.32</baseImponible>
+<valor>21.64</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>201.96</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>70424</codigoPrincipal>
+<descripcion>MEDIDOR DE AGUA DE 1/2" DH-METER ROSCADO CHORRO UNICO</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>39.20</precioUnitario>
+<descuento>15.68</descuento>
+<precioTotalSinImpuesto>180.32</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>180.32</baseImponible>
+<valor>21.64</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">mantenimiento@elrosado.com</campoAdicional>
+<campoAdicional nombre="Email">edocs@elrosado.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3702400</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">003349</campoAdicional>
+</infoAdicional>
+</factura>

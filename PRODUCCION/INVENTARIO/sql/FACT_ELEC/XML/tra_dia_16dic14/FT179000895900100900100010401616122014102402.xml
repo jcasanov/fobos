@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104016</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/12/2014</fechaEmision>
+<dirEstablecimiento>URB. SAN ISIDRO, MZ. A # 14</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104016</guiaRemision>
+<razonSocialComprador>PLAZA DUMANI JORGE</razonSocialComprador>
+<identificacionComprador>0908390503   </identificacionComprador>
+<totalSinImpuestos>338.50</totalSinImpuestos>
+<totalDescuento>47.39</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>291.11</baseImponible>
+<valor>34.93</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>326.04</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>71778</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA BAJO MESON SS0055771301CW IMOLA BL</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>67.70</precioUnitario>
+<descuento>28.43</descuento>
+<precioTotalSinImpuesto>174.67</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="BRIGGS" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>174.67</baseImponible>
+<valor>20.96</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>71778</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA BAJO MESON SS0055771301CW IMOLA BL</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>67.70</precioUnitario>
+<descuento>18.96</descuento>
+<precioTotalSinImpuesto>116.44</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="BRIGGS" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>116.44</baseImponible>
+<valor>13.97</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2835482</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">008499</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,4 @@
+for i in *.4gl
+do
+	fglpc $i
+done

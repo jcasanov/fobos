@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000114017</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000114017</guiaRemision>
+<razonSocialComprador>MEDINA DIAS JAIME ERNESTO</razonSocialComprador>
+<identificacionComprador>1801435668001</identificacionComprador>
+<totalSinImpuestos>147.28</totalSinImpuestos>
+<totalDescuento>16.37</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>147.28</baseImponible>
+<valor>17.67</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>164.95</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5668</codigoPrincipal>
+<descripcion>TUBO PVC DESAGUE 40 PSI DE 160mm. x 3 Mts. ESPIGA CAMPANA</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>28.20</precioUnitario>
+<descuento>5.64</descuento>
+<precioTotalSinImpuesto>50.76</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>50.76</baseImponible>
+<valor>6.09</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5666</codigoPrincipal>
+<descripcion>TUBO PVC DESAGUE 40 PSI DE 110mm. x 3 Mts. ESPIGA CAMPANA</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>13.32</precioUnitario>
+<descuento>4.00</descuento>
+<precioTotalSinImpuesto>35.96</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>35.96</baseImponible>
+<valor>4.32</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5662</codigoPrincipal>
+<descripcion>TUBO PVC DESAGUE 40 PSI DE 50mm. x 3 Mts. ESPIGA CAMPANA</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>5.39</precioUnitario>
+<descuento>1.08</descuento>
+<precioTotalSinImpuesto>9.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.70</baseImponible>
+<valor>1.16</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3778</codigoPrincipal>
+<descripcion>REDUCCION PVC DESAGUE DE 160mm. x 110mm. ISO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>11.67</precioUnitario>
+<descuento>1.17</descuento>
+<precioTotalSinImpuesto>10.50</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>10.50</baseImponible>
+<valor>1.26</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2672</codigoPrincipal>
+<descripcion>CODO PVC DESAGUE DE 110mm. x 45ø ISO E/C</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>4.32</precioUnitario>
+<descuento>0.86</descuento>
+<precioTotalSinImpuesto>7.78</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7.78</baseImponible>
+<valor>0.93</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>2690</codigoPrincipal>
+<descripcion>CODO PVC DESAGUE DE 110mm. x 90ø ISO E/C</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>3.18</precioUnitario>
+<descuento>1.91</descuento>
+<precioTotalSinImpuesto>17.17</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>17.17</baseImponible>
+<valor>2.06</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6484</codigoPrincipal>
+<descripcion>YEE PVC DESAGUE DE 110mm.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>4.70</precioUnitario>
+<descuento>0.47</descuento>
+<precioTotalSinImpuesto>4.23</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.23</baseImponible>
+<valor>0.51</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>6510</codigoPrincipal>
+<descripcion>YEE PVC DESAGUE DE 110mm. x 50mm.</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>4.14</precioUnitario>
+<descuento>1.24</descuento>
+<precioTotalSinImpuesto>11.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>11.18</baseImponible>
+<valor>1.34</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jaime_medinad@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2643975</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">044807</campoAdicional>
+</infoAdicional>
+</factura>

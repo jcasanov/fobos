@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268629</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268629</guiaRemision>
+<razonSocialComprador>SUMINISTROS INDUSTRIALES & PETROLEROS SUMINPETRO CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1792360250001</identificacionComprador>
+<totalSinImpuestos>200.44</totalSinImpuestos>
+<totalDescuento>39.27</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>200.44</baseImponible>
+<valor>24.05</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>224.49</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>94503</codigoPrincipal>
+<descripcion>VALVULA DE GLOBO DE ACERO INOXIDABLE IT-402 DE 1" 200 PSI</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>41.39</precioUnitario>
+<descuento>28.15</descuento>
+<precioTotalSinImpuesto>137.41</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INOX T"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>137.41</baseImponible>
+<valor>16.49</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100378</codigoPrincipal>
+<descripcion>DADOS PARA TERRAJA MANUAL DE 3/4"  NPT HSS. P/ACERO INOX. (37920)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>74.15</precioUnitario>
+<descuento>11.12</descuento>
+<precioTotalSinImpuesto>63.03</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>63.03</baseImponible>
+<valor>7.56</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">contabilidad@suminpetro.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2598934</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">059582</campoAdicional>
+<campoAdicional nombre="Observaciones">PED.ING. HUGO ALVARADO</campoAdicional>
+</infoAdicional>
+</factura>

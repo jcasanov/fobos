@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025209</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>19/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>CEMIMEX.  CIA.LTDA</razonSocialComprador>
+<identificacionComprador>1790500039001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000142224</numDocModificado>
+<fechaEmisionDocSustento>02/05/2013</fechaEmisionDocSustento>
+<totalSinImpuestos>283.14</totalSinImpuestos>
+<valorModificacion>317.12</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>283.14</baseImponible>
+<valor>33.98</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 236329 CEMIMEX CIA REC C DL CRUZ FC</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>99805</codigoInterno>
+<descripcion>BOMBA SUMERGIBLE DE 4" G4L2005C6M1A DE 20 GPM 5 ETAP.C/MOTOR DE 1/2HP/115V 1-1/4"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>363.00</precioUnitario>
+<descuento>79.86</descuento>
+<precioTotalSinImpuesto>283.14</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="XIAMEN"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>283.14</baseImponible>
+<valor>33.98</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">ventas1cemimex@yahoo.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">549148</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">2390</campoAdicional>
+</infoAdicional>
+</notaCredito>

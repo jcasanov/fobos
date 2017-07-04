@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268804</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268804</guiaRemision>
+<razonSocialComprador>SOLINES CORONEL CARLOS</razonSocialComprador>
+<identificacionComprador>1701621151</identificacionComprador>
+<totalSinImpuestos>730.67</totalSinImpuestos>
+<totalDescuento>81.19</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>730.67</baseImponible>
+<valor>87.68</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>818.35</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>96494</codigoPrincipal>
+<descripcion>BOMBA TIPO JET C-MOTOR FVJO7CI DE 3/4 HP/115/230/60C/1F. VERSAJET (91180007)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>405.93</precioUnitario>
+<descuento>81.19</descuento>
+<precioTotalSinImpuesto>730.67</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>730.67</baseImponible>
+<valor>87.68</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">csolines@solines.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2541933</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064362</campoAdicional>
+<campoAdicional nombre="Observaciones">CHEQ N: 6563 BNCO INTERNACIONAL</campoAdicional>
+</infoAdicional>
+</factura>

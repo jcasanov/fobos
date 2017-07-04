@@ -1,0 +1,120 @@
+DATABASE aceros
+SCREEN
+{
+No Proforma:[c01    ]      Preventa:[c080   ]  Factura:[c9][c081           ]
+     Moneda:[c3] [c04                ]  Fecha Proforma:[c02                ]
+Cód.Cliente:[c06    ]    Días Validez:[c05  ]    Impuesto:[c07  ]%    
+    Nombres:[c08                                                ]
+  Dirección:[c10                            ] Ced/RUC/Pas:[c09             ]
+Observación:[c12                            ]    Teléfono:[c11             ] 
+Entregar en:[c13                            ]  Forma Pago:[c14             ]
+   Vendedor:[c15] [c16                      ]       Flete:[g000     ]
+                                                            [c090] de [c091]
+ [h4  |h040    |h041    |h042    |h043    |h045 |h046         |h047         ]
+[y1] [c050  ] [c051    |c052    |c053    |c054 |c055         |c056         ]
+[y1] [c050  ] [c051    |c052    |c053    |c054 |c055         |c056         ]
+[y1] [c050  ] [c051    |c052    |c053    |c054 |c055         |c056         ]
+[y1] [c050  ] [c051    |c052    |c053    |c054 |c055         |c056         ]
+[c070                               ]               Subtotal:[c060         ]
+[c071                               ]              Descuento:[c061         ]
+[c072                                    ]          Impuesto:[c062         ]
+[c073                                              ]    Neto:[c063         ]
+[c074                                                             |c075    ]
+}
+TABLES
+	rept021
+	rept022
+	rept023
+ATTRIBUTES
+c01  = r21_numprof, REVERSE, 
+       WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2', 
+       NOENTRY;          
+c02  = r21_fecing, REVERSE, NOENTRY;
+c3   = r21_moneda, REVERSE, UPSHIFT,           
+       WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+       COMMENTS = 'Moneda Base o Moneda Alterna. '; 
+c04  = formonly.nom_moneda TYPE VARCHAR, NOENTRY, REVERSE;
+c05  = r21_dias_prof, REVERSE, NOENTRY;
+c06  = r21_codcli, REVERSE,
+       WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+       REQUIRED;
+c07  = r21_porc_impto, REVERSE, NOENTRY, FORMAT = '#&.##';
+c08  = r21_nomcli, REVERSE, UPSHIFT, SCROLL;
+c09  = r21_cedruc, REVERSE, UPSHIFT, COMMENTS = 'Cédula o RUC del cliente. ';
+c10  = r21_dircli, REVERSE, UPSHIFT, SCROLL,         
+       COMMENTS = 'Dirección del domicilio del cliente.';
+c11  = r21_telcli;
+c12  = r21_atencion, UPSHIFT, SCROLL;
+c13  = r21_referencia, UPSHIFT, SCROLL;
+c14  = r21_forma_pago, REVERSE, UPSHIFT, SCROLL;
+c15  = r21_vendedor, 
+       WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2', 
+       REVERSE;                   
+c16  = formonly.nom_vendedor TYPE VARCHAR, NOENTRY, REVERSE;
+
+	---- DETALLE ----
+c050 = r22_item, UPSHIFT, AUTONEXT,
+       OPTIONS = '-nolist', WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',         
+       REQUIRED;
+c051 = formonly.stock_tot TYPE DECIMAL(8,2), 
+       OPTIONS = '-nolist',       
+       NOENTRY, FORMAT= '####&.##';                            
+c052 = formonly.stock_loc TYPE DECIMAL(8,2),        
+       OPTIONS = '-nolist',                  
+       NOENTRY, FORMAT= '####&.##';                                 
+c053 = r22_cantidad, AUTONEXT,
+       OPTIONS = '-nolist',
+       INCLUDE = (0.01 TO 99999.99);
+y1   = r22_bodega, UPSHIFT, REQUIRED, AUTONEXT,
+       OPTIONS = '-nolist', WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c054 = r22_porc_descto, FORMAT = '#&.##', AUTONEXT,
+       OPTIONS = '-nolist', 
+       INCLUDE = (0 TO 99.99); 	
+c055 = r22_precio, FORMAT = '##,###,##&.##', AUTONEXT,
+       OPTIONS = '-nolist';
+       --NOENTRY;
+c056 = formonly.subtotal_item TYPE DECIMAL(12,2), 
+       OPTIONS = '-nolist',
+       NOENTRY, FORMAT = '##,###,##&.##'; 
+c060 = r21_tot_bruto, FORMAT = '##,###,##&.##', REVERSE, NOENTRY;       
+c061 = r21_tot_dscto, FORMAT = '##,###,##&.##', NOENTRY;       
+c062 = formonly.vm_impuesto TYPE DECIMAL(11,2),	FORMAT = '##,###,##&.##', NOENTRY;    
+c063 = r21_tot_neto, REVERSE, FORMAT = '##,###,##&.##', NOENTRY;
+c070 = formonly.descrip_1, NOENTRY;
+c071 = formonly.descrip_2, NOENTRY;
+c072 = formonly.descrip_3, NOENTRY;
+c073 = formonly.descrip_4, NOENTRY;
+c074 = formonly.nom_item,  NOENTRY, REVERSE;
+c075 = formonly.nom_marca, NOENTRY, REVERSE;
+h040 = formonly.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15'; 
+h041 = formonly.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16'; 
+h042 = formonly.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17'; 
+h043 = formonly.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18'; 
+h4   = formonly.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19'; 
+h045 = formonly.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20'; 
+h046 = formonly.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21'; 
+h047 = formonly.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22'; 
+g000 = r21_flete, NOENTRY, REVERSE, FORMAT = '##,##&.##',
+	INCLUDE = (0 TO 99999);
+c080 = rept023.r23_numprev, NOENTRY, UPSHIFT, REVERSE;
+c9   = rept021.r21_cod_tran, NOENTRY, UPSHIFT, REVERSE;
+c081 = rept021.r21_num_tran, NOENTRY, UPSHIFT, REVERSE;
+
+c090 = FORMONLY.num_row, NOENTRY, REVERSE;
+c091 = FORMONLY.max_row, NOENTRY, REVERSE;
+
+#c    = rept021.r21_trans_fact, AUTONEXT, REVERSE, UPSHIFT, INCLUDE = ('S', 'N'),
+#	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge',
+#	COMMENTS = 'Marque esta proforma si la factura se cruzara con TR otra localidad.';
+END
+INSTRUCTIONS 
+DELIMITERS '||'
+SCREEN RECORD r_detalle[4] (r22_bodega, r22_item, formonly.stock_tot, formonly.stock_loc, r22_cantidad, 
+			    r22_porc_descto, r22_precio, formonly.subtotal_item)
+
+KEYS
+	F5 = 'Crear Cliente'
+	F6 = 'Crear Item'
+	F7 = 'Ver Item'
+	F8 = 'Stock Total'
+	F9 = 'Subtotal Neto'

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104082</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104082</guiaRemision>
+<razonSocialComprador>EDIFICIO TORRE VIGIA DEL MAR</razonSocialComprador>
+<identificacionComprador>0992203897001</identificacionComprador>
+<totalSinImpuestos>529.10</totalSinImpuestos>
+<totalDescuento>58.78</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>529.10</baseImponible>
+<valor>63.49</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>592.59</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>71516</codigoPrincipal>
+<descripcion>GRIFERIA DE LAVABO 1-H E181.03/39 CR JGO MONOC. ALTO VESSEL-LIBBY</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>149.77</precioUnitario>
+<descuento>29.95</descuento>
+<precioTotalSinImpuesto>269.59</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>269.59</baseImponible>
+<valor>32.35</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>95359</codigoPrincipal>
+<descripcion>LAVABO VESSEL DE SOBREPONER E246-BO CARUSSO BONE 51 cm.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>102.55</precioUnitario>
+<descuento>20.51</descuento>
+<precioTotalSinImpuesto>184.59</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>184.59</baseImponible>
+<valor>22.15</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>27473</codigoPrincipal>
+<descripcion>LLAVE ANGULAR E269.01 DH CR P/MANGUERA CON NEPLO Y ROSETA</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>6.66</precioUnitario>
+<descuento>2.66</descuento>
+<precioTotalSinImpuesto>23.98</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>23.98</baseImponible>
+<valor>2.88</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>91183</codigoPrincipal>
+<descripcion>CERRADURA DORMITORIO 405DL US-26D DELTA CROMO SATINADO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>28.30</precioUnitario>
+<descuento>5.66</descuento>
+<precioTotalSinImpuesto>50.94</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KWIKSE"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>50.94</baseImponible>
+<valor>6.11</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2043384</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">015707</campoAdicional>
+</infoAdicional>
+</factura>

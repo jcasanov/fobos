@@ -1,0 +1,6 @@
+fglschema aceros
+for i in ACTIVOS CAJA COBRANZAS COMPRAS CONTABILIDAD GENERALES LIBRERIAS MENU REPUESTOS TALLER TESORERIA NOMINA SRI
+do
+	cp aceros.sch $i/fuentes
+	cp aceros.sch $i/forms
+done

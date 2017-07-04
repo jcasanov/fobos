@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000114002</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000114002</guiaRemision>
+<razonSocialComprador>DANEC S.A.</razonSocialComprador>
+<identificacionComprador>1790040968001</identificacionComprador>
+<totalSinImpuestos>149.94</totalSinImpuestos>
+<totalDescuento>26.46</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>149.94</baseImponible>
+<valor>17.99</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>167.93</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>150609</codigoPrincipal>
+<descripcion>ANCLAJE EPOXICO 8486SD DE 12oz AC100</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>44.10</precioUnitario>
+<descuento>26.46</descuento>
+<precioTotalSinImpuesto>149.94</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>149.94</baseImponible>
+<valor>17.99</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jalarcon@danec.com</campoAdicional>
+<campoAdicional nombre="Email">centroacopio2@danec.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">330301</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">028682</campoAdicional>
+<campoAdicional nombre="Observaciones">ORDEN DE COMPRA:15000187</campoAdicional>
+</infoAdicional>
+</factura>

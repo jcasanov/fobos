@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091825</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091825</guiaRemision>
+<razonSocialComprador>REYES PLAZA LUIS ALBERTO, ING.</razonSocialComprador>
+<identificacionComprador>0907617104001</identificacionComprador>
+<totalSinImpuestos>6477.73</totalSinImpuestos>
+<totalDescuento>1507.25</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>6477.73</baseImponible>
+<valor>777.33</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>7255.06</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>101041</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 8" 550STS50D8A-0466 PARA MOTOR DE 50HP (97080550304)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2991.59</precioUnitario>
+<descuento>508.57</descuento>
+<precioTotalSinImpuesto>2483.02</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2483.02</baseImponible>
+<valor>297.96</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100254</codigoPrincipal>
+<descripcion>MOTOR ELEC SUMERG DE 6" 6C3F DE 60 HP 380/460/60/3F (2366198125)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>4993.39</precioUnitario>
+<descuento>998.68</descuento>
+<precioTotalSinImpuesto>3994.71</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3994.71</baseImponible>
+<valor>479.37</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">construccioneslrp@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">094738419</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">011566</campoAdicional>
+</infoAdicional>
+</factura>

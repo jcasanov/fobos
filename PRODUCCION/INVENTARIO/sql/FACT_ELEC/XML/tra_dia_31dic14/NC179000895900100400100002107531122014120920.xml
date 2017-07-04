@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000021075</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>31/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<razonSocialComprador>YEPEZ AVILA JOSE</razonSocialComprador>
+<identificacionComprador>1705284840</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000021075</numDocModificado>
+<fechaEmisionDocSustento>31/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>99.48</totalSinImpuestos>
+<valorModificacion>111.42</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>99.48</baseImponible>
+<valor>11.94</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>POR ANULACION O.T. # 8135</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>21044</codigoInterno>
+<descripcion>RETENEDOR DE BOMBA 14525A000K -14525A P/ BOMBAS MYERS HD, HP, HJ</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>36.20</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>36.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>36.20</baseImponible>
+<valor>4.34</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>21138</codigoInterno>
+<descripcion>SWITCH DE PRESION 15760-A2 DE 40 A 60 PSI  SQUARE D</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>31.90</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>31.90</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>31.90</baseImponible>
+<valor>3.83</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>19966</codigoInterno>
+<descripcion>CONTROL DE AIRE 13809-A  BRADY</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>31.38</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>31.38</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>31.38</baseImponible>
+<valor>3.77</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jyepez@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">524450</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">1746</campoAdicional>
+</infoAdicional>
+</notaCredito>

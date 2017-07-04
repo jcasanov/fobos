@@ -1,0 +1,55 @@
+export LD_ASSUME_KERNEL=2.4.0
+echo 'generando los "Compilar" ...'
+fglpc compilar_4gl.4gl
+fgl2p compilar.4gl
+
+for i in *.err
+do
+	if [ "$i" == "compilar.err" ] || [ "$i" == "compilar_4gl.err" ]; then
+		exit;
+	fi
+done
+
+cp compilar.* ACTIVOS/fuentes
+cp compilar.* CAJA/fuentes
+cp compilar.* COBRANZAS/fuentes
+cp compilar.* COMPRAS/fuentes
+cp compilar.* CONTABILIDAD/fuentes
+cp compilar.* LIBRERIAS/fuentes
+cp compilar.* GENERALES/fuentes
+cp compilar.* MENU/fuentes
+cp compilar.* REPUESTOS/fuentes
+cp compilar.* TALLER/fuentes
+cp compilar.* TESORERIA/fuentes
+cp compilar.* NOMINA/fuentes
+cp compilar.* SRI/fuentes
+
+cp compilar_4gl.* ACTIVOS/fuentes
+cp compilar_4gl.* CAJA/fuentes
+cp compilar_4gl.* COBRANZAS/fuentes
+cp compilar_4gl.* COMPRAS/fuentes
+cp compilar_4gl.* CONTABILIDAD/fuentes
+cp compilar_4gl.* LIBRERIAS/fuentes
+cp compilar_4gl.* GENERALES/fuentes
+cp compilar_4gl.* MENU/fuentes
+cp compilar_4gl.* REPUESTOS/fuentes
+cp compilar_4gl.* TALLER/fuentes
+cp compilar_4gl.* TESORERIA/fuentes
+cp compilar_4gl.* NOMINA/fuentes
+cp compilar_4gl.* SRI/fuentes
+
+cp compi ACTIVOS/fuentes
+cp compi CAJA/fuentes
+cp compi COBRANZAS/fuentes
+cp compi COMPRAS/fuentes
+cp compi CONTABILIDAD/fuentes
+cp compi LIBRERIAS/fuentes
+cp compi GENERALES/fuentes
+cp compi MENU/fuentes
+cp compi REPUESTOS/fuentes
+cp compi TALLER/fuentes
+cp compi TESORERIA/fuentes
+cp compi NOMINA/fuentes
+cp compi SRI/fuentes
+
+echo 'copiados los "Compilar" a los modulos OK ...'

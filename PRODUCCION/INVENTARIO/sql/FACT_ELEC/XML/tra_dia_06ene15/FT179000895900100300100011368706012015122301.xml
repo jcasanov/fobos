@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113687</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>06/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113687</guiaRemision>
+<razonSocialComprador>CASTRO TIPAN JUAN CARLOS</razonSocialComprador>
+<identificacionComprador>1710734938</identificacionComprador>
+<totalSinImpuestos>4.75</totalSinImpuestos>
+<totalDescuento>0.41</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>4.75</baseImponible>
+<valor>0.57</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>5.32</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>7089</codigoPrincipal>
+<descripcion>ACCESORIOS DE FIJACION PERNO B LARGO 2-1/2" AUTOPERFORANTE 10 Unid.</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>1.29</precioUnitario>
+<descuento>0.41</descuento>
+<precioTotalSinImpuesto>4.75</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ROOFTE"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.75</baseImponible>
+<valor>0.57</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">juancarlos castro@dileaunamigo.tv</campoAdicional>
+<campoAdicional nombre="telefono-movil">2346995</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064224</campoAdicional>
+</infoAdicional>
+</factura>

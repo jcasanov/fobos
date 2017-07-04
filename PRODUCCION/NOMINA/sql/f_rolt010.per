@@ -1,0 +1,23 @@
+database acero_gm
+screen size 24 by 80
+{
+n10_compania       [f000       ]
+n10_cod_rubro      [f001  ]
+n10_cod_trab       [f002       ]
+n10_cod_liqrol     [a0]
+n10_valor          [f003         ]
+n10_usuario        [f004      ]
+n10_fecing         [f005               ]
+}
+end
+tables
+rolt010
+attributes
+f000 = rolt010.n10_compania;
+f001 = rolt010.n10_cod_rubro;
+f002 = rolt010.n10_cod_trab;
+a0 = rolt010.n10_cod_liqrol;
+f003 = rolt010.n10_valor;
+f004 = rolt010.n10_usuario;
+f005 = rolt010.n10_fecing;
+end

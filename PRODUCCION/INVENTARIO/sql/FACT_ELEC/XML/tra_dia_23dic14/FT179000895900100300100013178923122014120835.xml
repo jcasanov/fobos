@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131789</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131789</guiaRemision>
+<razonSocialComprador>PLYWOOD ECUATORIANA S.A.</razonSocialComprador>
+<identificacionComprador>1790007111001</identificacionComprador>
+<totalSinImpuestos>157.13</totalSinImpuestos>
+<totalDescuento>27.73</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>157.13</baseImponible>
+<valor>18.86</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>175.99</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>98325</codigoPrincipal>
+<descripcion>JUEGO DE EMPAQUES KX-GT DE 2" P/ KVD (2 EMPAQUES Y 8 RODELAS)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>92.43</precioUnitario>
+<descuento>27.73</descuento>
+<precioTotalSinImpuesto>157.13</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="KLINGE"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>157.13</baseImponible>
+<valor>18.86</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">greyes@platayuc.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">676847</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">028929</campoAdicional>
+</infoAdicional>
+</factura>

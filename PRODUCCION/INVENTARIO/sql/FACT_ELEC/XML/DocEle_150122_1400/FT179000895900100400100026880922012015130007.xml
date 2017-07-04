@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268809</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268809</guiaRemision>
+<razonSocialComprador>ARCLAD</razonSocialComprador>
+<identificacionComprador>1701283465001</identificacionComprador>
+<totalSinImpuestos>9063.92</totalSinImpuestos>
+<totalDescuento>1404.92</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>9063.92</baseImponible>
+<valor>1087.67</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>10151.59</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>70656</codigoPrincipal>
+<descripcion>BOMBA CENT.MONOETAPA P/INCENDIO C/MOT.A GASOLINA 61-1/2A1-CH13 S/G 2-1/2x1-1/2 MOT.KOHLER 13HP ARR.EL.S/BAT.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>8457.41</precioUnitario>
+<descuento>1268.61</descuento>
+<precioTotalSinImpuesto>7188.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GORMAN"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7188.80</baseImponible>
+<valor>862.66</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>71120</codigoPrincipal>
+<descripcion>BOMBA CENTRIF MULTIETAPA C-MOTOR FES6A  3HP 6 ETP  220/380/440/60/3F</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>908.73</precioUnitario>
+<descuento>136.31</descuento>
+<precioTotalSinImpuesto>772.42</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FAMAC"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>772.42</baseImponible>
+<valor>92.69</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101311</codigoPrincipal>
+<descripcion>TABLERO ELECTRICO DE CONTROL P/BOMBA CONTRA INCENDIOS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1102.70</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1102.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1102.70</baseImponible>
+<valor>132.32</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">janneth.carvajal@arclad.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3500100</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">022950</campoAdicional>
+<campoAdicional nombre="Observaciones">SISTEMA CONTRA INCENDIOS</campoAdicional>
+</infoAdicional>
+</factura>

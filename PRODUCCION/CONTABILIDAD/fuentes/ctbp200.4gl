@@ -8,7 +8,6 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_demonios	VARCHAR(12)
 DEFINE rm_ctb		RECORD LIKE ctbt006.*
 DEFINE rm_mes		ARRAY[12] OF LIKE ctbt006.b06_mes
 DEFINE tit_enero	CHAR(1)

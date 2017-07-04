@@ -1,0 +1,38 @@
+export base=$1
+export localidad=1
+export anio=$2
+export mes=$3
+export mediosue=$4
+export restaurar=$5
+
+if [ "$base" == "" ]; then
+	echo "Falta la Base."
+	exit
+fi
+
+if [ "$base" == "acero_gm" ]; then
+	export localidad=1
+fi
+
+if [ "$base" == "acero_qm" ]; then
+	export localidad=3
+fi
+
+if [ $localidad == 0 ]; then
+	echo "Base incorrecta."
+	exit
+fi
+
+if [ "$anio" == "" ]; then
+	echo "Falta el año."
+	exit
+fi
+
+if [ "$mes" == "" ]; then
+	echo "Falta el mes."
+	exit
+fi
+
+fglgo gennsueiess $base $localidad $anio $mes $mediosue
+fglgo genhecoiess $base $localidad $anio $mes
+fglgo genvacaiess $base $localidad $anio $mes $restaurar

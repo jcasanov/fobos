@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091771</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>05/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091771</guiaRemision>
+<razonSocialComprador>PROHERRAMIENTAS S.A. PROHERRASA</razonSocialComprador>
+<identificacionComprador>0992167076001</identificacionComprador>
+<totalSinImpuestos>978.68</totalSinImpuestos>
+<totalDescuento>172.71</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>978.68</baseImponible>
+<valor>117.44</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1096.12</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>97968</codigoPrincipal>
+<descripcion>TERRAJA 12R DE 1/8" A 2" NPT. C/MANGO Y TRINQUETE (36505)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1151.39</precioUnitario>
+<descuento>172.71</descuento>
+<precioTotalSinImpuesto>978.68</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>978.68</baseImponible>
+<valor>117.44</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">proherra@netlife.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2250429</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">003980</campoAdicional>
+</infoAdicional>
+</factura>

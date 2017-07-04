@@ -3777,6 +3777,8 @@ DEFINE cuenta		LIKE ctbt011.b11_cuenta
 DEFINE moneda		LIKE ctbt011.b11_moneda
 DEFINE fecha		DATE
 DEFINE ano, ano_ant	LIKE ctbt011.b11_ano
+DEFINE val_db		LIKE ctbt011.b11_db_ano_ant
+DEFINE val_cr		LIKE ctbt011.b11_cr_ano_ant
 DEFINE mes, dia		SMALLINT
 DEFINE flag		CHAR(1)
 DEFINE r_db ARRAY[12] OF LIKE ctbt011.b11_db_mes_01
@@ -3882,7 +3884,19 @@ IF r_b00.b00_anopro < ano AND r.b10_tipo_cta <> 'R' THEN
 		      b11_moneda   = moneda AND 
 		      b11_ano      = ano_ant
 END IF	
-LET r_sal.b11_db_ano_ant = r_sal.b11_db_ano_ant  +
+LET val_db = 0
+LET val_cr = 0
+IF ano_ant >= 2012 AND r_sal1.b11_db_ano_ant = 0 AND r_sal1.b11_cr_ano_ant = 0
+THEN
+	SELECT b11_db_ano_ant, b11_cr_ano_ant
+		INTO val_db, val_cr
+		FROM t_bal_gen 
+		WHERE b11_compania = codcia
+		  AND b11_cuenta   = cuenta
+		  AND b11_moneda   = moneda
+		  AND b11_ano      = ano_ant
+END IF
+LET r_sal.b11_db_ano_ant = r_sal.b11_db_ano_ant  + val_db +
 			   r_sal1.b11_db_ano_ant +
 			   r_sal1.b11_db_mes_01  +
 			   r_sal1.b11_db_mes_02  +
@@ -3896,7 +3910,7 @@ LET r_sal.b11_db_ano_ant = r_sal.b11_db_ano_ant  +
 			   r_sal1.b11_db_mes_10  +
 			   r_sal1.b11_db_mes_11  +
 			   r_sal1.b11_db_mes_12  
-LET r_sal.b11_cr_ano_ant = r_sal.b11_cr_ano_ant  +
+LET r_sal.b11_cr_ano_ant = r_sal.b11_cr_ano_ant  + val_cr +
 			   r_sal1.b11_cr_ano_ant +
 			   r_sal1.b11_cr_mes_01  +
 			   r_sal1.b11_cr_mes_02  +
@@ -7502,13 +7516,17 @@ END FUNCTION
 
 
 
-FUNCTION fl_lee_cod_sectorial(sectorial)
+FUNCTION fl_lee_cod_sectorial(codcia, anio, sectorial)
+DEFINE codcia		LIKE rolt017.n17_compania
+DEFINE anio		LIKE rolt017.n17_ano_sect
 DEFINE sectorial	LIKE rolt017.n17_sectorial
 DEFINE r_n17		RECORD LIKE rolt017.*
 
 INITIALIZE r_n17.* TO NULL
 SELECT * INTO r_n17.* FROM rolt017
-	WHERE n17_sectorial = sectorial
+	WHERE n17_compania  = codcia
+	  AND n17_ano_sect  = anio
+	  AND n17_sectorial = sectorial
 RETURN r_n17.*
 
 END FUNCTION
@@ -8074,14 +8092,19 @@ END FUNCTION
 
 
 {--
-FUNCTION fl_lee_motivo_salida_trabajador(motivo)
-DEFINE motivo 		LIKE rolt074.n74_serial
-DEFINE r		RECORD LIKE rolt074.*
+FUNCTION fl_lee_acta_finiquito(codcia, proceso, acta)
+DEFINE codcia 		LIKE rolt074.n74_compania
+DEFINE proceso 		LIKE rolt074.n74_proceso
+DEFINE acta 		LIKE rolt074.n74_num_acta
+DEFINE r_n74		RECORD LIKE rolt074.*
 
-INITIALIZE r.* TO NULL
-SELECT * INTO r.* FROM rolt074 WHERE n74_serial = motivo
-
-RETURN r.*
+INITIALIZE r_n74.* TO NULL
+SELECT * INTO r_n74.*
+	FROM rolt074
+	WHERE n74_compania = codcia
+	  AND n74_proceso  = proceso
+	  AND n74_num_acta = acta
+RETURN r_n74.*
 
 END FUNCTION
 --}
@@ -8307,7 +8330,8 @@ DEFINE bodega		LIKE rept034.r34_bodega
 DEFINE num_ent		LIKE rept036.r36_num_entrega
 DEFINE cod_tran		LIKE rept034.r34_cod_tran
 DEFINE num_tran		LIKE rept034.r34_num_tran
-DEFINE query		CHAR(1500)
+DEFINE expr_sql		CHAR(300)
+DEFINE query		CHAR(1800)
 DEFINE resp		CHAR(6)
 DEFINE a		INTEGER
 DEFINE resul, lim	SMALLINT
@@ -8315,20 +8339,27 @@ DEFINE lin_menu		SMALLINT
 DEFINE row_ini  	SMALLINT
 DEFINE num_rows 	SMALLINT
 DEFINE num_cols 	SMALLINT
-DEFINE mensaje		VARCHAR(100)
+DEFINE mensaje		VARCHAR(150)
 DEFINE cont		INTEGER
+DEFINE flag		SMALLINT
 DEFINE cont_cred	LIKE gent037.g37_cont_cred
 DEFINE secuencia	LIKE gent037.g37_secuencia
 DEFINE sec_sri		LIKE gent037.g37_sec_num_sri
+DEFINE aux_sri		LIKE rept095.r95_num_sri
 DEFINE fecha_ini	LIKE rept095.r95_fecha_initras
 DEFINE fecha_emi	LIKE rept095.r95_fecha_emi
 DEFINE persona_id	LIKE rept095.r95_persona_id
 DEFINE pers_id_dest	LIKE rept095.r95_pers_id_dest
 DEFINE r_g02		RECORD LIKE gent002.*
+DEFINE r_g37		RECORD LIKE gent037.*
+DEFINE r_r02		RECORD LIKE rept002.*
+DEFINE r_r09		RECORD LIKE rept009.*
 DEFINE r_r19		RECORD LIKE rept019.*
 DEFINE r_r95		RECORD LIKE rept095.*
 DEFINE r_r96		RECORD LIKE rept096.*
 DEFINE r_r97		RECORD LIKE rept097.*
+DEFINE r_r108		RECORD LIKE rept108.*
+DEFINE r_r109		RECORD LIKE rept109.*
 
 IF num_ent IS NULL AND cod_tran IS NULL THEN
 	CALL fl_mostrar_mensaje('No hay ninguna transacción o nota de entrega, para relacionar la guía de remisión.', 'exclamation')
@@ -8367,9 +8398,19 @@ LET r_r95.r95_usuario       = vg_usuario
 LET r_r95.r95_fecing        = CURRENT
 IF cod_tran = 'TR' THEN
 	LET r_r95.r95_motivo = 'N'
-	LET query = 'SELECT UNIQUE g01_razonsocial per_dest,g02_numruc per_id,',
+	LET expr_sql         = 'SELECT UNIQUE g01_razonsocial per_dest,',
+			' g02_numruc per_id,',
 			' TRIM(g02_nombre) || " " || TRIM(g02_direccion)',
-			' punto_lleg ',
+			' punto_lleg '
+	CALL fl_lee_bodega_rep(vg_codcia, bodega) RETURNING r_r02.*
+	CALL fl_lee_tipo_ident_bod(r_r02.r02_compania, r_r02.r02_tipo_ident)
+		RETURNING r_r09.*
+	IF r_r09.r09_tipo_ident = "Y" THEN
+		LET expr_sql = 'SELECT UNIQUE r19_nomcli per_dest,',
+					' r19_cedruc per_id,',
+					' r19_dircli punto_lleg'
+	END IF
+	LET query = expr_sql CLIPPED,
 			' FROM rept019, rept002, gent002, gent001 ',
 			' WHERE r19_compania  = ', codcia,
 			'   AND r19_localidad = ', codloc,
@@ -8456,22 +8497,23 @@ FETCH q_autoriz INTO r_r95.r95_num_sri, r_r95.r95_autoriz_sri,
 CLOSE q_autoriz
 FREE q_autoriz
 DECLARE q_autoriz_2 CURSOR FOR
-        SELECT g37_autorizacion
-                FROM gent037
-                WHERE g37_compania   = codcia
-                  AND g37_localidad  = codloc
-                  AND g37_tipo_doc   = "FA"
-                  AND g37_secuencia IN
-                        (SELECT MAX(g37_secuencia)
-                                FROM gent037
-                                WHERE g37_compania  = codcia
-                                  AND g37_localidad = codloc
-                                  AND g37_tipo_doc  = "FA")
+	SELECT g37_autorizacion
+		FROM gent037
+		WHERE g37_compania   = codcia
+		  AND g37_localidad  = codloc
+		  AND g37_tipo_doc   = "FA"
+		  AND g37_secuencia IN
+			(SELECT MAX(g37_secuencia)
+				FROM gent037
+				WHERE g37_compania  = codcia
+				  AND g37_localidad = codloc
+				  AND g37_tipo_doc  = "FA")
 OPEN q_autoriz_2
 FETCH q_autoriz_2 INTO r_r95.r95_autoriz_sri
 CLOSE q_autoriz_2
 FREE q_autoriz_2
 --END IF
+LET r_r95.r95_autoriz_sri = '.'
 DISPLAY BY NAME r_r95.r95_motivo, r_r95.r95_usuario, r_r95.r95_fecing
 IF vg_gui = 0 THEN
 	CASE r_r95.r95_motivo
@@ -8483,20 +8525,22 @@ IF vg_gui = 0 THEN
 	END CASE
 END IF
 LET int_flag = 0
-INPUT BY NAME r_r95.r95_fecha_initras, r_r95.r95_num_sri, r_r95.r95_autoriz_sri,
-		r_r95.r95_fecha_fintras, r_r95.r95_motivo, r_r95.r95_fecha_emi,
-		r_r95.r95_punto_part, r_r95.r95_persona_guia,
-		r_r95.r95_persona_id, r_r95.r95_placa, r_r95.r95_persona_dest,
-		r_r95.r95_pers_id_dest, r_r95.r95_punto_lleg
+INPUT BY NAME r_r95.r95_fecha_initras, r_r95.r95_num_sri,
+	r_r95.r95_fecha_fintras, r_r95.r95_motivo, r_r95.r95_fecha_emi,
+	r_r95.r95_punto_part, r_r95.r95_persona_guia, r_r95.r95_persona_id,
+	r_r95.r95_placa, r_r95.r95_persona_dest, r_r95.r95_pers_id_dest,
+	r_r95.r95_punto_lleg, r_r95.r95_proc_orden, r_r95.r95_cod_zona,
+	r_r95.r95_cod_subzona
 	WITHOUT DEFAULTS
 	ON KEY(INTERRUPT)
         	IF FIELD_TOUCHED(r_r95.r95_fecha_initras, r_r95.r95_num_sri,
-				 r_r95.r95_autoriz_sri, r_r95.r95_fecha_fintras,
-				 r_r95.r95_motivo, r_r95.r95_fecha_emi,
-				 r_r95.r95_punto_part, r_r95.r95_persona_guia,
-				 r_r95.r95_persona_id, r_r95.r95_placa,
-				 r_r95.r95_persona_dest, r_r95.r95_pers_id_dest,
-				 r_r95.r95_punto_lleg)
+				 r_r95.r95_fecha_fintras, r_r95.r95_motivo,
+				 r_r95.r95_fecha_emi, r_r95.r95_punto_part,
+				 r_r95.r95_persona_guia, r_r95.r95_persona_id,
+				 r_r95.r95_placa, r_r95.r95_persona_dest,
+				 r_r95.r95_pers_id_dest, r_r95.r95_punto_lleg,
+				 r_r95.r95_proc_orden, r_r95.r95_cod_zona,
+				 r_r95.r95_cod_subzona)
 		THEN
 			LET int_flag = 0
 			CALL fl_mensaje_abandonar_proceso() RETURNING resp
@@ -8515,11 +8559,38 @@ INPUT BY NAME r_r95.r95_fecha_initras, r_r95.r95_num_sri, r_r95.r95_autoriz_sri,
 			CLOSE WINDOW w_tf
 			LET int_flag = 0
 		END IF
+	ON KEY(F2)
+		IF INFIELD(r95_cod_zona) THEN
+			CALL fl_ayuda_zonas(codcia, codloc, "A")
+				RETURNING r_r108.r108_cod_zona,
+					  r_r108.r108_descripcion
+		      	IF r_r108.r108_cod_zona IS NOT NULL THEN
+				LET r_r95.r95_cod_zona = r_r108.r108_cod_zona
+				DISPLAY BY NAME r_r95.r95_cod_zona,
+						r_r108.r108_descripcion
+		      	END IF
+		END IF
+		IF INFIELD(r95_cod_subzona) AND r_r95.r95_cod_zona IS NOT NULL
+		THEN
+			CALL fl_ayuda_subzonas(codcia, codloc,
+						r_r95.r95_cod_zona, "A")
+				RETURNING r_r109.r109_cod_subzona,
+					  r_r109.r109_descripcion
+		      	IF r_r109.r109_cod_subzona IS NOT NULL THEN
+				LET r_r95.r95_cod_subzona =
+							r_r109.r109_cod_subzona
+				DISPLAY BY NAME r_r95.r95_cod_subzona,
+						r_r109.r109_descripcion
+		      	END IF
+		END IF
+		LET int_flag = 0
 	BEFORE INPUT
 		--#CALL dialog.keysetlabel("F1","")
 		--#CALL dialog.keysetlabel("CONTROL-W","")
 	BEFORE FIELD r95_fecha_initras
 		LET fecha_ini = r_r95.r95_fecha_initras
+	BEFORE FIELD r95_num_sri
+		LET aux_sri = r_r95.r95_num_sri
 	BEFORE FIELD r95_fecha_emi
 		LET fecha_emi = r_r95.r95_fecha_emi
 	BEFORE FIELD r95_persona_id
@@ -8536,6 +8607,7 @@ INPUT BY NAME r_r95.r95_fecha_initras, r_r95.r95_num_sri, r_r95.r95_autoriz_sri,
 			--NEXT FIELD r95_fecha_initras
 		END IF
 	AFTER FIELD r95_num_sri
+		{--
 		IF LENGTH(r_r95.r95_num_sri) < 14 THEN
 			CALL fl_mostrar_mensaje('El número del SRI ingresado es incorrecto.', 'exclamation')
 			NEXT FIELD r95_num_sri
@@ -8549,6 +8621,35 @@ INPUT BY NAME r_r95.r95_fecha_initras, r_r95.r95_num_sri, r_r95.r95_autoriz_sri,
 		   r_r95.r95_num_sri[8, 8] <> '-' THEN
 			CALL fl_mostrar_mensaje('Faltan los guiones.', 'exclamation')
 			NEXT FIELD r95_num_sri
+		END IF
+		--}
+		IF r_r95.r95_num_sri IS NULL THEN
+			LET r_r95.r95_num_sri = aux_sri
+			DISPLAY BY NAME r_r95.r95_num_sri
+		END IF
+		CALL fl_validacion_num_sri(codcia, codloc, "GR", cont_cred,
+						r_r95.r95_num_sri)
+			RETURNING r_g37.*, r_r95.r95_num_sri, flag
+		CASE flag
+			WHEN -1
+				RETURN 0
+			WHEN 0
+				LET r_r95.r95_num_sri = aux_sri
+				DISPLAY BY NAME r_r95.r95_num_sri
+				NEXT FIELD r95_num_sri
+		END CASE
+		IF aux_sri <> r_r95.r95_num_sri THEN
+			SELECT COUNT(*) INTO cont
+				FROM rept095
+				WHERE r95_compania  = codcia
+				  AND r95_localidad = codloc
+  				  AND r95_num_sri   = r_r95.r95_num_sri
+			IF cont > 0 THEN
+				CALL fl_mostrar_mensaje('La secuencia del SRI ' || r_r95.r95_num_sri[9,15] || ' ya existe.','exclamation')
+				LET r_r95.r95_num_sri = aux_sri
+				DISPLAY BY NAME r_r95.r95_num_sri
+				NEXT FIELD r95_num_sri
+			END IF
 		END IF
 	AFTER FIELD r95_fecha_fintras
 		IF r_r95.r95_fecha_fintras IS NOT NULL THEN
@@ -8609,6 +8710,51 @@ INPUT BY NAME r_r95.r95_fecha_initras, r_r95.r95_num_sri, r_r95.r95_autoriz_sri,
 				NEXT FIELD r95_pers_id_dest
 			END IF
 		END IF
+	AFTER FIELD r95_cod_zona
+		IF r_r95.r95_cod_zona IS NOT NULL THEN
+			CALL fl_lee_zona(codcia, codloc, r_r95.r95_cod_zona)
+				RETURNING r_r108.*
+			IF r_r108.r108_compania IS NULL THEN
+				CALL fl_mostrar_mensaje('Esta Zona no existe en la compañía.', 'exclamation')
+				NEXT FIELD r95_cod_zona
+			END IF
+			IF r_r108.r108_estado = "B" THEN
+				CALL fl_mostrar_mensaje('Esta Zona esta con estado BLOQUEADO.', 'exclamation')
+				NEXT FIELD r95_cod_zona
+			END IF
+			LET r_r95.r95_cod_zona = r_r108.r108_cod_zona
+		ELSE
+			INITIALIZE r_r108.*, r_r109.*, r_r95.r95_cod_zona,
+					r_r95.r95_cod_subzona
+				TO NULL
+		END IF
+		DISPLAY BY NAME r_r95.r95_cod_zona, r_r108.r108_descripcion,
+				r_r95.r95_cod_subzona, r_r109.r109_descripcion
+	AFTER FIELD r95_cod_subzona
+		IF r_r95.r95_cod_zona IS NULL THEN
+			INITIALIZE r_r109.*, r_r95.r95_cod_subzona TO NULL
+			DISPLAY BY NAME r_r95.r95_cod_subzona,
+					r_r109.r109_descripcion
+			CONTINUE INPUT
+		END IF
+		IF r_r95.r95_cod_subzona IS NOT NULL THEN
+			CALL fl_lee_subzona(codcia, codloc,
+						r_r95.r95_cod_zona,
+						r_r95.r95_cod_subzona)
+				RETURNING r_r109.*
+			IF r_r109.r109_compania IS NULL THEN
+				CALL fl_mostrar_mensaje('Esta Sub-Zona no existe en la compañía o no esta asociado a ésta zona.', 'exclamation')
+				NEXT FIELD r95_cod_subzona
+			END IF
+			IF r_r109.r109_estado = "B" THEN
+				CALL fl_mostrar_mensaje('Esta Sub-Zona esta con estado BLOQUEADO.', 'exclamation')
+				NEXT FIELD r95_cod_subzona
+			END IF
+			LET r_r95.r95_cod_subzona = r_r109.r109_cod_subzona
+		ELSE
+			INITIALIZE r_r109.*, r_r95.r95_cod_subzona TO NULL
+		END IF
+		DISPLAY BY NAME r_r95.r95_cod_subzona, r_r109.r109_descripcion
 	AFTER INPUT
 		IF r_r95.r95_fecha_fintras IS NOT NULL THEN
 			IF r_r95.r95_fecha_initras > r_r95.r95_fecha_fintras
@@ -8621,8 +8767,8 @@ END INPUT
 IF int_flag THEN
 	LET mensaje = 'No se va a generar la Guía de Remisión.'
 	CALL fl_mostrar_mensaje(mensaje, 'info')
-	CLOSE WINDOW w_ayuf307
 	LET int_flag = 0
+	CLOSE WINDOW w_ayuf307
 	RETURN 0
 END IF
 CALL fl_lee_localidad(codcia, codloc) RETURNING r_g02.*
@@ -8637,7 +8783,10 @@ WHILE TRUE
 			WHERE r95_compania  = $r_r95.r95_compania
 			  AND r95_localidad = $r_r95.r95_localidad
 	END SQL
-	LET r_r95.r95_fecing = CURRENT
+	LET r_r95.r95_fecing  = CURRENT
+	LET r_r95.r95_num_sri = r_g37.g37_pref_sucurs, "-",
+				r_g37.g37_pref_pto_vta, "-",
+				r_r95.r95_guia_remision USING "&&&&&&&&&"
 	WHENEVER ERROR CONTINUE
 	INSERT INTO rept095 VALUES (r_r95.*)
 	IF STATUS = 0 THEN
@@ -8645,6 +8794,7 @@ WHILE TRUE
 		EXIT WHILE
 	END IF
 END WHILE
+{--
 LET lim     = LENGTH(r_r95.r95_num_sri)
 LET sec_sri = r_r95.r95_num_sri[9, lim]
 UPDATE gent037
@@ -8654,6 +8804,7 @@ UPDATE gent037
 	  AND g37_tipo_doc     = "GR"
 	  AND g37_secuencia    = secuencia
 	  AND g37_sec_num_sri <= sec_sri
+--}
 IF num_ent IS NOT NULL THEN
 	LET r_r96.r96_compania      = codcia
 	LET r_r96.r96_localidad     = codloc
@@ -8670,10 +8821,10 @@ IF cod_tran IS NOT NULL THEN
 	LET r_r97.r97_num_tran      = num_tran
 	INSERT INTO rept097 VALUES (r_r97.*)
 END IF
-CLOSE WINDOW w_ayuf307
 LET int_flag = 0
-LET mensaje  = 'Se generó Guía de Remisión No. ',
-		r_r95.r95_guia_remision USING "<<<<<<<&", '.'
+CLOSE WINDOW w_ayuf307
+LET mensaje  = 'Se generó Guía de Remisión No. ', r_r95.r95_num_sri CLIPPED, '.'
+		--r_r95.r95_guia_remision USING "<<<<<<<&", '.'
 CALL fl_mostrar_mensaje(mensaje, 'info')
 RETURN 1
 
@@ -8697,7 +8848,7 @@ DEFINE r_r96		RECORD LIKE rept096.*
 DEFINE r_r97		RECORD LIKE rept097.*
 DEFINE resp		CHAR(6)
 DEFINE resul		SMALLINT
-DEFINE mensaje		VARCHAR(100)
+DEFINE mensaje		VARCHAR(150)
 
 IF num_ent IS NULL AND cod_tran IS NULL THEN
 	CALL fl_mostrar_mensaje('No hay ninguna transacción o nota de entrega, para relacionar la guía de remisión.', 'exclamation')
@@ -8786,8 +8937,8 @@ IF cod_tran = 'TR' THEN
 	LET r_r97.r97_num_tran      = num_tran
 	INSERT INTO rept097 VALUES (r_r97.*)
 END IF
-LET mensaje  = 'Se agregó a Guía de Remisión No. ',
-		r_r95.r95_guia_remision USING "<<<<<<<&", '.'
+LET mensaje  = 'Se agregó a Guía de Remisión No. ',r_r95.r95_num_sri CLIPPED,'.'
+		--r_r95.r95_guia_remision USING "<<<<<<<&", '.'
 CALL fl_mostrar_mensaje(mensaje, 'info')
 RETURN 1
 
@@ -8810,6 +8961,8 @@ DEFINE row_ini  	SMALLINT
 DEFINE num_rows 	SMALLINT
 DEFINE num_cols 	SMALLINT
 DEFINE r_r95		RECORD LIKE rept095.*
+DEFINE r_r108		RECORD LIKE rept108.*
+DEFINE r_r109		RECORD LIKE rept109.*
 
 LET lin_menu = 0
 LET row_ini  = 3
@@ -8856,14 +9009,21 @@ ELSE
 END IF
 IF r_r95.r95_compania IS NULL THEN
 	CALL fl_mostrar_mensaje('No existe Guía de Remisión.', 'exclamation')
+	LET int_flag = 0
+	CLOSE WINDOW w_ayuf307
 	RETURN
 END IF
-DISPLAY BY NAME r_r95.r95_fecha_initras,r_r95.r95_num_sri,r_r95.r95_autoriz_sri,
+DISPLAY BY NAME r_r95.r95_fecha_initras,r_r95.r95_num_sri,
 		r_r95.r95_fecha_fintras, r_r95.r95_motivo, r_r95.r95_fecha_emi,
 		r_r95.r95_punto_part, r_r95.r95_persona_guia,
 		r_r95.r95_persona_id, r_r95.r95_persona_dest, r_r95.r95_placa,
-		r_r95.r95_pers_id_dest, r_r95.r95_punto_lleg,r_r95.r95_usuario,
-		r_r95.r95_fecing
+		r_r95.r95_pers_id_dest, r_r95.r95_punto_lleg,
+		r_r95.r95_proc_orden, r_r95.r95_cod_zona, r_r95.r95_cod_subzona,
+		r_r95.r95_usuario, r_r95.r95_fecing
+CALL fl_lee_zona(codcia, codloc, r_r95.r95_cod_zona) RETURNING r_r108.*
+CALL fl_lee_subzona(codcia, codloc, r_r95.r95_cod_zona, r_r95.r95_cod_subzona)
+	RETURNING r_r109.*
+DISPLAY BY NAME r_r108.r108_descripcion, r_r109.r109_descripcion
 MENU 'OPCIONES'
 	COMMAND KEY('I') 'Imprimir' 'Imprime la Guía de Remisión. '
 		LET run_prog = '; fglrun '
@@ -8880,8 +9040,8 @@ MENU 'OPCIONES'
 	COMMAND KEY('S') 'Salir' 'Salir al menu anterior. '
 		EXIT MENU
 END MENU
-CLOSE WINDOW w_ayuf307
 LET int_flag = 0
+CLOSE WINDOW w_ayuf307
 RETURN
 
 END FUNCTION
@@ -9292,7 +9452,7 @@ IF estado <> 'T' THEN
 		LET expr_est = '   AND a10_estado = "', estado, '"'
 	ELSE
 		LET expr_est = '   AND a10_estado IN ("N", "R", "E", "S", "V",',
-							' "D") '
+							' "D", "C") '
 	END IF
 ELSE
 	DECLARE ex_est CURSOR FOR
@@ -9568,5 +9728,219 @@ IF cuantos > 0 THEN
 	LET resul = 1
 END IF
 RETURN resul
+
+END FUNCTION
+
+
+
+FUNCTION fl_lee_transaccion_remota(cod_cia, cod_loc, cod_tran, num_tran)
+DEFINE cod_cia		LIKE rept090.r90_compania
+DEFINE cod_loc		LIKE rept090.r90_localidad
+DEFINE cod_tran		LIKE rept090.r90_cod_tran
+DEFINE num_tran		LIKE rept090.r90_num_tran
+DEFINE r		RECORD LIKE rept090.*
+
+INITIALIZE r.* TO NULL
+--IF cod_tran <> 'TR' THEN
+IF cod_loc = 0 THEN
+	CASE vg_codloc
+		WHEN 1 LET cod_loc = 3
+		WHEN 3 LET cod_loc = 1
+		WHEN 4 LET cod_loc = 3
+	END CASE
+END IF
+SELECT * INTO r.*
+	FROM rept090
+	WHERE r90_compania  = cod_cia
+	  AND r90_localidad = cod_loc
+	  AND r90_cod_tran  = cod_tran
+	  AND r90_num_tran  = num_tran
+RETURN r.*
+
+END FUNCTION
+
+
+
+FUNCTION fl_lee_transaccion_cab_rem(cod_cia, cod_loc, cod_tran, num_tran)
+DEFINE cod_cia		LIKE rept091.r91_compania
+DEFINE cod_loc		LIKE rept091.r91_localidad
+DEFINE cod_tran		LIKE rept091.r91_cod_tran
+DEFINE num_tran		LIKE rept091.r91_num_tran
+DEFINE r		RECORD LIKE rept091.*
+
+INITIALIZE r.* TO NULL
+SELECT * INTO r.*
+	FROM rept091
+	WHERE r91_compania  = cod_cia
+	  AND r91_localidad = cod_loc
+	  AND r91_cod_tran  = cod_tran
+	  AND r91_num_tran  = num_tran
+RETURN r.*
+
+END FUNCTION
+
+
+
+FUNCTION fl_lee_zona(codcia, codloc, zona)
+DEFINE codcia		LIKE rept108.r108_compania
+DEFINE codloc		LIKE rept108.r108_localidad
+DEFINE zona		LIKE rept108.r108_cod_zona
+DEFINE r_r108		RECORD LIKE rept108.*
+
+INITIALIZE r_r108.* TO NULL
+SELECT * INTO r_r108.*
+	FROM rept108
+	WHERE r108_compania  = codcia
+	  AND r108_localidad = codloc
+	  AND r108_cod_zona  = zona
+RETURN r_r108.*
+
+END FUNCTION
+
+
+
+FUNCTION fl_lee_subzona(codcia, codloc, zona, subzona)
+DEFINE codcia		LIKE rept109.r109_compania
+DEFINE codloc		LIKE rept109.r109_localidad
+DEFINE zona		LIKE rept109.r109_cod_zona
+DEFINE subzona		LIKE rept109.r109_cod_subzona
+DEFINE r_r109		RECORD LIKE rept109.*
+
+INITIALIZE r_r109.* TO NULL
+SELECT * INTO r_r109.*
+	FROM rept109
+	WHERE r109_compania    = codcia
+	  AND r109_localidad   = codloc
+	  AND r109_cod_zona    = zona
+	  AND r109_cod_subzona = subzona
+RETURN r_r109.*
+
+END FUNCTION
+
+
+
+FUNCTION fl_lee_transporte(codcia, codloc, trans)
+DEFINE codcia		LIKE rept110.r110_compania
+DEFINE codloc		LIKE rept110.r110_localidad
+DEFINE trans		LIKE rept110.r110_cod_trans
+DEFINE r_r110		RECORD LIKE rept110.*
+
+INITIALIZE r_r110.* TO NULL
+SELECT * INTO r_r110.*
+	FROM rept110
+	WHERE r110_compania  = codcia
+	  AND r110_localidad = codloc
+	  AND r110_cod_trans = trans
+RETURN r_r110.*
+
+END FUNCTION
+
+
+
+FUNCTION fl_lee_chofer(codcia, codloc, trans, chofer)
+DEFINE codcia		LIKE rept111.r111_compania
+DEFINE codloc		LIKE rept111.r111_localidad
+DEFINE trans		LIKE rept111.r111_cod_trans
+DEFINE chofer		LIKE rept111.r111_cod_chofer
+DEFINE r_r111		RECORD LIKE rept111.*
+
+INITIALIZE r_r111.* TO NULL
+SELECT * INTO r_r111.*
+	FROM rept111
+	WHERE r111_compania   = codcia
+	  AND r111_localidad  = codloc
+	  AND r111_cod_trans  = trans
+	  AND r111_cod_chofer = chofer
+RETURN r_r111.*
+
+END FUNCTION
+
+
+
+FUNCTION fl_lee_observacion(codcia, codloc, obser)
+DEFINE codcia		LIKE rept112.r112_compania
+DEFINE codloc		LIKE rept112.r112_localidad
+DEFINE obser		LIKE rept112.r112_cod_obser
+DEFINE r_r112		RECORD LIKE rept112.*
+
+INITIALIZE r_r112.* TO NULL
+SELECT * INTO r_r112.*
+	FROM rept112
+	WHERE r112_compania  = codcia
+	  AND r112_localidad = codloc
+	  AND r112_cod_obser  = obser
+RETURN r_r112.*
+
+END FUNCTION
+
+
+
+FUNCTION fl_lee_hoja_de_ruta(codcia, codloc, num_hojrut)
+DEFINE codcia		LIKE rept113.r113_compania
+DEFINE codloc		LIKE rept113.r113_localidad
+DEFINE num_hojrut	LIKE rept113.r113_num_hojrut
+DEFINE r_r113		RECORD LIKE rept113.*
+
+INITIALIZE r_r113.* TO NULL
+SELECT * INTO r_r113.*
+	FROM rept113
+	WHERE r113_compania   = codcia
+	  AND r113_localidad  = codloc
+	  AND r113_num_hojrut = num_hojrut
+RETURN r_r113.*
+
+END FUNCTION
+
+
+
+FUNCTION fl_lee_ayudante(codcia, codloc, trans, ayud)
+DEFINE codcia		LIKE rept115.r115_compania
+DEFINE codloc		LIKE rept115.r115_localidad
+DEFINE trans		LIKE rept115.r115_cod_trans
+DEFINE ayud		LIKE rept115.r115_cod_ayud
+DEFINE r_r115		RECORD LIKE rept115.*
+
+INITIALIZE r_r115.* TO NULL
+SELECT * INTO r_r115.*
+	FROM rept115
+	WHERE r115_compania  = codcia
+	  AND r115_localidad = codloc
+	  AND r115_cod_trans = trans
+	  AND r115_cod_ayud  = ayud
+RETURN r_r115.*
+
+END FUNCTION
+
+
+
+FUNCTION fl_lee_cia_entrega(codcia, codloc, trans)
+DEFINE codcia		LIKE rept116.r116_compania
+DEFINE codloc		LIKE rept116.r116_localidad
+DEFINE trans		LIKE rept116.r116_cia_trans
+DEFINE r_r116		RECORD LIKE rept116.*
+
+INITIALIZE r_r116.* TO NULL
+SELECT * INTO r_r116.*
+	FROM rept116
+	WHERE r116_compania  = codcia
+	  AND r116_localidad = codloc
+	  AND r116_cia_trans = trans
+RETURN r_r116.*
+
+END FUNCTION
+
+
+
+FUNCTION fl_lee_division_politica(pais, divi_poli)
+DEFINE pais		LIKE gent025.g25_pais
+DEFINE divi_poli	LIKE gent025.g25_divi_poli
+DEFINE r_g25		RECORD LIKE gent025.*
+
+INITIALIZE r_g25.* TO NULL
+SELECT * INTO r_g25.*
+	FROM gent025
+	WHERE g25_pais      = pais
+	  AND g25_divi_poli = divi_poli
+RETURN r_g25.*
 
 END FUNCTION

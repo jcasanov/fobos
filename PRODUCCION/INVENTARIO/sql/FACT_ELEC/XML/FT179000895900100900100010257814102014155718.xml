@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000102578</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>14/10/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000102578</guiaRemision>
+<razonSocialComprador>VELEZ Y ASOCIADOS S.A.</razonSocialComprador>
+<identificacionComprador>0992309652001</identificacionComprador>
+<totalSinImpuestos>668.25</totalSinImpuestos>
+<totalDescuento>100.24</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>568.01</baseImponible>
+<valor>68.16</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>636.17</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>70375</codigoPrincipal>
+<descripcion>ROTOMARTILLO 5359-21 SDS DE 1-1/8" 7.4AMP 0-980RPM 0-4200 GOLPES (MALETIN)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>640.14</precioUnitario>
+<descuento>96.02</descuento>
+<precioTotalSinImpuesto>544.12</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>544.12</baseImponible>
+<valor>65.29</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150477</codigoPrincipal>
+<descripcion>CINCEL PARA CEMENTO 48-62-6115 SDS PLUS 3/4" x 10" PLANO.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>13.81</precioUnitario>
+<descuento>2.07</descuento>
+<precioTotalSinImpuesto>11.74</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>11.74</baseImponible>
+<valor>1.41</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>95043</codigoPrincipal>
+<descripcion>CINCEL PARA CEMENTO 48-62-4075 CINCEL PUNTERO 12"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>14.30</precioUnitario>
+<descuento>2.15</descuento>
+<precioTotalSinImpuesto>12.15</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>12.15</baseImponible>
+<valor>1.46</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

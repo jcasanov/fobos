@@ -1,0 +1,5 @@
+cd ../sql/
+dbaccess acero_gc -qcr up_r20.sql
+cd ../fuentes/
+fglgo update1179 acero_gc 2 | tee update1179.log
+fglgo ajuste79_3 acero_gc 2 | tee ajuste79_3.log

@@ -206,11 +206,9 @@ CALL muestra_contadores()
 
 END FUNCTION
 
-
    
 
 FUNCTION control_modificacion()
-DEFINE flag		CHAR(1)
 
 IF rm_cobra.z05_estado <> 'A' THEN
 	CALL fl_mensaje_estado_bloqueado()
@@ -283,13 +281,13 @@ IF NOT int_flag THEN
 	LET vm_rows[vm_row_current] = num_aux
 	CALL fl_mensaje_registro_ingresado()
 END IF
+CLEAR FORM
 IF vm_num_rows > 0 THEN
 	CALL lee_muestra_registro(vm_rows[vm_row_current])
 END IF
 CALL muestra_contadores()
 
 END FUNCTION
-
 
 
 
@@ -365,8 +363,7 @@ END FUNCTION
 
 FUNCTION control_bloqueo()
 DEFINE resp		CHAR(6)
-DEFINE i		SMALLINT
-DEFINE mensaje		VARCHAR(20)
+DEFINE mensaje		VARCHAR(40)
 DEFINE estado		CHAR(1)
 
 LET int_flag = 0
@@ -384,11 +381,11 @@ IF STATUS < 0 THEN
 	RETURN
 END IF
 WHENEVER ERROR STOP
-LET mensaje = 'Seguro de bloquear ?'
+LET mensaje = 'Seguro de BLOQUEAR ?'
 LET estado  = 'B'
 IF rm_cobra.z05_estado <> 'A' THEN
-      LET mensaje = 'Seguro de activar ?'
-      LET estado  = 'A'
+	LET mensaje = 'Seguro de ACTIVAR ?'
+	LET estado  = 'A'
 END IF	
 LET int_flag = 0
 CALL fl_hacer_pregunta(mensaje, 'No') RETURNING resp

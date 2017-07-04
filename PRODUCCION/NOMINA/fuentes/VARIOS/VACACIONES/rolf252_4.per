@@ -1,0 +1,20 @@
+DATABASE aceros
+SCREEN
+{
+
+          DATOS DE GLOSA Y CHEQUE PARA VACACIONES
+          --------------------------------------
+
+ No. Cheque: [c000      ]
+
+      Glosa: [c001                                         ]
+             [c001                                         ]
+             [c001                                         ]
+
+}
+TABLES
+ctbt012
+ATTRIBUTES
+c000 = ctbt012.b12_num_cheque, AUTONEXT, REVERSE, UPSHIFT;
+c001 = ctbt012.b12_glosa, AUTONEXT, REVERSE, UPSHIFT, WORDWRAP COMPRESS;
+END

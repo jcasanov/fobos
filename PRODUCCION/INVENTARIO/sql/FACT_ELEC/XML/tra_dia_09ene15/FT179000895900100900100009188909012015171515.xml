@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091889</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>09/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091889</guiaRemision>
+<razonSocialComprador>CONSTRUCCIONES Y CUBIERTAS KLAERE CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>0990392218001</identificacionComprador>
+<totalSinImpuestos>252.41</totalSinImpuestos>
+<totalDescuento>28.05</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>252.41</baseImponible>
+<valor>30.29</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>282.70</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>15736</codigoPrincipal>
+<descripcion>DADOS PARA PERNOS DE 1/2" HS (ALTA VELOCIDAD) UNC (48235)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>280.46</precioUnitario>
+<descuento>28.05</descuento>
+<precioTotalSinImpuesto>252.41</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>252.41</baseImponible>
+<valor>30.29</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">asistentegerencia@estructurasklaere.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2114378</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">002848</campoAdicional>
+</infoAdicional>
+</factura>

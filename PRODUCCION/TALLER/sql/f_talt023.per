@@ -1,0 +1,129 @@
+database acero_gm
+screen size 24 by 80
+{
+t23_compania       [f000       ]
+t23_localidad      [f001  ]
+t23_orden          [f002       ]
+t23_estado         [a]
+t23_tipo_ot        [b]
+t23_subtipo_ot     [c]
+t23_descripcion    [f003                                    ]
+                   [f004                                    ]
+                   [f005                                    ]
+t23_cod_cliente    [f006       ]
+t23_nom_cliente    [f007                                              ]
+                   [f008                                              ]
+t23_tel_cliente    [f009      ]
+t23_codcli_est     [f010       ]
+t23_numpre         [f011       ]
+t23_valor_tope     [f012         ]
+t23_seccion        [f013  ]
+t23_cod_asesor     [f014  ]
+t23_cod_mecani     [f015  ]
+t23_moneda         [a0]
+}
+screen
+{
+t23_paridad        [f016              ]
+t23_precision      [f017  ]
+t23_fecini         [f018      ]
+t23_fecfin         [f019      ]
+t23_cont_cred      [d]
+t23_porc_impto     [f020  ]
+t23_modelo         [f021           ]
+t23_chasis         [f022                     ]
+t23_placa          [f023      ]
+t23_color          [f024           ]
+t23_kilometraje    [f025       ]
+t23_orden_cheq     [f026       ]
+t23_val_mo_tal     [f027         ]
+t23_val_mo_ext     [f028         ]
+t23_val_mo_cti     [f029         ]
+t23_val_rp_tal     [f030         ]
+t23_val_rp_ext     [f031         ]
+t23_val_rp_cti     [f032         ]
+t23_val_rp_alm     [f033         ]
+t23_val_otros1     [f034         ]
+}
+screen
+{
+t23_val_otros2     [f035         ]
+t23_por_mo_tal     [f036  ]
+t23_por_rp_tal     [f037  ]
+t23_por_rp_alm     [f038  ]
+t23_vde_mo_tal     [f039        ]
+t23_vde_rp_tal     [f040        ]
+t23_vde_rp_alm     [f041        ]
+t23_tot_bruto      [f042          ]
+t23_tot_dscto      [f043         ]
+t23_val_impto      [f044         ]
+t23_tot_neto       [f045          ]
+t23_fec_cierre     [f046               ]
+t23_num_factura    [f047             ]
+t23_fec_factura    [f048               ]
+t23_usuario        [f049      ]
+t23_fecing         [f050               ]
+}
+end
+tables
+talt023
+attributes
+f000 = talt023.t23_compania;
+f001 = talt023.t23_localidad;
+f002 = talt023.t23_orden;
+a = talt023.t23_estado;
+b = talt023.t23_tipo_ot;
+c = talt023.t23_subtipo_ot;
+f003 = talt023.t23_descripcion[1,40];
+f004 = talt023.t23_descripcion[41,80];
+f005 = talt023.t23_descripcion[81,120];
+f006 = talt023.t23_cod_cliente;
+f007 = talt023.t23_nom_cliente[1,50];
+f008 = talt023.t23_nom_cliente[51,100];
+f009 = talt023.t23_tel_cliente;
+f010 = talt023.t23_codcli_est;
+f011 = talt023.t23_numpre;
+f012 = talt023.t23_valor_tope;
+f013 = talt023.t23_seccion;
+f014 = talt023.t23_cod_asesor;
+f015 = talt023.t23_cod_mecani;
+a0 = talt023.t23_moneda;
+
+f016 = talt023.t23_paridad;
+f017 = talt023.t23_precision;
+f018 = talt023.t23_fecini;
+f019 = talt023.t23_fecfin;
+d = talt023.t23_cont_cred;
+f020 = talt023.t23_porc_impto;
+f021 = talt023.t23_modelo;
+f022 = talt023.t23_chasis;
+f023 = talt023.t23_placa;
+f024 = talt023.t23_color;
+f025 = talt023.t23_kilometraje;
+f026 = talt023.t23_orden_cheq;
+f027 = talt023.t23_val_mo_tal;
+f028 = talt023.t23_val_mo_ext;
+f029 = talt023.t23_val_mo_cti;
+f030 = talt023.t23_val_rp_tal;
+f031 = talt023.t23_val_rp_ext;
+f032 = talt023.t23_val_rp_cti;
+f033 = talt023.t23_val_rp_alm;
+f034 = talt023.t23_val_otros1;
+
+f035 = talt023.t23_val_otros2;
+f036 = talt023.t23_por_mo_tal;
+f037 = talt023.t23_por_rp_tal;
+f038 = talt023.t23_por_rp_alm;
+f039 = talt023.t23_vde_mo_tal;
+f040 = talt023.t23_vde_rp_tal;
+f041 = talt023.t23_vde_rp_alm;
+f042 = talt023.t23_tot_bruto;
+f043 = talt023.t23_tot_dscto;
+f044 = talt023.t23_val_impto;
+f045 = talt023.t23_tot_neto;
+f046 = talt023.t23_fec_cierre;
+f047 = talt023.t23_num_factura;
+f048 = talt023.t23_fec_factura;
+f049 = talt023.t23_usuario;
+f050 = talt023.t23_fecing;
+end

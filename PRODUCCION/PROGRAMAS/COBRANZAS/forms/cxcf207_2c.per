@@ -1,0 +1,55 @@
+DATABASE aceros
+SCREEN
+{
+
+           Cliente: [c001       ] [c002                                    ]
+             Banco: [c003][c004                             ]
+        No. Cuenta: [c005           ]         No. Cheque: [c006            ]
+                                            Valor Cheque: [c024            ]
+        Fecha Caja: [c007      ]               Moneda: [a0][c008           ]
+   Area de Negocio: [c009  ][c010           ]
+
+        Referencia: [c013                          ]
+                    [c013                          ]
+         Valor N/D: [c014            ]
+         N/D Banco: [c015      ]          Fecha N/D Banco: [c016      ]
+           Cartera: [c018  ] [c019                          ]
+    Línea de Venta: [c020  ] [c021                          ]
+      N/D Generada: [c017            ]
+
+           Usuario: [c022      ]       Fecha Ingreso: [c023               ]
+}
+TABLES
+cajt012, cxct020
+ATTRIBUTES
+c001 = cajt012.j12_codcli, AUTONEXT, UPSHIFT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c002 = FORMONLY.tit_nombre_cli, NOENTRY, UPSHIFT;
+c003 = cajt012.j12_banco, NOENTRY, REVERSE, UPSHIFT;
+c004 = FORMONLY.tit_banco, NOENTRY, REVERSE, UPSHIFT;
+c005 = cajt012.j12_num_cta, NOENTRY, REVERSE, UPSHIFT;
+c006 = cajt012.j12_num_cheque, NOENTRY, REVERSE, UPSHIFT;
+c007 = cajt012.j12_fec_caja, NOENTRY, REVERSE, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+a0   = cajt012.j12_moneda, NOENTRY, REVERSE, UPSHIFT;
+c008 = FORMONLY.tit_moneda, NOENTRY, REVERSE, UPSHIFT;
+c009 = cajt012.j12_areaneg, NOENTRY, UPSHIFT;
+c010 = FORMONLY.tit_area, NOENTRY, UPSHIFT;
+c013 = cajt012.j12_referencia, AUTONEXT, REVERSE, UPSHIFT, WORDWRAP COMPRESS;
+c014 = cajt012.j12_valor, AUTONEXT, REVERSE, UPSHIFT,
+	INCLUDE = (0 TO 9999999999.99), FORMAT = '#,###,###,##&.##';
+c015 = cajt012.j12_nd_banco, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Ingresar el número de la nota de dédito que emite el banco';
+c016 = cajt012.j12_nd_fec_bco, AUTONEXT, REVERSE, UPSHIFT,FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingresar la fecha de la nota de dédito que emite el banco';
+c017 = cajt012.j12_nd_interna, NOENTRY, REVERSE, UPSHIFT;
+c018 = cxct020.z20_cartera, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c019 = FORMONLY.tit_cartera, NOENTRY, REVERSE, UPSHIFT;
+c020 = cxct020.z20_linea, AUTONEXT, REVERSE, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c021 = FORMONLY.tit_linea, NOENTRY, REVERSE, UPSHIFT;
+c022 = cajt012.j12_usuario, NOENTRY, REVERSE, UPSHIFT;
+c023 = cajt012.j12_fecing, NOENTRY, REVERSE, UPSHIFT;
+c024 = FORMONLY.tit_valor_che TYPE DECIMAL (12,2), NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = '#,###,###,##&.##';
+end

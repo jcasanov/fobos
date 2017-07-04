@@ -1150,10 +1150,7 @@ INPUT BY NAME r_n39.n39_fecini_vac, r_n39.n39_fecfin_vac, r_n39.n39_tipo,
 				CALL fl_lee_trabajador_roles(r_n39.n39_compania,
 							r_n39.n39_cod_trab)
 					RETURNING r_n30.*
-				IF rm_n39.n39_tipo_pago = 'T' THEN
-					LET r_n39.n39_cta_trabaj =
-							r_n30.n30_cta_trabaj
-				END IF
+				LET r_n39.n39_cta_trabaj = r_n30.n30_cta_trabaj
                                 DISPLAY BY NAME r_n39.n39_bco_empresa,
 						r_g08.g08_nombre,
 						r_n39.n39_cta_empresa,
@@ -3586,8 +3583,8 @@ WHILE TRUE
 			IF YEAR(rm_diasgoz[i].n47_fecha_ini) <>
 			   YEAR(r_n39.n39_perfin_real)
 			THEN
-				--CALL fl_mostrar_mensaje('El anio de la fecha inicial debe ser igual al anio de la fecha final real de vacaciones.', 'exclamation')
-				--NEXT FIELD n47_fecha_ini
+				CALL fl_mostrar_mensaje('El anio de la fecha inicial debe ser igual al anio de la fecha final real de vacaciones.', 'exclamation')
+				NEXT FIELD n47_fecha_ini
 			END IF
 		AFTER FIELD n47_dias_real, n47_dias_goza
 			IF rm_diasgoz[i].n47_estado <> 'A' THEN

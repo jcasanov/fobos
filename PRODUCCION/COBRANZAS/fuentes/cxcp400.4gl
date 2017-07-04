@@ -315,7 +315,7 @@ INPUT BY NAME rm_par.anho, rm_par.mes, rm_par.g13_moneda, rm_par.areaneg,
 			END IF 
 		END IF
 		IF INFIELD(zona_cobro) THEN
-			CALL fl_ayuda_zona_cobro() 
+			CALL fl_ayuda_zona_cobro('T', 'T') 
 					RETURNING r_z06.z06_zona_cobro,
 						  r_z06.z06_nombre
 			IF r_z06.z06_zona_cobro IS NOT NULL THEN

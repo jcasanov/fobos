@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175857</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>ISLA GENOVESA N42-118 Y TOMAS DE BERLANG</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175857</guiaRemision>
+<razonSocialComprador>CORPORACION ECUATORIANA DE SUMINISTROS SUMECOR CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1790963489001</identificacionComprador>
+<totalSinImpuestos>328.55</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>328.55</baseImponible>
+<valor>39.43</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>367.98</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>92911</codigoPrincipal>
+<descripcion>BOMBA CENTRIF MONOETAPA DE AUMENTO DE PRESION UPA 120 AUTO 1 x 110V./60C/ 3/4" 215 WATTS (52588421)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>303.65</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>303.65</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="GRUNDFOS" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>303.65</baseImponible>
+<valor>36.44</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>94797</codigoPrincipal>
+<descripcion>KIT SENSOR DE FLUJO  P/UPA-120 (91760166)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>24.90</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>24.90</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="GRUNDFOS" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>24.90</baseImponible>
+<valor>2.99</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

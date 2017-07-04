@@ -1,0 +1,3 @@
+fglpc restaura_act2.4gl
+cat restaura_act2.4go globales.4go libp000.4go libp001.4go libp002.4go libp003.4go libp004.4go libp005.4go libp006.4go > restaura_act2.4gi
+rm restaura_act2.4go

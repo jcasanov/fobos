@@ -1,0 +1,43 @@
+DATABASE FORMONLY
+SCREEN
+{
+
+         Moneda: [c4]     [c005                ]
+
+ Cód. Proveedor: [c002  ] [c003                                         ]
+
+ Incluir Doc. Saldo Cero? : [d]  Cartera Del [c007      ] Al [c008      ]
+
+                                 Fecha Vcto. [c016      ]  - [c017      ]
+
+     Tipo Saldo: [c009        ]          Valor Doc. >= a: [c010         ]
+
+
+
+
+}
+ATTRIBUTES
+c002 = FORMONLY.codprov TYPE INTEGER, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = FORMONLY.nomprov, NOENTRY;
+c4   = FORMONLY.moneda TYPE CHAR NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c005 = FORMONLY.tit_mon, NOENTRY, REVERSE;
+d    = FORMONLY.incluir_sal TYPE CHAR NOT NULL, REQUIRED, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N';
+c007 = FORMONLY.fecha_emi TYPE DATE, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Fecha en que se emitieron los documentos. (dd-mm-yyyy)';
+c008 = FORMONLY.fecha_cart TYPE DATE NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+	REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Fecha que se va a generar el detalle de Documentos. (dd-mm-yyyy)';
+c016 = FORMONLY.fecha_vcto1 TYPE DATE, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Fecha Inicial de vencimiento. (dd-mm-yyyy). Utilizar en planificación de pagos.';
+c017 = FORMONLY.fecha_vcto2 TYPE DATE, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Fecha Final de vencimiento. (dd-mm-yyyy). Utilizar en planificación de pagos.';
+c009 = FORMONLY.tipo_saldo TYPE CHAR NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'RADIO',
+	CONFIG = 'A "A Favor"  P "Por Vencer"  V Vencidos  T Todos',
+	DEFAULT = 'T';
+c010 = FORMONLY.valor TYPE DECIMAL(12,2), INCLUDE = (0 TO 99999999.99),
+	FORMAT = '--,---,--&.##';
+END

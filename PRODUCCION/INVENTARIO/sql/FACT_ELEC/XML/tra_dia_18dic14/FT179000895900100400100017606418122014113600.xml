@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176064</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176064</guiaRemision>
+<razonSocialComprador>OFISNA  CIA.LTDA.</razonSocialComprador>
+<identificacionComprador>1790697754001</identificacionComprador>
+<totalSinImpuestos>98.97</totalSinImpuestos>
+<totalDescuento>11.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>98.97</baseImponible>
+<valor>11.88</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>110.85</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5828</codigoPrincipal>
+<descripcion>TUBO PVC ROSCABLE x 6 MTS. DE 3/4" (340 PSI)</descripcion>
+<cantidad>7.00</cantidad>
+<precioUnitario>11.08</precioUnitario>
+<descuento>7.76</descuento>
+<precioTotalSinImpuesto>69.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>69.80</baseImponible>
+<valor>8.38</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50382</codigoPrincipal>
+<descripcion>TEE POLIPROPILENO DE 3/4" (AGUA CALIENTE)</descripcion>
+<cantidad>14.00</cantidad>
+<precioUnitario>0.90</precioUnitario>
+<descuento>1.26</descuento>
+<precioTotalSinImpuesto>11.34</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>11.34</baseImponible>
+<valor>1.36</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50292</codigoPrincipal>
+<descripcion>CODO POLIPROPILENO DE 3/4" x 90°</descripcion>
+<cantidad>21.00</cantidad>
+<precioUnitario>0.60</precioUnitario>
+<descuento>1.26</descuento>
+<precioTotalSinImpuesto>11.34</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>11.34</baseImponible>
+<valor>1.36</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50353</codigoPrincipal>
+<descripcion>REDUCTOR POLIPROPILENO DE 1" A 3/4" (AGUA CALIENTE)</descripcion>
+<cantidad>7.00</cantidad>
+<precioUnitario>1.03</precioUnitario>
+<descuento>0.72</descuento>
+<precioTotalSinImpuesto>6.49</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.49</baseImponible>
+<valor>0.78</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2827219</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">028896</campoAdicional>
+</infoAdicional>
+</factura>

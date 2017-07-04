@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268091</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>06/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268091</guiaRemision>
+<razonSocialComprador>HILSEA INVESTMENTS LIMITED</razonSocialComprador>
+<identificacionComprador>1791006356001</identificacionComprador>
+<totalSinImpuestos>91.70</totalSinImpuestos>
+<totalDescuento>16.19</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>91.70</baseImponible>
+<valor>11.00</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>102.70</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102732</codigoPrincipal>
+<descripcion>IMPULSOR DE ACERO INOX. P/CM-5 (97690626)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>15.52</precioUnitario>
+<descuento>4.66</descuento>
+<precioTotalSinImpuesto>26.38</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>26.38</baseImponible>
+<valor>3.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102389</codigoPrincipal>
+<descripcion>KIT DE REPARACION P/ CM 1/3/5  (97690016)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>76.85</precioUnitario>
+<descuento>11.53</descuento>
+<precioTotalSinImpuesto>65.32</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="GRUNDF"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>65.32</baseImponible>
+<valor>7.84</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">paulj@hilsea.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2387911</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">029071</campoAdicional>
+</infoAdicional>
+</factura>

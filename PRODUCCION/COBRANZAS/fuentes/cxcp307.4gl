@@ -1,11 +1,11 @@
-------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 -- Titulo           : cxcp307.4gl - Consulta Análisis Detalle Cartera
 -- Elaboracion      : 11-Oct-2001
 -- Autor            : YEC
 -- Formato Ejecucion: fglrun cxcp307.4gl base_datos modulo compañía localidad
 -- Ultima Correccion: 
 -- Motivo Correccion:
-------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
 DEFINE rm_orden		ARRAY[10] OF CHAR(4)

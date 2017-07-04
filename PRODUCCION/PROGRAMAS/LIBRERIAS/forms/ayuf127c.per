@@ -1,0 +1,29 @@
+DATABASE aceros
+SCREEN
+{
+  LINEAS DE REPUESTOS
+ -----------------------------------------------------------------
+  Sub.  Descripción                    Línea
+ -----------------------------------------------------------------
+ [c000 |c001                          |c002                      ]
+ [c000 |c001                          |c002                      ]
+ [c000 |c001                          |c002                      ]
+ [c000 |c001                          |c002                      ]
+ [c000 |c001                          |c002                      ]
+ [c000 |c001                          |c002                      ]
+ [c000 |c001                          |c002                      ]
+ [c000 |c001                          |c002                      ]
+ [c000 |c001                          |c002                      ]
+ [c000 |c001                          |c002                      ]
+}
+TABLES
+rept070
+rept003
+ATTRIBUTES
+c000 = r70_sub_linea, UPSHIFT, REVERSE;
+c001 = r70_desc_sub, UPSHIFT, REVERSE;
+c002 = r03_nombre, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_sublin[10] (r70_sub_linea, r70_desc_sub, r03_nombre)

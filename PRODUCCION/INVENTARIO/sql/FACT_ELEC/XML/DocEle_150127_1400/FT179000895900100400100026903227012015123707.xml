@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000269032</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>004-001-000269032</guiaRemision>
+<razonSocialComprador>CAYANCELA PILA ALEJANDRO</razonSocialComprador>
+<identificacionComprador>1707388573</identificacionComprador>
+<totalSinImpuestos>1146.20</totalSinImpuestos>
+<totalDescuento>127.36</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1146.20</baseImponible>
+<valor>137.54</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>1283.74</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>96440</codigoPrincipal>
+<descripcion>BOMBA CENTRIF MULTIETAPA C-MOTOR FES6-AP DE 3 HP 1" X 3/4"  110V/60C/1F</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1273.56</precioUnitario>
+<descuento>127.36</descuento>
+<precioTotalSinImpuesto>1146.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FAMAC"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1146.20</baseImponible>
+<valor>137.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">edisson-santhy_84@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3151181</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064402</campoAdicional>
+<campoAdicional nombre="Observaciones">SOLICITA SR. ALEJANDRO CAYANCELA</campoAdicional>
+</infoAdicional>
+</factura>

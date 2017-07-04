@@ -1,0 +1,28 @@
+DATABASE aceros
+
+SCREEN
+{
+ CONFIGURACION DE COMPANIAS Y LOCALIDADES
+[z001                            |z002                         ]
+[f001                            |f002                         ] 
+[f001                            |f002                         ]
+[f001                            |f002                         ]
+[f001                            |f002                         ]
+[f001                            |f002                         ]
+[f001                            |f002                         ]
+[f001                            |f002                         ]
+}
+
+TABLES
+gent001
+gent002
+
+ATTRIBUTES
+f001 = g01_razonsocial;
+f002 = g02_nombre;
+z001 = formonly.bt_compania,  WIDGET = 'BUTTON';
+z002 = formonly.bt_localidad, WIDGET = 'BUTTON';
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh[7](g01_razonsocial, g02_nombre)

@@ -1,0 +1,21 @@
+database acero_gm
+screen size 24 by 80
+{
+c40_compania       [f000       ]
+c40_localidad      [f001  ]
+c40_numero_oc      [f002       ]
+c40_num_recep      [f003  ]
+c40_tipo_comp      [a0]
+c40_num_comp       [f004    ]
+}
+end
+tables
+ordt040
+attributes
+f000 = ordt040.c40_compania;
+f001 = ordt040.c40_localidad;
+f002 = ordt040.c40_numero_oc;
+f003 = ordt040.c40_num_recep;
+a0 = ordt040.c40_tipo_comp;
+f004 = ordt040.c40_num_comp;
+end

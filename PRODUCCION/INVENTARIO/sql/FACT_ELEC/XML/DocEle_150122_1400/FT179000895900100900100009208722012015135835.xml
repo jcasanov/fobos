@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092087</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092087</guiaRemision>
+<razonSocialComprador>FINCA BOTANICA AROMATICA S.A. FINBOAR</razonSocialComprador>
+<identificacionComprador>0992478535001</identificacionComprador>
+<totalSinImpuestos>1814.26</totalSinImpuestos>
+<totalDescuento>222.01</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>1814.26</baseImponible>
+<valor>217.71</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>2031.97</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>18698</codigoPrincipal>
+<descripcion>BOMBA CENTRIF STANDARD C-MOTOR 200 M  7-1/2HP 230/460-3-60</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1970.16</precioUnitario>
+<descuento>216.72</descuento>
+<precioTotalSinImpuesto>1753.44</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1753.44</baseImponible>
+<valor>210.41</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21412</codigoPrincipal>
+<descripcion>VALVULA DE PIE VP-63 DE 2-1/2"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>66.11</precioUnitario>
+<descuento>5.29</descuento>
+<precioTotalSinImpuesto>60.82</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HELBER"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>60.82</baseImponible>
+<valor>7.30</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">fincabotanica@yahoo.com</campoAdicional>
+<campoAdicional nombre="Email">dmontesinos@youngliving.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2883460</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">009561</campoAdicional>
+<campoAdicional nombre="Observaciones">ATT.RICHARD ALMEIDA</campoAdicional>
+</infoAdicional>
+</factura>

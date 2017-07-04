@@ -1,0 +1,37 @@
+database acero_gm
+screen size 24 by 80
+{
+j11_compania       [f000       ]
+j11_localidad      [f001  ]
+j11_tipo_fuente    [a0]
+j11_num_fuente     [f002       ]
+j11_secuencia      [f003  ]
+j11_codigo_pago    [a1]
+j11_moneda         [a2]
+j11_paridad        [f004              ]
+j11_valor          [f005          ]
+j11_cod_bco_tarj   [f006  ]
+j11_num_ch_aut     [f007           ]
+j11_num_cta_tarj   [f008                     ]
+j11_protestado     [a]
+j11_num_egreso     [f009       ]
+}
+end
+tables
+cajt011
+attributes
+f000 = cajt011.j11_compania;
+f001 = cajt011.j11_localidad;
+a0 = cajt011.j11_tipo_fuente;
+f002 = cajt011.j11_num_fuente;
+f003 = cajt011.j11_secuencia;
+a1 = cajt011.j11_codigo_pago;
+a2 = cajt011.j11_moneda;
+f004 = cajt011.j11_paridad;
+f005 = cajt011.j11_valor;
+f006 = cajt011.j11_cod_bco_tarj;
+f007 = cajt011.j11_num_ch_aut;
+f008 = cajt011.j11_num_cta_tarj;
+a = cajt011.j11_protestado;
+f009 = cajt011.j11_num_egreso;
+end

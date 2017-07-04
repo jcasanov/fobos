@@ -1,0 +1,33 @@
+DATABASE aceros
+
+SCREEN
+{
+ ACTIVOS FIJOS
+
+ [lbl1   |lbl2                           ]
+[c01    |c002                           ] 
+[c01    |c002                           ] 
+[c01    |c002                           ] 
+[c01    |c002                           ] 
+[c01    |c002                           ] 
+[c01    |c002                           ] 
+[c01    |c002                           ] 
+[c01    |c002                           ] 
+[c01    |c002                           ] 
+[c01    |c002                           ] 
+
+}
+
+TABLES
+actt010
+
+ATTRIBUTES
+c01  = a10_codigo_bien, UPSHIFT;
+c002 = a10_descripcion, UPSHIFT;
+lbl1 = formonly.bt_codigo_bien, 	NOENTRY, WIDGET='BUTTON', CONFIG='F15';
+lbl2 = formonly.bt_descripcion,	 	NOENTRY, WIDGET='BUTTON', CONFIG='F16';
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_codigo_bien[10](a10_codigo_bien, a10_descripcion)
+

@@ -615,10 +615,12 @@ INPUT BY NAME rm_g37.g37_localidad, rm_g37.g37_tipo_doc, rm_g37.g37_cont_cred,
 				CALL fl_mostrar_mensaje('Numero de Autorizacion no tiene completo el numero de digitos.', 'exclamation')
 				NEXT FIELD g37_autorizacion
 			END IF
+			{-- OJO
 			IF rm_g37.g37_autorizacion[1, 1] <> '1' THEN
 				CALL fl_mostrar_mensaje('Numero de Autorizacion es incorrecto.', 'exclamation')
 				NEXT FIELD g37_autorizacion
 			END IF
+			--}
 			IF NOT fl_valida_numeros(rm_g37.g37_autorizacion) THEN
 				NEXT FIELD g37_autorizacion
 			END IF

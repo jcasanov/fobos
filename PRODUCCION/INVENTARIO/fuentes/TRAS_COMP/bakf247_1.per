@@ -1,0 +1,96 @@
+DATABASE aceros
+SCREEN
+{
+                                                            [c000 ] de [c001 ]
+   Traspaso: [c002    ]    Codigo Ventas: [c01] [c003                        ]
+   Division: [c]        [c005                                ]
+      Linea: [c2]       [c006                                ]
+      Grupo: [c3 ]      [c007                                    ]
+      Clase: [c008    ] [c009                                              ]
+      Marca: [c010  ]   [c011                                ]
+ Referencia: [c004                                    ]
+ Items Actual  [c012 ] de [c013 ]   Items Traspaso          [c014 ] de [c015 ]
+ [c0|c020   |c021       |c022      |c1|c023   |c024      |c025      |c026     ]
+[c4|c030   |c031       |c032      |c5|c033   |c034      |c035      |c036     ]
+[c4|c030   |c031       |c032      |c5|c033   |c034      |c035      |c036     ]
+[c4|c030   |c031       |c032      |c5|c033   |c034      |c035      |c036     ]
+[c4|c030   |c031       |c032      |c5|c033   |c034      |c035      |c036     ]
+[c4|c030   |c031       |c032      |c5|c033   |c034      |c035      |c036     ]
+[c4|c030   |c031       |c032      |c5|c033   |c034      |c035      |c036     ]
+[c4|c030   |c031       |c032      |c5|c033   |c034      |c035      |c036     ]
+[c4|c030   |c031       |c032      |c5|c033   |c034      |c035      |c036     ]
+   [c040                                                             ]
+
+    Usuario: [c041      ]                 Fecha Ingreso: [c042               ]
+}
+TABLES
+rept001
+rept002
+rept043
+rept044
+ATTRIBUTES
+c000 = FORMONLY.num_cur, NOENTRY, UPSHIFT, REVERSE;
+c001 = FORMONLY.max_cur, NOENTRY, UPSHIFT, REVERSE;
+
+c002 = rept043.r43_traspaso, NOENTRY, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c01  = rept043.r43_cod_ventas, NOENTRY, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = rept001.r01_nombres, NOENTRY, UPSHIFT, REVERSE;
+c004 = rept043.r43_referencia, AUTONEXT, UPSHIFT, REVERSE;
+
+c    = rept043.r43_division, AUTONEXT, UPSHIFT, REVERSE, INCLUDE = ('0' TO '9'),
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c005 = rept043.r43_nom_div, NOENTRY, UPSHIFT, REVERSE;
+c2   = rept043.r43_sub_linea, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c006 = rept043.r43_desc_sub, NOENTRY, UPSHIFT, REVERSE;
+c3   = rept043.r43_cod_grupo, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c007 = rept043.r43_desc_grupo, NOENTRY, UPSHIFT;
+c008 = rept043.r43_cod_clase, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c009 = rept043.r43_desc_clase, NOENTRY, UPSHIFT;
+c010 = rept043.r43_marca, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c011 = rept043.r43_desc_marca, NOENTRY, UPSHIFT, REVERSE;
+
+c012 = FORMONLY.num_row1, NOENTRY, UPSHIFT, REVERSE;
+c013 = FORMONLY.max_row1, NOENTRY, UPSHIFT, REVERSE;
+c014 = FORMONLY.num_row2, NOENTRY, UPSHIFT, REVERSE;
+c015 = FORMONLY.max_row2, NOENTRY, UPSHIFT, REVERSE;
+
+c0   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15'; 
+c020 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16'; 
+c021 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17'; 
+c022 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18'; 
+c1   = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19'; 
+c023 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20'; 
+c024 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21'; 
+c025 = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22'; 
+c026 = FORMONLY.tit_col9, WIDGET = 'BUTTON', CONFIG = 'F23'; 
+
+c4   = rept044.r44_bodega_ori, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c030 = rept044.r44_item_ori,  NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c031 = rept044.r44_stock_ori, NOENTRY, UPSHIFT, FORMAT = '---,--&.##',
+	OPTIONS = '-nolist';
+c032 = rept044.r44_costo_ori, NOENTRY, UPSHIFT, FORMAT = '##,##&.##',
+	OPTIONS = '-nolist';
+c5   = rept044.r44_bodega_tra, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c033 = rept044.r44_item_tra,  AUTONEXT, UPSHIFT, OPTIONS = '-nolist';
+c034 = rept044.r44_cant_tra, AUTONEXT, UPSHIFT, FORMAT = '---,--&.##',
+	INCLUDE = (0.01 TO 999999.99), OPTIONS = '-nolist';
+c035 = rept044.r44_stock_tra, NOENTRY, UPSHIFT, FORMAT = '---,--&.##',
+	OPTIONS = '-nolist';
+c036 = rept044.r44_costo_tra, NOENTRY, UPSHIFT, FORMAT = '##,##&.##',
+	OPTIONS = '-nolist';
+
+c040 = rept044.r44_desc_ori, NOENTRY, UPSHIFT, REVERSE;
+c041 = rept043.r43_usuario, NOENTRY, UPSHIFT, REVERSE;
+c042 = rept043.r43_fecing, NOENTRY, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_detalle[8] (r44_bodega_ori, r44_item_ori, r44_stock_ori,
+				r44_costo_ori, r44_bodega_tra, r44_item_tra,
+				r44_cant_tra, r44_stock_tra, r44_costo_tra)

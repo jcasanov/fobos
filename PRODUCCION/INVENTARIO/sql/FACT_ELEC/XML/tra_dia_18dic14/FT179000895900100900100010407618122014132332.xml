@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104076</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104076</guiaRemision>
+<razonSocialComprador>JARAMILLO MINAYA</razonSocialComprador>
+<identificacionComprador>0791739942001</identificacionComprador>
+<totalSinImpuestos>172.18</totalSinImpuestos>
+<totalDescuento>12.96</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>172.18</baseImponible>
+<valor>20.66</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>192.84</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>100758</codigoPrincipal>
+<descripcion>ACCESORIO ADA SC002659306 BARRA DE APOYO MEDIANA</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>42.98</precioUnitario>
+<descuento>3.01</descuento>
+<precioTotalSinImpuesto>39.97</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>39.97</baseImponible>
+<valor>4.80</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>47145</codigoPrincipal>
+<descripcion>GRIFERIA CON DUCHA TELEFONO E118.07/26 CR "LUMINA" CROMO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>71.08</precioUnitario>
+<descuento>9.95</descuento>
+<precioTotalSinImpuesto>132.21</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>132.21</baseImponible>
+<valor>15.87</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">ROSSANA_MINAYA58@HOTMAIL.COM</campoAdicional>
+<campoAdicional nombre="telefono-movil">2838755</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016655</campoAdicional>
+</infoAdicional>
+</factura>

@@ -486,7 +486,6 @@ DEFINE j11_num_ch_aut		LIKE cajt011.j11_num_ch_aut
 DEFINE j11_num_cta_tarj		LIKE cajt011.j11_num_cta_tarj
 DEFINE j11_moneda		LIKE cajt011.j11_moneda
 DEFINE j11_valor		LIKE cajt011.j11_valor
-DEFINE cont_cred		LIKE cajt001.j01_cont_cred
 DEFINE num_sri			LIKE rept038.r38_num_sri
 
 DEFINE usuario			VARCHAR(19,15)
@@ -500,6 +499,7 @@ DEFINE r_g08			RECORD LIKE gent008.*
 DEFINE r_g10			RECORD LIKE gent010.*
 DEFINE ttipo			LIKE cajt011.j11_codigo_pago
 DEFINE tvalor			LIKE cajt011.j11_valor
+DEFINE cont_cred	LIKE cajt001.j01_cont_cred
 DEFINE escape		SMALLINT
 DEFINE act_comp, db_c	SMALLINT
 DEFINE desact_comp, db	SMALLINT
@@ -561,13 +561,13 @@ PAGE HEADER
 	      COLUMN 113, usuario
 	PRINT COLUMN 1, "------------------------------------------------------------------------------------------------------------------------------------"
 	PRINT COLUMN 001, "Fecha Pro.",		-- (10)
-	      COLUMN 012, "Cliente/Referenc",   -- (20)
-	      COLUMN 029, "Documento",		-- (10)
-	      COLUMN 040, "Num. SRI",		-- (15)
-	      COLUMN 058, "     Valor",		-- (10) ###,##&.##
-	      COLUMN 069, "CP",
-	      COLUMN 070, "Banco/Tarjeta",      -- (15)
-	      COLUMN 088, "# Ch/Aut",		-- (15)
+	      COLUMN 012, "Cliente/Referencia", -- (20)
+	      COLUMN 033, "Documento",		-- (10)
+	      COLUMN 044, "Num. SRI",		-- (15)
+	      COLUMN 060, "     Valor",		-- (10) ###,##&.##
+	      COLUMN 071, "CP",
+	      COLUMN 074, "Banco/Tarjeta",      -- (15)
+	      COLUMN 090, "# Ch/Aut",		-- (15)
 	      COLUMN 106, "# Cta/Tarj",		-- (16)
 	      COLUMN 123, "Valor Pago"		-- (10)
 	PRINT COLUMN 1, "------------------------------------------------------------------------------------------------------------------------------------"
@@ -597,15 +597,15 @@ ON EVERY ROW
 	END FOR
 	NEED 3 LINES
 	PRINT COLUMN 001, j10_fecha_pro USING "dd-mm-yyyy",
-	      COLUMN 012, cliente[1,16],
-	      COLUMN 029, j10_tipo_destino, '-', 
+	      COLUMN 012, cliente[1,20],
+	      COLUMN 033, j10_tipo_destino, '-', 
 	      		  fl_justifica_titulo('I', j10_num_destino, 7) CLIPPED,
-	      COLUMN 040, num_sri[1,17], 
-	      COLUMN 058, j10_valor USING "---,--&.##",
-	      COLUMN 069, j11_codigo_pago,
-	      COLUMN 072, n_bco_tarj[1,15],
-	      COLUMN 088, j11_num_ch_aut[1,17],
-	      COLUMN 106, j11_num_cta_tarj[1,16],
+	      COLUMN 044, num_sri[1,15], 
+	      COLUMN 060, j10_valor USING "---,--&.##",
+	      COLUMN 071, j11_codigo_pago,
+	      COLUMN 074, n_bco_tarj[1,15],
+	      COLUMN 090, j11_num_ch_aut[1,15],
+	      COLUMN 106, j11_num_cta_tarj[1,25],
 	      COLUMN 123, j11_valor USING "---,--&.##"
 
 ON LAST ROW

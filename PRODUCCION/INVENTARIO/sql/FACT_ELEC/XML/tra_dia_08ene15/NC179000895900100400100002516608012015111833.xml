@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025166</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>08/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>ESYCMET CIA. LTDA</razonSocialComprador>
+<identificacionComprador>1791323025001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000176419</numDocModificado>
+<fechaEmisionDocSustento>30/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>2701.01</totalSinImpuestos>
+<valorModificacion>3025.13</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>2701.01</baseImponible>
+<valor>324.12</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 268002 ESYCMET CIA MAT NO ENTRGD FC</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>150170</codigoInterno>
+<descripcion>TALADRO DE BASE ELECTROMAGNETICA 4208-1 INCLUYE MOTOR 4297-1 Y BASE 4203</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3087.98</precioUnitario>
+<descuento>555.84</descuento>
+<precioTotalSinImpuesto>2532.14</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2532.14</baseImponible>
+<valor>303.86</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>93735</codigoInterno>
+<descripcion>ADAPTADOR 49-57-0025 EN ACOPLES MORSE P/4292-1/4297-1</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>191.30</precioUnitario>
+<descuento>28.70</descuento>
+<precioTotalSinImpuesto>162.60</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>162.60</baseImponible>
+<valor>19.51</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>150452</codigoInterno>
+<descripcion>DISPENSADOR 44-46-0090 DE LIQUIDO REFRIGERANTE P/ TALADRO/ELECTROMAGNET.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>7.12</precioUnitario>
+<descuento>0.85</descuento>
+<precioTotalSinImpuesto>6.27</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.27</baseImponible>
+<valor>0.75</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">esycmet@esycmet.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">520381</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">4198</campoAdicional>
+</infoAdicional>
+</notaCredito>

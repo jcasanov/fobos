@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176002</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>SOLANDA SUP. MANZANA 3 CASA # 10</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176002</guiaRemision>
+<razonSocialComprador>VELASCO CASA JAIME</razonSocialComprador>
+<identificacionComprador>1711683381001</identificacionComprador>
+<totalSinImpuestos>5922.98</totalSinImpuestos>
+<totalDescuento>1018.82</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>5922.98</baseImponible>
+<valor>710.76</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>6633.74</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>94171</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 4" SDQP60-150 SISTEMA DE PRESION CONSTANTE (93806015) SD150</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2893.89</precioUnitario>
+<descuento>434.08</descuento>
+<precioTotalSinImpuesto>2459.81</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANKLIN PUMPS SYSTEMS" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2459.81</baseImponible>
+<valor>295.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>94171</codigoPrincipal>
+<descripcion>BOMBA SUMERGIBLE DE 4" SDQP60-150 SISTEMA DE PRESION CONSTANTE (93806015) SD150</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2893.89</precioUnitario>
+<descuento>434.08</descuento>
+<precioTotalSinImpuesto>2459.81</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANKLIN PUMPS SYSTEMS" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2459.81</baseImponible>
+<valor>295.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>95896</codigoPrincipal>
+<descripcion>CAJA DE CONTROL ALTERNADOR DUPLEX (5850012000)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>705.16</precioUnitario>
+<descuento>105.77</descuento>
+<precioTotalSinImpuesto>599.39</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FRANKLIN" valor="FRANKL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>599.39</baseImponible>
+<valor>71.93</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>61793</codigoPrincipal>
+<descripcion>TANQUE DE PRESION FIBRA DE VIDRIO WM-9/WM0120 ENTREGA DE 8.9 GLS POR CICLO DE 30/50 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>448.86</precioUnitario>
+<descuento>44.89</descuento>
+<precioTotalSinImpuesto>403.97</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="WELL MATE" valor="WELL M"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>403.97</baseImponible>
+<valor>48.48</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">099849333</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">026387</campoAdicional>
+</infoAdicional>
+</factura>

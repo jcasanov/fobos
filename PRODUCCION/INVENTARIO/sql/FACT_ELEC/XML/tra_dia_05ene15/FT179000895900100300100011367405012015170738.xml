@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000113674</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>05/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000113674</guiaRemision>
+<razonSocialComprador>GUERRA COLOMA ALEX SHUSEP</razonSocialComprador>
+<identificacionComprador>1712896644001</identificacionComprador>
+<totalSinImpuestos>347.28</totalSinImpuestos>
+<totalDescuento>47.82</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>347.28</baseImponible>
+<valor>41.67</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>388.95</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99362</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA MACHALILLA BLANCO PRIMERA</descripcion>
+<cantidad>3.50</cantidad>
+<precioUnitario>8.82</precioUnitario>
+<descuento>5.25</descuento>
+<precioTotalSinImpuesto>25.62</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>25.62</baseImponible>
+<valor>3.07</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99363</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 43 X 43 MONOQUEMA MACHALILLA BLANCO ESTANDAR</descripcion>
+<cantidad>31.50</cantidad>
+<precioUnitario>7.95</precioUnitario>
+<descuento>42.57</descuento>
+<precioTotalSinImpuesto>207.86</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>207.86</baseImponible>
+<valor>24.94</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97614</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS 4262722 CAMPEON DRESDEN BLUE C/ASIENTO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>48.88</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>48.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>48.88</baseImponible>
+<valor>5.87</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>48064</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA DE PARED PREPONCHADO 5575722  SHELBY AZUL DRESDEN</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>10.74</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>10.74</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>10.74</baseImponible>
+<valor>1.29</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97612</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL DOS PIEZAS 4262130 CAMPEON BLANCO C/ASIENTO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>44.44</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>44.44</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>44.44</baseImponible>
+<valor>5.33</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>68746</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA DE PARED PREPONCHADO 5575130 SHELBY BLANCO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>9.74</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>9.74</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.74</baseImponible>
+<valor>1.17</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">konstrucciones2000@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2288492</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">056388</campoAdicional>
+</infoAdicional>
+</factura>

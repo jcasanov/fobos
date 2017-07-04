@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091820</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091820</guiaRemision>
+<razonSocialComprador>BEBIDAS ARCACONTINENTAL ECUADOR ARCADOR S.A.</razonSocialComprador>
+<identificacionComprador>1792411149001</identificacionComprador>
+<totalSinImpuestos>575.20</totalSinImpuestos>
+<totalDescuento>143.80</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>575.20</baseImponible>
+<valor>69.02</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>644.22</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>100006</codigoPrincipal>
+<descripcion>TALADRO A BATERIA 2615-21CT M18 LITHIUM-ION 3/8" TALADRO EN ANGULO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>359.50</precioUnitario>
+<descuento>143.80</descuento>
+<precioTotalSinImpuesto>575.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>575.20</baseImponible>
+<valor>69.02</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">judith.veliz@arcacontal.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2240700</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016701</campoAdicional>
+</infoAdicional>
+</factura>

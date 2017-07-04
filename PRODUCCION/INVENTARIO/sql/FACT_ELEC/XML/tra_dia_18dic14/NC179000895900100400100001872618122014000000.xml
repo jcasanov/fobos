@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000018726</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>SERTECPET S.A.</razonSocialComprador>
+<identificacionComprador>1791263308001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000018726</numDocModificado>
+<fechaEmisionDocSustento>18/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>3786.75</totalSinImpuestos>
+<valorModificacion>4241.16</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>3786.75</baseImponible>
+<valor>454.41</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV. DF-21039 FACT. FA-265410</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>25106</codigoInterno>
+<descripcion>DEV. DF-21039 FACT. FA-265410</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>3786.75</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3786.75</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ACERO"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3786.75</baseImponible>
+<valor>454.41</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3954900</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">10219</campoAdicional>
+</infoAdicional>
+</notaCredito>

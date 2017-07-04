@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025231</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>INGENIERIA AVANZADA EN TECNOLOGIA EATEC S.A.</razonSocialComprador>
+<identificacionComprador>1792041236001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000268198</numDocModificado>
+<fechaEmisionDocSustento>08/01/2015</fechaEmisionDocSustento>
+<totalSinImpuestos>459.93</totalSinImpuestos>
+<valorModificacion>515.12</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>459.93</baseImponible>
+<valor>55.19</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>POR DEVOLUCION O.T. # 8140</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>99094</codigoInterno>
+<descripcion>BANDEJA P/ MODELO 1224 (26847)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>241.14</precioUnitario>
+<descuento>24.11</descuento>
+<precioTotalSinImpuesto>217.03</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>217.03</baseImponible>
+<valor>26.04</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>100819</codigoInterno>
+<descripcion>INSERTO P/ROSCADORA 1224 (54212)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>148.05</precioUnitario>
+<descuento>14.81</descuento>
+<precioTotalSinImpuesto>133.24</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>133.24</baseImponible>
+<valor>15.99</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>91413</codigoInterno>
+<descripcion>KIT DE REPARACION P/ BOMBA DE ACEITE "ML" P/MOD-1224 (33422)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>66.03</precioUnitario>
+<descuento>6.60</descuento>
+<precioTotalSinImpuesto>59.43</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>59.43</baseImponible>
+<valor>7.13</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>98633</codigoInterno>
+<descripcion>MICRO SWITCH DE CONTACTO P/ROSCADORA MOD.1224 (21148)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>32.58</precioUnitario>
+<descuento>3.26</descuento>
+<precioTotalSinImpuesto>29.32</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>29.32</baseImponible>
+<valor>3.52</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>15507</codigoInterno>
+<descripcion>CUCHILLA PARA CORTATUBO F-229-S P/MOD.4S/44S/466S/466HWS/468S/472HWS (33130)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>23.23</precioUnitario>
+<descuento>2.32</descuento>
+<precioTotalSinImpuesto>20.91</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>20.91</baseImponible>
+<valor>2.51</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">contabilidad@eatecsa.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">5009000</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">45954</campoAdicional>
+</infoAdicional>
+</notaCredito>

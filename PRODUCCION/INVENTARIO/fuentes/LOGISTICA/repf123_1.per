@@ -1,0 +1,37 @@
+DATABASE aceros
+SCREEN
+{
+                                                              [c000] de [c001]
+
+                                                         Estado: [c|c002     ]
+
+
+            Código Observación: [c003] [c004                   ]
+                                       [c004                   ]
+
+              Tipo Observación: [c005        ]
+
+
+
+
+   Ingresado Por: [c006      ]            Fecha Ingreso: [c007               ]
+}
+TABLES
+rept112
+ATTRIBUTES
+c000 = FORMONLY.num_reg, NOENTRY, UPSHIFT, REVERSE;
+c001 = FORMONLY.max_reg, NOENTRY, UPSHIFT, REVERSE;
+
+c    = rept112.r112_estado, NOENTRY, UPSHIFT, REVERSE,
+	COMMENTS = '(A) ACTIVO  (B) BLOQUEADO';
+c002 = FORMONLY.tit_estado, NOENTRY, UPSHIFT, REVERSE;
+c003 = rept112.r112_cod_obser, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c004 = rept112.r112_descripcion, AUTONEXT, UPSHIFT, REVERSE,
+	WORDWRAP COMPRESS, SCROLL;
+c005 = rept112.r112_tipo, AUTONEXT, UPSHIFT, REVERSE, DEFAULT = 'C',
+	WIDGET = 'RADIO', CONFIG = 'C Comercial L Logística T Técnico';
+
+c006 = rept112.r112_usuario, NOENTRY, UPSHIFT, REVERSE;
+c007 = rept112.r112_fecing, NOENTRY, UPSHIFT, REVERSE;
+END

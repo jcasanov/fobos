@@ -1,0 +1,56 @@
+DATABASE aceros
+SCREEN
+{
+
+       Quincenas: [c001     ]
+
+
+
+             Año: [c002]            Mes: [c1] [c003       ]
+      
+         Período: [c004      ]        -        [c005      ]
+
+    Departamento: [c006  ] [c007                          ]
+
+      Trabajador: [c008  ] [c009                                         ]
+
+      Incluir Totales Décimos ?: [c]             Incluir Utilidades ?: [d]
+   Incluir Vacaciones Pagadas ?: [e]      Agrupado por Departamento ?: [f]
+
+}
+TABLES
+gent034
+rolt030
+rolt032
+ATTRIBUTES
+c001 = rolt032.n32_cod_liqrol, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'RADIO', CONFIG = 'Q1 Primera  Q2 Segunda  TO Ambas',
+	INCLUDE = ("Q1", "Q2", "TO"), DEFAULT = "TO";
+c002 = rolt032.n32_ano_proceso, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = (1980 TO 2099);
+c1   = FORMONLY.n32_mes_proceso, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	INCLUDE = (01 TO 12, NULL);
+c003 = FORMONLY.tit_mes, NOENTRY, UPSHIFT;
+c004 = rolt032.n32_fecha_ini, NOENTRY, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy';
+c005 = rolt032.n32_fecha_fin, NOENTRY, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy';
+c006 = FORMONLY.n32_cod_depto, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c007 = gent034.g34_nombre, NOENTRY, UPSHIFT;
+c008 = FORMONLY.n32_cod_trab, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
+	COMMENTS = 'Dígite el código del trabajador.';
+c009 = rolt030.n30_nombres, NOENTRY, UPSHIFT;
+c    = FORMONLY.vm_incluir_de TYPE CHAR NOT NULL, REQUIRED, REVERSE, UPSHIFT,
+	INCLUDE = ('S', 'N'), DEFAULT = 'N',
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+d    = FORMONLY.vm_incluir_ut TYPE CHAR NOT NULL, REQUIRED, REVERSE, UPSHIFT,
+	INCLUDE = ('S', 'N'), DEFAULT = 'N',
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+e    = FORMONLY.vm_incluir_va TYPE CHAR NOT NULL, REQUIRED, REVERSE, UPSHIFT,
+	INCLUDE = ('S', 'N'), DEFAULT = 'N',
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+f    = FORMONLY.vm_agrupado TYPE CHAR NOT NULL, REQUIRED, REVERSE, UPSHIFT,
+	INCLUDE = ('S', 'N'), DEFAULT = 'S',
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge';
+END

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025164</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>OBRAS Y PROYECTOS FLORES & HIJO CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>0190371107001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000176170</numDocModificado>
+<fechaEmisionDocSustento>19/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>270.34</totalSinImpuestos>
+<valorModificacion>302.78</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>270.34</baseImponible>
+<valor>32.44</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 267761 OBR Y PROY FLORES NO ENTRGD</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>150623</codigoInterno>
+<descripcion>FULMINANTES PARA PISTOLA 50504 VERDE(3)CAL0.22 P/P7200/P2201 CAJA DE 100 u</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>13.13</precioUnitario>
+<descuento>26.26</descuento>
+<precioTotalSinImpuesto>236.34</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="CIEN"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>236.34</baseImponible>
+<valor>28.36</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>69621</codigoInterno>
+<descripcion>CLAVO DE CABEZA .300 PARA CEMENTO Y ACERO 50022 DE 3/4" PIN 0.145" CABEZA 0.3" CAJA DE 100 u</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>4.00</precioUnitario>
+<descuento>6.00</descuento>
+<precioTotalSinImpuesto>34.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="CAJA"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>34.00</baseImponible>
+<valor>4.08</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacionelectronica@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">074102912</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">61968</campoAdicional>
+</infoAdicional>
+</notaCredito>

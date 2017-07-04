@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000004372</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>LOPEZ ZURITA AMADA GRACIELA</razonSocialComprador>
+<identificacionComprador>1801700160001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>003-001-000129211</numDocModificado>
+<fechaEmisionDocSustento>08/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>28.44</totalSinImpuestos>
+<valorModificacion>31.85</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>28.44</baseImponible>
+<valor>3.41</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>REF POR FECHA  NP 138754</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>5454</codigoInterno>
+<descripcion>TUBO GALVANIZADO (POSTE) TIPO "T" DE 1" (25 mm.) EXTERIOR 1.8mm. ESPESOR</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>14.22</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>28.44</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>28.44</baseImponible>
+<valor>3.41</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacionelectronica@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2650557</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">40591</campoAdicional>
+</infoAdicional>
+</notaCredito>

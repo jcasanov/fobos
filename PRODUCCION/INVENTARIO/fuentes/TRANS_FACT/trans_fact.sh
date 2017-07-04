@@ -1,0 +1,52 @@
+# TRANSMITE FACTURAS PARA CRUZAR CON TR GUAYAQUI, QUITO Y EL SUR
+. /acero/envfobos.sh
+export TRANS_FA_TR_HOME=$FOBOS_HOME/log/TRANS_FA_TR
+. funciones.sh
+
+compara_fa_tr;
+NUEVOS_GMQM=$(getNuevosGMQM)
+NUEVOS_GMQS=$(getNuevosGMQS)
+NUEVOS_QMGM=$(getNuevosQMGM)
+NUEVOS_QMQS=$(getNuevosQMQS)
+NUEVOS_QSGM=$(getNuevosQSGM)
+NUEVOS_QSQM=$(getNuevosQSQM)
+CODERR=0
+
+
+if [ $(($NUEVOS_GMQM + $NUEVOS_GMQS + $NUEVOS_QMGM + $NUEVOS_QMQS + $NUEVOS_QSGM + $NUEVOS_QSQM)) -eq 0 ];
+then
+	echo "NO HAY FACTURAS PARA TRANSMITIR EN ESTE MOMENTO"
+else
+
+	if [ $(($NUEVOS_GMQM + $NUEVOS_GMQS)) -eq 0 ];
+	then
+		echo "NO HAY FACTURAS PARA TRANSMITIR ENTRE GYE-UIO Y GYE-SUR"
+	else
+		echo "TOTAL FACTURAS PARA TRANSMITIR GYE-UIO: " $(getNuevosGMQM)
+		echo "TOTAL FACTURAS PARA TRANSMITIR GYE-SUR: " $(getNuevosGMQS)
+
+		if ! trans_fa_tr_01; then error_msg "\n  ERROR: NO PUDO TRANSMITIR GYE-UIO Y GYE-SUR"; CODERR=1;	fi
+	fi
+
+	if [ $(($NUEVOS_QMGM + $NUEVOS_QMQS)) -eq 0 ];
+	then
+		echo "NO HAY FACTURAS PARA TRANSMITIR ENTRE UIO-GYE Y UIO-SUR"
+	else
+		echo "TOTAL FACTURAS PARA TRANSMITIR UIO-GYE: " $(getNuevosQMGM)
+		echo "TOTAL FACTURAS PARA TRANSMITIR UIO-SUR: " $(getNuevosQMQS)
+
+		if ! trans_fa_tr_03; then error_msg "\n  ERROR: NO PUDO TRANSMITIR GYE-UIO Y GYE-SUR"; CODERR=1;	fi
+	fi
+
+	if [ $(($NUEVOS_QMGM + $NUEVOS_QMQS)) -eq 0 ];
+	then
+		echo "NO HAY FACTURAS PARA TRANSMITIR ENTRE UIO-GYE Y UIO-SUR"
+	else
+		echo "TOTAL FACTURAS PARA TRANSMITIR SUR-GYE: " $(getNuevosQSGM)
+		echo "TOTAL FACTURAS PARA TRANSMITIR SUR-UIO: " $(getNuevosQSQM)
+
+		if ! trans_fa_tr_04; then error_msg "\n  ERROR: NO PUDO TRANSMITIR GYE-UIO Y GYE-SUR"; CODERR=1;	fi
+	fi
+
+fi
+exit $CODERR

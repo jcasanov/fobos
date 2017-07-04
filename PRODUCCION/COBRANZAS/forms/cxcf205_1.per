@@ -12,7 +12,7 @@ SCREEN
          Moneda: [c1] [c007            ]   Paridad: [c008               ]
 
         Subtipo: [c009] [c010                          ]    
-       Cobrador: [c011] [c012                          ]
+     Zona Cobro: [c011] [c012                          ]
      Referencia: [c013                                 ]
 
   Valor a Pagar: [c014            ]
@@ -45,9 +45,9 @@ c008 = cxct024.z24_paridad, NOENTRY, REVERSE, UPSHIFT,
 c009 = cxct024.z24_subtipo, AUTONEXT, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 c010 = FORMONLY.n_motivo, NOENTRY, REVERSE, UPSHIFT;
-c011 = cxct024.z24_cobrador, AUTONEXT, UPSHIFT, REVERSE,
+c011 = cxct024.z24_zona_cobro, AUTONEXT, UPSHIFT, REVERSE,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c012 = FORMONLY.n_cobrador, NOENTRY, REVERSE, UPSHIFT;
+c012 = FORMONLY.n_zoncob, NOENTRY, REVERSE, UPSHIFT;
 c013 = cxct024.z24_referencia, AUTONEXT, UPSHIFT;
 c014 = cxct024.z24_total_cap, AUTONEXT, REVERSE, FORMAT = '#,###,###,##&.##';
 

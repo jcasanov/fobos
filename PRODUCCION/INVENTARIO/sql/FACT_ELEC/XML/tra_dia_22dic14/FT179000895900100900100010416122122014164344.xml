@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104161</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104161</guiaRemision>
+<razonSocialComprador>BURGOS GOMEZ LUIS</razonSocialComprador>
+<identificacionComprador>0920976743001</identificacionComprador>
+<totalSinImpuestos>2935.62</totalSinImpuestos>
+<totalDescuento>326.18</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>2935.62</baseImponible>
+<valor>352.27</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>3287.89</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>13758</codigoPrincipal>
+<descripcion>MOTO-PROPULSOR MOD-700 1/8" A 2" 1/2 HP 115/60/1 (41935)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2195.22</precioUnitario>
+<descuento>219.52</descuento>
+<precioTotalSinImpuesto>1975.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1975.70</baseImponible>
+<valor>237.08</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>13894</codigoPrincipal>
+<descripcion>PRENSA 775 TIPO PORTATIL DE SOPORTE P/MOD-700 (42625)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>241.33</precioUnitario>
+<descuento>24.13</descuento>
+<precioTotalSinImpuesto>217.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>217.20</baseImponible>
+<valor>26.06</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>92904</codigoPrincipal>
+<descripcion>PRENSA NO.425 DE 1/8" A 2-1/2" CON TRIPODE (16703)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>408.26</precioUnitario>
+<descuento>40.83</descuento>
+<precioTotalSinImpuesto>367.43</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>367.43</baseImponible>
+<valor>44.09</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>93694</codigoPrincipal>
+<descripcion>ACEITERA (RECIPIENTE) N.418 COMPLETA (10883)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>364.69</precioUnitario>
+<descuento>36.47</descuento>
+<precioTotalSinImpuesto>328.22</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>328.22</baseImponible>
+<valor>39.39</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>15666</codigoPrincipal>
+<descripcion>DADOS PARA TERRAJA MANUAL P/ 12-R DE 3/4" NPT (37830)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>52.30</precioUnitario>
+<descuento>5.23</descuento>
+<precioTotalSinImpuesto>47.07</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>47.07</baseImponible>
+<valor>5.65</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">luisburgos.g83@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2228574</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016681</campoAdicional>
+</infoAdicional>
+</factura>

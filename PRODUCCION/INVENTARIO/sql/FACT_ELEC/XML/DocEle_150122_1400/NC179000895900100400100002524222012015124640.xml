@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025242</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>CARROCERIAS IMCE</razonSocialComprador>
+<identificacionComprador>1801172162001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000174684</numDocModificado>
+<fechaEmisionDocSustento>24/11/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>4385.62</totalSinImpuestos>
+<valorModificacion>4911.89</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>4385.62</baseImponible>
+<valor>526.27</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 266367 CARROCERIAS IMCE P-VOLVER FAC</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>95797</codigoInterno>
+<descripcion>ATORNILLADORA 6580-20 P/METAL DE 6.5 AMPS.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>339.07</precioUnitario>
+<descuento>61.03</descuento>
+<precioTotalSinImpuesto>278.04</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>278.04</baseImponible>
+<valor>33.36</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>95797</codigoInterno>
+<descripcion>ATORNILLADORA 6580-20 P/METAL DE 6.5 AMPS.</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>339.07</precioUnitario>
+<descuento>244.13</descuento>
+<precioTotalSinImpuesto>1112.15</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1112.15</baseImponible>
+<valor>133.46</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>102399</codigoInterno>
+<descripcion>AMOLADORA ELECTRICA 6117-33D DE 13 AMPS. 5" 2.9 HP.</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>219.77</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1318.62</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1318.62</baseImponible>
+<valor>158.23</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>102467</codigoInterno>
+<descripcion>JUEGO 48-22-2006 DE DESTORNILLADORES DE 6 PZS.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>43.47</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>43.47</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>43.47</baseImponible>
+<valor>5.22</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>101431</codigoInterno>
+<descripcion>ATORNILLADORA A BATERIA 2402-22 M-12 FUEL DE 1/4"</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>331.98</precioUnitario>
+<descuento>358.54</descuento>
+<precioTotalSinImpuesto>1633.34</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1633.34</baseImponible>
+<valor>196.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacion@carroceriasimce.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">032445347</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">46247</campoAdicional>
+</infoAdicional>
+</notaCredito>

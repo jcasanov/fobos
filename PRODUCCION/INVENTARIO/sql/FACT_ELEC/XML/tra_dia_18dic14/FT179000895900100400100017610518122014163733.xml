@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176105</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento></dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176105</guiaRemision>
+<razonSocialComprador>MORENO ZAPATA EDUARDO PATRICIO</razonSocialComprador>
+<identificacionComprador>1719805267</identificacionComprador>
+<totalSinImpuestos>138.32</totalSinImpuestos>
+<totalDescuento>15.38</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>138.32</baseImponible>
+<valor>16.60</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>154.92</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>102406</codigoPrincipal>
+<descripcion>BROCAS JUEGOS 48-89-0026 DE COBALTO THUNDERBOLT ( 14 PZS. )</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>80.80</precioUnitario>
+<descuento>8.08</descuento>
+<precioTotalSinImpuesto>72.72</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>72.72</baseImponible>
+<valor>8.73</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>150078</codigoPrincipal>
+<descripcion>BROCAS JUEGOS 48-89-1105 TITANIO HS METAL (20 Pzs.)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>46.65</precioUnitario>
+<descuento>4.67</descuento>
+<precioTotalSinImpuesto>41.98</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>41.98</baseImponible>
+<valor>5.04</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102450</codigoPrincipal>
+<descripcion>JUEGO 48-89-2803P DE BROCAS DE OXIDO NEGRO THUNDERBOLT (15 PZS.)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>26.25</precioUnitario>
+<descuento>2.63</descuento>
+<precioTotalSinImpuesto>23.62</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>23.62</baseImponible>
+<valor>2.83</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2842247</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064136</campoAdicional>
+</infoAdicional>
+</factura>

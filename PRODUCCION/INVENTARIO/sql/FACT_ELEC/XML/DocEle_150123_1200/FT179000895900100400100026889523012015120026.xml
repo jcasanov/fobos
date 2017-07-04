@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268895</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268895</guiaRemision>
+<razonSocialComprador>SEINGPROAÒO CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1791435818001</identificacionComprador>
+<totalSinImpuestos>536.45</totalSinImpuestos>
+<totalDescuento>94.67</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>536.45</baseImponible>
+<valor>64.37</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>600.82</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>99475</codigoPrincipal>
+<descripcion>ROTOMARTILLO 5263-21 SDS DE 5/8" 5.5 AMP 120V. 0-3700 RPM 0-4400 GOLPES (MALETIN)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>315.56</precioUnitario>
+<descuento>94.67</descuento>
+<precioTotalSinImpuesto>536.45</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>536.45</baseImponible>
+<valor>64.37</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">asistentecompras1@seingpro.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2556771</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">029655</campoAdicional>
+<campoAdicional nombre="Observaciones">ORDEN DE COMPRA N.-003464</campoAdicional>
+</infoAdicional>
+</factura>

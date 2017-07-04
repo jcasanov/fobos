@@ -1,0 +1,33 @@
+DATABASE aceros
+
+SCREEN
+{
+ CUENTAS BANCARIAS
+----------------------------------------------------
+ Cod   Nombre	               Tipo Cuenta 
+----------------------------------------------------
+[c00 ][c01                     ][c][c002          ] 
+[c00 ][c01                     ][c][c002          ]
+[c00 ][c01                     ][c][c002          ]
+[c00 ][c01                     ][c][c002          ]
+[c00 ][c01                     ][c][c002          ]
+[c00 ][c01                     ][c][c002          ]
+[c00 ][c01                     ][c][c002          ] 
+[c00 ][c01                     ][c][c002          ] 
+[c00 ][c01                     ][c][c002          ] 
+[c00 ][c01                     ][c][c002          ] 
+}
+
+TABLES
+gent008
+gent009
+
+ATTRIBUTES
+c00  = g08_banco;
+c01  = g08_nombre;
+c    = g09_tipo_cta;
+c002 = g09_numero_cta;
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_ctabco[10](g08_banco, g08_nombre, g09_tipo_cta, g09_numero_cta)

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268314</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>10/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268314</guiaRemision>
+<razonSocialComprador>TONELLO SOLUCIONES INTEGRALES CIA LTDA</razonSocialComprador>
+<identificacionComprador>1792234549001</identificacionComprador>
+<totalSinImpuestos>3377.24</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>3377.24</baseImponible>
+<valor>0.00</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>3377.24</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>66</codigoPrincipal>
+<descripcion>ANGULO LAMINADO x 6 MTS. DE 50mm. x 4mm.</descripcion>
+<cantidad>89.00</cantidad>
+<precioUnitario>21.11</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1878.79</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>1878.79</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>68</codigoPrincipal>
+<descripcion>ANGULO LAMINADO x 6 MTS. DE 50mm. x 6mm.</descripcion>
+<cantidad>30.00</cantidad>
+<precioUnitario>32.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>960.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>960.00</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>294</codigoPrincipal>
+<descripcion>HIERRO CORRUGADO  4200 DE 12mm. x 6m</descripcion>
+<cantidad>110.00</cantidad>
+<precioUnitario>4.07</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>447.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDEC"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>447.70</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>474</codigoPrincipal>
+<descripcion>PLETINA DE 50 x 3mm. x 6 m</descripcion>
+<cantidad>11.00</cantidad>
+<precioUnitario>8.25</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>90.75</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>0</codigoPorcentaje>
+<tarifa>0.00</tarifa>
+<baseImponible>90.75</baseImponible>
+<valor>0.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">patricia@tonello.ec</campoAdicional>
+<campoAdicional nombre="Email">gustavo@tonello.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2110002</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">055735</campoAdicional>
+<campoAdicional nombre="Observaciones">ORDEN ADJUNTA</campoAdicional>
+</infoAdicional>
+</factura>

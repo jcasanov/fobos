@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268176</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268176</guiaRemision>
+<razonSocialComprador>PATECA</razonSocialComprador>
+<identificacionComprador>1790032337001</identificacionComprador>
+<totalSinImpuestos>159.82</totalSinImpuestos>
+<totalDescuento>7.82</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>159.82</baseImponible>
+<valor>19.18</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>179.00</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>93770</codigoPrincipal>
+<descripcion>FRESA ANULAR PARA TALADRO ELECTROMAGNETICO 49-59-0687 DE 11/16" P/PLANCHA DE HASTA 1"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>42.04</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>42.04</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>42.04</baseImponible>
+<valor>5.04</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>93772</codigoPrincipal>
+<descripcion>FRESA ANULAR PARA TALADRO ELECTROMAGNETICO 49-59-0812 DE 13/16" P/PLANCHA DE HASTA 1"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>47.42</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>47.42</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>47.42</baseImponible>
+<valor>5.69</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70395</codigoPrincipal>
+<descripcion>FRESA ANULAR PARA TALADROS MANUALES 44-60-1721 PIN EYECTOR P/CORT.ANUL.DE 2" DE PROFUNDIDAD</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>28.61</precioUnitario>
+<descuento>2.86</descuento>
+<precioTotalSinImpuesto>25.75</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>25.75</baseImponible>
+<valor>3.09</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>97896</codigoPrincipal>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7432 SD1 DE 5/8" X 4-1/2"</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>1.79</precioUnitario>
+<descuento>3.58</descuento>
+<precioTotalSinImpuesto>32.22</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>32.22</baseImponible>
+<valor>3.87</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100063</codigoPrincipal>
+<descripcion>BROCA PARA CEMENTO 48-20-7473 DE 1/2" x 8" x 10" SDS 2 CORTADORES</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>13.77</precioUnitario>
+<descuento>1.38</descuento>
+<precioTotalSinImpuesto>12.39</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>12.39</baseImponible>
+<valor>1.49</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">lromero@pateca.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2277666</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">022358</campoAdicional>
+</infoAdicional>
+</factura>

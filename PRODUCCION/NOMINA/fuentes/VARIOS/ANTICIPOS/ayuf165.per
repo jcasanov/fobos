@@ -1,0 +1,38 @@
+DATABASE aceros
+SCREEN
+{
+ PROCESO ADICIONALES DE NOMINA
+
+ [c0|c001    |c002                                 |c003         ]
+[c1|c011    |c012                                 |c013         ]
+[c1|c011    |c012                                 |c013         ]
+[c1|c011    |c012                                 |c013         ]
+[c1|c011    |c012                                 |c013         ]
+[c1|c011    |c012                                 |c013         ]
+[c1|c011    |c012                                 |c013         ]
+[c1|c011    |c012                                 |c013         ]
+[c1|c011    |c012                                 |c013         ]
+[c1|c011    |c012                                 |c013         ]
+[c1|c011    |c012                                 |c013         ]
+                                        Total ==> [c020         ]
+
+}
+TABLES
+rolt030
+rolt091
+ATTRIBUTES
+c0   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c002 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c003 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+
+c1   = rolt091.n91_proceso, UPSHIFT, NOENTRY;
+c011 = rolt091.n91_num_ant, UPSHIFT;
+c012 = rolt030.n30_nombres, UPSHIFT;
+c013 = rolt091.n91_valor_ant, UPSHIFT;
+
+c020 = FORMONLY.total, NOENTRY, REVERSE, UPSHIFT, FORMAT = '--,---,--&.##';
+END
+INSTRUCTIONS
+SCREEN RECORD rh_proceso[10] (n91_proceso, n91_num_ant, n30_nombres,
+				n91_valor_ant)

@@ -1,0 +1,13 @@
+Hola Nelsón, a continuación te muestro un ejemplo de cálculo
+
+Se hizo un préstamo de $ 100 a descontar $ 25 quincenal a partir de la 2da. 
+q. de Agosto.
+
+100 x 12 x 9 / 36.000 =   0.30
+75  x  12 x 15 /36.000 =  0.38
+50  x  12 x 15 /36.000 =  0.25
+25  x  12 x 15 /36.000 =  0.13
+                                      ------
+         Total interés ....  $   1.06
+
+Saludos,

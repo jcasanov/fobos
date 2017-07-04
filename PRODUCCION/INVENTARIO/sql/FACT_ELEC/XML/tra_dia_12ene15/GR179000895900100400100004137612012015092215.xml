@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000041376</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<dirPartida>AV. LA PRENSA N-4514</dirPartida>
+<razonSocialTransportista>SR FERNANDO VACA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>12/01/2015</fechaIniTransporte>
+<fechaFinTransporte>12/01/2015</fechaFinTransporte>
+<placa>P0Z-801</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1792234549001</identificacionDestinatario>
+<razonSocialDestinatario>TONELLO SOLUCIONES INTEGRALES CIA LTDA</razonSocialDestinatario>
+<dirDestinatario>MORALES S6-68 Y ARGENTINA ESQ.CAYAMBE</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>10/01/2015</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>294</codigoInterno>
+<descripcion>HIERRO CORRUGADO  4200 DE 12mm. x 6m</descripcion>
+<cantidad>110.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ANDEC"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>474</codigoInterno>
+<descripcion>PLETINA DE 50 x 3mm. x 6 m</descripcion>
+<cantidad>11.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>66</codigoInterno>
+<descripcion>ANGULO LAMINADO x 6 MTS. DE 50mm. x 4mm.</descripcion>
+<cantidad>89.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>68</codigoInterno>
+<descripcion>ANGULO LAMINADO x 6 MTS. DE 50mm. x 6mm.</descripcion>
+<cantidad>30.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">patricia@tonello.ec</campoAdicional>
+<campoAdicional nombre="Email">gustavo@tonello.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2110002</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">055735</campoAdicional>
+</infoAdicional>
+</guiaRemision>

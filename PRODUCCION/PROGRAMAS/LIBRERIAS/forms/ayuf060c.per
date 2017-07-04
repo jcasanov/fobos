@@ -1,0 +1,28 @@
+DATABASE aceros
+SCREEN
+{
+  TIPOS ORDENES COMPRA
+ ---------------------------
+  Cód. Descripción
+ ---------------------------
+ [a  ][f001                ]
+ [a  ][f001                ]
+ [a  ][f001                ]
+ [a  ][f001                ]
+ [a  ][f001                ]
+ [a  ][f001                ]
+ [a  ][f001                ]
+ [a  ][f001                ]
+ [a  ][f001                ]
+ [a  ][f001                ]
+
+}
+TABLES
+ordt001
+ATTRIBUTES
+a    = c01_tipo_orden,REVERSE;
+f001 = c01_nombre,REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_oc[10] (c01_tipo_orden, c01_nombre)

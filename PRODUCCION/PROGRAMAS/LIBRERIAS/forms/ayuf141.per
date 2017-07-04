@@ -1,0 +1,33 @@
+DATABASE aceros
+
+SCREEN
+{
+ CAPITULOS PARTIDAS ARANCELARIAS
+
+ [lbl1    |lbl2                           ]
+[c01     |c002                           ] 
+[c01     |c002                           ] 
+[c01     |c002                           ] 
+[c01     |c002                           ] 
+[c01     |c002                           ] 
+[c01     |c002                           ] 
+[c01     |c002                           ] 
+[c01     |c002                           ] 
+[c01     |c002                           ] 
+[c01     |c002                           ] 
+
+}
+
+TABLES
+gent038
+
+ATTRIBUTES
+c01  = g38_capitulo, UPSHIFT;
+c002 = g38_desc_cap;
+lbl1 = formonly.bt_capitulo, 		NOENTRY, WIDGET='BUTTON', CONFIG='F15';
+lbl2 = formonly.bt_descripcion,	 	NOENTRY, WIDGET='BUTTON', CONFIG='F16';
+END
+
+INSTRUCTIONS
+SCREEN RECORD rh_capitulo[10](g38_capitulo, g38_desc_cap)
+

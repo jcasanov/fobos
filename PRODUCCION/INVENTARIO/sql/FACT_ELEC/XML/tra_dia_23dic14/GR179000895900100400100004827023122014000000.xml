@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048270</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<dirPartida>AV. LA PRENSA N/4514</dirPartida>
+<razonSocialTransportista>SERVIENTREGA</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>0991285679001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>23/12/2014</fechaIniTransporte>
+<fechaFinTransporte>23/12/2014</fechaFinTransporte>
+<placa>PAA-001</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>0102573334001</identificacionDestinatario>
+<razonSocialDestinatario>PALACIOS DELGADO JUAN LEONARDO</razonSocialDestinatario>
+<dirDestinatario>N/B</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>23/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>150323</codigoInterno>
+<descripcion>DISPENSADORES DE ADHESIVO 8437 PARA POWER-STICK</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="MODELO" valor="8437"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>150609</codigoInterno>
+<descripcion>ANCLAJE EPOXICO 8486SD DE 12oz AC100</descripcion>
+<cantidad>4.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="MODELO" valor="8486SD"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>97891</codigoInterno>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7446 SD1 DE 3/4" X 7"</descripcion>
+<cantidad>64.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="MODELO" valor="7446 SD1"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>97894</codigoInterno>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7434 SD1 DE 5/8" X 6"</descripcion>
+<cantidad>61.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="MODELO" valor="7434 SD1"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>98301</codigoInterno>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7414 SD1 DE 3/8" X 3-1/2"</descripcion>
+<cantidad>30.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="MODELO" valor="7414 SD1"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>98927</codigoInterno>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7436SD1 DE 5/8" X 7"</descripcion>
+<cantidad>13.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="MODELO" valor="7436SD1"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>99239</codigoInterno>
+<descripcion>ANCLAJE DE CUNIA POWER-STUD 7423 SD1 DE 1/2" X 4-1/2"</descripcion>
+<cantidad>150.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="MODELO" valor="7423SD1"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">P_Pasoc825@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2836824</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">054917</campoAdicional>
+</infoAdicional>
+</guiaRemision>

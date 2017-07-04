@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000176333</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/12/2014</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000176333</guiaRemision>
+<razonSocialComprador>EMPRESA PUBLICA MUNICIPAL DE AGUA POTABLE ALCANTARILLADO Y ASEO CAYAMBE EMAPAAC E.P</razonSocialComprador>
+<identificacionComprador>1768086400001</identificacionComprador>
+<totalSinImpuestos>23908.50</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>23908.50</baseImponible>
+<valor>2869.02</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>26777.52</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>71492</codigoPrincipal>
+<descripcion>REMOLQUE P/DESTAPADORAS TOPO 4500 DE DOS EJES PARA KJ-3100 / K-1000</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>6497.51</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>6497.51</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6497.51</baseImponible>
+<valor>779.70</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100198</codigoPrincipal>
+<descripcion>DESTAPADOR DE DESAGUES A GASOLINA KJ-3100 P/DESAG. DE 2" A 10" 3000 PSI DE PRESION (37413)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>10584.44</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>10584.44</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>10584.44</baseImponible>
+<valor>1270.13</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>13063</codigoPrincipal>
+<descripcion>DESTAPADOR DE DESAGUES A GASOLINA K-1000 TUBERIA DE 8"-24" DE 6HP (84295)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>6445.77</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>6445.77</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6445.77</baseImponible>
+<valor>773.49</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>90354</codigoPrincipal>
+<descripcion>JET VAC H-32 P/ MODELOS KJ (67187)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>380.78</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>380.78</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>380.78</baseImponible>
+<valor>45.69</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">emapcay@yahoo.com.ar</campoAdicional>
+<campoAdicional nombre="telefono-movil">2360052</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064173</campoAdicional>
+</infoAdicional>
+</factura>

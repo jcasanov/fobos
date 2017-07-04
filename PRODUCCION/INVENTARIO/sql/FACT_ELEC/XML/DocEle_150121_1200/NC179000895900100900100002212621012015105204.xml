@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000022126</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>PROCESADORA NACIONAL DE ALIMENTOS C.A. PRONACA</razonSocialComprador>
+<identificacionComprador>1790319857001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000092054</numDocModificado>
+<fechaEmisionDocSustento>21/01/2015</fechaEmisionDocSustento>
+<totalSinImpuestos>50.79</totalSinImpuestos>
+<valorModificacion>56.88</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>50.79</baseImponible>
+<valor>6.09</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEVOLUCION: NO ES EL PRODUCTO</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>4770</codigoInterno>
+<descripcion>TEE PVC PRESION CAM-CAM-ESP-CAM DE 25mm. ISO</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>0.24</precioUnitario>
+<descuento>0.20</descuento>
+<precioTotalSinImpuesto>1.24</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.24</baseImponible>
+<valor>0.15</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>5826</codigoInterno>
+<descripcion>TUBO PVC ROSCABLE x 6 MTS. DE 1/2" (420 PSI)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>8.10</precioUnitario>
+<descuento>1.13</descuento>
+<precioTotalSinImpuesto>6.97</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.97</baseImponible>
+<valor>0.84</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>50304</codigoInterno>
+<descripcion>CODO POLIPROPILENO DE 3/4" x 45ø</descripcion>
+<cantidad>44.00</cantidad>
+<precioUnitario>0.98</precioUnitario>
+<descuento>6.04</descuento>
+<precioTotalSinImpuesto>37.08</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>37.08</baseImponible>
+<valor>4.45</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>50328</codigoInterno>
+<descripcion>NEPLO POLIPROPILENO DE 3/4" x 10 cm. (AGUA CALIENTE)</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>0.35</precioUnitario>
+<descuento>0.49</descuento>
+<precioTotalSinImpuesto>3.01</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.01</baseImponible>
+<valor>0.36</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>6150</codigoInterno>
+<descripcion>UNION FLEX DE 1/2"</descripcion>
+<cantidad>10.00</cantidad>
+<precioUnitario>0.29</precioUnitario>
+<descuento>0.41</descuento>
+<precioTotalSinImpuesto>2.49</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.49</baseImponible>
+<valor>0.30</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">cima@pronaca.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2130100</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">2058</campoAdicional>
+</infoAdicional>
+</notaCredito>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268926</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>23/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268926</guiaRemision>
+<razonSocialComprador>DANIELCOM EQUIPMENT SUPPLY S.A.</razonSocialComprador>
+<identificacionComprador>1791288777001</identificacionComprador>
+<totalSinImpuestos>708.72</totalSinImpuestos>
+<totalDescuento>125.07</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>708.72</baseImponible>
+<valor>85.05</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>793.77</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>14270</codigoPrincipal>
+<descripcion>TERRAJA 12R CABEZAL CON TRINQUETE Y DADOS DE 1/2" A 2" (36475)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>833.79</precioUnitario>
+<descuento>125.07</descuento>
+<precioTotalSinImpuesto>708.72</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>708.72</baseImponible>
+<valor>85.05</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">fact_electronica@danielcom.com</campoAdicional>
+<campoAdicional nombre="Email">marroyo@danielcom.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2258425</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">007874</campoAdicional>
+<campoAdicional nombre="Observaciones">ORDEN DE COMPRA N.- 7253</campoAdicional>
+</infoAdicional>
+</factura>

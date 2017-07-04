@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268177</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268177</guiaRemision>
+<razonSocialComprador>ARBOLEDA FAINI JUAN XAVIER</razonSocialComprador>
+<identificacionComprador>1704337052001</identificacionComprador>
+<totalSinImpuestos>126.47</totalSinImpuestos>
+<totalDescuento>14.05</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>126.47</baseImponible>
+<valor>15.18</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>141.65</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>19272</codigoPrincipal>
+<descripcion>ACEITE DE TRANSFORMADOR P/ BOMBA SUMERGIBLE</descripcion>
+<cantidad>19.00</cantidad>
+<precioUnitario>5.30</precioUnitario>
+<descuento>10.07</descuento>
+<precioTotalSinImpuesto>90.63</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="LITRO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>90.63</baseImponible>
+<valor>10.88</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>99231</codigoPrincipal>
+<descripcion>CAPACITOR DE ARRANQUE (CONDENSADOR) E-216-220 DE 216 A 269 MFD</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>10.50</precioUnitario>
+<descuento>3.15</descuento>
+<precioTotalSinImpuesto>28.35</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>28.35</baseImponible>
+<valor>3.40</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>20212</codigoPrincipal>
+<descripcion>EMPAQUE 5014-A-158 P/ BOMBA HJ</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>8.32</precioUnitario>
+<descuento>0.83</descuento>
+<precioTotalSinImpuesto>7.49</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MYERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>7.49</baseImponible>
+<valor>0.90</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">financiero@afhidrotecnologia.com</campoAdicional>
+<campoAdicional nombre="Email">caicedo@afhidrotecnologia.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2460424</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">032849</campoAdicional>
+</infoAdicional>
+</factura>

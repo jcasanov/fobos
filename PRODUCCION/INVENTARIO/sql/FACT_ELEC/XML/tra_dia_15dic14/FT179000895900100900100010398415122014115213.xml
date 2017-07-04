@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000103984</secuencial>
+<dirMatriz>KM 1.7 AV. JUAN TANCA MARENGO</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/12/2014</fechaEmision>
+<dirEstablecimiento>LOMAS DE URDESA, CALLE AVILES 202</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000103984</guiaRemision>
+<razonSocialComprador>SOLUCIONES DE INGENIERIA CIVIL EFICACES S.A. SICE</razonSocialComprador>
+<identificacionComprador>0992633026001</identificacionComprador>
+<totalSinImpuestos>464.14</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>464.14</baseImponible>
+<valor>55.70</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>519.84</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>71846</codigoPrincipal>
+<descripcion>LLAVE TEMPORIZADAS / PRESSMATIC CG0065543061CW GRIF. ANTIVANDALICA PICO LARGO P/E</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>48.09</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>144.27</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="BRIGGS" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>144.27</baseImponible>
+<valor>17.31</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>70747</codigoPrincipal>
+<descripcion>DESAGUE DE LAVABO SC005903000 1BO 1-1/4" PP DESAGUE CON REJILLA Y SIFON</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>4.15</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>12.45</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="EDESA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>12.45</baseImponible>
+<valor>1.49</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100444</codigoPrincipal>
+<descripcion>INODORO COMERCIAL PARA FLUSH JS007790130 CARLTON ADA BLANCO ASTO. ORQUIDEA</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>83.14</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>166.28</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="BRIGGS" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>166.28</baseImponible>
+<valor>19.95</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>27893</codigoPrincipal>
+<descripcion>TORNILLO 3011000 SET ANCLAJE TAZA PISO WC</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1.50</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>3.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="EDESA" valor="EDESA"/>
+<detAdicional nombre="PAR" valor="PAR"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>3.00</baseImponible>
+<valor>0.36</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101817</codigoPrincipal>
+<descripcion>EMPAQUE 1319000 SELLO DE CERA</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>1.17</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2.34</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="EDESA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.34</baseImponible>
+<valor>0.28</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>68699</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA BAJO MESON 6504130 MARLOWE BLANCO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>30.86</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>30.86</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="BRIGGS" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>30.86</baseImponible>
+<valor>3.70</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>71352</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA CON PEDESTAL PREPONCHADO 5567130 CORTO BRIZZA BLANCO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>52.47</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>104.94</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="BRIGGS" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>104.94</baseImponible>
+<valor>12.59</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email"></campoAdicional>
+</infoAdicional>
+</factura>

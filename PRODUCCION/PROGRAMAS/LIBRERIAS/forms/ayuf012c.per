@@ -1,0 +1,28 @@
+DATABASE aceros
+SCREEN
+{
+  PARTIDAS ARANCELARIAS
+ ------------------------------------------------------------
+  Código  	    Nombre 		
+ ------------------------------------------------------------
+ [c01            ] [c002                                    ] 
+ [c01            ] [c002                                    ]
+ [c01            ] [c002                                    ]
+ [c01            ] [c002                                    ]
+ [c01            ] [c002                                    ]
+ [c01            ] [c002                                    ]
+ [c01            ] [c002                                    ] 
+ [c01            ] [c002                                    ] 
+ [c01            ] [c002                                    ] 
+ [c01            ] [c002                                    ] 
+}
+TABLES
+gent016
+ATTRIBUTES
+c01  = gent016.g16_partida, UPSHIFT, AUTONEXT, REVERSE,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c002 = gent016.g16_desc_par, UPSHIFT, AUTONEXT, REVERSE;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rh_part[10] (g16_partida, g16_desc_par)

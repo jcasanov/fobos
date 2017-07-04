@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000269023</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>27/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000269023</guiaRemision>
+<razonSocialComprador>JACOME JACOME ALICIA DEL ROSARIO</razonSocialComprador>
+<identificacionComprador>1701914242001</identificacionComprador>
+<totalSinImpuestos>88.60</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>88.60</baseImponible>
+<valor>10.63</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>99.23</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>733</codigoPrincipal>
+<descripcion>TOL AL FRIO DE 1.4mm. 1.22 x 2.44 m</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>50.72</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>50.72</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IMPORT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>50.72</baseImponible>
+<valor>6.09</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>440</codigoPrincipal>
+<descripcion>PLETINA DE 32 x 4.5mm. x 6 Mts.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>9.08</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>9.08</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>9.08</baseImponible>
+<valor>1.09</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5352</codigoPrincipal>
+<descripcion>TUBO ESTRUCTURAL A-3724 TIPO "N" 30 x 30 x 2mm. ESPESOR</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>21.70</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>21.70</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>21.70</baseImponible>
+<valor>2.60</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>21938</codigoPrincipal>
+<descripcion>BISAGRA DE 5/8" (DOBLE ACCION)</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>0.77</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>4.62</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="PAR"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.62</baseImponible>
+<valor>0.55</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>96315</codigoPrincipal>
+<descripcion>DISCO ABRASIVO 49-94-4505  DE 4-1/2" TIPO 27</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2.48</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2.48</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.48</baseImponible>
+<valor>0.30</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jacomeeliana@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2438107</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">063099</campoAdicional>
+<campoAdicional nombre="Observaciones">T / CREDITO</campoAdicional>
+</infoAdicional>
+</factura>

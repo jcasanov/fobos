@@ -1076,7 +1076,9 @@ IF STATUS = NOTFOUND THEN
 	CALL fl_mostrar_mensaje('No hay bodega logica de facturación de Taller configurada.','stop') 
 	RETURN
 END IF
-CALL genera_ot()
+IF NOT genera_ot() THEN
+	RETURN
+END IF
 CALL genera_proformas_ot()
 CALL genera_mo_ot()
 CALL genera_transferencias()
@@ -1166,8 +1168,14 @@ LET r_t23.t23_compania 		= vg_codcia
 LET r_t23.t23_localidad		= vg_codloc
 LET r_t23.t23_orden 		= rm_t23.t23_orden
 LET r_t23.t23_estado 		= 'A'
-LET r_t23.t23_tipo_ot 		= 'C'
-LET r_t23.t23_subtipo_ot 	= 'C'
+LET r_t23.t23_tipo_ot 		= '1'
+LET r_t23.t23_subtipo_ot 	= '1'
+CALL lee_tipo_ot(r_t23.t23_tipo_ot, r_t23.t23_subtipo_ot)
+	RETURNING r_t23.t23_tipo_ot, r_t23.t23_subtipo_ot
+IF int_flag THEN
+	ROLLBACK WORK
+	RETURN 0
+END IF
 LET r_t23.t23_descripcion 	= rm_t20.t20_motivo
 LET r_t23.t23_cod_cliente 	= rm_t20.t20_cod_cliente
 LET r_t23.t23_nom_cliente 	= rm_t20.t20_nom_cliente
@@ -1201,19 +1209,39 @@ DECLARE q_ase CURSOR FOR
 		  AND t03_tipo       = 'A'
 		  AND t61_compania   = t03_compania
 		  AND t61_cod_asesor = t03_mecanico
-OPEN q_ase
-FETCH q_ase INTO r_t23.t23_cod_asesor
-CLOSE q_ase
-FREE q_ase
+IF vg_codloc <> 1 THEN
+	OPEN q_ase
+	FETCH q_ase INTO r_t23.t23_cod_asesor
+	CLOSE q_ase
+	FREE q_ase
+ELSE
+        -- PROVISIONAL HASTA SOLUCIONAR DE OTRA FORMA
+        FOREACH q_ase INTO r_t23.t23_cod_asesor
+                IF r_t23.t23_cod_asesor <> 1 THEN
+                        EXIT FOREACH
+                END IF
+        END FOREACH
+        --
+END IF
 DECLARE q_mec CURSOR FOR
 	SELECT t03_mecanico
 		FROM talt003
 		WHERE t03_compania   = vg_codcia
 		  AND t03_tipo       = 'M'
-OPEN q_mec
-FETCH q_mec INTO r_t23.t23_cod_mecani
-CLOSE q_mec
-FREE q_mec
+IF vg_codloc <> 1 THEN
+	OPEN q_mec
+	FETCH q_mec INTO r_t23.t23_cod_mecani
+	CLOSE q_mec
+	FREE q_mec
+ELSE
+        -- PROVISIONAL HASTA SOLUCIONAR DE OTRA FORMA
+        FOREACH q_mec INTO r_t23.t23_cod_mecani
+                IF r_t23.t23_cod_mecani <> 1 THEN
+                        EXIT FOREACH
+                END IF
+        END FOREACH
+        --
+END IF
 LET r_t23.t23_moneda = rm_t20.t20_moneda
 IF r_t23.t23_moneda = rg_gen.g00_moneda_base THEN
 	LET r_t23.t23_paridad = 1
@@ -1261,6 +1289,135 @@ LET r_t23.t23_tot_neto 		= 0
 LET r_t23.t23_usuario 		= vg_usuario
 LET r_t23.t23_fecing 		= CURRENT
 INSERT INTO talt023 VALUES (r_t23.*)
+RETURN 1
+
+END FUNCTION
+
+
+
+FUNCTION lee_tipo_ot(t23_tipo_ot, t23_subtipo_ot)
+DEFINE t23_tipo_ot	LIKE talt023.t23_tipo_ot
+DEFINE t23_subtipo_ot	LIKE talt023.t23_subtipo_ot
+DEFINE r_t05		RECORD LIKE talt005.*
+DEFINE r_t06		RECORD LIKE talt006.*
+DEFINE tipord		LIKE talt005.t05_tipord
+DEFINE desc_tipo_ot	LIKE talt005.t05_nombre
+DEFINE subtipo		LIKE talt006.t06_subtipo
+DEFINE desc_subtipo_ot	LIKE talt006.t06_nombre
+DEFINE resp		CHAR(6)
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
+
+LET lin_menu      = 00
+LET row_ini       = 09
+LET num_rows      = 09
+LET num_cols      = 45
+IF vg_gui = 0 THEN        
+	LET lin_menu = 01
+	LET row_ini  = 09
+	LET num_rows = 08 
+	LET num_cols = 46 
+END IF                  
+OPEN WINDOW w_talf201_2 AT row_ini, 18 WITH num_rows ROWS, num_cols COLUMNS
+	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE lin_menu,
+		  MESSAGE LINE LAST, BORDER) 
+IF vg_gui = 1 THEN
+	OPEN FORM f_talf201_2 FROM '../forms/talf201_2'
+ELSE
+	OPEN FORM f_talf201_2 FROM '../forms/talf201_2c'
+END IF
+DISPLAY FORM f_talf201_2
+CALL fl_lee_tipo_orden_taller(vg_codcia, t23_tipo_ot) RETURNING r_t05.* 
+CALL fl_lee_subtipo_orden_taller(vg_codcia, t23_tipo_ot, t23_subtipo_ot)
+	RETURNING r_t06.* 
+DISPLAY r_t05.t05_nombre TO desc_tipo_ot
+DISPLAY r_t06.t06_nombre TO desc_subtipo_ot
+LET int_flag = 0
+INPUT BY NAME t23_tipo_ot, t23_subtipo_ot
+	WITHOUT DEFAULTS
+	ON KEY(INTERRUPT)
+		IF FIELD_TOUCHED(t23_tipo_ot, t23_subtipo_ot) THEN
+			LET int_flag = 0
+			CALL fl_mensaje_abandonar_proceso() RETURNING resp
+			IF resp = 'Yes' THEN
+				LET int_flag = 1
+				EXIT INPUT
+			END IF
+		ELSE
+			LET int_flag = 1
+			EXIT INPUT
+		END IF
+	ON KEY(F2)
+		IF INFIELD(t23_tipo_ot) THEN
+			CALL fl_ayuda_tipo_orden_trabajo(vg_codcia)
+				RETURNING tipord, desc_tipo_ot
+			IF tipord IS NOT NULL THEN
+				LET t23_tipo_ot = tipord
+				DISPLAY BY NAME t23_tipo_ot, desc_tipo_ot
+			END IF
+		END IF
+		IF INFIELD(t23_subtipo_ot) AND t23_tipo_ot IS NOT NULL THEN
+			CALL fl_ayuda_subtipo_orden(vg_codcia, t23_tipo_ot)
+				RETURNING desc_tipo_ot, subtipo, desc_subtipo_ot
+			IF subtipo IS NOT NULL THEN
+				LET t23_subtipo_ot = subtipo
+				DISPLAY BY NAME t23_subtipo_ot, desc_subtipo_ot
+			END IF
+		END IF
+		LET int_flag = 0
+	AFTER FIELD t23_tipo_ot
+		IF t23_tipo_ot IS NOT NULL THEN
+			CALL fl_lee_tipo_orden_taller(vg_codcia, t23_tipo_ot)
+				RETURNING r_t05.*
+			IF r_t05.t05_tipord IS NULL THEN
+				CALL fl_mostrar_mensaje('No existe Tipo de Orden.','exclamation')
+				NEXT FIELD t23_tipo_ot
+       			END IF
+			LET t23_tipo_ot  = r_t05.t05_tipord
+			LET desc_tipo_ot = r_t05.t05_nombre
+		ELSE
+			LET t23_tipo_ot     = NULL
+			LET desc_tipo_ot    = NULL
+			LET t23_subtipo_ot  = NULL
+			LET desc_subtipo_ot = NULL
+		END IF
+		DISPLAY BY NAME t23_tipo_ot, desc_tipo_ot, t23_subtipo_ot,
+				desc_subtipo_ot
+	AFTER FIELD t23_subtipo_ot
+		IF t23_tipo_ot IS NULL THEN
+			LET t23_subtipo_ot  = NULL
+			LET desc_subtipo_ot = NULL
+			DISPLAY BY NAME t23_subtipo_ot, desc_subtipo_ot
+			CONTINUE INPUT
+		END IF
+		IF t23_subtipo_ot IS NOT NULL THEN
+			CALL fl_lee_subtipo_orden_taller(vg_codcia, t23_tipo_ot,
+								t23_subtipo_ot)
+				RETURNING r_t06.*
+			IF r_t06.t06_subtipo IS NULL THEN
+				CALL fl_mostrar_mensaje('No existe Subtipo de Orden o no esta asociado al Tipo de Orden.','exclamation')
+				NEXT FIELD t23_subtipo_ot
+       			END IF
+			LET t23_subtipo_ot  = r_t06.t06_subtipo
+			LET desc_subtipo_ot = r_t06.t06_nombre
+		ELSE
+			LET t23_subtipo_ot  = NULL
+			LET desc_subtipo_ot = NULL
+		END IF
+		DISPLAY BY NAME t23_subtipo_ot, desc_subtipo_ot
+	AFTER INPUT
+		CALL fl_lee_subtipo_orden_taller(vg_codcia, t23_tipo_ot,
+							t23_subtipo_ot)
+			RETURNING r_t06.*
+		IF r_t06.t06_subtipo IS NULL THEN
+			CALL fl_mostrar_mensaje('No existe Subtipo de Orden o no esta asociado al Tipo de Orden.','exclamation')
+			NEXT FIELD t23_subtipo_ot
+       		END IF
+END INPUT
+CLOSE WINDOW w_talf201_2
+RETURN t23_tipo_ot, t23_subtipo_ot
 
 END FUNCTION
 
@@ -1326,6 +1483,11 @@ FOREACH q_mo INTO r_t21.*
 	LET r_t24.t24_descripcion = r_t21.t21_descripcion
 	LET r_t24.t24_paga_clte   = 'S'
 	LET r_t24.t24_mecanico    = r_t23.t23_cod_mecani
+	-- PROVISIONAL HASTA SOLUCIONAR DE OTRA FORMA
+	IF vg_codloc = 1 THEN
+		LET r_t24.t24_mecanico = 2
+	END IF
+        --
 	CALL fl_lee_mecanico(r_t24.t24_compania, r_t24.t24_mecanico)
 		RETURNING r_t03.*
 	LET r_t24.t24_seccion     = r_t03.t03_seccion

@@ -1,0 +1,45 @@
+356d355
+< DEFINE cant_od_ant_sne	LIKE rept035.r35_cant_ent
+449,462d447
+< 	SELECT NVL(SUM(r35_cant_des - r35_cant_ent), 0) INTO cant_od_ant_sne
+< 		FROM rept034, rept035
+< 		WHERE r34_compania    = rm_r88.r88_compania
+< 		  AND r34_localidad   = rm_r88.r88_localidad
+< 		  AND r34_bodega      = rm_r34.r34_bodega
+< 		  AND r34_cod_tran    = rm_r88.r88_cod_fact
+< 		  AND r34_num_tran    = rm_r88.r88_num_fact
+< 		  --AND r34_estado      = 'P'
+< 		  AND r35_compania    = r34_compania
+< 		  AND r35_localidad   = r34_localidad
+< 		  AND r35_bodega      = r34_bodega
+< 		  AND r35_num_ord_des = r34_num_ord_des
+< 		  AND r35_item        = r_desp[i].r35_item
+< 	LET r_desp[i].r35_cant_ent = r_desp[i].r35_cant_ent - cant_od_ant_sne
+1456,1482d1440
+< 	IF num_args() = 7 THEN
+< 		DECLARE q_r37 CURSOR FOR
+< 			SELECT rept037.*
+< 				FROM rept034, rept036, rept037
+< 				WHERE r34_compania    = rm_r88.r88_compania
+< 				  AND r34_localidad   = rm_r88.r88_localidad
+< 				  AND r34_cod_tran    = rm_r88.r88_cod_fact
+< 				  AND r34_num_tran    = rm_r88.r88_num_fact
+< 				  AND r36_compania    = r34_compania
+< 				  AND r36_localidad   = r34_localidad
+< 				  AND r36_bodega      = r34_bodega
+< 				  AND r36_num_ord_des = r34_num_ord_des
+< 				  AND r37_compania    = r36_compania
+< 				  AND r37_localidad   = r36_localidad
+< 				  AND r37_bodega      = r36_bodega
+< 				  AND r37_num_entrega = r36_num_entrega
+< 				  AND r37_item        = r_desp_aux.r35_item
+< 		OPEN q_r37
+< 		FETCH q_r37
+< 		IF STATUS = NOTFOUND THEN
+< 			CLOSE q_r37
+< 			FREE q_r37
+< 			CONTINUE FOREACH
+< 		END IF
+< 		CLOSE q_r37
+< 		FREE q_r37
+< 	END IF

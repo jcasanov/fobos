@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000048259</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoGuiaRemision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<dirPartida>AV LA PRENSA N/4514</dirPartida>
+<razonSocialTransportista>ACERO COMERCIAL</razonSocialTransportista>
+<tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+<rucTransportista>1790008959001</rucTransportista>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<fechaIniTransporte>23/12/2014</fechaIniTransporte>
+<fechaFinTransporte>23/12/2014</fechaFinTransporte>
+<placa>PBZ-8801</placa>
+</infoGuiaRemision>
+<destinatarios>
+<destinatario>
+<identificacionDestinatario>1790105083001</identificacionDestinatario>
+<razonSocialDestinatario>ASOCIACION CULTURAL ACADEMIA COTOPAXI</razonSocialDestinatario>
+<dirDestinatario>NUESTRAS BODEGAS SEGUN CROQUIZ</dirDestinatario>
+<motivoTraslado>VENTA</motivoTraslado>
+<fechaEmisionDocSustento>17/12/2014</fechaEmisionDocSustento>
+<detalles>
+<detalle>
+<codigoInterno>21414</codigoInterno>
+<descripcion>VALVULA DE PIE VP-75 DE 3"</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HELBER"/>
+<detAdicional nombre="MODELO" valor="DE 3""/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>33573</codigoInterno>
+<descripcion>CAJA TERMICA COMPLETA GMC 40 DE 18 A 26 AMPERIOS P/ 7.5 HP</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="LG IND"/>
+<detAdicional nombre="MODELO" valor="GMC 40"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>61795</codigoInterno>
+<descripcion>TANQUE DE PRESION FIBRA DE VIDRIO WM-14WB/WM0180 ENTREGA DE 14.1 GLS POR CICLO DE 30/50 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="WELL M"/>
+<detAdicional nombre="MODELO" valor="WM-14WB-WM0180"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>70730</codigoInterno>
+<descripcion>MANOMETRO ROSCA NPT 1/4" 0-230 PSI DE GLICERINA ESF. 2.5"</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ASHCRO"/>
+<detAdicional nombre="MODELO" valor="M477603"/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>8798</codigoInterno>
+<descripcion>VALVULA COMPUERTA  BRONCE ROSCADA RW-206 DE 2-1/2" 125 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RED WH"/>
+<detAdicional nombre="MODELO" valor="RW-206  2-1/2""/>
+</detallesAdicionales>
+</detalle>
+<detalle>
+<codigoInterno>94084</codigoInterno>
+<descripcion>SWITCH DE PRESION DE 115 - 150 PSI REGULABLE DIF 30 PSI (21JA1EWW/21EA/11)</descripcion>
+<cantidad>1.00</cantidad>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="MODELO" valor="115-150 PSI"/>
+</detallesAdicionales>
+</detalle>
+</detalles>
+</destinatario>
+</destinatarios>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">022467411</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">005372</campoAdicional>
+</infoAdicional>
+</guiaRemision>

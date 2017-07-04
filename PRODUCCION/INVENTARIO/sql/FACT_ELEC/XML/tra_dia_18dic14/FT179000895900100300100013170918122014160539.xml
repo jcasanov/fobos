@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000131709</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000131709</guiaRemision>
+<razonSocialComprador>SALAZAR NARVAEZ BYRON ROMEO</razonSocialComprador>
+<identificacionComprador>1704214178001</identificacionComprador>
+<totalSinImpuestos>259.63</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>259.63</baseImponible>
+<valor>31.16</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>290.79</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>616</codigoPrincipal>
+<descripcion>ARMEX 6.25 x 2.40 MTS. R-84 150 x 150 x 4 x 4mm.</descripcion>
+<cantidad>8.00</cantidad>
+<precioUnitario>24.65</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>197.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>197.20</baseImponible>
+<valor>23.66</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>614</codigoPrincipal>
+<descripcion>ARMEX 6.25 x 2.40 MTS. R-64 150 x 150 x 3.5 x 3.5mm.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>19.36</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>19.36</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>19.36</baseImponible>
+<valor>2.32</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>620</codigoPrincipal>
+<descripcion>ARMEX 6.25 x 2.40 MTS. R-131 150 x 150 x 5 x 5mm.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>37.55</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>37.55</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>37.55</baseImponible>
+<valor>4.51</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>46310</codigoPrincipal>
+<descripcion>DISCO DE CORTE 80 EHT 178-2A-24 PS 178 x 3 x 22.2mm. (ACERO)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>2.76</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>5.52</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PFERD"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>5.52</baseImponible>
+<valor>0.66</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2343241</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">023199</campoAdicional>
+</infoAdicional>
+</factura>

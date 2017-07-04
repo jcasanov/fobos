@@ -16,7 +16,7 @@ SCREEN TITLE ' Datos Proveedor '
     Dirección Domicilio: 
       [c002                                                        ]
       [c002                                                        ]
-     Teléfono Domicilio: [c004      ]
+     Teléfono Domicilio: [c004       ]
 
     Usuario: [c014      ]             Fecha de Ingreso: [c015               ]
 }
@@ -27,15 +27,15 @@ SCREEN TITLE 'Datos Adicionales'
           Tipo Proveedor: [c011  ] [c018                           ]
 
        Dirección Trabajo: [c003                                    ]
-        Teléfono Trabajo: [c005      ]
+        Teléfono Trabajo: [c005       ]           Fax: [c006       ]
+                 Casilla: [c008       ] Fax Adicional: [c007       ]
 
-                     Fax: [c006       ]
-           Fax Adicional: [c007       ]
-                 Casilla: [c008      ]
+         Banco Proveedor: [c050   ] [c051                          ]
+        Código Bco. Tra.: [c1]             Tipo Cuenta [c052       ]
+         Cta. Bco. Prov.: [c053       ]      Proveedor
 
  	            País: [c009       ] [c016                     ]
                   Ciudad: [c010       ] [c017                     ]
-
      Representante Legal: [c013                          ]
 
         Retiene Fuente ?: [a]   Retiene Impto. ?: [e]   Contr. Especial ?: [f]
@@ -47,7 +47,7 @@ SCREEN TITLE '    Compañía     '
                  Contacto: [c103                          ]
                Referencia: [c104                                    ]
              Crédito Días: [c105  ]
-
+                   Correo: [c130                                             ]
  Cupo Crédito Moneda base: [c106            ]           Datos de Facturación
  Cupo Crédito Moneda Alt.: [c107            ]             Descuento: [c108 ]% 
                                                             Recargo: [c109 ]%
@@ -62,7 +62,7 @@ SCREEN TITLE '    Compañía     '
  Aux. Antic. Moneda Alter.: [c115        ] [c121                             ]
 }
 TABLES
-cxpt001, cxpt002
+cxpt001, cxpt002, gent008
 ATTRIBUTES
 c000 = cxpt001.p01_codprov, AUTONEXT, REVERSE,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
@@ -144,4 +144,14 @@ x002 = FORMONLY.vm_row_current2, NOENTRY;
 y002 = FORMONLY.vm_num_rows2, NOENTRY;
 x003 = FORMONLY.vm_row_current3, NOENTRY;
 y003 = FORMONLY.vm_num_rows3, NOENTRY;
-end
+
+c050 = cxpt002.p02_banco_prov, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c051 = gent008.g08_nombre, AUTONEXT, UPSHIFT;
+c052 = cxpt002.p02_tip_cta_prov, AUTONEXT, UPSHIFT,
+	WIDGET = 'RADIO',
+	CONFIG = 'A Ahorro C Corriente N Ninguno', DEFAULT = 'C';
+c053 = cxpt002.p02_cta_prov, AUTONEXT, UPSHIFT;
+c1   = cxpt002.p02_cod_bco_tra, NOENTRY, UPSHIFT;
+c130 = cxpt002.p02_email, AUTONEXT, SCROLL;
+END

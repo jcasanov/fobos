@@ -1,0 +1,40 @@
+DATABASE aceros
+SCREEN
+{
+ [c01               ]
+                                          [c02] de [c03]
+ [c000|c001|c002                                    |b|c]
+[c010|c011|c012                                    |d|e]
+[c010|c011|c012                                    |d|e]
+[c010|c011|c012                                    |d|e]
+[c010|c011|c012                                    |d|e]
+[c010|c011|c012                                    |d|e]
+[c010|c011|c012                                    |d|e]
+[c010|c011|c012                                    |d|e]
+[c010|c011|c012                                    |d|e]
+[c010|c011|c012                                    |d|e]
+[c010|c011|c012                                    |d|e]
+
+}
+TABLES
+rept111
+ATTRIBUTES
+c01  = FORMONLY.tit_nom, NOENTRY, UPSHIFT, REVERSE;
+c02  = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c03  = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c002 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+b    = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c    = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+
+c010 = rept111.r111_cod_trans, UPSHIFT, REVERSE;
+c011 = rept111.r111_cod_chofer, UPSHIFT, REVERSE;
+c012 = rept111.r111_nombre, UPSHIFT, REVERSE;
+d    = rept111.r111_tipo, UPSHIFT, REVERSE;
+e    = rept111.r111_estado, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+SCREEN RECORD rh_chofer[10] (r111_cod_trans, r111_cod_chofer, r111_nombre,
+				r111_tipo, r111_estado)

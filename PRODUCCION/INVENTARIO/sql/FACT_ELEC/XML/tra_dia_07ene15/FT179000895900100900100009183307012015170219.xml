@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000091833</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000091833</guiaRemision>
+<razonSocialComprador>ING. CARLOS MOROCHO DUQUE S.A. CM CONSTRUCCIONES</razonSocialComprador>
+<identificacionComprador>0992234903001</identificacionComprador>
+<totalSinImpuestos>158.18</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>158.18</baseImponible>
+<valor>18.98</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>177.16</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>101337</codigoPrincipal>
+<descripcion>INODORO RESIDENCIAL UNA PIEZA JSSI6091130  EGO REDONDO ADVANCE BLANCO INT.C/ASTO. S.DOWN</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>112.47</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>112.47</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>112.47</baseImponible>
+<valor>13.50</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>68897</codigoPrincipal>
+<descripcion>LAVABO DE PORCELANA PARA EMPOTRAR PREPONCHADO 6590130 OAKBROOK BLANCO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>28.18</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>28.18</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="BRIGGS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>28.18</baseImponible>
+<valor>3.38</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>71661</codigoPrincipal>
+<descripcion>DESAGUE DE LAVABO SC0016963061BO DESAGUE DE1 1/4" PUSH BOTTOM P/L</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>8.55</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>8.55</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>8.55</baseImponible>
+<valor>1.03</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101099</codigoPrincipal>
+<descripcion>TUBO ABASTO- LLAVE ANGULAR LAVABO 7578306  1/2 x 1/2" C/ MANGUERA DE 16"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>6.21</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>6.21</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.21</baseImponible>
+<valor>0.75</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>69081</codigoPrincipal>
+<descripcion>SIFON DE LAVABO 4019000 1-1/4" CON ACOPLE EN POLIPROPILENO BLANCO</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>2.77</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>2.77</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>2.77</baseImponible>
+<valor>0.33</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">tmunoz@cmconstrucciones.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2776077</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">008600</campoAdicional>
+</infoAdicional>
+</factura>

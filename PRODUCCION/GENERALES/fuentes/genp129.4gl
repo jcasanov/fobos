@@ -283,7 +283,7 @@ INPUT modulo, cia, usr WITHOUT DEFAULTS FROM g54_modulo, compania, usuario
 		END IF
 	ON KEY(F2)
 		IF INFIELD(usuario) AND NOT flag = 'P' THEN
-			CALL fl_ayuda_usuarios() RETURNING usr2, nom_usr
+			CALL fl_ayuda_usuarios("A") RETURNING usr2, nom_usr
 			IF usr2 IS NOT NULL THEN
 				DISPLAY usr2 TO usuario
 				LET usr = usr2
@@ -1168,7 +1168,7 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 		END IF
 	ON KEY(F2)
 		IF INFIELD(usuario) THEN
-			CALL fl_ayuda_usuarios() RETURNING r_g05.g05_usuario,
+			CALL fl_ayuda_usuarios("A") RETURNING r_g05.g05_usuario,
 							   r_g05.g05_nombres
 			IF r_g05.g05_usuario IS NOT NULL THEN
 				LET rm_par.usuario   = r_g05.g05_usuario

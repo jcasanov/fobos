@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268327</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>12/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268327</guiaRemision>
+<razonSocialComprador>PROCESADORA NACIONAL DE ALIMENTOS C.A. PRONACA</razonSocialComprador>
+<identificacionComprador>1790319857001</identificacionComprador>
+<totalSinImpuestos>474.51</totalSinImpuestos>
+<totalDescuento>23.58</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>474.51</baseImponible>
+<valor>56.94</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>531.45</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>1374</codigoPrincipal>
+<descripcion>ADAPTADOR PVC ESP-CAM MACHO ISO DE 63mm. A 2"</descripcion>
+<cantidad>5.00</cantidad>
+<precioUnitario>1.61</precioUnitario>
+<descuento>1.13</descuento>
+<precioTotalSinImpuesto>6.92</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>6.92</baseImponible>
+<valor>0.83</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>50422</codigoPrincipal>
+<descripcion>UNIVERSAL POLIPROPILENO DE 1/2" (AGUA CALIENTE)</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>0.89</precioUnitario>
+<descuento>0.75</descuento>
+<precioTotalSinImpuesto>4.59</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>4.59</baseImponible>
+<valor>0.55</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5298</codigoPrincipal>
+<descripcion>TUBO FLEX BAJA DENSIDAD DE 1" 72 PSI</descripcion>
+<cantidad>100.00</cantidad>
+<precioUnitario>1.55</precioUnitario>
+<descuento>21.70</descuento>
+<precioTotalSinImpuesto>133.30</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="PLASTI"/>
+<detAdicional nombre="UNIDAD" valor="M"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>133.30</baseImponible>
+<valor>16.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>624</codigoPrincipal>
+<descripcion>ARMEX 6.25 x 2.40 MTS. R-188 150 x 150 x 6 x 6mm.</descripcion>
+<cantidad>3.00</cantidad>
+<precioUnitario>46.72</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>140.16</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>140.16</baseImponible>
+<valor>16.82</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>91242</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA ALAMEDA BLANCO PRIMERA</descripcion>
+<cantidad>9.00</cantidad>
+<precioUnitario>10.53</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>94.77</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>94.77</baseImponible>
+<valor>11.37</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>91243</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 40 x 40 MONOQUEMA ALAMEDA NEGRO PRIMERA</descripcion>
+<cantidad>9.00</cantidad>
+<precioUnitario>10.53</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>94.77</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>94.77</baseImponible>
+<valor>11.37</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">facturacionelectronica@pronaca.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3976400</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">028945</campoAdicional>
+<campoAdicional nombre="Observaciones">O/C# 100031954</campoAdicional>
+</infoAdicional>
+</factura>

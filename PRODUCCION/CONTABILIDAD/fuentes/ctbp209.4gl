@@ -119,8 +119,8 @@ DEFINE fec_pro_act	DATE
 CALL fl_lee_compania_activos(vg_codcia) RETURNING r_a00.*
 LET fec_pro_act = MDY(r_a00.a00_mespro, 01, r_a00.a00_anopro) - 1 UNITS DAY
 IF rm_b00.b00_fecha_cm <> fec_pro_act THEN
-	--CALL fl_mostrar_mensaje('No se han cerrado todos los meses en el modulo de ACTIVOS FIJOS.', 'exclamation')
-	--RETURN 0
+	CALL fl_mostrar_mensaje('No se han cerrado todos los meses en el modulo de ACTIVOS FIJOS.', 'exclamation')
+	RETURN 0
 END IF
 CALL fl_chequeo_mes_proceso_rep(vg_codcia) RETURNING int_flag 
 IF int_flag THEN

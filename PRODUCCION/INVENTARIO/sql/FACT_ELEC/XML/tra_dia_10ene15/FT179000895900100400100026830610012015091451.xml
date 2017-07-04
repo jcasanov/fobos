@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268306</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>10/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268306</guiaRemision>
+<razonSocialComprador>KONSTRUCASA FERRETERIA</razonSocialComprador>
+<identificacionComprador>0603718073001</identificacionComprador>
+<totalSinImpuestos>320.68</totalSinImpuestos>
+<totalDescuento>21.66</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>320.68</baseImponible>
+<valor>38.48</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>359.16</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>5999</codigoPrincipal>
+<descripcion>UNION GALV. CLASE 150 DE 3"</descripcion>
+<cantidad>13.00</cantidad>
+<precioUnitario>12.42</precioUnitario>
+<descuento>8.07</descuento>
+<precioTotalSinImpuesto>153.39</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="CIFUNS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>153.39</baseImponible>
+<valor>18.41</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>19963</codigoPrincipal>
+<descripcion>CONTROL DE NIVEL 3UG09 SENSOR DE NIVEL P/ SONDAS</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>83.00</precioUnitario>
+<descuento>4.81</descuento>
+<precioTotalSinImpuesto>78.19</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>78.19</baseImponible>
+<valor>9.38</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>20161</codigoPrincipal>
+<descripcion>ELECTRODO ELECTRODO TIPO PENDULO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>8.85</precioUnitario>
+<descuento>1.42</descuento>
+<precioTotalSinImpuesto>16.28</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>16.28</baseImponible>
+<valor>1.95</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>94438</codigoPrincipal>
+<descripcion>BRIDA ACERO INOXIDABLE DE 2-1/2" ANSI 150 SLIP-ON</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>67.14</precioUnitario>
+<descuento>6.71</descuento>
+<precioTotalSinImpuesto>60.43</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="INOX T"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>60.43</baseImponible>
+<valor>7.25</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>3365</codigoPrincipal>
+<descripcion>CODO SOLDAR ASTM A-234 CEDULA 80 DE 3" x 90°</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>13.04</precioUnitario>
+<descuento>0.65</descuento>
+<precioTotalSinImpuesto>12.39</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="UNICIM"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>12.39</baseImponible>
+<valor>1.49</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">armandie1981@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2604974</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064205</campoAdicional>
+</infoAdicional>
+</factura>

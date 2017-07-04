@@ -1,0 +1,43 @@
+DATABASE aceros
+SCREEN
+{
+  Fecha Inicial: [c000      ]                     Fecha Final: [c001      ]
+
+-----------------------------------------------------------------------------
+ TP Número Documento     Nombre del Cliente         Fecha    Número del SRI
+-----------------------------------------------------------------------------
+[c0|c011           |c012                        |c013      |c014            ]
+[c0|c011           |c012                        |c013      |c014            ]
+[c0|c011           |c012                        |c013      |c014            ]
+[c0|c011           |c012                        |c013      |c014            ]
+[c0|c011           |c012                        |c013      |c014            ]
+[c0|c011           |c012                        |c013      |c014            ]
+[c0|c011           |c012                        |c013      |c014            ]
+[c0|c011           |c012                        |c013      |c014            ]
+[c0|c011           |c012                        |c013      |c014            ]
+[c0|c011           |c012                        |c013      |c014            ]
+[c0|c011           |c012                        |c013      |c014            ]
+[c0|c011           |c012                        |c013      |c014            ]
+[c0|c011           |c012                        |c013      |c014            ]
+}
+TABLES
+cxct001
+cxct021
+ATTRIBUTES
+c000 = FORMONLY.vm_fecha_ini TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Inicial en formato: dd-mm-aaaa';
+c001 = FORMONLY.vm_fecha_fin TYPE DATE NOT NULL, AUTONEXT, UPSHIFT, REVERSE,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese la Fecha Final en formato: dd-mm-aaaa';
+c0   = cxct021.z21_tipo_doc, NOENTRY, REVERSE, UPSHIFT;
+c011 = cxct021.z21_num_doc, NOENTRY, REVERSE, UPSHIFT;
+c012 = cxct001.z01_nomcli, NOENTRY, REVERSE, UPSHIFT;
+c013 = FORMONLY.z21_fecing TYPE DATE, NOENTRY, REVERSE, UPSHIFT,
+	FORMAT = 'dd-mm-yyyy';
+c014 = cxct021.z21_num_sri, AUTONEXT, REVERSE, UPSHIFT;
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_det[13] (z21_tipo_doc, z21_num_doc, z01_nomcli, z21_fecing,
+				z21_num_sri)

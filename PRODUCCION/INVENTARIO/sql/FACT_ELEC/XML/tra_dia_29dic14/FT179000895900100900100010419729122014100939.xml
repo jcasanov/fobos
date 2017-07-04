@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104197</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>29/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104197</guiaRemision>
+<razonSocialComprador>INDUSTRIAS ALIMENTICIAS ECUATORIANAS S.A. INALECSA</razonSocialComprador>
+<identificacionComprador>0990006776001</identificacionComprador>
+<totalSinImpuestos>451.10</totalSinImpuestos>
+<totalDescuento>73.44</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>451.10</baseImponible>
+<valor>54.13</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>505.23</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>98303</codigoPrincipal>
+<descripcion>VALVULA DE SEGURIDAD (VAP.,GAS) ROSCADA VSGR 3/4" x 1" DESCARGA A 150 PSI CUERPO EN HIERRO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>219.00</precioUnitario>
+<descuento>61.32</descuento>
+<precioTotalSinImpuesto>376.68</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TECVAL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>376.68</baseImponible>
+<valor>45.20</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>45534</codigoPrincipal>
+<descripcion>VALVULA DE SEGURIDAD P-CALENTADOR AUTOCLAVE VSM 1/2" x 1" DESCARGA 45 PSI</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>86.54</precioUnitario>
+<descuento>12.12</descuento>
+<precioTotalSinImpuesto>74.42</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TECVAL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>74.42</baseImponible>
+<valor>8.93</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">rene.bravo@inalecsa.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2162040</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">003363</campoAdicional>
+</infoAdicional>
+</factura>

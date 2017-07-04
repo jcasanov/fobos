@@ -1,0 +1,34 @@
+DATABASE aceros
+SCREEN
+{
+ TIPOS DE PORCENTAJE DE ICE
+
+ [c000|c001  |c002   |c003                                       ]
+[c010|c011  |c012   |c013                                       ]
+[c010|c011  |c012   |c013                                       ]
+[c010|c011  |c012   |c013                                       ]
+[c010|c011  |c012   |c013                                       ]
+[c010|c011  |c012   |c013                                       ]
+[c010|c011  |c012   |c013                                       ]
+[c010|c011  |c012   |c013                                       ]
+[c010|c011  |c012   |c013                                       ]
+[c010|c011  |c012   |c013                                       ]
+[c010|c011  |c012   |c013                                       ]
+
+}
+TABLES
+srit010
+ATTRIBUTES
+c000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c002 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c003 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+
+c010 = s10_codigo, UPSHIFT, REVERSE;
+c011 = s10_porcentaje_ice, UPSHIFT, REVERSE, FORMAT = '##&.##';
+c012 = s10_codigo_impto, UPSHIFT, REVERSE;
+c013 = s10_descripcion, UPSHIFT, REVERSE;
+END
+INSTRUCTIONS
+SCREEN RECORD rh_por_ice[10] (s10_codigo, s10_porcentaje_ice, s10_codigo_impto,
+				s10_descripcion)

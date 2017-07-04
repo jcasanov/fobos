@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268170</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>07/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268170</guiaRemision>
+<razonSocialComprador>MASTER CONTROL CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1791888685001</identificacionComprador>
+<totalSinImpuestos>96.77</totalSinImpuestos>
+<totalDescuento>17.08</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>96.77</baseImponible>
+<valor>11.61</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>108.38</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>4230</codigoPrincipal>
+<descripcion>TAPON NEGRO MACHO CLASE 150 DE 3/8"</descripcion>
+<cantidad>97.00</cantidad>
+<precioUnitario>0.69</precioUnitario>
+<descuento>10.04</descuento>
+<precioTotalSinImpuesto>56.89</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>56.89</baseImponible>
+<valor>6.83</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>4230</codigoPrincipal>
+<descripcion>TAPON NEGRO MACHO CLASE 150 DE 3/8"</descripcion>
+<cantidad>68.00</cantidad>
+<precioUnitario>0.69</precioUnitario>
+<descuento>7.04</descuento>
+<precioTotalSinImpuesto>39.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="HITACH"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>39.88</baseImponible>
+<valor>4.79</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">contabilidad@mastercontrol.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2566547</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">036495</campoAdicional>
+</infoAdicional>
+</factura>

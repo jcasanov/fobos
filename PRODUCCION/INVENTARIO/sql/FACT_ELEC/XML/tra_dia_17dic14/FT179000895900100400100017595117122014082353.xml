@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175951</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>AV.DE LOS SHYRIS N32-218 Y AV.ELOY ALFAR</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175951</guiaRemision>
+<razonSocialComprador>A&O CONSULTORES ASOCIADOS CIA. LTDA.</razonSocialComprador>
+<identificacionComprador>1791815416001</identificacionComprador>
+<totalSinImpuestos>446.12</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>446.12</baseImponible>
+<valor>53.53</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>499.65</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>13660</codigoPrincipal>
+<descripcion>LLAVE DE TUBO RECTA NO. 36 (31035)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>170.15</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>170.15</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIDGID" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>170.15</baseImponible>
+<valor>20.42</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>16814</codigoPrincipal>
+<descripcion>MUELA E-4205-X P/LLAVE Nø24 (31700)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>25.89</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>51.78</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIDGID" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>51.78</baseImponible>
+<valor>6.21</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>17314</codigoPrincipal>
+<descripcion>QUIJADA D-342 P/LLAVE Nø 24 (31695)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>50.50</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>101.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIDGID" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>101.00</baseImponible>
+<valor>12.12</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>93572</codigoPrincipal>
+<descripcion>GRIFO ESFERICO BRONCE CROMADO FUTURGAS DE 3/4" (AGUA, GAS Y AIRE)</descripcion>
+<cantidad>6.00</cantidad>
+<precioUnitario>9.29</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>55.74</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FIV" valor="FIV"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>55.74</baseImponible>
+<valor>6.69</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>92752</codigoPrincipal>
+<descripcion>LLAVE AJUSTABLE (INGLESA) N.760  DE 10"   (86912)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>24.96</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>24.96</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="RIDGID" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>24.96</baseImponible>
+<valor>3.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102642</codigoPrincipal>
+<descripcion>JUEGO DE LLAVES MIXTAS B-0907 DE 8/10/11/12/13/14/15/17 Y 19 mm.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>42.49</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>42.49</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FIXMAN" valor="FIXMAN"/>
+<detAdicional nombre="JUEGO" valor="JUEGO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>42.49</baseImponible>
+<valor>5.10</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">3825592</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">057575</campoAdicional>
+</infoAdicional>
+</factura>

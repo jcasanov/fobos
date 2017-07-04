@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>003</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000114043</secuencial>
+<dirMatriz>AV. DE LA PRENSA N45-14 Y EL TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>21/01/2015</fechaEmision>
+<dirEstablecimiento>GUALBERTO PEREZ E1-88 Y MALDONADO Y NAPO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>003-001-000114043</guiaRemision>
+<razonSocialComprador>HERNANDEZ VILLARROEL NORFA EDIDT</razonSocialComprador>
+<identificacionComprador>1710233295001</identificacionComprador>
+<totalSinImpuestos>825.13</totalSinImpuestos>
+<totalDescuento>108.93</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>825.13</baseImponible>
+<valor>99.02</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>924.15</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>100679</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 33 x 33 MONOQUEMA TOMEBAMBA SEGUNDA</descripcion>
+<cantidad>30.00</cantidad>
+<precioUnitario>8.30</precioUnitario>
+<descuento>37.35</descuento>
+<precioTotalSinImpuesto>211.65</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>211.65</baseImponible>
+<valor>25.40</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101840</codigoPrincipal>
+<descripcion>AZULEJO PARED 20 x 25 ROYAL BLANCO  SEGUNDA</descripcion>
+<cantidad>20.00</cantidad>
+<precioUnitario>7.64</precioUnitario>
+<descuento>22.92</descuento>
+<precioTotalSinImpuesto>129.88</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>129.88</baseImponible>
+<valor>15.59</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100466</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 FERRARA AZUL MARINO PRIMERA</descripcion>
+<cantidad>9.00</cantidad>
+<precioUnitario>9.54</precioUnitario>
+<descuento>12.88</descuento>
+<precioTotalSinImpuesto>72.98</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>72.98</baseImponible>
+<valor>8.76</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>101209</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 FERRARA VERDE BOTELLA  PRIMERA</descripcion>
+<cantidad>9.00</cantidad>
+<precioUnitario>9.54</precioUnitario>
+<descuento>12.88</descuento>
+<precioTotalSinImpuesto>72.98</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>72.98</baseImponible>
+<valor>8.76</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>100470</codigoPrincipal>
+<descripcion>AZULEJO PARED 25 x 33 FERRARA MARFIL PRIMERA</descripcion>
+<cantidad>16.00</cantidad>
+<precioUnitario>9.54</precioUnitario>
+<descuento>22.90</descuento>
+<precioTotalSinImpuesto>129.74</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIALTO"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>129.74</baseImponible>
+<valor>15.57</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>102136</codigoPrincipal>
+<descripcion>BALDOSA DE PISO 31 x 31 MONOQUEMA SANTA ANA PRIMERA</descripcion>
+<cantidad>30.00</cantidad>
+<precioUnitario>6.93</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>207.90</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ECUACE"/>
+<detAdicional nombre="UNIDAD" valor="M2"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>207.90</baseImponible>
+<valor>24.95</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">yacofernando77@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2280152</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">045632</campoAdicional>
+<campoAdicional nombre="Observaciones">PIDE SRA. EDITH</campoAdicional>
+</infoAdicional>
+</factura>

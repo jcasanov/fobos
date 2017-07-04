@@ -519,12 +519,6 @@ INPUT BY NAME rm_t60.t60_fac_ant,rm_t60.t60_codcli_nue, rm_t60.t60_motivo_refact
 				CALL fl_mostrar_mensaje('La Factura no existe en la Compañía.', 'exclamation')
                         	NEXT FIELD t60_fac_ant
 			END IF
-			{--
-			IF tiene_cruce(r_t23.t23_orden) THEN
-				CALL fl_mostrar_mensaje('La Factura no puede ser refacturada, porque una o varias Facturas de Inventario tienen un problema tecnico con el CRUCE AUTOMATICO DE STOCK. Por favor llame al Administrador para mayor informacion.', 'exclamation')
-				NEXT FIELD t60_fac_ant
-			END IF
-			--}
 			IF NOT validar_caja() THEN
 				LET int_flag = 1
 				RETURN
@@ -543,14 +537,6 @@ INPUT BY NAME rm_t60.t60_fac_ant,rm_t60.t60_codcli_nue, rm_t60.t60_motivo_refact
 			DISPLAY BY NAME r_t23.t23_cod_cliente,
 					r_t23.t23_nom_cliente,
 					rm_t60.t60_ot_ant
-			CALL fl_lee_cliente_general(r_t23.t23_cod_cliente)
-				RETURNING r_z01.*
-			IF r_z01.z01_paga_impto = 'S' AND
-			   r_t23.t23_porc_impto = 0
-			THEN
-				CALL fl_mostrar_mensaje('No puede Refacturar esta factura, porque no tiene IVA y el cliente esta configurado para calcular pago de impuestos.', 'exclamation')
-				CONTINUE INPUT
-			END IF
 			IF r_t23.t23_cont_cred = 'R' THEN
 				SELECT NVL(SUM((z20_valor_cap + z20_valor_int) -
 					(z20_saldo_cap + z20_saldo_int)), 0)
@@ -803,9 +789,6 @@ DECLARE q_r19 CURSOR WITH HOLD FOR
 FOREACH q_r19 INTO rm_r19.*
 	CALL lee_registro_refact_inv(rm_r19.r19_cod_tran, rm_r19.r19_num_tran)
 		RETURNING r_r88.*
-	IF rm_r19.r19_tipo_dev IS NOT NULL AND r_r88.r88_cod_dev IS NULL THEN
-		CONTINUE FOREACH
-	END IF
 	IF r_r88.r88_cod_fact_nue IS NULL THEN
 		CALL llamada_de_procesos(2, "REPUESTOS", "RE", "repp237 ")
 	END IF
@@ -987,41 +970,6 @@ IF vm_row_current > 1 THEN
 END IF
 CALL lee_muestra_registro(vm_rows[vm_row_current])
 CALL muestra_contadores()
-
-END FUNCTION
-
-
-
-FUNCTION tiene_cruce(orden)
-DEFINE orden		LIKE talt023.t23_orden
-DEFINE r_r19		RECORD LIKE rept019.*
-
-INITIALIZE r_r19.* TO NULL
-DECLARE q_tiene CURSOR FOR
-	SELECT UNIQUE c.*
-		FROM rept019 c
-		WHERE c.r19_compania    = vg_codcia
-		  AND c.r19_localidad   = vg_codloc
-		  AND c.r19_cod_tran    = "FA"
-		  AND c.r19_ord_trabajo = orden
-		  AND EXISTS (SELECT 1 FROM rept019 a, rept041 b
-				WHERE a.r19_compania  = c.r19_compania
-				  AND a.r19_localidad = c.r19_localidad
-		  		  AND a.r19_cod_tran  = "TR"
-		  		  AND a.r19_tipo_dev  = c.r19_cod_tran
-		  		  AND a.r19_num_dev   = c.r19_num_tran
-				  AND b.r41_compania  = a.r19_compania
-				  AND b.r41_localidad = a.r19_localidad
-				  AND b.r41_cod_tr    = a.r19_cod_tran
-				  AND b.r41_num_tr    = a.r19_num_tran)
-OPEN q_tiene
-FETCH q_tiene INTO r_r19.*
-CLOSE q_tiene
-FREE q_tiene
-IF r_r19.r19_compania IS NOT NULL THEN
-	RETURN 1
-END IF
-RETURN 0
 
 END FUNCTION
 

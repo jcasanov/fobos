@@ -1,0 +1,8 @@
+HELO srvgye01.acerocomercial.com
+MAIL FROM: fobos@acerocomercial.com
+RCPT TO: fsilva@acerocomercial.com
+DATA
+hola
+.
+quit
+

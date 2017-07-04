@@ -1,0 +1,76 @@
+DATABASE aceros
+SCREEN
+{
+
+                                                            [c021 ] de [c022 ]
+         Proceso:    [c0] [c001                          ]
+        Empleado: [c002 ] [c003                                      ]
+        Anticipo: [c004 ]                          Fecha: [c005      ]
+
+          Motivo: [c006                                              ]
+                                    Provisionar Aporte Personal ?: [c]
+
+   Forma de Pago: [c007            ]             Valor Ganado: [c008         ]
+
+   Banco Empresa                       Valor Parcial Vacación: [c009         ]
+  [c1] [c010                      ]    (-) Aporte Prov. Pers.: [c011         ]
+  Cuenta Empresa: [c012           ]    (-)   Saldo Pend. Ant.: [c023         ]
+ Cuenta Empleado: [c013           ]                            --------------
+                                                   Valor Tope: [c014         ]
+ Aplicar en Vac.: [c2|c015      |c016      ]  
+     Comprobante: [c3|c017    ]                Valor Anticipo: [c018         ]
+
+   Ingresado Por: [c019       ]        Fecha de Ingreso: [c020               ]
+}                                      
+TABLES
+gent008
+rolt003
+rolt030
+rolt091
+ATTRIBUTES
+c0   = rolt091.n91_proceso, NOENTRY, REVERSE, UPSHIFT;
+c001 = rolt003.n03_nombre, NOENTRY, REVERSE, UPSHIFT;
+c002 = rolt091.n91_cod_trab, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = rolt030.n30_nombres, NOENTRY, REVERSE, UPSHIFT;
+c004 = rolt091.n91_num_ant, NOENTRY, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c005 = rolt091.n91_fecha_ant, NOENTRY, REVERSE, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+
+c006 = rolt091.n91_motivo_ant, AUTONEXT, REVERSE, UPSHIFT;
+c    = rolt091.n91_prov_aport, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge', DEFAULT = 'S';
+
+c007 = rolt091.n91_tipo_pago, AUTONEXT, UPSHIFT, REVERSE, DEFAULT = 'E',
+	WIDGET = 'RADIO', CONFIG = 'E Efectivo C Cheque T Transferencia';
+c008 = rolt091.n91_valor_gan, NOENTRY, REVERSE, FORMAT = '##,###,##&.##';
+c009 = rolt091.n91_val_vac_par, NOENTRY, REVERSE, FORMAT = '##,###,##&.##';
+c1   = rolt091.n91_bco_empresa, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c010 = gent008.g08_nombre, NOENTRY, UPSHIFT;
+c011 = rolt091.n91_val_pro_apor, NOENTRY, REVERSE, FORMAT = '##,###,##&.##',
+	COLOR = RED WHERE c011 > 0;
+c012 = rolt091.n91_cta_empresa, AUTONEXT, UPSHIFT;
+c013 = rolt091.n91_cta_trabaj, AUTONEXT, UPSHIFT;
+c014 = rolt091.n91_valor_tope, NOENTRY, REVERSE, FORMAT = '--,---,--&.##',
+	COLOR = RED WHERE c014 < 0, COLOR = BLACK WHERE c014 = 0,
+	COLOR = BLUE WHERE c014 > 0;
+c023 = rolt091.n91_saldo_pend, NOENTRY, FORMAT = '--,---,--&.##',
+	COLOR = RED WHERE c023 <> 0;
+
+c2   = rolt091.n91_proc_vac, NOENTRY, REVERSE, UPSHIFT;
+c015 = rolt091.n91_periodo_ini, NOENTRY, REVERSE, UPSHIFT,FORMAT = 'dd-mm-yyyy';
+c016 = rolt091.n91_periodo_fin, NOENTRY, REVERSE, UPSHIFT,FORMAT = 'dd-mm-yyyy';
+c3   = rolt091.n91_tipo_comp, NOENTRY, UPSHIFT, COLOR = BLUE
+	WHERE c3 IS NOT NULL;
+c017 = rolt091.n91_num_comp, NOENTRY, UPSHIFT, COLOR = BLUE
+	WHERE c017 IS NOT NULL;
+c018 = rolt091.n91_valor_ant, AUTONEXT, FORMAT = '##,###,##&.##',
+	INCLUDE = (0.01 TO 99999999.99);
+
+c019 = rolt091.n91_usuario, NOENTRY, REVERSE, UPSHIFT;
+c020 = rolt091.n91_fecing, NOENTRY, REVERSE, UPSHIFT;
+
+c021 = FORMONLY.num_row, NOENTRY, UPSHIFT;
+c022 = FORMONLY.max_row, NOENTRY, UPSHIFT;
+END

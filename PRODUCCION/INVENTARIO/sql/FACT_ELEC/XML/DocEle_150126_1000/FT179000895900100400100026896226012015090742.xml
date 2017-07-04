@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268962</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>26/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268962</guiaRemision>
+<razonSocialComprador>BOLANOS PANTOJA AGUSTIN VINICIO</razonSocialComprador>
+<identificacionComprador>1706729306</identificacionComprador>
+<totalSinImpuestos>23.38</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>23.38</baseImponible>
+<valor>2.81</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>26.19</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>551</codigoPrincipal>
+<descripcion>HIERRO REDONDO LISO x 5.90 M. DE 6mm.</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>1.53</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>1.53</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="IDEAL"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>1.53</baseImponible>
+<valor>0.18</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>71057</codigoPrincipal>
+<descripcion>LLAVE DE PARED PICO MOVIL SG0074303061CE SHELBY LLAVE COCINA PICO ALTO C/DE</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>21.85</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>21.85</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="EDESA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>21.85</baseImponible>
+<valor>2.62</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">viniciopt@yahoo.es</campoAdicional>
+<campoAdicional nombre="telefono-movil">2240352</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064390</campoAdicional>
+</infoAdicional>
+</factura>

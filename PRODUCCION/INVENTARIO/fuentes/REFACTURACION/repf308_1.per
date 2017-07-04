@@ -1,0 +1,77 @@
+DATABASE aceros
+SCREEN
+{
+    Factura No.: [c001           ]       Fecha Factura: [c002               ]
+       Preventa: [c003   ]                                Proforma: [c004   ]
+        Cliente: [c005  ][c006                                              ]
+      Dirección: [c007                              ]   Teléfono: [c008     ]
+       Vendedor: [c09][c010                         ]   Impuesto: [c011 ]%
+                                                             [c050] de [c051]
+ [c040     |a0|c041  |c042                    |c043 |c044      |c045         ]
+[c020     |b0|c021  |c022                    |c023 |c024      |c025         ]
+[c020     |b0|c021  |c022                    |c023 |c024      |c025         ]
+[c020     |b0|c021  |c022                    |c023 |c024      |c025         ]
+[c020     |b0|c021  |c022                    |c023 |c024      |c025         ]
+[c020     |b0|c021  |c022                    |c023 |c024      |c025         ]
+[c020     |b0|c021  |c022                    |c023 |c024      |c025         ]
+[c020     |b0|c021  |c022                    |c023 |c024      |c025         ]
+                                                    Subtotal:[c030          ]
+ Anulación/Devolución: [z5|z51      ]              Descuento:[c031          ]
+                       [z52                ]        Impuesto:[c032          ]
+                                                       Flete:[c034          ]
+[c073                                              ]    Neto:[c033          ]
+[c074                                                             ]
+}
+TABLES
+rept019
+rept020
+rept023
+ATTRIBUTES
+c001 = r19_num_tran, REVERSE;
+c002 = r19_fecing, REVERSE;
+c003 = r23_numprev, REVERSE;
+c004 = r23_numprof, REVERSE;
+c005 = r19_codcli, REVERSE;
+c006 = r19_nomcli, REVERSE;
+c007 = r19_dircli, REVERSE;
+c008 = r19_telcli;
+c09  = r19_vendedor, REVERSE;
+c010 = FORMONLY.tit_vend, REVERSE;
+c011 = r19_porc_impto, REVERSE;
+c020 = r20_cant_ven, FORMAT = '#####&.##';
+b0   = r20_bodega;
+c021 = r20_item;
+c022 = FORMONLY.tit_item;
+c023 = r20_descuento;
+c024 = r20_precio, FORMAT = "###,##&.##";
+c025 = FORMONLY.subtotal    TYPE DECIMAL(14,2), FORMAT = "##,###,##&.##";
+c030 = FORMONLY.t_subtotal  TYPE DECIMAL(14,2), FORMAT = "###,###,##&.##";
+c031 = FORMONLY.t_descuento TYPE DECIMAL(14,2), FORMAT = "###,###,##&.##";
+c032 = FORMONLY.t_impuesto  TYPE DECIMAL(14,2), FORMAT = "###,###,##&.##";
+c033 = FORMONLY.t_neto      TYPE DECIMAL(14,2), FORMAT = "###,###,##&.##", 
+       REVERSE;
+c034 = r19_flete, FORMAT = "###,###,##&.##";
+c040 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+a0   = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c041 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c042 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c043 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c044 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c045 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
+z5   = r19_tipo_dev, REVERSE, NOENTRY;
+z51  = r19_num_dev,  REVERSE, NOENTRY;
+z52  = FORMONLY.fec_dev TYPE DATETIME YEAR TO SECOND, REVERSE, NOENTRY;
+c073 = FORMONLY.descrip_4, NOENTRY;
+c074 = FORMONLY.nom_item,  NOENTRY, REVERSE;
+
+c050 = FORMONLY.num_row,   NOENTRY, REVERSE;
+c051 = FORMONLY.max_row,   NOENTRY, REVERSE;
+END
+KEYS
+F5='Forma Pago'
+F6='Item'
+F7='Orden Despacho'
+F8='Preventa'
+INSTRUCTIONS
+SCREEN RECORD r_trn[7] (r20_cant_ven, r20_bodega, r20_item, FORMONLY.tit_item, 
+			r20_descuento, r20_precio, FORMONLY.subtotal)

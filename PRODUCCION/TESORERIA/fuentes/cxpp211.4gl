@@ -330,12 +330,13 @@ DEFINE lim		SMALLINT
 
 LET int_flag = 0 
 INPUT BY NAME rm_p33.p33_numero_oc, rm_p33.p33_cod_prov_nue,
-	rm_p33.p33_num_fac_nue, rm_p33.p33_num_aut_nue, rm_p33.p33_fec_cad_nue
+	rm_p33.p33_num_fac_nue, rm_p33.p33_fec_aut_nue, rm_p33.p33_num_aut_nue,
+	rm_p33.p33_fec_cad_nue
 	WITHOUT DEFAULTS
 	ON KEY(INTERRUPT)
 		IF FIELD_TOUCHED(rm_p33.p33_numero_oc, rm_p33.p33_cod_prov_nue,
-				 rm_p33.p33_num_fac_nue, rm_p33.p33_num_aut_nue,
-				 rm_p33.p33_fec_cad_nue)
+				 rm_p33.p33_num_fac_nue, rm_p33.p33_fec_aut_nue,
+				 rm_p33.p33_num_aut_nue, rm_p33.p33_fec_cad_nue)
 		THEN
 			LET int_flag = 0
 			CALL fl_mensaje_abandonar_proceso() RETURNING resp
@@ -430,11 +431,15 @@ INPUT BY NAME rm_p33.p33_numero_oc, rm_p33.p33_cod_prov_nue,
 				NEXT FIELD p33_num_fac_nue
 			END IF
 		END IF
-	AFTER FIELD p33_fec_cad_nue
-		IF rm_p33.p33_fec_cad_nue IS NOT NULL THEN
-			CALL retorna_fin_mes(rm_p33.p33_fec_cad_nue)
-				RETURNING rm_p33.p33_fec_cad_nue
-			DISPLAY BY NAME rm_p33.p33_fec_cad_nue
+	AFTER FIELD p33_fec_aut_nue
+		IF rm_p33.p33_fec_aut_nue IS NOT NULL THEN
+			IF LENGTH(rm_p33.p33_fec_aut_nue) <> 14 THEN
+				CALL fl_mostrar_mensaje('Numero de Fecha de Autorizacion no tiene completo el total de digitos.', 'exclamation')
+				NEXT FIELD p33_fec_aut_nue
+			END IF
+			IF NOT fl_valida_numeros(rm_p33.p33_fec_aut_nue) THEN
+				NEXT FIELD p33_fec_aut_nue
+			END IF
 		END IF
 	AFTER FIELD p33_num_aut_nue
 		IF rm_p33.p33_num_aut_nue IS NOT NULL THEN
@@ -442,18 +447,27 @@ INPUT BY NAME rm_p33.p33_numero_oc, rm_p33.p33_cod_prov_nue,
 				CALL fl_mostrar_mensaje('Numero de Autorizacion no tiene completo el numero de digitos.', 'exclamation')
 				NEXT FIELD p33_num_aut_nue
 			END IF
+			{-- OJO
 			IF rm_p33.p33_num_aut_nue[1, 1] <> '1' THEN
 				CALL fl_mostrar_mensaje('Numero de Autorizacion es incorrecto.', 'exclamation')
 				NEXT FIELD p33_num_aut_nue
 			END IF
+			--}
 			IF NOT fl_valida_numeros(rm_p33.p33_num_aut_nue) THEN
 				NEXT FIELD p33_num_aut_nue
 			END IF
+		END IF
+	AFTER FIELD p33_fec_cad_nue
+		IF rm_p33.p33_fec_cad_nue IS NOT NULL THEN
+			--CALL retorna_fin_mes(rm_p33.p33_fec_cad_nue)
+			--	RETURNING rm_p33.p33_fec_cad_nue
+			DISPLAY BY NAME rm_p33.p33_fec_cad_nue
 		END IF
 	AFTER INPUT
 		IF rm_p33.p33_cod_prov_nue IS NULL AND
 		   rm_p33.p33_nom_prov_nue IS NULL AND
 		   rm_p33.p33_num_fac_nue  IS NULL AND
+		   rm_p33.p33_fec_aut_nue  IS NULL AND
 		   rm_p33.p33_num_aut_nue  IS NULL AND
 		   rm_p33.p33_fec_cad_nue  IS NULL
 		THEN
@@ -484,14 +498,15 @@ IF NOT flag THEN
 	LET rm_p33.p33_cod_prov_nue = NULL
 	LET rm_p33.p33_nom_prov_nue = NULL
 	LET rm_p33.p33_num_fac_nue  = NULL
+	LET rm_p33.p33_fec_aut_nue  = NULL
 	LET rm_p33.p33_num_aut_nue  = NULL
 	LET rm_p33.p33_fec_cad_nue  = NULL
 	DISPLAY BY NAME rm_p33.p33_cod_prov_ant, rm_p33.p33_nom_prov_ant,
 			rm_p33.p33_num_fac_ant, rm_p33.p33_num_aut_ant,
 			rm_p33.p33_fec_cad_ant, rm_p33.p33_num_tran,
 			rm_p33.p33_cod_prov_nue, rm_p33.p33_nom_prov_nue,
-			rm_p33.p33_num_fac_nue, rm_p33.p33_num_aut_nue,
-			rm_p33.p33_fec_cad_nue
+			rm_p33.p33_num_fac_nue, rm_p33.p33_fec_aut_nue,
+			rm_p33.p33_num_aut_nue, rm_p33.p33_fec_cad_nue
 	RETURN
 END IF
 LET rm_p33.p33_cod_prov_ant = r_c10.c10_codprov
@@ -544,6 +559,7 @@ DEFINE expr_pro		VARCHAR(300)
 DEFINE expr_num		VARCHAR(300)
 DEFINE expr_aut		VARCHAR(100)
 DEFINE expr_fec		VARCHAR(100)
+DEFINE expr_fec_a	VARCHAR(100)
 DEFINE resul		SMALLINT
 
 LET resul = 0
@@ -600,8 +616,8 @@ THEN
 	END IF
 	WHENEVER ERROR STOP
 END IF
-IF rm_p33.p33_num_fac_nue IS NOT NULL OR rm_p33.p33_num_aut_nue IS NOT NULL OR
-   rm_p33.p33_fec_cad_nue IS NOT NULL
+IF rm_p33.p33_num_fac_nue IS NOT NULL OR rm_p33.p33_fec_aut_nue IS NULL OR
+   rm_p33.p33_num_aut_nue IS NOT NULL OR rm_p33.p33_fec_cad_nue IS NOT NULL
 THEN
 	CALL fl_lee_orden_compra(vg_codcia, vg_codloc, rm_p33.p33_numero_oc)
 		RETURNING r_c10.*
@@ -614,6 +630,11 @@ THEN
 				'     c13_serie_comp = "', serie_comp CLIPPED,
 							'"'
 	END IF
+	LET expr_fec_a = NULL
+	IF rm_p33.p33_fec_aut_nue IS NOT NULL THEN
+		LET expr_fec_a = ' c13_fec_aut = "',
+					rm_p33.p33_fec_aut_nue CLIPPED, '"'
+	END IF
 	LET expr_aut = NULL
 	IF rm_p33.p33_num_aut_nue IS NOT NULL THEN
 		LET expr_aut = ' c13_num_aut = "',
@@ -625,12 +646,18 @@ THEN
 					rm_p33.p33_fec_cad_nue CLIPPED, '"'
 	END IF
 	IF expr_num IS NOT NULL AND
-	  (expr_aut IS NOT NULL OR expr_fec IS NOT NULL)
+	  (expr_aut IS NOT NULL OR expr_fec IS NOT NULL OR
+	   expr_fec_a IS NOT NULL)
 	THEN
 		LET expr_num = expr_num CLIPPED, ', '
 	END IF
-	IF expr_aut IS NOT NULL AND expr_fec IS NOT NULL THEN
+	IF expr_aut IS NOT NULL AND
+	  (expr_fec IS NOT NULL OR expr_fec_a IS NOT NULL)
+	THEN
 		LET expr_aut = expr_aut CLIPPED, ', '
+	END IF
+	IF expr_fec IS NOT NULL AND expr_fec_a IS NOT NULL THEN
+		LET expr_fec = expr_fec CLIPPED, ', '
 	END IF
 	ERROR 'Actualizando registro en ordt013...'
 	WHENEVER ERROR CONTINUE
@@ -638,6 +665,7 @@ THEN
 			' SET ', expr_num CLIPPED,
 				expr_aut CLIPPED,
 				expr_fec CLIPPED,
+				expr_fec_a CLIPPED,
 			' WHERE c13_compania  = ', vg_codcia,
 			'   AND c13_localidad = ', vg_codloc,
 			'   AND c13_numero_oc = ', rm_p33.p33_numero_oc,
@@ -1177,8 +1205,8 @@ DISPLAY BY NAME rm_p33.p33_numero_oc, rm_p33.p33_cod_prov_ant,
 		rm_p33.p33_num_aut_ant, rm_p33.p33_fec_cad_ant,
 		rm_p33.p33_num_tran, rm_p33.p33_cod_prov_nue,
 		rm_p33.p33_nom_prov_nue, rm_p33.p33_num_fac_nue,
-		rm_p33.p33_num_aut_nue, rm_p33.p33_fec_cad_nue,
-		rm_p33.p33_usuario, rm_p33.p33_fecing
+		rm_p33.p33_fec_aut_nue, rm_p33.p33_num_aut_nue,
+		rm_p33.p33_fec_cad_nue, rm_p33.p33_usuario, rm_p33.p33_fecing
 CALL muestra_contadores(vm_row_current, vm_num_rows)
 
 END FUNCTION

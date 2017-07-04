@@ -899,12 +899,10 @@ DEFINE tipo_doc		LIKE cxct020.z20_tipo_doc
 DEFINE num_doc		LIKE cxct020.z20_num_doc
 DEFINE run_prog		CHAR(10)
 
-{-- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE --}
 LET run_prog = '; fglrun '
 IF vg_gui = 0 THEN
 	LET run_prog = '; fglgo '
 END IF
-{--- ---}
 LET vm_nuevoprog = 'cd ..', vg_separador, '..', vg_separador, 'COBRANZAS',
 	vg_separador, 'fuentes', vg_separador, run_prog, 'cxcp200 ', vg_base,
 	' ', vg_modulo, ' ', vg_codcia, ' ', vg_codloc, ' ', rm_j12.j12_codcli,
@@ -1078,12 +1076,10 @@ DEFINE tipo_doc		LIKE cxct020.z20_tipo_doc
 DEFINE num_doc		LIKE cxct020.z20_num_doc
 DEFINE run_prog		CHAR(10)
 
-{-- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE --}
 LET run_prog = '; fglrun '
 IF vg_gui = 0 THEN
 	LET run_prog = '; fglgo '
 END IF
-{--- ---}
 LET vm_nuevoprog = 'cd ..', vg_separador, '..', vg_separador, 'COBRANZAS',
 	vg_separador, 'fuentes', vg_separador, run_prog, 'cxcp415 ', vg_base,
 	' ', vg_modulo, ' ', vg_codcia, ' ', vg_codloc, ' ', rm_j12.j12_codcli,
@@ -1134,12 +1130,10 @@ DEFINE num_comp		LIKE ctbt012.b12_num_comp
 DEFINE cocoliso		CHAR(300)
 DEFINE run_prog		CHAR(10)
 
-{-- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE --}
 LET run_prog = '; fglrun '
 IF vg_gui = 0 THEN
 	LET run_prog = '; fglgo '
 END IF
-{--- ---}
 LET cocoliso = 'cd ..', vg_separador, '..', vg_separador, 'TESORERIA',
 		vg_separador, 'fuentes', vg_separador, run_prog, 'cxpp403 ',
 		vg_base, ' TE ', vg_codcia, ' ', vg_codloc, ' "', tipo_comp,

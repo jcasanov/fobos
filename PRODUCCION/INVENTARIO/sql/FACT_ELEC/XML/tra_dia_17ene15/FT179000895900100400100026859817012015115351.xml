@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000268598</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000268598</guiaRemision>
+<razonSocialComprador>SUINCO E INGIN.  CIA.LTDA.</razonSocialComprador>
+<identificacionComprador>1790886824001</identificacionComprador>
+<totalSinImpuestos>585.49</totalSinImpuestos>
+<totalDescuento>119.92</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>585.49</baseImponible>
+<valor>70.26</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>655.75</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>13022</codigoPrincipal>
+<descripcion>CORTATUBO 44-S DE 4 RUEDAS DE 2-1/2" A 4" (32880)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>507.47</precioUnitario>
+<descuento>86.27</descuento>
+<precioTotalSinImpuesto>421.20</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>421.20</baseImponible>
+<valor>50.54</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>45781</codigoPrincipal>
+<descripcion>CORTATUBO N.202 DE 1/8" A 2" (32895)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>197.94</precioUnitario>
+<descuento>33.65</descuento>
+<precioTotalSinImpuesto>164.29</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>164.29</baseImponible>
+<valor>19.71</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">suinco@cablemodem.com.ec</campoAdicional>
+<campoAdicional nombre="telefono-movil">2599591</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">029002</campoAdicional>
+<campoAdicional nombre="Observaciones">PEDIDO PERSONAL ING. JORGE GODOY</campoAdicional>
+</infoAdicional>
+</factura>

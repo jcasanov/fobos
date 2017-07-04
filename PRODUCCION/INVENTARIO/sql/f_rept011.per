@@ -1,0 +1,39 @@
+database acero_gm
+screen size 24 by 80
+{
+r11_compania       [f000       ]
+r11_bodega         [a0]
+r11_item           [f001           ]
+r11_ubicacion      [f002      ]
+r11_ubica_ant      [f003      ]
+r11_stock_ant      [f004      ]
+r11_stock_act      [f005      ]
+r11_ing_dia        [f006      ]
+r11_egr_dia        [f007      ]
+r11_fec_ultvta     [f008      ]
+r11_tip_ultvta     [a1]
+r11_num_ultvta     [f009             ]
+r11_fec_ulting     [f010      ]
+r11_tip_ulting     [a2]
+r11_num_ulting     [f011             ]
+}
+end
+tables
+rept011
+attributes
+f000 = rept011.r11_compania;
+a0 = rept011.r11_bodega;
+f001 = rept011.r11_item;
+f002 = rept011.r11_ubicacion;
+f003 = rept011.r11_ubica_ant;
+f004 = rept011.r11_stock_ant;
+f005 = rept011.r11_stock_act;
+f006 = rept011.r11_ing_dia;
+f007 = rept011.r11_egr_dia;
+f008 = rept011.r11_fec_ultvta;
+a1 = rept011.r11_tip_ultvta;
+f009 = rept011.r11_num_ultvta;
+f010 = rept011.r11_fec_ulting;
+a2 = rept011.r11_tip_ulting;
+f011 = rept011.r11_num_ulting;
+end

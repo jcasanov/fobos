@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175974</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>HERNAN CORTEZ 350 Y AV CARLOS V</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175974</guiaRemision>
+<razonSocialComprador>AGUILERA CARDENAS JOSE EDUARDO ARQ.</razonSocialComprador>
+<identificacionComprador>1703435105001</identificacionComprador>
+<totalSinImpuestos>257.05</totalSinImpuestos>
+<totalDescuento>19.35</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>257.05</baseImponible>
+<valor>30.85</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>287.90</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>61391</codigoPrincipal>
+<descripcion>TUBO NEGRO S-UNION ISO II TIPO "F" DE 2-1/2" x 6 m.</descripcion>
+<cantidad>4.00</cantidad>
+<precioUnitario>61.14</precioUnitario>
+<descuento>17.12</descuento>
+<precioTotalSinImpuesto>227.44</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="FUJI" valor="FUJI"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>227.44</baseImponible>
+<valor>27.29</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>5544</codigoPrincipal>
+<descripcion>TUBO NEGRO (POSTE) TIPO "T" DE 1-1/2" (38.1mm.) EXTERIOR 1.8mm. ESPESOR</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>15.92</precioUnitario>
+<descuento>2.23</descuento>
+<precioTotalSinImpuesto>29.61</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="TUGALT" valor="TUGALT"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>29.61</baseImponible>
+<valor>3.55</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2536787</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">037862</campoAdicional>
+</infoAdicional>
+</factura>

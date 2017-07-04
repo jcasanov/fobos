@@ -826,8 +826,6 @@ DEFINE cod_tran		LIKE rept019.r19_cod_tran
 DEFINE num_tran		LIKE rept019.r19_num_tran
 DEFINE mensaje		VARCHAR(200)
 DEFINE resul		SMALLINT
-DEFINE resp		CHAR(6)
-DEFINE intentar		INTEGER
 
 INITIALIZE r_z21.*, r_z22.*, r_z23.* TO NULL
 CALL fl_lee_cabecera_caja(vg_codcia, vg_codloc, rm_adi[i].j14_tipo_fuente,
@@ -965,47 +963,12 @@ FOREACH q_di_aplic INTO r_z20.*
 	LET r_z23.z23_valor_int  = r_z23.z23_saldo_int * (-1)
 	LET r_z22.z22_total_cap  = r_z22.z22_total_cap + r_z23.z23_valor_cap
 	LET r_z22.z22_total_int  = r_z22.z22_total_int + r_z23.z23_valor_int
-	LET intentar = 1
-	WHILE intentar
-		WHENEVER ERROR CONTINUE
-		SET LOCK MODE TO WAIT 1
-		INSERT INTO cxct023 VALUES(r_z23.*)
-		IF STATUS <> 0 THEN
-			LET int_flag = 0
-			CALL fl_hacer_pregunta('Se esta generando primero una transacción que esta actualizando el saldo del documento. Si desea intentar generar el AJ nuevamente presione SI, de lo contrario presione NO.', 'Yes')
-				RETURNING resp
-			IF resp <> 'Yes' THEN
-				ROLLBACK WORK
-				WHENEVER ERROR STOP
-				EXIT PROGRAM
-			END IF
-			CONTINUE WHILE
-		END IF
-		LET intentar = 0
-	END WHILE
-	LET r_z23.z23_orden = r_z23.z23_orden + 1
-	LET intentar = 1
-	WHILE intentar
-		WHENEVER ERROR CONTINUE
-		SET LOCK MODE TO WAIT 1
-		UPDATE cxct020
-			SET z20_saldo_cap = z20_saldo_cap + r_z23.z23_valor_cap,
-			    z20_saldo_int = z20_saldo_int + r_z23.z23_valor_int
-			WHERE CURRENT OF q_proc
-		IF STATUS <> 0 THEN
-			LET int_flag = 0
-			CALL fl_hacer_pregunta('Al momento otra transacción esta actualizando el saldo del documento. Si desea intentar generar el AJ nuevamente presione SI, de lo contrario presione NO.', 'Yes')
-				RETURNING resp
-			IF resp <> 'Yes' THEN
-				ROLLBACK WORK
-				WHENEVER ERROR STOP
-				EXIT PROGRAM
-			END IF
-			CONTINUE WHILE
-		END IF
-		LET intentar = 0
-	END WHILE
-	WHENEVER ERROR STOP
+	INSERT INTO cxct023 VALUES(r_z23.*)
+	LET r_z23.z23_orden      = r_z23.z23_orden + 1
+	UPDATE cxct020
+		SET z20_saldo_cap = z20_saldo_cap + r_z23.z23_valor_cap,
+		    z20_saldo_int = z20_saldo_int + r_z23.z23_valor_int
+		WHERE CURRENT OF q_proc
 	CLOSE q_proc
 	FREE q_proc
 END FOREACH
@@ -1373,8 +1336,7 @@ CASE rm_adi[i].j10_areaneg
 						rm_detalle[i].j14_localidad,
 						rm_adi[i].j14_num_tran)
 			RETURNING r_t23.*
-		--LET valor_bruto = r_t23.t23_tot_bruto - r_t23.t23_tot_dscto
-		LET valor_bruto = r_t23.t23_tot_bruto - r_t23.t23_vde_mo_tal
+		LET valor_bruto = r_t23.t23_tot_bruto - r_t23.t23_tot_dscto
 		LET valor_impto = r_t23.t23_val_impto
 		LET subtotal    = valor_bruto + valor_impto
 		LET flete       = NULL

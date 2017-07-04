@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000022056</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>06/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>CONSTRUCTORA COVIGON C.A.</razonSocialComprador>
+<identificacionComprador>0990817987001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>009-001-000022056</numDocModificado>
+<fechaEmisionDocSustento>17/09/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>210.91</totalSinImpuestos>
+<valorModificacion>236.22</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>210.91</baseImponible>
+<valor>25.31</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEVOLUCION: MATERIAL INCORRECTO</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>91928</codigoInterno>
+<descripcion>LAVAPLATOS DE ACERO INOXIDABLE 10104309 950.510 1C 1E DER. S/H P/DESG. C/REBOSO MODULAR</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>79.12</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>79.12</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TEKA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>79.12</baseImponible>
+<valor>9.49</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoInterno>23897</codigoInterno>
+<descripcion>LAVAPLATOS DE ACERO INOXIDABLE 10184550 1235x510 2P 1E DER. S/H P/DESG C/REBOSO Y 3-1/2" MODULAR</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>131.79</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>131.79</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="TEKA"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>131.79</baseImponible>
+<valor>15.81</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">compras2@covigon.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2922152</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">7186</campoAdicional>
+</infoAdicional>
+</notaCredito>

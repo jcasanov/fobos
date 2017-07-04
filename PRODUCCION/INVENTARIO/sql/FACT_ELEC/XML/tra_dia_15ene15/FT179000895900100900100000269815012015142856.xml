@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000002698</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>15/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000002698</guiaRemision>
+<razonSocialComprador>VIVANCO ELIZALDE BRAULIO AUSBERTO</razonSocialComprador>
+<identificacionComprador>0701143935001</identificacionComprador>
+<totalSinImpuestos>338.75</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>338.75</baseImponible>
+<valor>40.65</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>379.40</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>ZZ</codigoPrincipal>
+<descripcion>MANO DE OBRA - BOMBA No.1</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>40.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>40.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ACERO-"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>40.00</baseImponible>
+<valor>4.80</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>ZZ</codigoPrincipal>
+<descripcion>MANO DE OBRA - BOMBA No.2</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>40.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>40.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ACERO-"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>40.00</baseImponible>
+<valor>4.80</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>SERVICIO1</codigoPrincipal>
+<descripcion>REBOBINAJE DE BOMBA SUMERGIBLE Y CAMBIO DE IMPULSOR</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>230.00</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>230.00</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ACERO-"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>230.00</baseImponible>
+<valor>27.60</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>SERVICIO2</codigoPrincipal>
+<descripcion>ARREGLO DE BOMBA SUMERGIBLE, CAMBIO DE CAPACITOR Y ARREGLO D</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>28.75</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>28.75</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="ACERO-"/>
+<detAdicional nombre="UNIDAD" valor="UNI"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>28.75</baseImponible>
+<valor>3.45</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">braulio_vivanco57@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2944035</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">013515</campoAdicional>
+</infoAdicional>
+</factura>

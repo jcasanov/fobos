@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025179</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>10/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>CUERPO DE INGENIEROS DEL EJERCITO</razonSocialComprador>
+<identificacionComprador>1768007040001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000176424</numDocModificado>
+<fechaEmisionDocSustento>30/12/2014</fechaEmisionDocSustento>
+<totalSinImpuestos>568.80</totalSinImpuestos>
+<valorModificacion>637.06</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>568.80</baseImponible>
+<valor>68.26</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 268007 CUERPO INGS CAMBIO FA-268307</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>98135</codigoInterno>
+<descripcion>ANCLAJE EPOXICO 0500SD PE1000 + DUAL CARTRIDGE DE 13 Onzas</descripcion>
+<cantidad>16.00</cantidad>
+<precioUnitario>39.50</precioUnitario>
+<descuento>63.20</descuento>
+<precioTotalSinImpuesto>568.80</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="POWERS"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>568.80</baseImponible>
+<valor>68.26</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jorgejimenez_1979@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2656424</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">1112</campoAdicional>
+</infoAdicional>
+</notaCredito>

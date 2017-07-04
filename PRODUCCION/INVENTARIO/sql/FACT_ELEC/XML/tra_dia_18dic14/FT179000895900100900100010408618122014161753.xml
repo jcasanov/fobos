@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000104086</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>18/12/2014</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<guiaRemision>009-001-000104086</guiaRemision>
+<razonSocialComprador>FERRETERIA METAL & HIERRO S.A.</razonSocialComprador>
+<identificacionComprador>1391818068001</identificacionComprador>
+<totalSinImpuestos>483.89</totalSinImpuestos>
+<totalDescuento>53.77</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>483.89</baseImponible>
+<valor>58.07</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>541.96</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>90380</codigoPrincipal>
+<descripcion>ACEITE PARA EQUIPOS P/ ROSCAR EN ACERO INOXIDABLE 5 GL. (74047)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>203.68</precioUnitario>
+<descuento>20.37</descuento>
+<precioTotalSinImpuesto>183.31</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>183.31</baseImponible>
+<valor>22.00</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>15702</codigoPrincipal>
+<descripcion>DADOS PARA TUBOS 2-1/2" A 4" NPT HS P/714-914 (26192)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>312.70</precioUnitario>
+<descuento>31.27</descuento>
+<precioTotalSinImpuesto>281.43</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>281.43</baseImponible>
+<valor>33.77</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>15506</codigoPrincipal>
+<descripcion>CUCHILLA PARA CORTATUBO F-229 P/MOD.4S/44S/466S/466HWS/468HWS/472HWS/764 (33125)</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>21.28</precioUnitario>
+<descuento>2.13</descuento>
+<precioTotalSinImpuesto>19.15</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="RIDGID"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>19.15</baseImponible>
+<valor>2.30</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">042924858</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016639</campoAdicional>
+</infoAdicional>
+</factura>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>009</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000092091</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>22/01/2015</fechaEmision>
+<dirEstablecimiento>KM 1.7 AV. JUAN TANCA MARENGO</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<guiaRemision>009-001-000092091</guiaRemision>
+<razonSocialComprador>SUQUINAHUA DE LA CUADRA MERCY</razonSocialComprador>
+<identificacionComprador>0907581219</identificacionComprador>
+<totalSinImpuestos>812.24</totalSinImpuestos>
+<totalDescuento>203.06</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>812.24</baseImponible>
+<valor>97.47</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>909.71</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>90446</codigoPrincipal>
+<descripcion>GRIFERIA DE TINA E103/84 CR CHESS CROMO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>269.23</precioUnitario>
+<descuento>107.69</descuento>
+<precioTotalSinImpuesto>430.77</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>430.77</baseImponible>
+<valor>51.69</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>90415</codigoPrincipal>
+<descripcion>GRIFERIA DE BIDET CON SPRAY VERTICAL E299/84 CR CHESS CROMO</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>238.42</precioUnitario>
+<descuento>95.37</descuento>
+<precioTotalSinImpuesto>381.47</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="FRANZ"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>381.47</baseImponible>
+<valor>45.78</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">charlesg51@hotmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2451693</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">016733</campoAdicional>
+</infoAdicional>
+</factura>

@@ -42,7 +42,8 @@ DEFINE rm_par2 		RECORD
 				fec_emi_fin	DATE,
 				fec_vcto_ini	DATE,
 				fec_vcto_fin	DATE,
-				incluir_tj	CHAR(1)
+				incluir_tj	CHAR(1),
+				origen		CHAR(1)
 			END RECORD
 DEFINE rm_doc		ARRAY[32766] OF RECORD
 				cladoc		LIKE cxct020.z20_tipo_doc,
@@ -160,6 +161,7 @@ LET rm_par.fecha_cart  = TODAY
 LET vm_fecha_ini       = rm_z60.z60_fecha_carga
 LET vm_contab          = 'C'
 LET rm_par2.incluir_tj = 'S'
+LET rm_par2.origen     = 'T'
 IF num_args() >= 5 THEN
 	CALL llamada_de_otro_programa()
 END IF
@@ -574,7 +576,7 @@ END FUNCTION
 
 FUNCTION lee_parametros2()
 
-OPEN WINDOW w_cxcf315_6 AT 06, 10 WITH FORM "../forms/cxcf315_6" 
+OPEN WINDOW w_cxcf315_6 AT 06, 12 WITH FORM "../forms/cxcf315_6" 
 	ATTRIBUTE(BORDER, COMMENT LINE LAST, FORM LINE FIRST)
 LET int_flag = 0
 INPUT BY NAME rm_par2.*
@@ -701,6 +703,7 @@ DEFINE expr7		VARCHAR(200)
 DEFINE expr8, expr9	CHAR(400)
 DEFINE expr10, expr11	CHAR(100)
 DEFINE expr12		CHAR(200)
+DEFINE expr13		CHAR(100)
 DEFINE tabl1		VARCHAR(10)
 DEFINE expr_int, tabl2	VARCHAR(20)
 DEFINE signo		CHAR(2)
@@ -866,6 +869,10 @@ IF rm_par2.incluir_tj = 'N' THEN
 	LET expr12 = '   AND NOT EXISTS (SELECT g10_codcobr FROM gent010 ',
 					' WHERE g10_codcobr = z01_codcli) '
 END IF
+LET expr13 = NULL
+IF rm_par2.origen <> 'T' THEN
+	LET expr13 = '   AND z20_origen = "', rm_par2.origen, '"'
+END IF
 LET query = 'INSERT INTO tempo_doc ',
 		'SELECT z20_areaneg, z20_tipo_doc, z20_num_doc, z20_dividendo,',
 			' z20_codcli, z01_nomcli, z20_fecha_emi,',
@@ -885,7 +892,8 @@ LET query = 'INSERT INTO tempo_doc ',
 			expr3 CLIPPED,
 			expr10 CLIPPED,
 			expr11 CLIPPED,
-			expr12 CLIPPED
+			expr12 CLIPPED,
+			expr13 CLIPPED
 PREPARE stmnt1 FROM query
 EXECUTE stmnt1
 DROP TABLE tmp_z20
@@ -1155,6 +1163,12 @@ WHILE TRUE
 		ON KEY(F11)
 			CALL control_archivo()
 			LET int_flag = 0
+		ON KEY(CONTROL-W)
+			CALL control_archivo_indicador()
+			LET int_flag = 0
+		ON KEY(CONTROL-X)
+			CALL control_archivo_crediticio()
+			LET int_flag = 0
 		ON KEY(F15)
 			LET col      = 1
 			LET int_flag = 2
@@ -1190,6 +1204,8 @@ WHILE TRUE
 			ELSE
 				CALL dialog.keysetlabel("F9", "")
 			END IF
+			--#CALL dialog.keysetlabel("CONTROL-W","Arch. Indicador")
+			--#CALL dialog.keysetlabel("CONTROL-X","Arch. Crediticio")
 		AFTER DISPLAY 
 			CONTINUE DISPLAY
 		BEFORE ROW
@@ -2708,8 +2724,16 @@ UNLOAD TO "../../../tmp/cxcp315.unl"
 	}
 	SELECT UNIQUE codcli, nomcli, localidad, cladoc, numdoc, r38_num_sri,
 		fecha_emi, YEAR(fecha_emi) anio, fecha,(fecha - fecha_emi) dias,
-		valor_doc, saldo_doc, vendedor
-		FROM t2
+		valor_doc, saldo_doc, g31_nombre, vendedor,
+		NVL((SELECT z06_nombre
+			FROM cxct002, cxct006
+			WHERE z02_compania   = vg_codcia
+			  AND z02_localidad  = localidad
+			  AND z02_codcli     = codcli
+			  AND z06_zona_cobro = z02_zona_cobro), "SIN COBRADOR")
+		FROM t2, cxct001, gent031
+		WHERE z01_codcli = codcli
+		  AND g31_ciudad = z01_ciudad
 		--ORDER BY 5 ASC, 2 ASC
 		ORDER BY 2 ASC, 7 ASC
 --DROP TABLE t3
@@ -2901,5 +2925,184 @@ IF base_loc IS NOT NULL THEN
 	LET base_loc = base_loc CLIPPED, ':'
 END IF
 RETURN base_loc CLIPPED
+
+END FUNCTION
+
+
+
+FUNCTION control_archivo_indicador()
+DEFINE query		CHAR(5500)
+DEFINE mensaje		VARCHAR(100)
+DEFINE resp		CHAR(6)
+
+ERROR 'Generando Archivo cxcp315_ind.unl ... por favor espere'
+LET query = 'SELECT g02_nombre loc, NVL(z06_nombre, "SIN COBRADOR") cobra, ',
+		'fp_numero_semana("', rm_par.fecha_cart, '") num_sem, ',
+		'YEAR(DATE("', rm_par.fecha_cart, '")) anio, ',
+		'cladoc, numdoc, secuencia, '
+		--'fecha, cladoc, numdoc, secuencia, '
+		{--
+		'ROUND((DATE(fecha) - MDY(1, 3, YEAR(DATE(fecha) ',
+		'- WEEKDAY(DATE(fecha) - 1 UNITS DAY) + 4 UNITS DAY)) ',
+		'+ WEEKDAY(MDY(1, 3, YEAR(DATE(fecha) ',
+		'- WEEKDAY(DATE(fecha) - 1 UNITS DAY) + 4 UNITS DAY))) ',
+		'+ 5) / 7, 0) num_sem, '
+		--}
+LET int_flag = 0
+CALL fl_hacer_pregunta('Desea generar el archivo por antiguedad de cartera ?', 'nO')
+	RETURNING resp
+IF resp = 'Yes' THEN
+	LET query = query CLIPPED,
+			'(TODAY - fecha) dias, ',
+			'SUM((saldo_doc * (TODAY - fecha))) tot_t, ',
+			'SUM(saldo_doc) tot_d '
+ELSE
+	LET query = query CLIPPED, 
+			'SUM(saldo_doc) tot_cart '
+END IF
+LET query = query CLIPPED, 
+		' FROM tempo_doc, gent002, cxct002, OUTER cxct006 ',
+		' WHERE g02_compania   = ', vg_codcia,
+		'   AND g02_localidad  = localidad ',
+		'   AND z02_compania   = g02_compania ',
+		'   AND z02_localidad  = g02_localidad ',
+		'   AND z02_codcli     = codcli ',
+		'   AND z02_zona_cobro = z06_zona_cobro '
+		--' GROUP BY 1, 2, 3 ',
+IF resp = 'Yes' THEN
+	LET query = query CLIPPED,
+		' GROUP BY 1, 2, 3, 4, 5, 6, 7, 8 '
+ELSE
+	LET query = query CLIPPED,
+		' GROUP BY 1, 2, 3, 4, 5, 6, 7 '--, 8 '
+END IF
+LET query = query CLIPPED,
+	' INTO TEMP t1 '
+PREPARE exec_t1 FROM query
+EXECUTE exec_t1
+IF resp = 'Yes' THEN
+	{--
+	SELECT loc, cobra, anio, num_sem, SUM(tot_t) tot_t, SUM(tot_d) tot_d
+		FROM t1
+		GROUP BY 1, 2, 3, 4
+		INTO TEMP t2
+	DROP TABLE t1
+	SELECT loc, cobra, anio, num_sem, (tot_t / tot_d) tot_cart
+		FROM t2
+		INTO TEMP t1
+	DROP TABLE t2
+	--}
+	UNLOAD TO "../../../tmp/cxcp315_ind.unl"
+		SELECT * FROM t1
+			ORDER BY 4 ASC, 2 ASC
+ELSE
+	UNLOAD TO "../../../tmp/cxcp315_ind.unl"
+		SELECT loc, cobra, anio, num_sem, SUM(tot_cart) tot_cart
+			FROM t1
+			GROUP BY 1, 2, 3, 4
+			ORDER BY 4 ASC, 2 ASC
+		{--
+		SELECT loc, cobra, anio, num_sem, cladoc, numdoc, fecha,
+			SUM(tot_cart) tot_cart
+			FROM t1
+			GROUP BY 1, 2, 3, 4, 5, 6, 7
+			ORDER BY 4 ASC, 2 ASC
+		--}
+END IF
+DROP TABLE t1
+RUN "mv ../../../tmp/cxcp315_ind.unl $HOME/tmp/"
+LET mensaje = FGL_GETENV("HOME"), '/tmp/cxcp315_ind.unl'
+CALL fl_mostrar_mensaje('Archivo de Indicadores Generado en: ' || mensaje, 'info')
+ERROR ' '
+
+END FUNCTION
+
+
+
+FUNCTION control_archivo_crediticio()
+DEFINE query		CHAR(10000)
+DEFINE mensaje		VARCHAR(200)
+
+IF rm_par2.fec_emi_ini IS NULL THEN
+	CALL fl_mostrar_mensaje('No se ha seleccionado un periodo de emisión en los filtros adicionales para generar este tipo de archivo.', 'exclamation')
+	RETURN
+END IF
+ERROR 'Generando Archivo Crediticio. Por favor espere ... '
+LET query = "SELECT 'SR01609' AS cod_ent, ",
+		"DATE('", rm_par2.fec_emi_fin, "') AS fec_corte, ",
+		"CASE WHEN z01_tipo_doc_id = 'P' ",
+			"THEN 'E' ",
+			"ELSE z01_tipo_doc_id ",
+		"END AS tipo_id, ",
+		"z01_num_doc_id AS cedruc, ",
+		"nomcli AS cliente, ",
+		"z01_personeria AS cla_suj, ",
+		"(SELECT codigo ",
+			"FROM gent031, gent025, provincia ",
+			"WHERE g31_ciudad    = z01_ciudad ",
+			"  AND g31_pais      = z01_pais ",
+			"  AND g25_pais      = g31_pais ",
+			"  AND g25_divi_poli = g31_divi_poli ",
+			"  AND pais          = g25_pais ",
+			"  AND cod_phobos    = g25_divi_poli) AS cod_prov, ",
+		"(SELECT b.codigo ",
+			"FROM gent031, gent025, canton b ",
+			"WHERE g31_ciudad    = z01_ciudad ",
+			"  AND g31_pais      = z01_pais ",
+			"  AND g25_pais      = g31_pais ",
+			"  AND g25_divi_poli = g31_divi_poli ",
+			"  AND b.pais        = g25_pais ",
+			"  AND b.divi_poli   = g25_divi_poli ",
+			"  AND b.cod_phobos  = g31_ciudad) AS cod_cant, ",
+		"'' AS cod_parroq, ",
+		"'' AS sexo, ",
+		"'' AS est_civ, ",
+		"'' AS ori_ing, ",
+		"(SELECT r38_num_sri ",
+			" FROM rept038 ",
+			" WHERE r38_compania     = ", vg_codcia,
+			"   AND r38_localidad    = localidad ",
+			"   AND r38_tipo_doc    IN ('FA', 'NV') ",
+			"   AND r38_tipo_fuente  = 'PR' ",
+			"   AND r38_cod_tran     = cod_tran ",
+			"   AND r38_num_tran     = num_tran) AS num_ope, ",
+		"valor_doc AS val_ope, ",
+		"saldo_doc AS sal_ope, ",
+		"fecha_emi AS fecha_conc, ",
+		"fecha AS fec_vcto, ",
+		"fecha AS fec_exi, ",
+		"(fecha - fecha_emi) AS plazo_op, ",
+		"'' AS perioc_pag, ",
+		"'' AS dias_mor, ",
+		"saldo_doc AS monto_mor, ",
+		"0.00 AS int_mor, ",
+		"0.00 AS por_venc_30, ",
+		"0.00 AS por_venc_90, ",
+		"0.00 AS por_venc_180, ",
+		"0.00 AS por_venc_360, ",
+		"0.00 AS por_venc_m_360, ",
+		"0.00 AS venc_30, ",
+		"0.00 AS venc_90, ",
+		"0.00 AS venc_180, ",
+		"0.00 AS venc_360, ",
+		"0.00 AS venc_m_360, ",
+		"0.00 AS val_dem_jud, ",
+		"0.00 AS cart_cast, ",
+		"0.00 AS cuot_cred, ",
+		"'' AS fec_canc, ",
+		"'' AS for_canc ",
+		"FROM tempo_doc, cxct001 ",
+		"WHERE z01_codcli    = codcli ",
+		"INTO TEMP t1 "
+PREPARE exec_arch_cred FROM query
+EXECUTE exec_arch_cred
+UNLOAD TO "/tmp/cxcp315_cre.txt"
+	SELECT * FROM t1
+		ORDER BY 5
+RUN "mv /tmp/cxcp315_cre.txt $HOME/tmp/cxcp315_cre.txt"
+LET mensaje = FGL_GETENV("HOME"), '/tmp/cxcp315_cre.txt'
+DROP TABLE t1
+CALL fl_mostrar_mensaje('Archivo Crediticio Generado en: ' || mensaje, 'info')
+ERROR ' '
 
 END FUNCTION

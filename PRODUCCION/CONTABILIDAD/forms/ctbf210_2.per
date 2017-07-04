@@ -1,0 +1,62 @@
+DATABASE aceros
+SCREEN
+{
+                                                              [x002] de [y002]
+
+           Compañía: [c012]  [c064                                    ]
+          Localidad: [c013]  [c065                ]
+             Módulo: [a2]    [c066                ]
+        Grupo Línea: [c014 ] [c067                          ]
+
+                              Auxiliares Contables
+                              --------------------
+
+   Caja Moneda Base: [c015        ] [c068                                    ]
+  Caja Moneda Emer.: [c016        ] [c069                                    ]
+  Cta x Cob. M.Base: [c017        ] [c070                                    ]
+  Cta x Cob. M.Eme.: [c018        ] [c071                                    ]
+   Cta. Antícipo MB: [c019        ] [c072                                    ]
+   Cta. Antícipo ME: [c020        ] [c073                                    ]
+          Intereses: [c021        ] [c074                                    ]
+
+}
+TABLES
+ctbt041
+ATTRIBUTES
+c012 = ctbt041.b41_compania, NOENTRY, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c064 = FORMONLY.tit_compania2, NOENTRY, UPSHIFT, REVERSE;
+c013 = ctbt041.b41_localidad, NOENTRY, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c065 = FORMONLY.tit_localidad2, NOENTRY, UPSHIFT, REVERSE;
+a2 = ctbt041.b41_modulo, NOENTRY, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c066 = FORMONLY.tit_modulo2, NOENTRY, UPSHIFT, REVERSE;
+c014 = ctbt041.b41_grupo_linea, NOENTRY, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c067 = FORMONLY.tit_grupo_linea2, NOENTRY, UPSHIFT, REVERSE;
+c015 = ctbt041.b41_caja_mb, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c068 = FORMONLY.tit_caja_mb, NOENTRY, UPSHIFT, REVERSE;
+c016 = ctbt041.b41_caja_me, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c069 = FORMONLY.tit_caja_me, NOENTRY, UPSHIFT, REVERSE;
+c017 = ctbt041.b41_cxc_mb, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c070 = FORMONLY.tit_cxc_mb, NOENTRY, UPSHIFT, REVERSE;
+c018 = ctbt041.b41_cxc_me, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c071 = FORMONLY.tit_cxc_me, NOENTRY, UPSHIFT, REVERSE;
+c019 = ctbt041.b41_ant_mb, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c072 = FORMONLY.tit_ant_mb, NOENTRY, UPSHIFT, REVERSE;
+c020 = ctbt041.b41_ant_me, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c073 = FORMONLY.tit_ant_me, NOENTRY, UPSHIFT, REVERSE;
+c021 = ctbt041.b41_intereses, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c074 = FORMONLY.tit_intereses, NOENTRY, UPSHIFT, REVERSE;
+
+x002 = FORMONLY.vm_row_current2, NOENTRY;
+y002 = FORMONLY.vm_num_rows2, NOENTRY;
+END

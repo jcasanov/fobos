@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000175988</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>17/12/2014</fechaEmision>
+<dirEstablecimiento>VENEZUELA</dirEstablecimiento>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<tipoIdentificacionComprador>06</tipoIdentificacionComprador>
+<guiaRemision>004-001-000175988</guiaRemision>
+<razonSocialComprador>ALCHACOA TOVAR JOSE JUVENAL</razonSocialComprador>
+<identificacionComprador>081046951</identificacionComprador>
+<totalSinImpuestos>381.63</totalSinImpuestos>
+<totalDescuento>0.00</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<descuentoAdicional>0.00</descuentoAdicional>
+<baseImponible>381.63</baseImponible>
+<valor>45.80</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0.00</propina>
+<importeTotal>427.43</importeTotal>
+<moneda>DOLAR</moneda>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>97401</codigoPrincipal>
+<descripcion>AMOLADORA ELECTRICA 6088-30 DE 4.2 HP. 15 AMPS 6000 RPM P/DISCO DE 7" Y 9"</descripcion>
+<cantidad>1.00</cantidad>
+<precioUnitario>307.67</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>307.67</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>307.67</baseImponible>
+<valor>36.92</valor>
+</impuesto>
+</impuestos>
+</detalle>
+<detalle>
+<codigoPrincipal>95760</codigoPrincipal>
+<descripcion>HOJA DE SIERRA 49-22-1129 DE 6" Y 9" P/SIERRA SABLE (12 UNID.)</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>36.98</precioUnitario>
+<descuento>0.00</descuento>
+<precioTotalSinImpuesto>73.96</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MILWAUKEE" valor="MILWAU"/>
+<detAdicional nombre="JUEGO" valor="JUEGO"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>73.96</baseImponible>
+<valor>8.88</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">infouio@acerocomercial.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">0416480864</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">064125</campoAdicional>
+</infoAdicional>
+</factura>

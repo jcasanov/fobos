@@ -1,0 +1,23 @@
+DATABASE FORMONLY
+SCREEN 
+{
+		
+	              Fecha Inicial: [c001      ]  
+
+            	        Fecha Final: [c002      ]
+
+		  	     Estado: [c|c010      ]
+
+}
+ATTRIBUTES
+c001 = FORMONLY.inicial TYPE DATE, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese fecha en formato: dd-mm-aaaa';
+c002 = FORMONLY.final TYPE DATE, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Ingrese fecha en formato: dd-mm-aaaa';
+c    = FORMONLY.estado TYPE CHAR, REVERSE, UPSHIFT, AUTONEXT,
+	INCLUDE = ('A', 'B', 'T'), DEFAULT = 'A',
+	COMMENTS = '(A) Activos  (B) Bloqueados  (T) Todos';
+c010 = FORMONLY.tit_estado,REVERSE,UPSHIFT,NOENTRY;
+end
+INSTRUCTIONS
+DELIMITERS '||'

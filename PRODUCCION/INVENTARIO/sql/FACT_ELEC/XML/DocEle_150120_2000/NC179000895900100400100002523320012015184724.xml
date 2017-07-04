@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+<infoTributaria>
+<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>
+<nombreComercial>ACERO COMERCIAL</nombreComercial>
+<ruc>1790008959001</ruc>
+<estab>004</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000025233</secuencial>
+<dirMatriz>AV.DE LA PRENSA N45-14 Y TELEGRAFO 1</dirMatriz>
+</infoTributaria>
+<infoNotaCredito>
+<fechaEmision>20/01/2015</fechaEmision>
+<dirEstablecimiento>AV. LA PRENSA - MATRIZ QUITO</dirEstablecimiento>
+<tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+<razonSocialComprador>ROVAYO PROCEL JUAN PABLO</razonSocialComprador>
+<identificacionComprador>1705265526001</identificacionComprador>
+<contribuyenteEspecial>5368</contribuyenteEspecial>
+<obligadoContabilidad>SI</obligadoContabilidad>
+<codDocModificado>01</codDocModificado>
+<numDocModificado>004-001-000268729</numDocModificado>
+<fechaEmisionDocSustento>20/01/2015</fechaEmisionDocSustento>
+<totalSinImpuestos>14.14</totalSinImpuestos>
+<valorModificacion>15.84</valorModificacion>
+<moneda>DOLAR</moneda>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<baseImponible>14.14</baseImponible>
+<valor>1.70</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<motivo>DEV 268729 JUAN ROVAYO MAT NO ENTRGD SS</motivo>
+</infoNotaCredito>
+<detalles>
+<detalle>
+<codigoInterno>48</codigoInterno>
+<descripcion>ANGULO LAMINADO x 6 MTS. DE 20mm. x 3mm.</descripcion>
+<cantidad>2.00</cantidad>
+<precioUnitario>7.44</precioUnitario>
+<descuento>0.74</descuento>
+<precioTotalSinImpuesto>14.14</precioTotalSinImpuesto>
+<detallesAdicionales>
+<detAdicional nombre="MARCA" valor="NACION"/>
+<detAdicional nombre="UNIDAD" valor="UNIDAD"/>
+</detallesAdicionales>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>2</codigoPorcentaje>
+<tarifa>12.00</tarifa>
+<baseImponible>14.14</baseImponible>
+<valor>1.70</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">jprovayo@gmail.com</campoAdicional>
+<campoAdicional nombre="telefono-movil">2922005</campoAdicional>
+<campoAdicional nombre="CodInternoSAP">48583</campoAdicional>
+</infoAdicional>
+</notaCredito>
