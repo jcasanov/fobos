@@ -140,13 +140,12 @@ END FUNCTION
 
 
 FUNCTION control_ingreso()
-DEFINE r_niv		RECORD LIKE ctbt001.*
 DEFINE r_grp		RECORD LIKE ctbt002.*
 DEFINE crea			CHAR(1)
 DEFINE num_elm		SMALLINT
 
 CALL fl_retorna_usuario()
-INITIALIZE rm_b10.*, r_niv.*, r_grp.* TO NULL
+INITIALIZE rm_b10.*, r_grp.* TO NULL
 CLEAR tit_nivel, tit_centro, tit_cta_padre
 
 LET rm_b10.b10_compania		= vg_codcia
@@ -157,10 +156,7 @@ LET rm_b10.b10_saldo_ma		= 'N'
 LET rm_b10.b10_permite_mov	= 'N'
 LET rm_b10.b10_usuario		= vg_usuario
 LET rm_b10.b10_fecing		= CURRENT
-CALL fl_lee_nivel_cuenta(rm_b10.b10_nivel) RETURNING r_niv.*
-IF r_niv.b01_nivel IS NOT NULL THEN
-	DISPLAY r_niv.b01_nombre TO tit_nivel
-END IF
+
 CALL muestra_estado()
 CALL leer_datos('I') RETURNING crea
 IF int_flag THEN
@@ -441,29 +437,12 @@ INPUT BY NAME rm_b10.b10_cuenta, rm_b10.b10_descripcion, rm_b10.b10_descri_alt,
 		LET cniv_aux = rm_b10.b10_nivel
 	AFTER FIELD b10_cuenta
 		IF rm_b10.b10_cuenta IS NOT NULL THEN
-			CALL fl_lee_nivel_cuenta(rm_b10.b10_nivel) RETURNING r_niv.*
-			{--
-			IF r_niv.b01_nivel IS NULL THEN
-				CALL fl_mostrar_mensaje('Nivel no esta configurado','stop')
-				EXIT PROGRAM
-			END IF
-			LET j = comprobar_nivel(rm_b10.b10_cuenta, 12)
-			IF j = 1 THEN
-				NEXT FIELD b10_cuenta
-			END IF
-			--}
 			CALL fl_lee_grupo_cuenta(vg_codcia,rm_b10.b10_cuenta[1,1])
 				RETURNING r_grp.*
 			IF r_grp.b02_grupo_cta IS NULL THEN
 				CALL fl_mostrar_mensaje('Grupo para está cuenta no existe','exclamation')				
 				NEXT FIELD b10_cuenta
 			END IF
-			{--
-			IF LENGTH(rm_b10.b10_cuenta) < r_niv.b01_posicion_i THEN
-				CALL fl_mostrar_mensaje('Número de cuenta debe ser del nivel 6','exclamation')
-				NEXT FIELD b10_cuenta
-			END IF
-			--}
 			CALL fl_lee_cuenta(vg_codcia, rm_b10.b10_cuenta)
 				RETURNING r_ctb_aux.*
 			IF r_ctb_aux.b10_cuenta IS NOT NULL THEN
@@ -563,48 +542,6 @@ INPUT BY NAME rm_b10.b10_cuenta, rm_b10.b10_descripcion, rm_b10.b10_descri_alt,
 		END IF
 END INPUT
 RETURN crear
-
-END FUNCTION
-
-
-
-FUNCTION comprobar_nivel(cuenta, tot_pos)
-DEFINE r_nv		RECORD LIKE ctbt001.*
-DEFINE cuenta		LIKE ctbt010.b10_cuenta
-DEFINE ceros,i,tot_pos	SMALLINT
-DEFINE ind		SMALLINT
-
-IF cuenta[1,1] = 0 THEN
-	CALL fl_mostrar_mensaje('Número de cuenta no puede comenzar con cero','exclamation')
-	RETURN 1
-END IF
-FOR i = 2 TO 5
-	INITIALIZE r_nv.* TO NULL
-	CALL fl_lee_nivel_cuenta(i) RETURNING r_nv.*
-	LET ceros = 0
-	FOR ind = r_nv.b01_posicion_i TO r_nv.b01_posicion_f
-		IF cuenta[ind,ind] = 0 THEN
-			LET ceros = ceros + 1
-		END IF
-	END FOR
-	IF ceros = (r_nv.b01_posicion_f - r_nv.b01_posicion_i) + 1 THEN
-		LET ceros = 0
-		FOR ind = (r_nv.b01_posicion_f + 1) TO tot_pos
-			IF cuenta[ind,ind] <> 0 THEN
-				LET ceros = ceros + 1
-			END IF
-		END FOR
-		IF ceros <> 0 THEN
-			CALL fl_mostrar_mensaje('Número de cuenta estáa incorrecto','exclamation')
-			RETURN 1
-		END IF 
-	END IF
-END FOR
-IF cuenta[9,12] = '0000' THEN
-	CALL fl_mostrar_mensaje('Número de cuenta auxiliar no puede terminar con 4 ceros','exclamation')
-	RETURN 1
-END IF
-RETURN 0
 
 END FUNCTION
 
