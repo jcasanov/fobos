@@ -290,7 +290,7 @@ OUTPUT
 	LEFT MARGIN		0
 	RIGHT MARGIN	132
 	BOTTOM MARGIN	3
-	PAGE LENGTH		44
+	PAGE LENGTH		43
 
 FORMAT
 
@@ -373,67 +373,57 @@ PAGE HEADER
 	LET v_r      = valor_rete USING "###,###,##&.##"
 	LET v_c      = valor_cred USING "###,###,##&.##"
 	CALL fl_lee_cliente_general(rm_r19.r19_codcli) RETURNING r_z01.*
-	SKIP 3 LINES
+	SKIP 4 LINES
 	print ASCII escape;
 	print ASCII act_comp
-	{-- COMENTADO EL 18-FEB-2013
-	PRINT COLUMN 70,  "No. ", rm_r19.r19_cod_tran, " ", factura
-	--PRINT COLUMN 27,  "ALMACEN : ", rm_loc.g02_nombre,
-	PRINT COLUMN 26,  "ALMACEN : ", rm_loc.g02_nombre,
-	      COLUMN 70,  "FECHA FACTURA : ", DATE(rm_r19.r19_fecing) 
-			 			USING "dd-mm-yyyy"
-	--}
-	--20/05/2014
-	--PRINT COLUMN 26,  "ALMACEN : ", rm_loc.g02_nombre,
-	PRINT COLUMN 092, ASCII escape, ASCII act_12cpi, ASCII escape,
+	{--
+	PRINT COLUMN 108, ASCII escape, ASCII act_12cpi, ASCII escape,
 			ASCII act_dob1, ASCII act_dob2,
 			ASCII escape, ASCII act_neg,
 			"No. ", factura,
-			{--
-			"No. ", rm_r19.r19_cod_tran, " - ",
-			rm_loc.g02_serie_cia USING "&&&", "-",
-			rm_loc.g02_serie_loc USING "&&&", "-", factura,
-			--}
-		ASCII escape, ASCII act_dob1, ASCII des_dob,
-		ASCII escape, ASCII act_12cpi, ASCII escape, ASCII des_neg,
-		ASCII escape, ASCII act_comp
-	PRINT COLUMN 006, "(", rm_r19.r19_codcli USING "&&&&&", ") : ",
-					rm_r19.r19_nomcli[1, 40] CLIPPED,
-		  COLUMN 060, ASCII escape, ASCII act_10cpi,
-		ASCII escape, ASCII act_neg,
-		" ", DATE(rm_r19.r19_fecing) USING "dd-mm-yyyy",
+			ASCII escape, ASCII act_dob1, ASCII des_dob,
+			ASCII escape, ASCII act_12cpi, ASCII escape, ASCII des_neg,
+			ASCII escape, ASCII act_comp
+	--}
+	PRINT COLUMN 010, "(", rm_r19.r19_codcli USING "&&&&&", ") : ",
+					rm_r19.r19_nomcli[1, 60] CLIPPED,
+		  COLUMN 077, ASCII escape, ASCII act_10cpi,
+					ASCII escape, ASCII act_neg,
+				" ", DATE(rm_r19.r19_fecing) USING "dd-mm-yyyy",
 		ASCII escape, ASCII des_neg
 	SKIP 1 LINES
 	print ASCII escape;
 	print ASCII act_comp;
-	PRINT COLUMN 006, "DIRECCION       : ", rm_r19.r19_dircli
-	PRINT COLUMN 001, "CEDULA/RUC      : ", rm_r19.r19_cedruc,
-	      COLUMN 080, fl_justifica_titulo('I', v_c, 15)
+	PRINT COLUMN 015, rm_r19.r19_dircli
+	PRINT COLUMN 013, rm_r19.r19_cedruc
+	PRINT COLUMN 098, (fecha_vcto - DATE(rm_r19.r19_fecing) + 1) USING "##0"
 	SKIP 2 LINES
 
 ON EVERY ROW
 	NEED 2 LINES
 	PRINT COLUMN 002, r_rep.r20_item[1,7],
-		  COLUMN 012, r_rep.descripcion,
-	      COLUMN 084, r_rep.cant_ven	USING '####&.##',
-	      COLUMN 094, r_rep.precio		USING '###,###,##&.##',
-	      COLUMN 110, r_rep.descuento	USING '##&.##',
+		  COLUMN 014, r_rep.descripcion[1, 50] CLIPPED,
+	      COLUMN 069, r_rep.cant_ven	USING '####&.##',
+	      COLUMN 088, r_rep.precio		USING '###,###,##&.##',
+	      COLUMN 106, r_rep.descuento	USING '##&.##',
 	      COLUMN 118, r_rep.valor_tot	USING '###,###,##&.##'
 	
 PAGE TRAILER
 	CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc, rm_r19.r19_codcli)
 		RETURNING r_z02.*
-	SKIP 2 LINES
 	PRINT COLUMN 002, ASCII escape, ASCII act_dob1, ASCII des_dob,
 		ASCII escape, ASCII act_10cpi, ASCII escape, ASCII des_neg,
 		ASCII escape, ASCII act_comp,
-	      COLUMN 085, "TOTAL BRUTO",
-	      COLUMN 105, rm_r19.r19_tot_bruto	USING "#,###,###,##&.##"
-	PRINT COLUMN 096, rm_r19.r19_tot_dscto	USING "###,###,##&.##"
-	PRINT COLUMN 122, subtotal		USING "###,###,##&.##"
-	PRINT COLUMN 096, rm_r19.r19_porc_impto USING "#&",
+	      COLUMN 127, rm_r19.r19_tot_bruto	USING "#,###,###,##&.##"
+	SKIP 1 LINES
+	PRINT COLUMN 118, rm_r19.r19_tot_dscto	USING "###,###,##&.##"
+	SKIP 1 LINES
+	PRINT COLUMN 118, subtotal		USING "###,###,##&.##"
+	SKIP 1 LINES
+	PRINT COLUMN 104, rm_r19.r19_porc_impto USING "#&",
 		  COLUMN 118, impuesto		USING "###,###,##&.##"
-	PRINT COLUMN 124, valor_pag		USING "#,###,###,##&.##";
+	SKIP 1 LINES
+	PRINT COLUMN 118, valor_pag		USING "###,###,##&.##";
 	print ASCII escape;
 	print ASCII desact_comp 
 
