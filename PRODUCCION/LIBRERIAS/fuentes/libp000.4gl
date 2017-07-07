@@ -2989,6 +2989,22 @@ END FUNCTION
 
 
 
+FUNCTION fl_lee_cuenta_padre(cod_cia, cuenta)
+DEFINE cod_cia		LIKE ctbt010.b10_compania
+DEFINE cuenta		LIKE ctbt010.b10_cuenta_padre
+DEFINE r			RECORD LIKE ctbt010.*
+
+INITIALIZE r.* TO NULL
+SELECT * INTO r.*
+	FROM ctbt010 
+	WHERE b10_compania = cod_cia
+	  AND b10_cuenta   = cuenta
+RETURN r.*
+
+END FUNCTION
+
+
+
 FUNCTION fl_lee_nivel_cuenta(nivel)
 DEFINE nivel		LIKE ctbt001.b01_nivel
 DEFINE r		RECORD LIKE ctbt001.*
@@ -3719,7 +3735,7 @@ END FUNCTION
 
 
 
-FUNCTION fl_genera_niveles_mayorizacion(cuenta, debito, credito)
+FUNCTION fl_genera_niveles_mayorizacion_old(cuenta, debito, credito)
 DEFINE cuenta		LIKE ctbt010.b10_cuenta
 DEFINE debito		LIKE ctbt013.b13_valor_base
 DEFINE credito		LIKE ctbt013.b13_valor_base
@@ -3748,6 +3764,27 @@ FOREACH q_niv INTO rn.*
 		LET cuenta[ini, fin] = ceros CLIPPED
 	END IF
 END FOREACH
+
+END FUNCTION
+
+
+
+FUNCTION fl_genera_niveles_mayorizacion(cuenta, debito, credito)
+DEFINE cuenta		LIKE ctbt010.b10_cuenta
+DEFINE debito		LIKE ctbt013.b13_valor_base
+DEFINE credito		LIKE ctbt013.b13_valor_base
+DEFINE r_b10		RECORD LIKE ctbt010.*
+
+CALL fl_inserta_temporal_mayorizacion(cuenta, debito, credito)
+WHILE TRUE
+	CALL fl_lee_cuenta(vg_codcia, cuenta) RETURNING r_b10.*
+	IF r_b10.b10_cuenta_padre IS NULL THEN
+		EXIT WHILE
+	END IF
+	CALL fl_inserta_temporal_mayorizacion(r_b10.b10_cuenta_padre, debito,
+											credito)
+	LET cuenta = r_b10.b10_cuenta_padre
+END WHILE
 
 END FUNCTION
 
@@ -8402,7 +8439,7 @@ IF cod_tran = 'TR' THEN
 			' g02_numruc per_id,',
 			' TRIM(g02_nombre) || " " || TRIM(g02_direccion)',
 			' punto_lleg '
-	CALL fl_lee_bodega_rep(vg_codcia, bodega) RETURNING r_r02.*
+	CALL fl_lee_bodega_rep(codcia, bodega) RETURNING r_r02.*
 	CALL fl_lee_tipo_ident_bod(r_r02.r02_compania, r_r02.r02_tipo_ident)
 		RETURNING r_r09.*
 	IF r_r09.r09_tipo_ident = "Y" THEN
@@ -8904,7 +8941,7 @@ IF cod_tran = 'TR' THEN
 	FOREACH q_r95 INTO r_r97.*, r_r19.*, r_r95.*
 		CALL fl_lee_bodega_rep(r_r95.r95_compania,r_r19.r19_bodega_dest)
 			RETURNING r_r02_1.*
-		CALL fl_lee_bodega_rep(vg_codcia, bodega) RETURNING r_r02_2.*
+		CALL fl_lee_bodega_rep(codcia, bodega) RETURNING r_r02_2.*
 		IF r_r02_1.r02_localidad = r_r02_2.r02_localidad THEN
 			LET resul = 1
 			EXIT FOREACH

@@ -925,11 +925,8 @@ WHILE NOT salir
 						'exclamation')
 					NEXT FIELD b15_cuenta
 				END IF
-				IF r_b10.b10_nivel <> vm_nivel_cta THEN
-					CALL fgl_winmessage(vg_producto,
-						'La cuenta ingresada debe ' ||
-						'ser del último nivel.',
-						'exclamation')
+				IF r_b10.b10_permite_mov = 'N' THEN
+					CALL fl_mostrar_mensaje('Cuenta no permite movimiento.', 'exclamation')
 					NEXT FIELD b15_cuenta
 				END IF
 				LET rm_cuenta[i].desc_cuenta = 

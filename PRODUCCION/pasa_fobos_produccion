@@ -1,6 +1,6 @@
 export DIR=$PWD
 cd $DIR
-for i in ACTIVOS CAJA COBRANZAS COMPRAS CONTABILIDAD GENERALES LIBRERIAS INVENTARIO TALLER TESORERIA NOMINA
+for i in ACTIVOS CAJA COBRANZAS COMPRAS CONTABILIDAD GENERALES LIBRERIAS INVENTARIO MENU NOMINA SRI TALLER TESORERIA
 do
 	cd $i
 	cd fuentes
@@ -9,13 +9,13 @@ do
 	if [ "$i" == "INVENTARIO" ]; then
 		export modulo="REPUESTOS"
 	fi
-	for j in *.4gl
+	for j in ???p???.4gl
 	do
 		echo "Copiando $i/fuentes/$j a $HOME/PRODUCCION/$modulo/fuentes/"
 		cp $j $HOME/PRODUCCION/$modulo/fuentes/
 	done
 	cd ../forms
-	for j in *.per
+	for j in ???f*.per
 	do
 		echo "Copiando $i/forms/$j a $HOME/PRODUCCION/$modulo/forms/"
 		cp $j $HOME/PRODUCCION/$modulo/forms/

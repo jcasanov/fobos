@@ -1042,8 +1042,8 @@ INPUT BY NAME rm_r81.r81_pedido, rm_r81.r81_fecha, rm_r81.r81_moneda_base,
                                 CALL fl_mensaje_estado_bloqueado()
                                 NEXT FIELD r16_aux_cont
                         END IF
-			IF r_b10.b10_nivel <> vm_nivel THEN
-				CALL fl_mostrar_mensaje('Nivel de cuenta debe ser solo 6.','info')
+			IF r_b10.b10_permite_mov = 'N' THEN
+				CALL fl_mostrar_mensaje('Cuenta no permite movimiento.', 'exclamation')
                                 NEXT FIELD r16_aux_cont
                         END IF
                 ELSE

@@ -491,8 +491,8 @@ INPUT BY NAME rm_cxc.z00_compania, rm_cxc.z00_credit_auto,
                                 CALL fl_mensaje_estado_bloqueado()
                                 NEXT FIELD z00_aux_clte_mb
                         END IF
-			IF r_cta.b10_nivel <> 6 THEN
-				CALL fgl_winmessage(vg_producto,'Nivel de cuenta debe ser solo 6','info')
+			IF r_cta.b10_permite_mov = 'N' THEN
+				CALL fl_mostrar_mensaje('Cuenta no permite movimiento.', 'exclamation')
 				NEXT FIELD z00_aux_clte_mb
 			END IF
 		ELSE
@@ -517,8 +517,8 @@ INPUT BY NAME rm_cxc.z00_compania, rm_cxc.z00_credit_auto,
                                 CALL fl_mensaje_estado_bloqueado()
                                 NEXT FIELD z00_aux_clte_ma
                         END IF
-			IF r_cta.b10_nivel <> 6 THEN
-				CALL fgl_winmessage(vg_producto,'Nivel de cuenta debe ser solo 6','info')
+			IF r_cta.b10_permite_mov = 'N' THEN
+				CALL fl_mostrar_mensaje('Cuenta no permite movimiento.', 'exclamation')
 				NEXT FIELD z00_aux_clte_ma
 			END IF
 		ELSE
@@ -543,8 +543,8 @@ INPUT BY NAME rm_cxc.z00_compania, rm_cxc.z00_credit_auto,
                                 CALL fl_mensaje_estado_bloqueado()
                                 NEXT FIELD z00_aux_ant_mb
                         END IF
-			IF r_cta.b10_nivel <> 6 THEN
-				CALL fgl_winmessage(vg_producto,'Nivel de cuenta debe ser solo 6','info')
+			IF r_cta.b10_permite_mov = 'N' THEN
+				CALL fl_mostrar_mensaje('Cuenta no permite movimiento.', 'exclamation')
 				NEXT FIELD z00_aux_ant_mb
 			END IF
 		ELSE
@@ -569,8 +569,8 @@ INPUT BY NAME rm_cxc.z00_compania, rm_cxc.z00_credit_auto,
                                 CALL fl_mensaje_estado_bloqueado()
                                 NEXT FIELD z00_aux_ant_ma
                         END IF
-			IF r_cta.b10_nivel <> 6 THEN
-				CALL fgl_winmessage(vg_producto,'Nivel de cuenta debe ser solo 6','info')
+			IF r_cta.b10_permite_mov = 'N' THEN
+				CALL fl_mostrar_mensaje('Cuenta no permite movimiento.', 'exclamation')
 				NEXT FIELD z00_aux_ant_ma
 			END IF
 		ELSE

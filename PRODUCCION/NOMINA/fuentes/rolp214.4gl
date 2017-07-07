@@ -4365,8 +4365,8 @@ IF r_cta.b10_estado = 'B' THEN
 	CALL fl_mensaje_estado_bloqueado()
 	RETURN 0
 END IF
-IF r_cta.b10_nivel <> vm_nivel THEN
-	CALL fl_mostrar_mensaje('Nivel de cuenta debe ser solo del último.', 'exclamation')
+IF r_cta.b10_permite_mov = 'N' THEN
+	CALL fl_mostrar_mensaje('Cuenta no permite movimiento.', 'exclamation')
 	RETURN 0
 END IF
 RETURN 1

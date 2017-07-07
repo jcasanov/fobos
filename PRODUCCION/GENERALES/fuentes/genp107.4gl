@@ -402,12 +402,8 @@ INPUT BY NAME rm_cta.g09_banco, rm_cta.g09_numero_cta, rm_cta.g09_tipo_cta,
 					CLEAR n_cuenta
 					NEXT FIELD g09_aux_cont
 				END IF
-				IF r_b10.b10_nivel <> vm_nivel_cta THEN
-					CALL FGL_WINMESSAGE(vg_producto, 
-                            		 	            'Cuenta debe ' ||
-                               	                            'ser de nivel ' ||
-                               	                            vm_nivel_cta || '.',
-                                       	                    'exclamation')
+				IF r_b10.b10_permite_mov = 'N' THEN
+					CALL fl_mostrar_mensaje('Cuenta no permite movimiento.', 'exclamation')
 					CLEAR n_cuenta
 					NEXT FIELD g09_aux_cont
 				END IF

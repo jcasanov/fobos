@@ -582,8 +582,8 @@ INPUT BY NAME rm_ctb.b00_compania, rm_ctb.b00_moneda_base,
                                 CALL fl_mensaje_estado_bloqueado()
                                 NEXT FIELD b00_cuenta_uti
                         END IF
-			IF r_cta.b10_nivel <> 6 THEN
-				CALL fgl_winmessage(vg_producto,'Nivel de cuenta debe ser solo 6.','info')
+			IF r_cta.b10_permite_mov = 'N' THEN
+				CALL fl_mostrar_mensaje('Cuenta no permite movimiento.', 'exclamation')
 				NEXT FIELD b00_cuenta_uti
 			END IF
 		ELSE
@@ -603,8 +603,8 @@ INPUT BY NAME rm_ctb.b00_compania, rm_ctb.b00_moneda_base,
                                 CALL fl_mensaje_estado_bloqueado()
                                 NEXT FIELD b00_cta_uti_ant
                         END IF
-			IF r_cta.b10_nivel <> 6 THEN
-				CALL fgl_winmessage(vg_producto,'Nivel de cuenta debe ser solo 6.','info')
+			IF r_cta.b10_permite_mov = 'N' THEN
+				CALL fl_mostrar_mensaje('Cuenta no permite movimiento.', 'exclamation')
 				NEXT FIELD b00_cta_uti_ant
 			END IF
 		ELSE
@@ -624,8 +624,8 @@ INPUT BY NAME rm_ctb.b00_compania, rm_ctb.b00_moneda_base,
                                 CALL fl_mensaje_estado_bloqueado()
                                 NEXT FIELD b00_cuenta_difi
                         END IF
-			IF r_cta.b10_nivel <> 6 THEN
-				CALL fgl_winmessage(vg_producto,'Nivel de cuenta debe ser solo 6.','info')
+			IF r_cta.b10_permite_mov = 'N' THEN
+				CALL fl_mostrar_mensaje('Cuenta no permite movimiento.', 'exclamation')
 				NEXT FIELD b00_cuenta_difi
 			END IF
 		ELSE
@@ -645,8 +645,8 @@ INPUT BY NAME rm_ctb.b00_compania, rm_ctb.b00_moneda_base,
                                 CALL fl_mensaje_estado_bloqueado()
                                 NEXT FIELD b00_cuenta_dife
                         END IF
-			IF r_cta.b10_nivel <> 6 THEN
-				CALL fgl_winmessage(vg_producto,'Nivel de cuenta debe ser solo 6.','info')
+			IF r_cta.b10_permite_mov = 'N' THEN
+				CALL fl_mostrar_mensaje('Cuenta no permite movimiento.', 'exclamation')
 				NEXT FIELD b00_cuenta_dife
 			END IF
 		ELSE

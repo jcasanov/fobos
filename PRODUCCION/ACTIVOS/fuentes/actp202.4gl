@@ -1024,8 +1024,8 @@ IF r_b10.b10_compania IS NULL THEN
 	CALL fl_mostrar_mensaje('No existe esta cuenta.', 'exclamation')
 	RETURN 0
 END IF
-IF r_b10.b10_nivel <> vm_last_lvl THEN
-	CALL fl_mostrar_mensaje('Cuenta debe ser del último nivel.', 'exclamation')
+IF r_b10.b10_permite_mov = 'N' THEN
+	CALL fl_mostrar_mensaje('Cuenta no permite movimiento.', 'exclamation')
 	RETURN 0
 END IF
 IF r_b10.b10_estado = 'B' THEN

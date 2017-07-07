@@ -396,8 +396,8 @@ INPUT BY NAME rm_ctb.b16_cta_master
 			END IF
 			DISPLAY r_ctb_aux.b10_descripcion TO tit_master
 			SELECT MAX(b01_nivel) INTO maxnivel FROM ctbt001
-			IF r_ctb_aux.b10_nivel <> maxnivel THEN
-				CALL fgl_winmessage(vg_producto,'La cuenta no puede ser del nivel ' || r_ctb_aux.b10_nivel,'exclamation')
+			IF r_ctb_aux.b10_permite_mov = 'N' THEN
+				CALL fl_mostrar_mensaje('Cuenta no permite movimiento.', 'exclamation')
 				NEXT FIELD rm_ctb.b16_cta_master
 			END IF
 			IF r_ctb_aux.b10_tipo_cta <> 'R' THEN
@@ -502,8 +502,8 @@ IF vm_total_por < 100 THEN
 				DISPLAY r_ctb_aux.b10_descripcion
 					TO vm_cm[i].tit_detalle
 				SELECT MAX(b01_nivel) INTO maxnivel FROM ctbt001
-				IF r_ctb_aux.b10_nivel <> maxnivel THEN
-					CALL fgl_winmessage(vg_producto,'La cuenta no puede ser del nivel ' || r_ctb_aux.b10_nivel,'exclamation')
+				IF r_ctb_aux.b10_permite_mov = 'N' THEN
+					CALL fl_mostrar_mensaje('Cuenta no permite movimiento.', 'exclamation')
 					NEXT FIELD b16_cta_detail
 				END IF
 				IF r_ctb_aux.b10_tipo_cta <> 'R' THEN

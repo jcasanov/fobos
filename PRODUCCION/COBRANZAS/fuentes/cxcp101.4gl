@@ -1453,8 +1453,8 @@ IF r_b10.b10_estado = 'B' THEN
 	CALL fl_mensaje_estado_bloqueado()
 	RETURN 1
 END IF
-IF r_b10.b10_nivel <> vm_nivel THEN
-	CALL fgl_winmessage(vg_producto,'Nivel de cuenta debe ser solo del ultimo.','exclamation')
+IF r_b10.b10_permite_mov = 'N' THEN
+	CALL fl_mostrar_mensaje('Cuenta no permite movimiento.', 'exclamation')
 	RETURN 1
 END IF
 RETURN 0

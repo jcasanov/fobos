@@ -2003,9 +2003,8 @@ IF r_ctb.b10_cuenta IS NULL THEN
 	CALL fgl_winmessage(vg_producto,'Cuenta no existe.','exclamation')
 	RETURN 1
 END IF
-IF r_ctb.b10_nivel <> vm_nivel AND r_ctb.b10_nivel <> vm_nivel - 1
-AND r_ctb.b10_nivel <> vm_nivel - 2 THEN
-	CALL fgl_winmessage(vg_producto,'Cuenta debe ser mínimo del nivel ' || vm_nivel - 2 || '.', 'exclamation')
+IF r_ctb.b10_permite_mov = 'N' THEN
+	CALL fl_mostrar_mensaje('Cuenta no permite movimiento.', 'exclamation')
 	RETURN 1
 END IF
 RETURN 0

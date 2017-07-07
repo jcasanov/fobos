@@ -965,9 +965,8 @@ INPUT BY NAME rm_r16.r16_pedido, rm_r16.r16_tipo, rm_r16.r16_linea,
                                 CALL fl_mensaje_estado_bloqueado()
                                 NEXT FIELD r16_aux_cont
                         END IF
-			IF r_b10.b10_nivel <> vm_nivel THEN
-                        	--CALL fgl_winmessage(vg_producto,'Nivel de cuenta debe ser solo 6','info')
-				CALL fl_mostrar_mensaje('Nivel de cuenta debe ser solo 6.','info')
+			IF r_b10.b10_permite_mov = 'N' THEN
+				CALL fl_mostrar_mensaje('Cuenta no permite movimiento.', 'exclamation')
                                 NEXT FIELD r16_aux_cont
                         END IF
                 ELSE
