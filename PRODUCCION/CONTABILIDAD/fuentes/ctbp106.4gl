@@ -17,8 +17,6 @@ DEFINE vm_cc 			ARRAY[5] OF RECORD
 							b10_cuenta	LIKE ctbt010.b10_cuenta,
 							b10_descripcion	LIKE ctbt010.b10_descripcion
 						END RECORD
-DEFINE max_nivel		LIKE ctbt001.b01_nivel
-
 
 
 MAIN
@@ -61,7 +59,7 @@ INITIALIZE rm_b10.* TO NULL
 LET vm_num_rows    = 0
 LET vm_row_current = 0
 CALL muestra_contadores(vm_row_current, vm_num_rows)
-SELECT MAX(b01_nivel) INTO max_nivel FROM ctbt001
+
 MENU 'OPCIONES'
 	BEFORE MENU
 		HIDE OPTION 'Avanzar'
@@ -150,17 +148,11 @@ DEFINE num_elm		SMALLINT
 CALL fl_retorna_usuario()
 INITIALIZE rm_b10.*, r_niv.*, r_grp.* TO NULL
 CLEAR tit_nivel, tit_centro, tit_cta_padre
-{--
-IF max_nivel IS NULL THEN
-	CALL fl_mostrar_mensaje('No hay niveles de cuentas configurado.','stop')
-	EXIT PROGRAM
-END IF
---}
+
 LET rm_b10.b10_compania		= vg_codcia
 LET rm_b10.b10_estado		= 'A'
 LET rm_b10.b10_tipo_cta		= NULL
 LET rm_b10.b10_tipo_mov		= NULL
-LET rm_b10.b10_nivel		= max_nivel
 LET rm_b10.b10_saldo_ma		= 'N'
 LET rm_b10.b10_permite_mov	= 'N'
 LET rm_b10.b10_usuario		= vg_usuario
@@ -506,10 +498,6 @@ INPUT BY NAME rm_b10.b10_cuenta, rm_b10.b10_descripcion, rm_b10.b10_descri_alt,
 			CALL fl_lee_nivel_cuenta(rm_b10.b10_nivel) RETURNING r_niv.*
 			IF r_niv.b01_nivel IS NULL THEN
 				CALL fl_mostrar_mensaje('Nivel no esta configurado', 'exclamation')
-				NEXT FIELD b10_nivel
-			END IF
-			IF rm_b10.b10_nivel > max_nivel THEN
-				CALL fl_mostrar_mensaje('No puede configurar una cuenta de un Nivel que no esta configurado.', 'exclamation')
 				NEXT FIELD b10_nivel
 			END IF
 			DISPLAY r_niv.b01_nombre TO tit_nivel

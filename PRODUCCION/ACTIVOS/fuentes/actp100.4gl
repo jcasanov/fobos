@@ -390,9 +390,8 @@ ste','exclamation')
 				CALL fl_mensaje_estado_bloqueado()
 				NEXT FIELD a00_aux_reexp
 			END IF
-			--IF r_ctb_aux.b10_nivel <> 6 THEN
 			IF r_ctb_aux.b10_permite_mov = 'N' THEN
-				CALL fl_mostrar_mensaje('Auxiliar de Reexpresión debe no permite movimiento.', 'exclamation')
+				CALL fl_mostrar_mensaje('Auxiliar de reexpresión no permite movimiento.', 'exclamation')
 				NEXT FIELD a00_aux_reexp
 			END IF
 		ELSE
