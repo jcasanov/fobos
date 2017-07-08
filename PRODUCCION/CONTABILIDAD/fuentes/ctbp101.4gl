@@ -133,9 +133,6 @@ LET rm_ctb.b01_fecing = CURRENT
 CALL leer_datos('I')
 IF NOT int_flag THEN
 	LET rm_ctb.b01_fecing = CURRENT
-    IF rm_ctb.b01_nivel IS NULL THEN
-		SELECT NVL(MAX(b01_nivel), 0) + 1 INTO rm_ctb.b01_nivel FROM ctbt001
-    END IF
 	INSERT INTO ctbt001 VALUES (rm_ctb.*)
 	LET vm_num_rows = vm_num_rows + 1
 	LET vm_row_current = vm_num_rows
