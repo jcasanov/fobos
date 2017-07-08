@@ -10,14 +10,33 @@ grant connect to "public";
 
 
 
+ 
+
+
+ 
+
 
  
 
 
  
 
-{ TABLE "fobos".source4gl row size = 100 number of columns = 4 index size = 70 }
-{ unload file name = sourc00100.unl number of rows = 216 }
+
+ 
+
+
+ 
+
+
+ 
+
+
+ 
+
+
+
+{ TABLE "fobos".source4gl row size = 100 number of columns = 4 index size = 102 }
+{ unload file name = sourc00100.unl number of rows = 217 }
 
 create table "fobos".source4gl 
   (
@@ -28,7 +47,7 @@ create table "fobos".source4gl
   )  extent size 20 next size 16 lock mode page;
 revoke all on "fobos".source4gl from "public";
 
-{ TABLE "fobos".sourceother row size = 103 number of columns = 5 index size = 70 
+{ TABLE "fobos".sourceother row size = 103 number of columns = 5 index size = 102 
               }
 { unload file name = sourc00101.unl number of rows = 0 }
 
@@ -42,7 +61,7 @@ create table "fobos".sourceother
   )  extent size 16 next size 16 lock mode page;
 revoke all on "fobos".sourceother from "public";
 
-{ TABLE "fobos".libraries row size = 59 number of columns = 3 index size = 70 }
+{ TABLE "fobos".libraries row size = 59 number of columns = 3 index size = 102 }
 { unload file name = libra00102.unl number of rows = 0 }
 
 create table "fobos".libraries 
@@ -53,7 +72,7 @@ create table "fobos".libraries
   )  extent size 16 next size 16 lock mode page;
 revoke all on "fobos".libraries from "public";
 
-{ TABLE "fobos".opts row size = 58 number of columns = 3 index size = 70 }
+{ TABLE "fobos".opts row size = 58 number of columns = 3 index size = 102 }
 { unload file name = opts_00103.unl number of rows = 0 }
 
 create table "fobos".opts 
@@ -64,8 +83,8 @@ create table "fobos".opts
   )  extent size 16 next size 16 lock mode page;
 revoke all on "fobos".opts from "public";
 
-{ TABLE "fobos".global row size = 100 number of columns = 4 index size = 70 }
-{ unload file name = globa00104.unl number of rows = 216 }
+{ TABLE "fobos".global row size = 100 number of columns = 4 index size = 102 }
+{ unload file name = globa00104.unl number of rows = 217 }
 
 create table "fobos".global 
   (
@@ -76,7 +95,7 @@ create table "fobos".global
   )  extent size 20 next size 16 lock mode page;
 revoke all on "fobos".global from "public";
 
-{ TABLE "fobos".runner row size = 150 number of columns = 6 index size = 70 }
+{ TABLE "fobos".runner row size = 150 number of columns = 6 index size = 102 }
 { unload file name = runne00105.unl number of rows = 0 }
 
 create table "fobos".runner 
@@ -90,8 +109,8 @@ create table "fobos".runner
   )  extent size 16 next size 16 lock mode page;
 revoke all on "fobos".runner from "public";
 
-{ TABLE "fobos".otherobj row size = 100 number of columns = 4 index size = 70 }
-{ unload file name = other00106.unl number of rows = 852 }
+{ TABLE "fobos".otherobj row size = 100 number of columns = 4 index size = 102 }
+{ unload file name = other00106.unl number of rows = 859 }
 
 create table "fobos".otherobj 
   (
@@ -103,7 +122,7 @@ create table "fobos".otherobj
 revoke all on "fobos".otherobj from "public";
 
 { TABLE "fobos".id_prog4gl row size = 11 number of columns = 2 index size = 0 }
-{ unload file name = id_pr00107.unl number of rows = 545 }
+{ unload file name = id_pr00107.unl number of rows = 550 }
 
 create table "fobos".id_prog4gl 
   (
@@ -115,7 +134,7 @@ create table "fobos".id_prog4gl
 revoke all on "fobos".id_prog4gl from "public";
 
 { TABLE "fobos".id_prog4js row size = 11 number of columns = 2 index size = 0 }
-{ unload file name = id_pr00108.unl number of rows = 546 }
+{ unload file name = id_pr00108.unl number of rows = 552 }
 
 create table "fobos".id_prog4js 
   (
@@ -179,33 +198,6 @@ grant index on "fobos".id_prog4js to "public" as "fobos";
 
 
 
-
- 
-
-
- 
-
-
- 
-
-
- 
-
-
- 
-
-
- 
-
-
-revoke usage on language SPL from public ;
-
-grant usage on language SPL to public ;
-
-
-
-
-
 create index "fobos".i_fglspgm on "fobos".source4gl (ppath,progname) 
     using btree  in datadbs ;
 create index "fobos".i_fglspgm1 on "fobos".source4gl (progname) 
@@ -234,7 +226,6 @@ create index "fobos".i_fglobpgm on "fobos".otherobj (ppath,progname)
     using btree  in datadbs ;
 create index "fobos".i_fglobpgm1 on "fobos".otherobj (progname) 
     using btree  in datadbs ;
-
 
 
 
