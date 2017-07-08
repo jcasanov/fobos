@@ -506,8 +506,8 @@ WHILE TRUE
 				LET rm_ring[i].tit_cuenta = r_b10.b10_descripcion 
 				DISPLAY rm_ring[i].tit_cuenta TO
 					rm_ring[j].tit_cuenta
-				IF r_b10.b10_nivel <> '6' THEN
-					CALL fl_mostrar_mensaje('El nivel de la cuenta debe ser de auxiliar.', 'exclamation')
+				IF r_b10.b10_permite_mov = 'N' THEN
+					CALL fl_mostrar_mensaje('Cuenta no permite movimiento.', 'exclamation')
 					NEXT FIELD n50_aux_cont
 				END IF
 			ELSE
@@ -564,8 +564,8 @@ WHILE TRUE
 				LET rm_regr[i].tit_cuenta = r_b10.b10_descripcion 
 				DISPLAY rm_regr[i].tit_cuenta TO
 					rm_regr[j].tit_cuenta
-				IF r_b10.b10_nivel <> '6' THEN
-					CALL fl_mostrar_mensaje('El nivel de la cuenta debe ser de auxiliar.', 'exclamation')
+				IF r_b10.b10_permite_mov = 'N' THEN
+					CALL fl_mostrar_mensaje('Cuenta no permite movimiento.', 'exclamation')
 					NEXT FIELD n51_aux_cont
 				END IF
 			ELSE
@@ -628,8 +628,8 @@ WHILE TRUE
 				LET rm_rtra[i].tit_cuenta = r_b10.b10_descripcion 
 				DISPLAY rm_rtra[i].tit_cuenta TO
 					rm_rtra[j].tit_cuenta
-				IF r_b10.b10_nivel <> '6' THEN
-					CALL fl_mostrar_mensaje('El nivel de la cuenta debe ser de auxiliar.', 'exclamation')
+				IF r_b10.b10_permite_mov = 'N' THEN
+					CALL fl_mostrar_mensaje('Cuenta no permite movimiento.', 'exclamation')
 					NEXT FIELD n52_aux_cont
 				END IF
 			ELSE

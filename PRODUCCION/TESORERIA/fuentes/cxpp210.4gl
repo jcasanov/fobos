@@ -3510,8 +3510,8 @@ WHILE NOT salir
 				CALL fl_mostrar_mensaje('No existe cuenta contable.','exclamation')
 				NEXT FIELD b13_cuenta
 			END IF
-			IF r_b10.b10_nivel <> last_lvl_cta THEN
-				CALL fl_mostrar_mensaje('La cuenta ingresada debe ser del último nivel.','exclamation')
+			IF r_b10.b10_permite_mov = 'N' THEN
+				CALL fl_mostrar_mensaje('Cuenta no permite movimiento.', 'exclamation')
 				NEXT FIELD b13_cuenta
 			END IF
 -- :)

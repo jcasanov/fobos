@@ -1,4 +1,4 @@
-for i in aceros@$1 acero_qm@$1
+for i in aceros@$1 acero_gm@$1
 	do
 		echo "Creando rolt070 en $i ..."
 		dbaccess $i rolt070.sql

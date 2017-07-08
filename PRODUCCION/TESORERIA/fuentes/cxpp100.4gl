@@ -8,7 +8,6 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_demonios	VARCHAR(12)
 DEFINE rm_cxp		RECORD LIKE cxpt000.*
 DEFINE vm_num_rows	SMALLINT
 DEFINE vm_row_current	SMALLINT
@@ -20,7 +19,7 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
+CALL startlog('../logs/cxpp100.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN          -- Validar # parámetros correcto
@@ -440,8 +439,8 @@ INPUT BY NAME rm_cxp.p00_compania, rm_cxp.p00_tipo_egr_gen, rm_cxp.p00_mespro,
                                 CALL fl_mensaje_estado_bloqueado()
                                 NEXT FIELD p00_aux_prov_mb
                         END IF
-			IF r_cta.b10_nivel <> 6 THEN
-				CALL fgl_winmessage(vg_producto,'Nivel de cuenta debe ser solo 6.','exclamation')
+			IF r_cta.b10_permite_mov = 'N' THEN
+				CALL fl_mostrar_mensaje('Cuenta no permite movimiento.', 'exclamation')
 				NEXT FIELD p00_aux_prov_mb
 			END IF
 		ELSE
@@ -466,8 +465,8 @@ INPUT BY NAME rm_cxp.p00_compania, rm_cxp.p00_tipo_egr_gen, rm_cxp.p00_mespro,
                                 CALL fl_mensaje_estado_bloqueado()
                                 NEXT FIELD p00_aux_prov_ma
                         END IF
-			IF r_cta.b10_nivel <> 6 THEN
-				CALL fgl_winmessage(vg_producto,'Nivel de cuenta debe ser solo 6.','exclamation')
+			IF r_cta.b10_permite_mov = 'N' THEN
+				CALL fl_mostrar_mensaje('Cuenta no permite movimiento.', 'exclamation')
 				NEXT FIELD p00_aux_prov_ma
 			END IF
 		ELSE
@@ -492,8 +491,8 @@ INPUT BY NAME rm_cxp.p00_compania, rm_cxp.p00_tipo_egr_gen, rm_cxp.p00_mespro,
                                 CALL fl_mensaje_estado_bloqueado()
                                 NEXT FIELD p00_aux_ant_mb
                         END IF
-			IF r_cta.b10_nivel <> 6 THEN
-				CALL fgl_winmessage(vg_producto,'Nivel de cuenta debe ser solo 6.','exclamation')
+			IF r_cta.b10_permite_mov = 'N' THEN
+				CALL fl_mostrar_mensaje('Cuenta no permite movimiento.', 'exclamation')
 				NEXT FIELD p00_aux_ant_mb
 			END IF
 		ELSE
@@ -518,8 +517,8 @@ INPUT BY NAME rm_cxp.p00_compania, rm_cxp.p00_tipo_egr_gen, rm_cxp.p00_mespro,
                                 CALL fl_mensaje_estado_bloqueado()
                                 NEXT FIELD p00_aux_ant_ma
                         END IF
-			IF r_cta.b10_nivel <> 6 THEN
-				CALL fgl_winmessage(vg_producto,'Nivel de cuenta debe ser solo 6.','exclamation')
+			IF r_cta.b10_permite_mov = 'N' THEN
+				CALL fl_mostrar_mensaje('Cuenta no permite movimiento.', 'exclamation')
 				NEXT FIELD p00_aux_ant_ma
 			END IF
 		ELSE

@@ -51,6 +51,8 @@ DEFINE vm_max_prest	SMALLINT
 DEFINE vm_num_prest	SMALLINT
 DEFINE vm_cur_prest	SMALLINT
 DEFINE vm_lin_pag	SMALLINT
+DEFINE vm_num_dettot	SMALLINT
+DEFINE vm_max_dettot	SMALLINT
 
 
 
