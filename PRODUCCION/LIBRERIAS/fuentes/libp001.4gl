@@ -2483,7 +2483,7 @@ WHILE TRUE
 	MESSAGE 'Seleccionando datos . . . espere por favor.'
 	LET expr_nivel = " 1 = 1 "
 	IF nivel = -1 THEN
-		expr_nivel = " b10_permite_mov = 'S' "
+		LET expr_nivel = " b10_permite_mov = 'S' "
 	ELSE
 		IF nivel <> 0 THEN
 			LET expr_nivel = " b10_nivel =  ", nivel 
