@@ -8,8 +8,6 @@
 --------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_nuevoprog	VARCHAR(400)
-DEFINE vm_nivel		LIKE ctbt001.b01_nivel
 DEFINE rm_b43		RECORD LIKE ctbt043.*
 DEFINE vm_num_rows	SMALLINT
 DEFINE vm_row_current	SMALLINT
@@ -49,11 +47,6 @@ END MAIN
 FUNCTION control_master()
 
 CALL fl_nivel_isolation()
-SELECT MAX(b01_nivel) INTO vm_nivel FROM ctbt001
-IF vm_nivel IS NULL THEN
-	CALL fl_mostrar_mensaje('No existe ningun nivel de cuenta configurado en la compania.','stop')
-	EXIT PROGRAM
-END IF
 LET vm_max_rows	= 1000
 OPEN WINDOW w_ctbf213_1 AT 3,2 WITH 22 ROWS, 80 COLUMNS
     ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE 0, BORDER,
@@ -273,7 +266,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_vta_mo_tal) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_vta_mo_tal
@@ -281,7 +274,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_vta_mo_ext) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_vta_mo_ext
@@ -289,7 +282,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_vta_mo_cti) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_vta_mo_cti
@@ -297,7 +290,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_vta_rp_tal) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_vta_rp_tal
@@ -305,7 +298,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_vta_rp_ext) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_vta_rp_ext
@@ -313,7 +306,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_vta_rp_cti) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_vta_rp_cti
@@ -321,7 +314,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_vta_rp_alm) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_vta_rp_alm
@@ -329,7 +322,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_vta_otros1) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_vta_otros1
@@ -337,7 +330,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_vta_otros2) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_vta_otros2
@@ -345,7 +338,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_dvt_mo_tal) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_dvt_mo_tal
@@ -353,7 +346,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_dvt_mo_ext) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_dvt_mo_ext
@@ -361,7 +354,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_dvt_mo_cti) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_dvt_mo_cti
@@ -369,7 +362,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_dvt_rp_tal) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_dvt_rp_tal
@@ -377,7 +370,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_dvt_rp_ext) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_dvt_rp_ext
@@ -385,7 +378,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_dvt_rp_cti) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_dvt_rp_cti
@@ -393,7 +386,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_dvt_rp_alm) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_dvt_rp_alm
@@ -401,7 +394,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_dvt_otros1) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_dvt_otros1
@@ -409,7 +402,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_dvt_otros2) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_dvt_otros2
@@ -417,7 +410,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_cos_mo_tal) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_cos_mo_tal
@@ -425,7 +418,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_cos_mo_ext) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_cos_mo_ext
@@ -433,7 +426,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_cos_mo_cti) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_cos_mo_cti
@@ -441,7 +434,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_cos_rp_tal) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_cos_rp_tal
@@ -449,7 +442,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_cos_rp_ext) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_cos_rp_ext
@@ -457,7 +450,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_cos_rp_cti) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_cos_rp_cti
@@ -465,7 +458,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_cos_rp_alm) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_cos_rp_alm
@@ -473,7 +466,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_cos_otros1) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_cos_otros1
@@ -481,7 +474,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_cos_otros2) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_cos_otros2
@@ -489,7 +482,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_pro_mo_tal) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_pro_mo_tal
@@ -497,7 +490,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_pro_mo_ext) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_pro_mo_ext
@@ -505,7 +498,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_pro_mo_cti) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_pro_mo_cti
@@ -513,7 +506,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_pro_rp_tal) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_pro_rp_tal
@@ -521,7 +514,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_pro_rp_ext) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_pro_rp_ext
@@ -529,7 +522,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_pro_rp_cti) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_pro_rp_cti
@@ -537,7 +530,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_pro_rp_alm) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_pro_rp_alm
@@ -545,7 +538,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_pro_otros1) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_pro_otros1
@@ -553,7 +546,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_pro_otros2) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_pro_otros2
@@ -561,7 +554,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_des_mo_tal) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_des_mo_tal
@@ -569,7 +562,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_des_rp_tal) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_des_rp_tal
@@ -577,7 +570,7 @@ CONSTRUCT BY NAME expr_sql ON b43_compania, b43_localidad, b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_des_rp_alm) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b43_des_rp_alm
@@ -758,7 +751,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_vta_mo_tal) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_vta_mo_tal = r_b10.b10_cuenta
@@ -767,7 +760,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_vta_mo_ext) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_vta_mo_ext = r_b10.b10_cuenta
@@ -776,7 +769,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_vta_mo_cti) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_vta_mo_cti = r_b10.b10_cuenta
@@ -785,7 +778,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_vta_rp_tal) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_vta_rp_tal = r_b10.b10_cuenta
@@ -794,7 +787,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_vta_rp_ext) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_vta_rp_ext = r_b10.b10_cuenta
@@ -803,7 +796,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_vta_rp_cti) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_vta_rp_cti = r_b10.b10_cuenta
@@ -812,7 +805,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_vta_rp_alm) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_vta_rp_alm = r_b10.b10_cuenta
@@ -821,7 +814,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_vta_otros1) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_vta_otros1 = r_b10.b10_cuenta
@@ -830,7 +823,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_vta_otros2) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_vta_otros2 = r_b10.b10_cuenta
@@ -839,7 +832,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_dvt_mo_tal) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_dvt_mo_tal = r_b10.b10_cuenta
@@ -848,7 +841,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_dvt_mo_ext) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_dvt_mo_ext = r_b10.b10_cuenta
@@ -857,7 +850,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_dvt_mo_cti) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_dvt_mo_cti = r_b10.b10_cuenta
@@ -866,7 +859,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_dvt_rp_tal) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_dvt_rp_tal = r_b10.b10_cuenta
@@ -875,7 +868,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_dvt_rp_ext) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_dvt_rp_ext = r_b10.b10_cuenta
@@ -884,7 +877,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_dvt_rp_cti) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_dvt_rp_cti = r_b10.b10_cuenta
@@ -893,7 +886,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_dvt_rp_alm) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_dvt_rp_alm = r_b10.b10_cuenta
@@ -902,7 +895,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_dvt_otros1) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_dvt_otros1 = r_b10.b10_cuenta
@@ -911,7 +904,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_dvt_otros2) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_dvt_otros2 = r_b10.b10_cuenta
@@ -920,7 +913,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_cos_mo_tal) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_cos_mo_tal = r_b10.b10_cuenta
@@ -929,7 +922,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_cos_mo_ext) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_cos_mo_ext = r_b10.b10_cuenta
@@ -938,7 +931,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_cos_mo_cti) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_cos_mo_cti = r_b10.b10_cuenta
@@ -947,7 +940,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_cos_rp_tal) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_cos_rp_tal = r_b10.b10_cuenta
@@ -956,7 +949,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_cos_rp_ext) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_cos_rp_ext = r_b10.b10_cuenta
@@ -965,7 +958,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_cos_rp_cti) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_cos_rp_ext = r_b10.b10_cuenta
@@ -974,7 +967,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_cos_rp_alm) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_cos_rp_alm = r_b10.b10_cuenta
@@ -983,7 +976,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_cos_otros1) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_cos_otros1 = r_b10.b10_cuenta
@@ -992,7 +985,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_cos_otros2) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_cos_otros2 = r_b10.b10_cuenta
@@ -1001,7 +994,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_pro_mo_tal) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_pro_mo_tal = r_b10.b10_cuenta
@@ -1010,7 +1003,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_pro_mo_ext) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_pro_mo_ext = r_b10.b10_cuenta
@@ -1019,7 +1012,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_pro_mo_cti) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_pro_mo_cti = r_b10.b10_cuenta
@@ -1028,7 +1021,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_pro_rp_tal) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_pro_rp_tal = r_b10.b10_cuenta
@@ -1037,7 +1030,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_pro_rp_ext) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_pro_rp_ext = r_b10.b10_cuenta
@@ -1046,7 +1039,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_pro_rp_cti) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_pro_rp_cti = r_b10.b10_cuenta
@@ -1055,7 +1048,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_pro_rp_alm) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_pro_rp_alm = r_b10.b10_cuenta
@@ -1064,7 +1057,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_pro_otros1) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_pro_otros1 = r_b10.b10_cuenta
@@ -1073,7 +1066,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_pro_otros2) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_pro_otros2 = r_b10.b10_cuenta
@@ -1082,7 +1075,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_des_mo_tal) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_des_mo_tal = r_b10.b10_cuenta
@@ -1091,7 +1084,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_des_rp_tal) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_des_rp_tal = r_b10.b10_cuenta
@@ -1100,7 +1093,7 @@ INPUT BY NAME rm_b43.b43_compania, rm_b43.b43_localidad, rm_b43.b43_grupo_linea,
 			END IF
 		END IF
 		IF INFIELD(b43_des_rp_alm) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b43.b43_des_rp_alm = r_b10.b10_cuenta

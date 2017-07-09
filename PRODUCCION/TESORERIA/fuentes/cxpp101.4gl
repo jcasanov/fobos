@@ -8,8 +8,6 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_nuevoprog	VARCHAR(100)
-DEFINE vm_nivel		LIKE ctbt001.b01_nivel
 DEFINE rm_p01		RECORD LIKE cxpt001.*
 DEFINE rm_p02		RECORD LIKE cxpt002.*
 DEFINE rm_p05		RECORD LIKE cxpt005.*
@@ -81,11 +79,7 @@ INITIALIZE rm_p01.*, rm_p02.*, rm_p05.* TO NULL
 FOR i = 1 TO vm_max_ret
         INITIALIZE rm_ret[i].*, rm_ret_aux[i].* TO NULL
 END FOR
-SELECT MAX(b01_nivel) INTO vm_nivel FROM ctbt001
-IF vm_nivel IS NULL THEN
-	CALL fl_mostrar_mensaje('No existe ningun nivel de cuenta configurado en la compania.','stop')
-	EXIT PROGRAM
-END IF
+
 LET vm_num_rows    = 0
 LET vm_num_ret     = 0
 LET vm_row_current = 0
@@ -407,7 +401,7 @@ IF num_args() = 4 THEN
 			END IF
 		END IF
 		IF INFIELD(p02_aux_prov_mb) THEN
-                        CALL fl_ayuda_cuenta_contable(vg_codcia,vm_nivel)
+                        CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
                         IF cod_aux IS NOT NULL THEN
@@ -416,7 +410,7 @@ IF num_args() = 4 THEN
                         END IF
                 END IF
                 IF INFIELD(p02_aux_prov_ma) THEN
-                        CALL fl_ayuda_cuenta_contable(vg_codcia,vm_nivel)
+                        CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
                         IF cod_aux IS NOT NULL THEN
@@ -425,7 +419,7 @@ IF num_args() = 4 THEN
                         END IF
                 END IF
 		IF INFIELD(p02_aux_ant_mb) THEN
-                        CALL fl_ayuda_cuenta_contable(vg_codcia,vm_nivel)
+                        CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
                         IF cod_aux IS NOT NULL THEN
@@ -434,7 +428,7 @@ IF num_args() = 4 THEN
                         END IF
                 END IF
                 IF INFIELD(p02_aux_ant_ma) THEN
-                        CALL fl_ayuda_cuenta_contable(vg_codcia,vm_nivel)
+                        CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
                         IF cod_aux IS NOT NULL THEN
@@ -696,7 +690,7 @@ INPUT BY NAME rm_p01.p01_nomprov, rm_p01.p01_personeria, rm_p01.p01_num_doc,
 			END IF
 		END IF
 		IF INFIELD(p02_aux_prov_mb) THEN
-                        CALL fl_ayuda_cuenta_contable(vg_codcia,vm_nivel)
+                        CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
                         IF cod_aux IS NOT NULL THEN
@@ -706,7 +700,7 @@ INPUT BY NAME rm_p01.p01_nomprov, rm_p01.p01_personeria, rm_p01.p01_num_doc,
                         END IF
                 END IF
                 IF INFIELD(p02_aux_prov_ma) THEN
-                        CALL fl_ayuda_cuenta_contable(vg_codcia,vm_nivel)
+                        CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
                         IF cod_aux IS NOT NULL THEN
@@ -716,7 +710,7 @@ INPUT BY NAME rm_p01.p01_nomprov, rm_p01.p01_personeria, rm_p01.p01_num_doc,
                         END IF
                 END IF
 		IF INFIELD(p02_aux_ant_mb) THEN
-                        CALL fl_ayuda_cuenta_contable(vg_codcia,vm_nivel)
+                        CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
                         IF cod_aux IS NOT NULL THEN
@@ -726,7 +720,7 @@ INPUT BY NAME rm_p01.p01_nomprov, rm_p01.p01_personeria, rm_p01.p01_num_doc,
                         END IF
                 END IF
                 IF INFIELD(p02_aux_ant_ma) THEN
-                        CALL fl_ayuda_cuenta_contable(vg_codcia,vm_nivel)
+                        CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
                         IF cod_aux IS NOT NULL THEN

@@ -11,7 +11,6 @@ GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 DEFINE vm_nuevoprog	CHAR(400)
 DEFINE rm_r16		RECORD LIKE rept016.*
 DEFINE rm_r17		RECORD LIKE rept017.*
-DEFINE vm_nivel		LIKE ctbt001.b01_nivel
 DEFINE vm_grupo_linea	LIKE gent020.g20_grupo_linea
 DEFINE vm_num_rows      SMALLINT
 DEFINE vm_row_current   SMALLINT
@@ -107,11 +106,6 @@ ELSE
 END IF
 DISPLAY FORM f_mas
 CALL mostrar_botones_detalle()
-SELECT MAX(b01_nivel) INTO vm_nivel FROM ctbt001
-IF vm_nivel IS NULL THEN
-	CALL fl_mostrar_mensaje('No existe ningun nivel de cuenta configurado en la compania.','stop')
-	EXIT PROGRAM
-END IF
 DECLARE qu_gl CURSOR FOR SELECT g20_grupo_linea FROM gent020
 	WHERE g20_compania = vg_codcia
 OPEN qu_gl 
@@ -659,8 +653,7 @@ IF num_args() = 4 THEN
 	                        END IF
 	                END IF
 			IF INFIELD(r16_aux_cont) THEN
-                	        CALL fl_ayuda_cuenta_contable(vg_codcia,
-								vm_nivel)
+                	        CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
                         	        RETURNING cod_aux, nom_aux
 	                        LET int_flag = 0
         	                IF cod_aux IS NOT NULL THEN
@@ -827,7 +820,7 @@ INPUT BY NAME rm_r16.r16_pedido, rm_r16.r16_tipo, rm_r16.r16_linea,
                         END IF
                 END IF
 		IF INFIELD(r16_aux_cont) THEN
-                        CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+                        CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
                         IF cod_aux IS NOT NULL THEN

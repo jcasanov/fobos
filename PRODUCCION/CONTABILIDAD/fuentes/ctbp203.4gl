@@ -8,14 +8,12 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_nuevoprog	VARCHAR(400)
 DEFINE rm_g09		RECORD LIKE gent009.*
 DEFINE rm_b10		RECORD LIKE ctbt010.*
 DEFINE rm_b12		RECORD LIKE ctbt012.*
 DEFINE rm_b13		RECORD LIKE ctbt013.*
 DEFINE rm_b30		RECORD LIKE ctbt030.*
 DEFINE vm_flag_mant	CHAR(1)
-DEFINE vm_nivel		SMALLINT
 DEFINE vm_num_rows	SMALLINT
 DEFINE vm_row_current	SMALLINT
 DEFINE vm_max_rows	SMALLINT
@@ -849,15 +847,16 @@ END FUNCTION
 
 FUNCTION control_impresion_conciliacion()
 DEFINE num_concil	LIKE ctbt030.b30_num_concil
+DEFINE nuevoprog	VARCHAR(400)
 
 LET num_concil = rm_b30.b30_num_concil
 IF num_args() = 4 THEN
 	LET num_concil = arg_val(4)
 END IF
-LET vm_nuevoprog = 'cd ..', vg_separador, '..', vg_separador, 'CONTABILIDAD',
+LET nuevoprog = 'cd ..', vg_separador, '..', vg_separador, 'CONTABILIDAD',
 	vg_separador, 'fuentes', vg_separador, '; fglrun ctbp408 ', vg_base,
 	' ', vg_modulo, ' ', vg_codcia, ' ', num_concil
-RUN vm_nuevoprog
+RUN nuevoprog
 
 END FUNCTION
 
@@ -1613,16 +1612,17 @@ END FUNCTION
 
 FUNCTION ver_comprobante(i)
 DEFINE i		SMALLINT
+DEFINE nuevoprog	VARCHAR(400)
 
 IF vm_num_det = 0 THEN
 	CALL fgl_winmessage(vg_producto,'No hay comprobante para mostrar.','exclamation')
 	RETURN
 END IF
-LET vm_nuevoprog = 'cd ..', vg_separador, '..', vg_separador, 'CONTABILIDAD',
+LET nuevoprog = 'cd ..', vg_separador, '..', vg_separador, 'CONTABILIDAD',
 	vg_separador, 'fuentes', vg_separador, '; fglrun ctbp201 ', vg_base,
 	' ', vg_modulo, ' ', vg_codcia, ' ', '"', rm_det[i].b13_tipo_comp, '"',
 	' ', '"', rm_det[i].b13_num_comp, '"'
-RUN vm_nuevoprog
+RUN nuevoprog
 
 END FUNCTION
 
@@ -1634,11 +1634,6 @@ OPEN WINDOW w_mov AT 05, 02
         WITH FORM '../forms/ctbf203_2'
         ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MESSAGE LINE LAST,
                    BORDER)
-SELECT MAX(b01_nivel) INTO vm_nivel FROM ctbt001
-IF vm_nivel IS NULL THEN
-	CALL fgl_winmessage(vg_producto,'Nivel no está configurado.','stop')
-	EXIT PROGRAM
-END IF
 CALL mostrar_botones_mov()
 IF vm_flag_mov = 0 THEN
 	CALL llenar_contabilizar()
@@ -1854,7 +1849,7 @@ INPUT ARRAY rm_mov WITHOUT DEFAULTS FROM rm_mov.*
 			END IF 
 		END IF
 		IF INFIELD(b31_cuenta) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING cod_aux, nom_aux
 			LET int_flag = 0
 			IF cod_aux IS NOT NULL THEN

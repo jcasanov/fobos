@@ -15,9 +15,7 @@ DEFINE vm_r_rows 	ARRAY[1000] OF INTEGER -- ARREGLO DE ROWID DE FILAS
 DEFINE vm_row_current	SMALLINT	-- FILA CORRIENTE DEL ARREGLO
 DEFINE vm_num_rows	SMALLINT	-- CANTIDAD DE FILAS LEIDAS
 DEFINE vm_max_rows      SMALLINT        -- MAXIMO DE FILAS LEIDAS
-DEFINE vm_demonios	VARCHAR(12)
 DEFINE flag_man         CHAR(1)
-DEFINE vm_nivel		LIKE ctbt001.b01_nivel
 
 
 
@@ -57,11 +55,7 @@ OPEN WINDOW w_dep AT 3,2 WITH 16 ROWS, 80 COLUMNS
 OPEN FORM f_dep FROM '../forms/genf124_1'
 DISPLAY FORM f_dep
 INITIALIZE rm_g34.* TO NULL
-SELECT MAX(b01_nivel) INTO vm_nivel FROM ctbt001
-IF vm_nivel IS NULL THEN
-	CALL fl_mostrar_mensaje('No existe ningun nivel de cuenta configurado en la compania.','stop')
-	EXIT PROGRAM
-END IF
+
 LET vm_num_rows = 0
 LET vm_row_current = 0
 CALL muestra_contadores(vm_row_current, vm_num_rows)
@@ -174,7 +168,7 @@ CONSTRUCT BY NAME expr_sql ON g34_cod_depto, g34_cod_ccosto, g34_nombre,
                         END IF
                 END IF
 		IF INFIELD(g34_aux_deprec) THEN
-                        CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+                        CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
                         IF cod_aux IS NOT NULL THEN
@@ -346,7 +340,7 @@ INPUT BY NAME rm_g34.g34_nombre, rm_g34.g34_cod_ccosto, rm_g34.g34_aux_deprec
                         END IF
                 END IF
 		IF INFIELD(g34_aux_deprec) THEN
-                        CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+                        CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
                         IF cod_aux IS NOT NULL THEN

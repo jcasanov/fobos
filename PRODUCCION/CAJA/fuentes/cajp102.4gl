@@ -9,7 +9,6 @@
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
 DEFINE rm_caj		RECORD LIKE cajt002.*
-DEFINE vm_nivel		LIKE ctbt001.b01_nivel
 DEFINE vm_num_rows	SMALLINT
 DEFINE vm_row_current	SMALLINT
 DEFINE vm_max_rows	SMALLINT
@@ -75,11 +74,7 @@ DISPLAY FORM f_caj
 INITIALIZE rm_caj.* TO NULL
 LET vm_num_rows = 0
 LET vm_row_current = 0
-SELECT MAX(b01_nivel) INTO vm_nivel FROM ctbt001
-IF vm_nivel IS NULL THEN
-	CALL fl_mostrar_mensaje('No existe ningun nivel de cuenta configurado en la compania.','stop')
-	EXIT PROGRAM
-END IF
+
 CALL muestra_contadores(vm_row_current, vm_num_rows)
 MENU 'OPCIONES'
 	BEFORE MENU
@@ -276,7 +271,7 @@ CONSTRUCT BY NAME expr_sql ON j02_localidad, j02_codigo_caja, j02_nombre_caja,
 			END IF 
 		END IF
 		IF INFIELD(j02_aux_cont) THEN
-                        CALL fl_ayuda_cuenta_contable(vg_codcia,vm_nivel)
+                        CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
                                 RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
                         LET int_flag = 0
                         IF r_b10.b10_cuenta IS NOT NULL THEN
@@ -386,7 +381,7 @@ INPUT BY NAME rm_caj.j02_localidad, rm_caj.j02_nombre_caja,
 			END IF 
 		END IF
 		IF INFIELD(j02_aux_cont) THEN
-                        CALL fl_ayuda_cuenta_contable(vg_codcia,vm_nivel)
+                        CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
                                 RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
                         LET int_flag = 0
                         IF r_b10.b10_cuenta IS NOT NULL THEN

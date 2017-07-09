@@ -9,10 +9,6 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_demonios	VARCHAR(12)
-
-DEFINE vm_nivel_cta	LIKE ctbt001.b01_nivel
-
 -- CADA VEZ QUE SE REALIZE UNA CONSULTA SE GUARDARAN LOS ROWID DE CADA FILA 
 -- RECUPERADA EN UNA TABLA LLAMADA r_rows QUE TENDRA 1000 ELEMENTOS
 DEFINE vm_rows ARRAY[1000] OF INTEGER  	-- ARREGLO DE ROWID DE FILAS LEIDAS
@@ -72,14 +68,6 @@ LET vm_num_rows = 0
 LET vm_row_current = 0
 INITIALIZE rm_cta.* TO NULL
 CALL muestra_contadores()
-
-SELECT MAX(b01_nivel) INTO vm_nivel_cta FROM ctbt001
-IF vm_nivel_cta IS NULL THEN
-	CALL fgl_winmessage(vg_producto,
-		'No se ha configurado el plan de cuentas.',
-		'stop')
-	EXIT PROGRAM
-END IF
 
 MENU 'OPCIONES'
 	BEFORE MENU
@@ -303,7 +291,7 @@ INPUT BY NAME rm_cta.g09_banco, rm_cta.g09_numero_cta, rm_cta.g09_tipo_cta,
 			END IF	
 		END IF
 		IF INFIELD(g09_aux_cont) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel_cta) 
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1) 
 				RETURNING cuenta, nom_cuenta 
 			IF cuenta IS NOT NULL THEN
 				LET rm_cta.g09_aux_cont = cuenta
@@ -518,7 +506,7 @@ CONSTRUCT BY NAME expr_sql
 			END IF	
 		END IF
 		IF INFIELD(g09_aux_cont) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel_cta) 
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1) 
 				RETURNING cuenta, nom_cuenta 
 			IF cuenta IS NOT NULL THEN
 				LET rm_cta.g09_aux_cont = cuenta

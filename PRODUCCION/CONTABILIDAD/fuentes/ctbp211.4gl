@@ -8,8 +8,6 @@
 --------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_nuevoprog	VARCHAR(400)
-DEFINE vm_nivel		LIKE ctbt001.b01_nivel
 DEFINE rm_b41		RECORD LIKE ctbt041.*
 DEFINE vm_num_rows	SMALLINT
 DEFINE vm_row_current	SMALLINT
@@ -50,11 +48,6 @@ FUNCTION control_master()
 DEFINE flag		CHAR(1)
 
 CALL fl_nivel_isolation()
-SELECT MAX(b01_nivel) INTO vm_nivel FROM ctbt001
-IF vm_nivel IS NULL THEN
-	CALL fl_mostrar_mensaje('No existe ningun nivel de cuenta configurado en la compania.','stop')
-	EXIT PROGRAM
-END IF
 LET vm_max_rows	= 1000
 OPEN WINDOW w_ctbf211_1 AT 3,2 WITH 20 ROWS, 80 COLUMNS
     ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE 0, BORDER,
@@ -259,7 +252,7 @@ CONSTRUCT BY NAME expr_sql ON b41_compania, b41_localidad, b41_modulo,
 			END IF 
 		END IF
 		IF INFIELD(b41_caja_mb) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b41_caja_mb
@@ -267,7 +260,7 @@ CONSTRUCT BY NAME expr_sql ON b41_compania, b41_localidad, b41_modulo,
 			END IF
 		END IF
 		IF INFIELD(b41_caja_me) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b41_caja_me
@@ -275,7 +268,7 @@ CONSTRUCT BY NAME expr_sql ON b41_compania, b41_localidad, b41_modulo,
 			END IF
 		END IF
 		IF INFIELD(b41_cxc_mb) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b41_cxc_mb
@@ -283,7 +276,7 @@ CONSTRUCT BY NAME expr_sql ON b41_compania, b41_localidad, b41_modulo,
 			END IF
 		END IF
 		IF INFIELD(b41_cxc_me) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b41_cxc_me
@@ -291,7 +284,7 @@ CONSTRUCT BY NAME expr_sql ON b41_compania, b41_localidad, b41_modulo,
 			END IF
 		END IF
 		IF INFIELD(b41_ant_mb) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b41_ant_mb
@@ -299,7 +292,7 @@ CONSTRUCT BY NAME expr_sql ON b41_compania, b41_localidad, b41_modulo,
 			END IF
 		END IF
 		IF INFIELD(b41_ant_me) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b41_ant_me
@@ -307,7 +300,7 @@ CONSTRUCT BY NAME expr_sql ON b41_compania, b41_localidad, b41_modulo,
 			END IF
 		END IF
 		IF INFIELD(b41_intereses) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b41_intereses
@@ -456,7 +449,7 @@ INPUT BY NAME rm_b41.b41_compania, rm_b41.b41_localidad, rm_b41.b41_modulo,
 			END IF
 		END IF
 		IF INFIELD(b41_caja_mb) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b41.b41_caja_mb = r_b10.b10_cuenta
@@ -465,7 +458,7 @@ INPUT BY NAME rm_b41.b41_compania, rm_b41.b41_localidad, rm_b41.b41_modulo,
 			END IF
 		END IF
 		IF INFIELD(b41_caja_me) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b41.b41_caja_me = r_b10.b10_cuenta
@@ -474,7 +467,7 @@ INPUT BY NAME rm_b41.b41_compania, rm_b41.b41_localidad, rm_b41.b41_modulo,
 			END IF
 		END IF
 		IF INFIELD(b41_cxc_mb) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b41.b41_cxc_mb = r_b10.b10_cuenta
@@ -483,7 +476,7 @@ INPUT BY NAME rm_b41.b41_compania, rm_b41.b41_localidad, rm_b41.b41_modulo,
 			END IF
 		END IF
 		IF INFIELD(b41_cxc_me) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b41.b41_cxc_me = r_b10.b10_cuenta
@@ -492,7 +485,7 @@ INPUT BY NAME rm_b41.b41_compania, rm_b41.b41_localidad, rm_b41.b41_modulo,
 			END IF
 		END IF
 		IF INFIELD(b41_ant_mb) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b41.b41_ant_mb = r_b10.b10_cuenta
@@ -501,7 +494,7 @@ INPUT BY NAME rm_b41.b41_compania, rm_b41.b41_localidad, rm_b41.b41_modulo,
 			END IF
 		END IF
 		IF INFIELD(b41_ant_me) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b41.b41_ant_me = r_b10.b10_cuenta
@@ -510,7 +503,7 @@ INPUT BY NAME rm_b41.b41_compania, rm_b41.b41_localidad, rm_b41.b41_modulo,
 			END IF
 		END IF
 		IF INFIELD(b41_intereses) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b41.b41_intereses = r_b10.b10_cuenta

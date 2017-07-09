@@ -8,8 +8,6 @@
 --------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_nuevoprog	VARCHAR(400)
-DEFINE vm_nivel		LIKE ctbt001.b01_nivel
 DEFINE rm_b40		RECORD LIKE ctbt040.*
 DEFINE vm_num_rows	SMALLINT
 DEFINE vm_row_current	SMALLINT
@@ -49,11 +47,6 @@ END MAIN
 FUNCTION control_master()
 
 CALL fl_nivel_isolation()
-SELECT MAX(b01_nivel) INTO vm_nivel FROM ctbt001
-IF vm_nivel IS NULL THEN
-	CALL fl_mostrar_mensaje('No existe ningun nivel de cuenta configurado en la compania.','stop')
-	EXIT PROGRAM
-END IF
 LET vm_max_rows	= 1000
 OPEN WINDOW w_ctbf210_1 AT 3,2 WITH 22 ROWS, 80 COLUMNS
     ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE 0, BORDER,
@@ -351,7 +344,7 @@ CONSTRUCT BY NAME expr_sql ON b40_compania, b40_localidad, b40_modulo,
 			END IF
 		END IF
 		IF INFIELD(b40_venta) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b40_venta
@@ -359,7 +352,7 @@ CONSTRUCT BY NAME expr_sql ON b40_compania, b40_localidad, b40_modulo,
 			END IF
 		END IF
 		IF INFIELD(b40_descuento) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b40_descuento
@@ -367,7 +360,7 @@ CONSTRUCT BY NAME expr_sql ON b40_compania, b40_localidad, b40_modulo,
 			END IF
 		END IF
 		IF INFIELD(b40_dev_venta) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b40_dev_venta
@@ -375,7 +368,7 @@ CONSTRUCT BY NAME expr_sql ON b40_compania, b40_localidad, b40_modulo,
 			END IF
 		END IF
 		IF INFIELD(b40_costo_venta) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b40_costo_venta
@@ -383,7 +376,7 @@ CONSTRUCT BY NAME expr_sql ON b40_compania, b40_localidad, b40_modulo,
 			END IF
 		END IF
 		IF INFIELD(b40_dev_costo) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b40_dev_costo
@@ -391,7 +384,7 @@ CONSTRUCT BY NAME expr_sql ON b40_compania, b40_localidad, b40_modulo,
 			END IF
 		END IF
 		IF INFIELD(b40_inventario) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b40_inventario
@@ -399,7 +392,7 @@ CONSTRUCT BY NAME expr_sql ON b40_compania, b40_localidad, b40_modulo,
 			END IF
 		END IF
 		IF INFIELD(b40_transito) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b40_transito
@@ -407,7 +400,7 @@ CONSTRUCT BY NAME expr_sql ON b40_compania, b40_localidad, b40_modulo,
 			END IF
 		END IF
 		IF INFIELD(b40_ajustes) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b40_ajustes
@@ -415,7 +408,7 @@ CONSTRUCT BY NAME expr_sql ON b40_compania, b40_localidad, b40_modulo,
 			END IF
 		END IF
 		IF INFIELD(b40_flete) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO b40_flete
@@ -595,7 +588,7 @@ INPUT BY NAME rm_b40.b40_compania, rm_b40.b40_localidad, rm_b40.b40_modulo,
 			END IF
 		END IF
 		IF INFIELD(b40_venta) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b40.b40_venta = r_b10.b10_cuenta
@@ -604,7 +597,7 @@ INPUT BY NAME rm_b40.b40_compania, rm_b40.b40_localidad, rm_b40.b40_modulo,
 			END IF
 		END IF
 		IF INFIELD(b40_descuento) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b40.b40_descuento = r_b10.b10_cuenta
@@ -613,7 +606,7 @@ INPUT BY NAME rm_b40.b40_compania, rm_b40.b40_localidad, rm_b40.b40_modulo,
 			END IF
 		END IF
 		IF INFIELD(b40_dev_venta) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b40.b40_dev_venta = r_b10.b10_cuenta
@@ -622,7 +615,7 @@ INPUT BY NAME rm_b40.b40_compania, rm_b40.b40_localidad, rm_b40.b40_modulo,
 			END IF
 		END IF
 		IF INFIELD(b40_costo_venta) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b40.b40_costo_venta = r_b10.b10_cuenta
@@ -631,7 +624,7 @@ INPUT BY NAME rm_b40.b40_compania, rm_b40.b40_localidad, rm_b40.b40_modulo,
 			END IF
 		END IF
 		IF INFIELD(b40_dev_costo) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b40.b40_dev_costo = r_b10.b10_cuenta
@@ -640,7 +633,7 @@ INPUT BY NAME rm_b40.b40_compania, rm_b40.b40_localidad, rm_b40.b40_modulo,
 			END IF
 		END IF
 		IF INFIELD(b40_inventario) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b40.b40_inventario = r_b10.b10_cuenta
@@ -649,7 +642,7 @@ INPUT BY NAME rm_b40.b40_compania, rm_b40.b40_localidad, rm_b40.b40_modulo,
 			END IF
 		END IF
 		IF INFIELD(b40_transito) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b40.b40_transito = r_b10.b10_cuenta
@@ -658,7 +651,7 @@ INPUT BY NAME rm_b40.b40_compania, rm_b40.b40_localidad, rm_b40.b40_modulo,
 			END IF
 		END IF
 		IF INFIELD(b40_ajustes) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b40.b40_ajustes = r_b10.b10_cuenta
@@ -667,7 +660,7 @@ INPUT BY NAME rm_b40.b40_compania, rm_b40.b40_localidad, rm_b40.b40_modulo,
 			END IF
 		END IF
 		IF INFIELD(b40_flete) THEN
-			CALL fl_ayuda_cuenta_contable(codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_b40.b40_flete = r_b10.b10_cuenta

@@ -8,8 +8,6 @@
 --------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_nuevoprog	VARCHAR(400)
-DEFINE vm_nivel		LIKE ctbt001.b01_nivel
 DEFINE rm_z01		RECORD LIKE cxct001.*
 DEFINE rm_z02		RECORD LIKE cxct002.*
 DEFINE rm_g05		RECORD LIKE gent005.*
@@ -106,11 +104,7 @@ OPTIONS INPUT WRAP,
 OPEN FORM f_cxc FROM "../forms/cxcf101_1"
 DISPLAY FORM f_cxc
 INITIALIZE rm_z01.*, rm_z02.* TO NULL
-SELECT MAX(b01_nivel) INTO vm_nivel FROM ctbt001
-IF vm_nivel IS NULL THEN
-	CALL fl_mostrar_mensaje('No existe ningun nivel de cuenta configurado en la compania.','stop')
-	EXIT PROGRAM
-END IF
+
 CALL fl_lee_usuario(vg_usuario) RETURNING rm_g05.*
 LET vm_num_rows    = 0
 LET vm_row_current = 0
@@ -520,7 +514,7 @@ IF num_args() = 4 THEN
                         END IF
                 END IF
 		IF INFIELD(z02_aux_clte_mb) THEN
-                        CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+                        CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
                         IF cod_aux IS NOT NULL THEN
@@ -529,7 +523,7 @@ IF num_args() = 4 THEN
                         END IF
                 END IF
                 IF INFIELD(z02_aux_clte_ma) THEN
-                        CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+                        CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
                         IF cod_aux IS NOT NULL THEN
@@ -538,7 +532,7 @@ IF num_args() = 4 THEN
                         END IF
                 END IF
 		IF INFIELD(z02_aux_ant_mb) THEN
-                        CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+                        CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
                         IF cod_aux IS NOT NULL THEN
@@ -547,7 +541,7 @@ IF num_args() = 4 THEN
                         END IF
                 END IF
                 IF INFIELD(z02_aux_ant_ma) THEN
-                        CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+                        CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
                         IF cod_aux IS NOT NULL THEN
@@ -775,7 +769,7 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 			IF rm_g05.g05_tipo = 'UF' THEN
 				CONTINUE INPUT
 			END IF
-                        CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+                        CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
                         IF cod_aux IS NOT NULL THEN
@@ -788,7 +782,7 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 			IF rm_g05.g05_tipo = 'UF' THEN
 				CONTINUE INPUT
 			END IF
-                        CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+                        CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
                         IF cod_aux IS NOT NULL THEN
@@ -801,7 +795,7 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 			IF rm_g05.g05_tipo = 'UF' THEN
 				CONTINUE INPUT
 			END IF
-                        CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+                        CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
                         IF cod_aux IS NOT NULL THEN
@@ -814,7 +808,7 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 			IF rm_g05.g05_tipo = 'UF' THEN
 				CONTINUE INPUT
 			END IF
-                        CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+                        CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
                         IF cod_aux IS NOT NULL THEN
@@ -1896,12 +1890,13 @@ END FUNCTION
 
 FUNCTION ver_areaneg(flag)
 DEFINE flag		CHAR(1)
+DEFINE nuevoprog	VARCHAR(400)
 
-LET vm_nuevoprog = 'cd ..', vg_separador, '..', vg_separador, 'COBRANZAS',
+LET nuevoprog = 'cd ..', vg_separador, '..', vg_separador, 'COBRANZAS',
 	vg_separador, 'fuentes', vg_separador, '; fglrun cxcp106 ' , vg_base,
 	' ', vg_modulo, ' ', vg_codcia, ' ', vm_r_cli[vm_row_current].codloc,
 	' ', rm_z01.z01_codcli, ' ', flag
-RUN vm_nuevoprog
+RUN nuevoprog
 
 END FUNCTION
 
@@ -2045,7 +2040,7 @@ INPUT BY NAME rm_z02.z02_localidad, rm_z02.z02_contacto, rm_z02.z02_referencia,
 			IF rm_g05.g05_tipo = 'UF' THEN
 				CONTINUE INPUT
 			END IF
-                        CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+                        CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
                         IF cod_aux IS NOT NULL THEN
@@ -2058,7 +2053,7 @@ INPUT BY NAME rm_z02.z02_localidad, rm_z02.z02_contacto, rm_z02.z02_referencia,
 			IF rm_g05.g05_tipo = 'UF' THEN
 				CONTINUE INPUT
 			END IF
-                        CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+                        CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
                         IF cod_aux IS NOT NULL THEN
@@ -2071,7 +2066,7 @@ INPUT BY NAME rm_z02.z02_localidad, rm_z02.z02_contacto, rm_z02.z02_referencia,
 			IF rm_g05.g05_tipo = 'UF' THEN
 				CONTINUE INPUT
 			END IF
-                        CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+                        CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
                         IF cod_aux IS NOT NULL THEN
@@ -2084,7 +2079,7 @@ INPUT BY NAME rm_z02.z02_localidad, rm_z02.z02_contacto, rm_z02.z02_referencia,
 			IF rm_g05.g05_tipo = 'UF' THEN
 				CONTINUE INPUT
 			END IF
-                        CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+                        CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
                                 RETURNING cod_aux, nom_aux
                         LET int_flag = 0
                         IF cod_aux IS NOT NULL THEN
@@ -3190,7 +3185,7 @@ INPUT ARRAY rm_detz09 WITHOUT DEFAULTS FROM rm_detz09.*
 			END IF
 		END IF
 		IF INFIELD(z09_aux_cont) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_detz09[i].z09_aux_cont = r_b10.b10_cuenta

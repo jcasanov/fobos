@@ -10,7 +10,6 @@
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
                                                                                 
 DEFINE rm_g58   	RECORD LIKE gent058.*
-DEFINE vm_nivel		LIKE ctbt001.b01_nivel
 DEFINE vm_r_rows	ARRAY[1000] OF INTEGER
 DEFINE vm_row_current   SMALLINT        -- FILA CORRIENTE DEL ARREGLO
 DEFINE vm_num_rows      SMALLINT        -- CANTIDAD DE FILAS LEIDAS
@@ -73,11 +72,7 @@ ELSE
 	OPEN FORM f_genf143_1 FROM '../forms/genf143_1c'
 END IF
 DISPLAY FORM f_genf143_1
-SELECT MAX(b01_nivel) INTO vm_nivel FROM ctbt001
-IF vm_nivel IS NULL THEN
-	CALL fl_mostrar_mensaje('No existe ningun nivel de cuenta configurado en la compañía.','stop')
-	EXIT PROGRAM
-END IF
+
 INITIALIZE rm_g58.* TO NULL
 LET vm_num_rows = 0
 LET vm_row_current = 0
@@ -256,7 +251,7 @@ CONSTRUCT BY NAME expr_sql ON g58_estado, g58_localidad, g58_porc_impto,
 			END IF
 		END IF
 		IF INFIELD(g58_aux_cont) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta      TO g58_aux_cont
@@ -357,7 +352,7 @@ INPUT BY NAME rm_g58.g58_localidad, rm_g58.g58_porc_impto, rm_g58.g58_tipo,
 			END IF
 		END IF
 		IF INFIELD(g58_aux_cont) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_g58.g58_aux_cont = r_b10.b10_cuenta

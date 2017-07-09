@@ -10,7 +10,6 @@ GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
 DEFINE rm_c01		RECORD LIKE ordt001.*
 DEFINE rm_s24		RECORD LIKE srit024.*
-DEFINE vm_nivel		LIKE ctbt001.b01_nivel
 DEFINE vm_num_rows	SMALLINT
 DEFINE vm_row_current	SMALLINT
 DEFINE vm_max_rows	SMALLINT
@@ -87,11 +86,7 @@ DISPLAY FORM f_ordf101_1
 INITIALIZE rm_c01.* TO NULL
 LET vm_num_rows    = 0
 LET vm_row_current = 0
-SELECT MAX(b01_nivel) INTO vm_nivel FROM ctbt001
-IF vm_nivel IS NULL THEN
-	CALL fl_mostrar_mensaje('No existe ningun nivel de cuenta configurado en la compania.','stop')
-	EXIT PROGRAM
-END IF
+
 CALL muestra_contadores(vm_row_current, vm_num_rows)
 MENU 'OPCIONES'
 	BEFORE MENU
@@ -308,7 +303,7 @@ CONSTRUCT BY NAME expr_sql ON c01_estado, c01_tipo_orden, c01_nombre,
 			END IF 
 		END IF
 		IF INFIELD(c01_aux_cont) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			LET int_flag = 0
 			IF r_b10.b10_cuenta IS NOT NULL THEN
@@ -318,7 +313,7 @@ CONSTRUCT BY NAME expr_sql ON c01_estado, c01_tipo_orden, c01_nombre,
 			END IF
 		END IF
 		IF INFIELD(c01_aux_ot_proc) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			LET int_flag = 0
 			IF r_b10.b10_cuenta IS NOT NULL THEN
@@ -328,7 +323,7 @@ CONSTRUCT BY NAME expr_sql ON c01_estado, c01_tipo_orden, c01_nombre,
 			END IF
 		END IF
 		IF INFIELD(c01_aux_ot_cost) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			LET int_flag = 0
 			IF r_b10.b10_cuenta IS NOT NULL THEN
@@ -338,7 +333,7 @@ CONSTRUCT BY NAME expr_sql ON c01_estado, c01_tipo_orden, c01_nombre,
 			END IF
 		END IF
 		IF INFIELD(c01_aux_ot_vta) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			LET int_flag = 0
 			IF r_b10.b10_cuenta IS NOT NULL THEN
@@ -348,7 +343,7 @@ CONSTRUCT BY NAME expr_sql ON c01_estado, c01_tipo_orden, c01_nombre,
 			END IF
 		END IF
 		IF INFIELD(c01_aux_ot_dvta) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			LET int_flag = 0
 			IF r_b10.b10_cuenta IS NOT NULL THEN
@@ -459,7 +454,7 @@ INPUT BY NAME rm_c01.c01_nombre, rm_c01.c01_ing_bodega,  rm_c01.c01_bien_serv,
 			END IF 
 		END IF
 		IF INFIELD(c01_aux_cont) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			LET int_flag = 0
 			IF r_b10.b10_cuenta IS NOT NULL THEN
@@ -469,7 +464,7 @@ INPUT BY NAME rm_c01.c01_nombre, rm_c01.c01_ing_bodega,  rm_c01.c01_bien_serv,
 			END IF
 		END IF
 		IF INFIELD(c01_aux_ot_proc) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			LET int_flag = 0
 			IF r_b10.b10_cuenta IS NOT NULL THEN
@@ -479,7 +474,7 @@ INPUT BY NAME rm_c01.c01_nombre, rm_c01.c01_ing_bodega,  rm_c01.c01_bien_serv,
 			END IF
 		END IF
 		IF INFIELD(c01_aux_ot_cost) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			LET int_flag = 0
 			IF r_b10.b10_cuenta IS NOT NULL THEN
@@ -489,7 +484,7 @@ INPUT BY NAME rm_c01.c01_nombre, rm_c01.c01_ing_bodega,  rm_c01.c01_bien_serv,
 			END IF
 		END IF
 		IF INFIELD(c01_aux_ot_vta) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			LET int_flag = 0
 			IF r_b10.b10_cuenta IS NOT NULL THEN
@@ -499,7 +494,7 @@ INPUT BY NAME rm_c01.c01_nombre, rm_c01.c01_ing_bodega,  rm_c01.c01_bien_serv,
 			END IF
 		END IF
 		IF INFIELD(c01_aux_ot_dvta) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			LET int_flag = 0
 			IF r_b10.b10_cuenta IS NOT NULL THEN
@@ -956,7 +951,7 @@ INPUT ARRAY rm_sust WITHOUT DEFAULTS FROM rm_sust.*
 		END IF
 	ON KEY(F2)
 		IF INFIELD(s23_aux_cont) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_sust[i].s23_aux_cont   = r_b10.b10_cuenta
@@ -1300,7 +1295,7 @@ INPUT BY NAME rm_s24.s24_codigo, rm_s24.s24_aux_cont
 			END IF
 		END IF
 		IF INFIELD(s24_aux_cont) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_s24.s24_aux_cont = r_b10.b10_cuenta
