@@ -2430,6 +2430,9 @@ FUNCTION fl_ayuda_cuenta_contable(cod_cia, nivel)
 ## cuando sea ingreso de cuenta el parametro nivel será = 0, en modificacion
 ## de cuentas parametro nivel será = 6
 
+## Si el parámetro es -1 se mostrarán las cuentas que permitan movimiento sin
+## importar el nivel
+
 DEFINE rh_ctacon ARRAY[1000] OF RECORD
 	b10_cuenta	LIKE ctbt010.b10_cuenta,
 	b10_descripcion	LIKE ctbt010.b10_descripcion
@@ -2479,8 +2482,12 @@ WHILE TRUE
 	END IF
 	MESSAGE 'Seleccionando datos . . . espere por favor.'
 	LET expr_nivel = " 1 = 1 "
-	IF nivel <> 0 THEN
-		LET expr_nivel = " b10_nivel =  ", nivel 
+	IF nivel = -1 THEN
+		expr_nivel = " b10_permite_mov = 'S' "
+	ELSE
+		IF nivel <> 0 THEN
+			LET expr_nivel = " b10_nivel =  ", nivel 
+		END IF
 	END IF
 -----------------
 LET vm_columna_1 = 1
