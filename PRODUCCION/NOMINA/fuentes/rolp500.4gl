@@ -183,7 +183,6 @@ END FUNCTION
 
 FUNCTION control_pago_efectivo()
 DEFINE r_b10		RECORD LIKE ctbt010.*
-DEFINE nivel		LIKE ctbt001.b01_nivel
 DEFINE resul		SMALLINT
 DEFINE lin_menu		SMALLINT
 DEFINE row_ini  	SMALLINT
@@ -205,11 +204,6 @@ OPEN WINDOW w_rol_pag AT row_ini, 5 WITH num_rows ROWS, num_cols COLUMNS
 		  BORDER, MESSAGE LINE LAST)
 OPEN FORM f_pago FROM '../forms/rolf500_4'
 DISPLAY FORM f_pago
-SELECT MAX(b01_nivel) INTO nivel FROM ctbt001
-IF nivel IS NULL THEN
-	CALL fl_mostrar_mensaje('No existe ningun nivel de cuenta configurado en la compania.','stop')
-	EXIT PROGRAM
-END IF
 INITIALIZE rm_n54.* TO NULL
 DECLARE q_n54 CURSOR FOR SELECT * FROM rolt054
 OPEN q_n54
@@ -223,7 +217,7 @@ INPUT BY NAME rm_n54.n54_aux_cont WITHOUT DEFAULTS
 		EXIT INPUT
 	ON KEY(F2)
 		IF INFIELD(n54_aux_cont) THEN
-                        CALL fl_ayuda_cuenta_contable(vg_codcia, nivel)
+                        CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
                                 RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
                         LET int_flag = 0
                         IF r_b10.b10_cuenta IS NOT NULL THEN
@@ -234,7 +228,7 @@ INPUT BY NAME rm_n54.n54_aux_cont WITHOUT DEFAULTS
                 END IF
 	AFTER FIELD n54_aux_cont
                 IF rm_n54.n54_aux_cont IS NOT NULL THEN
-			CALL validar_cuenta(rm_n54.n54_aux_cont, nivel)
+			CALL validar_cuenta(rm_n54.n54_aux_cont)
 				RETURNING resul
 			IF resul = 1 THEN
 				NEXT FIELD n54_aux_cont
@@ -259,9 +253,8 @@ END FUNCTION
 
 
 
-FUNCTION validar_cuenta(aux_cont, nivel)
+FUNCTION validar_cuenta(aux_cont)
 DEFINE aux_cont		LIKE ctbt010.b10_cuenta
-DEFINE nivel		LIKE ctbt001.b01_nivel
 DEFINE r_b10            RECORD LIKE ctbt010.*
 
 CALL fl_lee_cuenta(vg_codcia, aux_cont) RETURNING r_b10.*
@@ -486,7 +479,7 @@ WHILE TRUE
 			LET i = arr_curr()
 			LET j = scr_line()
 		ON KEY(F2)
-			CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING r_b10.b10_cuenta, 
 					  r_b10.b10_descripcion
 			LET int_flag = 0
@@ -544,7 +537,7 @@ WHILE TRUE
 			LET i = arr_curr()
 			LET j = scr_line()
 		ON KEY(F2)
-			CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING r_b10.b10_cuenta, 
 					  r_b10.b10_descripcion
 			LET int_flag = 0
@@ -604,7 +597,7 @@ WHILE TRUE
 		ON KEY(F2)
 			LET i = arr_curr()
 			LET j = scr_line()
-			CALL fl_ayuda_cuenta_contable(vg_codcia, 6)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING r_b10.b10_cuenta, 
 					  r_b10.b10_descripcion
 			LET int_flag = 0

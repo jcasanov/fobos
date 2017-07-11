@@ -9,7 +9,6 @@
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
 DEFINE vm_demonios	VARCHAR(12)
-DEFINE vm_nivel_cta	LIKE ctbt001.b01_nivel
 DEFINE vm_diario	LIKE ctbt014.b14_codigo
 
 DEFINE vm_filas_pant	SMALLINT
@@ -106,14 +105,6 @@ CALL fl_lee_compania_contabilidad(vg_codcia) 	RETURNING rm_b00.*
 IF rm_b00.b00_compania IS NULL THEN
 	CALL fgl_winmessage(vg_producto,
 		'No existe configuración para está compañía en el módulo.',
-		'stop')
-	EXIT PROGRAM
-END IF
-
-SELECT MAX(b01_nivel) INTO vm_nivel_cta FROM ctbt001
-IF vm_nivel_cta IS NULL THEN
-	CALL fgl_winmessage(vg_producto,
-		'No se ha configurado el plan de cuentas.',
 		'stop')
 	EXIT PROGRAM
 END IF
@@ -881,8 +872,7 @@ WHILE NOT salir
 			EXIT INPUT
 		ON KEY(F2)	
 			IF INFIELD(b15_cuenta) THEN
-				CALL fl_ayuda_cuenta_contable(vg_codcia, 
-					vm_nivel_cta) 
+				CALL fl_ayuda_cuenta_contable(vg_codcia, -1) 
 					RETURNING r_b10.b10_cuenta, 
         					  r_b10.b10_descripcion 
 				IF r_b10.b10_cuenta IS NOT NULL THEN

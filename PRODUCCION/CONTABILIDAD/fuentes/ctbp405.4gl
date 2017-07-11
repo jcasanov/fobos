@@ -32,7 +32,6 @@ DEFINE vm_subtipo	LIKE ctbt012.b12_subtipo
 DEFINE vm_fecha_ini	DATE
 DEFINE vm_fecha_fin	DATE
 DEFINE vm_moneda	LIKE gent013.g13_moneda
-DEFINE vm_nivel         SMALLINT
 DEFINE vm_saldo 	DECIMAL (14,2)
 DEFINE vm_archivo	CHAR(6)
 
@@ -76,11 +75,7 @@ LET vm_left   = 0
 LET vm_right  = 132
 LET vm_bottom = 4
 LET vm_page   = 66
-SELECT MAX(b01_nivel) INTO vm_nivel FROM ctbt001
-IF vm_nivel IS NULL THEN
-	CALL fgl_winmessage(vg_producto,'Nivel no está configurado.','stop')
-	EXIT PROGRAM
-END IF
+
 IF num_args() <> 4 THEN
 	CALL llamada_otro_prog()
 	EXIT PROGRAM
@@ -247,7 +242,7 @@ INPUT BY NAME vm_cta_inicial, vm_cta_final, vm_fecha_ini,
 		RETURN
 	ON KEY(F2)
 		IF INFIELD(vm_cta_inicial) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET vm_cta_inicial = r_b10.b10_cuenta	
@@ -256,7 +251,7 @@ INPUT BY NAME vm_cta_inicial, vm_cta_final, vm_fecha_ini,
 			END IF
 		END IF
 		IF INFIELD(vm_cta_final) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET vm_cta_final   = r_b10.b10_cuenta	

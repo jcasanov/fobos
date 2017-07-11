@@ -43,7 +43,6 @@ DEFINE rm_descri	ARRAY[1000] OF RECORD
 				tipo		LIKE ctbt013.b13_tipo_doc,
 				glosa		LIKE ctbt013.b13_glosa
 			END RECORD
-DEFINE vm_nivel         LIKE ctbt001.b01_nivel
 
 
 
@@ -113,11 +112,7 @@ LET vm_num_det = 0
 LET vm_scr_lin = 0
 CALL muestra_contadores_cab(0)
 CALL muestra_contadores_det(0)
-SELECT MAX(b01_nivel) INTO vm_nivel FROM ctbt001
-IF vm_nivel IS NULL THEN
-	CALL fgl_winmessage(vg_producto,'Nivel no esta configurado.','stop')
-	EXIT PROGRAM
-END IF
+
 MENU 'OPCIONES'
 	COMMAND KEY ('C') 'Consultar'
 		CALL control_consulta()
@@ -201,7 +196,7 @@ CONSTRUCT BY NAME expr_cta ON b13_cuenta
 		EXIT CONSTRUCT
 	ON KEY(F2)	
 		IF INFIELD(b13_cuenta) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta TO b13_cuenta

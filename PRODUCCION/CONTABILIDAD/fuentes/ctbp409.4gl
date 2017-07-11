@@ -42,7 +42,6 @@ DEFINE vm_saldo_cli 	DECIMAL(14,2)
 DEFINE vm_saldo_pro 	DECIMAL(14,2)
 DEFINE vm_saldo_ped 	DECIMAL(14,2)
 DEFINE vm_saldo_ini 	DECIMAL(14,2)
-DEFINE vm_nivel         SMALLINT
 DEFINE vm_incluir	CHAR(1)
 DEFINE vm_ver_saldos	CHAR(1)
 DEFINE vm_archivo	CHAR(6)
@@ -133,11 +132,6 @@ CALL fl_lee_moneda(vm_moneda) RETURNING rm_g13.*
 DISPLAY rm_g13.g13_nombre TO nom_moneda
 LET vm_fecha_ini = TODAY
 LET vm_fecha_fin = TODAY
-SELECT MAX(b01_nivel) INTO vm_nivel FROM ctbt001
-IF vm_nivel IS NULL THEN
-	CALL fgl_winmessage(vg_producto,'Nivel no esta configurado.','stop')
-	EXIT PROGRAM
-END IF
 LET vm_fec_arran  = rm_z60.z60_fecha_carga
 LET vm_incluir    = 'N'
 LET vm_ver_saldos = 'N'
@@ -311,7 +305,7 @@ INPUT BY NAME 	vm_cta_inicial,	vm_moneda, vm_fecha_ini, vm_fecha_fin,
 		RETURN
 	ON KEY(F2)
 		IF INFIELD(vm_cta_inicial) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET vm_cta_inicial = r_b10.b10_cuenta	
