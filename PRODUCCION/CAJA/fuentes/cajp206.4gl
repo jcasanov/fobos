@@ -1409,7 +1409,6 @@ DEFINE i, j, col	SMALLINT
 DEFINE max_rows		SMALLINT
 DEFINE salir		SMALLINT
 DEFINE tot_egr		LIKE cajt010.j10_valor
-DEFINE last_lvl_cta	LIKE ctbt001.b01_nivel
 DEFINE cuenta      	LIKE ctbt010.b10_cuenta
 DEFINE debito		LIKE ctbt013.b13_valor_base
 DEFINE credito		LIKE ctbt013.b13_valor_base
@@ -1484,15 +1483,6 @@ END IF
 CALL inserta_tabla_temporal(cuenta, rm_j10.j10_valor, 0, 'V') 
 	RETURNING tot_debito, tot_credito
 
-SELECT MAX(b01_nivel) INTO last_lvl_cta FROM ctbt001
-IF last_lvl_cta IS NULL THEN
-	--CALL fgl_winmessage(vg_producto,'No se ha configurado el plan de cuentas, no puede haber contabilización en línea.','exclamation')
-	CALL fl_mostrar_mensaje('No se ha configurado el plan de cuentas, no puede haber contabilización en línea.','exclamation')
-	LET int_flag = 1
-	CLOSE WINDOW w_207_2
-	RETURN r_b12.*
-END IF
-
 OPTIONS 
 	INSERT KEY F10,
 	DELETE KEY F11
@@ -1530,8 +1520,7 @@ WHILE NOT salir
 		ON KEY(F2)
 			IF INFIELD(b13_cuenta) AND modificable(r_ctas[i].cuenta)
 			THEN
-				CALL fl_ayuda_cuenta_contable(vg_codcia, 
-					last_lvl_cta) 
+				CALL fl_ayuda_cuenta_contable(vg_codcia, -1) 
 					RETURNING r_b10.b10_cuenta, 
         					  r_b10.b10_descripcion 
 				IF r_b10.b10_cuenta IS NOT NULL THEN

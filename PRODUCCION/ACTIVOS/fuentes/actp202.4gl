@@ -16,7 +16,6 @@ DEFINE vm_num_baja	INTEGER
 DEFINE vm_num_venta	INTEGER
 DEFINE vm_tran_ini	INTEGER
 DEFINE vm_tran_fin	INTEGER
-DEFINE vm_last_lvl	LIKE ctbt001.b01_nivel
 DEFINE vm_cod_tran1	LIKE actt012.a12_codigo_tran
 DEFINE vm_cod_tran2	LIKE actt012.a12_codigo_tran
 DEFINE vm_cod_tran3	LIKE actt012.a12_codigo_tran
@@ -110,12 +109,6 @@ END MAIN
 FUNCTION funcion_master()
 
 CALL fl_nivel_isolation()
-INITIALIZE vm_last_lvl TO NULL
-SELECT MAX(b01_nivel) INTO vm_last_lvl FROM ctbt001 
-IF vm_last_lvl IS NULL THEN
-	CALL fl_mostrar_mensaje('No se han configurado los niveles de cuenta.', 'exclamation')
-	EXIT PROGRAM
-END IF
 CREATE TEMP TABLE te_depre
 	(te_grupo		SMALLINT,
 	 te_codigo_bien		INTEGER,
@@ -912,7 +905,7 @@ INPUT BY NAME rm_ven.*
 		EXIT INPUT
 	ON KEY(F2)
 		IF INFIELD(aux_pago) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_last_lvl)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING cuenta, descripcion
 			IF cuenta IS NOT NULL THEN
 				LET rm_ven.aux_pago = cuenta

@@ -2889,7 +2889,6 @@ DEFINE salir		SMALLINT
 DEFINE impto		LIKE ordt013.c13_tot_impto
 DEFINE retenciones	LIKE cxpt027.p27_total_ret 
 DEFINE cuenta_cxp	LIKE ctbt010.b10_cuenta
-DEFINE last_lvl_cta	LIKE ctbt001.b01_nivel
 DEFINE cuenta      	LIKE ctbt010.b10_cuenta
 DEFINE debito		LIKE ctbt013.b13_valor_base
 DEFINE credito		LIKE ctbt013.b13_valor_base
@@ -3021,15 +3020,6 @@ END IF
 CALL inserta_tabla_temporal(r_b42.b42_iva_compra, impto, 0, 'F')
 	RETURNING tot_debito, tot_credito
 
-SELECT MAX(b01_nivel) INTO last_lvl_cta FROM ctbt001
-IF last_lvl_cta IS NULL THEN
-	--CALL fgl_winmessage(vg_producto,'No se ha configurado el plan de cuentas, no puede haber contabilización en línea.','exclamation')
-	CALL fl_mostrar_mensaje('No se ha configurado el plan de cuentas, no puede haber contabilización en línea.','exclamation')
-	LET int_flag = 1
-	CLOSE WINDOW w_202_4
-	RETURN r_b12.*
-END IF
-
 INITIALIZE rm_b12.* TO NULL
 LET rm_b12.b12_glosa = 'COMPROBANTE: ', rm_p01.p01_nomprov[1,25], ' ',
 			rm_c13.c13_factura
@@ -3084,8 +3074,7 @@ WHILE NOT salir
 		ON KEY(F2)
 			IF INFIELD(b13_cuenta) AND modificable(r_ctas[i].cuenta)
 			THEN
-				CALL fl_ayuda_cuenta_contable(vg_codcia, 
-					last_lvl_cta) 
+				CALL fl_ayuda_cuenta_contable(vg_codcia, -1) 
 					RETURNING r_b10.b10_cuenta, 
         					  r_b10.b10_descripcion 
 				IF r_b10.b10_cuenta IS NOT NULL THEN

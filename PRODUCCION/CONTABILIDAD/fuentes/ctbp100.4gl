@@ -275,7 +275,7 @@ CONSTRUCT BY NAME expr_sql ON b00_compania, b00_moneda_base, b00_moneda_aux,
 		END IF 
 	END IF
 	IF INFIELD(b00_cuenta_uti) THEN
-		CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+		CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 			RETURNING cod_aux, nom_aux
 		LET int_flag = 0
 		IF cod_aux IS NOT NULL THEN
@@ -284,7 +284,7 @@ CONSTRUCT BY NAME expr_sql ON b00_compania, b00_moneda_base, b00_moneda_aux,
 		END IF 
 	END IF
 	IF INFIELD(b00_cta_uti_ant) THEN
-		CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+		CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 			RETURNING cod_aux, nom_aux
 		LET int_flag = 0
 		IF cod_aux IS NOT NULL THEN
@@ -293,7 +293,7 @@ CONSTRUCT BY NAME expr_sql ON b00_compania, b00_moneda_base, b00_moneda_aux,
 		END IF 
 	END IF
 	IF INFIELD(b00_cuenta_difi) THEN
-		CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+		CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 			RETURNING cod_aux, nom_aux
 		LET int_flag = 0
 		IF cod_aux IS NOT NULL THEN
@@ -302,7 +302,7 @@ CONSTRUCT BY NAME expr_sql ON b00_compania, b00_moneda_base, b00_moneda_aux,
 		END IF 
 	END IF
 	IF INFIELD(b00_cuenta_dife) THEN
-		CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+		CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 			RETURNING cod_aux, nom_aux
 		LET int_flag = 0
 		IF cod_aux IS NOT NULL THEN
@@ -445,7 +445,7 @@ INPUT BY NAME rm_ctb.b00_compania, rm_ctb.b00_moneda_base,
 			END IF 
 		END IF
 		IF INFIELD(b00_cuenta_difi) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING cod_aux, nom_aux
 			LET int_flag = 0
 			IF cod_aux IS NOT NULL THEN
@@ -455,7 +455,7 @@ INPUT BY NAME rm_ctb.b00_compania, rm_ctb.b00_moneda_base,
 			END IF 
 		END IF
 		IF INFIELD(b00_cuenta_dife) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING cod_aux, nom_aux
 			LET int_flag = 0
 			IF cod_aux IS NOT NULL THEN
