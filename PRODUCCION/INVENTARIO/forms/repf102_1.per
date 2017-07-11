@@ -1,5 +1,5 @@
 DATABASE aceros
-SCREEN size 24 by 80
+SCREEN
 {
 
 
@@ -9,14 +9,16 @@ SCREEN size 24 by 80
         Localidad: [a2 ] [a22                     ]    Tipo: [b              ]
           Factura: [f]			            
 
+   Identificación: [g] [f007                      ]
+                                                       Area: [f003         ]
 
-    Ingresado Por: [f005      ]                        Area: [f003         ]
- Fecha de Ingreso: [f006               ]
+
+    Ingresado Por: [f005      ]      Fecha de Ingreso: [f006               ]
 
 }
-end
 TABLES
 rept002
+rept009
 ATTRIBUTES
 f0   = rept002.r02_codigo, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
@@ -36,6 +38,10 @@ f003 = rept002.r02_area, REVERSE, AUTONEXT, DEFAULT = 'R',
 f    = rept002.r02_factura, REVERSE, DEFAULT = 'N',
 	WIDGET = 'CHECK', CONFIG = 'S N acknowedge', 
 	 COMMENT = '¿ Esta bodega factura ?';
+g    = rept002.r02_tipo_ident, REVERSE, AUTONEXT, UPSHIFT, DEFAULT = 'V',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+	#WIDGET = 'RADIO',CONFIG = 'V Comun C Contratos R Reserva I Importacion';
+f007 = rept009.r09_descripcion, NOENTRY, UPSHIFT;
 f005 = rept002.r02_usuario, REVERSE, NOENTRY;
 f006 = rept002.r02_fecing, REVERSE, NOENTRY;
-end
+END
