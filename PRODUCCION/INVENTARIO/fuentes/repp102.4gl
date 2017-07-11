@@ -51,9 +51,9 @@ FUNCTION funcion_master()
 
 CALL fl_nivel_isolation()
 LET vm_max_rows = 1000
-OPEN WINDOW w_bod AT 3, 2 WITH 16 ROWS, 80 COLUMNS
-    ATTRIBUTE(FORM LINE FIRST + 2, COMMENT LINE LAST, MENU LINE FIRST,BORDER,
-	      MESSAGE LINE LAST - 2)
+OPEN WINDOW w_bod AT 3, 2 WITH 15 ROWS, 80 COLUMNS
+    ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE 0, BORDER,
+		MESSAGE LINE LAST - 1)
 OPEN FORM f_bod FROM '../forms/repf102_1'
 DISPLAY FORM f_bod
 INITIALIZE rm_bod.* TO NULL
@@ -145,14 +145,16 @@ FUNCTION control_consulta()
 DEFINE nomloc		LIKE gent002.g02_nombre
 DEFINE expr_sql		VARCHAR(500)
 DEFINE query		VARCHAR(800)
+DEFINE r_r09		RECORD LIKE rept009.*
 
 CLEAR FORM
 LET int_flag = 0
 CONSTRUCT BY NAME expr_sql ON r02_codigo, r02_estado, r02_nombre, r02_localidad,
-	r02_tipo, r02_factura, r02_usuario, r02_area
+	r02_tipo, r02_factura, r02_tipo_ident, r02_usuario, r02_area
 	ON KEY(F2)
 		IF INFIELD(r02_codigo) THEN
-		     CALL fl_ayuda_bodegas_rep(vg_codcia, 'T', 'T', 'T', 'A', 'T')
+		     CALL fl_ayuda_bodegas_rep(vg_codcia, 'T', 'T', 'T', 'A',
+						'T', '2')
 		     	RETURNING rm_bod.r02_codigo, rm_bod.r02_nombre
 		     IF rm_bod.r02_codigo IS NOT NULL THEN
 			DISPLAY BY NAME rm_bod.r02_codigo, rm_bod.r02_nombre
@@ -167,6 +169,16 @@ CONSTRUCT BY NAME expr_sql ON r02_codigo, r02_estado, r02_nombre, r02_localidad,
 			DISPLAY  nomloc TO nom_loc
                      END IF
                 END IF
+		IF INFIELD(r02_tipo_ident) THEN
+			CALL fl_ayuda_tipo_ident_bod(vg_codcia, 'T')
+				RETURNING r_r09.r09_tipo_ident,
+					r_r09.r09_descripcion
+			IF r_r09.r09_tipo_ident IS NOT NULL THEN
+				LET rm_bod.r02_tipo_ident = r_r09.r09_tipo_ident
+				DISPLAY BY NAME rm_bod.r02_tipo_ident,
+						r_r09.r09_descripcion
+			END IF
+		END IF
                 LET int_flag = 0
 END CONSTRUCT
 IF int_flag THEN
@@ -209,6 +221,7 @@ END FUNCTION
 
 FUNCTION control_ingreso()
 DEFINE r_g02		RECORD LIKE gent002.*
+DEFINE r_r09		RECORD LIKE rept009.*
 
 OPTIONS INPUT WRAP
 CLEAR FORM
@@ -220,10 +233,12 @@ LET rm_bod.r02_tipo       = 'F'
 LET rm_bod.r02_area       = 'R'
 LET rm_bod.r02_factura    = 'S'
 LET rm_bod.r02_localidad  = vg_codloc
+LET rm_bod.r02_tipo_ident = 'V'
 LET rm_bod.r02_fecing     = CURRENT
 LET rm_bod.r02_usuario    = vg_usuario
+CALL fl_lee_tipo_ident_bod(vg_codcia, rm_bod.r02_tipo_ident) RETURNING r_r09.*
 DISPLAY BY NAME rm_bod.r02_fecing, rm_bod.r02_usuario, rm_bod.r02_estado,
-		rm_bod.r02_localidad
+		rm_bod.r02_localidad, r_r09.r09_descripcion
 CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING r_g02.*
 DISPLAY r_g02.g02_nombre TO nom_loc	
 DISPLAY 'ACTIVO' TO tit_estado
@@ -279,6 +294,7 @@ IF int_flag THEN
 END IF
 UPDATE rept002 SET * = rm_bod.*	WHERE CURRENT OF q_up
 COMMIT WORK
+CALL lee_muestra_registro(vm_r_rows[vm_row_current])
 CALL fl_mensaje_registro_modificado()
 
 END FUNCTION
@@ -286,10 +302,10 @@ END FUNCTION
 
 
 FUNCTION control_bloqueo_activacion()
-DEFINE resp    	CHAR(6)
-DEFINE i	SMALLINT
-DEFINE mensaje	VARCHAR(20)
-DEFINE estado	LIKE rept002.r02_estado
+DEFINE resp		CHAR(6)
+DEFINE i		SMALLINT
+DEFINE mensaje		VARCHAR(100)
+DEFINE estado		LIKE rept002.r02_estado
 
 LET int_flag = 0
 IF rm_bod.r02_codigo IS NULL OR vm_num_rows = 0 THEN
@@ -300,8 +316,9 @@ LET mensaje = 'Seguro de bloquear'
 IF rm_bod.r02_estado <> 'A' THEN
 	LET mensaje = 'Seguro de activar'
 END IF
-CALL fl_mensaje_seguro_ejecutar_proceso()
-	RETURNING resp
+LET mensaje  = mensaje CLIPPED, ' esta bodega ?'
+LET int_flag = 0
+CALL fl_hacer_pregunta(mensaje, 'No') RETURNING resp
 IF resp = 'Yes' THEN
 	BEGIN WORK
 	WHENEVER ERROR CONTINUE
@@ -310,7 +327,7 @@ IF resp = 'Yes' THEN
 		FOR UPDATE
 	OPEN q_del
 	FETCH q_del INTO rm_bod.*
-	IF status < 0 THEN
+	IF STATUS < 0 THEN
 		ROLLBACK WORK
 		CALL fl_mensaje_bloqueo_otro_usuario()
 		WHENEVER ERROR STOP
@@ -324,9 +341,9 @@ IF resp = 'Yes' THEN
 	UPDATE rept002 SET r02_estado = estado WHERE CURRENT OF q_del
 	COMMIT WORK
 	LET int_flag = 1
-	CALL fl_mensaje_registro_modificado()
 	CLEAR FORM	
 	CALL lee_muestra_registro(vm_r_rows[vm_row_current])
+	CALL fl_mensaje_registro_modificado()
 END IF
 CALL muestra_contadores(vm_row_current, vm_num_rows)
 
@@ -341,21 +358,23 @@ DEFINE nombre		LIKE rept002.r02_nombre
 DEFINE nomloc		LIKE gent002.g02_nombre
 DEFINE locali		LIKE gent002.g02_localidad
 DEFINE r_r02		RECORD LIKE rept002.*
+DEFINE r_r09		RECORD LIKE rept009.*
 DEFINE mensaje		VARCHAR(100)
                                                                                 
 OPTIONS INPUT WRAP
 LET int_flag = 0 
 INPUT BY NAME rm_bod.r02_codigo, rm_bod.r02_nombre, rm_bod.r02_localidad,
-	rm_bod.r02_factura, rm_bod.r02_tipo, rm_bod.r02_area
+	rm_bod.r02_factura, rm_bod.r02_tipo, rm_bod.r02_tipo_ident,
+	rm_bod.r02_area
 	WITHOUT DEFAULTS
         ON KEY(INTERRUPT)
-        	 IF FIELD_TOUCHED(rm_bod.r02_codigo, rm_bod.r02_nombre,
-				  rm_bod.r02_localidad, rm_bod.r02_factura,
-				  rm_bod.r02_tipo, rm_bod.r02_area)
+		IF FIELD_TOUCHED(rm_bod.r02_codigo, rm_bod.r02_nombre,
+				 rm_bod.r02_localidad, rm_bod.r02_factura,
+				 rm_bod.r02_tipo, rm_bod.r02_tipo_ident,
+				 rm_bod.r02_area)
                  THEN
                         LET int_flag = 0
-			CALL fl_mensaje_abandonar_proceso()
-                        	RETURNING resp
+			CALL fl_mensaje_abandonar_proceso() RETURNING resp
                         IF resp = 'Yes' THEN
                              LET int_flag = 1
 			    IF vm_flag_mant = 'I' THEN
@@ -370,6 +389,16 @@ INPUT BY NAME rm_bod.r02_codigo, rm_bod.r02_nombre, rm_bod.r02_localidad,
                         RETURN
                 END IF       	
 	ON KEY(F2)
+		IF INFIELD(r02_tipo_ident) THEN
+			CALL fl_ayuda_tipo_ident_bod(vg_codcia, 'A')
+				RETURNING r_r09.r09_tipo_ident,
+					r_r09.r09_descripcion
+			IF r_r09.r09_tipo_ident IS NOT NULL THEN
+				LET rm_bod.r02_tipo_ident = r_r09.r09_tipo_ident
+				DISPLAY BY NAME rm_bod.r02_tipo_ident,
+						r_r09.r09_descripcion
+			END IF
+		END IF
 		IF vm_flag_mant = 'M' THEN
 			CONTINUE INPUT
 		END IF
@@ -430,6 +459,23 @@ INPUT BY NAME rm_bod.r02_codigo, rm_bod.r02_nombre, rm_bod.r02_localidad,
 			CALL fl_mensaje_estado_bloqueado()
 			NEXT FIELD r02_localidad
 		END IF
+	AFTER FIELD r02_tipo_ident
+		IF rm_bod.r02_tipo_ident IS NOT NULL THEN
+			CALL fl_lee_tipo_ident_bod(vg_codcia,
+							rm_bod.r02_tipo_ident)
+				RETURNING r_r09.*
+			IF r_r09.r09_tipo_ident IS NULL THEN
+				CALL fl_mostrar_mensaje('No existe este tipo de identificación.', 'exclamation')
+				NEXT FIELD r02_tipo_ident
+			END IF
+			IF r_r09.r09_estado = 'B' THEN
+				CALL fl_mensaje_estado_bloqueado()
+				NEXT FIELD r02_tipo_ident
+			END IF
+			DISPLAY BY NAME r_r09.r09_descripcion
+		ELSE
+			CLEAR r09_descripcion
+		END IF
 	AFTER INPUT
 		IF vm_flag_mant = 'I' OR rm_bod2.r02_nombre <> rm_bod.r02_nombre
 		THEN
@@ -440,7 +486,6 @@ INPUT BY NAME rm_bod.r02_codigo, rm_bod.r02_nombre, rm_bod.r02_localidad,
 				LET mensaje = 'El nombre de la bodega ya ha ',
 						'sido asignada al registro ',
 						'de código ', codigo
-                 		--CALL fgl_winmessage(vg_producto, mensaje, 'exclamation')
 				CALL fl_mostrar_mensaje(mensaje, 'exclamation')
 	         		NEXT FIELD r02_nombre  
               		END IF
@@ -474,6 +519,7 @@ END FUNCTION
 
 FUNCTION lee_muestra_registro(num_row)
 DEFINE num_row		INTEGER
+DEFINE r_r09		RECORD LIKE rept009.*
 
 IF vm_num_rows <= 0 THEN
 	RETURN
@@ -484,15 +530,17 @@ IF STATUS = NOTFOUND THEN
 END IF
 DISPLAY BY NAME rm_bod.r02_codigo, rm_bod.r02_nombre, rm_bod.r02_estado, 
 		rm_bod.r02_tipo, rm_bod.r02_area, rm_bod.r02_factura, 
-		rm_bod.r02_localidad, rm_bod.r02_usuario, rm_bod.r02_fecing
+		rm_bod.r02_localidad, rm_bod.r02_tipo_ident, rm_bod.r02_usuario,
+		rm_bod.r02_fecing
 IF rm_bod.r02_estado = 'A' THEN
         DISPLAY 'ACTIVO' TO tit_estado
 ELSE
         DISPLAY 'BLOQUEADO' TO tit_estado
 END IF
-CALL fl_lee_localidad(vg_codcia, rm_bod.r02_localidad)
-RETURNING rm_loc.*
+CALL fl_lee_localidad(vg_codcia, rm_bod.r02_localidad) RETURNING rm_loc.*
+CALL fl_lee_tipo_ident_bod(vg_codcia, rm_bod.r02_tipo_ident) RETURNING r_r09.*
 DISPLAY rm_loc.g02_nombre TO nom_loc
+DISPLAY BY NAME r_r09.r09_descripcion
 
 END FUNCTION
 
