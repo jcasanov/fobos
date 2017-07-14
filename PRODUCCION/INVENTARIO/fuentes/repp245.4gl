@@ -1,10 +1,10 @@
 --------------------------------------------------------------------------------
--- Titulo           : repp245.4gl - Ingreso Tranferencias Bodega Contratos
--- Elaboracion      : 01-oct-2008
--- Autor            : NPC
+-- Titulo           : repp245.4gl - Ingreso Tranferencias Contratos
+-- Elaboracion      : 07-nov-2001
+-- Autor            : GVA
 -- Formato Ejecucion: fglrun repp245 base modulo compania localidad
 --			[cod_tran] [num_tran] [flag]
--- Ultima Correccion: 22-dic-2008
+-- Ultima Correccion: 07-nov-2001
 -- Motivo Correccion: 1
 --------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
@@ -722,11 +722,13 @@ END FUNCTION
 
 
 FUNCTION control_actualizacion_existencia()
+DEFINE r_r11		RECORD LIKE rept011.*
 DEFINE stock_act	LIKE rept011.r11_stock_act
 DEFINE ing_dia		LIKE rept011.r11_ing_dia
 DEFINE j, act_sto_bd	SMALLINT
+DEFINE mensaje		VARCHAR(250)
 
-SET LOCK MODE TO WAIT
+SET LOCK MODE TO WAIT 2
 
 FOR j = 1 TO vm_num_detalles
 	
@@ -739,6 +741,19 @@ FOR j = 1 TO vm_num_detalles
 			WHERE r11_compania  = vg_codcia
 			AND   r11_bodega    = rm_r19.r19_bodega_ori
 			AND   r11_item      = r_detalle[j].r20_item 
+		CALL fl_lee_stock_rep(vg_codcia, rm_r19.r19_bodega_ori,
+					r_detalle[j].r20_item)
+			RETURNING r_r11.*
+		IF r_r11.r11_stock_act < 0 THEN
+			WHENEVER ERROR STOP
+			ROLLBACK WORK
+			LET mensaje = 'Ha occurido un error con la disminución',
+					' del stock en el ítem ',
+					r_detalle[j].r20_item CLIPPED,
+					'. Por favor llame al ADMINISTRADOR.'
+			CALL fl_mostrar_mensaje(mensaje, 'stop')
+			EXIT PROGRAM
+		END IF
 	END IF
 			
 	CALL fl_lee_stock_rep(vg_codcia, rm_r19.r19_bodega_dest, 
@@ -830,7 +845,7 @@ INPUT BY NAME rm_r19.r19_vendedor,    rm_r19.r19_bodega_ori,
 			END IF
 		END IF
 		IF INFIELD(r19_bodega_ori) THEN
-		     	CALL fl_ayuda_bodegas_rep(vg_codcia, vg_codloc, 'A', 'F', 'R', 'T', '5')
+		     	CALL fl_ayuda_bodegas_rep(vg_codcia, vg_codloc, 'A', 'T', 'A', 'T', '5')
 		     		RETURNING rm_r02.r02_codigo, rm_r02.r02_nombre
 		     	IF rm_r02.r02_codigo IS NOT NULL THEN
 				LET rm_r19.r19_bodega_ori = rm_r02.r02_codigo
@@ -839,7 +854,7 @@ INPUT BY NAME rm_r19.r19_vendedor,    rm_r19.r19_bodega_ori,
 		     END IF
 		END IF
 		IF INFIELD(r19_bodega_dest) THEN
-		     	CALL fl_ayuda_bodegas_rep(vg_codcia, vg_codloc, 'A', 'F', 'R', 'T', '5')
+		     	CALL fl_ayuda_bodegas_rep(vg_codcia, 'T', 'A', 'T', 'A', 'T', '5')
 		     		RETURNING rm_r02.r02_codigo, rm_r02.r02_nombre
 		     	IF rm_r02.r02_codigo IS NOT NULL THEN
 				LET rm_r19.r19_bodega_dest = rm_r02.r02_codigo
@@ -968,10 +983,15 @@ INPUT BY NAME rm_r19.r19_vendedor,    rm_r19.r19_bodega_ori,
 			CLEAR nom_subtipo
 		END IF
 	AFTER INPUT
+		IF NOT fl_digito_bodega_contrato(vg_codcia,
+						rm_r19.r19_bodega_ori,
+						rm_r19.r19_bodega_dest)
+		{
 		IF ((rm_r19.r19_bodega_ori  <> 'GC') AND
 		    (rm_r19.r19_bodega_ori  <> 'QC') AND
 		    (rm_r19.r19_bodega_dest <> 'GC') AND
 		    (rm_r19.r19_bodega_dest <> 'QC'))
+		}
 		THEN
 			CALL fl_mostrar_mensaje('Ya sea en la bodega origen o destino, debe digitar la BODEGA DE CONTRATOS para esta localidad.','info')
 			CONTINUE INPUT
@@ -1017,9 +1037,9 @@ INPUT BY NAME rm_r19.r19_vendedor,    rm_r19.r19_bodega_ori,
 			ELSE
 				CALL fl_mostrar_mensaje('La Bodega Destino no puede ser la Bodega Sin Stock.','exclamation')
 			END IF
-			IF rm_vend.r01_tipo <> 'G' THEN
+			--IF rm_vend.r01_tipo <> 'G' THEN
 				NEXT FIELD r19_bodega_dest
-			END IF
+			--END IF
 		END IF
 		CALL fl_lee_localidad(vg_codcia, r_ori.r02_localidad)
 			RETURNING r1_g02.*
@@ -1316,8 +1336,8 @@ END FUNCTION
 
 
 FUNCTION control_consulta()
-DEFINE expr_sql		CHAR(800)
-DEFINE query		CHAR(3000)
+DEFINE expr_sql		CHAR(500)
+DEFINE query		CHAR(800)
 DEFINE expr_tran	VARCHAR(100)
 DEFINE r_r19		RECORD LIKE rept019.*
 
@@ -1366,7 +1386,7 @@ IF num_args() = 4 THEN
 				END IF
 			END IF
 			IF INFIELD(r19_bodega_ori) THEN
-		     	     CALL fl_ayuda_bodegas_rep(vg_codcia, vg_codloc, 'A', 'F', 'R', 'T', '5')
+			     CALL fl_ayuda_bodegas_rep(vg_codcia, vg_codloc, 'A', 'T', 'A', 'T', '5')
 		     		RETURNING rm_r02.r02_codigo, rm_r02.r02_nombre
 			     IF rm_r02.r02_codigo IS NOT NULL THEN
 				    LET rm_r19.r19_bodega_ori= rm_r02.r02_codigo
@@ -1375,7 +1395,7 @@ IF num_args() = 4 THEN
 			     END IF
 			END IF
 			IF INFIELD(r19_bodega_dest) THEN
-		     	        CALL fl_ayuda_bodegas_rep(vg_codcia, vg_codloc, 'A', 'F', 'R', 'T', '5')
+			     	CALL fl_ayuda_bodegas_rep(vg_codcia, 'T', 'A', 'T', 'A', 'T', '5')
 		     		RETURNING rm_r02.r02_codigo, rm_r02.r02_nombre
 			     	IF rm_r02.r02_codigo IS NOT NULL THEN
 					LET rm_r19.r19_bodega_dest =
@@ -1434,16 +1454,6 @@ LET query = 'SELECT *, ROWID FROM rept019 ',
 		'   AND r19_localidad = ', vg_codloc,
 		expr_tran CLIPPED,
 		'   AND ', expr_sql CLIPPED,
-		'   AND EXISTS ',
-			'(SELECT 1 FROM rept002 ',
-				'WHERE r02_compania   = r19_compania ',
-				'  AND r02_codigo     = r19_bodega_ori ',
-				'  AND r02_tipo_ident = "C" ',
-			'UNION ',
-			'SELECT 1 FROM rept002 ',
-				'WHERE r02_compania   = r19_compania ',
-				'  AND r02_codigo     = r19_bodega_dest ',
-				'  AND r02_tipo_ident = "C") ',
 		' ORDER BY 3, 4'
 		
 PREPARE cons FROM query
@@ -2119,7 +2129,6 @@ IF r_r02.r02_localidad <> vg_codloc OR r_r02.r02_area = 'T' THEN
 					rm_r19.r19_cod_tran,rm_r19.r19_num_tran)
 			RETURNING resul
 	END IF
-	LET resul = 1
 END IF
 RETURN resul
 

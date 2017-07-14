@@ -649,6 +649,7 @@ END FUNCTION
 
 FUNCTION control_ingreso()
 DEFINE cod_item		INTEGER
+DEFINE query		VARCHAR(250)
 DEFINE r_g13		RECORD LIKE gent013.*
 
 CLEAR FORM
@@ -688,15 +689,14 @@ IF NOT int_flag THEN
 	BEGIN WORK
 		--CALL cambio_modificacion()
 		IF vg_codloc < 3 THEN
-			SELECT MAX(r10_codigo) INTO cod_item
-			FROM rept010
-			WHERE r10_compania = rm_item.r10_compania
-			  AND r10_codigo < '90000'
-			  AND r10_codigo NOT IN('71176', '80002', '80004',
-				'80006', '80008', '80009', '80010', '80012',
-				'80014', '80018', '80020')
-			  AND LENGTH(r10_codigo) = 5
-			      --(SELECT MAX(LENGTH(r10_codigo)) FROM rept010)
+			LET query = 'SELECT ROUND(NVL(MAX(r10_codigo), 0) + 1, 0) nue_ite ',
+							' FROM rept010 ',
+							' WHERE r10_compania = ', rm_item.r10_compania,
+							' INTO TEMP t1 '
+			PREPARE exec_t1 FROM query
+			EXECUTE exec_t1
+			SELECT * INTO cod_item FROM t1
+			DROP TABLE t1
 		ELSE
 			SELECT MAX(r10_codigo) INTO cod_item
 			FROM rept010
@@ -722,7 +722,6 @@ IF NOT int_flag THEN
 			  AND LENGTH(r10_codigo) =
 			      (SELECT MAX(LENGTH(r10_codigo)) FROM rept010)
 		END IF
-		LET cod_item           = cod_item + 1
 		LET rm_item.r10_codigo = cod_item
 		LET rm_item.r10_fecing = CURRENT
 		IF num_args() <> 4 THEN

@@ -59,7 +59,6 @@ INITIALIZE rm_b10.* TO NULL
 LET vm_num_rows    = 0
 LET vm_row_current = 0
 CALL muestra_contadores(vm_row_current, vm_num_rows)
-
 MENU 'OPCIONES'
 	BEFORE MENU
 		HIDE OPTION 'Avanzar'
@@ -162,7 +161,7 @@ CALL leer_datos('I') RETURNING crea
 IF int_flag THEN
 	CLEAR FORM
 	IF vm_row_current > 0 THEN
-		CALL mostrar_registro(vm_r_rows[vm_row_current])
+		CALL muestra_reg()
 	END IF
 	RETURN
 END IF
@@ -177,8 +176,7 @@ BEGIN WORK
 	LET vm_row_current = vm_num_rows
 	DISPLAY BY NAME rm_b10.b10_fecing
 	LET vm_r_rows[vm_row_current] = SQLCA.SQLERRD[6] 
-	CALL mostrar_registro(vm_r_rows[vm_num_rows])	
-	CALL muestra_contadores(vm_row_current, vm_num_rows)
+	CALL muestra_reg()
 	{--
 	IF crea = 1 THEN
 		CALL crear_cuentas_superiores() RETURNING num_elm
@@ -205,7 +203,7 @@ IF rm_b10.b10_estado = 'B' THEN
 	CALL fl_mensaje_estado_bloqueado()
 	RETURN
 END IF
-CALL mostrar_registro(vm_r_rows[vm_row_current])
+CALL muestra_reg()
 BEGIN WORK
 WHENEVER ERROR CONTINUE
 DECLARE q_up CURSOR FOR
@@ -226,7 +224,7 @@ IF int_flag THEN
 	ROLLBACK WORK
 	CLEAR FORM
 	IF vm_row_current > 0 THEN
-		CALL mostrar_registro(vm_r_rows[vm_row_current])
+		CALL muestra_reg()
 	END IF
 	WHENEVER ERROR STOP
 	RETURN
@@ -313,7 +311,7 @@ IF num_args() = 3 THEN
 	END CONSTRUCT
 	IF int_flag THEN
 		IF vm_row_current > 0 THEN
-			CALL mostrar_registro(vm_r_rows[vm_row_current])
+			CALL muestra_reg()
 		ELSE
 			CLEAR FORM
 		END IF
@@ -344,9 +342,8 @@ IF vm_num_rows = 0 THEN
 	LET vm_row_current = 0
 ELSE  
 	LET vm_row_current = 1
-	CALL mostrar_registro(vm_r_rows[vm_row_current])
+	CALL muestra_reg()
 END IF
-CALL muestra_contadores(vm_row_current, vm_num_rows)
 
 END FUNCTION
 
@@ -552,8 +549,7 @@ FUNCTION muestra_siguiente_registro()
 IF vm_row_current < vm_num_rows THEN
 	LET vm_row_current = vm_row_current + 1
 END IF
-CALL mostrar_registro(vm_r_rows[vm_row_current])
-CALL muestra_contadores(vm_row_current, vm_num_rows)
+CALL muestra_reg()
 
 END FUNCTION
 
@@ -564,8 +560,17 @@ FUNCTION muestra_anterior_registro()
 IF vm_row_current > 1 THEN
 	LET vm_row_current = vm_row_current - 1
 END IF
+CALL muestra_reg()
+
+END FUNCTION
+
+
+
+FUNCTION muestra_reg()
+
 CALL mostrar_registro(vm_r_rows[vm_row_current])
 CALL muestra_contadores(vm_row_current, vm_num_rows)
+CALL muestra_estado()
 
 END FUNCTION
 

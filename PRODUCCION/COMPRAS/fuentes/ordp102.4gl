@@ -10,12 +10,14 @@ GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
 DEFINE rm_c02		RECORD LIKE ordt002.*
 DEFINE rm_c03		RECORD LIKE ordt003.*
+DEFINE vm_nivel		LIKE ctbt001.b01_nivel
 DEFINE rm_retsri	ARRAY [10000] OF RECORD
 			c03_codigo_sri		LIKE ordt003.c03_codigo_sri,
 			c03_concepto_ret	LIKE ordt003.c03_concepto_ret,
 			c03_fecha_ini_porc	LIKE ordt003.c03_fecha_ini_porc,
 			c03_fecha_fin_porc	LIKE ordt003.c03_fecha_fin_porc,
 			c03_ingresa_proc	LIKE ordt003.c03_ingresa_proc,
+			c03_tipo_fuente		LIKE ordt003.c03_tipo_fuente,
 			c03_estado		LIKE ordt003.c03_estado
 			END RECORD
 DEFINE rm_audi		ARRAY [10000] OF RECORD
@@ -99,11 +101,15 @@ ELSE
 	OPEN FORM f_ord FROM "../forms/ordf102_1c"
 END IF
 DISPLAY FORM f_ord
-INITIALIZE rm_c02.* TO NULL
+INITIALIZE rm_c02.*, vm_nivel TO NULL
 LET vm_num_rows    = 0
 LET vm_row_current = 0
 CALL muestra_contadores(vm_row_current, vm_num_rows)
-
+SELECT MAX(b01_nivel) INTO vm_nivel FROM ctbt001
+IF vm_nivel IS NULL THEN
+	CALL fl_mostrar_mensaje('Nivel no esta configurado en Contabilidad.', 'stop')
+	EXIT PROGRAM
+END IF
 MENU 'OPCIONES'
 	BEFORE MENU
 		HIDE OPTION 'Avanzar'
@@ -295,7 +301,7 @@ CONSTRUCT BY NAME expr_sql ON c02_estado, c02_tipo_ret, c02_porcentaje,
 		CALL llamar_visor_teclas()
 	ON KEY(F2)
 		IF INFIELD(c02_aux_cont) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
 				RETURNING cod_aux, nom_aux
 			LET int_flag = 0
 			IF cod_aux IS NOT NULL THEN
@@ -397,7 +403,7 @@ INPUT BY NAME rm_c02.c02_tipo_ret, rm_c02.c02_porcentaje, rm_c02.c02_nombre,
 		CALL llamar_visor_teclas()
 	ON KEY(F2)
 		IF INFIELD(c02_aux_cont) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
 				RETURNING cod_aux, nom_aux
 			LET int_flag = 0
 			IF cod_aux IS NOT NULL THEN
@@ -681,9 +687,8 @@ DISPLAY FORM f_ordf102_2
 --#DISPLAY 'Fecha Ini.'		TO tit_col3 
 --#DISPLAY 'Fecha Fin.'		TO tit_col4 
 --#DISPLAY 'I'			TO tit_col5 
---#DISPLAY 'E'			TO tit_col6 
-OPTIONS INSERT KEY F30,
-	DELETE KEY F31
+--#DISPLAY 'T'			TO tit_col6 
+--#DISPLAY 'E'			TO tit_col7 
 CLEAR c03_tipo_ret, c02_nombre, c03_porcentaje, c03_usuario_modifi,
 	c03_fecha_modifi, c03_usuario_elimin, c03_fecha_elimin
 FOR i = 1 TO fgl_scr_size('rm_retsri')
@@ -697,9 +702,10 @@ LET insertar = 1
 BEGIN WORK
 DECLARE q_c03 CURSOR WITH HOLD FOR
 	SELECT * FROM ordt003
-		WHERE c03_compania   = rm_c02.c02_compania
-		  AND c03_tipo_ret   = rm_c02.c02_tipo_ret
-		  AND c03_porcentaje = rm_c02.c02_porcentaje
+		WHERE c03_compania       = rm_c02.c02_compania
+		  AND c03_tipo_ret       = rm_c02.c02_tipo_ret
+		  AND c03_porcentaje     = rm_c02.c02_porcentaje
+		  AND c03_fecha_fin_porc IS NULL
 OPEN q_c03
 FETCH q_c03 INTO rm_c03.*
 IF STATUS = NOTFOUND THEN
@@ -717,6 +723,7 @@ FOREACH q_c03 INTO rm_c03.*
 	LET rm_retsri[vm_num_det].c03_concepto_ret   = rm_c03.c03_concepto_ret
 	LET rm_retsri[vm_num_det].c03_fecha_ini_porc = rm_c03.c03_fecha_ini_porc
 	LET rm_retsri[vm_num_det].c03_fecha_fin_porc = rm_c03.c03_fecha_fin_porc
+	LET rm_retsri[vm_num_det].c03_tipo_fuente    = rm_c03.c03_tipo_fuente
 	LET rm_retsri[vm_num_det].c03_ingresa_proc   = rm_c03.c03_ingresa_proc
 	LET rm_retsri[vm_num_det].c03_estado         = rm_c03.c03_estado
 	LET rm_audi[vm_num_det].c03_usuario_modifi   = rm_c03.c03_usuario_modifi
@@ -731,7 +738,11 @@ FOREACH q_c03 INTO rm_c03.*
 END FOREACH
 LET vm_num_det = vm_num_det - 1
 IF vm_num_det = 0 THEN
-	LET vm_num_det = 1
+	ROLLBACK WORK
+	CALL fl_mensaje_consulta_sin_registros()
+	CLOSE WINDOW w_ordf102_2
+	LET int_flag = 0
+	RETURN
 END IF
 DISPLAY BY NAME rm_c03.c03_tipo_ret, rm_c02.c02_nombre, rm_c03.c03_porcentaje
 CALL set_count(vm_num_det)
@@ -746,6 +757,40 @@ INPUT ARRAY rm_retsri WITHOUT DEFAULTS FROM rm_retsri.*
 		END IF
 	ON KEY(F1,CONTROL-W)
 		CALL control_visor_teclas_caracter_1() 
+	ON KEY(F2)
+		--#LET i = arr_curr()
+		--#LET j = scr_line()
+		--#IF INFIELD(rm_retsri[i].c03_codigo_sri) THEN
+			--#CALL fl_ayuda_codigos_sri(vg_codcia,
+					--#rm_c03.c03_tipo_ret,
+					--#rm_c03.c03_porcentaje, 'A', 0, 'T')
+				--#RETURNING r_c03.c03_codigo_sri,
+					  --#r_c03.c03_concepto_ret,
+					  --#r_c03.c03_fecha_ini_porc
+			--#IF r_c03.c03_codigo_sri IS NOT NULL THEN
+				--#CALL fl_lee_codigos_sri(vg_codcia,
+						--#rm_c03.c03_tipo_ret,
+						--#rm_c03.c03_porcentaje,
+						--#r_c03.c03_codigo_sri,
+						--#r_c03.c03_fecha_ini_porc)
+					--#RETURNING r_c03.*
+				--#LET rm_retsri[i].c03_codigo_sri =
+						--#r_c03.c03_codigo_sri
+				--#LET rm_retsri[i].c03_concepto_ret =
+						--#r_c03.c03_concepto_ret
+				--#LET rm_retsri[i].c03_fecha_ini_porc =
+						--#r_c03.c03_fecha_ini_porc
+				--#LET rm_retsri[i].c03_fecha_fin_porc =
+						--#r_c03.c03_fecha_fin_porc
+				--#LET rm_retsri[i].c03_tipo_fuente =
+						--#r_c03.c03_tipo_fuente
+				--#LET rm_retsri[i].c03_ingresa_proc =
+						--#r_c03.c03_ingresa_proc
+				--#LET rm_retsri[i].c03_estado =r_c03.c03_estado
+				--#DISPLAY rm_retsri[i].* TO rm_retsri[j].*
+			--#END IF
+		--#END IF
+		--#LET int_flag = 0
 	ON KEY(F5)
 		LET i = arr_curr()
 		LET j = scr_line()
@@ -784,6 +829,10 @@ INPUT ARRAY rm_retsri WITHOUT DEFAULTS FROM rm_retsri.*
 		ELSE
 			--#CALL dialog.keysetlabel("F5","")
 		END IF
+	BEFORE DELETE
+		--#CANCEL DELETE
+	BEFORE INSERT
+		--#CANCEL INSERT
 	AFTER FIELD c03_codigo_sri, c03_concepto_ret
 		IF rm_retsri[i].c03_estado IS NULL THEN
 			LET rm_retsri[i].c03_estado = 'A'
@@ -801,8 +850,16 @@ INPUT ARRAY rm_retsri WITHOUT DEFAULTS FROM rm_retsri.*
 			DISPLAY rm_retsri[i].c03_codigo_sri TO
 				rm_retsri[j].c03_codigo_sri
 		END IF
-	AFTER INSERT
-		LET insertar = 0
+		CALL fl_lee_codigos_sri(vg_codcia, rm_c03.c03_tipo_ret,
+					rm_c03.c03_porcentaje,
+					rm_retsri[i].c03_codigo_sri,
+					rm_retsri[i].c03_fecha_ini_porc)
+			RETURNING r_c03.*
+		IF r_c03.c03_compania IS NOT NULL THEN
+			LET rm_retsri[i].c03_concepto_ret=r_c03.c03_concepto_ret
+			DISPLAY rm_retsri[i].c03_concepto_ret TO
+				rm_retsri[j].c03_concepto_ret
+		END IF
 	AFTER INPUT
 		LET vm_num_det = arr_count()
 		IF rm_retsri[vm_num_det].c03_fecha_ini_porc IS NULL THEN
@@ -820,15 +877,17 @@ INPUT ARRAY rm_retsri WITHOUT DEFAULTS FROM rm_retsri.*
 		END FOR
 		FOR k = 1 TO vm_num_det - 1
 			FOR l = k + 1 TO vm_num_det
-				IF rm_retsri[k].c03_codigo_sri =
-				   rm_retsri[l].c03_codigo_sri 
+				IF (rm_retsri[k].c03_codigo_sri =
+				    rm_retsri[l].c03_codigo_sri) AND
+				   (rm_retsri[k].c03_fecha_ini_porc =
+				    rm_retsri[l].c03_fecha_ini_porc)
 				THEN
 					LET mensaje = 'El código esta repetido en la fila ', l USING "<<<<&", '. Favor de corregirlo.'
 					CALL fl_mostrar_mensaje(mensaje, 'exclamation')
 					CONTINUE INPUT
 				END IF
 				IF rm_retsri[k].c03_concepto_ret =
-				   rm_retsri[l].c03_concepto_ret 
+				   rm_retsri[l].c03_concepto_ret
 				THEN
 					LET mensaje = 'La descripción esta repetida en la fila ', l USING "<<<<&", '. Favor de corregirla.'
 					CALL fl_mostrar_mensaje(mensaje, 'exclamation')
@@ -849,10 +908,12 @@ FOR i = 1 TO vm_num_det
 	WHENEVER ERROR CONTINUE
 	DECLARE q_c03_2 CURSOR FOR
 		SELECT * FROM ordt003
-			WHERE c03_compania   = rm_c03.c03_compania
-			  AND c03_tipo_ret   = rm_c03.c03_tipo_ret
-			  AND c03_porcentaje = rm_c03.c03_porcentaje
-			  AND c03_codigo_sri = rm_retsri[i].c03_codigo_sri
+			WHERE c03_compania       = rm_c03.c03_compania
+			  AND c03_tipo_ret       = rm_c03.c03_tipo_ret
+			  AND c03_porcentaje     = rm_c03.c03_porcentaje
+			  AND c03_codigo_sri     = rm_retsri[i].c03_codigo_sri
+			  AND c03_fecha_ini_porc =
+					rm_retsri[i].c03_fecha_ini_porc
 		FOR UPDATE
 	OPEN q_c03_2
 	FETCH q_c03_2 INTO r_c03.*
@@ -872,11 +933,12 @@ FOR i = 1 TO vm_num_det
 			VALUES(rm_c03.c03_compania, rm_c03.c03_tipo_ret,
 				rm_c03.c03_porcentaje,
 				rm_retsri[i].c03_codigo_sri,
+				rm_retsri[i].c03_fecha_ini_porc,
 				rm_retsri[i].c03_estado,
 				rm_retsri[i].c03_concepto_ret,
-				rm_retsri[i].c03_fecha_ini_porc,
 				rm_retsri[i].c03_fecha_fin_porc,
-				rm_retsri[i].c03_ingresa_proc, NULL, NULL, NULL,
+				rm_retsri[i].c03_ingresa_proc,
+				rm_retsri[i].c03_tipo_fuente, NULL, NULL, NULL,
 				NULL, rm_c03.c03_usuario, rm_c03.c03_fecing)
 		CLOSE q_c03_2
 		CONTINUE FOR
@@ -884,9 +946,10 @@ FOR i = 1 TO vm_num_det
 	UPDATE ordt003
 		SET c03_estado         = rm_retsri[i].c03_estado,
 		    c03_concepto_ret   = rm_retsri[i].c03_concepto_ret,
-		    c03_fecha_ini_porc = rm_retsri[i].c03_fecha_ini_porc,
+		    --c03_fecha_ini_porc = rm_retsri[i].c03_fecha_ini_porc,
 		    c03_fecha_fin_porc = rm_retsri[i].c03_fecha_fin_porc,
-		    c03_ingresa_proc   = rm_retsri[i].c03_ingresa_proc
+		    c03_ingresa_proc   = rm_retsri[i].c03_ingresa_proc,
+		    c03_tipo_fuente    = rm_retsri[i].c03_tipo_fuente
 		WHERE CURRENT OF q_c03_2
 	IF rm_audi[i].c03_usuario_modifi IS NOT NULL THEN
 		UPDATE ordt003
@@ -1127,7 +1190,7 @@ INPUT ARRAY rm_detj91 WITHOUT DEFAULTS FROM rm_detj91.*
 		END IF
 	ON KEY(F2)
 		IF INFIELD(j91_codigo_pago) THEN
-			CALL fl_ayuda_forma_pago(vg_codcia, 'T', 'A') 
+			CALL fl_ayuda_forma_pago(vg_codcia, 'T', 'A', 'S') 
 				RETURNING r_j01.j01_codigo_pago,
 					  r_j01.j01_nombre,
 					  r_j01.j01_cont_cred
@@ -1143,7 +1206,7 @@ INPUT ARRAY rm_detj91 WITHOUT DEFAULTS FROM rm_detj91.*
 			END IF
 		END IF
 		IF INFIELD(j91_aux_cont) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_detj91[i].j91_aux_cont = r_b10.b10_cuenta

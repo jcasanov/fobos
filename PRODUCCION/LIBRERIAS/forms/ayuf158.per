@@ -19,9 +19,9 @@ TABLES
 rolt074
 
 ATTRIBUTES
-f001 = n74_serial;
-f002 = n74_descripcion;
+f001 = n74_proceso;
+f002 = FORMONLY.n74_descripcion;
 END
 
 INSTRUCTIONS
-SCREEN RECORD rh_motiv[7](n74_serial, n74_descripcion)
+SCREEN RECORD rh_motiv[7](n74_proceso, FORMONLY.n74_descripcion)

@@ -415,9 +415,10 @@ DEFINE comando		VARCHAR(130)
 
 CALL fl_lee_cuenta(vg_codcia, cuenta) RETURNING r_cta.*
 LET min_nivel = vm_max_nivel - 2
-IF r_cta.b10_nivel < min_nivel THEN
-	LET mensaje = 'Solo puede ver movimientos de cuentas de nivel', min_nivel USING '#&', ' en adelante'
-	CALL fgl_winmessage(vg_producto, mensaje, 'exclamation')
+IF r_cta.b10_permite_mov = 'N' THEN
+	CALL fl_mostrar_mensaje('Cuenta no permite movimiento.', 'exclamation')
+	--LET mensaje = 'Solo puede ver movimientos de cuentas de nivel', min_nivel USING '#&', ' en adelante'
+	--CALL fgl_winmessage(vg_producto, mensaje, 'exclamation')
 	RETURN
 END IF
 LET fecha_ini = MDY(rm_par.mes, 1, rm_par.ano)

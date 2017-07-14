@@ -7,12 +7,12 @@ SCREEN
  Cliente: [c000  |c001                                                      ]
 
                                                                [c11] de [c12]
- [c020    |c|c021                |c022    |c023      |c024               |d|e]
-[c030  ] [f|c031                |c032  ] [c033      |c034               |g|h]
-[c030  ] [f|c031                |c032  ] [c033      |c034               |g|h]
-[c030  ] [f|c031                |c032  ] [c033      |c034               |g|h]
-[c030  ] [f|c031                |c032  ] [c033      |c034               |g|h]
-[c030  ] [f|c031                |c032  ] [c033      |c034               |g|h]
+ [c020    |c|c021              |c022    |c023      |c024               |d|e|f]
+[c030  ] [g|c031              |c032  ] [c033      |c034               |h|i|j]
+[c030  ] [g|c031              |c032  ] [c033      |c034               |h|i|j]
+[c030  ] [g|c031              |c032  ] [c033      |c034               |h|i|j]
+[c030  ] [g|c031              |c032  ] [c033      |c034               |h|i|j]
+[c030  ] [g|c031              |c032  ] [c033      |c034               |h|i|j]
 
  [c040                                                                      ]
 }
@@ -36,11 +36,12 @@ c023 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
 c024 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
 d    = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
 e    = FORMONLY.tit_col8, WIDGET = 'BUTTON', CONFIG = 'F22';
+f    = FORMONLY.tit_col9, WIDGET = 'BUTTON', CONFIG = 'F23';
 
 c030 = cxct008.z08_porcentaje, AUTONEXT, UPSHIFT, FORMAT = '##&.##',
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
 	INCLUDE = (0 TO 100.00), OPTIONS = '-nolist';
-f    = cxct008.z08_tipo_ret, AUTONEXT, UPSHIFT, INCLUDE = ('F', 'I'),
+g    = cxct008.z08_tipo_ret, AUTONEXT, UPSHIFT, INCLUDE = ('F', 'I'),
 	COMMENTS = 'F Retencion en la Fuente. I Retencion del IVA.',
 	OPTIONS = '-nolist';
 c031 = ordt002.c02_nombre, NOENTRY, SCROLL, OPTIONS = '-nolist';
@@ -50,10 +51,11 @@ c032 = cxct008.z08_codigo_sri, AUTONEXT, UPSHIFT,
 c033 = cxct008.z08_fecha_ini_porc, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
 	OPTIONS = '-nolist';
 c034 = ordt003.c03_concepto_ret, NOENTRY, SCROLL, OPTIONS = '-nolist';
-g    = cxct008.z08_defecto, AUTONEXT, UPSHIFT,
+h    = ordt003.c03_tipo_fuente, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+i    = cxct008.z08_defecto, AUTONEXT, UPSHIFT,
 	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge', DEFAULT = 'N',
 	OPTIONS = '-nolist';
-h    = cxct008.z08_flete, AUTONEXT, UPSHIFT,
+j    = cxct008.z08_flete, AUTONEXT, UPSHIFT,
 	WIDGET = 'CHECK', CONFIG = 'S N Acknowledge', DEFAULT = 'N',
 	OPTIONS = '-nolist';
 
@@ -65,4 +67,5 @@ INSTRUCTIONS
 DELIMITERS '||'
 SCREEN RECORD rm_detret[5] (z08_porcentaje, z08_tipo_ret, c02_nombre,
 				z08_codigo_sri, z08_fecha_ini_porc,
-				c03_concepto_ret, z08_defecto, z08_flete)
+				c03_concepto_ret, c03_tipo_fuente, z08_defecto,
+				z08_flete)

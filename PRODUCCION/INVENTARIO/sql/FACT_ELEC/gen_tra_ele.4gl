@@ -379,11 +379,11 @@ CASE vm_tip_doc
 	WHEN "NDC" LET carpeta = "ND_ELEC"
 	WHEN "NCC" LET carpeta = "NC_ELEC"
 END CASE
-LET comando = comando CLIPPED, ' > /acero/fobos/tmp/',
+LET comando = comando CLIPPED, ' > /u/acero/fobos/tmp/',
 		carpeta CLIPPED, '/', r_reg.*, '.xml'
 RUN comando CLIPPED
-LET comando = 'cp -rf /acero/fobos/tmp/', carpeta CLIPPED,'/', r_reg.*, '.xml ',
-		'/acero/fobos/tmp/DOCUMENTOSELECTRONICOS/'
+LET comando = 'cp -rf /u/acero/fobos/tmp/', carpeta CLIPPED,'/', r_reg.*,
+		'.xml ', '/u/acero/fobos/tmp/DOCUMENTOSELECTRONICOS/'
 RUN comando CLIPPED
 
 END FUNCTION

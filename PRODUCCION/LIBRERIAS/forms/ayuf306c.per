@@ -8,7 +8,6 @@ SCREEN
  Cliente/Proveed.: [c019  |c020                                              ]
         Documento: [c0|c021           ]   Valor del Documento: [c018         ]
 
- [c000          |c001                             |c002         |c003         ]
 [c010        ] [c011                             |c012         |c013         ]
 [c010        ] [c011                             |c012         |c013         ]
 [c010        ] [c011                             |c012         |c013         ]
@@ -23,28 +22,20 @@ TABLES
 ctbt010
 ctbt013
 ATTRIBUTES
-c000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
-c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
-c002 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
-c003 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
 
-c010 = ctbt013.b13_cuenta, AUTONEXT, UPSHIFT, REVERSE, OPTIONS = '-nolist',
-	WIDGET  = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c011 = ctbt013.b13_glosa NOT NULL, REQUIRED, AUTONEXT, UPSHIFT, REVERSE, SCROLL,
-	OPTIONS = '-nolist';
+c010 = ctbt013.b13_cuenta, AUTONEXT, UPSHIFT, REVERSE;
+c011 = ctbt013.b13_glosa, REQUIRED, AUTONEXT, UPSHIFT, REVERSE;
 c012 = FORMONLY.debito TYPE DECIMAL NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
-	REVERSE, FORMAT = '##,###,##&.##', INCLUDE = (0 TO 99999999.99),
-	OPTIONS = '-nolist';
+	REVERSE, FORMAT = '##,###,##&.##', INCLUDE = (0 TO 99999999.99);
 c013 = FORMONLY.credito TYPE DECIMAL NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
-	REVERSE, FORMAT = '##,###,##&.##', INCLUDE = (0 TO 99999999.99),
-	OPTIONS = '-nolist';
+	REVERSE, FORMAT = '##,###,##&.##', INCLUDE = (0 TO 99999999.99);
 
 c014 = FORMONLY.tot_debito TYPE DECIMAL NOT NULL, NOENTRY, UPSHIFT, REVERSE,
 	FORMAT = '##,###,##&.##', INCLUDE = (0 TO 99999999.99);
 c015 = FORMONLY.tot_credito TYPE DECIMAL NOT NULL, NOENTRY, UPSHIFT, REVERSE,
 	FORMAT = '##,###,##&.##', INCLUDE = (0 TO 99999999.99);
 c016 = FORMONLY.dif_cuadre TYPE DECIMAL NOT NULL, NOENTRY, UPSHIFT, REVERSE,
-	FORMAT = '--,---,--&.##', COLOR = RED WHERE c016 < 0;
+	FORMAT = '--,---,--&.##';
 c017 = ctbt010.b10_descripcion, NOENTRY, UPSHIFT, REVERSE;
 c018 = FORMONLY.tit_valor TYPE DECIMAL NOT NULL, NOENTRY, UPSHIFT, REVERSE,
 	FORMAT = '##,###,##&.##', INCLUDE = (0 TO 99999999.99);
