@@ -309,13 +309,13 @@ END FUNCTION
 
 
 FUNCTION preparar_query()
-DEFINE query		CHAR(1500)
+DEFINE query		CHAR(2000)
 DEFINE expr_dep		VARCHAR(100)
 DEFINE expr_proc	VARCHAR(100)
 DEFINE expr_trab	VARCHAR(100)
 DEFINE expr_tip		VARCHAR(100)
 DEFINE expr_est		VARCHAR(100)
-DEFINE expr_fec		VARCHAR(200)
+DEFINE expr_fec		VARCHAR(250)
 
 LET expr_dep = NULL
 IF rm_par.cod_depto IS NOT NULL THEN
@@ -327,13 +327,13 @@ IF rm_par.cod_trab IS NOT NULL THEN
 END IF
 CASE rm_par.tipo_fecha
 	WHEN 'V'
-		LET expr_fec = '   AND n39_periodo_fin  BETWEEN "',
-					rm_par.fecha_ini, '" AND "',
-					rm_par.fecha_fin, '"'
+		LET expr_fec = '   AND n39_periodo_fin  BETWEEN DATE("',
+					rm_par.fecha_ini, '") AND DATE("',
+					rm_par.fecha_fin, '")'
 	WHEN 'C'
-		LET expr_fec = '   AND DATE(n39_fecing) BETWEEN "',
-					rm_par.fecha_ini, '" AND "',
-					rm_par.fecha_fin, '"'
+		LET expr_fec = '   AND DATE(n39_fecing) BETWEEN DATE("',
+					rm_par.fecha_ini, '") AND DATE("',
+					rm_par.fecha_fin, '")'
 END CASE
 LET expr_tip = '   AND n39_tipo         = "', rm_par.tipo_vac, '"'
 CASE rm_par.tipo_vac

@@ -10,6 +10,7 @@
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
                                                                                 
 DEFINE rm_n56   	RECORD LIKE rolt056.*
+DEFINE vm_nivel		LIKE ctbt001.b01_nivel
 DEFINE vm_r_rows	ARRAY[1000] OF INTEGER
 DEFINE vm_row_current   SMALLINT        -- FILA CORRIENTE DEL ARREGLO
 DEFINE vm_num_rows      SMALLINT        -- CANTIDAD DE FILAS LEIDAS
@@ -72,7 +73,11 @@ ELSE
 	OPEN FORM f_rolf112_1 FROM '../forms/rolf112_1c'
 END IF
 DISPLAY FORM f_rolf112_1
-
+SELECT MAX(b01_nivel) INTO vm_nivel FROM ctbt001
+IF vm_nivel IS NULL THEN
+	CALL fl_mostrar_mensaje('No existe ningun nivel de cuenta configurado en la compañía.','stop')
+	EXIT PROGRAM
+END IF
 INITIALIZE rm_n56.* TO NULL
 LET vm_num_rows = 0
 LET vm_row_current = 0
@@ -262,7 +267,7 @@ CONSTRUCT BY NAME expr_sql ON n56_estado, n56_proceso, n56_cod_trab,
 			END IF
 		END IF
 		IF INFIELD(n56_aux_val_vac) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta TO n56_aux_val_vac
@@ -270,7 +275,7 @@ CONSTRUCT BY NAME expr_sql ON n56_estado, n56_proceso, n56_cod_trab,
 			END IF
 		END IF
 		IF INFIELD(n56_aux_val_adi) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta TO n56_aux_val_adi
@@ -278,7 +283,7 @@ CONSTRUCT BY NAME expr_sql ON n56_estado, n56_proceso, n56_cod_trab,
 			END IF
 		END IF
 		IF INFIELD(n56_aux_otr_ing) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta TO n56_aux_otr_ing
@@ -286,7 +291,7 @@ CONSTRUCT BY NAME expr_sql ON n56_estado, n56_proceso, n56_cod_trab,
 			END IF
 		END IF
 		IF INFIELD(n56_aux_iess) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta TO n56_aux_iess
@@ -294,7 +299,7 @@ CONSTRUCT BY NAME expr_sql ON n56_estado, n56_proceso, n56_cod_trab,
 			END IF
 		END IF
 		IF INFIELD(n56_aux_otr_egr) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta TO n56_aux_otr_egr
@@ -302,7 +307,7 @@ CONSTRUCT BY NAME expr_sql ON n56_estado, n56_proceso, n56_cod_trab,
 			END IF
 		END IF
 		IF INFIELD(n56_aux_banco) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				DISPLAY r_b10.b10_cuenta TO n56_aux_banco
@@ -417,7 +422,7 @@ INPUT BY NAME rm_n56.n56_proceso, rm_n56.n56_cod_trab, rm_n56.n56_cod_depto,
 			END IF
 		END IF
 		IF INFIELD(n56_aux_val_vac) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_n56.n56_aux_val_vac = r_b10.b10_cuenta
@@ -426,7 +431,7 @@ INPUT BY NAME rm_n56.n56_proceso, rm_n56.n56_cod_trab, rm_n56.n56_cod_depto,
 			END IF
 		END IF
 		IF INFIELD(n56_aux_val_adi) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_n56.n56_aux_val_adi = r_b10.b10_cuenta
@@ -435,7 +440,7 @@ INPUT BY NAME rm_n56.n56_proceso, rm_n56.n56_cod_trab, rm_n56.n56_cod_depto,
 			END IF
 		END IF
 		IF INFIELD(n56_aux_otr_ing) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_n56.n56_aux_otr_ing = r_b10.b10_cuenta
@@ -444,7 +449,7 @@ INPUT BY NAME rm_n56.n56_proceso, rm_n56.n56_cod_trab, rm_n56.n56_cod_depto,
 			END IF
 		END IF
 		IF INFIELD(n56_aux_iess) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_n56.n56_aux_iess = r_b10.b10_cuenta
@@ -453,7 +458,7 @@ INPUT BY NAME rm_n56.n56_proceso, rm_n56.n56_cod_trab, rm_n56.n56_cod_depto,
 			END IF
 		END IF
 		IF INFIELD(n56_aux_otr_egr) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_n56.n56_aux_otr_egr = r_b10.b10_cuenta
@@ -462,7 +467,7 @@ INPUT BY NAME rm_n56.n56_proceso, rm_n56.n56_cod_trab, rm_n56.n56_cod_depto,
 			END IF
 		END IF
 		IF INFIELD(n56_aux_banco) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_n56.n56_aux_banco = r_b10.b10_cuenta
@@ -524,6 +529,7 @@ INPUT BY NAME rm_n56.n56_proceso, rm_n56.n56_cod_trab, rm_n56.n56_cod_depto,
 			END IF
 			DISPLAY BY NAME r_n30.n30_nombres
 			IF r_n30.n30_estado <> 'A' AND
+			   r_n30.n30_estado <> 'J' AND
 			   rm_n56.n56_proceso <> 'UT'
 			THEN
 				CALL fl_mensaje_estado_bloqueado()

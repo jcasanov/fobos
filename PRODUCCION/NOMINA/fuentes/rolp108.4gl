@@ -15,14 +15,20 @@ DEFINE vm_nivel		LIKE ctbt001.b01_nivel
 DEFINE vm_r_rows	ARRAY [1000] OF INTEGER
 DEFINE rm_car		ARRAY [50] OF RECORD
 				n31_tipo_carga	LIKE rolt031.n31_tipo_carga,
-				tit_carga	CHAR(8),
+				tit_carga	VARCHAR(8),
+				n31_cod_trab_e	LIKE rolt031.n31_cod_trab_e,
 				n31_nombres	LIKE rolt031.n31_nombres,
+				estado_civ	LIKE rolt030.n30_est_civil,
+				tit_estado_civ	VARCHAR(8),
 				n31_fecha_nacim	LIKE rolt031.n31_fecha_nacim
 			END RECORD
 DEFINE rm_car_aux	ARRAY [50] OF RECORD
 				n31_tipo_carga	LIKE rolt031.n31_tipo_carga,
-				tit_carga	CHAR(8),
+				tit_carga	VARCHAR(8),
+				n31_cod_trab_e	LIKE rolt031.n31_cod_trab_e,
 				n31_nombres	LIKE rolt031.n31_nombres,
+				estado_civ	LIKE rolt030.n30_est_civil,
+				tit_estado_civ	VARCHAR(8),
 				n31_fecha_nacim	LIKE rolt031.n31_fecha_nacim
 			END RECORD
 DEFINE vm_num_rows	INTEGER
@@ -229,6 +235,15 @@ IF vg_codloc <> 3 THEN
 ELSE
 	LET rm_n30.n30_fon_res_anio = 'N'
 END IF
+SQL
+	SELECT NVL(MAX(n17_ano_sect), YEAR(TODAY))
+		INTO $rm_n30.n30_ano_sect
+		FROM rolt017
+		WHERE n17_compania = $vg_codcia
+END SQL
+IF vg_codloc = 1 THEN
+	LET rm_n30.n30_sub_activ = vg_codloc
+END IF
 LET rm_n30.n30_usuario      = vg_usuario
 LET rm_n30.n30_fecing       = CURRENT
 LET rm_n31.n31_compania     = vg_codcia
@@ -347,6 +362,7 @@ DEFINE tipo_aux         LIKE gent009.g09_tipo_cta
 DEFINE num_aux          LIKE gent009.g09_numero_cta
 DEFINE r_n13		RECORD LIKE rolt013.*
 DEFINE r_n17		RECORD LIKE rolt017.*
+DEFINE r_g02		RECORD LIKE gent002.*
 DEFINE query		VARCHAR(1200)
 DEFINE expr_sql		VARCHAR(800)
 DEFINE num_reg		INTEGER
@@ -367,7 +383,8 @@ IF num_args() = 3 THEN
 	n30_cta_trabaj, n30_mon_sueldo, n30_sueldo_mes, n30_factor_hora,
 	n30_tipo_trab, n30_tipo_contr, n30_refer_fami, n30_cod_seguro,
 	n30_carnet_seg, n30_desc_seguro, n30_sub_activ, n30_desc_impto,
-	n30_sectorial, n30_fec_jub, n30_val_jub_pat,n30_fon_res_anio,n30_usuario
+	n30_sectorial, n30_ano_sect, n30_fec_jub, n30_val_jub_pat,
+	n30_fon_res_anio, n30_usuario
 	ON KEY(F2)
 		IF INFIELD(n30_cod_trab) THEN
                         CALL fl_ayuda_codigo_empleado(vg_codcia)
@@ -388,7 +405,7 @@ IF num_args() = 3 THEN
                         END IF
                 END IF
 		IF INFIELD(n30_ciudad_nac) THEN
-                        CALL fl_ayuda_ciudad(codp_aux)
+                        CALL fl_ayuda_ciudad(codp_aux, 0)
                                 RETURNING codc_aux, nomc_aux
                         LET int_flag = 0
                         IF codc_aux IS NOT NULL THEN
@@ -444,15 +461,25 @@ IF num_args() = 3 THEN
 			END IF
                 END IF
 		IF INFIELD(n30_sectorial) THEN
-			CALL fl_ayuda_sectorial()
-				RETURNING r_n17.n17_sectorial,
+			CALL fl_ayuda_sectorial(vg_codcia, 2003, 'C')
+				RETURNING r_n17.n17_ano_sect,
+					  r_n17.n17_sectorial,
 					  r_n17.n17_descripcion
 			LET int_flag = 0
 			IF r_n17.n17_sectorial IS NOT NULL THEN
 				DISPLAY r_n17.n17_sectorial TO n30_sectorial
+				DISPLAY r_n17.n17_ano_sect  TO n30_ano_sect
 				DISPLAY BY NAME r_n17.n17_descripcion
 			END IF
                 END IF
+		IF INFIELD(n30_sub_activ) THEN
+			CALL fl_ayuda_localidad(vg_codcia)
+				RETURNING r_g02.g02_localidad, r_g02.g02_nombre
+			LET int_flag = 0
+			IF r_g02.g02_localidad IS NOT NULL THEN
+				DISPLAY r_g02.g02_localidad TO n30_sub_activ
+			END IF
+		END IF
 	END CONSTRUCT
 	IF int_flag THEN
 		IF vm_row_current > 0 THEN
@@ -503,10 +530,11 @@ DEFINE tipo_llamada	CHAR(1)
 DEFINE l		SMALLINT
 
 IF rm_n30.n30_estado = 'I' AND tipo_llamada = 'I' THEN
+	LET vm_flag_mant = 'I'
 	CALL fl_mensaje_estado_bloqueado()
 	RETURN
 END IF
-OPEN WINDOW w_car AT 07,24
+OPEN WINDOW w_car AT 07,05
         WITH FORM '../forms/rolf108_2'
         ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MESSAGE LINE LAST,
                    BORDER)
@@ -549,6 +577,7 @@ IF vm_num_car = 0 THEN
 	CALL fl_mensaje_consulta_sin_registros()
 	RETURN
 END IF
+LET int_flag = 0
 CALL set_count(vm_num_car)
 DISPLAY ARRAY rm_car TO rm_car.*
 	ON KEY(INTERRUPT)
@@ -561,6 +590,7 @@ DISPLAY ARRAY rm_car TO rm_car.*
 	BEFORE ROW
 		LET i = arr_curr()
 		LET j = scr_line()
+		CALL muestra_contadores_car(i, vm_num_car)
 	AFTER DISPLAY
 		CONTINUE DISPLAY
 END DISPLAY
@@ -570,6 +600,7 @@ END FUNCTION
 
 
 FUNCTION llenar_cargas()
+DEFINE r_n30		RECORD LIKE rolt030.*
 DEFINE r_rol2		RECORD LIKE rolt031.*
 
 DECLARE q_car CURSOR FOR
@@ -582,7 +613,19 @@ FOREACH q_car INTO r_rol2.*
 	LET rm_car[vm_num_car].n31_tipo_carga  = r_rol2.n31_tipo_carga
 	CALL descripcion_cargas(r_rol2.n31_tipo_carga)
 		RETURNING rm_car[vm_num_car].tit_carga
+	LET rm_car[vm_num_car].n31_cod_trab_e  = r_rol2.n31_cod_trab_e
 	LET rm_car[vm_num_car].n31_nombres     = r_rol2.n31_nombres
+	CALL fl_lee_trabajador_roles(vg_codcia, r_rol2.n31_cod_trab_e)
+		RETURNING r_n30.*
+	IF r_n30.n30_est_civil IS NULL THEN
+		CALL fl_lee_trabajador_roles(vg_codcia, rm_n30.n30_cod_trab)
+			RETURNING r_n30.*
+		IF r_rol2.n31_tipo_carga = 'E' THEN
+			LET rm_car[vm_num_car].estado_civ = r_n30.n30_est_civil
+			CALL descripcion_estado(r_n30.n30_est_civil)
+				RETURNING rm_car[vm_num_car].tit_estado_civ
+		END IF
+	END IF
 	LET rm_car[vm_num_car].n31_fecha_nacim = r_rol2.n31_fecha_nacim
 	LET rm_car_aux[vm_num_car].*           = rm_car[vm_num_car].*
 	LET vm_num_car = vm_num_car + 1
@@ -612,8 +655,12 @@ END FUNCTION
 
 
 FUNCTION leer_cargas()
-DEFINE resp             CHAR(6)
-DEFINE i,j,k		SMALLINT
+DEFINE resp		CHAR(6)
+DEFINE i, j, k, pos	SMALLINT
+DEFINE r_n30		RECORD LIKE rolt030.*
+DEFINE max_row		SMALLINT
+DEFINE cont_e, cont_n	SMALLINT
+DEFINE mensaje		VARCHAR(200)
 
 OPTIONS INPUT WRAP
 LET i = 1
@@ -629,17 +676,90 @@ INPUT ARRAY rm_car WITHOUT DEFAULTS FROM rm_car.*
 				LET rm_car[k].* = rm_car_aux[k].*
 			END FOR
 			EXIT INPUT
-       	       	END IF	
+       	       	END IF
+	ON KEY(F2)
+		IF INFIELD(n31_cod_trab_e) THEN
+			IF rm_car[i].n31_tipo_carga <> 'E' THEN
+				CONTINUE INPUT
+			END IF
+			CALL fl_ayuda_codigo_empleado(vg_codcia)
+				RETURNING r_n30.n30_cod_trab, r_n30.n30_nombres
+			IF r_n30.n30_cod_trab IS NOT NULL THEN
+				LET rm_car[i].n31_cod_trab_e =r_n30.n30_cod_trab
+				CALL datos_conyugue(rm_car[i].n31_cod_trab_e,
+							i, j)
+			END IF
+		END IF
+		LET int_flag = 0
 	BEFORE ROW
        		LET i = arr_curr()
        		LET j = scr_line()
+		LET max_row = arr_count()
+		IF i > max_row THEN
+			LET max_row = max_row + 1
+		END IF
+		CALL muestra_contadores_car(i, max_row)
 	AFTER FIELD n31_tipo_carga
 		IF rm_car[i].n31_tipo_carga IS NOT NULL THEN
 			CALL descripcion_cargas(rm_car[i].n31_tipo_carga)
 				RETURNING rm_car[i].tit_carga
 			DISPLAY rm_car[i].tit_carga TO rm_car[j].tit_carga
 		END IF
-	AFTER FIELD n31_fecha_nacim
+	AFTER FIELD n31_cod_trab_e
+		IF rm_car[i].n31_tipo_carga <> 'E' THEN
+			LET rm_car[i].n31_cod_trab_e = NULL
+			DISPLAY rm_car[i].n31_cod_trab_e TO
+				rm_car[j].n31_cod_trab_e
+			CONTINUE INPUT
+		END IF
+		IF rm_car[i].n31_cod_trab_e IS NOT NULL THEN
+			CALL fl_lee_trabajador_roles(vg_codcia,
+						rm_car[i].n31_cod_trab_e)
+				RETURNING r_n30.*
+			IF r_n30.n30_compania IS NULL THEN
+				CALL fl_mostrar_mensaje('No existe el código de este empleado en la Compañía.', 'exclamation')
+				NEXT FIELD n31_cod_trab_e
+			END IF
+			IF r_n30.n30_estado = 'I' THEN
+				CALL fl_mensaje_estado_bloqueado()
+				NEXT FIELD n31_cod_trab_e
+			END IF
+			IF r_n30.n30_sexo = rm_n30.n30_sexo THEN
+				CALL fl_mostrar_mensaje('El conyugue debe ser de distinto sexo.', 'exclamation')
+				NEXT FIELD n31_cod_trab_e
+			END IF
+			CALL datos_conyugue(rm_car[i].n31_cod_trab_e, i, j)
+		ELSE
+			IF rm_car[i].n31_tipo_carga = 'H' THEN
+				LET rm_car[i].estado_civ     = NULL
+				LET rm_car[i].tit_estado_civ = NULL
+				DISPLAY rm_car[i].estado_civ TO
+					rm_car[j].estado_civ
+				DISPLAY rm_car[i].tit_estado_civ TO
+					rm_car[j].tit_estado_civ
+			END IF
+		END IF
+	AFTER FIELD estado_civ
+		IF rm_car[i].n31_tipo_carga <> 'E' THEN
+			LET rm_car[i].estado_civ     = NULL
+			LET rm_car[i].tit_estado_civ = NULL
+			DISPLAY rm_car[i].estado_civ TO
+				rm_car[j].estado_civ
+			DISPLAY rm_car[i].tit_estado_civ TO
+				rm_car[j].tit_estado_civ
+			CONTINUE INPUT
+		END IF
+		IF rm_car[i].estado_civ IS NOT NULL THEN
+			CALL descripcion_estado(rm_car[i].estado_civ)
+				RETURNING rm_car[i].tit_estado_civ
+			DISPLAY rm_car[i].tit_estado_civ TO
+				rm_car[j].tit_estado_civ
+		END IF
+	AFTER FIELD n31_fecha_nacim, n31_nombres
+		IF rm_car[i].n31_cod_trab_e IS NOT NULL THEN
+			CALL datos_conyugue(rm_car[i].n31_cod_trab_e, i, j)
+			CONTINUE INPUT
+		END IF
 		IF rm_car[i].n31_fecha_nacim IS NOT NULL THEN
 			IF rm_car[i].n31_fecha_nacim >= TODAY THEN
 				CALL fl_mostrar_mensaje('Esta fecha de nacimiento es incorrecta','exclamation')
@@ -648,6 +768,38 @@ INPUT ARRAY rm_car WITHOUT DEFAULTS FROM rm_car.*
 		END IF
 	AFTER INPUT
 		LET vm_num_car = arr_count()
+		LET cont_e = 0
+		FOR k = 1 TO vm_num_car
+			IF rm_car[k].n31_tipo_carga = 'E' THEN
+				LET cont_e = cont_e + 1
+			END IF
+		END FOR
+		IF cont_e > 1 THEN
+			CALL fl_mostrar_mensaje('Solo puede digitar un conyugue.', 'exclamation')
+			CONTINUE INPUT
+		END IF
+		LET pos = 0
+		FOR k = 1 TO vm_num_car
+			SELECT COUNT(*)
+				INTO cont_n
+				FROM rolt031
+				WHERE n31_compania    = vg_codcia
+				  AND n31_cod_trab   <> rm_n30.n30_cod_trab
+				  AND n31_cod_trab_e <> rm_n30.n30_cod_trab
+				  AND n31_nombres     = rm_car[k].n31_nombres
+			IF cont_n > 0 THEN
+				LET pos = k
+				EXIT FOR
+			END IF
+		END FOR
+		IF pos > 0 THEN
+			LET mensaje = 'El nombre ',
+					rm_car[pos].n31_nombres CLIPPED,
+					' ya esta asignado como carga a otro ',
+					'empleado. '
+			CALL fl_mostrar_mensaje(mensaje, 'exclamation')
+			CONTINUE INPUT
+		END IF
 		FOR k = 1 TO vm_num_car
 			LET rm_car_aux[k].* = rm_car[k].*
 		END FOR
@@ -657,6 +809,38 @@ IF NOT int_flag THEN
 ELSE
 	LET vm_flag_mant = 'X'
 END IF
+
+END FUNCTION
+
+
+
+FUNCTION datos_conyugue(cod_trab_e, i, j)
+DEFINE cod_trab_e	LIKE rolt030.n30_cod_trab
+DEFINE i, j		SMALLINT
+DEFINE r_n30		RECORD LIKE rolt030.*
+
+CALL fl_lee_trabajador_roles(vg_codcia, cod_trab_e) RETURNING r_n30.*
+LET rm_car[i].n31_nombres     = r_n30.n30_nombres
+LET rm_car[i].n31_fecha_nacim = r_n30.n30_fecha_nacim
+IF rm_car[i].estado_civ IS NULL THEN
+	IF r_n30.n30_est_civil = 'C' OR r_n30.n30_est_civil = 'U' THEN
+		LET rm_car[i].estado_civ = r_n30.n30_est_civil
+	ELSE
+		LET rm_car[i].estado_civ = 'C'
+	END IF
+	CALL descripcion_estado(rm_car[i].estado_civ)
+		RETURNING rm_car[i].tit_estado_civ
+END IF
+DISPLAY rm_car[i].* TO rm_car[j].*
+
+END FUNCTION
+
+
+
+FUNCTION muestra_contadores_car(num_row, max_row)
+DEFINE num_row, max_row	SMALLINT
+
+DISPLAY BY NAME num_row, max_row
 
 END FUNCTION
 
@@ -675,6 +859,21 @@ END FUNCTION
 
 
 
+FUNCTION descripcion_estado(tipo)
+DEFINE tipo		LIKE rolt030.n30_est_civil
+DEFINE estado_civ	VARCHAR(8)
+
+CASE tipo
+	WHEN 'C' LET estado_civ	= 'CASADO'
+	WHEN 'U' LET estado_civ	= 'UNIDO'
+	OTHERWISE LET estado_civ = NULL
+END CASE
+RETURN estado_civ CLIPPED
+
+END FUNCTION
+
+
+
 FUNCTION leer_datos()
 DEFINE resp		CHAR(6)
 DEFINE resul		SMALLINT
@@ -688,6 +887,7 @@ DEFINE r_g09		RECORD LIKE gent009.*
 DEFINE r_n13		RECORD LIKE rolt013.*
 DEFINE r_n17		RECORD LIKE rolt017.*
 DEFINE r_b10		RECORD LIKE ctbt010.*
+DEFINE r_g02		RECORD LIKE gent002.*
 DEFINE codp_aux         LIKE gent030.g30_pais
 DEFINE nomp_aux         LIKE gent030.g30_nombre
 DEFINE codc_aux         LIKE gent031.g31_ciudad
@@ -704,6 +904,7 @@ DEFINE nomb_aux         LIKE gent008.g08_nombre
 DEFINE tipo_aux         LIKE gent009.g09_tipo_cta
 DEFINE num_aux          LIKE gent009.g09_numero_cta
 DEFINE fec_ing		LIKE rolt030.n30_fecha_ing
+DEFINE val_aux		LIKE rolt017.n17_valor
 DEFINE mensaje		VARCHAR(100)
 DEFINE valor		VARCHAR(15)
 
@@ -715,7 +916,8 @@ DISPLAY BY NAME rm_n30.n30_usuario, rm_n30.n30_fecing, rm_n30.n30_sexo,
 		rm_n30.n30_mon_sueldo, rm_n30.n30_tipo_cta_tra,
 		rm_n30.n30_factor_hora,	rm_n30.n30_tipo_trab,
 		rm_n30.n30_tipo_contr, rm_n30.n30_desc_seguro,
-		rm_n30.n30_desc_impto, rm_n30.n30_fon_res_anio
+		rm_n30.n30_desc_impto, rm_n30.n30_fon_res_anio,
+		rm_n30.n30_ano_sect
 LET int_flag = 0
 INPUT BY NAME rm_n30.n30_nombres, rm_n30.n30_domicilio, rm_n30.n30_telef_domic, 
 	rm_n30.n30_telef_fami, rm_n30.n30_num_doc_id, rm_n30.n30_tipo_doc_id,
@@ -773,7 +975,7 @@ INPUT BY NAME rm_n30.n30_nombres, rm_n30.n30_domicilio, rm_n30.n30_telef_domic,
                         END IF
                 END IF
 		IF INFIELD(n30_ciudad_nac) THEN
-                        CALL fl_ayuda_ciudad(rm_n30.n30_pais_nac)
+                        CALL fl_ayuda_ciudad(rm_n30.n30_pais_nac, 0)
                                 RETURNING codc_aux, nomc_aux
                         LET int_flag = 0
                         IF codc_aux IS NOT NULL THEN
@@ -838,16 +1040,29 @@ INPUT BY NAME rm_n30.n30_nombres, rm_n30.n30_domicilio, rm_n30.n30_telef_domic,
 			END IF
                 END IF
 		IF INFIELD(n30_sectorial) THEN
-			CALL fl_ayuda_sectorial()
-				RETURNING r_n17.n17_sectorial,
+			CALL fl_ayuda_sectorial(vg_codcia, rm_n30.n30_ano_sect,
+						'I')
+				RETURNING r_n17.n17_ano_sect,
+					  r_n17.n17_sectorial,
 					  r_n17.n17_descripcion
 			LET int_flag = 0
 			IF r_n17.n17_sectorial IS NOT NULL THEN
 				LET rm_n30.n30_sectorial = r_n17.n17_sectorial
-				DISPLAY r_n17.n17_sectorial TO n30_sectorial
-				DISPLAY BY NAME r_n17.n17_descripcion
+				LET rm_n30.n30_ano_sect  = r_n17.n17_ano_sect
+				DISPLAY BY NAME rm_n30.n30_sectorial,
+						rm_n30.n30_ano_sect,
+						r_n17.n17_descripcion
 			END IF
                 END IF
+		IF INFIELD(n30_sub_activ) THEN
+			CALL fl_ayuda_localidad(vg_codcia)
+				RETURNING r_g02.g02_localidad, r_g02.g02_nombre
+			LET int_flag = 0
+			IF r_g02.g02_localidad IS NOT NULL THEN
+				LET rm_n30.n30_sub_activ = r_g02.g02_localidad
+				DISPLAY BY NAME rm_n30.n30_sub_activ
+			END IF
+		END IF
 	BEFORE FIELD n30_ciudad_nac
 		IF rm_n30.n30_pais_nac IS NULL THEN
 			CALL fl_mostrar_mensaje('Ingrese el país primero','info')
@@ -1064,10 +1279,26 @@ e','exclamation')
 		END IF
 	AFTER FIELD n30_sectorial
 		IF rm_n30.n30_sectorial IS NOT NULL THEN
-			CALL fl_lee_cod_sectorial(rm_n30.n30_sectorial)
+			CALL fl_lee_cod_sectorial(vg_codcia,
+						rm_n30.n30_ano_sect,
+						rm_n30.n30_sectorial)
 				RETURNING r_n17.*
 			IF r_n17.n17_sectorial IS NULL THEN
 				CALL fl_mostrar_mensaje('No existe este código sectorial.', 'exclamation')
+				NEXT FIELD n30_sectorial
+			END IF
+			SQL
+				SELECT NVL(n17_valor, 0.00)
+					INTO $val_aux
+					FROM rolt030, rolt017
+					WHERE n30_compania  = $vg_codcia
+					  AND n30_cod_trab  = $rm_n30.n30_cod_trab
+					  AND n17_compania  = n30_compania
+					  AND n17_ano_sect  = n30_ano_sect
+					  AND n17_sectorial = n30_sectorial
+			END SQL
+			IF val_aux > r_n17.n17_valor THEN
+				CALL fl_mostrar_mensaje('No puede cambiar este código sectorial, debido a que el valor es menor al valor del código ' || r_n17.n17_descripcion || '.', 'exclamation')
 				NEXT FIELD n30_sectorial
 			END IF
 			DISPLAY BY NAME r_n17.n17_descripcion
@@ -1080,6 +1311,20 @@ e','exclamation')
 				CALL fl_mostrar_mensaje('La fecha de jubilación es incorrecta.','exclamation')
 				NEXT FIELD n30_fec_jub
 			END IF
+		END IF
+	AFTER FIELD n30_sub_activ
+		IF rm_n30.n30_sub_activ IS NULL THEN
+			CONTINUE INPUT
+		END IF
+		IF NOT fl_solo_numeros(rm_n30.n30_sub_activ) THEN
+			CALL fl_mostrar_mensaje('Digite solo números.', 'exclamation')
+			NEXT FIELD n30_sub_activ
+		END IF
+		CALL fl_lee_localidad(vg_codcia, rm_n30.n30_sub_activ)
+			RETURNING r_g02.*
+		IF r_g02.g02_compania IS NULL THEN
+			CALL fl_mostrar_mensaje('Localidad no existe.', 'exclamation')
+			NEXT FIELD n30_sub_activ
 		END IF
 	AFTER INPUT
 		IF rm_n30.n30_tipo_pago <> 'E' THEN
@@ -1171,8 +1416,12 @@ e','exclamation')
 				--NEXT FIELD n30_lib_militar
 			END IF
 		END IF
-		IF rm_n30.n30_sectorial IS NOT NULL THEN
-			CALL fl_lee_cod_sectorial(rm_n30.n30_sectorial)
+		IF rm_n30.n30_sectorial IS NOT NULL AND
+		   rm_n30.n30_estado = 'A'
+		THEN
+			CALL fl_lee_cod_sectorial(vg_codcia,
+						rm_n30.n30_ano_sect,
+						rm_n30.n30_sectorial)
 				RETURNING r_n17.*
 			IF r_n17.n17_valor > rm_n30.n30_sueldo_mes THEN
                         	CALL fl_lee_moneda(rm_n30.n30_mon_sueldo)
@@ -1186,8 +1435,12 @@ e','exclamation')
 						15), ' que es el ',
 						'valor del sectorial.'
 				CALL fl_mostrar_mensaje(mensaje, 'exclamation')
-				--NEXT FIELD n30_sueldo_mes
+				NEXT FIELD n30_sueldo_mes
 			END IF
+		END IF
+		IF rm_n30.n30_sub_activ IS NULL THEN
+			CALL fl_mostrar_mensaje('Digite la localidad.', 'exclamation')
+			NEXT FIELD n30_sub_activ
 		END IF
 END INPUT
 
@@ -1324,16 +1577,19 @@ IF vm_flag_mant = 'I' THEN
 			WHERE n30_compania = rm_n30.n30_compania
 		LET rm_n31.n31_cod_trab = rm_n30.n30_cod_trab
 	END WHILE
-	CALL control_cargas('I')
-	IF NOT int_flag THEN
-		CALL grabar_cargas()
+	IF rm_n30.n30_est_civil <> 'S' THEN
+		CALL control_cargas('I')
+		IF NOT int_flag THEN
+			CALL grabar_cargas()
+		END IF
 	END IF
-	--CALL generar_aux_cont_empleado()
+	IF vg_codloc = 1 AND rm_n30.n30_fec_jub IS NULL THEN
+		--CALL generar_aux_cont_empleado()
+	END IF
 	CALL graba_modulo_club(rm_n30.*)
 	CALL verificar_proceso_activo_nomina()
 	LET vm_r_rows[vm_row_current] = num_aux
 	DISPLAY BY NAME rm_n30.n30_cod_trab, rm_n30.n30_fecing
-	CALL muestra_reg()
 ELSE
 	IF vm_flag_mant = 'M' THEN
 		UPDATE rolt030 SET * = rm_n30.* WHERE CURRENT OF q_up
@@ -1346,12 +1602,14 @@ ELSE
 		END IF
 	END IF
 END IF
+CALL muestra_reg()
 
 END FUNCTION
 
 
 
 FUNCTION grabar_cargas()
+DEFINE sec		LIKE rolt031.n31_secuencia
 DEFINE i		SMALLINT
 
 IF vm_num_car IS NULL THEN
@@ -1360,6 +1618,11 @@ END IF
 DELETE FROM rolt031
 	WHERE n31_compania = vg_codcia
 	  AND n31_cod_trab = rm_n31.n31_cod_trab
+UPDATE rolt030
+	SET n30_est_civil = "D"
+	WHERE n30_compania   = vg_codcia
+	  AND n30_cod_trab   = rm_n30.n30_cod_trab
+	  AND n30_est_civil IN ("C", "U")
 IF vm_num_car <= 0 THEN
 	RETURN
 END IF
@@ -1369,8 +1632,43 @@ FOR i = 1 TO vm_num_car
         INSERT INTO rolt031
 		VALUES (rm_n31.n31_compania, rm_n31.n31_cod_trab,
 			rm_n31.n31_secuencia, rm_car[i].n31_tipo_carga,
-			rm_car[i].n31_nombres, rm_car[i].n31_fecha_nacim,
-			rm_n31.n31_usuario, rm_n31.n31_fecing)
+			rm_car[i].n31_cod_trab_e, rm_car[i].n31_nombres,
+			rm_car[i].n31_fecha_nacim, rm_n31.n31_usuario,
+			rm_n31.n31_fecing)
+	IF rm_car[i].estado_civ IS NOT NULL THEN
+		UPDATE rolt030
+			SET n30_est_civil = rm_car[i].estado_civ
+			WHERE n30_compania = vg_codcia
+			  AND n30_cod_trab = rm_n30.n30_cod_trab
+		UPDATE rolt030
+			SET n30_est_civil = rm_car[i].estado_civ
+			WHERE n30_compania = vg_codcia
+			  AND n30_cod_trab = rm_car[i].n31_cod_trab_e
+		SELECT * FROM rolt031
+			WHERE n31_compania   = vg_codcia
+			  AND n31_cod_trab   = rm_car[i].n31_cod_trab_e
+			  AND n31_cod_trab_e = rm_n30.n30_cod_trab
+		IF STATUS = NOTFOUND THEN
+			IF rm_car[i].n31_cod_trab_e IS NULL THEN
+				CONTINUE FOR
+			END IF
+			SQL
+				SELECT NVL(MAX(n31_secuencia) + 1, 1)
+					INTO $sec
+					FROM rolt031
+					WHERE n31_compania = $vg_codcia
+				  	  AND n31_cod_trab =
+						$rm_car[i].n31_cod_trab_e
+			END SQL
+        		INSERT INTO rolt031
+				VALUES (rm_n31.n31_compania,
+					rm_car[i].n31_cod_trab_e, sec,
+					rm_car[i].n31_tipo_carga,
+					rm_n31.n31_cod_trab, rm_n30.n30_nombres,
+					rm_n30.n30_fecha_nacim,
+					rm_n31.n31_usuario, rm_n31.n31_fecing)
+		END IF
+	END IF
 END FOR
 
 END FUNCTION
@@ -1457,9 +1755,10 @@ DISPLAY BY NAME rm_n30.n30_cod_trab, rm_n30.n30_nombres,
 		rm_n30.n30_desc_impto, rm_n30.n30_bco_empresa,
 		rm_n30.n30_cta_empresa,	rm_n30.n30_tipo_cta_tra,
 		rm_n30.n30_cta_trabaj, rm_n30.n30_cod_seguro,
-		rm_n30.n30_sectorial, rm_n30.n30_lib_militar,
-		rm_n30.n30_fec_jub, rm_n30.n30_val_jub_pat,
-		rm_n30.n30_fon_res_anio, rm_n30.n30_usuario, rm_n30.n30_fecing
+		rm_n30.n30_sectorial, rm_n30.n30_ano_sect,
+		rm_n30.n30_lib_militar, rm_n30.n30_fec_jub,
+		rm_n30.n30_val_jub_pat, rm_n30.n30_fon_res_anio,
+		rm_n30.n30_usuario, rm_n30.n30_fecing
 CALL fl_lee_pais(rm_n30.n30_pais_nac) RETURNING r_pai.*
 DISPLAY r_pai.g30_nombre TO tit_pais
 CALL fl_lee_ciudad(rm_n30.n30_ciudad_nac) RETURNING r_ciu.*
@@ -1474,7 +1773,8 @@ CALL fl_lee_banco_general(rm_n30.n30_bco_empresa) RETURNING r_g08.*
 DISPLAY r_g08.g08_nombre TO tit_banco
 CALL fl_lee_seguros(rm_n30.n30_cod_seguro) RETURNING r_n13.*
 DISPLAY BY NAME r_n13.n13_descripcion
-CALL fl_lee_cod_sectorial(rm_n30.n30_sectorial) RETURNING r_n17.*
+CALL fl_lee_cod_sectorial(vg_codcia, rm_n30.n30_ano_sect, rm_n30.n30_sectorial)
+	RETURNING r_n17.*
 DISPLAY BY NAME r_n17.n17_descripcion
 CALL muestra_estado()
 LET rm_n31.n31_compania = vg_codcia
@@ -1710,32 +2010,180 @@ END FUNCTION
 FUNCTION mostrar_botones_cargas()
 
 DISPLAY 'Tipo Carga' TO tit_col1
-DISPLAY 'Nombres'    TO tit_col2
-DISPLAY 'Fecha Nac.' TO tit_col3
+DISPLAY 'Código'     TO tit_col2
+DISPLAY 'Nombres'    TO tit_col3
+DISPLAY 'Est. Civil' TO tit_col4
+DISPLAY 'Fecha Nac.' TO tit_col5
 
 END FUNCTION
 
 
 
 FUNCTION generar_aux_cont_empleado()
+DEFINE cta		LIKE ctbt010.b10_cuenta
+DEFINE nom_cta		LIKE ctbt010.b10_descripcion
+DEFINE nombre		LIKE rolt030.n30_nombres
+DEFINE query		CHAR(2000)
+DEFINE tab1, tab2	CHAR(2)
+DEFINE i, lim, pos	SMALLINT
+DEFINE ctos1, ctos2	INTEGER
+--define c		like ctbt010.b10_cuenta
+--define d		like ctbt010.b10_descripcion
 
-SELECT a.* FROM rolt056 a
-	WHERE a.n56_compania   = rm_n30.n30_compania
-	  AND a.n56_cod_depto  = rm_n30.n30_cod_depto
-	  AND a.n56_cod_trab   =
+SELECT a.*, TRIM(n30_nombres) nom_empl
+	FROM rolt056 a, rolt030
+	WHERE a.n56_compania  = rm_n30.n30_compania
+	  AND a.n56_cod_depto = rm_n30.n30_cod_depto
+	  AND a.n56_cod_trab  =
 		(SELECT MAX(UNIQUE b.n56_cod_trab)
 			FROM rolt056 b
 			WHERE b.n56_compania  = a.n56_compania
-			  AND b.n56_cod_depto = rm_n30.n30_cod_depto
+			  AND b.n56_cod_depto = a.n56_cod_depto
 	  		  AND b.n56_estado    = 'A')
-	  AND a.n56_estado    = 'A'
+	  AND a.n56_estado   = 'A'
+	  AND n30_compania   = a.n56_compania
+	  AND n30_cod_trab   = a.n56_cod_trab
 	INTO TEMP tmp_n56
 SELECT * FROM rolt052
 	WHERE n52_compania = rm_n30.n30_compania
 	  AND n52_cod_trab = (SELECT UNIQUE n56_cod_trab FROM tmp_n56)
 	INTO TEMP tmp_n52
-DROP TABLE tmp_n52
+SELECT COUNT(*) INTO ctos1 FROM tmp_n56
+SELECT COUNT(*) INTO ctos2 FROM tmp_n52
+IF ctos1 = 0 AND ctos2 = 0 THEN
+	DROP TABLE tmp_n52
+	DROP TABLE tmp_n56
+	RETURN
+END IF
+SELECT UNIQUE nom_empl, LENGTH(nom_empl) INTO nombre, lim FROM tmp_n56
+LET pos = 0
+FOR i = 1 TO lim
+	IF nombre[i, i] = " " THEN
+		EXIT FOR
+	END IF
+	LET pos = pos + 1
+END FOR
+LET nombre = nombre[1, pos] CLIPPED
+LET query  = 'SELECT b10_cuenta cuenta, ',
+			'TRIM(REPLACE(b10_descripcion, ',
+				'(SELECT UNIQUE nom_empl ',
+					'FROM tmp_n56), " ")) nomcta ',
+		'FROM ctbt010 ',
+		'WHERE b10_compania    = ', vg_codcia,
+		'  AND b10_estado      = "A" ',
+		'  AND b10_descripcion MATCHES "*', nombre CLIPPED, '*" ',
+		'  AND b10_descripcion NOT MATCHES "*HERACL*"',
+		'INTO TEMP t1 '
+PREPARE exec_t1 FROM query
+EXECUTE exec_t1
+LET i = 28
+WHILE i > 13
+	IF (i MOD 2) = 0 THEN
+		LET tab1 = 't1'
+		LET tab2 = 't2'
+	ELSE
+		LET tab1 = 't2'
+		LET tab2 = 't1'
+	END IF
+	LET query = 'SELECT cuenta, TRIM(REPLACE(nomcta, ',
+				'(SELECT UNIQUE nom_empl[1, ', i, '] ',
+					'FROM tmp_n56), " ")) nomcta ',
+			' FROM ', tab1,
+			' INTO TEMP ', tab2
+	PREPARE exec_rep FROM query
+	EXECUTE exec_rep
+	IF (i MOD 2) = 0 THEN
+		DROP TABLE t1
+	ELSE
+		DROP TABLE t2
+	END IF
+	LET i = i - 1
+END WHILE
+SELECT cuenta, TRIM(REPLACE(nomcta,
+		(SELECT UNIQUE nom_empl[1, 13] FROM tmp_n56), " ")) nomcta
+	FROM t2
+	INTO TEMP tmp_b10
+DROP TABLE t2
+SELECT LPAD(ROUND(MAX(b10_cuenta) + 1, 0), 11, 0) cta_s
+	FROM tmp_n56, ctbt010
+	WHERE n56_proceso      = "AN"
+	  AND b10_compania     = n56_compania
+	  AND b10_cuenta[1, 8] = n56_aux_val_vac[1, 8]
+	INTO TEMP t1
+SELECT TRIM(cta_s[9, 11]) sec_max
+	FROM t1
+	INTO TEMP t2
+DROP TABLE t1
+let query = 'SELECT b.cuenta[1, 8] || ',
+			'(SELECT sec_max FROM t2) cuenta, ',
+		'TRIM(b.nomcta) || " " || TRIM(n30_nombres) nomcta ',
+		'FROM tmp_b10 b, ctbt010 a, rolt030 ',
+		'WHERE a.b10_compania = ', vg_codcia,
+		'  AND a.b10_cuenta   = b.cuenta ',
+		'  AND n30_compania   = a.b10_compania ',
+		'  AND n30_cod_trab   = ', rm_n30.n30_cod_trab
+{--
+prepare caca from query
+declare q_caca cursor for caca
+foreach q_caca into c, d
+	display c, d
+end foreach
+--}
+LET query = 'INSERT INTO ctbt010 ',
+		'(b10_compania, b10_cuenta, b10_descripcion, b10_estado, ',
+		 'b10_tipo_cta, b10_tipo_mov, b10_nivel, b10_saldo_ma, ',
+		 'b10_usuario, b10_fecing) ',
+		'SELECT a.b10_compania cia, b.cuenta[1, 8] || ',
+			'(SELECT sec_max FROM t2) cuenta, ',
+		'TRIM(b.nomcta) || " " || TRIM(n30_nombres) nomcta, ',
+		'a.b10_estado estado, a.b10_tipo_cta t_c, a.b10_tipo_mov t_m, ',
+		'a.b10_nivel nivel, a.b10_saldo_ma sal_ma, "',
+		vg_usuario CLIPPED, '" usua, CURRENT fec ',
+		'FROM tmp_b10 b, ctbt010 a, rolt030 ',
+		'WHERE a.b10_compania = ', vg_codcia,
+		'  AND a.b10_cuenta   = b.cuenta ',
+		'  AND n30_compania   = a.b10_compania ',
+		'  AND n30_cod_trab   = ', rm_n30.n30_cod_trab
+PREPARE exec_b10 FROM query
+EXECUTE exec_b10
+DROP TABLE tmp_b10
+LET query = 'INSERT INTO rolt056 ',
+		'(n56_compania, n56_proceso, n56_cod_depto, n56_cod_trab, ',
+		 'n56_estado, n56_aux_val_vac, n56_aux_val_adi, ',
+		 'n56_aux_otr_ing, n56_aux_iess, n56_aux_otr_egr, ',
+		 'n56_aux_banco, n56_usuario, n56_fecing) ',
+		'SELECT a.n56_compania, a.n56_proceso, a.n56_cod_depto, ',
+			rm_n30.n30_cod_trab, ', "A", ',
+			'CASE WHEN a.n56_proceso[1, 1]  = "D" OR ',
+				 ' a.n56_proceso[1, 1]  = "F" OR ',
+				 ' a.n56_proceso        = "UT" OR ',
+				 ' a.n56_proceso        = "VP" ',
+				'THEN a.n56_aux_val_vac ',
+				'ELSE a.n56_aux_val_vac[1, 8] || ',
+					'(SELECT sec_max FROM t2) ',
+			'END, ',
+			'CASE WHEN a.n56_proceso <> "VA" ',
+				'THEN a.n56_aux_val_adi ',
+				'ELSE a.n56_aux_val_adi[1, 8] || ',
+					'(SELECT sec_max FROM t2) ',
+			'END, ',
+		 	'a.n56_aux_otr_ing, a.n56_aux_iess, a.n56_aux_otr_egr,',
+			' a.n56_aux_banco, "', vg_usuario CLIPPED, '", CURRENT',
+		' FROM tmp_n56 a, rolt030 ',
+		' WHERE n30_compania = ', vg_codcia,
+		'   AND n30_cod_trab = ', rm_n30.n30_cod_trab
+PREPARE exec_n56 FROM query
+EXECUTE exec_n56
 DROP TABLE tmp_n56
+LET query = 'INSERT INTO rolt052 ',
+		'(n52_compania, n52_cod_rubro, n52_cod_trab, n52_aux_cont) ',
+		'SELECT a.n52_compania, a.n52_cod_rubro, ', rm_n30.n30_cod_trab,
+			', a.n52_aux_cont[1, 8] || (SELECT sec_max FROM t2) ',
+			' FROM tmp_n52 a '
+PREPARE exec_n52 FROM query
+EXECUTE exec_n52
+DROP TABLE tmp_n52
+DROP TABLE t2
 
 END FUNCTION
 
@@ -1838,6 +2286,9 @@ SQL
 		FROM t1
 END SQL
 DROP TABLE t1
+IF fec_tope < TODAY THEN
+	LET fec_tope = TODAY
+END IF
 RETURN fec_tope
 
 END FUNCTION

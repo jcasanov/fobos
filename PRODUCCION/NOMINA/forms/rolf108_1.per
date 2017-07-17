@@ -53,13 +53,13 @@ SCREEN size 18 by 78 TITLE '  Otros Datos   '
               Seguro: [c050] [c051                          ]
 
        Carnet Seguro: [c030           ]    Descto. Seguro ?: [b]
-       Sub Actividad: [c031      ]       Descto. Impuesto ?: [c]
+           Localidad: [c031]             Descto. Impuesto ?: [c]
 
-    Código Sectorial: [c070      ] [c071                               ]
-                                   [c071                               ]
-    Fecha Jubilación: [c061      ]      Valor Jub. Patronal: [c062         ]
+    Código Sectorial: [c070           ] [c071                               ]
+       Año Sectorial: [c072]            [c071                               ]
+    Fecha Jubilación: [c061      ]       Valor Jub. Patronal: [c062         ]
 
-             Usuario: [c037      ]            Fondo de Reserva Anual ? : [d]
+             Usuario: [c037      ]             Fondo de Reserva Anual ? : [d]
     Fecha de Ingreso: [c038               ]
 }
 TABLES
@@ -133,7 +133,8 @@ c029 = rolt030.n30_refer_fami, AUTONEXT, UPSHIFT;
 c030 = rolt030.n30_carnet_seg, AUTONEXT, UPSHIFT;
 b    = rolt030.n30_desc_seguro, AUTONEXT, REVERSE, UPSHIFT,
         WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S';
-c031 = rolt030.n30_sub_activ, AUTONEXT, UPSHIFT;
+c031 = rolt030.n30_sub_activ, AUTONEXT, UPSHIFT, REVERSE,
+        WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 c    = rolt030.n30_desc_impto, AUTONEXT, REVERSE, UPSHIFT,
         WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N';
 c032 = rolt030.n30_bco_empresa, AUTONEXT, UPSHIFT,
@@ -152,6 +153,7 @@ c051 = rolt013.n13_descripcion, NOENTRY, UPSHIFT;
 c070 = rolt030.n30_sectorial, AUTONEXT, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 c071 = rolt017.n17_descripcion, NOENTRY, UPSHIFT, WORDWRAP COMPRESS;
+c072 = rolt030.n30_ano_sect, NOENTRY, UPSHIFT, REVERSE;
 c061 = rolt030.n30_fec_jub, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
 	COMMENTS = 'Ingrese la fecha (dd-mm-aaaa) de un empleado jubilado.';
 c062 = rolt030.n30_val_jub_pat, AUTONEXT, UPSHIFT, FORMAT = '##,###,##&.##',

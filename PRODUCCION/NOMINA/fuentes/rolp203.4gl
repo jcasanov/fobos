@@ -183,6 +183,7 @@ DEFINE r_n18		RECORD LIKE rolt018.*
 DEFINE r_n32		RECORD LIKE rolt032.*
 DEFINE r_n33, r_n33_v	RECORD LIKE rolt033.*
 DEFINE r_n13		RECORD LIKE rolt013.*
+DEFINE r_n60		RECORD LIKE rolt060.*
 DEFINE tot_valor	DECIMAL(12,2)
 DEFINE tot_egr		DECIMAL(12,2)
 DEFINE tot_ing		DECIMAL(12,2)
@@ -192,6 +193,7 @@ DEFINE mensaje		VARCHAR(200)
 DEFINE flag		LIKE rolt033.n33_cant_valor
 DEFINE flag_ident	LIKE rolt006.n06_flag_ident
 DEFINE rub_vac		LIKE rolt006.n06_cod_rubro
+DEFINE rubro		LIKE rolt006.n06_cod_rubro
 DEFINE factor_sueldo	DECIMAL(22,15)
 DEFINE expr_sql		CHAR(300)
 DEFINE dias, dias_ini	SMALLINT
@@ -217,6 +219,10 @@ IF vg_codcia = 1 THEN
 END IF
 PREPARE trab FROM expr_sql
 DECLARE q_trab CURSOR FOR trab
+CALL fl_lee_parametros_club_roles(vg_codcia) RETURNING r_n60.*
+IF r_n60.n60_compania IS NULL THEN
+	LET r_n60.n60_rub_aporte = 0
+END IF
 FOREACH q_trab INTO r_n30.*
         IF r_n30.n30_fecha_reing IS NULL THEN
 		IF r_n30.n30_fecha_sal < rm_par.n32_fecha_ini THEN
@@ -289,7 +295,6 @@ FOREACH q_trab INTO r_n30.*
 						rm_par.n32_fecha_ini,
 						rm_par.n32_fecha_fin,
 						r_n30.n30_cod_trab,
-						r_n06.n06_cod_rubro,
 						r_n06.n06_flag_ident)
                   		RETURNING r_n33.n33_valor
 			INITIALIZE rub_vac, r_n33.n33_horas_porc TO NULL
@@ -374,18 +379,21 @@ FOREACH q_trab INTO r_n30.*
 				END IF
 			END IF
 			IF EXTEND(r_n30.n30_fecha_sal, YEAR TO MONTH) =
-			   EXTEND(rm_par.n32_fecha_fin, YEAR TO MONTH) AND
-			  NOT (EXTEND(r_n30.n30_fecha_sal, MONTH TO DAY)
-					= '02-28' OR
-			   EXTEND(r_n30.n30_fecha_sal, MONTH TO DAY) = '02-29')
+			   EXTEND(rm_par.n32_fecha_fin, YEAR TO MONTH)
 			THEN
-				LET dias_ini = (r_n30.n30_fecha_sal -
+				IF EXTEND(r_n30.n30_fecha_sal, MONTH TO DAY)
+					<> EXTEND(MDY(01, 03,
+						YEAR(r_n30.n30_fecha_sal))
+						- 1 UNITS DAY, MONTH TO DAY)
+				THEN
+					LET dias_ini = (r_n30.n30_fecha_sal -
 						rm_par.n32_fecha_ini) + 1
-				IF dias_ini < r_n33.n33_valor THEN
-					LET r_n33.n33_valor = dias_ini
-				END IF
-				IF r_n33.n33_valor = 0 THEN
-					LET r_n33.n33_valor = 1
+					IF dias_ini < r_n33.n33_valor THEN
+						LET r_n33.n33_valor = dias_ini
+					END IF
+					IF r_n33.n33_valor = 0 THEN
+						LET r_n33.n33_valor = 1
+					END IF
 				END IF
 			END IF
 			CALL retorna_suma_valor_rubros_base(
@@ -467,7 +475,6 @@ FOREACH q_trab INTO r_n30.*
                   	IF r_n06.n06_flag_ident = 'AP' THEN	
 				LET r_n32.n32_tot_gan    = tot_valor +
 					calcula_valor_dias_descartados(
-							r_n06.n06_cod_rubro, 
                         				vg_codcia,
                 	        		   	rm_par.n32_cod_liqrol,
         	                		   	rm_par.n32_fecha_ini,
@@ -555,6 +562,28 @@ FOREACH q_trab INTO r_n30.*
 	                  			RETURNING r_n33.n33_valor
 					LET r_n33.n33_horas_porc = NULL
 				END IF
+		   		IF r_n06.n06_flag_ident = 'SY' OR
+		   		   r_n06.n06_flag_ident = 'AM'
+				THEN
+					CALL ajuste_sueldo_maternidad(
+							r_n30.n30_cod_trab,
+							r_n06.n06_cod_rubro,
+							r_n06.n06_flag_ident)
+	                  			RETURNING r_n33.n33_valor
+					LET r_n33.n33_horas_porc = NULL
+				END IF
+				IF r_n06.n06_flag_ident = 'EC' THEN
+					IF r_n30.n30_desc_impto = 'S' THEN
+					LET r_n33.n33_horas_porc =
+						r_n07.n07_factor
+					LET r_n33.n33_valor      =
+						tot_valor * r_n07.n07_factor
+						/ 100
+					ELSE
+					LET r_n33.n33_horas_porc = NULL
+					LET r_n33.n33_valor      = 0.00
+					END IF
+				END IF
 			END IF
 			END IF
 		ELSE
@@ -586,9 +615,14 @@ FOREACH q_trab INTO r_n30.*
 					  AND n18_flag_ident =
 							r_n06.n06_flag_ident
 				IF r_n18.n18_flag_ident IS NULL THEN
-					LET r_n33.n33_valor = (r_n33.n33_valor /
+					IF r_n33.n33_cod_rubro <>
+						r_n60.n60_rub_aporte
+					THEN
+						LET r_n33.n33_valor =
+							(r_n33.n33_valor /
 							rm_n00.n00_dias_mes) *
 							dias
+					END IF
 				END IF
 			END IF
 		END IF
@@ -612,14 +646,27 @@ FOREACH q_trab INTO r_n30.*
 			r_n32.n32_compania,  r_n32.n32_cod_liqrol, 
 			r_n32.n32_fecha_ini, r_n32.n32_fecha_fin,
 			r_n32.n32_cod_trab,  r_n06.n06_cod_rubro)
-	CALL retorna_totales(r_n32.n32_compania,  r_n32.n32_cod_liqrol,
-	                     r_n32.n32_fecha_ini, r_n32.n32_fecha_fin, 
-	                     r_n32.n32_cod_trab,  'DI') 
-		RETURNING tot_ing                     
-	CALL retorna_totales(r_n32.n32_compania,  r_n32.n32_cod_liqrol,
-                             r_n32.n32_fecha_ini, r_n32.n32_fecha_fin, 
-	                     r_n32.n32_cod_trab,  'DE')
-		RETURNING tot_egr    
+	IF r_n30.n30_estado <> 'I' THEN
+		CALL retorna_totales(r_n32.n32_compania,  r_n32.n32_cod_liqrol,
+	        	             r_n32.n32_fecha_ini, r_n32.n32_fecha_fin, 
+	                	     r_n32.n32_cod_trab,  'DI')
+			RETURNING tot_ing
+		CALL retorna_totales(r_n32.n32_compania,  r_n32.n32_cod_liqrol,
+        	                     r_n32.n32_fecha_ini, r_n32.n32_fecha_fin, 
+	        	             r_n32.n32_cod_trab,  'DE')
+			RETURNING tot_egr
+	ELSE
+		CALL retorna_totales_sob(r_n32.n32_compania,
+				r_n32.n32_cod_liqrol, r_n32.n32_fecha_ini,
+				r_n32.n32_fecha_fin, r_n32.n32_cod_trab,
+				r_n06.n06_cod_rubro, 'DI')
+			RETURNING tot_ing
+		CALL retorna_totales_sob(r_n32.n32_compania,
+				r_n32.n32_cod_liqrol, r_n32.n32_fecha_ini,
+				r_n32.n32_fecha_fin, r_n32.n32_cod_trab,
+				r_n06.n06_cod_rubro, 'DE')
+			RETURNING tot_egr
+	END IF
 	LET sobregiro = 0
 	IF tot_egr > tot_ing THEN
 		SELECT n06_cod_rubro
@@ -639,8 +686,7 @@ FOREACH q_trab INTO r_n30.*
 				       tot_egr - tot_ing USING '<<,<<&.##'
 			CALL fl_mostrar_mensaje(mensaje, 'exclamation')
 		END IF
-		SELECT * INTO r_n06.* FROM rolt006
-			WHERE n06_flag_ident = 'SI' 
+		SELECT * INTO r_n06.* FROM rolt006 WHERE n06_flag_ident = 'SI' 
 		CALL fl_lee_rubro_liq_trabajador(vg_codcia,    
 	        		rm_par.n32_cod_liqrol,	       
 	        	 	rm_par.n32_fecha_ini,          
@@ -656,10 +702,28 @@ FOREACH q_trab INTO r_n30.*
 			r_n32.n32_compania,  r_n32.n32_cod_liqrol, 
 			r_n32.n32_fecha_ini, r_n32.n32_fecha_fin,
 			r_n32.n32_cod_trab,  r_n06.n06_cod_rubro)
-		CALL retorna_totales(r_n32.n32_compania,  r_n32.n32_cod_liqrol,
-	                     r_n32.n32_fecha_ini, r_n32.n32_fecha_fin, 
-	                     r_n32.n32_cod_trab,  'DI') 
-			RETURNING tot_ing                     
+		IF r_n30.n30_estado <> 'I' THEN
+			CALL retorna_totales(r_n32.n32_compania,
+					r_n32.n32_cod_liqrol,
+					r_n32.n32_fecha_ini,r_n32.n32_fecha_fin,
+					r_n32.n32_cod_trab, 'DI')
+				RETURNING tot_ing
+		ELSE
+			SELECT n06_cod_rubro
+				INTO rubro
+				FROM rolt006
+				WHERE n06_flag_ident = "SE"
+			CALL actualiza_detalle_liquidacion(sobregiro,
+					r_n32.n32_compania,r_n32.n32_cod_liqrol,
+					r_n32.n32_fecha_ini,r_n32.n32_fecha_fin,
+					r_n32.n32_cod_trab, rubro)
+			CALL retorna_totales_sob(r_n32.n32_compania,
+					r_n32.n32_cod_liqrol,
+					r_n32.n32_fecha_ini,r_n32.n32_fecha_fin,
+					r_n32.n32_cod_trab, r_n06.n06_cod_rubro,
+					'DI')
+				RETURNING tot_ing
+		END IF
 		LET tot_ing = tot_egr
 	END IF
 
@@ -711,14 +775,31 @@ FOREACH q_trab INTO r_n30.*
 			  AND n33_fecha_fin  = r_n32.n32_fecha_fin
 			  AND n33_cod_trab   = r_n32.n32_cod_trab
 			  AND n33_cod_rubro  = r_n06.n06_cod_rubro      
-		CALL retorna_totales(r_n32.n32_compania,  r_n32.n32_cod_liqrol,
-	        	             r_n32.n32_fecha_ini, r_n32.n32_fecha_fin, 
-	                	     r_n32.n32_cod_trab,  'DI') 
-			RETURNING tot_ing                     
-		CALL retorna_totales(r_n32.n32_compania,  r_n32.n32_cod_liqrol,
-                	             r_n32.n32_fecha_ini, r_n32.n32_fecha_fin, 
-	                	     r_n32.n32_cod_trab,  'DE')
-			RETURNING tot_egr    
+		IF r_n30.n30_estado <> 'I' THEN
+			CALL retorna_totales(r_n32.n32_compania,
+					r_n32.n32_cod_liqrol,
+					r_n32.n32_fecha_ini,r_n32.n32_fecha_fin,
+					r_n32.n32_cod_trab, 'DI')
+				RETURNING tot_ing
+			CALL retorna_totales(r_n32.n32_compania,
+					r_n32.n32_cod_liqrol,
+					r_n32.n32_fecha_ini,r_n32.n32_fecha_fin,
+					r_n32.n32_cod_trab, 'DE')
+				RETURNING tot_egr
+		ELSE
+			CALL retorna_totales_sob(r_n32.n32_compania,
+					r_n32.n32_cod_liqrol,
+					r_n32.n32_fecha_ini,r_n32.n32_fecha_fin,
+					r_n32.n32_cod_trab, r_n06.n06_cod_rubro,
+					'DI')
+				RETURNING tot_ing
+			CALL retorna_totales_sob(r_n32.n32_compania,
+					r_n32.n32_cod_liqrol,
+					r_n32.n32_fecha_ini,r_n32.n32_fecha_fin,
+					r_n32.n32_cod_trab, r_n06.n06_cod_rubro,
+					'DE')
+				RETURNING tot_egr
+		END IF
 		LET tot_ing = tot_ing - sobregiro
 		IF tot_egr > tot_ing THEN
 			LET mensaje = 'El trabajador: ', 
@@ -740,12 +821,22 @@ FOREACH q_trab INTO r_n30.*
 				r_n32.n32_compania,  r_n32.n32_cod_liqrol, 
 				r_n32.n32_fecha_ini, r_n32.n32_fecha_fin,
 				r_n32.n32_cod_trab,  r_n06.n06_cod_rubro)
-			CALL retorna_totales(r_n32.n32_compania,
-					r_n32.n32_cod_liqrol,
-					r_n32.n32_fecha_ini,
-					r_n32.n32_fecha_fin, r_n32.n32_cod_trab,
-					'DI')
-				RETURNING tot_ing                     
+			IF r_n30.n30_estado <> 'I' THEN
+				CALL retorna_totales(r_n32.n32_compania,
+						r_n32.n32_cod_liqrol,
+						r_n32.n32_fecha_ini,
+						r_n32.n32_fecha_fin,
+						r_n32.n32_cod_trab, 'DI')
+					RETURNING tot_ing
+			ELSE
+				CALL retorna_totales_sob(r_n32.n32_compania,
+						r_n32.n32_cod_liqrol,
+						r_n32.n32_fecha_ini,
+						r_n32.n32_fecha_fin,
+						r_n32.n32_cod_trab,
+						r_n06.n06_cod_rubro, 'DI')
+					RETURNING tot_ing
+			END IF
 			LET tot_ing = tot_egr
 		END IF
 
@@ -822,6 +913,60 @@ END FUNCTION
 
 
 
+FUNCTION retorna_totales_sob(codcia, cod_liqrol, fecha_ini, fecha_fin, cod_trab,
+				rubro, flag)
+DEFINE codcia 		LIKE rolt032.n32_compania
+DEFINE cod_liqrol	LIKE rolt032.n32_cod_liqrol
+DEFINE fecha_ini	LIKE rolt032.n32_fecha_ini
+DEFINE fecha_fin	LIKE rolt032.n32_fecha_fin
+DEFINE cod_trab		LIKE rolt032.n32_cod_trab
+DEFINE rubro		LIKE rolt006.n06_cod_rubro
+DEFINE flag		LIKE rolt006.n06_det_tot
+DEFINE fecha		LIKE rolt032.n32_fecha_ini
+DEFINE r_n06		RECORD LIKE rolt006.*
+DEFINE valor, val_sob	DECIMAL(12,2)
+
+LET val_sob = 0
+CALL fl_lee_rubro_roles(rubro) RETURNING r_n06.*
+IF r_n06.n06_flag_ident <> 'FM' AND flag = 'DE' THEN
+	DECLARE q_sobre CURSOR FOR
+		SELECT n33_valor, n33_fecha_ini
+			FROM rolt033
+			WHERE n33_compania  = codcia
+			  AND n33_fecha_ini < fecha_ini
+			  AND n33_fecha_fin < fecha_fin
+			  AND n33_cod_trab  = cod_trab
+			  AND n33_cod_rubro = rubro
+			ORDER BY 2 DESC
+	OPEN q_sobre
+	FETCH q_sobre INTO val_sob, fecha
+	CLOSE q_sobre
+	FREE q_sobre
+END IF
+SELECT SUM(n33_valor)
+	INTO valor
+	FROM rolt033
+	WHERE n33_compania   = codcia
+	  AND n33_cod_liqrol = cod_liqrol
+	  AND n33_fecha_ini  = fecha_ini
+	  AND n33_fecha_fin  = fecha_fin
+	  AND n33_cod_trab   = cod_trab
+	  AND n33_det_tot    = flag
+	  AND n33_cod_rubro  NOT IN
+				(SELECT n06_cod_rubro
+					FROM rolt006
+					WHERE n06_flag_ident IN ("SI", "SE"))
+	  AND n33_cant_valor = "V"
+IF valor IS NULL THEN
+	LET valor = 0
+END IF
+LET valor = valor + val_sob
+RETURN valor
+
+END FUNCTION
+
+
+
 FUNCTION retorna_suma_valor_rubros_base(cod_rubro, codcia, cod_liqrol,
 					fecha_ini, fecha_fin, cod_trab, flag)
 DEFINE cod_rubro	LIKE rolt006.n06_cod_rubro
@@ -848,10 +993,11 @@ IF flag = 1 THEN
 END IF
 IF flag = 2 THEN
 	LET query = query CLIPPED,
-			'   AND n08_rubro_base NOT IN ',
+			'   AND n08_rubro_base IN ',
 				'(SELECT n06_cod_rubro ',
 					'FROM rolt006 ',
-					'WHERE n06_flag_ident = "SX")'
+					'WHERE n06_flag_ident IN ',
+					'("VT", "VE", "VM", "VV"))'
 END IF
 PREPARE cons_n08 FROM query
 DECLARE q_rbase CURSOR FOR cons_n08
@@ -952,8 +1098,8 @@ SELECT n08_cod_rubro INTO rubro
 	WHERE n06_flag_ident  = 'DE'
 	  AND n08_rubro_base  = n06_cod_rubro
 	  AND n08_cod_rubro  IN (SELECT n06_cod_rubro
-				 FROM rolt006
-				 WHERE n06_flag_ident = 'VE')
+					 FROM rolt006
+					 WHERE n06_flag_ident = 'VE')
 CALL fl_lee_rubro_liq_trabajador(vg_codcia, rm_par.n32_cod_liqrol,
 				rm_par.n32_fecha_ini, rm_par.n32_fecha_fin,
 				cod_trab, rubro)
@@ -1009,6 +1155,82 @@ END FUNCTION
 
 
 
+FUNCTION ajuste_sueldo_maternidad(cod_trab, cod_rubro, flag_ident)
+DEFINE cod_trab		LIKE rolt030.n30_cod_trab
+DEFINE cod_rubro	LIKE rolt033.n33_cod_rubro
+DEFINE flag_ident	LIKE rolt006.n06_flag_ident
+DEFINE rubro		LIKE rolt033.n33_cod_rubro
+DEFINE r_n13		RECORD LIKE rolt013.*
+DEFINE r_n30		RECORD LIKE rolt030.*
+DEFINE r_n33		RECORD LIKE rolt033.*
+DEFINE valor_mat	LIKE rolt033.n33_valor
+DEFINE valor_aux	LIKE rolt033.n33_valor
+DEFINE flag		SMALLINT
+
+LET valor_mat = 0
+LET rubro     = NULL
+SELECT n08_cod_rubro INTO rubro
+	FROM rolt006, rolt008
+	WHERE n06_flag_ident  = 'DM'
+	  AND n08_rubro_base  = n06_cod_rubro
+	  AND n08_cod_rubro  IN (SELECT n06_cod_rubro
+					 FROM rolt006
+					 WHERE n06_flag_ident = 'VM')
+CALL fl_lee_rubro_liq_trabajador(vg_codcia, rm_par.n32_cod_liqrol,
+				rm_par.n32_fecha_ini, rm_par.n32_fecha_fin,
+				cod_trab, rubro)
+	RETURNING r_n33.*
+IF r_n33.n33_horas_porc IS NULL THEN
+	RETURN valor_mat
+END IF
+IF r_n33.n33_horas_porc = 0 THEN
+	RETURN valor_mat
+END IF
+LET rubro = NULL
+SELECT n08_rubro_base INTO rubro FROM rolt008 WHERE n08_cod_rubro = cod_rubro
+IF rubro IS NULL THEN
+	RETURN valor_mat
+END IF
+CALL fl_lee_rubro_liq_trabajador(vg_codcia, rm_par.n32_cod_liqrol,
+				rm_par.n32_fecha_ini, rm_par.n32_fecha_fin,
+				cod_trab, rubro)
+	RETURNING r_n33.*
+CALL fl_lee_trabajador_roles(vg_codcia, cod_trab) RETURNING r_n30.*
+INITIALIZE rubro TO NULL
+SELECT n06_cod_rubro INTO rubro FROM rolt006 WHERE n06_flag_ident = 'AP'
+IF flag_ident = 'SY' THEN
+	CALL retorna_suma_valor_rubros_base(rubro, vg_codcia,
+				rm_par.n32_cod_liqrol, rm_par.n32_fecha_ini,
+				rm_par.n32_fecha_fin, cod_trab, 2)
+		RETURNING r_n33.n33_valor, flag
+	IF r_n33.n33_valor < retorna_sueldo_quincena(r_n30.n30_sueldo_mes) THEN
+		LET valor_mat = retorna_sueldo_quincena(r_n30.n30_sueldo_mes)
+				- r_n33.n33_valor
+	END IF
+ELSE
+	LET valor_aux = r_n33.n33_valor
+	IF valor_aux > 0 THEN
+		CALL fl_lee_seguros(r_n30.n30_cod_seguro) RETURNING r_n13.*
+		CALL fl_lee_rubro_liq_trabajador(vg_codcia,
+				rm_par.n32_cod_liqrol, rm_par.n32_fecha_ini,
+				rm_par.n32_fecha_fin, cod_trab, rubro)
+			RETURNING r_n33.*
+		LET valor_mat = valor_aux - 
+				(valor_aux * r_n13.n13_porc_trab / 100)
+		IF (valor_aux - (r_n33.n33_valor + valor_mat)) >= -0.03 AND
+		   (valor_aux - (r_n33.n33_valor + valor_mat)) <= 0.03
+		THEN
+			LET valor_mat = valor_mat + (valor_aux -
+					(r_n33.n33_valor + valor_mat))
+		END IF
+	END IF
+END IF
+RETURN valor_mat
+
+END FUNCTION
+
+
+
 FUNCTION retorna_sueldo_quincena(sueldo_mes)
 DEFINE sueldo_mes	LIKE rolt030.n30_sueldo_mes
 DEFINE resi_sue		DECIMAL(14,4)
@@ -1032,13 +1254,12 @@ END FUNCTION
 
 
 FUNCTION calcula_valor_vacaciones(codcia, cod_liqrol, fecha_ini, fecha_fin,
-					cod_trab, cod_rubro, flag_ident)
+					cod_trab, flag_ident)
 DEFINE codcia		LIKE rolt032.n32_compania
 DEFINE cod_liqrol	LIKE rolt032.n32_cod_liqrol
 DEFINE fecha_ini	LIKE rolt032.n32_fecha_ini
 DEFINE fecha_fin	LIKE rolt032.n32_fecha_fin
 DEFINE cod_trab		LIKE rolt030.n30_cod_trab
-DEFINE cod_rubro	LIKE rolt006.n06_cod_rubro
 DEFINE flag_ident	LIKE rolt006.n06_flag_ident
 DEFINE r_n13		RECORD LIKE rolt013.*
 DEFINE r_n30		RECORD LIKE rolt030.*
@@ -1172,9 +1393,8 @@ END FUNCTION
 
 
 
-FUNCTION calcula_valor_dias_descartados(cod_rubro, codcia, cod_liqrol,fecha_ini,
+FUNCTION calcula_valor_dias_descartados(codcia, cod_liqrol,fecha_ini,
 					fecha_fin, cod_trab, sueldo_mes)
-DEFINE cod_rubro	LIKE rolt006.n06_cod_rubro
 DEFINE codcia		LIKE rolt032.n32_compania
 DEFINE cod_liqrol	LIKE rolt032.n32_cod_liqrol
 DEFINE fecha_ini	LIKE rolt032.n32_fecha_ini

@@ -308,7 +308,9 @@ ON EVERY ROW
 	CALL fl_lee_moneda(r_rol.n30_mon_sueldo) RETURNING r_g13.*
 	CALL fl_lee_cargo(vg_codcia, r_rol.n30_cod_cargo) RETURNING r_g35.*
 	CALL fl_lee_seguros(r_rol.n30_cod_seguro) RETURNING r_n13.*
-	CALL fl_lee_cod_sectorial(r_rol.n30_sectorial) RETURNING r_n17.*
+	CALL fl_lee_cod_sectorial(vg_codcia, r_rol.n30_ano_sect,
+				r_rol.n30_sectorial)
+		RETURNING r_n17.*
 	LET sueldo = r_rol.n30_sueldo_mes
 	IF r_rol.n30_estado = 'J' THEN
 		LET sueldo = r_rol.n30_val_jub_pat

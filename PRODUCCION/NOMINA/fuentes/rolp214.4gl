@@ -25,6 +25,7 @@ DEFINE rm_detalle	ARRAY[300] OF RECORD
 				n46_saldo	LIKE rolt046.n46_saldo
 			END RECORD
 DEFINE rm_b00		RECORD LIKE ctbt000.*
+DEFINE rm_g02		RECORD LIKE gent002.*
 DEFINE rm_n00		RECORD LIKE rolt000.*
 DEFINE rm_n45		RECORD LIKE rolt045.*
 DEFINE rm_n32		RECORD LIKE rolt032.*
@@ -70,6 +71,7 @@ DEFINE rm_dettotpre	ARRAY[20] OF RECORD
 			END RECORD
 DEFINE vm_nivel		LIKE ctbt001.b01_nivel
 DEFINE vm_proceso	LIKE rolt003.n03_proceso
+DEFINE vm_aux_con_red	LIKE ctbt010.b10_cuenta
 DEFINE vm_max_prest	SMALLINT
 DEFINE vm_num_prest	SMALLINT
 DEFINE vm_cur_prest	SMALLINT
@@ -138,6 +140,11 @@ IF vm_nivel IS NULL THEN
 	CALL fl_mostrar_mensaje('No existe ningun nivel de cuenta configurado en la compañía.','stop')
 	EXIT PROGRAM
 END IF
+CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rm_g02.*
+IF rm_g02.g02_compania IS NULL THEN
+	CALL fl_mostrar_mensaje('No existe localidad.','stop')
+	EXIT PROGRAM
+END IF
 CALL fl_lee_conf_adic_rol(vg_codcia) RETURNING rm_n90.*
 IF rm_n90.n90_compania IS NULL THEN
 	CALL fl_mostrar_mensaje('No existe configuracion adicional de nomina en la tabla rolt090.', 'stop')
@@ -189,6 +196,7 @@ MENU 'OPCIONES'
 		HIDE OPTION 'Capacidad Pago'
 		HIDE OPTION 'Resumen'
 		HIDE OPTION 'Imprimir'
+		HIDE OPTION 'Archivo Banco'
 		HIDE OPTION 'Detalle'
 		HIDE OPTION 'Anticipo Anterior'
 		IF num_args() <> 3 THEN
@@ -210,6 +218,16 @@ MENU 'OPCIONES'
 			SHOW OPTION 'Capacidad Pago'
 			SHOW OPTION 'Resumen'
 			SHOW OPTION 'Imprimir'
+			IF rm_n45.n45_cta_trabaj IS NOT NULL THEN
+				IF  rm_n45.n45_tipo_pago = 'T' AND
+				   (rm_n45.n45_estado = 'A' OR
+				    rm_n45.n45_estado = 'R')
+				THEN
+					SHOW OPTION 'Archivo Banco'
+				ELSE
+					HIDE OPTION 'Archivo Banco'
+				END IF
+			END IF
 			SHOW OPTION 'Detalle'
 			IF rm_n45.n45_prest_tran IS NOT NULL THEN
 				SHOW OPTION 'Anticipo Anterior'
@@ -244,6 +262,16 @@ MENU 'OPCIONES'
 			END IF
 			SHOW OPTION 'Resumen'
 			SHOW OPTION 'Imprimir'
+			IF rm_n45.n45_cta_trabaj IS NOT NULL THEN
+				IF  rm_n45.n45_tipo_pago = 'T' AND
+				   (rm_n45.n45_estado = 'A' OR
+				    rm_n45.n45_estado = 'R')
+				THEN
+					SHOW OPTION 'Archivo Banco'
+				ELSE
+					HIDE OPTION 'Archivo Banco'
+				END IF
+			END IF
 			SHOW OPTION 'Detalle'
 			IF rm_n45.n45_prest_tran IS NOT NULL THEN
 				SHOW OPTION 'Anticipo Anterior'
@@ -260,6 +288,7 @@ MENU 'OPCIONES'
 				HIDE OPTION 'Capacidad Pago'
 				HIDE OPTION 'Resumen'
 				HIDE OPTION 'Imprimir'
+				HIDE OPTION 'Archivo Banco'
 				HIDE OPTION 'Detalle'
 				HIDE OPTION 'Anticipo Anterior'
 			END IF
@@ -277,6 +306,16 @@ MENU 'OPCIONES'
 			END IF
 			SHOW OPTION 'Resumen'
 			SHOW OPTION 'Imprimir'
+			IF rm_n45.n45_cta_trabaj IS NOT NULL THEN
+				IF  rm_n45.n45_tipo_pago = 'T' AND
+				   (rm_n45.n45_estado = 'A' OR
+				    rm_n45.n45_estado = 'R')
+				THEN
+					SHOW OPTION 'Archivo Banco'
+				ELSE
+					HIDE OPTION 'Archivo Banco'
+				END IF
+			END IF
 			SHOW OPTION 'Detalle'
 			IF rm_n45.n45_prest_tran IS NOT NULL THEN
 				SHOW OPTION 'Anticipo Anterior'
@@ -298,6 +337,8 @@ MENU 'OPCIONES'
 		CALL control_resumen(2)
         COMMAND KEY('K') 'Imprimir'   'Imprime el anticipo actual.'
 		CALL control_imprimir()
+        COMMAND KEY('L') 'Archivo Banco'   'Genera el archivo para las transf.'
+		CALL generar_archivo()
         COMMAND KEY('D') 'Detalle'   'Se ubica en el detalle.'
 		IF vm_num_rows > 0 THEN
 			CALL ubicarse_detalle()
@@ -321,6 +362,16 @@ MENU 'OPCIONES'
 		ELSE
 			HIDE OPTION 'Capacidad Pago'
 		END IF
+		IF rm_n45.n45_cta_trabaj IS NOT NULL THEN
+			IF  rm_n45.n45_tipo_pago = 'T' AND
+			   (rm_n45.n45_estado = 'A' OR
+			    rm_n45.n45_estado = 'R')
+			THEN
+				SHOW OPTION 'Archivo Banco'
+			ELSE
+				HIDE OPTION 'Archivo Banco'
+			END IF
+		END IF
 		IF rm_n45.n45_prest_tran IS NOT NULL THEN
 			SHOW OPTION 'Anticipo Anterior'
 		ELSE
@@ -340,6 +391,16 @@ MENU 'OPCIONES'
 			SHOW OPTION 'Capacidad Pago'
 		ELSE
 			HIDE OPTION 'Capacidad Pago'
+		END IF
+		IF rm_n45.n45_cta_trabaj IS NOT NULL THEN
+			IF  rm_n45.n45_tipo_pago = 'T' AND
+			   (rm_n45.n45_estado = 'A' OR
+			    rm_n45.n45_estado = 'R')
+			THEN
+				SHOW OPTION 'Archivo Banco'
+			ELSE
+				HIDE OPTION 'Archivo Banco'
+			END IF
 		END IF
 		IF rm_n45.n45_prest_tran IS NOT NULL THEN
 			SHOW OPTION 'Anticipo Anterior'
@@ -414,7 +475,7 @@ END IF
 LET vm_row_current            = vm_num_rows
 LET vm_r_rows[vm_row_current] = num_aux
 CALL muestrar_reg()
-IF rm_n45.n45_sal_prest_ant > 0 OR rm_n45.n45_tipo_pago = 'E' THEN
+IF rm_n45.n45_sal_prest_ant > 0 OR rm_n45.n45_tipo_pago <> 'C' THEN
 --IF rm_n45.n45_sal_prest_ant > 0 THEN
 	CALL control_contabilizacion()
 END IF
@@ -1344,8 +1405,8 @@ INPUT BY NAME rm_n45.n45_cod_rubro, rm_n45.n45_cod_trab, rm_n45.n45_val_prest,
 					MONTH TO DAY)
 				THEN
 					CALL fl_mostrar_mensaje('No puede Redistribuír el saldo anterior, ya que el proceso ' || r_n05.n05_proceso || ' ' || r_n03.n03_nombre CLIPPED || ' esta abierto y no esta contabilizado, ademas la fecha de hoy es posterior a la fecha de cierre.', 'exclamation')
-					LET int_flag = 1
-					RETURN
+					--LET int_flag = 1
+					--RETURN
 				END IF
 			END IF
 		ELSE
@@ -2638,8 +2699,9 @@ DISPLAY BY NAME rm_n45.n45_cod_rubro, r_n06.n06_nombre, rm_n45.n45_fecha,
 		rm_n45.n45_mes_gracia, rm_n45.n45_porc_int, rm_n45.n45_valor_int
 CALL muestra_estado()
 CALL limpiar_detalle()
-LET vm_num_dettot = 0
-LET vm_num_det    = 0
+LET vm_num_dettot  = 0
+LET vm_num_det     = 0
+LET vm_aux_con_red = NULL
 CALL calcular_interes()
 
 END FUNCTION
@@ -2974,6 +3036,8 @@ CASE flag
 			END IF
 		END IF
 		CALL retorna_fecha_proc(cod_liqrol, anio, mes)
+			RETURNING fecha_ini, fecha_fin
+		CALL retorna_fecha_proc_anual_gracia(fecha_ini, fecha_fin)
 			RETURNING fecha_ini, fecha_fin
 		LET val_prest  = rm_dettotpre[posi].n58_valor_dist
 		LET num_div    = rm_dettotpre[posi].n58_num_div
@@ -3540,10 +3604,19 @@ DISPLAY ARRAY rm_detalle TO rm_detalle.*
 		END IF
 		CALL ver_anticipo(2)
 		LET int_flag = 0
+	ON KEY(CONTROL-V)
+		IF rm_n45.n45_cta_trabaj IS NOT NULL THEN
+			IF  rm_n45.n45_tipo_pago = 'T' AND
+			   (rm_n45.n45_estado = 'A' OR rm_n45.n45_estado = 'R')
+			THEN
+				CALL generar_archivo()
+			END IF
+		END IF
+		LET int_flag = 0
 	--#BEFORE DISPLAY 
 		--#CALL dialog.keysetlabel('ACCEPT', '')   
 		--#CALL dialog.keysetlabel("F1","") 
-		--#CALL dialog.keysetlabel("CONTROL-W","") 
+		--#CALL dialog.keysetlabel("CONTROL-V","") 
 		--#IF rm_n45.n45_estado = 'E' OR rm_n45.n45_estado = 'T' THEN
 			--#CALL dialog.keysetlabel("F6","") 
 		--#ELSE
@@ -3562,6 +3635,13 @@ DISPLAY ARRAY rm_detalle TO rm_detalle.*
 			--#CALL dialog.keysetlabel("F11","") 
 		--#ELSE
 			--#CALL dialog.keysetlabel("F11","Anticipo Anterior") 
+		--#END IF
+		--#IF rm_n45.n45_cta_trabaj IS NOT NULL THEN
+			--#IF  rm_n45.n45_tipo_pago = 'T' AND
+			--# (rm_n45.n45_estado = 'A' OR rm_n45.n45_estado = 'R')
+			--#THEN
+				--#CALL dialog.keysetlabel("CONTROL-V","Archivo Banco") 
+			--#END IF
 		--#END IF
 	--#BEFORE ROW 
 		--#LET i = arr_curr()	
@@ -3624,6 +3704,11 @@ FUNCTION retorna_ano_mes(ano, mes)
 DEFINE ano		LIKE rolt032.n32_ano_proceso
 DEFINE mes		LIKE rolt032.n32_mes_proceso
 
+{--
+IF EXTEND(MDY(mes, 01, ano), YEAR TO MONTH) = EXTEND(TODAY, YEAR TO MONTH) THEN
+	RETURN ano, mes
+END IF
+--}
 LET mes = mes + 1
 IF mes > 12 THEN
 	LET mes = 1
@@ -3648,6 +3733,27 @@ IF mes > 12 THEN
 	LET ano = ano + 1
 END IF
 RETURN ano, mes
+
+END FUNCTION 
+
+
+
+FUNCTION retorna_fecha_proc_anual_gracia(fecha_ini, fecha_fin)
+DEFINE fecha_ini	DATE
+DEFINE fecha_fin	DATE
+DEFINE fecha		DATE
+DEFINE anio, mes	SMALLINT
+
+IF rm_n45.n45_mes_gracia = 0 THEN
+	RETURN fecha_ini, fecha_fin
+END IF
+CALL retorna_ano_mes_gracia(YEAR(TODAY), MONTH(TODAY)) RETURNING anio, mes
+LET fecha = MDY(mes, 01, anio)
+IF EXTEND(fecha, YEAR TO MONTH) > EXTEND(fecha_fin, YEAR TO MONTH) THEN
+	LET fecha_ini = fecha_fin + 1 UNITS DAY
+	LET fecha_fin = fecha_fin + 1 UNITS YEAR
+END IF
+RETURN fecha_ini, fecha_fin
 
 END FUNCTION 
 
@@ -3841,6 +3947,8 @@ IF cod_liqrol <> 'VA' AND cod_liqrol <> 'VP' THEN
 						r_n03.n03_dia_ini, YEAR(fecha))
 			LET fecha_fin = fecha_ini + 1 UNITS YEAR - 1 UNITS DAY
 		END IF
+		CALL retorna_fecha_proc_anual_gracia(fecha_ini, fecha_fin)
+			RETURNING fecha_ini, fecha_fin
 	END IF
 	IF anio <= YEAR(TODAY) AND cod_liqrol = 'UT' THEN
 		LET anio = NULL
@@ -4120,6 +4228,7 @@ DEFINE r_n45		RECORD LIKE rolt045.*
 DEFINE r_n56		RECORD LIKE rolt056.*
 DEFINE r_n59		RECORD LIKE rolt059.*
 DEFINE tipo_pago	LIKE rolt045.n45_tipo_pago
+DEFINE cta_trabaj	LIKE rolt045.n45_cta_trabaj
 
 LET lin_men  = 0
 LET num_rows = 10
@@ -4183,7 +4292,7 @@ ELSE
 		LET rm_n45.n45_tipo_pago   = 'R'
 		LET rm_n45.n45_bco_empresa = r_n45.n45_bco_empresa
 		LET rm_n45.n45_cta_empresa = r_n45.n45_cta_empresa
-		IF rm_n45.n45_cta_trabaj IS NULL THEN
+		--IF rm_n45.n45_cta_trabaj IS NULL THEN
 			CALL fl_lee_rubro_roles(rm_n45.n45_cod_rubro)
 				RETURNING r_n06.*
 			INITIALIZE r_n56.* TO NULL
@@ -4195,9 +4304,9 @@ ELSE
 				  AND n56_cod_trab  = rm_n45.n45_cod_trab
 				  AND n56_estado    = "A"
 			IF r_n56.n56_compania IS NOT NULL THEN
-				LET rm_n45.n45_cta_trabaj =r_n56.n56_aux_val_vac
+				LET vm_aux_con_red = r_n56.n56_aux_val_vac
 			END IF
-		END IF
+		--END IF
 		CALL fl_lee_banco_general(rm_n45.n45_bco_empresa)
 			RETURNING r_g08.*
 		DISPLAY BY NAME r_g08.g08_nombre
@@ -4237,11 +4346,21 @@ INPUT BY NAME rm_n45.n45_tipo_pago, rm_n45.n45_bco_empresa,
                         IF r_g08.g08_banco IS NOT NULL THEN
 				LET rm_n45.n45_bco_empresa = r_g08.g08_banco
 				LET rm_n45.n45_cta_empresa =r_g09.g09_numero_cta
+				CALL fl_lee_trabajador_roles(
+							rm_n45.n45_compania,
+							rm_n45.n45_cod_trab)
+					RETURNING r_n30.*
+				IF rm_n45.n45_tipo_pago = 'T' THEN
+					LET rm_n45.n45_cta_trabaj =
+							r_n30.n30_cta_trabaj
+				END IF
                                 DISPLAY BY NAME rm_n45.n45_bco_empresa,
 						r_g08.g08_nombre,
-						rm_n45.n45_cta_empresa
+						rm_n45.n45_cta_empresa,
+						rm_n45.n45_cta_trabaj
                         END IF
                 END IF
+		{--
 		IF INFIELD(n45_cta_trabaj) THEN
 			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
@@ -4250,7 +4369,33 @@ INPUT BY NAME rm_n45.n45_tipo_pago, rm_n45.n45_bco_empresa,
 				DISPLAY BY NAME rm_n45.n45_cta_trabaj
 			END IF
 		END IF
+		--}
 		LET int_flag = 0
+	BEFORE FIELD n45_cta_trabaj
+		LET cta_trabaj = rm_n45.n45_cta_trabaj
+	AFTER FIELD n45_tipo_pago
+		CALL fl_lee_trabajador_roles(rm_n45.n45_compania,
+						rm_n45.n45_cod_trab)
+			RETURNING r_n30.*
+		CASE rm_n45.n45_tipo_pago
+			WHEN 'E'
+				LET rm_n45.n45_bco_empresa = NULL
+				LET rm_n45.n45_cta_empresa = NULL
+				LET rm_n45.n45_cta_trabaj  = NULL
+			WHEN 'C'
+				LET rm_n45.n45_bco_empresa=r_n30.n30_bco_empresa
+				LET rm_n45.n45_cta_empresa=r_n30.n30_cta_empresa
+				LET rm_n45.n45_cta_trabaj = NULL
+			WHEN 'T'
+				LET rm_n45.n45_bco_empresa=r_n30.n30_bco_empresa
+				LET rm_n45.n45_cta_empresa=r_n30.n30_cta_empresa
+				LET rm_n45.n45_cta_trabaj = r_n30.n30_cta_trabaj
+		END CASE
+		CALL fl_lee_banco_general(rm_n45.n45_bco_empresa)
+			RETURNING r_g08.*
+		DISPLAY BY NAME rm_n45.n45_tipo_pago, rm_n45.n45_bco_empresa,
+				r_g08.g08_nombre, rm_n45.n45_cta_empresa,
+				rm_n45.n45_cta_trabaj
 	AFTER FIELD n45_bco_empresa
                 IF rm_n45.n45_bco_empresa IS NOT NULL THEN
                         CALL fl_lee_banco_general(rm_n45.n45_bco_empresa)
@@ -4297,15 +4442,24 @@ INPUT BY NAME rm_n45.n45_tipo_pago, rm_n45.n45_bco_empresa,
 			CLEAR n45_cta_empresa
 		END IF
 	AFTER FIELD n45_cta_trabaj
+		IF rm_n45.n45_cta_trabaj IS NULL THEN
+			LET rm_n45.n45_cta_trabaj = cta_trabaj
+		END IF
+		IF rm_n45.n45_cta_trabaj <> cta_trabaj THEN
+			LET rm_n45.n45_cta_trabaj = cta_trabaj
+		END IF
+		DISPLAY BY NAME rm_n45.n45_cta_trabaj
 		IF rm_n45.n45_tipo_pago <> 'T' THEN
 			LET rm_n45.n45_cta_trabaj = NULL
 			DISPLAY BY NAME rm_n45.n45_cta_trabaj
 			CONTINUE INPUT
 		END IF
 		IF rm_n45.n45_cta_trabaj IS NOT NULL THEN
+			{--
 			IF NOT validar_cuenta(rm_n45.n45_cta_trabaj) THEN
 				NEXT FIELD n45_cta_trabaj
 			END IF
+			--}
 		ELSE
 			CLEAR n45_cta_trabaj
 		END IF
@@ -4333,16 +4487,18 @@ INPUT BY NAME rm_n45.n45_tipo_pago, rm_n45.n45_bco_empresa,
 		END IF
 		IF rm_n45.n45_cta_trabaj IS NULL THEN
 			IF rm_n45.n45_tipo_pago = 'T' THEN
-				CALL fl_mostrar_mensaje('Empleado con tipo de Pago Transferencia, debe ingresar el Número de Cuenta Contable.', 'exclamation')
+				CALL fl_mostrar_mensaje('Empleado con tipo de Pago Transferencia, debe ingresar el No. de Cuenta de su Banco.', 'exclamation')
 				NEXT FIELD n45_cta_trabaj
 			END IF
 		END IF
 		IF rm_n45.n45_tipo_pago = 'T' THEN
 			IF rm_n45.n45_cta_trabaj IS NOT NULL THEN
+				{--
 				IF NOT validar_cuenta(rm_n45.n45_cta_trabaj)
 				THEN
 					NEXT FIELD n45_cta_trabaj
 				END IF
+				--}
 			END IF
 		END IF
 END INPUT
@@ -4442,7 +4598,7 @@ BEGIN WORK
 	UPDATE rolt045
 		SET n45_tipo_pago   = tipo_pago,
 		    n45_bco_empresa = rm_n45.n45_bco_empresa,
-		    n45_bco_empresa = rm_n45.n45_bco_empresa,
+		    n45_cta_empresa = rm_n45.n45_cta_empresa,
 		    n45_cta_trabaj  = rm_n45.n45_cta_trabaj
 		WHERE CURRENT OF q_cont
 	IF STATUS < 0 THEN
@@ -4471,6 +4627,13 @@ END IF
 CALL fl_lee_cab_prestamo_roles(vg_codcia, rm_n45.n45_num_prest)
 	RETURNING rm_n45.*
 CALL fl_mostrar_mensaje('Contabilización del Anticipo Generada Ok.', 'info')
+IF rm_n45.n45_cta_trabaj IS NOT NULL THEN
+	IF  rm_n45.n45_tipo_pago = 'T' AND
+	   (rm_n45.n45_estado = 'A' OR rm_n45.n45_estado = 'R')
+	THEN
+		CALL generar_archivo()
+	END IF
+END IF
 
 END FUNCTION
 
@@ -4593,12 +4756,13 @@ THEN
 	--
 END IF
 LET sec = 1
-IF rm_n45.n45_tipo_pago = 'T' OR rm_n45.n45_tipo_pago = 'R' THEN
-	CALL generar_detalle_contable(r_b12.*, rm_n45.n45_cta_trabaj, val_prest,
+--IF rm_n45.n45_tipo_pago = 'T' OR rm_n45.n45_tipo_pago = 'R' THEN
+IF rm_n45.n45_val_prest = 0 THEN
+	LET r_n56.n56_aux_banco = vm_aux_con_red
+END IF
+IF rm_n45.n45_tipo_pago = 'R' THEN
+	CALL generar_detalle_contable(r_b12.*, vm_aux_con_red, val_prest,
 					'D', sec, 0, 'S')
-	IF rm_n45.n45_val_prest = 0 THEN
-		LET r_n56.n56_aux_banco = rm_n45.n45_cta_trabaj
-	END IF
 ELSE
 	CALL generar_detalle_contable(r_b12.*, r_n56.n56_aux_val_vac, val_prest,
 					'D', sec, 0, 'S')
@@ -4829,7 +4993,6 @@ END FUNCTION
 
 REPORT reporte_anticipos(i)
 DEFINE i, j		SMALLINT
-DEFINE r_g02		RECORD LIKE gent002.*
 DEFINE r_g13		RECORD LIKE gent013.*
 DEFINE r_g50		RECORD LIKE gent050.*
 DEFINE r_n03		RECORD LIKE rolt003.*
@@ -5039,3 +5202,159 @@ END CASE
 RETURN nom_estado
 
 END FUNCTION
+
+
+
+FUNCTION generar_archivo()
+DEFINE query 		CHAR(6000)
+DEFINE archivo		VARCHAR(100)
+DEFINE comando		VARCHAR(100)
+DEFINE mensaje		VARCHAR(200)
+DEFINE nom_mes		VARCHAR(10)
+DEFINE r_g31		RECORD LIKE gent031.*
+DEFINE r_n59		RECORD LIKE rolt059.*
+
+INITIALIZE r_n59.* TO NULL
+SELECT * INTO r_n59.*
+	FROM rolt059
+	WHERE n59_compania  = rm_n45.n45_compania
+	  AND n59_num_prest = rm_n45.n45_num_prest
+IF r_n59.n59_compania IS NULL THEN
+	CALL fl_mostrar_mensaje('No puede generar archivo de pago al banco de un anticipo no contabilizado.', 'exclamation')
+	RETURN
+END IF
+LET nom_mes = UPSHIFT(fl_justifica_titulo('I',
+			fl_retorna_nombre_mes(MONTH(rm_n45.n45_fecha)), 11))
+LET archivo = "ANT_", rm_n45.n45_num_prest USING "<<<<<&", "_",
+		DAY(rm_n45.n45_fecha) USING "&&", "-", nom_mes[1, 3] CLIPPED,
+		YEAR(rm_n45.n45_fecha) USING "####", "_"
+CALL fl_lee_ciudad(rm_g02.g02_ciudad) RETURNING r_g31.*
+LET archivo = archivo CLIPPED, r_g31.g31_siglas CLIPPED, ".txt"
+LET comando = "ls -1 $HOME/tmp/", archivo CLIPPED, " > ../../../tmp/arch_anti"
+RUN comando
+CREATE TEMP TABLE t1 (nom_arch VARCHAR(100))
+LOAD FROM "../../../tmp/arch_anti" INSERT INTO t1
+DECLARE q_t1 CURSOR FOR SELECT * FROM t1
+OPEN q_t1
+FETCH q_t1 INTO comando
+CLOSE q_t1
+FREE q_t1
+DROP TABLE t1
+LET comando = comando[18, 100] CLIPPED
+IF archivo = comando THEN
+	LET comando = "rm -rf ../../../tmp/arch_anti"
+	RUN comando
+	CALL fl_mostrar_mensaje('A este anticipo, ya se le generó el archivo de pago al banco.', 'exclamation')
+	RETURN
+END IF
+LET comando = "rm -rf ../../../tmp/arch_anti"
+RUN comando
+CREATE TEMP TABLE tmp_rol_ban
+	(
+		tipo_pago		CHAR(2),
+		cuenta_empresa		CHAR(11),
+		secuencia		SERIAL,
+		comp_pago		CHAR(5),
+		cod_trab		CHAR(6),
+		moneda			CHAR(3),
+		valor			VARCHAR(13),
+		forma_pago		CHAR(3),
+		codi_banco		CHAR(4),
+		tipo_cuenta		CHAR(3),
+		cuenta_empleado		CHAR(11),
+		tipo_doc_id		CHAR(1),
+		num_doc_id		VARCHAR(13),
+		empleado		VARCHAR(40),
+		direccion		VARCHAR(40),
+		ciudad			VARCHAR(20),
+		telefono		VARCHAR(10),
+		local_cobro		VARCHAR(10),
+		referencia		VARCHAR(30),
+		referencia_adic		VARCHAR(30)
+	)
+
+LET query = 'SELECT "PA" AS tip_pag, g09_numero_cta AS cuenta_empr,',
+			' 0 AS secu, "" AS comp_p, n45_cod_trab AS cod_emp,',
+			' g13_simbolo AS mone, TRUNC(n45_val_prest * 100,0) AS',
+			' neto_rec, "CTA" AS for_pag, "0036" AS cod_ban,',
+			' CASE WHEN n30_tipo_cta_tra = "A"',
+				' THEN "AHO"',
+				' ELSE "CTE"',
+			' END AS tipo_c, n45_cta_trabaj AS cuenta_empl,',
+			' n30_tipo_doc_id AS tipo_id,',
+			' CASE WHEN n45_cod_trab = 24 AND ', vg_codloc, ' = 1 ',
+				' THEN "0920503067"',
+				' ELSE n30_num_doc_id',
+			' END AS cedula,',
+			' CASE WHEN n45_cod_trab = 24 AND ', vg_codloc, ' = 1 ',
+				' THEN "CHILA RUA EMILIANO FRANCISCO"',
+				' ELSE n30_nombres',
+			' END AS empleados, n30_domicilio AS direc,',
+			' g31_nombre AS ciudad_emp, n30_telef_domic AS fono,',
+			' "" AS loc_cob, n03_nombre AS refer1,',
+			' CASE',
+				' WHEN MONTH(n45_fecha) = 01 THEN "ENERO"',
+				' WHEN MONTH(n45_fecha) = 02 THEN "FEBRERO"',
+				' WHEN MONTH(n45_fecha) = 03 THEN "MARZO"',
+				' WHEN MONTH(n45_fecha) = 04 THEN "ABRIL"',
+				' WHEN MONTH(n45_fecha) = 05 THEN "MAYO"',
+				' WHEN MONTH(n45_fecha) = 06 THEN "JUNIO"',
+				' WHEN MONTH(n45_fecha) = 07 THEN "JULIO"',
+				' WHEN MONTH(n45_fecha) = 08 THEN "AGOSTO"',
+				' WHEN MONTH(n45_fecha) = 09 THEN "SEPTIEMBRE"',
+				' WHEN MONTH(n45_fecha) = 10 THEN "OCTUBRE"',
+				' WHEN MONTH(n45_fecha) = 11 THEN "NOVIEMBRE"',
+				' WHEN MONTH(n45_fecha) = 12 THEN "DICIEMBRE"',
+			' END || "-" || LPAD(YEAR(n45_fecha), 4, 0) AS refer2',
+		' FROM rolt045, rolt030, gent009, gent013, gent031,',
+			' rolt003 ',
+		' WHERE n45_compania   = ', vg_codcia,
+		'   AND n45_num_prest  = ', rm_n45.n45_num_prest,
+		'   AND n45_estado    IN ("A", "R")',
+		'   AND n45_val_prest  > 0 ',
+  		'   AND n30_compania   = n45_compania ',
+		'   AND n30_cod_trab   = n45_cod_trab ',
+		'   AND g09_compania   = n45_compania ',
+		'   AND g09_banco      = n45_bco_empresa ',
+		'   AND g09_numero_cta = n45_cta_empresa ',
+		'   AND n03_proceso    = "', vm_proceso, '"',
+		'   AND g13_moneda     = n45_moneda ',
+		'   AND g31_ciudad     = n30_ciudad_nac ',
+		' ORDER BY 14 ',
+		' INTO TEMP t1 '
+PREPARE exec_dat FROM query
+EXECUTE exec_dat
+LET query = 'INSERT INTO tmp_rol_ban ',
+		'(tipo_pago, cuenta_empresa, secuencia, comp_pago, cod_trab,',
+		' moneda, valor, forma_pago, codi_banco, tipo_cuenta,',
+		' cuenta_empleado, tipo_doc_id, num_doc_id, empleado,',
+		' direccion, ciudad, telefono, local_cobro, referencia,',
+		' referencia_adic) ',
+		' SELECT * FROM t1 '
+PREPARE exec_tmp FROM query
+EXECUTE exec_tmp
+DROP TABLE t1
+LET query = 'SELECT tipo_pago, cuenta_empresa, secuencia, comp_pago, cod_trab,',
+		' "USD" moneda, LPAD(valor, 13, 0) valor, forma_pago,',
+		' codi_banco, tipo_cuenta,',
+		' LPAD(cuenta_empleado, 11, 0) cta_emp, tipo_doc_id,',
+		' LPAD(num_doc_id, 13, 0) num_doc_id,',
+		' REPLACE(empleado, "ñ", "N") empleado,',
+		' "" direccion, "" ciudad, "" telefono, "" local_cobro,',
+		' "ROL DE PAGO" referencia, referencia_adic',
+		' FROM tmp_rol_ban ',
+		' INTO TEMP t1 '
+PREPARE exec_t1 FROM query
+EXECUTE exec_t1
+DROP TABLE tmp_rol_ban
+UNLOAD TO "../../../tmp/ant_emp.txt" DELIMITER "	"
+	SELECT * FROM t1
+		ORDER BY secuencia
+LET mensaje = 'Archivo ', archivo CLIPPED, ' Generado ', FGL_GETENV("HOME"),
+		'/tmp/  OK'
+LET archivo = "mv ../../../tmp/ant_emp.txt $HOME/tmp/", archivo CLIPPED
+RUN archivo
+DROP TABLE t1
+CALL fl_mostrar_mensaje(mensaje, 'info')
+
+END FUNCTION 

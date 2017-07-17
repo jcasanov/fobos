@@ -15,6 +15,7 @@ DEFINE rm_n00		RECORD LIKE rolt000.*
 DEFINE rm_n03		RECORD LIKE rolt003.*
 DEFINE rm_n90		RECORD LIKE rolt090.*
 DEFINE rm_n91   	RECORD LIKE rolt091.*
+DEFINE vm_nivel		LIKE ctbt001.b01_nivel
 DEFINE vm_proceso	LIKE rolt003.n03_proceso
 DEFINE rm_detalle	ARRAY[200] OF RECORD
 				n92_num_prest	LIKE rolt092.n92_num_prest,
@@ -86,6 +87,11 @@ END IF
 CALL fl_lee_compania_contabilidad(vg_codcia) RETURNING rm_b00.*
 IF rm_b00.b00_compania IS NULL THEN
 	CALL fl_mostrar_mensaje('No existe ninguna compañía configurada en CONTABILIDAD.', 'stop')
+	EXIT PROGRAM
+END IF
+SELECT MAX(b01_nivel) INTO vm_nivel FROM ctbt001
+IF vm_nivel IS NULL THEN
+	CALL fl_mostrar_mensaje('No existe ningun nivel de cuenta configurado en la compañía.','stop')
 	EXIT PROGRAM
 END IF
 LET vm_max_rows = 1000
@@ -367,7 +373,7 @@ IF num_args() = 3 THEN
                         END IF
                 END IF
 		IF INFIELD(n91_cta_trabaj) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_n91.n91_cta_trabaj = r_b10.b10_cuenta
@@ -482,7 +488,7 @@ INPUT BY NAME rm_n91.n91_cod_trab, rm_n91.n91_motivo_ant, rm_n91.n91_tipo_pago,
                         END IF
                 END IF
 		IF INFIELD(n91_cta_trabaj) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_n91.n91_cta_trabaj = r_b10.b10_cuenta
@@ -1448,6 +1454,7 @@ DEFINE sec		LIKE ctbt013.b13_secuencia
 DEFINE flag_bco		SMALLINT
 DEFINE r_g09		RECORD LIKE gent009.*
 DEFINE r_b13		RECORD LIKE ctbt013.*
+DEFINE r_n30		RECORD LIKE rolt030.*
 
 INITIALIZE r_b13.* TO NULL
 LET r_b13.b13_compania    = r_b12.b12_compania
@@ -1471,11 +1478,12 @@ IF flag_bco THEN
 		LET r_b13.b13_tipo_doc = 'DEP'
 	END IF
 END IF
+CALL fl_lee_trabajador_roles(vg_codcia, rm_n91.n91_cod_trab) RETURNING r_n30.*
 LET r_b13.b13_cuenta      = cuenta
 LET r_b13.b13_glosa       = 'CAN.ANT.EMP. ',
+				rm_n91.n91_fecha_ant USING "dd-mm-yy", ' ',
 				rm_n91.n91_cod_trab USING "<<&&", ' ',
-				rm_n91.n91_periodo_ini USING "dd-mm-yy",' ',
-				rm_n91.n91_periodo_fin USING "dd-mm-yy"
+				r_n30.n30_nombres CLIPPED
 LET r_b13.b13_valor_base  = 0
 LET r_b13.b13_valor_aux   = 0
 CASE tipo

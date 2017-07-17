@@ -2,57 +2,74 @@ DATABASE aceros
 SCREEN 
 {
 
-                          Estado: [a][a001     ]
-                     Mes Proceso: [c0|c103        ]
-                     Año Proceso: [c006]           
-                                                              [c030] de [c031]
- [c000 |c001      |c002                                 |c003      |c004      ]
-[c010 |c011      |c012                                 |c013      |c014      ]
-[c010 |c011      |c012                                 |c013      |c014      ]
-[c010 |c011      |c012                                 |c013      |c014      ]
-[c010 |c011      |c012                                 |c013      |c014      ]
-[c010 |c011      |c012                                 |c013      |c014      ]
-[c010 |c011      |c012                                 |c013      |c014      ]
-[c010 |c011      |c012                                 |c013      |c014      ]
-[c010 |c011      |c012                                 |c013      |c014      ]
-[c010 |c011      |c012                                 |c013      |c014      ]
-[c010 |c011      |c012                                 |c013      |c014      ]
-[c010 |c011      |c012                                 |c013      |c014      ]
-[c010 |c011      |c012                                 |c013      |c014      ]
-[c010 |c011      |c012                                 |c013      |c014      ]
-         Diario: [c1|c021    ]                         T o t a l: [c020      ]
+                   Estado: [c][c000     ]                     [c001] de [c002]
+                  Proceso: [c0] [c003                          ]
+           Rol a Liquidar: [c1] [c004                          ] 
+                  Periodo: [c005      ]      -      [c006      ]
+                                                              [c007] de [c008]
+ [c010 |c011      |c012                             |c013      |c14|c015      ]
+[c020 |c021      |c022                             |c023      |c24|c025      ]
+[c020 |c021      |c022                             |c023      |c24|c025      ]
+[c020 |c021      |c022                             |c023      |c24|c025      ]
+[c020 |c021      |c022                             |c023      |c24|c025      ]
+[c020 |c021      |c022                             |c023      |c24|c025      ]
+[c020 |c021      |c022                             |c023      |c24|c025      ]
+[c020 |c021      |c022                             |c023      |c24|c025      ]
+[c020 |c021      |c022                             |c023      |c24|c025      ]
+[c020 |c021      |c022                             |c023      |c24|c025      ]
+[c020 |c021      |c022                             |c023      |c24|c025      ]
+[c020 |c021      |c022                             |c023      |c24|c025      ]
+[c020 |c021      |c022                             |c023      |c24|c025      ]
+         Diario: [c2|c030    ]                         T o t a l: [c031      ]
 }
 TABLES
+rolt003
 rolt048
 rolt030
 ATTRIBUTES
-a    = rolt048.n48_estado, AUTONEXT, UPSHIFT, INCLUDE = ('A', 'P'), REVERSE,
+c    = rolt048.n48_estado, NOENTRY, UPSHIFT, INCLUDE = ('A', 'P'), REVERSE,
        COMMENTS = 'A Activo  P Procesado';
-a001 = FORMONLY.tit_estado;
-c006 = rolt048.n48_ano_proceso, REVERSE;
-c0   = rolt048.n48_mes_proceso, REVERSE;
-c103 = FORMONLY.n_mes, NOENTRY;
+c000 = FORMONLY.tit_estado;
 
-c000 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15',OPTIONS = '-nolist';
-c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16',OPTIONS = '-nolist';
-c002 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17',OPTIONS = '-nolist';
-c003 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18',OPTIONS = '-nolist';
-c004 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F18',OPTIONS = '-nolist';
+c001 = FORMONLY.row_cur, NOENTRY, UPSHIFT;
+c002 = FORMONLY.max_cur, NOENTRY, UPSHIFT;
 
-c010 = rolt048.n48_cod_trab, OPTIONS = '-nolist';
-c011 = rolt030.n30_num_doc_id, OPTIONS = '-nolist';
-c012 = rolt030.n30_nombres, OPTIONS = '-nolist';
-c013 = rolt030.n30_fec_jub, FORMAT = 'dd-mm-yyyy', OPTIONS = '-nolist';
-c014 = rolt048.n48_val_jub_pat, FORMAT = '###,##&.##', OPTIONS = '-nolist';
+c0   = rolt048.n48_proceso, NOENTRY, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c003 = rolt003.n03_nombre, NOENTRY, UPSHIFT, REVERSE;
+c1   = rolt048.n48_cod_liqrol, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c004 = FORMONLY.tit_nombre, NOENTRY, UPSHIFT;
+c005 = rolt048.n48_fecha_ini, NOENTRY, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy';
+c006 = rolt048.n48_fecha_fin, NOENTRY, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy';
 
-c020 = FORMONLY.tot_valor TYPE DECIMAL(11,2), FORMAT = '###,##&.##', REVERSE;
-c1   = rolt048.n48_tipo_comp, NOENTRY, UPSHIFT, REVERSE;
-c021 = rolt048.n48_num_comp, NOENTRY, UPSHIFT, REVERSE;
+c007 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c008 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
 
-c030 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
-c031 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+c010 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15',OPTIONS = '-nolist';
+c011 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16',OPTIONS = '-nolist';
+c012 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17',OPTIONS = '-nolist';
+c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18',OPTIONS = '-nolist';
+c14  = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F18',OPTIONS = '-nolist';
+c015 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F19',OPTIONS = '-nolist';
+
+c020 = rolt048.n48_cod_trab, OPTIONS = '-nolist';
+c021 = rolt030.n30_num_doc_id, OPTIONS = '-nolist';
+c022 = rolt030.n30_nombres, OPTIONS = '-nolist';
+c023 = rolt030.n30_fec_jub, FORMAT = 'dd-mm-yyyy', OPTIONS = '-nolist';
+c24  = rolt048.n48_num_dias, OPTIONS = '-nolist';
+c025 = rolt048.n48_val_jub_pat, FORMAT = '###,##&.##', OPTIONS = '-nolist';
+
+c2   = rolt048.n48_tipo_comp, NOENTRY, UPSHIFT, REVERSE;
+c030 = rolt048.n48_num_comp, NOENTRY, UPSHIFT, REVERSE;
+c031 = FORMONLY.tot_valor TYPE DECIMAL(11,2), FORMAT = '###,##&.##', REVERSE;
 END
+KEYS
+F5 = 'Datos Empleado'
+F6 = 'Contabilización'
+F7 = 'Forma de Pago'
+F8 = 'Eliminación Pago'
 INSTRUCTIONS
 DELIMITERS '||'
-SCREEN RECORD rm_pat[13] (n48_cod_trab, n30_num_doc_id, n30_nombres,
-				n30_fec_jub, n48_val_jub_pat)
+SCREEN RECORD rm_pat[12] (n48_cod_trab, n30_num_doc_id, n30_nombres,
+				n30_fec_jub, n48_num_dias, n48_val_jub_pat)

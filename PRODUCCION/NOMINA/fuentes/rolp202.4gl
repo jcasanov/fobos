@@ -687,7 +687,8 @@ ELSE
 	LET comando = 'fglrun rolp203 ', vg_base, ' ', vg_modulo, ' ',
 		       vg_codcia, ' X ', rm_n32.n32_cod_trab
 	DECLARE q_n47 CURSOR FOR
-		SELECT * FROM rolt047
+		SELECT n47_cod_trab
+			FROM rolt047
 			WHERE n47_compania   = vg_codcia
 			  AND n47_proceso    = 'VA'
 			  AND n47_estado     = 'A'
@@ -695,7 +696,17 @@ ELSE
 			  AND n47_fecha_ini  = rm_n32.n32_fecha_ini
 			  AND n47_fecha_fin  = rm_n32.n32_fecha_fin
 			  AND n47_cod_trab   = rm_n32.n32_cod_trab
-	FOREACH q_n47 INTO r_n47.*
+		UNION
+		SELECT n33_cod_trab
+			FROM rolt033, rolt006
+			WHERE n33_compania    = vg_codcia
+			  AND n33_cod_liqrol  = rm_n32.n32_cod_liqrol
+			  AND n33_fecha_ini   = rm_n32.n32_fecha_ini
+			  AND n33_fecha_fin   = rm_n32.n32_fecha_fin
+			  AND n33_valor       > 0
+			  AND n06_cod_rubro   = n33_cod_rubro
+			  AND n06_flag_ident IN ('DM', 'DE')
+	FOREACH q_n47 INTO r_n47.n47_cod_trab
 		LET comando = 'fglrun rolp203 ', vg_base, ' ', vg_modulo, ' ',
 	        	       vg_codcia, ' X ', r_n47.n47_cod_trab
 		RUN comando

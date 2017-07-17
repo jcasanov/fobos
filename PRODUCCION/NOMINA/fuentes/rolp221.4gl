@@ -1343,8 +1343,8 @@ UPDATE rolt005 SET n05_activo = 'N'
 
 DECLARE q_prest CURSOR FOR
 	SELECT * FROM rolt037
-        	WHERE n37_compania = vg_codcia
-		  AND n37_proceso  = vm_proceso
+        	WHERE n37_compania  = vg_codcia
+		  AND n37_proceso   = vm_proceso
 		  AND n37_fecha_ini = vm_r_rows[vm_row_current].n36_fecha_ini
 		  AND n37_fecha_fin = vm_r_rows[vm_row_current].n36_fecha_fin
 
@@ -1375,12 +1375,24 @@ FOREACH q_prest INTO r_n37.*
 		WHERE n58_compania  = r_n37.n37_compania
 		  AND n58_num_prest = r_n37.n37_num_prest
 		  AND n58_proceso   = r_n37.n37_proceso
+
 	UPDATE rolt046 SET n46_saldo = n46_valor - r_n37.n37_valor
         	WHERE n46_compania   = vg_codcia
 		  AND n46_num_prest  = r_n37.n37_num_prest
 		  AND n46_cod_liqrol = vm_proceso
 		  AND n46_fecha_ini  = vm_r_rows[vm_row_current].n36_fecha_ini
 		  AND n46_fecha_fin  = vm_r_rows[vm_row_current].n36_fecha_fin
+		  AND n46_saldo      = r_n37.n37_valor
+
+	UPDATE rolt046
+		SET n46_saldo = n46_valor - (r_n37.n37_valor + n46_saldo)
+        	WHERE n46_compania   = vg_codcia
+		  AND n46_num_prest  = r_n37.n37_num_prest
+		  AND n46_cod_liqrol = vm_proceso
+		  AND n46_fecha_ini  = vm_r_rows[vm_row_current].n36_fecha_ini
+		  AND n46_fecha_fin  = vm_r_rows[vm_row_current].n36_fecha_fin
+		  AND n46_saldo      > 0
+		  AND n46_saldo      < r_n37.n37_valor
 
 	UPDATE rolt045 SET n45_descontado = n45_descontado + r_n37.n37_valor,
 			   n45_estado     = r_n45.n45_estado
@@ -1786,7 +1798,7 @@ DEFINE r_g31		RECORD LIKE gent031.*
 CREATE TEMP TABLE tmp_rol_ban
 	(
 		tipo_pago		CHAR(2),
-		cuenta_empresa		CHAR(10),
+		cuenta_empresa		CHAR(11),
 		secuencia		SERIAL,
 		comp_pago		CHAR(5),
 		cod_trab		CHAR(6),
@@ -1797,7 +1809,8 @@ CREATE TEMP TABLE tmp_rol_ban
 		tipo_cuenta		CHAR(3),
 		cuenta_empleado		CHAR(11),
 		tipo_doc_id		CHAR(1),
-		num_doc_id		DECIMAL(13,0),
+		num_doc_id		VARCHAR(13),
+		--num_doc_id		DECIMAL(13,0),
 		empleado		VARCHAR(40),
 		direccion		VARCHAR(40),
 		ciudad			VARCHAR(20),
@@ -1810,7 +1823,7 @@ CREATE TEMP TABLE tmp_rol_ban
 LET query = 'SELECT "PA" AS tip_pag, g09_numero_cta AS cuenta_empr,',
 			' 0 AS secu, "" AS comp_p, n36_cod_trab AS cod_emp,',
 			' g13_simbolo AS mone,TRUNC(n36_valor_neto * 100,0) AS',
-			' neto_rec, "CTA" AS for_pag, "0040" AS cod_ban,',
+			' neto_rec, "CTA" AS for_pag, "0036" AS cod_ban,',
 			' CASE WHEN n30_tipo_cta_tra = "A"',
 				' THEN "AHO"',
 				' ELSE "CTE"',
@@ -1852,6 +1865,7 @@ LET query = 'SELECT "PA" AS tip_pag, g09_numero_cta AS cuenta_empr,',
 		'   AND n30_cod_trab    = n36_cod_trab ',
 		'   AND g09_compania    = n36_compania ',
 		'   AND g09_banco       = n36_bco_empresa ',
+		'   AND g09_numero_cta  = n36_cta_empresa ',
 		'   AND n03_proceso     = n36_proceso ',
 		'   AND g13_moneda      = n36_moneda ',
 		'   AND g31_ciudad      = n30_ciudad_nac ',

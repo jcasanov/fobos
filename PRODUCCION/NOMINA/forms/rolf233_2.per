@@ -1,5 +1,5 @@
-database aceros
-screen 
+DATABASE aceros
+SCREEN 
 {
              Ingrese Otros Ingresos y Descuentos
             -------------------------------------
@@ -12,23 +12,22 @@ screen
 [c000                                         |c001            ]
                                               [c100            ]
 }
-end
-tables
-rolt073
-attributes
-c000 = rolt073.n73_rubro, OPTIONS='-nolist', REVERSE;
-c001 = rolt073.n73_valor, OPTIONS='-nolist', 
+TABLES
+rolt076
+ATTRIBUTES
+c000 = rolt076.n76_cod_rubro, OPTIONS='-nolist', REVERSE;
+c001 = rolt076.n76_valor_rub, OPTIONS='-nolist', 
 			REVERSE, FORMAT='-,---,---,--&.##',
 			COLOR=RED WHERE c001 < 0;
 
-c100 = formonly.tot_valor TYPE DECIMAL(11,2) NOT NULL, NOENTRY, REVERSE, 
+c100 = formonly.tot_valor_rub TYPE DECIMAL(11,2) NOT NULL, NOENTRY, REVERSE, 
 			FORMAT='-,---,---,--&.##',
 			COLOR=RED WHERE c100 < 0;
 
 lbl1 = formonly.bt_rubro,    WIDGET='BUTTON', CONFIG='F15';
-lbl2 = formonly.bt_valor,    WIDGET='BUTTON', CONFIG='F16';
+lbl2 = formonly.bt_valor_rub,    WIDGET='BUTTON', CONFIG='F16';
 
-end
-
-instructions
-screen record ra_scr[6] (n73_rubro, n73_valor) 
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD ra_scr[6] (n76_cod_rubro, n76_valor_rub) 

@@ -1,57 +1,103 @@
-database aceros
-screen 
+DATABASE aceros
+SCREEN
 {
-                                                 Estado: [a|c101         ]
+                                                              [c000] de [c001]
+        Acta: [c1|c015]                               Estado: [c] [c002      ]
 
-        Trabajador: [c001] [c100                                         ]
-     Motivo Salida: [d ] [c020           ]       
-Fecha Notificaci¢n: [c004      ]                 Promedia Comisiones?  [b]      
-      Fecha Salida: [c005      ]                       Cuantos Meses? [c6]
+    Empleado: [c003] [c004                                                   ]
+      Cédula: [c005      ]       Cargo: [c006                                ]
+                                        [c006                                ]
+  Fecha Sal.: [c007      ]  Fecha Ent.: [c008      ]  Sueldo Pro: [c009      ]
 
-                                     Liquidaci¢n Roles: [c009            ]
-					    Comisiones: [c008            ]
-                                         Decimo Cuarto: [c010            ]
-                                        Decimo Tercero: [c011            ]
-                                      Total Vacaciones: [c012            ]
-				           Total Otros: [c017            ]
-				(-)    Saldo Anticipos: [c018            ]
-
-                            Bonificaci¢n Por Deshaucio: [c013            ] 
-                                         Indemnizaci¢n: [c014            ] 
-                                                        ------------------
-                                        Neto A Recibir: [c016            ]
+   Tipo Acta: [c010] [c011                         ]  Desahucio Parcial ?: [d]
+      Motivo: [c012                                ]          [c013] de [c014]
+ [c020|c021 |c022      |c023      |c024                |c025      |c026       ]
+[c0] [c03] [c031      |c032      |c033                |c034      |c035       ]
+[c0] [c03] [c031      |c032      |c033                |c034      |c035       ]
+[c0] [c03] [c031      |c032      |c033                |c034      |c035       ]
+[c0] [c03] [c031      |c032      |c033                |c034      |c035       ]
+[c0] [c03] [c031      |c032      |c033                |c034      |c035       ]
+[c0] [c03] [c031      |c032      |c033                |c034      |c035       ]
+[c0] [c03] [c031      |c032      |c033                |c034      |c035       ]
+[c0] [c03] [c031      |c032      |c033                |c034      |c035       ]
+     [c040            ] - [c041           ]       Total a Pagar: [c042       ]
+      Usuario: [c043      ]               Fecha Ingreso: [c044               ]
 }
-end
-tables
-rolt070
-attributes
-c001 = rolt070.n70_cod_trab, REVERSE, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
-a = rolt070.n70_estado, REVERSE, NOENTRY, COMMENT='A Activo  P Procesado', UPSHIFT;
-c004 = rolt070.n70_fec_ren, REVERSE, FORMAT='dd-mm-yyyy', 
-	COMMENT='Digite la fecha en formato: dd-mm-aaaa';
-c005 = rolt070.n70_fec_sal, REVERSE, FORMAT='dd-mm-yyyy', 
-	COMMENT='Digite la fecha en formato: dd-mm-aaaa';
+TABLES
+rolt003
+rolt006
+rolt030
+rolt073
+rolt074
+rolt075
+ATTRIBUTES
+c000 = FORMONLY.num_reg, NOENTRY, UPSHIFT, REVERSE;
+c001 = FORMONLY.max_reg, NOENTRY, UPSHIFT, REVERSE;
+c1   = rolt074.n74_proceso, NOENTRY, UPSHIFT, REVERSE;
+c015 = rolt074.n74_num_acta, NOENTRY, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c    = rolt074.n74_estado, NOENTRY, UPSHIFT, REVERSE, INCLUDE = ('A', 'P', 'E'),
+	COMMENTS = '(A) Activo (P) Procesado (E) Eliminado.';
+c002 = FORMONLY.desc_est, NOENTRY, UPSHIFT, REVERSE;
+c003 = rolt074.n74_cod_trab, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c004 = rolt030.n30_nombres, NOENTRY, UPSHIFT, REVERSE;
+c005 = rolt030.n30_num_doc_id, NOENTRY, UPSHIFT, REVERSE;
+c006 = rolt074.n74_sectorial, NOENTRY, UPSHIFT, REVERSE, SCROLL,
+	WORDWRAP COMPRESS;
+c007 = rolt074.n74_fecha_sal, AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COLOR = RED,
+	COMMENTS = 'Digite la fecha de Salida en formato: dd-mm-aaaa.';
+c008 = rolt074.n74_fecha_ent, NOENTRY, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha de Entrada en formato: dd-mm-aaaa.';
+c009 = rolt074.n74_sueldo_prom, NOENTRY, UPSHIFT, REVERSE, COLOR = BLUE,
+	FORMAT = '###,##&.##';
+c010 = rolt074.n74_tipo_acta, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c011 = rolt073.n73_conc_abr, NOENTRY, UPSHIFT, REVERSE;
+d    = rolt074.n74_desah_parc, AUTONEXT, UPSHIFT, REVERSE, INCLUDE = ('S', 'N'),
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N';
+c012 = rolt074.n74_motivo, AUTONEXT, UPSHIFT, REVERSE;
+c013 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c014 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
 
-b = rolt070.n70_calc_comi,    WIDGET='CHECK', CONFIG='S N acknowledge',
-			      DEFAULT = 'N', AUTONEXT; 
-c6 = rolt070.n70_mes_prom,    REVERSE, FORMAT='#&', INCLUDE=(0 TO 99);
+c020 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c021 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c022 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c023 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c024 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+c025 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+c026 = FORMONLY.tit_col7, WIDGET = 'BUTTON', CONFIG = 'F21';
 
-c008 = rolt070.n70_comisiones,    REVERSE, FORMAT='#,###,###,##&.##';
-c009 = rolt070.n70_tot_rol,       NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
-c010 = rolt070.n70_tot_dc,        NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
-c011 = rolt070.n70_tot_dt,        NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
-c012 = rolt070.n70_tot_vaca,      NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+c0   = rolt075.n75_cod_liqrol, AUTONEXT, UPSHIFT, OPTIONS = '-nolist',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c03  = FORMONLY.n76_cod_rubro, AUTONEXT, UPSHIFT, OPTIONS = '-nolist',
+	FORMAT = '&&&', WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c031 = rolt075.n75_fecha_ini, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+c032 = rolt075.n75_fecha_fin, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	OPTIONS = '-nolist';
+c033 = rolt075.n75_referencia, AUTONEXT, UPSHIFT, SCROLL, OPTIONS = '-nolist';
+c034 = rolt075.n75_valor_base, NOENTRY, UPSHIFT, FORMAT = '###,##&.##',
+	OPTIONS = '-nolist';
+c035 = rolt075.n75_valor_pro, AUTONEXT, UPSHIFT, FORMAT = '(((,((&.##)',
+	COLOR = BLUE WHERE c035 > 0, COLOR = BLACK WHERE c035 = 0,
+	COLOR = RED WHERE c035 < 0, OPTIONS = '-nolist';
 
-c013 = rolt070.n70_bonificacion,  NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
-c014 = rolt070.n70_indemnizacion, NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
-c016 = rolt070.n70_tot_neto,      NOENTRY, REVERSE, FORMAT='-,---,---,--&.##';
-c017 = rolt070.n70_tot_otros,     NOENTRY, REVERSE, FORMAT='-,---,---,--&.##';
-c018 = rolt070.n70_tot_anticipos, NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
-
-d    = rolt070.n70_motivo,     WIDGET='FIELD_BMP', CONFIG='lista.bmp F2',
-			       AUTONEXT, REVERSE; 
-
-c100 = formonly.n30_nombres,   UPSHIFT, REVERSE, NOENTRY;
-c101 = formonly.n_estado,      UPSHIFT, REVERSE, NOENTRY;
-c020 = formonly.n74_descripcion,      UPSHIFT, REVERSE, NOENTRY;	
-end
+c040 = rolt003.n03_nombre_Abr, NOENTRY, UPSHIFT, REVERSE;
+c041 = rolt006.n06_nombre_Abr, NOENTRY, UPSHIFT;
+c042 = rolt074.n74_tot_neto, NOENTRY, UPSHIFT, FORMAT = '####,##&.##',
+	COLOR = BLUE;
+c043 = rolt074.n74_usuario, NOENTRY, UPSHIFT, REVERSE;
+c044 = rolt074.n74_fecing, NOENTRY, UPSHIFT, REVERSE;
+END
+KEYS
+F5 = 'Forma de Pago'
+F6 = 'Detalle Rubros'
+F7 = 'Contablización'
+F8 = 'Imprimir'
+INSTRUCTIONS
+DELIMITERS "||"
+SCREEN RECORD rm_detalle[8] (n75_cod_liqrol, n76_cod_rubro, n75_fecha_ini,
+				n75_fecha_fin, n75_referencia, n75_valor_base,
+				n75_valor_pro)

@@ -1,0 +1,81 @@
+DATABASE aceros
+SCREEN
+{
+                                                              [c000] de [c001]
+
+    Registro: [c003    ]    Fecha: [c004      ]         Estado: [c|c002      ]
+
+     Factura: [c005    ]  Cliente: [c006  ] [c007                            ]
+ Fecha Fact.: [c008               ]
+  Referencia: [c009                                          ]  [c10] de [c11]
+ [c020  |c021  |c022           |c023           |c024  |c025                   ]
+[c030  |c031  |c032           |c033           |c034] [c035                   ]
+[c030  |c031  |c032           |c033           |c034] [c035                   ]
+[c030  |c031  |c032           |c033           |c034] [c035                   ]
+[c030  |c031  |c032           |c033           |c034] [c035                   ]
+[c030  |c031  |c032           |c033           |c034] [c035                   ]
+[c030  |c031  |c032           |c033           |c034] [c035                   ]
+[c030  |c031  |c032           |c033           |c034] [c035                   ]
+[c030  |c031  |c032           |c033           |c034] [c035                   ]
+
+[c040                                         ][c041                         ]
+[c042                                                             ]
+
+   Ingresado Por: [c043      ]            Fecha Ingreso: [c044               ]
+}
+TABLES
+rept010
+rept072
+talt003
+talt023
+talt034
+talt035
+ATTRIBUTES
+c000 = FORMONLY.num_reg, NOENTRY, UPSHIFT, REVERSE;
+c001 = FORMONLY.max_reg, NOENTRY, UPSHIFT, REVERSE;
+
+c    = talt034.t34_estado, NOENTRY, UPSHIFT, REVERSE,
+	COMMENTS = '(A) EN PROCESO  (C) CERRADO  (E) ELIMINADO';
+c002 = FORMONLY.tit_estado, NOENTRY, UPSHIFT, REVERSE;
+c003 = talt034.t34_num_reg, NOENTRY, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c004 = talt034.t34_fecha, NOENTRY, UPSHIFT, REVERSE, FORMAT = "dd-mm-yyyy";
+c005 = talt034.t34_num_fact, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c006 = talt023.t23_cod_cliente, NOENTRY, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c007 = talt023.t23_nom_cliente, NOENTRY, UPSHIFT, REVERSE;
+c008 = talt023.t23_fec_factura, NOENTRY, UPSHIFT, REVERSE;
+c009 = talt034.t34_referencia, AUTONEXT, UPSHIFT, REVERSE;
+
+c10  = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c11  = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c020 = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c021 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F17';
+c022 = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F18';
+c023 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F19';
+c024 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F20';
+c025 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F21';
+
+c030 = talt035.t35_item, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c031 = rept010.r10_marca, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c032 = talt035.t35_serie, AUTONEXT, UPSHIFT, SCROLL, OPTIONS = '-nolist';
+c033 = talt035.t35_desc_prueb, AUTONEXT, UPSHIFT, SCROLL, OPTIONS = '-nolist';
+c034 = talt035.t35_tecnico, AUTONEXT, UPSHIFT, OPTIONS = '-nolist',
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c035 = talt035.t35_observacion, AUTONEXT, UPSHIFT, SCROLL, OPTIONS = '-nolist';
+
+c040 = rept072.r72_desc_clase, NOENTRY, UPSHIFT;
+c041 = talt003.t03_nombres, NOENTRY, UPSHIFT, REVERSE;
+c042 = rept010.r10_nombre, NOENTRY, UPSHIFT;
+c043 = talt034.t34_usuario, NOENTRY, UPSHIFT, REVERSE;
+c044 = talt034.t34_fecing, NOENTRY, UPSHIFT, REVERSE;
+END
+KEYS
+F5 = "Factura"
+F6 = 'Imprimir'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_regtec[8] (t35_item, r10_marca, t35_serie, t35_desc_prueb,
+				t35_tecnico, t35_observacion)

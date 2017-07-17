@@ -834,7 +834,7 @@ LET query = 'SELECT a.n32_cod_trab AS cod_trab, n30_num_doc_id AS cedula, ',
 				'(SELECT n06_cod_rubro ',
 				'FROM rolt006 ',
 				'WHERE n06_flag_ident IN ("VT", "VV", "OV", ',
-						'"VE", "SX")))), 0) >= ',
+						'"VE", "SX", "SY")))), 0) >= ',
 			'NVL(SUM(a.n32_sueldo / ',
 			'(SELECT COUNT(*) ',
 				'FROM rolt032 b ',
@@ -862,7 +862,7 @@ LET query = 'SELECT a.n32_cod_trab AS cod_trab, n30_num_doc_id AS cedula, ',
 					'(SELECT n06_cod_rubro ',
 					'FROM rolt006 ',
 					'WHERE n06_flag_ident IN ("VT", "VV", ',
-						'"OV", "VE", "SX")))), 0) ',
+						'"OV", "VE", "SX", "SY")))), 0) ',
 		' END AS sueldo, ',
 		--retorna_columna_val(4) CLIPPED, ' AS valor_ext, ',
 		retorna_columna_val(1) CLIPPED, ' - ',
@@ -876,7 +876,7 @@ LET query = 'SELECT a.n32_cod_trab AS cod_trab, n30_num_doc_id AS cedula, ',
 				'(SELECT n06_cod_rubro ',
 					'FROM rolt006 ',
 					'WHERE n06_flag_ident IN ("VT", "VV", ',
-						'"OV", "VE", "SX")))), 0) >= ',
+						'"OV", "VE", "SX", "SY")))), 0) >= ',
 			'NVL(SUM(a.n32_sueldo / ',
 			'(SELECT COUNT(*) ',
 				'FROM rolt032 b ',
@@ -904,7 +904,7 @@ LET query = 'SELECT a.n32_cod_trab AS cod_trab, n30_num_doc_id AS cedula, ',
 					'(SELECT n06_cod_rubro ',
 					'FROM rolt006 ',
 					'WHERE n06_flag_ident IN ("VT", "VV", ',
-						'"OV", "VE", "SX")))), 0) ',
+						'"OV", "VE", "SX", "SY")))), 0) ',
 		' END) AS valor_ext, ',
 		retorna_columna_val(1) CLIPPED, ' AS valor_rol, ',
 		retorna_columna_val(2) CLIPPED, ' AS ap_iess_per, ',
@@ -919,7 +919,7 @@ LET query = 'SELECT a.n32_cod_trab AS cod_trab, n30_num_doc_id AS cedula, ',
 		'   AND a.n32_estado     <> "E" ',
 		'   AND n30_compania      = a.n32_compania ',
 		'   AND n30_cod_trab      = a.n32_cod_trab ',
-		'   and n30_cod_trab     <> 170 ',
+		'   AND n30_cod_trab     <> 170 ',
 		' GROUP BY 1, 2, 3, 5, 6 ',
 		' INTO TEMP t1 '
 PREPARE exec_tmp FROM query
@@ -1054,7 +1054,7 @@ SELECT n33_cod_trab, NVL(SUM(n33_valor), 0) valor
 					(SELECT c.n06_cod_rubro
 					FROM rolt006 c
 					WHERE c.n06_flag_ident IN
-					('VT', 'VV', 'VE', 'VM', 'OV', 'SX')))
+					('VT', 'VV', 'VE', 'VM', 'OV', 'SX', 'SY')))
 	GROUP BY 1
 	HAVING NVL(SUM(n33_valor), 0) > 0
 	INTO TEMP t1
@@ -1238,7 +1238,7 @@ SELECT NVL(SUM(n33_valor), 0)
 					(SELECT n06_cod_rubro
 					FROM rolt006
 					WHERE n06_flag_ident IN ("VT", "VE",
-							"VM", "VV", "SX")))
+							"VM", "VV", "SX", "SY")))
 	  AND n33_valor       > 0
 RETURN sueldo_parc
 

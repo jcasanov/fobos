@@ -14,6 +14,7 @@ DEFINE vm_proceso	LIKE rolt042.n42_proceso
 DEFINE vm_fecha_ini	LIKE rolt042.n42_fecha_ini
 DEFINE vm_fecha_fin	LIKE rolt042.n42_fecha_fin
 DEFINE rm_n42		RECORD LIKE rolt042.*
+DEFINE tot_dias		INTEGER
 
 
 
@@ -143,10 +144,12 @@ DECLARE q_utilidades CURSOR FOR
 		ORDER BY n30_nombres ASC
 --START REPORT report_utilidades TO FILE "listado.npc"
 START REPORT report_utilidades TO PIPE comando
+LET tot_dias = 0
 FOREACH q_utilidades INTO r_rol.*
 	IF r_rol.anticipos IS NULL THEN
 		LET r_rol.anticipos = 0
 	END IF
+	LET tot_dias = tot_dias + r_rol.dias_trab
 	OUTPUT TO REPORT report_utilidades(r_rol.*)
 END FOREACH
 FINISH REPORT report_utilidades
@@ -251,7 +254,7 @@ PAGE HEADER
         PRINT COLUMN 002, '-----------------------------------------------------------------------------------------------------------------------------------'
 
 ON EVERY ROW
-	NEED 2 LINES
+	NEED 3 LINES
 	PRINT COLUMN 002, r_rol.cod_trab USING '##&&',
 	      COLUMN 008, r_rol.nom_trab CLIPPED,
 	      COLUMN 050, r_rol.dias_trab USING "###&&",
@@ -264,6 +267,7 @@ ON EVERY ROW
 	      COLUMN 119, r_rol.valor_neto USING '###,###,##&.##'
 
 ON LAST ROW 
+	NEED 2 LINES
 	PRINT COLUMN 050, '-----',
 	      COLUMN 056, '--------------',  
 	      COLUMN 071, '---',  
@@ -272,7 +276,8 @@ ON LAST ROW
 	      COLUMN 105, '-------------',  
 	      COLUMN 119, '--------------'  
 	PRINT COLUMN 043, 'TOTAL: ',
-	      COLUMN 050, SUM(r_rol.dias_trab) USING '###&&',
+	      #COLUMN 050, SUM(r_rol.dias_trab) USING '###&&',
+	      COLUMN 050, SUM(tot_dias) USING '###&&',
 	      COLUMN 056, SUM(r_rol.ganado) USING '###,###,##&.##',
 	      COLUMN 071, SUM(r_rol.cargas) USING '#&&',
 	      COLUMN 075, SUM(r_rol.valor_bruto) USING '###,###,##&.##',

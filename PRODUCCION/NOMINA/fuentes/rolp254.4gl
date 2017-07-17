@@ -784,10 +784,13 @@ IF r_n39.n39_tipo = 'P' THEN
 	CALL fl_mostrar_mensaje(mensaje CLIPPED, 'exclamation')
 	RETURN 0
 END IF
+{-
 LET dias_gozo = r_n39.n39_dias_vac
 IF r_n39.n39_gozar_adic = 'S' THEN
 	LET dias_gozo = dias_gozo + r_n39.n39_dias_adi
 END IF
+--}
+LET dias_gozo = r_n39.n39_dias_vac + r_n39.n39_dias_adi
 LET dias_gozo = dias_gozo - r_n39.n39_dias_goza - tot_dias_n47(r_n39.*)
 IF rm_det[i].n47_dias_goza - dias_gozo > 0 THEN
 	LET mensaje = 'Las vacaciones del empleado: ',

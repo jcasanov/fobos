@@ -498,8 +498,15 @@ FOREACH q_tneto INTO tipo_pago, bco_empresa, cta_empresa, tot_neto
 			THEN
 				LET tot_neto = tot_neto + val_egr
 			ELSE
-				IF tipo_pago <> 'E' THEN
-					LET tot_neto = tot_neto + val_egr
+				IF vg_codcia = 1 THEN
+					--IF tipo_pago <> 'E' THEN  OJO ANTES
+					IF tipo_pago = 'T' THEN
+						LET tot_neto =tot_neto + val_egr
+					END IF
+				ELSE
+					IF tipo_pago <> 'E' THEN
+						LET tot_neto =tot_neto + val_egr
+					END IF
 				END IF
 			END IF
 		END IF

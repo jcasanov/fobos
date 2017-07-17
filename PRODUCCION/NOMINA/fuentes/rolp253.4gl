@@ -20,6 +20,7 @@ DEFINE vm_r_rows	ARRAY[1000] OF INTEGER
 DEFINE vm_row_current   SMALLINT        -- FILA CORRIENTE DEL ARREGLO
 DEFINE vm_num_rows      SMALLINT        -- CANTIDAD DE FILAS LEIDAS
 DEFINE vm_max_rows      SMALLINT        -- MAXIMO DE FILAS LEIDAS
+DEFINE vm_nivel		LIKE ctbt001.b01_nivel
 DEFINE vm_proceso	LIKE rolt039.n39_proceso
 DEFINE vm_vac_goz	LIKE rolt039.n39_proceso
 DEFINE vm_vac_pag	LIKE rolt039.n39_proceso
@@ -98,6 +99,11 @@ END IF
 CALL fl_lee_compania_contabilidad(vg_codcia) RETURNING rm_b00.*
 IF rm_b00.b00_compania IS NULL THEN
 	CALL fl_mostrar_mensaje('No existe ninguna compañía configurada en CONTABILIDAD.', 'stop')
+	EXIT PROGRAM
+END IF
+SELECT MAX(b01_nivel) INTO vm_nivel FROM ctbt001
+IF vm_nivel IS NULL THEN
+	CALL fl_mostrar_mensaje('No existe ningun nivel de cuenta configurado en la compañía.','stop')
 	EXIT PROGRAM
 END IF
 LET vm_max_rows = 1000
@@ -351,7 +357,7 @@ IF num_args() = 3 THEN
                         END IF
                 END IF
 		IF INFIELD(n91_cta_trabaj) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_n91.n91_cta_trabaj = r_b10.b10_cuenta
@@ -464,7 +470,7 @@ INPUT BY NAME rm_n91.n91_cod_trab, rm_n91.n91_motivo_ant, rm_n91.n91_prov_aport,
                         END IF
                 END IF
 		IF INFIELD(n91_cta_trabaj) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_n91.n91_cta_trabaj = r_b10.b10_cuenta

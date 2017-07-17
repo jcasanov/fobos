@@ -13,10 +13,8 @@ DEFINE vm_row_current	SMALLINT
 DEFINE vm_max_rows	SMALLINT
 DEFINE vm_max_det	SMALLINT
 DEFINE vm_num_det	SMALLINT
-DEFINE vm_r_rows	ARRAY[1000] OF INTEGER
-DEFINE rm_par		RECORD
-				n74_proceso	LIKE rolt074.n74_proceso,
-				n74_num_acta	LIKE rolt074.n74_num_acta,
+DEFINE vm_r_rows	ARRAY[6000] OF INTEGER
+DEFINE rm_par2		RECORD
 				n74_cod_trab	LIKE rolt074.n74_cod_trab,
 				n30_nombres	LIKE rolt030.n30_nombres,
 				n30_num_doc_id	LIKE rolt030.n30_num_doc_id,
@@ -31,28 +29,72 @@ DEFINE rm_par		RECORD
 				n74_usuario	LIKE rolt074.n74_usuario,
 				n74_fecing	LIKE rolt074.n74_fecing
 			END RECORD
-DEFINE rm_detalle	ARRAY[50] OF RECORD
-				n75_cod_liqrol	LIKE rolt075.n75_cod_liqrol,
-				n76_cod_rubro	LIKE rolt076.n76_cod_rubro,
-				n75_fecha_ini	LIKE rolt075.n75_fecha_ini,
-				n75_fecha_fin	LIKE rolt075.n75_fecha_fin,
-				n75_referencia	LIKE rolt075.n75_referencia,
-				n75_valor_base	LIKE rolt075.n75_valor_base,
-				n75_valor_pro	LIKE rolt075.n75_valor_pro
+DEFINE rm_detalle	ARRAY[300] OF RECORD
+				n46_secuencia	LIKE rolt046.n46_secuencia,
+				n46_cod_liqrol	LIKE rolt046.n46_cod_liqrol,
+				n03_nombre_abr	LIKE rolt003.n03_nombre_abr,
+				n46_fecha_ini	LIKE rolt046.n46_fecha_ini,
+				n46_fecha_fin	LIKE rolt046.n46_fecha_fin,
+				n46_valor	LIKE rolt046.n46_valor,
+				n46_saldo	LIKE rolt046.n46_saldo
 			END RECORD
 DEFINE rm_b00		RECORD LIKE ctbt000.*
 DEFINE rm_n00		RECORD LIKE rolt000.*
-DEFINE rm_n74		RECORD LIKE rolt074.*
+DEFINE rm_n45		RECORD LIKE rolt045.*
+DEFINE rm_n32		RECORD LIKE rolt032.*
+DEFINE rm_n36		RECORD LIKE rolt036.*
+DEFINE rm_n39		RECORD LIKE rolt039.*
+DEFINE rm_n41		RECORD LIKE rolt041.*
 DEFINE rm_n90		RECORD LIKE rolt090.*
+DEFINE rm_par		RECORD
+				cod_liqrol	LIKE rolt046.n46_cod_liqrol,
+				n03_nombre	LIKE rolt003.n03_nombre,
+				n46_fecha_ini	LIKE rolt046.n46_fecha_ini,
+				n46_fecha_fin	LIKE rolt046.n46_fecha_fin,
+				num_pagos	SMALLINT
+			END RECORD
+DEFINE total_valor	DECIMAL(14,2)
+DEFINE total_saldo	DECIMAL(14,2)
 DEFINE vm_flag_mant	CHAR(1)
+DEFINE rm_detprest	ARRAY[20] OF RECORD
+				n46_num_prest	LIKE rolt046.n46_num_prest,
+				n46_secuencia	LIKE rolt046.n46_secuencia,
+				n46_cod_liqrol	LIKE rolt046.n46_cod_liqrol,
+				n46_fecha_ini	LIKE rolt046.n46_fecha_ini,
+				n46_fecha_fin	LIKE rolt046.n46_fecha_fin,
+				n46_valor	LIKE rolt046.n46_valor,
+				n46_saldo	LIKE rolt046.n46_saldo
+			END RECORD
+DEFINE rm_detliq	ARRAY[50] OF RECORD
+				n32_cod_liqrol	LIKE rolt032.n32_cod_liqrol,
+				n32_fecha_ini	LIKE rolt032.n32_fecha_ini,
+				n32_fecha_fin	LIKE rolt032.n32_fecha_fin,
+				n32_tot_ing	LIKE rolt032.n32_tot_ing,
+				n32_tot_egr	LIKE rolt032.n32_tot_egr,
+				n32_tot_neto	LIKE rolt032.n32_tot_neto
+			END RECORD
+DEFINE rm_dettotpre	ARRAY[20] OF RECORD
+				n58_proceso	LIKE rolt058.n58_proceso,
+				n03_nombre	LIKE rolt003.n03_nombre,
+				n58_div_act	LIKE rolt058.n58_div_act,
+				n58_num_div	LIKE rolt058.n58_num_div,
+				n58_valor_div	LIKE rolt058.n58_valor_div,
+				n58_valor_dist	LIKE rolt058.n58_valor_dist,
+				n58_saldo_dist	LIKE rolt058.n58_saldo_dist
+			END RECORD
 DEFINE vm_nivel		LIKE ctbt001.b01_nivel
 DEFINE vm_proceso	LIKE rolt003.n03_proceso
 DEFINE vm_max_prest	SMALLINT
 DEFINE vm_num_prest	SMALLINT
 DEFINE vm_cur_prest	SMALLINT
-DEFINE vm_lin_pag	SMALLINT
-DEFINE vm_num_dettot	SMALLINT
+DEFINE vm_max_detliq	SMALLINT
+DEFINE vm_num_detliq	SMALLINT
+DEFINE vm_cur_detliq	SMALLINT
 DEFINE vm_max_dettot	SMALLINT
+DEFINE vm_num_dettot	SMALLINT
+DEFINE vm_cur_dettot	SMALLINT
+DEFINE vm_cambio_valor	SMALLINT
+DEFINE vm_lin_pag	SMALLINT
 
 
 
@@ -254,7 +296,7 @@ END FUNCTION
 FUNCTION control_ingreso()
 DEFINE num_aux		INTEGER
 DEFINE resul, i		SMALLINT
-DEFINE r_n74		RECORD LIKE rolt045.*
+DEFINE r_n45		RECORD LIKE rolt045.*
 
 CALL fl_retorna_usuario()
 LET vm_flag_mant = 'I'
@@ -267,38 +309,38 @@ END IF
 BEGIN WORK
 	WHENEVER ERROR CONTINUE
 	WHILE TRUE
-		LET rm_n74.n74_num_prest = NULL
-		SELECT NVL(MAX(n74_num_prest), 0) + 1
-			INTO rm_n74.n74_num_prest
+		LET rm_n45.n45_num_prest = NULL
+		SELECT NVL(MAX(n45_num_prest), 0) + 1
+			INTO rm_n45.n45_num_prest
 			FROM rolt045
-			WHERE n74_compania = vg_codcia
-		IF rm_n74.n74_num_prest IS NULL THEN
-			LET rm_n74.n74_num_prest = 1
+			WHERE n45_compania = vg_codcia
+		IF rm_n45.n45_num_prest IS NULL THEN
+			LET rm_n45.n45_num_prest = 1
 		END IF
-		CALL fl_lee_cab_prestamo_roles(vg_codcia, rm_n74.n74_num_prest)
-			RETURNING r_n74.*
-		IF r_n74.n74_num_prest IS NULL THEN
+		CALL fl_lee_cab_prestamo_roles(vg_codcia, rm_n45.n45_num_prest)
+			RETURNING r_n45.*
+		IF r_n45.n45_num_prest IS NULL THEN
 			EXIT WHILE
 		END IF
 	END WHILE
 	WHENEVER ERROR STOP
-	LET rm_n74.n74_fecha  = CURRENT
-	LET rm_n74.n74_fecing = CURRENT
-	IF rm_n74.n74_tipo_pago = 'R' THEN
-		LET rm_n74.n74_tipo_pago = 'T'
+	LET rm_n45.n45_fecha  = CURRENT
+	LET rm_n45.n45_fecing = CURRENT
+	IF rm_n45.n45_tipo_pago = 'R' THEN
+		LET rm_n45.n45_tipo_pago = 'T'
 	END IF
-	INSERT INTO rolt045 VALUES(rm_n74.*)
+	INSERT INTO rolt045 VALUES(rm_n45.*)
 	LET num_aux = SQLCA.SQLERRD[6] 
 	CALL grabar_detalle()
 	CALL grabar_resumen()
 	CALL control_transferir_prestamo()
 COMMIT WORK
-IF rm_n74.n74_val_prest > 0 THEN
-	CALL regenerar_novedades(rm_n74.n74_num_prest, 0)
-	CALL regenerar_novedades(rm_n74.n74_prest_tran, 1)
+IF rm_n45.n45_val_prest > 0 THEN
+	CALL regenerar_novedades(rm_n45.n45_num_prest, 0)
+	CALL regenerar_novedades(rm_n45.n45_prest_tran, 1)
 ELSE
-	CALL regenerar_novedades(rm_n74.n74_prest_tran, 1)
-	CALL regenerar_novedades(rm_n74.n74_num_prest, 0)
+	CALL regenerar_novedades(rm_n45.n45_prest_tran, 1)
+	CALL regenerar_novedades(rm_n45.n45_num_prest, 0)
 END IF
 IF vm_num_rows = vm_max_rows THEN
 	LET vm_num_rows = 1
@@ -308,8 +350,8 @@ END IF
 LET vm_row_current            = vm_num_rows
 LET vm_r_rows[vm_row_current] = num_aux
 CALL muestrar_reg()
-IF rm_n74.n74_sal_prest_ant > 0 OR rm_n74.n74_tipo_pago = 'E' THEN
---IF rm_n74.n74_sal_prest_ant > 0 THEN
+IF rm_n45.n45_sal_prest_ant > 0 OR rm_n45.n45_tipo_pago = 'E' THEN
+--IF rm_n45.n45_sal_prest_ant > 0 THEN
 	CALL control_contabilizacion()
 END IF
 CALL control_imprimir()
@@ -326,24 +368,24 @@ DEFINE resul, flag	SMALLINT
 DEFINE resp		CHAR(6)
 
 CALL mostrar_registro(vm_r_rows[vm_row_current])
-IF rm_n74.n74_estado <> 'A' AND rm_n74.n74_estado <> 'R' THEN
+IF rm_n45.n45_estado <> 'A' AND rm_n45.n45_estado <> 'R' THEN
 	CALL fl_mostrar_mensaje('Solo puede modificar un anticipo cuando esta Activo o Redistribuido.', 'exclamation')
 	RETURN
 END IF
 {--
-IF rm_n74.n74_descontado > 0 THEN
+IF rm_n45.n45_descontado > 0 THEN
 	CALL fl_mostrar_mensaje('No puede modificar un anticipo que ya se comenzo a descontar.', 'exclamation')
 	RETURN
 END IF
 --}
-IF rm_n74.n74_val_prest + rm_n74.n74_sal_prest_ant + rm_n74.n74_valor_int -
-   rm_n74.n74_descontado = 0
+IF rm_n45.n45_val_prest + rm_n45.n45_sal_prest_ant + rm_n45.n45_valor_int -
+   rm_n45.n45_descontado = 0
 THEN
 	CALL fl_mostrar_mensaje('No puede modificar un anticipo que ya esté cancelado.', 'exclamation')
 	RETURN
 END IF
 LET flag = 1
-CALL lee_prest_cont(vg_codcia, rm_n74.n74_num_prest) RETURNING r_n59.*
+CALL lee_prest_cont(vg_codcia, rm_n45.n45_num_prest) RETURNING r_n59.*
 IF r_n59.n59_compania IS NOT NULL THEN
 	CALL fl_mostrar_mensaje('No puede modificar un anticipo que ya esté contabilizado.', 'exclamation')
 	IF vm_num_det <= 1 THEN
@@ -364,7 +406,7 @@ DECLARE q_up CURSOR FOR
 		WHERE ROWID = vm_r_rows[vm_row_current]
 	FOR UPDATE
 OPEN q_up
-FETCH q_up INTO rm_n74.*
+FETCH q_up INTO rm_n45.*
 IF STATUS = NOTFOUND THEN
 	ROLLBACK WORK
 	CALL fl_mostrar_mensaje('Este registro no existe. Ha ocurrido un error interno de la base de datos.', 'exclamation')
@@ -377,7 +419,7 @@ IF STATUS < 0 THEN
 	WHENEVER ERROR STOP
 	RETURN
 END IF
-IF rm_n74.n74_descontado > 0 THEN
+IF rm_n45.n45_descontado > 0 THEN
 	CALL modificar_dividendos_con_saldo() RETURNING resul
 	IF int_flag THEN
 		CALL mostrar_salir()
@@ -390,11 +432,11 @@ IF resul THEN
 	WHENEVER ERROR STOP
 	RETURN
 END IF
-LET rm_n74.n74_fecha  = CURRENT
-IF rm_n74.n74_tipo_pago = 'R' THEN
-	LET rm_n74.n74_tipo_pago = 'T'
+LET rm_n45.n45_fecha  = CURRENT
+IF rm_n45.n45_tipo_pago = 'R' THEN
+	LET rm_n45.n45_tipo_pago = 'T'
 END IF
-UPDATE rolt045 SET * = rm_n74.* WHERE CURRENT OF q_up
+UPDATE rolt045 SET * = rm_n45.* WHERE CURRENT OF q_up
 IF STATUS < 0 THEN
 	ROLLBACK WORK
 	CALL fl_mostrar_mensaje('Ha ocurrido un error interno de la base de datos al intentar actualizar el registro. Consulte con el Administrador.', 'exclamation')
@@ -405,7 +447,7 @@ CALL grabar_detalle()
 CALL grabar_resumen()
 WHENEVER ERROR STOP
 COMMIT WORK
-CALL regenerar_novedades(rm_n74.n74_num_prest, 0)
+CALL regenerar_novedades(rm_n45.n45_num_prest, 0)
 LET vm_flag_mant = 'C'
 CALL muestrar_reg()
 CALL fl_mensaje_registro_modificado()
@@ -460,7 +502,7 @@ FUNCTION control_consulta()
 DEFINE r_g13		RECORD LIKE gent013.*
 DEFINE r_n06		RECORD LIKE rolt006.*
 DEFINE r_n30		RECORD LIKE rolt030.*
-DEFINE r_n74		RECORD LIKE rolt045.*
+DEFINE r_n45		RECORD LIKE rolt045.*
 DEFINE query		CHAR(1800)
 DEFINE expr_sql		CHAR(1200)
 DEFINE num_reg		INTEGER
@@ -468,64 +510,64 @@ DEFINE num_reg		INTEGER
 CLEAR FORM
 CALL mostrar_botones()
 IF num_args() <> 3 THEN
-	LET expr_sql = ' n74_num_prest = ', arg_val(4)
+	LET expr_sql = ' n45_num_prest = ', arg_val(4)
 ELSE
 	LET int_flag = 0 
-	CONSTRUCT BY NAME expr_sql ON n74_estado, n74_num_prest, n74_cod_rubro,
-		n74_prest_tran, n74_cod_trab, n74_usuario, n74_moneda,
-		n74_val_prest, n74_mes_gracia, n74_porc_int, n74_valor_int,
-		n74_sal_prest_ant, n74_descontado, n74_paridad, n74_referencia,
-		n74_fecha
+	CONSTRUCT BY NAME expr_sql ON n45_estado, n45_num_prest, n45_cod_rubro,
+		n45_prest_tran, n45_cod_trab, n45_usuario, n45_moneda,
+		n45_val_prest, n45_mes_gracia, n45_porc_int, n45_valor_int,
+		n45_sal_prest_ant, n45_descontado, n45_paridad, n45_referencia,
+		n45_fecha
 		ON KEY(F2)
-			IF INFIELD(n74_num_prest) THEN
+			IF INFIELD(n45_num_prest) THEN
 				CALL fl_ayuda_anticipos(vg_codcia, 'X')
-					RETURNING r_n74.n74_num_prest
-				IF r_n74.n74_num_prest IS NOT NULL THEN
-					LET rm_n74.n74_num_prest =
-							r_n74.n74_num_prest
-					DISPLAY BY NAME rm_n74.n74_num_prest
+					RETURNING r_n45.n45_num_prest
+				IF r_n45.n45_num_prest IS NOT NULL THEN
+					LET rm_n45.n45_num_prest =
+							r_n45.n45_num_prest
+					DISPLAY BY NAME rm_n45.n45_num_prest
 				END IF
 			END IF
-			IF INFIELD(n74_cod_rubro) THEN
+			IF INFIELD(n45_cod_rubro) THEN
 				CALL fl_ayuda_rubros_generales_roles('DE', 'T',
 							'T', 'S', 'T', 'T')
 					RETURNING r_n06.n06_cod_rubro, 
 						  r_n06.n06_nombre 
 				IF r_n06.n06_cod_rubro IS NOT NULL THEN
-					LET rm_n74.n74_cod_rubro =
+					LET rm_n45.n45_cod_rubro =
 							r_n06.n06_cod_rubro
-					DISPLAY BY NAME rm_n74.n74_cod_rubro,
+					DISPLAY BY NAME rm_n45.n45_cod_rubro,
 							r_n06.n06_nombre
 				END IF
 			END IF
-			IF INFIELD(n74_prest_tran) THEN
+			IF INFIELD(n45_prest_tran) THEN
 				CALL fl_ayuda_anticipos(vg_codcia, 'T')
-					RETURNING r_n74.n74_prest_tran
-				IF r_n74.n74_prest_tran IS NOT NULL THEN
-					LET rm_n74.n74_prest_tran =
-							r_n74.n74_prest_tran
-					DISPLAY BY NAME rm_n74.n74_prest_tran
+					RETURNING r_n45.n45_prest_tran
+				IF r_n45.n45_prest_tran IS NOT NULL THEN
+					LET rm_n45.n45_prest_tran =
+							r_n45.n45_prest_tran
+					DISPLAY BY NAME rm_n45.n45_prest_tran
 				END IF
 			END IF
-			IF INFIELD(n74_cod_trab) THEN
+			IF INFIELD(n45_cod_trab) THEN
 	                        CALL fl_ayuda_codigo_empleado(vg_codcia)
 	                                RETURNING r_n30.n30_cod_trab,
 						  r_n30.n30_nombres
 				IF r_n30.n30_cod_trab IS NOT NULL THEN
-	                                LET rm_n74.n74_cod_trab =
+	                                LET rm_n45.n45_cod_trab =
 							r_n30.n30_cod_trab
-        	                        DISPLAY BY NAME rm_n74.n74_cod_trab,
+        	                        DISPLAY BY NAME rm_n45.n45_cod_trab,
 							r_n30.n30_nombres
                         	END IF
 	                END IF
-			IF INFIELD(n74_moneda) THEN
+			IF INFIELD(n45_moneda) THEN
 				CALL fl_ayuda_monedas()
 					RETURNING r_g13.g13_moneda,
 						  r_g13.g13_nombre,
 						  r_g13.g13_decimales
 				IF r_g13.g13_moneda IS NOT NULL THEN
-					LET rm_n74.n74_moneda = r_g13.g13_moneda
-					DISPLAY BY NAME rm_n74.n74_moneda,
+					LET rm_n45.n45_moneda = r_g13.g13_moneda
+					DISPLAY BY NAME rm_n45.n45_moneda,
 							r_g13.g13_nombre
 				END IF
 			END IF
@@ -533,12 +575,12 @@ ELSE
 		BEFORE CONSTRUCT
 			--#CALL dialog.keysetlabel("F1","")
 			--#CALL dialog.keysetlabel("CONTROL-W","")
-		AFTER FIELD n74_estado
-			LET rm_n74.n74_estado = GET_FLDBUF(n74_estado)
-			IF rm_n74.n74_estado IS NOT NULL THEN
+		AFTER FIELD n45_estado
+			LET rm_n45.n45_estado = GET_FLDBUF(n45_estado)
+			IF rm_n45.n45_estado IS NOT NULL THEN
 				CALL muestra_estado()
 			ELSE
-				CLEAR n74_estado, tit_estado
+				CLEAR n45_estado, tit_estado
 			END IF
 	END CONSTRUCT
 	IF int_flag THEN
@@ -547,13 +589,13 @@ ELSE
 	END IF
 END IF
 LET query = 'SELECT *, ROWID FROM rolt045 ',
-		' WHERE n74_compania = ', vg_codcia,
+		' WHERE n45_compania = ', vg_codcia,
 		'   AND ', expr_sql CLIPPED,
 		' ORDER BY 2 ' CLIPPED
 PREPARE cons FROM query	
 DECLARE q_cons CURSOR FOR cons
 LET vm_num_rows = 0
-FOREACH q_cons INTO rm_n74.*, num_reg
+FOREACH q_cons INTO rm_n45.*, num_reg
 	LET vm_num_rows = vm_num_rows + 1
         IF vm_num_rows > vm_max_rows THEN
 		LET vm_num_rows = vm_num_rows - 1
@@ -592,21 +634,21 @@ IF vm_num_rows = 0 THEN
 	RETURN
 END IF
 CALL mostrar_registro(vm_r_rows[vm_row_current])
---IF rm_n74.n74_val_prest = 0 AND rm_n74.n74_estado = 'R' THEN
-IF rm_n74.n74_estado = 'R' THEN
+--IF rm_n45.n45_val_prest = 0 AND rm_n45.n45_estado = 'R' THEN
+IF rm_n45.n45_estado = 'R' THEN
 	CALL fl_mostrar_mensaje('No puede eliminar un anticipo que ya esta REDEFINIDO.', 'exclamation')
 	RETURN
 END IF
-IF rm_n74.n74_estado <> 'A' AND rm_n74.n74_estado <> 'R' THEN
+IF rm_n45.n45_estado <> 'A' AND rm_n45.n45_estado <> 'R' THEN
 	CALL fl_mostrar_mensaje('No puede eliminar un anticipo que no esté ACTIVO o REDISTRIBUIDO.', 'exclamation')
 	RETURN
 END IF
-IF rm_n74.n74_descontado > 0 THEN
+IF rm_n45.n45_descontado > 0 THEN
 	CALL fl_mostrar_mensaje('No puede eliminar un anticipo que se ha descontado uno o mas dividendos.', 'exclamation')
 	RETURN
 END IF
-IF rm_n74.n74_val_prest + rm_n74.n74_sal_prest_ant + rm_n74.n74_valor_int -
-   rm_n74.n74_descontado = 0
+IF rm_n45.n45_val_prest + rm_n45.n45_sal_prest_ant + rm_n45.n45_valor_int -
+   rm_n45.n45_descontado = 0
 THEN
 	CALL fl_mostrar_mensaje('No puede eliminar un anticipo que ya esté cancelado.', 'exclamation')
 	RETURN
@@ -616,7 +658,7 @@ CALL fl_hacer_pregunta('Esta seguro que desea ELIMINAR este anticipo ?', 'No')
 IF resp <> 'Yes' THEN
 	RETURN
 END IF
-CALL lee_prest_cont(vg_codcia, rm_n74.n74_num_prest) RETURNING r_n59.*
+CALL lee_prest_cont(vg_codcia, rm_n45.n45_num_prest) RETURNING r_n59.*
 IF r_n59.n59_compania IS NOT NULL THEN
 	CALL fl_hacer_pregunta('Este anticipo tiene contabilización. Desea continuar con la eliminación ?', 'No')
 		RETURNING resp
@@ -631,7 +673,7 @@ DECLARE q_elimin CURSOR FOR
 		WHERE ROWID = vm_r_rows[vm_row_current]
 	FOR UPDATE
 OPEN q_elimin
-FETCH q_elimin INTO rm_n74.*
+FETCH q_elimin INTO rm_n45.*
 IF STATUS = NOTFOUND THEN
 	ROLLBACK WORK
 	CALL fl_mostrar_mensaje('No existe el registro que desea eliminar. Por favor pida ayuda al Administrador.', 'exclamation')
@@ -654,7 +696,7 @@ LET int_flag = 1
 CALL elimina_registro()
 COMMIT WORK
 CALL eliminar_diario_contable(r_n59.*)
-CALL regenerar_novedades(rm_n74.n74_num_prest, 0)
+CALL regenerar_novedades(rm_n45.n45_num_prest, 0)
 CALL fl_mostrar_mensaje('Se ha eliminado esté anticipo Ok.', 'info')
 
 END FUNCTION
@@ -662,21 +704,21 @@ END FUNCTION
 
 
 FUNCTION elimina_registro()
-DEFINE estado		LIKE rolt045.n74_estado
+DEFINE estado		LIKE rolt045.n45_estado
 
-IF rm_n74.n74_estado = 'A' THEN
+IF rm_n45.n45_estado = 'A' THEN
 	LET estado = 'E'
 END IF
-IF rm_n74.n74_estado = 'E' THEN
+IF rm_n45.n45_estado = 'E' THEN
 	LET estado = 'A'
 END IF
-UPDATE rolt045 SET n74_estado    = estado,
-		   n74_fec_elimi = CURRENT
+UPDATE rolt045 SET n45_estado    = estado,
+		   n45_fec_elimi = CURRENT
 	WHERE CURRENT OF q_elimin
-LET rm_n74.n74_fec_elimi = CURRENT
-LET rm_n74.n74_estado    = estado
+LET rm_n45.n45_fec_elimi = CURRENT
+LET rm_n45.n45_estado    = estado
 CALL muestra_estado()
-DISPLAY BY NAME rm_n74.n74_fec_elimi
+DISPLAY BY NAME rm_n45.n45_fec_elimi
 
 END FUNCTION
 
@@ -751,8 +793,8 @@ CALL preparar_query_cap() RETURNING resul
 IF resul THEN
 	RETURN
 END IF
-CALL fl_lee_trabajador_roles(vg_codcia, rm_n74.n74_cod_trab) RETURNING r_n30.*
-DISPLAY rm_n74.n74_cod_trab TO n32_cod_trab
+CALL fl_lee_trabajador_roles(vg_codcia, rm_n45.n45_cod_trab) RETURNING r_n30.*
+DISPLAY rm_n45.n45_cod_trab TO n32_cod_trab
 DISPLAY BY NAME r_n30.n30_nombres
 WHILE TRUE
 	IF vm_num_prest > 0 THEN
@@ -812,13 +854,13 @@ LET vm_max_detliq = 50
 INITIALIZE r_n32.*, r_n46.* TO NULL
 DECLARE q_detant CURSOR FOR
 	SELECT rolt046.* FROM rolt045, rolt046
-		WHERE n74_compania  = vg_codcia
-		  AND n74_cod_trab  = rm_n74.n74_cod_trab
-		  AND n74_estado    IN ("A", "R")
-		  AND n74_val_prest + n74_sal_prest_ant + n74_valor_int >
-								n74_descontado
-		  AND n46_compania  = n74_compania
-		  AND n46_num_prest = n74_num_prest
+		WHERE n45_compania  = vg_codcia
+		  AND n45_cod_trab  = rm_n45.n45_cod_trab
+		  AND n45_estado    IN ("A", "R")
+		  AND n45_val_prest + n45_sal_prest_ant + n45_valor_int >
+								n45_descontado
+		  AND n46_compania  = n45_compania
+		  AND n46_num_prest = n45_num_prest
 		  AND n46_saldo     > 0
 		ORDER BY n46_num_prest, n46_secuencia
 OPEN q_detant
@@ -830,7 +872,7 @@ DECLARE q_detliq CURSOR FOR
 		WHERE n32_compania   = vg_codcia
 		  AND n32_fecha_ini >= fec_ini
 		  AND n32_fecha_fin <= fec_fin
-		  AND n32_cod_trab   = rm_n74.n74_cod_trab
+		  AND n32_cod_trab   = rm_n45.n45_cod_trab
 		  AND n32_estado    <> 'E'
 		ORDER BY n32_fecha_fin DESC
 OPEN q_detliq
@@ -847,7 +889,7 @@ LET total_valor  = 0
 LET total_saldo  = 0
 LET vm_num_prest = 1
 FOREACH q_detant INTO r_n46.*
-	IF r_n46.n46_num_prest = rm_n74.n74_num_prest THEN
+	IF r_n46.n46_num_prest = rm_n45.n45_num_prest THEN
 		CONTINUE FOREACH
 	END IF
 	LET rm_detprest[vm_num_prest].n46_num_prest  = r_n46.n46_num_prest
@@ -1026,26 +1068,26 @@ DEFINE r_n06		RECORD LIKE rolt006.*
 DEFINE r_n16		RECORD LIKE rolt016.*
 DEFINE r_n18		RECORD LIKE rolt018.*
 DEFINE r_n30		RECORD LIKE rolt030.*
-DEFINE r_n74		RECORD LIKE rolt045.*
+DEFINE r_n45		RECORD LIKE rolt045.*
 DEFINE dia		LIKE rolt003.n03_dia_fin
-DEFINE val_prest	LIKE rolt045.n74_val_prest
-DEFINE val_p		LIKE rolt045.n74_val_prest
-DEFINE fecha_p		LIKE rolt045.n74_fecha
-DEFINE mes_g		LIKE rolt045.n74_mes_gracia
-DEFINE porc_i		LIKE rolt045.n74_porc_int
+DEFINE val_prest	LIKE rolt045.n45_val_prest
+DEFINE val_p		LIKE rolt045.n45_val_prest
+DEFINE fecha_p		LIKE rolt045.n45_fecha
+DEFINE mes_g		LIKE rolt045.n45_mes_gracia
+DEFINE porc_i		LIKE rolt045.n45_porc_int
 DEFINE deuda		DECIMAL(14,2)
 DEFINE deuda_c		VARCHAR(13)
 DEFINE resul		SMALLINT
 DEFINE resp		CHAR(6)
 
 LET int_flag = 0 
-INPUT BY NAME rm_n74.n74_cod_rubro, rm_n74.n74_cod_trab, rm_n74.n74_val_prest,
-	rm_n74.n74_mes_gracia, rm_n74.n74_porc_int, rm_n74.n74_referencia
+INPUT BY NAME rm_n45.n45_cod_rubro, rm_n45.n45_cod_trab, rm_n45.n45_val_prest,
+	rm_n45.n45_mes_gracia, rm_n45.n45_porc_int, rm_n45.n45_referencia
 	WITHOUT DEFAULTS
 	ON KEY(INTERRUPT)
-		IF FIELD_TOUCHED(rm_n74.n74_cod_rubro, rm_n74.n74_cod_trab,
-				 rm_n74.n74_val_prest, rm_n74.n74_mes_gracia,
-				 rm_n74.n74_porc_int, rm_n74.n74_referencia)
+		IF FIELD_TOUCHED(rm_n45.n45_cod_rubro, rm_n45.n45_cod_trab,
+				 rm_n45.n45_val_prest, rm_n45.n45_mes_gracia,
+				 rm_n45.n45_porc_int, rm_n45.n45_referencia)
 		THEN
 			LET int_flag = 0
 			CALL fl_mensaje_abandonar_proceso() RETURNING resp
@@ -1057,26 +1099,26 @@ INPUT BY NAME rm_n74.n74_cod_rubro, rm_n74.n74_cod_trab, rm_n74.n74_val_prest,
 			RETURN
 		END IF
 	ON KEY(F2)
-		IF INFIELD(n74_cod_rubro) THEN
+		IF INFIELD(n45_cod_rubro) THEN
 			CALL fl_ayuda_rubros_generales_roles('DE', 'T', 'T',
 								'T', 'T', 'T')
 				RETURNING r_n06.n06_cod_rubro, 
 					  r_n06.n06_nombre 
 			IF r_n06.n06_cod_rubro IS NOT NULL THEN
-				LET rm_n74.n74_cod_rubro = r_n06.n06_cod_rubro
-				DISPLAY BY NAME rm_n74.n74_cod_rubro,
+				LET rm_n45.n45_cod_rubro = r_n06.n06_cod_rubro
+				DISPLAY BY NAME rm_n45.n45_cod_rubro,
 						r_n06.n06_nombre
 			END IF
 		END IF
-		IF INFIELD(n74_cod_trab) THEN
+		IF INFIELD(n45_cod_trab) THEN
 			IF vm_flag_mant = 'M' THEN
 				CONTINUE INPUT
                 	END IF
                         CALL fl_ayuda_codigo_empleado(vg_codcia)
                                 RETURNING r_n30.n30_cod_trab, r_n30.n30_nombres
                         IF r_n30.n30_cod_trab IS NOT NULL THEN
-                                LET rm_n74.n74_cod_trab = r_n30.n30_cod_trab
-                                DISPLAY BY NAME rm_n74.n74_cod_trab,
+                                LET rm_n45.n45_cod_trab = r_n30.n30_cod_trab
+                                DISPLAY BY NAME rm_n45.n45_cod_trab,
 						r_n30.n30_nombres
                         END IF
                 END IF
@@ -1085,66 +1127,66 @@ INPUT BY NAME rm_n74.n74_cod_rubro, rm_n74.n74_cod_trab, rm_n74.n74_val_prest,
 		--#CALL dialog.keysetlabel("F1","")
 		--#CALL dialog.keysetlabel("CONTROL-W","")
 		IF vm_flag_mant = 'M' THEN
-			LET val_p           = rm_n74.n74_val_prest
+			LET val_p           = rm_n45.n45_val_prest
 			LET vm_cambio_valor = 0
 		END IF
-	BEFORE FIELD n74_cod_rubro
-		LET r_n06.n06_cod_rubro = rm_n74.n74_cod_rubro
-	BEFORE FIELD n74_cod_trab
+	BEFORE FIELD n45_cod_rubro
+		LET r_n06.n06_cod_rubro = rm_n45.n45_cod_rubro
+	BEFORE FIELD n45_cod_trab
 		IF vm_flag_mant = 'M' THEN
-			LET r_n74.n74_cod_trab = rm_n74.n74_cod_trab
+			LET r_n45.n45_cod_trab = rm_n45.n45_cod_trab
 		END IF
-	BEFORE FIELD n74_val_prest
-		LET val_prest = rm_n74.n74_val_prest
-	BEFORE FIELD n74_mes_gracia
-		LET mes_g = rm_n74.n74_mes_gracia
-	BEFORE FIELD n74_porc_int
-		LET porc_i = rm_n74.n74_porc_int
-	AFTER FIELD n74_cod_rubro
-		IF rm_n74.n74_cod_rubro IS NULL THEN
-			LET rm_n74.n74_cod_rubro = r_n06.n06_cod_rubro
-			CALL fl_lee_rubro_roles(rm_n74.n74_cod_rubro)
+	BEFORE FIELD n45_val_prest
+		LET val_prest = rm_n45.n45_val_prest
+	BEFORE FIELD n45_mes_gracia
+		LET mes_g = rm_n45.n45_mes_gracia
+	BEFORE FIELD n45_porc_int
+		LET porc_i = rm_n45.n45_porc_int
+	AFTER FIELD n45_cod_rubro
+		IF rm_n45.n45_cod_rubro IS NULL THEN
+			LET rm_n45.n45_cod_rubro = r_n06.n06_cod_rubro
+			CALL fl_lee_rubro_roles(rm_n45.n45_cod_rubro)
 				RETURNING r_n06.*
-			DISPLAY BY NAME rm_n74.n74_cod_rubro, r_n06.n06_nombre
+			DISPLAY BY NAME rm_n45.n45_cod_rubro, r_n06.n06_nombre
 		END IF
-		IF rm_n74.n74_cod_rubro IS NOT NULL THEN
-			CALL fl_lee_rubro_roles(rm_n74.n74_cod_rubro)
+		IF rm_n45.n45_cod_rubro IS NOT NULL THEN
+			CALL fl_lee_rubro_roles(rm_n45.n45_cod_rubro)
 				RETURNING r_n06.*
 			IF r_n06.n06_cod_rubro IS NULL  THEN
 				CALL fl_mostrar_mensaje('Rubro no existe.','exclamation')
-				NEXT FIELD n74_cod_rubro
+				NEXT FIELD n45_cod_rubro
 			END IF
 			DISPLAY BY NAME r_n06.n06_nombre
 			IF r_n06.n06_estado = 'B' THEN
 				CALL fl_mensaje_estado_bloqueado()
-				NEXT FIELD n74_cod_rubro
+				NEXT FIELD n45_cod_rubro
 			END IF
 			IF r_n06.n06_det_tot <> 'DE' THEN
 				CALL fl_mostrar_mensaje('El rubro debe ser de descuento.', 'exclamation')
-				NEXT FIELD n74_cod_rubro
+				NEXT FIELD n45_cod_rubro
 			END IF
 			IF r_n06.n06_flag_ident IS NULL THEN
 				CALL fl_mostrar_mensaje('El rubro no tiene identificacion de ANTICIPOS.', 'exclamation')
-				NEXT FIELD n74_cod_rubro
+				NEXT FIELD n45_cod_rubro
 			END IF
 			INITIALIZE r_n18.* TO NULL
 			SELECT * INTO r_n18.*
 				FROM rolt018
-				WHERE n18_cod_rubro  = rm_n74.n74_cod_rubro
+				WHERE n18_cod_rubro  = rm_n45.n45_cod_rubro
 				  AND n18_flag_ident = r_n06.n06_flag_ident
 			IF (r_n06.n06_flag_ident <> vm_proceso AND
 			    r_n06.n06_flag_ident <> r_n18.n18_flag_ident) OR
 			    r_n18.n18_flag_ident IS NULL
 			THEN
 				CALL fl_mostrar_mensaje('El rubro debe ser un rubro con identificacion de ANTICIPOS.', 'exclamation')
-				NEXT FIELD n74_cod_rubro
+				NEXT FIELD n45_cod_rubro
 			END IF
 			IF r_n06.n06_ing_usuario = 'N' AND
 			   r_n06.n06_flag_ident <> vm_proceso AND
 			   r_n06.n06_flag_ident <> r_n18.n18_flag_ident
 			THEN
 				CALL fl_mostrar_mensaje('El rubro no puede ser ingresado por el usuario.', 'exclamation')
-				NEXT FIELD n74_cod_rubro
+				NEXT FIELD n45_cod_rubro
 			END IF
 			IF r_n06.n06_flag_ident = r_n18.n18_flag_ident THEN
 				CALL fl_lee_proceso_roles(r_n18.n18_flag_ident)
@@ -1155,73 +1197,73 @@ INPUT BY NAME rm_n74.n74_cod_rubro, rm_n74.n74_cod_trab, rm_n74.n74_val_prest,
 						WHERE n16_flag_ident =
 							r_n18.n18_flag_ident
 					CALL fl_mostrar_mensaje('No existe configurado el proceso ' || r_n16.n16_descripcion CLIPPED || ' en la tabla rolt003.', 'exclamation')
-					NEXT FIELD n74_cod_rubro
+					NEXT FIELD n45_cod_rubro
 				END IF
-				LET rm_n74.n74_tipo_pago = 'E'
+				LET rm_n45.n45_tipo_pago = 'E'
 			END IF
 		ELSE
 			CLEAR n06_nombre
 		END IF
-	AFTER FIELD n74_cod_trab
+	AFTER FIELD n45_cod_trab
 		IF vm_flag_mant = 'M' THEN
-			LET rm_n74.n74_cod_trab = r_n74.n74_cod_trab
-			DISPLAY BY NAME rm_n74.n74_cod_trab
+			LET rm_n45.n45_cod_trab = r_n45.n45_cod_trab
+			DISPLAY BY NAME rm_n45.n45_cod_trab
 			CONTINUE INPUT
 		END IF
-		IF rm_n74.n74_cod_trab IS NOT NULL THEN
+		IF rm_n45.n45_cod_trab IS NOT NULL THEN
 			CALL fl_lee_trabajador_roles(vg_codcia,
-							rm_n74.n74_cod_trab)
+							rm_n45.n45_cod_trab)
                         	RETURNING r_n30.*
 			IF r_n30.n30_compania IS NULL THEN
 				CALL fgl_winmessage(vg_producto,'No existe el código de este empleado en la Compañía.','exclamation')
-				NEXT FIELD n74_cod_trab
+				NEXT FIELD n45_cod_trab
 			END IF
 			DISPLAY BY NAME r_n30.n30_nombres
 			IF r_n30.n30_estado = 'I' THEN
 				CALL fl_mensaje_estado_bloqueado()
-				--NEXT FIELD n74_cod_trab
+				--NEXT FIELD n45_cod_trab
 			END IF
-			LET rm_n74.n74_prest_tran    = NULL
-			LET rm_n74.n74_sal_prest_ant = 0
-			DECLARE q_n74 CURSOR FOR
+			LET rm_n45.n45_prest_tran    = NULL
+			LET rm_n45.n45_sal_prest_ant = 0
+			DECLARE q_n45 CURSOR FOR
 				SELECT * FROM rolt045
-					WHERE n74_compania = vg_codcia
-					  AND n74_cod_trab = rm_n74.n74_cod_trab
-					  AND n74_cod_rubro=rm_n74.n74_cod_rubro
-					  AND n74_estado   IN ('A', 'R')
-			OPEN q_n74
-			FETCH q_n74 INTO r_n74.*
+					WHERE n45_compania = vg_codcia
+					  AND n45_cod_trab = rm_n45.n45_cod_trab
+					  AND n45_cod_rubro=rm_n45.n45_cod_rubro
+					  AND n45_estado   IN ('A', 'R')
+			OPEN q_n45
+			FETCH q_n45 INTO r_n45.*
 			IF STATUS <> NOTFOUND THEN
-				SELECT NVL(SUM(n74_val_prest + n74_sal_prest_ant
-				 	+ n74_valor_int - n74_descontado), 0)
+				SELECT NVL(SUM(n45_val_prest + n45_sal_prest_ant
+				 	+ n45_valor_int - n45_descontado), 0)
 					INTO deuda FROM rolt045
-					WHERE n74_compania = vg_codcia
-					  AND n74_cod_trab = rm_n74.n74_cod_trab
-					  AND n74_cod_rubro=rm_n74.n74_cod_rubro
-					  AND n74_estado   IN ('A', 'R')
+					WHERE n45_compania = vg_codcia
+					  AND n45_cod_trab = rm_n45.n45_cod_trab
+					  AND n45_cod_rubro=rm_n45.n45_cod_rubro
+					  AND n45_estado   IN ('A', 'R')
  				LET deuda_c = deuda USING "--,---,--&.##"
 				CALL fl_mostrar_mensaje('Este empleado ya tiene una deuda de ' || fl_justifica_titulo('I', deuda_c, 13) CLIPPED || '.', 'exclamation')
-				LET rm_n74.n74_sal_prest_ant = deuda
+				LET rm_n45.n45_sal_prest_ant = deuda
 				DECLARE q_ant CURSOR FOR
-					SELECT n74_num_prest, n74_fecha
+					SELECT n45_num_prest, n45_fecha
 						FROM rolt045
-						WHERE n74_compania  = vg_codcia
-						  AND n74_cod_trab  =
-							rm_n74.n74_cod_trab
-						  AND n74_cod_rubro =
-							rm_n74.n74_cod_rubro
-						  AND n74_estado   IN ('A', 'R')
-					ORDER BY n74_fecha DESC
+						WHERE n45_compania  = vg_codcia
+						  AND n45_cod_trab  =
+							rm_n45.n45_cod_trab
+						  AND n45_cod_rubro =
+							rm_n45.n45_cod_rubro
+						  AND n45_estado   IN ('A', 'R')
+					ORDER BY n45_fecha DESC
 				OPEN q_ant
-				FETCH q_ant INTO rm_n74.n74_prest_tran, fecha_p
+				FETCH q_ant INTO rm_n45.n45_prest_tran, fecha_p
 				CLOSE q_ant
 				FREE q_ant
 			END IF
-			CLOSE q_n74
-			FREE q_n74
-			DISPLAY BY NAME rm_n74.n74_sal_prest_ant,
-					rm_n74.n74_prest_tran
-			CALL proceso_activo_nomina(rm_n74.n74_prest_tran, 1, 0)
+			CLOSE q_n45
+			FREE q_n45
+			DISPLAY BY NAME rm_n45.n45_sal_prest_ant,
+					rm_n45.n45_prest_tran
+			CALL proceso_activo_nomina(rm_n45.n45_prest_tran, 1, 0)
 				RETURNING r_n05.*, resul
 			IF NOT resul THEN
 				CALL fl_lee_proceso_roles(r_n05.n05_proceso)
@@ -1245,58 +1287,58 @@ INPUT BY NAME rm_n74.n74_cod_rubro, rm_n74.n74_cod_trab, rm_n74.n74_val_prest,
 		ELSE
 			CLEAR n30_nombres
 		END IF
-	AFTER FIELD n74_mes_gracia
+	AFTER FIELD n45_mes_gracia
 		IF vm_flag_mant = 'M' THEN
-			LET rm_n74.n74_mes_gracia = mes_g
-			DISPLAY BY NAME rm_n74.n74_mes_gracia
+			LET rm_n45.n45_mes_gracia = mes_g
+			DISPLAY BY NAME rm_n45.n45_mes_gracia
 			CONTINUE INPUT
 		END IF
-		IF rm_n74.n74_mes_gracia IS NULL THEN
-			LET rm_n74.n74_mes_gracia = mes_g
-			DISPLAY BY NAME rm_n74.n74_mes_gracia
+		IF rm_n45.n45_mes_gracia IS NULL THEN
+			LET rm_n45.n45_mes_gracia = mes_g
+			DISPLAY BY NAME rm_n45.n45_mes_gracia
 		END IF
-		IF rm_n74.n74_mes_gracia > 0 THEN
-			IF rm_n74.n74_mes_gracia > rm_n90.n90_mes_gra_ant THEN
+		IF rm_n45.n45_mes_gracia > 0 THEN
+			IF rm_n45.n45_mes_gracia > rm_n90.n90_mes_gra_ant THEN
 				CALL fl_mostrar_mensaje('Los meses de gracia no pueden ser mayor que los meses de gracia configurado.', 'exclamation')
-				LET rm_n74.n74_mes_gracia =
+				LET rm_n45.n45_mes_gracia =
 							rm_n90.n90_mes_gra_ant
-				DISPLAY BY NAME rm_n74.n74_mes_gracia
-				NEXT FIELD n74_mes_gracia
+				DISPLAY BY NAME rm_n45.n45_mes_gracia
+				NEXT FIELD n45_mes_gracia
 			END IF
 		END IF
-	AFTER FIELD n74_porc_int
+	AFTER FIELD n45_porc_int
 		IF vm_flag_mant = 'M' THEN
-			LET rm_n74.n74_porc_int = porc_i
-			DISPLAY BY NAME rm_n74.n74_porc_int
+			LET rm_n45.n45_porc_int = porc_i
+			DISPLAY BY NAME rm_n45.n45_porc_int
 			CONTINUE INPUT
 		END IF
-		IF rm_n74.n74_porc_int IS NULL THEN
-			LET rm_n74.n74_porc_int = porc_i
-			DISPLAY BY NAME rm_n74.n74_porc_int
+		IF rm_n45.n45_porc_int IS NULL THEN
+			LET rm_n45.n45_porc_int = porc_i
+			DISPLAY BY NAME rm_n45.n45_porc_int
 		END IF
-		IF rm_n74.n74_porc_int > 0 THEN
-			IF rm_n74.n74_porc_int > rm_n90.n90_porc_int_ant THEN
+		IF rm_n45.n45_porc_int > 0 THEN
+			IF rm_n45.n45_porc_int > rm_n90.n90_porc_int_ant THEN
 				CALL fl_mostrar_mensaje('El porcentaje interes no puede ser mayor que el porcentaje configurado.', 'exclamation')
-				LET rm_n74.n74_porc_int =rm_n90.n90_porc_int_ant
-				DISPLAY BY NAME rm_n74.n74_porc_int
-				NEXT FIELD n74_porc_int
+				LET rm_n45.n45_porc_int =rm_n90.n90_porc_int_ant
+				DISPLAY BY NAME rm_n45.n45_porc_int
+				NEXT FIELD n45_porc_int
 			END IF
 		END IF
-	AFTER FIELD n74_val_prest
-		IF rm_n74.n74_descontado > 0 OR rm_n74.n74_val_prest IS NULL
+	AFTER FIELD n45_val_prest
+		IF rm_n45.n45_descontado > 0 OR rm_n45.n45_val_prest IS NULL
 		THEN
-			LET rm_n74.n74_val_prest = val_prest
-			DISPLAY BY NAME rm_n74.n74_val_prest
+			LET rm_n45.n45_val_prest = val_prest
+			DISPLAY BY NAME rm_n45.n45_val_prest
 			CONTINUE INPUT
 		END IF
 	AFTER INPUT
-		IF rm_n74.n74_val_prest = 0 AND rm_n74.n74_sal_prest_ant = 0
+		IF rm_n45.n45_val_prest = 0 AND rm_n45.n45_sal_prest_ant = 0
 		THEN
 			CALL fl_mostrar_mensaje('Debe ingresar el valor del anticipo que sea mayor a cero.', 'exclamation')
-			NEXT FIELD n74_val_prest
+			NEXT FIELD n45_val_prest
 		END IF
 		IF vm_flag_mant = 'M' THEN
-			IF val_p <> rm_n74.n74_val_prest THEN
+			IF val_p <> rm_n45.n45_val_prest THEN
 				LET vm_cambio_valor = 1
 			END IF
 		END IF
@@ -1483,7 +1525,7 @@ INPUT BY NAME rm_par.*
 				DISPLAY BY NAME rm_par.num_pagos
 			END IF
 			CALL fl_lee_trabajador_roles(vg_codcia,
-							rm_n74.n74_cod_trab)
+							rm_n45.n45_cod_trab)
                         	RETURNING r_n30.*
 			IF rm_par.cod_liqrol[1] = 'M' OR
 			   rm_par.cod_liqrol[1] = 'Q' OR
@@ -1597,7 +1639,7 @@ DEFINE num_rows 	SMALLINT
 DEFINE num_cols 	SMALLINT
 DEFINE r_n06		RECORD LIKE rolt006.*
 DEFINE r_n30		RECORD LIKE rolt030.*
-DEFINE val_prest, total	LIKE rolt045.n74_val_prest
+DEFINE val_prest, total	LIKE rolt045.n45_val_prest
 
 LET lin_men  = 0
 LET num_rows = 19
@@ -1623,12 +1665,12 @@ DISPLAY FORM f_rolf233_4
 --#DISPLAY "Valor Div."  TO tit_col5
 --#DISPLAY "Total Dist." TO tit_col6
 --#DISPLAY "Saldo Dist." TO tit_col7
-LET val_prest = rm_n74.n74_val_prest + rm_n74.n74_sal_prest_ant +
-		rm_n74.n74_valor_int
-DISPLAY rm_n74.n74_num_prest TO n58_num_prest
-CALL fl_lee_rubro_roles(rm_n74.n74_cod_rubro) RETURNING r_n06.*
-CALL fl_lee_trabajador_roles(vg_codcia, rm_n74.n74_cod_trab) RETURNING r_n30.*
-DISPLAY BY NAME rm_n74.n74_cod_rubro, r_n06.n06_nombre, rm_n74.n74_cod_trab,
+LET val_prest = rm_n45.n45_val_prest + rm_n45.n45_sal_prest_ant +
+		rm_n45.n45_valor_int
+DISPLAY rm_n45.n45_num_prest TO n58_num_prest
+CALL fl_lee_rubro_roles(rm_n45.n45_cod_rubro) RETURNING r_n06.*
+CALL fl_lee_trabajador_roles(vg_codcia, rm_n45.n45_cod_trab) RETURNING r_n30.*
+DISPLAY BY NAME rm_n45.n45_cod_rubro, r_n06.n06_nombre, rm_n45.n45_cod_trab,
 		r_n30.n30_nombres, val_prest
 IF flag = 2 THEN
 	LET vm_num_dettot = 0
@@ -1655,7 +1697,7 @@ END FUNCTION
 
 
 FUNCTION leer_par_dist_var_procesos(val_prest)
-DEFINE val_prest, total	LIKE rolt045.n74_val_prest
+DEFINE val_prest, total	LIKE rolt045.n45_val_prest
 DEFINE j	 	SMALLINT
 DEFINE mensaje		VARCHAR(200)
 DEFINE resp		CHAR(6)
@@ -1794,7 +1836,7 @@ IF rm_dettotpre[i].n58_proceso = 'Q1' OR rm_dettotpre[i].n58_proceso = 'Q2' THEN
 				  AND b.n32_fecha_ini  = a.n32_fecha_ini
 				  AND b.n32_fecha_fin  = a.n32_fecha_fin
 			  	  AND b.n32_cod_trab   = a.n32_cod_trab)
-		  AND a.n32_cod_trab   = rm_n74.n74_cod_trab
+		  AND a.n32_cod_trab   = rm_n45.n45_cod_trab
 		  AND a.n32_estado    <> 'E'
 	LET valor = valor * rm_dettotpre[i].n58_num_div
 END IF
@@ -1804,7 +1846,7 @@ IF rm_dettotpre[i].n58_proceso = 'DT' THEN
 		FROM rolt036
 		WHERE n36_compania     = vg_codcia
 		  AND n36_proceso      = rm_dettotpre[i].n58_proceso
-		  AND n36_cod_trab     = rm_n74.n74_cod_trab
+		  AND n36_cod_trab     = rm_n45.n45_cod_trab
 	CALL fl_lee_proceso_roles(rm_dettotpre[i].n58_proceso) RETURNING r_n03.*
 	LET anio_f  = YEAR(TODAY)
 	LET per_ini = MDY(r_n03.n03_mes_ini, r_n03.n03_dia_ini, anio_i)
@@ -1815,13 +1857,13 @@ IF rm_dettotpre[i].n58_proceso = 'DT' THEN
 		  AND n32_cod_liqrol IN ('Q1', 'Q2')
 		  AND n32_fecha_ini  >= per_ini
 		  AND n32_fecha_fin  <= per_fin
-		  AND n32_cod_trab    = rm_n74.n74_cod_trab
+		  AND n32_cod_trab    = rm_n45.n45_cod_trab
 		  AND n32_estado     <> 'E'
 	SELECT NVL(MAX(n36_valor_bruto), 0) INTO r_n03.n03_valor
 		FROM rolt036
 		WHERE n36_compania     = vg_codcia
 		  AND n36_proceso      = rm_dettotpre[i].n58_proceso
-		  AND n36_cod_trab     = rm_n74.n74_cod_trab
+		  AND n36_cod_trab     = rm_n45.n45_cod_trab
 	IF valor < r_n03.n03_valor THEN
 		LET valor = r_n03.n03_valor
 	END IF
@@ -1831,14 +1873,14 @@ IF rm_dettotpre[i].n58_proceso = 'DC' THEN
 		FROM rolt036
 		WHERE n36_compania     = vg_codcia
 		  AND n36_proceso      = rm_dettotpre[i].n58_proceso
-		  AND n36_cod_trab     = rm_n74.n74_cod_trab
+		  AND n36_cod_trab     = rm_n45.n45_cod_trab
 	CALL fl_lee_proceso_roles(rm_dettotpre[i].n58_proceso) RETURNING r_n03.*
 	IF valor < r_n03.n03_valor THEN
 		LET valor = r_n03.n03_valor
 	END IF
 END IF
 IF rm_dettotpre[i].n58_proceso = 'VA' OR rm_dettotpre[i].n58_proceso = 'VP' THEN
-	CALL fl_lee_trabajador_roles(vg_codcia, rm_n74.n74_cod_trab)
+	CALL fl_lee_trabajador_roles(vg_codcia, rm_n45.n45_cod_trab)
 		RETURNING r_n30.*
 	LET per_ini = NULL
 	SELECT MAX(n39_periodo_fin) + 1 UNITS DAY
@@ -1846,7 +1888,7 @@ IF rm_dettotpre[i].n58_proceso = 'VA' OR rm_dettotpre[i].n58_proceso = 'VP' THEN
 		FROM rolt039
 		WHERE n39_compania     = vg_codcia
 		  AND n39_proceso      = rm_dettotpre[i].n58_proceso
-		  AND n39_cod_trab     = rm_n74.n74_cod_trab
+		  AND n39_cod_trab     = rm_n45.n45_cod_trab
 	IF per_ini IS NULL THEN
 		LET per_ini = MDY(MONTH(r_n30.n30_fecha_ing),
 					DAY(r_n30.n30_fecha_ing), YEAR(TODAY))
@@ -1860,7 +1902,7 @@ IF rm_dettotpre[i].n58_proceso = 'VA' OR rm_dettotpre[i].n58_proceso = 'VP' THEN
 		FROM rolt039
 		WHERE n39_compania     = vg_codcia
 		  AND n39_proceso      = rm_dettotpre[i].n58_proceso
-		  AND n39_cod_trab     = rm_n74.n74_cod_trab
+		  AND n39_cod_trab     = rm_n45.n45_cod_trab
 	IF valor < r_n03.n03_valor THEN
 		LET valor = r_n03.n03_valor
 	END IF
@@ -1870,7 +1912,7 @@ IF rm_dettotpre[i].n58_proceso = 'UT' THEN
 		INTO valor
 		FROM rolt042
 		WHERE n42_compania  = vg_codcia
-		  AND n42_cod_trab  = rm_n74.n74_cod_trab
+		  AND n42_cod_trab  = rm_n45.n45_cod_trab
 END IF
 IF rm_dettotpre[i].n58_valor_div > valor AND valor <> 0 THEN
 	LET valor_c = valor USING "--,---,--&.##"
@@ -2008,7 +2050,7 @@ DEFINE query		CHAR(2000)
 DEFINE expr_tab		VARCHAR(6)
 DEFINE expr_sql		VARCHAR(400)
 DEFINE i		SMALLINT
-DEFINE num_prest	LIKE rolt045.n74_num_prest
+DEFINE num_prest	LIKE rolt045.n45_num_prest
 
 FOR i = 1 TO vm_max_dettot
 	INITIALIZE rm_dettotpre[i].* TO NULL
@@ -2028,19 +2070,19 @@ LET query = 'SELECT NVL(n58_proceso, n03_proceso), n03_nombre, ',
 			'NVL(n58_saldo_dist, 0) ',
 		' FROM rolt003,', expr_tab CLIPPED, ' rolt058 ',
 		expr_sql CLIPPED, ' n58_compania     = ', vg_codcia,
-		'   AND n58_num_prest    = ', rm_n74.n74_num_prest,
+		'   AND n58_num_prest    = ', rm_n45.n45_num_prest,
 		'   AND n58_proceso      = n03_proceso ',
 		' ORDER BY 2 '
-IF rm_n74.n74_num_prest IS NULL THEN
-	LET num_prest = rm_n74.n74_prest_tran
+IF rm_n45.n45_num_prest IS NULL THEN
+	LET num_prest = rm_n45.n45_prest_tran
 	IF num_prest IS NULL THEN
 		LET num_prest = 0
 	END IF
 	LET expr_sql = '   AND EXISTS (SELECT * FROM rolt045 ',
-				' WHERE n74_compania   = n58_compania ',
-				'   AND n74_num_prest <> n58_num_prest ',
-				'   AND n74_cod_rubro  = ',rm_n74.n74_cod_rubro,
-				'   AND n74_estado    IN ("A", "R"))), '
+				' WHERE n45_compania   = n58_compania ',
+				'   AND n45_num_prest <> n58_num_prest ',
+				'   AND n45_cod_rubro  = ',rm_n45.n45_cod_rubro,
+				'   AND n45_estado    IN ("A", "R"))), '
 	LET query = 'SELECT n03_proceso, n03_nombre, 0, ',
 			' NVL((SELECT n58_num_div - n58_div_act ',
 				' FROM rolt058 ',
@@ -2116,8 +2158,8 @@ FOR i = 1 TO vm_num_dettot
 	LET tot_val_dis = tot_val_dis + rm_dettotpre[i].n58_valor_dist
 	LET tot_sal_dis = tot_sal_dis + rm_dettotpre[i].n58_saldo_dist
 END FOR
-LET val_dif = (rm_n74.n74_val_prest + rm_n74.n74_sal_prest_ant +
-		rm_n74.n74_valor_int) - tot_val_dis
+LET val_dif = (rm_n45.n45_val_prest + rm_n45.n45_sal_prest_ant +
+		rm_n45.n45_valor_int) - tot_val_dis
 DISPLAY BY NAME tot_div_act, tot_num_div, tot_val_dis, tot_sal_dis, val_dif
 LET vm_num_det = tot_num_div
 RETURN tot_val_dis
@@ -2293,10 +2335,10 @@ WHILE TRUE
 			IF resul THEN
 				NEXT FIELD n46_cod_liqrol
 			END IF
-			IF total_valor <> (rm_n74.n74_val_prest +
-					rm_n74.n74_valor_int +
-					rm_n74.n74_sal_prest_ant -
-					rm_n74.n74_descontado)
+			IF total_valor <> (rm_n45.n45_val_prest +
+					rm_n45.n45_valor_int +
+					rm_n45.n45_sal_prest_ant -
+					rm_n45.n45_descontado)
 			THEN
 				CALL fl_mostrar_mensaje('El valor total de los dividendos es mayor que el valor del anticipo menos el descontado.', 'exclamation')
 				NEXT FIELD n46_valor
@@ -2399,10 +2441,10 @@ INPUT ARRAY rm_detalle WITHOUT DEFAULTS FROM rm_detalle.*
 		CALL mostrar_total()
 	AFTER INPUT
 		CALL mostrar_total()
-		IF total_saldo <> (rm_n74.n74_val_prest +
-				rm_n74.n74_valor_int +
-				rm_n74.n74_sal_prest_ant -
-				rm_n74.n74_descontado)
+		IF total_saldo <> (rm_n45.n45_val_prest +
+				rm_n45.n45_valor_int +
+				rm_n45.n45_sal_prest_ant -
+				rm_n45.n45_descontado)
 		THEN
 			CALL fl_mostrar_mensaje('El saldo total de los dividendos es diferente que el valor actual del anticipo.', 'exclamation')
 			CONTINUE INPUT
@@ -2464,31 +2506,7 @@ DEFINE r_g13		RECORD LIKE gent013.*
 DEFINE r_n06		RECORD LIKE rolt006.*
 DEFINE resul	 	SMALLINT
 
-LET rm_n74.n74_compania      = vg_codcia
-LET rm_n74.n74_estado        = 'A'
-LET rm_n74.n74_fecha         = CURRENT
-LET rm_n74.n74_val_prest     = 0
-LET rm_n74.n74_valor_int     = 0
-LET rm_n74.n74_sal_prest_ant = 0
-LET rm_n74.n74_descontado    = 0
-LET rm_n74.n74_mes_gracia    = rm_n90.n90_mes_gra_ant
-LET rm_n74.n74_porc_int      = rm_n90.n90_porc_int_ant
-LET rm_n74.n74_moneda        = rg_gen.g00_moneda_base
-CALL fl_lee_moneda(rm_n74.n74_moneda) RETURNING r_g13.*
-IF r_g13.g13_moneda IS NULL THEN
-	CALL fl_mostrar_mensaje('No existe configurada una moneda base en el sistema.', 'stop')
-	EXIT PROGRAM
-END IF
-CALL retorna_paridad() RETURNING rm_n74.n74_paridad, resul
-LET rm_n74.n74_tipo_pago     = 'C'
-LET rm_n74.n74_usuario       = vg_usuario
-LET rm_n74.n74_fecing        = CURRENT
-LET rm_par.num_pagos         = 1
-DISPLAY BY NAME rm_n74.n74_cod_rubro, r_n06.n06_nombre, rm_n74.n74_fecha,
-		rm_n74.n74_val_prest, rm_n74.n74_sal_prest_ant,
-		rm_n74.n74_descontado, rm_n74.n74_moneda, r_g13.g13_nombre,
-		rm_n74.n74_paridad, rm_n74.n74_usuario, rm_n74.n74_prest_tran,
-		rm_n74.n74_mes_gracia, rm_n74.n74_porc_int, rm_n74.n74_valor_int
+INITIALIZE rm_par.* TO NULL
 CALL muestra_estado()
 CALL limpiar_detalle()
 LET vm_num_det    = 0
@@ -2587,22 +2605,22 @@ DEFINE ini		LIKE rolt046.n46_secuencia
 DEFINE posi		SMALLINT
 DEFINE divi, num_div	LIKE rolt046.n46_secuencia
 DEFINE r_n03		RECORD LIKE rolt003.*
-DEFINE valor		LIKE rolt045.n74_val_prest
+DEFINE valor		LIKE rolt045.n45_val_prest
 DEFINE cod_liqrol	LIKE rolt003.n03_proceso
 DEFINE fecha_ini	LIKE rolt046.n46_fecha_ini
 DEFINE fecha_fin	LIKE rolt046.n46_fecha_fin
-DEFINE val_prest	LIKE rolt045.n74_val_prest
-DEFINE val_aux		LIKE rolt045.n74_val_prest
-DEFINE tot_prestamo	LIKE rolt045.n74_val_prest
+DEFINE val_prest	LIKE rolt045.n45_val_prest
+DEFINE val_aux		LIKE rolt045.n45_val_prest
+DEFINE tot_prestamo	LIKE rolt045.n45_val_prest
 DEFINE anio, mes, dia	SMALLINT
 DEFINE restar, i, j	SMALLINT
 DEFINE retorna_mes	SMALLINT
 DEFINE encont		SMALLINT
 
-LET val_prest = rm_n74.n74_val_prest + rm_n74.n74_sal_prest_ant
-		+ rm_n74.n74_valor_int - rm_n74.n74_descontado
-LET val_aux   = rm_n74.n74_val_prest
-IF rm_n74.n74_val_prest = 0 OR rm_n74.n74_sal_prest_ant > 0 THEN
+LET val_prest = rm_n45.n45_val_prest + rm_n45.n45_sal_prest_ant
+		+ rm_n45.n45_valor_int - rm_n45.n45_descontado
+LET val_aux   = rm_n45.n45_val_prest
+IF rm_n45.n45_val_prest = 0 OR rm_n45.n45_sal_prest_ant > 0 THEN
 	LET val_aux = val_prest
 END IF
 LET num_div   = rm_par.num_pagos
@@ -2633,7 +2651,7 @@ CASE flag
 					  AND b.n32_fecha_ini  = a.n32_fecha_ini
 					  AND b.n32_fecha_fin  = a.n32_fecha_fin
 				  	  AND b.n32_cod_trab   = a.n32_cod_trab)
-				  AND a.n32_cod_trab   = rm_n74.n74_cod_trab
+				  AND a.n32_cod_trab   = rm_n45.n45_cod_trab
 				  AND a.n32_estado    <> 'E'
 			LET retorna_mes = 1
 			IF cod_liqrol = 'Q2' THEN
@@ -2744,7 +2762,7 @@ END FOR
 IF flag = 1 OR flag = 3 THEN
 	LET valor = rm_detalle[1].n46_valor * num_div
 	IF valor < val_prest AND flag = 1 THEN
-		IF tot_prestamo <> rm_n74.n74_val_prest THEN
+		IF tot_prestamo <> rm_n45.n45_val_prest THEN
 			LET rm_detalle[max_det].n46_valor =
 					rm_detalle[max_det].n46_valor +
 					(val_aux - valor)
@@ -2776,10 +2794,10 @@ END FUNCTION
 FUNCTION retorna_paridad()
 DEFINE r_g14		RECORD LIKE gent014.*
 
-IF rm_n74.n74_moneda = rg_gen.g00_moneda_base THEN
+IF rm_n45.n45_moneda = rg_gen.g00_moneda_base THEN
 	LET r_g14.g14_tasa = 1
 ELSE
-	CALL fl_lee_factor_moneda(rm_n74.n74_moneda, rg_gen.g00_moneda_base)
+	CALL fl_lee_factor_moneda(rm_n45.n45_moneda, rg_gen.g00_moneda_base)
 		RETURNING r_g14.*
 	IF r_g14.g14_serial IS NULL THEN
 		CALL fl_mostrar_mensaje('La paridad para esta moneda no existe.','exclamation')
@@ -2793,10 +2811,10 @@ END FUNCTION
 
 
 FUNCTION muestra_estado()
-DEFINE estado		LIKE rolt074.n74_estado
+DEFINE estado		LIKE rolt045.n45_estado
 
-LET estado = rm_n74.n74_estado
-DISPLAY BY NAME rm_n74.n74_estado
+LET estado = rm_n45.n45_estado
+--DISPLAY BY NAME rm_n45.n45_estado
 CASE estado
 	WHEN 'A'
 		DISPLAY 'ACTIVO'        TO desc_est
@@ -2900,26 +2918,26 @@ IF vm_num_rows <= 0 THEN
 END IF
 DECLARE q_cons1 CURSOR FOR SELECT * FROM rolt045 WHERE ROWID = num_registro
 OPEN q_cons1
-FETCH q_cons1 INTO rm_n74.*
+FETCH q_cons1 INTO rm_n45.*
 IF STATUS = NOTFOUND THEN
 	CALL fl_mostrar_mensaje('No existe registro con índice: ' || vm_row_current,'exclamation')
 	RETURN
 END IF
 {
-DISPLAY BY NAME	rm_n74.n74_num_prest, rm_n74.n74_cod_rubro, rm_n74.n74_cod_trab,
-		rm_n74.n74_moneda, rm_n74.n74_val_prest, rm_n74.n74_paridad,
-		rm_n74.n74_sal_prest_ant, rm_n74.n74_descontado,
-		rm_n74.n74_referencia, rm_n74.n74_fecha, rm_n74.n74_fec_elimi,
-		rm_n74.n74_usuario, rm_n74.n74_prest_tran,rm_n74.n74_mes_gracia,
-		rm_n74.n74_porc_int, rm_n74.n74_valor_int
-CALL fl_lee_rubro_roles(rm_n74.n74_cod_rubro) RETURNING r_n06.*
+DISPLAY BY NAME	rm_n45.n45_num_prest, rm_n45.n45_cod_rubro, rm_n45.n45_cod_trab,
+		rm_n45.n45_moneda, rm_n45.n45_val_prest, rm_n45.n45_paridad,
+		rm_n45.n45_sal_prest_ant, rm_n45.n45_descontado,
+		rm_n45.n45_referencia, rm_n45.n45_fecha, rm_n45.n45_fec_elimi,
+		rm_n45.n45_usuario, rm_n45.n45_prest_tran,rm_n45.n45_mes_gracia,
+		rm_n45.n45_porc_int, rm_n45.n45_valor_int
+CALL fl_lee_rubro_roles(rm_n45.n45_cod_rubro) RETURNING r_n06.*
 DISPLAY BY NAME r_n06.n06_nombre
-CALL fl_lee_trabajador_roles(vg_codcia, rm_n74.n74_cod_trab) RETURNING r_n30.*
+CALL fl_lee_trabajador_roles(vg_codcia, rm_n45.n45_cod_trab) RETURNING r_n30.*
 DISPLAY BY NAME r_n30.n30_nombres
-CALL fl_lee_moneda(rm_n74.n74_moneda) RETURNING r_g13.*
+CALL fl_lee_moneda(rm_n45.n45_moneda) RETURNING r_g13.*
 DISPLAY BY NAME r_g13.g13_nombre
-LET valor_deuda = rm_n74.n74_val_prest + rm_n74.n74_sal_prest_ant
-			+ rm_n74.n74_valor_int - rm_n74.n74_descontado
+LET valor_deuda = rm_n45.n45_val_prest + rm_n45.n45_sal_prest_ant
+			+ rm_n45.n45_valor_int - rm_n45.n45_descontado
 DISPLAY BY NAME valor_deuda
 CALL muestra_estado()
 CALL cargar_detalle()
@@ -2942,8 +2960,8 @@ DEFINE r_n46		RECORD LIKE rolt046.*
 
 DECLARE q_n46 CURSOR FOR
 	SELECT * FROM rolt046
-		WHERE n46_compania  = rm_n74.n74_compania
-		  AND n46_num_prest = rm_n74.n74_num_prest
+		WHERE n46_compania  = rm_n45.n45_compania
+		  AND n46_num_prest = rm_n45.n45_num_prest
 		ORDER BY n46_secuencia
 LET vm_num_det = 1
 FOREACH q_n46 INTO r_n46.*
@@ -2978,15 +2996,15 @@ DEFINE r_n46		RECORD LIKE rolt046.*
 DEFINE i		SMALLINT
 
 DELETE FROM rolt058
-	WHERE n58_compania  = rm_n74.n74_compania
-	  AND n58_num_prest = rm_n74.n74_num_prest
+	WHERE n58_compania  = rm_n45.n45_compania
+	  AND n58_num_prest = rm_n45.n45_num_prest
 DELETE FROM rolt046
-	WHERE n46_compania  = rm_n74.n74_compania
-	  AND n46_num_prest = rm_n74.n74_num_prest
+	WHERE n46_compania  = rm_n45.n45_compania
+	  AND n46_num_prest = rm_n45.n45_num_prest
 	  AND n46_saldo     = n46_valor
 FOR i = 1 TO vm_num_det
-	LET r_n46.n46_compania   = rm_n74.n74_compania
-	LET r_n46.n46_num_prest  = rm_n74.n74_num_prest
+	LET r_n46.n46_compania   = rm_n45.n45_compania
+	LET r_n46.n46_num_prest  = rm_n45.n45_num_prest
 	LET r_n46.n46_secuencia  = rm_detalle[i].n46_secuencia
 	LET r_n46.n46_cod_liqrol = rm_detalle[i].n46_cod_liqrol
 	LET r_n46.n46_fecha_ini  = rm_detalle[i].n46_fecha_ini
@@ -3016,8 +3034,8 @@ IF vm_num_dettot = 0 THEN
 				' NVL(SUM(n46_valor), 0), NVL(SUM(n46_saldo),',
 				' 0), "', vg_usuario CLIPPED, '", CURRENT ',
 				' FROM rolt046 ',
-				' WHERE n46_compania  = ', rm_n74.n74_compania,
-				'   AND n46_num_prest = ', rm_n74.n74_num_prest,
+				' WHERE n46_compania  = ', rm_n45.n45_compania,
+				'   AND n46_num_prest = ', rm_n45.n45_num_prest,
 				' GROUP BY 1, 2, 3, 4, 9, 10 '
 	PREPARE exec_n58 FROM query
 	EXECUTE exec_n58
@@ -3030,8 +3048,8 @@ FOR i = 1 TO vm_num_dettot
 	THEN
 		CONTINUE FOR
 	END IF
-	LET r_n58.n58_compania   = rm_n74.n74_compania
-	LET r_n58.n58_num_prest  = rm_n74.n74_num_prest
+	LET r_n58.n58_compania   = rm_n45.n45_compania
+	LET r_n58.n58_num_prest  = rm_n45.n45_num_prest
 	LET r_n58.n58_proceso    = rm_dettotpre[i].n58_proceso
 	LET r_n58.n58_div_act    = rm_dettotpre[i].n58_div_act
 	LET r_n58.n58_num_div    = rm_dettotpre[i].n58_num_div
@@ -3048,42 +3066,42 @@ END FUNCTION
 
 
 FUNCTION control_transferir_prestamo()
-DEFINE r_n74		RECORD LIKE rolt045.*
+DEFINE r_n45		RECORD LIKE rolt045.*
 DEFINE deuda		DECIMAL(14,2)
 
-DECLARE q_n74_tran CURSOR FOR
+DECLARE q_n45_tran CURSOR FOR
 	SELECT * FROM rolt045
-		WHERE n74_compania   = vg_codcia
-		  AND n74_num_prest <> rm_n74.n74_num_prest
-		  AND n74_cod_rubro  = rm_n74.n74_cod_rubro
-		  AND n74_cod_trab   = rm_n74.n74_cod_trab
-		  AND n74_estado    IN ("A", "R")
-OPEN q_n74_tran
-FETCH q_n74_tran INTO r_n74.*
+		WHERE n45_compania   = vg_codcia
+		  AND n45_num_prest <> rm_n45.n45_num_prest
+		  AND n45_cod_rubro  = rm_n45.n45_cod_rubro
+		  AND n45_cod_trab   = rm_n45.n45_cod_trab
+		  AND n45_estado    IN ("A", "R")
+OPEN q_n45_tran
+FETCH q_n45_tran INTO r_n45.*
 IF STATUS = NOTFOUND THEN
-	CLOSE q_n74_tran
-	FREE q_n74_tran
+	CLOSE q_n45_tran
+	FREE q_n45_tran
 	RETURN
 END IF
-CLOSE q_n74_tran
-FREE q_n74_tran
-SELECT NVL(SUM(n74_val_prest + n74_sal_prest_ant + n74_valor_int -
-		n74_descontado), 0)
+CLOSE q_n45_tran
+FREE q_n45_tran
+SELECT NVL(SUM(n45_val_prest + n45_sal_prest_ant + n45_valor_int -
+		n45_descontado), 0)
 	INTO deuda
 	FROM rolt045
-	WHERE n74_compania   = vg_codcia
-	  AND n74_num_prest <> rm_n74.n74_num_prest
-	  AND n74_cod_rubro  = rm_n74.n74_cod_rubro
-	  AND n74_cod_trab   = rm_n74.n74_cod_trab
-	  AND n74_estado    IN ("A", "R")
+	WHERE n45_compania   = vg_codcia
+	  AND n45_num_prest <> rm_n45.n45_num_prest
+	  AND n45_cod_rubro  = rm_n45.n45_cod_rubro
+	  AND n45_cod_trab   = rm_n45.n45_cod_trab
+	  AND n45_estado    IN ("A", "R")
 WHENEVER ERROR CONTINUE
 DECLARE q_up_tran CURSOR FOR
 	SELECT * FROM rolt045
-		WHERE n74_compania  = r_n74.n74_compania
-		  AND n74_num_prest = r_n74.n74_num_prest
+		WHERE n45_compania  = r_n45.n45_compania
+		  AND n45_num_prest = r_n45.n45_num_prest
 	FOR UPDATE
 OPEN q_up_tran
-FETCH q_up_tran INTO r_n74.*
+FETCH q_up_tran INTO r_n45.*
 IF STATUS = NOTFOUND THEN
 	ROLLBACK WORK
 	CALL fl_mostrar_mensaje('El registro del anticipo anterior no existe. Ha ocurrido un error interno de la base de datos.', 'stop')
@@ -3097,9 +3115,9 @@ IF STATUS < 0 THEN
 	EXIT PROGRAM
 END IF
 UPDATE rolt045
-	SET n74_estado     = 'T',
-	    n74_prest_tran = rm_n74.n74_num_prest,
-	    n74_descontado = (n74_val_prest + n74_sal_prest_ant + n74_valor_int)
+	SET n45_estado     = 'T',
+	    n45_prest_tran = rm_n45.n45_num_prest,
+	    n45_descontado = (n45_val_prest + n45_sal_prest_ant + n45_valor_int)
 	WHERE CURRENT OF q_up_tran
 IF STATUS < 0 THEN
 	ROLLBACK WORK
@@ -3108,27 +3126,27 @@ IF STATUS < 0 THEN
 	EXIT PROGRAM
 END IF
 UPDATE rolt045
-	SET n74_estado        = 'R',
-	    n74_prest_tran    = r_n74.n74_num_prest,
-	    n74_sal_prest_ant = deuda
-	WHERE n74_compania  = vg_codcia
-	  AND n74_num_prest = rm_n74.n74_num_prest
+	SET n45_estado        = 'R',
+	    n45_prest_tran    = r_n45.n45_num_prest,
+	    n45_sal_prest_ant = deuda
+	WHERE n45_compania  = vg_codcia
+	  AND n45_num_prest = rm_n45.n45_num_prest
 IF STATUS < 0 THEN
 	ROLLBACK WORK
 	CALL fl_mostrar_mensaje('Ha ocurrido un error interno de la base de datos al intentar actualizar el registro del anticipo anterior. Consulte con el Administrador.', 'stop')
 	WHENEVER ERROR STOP
 	EXIT PROGRAM
 END IF
---IF rm_n74.n74_val_prest = 0 THEN
+--IF rm_n45.n45_val_prest = 0 THEN
 	UPDATE rolt046
 		SET n46_saldo = 0
-		WHERE n46_compania  = r_n74.n74_compania
-		  AND n46_num_prest = r_n74.n74_num_prest
+		WHERE n46_compania  = r_n45.n45_compania
+		  AND n46_num_prest = r_n45.n45_num_prest
 	UPDATE rolt058
 		SET n58_saldo_dist = 0,
 		    n58_div_act    = n58_num_div
-		WHERE n58_compania  = r_n74.n74_compania
-		  AND n58_num_prest = r_n74.n74_num_prest
+		WHERE n58_compania  = r_n45.n45_compania
+		  AND n58_num_prest = r_n45.n45_num_prest
 --END IF
 WHENEVER ERROR STOP
 
@@ -3181,32 +3199,32 @@ DISPLAY ARRAY rm_detalle TO rm_detalle.*
 		LET int_flag = 1
        	        EXIT DISPLAY  
 	ON KEY(F6)
-		IF rm_n74.n74_estado <> 'E' AND rm_n74.n74_estado <> 'T' THEN
+		IF rm_n45.n45_estado <> 'E' AND rm_n45.n45_estado <> 'T' THEN
 			CALL control_capacidad_pago()
 		END IF
 	ON KEY(F7)
 		CALL control_forma_pago()
 		LET int_flag = 0
 	ON KEY(F8)
-		IF rm_n74.n74_num_prest IS NULL THEN
+		IF rm_n45.n45_num_prest IS NULL THEN
 			CONTINUE DISPLAY
 		END IF
 		CALL control_contabilizacion()
 		LET int_flag = 0
 	ON KEY(F9)
-		IF rm_n74.n74_num_prest IS NULL THEN
+		IF rm_n45.n45_num_prest IS NULL THEN
 			CONTINUE DISPLAY
 		END IF
 		CALL control_resumen(2)
 		LET int_flag = 0
 	ON KEY(F10)
-		IF rm_n74.n74_num_prest IS NULL THEN
+		IF rm_n45.n45_num_prest IS NULL THEN
 			CONTINUE DISPLAY
 		END IF
 		CALL control_imprimir()
 		LET int_flag = 0
 	ON KEY(F11)
-		IF rm_n74.n74_prest_tran IS NULL OR num_args() = 5 THEN
+		IF rm_n45.n45_prest_tran IS NULL OR num_args() = 5 THEN
 			CONTINUE DISPLAY
 		END IF
 		CALL ver_anticipo(2)
@@ -3215,12 +3233,12 @@ DISPLAY ARRAY rm_detalle TO rm_detalle.*
 		--#CALL dialog.keysetlabel('ACCEPT', '')   
 		--#CALL dialog.keysetlabel("F1","") 
 		--#CALL dialog.keysetlabel("CONTROL-W","") 
-		--#IF rm_n74.n74_estado = 'E' OR rm_n74.n74_estado = 'T' THEN
+		--#IF rm_n45.n45_estado = 'E' OR rm_n45.n45_estado = 'T' THEN
 			--#CALL dialog.keysetlabel("F6","") 
 		--#ELSE
 			--#CALL dialog.keysetlabel("F6","Capacidad Pago") 
 		--#END IF
-		--#IF rm_n74.n74_num_prest IS NULL THEN
+		--#IF rm_n45.n45_num_prest IS NULL THEN
 			--#CALL dialog.keysetlabel("F8","") 
 			--#CALL dialog.keysetlabel("F9","") 
 			--#CALL dialog.keysetlabel("F10","") 
@@ -3229,7 +3247,7 @@ DISPLAY ARRAY rm_detalle TO rm_detalle.*
 			--#CALL dialog.keysetlabel("F9","Resumen") 
 			--#CALL dialog.keysetlabel("F10","Imprimir") 
 		--#END IF
-		--#IF rm_n74.n74_prest_tran IS NULL OR num_args() = 5 THEN
+		--#IF rm_n45.n45_prest_tran IS NULL OR num_args() = 5 THEN
 			--#CALL dialog.keysetlabel("F11","") 
 		--#ELSE
 			--#CALL dialog.keysetlabel("F11","Anticipo Anterior") 
@@ -3315,10 +3333,10 @@ FUNCTION retorna_ano_mes_gracia(ano, mes)
 DEFINE ano		LIKE rolt032.n32_ano_proceso
 DEFINE mes		LIKE rolt032.n32_mes_proceso
 
-IF rm_n74.n74_mes_gracia = 0 THEN
+IF rm_n45.n45_mes_gracia = 0 THEN
 	RETURN ano, mes
 END IF
-LET mes = mes + rm_n74.n74_mes_gracia
+LET mes = mes + rm_n45.n45_mes_gracia
 IF mes > 12 THEN
 	LET mes = mes - 12
 	LET ano = ano + 1
@@ -3335,7 +3353,7 @@ DEFINE fecha_fin	DATE
 DEFINE fecha		DATE
 DEFINE anio, mes	SMALLINT
 
-IF rm_n74.n74_mes_gracia = 0 THEN
+IF rm_n45.n45_mes_gracia = 0 THEN
 	RETURN fecha_ini, fecha_fin
 END IF
 CALL retorna_ano_mes_gracia(YEAR(TODAY), MONTH(TODAY)) RETURNING anio, mes
@@ -3507,7 +3525,7 @@ IF cod_liqrol <> 'VA' AND cod_liqrol <> 'VP' THEN
 					  AND b.n32_fecha_ini  = a.n32_fecha_ini
 					  AND b.n32_fecha_fin  = a.n32_fecha_fin
 				  	  AND b.n32_cod_trab   = a.n32_cod_trab)
-			  AND a.n32_cod_trab   = rm_n74.n74_cod_trab
+			  AND a.n32_cod_trab   = rm_n45.n45_cod_trab
 			  AND a.n32_estado     = 'A'
 		IF fecha IS NOT NULL THEN
 			CALL retorna_ano_mes_gracia(YEAR(fecha), MONTH(fecha))
@@ -3563,7 +3581,7 @@ IF cod_liqrol <> 'VA' AND cod_liqrol <> 'VP' THEN
 		END IF
 	END IF
 ELSE
-	CALL fl_lee_trabajador_roles(vg_codcia, rm_n74.n74_cod_trab)
+	CALL fl_lee_trabajador_roles(vg_codcia, rm_n45.n45_cod_trab)
 		RETURNING r_n30.*
 	LET dia = DAY(r_n30.n30_fecha_ing)
 	IF dia > 1 AND dia < 16 THEN
@@ -3593,11 +3611,12 @@ END FUNCTION
 
 FUNCTION borrar_cabecera()
 
-CLEAR n74_estado, desc_est, n74_cod_trab, n30_nombres, n30_num_doc_id,
-	n74_sectorial, n74_fecha_sal, n74_fecha_ent, n74_sueldo_prom,
-	n74_tipo_acta, n73_conc_abr, n74_desah_parc, n74_motivo, n74_usuario,
-	n74_fecing
-INITIALIZE rm_n74.*, rm_par.* TO NULL
+CLEAR n45_estado, tit_estado, n45_num_prest, n45_cod_rubro, n06_nombre,
+	n45_cod_trab, n30_nombres, n45_moneda, g13_nombre, n45_val_prest,
+	n45_paridad, n45_sal_prest_ant, n45_descontado, valor_deuda, n45_fecha,
+	n45_fec_elimi, n45_referencia, n45_usuario, n45_prest_tran,
+	n45_mes_gracia, n45_porc_int, n45_valor_int
+INITIALIZE rm_n45.*, rm_par.* TO NULL
 
 END FUNCTION
 
@@ -3620,7 +3639,7 @@ DEFINE ini, i		SMALLINT
 FOR i = ini TO fgl_scr_size('rm_detalle')
 	CLEAR rm_detalle[i].*
 END FOR
-CLEAR n03_nombre_Abr, n06_nombre_Abr, n74_tot_neto
+CLEAR total_valor, total_saldo
 
 END FUNCTION
 
@@ -3629,11 +3648,11 @@ END FUNCTION
 FUNCTION ver_anticipo(flag)
 DEFINE flag		SMALLINT
 DEFINE param		VARCHAR(60)
-DEFINE num_prest	LIKE rolt045.n74_num_prest
+DEFINE num_prest	LIKE rolt045.n45_num_prest
 
 CASE flag
 	WHEN 1 LET num_prest = rm_detprest[vm_cur_prest].n46_num_prest
-	WHEN 2 LET num_prest = rm_n74.n74_prest_tran
+	WHEN 2 LET num_prest = rm_n45.n45_prest_tran
 END CASE
 LET param = ' ', num_prest, ' "X"'
 CALL ejecuta_comando('NOMINA', vg_modulo, 'rolp233 ', param)
@@ -3650,7 +3669,7 @@ DEFINE r_n32		RECORD LIKE rolt032.*
 CALL fl_lee_liquidacion_roles(vg_codcia,rm_detliq[vm_cur_detliq].n32_cod_liqrol,
 					rm_detliq[vm_cur_detliq].n32_fecha_ini,
 					rm_detliq[vm_cur_detliq].n32_fecha_fin,
-					rm_n74.n74_cod_trab)
+					rm_n45.n45_cod_trab)
 	RETURNING r_n32.*
 LET prog  = 'rolp303 '
 LET param = ' "', rm_detliq[vm_cur_detliq].n32_cod_liqrol, '" ',
@@ -3664,7 +3683,7 @@ END FUNCTION
 
 
 FUNCTION regenerar_novedades(num_prest, sin_saldo)
-DEFINE num_prest	LIKE rolt045.n74_num_prest
+DEFINE num_prest	LIKE rolt045.n45_num_prest
 DEFINE sin_saldo	SMALLINT
 DEFINE r_n05		RECORD LIKE rolt005.*
 DEFINE r_n30		RECORD LIKE rolt030.*
@@ -3677,11 +3696,11 @@ CALL proceso_activo_nomina(num_prest, 0, sin_saldo) RETURNING r_n05.*, resul
 IF resul THEN
 	RETURN
 END IF
-CALL fl_lee_trabajador_roles(vg_codcia, rm_n74.n74_cod_trab) RETURNING r_n30.*
+CALL fl_lee_trabajador_roles(vg_codcia, rm_n45.n45_cod_trab) RETURNING r_n30.*
 LET mensaje = 'Se va a regenerar novedad de ', r_n05.n05_proceso, ' ',
 		r_n05.n05_fecini_act USING "dd-mm-yyyy", ' - ',
 		r_n05.n05_fecfin_act USING "dd-mm-yyyy", ' para el trabajador ',
-		rm_n74.n74_cod_trab USING "&&&&", ' ', r_n30.n30_nombres CLIPPED
+		rm_n45.n45_cod_trab USING "&&&&", ' ', r_n30.n30_nombres CLIPPED
 CALL fl_mostrar_mensaje(mensaje, 'info')
 CASE r_n05.n05_proceso
 	WHEN 'Q1' LET prog  = 'rolp200 '
@@ -3690,15 +3709,15 @@ CASE r_n05.n05_proceso
 	WHEN 'DC' LET prog  = 'rolp221 '
 	WHEN 'UT' LET prog  = 'rolp222 '
 END CASE
-LET param = ' ', r_n05.n05_proceso[1,1], ' ', rm_n74.n74_cod_trab, ' ',
+LET param = ' ', r_n05.n05_proceso[1,1], ' ', rm_n45.n45_cod_trab, ' ',
 		r_n05.n05_proceso, ' ', r_n05.n05_fecini_act, ' ',
 		r_n05.n05_fecfin_act
 IF r_n05.n05_proceso = 'DT' OR r_n05.n05_proceso = 'DC' THEN
 	LET param = ' ', r_n05.n05_fecini_act, ' ', r_n05.n05_fecfin_act, ' ',
-			rm_n74.n74_cod_trab, ' G'
+			rm_n45.n45_cod_trab, ' G'
 END IF
 IF r_n05.n05_proceso = 'UT' THEN
-	LET param = ' ', YEAR(r_n05.n05_fecfin_act), ' ', rm_n74.n74_cod_trab,
+	LET param = ' ', YEAR(r_n05.n05_fecfin_act), ' ', rm_n45.n45_cod_trab,
 			' G'
 END IF
 CALL ejecuta_comando('NOMINA', vg_modulo, prog, param)
@@ -3708,7 +3727,7 @@ END FUNCTION
 
 
 FUNCTION proceso_activo_nomina(num_prest, flag, sin_saldo)
-DEFINE num_prest	LIKE rolt045.n74_num_prest
+DEFINE num_prest	LIKE rolt045.n45_num_prest
 DEFINE flag, sin_saldo	SMALLINT
 DEFINE r_n05		RECORD LIKE rolt005.*
 DEFINE r_n46		RECORD LIKE rolt046.*
@@ -3814,10 +3833,10 @@ DEFINE r_g08		RECORD LIKE gent008.*
 DEFINE r_g09		RECORD LIKE gent009.*
 DEFINE r_n06		RECORD LIKE rolt006.*
 DEFINE r_n30		RECORD LIKE rolt030.*
-DEFINE r_n74		RECORD LIKE rolt045.*
+DEFINE r_n45		RECORD LIKE rolt045.*
 DEFINE r_n56		RECORD LIKE rolt056.*
 DEFINE r_n59		RECORD LIKE rolt059.*
-DEFINE tipo_pago	LIKE rolt045.n74_tipo_pago
+DEFINE tipo_pago	LIKE rolt045.n45_tipo_pago
 
 LET lin_men  = 0
 LET num_rows = 10
@@ -3836,53 +3855,53 @@ ELSE
 	OPEN FORM f_rolf233_5 FROM '../forms/rolf233_5c'
 END IF
 DISPLAY FORM f_rolf233_5
-CALL fl_lee_banco_general(rm_n74.n74_bco_empresa) RETURNING r_g08.*
+CALL fl_lee_banco_general(rm_n45.n45_bco_empresa) RETURNING r_g08.*
 DISPLAY BY NAME r_g08.g08_nombre
-CALL lee_prest_cont(vg_codcia, rm_n74.n74_num_prest) RETURNING r_n59.*
+CALL lee_prest_cont(vg_codcia, rm_n45.n45_num_prest) RETURNING r_n59.*
 IF r_n59.n59_compania IS NOT NULL AND vm_flag_mant = 'C' THEN
 	WHILE TRUE
-		LET tipo_pago = rm_n74.n74_tipo_pago
-		IF rm_n74.n74_val_prest = 0 THEN
-			LET rm_n74.n74_tipo_pago = 'R'
+		LET tipo_pago = rm_n45.n45_tipo_pago
+		IF rm_n45.n45_val_prest = 0 THEN
+			LET rm_n45.n45_tipo_pago = 'R'
 		END IF
-		DISPLAY BY NAME rm_n74.n74_tipo_pago, rm_n74.n74_bco_empresa,
-				rm_n74.n74_cta_empresa, rm_n74.n74_cta_trabaj
+		DISPLAY BY NAME rm_n45.n45_tipo_pago, rm_n45.n45_bco_empresa,
+				rm_n45.n45_cta_empresa, rm_n45.n45_cta_trabaj
 		MESSAGE 'Presione ESC para SALIR ...'
 		LET escape = fgl_getkey()
 		IF escape <> 0 AND escape <> 27 THEN
 			CONTINUE WHILE
 		END IF
-		IF rm_n74.n74_val_prest = 0 THEN
-			LET rm_n74.n74_tipo_pago = tipo_pago
+		IF rm_n45.n45_val_prest = 0 THEN
+			LET rm_n45.n45_tipo_pago = tipo_pago
 		END IF
 		EXIT WHILE
 	END WHILE
 	CLOSE WINDOW w_rolf233_5
 	RETURN
 END IF
-CALL fl_lee_trabajador_roles(vg_codcia, rm_n74.n74_cod_trab) RETURNING r_n30.*
+CALL fl_lee_trabajador_roles(vg_codcia, rm_n45.n45_cod_trab) RETURNING r_n30.*
 IF (r_n30.n30_tipo_pago  <> 'E' AND r_n30.n30_bco_empresa  IS NOT NULL) AND
-   (rm_n74.n74_tipo_pago <> 'E' AND rm_n74.n74_bco_empresa IS NULL) AND
-    rm_n74.n74_val_prest  > 0
+   (rm_n45.n45_tipo_pago <> 'E' AND rm_n45.n45_bco_empresa IS NULL) AND
+    rm_n45.n45_val_prest  > 0
 THEN
-	LET rm_n74.n74_tipo_pago   = r_n30.n30_tipo_pago
-	LET rm_n74.n74_bco_empresa = r_n30.n30_bco_empresa
-	LET rm_n74.n74_cta_empresa = r_n30.n30_cta_empresa
-	IF rm_n74.n74_tipo_pago = 'T' THEN
-		LET rm_n74.n74_cta_trabaj  = r_n30.n30_cta_trabaj
+	LET rm_n45.n45_tipo_pago   = r_n30.n30_tipo_pago
+	LET rm_n45.n45_bco_empresa = r_n30.n30_bco_empresa
+	LET rm_n45.n45_cta_empresa = r_n30.n30_cta_empresa
+	IF rm_n45.n45_tipo_pago = 'T' THEN
+		LET rm_n45.n45_cta_trabaj  = r_n30.n30_cta_trabaj
 	END IF
-	CALL fl_lee_banco_general(rm_n74.n74_bco_empresa) RETURNING r_g08.*
+	CALL fl_lee_banco_general(rm_n45.n45_bco_empresa) RETURNING r_g08.*
 	DISPLAY BY NAME r_g08.g08_nombre
 ELSE
-	IF rm_n74.n74_val_prest = 0 THEN
-		CALL fl_lee_cab_prestamo_roles(rm_n74.n74_compania,
-						rm_n74.n74_prest_tran)
-			RETURNING r_n74.*
-		LET rm_n74.n74_tipo_pago   = 'R'
-		LET rm_n74.n74_bco_empresa = r_n74.n74_bco_empresa
-		LET rm_n74.n74_cta_empresa = r_n74.n74_cta_empresa
-		IF rm_n74.n74_cta_trabaj IS NULL THEN
-			CALL fl_lee_rubro_roles(rm_n74.n74_cod_rubro)
+	IF rm_n45.n45_val_prest = 0 THEN
+		CALL fl_lee_cab_prestamo_roles(rm_n45.n45_compania,
+						rm_n45.n45_prest_tran)
+			RETURNING r_n45.*
+		LET rm_n45.n45_tipo_pago   = 'R'
+		LET rm_n45.n45_bco_empresa = r_n45.n45_bco_empresa
+		LET rm_n45.n45_cta_empresa = r_n45.n45_cta_empresa
+		IF rm_n45.n45_cta_trabaj IS NULL THEN
+			CALL fl_lee_rubro_roles(rm_n45.n45_cod_rubro)
 				RETURNING r_n06.*
 			INITIALIZE r_n56.* TO NULL
 			SELECT * INTO r_n56.*
@@ -3890,37 +3909,37 @@ ELSE
 				WHERE n56_compania  = vg_codcia
 				  AND n56_proceso   = r_n06.n06_flag_ident
 				  AND n56_cod_depto = r_n30.n30_cod_depto
-				  AND n56_cod_trab  = rm_n74.n74_cod_trab
+				  AND n56_cod_trab  = rm_n45.n45_cod_trab
 				  AND n56_estado    = "A"
 			IF r_n56.n56_compania IS NOT NULL THEN
-				LET rm_n74.n74_cta_trabaj =r_n56.n56_aux_val_vac
+				LET rm_n45.n45_cta_trabaj =r_n56.n56_aux_val_vac
 			END IF
 		END IF
-		CALL fl_lee_banco_general(rm_n74.n74_bco_empresa)
+		CALL fl_lee_banco_general(rm_n45.n45_bco_empresa)
 			RETURNING r_g08.*
 		DISPLAY BY NAME r_g08.g08_nombre
 	END IF
 END IF
-LET r_n74.* = rm_n74.*
+LET r_n45.* = rm_n45.*
 LET int_flag = 0
-IF rm_n74.n74_tipo_pago = 'R' THEN
+IF rm_n45.n45_tipo_pago = 'R' THEN
 	CLOSE WINDOW w_rolf233_5
 	RETURN
 END IF
-INPUT BY NAME rm_n74.n74_tipo_pago, rm_n74.n74_bco_empresa,
-	rm_n74.n74_cta_empresa, rm_n74.n74_cta_trabaj
+INPUT BY NAME rm_n45.n45_tipo_pago, rm_n45.n45_bco_empresa,
+	rm_n45.n45_cta_empresa, rm_n45.n45_cta_trabaj
 	WITHOUT DEFAULTS
 	ON KEY(INTERRUPT)
-		IF FIELD_TOUCHED(rm_n74.n74_tipo_pago, rm_n74.n74_bco_empresa,
-				 rm_n74.n74_cta_empresa, rm_n74.n74_cta_trabaj)
+		IF FIELD_TOUCHED(rm_n45.n45_tipo_pago, rm_n45.n45_bco_empresa,
+				 rm_n45.n45_cta_empresa, rm_n45.n45_cta_trabaj)
 		THEN
 			LET int_flag = 0
 			CALL fl_mensaje_abandonar_proceso() RETURNING resp
 			IF resp = 'Yes' THEN
-				LET rm_n74.n74_tipo_pago  = r_n74.n74_tipo_pago
-				LET rm_n74.n74_bco_empresa=r_n74.n74_bco_empresa
-				LET rm_n74.n74_cta_empresa=r_n74.n74_cta_empresa
-				LET rm_n74.n74_cta_trabaj =r_n74.n74_cta_trabaj
+				LET rm_n45.n45_tipo_pago  = r_n45.n45_tipo_pago
+				LET rm_n45.n45_bco_empresa=r_n45.n45_bco_empresa
+				LET rm_n45.n45_cta_empresa=r_n45.n45_cta_empresa
+				LET rm_n45.n45_cta_trabaj =r_n45.n45_cta_trabaj
 				LET int_flag = 1
 				EXIT INPUT
 			END IF
@@ -3928,118 +3947,118 @@ INPUT BY NAME rm_n74.n74_tipo_pago, rm_n74.n74_bco_empresa,
 			EXIT INPUT
 		END IF
 	ON KEY(F2)
-		IF INFIELD(n74_bco_empresa) THEN
+		IF INFIELD(n45_bco_empresa) THEN
                         CALL fl_ayuda_cuenta_banco(vg_codcia, 'A')
                                 RETURNING r_g08.g08_banco, r_g08.g08_nombre,
 					r_g09.g09_tipo_cta, r_g09.g09_numero_cta
                         IF r_g08.g08_banco IS NOT NULL THEN
-				LET rm_n74.n74_bco_empresa = r_g08.g08_banco
-				LET rm_n74.n74_cta_empresa =r_g09.g09_numero_cta
-                                DISPLAY BY NAME rm_n74.n74_bco_empresa,
+				LET rm_n45.n45_bco_empresa = r_g08.g08_banco
+				LET rm_n45.n45_cta_empresa =r_g09.g09_numero_cta
+                                DISPLAY BY NAME rm_n45.n45_bco_empresa,
 						r_g08.g08_nombre,
-						rm_n74.n74_cta_empresa
+						rm_n45.n45_cta_empresa
                         END IF
                 END IF
-		IF INFIELD(n74_cta_trabaj) THEN
+		IF INFIELD(n45_cta_trabaj) THEN
 			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
-				LET rm_n74.n74_cta_trabaj = r_b10.b10_cuenta
-				DISPLAY BY NAME rm_n74.n74_cta_trabaj
+				LET rm_n45.n45_cta_trabaj = r_b10.b10_cuenta
+				DISPLAY BY NAME rm_n45.n45_cta_trabaj
 			END IF
 		END IF
 		LET int_flag = 0
-	AFTER FIELD n74_bco_empresa
-                IF rm_n74.n74_bco_empresa IS NOT NULL THEN
-                        CALL fl_lee_banco_general(rm_n74.n74_bco_empresa)
+	AFTER FIELD n45_bco_empresa
+                IF rm_n45.n45_bco_empresa IS NOT NULL THEN
+                        CALL fl_lee_banco_general(rm_n45.n45_bco_empresa)
                                 RETURNING r_g08.*
 			IF r_g08.g08_banco IS NULL THEN
 				CALL fl_mostrar_mensaje('Banco no existe.','exclamation')
-				NEXT FIELD n74_bco_empresa
+				NEXT FIELD n45_bco_empresa
 			END IF
 			DISPLAY BY NAME r_g08.g08_nombre
 		ELSE
-			CLEAR n74_bco_empresa, g08_nombre, n74_cta_empresa
+			CLEAR n45_bco_empresa, g08_nombre, n45_cta_empresa
                 END IF
-	AFTER FIELD n74_cta_empresa
-                IF rm_n74.n74_cta_empresa IS NOT NULL THEN
+	AFTER FIELD n45_cta_empresa
+                IF rm_n45.n45_cta_empresa IS NOT NULL THEN
                         CALL fl_lee_banco_compania(vg_codcia,
-							rm_n74.n74_bco_empresa,
-							rm_n74.n74_cta_empresa)
+							rm_n45.n45_bco_empresa,
+							rm_n45.n45_cta_empresa)
                                 RETURNING r_g09.*
 			IF r_g09.g09_banco IS NULL THEN
 				CALL fl_mostrar_mensaje('Banco o Cuenta Corriente no existe en la compañía.','exclamation')
-				NEXT FIELD n74_bco_empresa
+				NEXT FIELD n45_bco_empresa
 			END IF
-			LET rm_n74.n74_cta_empresa = r_g09.g09_numero_cta
-			DISPLAY BY NAME rm_n74.n74_cta_empresa
-                        CALL fl_lee_banco_general(rm_n74.n74_bco_empresa)
+			LET rm_n45.n45_cta_empresa = r_g09.g09_numero_cta
+			DISPLAY BY NAME rm_n45.n45_cta_empresa
+                        CALL fl_lee_banco_general(rm_n45.n45_bco_empresa)
                                 RETURNING r_g08.*
 			DISPLAY BY NAME r_g08.g08_nombre
 			IF r_g09.g09_estado = 'B' THEN
 				CALL fl_mensaje_estado_bloqueado()
-				NEXT FIELD n74_bco_empresa
+				NEXT FIELD n45_bco_empresa
 			END IF
 			CALL fl_lee_cuenta(r_g09.g09_compania,
 						r_g09.g09_aux_cont)
 				RETURNING r_b10.*
 			IF r_b10.b10_compania IS NULL THEN
 				CALL fl_mostrar_mensaje('No se puede escoger una cuenta corriente que no tiene auxiliar contable.', 'exclamation')
-				NEXT FIELD n74_bco_empresa
+				NEXT FIELD n45_bco_empresa
 			END IF
 			IF r_b10.b10_estado <> 'A' THEN
 				CALL fl_mostrar_mensaje('El auxiliar contable de esta cuenta bancaria esta con estado bloqueado.', 'exclamation')
-				NEXT FIELD n74_bco_empresa
+				NEXT FIELD n45_bco_empresa
 			END IF
 		ELSE
-			CLEAR n74_cta_empresa
+			CLEAR n45_cta_empresa
 		END IF
-	AFTER FIELD n74_cta_trabaj
-		IF rm_n74.n74_tipo_pago <> 'T' THEN
-			LET rm_n74.n74_cta_trabaj = NULL
-			DISPLAY BY NAME rm_n74.n74_cta_trabaj
+	AFTER FIELD n45_cta_trabaj
+		IF rm_n45.n45_tipo_pago <> 'T' THEN
+			LET rm_n45.n45_cta_trabaj = NULL
+			DISPLAY BY NAME rm_n45.n45_cta_trabaj
 			CONTINUE INPUT
 		END IF
-		IF rm_n74.n74_cta_trabaj IS NOT NULL THEN
-			IF NOT validar_cuenta(rm_n74.n74_cta_trabaj) THEN
-				NEXT FIELD n74_cta_trabaj
+		IF rm_n45.n45_cta_trabaj IS NOT NULL THEN
+			IF NOT validar_cuenta(rm_n45.n45_cta_trabaj) THEN
+				NEXT FIELD n45_cta_trabaj
 			END IF
 		ELSE
-			CLEAR n74_cta_trabaj
+			CLEAR n45_cta_trabaj
 		END IF
 	AFTER INPUT
-		IF rm_n74.n74_tipo_pago = 'R' THEN
+		IF rm_n45.n45_tipo_pago = 'R' THEN
 			CALL fl_mostrar_mensaje('Cambie la forma de pago.', 'exclamation')
 			CONTINUE INPUT
 		END IF
-		IF rm_n74.n74_tipo_pago <> 'E' THEN
-			IF rm_n74.n74_bco_empresa IS NULL OR
-			   rm_n74.n74_cta_empresa IS NULL
+		IF rm_n45.n45_tipo_pago <> 'E' THEN
+			IF rm_n45.n45_bco_empresa IS NULL OR
+			   rm_n45.n45_cta_empresa IS NULL
 			THEN
 				CALL fl_mostrar_mensaje('Empleado con tipo de pago Cheque o Transferencia, debe ingresar el Banco y la Cuenta Corriente.', 'exclamation')
-				NEXT FIELD n74_bco_empresa
+				NEXT FIELD n45_bco_empresa
 			END IF
 		ELSE
-			IF rm_n74.n74_bco_empresa IS NULL OR
-			   rm_n74.n74_cta_empresa IS NULL
+			IF rm_n45.n45_bco_empresa IS NULL OR
+			   rm_n45.n45_cta_empresa IS NULL
 			THEN
-				INITIALIZE rm_n74.n74_bco_empresa,
-					rm_n74.n74_cta_empresa TO NULL
-				CLEAR n74_bco_empresa, n74_cta_empresa,
+				INITIALIZE rm_n45.n45_bco_empresa,
+					rm_n45.n45_cta_empresa TO NULL
+				CLEAR n45_bco_empresa, n45_cta_empresa,
 					g08_nombre
 			END IF
 		END IF
-		IF rm_n74.n74_cta_trabaj IS NULL THEN
-			IF rm_n74.n74_tipo_pago = 'T' THEN
+		IF rm_n45.n45_cta_trabaj IS NULL THEN
+			IF rm_n45.n45_tipo_pago = 'T' THEN
 				CALL fl_mostrar_mensaje('Empleado con tipo de Pago Transferencia, debe ingresar el Número de Cuenta Contable.', 'exclamation')
-				NEXT FIELD n74_cta_trabaj
+				NEXT FIELD n45_cta_trabaj
 			END IF
 		END IF
-		IF rm_n74.n74_tipo_pago = 'T' THEN
-			IF rm_n74.n74_cta_trabaj IS NOT NULL THEN
-				IF NOT validar_cuenta(rm_n74.n74_cta_trabaj)
+		IF rm_n45.n45_tipo_pago = 'T' THEN
+			IF rm_n45.n45_cta_trabaj IS NOT NULL THEN
+				IF NOT validar_cuenta(rm_n45.n45_cta_trabaj)
 				THEN
-					NEXT FIELD n74_cta_trabaj
+					NEXT FIELD n45_cta_trabaj
 				END IF
 			END IF
 		END IF
@@ -4063,8 +4082,8 @@ IF r_cta.b10_estado = 'B' THEN
 	CALL fl_mensaje_estado_bloqueado()
 	RETURN 0
 END IF
-IF r_cta.b10_nivel <> vm_nivel THEN
-	CALL fl_mostrar_mensaje('Nivel de cuenta debe ser solo del último.', 'exclamation')
+IF r_cta.b10_permite_mov = 'N' THEN
+	CALL fl_mostrar_mensaje('Cuenta no permite movimiento.', 'exclamation')
 	RETURN 0
 END IF
 RETURN 1
@@ -4077,11 +4096,11 @@ END FUNCTION
 FUNCTION control_contabilizacion()
 DEFINE r_b12		RECORD LIKE ctbt012.*
 DEFINE r_n59		RECORD LIKE rolt059.*
-DEFINE tipo_pago	LIKE rolt045.n74_tipo_pago
+DEFINE tipo_pago	LIKE rolt045.n45_tipo_pago
 DEFINE resp		CHAR(6)
 
 CALL mostrar_registro(vm_r_rows[vm_row_current])
-CALL lee_prest_cont(vg_codcia, rm_n74.n74_num_prest) RETURNING r_n59.*
+CALL lee_prest_cont(vg_codcia, rm_n45.n45_num_prest) RETURNING r_n59.*
 IF r_n59.n59_compania IS NOT NULL THEN
 	CALL ver_contabilizacion(r_n59.n59_tipo_comp, r_n59.n59_num_comp)
 	RETURN
@@ -4090,23 +4109,23 @@ IF rm_n90.n90_gen_cont_ant = 'N' THEN
 	CALL fl_mostrar_mensaje('No se puede contabilizar el anticipo, porque no esta configurado generacion contable para anticipos, en la configuracion adicional de nomina.', 'exclamation')
 	RETURN
 END IF
-IF rm_n74.n74_estado <> 'A' AND rm_n74.n74_estado <> 'R' THEN
+IF rm_n45.n45_estado <> 'A' AND rm_n45.n45_estado <> 'R' THEN
 	CALL fl_mostrar_mensaje('Solo puede contabilizar un anticipo cuando esta Activo o Redistribuido.', 'exclamation')
 	RETURN
 END IF
-IF rm_n74.n74_descontado > 0 THEN
+IF rm_n45.n45_descontado > 0 THEN
 	CALL fl_mostrar_mensaje('No puede contabilizar un anticipo que ya se comenzo a descontar.', 'exclamation')
 	RETURN
 END IF
-IF rm_n74.n74_val_prest > 0 AND rm_n74.n74_tipo_pago <> 'E' THEN
---IF rm_n74.n74_val_prest > 0 THEN
+IF rm_n45.n45_val_prest > 0 AND rm_n45.n45_tipo_pago <> 'E' THEN
+--IF rm_n45.n45_val_prest > 0 THEN
 	CALL fl_hacer_pregunta('Esta seguro de generar contabilización para este Anticipo ?', 'Yes')
 		RETURNING resp
 	IF resp <> 'Yes' THEN
 		RETURN
 	END IF
 END IF
-IF vm_flag_mant <> 'I' AND rm_n74.n74_tipo_pago <> 'E' THEN
+IF vm_flag_mant <> 'I' AND rm_n45.n45_tipo_pago <> 'E' THEN
 --IF vm_flag_mant <> 'I' THEN
 	CALL control_forma_pago()
 	IF int_flag THEN
@@ -4120,7 +4139,7 @@ BEGIN WORK
 			WHERE ROWID = vm_r_rows[vm_row_current]
 		FOR UPDATE
 	OPEN q_cont
-	FETCH q_cont INTO rm_n74.*
+	FETCH q_cont INTO rm_n45.*
 	IF STATUS = NOTFOUND THEN
 		ROLLBACK WORK
 		CALL fl_mostrar_mensaje('Este registro no existe. Ha ocurrido un error interno de la base de datos.', 'exclamation')
@@ -4133,15 +4152,15 @@ BEGIN WORK
 		WHENEVER ERROR STOP
 		RETURN
 	END IF
-	LET tipo_pago = rm_n74.n74_tipo_pago
-	IF rm_n74.n74_tipo_pago = 'R' THEN
+	LET tipo_pago = rm_n45.n45_tipo_pago
+	IF rm_n45.n45_tipo_pago = 'R' THEN
 		LET tipo_pago = 'T'
 	END IF
 	UPDATE rolt045
-		SET n74_tipo_pago   = tipo_pago,
-		    n74_bco_empresa = rm_n74.n74_bco_empresa,
-		    n74_cta_empresa = rm_n74.n74_cta_empresa,
-		    n74_cta_trabaj  = rm_n74.n74_cta_trabaj
+		SET n45_tipo_pago   = tipo_pago,
+		    n45_bco_empresa = rm_n45.n45_bco_empresa,
+		    n45_cta_empresa = rm_n45.n45_cta_empresa,
+		    n45_cta_trabaj  = rm_n45.n45_cta_trabaj
 		WHERE CURRENT OF q_cont
 	IF STATUS < 0 THEN
 		ROLLBACK WORK
@@ -4166,8 +4185,8 @@ CALL fl_hacer_pregunta('Desea ver contabilización generada ?', 'Yes')
 IF resp = 'Yes' THEN
 	CALL ver_contabilizacion(r_b12.b12_tipo_comp, r_b12.b12_num_comp)
 END IF
-CALL fl_lee_cab_prestamo_roles(vg_codcia, rm_n74.n74_num_prest)
-	RETURNING rm_n74.*
+CALL fl_lee_cab_prestamo_roles(vg_codcia, rm_n45.n45_num_prest)
+	RETURNING rm_n45.*
 CALL fl_mostrar_mensaje('Contabilización del Anticipo Generada Ok.', 'info')
 
 END FUNCTION
@@ -4181,31 +4200,31 @@ DEFINE r_g14		RECORD LIKE gent014.*
 DEFINE r_n03		RECORD LIKE rolt003.*
 DEFINE r_n06		RECORD LIKE rolt006.*
 DEFINE r_n30		RECORD LIKE rolt030.*
-DEFINE r_n74		RECORD LIKE rolt045.*
+DEFINE r_n45		RECORD LIKE rolt045.*
 DEFINE r_n56		RECORD LIKE rolt056.*
 DEFINE r_n59		RECORD LIKE rolt059.*
 DEFINE glosa		LIKE ctbt012.b12_glosa
 DEFINE num_che		LIKE ctbt012.b12_num_cheque
 DEFINE sec		LIKE ctbt013.b13_secuencia
-DEFINE val_prest	LIKE rolt045.n74_val_prest
+DEFINE val_prest	LIKE rolt045.n45_val_prest
 DEFINE valor_cuad	DECIMAL(14,2)
 
 INITIALIZE r_b12.*, r_n56.*, r_n59.* TO NULL
-CALL fl_lee_trabajador_roles(vg_codcia, rm_n74.n74_cod_trab) RETURNING r_n30.*
-CALL fl_lee_rubro_roles(rm_n74.n74_cod_rubro) RETURNING r_n06.*
+CALL fl_lee_trabajador_roles(vg_codcia, rm_n45.n45_cod_trab) RETURNING r_n30.*
+CALL fl_lee_rubro_roles(rm_n45.n45_cod_rubro) RETURNING r_n06.*
 SELECT * INTO r_n56.*
 	FROM rolt056
 	WHERE n56_compania  = vg_codcia
 	  AND n56_proceso   = r_n06.n06_flag_ident
 	  AND n56_cod_depto = r_n30.n30_cod_depto
-	  AND n56_cod_trab  = rm_n74.n74_cod_trab
+	  AND n56_cod_trab  = rm_n45.n45_cod_trab
 	  AND n56_estado    = "A"
 IF r_n56.n56_compania IS NULL THEN
 	CALL fl_lee_proceso_roles(r_n06.n06_flag_ident) RETURNING r_n03.*
 	CALL fl_mostrar_mensaje('No existen auxiliares contable para este trabajador en el proceso de ' || r_n03.n03_nombre CLIPPED || '.', 'stop')
 	RETURN r_b12.*
 END IF
-IF rm_n74.n74_valor_int > 0 AND r_n56.n56_aux_otr_egr IS NULL THEN
+IF rm_n45.n45_valor_int > 0 AND r_n56.n56_aux_otr_egr IS NULL THEN
 	CALL fl_mostrar_mensaje('No existe auxiliar contable para el valor interes.', 'stop')
 	RETURN r_b12.*
 END IF
@@ -4214,7 +4233,7 @@ IF NOT validacion_contable(TODAY) THEN
 END IF
 LET r_b12.b12_compania 	  = vg_codcia
 LET r_b12.b12_tipo_comp   = "DC"
-IF rm_n74.n74_tipo_pago = 'C' THEN
+IF rm_n45.n45_tipo_pago = 'C' THEN
 	LET r_b12.b12_tipo_comp = "EG"
 END IF
 LET r_b12.b12_num_comp    = fl_numera_comprobante_contable(vg_codcia,
@@ -4224,11 +4243,11 @@ IF r_b12.b12_num_comp <= 0 THEN
 	RETURN r_b12.*
 END IF
 LET r_b12.b12_estado 	  = 'A'
-LET r_b12.b12_glosa       = rm_n74.n74_referencia CLIPPED, ' ',
+LET r_b12.b12_glosa       = rm_n45.n45_referencia CLIPPED, ' ',
 				r_n30.n30_nombres[1, 25] CLIPPED,
 				', ANTICIPOS DE EMPLEADOS ',
-				DATE(rm_n74.n74_fecha) USING "dd-mm-yyyy"
-IF rm_n74.n74_tipo_pago = 'C' THEN
+				DATE(rm_n45.n45_fecha) USING "dd-mm-yyyy"
+IF rm_n45.n45_tipo_pago = 'C' THEN
 	LET r_b12.b12_benef_che = r_n30.n30_nombres CLIPPED
 	CALL lee_cheque(r_b12.*) RETURNING num_che, glosa
 	IF int_flag THEN
@@ -4239,14 +4258,14 @@ IF rm_n74.n74_tipo_pago = 'C' THEN
 	LET r_b12.b12_num_cheque = num_che
 	LET r_b12.b12_glosa      = glosa CLIPPED
 END IF
-IF rm_n74.n74_sal_prest_ant > 0 THEN
+IF rm_n45.n45_sal_prest_ant > 0 THEN
 	LET r_b12.b12_glosa = r_b12.b12_glosa CLIPPED, ' (REDISTRIBUIDO).'
 END IF
 LET r_b12.b12_glosa = r_b12.b12_glosa CLIPPED, ' ANT. ',
-			rm_n74.n74_num_prest USING "<<&&", ' '
-IF rm_n74.n74_sal_prest_ant > 0 THEN
+			rm_n45.n45_num_prest USING "<<&&", ' '
+IF rm_n45.n45_sal_prest_ant > 0 THEN
 	LET r_b12.b12_glosa = r_b12.b12_glosa CLIPPED, ' PA-',
-				rm_n74.n74_prest_tran USING "<<&&"
+				rm_n45.n45_prest_tran USING "<<&&"
 END IF
 LET r_b12.b12_origen      = 'A'
 CALL fl_lee_moneda(r_n30.n30_mon_sueldo) RETURNING r_g13.*
@@ -4268,22 +4287,22 @@ LET r_b12.b12_modulo      = vg_modulo
 LET r_b12.b12_usuario     = vg_usuario
 LET r_b12.b12_fecing      = CURRENT
 INSERT INTO ctbt012 VALUES (r_b12.*) 
-LET val_prest = rm_n74.n74_val_prest + rm_n74.n74_valor_int
-IF rm_n74.n74_val_prest = 0 THEN
-	LET val_prest = rm_n74.n74_sal_prest_ant
+LET val_prest = rm_n45.n45_val_prest + rm_n45.n45_valor_int
+IF rm_n45.n45_val_prest = 0 THEN
+	LET val_prest = rm_n45.n45_sal_prest_ant
 END IF
-CALL fl_lee_cab_prestamo_roles(vg_codcia, rm_n74.n74_prest_tran)
-	RETURNING r_n74.*
-IF r_n74.n74_estado = 'A' OR r_n74.n74_estado = 'R' OR r_n74.n74_estado = 'T'
+CALL fl_lee_cab_prestamo_roles(vg_codcia, rm_n45.n45_prest_tran)
+	RETURNING r_n45.*
+IF r_n45.n45_estado = 'A' OR r_n45.n45_estado = 'R' OR r_n45.n45_estado = 'T'
 THEN
 	-- OJO QUITAR CUANDO ESTEN DADOS DE BAJA LOS ANTICIPOS VIEJOS
-	IF vg_codloc <> 3 OR DATE(r_n74.n74_fecing) >= MDY(06, 15, 2007) THEN
+	IF vg_codloc <> 3 OR DATE(r_n45.n45_fecing) >= MDY(06, 15, 2007) THEN
 	--
 
-	CALL lee_prest_cont(vg_codcia, r_n74.n74_num_prest) RETURNING r_n59.*
+	CALL lee_prest_cont(vg_codcia, r_n45.n45_num_prest) RETURNING r_n59.*
 	IF r_n59.n59_compania IS NULL THEN
-		LET val_prest = val_prest + r_n74.n74_val_prest
-				+ r_n74.n74_valor_int
+		LET val_prest = val_prest + r_n45.n45_val_prest
+				+ r_n45.n45_valor_int
 	END IF
 
 	--
@@ -4291,32 +4310,32 @@ THEN
 	--
 END IF
 LET sec = 1
-IF rm_n74.n74_tipo_pago = 'T' OR rm_n74.n74_tipo_pago = 'R' THEN
-	CALL generar_detalle_contable(r_b12.*, rm_n74.n74_cta_trabaj, val_prest,
+IF rm_n45.n45_tipo_pago = 'T' OR rm_n45.n45_tipo_pago = 'R' THEN
+	CALL generar_detalle_contable(r_b12.*, rm_n45.n45_cta_trabaj, val_prest,
 					'D', sec, 0, 'S')
-	IF rm_n74.n74_val_prest = 0 THEN
-		LET r_n56.n56_aux_banco = rm_n74.n74_cta_trabaj
+	IF rm_n45.n45_val_prest = 0 THEN
+		LET r_n56.n56_aux_banco = rm_n45.n45_cta_trabaj
 	END IF
 ELSE
 	CALL generar_detalle_contable(r_b12.*, r_n56.n56_aux_val_vac, val_prest,
 					'D', sec, 0, 'S')
 END IF
-IF rm_n74.n74_sal_prest_ant > 0 AND rm_n74.n74_val_prest > 0 THEN
+IF rm_n45.n45_sal_prest_ant > 0 AND rm_n45.n45_val_prest > 0 THEN
 	LET sec = sec + 1
 	CALL generar_detalle_contable(r_b12.*, r_n56.n56_aux_val_vac,
-				rm_n74.n74_sal_prest_ant, 'D', sec, 0, 'S')
+				rm_n45.n45_sal_prest_ant, 'D', sec, 0, 'S')
 	LET sec = sec + 1
 	CALL generar_detalle_contable(r_b12.*, r_n56.n56_aux_val_vac,
-				rm_n74.n74_sal_prest_ant, 'H', sec, 1, 'N')
+				rm_n45.n45_sal_prest_ant, 'H', sec, 1, 'N')
 END IF
-IF rm_n74.n74_valor_int > 0 THEN
+IF rm_n45.n45_valor_int > 0 THEN
 	LET sec = sec + 1
 	CALL generar_detalle_contable(r_b12.*, r_n56.n56_aux_otr_egr,
-					rm_n74.n74_valor_int, 'H', sec, 0, 'S')
+					rm_n45.n45_valor_int, 'H', sec, 0, 'S')
 END IF
 LET sec = sec + 1
 CALL generar_detalle_contable(r_b12.*, r_n56.n56_aux_banco, (val_prest -
-				rm_n74.n74_valor_int), 'H', sec, 1, 'S')
+				rm_n45.n45_valor_int), 'H', sec, 1, 'S')
 SELECT NVL(SUM(b13_valor_base), 0) INTO valor_cuad
 	FROM ctbt013
 	WHERE b13_compania  = vg_codcia
@@ -4328,8 +4347,8 @@ IF valor_cuad <> 0 THEN
 	RETURN r_b12.*
 END IF
 INITIALIZE r_n59.* TO NULL
-LET r_n59.n59_compania  = rm_n74.n74_compania
-LET r_n59.n59_num_prest = rm_n74.n74_num_prest
+LET r_n59.n59_compania  = rm_n45.n45_compania
+LET r_n59.n59_num_prest = rm_n45.n45_num_prest
 LET r_n59.n59_tipo_comp = r_b12.b12_tipo_comp
 LET r_n59.n59_num_comp  = r_b12.b12_num_comp
 INSERT INTO rolt059 VALUES(r_n59.*)
@@ -4437,16 +4456,16 @@ LET r_b13.b13_tipo_comp   = r_b12.b12_tipo_comp
 LET r_b13.b13_num_comp    = r_b12.b12_num_comp
 LET r_b13.b13_secuencia   = sec
 IF flag_bco THEN
-	IF rm_n74.n74_tipo_pago <> 'E' THEN
-		CALL fl_lee_banco_compania(vg_codcia, rm_n74.n74_bco_empresa,
-						rm_n74.n74_cta_empresa)
+	IF rm_n45.n45_tipo_pago <> 'E' THEN
+		CALL fl_lee_banco_compania(vg_codcia, rm_n45.n45_bco_empresa,
+						rm_n45.n45_cta_empresa)
 			RETURNING r_g09.*
-		IF rm_n74.n74_val_prest > 0 AND flag = 'S' THEN
+		IF rm_n45.n45_val_prest > 0 AND flag = 'S' THEN
 			LET cuenta = r_g09.g09_aux_cont
 		END IF
 	END IF
-	IF rm_n74.n74_val_prest > 0 THEN
-		CASE rm_n74.n74_tipo_pago
+	IF rm_n45.n45_val_prest > 0 THEN
+		CASE rm_n45.n45_tipo_pago
 			WHEN 'C' IF flag = 'S' THEN
 					LET r_b13.b13_tipo_doc = 'CHE'
 				 END IF
@@ -4456,10 +4475,10 @@ IF flag_bco THEN
 END IF
 LET r_b13.b13_cuenta      = cuenta
 LET r_b13.b13_glosa       = 'LIQ.ANT.EMP. ',
-				rm_n74.n74_cod_trab USING "<<<&&", ' AN-',
-				rm_n74.n74_num_prest USING "<<<&&",
-				' RUBRO: ', rm_n74.n74_cod_rubro USING "<<<&&",
-				' ', DATE(rm_n74.n74_fecha) USING "dd-mm-yyyy"
+				rm_n45.n45_cod_trab USING "<<<&&", ' AN-',
+				rm_n45.n45_num_prest USING "<<<&&",
+				' RUBRO: ', rm_n45.n45_cod_rubro USING "<<<&&",
+				' ', DATE(rm_n45.n45_fecha) USING "dd-mm-yyyy"
 LET r_b13.b13_valor_base  = 0
 LET r_b13.b13_valor_aux   = 0
 CASE tipo
@@ -4575,62 +4594,62 @@ PAGE HEADER
 		ASCII escape, ASCII act_dob1, ASCII des_dob,
 		ASCII escape, ASCII act_12cpi
 	SKIP 1 LINES
-	CALL fl_lee_trabajador_roles(rm_n74.n74_compania, rm_n74.n74_cod_trab)
+	CALL fl_lee_trabajador_roles(rm_n45.n45_compania, rm_n45.n45_cod_trab)
 		RETURNING r_n30.*
-	CALL fl_lee_rubro_roles(rm_n74.n74_cod_rubro) RETURNING r_n06.*
+	CALL fl_lee_rubro_roles(rm_n45.n45_cod_rubro) RETURNING r_n06.*
 	CALL fl_lee_moneda(r_n30.n30_mon_sueldo) RETURNING r_g13.*
-	CALL fl_justifica_titulo('I', rm_n74.n74_usuario, 10) RETURNING usuario
+	CALL fl_justifica_titulo('I', rm_n45.n45_usuario, 10) RETURNING usuario
 	CALL fl_lee_modulo(vg_modulo) RETURNING r_g50.*
 	LET modulo      = 'MODULO    : ', r_g50.g50_nombre[1, 19] CLIPPED
-	LET valor_deuda = rm_n74.n74_val_prest + rm_n74.n74_sal_prest_ant
-				+ rm_n74.n74_valor_int - rm_n74.n74_descontado
+	LET valor_deuda = rm_n45.n45_val_prest + rm_n45.n45_sal_prest_ant
+				+ rm_n45.n45_valor_int - rm_n45.n45_descontado
 	PRINT COLUMN 001, modulo CLIPPED,
 	      COLUMN 089, 'PAG. ', PAGENO USING "&&&"
 	SKIP 1 LINES
-	PRINT COLUMN 001, 'ANTICIPO  : ', rm_n74.n74_num_prest USING "<<<<&&",
-	      COLUMN 025, 'RUBRO: ', rm_n74.n74_cod_rubro USING "&&", ' ',
+	PRINT COLUMN 001, 'ANTICIPO  : ', rm_n45.n45_num_prest USING "<<<<&&",
+	      COLUMN 025, 'RUBRO: ', rm_n45.n45_cod_rubro USING "&&", ' ',
 		r_n06.n06_nombre_abr CLIPPED;
-	IF rm_n74.n74_prest_tran IS NOT NULL THEN
-		PRINT COLUMN 052, 'ESTADO: ', rm_n74.n74_estado, ' ',
-			retorna_estado(rm_n74.n74_estado) CLIPPED,
+	IF rm_n45.n45_prest_tran IS NOT NULL THEN
+		PRINT COLUMN 052, 'ESTADO: ', rm_n45.n45_estado, ' ',
+			retorna_estado(rm_n45.n45_estado) CLIPPED,
 		      COLUMN 078, 'ANT. TRANS.: ',
-			rm_n74.n74_prest_tran USING "<<<<&&"
+			rm_n45.n45_prest_tran USING "<<<<&&"
 	ELSE
-		PRINT COLUMN 059, 'ESTADO           : ', rm_n74.n74_estado, ' ',
-			retorna_estado(rm_n74.n74_estado) CLIPPED
+		PRINT COLUMN 059, 'ESTADO           : ', rm_n45.n45_estado, ' ',
+			retorna_estado(rm_n45.n45_estado) CLIPPED
 	END IF
-	PRINT COLUMN 001, 'EMPLEADO  : ', rm_n74.n74_cod_trab USING "<<<&&&",
+	PRINT COLUMN 001, 'EMPLEADO  : ', rm_n45.n45_cod_trab USING "<<<&&&",
 		' ', r_n30.n30_nombres[1, 35] CLIPPED,
 	      COLUMN 059, 'USUARIO          : ', usuario
-	LET valor_car = rm_n74.n74_val_prest USING "---,---,--&.##"
+	LET valor_car = rm_n45.n45_val_prest USING "---,---,--&.##"
 	CALL fl_justifica_titulo('I', valor_car, 14) RETURNING valor_car
-	PRINT COLUMN 001, 'MONEDA    : ', rm_n74.n74_moneda CLIPPED, ' ',
+	PRINT COLUMN 001, 'MONEDA    : ', rm_n45.n45_moneda CLIPPED, ' ',
 		r_g13.g13_nombre CLIPPED,
 	      COLUMN 059, 'VALOR ANTICIPO   : ', valor_car
-	LET valor_car = rm_n74.n74_paridad USING "--,---,--&.#########"
+	LET valor_car = rm_n45.n45_paridad USING "--,---,--&.#########"
 	CALL fl_justifica_titulo('I', valor_car, 19) RETURNING valor_car
 	PRINT COLUMN 001, 'PARIDAD   : ', valor_car;
-	IF rm_n74.n74_sal_prest_ant > 0 THEN
-		LET valor_car = rm_n74.n74_sal_prest_ant USING "---,---,--&.##"
+	IF rm_n45.n45_sal_prest_ant > 0 THEN
+		LET valor_car = rm_n45.n45_sal_prest_ant USING "---,---,--&.##"
 		CALL fl_justifica_titulo('I', valor_car, 14) RETURNING valor_car
 		PRINT COLUMN 059, 'SALDO ANT. PREST.: ', valor_car
 	ELSE
 		PRINT COLUMN 059, ' '
 	END IF
-	LET valor_car = rm_n74.n74_descontado USING "---,---,--&.##"
+	LET valor_car = rm_n45.n45_descontado USING "---,---,--&.##"
 	CALL fl_justifica_titulo('I', valor_car, 14) RETURNING valor_car
-	PRINT COLUMN 001, 'REFERENCIA: ', rm_n74.n74_referencia CLIPPED,
+	PRINT COLUMN 001, 'REFERENCIA: ', rm_n45.n45_referencia CLIPPED,
 	      COLUMN 059, 'DESCONTADO       : ', valor_car
 	LET valor_car = valor_deuda USING "---,---,--&.##"
 	CALL fl_justifica_titulo('I', valor_car, 14) RETURNING valor_car
-	PRINT COLUMN 001, 'FECHA     : ', DATE(rm_n74.n74_fecha)
+	PRINT COLUMN 001, 'FECHA     : ', DATE(rm_n45.n45_fecha)
 		USING "dd-mm-yyyy", 1 SPACES,
-		EXTEND(rm_n74.n74_fecha, HOUR TO SECOND),
+		EXTEND(rm_n45.n45_fecha, HOUR TO SECOND),
 	      COLUMN 059, 'VALOR ACTUAL     : ', valor_car
-	IF rm_n74.n74_fec_elimi IS NOT NULL THEN
-		PRINT COLUMN 001, 'FECHA ELI.: ', DATE(rm_n74.n74_fec_elimi)
+	IF rm_n45.n45_fec_elimi IS NOT NULL THEN
+		PRINT COLUMN 001, 'FECHA ELI.: ', DATE(rm_n45.n45_fec_elimi)
 			USING "dd-mm-yyyy", 1 SPACES,
-			EXTEND(rm_n74.n74_fec_elimi, HOUR TO SECOND);
+			EXTEND(rm_n45.n45_fec_elimi, HOUR TO SECOND);
 	ELSE
 		PRINT COLUMN 001, ' ';
 	END IF
@@ -4724,7 +4743,7 @@ END REPORT
 
 
 FUNCTION retorna_estado(estado)
-DEFINE estado		LIKE rolt045.n74_estado
+DEFINE estado		LIKE rolt045.n45_estado
 DEFINE nom_estado	VARCHAR(15)
 
 CASE estado

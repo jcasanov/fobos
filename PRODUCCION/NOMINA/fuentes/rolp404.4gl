@@ -2,7 +2,8 @@
 -- Titulo           : rolp404.4gl - Impresión recibos de pagos de jubilados
 -- Elaboracion      : 04-Sep-2003
 -- Autor            : JCM
--- Formato Ejecucion: fglrun rolp404 base módulo compañía ano mes
+-- Formato Ejecucion: fglrun rolp404 base módulo compañía
+--					cod_liqrol fec_ini fec_fin
 -- Ultima Correccion: 
 -- Motivo Correccion:
 --------------------------------------------------------------------------------
@@ -15,7 +16,9 @@ DEFINE fin_arch		INTEGER
 DEFINE num_liq, tot_liq	INTEGER
 DEFINE tot_sueldo	DECIMAL(14,2)
 DEFINE tot_descontar	DECIMAL(14,2)
-DEFINE vm_ano, vm_mes	INTEGER
+DEFINE vm_cod_lq	LIKE rolt048.n48_cod_liqrol
+DEFINE vm_fec_ini	LIKE rolt048.n48_fecha_ini
+DEFINE vm_fec_fin	LIKE rolt048.n48_fecha_fin
 DEFINE vm_lineas_impr	SMALLINT
 
 
@@ -25,10 +28,10 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
+CALL startlog('../logs/rolp404.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
-IF num_args() <> 5 THEN
+IF num_args() <> 6 THEN
 	-- Validar # parametros correcto
 	CALL fl_mostrar_mensaje('Numero de parametros incorrecto.','stop')
 	EXIT PROGRAM
@@ -36,8 +39,9 @@ END IF
 LET vg_base    = arg_val(1)
 LET vg_modulo  = arg_val(2)
 LET vg_codcia  = arg_val(3)
-LET vm_ano     = arg_val(4)
-LET vm_mes     = arg_val(5)
+LET vm_cod_lq  = arg_val(4)
+LET vm_fec_ini = arg_val(5)
+LET vm_fec_fin = arg_val(6)
 LET vg_proceso = 'rolp404'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()
@@ -89,28 +93,31 @@ END FUNCTION
 FUNCTION control_reporte(comando)
 DEFINE comando		CHAR(100)
 DEFINE r_jub		RECORD
-	cod_trab		LIKE rolt048.n48_cod_trab,
-	nom_trab		LIKE rolt030.n30_nombres,
-	estado			LIKE rolt048.n48_estado,
-	valor			LIKE rolt048.n48_val_jub_pat,
-	moneda			LIKE rolt048.n48_moneda,
-	tipo_pago		LIKE rolt048.n48_tipo_pago,
-	bco_empresa		LIKE rolt048.n48_bco_empresa,
-	cta_empresa		LIKE rolt048.n48_cta_empresa,
-	cta_trabaj		LIKE rolt048.n48_cta_trabaj
-END RECORD
+				anio		LIKE rolt048.n48_ano_proceso,
+				mes		LIKE rolt048.n48_mes_proceso,
+				cod_trab	LIKE rolt048.n48_cod_trab,
+				nom_trab	LIKE rolt030.n30_nombres,
+				estado		LIKE rolt048.n48_estado,
+				valor		LIKE rolt048.n48_val_jub_pat,
+				moneda		LIKE rolt048.n48_moneda,
+				tipo_pago	LIKE rolt048.n48_tipo_pago,
+				bco_empresa	LIKE rolt048.n48_bco_empresa,
+				cta_empresa	LIKE rolt048.n48_cta_empresa,
+				cta_trabaj	LIKE rolt048.n48_cta_trabaj
+			END RECORD
 DEFINE flag 		INTEGER
 
 DECLARE q_jub CURSOR FOR
-	SELECT n48_cod_trab,    n30_nombres,     n48_estado,  
-	       n48_val_jub_pat, n48_moneda,      n48_tipo_pago, 
-               n48_bco_empresa, n48_cta_empresa, n48_cta_trabaj 
+	SELECT n48_ano_proceso, n48_mes_proceso, n48_cod_trab, n30_nombres,
+		n48_estado, n48_val_jub_pat, n48_moneda, n48_tipo_pago,
+		n48_bco_empresa, n48_cta_empresa, n48_cta_trabaj 
 	FROM rolt048, rolt030 
-	WHERE n48_compania    = vg_codcia
-	  AND n48_ano_proceso = vm_ano
-	  AND n48_mes_proceso = vm_mes
-	  AND n30_compania    = n48_compania 
-	  AND n30_cod_trab    = n48_cod_trab 
+	WHERE n48_compania   = vg_codcia
+	  AND n48_cod_liqrol = vm_cod_lq
+	  AND n48_fecha_ini  = vm_fec_ini
+	  AND n48_fecha_fin  = vm_fec_fin
+	  AND n30_compania   = n48_compania 
+	  AND n30_cod_trab   = n48_cod_trab 
 	ORDER BY n30_nombres 
 
 LET flag = 0
@@ -135,16 +142,19 @@ END FUNCTION
 
 REPORT reporte_liq_jubilados(r_jub)
 DEFINE r_jub		RECORD
-	cod_trab		LIKE rolt048.n48_cod_trab,
-	nom_trab		LIKE rolt030.n30_nombres,
-	estado			LIKE rolt048.n48_estado,
-	valor			LIKE rolt048.n48_val_jub_pat,
-	moneda			LIKE rolt048.n48_moneda,
-	tipo_pago		LIKE rolt048.n48_tipo_pago,
-	bco_empresa		LIKE rolt048.n48_bco_empresa,
-	cta_empresa		LIKE rolt048.n48_cta_empresa,
-	cta_trabaj		LIKE rolt048.n48_cta_trabaj
-END RECORD
+				anio		LIKE rolt048.n48_ano_proceso,
+				mes		LIKE rolt048.n48_mes_proceso,
+				cod_trab	LIKE rolt048.n48_cod_trab,
+				nom_trab	LIKE rolt030.n30_nombres,
+				estado		LIKE rolt048.n48_estado,
+				valor		LIKE rolt048.n48_val_jub_pat,
+				moneda		LIKE rolt048.n48_moneda,
+				tipo_pago	LIKE rolt048.n48_tipo_pago,
+				bco_empresa	LIKE rolt048.n48_bco_empresa,
+				cta_empresa	LIKE rolt048.n48_cta_empresa,
+				cta_trabaj	LIKE rolt048.n48_cta_trabaj
+			END RECORD
+DEFINE r_n03		RECORD LIKE rolt003.*
 DEFINE r_n30		RECORD LIKE rolt030.*
 DEFINE r_g13		RECORD LIKE gent013.*
 DEFINE suel_t		VARCHAR(15)
@@ -205,13 +215,17 @@ ON EVERY ROW
 	--print ASCII act_comp
 	SKIP 6 LINES
 	LET tot_sueldo = tot_sueldo + r_jub.valor
+	CALL fl_lee_proceso_roles(vm_cod_lq) RETURNING r_n03.*
+	LET titulo     = "RECIBO PAGO JUBILADOS (",r_n03.n03_nombre_abr CLIPPED,
+				")"
+	CALL fl_justifica_titulo('C', titulo, 80) RETURNING titulo
 	PRINT COLUMN 001, rm_cia.g01_razonsocial
-	PRINT COLUMN 032, "RECIBO DE PAGO JUBILADOS"
+	PRINT COLUMN 001, titulo
 	SKIP 1 LINES
 	PRINT COLUMN 001, "NOMBRE(", r_jub.cod_trab USING "&&&&", "): ",
 			  r_jub.nom_trab[1,36],
-	      COLUMN 050, "LIQUIDACION: ", fl_retorna_nombre_mes(vm_mes),
-						   " / ", vm_ano USING '&&&&'
+	      COLUMN 050, "LIQUIDACION: ", fl_retorna_nombre_mes(r_jub.mes),
+					   " / ", r_jub.anio USING '&&&&' 
 	PRINT COLUMN 001, "FORMA PAGO  : ", forma_pago,
 	      COLUMN 055, "ESTADO LIQ.: ", nom_est
 	SKIP 1 LINES
@@ -241,8 +255,8 @@ ON LAST ROW
 	SKIP 1 LINES
 	PRINT COLUMN 001, "TOTALES     : No. de Liquidaciones ", 
 		          tot_liq USING "###",
-	      COLUMN 050, "LIQUIDACION: ", fl_retorna_nombre_mes(vm_mes),
-						   " / ", vm_ano USING '&&&&' 
+	      COLUMN 050, "LIQUIDACION: ", fl_retorna_nombre_mes(r_jub.mes),
+					   " / ", r_jub.anio USING '&&&&' 
 	SKIP 2 LINES
 	PRINT COLUMN 001, "INGRESOS    : ",
 	      COLUMN 062, DATE(TODAY) USING 'dd-mm-yyyy', 1 SPACES, TIME
@@ -289,11 +303,14 @@ FUNCTION sacar_totales(tipo)
 DEFINE tipo		CHAR(1)
 DEFINE tot_valor	DECIMAL(14,2)
 
-SELECT NVL(SUM(n48_val_jub_pat), 0) INTO tot_valor FROM rolt048 
+SELECT NVL(SUM(n48_val_jub_pat), 0)
+	INTO tot_valor
+	FROM rolt048 
 	WHERE n48_compania    =  vg_codcia
-	  AND n48_ano_proceso = vm_ano
-	  AND n48_mes_proceso = vm_mes
- 	  AND n48_estado      <> "E"
+	  AND n48_cod_liqrol  = vm_cod_lq
+	  AND n48_fecha_ini   = vm_fec_ini
+	  AND n48_fecha_fin   = vm_fec_fin
+ 	  AND n48_estado     <> "E"
           AND n48_tipo_pago   = tipo
 RETURN tot_valor
 

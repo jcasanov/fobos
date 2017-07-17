@@ -28,11 +28,30 @@ DEFINE rm_par		RECORD
 DEFINE vm_filas_pant 	INTEGER
 DEFINE vm_numelm 	INTEGER
 DEFINE vm_maxelm 	INTEGER
-DEFINE rm_scr ARRAY[1000] OF RECORD
-	n33_cod_trab		LIKE rolt033.n33_cod_trab,
-	n_trab			LIKE rolt030.n30_nombres,
-	n33_valor		LIKE rolt033.n33_valor
-END RECORD
+DEFINE rm_scr		ARRAY[1000] OF RECORD
+				n33_cod_trab	LIKE rolt033.n33_cod_trab,
+				n_trab		LIKE rolt030.n30_nombres,
+				n33_valor	LIKE rolt033.n33_valor
+			END RECORD
+DEFINE r_det_arch	ARRAY[1000] OF RECORD
+				n30_cod_trab	LIKE rolt030.n30_cod_trab,
+				n30_nombres	LIKE rolt030.n30_nombres,
+				val_rub		LIKE rolt006.n06_valor_fijo,
+				flag_ident	LIKE rolt006.n06_flag_ident
+			END RECORD
+DEFINE r_det_nov	ARRAY[1000] OF RECORD
+				n30_cod_trab	LIKE rolt030.n30_cod_trab,
+				n30_nombres	LIKE rolt030.n30_nombres,
+				flag_ident	LIKE rolt006.n06_flag_ident,
+				comentarios	VARCHAR(30)
+			END RECORD
+DEFINE vm_num_det	SMALLINT
+DEFINE vm_max_det	SMALLINT
+DEFINE rm_orden 	ARRAY[15] OF CHAR(4)
+DEFINE vm_columna_1	SMALLINT
+DEFINE vm_columna_2	SMALLINT
+DEFINE novedades	VARCHAR(100)
+DEFINE vm_carg_arch	SMALLINT
 
 
 
@@ -91,7 +110,8 @@ IF rm_n00.n00_serial IS NULL THEN
 END IF
 
 -- AQUI SE DEFINEN VALORES DE VARIABLES GLOBALES
-LET vm_maxelm = 1000
+LET vm_maxelm  = 1000
+LET vm_max_det = 1000
 
 LET salir = 0
 WHILE (salir = 0)
@@ -197,25 +217,31 @@ IF int_flag THEN
         RETURN
 END IF
 
-CALL carga_trabajadores()
 
-CALL lee_valores_rubro()
-IF int_flag THEN
-	LET int_flag = 0
-	CLEAR FORM
-	CALL limpia_pantalla()
-	CALL mostrar_botones()
-        RETURN
+IF NOT vm_carg_arch THEN
+
+	CALL carga_trabajadores()
+
+	CALL lee_valores_rubro()
+	IF int_flag THEN
+		LET int_flag = 0
+		CLEAR FORM
+		CALL limpia_pantalla()
+		CALL mostrar_botones()
+	        RETURN
+	END IF
+
+	CALL fl_mensaje_seguro_ejecutar_proceso() RETURNING resp
+	IF resp = 'No' THEN
+		LET int_flag = 0
+		CLEAR FORM
+		CALL limpia_pantalla()
+		CALL mostrar_botones()
+	        RETURN
+	END IF
+
 END IF
 
-CALL fl_mensaje_seguro_ejecutar_proceso() RETURNING resp
-IF resp = 'No' THEN
-	LET int_flag = 0
-	CLEAR FORM
-	CALL limpia_pantalla()
-	CALL mostrar_botones()
-        RETURN
-END IF
 
 BEGIN WORK
 LET int_flag = 0
@@ -234,14 +260,25 @@ LET comando = 'fglrun rolp203 ', vg_base, ' ', vg_modulo, ' ',
                vg_codcia, ' X'
 RUN comando
 DECLARE q_n47 CURSOR FOR
-	SELECT * FROM rolt047
+	SELECT n47_cod_trab
+		FROM rolt047
 		WHERE n47_compania   = vg_codcia
 		  AND n47_proceso    = 'VA'
 		  AND n47_estado     = 'A'
 		  AND n47_cod_liqrol = rm_par.n32_cod_liqrol
 		  AND n47_fecha_ini  = rm_par.n32_fecha_ini
 		  AND n47_fecha_fin  = rm_par.n32_fecha_fin
-FOREACH q_n47 INTO r_n47.*
+	UNION ALL
+	SELECT n33_cod_trab
+		FROM rolt033, rolt006
+		WHERE n33_compania    = vg_codcia
+		  AND n33_cod_liqrol  = rm_par.n32_cod_liqrol
+		  AND n33_fecha_ini   = rm_par.n32_fecha_ini
+		  AND n33_fecha_fin   = rm_par.n32_fecha_fin
+		  AND n33_valor       > 0
+		  AND n06_cod_rubro   = n33_cod_rubro
+		  AND n06_flag_ident IN ('DM', 'DE')
+FOREACH q_n47 INTO r_n47.n47_cod_trab
 	LET comando = 'fglrun rolp203 ', vg_base, ' ', vg_modulo, ' ',
         	       vg_codcia, ' X ', r_n47.n47_cod_trab
 	RUN comando
@@ -306,7 +343,16 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
                                 DISPLAY BY NAME rm_par.*
                         END IF
                 END IF
-                LET int_flag = 0
+		LET int_flag = 0
+	ON KEY(F5)
+		LET vm_carg_arch = 0
+		IF control_cargar_archivo() THEN
+			LET vm_carg_arch = 1
+			EXIT INPUT
+		END IF
+		LET int_flag = 0
+	BEFORE INPUT
+        	CALL dialog.keysetlabel('F5','Cargar Archivo')
         AFTER FIELD n32_moneda
                 IF rm_par.n32_moneda IS NOT NULL THEN
                         CALL fl_lee_moneda(rm_par.n32_moneda)
@@ -598,40 +644,504 @@ DISPLAY 'Valor Rubro' 		TO bt_valor
 END FUNCTION
 
 
-{
-FUNCTION validar_parametros()
 
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 
-                            'stop')
-	EXIT PROGRAM
+FUNCTION control_cargar_archivo()
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
+DEFINE archivo		VARCHAR(255)
+
+IF NOT cargar_datos_arch() THEN
+	RETURN 0
 END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 
-                            'stop')
-	EXIT PROGRAM
+LET lin_menu = 0
+LET row_ini  = 4
+LET num_rows = 20
+LET num_cols = 68
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
 END IF
-IF rg_cia.g01_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || 
-                            vg_codcia, 'stop')
-	EXIT PROGRAM
+OPEN WINDOW w_rolf201_3 AT row_ini, 07 WITH num_rows ROWS, num_cols COLUMNS
+	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE lin_menu,
+		  BORDER)
+IF vg_gui = 1 THEN
+	OPEN FORM f_rolf201_3 FROM '../forms/rolf201_3'
+ELSE
+	OPEN FORM f_rolf201_3 FROM '../forms/rolf201_3c'
 END IF
-IF vg_codloc IS NULL THEN
-	LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
+DISPLAY FORM f_rolf201_3
+LET vm_num_det = 0
+CALL mostrar_botones_detalle2()
+CALL borrar_detalle_arch()
+CALL muestra_detalle_arch()
+CALL borrar_detalle_arch()
+CLOSE WINDOW w_rolf201_3
+IF int_flag THEN
+	DROP TABLE tmp_det_arch
+	LET int_flag = 0
+	RETURN 0
 END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-	CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc, 
-                            'stop')
-	EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-	CALL fgl_winmessage(vg_producto, 'Localidad no está activa: ' || 
-                            vg_codloc, 'stop')
-	EXIT PROGRAM
-END IF
+SELECT codigo, valor, n06_cod_rubro AS rubro
+	FROM tmp_det_arch, rolt006
+	WHERE flag_ident = n06_flag_ident
+	INTO TEMP t1
+DROP TABLE tmp_det_arch
+BEGIN WORK
+	WHENEVER ERROR CONTINUE
+	UPDATE rolt033
+		SET n33_valor =
+			(SELECT valor
+				FROM t1
+				WHERE codigo = n33_cod_trab
+				  AND rubro  = n33_cod_rubro) 
+		WHERE n33_compania    = vg_codcia
+		  AND n33_cod_liqrol  = rm_par.n32_cod_liqrol
+		  AND n33_fecha_ini   = rm_par.n32_fecha_ini
+		  AND n33_fecha_fin   = rm_par.n32_fecha_fin
+		  AND EXISTS
+			(SELECT 1 FROM t1
+				WHERE codigo = n33_cod_trab
+				  AND rubro  = n33_cod_rubro) 
+		  --AND n33_valor       = 0
+	IF STATUS <> 0 THEN
+		WHENEVER ERROR STOP
+		ROLLBACK WORK
+		CALL fl_mostrar_mensaje('Ha ocurrido un ERROR al intentar cargar los datos del archivo en la NOMINA. Por favor LLAME AL ADMINISTRADOR.', 'exclamation')
+		DROP TABLE t1
+		RETURN 0
+	END IF
+	WHENEVER ERROR STOP
+COMMIT WORK
+CALL fl_mostrar_mensaje('Se cargaron los datos del archivo en la NOMINA.', 'info')
+LET archivo = '$HOME/EXTRAS/VALORES_ADIC_', vg_usuario CLIPPED, '_',
+		TODAY USING "yyyy-mm-dd", '_', TIME, '.csv'
+LET archivo = 'mv -f VALORES_ADIC.csv ', archivo CLIPPED
+RUN archivo
+RUN 'rm -rf VALORES_ADIC.csv '
+DROP TABLE t1
+RETURN 1
 
 END FUNCTION
-}
+
+
+
+FUNCTION cargar_datos_arch()
+DEFINE query		CHAR(800)
+DEFINE cuantos		INTEGER
+DEFINE otras		SMALLINT
+DEFINE mensaje		VARCHAR(200)
+
+SELECT n30_cod_trab AS codigo, n30_nombres AS empleado, n30_sueldo_mes AS valor,
+	n30_mon_sueldo AS flag_ident
+	FROM rolt030
+	WHERE n30_compania = 999
+	INTO TEMP t1
+RUN 'mv -f $HOME/tmp/VALORES_ADIC.csv .'
+RUN 'dos2unix VALORES_ADIC.csv'
+WHENEVER ERROR CONTINUE
+LOAD FROM "VALORES_ADIC.csv" DELIMITER "," INSERT INTO t1
+IF STATUS = 846 THEN
+	DROP TABLE t1
+	CALL fl_mostrar_mensaje('No se puede cargar el archivo porque falta el codigo o el valor en alguna linea del archivo.', 'exclamation')
+	WHENEVER ERROR STOP
+	RETURN 0
+END IF
+IF STATUS = 847 THEN
+	DROP TABLE t1
+	CALL fl_mostrar_mensaje('No se puede cargar el archivo porque uno de los registros tiene una COMA en vez del PUNTO DECIMAL.', 'exclamation')
+	WHENEVER ERROR STOP
+	RETURN 0
+END IF
+IF STATUS = -805 THEN
+	DROP TABLE t1
+	LET mensaje = 'No se puede cargar el archivo porque no existe en la ',
+			'ruta: ', FGL_GETENV("HOME") CLIPPED, '/tmp/.'
+	CALL fl_mostrar_mensaje(mensaje, 'exclamation')
+	WHENEVER ERROR STOP
+	RETURN 0
+END IF
+IF STATUS <> 0 THEN
+	DROP TABLE t1
+	CALL fl_mostrar_mensaje('No se puede cargar el archivo porque ha ocurrido un error. LLAME AL ADMINISTRADOR.', 'exclamation')
+	WHENEVER ERROR STOP
+	RETURN 0
+END IF
+WHENEVER ERROR STOP
+SELECT COUNT(*) INTO vm_num_det FROM t1
+IF vm_num_det = 0 THEN
+	DROP TABLE t1
+	CALL fl_mostrar_mensaje('No se puede cargar el archivo porque esta vacio.', 'exclamation')
+	RETURN 0
+END IF
+SELECT * FROM t1
+	INTO TEMP tmp_det_arch
+SELECT * FROM t1
+	WHERE NOT EXISTS
+		(SELECT 1 FROM rolt030
+			WHERE n30_compania = vg_codcia
+			  AND n30_cod_trab = codigo)
+	INTO TEMP tmp_fal
+DROP TABLE t1
+SELECT codigo, empleado, flag_ident,
+	"EMPLEADO CON ESTADO INACTIVO" AS comentario
+	FROM tmp_det_arch, rolt030
+	WHERE n30_compania = vg_codcia
+	  AND n30_cod_trab = codigo
+	  AND n30_estado   = "I"
+	INTO TEMP tmp_nov
+SELECT COUNT(*) INTO cuantos FROM tmp_nov
+LET novedades = NULL
+IF cuantos > 0 THEN
+	LET novedades = 'EXISTEN EMPLEADOS CON ESTADO INACTIVO'
+END IF
+SELECT codigo, flag_ident, COUNT(*) AS ctos
+	FROM tmp_det_arch
+	GROUP BY 1, 2
+	HAVING COUNT(*) > 1
+	INTO TEMP t1
+SELECT COUNT(*) INTO cuantos FROM t1
+IF cuantos > 0 THEN
+	IF novedades IS NULL THEN
+		LET novedades = 'EXISTEN EMPLEADOS CON RUBROS REPETIDOS'
+	ELSE
+		LET novedades = novedades CLIPPED, ' Y TAMBIEN REPETIDO'
+	END IF
+	LET query = 'INSERT INTO tmp_nov ',
+		'SELECT UNIQUE a.codigo, a.empleado, a.flag_ident, ',
+		       '(SELECT "COD. EMPLEADO ESTA REPETIDO: " ',
+				'|| t1.ctos FROM t1 ',
+			'WHERE t1.codigo = a.codigo) AS comentario ',
+		'FROM tmp_det_arch a ',
+		'WHERE a.codigo IN ',
+			'(SELECT t1.codigo FROM t1 ',
+				'WHERE t1.codigo     = a.codigo ',
+				'  AND t1.flag_ident = a.flag_ident) '
+	PREPARE exec_nov1 FROM query
+	EXECUTE exec_nov1
+END IF
+DROP TABLE t1
+LET query = ' SELECT codigo, empleado, flag_ident, ',
+			'CASE WHEN valor IS NULL ',
+				'THEN "EMPLEADO SIN VALORES" ',
+				'ELSE "EMPLEADO CON VALOR CERO" ',
+			'END AS comentario ',
+		'FROM tmp_det_arch ',
+		'WHERE valor IS NULL ',
+		'   OR valor <= 0 ',
+		'INTO TEMP t1'
+PREPARE exec_nov2 FROM query
+EXECUTE exec_nov2
+SELECT COUNT(*) INTO cuantos FROM t1
+LET otras = 0
+IF cuantos > 0 THEN
+	IF novedades IS NULL THEN
+		LET novedades = 'EXISTEN EMPLEADOS SIN LA COLUMNA VALOR'
+	ELSE
+		LET novedades = novedades CLIPPED, '. OTRAS NOVEDADES'
+		LET otras     = 1
+	END IF
+	INSERT INTO tmp_nov SELECT * FROM t1
+END IF
+DROP TABLE t1
+SELECT COUNT(*) INTO cuantos FROM tmp_fal
+IF cuantos > 0 THEN
+	IF novedades IS NULL THEN
+		LET novedades = 'ESTOS COD. EMPLEADOS NO EXISTEN EN LA BASE'
+	END IF
+	IF NOT otras THEN
+		LET novedades = novedades CLIPPED, '. OTRAS NOVEDADES'
+	END IF
+	INSERT INTO tmp_nov
+		SELECT codigo, "N/A" AS empleado, flag_ident,
+			"CODIGO EMPLEADO NO EXISTE" AS comentario
+			FROM tmp_fal
+END IF
+SELECT COUNT(*) INTO cuantos FROM tmp_nov
+DROP TABLE tmp_fal
+IF cuantos > 0 THEN
+	DROP TABLE tmp_det_arch
+	CALL control_cargar_novedades()
+	RETURN 0
+END IF
+DROP TABLE tmp_nov
+RETURN 1
+
+END FUNCTION
+
+
+
+FUNCTION borrar_detalle_arch()
+DEFINE i		SMALLINT
+
+LET vm_num_det = 0
+FOR i = 1 TO fgl_scr_size("r_det_arch")
+	CLEAR r_det_arch[i].*
+END FOR
+FOR i = 1 TO vm_max_det
+	INITIALIZE r_det_arch[i].* TO NULL
+END FOR
+
+END FUNCTION
+
+
+
+FUNCTION muestra_detalle_arch()
+DEFINE i, j, col, salir	SMALLINT
+DEFINE resp		CHAR(6)
+DEFINE query		CHAR(400)
+DEFINE nom_rub		LIKE rolt006.n06_nombre
+DEFINE valor		LIKE rolt006.n06_valor_fijo
+
+LET col           = 4
+LET rm_orden[col] = 'ASC'
+LET vm_columna_1  = col
+LET vm_columna_2  = 2
+WHILE TRUE
+	LET query = 'SELECT * FROM tmp_det_arch ',
+			' ORDER BY ', vm_columna_1, ' ', rm_orden[vm_columna_1],
+			        ', ', vm_columna_2, ' ', rm_orden[vm_columna_2]
+	PREPARE det2 FROM query
+	DECLARE q_det2 CURSOR FOR det2
+	LET vm_num_det = 1
+        FOREACH q_det2 INTO r_det_arch[vm_num_det].*
+                LET vm_num_det = vm_num_det + 1
+                IF vm_num_det > vm_max_det THEN
+                        EXIT FOREACH
+                END IF
+        END FOREACH
+        LET vm_num_det = vm_num_det - 1
+	LET salir    = 0
+	LET int_flag = 0
+	CALL set_count(vm_num_det)
+	INPUT ARRAY r_det_arch WITHOUT DEFAULTS FROM r_det_arch.*
+		ON KEY(INTERRUPT)
+			LET int_flag = 0
+			CALL fl_mensaje_abandonar_proceso() RETURNING resp
+			IF resp = 'Yes' THEN
+				LET int_flag   = 1
+				EXIT INPUT
+			END IF
+		ON KEY(F5)
+			LET i = arr_curr()
+			CALL ver_empleado(r_det_arch[i].n30_cod_trab)
+			LET int_flag = 0
+		ON KEY(F15)
+			LET col = 1
+			EXIT INPUT
+		ON KEY(F16)
+			LET col = 2
+			EXIT INPUT
+		ON KEY(F17)
+			LET col = 3
+			EXIT INPUT
+		ON KEY(F18)
+			LET col = 4
+			EXIT INPUT
+		--#BEFORE INPUT
+			--#CALL dialog.keysetlabel("F1","")
+			--#CALL dialog.keysetlabel("CONTROL-W","")
+			--#CALL dialog.keysetlabel('DELETE','')
+			--#CALL dialog.keysetlabel('INSERT','')
+		--#BEFORE ROW
+			--#LET i = arr_curr()
+	        	--#LET j = scr_line()
+			--#DISPLAY i TO cur_row
+			--#DISPLAY vm_num_det TO max_row
+			--#SELECT n06_nombre
+				--#INTO nom_rub
+				--#FROM rolt006
+				--#WHERE n06_flag_ident =
+					--#r_det_arch[i].flag_ident
+			--#DISPLAY BY NAME nom_rub
+		BEFORE DELETE
+			--#CANCEL DELETE
+		BEFORE INSERT
+			--#CANCEL INSERT
+		BEFORE FIELD val_rub
+			LET valor = r_det_arch[i].val_rub
+		AFTER FIELD val_rub
+			LET r_det_arch[i].val_rub = valor
+			DISPLAY r_det_arch[i].val_rub TO r_det_arch[j].val_rub
+		AFTER INPUT
+			LET salir = 1
+	END INPUT
+	IF int_flag = 1 OR salir THEN
+		EXIT WHILE
+	END IF
+	IF col <> vm_columna_1 THEN
+		LET vm_columna_2           = vm_columna_1 
+		LET rm_orden[vm_columna_2] = rm_orden[vm_columna_1]
+		LET vm_columna_1           = col 
+	END IF
+	IF rm_orden[vm_columna_1] = 'ASC' THEN
+		LET rm_orden[vm_columna_1] = 'DESC'
+	ELSE
+		LET rm_orden[vm_columna_1] = 'ASC'
+	END IF
+END WHILE
+
+END FUNCTION
+
+
+
+FUNCTION mostrar_botones_detalle2()
+
+--#DISPLAY "Codigo"	TO tit_col1
+--#DISPLAY "Empleado"	TO tit_col2
+--#DISPLAY "Valor"	TO tit_col3
+--#DISPLAY "Rb"		TO tit_col4
+
+END FUNCTION
+
+
+
+FUNCTION control_cargar_novedades()
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
+
+LET lin_menu = 0
+LET row_ini  = 4
+LET num_rows = 18
+LET num_cols = 74
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW w_rolf201_4 AT row_ini, 04 WITH num_rows ROWS, num_cols COLUMNS
+	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE lin_menu,
+		  BORDER)
+IF vg_gui = 1 THEN
+	OPEN FORM f_rolf201_4 FROM '../forms/rolf201_4'
+ELSE
+	OPEN FORM f_rolf201_4 FROM '../forms/rolf201_4c'
+END IF
+DISPLAY FORM f_rolf201_4
+LET vm_num_det = 0
+CALL mostrar_botones_detalle3()
+DISPLAY BY NAME novedades
+CALL muestra_detalle_nov()
+LET int_flag = 0
+CLOSE WINDOW w_rolf201_4
+RETURN
+
+END FUNCTION
+
+
+
+FUNCTION muestra_detalle_nov()
+DEFINE i, j, col	SMALLINT
+DEFINE query		CHAR(400)
+DEFINE nom_rub		LIKE rolt006.n06_nombre
+
+LET col           = 4
+LET rm_orden[col] = 'DESC'
+LET vm_columna_1  = col
+LET vm_columna_2  = 1
+WHILE TRUE
+	LET query = 'SELECT * FROM tmp_nov ',
+			' ORDER BY ', vm_columna_1, ' ', rm_orden[vm_columna_1],
+			        ', ', vm_columna_2, ' ', rm_orden[vm_columna_2]
+	PREPARE det3 FROM query
+	DECLARE q_det3 CURSOR FOR det3
+	LET vm_num_det = 1
+        FOREACH q_det3 INTO r_det_nov[vm_num_det].*
+                LET vm_num_det = vm_num_det + 1
+                IF vm_num_det > vm_max_det THEN
+                        EXIT FOREACH
+                END IF
+        END FOREACH
+        LET vm_num_det = vm_num_det - 1
+	LET int_flag = 0
+	CALL set_count(vm_num_det)
+	DISPLAY ARRAY r_det_nov TO r_det_nov.*
+		ON KEY(INTERRUPT)
+			LET int_flag = 1
+			EXIT DISPLAY
+		ON KEY(F5)
+			LET i = arr_curr()
+			CALL ver_empleado(r_det_nov[i].n30_cod_trab)
+			LET int_flag = 0
+		ON KEY(F15)
+			LET col = 1
+			EXIT DISPLAY
+		ON KEY(F16)
+			LET col = 2
+			EXIT DISPLAY
+		ON KEY(F17)
+			LET col = 3
+			EXIT DISPLAY
+		ON KEY(F18)
+			LET col = 4
+			EXIT DISPLAY
+		--#BEFORE DISPLAY
+			--#CALL dialog.keysetlabel("ACCEPT","")
+			--#CALL dialog.keysetlabel("F1","")
+			--#CALL dialog.keysetlabel("CONTROL-W","")
+		--#BEFORE ROW
+			--#LET i = arr_curr()
+	        	--#LET j = scr_line()
+			--#DISPLAY i TO cur_row
+			--#DISPLAY vm_num_det TO max_row
+			--#SELECT n06_nombre
+				--#INTO nom_rub
+				--#FROM rolt006
+				--#WHERE n06_flag_ident =
+					--#r_det_nov[i].flag_ident
+			--#DISPLAY BY NAME nom_rub
+		--#AFTER DISPLAY
+			--#CONTINUE DISPLAY
+	END DISPLAY
+	IF int_flag = 1 THEN
+		EXIT WHILE
+	END IF
+	IF col <> vm_columna_1 THEN
+		LET vm_columna_2           = vm_columna_1 
+		LET rm_orden[vm_columna_2] = rm_orden[vm_columna_1]
+		LET vm_columna_1           = col 
+	END IF
+	IF rm_orden[vm_columna_1] = 'ASC' THEN
+		LET rm_orden[vm_columna_1] = 'DESC'
+	ELSE
+		LET rm_orden[vm_columna_1] = 'ASC'
+	END IF
+END WHILE
+DROP TABLE tmp_nov
+
+END FUNCTION
+
+
+
+FUNCTION mostrar_botones_detalle3()
+
+--#DISPLAY "Codigo"		TO tit_col1
+--#DISPLAY "Empleado"		TO tit_col2
+--#DISPLAY "Rb"			TO tit_col3
+--#DISPLAY "Observaciones"	TO tit_col4
+
+END FUNCTION
+
+
+
+FUNCTION ver_empleado(codigo)
+DEFINE codigo		LIKE rolt030.n30_cod_trab
+DEFINE run_prog		CHAR(10)
+DEFINE comando		CHAR(400)
+
+LET run_prog = '; fglrun '
+IF vg_gui = 0 THEN
+	LET run_prog = '; fglgo '
+END IF
+LET comando = 'cd ..', vg_separador, '..', vg_separador, 'NOMINA',
+	vg_separador, 'fuentes', vg_separador, run_prog, ' rolp108 ', vg_base,
+	' ', vg_modulo, ' ', vg_codcia, ' ', vg_codloc, ' ', codigo
+RUN comando
+
+END FUNCTION

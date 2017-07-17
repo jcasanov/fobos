@@ -49,6 +49,7 @@ DEFINE rm_diasgoz	ARRAY[20] OF RECORD
 				n47_secuencia	LIKE rolt047.n47_secuencia,
 				n47_estado	LIKE rolt047.n47_estado
 			END RECORD
+DEFINE vm_nivel		LIKE ctbt001.b01_nivel
 DEFINE vm_proceso	LIKE rolt039.n39_proceso
 DEFINE vm_vac_goz	LIKE rolt039.n39_proceso
 DEFINE vm_vac_pag	LIKE rolt039.n39_proceso
@@ -144,6 +145,11 @@ END IF
 CALL fl_lee_compania_contabilidad(vg_codcia) RETURNING rm_b00.*
 IF rm_b00.b00_compania IS NULL THEN
 	CALL fl_mostrar_mensaje('No existe ninguna compañía configurada en CONTABILIDAD.', 'stop')
+	EXIT PROGRAM
+END IF
+SELECT MAX(b01_nivel) INTO vm_nivel FROM ctbt001
+IF vm_nivel IS NULL THEN
+	CALL fl_mostrar_mensaje('No existe ningun nivel de cuenta configurado en la compañía.','stop')
 	EXIT PROGRAM
 END IF
 LET lin_menu = 0
@@ -1067,12 +1073,14 @@ LET vm_num_rub = 0
 LET vm_max_rub = 200
 CALL borrar_ingresos_descuentos()
 IF num_args() <> 8 THEN
+	{--
 	CALL reajustar_valor_vacaciones_por_sueldo(r_n39.*)
 		RETURNING r_n39.*, resul
 	IF resul THEN
 		CALL calcular_iess(r_n39.*) RETURNING r_n39.n39_descto_iess
 		CALL fl_mostrar_mensaje('El valor de las vacaciones (valor normal y valor adicional) han sido reajustados al sueldo actual del empleado, para que no sean menor al mismo.', 'info')
 	END IF
+	--}
 END IF
 CALL mostrar_datos_empleado(r_n39.*)
 IF rm_n39.n39_estado = 'P' THEN
@@ -1144,7 +1152,10 @@ INPUT BY NAME r_n39.n39_fecini_vac, r_n39.n39_fecfin_vac, r_n39.n39_tipo,
 				CALL fl_lee_trabajador_roles(r_n39.n39_compania,
 							r_n39.n39_cod_trab)
 					RETURNING r_n30.*
-				LET r_n39.n39_cta_trabaj = r_n30.n30_cta_trabaj
+				IF rm_n39.n39_tipo_pago = 'T' THEN
+					LET r_n39.n39_cta_trabaj =
+							r_n30.n30_cta_trabaj
+				END IF
                                 DISPLAY BY NAME r_n39.n39_bco_empresa,
 						r_g08.g08_nombre,
 						r_n39.n39_cta_empresa,
@@ -1152,7 +1163,7 @@ INPUT BY NAME r_n39.n39_fecini_vac, r_n39.n39_fecfin_vac, r_n39.n39_tipo,
                         END IF
                 END IF
 		IF INFIELD(n39_cta_trabaj) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET r_n39.n39_cta_trabaj = r_b10.b10_cuenta
@@ -1848,6 +1859,7 @@ FUNCTION calcular_iess(r_n39)
 DEFINE r_n39		RECORD LIKE rolt039.*
 DEFINE r_n13		RECORD LIKE rolt013.*
 DEFINE r_n30		RECORD LIKE rolt030.*
+DEFINE aux_iess		LIKE rolt039.n39_descto_iess
 
 CALL fl_lee_trabajador_roles(r_n39.n39_compania, r_n39.n39_cod_trab)
 	RETURNING r_n30.*
@@ -1863,6 +1875,17 @@ END CASE
 IF r_n39.n39_gozar_adic = 'N' AND r_n39.n39_tipo = 'G' THEN
 	LET r_n39.n39_descto_iess = (r_n39.n39_valor_vaca * r_n13.n13_porc_trab)
 					/ 100
+END IF
+SELECT NVL(SUM(n47_valor_pag - n47_valor_des), 0)
+	INTO aux_iess
+	FROM rolt047
+	WHERE n47_compania    = r_n39.n39_compania
+	  AND n47_proceso     = vm_vac_goz
+	  AND n47_cod_trab    = r_n39.n39_cod_trab
+	  AND n47_periodo_ini = r_n39.n39_periodo_ini
+	  AND n47_periodo_fin = r_n39.n39_periodo_fin
+IF aux_iess > 0 THEN
+	LET r_n39.n39_descto_iess = aux_iess
 END IF
 RETURN r_n39.n39_descto_iess
 
@@ -2594,6 +2617,8 @@ DEFINE num_che		LIKE ctbt012.b12_num_cheque
 DEFINE aux_cont		LIKE ctbt013.b13_cuenta
 DEFINE sec		LIKE ctbt013.b13_secuencia
 DEFINE val_egr		LIKE rolt039.n39_otros_egr
+DEFINE val_vac_g	LIKE rolt039.n39_valor_vaca
+DEFINE val_vac_p	LIKE rolt039.n39_valor_adic
 DEFINE val_ant		LIKE rolt091.n91_valor_ant
 DEFINE frase		VARCHAR(60)
 DEFINE valor_cuad	DECIMAL(14,2)
@@ -2692,15 +2717,40 @@ LET r_b12.b12_modulo      = vg_modulo
 LET r_b12.b12_usuario     = vg_usuario
 LET r_b12.b12_fecing      = CURRENT
 INSERT INTO ctbt012 VALUES (r_b12.*) 
-LET sec = 1
+LET sec       = 1
+LET val_vac_g = 0
+SELECT NVL(SUM(n47_valor_pag), 0)
+	INTO val_vac_g
+	FROM rolt047
+	WHERE n47_compania    = rm_n39_act.n39_compania
+	  AND n47_proceso     = vm_vac_goz
+	  AND n47_cod_trab    = rm_n39_act.n39_cod_trab
+	  AND n47_periodo_ini = rm_n39_act.n39_periodo_ini
+	  AND n47_periodo_fin = rm_n39_act.n39_periodo_fin
+-- OJO NUEVA CONDICION EL 09-OCT-2012
+IF rm_n39_act.n39_gozar_adic = "S" THEN
+	LET val_vac_g = rm_n39_act.n39_valor_vaca
+END IF
+--
 IF rm_n39_act.n39_tipo_pago = 'T' THEN
 	CALL generar_detalle_contable(r_b12.*, r_n56.n56_aux_val_vac,
-					rm_n39_act.n39_valor_vaca, 'D', sec, 1)
+				-- OJO COMENTADO EL 10-SEP-2012
+				--rm_n39_act.n39_valor_vaca, 'D', sec, 1)
+				val_vac_g, 'D', sec, 1)
 ELSE
 	CALL generar_detalle_contable(r_b12.*, r_n56.n56_aux_val_vac,
-					rm_n39_act.n39_valor_vaca, 'D', sec, 0)
+				-- OJO COMENTADO EL 10-SEP-2012
+				--rm_n39_act.n39_valor_vaca, 'D', sec, 0)
+				val_vac_g, 'D', sec, 0)
 END IF
-IF rm_n39_act.n39_valor_adic > 0 THEN
+LET val_vac_p = rm_n39_act.n39_valor_adic
+IF val_vac_g < (rm_n39_act.n39_valor_vaca + rm_n39_act.n39_valor_adic) THEN
+	LET val_vac_p = (rm_n39_act.n39_valor_vaca + rm_n39_act.n39_valor_adic)
+			- val_vac_g
+END IF
+-- OJO COMENTADO EL 10-SEP-2012
+--IF rm_n39_act.n39_valor_adic > 0 THEN
+IF val_vac_p > 0 THEN
 	LET aux_cont = r_n56.n56_aux_val_adi
 	IF rm_n39_act.n39_proceso    <> vm_vac_pag AND
 	   rm_n39_act.n39_gozar_adic  = 'N'
@@ -2717,10 +2767,14 @@ IF rm_n39_act.n39_valor_adic > 0 THEN
 	LET sec = sec + 1
 	IF rm_n39_act.n39_tipo_pago = 'T' THEN
 		CALL generar_detalle_contable(r_b12.*, aux_cont,
-					rm_n39_act.n39_valor_adic, 'D', sec, 1)
+					-- OJO COMENTADO EL 10-SEP-2012
+					--rm_n39_act.n39_valor_adic, 'D', sec, 1)
+					val_vac_p, 'D', sec, 1)
 	ELSE
 		CALL generar_detalle_contable(r_b12.*, aux_cont,
-					rm_n39_act.n39_valor_adic, 'D', sec, 0)
+					-- OJO COMENTADO EL 10-SEP-2012
+					--rm_n39_act.n39_valor_adic, 'D', sec, 0)
+					val_vac_p, 'D', sec, 0)
 	END IF
 END IF
 IF rm_n39_act.n39_otros_ing > 0 THEN
@@ -3394,7 +3448,8 @@ IF r_n39.n39_dias_goza > tot_dias AND r_reg.n47_cod_liqrol IS NULL THEN
 END IF
 IF r_n39.n39_gozar_adic = 'N' THEN
 	LET tot_dias           = tot_dias - r_n39.n39_dias_adi
-	LET r_n39.n39_dias_adi = 0
+	-- OJO COMENTADO EL 10-SEP-2012
+	--LET r_n39.n39_dias_adi = 0
 END IF
 LET tot_dias_aux = tot_dias - tot_dias_n47(r_n39.*)
 LET lin_menu = 0
@@ -3437,11 +3492,13 @@ FOREACH q_n47 INTO r_reg.*
 	LET rm_diasgoz[num_row].* = r_reg.*
 	LET num_row               = num_row + 1
 	LET tot_dias              = tot_dias - r_reg.n47_dias_goza
+	{-- OJO COMENTADO EL 10-SEP-2012
 	LET r_n39.n39_dias_vac    = r_n39.n39_dias_vac - r_reg.n47_dias_goza
 	IF r_n39.n39_dias_vac < 0 THEN
 		LET r_n39.n39_dias_adi = r_n39.n39_dias_adi + r_n39.n39_dias_vac
 		LET r_n39.n39_dias_vac = 0
 	END IF
+	--}
 	IF num_row > max_row THEN
 		EXIT FOREACH
 	END IF
@@ -3485,6 +3542,7 @@ IF tot_dias > 0 AND num_args() < 8 THEN
 	ELSE
 		LET resul = 1
 	END IF
+{-- OJO COMENTADO EL 10-SEP-2012
 	IF tot_dias > r_n39.n39_dias_vac AND r_n39.n39_gozar_adic = 'S'
 	   AND resul
 	THEN
@@ -3503,6 +3561,7 @@ IF tot_dias > 0 AND num_args() < 8 THEN
 			LET num_row = num_row - 1
 		END IF
 	END IF
+--}
 END IF
 LET salir    = 0
 LET int_flag = 0
@@ -3577,8 +3636,8 @@ WHILE TRUE
 			IF YEAR(rm_diasgoz[i].n47_fecha_ini) <>
 			   YEAR(r_n39.n39_perfin_real)
 			THEN
-				CALL fl_mostrar_mensaje('El anio de la fecha inicial debe ser igual al anio de la fecha final real de vacaciones.', 'exclamation')
-				NEXT FIELD n47_fecha_ini
+				--CALL fl_mostrar_mensaje('El anio de la fecha inicial debe ser igual al anio de la fecha final real de vacaciones.', 'exclamation')
+				--NEXT FIELD n47_fecha_ini
 			END IF
 		AFTER FIELD n47_dias_real, n47_dias_goza
 			IF rm_diasgoz[i].n47_estado <> 'A' THEN
@@ -3620,20 +3679,42 @@ WHILE TRUE
 				CALL fl_mostrar_mensaje('La fecha final de vacaciones debe estar dentro del periodo quincenal a aplicar.', 'exclamation')
 				NEXT FIELD n47_fecini_vac
 			END IF
-		AFTER ROW
+		--AFTER ROW
 			--LET rm_diasgoz[1].* = r_reg.*
 			--DISPLAY rm_diasgoz[1].* TO rm_diasgoz[1].*
 		AFTER INPUT
+			LET max_row  = arr_count()
 			LET tot_goza = 0
 			FOR i = 1 TO max_row
 				LET tot_goza = tot_goza +
 						rm_diasgoz[i].n47_dias_goza
 			END FOR
-			IF tot_goza <> tot_dias_aux THEN
-				CALL fl_mostrar_mensaje('No puede el total de dias a gozar ser mayor que el total de dias del empleado.', 'exclamation')
-				CONTINUE INPUT
+			IF r_n39.n39_gozar_adic = 'S' AND
+			   tot_goza <> tot_dias_aux THEN
+				CALL fl_mostrar_mensaje('No puede ser el total de dias a gozar ser mayor que el total de dias del empleado.', 'exclamation')
+				-- OJO COMENTADO EL 10-SEP-2012
+				--CONTINUE INPUT
 			END IF
 			CALL grabar_n47(r_n39.*, max_row)
+			CALL calcular_iess(r_n39.*)
+				RETURNING r_n39.n39_descto_iess
+			LET r_n39.n39_neto = r_n39.n39_valor_vaca
+						+ r_n39.n39_valor_adic
+						+ r_n39.n39_otros_ing
+						- r_n39.n39_descto_iess
+						- r_n39.n39_otros_egr
+			LET r_n39.n39_dias_goza = r_n39.n39_dias_vac
+						+ r_n39.n39_dias_adi
+						- tot_goza
+			UPDATE rolt039
+				SET n39_dias_goza   = r_n39.n39_dias_goza,
+				    n39_descto_iess = r_n39.n39_descto_iess,
+				    n39_neto        = r_n39.n39_neto
+				WHERE n39_compania    = r_n39.n39_compania
+				  AND n39_proceso     = r_n39.n39_proceso
+				  AND n39_cod_trab    = r_n39.n39_cod_trab
+				  AND n39_periodo_ini = r_n39.n39_periodo_ini
+				  AND n39_periodo_fin = r_n39.n39_periodo_fin
 			LET salir = 1
 	END INPUT
 	ELSE
@@ -3906,11 +3987,13 @@ DEFINE r_n13		RECORD LIKE rolt013.*
 DEFINE r_n30		RECORD LIKE rolt030.*
 DEFINE val_vac		LIKE rolt039.n39_valor_vaca
 DEFINE valor		LIKE rolt033.n33_valor
-DEFINE tot_dias		SMALLINT
+DEFINE tot_dias		LIKE rolt039.n39_dias_vac
 
 LET valor = 0
 --IF r_n39.n39_estado = 'P' AND r_n39.n39_tipo = 'G' THEN
-IF r_n39.n39_tipo = 'G' THEN
+
+-- OJO COMENTADO EL 10-SEP-2012
+--IF r_n39.n39_tipo = 'G' THEN
 	LET tot_dias = r_n39.n39_dias_vac
 	LET val_vac  = r_n39.n39_valor_vaca
 	IF r_n39.n39_gozar_adic = 'S' THEN
@@ -3926,7 +4009,7 @@ IF r_n39.n39_tipo = 'G' THEN
 		CALL fl_lee_seguros(r_n30.n30_cod_seguro) RETURNING r_n13.*
 		LET valor = valor - (valor * r_n13.n13_porc_trab / 100)
 	END IF
-END IF
+--END IF
 RETURN valor
 
 END FUNCTION

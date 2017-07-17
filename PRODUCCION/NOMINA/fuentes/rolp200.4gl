@@ -88,11 +88,9 @@ DEFINE r_n05		RECORD LIKE rolt005.*
 DEFINE r_n03		RECORD LIKE rolt003.*
 DEFINE r_n30		RECORD LIKE rolt030.*
 DEFINE r_n32		RECORD LIKE rolt032.*
-DEFINE r_n47		RECORD LIKE rolt047.*
 --DEFINE r_n70		RECORD LIKE rolt070.*
 DEFINE mensaje		VARCHAR(250)
 DEFINE num		SMALLINT
-DEFINE comando		CHAR(100)
 
 CALL fl_lee_parametro_general_roles() RETURNING rm_n00.*
 CALL fl_lee_compania_roles(vg_codcia) RETURNING r_n01.*
@@ -124,9 +122,7 @@ IF num_args() = 8 OR num_args() = 9 THEN
 
 	END IF
 	COMMIT WORK
-	LET comando = 'fglrun rolp203 ', vg_base, ' ', vg_modulo, ' ',
-	               vg_codcia, ' X ', rm_par.cod_trab
-	RUN comando
+	CALL calcula_nomina(1)
 	EXIT PROGRAM
 END IF	
 
@@ -346,26 +342,51 @@ COMMIT WORK
 LET mensaje = 'Novedades de roles generadas: ', vm_num_nov USING '##&'
 CALL fl_mostrar_mensaje(mensaje, 'info')
 IF vm_num_nov > 0 THEN
-	LET comando = 'fglrun rolp203 ', vg_base, ' ', vg_modulo, ' ',
-	               vg_codcia, ' X'
-	RUN comando
-	DECLARE q_n47 CURSOR FOR
-		SELECT * FROM rolt047
-			WHERE n47_compania   = vg_codcia
-			  AND n47_proceso    = 'VA'
-			  AND n47_estado     = 'A'
-			  AND n47_cod_liqrol = rm_par.n32_cod_liqrol
-			  AND n47_fecha_ini  = rm_par.n32_fecha_ini
-			  AND n47_fecha_fin  = rm_par.n32_fecha_fin
-	FOREACH q_n47 INTO r_n47.*
-		LET comando = 'fglrun rolp203 ', vg_base, ' ', vg_modulo, ' ',
-	        	       vg_codcia, ' X ', r_n47.n47_cod_trab
-		RUN comando
-	END FOREACH
+	CALL calcula_nomina(0)
 END IF
 
 END FUNCTION
 
+
+
+FUNCTION calcula_nomina(flag)
+DEFINE flag		SMALLINT
+DEFINE r_n47		RECORD LIKE rolt047.*
+
+IF flag THEN
+	CALL ejec_prog(rm_par.cod_trab)
+	CALL ejec_prog(rm_par.cod_trab)
+	RETURN
+END IF
+CALL ejec_prog(0)
+DECLARE q_n47 CURSOR FOR
+	SELECT * FROM rolt047
+		WHERE n47_compania   = vg_codcia
+		  AND n47_proceso    = 'VA'
+		  AND n47_estado     = 'A'
+		  AND n47_cod_liqrol = rm_par.n32_cod_liqrol
+		  AND n47_fecha_ini  = rm_par.n32_fecha_ini
+		  AND n47_fecha_fin  = rm_par.n32_fecha_fin
+FOREACH q_n47 INTO r_n47.*
+	CALL ejec_prog(r_n47.n47_cod_trab)
+END FOREACH
+
+END FUNCTION
+
+
+
+FUNCTION ejec_prog(cod_trab)
+DEFINE cod_trab		LIKE rolt030.n30_cod_trab
+DEFINE comando		VARCHAR(100)
+
+IF cod_trab = 0 THEN
+	LET cod_trab = NULL
+END IF
+LET comando = 'fglrun rolp203 ', vg_base, ' ', vg_modulo, ' ', vg_codcia, ' X ',
+		cod_trab
+RUN comando
+
+END FUNCTION
 
 
 
@@ -826,6 +847,7 @@ IF rm_par.n32_cod_liqrol[1] = r_n60.n60_frec_aporte THEN
 			' WHERE n30_compania     = ', vg_codcia,
 			expr_trab CLIPPED,
 			'   AND n30_estado       = "A" ',
+			'   AND n30_cod_trab     NOT IN (8, 271, 190) ',
 			'   AND n61_compania     = n30_compania ',
 			'   AND n61_cod_trab     = n30_cod_trab ',
 			'   AND n61_fec_sal_club IS NULL ',
@@ -835,7 +857,8 @@ IF rm_par.n32_cod_liqrol[1] = r_n60.n60_frec_aporte THEN
 				' WHERE n30_compania     = ', vg_codcia,
 				expr_trab CLIPPED,
 				'   AND n30_estado       = "I" ',
-				'   AND n30_fecha_sal  >= "',
+				'   AND n30_cod_trab     NOT IN (8, 271, 190) ',
+				'   AND n30_fecha_sal    >= "',
 						rm_par.n32_fecha_ini, '"',
 				'   AND n61_compania     = n30_compania ',
 				'   AND n61_cod_trab     = n30_cod_trab ',

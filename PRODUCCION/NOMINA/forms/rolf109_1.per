@@ -2,20 +2,33 @@ DATABASE aceros
 SCREEN
 {
 
+                                                            [c000] de [c001]
 
-     Código Sectorial: [c000      ] [c001                               ] 
-                                    [c001                               ] 
+      Año Sectorial: [c002]
 
-                Valor: [c002         ]
+   Código Sectorial: [c003           ] [c004                               ] 
+                                       [c004                               ] 
+                                       [c004                               ] 
+                                       [c004                               ] 
+
+              Valor: [c005         ]
+
+            Usuario: [c006      ]       Fecha Ingreso: [c007               ]
 
 }
 TABLES
 rolt017
 ATTRIBUTES
-c000 = rolt017.n17_sectorial, AUTONEXT, UPSHIFT, REVERSE,
+c000 = FORMONLY.num_rows, NOENTRY, UPSHIFT, REVERSE;
+c001 = FORMONLY.max_rows, NOENTRY, UPSHIFT, REVERSE;
+c002 = rolt017.n17_ano_sect, AUTONEXT, UPSHIFT, REVERSE,
+	INCLUDE = (2003 TO 2099);
+c003 = rolt017.n17_sectorial, AUTONEXT, UPSHIFT, REVERSE,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c001 = rolt017.n17_descripcion, AUTONEXT, UPSHIFT, REVERSE, SCROLL,
+c004 = rolt017.n17_descripcion, AUTONEXT, UPSHIFT, REVERSE, SCROLL,
 	WORDWRAP COMPRESS;
-c002 = rolt017.n17_valor, AUTONEXT, UPSHIFT, REVERSE,
+c005 = rolt017.n17_valor, AUTONEXT, UPSHIFT, REVERSE,
 	INCLUDE = (0 TO 99999999.99), FORMAT = '##,###,##&.##';
+c006 = rolt017.n17_usuario, NOENTRY, UPSHIFT, REVERSE;
+c007 = rolt017.n17_fecing, NOENTRY, UPSHIFT, REVERSE;
 END
