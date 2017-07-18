@@ -8,7 +8,6 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_demonios	VARCHAR(12)
 DEFINE vm_titprog	VARCHAR(50)
 DEFINE vm_rows ARRAY[1000] OF INTEGER  	-- ARREGLO DE ROWID DE FILAS LEIDAS
 DEFINE vm_row_current	SMALLINT	-- FILA CORRIENTE DEL ARREGLO
