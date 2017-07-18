@@ -1,25 +1,25 @@
 DATABASE aceros
 SCREEN
 {
-No Proforma:[c01    ]      Preventa:[c080   ]  Factura:[c9][c081           ]
-     Moneda:[c3] [c04                ]  Fecha Proforma:[c02                ]
-Cód.Cliente:[c06    ]    Días Validez:[c05  ]    Impuesto:[c07  ]%    
-    Nombres:[c08                                                ]
-  Dirección:[c10                            ] Ced/RUC/Pas:[c09             ]
-Observación:[c12                            ]    Teléfono:[c11             ] 
-Entregar en:[c13                            ]  Forma Pago:[c14             ]
-   Vendedor:[c15] [c16                      ]       Flete:[g000     ]
-                                                            [c090] de [c091]
- [h4  |h040    |h041    |h042    |h043    |h045 |h046         |h047         ]
-[y1] [c050  ] [c051    |c052    |c053    |c054 |c055         |c056         ]
-[y1] [c050  ] [c051    |c052    |c053    |c054 |c055         |c056         ]
-[y1] [c050  ] [c051    |c052    |c053    |c054 |c055         |c056         ]
-[y1] [c050  ] [c051    |c052    |c053    |c054 |c055         |c056         ]
-[c070                               ]               Subtotal:[c060         ]
-[c071                               ]              Descuento:[c061         ]
-[c072                                    ]          Impuesto:[c062         ]
-[c073                                              ]    Neto:[c063         ]
-[c074                                                             |c075    ]
+No Proforma:[c01    ]      Preventa:[c080   ]   Factura:[c9][c081           ]
+     Moneda:[c3] [c04                ]   Fecha Proforma:[c02                ]
+Cód.Cliente:[c06    ]    Días Validez:[c05  ]     Impuesto:[c07  ]%    
+    Nombres:[c08                                                 ]
+  Dirección:[c10                             ] Ced/RUC/Pas:[c09             ]
+Observación:[c12                             ]    Teléfono:[c11             ] 
+Entregar en:[c13                             ]  Forma Pago:[c14             ]
+   Vendedor:[c15] [c16                       ]       Flete:[g000     ]
+                                                             [c090] de [c091]
+ [h4  |h040    |h041    |h042    |h043    |h045  |h046         |h047         ]
+[y1] [c050  ] [c051    |c052    |c053    |c054  |c055         |c056         ]
+[y1] [c050  ] [c051    |c052    |c053    |c054  |c055         |c056         ]
+[y1] [c050  ] [c051    |c052    |c053    |c054  |c055         |c056         ]
+[y1] [c050  ] [c051    |c052    |c053    |c054  |c055         |c056         ]
+[c070                               ]                Subtotal:[c060         ]
+[c071                               ]               Descuento:[c061         ]
+[c072                                    ]           Impuesto:[c062         ]
+[c073                                              ]     Neto:[c063         ]
+[c074                                                              |c075    ]
 }
 TABLES
 	rept021
@@ -67,9 +67,9 @@ c053 = r22_cantidad, AUTONEXT,
        INCLUDE = (0.01 TO 99999.99);
 y1   = r22_bodega, UPSHIFT, REQUIRED, AUTONEXT,
        OPTIONS = '-nolist', WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c054 = r22_porc_descto, FORMAT = '#&.##', AUTONEXT,
+c054 = r22_porc_descto, FORMAT = '##&.##', AUTONEXT,
        OPTIONS = '-nolist', 
-       INCLUDE = (0 TO 99.99); 	
+       INCLUDE = (0 TO 100.00); 	
 c055 = r22_precio, FORMAT = '##,###,##&.##', AUTONEXT,
        OPTIONS = '-nolist';
        --NOENTRY;

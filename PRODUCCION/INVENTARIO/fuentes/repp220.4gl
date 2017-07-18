@@ -1489,19 +1489,6 @@ WHILE NOT salir
 				END IF         
 				LET k = i - j + 1 
 				CALL calcula_totales(arr_count(),k)
-				FOR k = 1 TO arr_count()
-					IF k = i THEN
-						CONTINUE FOR
-					END IF
-                       			IF r_detalle[i].r22_item =
-						 r_detalle[k].r22_item AND 
-                       			   r_detalle[i].r22_bodega =
-						 r_detalle[k].r22_bodega THEN
-	--			AND r_detalle[k].r22_bodega <> vm_bod_sstock THEN
-						CALL fl_mostrar_mensaje('No puede repetir un mismo item y una misma bodega. Borre la línea.','exclamation') 
-						NEXT FIELD r22_item
-					END IF
-				END FOR
 			ELSE
 				CLEAR nom_item, descrip_1, descrip_2, descrip_3,
 					descrip_4, nom_marca
@@ -1576,7 +1563,7 @@ WHILE NOT salir
 			LET ind = arr_count()
 			LET vm_ind_arr = ind
 			IF rm_r21.r21_tot_neto - rm_r21.r21_flete = 0 THEN
-				NEXT FIELD r22_cantidad 
+				--NEXT FIELD r22_cantidad 
 			END IF                         
 			LET k = valida_cliente_consumidor_final(rm_r21.r21_codcli)
 			LET salir = 1 
@@ -2132,42 +2119,6 @@ FOR i = 1 TO preventas
 		IF j > rm_r00.r00_numlin_fact THEN
 			EXIT WHILE
 		END IF
-		INITIALIZE r_r24.* TO NULL
-		DECLARE q_r24 CURSOR FOR
-			SELECT * FROM rept024
-				WHERE r24_compania  = vg_codcia
-				  AND r24_localidad = vg_codloc
-				  AND r24_numprev   = rm_r23.r23_numprev
-		  		  AND r24_item      = r_detprev.item
-			ORDER BY r24_orden DESC
-		OPEN q_r24
-		FETCH q_r24 INTO r_r24.*
-		IF STATUS <> NOTFOUND THEN
-			IF r_detprev.precio <> r_r24.r24_precio THEN
-				ROLLBACK WORK
-				LET mensaje = 'El item ',
-					r_detprev.item CLIPPED,
-					' se ha digitado dos ',
-					'veces en la proforma, con ',
-					'precios diferentes. Se detendrá ',
-					'la generación de la preventa.'
-				CALL fl_mostrar_mensaje(mensaje, 'stop')
-				RETURN 
-			END IF
-			IF r_detprev.descto <> r_r24.r24_descuento THEN
-				ROLLBACK WORK
-				LET mensaje = 'El item ',
-					r_detprev.item CLIPPED,
-					' se ha digitado dos o mas ',
-					'veces en la proforma, con ',
-					'descuentos diferentes. Se detendra ',
-					'la generación de la preventa.'
-				CALL fl_mostrar_mensaje(mensaje, 'stop')
-				RETURN
-			END IF
-		END IF
-		CLOSE q_r24
-		FREE q_r24
 		INITIALIZE rm_r24.* TO NULL
 		LET rm_r24.r24_compania     = vg_codcia
 		LET rm_r24.r24_localidad    = vg_codloc 
