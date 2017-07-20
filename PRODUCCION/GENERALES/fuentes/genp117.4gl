@@ -236,16 +236,16 @@ FUNCTION control_modificacion()
 DEFINE 	nombre		LIKE gent003.g03_nombre
 
 LET vm_flag_mant = 'M'
-WHENEVER ERROR CONTINUE
 BEGIN WORK
+WHENEVER ERROR CONTINUE
 DECLARE q_up CURSOR FOR SELECT * FROM gent020 WHERE ROWID = vm_r_rows[vm_row_current]
 	FOR UPDATE
 OPEN q_up
 FETCH q_up INTO rm_lvent.*
 IF status < 0 THEN
+	WHENEVER ERROR STOP
 	ROLLBACK WORK
 	CALL fl_mensaje_bloqueo_otro_usuario()
-	WHENEVER ERROR STOP
 	RETURN
 END IF
 WHENEVER ERROR STOP
@@ -261,6 +261,7 @@ IF NOT int_flag THEN
 	COMMIT WORK
 	CALL fl_mensaje_registro_modificado()
 ELSE
+	ROLLBACK WORK
 	CALL lee_muestra_registro(vm_r_rows[vm_row_current])
 END IF
 CLOSE q_up

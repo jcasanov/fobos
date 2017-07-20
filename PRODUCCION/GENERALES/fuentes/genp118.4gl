@@ -1,6 +1,6 @@
 -------------------------------------------------------------------------------
 -- Titulo               : genp118.4gl -- Mantenimiento de Transacciones de
---					 Modulos de Facturación
+--		                                 Modulos de Facturación
 -- Elaboración          : 29-ago-2001
 -- Autor                : GVA
 -- Formato de Ejecución : fglrun  genp118.4gl base GE 
@@ -16,7 +16,6 @@ DEFINE vm_r_rows ARRAY[1000] OF INTEGER -- ARREGLO DE ROWID DE FILAS LEIDAS
 DEFINE vm_row_current   SMALLINT        -- FILA CORRIENTE DEL ARREGLO
 DEFINE vm_num_rows      SMALLINT        -- CANTIDAD DE FILAS LEIDAS
 DEFINE vm_max_rows      SMALLINT        -- MAXIMO DE FILAS LEIDAS
-DEFINE vm_demonios      VARCHAR(12)
 DEFINE vm_flag_mant     CHAR(1)
 DEFINE vm_tipo          LIKE gent021.g21_tipo
 
@@ -25,7 +24,7 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
+CALL startlog('../logs/genp118.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 2 THEN
@@ -248,18 +247,19 @@ IF rm_tran.g21_estado <> 'A' THEN
 	CALL fl_mensaje_estado_bloqueado()
 	RETURN
 END IF
-WHENEVER ERROR CONTINUE
 BEGIN WORK
+WHENEVER ERROR CONTINUE
 DECLARE q_up CURSOR FOR SELECT * FROM gent021 WHERE ROWID = vm_r_rows[vm_row_current]
 	FOR UPDATE
 OPEN q_up
 FETCH q_up INTO rm_tran.*
 IF status < 0 THEN
-	COMMIT WORK
-	CALL fl_mensaje_bloqueo_otro_usuario()
 	WHENEVER ERROR STOP
+	ROLLBACK WORK
+	CALL fl_mensaje_bloqueo_otro_usuario()
 	RETURN
 END IF
+WHENEVER ERROR STOP
 CALL lee_datos()
 IF NOT int_flag THEN
     	UPDATE gent021 SET * = rm_tran.*
@@ -267,6 +267,7 @@ IF NOT int_flag THEN
 	COMMIT WORK
 	CALL fl_mensaje_registro_modificado()
 ELSE
+	ROLLBACK WORK
 	CALL lee_muestra_registro(vm_r_rows[vm_row_current])
 END IF
 CLOSE q_up
@@ -288,19 +289,20 @@ END IF
 CALL fl_mensaje_seguro_ejecutar_proceso()
 	RETURNING resp
 IF resp = 'Yes' THEN
-WHENEVER ERROR CONTINUE
 	BEGIN WORK
+	WHENEVER ERROR CONTINUE
 	DECLARE q_del CURSOR FOR SELECT * FROM gent021 
 		WHERE ROWID = vm_r_rows[vm_row_current]
 		FOR UPDATE
 	OPEN q_del
 	FETCH q_del INTO rm_tran.*
 	IF status < 0 THEN
-		COMMIT WORK
-		CALL fl_mensaje_bloqueo_otro_usuario()
 		WHENEVER ERROR STOP
+		ROLLBACK WORK
+		CALL fl_mensaje_bloqueo_otro_usuario()
 		RETURN
 	END IF
+	WHENEVER ERROR STOP
 	LET estado = 'B'
 	IF rm_tran.g21_estado <> 'A' THEN
 		LET estado = 'A'
