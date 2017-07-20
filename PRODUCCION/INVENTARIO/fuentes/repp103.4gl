@@ -16,7 +16,6 @@ DEFINE vm_r_rows	ARRAY[1000] OF INTEGER -- ARREGLO ROWID DE FILAS LEIDAS
 DEFINE vm_row_current   SMALLINT        -- FILA CORRIENTE DEL ARREGLO
 DEFINE vm_num_rows      SMALLINT        -- CANTIDAD DE FILAS LEIDAS
 DEFINE vm_max_rows      SMALLINT        -- MAXIMO DE FILAS LEIDAS
-DEFINE vm_demonios      VARCHAR(12)
 DEFINE vm_flag_mant     CHAR(1)
 
 
@@ -67,7 +66,6 @@ MENU 'OPCIONES'
 		HIDE OPTION 'Retroceder'
 		HIDE OPTION 'Modificar'
 		HIDE OPTION 'Bloquear/Activar'
-	{--
 	COMMAND KEY('I') 'Ingresar' 'Ingresar nuevos registros. '
 		CALL control_ingreso()
 		IF vm_num_rows = 1 THEN
@@ -80,11 +78,10 @@ MENU 'OPCIONES'
 		IF vm_row_current = vm_num_rows THEN
 			HIDE OPTION 'Avanzar'
 		END IF
-	--}
-        COMMAND KEY('M') 'Modificar' 'Modificar registro corriente. '
-                IF vm_num_rows > 0 THEN
-                        CALL control_modificacion()
-                ELSE
+    COMMAND KEY('M') 'Modificar' 'Modificar registro corriente. '
+        IF vm_num_rows > 0 THEN
+            CALL control_modificacion()
+        ELSE
 			CALL fl_mensaje_consultar_primero()
 		END IF
 	COMMAND KEY('C') 'Consultar' 'Consultar un registro. '
@@ -269,7 +266,7 @@ WHENEVER ERROR STOP
 LET rm_lven2.r03_nombre = rm_lven.r03_nombre
 CALL lee_datos()
 IF NOT int_flag THEN
-    	UPDATE rept003 SET * = rm_lven.* WHERE CURRENT OF q_up
+    UPDATE rept003 SET * = rm_lven.* WHERE CURRENT OF q_up
 	COMMIT WORK
 	CALL fl_mensaje_registro_modificado()
 ELSE
