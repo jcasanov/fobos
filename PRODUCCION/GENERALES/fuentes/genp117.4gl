@@ -1,7 +1,6 @@
-
 -------------------------------------------------------------------------------
 -- Titulo               : Genp117.4gl -- Mantenimiento de Grupos
---					 de Lineas de Ventas
+--					                     de Lineas de Ventas
 -- Elaboración          : 27-ago-2001
 -- Autor                : GVA
 -- Formato de Ejecución : fglrun Genp117.4gl base GE 1
@@ -18,15 +17,16 @@ DEFINE vm_r_rows ARRAY[1000] OF INTEGER -- ARREGLO DE ROWID DE FILAS LEIDAS
 DEFINE vm_row_current	SMALLINT	-- FILA CORRIENTE DEL ARREGLO
 DEFINE vm_num_rows	SMALLINT	-- CANTIDAD DE FILAS LEIDAS
 DEFINE vm_max_rows      SMALLINT        -- MAXIMO DE FILAS LEIDAS
-DEFINE vm_demonios	VARCHAR(12)
 DEFINE vm_flag_mant	CHAR(1)
+
+
 
 MAIN
 
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
+CALL startlog('../logs/genp1177.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN
@@ -243,11 +243,12 @@ DECLARE q_up CURSOR FOR SELECT * FROM gent020 WHERE ROWID = vm_r_rows[vm_row_cur
 OPEN q_up
 FETCH q_up INTO rm_lvent.*
 IF status < 0 THEN
-	COMMIT WORK
+	ROLLBACK WORK
 	CALL fl_mensaje_bloqueo_otro_usuario()
 	WHENEVER ERROR STOP
 	RETURN
 END IF
+WHENEVER ERROR STOP
 LET rm_lvent2.g20_nombre = rm_lvent.g20_nombre
 CALL fl_lee_area_negocio(vg_codcia, rm_lvent.g20_areaneg) RETURNING rm_aneg.*
 DISPLAY rm_aneg.g03_nombre TO nom_areaneg
