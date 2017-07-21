@@ -151,7 +151,7 @@ CLEAR FORM
 LET int_flag = 0
 CONSTRUCT BY NAME expr_sql ON r00_compania, r00_cia_taller, r00_bodega_fact,
 		 r00_dias_prof, r00_expi_prof, r00_dias_dev, r00_dias_dev, 
-		 r00_cred_auto
+		 r00_fact_sin_stock
 	ON KEY(F2)
 		IF INFIELD(r00_compania) THEN
 		     CALL fl_ayuda_compania()
@@ -231,7 +231,7 @@ INITIALIZE rm_pcia2.* TO NULL
 LET vm_flag_mant            = 'I'
 LET rm_pcia.r00_estado      = 'A'
 LET rm_pcia.r00_dev_mes     = 'S'
-LET rm_pcia.r00_cred_auto   = 'S'
+LET rm_pcia.r00_fact_sin_stock   = 'S'
 LET rm_pcia.r00_tipo_costo  = 'P'
 LET rm_pcia.r00_tipo_margen = 'L'
 LET rm_pcia.r00_tipo_descto = 'L'
@@ -359,7 +359,7 @@ INPUT BY NAME rm_pcia.r00_compania,    rm_pcia.r00_cia_taller,
 	      rm_pcia.r00_contr_prof,
 	      rm_pcia.r00_dias_prof,   rm_pcia.r00_expi_prof,  
 	      rm_pcia.r00_dias_dev,    rm_pcia.r00_dev_mes,
-	      rm_pcia.r00_cred_auto,
+	      rm_pcia.r00_fact_sin_stock,
 	      rm_pcia.r00_mespro,      rm_pcia.r00_anopro,   
 	      rm_pcia.r00_valmin_ccli, rm_pcia.r00_codcli_tal,
 	      rm_pcia.r00_tipo_costo,  
@@ -372,7 +372,7 @@ INPUT BY NAME rm_pcia.r00_compania,    rm_pcia.r00_cia_taller,
 				  r00_expi_prof,   r00_dias_dev, 
 				  r00_tipo_fact,   r00_numlin_fact,
 				  r00_tipo_margen, r00_tipo_costo,
-				  r00_cred_auto,   r00_tipo_descto,
+				  r00_fact_sin_stock,   r00_tipo_descto,
 				  r00_codcli_tal,  r00_contr_prof)
                     THEN
                         LET INT_FLAG = 0
@@ -586,7 +586,7 @@ INPUT BY NAME rm_pcia.r00_compania,    rm_pcia.r00_cia_taller,
 				  r00_expi_prof,   r00_dias_dev, 
 				  r00_tipo_fact,   r00_numlin_fact,
 				  r00_tipo_margen, r00_tipo_costo,
-				  r00_cred_auto,   r00_tipo_descto,
+				  r00_fact_sin_stock,   r00_tipo_descto,
 				  r00_codcli_tal,  r00_contr_prof,
 				  r00_valmin_ccli)
                     THEN

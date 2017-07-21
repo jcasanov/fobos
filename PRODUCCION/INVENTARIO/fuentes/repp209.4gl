@@ -670,7 +670,7 @@ LET rm_r23.r23_compania   = vg_codcia
 LET rm_r23.r23_localidad  = vg_codloc
 LET rm_r23.r23_moneda     = rg_gen.g00_moneda_base
 LET rm_r23.r23_bodega     = rm_r00.r00_bodega_fact
-LET vm_credito_auto       = rm_r00.r00_cred_auto
+LET vm_credito_auto       = rm_r00.r00_fact_sin_stock
 LET rm_r23.r23_cont_cred  = 'C'
 LET rm_r23.r23_porc_impto = rg_gen.g00_porc_impto
 LET rm_r23.r23_paridad    =  1.0
@@ -802,7 +802,7 @@ END IF
 WHENEVER ERROR STOP
 
 IF rm_r23.r23_codcli IS NOT NULL  AND rm_r23.r23_cont_cred = 'R' THEN
-	LET vm_credito_auto = rm_r00.r00_cred_auto
+	LET vm_credito_auto = rm_r00.r00_fact_sin_stock
 	CALL control_cliente()
 		RETURNING cliente
 END IF 
@@ -1585,8 +1585,8 @@ IF rm_c03.z03_codcli IS NULL THEN
 		LET vm_credito_auto = rm_c02.z02_credit_auto
 	END IF
 	LET vm_plazo         = rm_c02.z02_credit_dias
-	LET vm_cupo_credito_mb = rm_c02.z02_cupocred_mb
-	LET vm_cupo_credito_ma = rm_c02.z02_cupocred_ma
+	LET vm_cupo_credito_mb = rm_c02.z02_cupcred_aprob
+	LET vm_cupo_credito_ma = rm_c02.z02_cupcred_xaprob
 ELSE
 	LET vm_descuento_cont = rm_c03.z03_dcto_item_c
 	LET vm_descuento_cred = rm_c03.z03_dcto_item_r

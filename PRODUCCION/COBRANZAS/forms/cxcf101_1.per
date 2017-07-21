@@ -43,13 +43,13 @@ SCREEN TITLE 'Datos Adicionales'
 SCREEN TITLE '     Cia/Loc     '
 {
                                                               [x003] de [y003]
-             Localidad: [c130] [c131                   ]
-               Cliente: [c124    |c125                                       ]
-              Contacto: [c103                          ]
-            Referencia: [c104                                    ]
- Fact. Automatica OT ?: [b]                 Crédito Días: [c105  ]
- Cupo Crédito Moneda base: [c106            ]        Descuento en Facturación
- Cupo Crédito Moneda Alt.: [c107            ]        Contado Bienes: [c108 ]% 
+              Localidad: [c130] [c131                   ]
+                Cliente: [c124    |c125                                      ]
+               Contacto: [c103                          ]
+             Referencia: [c104                                    ]
+  Fact. Automatica OT ?: [b]                 Crédito Días: [c105  ]
+  Cupo Crédito Aprobado: [c106            ]        Descuento en Facturación
+ Cupo Crédito x Aprobar: [c107            ]          Contado Bienes: [c108 ]% 
                                                      Crédito Bienes: [c109 ]%
                                                    Contado Servicio: [c122 ]%
                  Cheques ?: [d]                    Crédito Servicio: [c123 ]%
@@ -112,9 +112,9 @@ b    = cxct002.z02_credit_auto, REVERSE, UPSHIFT,
 	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S',
 	COMMENTS = 'Marcar para que genere automaticamente factura a credito en el cierre de OT.';
 c105 = cxct002.z02_credit_dias, AUTONEXT, REVERSE, INCLUDE = (0 TO 65536);
-c106 = cxct002.z02_cupocred_mb, AUTONEXT, INCLUDE = (0 TO 9999999999.99),
+c106 = cxct002.z02_cupcred_aprob, AUTONEXT, INCLUDE = (0 TO 9999999999.99),
 	REVERSE, FORMAT = '#,###,###,##&.##';
-c107 = cxct002.z02_cupocred_ma, NOENTRY, REVERSE, FORMAT = '#,###,###,##&.##';
+c107 = cxct002.z02_cupcred_xaprob, AUTONEXT, REVERSE, FORMAT = '#,###,###,##&.##';
 c108 = cxct002.z02_dcto_item_c, AUTONEXT, REVERSE, 
 	INCLUDE = (0 TO 99.99), FORMAT = '#&.##';
 c109 = cxct002.z02_dcto_item_r, AUTONEXT, REVERSE,

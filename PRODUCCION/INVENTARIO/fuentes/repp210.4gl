@@ -1980,10 +1980,10 @@ EXECUTE exec_t1
 LET cred_aprob = 0
 SELECT NVL(SUM(val_c), 0) INTO cred_aprob FROM t1
 DROP TABLE t1
-LET valor_cred = (r_z02.z02_cupocred_mb - r_cli.tot_saldo) -
+LET valor_cred = (r_z02.z02_cupcred_aprob - r_cli.tot_saldo) -
 			(cred_aprob + r_detalle[i].valor_neto)
 IF (cred_aprob + r_detalle[i].valor_neto) >
-   (r_z02.z02_cupocred_mb - r_cli.tot_saldo)
+   (r_z02.z02_cupcred_aprob - r_cli.tot_saldo)
 THEN
 	LET mensaje = 'El cliente tiene SALDO DEUDOR de:           ',
 		r_cli.tot_saldo USING "#,###,##&.&&",
@@ -1999,7 +1999,7 @@ THEN
 		(r_cli.tot_saldo + r_detalle[i].valor_neto + cred_aprob)
 		USING "#,###,##&.&&",
 		'\n\nEl cliente tiene un CUPO DE CREDITO de: ',
-		r_z02.z02_cupocred_mb USING "#,###,##&.&&",
+		r_z02.z02_cupcred_aprob USING "#,###,##&.&&",
 		'\n\ny el crédito solicitado excede el CUPO en:  ',
 		valor_cred USING "#,###,##&.&&"
 	CALL fl_mostrar_mensaje(mensaje, 'exclamation')
