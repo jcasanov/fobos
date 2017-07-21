@@ -2103,6 +2103,9 @@ FOR i = 1 TO preventas
        	 	LET rm_r23.r23_numprev = 1
 	END IF
 	FOR k = 1 TO vm_num_detalles
+		IF rm_r00.r00_fact_sin_stock = 'S' THEN
+			CONTINUE FOR
+		END IF
 		CALL fl_lee_bodega_rep(vg_codcia, r_detalle[k].r22_bodega)
 			RETURNING r_r02.*
 		IF r_r02.r02_tipo = 'S' THEN

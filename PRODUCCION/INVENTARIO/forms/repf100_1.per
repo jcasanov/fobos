@@ -7,7 +7,7 @@ SCREEN
     Bodega Factura: [a0] [a2                           ]
 
    Activar control de margenes de utilidad en proformas: [g]
-Días Validéz Precios Proforma: [f02]            Crédito Automatico: [e]
+Días Validéz Precios Proforma: [f02] Preventa Sin Stock Aprobada Automatica:[e]
      Días Expiración Proforma: [f03]                Devolución Mes: [f]
               Días Devolución: [f04 ]
                Mes de Proceso: [c020]               Año de Proceso: [c021]    
@@ -61,7 +61,7 @@ a0   = rept000.r00_bodega_fact, REVERSE, UPSHIFT,
 a2   = FORMONLY.nom_bod TYPE VARCHAR, NOENTRY;
 f02  = rept000.r00_dias_prof, REVERSE;
 f03  = rept000.r00_expi_prof, REVERSE;
-e    = rept000.r00_cred_auto,
+e    = rept000.r00_fact_sin_stock,
 	WIDGET = 'CHECK', CONFIG = 'S N acknowledge',
         COMMENT = 'Compañía otorga crédito automatico ?';
 f04  = rept000.r00_dias_dev, REVERSE, INCLUDE = (0 TO 2600);

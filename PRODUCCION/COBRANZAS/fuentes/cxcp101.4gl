@@ -273,8 +273,8 @@ IF rm_g05.g05_tipo = 'UF' THEN
 END IF
 --LET rm_z02.z02_credit_dias = r_z00.z00_credit_dias
 LET rm_z02.z02_credit_dias  = 0
-LET rm_z02.z02_cupocred_mb  = 0
-LET rm_z02.z02_cupocred_ma  = 0
+LET rm_z02.z02_cupcred_aprob  = 0
+LET rm_z02.z02_cupcred_xaprob  = 0
 LET rm_z02.z02_dcto_item_c  = 0
 LET rm_z02.z02_dcto_item_r  = 0
 LET rm_z02.z02_dcto_mano_c  = 0
@@ -424,7 +424,7 @@ DEFINE codzc_aux        LIKE cxct006.z06_zona_cobro
 DEFINE nomzc_aux        LIKE cxct006.z06_nombre
 DEFINE cod_aux          LIKE ctbt010.b10_cuenta
 DEFINE nom_aux          LIKE ctbt010.b10_descripcion
-DEFINE query		VARCHAR(1500)
+DEFINE query		VARCHAR(2000)
 DEFINE expr_sql		VARCHAR(1000)
 DEFINE expr_loc		VARCHAR(100)
 DEFINE num_reg		INTEGER
@@ -444,7 +444,8 @@ IF num_args() = 4 THEN
 	z01_casilla, z01_pais, z01_ciudad, z01_rep_legal, z01_paga_impto,
 	z02_contr_espe, z02_oblig_cont, z02_email,
 	z02_localidad, z02_contacto, z02_referencia, z02_credit_auto,
-	z02_credit_dias, z02_cupocred_mb, z02_dcto_item_c, z02_dcto_item_r,
+	z02_credit_dias, z02_cupcred_aprob, z02_cupcred_xaprob, 
+	z02_dcto_item_c, z02_dcto_item_r,
 	z02_dcto_mano_c, z02_dcto_mano_r, z02_cheques, z02_zona_venta,
 	z02_zona_cobro, z02_aux_clte_mb, z02_aux_clte_ma, z02_aux_ant_mb,
 	z02_aux_ant_ma
@@ -637,8 +638,8 @@ INITIALIZE r_pai.*, r_ciu.*, r_car.*, r_zon_vta.*, r_zon_cob.*, r_mon.*,
 DISPLAY rm_z01.z01_codcli TO tit_codigo_cli
 DISPLAY rm_z01.z01_nomcli TO tit_nombre_cli
 DISPLAY BY NAME rm_z01.z01_usuario, rm_z01.z01_fecing, rm_z02.z02_localidad,
-		rm_z02.z02_credit_dias, rm_z02.z02_cupocred_mb,
-		rm_z02.z02_cupocred_ma, rm_z02.z02_dcto_item_c,
+		rm_z02.z02_credit_dias, rm_z02.z02_cupcred_aprob,
+		rm_z02.z02_cupcred_xaprob, rm_z02.z02_dcto_item_c,
 		rm_z02.z02_dcto_item_r, rm_z02.z02_dcto_mano_c,
 		rm_z02.z02_dcto_mano_r, rm_z02.z02_aux_clte_mb,
 		rm_z02.z02_aux_clte_ma, rm_z02.z02_aux_ant_mb,
@@ -655,7 +656,8 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 	rm_z02.z02_contr_espe, rm_z02.z02_oblig_cont, rm_z02.z02_email,
 	rm_z02.z02_contacto,
 	rm_z02.z02_referencia, rm_z02.z02_credit_auto, rm_z02.z02_credit_dias,
-	rm_z02.z02_cupocred_mb, rm_z02.z02_dcto_item_c, rm_z02.z02_dcto_item_r,
+	rm_z02.z02_cupcred_aprob, rm_z02.z02_cupcred_xaprob, rm_z02.z02_dcto_item_c,
+	rm_z02.z02_dcto_item_r,
 	rm_z02.z02_dcto_mano_c, rm_z02.z02_dcto_mano_r, rm_z02.z02_cheques,
 	rm_z02.z02_zona_venta, rm_z02.z02_zona_cobro, rm_z02.z02_aux_clte_mb,
 	rm_z02.z02_aux_clte_ma, rm_z02.z02_aux_ant_mb, rm_z02.z02_aux_ant_ma
@@ -673,7 +675,7 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 			rm_z02.z02_email,
 			rm_z02.z02_contacto,
 			rm_z02.z02_referencia, rm_z02.z02_credit_auto,
-			rm_z02.z02_credit_dias, rm_z02.z02_cupocred_mb,
+			rm_z02.z02_credit_dias, rm_z02.z02_cupcred_aprob, rm_z02.z02_cupcred_xaprob,
 			rm_z02.z02_dcto_item_c, rm_z02.z02_dcto_item_r,
 			rm_z02.z02_dcto_mano_c, rm_z02.z02_dcto_mano_r,
 			rm_z02.z02_cheques, rm_z02.z02_zona_venta,
@@ -1142,22 +1144,22 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 		ELSE
 			CLEAR tit_zona_cob
 		END IF
-	BEFORE FIELD z02_cupocred_mb
+	BEFORE FIELD z02_cupcred_aprob
 		IF vm_flag_mant = 'M' AND rm_g05.g05_tipo = 'UF' THEN
-			LET r_aux2.z02_cupocred_mb = rm_z02.z02_cupocred_mb
+			LET r_aux2.z02_cupcred_aprob = rm_z02.z02_cupcred_aprob
 		END IF
 		CALL poner_credit_dias() RETURNING resul
-	AFTER FIELD z02_cupocred_mb
+	AFTER FIELD z02_cupcred_aprob
 		IF rm_g05.g05_tipo = 'UF' THEN
-			LET rm_z02.z02_cupocred_mb = 0
+			LET rm_z02.z02_cupcred_aprob = 0
 			IF vm_flag_mant = 'M' THEN
-				LET rm_z02.z02_cupocred_mb =
-							r_aux2.z02_cupocred_mb
+				LET rm_z02.z02_cupcred_aprob =
+							r_aux2.z02_cupcred_aprob
 			END IF
-			DISPLAY BY NAME rm_z02.z02_cupocred_mb
+			DISPLAY BY NAME rm_z02.z02_cupcred_aprob
 			CONTINUE INPUT
 		END IF
-		IF rm_z02.z02_cupocred_mb IS NOT NULL THEN
+		IF rm_z02.z02_cupcred_aprob IS NOT NULL THEN
 			IF rg_gen.g00_moneda_alt IS NOT NULL
 			OR rg_gen.g00_moneda_alt <> ' ' THEN
 			       CALL fl_lee_factor_moneda(rg_gen.g00_moneda_base,
@@ -1165,24 +1167,24 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 					RETURNING r_mon.*
 				CALL fl_retorna_precision_valor(
 							rg_gen.g00_moneda_base,
-                                                        rm_z02.z02_cupocred_mb)
-                                	RETURNING rm_z02.z02_cupocred_mb
-                                DISPLAY BY NAME rm_z02.z02_cupocred_mb
+                                                        rm_z02.z02_cupcred_aprob)
+                                	RETURNING rm_z02.z02_cupcred_aprob
+                                DISPLAY BY NAME rm_z02.z02_cupcred_aprob
 				IF r_mon.g14_serial IS NOT NULL THEN
-					LET rm_z02.z02_cupocred_ma = 
-					rm_z02.z02_cupocred_mb * r_mon.g14_tasa
-					IF rm_z02.z02_cupocred_ma IS NULL 
-					OR rm_z02.z02_cupocred_ma>9999999999.99
+					LET rm_z02.z02_cupcred_xaprob = 
+					rm_z02.z02_cupcred_aprob * r_mon.g14_tasa
+					IF rm_z02.z02_cupcred_xaprob IS NULL 
+					OR rm_z02.z02_cupcred_xaprob>9999999999.99
 					THEN
 						CALL fgl_winmessage(vg_producto,'El cupo de crédito en moneda base está demasiado grande', 'exclamation')
-						NEXT FIELD z02_cupocred_mb
+						NEXT FIELD z02_cupcred_aprob
 					END IF
 				END IF
 				CALL fl_retorna_precision_valor(
 							rg_gen.g00_moneda_base,
-                                                        rm_z02.z02_cupocred_ma)
-                                	RETURNING rm_z02.z02_cupocred_ma
-				DISPLAY BY NAME rm_z02.z02_cupocred_ma
+                                                        rm_z02.z02_cupcred_xaprob)
+                                	RETURNING rm_z02.z02_cupcred_xaprob
+				DISPLAY BY NAME rm_z02.z02_cupcred_xaprob
 			END IF
 		END IF
 	BEFORE FIELD z02_aux_clte_mb
@@ -1352,6 +1354,12 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 			IF NOT resul THEN
 				NEXT FIELD z01_num_doc_id
 			END IF
+		END IF
+		IF rm_z02.z02_cupcred_xaprob <= rm_z02.z02_cupcred_aprob AND
+		   rm_z02.z02_cupcred_xaprob <> 0
+		THEN
+			CALL fl_mostrar_mensaje('El credito por aprobar debe ser mayor al cupo de credito aprobado.', 'exclamation')
+			NEXT FIELD z02_cupcred_xaprob
 		END IF
 END INPUT
 
@@ -1622,8 +1630,8 @@ DISPLAY BY NAME rm_z02.z02_localidad, rm_z02.z02_contacto,
 		rm_z02.z02_contr_espe, rm_z02.z02_oblig_cont,
 		rm_z02.z02_email,
 		rm_z02.z02_referencia, rm_z02.z02_credit_auto,
-		rm_z02.z02_credit_dias, rm_z02.z02_cupocred_mb,
-		rm_z02.z02_cupocred_ma, rm_z02.z02_dcto_item_c,
+		rm_z02.z02_credit_dias, rm_z02.z02_cupcred_aprob,
+		rm_z02.z02_cupcred_xaprob, rm_z02.z02_dcto_item_c,
 		rm_z02.z02_dcto_item_r, rm_z02.z02_dcto_mano_c,
 		rm_z02.z02_dcto_mano_r, rm_z02.z02_cheques,
 		rm_z02.z02_zona_venta, rm_z02.z02_zona_cobro,
@@ -1775,7 +1783,8 @@ ELSE
 				    z02_referencia  = rm_z02.z02_referencia,
 				    z02_credit_auto = rm_z02.z02_credit_auto,
 				    z02_credit_dias = rm_z02.z02_credit_dias,
-				    z02_cupocred_mb = rm_z02.z02_cupocred_mb,
+				    z02_cupcred_aprob = rm_z02.z02_cupcred_aprob,
+				    z02_cupcred_xaprob = rm_z02.z02_cupcred_xaprob,
 				    z02_dcto_item_c = rm_z02.z02_dcto_item_c,
 				    z02_dcto_item_r = rm_z02.z02_dcto_item_r,
 				    z02_dcto_mano_c = rm_z02.z02_dcto_mano_c,
@@ -1906,7 +1915,7 @@ FUNCTION control_localidad()
 
 CLEAR z02_localidad, tit_localidad,
 	z02_contacto, z02_referencia, z02_credit_auto, z02_credit_dias,
-	z02_cupocred_mb, z02_cupocred_ma, z02_dcto_item_c, z02_dcto_item_r,
+	z02_cupcred_aprob, z02_cupcred_xaprob, z02_dcto_item_c, z02_dcto_item_r,
 	z02_dcto_mano_c, z02_dcto_mano_r, z02_cheques, z02_zona_venta,
 	z02_zona_cobro, tit_zona_vta, tit_zona_cob, z02_aux_clte_mb,
 	z02_aux_clte_ma, z02_aux_ant_mb, z02_aux_ant_ma, tit_cli_mb, tit_cli_ma,
@@ -1956,15 +1965,16 @@ DEFINE nom_aux          LIKE ctbt010.b10_descripcion
 
 INITIALIZE rm_z02.z02_localidad, r_g32.*, r_z06.*, r_g14.*, codzv_aux,
 	codzc_aux, cod_aux TO NULL
-DISPLAY BY NAME rm_z02.z02_credit_dias, rm_z02.z02_cupocred_mb,
-		rm_z02.z02_cupocred_ma, rm_z02.z02_dcto_item_c,
+DISPLAY BY NAME rm_z02.z02_credit_dias, rm_z02.z02_cupcred_aprob,
+		rm_z02.z02_cupcred_xaprob, rm_z02.z02_dcto_item_c,
 		rm_z02.z02_dcto_item_r, rm_z02.z02_dcto_mano_c,
 		rm_z02.z02_dcto_mano_r, rm_z02.z02_aux_clte_mb,
 		rm_z02.z02_aux_clte_ma, rm_z02.z02_aux_ant_mb,
 		rm_z02.z02_aux_ant_ma
 LET int_flag = 0
 INPUT BY NAME rm_z02.z02_localidad, rm_z02.z02_contacto, rm_z02.z02_referencia,
-	rm_z02.z02_credit_auto, rm_z02.z02_credit_dias, rm_z02.z02_cupocred_mb,
+	rm_z02.z02_credit_auto, rm_z02.z02_credit_dias, rm_z02.z02_cupcred_aprob,
+	rm_z02.z02_cupcred_xaprob,
 	rm_z02.z02_dcto_item_c, rm_z02.z02_dcto_item_r, rm_z02.z02_dcto_mano_c,
 	rm_z02.z02_dcto_mano_r, rm_z02.z02_cheques, rm_z02.z02_zona_venta,
 	rm_z02.z02_zona_cobro, rm_z02.z02_aux_clte_mb, rm_z02.z02_aux_clte_ma,
@@ -1973,7 +1983,7 @@ INPUT BY NAME rm_z02.z02_localidad, rm_z02.z02_contacto, rm_z02.z02_referencia,
 	ON KEY(INTERRUPT)
         	IF FIELD_TOUCHED(rm_z02.z02_localidad, rm_z02.z02_contacto,
 			rm_z02.z02_referencia, rm_z02.z02_credit_auto,
-			rm_z02.z02_credit_dias, rm_z02.z02_cupocred_mb,
+			rm_z02.z02_credit_dias, rm_z02.z02_cupcred_aprob, rm_z02.z02_cupcred_xaprob,
 			rm_z02.z02_dcto_item_c, rm_z02.z02_dcto_item_r,
 			rm_z02.z02_dcto_mano_c, rm_z02.z02_dcto_mano_r,
 			rm_z02.z02_cheques, rm_z02.z02_zona_venta,
@@ -2215,22 +2225,22 @@ INPUT BY NAME rm_z02.z02_localidad, rm_z02.z02_contacto, rm_z02.z02_referencia,
 		ELSE
 			CLEAR tit_zona_cob
 		END IF
-	BEFORE FIELD z02_cupocred_mb
+	BEFORE FIELD z02_cupcred_aprob
 		IF vm_flag_mant = 'M' AND rm_g05.g05_tipo = 'UF' THEN
-			LET r_aux2.z02_cupocred_mb = rm_z02.z02_cupocred_mb
+			LET r_aux2.z02_cupcred_aprob = rm_z02.z02_cupcred_aprob
 		END IF
 		CALL poner_credit_dias() RETURNING resul
-	AFTER FIELD z02_cupocred_mb
+	AFTER FIELD z02_cupcred_aprob
 		IF rm_g05.g05_tipo = 'UF' THEN
-			LET rm_z02.z02_cupocred_mb = 0
+			LET rm_z02.z02_cupcred_aprob = 0
 			IF vm_flag_mant = 'M' THEN
-				LET rm_z02.z02_cupocred_mb =
-							r_aux2.z02_cupocred_mb
+				LET rm_z02.z02_cupcred_aprob =
+							r_aux2.z02_cupcred_aprob
 			END IF
-			DISPLAY BY NAME rm_z02.z02_cupocred_mb
+			DISPLAY BY NAME rm_z02.z02_cupcred_aprob
 			CONTINUE INPUT
 		END IF
-		IF rm_z02.z02_cupocred_mb IS NOT NULL THEN
+		IF rm_z02.z02_cupcred_aprob IS NOT NULL THEN
 			IF rg_gen.g00_moneda_alt IS NOT NULL
 			OR rg_gen.g00_moneda_alt <> ' ' THEN
 			       CALL fl_lee_factor_moneda(rg_gen.g00_moneda_base,
@@ -2238,24 +2248,24 @@ INPUT BY NAME rm_z02.z02_localidad, rm_z02.z02_contacto, rm_z02.z02_referencia,
 					RETURNING r_g14.*
 				CALL fl_retorna_precision_valor(
 							rg_gen.g00_moneda_base,
-                                                        rm_z02.z02_cupocred_mb)
-                                	RETURNING rm_z02.z02_cupocred_mb
-                                DISPLAY BY NAME rm_z02.z02_cupocred_mb
+                                                        rm_z02.z02_cupcred_aprob)
+                                	RETURNING rm_z02.z02_cupcred_aprob
+                                DISPLAY BY NAME rm_z02.z02_cupcred_aprob
 				IF r_g14.g14_serial IS NOT NULL THEN
-					LET rm_z02.z02_cupocred_ma = 
-					rm_z02.z02_cupocred_mb * r_g14.g14_tasa
-					IF rm_z02.z02_cupocred_ma IS NULL 
-					OR rm_z02.z02_cupocred_ma>9999999999.99
+					LET rm_z02.z02_cupcred_xaprob = 
+					rm_z02.z02_cupcred_aprob * r_g14.g14_tasa
+					IF rm_z02.z02_cupcred_xaprob IS NULL 
+					OR rm_z02.z02_cupcred_xaprob>9999999999.99
 					THEN
 						CALL fgl_winmessage(vg_producto,'El cupo de crédito en moneda base está demasiado grande', 'exclamation')
-						NEXT FIELD z02_cupocred_mb
+						NEXT FIELD z02_cupcred_aprob
 					END IF
 				END IF
 				CALL fl_retorna_precision_valor(
 							rg_gen.g00_moneda_base,
-                                                        rm_z02.z02_cupocred_ma)
-                                	RETURNING rm_z02.z02_cupocred_ma
-				DISPLAY BY NAME rm_z02.z02_cupocred_ma
+                                                        rm_z02.z02_cupcred_xaprob)
+                                	RETURNING rm_z02.z02_cupcred_xaprob
+				DISPLAY BY NAME rm_z02.z02_cupcred_xaprob
 			END IF
 		END IF
 	BEFORE FIELD z02_aux_clte_mb
@@ -2403,6 +2413,12 @@ INPUT BY NAME rm_z02.z02_localidad, rm_z02.z02_contacto, rm_z02.z02_referencia,
 		IF resul = 1 THEN
 			CALL fgl_winmessage(vg_producto,'Crédito de días debe ser mayor a cero, si hay crédito automático','info')
 			NEXT FIELD z02_credit_dias
+		END IF
+		IF rm_z02.z02_cupcred_xaprob <= rm_z02.z02_cupcred_aprob AND
+		   rm_z02.z02_cupcred_xaprob <> 0
+		THEN
+			CALL fl_mostrar_mensaje('El credito por aprobar debe ser mayor al cupo de credito aprobado.', 'exclamation')
+			NEXT FIELD z02_cupcred_xaprob
 		END IF
 END INPUT
 
