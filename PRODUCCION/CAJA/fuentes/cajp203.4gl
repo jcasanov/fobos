@@ -595,12 +595,14 @@ INPUT BY NAME rm_j10.j10_tipo_fuente, rm_j10.j10_num_fuente, rm_r38.r38_num_sri
 				CALL fl_lee_cliente_localidad(vg_codcia,
 						vg_codloc, r_j10.j10_codcli)
 					RETURNING r_z02.*
+{JCM
 				IF r_z02.z02_email IS NULL THEN	
 					CALL fl_mostrar_mensaje('Cliente no tiene registrado el correo electrónico para esta localidad.','exclamation')
 					NEXT FIELD j10_num_fuente
 				ELSE
 					CALL fl_mostrar_mensaje('Cliente tiene registrado este correo electrónico para esta localidad: ' || r_z02.z02_email CLIPPED || '.', 'info')
 				END IF
+}
 				CALL fl_lee_preventa_rep(vg_codcia, vg_codloc,
 					r_j10.j10_num_fuente) RETURNING r_r23.*
 				IF r_r23.r23_numprev IS NULL THEN
@@ -670,12 +672,14 @@ INPUT BY NAME rm_j10.j10_tipo_fuente, rm_j10.j10_num_fuente, rm_r38.r38_num_sri
 				CALL fl_lee_cliente_localidad(vg_codcia,
 						vg_codloc, r_j10.j10_codcli)
 					RETURNING r_z02.*
+{JCM
 				IF r_z02.z02_email IS NULL THEN	
 					CALL fl_mostrar_mensaje('Cliente no tiene registrado el correo electrónico para esta localidad.','exclamation')
 					NEXT FIELD j10_num_fuente
 				ELSE
 					CALL fl_mostrar_mensaje('Cliente tiene registrado este correo electrónico para esta localidad: ' || r_z02.z02_email CLIPPED || '.', 'info')
 				END IF
+}
 				CALL fl_lee_orden_trabajo(vg_codcia, vg_codloc,
 					r_j10.j10_num_fuente) RETURNING r_t23.*
 				IF r_t23.t23_orden IS NULL THEN
