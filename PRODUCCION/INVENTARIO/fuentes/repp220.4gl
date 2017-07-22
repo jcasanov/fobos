@@ -213,6 +213,7 @@ MENU 'OPCIONES'
 		HIDE OPTION 'Imprimir'
 		--#HIDE OPTION 'Enviar Mail'
 		--#HIDE OPTION 'PDF'
+		HIDE OPTION 'Hacer Pedido'
 		IF num_args() = 5 THEN                                          
 			HIDE OPTION 'Modificar'                                 
 			HIDE OPTION 'Ingresar'                                  
@@ -235,6 +236,7 @@ MENU 'OPCIONES'
 			SHOW OPTION 'Modificar'                                
 			SHOW OPTION 'Ver Detalle'                               
 			SHOW OPTION 'Hacer Preventa'                            
+			SHOW OPTION 'Hacer Pedido'
 			SHOW OPTION 'Imprimir'                                  
 			--#SHOW OPTION 'Enviar Mail'
 			--#IF vg_usuario <> 'HSALAZAR' THEN
@@ -265,12 +267,24 @@ MENU 'OPCIONES'
 		ELSE                                                            
 			CALL fl_mensaje_consultar_primero()                     
 		END IF	                                                        
-        COMMAND KEY('C') 'Consultar'            'Consultar un registro.'        
-                CALL control_consulta()                                         
-                IF vm_num_rows <= 1 THEN 
-                        SHOW OPTION 'Modificar'
-                        SHOW OPTION 'Ver Detalle'
+	COMMAND KEY('P') 'Hacer Pedido'      'Convertir la Proforma en Pedido.'
+		IF vm_num_rows > 0 THEN
+			CALL control_hacer_pedido()
+			IF NOT int_flag THEN
+				CALL control_grabar_proforma_pedido()
+			ELSE
+				LET int_flag = 0
+			END IF
+		ELSE
+			CALL fl_mensaje_consultar_primero()
+		END IF
+	COMMAND KEY('C') 'Consultar'            'Consultar un registro.'        
+		CALL control_consulta()                                         
+        IF vm_num_rows <= 1 THEN 
+       		SHOW OPTION 'Modificar'
+            SHOW OPTION 'Ver Detalle'
 			SHOW OPTION 'Hacer Preventa'
+			SHOW OPTION 'Hacer Pedido'
 			SHOW OPTION 'Imprimir'   
 			--#SHOW OPTION 'Enviar Mail'
 			--#IF vg_usuario <> 'HSALAZAR' THEN
@@ -282,17 +296,18 @@ MENU 'OPCIONES'
 			--#ELSE
 				--#HIDE OPTION 'PDF'
 			--#END IF
-                        HIDE OPTION 'Avanzar'   
-                        HIDE OPTION 'Retroceder'
-                        IF vm_num_rows = 0 THEN
+            HIDE OPTION 'Avanzar'   
+            HIDE OPTION 'Retroceder'
+            IF vm_num_rows = 0 THEN
 				HIDE OPTION 'Imprimir'
 				--#HIDE OPTION 'Enviar Mail'
 				--#HIDE OPTION 'PDF'
-                        	HIDE OPTION 'Modificar'
+                HIDE OPTION 'Modificar'
 				HIDE OPTION 'Ver Detalle'
 				HIDE OPTION 'Hacer Preventa'
-                        END IF 
-                ELSE          
+				HIDE OPTION 'Hacer Pedido'
+            END IF 
+        ELSE          
 			SHOW OPTION 'Imprimir'   
 			--#SHOW OPTION 'Enviar Mail'
 			--#IF vg_usuario <> 'HSALAZAR' THEN
@@ -305,13 +320,14 @@ MENU 'OPCIONES'
 				--#HIDE OPTION 'PDF'
 			--#END IF
 			SHOW OPTION 'Hacer Preventa' 
-                        SHOW OPTION 'Ver Detalle'   
-                        SHOW OPTION 'Modificar'    
-                        SHOW OPTION 'Avanzar'     
-                END IF                           
-                IF vm_row_current <= 1 THEN     
-                        HIDE OPTION 'Retroceder'
-                END IF
+			SHOW OPTION 'Hacer Pedido' 
+            SHOW OPTION 'Ver Detalle'   
+            SHOW OPTION 'Modificar'    
+            SHOW OPTION 'Avanzar'     
+		END IF                           
+        IF vm_row_current <= 1 THEN     
+        	HIDE OPTION 'Retroceder'
+        END IF
 	COMMAND KEY('K') 'Imprimir'
 		IF rm_r21.r21_numprof IS NOT NULL THEN 
 			CALL control_imprimir_proforma(1)
@@ -325,7 +341,7 @@ MENU 'OPCIONES'
 		CALL enviar_mail()
 	--#COMMAND KEY('Y') 'PDF' 'Genera un archivo .pdf de la proforma.'
 		CALL generar_pdf()
-        COMMAND KEY('V') 'Ver Detalle'   'Muestra anteriores detalles.'
+    COMMAND KEY('V') 'Ver Detalle'   'Muestra anteriores detalles.'
 		IF vm_num_rows > 0 THEN
 			CALL control_ver_detalle()
 		ELSE
@@ -336,12 +352,14 @@ MENU 'OPCIONES'
 		IF vm_row_current = vm_num_rows THEN
 			HIDE OPTION 'Avanzar'
 			SHOW OPTION 'Hacer Preventa'
+			SHOW OPTION 'Hacer Pedido'
 			SHOW OPTION 'Ver Detalle'
 			SHOW OPTION 'Retroceder'
 			SHOW OPTION 'Modificar'
 			NEXT OPTION 'Retroceder'
 		ELSE
 			SHOW OPTION 'Hacer Preventa'
+			SHOW OPTION 'Hacer Pedido'
 			SHOW OPTION 'Ver Detalle'  
 			SHOW OPTION 'Modificar'
 			SHOW OPTION 'Avanzar'
@@ -351,6 +369,7 @@ MENU 'OPCIONES'
 		CALL anterior_registro()
 		IF vm_row_current = 1 THEN
 			SHOW OPTION 'Hacer Preventa'
+			SHOW OPTION 'Hacer Pedido'
 			SHOW OPTION 'Ver Detalle'  
 			SHOW OPTION 'Modificar'   
 			HIDE OPTION 'Retroceder' 
@@ -358,6 +377,7 @@ MENU 'OPCIONES'
 			NEXT OPTION 'Avanzar'  
 		ELSE 
 			SHOW OPTION 'Hacer Preventa'
+			SHOW OPTION 'Hacer Pedido'
 			SHOW OPTION 'Ver Detalle'
 			SHOW OPTION 'Modificar' 
 			SHOW OPTION 'Avanzar'  
@@ -2360,6 +2380,311 @@ FREE q_elimpre
 RETURN flag
 
 END FUNCTION
+
+
+
+FUNCTION control_hacer_pedido()
+DEFINE r_r16		RECORD LIKE  rept016.*
+DEFINE r_r03		RECORD LIKE  rept003.*
+DEFINE r_p01		RECORD LIKE  cxpt001.*
+DEFINE r_p02		RECORD LIKE  cxpt002.*
+DEFINE r_b10		RECORD LIKE  ctbt010.*
+DEFINE r_g13		RECORD LIKE  gent013.*
+DEFINE resp		CHAR(6)
+
+IF DATE(rm_r21.r21_fecing) + rm_r00.r00_expi_prof < TODAY THEN   
+	CALL fl_mostrar_mensaje('La proforma ya expiró.','exclamation')
+	LET int_flag = 1
+	RETURN
+END IF
+
+OPEN WINDOW w_220_6 AT 8,2 WITH 12 ROWS, 80 COLUMNS
+	ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, BORDER, 
+		  MESSAGE LINE LAST - 2) 
+OPEN FORM f_220_6 FROM '../forms/repf220_6'
+DISPLAY FORM f_220_6
+
+INITIALIZE rm_r16.*, r_r16.*, r_r03.*, r_p01.*, r_p02.*, r_b10.*, 
+		   r_g13.*
+		TO NULL
+
+CALL fl_lee_moneda(rg_gen.g00_moneda_base) RETURNING r_g13.*
+LET rm_r16.r16_moneda     = rg_gen.g00_moneda_base
+LET rm_r16.r16_fec_envio  = TODAY
+LET rm_r16.r16_tipo       = 'E'
+LET rm_r16.r16_referencia = 'PROFORMA # '|| rm_r21.r21_numprof || '.' 
+LET rm_r16.r16_estado     = 'A'
+DISPLAY 'ACTIVO' TO tit_estado_rep
+DISPLAY r_g13.g13_nombre TO tit_mon_bas
+
+LET int_flag = 0
+INPUT BY NAME rm_r16.r16_pedido,    rm_r16.r16_tipo,      rm_r16.r16_linea,
+			  rm_r16.r16_proveedor, rm_r16.r16_fec_envio, rm_r16.r16_referencia,
+              rm_r16.r16_moneda,    rm_r16.r16_aux_cont,  rm_r16.r16_estado
+	WITHOUT DEFAULTS
+	ON KEY(INTERRUPT)
+		IF field_touched(r16_pedido,    r16_tipo,       r16_proveedor, 
+						 r16_fec_envio, r16_referencia, r16_moneda,
+						 r16_aux_cont)
+		THEN
+			LET int_flag = 0
+			CALL fl_mensaje_abandonar_proceso() RETURNING resp
+			IF resp = 'Yes' THEN
+				LET int_flag = 1
+				EXIT INPUT
+			END IF
+		ELSE
+			EXIT INPUT
+		END IF
+	ON KEY(F2)
+		IF infield(r16_linea) THEN
+			CALL fl_ayuda_lineas_rep(vg_codcia)
+				RETURNING r_r03.r03_codigo, r_r03.r03_nombre
+			IF r_r03.r03_codigo IS NOT NULL THEN
+				LET rm_r16.r16_linea = r_r03.r03_codigo
+				DISPLAY BY NAME rm_r16.r16_linea
+			END IF
+		END IF
+		IF infield(r16_proveedor) THEN
+			CALL fl_ayuda_proveedores_localidad(vg_codcia,vg_codloc)
+				RETURNING r_p01.p01_codprov, r_p01.p01_nomprov
+			IF r_p01.p01_codprov IS NOT NULL THEN
+				CALL fl_lee_proveedor_localidad(vg_codcia,
+							vg_codloc, 
+							r_p01.p01_codprov)
+					RETURNING r_p02.*
+				LET rm_r16.r16_proveedor = r_p01.p01_codprov
+				LET rm_r16.r16_demora    = 
+						r_p02.p02_dias_demora
+				LET rm_r16.r16_seguridad = r_p02.p02_dias_seguri
+				DISPLAY BY NAME rm_r16.r16_proveedor,
+						rm_r16.r16_demora, 
+						rm_r16.r16_seguridad
+				DISPLAY r_p01.p01_nomprov TO tit_proveedor
+			END IF
+		END IF
+		IF infield(r16_moneda) THEN
+                        CALL fl_ayuda_monedas()
+                                RETURNING r_g13.g13_moneda, r_g13.g13_nombre, 
+					  r_g13.g13_decimales
+                        IF r_g13.g13_moneda IS NOT NULL THEN
+				LET rm_r16.r16_moneda = r_g13.g13_nombre
+                                DISPLAY BY NAME rm_r16.r16_moneda
+                                DISPLAY r_g13.g13_nombre TO tit_mon_bas
+                        END IF
+                END IF
+		IF infield(r16_aux_cont) THEN
+                        CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+                                RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
+                        IF r_b10.b10_cuenta IS NOT NULL THEN
+				LET rm_r16.r16_aux_cont = r_b10.b10_cuenta
+                                DISPLAY BY NAME rm_r16.r16_aux_cont
+                                DISPLAY r_b10.b10_descripcion TO tit_aux_con
+                        END IF
+                END IF
+		LET int_flag = 0
+
+	AFTER FIELD r16_pedido
+		IF rm_r16.r16_pedido IS NOT NULL THEN
+			CALL fl_lee_pedido_rep(vg_codcia,vg_codloc, rm_r16.r16_pedido)
+				RETURNING r_r16.*
+			IF r_r16.r16_compania IS NOT NULL THEN
+				CALL fl_mostrar_mensaje('Este pedido ya fue realizado en la Compañía.','exclamation')
+				NEXT FIELD r16_pedido
+			END IF
+		END IF
+	AFTER FIELD r16_linea
+		IF rm_r16.r16_linea IS NOT NULL THEN
+			CALL fl_lee_linea_rep(vg_codcia, rm_r16.r16_linea)
+				RETURNING r_r03.*
+			IF r_r03.r03_compania IS NULL THEN
+				CALL fl_mostrar_mensaje('No existe esa línea en la Compañía.','exclamation')
+				NEXT FIELD r16_linea
+			END IF
+                        IF r_r03.r03_estado = 'B' THEN
+                                CALL fl_mensaje_estado_bloqueado()
+                                NEXT FIELD r16_linea
+                        END IF
+			IF rm_r21.r21_grupo_linea <> r_r03.r03_grupo_linea THEN
+				CALL fl_mostrar_mensaje( 'La Línea es diferente al Grupo de Línea que esta en la Proforma, debe ingresar una Línea que se encuentre dentro de ese Grupo de Línea.', 'exclamation')
+				NEXT FIELD r16_linea
+			END IF
+		ELSE
+			IF rm_r16.r16_tipo = 'S' THEN
+				CALL fl_mostrar_mensaje('Pedido es sugerido, escoja una línea.','exclamation')
+				NEXT FIELD r16_linea
+			END IF
+		END IF
+	AFTER FIELD r16_proveedor
+		IF rm_r16.r16_proveedor IS NOT NULL THEN
+			CALL fl_lee_proveedor_localidad(vg_codcia,
+						vg_codloc,rm_r16.r16_proveedor)
+				RETURNING r_p02.*
+			IF r_p02.p02_compania IS NULL THEN
+				CALL fl_mostrar_mensaje('No existe ese proveedor en la Localidad de la Compañía.','exclamation')
+				NEXT FIELD r16_proveedor
+			END IF
+			CALL fl_lee_proveedor(rm_r16.r16_proveedor)
+				RETURNING r_p01.*
+			DISPLAY r_p01.p01_nomprov TO tit_proveedor
+			IF r_p01.p01_estado = 'B' THEN
+				CALL fl_mensaje_estado_bloqueado()
+				NEXT FIELD r16_proveedor
+			END IF
+			LET rm_r16.r16_demora    = r_p02.p02_dias_demora
+			LET rm_r16.r16_seguridad = r_p02.p02_dias_seguri
+			DISPLAY BY NAME rm_r16.r16_demora, rm_r16.r16_seguridad
+		ELSE
+			CLEAR r16_demora, r16_seguridad, tit_proveedor
+		END IF
+	AFTER FIELD r16_fec_envio
+		IF rm_r16.r16_fec_envio IS NOT NULL THEN
+			IF rm_r16.r16_fec_envio > TODAY THEN
+				CALL fl_mostrar_mensaje('La fecha de envío no puede ser mayor a hoy.','exclamation')
+				NEXT FIELD r16_fec_envio
+			END IF
+		END IF
+	AFTER FIELD r16_moneda
+		IF rm_r16.r16_moneda IS NOT NULL THEN
+                        CALL fl_lee_moneda(rm_r16.r16_moneda)
+                                RETURNING r_g13.*
+                        IF r_g13.g13_moneda IS NULL  THEN
+                        	CALL fl_mostrar_mensaje('Moneda no existe en la Companía.','exclamation')
+                                NEXT FIELD r16_moneda
+                        END IF
+                        DISPLAY r_g13.g13_nombre TO tit_mon_bas
+                        IF r_g13.g13_estado = 'B' THEN
+                                CALL fl_mensaje_estado_bloqueado()
+                                NEXT FIELD r16_moneda
+                        END IF
+                ELSE
+                        LET rm_r16.r16_moneda = rg_gen.g00_moneda_base
+                        DISPLAY BY NAME rm_r16.r16_moneda
+                        CALL fl_lee_moneda(rm_r16.r16_moneda) 
+				RETURNING r_g13.*
+                        DISPLAY r_g13.g13_nombre TO tit_mon_bas
+                END IF
+	AFTER FIELD r16_aux_cont
+		IF rm_r16.r16_aux_cont IS NOT NULL THEN
+                        CALL fl_lee_cuenta(vg_codcia, rm_r16.r16_aux_cont)
+                                RETURNING r_b10.*
+                        IF r_b10.b10_cuenta IS NULL THEN
+                        	CALL fl_mostrar_mensaje('Cuenta no existe en la Compañía.','exclamation')
+                                NEXT FIELD r16_aux_cont
+                        END IF
+                        DISPLAY r_b10.b10_descripcion TO tit_aux_con
+                        IF r_b10.b10_estado = 'B' THEN
+                                CALL fl_mensaje_estado_bloqueado()
+                                NEXT FIELD r16_aux_cont
+                        END IF
+			IF r_b10.b10_nivel <> 6 THEN
+                        	CALL fl_mostrar_mensaje('Nivel de cuenta debe ser solo 6.','info')
+                                NEXT FIELD r16_aux_cont
+                        END IF
+                ELSE
+                        CLEAR tit_aux_con
+                END IF
+	AFTER INPUT
+		IF rm_r16.r16_tipo = 'S' THEN
+			IF rm_r16.r16_linea IS NULL THEN
+				CALL fl_mostrar_mensaje('Pedido es sugerido, escoja una línea.','exclamation')
+				DISPLAY BY NAME rm_r16.r16_linea
+				NEXT FIELD r16_linea
+			END IF
+		END IF
+END INPUT	
+
+LET int_flag = 0
+CLOSE WINDOW w_220_6
+
+END FUNCTION
+
+
+
+FUNCTION control_grabar_proforma_pedido()
+DEFINE expr_sql 	VARCHAR(200)
+DEFINE r_r22		RECORD LIKE rept022.*
+DEFINE r_r17		RECORD LIKE rept017.*
+DEFINE r_r10		RECORD LIKE rept010.*
+
+LET rm_r16.r16_compania    = vg_codcia
+LET rm_r16.r16_localidad   = vg_codloc
+LET rm_r16.r16_fec_envio   = CURRENT
+LET rm_r16.r16_maximo      = 0
+LET rm_r16.r16_minimo      = 0
+LET rm_r16.r16_periodo_vta = 0
+LET rm_r16.r16_pto_reorden = 0
+LET rm_r16.r16_flag_estad  = 'M'
+LET rm_r16.r16_usuario     = vg_usuario
+LET rm_r16.r16_fecing      = CURRENT
+
+BEGIN WORK
+	INSERT INTO rept016 VALUES (rm_r16.*)
+	LET expr_sql = 'SELECT * FROM rept022',
+				' WHERE r22_compania  =', vg_codcia,
+				'   AND r22_localidad =', vg_codloc,
+				'   AND r22_numprof   =',rm_r21.r21_numprof,
+				' ORDER BY r22_orden' 
+
+	PREPARE ejecucion FROM expr_sql
+	DECLARE q_det_ped CURSOR FOR ejecucion
+		
+	FOREACH q_det_ped INTO r_r22.*
+		CALL fl_lee_item(rm_r16.r16_compania, r_r22.r22_item)
+			RETURNING r_r10.*
+
+		INITIALIZE r_r17.* TO NULL
+		LET r_r17.r17_compania    = rm_r16.r16_compania	
+		LET r_r17.r17_localidad   = rm_r16.r16_localidad	
+		LET r_r17.r17_pedido      = rm_r16.r16_pedido	
+		LET r_r17.r17_item        = r_r22.r22_item	
+		LET r_r17.r17_orden       = r_r22.r22_orden	
+		LET r_r17.r17_estado      = 'A'	
+		LET r_r17.r17_fob         = r_r10.r10_fob	
+		LET r_r17.r17_cantped     = r_r22.r22_cantidad	
+		LET r_r17.r17_cantrec     = 0	
+		LET r_r17.r17_exfab_mb    = 0 
+		LET r_r17.r17_desp_mi     = 0 
+		LET r_r17.r17_desp_mb     = 0 
+		LET r_r17.r17_tot_fob_mi  = 0 
+		LET r_r17.r17_tot_fob_mb  = 0 
+		LET r_r17.r17_flete       = 0 
+		LET r_r17.r17_seguro      = 0 
+		LET r_r17.r17_cif         = 0 
+		LET r_r17.r17_arancel     = 0 
+		LET r_r17.r17_salvagu     = 0 
+		LET r_r17.r17_cargos      = 0 
+		LET r_r17.r17_costuni_ing = 0 
+		LET r_r17.r17_ind_bko     = 'S'
+		LET r_r17.r17_linea       = r_r10.r10_linea
+		LET r_r17.r17_rotacion    = r_r10.r10_rotacion
+		LET r_r17.r17_partida     = r_r10.r10_partida
+		LET r_r17.r17_porc_part   = 0 
+		LET r_r17.r17_porc_salva  = 0 
+		LET r_r17.r17_peso        = r_r10.r10_peso
+		LET r_r17.r17_cantpaq     = r_r10.r10_cantpaq
+
+		-- Para consolidar cuando existen items repetidos en la
+		-- proforma (suma lo que existe en pedido + la cantidad del 
+		-- item repetido)
+		WHENEVER ERROR CONTINUE
+		INSERT INTO rept017 VALUES (r_r17.*)
+		IF status < 0 THEN
+			UPDATE rept017 set r17_cantped = r17_cantped +
+							 r_r17.r17_cantped
+				WHERE r17_compania  = vg_codcia
+				  AND r17_localidad = vg_codloc
+				  AND r17_pedido    = rm_r16.r16_pedido
+				  AND r17_item      = r_r17.r17_item
+		END IF
+		WHENEVER ERROR STOP
+	END FOREACH
+COMMIT WORK
+
+CALL fl_mostrar_mensaje( 'Proceso Realizado Ok.', 'info')
+
+END FUNCTION
+
 
 
 
