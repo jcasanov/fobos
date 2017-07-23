@@ -231,7 +231,7 @@ CONSTRUCT BY NAME expr_sql ON p00_compania, p00_tipo_egr_gen, p00_aux_prov_mb,
 		END IF 
 	END IF
 	IF INFIELD(p00_aux_prov_mb) THEN
-		CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+		CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 			RETURNING cod_aux, nom_aux
 		LET int_flag = 0
 		IF cod_aux IS NOT NULL THEN
@@ -240,7 +240,7 @@ CONSTRUCT BY NAME expr_sql ON p00_compania, p00_tipo_egr_gen, p00_aux_prov_mb,
 		END IF 
 	END IF
 	IF INFIELD(p00_aux_prov_ma) THEN
-		CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+		CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 			RETURNING cod_aux, nom_aux
 		LET int_flag = 0
 		IF cod_aux IS NOT NULL THEN
@@ -249,7 +249,7 @@ CONSTRUCT BY NAME expr_sql ON p00_compania, p00_tipo_egr_gen, p00_aux_prov_mb,
 		END IF 
 	END IF
 	IF INFIELD(p00_aux_ant_mb) THEN
-		CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+		CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 			RETURNING cod_aux, nom_aux
 		LET int_flag = 0
 		IF cod_aux IS NOT NULL THEN
@@ -258,7 +258,7 @@ CONSTRUCT BY NAME expr_sql ON p00_compania, p00_tipo_egr_gen, p00_aux_prov_mb,
 		END IF 
 	END IF
 	IF INFIELD(p00_aux_ant_ma) THEN
-		CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+		CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 			RETURNING cod_aux, nom_aux
 		LET int_flag = 0
 		IF cod_aux IS NOT NULL THEN
@@ -350,7 +350,7 @@ INPUT BY NAME rm_cxp.p00_compania, rm_cxp.p00_tipo_egr_gen, rm_cxp.p00_mespro,
 			END IF 
 		END IF
 		IF INFIELD(p00_aux_prov_mb) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING cod_aux, nom_aux
 			LET int_flag = 0
 			IF cod_aux IS NOT NULL THEN
@@ -360,7 +360,7 @@ INPUT BY NAME rm_cxp.p00_compania, rm_cxp.p00_tipo_egr_gen, rm_cxp.p00_mespro,
 			END IF 
 		END IF
 		IF INFIELD(p00_aux_prov_ma) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING cod_aux, nom_aux
 			LET int_flag = 0
 			IF cod_aux IS NOT NULL THEN
@@ -370,7 +370,7 @@ INPUT BY NAME rm_cxp.p00_compania, rm_cxp.p00_tipo_egr_gen, rm_cxp.p00_mespro,
 			END IF 
 		END IF
 		IF INFIELD(p00_aux_ant_mb) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING cod_aux, nom_aux
 			LET int_flag = 0
 			IF cod_aux IS NOT NULL THEN
@@ -380,7 +380,7 @@ INPUT BY NAME rm_cxp.p00_compania, rm_cxp.p00_tipo_egr_gen, rm_cxp.p00_mespro,
 			END IF 
 		END IF
 		IF INFIELD(p00_aux_ant_ma) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING cod_aux, nom_aux
 			LET int_flag = 0
 			IF cod_aux IS NOT NULL THEN

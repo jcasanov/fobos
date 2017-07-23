@@ -14,7 +14,6 @@ DEFINE vm_row_current	INTEGER
 DEFINE vm_max_rows	INTEGER
 DEFINE vm_r_rows	ARRAY [1000] OF INTEGER
 DEFINE vm_proceso	LIKE rolt005.n05_proceso
-DEFINE vm_nivel		LIKE ctbt001.b01_nivel
 DEFINE rm_b00		RECORD LIKE ctbt000.*
 DEFINE rm_loc		RECORD LIKE gent002.*
 DEFINE rm_n00		RECORD LIKE rolt000.*
@@ -86,11 +85,7 @@ IF rm_b00.b00_compania IS NULL THEN
 	CALL fl_mostrar_mensaje('No existe ninguna compañía configurada en CONTABILIDAD.', 'stop')
 	EXIT PROGRAM
 END IF
-SELECT MAX(b01_nivel) INTO vm_nivel FROM ctbt001
-IF vm_nivel IS NULL THEN
-	CALL fl_mostrar_mensaje('No existe ningun nivel de cuenta configurado en la compañía.','stop')
-	EXIT PROGRAM
-END IF
+
 CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rm_loc.*
 IF rm_loc.g02_compania IS NULL THEN
 	DROP TABLE tmp_descuentos
@@ -1407,7 +1402,7 @@ INPUT BY NAME rm_scr[pos].n44_tipo_pago, rm_n44[pos].n44_bco_empresa,
                         END IF
                 END IF
 		IF INFIELD(n44_cta_trabaj) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_n44[pos].n44_cta_trabaj = r_b10.b10_cuenta

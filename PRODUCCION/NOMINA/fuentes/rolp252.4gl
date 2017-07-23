@@ -49,7 +49,6 @@ DEFINE rm_diasgoz	ARRAY[20] OF RECORD
 				n47_secuencia	LIKE rolt047.n47_secuencia,
 				n47_estado	LIKE rolt047.n47_estado
 			END RECORD
-DEFINE vm_nivel		LIKE ctbt001.b01_nivel
 DEFINE vm_proceso	LIKE rolt039.n39_proceso
 DEFINE vm_vac_goz	LIKE rolt039.n39_proceso
 DEFINE vm_vac_pag	LIKE rolt039.n39_proceso
@@ -145,11 +144,6 @@ END IF
 CALL fl_lee_compania_contabilidad(vg_codcia) RETURNING rm_b00.*
 IF rm_b00.b00_compania IS NULL THEN
 	CALL fl_mostrar_mensaje('No existe ninguna compañía configurada en CONTABILIDAD.', 'stop')
-	EXIT PROGRAM
-END IF
-SELECT MAX(b01_nivel) INTO vm_nivel FROM ctbt001
-IF vm_nivel IS NULL THEN
-	CALL fl_mostrar_mensaje('No existe ningun nivel de cuenta configurado en la compañía.','stop')
 	EXIT PROGRAM
 END IF
 LET lin_menu = 0
@@ -1163,7 +1157,7 @@ INPUT BY NAME r_n39.n39_fecini_vac, r_n39.n39_fecfin_vac, r_n39.n39_tipo,
                         END IF
                 END IF
 		IF INFIELD(n39_cta_trabaj) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET r_n39.n39_cta_trabaj = r_b10.b10_cuenta

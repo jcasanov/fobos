@@ -249,7 +249,7 @@ CONSTRUCT BY NAME expr_sql ON b10_nivel, b10_cuenta, b10_descripcion
 			END IF 
 		END IF
 		IF INFIELD(b10_cuenta) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING cod_aux, nom_aux
 			LET int_flag = 0
 			IF cod_aux IS NOT NULL THEN

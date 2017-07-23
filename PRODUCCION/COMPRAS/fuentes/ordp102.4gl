@@ -10,7 +10,6 @@ GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
 DEFINE rm_c02		RECORD LIKE ordt002.*
 DEFINE rm_c03		RECORD LIKE ordt003.*
-DEFINE vm_nivel		LIKE ctbt001.b01_nivel
 DEFINE rm_retsri	ARRAY [10000] OF RECORD
 			c03_codigo_sri		LIKE ordt003.c03_codigo_sri,
 			c03_concepto_ret	LIKE ordt003.c03_concepto_ret,
@@ -101,15 +100,11 @@ ELSE
 	OPEN FORM f_ord FROM "../forms/ordf102_1c"
 END IF
 DISPLAY FORM f_ord
-INITIALIZE rm_c02.*, vm_nivel TO NULL
+INITIALIZE rm_c02.* TO NULL
 LET vm_num_rows    = 0
 LET vm_row_current = 0
 CALL muestra_contadores(vm_row_current, vm_num_rows)
-SELECT MAX(b01_nivel) INTO vm_nivel FROM ctbt001
-IF vm_nivel IS NULL THEN
-	CALL fl_mostrar_mensaje('Nivel no esta configurado en Contabilidad.', 'stop')
-	EXIT PROGRAM
-END IF
+
 MENU 'OPCIONES'
 	BEFORE MENU
 		HIDE OPTION 'Avanzar'
@@ -301,7 +296,7 @@ CONSTRUCT BY NAME expr_sql ON c02_estado, c02_tipo_ret, c02_porcentaje,
 		CALL llamar_visor_teclas()
 	ON KEY(F2)
 		IF INFIELD(c02_aux_cont) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING cod_aux, nom_aux
 			LET int_flag = 0
 			IF cod_aux IS NOT NULL THEN
@@ -403,7 +398,7 @@ INPUT BY NAME rm_c02.c02_tipo_ret, rm_c02.c02_porcentaje, rm_c02.c02_nombre,
 		CALL llamar_visor_teclas()
 	ON KEY(F2)
 		IF INFIELD(c02_aux_cont) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING cod_aux, nom_aux
 			LET int_flag = 0
 			IF cod_aux IS NOT NULL THEN
@@ -1206,7 +1201,7 @@ INPUT ARRAY rm_detj91 WITHOUT DEFAULTS FROM rm_detj91.*
 			END IF
 		END IF
 		IF INFIELD(j91_aux_cont) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_detj91[i].j91_aux_cont = r_b10.b10_cuenta

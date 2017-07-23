@@ -357,7 +357,7 @@ INPUT BY NAME rm_ctb.b16_cta_master
 	END IF
 	ON KEY(F2)
 	IF INFIELD(b16_cta_master) THEN
-		CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+		CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 			RETURNING cod_aux, nom_aux
 		LET int_flag = 0
 		IF cod_aux IS NOT NULL THEN
@@ -450,7 +450,7 @@ IF vm_total_por < 100 THEN
                 	END IF
 		ON KEY(F2)
 			IF INFIELD(b16_cta_detail) THEN
-				CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+				CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 					RETURNING cod_aux, nom_aux
 				LET int_flag = 0
 				IF cod_aux IS NOT NULL THEN

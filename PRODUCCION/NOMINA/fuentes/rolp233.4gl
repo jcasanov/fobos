@@ -82,7 +82,6 @@ DEFINE rm_dettotpre	ARRAY[20] OF RECORD
 				n58_valor_dist	LIKE rolt058.n58_valor_dist,
 				n58_saldo_dist	LIKE rolt058.n58_saldo_dist
 			END RECORD
-DEFINE vm_nivel		LIKE ctbt001.b01_nivel
 DEFINE vm_proceso	LIKE rolt003.n03_proceso
 DEFINE vm_max_prest	SMALLINT
 DEFINE vm_num_prest	SMALLINT
@@ -136,11 +135,6 @@ CALL fl_nivel_isolation()
 CALL fl_lee_compania_contabilidad(vg_codcia) RETURNING rm_b00.*
 IF rm_b00.b00_compania IS NULL THEN
 	CALL fl_mostrar_mensaje('No existe ninguna compañía configurada en CONTABILIDAD.', 'stop')
-	EXIT PROGRAM
-END IF
-SELECT MAX(b01_nivel) INTO vm_nivel FROM ctbt001
-IF vm_nivel IS NULL THEN
-	CALL fl_mostrar_mensaje('No existe ningun nivel de cuenta configurado en la compañía.','stop')
 	EXIT PROGRAM
 END IF
 CALL fl_lee_conf_adic_rol(vg_codcia) RETURNING rm_n90.*
@@ -3960,7 +3954,7 @@ INPUT BY NAME rm_n45.n45_tipo_pago, rm_n45.n45_bco_empresa,
                         END IF
                 END IF
 		IF INFIELD(n45_cta_trabaj) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_n45.n45_cta_trabaj = r_b10.b10_cuenta

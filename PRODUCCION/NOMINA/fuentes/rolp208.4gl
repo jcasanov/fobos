@@ -43,7 +43,6 @@ DEFINE rm_adi		ARRAY[300] OF RECORD
 			END RECORD
 DEFINE rm_b00		RECORD LIKE ctbt000.*
 DEFINE vm_proceso       LIKE rolt036.n36_proceso
-DEFINE vm_nivel		LIKE ctbt001.b01_nivel
 DEFINE vm_filas_pant 	INTEGER
 DEFINE vm_numelm 	INTEGER
 DEFINE vm_maxelm 	INTEGER
@@ -112,11 +111,7 @@ IF rm_b00.b00_compania IS NULL THEN
 	CALL fl_mostrar_mensaje('No existe ninguna compañía configurada en CONTABILIDAD.', 'stop')
 	EXIT PROGRAM
 END IF
-SELECT MAX(b01_nivel) INTO vm_nivel FROM ctbt001
-IF vm_nivel IS NULL THEN
-	CALL fl_mostrar_mensaje('No existe ningun nivel de cuenta configurado en la compañía.','stop')
-	EXIT PROGRAM
-END IF
+
 CALL fl_lee_parametro_general_roles() RETURNING rm_n00.*
 IF rm_n00.n00_serial IS NULL THEN
 	CALL fl_mostrar_mensaje('No existe configuración general para este módulo.', 'stop')
@@ -1269,7 +1264,7 @@ INPUT BY NAME rm_n48.n48_tipo_pago, rm_n48.n48_bco_empresa,
                         END IF
                 END IF
 		IF INFIELD(n48_cta_trabaj) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_n48.n48_cta_trabaj = r_b10.b10_cuenta

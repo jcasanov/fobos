@@ -9,7 +9,6 @@
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
 DEFINE rm_g01		RECORD LIKE gent001.*
-DEFINE vm_nivel		LIKE ctbt001.b01_nivel
 DEFINE rm_par 		RECORD 
 				g13_moneda	LIKE gent013.g13_moneda,
 				g13_nombre	LIKE gent013.g13_nombre,
@@ -125,11 +124,7 @@ ELSE
 	OPEN FORM f_rep FROM "../forms/ordf401_1c"
 END IF
 DISPLAY FORM f_rep
-SELECT MAX(b01_nivel) INTO vm_nivel FROM ctbt001
-IF vm_nivel IS NULL THEN
-	CALL fl_mostrar_mensaje('No existe ningun nivel de cuenta configurado en la compania.','stop')
-	EXIT PROGRAM
-END IF
+
 FOR i = 1 TO num_ord
 	LET rm_ord[i].chk_asc  = 'S'
 	LET rm_ord[i].chk_desc = 'N'
@@ -405,7 +400,7 @@ INPUT BY NAME rm_par.g13_moneda, rm_par.fecha_ini, rm_par.fecha_fin,
 			END IF
 		END IF
 		IF INFIELD(c01_aux_cont) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
 			LET int_flag = 0
 			IF r_b10.b10_cuenta IS NOT NULL THEN

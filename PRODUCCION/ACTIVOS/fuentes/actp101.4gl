@@ -8,7 +8,6 @@
 --------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_last_lvl		LIKE ctbt001.b01_nivel
 DEFINE rm_a01			RECORD LIKE actt001.*
 DEFINE activo 			ARRAY[1000] OF INTEGER 
 DEFINE vm_indice		INTEGER
@@ -59,13 +58,6 @@ OPEN WINDOW w_actf101_1 AT 3,2 WITH 22 ROWS, 80 COLUMNS
 OPEN FORM f_actf101_1 FROM '../forms/actf101_1'
 DISPLAY FORM f_actf101_1
 INITIALIZE rm_a01.* TO NULL
-
-INITIALIZE vm_last_lvl TO NULL
-SELECT MAX(b01_nivel) INTO vm_last_lvl FROM ctbt001 
-IF vm_last_lvl IS NULL THEN
-	CALL fl_mostrar_mensaje('No se han configurado los niveles de cuenta.', 'exclamation')
-	EXIT PROGRAM
-END IF
 
 LET vm_num_rows = 0
 LET vm_indice   = 0
@@ -204,7 +196,7 @@ CONSTRUCT BY NAME expr_sql ON a01_grupo_act, a01_nombre, a01_depreciable,
 	
 
 		IF INFIELD(a01_aux_activo) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_last_lvl) 
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1) 
 				RETURNING cuenta, descripcion
 			IF cuenta IS NOT NULL THEN
 				LET rm_a01.a01_aux_activo = cuenta
@@ -216,7 +208,7 @@ CONSTRUCT BY NAME expr_sql ON a01_grupo_act, a01_nombre, a01_depreciable,
 	
 
 		IF INFIELD(a01_aux_reexpr) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_last_lvl) 
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1) 
 				RETURNING cuenta, descripcion
 			IF cuenta IS NOT NULL THEN
 				LET rm_a01.a01_aux_reexpr = cuenta
@@ -228,7 +220,7 @@ CONSTRUCT BY NAME expr_sql ON a01_grupo_act, a01_nombre, a01_depreciable,
 
 
 		IF INFIELD(a01_aux_dep_act) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_last_lvl) 
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1) 
 				RETURNING cuenta, descripcion
 			IF cuenta IS NOT NULL THEN
 				LET rm_a01.a01_aux_dep_act = cuenta
@@ -240,7 +232,7 @@ CONSTRUCT BY NAME expr_sql ON a01_grupo_act, a01_nombre, a01_depreciable,
 
 
 		IF INFIELD(a01_aux_dep_reex) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_last_lvl) 
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1) 
 				RETURNING cuenta, descripcion
 			IF cuenta IS NOT NULL THEN
 				LET rm_a01.a01_aux_dep_reex = cuenta
@@ -252,7 +244,7 @@ CONSTRUCT BY NAME expr_sql ON a01_grupo_act, a01_nombre, a01_depreciable,
 
 
 		IF INFIELD(a01_aux_pago) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_last_lvl) 
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1) 
 				RETURNING cuenta, descripcion
 			IF cuenta IS NOT NULL THEN
 				LET rm_a01.a01_aux_pago = cuenta
@@ -264,7 +256,7 @@ CONSTRUCT BY NAME expr_sql ON a01_grupo_act, a01_nombre, a01_depreciable,
 
 
 		IF INFIELD(a01_aux_iva) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_last_lvl) 
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1) 
 				RETURNING cuenta, descripcion
 			IF cuenta IS NOT NULL THEN
 				LET rm_a01.a01_aux_iva = cuenta
@@ -276,7 +268,7 @@ CONSTRUCT BY NAME expr_sql ON a01_grupo_act, a01_nombre, a01_depreciable,
 
 
 		IF INFIELD(a01_aux_venta) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_last_lvl) 
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1) 
 				RETURNING cuenta, descripcion
 			IF cuenta IS NOT NULL THEN
 				LET rm_a01.a01_aux_venta = cuenta
@@ -288,7 +280,7 @@ CONSTRUCT BY NAME expr_sql ON a01_grupo_act, a01_nombre, a01_depreciable,
 
 
 		IF INFIELD(a01_aux_gasto) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_last_lvl) 
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1) 
 				RETURNING cuenta, descripcion
 			IF cuenta IS NOT NULL THEN
 				LET rm_a01.a01_aux_gasto = cuenta
@@ -299,7 +291,7 @@ CONSTRUCT BY NAME expr_sql ON a01_grupo_act, a01_nombre, a01_depreciable,
 		END IF
 
 		IF INFIELD(a01_aux_transf) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_last_lvl) 
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1) 
 				RETURNING cuenta, descripcion
 			IF cuenta IS NOT NULL THEN
 				LET rm_a01.a01_aux_transf = cuenta
@@ -486,7 +478,7 @@ INPUT BY NAME rm_a01.a01_grupo_act, rm_a01.a01_nombre,
 
 	ON KEY(F2)
 		IF INFIELD(a01_aux_activo) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_last_lvl) 
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1) 
 				RETURNING cuenta, descripcion
 			IF cuenta IS NOT NULL THEN
 				LET rm_a01.a01_aux_activo = cuenta
@@ -496,7 +488,7 @@ INPUT BY NAME rm_a01.a01_grupo_act, rm_a01.a01_nombre,
 		END IF
 
 		IF INFIELD(a01_aux_reexpr) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_last_lvl) 
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1) 
 				RETURNING cuenta, descripcion
 			IF cuenta IS NOT NULL THEN
 				LET rm_a01.a01_aux_reexpr = cuenta
@@ -506,7 +498,7 @@ INPUT BY NAME rm_a01.a01_grupo_act, rm_a01.a01_nombre,
 		END IF 
 
 		IF INFIELD(a01_aux_dep_act) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_last_lvl) 
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1) 
 				RETURNING cuenta, descripcion
 			IF cuenta IS NOT NULL THEN
 				LET rm_a01.a01_aux_dep_act = cuenta
@@ -516,7 +508,7 @@ INPUT BY NAME rm_a01.a01_grupo_act, rm_a01.a01_nombre,
 		END IF 
 
 		IF INFIELD(a01_aux_dep_reex) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_last_lvl) 
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1) 
 				RETURNING cuenta, descripcion
 			IF cuenta IS NOT NULL THEN
 				LET rm_a01.a01_aux_dep_reex = cuenta
@@ -526,7 +518,7 @@ INPUT BY NAME rm_a01.a01_grupo_act, rm_a01.a01_nombre,
 		END IF
 
 		IF INFIELD(a01_aux_pago) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_last_lvl) 
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1) 
 				RETURNING cuenta, descripcion
 			IF cuenta IS NOT NULL THEN
 				LET rm_a01.a01_aux_pago = cuenta
@@ -539,7 +531,7 @@ INPUT BY NAME rm_a01.a01_grupo_act, rm_a01.a01_nombre,
 			IF rm_a01.a01_paga_iva = 'N' THEN
 				CONTINUE INPUT
 			END IF
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_last_lvl) 
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1) 
 				RETURNING cuenta, descripcion
 			IF cuenta IS NOT NULL THEN
 				LET rm_a01.a01_aux_iva = cuenta
@@ -549,7 +541,7 @@ INPUT BY NAME rm_a01.a01_grupo_act, rm_a01.a01_nombre,
 		END IF
 
 		IF INFIELD(a01_aux_venta) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_last_lvl) 
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1) 
 				RETURNING cuenta, descripcion
 			IF cuenta IS NOT NULL THEN
 				LET rm_a01.a01_aux_venta = cuenta
@@ -559,7 +551,7 @@ INPUT BY NAME rm_a01.a01_grupo_act, rm_a01.a01_nombre,
 		END IF
 
 		IF INFIELD(a01_aux_gasto) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_last_lvl) 
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1) 
 				RETURNING cuenta, descripcion
 			IF cuenta IS NOT NULL THEN
 				LET rm_a01.a01_aux_gasto = cuenta
@@ -569,7 +561,7 @@ INPUT BY NAME rm_a01.a01_grupo_act, rm_a01.a01_nombre,
 		END IF
 
 		IF INFIELD(a01_aux_transf) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_last_lvl) 
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1) 
 				RETURNING cuenta, descripcion
 			IF cuenta IS NOT NULL THEN
 				LET rm_a01.a01_aux_transf = cuenta

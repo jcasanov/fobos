@@ -265,7 +265,7 @@ CONSTRUCT BY NAME expr_sql ON z00_compania, z00_credit_auto, z00_bloq_vencido,
 			END IF 
 		END IF
 		IF INFIELD(z00_aux_clte_mb) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING cod_aux, nom_aux
 			LET int_flag = 0
 			IF cod_aux IS NOT NULL THEN
@@ -274,7 +274,7 @@ CONSTRUCT BY NAME expr_sql ON z00_compania, z00_credit_auto, z00_bloq_vencido,
 			END IF 
 		END IF
 		IF INFIELD(z00_aux_clte_ma) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING cod_aux, nom_aux
 			LET int_flag = 0
 			IF cod_aux IS NOT NULL THEN
@@ -283,7 +283,7 @@ CONSTRUCT BY NAME expr_sql ON z00_compania, z00_credit_auto, z00_bloq_vencido,
 			END IF 
 		END IF
 		IF INFIELD(z00_aux_ant_mb) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING cod_aux, nom_aux
 			LET int_flag = 0
 			IF cod_aux IS NOT NULL THEN
@@ -292,7 +292,7 @@ CONSTRUCT BY NAME expr_sql ON z00_compania, z00_credit_auto, z00_bloq_vencido,
 			END IF 
 		END IF
 		IF INFIELD(z00_aux_ant_ma) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING cod_aux, nom_aux
 			LET int_flag = 0
 			IF cod_aux IS NOT NULL THEN
@@ -398,7 +398,7 @@ INPUT BY NAME rm_cxc.z00_compania, rm_cxc.z00_credit_auto,
 			END IF 
 		END IF
 		IF INFIELD(z00_aux_clte_mb) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING cod_aux, nom_aux
 			LET int_flag = 0
 			IF cod_aux IS NOT NULL THEN
@@ -408,7 +408,7 @@ INPUT BY NAME rm_cxc.z00_compania, rm_cxc.z00_credit_auto,
 			END IF 
 		END IF
 		IF INFIELD(z00_aux_clte_ma) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING cod_aux, nom_aux
 			LET int_flag = 0
 			IF cod_aux IS NOT NULL THEN
@@ -418,7 +418,7 @@ INPUT BY NAME rm_cxc.z00_compania, rm_cxc.z00_credit_auto,
 			END IF 
 		END IF
 		IF INFIELD(z00_aux_ant_mb) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING cod_aux, nom_aux
 			LET int_flag = 0
 			IF cod_aux IS NOT NULL THEN
@@ -428,7 +428,7 @@ INPUT BY NAME rm_cxc.z00_compania, rm_cxc.z00_credit_auto,
 			END IF 
 		END IF
 		IF INFIELD(z00_aux_ant_ma) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING cod_aux, nom_aux
 			LET int_flag = 0
 			IF cod_aux IS NOT NULL THEN

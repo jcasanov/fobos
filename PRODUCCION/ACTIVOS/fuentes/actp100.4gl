@@ -238,7 +238,7 @@ CONSTRUCT BY NAME expr_sql ON a00_compania, a00_aux_reexp, a00_ind_reexp,
 			END IF
         	END IF
 		IF infield(a00_aux_reexp) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, 6)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING cod_aux, nom_aux
 			LET int_flag = 0
 			IF cod_aux IS NOT NULL THEN
@@ -335,7 +335,7 @@ INPUT BY NAME rm_a00.a00_compania, rm_a00.a00_aux_reexp, rm_a00.a00_ind_reexp,
 			END IF
         	END IF
 		IF infield(a00_aux_reexp) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, 6)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING cod_aux, nom_aux
 			LET int_flag = 0
 			IF cod_aux IS NOT NULL THEN

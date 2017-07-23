@@ -239,13 +239,7 @@ DEFINE cont_cred	LIKE cajt001.j01_cont_cred
 DEFINE query		CHAR(800)
 DEFINE expr_sql		CHAR(500)
 DEFINE num_reg		INTEGER
-DEFINE last_lvl		SMALLINT
 
-SELECT MAX(b01_nivel) INTO last_lvl FROM ctbt001
-IF last_lvl IS NULL THEN
-	CALL fl_mostrar_mensaje('No se ha configurado el plan de cuentas.','stop')
-	EXIT PROGRAM
-END IF
 CLEAR FORM
 LET int_flag = 0
 CONSTRUCT BY NAME expr_sql ON j01_codigo_pago, j01_nombre, j01_estado,
@@ -264,7 +258,7 @@ CONSTRUCT BY NAME expr_sql ON j01_codigo_pago, j01_nombre, j01_estado,
 			END IF 
 		END IF
 		IF INFIELD(j01_aux_cont) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, last_lvl)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING r_b10.b10_cuenta, 
 					  r_b10.b10_descripcion 
 			IF r_b10.b10_cuenta IS NOT NULL THEN
@@ -325,13 +319,7 @@ DEFINE resp		CHAR(6)
 DEFINE r_j01	RECORD LIKE cajt001.*
 
 DEFINE r_b10		RECORD LIKE ctbt010.*
-DEFINE last_lvl		SMALLINT
 
-SELECT MAX(b01_nivel) INTO last_lvl FROM ctbt001
-IF last_lvl IS NULL THEN
-	CALL fl_mostrar_mensaje('No se ha configurado el plan de cuentas.','stop')
-	EXIT PROGRAM
-END IF
 INITIALIZE r_j01.* TO NULL
 DISPLAY BY NAME rm_j01.j01_usuario, rm_j01.j01_fecing, rm_j01.j01_estado
 LET int_flag = 0
@@ -364,7 +352,7 @@ INPUT BY NAME rm_j01.j01_codigo_pago, rm_j01.j01_nombre, rm_j01.j01_aux_cont,
                 END IF
 	ON KEY(F2)
 		IF INFIELD(j01_aux_cont) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, last_lvl)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING r_b10.b10_cuenta, 
 					  r_b10.b10_descripcion 
 			IF r_b10.b10_cuenta IS NOT NULL THEN

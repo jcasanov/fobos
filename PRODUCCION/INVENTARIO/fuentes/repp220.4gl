@@ -2476,7 +2476,7 @@ INPUT BY NAME rm_r16.r16_pedido,    rm_r16.r16_tipo,      rm_r16.r16_linea,
                         END IF
                 END IF
 		IF infield(r16_aux_cont) THEN
-                        CALL fl_ayuda_cuenta_contable(vg_codcia,6)
+                        CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
                                 RETURNING r_b10.b10_cuenta,r_b10.b10_descripcion
                         IF r_b10.b10_cuenta IS NOT NULL THEN
 				LET rm_r16.r16_aux_cont = r_b10.b10_cuenta
