@@ -2079,7 +2079,12 @@ IF vm_flag_llam = 'I' THEN
 		LET r_detalle[k].c11_precio    = r_r22.r22_precio
 		LET r_detalle[k].subtotal      = r_r22.r22_precio * r_r22.r22_cantidad
 		LET r_detalle[k].paga_iva      = 'S'
+		LET k = k + 1
 	END FOREACH
+	LET k = k - 1
+	IF k < 1 THEN
+		LET k = 1
+	END IF
 	CALL set_count(k)
 	LET max_row = k
 END IF
