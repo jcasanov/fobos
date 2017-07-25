@@ -256,6 +256,7 @@ DEFINE r_r01		RECORD LIKE rept001.*
 DEFINE r_r21		RECORD LIKE rept021.*
 DEFINE r_r23		RECORD LIKE rept023.*
 DEFINE r_j10		RECORD LIKE cajt010.*
+DEFINE r_g31		RECORD LIKE gent031.*
 DEFINE r_j11		RECORD LIKE cajt011.*
 DEFINE fecha_vcto	DATE
 DEFINE valor_efec	DECIMAL(14,2)
@@ -373,6 +374,9 @@ PAGE HEADER
 	LET v_r      = valor_rete USING "###,###,##&.##"
 	LET v_c      = valor_cred USING "###,###,##&.##"
 	CALL fl_lee_cliente_general(rm_r19.r19_codcli) RETURNING r_z01.*
+	CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc, rm_r19.r19_codcli)
+		RETURNING r_z02.*
+	CALL fl_lee_ciudad(r_z01.z01_ciudad) RETURNING r_g31.*
 	SKIP 4 LINES
 	print ASCII escape;
 	print ASCII act_comp
@@ -391,13 +395,14 @@ PAGE HEADER
 					ASCII escape, ASCII act_neg,
 				" ", DATE(rm_r19.r19_fecing) USING "dd-mm-yyyy",
 		ASCII escape, ASCII des_neg
-	SKIP 1 LINES
+	PRINT COLUMN 010, r_z02.z02_referencia CLIPPED
 	print ASCII escape;
 	print ASCII act_comp;
 	PRINT COLUMN 015, rm_r19.r19_dircli
 	PRINT COLUMN 013, rm_r19.r19_cedruc
 	PRINT COLUMN 098, (fecha_vcto - DATE(rm_r19.r19_fecing) + 1) USING "##0"
-	SKIP 2 LINES
+	PRINT COLUMN 060, r_g31.g31_nombre CLIPPED
+	SKIP 1 LINES
 
 ON EVERY ROW
 	NEED 2 LINES
@@ -409,8 +414,6 @@ ON EVERY ROW
 	      COLUMN 118, r_rep.valor_tot	USING '###,###,##&.##'
 	
 PAGE TRAILER
-	CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc, rm_r19.r19_codcli)
-		RETURNING r_z02.*
 	PRINT COLUMN 002, ASCII escape, ASCII act_dob1, ASCII des_dob,
 		ASCII escape, ASCII act_10cpi, ASCII escape, ASCII des_neg,
 		ASCII escape, ASCII act_comp,

@@ -1,8 +1,9 @@
 ------------------------------------------------------------------------------
 -- Titulo           : ordp200.4gl - Mantenimineto de Ordenes de Compra
 -- Elaboracion      : 14-nov-2001
--- Autor            : GVA
--- Formato Ejecucion: fglrun ordp200 base modulo compania localidad
+-- Autor            : NPC
+-- Formato Ejecucion: fglrun ordp200 base modulo compania localidad [num_oc]
+--	 En modo ingreso: fglrun ordp200 base mod cia loc I tipo numprof vend
 -- Ultima Correccion: 
 -- Motivo Correccion: 
 ------------------------------------------------------------------------------
@@ -101,6 +102,10 @@ DEFINE tot_int			LIKE ordt010.c10_tot_compra
 DEFINE tot_sub			LIKE ordt010.c10_tot_compra
 ---------------------------------------------------------------
 DEFINE vm_activo_mod		LIKE ordt001.c01_modulo
+DEFINE vm_flag_llam		CHAR(1)
+DEFINE vm_tipo_oc		LIKE ordt010.c10_tipo_orden
+DEFINE vm_numprof		LIKE rept021.r21_numprof
+DEFINE vm_vendedor		LIKE rept001.r01_codigo
 
 
 
@@ -112,7 +117,8 @@ CLEAR SCREEN
 CALL startlog('../logs/ordp200.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
-IF num_args() <> 4 AND num_args() <> 5 THEN     -- Validar # parametros correcto
+IF num_args() <> 4 AND num_args() <> 5 AND num_args() <> 8
+THEN     -- Validar # parametros correcto
 	CALL fl_mostrar_mensaje('Número de parametros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
@@ -120,7 +126,15 @@ LET vg_base    = arg_val(1)
 LET vg_modulo  = arg_val(2)
 LET vg_codcia  = arg_val(3)
 LET vg_codloc  = arg_val(4)
-LET vg_num_ord = arg_val(5)
+IF num_args() = 5 THEN
+	LET vg_num_ord = arg_val(5)
+END IF
+IF num_args() = 8 THEN
+	LET vm_flag_llam = arg_val(5)
+	LET vm_tipo_oc   = arg_val(6)
+	LET vm_numprof   = arg_val(7)
+	LET vm_vendedor  = arg_val(8)
+END IF
 LET vg_proceso = 'ordp200'
 
 CALL fl_activar_base_datos(vg_base)
@@ -226,11 +240,15 @@ MENU 'OPCIONES'
                        	 	SHOW OPTION 'Avanzar Detalle'
                 	END IF
 		END IF 
+		IF vm_flag_llam = 'I' THEN
+			CALL control_ingreso()
+			EXIT MENU
+		END IF
 
 	COMMAND KEY('I') 'Ingresar' 		'Ingresar nuevos registros.'
                 HIDE OPTION 'Avanzar Detalle'
                 HIDE OPTION 'Retroceder Detalle'
-                CALL control_ingreso()
+				CALL control_ingreso()
                 HIDE OPTION 'Ver Recepción'
                	HIDE OPTION 'Ver Anulación'
 		IF vm_num_rows >= 1 THEN
@@ -1500,6 +1518,11 @@ END IF
 LET rm_c10.c10_cod_sust_sri = r_s23.s23_sustento_sri
 LET rm_c10.c10_base_ice     = 0
 LET rm_c10.c10_valor_ice    = 0
+IF vm_flag_llam = 'I' THEN
+	LET rm_c10.c10_estado      = 'P'
+	LET rm_c10.c10_usua_aprob  = vg_usuario
+	LET rm_c10.c10_fecha_aprob = CURRENT
+END IF
 INSERT INTO ordt010 VALUES (rm_c10.*)
 DISPLAY BY NAME rm_c10.c10_numero_oc
 
@@ -1602,9 +1625,23 @@ DEFINE done		SMALLINT
 DEFINE r_b43		RECORD LIKE ctbt043.*
 DEFINE r_s23_s		RECORD LIKE srit023.*
 DEFINE r_s23_n		RECORD LIKE srit023.*
+DEFINE r_r01		RECORD LIKE rept001.*
 
 LET int_flag = 0
 CALL calcula_totales(vm_num_detalles,1)
+IF vm_flag_llam = 'I' THEN
+	LET rm_c10.c10_tipo_orden = vm_tipo_oc
+	LET rm_c10.c10_cod_depto  = 1
+	LET rm_c10.c10_numprof    = vm_numprof
+	CALL fl_lee_vendedor_rep(vg_codcia, vm_vendedor) RETURNING r_r01.*
+	LET rm_c10.c10_solicitado = r_r01.r01_nombres
+	CALL fl_lee_tipo_orden_compra(rm_c10.c10_tipo_orden) RETURNING rm_c01.*
+	CALL fl_lee_departamento(vg_codcia, rm_c10.c10_cod_depto) RETURNING rm_g34.*
+	DISPLAY BY NAME rm_c10.c10_cod_depto, rm_c10.c10_tipo_orden,
+					rm_c10.c10_numprof
+	DISPLAY rm_g34.g34_nombre TO nom_departamento
+	DISPLAY rm_c01.c01_nombre TO nom_tipo_orden
+END IF
 DISPLAY BY NAME rm_c10.c10_dif_cuadre, rm_c10.c10_usuario
 INPUT BY NAME valor_fact, 
               rm_c10.c10_moneda,       rm_c10.c10_tipo_orden,
@@ -1614,13 +1651,13 @@ INPUT BY NAME valor_fact,
               rm_c10.c10_recargo,      rm_c10.c10_solicitado,
 	      rm_c10.c10_ord_trabajo,  rm_c10.c10_tipo_pago,   
 	      rm_c10.c10_referencia ,  rm_c10.c10_otros,
-	      rm_c10.c10_flete
+	      rm_c10.c10_flete, rm_c10.c10_numprof
 	      WITHOUT DEFAULTS
 	ON KEY (INTERRUPT)
 		IF NOT FIELD_TOUCHED(c10_cod_depto,  c10_tipo_orden,
 				     c10_codprov,    c10_atencion, 
 				     c10_solicitado, c10_ord_trabajo,
-				     c10_referencia)
+				     c10_referencia, rm_c10.c10_numprof)
 		THEN
 			RETURN
 		END IF
@@ -1679,6 +1716,11 @@ INPUT BY NAME valor_fact,
 		END IF
 
 		IF INFIELD(c10_ord_trabajo) THEN
+			IF vm_flag_llam = 'I' THEN
+				LET rm_c10.c10_ord_trabajo = NULL
+				DISPLAY BY NAME rm_c10.c10_ord_trabajo
+				CONTINUE INPUT
+			END IF
 			CALL fl_ayuda_orden_trabajo(vg_codcia, vg_codloc,'A')
 				RETURNING rm_t23.t23_orden, 
 					  rm_t23.t23_nom_cliente
@@ -1878,6 +1920,11 @@ INPUT BY NAME valor_fact,
 		END IF
 
 	AFTER FIELD c10_ord_trabajo
+		IF vm_flag_llam = 'I' THEN
+			LET rm_c10.c10_ord_trabajo = NULL
+			DISPLAY BY NAME rm_c10.c10_ord_trabajo
+			CONTINUE INPUT
+		END IF
 		IF rm_c10.c10_ord_trabajo IS NOT NULL THEN
 			CALL fl_lee_orden_trabajo(vg_codcia, vg_codloc,
 						  rm_c10.c10_ord_trabajo)
@@ -1989,6 +2036,8 @@ DEFINE r_a10		RECORD LIKE actt010.*
 DEFINE valor_bien	LIKE actt010.a10_valor
 DEFINE grupo		LIKE actt010.a10_grupo_act
 DEFINE tipo		LIKE actt010.a10_tipo_act
+DEFINE r_r10		RECORD LIKE rept010.*
+DEFINE r_r22		RECORD LIKE rept022.*
 
 CALL retorna_tam_arr()
 LET vm_filas_pant  = vm_size_arr
@@ -2007,6 +2056,32 @@ IF vm_flag_mant <> 'M' THEN
 ELSE 
 	CALL set_count(vm_ind_arr)
 	LET max_row = vm_ind_arr
+END IF
+
+IF vm_flag_llam = 'I' THEN
+	INITIALIZE r_r10.*, r_r22.* TO NULL
+	DECLARE q_r22 CURSOR FOR
+		SELECT rept022.*, r10_nombre
+			FROM rept022, rept010
+			WHERE r22_compania  = vg_codcia
+			  AND r22_localidad = vg_codloc
+			  AND r22_numprof   = vm_numprof
+			  AND r10_compania  = r22_compania
+			  AND r10_codigo    = r22_item
+			ORDER BY r22_orden ASC
+	LET k = 1
+	FOREACH q_r22 INTO r_r22.*, r_r10.r10_nombre
+		LET r_detalle[k].c11_tipo      = 'S'
+		LET r_detalle[k].c11_cant_ped  = r_r22.r22_cantidad
+		LET r_detalle[k].c11_codigo    = r_r22.r22_item
+		LET r_detalle[k].c11_descrip   = r_r10.r10_nombre
+		LET r_detalle[k].c11_descuento = r_r22.r22_porc_descto
+		LET r_detalle[k].c11_precio    = r_r22.r22_precio
+		LET r_detalle[k].subtotal      = r_r22.r22_precio * r_r22.r22_cantidad
+		LET r_detalle[k].paga_iva      = 'S'
+	END FOREACH
+	CALL set_count(k)
+	LET max_row = k
 END IF
 
 CALL fl_lee_tipo_orden_compra(rm_c10.c10_tipo_orden) RETURNING r_c01.*

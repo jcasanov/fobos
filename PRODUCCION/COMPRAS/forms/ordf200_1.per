@@ -9,7 +9,7 @@ SCREEN
      Atención:[c15                    ]   Solicitado Por:[c16                ]
 Orden Trabajo:[c17   ] [c18                 ] Forma Pago:[c31         ] 
    Referencia:[c19                          ]
-      Usuario:[c052      ]                                    [c050] de [c051]
+      Usuario:[c052      ]  Proforma Inventario: [c053    ]   [c050] de [c051]
  [b|b0        |b1      |b2                      |b3   |b4        |b5        ]
 [a|c20       |c21   ] [c22                     |c23  |c24       |c25       |y] 
 [a|c20       |c21   ] [c22                     |c23  |c24       |c25       |y] 
@@ -112,6 +112,8 @@ c050 = FORMONLY.num_row, REVERSE, UPSHIFT, NOENTRY;
 c051 = FORMONLY.max_row, REVERSE, UPSHIFT, NOENTRY;
 
 c052 = ordt010.c10_usuario, NOENTRY, UPSHIFT, REVERSE;
+c053 = ordt010.c10_numprof, NOENTRY, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 END
 INSTRUCTIONS 
 DELIMITERS '||'
