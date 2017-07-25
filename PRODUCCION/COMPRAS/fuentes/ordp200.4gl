@@ -2071,7 +2071,13 @@ IF vm_flag_llam = 'I' THEN
 			ORDER BY r22_orden ASC
 	LET k = 1
 	FOREACH q_r22 INTO r_r22.*, r_r10.r10_nombre
-		LET r_detalle[k].c11_tipo      = 'S'
+		IF vm_tipo <> 'T' THEN
+			LET r_detalle[k].c11_tipo = vm_tipo
+		ELSE
+			IF r_detalle[k].c11_tipo IS NULL THEN
+				LET r_detalle[k].c11_tipo = 'S'
+			END IF
+		END IF
 		LET r_detalle[k].c11_cant_ped  = r_r22.r22_cantidad
 		LET r_detalle[k].c11_codigo    = r_r22.r22_item
 		LET r_detalle[k].c11_descrip   = r_r10.r10_nombre
@@ -2671,7 +2677,8 @@ IF num_args() = 4 THEN
 		  ON c10_numero_oc,   c10_estado,    c10_moneda,  c10_fecing,	
 	             c10_tipo_orden,  c10_cod_depto, c10_codprov, c10_atencion, 
 		     c10_porc_descto, c10_recargo,   c10_solicitado,
-	             c10_ord_trabajo, c10_tipo_pago, c10_referencia, c10_usuario
+	             c10_ord_trabajo, c10_tipo_pago, c10_referencia, c10_usuario,
+			c10_numprof
         ON KEY(F1,CONTROL-W)
 		CALL llamar_visor_teclas()
 	ON KEY(F2)
@@ -2831,7 +2838,8 @@ DISPLAY BY NAME rm_c10.c10_numero_oc, rm_c10.c10_estado,  rm_c10.c10_moneda,
 		rm_c10.c10_tipo_pago,  rm_c10.c10_referencia, 
 		rm_c10.c10_solicitado, rm_c10.c10_tot_compra, 
 		rm_c10.c10_tot_impto,  rm_c10.c10_flete, rm_c10.c10_otros,
-		valor_fact, rm_c10.c10_dif_cuadre, rm_c10.c10_usuario
+		valor_fact, rm_c10.c10_dif_cuadre, rm_c10.c10_usuario,
+		rm_c10.c10_numprof
 
 IF vg_gui = 0 THEN
 	CALL muestra_tipopago(rm_c10.c10_tipo_pago)
