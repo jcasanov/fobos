@@ -2009,12 +2009,14 @@ END IF
 --} 
 CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc, rm_r21.r21_codcli)
 	RETURNING r_z02.*
+{--
 IF r_z02.z02_email IS NULL THEN	
 	CALL fl_mostrar_mensaje('Cliente no tiene registrado el correo electrónico para esta localidad.','exclamation')
 	RETURN
 ELSE
 	CALL fl_mostrar_mensaje('Cliente tiene registrado este correo electrónico para esta localidad: ' || r_z02.z02_email CLIPPED || '.', 'info')
 END IF
+--}
 IF rm_r21.r21_trans_fact = 'S' THEN
 	IF cuantos = 0 THEN
 		CALL fl_mostrar_mensaje('Esta Proforma no se puede convertir en Pre-Venta, porque no se va a transmitir hacia otra localidad. Falta la bodega SIN STOCK.', 'exclamation')
