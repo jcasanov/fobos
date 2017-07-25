@@ -398,11 +398,11 @@ PAGE HEADER
 	PRINT COLUMN 010, r_z02.z02_referencia CLIPPED
 	print ASCII escape;
 	print ASCII act_comp;
-	PRINT COLUMN 015, rm_r19.r19_dircli
+	PRINT COLUMN 015, rm_r19.r19_dircli,
+	      COLUMN 066, r_g31.g31_nombre CLIPPED
 	PRINT COLUMN 013, rm_r19.r19_cedruc
 	PRINT COLUMN 098, (fecha_vcto - DATE(rm_r19.r19_fecing) + 1) USING "##0"
-	PRINT COLUMN 060, r_g31.g31_nombre CLIPPED
-	SKIP 1 LINES
+	SKIP 2 LINES
 
 ON EVERY ROW
 	NEED 2 LINES
