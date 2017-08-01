@@ -45,7 +45,7 @@ c013 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
 c014 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19'; 
 c015 = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20'; 
 
-c020 = ordt004.c04_cod_pedido, AUTONEXT, UPSHIFT, OPTIONS = '-nolist';
+c020 = ordt004.c04_cod_item, AUTONEXT, UPSHIFT, OPTIONS = '-nolist';
 c021 = rept010.r10_nombre, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
 c022 = rept010.r10_precio_mb, NOENTRY, UPSHIFT, FORMAT = "##,##&.##",
 		OPTIONS = '-nolist';
@@ -66,5 +66,5 @@ KEYS
 F5 = 'Ver Item'
 INSTRUCTIONS
 DELIMITERS '||'
-SCREEN RECORD rm_detalle[11] (c04_cod_pedido, r10_nombre, r10_precio_mb,
+SCREEN RECORD rm_detalle[11] (c04_cod_item, r10_nombre, r10_precio_mb,
 								c04_pvp_prov_sug, c04_desc_prov, c04_costo_prov)

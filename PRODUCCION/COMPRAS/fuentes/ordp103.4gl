@@ -21,7 +21,7 @@ DEFINE rm_par	 		RECORD
 							c04_fecing			LIKE ordt004.c04_fecing
 						END RECORD
 DEFINE rm_detalle		ARRAY [2000] OF RECORD
-							c04_cod_pedido		LIKE ordt004.c04_cod_pedido,
+							c04_cod_item  		LIKE ordt004.c04_cod_item,
 							r10_nombre			LIKE rept010.r10_nombre,
 							r10_precio_mb		LIKE rept010.r10_precio_mb,
 							c04_pvp_prov_sug	LIKE ordt004.c04_pvp_prov_sug,
@@ -187,7 +187,7 @@ END FUNCTION
 FUNCTION cargar_detalle()
 DEFINE query		CHAR(1500)
 
-LET query = 'SELECT c04_cod_pedido, r10_nombre, r10_precio_mb, ',
+LET query = 'SELECT c04_cod_item, r10_nombre, r10_precio_mb, ',
 					'c04_pvp_prov_sug, c04_desc_prov, c04_costo_prov, ',
 					'r10_codigo, r10_precio_mb AS prec_ant, r72_desc_clase, ',
 					'r10_nombre AS desc_item ',
@@ -198,7 +198,7 @@ LET query = 'SELECT c04_cod_pedido, r10_nombre, r10_precio_mb, ',
 				'   AND c04_fecha_vigen = "', rm_par.c04_fecha_vigen, '"',
 				'   AND p01_codprov     = c04_codprov ',
 				'   AND r10_compania    = c04_compania ',
-				'   AND r10_cod_pedido  = c04_cod_pedido ',
+				'   AND r10_cod_pedido  = c04_cod_item ',
 				'   AND r72_compania    = r10_compania ',
 				'   AND r72_linea       = r10_linea ',
 				'   AND r72_sub_linea   = r10_sub_linea ',
@@ -270,11 +270,11 @@ INPUT ARRAY rm_detalle WITHOUT DEFAULTS FROM rm_detalle.*
 		ELSE
 			--#CALL dialog.keysetlabel("F5", "")
 		END IF
-	AFTER FIELD c04_cod_pedido
-		IF rm_detalle[i].c04_cod_pedido IS NOT NULL THEN
+	AFTER FIELD c04_cod_item
+		IF rm_detalle[i].c04_cod_item IS NOT NULL THEN
 			IF NOT llena_fila_detalle(i, j) THEN
 				CALL fl_mostrar_mensaje('Este código de pedido no existe en el maestro de ítems.', 'exclamation')
-				NEXT FIELD c04_cod_pedido
+				NEXT FIELD c04_cod_item
 			END IF
 			IF rm_adi[i].r10_codigo IS NOT NULL THEN
 				--#CALL dialog.keysetlabel("F5", "Ver Item")
@@ -286,9 +286,9 @@ INPUT ARRAY rm_detalle WITHOUT DEFAULTS FROM rm_detalle.*
 		LET salir = 0
 		FOR k = 1 TO vm_num_det - 1
 			FOR l = k + 1 TO vm_num_det
-				IF rm_detalle[k].c04_cod_pedido = rm_detalle[l].c04_cod_pedido
+				IF rm_detalle[k].c04_cod_item = rm_detalle[l].c04_cod_item
 				THEN
-					CALL fl_mostrar_mensaje('El código ' || rm_detalle[k].c04_cod_pedido CLIPPED || ' esta repetido, por favor corrijalo.', 'exclamation')
+					CALL fl_mostrar_mensaje('El código ' || rm_detalle[k].c04_cod_item CLIPPED || ' esta repetido, por favor corrijalo.', 'exclamation')
 					LET salir = 1
 					EXIT FOR
 				END IF
@@ -307,7 +307,7 @@ INPUT ARRAY rm_detalle WITHOUT DEFAULTS FROM rm_detalle.*
 				(rm_detalle[k].c04_pvp_prov_sug IS NOT NULL AND
 				 rm_detalle[k].c04_desc_prov IS NOT NULL))
 			THEN
-				CALL fl_mostrar_mensaje('El código ' || rm_detalle[k].c04_cod_pedido CLIPPED || ' SOLO debe tener PVP Sugerido o el descuento, por favor corrijalo.', 'exclamation')
+				CALL fl_mostrar_mensaje('El código ' || rm_detalle[k].c04_cod_item CLIPPED || ' SOLO debe tener PVP Sugerido o el descuento, por favor corrijalo.', 'exclamation')
 				LET salir = 1
 				EXIT FOR
 			END IF
@@ -333,7 +333,7 @@ LET query = 'SELECT rept010.*, rept072.* ',
 				' FROM rept010, rept072 ',
 				' WHERE r10_compania    = ', vg_codcia,
 				'   AND r10_cod_pedido  = "',
-							rm_detalle[i].c04_cod_pedido CLIPPED, '" ',
+							rm_detalle[i].c04_cod_item CLIPPED, '" ',
 				'   AND r72_compania    = r10_compania ',
 				'   AND r72_linea       = r10_linea ',
 				'   AND r72_sub_linea   = r10_sub_linea ',
@@ -385,17 +385,17 @@ SET LOCK MODE TO WAIT
 	LET grabo = 1
 	FOR i = 1 TO vm_num_det
 		INSERT INTO ordt004
-			(c04_compania, c04_localidad, c04_codprov, c04_cod_pedido,
+			(c04_compania, c04_localidad, c04_codprov, c04_cod_item,
 			 c04_fecha_vigen, c04_pvp_prov_sug, c04_desc_prov, c04_costo_prov,
 			 c04_usuario, c04_fecing)
 			VALUES (vg_codcia, vg_codloc, rm_par.c04_codprov,
-					rm_detalle[i].c04_cod_pedido, rm_par.c04_fecha_vigen,
+					rm_detalle[i].c04_cod_item, rm_par.c04_fecha_vigen,
 					rm_detalle[i].c04_pvp_prov_sug, rm_detalle[i].c04_desc_prov,
 					rm_detalle[i].c04_costo_prov, rm_par.c04_usuario, CURRENT)
 		IF STATUS <> 0 THEN
 			ROLLBACK WORK
 			WHENEVER ERROR STOP
-			CALL fl_mostrar_mensaje('No se pudo insertar el registro del código de pedido ' || rm_detalle[i].c04_cod_pedido CLIPPED || '. Por favor llame al administrador.', 'exclamation')
+			CALL fl_mostrar_mensaje('No se pudo insertar el registro del código de pedido ' || rm_detalle[i].c04_cod_item CLIPPED || '. Por favor llame al administrador.', 'exclamation')
 			LET grabo = 0
 			EXIT FOR
 		END IF
@@ -411,14 +411,14 @@ SET LOCK MODE TO WAIT
 		IF STATUS <> 0 THEN
 			ROLLBACK WORK
 			WHENEVER ERROR STOP
-			CALL fl_mostrar_mensaje('No se pudo actualizar precio en el registro del código de pedido ' || rm_detalle[i].c04_cod_pedido CLIPPED || '. Por favor llame al administrador.', 'exclamation')
+			CALL fl_mostrar_mensaje('No se pudo actualizar precio en el registro del código de pedido ' || rm_detalle[i].c04_cod_item CLIPPED || '. Por favor llame al administrador.', 'exclamation')
 			LET grabo = 0
 			EXIT FOR
 		END IF
 		IF NOT usuario_camprec(i) THEN
 			ROLLBACK WORK
 			WHENEVER ERROR STOP
-			CALL fl_mostrar_mensaje('No se pudo registrar la actualización del precio en el código de pedido ' || rm_detalle[i].c04_cod_pedido CLIPPED || '. Por favor llame al administrador.', 'exclamation')
+			CALL fl_mostrar_mensaje('No se pudo registrar la actualización del precio en el código de pedido ' || rm_detalle[i].c04_cod_item CLIPPED || '. Por favor llame al administrador.', 'exclamation')
 			LET grabo = 0
 			EXIT FOR
 		END IF
@@ -555,7 +555,7 @@ END FUNCTION
 
 REPORT listado_precio_items_proveedor(r_rep)
 DEFINE r_rep 			RECORD
-							c04_cod_pedido		LIKE ordt004.c04_cod_pedido,
+							c04_cod_item		LIKE ordt004.c04_cod_item,
 							r10_nombre			LIKE rept010.r10_nombre,
 							r10_precio_mb		LIKE rept010.r10_precio_mb,
 							c04_pvp_prov_sug	LIKE ordt004.c04_pvp_prov_sug,
@@ -627,7 +627,7 @@ PAGE HEADER
 
 ON EVERY ROW
 	NEED 3 LINES
-	PRINT COLUMN 001, r_rep.c04_cod_pedido		CLIPPED,
+	PRINT COLUMN 001, r_rep.c04_cod_item		CLIPPED,
 	      COLUMN 008, r_rep.r72_desc_clase[1, 25]	CLIPPED,
 	      COLUMN 034, r_rep.desc_item[1, 47]	CLIPPED,
 	      COLUMN 089, r_rep.r10_precio_mb		USING "---,---,--&.##",

@@ -2095,9 +2095,9 @@ IF vm_flag_llam = 'I' THEN
 		-- de los precios de la proforma
 		IF r_c04.c04_compania IS NOT NULL THEN
 			IF r_c04.c04_costo_prov IS NULL THEN
-				r_detalle[k].c11_precio = r_c04.c04_pvp_prov_sug * r_c04.c04_desc_prov
+				LET r_detalle[k].c11_precio = r_c04.c04_pvp_prov_sug * r_c04.c04_desc_prov
 			ELSE
-				r_detalle[k].c11_precio = r_c04.c04_costo_prov
+				LET r_detalle[k].c11_precio = r_c04.c04_costo_prov
 			END IF
 		END IF
 
