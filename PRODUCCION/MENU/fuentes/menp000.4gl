@@ -3265,6 +3265,7 @@ DISPLAY "Compañías"     	TO c100   ## Botón 1 cxpp100
 DISPLAY "Proveedores Cía/Loc" 	TO c200   ## Botón 2 cxpp101
 DISPLAY "Doc./Transacciones"    TO c300   ## Botón 3 cxpp102
 DISPLAY "Porcentaje Retención" TO c400   ## Botón 3 ordp102
+DISPLAY "Lista Precios Prov." TO c500   ## Botón 4 ordp103
 
 LET c = fgl_getkey()
 
@@ -3300,6 +3301,14 @@ CASE c
 			EXIT CASE
 		END IF
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'COMPRAS', vg_separador, 'fuentes', vg_separador, '; fglrun ordp102 ', vg_base, ' ', 'OC', vg_codcia
+		RUN ejecuta
+	WHEN 5
+		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
+							'OC', 'ordp103')
+		THEN
+			EXIT CASE
+		END IF
+		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'COMPRAS', vg_separador, 'fuentes', vg_separador, '; fglrun ordp103 ', vg_base, ' ', 'OC', vg_codcia, ' ', vg_codloc
 		RUN ejecuta
 	WHEN 0
 		CLOSE WINDOW w_menu_configuracion
