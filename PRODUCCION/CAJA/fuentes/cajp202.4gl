@@ -504,6 +504,10 @@ SELECT r02_codigo AS bod
 	  AND r02_area       = "R"
 	  AND r02_tipo_ident = "P"
 	INTO TEMP tmp_bod
+SELECT COUNT(*) INTO cuantos FROM tmp_bod
+IF cuantos = 0 THEN
+	RETURN
+END IF
 SELECT t1.*, r22_item AS item
 	FROM t1, rept022
 	WHERE r22_compania  = cia
