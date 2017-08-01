@@ -2038,6 +2038,7 @@ DEFINE grupo		LIKE actt010.a10_grupo_act
 DEFINE tipo		LIKE actt010.a10_tipo_act
 DEFINE r_r10		RECORD LIKE rept010.*
 DEFINE r_r22		RECORD LIKE rept022.*
+DEFINE r_c04		RECORD LIKE ordt004.*
 
 CALL retorna_tam_arr()
 LET vm_filas_pant  = vm_size_arr
@@ -2059,18 +2060,25 @@ ELSE
 END IF
 
 IF vm_flag_llam = 'I' THEN
-	INITIALIZE r_r10.*, r_r22.* TO NULL
 	DECLARE q_r22 CURSOR FOR
-		SELECT rept022.*, r10_nombre
-			FROM rept022, rept010
+		SELECT rept022.*, rept010.*, ordt004.*
+			FROM rept022, rept010, OUTER ordt004
 			WHERE r22_compania  = vg_codcia
 			  AND r22_localidad = vg_codloc
 			  AND r22_numprof   = vm_numprof
 			  AND r10_compania  = r22_compania
 			  AND r10_codigo    = r22_item
+  			  AND c04_compania  = r22_compania
+  			  AND c04_localidad = r22_localidad
+			  AND c04_codprov   = rm_c10.c10_codprov
+			  AND c04_cod_item  = r10_cod_pedido
+			  AND c04_fecha_vigen <= TODAY
+			  AND c04_fecha_fin IS NULL OR c04_fecha_fin > TODAY
 			ORDER BY r22_orden ASC
 	LET k = 1
 	FOREACH q_r22 INTO r_r22.*, r_r10.r10_nombre
+		INITIALIZE r_r10.*, r_r22.*, r_c04.* TO NULL
+
 		IF vm_tipo <> 'T' THEN
 			LET r_detalle[k].c11_tipo = vm_tipo
 		ELSE
@@ -2082,8 +2090,24 @@ IF vm_flag_llam = 'I' THEN
 		LET r_detalle[k].c11_codigo    = r_r22.r22_item
 		LET r_detalle[k].c11_descrip   = r_r10.r10_nombre
 		LET r_detalle[k].c11_descuento = r_r22.r22_porc_descto
-		LET r_detalle[k].c11_precio    = r_r22.r22_precio
-		LET r_detalle[k].subtotal      = r_r22.r22_precio * r_r22.r22_cantidad
+
+		-- Si tenemos la lista de precios del proveedor, usemos esa en lugar
+		-- de los precios de la proforma
+		IF r_c04.c04_compania IS NOT NULL THEN
+			IF r_c04.c04_costo_prov IS NULL THEN
+				r_detalle[k].c11_precio = r_c04.c04_pvp_prov_sug * r_c04.c04_desc_prov
+			ELSE
+				r_detalle[k].c11_precio = r_c04.c04_costo_prov
+			END IF
+		END IF
+
+		-- Si no hay lista de proveedor o el precio termina en NULL (porque no hay
+		-- descuento configurado por ejemplo, use el de la proforma
+		IF r_detalle[k].c11_precio IS NULL THEN
+			LET r_detalle[k].c11_precio    = r_r22.r22_precio
+		END IF
+
+		LET r_detalle[k].subtotal      = r_detalle[k].c11_precio * r_detalle[k].c11_cant_ped
 		LET r_detalle[k].paga_iva      = 'S'
 		LET k = k + 1
 	END FOREACH
@@ -2095,6 +2119,7 @@ IF vm_flag_llam = 'I' THEN
 	LET max_row = k
 END IF
 
+INITIALIZE r_r10.* TO NULL
 CALL fl_lee_tipo_orden_compra(rm_c10.c10_tipo_orden) RETURNING r_c01.*
 LET int_flag = 0
 INPUT ARRAY r_detalle WITHOUT DEFAULTS FROM r_detalle.*
