@@ -8,11 +8,12 @@ begin work;
 			c04_compania		integer					not null,
 			c04_localidad		smallint				not null,
 			c04_codprov			integer					not null,
-			c04_cod_pedido		char(20)				not null,
+			c04_cod_item		char(20)				not null,
 			c04_fecha_vigen		date					not null,
 			c04_pvp_prov_sug	decimal(13,4),
 			c04_desc_prov		decimal(5,2),
 			c04_costo_prov		decimal(13,4),
+			c04_fecha_fin		date,
 			c04_usuario			varchar(10,5)			not null,
 			c04_fecing			datetime year to second	not null
 
@@ -22,7 +23,7 @@ begin work;
 
 	create unique index "fobos".i01_pk_ordt004
 		on "fobos".ordt004
-			(c04_compania, c04_localidad, c04_codprov, c04_cod_pedido,
+			(c04_compania, c04_localidad, c04_codprov, c04_cod_item,
 			 c04_fecha_vigen)
 		in idxdbs;
 
@@ -49,7 +50,7 @@ begin work;
 	alter table "fobos".ordt004
 		add constraint
 			primary key (c04_compania, c04_localidad, c04_codprov,
-						 c04_cod_pedido, c04_fecha_vigen)
+						 c04_cod_item, c04_fecha_vigen)
 				constraint "fobos".pk_ordt004;
 
 	alter table "fobos".ordt004
@@ -78,8 +79,8 @@ begin work;
 
 	alter table "fobos".ordt004
 		add constraint
-			check ((c04_pvp_prov_sug is null and c04_desc_prov is not null)
-				or (c04_pvp_prov_sug is not null and c04_desc_prov is null))
+			check ((c04_pvp_prov_sug is null and c04_costo_prov is not null)
+				or (c04_pvp_prov_sug is not null and c04_costo_prov is null))
 			constraint "fobos".ck_01_ordt004;
 
 --rollback work;
