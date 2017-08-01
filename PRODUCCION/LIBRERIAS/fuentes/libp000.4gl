@@ -5435,6 +5435,7 @@ DECLARE qu_refle CURSOR FOR
 		WHERE g07_user = vg_usuario AND g07_default = 'S'
 OPEN qu_refle
 FETCH qu_refle INTO r_gen.g07_impresora
+CLOSE qu_refle
 CALL fl_lee_impresora(r_gen.g07_impresora) RETURNING r_gen2.*
 DISPLAY BY NAME r_gen2.g06_nombre
 LET int_flag = 0
@@ -5495,6 +5496,13 @@ IF NOT int_flag THEN
 	END IF
 	IF tit_impresion = 'P' THEN
 		LET comando = 'fglpager'
+	END IF
+	IF tit_impresion = 'A' THEN
+		INITIALIZE r_gen2.g06_nombre TO NULL
+		OPTIONS INPUT NO WRAP
+		INPUT BY NAME r_gen2.g06_nombre
+		LET comando = 'cat > ', FGL_GETENV('HOME') CLIPPED, vg_separador, 
+                      '/tmp', vg_separador, r_gen2.g06_nombre, '.wri'
 	END IF
 END IF
 CLOSE WINDOW w_for
