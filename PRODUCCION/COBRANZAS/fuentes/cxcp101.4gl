@@ -1711,8 +1711,10 @@ DEFINE num_aux		INTEGER
 DEFINE i, lim		SMALLINT
 
 IF vm_num_ret = 0 AND vm_flag_mant <> 'I' THEN
-	CALL fl_mostrar_mensaje('Debe ingresar primero las retenciones del cliente.', 'exclamation')
-	RETURN
+	IF (rm_z01.z01_paga_impto = 'S' OR rm_z02.z02_contr_espe = 'S') THEN
+		CALL fl_mostrar_mensaje('Debe ingresar primero las retenciones del cliente.', 'exclamation')
+		RETURN
+	END IF
 END IF
 CALL poner_SI_NO_S_N(0)
 LET rm_z02.z02_email = rm_z02.z02_email CLIPPED
@@ -2852,9 +2854,11 @@ INPUT ARRAY rm_detret WITHOUT DEFAULTS FROM rm_detret.*
 				LET cont_f = cont_f + 1
 			END IF
 		END FOR
-		IF cont_d1 = 0 OR cont_f = 0 THEN
-			CALL fl_mostrar_mensaje('Debe al menos marcar un tipo de porcentaje como defecto o flete.', 'exclamation')
-			CONTINUE INPUT
+		IF (rm_z01.z01_paga_impto = 'S' OR rm_z02.z02_contr_espe = 'S') THEN
+			IF cont_d1 = 0 OR cont_f = 0 THEN
+				CALL fl_mostrar_mensaje('Debe al menos marcar un tipo de porcentaje como defecto o flete.', 'exclamation')
+				CONTINUE INPUT
+			END IF
 		END IF
 		IF cont_f > 1 THEN
 			CALL fl_mostrar_mensaje('Solamente un tipo de porcentaje puede ser chequedo como tipo flete.', 'exclamation')
