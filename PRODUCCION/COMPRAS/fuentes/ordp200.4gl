@@ -2079,8 +2079,7 @@ IF vm_flag_llam = 'I' THEN
 			  AND c04_fecha_fin IS NULL OR c04_fecha_fin > TODAY
 			ORDER BY r22_orden ASC
 	LET k = 1
-	FOREACH q_r22 INTO r_r22.*, r_r10.r10_nombre
-		INITIALIZE r_r10.*, r_r22.*, r_c04.* TO NULL
+	FOREACH q_r22 INTO r_r22.*, r_r10.*, r_c04.*
 
 		IF vm_tipo <> 'T' THEN
 			LET r_detalle[k].c11_tipo = vm_tipo
@@ -2122,7 +2121,8 @@ IF vm_flag_llam = 'I' THEN
 	LET max_row = k
 END IF
 
-INITIALIZE r_r10.* TO NULL
+INITIALIZE r_r10.*, r_r22.*, r_c04.* TO NULL
+
 CALL fl_lee_tipo_orden_compra(rm_c10.c10_tipo_orden) RETURNING r_c01.*
 LET int_flag = 0
 INPUT ARRAY r_detalle WITHOUT DEFAULTS FROM r_detalle.*
