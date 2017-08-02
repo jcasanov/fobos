@@ -378,7 +378,7 @@ PAGE HEADER
 	CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc, rm_r19.r19_codcli)
 		RETURNING r_z02.*
 	CALL fl_lee_ciudad(r_z01.z01_ciudad) RETURNING r_g31.*
-	SKIP 5 LINES
+	SKIP 4 LINES
 	print ASCII escape;
 	print ASCII act_comp
 	{--
@@ -404,7 +404,7 @@ PAGE HEADER
 	PRINT COLUMN 013, rm_r19.r19_cedruc
 	PRINT COLUMN 093, r_r21.r21_forma_pago CLIPPED,
 	      COLUMN 123, (fecha_vcto - DATE(rm_r19.r19_fecing) + 1) USING "##0"
-	SKIP 1 LINES
+	SKIP 2 LINES
 
 ON EVERY ROW
 	NEED 2 LINES
