@@ -274,6 +274,7 @@ DEFINE v_ch			VARCHAR(15)
 DEFINE v_t			VARCHAR(15)
 DEFINE v_r			VARCHAR(15)
 DEFINE v_c			VARCHAR(15)
+DEFINE impr_desc	VARCHAR(100)
 DEFINE label_letras	VARCHAR(130)
 DEFINE escape		SMALLINT
 DEFINE act_comp		SMALLINT
@@ -377,7 +378,7 @@ PAGE HEADER
 	CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc, rm_r19.r19_codcli)
 		RETURNING r_z02.*
 	CALL fl_lee_ciudad(r_z01.z01_ciudad) RETURNING r_g31.*
-	SKIP 4 LINES
+	SKIP 5 LINES
 	print ASCII escape;
 	print ASCII act_comp
 	{--
@@ -399,15 +400,18 @@ PAGE HEADER
 	print ASCII escape;
 	print ASCII act_comp;
 	PRINT COLUMN 015, rm_r19.r19_dircli,
-	      COLUMN 066, r_g31.g31_nombre CLIPPED
+	      COLUMN 068, r_g31.g31_nombre CLIPPED
 	PRINT COLUMN 013, rm_r19.r19_cedruc
-	PRINT COLUMN 098, (fecha_vcto - DATE(rm_r19.r19_fecing) + 1) USING "##0"
-	SKIP 2 LINES
+	PRINT COLUMN 093, r_r21.r21_forma_pago CLIPPED,
+	      COLUMN 123, (fecha_vcto - DATE(rm_r19.r19_fecing) + 1) USING "##0"
+	SKIP 1 LINES
 
 ON EVERY ROW
 	NEED 2 LINES
+	LET impr_desc = r_rep.desc_clase CLIPPED, ' ', r_rep.descripcion CLIPPED,
+					' ', r_rep.unidades CLIPPED
 	PRINT COLUMN 002, r_rep.r20_item[1,7],
-		  COLUMN 014, r_rep.descripcion[1, 50] CLIPPED,
+		  COLUMN 014, impr_desc[1, 54] CLIPPED,
 	      COLUMN 069, r_rep.cant_ven	USING '####&.##',
 	      COLUMN 088, r_rep.precio		USING '###,###,##&.##',
 	      COLUMN 106, r_rep.descuento	USING '##&.##',
@@ -417,6 +421,7 @@ PAGE TRAILER
 	PRINT COLUMN 002, ASCII escape, ASCII act_dob1, ASCII des_dob,
 		ASCII escape, ASCII act_10cpi, ASCII escape, ASCII des_neg,
 		ASCII escape, ASCII act_comp,
+	      COLUMN 011, "ENTREGAR EN: ", r_r21.r21_referencia CLIPPED,
 	      COLUMN 127, rm_r19.r19_tot_bruto	USING "#,###,###,##&.##"
 	SKIP 1 LINES
 	PRINT COLUMN 118, rm_r19.r19_tot_dscto	USING "###,###,##&.##"
