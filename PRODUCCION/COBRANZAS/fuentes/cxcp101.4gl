@@ -862,7 +862,7 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 			THEN
 				--CALL fl_mostrar_mensaje('Este cliente ya ha tenido movimiento, por lo tanto no puede modificar su identificación.', 'exclamation')
 			END IF
-			LET rm_z01.z01_personeria = r_aux.z01_personeria
+			--LET rm_z01.z01_personeria = r_aux.z01_personeria
 			DISPLAY BY NAME rm_z01.z01_personeria
 		END IF
 	AFTER FIELD z01_tipo_doc_id
@@ -888,7 +888,7 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 			THEN
 				--CALL fl_mostrar_mensaje('Este cliente ya ha tenido movimiento, por lo tanto no puede modificar su identificación.', 'exclamation')
 			END IF
-			LET rm_z01.z01_tipo_doc_id = r_aux.z01_tipo_doc_id
+			--LET rm_z01.z01_tipo_doc_id = r_aux.z01_tipo_doc_id
 			DISPLAY BY NAME rm_z01.z01_tipo_doc_id
 		END IF
 	BEFORE FIELD z01_direccion1
@@ -963,12 +963,6 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 			END IF
 			--}
 			DISPLAY BY NAME rm_z01.z01_tipo_doc_id
-			CALL validar_cedruc(rm_z01.z01_codcli,
-						rm_z01.z01_num_doc_id)
-				RETURNING resul
-			IF NOT resul THEN
-				--NEXT FIELD z01_num_doc_id
-			END IF
 		END IF
 	AFTER FIELD z01_pais
                 IF rm_z01.z01_pais IS NOT NULL THEN
@@ -1354,8 +1348,7 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 			END IF
 		END IF
 		IF rm_z01.z01_num_doc_id IS NOT NULL THEN
-			CALL validar_cedruc(rm_z01.z01_codcli,
-						rm_z01.z01_num_doc_id)
+			CALL validar_cedruc(rm_z01.z01_codcli, rm_z01.z01_num_doc_id)
 				RETURNING resul
 			IF NOT resul THEN
 				NEXT FIELD z01_num_doc_id
