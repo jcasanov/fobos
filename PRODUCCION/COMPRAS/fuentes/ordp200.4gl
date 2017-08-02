@@ -1646,15 +1646,17 @@ IF vm_flag_llam = 'I' THEN
 	DISPLAY rm_c01.c01_nombre TO nom_tipo_orden
 END IF
 DISPLAY BY NAME rm_c10.c10_dif_cuadre, rm_c10.c10_usuario
-INPUT BY NAME valor_fact, 
+INPUT BY NAME rm_c10.c10_codprov,
               rm_c10.c10_moneda,       rm_c10.c10_tipo_orden,
-	      rm_c10.c10_cod_depto,    rm_c10.c10_codprov,
-	      rm_c10.c10_atencion,     rm_c10.c10_porc_impto, 
+	      rm_c10.c10_cod_depto,    
+	      rm_c10.c10_atencion,      rm_c10.c10_referencia ,  
+           rm_c10.c10_porc_impto, 
               vm_calc_iva,             rm_c10.c10_porc_descto,  
               rm_c10.c10_recargo,      rm_c10.c10_solicitado,
 	      rm_c10.c10_ord_trabajo,  rm_c10.c10_tipo_pago,   
-	      rm_c10.c10_referencia ,  rm_c10.c10_otros,
-	      rm_c10.c10_flete, rm_c10.c10_numprof
+	     
+          rm_c10.c10_otros,
+	      rm_c10.c10_flete, rm_c10.c10_numprof, valor_fact 
 	      WITHOUT DEFAULTS
 	ON KEY (INTERRUPT)
 		IF NOT FIELD_TOUCHED(c10_cod_depto,  c10_tipo_orden,
@@ -2076,7 +2078,7 @@ IF vm_flag_llam = 'I' THEN
 			  AND c04_codprov   = rm_c10.c10_codprov
 			  AND c04_cod_item  = r10_cod_pedido
 			  AND c04_fecha_vigen <= TODAY
-			  AND c04_fecha_fin IS NULL OR c04_fecha_fin > TODAY
+			  AND (c04_fecha_fin IS NULL OR c04_fecha_fin > TODAY)
 			ORDER BY r22_orden ASC
 	LET k = 1
 	FOREACH q_r22 INTO r_r22.*, r_r10.*, r_c04.*
