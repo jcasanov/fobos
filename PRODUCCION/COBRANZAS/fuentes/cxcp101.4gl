@@ -829,7 +829,7 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 		END IF
 	BEFORE FIELD z01_tipo_doc_id
 		IF rm_z01.z01_num_doc_id IS NULL THEN
-			CALL fgl_winmessage(vg_producto,'Digite primero el número de identificación de documento','info')
+			CALL fl_mostrar_mensaje('Digite primero el número de identificación de documento','info')
 			NEXT FIELD z01_num_doc_id
 		END IF
 		IF vm_flag_mant = 'M' THEN
@@ -841,11 +841,13 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 		END IF
 	AFTER FIELD z01_personeria
 		IF vm_flag_mant = 'M' THEN
+			{--
 			IF rm_g05.g05_tipo = 'UF' THEN
 				LET rm_z01.z01_personeria = r_aux.z01_personeria
 				DISPLAY BY NAME rm_z01.z01_personeria
 				CONTINUE INPUT
 			END IF
+			--}
 			--IF vg_usuario = 'FOBOS' THEN
 			IF rm_g05.g05_tipo <> 'UF' AND rm_g05.g05_grupo = 'SI'
 			THEN
@@ -858,18 +860,20 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 			IF FIELD_TOUCHED(z01_personeria) AND
 			   rm_z01.z01_personeria <> r_aux.z01_personeria
 			THEN
-				CALL fl_mostrar_mensaje('Este cliente ya ha tenido movimiento, por lo tanto no puede modificar su identificación.', 'exclamation')
+				--CALL fl_mostrar_mensaje('Este cliente ya ha tenido movimiento, por lo tanto no puede modificar su identificación.', 'exclamation')
 			END IF
 			LET rm_z01.z01_personeria = r_aux.z01_personeria
 			DISPLAY BY NAME rm_z01.z01_personeria
 		END IF
 	AFTER FIELD z01_tipo_doc_id
 		IF vm_flag_mant = 'M' THEN
+			{--
 			IF rm_g05.g05_tipo = 'UF' THEN
 				LET rm_z01.z01_tipo_doc_id=r_aux.z01_tipo_doc_id
 				DISPLAY BY NAME rm_z01.z01_tipo_doc_id
 				CONTINUE INPUT
 			END IF
+			--}
 			--IF vg_usuario = 'FOBOS' THEN
 			IF rm_g05.g05_tipo <> 'UF' AND rm_g05.g05_grupo = 'SI'
 			THEN
@@ -882,7 +886,7 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 			IF FIELD_TOUCHED(z01_tipo_doc_id) AND
 			   rm_z01.z01_tipo_doc_id <> r_aux.z01_tipo_doc_id
 			THEN
-				CALL fl_mostrar_mensaje('Este cliente ya ha tenido movimiento, por lo tanto no puede modificar su identificación.', 'exclamation')
+				--CALL fl_mostrar_mensaje('Este cliente ya ha tenido movimiento, por lo tanto no puede modificar su identificación.', 'exclamation')
 			END IF
 			LET rm_z01.z01_tipo_doc_id = r_aux.z01_tipo_doc_id
 			DISPLAY BY NAME rm_z01.z01_tipo_doc_id
@@ -890,18 +894,18 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 	BEFORE FIELD z01_direccion1
 		IF rm_z01.z01_personeria = 'N' THEN
 			IF rm_z01.z01_tipo_doc_id = 'R' THEN
-				CALL fgl_winmessage(vg_producto,'Una persona natural no puede tener asignado Ruc','exclamation')
-				NEXT FIELD z01_tipo_doc_id
+				--CALL fl_mostrar_mensaje('Una persona natural no puede tener asignado RUC','exclamation')
+				--NEXT FIELD z01_tipo_doc_id
 			END IF
 		ELSE
 			IF rm_z01.z01_tipo_doc_id <> 'R' THEN
-				CALL fgl_winmessage(vg_producto,'Una persona jurídica no puede tener asignado Cédula o Pasaporte','exclamation')
-				NEXT FIELD z01_tipo_doc_id
+				--CALL fl_mostrar_mensaje('Una persona jurídica no puede tener asignado Cédula o Pasaporte','exclamation')
+				--NEXT FIELD z01_tipo_doc_id
 			END IF
 		END IF
 	BEFORE FIELD z01_ciudad
 		IF rm_z01.z01_pais IS NULL THEN
-			CALL fgl_winmessage(vg_producto,'Ingrese el país primero','info')
+			CALL fl_mostrar_mensaje('Ingrese el país primero','info')
 			NEXT FIELD z01_pais
 		END IF
 	AFTER FIELD z01_codcli
@@ -951,11 +955,13 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 			END IF
 		END IF
 		IF rm_z01.z01_num_doc_id IS NOT NULL THEN
+			{--
 			IF rm_z01.z01_personeria = 'N' THEN
 				LET rm_z01.z01_tipo_doc_id = 'C'
 			ELSE
 				LET rm_z01.z01_tipo_doc_id = 'R'
 			END IF
+			--}
 			DISPLAY BY NAME rm_z01.z01_tipo_doc_id
 			CALL validar_cedruc(rm_z01.z01_codcli,
 						rm_z01.z01_num_doc_id)
@@ -969,7 +975,7 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
                         CALL fl_lee_pais(rm_z01.z01_pais)
                                 RETURNING r_pai.*
                         IF r_pai.g30_pais IS NULL  THEN
-                                CALL fgl_winmessage(vg_producto,'Este país no existe','exclamation')
+                                CALL fl_mostrar_mensaje('Este país no existe','exclamation')
                                 NEXT FIELD z01_pais
                         END IF
                         DISPLAY r_pai.g30_nombre TO tit_pais
@@ -981,12 +987,12 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
                         CALL fl_lee_ciudad(rm_z01.z01_ciudad)
                                 RETURNING r_ciu.*
                         IF r_ciu.g31_ciudad IS NULL  THEN
-                                CALL fgl_winmessage(vg_producto,'Está ciudad no existe','exclamation')
+                                CALL fl_mostrar_mensaje('Está ciudad no existe','exclamation')
                                 NEXT FIELD z01_ciudad
                         END IF
                         DISPLAY r_ciu.g31_nombre TO tit_ciudad
 			IF r_ciu.g31_pais <> r_pai.g30_pais THEN
-				CALL fgl_winmessage(vg_producto,'Esta ciudad no pertenece a ese país','exclamation')
+				CALL fl_mostrar_mensaje('Esta ciudad no pertenece a ese país','exclamation')
 				NEXT FIELD z01_ciudad
 			END IF
                 ELSE
@@ -1001,7 +1007,7 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 			LET rm_z01.z01_paga_impto = 'S'
 		END IF
 		IF vm_flag_mant = 'M' AND rm_g05.g05_tipo = 'UF' THEN
-			LET rm_z01.z01_paga_impto = r_aux.z01_paga_impto
+			--LET rm_z01.z01_paga_impto = r_aux.z01_paga_impto
 		END IF
 		DISPLAY BY NAME rm_z01.z01_paga_impto
 	BEFORE FIELD z02_contr_espe
@@ -1033,7 +1039,7 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
                         CALL fl_lee_subtipo_entidad('CL', rm_z01.z01_tipo_clte)
                                 RETURNING r_car.*
                         IF r_car.g12_tiporeg IS NULL  THEN
-                                CALL fgl_winmessage(vg_producto,'Cartera no existe','exclamation')
+                                CALL fl_mostrar_mensaje('Cartera no existe','exclamation')
                                 NEXT FIELD z01_tipo_clte
                         END IF
                         DISPLAY r_car.g12_nombre TO tit_tipo_cli
@@ -1100,7 +1106,7 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 			CALL fl_lee_zona_venta(vg_codcia,rm_z02.z02_zona_venta)
 				RETURNING r_zon_vta.*
 			IF r_zon_vta.g32_zona_venta IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'Zona de venta no existe','exclamation')
+				CALL fl_mostrar_mensaje('Zona de venta no existe','exclamation')
 				NEXT FIELD z02_zona_venta
 			END IF
 			DISPLAY r_zon_vta.g32_nombre TO tit_zona_vta
@@ -1133,7 +1139,7 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 			CALL fl_lee_zona_cobro(rm_z02.z02_zona_cobro)
 				RETURNING r_zon_cob.*
 			IF r_zon_cob.z06_zona_cobro IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'Zona de venta no existe','exclamation')
+				CALL fl_mostrar_mensaje('Zona de venta no existe','exclamation')
 				NEXT FIELD z02_zona_cobro
 			END IF
 			IF r_zon_cob.z06_estado = 'B' THEN
@@ -1176,7 +1182,7 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 					IF rm_z02.z02_cupcred_xaprob IS NULL 
 					OR rm_z02.z02_cupcred_xaprob>9999999999.99
 					THEN
-						CALL fgl_winmessage(vg_producto,'El cupo de crédito en moneda base está demasiado grande', 'exclamation')
+						CALL fl_mostrar_mensaje('El cupo de crédito en moneda base está demasiado grande', 'exclamation')
 						NEXT FIELD z02_cupcred_aprob
 					END IF
 				END IF
@@ -1330,7 +1336,7 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 	AFTER INPUT
 		CALL poner_credit_dias() RETURNING resul
 		IF resul = 1 THEN
-			CALL fgl_winmessage(vg_producto,'Crédito de días debe ser mayor a cero, si hay crédito automático','info')
+			CALL fl_mostrar_mensaje('Crédito de días debe ser mayor a cero, si hay crédito automático','info')
 			NEXT FIELD z02_credit_dias
 		END IF
 		IF vm_flag_mant = 'I' THEN
@@ -1471,7 +1477,7 @@ DEFINE c1		LIKE ctbt010.b10_cuenta
 DEFINE c2		LIKE ctbt010.b10_cuenta
 
 IF aux_cont = c1 OR aux_cont = c2 THEN
-	CALL fgl_winmessage(vg_producto,'Las cuentas de clientes deben ser distintas de las cuentas de anticípo.','exclamation')
+	CALL fl_mostrar_mensaje('Las cuentas de clientes deben ser distintas de las cuentas de anticípo.','exclamation')
 	RETURN 1
 END IF
 RETURN 0
@@ -1711,7 +1717,7 @@ DEFINE num_aux		INTEGER
 DEFINE i, lim		SMALLINT
 
 IF vm_num_ret = 0 AND vm_flag_mant <> 'I' THEN
-	IF (rm_z01.z01_paga_impto = 'S' OR rm_z02.z02_contr_espe = 'S') THEN
+	IF rm_z02.z02_contr_espe = 'S' THEN
 		CALL fl_mostrar_mensaje('Debe ingresar primero las retenciones del cliente.', 'exclamation')
 		RETURN
 	END IF
@@ -2185,7 +2191,7 @@ INPUT BY NAME rm_z02.z02_localidad, rm_z02.z02_contacto, rm_z02.z02_referencia,
 			CALL fl_lee_zona_venta(vg_codcia,rm_z02.z02_zona_venta)
 				RETURNING r_g32.*
 			IF r_g32.g32_zona_venta IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'Zona de venta no existe','exclamation')
+				CALL fl_mostrar_mensaje('Zona de venta no existe','exclamation')
 				NEXT FIELD z02_zona_venta
 			END IF
 			DISPLAY r_g32.g32_nombre TO tit_zona_vta
@@ -2218,7 +2224,7 @@ INPUT BY NAME rm_z02.z02_localidad, rm_z02.z02_contacto, rm_z02.z02_referencia,
 			CALL fl_lee_zona_cobro(rm_z02.z02_zona_cobro)
 				RETURNING r_z06.*
 			IF r_z06.z06_zona_cobro IS NULL THEN
-				CALL fgl_winmessage(vg_producto,'Zona de venta no existe','exclamation')
+				CALL fl_mostrar_mensaje('Zona de venta no existe','exclamation')
 				NEXT FIELD z02_zona_cobro
 			END IF
 			IF r_z06.z06_estado = 'B' THEN
@@ -2261,7 +2267,7 @@ INPUT BY NAME rm_z02.z02_localidad, rm_z02.z02_contacto, rm_z02.z02_referencia,
 					IF rm_z02.z02_cupcred_xaprob IS NULL 
 					OR rm_z02.z02_cupcred_xaprob>9999999999.99
 					THEN
-						CALL fgl_winmessage(vg_producto,'El cupo de crédito en moneda base está demasiado grande', 'exclamation')
+						CALL fl_mostrar_mensaje('El cupo de crédito en moneda base está demasiado grande', 'exclamation')
 						NEXT FIELD z02_cupcred_aprob
 					END IF
 				END IF
@@ -2415,7 +2421,7 @@ INPUT BY NAME rm_z02.z02_localidad, rm_z02.z02_contacto, rm_z02.z02_referencia,
 	AFTER INPUT
 		CALL poner_credit_dias() RETURNING resul
 		IF resul = 1 THEN
-			CALL fgl_winmessage(vg_producto,'Crédito de días debe ser mayor a cero, si hay crédito automático','info')
+			CALL fl_mostrar_mensaje('Crédito de días debe ser mayor a cero, si hay crédito automático','info')
 			NEXT FIELD z02_credit_dias
 		END IF
 		IF rm_z02.z02_cupcred_xaprob <= rm_z02.z02_cupcred_aprob AND
@@ -2860,7 +2866,7 @@ INPUT ARRAY rm_detret WITHOUT DEFAULTS FROM rm_detret.*
 				LET cont_f = cont_f + 1
 			END IF
 		END FOR
-		IF (rm_z01.z01_paga_impto = 'S' OR rm_z02.z02_contr_espe = 'S') THEN
+		IF (rm_z02.z02_contr_espe = 'S') THEN
 			IF cont_d1 = 0 OR cont_f = 0 THEN
 				CALL fl_mostrar_mensaje('Debe al menos marcar un tipo de porcentaje como defecto o flete.', 'exclamation')
 				CONTINUE INPUT
