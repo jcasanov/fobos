@@ -4285,7 +4285,6 @@ DEFINE estado		CHAR(1)
 
 LET intentar = 1
 LET done = 0
-WHENEVER ERROR CONTINUE
 WHILE (intentar)
 		DECLARE q_j10 CURSOR FOR
 			SELECT * FROM cajt010
@@ -4303,7 +4302,6 @@ WHILE (intentar)
 		LET done = 1
 	END IF
 END WHILE
-WHENEVER ERROR STOP
 
 IF NOT intentar AND NOT done THEN
 	RETURN done
