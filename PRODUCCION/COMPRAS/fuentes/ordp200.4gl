@@ -1626,6 +1626,7 @@ DEFINE r_b43		RECORD LIKE ctbt043.*
 DEFINE r_s23_s		RECORD LIKE srit023.*
 DEFINE r_s23_n		RECORD LIKE srit023.*
 DEFINE r_r01		RECORD LIKE rept001.*
+DEFINE r_r21		RECORD LIKE rept021.*
 
 LET int_flag = 0
 CALL calcula_totales(vm_num_detalles,1)
@@ -1633,12 +1634,14 @@ IF vm_flag_llam = 'I' THEN
 	LET rm_c10.c10_tipo_orden = vm_tipo_oc
 	LET rm_c10.c10_cod_depto  = 1
 	LET rm_c10.c10_numprof    = vm_numprof
+	CALL fl_lee_proforma_rep(vg_codcia, vg_codloc, vm_numprof) RETURNING r_r21.*
+	LET valor_fact = r_r21.r21_tot_bruto - r_r21.r21_tot_dscto
 	CALL fl_lee_vendedor_rep(vg_codcia, vm_vendedor) RETURNING r_r01.*
 	LET rm_c10.c10_solicitado = r_r01.r01_nombres
 	CALL fl_lee_tipo_orden_compra(rm_c10.c10_tipo_orden) RETURNING rm_c01.*
 	CALL fl_lee_departamento(vg_codcia, rm_c10.c10_cod_depto) RETURNING rm_g34.*
 	DISPLAY BY NAME rm_c10.c10_cod_depto, rm_c10.c10_tipo_orden,
-					rm_c10.c10_numprof
+					rm_c10.c10_numprof, valor_fact
 	DISPLAY rm_g34.g34_nombre TO nom_departamento
 	DISPLAY rm_c01.c01_nombre TO nom_tipo_orden
 END IF
