@@ -1815,8 +1815,10 @@ ELSE
 	ELSE
 		IF vm_flag_mant = 'C' THEN
 			CALL grabar_retenciones()
-			CALL fl_mensaje_registro_modificado()
-			LET vm_flag_mant = 'I'
+			IF rm_z01.z01_personeria <> 'N' THEN
+				CALL fl_mensaje_registro_modificado()
+				LET vm_flag_mant = 'I'
+			END IF
 		END IF
 	END IF
 END IF
@@ -2433,6 +2435,10 @@ DEFINE tipo_llamada	CHAR(1)
 DEFINE row_ini, col_ini	SMALLINT
 DEFINE row_fin, col_fin	SMALLINT
 
+IF rm_z01.z01_personeria = 'N' THEN
+	LET int_flag = 0
+	RETURN
+END IF
 LET row_ini = 07
 LET row_fin = 16
 LET col_ini = 02
@@ -3328,6 +3334,9 @@ FUNCTION grabar_retenciones()
 DEFINE query		CHAR(800)
 DEFINE i		SMALLINT
 
+IF rm_z01.z01_personeria = 'N' THEN
+	RETURN
+END IF
 DELETE FROM cxct009
 	WHERE z09_compania = vg_codcia
 	  AND z09_codcli   = rm_z01.z01_codcli
