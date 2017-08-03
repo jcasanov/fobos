@@ -2116,15 +2116,16 @@ IF vm_flag_llam = 'I' THEN
 		LET r_detalle[k].c11_cant_ped  = r_r22.r22_cantidad
 		LET r_detalle[k].c11_codigo    = r_r22.r22_item
 		LET r_detalle[k].c11_descrip   = r_r10.r10_nombre
-		LET r_detalle[k].c11_descuento = r_r22.r22_porc_descto
 
 		-- Si tenemos la lista de precios del proveedor, usemos esa en lugar
 		-- de los precios de la proforma
 		IF r_c04.c04_compania IS NOT NULL THEN
 			IF r_c04.c04_costo_prov IS NULL THEN
-				LET r_detalle[k].c11_precio = r_c04.c04_pvp_prov_sug * r_c04.c04_desc_prov
+				LET r_detalle[k].c11_precio = r_c04.c04_pvp_prov_sug 
+				LET r_detalle[k].c11_descuento = r_c04.c04_desc_prov 
 			ELSE
 				LET r_detalle[k].c11_precio = r_c04.c04_costo_prov
+				LET r_detalle[k].c11_descuento = 0 
 			END IF
 		END IF
 
