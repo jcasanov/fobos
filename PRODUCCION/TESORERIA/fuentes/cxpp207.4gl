@@ -320,7 +320,7 @@ WHILE TRUE
 					RETURNING r_p02.*
 				--#IF r_p02.p02_email IS NULL THEN
 					--#CALL fl_mostrar_mensaje('El Proveedor no tiene configurado la cuenta de correo, configuresela en el mantenimiento de proveedores.','exclamation')
-					--#CONTINUE DISPLAY
+					--CONTINUE DISPLAY
 				--#END IF
 				IF l = 0 THEN
 					LET tot_ret = 0

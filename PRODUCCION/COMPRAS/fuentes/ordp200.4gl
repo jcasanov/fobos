@@ -129,6 +129,7 @@ LET vg_codloc  = arg_val(4)
 IF num_args() = 5 THEN
 	LET vg_num_ord = arg_val(5)
 END IF
+LET vm_flag_llam = NULL
 IF num_args() = 8 THEN
 	LET vm_flag_llam = arg_val(5)
 	LET vm_tipo_oc   = arg_val(6)
@@ -156,6 +157,7 @@ DEFINE lin_menu		SMALLINT
 DEFINE row_ini  	SMALLINT
 DEFINE num_rows 	SMALLINT
 DEFINE num_cols 	SMALLINT
+DEFINE r_c10		RECORD LIKE ordt010.*
 
 CALL fl_nivel_isolation()
 IF num_args() = 4 THEN
@@ -241,6 +243,17 @@ MENU 'OPCIONES'
                 	END IF
 		END IF 
 		IF vm_flag_llam = 'I' THEN
+			CALL lee_oc_proforma() RETURNING r_c10.*
+			IF r_c10.c10_compania IS NOT NULL THEN
+				LET vg_num_ord = r_c10.c10_numero_oc
+               	CALL control_consulta()
+				IF r_c10.c10_estado = 'C' THEN
+					CALL control_ver_detalle()
+					EXIT MENU
+				END IF
+				CALL control_modificacion()
+				EXIT MENU
+			END IF
 			CALL control_ingreso()
 			EXIT MENU
 		END IF
@@ -683,7 +696,7 @@ LET tot_compra         = rm_c10.c10_tot_compra
 
 DISPLAY BY NAME tot_compra, rm_c10.c10_interes
 
-IF rm_c10.c10_estado <> 'A' THEN
+IF rm_c10.c10_estado <> 'A' AND vm_flag_llam IS NULL THEN
 	ROLLBACK WORK
 	LET i = control_cargar_forma_pago_oc()
 	CALL control_DISPLAY_ordt012(i)
@@ -1215,8 +1228,7 @@ END FUNCTION
 
 
 FUNCTION control_ingreso()
-DEFINE i 		SMALLINT
-DEFINE intentar 	SMALLINT
+DEFINE i, intentar 	SMALLINT
 DEFINE done 		SMALLINT
 
 CLEAR FORM
@@ -1621,12 +1633,13 @@ END FUNCTION
 
 FUNCTION control_lee_cabecera()
 DEFINE resp 		CHAR(6)
-DEFINE done		SMALLINT
+DEFINE done			SMALLINT
 DEFINE r_b43		RECORD LIKE ctbt043.*
 DEFINE r_s23_s		RECORD LIKE srit023.*
 DEFINE r_s23_n		RECORD LIKE srit023.*
 DEFINE r_r01		RECORD LIKE rept001.*
 DEFINE r_r21		RECORD LIKE rept021.*
+DEFINE r_c10		RECORD LIKE ordt010.*
 
 LET int_flag = 0
 CALL calcula_totales(vm_num_detalles,1)
@@ -1634,14 +1647,24 @@ IF vm_flag_llam = 'I' THEN
 	LET rm_c10.c10_tipo_orden = vm_tipo_oc
 	LET rm_c10.c10_cod_depto  = 1
 	LET rm_c10.c10_numprof    = vm_numprof
-	CALL fl_lee_proforma_rep(vg_codcia, vg_codloc, vm_numprof) RETURNING r_r21.*
-	LET valor_fact = r_r21.r21_tot_bruto - r_r21.r21_tot_dscto
-	CALL fl_lee_vendedor_rep(vg_codcia, vm_vendedor) RETURNING r_r01.*
-	LET rm_c10.c10_solicitado = r_r01.r01_nombres
+	CALL lee_oc_proforma() RETURNING r_c10.*
+	IF r_c10.c10_compania IS NOT NULL THEN
+		LET rm_c10.*    = r_c10.*
+		LET vm_subtotal = rm_c10.c10_tot_repto + rm_c10.c10_tot_mano
+		LET valor_fact  = vm_subtotal - rm_c10.c10_tot_dscto + rm_c10.c10_otros
+							+ rm_c10.c10_dif_cuadre
+	ELSE
+		CALL fl_lee_proforma_rep(vg_codcia, vg_codloc, vm_numprof)
+			RETURNING r_r21.*
+		LET valor_fact            = r_r21.r21_tot_bruto - r_r21.r21_tot_dscto
+		LET rm_c10.c10_referencia = r_r21.r21_nomcli
+		CALL fl_lee_vendedor_rep(vg_codcia, vm_vendedor) RETURNING r_r01.*
+		LET rm_c10.c10_solicitado = r_r01.r01_nombres
+	END IF
 	CALL fl_lee_tipo_orden_compra(rm_c10.c10_tipo_orden) RETURNING rm_c01.*
 	CALL fl_lee_departamento(vg_codcia, rm_c10.c10_cod_depto) RETURNING rm_g34.*
 	DISPLAY BY NAME rm_c10.c10_cod_depto, rm_c10.c10_tipo_orden,
-					rm_c10.c10_numprof, valor_fact
+					rm_c10.c10_numprof, valor_fact, rm_c10.c10_referencia
 	DISPLAY rm_g34.g34_nombre TO nom_departamento
 	DISPLAY rm_c01.c01_nombre TO nom_tipo_orden
 END IF
@@ -3168,6 +3191,25 @@ SELECT NVL(SUM(r11_stock_act), 0)
 					WHERE b.g02_compania  = a.g02_compania
 					  AND b.g02_localidad = vg_codloc))
 RETURN stock
+
+END FUNCTION
+
+
+
+FUNCTION lee_oc_proforma()
+DEFINE r_c10		RECORD LIKE ordt010.*
+
+INITIALIZE r_c10.* TO NULL
+DECLARE q_oc_prof CURSOR FOR
+	SELECT * FROM ordt010
+		WHERE c10_compania  = vg_codcia
+		  AND c10_localidad = vg_codloc
+		  AND c10_numprof   = vm_numprof
+OPEN q_oc_prof
+FETCH q_oc_prof INTO r_c10.*
+CLOSE q_oc_prof
+FREE q_oc_prof
+RETURN r_c10.*
 
 END FUNCTION
 
