@@ -292,7 +292,7 @@ OUTPUT
 	LEFT MARGIN		0
 	RIGHT MARGIN	132
 	BOTTOM MARGIN	3
-	PAGE LENGTH		43
+	PAGE LENGTH		42
 
 FORMAT
 
@@ -390,20 +390,20 @@ PAGE HEADER
 			ASCII escape, ASCII act_12cpi, ASCII escape, ASCII des_neg,
 			ASCII escape, ASCII act_comp
 	--}
-	PRINT COLUMN 010, "(", rm_r19.r19_codcli USING "&&&&&", ") : ",
-					rm_r19.r19_nomcli[1, 60] CLIPPED,
+	PRINT COLUMN 010, r_z02.z02_referencia[1,70] CLIPPED,
 		  COLUMN 077, ASCII escape, ASCII act_10cpi,
 					ASCII escape, ASCII act_neg,
 				" ", DATE(rm_r19.r19_fecing) USING "dd-mm-yyyy",
 		ASCII escape, ASCII des_neg
-	PRINT COLUMN 010, r_z02.z02_referencia CLIPPED
+	PRINT COLUMN 010, "(", rm_r19.r19_codcli USING "&&&&&", ") : ",
+					rm_r19.r19_nomcli[1, 60] CLIPPED
 	print ASCII escape;
 	print ASCII act_comp;
 	PRINT COLUMN 015, rm_r19.r19_dircli,
 	      COLUMN 068, r_g31.g31_nombre CLIPPED
 	PRINT COLUMN 013, rm_r19.r19_cedruc
-	PRINT COLUMN 093, r_r21.r21_forma_pago CLIPPED,
-	      COLUMN 123, (fecha_vcto - DATE(rm_r19.r19_fecing) + 1) USING "##0"
+	PRINT COLUMN 093, r_r21.r21_forma_pago CLIPPED
+--	      COLUMN 123, (fecha_vcto - DATE(rm_r19.r19_fecing) + 1) USING "##0"
 	SKIP 2 LINES
 
 ON EVERY ROW
