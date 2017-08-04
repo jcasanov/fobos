@@ -10,14 +10,14 @@ SCREEN
     Dirección:[g8                             ]  Ced/RUC/Pas:[g7             ]
      Vendedor:[g10 ] [g11                     ]    Tipo Pago:[g13            ]
 
-    [e][c0     |c1     |c2] [c3        ] [c4   |c5           |c6              ]
-   [b][g16    |g17    |z1] [g18       ] [g20  |g21          |g22             ]
-   [b][g16    |g17    |z1] [g18       ] [g20  |g21          |g22             ]
-   [b][g16    |g17    |z1] [g18       ] [g20  |g21          |g22             ]
-   [b][g16    |g17    |z1] [g18       ] [g20  |g21          |g22             ]
-                  		                   Subtotal:[g23             ]
+   [e][c0     |c1     |c2] [c3        ] [c4    |c5           |c6              ]
+  [b][g16    |g17    |z1] [g18       ] [g20   |g21          |g22             ]
+  [b][g16    |g17    |z1] [g18       ] [g20   |g21          |g22             ]
+  [b][g16    |g17    |z1] [g18       ] [g20   |g21          |g22             ]
+  [b][g16    |g17    |z1] [g18       ] [g20   |g21          |g22             ]
+                                                   Subtotal:[g23             ]
      [g19                           ]             Descuento:[g24             ]
-	 Peso Total:[c00            ]              Impuesto:[g25             ]
+         Peso Total:[c00            ]              Impuesto:[g25             ]
               Flete:[g15            ]	               Neto:[g26             ]
 }
 TABLES
@@ -89,7 +89,7 @@ z1  = r24_bodega, UPSHIFT, AUTONEXT, REQUIRED, OPTIONS = '-nolist',
 g18 = rept024.r24_item, AUTONEXT, UPSHIFT, OPTIONS = '-nolist',
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 g19 = FORMONLY.nom_item, NOENTRY;
-g20 = rept024.r24_descuento, FORMAT = '#&.##', INCLUDE = (0 TO 99.99),
+g20 = rept024.r24_descuento, FORMAT = '##&.##', INCLUDE = (0 TO 100.00),
 	OPTIONS = '-nolist';
 g21 = rept024.r24_precio, NOENTRY, FORMAT = '##,###,##&.##',
 	 OPTIONS = '-nolist';

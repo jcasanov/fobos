@@ -1031,7 +1031,7 @@ CASE flag
 		LET param    = rm_r88.r88_numprev_nue
 		LET mensproc = "Aprobación Pre-Venta."
 	WHEN 4
-		LET param    = rm_r88.r88_numprev_nue, ' "A" '
+		LET param    = rm_r88.r88_numprev_nue, ' "R" '
 		LET mensproc = "Aprobación Crédito."
 	WHEN 5
 		LET param    = '"PR" ', rm_r88.r88_numprev_nue, ' "A" '

@@ -3888,7 +3888,7 @@ SELECT r10_sec_item r10_codigo, r10_nombre, r11_stock_act stock_pend,
 	r11_stock_act stock_tot, r11_stock_act stock_loc, r10_stock_max,
 	r10_stock_min
 	FROM rept010, rept011
-	WHERE r10_compania  = 17
+	WHERE r10_compania  = 99
 	  AND r11_compania  = r10_compania
 	  AND r11_item      = r10_codigo
 	INTO TEMP t_item
@@ -4032,34 +4032,58 @@ END FUNCTION
 
 
 FUNCTION obtener_stock_pendiente()
+DEFINE r_c10		RECORD LIKE ordt010.*
+DEFINE r_r21		RECORD LIKE rept021.*
 DEFINE cuantos		INTEGER
-DEFINE query		CHAR(800)
+DEFINE query		CHAR(1500)
+DEFINE expr_query	VARCHAR(200)
 
 CALL obtener_bod_sin_stock()
-SELECT r20_cod_tran, r20_num_tran, r20_fecing fecha, r20_bodega, r20_item,
-		r20_cant_ven
-	FROM rept020
-	WHERE r20_compania   = vg_codcia
-	  AND r20_localidad  = vg_codloc
-	  AND r20_cod_tran  IN ("FA", "DF")
-	  AND r20_bodega    IN (SELECT r02_codigo FROM t_bd1)
-	  AND r20_item      IN (SELECT r10_codigo FROM t_item)
-	INTO TEMP t_r20
-SELECT r19_cod_tran, r19_num_tran, r19_nomcli, r19_vendedor, r19_tipo_dev,
-	r19_num_dev
-	FROM rept019
-	WHERE r19_compania  = vg_codcia
-	  AND r19_localidad = vg_codloc
-	  AND r19_cod_tran  = "FA"
-	  AND (r19_tipo_dev = "DF" OR r19_tipo_dev IS NULL)
-UNION ALL
-SELECT r19_cod_tran, r19_num_tran, r19_nomcli, r19_vendedor, r19_tipo_dev,
-	r19_num_dev
-	FROM rept019
-	WHERE r19_compania   = vg_codcia
-	  AND r19_localidad  = vg_codloc
-	  AND r19_cod_tran   = "DF"
-	INTO TEMP t_r19
+CALL fl_lee_orden_compra(vg_codcia, vg_codloc, rm_r19.r19_oc_interna)
+	RETURNING r_c10.*
+CALL fl_lee_proforma_rep(vg_codcia, vg_codloc, r_c10.c10_numprof)
+	RETURNING r_r21.*
+LET expr_query = NULL
+IF r_r21.r21_num_tran IS NOT NULL THEN
+	LET expr_query = '   AND r20_cod_tran = "', r_r21.r21_cod_tran, '" ',
+					 '   AND r20_num_tran = ', r_r21.r21_num_tran
+END IF
+LET query = 'SELECT r20_cod_tran, r20_num_tran, r20_fecing fecha, r20_bodega, ',
+					'r20_item, r20_cant_ven ',
+				' FROM rept020 ',
+				' WHERE r20_compania   = ', vg_codcia,
+				'   AND r20_localidad  = ', vg_codloc,
+				'   AND r20_cod_tran  IN ("FA", "DF") ',
+				expr_query CLIPPED,
+				'   AND r20_bodega    IN (SELECT r02_codigo FROM t_bd1) ',
+				'   AND r20_item      IN (SELECT r10_codigo FROM t_item) ',
+				' INTO TEMP t_r20 '
+PREPARE exec_t_r20 FROM query
+EXECUTE exec_t_r20
+LET expr_query = NULL
+IF r_r21.r21_num_tran IS NOT NULL THEN
+	LET expr_query = '   AND r19_cod_tran = "', r_r21.r21_cod_tran, '" ',
+					 '   AND r19_num_tran = ', r_r21.r21_num_tran
+ELSE
+	LET expr_query = '   AND r19_cod_tran = "FA" '
+END IF
+LET query = 'SELECT r19_cod_tran, r19_num_tran, r19_nomcli, r19_vendedor, ',
+					'r19_tipo_dev, r19_num_dev ',
+				' FROM rept019 ',
+				' WHERE r19_compania  = ', vg_codcia,
+				'   AND r19_localidad = ', vg_codloc,
+				expr_query CLIPPED,
+				'   AND (r19_tipo_dev = "DF" OR r19_tipo_dev IS NULL) ',
+			' UNION ALL ',
+			' SELECT r19_cod_tran, r19_num_tran, r19_nomcli, r19_vendedor, ',
+						'r19_tipo_dev, r19_num_dev ',
+				' FROM rept019 ',
+				' WHERE r19_compania   = ', vg_codcia,
+				'   AND r19_localidad  = ', vg_codloc,
+	 			'   AND r19_cod_tran   = "DF" ',
+				' INTO TEMP t_r19 '
+PREPARE exec_t_r19 FROM query
+EXECUTE exec_t_r19
 SELECT c.*, d.r19_nomcli, d.r19_vendedor
 	FROM t_r20 c, t_r19 d
 	WHERE d.r19_cod_tran = c.r20_cod_tran

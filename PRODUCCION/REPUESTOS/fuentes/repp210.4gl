@@ -3,8 +3,8 @@
 -- Elaboracion      : 25-oct-2001
 -- Autor            : GVA
 -- Formato Ejecucion: fglrun repp210 base modulo compania localidad
---			[numprev] [A]
--- Ultima Correccion: 25-oct-2001
+--			[numprev] [A/R]
+-- Ultima Correccion: 03-ago-2017	NPC
 -- Motivo Correccion: 1
 --------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
@@ -461,9 +461,11 @@ END FUNCTION
 
 
 
-FUNCTION control_forma_pago(numprev)
+FUNCTION control_forma_pago(numprev, flag)
 DEFINE numprev		LIKE rept023.r23_numprev
+DEFINE flag			SMALLINT
 DEFINE r_r19		RECORD LIKE rept019.*
+DEFINE r_z02		RECORD LIKE cxct002.*
 DEFINE fecha_1er_pago	DATE
 DEFINE num_dias		INTEGER
 DEFINE d_pagos		INTEGER
@@ -483,7 +485,7 @@ INITIALIZE rm_r25.*, fecha_primer_pago TO NULL
 LET d_pagos           = rm_z61.z61_dia_entre_pago
 LET fecha_primer_pago = TODAY + d_pagos
 
-IF num_args() = 6 THEN
+IF num_args() = 6 AND arg_val(6) = 'R' THEN
 	CALL fl_lee_cabecera_transaccion_rep(rm_r88.r88_compania,
 				rm_r88.r88_localidad, rm_r88.r88_cod_fact,
 				rm_r88.r88_num_fact)
@@ -500,12 +502,17 @@ CALL fl_lee_cabecera_credito_rep(vg_codcia, vg_codloc, rm_r23.r23_numprev)
 	RETURNING rm_r25.*
 IF rm_r25.r25_numprev IS NULL THEN
 	LET fecha_primer_pago     = TODAY + d_pagos
-	IF num_args() = 6 THEN
+	IF num_args() = 6 AND arg_val(6) = 'R' THEN
 		LET fecha_primer_pago = TODAY + num_dias UNITS DAY
+	END IF
+	IF arg_val(6) = 'A' THEN
+		CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc, rm_r23.r23_codcli)
+			RETURNING r_z02.*
+		LET fecha_primer_pago = TODAY + r_z02.z02_credit_dias UNITS DAY
 	END IF
 	LET rm_r25.r25_interes    = rm_z61.z61_intereses
 	LET dias_entre_pagos      = d_pagos
-	IF num_args() = 6 THEN
+	IF num_args() = 6 AND arg_val(6) = 'R' THEN
 		LET dias_entre_pagos = num_dias
 	END IF
 	LET rm_r25.r25_plazo      = calcula_plazo()
@@ -513,7 +520,7 @@ IF rm_r25.r25_numprev IS NULL THEN
 	LET rm_r25.r25_valor_cred = rm_r23.r23_tot_neto
 	LET rm_r25.r25_valor_ant  = 0
 	LET rm_r25.r25_dividendos = rm_z61.z61_num_pagos
-	IF r_r19.r19_cont_cred = 'R' AND num_args() = 6 THEN
+	IF r_r19.r19_cont_cred = 'R' AND num_args() = 6 AND arg_val(6) = 'R' THEN
 		SELECT NVL(MAX(z20_dividendo), 1) INTO rm_r25.r25_dividendos
 			FROM cxct020
 			WHERE z20_compania  = r_r19.r19_compania
@@ -524,7 +531,7 @@ IF rm_r25.r25_numprev IS NULL THEN
 			  AND z20_num_tran  = r_r19.r19_num_tran
 	END IF
 	LET vm_flag_dividendos    = 'S'
-	IF num_args() = 6 THEN
+	IF num_args() = 6 AND arg_val(6) = 'R' THEN
 		LET rm_r25.r25_plazo = rm_r25.r25_dividendos * dias_entre_pagos
 	END IF
 ELSE
@@ -535,6 +542,12 @@ ELSE
 	IF rm_r25.r25_valor_cred + rm_r25.r25_valor_ant <> rm_r23.r23_tot_neto
 	THEN
 		LET fecha_primer_pago     = fecha_1er_pago
+		IF arg_val(6) = 'A' THEN
+			CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc,
+											rm_r23.r23_codcli)
+				RETURNING r_z02.*
+			LET fecha_primer_pago = TODAY + r_z02.z02_credit_dias UNITS DAY
+		END IF
 		LET rm_r25.r25_interes    = 0
 		LET rm_r25.r25_interes    = 0
 		LET rm_r25.r25_numprev    = rm_r23.r23_numprev
@@ -554,7 +567,7 @@ END IF
 CALL fl_lee_moneda(rm_r23.r23_moneda) 	-- PARA OBTENER EL NOMBRE DE LA MONEDA 
 	RETURNING rm_g13.*		   	    
 
-IF num_args() = 6 THEN
+IF num_args() = 6 AND flag THEN
 	RETURN
 END IF
 
@@ -563,6 +576,9 @@ DISPLAY BY NAME rm_r23.r23_moneda, fecha_primer_pago, rm_r25.r25_plazo,
 		rm_r25.r25_valor_cred, rm_r25.r25_numprev, rm_r23.r23_codcli,
 		rm_r23.r23_nomcli, rm_r25.r25_dividendos
 DISPLAY rm_g13.g13_nombre TO nom_moneda
+IF num_args() = 6 AND arg_val(6) = 'A' THEN
+	CALL control_cargar_detalle_credito()
+END IF
 
 END FUNCTION
 
@@ -617,7 +633,9 @@ IF i > 0 THEN
 END IF
 IF num_args() = 6 THEN
 	CALL generacion_credito(numprev)
-	RETURN
+	IF arg_val(6) = 'R' THEN
+		RETURN
+	END IF
 END IF
 LET lin_menu = 0
 LET row_ini  = 3
@@ -641,7 +659,7 @@ DISPLAY FORM f_210_3
 CLEAR FORM
 CALL control_display_botones_credito()
 
-CALL control_forma_pago(numprev)
+CALL control_forma_pago(numprev, 0)
 MENU 'OPCIONES'
 	BEFORE MENU
 		IF num_args() <> 4 THEN
@@ -659,7 +677,12 @@ MENU 'OPCIONES'
 		IF done = 1 THEN
 			EXIT MENU
 		END IF
+	COMMAND KEY('D') 'Detalle'		'Se ubica en el detalle.'
+		CALL control_display_detalle_credito()
 	COMMAND KEY('S') 'Salir' 		'Salir Menu.'
+		IF arg_val(6) = 'A' THEN
+			EXIT MENU
+		END IF
 		IF rm_r23.r23_estado = 'P' THEN
 			LET resp = control_salir()
 			IF resp = 'Yes' THEN
@@ -685,7 +708,7 @@ FUNCTION generacion_credito(numprev)
 DEFINE numprev		LIKE rept023.r23_numprev
 DEFINE done		SMALLINT
 
-CALL control_forma_pago(numprev)
+CALL control_forma_pago(numprev, 1)
 CALL control_credito()
 CALL control_grabar() RETURNING done
 
@@ -696,8 +719,7 @@ END FUNCTION
 FUNCTION control_salir()
 DEFINE resp		CHAR(6)
 
-CALL fl_mensaje_abandonar_proceso()
-	RETURNING resp
+CALL fl_mensaje_abandonar_proceso() RETURNING resp
 RETURN resp
 
 END FUNCTION
@@ -827,7 +849,7 @@ IF num_args() <> 6 THEN
 ELSE
 	LET mensaje = 'Aprobación de Crédito en Pre-Venta ',
 			rm_r23.r23_numprev USING "<<<<<<&", ' Generada Ok.'
-	--CALL fl_mostrar_mensaje(mensaje, 'info')
+	CALL fl_mostrar_mensaje(mensaje, 'info')
 END IF
 RETURN done
 
@@ -1067,12 +1089,22 @@ FOR i = 1 TO rm_r25.r25_dividendos
 			    r_detalle_3[i-1].r26_fec_vcto + dias_entre_pagos
 		END IF
 	ELSE
-		LET query = 'SELECT r26_fec_vcto ',
-				' FROM rept026 ',
-				' WHERE r26_compania  = ', rm_r88.r88_compania,
-				'   AND r26_localidad = ', rm_r88.r88_localidad,
-				'   AND r26_numprev   = ', rm_r88.r88_numprev,
-				'   AND r26_dividendo = ', i
+		IF arg_val(6) = 'R' THEN
+			LET query = 'SELECT r26_fec_vcto ',
+					' FROM rept026 ',
+					' WHERE r26_compania  = ', rm_r88.r88_compania,
+					'   AND r26_localidad = ', rm_r88.r88_localidad,
+					'   AND r26_numprev   = ', rm_r88.r88_numprev,
+					'   AND r26_dividendo = ', i
+		END IF
+		IF arg_val(6) = 'A' THEN
+			LET query = 'SELECT r26_fec_vcto ',
+					' FROM rept026 ',
+					' WHERE r26_compania  = ', vg_codcia,
+					'   AND r26_localidad = ', vg_codloc,
+					'   AND r26_numprev   = ', vg_numprev,
+					'   AND r26_dividendo = ', i
+		END IF
 		PREPARE cons_r26_ant FROM query
 		DECLARE q_r26_ant CURSOR FOR cons_r26_ant
 		OPEN q_r26_ant
@@ -1106,7 +1138,7 @@ LET vm_filas_pant = vm_size_arr3
 IF rm_r25.r25_dividendos < vm_filas_pant THEN
 	LET vm_filas_pant = rm_r25.r25_dividendos
 END IF 
-IF num_args() = 6 THEN
+IF num_args() = 6 AND arg_val(6) = 'R' THEN
 	RETURN
 END IF
 FOR i = 1 TO vm_filas_pant
@@ -1421,30 +1453,28 @@ DEFINE mensaje		VARCHAR(150)
 DEFINE r_z00		RECORD LIKE cxct000.*
 DEFINE r_z02		RECORD LIKE cxct002.*
 
-LET int_flag = 0
 IF fecha_primer_pago IS NULL THEN
 	LET fecha_primer_pago = TODAY + dias_entre_pagos
 END IF
+LET int_flag = 0
 INPUT BY NAME rm_r25.r25_numprev, rm_r23.r23_codcli, rm_r23.r23_nomcli,
 	      rm_r25.r25_dividendos, rm_r25.r25_plazo, fecha_primer_pago,
 		dias_entre_pagos, rm_r25.r25_valor_cred, rm_r25.r25_valor_ant
 	WITHOUT DEFAULTS
-	ON KEY (INTERRUPT)
+	ON KEY(INTERRUPT)
 		IF NOT FIELD_TOUCHED(r23_codcli,  r23_nomcli, r25_dividendos,
 				     dias_entre_pagos)
 		THEN
-			--RETURN
+			LET int_flag = 1
 			EXIT INPUT
 		END IF
-		LET INT_FLAG = 0
-		CALL fl_mensaje_abandonar_proceso()
-                	RETURNING resp
+		LET int_flag = 0
+		CALL fl_mensaje_abandonar_proceso() RETURNING resp
 		IF resp = 'Yes' THEN
 			LET int_flag = 1
-			--#RETURN
 			EXIT INPUT
 		END IF
-        ON KEY(F1,CONTROL-W)
+	ON KEY(F1,CONTROL-W)
 		CALL llamar_visor_teclas()
 	BEFORE INPUT
 		--#CALL dialog.keysetlabel("F1","")

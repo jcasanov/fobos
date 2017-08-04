@@ -1236,14 +1236,17 @@ WHILE NOT salir
 				LET max_row = max_row + 1
 			END IF
 			LET item_anterior = r_detalle[i].r22_item  
+			IF r_detalle[i].r22_bodega IS NULL THEN
+				LET r_detalle[i].r22_bodega = rm_r00.r00_bodega_fact
+				DISPLAY r_detalle[i].r22_bodega TO r_detalle[j].r22_bodega
+			END IF
 			IF r_detalle[i].r22_item IS NOT NULL THEN
-				CALL fl_lee_item(vg_codcia,
-							r_detalle[i].r22_item)
+				CALL fl_lee_item(vg_codcia, r_detalle[i].r22_item)
 					RETURNING rm_r10.*
 				CALL muestra_etiquetas_det(i, max_row, i)
 			ELSE
-				CLEAR nom_item, descrip_1, descrip_2, descrip_3,
-					descrip_4, nom_marca
+				CLEAR nom_item, descrip_1, descrip_2, descrip_3, descrip_4,
+					nom_marca
 			END IF
 			LET num = arr_count()
 		AFTER DELETE	                                   
@@ -1429,14 +1432,8 @@ WHILE NOT salir
 				   FIELD_TOUCHED(r22_bodega) THEN       
 				IF rg_gen.g00_moneda_base = rm_r21.r21_moneda THEN
 					LET r_detalle[i].r22_precio = rm_r10.r10_precio_mb
-					IF vg_codcia = 2 AND rm_vend.r01_user_owner = 'TRANINVE' THEN
-						LET r_detalle[i].r22_precio = rm_r10.r10_costo_mb
-					END IF
 				ELSE		
 					LET r_detalle[i].r22_precio = rm_r10.r10_precio_ma
-					IF vg_codcia = 2 AND rm_vend.r01_user_owner = 'TRANINVE' THEN
-						LET r_detalle[i].r22_precio = rm_r10.r10_costo_ma
-					END IF
 				END IF			
 				END IF			
 				IF r_detalle[i].r22_porc_descto IS NULL THEN 
@@ -1532,9 +1529,11 @@ WHILE NOT salir
 					RETURNING max_descto, max_descto_c
 				IF r_detalle[i].r22_porc_descto > max_descto THEN
 					LET mensaje = 'El item: ', r_detalle[i].r22_item CLIPPED,
-						      ' tiene un descuento máximo de: ', 
-						      max_descto USING '#&.##'	
-					CALL fl_mostrar_mensaje(mensaje,'exclamation') 			
+						      ' tiene un descuento maximo de: ', 
+						      max_descto USING '##&.##'	
+					IF rm_vend.r01_tipo = 'I' OR rm_vend.r01_tipo = 'E' THEN
+						CALL fl_mostrar_mensaje(mensaje,'exclamation')
+					END IF
 					IF rm_g04.g04_grupo <> 'GE' THEN
 						LET r_detalle[i].r22_porc_descto = max_descto
 						DISPLAY r_detalle[i].* TO  r_detalle[j].* 
@@ -1968,6 +1967,7 @@ DEFINE flag_error	SMALLINT
 DEFINE flag_bloqueo	SMALLINT
 DEFINE cuantos		INTEGER
 DEFINE numprof		VARCHAR(15)
+DEFINE param		VARCHAR(100)
 
 IF rm_r21.r21_num_ot IS NOT NULL OR rm_r21.r21_num_presup IS NOT NULL THEN
 	CALL fl_mostrar_mensaje('Esta proforma es de talleres.','exclamation')             	
@@ -2091,16 +2091,15 @@ IF rm_r00.r00_numlin_fact <> 9999 THEN
 END IF
 -- Saca los items que se van a grabar en el detalle de la(s) preventa(s)
 DECLARE q_prof CURSOR FOR
-	SELECT MIN(r22_orden), r22_bodega, r22_item, r22_precio,
-		r22_porc_descto, r10_linea, SUM(r22_cantidad)
+	SELECT (r22_orden), r22_bodega, r22_item, r22_precio,
+		r22_porc_descto, r10_linea, (r22_cantidad)
 		FROM rept022, rept010 
 		WHERE r22_compania  = vg_codcia 
 		  AND r22_localidad = vg_codloc
 		  AND r22_numprof   = rm_r21.r21_numprof
 		  AND r10_compania  = r22_compania
 		  AND r10_codigo    = r22_item 
-		GROUP BY r22_bodega, r22_item, r22_precio, r22_porc_descto,
-			r10_linea
+		--GROUP BY r22_bodega, r22_item, r22_precio, r22_porc_descto,	r10_linea
 		ORDER BY 1 
 INITIALIZE r_detprev.* TO NULL
 LET salir = 0 
@@ -2278,6 +2277,15 @@ LET mensaje = 'Se generó la preventa: ', rm_r23.r23_numprev USING "<<<<<<&", '.'
 CALL fl_mostrar_mensaje(mensaje, 'info')
 IF num_args() <> 6 THEN
 	DISPLAY BY NAME rm_r23.r23_numprev
+END IF
+IF num_args() = 4 THEN
+	LET int_flag = 0
+	CALL fl_hacer_pregunta('Desea generar crédito automatico para esta Pre-venta?', 'Yes')
+		RETURNING resp
+	IF resp = 'Yes' THEN
+		LET param = ' ', rm_r23.r23_numprev, ' A '
+		CALL fl_ejecuta_comando('REPUESTOS', vg_modulo, 'repp210', param, 1)
+	END IF
 END IF
 
 END FUNCTION
@@ -2923,10 +2931,8 @@ DEFINE codcia		LIKE gent001.g01_compania
 DEFINE cod_util		LIKE rept010.r10_cod_util
 DEFINE r_r77		RECORD LIKE rept077.*
 
-SELECT * INTO r_r77.* FROM rept077
-	WHERE r77_compania    = codcia AND 
-	      r77_codigo_util = cod_util
-IF status = NOTFOUND THEN
+CALL fl_lee_factor_utilidad_rep(codcia, cod_util) RETURNING r_r77.*
+IF r_r77.r77_compania IS NULL THEN
 	RETURN 0, 0
 END IF
 IF rm_vend.r01_compania IS NULL AND rm_g05.g05_tipo = 'AG' THEN
@@ -2940,6 +2946,11 @@ IF rm_vend.r01_tipo = 'J' THEN
 END IF
 IF rm_vend.r01_tipo = 'G' THEN
 	RETURN r_r77.r77_dscmax_ger, r_r77.r77_dscmax_ven
+END IF
+IF rm_vend.r01_tipo <> 'I' AND rm_vend.r01_tipo <> 'E' AND
+   r_r77.r77_desc_promo > 0
+THEN
+	RETURN r_r77.r77_desc_promo, r_r77.r77_dscmax_ven
 END IF
 RETURN r_r77.r77_dscmax_ven, r_r77.r77_dscmax_ven
 
