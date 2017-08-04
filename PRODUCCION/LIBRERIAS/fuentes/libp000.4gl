@@ -5404,6 +5404,115 @@ END FUNCTION
 
 
 
+FUNCTION fl_control_reportes_extendido()
+DEFINE tit_impresion	CHAR(1)
+DEFINE r_gen		RECORD LIKE gent007.*
+DEFINE r_g07		RECORD LIKE gent007.*
+DEFINE r_gen2		RECORD LIKE gent006.*
+DEFINE codi_aux		LIKE gent006.g06_impresora
+DEFINE nomi_aux		LIKE gent006.g06_nombre
+DEFINE comando		VARCHAR(100)
+DEFINE row_ini		SMALLINT
+
+LET row_ini = 4
+IF vg_gui = 0 THEN
+	LET row_ini = 6
+END IF
+OPEN WINDOW w_forext AT row_ini, 9 WITH 10 ROWS, 63 COLUMNS
+        ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MESSAGE LINE LAST,
+                   MENU LINE 0, BORDER)
+IF vg_gui = 1 THEN
+	OPEN FORM f_ayuf311 FROM "../../../PRODUCCION/LIBRERIAS/forms/ayuf311"
+ELSE
+	OPEN FORM f_ayuf311 FROM "../../../PRODUCCION/LIBRERIAS/forms/ayuf304c"
+END IF
+DISPLAY FORM f_ayuf311
+INITIALIZE codi_aux, comando TO NULL
+LET tit_impresion = 'I'
+INITIALIZE r_gen.g07_impresora TO NULL
+DECLARE qu_repoext CURSOR FOR 
+	SELECT g07_impresora FROM gent007 
+		WHERE g07_user = vg_usuario AND g07_default = 'S'
+OPEN qu_repoext
+FETCH qu_repoext INTO r_gen.g07_impresora
+CLOSE qu_repoext
+CALL fl_lee_impresora(r_gen.g07_impresora) RETURNING r_gen2.*
+DISPLAY BY NAME r_gen2.g06_nombre
+LET int_flag = 0
+INPUT BY NAME tit_impresion, r_gen.g07_impresora
+	WITHOUT DEFAULTS
+	ON KEY(INTERRUPT)
+		LET int_flag = 1
+		EXIT INPUT
+	ON KEY(F2)
+		IF INFIELD(g07_impresora) THEN
+               		CALL fl_ayuda_impresoras(vg_usuario)
+                       		RETURNING codi_aux, nomi_aux
+       		      	LET int_flag = 0
+                      	IF codi_aux IS NOT NULL THEN
+                              	LET r_gen.g07_impresora = codi_aux
+                               	DISPLAY BY NAME r_gen.g07_impresora
+                               	DISPLAY nomi_aux TO g06_nombre
+                       	END IF
+                END IF
+	AFTER FIELD tit_impresion
+		IF tit_impresion <> 'I' THEN
+			EXIT INPUT
+		END IF
+		IF tit_impresion = 'P' THEN
+                        LET r_gen.g07_impresora = NULL
+			CLEAR g07_impresora, g06_nombre
+		END IF
+	AFTER FIELD g07_impresora
+		IF r_gen.g07_impresora IS NOT NULL THEN
+			CALL fl_lee_impresora(r_gen.g07_impresora)
+				RETURNING r_gen2.*
+			IF r_gen2.g06_impresora IS NULL THEN
+				CALL fl_mostrar_mensaje('Impresora no existe.','exclamation')
+				NEXT FIELD g07_impresora
+			END IF
+			DISPLAY BY NAME r_gen2.g06_nombre
+			CALL fl_lee_impresora_usr(vg_usuario,
+							r_gen.g07_impresora)
+				RETURNING r_g07.*
+			IF r_g07.g07_impresora IS NULL THEN
+				CALL fl_mostrar_mensaje('Esta impresora no esta asignada a este usuario.','exclamation')
+				NEXT FIELD g07_impresora
+			END IF
+		ELSE
+			CLEAR g06_nombre
+		END IF
+	AFTER INPUT
+		IF tit_impresion = 'I' THEN
+			IF r_gen.g07_impresora IS NULL THEN
+				CALL fl_mostrar_mensaje('Escoja una Impresora.','exclamation')
+				NEXT FIELD g07_impresora
+			END IF
+		END IF
+END INPUT
+IF NOT int_flag THEN
+	IF tit_impresion = 'I' THEN
+		LET comando = 'lpr -o raw -P ', r_gen.g07_impresora
+	END IF
+	IF tit_impresion = 'P' THEN
+		LET comando = 'fglpager'
+	END IF
+	IF tit_impresion = 'A' THEN
+		INITIALIZE r_gen2.g06_nombre TO NULL
+		OPTIONS INPUT NO WRAP
+		INPUT BY NAME r_gen2.g06_nombre
+		LET comando = 'enscript -B -f Courier6.9 -o - | ps2pdf - ', 
+					  FGL_GETENV('HOME') CLIPPED, vg_separador, 
+                      '/tmp', vg_separador, r_gen2.g06_nombre, '.pdf'
+	END IF
+END IF
+CLOSE WINDOW w_forext
+RETURN tit_impresion, comando
+
+END FUNCTION
+
+
+
 FUNCTION fl_control_reportes()
 DEFINE tit_impresion	CHAR(1)
 DEFINE r_gen		RECORD LIKE gent007.*
@@ -5496,13 +5605,6 @@ IF NOT int_flag THEN
 	END IF
 	IF tit_impresion = 'P' THEN
 		LET comando = 'fglpager'
-	END IF
-	IF tit_impresion = 'A' THEN
-		INITIALIZE r_gen2.g06_nombre TO NULL
-		OPTIONS INPUT NO WRAP
-		INPUT BY NAME r_gen2.g06_nombre
-		LET comando = 'cat > ', FGL_GETENV('HOME') CLIPPED, vg_separador, 
-                      '/tmp', vg_separador, r_gen2.g06_nombre, '.wri'
 	END IF
 END IF
 CLOSE WINDOW w_for

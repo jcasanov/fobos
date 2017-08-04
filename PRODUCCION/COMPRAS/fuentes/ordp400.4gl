@@ -16,6 +16,8 @@ DEFINE rm_loc		RECORD LIKE gent002.*
 DEFINE vm_num_item	INTEGER
 DEFINE vm_num_lineas	INTEGER
 
+DEFINE vm_impresion CHAR(1)
+
 
 
 MAIN
@@ -132,7 +134,7 @@ WHILE TRUE
 						rm_c10.c10_numero_oc)
 			RETURNING rm_c10.*
 	END IF
-	CALL fl_control_reportes() RETURNING comando
+	CALL fl_control_reportes_extendido() RETURNING vm_impresion, comando
 	IF int_flag THEN
 		IF num_args() = 4 THEN
 			CONTINUE WHILE
@@ -386,8 +388,10 @@ PAGE HEADER
 		WHEN 'C'
 			LET nom_estado = 'CERRADA'
 	END CASE  
-	print ASCII escape;
-	print ASCII act_comp;
+	IF vm_impresion = 'I' THEN
+		print ASCII escape;
+		print ASCII act_comp;
+	END IF
 	PRINT COLUMN 109, "PAG. ", PAGENO USING "&&&"
 	PRINT COLUMN 01,  titulo
 	SKIP 1 LINES
@@ -467,11 +471,11 @@ PAGE TRAILER
 	LET label_letras = fl_retorna_letras(rm_c10.c10_moneda, valor_pag)
 	SKIP 2 LINES
 	IF vm_num_lineas = vm_num_item THEN
-		PRINT COLUMN 02,  "SOMOS CONTRIBUYENTES ESPECIALES D.G.R. # 39",
+		PRINT --COLUMN 02,  "SOMOS CONTRIBUYENTES ESPECIALES D.G.R. # 39",
 		      COLUMN 95,  "TOTAL BRUTO",
 		      COLUMN 116, rm_c10.c10_tot_repto + rm_c10.c10_tot_mano
 							USING "#,###,###,##&.##"
-		PRINT COLUMN 02,  "PRECIOS SUJETOS A CAMBIO SIN PREVIO AVISO",
+		PRINT --COLUMN 02,  "PRECIOS SUJETOS A CAMBIO SIN PREVIO AVISO",
 		      COLUMN 95,  "DESCUENTOS",
 		      COLUMN 118, rm_c10.c10_tot_dscto	USING "###,###,##&.##"
 		PRINT COLUMN 95,  "SEGURO",
@@ -495,8 +499,10 @@ PAGE TRAILER
 		PRINT COLUMN 02, 1 SPACES
 		PRINT COLUMN 02, 1 SPACES;
 	END IF
-	print ASCII escape;
-	print ASCII desact_comp 
+	IF vm_impresion = 'I' THEN
+		print ASCII escape;
+		print ASCII desact_comp 
+	END IF
 
 END REPORT
 
