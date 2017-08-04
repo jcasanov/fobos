@@ -2066,7 +2066,11 @@ DEFINE grupo		LIKE actt010.a10_grupo_act
 DEFINE tipo		LIKE actt010.a10_tipo_act
 DEFINE r_r10		RECORD LIKE rept010.*
 DEFINE r_r22		RECORD LIKE rept022.*
-DEFINE r_c04		RECORD LIKE ordt004.*
+
+-- Para los valores de la lista de precios
+DEFINE pvp_prov_sug	 LIKE ordt004.c04_pvp_prov_sug
+DEFINE desc_prov	 LIKE ordt004.c04_desc_prov
+DEFINE costo_prov	 LIKE ordt004.c04_costo_prov
 
 CALL retorna_tam_arr()
 LET vm_filas_pant  = vm_size_arr
@@ -2088,8 +2092,11 @@ ELSE
 END IF
 
 IF vm_flag_llam = 'I' THEN
+
+	-- En el pedido se deben acumular los items
 	DECLARE q_r22 CURSOR FOR
-		SELECT rept022.*, rept010.*, ordt004.*
+		SELECT r22_item, r10_nombre, c04_pvp_prov_sug, c04_desc_prov,
+               c04_costo_prov, r22_precio, sum(r22_cantidad)
 			FROM rept022, rept010, OUTER ordt004
 			WHERE r22_compania  = vg_codcia
 			  AND r22_localidad = vg_codloc
@@ -2102,9 +2109,12 @@ IF vm_flag_llam = 'I' THEN
 			  AND c04_cod_item  = r10_cod_pedido
 			  AND c04_fecha_vigen <= TODAY
 			  AND (c04_fecha_fin IS NULL OR c04_fecha_fin > TODAY)
-			ORDER BY r22_orden ASC
+			GROUP BY r22_item, r10_nombre, c04_pvp_prov_sug, c04_desc_prov,
+               		 c04_costo_prov, r22_precio
 	LET k = 1
-	FOREACH q_r22 INTO r_r22.*, r_r10.*, r_c04.*
+	FOREACH q_r22 INTO r_detalle[k].c11_codigo, r_detalle[k].c11_descrip,
+						pvp_prov_sug, desc_prov, costo_prov, r_detalle[k].c11_precio,
+						r_detalle[k].c11_cant_ped	
 
 		IF vm_tipo <> 'T' THEN
 			LET r_detalle[k].c11_tipo = vm_tipo
@@ -2113,26 +2123,17 @@ IF vm_flag_llam = 'I' THEN
 				LET r_detalle[k].c11_tipo = 'S'
 			END IF
 		END IF
-		LET r_detalle[k].c11_cant_ped  = r_r22.r22_cantidad
-		LET r_detalle[k].c11_codigo    = r_r22.r22_item
-		LET r_detalle[k].c11_descrip   = r_r10.r10_nombre
 
 		-- Si tenemos la lista de precios del proveedor, usemos esa en lugar
 		-- de los precios de la proforma
-		IF r_c04.c04_compania IS NOT NULL THEN
-			IF r_c04.c04_costo_prov IS NULL THEN
-				LET r_detalle[k].c11_precio = r_c04.c04_pvp_prov_sug 
-				LET r_detalle[k].c11_descuento = r_c04.c04_desc_prov 
-			ELSE
-				LET r_detalle[k].c11_precio = r_c04.c04_costo_prov
+		IF pvp_prov_sug IS NOT NULL THEN
+			LET r_detalle[k].c11_precio = pvp_prov_sug 
+			LET r_detalle[k].c11_descuento = desc_prov 
+		ELSE
+			IF costo_prov IS NOT NULL THEN
+				LET r_detalle[k].c11_precio = costo_prov
 				LET r_detalle[k].c11_descuento = 0 
 			END IF
-		END IF
-
-		-- Si no hay lista de proveedor o el precio termina en NULL (porque no hay
-		-- descuento configurado por ejemplo, use el de la proforma
-		IF r_detalle[k].c11_precio IS NULL THEN
-			LET r_detalle[k].c11_precio    = r_r22.r22_precio
 		END IF
 
 		LET r_detalle[k].subtotal      = r_detalle[k].c11_precio * r_detalle[k].c11_cant_ped
