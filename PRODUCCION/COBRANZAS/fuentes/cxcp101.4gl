@@ -446,7 +446,8 @@ IF num_args() = 4 THEN
 	z02_localidad, z02_contacto, z02_referencia, z02_credit_auto,
 	z02_credit_dias, z02_cupcred_aprob, z02_cupcred_xaprob, 
 	z02_dcto_item_c, z02_dcto_item_r,
-	z02_dcto_mano_c, z02_dcto_mano_r, z02_cheques, z02_zona_venta,
+	z02_dcto_mano_c, z02_dcto_mano_r, z02_num_pagos, z02_dia_entre_pago,
+	z02_max_entre_pago, z02_cheques, z02_zona_venta,
 	z02_zona_cobro, z02_aux_clte_mb, z02_aux_clte_ma, z02_aux_ant_mb,
 	z02_aux_ant_ma
 	ON KEY(F2)
@@ -658,7 +659,8 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 	rm_z02.z02_referencia, rm_z02.z02_credit_auto, rm_z02.z02_credit_dias,
 	rm_z02.z02_cupcred_aprob, rm_z02.z02_cupcred_xaprob, rm_z02.z02_dcto_item_c,
 	rm_z02.z02_dcto_item_r,
-	rm_z02.z02_dcto_mano_c, rm_z02.z02_dcto_mano_r, rm_z02.z02_cheques,
+	rm_z02.z02_dcto_mano_c, rm_z02.z02_dcto_mano_r, rm_z02.z02_num_pagos,
+	rm_z02.z02_dia_entre_pago, rm_z02.z02_max_entre_pago, rm_z02.z02_cheques,
 	rm_z02.z02_zona_venta, rm_z02.z02_zona_cobro, rm_z02.z02_aux_clte_mb,
 	rm_z02.z02_aux_clte_ma, rm_z02.z02_aux_ant_mb, rm_z02.z02_aux_ant_ma
 	WITHOUT DEFAULTS
@@ -675,9 +677,12 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 			rm_z02.z02_email,
 			rm_z02.z02_contacto,
 			rm_z02.z02_referencia, rm_z02.z02_credit_auto,
-			rm_z02.z02_credit_dias, rm_z02.z02_cupcred_aprob, rm_z02.z02_cupcred_xaprob,
+			rm_z02.z02_credit_dias, rm_z02.z02_cupcred_aprob,
+			rm_z02.z02_cupcred_xaprob,
 			rm_z02.z02_dcto_item_c, rm_z02.z02_dcto_item_r,
 			rm_z02.z02_dcto_mano_c, rm_z02.z02_dcto_mano_r,
+			rm_z02.z02_num_pagos, rm_z02.z02_dia_entre_pago,
+			rm_z02.z02_max_entre_pago,
 			rm_z02.z02_cheques, rm_z02.z02_zona_venta,
 			rm_z02.z02_zona_cobro, rm_z02.z02_aux_clte_mb,
 			rm_z02.z02_aux_clte_ma, rm_z02.z02_aux_ant_mb,
@@ -1333,6 +1338,29 @@ INPUT BY NAME rm_z01.z01_codcli, rm_z01.z01_nomcli, rm_z01.z01_personeria,
 			CALL fl_mostrar_mensaje('Crédito de días debe ser mayor a cero, si hay crédito automático','info')
 			NEXT FIELD z02_credit_dias
 		END IF
+		IF rm_z02.z02_credit_dias = 0 THEN
+			LET rm_z02.z02_cupcred_aprob  = 0
+			LET rm_z02.z02_cupcred_xaprob = 0
+			LET rm_z02.z02_num_pagos      = NULL
+			LET rm_z02.z02_dia_entre_pago = NULL
+			LET rm_z02.z02_max_entre_pago = NULL
+		END IF
+		IF (rm_z02.z02_dia_entre_pago IS NULL AND
+			rm_z02.z02_max_entre_pago IS NOT NULL) OR
+			(rm_z02.z02_dia_entre_pago IS NOT NULL AND
+			 rm_z02.z02_max_entre_pago IS NULL)
+		THEN
+			CALL fl_mostrar_mensaje('Debe digitar tanto días entre pago, como días maximo entre pagos.', 'exclamation')
+			CONTINUE INPUT
+		END IF
+		IF (rm_z02.z02_dia_entre_pago IS NOT NULL AND
+			rm_z02.z02_max_entre_pago IS NOT NULL)
+		THEN
+			IF rm_z02.z02_dia_entre_pago > rm_z02.z02_max_entre_pago THEN
+				CALL fl_mostrar_mensaje('Días entre pago no puede ser mayor que días maximo de pago.', 'exclamation')
+				CONTINUE INPUT
+			END IF
+		END IF
 		IF vm_flag_mant = 'I' THEN
 			IF rm_z01.z01_codcli IS NOT NULL THEN
 				CALL fl_lee_cliente_general(rm_z01.z01_codcli)
@@ -1632,7 +1660,9 @@ DISPLAY BY NAME rm_z02.z02_localidad, rm_z02.z02_contacto,
 		rm_z02.z02_credit_dias, rm_z02.z02_cupcred_aprob,
 		rm_z02.z02_cupcred_xaprob, rm_z02.z02_dcto_item_c,
 		rm_z02.z02_dcto_item_r, rm_z02.z02_dcto_mano_c,
-		rm_z02.z02_dcto_mano_r, rm_z02.z02_cheques,
+		rm_z02.z02_dcto_mano_r, rm_z02.z02_num_pagos,
+		rm_z02.z02_dia_entre_pago, rm_z02.z02_max_entre_pago,
+		rm_z02.z02_cheques,
 		rm_z02.z02_zona_venta, rm_z02.z02_zona_cobro,
 		rm_z02.z02_aux_clte_mb, rm_z02.z02_aux_clte_ma,
 		rm_z02.z02_aux_ant_mb, rm_z02.z02_aux_ant_ma
@@ -1799,7 +1829,10 @@ ELSE
 				    z02_aux_ant_ma  = rm_z02.z02_aux_ant_ma,
 				    z02_contr_espe  = rm_z02.z02_contr_espe,
 				    z02_oblig_cont  = rm_z02.z02_oblig_cont,
-				    z02_email       = rm_z02.z02_email
+				    z02_email       = rm_z02.z02_email,
+					z02_num_pagos   = rm_z02.z02_num_pagos,
+					z02_dia_entre_pago = rm_z02.z02_dia_entre_pago,
+					z02_max_entre_pago = rm_z02.z02_max_entre_pago
 				--WHERE CURRENT OF q_up2
 				WHERE z02_compania = vg_codcia
 				  AND z02_codcli   = rm_z01.z01_codcli
@@ -1919,7 +1952,8 @@ FUNCTION control_localidad()
 CLEAR z02_localidad, tit_localidad,
 	z02_contacto, z02_referencia, z02_credit_auto, z02_credit_dias,
 	z02_cupcred_aprob, z02_cupcred_xaprob, z02_dcto_item_c, z02_dcto_item_r,
-	z02_dcto_mano_c, z02_dcto_mano_r, z02_cheques, z02_zona_venta,
+	z02_dcto_mano_c, z02_dcto_mano_r, z02_num_pagos, z02_dia_entre_pago,
+	z02_max_entre_pago, z02_cheques, z02_zona_venta,
 	z02_zona_cobro, tit_zona_vta, tit_zona_cob, z02_aux_clte_mb,
 	z02_aux_clte_ma, z02_aux_ant_mb, z02_aux_ant_ma, tit_cli_mb, tit_cli_ma,
 	tit_ant_mb, tit_ant_ma
@@ -1979,7 +2013,9 @@ INPUT BY NAME rm_z02.z02_localidad, rm_z02.z02_contacto, rm_z02.z02_referencia,
 	rm_z02.z02_credit_auto, rm_z02.z02_credit_dias, rm_z02.z02_cupcred_aprob,
 	rm_z02.z02_cupcred_xaprob,
 	rm_z02.z02_dcto_item_c, rm_z02.z02_dcto_item_r, rm_z02.z02_dcto_mano_c,
-	rm_z02.z02_dcto_mano_r, rm_z02.z02_cheques, rm_z02.z02_zona_venta,
+	rm_z02.z02_dcto_mano_r,
+	rm_z02.z02_num_pagos, rm_z02.z02_dia_entre_pago, rm_z02.z02_max_entre_pago,
+	rm_z02.z02_cheques, rm_z02.z02_zona_venta,
 	rm_z02.z02_zona_cobro, rm_z02.z02_aux_clte_mb, rm_z02.z02_aux_clte_ma,
 	rm_z02.z02_aux_ant_mb, rm_z02.z02_aux_ant_ma
 	WITHOUT DEFAULTS
@@ -1989,6 +2025,7 @@ INPUT BY NAME rm_z02.z02_localidad, rm_z02.z02_contacto, rm_z02.z02_referencia,
 			rm_z02.z02_credit_dias, rm_z02.z02_cupcred_aprob, rm_z02.z02_cupcred_xaprob,
 			rm_z02.z02_dcto_item_c, rm_z02.z02_dcto_item_r,
 			rm_z02.z02_dcto_mano_c, rm_z02.z02_dcto_mano_r,
+	rm_z02.z02_num_pagos, rm_z02.z02_dia_entre_pago, rm_z02.z02_max_entre_pago,
 			rm_z02.z02_cheques, rm_z02.z02_zona_venta,
 			rm_z02.z02_zona_cobro, rm_z02.z02_aux_clte_mb,
 			rm_z02.z02_aux_clte_ma, rm_z02.z02_aux_ant_mb,
@@ -2416,6 +2453,29 @@ INPUT BY NAME rm_z02.z02_localidad, rm_z02.z02_contacto, rm_z02.z02_referencia,
 		IF resul = 1 THEN
 			CALL fl_mostrar_mensaje('Crédito de días debe ser mayor a cero, si hay crédito automático','info')
 			NEXT FIELD z02_credit_dias
+		END IF
+		IF rm_z02.z02_credit_dias = 0 THEN
+			LET rm_z02.z02_cupcred_aprob  = 0
+			LET rm_z02.z02_cupcred_xaprob = 0
+			LET rm_z02.z02_num_pagos      = NULL
+			LET rm_z02.z02_dia_entre_pago = NULL
+			LET rm_z02.z02_max_entre_pago = NULL
+		END IF
+		IF (rm_z02.z02_dia_entre_pago IS NULL AND
+			rm_z02.z02_max_entre_pago IS NOT NULL) OR
+			(rm_z02.z02_dia_entre_pago IS NOT NULL AND
+			 rm_z02.z02_max_entre_pago IS NULL)
+		THEN
+			CALL fl_mostrar_mensaje('Debe digitar tanto días entre pago, como días maximo entre pagos.', 'exclamation')
+			CONTINUE INPUT
+		END IF
+		IF (rm_z02.z02_dia_entre_pago IS NOT NULL AND
+			rm_z02.z02_max_entre_pago IS NOT NULL)
+		THEN
+			IF rm_z02.z02_dia_entre_pago > rm_z02.z02_max_entre_pago THEN
+				CALL fl_mostrar_mensaje('Días entre pago no puede ser mayor que días maximo de pago.', 'exclamation')
+				CONTINUE INPUT
+			END IF
 		END IF
 		IF rm_z02.z02_cupcred_xaprob <= rm_z02.z02_cupcred_aprob AND
 		   rm_z02.z02_cupcred_xaprob <> 0

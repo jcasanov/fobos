@@ -515,11 +515,17 @@ IF rm_r25.r25_numprev IS NULL THEN
 	IF num_args() = 6 AND arg_val(6) = 'R' THEN
 		LET dias_entre_pagos = num_dias
 	END IF
+	IF r_z02.z02_dia_entre_pago IS NOT NULL THEN
+		LET dias_entre_pagos = r_z02.z02_dia_entre_pago
+	END IF
 	LET rm_r25.r25_plazo      = calcula_plazo()
 	LET rm_r25.r25_numprev    = rm_r23.r23_numprev
 	LET rm_r25.r25_valor_cred = rm_r23.r23_tot_neto
 	LET rm_r25.r25_valor_ant  = 0
 	LET rm_r25.r25_dividendos = rm_z61.z61_num_pagos
+	IF r_z02.z02_num_pagos IS NOT NULL THEN
+		LET rm_r25.r25_dividendos = r_z02.z02_num_pagos
+	END IF
 	IF r_r19.r19_cont_cred = 'R' AND num_args() = 6 AND arg_val(6) = 'R' THEN
 		SELECT NVL(MAX(z20_dividendo), 1) INTO rm_r25.r25_dividendos
 			FROM cxct020
@@ -578,6 +584,7 @@ DISPLAY BY NAME rm_r23.r23_moneda, fecha_primer_pago, rm_r25.r25_plazo,
 DISPLAY rm_g13.g13_nombre TO nom_moneda
 IF num_args() = 6 AND arg_val(6) = 'A' THEN
 	CALL control_cargar_detalle_credito()
+	DISPLAY BY NAME vm_tot_cap, vm_tot_interes, vm_total
 END IF
 
 END FUNCTION
@@ -596,9 +603,21 @@ DEFINE num_cols 	SMALLINT
 DEFINE mensaje		VARCHAR(100)
 DEFINE nprev		VARCHAR(10)
 DEFINE flag_error	SMALLINT
+DEFINE r_z02		RECORD LIKE cxct002.*
 
 LET entro_cre = 0
 CALL fl_lee_configuracion_credito_cxc(vg_codcia, vg_codloc) RETURNING rm_z61.*
+CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc, rm_r23.r23_codcli)
+	RETURNING r_z02.*
+IF r_z02.z02_num_pagos IS NOT NULL THEN
+	LET rm_z61.z61_num_pagos = r_z02.z02_num_pagos
+END IF
+IF r_z02.z02_dia_entre_pago IS NOT NULL THEN
+	LET rm_z61.z61_dia_entre_pago = r_z02.z02_dia_entre_pago
+END IF
+IF r_z02.z02_max_entre_pago IS NOT NULL THEN
+	LET rm_z61.z61_max_entre_pago = r_z02.z02_max_entre_pago
+END IF
 CALL fl_lee_preventa_rep(vg_codcia, vg_codloc, numprev) RETURNING rm_r23.*
 IF num_args() = 4 AND rm_r23.r23_estado <> 'P' THEN
 	CALL fl_mostrar_mensaje('La preventa no tiene estado de aprobada.','exclamation')
@@ -1110,7 +1129,12 @@ FOR i = 1 TO rm_r25.r25_dividendos
 		OPEN q_r26_ant
 		FETCH q_r26_ant INTO fecha
 		IF STATUS = NOTFOUND THEN
-			LET r_detalle_3[i].r26_fec_vcto = fecha_primer_pago
+			IF i = 1 THEN
+				LET r_detalle_3[i].r26_fec_vcto = fecha_primer_pago
+			ELSE
+				LET r_detalle_3[i].r26_fec_vcto =
+						r_detalle_3[i - 1].r26_fec_vcto + dias_entre_pagos
+			END IF
 		ELSE
 			IF fecha > TODAY THEN
 				LET r_detalle_3[i].r26_fec_vcto = fecha
@@ -1309,7 +1333,7 @@ END FUNCTION
 
 FUNCTION calcula_interes()
 DEFINE valor_cred	LIKE rept025.r25_valor_cred
-DEFINE i 		SMALLINT
+DEFINE i 			SMALLINT
 
 LET vm_tot_cap     = 0
 LET vm_tot_interes = 0

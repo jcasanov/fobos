@@ -48,11 +48,11 @@ SCREEN TITLE '     Cia/Loc     '
                Contacto: [c103                          ]
              Referencia: [c104                                    ]
   Fact. Automatica OT ?: [b]                 Crédito Días: [c105  ]
-  Cupo Crédito Aprobado: [c106            ]        Descuento en Facturación
- Cupo Crédito x Aprobar: [c107            ]          Contado Bienes: [c108 ]% 
-                                                     Crédito Bienes: [c109 ]%
-                                                   Contado Servicio: [c122 ]%
-                 Cheques ?: [d]                    Crédito Servicio: [c123 ]%
+  Cupo Crédito Aprobado: [c106            ]         Descuento en Facturación
+ Cupo Crédito x Aprobar: [c107            ]           Contado Bienes: [c108 ]% 
+        Numero de Pagos: [c132]                       Crédito Bienes: [c109 ]%
+       Dias entre Pagos: [c133] Max.Dia Pago:[c134] Contado Servicio: [c122 ]%
+                 Cheques ?: [d]                     Crédito Servicio: [c123 ]%
              Zona de Venta: [c110  ] [c116                          ]
              Zona de Cobro: [c111  ] [c117                          ]
   Aux. Cliente Moneda Base: [c112        ] [c118                             ]
@@ -155,4 +155,14 @@ x002 = FORMONLY.vm_row_current2, NOENTRY;
 y002 = FORMONLY.vm_num_rows2, NOENTRY;
 x003 = FORMONLY.vm_row_current3, NOENTRY;
 y003 = FORMONLY.vm_num_rows3, NOENTRY;
+
+c132 = cxct002.z02_num_pagos, AUTONEXT, UPSHIFT, INCLUDE = (1 TO 300, NULL),
+		FORMAT = '###',
+		COMMENTS = 'Digite el numero de pagos que puede tener este cliente.';
+c133 = cxct002.z02_dia_entre_pago, AUTONEXT, UPSHIFT, INCLUDE = (1 TO 30, NULL),
+		FORMAT = '##',
+		COMMENTS = 'Digite los dias entre pagos que puede tener este cliente.';
+c134 = cxct002.z02_max_entre_pago, AUTONEXT, UPSHIFT,INCLUDE = (1 TO 180, NULL),
+		FORMAT = '###',
+		COMMENTS = 'Digite los dias entre pagos maximo que puede tener este cliente.';
 END
