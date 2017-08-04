@@ -1994,9 +1994,11 @@ INPUT BY NAME rm_c10.c10_codprov,
 	AFTER FIELD c10_otros, c10_flete
 		CALL calcula_totales(vm_num_detalles,1)
 	AFTER INPUT
-		IF valor_fact IS NULL OR valor_fact <= 0 THEN
-			CALL fl_mostrar_mensaje('Digite subtotal antes del iva de la factura del proveedor.','exclamation')
-			NEXT FIELD valor_fact
+		IF vm_flag_llam <> 'I' THEN
+			IF valor_fact IS NULL OR valor_fact <= 0 THEN
+				CALL fl_mostrar_mensaje('Digite subtotal antes del iva de la factura del proveedor.','exclamation')
+				NEXT FIELD valor_fact
+			END IF
 		END IF
 		IF rm_c01.c01_modulo = 'TA' AND rm_c10.c10_ord_trabajo IS NULL THEN
 			CALL fl_mostrar_mensaje('Debe ingresar una Orden de Trabajo para esta Orden de Compra.','exclamation')
