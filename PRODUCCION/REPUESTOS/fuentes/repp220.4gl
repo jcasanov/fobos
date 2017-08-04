@@ -213,7 +213,6 @@ MENU 'OPCIONES'
 		HIDE OPTION 'Hacer Preventa'                                    
 		HIDE OPTION 'Imprimir'
 		--#HIDE OPTION 'Enviar Mail'
-		--#HIDE OPTION 'PDF'
 		HIDE OPTION 'Hacer Pedido'
 		IF num_args() = 5 THEN                                          
 			HIDE OPTION 'Modificar'                                 
@@ -221,18 +220,13 @@ MENU 'OPCIONES'
 			HIDE OPTION 'Consultar'                                 
 			SHOW OPTION 'Imprimir'                                  
 			--#SHOW OPTION 'Enviar Mail'
-			--#IF vg_usuario <> 'HSALAZAR' THEN
-				--#SHOW OPTION 'PDF'
-			--#ELSE
-				--#HIDE OPTION 'PDF'
-			--#END IF
 			SHOW OPTION 'Ver Detalle'
 			CALL control_consulta()                                 
 			CALL control_ver_detalle()
 			EXIT MENU
 		END IF                                                          
 	COMMAND KEY('I') 'Ingresar' 		'Ingresar nuevos registros.'    
-                CALL control_ingreso()                                          
+        CALL control_ingreso()                                          
 		IF vm_num_rows >= 1 THEN                                        
 			SHOW OPTION 'Modificar'                                
 			SHOW OPTION 'Ver Detalle'                               
@@ -240,22 +234,13 @@ MENU 'OPCIONES'
 			SHOW OPTION 'Hacer Pedido'
 			SHOW OPTION 'Imprimir'                                  
 			--#SHOW OPTION 'Enviar Mail'
-			--#IF vg_usuario <> 'HSALAZAR' THEN
-				--#IF vm_num_rows > 0 THEN
-					--#SHOW OPTION 'PDF'
-				--#ELSE
-					--#HIDE OPTION 'PDF'
-				--#END IF
-			--#ELSE
-				--#HIDE OPTION 'PDF'
-			--#END IF
 		END IF                                                          
-                IF vm_row_current > 1 THEN                                      
-                        SHOW OPTION 'Retroceder'                              
-                END IF                                                          
-                IF vm_row_current = vm_num_rows THEN                            
-                        HIDE OPTION 'Avanzar'                                   
-                END IF                                                          
+        IF vm_row_current > 1 THEN                                      
+        	SHOW OPTION 'Retroceder'                              
+        END IF                                                          
+        IF vm_row_current = vm_num_rows THEN                            
+        	HIDE OPTION 'Avanzar'                                   
+        END IF                                                          
 	COMMAND KEY('M') 'Modificar' 		'Modificar un registro.'       
 		IF vm_num_rows > 0 THEN                                        
 			CALL control_modificacion()                             
@@ -283,21 +268,11 @@ MENU 'OPCIONES'
 			SHOW OPTION 'Hacer Pedido'
 			SHOW OPTION 'Imprimir'   
 			--#SHOW OPTION 'Enviar Mail'
-			--#IF vg_usuario <> 'HSALAZAR' THEN
-				--#IF vm_num_rows > 0 THEN
-					--#SHOW OPTION 'PDF'
-				--#ELSE
-					--#HIDE OPTION 'PDF'
-				--#END IF
-			--#ELSE
-				--#HIDE OPTION 'PDF'
-			--#END IF
             HIDE OPTION 'Avanzar'   
             HIDE OPTION 'Retroceder'
             IF vm_num_rows = 0 THEN
 				HIDE OPTION 'Imprimir'
 				--#HIDE OPTION 'Enviar Mail'
-				--#HIDE OPTION 'PDF'
                 HIDE OPTION 'Modificar'
 				HIDE OPTION 'Ver Detalle'
 				HIDE OPTION 'Hacer Preventa'
@@ -306,15 +281,6 @@ MENU 'OPCIONES'
         ELSE          
 			SHOW OPTION 'Imprimir'   
 			--#SHOW OPTION 'Enviar Mail'
-			--#IF vg_usuario <> 'HSALAZAR' THEN
-				--#IF vm_num_rows > 0 THEN
-					--#SHOW OPTION 'PDF'
-				--#ELSE
-					--#HIDE OPTION 'PDF'
-				--#END IF
-			--#ELSE
-				--#HIDE OPTION 'PDF'
-			--#END IF
 			SHOW OPTION 'Hacer Preventa' 
 			SHOW OPTION 'Hacer Pedido' 
             SHOW OPTION 'Ver Detalle'   
@@ -335,8 +301,6 @@ MENU 'OPCIONES'
 		END IF
 	--}
 		CALL enviar_mail()
-	--#COMMAND KEY('Y') 'PDF' 'Genera un archivo .pdf de la proforma.'
-		CALL generar_pdf()
     COMMAND KEY('V') 'Ver Detalle'   'Muestra anteriores detalles.'
 		IF vm_num_rows > 0 THEN
 			CALL control_ver_detalle()
@@ -1880,11 +1844,6 @@ DISPLAY ARRAY r_detalle TO r_detalle.*
 		CALL enviar_mail()
 		LET int_flag = 0
 	ON KEY(F8)
-		IF vg_usuario <> 'HSALAZAR' THEN
-			CALL generar_pdf()
-			LET int_flag = 0
-		END IF
-	ON KEY(F9)
 		LET subtot_net = rm_r21.r21_tot_bruto - rm_r21.r21_tot_dscto
 		ERROR 'El Subtotal - Descuento es : ', subtot_net
 	ON KEY(RETURN)
@@ -1895,20 +1854,15 @@ DISPLAY ARRAY r_detalle TO r_detalle.*
 		--#LET i = arr_curr()	
 		--#LET j = scr_line()
 		--#CALL muestra_etiquetas_det(i, vm_ind_arr, i)
-        --#BEFORE DISPLAY 
-                --#CALL dialog.keysetlabel('ACCEPT', '')   
+    --#BEFORE DISPLAY 
+        --#CALL dialog.keysetlabel('ACCEPT', '')   
 		--#CALL dialog.keysetlabel("F1","") 
 		--#CALL dialog.keysetlabel("CONTROL-W","") 
 		--#CALL dialog.keysetlabel("F5","Stock Total") 
 		--#CALL dialog.keysetlabel("F6","Imprimir") 
 		--#CALL dialog.keysetlabel("F7","Enviar Mail") 
-		--#IF vg_usuario <> 'HSALAZAR' THEN
-			--#CALL dialog.keysetlabel("F8","PDF")
-		--#ELSE
-			--#CALL dialog.keysetlabel("F8","")
-		--#END IF
-        --#AFTER DISPLAY  
-                --#CONTINUE DISPLAY  
+    --#AFTER DISPLAY  
+        --#CONTINUE DISPLAY  
 END DISPLAY 
 CALL muestra_contadores_det(0, vm_ind_arr)
 
@@ -3534,15 +3488,6 @@ ELSE
 
 END FUNCTION
 
-
-
-FUNCTION generar_pdf()
-DEFINE comando		CHAR(256)
-
-LET comando = "proforma.jsp?numero=", rm_r21.r21_numprof USING "<<<<<<&"
-CALL fl_ejecuta_reporte_pdf(vg_codloc, comando, 'F')
-
-END FUNCTION
 
 
 

@@ -12,7 +12,6 @@ GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
 DEFINE vm_proforma	LIKE rept021.r21_numprof
 DEFINE rm_r21		RECORD LIKE rept021.*
-DEFINE rm_r22		RECORD LIKE rept022.*
 DEFINE rm_r00		RECORD LIKE rept000.*
 DEFINE rm_r01		RECORD LIKE rept001.*
 DEFINE rm_cia		RECORD LIKE gent001.*
@@ -20,6 +19,8 @@ DEFINE rm_loc		RECORD LIKE gent002.*
 DEFINE rm_z01	  	RECORD LIKE cxct001.*
 DEFINE vm_num_item	INTEGER
 DEFINE vm_num_lineas	INTEGER
+
+DEFINE vm_impresion CHAR(1)
 
 
 
@@ -95,7 +96,7 @@ DEFINE r_r73		RECORD LIKE rept073.*
 DEFINE r_r22		RECORD LIKE rept022.*
 
 IF num_args() <> 6 THEN
-	CALL fl_control_reportes() RETURNING comando
+	CALL fl_control_reportes_extendido() RETURNING vm_impresion, comando
 	IF int_flag THEN
 		RETURN
 	END IF
@@ -233,13 +234,20 @@ PAGE HEADER
 	CALL fl_justifica_titulo('I', vg_usuario, 10) RETURNING usuario
 --	print '&k2S' 		-- Letra condensada
 	LET proforma = rm_r21.r21_numprof
-	print ASCII escape;
-	print ASCII act_comp;
-	PRINT COLUMN 036, ASCII escape, ASCII act_dob1, ASCII act_dob2,
+
+	IF vm_impresion = 'I' THEN	
+		print ASCII escape;
+		print ASCII act_comp;
+	ELSE
+		print "";
+		print "";
+	END IF
+
+	PRINT --COLUMN 036, ASCII escape, ASCII act_dob1, ASCII act_dob2,
 		--"www.acerocomercial.com",
-	      COLUMN 040, "No. PROFORMA : ", proforma,
-		ASCII escape, ASCII act_dob1, ASCII des_dob,
-		ASCII escape, ASCII act_comp
+	      COLUMN 040, "No. PROFORMA : ", proforma --,
+--		ASCII escape, ASCII act_dob1, ASCII des_dob,
+--		ASCII escape, ASCII act_comp
 	PRINT COLUMN 107, "PAG. ", PAGENO USING "&&&"
 	PRINT COLUMN 01,  "CLIENTE (", rm_r21.r21_codcli USING "&&&&&", ") : ",
 					rm_r21.r21_nomcli[1, 100] CLIPPED
@@ -294,11 +302,6 @@ PAGE TRAILER
 	LET label_letras = fl_retorna_letras(rm_r21.r21_moneda, valor_pag)
 	SKIP 2 LINES
 	IF vm_num_lineas = vm_num_item THEN
-		IF vg_codloc <= 5 THEN
-		PRINT COLUMN 02,  "SOMOS CONTRIBUYENTES ESPECIALES S.R.I. #39";
-		ELSE
-		PRINT COLUMN 02,  "SOMOS CONTRIBUYENTES ESPECIALES S.R.I. #270";
-		END IF
 		PRINT COLUMN 95,  "TOTAL BRUTO",
 		      COLUMN 116, rm_r21.r21_tot_bruto	USING "#,###,###,##&.##"
 		PRINT COLUMN 02,  "PRECIOS SUJETOS A CAMBIO SIN PREVIO AVISO",
@@ -322,7 +325,13 @@ PAGE TRAILER
 		PRINT COLUMN 02, 1 SPACES
 		PRINT COLUMN 02, 1 SPACES;
 	END IF
-	print ASCII escape;
-	print ASCII desact_comp 
+	
+	IF vm_impresion = 'I' THEN
+		print ASCII escape;
+		print ASCII desact_comp 
+	ELSE
+		print "";
+		print ""
+	END IF
 
 END REPORT
