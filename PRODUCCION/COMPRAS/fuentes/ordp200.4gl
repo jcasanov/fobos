@@ -2148,7 +2148,7 @@ IF vm_flag_llam = 'I' THEN
 	LET max_row = k
 END IF
 
-INITIALIZE r_r10.*, r_r22.*, r_c04.* TO NULL
+INITIALIZE r_r10.*, r_r22.* TO NULL
 
 CALL fl_lee_tipo_orden_compra(rm_c10.c10_tipo_orden) RETURNING r_c01.*
 LET int_flag = 0
