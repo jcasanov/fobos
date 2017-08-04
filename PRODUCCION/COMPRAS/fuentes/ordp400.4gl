@@ -391,6 +391,9 @@ PAGE HEADER
 	IF vm_impresion = 'I' THEN
 		print ASCII escape;
 		print ASCII act_comp;
+	ELSE
+		print "";
+		print "";
 	END IF
 	PRINT COLUMN 109, "PAG. ", PAGENO USING "&&&"
 	PRINT COLUMN 01,  titulo
@@ -502,6 +505,9 @@ PAGE TRAILER
 	IF vm_impresion = 'I' THEN
 		print ASCII escape;
 		print ASCII desact_comp 
+	ELSE
+		print "";
+		print ""
 	END IF
 
 END REPORT
