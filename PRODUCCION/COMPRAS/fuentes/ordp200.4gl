@@ -2119,13 +2119,7 @@ IF vm_flag_llam = 'I' THEN
 						pvp_prov_sug, desc_prov, costo_prov, r_detalle[k].c11_precio,
 						r_detalle[k].c11_cant_ped	
 
-		IF vm_tipo <> 'T' THEN
-			LET r_detalle[k].c11_tipo = vm_tipo
-		ELSE
-			IF r_detalle[k].c11_tipo IS NULL THEN
-				LET r_detalle[k].c11_tipo = 'S'
-			END IF
-		END IF
+		LET r_detalle[k].c11_tipo = 'B'
 
 		-- Si tenemos la lista de precios del proveedor, usemos esa en lugar
 		-- de los precios de la proforma
@@ -2139,6 +2133,7 @@ IF vm_flag_llam = 'I' THEN
 			END IF
 		END IF
 
+		LET r_detalle[k].c11_descuento = 0 
 		LET r_detalle[k].subtotal = (r_detalle[k].c11_precio * 
 										(1 - (r_detalle[k].c11_descuento / 100))) * 
 										r_detalle[k].c11_cant_ped
