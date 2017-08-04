@@ -1656,7 +1656,6 @@ IF vm_flag_llam = 'I' THEN
 	ELSE
 		CALL fl_lee_proforma_rep(vg_codcia, vg_codloc, vm_numprof)
 			RETURNING r_r21.*
-		LET valor_fact            = r_r21.r21_tot_bruto - r_r21.r21_tot_dscto
 		LET rm_c10.c10_referencia = r_r21.r21_nomcli
 		CALL fl_lee_vendedor_rep(vg_codcia, vm_vendedor) RETURNING r_r01.*
 		LET rm_c10.c10_solicitado = r_r01.r01_nombres
@@ -2111,6 +2110,8 @@ IF vm_flag_llam = 'I' THEN
 			  AND (c04_fecha_fin IS NULL OR c04_fecha_fin > TODAY)
 			GROUP BY r22_item, r10_nombre, c04_pvp_prov_sug, c04_desc_prov,
                		 c04_costo_prov, r22_precio
+
+	LET valor_fact = 0
 	LET k = 1
 	FOREACH q_r22 INTO r_detalle[k].c11_codigo, r_detalle[k].c11_descrip,
 						pvp_prov_sug, desc_prov, costo_prov, r_detalle[k].c11_precio,
@@ -2136,8 +2137,11 @@ IF vm_flag_llam = 'I' THEN
 			END IF
 		END IF
 
-		LET r_detalle[k].subtotal      = r_detalle[k].c11_precio * r_detalle[k].c11_cant_ped
-		LET r_detalle[k].paga_iva      = 'S'
+		LET r_detalle[k].subtotal = r_detalle[k].c11_precio * r_detalle[k].c11_cant_ped
+		LET r_detalle[k].paga_iva = 'S'
+
+		LET valor_fact            = valor_fact + r_detalle[k].subtotal
+
 		LET k = k + 1
 	END FOREACH
 	LET k = k - 1
