@@ -2139,7 +2139,9 @@ IF vm_flag_llam = 'I' THEN
 			END IF
 		END IF
 
-		LET r_detalle[k].subtotal = r_detalle[k].c11_precio * r_detalle[k].c11_cant_ped
+		LET r_detalle[k].subtotal = (r_detalle[k].c11_precio * 
+										(1 - (r_detalle[k].c11_descuento / 100))) * 
+										r_detalle[k].c11_cant_ped
 		LET r_detalle[k].paga_iva = 'S'
 
 		LET valor_fact            = valor_fact + r_detalle[k].subtotal
