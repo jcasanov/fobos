@@ -2120,6 +2120,7 @@ IF vm_flag_llam = 'I' THEN
 						r_detalle[k].c11_cant_ped	
 
 		LET r_detalle[k].c11_tipo = 'B'
+		LET r_detalle[k].c11_descuento = 0 
 
 		-- Si tenemos la lista de precios del proveedor, usemos esa en lugar
 		-- de los precios de la proforma
@@ -2133,7 +2134,6 @@ IF vm_flag_llam = 'I' THEN
 			END IF
 		END IF
 
-		LET r_detalle[k].c11_descuento = 0 
 		LET r_detalle[k].subtotal = (r_detalle[k].c11_precio * 
 										(1 - (r_detalle[k].c11_descuento / 100))) * 
 										r_detalle[k].c11_cant_ped
