@@ -2351,7 +2351,7 @@ IF DATE(rm_r21.r21_fecing) + rm_r00.r00_expi_prof < TODAY THEN
 	LET int_flag = 1
 	RETURN
 END IF
-LET param = ' I 1 ', rm_r21.r21_numprof, ' ', rm_r21.r21_vendedor
+LET param = ' I ', rm_r21.r21_numprof
 CALL fl_ejecuta_comando('COMPRAS', 'OC', 'ordp200', param, 1)
 
 END FUNCTION

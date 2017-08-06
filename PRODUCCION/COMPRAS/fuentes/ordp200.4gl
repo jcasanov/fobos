@@ -103,9 +103,7 @@ DEFINE tot_sub			LIKE ordt010.c10_tot_compra
 ---------------------------------------------------------------
 DEFINE vm_activo_mod		LIKE ordt001.c01_modulo
 DEFINE vm_flag_llam		CHAR(1)
-DEFINE vm_tipo_oc		LIKE ordt010.c10_tipo_orden
 DEFINE vm_numprof		LIKE rept021.r21_numprof
-DEFINE vm_vendedor		LIKE rept001.r01_codigo
 
 
 
@@ -117,7 +115,7 @@ CLEAR SCREEN
 CALL startlog('../logs/ordp200.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
-IF num_args() <> 4 AND num_args() <> 5 AND num_args() <> 8
+IF num_args() <> 4 AND num_args() <> 5 AND num_args() <> 6
 THEN     -- Validar # parametros correcto
 	CALL fl_mostrar_mensaje('Número de parametros incorrecto.','stop')
 	EXIT PROGRAM
@@ -130,11 +128,9 @@ IF num_args() = 5 THEN
 	LET vg_num_ord = arg_val(5)
 END IF
 LET vm_flag_llam = NULL
-IF num_args() = 8 THEN
+IF num_args() = 6 THEN
 	LET vm_flag_llam = arg_val(5)
-	LET vm_tipo_oc   = arg_val(6)
-	LET vm_numprof   = arg_val(7)
-	LET vm_vendedor  = arg_val(8)
+	LET vm_numprof   = arg_val(6)
 END IF
 LET vg_proceso = 'ordp200'
 
@@ -1644,7 +1640,15 @@ DEFINE r_c10		RECORD LIKE ordt010.*
 LET int_flag = 0
 CALL calcula_totales(vm_num_detalles,1)
 IF vm_flag_llam = 'I' THEN
-	LET rm_c10.c10_tipo_orden = vm_tipo_oc
+
+	SELECT c01_tipo_orden, c01_bien_serv
+	  INTO rm_c10.c10_tipo_orden, vm_tipo
+	  FROM ordt001
+	 WHERE c01_modulo     = 'RE'
+	   AND c01_ing_bodega = 'S'
+	   AND c01_estado     = 'A'
+
+	LET vm_flag_item = 'S'
 	LET rm_c10.c10_cod_depto  = 1
 	LET rm_c10.c10_numprof    = vm_numprof
 	CALL lee_oc_proforma() RETURNING r_c10.*
@@ -1657,7 +1661,7 @@ IF vm_flag_llam = 'I' THEN
 		CALL fl_lee_proforma_rep(vg_codcia, vg_codloc, vm_numprof)
 			RETURNING r_r21.*
 		LET rm_c10.c10_referencia = r_r21.r21_nomcli
-		CALL fl_lee_vendedor_rep(vg_codcia, vm_vendedor) RETURNING r_r01.*
+		CALL fl_lee_vendedor_rep(vg_codcia, r_r21.r21_vendedor) RETURNING r_r01.*
 		LET rm_c10.c10_solicitado = r_r01.r01_nombres
 	END IF
 	CALL fl_lee_tipo_orden_compra(rm_c10.c10_tipo_orden) RETURNING rm_c01.*
