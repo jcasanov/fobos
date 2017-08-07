@@ -2429,6 +2429,7 @@ LET vg_servidor = FGL_GETENV('INFORMIXSERVER')
 CALL fl_lee_configuracion_facturacion() RETURNING rg_gen.*
 CALL fl_marca_registrada_producto()
 CALL fl_retorna_usuario()
+CALL fl_retorna_fecha_proceso()
 CALL fl_separador()
 IF vg_codcia = 0 OR vg_codcia IS NULL THEN
 	LET vg_codcia = fl_retorna_compania_default()
@@ -10089,5 +10090,33 @@ SELECT * INTO r_g25.*
 	WHERE g25_pais      = pais
 	  AND g25_divi_poli = divi_poli
 RETURN r_g25.*
+
+END FUNCTION
+
+
+
+FUNCTION fl_retorna_fecha_proceso()
+
+INITIALIZE vg_fecha TO NULL
+SELECT fb_fechasist INTO vg_fecha FROM fobos WHERE fb_usar_fechasist = 'S' 
+IF vg_fecha IS NULL THEN
+	LET vg_fecha = TODAY
+END IF
+
+END FUNCTION
+
+
+
+FUNCTION fl_current()
+DEFINE fechatexto   VARCHAR(25)
+DEFINE fechahora    VARCHAR(25)
+
+LET fechatexto = CURRENT, ''
+LET fechahora = YEAR(vg_fecha)  USING '&&&&', '-',
+                MONTH(vg_fecha) USING '&&', '-',
+                DAY(vg_fecha)   USING '&&', ' ',
+                fechatexto[12,19]
+
+RETURN fechahora
 
 END FUNCTION

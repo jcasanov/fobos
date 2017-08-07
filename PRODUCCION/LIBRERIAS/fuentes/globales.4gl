@@ -11,6 +11,7 @@ DEFINE vg_codloc	LIKE gent002.g02_localidad
 DEFINE vg_usuario	LIKE gent005.g05_usuario
 DEFINE vg_separador	LIKE fobos.fb_separador
 DEFINE vg_dir_fobos	LIKE fobos.fb_dir_fobos
+DEFINE vg_fecha		DATE
 DEFINE vg_gui		SMALLINT
 
 DEFINE vg_servidor	VARCHAR(20)
