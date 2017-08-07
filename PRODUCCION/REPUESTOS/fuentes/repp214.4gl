@@ -845,7 +845,7 @@ INPUT BY NAME rm_r19.r19_cod_tran, rm_r19.r19_oc_interna, vm_num_aut,
 		END IF
 		IF r_c10.c10_estado <> 'P' THEN
 			--CALL fgl_winmessage(vg_producto,'No puede realizar una compra local de esta orden de compra.','exclamation')
-			CALL fl_mostrar_mensaje('No puede realizar una compra local de esta orden de compra.','exclamation')
+			CALL fl_mostrar_mensaje('Orden de compra no esta aprobada.','exclamation')
 			INITIALIZE r_c10.* TO NULL
 			CALL etiquetas_orden_compra(r_c10.*)
 			--#CALL dialog.keysetlabel('F5', '')
@@ -857,7 +857,7 @@ INPUT BY NAME rm_r19.r19_cod_tran, rm_r19.r19_oc_interna, vm_num_aut,
 		IF r_c01.c01_modulo <> vg_modulo AND r_c01.c01_ing_bodega <> 'S'
 		THEN
 			--CALL fgl_winmessage(vg_producto,'Esta orden de compra no puede asociarse a una compra local.','exclamation')
-			CALL fl_mostrar_mensaje('Esta orden de compra no puede asociarse a una compra local.','exclamation')
+			CALL fl_mostrar_mensaje('Orden de compra no pertenece al módulo.','exclamation')
 			INITIALIZE r_c10.* TO NULL
 			CALL etiquetas_orden_compra(r_c10.*)
 			--#CALL dialog.keysetlabel('F5', '')
