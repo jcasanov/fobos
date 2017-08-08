@@ -435,7 +435,7 @@ CALL fl_lee_cabecera_transaccion_rep(r_r88.r88_compania, r_r88.r88_localidad,
 LET rm_r21.r21_referencia = r_r19.r19_referencia CLIPPED
 LET rm_r21.r21_cod_tran   = NULL
 LET rm_r21.r21_num_tran   = NULL
-LET rm_r21.r21_fecing     = CURRENT 
+LET rm_r21.r21_fecing     = fl_current() 
 BEGIN WORK                       
 LET done = control_cabecera()   
 IF done = 0 THEN               
@@ -482,7 +482,7 @@ INITIALIZE rm_r01.*, rm_r03.*, rm_r04.*, rm_r10.*, rm_r11.* TO NULL
 INITIALIZE rm_r03.*, rm_r04.*, rm_r10.*, rm_r11.*, rm_g13.* TO NULL
 INITIALIZE rm_g14.*, rm_g20.*, rm_z01.*, rm_z02.* TO NULL
 INITIALIZE rm_r21.*, rm_r22.* TO NULL
-LET rm_r21.r21_fecing     = CURRENT 
+LET rm_r21.r21_fecing     = fl_current() 
 LET rm_r21.r21_usuario    = vg_usuario
 LET rm_r21.r21_compania   = vg_codcia
 LET rm_r21.r21_localidad  = vg_codloc
@@ -545,7 +545,7 @@ IF int_flag THEN
 	END IF                                                          
 	RETURN                   
 END IF                          
-LET rm_r21.r21_fecing   = CURRENT
+LET rm_r21.r21_fecing   = fl_current()
 LET rm_r21.r21_tot_neto = vm_total
 BEGIN WORK                       
 LET done = control_cabecera()   
@@ -604,7 +604,7 @@ IF rm_r21.r21_num_ot IS NOT NULL OR rm_r21.r21_num_presup IS NOT NULL THEN
 	CALL fl_mostrar_mensaje('Esta proforma es de talleres.','exclamation')
 	RETURN
 END IF 
-IF DATE(rm_r21.r21_fecing) + rm_r00.r00_expi_prof < TODAY THEN   
+IF DATE(rm_r21.r21_fecing) + rm_r00.r00_expi_prof < vg_fecha THEN   
 	CALL fl_mostrar_mensaje('El tiempo de vida de la proforma ya ' ||
 				'expiró, por lo tanto no puede ser ' ||
 				'modificada.',
@@ -650,7 +650,7 @@ IF int_flag THEN
 	CALL lee_muestra_registro(vm_rows[vm_row_current])
 	RETURN   
 ELSE    
-	LET rm_r21.r21_fecing = CURRENT
+	LET rm_r21.r21_fecing = fl_current()
 	DISPLAY BY NAME rm_r21.r21_fecing
 	WHENEVER ERROR CONTINUE
 	UPDATE rept021
@@ -1711,7 +1711,7 @@ WHILE TRUE
 		EXIT WHILE
 	END IF
 END WHILE
-LET rm_r21.r21_fecing = CURRENT  
+LET rm_r21.r21_fecing = fl_current()  
 INSERT INTO rept021 VALUES (rm_r21.*) 
 IF num_args() = 6 THEN
 	RETURN 1
@@ -1962,7 +1962,7 @@ IF rm_r21.r21_cod_tran IS NOT NULL THEN
 END IF 
 CALL fl_lee_compania_repuestos(vg_codcia)  -- PARA OBTENER LA CONFIGURACION 
 	RETURNING rm_r00.*		   -- DEL AREA DE REPUESTOS 
-IF DATE(rm_r21.r21_fecing) + rm_r00.r00_expi_prof < TODAY THEN   
+IF DATE(rm_r21.r21_fecing) + rm_r00.r00_expi_prof < vg_fecha THEN   
 	CALL fl_mostrar_mensaje('El tiempo de vida de la proforma ya ' ||
 				'expiró, por lo tanto no puede ser ' ||
 				'convertida en preventa.',
@@ -2043,7 +2043,7 @@ LET rm_r23.r23_usuario     = vg_usuario
 IF num_args() = 6 THEN
 	LET rm_r23.r23_usuario = rm_r21.r21_usuario
 END IF
-LET rm_r23.r23_fecing      = CURRENT
+LET rm_r23.r23_fecing      = fl_current()
 LET numprof		   = rm_r21.r21_numprof
 LET rm_r23.r23_referencia  = 'PREVTA. GENERADA DE PROF. # ', numprof CLIPPED
 CALL fl_lee_moneda(rm_r23.r23_moneda) RETURNING rm_g13.*
@@ -2368,7 +2368,7 @@ END FUNCTION
 FUNCTION control_hacer_pedido()
 DEFINE param		VARCHAR(100)
 
-IF DATE(rm_r21.r21_fecing) + rm_r00.r00_expi_prof < TODAY THEN   
+IF DATE(rm_r21.r21_fecing) + rm_r00.r00_expi_prof < vg_fecha THEN   
 	CALL fl_mostrar_mensaje('La proforma ya expiró.','exclamation')
 	LET int_flag = 1
 	RETURN
@@ -2474,7 +2474,7 @@ FOR i = 1 TO vm_ind_arr
 	END IF
 	-- OJO REVISAR ***NPC
 	IF r_detalle[i].r22_bodega <> vm_bod_sstock THEN
-		LET dias_trans = TODAY - DATE(rm_r21.r21_fecing)
+		LET dias_trans = vg_fecha - DATE(rm_r21.r21_fecing)
 		IF (rm_r21.r21_cod_tran IS NULL) AND
 		   NOT (rm_r00.r00_dias_prof < dias_trans OR
 			rm_r00.r00_dias_prof = 0)
@@ -3112,9 +3112,9 @@ ELSE
 	LET r_j10.j10_valor = rm_r23.r23_tot_neto 
 END IF
 
-LET r_j10.j10_fecha_pro   = CURRENT
+LET r_j10.j10_fecha_pro   = fl_current()
 LET r_j10.j10_usuario     = vg_usuario 
-LET r_j10.j10_fecing      = CURRENT
+LET r_j10.j10_fecing      = fl_current()
 LET r_j10.j10_compania    = vg_codcia
 LET r_j10.j10_localidad   = vg_codloc
 LET r_j10.j10_tipo_fuente = 'PR'
@@ -3327,7 +3327,7 @@ FUNCTION retorna_precio_validez_item()
 DEFINE dias_trans	INTEGER
 
 IF rm_r21.r21_cod_tran IS NULL THEN
-	LET dias_trans = TODAY - DATE(rm_r21.r21_fecing)
+	LET dias_trans = vg_fecha - DATE(rm_r21.r21_fecing)
 	IF rm_r00.r00_dias_prof < dias_trans OR rm_r00.r00_dias_prof = 0 THEN
 		RETURN 1
 	END IF
@@ -3475,7 +3475,7 @@ END IF
 LET comando = 'cd ..', vg_separador, '..', vg_separador, 'COBRANZAS',
 		vg_separador, 'fuentes', vg_separador, run_prog,' cxcp314 ',
 		vg_base, ' "CO" ', vg_codcia, ' ', vg_codloc, ' ',
-		rm_r21.r21_moneda, ' ', DATE(TODAY), ' "T" 0.01 ',
+		rm_r21.r21_moneda, ' ', DATE(vg_fecha), ' "T" 0.01 ',
 		'"N" ', vg_codloc, ' ', rm_r21.r21_codcli
 RUN comando
 
