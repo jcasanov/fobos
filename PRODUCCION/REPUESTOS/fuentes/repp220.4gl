@@ -469,7 +469,7 @@ END FUNCTION
 
 
 FUNCTION control_ingreso()
-DEFINE i 		SMALLINT
+DEFINE i 			SMALLINT
 DEFINE intentar 	SMALLINT
 DEFINE done 		SMALLINT
 
@@ -498,8 +498,10 @@ LET rm_r21.r21_vendedor   = rm_vend.r01_codigo
 CALL fl_lee_moneda(rg_gen.g00_moneda_base) 	     -- PARA OBTENER EL NOMBRE
 	RETURNING rm_g13.*		   	     -- DE LA MONEDA BASE    
 LET rm_r21.r21_precision = rm_g13.g13_decimales  
-DECLARE qu_gl CURSOR FOR SELECT g20_grupo_linea FROM gent020
-	WHERE g20_compania = vg_codcia
+DECLARE qu_gl CURSOR FOR
+	SELECT g20_grupo_linea
+		FROM gent020
+		WHERE g20_compania = vg_codcia
 OPEN qu_gl 
 FETCH qu_gl INTO rm_r21.r21_grupo_linea 
 IF status = NOTFOUND THEN
@@ -512,11 +514,13 @@ IF status = NOTFOUND THEN
 	END IF
 	RETURN
 END IF
+CLOSE qu_gl 
+FREE qu_gl 
 --LET rm_r21.r21_bodega     = rm_r00.r00_bodega_fact 
 LET rm_r21.r21_bodega     = retorna_bodega_localidad(vg_codcia, vg_codloc)
 
 DISPLAY BY NAME rm_r21.r21_fecing, rm_r21.r21_moneda, rm_r21.r21_porc_impto,
-		rm_r21.r21_dias_prof
+				rm_r21.r21_dias_prof
 DISPLAY rm_g13.g13_nombre TO nom_moneda
 DISPLAY rm_vend.r01_nombres TO nom_vendedor
 CALL lee_cabecera()  
@@ -697,7 +701,7 @@ DEFINE r_r01		RECORD LIKE rept001.*
 CLEAR FORM
 CALL control_DISPLAY_botones()
 
-LET INT_FLAG = 0
+LET int_flag = 0
 IF num_args() = 4 THEN
 	CONSTRUCT BY NAME expr_sql 
 		  ON r21_numprof,  r21_num_tran,  r21_moneda,   
@@ -821,7 +825,7 @@ LET query = 'SELECT *, ROWID FROM rept021 ',
 		' WHERE r21_compania  = ', vg_codcia,
 		'   AND r21_localidad = ', vg_codloc,
 		'   AND ', expr_sql CLIPPED,
-		' ORDER BY 3, 4' 
+		' ORDER BY r21_fecing DESC, 3, 4' 
 PREPARE cons FROM query
 DECLARE q_cons CURSOR FOR cons
 LET vm_num_rows = 1
@@ -866,32 +870,32 @@ DEFINE cliente		LIKE rept021.r21_codcli
 DEFINE r_g10		RECORD LIKE gent010.*
 DEFINE done, resul	SMALLINT
 DEFINE flag_error	SMALLINT
+DEFINE unavez		SMALLINT
 
+LET unavez   = 0
 LET int_flag = 0
-INPUT BY NAME   rm_r21.r21_codcli,     rm_r21.r21_nomcli,
-		rm_r21.r21_dircli,     rm_r21.r21_cedruc,
-		rm_r21.r21_telcli,     
-		rm_r21.r21_atencion,   rm_r21.r21_referencia,
-		rm_r21.r21_forma_pago, 
-		rm_r21.r21_vendedor,   rm_r21.r21_flete--, rm_r21.r21_trans_fact
-		WITHOUT DEFAULTS              
+INPUT BY NAME rm_r21.r21_codcli, rm_r21.r21_nomcli, rm_r21.r21_dircli,
+				rm_r21.r21_cedruc, rm_r21.r21_telcli, rm_r21.r21_atencion,
+				rm_r21.r21_referencia, rm_r21.r21_forma_pago,
+				rm_r21.r21_vendedor, rm_r21.r21_flete--, rm_r21.r21_trans_fact
+	WITHOUT DEFAULTS              
 	ON KEY (INTERRUPT)          
-		IF NOT FIELD_TOUCHED(r21_codcli, r21_nomcli, r21_telcli,
-					r21_atencion, r21_referencia,
-					r21_forma_pago, r21_cedruc,
-					r21_vendedor, r21_dircli)--,r21_trans_fact)
+		IF NOT FIELD_TOUCHED(r21_codcli, r21_nomcli, r21_dircli, r21_cedruc,
+							 r21_telcli, r21_atencion, r21_referencia,
+							 r21_forma_pago, r21_vendedor, r21_flete)--,r21_trans_fact)
 		THEN
+			LET int_flag = 1
 			EXIT INPUT
 		END IF
-		LET INT_FLAG = 0
-		CALL fl_mensaje_abandonar_proceso() RETURNING resp             
-		IF resp = 'Yes' THEN              
-			LET int_flag = 1         
+		LET int_flag = 0
+		CALL fl_mensaje_abandonar_proceso() RETURNING resp
+		IF resp = 'Yes' THEN
+			LET int_flag = 1
 			EXIT INPUT
-		END IF                         
-        ON KEY(F1,CONTROL-W)                  
-		CALL control_visor_teclas_caracter_1() 
-	ON KEY(F2)                   
+		END IF
+        ON KEY(F1,CONTROL-W)
+		CALL control_visor_teclas_caracter_1()
+	ON KEY(F2)
 		IF INFIELD(r21_vendedor) AND (rm_g05.g05_tipo <> 'UF' OR 
 			rm_vend.r01_tipo = 'J' OR
 			rm_vend.r01_tipo = 'G') THEN
@@ -909,20 +913,22 @@ INPUT BY NAME   rm_r21.r21_codcli,     rm_r21.r21_nomcli,
 			IF rm_z02.z02_codcli IS NOT NULL THEN   
 				LET rm_r21.r21_codcli = rm_z02.z02_codcli
 				LET rm_r21.r21_nomcli = rm_z01.z01_nomcli
-				DISPLAY BY NAME rm_r21.r21_codcli, 
-						rm_r21.r21_nomcli 
+				LET rm_r21.r21_atencion = NULL
+				DISPLAY BY NAME rm_r21.r21_codcli, rm_r21.r21_nomcli,
+								rm_r21.r21_atencion
+				LET unavez = 1
 			END IF   
 		END IF    
 		LET int_flag = 0  
 	ON KEY(F5)
 		CALL control_crear_cliente() 
-		LET INT_FLAG = 0    
+		LET int_flag = 0
 	ON KEY(F6)
 		IF rm_r21.r21_codcli IS NULL THEN
 			CONTINUE INPUT
 		END IF
 		CALL control_ver_ec_cliente()
-		LET INT_FLAG = 0                            
+		LET int_flag = 0
 	BEFORE INPUT            
 		--#CALL dialog.keysetlabel("F1","") 
 		--#CALL dialog.keysetlabel("F6","E/C Cliente")
@@ -956,6 +962,19 @@ INPUT BY NAME   rm_r21.r21_codcli,     rm_r21.r21_nomcli,
 		ELSE              
 			CLEAR nom_vendedor
 		END IF
+	BEFORE FIELD r21_codcli
+		IF rm_z01.z01_codcli IS NULL THEN
+			IF NOT unavez THEN
+				LET unavez = 1
+			END IF
+		END IF
+	BEFORE FIELD r21_nomcli
+		IF rm_r21.r21_nomcli IS NOT NULL THEN
+			IF unavez THEN
+				LET unavez = 0
+				NEXT FIELD r21_atencion
+			END IF
+		END IF
 	AFTER FIELD r21_codcli, r21_nomcli, r21_dircli, r21_cedruc, r21_telcli 
 		IF rm_r21.r21_codcli IS NOT NULL THEN    
 			CALL fl_lee_cliente_general(rm_r21.r21_codcli) 
@@ -972,8 +991,9 @@ INPUT BY NAME   rm_r21.r21_codcli,     rm_r21.r21_nomcli,
 			LET rm_r21.r21_telcli    = rm_z01.z01_telefono1
 			DISPLAY BY NAME rm_r21.r21_nomcli, rm_r21.r21_dircli,
 					rm_r21.r21_cedruc, rm_r21.r21_telcli
-			CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc, 
-				rm_r21.r21_codcli) RETURNING rm_z02.*
+			CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc,
+											rm_r21.r21_codcli)
+				RETURNING rm_z02.*
 			IF rm_z02.z02_codcli IS NULL THEN	
 				CALL fl_mostrar_mensaje('Cliente no está activado para esta localidad.','exclamation')
 				NEXT FIELD r21_codcli	
@@ -987,7 +1007,10 @@ INPUT BY NAME   rm_r21.r21_codcli,     rm_r21.r21_nomcli,
 			ELSE
 				LET rm_r21.r21_porc_impto =rg_gen.g00_porc_impto
                 	END IF         
-			DISPLAY BY NAME rm_r21.r21_porc_impto
+			IF rm_r21.r21_atencion IS NULL THEN
+				LET rm_r21.r21_atencion = rm_z02.z02_contacto
+			END IF
+			DISPLAY BY NAME rm_r21.r21_porc_impto, rm_r21.r21_atencion
 		ELSE
 			LET rm_z01.z01_paga_impto = 'S'
 			LET rm_r21.r21_porc_impto = rg_gen.g00_porc_impto
@@ -1122,9 +1145,8 @@ WHILE NOT salir
 	END IF           
 	INPUT ARRAY r_detalle WITHOUT DEFAULTS FROM r_detalle.*
 		ON KEY(INTERRUPT)
-			LET INT_FLAG = 0    
-			CALL fl_mensaje_abandonar_proceso()
-               			RETURNING resp      
+			LET int_flag = 0
+			CALL fl_mensaje_abandonar_proceso() RETURNING resp
 			IF resp = 'Yes' THEN       
 				LET int_flag = 1  
 				EXIT WHILE       
@@ -1163,13 +1185,13 @@ WHILE NOT salir
      				        DISPLAY r_detalle[i].r22_item TO r_detalle[j].r22_item 
                         	END IF			
 			END IF 
-                	LET INT_FLAG = 0                  
+			LET int_flag = 0
 		ON KEY(F6)
 			CALL control_crear_item()                     
-			LET INT_FLAG = 0                             
+			LET int_flag = 0
 		ON KEY(F7)                                         
 			CALL control_ver_item(r_detalle[i].r22_item) 
-			LET INT_FLAG = 0                            
+			LET int_flag = 0
 		ON KEY(F8)
 			IF r_detalle[i].r22_item IS NOT NULL THEN
 				LET i = arr_curr()
