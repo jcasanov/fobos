@@ -390,7 +390,7 @@ PAGE HEADER
 			ASCII escape, ASCII act_12cpi, ASCII escape, ASCII des_neg,
 			ASCII escape, ASCII act_comp
 	--}
-	PRINT COLUMN 010, r_z02.z02_referencia[1,70] CLIPPED,
+	PRINT COLUMN 010, r_z02.z02_referencia CLIPPED,
 		  COLUMN 077, ASCII escape, ASCII act_10cpi,
 					ASCII escape, ASCII act_neg,
 				" ", DATE(rm_r19.r19_fecing) USING "dd-mm-yyyy",
