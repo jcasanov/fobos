@@ -400,12 +400,12 @@ PAGE HEADER
 	SKIP 1 LINES
 	PRINT COLUMN 01,  "PROVEEDOR (", rm_c10.c10_codprov
 				USING "&&&&&", ") : ", rm_p01.p01_nomprov,
-	      COLUMN 69,  "TIPO ORDEN COMPRA  : ", r_tip_oc.c01_nombre
+	      COLUMN 69,  "FECHA ORDEN COMPRA: ", DATE(rm_c10.c10_fecing) 
+			 			USING "dd-mm-yyyy"
 	PRINT COLUMN 01,  "CEDULA/RUC        : ", rm_p01.p01_num_doc,
 	      COLUMN 69,  "SOLICITADO POR     : ", rm_cia.g01_razonsocial
-	PRINT COLUMN 01,  "DIRECCION         : ", rm_p01.p01_direccion1[1, 81],
-	      COLUMN 103,  "FECHA ORDEN COMPRA: ", DATE(rm_c10.c10_fecing) 
-			 			USING "dd-mm-yyyy"
+	PRINT COLUMN 01,  "DIRECCION         : ", rm_p01.p01_direccion1[1, 65],
+	      COLUMN 69,  "TIPO ORDEN COMPRA  : ", r_tip_oc.c01_nombre
 	PRINT COLUMN 01,  "TELEFONO          : ", rm_p01.p01_telefono1, " ",
 						  rm_p01.p01_telefono2,
 	      COLUMN 69,  "FACTURA            : ", rm_c10.c10_factura
