@@ -402,7 +402,7 @@ PAGE HEADER
 				USING "&&&&&", ") : ", rm_p01.p01_nomprov,
 	      COLUMN 69,  "TIPO ORDEN COMPRA  : ", r_tip_oc.c01_nombre
 	PRINT COLUMN 01,  "CEDULA/RUC        : ", rm_p01.p01_num_doc,
-	      COLUMN 69,  "ESTADO ORDEN COMPRA: ", nom_estado
+	      COLUMN 69,  "SOLICITADO POR     : ", rm_cia.g01_razonsocial
 	PRINT COLUMN 01,  "DIRECCION         : ", rm_p01.p01_direccion1[1, 81],
 	      COLUMN 103,  "FECHA ORDEN COMPRA: ", DATE(rm_c10.c10_fecing) 
 			 			USING "dd-mm-yyyy"
@@ -424,7 +424,8 @@ PAGE HEADER
 						   rm_loc.g02_fax2
 	PRINT COLUMN 01,  "FECHA IMPRESION   : ", DATE(TODAY)
 			USING 'dd-mm-yyyy', 1 SPACES, TIME,
-	      COLUMN 69,  "SOLICITADO POR     : ", rm_c10.c10_solicitado
+	      COLUMN 69,  "ESTADO ORDEN COMPRA: ", nom_estado
+
 	--SKIP 1 LINES
 	PRINT "------------------------------------------------------------------------------------------------------------------------------------"
 	IF r_tip_oc.c01_ing_bodega = 'S' THEN
@@ -481,21 +482,15 @@ PAGE TRAILER
 		PRINT --COLUMN 02,  "PRECIOS SUJETOS A CAMBIO SIN PREVIO AVISO",
 		      COLUMN 95,  "DESCUENTOS",
 		      COLUMN 118, rm_c10.c10_tot_dscto	USING "###,###,##&.##"
-		PRINT COLUMN 95,  "SEGURO",
-	      	      COLUMN 118, rm_c10.c10_otros	USING "###,###,##&.##"
 		PRINT COLUMN 95,  "SUBTOTAL",
 		      COLUMN 118, subtotal		USING "###,###,##&.##"
 		PRINT COLUMN 95,  "I. V. A. (", rm_c10.c10_porc_impto
 							USING "#&", ") %",
 		      COLUMN 118, impuesto		USING "###,###,##&.##"
-		PRINT COLUMN 95,  "TRANSPORTE",
-	      	      COLUMN 118, rm_c10.c10_flete	USING "###,###,##&.##"
 		PRINT COLUMN 02,  "SON: ", label_letras[1,87],
 		      COLUMN 95,  "VALOR A PAGAR",
 		      COLUMN 116, valor_pag	USING "#,###,###,##&.##";
 	ELSE
-		PRINT COLUMN 02, 1 SPACES
-		PRINT COLUMN 02, 1 SPACES
 		PRINT COLUMN 02, 1 SPACES
 		PRINT COLUMN 02, 1 SPACES
 		PRINT COLUMN 02, 1 SPACES
