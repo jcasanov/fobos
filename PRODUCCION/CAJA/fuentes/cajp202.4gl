@@ -211,7 +211,7 @@ END FOREACH
 
 LET vm_detalle = i - 1
 
-LET rm_j04.j04_fecha_cierre = CURRENT
+LET rm_j04.j04_fecha_cierre = fl_current()
 LET rm_j04.j04_usuario      = vg_usuario
 
 DISPLAY BY NAME rm_j04.j04_fecha_cierre, rm_j04.j04_usuario,
@@ -257,7 +257,7 @@ IF STATUS < 0 THEN
 END IF
 
 UPDATE cajt004
-	SET j04_fecha_cierre = CURRENT
+	SET j04_fecha_cierre = fl_current()
 	WHERE CURRENT OF q_cajt004
 
 COMMIT WORK
@@ -317,7 +317,7 @@ SELECT COUNT(*) INTO cuantos
 	FROM cajt004
 	WHERE j04_compania     = vg_codcia
 	  AND j04_localidad    = vg_codloc
-	  AND j04_fecha_cierre = TODAY
+	  AND j04_fecha_cierre = vg_fecha
 IF cuantos > 1 THEN
 	RETURN
 END IF
@@ -329,7 +329,7 @@ SELECT j10_compania cia, j10_localidad loc, j10_tipo_fuente tipo_f,
 	  AND j10_estado       IN ('A', 'P')
 	  --AND j10_estado        = 'A'
 	  AND j10_tipo_destino IS NULL
-	  AND DATE(j10_fecing) <= TODAY
+	  AND DATE(j10_fecing) <= vg_fecha
 	INTO TEMP tmp_j10
 IF r_j02.j02_pre_ventas = 'S' THEN
 	CALL borra_preventa()
@@ -357,7 +357,7 @@ SELECT p24_compania cia, p24_localidad loc, p24_orden_pago ord_pag
 	WHERE p24_compania      = vg_codcia
 	  AND p24_localidad     = vg_codloc
 	  AND p24_estado        = 'A'
-	  AND DATE(p24_fecing) <= TODAY
+	  AND DATE(p24_fecing) <= vg_fecha
 	INTO TEMP tmp_p24
 SELECT COUNT(*) INTO cuantos FROM tmp_p24
 IF cuantos = 0 THEN
@@ -397,7 +397,7 @@ SELECT r23_compania cia, r23_localidad loc, r23_numprev num_p
 	  AND r23_localidad     = vg_codloc
 	  AND r23_estado       <> "F"
 	  AND r23_cod_tran     IS NULL
-	  AND DATE(r23_fecing)  < TODAY
+	  AND DATE(r23_fecing)  < vg_fecha
 	INTO TEMP tmp_r23
 SELECT COUNT(*) INTO cuantos FROM tmp_r23
 IF cuantos = 0 THEN
@@ -481,11 +481,11 @@ SELECT r21_compania AS cia,
 	  AND r21_cod_tran     IS NULL
 	  AND r21_num_presup   IS NULL
 	  AND r21_num_ot       IS NULL
-	  AND DATE(r21_fecing) BETWEEN TODAY -
+	  AND DATE(r21_fecing) BETWEEN vg_fecha -
 		(SELECT r00_expi_prof * 2
 			FROM rept000
 			WHERE r00_compania = r21_compania) UNITS DAY
-				   AND TODAY -
+				   AND vg_fecha -
 		(SELECT r00_expi_prof + 1
 			FROM rept000
 			WHERE r00_compania = r21_compania) UNITS DAY
@@ -593,10 +593,10 @@ DECLARE qu_lt CURSOR FOR
 		  AND j10_localidad    = vg_codloc
 		  AND j10_estado       = 'A'
 		  AND j10_tipo_destino IS NULL
-		  AND DATE(j10_fecing) < TODAY
+		  AND DATE(j10_fecing) < vg_fecha
 FOREACH qu_lt INTO r_j10.*
 	--
-	IF DATE(r_j10.j10_fecing) >= TODAY THEN
+	IF DATE(r_j10.j10_fecing) >= vg_fecha THEN
 		CONTINUE FOREACH
 	END IF
 	--
@@ -626,7 +626,7 @@ DECLARE gy_chicho CURSOR FOR
 		  AND r23_localidad     = vg_codloc
 		  AND r23_estado       <> 'F'
 		  AND r23_cod_tran     IS NULL
-		  AND DATE(r23_fecing) <= TODAY
+		  AND DATE(r23_fecing) <= vg_fecha
 FOREACH gy_chicho INTO r_j10.j10_num_fuente
 	CALL borra_preventa(vg_codcia, vg_codloc, r_j10.j10_num_fuente)
 END FOREACH
@@ -636,7 +636,7 @@ DECLARE qu_pichaloca CURSOR FOR
 		WHERE z24_compania      = vg_codcia
 		  AND z24_localidad     = vg_codloc
 		  AND z24_estado       <> 'P'
-		  AND DATE(z24_fecing) <= TODAY
+		  AND DATE(z24_fecing) <= vg_fecha
 FOREACH qu_pichaloca INTO r_j10.j10_num_fuente
 	CALL borra_solicitud(vg_codcia, vg_codloc, r_j10.j10_num_fuente)
 END FOREACH
@@ -656,7 +656,7 @@ DECLARE q_p24 CURSOR FOR
 		WHERE p24_compania      = codcia
 		  AND p24_localidad     = codloc
 		  AND p24_estado        = 'A'
-		  AND DATE(p24_fecing) <= TODAY
+		  AND DATE(p24_fecing) <= vg_fecha
 OPEN q_p24
 FOREACH q_p24 INTO r_p24.*
 	DELETE FROM cxpt026
