@@ -483,7 +483,7 @@ LET vm_areaneg = rm_g20.g20_areaneg
 
 INITIALIZE rm_r25.*, fecha_primer_pago TO NULL
 LET d_pagos           = rm_z61.z61_dia_entre_pago
-LET fecha_primer_pago = TODAY + d_pagos
+LET fecha_primer_pago = vg_fecha + d_pagos
 
 IF num_args() = 6 AND arg_val(6) = 'R' THEN
 	CALL fl_lee_cabecera_transaccion_rep(rm_r88.r88_compania,
@@ -495,20 +495,20 @@ IF num_args() = 6 AND arg_val(6) = 'R' THEN
 		LET d_pagos   = 1
 		LET num_dias  = 1
 	END IF
-	LET fecha_primer_pago = TODAY + num_dias UNITS DAY
+	LET fecha_primer_pago = vg_fecha + num_dias UNITS DAY
 END IF
 
 CALL fl_lee_cabecera_credito_rep(vg_codcia, vg_codloc, rm_r23.r23_numprev) 
 	RETURNING rm_r25.*
 IF rm_r25.r25_numprev IS NULL THEN
-	LET fecha_primer_pago     = TODAY + d_pagos
+	LET fecha_primer_pago     = vg_fecha + d_pagos
 	IF num_args() = 6 AND arg_val(6) = 'R' THEN
-		LET fecha_primer_pago = TODAY + num_dias UNITS DAY
+		LET fecha_primer_pago = vg_fecha + num_dias UNITS DAY
 	END IF
 	IF arg_val(6) = 'A' THEN
 		CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc, rm_r23.r23_codcli)
 			RETURNING r_z02.*
-		LET fecha_primer_pago = TODAY + r_z02.z02_credit_dias UNITS DAY
+		LET fecha_primer_pago = vg_fecha + r_z02.z02_credit_dias UNITS DAY
 	END IF
 	LET rm_r25.r25_interes    = rm_z61.z61_intereses
 	LET dias_entre_pagos      = d_pagos
@@ -541,9 +541,9 @@ IF rm_r25.r25_numprev IS NULL THEN
 		LET rm_r25.r25_plazo = rm_r25.r25_dividendos * dias_entre_pagos
 	END IF
 ELSE
-	LET fecha_1er_pago = TODAY + d_pagos
+	LET fecha_1er_pago = vg_fecha + d_pagos
 	IF num_args() = 6 THEN
-		LET fecha_1er_pago = TODAY + num_dias UNITS DAY
+		LET fecha_1er_pago = vg_fecha + num_dias UNITS DAY
 	END IF
 	IF rm_r25.r25_valor_cred + rm_r25.r25_valor_ant <> rm_r23.r23_tot_neto
 	THEN
@@ -552,7 +552,7 @@ ELSE
 			CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc,
 											rm_r23.r23_codcli)
 				RETURNING r_z02.*
-			LET fecha_primer_pago = TODAY + r_z02.z02_credit_dias UNITS DAY
+			LET fecha_primer_pago = vg_fecha + r_z02.z02_credit_dias UNITS DAY
 		END IF
 		LET rm_r25.r25_interes    = 0
 		LET rm_r25.r25_interes    = 0
@@ -937,9 +937,9 @@ ELSE
 	
 END IF
 
-LET r_j10.j10_fecha_pro   = CURRENT
+LET r_j10.j10_fecha_pro   = fl_current()
 LET r_j10.j10_usuario     = vg_usuario 
-LET r_j10.j10_fecing      = CURRENT
+LET r_j10.j10_fecing      = fl_current()
 LET r_j10.j10_compania    = vg_codcia
 LET r_j10.j10_localidad   = vg_codloc
 LET r_j10.j10_tipo_fuente = 'PR'
@@ -1136,10 +1136,10 @@ FOR i = 1 TO rm_r25.r25_dividendos
 						r_detalle_3[i - 1].r26_fec_vcto + dias_entre_pagos
 			END IF
 		ELSE
-			IF fecha > TODAY THEN
+			IF fecha > vg_fecha THEN
 				LET r_detalle_3[i].r26_fec_vcto = fecha
 			ELSE
-				LET r_detalle_3[i].r26_fec_vcto = TODAY +
+				LET r_detalle_3[i].r26_fec_vcto = vg_fecha +
 								1 UNITS DAY
 			END IF
 		END IF
@@ -1302,7 +1302,7 @@ WHILE TRUE
 
 -- Para evitar que se grabe una fecha de vencimiento < a today (1822)
 			FOR i = 1 TO rm_r25.r25_dividendos
-				IF r_detalle_3[i].r26_fec_vcto < TODAY THEN
+				IF r_detalle_3[i].r26_fec_vcto < vg_fecha THEN
 					--CALL fgl_winmessage(vg_producto,'La fecha de vencimiento no puede ser menor a la fecha de hoy.','exclamation')
 					CALL fl_mostrar_mensaje('La fecha de vencimiento no puede ser menor a la fecha de hoy.','exclamation')
 					CONTINUE INPUT
@@ -1310,7 +1310,7 @@ WHILE TRUE
 			END FOR
 			LET tt = rm_r25.r25_dividendos
 			LET rm_r25.r25_plazo = 
-			    r_detalle_3[tt].r26_fec_vcto - TODAY 	
+			    r_detalle_3[tt].r26_fec_vcto - vg_fecha 	
 			DISPLAY BY NAME rm_r25.r25_plazo
 
 			--#EXIT WHILE
@@ -1478,7 +1478,7 @@ DEFINE r_z00		RECORD LIKE cxct000.*
 DEFINE r_z02		RECORD LIKE cxct002.*
 
 IF fecha_primer_pago IS NULL THEN
-	LET fecha_primer_pago = TODAY + dias_entre_pagos
+	LET fecha_primer_pago = vg_fecha + dias_entre_pagos
 END IF
 LET int_flag = 0
 INPUT BY NAME rm_r25.r25_numprev, rm_r23.r23_codcli, rm_r23.r23_nomcli,
@@ -1521,11 +1521,11 @@ INPUT BY NAME rm_r25.r25_numprev, rm_r23.r23_codcli, rm_r23.r23_nomcli,
 		END IF
 	AFTER FIELD fecha_primer_pago
 		IF fecha_primer_pago IS NOT NULL THEN
-			IF fecha_primer_pago < TODAY THEN
+			IF fecha_primer_pago < vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha ingresada debe ser mayor o igual a la de hoy. ','exclamation')
 				NEXT FIELD fecha_primer_pago
 			END IF
-			LET fecha = TODAY + rm_r25.r25_plazo
+			LET fecha = vg_fecha + rm_r25.r25_plazo
 			IF fecha_primer_pago > fecha THEN
 				LET mensaje = 'La fecha ingresada debe ser ',
 						'menor o igual a la fecha ',
@@ -1883,7 +1883,7 @@ IF vg_gui = 0 THEN
 	CALL fl_mostrar_mensaje('Este programa no esta para este tipo de terminales.', 'exclamation')
 	RETURN
 END IF
-LET fecha   = TODAY
+LET fecha   = vg_fecha
 LET comando = 'cd ..', vg_separador, '..', vg_separador, 'COBRANZAS',
 		vg_separador, 'fuentes', vg_separador, '; fglrun cxcp314 ',
 		vg_base, ' "CO" ', vg_codcia, ' ', vg_codloc, ' ',
@@ -2088,11 +2088,11 @@ LET query = 'SELECT a.* ',
 		' FROM ', bas_loc CLIPPED, 'cxct020 a',
 		' WHERE z20_compania   = ', vg_codcia,
 		'   AND z20_codcli     = ', rm_r23.r23_codcli,
-		'   AND z20_fecha_emi <= TODAY ',
+		'   AND z20_fecha_emi <=  "', vg_fecha, '"'
 		' INTO TEMP tmp_z20 '
 PREPARE cons_z20 FROM query
 EXECUTE cons_z20
-LET fecha = EXTEND(TODAY, YEAR TO SECOND) + 23 UNITS HOUR +
+LET fecha = EXTEND(vg_fecha, YEAR TO SECOND) + 23 UNITS HOUR +
 		59 UNITS MINUTE + 59 UNITS SECOND
 LET subquery1 = '(SELECT z23_valor_cap + z23_valor_int + z23_saldo_cap + ',
 			'z23_saldo_int ',
@@ -2137,7 +2137,7 @@ LET query = ' SELECT g02_nombre, z20_localidad, z20_codcli, z20_tipo_doc, ',
 			'z20_fecha_emi, z20_fecha_vcto, ',
 			'(z20_valor_cap + z20_valor_int) valor_doc, ',
 			' NVL(', subquery1 CLIPPED, ', ',
-			' CASE WHEN z20_fecha_emi <= TODAY ',
+			' CASE WHEN z20_fecha_emi <= "', vg_fecha, '"',
 				' THEN z20_saldo_cap + z20_saldo_int - ',
 					subquery2 CLIPPED,
 				' ELSE z20_valor_cap + z20_valor_int',
@@ -2186,11 +2186,11 @@ LET query = 'SELECT a.* ',
 		' FROM ', bas_loc CLIPPED, 'cxct021 a',
 		' WHERE z21_compania   = ', vg_codcia,
 		'   AND z21_codcli     = ', rm_r23.r23_codcli,
-		'   AND z21_fecha_emi <= TODAY ',
+		'   AND z21_fecha_emi <= "', vg_fecha, '"',
 		' INTO TEMP tmp_z21 '
 PREPARE cons_z21 FROM query
 EXECUTE cons_z21
-LET fecha = EXTEND(TODAY, YEAR TO SECOND) + 23 UNITS HOUR + 59 UNITS MINUTE
+LET fecha = EXTEND(vg_fecha, YEAR TO SECOND) + 23 UNITS HOUR + 59 UNITS MINUTE
 		+ 59 UNITS SECOND
 LET subquery1 = '(SELECT SUM(z23_valor_cap + z23_valor_int) ',
 		' FROM ', bas_loc CLIPPED, 'cxct023, ', bas_loc CLIPPED,
@@ -2217,12 +2217,12 @@ LET subquery2 = '(SELECT NVL(SUM(z23_valor_cap + z23_valor_int), 0) ',
 		'   AND z23_doc_favor  = z21_num_doc) '
 LET query = 'SELECT z21_localidad, z21_tipo_doc, z21_num_doc, z21_codcli, ',
 		' z01_nomcli, z21_fecha_emi, ',
-		' NVL(CASE WHEN z21_fecha_emi > TODAY ',
+		' NVL(CASE WHEN z21_fecha_emi > "', vg_fecha, '"',
 			' THEN z21_valor + ', subquery1 CLIPPED,
 			' ELSE ', subquery2 CLIPPED, ' + z21_saldo - ',
 				  subquery1 CLIPPED,
 		' END, ',
-		' CASE WHEN z21_fecha_emi <= TODAY ',
+		' CASE WHEN z21_fecha_emi <= "', vg_fecha, '"',
 			' THEN z21_saldo - ', subquery2 CLIPPED,
 			' ELSE z21_valor',
 		' END) * (-1) saldo_mov ',
@@ -2259,14 +2259,14 @@ LET flag = 1
 ERROR "Generando resumen . . . espere por favor." ATTRIBUTE(NORMAL)
 LET query = 'SELECT z20_localidad loc1, z20_codcli cli1, valor_mov sald1 ',
 		' FROM tmp_mov ',
-		' WHERE z20_fecha_vcto >= TODAY ',
+		' WHERE z20_fecha_vcto >= "', vg_fecha, '"', 
 		'   AND valor_mov       > 0 ',
 		' INTO TEMP t1 '
 PREPARE cons_t1_a FROM query
 EXECUTE	cons_t1_a
 LET query = 'SELECT z20_localidad loc2, z20_codcli cli2, valor_mov sald2 ',
 		' FROM tmp_mov ',
-		' WHERE z20_fecha_vcto < TODAY ',
+		' WHERE z20_fecha_vcto < "', vg_fecha, '"',
 		'   AND valor_mov      > 0 ',
 		' INTO TEMP t2 '
 PREPARE cons_t2_a FROM query

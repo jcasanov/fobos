@@ -567,7 +567,7 @@ LET rm_r21.r21_tot_bruto   = rm_r23.r23_tot_bruto
 LET rm_r21.r21_tot_dscto   = rm_r23.r23_tot_dscto                   
 LET rm_r21.r21_tot_neto    = rm_r23.r23_tot_neto - rm_r23.r23_flete  
 LET rm_r21.r21_usuario     = vg_usuario    
-LET rm_r21.r21_fecing      = CURRENT    
+LET rm_r21.r21_fecing      = fl_current()
 LET rm_r21.r21_referencia  = 'REFERENCIA A PREVENTA # '|| rm_r23.r23_numprev    
 LET rm_r21.r21_modelo      = '.'    
 
@@ -664,7 +664,7 @@ END IF
 -- INITIAL VALUES FOR rm_r23 FIELDS
 LET rm_r23.r23_estado     = 'P'
 LET rm_r23.r23_flete      = 0
-LET vm_fecha              = CURRENT
+LET vm_fecha              = fl_current()
 LET rm_r23.r23_usuario    = vg_usuario
 LET rm_r23.r23_compania   = vg_codcia
 LET rm_r23.r23_localidad  = vg_codloc
@@ -720,7 +720,7 @@ IF int_flag THEN
 	RETURN
 END IF
 	-- ACTUALIZO LOS VALORES DEFAULTS QUE INGRESE AL INICIO DE LEE DATOS --
-LET rm_r23.r23_fecing = CURRENT
+LET rm_r23.r23_fecing = fl_current()
 LET rm_r23.r23_tot_neto = vm_total
 BEGIN WORK
 
@@ -1090,9 +1090,9 @@ ELSE
 	
 END IF
 
-LET r_j10.j10_fecha_pro   = CURRENT
+LET r_j10.j10_fecha_pro   = fl_current()
 LET r_j10.j10_usuario     = vg_usuario 
-LET r_j10.j10_fecing      = CURRENT
+LET r_j10.j10_fecing      = fl_current()
 LET r_j10.j10_compania    = vg_codcia
 LET r_j10.j10_localidad   = vg_codloc
 LET r_j10.j10_tipo_fuente = 'PR'
@@ -2416,7 +2416,7 @@ IF rm_r23.r23_cont_cred = 'R' AND cupo_credito >= rm_r23.r23_tot_neto AND
 			VALUES(vg_codcia, vg_codloc,  rm_r23.r23_numprev, 0, 
 		       	       rm_r23.r23_tot_neto, 0, 1, vm_plazo, NULL, NULL)
 
-	LET vcto = TODAY + vm_plazo 
+	LET vcto = vg_fecha + vm_plazo 
 
 	INSERT INTO rept026 
 			VALUES(vg_codcia, vg_codloc,  rm_r23.r23_numprev, 1, 

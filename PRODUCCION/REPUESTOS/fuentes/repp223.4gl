@@ -763,7 +763,7 @@ WHILE TRUE
 					r_r23.r23_tot_neto, 0, 1, 
 					r_z02.z02_credit_dias, null, null)
 
-			LET fecha_aux = TODAY + r_z02.z02_credit_dias 
+			LET fecha_aux = vg_fecha + r_z02.z02_credit_dias 
 
 			INSERT INTO rept026 VALUES(vg_codcia, vg_codloc,  
 					r_r23.r23_numprev, 1, 
@@ -844,9 +844,9 @@ LET r_j10.j10_codcli    = rm_r23.r23_codcli
 LET r_j10.j10_nomcli    = rm_r23.r23_nomcli
 LET r_j10.j10_moneda    = rm_r23.r23_moneda
 
-LET r_j10.j10_fecha_pro   = CURRENT
+LET r_j10.j10_fecha_pro   = fl_current()
 LET r_j10.j10_usuario     = vg_usuario 
-LET r_j10.j10_fecing      = CURRENT
+LET r_j10.j10_fecing      = fl_current()
 LET r_j10.j10_compania    = vg_codcia
 LET r_j10.j10_localidad   = vg_codloc
 LET r_j10.j10_tipo_fuente = 'PR'
@@ -929,7 +929,7 @@ BEGIN WORK
 		RETURN
 	END IF
 	WHENEVER ERROR CONTINUE
-	LET fec_tr_fa = CURRENT
+	LET fec_tr_fa = fl_current()
 	UPDATE rept021
 		SET r21_trans_fact = 'S',
 		    r21_usr_tr_fa  = vg_usuario,
