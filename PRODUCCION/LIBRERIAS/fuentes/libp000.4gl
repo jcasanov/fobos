@@ -3129,6 +3129,8 @@ DEFINE num_format	CHAR(8)
 DEFINE ano_char		CHAR(4)
 DEFINE existe		SMALLINT
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 SET LOCK MODE TO WAIT 3
 WHENEVER ERROR CONTINUE
 LET existe = 0
@@ -3144,8 +3146,9 @@ WHILE NOT existe
         IF status = NOTFOUND THEN
 		CLOSE q_ncompt
 		WHENEVER ERROR STOP
+			LET fecha_actual = fl_current()
 	        INSERT INTO ctbt005 VALUES (compania, tipo, ano, 0,0,0,0,0,0,0,
-					    0,0,0,0,0, vg_usuario, fl_current())
+					    0,0,0,0,0, vg_usuario, fecha_actual)
 		IF status < 0 THEN
 			CALL fl_mostrar_mensaje('Error al insertar control secuencia en ctbt005', 'exclamation')
 			LET numero = -1
@@ -3559,6 +3562,8 @@ DEFINE tot_db		DECIMAL(15,2)
 DEFINE tot_cr		DECIMAL(15,2)
 DEFINE num_row		INTEGER
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 CALL fl_lee_compania_contabilidad(codcia) RETURNING r_cia.*
 IF r_cia.b00_compania IS NULL THEN
 	CALL fl_mostrar_mensaje('Compañía no está configurada en Contabilidad', 'exclamation')
@@ -3589,7 +3594,8 @@ SELECT * FROM ctbt006
 	      b06_mes      = mes
 LET num_row = 0
 IF status = NOTFOUND THEN
-	INSERT INTO ctbt006 VALUES (codcia, ano, mes, vg_usuario, fl_current())
+	LET fecha_actual = fl_current()
+	INSERT INTO ctbt006 VALUES (codcia, ano, mes, vg_usuario, fecha_actual)
 	LET num_row = SQLCA.SQLERRD[6]
 END IF
 ERROR 'Bloqueando maestro de saldos'

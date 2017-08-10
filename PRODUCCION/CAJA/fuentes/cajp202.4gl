@@ -258,7 +258,7 @@ IF STATUS < 0 THEN
 	EXIT PROGRAM
 END IF
 
-fecha_actual = fl_current()
+LET fecha_actual = fl_current()
 
 UPDATE cajt004
 	SET j04_fecha_cierre = fecha_actual
