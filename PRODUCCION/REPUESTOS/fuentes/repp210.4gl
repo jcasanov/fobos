@@ -2088,7 +2088,7 @@ LET query = 'SELECT a.* ',
 		' FROM ', bas_loc CLIPPED, 'cxct020 a',
 		' WHERE z20_compania   = ', vg_codcia,
 		'   AND z20_codcli     = ', rm_r23.r23_codcli,
-		'   AND z20_fecha_emi <=  "', vg_fecha, '"'
+		'   AND z20_fecha_emi <=  "', vg_fecha, '"',
 		' INTO TEMP tmp_z20 '
 PREPARE cons_z20 FROM query
 EXECUTE cons_z20
