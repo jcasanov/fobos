@@ -104,9 +104,9 @@ END FUNCTION
 FUNCTION control_master()
 
 INITIALIZE rm_par.* TO NULL
-LET rm_par.c04_fecha_vigen = TODAY
+LET rm_par.c04_fecha_vigen = vg_fecha
 LET rm_par.c04_usuario     = vg_usuario
-LET rm_par.c04_fecing      = CURRENT
+LET rm_par.c04_fecing      = fl_current()
 WHILE TRUE
 	CALL borrar_detalle()
 	CALL muestra_contadores_det(0, 0)
@@ -174,7 +174,7 @@ INPUT BY NAME rm_par.*
 			LET rm_par.c04_fecha_vigen = fec_ini     
 			DISPLAY BY NAME rm_par.c04_fecha_vigen
 		END IF
-		IF rm_par.c04_fecha_vigen < TODAY THEN
+		IF rm_par.c04_fecha_vigen < vg_fecha THEN
 			CALL fl_mostrar_mensaje('La fecha de vigencia no puede ser menor a la de hoy.','exclamation')
 			NEXT FIELD c04_fecha_vigen
 		END IF
@@ -391,7 +391,7 @@ SET LOCK MODE TO WAIT
 			VALUES (vg_codcia, vg_codloc, rm_par.c04_codprov,
 					rm_detalle[i].c04_cod_item, rm_par.c04_fecha_vigen,
 					rm_detalle[i].c04_pvp_prov_sug, rm_detalle[i].c04_desc_prov,
-					rm_detalle[i].c04_costo_prov, rm_par.c04_usuario, CURRENT)
+					rm_detalle[i].c04_costo_prov, rm_par.c04_usuario, fl_current())
 		IF STATUS <> 0 THEN
 			ROLLBACK WORK
 			WHENEVER ERROR STOP
@@ -405,7 +405,7 @@ SET LOCK MODE TO WAIT
 		UPDATE rept010
 			SET r10_precio_mb   = rm_detalle[i].r10_precio_mb,
 				r10_precio_ant  = rm_adi[i].r10_precio_ant,
-				r10_fec_camprec = CURRENT
+				r10_fec_camprec = fl_current()
 			WHERE r10_compania = vg_codcia
 			  AND r10_codigo   = rm_adi[i].r10_codigo
 		IF STATUS <> 0 THEN
@@ -457,7 +457,7 @@ DROP TABLE t1
 LET r_r87.r87_precio_act  = rm_detalle[i].r10_precio_mb
 LET r_r87.r87_precio_ant  = rm_adi[i].r10_precio_ant
 LET r_r87.r87_usu_camprec = vg_usuario
-LET r_r87.r87_fec_camprec = CURRENT
+LET r_r87.r87_fec_camprec = fl_current()
 INSERT INTO rept087 VALUES (r_r87.*)
 IF STATUS = 0 THEN
 	RETURN 1
@@ -612,7 +612,7 @@ PAGE HEADER
 	PRINT COLUMN 052, "** FECHA VIGENCIA : ",
 		rm_par.c04_fecha_vigen USING "dd-mm-yyyy"
 	SKIP 1 LINES
-	PRINT COLUMN 001, "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 001, "FECHA IMPRESION: ", vg_fecha USING "dd-mm-yyyy",
 		1 SPACES, TIME,
 	      COLUMN 114, usuario
 	PRINT COLUMN 001, "------------------------------------------------------------------------------------------------------------------------------------"

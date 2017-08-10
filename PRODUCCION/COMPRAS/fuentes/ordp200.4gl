@@ -712,7 +712,7 @@ END IF
 
 IF i = 1 THEN
 	LET pagos      = 1 
-	LET fecha_pago = TODAY + 30
+	LET fecha_pago = vg_fecha + 30
 	LET dias_pagos = 30
 	LET tot_cap    = 0
 	LET tot_int    = 0
@@ -1002,7 +1002,7 @@ INPUT BY NAME pagos, rm_c10.c10_interes, fecha_pago, dias_pagos
 		--#CALL dialog.keysetlabel("F1","")
 		--#CALL dialog.keysetlabel("CONTROL-W","")
 	AFTER FIELD fecha_pago
-		IF fecha_pago < TODAY THEN
+		IF fecha_pago < vg_fecha THEN
 			--CALL fgl_winmessage(vg_producto,'Debe ingresar una fecha mayor o igual a la de hoy.','exclamation')
 			CALL fl_mostrar_mensaje('Debe ingresar una fecha mayor o igual a la de hoy.','exclamation')
 			NEXT FIELD fecha_pago
@@ -1127,7 +1127,7 @@ WHILE TRUE
 				EXIT INPUT
 			END IF
 
-			LET tot_dias = r_detalle_2[pagos].c12_fecha_vcto - TODAY 	
+			LET tot_dias = r_detalle_2[pagos].c12_fecha_vcto - vg_fecha 	
 			DISPLAY BY NAME tot_dias
 
 			IF vg_gui = 1 THEN
@@ -1241,7 +1241,7 @@ IF vg_gui = 0 THEN
 END IF
 LET rm_c10.c10_recargo     = 0
 LET rm_c10.c10_estado      = 'A'
-LET rm_c10.c10_fecing      = CURRENT
+LET rm_c10.c10_fecing      = fl_current()
 LET rm_c10.c10_usuario     = vg_usuario
 LET rm_c10.c10_compania    = vg_codcia
 LET rm_c10.c10_localidad   = vg_codloc
@@ -1502,7 +1502,7 @@ DEFINE numprev          INTEGER
 DEFINE r_s23		RECORD LIKE srit023.*
 
 LET done = 1
-LET rm_c10.c10_fecing = CURRENT
+LET rm_c10.c10_fecing = fl_current()
 
 SELECT MAX(c10_numero_oc) + 1 INTO rm_c10.c10_numero_oc
 	FROM  ordt010
@@ -1529,7 +1529,7 @@ LET rm_c10.c10_valor_ice    = 0
 IF vm_flag_llam = 'I' THEN
 	LET rm_c10.c10_estado      = 'P'
 	LET rm_c10.c10_usua_aprob  = vg_usuario
-	LET rm_c10.c10_fecha_aprob = CURRENT
+	LET rm_c10.c10_fecha_aprob = fl_current()
 END IF
 INSERT INTO ordt010 VALUES (rm_c10.*)
 DISPLAY BY NAME rm_c10.c10_numero_oc
@@ -2112,8 +2112,8 @@ IF vm_flag_llam = 'I' THEN
   			  AND c04_localidad = r22_localidad
 			  AND c04_codprov   = rm_c10.c10_codprov
 			  AND c04_cod_item  = r10_cod_pedido
-			  AND c04_fecha_vigen <= TODAY
-			  AND (c04_fecha_fin IS NULL OR c04_fecha_fin > TODAY)
+			  AND c04_fecha_vigen <= vg_fecha
+			  AND (c04_fecha_fin IS NULL OR c04_fecha_fin > vg_fecha)
 			GROUP BY r22_item, r10_nombre, c04_pvp_prov_sug, c04_desc_prov,
                		 c04_costo_prov, r22_precio
 

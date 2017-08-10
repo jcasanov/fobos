@@ -214,7 +214,7 @@ LET rm_p01.p01_cont_espe    = 'N'
 LET rm_p01.p01_estado       = 'A'
 LET rm_p02.p02_tip_cta_prov = 'N'
 LET rm_p01.p01_usuario      = vg_usuario
-LET rm_p01.p01_fecing       = CURRENT
+LET rm_p01.p01_fecing       = fl_current()
 
 LET rm_p02.p02_compania     = vg_codcia
 LET rm_p02.p02_localidad    = vg_codloc
@@ -295,7 +295,7 @@ END IF
 IF rm_p02.p02_codprov IS NULL THEN
 	LET rm_p02.p02_int_ext = 'I'
 	LET rm_p02.p02_usuario = rm_p01.p01_usuario
-	LET rm_p02.p02_fecing  = CURRENT
+	LET rm_p02.p02_fecing  = fl_current()
 END IF
 WHENEVER ERROR STOP
 CALL leer_datos()
@@ -1232,7 +1232,7 @@ END FOR
 LET rm_p02.p02_email = correo CLIPPED
 IF rm_p01.p01_codprov IS NULL THEN
 	LET num_aux            = 0 
-	LET rm_p01.p01_fecing  = CURRENT
+	LET rm_p01.p01_fecing  = fl_current()
 	LET rm_p02.p02_fecing = rm_p01.p01_fecing
 	SELECT MAX(p01_codprov) INTO rm_p01.p01_codprov FROM cxpt001
 	IF rm_p01.p01_codprov IS NOT NULL THEN

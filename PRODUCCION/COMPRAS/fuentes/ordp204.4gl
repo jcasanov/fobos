@@ -524,7 +524,7 @@ IF STATUS <> NOTFOUND THEN
 	CALL fl_mayoriza_comprobante(r_b12.b12_compania, r_b12.b12_tipo_comp, r_b12.b12_num_comp, 'D')
 	SET LOCK MODE TO WAIT 5
 	UPDATE ctbt012 SET b12_estado     = 'E',
-			   b12_fec_modifi = CURRENT 
+			   b12_fec_modifi = fl_current() 
 		WHERE b12_compania  = r_b12.b12_compania  AND 
 		      b12_tipo_comp = r_b12.b12_tipo_comp AND 
 		      b12_num_comp  = r_b12.b12_num_comp
@@ -567,7 +567,7 @@ IF num_ret IS NOT NULL THEN
 							r_b12.b12_num_comp, 'D')
 			SET LOCK MODE TO WAIT 5
 			UPDATE ctbt012 SET b12_estado     = 'E',
-					   b12_fec_modifi = CURRENT 
+					   b12_fec_modifi = fl_current() 
 				WHERE b12_compania  = r_b12.b12_compania  AND 
 				      b12_tipo_comp = r_b12.b12_tipo_comp AND 
 				      b12_num_comp  = r_b12.b12_num_comp
@@ -648,7 +648,7 @@ IF i > 1 THEN
 ELSE
 	LET dias_pagos =r_detalle_2[1].c15_fecha_vcto - DATE(rm_c13.c13_fecing) 
 END IF
-LET tot_dias = r_detalle_2[i].c15_fecha_vcto - TODAY
+LET tot_dias = r_detalle_2[i].c15_fecha_vcto - vg_fecha
 LET pagos = i
 DISPLAY BY NAME tot_recep, dias_pagos, pagos, tot_cap, tot_int, 
 		tot_sub,   fecha_pago, tot_dias, rm_c13.c13_interes
@@ -678,7 +678,7 @@ FUNCTION control_update_ordt013()
 
 UPDATE ordt013 
 	SET c13_estado      = 'E',
-	    c13_fecha_eli   = CURRENT	
+	    c13_fecha_eli   = fl_current()	
 	WHERE c13_compania  = vg_codcia
 	  AND c13_localidad = vg_codloc
 	  AND c13_numero_oc = rm_c13.c13_numero_oc
@@ -704,7 +704,7 @@ CLOSE q_cxpt028
 FREE  q_cxpt028
 UPDATE cxpt027 
 	SET p27_estado      = 'E',
-	    p27_fecha_eli   = CURRENT	
+	    p27_fecha_eli   = fl_current()	
 	WHERE p27_compania  = vg_codcia
 	  AND p27_localidad = vg_codloc
 	  AND p27_num_ret   = num_ret
@@ -826,10 +826,10 @@ INPUT BY NAME rm_c13.c13_numero_oc, rm_c13.c13_factura
                        			NEXT FIELD c13_numero_oc
 				END IF
 			END IF
-			LET dias = TODAY - r_c10.c10_fecha_fact
+			LET dias = vg_fecha - r_c10.c10_fecha_fact
 			IF (r_c00.c00_react_mes = 'S' AND 
-				(YEAR(TODAY)  <> YEAR(r_c10.c10_fecha_fact) OR
-				 MONTH(TODAY) <> MONTH(r_c10.c10_fecha_fact)))
+				(YEAR(vg_fecha)  <> YEAR(r_c10.c10_fecha_fact) OR
+				 MONTH(vg_fecha) <> MONTH(r_c10.c10_fecha_fact)))
 			   OR
 			   (r_c00.c00_react_mes = 'N' AND 
 				dias > r_c00.c00_dias_react) THEN
@@ -942,7 +942,7 @@ LET r_p21.p21_num_doc      = nextValInSequence('TE', vm_nota_credito)
 LET r_p21.p21_referencia   = 'ANULACION RECEPCION # ',
 				rm_c13.c13_num_recep USING "<&", ' OC # ',
 				rm_c13.c13_numero_oc USING "<<<<&"
-LET r_p21.p21_fecha_emi    = TODAY
+LET r_p21.p21_fecha_emi    = vg_fecha
 LET r_p21.p21_moneda       = rm_c10.c10_moneda
 LET r_p21.p21_paridad      = rm_c10.c10_paridad
 LET r_p21.p21_valor        = rm_c13.c13_tot_recep - tot_ret
@@ -950,7 +950,7 @@ LET r_p21.p21_saldo        = rm_c13.c13_tot_recep - tot_ret
 LET r_p21.p21_subtipo      = 1
 LET r_p21.p21_origen       = 'A'
 LET r_p21.p21_usuario      = vg_usuario
-LET r_p21.p21_fecing       = CURRENT
+LET r_p21.p21_fecing       = fl_current()
 INSERT INTO cxpt021 VALUES(r_p21.*)
 -- Para aplicar la nota de credito
 DECLARE q_ddev CURSOR FOR 
@@ -973,7 +973,7 @@ IF r_caju.p22_num_trn <= 0 THEN
 	EXIT PROGRAM
 END IF
 LET r_caju.p22_referencia       = r_p21.p21_referencia CLIPPED
-LET r_caju.p22_fecha_emi 	= TODAY
+LET r_caju.p22_fecha_emi 	= vg_fecha
 LET r_caju.p22_moneda 		= rm_c10.c10_moneda
 LET r_caju.p22_paridad 		= rm_c10.c10_paridad
 LET r_caju.p22_tasa_mora 	= 0
@@ -986,7 +986,7 @@ LET r_caju.p22_fecha_elim 	= NULL
 LET r_caju.p22_tiptrn_elim 	= NULL
 LET r_caju.p22_numtrn_elim 	= NULL
 LET r_caju.p22_usuario 		= vg_usuario
-LET r_caju.p22_fecing 		= CURRENT
+LET r_caju.p22_fecing 		= fl_current()
 INSERT INTO cxpt022 VALUES (r_caju.*)
 LET num_row = SQLCA.SQLERRD[6]
 LET valor_favor = r_p21.p21_valor 
@@ -1227,7 +1227,7 @@ FOREACH q_c11 INTO r_c11.*
 	LET r_a12.a12_tipcomp_gen = r_c40.c40_tipo_comp
 	LET r_a12.a12_numcomp_gen = r_c40.c40_num_comp
 	LET r_a12.a12_usuario 	  = vg_usuario
-	LET r_a12.a12_fecing 	  = CURRENT
+	LET r_a12.a12_fecing 	  = fl_current()
 	INSERT INTO actt012 VALUES (r_a12.*)
 END FOREACH
 RETURN r_c40.c40_tipo_comp, r_c40.c40_num_comp

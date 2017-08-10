@@ -305,7 +305,7 @@ LET rm_p24.p24_tasa_mora  = 0
 LET rm_p24.p24_total_mora = 0
 
 LET rm_p24.p24_usuario    = vg_usuario
-LET rm_p24.p24_fecing     = CURRENT
+LET rm_p24.p24_fecing     = fl_current()
 
 CALL lee_datos()
 IF INT_FLAG THEN
@@ -1370,12 +1370,12 @@ CALL fl_lee_proveedor(proveedor) 	     RETURNING r_p01.*
 
 DISPLAY r_p01.p01_nomprov 	TO 	n_proveedor
 
-IF fecha_vcto >= TODAY THEN
+IF fecha_vcto >= vg_fecha THEN
 	DISPLAY 'Por vencer' TO n_estado_vcto
 ELSE
 	DISPLAY 'Vencido' TO n_estado_vcto
 END IF
-LET dias = fecha_vcto - TODAY
+LET dias = fecha_vcto - vg_fecha
 DISPLAY BY NAME dias
 
 END FUNCTION
@@ -1644,16 +1644,16 @@ CASE tipo_vcto
 	WHEN 'V'
 		IF condicion IS NOT NULL THEN
 			LET condicion = 
-				condicion || ' AND p20_fecha_vcto < TODAY'
+				condicion || ' AND p20_fecha_vcto < "', vg_fecha, '"'
 		ELSE
-			LET condicion = ' AND p20_fecha_vcto < TODAY'
+			LET condicion = ' AND p20_fecha_vcto < "', vg_fecha, '"' 
 		END IF
 	WHEN 'P'
 		IF condicion IS NOT NULL THEN
 			LET condicion = 
-				condicion || ' AND p20_fecha_vcto >= TODAY'
+				condicion || ' AND p20_fecha_vcto >= "', vg_fecha, '"'
 		ELSE
-			LET condicion = ' AND p20_fecha_vcto >= TODAY'
+			LET condicion = ' AND p20_fecha_vcto >= "', vg_fecha, '"'
 		END IF
 END CASE
 
@@ -2328,7 +2328,7 @@ END IF
 LET comando = 'cd ..', vg_separador, '..', vg_separador, 'TESORERIA',
 		vg_separador, 'fuentes', vg_separador, run_prog, 'cxpp314 ',
 		vg_base, ' ', vg_modulo, ' ', vg_codcia, ' ', vg_codloc, ' ',
-		rm_p24.p24_moneda, ' ', TODAY, ' "T" 0.01 "N" ',
+		rm_p24.p24_moneda, ' ', vg_fecha, ' "T" 0.01 "N" ',
 		rm_docs[i].proveedor, ' 0 '
 RUN comando	
 

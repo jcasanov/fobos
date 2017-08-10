@@ -48,17 +48,21 @@ FUNCTION control_master_caja()
 DEFINE resp		CHAR(10)
 DEFINE comando		VARCHAR(80)
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 LET vm_tipo_doc = 'PA'
+
 BEGIN WORK
 CALL valida_num_solicitud()
 CALL genera_ingreso_caja()
 UPDATE cxct024 SET z24_estado = 'P'
 	WHERE CURRENT OF q_nsol 
 CALL fl_genera_saldos_cliente(vg_codcia, vg_codloc, rm_csol.z24_codcli)
+LET fecha_actual = fl_current()
 UPDATE cajt010 SET j10_estado = 'P',
 		   j10_tipo_destino = rm_docf.z21_tipo_doc,
 		   j10_num_destino  = rm_docf.z21_num_doc,
-		   j10_fecha_pro    = CURRENT
+		   j10_fecha_pro    = fecha_actual
 	WHERE CURRENT OF q_ccaj
 COMMIT WORK
 CALL fl_control_master_contab_ingresos_caja(vg_codcia, vg_codloc,
@@ -161,7 +165,7 @@ LET rm_docf.z21_areaneg 	= rm_ccaj.j10_areaneg
 LET rm_docf.z21_linea	 	= rm_csol.z24_linea
 LET rm_docf.z21_referencia 	= 'SOLICITUD ANTICIPO: ', rm_csol.z24_numero_sol
 				   USING '#####&'
-LET rm_docf.z21_fecha_emi 	= TODAY
+LET rm_docf.z21_fecha_emi 	= vg_fecha
 LET rm_docf.z21_moneda 		= rm_csol.z24_moneda
 LET rm_docf.z21_paridad 	= rm_csol.z24_paridad
 LET rm_docf.z21_val_impto	= 0
@@ -170,7 +174,7 @@ LET rm_docf.z21_saldo 		= rm_csol.z24_total_cap
 LET rm_docf.z21_subtipo		= rm_csol.z24_subtipo
 LET rm_docf.z21_origen 		= 'A'
 LET rm_docf.z21_usuario 	= vg_usuario
-LET rm_docf.z21_fecing 		= CURRENT
+LET rm_docf.z21_fecing 		= fl_current()
 INSERT INTO cxct021 VALUES (rm_docf.*)
 
 END FUNCTION

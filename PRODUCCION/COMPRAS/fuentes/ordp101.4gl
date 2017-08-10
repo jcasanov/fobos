@@ -194,12 +194,12 @@ LET rm_c01.c01_porc_retf_s = 0
 LET rm_c01.c01_porc_reti_b = 0
 LET rm_c01.c01_porc_reti_s = 0
 LET rm_c01.c01_usuario     = vg_usuario
-LET rm_c01.c01_fecing      = CURRENT
+LET rm_c01.c01_fecing      = fl_current()
 CALL muestra_estado()
 IF NOT ingreso_datos() THEN
 	RETURN
 END IF
-LET rm_c01.c01_fecing     = CURRENT
+LET rm_c01.c01_fecing     = fl_current()
 LET rm_c01.c01_tipo_orden = 0
 BEGIN WORK
 	INSERT INTO ordt001 VALUES (rm_c01.*)
@@ -1034,7 +1034,7 @@ FOR i = 1 TO vm_num_det
 		VALUES(vg_codcia, rm_c01.c01_tipo_orden,
 			rm_sust[i].s23_sustento_sri, rm_sust[i].s23_secuencia,
 			rm_sust[i].s23_aux_cont, rm_sust[i].s23_tributa,
-			vg_usuario, CURRENT)
+			vg_usuario, fl_current())
 END FOR
 
 END FUNCTION
@@ -1163,7 +1163,7 @@ SELECT * INTO r_s23.*
 	  AND s23_secuencia    = rm_sust[i].s23_secuencia
 IF r_s23.s23_usuario IS NULL THEN
 	LET r_s23.s23_usuario = vg_usuario
-	LET r_s23.s23_fecing  = CURRENT
+	LET r_s23.s23_fecing  = fl_current()
 END IF
 DISPLAY BY NAME r_s23.s23_usuario, r_s23.s23_fecing
 CALL muestra_contadores_sust(i, vm_num_det)
@@ -1226,7 +1226,7 @@ IF rm_s24.s24_compania IS NOT NULL THEN
 ELSE
 	LET rm_s24.s24_compania = vg_codcia
 	LET rm_s24.s24_usuario  = vg_usuario
-	LET rm_s24.s24_fecing   = CURRENT
+	LET rm_s24.s24_fecing   = fl_current()
 END IF
 LET rm_s24.s24_tipo_orden = rm_c01.c01_tipo_orden
 DISPLAY rm_c01.c01_tipo_orden TO tipo_orden
@@ -1236,7 +1236,7 @@ LET quitar_ice = 0
 CALL leer_ice()
 IF NOT int_flag THEN
 	BEGIN WORK
-		LET rm_s24.s24_fecing = CURRENT
+		LET rm_s24.s24_fecing = fl_current()
 		DELETE FROM srit024
 			WHERE s24_compania       = vg_codcia
 			  AND s24_codigo         = rm_s24.s24_codigo

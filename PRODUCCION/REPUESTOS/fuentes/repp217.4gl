@@ -317,7 +317,7 @@ CALL retorna_tam_arr()
 LET vm_num_rows    = 0
 LET vm_row_current = 0
 INITIALIZE rm_r20.* TO NULL
-LET rm_r19.r19_fecing   = CURRENT
+LET rm_r19.r19_fecing   = fl_current()
 LET rm_r19.r19_usuario  = vg_usuario
 LET rm_r19.r19_cod_tran = vm_cod_tran_2
 LET rm_r19.r19_tipo_dev = vm_cod_tran
@@ -404,7 +404,7 @@ IF int_flag THEN
 END IF
 LET vm_cod_tran_2 = vm_cod_dev
 IF rm_r19.r19_tot_neto = rm_fact.r19_tot_neto THEN
-	IF TODAY = DATE(rm_fact.r19_fecing) AND
+	IF vg_fecha = DATE(rm_fact.r19_fecing) AND
 	   NOT tiene_nota_entrega(rm_fact.r19_cod_tran, rm_fact.r19_num_tran)
 	THEN
 {-- DESAPARECEN LAS ANULACIONES DE FACTURA --}
@@ -522,7 +522,7 @@ END IF
 {-- NUEVO PARA COMPLACER A CP --}
 WHENEVER ERROR CONTINUE
 UPDATE rept019
-	SET r19_fecing = CURRENT + 3 UNITS SECOND
+	SET r19_fecing = fl_current() + 3 UNITS SECOND
 	WHERE r19_compania  = vg_codcia
 	  AND r19_localidad = vg_codloc
 	  AND r19_cod_tran  = rm_r19.r19_cod_tran
@@ -537,7 +537,7 @@ IF STATUS < 0 THEN
 END IF
 WHENEVER ERROR CONTINUE
 UPDATE rept020
-	SET r20_fecing = CURRENT + 3 UNITS SECOND
+	SET r20_fecing = fl_current() + 3 UNITS SECOND
 	WHERE r20_compania  = vg_codcia
 	  AND r20_localidad = vg_codloc
 	  AND r20_cod_tran  = rm_r19.r19_cod_tran
@@ -590,7 +590,7 @@ CALL fl_lee_cabecera_transaccion_rep(vg_codcia, vg_codloc, rm_r19.r19_cod_tran,
 					rm_r19.r19_num_tran)
 	RETURNING r_r19.*
 IF r_r19.r19_ord_trabajo IS NOT NULL THEN
-	IF DATE(r_r19.r19_fecing) = TODAY THEN
+	IF DATE(r_r19.r19_fecing) = vg_fecha THEN
 		LET referencia = 'POR ANULACION O.T. #'
 	ELSE
 		LET referencia = 'POR DEVOLUCION O.T. #'
@@ -781,7 +781,7 @@ LET vm_flag_mant = 'I'
 CALL control_DISPLAY_botones()
 
 INITIALIZE rm_r19.*, rm_r20.* TO NULL
-LET rm_r19.r19_fecing   = CURRENT
+LET rm_r19.r19_fecing   = fl_current()
 LET rm_r19.r19_usuario  = vg_usuario
 LET rm_r19.r19_cod_tran = vm_cod_tran_2
 LET rm_r19.r19_tipo_dev = vm_cod_tran
@@ -857,7 +857,7 @@ END IF
 {-- AQUI ESTABA LA LLAMADA DEL CRUCE DE BODEGAS --}
 LET vm_cod_tran_2 = vm_cod_dev
 IF rm_r19.r19_tot_neto = rm_fact.r19_tot_neto THEN
-	IF TODAY = DATE(rm_fact.r19_fecing) AND
+	IF vg_fecha = DATE(rm_fact.r19_fecing) AND
 	   NOT tiene_nota_entrega(rm_fact.r19_cod_tran, rm_fact.r19_num_tran)
 	THEN
 		--LET vm_cod_tran_2 = vm_cod_anu
@@ -1002,7 +1002,7 @@ END IF
 {-- NUEVO PARA COMPLACER A CP --}
 WHENEVER ERROR CONTINUE
 UPDATE rept019
-	SET r19_fecing = CURRENT + 3 UNITS SECOND
+	SET r19_fecing = fl_current() + 3 UNITS SECOND
 	WHERE r19_compania  = vg_codcia
 	  AND r19_localidad = vg_codloc
 	  AND r19_cod_tran  = rm_r19.r19_cod_tran
@@ -1017,7 +1017,7 @@ IF STATUS < 0 THEN
 END IF
 WHENEVER ERROR CONTINUE
 UPDATE rept020
-	SET r20_fecing = CURRENT + 3 UNITS SECOND
+	SET r20_fecing = fl_current() + 3 UNITS SECOND
 	WHERE r20_compania  = vg_codcia
 	  AND r20_localidad = vg_codloc
 	  AND r20_cod_tran  = rm_r19.r19_cod_tran
@@ -1076,7 +1076,7 @@ END IF
 
 --IF rm_r19.r19_tot_neto = rm_j10.j10_valor THEN
 IF rm_r19.r19_tot_neto = vm_total_fact THEN
-	IF DATE(rm_j10.j10_fecha_pro) = TODAY AND
+	IF DATE(rm_j10.j10_fecha_pro) = vg_fecha AND
 	   rm_r19.r19_cod_tran = vm_cod_anu THEN
  		UPDATE cajt010 SET j10_estado = 'E'
 			WHERE j10_compania    =  vg_codcia 
@@ -1213,7 +1213,7 @@ LET rm_r19.r19_tipo_dev = vm_cod_tran	  	-- TIPO DEV = 'FA'
 LET rm_r19.r19_cod_tran = vm_cod_tran_2		
 LET rm_r19.r19_num_tran = num_tran		-- EL NUEVO NUMERO DE LA TRAN.	
 LET rm_r19.r19_usuario  = vg_usuario			
-LET rm_r19.r19_fecing   = CURRENT
+LET rm_r19.r19_fecing   = fl_current()
 LET rm_r19.r19_paridad  = 1
 
 IF rm_r19.r19_moneda <> rg_gen.g00_moneda_base THEN
@@ -1585,7 +1585,7 @@ INPUT BY NAME rm_r19.r19_num_dev, rm_r19.r19_codcli, r19_referencia
 
 
 			IF DATE(rm_r19.r19_fecing) + rm_r00.r00_dias_dev < 
-			   TODAY 
+			   vg_fecha 
 			   THEN
 				CALL fl_mostrar_mensaje('La factura no puede ser devuelta porque supero el plazo para su devolución.','exclamation')
 				NEXT FIELD r19_num_dev
@@ -1615,7 +1615,7 @@ INPUT BY NAME rm_r19.r19_num_dev, rm_r19.r19_codcli, r19_referencia
 				RUN comando CLIPPED
 				NEXT FIELD r19_codcli
 			END IF
-			IF TODAY > DATE(rm_r19.r19_fecing) AND 
+			IF vg_fecha > DATE(rm_r19.r19_fecing) AND 
 				rm_r19.r19_codcli = rm_r00.r00_codcli_tal THEN
 				CALL fl_mostrar_mensaje('Se va a generar NC, y el cliente es CONSUMIDOR FINAL, debe indicar un código de cliente valido.','exclamation')
 				NEXT FIELD r19_codcli
@@ -1631,7 +1631,7 @@ INPUT BY NAME rm_r19.r19_num_dev, rm_r19.r19_codcli, r19_referencia
 		END IF
 		IF (r_r19.r19_codcli IS NULL AND
                 	rm_r19.r19_codcli IS NOT NULL) OR 
-			(TODAY > DATE(r_r19.r19_fecing) AND 
+			(vg_fecha > DATE(r_r19.r19_fecing) AND 
 				r_r19.r19_codcli = rm_r00.r00_codcli_tal) OR
 		    tiene_nota_entrega(vm_cod_tran, rm_r19.r19_num_dev)
 		THEN
@@ -1689,7 +1689,7 @@ INPUT BY NAME rm_r19.r19_num_dev, rm_r19.r19_codcli, r19_referencia
 			CALL fl_mostrar_mensaje('Debe ingresar código del cliente.','exclamation')
 			NEXT FIELD r19_codcli
 		END IF
-		IF (TODAY > DATE(r_r19.r19_fecing) AND 
+		IF (vg_fecha > DATE(r_r19.r19_fecing) AND 
 		   rm_r19.r19_codcli = rm_r00.r00_codcli_tal) THEN
 			CALL fl_mostrar_mensaje('El codigo del cliente no puede ser el del consumidor final.','exclamation')
 			NEXT FIELD r19_codcli
@@ -2436,7 +2436,7 @@ LET r_nc.z21_areaneg 	= r_glin.g20_areaneg
 LET r_nc.z21_linea  	= r_glin.g20_grupo_linea
 LET r_nc.z21_referencia = 'DEV. ', rm_r19.r19_cod_tran, '-', num_tran CLIPPED,
 			  ' FACT. ', rm_r19.r19_tipo_dev, '-', num_dev CLIPPED
-LET r_nc.z21_fecha_emi 	= TODAY
+LET r_nc.z21_fecha_emi 	= vg_fecha
 LET r_nc.z21_moneda 	= rm_r19.r19_moneda
 LET r_nc.z21_paridad 	= 1
 IF r_nc.z21_moneda <> rg_gen.g00_moneda_base THEN
@@ -2459,7 +2459,7 @@ LET r_nc.z21_origen 	= 'A'
 LET r_nc.z21_cod_tran   = rm_r19.r19_cod_tran
 LET r_nc.z21_num_tran   = rm_r19.r19_num_tran
 LET r_nc.z21_usuario 	= vg_usuario
-LET r_nc.z21_fecing 	= CURRENT
+LET r_nc.z21_fecing 	= fl_current()
 LET inserta_nc = 1
 IF rm_r19.r19_cod_tran = vm_cod_anu THEN
 	SELECT SUM(z20_saldo_cap + z20_saldo_int) INTO tot_saldo_doc 
@@ -2943,7 +2943,7 @@ FOREACH q_tmp INTO bodega
 		LET r_r19.r19_ord_trabajo = rm_r19.r19_ord_trabajo
 	END IF
 	LET r_r19.r19_usuario     = vg_usuario
-	LET r_r19.r19_fecing      = CURRENT
+	LET r_r19.r19_fecing      = fl_current()
 	INSERT INTO rept019 VALUES (r_r19.*)
 	INITIALIZE r_r20.* TO NULL
 	LET r_r20.r20_compania	  = vg_codcia
@@ -3040,7 +3040,7 @@ FOREACH q_tmp INTO bodega
 			LET r_r11.r11_stock_act = 0
 		END IF
 		LET r_r20.r20_stock_bd   = r_r11.r11_stock_act 
-		LET r_r20.r20_fecing	 = CURRENT
+		LET r_r20.r20_fecing	 = fl_current()
 		INSERT INTO rept020 VALUES(r_r20.*)
 		UPDATE rept011 SET r11_stock_act = r11_stock_act - cantidad,
 			           r11_egr_dia   = r11_egr_dia   + cantidad
@@ -3844,7 +3844,7 @@ LET r_r19.r19_tot_dscto  	= 0.0
 LET r_r19.r19_tot_neto		= r_r19.r19_tot_costo
 LET r_r19.r19_flete      	= 0.0
 LET r_r19.r19_usuario      	= vg_usuario
-LET r_r19.r19_fecing      	= CURRENT
+LET r_r19.r19_fecing      	= fl_current()
 INSERT INTO rept019 VALUES (r_r19.*)
 INITIALIZE r_r20.* TO NULL
 LET r_r20.r20_compania		= vg_codcia
@@ -3937,7 +3937,7 @@ FOREACH q_trans_d INTO r_trans_d.*
 		LET r_r11.r11_stock_act = 0
 	END IF
 	LET r_r20.r20_stock_bd   = r_r11.r11_stock_act 
-	LET r_r20.r20_fecing	 = CURRENT
+	LET r_r20.r20_fecing	 = fl_current()
 	INSERT INTO rept020 VALUES(r_r20.*)
 	IF flag = 0 THEN
 		CONTINUE FOREACH

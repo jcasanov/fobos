@@ -280,7 +280,7 @@ LET rm_z02.z02_dcto_item_r  = 0
 LET rm_z02.z02_dcto_mano_c  = 0
 LET rm_z02.z02_dcto_mano_r  = 0
 LET rm_z02.z02_usuario      = vg_usuario
-LET rm_z02.z02_fecing       = CURRENT
+LET rm_z02.z02_fecing       = fl_current()
 
 END FUNCTION
 
@@ -303,7 +303,7 @@ LET rm_z02.z02_contr_espe  = 'N'
 LET rm_z02.z02_oblig_cont  = 'N'
 LET rm_z01.z01_estado      = 'A'
 LET rm_z01.z01_usuario     = vg_usuario
-LET rm_z01.z01_fecing      = CURRENT
+LET rm_z01.z01_fecing      = fl_current()
 CALL muestra_estado()
 LET vm_flag_mant = 'I'
 IF rm_g05.g05_tipo = 'UF' THEN
@@ -387,7 +387,7 @@ IF rm_z02.z02_codcli IS NULL THEN
 	LET rm_z02.z02_credit_auto = 'N'
 	LET rm_z02.z02_cheques     = 'S'
 	LET rm_z02.z02_usuario     = rm_z01.z01_usuario
-	LET rm_z02.z02_fecing      = CURRENT
+	LET rm_z02.z02_fecing      = fl_current()
 END IF
 WHENEVER ERROR STOP
 LET vm_flag_mant = 'M'
@@ -1761,7 +1761,7 @@ END FOR
 LET rm_z02.z02_email = correo CLIPPED
 IF vm_flag_mant = 'I' THEN
 	LET rm_z02.z02_codcli = rm_z01.z01_codcli
-	LET rm_z01.z01_fecing = CURRENT
+	LET rm_z01.z01_fecing = fl_current()
 	LET rm_z02.z02_fecing = rm_z01.z01_fecing
 	INSERT INTO cxct001 VALUES (rm_z01.*)
 	LET num_aux = SQLCA.SQLERRD[6] 
@@ -1840,7 +1840,7 @@ ELSE
 			LET rm_z02.z02_compania  = vg_codcia
 			LET rm_z02.z02_localidad = vg_codloc
 			LET rm_z02.z02_codcli    = rm_z01.z01_codcli
-			LET rm_z02.z02_fecing    = CURRENT
+			LET rm_z02.z02_fecing    = fl_current()
 			INSERT INTO cxct002 VALUES (rm_z02.*)
 		END IF
 		LET vm_flag_mant = 'C'
@@ -1963,7 +1963,7 @@ IF NOT int_flag THEN
 	CALL poner_SI_NO_S_N(0)
 	LET rm_z02.z02_compania = vg_codcia
 	LET rm_z02.z02_codcli   = rm_z01.z01_codcli
-	LET rm_z02.z02_fecing   = CURRENT
+	LET rm_z02.z02_fecing   = fl_current()
 	INSERT INTO cxct002 VALUES (rm_z02.*)
 	LET vm_r_cli[vm_row_current].codloc = rm_z02.z02_localidad
 	LET vm_r_cli[vm_row_current].codcli = rm_z02.z02_codcli
@@ -3414,12 +3414,12 @@ FOR i = 1 TO vm_num_ret
 			rm_detret[i].z08_porcentaje,rm_detret[i].z08_codigo_sri,
 			rm_detret[i].z08_fecha_ini_porc,
 			rm_detret[i].z08_defecto, rm_detret[i].z08_flete,
-			vg_usuario, CURRENT)
+			vg_usuario, fl_current())
 	LET query = 'INSERT INTO cxct009 ',
 			'SELECT ', vg_codcia, ', ', rm_z01.z01_codcli, ', ',
 				'tipo_ret, porc_ret, codigo_sri, fec_ini_por, ',
 				'cod_pago, cont_cred, aux_cont, "', vg_usuario,
-				'", CURRENT ',
+				'",  "', fl_current(), '"',
 			' FROM tmp_z09 ',
 			' WHERE tipo_ret   = "', rm_detret[i].z08_tipo_ret, '"',
 			'   AND porc_ret   = ',	rm_detret[i].z08_porcentaje,

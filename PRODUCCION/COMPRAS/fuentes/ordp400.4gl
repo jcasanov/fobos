@@ -422,7 +422,7 @@ PAGE HEADER
 	PRINT COLUMN 01,  "ORDEN DE TRABAJO  : ", orden_trab,
 	      COLUMN 69,  "FAX                : ", rm_loc.g02_fax1, " ",
 						   rm_loc.g02_fax2
-	PRINT COLUMN 01,  "FECHA IMPRESION   : ", DATE(TODAY)
+	PRINT COLUMN 01,  "FECHA IMPRESION   : ", DATE(vg_fecha)
 			USING 'dd-mm-yyyy', 1 SPACES, TIME,
 	      COLUMN 69,  "ESTADO ORDEN COMPRA: ", nom_estado
 

@@ -213,7 +213,7 @@ DEFINE r_b12		RECORD LIKE ctbt012.*
 LET rm_p27.p27_estado  = 'A'
 LET rm_p27.p27_paridad = 1
 LET rm_p27.p27_usuario = vg_usuario
-LET rm_p27.p27_fecing  = CURRENT
+LET rm_p27.p27_fecing  = fl_current()
 LET rm_p27.p27_moneda  = rg_gen.g00_moneda_base
 CALL fl_lee_moneda(rm_p27.p27_moneda) RETURNING r_mon.*
 IF r_mon.g13_moneda IS NULL THEN
@@ -295,7 +295,7 @@ WHILE TRUE
 			--#BEFORE ROW
 				--#LET i = arr_curr()
 				--#LET j = scr_line()
-				--#LET rm_p27.p27_fecing  = CURRENT
+				--#LET rm_p27.p27_fecing  = fl_current()
 				--#CALL muestra_contadores_det(i)
 				--#DISPLAY rm_refer[i] TO p20_referencia
 				--#DISPLAY BY NAME rm_p27.p27_fecing
@@ -1127,7 +1127,7 @@ DECLARE q_p28 CURSOR FOR
 LET r_b12.b12_compania    = vg_codcia
 LET r_b12.b12_tipo_comp   = 'DC'
 LET r_b12.b12_num_comp    = fl_numera_comprobante_contable(vg_codcia,
-                            	r_b12.b12_tipo_comp, YEAR(TODAY), MONTH(TODAY))
+                            	r_b12.b12_tipo_comp, YEAR(vg_fecha), MONTH(vg_fecha))
 LET r_b12.b12_estado      = 'A'
 LET r_b12.b12_subtipo     = NULL
 CALL fl_lee_proveedor(rm_p27.p27_codprov) RETURNING r_p01.*
@@ -1141,14 +1141,14 @@ LET r_b12.b12_num_cheque  = NULL
 LET r_b12.b12_origen      = 'A'
 LET r_b12.b12_moneda      = rm_p27.p27_moneda
 LET r_b12.b12_paridad     = rm_p27.p27_paridad
-LET r_b12.b12_fec_proceso = TODAY
+LET r_b12.b12_fec_proceso = vg_fecha
 LET r_b12.b12_fec_reversa = NULL
 LET r_b12.b12_tip_reversa = NULL
 LET r_b12.b12_num_reversa = NULL
 LET r_b12.b12_fec_modifi  = NULL
 LET r_b12.b12_modulo      = vg_modulo
 LET r_b12.b12_usuario     = vg_usuario
-LET r_b12.b12_fecing      = CURRENT
+LET r_b12.b12_fecing      = fl_current()
 INSERT INTO ctbt012 VALUES(r_b12.*)
 LET j       = 1
 LET tot_val = 0
@@ -1232,7 +1232,7 @@ ELSE
 END IF
 LET r_b13.b13_num_concil  = NULL
 LET r_b13.b13_filtro      = NULL
-LET r_b13.b13_fec_proceso = TODAY
+LET r_b13.b13_fec_proceso = vg_fecha
 LET r_b13.b13_codcli      = NULL
 LET r_b13.b13_codprov     = rm_p27.p27_codprov
 LET r_b13.b13_pedido      = NULL
@@ -1266,7 +1266,7 @@ IF r_p22.p22_num_trn = -1 THEN
 	EXIT PROGRAM
 END IF
 LET r_p22.p22_referencia = 'RETENCION # ', vm_num_ret USING "<<<<<&"
-LET r_p22.p22_fecha_emi  = TODAY
+LET r_p22.p22_fecha_emi  = vg_fecha
 LET r_p22.p22_moneda     = rm_p27.p27_moneda
 LET r_p22.p22_paridad    = rm_p27.p27_paridad
 LET r_p22.p22_tasa_mora  = 0
@@ -1275,7 +1275,7 @@ LET r_p22.p22_total_int  = 0
 LET r_p22.p22_total_mora = 0
 LET r_p22.p22_origen     = 'M'
 LET r_p22.p22_usuario    = vg_usuario
-LET r_p22.p22_fecing     = CURRENT 
+LET r_p22.p22_fecing     = fl_current() 
 INSERT INTO cxpt022 VALUES(r_p22.*)
 --------------------------------------------------------------------------
 
@@ -1368,7 +1368,7 @@ LET r_p27.p27_paridad   = rm_p27.p27_paridad
 SELECT SUM(subtotal) INTO r_p27.p27_total_ret FROM tmp_retenciones
 LET r_p27.p27_origen    = 'M'
 LET r_p27.p27_usuario   = vg_usuario
-LET r_p27.p27_fecing    = CURRENT
+LET r_p27.p27_fecing    = fl_current()
 LET r_p27.p27_num_ret   = nextValInSequence('TE', vm_retencion)
 IF r_p27.p27_num_ret = -1 THEN
 	LET int_flag = 1
@@ -1892,7 +1892,7 @@ END FUNCTION
 FUNCTION ver_estado_cuenta()
 DEFINE param		VARCHAR(100)
 
-LET param = vg_codloc, ' ', rm_p27.p27_moneda, ' ', TODAY, ' "T" 0.01 "N" ',
+LET param = vg_codloc, ' ', rm_p27.p27_moneda, ' ', vg_fecha, ' "T" 0.01 "N" ',
 		rm_p27.p27_codprov, ' 0 '
 CALL ejecuta_comando('TESORERIA', vg_modulo, 'cxpp314', param)
 

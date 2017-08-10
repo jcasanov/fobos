@@ -248,7 +248,7 @@ FOR i = 1 TO fgl_scr_size('rm_aju')
 END FOR
 LET rm_p22.p22_compania   = vg_codcia
 LET rm_p22.p22_localidad  = vg_codloc
-LET rm_p22.p22_fecha_emi  = TODAY
+LET rm_p22.p22_fecha_emi  = vg_fecha
 LET rm_p22.p22_moneda     = rg_gen.g00_moneda_base
 LET rm_p22.p22_paridad    = 1
 LET rm_p22.p22_tasa_mora  = 0
@@ -257,7 +257,7 @@ LET rm_p22.p22_total_int  = 0
 LET rm_p22.p22_total_mora = 0
 LET rm_p22.p22_origen     = 'M'
 LET rm_p22.p22_usuario    = vg_usuario
-LET rm_p22.p22_fecing     = CURRENT
+LET rm_p22.p22_fecing     = fl_current()
 
 LET rm_p23.p23_compania   = vg_codcia
 LET rm_p23.p23_localidad  = vg_codloc
@@ -295,7 +295,7 @@ IF NOT int_flag THEN
 		ROLLBACK WORK
 		EXIT PROGRAM
 	END IF
-	LET rm_p22.p22_fecing = CURRENT
+	LET rm_p22.p22_fecing = fl_current()
 	INSERT INTO cxpt022 VALUES (rm_p22.*)
 	LET num_aux              = SQLCA.SQLERRD[6] 
 	LET rm_p23.p23_codprov  = rm_p22.p22_codprov
@@ -1426,12 +1426,12 @@ END FUNCTION
 FUNCTION mensaje_fecha(i)
 DEFINE i,dias		SMALLINT
 
-IF rm_sld[i].p20_fecha_vcto >= TODAY THEN
+IF rm_sld[i].p20_fecha_vcto >= vg_fecha THEN
 	DISPLAY 'POR VENCER' TO tit_fecha_vcto
 ELSE
 	DISPLAY 'VENCIDO' TO tit_fecha_vcto
 END IF
-LET dias = rm_sld[i].p20_fecha_vcto - TODAY
+LET dias = rm_sld[i].p20_fecha_vcto - vg_fecha
 DISPLAY dias TO tit_dias
 
 END FUNCTION

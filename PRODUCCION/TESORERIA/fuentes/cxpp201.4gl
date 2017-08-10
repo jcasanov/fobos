@@ -182,14 +182,14 @@ CLEAR p21_paridad, p21_saldo, p21_origen, tit_nombre_pro, tit_tipo_doc,
 	tit_subtipo, tit_mon_bas
 LET rm_p21.p21_compania  = vg_codcia
 LET rm_p21.p21_localidad = vg_codloc
-LET rm_p21.p21_fecha_emi = TODAY
+LET rm_p21.p21_fecha_emi = vg_fecha
 LET rm_p21.p21_moneda    = rg_gen.g00_moneda_base
 LET rm_p21.p21_valor     = 0
 LET rm_p21.p21_saldo     = 0
 LET rm_p21.p21_paridad   = 1
 LET rm_p21.p21_origen    = 'M'
 LET rm_p21.p21_usuario   = vg_usuario
-LET rm_p21.p21_fecing    = CURRENT
+LET rm_p21.p21_fecing    = fl_current()
 CALL fl_lee_moneda(rm_p21.p21_moneda) RETURNING r_mon.*
 IF r_mon.g13_moneda IS NULL THEN
 	CALL fl_mostrar_mensaje('No existe ninguna moneda base.','stop')
@@ -210,7 +210,7 @@ IF NOT int_flag THEN
 			END IF
 			DISPLAY BY NAME rm_p21.p21_num_doc
 		END IF
-		LET rm_p21.p21_fecing = CURRENT
+		LET rm_p21.p21_fecing = fl_current()
 		INSERT INTO cxpt021 VALUES (rm_p21.*)
 		LET num_aux = SQLCA.SQLERRD[6] 
 		CALL fl_genera_saldos_proveedor(vg_codcia, vg_codloc,
@@ -626,9 +626,9 @@ INPUT BY NAME rm_p21.p21_codprov, rm_p21.p21_tipo_doc, rm_p21.p21_num_doc,
 		END IF
 	AFTER FIELD p21_fecha_emi
 		IF rm_p21.p21_fecha_emi IS NOT NULL THEN
-			IF rm_p21.p21_fecha_emi > TODAY
-			OR (MONTH(rm_p21.p21_fecha_emi) <> MONTH(TODAY)
-			OR YEAR(rm_p21.p21_fecha_emi) <> YEAR(TODAY)) THEN
+			IF rm_p21.p21_fecha_emi > vg_fecha
+			OR (MONTH(rm_p21.p21_fecha_emi) <> MONTH(vg_fecha)
+			OR YEAR(rm_p21.p21_fecha_emi) <> YEAR(vg_fecha)) THEN
 				--CALL fgl_winmessage(vg_producto,'La fecha de emisión debe ser de hoy o del presente mes.','exclamation')
 				CALL fl_mostrar_mensaje('La fecha de emisión debe ser de hoy o del presente mes.','exclamation')
 				NEXT FIELD p21_fecha_emi
@@ -725,7 +725,7 @@ IF STATUS = NOTFOUND THEN
 	RETURN
 END IF
 IF num_args() = 8 THEN
-	IF arg_val(8) < TODAY THEN
+	IF arg_val(8) < vg_fecha THEN
 		CALL obtener_saldo_a_favor_fecha()
 	END IF
 END IF

@@ -195,7 +195,7 @@ CALL fl_lee_proveedor(rm_ordp.p24_codprov) RETURNING rm_prov.*
 INITIALIZE rm_ccomp.* TO NULL
 LET rm_ccomp.b12_modulo      = vg_modulo
 LET rm_ccomp.b12_tipo_comp   = vm_cod_cont
-LET rm_ccomp.b12_fec_proceso = TODAY
+LET rm_ccomp.b12_fec_proceso = vg_fecha
 LET rm_ccomp.b12_benef_che   = rm_prov.p01_nomprov
 IF rm_ordp.p24_banco = 0 THEN
 	LET rm_ccomp.b12_benef_che = NULL
@@ -665,7 +665,7 @@ IF cod_trn = vm_cod_aju THEN
 	LET rm_pago.p22_referencia = 'RETENCIONES ORDEN DE PAGO # ', rm_ordp.p24_orden_pago
 				      USING '####&'
 END IF	
-LET rm_pago.p22_fecha_emi 	= TODAY
+LET rm_pago.p22_fecha_emi 	= vg_fecha
 LET rm_pago.p22_moneda 		= rm_ordp.p24_moneda
 LET rm_pago.p22_paridad 	= rm_ordp.p24_paridad
 LET rm_pago.p22_tasa_mora 	= 0
@@ -684,7 +684,7 @@ LET rm_pago.p22_subtipo 	= rm_ordp.p24_subtipo
 LET rm_pago.p22_origen 		= 'A'
 LET rm_pago.p22_orden_pago	= rm_ordp.p24_orden_pago
 LET rm_pago.p22_usuario 	= vg_usuario
-LET rm_pago.p22_fecing 		= CURRENT + segundo UNITS SECOND
+LET rm_pago.p22_fecing 		= fl_current() + segundo UNITS SECOND
 INSERT INTO cxpt022 VALUES (rm_pago.*)
 LET tot_cap  = 0
 LET tot_int  = 0
@@ -798,7 +798,7 @@ LET rm_ret.p27_tip_contable = rm_ccomp.b12_tipo_comp
 LET rm_ret.p27_num_contable = rm_ccomp.b12_num_comp
 LET rm_ret.p27_origen 	    = 'A'
 LET rm_ret.p27_usuario 	    = vg_usuario
-LET rm_ret.p27_fecing 	    = CURRENT
+LET rm_ret.p27_fecing 	    = fl_current()
 INSERT INTO cxpt027 VALUES (rm_ret.*)
 LET i = 0
 FOREACH q_det INTO r_pdoc.*
@@ -1073,7 +1073,7 @@ LET rm_fav.p21_referencia 	= rm_ordp.p24_referencia
 IF rm_ordp.p24_referencia IS NULL THEN
 	LET rm_fav.p21_referencia = '.'
 END IF	
-LET rm_fav.p21_fecha_emi 	= TODAY
+LET rm_fav.p21_fecha_emi 	= vg_fecha
 LET rm_fav.p21_moneda 		= rm_ordp.p24_moneda
 LET rm_fav.p21_paridad 		= rm_ordp.p24_paridad
 LET rm_fav.p21_valor 		= rm_ordp.p24_total_cap
@@ -1082,7 +1082,7 @@ LET rm_fav.p21_subtipo 		= rm_ordp.p24_subtipo
 LET rm_fav.p21_origen 		= 'A'
 LET rm_fav.p21_orden_pago	= rm_ordp.p24_orden_pago
 LET rm_fav.p21_usuario 		= vg_usuario
-LET rm_fav.p21_fecing 		= CURRENT
+LET rm_fav.p21_fecing 		= fl_current()
 INSERT INTO cxpt021 VALUES (rm_fav.*)
 
 END FUNCTION
@@ -1108,7 +1108,7 @@ DEFINE valor_cr		LIKE ctbt013.b13_valor_base
 LET rm_ccomp.b12_compania 	= vg_codcia
 LET rm_ccomp.b12_tipo_comp 	= vm_cod_cont
 LET rm_ccomp.b12_num_comp 	= fl_numera_comprobante_contable(vg_codcia, 
-					vm_cod_cont, YEAR(TODAY), MONTH(TODAY)) 
+					vm_cod_cont, YEAR(vg_fecha), MONTH(vg_fecha)) 
 IF rm_ccomp.b12_num_comp <= 0 THEN
 	ROLLBACK WORK
 	EXIT PROGRAM
@@ -1116,7 +1116,7 @@ END IF
 LET rm_ccomp.b12_estado 	= 'A'
 LET rm_ccomp.b12_origen 	= 'A'
 LET rm_ccomp.b12_usuario 	= vg_usuario
-LET rm_ccomp.b12_fecing 	= CURRENT
+LET rm_ccomp.b12_fecing 	= fl_current()
 INSERT INTO ctbt012 VALUES (rm_ccomp.*) 
 CALL fl_lee_proveedor_localidad(vg_codcia, vg_codloc, rm_prov.p01_codprov)
 	RETURNING r_p02.*
@@ -1201,7 +1201,7 @@ FOREACH q_dte INTO i, cuenta, glosa, valor_db, valor_cr
 	IF valor_cr > 0 THEN
     		LET r.b13_valor_base = valor_cr * -1
 	END IF
-    	LET r.b13_fec_proceso 	= TODAY
+    	LET r.b13_fec_proceso 	= vg_fecha
     	LET r.b13_num_concil 	= 0
     	LET r.b13_codprov 	= rm_ordp.p24_codprov
 	INSERT INTO ctbt013 VALUES (r.*) 

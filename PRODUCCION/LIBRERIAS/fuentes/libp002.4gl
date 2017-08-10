@@ -613,7 +613,7 @@ FOREACH cu_repcont INTO r_r40.*
 		RETURNING r_b12.*
 	SET LOCK MODE TO WAIT 5
 	UPDATE ctbt012 SET b12_estado     = 'E',
-			   b12_fec_modifi = CURRENT 
+			   b12_fec_modifi = fl_current() 
 		WHERE b12_compania  = r_b12.b12_compania  AND 
 		      b12_tipo_comp = r_b12.b12_tipo_comp AND 
 		      b12_num_comp  = r_b12.b12_num_comp
@@ -1072,7 +1072,7 @@ IF rm_crep.r19_tot_neto = r_comp.r19_tot_neto THEN
 		RETURNING r_b12.*
 	SET LOCK MODE TO WAIT 5
 	UPDATE ctbt012 SET b12_estado     = 'E',
-			   b12_fec_modifi = CURRENT 
+			   b12_fec_modifi = fl_current() 
 		WHERE b12_compania  = r_b12.b12_compania  AND 
 		      b12_tipo_comp = r_b12.b12_tipo_comp AND 
 		      b12_num_comp  = r_b12.b12_num_comp
@@ -1231,7 +1231,7 @@ FOREACH q_mast INTO tipo_comp, subtipo, indice
     	LET r_ccomp.b12_paridad 	= 1
     	LET r_ccomp.b12_modulo	 	= vm_modulo
     	LET r_ccomp.b12_usuario 	= vg_usuario
-    	LET r_ccomp.b12_fecing 		= CURRENT
+    	LET r_ccomp.b12_fecing 		= fl_current()
 	INSERT INTO ctbt012 VALUES (r_ccomp.*)
 	DECLARE q_dmast CURSOR FOR SELECT * FROM te_master
 		WHERE te_tipo_comp = tipo_comp AND 

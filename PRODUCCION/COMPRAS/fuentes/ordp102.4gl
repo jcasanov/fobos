@@ -206,13 +206,13 @@ IF vg_gui = 0 THEN
 	CALL muestra_tipofuente(rm_c02.c02_tipo_fuente)
 END IF
 LET rm_c02.c02_usuario     = vg_usuario
-LET rm_c02.c02_fecing      = CURRENT
+LET rm_c02.c02_fecing      = fl_current()
 LET rm_c02.c02_estado      = 'A'
 CLEAR tit_aux_con
 CALL muestra_estado()
 CALL leer_datos('I')
 IF NOT int_flag THEN
-	LET rm_c02.c02_fecing = CURRENT
+	LET rm_c02.c02_fecing = fl_current()
 	INSERT INTO ordt002 VALUES (rm_c02.*)
 	IF vm_num_rows = vm_max_rows THEN
 		LET vm_num_rows = 1
@@ -708,7 +708,7 @@ IF STATUS = NOTFOUND THEN
 	LET rm_c03.c03_tipo_ret   = rm_c02.c02_tipo_ret
 	LET rm_c03.c03_porcentaje = rm_c02.c02_porcentaje
 	LET rm_c03.c03_usuario    = rm_c02.c02_usuario
-	LET rm_c03.c03_fecing     = CURRENT
+	LET rm_c03.c03_fecing     = fl_current()
 	LET insertar              = 0
 END IF
 WHENEVER ERROR STOP
@@ -794,7 +794,7 @@ INPUT ARRAY rm_retsri WITHOUT DEFAULTS FROM rm_retsri.*
 			DISPLAY rm_retsri[i].c03_estado TO
 				rm_retsri[j].c03_estado
 			LET rm_audi[i].c03_usuario_elimin = vg_usuario
-			LET rm_audi[i].c03_fecha_elimin   = CURRENT
+			LET rm_audi[i].c03_fecha_elimin   = fl_current()
 			DISPLAY BY NAME rm_audi[i].*
 		END IF
 	BEFORE INPUT
@@ -837,7 +837,7 @@ INPUT ARRAY rm_retsri WITHOUT DEFAULTS FROM rm_retsri.*
 		IF NOT insertar AND nombre <> rm_retsri[i].c03_concepto_ret
 		THEN
 			LET rm_audi[i].c03_usuario_modifi = vg_usuario
-			LET rm_audi[i].c03_fecha_modifi   = CURRENT
+			LET rm_audi[i].c03_fecha_modifi   = fl_current()
 			DISPLAY BY NAME rm_audi[i].*
 		END IF
 		IF NOT insertar AND codigo <> rm_retsri[i].c03_codigo_sri THEN
@@ -1334,7 +1334,7 @@ FOR i = 1 TO vm_num_ret
 		VALUES(vg_codcia, rm_detj91[i].j91_codigo_pago,
 			rm_detj91[i].j91_cont_cred, rm_c02.c02_tipo_ret,
 			rm_c02.c02_porcentaje, rm_detj91[i].j91_aux_cont,
-			vg_usuario, CURRENT)
+			vg_usuario, fl_current())
 END FOR
  
 END FUNCTION

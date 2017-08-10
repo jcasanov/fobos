@@ -3145,7 +3145,7 @@ WHILE NOT existe
 		CLOSE q_ncompt
 		WHENEVER ERROR STOP
 	        INSERT INTO ctbt005 VALUES (compania, tipo, ano, 0,0,0,0,0,0,0,
-					    0,0,0,0,0, vg_usuario, CURRENT)
+					    0,0,0,0,0, vg_usuario, fl_current())
 		IF status < 0 THEN
 			CALL fl_mostrar_mensaje('Error al insertar control secuencia en ctbt005', 'exclamation')
 			LET numero = -1
@@ -3589,7 +3589,7 @@ SELECT * FROM ctbt006
 	      b06_mes      = mes
 LET num_row = 0
 IF status = NOTFOUND THEN
-	INSERT INTO ctbt006 VALUES (codcia, ano, mes, vg_usuario, CURRENT)
+	INSERT INTO ctbt006 VALUES (codcia, ano, mes, vg_usuario, fl_current())
 	LET num_row = SQLCA.SQLERRD[6]
 END IF
 ERROR 'Bloqueando maestro de saldos'
@@ -5325,7 +5325,7 @@ LET r_caju.z22_fecha_elim  = NULL
 LET r_caju.z22_tiptrn_elim = NULL
 LET r_caju.z22_numtrn_elim = NULL
 LET r_caju.z22_usuario 	   = vg_usuario
-LET r_caju.z22_fecing 	   = CURRENT
+LET r_caju.z22_fecing 	   = fl_current()
 INSERT INTO cxct022 VALUES (r_caju.*)
 LET num_row = SQLCA.SQLERRD[6]
 LET i = 0
@@ -7452,7 +7452,7 @@ LET r_b12.b12_num_reversa = NULL
 LET r_b12.b12_fec_modifi  = NULL
 LET r_b12.b12_modulo      = vg_modulo
 LET r_b12.b12_usuario     = vg_usuario
-LET r_b12.b12_fecing      = CURRENT
+LET r_b12.b12_fecing      = fl_current()
 INSERT INTO ctbt012 VALUES(r_b12.*)
 FOR l = 1 TO num
 	INITIALIZE r_b13.* TO NULL
@@ -8543,7 +8543,7 @@ LET r_r95.r95_entre_local   = 'N'
 LET r_r95.r95_fecha_initras = TODAY
 LET r_r95.r95_fecha_emi     = TODAY
 LET r_r95.r95_usuario       = vg_usuario
-LET r_r95.r95_fecing        = CURRENT
+LET r_r95.r95_fecing        = fl_current()
 IF cod_tran = 'TR' THEN
 	LET r_r95.r95_motivo = 'N'
 	LET expr_sql         = 'SELECT UNIQUE g01_razonsocial per_dest,',
@@ -8931,7 +8931,7 @@ WHILE TRUE
 			WHERE r95_compania  = $r_r95.r95_compania
 			  AND r95_localidad = $r_r95.r95_localidad
 	END SQL
-	LET r_r95.r95_fecing  = CURRENT
+	LET r_r95.r95_fecing  = fl_current()
 	LET r_r95.r95_num_sri = r_g37.g37_pref_sucurs, "-",
 				r_g37.g37_pref_pto_vta, "-",
 				r_r95.r95_guia_remision USING "&&&&&&&&&"

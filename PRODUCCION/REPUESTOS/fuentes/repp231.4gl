@@ -438,8 +438,8 @@ IF STATUS < 0 THEN
 	END IF
 END IF
 WHENEVER ERROR STOP
-IF rm_r34.r34_fec_entrega < TODAY THEN
-	LET rm_r34.r34_fec_entrega = TODAY
+IF rm_r34.r34_fec_entrega < vg_fecha THEN
+	LET rm_r34.r34_fec_entrega = vg_fecha
 END IF
 LET vm_flag_mant = 'M'
 IF num_args() = 7 THEN
@@ -937,7 +937,7 @@ INSERT INTO rept036
 	VALUES (rm_r34.r34_compania, rm_r34.r34_localidad, rm_r34.r34_bodega,
 		num_entrega, rm_r34.r34_num_ord_des, 'A',rm_r34.r34_fec_entrega,
 		rm_r34.r34_entregar_a, rm_r34.r34_entregar_en, vm_bodega_real,
-		vg_usuario, CURRENT)
+		vg_usuario, fl_current())
 LET vm_num_ent = num_entrega
 IF num_args() <> 7 THEN
 	FOR i = 1 TO vm_num_repd
@@ -1102,7 +1102,7 @@ LET r_r19.r19_tot_dscto  	= 0.0
 LET r_r19.r19_tot_neto		= r_r19.r19_tot_costo
 LET r_r19.r19_flete      	= 0.0
 LET r_r19.r19_usuario      	= vg_usuario
-LET r_r19.r19_fecing      	= CURRENT
+LET r_r19.r19_fecing      	= fl_current()
 INSERT INTO rept019 VALUES (r_r19.*)
 INITIALIZE r_r20.* TO NULL
 LET r_r20.r20_compania		= vg_codcia
@@ -1193,7 +1193,7 @@ FOR j = 1 TO vm_num_repd
 		LET r_r11.r11_stock_act = 0
 	END IF
 	LET r_r20.r20_stock_bd   = r_r11.r11_stock_act 
-	LET r_r20.r20_fecing	 = CURRENT
+	LET r_r20.r20_fecing	 = fl_current()
 --display '------ en ins r20 ', r_r20.r20_bodega, ' ', r_r20.r20_item, ' ', r_r20.r20_cant_ven
 	INSERT INTO rept020 VALUES(r_r20.*)
 	UPDATE rept011 SET r11_stock_act = r11_stock_act - cant_ent,
@@ -1573,7 +1573,7 @@ INPUT BY NAME vm_bodega_real, rm_r34.r34_fec_entrega, rm_r34.r34_entregar_a,
 		END IF
 	AFTER FIELD r34_fec_entrega
 		IF rm_r34.r34_fec_entrega IS NOT NULL THEN
-			IF rm_r34.r34_fec_entrega < TODAY THEN
+			IF rm_r34.r34_fec_entrega < vg_fecha THEN
 				LET rm_r34.r34_fec_entrega = fecha_ent
 			END IF
 		ELSE
@@ -1834,10 +1834,10 @@ IF STATUS = NOTFOUND THEN
 	CALL fl_mostrar_mensaje(mensaje, 'exclamation')
 	RETURN
 END IF	
-IF rm_r34.r34_fec_entrega < TODAY THEN
+IF rm_r34.r34_fec_entrega < vg_fecha THEN
 	IF rm_r34.r34_estado = 'A' OR rm_r34.r34_estado = 'P' THEN
 		IF flag_sql AND (num_args() = 4 OR num_args() = 7) THEN
-			LET rm_r34.r34_fec_entrega = TODAY
+			LET rm_r34.r34_fec_entrega = vg_fecha
 		END IF
 	END IF
 END IF

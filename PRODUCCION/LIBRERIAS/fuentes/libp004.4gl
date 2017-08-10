@@ -354,7 +354,7 @@ IF rm_cveh.v30_tot_neto = r_fact.v30_tot_neto THEN
 			RETURNING r_b12.*
 		SET LOCK MODE TO WAIT 5
 		UPDATE ctbt012 SET b12_estado     = 'E',
-				   b12_fec_modifi = CURRENT 
+				   b12_fec_modifi = fl_current() 
 			WHERE b12_compania  = r_b12.b12_compania  AND 
 			      b12_tipo_comp = r_b12.b12_tipo_comp AND 
 			      b12_num_comp  = r_b12.b12_num_comp
@@ -466,7 +466,7 @@ FOREACH q_mast INTO tipo_comp, subtipo, indice
     	LET r_ccomp.b12_paridad 	= 1
     	LET r_ccomp.b12_modulo	 	= vm_modulo
     	LET r_ccomp.b12_usuario 	= vg_usuario
-    	LET r_ccomp.b12_fecing 		= CURRENT
+    	LET r_ccomp.b12_fecing 		= fl_current()
 	INSERT INTO ctbt012 VALUES (r_ccomp.*)
 	DECLARE q_dmast CURSOR FOR SELECT * FROM te_master
 		WHERE te_tipo_comp = tipo_comp AND 
@@ -915,7 +915,7 @@ FOREACH q_mast2 INTO tipo_comp, subtipo, indice
 		WHERE tipo_sol = tipo_fuente
 		  AND num_sol  = num_fuente
 	IF rm_caja.j10_tipo_destino = 'AR' THEN
-		LET r_ccomp.b12_fec_proceso = TODAY
+		LET r_ccomp.b12_fec_proceso = vg_fecha
 	END IF
 	DECLARE q_fecult CURSOR FOR
 		SELECT MAX(j14_fecha_emi)
@@ -1064,7 +1064,7 @@ FOREACH q_mast2 INTO tipo_comp, subtipo, indice
     	LET r_ccomp.b12_paridad = 1
     	LET r_ccomp.b12_modulo  = vg_modulo
     	LET r_ccomp.b12_usuario = vg_usuario
-    	LET r_ccomp.b12_fecing  = CURRENT
+    	LET r_ccomp.b12_fecing  = fl_current()
 	INSERT INTO ctbt012 VALUES (r_ccomp.*)
 	DECLARE q_dmast2 CURSOR FOR
 		SELECT * FROM te_master

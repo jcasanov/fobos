@@ -473,7 +473,7 @@ LET rm_r19.r19_localidad  = vg_codloc
 LET rm_r19.r19_cod_tran   = vm_transaccion
 LET rm_r19.r19_flete      = 0
 LET rm_r19.r19_usuario    = vg_usuario
-LET rm_r19.r19_fecing     = CURRENT
+LET rm_r19.r19_fecing     = fl_current()
 LET rm_r19.r19_bodega_ori = rm_r00.r00_bodega_fact
 
 LET rm_r19.r19_dircli     = '.'   
@@ -566,7 +566,7 @@ IF rm_r19.r19_num_tran = -1 THEN
 	RETURN
 END IF
 
-LET rm_r19.r19_fecing = CURRENT
+LET rm_r19.r19_fecing = fl_current()
 LET rm_r19.r19_flete  = rm_c10.c10_flete
 INSERT INTO rept019 VALUES (rm_r19.*)
 DISPLAY BY NAME rm_r19.r19_num_tran
@@ -676,8 +676,8 @@ END IF
 
 UPDATE ordt010 SET c10_estado      = estado,
 		   c10_factura     = rm_r19.r19_oc_externa,
-		   c10_fecha_fact  = TODAY,
-		   c10_fecha_entre = CURRENT	
+		   c10_fecha_fact  = vg_fecha,
+		   c10_fecha_entre = fl_current()	
 	WHERE CURRENT OF q_c10
 CLOSE q_c10
 FREE  q_c10
@@ -967,7 +967,7 @@ INPUT BY NAME rm_r19.r19_cod_tran, rm_r19.r19_oc_interna, vm_num_aut,
 			CALL fl_mostrar_mensaje('Digite la fecha de caducidad.', 'exclamation')
 			NEXT FIELD vm_fecha_cadu
 		END IF
-		IF vm_fecha_cadu < TODAY THEN
+		IF vm_fecha_cadu < vg_fecha THEN
 			CALL fl_mostrar_mensaje('La fecha de caducidad no puede ser menor a la fecha de hoy.', 'exclamation')
 			NEXT FIELD vm_fecha_cadu
 		END IF
@@ -1672,7 +1672,7 @@ LET r_r20.r20_cant_ent   = 0
 LET r_r20.r20_costnue_mb = 0
 LET r_r20.r20_costnue_ma = 0
 
-LET r_r20.r20_fecing     = CURRENT
+LET r_r20.r20_fecing     = fl_current()
 
 LET orden = 1
 CALL prorratea_costos_adicionales()
@@ -1694,7 +1694,7 @@ FOR i = 1 TO vm_indice
     	CALL fl_lee_item(vg_codcia, rm_compra[i].item) RETURNING r_r10.*
 	LET r_aux.* = r_r10.*
 	LET r_r10.r10_precio_ant  = r_r10.r10_precio_mb
-	LET r_r10.r10_fec_camprec = CURRENT
+	LET r_r10.r10_fec_camprec = fl_current()
 	LET r_r10.r10_precio_mb   = costo_nue + 
 				   (costo_nue * rm_r19.r19_fact_venta / 100)
 	LET r_r10.r10_precio_mb   = fl_retorna_precision_valor(rm_r19.r19_moneda, r_r10.r10_precio_mb)
@@ -2063,7 +2063,7 @@ IF i = 1 THEN
 -- fecha_pago debe ser TODAY + credit_dias (definido en la cxpt002)
 	CALL fl_lee_proveedor_localidad(vg_codcia, vg_codloc, r_c10.c10_codprov)
 		RETURNING r_p02.*
-	LET fecha_pago = TODAY + r_p02.p02_credit_dias
+	LET fecha_pago = vg_fecha + r_p02.p02_credit_dias
 	LET dias_pagos = r_p02.p02_credit_dias
 	LET tot_cap    = 0
 	LET tot_int    = 0
@@ -2102,7 +2102,7 @@ DEFINE r_c10		RECORD LIKE ordt010.*
 
 LET pagos       = 1
 LET c10_interes = r_c10.c10_interes
-LET fecha_pago  = TODAY + 30
+LET fecha_pago  = vg_fecha + 30
 LET dias_pagos  = 30
 
 INPUT BY NAME pagos, c10_interes, fecha_pago, dias_pagos WITHOUT DEFAULTS
@@ -2119,7 +2119,7 @@ INPUT BY NAME pagos, c10_interes, fecha_pago, dias_pagos WITHOUT DEFAULTS
 		--#CALL dialog.keysetlabel("F1","")
 		--#CALL dialog.keysetlabel("CONTROL-W","")
 	AFTER FIELD fecha_pago
-		IF fecha_pago < TODAY OR fecha_pago IS NULL THEN
+		IF fecha_pago < vg_fecha OR fecha_pago IS NULL THEN
 			--CALL fgl_winmessage(vg_producto,'Debe ingresar una fecha mayor o igual a la de hoy.','exclamation')
 			CALL fl_mostrar_mensaje('Debe ingresar una fecha mayor o igual a la de hoy.','exclamation')
 			NEXT FIELD fecha_pago
@@ -2303,8 +2303,8 @@ LET r_p20.p20_compania    = vg_codcia
 LET r_p20.p20_localidad   = vg_codloc
 LET r_p20.p20_codprov     = r_c10.c10_codprov
 LET r_p20.p20_usuario     = vg_usuario
-LET r_p20.p20_fecing      = CURRENT
-LET r_p20.p20_fecha_emi	  = TODAY
+LET r_p20.p20_fecing      = fl_current()
+LET r_p20.p20_fecha_emi	  = vg_fecha
 LET r_p20.p20_tipo_doc    = 'FA'
 LET r_p20.p20_num_doc     = rm_r19.r19_oc_externa
 LET r_p20.p20_referencia  = 'COMPRA LOCAL # ' || rm_r19.r19_num_tran
@@ -2349,7 +2349,7 @@ ELSE
 	LET r_p20.p20_referencia  = 'COMPRA LOCAL # ' || rm_r19.r19_num_tran 
 				    || ' CONTADO'
 	LET r_p20.p20_dividendo  = 1
-	LET r_p20.p20_fecha_vcto = TODAY
+	LET r_p20.p20_fecha_vcto = vg_fecha
 	LET r_p20.p20_valor_cap  = rm_r19.r19_tot_neto
 	LET r_p20.p20_valor_int  = 0
 	LET r_p20.p20_saldo_cap  = rm_r19.r19_tot_neto
@@ -2508,7 +2508,7 @@ ELSE
 	LET dias_pagos = 
 		r_detalle_2[1].c12_fecha_vcto - date(r_c13.c13_fecing)
 END IF
-LET tot_dias = r_detalle_2[i].c12_fecha_vcto - TODAY
+LET tot_dias = r_detalle_2[i].c12_fecha_vcto - vg_fecha
 
 LET pagos = i
 DISPLAY tot_recep TO tot_compra
@@ -2859,7 +2859,7 @@ END IF
 
 LET r_p22.p22_referencia = 'RETENCIONES EN COMPRA LOCAL # '|| 
 			   rm_r19.r19_num_tran
-LET r_p22.p22_fecha_emi  = TODAY
+LET r_p22.p22_fecha_emi  = vg_fecha
 LET r_p22.p22_moneda     = rm_r19.r19_moneda
 LET r_p22.p22_paridad    = rm_r19.r19_paridad
 LET r_p22.p22_tasa_mora  = 0
@@ -2868,7 +2868,7 @@ LET r_p22.p22_total_int  = 0
 LET r_p22.p22_total_mora = 0
 LET r_p22.p22_origen     = 'A'
 LET r_p22.p22_usuario    = vg_usuario
-LET r_p22.p22_fecing     = CURRENT 
+LET r_p22.p22_fecing     = fl_current()
 
 INSERT INTO cxpt022 VALUES(r_p22.*)
 --------------------------------------------------------------------------
@@ -2953,7 +2953,7 @@ LET r_p22.p22_tipo_trn   = vm_ajuste
 
 LET r_p22.p22_referencia = 'COMPRA LOCAL # '|| rm_r19.r19_num_tran ||
 			   ' PAGO CONTADO'
-LET r_p22.p22_fecha_emi  = TODAY
+LET r_p22.p22_fecha_emi  = vg_fecha
 LET r_p22.p22_moneda     = rm_r19.r19_moneda
 LET r_p22.p22_paridad    = rm_r19.r19_paridad
 LET r_p22.p22_tasa_mora  = 0
@@ -2962,7 +2962,7 @@ LET r_p22.p22_total_int  = 0
 LET r_p22.p22_total_mora = 0
 LET r_p22.p22_origen     = 'A'
 LET r_p22.p22_usuario    = vg_usuario
-LET r_p22.p22_fecing     = CURRENT + 1 UNITS SECOND
+LET r_p22.p22_fecing     = fl_current() + 1 UNITS SECOND
 
 LET r_p22.p22_num_trn    = nextValInSequence('TE', r_p22.p22_tipo_trn)
 IF r_p22.p22_num_trn     = -1 THEN
@@ -3057,7 +3057,7 @@ LET r_p27.p27_paridad       = rm_r19.r19_paridad
 LET r_p27.p27_total_ret     = tot_ret
 LET r_p27.p27_origen        = 'A'
 LET r_p27.p27_usuario       = vg_usuario
-LET r_p27.p27_fecing        = CURRENT
+LET r_p27.p27_fecing        = fl_current()
 
 LET r_p27.p27_num_ret = nextValInSequence('TE', vm_retencion)
 IF r_p27.p27_num_ret = -1 THEN
@@ -3206,8 +3206,8 @@ DECLARE q_sri CURSOR FOR
 		WHERE g37_compania   = vg_codcia
 		  AND g37_localidad  = vg_codloc
 		  AND g37_tipo_doc   = 'RT'
-	  	  AND g37_fecha_emi <= DATE(TODAY)
-	  	  AND g37_fecha_exp >= DATE(TODAY)
+	  	  AND g37_fecha_emi <= DATE(vg_fecha)
+	  	  AND g37_fecha_exp >= DATE(vg_fecha)
 		FOR UPDATE
 OPEN q_sri
 FETCH q_sri INTO r_g37.*
@@ -4334,7 +4334,7 @@ LET r_r19.r19_tot_dscto  	= 0.0
 LET r_r19.r19_tot_neto		= r_r19.r19_tot_costo
 LET r_r19.r19_flete      	= 0.0
 LET r_r19.r19_usuario      	= vg_usuario
-LET r_r19.r19_fecing      	= CURRENT
+LET r_r19.r19_fecing      	= fl_current()
 INSERT INTO rept019 VALUES (r_r19.*)
 INITIALIZE r_r20.* TO NULL
 LET r_r20.r20_compania		= vg_codcia
@@ -4397,7 +4397,7 @@ FOREACH q_fact_i INTO r_fact_i.*
 		LET r_r11.r11_stock_act = 0
 	END IF
 	LET r_r20.r20_stock_bd   = r_r11.r11_stock_act 
-	LET r_r20.r20_fecing	 = CURRENT
+	LET r_r20.r20_fecing	 = fl_current()
 	INSERT INTO rept020 VALUES(r_r20.*)
 	UPDATE rept011
 		SET r11_stock_act = r11_stock_act - r_fact_i.cant_desp,

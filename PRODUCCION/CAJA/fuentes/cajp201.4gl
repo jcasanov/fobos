@@ -176,13 +176,13 @@ SELECT * INTO rm_j04.* FROM cajt004
         WHERE j04_compania    = vg_codcia
           AND j04_localidad   = vg_codloc
           AND j04_codigo_caja = rm_j02.j02_codigo_caja
-          AND j04_fecha_aper  = TODAY
+          AND j04_fecha_aper  = vg_fecha
           AND j04_secuencia   = (SELECT MAX(j04_secuencia) FROM cajt004
                                         WHERE j04_compania    = vg_codcia
                                           AND j04_localidad   = vg_codloc
                                           AND j04_codigo_caja =
                                               rm_j02.j02_codigo_caja
-                                          AND j04_fecha_aper  = TODAY)
+                                          AND j04_fecha_aper  = vg_fecha)
 			
 IF rm_j04.j04_fecha_aper IS NULL THEN
 	--CALL FGL_WINMESSAGE(vg_producto,'La caja no ha sido aperturada.','exclamation' )
@@ -225,7 +225,7 @@ END FOREACH
 
 LET vm_detalle = i - 1
 
-LET rm_j04.j04_fecha_aper = TODAY
+LET rm_j04.j04_fecha_aper = vg_fecha
 DISPLAY BY NAME rm_j02.j02_nombre_caja, rm_j04.j04_fecha_aper,
 		rm_j04.j04_usuario
 
@@ -261,8 +261,8 @@ LET rm_j04.j04_compania    = vg_codcia
 LET rm_j04.j04_localidad   = vg_codloc
 LET rm_j04.j04_codigo_caja = rm_j02.j02_codigo_caja
 LET rm_j04.j04_usuario     = vg_usuario
-LET rm_j04.j04_fecha_aper  = TODAY 
-LET rm_j04.j04_fecing      = CURRENT 
+LET rm_j04.j04_fecha_aper  = vg_fecha 
+LET rm_j04.j04_fecing      = fl_current() 
 INITIALIZE rm_j04.j04_fecha_cierre TO NULL
 
 INSERT INTO cajt004 VALUES(rm_j04.*)

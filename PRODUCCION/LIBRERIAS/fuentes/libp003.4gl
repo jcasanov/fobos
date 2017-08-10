@@ -481,7 +481,7 @@ FOREACH q_mast INTO tipo_comp, subtipo, indice
     	LET r_ccomp.b12_paridad 	= 1
     	LET r_ccomp.b12_modulo	 	= vm_modulo
     	LET r_ccomp.b12_usuario 	= vg_usuario
-    	LET r_ccomp.b12_fecing 		= CURRENT
+    	LET r_ccomp.b12_fecing 		= fl_current()
 	INSERT INTO ctbt012 VALUES (r_ccomp.*)
 	DECLARE q_dmast CURSOR FOR SELECT * FROM te_master
 		WHERE te_tipo_comp = tipo_comp AND 

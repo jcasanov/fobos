@@ -170,7 +170,7 @@ FUNCTION retorna_precio_validez_item()
 DEFINE dias_trans	INTEGER
 
 IF rm_r21.r21_cod_tran IS NULL THEN
-	LET dias_trans = TODAY - DATE(rm_r21.r21_fecing)
+	LET dias_trans = vg_fecha - DATE(rm_r21.r21_fecing)
 	IF rm_r00.r00_dias_prof < dias_trans OR rm_r00.r00_dias_prof = 0 THEN
 		RETURN 1
 	END IF
@@ -269,7 +269,7 @@ PAGE HEADER
 	PRINT COLUMN 01,  "FORMA DE PAGO   : ", rm_r21.r21_forma_pago,
 	      COLUMN 69,  "FAX            : ", rm_loc.g02_fax1, " ",
 						rm_loc.g02_fax2
-	PRINT COLUMN 01,  "FECHA IMPRESION : ", DATE(TODAY) USING 'dd-mm-yyyy',
+	PRINT COLUMN 01,  "FECHA IMPRESION : ", DATE(vg_fecha) USING 'dd-mm-yyyy',
 		1 SPACES, TIME,
 	      COLUMN 69,  "VENDEDOR(A)    : ", rm_r01.r01_nombres
 	SKIP 1 LINES

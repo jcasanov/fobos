@@ -221,7 +221,7 @@ INITIALIZE rm_p24.* TO NULL
 LET rm_p24.p24_compania   = vg_codcia
 LET rm_p24.p24_localidad  = vg_codloc
 LET rm_p24.p24_usuario    = vg_usuario
-LET rm_p24.p24_fecing     = CURRENT
+LET rm_p24.p24_fecing     = fl_current()
 LET rm_p24.p24_tipo       = 'A' -- Solicitud de cobro de pago anticipado
 LET rm_p24.p24_tasa_mora  = 0	-- Hasta que se implemente el proceso 
 LET rm_p24.p24_total_mora = 0   -- para calcular el interes por mora
@@ -941,7 +941,7 @@ END IF
 LET comando = 'cd ..', vg_separador, '..', vg_separador, 'TESORERIA',
 		vg_separador, 'fuentes', vg_separador, run_prog, 'cxpp314 ',
 		vg_base, ' ', vg_modulo, ' ', vg_codcia, ' ', vg_codloc, ' ',
-		rm_p24.p24_moneda, ' ', TODAY, ' "T" 0.01 "N" ',
+		rm_p24.p24_moneda, ' ', vg_fecha, ' "T" 0.01 "N" ',
 		rm_p24.p24_codprov, ' 0 '
 RUN comando	
 

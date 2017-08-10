@@ -392,7 +392,7 @@ WHILE TRUE
 		UPDATE ordt010 
 			SET c10_estado      = 'P',
 			    c10_usua_aprob  = vg_usuario,
-			    c10_fecha_aprob = CURRENT
+			    c10_fecha_aprob = fl_current()
                       WHERE c10_compania    = vg_codcia
                         AND c10_localidad   = vg_codloc
                         AND c10_numero_oc   = r_detalle[j].c10_numero_oc

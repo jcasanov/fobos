@@ -61,7 +61,7 @@ BEGIN WORK
 		SET j10_estado = 'P',
 		    j10_tipo_destino = rm_cpag.z22_tipo_trn,
 		    j10_num_destino  = rm_cpag.z22_num_trn,
-		    j10_fecha_pro    = CURRENT
+		    j10_fecha_pro    = fl_current()
 		WHERE CURRENT OF q_ccaj
 COMMIT WORK
 CALL fl_control_master_contab_ingresos_caja(vg_codcia, vg_codloc,
@@ -171,7 +171,7 @@ LET rm_cpag.z22_num_trn 	= numero
 LET rm_cpag.z22_areaneg 	= rm_ccaj.j10_areaneg
 LET rm_cpag.z22_referencia 	= 'SOLICITUD COBRO: ', rm_csol.z24_numero_sol
 				   USING '#####&'
-LET rm_cpag.z22_fecha_emi 	= TODAY
+LET rm_cpag.z22_fecha_emi 	= vg_fecha
 LET rm_cpag.z22_moneda 		= rm_csol.z24_moneda
 LET rm_cpag.z22_paridad 	= rm_csol.z24_paridad
 LET rm_cpag.z22_tasa_mora 	= 0
@@ -186,7 +186,7 @@ LET rm_cpag.z22_fecha_elim	= NULL
 LET rm_cpag.z22_tiptrn_elim 	= NULL
 LET rm_cpag.z22_numtrn_elim 	= NULL
 LET rm_cpag.z22_usuario 	= vg_usuario
-LET rm_cpag.z22_fecing 		= CURRENT
+LET rm_cpag.z22_fecing 		= fl_current()
 --display 'cajp204: fecha antes insert ', rm_cpag.z22_fecing
 --display ' '
 INSERT INTO cxct022 VALUES (rm_cpag.*)

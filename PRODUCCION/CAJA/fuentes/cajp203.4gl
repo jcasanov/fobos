@@ -208,14 +208,14 @@ WHILE NOT salir
 		WHERE j04_compania    = vg_codcia
 		  AND j04_localidad   = vg_codloc
 		  AND j04_codigo_caja = rm_j02.j02_codigo_caja
-		  AND j04_fecha_aper  = TODAY
+		  AND j04_fecha_aper  = vg_fecha
 		  AND j04_secuencia   = (SELECT MAX(j04_secuencia) 
 		  			FROM cajt004
 	  				WHERE j04_compania  = vg_codcia
 	  				  AND j04_localidad = vg_codloc
 	  				  AND j04_codigo_caja 
 	  				  	= rm_j02.j02_codigo_caja
-	  				  AND j04_fecha_aper  = TODAY)
+	  				  AND j04_fecha_aper  = vg_fecha)
 	
 	IF STATUS = NOTFOUND THEN 
 		CALL fl_mostrar_mensaje('La caja no esta aperturada.', 'stop')
@@ -363,14 +363,14 @@ FOREACH q_j90 INTO r_j90.*
 		WHERE j04_compania    = vg_codcia
 		  AND j04_localidad   = vg_codloc
 		  AND j04_codigo_caja = r_j90.j90_codigo_caja
-		  AND j04_fecha_aper  = TODAY
+		  AND j04_fecha_aper  = vg_fecha
 		  AND j04_secuencia   = (SELECT MAX(j04_secuencia) 
 	  			FROM cajt004
   				WHERE j04_compania  = vg_codcia
   				  AND j04_localidad = vg_codloc
   				  AND j04_codigo_caja 
   				  	= r_j90.j90_codigo_caja
-  				  AND j04_fecha_aper  = TODAY)
+  				  AND j04_fecha_aper  = vg_fecha)
 	IF STATUS <> NOTFOUND THEN 
 		LET salir = 1
 		EXIT FOREACH
@@ -915,7 +915,7 @@ IF resul = 1 THEN
 		FROM talt023
 		WHERE t23_compania          = vg_codcia
 		  AND t23_estado            = 'C'
-		  AND DATE(t23_fec_cierre) >= TODAY
+		  AND DATE(t23_fec_cierre) >= vg_fecha
 	UNION
 	SELECT t23_compania, t23_localidad, t23_orden,
 		(SELECT COUNT(*)
@@ -2680,7 +2680,7 @@ IF registros_retenciones(numero_ret, codigo_pago, posi) = 0 THEN
 		WHEN "PR" LET tipo_fue = 'B'
 		WHEN "OT" LET tipo_fue = 'S'
 	END CASE
-	LET expr_tip = ', "', vm_tipo_doc, '" tip_doc, TODAY fec_fact, ',
+	LET expr_tip = ', "', vm_tipo_doc, '" tip_doc, "', vg_fecha, '" fec_fact, ',
 			'z08_fecha_ini_porc fec_ini_porc '
 	IF rm_j10.j10_tipo_fuente = 'SC' THEN
 		CALL retorna_tipo_doc(posi, tipo_f) RETURNING tip_d, fec_f
@@ -3056,7 +3056,7 @@ DEFINE mensaje		VARCHAR(200)
 
 OPTIONS INPUT NO WRAP
 IF rm_j14.j14_fecha_emi IS NULL THEN
-	LET rm_j14.j14_fecha_emi = TODAY
+	LET rm_j14.j14_fecha_emi = vg_fecha
 END IF
 LET int_flag = 0
 INPUT BY NAME rm_j14.j14_num_ret_sri, rm_j14.j14_autorizacion,
@@ -3099,7 +3099,7 @@ INPUT BY NAME rm_j14.j14_num_ret_sri, rm_j14.j14_autorizacion,
 				LET rm_j14.j14_fecha_emi = fecha
 				DISPLAY BY NAME rm_j14.j14_fecha_emi
 			END IF
-			LET fecha = TODAY
+			LET fecha = vg_fecha
 		END IF
 	AFTER FIELD j14_num_ret_sri
 		IF NOT valido_num_ret(rm_j14.j14_num_ret_sri) THEN
@@ -3146,9 +3146,9 @@ INPUT BY NAME rm_j14.j14_num_ret_sri, rm_j14.j14_autorizacion,
 				DISPLAY BY NAME rm_j14.j14_fecha_emi
 				CONTINUE INPUT
 			END IF
-			LET fecha = TODAY
+			LET fecha = vg_fecha
 		END IF
-		IF rm_j14.j14_fecha_emi < TODAY AND
+		IF rm_j14.j14_fecha_emi < vg_fecha AND
 		   rm_j10.j10_tipo_fuente <> 'SC'
 		THEN
 			CALL fl_mostrar_mensaje('La fecha de emision del comprobante no puede ser menor que la fecha de hoy.', 'exclamation')
@@ -3177,7 +3177,7 @@ INPUT BY NAME rm_j14.j14_num_ret_sri, rm_j14.j14_autorizacion,
 			NEXT FIELD j14_fecha_emi
 		END IF
 		IF (MDY(MONTH(fecha_min), 01, YEAR(fecha_min)) + 1 UNITS MONTH
-			- 1 UNITS DAY) < (TODAY - (dias_tope + 1) UNITS DAY)
+			- 1 UNITS DAY) < (vg_fecha - (dias_tope + 1) UNITS DAY)
 		THEN
 			LET mensaje = 'No se puede cargar retenciones a una ',
 					'factura con fecha de mas de ',
@@ -3501,7 +3501,7 @@ INPUT ARRAY rm_detret WITHOUT DEFAULTS FROM rm_detret.*
 						rm_adi_r[l].fec_fact
 			ELSE
 				LET rm_adi_r[l].tipo_doc = vm_tipo_doc
-				LET rm_adi_r[l].fec_fact = TODAY
+				LET rm_adi_r[l].fec_fact = vg_fecha
 			END IF
 		END FOR
 		LET salir = 1
@@ -4020,7 +4020,7 @@ OPEN q_cons_r38_2
 FETCH q_cons_r38_2 INTO tip_d
 CLOSE q_cons_r38_2
 FREE q_cons_r38_2
-LET fec_f = TODAY
+LET fec_f = vg_fecha
 CASE tipo_f
 	WHEN 'PR'
 		CALL fl_lee_cabecera_transaccion_rep(vg_codcia,	vg_codloc,
@@ -4282,6 +4282,7 @@ DEFINE intentar		SMALLINT
 DEFINE done 		SMALLINT
 
 DEFINE estado		CHAR(1)
+DEFINE fecha_actual DATETIME YEAR TO SECOND
 
 LET intentar = 1
 LET done = 0
@@ -4307,11 +4308,12 @@ IF NOT intentar AND NOT done THEN
 	RETURN done
 END IF
 
+LET fecha_actual = fl_current()
 
-	UPDATE cajt010 SET j10_estado      = estado,
-			   j10_codigo_caja = rm_j04.j04_codigo_caja,
-			   j10_fecha_pro   = CURRENT
-		WHERE CURRENT OF q_j10 
+UPDATE cajt010 SET j10_estado      = estado,
+				   j10_codigo_caja = rm_j04.j04_codigo_caja,
+				   j10_fecha_pro   = fecha_actual
+ WHERE CURRENT OF q_j10 
 
 CLOSE q_j10
 
@@ -4472,7 +4474,7 @@ FOREACH q_ret2 INTO r_j14.j14_num_ret_sri, r_j14.j14_autorizacion,
 	LET r_j14.j14_tipo_comp    = NULL
 	LET r_j14.j14_num_comp     = NULL
 	LET r_j14.j14_usuario      = vg_usuario
-	LET r_j14.j14_fecing       = CURRENT
+	LET r_j14.j14_fecing       = fl_current()
 	INSERT INTO cajt014 VALUES (r_j14.*)
 	LET i = i + 1
 END FOREACH
@@ -4782,7 +4784,7 @@ FOREACH q_cajas_j13 INTO codigo_pago, moneda, valor
 				WHERE j13_compania     = vg_codcia
 				  AND j13_localidad    = vg_codloc
 				  AND j13_codigo_caja  = rm_j02.j02_codigo_caja
-				  AND j13_fecha        = TODAY
+				  AND j13_fecha        = vg_fecha
 				  AND j13_moneda       = moneda
 				  AND j13_trn_generada = rm_j10.j10_tipo_destino
 				  AND j13_codigo_pago  = codigo_pago
@@ -4805,7 +4807,7 @@ FOREACH q_cajas_j13 INTO codigo_pago, moneda, valor
 			LET r_j13.j13_compania     = vg_codcia
 			LET r_j13.j13_localidad    = vg_codloc
 			LET r_j13.j13_codigo_caja  = rm_j02.j02_codigo_caja
-			LET r_j13.j13_fecha        = TODAY
+			LET r_j13.j13_fecha        = vg_fecha
 			LET r_j13.j13_moneda       = moneda
 			LET r_j13.j13_trn_generada = rm_j10.j10_tipo_destino
 			LET r_j13.j13_codigo_pago  = codigo_pago

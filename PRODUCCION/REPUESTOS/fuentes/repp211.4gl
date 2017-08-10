@@ -88,7 +88,7 @@ UPDATE rept025 SET r25_cod_tran = rm_cabt.r19_cod_tran,
 UPDATE cajt010 SET j10_estado       = 'P',
 		   j10_tipo_destino = rm_cabt.r19_cod_tran,
 		   j10_num_destino  = rm_cabt.r19_num_tran,
-		   j10_fecha_pro    = CURRENT
+		   j10_fecha_pro    = fl_current()
 	WHERE CURRENT OF q_ccaj
 CALL act_ultima_venta()
 CALL fl_actualiza_acumulados_ventas_rep(vg_codcia, vg_codloc,
@@ -545,7 +545,7 @@ LET rm_cabt.r19_flete 		= rm_cprev.r23_flete
 LET rm_cabt.r19_numliq 		= NULL
 LET rm_cabt.r19_usuario 	= vg_usuario
 CALL obtener_usuario_por_refacturacion()
-LET rm_cabt.r19_fecing 		= CURRENT
+LET rm_cabt.r19_fecing 		= fl_current()
 INSERT INTO rept019 VALUES (rm_cabt.*)
 FOREACH q_dprev INTO r.*
 	IF r.r24_cant_ven = 0 THEN
@@ -586,7 +586,7 @@ FOREACH q_dprev INTO r.*
     	LET rm_dett.r20_costnue_ma 	= rm_item.r10_costo_ma
     	LET rm_dett.r20_stock_ant 	= rm_stock.r11_stock_act +r.r24_cant_ven
     	LET rm_dett.r20_stock_bd 	= 0
-    	LET rm_dett.r20_fecing 		= CURRENT
+    	LET rm_dett.r20_fecing 		= fl_current()
 	INSERT INTO rept020 VALUES (rm_dett.*)
 END FOREACH
 
@@ -615,7 +615,7 @@ FOREACH q_dcred INTO r.*
     	LET r_doc.z20_dividendo = r.r26_dividendo
     	LET r_doc.z20_areaneg 	= rm_ccaj.j10_areaneg
     	LET r_doc.z20_referencia= rm_cprev.r23_referencia
-    	LET r_doc.z20_fecha_emi = TODAY
+    	LET r_doc.z20_fecha_emi = vg_fecha
     	LET r_doc.z20_fecha_vcto= r.r26_fec_vcto
     	LET r_doc.z20_tasa_int  = rm_cpago.r25_interes
     	LET r_doc.z20_tasa_mora = 0
@@ -632,7 +632,7 @@ FOREACH q_dcred INTO r.*
     	LET r_doc.z20_cod_tran  = rm_cabt.r19_cod_tran
     	LET r_doc.z20_num_tran  = rm_cabt.r19_num_tran
     	LET r_doc.z20_usuario 	= vg_usuario
-    	LET r_doc.z20_fecing 	= CURRENT
+    	LET r_doc.z20_fecing 	= fl_current()
 	INSERT INTO cxct020 VALUES (r_doc.*)
 END FOREACH
 
@@ -660,8 +660,8 @@ LET r_doc.z20_num_doc 	= rm_cabt.r19_num_tran
 LET r_doc.z20_dividendo = 00
 LET r_doc.z20_areaneg 	= rm_ccaj.j10_areaneg
 LET r_doc.z20_referencia= rm_cprev.r23_referencia
-LET r_doc.z20_fecha_emi = TODAY
-LET r_doc.z20_fecha_vcto= TODAY 
+LET r_doc.z20_fecha_emi = vg_fecha
+LET r_doc.z20_fecha_vcto= vg_fecha 
 LET r_doc.z20_tasa_int  = 0
 LET r_doc.z20_tasa_mora = 0
 LET r_doc.z20_moneda 	= rm_cprev.r23_moneda
@@ -677,7 +677,7 @@ LET r_doc.z20_origen 	= 'A'
 LET r_doc.z20_cod_tran  = rm_cabt.r19_cod_tran
 LET r_doc.z20_num_tran  = rm_cabt.r19_num_tran
 LET r_doc.z20_usuario 	= vg_usuario
-LET r_doc.z20_fecing 	= CURRENT
+LET r_doc.z20_fecing 	= fl_current()
 INSERT INTO cxct020 VALUES (r_doc.*)
 INITIALIZE r_caju.* TO NULL
 CALL fl_actualiza_control_secuencias(vg_codcia, vg_codloc, 'CO', 'AA', 'AJ')
@@ -693,7 +693,7 @@ LET r_caju.z22_tipo_trn 	= 'AJ'
 LET r_caju.z22_num_trn 		= numero
 LET r_caju.z22_areaneg 		= rm_ccaj.j10_areaneg
 LET r_caju.z22_referencia 	= 'APLICACION ANTICIPO'
-LET r_caju.z22_fecha_emi 	= TODAY
+LET r_caju.z22_fecha_emi 	= vg_fecha
 LET r_caju.z22_moneda 		= rm_cprev.r23_moneda
 LET r_caju.z22_paridad 		= rm_cprev.r23_paridad
 LET r_caju.z22_tasa_mora 	= 0
@@ -707,7 +707,7 @@ LET r_caju.z22_fecha_elim	= NULL
 LET r_caju.z22_tiptrn_elim 	= NULL
 LET r_caju.z22_numtrn_elim 	= NULL
 LET r_caju.z22_usuario 		= vg_usuario
-LET r_caju.z22_fecing 		= CURRENT
+LET r_caju.z22_fecing 		= fl_current()
 INSERT INTO cxct022 VALUES (r_caju.*)
 LET valor_aux = rm_cpago.r25_valor_ant 
 DECLARE q_antd CURSOR FOR 
@@ -773,7 +773,7 @@ DECLARE q_jojoy CURSOR FOR SELECT r20_bodega, r20_item
 	      r20_cod_tran  = rm_cabt.r19_cod_tran AND
 	      r20_num_tran  = rm_cabt.r19_num_tran
 FOREACH q_jojoy INTO bod, item
-	UPDATE rept011 SET r11_fec_ultvta = TODAY,
+	UPDATE rept011 SET r11_fec_ultvta = vg_fecha,
 		           r11_tip_ultvta = rm_cabt.r19_cod_tran,
 		           r11_num_ultvta = rm_cabt.r19_num_tran
 		WHERE r11_compania = vg_codcia AND
@@ -798,11 +798,11 @@ LET r_r34.r34_localidad		= rm_cabt.r19_localidad
 LET r_r34.r34_estado 		= 'A'
 LET r_r34.r34_cod_tran 		= rm_cabt.r19_cod_tran
 LET r_r34.r34_num_tran 		= rm_cabt.r19_num_tran
-LET r_r34.r34_fec_entrega 	= TODAY
+LET r_r34.r34_fec_entrega 	= vg_fecha
 LET r_r34.r34_entregar_a 	= rm_cabt.r19_nomcli
 LET r_r34.r34_entregar_en 	= rm_cabt.r19_dircli
 LET r_r34.r34_usuario 		= vg_usuario
-LET r_r34.r34_fecing 		= CURRENT
+LET r_r34.r34_fecing 		= fl_current()
 IF rm_cprev.r23_numprof IS NOT NULL THEN
 	CALL fl_lee_proforma_rep(vg_codcia, vg_codloc, rm_cprev.r23_numprof)
 		RETURNING rm_r21.*
@@ -928,8 +928,8 @@ FOREACH q_pagotj INTO r_j11.j11_compania, r_j11.j11_localidad,
 		LET r_doc.z20_dividendo  = dividendo
 		LET r_doc.z20_areaneg 	 = rm_ccaj.j10_areaneg
 		LET r_doc.z20_referencia = 'AUI. #: ', r_j11_2.j11_num_ch_aut
-		LET r_doc.z20_fecha_emi  = TODAY
-		LET r_doc.z20_fecha_vcto = TODAY + 30
+		LET r_doc.z20_fecha_emi  = vg_fecha
+		LET r_doc.z20_fecha_vcto = vg_fecha + 30
 		LET r_doc.z20_tasa_int   = 0
 		LET r_doc.z20_tasa_mora  = 0
 		LET r_doc.z20_moneda 	 = rm_cprev.r23_moneda
@@ -945,7 +945,7 @@ FOREACH q_pagotj INTO r_j11.j11_compania, r_j11.j11_localidad,
 		LET r_doc.z20_cod_tran   = rm_cabt.r19_cod_tran
 		LET r_doc.z20_num_tran   = rm_cabt.r19_num_tran
 		LET r_doc.z20_usuario 	 = vg_usuario
-		LET r_doc.z20_fecing 	 = CURRENT
+		LET r_doc.z20_fecing 	 = fl_current()
 		WHENEVER ERROR CONTINUE
 		INSERT INTO cxct020 VALUES (r_doc.*)
 		IF STATUS <> 0 THEN
@@ -980,13 +980,13 @@ FOREACH q_j90 INTO r_j90.*
 		WHERE j04_compania    = vg_codcia
 		  AND j04_localidad   = vg_codloc
 		  AND j04_codigo_caja = r_j90.j90_codigo_caja
-		  AND j04_fecha_aper  = TODAY
+		  AND j04_fecha_aper  = vg_fecha
 		  AND j04_secuencia   = (SELECT MAX(j04_secuencia) 
 	  			FROM cajt004
   				WHERE j04_compania    = vg_codcia
   				  AND j04_localidad   = vg_codloc
   				  AND j04_codigo_caja = r_j90.j90_codigo_caja
-  				  AND j04_fecha_aper  = TODAY)
+  				  AND j04_fecha_aper  = vg_fecha)
 	IF STATUS <> NOTFOUND THEN 
 		CALL fl_lee_codigo_caja_caja(r_j04.j04_compania,
 						r_j04.j04_localidad,
@@ -1051,7 +1051,7 @@ FOREACH q_trans_ori_cab INTO r_r19.*
 	LET r_r19.r19_tipo_dev   = rm_cabt.r19_cod_tran
 	LET r_r19.r19_num_dev    = rm_cabt.r19_num_tran
 	LET r_r19.r19_usuario    = vg_usuario
-	LET r_r19.r19_fecing     = CURRENT
+	LET r_r19.r19_fecing     = fl_current()
 	INSERT INTO rept019 VALUES (r_r19.*)
 	INSERT INTO rept041
 		VALUES(r_r19.r19_compania, r_r19.r19_localidad,
@@ -1094,7 +1094,7 @@ FOREACH q_trans_ori_cab INTO r_r19.*
 			LET r_r11.r11_stock_act = 0
 		END IF
 		LET r_r20.r20_stock_bd   = r_r11.r11_stock_act
-		LET r_r20.r20_fecing	 = CURRENT
+		LET r_r20.r20_fecing	 = fl_current()
 		INSERT INTO rept020 VALUES(r_r20.*)
 		UPDATE rept019
 			SET r19_tot_costo = r_r19.r19_tot_costo,

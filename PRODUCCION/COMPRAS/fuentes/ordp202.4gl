@@ -946,7 +946,7 @@ CALL control_DISPLAY_botones()
 INITIALIZE rm_c00.*, rm_c13.*, rm_c14.*,vm_flag_forma_pago TO NULL
 LET tot_ret = 0
 
-LET rm_c13.c13_fecing  = CURRENT
+LET rm_c13.c13_fecing  = fl_current()
 LET rm_c13.c13_usuario = vg_usuario
 LET rm_c13.c13_estado  = 'A'
 
@@ -1113,14 +1113,14 @@ IF vm_flag_recep = 'S' THEN
 
 	UPDATE ordt010 SET c10_estado      = estado,
 			   c10_factura     = rm_c13.c13_num_guia,
-			   c10_fecha_fact  = TODAY,
-			   c10_fecha_entre = CURRENT	
+			   c10_fecha_fact  = vg_fecha,
+			   c10_fecha_entre = fl_current()	
 		WHERE CURRENT OF q_ordt010 
 ELSE
 	UPDATE ordt010 SET c10_estado      = 'C',
 			   c10_factura     = rm_c13.c13_num_guia,
-			   c10_fecha_fact  = TODAY,
-			   c10_fecha_entre = CURRENT	
+			   c10_fecha_fact  = vg_fecha,
+			   c10_fecha_entre = fl_current()	
 		WHERE CURRENT OF q_ordt010 
 END IF
 
@@ -1272,7 +1272,7 @@ LET rm_p27.p27_paridad       = rm_c10.c10_paridad
 LET rm_p27.p27_total_ret     = tot_ret
 LET rm_p27.p27_origen        = 'A'
 LET rm_p27.p27_usuario       = vg_usuario
-LET rm_p27.p27_fecing        = CURRENT
+LET rm_p27.p27_fecing        = fl_current()
 
 LET rm_p27.p27_num_ret = nextValInSequence('TE', vm_retencion)
 IF rm_p27.p27_num_ret = -1 THEN
@@ -1413,7 +1413,7 @@ LET r_p22.p22_num_trn    = nextValInSequence('TE', r_p22.p22_tipo_trn)
 LET r_p22.p22_referencia = 'RET # ', rm_p27.p27_num_ret, ', RECEP # ', 
 			   rm_c13.c13_num_recep, ', OC # ',
 			   rm_c10.c10_numero_oc
-LET r_p22.p22_fecha_emi  = TODAY
+LET r_p22.p22_fecha_emi  = vg_fecha
 LET r_p22.p22_moneda     = rm_c10.c10_moneda
 LET r_p22.p22_paridad    = rm_c10.c10_paridad
 LET r_p22.p22_tasa_mora  = 0
@@ -1422,7 +1422,7 @@ LET r_p22.p22_total_int  = 0
 LET r_p22.p22_total_mora = 0
 LET r_p22.p22_origen     = 'A'
 LET r_p22.p22_usuario    = vg_usuario
-LET r_p22.p22_fecing     = CURRENT 
+LET r_p22.p22_fecing     = fl_current() 
 
 INSERT INTO cxpt022 VALUES(r_p22.*)
 --------------------------------------------------------------------------
@@ -1487,7 +1487,7 @@ LET r_p22.p22_codprov    = rm_c10.c10_codprov
 LET r_p22.p22_tipo_trn   = 'AJ'
 
 LET r_p22.p22_referencia = 'RECEPCION ORDEN DE COMPRA # '|| rm_c13.c13_num_recep || ' PAGO CONTADO'
-LET r_p22.p22_fecha_emi  = TODAY
+LET r_p22.p22_fecha_emi  = vg_fecha
 LET r_p22.p22_moneda     = rm_c10.c10_moneda
 LET r_p22.p22_paridad    = rm_c10.c10_paridad
 LET r_p22.p22_tasa_mora  = 0
@@ -1496,7 +1496,7 @@ LET r_p22.p22_total_int  = 0
 LET r_p22.p22_total_mora = 0
 LET r_p22.p22_origen     = 'A'
 LET r_p22.p22_usuario    = vg_usuario
-LET r_p22.p22_fecing     = CURRENT + 1 UNITS SECOND
+LET r_p22.p22_fecing     = fl_current() + 1 UNITS SECOND
 
 LET r_p22.p22_num_trn    = nextValInSequence('TE', r_p22.p22_tipo_trn)
 
@@ -1662,8 +1662,8 @@ INITIALIZE rm_c13.c13_fecha_eli TO NULL
 
 LET rm_c13.c13_compania    = vg_codcia
 LET rm_c13.c13_localidad   = vg_codloc
-LET rm_c13.c13_fecing      = CURRENT
-LET rm_c13.c13_fecha_recep = CURRENT
+LET rm_c13.c13_fecing      = fl_current()
+LET rm_c13.c13_fecha_recep = fl_current()
 LET rm_c13.c13_factura     = rm_c13.c13_num_guia
 LET rm_c13.c13_estado      = 'A'
 LET rm_c13.c13_flete       = rm_c10.c10_flete
@@ -2077,7 +2077,7 @@ INPUT BY NAME rm_c13.c13_numero_oc, rm_c13.c13_num_guia, rm_c13.c13_fecha_cadu,
 			CALL fl_mostrar_mensaje('Digite la fecha de caducidad.', 'exclamation')
 			NEXT FIELD c13_fecha_cadu
 		END IF
-		IF rm_c13.c13_fecha_cadu < TODAY THEN
+		IF rm_c13.c13_fecha_cadu < vg_fecha THEN
 			CALL fl_mostrar_mensaje('La fecha de caducidad no puede ser menor a la fecha de hoy.', 'exclamation')
 			NEXT FIELD c13_fecha_cadu
 		END IF
@@ -2402,7 +2402,7 @@ CALL control_DISPLAY_botones_2()
 
 IF pagos = 0 THEN
 	LET tot_recep  = rm_c13.c13_tot_recep
-	LET fecha_pago = TODAY + 30
+	LET fecha_pago = vg_fecha + 30
 	LET dias_pagos = 30
 	LET pagos      = 1
 	DISPLAY BY NAME pagos, tot_recep, rm_c13.c13_interes, 
@@ -2484,7 +2484,7 @@ INPUT BY NAME pagos, rm_c13.c13_interes, fecha_pago, dias_pagos
 		--#CALL dialog.keysetlabel("F1","")
 		--#CALL dialog.keysetlabel("CONTROL-W","")
 	AFTER FIELD fecha_pago
-		IF fecha_pago < TODAY THEN
+		IF fecha_pago < vg_fecha THEN
 			--CALL fgl_winmessage(vg_producto,'Debe ingresar una fecha mayor o igual a la de hoy.','exclamation')
 			CALL fl_mostrar_mensaje('Debe ingresar una fecha mayor o igual a la de hoy.','exclamation')
 			NEXT FIELD fecha_pago
@@ -2609,7 +2609,7 @@ WHILE TRUE
 				EXIT INPUT
 			END IF
 
-			LET tot_dias = r_detalle_2[pagos].c15_fecha_vcto - TODAY 	
+			LET tot_dias = r_detalle_2[pagos].c15_fecha_vcto - vg_fecha 	
 			DISPLAY BY NAME tot_dias
 
 			EXIT WHILE
@@ -2729,8 +2729,8 @@ LET r_p20.p20_compania    = vg_codcia
 LET r_p20.p20_localidad   = vg_codloc
 LET r_p20.p20_codprov     = rm_c10.c10_codprov
 LET r_p20.p20_usuario     = vg_usuario
-LET r_p20.p20_fecing      = CURRENT
-LET r_p20.p20_fecha_emi	  = TODAY
+LET r_p20.p20_fecing      = fl_current()
+LET r_p20.p20_fecha_emi	  = vg_fecha
 LET r_p20.p20_tipo_doc    = 'FA'
 LET r_p20.p20_num_doc     = rm_c13.c13_factura
 LET r_p20.p20_referencia  = 'RECEPCION # ' || rm_c13.c13_num_recep
@@ -2769,7 +2769,7 @@ ELSE
 	LET r_p20.p20_referencia  = 'RECEPCION # ' || rm_c13.c13_num_recep 
 				    || '  DE CONTADO'
 	LET r_p20.p20_dividendo  = 1
-	LET r_p20.p20_fecha_vcto = TODAY
+	LET r_p20.p20_fecha_vcto = vg_fecha
 	LET r_p20.p20_valor_cap  = rm_c13.c13_tot_recep
 	LET r_p20.p20_valor_int  = 0
 	LET r_p20.p20_saldo_cap  = rm_c13.c13_tot_recep
@@ -3372,7 +3372,7 @@ END IF
 LET r_b12.b12_compania    = vg_codcia
 LET r_b12.b12_tipo_comp   = 'DC'
 LET r_b12.b12_num_comp    = fl_numera_comprobante_contable(vg_codcia,
-                            	r_b12.b12_tipo_comp, YEAR(TODAY), MONTH(TODAY))
+                            	r_b12.b12_tipo_comp, YEAR(vg_fecha), MONTH(vg_fecha))
 LET r_b12.b12_estado      = 'A'
 IF r_c01.c01_modulo = 'AF' THEN
 	LET r_b12.b12_subtipo = 60
@@ -3385,14 +3385,14 @@ LET r_b12.b12_num_cheque  = NULL
 LET r_b12.b12_origen      = 'A'
 LET r_b12.b12_moneda      = r_c10.c10_moneda
 LET r_b12.b12_paridad     = r_c10.c10_paridad
-LET r_b12.b12_fec_proceso = TODAY
+LET r_b12.b12_fec_proceso = vg_fecha
 LET r_b12.b12_fec_reversa = NULL
 LET r_b12.b12_tip_reversa = NULL
 LET r_b12.b12_num_reversa = NULL
 LET r_b12.b12_fec_modifi  = NULL
 LET r_b12.b12_modulo      = r_c01.c01_modulo
 LET r_b12.b12_usuario     = vg_usuario
-LET r_b12.b12_fecing      = CURRENT
+LET r_b12.b12_fecing      = fl_current()
 INSERT INTO ctbt012 VALUES(r_b12.*)
 DECLARE q_c11 CURSOR FOR
 	SELECT * FROM ordt011
@@ -3478,7 +3478,7 @@ FOREACH q_c11 INTO r_c11.*
 	LET r_a12.a12_tipcomp_gen = r_b12.b12_tipo_comp
 	LET r_a12.a12_numcomp_gen = r_b12.b12_num_comp
 	LET r_a12.a12_usuario 	  = vg_usuario
-	LET r_a12.a12_fecing 	  = CURRENT
+	LET r_a12.a12_fecing 	  = fl_current()
 	INSERT INTO actt012 VALUES (r_a12.*)
 END FOREACH
 RETURN r_b12.*
@@ -3524,7 +3524,7 @@ ELSE
 END IF
 LET r_b13.b13_num_concil  = NULL
 LET r_b13.b13_filtro      = NULL
-LET r_b13.b13_fec_proceso = TODAY
+LET r_b13.b13_fec_proceso = vg_fecha
 LET r_b13.b13_codcli      = NULL
 LET r_b13.b13_codprov     = r_c10.c10_codprov
 LET r_b13.b13_pedido      = NULL
@@ -3656,17 +3656,17 @@ LET r_b12.b12_compania    = vg_codcia
 -- OjO confirmar
 LET r_b12.b12_tipo_comp   = r_b03.b03_tipo_comp
 LET r_b12.b12_num_comp    = fl_numera_comprobante_contable(vg_codcia,
-                            	r_b12.b12_tipo_comp, YEAR(TODAY), MONTH(TODAY))
+                            	r_b12.b12_tipo_comp, YEAR(vg_fecha), MONTH(vg_fecha))
 LET r_b12.b12_estado      = 'A' 
 --LET r_b12.b12_glosa       = 'COMPROBANTE: ' || glosa CLIPPED 
 LET r_b12.b12_glosa       = rm_b12.b12_glosa CLIPPED
 LET r_b12.b12_origen      = 'A' 
 LET r_b12.b12_moneda      = r_c10.c10_moneda 
 LET r_b12.b12_paridad     = r_c10.c10_paridad 
-LET r_b12.b12_fec_proceso = TODAY
+LET r_b12.b12_fec_proceso = vg_fecha
 LET r_b12.b12_modulo      = r_b03.b03_modulo
 LET r_b12.b12_usuario     = vg_usuario 
-LET r_b12.b12_fecing      = CURRENT
+LET r_b12.b12_fecing      = fl_current()
 
 INSERT INTO ctbt012 VALUES(r_b12.*)
 
