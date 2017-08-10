@@ -229,6 +229,8 @@ END FUNCTION
 
 FUNCTION control_cerrar()
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 BEGIN WORK
 
 WHENEVER ERROR CONTINUE
@@ -256,8 +258,10 @@ IF STATUS < 0 THEN
 	EXIT PROGRAM
 END IF
 
+fecha_actual = fl_current()
+
 UPDATE cajt004
-	SET j04_fecha_cierre = fl_current()
+	SET j04_fecha_cierre = fecha_actual
 	WHERE CURRENT OF q_cajt004
 
 COMMIT WORK
