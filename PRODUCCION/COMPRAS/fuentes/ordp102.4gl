@@ -1316,6 +1316,7 @@ END FUNCTION
 
 FUNCTION grabar_tipos_pago()
 DEFINE i		SMALLINT
+DEFINE fecha_actual DATETIME YEAR TO SECOND
 
 WHENEVER ERROR CONTINUE
 DELETE FROM cajt091
@@ -1329,12 +1330,13 @@ IF STATUS <> 0 THEN
 	RETURN
 END IF
 WHENEVER ERROR STOP
+LET fecha_actual = fl_current()
 FOR i = 1 TO vm_num_ret
 	INSERT INTO cajt091
 		VALUES(vg_codcia, rm_detj91[i].j91_codigo_pago,
 			rm_detj91[i].j91_cont_cred, rm_c02.c02_tipo_ret,
 			rm_c02.c02_porcentaje, rm_detj91[i].j91_aux_cont,
-			vg_usuario, fl_current())
+			vg_usuario, fecha_actual)
 END FOR
  
 END FUNCTION

@@ -366,6 +366,7 @@ END FUNCTION
 
 FUNCTION grabar_detalle()
 DEFINE i, grabo			SMALLINT
+DEFINE fecha_actual		DATETIME YEAR TO SECOND
 
 BEGIN WORK
 WHENEVER ERROR CONTINUE
@@ -382,6 +383,7 @@ SET LOCK MODE TO WAIT
 		CALL fl_mostrar_mensaje('No se pudo eliminar el registro del proveedor ' || rm_par.p01_nomprov CLIPPED || ' con fecha de vigencia ' || rm_par.c04_fecha_vigen USING "dd-mm-yyyy" || '. Por favor llame al administrador.','exclamation')
 		RETURN
 	END IF
+	LET fecha_actual = fl_current()
 	LET grabo = 1
 	FOR i = 1 TO vm_num_det
 		INSERT INTO ordt004
@@ -391,7 +393,7 @@ SET LOCK MODE TO WAIT
 			VALUES (vg_codcia, vg_codloc, rm_par.c04_codprov,
 					rm_detalle[i].c04_cod_item, rm_par.c04_fecha_vigen,
 					rm_detalle[i].c04_pvp_prov_sug, rm_detalle[i].c04_desc_prov,
-					rm_detalle[i].c04_costo_prov, rm_par.c04_usuario, fl_current())
+					rm_detalle[i].c04_costo_prov, rm_par.c04_usuario, fecha_actual)
 		IF STATUS <> 0 THEN
 			ROLLBACK WORK
 			WHENEVER ERROR STOP
@@ -405,7 +407,7 @@ SET LOCK MODE TO WAIT
 		UPDATE rept010
 			SET r10_precio_mb   = rm_detalle[i].r10_precio_mb,
 				r10_precio_ant  = rm_adi[i].r10_precio_ant,
-				r10_fec_camprec = fl_current()
+				r10_fec_camprec = fecha_actual
 			WHERE r10_compania = vg_codcia
 			  AND r10_codigo   = rm_adi[i].r10_codigo
 		IF STATUS <> 0 THEN

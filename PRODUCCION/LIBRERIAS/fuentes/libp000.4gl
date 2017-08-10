@@ -3853,8 +3853,8 @@ IF r.b10_compania IS NULL THEN
 	RETURN 0
 END IF
 LET fin_mes_current  = MDY(mes,1,ano) + 1 UNITS MONTH - 1 UNITS DAY
-IF ano = YEAR(TODAY) AND mes = MONTH(TODAY) THEN
-	LET fin_mes_current = TODAY
+IF ano = YEAR(vg_fecha) AND mes = MONTH(vg_fecha) THEN
+	LET fin_mes_current = vg_fecha
 END IF
 LET fin_mes_anterior = MDY(mes,1,ano) - 1 UNITS DAY
 LET saldo_trn = 0
@@ -5063,7 +5063,7 @@ FOREACH q_acdo INTO rd.*
 	LET i = i + 1
 	LET pvencer = rd.z20_saldo_cap + rd.z20_saldo_int
 	LET vencido = 0
-	IF rd.z20_fecha_vcto - TODAY < 0 THEN
+	IF rd.z20_fecha_vcto - vg_fecha < 0 THEN
 		LET vencido = rd.z20_saldo_cap + rd.z20_saldo_int
 		LET pvencer = 0
 	END IF
@@ -5184,7 +5184,7 @@ FOREACH q_docp INTO rd.*
 	LET i = i + 1
 	LET pvencer = rd.p20_saldo_cap + rd.p20_saldo_int
 	LET vencido = 0
-	IF rd.p20_fecha_vcto - TODAY < 0 THEN
+	IF rd.p20_fecha_vcto - vg_fecha < 0 THEN
 		LET vencido = rd.p20_saldo_cap + rd.p20_saldo_int
 		LET pvencer = 0
 	END IF
@@ -5306,7 +5306,7 @@ END IF
 LET r_caju.z22_areaneg 	   = areaneg
 LET r_caju.z22_referencia  = 'DEV. FACT.: ', cod_tran, ' ',
 				num_tran USING '<<<<<&'
-LET r_caju.z22_fecha_emi   = TODAY
+LET r_caju.z22_fecha_emi   = vg_fecha
 LET r_caju.z22_moneda 	   = moneda
 LET r_caju.z22_paridad 	   = 1
 IF r_caju.z22_moneda <> rg_gen.g00_moneda_base THEN
@@ -6246,7 +6246,7 @@ DEFINE cod_cia          LIKE rept000.r00_compania
 DEFINE r_rep            RECORD LIKE rept000.*
 
 CALL fl_lee_compania_repuestos(cod_cia) RETURNING r_rep.*
-IF MONTH(TODAY) <> r_rep.r00_mespro THEN
+IF MONTH(vg_fecha) <> r_rep.r00_mespro THEN
 	CALL fl_mostrar_mensaje( 'Mes de proceso incorrecto. Debe ejecutar cierre mensual de Inventarios', 'stop')
 	RETURN 1
 END IF
@@ -6261,7 +6261,7 @@ DEFINE cod_cia          LIKE cxct000.z00_compania
 DEFINE r_z00            RECORD LIKE cxct000.*
 
 CALL fl_lee_compania_cobranzas(cod_cia) RETURNING r_z00.*
-IF MONTH(TODAY) <> r_z00.z00_mespro THEN
+IF MONTH(vg_fecha) <> r_z00.z00_mespro THEN
 	CALL fl_mostrar_mensaje( 'Mes de proceso incorrecto. Debe ejecutar cierre mensual de Cobranzas', 'stop')
 	RETURN 1
 END IF
@@ -6276,7 +6276,7 @@ DEFINE cod_cia          LIKE cxpt000.p00_compania
 DEFINE r_p00            RECORD LIKE cxpt000.*
 
 CALL fl_lee_compania_tesoreria(cod_cia) RETURNING r_p00.*
-IF MONTH(TODAY) <> r_p00.p00_mespro THEN
+IF MONTH(vg_fecha) <> r_p00.p00_mespro THEN
 	CALL fl_mostrar_mensaje( 'Mes de proceso incorrecto. Debe ejecutar cierre mensual de Tesorería', 'stop')
 	RETURN 1
 END IF
@@ -6291,7 +6291,7 @@ DEFINE cod_cia          LIKE veht000.v00_compania
 DEFINE r_v00            RECORD LIKE veht000.*
 
 CALL fl_lee_compania_vehiculos(cod_cia) RETURNING r_v00.*
-IF MONTH(TODAY) <> r_v00.v00_mespro THEN
+IF MONTH(vg_fecha) <> r_v00.v00_mespro THEN
 	CALL fl_mostrar_mensaje( 'Mes de proceso incorrecto. Debe ejecutar cierre mensual de Vehículos', 'stop')
 	RETURN 1
 END IF
@@ -6306,7 +6306,7 @@ DEFINE cod_cia          LIKE rolt001.n01_compania
 DEFINE r_n01            RECORD LIKE rolt001.*
 
 CALL fl_lee_compania_roles(cod_cia) RETURNING r_n01.*
-IF MONTH(TODAY) <> r_n01.n01_mes_proceso THEN
+IF MONTH(vg_fecha) <> r_n01.n01_mes_proceso THEN
 	CALL fl_mostrar_mensaje( 'Mes de proceso incorrecto. Debe ejecutar cierre mensual de Nomina.', 'stop')
 	RETURN 1
 END IF
@@ -6321,7 +6321,7 @@ DEFINE cod_cia		LIKE talt000.t00_compania
 DEFINE r_t00		RECORD LIKE talt000.*
 
 CALL fl_lee_configuracion_taller(cod_cia) RETURNING r_t00.*
-IF MONTH(TODAY) <> r_t00.t00_mespro THEN
+IF MONTH(vg_fecha) <> r_t00.t00_mespro THEN
 	CALL fl_mostrar_mensaje( 'Mes de proceso incorrecto. Debe ejecutar cierre mensual de Taller.', 'stop')
 	RETURN 1
 END IF
@@ -6336,7 +6336,7 @@ DEFINE cod_cia		LIKE srit000.s00_compania
 DEFINE r_s00		RECORD LIKE srit000.*
 
 CALL fl_lee_configuracion_sri(cod_cia) RETURNING r_s00.*
-IF MONTH(TODAY) <> r_s00.s00_mes_proceso THEN
+IF MONTH(vg_fecha) <> r_s00.s00_mes_proceso THEN
 	CALL fl_mostrar_mensaje( 'Mes de proceso incorrecto. Debe ejecutar cierre mensual de SRI.', 'stop')
 	RETURN 1
 END IF
@@ -6381,7 +6381,7 @@ FOREACH cu_ces INTO cod_caja
 		WHERE j04_compania    = cod_cia  AND 
 	      	      j04_localidad   = cod_loc  AND 
 	      	      j04_codigo_caja = cod_caja AND
-	      	      j04_fecha_aper  = TODAY
+	      	      j04_fecha_aper  = vg_fecha
 		ORDER BY j04_fecing DESC
 	OPEN cu_chcj
 	FETCH cu_chcj INTO r_j04.*
@@ -7421,7 +7421,7 @@ INITIALIZE r_b12.* TO NULL
 LET r_b12.b12_compania    = r_datdoc.codcia
 LET r_b12.b12_tipo_comp   = 'DC'
 LET r_b12.b12_num_comp    = fl_numera_comprobante_contable(r_b12.b12_compania,
-				r_b12.b12_tipo_comp, YEAR(TODAY), MONTH(TODAY))
+				r_b12.b12_tipo_comp, YEAR(vg_fecha), MONTH(vg_fecha))
 IF r_b12.b12_num_comp = '0' OR r_b12.b12_num_comp = '-1' THEN
 	INITIALIZE r_b12.* TO NULL
 	LET int_flag = 1
@@ -7451,7 +7451,7 @@ LET r_b12.b12_num_cheque  = NULL
 LET r_b12.b12_origen      = 'A'
 LET r_b12.b12_moneda      = r_datdoc.moneda
 LET r_b12.b12_paridad     = r_datdoc.paridad
-LET r_b12.b12_fec_proceso = TODAY
+LET r_b12.b12_fec_proceso = vg_fecha
 LET r_b12.b12_fec_reversa = NULL
 LET r_b12.b12_tip_reversa = NULL
 LET r_b12.b12_num_reversa = NULL
@@ -7482,7 +7482,7 @@ FOR l = 1 TO num
 	END IF
 	LET r_b13.b13_num_concil  = NULL
 	LET r_b13.b13_filtro      = NULL
-	LET r_b13.b13_fec_proceso = TODAY
+	LET r_b13.b13_fec_proceso = vg_fecha
 	IF r_datdoc.flag_mod = 1 THEN
 		LET r_b13.b13_codcli  = r_datdoc.cliprov
 		LET r_b13.b13_codprov = NULL
@@ -7775,7 +7775,7 @@ IF STATUS = NOTFOUND THEN
 	CALL fl_mostrar_mensaje(mensaje, icono)
 	RETURN
 END IF
-LET dias = r_g37.g37_fecha_exp - TODAY
+LET dias = r_g37.g37_fecha_exp - vg_fecha
 IF dias <= 30 THEN
 	CASE tipo_doc
 		WHEN 'FA'
@@ -8546,8 +8546,8 @@ DISPLAY FORM f_ayuf307
 INITIALIZE r_r95.*, r_r96.*, r_r97.* TO NULL
 LET r_r95.r95_motivo        = 'V'
 LET r_r95.r95_entre_local   = 'N'
-LET r_r95.r95_fecha_initras = TODAY
-LET r_r95.r95_fecha_emi     = TODAY
+LET r_r95.r95_fecha_initras = vg_fecha
+LET r_r95.r95_fecha_emi     = vg_fecha
 LET r_r95.r95_usuario       = vg_usuario
 LET r_r95.r95_fecing        = fl_current()
 IF cod_tran = 'TR' THEN
@@ -8756,7 +8756,7 @@ INPUT BY NAME r_r95.r95_fecha_initras, r_r95.r95_num_sri,
 			LET r_r95.r95_fecha_initras = fecha_ini
 			DISPLAY BY NAME r_r95.r95_fecha_initras
 		END IF
-		IF r_r95.r95_fecha_initras < TODAY THEN
+		IF r_r95.r95_fecha_initras < vg_fecha THEN
 			CALL fl_mostrar_mensaje('La fecha de iniciación del traslado no puede ser menor a la fecha de hoy.', 'exclamation')
 			--NEXT FIELD r95_fecha_initras
 		END IF
@@ -8807,7 +8807,7 @@ INPUT BY NAME r_r95.r95_fecha_initras, r_r95.r95_num_sri,
 		END IF
 	AFTER FIELD r95_fecha_fintras
 		IF r_r95.r95_fecha_fintras IS NOT NULL THEN
-			IF r_r95.r95_fecha_fintras < TODAY THEN
+			IF r_r95.r95_fecha_fintras < vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha de terminación del traslado no puede ser menor a la fecha de hoy.', 'exclamation')
 				--NEXT FIELD r95_fecha_fintras
 			END IF
@@ -8835,7 +8835,7 @@ INPUT BY NAME r_r95.r95_fecha_initras, r_r95.r95_num_sri,
 			LET r_r95.r95_fecha_emi = fecha_emi
 			DISPLAY BY NAME r_r95.r95_fecha_emi
 		END IF
-		IF r_r95.r95_fecha_emi < TODAY THEN
+		IF r_r95.r95_fecha_emi < vg_fecha THEN
 			CALL fl_mostrar_mensaje('La fecha de emisión no puede ser menor a la fecha de hoy.', 'exclamation')
 			--NEXT FIELD r95_fecha_emi
 		END IF

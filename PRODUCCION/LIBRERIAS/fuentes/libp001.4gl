@@ -20565,8 +20565,8 @@ LET query = 'SELECT n32_cod_liqrol, n32_fecha_ini, n32_fecha_fin, ',
 				'   AND n36_cod_trab   = ', cod_trab, '),',
 				' DATE((SELECT MDY(n03_mes_ini, n03_dia_ini,',
 					' CASE WHEN "', proc, '" <> "DC" ',
-						'THEN YEAR(TODAY) - 1 ',
-						'ELSE YEAR(TODAY) ',
+						'THEN YEAR("', vg_fecha, '") - 1 ',
+						'ELSE YEAR("', vg_fecha, '") ',
 					' END) ',
 					' FROM rolt003 ',
 					' WHERE n03_proceso = "', proc, '")))',
@@ -20747,8 +20747,7 @@ FOREACH q_liqgan INTO rh_liqgan[num_row].*
 					END IF
 				ELSE
 					IF proc = 'VP' AND
-					   rh_liqgan[num_row].n32_fecha_fin >
-					   TODAY
+					   rh_liqgan[num_row].n32_fecha_fin > vg_fecha
 					THEN
 						CONTINUE FOREACH
 					END IF
@@ -20803,7 +20802,7 @@ FOREACH q_liqgan INTO rh_liqgan[num_row].*
 	     rh_liqgan[num_row].n32_fecha_ini >= fecha_aux) OR an_a > 1
 	THEN
 		IF r_n39.n39_dias_adi IS NOT NULL THEN
-			IF rh_liqgan[num_row].n32_fecha_fin <= TODAY THEN
+			IF rh_liqgan[num_row].n32_fecha_fin <= vg_fecha THEN
 				LET dias_adi = r_n39.n39_dias_adi
 			END IF
 		ELSE

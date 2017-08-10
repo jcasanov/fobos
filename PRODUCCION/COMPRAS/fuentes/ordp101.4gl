@@ -1025,6 +1025,9 @@ END FUNCTION
 
 FUNCTION grabar_sustento()
 DEFINE i		SMALLINT
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
+LET fecha_actual = fl_current()
 
 DELETE FROM srit023
 	WHERE s23_compania   = vg_codcia
@@ -1034,7 +1037,7 @@ FOR i = 1 TO vm_num_det
 		VALUES(vg_codcia, rm_c01.c01_tipo_orden,
 			rm_sust[i].s23_sustento_sri, rm_sust[i].s23_secuencia,
 			rm_sust[i].s23_aux_cont, rm_sust[i].s23_tributa,
-			vg_usuario, fl_current())
+			vg_usuario, fecha_actual)
 END FOR
 
 END FUNCTION

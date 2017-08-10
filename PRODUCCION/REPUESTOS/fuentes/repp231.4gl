@@ -926,6 +926,8 @@ DEFINE num_entrega	LIKE rept036.r36_num_entrega
 DEFINE item		LIKE rept037.r37_item
 DEFINE cant_ent		LIKE rept037.r37_cant_ent
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 CALL retorna_num_ent(rm_r34.r34_bodega) RETURNING num_entrega
 IF num_args() = 7 THEN
 	CALL retorna_entregar_en_refacturacion(vm_bodega_real,
@@ -933,11 +935,12 @@ IF num_args() = 7 THEN
 		RETURNING rm_r34.r34_entregar_en
 END IF
 LET vm_num_ent = NULL
+LET fecha_actual = fl_current()
 INSERT INTO rept036
 	VALUES (rm_r34.r34_compania, rm_r34.r34_localidad, rm_r34.r34_bodega,
 		num_entrega, rm_r34.r34_num_ord_des, 'A',rm_r34.r34_fec_entrega,
 		rm_r34.r34_entregar_a, rm_r34.r34_entregar_en, vm_bodega_real,
-		vg_usuario, fl_current())
+		vg_usuario, fecha_actual)
 LET vm_num_ent = num_entrega
 IF num_args() <> 7 THEN
 	FOR i = 1 TO vm_num_repd
