@@ -3128,6 +3128,7 @@ DEFINE expr_up		VARCHAR(200)
 DEFINE num_format	CHAR(8)
 DEFINE ano_char		CHAR(4)
 DEFINE existe		SMALLINT
+DEFINE fecha		DATETIME YEAR TO SECOND
 
 DEFINE fecha_actual DATETIME YEAR TO SECOND
 
@@ -3561,6 +3562,7 @@ DEFINE num_act		INTEGER
 DEFINE tot_db		DECIMAL(15,2)
 DEFINE tot_cr		DECIMAL(15,2)
 DEFINE num_row		INTEGER
+DEFINE fecha		DATETIME YEAR TO SECOND
 
 DEFINE fecha_actual DATETIME YEAR TO SECOND
 
@@ -10114,15 +10116,16 @@ END FUNCTION
 
 
 FUNCTION fl_current()
-DEFINE fechatexto   VARCHAR(25)
-DEFINE fechahora    VARCHAR(25)
+DEFINE fechatexto		VARCHAR(25)
+DEFINE fechahora		VARCHAR(25)
+DEFINE fec_cur			DATETIME YEAR TO SECOND
 
 LET fechatexto = CURRENT, ''
-LET fechahora = YEAR(vg_fecha)  USING '&&&&', '-',
-                MONTH(vg_fecha) USING '&&', '-',
-                DAY(vg_fecha)   USING '&&', ' ',
-                fechatexto[12,19]
-
-RETURN fechahora
+LET fechahora  = YEAR(vg_fecha)  USING '&&&&', '-',
+				 MONTH(vg_fecha) USING '&&', '-',
+				 DAY(vg_fecha)   USING '&&', ' ',
+				 fechatexto[12,19]
+LET fec_cur    = fechahora
+RETURN fec_cur
 
 END FUNCTION
