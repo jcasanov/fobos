@@ -1696,22 +1696,30 @@ END FUNCTION
 
 FUNCTION control_cabecera()
 DEFINE r_r21		RECORD LIKE rept021.*
+DEFINE numprof		LIKE rept021.r21_numprof
 
-WHILE TRUE
-	SQL
-		SELECT NVL(MAX(r21_numprof), 0) + 1
-			INTO $rm_r21.r21_numprof
-			FROM rept021
-			WHERE r21_compania  = $vg_codcia
-			  AND r21_localidad = $vg_codloc
-	END SQL
-	CALL fl_lee_proforma_rep(vg_codcia, vg_codloc, rm_r21.r21_numprof)
-		RETURNING r_r21.*
-	IF r_r21.r21_compania IS NULL THEN   
-		EXIT WHILE
+{*
+ * Primero leemos la tabla de secuencias, si obtenemos un valor no nulo y 
+ * mayor a cero usamos ese valor para insertar; caso contrario recurrimos 
+ * al viejo y efectivo método de buscar el último registro y sumarle uno
+ *}
+LET numprof = fl_actualiza_control_secuencias(vg_codcia, vg_codloc, vg_modulo,
+											  'AA', 'PF')
+IF numprof IS NULL OR numprof <= 0 THEN
+	SELECT MAX(r21_numprof) + 1
+	  INTO numprof
+	  FROM rept021
+	 WHERE r21_compania  = vg_codcia
+	   AND r21_localidad = vg_codloc
+
+	-- Si el resultado es nulo, es el primer registro
+	IF numprof IS NULL THEN   
+		LET numprof = 1
 	END IF
-END WHILE
-LET rm_r21.r21_fecing = fl_current()  
+END IF
+
+LET rm_r21.r21_numprof = numprof
+LET rm_r21.r21_fecing  = fl_current()  
 INSERT INTO rept021 VALUES (rm_r21.*) 
 IF num_args() = 6 THEN
 	RETURN 1
@@ -1944,6 +1952,7 @@ DEFINE flag_bloqueo	SMALLINT
 DEFINE cuantos		INTEGER
 DEFINE numprof		VARCHAR(15)
 DEFINE param		VARCHAR(100)
+DEFINE numprev		LIKE rept023.r23_numprev
 
 IF rm_r21.r21_num_ot IS NOT NULL OR rm_r21.r21_num_presup IS NOT NULL THEN
 	CALL fl_mostrar_mensaje('Esta proforma es de talleres.','exclamation')             	
@@ -2044,8 +2053,7 @@ IF num_args() = 6 THEN
 	LET rm_r23.r23_usuario = rm_r21.r21_usuario
 END IF
 LET rm_r23.r23_fecing      = fl_current()
-LET numprof		   = rm_r21.r21_numprof
-LET rm_r23.r23_referencia  = 'PREVTA. GENERADA DE PROF. # ', numprof CLIPPED
+LET rm_r23.r23_referencia  = 'PREVTA. GENERADA DE PROF. # ', rm_r23.r23_numprof CLIPPED
 CALL fl_lee_moneda(rm_r23.r23_moneda) RETURNING rm_g13.*
 LET rm_r23.r23_precision = rm_g13.g13_decimales
 IF rm_r23.r23_moneda = rg_gen.g00_moneda_base THEN 
@@ -2088,13 +2096,28 @@ FOR i = 1 TO preventas
 	IF salir THEN
 		EXIT FOR
 	END IF
-	SELECT MAX(r23_numprev) + 1 INTO rm_r23.r23_numprev 
-       		FROM  rept023
-        	WHERE r23_compania  = vg_codcia 
-        	AND   r23_localidad = vg_codloc
-	IF rm_r23.r23_numprev IS NULL THEN
-       	 	LET rm_r23.r23_numprev = 1
+
+	{*
+	 * Primero leemos la tabla de secuencias, si obtenemos un valor no nulo y 
+	 * mayor a cero usamos ese valor para insertar; caso contrario recurrimos 
+	 * al viejo y efectivo método de buscar el último registro y sumarle uno
+	 *}
+	LET numprev = fl_actualiza_control_secuencias(vg_codcia, vg_codloc,
+												  vg_modulo, 'AA', 'PV')
+	IF numprev IS NULL OR numprev <= 0 THEN
+		SELECT MAX(r23_numprev) + 1
+		  INTO numprev
+		  FROM rept023
+		 WHERE r23_compania  = vg_codcia
+		   AND r23_localidad = vg_codloc
+
+		-- Si el resultado es nulo, es el primer registro
+		IF numprev IS NULL THEN
+			LET numprev = 1
+		END IF
 	END IF
+
+	LET rm_r23.r23_numprev = numprev
 	FOR k = 1 TO vm_num_detalles
 		IF rm_r00.r00_fact_sin_stock = 'S' THEN
 			CONTINUE FOR
