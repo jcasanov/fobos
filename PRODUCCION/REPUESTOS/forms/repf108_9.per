@@ -1,0 +1,57 @@
+DATABASE aceros
+SCREEN
+{
+
+      Código Item: [f001   ]                          Estado: [a][aa         ]
+           Nombre: [f002                                                     ]
+
+            Clase: [f057    ] [F058                                          ]
+            Marca: [f59   ]   [f060                                ]
+
+             Tipo: [f003] [a2           ]       Unidad Medida: [f005   ] [a3 ]
+           Modelo: [f009                ]     Filtro Busqueda: [c050      ]
+
+       Precio FOB: [f011          ]           Código Utilidad: [f078 ]
+
+        Proveedor: [f061  ] [f062                                            ]
+           P.V.P.: [f012          ]                    Costo: [f014          ]
+
+    Código Pedido: [f065                ]
+ Código Comercial: [f067                               ]
+                   [f067                               ]
+
+}
+TABLES
+rept010
+ATTRIBUTES
+f001 = FORMONLY.r10_codigo, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f002 = rept010.r10_nombre, REVERSE, AUTONEXT, SCROLL;
+a    = rept010.r10_estado, REVERSE, NOENTRY, UPSHIFT;
+aa   = FORMONLY.tit_estado TYPE VARCHAR, NOENTRY;
+f003 = rept010.r10_tipo, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+a2   = FORMONLY.nom_tipo TYPE VARCHAR, AUTONEXT, NOENTRY, REVERSE;
+f005 = rept010.r10_uni_med, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+a3   = FORMONLY.nom_uni TYPE VARCHAR, NOENTRY, REVERSE;
+f009 = rept010.r10_modelo, AUTONEXT, REVERSE, UPSHIFT;
+f011 = rept010.r10_fob, AUTONEXT, REVERSE, FORMAT = '#,###,##&.###';
+f012 = rept010.r10_precio_mb, REVERSE, FORMAT = '###,###,##&.##',
+	INCLUDE = (0.00 TO 999999.99);
+f014 = rept010.r10_costo_mb, AUTONEXT, REVERSE, FORMAT = '###,###,##&.##';
+c050 = rept010.r10_filtro, AUTONEXT, UPSHIFT;
+f057 = rept010.r10_cod_clase, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f058 = FORMONLY.tit_clase, NOENTRY, UPSHIFT, REVERSE;
+f59  = rept010.r10_marca, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f060 = FORMONLY.tit_marca, NOENTRY, UPSHIFT, REVERSE;
+f061 = rept010.r10_proveedor, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+f062 = FORMONLY.nom_prov TYPE VARCHAR, NOENTRY;
+f065 = rept010.r10_cod_pedido, UPSHIFT, AUTONEXT;
+f067 = rept010.r10_cod_comerc, UPSHIFT, AUTONEXT, WORDWRAP COMPRESS;
+f078 = rept010.r10_cod_util, AUTONEXT, UPSHIFT, REVERSE,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+END

@@ -649,7 +649,6 @@ END FUNCTION
 
 FUNCTION control_ingreso()
 DEFINE cod_item		INTEGER
-DEFINE query		VARCHAR(250)
 DEFINE r_g13		RECORD LIKE gent013.*
 
 CLEAR FORM
@@ -689,14 +688,7 @@ IF NOT int_flag THEN
 	BEGIN WORK
 		--CALL cambio_modificacion()
 		IF vg_codloc < 3 THEN
-			LET query = 'SELECT ROUND(NVL(MAX(r10_codigo), 0) + 1, 0) nue_ite ',
-							' FROM rept010 ',
-							' WHERE r10_compania = ', rm_item.r10_compania,
-							' INTO TEMP t1 '
-			PREPARE exec_t1 FROM query
-			EXECUTE exec_t1
-			SELECT * INTO cod_item FROM t1
-			DROP TABLE t1
+			CALL retorna_sec_cod_item() RETURNING cod_item
 		ELSE
 			SELECT MAX(r10_codigo) INTO cod_item
 			FROM rept010
@@ -2858,50 +2850,282 @@ END FUNCTION
 
 
 FUNCTION control_clonacion_item()
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 DEFINE cod_item		INTEGER
-DEFINE resp		CHAR(6)
+DEFINE resp			CHAR(6)
+DEFINE r_c04		RECORD LIKE ordt004.*
+DEFINE r_p01		RECORD LIKE cxpt001.*
+DEFINE r_r05		RECORD LIKE rept005.*
+DEFINE r_r06		RECORD LIKE rept006.*
+DEFINE r_r10		RECORD LIKE rept010.*
+DEFINE r_r72		RECORD LIKE rept072.*
+DEFINE r_r73		RECORD LIKE rept073.*
+DEFINE r_r77		RECORD LIKE rept077.*
+DEFINE costo_mb		LIKE rept010.r10_costo_mb
 
-CALL fl_hacer_pregunta('Esta seguro de Clonar éste Item ?', 'No') RETURNING resp
 LET int_flag = 0
+CALL fl_hacer_pregunta('Esta seguro de Clonar éste Item ?', 'No') RETURNING resp
 IF resp <> 'Yes' THEN
 	RETURN
 END IF
+LET lin_menu = 0
+LET row_ini  = 5
+LET num_rows = 20
+LET num_cols = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW w_repf108_9 AT row_ini, 02 WITH num_rows ROWS, num_cols COLUMNS
+	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE lin_menu,
+		  MESSAGE LINE LAST, BORDER) 
+IF vg_gui = 1 THEN
+	OPEN FORM f_repf108_9 FROM '../forms/repf108_9'
+ELSE
+	OPEN FORM f_repf108_9 FROM '../forms/repf108_9c'
+END IF
+DISPLAY FORM f_repf108_9
 CLEAR FORM
+IF rm_item.r10_proveedor IS NOT NULL THEN
+	INITIALIZE r_c04.* TO NULL
+	DECLARE q_cost_prov CURSOR FOR
+		SELECT * FROM ordt004
+			WHERE c04_compania  = vg_codcia
+			  AND c04_localidad = vg_codloc
+			  AND c04_codprov   = rm_item.r10_proveedor
+			  AND c04_cod_item  = rm_item.r10_codigo
+			ORDER BY c04_fecha_vigen DESC
+	OPEN q_cost_prov
+	FETCH q_cost_prov INTO r_c04.*
+	CLOSE q_cost_prov
+	FREE q_cost_prov
+	LET rm_item.r10_precio_mb = r_c04.c04_pvp_prov_sug
+	LET rm_item.r10_costo_mb  = r_c04.c04_costo_prov
+END IF
+LET rm_item.r10_codigo = NULL
+LET rm_item.r10_estado = 'A'
+CALL muestra_estado()
+DISPLAY BY NAME rm_item.r10_estado, rm_item.r10_nombre, rm_item.r10_cod_clase,
+				rm_item.r10_marca, rm_item.r10_tipo, rm_item.r10_uni_med,
+				rm_item.r10_modelo, rm_item.r10_filtro, rm_item.r10_fob,
+				rm_item.r10_cod_util, rm_item.r10_proveedor,
+				rm_item.r10_precio_mb, rm_item.r10_costo_mb,
+				rm_item.r10_cod_pedido, rm_item.r10_cod_comerc
+DISPLAY rm_clase.r72_desc_clase TO tit_clase
+DISPLAY rm_marca.r73_desc_marca TO tit_marca
+DISPLAY rm_titem.r06_nombre     TO nom_tipo
+DISPLAY rm_uni.r05_siglas       TO nom_uni
+DISPLAY rm_prov.p01_nomprov     TO nom_prov
+LET int_flag = 0
+INPUT BY NAME rm_item.r10_codigo, rm_item.r10_nombre, rm_item.r10_cod_clase,
+			  rm_item.r10_marca, rm_item.r10_tipo, rm_item.r10_uni_med,
+			  rm_item.r10_modelo, rm_item.r10_filtro, rm_item.r10_fob,
+			  rm_item.r10_cod_util, rm_item.r10_proveedor,rm_item.r10_precio_mb,
+			  rm_item.r10_costo_mb,rm_item.r10_cod_pedido,rm_item.r10_cod_comerc
+	WITHOUT DEFAULTS
+	ON KEY(INTERRUPT)
+		IF NOT FIELD_TOUCHED(rm_item.r10_codigo, rm_item.r10_nombre,
+							 rm_item.r10_cod_clase, rm_item.r10_marca,
+							 rm_item.r10_tipo, rm_item.r10_uni_med,
+							 rm_item.r10_modelo, rm_item.r10_filtro,
+							 rm_item.r10_fob, rm_item.r10_cod_util,
+							 rm_item.r10_proveedor, rm_item.r10_precio_mb,
+							 rm_item.r10_costo_mb, rm_item.r10_cod_pedido,
+							 rm_item.r10_cod_comerc)
+		THEN
+			LET int_flag = 1
+			EXIT INPUT
+		END IF
+		LET int_flag = 0
+		CALL fl_mensaje_abandonar_proceso() RETURNING resp
+		IF resp = 'Yes' THEN
+			LET int_flag = 1
+			EXIT INPUT
+		END IF
+	ON KEY(F2)
+		IF INFIELD(r10_cod_clase) THEN
+			CALL fl_ayuda_clase_ventas_rep(vg_codcia, rm_item.r10_linea,
+											rm_item.r10_sub_linea,
+											rm_item.r10_cod_grupo)
+				RETURNING r_r72.r72_cod_clase, r_r72.r72_desc_clase
+			IF r_r72.r72_cod_clase IS NOT NULL THEN
+				LET rm_item.r10_cod_clase = r_r72.r72_cod_clase
+				DISPLAY BY NAME rm_item.r10_cod_clase
+				DISPLAY r_r72.r72_desc_clase TO tit_clase
+			END IF
+		END IF
+		IF INFIELD(r10_marca) THEN
+			CALL fl_ayuda_marcas_rep_asignadas(vg_codcia, rm_item.r10_cod_clase)
+				RETURNING r_r73.r73_marca
+			IF r_r73.r73_marca IS NOT NULL THEN
+				LET rm_item.r10_marca = r_r73.r73_marca
+				CALL fl_lee_marca_rep(vg_codcia, rm_item.r10_marca)
+					RETURNING r_r73.*
+				DISPLAY BY NAME rm_item.r10_marca
+				DISPLAY r_r73.r73_desc_marca TO tit_marca
+			END IF
+		END IF
+		IF INFIELD(r10_tipo) THEN
+			CALL fl_ayuda_tipo_item()
+				RETURNING r_r06.r06_codigo, r_r06.r06_nombre
+			IF r_r06.r06_codigo IS NOT NULL THEN
+				LET rm_item.r10_tipo = r_r06.r06_codigo
+				DISPLAY BY NAME rm_item.r10_tipo
+				DISPLAY r_r06.r06_nombre TO nom_tipo
+			END IF
+		END IF
+		IF INFIELD(r10_uni_med) THEN
+			CALL fl_ayuda_unidad_medida()
+				RETURNING r_r05.r05_codigo, r_r05.r05_siglas
+			IF r_r05.r05_codigo IS NOT NULL THEN
+				LET rm_item.r10_uni_med = r_r05.r05_codigo
+				DISPLAY BY NAME rm_item.r10_uni_med
+				DISPLAY r_r05.r05_siglas TO nom_uni
+			END IF
+		END IF
+		IF INFIELD(r10_cod_util) THEN
+			CALL fl_ayuda_factor_utilidad_rep(vg_codcia)
+				RETURNING r_r77.r77_codigo_util
+				IF r_r77.r77_codigo_util IS NOT NULL THEN
+					LET rm_item.r10_cod_util = r_r77.r77_codigo_util
+					DISPLAY BY NAME rm_item.r10_cod_util
+				END IF
+		END IF
+		IF INFIELD(r10_proveedor) THEN
+			CALL fl_ayuda_proveedores()
+				RETURNING r_p01.p01_codprov, r_p01.p01_nomprov
+			IF r_p01.p01_codprov IS NOT NULL THEN
+				LET rm_item.r10_proveedor = r_p01.p01_codprov
+				DISPLAY BY NAME rm_item.r10_proveedor
+				DISPLAY r_p01.p01_nomprov TO nom_prov
+			END IF
+		END IF
+		LET int_flag = 0
+	BEFORE FIELD r10_costo_mb
+		LET costo_mb = rm_item.r10_costo_mb
+	AFTER FIELD r10_codigo
+		IF rm_item.r10_codigo IS NOT NULL THEN
+			CALL fl_lee_item(vg_codcia, rm_item.r10_codigo) RETURNING r_r10.*
+			IF r_r10.r10_codigo IS NOT NULL THEN
+				CALL fl_mostrar_mensaje('Ya existe el Item en la Compañía.','exclamation')
+				NEXT FIELD r10_codigo
+			END IF
+		END IF
+	AFTER FIELD r10_cod_clase
+		IF rm_item.r10_cod_clase IS NOT NULL THEN
+			CALL fl_lee_clase_rep(vg_codcia, rm_item.r10_linea,
+								rm_item.r10_sub_linea, rm_item.r10_cod_grupo,
+								rm_item.r10_cod_clase)
+				RETURNING r_r72.*
+			IF r_r72.r72_cod_clase IS NULL THEN
+				CALL fl_mostrar_mensaje('La Clase no existe en la compañía.','exclamation')
+				NEXT FIELD r10_cod_clase
+			END IF
+			IF rm_grupo.r71_cod_grupo IS NOT NULL THEN
+				IF rm_grupo.r71_cod_grupo <> r_r72.r72_cod_grupo THEN
+					CALL mensaje_error_clase()
+				END IF
+			END IF
+			DISPLAY r_r72.r72_desc_clase TO tit_clase
+		ELSE
+			CLEAR tit_clase
+		END IF
+	AFTER FIELD r10_marca
+		IF rm_item.r10_marca IS NOT NULL THEN
+			CALL fl_lee_marca_rep(vg_codcia, rm_item.r10_marca)
+				RETURNING r_r73.*
+			IF r_r73.r73_marca IS NULL THEN
+				CALL fl_mostrar_mensaje('La Marca no existe en la compañía.','exclamation')
+				NEXT FIELD r10_marca
+			END IF
+			DISPLAY r_r73.r73_desc_marca TO tit_marca
+		ELSE
+			CLEAR tit_marca
+		END IF
+	AFTER FIELD r10_tipo
+		IF rm_item.r10_tipo IS NOT NULL THEN
+			CALL fl_lee_tipo_item(rm_item.r10_tipo) RETURNING r_r06.*
+			IF r_r06.r06_codigo IS NULL THEN
+				CALL fl_mostrar_mensaje('El Tipo de Item no existe en la compañía.','exclamation')
+				NEXT FIELD r10_tipo
+			END IF
+			DISPLAY r_r06.r06_nombre TO nom_tipo
+		ELSE
+			CLEAR nom_tipo
+		END IF
+	AFTER FIELD r10_uni_med
+		IF rm_item.r10_uni_med IS NOT NULL THEN
+			CALL fl_lee_unidad_medida(rm_item.r10_uni_med) RETURNING r_r05.*
+			IF r_r05.r05_codigo IS NULL THEN
+				CALL fl_mostrar_mensaje('La Unidad de Medida no existe en la compañía.','exclamation')
+				NEXT FIELD r10_uni_med
+			END IF
+			DISPLAY r_r05.r05_siglas TO nom_uni
+		ELSE
+			CLEAR nom_uni
+		END IF
+	AFTER FIELD r10_proveedor
+		IF rm_item.r10_proveedor IS NOT NULL THEN
+			CALL fl_lee_proveedor(rm_item.r10_proveedor) RETURNING r_p01.*
+			IF r_p01.p01_codprov IS NULL THEN
+				CALL fl_mostrar_mensaje('No existe proveedor: ' || r_p01.p01_codprov,'exclamation')
+				NEXT FIELD r10_proveedor
+			END IF
+			IF r_p01.p01_estado = 'B' THEN
+				CALL fl_mensaje_estado_bloqueado()
+				NEXT FIELD r10_proveedor
+			END IF
+			DISPLAY r_p01.p01_nomprov TO nom_prov
+		ELSE
+			CLEAR nom_prov
+		END IF
+	AFTER FIELD r10_precio_mb
+		IF rm_item.r10_precio_mb IS NOT NULL THEN
+			LET rm_item.r10_precio_mb =
+						fl_retorna_precision_valor(rg_gen.g00_moneda_base,
+													rm_item.r10_precio_mb)
+		END IF
+	AFTER FIELD r10_costo_mb
+		IF tiene_stock(costo_mb) THEN
+			LET rm_item.r10_costo_mb = costo_mb
+		END IF
+		DISPLAY BY NAME rm_item.r10_costo_mb
+	AFTER INPUT
+		IF rm_clase.r72_compania IS NULL THEN
+			CALL mensaje_error_clase()
+			NEXT FIELD r10_cod_clase
+		END IF
+		IF rm_item.r10_cod_util IS NOT NULL THEN
+			CALL fl_lee_factor_utilidad_rep(vg_codcia, rm_item.r10_cod_util)
+				RETURNING r_r77.*
+			IF r_r77.r77_codigo_util IS NULL THEN
+				CALL fl_mostrar_mensaje('El Factor de Utilidad no existe en esta Compañía.','exclamation')
+				NEXT FIELD r10_cod_util
+			END IF
+		END IF
+		IF rm_item.r10_precio_mb <= rm_item.r10_costo_mb THEN
+			CALL fl_mostrar_mensaje('El P. V. P debe ser mayor que el costo.', 'exclamation')
+			NEXT FIELD r10_precio_mb
+		END IF
+END INPUT
+IF int_flag THEN
+	LET int_flag = 0
+	CLOSE WINDOW w_repf108_9
+	RETURN
+END IF
 CALL fl_lee_compania_repuestos(vg_codcia) RETURNING rm_r00.*
 INITIALIZE rm_lin.*, rm_uni.*, rm_titem.*, rm_par.*, rm_rot.* TO NULL
 BEGIN WORK
-	IF vg_codloc < 3 THEN
-		SELECT MAX(r10_codigo) INTO cod_item
-		FROM rept010
-		WHERE r10_compania = rm_item.r10_compania
-		  AND r10_codigo < '90000'
-		  AND r10_codigo NOT IN('71176', '80002', '80004',
-			'80006', '80008', '80009', '80010', '80012',
-			'80014', '80018', '80020')
-		  AND LENGTH(r10_codigo) = 5
-	ELSE
-		{--
-		SELECT MAX(r10_codigo) INTO cod_item
-		FROM rept010
-		WHERE r10_compania = rm_item.r10_compania AND 
-		      LENGTH(r10_codigo) =
-		      (SELECT MAX(LENGTH(r10_codigo)) FROM rept010)
-		--}
-		SELECT MAX(r10_codigo) INTO cod_item
-			FROM rept010
-			WHERE r10_compania        = rm_item.r10_compania
-			  --AND r10_codigo[1, 1]    = '9'
-			  --AND LENGTH(r10_codigo) >= 5
-			  AND r10_codigo[1, 2]    = '10'
-			  AND LENGTH(r10_codigo) >= 6
+	IF rm_item.r10_codigo IS NULL THEN
+		CALL retorna_sec_cod_item() RETURNING rm_item.r10_codigo
 	END IF
-	LET cod_item                = cod_item + 1
-	LET rm_item.r10_codigo      = cod_item
-	LET rm_item.r10_estado      = 'B'
-	LET rm_item.r10_costo_mb    = 0			-- 10/FEB/2011
 	LET rm_item.r10_costult_mb  = 0
 	LET rm_item.r10_costult_ma  = 0
-	LET rm_item.r10_precio_mb   = 0
 	LET rm_item.r10_precio_ant  = 0
 	LET rm_item.r10_fec_camprec = NULL
 	LET rm_item.r10_usu_cosrepo = NULL
@@ -2911,34 +3135,31 @@ BEGIN WORK
 	LET rm_item.r10_usuario     = vg_usuario
 	LET rm_item.r10_fecing      = CURRENT
 	INSERT INTO rept010 VALUES(rm_item.*)
-        IF vm_num_rows = vm_max_rows THEN
-       	        LET vm_num_rows = 1
-        ELSE
-       	        LET vm_num_rows = vm_num_rows + 1
-        END IF
+	IF vm_num_rows = vm_max_rows THEN
+		LET vm_num_rows = 1
+	ELSE
+		LET vm_num_rows = vm_num_rows + 1
+	END IF
 	LET vm_r_rows[vm_num_rows] = SQLCA.SQLERRD[6] 
 	LET vm_row_current         = vm_num_rows
 	INSERT INTO rept011
 	      (r11_compania, r11_bodega, r11_item, r11_ubicacion,
 	       r11_stock_ant, r11_stock_act, r11_ing_dia, r11_egr_dia)
-	  VALUES(vg_codcia, rm_r00.r00_bodega_fact,rm_item.r10_codigo,
-	       'SN',0,0,0,0)
+	  VALUES(vg_codcia, rm_r00.r00_bodega_fact, rm_item.r10_codigo, 'SN', 0, 0,
+			 0, 0)
 COMMIT WORK
-IF vm_num_rows > 0 THEN
-	CALL lee_muestra_registro(vm_r_rows[vm_row_current])
-END IF
-CALL muestra_estado()
-CALL muestra_contadores(vm_row_current, vm_num_rows)
 LET vm_clonado = 'S'
 CALL fl_mostrar_mensaje('Item ha sido clonado exitosamente.', 'info')
-CALL fl_hacer_pregunta('Desea Modificar éste Item ?', 'No') RETURNING resp
+CLOSE WINDOW w_repf108_9
 LET int_flag = 0
+CALL fl_hacer_pregunta('Desea Modificar éste Item ?', 'No') RETURNING resp
 IF resp <> 'Yes' THEN
 	LET vm_clonado = 'N'
 	RETURN
 END IF
 CALL control_modificacion()
 LET vm_clonado = 'N'
+RETURN
 
 END FUNCTION
 
@@ -2983,6 +3204,7 @@ ELSE
 	OPEN FORM f_repf108_8 FROM '../forms/repf108_8c'
 END IF
 DISPLAY FORM f_repf108_8
+CLEAR FORM
 DISPLAY BY NAME rm_item.r10_codigo, rm_item.r10_nombre
 INITIALIZE r_r02.*, vm_stock_inicial TO NULL
 LET bodega    = NULL
@@ -3168,5 +3390,25 @@ IF bodega <> bod THEN
 	LET bod = bodega
 END IF
 RETURN bod
+
+END FUNCTION
+
+
+
+FUNCTION retorna_sec_cod_item()
+DEFINE cod_item		INTEGER
+
+INITIALIZE cod_item TO NULL
+
+SELECT MAX(r10_codigo) + 1 nue_ite 
+  INTO cod_item
+  FROM rept010 
+ WHERE r10_compania = rm_item.r10_compania,
+
+IF cod_item IS NULL THEN
+	LET cod_item = 1
+END IF
+
+RETURN cod_item
 
 END FUNCTION
