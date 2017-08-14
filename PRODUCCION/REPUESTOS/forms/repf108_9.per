@@ -16,7 +16,9 @@ SCREEN
         Proveedor: [f061  ] [f062                                            ]
            P.V.P.: [f012          ]                    Costo: [f014          ]
 
-    Código Pedido: [f065                ]
+        Incluir en la lista de precios del proveedor [b]
+
+    Código Pedido: [f065                ]   
  Código Comercial: [f067                               ]
                    [f067                               ]
 
@@ -54,4 +56,7 @@ f065 = rept010.r10_cod_pedido, UPSHIFT, AUTONEXT;
 f067 = rept010.r10_cod_comerc, UPSHIFT, AUTONEXT, WORDWRAP COMPRESS;
 f078 = rept010.r10_cod_util, AUTONEXT, UPSHIFT, REVERSE,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+
+b = formonly.act_lista_precios TYPE CHAR, INCLUDE=('S', 'N'),
+	WIDGET = 'CHECK', CONFIG = 'S N acknowedge';
 END
