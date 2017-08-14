@@ -3161,14 +3161,17 @@ BEGIN WORK
 	IF act_lista_precios = 'S' THEN
 		LET fecha_actual = fl_current()
 
-		INSERT INTO ordt004
-		SELECT c04_compania, c04_localidad, c04_codprov, rm_item.r10_codigo,
-			   vg_fecha, c04_pvp_prov_sug, c04_desc_prov, c04_costo_prov,
-               c04_fecha_fin, vg_usuario, fecha_actual
-		  FROM ordt004
-		 WHERE c04_compania  = vg_codcia
-		   AND c04_localidad = vg_codloc
-		   AND c04_cod_item  = codigo_anterior 
+		SQL
+			INSERT INTO ordt004
+			SELECT c04_compania, c04_localidad, c04_codprov, $rm_item.r10_codigo,
+				   $vg_fecha, c04_pvp_prov_sug, c04_desc_prov, c04_costo_prov,
+        	       c04_fecha_fin, $vg_usuario, $fecha_actual
+			  FROM ordt004
+			 WHERE c04_compania  = $vg_codcia
+			   AND c04_localidad = $vg_codloc
+			   AND c04_cod_item  = $codigo_anterior 
+			   AND (c04_fecha_fin >= $vg_fecha OR c04_fecha_fin IS NULL)
+		END SQL
 	END IF
 COMMIT WORK
 LET vm_clonado = 'S'
