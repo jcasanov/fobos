@@ -2865,12 +2865,12 @@ DEFINE r_r72		RECORD LIKE rept072.*
 DEFINE r_r73		RECORD LIKE rept073.*
 DEFINE r_r77		RECORD LIKE rept077.*
 DEFINE costo_mb		LIKE rept010.r10_costo_mb
-
 -- Por si cambia el código del item
 DEFINE codigo_anterior	LIKE rept010.r10_codigo
 -- Variables de la forma
 DEFINE act_lista_precios CHAR(1)
 DEFINE fecha_actual DATETIME YEAR TO SECOND
+DEFINE query		CHAR(1500)
 
 LET int_flag = 0
 CALL fl_hacer_pregunta('Esta seguro de Clonar éste Item ?', 'No') RETURNING resp
@@ -2878,8 +2878,8 @@ IF resp <> 'Yes' THEN
 	RETURN
 END IF
 LET lin_menu = 0
-LET row_ini  = 5
-LET num_rows = 20
+LET row_ini  = 4
+LET num_rows = 21
 LET num_cols = 80
 IF vg_gui = 0 THEN
 	LET lin_menu = 1
@@ -2922,8 +2922,8 @@ DISPLAY BY NAME rm_item.r10_estado, rm_item.r10_nombre, rm_item.r10_cod_clase,
 				rm_item.r10_marca, rm_item.r10_tipo, rm_item.r10_uni_med,
 				rm_item.r10_modelo, rm_item.r10_filtro, rm_item.r10_fob,
 				rm_item.r10_cod_util, rm_item.r10_proveedor,
-				rm_item.r10_precio_mb, rm_item.r10_costo_mb,
-				rm_item.r10_cod_pedido, rm_item.r10_cod_comerc, act_lista_precios
+				rm_item.r10_precio_mb, rm_item.r10_costo_mb, act_lista_precios,
+				rm_item.r10_cod_pedido, rm_item.r10_cod_comerc
 DISPLAY rm_clase.r72_desc_clase TO tit_clase
 DISPLAY rm_marca.r73_desc_marca TO tit_marca
 DISPLAY rm_titem.r06_nombre     TO nom_tipo
@@ -2944,8 +2944,8 @@ INPUT BY NAME rm_item.r10_codigo, rm_item.r10_nombre, rm_item.r10_cod_clase,
 							 rm_item.r10_modelo, rm_item.r10_filtro,
 							 rm_item.r10_fob, rm_item.r10_cod_util,
 							 rm_item.r10_proveedor, rm_item.r10_precio_mb,
-							 rm_item.r10_costo_mb, rm_item.r10_cod_pedido,
-							 rm_item.r10_cod_comerc)
+							 rm_item.r10_costo_mb, act_lista_precios,
+							 rm_item.r10_cod_pedido, rm_item.r10_cod_comerc)
 		THEN
 			LET int_flag = 1
 			EXIT INPUT
@@ -3156,22 +3156,28 @@ BEGIN WORK
 	       r11_stock_ant, r11_stock_act, r11_ing_dia, r11_egr_dia)
 	  VALUES(vg_codcia, rm_r00.r00_bodega_fact, rm_item.r10_codigo, 'SN', 0, 0,
 			 0, 0)
-
 	-- Agregamos un registro a la lista de precios del proveedor 
 	IF act_lista_precios = 'S' THEN
 		LET fecha_actual = fl_current()
-
-		SQL
-			INSERT INTO ordt004
-			SELECT c04_compania, c04_localidad, c04_codprov, $rm_item.r10_codigo,
-				   $vg_fecha, c04_pvp_prov_sug, c04_desc_prov, c04_costo_prov,
-        	       c04_fecha_fin, $vg_usuario, $fecha_actual
-			  FROM ordt004
-			 WHERE c04_compania  = $vg_codcia
-			   AND c04_localidad = $vg_codloc
-			   AND c04_cod_item  = $codigo_anterior 
-			   AND (c04_fecha_fin >= $vg_fecha OR c04_fecha_fin IS NULL)
-		END SQL
+		LET query = 'INSERT INTO ordt004 ',
+						'(c04_compania, c04_localidad, c04_codprov,',
+						' c04_cod_item, c04_fecha_vigen, c04_pvp_prov_sug,',
+						' c04_desc_prov, c04_costo_prov, c04_fecha_fin,',
+						' c04_usuario, c04_fecing) ',
+						'SELECT c04_compania, c04_localidad, c04_codprov, ',
+							'"', rm_item.r10_codigo CLIPPED, '", ',
+							'"', vg_fecha, '", c04_pvp_prov_sug, ',
+							'c04_desc_prov, c04_costo_prov, c04_fecha_fin, ',
+							'"', vg_usuario CLIPPED, '", "', fecha_actual, '" ',
+			  			' FROM ordt004 ',
+						' WHERE c04_compania  = ', vg_codcia,
+						'   AND c04_localidad = ', vg_codloc,
+						'   AND c04_cod_item  = "', codigo_anterior CLIPPED,
+												'" ',
+						'   AND (c04_fecha_fin >= "', vg_fecha, '" ',
+						'    OR  c04_fecha_fin IS NULL) '
+		PREPARE ins_c04 FROM query
+		EXECUTE ins_c04
 	END IF
 COMMIT WORK
 LET vm_clonado = 'S'
