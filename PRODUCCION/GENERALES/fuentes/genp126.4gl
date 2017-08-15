@@ -199,7 +199,7 @@ OPTIONS INPUT WRAP
 CLEAR FORM
 INITIALIZE rm_dia.* TO NULL
 LET vm_flag_mant       = 'I'
-LET rm_dia.g36_fecing  = CURRENT
+LET rm_dia.g36_fecing  = fl_current()
 LET rm_dia.g36_usuario = vg_usuario
 DISPLAY BY NAME rm_dia.g36_fecing, rm_dia.g36_usuario
 CALL lee_datos()
@@ -258,7 +258,7 @@ FUNCTION lee_datos()
 DEFINE   	 resp    CHAR(6)
 DEFINE   	 codigo  LIKE gent036.g36_dia
 
-LET codigo = TODAY
+LET codigo = vg_fecha
 OPTIONS INPUT WRAP
 LET int_flag = 0
 INPUT BY NAME rm_dia.g36_dia, rm_dia.g36_referencia, rm_dia.g36_nue_dia

@@ -161,12 +161,12 @@ FOR indice = 1 TO fgl_scr_size('rm_impren')
         CLEAR rm_impren[indice].*
 END FOR
 LET rm_rol.n15_usuario = vg_usuario
-LET rm_rol.n15_fecing  = CURRENT
+LET rm_rol.n15_fecing  = fl_current()
 CALL leer_cabecera()
 IF NOT int_flag THEN
 	CALL leer_detalle() RETURNING num_elm
 	IF NOT int_flag THEN
-		LET rm_rol.n15_fecing   = CURRENT
+		LET rm_rol.n15_fecing   = fl_current()
 		LET rm_rol.n15_compania = vg_codcia
 		BEGIN WORK
 		FOR indice = 1 TO num_elm
@@ -350,7 +350,7 @@ INPUT BY NAME rm_rol.n15_ano
 				CALL fgl_winmessage(vg_producto,'Este año ya ha sido ingresado','exclamation')
 				NEXT FIELD n15_ano
 			END IF
-			IF rm_rol.n15_ano > YEAR(TODAY) THEN
+			IF rm_rol.n15_ano > YEAR(vg_fecha) THEN
 				CALL fgl_winmessage(vg_producto,'Este año no existe todavía','exclamation')
 				NEXT FIELD n15_ano
 			END IF

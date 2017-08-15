@@ -149,8 +149,8 @@ CLEAR FORM
 INITIALIZE rm_n90.* TO NULL
 LET vm_flag_mant            = 'I'
 LET rm_n90.n90_compania     = vg_codcia
-LET rm_n90.n90_dias_anio    = (MDY(12, 31, YEAR(TODAY)) -
-				MDY(01, 01, YEAR(TODAY))) + 1
+LET rm_n90.n90_dias_anio    = (MDY(12, 31, YEAR(vg_fecha)) -
+				MDY(01, 01, YEAR(vg_fecha))) + 1
 LET rm_n90.n90_tiem_max_vac = 3
 LET rm_n90.n90_dias_min_par = 0
 LET rm_n90.n90_gen_cont_vac = 'S'
@@ -158,7 +158,7 @@ LET rm_n90.n90_gen_cont_ant = 'S'
 LET rm_n90.n90_porc_int_ant = 0
 LET rm_n90.n90_mes_gra_ant  = 0
 LET rm_n90.n90_gen_cont_ut  = 'N'
-LET rm_n90.n90_fecing       = CURRENT
+LET rm_n90.n90_fecing       = fl_current()
 LET rm_n90.n90_usuario      = vg_usuario
 CALL fl_lee_compania(rm_n90.n90_compania) RETURNING r_g01.*
 DISPLAY BY NAME r_g01.g01_razonsocial, rm_n90.n90_fecing, rm_n90.n90_usuario

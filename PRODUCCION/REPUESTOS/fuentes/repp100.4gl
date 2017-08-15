@@ -237,8 +237,8 @@ LET rm_pcia.r00_tipo_margen = 'L'
 LET rm_pcia.r00_tipo_descto = 'L'
 LET rm_pcia.r00_tipo_fact   = 'U'
 LET rm_pcia.r00_contr_prof  = 'S'
-LET rm_pcia.r00_mespro      = MONTH(TODAY)
-LET rm_pcia.r00_anopro      = YEAR(TODAY)
+LET rm_pcia.r00_mespro      = MONTH(vg_fecha)
+LET rm_pcia.r00_anopro      = YEAR(vg_fecha)
 DISPLAY BY NAME rm_pcia.r00_estado
 DISPLAY 'ACTIVO' TO tit_estado
 CALL lee_datos()

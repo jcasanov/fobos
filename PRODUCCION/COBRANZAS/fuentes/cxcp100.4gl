@@ -145,8 +145,8 @@ LET rm_cxc.z00_credit_dias  = 0
 LET rm_cxc.z00_tasa_mora    = 0
 LET rm_cxc.z00_cobra_mora   = 'S'
 LET rm_cxc.z00_estado       = 'A'
-LET rm_cxc.z00_mespro       = MONTH(TODAY)
-LET rm_cxc.z00_anopro       = YEAR(TODAY)
+LET rm_cxc.z00_mespro       = MONTH(vg_fecha)
+LET rm_cxc.z00_anopro       = YEAR(vg_fecha)
 CALL muestra_estado()
 LET rm_z61.z61_num_pagos      = 1
 LET rm_z61.z61_max_pagos      = 300
@@ -163,7 +163,7 @@ IF NOT int_flag THEN
 		LET num_aux              = SQLCA.SQLERRD[6]
 		LET rm_z61.z61_compania  = rm_cxc.z00_compania
 		LET rm_z61.z61_localidad = vg_codloc
-		LET rm_z61.z61_fecing    = CURRENT
+		LET rm_z61.z61_fecing    = fl_current()
 		INSERT INTO cxct061 VALUES (rm_z61.*)
 	COMMIT WORK
 	LET vm_num_rows               = vm_num_rows + 1

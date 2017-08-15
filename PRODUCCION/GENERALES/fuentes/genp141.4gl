@@ -151,10 +151,10 @@ OPTIONS INPUT WRAP
 INITIALIZE rm_g39.* TO NULL
 LET rm_g39.g39_compania     = vg_codcia
 LET rm_g39.g39_localidad    = vg_codloc
-LET rm_g39.g39_fec_entrega  = TODAY
+LET rm_g39.g39_fec_entrega  = vg_fecha
 LET rm_g39.g39_num_dias_col = 20
 LET rm_g39.g39_usuario      = vg_usuario
-LET rm_g39.g39_fecing       = CURRENT
+LET rm_g39.g39_fecing       = fl_current()
 DISPLAY BY NAME rm_g39.g39_fec_entrega, rm_g39.g39_num_dias_col,
 		rm_g39.g39_fecing, rm_g39.g39_usuario
 CALL leer_parametros('I')
@@ -169,7 +169,7 @@ IF NOT int_flag THEN
 				  AND g39_tipo_doc  = $rm_g39.g39_tipo_doc
 		END SQL
 	END IF
-	LET rm_g39.g39_fecing = CURRENT
+	LET rm_g39.g39_fecing = fl_current()
        	INSERT INTO gent039 VALUES (rm_g39.*)
 	IF vm_num_rows = vm_max_rows THEN
                 LET vm_num_rows = 1
@@ -415,7 +415,7 @@ INPUT BY NAME rm_g39.g39_tipo_doc, rm_g39.g39_fec_entrega,
 			CALL mostar_nombres_eti()
 			CONTINUE INPUT
 		END IF
-		IF rm_g39.g39_fec_entrega > TODAY THEN
+		IF rm_g39.g39_fec_entrega > vg_fecha THEN
 			CALL fl_mostrar_mensaje('La Fecha de Entrega no puede ser mayor a la de hoy.', 'exclamation')
 			NEXT FIELD g39_fec_entrega
 		END IF

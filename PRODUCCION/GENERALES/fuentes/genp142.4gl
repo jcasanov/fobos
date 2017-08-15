@@ -160,10 +160,10 @@ LET vm_flag_mant         = 'I'
 LET rm_g37.g37_compania  = vg_codcia
 LET rm_g37.g37_localidad = vg_codloc
 LET rm_g37.g37_cont_cred = 'N'
-LET rm_g37.g37_fecha_emi = TODAY
+LET rm_g37.g37_fecha_emi = vg_fecha
 CALL obtener_fecha_exp(rm_g37.g37_fecha_emi) RETURNING rm_g37.g37_fecha_exp
 LET rm_g37.g37_usuario   = vg_usuario
-LET rm_g37.g37_fecing    = CURRENT
+LET rm_g37.g37_fecing    = fl_current()
 DISPLAY BY NAME rm_g37.g37_localidad, rm_g37.g37_cont_cred,rm_g37.g37_fecha_emi,
 		rm_g37.g37_fecha_exp, rm_g37.g37_fecing, rm_g37.g37_usuario
 CALL mostar_nombres_eti()
@@ -176,7 +176,7 @@ IF int_flag THEN
 	RETURN
 END IF
 CALL obtener_secuencia() RETURNING rm_g37.g37_secuencia
-LET rm_g37.g37_fecing = CURRENT
+LET rm_g37.g37_fecing = fl_current()
 BEGIN WORK
 INSERT INTO gent037 VALUES (rm_g37.*)
 IF vm_num_rows = vm_max_rows THEN
@@ -843,7 +843,7 @@ LET rm_g37.g37_secuencia = NULL
 LET rm_g37.g37_fecha_emi = r_g37.g37_fecha_exp + 1 UNITS DAY
 CALL obtener_fecha_exp(rm_g37.g37_fecha_emi) RETURNING rm_g37.g37_fecha_exp
 LET rm_g37.g37_usuario   = vg_usuario
-LET rm_g37.g37_fecing    = CURRENT
+LET rm_g37.g37_fecing    = fl_current()
 CALL muestra_datos()
 
 END FUNCTION

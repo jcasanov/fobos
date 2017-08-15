@@ -140,8 +140,8 @@ CALL fl_retorna_usuario()
 INITIALIZE rm_a00.* TO NULL
 LET rm_a00.a00_calc_reexp = 'S'
 LET rm_a00.a00_estado     = 'A'
-LET rm_a00.a00_anopro     = YEAR(TODAY)
-LET rm_a00.a00_mespro     = MONTH(TODAY)
+LET rm_a00.a00_anopro     = YEAR(vg_fecha)
+LET rm_a00.a00_mespro     = MONTH(vg_fecha)
 CLEAR tit_est, tit_estado_act, tit_compania, tit_aux_rex
 CALL muestra_estado()
 CALL fl_retorna_nombre_mes(rm_a00.a00_mespro) RETURNING tit_mes

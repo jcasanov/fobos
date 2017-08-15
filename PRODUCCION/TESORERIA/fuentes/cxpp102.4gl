@@ -142,7 +142,7 @@ FUNCTION control_ingreso()
 CALL fl_retorna_usuario()
 INITIALIZE rm_cxp.* TO NULL
 LET rm_cxp.p04_tipo    = 'D'
-LET rm_cxp.p04_fecing  = CURRENT
+LET rm_cxp.p04_fecing  = fl_current()
 LET rm_cxp.p04_usuario = vg_usuario 
 LET rm_cxp.p04_estado  = 'A'
 CLEAR tit_est
@@ -150,7 +150,7 @@ CLEAR tit_estado_tip
 CALL muestra_estado()
 CALL leer_datos('I')
 IF NOT int_flag THEN
-	LET rm_cxp.p04_fecing  = CURRENT
+	LET rm_cxp.p04_fecing  = fl_current()
       	INSERT INTO cxpt004 VALUES (rm_cxp.*)
 	LET vm_num_rows = vm_num_rows + 1
 	LET vm_row_current = vm_num_rows

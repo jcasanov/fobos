@@ -657,7 +657,7 @@ LET vm_flag_mant           = 'I'
 LET rm_item.r10_compania   = vg_codcia
 LET rm_item.r10_estado     = 'A'
 LET rm_item.r10_usuario    = vg_usuario
-LET rm_item.r10_fecing     = CURRENT
+LET rm_item.r10_fecing     = fl_current()
 LET rm_item.r10_paga_impto = 'S'
 LET rm_item.r10_cantped    = 0
 LET rm_item.r10_cantback   = 0
@@ -715,7 +715,7 @@ IF NOT int_flag THEN
 			      (SELECT MAX(LENGTH(r10_codigo)) FROM rept010)
 		END IF
 		LET rm_item.r10_codigo = cod_item
-		LET rm_item.r10_fecing = CURRENT
+		LET rm_item.r10_fecing = fl_current()
 		IF num_args() <> 4 THEN
 			IF arg_val(5) = 'C' THEN
 				LET rm_item.r10_costo_mb    = -0.01
@@ -783,7 +783,7 @@ END IF
 CALL cambio_modificacion()
 UPDATE rept010 SET * = rm_item.* WHERE CURRENT OF q_up
 IF rm_item.r10_fec_camprec IS NOT NULL THEN
-	IF DATE(rm_item.r10_fec_camprec) >= TODAY THEN
+	IF DATE(rm_item.r10_fec_camprec) >= vg_fecha THEN
 		CALL usuario_camprec()
 	END IF
 END IF
@@ -1243,7 +1243,7 @@ INPUT BY NAME rm_item.r10_codigo, rm_item.r10_nombre, rm_item.r10_linea,
 				LET modificar_precio = 1
 				LET rm_item.r10_precio_ant  =
 							rm_item2.r10_precio_mb
-				LET rm_item.r10_fec_camprec = CURRENT
+				LET rm_item.r10_fec_camprec = fl_current()
 				DISPLAY BY NAME rm_item.r10_fec_camprec
 				DISPLAY BY NAME rm_item.r10_precio_ant
 			END IF
@@ -1392,6 +1392,8 @@ DEFINE i	SMALLINT
 DEFINE mensaje	VARCHAR(20)
 DEFINE estado	LIKE rept010.r10_estado
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 LET int_flag = 0
 IF rm_item.r10_codigo IS NULL OR vm_num_rows = 0 THEN
 	CALL fl_mensaje_consultar_primero()
@@ -1427,8 +1429,9 @@ IF resp = 'Yes' THEN
 	END IF
 	CASE estado 
 		WHEN 'B'
+			LET fecha_actual = fl_current()
 			UPDATE rept010 SET r10_estado = estado,
-					   r10_feceli = CURRENT
+					   r10_feceli = fecha_actual
 			WHERE CURRENT OF q_del
 		WHEN 'A'
 			UPDATE rept010 SET r10_estado = estado,
@@ -2081,7 +2084,7 @@ LET r_par.r12_moneda = rg_gen.g00_moneda_base
 LET r_par.n_moneda   = r_g13.g13_nombre 
 LET r_par.bodega     = r_r00.r00_bodega_fact
 LET r_par.n_bodega   = r_r02.r02_nombre
-LET r_par.anho       = YEAR(TODAY)
+LET r_par.anho       = YEAR(vg_fecha)
 OPEN WINDOW w_108_5 AT 05, 08 WITH 19 ROWS, 67 COLUMNS
 	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE OFF, BORDER)
 OPEN FORM f_108_5 FROM '../forms/repf108_5'
@@ -2582,7 +2585,7 @@ LET rm_item.r10_usu_cosrepo = NULL
 LET rm_item.r10_fec_cosrepo = NULL
 --IF rm_item.r10_costrepo_mb IS NOT NULL THEN
 	LET rm_item.r10_usu_cosrepo = vg_usuario
-	LET rm_item.r10_fec_cosrepo = CURRENT
+	LET rm_item.r10_fec_cosrepo = fl_current()
 --END IF
 DISPLAY BY NAME rm_item.r10_usu_cosrepo, rm_item.r10_fec_cosrepo
 
@@ -2658,7 +2661,7 @@ DISPLAY 'Precio Actual'		TO tit_col3
 DISPLAY 'Precio Anter.'		TO tit_col4
 DISPLAY 'Usuario'		TO tit_col5
 DISPLAY 'Fecha Cambio Precio'	TO tit_col6
-LET fecha_fin = TODAY
+LET fecha_fin = vg_fecha
 LET fecha_ini = fecha_fin - 3 UNITS MONTH
 DISPLAY rm_item.r10_codigo TO r87_item
 DISPLAY BY NAME fecha_ini, fecha_fin, rm_item.r10_nombre
@@ -2753,7 +2756,7 @@ INPUT BY NAME fecha_ini, fecha_fin
 			LET fecha_ini = fec_ini
 			DISPLAY BY NAME fecha_ini
 		END IF
-		IF fecha_ini > TODAY THEN
+		IF fecha_ini > vg_fecha THEN
 			CALL fl_mostrar_mensaje('La Fecha Inicial no puede ser mayor que la Fecha de Hoy.', 'exclamation')
 			NEXT FIELD fecha_ini
 		END IF
@@ -2762,7 +2765,7 @@ INPUT BY NAME fecha_ini, fecha_fin
 			LET fecha_fin = fec_fin
 			DISPLAY BY NAME fecha_fin
 		END IF
-		IF fecha_fin > TODAY THEN
+		IF fecha_fin > vg_fecha THEN
 			CALL fl_mostrar_mensaje('La Fecha Final no puede ser mayor que la Fecha de Hoy.', 'exclamation')
 			NEXT FIELD fecha_fin
 		END IF
@@ -3240,7 +3243,7 @@ CLEAR FORM
 DISPLAY BY NAME rm_item.r10_codigo, rm_item.r10_nombre
 INITIALIZE r_r02.*, vm_stock_inicial TO NULL
 LET bodega    = NULL
-LET fecha_fin = TODAY
+LET fecha_fin = vg_fecha
 LET fecha_ini = MDY(MONTH(fecha_fin), 01, YEAR(fecha_fin))
 WHILE TRUE
 	LET int_flag = 0
@@ -3289,7 +3292,7 @@ WHILE TRUE
 			END IF
 		AFTER FIELD fecha_ini
 			IF fecha_ini IS NOT NULL THEN
-				IF fecha_ini > TODAY THEN
+				IF fecha_ini > vg_fecha THEN
 					CALL fl_mostrar_mensaje('La Fecha Inicial no puede ser mayor que la fecha de hoy.', 'exclamation')
 					NEXT FIELD fecha_ini
 				END IF
@@ -3308,7 +3311,7 @@ WHILE TRUE
 			END IF
 		AFTER FIELD fecha_fin
 			IF fecha_fin IS NOT NULL THEN
-				IF fecha_fin > TODAY THEN
+				IF fecha_fin > vg_fecha THEN
 					CALL fl_mostrar_mensaje('La Fecha Final no puede ser mayor que la fecha de hoy.', 'exclamation')
 					NEXT FIELD fecha_fin
 				END IF

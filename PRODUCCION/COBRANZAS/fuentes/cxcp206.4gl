@@ -289,7 +289,7 @@ INPUT BY NAME rm_par.*
 			LET rm_par.z26_fecha_cobro = fec_cob     
 			DISPLAY BY NAME rm_par.z26_fecha_cobro
 		END IF
-		IF rm_par.z26_fecha_cobro < TODAY THEN
+		IF rm_par.z26_fecha_cobro < vg_fecha THEN
 			CALL fl_mostrar_mensaje('La fecha de cobro no puede ser menor a la de hoy.','exclamation')
 			NEXT FIELD z26_fecha_cobro
 		END IF
@@ -498,6 +498,7 @@ END FUNCTION
 FUNCTION grabar_detalle()
 DEFINE i, grabo		SMALLINT
 DEFINE secue		LIKE cxct026.z26_secuencia
+DEFINE fecha_actual DATETIME YEAR TO SECOND
 
 BEGIN WORK
 WHENEVER ERROR CONTINUE
@@ -528,6 +529,7 @@ SET LOCK MODE TO WAIT
 	LET secue = 1
 	FOR i = 1 TO vm_num_det
 		IF rm_detalle[i].sel_documento = 'S' THEN
+			LET fecha_actual = fl_current()
 			INSERT INTO cxct026
 			(z26_compania, z26_localidad, z26_codcli, z26_banco, z26_num_cta,
 			 z26_num_cheque, z26_secuencia, z26_estado, z26_referencia,
@@ -538,7 +540,7 @@ SET LOCK MODE TO WAIT
 					rm_detalle[i].z26_referencia, rm_detalle[i].valor_che,
 					rm_par.z26_fecha_cobro, rm_adi[i].areaneg,
 					rm_detalle[i].z26_tipo_doc, rm_detalle[i].z26_num_doc,
-					rm_detalle[i].z26_dividendo, vg_usuario, CURRENT)
+					rm_detalle[i].z26_dividendo, vg_usuario, fecha_actual)
 			IF STATUS <> 0 THEN
 				ROLLBACK WORK
 				WHENEVER ERROR STOP
@@ -897,7 +899,7 @@ PAGE HEADER
 	      COLUMN 052, "COMPROBANTE CHEQUE POSTFECHADO" CLIPPED,
 	      COLUMN 125, UPSHIFT(vg_proceso) CLIPPED
 	SKIP 3 LINES
-	PRINT COLUMN 001, "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 001, "FECHA IMPRESION: ", vg_fecha USING "dd-mm-yyyy",
  		1 SPACES, TIME,
 	      COLUMN 113, usuario
 	PRINT "------------------------------------------------------------------------------------------------------------------------------------"

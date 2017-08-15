@@ -220,7 +220,7 @@ LET rm_n30.n30_estado       = 'A'
 LET rm_n30.n30_sexo         = 'M'
 LET rm_n30.n30_tipo_doc_id  = 'C'
 LET rm_n30.n30_est_civil    = 'S'
-LET rm_n30.n30_fecha_ing    = TODAY
+LET rm_n30.n30_fecha_ing    = vg_fecha
 LET rm_n30.n30_tipo_rol     = 'Q'
 LET rm_n30.n30_tipo_pago    = 'E'
 LET rm_n30.n30_mon_sueldo   = r_cia.n00_moneda_pago
@@ -236,7 +236,7 @@ ELSE
 	LET rm_n30.n30_fon_res_anio = 'N'
 END IF
 SQL
-	SELECT NVL(MAX(n17_ano_sect), YEAR(TODAY))
+	SELECT NVL(MAX(n17_ano_sect), YEAR($vg_fecha))
 		INTO $rm_n30.n30_ano_sect
 		FROM rolt017
 		WHERE n17_compania = $vg_codcia
@@ -245,7 +245,7 @@ IF vg_codloc = 1 THEN
 	LET rm_n30.n30_sub_activ = vg_codloc
 END IF
 LET rm_n30.n30_usuario      = vg_usuario
-LET rm_n30.n30_fecing       = CURRENT
+LET rm_n30.n30_fecing       = fl_current()
 LET rm_n31.n31_compania     = vg_codcia
 LET rm_n31.n31_usuario      = rm_n30.n30_usuario
 LET rm_n31.n31_fecing       = rm_n30.n30_fecing
@@ -761,7 +761,7 @@ INPUT ARRAY rm_car WITHOUT DEFAULTS FROM rm_car.*
 			CONTINUE INPUT
 		END IF
 		IF rm_car[i].n31_fecha_nacim IS NOT NULL THEN
-			IF rm_car[i].n31_fecha_nacim >= TODAY THEN
+			IF rm_car[i].n31_fecha_nacim >= vg_fecha THEN
 				CALL fl_mostrar_mensaje('Esta fecha de nacimiento es incorrecta','exclamation')
 				NEXT FIELD n31_fecha_nacim
 			END IF
@@ -1118,7 +1118,7 @@ INPUT BY NAME rm_n30.n30_nombres, rm_n30.n30_domicilio, rm_n30.n30_telef_domic,
                 END IF
 	AFTER FIELD n30_fecha_nacim
 		IF rm_n30.n30_fecha_nacim IS NOT NULL THEN
-			IF rm_n30.n30_fecha_nacim >= TODAY THEN
+			IF rm_n30.n30_fecha_nacim >= vg_fecha THEN
 				CALL fl_mostrar_mensaje('Esta fecha de nacimiento es incorrecta.','exclamation')
 				NEXT FIELD n30_fecha_nacim
 			END IF
@@ -1307,7 +1307,7 @@ e','exclamation')
 		END IF
 	AFTER FIELD n30_fec_jub
 		IF rm_n30.n30_fec_jub IS NOT NULL THEN
-			IF rm_n30.n30_fec_jub >= TODAY THEN
+			IF rm_n30.n30_fec_jub >= vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha de jubilación es incorrecta.','exclamation')
 				NEXT FIELD n30_fec_jub
 			END IF
@@ -1554,14 +1554,14 @@ DEFINE num_aux		INTEGER
 
 IF vm_flag_mant = 'I' THEN
 	LET num_aux           = 0 
-	LET rm_n30.n30_fecing = CURRENT
+	LET rm_n30.n30_fecing = fl_current()
 	LET rm_n31.n31_fecing = rm_n30.n30_fecing
 	SELECT NVL(MAX(n30_cod_trab), 0) + 1
 		INTO rm_n30.n30_cod_trab
 		FROM rolt030
 		WHERE n30_compania = rm_n30.n30_compania
 	LET rm_n31.n31_cod_trab = rm_n30.n30_cod_trab
-	LET rm_n30.n30_fecing   = CURRENT
+	LET rm_n30.n30_fecing   = fl_current()
 	WHILE TRUE
 		WHENEVER ERROR CONTINUE
 		INSERT INTO rolt030 VALUES (rm_n30.*)
@@ -1628,7 +1628,7 @@ IF vm_num_car <= 0 THEN
 END IF
 FOR i = 1 TO vm_num_car
 	LET rm_n31.n31_secuencia = i
-	LET rm_n31.n31_fecing    = CURRENT
+	LET rm_n31.n31_fecing    = fl_current()
         INSERT INTO rolt031
 		VALUES (rm_n31.n31_compania, rm_n31.n31_cod_trab,
 			rm_n31.n31_secuencia, rm_car[i].n31_tipo_carga,
@@ -1780,7 +1780,7 @@ CALL muestra_estado()
 LET rm_n31.n31_compania = vg_codcia
 LET rm_n31.n31_cod_trab = rm_n30.n30_cod_trab
 LET rm_n31.n31_usuario  = rm_n30.n30_usuario
-LET rm_n31.n31_fecing   = CURRENT
+LET rm_n31.n31_fecing   = fl_current()
 
 END FUNCTION
 
@@ -2138,7 +2138,7 @@ LET query = 'INSERT INTO ctbt010 ',
 		'TRIM(b.nomcta) || " " || TRIM(n30_nombres) nomcta, ',
 		'a.b10_estado estado, a.b10_tipo_cta t_c, a.b10_tipo_mov t_m, ',
 		'a.b10_nivel nivel, a.b10_saldo_ma sal_ma, "',
-		vg_usuario CLIPPED, '" usua, CURRENT fec ',
+		vg_usuario CLIPPED, '" usua, "', fl_current(), '", fec ',
 		'FROM tmp_b10 b, ctbt010 a, rolt030 ',
 		'WHERE a.b10_compania = ', vg_codcia,
 		'  AND a.b10_cuenta   = b.cuenta ',
@@ -2168,7 +2168,7 @@ LET query = 'INSERT INTO rolt056 ',
 					'(SELECT sec_max FROM t2) ',
 			'END, ',
 		 	'a.n56_aux_otr_ing, a.n56_aux_iess, a.n56_aux_otr_egr,',
-			' a.n56_aux_banco, "', vg_usuario CLIPPED, '", CURRENT',
+			' a.n56_aux_banco, "', vg_usuario CLIPPED, '", "', fl_current(), '"',
 		' FROM tmp_n56 a, rolt030 ',
 		' WHERE n30_compania = ', vg_codcia,
 		'   AND n30_cod_trab = ', rm_n30.n30_cod_trab
@@ -2206,7 +2206,7 @@ LET r_n61.n61_cod_trab     = r_n30.n30_cod_trab
 LET r_n61.n61_fec_ing_club = r_n30.n30_fecha_ing
 LET r_n61.n61_cuota        = r_n60.n60_val_aporte
 LET r_n61.n61_usuario      = vg_usuario
-LET r_n61.n61_fecing       = CURRENT
+LET r_n61.n61_fecing       = fl_current()
 INSERT INTO rolt061 VALUES(r_n61.*)
 
 END FUNCTION
@@ -2254,25 +2254,25 @@ DEFINE cod_trab		LIKE rolt030.n30_cod_trab
 DEFINE query		CHAR(15000)
 DEFINE fec_tope		LIKE rolt030.n30_fecha_ing
 
-LET query = 'SELECT NVL(MAX(n32_fecha_fin), TODAY) fec_top ',
+LET query = 'SELECT NVL(MAX(n32_fecha_fin), "', vg_fecha, '") fec_top ',
 		' FROM rolt032 ',
 		' WHERE n32_compania      = ', vg_codcia,
 		'   AND n32_cod_liqrol   IN ("Q1", "Q2") ',
 		'   AND n32_cod_trab      = ', cod_trab,
 		'UNION ALL ',
-		'SELECT NVL(MAX(n36_fecha_fin), TODAY) fec_top ',
+		'SELECT NVL(MAX(n36_fecha_fin), "', vg_fecha, '") fec_top ',
 		' FROM rolt036 ',
 		' WHERE n36_compania      = ', vg_codcia,
 		'   AND n36_proceso      IN ("DT", "DC") ',
 		'   AND n36_cod_trab      = ', cod_trab,
 		'UNION ALL ',
-		'SELECT NVL(MAX(n39_periodo_fin), TODAY) fec_top ',
+		'SELECT NVL(MAX(n39_periodo_fin), "', vg_fecha, '") fec_top ',
 		' FROM rolt039 ',
 		' WHERE n39_compania      = ', vg_codcia,
 		'   AND n39_proceso      IN ("VA", "VP") ',
 		'   AND n39_cod_trab      = ', cod_trab,
 		'UNION ALL ',
-		'SELECT NVL(MAX(n42_fecha_fin), TODAY) fec_top ',
+		'SELECT NVL(MAX(n42_fecha_fin), "', vg_fecha, '") fec_top ',
 		' FROM rolt042 ',
 		' WHERE n42_compania      = ', vg_codcia,
 		'   AND n42_proceso       = "UT" ',
@@ -2281,13 +2281,13 @@ LET query = 'SELECT NVL(MAX(n32_fecha_fin), TODAY) fec_top ',
 PREPARE exec_fec FROM query
 EXECUTE exec_fec
 SQL
-	SELECT NVL(MAX(fec_top), TODAY)
+	SELECT NVL(MAX(fec_top), $vg_fecha)
 		INTO $fec_tope
 		FROM t1
 END SQL
 DROP TABLE t1
-IF fec_tope < TODAY THEN
-	LET fec_tope = TODAY
+IF fec_tope < vg_fecha THEN
+	LET fec_tope = vg_fecha
 END IF
 RETURN fec_tope
 

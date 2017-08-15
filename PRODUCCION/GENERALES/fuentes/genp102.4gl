@@ -221,7 +221,7 @@ DEFINE max_loc     	LIKE gent002.g02_compania
 OPTIONS INPUT WRAP
 CLEAR FORM
 INITIALIZE rm_loc.* TO NULL
-LET rm_loc.g02_fecing = CURRENT
+LET rm_loc.g02_fecing = fl_current()
 LET rm_loc.g02_usuario = vg_usuario
 LET rm_loc.g02_matriz = 'N'
 LET rm_loc.g02_localidad = 1
@@ -418,7 +418,7 @@ INPUT BY NAME  	rm_loc.g02_nombre,    rm_loc.g02_abreviacion,
 	END IF
 	AFTER FIELD g02_fecaut_sri
 		IF rm_loc.g02_fecaut_sri IS NOT NULL THEN
-			IF rm_loc.g02_fecaut_sri > TODAY THEN
+			IF rm_loc.g02_fecaut_sri > vg_fecha THEN
 				CALL fgl_winmessage(vg_producto,'Fecha de autorización es incorrecta.','exclamation')
 				NEXT FIELD g02_fecaut_sri
 			END IF

@@ -257,8 +257,8 @@ LET rm_t00.t00_estado      = 'A'
 LET rm_t00.t00_dev_mes     = 'S'
 LET rm_t00.t00_req_tal     = 'S'
 LET rm_t00.t00_elim_mes    = 'N'
-LET rm_t00.t00_anopro      = YEAR(TODAY)
-LET rm_t00.t00_mespro      = MONTH(TODAY)
+LET rm_t00.t00_anopro      = YEAR(vg_fecha)
+LET rm_t00.t00_mespro      = MONTH(vg_fecha)
 DISPLAY BY NAME rm_t00.t00_estado, rm_t00.t00_anopro, rm_t00.t00_mespro
 DISPLAY 'ACTIVO' TO tit_estado
 CALL lee_datos()

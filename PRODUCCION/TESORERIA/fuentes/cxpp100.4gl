@@ -136,8 +136,8 @@ INITIALIZE rm_cxp.* TO NULL
 CLEAR tit_compania, tit_prv_mb, tit_prv_ma, tit_ant_mb, tit_ant_ma
 LET rm_cxp.p00_estado       = 'A'
 LET rm_cxp.p00_tipo_egr_gen = 'D'
-LET rm_cxp.p00_mespro = MONTH(TODAY)
-LET rm_cxp.p00_anopro = YEAR(TODAY)
+LET rm_cxp.p00_mespro = MONTH(vg_fecha)
+LET rm_cxp.p00_anopro = YEAR(vg_fecha)
 CALL muestra_estado()
 CALL leer_datos('I')
 IF NOT int_flag THEN

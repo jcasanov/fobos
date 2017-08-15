@@ -154,14 +154,14 @@ INITIALIZE rm_g37.*, rm_g39.* TO NULL
 LET rm_g37.g37_compania  = vg_codcia
 LET rm_g37.g37_localidad = vg_codloc
 LET rm_g37.g37_cont_cred = 'N'
-LET rm_g37.g37_fecha_emi = TODAY
+LET rm_g37.g37_fecha_emi = vg_fecha
 CALL obtener_fecha_exp(rm_g37.g37_fecha_emi) RETURNING rm_g37.g37_fecha_exp
 LET rm_g37.g37_usuario   = vg_usuario
-LET rm_g37.g37_fecing    = CURRENT
+LET rm_g37.g37_fecing    = fl_current()
 DISPLAY BY NAME rm_g37.g37_localidad, rm_g37.g37_cont_cred,rm_g37.g37_fecha_emi,
 		rm_g37.g37_fecha_exp, rm_g37.g37_fecing, rm_g37.g37_usuario
 CALL mostar_nombres_eti()
-LET rm_g39.g39_fec_entrega  = TODAY
+LET rm_g39.g39_fec_entrega  = vg_fecha
 LET rm_g39.g39_num_dias_col = 20
 CALL leer_parametros("I")
 IF int_flag THEN
@@ -173,7 +173,7 @@ LET salir = 0
 WHILE NOT salir
 	WHENEVER ERROR CONTINUE
 	CALL obtener_secuencia() RETURNING rm_g37.g37_secuencia
-	LET rm_g37.g37_fecing = CURRENT
+	LET rm_g37.g37_fecing = fl_current()
 	WHENEVER ERROR STOP
 	INSERT INTO gent037 VALUES (rm_g37.*)
 	IF STATUS = 0 THEN
@@ -635,7 +635,7 @@ INPUT BY NAME rm_g37.g37_localidad, rm_g37.g37_tipo_doc, rm_g37.g37_cont_cred,
 			LET rm_g39.g39_fec_entrega = r_g39.g39_fec_entrega
 			DISPLAY BY NAME rm_g39.g39_fec_entrega
 		END IF
-		IF rm_g39.g39_fec_entrega > TODAY THEN
+		IF rm_g39.g39_fec_entrega > vg_fecha THEN
 			CALL fl_mostrar_mensaje('La Fecha de Entrega no puede ser mayor a la de hoy.', 'exclamation')
 			NEXT FIELD g39_fec_entrega
 		END IF
@@ -901,7 +901,7 @@ LET rm_g37.g37_secuencia = NULL
 LET rm_g37.g37_fecha_emi = r_g37.g37_fecha_exp + 1 UNITS DAY
 CALL obtener_fecha_exp(rm_g37.g37_fecha_emi) RETURNING rm_g37.g37_fecha_exp
 LET rm_g37.g37_usuario   = vg_usuario
-LET rm_g37.g37_fecing    = CURRENT
+LET rm_g37.g37_fecing    = fl_current()
 CALL muestra_datos()
 
 END FUNCTION
