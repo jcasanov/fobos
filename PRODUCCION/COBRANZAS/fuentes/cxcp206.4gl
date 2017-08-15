@@ -31,11 +31,14 @@ DEFINE rm_detalle		ARRAY[10000] OF RECORD
 							z26_dividendo		LIKE cxct026.z26_dividendo,
 							z26_referencia		LIKE cxct026.z26_referencia,
 							areaneg				LIKE gent003.g03_nombre,
-							z20_valor_cap		LIKE cxct020.z20_valor_cap,
 							z20_saldo_cap		LIKE cxct020.z20_saldo_cap,
+							valor_che			LIKE cxct020.z20_valor_cap,
 							sel_documento		CHAR(1)
 						END RECORD
-DEFINE rm_areaneg		ARRAY[10000] OF LIKE gent003.g03_areaneg
+DEFINE rm_adi			ARRAY[10000] OF RECORD
+							z20_valor_cap		LIKE cxct020.z20_valor_cap,
+							areaneg				LIKE gent003.g03_areaneg
+						END RECORD
 DEFINE vm_max_det       SMALLINT
 DEFINE vm_num_det       SMALLINT
 
@@ -101,9 +104,12 @@ LET vm_row_current = 0
 LET vm_max_rows	   = 100
 LET vm_max_det     = 10000
 IF num_args() = 8 THEN
-	CALL control_consulta()
+	LET rm_z26.z26_codcli     = arg_val(5)
+	LET rm_z26.z26_banco      = arg_val(6)
+	LET rm_z26.z26_num_cta    = arg_val(7)
+	LET rm_z26.z26_num_cheque = arg_val(8)
+	CALL control_consulta(0)
 	IF vm_num_rows = 0 THEN
-		--CALL control_imprimir()
 		EXIT PROGRAM
 	END IF
 END IF
@@ -134,10 +140,10 @@ DEFINE i  		SMALLINT
 
 CALL muestra_contadores(0, 0)
 FOR i = 1 TO fgl_scr_size('rm_detalle')
-        INITIALIZE rm_detalle[i].*, rm_areaneg[i] TO NULL
+        INITIALIZE rm_detalle[i].*, rm_adi[i].* TO NULL
         CLEAR rm_detalle[i].*
 END FOR
-CLEAR total_valor, total_saldo
+CLEAR z20_valor_cap, total_valor, total_saldo
 
 END FUNCTION
 
@@ -150,8 +156,8 @@ FUNCTION botones_cabecera_forma()
 --#DISPLAY "DIV."			TO tit_col3
 --#DISPLAY "Referencia"		TO tit_col4
 --#DISPLAY "Areaneg"		TO tit_col5
---#DISPLAY "Valor Doc."		TO tit_col6
---#DISPLAY "Saldo Doc."		TO tit_col7
+--#DISPLAY "Saldo Doc."		TO tit_col6
+--#DISPLAY "Valor Che."		TO tit_col7
 --#DISPLAY "C"				TO tit_col8
 
 END FUNCTION
@@ -326,8 +332,6 @@ END FUNCTION
 
 FUNCTION cargar_detalle()
 DEFINE query		CHAR(1500)
-DEFINE total_valor	DECIMAL(12,2)
-DEFINE total_saldo	DECIMAL(12,2)
 
 LET query = 'SELECT z20_tipo_doc, z20_num_doc, z20_dividendo,',
 					' (SELECT r38_num_sri ',
@@ -343,27 +347,34 @@ LET query = 'SELECT z20_tipo_doc, z20_num_doc, z20_dividendo,',
 						'  AND r38_num_tran    = r19_num_tran) ',
 						'AS z26_referencia,',
 					' g03_nombre AS areaneg,',
-					' (z20_valor_cap + z20_valor_int) AS valor_cap,',
 					' (z20_saldo_cap + z20_saldo_int) AS saldo_cap,',
-					' "N" AS sel_documento, g03_areaneg ',
-				' FROM cxct020, gent003 ',
+					' NVL(z26_valor, 0) AS valor_che,',
+					' CASE WHEN z26_valor IS NULL ',
+						'THEN "N" ',
+						'ELSE "S" ',
+					' END AS sel_documento, ',
+					' (z20_valor_cap + z20_valor_int) AS valor_cap,',
+					' g03_areaneg ',
+				' FROM cxct020, gent003, OUTER cxct026 ',
 				' WHERE z20_compania    = ', vg_codcia,
 				'   AND z20_localidad   = ', vg_codloc,
 				'   AND z20_codcli      = ', rm_par.z26_codcli ,
 				'   AND (z20_saldo_cap + z20_saldo_int) > 0 ',
 				'   AND g03_compania    = z20_compania ',
 				'   AND g03_areaneg     = z20_areaneg ',
+				'   AND z26_compania    = z20_compania ',
+				'   AND z26_localidad   = z20_localidad ',
+				'   AND z26_codcli      = z20_codcli ',
+				'   AND z26_tipo_doc    = z20_tipo_doc ',
+				'   AND z26_num_doc     = z20_num_doc ',
+				'   AND z26_dividendo   = z20_dividendo ',
 			' INTO TEMP tmp_det '
 PREPARE exec_query FROM query
 EXECUTE exec_query
 DECLARE q_det CURSOR FOR
 		SELECT * FROM tmp_det
 LET vm_num_det  = 1
-LET total_valor = 0
-LET total_saldo = 0
-FOREACH q_det INTO rm_detalle[vm_num_det].*, rm_areaneg[vm_num_det]
-	LET total_valor = total_valor + rm_detalle[vm_num_det].z20_valor_cap
-	LET total_saldo = total_saldo + rm_detalle[vm_num_det].z20_saldo_cap
+FOREACH q_det INTO rm_detalle[vm_num_det].*, rm_adi[vm_num_det].*
 	LET vm_num_det = vm_num_det + 1
 	IF vm_num_det > vm_max_det THEN
 		CALL fl_mensaje_arreglo_incompleto()
@@ -372,7 +383,7 @@ FOREACH q_det INTO rm_detalle[vm_num_det].*, rm_areaneg[vm_num_det]
 END FOREACH
 LET vm_num_det = vm_num_det - 1
 DROP TABLE tmp_det
-DISPLAY BY NAME total_valor, total_saldo
+CALL mostrar_totales()
 
 END FUNCTION
 
@@ -383,11 +394,9 @@ DEFINE i, j			SMALLINT
 DEFINE k, cont		SMALLINT
 DEFINE tot_sal		DECIMAL(12,2)
 DEFINE resp			CHAR(6)
+DEFINE val_che		DECIMAL(12,2)
 DEFINE referen		LIKE cxct026.z26_referencia
 
-OPTIONS 
-	INSERT KEY F30,
-	DELETE KEY F31
 CALL set_count(vm_num_det)
 LET int_flag = 0
 INPUT ARRAY rm_detalle WITHOUT DEFAULTS FROM rm_detalle.*
@@ -400,6 +409,12 @@ INPUT ARRAY rm_detalle WITHOUT DEFAULTS FROM rm_detalle.*
 		END IF
 	ON KEY(F1,CONTROL-W)
 		CALL control_visor_teclas_caracter_1() 
+	ON KEY(F5)
+		LET i = arr_curr()
+		IF rm_detalle[i].valor_che > 0 THEN
+			CALL control_consulta(i)
+			LET int_flag = 0
+		END IF
 	BEFORE INPUT
 		--#CALL dialog.keysetlabel("F1", "")
 		--#CALL dialog.keysetlabel("CONTROL-W", "")
@@ -416,33 +431,63 @@ INPUT ARRAY rm_detalle WITHOUT DEFAULTS FROM rm_detalle.*
 		IF i > vm_num_det THEN
 			LET vm_num_det = vm_num_det + 1
 		END IF
+		DISPLAY BY NAME rm_adi[i].z20_valor_cap
 	BEFORE FIELD z26_referencia
 		LET i = arr_curr()
 		LET j = scr_line()
 		LET referen = rm_detalle[i].z26_referencia
+	BEFORE FIELD valor_che
+		LET i = arr_curr()
+		LET j = scr_line()
+		LET val_che = rm_detalle[i].valor_che
 	AFTER FIELD z26_referencia
 		IF rm_detalle[i].z26_referencia IS NULL THEN
 			LET rm_detalle[i].z26_referencia = referen
 			DISPLAY rm_detalle[i].z26_referencia TO
 					rm_detalle[j].z26_referencia
 		END IF
+	AFTER FIELD valor_che
+		IF rm_detalle[i].valor_che IS NULL THEN
+			LET rm_detalle[i].valor_che = val_che
+			DISPLAY rm_detalle[i].valor_che TO rm_detalle[j].valor_che
+		END IF
+		IF rm_detalle[i].valor_che > rm_detalle[i].z20_saldo_cap THEN
+			CALL fl_mostrar_mensaje('El valor que esta cargando al documento es mayor que el saldo del documento.', 'exclamation')
+			NEXT FIELD valor_che
+		END IF
+		IF rm_detalle[i].valor_che > 0 THEN
+			LET rm_detalle[i].sel_documento = 'S'
+		ELSE
+			LET rm_detalle[i].sel_documento = 'N'
+		END IF
+		DISPLAY rm_detalle[i].sel_documento TO rm_detalle[j].sel_documento
+		CALL mostrar_totales()
+	AFTER FIELD sel_documento
+		IF rm_detalle[i].sel_documento = 'S' THEN
+			LET rm_detalle[i].valor_che = rm_detalle[i].z20_saldo_cap
+		ELSE
+			LET rm_detalle[i].valor_che = 0
+		END IF
+		DISPLAY rm_detalle[i].valor_che TO rm_detalle[j].valor_che
+		CALL mostrar_totales()
+	AFTER ROW
+		CALL mostrar_totales()
 	AFTER INPUT
 		LET cont    = 0
 		LET tot_sal = 0
 		FOR k = 1 TO vm_num_det
 			IF rm_detalle[k].sel_documento = 'N' THEN
 				LET cont = cont + 1
-			ELSE
-				LET tot_sal = tot_sal + rm_detalle[k].z20_saldo_cap
 			END IF
+			LET tot_sal = tot_sal + rm_detalle[k].valor_che
 		END FOR
 		IF cont = vm_num_det THEN
 			CALL fl_mostrar_mensaje('Debe al menos seleccionar un documento.', 'exclamation')
 			CONTINUE INPUT
 		END IF
-		IF tot_sal > rm_par.z26_valor THEN
-			CALL fl_mostrar_mensaje('El saldo total de los documento seleccionados es mayor que el valor del cheque.', 'info')
-			--CONTINUE INPUT
+		IF tot_sal <> rm_par.z26_valor THEN
+			CALL fl_mostrar_mensaje('El valor cheque total de los documento seleccionados es diferente que el valor del cheque.', 'exclamation')
+			CONTINUE INPUT
 		END IF
 END INPUT
 
@@ -457,18 +502,26 @@ DEFINE secue		LIKE cxct026.z26_secuencia
 BEGIN WORK
 WHENEVER ERROR CONTINUE
 SET LOCK MODE TO WAIT
-	DELETE FROM cxct026
-		WHERE z26_compania   = vg_codcia
-		  AND z26_localidad  = vg_codloc
-		  AND z26_codcli     = rm_par.z26_codcli
-		  AND z26_banco      = rm_par.z26_banco
-		  AND z26_num_cta    = rm_par.z26_num_cta
-		  AND z26_num_cheque = rm_par.z26_num_cheque
-	IF STATUS <> 0 THEN
-		ROLLBACK WORK
-		SET LOCK MODE TO NOT WAIT
-		WHENEVER ERROR STOP
-		CALL fl_mostrar_mensaje('No se pudo eliminar el cheque del cliente ' || rm_par.tit_nombre_cli CLIPPED || ' con fecha de cobro ' || rm_par.z26_fecha_cobro USING "dd-mm-yyyy" || '. Por favor llame al administrador.', 'exclamation')
+	LET grabo = 1
+	FOR i = 1 TO vm_num_det
+		DELETE FROM cxct026
+			WHERE z26_compania   = vg_codcia
+			  AND z26_localidad  = vg_codloc
+			  AND z26_codcli     = rm_par.z26_codcli
+			  AND z26_tipo_doc   = rm_detalle[i].z26_tipo_doc
+			  AND z26_num_doc    = rm_detalle[i].z26_num_doc
+			  AND z26_dividendo  = rm_detalle[i].z26_dividendo
+			  AND z26_estado     = 'A'
+		IF STATUS <> 0 THEN
+			ROLLBACK WORK
+			SET LOCK MODE TO NOT WAIT
+			WHENEVER ERROR STOP
+			CALL fl_mostrar_mensaje('No se pudo eliminar el cheque del cliente ' || rm_par.tit_nombre_cli CLIPPED || ' con fecha de cobro ' || rm_par.z26_fecha_cobro USING "dd-mm-yyyy" || '. Por favor llame al administrador.', 'exclamation')
+			LET grabo = 0
+			EXIT FOR
+		END IF
+	END FOR
+	IF NOT grabo THEN
 		RETURN
 	END IF
 	LET grabo = 1
@@ -482,8 +535,8 @@ SET LOCK MODE TO WAIT
 			 z26_num_doc, z26_dividendo, z26_usuario, z26_fecing)
 			VALUES (vg_codcia, vg_codloc, rm_par.z26_codcli, rm_par.z26_banco,
 					rm_par.z26_num_cta, rm_par.z26_num_cheque, secue, 'A',
-					rm_detalle[i].z26_referencia, rm_par.z26_valor,
-					rm_par.z26_fecha_cobro, rm_areaneg[i],
+					rm_detalle[i].z26_referencia, rm_detalle[i].valor_che,
+					rm_par.z26_fecha_cobro, rm_adi[i].areaneg,
 					rm_detalle[i].z26_tipo_doc, rm_detalle[i].z26_num_doc,
 					rm_detalle[i].z26_dividendo, vg_usuario, CURRENT)
 			IF STATUS <> 0 THEN
@@ -508,174 +561,66 @@ END FUNCTION
 
 
 
-FUNCTION control_ingreso()
+FUNCTION mostrar_totales()
+DEFINE i			SMALLINT
+DEFINE total_valor	DECIMAL(12,2)
+DEFINE total_saldo	DECIMAL(12,2)
 
-CALL muestra_estado()
-CALL leer_datos('I')
-IF NOT int_flag THEN
-	LET rm_z26.z26_fecing = CURRENT
-	INSERT INTO cxct026 VALUES (rm_z26.*)
-	IF vm_num_rows = vm_max_rows THEN
-		LET vm_num_rows = 1
-	ELSE
-		LET vm_num_rows = vm_num_rows + 1
-	END IF
-	DISPLAY BY NAME rm_z26.z26_fecing
-	LET vm_row_current = vm_num_rows
-	LET vm_r_rows[vm_row_current] = SQLCA.SQLERRD[6] 
-	CALL muestra_contadores(vm_row_current, vm_num_rows)
-	CALL mostrar_registro(vm_r_rows[vm_num_rows])	
-	CALL fl_mensaje_registro_ingresado()
-ELSE
-	CLEAR FORM
-	CALL muestra_contadores(vm_row_current, vm_num_rows)
-	IF vm_row_current > 0 THEN
-		CALL mostrar_registro(vm_r_rows[vm_row_current])
-	END IF
-END IF
+LET total_valor = 0
+LET total_saldo = 0
+FOR i = 1 TO vm_num_det
+	LET total_saldo = total_saldo + rm_detalle[i].z20_saldo_cap
+	LET total_valor = total_valor + rm_detalle[i].valor_che
+END FOR
+DISPLAY BY NAME total_valor, total_saldo
 
 END FUNCTION
 
 
 
-FUNCTION control_modificacion()
-DEFINE done 		SMALLINT
-DEFINE i    		SMALLINT
-
-IF vm_num_rows = 0 THEN   
-	CALL fl_mensaje_consultar_primero()
-	RETURN
-END IF
-CALL mostrar_registro(vm_r_rows[vm_row_current])
-IF rm_z26.z26_estado = 'B' THEN
-	CALL fl_mensaje_estado_bloqueado()
-	RETURN
-END IF
-BEGIN WORK
-WHENEVER ERROR CONTINUE
-DECLARE q_upd CURSOR FOR
-	SELECT * FROM cxct026 WHERE ROWID = vm_r_rows[vm_row_current]
-	FOR UPDATE
-OPEN q_upd
-FETCH q_upd INTO rm_z26.*
-IF STATUS < 0 THEN
-	ROLLBACK WORK
-	CALL fl_mensaje_bloqueo_otro_usuario()
-	WHENEVER ERROR STOP
-	RETURN
-END IF  
-WHENEVER ERROR STOP
-CALL leer_datos('M')
-IF int_flag THEN
-	ROLLBACK WORK
-	CALL mostrar_registro(vm_r_rows[vm_row_current])
-	RETURN
-END IF 
-UPDATE cxct026 SET * = rm_z26.* WHERE CURRENT OF q_upd
-COMMIT WORK
-CALL mostrar_registro(vm_r_rows[vm_row_current])
-CALL fl_mensaje_registro_modificado()
-
-END FUNCTION
-
-
-
-FUNCTION control_consulta()
-DEFINE cod_aux		LIKE cxct002.z02_codcli
-DEFINE nom_aux		LIKE cxct001.z01_nomcli
-DEFINE codb_aux         LIKE gent008.g08_banco
-DEFINE nomb_aux         LIKE gent008.g08_nombre
-DEFINE tipo_aux         LIKE gent009.g09_tipo_cta
-DEFINE num_aux          LIKE gent009.g09_numero_cta
-DEFINE codt_aux		LIKE cxct004.z04_tipo_doc
-DEFINE nomt_aux		LIKE cxct004.z04_nombre
-DEFINE coda_aux		LIKE gent003.g03_areaneg
-DEFINE noma_aux		LIKE gent003.g03_nombre
-DEFINE r_cxc		RECORD LIKE cxct026.*
-DEFINE saldo		LIKE cxct020.z20_saldo_cap
-DEFINE mone		LIKE cxct020.z20_moneda
-DEFINE abrevia		LIKE gent003.g03_abreviacion
+FUNCTION control_consulta(i)
+DEFINE i			SMALLINT
 DEFINE query		CHAR(800)
 DEFINE expr_sql		CHAR(600)
 DEFINE num_reg		INTEGER
+DEFINE lin_menu		SMALLINT
+DEFINE row_ini  	SMALLINT
+DEFINE num_rows 	SMALLINT
+DEFINE num_cols 	SMALLINT
 
-CLEAR FORM
-INITIALIZE cod_aux, codb_aux, codt_aux, coda_aux, r_cxc.* TO NULL
-LET int_flag = 0
-IF num_args() = 4 THEN
-	CONSTRUCT BY NAME expr_sql ON z26_estado, z26_codcli, z26_banco,
-	z26_num_cta, z26_num_cheque, z26_valor, z26_fecha_cobro, z26_referencia,
-	z26_areaneg, z26_tipo_doc, z26_num_doc, z26_dividendo, z26_usuario
-        ON KEY(F1,CONTROL-W)
-		CALL llamar_visor_teclas()
-	ON KEY(F2)
-		IF INFIELD(z26_codcli) THEN
-			CALL fl_ayuda_cliente_localidad(vg_codcia,vg_codloc)
-				RETURNING cod_aux, nom_aux
-			LET int_flag = 0
-			IF cod_aux IS NOT NULL THEN
-				DISPLAY cod_aux TO z26_codcli 
-				DISPLAY nom_aux TO tit_nombre_cli
-			END IF 
-		END IF
-		IF INFIELD(z26_banco) THEN
-                        CALL fl_ayuda_bancos()
-                                RETURNING codb_aux, nomb_aux
-                        LET int_flag = 0
-                        IF codb_aux IS NOT NULL THEN
-                                DISPLAY codb_aux TO z26_banco
-                                DISPLAY nomb_aux TO tit_banco
-                        END IF
-                END IF
-		IF INFIELD(z26_areaneg) THEN
-			CALL fl_ayuda_areaneg(vg_codcia)
-				RETURNING coda_aux, noma_aux
-			LET int_flag = 0
-			IF coda_aux IS NOT NULL THEN
-				DISPLAY coda_aux TO z26_areaneg
-				DISPLAY noma_aux TO tit_area
-			END IF 
-		END IF
-		IF INFIELD(z26_tipo_doc) THEN
-			CALL fl_ayuda_tipo_documento_cobranzas('D')
-				RETURNING codt_aux, nomt_aux
-			LET int_flag = 0
-			IF codt_aux IS NOT NULL THEN
-				DISPLAY codt_aux TO z26_tipo_doc
-				DISPLAY nomt_aux TO tit_tipo_doc
-			END IF 
-		END IF
-		IF INFIELD(z26_num_doc) THEN
-			CALL fl_ayuda_doc_deudores_cob(vg_codcia, vg_codloc,
-					coda_aux, cod_aux, codt_aux)
-				RETURNING nom_aux, r_cxc.z26_tipo_doc,
-					r_cxc.z26_num_doc, r_cxc.z26_dividendo,
-					saldo, mone, abrevia
-			LET int_flag = 0
-			IF r_cxc.z26_num_doc IS NOT NULL THEN
-				DISPLAY BY NAME r_cxc.z26_dividendo
-				DISPLAY BY NAME r_cxc.z26_num_doc
-				DISPLAY saldo TO tit_saldo
-			END IF 
-		END IF
-		BEFORE CONSTRUCT
-			--#CALL dialog.keysetlabel("F1","")
-			--#CALL dialog.keysetlabel("CONTROL-W","")
-	END CONSTRUCT
-	IF int_flag THEN
-		IF vm_row_current > 0 THEN
-			CALL muestra_contadores(vm_row_current, vm_num_rows)
-			CALL mostrar_registro(vm_r_rows[vm_row_current])
-		ELSE
-			CLEAR FORM
-		END IF
-		RETURN
-	END IF
+LET lin_menu = 0
+LET row_ini  = 4
+LET num_rows = 20
+LET num_cols = 80
+IF vg_gui = 0 THEN
+	LET lin_menu = 1
+	LET row_ini  = 4
+	LET num_rows = 20
+	LET num_cols = 78
+END IF
+OPEN WINDOW w_cxcf206_2 AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
+	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE lin_menu,
+		  BORDER, MESSAGE LINE LAST) 
+IF vg_gui = 1 THEN
+	OPEN FORM f_cxcf206_2 FROM "../forms/cxcf206_2"
 ELSE
-	LET expr_sql = ' z26_codcli     = ' || arg_val(5) ||
-		   ' AND z26_banco      = ' || arg_val(6) ||
-		   ' AND z26_num_cta    = ' || '"' || arg_val(7) || '"' ||
-		   ' AND z26_num_cheque = ' || '"' || arg_val(8) || '"'
+	OPEN FORM f_cxcf206_2 FROM "../forms/cxcf206_2c"
+END IF
+DISPLAY FORM f_cxcf206_2
+CLEAR FORM
+LET vm_num_rows    = 0
+LET vm_row_current = 0
+CALL muestra_contadores(vm_row_current, vm_num_rows)
+IF i = 0 THEN
+	LET expr_sql = ' z26_codcli     = ', rm_z26.z26_codcli,
+			   ' AND z26_banco      = ', rm_z26.z26_banco,
+			   ' AND z26_num_cta    = "', rm_z26.z26_num_cta, '"',
+			   ' AND z26_num_cheque = "', rm_z26.z26_num_cheque, '"'
+ELSE
+	LET expr_sql = ' z26_codcli     = ', rm_par.z26_codcli,
+				' AND z26_tipo_doc  = "', rm_detalle[i].z26_tipo_doc, '"',
+				' AND z26_num_doc   = "', rm_detalle[i].z26_num_doc, '"',
+				' AND z26_dividendo = ', rm_detalle[i].z26_dividendo
 END IF
 LET query = 'SELECT *, ROWID FROM cxct026 ' ||
 		'WHERE z26_compania   = ' || vg_codcia ||
@@ -687,10 +632,10 @@ DECLARE q_cons CURSOR FOR cons
 LET vm_num_rows = 0
 FOREACH q_cons INTO rm_z26.*, num_reg
 	LET vm_num_rows = vm_num_rows + 1
-        IF vm_num_rows > vm_max_rows THEN
-		LET vm_num_rows = vm_num_rows - 1
-                EXIT FOREACH
-        END IF
+	IF vm_num_rows > vm_max_rows THEN
+	LET vm_num_rows = vm_num_rows - 1
+		EXIT FOREACH
+	END IF
 	LET vm_r_rows[vm_num_rows] = num_reg
 END FOREACH
 IF vm_num_rows = 0 THEN
@@ -704,260 +649,60 @@ ELSE
 	CALL muestra_contadores(vm_row_current, vm_num_rows)
 	CALL mostrar_registro(vm_r_rows[vm_row_current])
 END IF
-
-END FUNCTION
-
-
-
-FUNCTION leer_datos(flag)
-DEFINE resp		CHAR(6)
-DEFINE r_cxc_aux	RECORD LIKE cxct026.*
-DEFINE r_doc		RECORD LIKE cxct020.*
-DEFINE r_cli		RECORD LIKE cxct002.*
-DEFINE r_cli_gen	RECORD LIKE cxct001.*
-DEFINE r_bco_gen	RECORD LIKE gent008.*
-DEFINE r_tip		RECORD LIKE cxct004.*
-DEFINE r_are		RECORD LIKE gent003.*
-DEFINE cod_aux		LIKE cxct002.z02_codcli
-DEFINE nom_aux		LIKE cxct001.z01_nomcli
-DEFINE codb_aux         LIKE gent008.g08_banco
-DEFINE nomb_aux         LIKE gent008.g08_nombre
-DEFINE tipo_aux         LIKE gent009.g09_tipo_cta
-DEFINE num_aux          LIKE gent009.g09_numero_cta
-DEFINE codt_aux		LIKE cxct004.z04_tipo_doc
-DEFINE nomt_aux		LIKE cxct004.z04_nombre
-DEFINE coda_aux		LIKE gent003.g03_areaneg
-DEFINE noma_aux		LIKE gent003.g03_nombre
-DEFINE r_cxc		RECORD LIKE cxct026.*
-DEFINE saldo		LIKE cxct020.z20_saldo_cap
-DEFINE mone		LIKE cxct020.z20_moneda
-DEFINE abrevia		LIKE gent003.g03_abreviacion
-DEFINE valor		LIKE cxct026.z26_valor
-DEFINE flag		CHAR(1)
-
-INITIALIZE r_cxc_aux.*, r_cli.*, r_cli_gen.*, r_bco_gen, r_tip.*, r_are.*,
-	cod_aux, codb_aux, codt_aux, coda_aux, r_cxc.* TO NULL
-DISPLAY BY NAME rm_z26.z26_usuario, rm_z26.z26_fecing
-LET int_flag = 0
-INPUT BY NAME rm_z26.z26_codcli, rm_z26.z26_banco, rm_z26.z26_num_cta,
-	rm_z26.z26_num_cheque, rm_z26.z26_valor, rm_z26.z26_fecha_cobro,
-	rm_z26.z26_referencia, rm_z26.z26_areaneg, rm_z26.z26_tipo_doc,
-	rm_z26.z26_num_doc, rm_z26.z26_dividendo
-	WITHOUT DEFAULTS
-	ON KEY(INTERRUPT)
-	        IF field_touched(rm_z26.z26_codcli, rm_z26.z26_banco,
-			rm_z26.z26_num_cta, rm_z26.z26_num_cheque,
-			rm_z26.z26_valor, rm_z26.z26_fecha_cobro,
-			rm_z26.z26_referencia, rm_z26.z26_areaneg,
-			rm_z26.z26_tipo_doc, rm_z26.z26_num_doc,
-			rm_z26.z26_dividendo)
-	        THEN
-	               	LET int_flag = 0
-			CALL fl_mensaje_abandonar_proceso()
-                		RETURNING resp
-	              	IF resp = 'Yes' THEN
-				LET int_flag = 1
-                	       	CLEAR FORM
-                       		RETURN
-	                END IF
+MENU 'OPCIONES'
+	BEFORE MENU
+		HIDE OPTION 'Avanzar'
+		HIDE OPTION 'Retroceder'
+		HIDE OPTION 'Imprimir'
+		HIDE OPTION 'Documento'
+		IF vm_num_rows <= 1 THEN
+			HIDE OPTION 'Avanzar'
+			HIDE OPTION 'Retroceder'
 		ELSE
-			RETURN
+			SHOW OPTION 'Avanzar'
+			SHOW OPTION 'Documento'
+			SHOW OPTION 'Imprimir'
 		END IF
-	ON KEY(F1,CONTROL-W)
-		CALL control_visor_teclas_caracter_1() 
-	ON KEY(F2)
-		IF INFIELD(z26_codcli) THEN
-			CALL fl_ayuda_cliente_localidad(vg_codcia,vg_codloc)
-				RETURNING cod_aux, nom_aux
-			LET int_flag = 0
-			IF cod_aux IS NOT NULL THEN
-				LET rm_z26.z26_codcli = cod_aux
-				DISPLAY BY NAME rm_z26.z26_codcli 
-				DISPLAY nom_aux TO tit_nombre_cli
-			END IF 
+		IF vm_row_current <= 1 THEN
+			HIDE OPTION 'Retroceder'
 		END IF
-		IF INFIELD(z26_banco) THEN
-                        CALL fl_ayuda_bancos()
-                                RETURNING codb_aux, nomb_aux
-                        LET int_flag = 0
-                        IF codb_aux IS NOT NULL THEN
-				LET rm_z26.z26_banco = codb_aux
-                                DISPLAY BY NAME rm_z26.z26_banco
-                                DISPLAY nomb_aux TO tit_banco
-                        END IF
-                END IF
-		IF INFIELD(z26_areaneg) THEN
-			CALL fl_ayuda_areaneg(vg_codcia)
-				RETURNING coda_aux, noma_aux
-			LET int_flag = 0
-			IF coda_aux IS NOT NULL THEN
-				LET rm_z26.z26_areaneg = coda_aux
-				DISPLAY BY NAME rm_z26.z26_areaneg
-				DISPLAY noma_aux TO tit_area
-			END IF 
+		IF vm_num_rows > 0 THEN
+			SHOW OPTION 'Imprimir'
+			SHOW OPTION 'Documento'
+		ELSE
+			HIDE OPTION 'Imprimir'
+			HIDE OPTION 'Documento'
 		END IF
-		IF INFIELD(z26_tipo_doc) THEN
-			CALL fl_ayuda_tipo_documento_cobranzas('D')
-				RETURNING codt_aux, nomt_aux
-			LET int_flag = 0
-			IF codt_aux IS NOT NULL THEN
-				LET rm_z26.z26_tipo_doc = codt_aux
-				DISPLAY BY NAME rm_z26.z26_tipo_doc
-				DISPLAY nomt_aux TO tit_tipo_doc
-			END IF 
-		END IF
-		IF INFIELD(z26_num_doc) THEN
-			CALL fl_ayuda_doc_deudores_cob(vg_codcia, vg_codloc,
-					rm_z26.z26_areaneg, rm_z26.z26_codcli,
-					rm_z26.z26_tipo_doc)
-				RETURNING nom_aux, r_cxc.z26_tipo_doc,
-					r_cxc.z26_num_doc, r_cxc.z26_dividendo,
-					saldo, mone, abrevia
-			LET int_flag = 0
-			IF r_cxc.z26_num_doc IS NOT NULL THEN
-				LET rm_z26.z26_num_doc = r_cxc.z26_num_doc
-				LET rm_z26.z26_dividendo = r_cxc.z26_dividendo
-				DISPLAY BY NAME rm_z26.z26_dividendo
-				DISPLAY BY NAME rm_z26.z26_num_doc
-				DISPLAY saldo TO tit_saldo
-			END IF 
-		END IF
-	ON KEY(F5)
+	COMMAND KEY('D') 'Documento' 'Muestra el documento deudor.'
 		CALL ver_documento_deudor()
-	BEFORE INPUT
-		--#CALL dialog.keysetlabel("F1","")
-		--#CALL dialog.keysetlabel("CONTROL-W","")
-	BEFORE FIELD z26_valor
-		LET valor = rm_z26.z26_valor
-	AFTER FIELD z26_codcli
-		IF rm_z26.z26_codcli IS NOT NULL THEN
-			CALL fl_lee_cliente_general(rm_z26.z26_codcli)
-		 		RETURNING r_cli_gen.*
-			IF r_cli_gen.z01_codcli IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'Cliente no existe.','exclamation')
-				CALL fl_mostrar_mensaje('Cliente no existe.','exclamation')
-				NEXT FIELD z26_codcli
-			END IF
-			DISPLAY r_cli_gen.z01_nomcli TO tit_nombre_cli
-			IF r_cli_gen.z01_estado = 'B' THEN
-                                CALL fl_mensaje_estado_bloqueado()
-                                NEXT FIELD z26_codcli
-                        END IF		 
-			CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc,
-							rm_z26.z26_codcli)
-		 		RETURNING r_cli.*
-			IF r_cli.z02_compania IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'Cliente no está activado para la compañía.','exclamation')
-				CALL fl_mostrar_mensaje('Cliente no está activado para la compañía.','exclamation')
-				NEXT FIELD z26_codcli
-			END IF
+	COMMAND KEY('P') 'Imprimir' 'Imprime el registro . '
+		CALL control_imprimir()
+	COMMAND KEY('A') 'Avanzar' 'Ver siguiente registro. '
+		CALL muestra_siguiente_registro()
+		IF vm_row_current = vm_num_rows THEN
+			HIDE OPTION 'Avanzar'
+			SHOW OPTION 'Retroceder'
+			NEXT OPTION 'Retroceder'
 		ELSE
-			CLEAR tit_nombre_cli
+			SHOW OPTION 'Avanzar'
+			SHOW OPTION 'Retroceder'
 		END IF
-	AFTER FIELD z26_banco
-                IF rm_z26.z26_banco IS NOT NULL THEN
-                        CALL fl_lee_banco_general(rm_z26.z26_banco)
-                                RETURNING r_bco_gen.*
-			IF r_bco_gen.g08_banco IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'Banco no existe.','exclamation')
-				CALL fl_mostrar_mensaje('Banco no existe.','exclamation')
-				NEXT FIELD z26_banco
-			END IF
-			DISPLAY r_bco_gen.g08_nombre TO tit_banco
+	COMMAND KEY('R') 'Retroceder'  'Ver anterior registro. '
+		CALL muestra_anterior_registro()
+		IF vm_row_current = 1 THEN
+			HIDE OPTION 'Retroceder'
+			SHOW OPTION 'Avanzar'
+			NEXT OPTION 'Avanzar'
 		ELSE
-			CLEAR tit_banco
-                END IF
-	AFTER FIELD z26_valor
-		IF rm_z26.z26_valor IS NULL THEN
-			LET rm_z26.z26_valor = valor
-			DISPLAY BY NAME rm_z26.z26_valor
+			SHOW OPTION 'Avanzar'
+			SHOW OPTION 'Retroceder'
 		END IF
-	AFTER FIELD z26_areaneg
-		IF rm_z26.z26_areaneg IS NOT NULL THEN
-			CALL fl_lee_area_negocio(vg_codcia,rm_z26.z26_areaneg)
-				RETURNING r_are.*
-			IF r_are.g03_areaneg IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'Area de Negocio no existe.','exclamation')
-				CALL fl_mostrar_mensaje('Area de Negocio no existe.','exclamation')
-				NEXT FIELD z26_areaneg
-			END IF
-			DISPLAY r_are.g03_nombre TO tit_area
-		ELSE
-			CLEAR tit_area
-		END IF
-	AFTER FIELD z26_tipo_doc 
-		IF rm_z26.z26_tipo_doc IS NOT NULL THEN
-			CALL fl_lee_tipo_doc(rm_z26.z26_tipo_doc)
-				RETURNING r_tip.* 
-			IF r_tip.z04_tipo_doc IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'Tipo de documento no existe.','exclamation')
-				CALL fl_mostrar_mensaje('Tipo de documento no existe.','exclamation')
-				NEXT FIELD z26_tipo_doc
-			END IF
-			DISPLAY r_tip.z04_nombre TO tit_tipo_doc
-			IF r_tip.z04_tipo <> 'D' THEN
-				--CALL fgl_winmessage(vg_producto,'Tipo de documento debe ser deudor.','exclamation')
-				CALL fl_mostrar_mensaje('Tipo de documento debe ser deudor.','exclamation')
-				NEXT FIELD z26_tipo_doc
-			END IF
-			IF rm_z26.z26_tipo_doc <> 'DO'
-			AND rm_z26.z26_tipo_doc <> 'DI'
-			AND rm_z26.z26_tipo_doc <> 'FA'
-			AND rm_z26.z26_tipo_doc <> 'ND' THEN
-				--CALL fgl_winmessage(vg_producto,'Tipo de documento debe ser deudor.','exclamation')
-				CALL fl_mostrar_mensaje('Tipo de documento debe ser de cobro a clientes.','exclamation')
-				NEXT FIELD z26_tipo_doc
-			END IF
-			IF r_tip.z04_estado = 'B' THEN
-                                CALL fl_mensaje_estado_bloqueado()
-				NEXT FIELD z26_tipo_doc
-			END IF
-		ELSE
-			CLEAR tit_tipo_doc
-		END IF
-	AFTER FIELD z26_fecha_cobro
-		IF rm_z26.z26_fecha_cobro IS NOT NULL THEN
-			IF rm_z26.z26_fecha_cobro < TODAY THEN
-				--CALL fgl_winmessage(vg_producto,'La fecha de cobro no puede ser menor a la fecha de hoy.','exclamation')
-				CALL fl_mostrar_mensaje('La fecha de cobro no puede ser menor a la fecha de hoy.','exclamation')
-				NEXT FIELD z26_fecha_cobro
-			END IF
-		END IF
-	AFTER INPUT
-		IF rm_z26.z26_valor = 0 THEN
-			--CALL fgl_winmessage(vg_producto,'El valor del cheque debe ser mayor a cero.','exclamation')
-			CALL fl_mostrar_mensaje('El valor del cheque debe ser mayor a cero.','exclamation')
-			NEXT FIELD z26_valor
-		END IF
-		CALL fl_lee_cheque_fecha_cxc(vg_codcia, vg_codloc,
-				rm_z26.z26_codcli, rm_z26.z26_banco,
-				rm_z26.z26_num_cta, rm_z26.z26_num_cheque)
-			RETURNING r_cxc_aux.*
-		IF r_cxc_aux.z26_compania IS NOT NULL AND flag = 'I' THEN
-			--CALL fgl_winmessage(vg_producto,'Cheque ya ha sido ingresado.','exclamation')
-			CALL fl_mostrar_mensaje('Cheque ya ha sido ingresado.','exclamation')
-			NEXT FIELD z26_num_cheque
-		END IF
-		IF rm_z26.z26_tipo_doc IS NOT NULL THEN
-			CALL fl_lee_documento_deudor_cxc(vg_codcia, vg_codloc,
-				rm_z26.z26_codcli, rm_z26.z26_tipo_doc,
-				rm_z26.z26_num_doc, rm_z26.z26_dividendo)
-				RETURNING r_doc.*
-			IF r_doc.z20_compania IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'Documento no existe.','exclamation')
-				CALL fl_mostrar_mensaje('Documento no existe.','exclamation')
-				NEXT FIELD z26_tipo_doc
-			END IF
-		END IF
-		{
-		IF r_doc.z20_saldo_cap + r_doc.z20_saldo_int > rm_z26.z26_valor
-		THEN
-			--CALL fgl_winmessage(vg_producto,'El saldo del documento no puede ser mayor al valor del cheque.','exclamation')
-			CALL fl_mostrar_mensaje('El saldo del documento no puede ser mayor al valor del cheque.','exclamation')
-			NEXT FIELD z26_valor
-		END IF
-		}
-END INPUT
+	COMMAND KEY('S') 'Salir' 'Salir del programa. '
+		EXIT MENU
+END MENU
+LET int_flag = 0
+CLOSE WINDOW w_cxcf206_2
+RETURN
 
 END FUNCTION
 
@@ -1028,68 +773,12 @@ DISPLAY r_g03.g03_nombre TO tit_area
 CALL fl_lee_banco_general(rm_z26.z26_banco) RETURNING r_g08.*
 DISPLAY r_g08.g08_nombre TO tit_banco
 CALL fl_lee_documento_deudor_cxc(vg_codcia, vg_codloc, rm_z26.z26_codcli,
-				rm_z26.z26_tipo_doc, rm_z26.z26_num_doc,
-				rm_z26.z26_dividendo)
+									rm_z26.z26_tipo_doc, rm_z26.z26_num_doc,
+									rm_z26.z26_dividendo)
 	RETURNING r_z20.*
 LET saldo = r_z20.z20_saldo_cap + r_z20.z20_saldo_int
 DISPLAY saldo TO tit_saldo
 CALL muestra_estado()
-
-END FUNCTION
-
-
-
-FUNCTION bloquear_activar()
-DEFINE confir		CHAR(6)
-
-CALL mostrar_registro(vm_r_rows[vm_row_current])
-IF vm_num_rows = 0 THEN
-	CALL fl_mensaje_consultar_primero()
-	RETURN
-END IF
-LET int_flag = 0
-BEGIN WORK
-WHENEVER ERROR CONTINUE
-DECLARE q_ba CURSOR FOR
-	SELECT * FROM cxct026 WHERE ROWID = vm_r_rows[vm_row_current]
-	FOR UPDATE
-OPEN q_ba
-FETCH q_ba INTO rm_z26.*
-IF STATUS < 0 THEN
-	ROLLBACK WORK
-	CALL fl_mensaje_bloqueo_otro_usuario()
-	WHENEVER ERROR STOP
-	RETURN
-END IF	
-WHENEVER ERROR STOP
-CALL fl_mensaje_seguro_ejecutar_proceso() RETURNING confir
-IF confir <> 'Yes' THEN
-	ROLLBACK WORK
-	RETURN
-END IF
-LET int_flag = 1
-CALL bloquea_activa_registro()
-COMMIT WORK
-CALL mostrar_registro(vm_r_rows[vm_row_current])
-CALL fl_mensaje_registro_modificado()
-
-END FUNCTION
-
-
-
-FUNCTION bloquea_activa_registro()
-DEFINE estado		CHAR(1)
-
-IF rm_z26.z26_estado = 'A' THEN
-	DISPLAY 'BLOQUEADO' TO tit_estado_che
-	LET estado = 'B'
-ELSE 
-	DISPLAY 'ACTIVO' TO tit_estado_che
-	LET estado = 'A'
-END IF
-DISPLAY estado TO z26_estado
-UPDATE cxct026 SET z26_estado = estado WHERE CURRENT OF q_ba
-LET rm_z26.z26_estado = estado
 
 END FUNCTION
 
@@ -1123,32 +812,23 @@ END FUNCTION
 
 FUNCTION ver_documento_deudor()
 DEFINE run_prog		CHAR(10)
+DEFINE param		VARCHAR(100)
 
 IF rm_z26.z26_tipo_doc IS NULL THEN
-	--CALL fgl_winmessage(vg_producto,'Ingrese primero el tipo de documento.','exclamation')
 	CALL fl_mostrar_mensaje('Ingrese primero el tipo de documento.','exclamation')
 	RETURN
 END IF
 IF rm_z26.z26_num_doc IS NULL THEN
-	--CALL fgl_winmessage(vg_producto,'Ingrese el número de documento.','exclamation')
 	CALL fl_mostrar_mensaje('Ingrese el número de documento.','exclamation')
 	RETURN
 END IF
 IF rm_z26.z26_dividendo IS NULL THEN
-	--CALL fgl_winmessage(vg_producto,'Ingrese el dividendo de documento.','exclamation')
 	CALL fl_mostrar_mensaje('Ingrese el dividendo de documento.','exclamation')
 	RETURN
 END IF
-LET run_prog = '; fglrun '
-IF vg_gui = 0 THEN
-	LET run_prog = '; fglgo '
-END IF
-LET vm_nuevoprog = 'cd ..', vg_separador, '..', vg_separador, 'COBRANZAS',
-	vg_separador, 'fuentes', vg_separador, run_prog, 'cxcp200 ', vg_base,
-	' ', vg_modulo, ' ', vg_codcia, ' ', vg_codloc, ' ', rm_z26.z26_codcli,
-	' ', rm_z26.z26_tipo_doc, ' ', rm_z26.z26_num_doc, ' ',
-	rm_z26.z26_dividendo 
-RUN vm_nuevoprog
+LET param = ' ', rm_z26.z26_codcli, ' ', rm_z26.z26_tipo_doc, ' ',
+			rm_z26.z26_num_doc, ' ', rm_z26.z26_dividendo
+CALL fl_ejecuta_comando('COBRANZAS', vg_modulo, 'cxcp200', param, 1)
 
 END FUNCTION
 

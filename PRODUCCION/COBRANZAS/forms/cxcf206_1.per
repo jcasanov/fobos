@@ -20,7 +20,7 @@ SCREEN
 [c3|c031           |c032|c033             |c034      |c035      |c036      |d]
 [c3|c031           |c032|c033             |c034      |c035      |c036      |d]
 [c3|c031           |c032|c033             |c034      |c035      |c036      |d]
-                                            Totales: [c040      |c041      ]
+  Valor Documento: [c040      ]             Totales: [c041      |c042      ]
 }
 TABLES
 cxct026,
@@ -59,24 +59,25 @@ c032 = cxct026.z26_dividendo, NOENTRY, UPSHIFT, FORMAT = '&&&',
 		OPTIONS = '-nolist';
 c033 = cxct026.z26_referencia, AUTONEXT, UPSHIFT, SCROLL, OPTIONS = '-nolist';
 c034 = FORMONLY.areaneg, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
-c035 = cxct020.z20_valor_cap, NOENTRY, UPSHIFT, FORMAT = '###,##&.##',
-		COLOR = BLUE, OPTIONS = '-nolist';
-c036 = cxct020.z20_saldo_cap, NOENTRY, UPSHIFT, FORMAT = '###,##&.##',
+c035 = cxct020.z20_saldo_cap, NOENTRY, UPSHIFT, FORMAT = '###,##&.##',
 		COLOR = RED, OPTIONS = '-nolist';
+c036 = FORMONLY.valor_che TYPE DECIMAL NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
+		FORMAT = '###,##&.##', COLOR = BLUE, OPTIONS = '-nolist';
 d    = FORMONLY.sel_documento TYPE CHAR NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
 		WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N',
 		INCLUDE = ('S', 'N'), OPTIONS = '-nolist',
 		COMMENTS = 'Marque el documento en el que desea aplicar el valor del cheque.';
 
-c040 = FORMONLY.total_valor, NOENTRY, REVERSE, UPSHIFT, FORMAT = '###,##&.##',
-		COLOR = BLUE;
+c040 = cxct020.z20_valor_cap, NOENTRY, UPSHIFT, REVERSE, FORMAT = '###,##&.##';
 c041 = FORMONLY.total_saldo, NOENTRY, REVERSE, UPSHIFT, FORMAT = '###,##&.##',
 		COLOR = RED;
+c042 = FORMONLY.total_valor, NOENTRY, REVERSE, UPSHIFT, FORMAT = '###,##&.##',
+		COLOR = BLUE;
 END
 KEYS
 F5 = 'Ver Detalle'
 INSTRUCTIONS
 DELIMITERS '||'
 SCREEN RECORD rm_detalle[12] (z26_tipo_doc, z26_num_doc, z26_dividendo,
-								z26_referencia, areaneg, z20_valor_cap,
-								z20_saldo_cap, sel_documento)
+								z26_referencia, areaneg, z20_saldo_cap,
+								valor_che, sel_documento)
