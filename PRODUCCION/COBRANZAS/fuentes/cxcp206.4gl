@@ -4,12 +4,11 @@
 -- Autor            : NPC
 -- Formato Ejecucion: fglrun cxcp206 base módulo compañía localidad
 --			[cliente] [banco] [numero_cuenta] [numero_cheque]
--- Ultima Correccion: 
+-- Ultima Correccion: 15-ago-2017
 -- Motivo Correccion: 
 --------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_nuevoprog		CHAR(400)
 DEFINE rm_z26			RECORD LIKE cxct026.*
 DEFINE vm_num_rows		SMALLINT
 DEFINE vm_row_current	SMALLINT
@@ -41,6 +40,8 @@ DEFINE rm_adi			ARRAY[10000] OF RECORD
 						END RECORD
 DEFINE vm_max_det       SMALLINT
 DEFINE vm_num_det       SMALLINT
+DEFINE total_valor	DECIMAL(12,2)
+DEFINE total_saldo	DECIMAL(12,2)
 
 
 
@@ -109,9 +110,7 @@ IF num_args() = 8 THEN
 	LET rm_z26.z26_num_cta    = arg_val(7)
 	LET rm_z26.z26_num_cheque = arg_val(8)
 	CALL control_consulta(0)
-	IF vm_num_rows = 0 THEN
-		EXIT PROGRAM
-	END IF
+	EXIT PROGRAM
 END IF
 CALL muestra_contadores(0, 0)
 CALL borrar_cabecera()
@@ -229,11 +228,41 @@ INPUT BY NAME rm_par.*
 			END IF
 		END IF
 		IF INFIELD(z26_banco) THEN
-			CALL fl_ayuda_bancos() RETURNING codb_aux, nomb_aux
-			IF codb_aux IS NOT NULL THEN
-				LET rm_par.z26_banco = codb_aux
-				LET rm_par.tit_banco = nomb_aux
-				DISPLAY BY NAME rm_par.z26_banco, rm_par.tit_banco
+			IF NOT tiene_cheque_postfechados_activo() THEN
+				CALL fl_ayuda_bancos() RETURNING codb_aux, nomb_aux
+				IF codb_aux IS NOT NULL THEN
+					LET rm_par.z26_banco = codb_aux
+					LET rm_par.tit_banco = nomb_aux
+					DISPLAY BY NAME rm_par.z26_banco, rm_par.tit_banco
+				END IF
+			ELSE
+				CALL fl_ayuda_cheques_postfechados(vg_codcia, vg_codloc,
+													rm_par.z26_codcli)
+					RETURNING r_z26.z26_banco, r_z26.z26_num_cheque,
+								r_z26.z26_num_cta, r_z26.z26_valor
+				IF r_z26.z26_banco IS NOT NULL THEN
+					LET rm_par.z26_banco      = r_z26.z26_banco
+					CALL fl_lee_banco_general(rm_par.z26_banco)
+						RETURNING r_g08.*
+					LET rm_par.tit_banco      = r_g08.g08_nombre
+					LET rm_par.z26_num_cheque = r_z26.z26_num_cheque
+					LET rm_par.z26_num_cta    = r_z26.z26_num_cta
+					LET rm_par.z26_valor      = NULL
+					SELECT NVL(SUM(z26_valor), 0)
+						INTO rm_par.z26_valor
+						FROM cxct026
+						WHERE z26_compania   = vg_codcia
+						  AND z26_localidad  = vg_codloc
+						  AND z26_codcli     = rm_par.z26_codcli
+						  AND z26_banco      = rm_par.z26_banco
+						  AND z26_num_cta    = rm_par.z26_num_cta
+						  AND z26_num_cheque = rm_par.z26_num_cheque
+						  AND z26_estado     = 'A'
+					IF rm_par.z26_valor IS NULL THEN
+						LET rm_par.z26_valor = 0
+					END IF
+					DISPLAY BY NAME rm_par.*
+				END IF
 			END IF
 		END IF
 		LET int_flag = 0
@@ -243,7 +272,11 @@ INPUT BY NAME rm_par.*
 	BEFORE FIELD z26_valor
 		LET valor = rm_par.z26_valor
 	BEFORE FIELD z26_fecha_cobro
-		LET fec_cob = rm_par.z26_fecha_cobro
+		IF rm_par.z26_fecha_cobro IS NOT NULL THEN
+			LET fec_cob = rm_par.z26_fecha_cobro
+		ELSE
+			LET fec_cob = vg_fecha
+		END IF
 	AFTER FIELD z26_codcli
 		IF rm_par.z26_codcli IS NOT NULL THEN
 			CALL fl_lee_cliente_general(rm_par.z26_codcli) RETURNING r_z01.*
@@ -368,6 +401,9 @@ LET query = 'SELECT z20_tipo_doc, z20_num_doc, z20_dividendo,',
 				'   AND z26_tipo_doc    = z20_tipo_doc ',
 				'   AND z26_num_doc     = z20_num_doc ',
 				'   AND z26_dividendo   = z20_dividendo ',
+				'   AND z26_banco       = ', rm_par.z26_banco,
+				'   AND z26_num_cta     = "', rm_par.z26_num_cta, '"',
+				'   AND z26_num_cheque  = "', rm_par.z26_num_cheque, '"',
 			' INTO TEMP tmp_det '
 PREPARE exec_query FROM query
 EXECUTE exec_query
@@ -390,11 +426,15 @@ END FUNCTION
 
 
 FUNCTION leer_detalle()
+DEFINE resp			CHAR(6)
+DEFINE query		CHAR(800)
+DEFINE cla_ve		VARCHAR(100)
+DEFINE mensaje		VARCHAR(200)
+DEFINE val_che		DECIMAL(12,2)
+DEFINE val_asig		DECIMAL(12,2)
+DEFINE tot_sal		DECIMAL(12,2)
 DEFINE i, j			SMALLINT
 DEFINE k, cont		SMALLINT
-DEFINE tot_sal		DECIMAL(12,2)
-DEFINE resp			CHAR(6)
-DEFINE val_che		DECIMAL(12,2)
 DEFINE referen		LIKE cxct026.z26_referencia
 
 CALL set_count(vm_num_det)
@@ -440,6 +480,9 @@ INPUT ARRAY rm_detalle WITHOUT DEFAULTS FROM rm_detalle.*
 		LET i = arr_curr()
 		LET j = scr_line()
 		LET val_che = rm_detalle[i].valor_che
+		IF val_che IS NULL THEN
+			LET val_che = 0
+		END IF
 	AFTER FIELD z26_referencia
 		IF rm_detalle[i].z26_referencia IS NULL THEN
 			LET rm_detalle[i].z26_referencia = referen
@@ -464,7 +507,12 @@ INPUT ARRAY rm_detalle WITHOUT DEFAULTS FROM rm_detalle.*
 		CALL mostrar_totales()
 	AFTER FIELD sel_documento
 		IF rm_detalle[i].sel_documento = 'S' THEN
-			LET rm_detalle[i].valor_che = rm_detalle[i].z20_saldo_cap
+			LET val_asig = rm_par.z26_valor - total_valor
+			IF val_asig > rm_detalle[i].z20_saldo_cap THEN
+				LET rm_detalle[i].valor_che = rm_detalle[i].z20_saldo_cap
+			ELSE
+				LET rm_detalle[i].valor_che = val_asig
+			END IF
 		ELSE
 			LET rm_detalle[i].valor_che = 0
 		END IF
@@ -486,7 +534,52 @@ INPUT ARRAY rm_detalle WITHOUT DEFAULTS FROM rm_detalle.*
 			CONTINUE INPUT
 		END IF
 		IF tot_sal <> rm_par.z26_valor THEN
-			CALL fl_mostrar_mensaje('El valor cheque total de los documento seleccionados es diferente que el valor del cheque.', 'exclamation')
+			CALL fl_mostrar_mensaje('El valor cheque no esta distribuido entre el(los) documento(s) seleccionado(s) adecuadamente.', 'exclamation')
+			CONTINUE INPUT
+		END IF
+		LET cont = 0
+		FOR k = 1 TO vm_num_det
+			IF rm_detalle[k].valor_che = 0 THEN
+				CONTINUE FOR
+			END IF
+			LET val_che = NULL
+			LET query = 'SELECT (z26_banco || TRIM(z26_num_cta) || ',
+									'TRIM(z26_num_cheque)) AS clave, ',
+								'NVL(SUM(z26_valor), 0) AS valor_che ',
+						'FROM cxct026 ',
+					'WHERE z26_compania    = ', vg_codcia,
+					'  AND z26_localidad   = ', vg_codloc,
+					'  AND z26_codcli      = ', rm_par.z26_codcli,
+					'  AND z26_tipo_doc    = "', rm_detalle[k].z26_tipo_doc,'"',
+					'  AND z26_num_doc     = "', rm_detalle[k].z26_num_doc, '"',
+					'  AND z26_dividendo   = ', rm_detalle[k].z26_dividendo,
+					'  AND z26_estado     <> "B" ',
+					'GROUP BY 1 ',
+					'INTO TEMP t1 '
+			PREPARE exec_t1 FROM query
+			EXECUTE exec_t1
+			LET cla_ve = rm_par.z26_banco, rm_par.z26_num_cta CLIPPED,
+							rm_par.z26_num_cheque CLIPPED
+			SELECT NVL(SUM(valor_che), 0)
+				INTO val_che
+				FROM t1
+				WHERE clave <> cla_ve
+			DROP TABLE t1
+			IF val_che IS NULL THEN
+				LET val_che = 0
+			END IF
+			IF val_che >= rm_detalle[k].z20_saldo_cap THEN
+				LET mensaje = 'El documento ', rm_detalle[k].z26_tipo_doc, '-',
+								rm_detalle[k].z26_num_doc CLIPPED, '-',
+								rm_detalle[k].z26_dividendo USING "&&&",
+								' Tiene cargado su saldo restante en otro ',
+								'cheque que esta ACTIVO.'
+				CALL fl_mostrar_mensaje(mensaje, 'exclamation')
+				LET cont = 1
+				EXIT FOR
+			END IF
+		END FOR
+		IF cont THEN
 			CONTINUE INPUT
 		END IF
 END INPUT
@@ -497,32 +590,30 @@ END FUNCTION
 
 FUNCTION grabar_detalle()
 DEFINE i, grabo		SMALLINT
+DEFINE mensaje		VARCHAR(200)
 DEFINE secue		LIKE cxct026.z26_secuencia
 DEFINE fecha_actual DATETIME YEAR TO SECOND
 
 BEGIN WORK
 WHENEVER ERROR CONTINUE
 SET LOCK MODE TO WAIT
-	LET grabo = 1
-	FOR i = 1 TO vm_num_det
-		DELETE FROM cxct026
-			WHERE z26_compania   = vg_codcia
-			  AND z26_localidad  = vg_codloc
-			  AND z26_codcli     = rm_par.z26_codcli
-			  AND z26_tipo_doc   = rm_detalle[i].z26_tipo_doc
-			  AND z26_num_doc    = rm_detalle[i].z26_num_doc
-			  AND z26_dividendo  = rm_detalle[i].z26_dividendo
-			  AND z26_estado     = 'A'
-		IF STATUS <> 0 THEN
-			ROLLBACK WORK
-			SET LOCK MODE TO NOT WAIT
-			WHENEVER ERROR STOP
-			CALL fl_mostrar_mensaje('No se pudo eliminar el cheque del cliente ' || rm_par.tit_nombre_cli CLIPPED || ' con fecha de cobro ' || rm_par.z26_fecha_cobro USING "dd-mm-yyyy" || '. Por favor llame al administrador.', 'exclamation')
-			LET grabo = 0
-			EXIT FOR
-		END IF
-	END FOR
-	IF NOT grabo THEN
+	DELETE FROM cxct026
+		WHERE z26_compania   = vg_codcia
+		  AND z26_localidad  = vg_codloc
+		  AND z26_codcli     = rm_par.z26_codcli
+		  AND z26_banco      = rm_par.z26_banco
+		  AND z26_num_cta    = rm_par.z26_num_cta
+		  AND z26_num_cheque = rm_par.z26_num_cheque
+		  AND z26_estado     = 'A'
+	IF STATUS <> 0 THEN
+		ROLLBACK WORK
+		SET LOCK MODE TO NOT WAIT
+		WHENEVER ERROR STOP
+		LET mensaje = 'No se pudo eliminar el cheque del cliente ',
+						rm_par.tit_nombre_cli CLIPPED, ' con fecha de cobro ',
+						rm_par.z26_fecha_cobro USING "dd-mm-yyyy",
+						'. Por favor llame al administrador.'
+		CALL fl_mostrar_mensaje(mensaje, 'exclamation')
 		RETURN
 	END IF
 	LET grabo = 1
@@ -544,7 +635,10 @@ SET LOCK MODE TO WAIT
 			IF STATUS <> 0 THEN
 				ROLLBACK WORK
 				WHENEVER ERROR STOP
-				CALL fl_mostrar_mensaje('No se pudo insertar el registro del cheque ' || rm_par.z26_num_cheque USING "<<<<<&" || '. Por favor llame al administrador.', 'exclamation')
+				LET mensaje = 'No se pudo insertar el registro del cheque ',
+								rm_par.z26_num_cheque USING "<<<<<&",
+								'. Por favor llame al administrador.'
+				CALL fl_mostrar_mensaje(mensaje, 'exclamation')
 				LET grabo = 0
 				EXIT FOR
 			END IF
@@ -565,8 +659,6 @@ END FUNCTION
 
 FUNCTION mostrar_totales()
 DEFINE i			SMALLINT
-DEFINE total_valor	DECIMAL(12,2)
-DEFINE total_saldo	DECIMAL(12,2)
 
 LET total_valor = 0
 LET total_saldo = 0
@@ -575,6 +667,29 @@ FOR i = 1 TO vm_num_det
 	LET total_valor = total_valor + rm_detalle[i].valor_che
 END FOR
 DISPLAY BY NAME total_valor, total_saldo
+
+END FUNCTION
+
+
+
+FUNCTION tiene_cheque_postfechados_activo()
+DEFINE resul		SMALLINT
+
+LET resul = NULL
+DECLARE q_cli_con_che CURSOR FOR
+	SELECT 1 FROM cxct026
+		WHERE z26_compania  = vg_codcia
+		  AND z26_localidad = vg_codloc
+		  AND z26_codcli    = rm_par.z26_codcli
+		  AND z26_estado    = 'A'
+OPEN q_cli_con_che
+FETCH q_cli_con_che INTO resul
+CLOSE q_cli_con_che
+FREE q_cli_con_che
+IF resul IS NULL THEN
+	LET resul = 0
+END IF
+RETURN resul
 
 END FUNCTION
 

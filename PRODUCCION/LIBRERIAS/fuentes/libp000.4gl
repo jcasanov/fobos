@@ -518,16 +518,21 @@ DEFINE codcli		LIKE cxct026.z26_codcli
 DEFINE banco		LIKE cxct026.z26_banco
 DEFINE num_cta		LIKE cxct026.z26_num_cta
 DEFINE num_cheque	LIKE cxct026.z26_num_cheque
-DEFINE r		RECORD LIKE cxct026.*
+DEFINE r			RECORD LIKE cxct026.*
 
 INITIALIZE r.* TO NULL
-SELECT * INTO r.* FROM cxct026 
-	WHERE z26_compania   = cod_cia  AND 
-	      z26_localidad  = cod_loc  AND 
-	      z26_codcli     = codcli   AND 
-	      z26_banco      = banco    AND 
-	      z26_num_cta    = num_cta  AND 
-	      z26_num_cheque = num_cheque
+DECLARE q_cheque_postf CURSOR FOR
+	SELECT * FROM cxct026
+	WHERE z26_compania   = cod_cia
+	  AND z26_localidad  = cod_loc
+	  AND z26_codcli     = codcli
+	  AND z26_banco      = banco
+	  AND z26_num_cta    = num_cta
+	  AND z26_num_cheque = num_cheque
+OPEN q_cheque_postf
+FETCH q_cheque_postf INTO r.*
+CLOSE q_cheque_postf
+FREE q_cheque_postf
 RETURN r.*
 
 END FUNCTION

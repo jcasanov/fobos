@@ -1002,8 +1002,8 @@ LET subquery = '(SELECT NVL(SUM(sald3), 0) ',
 LET query = 'INSERT INTO tmp_saldos ',
 		' SELECT localidad, codcli, ',
 			subquery CLIPPED,
-			' FROM tempo_doc ',
-			' GROUP BY 1, 2'
+			' FROM tempo_doc '
+			--' GROUP BY 1, 2'
 PREPARE cons_saldo FROM query
 EXECUTE cons_saldo
 DROP TABLE t1

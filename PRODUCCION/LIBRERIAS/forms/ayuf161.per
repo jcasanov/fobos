@@ -16,12 +16,13 @@ SCREEN
 [c020      |c021            |c02|c023           |c024           |c025        ]
 [c020      |c021            |c02|c023           |c024           |c025        ]
 [c020      |c021            |c02|c023           |c024           |c025        ]
-                                             Total Cheques ==>  [c030        ]
+    Banco: [c030                          ]  Total Cheques ==>  [c031        ]
 
 }
 TABLES
 cxct001
 cxct026
+gent008
 ATTRIBUTES
 c000 = cxct001.z01_codcli, NOENTRY, UPSHIFT, REVERSE;
 c001 = cxct001.z01_nomcli, NOENTRY, UPSHIFT, REVERSE;
@@ -40,7 +41,8 @@ c023 = cxct026.z26_num_cheque, NOENTRY, UPSHIFT;
 c024 = cxct026.z26_num_cta, NOENTRY, UPSHIFT;
 c025 = cxct026.z26_valor, NOENTRY, UPSHIFT, FORMAT = '#,###,##&.##';
 
-c030 = FORMONLY.tit_total TYPE DECIMAL, NOENTRY, UPSHIFT,
+c030 = gent008.g08_nombre, NOENTRY, REVERSE, UPSHIFT;
+c031 = FORMONLY.tit_total TYPE DECIMAL, NOENTRY, UPSHIFT,
 	FORMAT = "#,###,##&.##";
 END
 INSTRUCTIONS

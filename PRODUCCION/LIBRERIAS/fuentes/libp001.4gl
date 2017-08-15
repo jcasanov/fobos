@@ -19129,6 +19129,7 @@ DEFINE fil_ini, fil_fin	SMALLINT
 DEFINE col_ini, col_fin	SMALLINT
 DEFINE tit_total	DECIMAL(12,2)
 DEFINE r_z01		RECORD LIKE cxct001.*
+DEFINE g08_nombre	ARRAY[10000] OF LIKE gent008.g08_nombre
 
 LET fil_ini = 05
 LET col_ini = 02
@@ -19169,19 +19170,21 @@ INITIALIZE col TO NULL
 LET salir = 0
 WHILE NOT salir
 	LET query = "SELECT z26_fecha_cobro, z26_referencia, z26_banco,",
-			" z26_num_cheque, z26_num_cta, z26_valor ",
-			" FROM cxct026 ",
+			" z26_num_cheque, z26_num_cta, NVL(SUM(z26_valor), 0), g08_nombre ",
+			" FROM cxct026, gent008 ",
 			" WHERE z26_compania  = ", cod_cia,
 			"   AND z26_localidad = ", cod_loc,
 			"   AND z26_codcli    = ", codcli,
 			"   AND z26_estado    = 'A' ",
+			"   AND g08_banco     = z26_banco ",
+			" GROUP BY 1, 2, 3, 4, 5, 7 ",
 			" ORDER BY ", vm_columna_1, " ", rm_orden[vm_columna_1],
 				", ", vm_columna_2, " ", rm_orden[vm_columna_2]
 	PREPARE chepos FROM query
 	DECLARE q_chepos CURSOR FOR chepos
 	LET i         = 1
 	LET tit_total = 0
-	FOREACH q_chepos INTO rh_chepos[i].*
+	FOREACH q_chepos INTO rh_chepos[i].*, g08_nombre[i]
 		LET tit_total = tit_total + rh_chepos[i].z26_valor
         	LET i         = i + 1
         	IF i > filas_max THEN
@@ -19231,6 +19234,7 @@ WHILE NOT salir
                        	EXIT DISPLAY
 		--#BEFORE ROW
 			--#LET j = arr_curr()
+			--#DISPLAY BY NAME g08_nombre[j]
 			--#MESSAGE j, ' de ', i
                	--#AFTER DISPLAY
                        	--#LET salir = 1
