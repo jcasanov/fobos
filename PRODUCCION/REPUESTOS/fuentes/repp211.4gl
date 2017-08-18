@@ -56,6 +56,8 @@ DEFINE comando		VARCHAR(80)
 DEFINE hecho		SMALLINT
 DEFINE run_prog		CHAR(10)
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 CALL fl_chequeo_mes_proceso_rep(vg_codcia) RETURNING int_flag 
 IF int_flag THEN
 	RETURN
@@ -85,10 +87,12 @@ UPDATE rept025 SET r25_cod_tran = rm_cabt.r19_cod_tran,
 	WHERE r25_compania  = vg_codcia AND 
               r25_localidad = vg_codloc AND 
               r25_numprev   = vm_preventa
+
+LET fecha_actual = fl_current()
 UPDATE cajt010 SET j10_estado       = 'P',
 		   j10_tipo_destino = rm_cabt.r19_cod_tran,
 		   j10_num_destino  = rm_cabt.r19_num_tran,
-		   j10_fecha_pro    = fl_current()
+		   j10_fecha_pro    = fecha_actual
 	WHERE CURRENT OF q_ccaj
 CALL act_ultima_venta()
 CALL fl_actualiza_acumulados_ventas_rep(vg_codcia, vg_codloc,
