@@ -44,7 +44,6 @@ DEFINE vm_num_rows	SMALLINT	-- CANTIDAD DE FILAS LEIDAS
 DEFINE vm_max_rows	SMALLINT	-- MAXIMO DE FILAS LEIDAS A LEER
 DEFINE vm_max_det	SMALLINT	-- MAXIMO DE FILAS LEIDAS A LEER DETALLE
 DEFINE vm_num_detalles	SMALLINT	-- NUMERO DE ELEMENTOS DEL DETALLE      
-DEFINE vm_flag_margen 	CHAR(1)
 DEFINE vm_ini_arr       SMALLINT        -- Indica la posicion inicial desde     
                                         -- que se empezo a mostrar la ultima vez
 DEFINE vm_curr_arr      SMALLINT        -- Indica la posición actual en el      
@@ -398,7 +397,6 @@ IF r_r88.r88_numprof_nue IS NOT NULL AND r_r88.r88_numprev_nue IS NULL THEN
 		RETURNING rm_r21.*
 	LET vm_ind_arr     = 0
 	LET vm_flag_mant   = 'I'
-	LET vm_flag_margen = 'N'
 	LET vm_total       = rm_r21.r21_tot_neto
 	CALL muestra_detalle()
 	CALL calcula_totales(vm_ind_arr, 1)
@@ -425,7 +423,6 @@ IF r_r88.r88_codcli_nue IS NOT NULL THEN
 END IF
 LET vm_ind_arr     = 0
 LET vm_flag_mant   = 'I'
-LET vm_flag_margen = 'N'
 LET vm_total       = rm_r21.r21_tot_neto
 CALL muestra_detalle()
 CALL calcula_totales(vm_ind_arr, 1)
@@ -475,7 +472,6 @@ LET vm_ind_arr = 0
 CLEAR FORM
 CALL control_DISPLAY_botones()
 LET vm_flag_mant = 'I'
-LET vm_flag_margen = 'N'
 INITIALIZE rm_r01.*, rm_r03.*, rm_r04.*, rm_r10.*, rm_r11.* TO NULL
 INITIALIZE rm_r03.*, rm_r04.*, rm_r10.*, rm_r11.*, rm_g13.* TO NULL
 INITIALIZE rm_g14.*, rm_g20.*, rm_z01.*, rm_z02.* TO NULL
