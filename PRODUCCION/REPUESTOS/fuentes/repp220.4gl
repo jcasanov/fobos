@@ -459,9 +459,7 @@ IF STATUS < 0 THEN
 	EXIT PROGRAM
 END IF
 COMMIT WORK  
---CALL control_imprimir_proforma(1) 
 LET mensaje = 'Proforma Generada: ', rm_r21.r21_numprof USING "<<<<<<&", ' Ok.'
---CALL fl_mostrar_mensaje(mensaje, 'info')
 CALL control_hacer_preventa()                           
 
 END FUNCTION
@@ -516,7 +514,6 @@ IF status = NOTFOUND THEN
 END IF
 CLOSE qu_gl 
 FREE qu_gl 
---LET rm_r21.r21_bodega     = rm_r00.r00_bodega_fact 
 LET rm_r21.r21_bodega     = retorna_bodega_localidad(vg_codcia, vg_codloc)
 
 DISPLAY BY NAME rm_r21.r21_fecing, rm_r21.r21_moneda, rm_r21.r21_porc_impto,
@@ -586,6 +583,7 @@ CALL control_imprimir_proforma(1)
 CALL fl_mensaje_registro_ingresado()
 
 END FUNCTION                                                                               
+
 
 
 FUNCTION control_modificacion()
@@ -815,12 +813,6 @@ ELSE
 	LET expr_sql = 'r21_numprof = ', vm_numprof
 END IF
 
-{--
-IF expr_sql_2 IS NOT NULL THEN
-	LET expr_sql = expr_sql CLIPPED || ' AND ' || expr_sql_2 CLIPPED
-END IF
---}
-
 LET query = 'SELECT *, ROWID FROM rept021 ', 
 		' WHERE r21_compania  = ', vg_codcia,
 		'   AND r21_localidad = ', vg_codloc,
@@ -877,12 +869,12 @@ LET int_flag = 0
 INPUT BY NAME rm_r21.r21_codcli, rm_r21.r21_nomcli, rm_r21.r21_dircli,
 				rm_r21.r21_cedruc, rm_r21.r21_telcli, rm_r21.r21_atencion,
 				rm_r21.r21_referencia, rm_r21.r21_forma_pago,
-				rm_r21.r21_vendedor, rm_r21.r21_flete--, rm_r21.r21_trans_fact
+				rm_r21.r21_vendedor, rm_r21.r21_flete
 	WITHOUT DEFAULTS              
 	ON KEY (INTERRUPT)          
 		IF NOT FIELD_TOUCHED(r21_codcli, r21_nomcli, r21_dircli, r21_cedruc,
 							 r21_telcli, r21_atencion, r21_referencia,
-							 r21_forma_pago, r21_vendedor, r21_flete)--,r21_trans_fact)
+							 r21_forma_pago, r21_vendedor, r21_flete)
 		THEN
 			LET int_flag = 1
 			EXIT INPUT
@@ -1085,22 +1077,17 @@ INPUT BY NAME rm_r21.r21_codcli, rm_r21.r21_nomcli, rm_r21.r21_dircli,
 	AFTER FIELD r21_flete
 		CALL calcula_totales(vm_ind_arr,1)      
 	AFTER INPUT
-		IF NOT valida_cliente_consumidor_final(rm_r21.r21_codcli) THEN
-			--NEXT FIELD r21_codcli
-		END IF
+		CALL valida_cliente_consumidor_final(rm_r21.r21_codcli) 
+				RETURNING flag_error
 		CALL control_saldos_vencidos(vg_codcia, rm_r21.r21_codcli, 1)
 				RETURNING flag_error
 		IF rm_z01.z01_paga_impto = 'N' THEN
 			LET vm_flag_calculo_impto = 'I'
 		END IF
-{--
-		IF flag_error THEN
-			NEXT FIELD r21_codcli
-		END IF
---}
 END INPUT 
                                                                                                           
 END FUNCTION
+
 
 
 FUNCTION lee_detalle()
@@ -1166,7 +1153,8 @@ WHILE NOT salir
 				END IF
 			END IF
 			IF INFIELD(r22_item) THEN  
-                		CALL fl_ayuda_maestro_items_stock(vg_codcia,                       	     rm_r21.r21_grupo_linea, r_detalle[i].r22_bodega)
+                		CALL fl_ayuda_maestro_items_stock(vg_codcia,                       	     
+														  rm_r21.r21_grupo_linea, r_detalle[i].r22_bodega)
                      		RETURNING rm_r10.r10_codigo, rm_r10.r10_nombre,
 					  rm_r10.r10_linea,rm_r10.r10_precio_mb,
 					  rm_r11.r11_bodega, stock         
@@ -1247,8 +1235,6 @@ WHILE NOT salir
 		AFTER FIELD r22_bodega 
 			IF r_detalle[i].r22_bodega IS NULL AND 
 			   r_detalle[i].r22_item IS NOT NULL THEN
-				--CALL fl_mostrar_mensaje('Digite bodega.','exclamation') 			
-				--NEXT FIELD r22_bodega
                        		CALL retorna_stock_item(vg_codcia, r_detalle[i].r22_bodega, r_detalle[i].r22_item, 'I')
                        			RETURNING r_detalle[i].r22_bodega, 
                        			          r_detalle[i].stock_tot, 
@@ -1284,28 +1270,10 @@ WHILE NOT salir
 						END IF
 					END IF	
 				END IF
-				{-- OJO POR IMPORTACIONES
-				IF vg_codloc > 2 THEN
-					CALL validar_item_importacion_sin_stock(i)
-						RETURNING resul
-					IF NOT resul THEN
-						NEXT FIELD r22_bodega
-					END IF  
-				END IF
-				--}
 			END IF
 		BEFORE FIELD r22_item                       
 			LET item_anterior = r_detalle[i].r22_item  
 		AFTER FIELD r22_item, r22_cantidad                
-			{--
-	    		IF r_detalle[i].r22_bodega IS NULL AND
-	    		   r_detalle[i].r22_item IS NOT NULL THEN
-	    		   	LET r_detalle[i].r22_item = NULL
-				CLEAR r_detalle[j].r22_item
-                       		CALL fl_mostrar_mensaje('Digite bodega primero.','exclamation')
-                       		NEXT FIELD r22_bodega
-			END IF
-			--}
 	    		IF r_detalle[i].r22_item IS NULL AND
 	    		   r_detalle[i].r22_cantidad IS NOT NULL THEN
 	    		   	LET r_detalle[i].r22_cantidad = NULL
@@ -1345,8 +1313,7 @@ WHILE NOT salir
 					CALL fl_mostrar_mensaje(rm_r10.r10_comentarios, 'exclamation')
 				END IF
                        		CALL retorna_stock_item(vg_codcia, r_detalle[i].r22_bodega, rm_r10.r10_codigo, 'I')
-                       			RETURNING --r_detalle[i].r22_bodega, 
-                       			          r_r02.r02_codigo, 
+                       			RETURNING r_r02.r02_codigo, 
                        			          r_detalle[i].stock_tot, 
                        				  r_detalle[i].stock_loc
 				IF r_detalle[i].r22_bodega IS NULL THEN
@@ -1367,34 +1334,11 @@ WHILE NOT salir
 						r_detalle[j].r22_porc_descto 
 			   	END IF
 
-				IF vg_codloc <> 3 AND vg_codloc <> 4 THEN
-				IF FIELD_TOUCHED(r22_item) THEN
-					LET r_detalle[i].r22_porc_descto = max_descto_c
-					DISPLAY r_detalle[i].r22_porc_descto TO 
-						r_detalle[j].r22_porc_descto 
-			   	END IF
-			   	END IF
-
 				IF r_detalle[i].r22_cantidad IS NULL THEN
 					LET r_detalle[i].r22_cantidad = 1
 					DISPLAY r_detalle[i].r22_cantidad TO 
 						r_detalle[j].r22_cantidad
 				END IF
-
-				{--
-				CALL fl_lee_unidad_medida(rm_r10.r10_uni_med)
-					RETURNING r_r05.*
-				IF r_r05.r05_decimales = 'N' THEN
-					SELECT TRUNC(r_detalle[i].r22_cantidad)
-						INTO valor_dec FROM dual
-					IF (r_detalle[i].r22_cantidad -
-					   valor_dec) > 0
-					THEN
-						CALL fl_mostrar_mensaje('A este Item no puede ingresarle Cantidades con Decimales.', 'exclamation')
-						NEXT FIELD r22_cantidad
-					END IF
-				END IF
-				--}
 
 				LET cant_prof = 0
 				FOR k = 1 TO arr_count()
@@ -1411,7 +1355,6 @@ WHILE NOT salir
 					END IF
 				END FOR
                        		LET r_detalle[i].stock_loc = r_detalle[i].stock_loc - cant_prof
-                       		--DISPLAY r_detalle[i].r22_bodega TO r_detalle[j].r22_bodega
                        		DISPLAY r_detalle[i].stock_tot  TO r_detalle[j].stock_tot
 				DISPLAY r_detalle[i].stock_loc  TO r_detalle[j].stock_loc
 				IF FIELD_TOUCHED(r22_item) OR
@@ -1431,7 +1374,6 @@ WHILE NOT salir
 				END IF   
 				IF rm_r10.r10_costo_mb <= 0 THEN  
 					CALL fl_mostrar_mensaje('El item no tiene costo.','exclamation') 
-					--NEXT FIELD r22_item                                                              
 				END IF 
 				LET k = i - j + 1 
 				CALL calcula_totales(arr_count(),k)
@@ -1441,13 +1383,6 @@ WHILE NOT salir
 					CALL fl_mostrar_mensaje('El Item no pertenece al Grupo de Línea de Venta. ','exclamation')
 					NEXT FIELD r22_item
 				END IF                                        
-				{--
-				IF r_detalle[i].stock_loc > 0 AND 
-					r_detalle[i].r22_cantidad > r_detalle[i].stock_loc THEN
-					LET r_detalle[i].r22_cantidad = r_detalle[i].stock_loc
-					DISPLAY r_detalle[i].* TO r_detalle[j].*
-				END IF		
-				--}
 				--- VALIDACIÓN DE VENTA SIN STOCK              
 				CALL fl_lee_stock_rep(vg_codcia, 
 						r_detalle[i].r22_bodega,
@@ -1495,15 +1430,6 @@ WHILE NOT salir
 					NEXT FIELD r22_item
 				END IF
 			END IF	
-			{-- OJO POR IMPORTACIONES
-			IF vg_codloc > 2 THEN
-				CALL validar_item_importacion_sin_stock(i)
-					RETURNING resul
-				IF NOT resul THEN
-					NEXT FIELD r22_bodega
-				END IF  
-			END IF
-			--}
 		AFTER FIELD r22_porc_descto      
 			IF r_detalle[i].r22_porc_descto IS NULL AND 
 				r_detalle[i].r22_item IS NOT NULL THEN 
@@ -1563,9 +1489,6 @@ WHILE NOT salir
 			END IF
 			LET ind = arr_count()
 			LET vm_ind_arr = ind
-			IF rm_r21.r21_tot_neto - rm_r21.r21_flete = 0 THEN
-				--NEXT FIELD r22_cantidad 
-			END IF                         
 			LET k = valida_cliente_consumidor_final(rm_r21.r21_codcli)
 			LET salir = 1 
 	END INPUT 
@@ -1745,7 +1668,6 @@ DEFINE orden	SMALLINT
 
 LET done  = 1 
 LET orden = 1
--- INITIAL VALUES FOR rm_r22 FIELDS
 FOR i = 1 TO vm_num_detalles
 	INITIALIZE rm_r22.* TO NULL 
 	IF r_detalle[i].r22_item IS NULL THEN
@@ -1987,21 +1909,8 @@ IF NOT valida_cliente_consumidor_final(rm_r21.r21_codcli) THEN
 END IF
 CALL control_saldos_vencidos(vg_codcia, rm_r21.r21_codcli, 0)
 	RETURNING flag_error
-{--
-IF flag_error THEN
-	RETURN
-END IF
---} 
 CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc, rm_r21.r21_codcli)
 	RETURNING r_z02.*
-{--
-IF r_z02.z02_email IS NULL THEN	
-	CALL fl_mostrar_mensaje('Cliente no tiene registrado el correo electrónico para esta localidad.','exclamation')
-	RETURN
-ELSE
-	CALL fl_mostrar_mensaje('Cliente tiene registrado este correo electrónico para esta localidad: ' || r_z02.z02_email CLIPPED || '.', 'info')
-END IF
---}
 IF rm_r21.r21_trans_fact = 'S' THEN
 	IF cuantos = 0 THEN
 		CALL fl_mostrar_mensaje('Esta Proforma no se puede convertir en Pre-Venta, porque no se va a transmitir hacia otra localidad. Falta la bodega SIN STOCK.', 'exclamation')
@@ -2083,7 +1992,6 @@ DECLARE q_prof CURSOR FOR
 		  AND r22_numprof   = rm_r21.r21_numprof
 		  AND r10_compania  = r22_compania
 		  AND r10_codigo    = r22_item 
-		--GROUP BY r22_bodega, r22_item, r22_precio, r22_porc_descto,	r10_linea
 		ORDER BY 1 
 INITIALIZE r_detprev.* TO NULL
 LET salir = 0 
@@ -2240,7 +2148,6 @@ FOR i = 1 TO preventas
 	LET rm_r23.r23_tot_costo = vm_costo
 	LET rm_r23.r23_tot_bruto = vm_subtotal
 	LET rm_r23.r23_tot_dscto = vm_descuento
---	LET rm_r23.r23_tot_neto  = vm_subtotal - vm_descuento + vm_impuesto
 	-- Para sacar el impuesto del total bruto
 	LET vm_impuesto= (vm_subtotal - vm_descuento) * 
 			  rm_r23.r23_porc_impto / 100
@@ -2441,14 +2348,6 @@ LET i = 1
 FOREACH q_rept022 INTO r_r22.*, peso
 	CALL fl_lee_item(vg_codcia, r_r22.r22_item) RETURNING rm_r10.*
 	LET r_detalle[i].r22_porc_descto = r_r22.r22_porc_descto
-	{
-	CALL retorna_descto_maximo_item(vg_codcia, rm_r10.r10_cod_util)
-		RETURNING max_descto, max_descto_c
-	LET r_detalle[i].r22_porc_descto = r_r22.r22_porc_descto
-	IF r_detalle[i].r22_porc_descto > max_descto THEN
-		LET r_detalle[i].r22_porc_descto = max_descto
-	END IF
-	}
 	LET r_detalle[i].r22_cantidad    = r_r22.r22_cantidad
 	LET r_detalle[i].r22_bodega      = r_r22.r22_bodega
 	LET r_detalle[i].r22_item        = r_r22.r22_item
@@ -2479,7 +2378,6 @@ LET vm_num_detalles = vm_ind_arr
 FOR i = 1 TO vm_ind_arr 
        	CALL retorna_stock_item(vg_codcia, r_detalle[i].r22_bodega, r_detalle[i].r22_item, 'C')
         	RETURNING bode, r_detalle[i].stock_tot, r_detalle[i].stock_loc
-        	--RETURNING r_detalle[i].r22_bodega, r_detalle[i].stock_tot, r_detalle[i].stock_loc
 
 	LET cant_prof = 0
 	FOR k = 1 TO vm_ind_arr
@@ -2586,17 +2484,7 @@ END FOREACH
 IF bodega IS NULL THEN
 	LET bodega  = vm_bod_sstock
 END IF
-{
-IF bodega IS NULL THEN
-	LET bodega = rm_r00.r00_bodega_fact
-	CALL fl_lee_stock_rep(codcia, bodega, codigo)
-       		RETURNING r_r11.*                    
-	IF r_r11.r11_stock_act IS NULL THEN          
-       		LET r_r11.r11_stock_act = 0          
-	END IF                                       
-	LET stock_loc = r_r11.r11_stock_act
-END IF                                       
-}
+
 RETURN bodega, stock_tot, stock_loc
 
 END FUNCTION
@@ -3007,7 +2895,6 @@ DISPLAY BY NAME rm_r21.r21_numprof, rm_r21.r21_vendedor, rm_r21.r21_tot_neto,
 		rm_r21.r21_referencia, 
 		rm_r21.r21_forma_pago, rm_r21.r21_atencion,
 		rm_r21.r21_flete, rm_r21.r21_cod_tran, rm_r21.r21_num_tran
-		--rm_r21.r21_trans_fact
 CALL retorna_preventa() RETURNING r_r23.r23_numprev
 DISPLAY BY NAME r_r23.r23_numprev
 CALL muestra_etiquetas()
@@ -3066,11 +2953,6 @@ FUNCTION retorna_tam_arr()
 IF num_args() <> 6 THEN
 	LET vm_size_arr = fgl_scr_size('r_detalle') 
 END IF
-{
-IF vg_gui = 0 THEN 
-	LET vm_size_arr = 3
-END IF 
-}
 
 END FUNCTION  
 
@@ -3157,7 +3039,6 @@ DEFINE intentar         SMALLINT
 DEFINE resp             CHAR(6)
                                                                                 
 LET intentar = 1
---CALL fgl_winquestion(vg_producto,'Registro bloqueado por otro usuario, desea intentarlo nuevamente','No','Yes|No','question',1)
 CALL fl_hacer_pregunta('Registro bloqueado por otro usuario, desea intentarlo nuevamente','No')
 	RETURNING resp
 IF resp = 'No' THEN
@@ -3321,10 +3202,6 @@ DECLARE qu_bolo CURSOR FOR
 		ORDER BY 1
 LET cont = 0
 FOREACH qu_bolo INTO bodega
-	IF codloc = 2 OR codloc = 4 THEN
-		LET cont = cont + 1
-		EXIT FOREACH
-	END IF
 	CALL fl_lee_auxiliares_ventas(codcia, codloc, vg_modulo, bodega,
 					rm_r21.r21_grupo_linea,
 					rm_r21.r21_porc_impto)

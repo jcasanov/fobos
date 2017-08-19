@@ -515,10 +515,6 @@ IF num_args() = 4 THEN
 						rm_item.r10_linea,
 						rm_item.r10_sub_linea)
 					RETURNING rm_sublin.*
-				IF rm_sublin.r70_sub_linea IS NULL THEN
-					--CALL fl_mostrar_mensaje('La Sublínea de venta no existe en la compañía.','exclamation')
-					--NEXT FIELD r10_sub_linea
-				END IF
 				IF rm_item.r10_linea IS NOT NULL THEN
 					IF rm_item.r10_linea <> rm_sublin.r70_linea THEN
 						CALL mensaje_error_sublinea()
@@ -537,10 +533,6 @@ IF num_args() = 4 THEN
 						rm_item.r10_sub_linea,
 						rm_item.r10_cod_grupo)
 					RETURNING rm_grupo.*
-				IF rm_grupo.r71_cod_grupo IS NULL THEN
-					--CALL fl_mostrar_mensaje('El Grupo no existe en la compañía.','exclamation')
-					--NEXT FIELD r10_cod_grupo
-				END IF
 				IF rm_sublin.r70_sub_linea IS NOT NULL THEN
 					IF rm_sublin.r70_sub_linea <> rm_grupo.r71_sub_linea THEN
 						CALL mensaje_error_grupo()
@@ -560,10 +552,6 @@ IF num_args() = 4 THEN
 						rm_item.r10_cod_grupo,
 						rm_item.r10_cod_clase)
 					RETURNING rm_clase.*
-				IF rm_clase.r72_cod_clase IS NULL THEN
-					--CALL fl_mostrar_mensaje('La Clase no existe en la compañía.','exclamation')
-					--NEXT FIELD r10_cod_clase
-				END IF
 				IF rm_grupo.r71_cod_grupo IS NOT NULL THEN
 					IF rm_grupo.r71_cod_grupo <> rm_clase.r72_cod_grupo THEN
 						CALL mensaje_error_clase()
@@ -661,59 +649,25 @@ LET rm_item.r10_fecing     = fl_current()
 LET rm_item.r10_paga_impto = 'S'
 LET rm_item.r10_cantped    = 0
 LET rm_item.r10_cantback   = 0
---LET rm_item.r10_costo_mb   = 0.01		-- 10/FEB/2011
 LET rm_item.r10_costo_mb   = 0
 LET rm_item.r10_costo_ma   = 0
 LET rm_item.r10_costult_mb = 0
 LET rm_item.r10_costult_ma = 0
 LET rm_item.r10_precio_ma  = 0
 LET rm_item.r10_sec_item   = 0
-{
-LET rm_item.r10_fob        = 0
-LET rm_item.r10_monfob     = rg_gen.g00_moneda_base
-}
+
 DISPLAY BY NAME rm_item.r10_usuario, rm_item.r10_fecing, rm_item.r10_estado,
 		rm_item.r10_costo_mb, rm_item.r10_costo_ma, 
 		rm_item.r10_cantped, rm_item.r10_cantback, 
 		rm_item.r10_costult_mb, rm_item.r10_costult_ma, 
 		rm_item.r10_paga_impto, rm_item.r10_precio_ma,
-		rm_item.r10_sec_item	--, rm_item.r10_fob, rm_item.r10_monfob
-{
-CALL fl_lee_moneda(rm_item.r10_monfob) RETURNING r_g13.*
-DISPLAY r_g13.g13_nombre TO nom_mon
-}
+		rm_item.r10_sec_item
+
 CALL muestra_estado()
 CALL lee_datos()
 IF NOT int_flag THEN
 	BEGIN WORK
-		--CALL cambio_modificacion()
-		IF vg_codloc < 3 THEN
-			CALL retorna_sec_cod_item() RETURNING cod_item
-		ELSE
-			SELECT MAX(r10_codigo) INTO cod_item
-			FROM rept010
-			WHERE r10_compania        = rm_item.r10_compania
-			  --AND r10_codigo[1, 1]    = '9'
-			  --AND LENGTH(r10_codigo) >= 5
-			  AND r10_codigo[1, 2]    = '10'
-			  AND LENGTH(r10_codigo) >= 6
-		END IF
-		IF vg_codloc = 6 THEN
-			SELECT NVL(MAX(r10_codigo), 120000) INTO cod_item
-			FROM rept010
-			WHERE r10_compania = rm_item.r10_compania
-			  AND r10_codigo   MATCHES '12????'
-			  AND LENGTH(r10_codigo) =
-			      (SELECT MAX(LENGTH(r10_codigo)) FROM rept010)
-		END IF
-		IF vg_codloc = 7 THEN
-			SELECT NVL(MAX(r10_codigo), 150000) INTO cod_item
-			FROM rept010
-			WHERE r10_compania = rm_item.r10_compania
-			  AND r10_codigo   MATCHES '15????'
-			  AND LENGTH(r10_codigo) =
-			      (SELECT MAX(LENGTH(r10_codigo)) FROM rept010)
-		END IF
+		CALL retorna_sec_cod_item() RETURNING cod_item
 		LET rm_item.r10_codigo = cod_item
 		LET rm_item.r10_fecing = fl_current()
 		IF num_args() <> 4 THEN
@@ -805,10 +759,6 @@ DEFINE costo_mb		LIKE rept010.r10_costo_mb
 DEFINE capitulo		LIKE gent016.g16_capitulo
 DEFINE cod_comerc	LIKE rept010.r10_cod_comerc
 
-IF vg_codloc <> 1 THEN
-	LET rm_item.r10_cantveh = 0
-	DISPLAY BY NAME rm_item.r10_cantveh
-END IF
 LET modificar_precio = 0
 LET capitulo = NULL
 LET int_flag = 0
@@ -1030,19 +980,11 @@ INPUT BY NAME rm_item.r10_codigo, rm_item.r10_nombre, rm_item.r10_linea,
 		ELSE
 			CLEAR nom_tipo
                 END IF
-{
-	BEFORE FIELD r10_linea
-		IF vm_flag_mant = 'M' THEN
-			LET linea = rm_item.r10_linea
-		END IF
-}
 	AFTER FIELD r10_linea
-		--IF vm_flag_mant = 'I' THEN
 	        IF rm_item.r10_linea IS NOT NULL THEN
         		CALL fl_lee_linea_rep(vg_codcia, rm_item.r10_linea)
                 		RETURNING rm_lin.*
                        	IF rm_lin.r03_codigo IS NULL THEN
-                              	--CALL fgl_winmessage(vg_producto,'La Línea de venta no existe en la compañía.','exclamation')
 				CALL fl_mostrar_mensaje('La Línea de venta no existe en la compañía.','exclamation')
                                	NEXT FIELD r10_linea
                	        END IF
@@ -1054,10 +996,6 @@ INPUT BY NAME rm_item.r10_codigo, rm_item.r10_nombre, rm_item.r10_linea,
 		ELSE 
 			CLEAR nom_lin
                	END IF
-		--ELSE
-			--LET rm_item.r10_linea = linea
-			--DISPLAY BY NAME rm_item.r10_linea
-               	--END IF
 	{-- Añadido por NPC --}
 	AFTER FIELD r10_sub_linea
                 IF rm_item.r10_sub_linea IS NOT NULL THEN
@@ -1065,7 +1003,6 @@ INPUT BY NAME rm_item.r10_codigo, rm_item.r10_nombre, rm_item.r10_linea,
 						rm_item.r10_sub_linea)
                     	RETURNING rm_sublin.*
                     IF rm_sublin.r70_sub_linea IS NULL THEN
-                    	--CALL fgl_winmessage(vg_producto,'La Sublínea de venta no existe en la compañía.','exclamation')
 			CALL fl_mostrar_mensaje('La Sublínea de venta no existe en la compañía.','exclamation')
                     	NEXT FIELD r10_sub_linea
                     END IF
@@ -1084,7 +1021,6 @@ INPUT BY NAME rm_item.r10_codigo, rm_item.r10_nombre, rm_item.r10_linea,
 				rm_item.r10_sub_linea,rm_item.r10_cod_grupo)
                     	RETURNING rm_grupo.*
                     IF rm_grupo.r71_cod_grupo IS NULL THEN
-                    	--CALL fgl_winmessage(vg_producto,'El Grupo no existe en la compañía.','exclamation')
 			CALL fl_mostrar_mensaje('El Grupo no existe en la compañía.','exclamation')
                         NEXT FIELD r10_cod_grupo
                     END IF
@@ -1105,7 +1041,6 @@ INPUT BY NAME rm_item.r10_codigo, rm_item.r10_nombre, rm_item.r10_linea,
 				rm_item.r10_cod_grupo,rm_item.r10_cod_clase)
                     	RETURNING rm_clase.*
                     IF rm_clase.r72_cod_clase IS NULL THEN
-                        --CALL fgl_winmessage(vg_producto,'La Clase no existe en la compañía.','exclamation')
 			CALL fl_mostrar_mensaje('La Clase no existe en la compañía.','exclamation')
                         NEXT FIELD r10_cod_clase
                     END IF
@@ -1124,7 +1059,6 @@ INPUT BY NAME rm_item.r10_codigo, rm_item.r10_nombre, rm_item.r10_linea,
                     CALL fl_lee_marca_rep(vg_codcia, rm_item.r10_marca)
                     	RETURNING rm_marca.*
                     IF rm_marca.r73_marca IS NULL THEN
-                        --CALL fgl_winmessage(vg_producto,'La Marca no existe en la compañía.','exclamation')
 			CALL fl_mostrar_mensaje('La Marca no existe en la compañía.','exclamation')
                         NEXT FIELD r10_marca
                     END IF
@@ -1181,7 +1115,6 @@ INPUT BY NAME rm_item.r10_codigo, rm_item.r10_nombre, rm_item.r10_linea,
                     CALL fl_lee_unidad_medida(rm_item.r10_uni_med)
                                 RETURNING rm_uni.*
                         IF rm_uni.r05_codigo IS NULL THEN
-                                --CALL fgl_winmessage(vg_producto,'La Unidad de Medida no existe en la compañía ','exclamation')
 				CALL fl_mostrar_mensaje('La Unidad de Medida no existe en la compañía.','exclamation')
                                 NEXT FIELD r10_uni_med
                         END IF
@@ -1194,7 +1127,6 @@ INPUT BY NAME rm_item.r10_codigo, rm_item.r10_nombre, rm_item.r10_linea,
                     CALL fl_lee_partida(rm_item.r10_partida)
                                 RETURNING rm_par.*
                         IF rm_par.g16_partida IS NULL THEN
-                                --CALL fgl_winmessage(vg_producto,'La Partida Arancelaria no existe en la compañía ','exclamation')
 				CALL fl_mostrar_mensaje('La Partida Arancelaria no existe en la compañía.','exclamation')
                                 NEXT FIELD r10_partida
                         END IF
@@ -1207,7 +1139,6 @@ INPUT BY NAME rm_item.r10_codigo, rm_item.r10_nombre, rm_item.r10_linea,
                     CALL fl_lee_indice_rotacion(vg_codcia, rm_item.r10_rotacion)
                                 RETURNING rm_rot.*
                         IF rm_rot.r04_rotacion IS NULL THEN
-                                --CALL fgl_winmessage(vg_producto,'El Indice de Rotación no existe en la compañía.','exclamation')
 				CALL fl_mostrar_mensaje('El Indice de Rotación no existe en la compañía.','exclamation')
                                 NEXT FIELD r10_rotacion
                         END IF
@@ -1220,7 +1151,6 @@ INPUT BY NAME rm_item.r10_codigo, rm_item.r10_nombre, rm_item.r10_linea,
                     CALL fl_lee_moneda(rm_item.r10_monfob)
                                 RETURNING rm_mon.*
                         IF rm_mon.g13_moneda IS NULL THEN
-                                --CALL fgl_winmessage(vg_producto,'La Moneda no existe en la compañía ','exclamation')
 				CALL fl_mostrar_mensaje('La Moneda no existe en la compañía.','exclamation')
                                 NEXT FIELD r10_monfob
                         END IF
@@ -1288,22 +1218,12 @@ INPUT BY NAME rm_item.r10_codigo, rm_item.r10_nombre, rm_item.r10_linea,
 			LET costo_mb = rm_item.r10_costo_mb
 		END IF
 	AFTER FIELD r10_costo_mb
-		IF vm_flag_mant = 'I' THEN
-			IF rm_item.r10_costo_mb = 0 THEN
-				--LET rm_item.r10_costo_mb = 0.01
-			END IF
-		ELSE
+		IF vm_flag_mant <> 'I' THEN
 			IF tiene_stock(costo_mb) THEN
 				LET rm_item.r10_costo_mb = costo_mb
 			END IF
 		END IF
 		DISPLAY BY NAME rm_item.r10_costo_mb
-	AFTER FIELD r10_cantveh
-		IF vg_codloc <> 1 THEN
-			LET rm_item.r10_cantveh = 0
-			DISPLAY BY NAME rm_item.r10_cantveh
-			CONTINUE INPUT
-		END IF
 	AFTER FIELD r10_cod_comerc
 		IF vm_flag_mant <> 'I' AND cod_comerc IS NOT NULL THEN
 			LET rm_item.r10_cod_comerc = cod_comerc
@@ -1622,7 +1542,6 @@ DECLARE q_exist CURSOR FOR
 	SELECT r02_codigo, r02_nombre, r11_stock_act, r11_ubicacion
 		FROM rept002, rept011
 		WHERE r02_compania   = vg_codcia
-		  --AND r02_codigo   NOT IN ('QC', 'GC')
 		  AND r02_tipo_ident NOT IN ('C', 'R')
 		  AND r11_compania   = r02_compania
                   AND r11_bodega     = r02_codigo
@@ -1652,7 +1571,6 @@ END IF
 LET i = i - 1
 IF i = 0 THEN
 	CALL fl_mensaje_consulta_sin_registros()
---	CLOSE WINDOW w_108_2
         RETURN
 END IF
 
@@ -1758,11 +1676,6 @@ IF i = 0 THEN
 	LET r_ubica[1].stock    = 0
 END IF
 LET i = i - 1
---IF i = 0 THEN
---	CALL fl_mensaje_consulta_sin_registros()
---	CLOSE WINDOW w_108_6
---      RETURN
---END IF
 
 LET int_flag = 0
 CALL set_count(i)
@@ -1819,12 +1732,9 @@ SELECT r17_pedido, r16_proveedor, r16_fec_llegada, r17_cantped, r17_fob
 	FROM rept016, rept017
 	WHERE r17_compania  = vg_codcia
           AND r17_item      = rm_item.r10_codigo
-	  --AND r17_cantped   > r17_cantrec 
-	  --AND r17_estado    NOT IN ('A', 'P')
 	  AND r16_compania  = r17_compania
           AND r16_localidad = r17_localidad
           AND r16_pedido    = r17_pedido
---UNION ALL
 UNION
 	SELECT r17_pedido, r16_proveedor, r16_fec_llegada, 
 	       (r17_cantped - r17_cantrec), r17_fob
@@ -1832,7 +1742,6 @@ UNION
 		WHERE r17_compania  = vg_codcia
 	          AND r17_item      = rm_item.r10_codigo
 		  AND r17_cantped   > r17_cantrec 
-		  --AND r17_estado    = 'P'
 		  AND r16_compania  = r17_compania
                   AND r16_localidad = r17_localidad
                   AND r16_pedido    = r17_pedido
@@ -2583,10 +2492,8 @@ FUNCTION cambio_modificacion()
 
 LET rm_item.r10_usu_cosrepo = NULL
 LET rm_item.r10_fec_cosrepo = NULL
---IF rm_item.r10_costrepo_mb IS NOT NULL THEN
 	LET rm_item.r10_usu_cosrepo = vg_usuario
 	LET rm_item.r10_fec_cosrepo = fl_current()
---END IF
 DISPLAY BY NAME rm_item.r10_usu_cosrepo, rm_item.r10_fec_cosrepo
 
 END FUNCTION
@@ -2627,7 +2534,7 @@ DECLARE q_usu_c CURSOR FOR
 	SELECT * FROM rept087
 	WHERE r87_compania = rm_item.r10_compania
 	  AND r87_item     = rm_item.r10_codigo
-	ORDER BY r87_fec_camprec DESC	--, r87_secuencia
+	ORDER BY r87_fec_camprec DESC
 OPEN q_usu_c
 FETCH q_usu_c INTO r_r87.*
 DISPLAY BY NAME r_r87.r87_usu_camprec
@@ -2681,7 +2588,7 @@ WHILE TRUE
 			  AND r87_item     = rm_item.r10_codigo
 			  AND DATE(r87_fec_camprec)
 				BETWEEN fecha_ini AND fecha_fin
-	                ORDER BY r87_fec_camprec DESC	--, r87_secuencia DESC
+	                ORDER BY r87_fec_camprec DESC
 	LET i = 1
 	FOREACH q_camprec INTO r_camprec[i].*
 		LET i = i + 1
@@ -2790,19 +2697,12 @@ DEFINE loc2		LIKE gent002.g02_localidad
 DEFINE mensaje		VARCHAR(200)
 DEFINE resul		SMALLINT
 
-IF vg_usuario <> 'PETEWETT' AND vg_usuario <> 'HSALAZAR' THEN
-	--RETURN 1
-END IF
 IF rm_item.r10_costo_mb = costo_act THEN
 	RETURN 1
 END IF
 IF vg_codloc = 1 OR vg_codloc = 2 THEN
 	LET loc1 = 1
 	LET loc2 = 2
-END IF
-IF vg_codloc = 3 OR vg_codloc = 4 THEN
-	LET loc1 = 3
-	LET loc2 = 4
 END IF
 DECLARE q_stock CURSOR FOR
 	SELECT * FROM rept011
@@ -3359,22 +3259,16 @@ DEFINE fecha_ini	DATE
 DEFINE fecha_fin	DATE
 DEFINE fec_ini		LIKE rept020.r20_fecing
 DEFINE bodega		LIKE rept019.r19_bodega_ori
-DEFINE codloc		LIKE rept019.r19_localidad
 DEFINE r_r19		RECORD LIKE rept019.*
 DEFINE r_r20		RECORD LIKE rept020.*
 DEFINE r_g21		RECORD LIKE gent021.*
 DEFINE query         	CHAR(800)
 
 LET fec_ini = EXTEND(fecha_ini, YEAR TO SECOND)
-LET codloc  = 0
-IF vg_codloc = 3 THEN
-	--LET codloc = 5
-	LET codloc = 3
-END IF
 LET query = 'SELECT rept020.*, rept019.*, gent021.* ' ,
 		' FROM rept020, rept019, gent021 ',
 		' WHERE r20_compania   = ', vg_codcia,
-		'   AND r20_localidad IN (', vg_codloc, ', ', codloc, ')',
+		'   AND r20_localidad = ', vg_codloc, 
 		'   AND r20_item       = "', rm_item.r10_codigo, '"',
 		'   AND r20_fecing    <= "', fec_ini, '"',
 		'   AND r20_compania   = r19_compania ',
