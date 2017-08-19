@@ -2711,7 +2711,7 @@ LET rm_c10.c10_dif_cuadre = valor_fact - (vm_subtotal - rm_c10.c10_tot_dscto +
 
 IF vm_calc_iva = 'S' THEN
 	LET rm_c10.c10_tot_impto = (rm_c10.c10_tot_repto + rm_c10.c10_tot_mano -
-				rm_c10.c10_tot_dscto + rm_c10.c10_dif_cuadre +
+				rm_c10.c10_tot_dscto + 
 				rm_c10.c10_otros) * rm_c10.c10_porc_impto / 100
 END IF
 LET rm_c10.c10_tot_impto = fl_retorna_precision_valor(rm_c10.c10_moneda,
@@ -2733,8 +2733,8 @@ END FOR
 	
 LET rm_c10.c10_tot_compra = vm_subtotal - rm_c10.c10_tot_dscto +
 			    rm_c10.c10_otros + 
-			    rm_c10.c10_tot_impto + rm_c10.c10_flete +
-			    rm_c10.c10_dif_cuadre
+			    rm_c10.c10_tot_impto + rm_c10.c10_flete 
+
 DISPLAY BY NAME vm_subtotal,          rm_c10.c10_tot_dscto, 
 		rm_c10.c10_tot_impto, rm_c10.c10_tot_compra,
 		rm_c10.c10_dif_cuadre
