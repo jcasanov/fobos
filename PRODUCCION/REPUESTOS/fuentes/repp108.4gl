@@ -2868,7 +2868,6 @@ DEFINE r_r72		RECORD LIKE rept072.*
 DEFINE r_r73		RECORD LIKE rept073.*
 DEFINE r_r77		RECORD LIKE rept077.*
 DEFINE costo_mb		LIKE rept010.r10_costo_mb
--- Por si cambia el código del item
 DEFINE codigo_anterior	LIKE rept010.r10_codigo
 -- Variables de la forma
 DEFINE act_lista_precios CHAR(1)
@@ -2916,10 +2915,10 @@ IF rm_item.r10_proveedor IS NOT NULL THEN
 	LET rm_item.r10_precio_mb = r_c04.c04_pvp_prov_sug
 	LET rm_item.r10_costo_mb  = r_c04.c04_costo_prov
 END IF
-LET rm_item.r10_codigo = NULL
 LET rm_item.r10_estado = 'A'
 LET act_lista_precios = 'S'
 LET codigo_anterior = rm_item.r10_codigo
+LET rm_item.r10_codigo = NULL
 CALL muestra_estado()
 DISPLAY BY NAME rm_item.r10_estado, rm_item.r10_nombre, rm_item.r10_cod_clase,
 				rm_item.r10_marca, rm_item.r10_tipo, rm_item.r10_uni_med,
