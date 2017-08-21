@@ -144,7 +144,6 @@ IF rm_p24.p24_tipo = 'P' THEN
 	  	  AND p22_orden_pago = rm_p24.p24_orden_pago
 
 	IF rm_p22.p22_num_trn IS NULL THEN
-		--CALL fgl_winmessage(vg_producto,'No se ha generado la transaccion de la emision del cheque.','stop')
 		CALL fl_mostrar_mensaje('No se ha generado la transaccion de la emision del cheque.','stop')
 		EXIT PROGRAM
 	END IF
@@ -159,8 +158,7 @@ ELSE
                   AND p21_orden_pago = rm_p24.p24_orden_pago
                                                                                 
         IF rm_p21.p21_num_doc IS NULL THEN
-                --CALL fgl_winmessage(vg_producto,'No se ha generado el pago anticipado de la emision del cheque.','stop')
-		CALL fl_mostrar_mensaje('No se ha generado el pago anticipado de la emision del cheque.','stop')
+			CALL fl_mostrar_mensaje('No se ha generado el pago anticipado de la emision del cheque.','stop')
                 EXIT PROGRAM
         END IF
 END IF
@@ -198,45 +196,6 @@ WHILE TRUE
 		  	AND b13_num_comp   = rm_b12.b12_num_comp
 		ORDER BY 1
 
-	IF rm_b12.b12_tipo_comp = 'EG' THEN
-		LET vm_top    = 0
-		LET vm_left   =	4
-		LET vm_right  =	120
-		LET vm_bottom =	4
-		LET vm_page   = 33
-		FOREACH q_ctbt013 INTO r_report.*	
-			IF r_report.valor_base >= 0 THEN
-				CONTINUE FOREACH
-			END IF
-			DECLARE q_g09 CURSOR FOR
-				SELECT * FROM gent009
-				WHERE g09_compania = vg_codcia
-				  AND g09_aux_cont = r_report.cuenta
-				  AND g09_aux_cont IN
-				(SELECT b13_cuenta FROM ctbt013
-				WHERE b13_compania   = vg_codcia
-				  AND b13_tipo_comp  = rm_b12.b12_tipo_comp
-				  AND b13_num_comp   = rm_b12.b12_num_comp
-				  AND b13_valor_base < 0) 
-			OPEN q_g09
-			FETCH q_g09
-			IF STATUS <> NOTFOUND THEN
-				CLOSE q_g09
-				FREE q_g09
-				LET valor_cheque = r_report.valor_base
-				EXIT FOREACH
-			END IF
-			CLOSE q_g09
-			FREE q_g09
-		END FOREACH
-		START REPORT report_egreso_2 TO PIPE comando	
-		FOREACH q_ctbt013 INTO r_report.*	
-			OUTPUT TO REPORT report_egreso_2(r_report.*,
-								valor_cheque)
-		END FOREACH
-		FINISH REPORT report_egreso_2
-		EXIT WHILE
-	ELSE
 		LET vm_top    = 0
 		LET vm_left   =	2
 		LET vm_right  =	120
@@ -248,7 +207,6 @@ WHILE TRUE
 		END FOREACH
 		FINISH REPORT report_egreso
 		EXIT WHILE
-	END IF
 END WHILE
 
 END FUNCTION

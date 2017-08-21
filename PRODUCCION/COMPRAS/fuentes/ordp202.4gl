@@ -1967,10 +1967,9 @@ INPUT BY NAME rm_c13.c13_numero_oc, rm_c13.c13_num_guia, rm_c13.c13_fecha_cadu,
 			END IF
 			DISPLAY rm_p01.p01_nomprov TO nomprov
 			IF oc_ant IS NULL OR oc_ant <> rm_c13.c13_numero_oc THEN
-				LET rm_c13.c13_num_aut   = rm_p01.p01_num_aut
-				LET rm_c13.c13_serie_comp= rm_p01.p01_serie_comp
-				DISPLAY BY NAME rm_c13.c13_num_aut,
-						rm_c13.c13_serie_comp
+				LET rm_c13.c13_serie_comp = rm_p01.p01_serie_comp
+				CALL retorna_num_aut()
+				DISPLAY BY NAME rm_c13.c13_serie_comp
 			END IF
 			LET vm_moneda   = r_c10.c10_moneda
 			LET vm_impuesto = r_c10.c10_porc_impto
@@ -2020,6 +2019,7 @@ INPUT BY NAME rm_c13.c13_numero_oc, rm_c13.c13_num_guia, rm_c13.c13_fecha_cadu,
 		IF NOT fl_valida_numeros(rm_c13.c13_num_guia[9, lim]) THEN
 			NEXT FIELD c13_num_guia
 		END IF
+		CALL retorna_num_aut()
 	AFTER FIELD c13_fecha_cadu
 		IF rm_c13.c13_fecha_cadu IS NOT NULL THEN
 			--CALL retorna_fin_mes(rm_c13.c13_fecha_cadu)
@@ -2039,20 +2039,19 @@ INPUT BY NAME rm_c13.c13_numero_oc, rm_c13.c13_num_guia, rm_c13.c13_fecha_cadu,
 		END IF
 
 	AFTER FIELD c13_num_aut
-		IF rm_c13.c13_num_aut IS NOT NULL THEN
-			IF LENGTH(rm_c13.c13_num_aut) <> 10 THEN
-				CALL fl_mostrar_mensaje('Numero de Autorizacion no tiene completo el numero de digitos.', 'exclamation')
-				NEXT FIELD c13_num_aut
-			END IF
-			{-- OJO
-			IF rm_c13.c13_num_aut[1, 1] <> '1' THEN
-				CALL fl_mostrar_mensaje('Numero de Autorizacion es incorrecto.', 'exclamation')
-				NEXT FIELD c13_num_aut
-			END IF
-			--}
-			IF NOT fl_valida_numeros(rm_c13.c13_num_aut) THEN
-				NEXT FIELD c13_num_aut
-			END IF
+		IF rm_c13.c13_num_aut IS NULL THEN
+			CALL retorna_num_aut()
+		END IF
+		IF (LENGTH(rm_c13.c13_num_aut) <> 10 AND
+			LENGTH(rm_c13.c13_num_aut) <> 37 AND
+			LENGTH(rm_c13.c13_num_aut) <> 47 AND
+			LENGTH(rm_c13.c13_num_aut) <> 49)
+		THEN
+			CALL fl_mostrar_mensaje('El número de autorización debe ser el número electrónico o bien el número específico de 10 digitos.', 'exclamation')
+			NEXT FIELD c13_num_aut
+		END IF
+		IF NOT fl_valida_numeros(rm_c13.c13_num_aut) THEN
+			NEXT FIELD c13_num_aut
 		END IF
 
 	AFTER FIELD c13_serie_comp
@@ -3895,6 +3894,30 @@ IF mes > 12 THEN
 END IF
 LET fecha = MDY(mes, 01, anio) - 1 UNITS DAY
 RETURN fecha
+
+END FUNCTION
+
+
+
+FUNCTION retorna_num_aut()
+DEFINE r_s18		RECORD LIKE srit018.*
+
+LET rm_c13.c13_num_aut = vg_fecha USING "ddmmyyyy"
+INITIALIZE r_s18.* TO NULL
+SELECT * 
+  INTO r_s18.*
+  FROM srit018
+ WHERE s18_compania  = vg_codcia
+   AND s18_cod_ident = rm_p01.p01_tipo_doc
+   AND s18_tipo_tran = 1
+
+LET rm_c13.c13_num_aut = rm_c13.c13_num_aut, r_s18.s18_sec_tran
+LET rm_c13.c13_num_aut = rm_c13.c13_num_aut, rm_p01.p01_num_doc CLIPPED, '2',
+					rm_c13.c13_num_guia[1, 3] CLIPPED,
+					rm_c13.c13_num_guia[5, 7] CLIPPED,
+					rm_c13.c13_num_guia[9, 17] CLIPPED,
+					rm_p01.p01_num_aut
+DISPLAY BY NAME rm_c13.c13_num_aut
 
 END FUNCTION
 

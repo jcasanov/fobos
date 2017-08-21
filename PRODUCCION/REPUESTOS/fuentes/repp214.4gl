@@ -105,6 +105,7 @@ DEFINE tot_sub			LIKE ordt010.c10_tot_compra
 DEFINE rm_r00			RECORD LIKE rept000.*
 DEFINE rm_c00			RECORD LIKE ordt000.*
 DEFINE vm_stock_pend		SMALLINT
+DEFINE rm_vend			RECORD LIKE rept001.*
 
 
 
@@ -462,6 +463,11 @@ DEFINE done		SMALLINT
 
 DEFINE resp 		CHAR(6)
 DEFINE estado 		LIKE ordt010.c10_estado
+DEFINE largo		SMALLINT
+DEFINE num_aut		LIKE ordt013.c13_num_aut
+DEFINE query		CHAR(400)
+
+DEFINE fecha_actual DATETIME YEAR TO SECOND
 
 LET vm_num_ret = NULL
 CLEAR FORM
@@ -480,6 +486,22 @@ LET rm_r19.r19_dircli     = '.'
 LET rm_r19.r19_cedruc     = '.'   
 
 CALL muestra_etiquetas()
+
+IF num_args() = 4 THEN
+	INITIALIZE rm_vend.* TO NULL
+	DECLARE qu_vd CURSOR FOR
+		SELECT * FROM rept001
+			WHERE r01_compania   = vg_codcia
+			  AND r01_user_owner = vg_usuario
+	OPEN qu_vd 
+	FETCH qu_vd INTO rm_vend.*
+	IF rm_vend.r01_compania IS NOT NULL THEN
+		LET rm_r19.r19_vendedor = rm_vend.r01_codigo
+		DISPLAY rm_vend.r01_nombres TO n_vendedor
+	END IF
+	CLOSE qu_vd 
+	FREE qu_vd 
+END IF
 
 CALL lee_datos()
 LET rm_r19.r19_nomcli     = rm_p01.p01_nomprov
@@ -674,11 +696,13 @@ IF INT_FLAG THEN
 	RETURN
 END IF
 
+LET fecha_actual = fl_current()
+
 UPDATE ordt010 SET c10_estado      = estado,
-		   c10_factura     = rm_r19.r19_oc_externa,
-		   c10_fecha_fact  = vg_fecha,
-		   c10_fecha_entre = fl_current()	
-	WHERE CURRENT OF q_c10
+                  c10_factura     = rm_r19.r19_oc_externa,
+	              c10_fecha_fact  = vg_fecha, 
+	              c10_fecha_entre = fecha_actual 
+       WHERE CURRENT OF q_c10
 CLOSE q_c10
 FREE  q_c10
 
@@ -704,12 +728,14 @@ IF r_p02.p02_aux_prov_mb IS NULL THEN
 	CALL fl_mostrar_mensaje('No existe configurado auxiliar contable para este proveedor.', 'stop')
 	RETURN
 END IF
+LET largo   = LENGTH(vm_num_aut)
+LET num_aut = vm_num_aut[largo - 9, largo]
 IF (r_p01.p01_num_aut IS NULL AND r_p01.p01_serie_comp IS NULL) OR
-   (r_p01.p01_num_aut <> vm_num_aut OR r_p01.p01_serie_comp <> vm_serie_comp)
+   (r_p01.p01_num_aut <> num_aut OR r_p01.p01_serie_comp <> vm_serie_comp)
 THEN
 	UPDATE cxpt001
 		SET p01_serie_comp = vm_serie_comp,
-		    p01_num_aut    = vm_num_aut
+		    p01_num_aut    = num_aut
 		WHERE CURRENT OF q_p01
 END IF
 CLOSE q_p01
@@ -740,30 +766,27 @@ END FUNCTION
 
 
 FUNCTION lee_datos()
-
 DEFINE resp 		CHAR(6)
-
 DEFINE r_r01		RECORD LIKE rept001.*
 DEFINE r_r02		RECORD LIKE rept002.*
 DEFINE r_c01		RECORD LIKE ordt001.*
 DEFINE r_c10		RECORD LIKE ordt010.*
 DEFINE r_p20		RECORD LIKE cxpt020.*
 DEFINE contador		SMALLINT
-
 DEFINE oc_ant		LIKE ordt010.c10_numero_oc
 
 INITIALIZE vm_num_aut, vm_serie_comp, vm_fecha_cadu TO NULL
-
-LET INT_FLAG = 0
-INPUT BY NAME rm_r19.r19_cod_tran, rm_r19.r19_oc_interna, vm_num_aut,
-	vm_serie_comp, vm_fecha_cadu, rm_r19.r19_oc_externa,
-	rm_r19.r19_fact_venta, rm_r19.r19_vendedor, rm_r19.r19_bodega_ori
+LET rm_r19.r19_fact_venta = 0.01
+LET int_flag = 0
+INPUT BY NAME rm_r19.r19_cod_tran, rm_r19.r19_oc_interna, rm_r19.r19_oc_externa,
+		rm_r19.r19_fact_venta, vm_serie_comp, vm_fecha_cadu, vm_num_aut,
+		rm_r19.r19_vendedor, rm_r19.r19_bodega_ori
 	WITHOUT DEFAULTS
 	ON KEY(INTERRUPT)
 		IF NOT FIELD_TOUCHED(rm_r19.r19_cod_tran, rm_r19.r19_oc_interna,
-				vm_num_aut, vm_serie_comp, vm_fecha_cadu,
-				rm_r19.r19_oc_externa, rm_r19.r19_fact_venta,
-				rm_r19.r19_vendedor, rm_r19.r19_bodega_ori)
+						 rm_r19.r19_oc_externa, rm_r19.r19_fact_venta,
+						 vm_serie_comp, vm_fecha_cadu, vm_num_aut,
+						 rm_r19.r19_vendedor, rm_r19.r19_bodega_ori)
 		THEN
 			RETURN
 		END IF
@@ -789,8 +812,7 @@ INPUT BY NAME rm_r19.r19_cod_tran, rm_r19.r19_oc_interna, vm_num_aut,
 		END IF
 		IF INFIELD(r19_vendedor) THEN
 			CALL fl_ayuda_vendedores(vg_codcia, 'A', 'M')
-				RETURNING r_r01.r01_codigo, 
-					  r_r01.r01_nombres
+				RETURNING r_r01.r01_codigo, r_r01.r01_nombres
 			IF r_r01.r01_codigo IS NOT NULL THEN
 			    LET rm_r19.r19_vendedor = r_r01.r01_codigo
 			    DISPLAY BY NAME rm_r19.r19_vendedor
@@ -836,7 +858,6 @@ INPUT BY NAME rm_r19.r19_cod_tran, rm_r19.r19_oc_interna, vm_num_aut,
 		CALL fl_lee_orden_compra(vg_codcia, vg_codloc, 
 			rm_r19.r19_oc_interna) RETURNING r_c10.*
 		IF r_c10.c10_numero_oc IS NULL THEN
-			--CALL fgl_winmessage(vg_producto,'Orden de compra no existe.','exclamation')
 			CALL fl_mostrar_mensaje('Orden de compra no existe.','exclamation')
 			INITIALIZE r_c10.* TO NULL
 			CALL etiquetas_orden_compra(r_c10.*)
@@ -844,7 +865,6 @@ INPUT BY NAME rm_r19.r19_cod_tran, rm_r19.r19_oc_interna, vm_num_aut,
 			NEXT FIELD r19_oc_interna 
 		END IF
 		IF r_c10.c10_estado <> 'P' THEN
-			--CALL fgl_winmessage(vg_producto,'No puede realizar una compra local de esta orden de compra.','exclamation')
 			CALL fl_mostrar_mensaje('Orden de compra no esta aprobada.','exclamation')
 			INITIALIZE r_c10.* TO NULL
 			CALL etiquetas_orden_compra(r_c10.*)
@@ -856,7 +876,6 @@ INPUT BY NAME rm_r19.r19_cod_tran, rm_r19.r19_oc_interna, vm_num_aut,
 			RETURNING r_c01.*
 		IF r_c01.c01_modulo <> vg_modulo AND r_c01.c01_ing_bodega <> 'S'
 		THEN
-			--CALL fgl_winmessage(vg_producto,'Esta orden de compra no puede asociarse a una compra local.','exclamation')
 			CALL fl_mostrar_mensaje('Orden de compra no pertenece al módulo.','exclamation')
 			INITIALIZE r_c10.* TO NULL
 			CALL etiquetas_orden_compra(r_c10.*)
@@ -865,9 +884,9 @@ INPUT BY NAME rm_r19.r19_cod_tran, rm_r19.r19_oc_interna, vm_num_aut,
 		END IF
 		CALL etiquetas_orden_compra(r_c10.*)
 		IF oc_ant IS NULL OR oc_ant <> r_c10.c10_numero_oc THEN
-			LET vm_num_aut    = rm_p01.p01_num_aut
+			CALL retorna_num_aut()
 			LET vm_serie_comp = rm_p01.p01_serie_comp
-			DISPLAY BY NAME vm_num_aut, vm_serie_comp
+			DISPLAY BY NAME vm_serie_comp
 		END IF
 		--#CALL dialog.keysetlabel('F5', 'Orden de Compra')
 		CALL setea_nombre_botones()
@@ -876,14 +895,12 @@ INPUT BY NAME rm_r19.r19_cod_tran, rm_r19.r19_oc_interna, vm_num_aut,
 			CALL fl_lee_vendedor_rep(vg_codcia, rm_r19.r19_vendedor)
 				RETURNING r_r01.*
 			IF r_r01.r01_codigo IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'Vendedor no existe.','exclamation')
 				CALL fl_mostrar_mensaje('Vendedor no existe.','exclamation')
 				CLEAR n_vendedor
 				NEXT FIELD r19_vendedor
 			END IF 
 			IF r_r01.r01_estado = 'B' THEN
-				--CALL fgl_winmessage(vg_producto,'Vendedor está bloqueado.','exclamation')
-				CALL fl_mostrar_mensaje('Vendedor está bloqueado.','exclamation')
+				CALL fl_mostrar_mensaje('Vendedor esta bloqueado.','exclamation')
 				CLEAR n_vendedor
 				NEXT FIELD r19_vendedor
 			END IF
@@ -896,19 +913,16 @@ INPUT BY NAME rm_r19.r19_cod_tran, rm_r19.r19_oc_interna, vm_num_aut,
 			CALL fl_lee_bodega_rep(vg_codcia, rm_r19.r19_bodega_ori)
 				RETURNING r_r02.*
 			IF r_r02.r02_codigo IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'Bodega no existe.','exclamation')
 				CALL fl_mostrar_mensaje('Bodega no existe.','exclamation')
 				CLEAR n_bodega
 				NEXT FIELD r19_bodega_ori
 			END IF 
 			IF r_r02.r02_estado = 'B' THEN
-				--CALL fgl_winmessage(vg_producto,'Bodega está bloqueada.','exclamation')
 				CALL fl_mostrar_mensaje('Bodega está bloqueada.','exclamation')
 				CLEAR n_bodega
 				NEXT FIELD r19_bodega_ori
 			END IF
 			IF r_r02.r02_tipo <> 'F' THEN
-				--CALL fgl_winmessage(vg_producto,'Debe escoger una bodega física.','exclamation')
 				CALL fl_mostrar_mensaje('Debe escoger una bodega física.','exclamation')
 				CLEAR n_bodega
 				NEXT FIELD r19_bodega_ori
@@ -941,6 +955,24 @@ INPUT BY NAME rm_r19.r19_cod_tran, rm_r19.r19_oc_interna, vm_num_aut,
 		IF rm_r19.r19_oc_externa[5, 7] <> vm_serie_comp[4, 6] THEN
 			CALL fl_mostrar_mensaje('El prefijo de venta es diferente que el de la serie del comprobante.', 'exclamation')
 			NEXT FIELD r19_oc_externa
+		END IF
+		IF oc_ant IS NULL OR oc_ant <> r_c10.c10_numero_oc THEN
+			CALL retorna_num_aut()
+		END IF
+	AFTER FIELD vm_num_aut
+		IF vm_num_aut IS NULL THEN
+			CALL retorna_num_aut()
+		END IF
+		IF (LENGTH(vm_num_aut) <> 10 AND
+			LENGTH(vm_num_aut) <> 37 AND
+			LENGTH(vm_num_aut) <> 47 AND
+			LENGTH(vm_num_aut) <> 49)
+		THEN
+			CALL fl_mostrar_mensaje('El número de autorización debe ser el número electrónico o bien el número específico de 10 digitos.', 'exclamation')
+			NEXT FIELD vm_num_aut
+		END IF
+		IF NOT fl_valida_numeros(vm_num_aut) THEN
+			NEXT FIELD vm_num_aut
 		END IF
 	AFTER FIELD vm_fecha_cadu
 		IF vm_fecha_cadu IS NOT NULL THEN
@@ -4425,9 +4457,7 @@ FOREACH q_fact_i INTO r_fact_i.*
 		SET stock_pend = stock_pend - r_fact_i.cant_desp
 		WHERE r10_codigo = r_fact_i.item
 	LET j = j + 1
-	--display '   transf ', r_r20.r20_num_tran, ' ', r_r20.r20_cant_ven, ' item ', r_r20.r20_item
 END FOREACH
---display '   transf ', r_r19.r19_num_tran
 UPDATE rept019
 	SET r19_tot_costo = r_r19.r19_tot_costo,
 	    r19_tot_bruto = r_r19.r19_tot_bruto,
@@ -4439,12 +4469,6 @@ UPDATE rept019
 INSERT INTO rept041
 	VALUES(vg_codcia, vg_codloc, rm_r19.r19_cod_tran, rm_r19.r19_num_tran,
 		r_r19.r19_cod_tran, r_r19.r19_num_tran)
-{
-LET num_tran = r_r19.r19_num_tran
-CALL fl_mostrar_mensaje('Se genero transferencia automatica No. ' ||
-			num_tran || '. De la bodega ' || r_r19.r19_bodega_ori ||
-			' a la bodega ' || r_r19.r19_bodega_dest || '.','info')
-}
 
 END FUNCTION
 
@@ -5078,5 +5102,29 @@ DROP TABLE tmp_ite_cl
 IF vm_stock_pend THEN
 	DROP TABLE temp_pend
 END IF
+
+END FUNCTION
+
+
+
+FUNCTION retorna_num_aut()
+DEFINE r_s18		RECORD LIKE srit018.*
+
+LET vm_num_aut = vg_fecha USING "ddmmyyyy"
+INITIALIZE r_s18.* TO NULL
+SELECT * 
+  INTO r_s18.*
+  FROM srit018
+ WHERE s18_compania  = vg_codcia
+   AND s18_cod_ident = rm_p01.p01_tipo_doc
+   AND s18_tipo_tran = 1
+
+LET vm_num_aut = vm_num_aut, r_s18.s18_sec_tran
+LET vm_num_aut = vm_num_aut, rm_p01.p01_num_doc CLIPPED, '2',
+					rm_r19.r19_oc_externa[1, 3] CLIPPED,
+					rm_r19.r19_oc_externa[5, 7] CLIPPED,
+					rm_r19.r19_oc_externa[9, 17] CLIPPED,
+					rm_p01.p01_num_aut
+DISPLAY BY NAME vm_num_aut
 
 END FUNCTION
