@@ -234,14 +234,9 @@ IF rm_rol.n15_ano IS NULL THEN
 	CALL fgl_winmessage(vg_producto,'Error: No hay registros que modificar','exclamation')
 	RETURN
 END IF
---IF rm_rol.n15_ano = YEAR(TODAY) THEN
-	CALL leer_detalle() RETURNING num_elm
---ELSE
-	--COMMIT WORK
-	--CALL fgl_winmessage(vg_producto,'El rol es histórico, no puede ser modificado','info')
-	--WHENEVER ERROR STOP
-	--RETURN
---END IF
+
+CALL leer_detalle() RETURNING num_elm
+
 IF NOT int_flag THEN
 	DELETE FROM rolt015 WHERE n15_ano = rm_rol.n15_ano
 	LET rm_rol.n15_compania = 0

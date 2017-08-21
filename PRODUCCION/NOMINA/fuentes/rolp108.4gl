@@ -332,9 +332,9 @@ LET rm_n31.n31_compania = vg_codcia
 LET rm_n31.n31_cod_trab = rm_n30.n30_cod_trab
 CALL control_grabar()
 COMMIT WORK
---IF rm_n30.n30_sueldo_mes <> sueldo THEN
-	CALL verificar_proceso_activo_nomina()
---END IF
+
+CALL verificar_proceso_activo_nomina()
+
 CALL muestra_reg()
 CALL fl_mensaje_registro_modificado()
 
@@ -1075,18 +1075,12 @@ INPUT BY NAME rm_n30.n30_nombres, rm_n30.n30_domicilio, rm_n30.n30_telef_domic,
 			CALL validar_cedruc(rm_n30.n30_cod_trab,
 						rm_n30.n30_num_doc_id)
 				RETURNING resul
-			IF NOT resul THEN
-				--NEXT FIELD n30_num_doc_id
-			END IF
 		END IF
 	AFTER FIELD n30_lib_militar
 		IF rm_n30.n30_lib_militar IS NOT NULL THEN
 			CALL validar_lib_militar(rm_n30.n30_cod_trab,
 						rm_n30.n30_lib_militar)
 				RETURNING resul
-			IF resul THEN
-				--NEXT FIELD n30_lib_militar
-			END IF
 		END IF
 	AFTER FIELD n30_pais_nac
                 IF rm_n30.n30_pais_nac IS NOT NULL THEN
@@ -1246,9 +1240,6 @@ e','exclamation')
 		IF rm_n30.n30_cta_trabaj IS NOT NULL THEN
 			CALL validar_cuenta(rm_n30.n30_cta_trabaj)
 				RETURNING resul
-			IF resul = 1 THEN
-				--NEXT FIELD n30_cta_trabaj
-			END IF
 		ELSE
 			CLEAR n30_cta_trabaj
 		END IF
@@ -1256,7 +1247,6 @@ e','exclamation')
 		IF rm_n30.n30_cta_trabaj IS NOT NULL THEN
 			IF rm_n30.n30_tipo_cta_tra <> 'N' THEN
 				CALL fgl_winmessage (vg_producto,'Empleado con tipo de cuenta de ahorros o corriente. Ingrese el número de cuenta trabajador.','exclamation')
-				--NEXT FIELD n30_cta_trabaj
 			END IF
 		END IF
 	AFTER FIELD n30_cod_seguro
@@ -1351,7 +1341,6 @@ e','exclamation')
 			END IF
 			IF rm_n30.n30_tipo_pago = 'T' THEN
 				CALL fl_mostrar_mensaje('Empleado con tipo de Pago Transferencia, debe ingresar el Número de Cuenta Contable.', 'exclamation')
-				--NEXT FIELD n30_cta_trabaj
 			END IF
 		END IF
 		IF rm_n30.n30_tipo_cta_tra = 'N' THEN
@@ -1406,15 +1395,9 @@ e','exclamation')
 			CALL validar_cedruc(rm_n30.n30_cod_trab,
 						rm_n30.n30_num_doc_id)
 				RETURNING resul
-			IF NOT resul THEN
-				--NEXT FIELD n30_num_doc_id
-			END IF
 			CALL validar_lib_militar(rm_n30.n30_cod_trab,
 						rm_n30.n30_lib_militar)
 				RETURNING resul
-			IF resul THEN
-				--NEXT FIELD n30_lib_militar
-			END IF
 		END IF
 		IF rm_n30.n30_sectorial IS NOT NULL AND
 		   rm_n30.n30_estado = 'A'
@@ -1500,9 +1483,7 @@ CASE cont
 		LET resul = 0
 END CASE
 IF cont <= 1 THEN
-	--IF rm_n30.n30_tipo_doc_id = 'C' THEN
-		CALL fl_validar_cedruc_dig_ver(cedruc) RETURNING resul
-	--END IF
+	CALL fl_validar_cedruc_dig_ver(cedruc) RETURNING resul
 END IF
 RETURN resul
 
@@ -1582,9 +1563,6 @@ IF vm_flag_mant = 'I' THEN
 		IF NOT int_flag THEN
 			CALL grabar_cargas()
 		END IF
-	END IF
-	IF vg_codloc = 1 AND rm_n30.n30_fec_jub IS NULL THEN
-		--CALL generar_aux_cont_empleado()
 	END IF
 	CALL graba_modulo_club(rm_n30.*)
 	CALL verificar_proceso_activo_nomina()
@@ -1885,15 +1863,12 @@ LET salida = rm_n30.n30_fecha_sal
 IF rm_n30.n30_estado = 'A' OR rm_n30.n30_estado = 'J' THEN
 	DISPLAY 'INACTIVO' TO tit_estado_tra
 	LET estado = 'I'
-	--LET salida = TODAY
 	LET salida = fec_tope
 	INITIALIZE reing TO NULL
 END IF
 IF rm_n30.n30_estado = 'I' THEN
 	DISPLAY 'ACTIVO' TO tit_estado_tra
 	LET estado = 'A'
-	--INITIALIZE salida TO NULL
-	--LET reing  = TODAY
 	LET reing  = fec_tope
 END IF
 DISPLAY salida TO n30_fecha_sal
@@ -2027,8 +2002,6 @@ DEFINE query		CHAR(2000)
 DEFINE tab1, tab2	CHAR(2)
 DEFINE i, lim, pos	SMALLINT
 DEFINE ctos1, ctos2	INTEGER
---define c		like ctbt010.b10_cuenta
---define d		like ctbt010.b10_descripcion
 
 SELECT a.*, TRIM(n30_nombres) nom_empl
 	FROM rolt056 a, rolt030
@@ -2122,13 +2095,7 @@ let query = 'SELECT b.cuenta[1, 8] || ',
 		'  AND a.b10_cuenta   = b.cuenta ',
 		'  AND n30_compania   = a.b10_compania ',
 		'  AND n30_cod_trab   = ', rm_n30.n30_cod_trab
-{--
-prepare caca from query
-declare q_caca cursor for caca
-foreach q_caca into c, d
-	display c, d
-end foreach
---}
+
 LET query = 'INSERT INTO ctbt010 ',
 		'(b10_compania, b10_cuenta, b10_descripcion, b10_estado, ',
 		 'b10_tipo_cta, b10_tipo_mov, b10_nivel, b10_saldo_ma, ',
