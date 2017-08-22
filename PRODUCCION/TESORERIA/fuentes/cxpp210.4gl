@@ -685,7 +685,7 @@ END IF
 
 IF i = 1 THEN
 	LET pagos      = 1 
-	LET fecha_pago = TODAY + 30
+	LET fecha_pago = vg_fecha + 30
 	LET dias_pagos = 30
 	LET tot_cap    = 0
 	LET tot_int    = 0
@@ -963,7 +963,7 @@ INPUT BY NAME pagos, rm_c10.c10_interes, fecha_pago, dias_pagos
 		--#CALL dialog.keysetlabel("F1","")
 		--#CALL dialog.keysetlabel("CONTROL-W","")
 	AFTER FIELD fecha_pago
-		IF fecha_pago < TODAY THEN
+		IF fecha_pago < vg_fecha THEN
 			CALL fl_mostrar_mensaje('Debe ingresar una fecha mayor o igual a la de hoy.','exclamation')
 			NEXT FIELD fecha_pago
 		END IF
@@ -1081,7 +1081,7 @@ WHILE TRUE
 				EXIT INPUT
 			END IF
 
-			LET tot_dias = r_detalle_2[pagos].c12_fecha_vcto - TODAY 	
+			LET tot_dias = r_detalle_2[pagos].c12_fecha_vcto - vg_fecha 	
 			DISPLAY BY NAME tot_dias
 
 			IF vg_gui = 1 THEN
@@ -1811,7 +1811,7 @@ INPUT BY NAME rm_c10.c10_codprov, rm_c13.c13_num_guia, rm_c13.c13_fec_aut,
 			CALL fl_mostrar_mensaje('Digite la fecha de caducidad.', 'exclamation')
 			NEXT FIELD c13_fecha_cadu
 		END IF
-		IF rm_c13.c13_fecha_cadu < TODAY THEN
+		IF rm_c13.c13_fecha_cadu < vg_fecha THEN
 			CALL fl_mostrar_mensaje('La fecha de caducidad no puede ser menor a la fecha de hoy.', 'exclamation')
 			NEXT FIELD c13_fecha_cadu
 		END IF
@@ -2506,7 +2506,7 @@ LET fecha_actual = fl_current()
 
 UPDATE ordt010 SET c10_estado      = 'C',
 		   c10_factura     = rm_c13.c13_num_guia,
-		   c10_fecha_fact  = TODAY,
+		   c10_fecha_fact  = vg_fecha,
 		   c10_fecha_entre = fecha_actual	
 	WHERE CURRENT OF q_ordt010 
 
@@ -2585,7 +2585,7 @@ LET r_p22.p22_codprov    = rm_c10.c10_codprov
 LET r_p22.p22_tipo_trn   = 'AJ'
 
 LET r_p22.p22_referencia = 'RECEPCION ORDEN DE COMPRA # '|| rm_c13.c13_num_recep || ' PAGO CONTADO'
-LET r_p22.p22_fecha_emi  = TODAY
+LET r_p22.p22_fecha_emi  = vg_fecha
 LET r_p22.p22_moneda     = rm_c10.c10_moneda
 LET r_p22.p22_paridad    = rm_c10.c10_paridad
 LET r_p22.p22_tasa_mora  = 0
@@ -3139,7 +3139,7 @@ LET r_p20.p20_localidad   = vg_codloc
 LET r_p20.p20_codprov     = rm_c10.c10_codprov
 LET r_p20.p20_usuario     = vg_usuario
 LET r_p20.p20_fecing      = fl_current()
-LET r_p20.p20_fecha_emi	  = TODAY
+LET r_p20.p20_fecha_emi	  = vg_fecha
 LET r_p20.p20_tipo_doc    = 'FA'
 LET r_p20.p20_num_doc     = rm_c13.c13_factura
 LET r_p20.p20_referencia  = 'RECEPCION # ' || rm_c13.c13_num_recep
@@ -3178,7 +3178,7 @@ ELSE
 	LET r_p20.p20_referencia  = 'RECEPCION # ' || rm_c13.c13_num_recep 
 				    || '  DE CONTADO'
 	LET r_p20.p20_dividendo  = 1
-	LET r_p20.p20_fecha_vcto = TODAY
+	LET r_p20.p20_fecha_vcto = vg_fecha
 	LET r_p20.p20_valor_cap  = rm_c13.c13_tot_recep
 	LET r_p20.p20_valor_int  = 0
 	LET r_p20.p20_saldo_cap  = rm_c13.c13_tot_recep
@@ -3690,7 +3690,7 @@ ELSE
 END IF
 LET r_b13.b13_num_concil  = NULL
 LET r_b13.b13_filtro      = NULL
-LET r_b13.b13_fec_proceso = TODAY
+LET r_b13.b13_fec_proceso = vg_fecha
 LET r_b13.b13_codcli      = NULL
 LET r_b13.b13_codprov     = r_c10.c10_codprov
 LET r_b13.b13_pedido      = NULL
@@ -3820,14 +3820,14 @@ LET r_b12.b12_compania    = vg_codcia
 -- OjO confirmar
 LET r_b12.b12_tipo_comp   = r_b03.b03_tipo_comp
 LET r_b12.b12_num_comp    = fl_numera_comprobante_contable(vg_codcia,
-                            	r_b12.b12_tipo_comp, YEAR(TODAY), MONTH(TODAY))
+                            	r_b12.b12_tipo_comp, YEAR(vg_fecha), MONTH(vg_fecha))
 LET r_b12.b12_estado      = 'A' 
 --LET r_b12.b12_glosa       = 'COMPROBANTE: ' || glosa CLIPPED 
 LET r_b12.b12_glosa       = rm_b12.b12_glosa CLIPPED
 LET r_b12.b12_origen      = 'A' 
 LET r_b12.b12_moneda      = r_c10.c10_moneda 
 LET r_b12.b12_paridad     = r_c10.c10_paridad 
-LET r_b12.b12_fec_proceso = TODAY
+LET r_b12.b12_fec_proceso = vg_fecha
 LET r_b12.b12_modulo      = r_b03.b03_modulo
 LET r_b12.b12_usuario     = vg_usuario 
 LET r_b12.b12_fecing      = fl_current()
@@ -4295,9 +4295,9 @@ IF rm_c10.c10_ord_trabajo IS NOT NULL THEN
 		RETURN 0
 	END IF
 END IF
-LET dias = TODAY - rm_c10.c10_fecha_fact
-IF (r_c00.c00_react_mes = 'S' AND (YEAR(TODAY) <> YEAR(rm_c10.c10_fecha_fact) OR
-    MONTH(TODAY) <> MONTH(rm_c10.c10_fecha_fact))) OR
+LET dias = vg_fecha - rm_c10.c10_fecha_fact
+IF (r_c00.c00_react_mes = 'S' AND (YEAR(vg_fecha) <> YEAR(rm_c10.c10_fecha_fact) OR
+    MONTH(vg_fecha) <> MONTH(rm_c10.c10_fecha_fact))) OR
    (r_c00.c00_react_mes = 'N' AND dias > r_c00.c00_dias_react)
 THEN
 	LET mensaje = 'No se puede anular la recepción # ',
@@ -4369,7 +4369,7 @@ LET r_p21.p21_num_doc    = nextValInSequence('TE', vm_nota_credito)
 LET r_p21.p21_referencia = 'ANULACION RECEPCION # ',
 				rm_c13.c13_num_recep USING "<&", ' OC # ',
 				rm_c13.c13_numero_oc USING "<<<<&"
-LET r_p21.p21_fecha_emi  = TODAY
+LET r_p21.p21_fecha_emi  = vg_fecha
 LET r_p21.p21_moneda     = rm_c10.c10_moneda
 LET r_p21.p21_paridad    = rm_c10.c10_paridad
 LET r_p21.p21_valor      = rm_c13.c13_tot_recep - tot_ret
@@ -4401,7 +4401,7 @@ IF r_p22.p22_num_trn <= 0 THEN
 	EXIT PROGRAM
 END IF
 LET r_p22.p22_referencia  = r_p21.p21_referencia CLIPPED
-LET r_p22.p22_fecha_emi   = TODAY
+LET r_p22.p22_fecha_emi   = vg_fecha
 LET r_p22.p22_moneda 	  = rm_c10.c10_moneda
 LET r_p22.p22_paridad 	  = rm_c10.c10_paridad
 LET r_p22.p22_tasa_mora   = 0
