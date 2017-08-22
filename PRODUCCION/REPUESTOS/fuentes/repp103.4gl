@@ -213,7 +213,7 @@ CLEAR FORM
 INITIALIZE rm_lven.* TO NULL
 LET vm_flag_mant          = 'I'
 LET rm_lven.r03_compania   = vg_codcia
-LET rm_lven.r03_fecing     = CURRENT
+LET rm_lven.r03_fecing     = fl_current()
 LET rm_lven.r03_usuario    = vg_usuario
 LET rm_lven.r03_estado     = 'A'
 LET rm_lven.r03_tipo       = 'N'

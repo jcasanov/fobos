@@ -186,7 +186,7 @@ FUNCTION control_ingreso()
 OPTIONS INPUT WRAP
 CLEAR FORM
 INITIALIZE rm_pais.* TO NULL
-LET rm_pais.g30_fecing = CURRENT
+LET rm_pais.g30_fecing = fl_current()
 LET rm_pais.g30_usuario = vg_usuario
 LET rm_pais.g30_pais = 0
 DISPLAY BY NAME rm_pais.g30_fecing, rm_pais.g30_usuario

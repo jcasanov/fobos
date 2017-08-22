@@ -2092,7 +2092,7 @@ CALL control_DISPLAY_botones_2()
 IF i = 1 THEN
 	LET pagos      = 1 
 -- OjO
--- fecha_pago debe ser TODAY + credit_dias (definido en la cxpt002)
+-- fecha_pago debe ser vg_fecha + credit_dias (definido en la cxpt002)
 	CALL fl_lee_proveedor_localidad(vg_codcia, vg_codloc, r_c10.c10_codprov)
 		RETURNING r_p02.*
 	LET fecha_pago = vg_fecha + r_p02.p02_credit_dias

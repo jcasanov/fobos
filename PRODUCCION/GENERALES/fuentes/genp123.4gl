@@ -192,7 +192,7 @@ DEFINE descri_cia	LIKE gent001.g01_razonsocial
 LET flag_man = 'I'
 CLEAR FORM
 INITIALIZE rm_cost.* TO NULL
-LET rm_cost.g33_fecing = CURRENT
+LET rm_cost.g33_fecing = fl_current()
 LET rm_cost.g33_usuario = vg_usuario
 LET rm_cost.g33_compania = vg_codcia
 DISPLAY BY NAME rm_cost.g33_fecing, rm_cost.g33_usuario

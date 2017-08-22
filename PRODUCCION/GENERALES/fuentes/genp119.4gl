@@ -204,7 +204,7 @@ FUNCTION control_ingreso()
 OPTIONS INPUT WRAP
 CLEAR FORM
 INITIALIZE rm_stran.* TO NULL
-LET rm_stran.g22_fecing      = CURRENT
+LET rm_stran.g22_fecing      = fl_current()
 LET rm_stran.g22_usuario     = vg_usuario
 LET rm_stran.g22_cod_subtipo = 0 
 LET rm_stran.g22_estado      = 'A'

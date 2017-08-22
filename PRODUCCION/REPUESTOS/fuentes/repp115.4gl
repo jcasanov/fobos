@@ -167,7 +167,7 @@ INITIALIZE rm_r75.* TO NULL
 LET vm_flag_mant          = 'I'
 LET rm_r75.r75_compania   = vg_codcia
 LET rm_r75.r75_estado 	  = 'A'
-LET rm_r75.r75_fecing     = CURRENT
+LET rm_r75.r75_fecing     = fl_current()
 LET rm_r75.r75_usuario    = vg_usuario
 CALL muestra_estado()
 DISPLAY BY NAME rm_r75.r75_fecing, rm_r75.r75_usuario

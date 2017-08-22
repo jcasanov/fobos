@@ -151,7 +151,7 @@ DEFINE num_aux		INTEGER
 CLEAR FORM
 INITIALIZE rm_g31.* TO NULL
 LET rm_g31.g31_ciudad  = 0
-LET rm_g31.g31_fecing  = CURRENT
+LET rm_g31.g31_fecing  = fl_current()
 LET rm_g31.g31_usuario = vg_usuario
 DISPLAY BY NAME rm_g31.g31_fecing, rm_g31.g31_usuario
 CALL lee_datos('I')

@@ -194,7 +194,7 @@ DEFINE nombre		LIKE gent032.g32_nombre
 LET flag_man = 'I'
 CLEAR FORM
 INITIALIZE rm_zonv.* TO NULL
-LET rm_zonv.g32_fecing = CURRENT
+LET rm_zonv.g32_fecing = fl_current()
 LET rm_zonv.g32_usuario = vg_usuario
 LET rm_zonv.g32_compania = vg_codcia
 DISPLAY BY NAME rm_zonv.g32_fecing, rm_zonv.g32_usuario

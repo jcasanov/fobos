@@ -312,7 +312,7 @@ INITIALIZE rm_pra.* TO NULL
 INITIALIZE rm_par.* TO NULL
 LET rm_pra.g16_porcentaje = 0
 LET rm_pra.g16_salvagu    = 0
-LET rm_pra.g16_fecing     = CURRENT
+LET rm_pra.g16_fecing     = fl_current()
 LET rm_pra.g16_usuario    = vg_usuario
 LET rm_par.g38_usuario    = vg_usuario
 
@@ -320,7 +320,6 @@ DISPLAY BY NAME rm_pra.g16_fecing, rm_pra.g16_usuario
 LET vm_flag_mant          = 'I'
 CALL lee_datos()
 IF NOT int_flag THEN
-	LET rm_pra.g16_fecing  = CURRENT
 	BEGIN WORK
 		INSERT INTO gent016 VALUES (rm_pra.*)
 		LET num_aux = SQLCA.SQLERRD[6]
@@ -396,15 +395,11 @@ IF NOT int_flag THEN
     			   	g16_salvagu    = rm_pra.g16_salvagu,
 				g16_niv_par    = rm_pra.g16_niv_par,
 				g16_nacional   = rm_pra.g16_nacional,
-				g16_verifcador = rm_pra.g16_verifcador,
-				g16_usuario    = vg_usuario,
-				g16_fecing     = CURRENT
+				g16_verifcador = rm_pra.g16_verifcador
 		WHERE CURRENT OF q_up
 	IF rm_pra.g16_capitulo IS NOT NULL THEN
 	UPDATE gent038 SET      g38_capitulo   = rm_par.g38_capitulo,
-				g38_desc_cap   = rm_par.g38_desc_cap,
-				g38_usuario    = vg_usuario,
-				g38_fecing     = CURRENT 
+				g38_desc_cap   = rm_par.g38_desc_cap
 		WHERE CURRENT OF q_up2
 	ELSE
 		INSERT INTO gent016 VALUES (rm_pra.*)

@@ -210,7 +210,7 @@ OPTIONS INPUT WRAP
 CLEAR FORM
 INITIALIZE rm_tran.* TO NULL
 LET vm_flag_mant           = 'I'
-LET rm_tran.g21_fecing     = CURRENT
+LET rm_tran.g21_fecing     = fl_current()
 LET rm_tran.g21_usuario    = vg_usuario
 LET rm_tran.g21_estado     = 'A'
 LET rm_tran.g21_tipo       = 'E'

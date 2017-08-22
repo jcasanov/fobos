@@ -216,7 +216,7 @@ DEFINE descri_cia	LIKE gent001.g01_razonsocial
 LET flag_man = 'I'
 CLEAR FORM
 INITIALIZE rm_g34.* TO NULL
-LET rm_g34.g34_fecing = CURRENT
+LET rm_g34.g34_fecing = fl_current()
 LET rm_g34.g34_usuario = vg_usuario
 LET rm_g34.g34_compania = vg_codcia
 DISPLAY BY NAME rm_g34.g34_fecing, rm_g34.g34_usuario

@@ -204,7 +204,7 @@ CLEAR FORM
 INITIALIZE rm_irot.* TO NULL
 LET vm_flag_mant          = 'I'
 LET rm_irot.r04_compania  = vg_codcia
-LET rm_irot.r04_fecing    = CURRENT
+LET rm_irot.r04_fecing    = fl_current()
 LET rm_irot.r04_usuario   = vg_usuario
 LET rm_irot.r04_estado    = 'A'
 LET rm_irot.r04_pedido    = 'S'

@@ -234,7 +234,7 @@ LET rm_bod.r02_area       = 'R'
 LET rm_bod.r02_factura    = 'S'
 LET rm_bod.r02_localidad  = vg_codloc
 LET rm_bod.r02_tipo_ident = 'V'
-LET rm_bod.r02_fecing     = CURRENT
+LET rm_bod.r02_fecing     = fl_current()
 LET rm_bod.r02_usuario    = vg_usuario
 CALL fl_lee_tipo_ident_bod(vg_codcia, rm_bod.r02_tipo_ident) RETURNING r_r09.*
 DISPLAY BY NAME rm_bod.r02_fecing, rm_bod.r02_usuario, rm_bod.r02_estado,

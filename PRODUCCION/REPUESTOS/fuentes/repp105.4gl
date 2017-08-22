@@ -193,12 +193,11 @@ CLEAR FORM
 INITIALIZE rm_uni.* TO NULL
 LET vm_flag_mant          = 'I'
 LET rm_uni.r05_decimales  = 'N'
-LET rm_uni.r05_fecing     = CURRENT
+LET rm_uni.r05_fecing     = fl_current()
 LET rm_uni.r05_usuario    = vg_usuario
 DISPLAY BY NAME rm_uni.r05_fecing, rm_uni.r05_usuario
 CALL lee_datos()
 IF NOT int_flag THEN
-	LET rm_uni.r05_fecing     = CURRENT
 	INSERT INTO rept005 VALUES (rm_uni.*)
         IF vm_num_rows = vm_max_rows THEN
                 LET vm_num_rows = 1

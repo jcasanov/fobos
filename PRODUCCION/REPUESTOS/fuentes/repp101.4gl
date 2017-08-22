@@ -224,7 +224,7 @@ DEFINE aux_row		INTEGER
 LET vm_flag_mant = 'I'
 CLEAR FORM
 INITIALIZE rm_vend.* TO NULL
-LET rm_vend.r01_fecing     = CURRENT
+LET rm_vend.r01_fecing     = fl_current()
 LET rm_vend.r01_usuario    = vg_usuario
 LET rm_vend.r01_compania   = vg_codcia
 LET rm_vend.r01_estado     = 'A'

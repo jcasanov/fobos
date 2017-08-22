@@ -187,7 +187,7 @@ FUNCTION control_ingreso()
 
 CLEAR FORM
 INITIALIZE rm_grem.* TO NULL
-LET rm_grem.g19_fecing = CURRENT
+LET rm_grem.g19_fecing = fl_current()
 LET rm_grem.g19_usuario = vg_usuario
 LET rm_grem.g19_codigo = 0
 DISPLAY BY NAME rm_grem.g19_fecing, rm_grem.g19_usuario

@@ -162,7 +162,7 @@ LET rm_g58.g58_estado     = 'A'
 LET rm_g58.g58_tipo_impto = 'I'
 LET rm_g58.g58_tipo       = 'V'
 LET rm_g58.g58_impto_sist = 'N'
-LET rm_g58.g58_fecing     = CURRENT
+LET rm_g58.g58_fecing     = fl_current()
 LET rm_g58.g58_usuario    = vg_usuario
 CALL fl_lee_localidad(rm_g58.g58_compania, rm_g58.g58_localidad)
 	RETURNING r_g02.*

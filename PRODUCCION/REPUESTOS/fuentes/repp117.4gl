@@ -157,12 +157,12 @@ CLEAR FORM
 INITIALIZE rm_r77.* TO NULL
 LET vm_flag_mant          = 'I'
 LET rm_r77.r77_compania   = vg_codcia
-LET rm_r77.r77_fecing     = CURRENT
+LET rm_r77.r77_fecing     = fl_current()
 LET rm_r77.r77_usuario    = vg_usuario
 DISPLAY BY NAME rm_r77.r77_fecing, rm_r77.r77_usuario
 CALL lee_datos()
 IF NOT int_flag THEN
-	LET rm_r77.r77_fecing     = CURRENT
+	LET rm_r77.r77_fecing     = fl_current()
         INSERT INTO rept077 VALUES (rm_r77.*)
         IF vm_num_rows = vm_max_rows THEN
                 LET vm_num_rows = 1

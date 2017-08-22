@@ -144,7 +144,7 @@ DEFINE subtipo		LIKE gent012.g12_subtipo
 CLEAR FORM
 INITIALIZE rm_sub.* TO NULL
 
-LET rm_sub.g12_fecing  = CURRENT
+LET rm_sub.g12_fecing  = fl_current()
 LET rm_sub.g12_usuario = vg_usuario
 
 CALL lee_datos('I')

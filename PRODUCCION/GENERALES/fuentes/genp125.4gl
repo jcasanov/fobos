@@ -194,7 +194,7 @@ LET flag_man = 'I'
 OPTIONS INPUT WRAP
 CLEAR FORM
 INITIALIZE rm_crg.* TO NULL
-LET rm_crg.g35_fecing = CURRENT
+LET rm_crg.g35_fecing = fl_current()
 LET rm_crg.g35_usuario = vg_usuario
 LET rm_crg.g35_compania = vg_codcia
 DISPLAY BY NAME rm_crg.g35_fecing, rm_crg.g35_usuario

@@ -246,11 +246,11 @@ INITIALIZE rm_r71.* TO NULL
 LET vm_flag_mant          = 'I'
 LET rm_r71.r71_compania   = vg_codcia
 LET rm_r71.r71_usuario    = vg_usuario
-LET rm_r71.r71_fecing     = CURRENT
+LET rm_r71.r71_fecing     = fl_current()
 DISPLAY BY NAME rm_r71.r71_fecing, rm_r71.r71_usuario
 CALL lee_datos()
 IF NOT int_flag THEN
-	LET rm_r71.r71_fecing     = CURRENT
+	LET rm_r71.r71_fecing     = fl_current()
         INSERT INTO rept071 VALUES (rm_r71.*)
         IF vm_num_rows = vm_max_rows THEN
                 LET vm_num_rows = 1

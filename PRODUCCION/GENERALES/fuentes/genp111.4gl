@@ -198,7 +198,7 @@ OPTIONS INPUT WRAP
 CLEAR FORM
 INITIALIZE rm_mon.* TO NULL
 LET vm_flag_mant       = 'I'
-LET rm_mon.g13_fecing  = CURRENT
+LET rm_mon.g13_fecing  = fl_current()
 LET rm_mon.g13_usuario = vg_usuario
 LET rm_mon.g13_estado = 'A'
 DISPLAY BY NAME rm_mon.g13_fecing, rm_mon.g13_usuario, rm_mon.g13_estado

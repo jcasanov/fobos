@@ -767,6 +767,8 @@ DEFINE cuanto_g54	INTEGER
 DEFINE cuanto_g55	INTEGER
 DEFINE user_cont	LIKE gent055.g55_user
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 FOR i = 1 TO vm_row_num
 	INITIALIZE r_g55.*, modulo TO NULL
 	DECLARE q_modulo2 CURSOR FOR
@@ -784,9 +786,10 @@ FOR i = 1 TO vm_row_num
 	IF r_g55.g55_compania IS NOT NULL THEN
 		CONTINUE FOR
 	END IF
+	LET fecha_actual = fl_current()
 	INSERT INTO gent055
 		VALUES(rm_permisos[i].g05_usuario, vg_codcia, modulo,
-			rm_permisos[i].g54_proceso, vg_usuario, CURRENT)
+			rm_permisos[i].g54_proceso, vg_usuario, fecha_actual)
 END FOR
 DECLARE q_mod_cont CURSOR FOR
 	SELECT g54_modulo, COUNT(*) FROM gent054
@@ -858,6 +861,8 @@ FUNCTION grabar_permisos_men()
 DEFINE i, flag		SMALLINT
 DEFINE modulo		LIKE gent050.g50_modulo
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 DELETE FROM gent057
 	WHERE g57_user    IN (SELECT UNIQUE g53_usuario FROM tmp_permisos)
 	  AND g57_proceso IN (SELECT g54_proceso FROM tmp_permisos)
@@ -873,9 +878,11 @@ FOR i = 1 TO vm_row_num
 			  AND g54_estado  <> "B"
 	OPEN q_modulo
 	FETCH q_modulo INTO modulo
+
+	LET fecha_actual = fl_current()
 	INSERT INTO gent057
 		VALUES(rm_permisos[i].g05_usuario, vg_codcia, modulo,
-			rm_permisos[i].g54_proceso, vg_usuario, CURRENT)
+			rm_permisos[i].g54_proceso, vg_usuario, fecha_actual)
 	CLOSE q_modulo
 	FREE q_modulo
 	LET flag = 1

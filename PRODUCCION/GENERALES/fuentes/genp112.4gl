@@ -198,7 +198,7 @@ DEFINE paridad		LIKE gent014.g14_tasa
 OPTIONS INPUT WRAP
 CLEAR FORM
 INITIALIZE rm_g14.* TO NULL
-LET rm_g14.g14_fecing = CURRENT
+LET rm_g14.g14_fecing = fl_current()
 LET rm_g14.g14_usuario = vg_usuario
 LET rm_g14.g14_serial = 0
 DISPLAY BY NAME rm_g14.g14_fecing, rm_g14.g14_usuario
@@ -206,7 +206,6 @@ CALL lee_datos('I')
 IF NOT int_flag THEN
 	BEGIN WORK
 	LET paridad = 1 / rm_g14.g14_tasa
-	LET rm_g14.g14_fecing = CURRENT
 	INSERT INTO gent014 VALUES (rm_g14.*)
 	LET num_aux = SQLCA.SQLERRD[6] 
 	INSERT INTO gent014
@@ -272,7 +271,7 @@ IF STATUS = NOTFOUND THEN
 	RETURN
 	--}
 	LET paridad = 1 / rm_g14.g14_tasa
-	LET fecing  = CURRENT
+	LET fecing  = fl_current()
 	INSERT INTO gent014
 		VALUES (0, rm_g14.g14_moneda_des, rm_g14.g14_moneda_ori,
 			paridad, rm_g14.g14_usuario, fecing)

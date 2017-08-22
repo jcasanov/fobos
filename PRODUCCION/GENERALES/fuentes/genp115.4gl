@@ -186,7 +186,7 @@ FUNCTION control_ingreso()
 OPTIONS INPUT WRAP
 CLEAR FORM
 INITIALIZE rm_rub.* TO NULL
-LET rm_rub.g17_fecing      = CURRENT
+LET rm_rub.g17_fecing      = fl_current()
 LET rm_rub.g17_usuario     = vg_usuario
 LET rm_rub.g17_codrubro    = 0
 LET rm_rub.g17_tipo_rubro  = 'N'

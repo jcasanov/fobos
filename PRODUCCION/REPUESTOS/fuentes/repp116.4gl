@@ -169,7 +169,7 @@ INITIALIZE rm_r76.* TO NULL
 LET rm_r76.r76_compania   = vg_codcia
 LET rm_r76.r76_localidad  = vg_codloc
 LET rm_r76.r76_estado 	  = 'A'
-LET rm_r76.r76_fecing     = CURRENT
+LET rm_r76.r76_fecing     = fl_current()
 LET rm_r76.r76_usuario    = vg_usuario
 DISPLAY BY NAME rm_r76.r76_estado
 IF vg_gui = 0 THEN
@@ -182,7 +182,7 @@ IF NOT int_flag THEN
 	IF NOT int_flag THEN
 		BEGIN WORK
 			FOR i = 1 TO vm_num_det
-				LET rm_r76.r76_fecing = CURRENT
+				LET rm_r76.r76_fecing = fl_current()
 	 			INSERT INTO rept076
 					VALUES (rm_r76.r76_compania,
 						rm_r76.r76_localidad,

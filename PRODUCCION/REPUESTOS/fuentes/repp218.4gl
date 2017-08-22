@@ -288,6 +288,8 @@ DEFINE done		SMALLINT
 
 DEFINE valor_aplicado	DECIMAL(14,2)
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 CLEAR FORM
 INITIALIZE rm_r19.* TO NULL
 
@@ -298,7 +300,7 @@ LET rm_r19.r19_cod_tran   = vm_transaccion
 LET rm_r19.r19_tipo_dev   = vm_dev_tran      
 LET rm_r19.r19_flete      = 0
 LET rm_r19.r19_usuario    = vg_usuario
-LET rm_r19.r19_fecing     = CURRENT
+LET rm_r19.r19_fecing     = fl_current()
 
 LET vm_cruce = 0
 
@@ -346,12 +348,14 @@ IF NOT done THEN
 	RETURN
 END IF
 
+LET fecha_actual = fl_current()
+
 UPDATE ordt010 SET c10_estado = 'E' 
 	WHERE c10_compania  = rm_c10.c10_compania  AND 
 	      c10_localidad = rm_c10.c10_localidad AND 
 	      c10_numero_oc = rm_c10.c10_numero_oc
 UPDATE ordt013 SET c13_estado = 'E',
-		   c13_fecha_eli = CURRENT
+		   c13_fecha_eli = fecha_actual
 	WHERE c13_compania  = rm_c10.c10_compania  AND 
 	      c13_localidad = rm_c10.c10_localidad AND 
 	      c13_numero_oc = rm_c10.c10_numero_oc
@@ -528,7 +532,7 @@ INPUT BY NAME rm_r19.r19_cod_tran, rm_r19.r19_tipo_dev, rm_r19.r19_num_dev,
 			CALL muestra_etiquetas(r_r19.*)
 			NEXT FIELD r19_num_dev
 		END IF
-		IF TODAY > (date(r_r19.r19_fecing) + rm_r00.r00_dias_dev) THEN
+		IF vg_fecha > (date(r_r19.r19_fecing) + rm_r00.r00_dias_dev) THEN
 			--CALL fgl_winmessage(vg_producto,'Ha excedido el limite de tiempo permitido para realizar devoluciones.','exclamation')
 			CALL fl_mostrar_mensaje('Ha excedido el limite de tiempo permitido para realizar devoluciones.','exclamation')
 			INITIALIZE r_r19.* TO NULL 
@@ -536,7 +540,7 @@ INPUT BY NAME rm_r19.r19_cod_tran, rm_r19.r19_tipo_dev, rm_r19.r19_num_dev,
 			NEXT FIELD r19_num_dev
 		END IF
 		IF rm_r00.r00_dev_mes = 'S' THEN
-			IF month(r_r19.r19_fecing) <> month(TODAY) THEN
+			IF month(r_r19.r19_fecing) <> month(vg_fecha) THEN
 				--CALL fgl_winmessage(vg_producto,'La devolución debe realizarse en el mismo mes en que se realizó la venta.','exclamation')
 				CALL fl_mostrar_mensaje('La devolución debe realizarse en el mismo mes en que se realizó la venta.','exclamation')
 				INITIALIZE r_r19.* TO NULL 
@@ -1303,7 +1307,7 @@ LET r_r20.r20_costant_ma = 0
 LET r_r20.r20_costnue_mb = 0
 LET r_r20.r20_costnue_ma = 0
 
-LET r_r20.r20_fecing     = CURRENT
+LET r_r20.r20_fecing     = fl_current()
 
 LET orden = 1
 FOR i = 1 TO vm_indice
@@ -1757,7 +1761,7 @@ END IF
 
 LET r_p21.p21_referencia   = 'DEVOLUCION (COMPRA LOCAL) # ',
 			     rm_r19.r19_num_tran USING '<<<<<<<<&'
-LET r_p21.p21_fecha_emi    = TODAY
+LET r_p21.p21_fecha_emi    = vg_fecha
 LET r_p21.p21_moneda       = rm_r19.r19_moneda
 LET r_p21.p21_paridad      = rm_r19.r19_paridad
 LET r_p21.p21_valor        = rm_r19.r19_tot_neto
@@ -1765,7 +1769,7 @@ LET r_p21.p21_saldo        = rm_r19.r19_tot_neto
 LET r_p21.p21_subtipo      = 1
 LET r_p21.p21_origen       = 'A'
 LET r_p21.p21_usuario      = vg_usuario
-LET r_p21.p21_fecing       = CURRENT
+LET r_p21.p21_fecing       = fl_current()
 
 INSERT INTO cxpt021 VALUES(r_p21.*)
 LET num_row_nc = SQLCA.SQLERRD[6]
@@ -1794,7 +1798,7 @@ IF r_caju.p22_num_trn <= 0 THEN
 END IF
 LET r_caju.p22_referencia 	= 'DEV. COMPRA LOCAL # ',
 					rm_r19.r19_num_tran USING '<<<<<<<<&'
-LET r_caju.p22_fecha_emi 	= TODAY
+LET r_caju.p22_fecha_emi 	= vg_fecha
 LET r_caju.p22_moneda 		= rm_r19.r19_moneda
 LET r_caju.p22_paridad 		= rm_r19.r19_paridad
 LET r_caju.p22_tasa_mora 	= 0
@@ -1807,7 +1811,7 @@ LET r_caju.p22_fecha_elim 	= NULL
 LET r_caju.p22_tiptrn_elim 	= NULL
 LET r_caju.p22_numtrn_elim 	= NULL
 LET r_caju.p22_usuario 		= vg_usuario
-LET r_caju.p22_fecing 		= CURRENT
+LET r_caju.p22_fecing 		= fl_current()
 
 INSERT INTO cxpt022 VALUES (r_caju.*)
 LET num_row = SQLCA.SQLERRD[6]
@@ -2304,7 +2308,7 @@ LET r_r19.r19_tot_dscto  	= 0.0
 LET r_r19.r19_tot_neto		= r_r19.r19_tot_costo
 LET r_r19.r19_flete      	= 0.0
 LET r_r19.r19_usuario      	= vg_usuario
-LET r_r19.r19_fecing      	= CURRENT
+LET r_r19.r19_fecing      	= fl_current()
 INSERT INTO rept019 VALUES (r_r19.*)
 INITIALIZE r_r20.* TO NULL
 LET r_r20.r20_compania		= vg_codcia
@@ -2375,7 +2379,7 @@ FOREACH q_trans_d INTO r_trans_d.*
 		LET r_r11.r11_stock_act = 0
 	END IF
 	LET r_r20.r20_stock_bd   = r_r11.r11_stock_act 
-	LET r_r20.r20_fecing	 = CURRENT
+	LET r_r20.r20_fecing	 = fl_current()
 	INSERT INTO rept020 VALUES(r_r20.*)
 	UPDATE rept011
 		SET r11_stock_act = r11_stock_act - r_trans_d.r20_cant_ven,

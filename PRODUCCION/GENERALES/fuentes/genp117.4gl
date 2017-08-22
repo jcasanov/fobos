@@ -207,7 +207,7 @@ DEFINE descri_cia	LIKE gent001.g01_razonsocial
 LET vm_flag_mant = 'I'
 CLEAR FORM
 INITIALIZE rm_lvent.* TO NULL
-LET rm_lvent.g20_fecing = CURRENT
+LET rm_lvent.g20_fecing = fl_current()
 LET rm_lvent.g20_usuario = vg_usuario
 LET rm_lvent.g20_compania = vg_codcia
 DISPLAY BY NAME rm_lvent.g20_fecing, rm_lvent.g20_usuario

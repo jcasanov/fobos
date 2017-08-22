@@ -171,7 +171,7 @@ INITIALIZE rm_p33.* TO NULL
 LET rm_p33.p33_compania  = vg_codcia
 LET rm_p33.p33_localidad = vg_codloc
 LET rm_p33.p33_usuario   = vg_usuario
-LET rm_p33.p33_fecing    = CURRENT
+LET rm_p33.p33_fecing    = fl_current()
 DISPLAY BY NAME rm_p33.p33_fecing, rm_p33.p33_usuario
 CALL lee_datos()
 IF int_flag THEN
@@ -208,7 +208,7 @@ BEGIN WORK
 		IF STATUS <> NOTFOUND THEN
 			CONTINUE WHILE
 		END IF
-		LET rm_p33.p33_fecing = CURRENT
+		LET rm_p33.p33_fecing = fl_current()
 		INSERT INTO cxpt033 VALUES (rm_p33.*)
 		LET num_reg = SQLCA.SQLERRD[6]
 		EXIT WHILE

@@ -313,7 +313,7 @@ DEFINE query		VARCHAR(400)
 OPTIONS INPUT WRAP
 CLEAR FORM
 INITIALIZE rm_modu.* TO NULL
-LET rm_modu.g54_fecing  = CURRENT
+LET rm_modu.g54_fecing  = fl_current()
 LET rm_modu.g54_usuario = vg_usuario 
 LET rm_modu.g54_estado  = "A" 
 LET rm_modu.g54_tipo    = 'M'
@@ -328,7 +328,7 @@ IF NOT int_flag THEN
 					rm_modu.g54_modulo, '", "',
 					rm_modu.g54_proceso CLIPPED, '", "',
 					vg_usuario CLIPPED, '", "',
-					EXTEND (CURRENT, YEAR TO SECOND), '"',
+					fl_current(), '"',
 				' FROM gent005 ',
 				' WHERE g05_estado  = "A" ',
 				'   AND g05_tipo   <> "AG"'

@@ -223,7 +223,7 @@ CLEAR FORM
 INITIALIZE rm_r73.* TO NULL
 LET vm_flag_mant          = 'I'
 LET rm_r73.r73_compania   = vg_codcia
-LET rm_r73.r73_fecing     = CURRENT
+LET rm_r73.r73_fecing     = fl_current()
 LET rm_r73.r73_usuario    = vg_usuario
 DISPLAY BY NAME rm_r73.r73_fecing, rm_r73.r73_usuario
 CALL lee_datos()

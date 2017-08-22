@@ -171,6 +171,8 @@ DEFINE expr_sql		VARCHAR(50)
 DEFINE i		SMALLINT
 DEFINE r_equi_item 	RECORD LIKE rept015.*
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 BEGIN WORK
 WHENEVER ERROR CONTINUE
 DECLARE q_upd CURSOR FOR SELECT * FROM rept015 
@@ -193,10 +195,11 @@ IF NOT int_flag THEN
 	DELETE FROM rept015 
 		WHERE r15_compania = vg_codcia 
 		AND   r15_item     = rm_equi.r15_item
+	LET fecha_actual = fl_current()
 	FOR i = 1 TO arr_count()
 		INSERT INTO rept015
 	 	VALUES (vg_codcia, rm_equi.r15_item, 		       				rm_equi_item[i].r15_equivalente,
-		rm_equi.r15_usuario,CURRENT)
+		rm_equi.r15_usuario,fecha_actual)
 	END FOR
 	COMMIT WORK
 	IF arr_count() > 0 THEN
@@ -307,7 +310,7 @@ CALL control_DISPLAY_botones()
 
 INITIALIZE rm_equi.* TO NULL
 LET vm_flag_mant          = 'I'
-LET rm_equi.r15_fecing    = CURRENT
+LET rm_equi.r15_fecing    = fl_current()
 LET rm_equi.r15_usuario   = vg_usuario
 LET rm_equi.r15_compania  = vg_codcia
 DISPLAY BY NAME rm_equi.r15_fecing, rm_equi.r15_usuario
@@ -349,8 +352,9 @@ IF NOT int_flag THEN
 	 WHERE r15_compania = vg_codcia 
 	   AND r15_item = rm_equi.r15_item
 	FOR i = 1 TO arr_count()
-		INSERT INTO rept015 VALUES (vg_codcia, rm_equi.r15_item, 		       	rm_equi_item[i].r15_equivalente, rm_equi.r15_usuario, 
-	       	CURRENT)
+		INSERT INTO rept015 VALUES (vg_codcia, rm_equi.r15_item, 		       	
+			rm_equi_item[i].r15_equivalente, rm_equi.r15_usuario, 
+	       	rm_equi.r15_fecing)
 	END FOR
         IF vm_num_rows = vm_max_rows THEN
                 LET vm_num_rows = 1

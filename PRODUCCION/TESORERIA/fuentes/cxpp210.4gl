@@ -1181,7 +1181,7 @@ IF vg_gui = 0 THEN
 END IF
 LET rm_c10.c10_recargo     = 0
 LET rm_c10.c10_estado      = 'A'
-LET rm_c10.c10_fecing      = CURRENT
+LET rm_c10.c10_fecing      = fl_current()
 LET rm_c10.c10_usuario     = vg_usuario
 LET rm_c10.c10_compania    = vg_codcia
 LET rm_c10.c10_localidad   = vg_codloc
@@ -1317,7 +1317,7 @@ DEFINE numprev          INTEGER
 DEFINE r_s23		RECORD LIKE srit023.*
 
 LET done = 1
-LET rm_c10.c10_fecing = CURRENT
+LET rm_c10.c10_fecing = fl_current()
 
 SELECT MAX(c10_numero_oc) + 1 INTO rm_c10.c10_numero_oc
 	FROM  ordt010
@@ -1333,7 +1333,7 @@ WHENEVER ERROR STOP
 
 LET rm_c10.c10_estado      = 'P'
 LET rm_c10.c10_usua_aprob  = vg_usuario
-LET rm_c10.c10_fecha_aprob = CURRENT
+LET rm_c10.c10_fecha_aprob = fl_current()
 LET rm_c10.c10_dif_cuadre  = 0
 CALL fl_obtener_aux_cont_sust(vg_codcia, rm_c10.c10_tipo_orden,
 				rm_c10.c10_sustento_sri)
@@ -1353,7 +1353,7 @@ IF status < 0 THEN
 		AND   c10_localidad = vg_codloc
 	LET rm_c10.c10_estado      = 'P'
 	LET rm_c10.c10_usua_aprob  = vg_usuario
-	LET rm_c10.c10_fecha_aprob = CURRENT
+	LET rm_c10.c10_fecha_aprob = fl_current()
 	LET rm_c10.c10_dif_cuadre  = 0
 	CALL fl_obtener_aux_cont_sust(vg_codcia, rm_c10.c10_tipo_orden,
 					rm_c10.c10_sustento_sri)
@@ -2444,7 +2444,7 @@ DEFINE i 	SMALLINT
 INITIALIZE rm_c00.*, rm_c14.*, vm_flag_forma_pago TO NULL
 LET tot_ret = 0
 
-LET rm_c13.c13_fecing  = CURRENT
+LET rm_c13.c13_fecing  = fl_current()
 LET rm_c13.c13_usuario = vg_usuario
 LET rm_c13.c13_estado  = 'A'
 
@@ -2505,10 +2505,14 @@ DEFINE r_b12		RECORD LIKE ctbt012.*
 DEFINE comando		VARCHAR(250)
 DEFINE run_prog		CHAR(10)
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
+LET fecha_actual = fl_current()
+
 UPDATE ordt010 SET c10_estado      = 'C',
 		   c10_factura     = rm_c13.c13_num_guia,
 		   c10_fecha_fact  = TODAY,
-		   c10_fecha_entre = CURRENT	
+		   c10_fecha_entre = fecha_actual	
 	WHERE CURRENT OF q_ordt010 
 
 CALL control_insert_ordt013()
@@ -2595,7 +2599,7 @@ LET r_p22.p22_total_int  = 0
 LET r_p22.p22_total_mora = 0
 LET r_p22.p22_origen     = 'A'
 LET r_p22.p22_usuario    = vg_usuario
-LET r_p22.p22_fecing     = CURRENT + 1 UNITS SECOND
+LET r_p22.p22_fecing     = fl_current() + 1 UNITS SECOND
 
 LET r_p22.p22_num_trn    = nextValInSequence('TE', r_p22.p22_tipo_trn)
 
@@ -2669,8 +2673,8 @@ INITIALIZE rm_c13.c13_fecha_eli TO NULL
 LET rm_c13.c13_compania    = vg_codcia
 LET rm_c13.c13_localidad   = vg_codloc
 LET rm_c13.c13_numero_oc   = rm_c10.c10_numero_oc
-LET rm_c13.c13_fecing      = CURRENT
-LET rm_c13.c13_fecha_recep = CURRENT
+LET rm_c13.c13_fecing      = fl_current()
+LET rm_c13.c13_fecha_recep = fl_current()
 LET rm_c13.c13_factura     = rm_c13.c13_num_guia
 LET rm_c13.c13_estado      = 'A'
 LET rm_c13.c13_flete       = rm_c10.c10_flete
@@ -3140,7 +3144,7 @@ LET r_p20.p20_compania    = vg_codcia
 LET r_p20.p20_localidad   = vg_codloc
 LET r_p20.p20_codprov     = rm_c10.c10_codprov
 LET r_p20.p20_usuario     = vg_usuario
-LET r_p20.p20_fecing      = CURRENT
+LET r_p20.p20_fecing      = fl_current()
 LET r_p20.p20_fecha_emi	  = TODAY
 LET r_p20.p20_tipo_doc    = 'FA'
 LET r_p20.p20_num_doc     = rm_c13.c13_factura
@@ -3832,7 +3836,7 @@ LET r_b12.b12_paridad     = r_c10.c10_paridad
 LET r_b12.b12_fec_proceso = TODAY
 LET r_b12.b12_modulo      = r_b03.b03_modulo
 LET r_b12.b12_usuario     = vg_usuario 
-LET r_b12.b12_fecing      = CURRENT
+LET r_b12.b12_fecing      = fl_current()
 
 INSERT INTO ctbt012 VALUES(r_b12.*)
 
@@ -4034,12 +4038,16 @@ DEFINE anulo_rp, i	SMALLINT
 DEFINE mensaje		VARCHAR(250)
 DEFINE resp		CHAR(6)
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 CALL fl_hacer_pregunta('Seguro de ELIMINAR esta Factura ?', 'No') RETURNING resp
 IF resp <> 'Yes' THEN
 	RETURN
 END IF
 LET vm_max_detalle  = 250
 LET vm_nota_credito = 'NC'
+LET fecha_actual = fl_current()
+
 INITIALIZE rm_c13.* TO NULL
 BEGIN WORK
 WHENEVER ERROR CONTINUE
@@ -4145,10 +4153,11 @@ FOREACH q_ordt013_2 INTO rm_c13.*
 			EXIT PROGRAM
 		END IF
 	END FOR 
+	LET rm_c13.c13_fecha_eli = fl_current()
 	LET i = 0
 	UPDATE ordt013
 		SET c13_estado    = 'E',
-		    c13_fecha_eli = CURRENT
+		    c13_fecha_eli = fecha_actual
 		WHERE c13_compania  = rm_c13.c13_compania
 		  AND c13_localidad = rm_c13.c13_localidad
 		  AND c13_numero_oc = rm_c13.c13_numero_oc
@@ -4199,7 +4208,7 @@ FOREACH q_ordt013_2 INTO rm_c13.*
 	CLOSE q_cxpt028
 	FREE  q_cxpt028
 	UPDATE cxpt027 SET p27_estado    = 'E',
-			   p27_fecha_eli = CURRENT
+			   p27_fecha_eli = fecha_actual
 		WHERE p27_compania  = rm_c10.c10_compania
 		  AND p27_localidad = rm_c10.c10_localidad
 		  AND p27_num_ret   = num_ret
@@ -4374,7 +4383,7 @@ LET r_p21.p21_saldo      = rm_c13.c13_tot_recep - tot_ret
 LET r_p21.p21_subtipo    = 1
 LET r_p21.p21_origen     = 'A'
 LET r_p21.p21_usuario    = vg_usuario
-LET r_p21.p21_fecing     = CURRENT
+LET r_p21.p21_fecing     = fl_current()
 INSERT INTO cxpt021 VALUES(r_p21.*)
 -- Para aplicar la nota de credito
 DECLARE q_ddev CURSOR FOR 
@@ -4411,7 +4420,7 @@ LET r_p22.p22_fecha_elim  = NULL
 LET r_p22.p22_tiptrn_elim = NULL
 LET r_p22.p22_numtrn_elim = NULL
 LET r_p22.p22_usuario 	  = vg_usuario
-LET r_p22.p22_fecing 	  = CURRENT
+LET r_p22.p22_fecing 	  = fl_current()
 INSERT INTO cxpt022 VALUES (r_p22.*)
 LET num_row        = SQLCA.SQLERRD[6]
 LET valor_favor    = r_p21.p21_valor 
@@ -4581,6 +4590,8 @@ DEFINE r_b12		RECORD LIKE ctbt012.*
 DEFINE mensaje		VARCHAR(250)
 DEFINE mens_com		VARCHAR(100)
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 CALL fl_lee_comprobante_contable(codcia, tipo_comp, num_comp) RETURNING r_b12.*
 IF r_b12.b12_compania IS NULL THEN
 	CASE flag
@@ -4608,8 +4619,9 @@ END IF
 CALL fl_mayoriza_comprobante(r_b12.b12_compania, r_b12.b12_tipo_comp,
 				r_b12.b12_num_comp, 'D')
 SET LOCK MODE TO WAIT 5
+LET fecha_actual = fl_current()
 UPDATE ctbt012 SET b12_estado     = 'E',
-		   b12_fec_modifi = CURRENT 
+		   b12_fec_modifi = fecha_actual 
 	WHERE b12_compania  = r_b12.b12_compania
 	  AND b12_tipo_comp = r_b12.b12_tipo_comp
 	  AND b12_num_comp  = r_b12.b12_num_comp

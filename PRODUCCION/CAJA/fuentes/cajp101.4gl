@@ -158,7 +158,7 @@ LET rm_j01.j01_cont_cred = 'C'
 LET rm_j01.j01_retencion = 'N'
 LET rm_j01.j01_estado    = 'A'
 LET rm_j01.j01_usuario   = vg_usuario
-LET rm_j01.j01_fecing    = CURRENT
+LET rm_j01.j01_fecing    = fl_current()
 CLEAR tit_estado_caj, n_aux_cont
 CALL muestra_estado()
 IF vg_gui = 0 THEN
@@ -172,7 +172,7 @@ IF int_flag THEN
 	END IF
 	RETURN
 END IF
-LET rm_j01.j01_fecing = CURRENT
+LET rm_j01.j01_fecing = fl_current()
 INSERT INTO cajt001 VALUES (rm_j01.*)
 LET vm_num_rows = vm_num_rows + 1
 LET vm_row_current = vm_num_rows

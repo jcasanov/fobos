@@ -192,7 +192,7 @@ OPTIONS INPUT WRAP
 CLEAR FORM
 INITIALIZE rm_item.* TO NULL
 LET vm_flag_mant        = 'I'
-LET rm_item.r06_fecing  = CURRENT
+LET rm_item.r06_fecing  = fl_current()
 LET rm_item.r06_usuario = vg_usuario
 DISPLAY BY NAME rm_item.r06_fecing, rm_item.r06_usuario
 SELECT MAX(r06_codigo) INTO rm_item.r06_codigo FROM rept006
