@@ -159,10 +159,10 @@ y003 = FORMONLY.vm_num_rows3, NOENTRY;
 c132 = cxct002.z02_num_pagos, AUTONEXT, UPSHIFT, INCLUDE = (1 TO 300, NULL),
 		FORMAT = '###',
 		COMMENTS = 'Digite el numero de pagos que puede tener este cliente.';
-c133 = cxct002.z02_dia_entre_pago, AUTONEXT, UPSHIFT, INCLUDE = (1 TO 30, NULL),
-		FORMAT = '##',
+c133 = cxct002.z02_dia_entre_pago, AUTONEXT, UPSHIFT, INCLUDE = (1 TO 360,NULL),
+		FORMAT = '###',
 		COMMENTS = 'Digite los dias entre pagos que puede tener este cliente.';
-c134 = cxct002.z02_max_entre_pago, AUTONEXT, UPSHIFT,INCLUDE = (1 TO 180, NULL),
+c134 = cxct002.z02_max_entre_pago, AUTONEXT, UPSHIFT,INCLUDE = (1 TO 365, NULL),
 		FORMAT = '###',
 		COMMENTS = 'Digite los dias entre pagos maximo que puede tener este cliente.';
 END

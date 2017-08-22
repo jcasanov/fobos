@@ -508,7 +508,7 @@ IF rm_r25.r25_numprev IS NULL THEN
 	IF arg_val(6) = 'A' THEN
 		CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc, rm_r23.r23_codcli)
 			RETURNING r_z02.*
-		LET fecha_primer_pago = vg_fecha + r_z02.z02_credit_dias UNITS DAY
+		LET fecha_primer_pago = vg_fecha + r_z02.z02_dia_entre_pago UNITS DAY
 	END IF
 	LET rm_r25.r25_interes    = rm_z61.z61_intereses
 	LET dias_entre_pagos      = d_pagos
@@ -552,7 +552,8 @@ ELSE
 			CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc,
 											rm_r23.r23_codcli)
 				RETURNING r_z02.*
-			LET fecha_primer_pago = vg_fecha + r_z02.z02_credit_dias UNITS DAY
+			LET fecha_primer_pago = vg_fecha +
+									r_z02.z02_dia_entre_pago UNITS DAY
 		END IF
 		LET rm_r25.r25_interes    = 0
 		LET rm_r25.r25_interes    = 0
@@ -1544,7 +1545,7 @@ INPUT BY NAME rm_r25.r25_numprev, rm_r23.r23_codcli, rm_r23.r23_nomcli,
 							vg_codloc,
 							rm_r23.r23_codcli)
 					RETURNING r_z02.*
-				IF rm_r25.r25_plazo > r_z02.z02_credit_dias THEN
+				IF rm_r25.r25_plazo > r_z02.z02_dia_entre_pago THEN
 					CALL fl_mostrar_mensaje('El plazo de crédito no puede ser mayor al límite de días crédito del cliente.', 'exclamation')
 					NEXT FIELD r25_plazo
 				END IF
@@ -1578,7 +1579,7 @@ IF rm_z03.z03_credit_dias IS NOT NULL THEN
 ELSE
 	CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc, rm_r23.r23_codcli)
 		RETURNING rm_z02.*
-	LET plazo = rm_z02.z02_credit_dias
+	LET plazo = rm_z02.z02_dia_entre_pago
 END IF
 RETURN plazo
 
