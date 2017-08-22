@@ -571,8 +571,7 @@ FOREACH cu_peque INTO rc.*
 		CALL fl_mostrar_mensaje(mensaje, 'stop')
 		EXIT PROGRAM
 	END IF
-	LET val_oc = rc.c10_tot_repto + rc.c10_tot_mano - rc.c10_tot_dscto +
-		     rc.c10_dif_cuadre
+	LET val_oc = rc.c10_tot_repto + rc.c10_tot_mano - rc.c10_tot_dscto 
 	CALL fl_genera_detalle_comp_tal(vm_tipo_comp, subtipo, 
 		rt.c01_aux_ot_proc, tipo_mov_2, val_oc, glosa, 
 	        rm_orden.t23_orden, rm_orden.t23_num_factura)

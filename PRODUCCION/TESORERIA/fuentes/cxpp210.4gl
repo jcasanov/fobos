@@ -1450,7 +1450,6 @@ DEFINE flete		LIKE ordt010.c10_flete
 
 LET int_flag = 0
 CALL calcula_totales(vm_num_detalles,1)
---DISPLAY BY NAME rm_c10.c10_dif_cuadre, rm_c10.c10_usuario
 DISPLAY BY NAME rm_c10.c10_usuario
 INPUT BY NAME rm_c10.c10_codprov, rm_c13.c13_num_guia, rm_c13.c13_fec_aut,
 	rm_c13.c13_num_aut, rm_c13.c13_fecha_cadu,
@@ -1980,9 +1979,8 @@ LET rm_c10.c10_dif_cuadre = valor_fact - (vm_subtotal - rm_c10.c10_tot_dscto +
 
 IF vm_calc_iva = 'S' THEN
 	LET rm_c10.c10_tot_impto = (rm_c10.c10_tot_repto  + rm_c10.c10_tot_mano -
-				    rm_c10.c10_tot_dscto  + 
-                                    rm_c10.c10_dif_cuadre + rm_c10.c10_otros) * 
-				    rm_c10.c10_porc_impto / 100
+				    rm_c10.c10_tot_dscto  + rm_c10.c10_otros) * 
+					    rm_c10.c10_porc_impto / 100
 END IF
 LET rm_c10.c10_tot_impto = fl_retorna_precision_valor(rm_c10.c10_moneda,
 			   rm_c10.c10_tot_impto)
@@ -2004,10 +2002,9 @@ END FOR
 LET rm_c10.c10_tot_compra = vm_subtotal - rm_c10.c10_tot_dscto +
 			    rm_c10.c10_otros + 
 			    rm_c10.c10_tot_impto + rm_c10.c10_flete +
-			    rm_c10.c10_dif_cuadre + rm_c10.c10_valor_ice
+			    rm_c10.c10_valor_ice
 DISPLAY BY NAME vm_subtotal,          rm_c10.c10_tot_dscto, 
 		rm_c10.c10_tot_impto, rm_c10.c10_tot_compra
-		--rm_c10.c10_dif_cuadre
 
 END FUNCTION
 
@@ -2161,8 +2158,7 @@ IF STATUS = NOTFOUND THEN
 END IF
 
 LET vm_subtotal = rm_c10.c10_tot_repto + rm_c10.c10_tot_mano
-LET valor_fact  = vm_subtotal - rm_c10.c10_tot_dscto + rm_c10.c10_otros +
-		  rm_c10.c10_dif_cuadre
+LET valor_fact  = vm_subtotal - rm_c10.c10_tot_dscto + rm_c10.c10_otros 
 LET estado = 'A'
 IF rm_c10.c10_estado = 'E' THEN
 	LET estado = rm_c10.c10_estado
@@ -2188,7 +2184,6 @@ DISPLAY BY NAME rm_c10.c10_numero_oc, rm_c10.c10_estado,  rm_c10.c10_moneda,
 		rm_c10.c10_tot_compra, vm_subtotal,
 		rm_c10.c10_tot_impto,  rm_c10.c10_flete, rm_c10.c10_otros,
 		valor_fact, rm_c10.c10_usuario,
- --rm_c10.c10_dif_cuadre,
 		rm_c13.c13_num_guia, rm_c13.c13_fec_aut, rm_c13.c13_num_aut,
 		rm_c13.c13_fecha_cadu
 
@@ -2998,8 +2993,7 @@ ELSE
 END IF
 IF vm_calc_iva = 'S' THEN
 	LET rm_c13.c13_tot_impto = (rm_c13.c13_tot_bruto - rm_c13.c13_tot_dscto + 
-	            		    rm_c13.c13_otros + 
-				    rm_c10.c10_dif_cuadre) * (vm_impuesto / 100)
+	            		    rm_c13.c13_otros ) * (vm_impuesto / 100)
 	LET rm_c13.c13_tot_impto = fl_retorna_precision_valor(vm_moneda, rm_c13.c13_tot_impto)
 	LET iva_bien  = val_bienes * vm_impuesto / 100
 	LET iva_bien  = fl_retorna_precision_valor(vm_moneda, iva_bien)
@@ -3008,7 +3002,7 @@ IF vm_calc_iva = 'S' THEN
 END IF
 LET rm_c13.c13_tot_recep = rm_c13.c13_tot_bruto - rm_c13.c13_tot_dscto +
 			   rm_c13.c13_tot_impto	+ rm_c13.c13_flete +
-			   rm_c13.c13_otros     + rm_c13.c13_dif_cuadre
+			   rm_c13.c13_otros     
 
 END FUNCTION
 

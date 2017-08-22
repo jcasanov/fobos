@@ -967,8 +967,7 @@ LET rm_crep.r19_tot_neto  = rm_crep.r19_tot_neto  * rm_crep.r19_paridad
 CALL fl_retorna_precision_valor(rg_gen.g00_moneda_base, rm_crep.r19_tot_neto)
 	RETURNING rm_crep.r19_tot_neto
 LET rm_crep.r19_tot_bruto = rm_crep.r19_tot_bruto - rm_crep.r19_tot_dscto +
-			    r_c13.c13_dif_cuadre  + r_c13.c13_flete + 
-			    r_c13.c13_otros 
+			    + r_c13.c13_flete + r_c13.c13_otros 
 LET val_iva = r_c13.c13_tot_impto
 LET val_prov = rm_crep.r19_tot_neto - tot_ret
 CALL fl_lee_auxiliares_generales(rm_crep.r19_compania, rm_crep.r19_localidad)

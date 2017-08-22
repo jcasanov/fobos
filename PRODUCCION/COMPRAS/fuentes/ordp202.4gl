@@ -2304,8 +2304,7 @@ ELSE
 END IF
 IF vm_calc_iva = 'S' THEN
 	LET rm_c13.c13_tot_impto = (rm_c13.c13_tot_bruto - rm_c13.c13_tot_dscto + 
-	            		    rm_c13.c13_otros + 
-				    rm_c10.c10_dif_cuadre) * (vm_impuesto / 100)
+	            		    rm_c13.c13_otros ) * (vm_impuesto / 100)
 	LET rm_c13.c13_tot_impto = fl_retorna_precision_valor(vm_moneda, rm_c13.c13_tot_impto)
 	LET iva_bien  = val_bienes * vm_impuesto / 100
 	LET iva_bien  = fl_retorna_precision_valor(vm_moneda, iva_bien)
@@ -2314,7 +2313,7 @@ IF vm_calc_iva = 'S' THEN
 END IF
 LET rm_c13.c13_tot_recep = rm_c13.c13_tot_bruto - rm_c13.c13_tot_dscto +
 			   rm_c13.c13_tot_impto	+ rm_c13.c13_flete +
-			   rm_c13.c13_otros     + rm_c13.c13_dif_cuadre
+			   rm_c13.c13_otros     
 
 DISPLAY BY NAME rm_c13.c13_tot_dscto, rm_c13.c13_tot_bruto, 
 		rm_c13.c13_tot_impto, rm_c13.c13_tot_recep,

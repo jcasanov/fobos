@@ -153,8 +153,7 @@ FOREACH qu_tanga INTO r_p28.*
 	r_p28.p28_valor_ret, glosa, rm_c13.c13_numero_oc, rm_c13.c13_num_recep,
 	rm_c13.c13_factura)
 END FOREACH
-LET rm_c13.c13_tot_bruto = (rm_c13.c13_tot_bruto - rm_C13.c13_dif_cuadre) 
-			    * rm_c10.c10_paridad
+LET rm_c13.c13_tot_bruto = rm_c13.c13_tot_bruto * rm_c10.c10_paridad
 CALL fl_retorna_precision_valor(rg_gen.g00_moneda_base, rm_c13.c13_tot_bruto)
 	RETURNING rm_c13.c13_tot_bruto
 LET rm_c13.c13_tot_dscto = rm_c13.c13_tot_dscto * rm_c10.c10_paridad

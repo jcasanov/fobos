@@ -570,8 +570,7 @@ IF r_c10.c10_tot_compra <> rm_r19.r19_tot_neto THEN
 	CALL fl_mostrar_mensaje('Se ha detectado que el total neto de la orden de compra No. ' || r_c10.c10_numero_oc USING "<<<<<<<&" || ' es diferente al total neto de la compra local.', 'stop')
 	EXIT PROGRAM
 END IF
-LET val_bienes = rm_r19.r19_tot_bruto - rm_r19.r19_tot_dscto +
-		 rm_c10.c10_dif_cuadre + rm_c10.c10_otros     
+LET val_bienes = rm_r19.r19_tot_bruto - rm_r19.r19_tot_dscto + rm_c10.c10_otros     
 LET val_neto   = rm_r19.r19_tot_neto
 
 LET rm_r19.r19_bodega_dest = rm_r19.r19_bodega_ori
@@ -1253,7 +1252,7 @@ END IF
 CALL fl_lee_orden_compra(vg_codcia, vg_codloc, 
 			rm_r19.r19_oc_interna) RETURNING rm_c10.*
 
-LET iva = (rm_r19.r19_tot_bruto - rm_r19.r19_tot_dscto + rm_c10.c10_dif_cuadre +
+LET iva = (rm_r19.r19_tot_bruto - rm_r19.r19_tot_dscto + 
 	   rm_c10.c10_otros) * (rm_r19.r19_porc_impto / 100)
 
 DISPLAY BY NAME rm_r19.r19_cod_tran,   
@@ -1633,15 +1632,15 @@ FOR i = 1 TO vm_indice
 	END IF
 END FOR
 
-LET iva    = (bruto - descto + rm_c10.c10_otros + rm_c10.c10_dif_cuadre) *
+LET iva    = (bruto - descto + rm_c10.c10_otros ) *
              (rm_r19.r19_porc_impto / 100)                                
              
-LET precio = (bruto - descto) + rm_c10.c10_dif_cuadre + iva
+LET precio = (bruto - descto) + iva
 
 LET rm_r19.r19_tot_dscto  = descto
 LET rm_r19.r19_tot_bruto  = bruto
 LET rm_r19.r19_tot_neto   = precio
-LET rm_r19.r19_tot_costo  = rm_c10.c10_dif_cuadre
+LET rm_r19.r19_tot_costo  = 0 
 LET rm_r19.r19_tot_neto   = rm_r19.r19_tot_neto + rm_c10.c10_flete +
 			    rm_c10.c10_otros
 DISPLAY BY NAME rm_r19.r19_tot_bruto,
@@ -2028,7 +2027,7 @@ LET r_c13.c13_tot_bruto   = rm_r19.r19_tot_bruto
 LET r_c13.c13_tot_dscto   = rm_r19.r19_tot_dscto
 LET r_c13.c13_tot_impto   = 
 	(rm_r19.r19_tot_neto - rm_r19.r19_tot_bruto) + rm_r19.r19_tot_dscto - 
-	 rm_c10.c10_dif_cuadre - rm_c10.c10_flete - rm_c10.c10_otros
+	 rm_c10.c10_flete - rm_c10.c10_otros
 LET r_c13.c13_tot_recep   = rm_r19.r19_tot_neto
 LET r_c13.c13_usuario     = vg_usuario
 LET r_c13.c13_fecing      = rm_r19.r19_fecing
@@ -2352,7 +2351,7 @@ LET r_p20.p20_paridad     = rm_r19.r19_paridad
 LET r_p20.p20_valor_fact  = rm_r19.r19_tot_neto
 LET r_p20.p20_valor_impto = rm_r19.r19_tot_neto + rm_r19.r19_tot_dscto -
 			    rm_r19.r19_tot_bruto - r_c10.c10_flete -
-			    r_c10.c10_otros      - r_c10.c10_dif_cuadre
+			    r_c10.c10_otros      
 -- OjO
 LET r_p20.p20_cod_depto  = r_c10.c10_cod_depto
 LET r_p20.p20_cartera    = 6
@@ -2600,8 +2599,7 @@ CALL fl_lee_proveedor(r_c10.c10_codprov)	RETURNING r_p01.*
 CALL fl_lee_compania_orden_compra(vg_codcia)	RETURNING r_c00.*
 
 LET val_servi  = 0
-LET val_bienes = rm_r19.r19_tot_bruto - rm_r19.r19_tot_dscto +
-		 rm_c10.c10_dif_cuadre + rm_c10.c10_otros     
+LET val_bienes = rm_r19.r19_tot_bruto - rm_r19.r19_tot_dscto + rm_c10.c10_otros     
 LET val_impto  = val_bienes * (rm_r19.r19_porc_impto / 100)
 LET val_neto   = rm_r19.r19_tot_neto
 LET val_pagar  = val_neto

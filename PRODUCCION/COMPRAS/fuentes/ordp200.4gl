@@ -1678,7 +1678,6 @@ IF vm_flag_llam = 'I' THEN
 		LET rm_c10.*    = r_c10.*
 		LET vm_subtotal = rm_c10.c10_tot_repto + rm_c10.c10_tot_mano
 		LET valor_fact  = vm_subtotal - rm_c10.c10_tot_dscto + rm_c10.c10_otros
-							+ rm_c10.c10_dif_cuadre
 	ELSE
 		CALL fl_lee_proforma_rep(vg_codcia, vg_codloc, vm_numprof)
 			RETURNING r_r21.*
@@ -2910,8 +2909,7 @@ IF STATUS = NOTFOUND THEN
 END IF
 
 LET vm_subtotal = rm_c10.c10_tot_repto + rm_c10.c10_tot_mano
-LET valor_fact  = vm_subtotal - rm_c10.c10_tot_dscto + rm_c10.c10_otros +
-		  rm_c10.c10_dif_cuadre
+LET valor_fact  = vm_subtotal - rm_c10.c10_tot_dscto + rm_c10.c10_otros
 
 	---PARA MOSTRAR LA CABECERA-----
 DISPLAY BY NAME rm_c10.c10_numero_oc, rm_c10.c10_estado,  rm_c10.c10_moneda,
