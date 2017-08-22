@@ -8,7 +8,6 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_demonios	VARCHAR(12)
 DEFINE rm_cia		RECORD LIKE ordt000.*
 DEFINE vm_num_rows	SMALLINT
 DEFINE vm_row_current	SMALLINT
@@ -20,11 +19,10 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
+CALL startlog('../logs/ordp100.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN          -- Validar # parámetros correcto
-	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto', 'stop')
 	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
@@ -359,7 +357,6 @@ INPUT BY NAME rm_cia.c00_compania, rm_cia.c00_cuando_ret,
 			CALL fl_lee_compania(rm_cia.c00_compania)
 				RETURNING rg_cia.*
                         IF rg_cia.g01_compania IS NULL THEN
-                                --CALL fgl_winmessage(vg_producto,'Compañía no existe','exclamation')
 				CALL fl_mostrar_mensaje('Compañía no existe.','exclamation')
                                 NEXT FIELD c00_compania
                         END IF
@@ -371,7 +368,6 @@ INPUT BY NAME rm_cia.c00_compania, rm_cia.c00_cuando_ret,
 			CALL fl_lee_compania_orden_compra(rm_cia.c00_compania)
 				RETURNING r_ord.*
 			IF rm_cia.c00_compania = r_ord.c00_compania THEN
-				--CALL fgl_winmessage(vg_producto,'Código de comapañía ya existe','exclamation')
 				CALL fl_mostrar_mensaje('Código de comapañía ya existe.','exclamation')
 				NEXT FIELD c00_compania
                         END IF
@@ -457,7 +453,6 @@ DEFINE num_registro	INTEGER
 IF vm_num_rows > 0 THEN
 	SELECT * INTO rm_cia.* FROM ordt000 WHERE ROWID=num_registro	
 	IF STATUS = NOTFOUND THEN
-		--CALL fgl_winmessage(vg_producto,'No existe registro con índice: ' || vm_row_current,'exclamation')
 		CALL fl_mostrar_mensaje('No existe registro con índice: ' || vm_row_current,'exclamation')
 		RETURN
 	END IF

@@ -42,12 +42,11 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
+CALL startlog('../logs/ordp300.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 
 IF num_args() <> 4 AND num_args() <> 8 THEN  -- Validar # parámetros correcto
-	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.','stop')
 	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
@@ -149,7 +148,6 @@ WHILE TRUE
 	END IF
 
 	IF vm_num_det = 0 THEN
-		--CALL fgl_winmessage(vg_producto,'No se encontraron registros con el criterio indicado.','exclamation')
 		CALL fl_mostrar_mensaje('No se encontraron registros con el criterio indicado.','exclamation')
 		IF num_args() = 8 THEN
 			EXIT PROGRAM
@@ -186,7 +184,7 @@ DEFINE r_p01		RECORD LIKE cxpt001.*
 
 IF vm_num_det = 0 AND num_args() <> 8 THEN
 	LET rm_c10.c10_estado = 'P'
-	LET vm_fecha_hasta    = TODAY
+	LET vm_fecha_hasta    = vg_fecha
 END IF
 DISPLAY BY NAME rm_c10.c10_estado, vm_numero_oc, 
 		vm_proveedor,      vm_depto,
@@ -281,7 +279,6 @@ END IF
 						 vm_numero_oc)
 				RETURNING r_c10.*
 			IF r_c10.c10_numero_oc IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'No existe la Orden de Compra en la Compañía.','exclamation')
 				CALL fl_mostrar_mensaje('No existe la Orden de Compra en la Compañía.','exclamation')
 			END IF
 			LET rm_c10.c10_estado = r_c10.c10_estado
@@ -301,17 +298,14 @@ END IF
 	AFTER FIELD vm_fecha_hasta 
 		IF vm_fecha_hasta IS NOT NULL THEN
 			IF vm_fecha_hasta < vm_fecha_desde THEN
-				--CALL fgl_winmessage(vg_producto,'La fecha final no debe ser mayor a la de fecha de inicio.','exclamation')
 				CALL fl_mostrar_mensaje('La fecha final no debe ser mayor a la de fecha de inicio.','exclamation')
 				NEXT FIELD vm_fecha_hasta
 			END IF
-			IF vm_fecha_hasta > TODAY THEN
-				--CALL fgl_winmessage(vg_producto,'La fecha final no puede ser mayor a la de hoy.','exclamation')
+			IF vm_fecha_hasta > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha final no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD vm_fecha_hasta
 			END IF
 			IF vm_fecha_desde < '01-01-1900' THEN
-				--CALL fgl_winmessage(vg_producto,'Debe ingresa fechas mayores a las del año 1900.','exclamation')	
 				CALL fl_mostrar_mensaje('Debe ingresa fechas mayores a las del año 1900.','exclamation')
 				NEXT FIELD vm_fecha_hasta
 			END IF
@@ -320,12 +314,10 @@ END IF
 	AFTER FIELD vm_fecha_desde 
 		IF vm_fecha_desde IS NOT NULL THEN
 			IF vm_fecha_desde > vm_fecha_hasta THEN
-				--CALL fgl_winmessage(vg_producto,'La fecha de inicio debe ser menor a la fecha final.','exclamation')
 				CALL fl_mostrar_mensaje('La fecha de inicio debe ser menor a la fecha final.','exclamation')
 				NEXT FIELD vm_fecha_desde
 			END IF
 			IF vm_fecha_hasta < '01-01-1900' THEN
-				--CALL fgl_winmessage(vg_producto,'Debe ingresa fechas mayores a las del año 1889.','exclamation')	
 				CALL fl_mostrar_mensaje('Debe ingresa fechas mayores a las del año 1889.','exclamation')
 				NEXT FIELD vm_fecha_desde
 			END IF
@@ -336,7 +328,6 @@ END IF
 			CALL fl_lee_proveedor(vm_proveedor)
 				RETURNING r_p01.*
 			IF r_p01.p01_codprov IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'No existe el proveedor en la Compañía.','exclamation')
 				CALL fl_mostrar_mensaje('No existe el proveedor en la Compañía.','exclamation')
 				CLEAR nom_proveedor
 				NEXT FIELD vm_proveedor
@@ -352,7 +343,6 @@ END IF
 						 vm_depto)
 				RETURNING r_g34.*
 			IF r_g34.g34_cod_depto IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'No existe el departamento en la Compañía.','exclamation')
 				CALL fl_mostrar_mensaje('No existe el departamento en la Compañía.','exclamation')
 				CLEAR nom_depto
 				NEXT FIELD vm_depto
@@ -367,7 +357,6 @@ END IF
 			CALL fl_lee_tipo_orden_compra(vm_tipo_orden)
 				RETURNING r_c01.*
 			IF r_c01.c01_tipo_orden IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'No existe el tipo de orden en la Compañía.','exclamation')
 				CALL fl_mostrar_mensaje('No existe el tipo de orden en la Compañía.','exclamation')
 				CLEAR nom_tipo
 				NEXT FIELD vm_tipo_orden
@@ -385,12 +374,10 @@ END IF
 
 		IF rm_c10.c10_estado = 'C' THEN
 			IF vm_fecha_desde IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'Debe ingresar la fecha de inicio.','exclamation') 
 				CALL fl_mostrar_mensaje('Debe ingresar la fecha de inicio.','exclamation') 
 				NEXT FIELD vm_fecha_desde
 			END IF
 			IF vm_fecha_hasta IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'Debe ingresar la fecha final.','exclamation') 
 				CALL fl_mostrar_mensaje('Debe ingresar la fecha final.','exclamation') 
 				NEXT FIELD vm_fecha_hasta
 			END IF
@@ -404,12 +391,10 @@ END IF
 		END IF
 
 		IF vm_fecha_desde IS NULL AND vm_fecha_hasta IS NOT NULL THEN
-			--CALL fgl_winmessage(vg_producto,'Debe ingresar la fecha de inicio.','exclamation') 
 			CALL fl_mostrar_mensaje('Debe ingresar la fecha de inicio.','exclamation') 
 			NEXT FIELD vm_fecha_desde
 		END IF
 		IF vm_fecha_hasta IS NULL AND vm_fecha_desde IS NOT NULL THEN
-			--CALL fgl_winmessage(vg_producto,'Debe ingresar la fecha de inicio.','exclamation') 
 			CALL fl_mostrar_mensaje('Debe ingresar la fecha de inicio.','exclamation') 
 			NEXT FIELD vm_fecha_hasta
 		END IF

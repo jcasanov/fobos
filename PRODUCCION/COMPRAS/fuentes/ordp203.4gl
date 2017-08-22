@@ -9,8 +9,6 @@
 
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_demonios	VARCHAR(12)
-
 DEFINE rm_orden ARRAY[10] OF CHAR(4)
 DEFINE vm_columna_1	SMALLINT
 DEFINE vm_columna_2	SMALLINT
@@ -54,11 +52,10 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
+CALL startlog('../logs/ordp203.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN          -- Validar # parámetros correcto
-	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.','stop')
 	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
@@ -242,12 +239,10 @@ WHILE NOT salir
 					RETURNING done
 				IF done = 0 THEN
 					ROLLBACK WORK
-					--CALL fgl_winmessage(vg_producto,'No se realizó proceso. ', 'exclamation')
 					CALL fl_mostrar_mensaje('No se realizó proceso.','exclamation')
 					CONTINUE INPUT
 				ELSE 
 					COMMIT WORK
-					--CALL fgl_winmessage(vg_producto,'Proceso realizado Ok. ','info')
 					CALL fl_mostrar_mensaje('Proceso realizado Ok.','info')
 					CALL control_cargar_detalle()
 				END IF 
@@ -360,7 +355,6 @@ END FOREACH
 
 LET i = i - 1
 IF i = 0 THEN 
-	--CALL fgl_winmessage(vg_producto,'No existen Ordenes de Compra recibidas para que puedan ser cerradas.','stop')
 	CALL fl_mostrar_mensaje('No existen Ordenes de Compra recibidas para que puedan ser cerradas.','stop')
 	EXIT PROGRAM
 END IF
@@ -404,22 +398,15 @@ WHILE TRUE
                         AND c10_numero_oc = r_detalle[j].c10_numero_oc
 
 	END IF
-        WHENEVER ERROR STOP
-        IF STATUS < 0 THEN
-		{
-                CALL fgl_winmessage(vg_producto,'La Orden de Compra número '||
-				r_detalle[j].c10_numero_oc ||'  del proveedor  '
-				||r_detalle[j].p01_nomprov ||
-				    '  está siendo modificada, no se '||
-				    'realizará la aprobacion. ','exclamation')
-		}
+    WHENEVER ERROR STOP
+    IF STATUS < 0 THEN
 		CALL fl_mostrar_mensaje('La Orden de Compra número ' ||
 				r_detalle[j].c10_numero_oc ||
 				' del proveedor ' || r_detalle[j].p01_nomprov ||
 				' está siendo modificada, no se ' ||
 				'realizará la aprobacion.','exclamation')
 		EXIT WHILE
-        END IF
+    END IF
 	LET j = j + 1
 	IF j > vm_ind_arr THEN
 		LET done     = 1

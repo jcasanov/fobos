@@ -34,7 +34,7 @@ DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
 
-CALL startlog('../logs/errores')
+CALL startlog('../logs/ordp302.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN   -- Validar # parámetros correcto
@@ -74,8 +74,8 @@ END IF
 DISPLAY FORM f_ordf302
 INITIALIZE vm_fecha_ini, vm_fecha_fin, rm_c10.c10_moneda TO NULL
 LET vm_max_det 		= 1000
-LET vm_fecha_ini	= TODAY
-LET vm_fecha_fin	= TODAY
+LET vm_fecha_ini	= vg_fecha
+LET vm_fecha_fin	= vg_fecha
 LET rm_c10.c10_moneda	= rg_gen.g00_moneda_base
 WHILE TRUE
 	CALL funcion_master()
@@ -156,7 +156,6 @@ INPUT BY NAME rm_c10.c10_moneda, vm_fecha_ini, vm_fecha_fin,
 				RETURNING rm_g13.*
 			IF rm_g13.g13_moneda IS NULL THEN
 				CLEAR nom_moneda 
-				--CALL fgl_winmessage(vg_producto,'No existe la Moneda en la Compañia.','exclamation')
 				CALL fl_mostrar_mensaje('No existe la Moneda en la Compañia.','exclamation')
 				NEXT FIELD c10_moneda
 			ELSE
@@ -174,7 +173,6 @@ INPUT BY NAME rm_c10.c10_moneda, vm_fecha_ini, vm_fecha_fin,
 			CALL fl_lee_tipo_orden_compra(rm_c10.c10_tipo_orden)
 				RETURNING r_c01.*
 			IF r_c01.c01_tipo_orden IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'No existe ese Tipo de Orden de Compra.','exclamation')
 				CALL fl_mostrar_mensaje('No existe ese Tipo de Orden de Compra.','exclamation')
 				NEXT FIELD c10_tipo_orden
 			END IF
@@ -190,7 +188,6 @@ INPUT BY NAME rm_c10.c10_moneda, vm_fecha_ini, vm_fecha_fin,
 			LET vm_fecha_fin = fecha_fin
 		END IF
 		IF vm_fecha_ini > vm_fecha_fin THEN
-			--CALL fgl_winmessage(vg_producto,'La fecha inicial debe ser menor que la fecha final.','exclamation')
 			CALL fl_mostrar_mensaje('La fecha inicial debe ser menor que la fecha final.','exclamation')
 			NEXT FIELD vm_fecha_ini
 		END IF

@@ -78,7 +78,6 @@ CREATE TEMP TABLE tmp_detalle_prov(
 		codprov		INTEGER,
 		nomprov		VARCHAR(40,20),
 		cedruc		CHAR(15),
-		--tipo_prov	VARCHAR(30,15),
 		estado		CHAR(1),
 		flete		DECIMAL(11,2),
 		otros		DECIMAL(11,2),
@@ -100,8 +99,8 @@ LET rm_par.g13_moneda   = r_g13.g13_moneda
 LET rm_par.g13_nombre   = r_g13.g13_nombre
 LET rm_par.estado       = 'T'
 LET rm_par.tipo_reporte = 'T'
-LET rm_par.fecha_ini    = TODAY
-LET rm_par.fecha_fin    = TODAY
+LET rm_par.fecha_ini    = vg_fecha
+LET rm_par.fecha_fin    = vg_fecha
 LET num_ord             = 2
 LET rm_ord[1].col       = rm_campos[5].nombre
 LET rm_ord[2].col       = rm_campos[2].nombre
@@ -174,7 +173,6 @@ DEFINE r_prov		RECORD
 				codprov		LIKE cxpt001.p01_codprov,
 				nomprov		LIKE cxpt001.p01_nomprov,
 				cedruc		LIKE cxpt001.p01_num_doc,
-				--tipo_prov	LIKE gent012.g12_nombre,
 				estado		CHAR(1),
 				flete		LIKE ordt010.c10_flete,
 				otros		LIKE ordt010.c10_otros,
@@ -190,7 +188,6 @@ DEFINE r_prov		RECORD
 			END RECORD
 DEFINE r_p01		RECORD LIKE cxpt001.*
 DEFINE r_c10		RECORD LIKE ordt010.*
---DEFINE r_g12		RECORD LIKE gent012.*
 
 CALL fl_lee_compania(vg_codcia) RETURNING rm_g01.*
 IF rm_g01.g01_compania IS NULL THEN
@@ -231,13 +228,8 @@ WHILE TRUE
 		SELECT * FROM tmp_detalle_prov
 			WHERE codprov = r_p01.p01_codprov
 		IF STATUS = NOTFOUND THEN
-			{--
-			CALL fl_lee_subtipo_entidad('TP', r_p01.p01_tipo_prov)
-				RETURNING r_g12.*
-			--}
 			INSERT INTO tmp_detalle_prov
 				VALUES(r_p01.p01_codprov, r_p01.p01_nomprov,
-					--r_g12.g12_nombre, r_p01.p01_estado,
 					r_p01.p01_num_doc, r_p01.p01_estado,
 					r_det.flete, r_det.otros,
 					r_det.valor_bruto, r_det.valor_dscto,
@@ -524,7 +516,7 @@ INPUT BY NAME rm_par.g13_moneda, rm_par.fecha_ini, rm_par.fecha_fin,
 		END IF
 	AFTER FIELD fecha_ini
 		IF rm_par.fecha_ini IS NOT NULL THEN
-			IF rm_par.fecha_ini > TODAY THEN
+			IF rm_par.fecha_ini > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha de inicio no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD fecha_ini
 			END IF
@@ -538,7 +530,7 @@ INPUT BY NAME rm_par.g13_moneda, rm_par.fecha_ini, rm_par.fecha_fin,
 		END IF
 	AFTER FIELD fecha_fin
 		IF rm_par.fecha_fin IS NOT NULL THEN
-			IF rm_par.fecha_fin > TODAY THEN
+			IF rm_par.fecha_fin > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha de término no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD fecha_fin
 			END IF
@@ -834,7 +826,7 @@ PAGE HEADER
 		PRINT COLUMN 20, "** PROVEEDOR           : ", rm_par.nomprov
 	--#END IF
 	SKIP 1 LINES
-	PRINT COLUMN 01, "FECHA DE IMPRESION: ", TODAY USING "dd-mm-yyyy", 
+	PRINT COLUMN 01, "FECHA DE IMPRESION: ", vg_fecha USING "dd-mm-yyyy", 
 	                 1 SPACES, TIME,
 	      COLUMN 142, usuario
 	SKIP 1 LINES
@@ -902,7 +894,6 @@ DEFINE r_prov		RECORD
 				codprov		LIKE cxpt001.p01_codprov,
 				nomprov		LIKE cxpt001.p01_nomprov,
 				cedruc		LIKE cxpt001.p01_num_doc,
-				--tipo_prov	LIKE gent012.g12_nombre,
 				estado		CHAR(1),
 				flete		LIKE ordt010.c10_flete,
 				otros		LIKE ordt010.c10_otros,
@@ -988,7 +979,7 @@ PAGE HEADER
 		PRINT COLUMN 20, "** DEPARTAMENTO        : ", rm_par.n_dpto
 	--#END IF
 	SKIP 1 LINES
-	PRINT COLUMN 01, "FECHA DE IMPRESION: ", TODAY USING "dd-mm-yyyy", 
+	PRINT COLUMN 01, "FECHA DE IMPRESION: ", vg_fecha USING "dd-mm-yyyy", 
 	                 1 SPACES, TIME,
 	      COLUMN 142, usuario
 	SKIP 1 LINES
@@ -1072,14 +1063,12 @@ INPUT ARRAY rm_ord WITHOUT DEFAULTS FROM rm_ord.*
 		LET i = arr_curr()
 	AFTER FIELD col
 		IF rm_ord[i].col IS NULL THEN
-			--CALL fgl_winmessage(vg_producto,'Debe elegir una columna.','exclamation')
 			CALL fl_mostrar_mensaje('Debe elegir una columna.','exclamation')
 			NEXT FIELD col	
 		END IF
 		LET campo = rm_ord[i].col
 		FOR j = 1 TO num_ord
 			IF j <> i AND rm_ord[j].col = campo THEN
-				--CALL fgl_winmessage(vg_producto,'No puede ordenar dos veces sobre el mismo campo.','exclamation')
 				CALL fl_mostrar_mensaje('No puede ordenar dos veces sobre el mismo campo.','exclamation')
 				NEXT FIELD col
 			END IF
@@ -1092,7 +1081,6 @@ INPUT ARRAY rm_ord WITHOUT DEFAULTS FROM rm_ord.*
 			END IF
 		END FOR
 		IF campo IS NULL THEN
-			--CALL fgl_winmessage(vg_producto,'Campo no existe.','exclamation')
 			CALL fl_mostrar_mensaje('Campo no existe.','exclamation')
 			NEXT FIELD col
 		END IF

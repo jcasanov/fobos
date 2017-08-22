@@ -819,29 +819,6 @@ DISPLAY BY NAME val_pagar, tot_ret
 
 END FUNCTION
 
-{
-FUNCTION control_cargar_retenciones_aplicadas()
-DEFINE r_p28		RECORD LIKE cxpt028.*
-DEFINE i		SMALLINT
-
-DECLARE q_cxpt028 CURSOR FOR 
-	SELECT * FROM cxpt028 
-		WHERE p28_compania  = vg_codcia
-		  AND p28_localidad = vg_codloc
-		  AND p28_codprov   = rm_c10.c10_codprov
-		  AND p28_num_doc   = rm_c13.c13_factura
-
-FOREACH q_cxpt028 INTO r_p28.*
-	FOR i = 1 TO ind_ret 
-		IF   THEN
-		END IF
-		
-	END FOR
-END FOREACH
-
-END FUNCTION
-}
-
 
 
 FUNCTION control_cargar_retencion()
@@ -849,21 +826,11 @@ DEFINE i 	SMALLINT
 DEFINE r_c02	RECORD LIKE ordt002.*	-- PORCENTAJE DE RETENCIONES OC
 DEFINE r_p05	RECORD LIKE cxpt005.*	-- RETENCIONES CONF * PROVEEDOR
 
-{
-LET val_servi  = rm_c10.c10_tot_mano  * (1 + rm_c10.c10_porc_descto / 100) 
-LET val_bienes = rm_c10.c10_tot_repto * (1 + rm_c10.c10_porc_descto / 100) 
-}
 LET val_impto  = rm_c13.c13_tot_impto
 LET val_neto   = rm_c13.c13_tot_recep
 LET val_pagar  = val_neto
 
-{
-LET iva_bien   = val_bienes * (rm_c10.c10_porc_impto / 100)
-LET iva_servi  = val_servi  * (rm_c10.c10_porc_impto / 100)
-}
-
 LET tot_ret    = 0
-
 LET ind_ret = 0
 
 DECLARE q_ret CURSOR FOR
@@ -1008,11 +975,6 @@ IF rm_c10.c10_ord_trabajo IS NOT NULL THEN
 	FETCH q_blot INTO rm_t23.*
 	IF STATUS = NOTFOUND THEN
 		ROLLBACK WORK
-		{
-		CALL fgl_winmessage(vg_producto,'Orden de trabajo: ' ||
-				    rm_c10.c10_ord_trabajo || ' no existe.',
-				    'stop')
-		}
 		CALL fl_mostrar_mensaje('Orden de trabajo: ' ||
 				    rm_c10.c10_ord_trabajo || ' no existe.',
 				    'stop')
@@ -1020,11 +982,6 @@ IF rm_c10.c10_ord_trabajo IS NOT NULL THEN
 	END IF
 	IF status < 0 THEN
 		ROLLBACK WORK
-		{
-		CALL fgl_winmessage(vg_producto,'Orden de trabajo: ' ||
-				    rm_c10.c10_ord_trabajo ||
-				    ' está bloqueada por otro proceso.', 'stop')
-		}
 		CALL fl_mostrar_mensaje('Orden de trabajo: ' ||
 				    rm_c10.c10_ord_trabajo ||
 				    ' está bloqueada por otro proceso.','stop')
@@ -1032,11 +989,6 @@ IF rm_c10.c10_ord_trabajo IS NOT NULL THEN
 	END IF
 	IF rm_t23.t23_estado <> 'A' THEN
 		ROLLBACK WORK
-		{
-		CALL fgl_winmessage(vg_producto,'Estado de O.T. ' || 
-			    	rm_c10.c10_ord_trabajo ||
-			    	' no está activa.','stop')
-		}
 		CALL fl_mostrar_mensaje('Estado de O.T. ' || 
 			    	rm_c10.c10_ord_trabajo ||
 			    	' no está activa.','stop')
@@ -1086,9 +1038,7 @@ DEFINE run_prog		CHAR(10)
 
 --- PARA VALIDAR QUE GENERE LA FORMA DE PAGO CUANDO ES UNA RECEPCION PARCIAL ---
 
-IF  rm_c10.c10_tipo_pago = 'R' AND vm_flag_forma_pago = 'S' 
-    THEN
-	--CALL fgl_winmessage(vg_producto,'Debe generar la forma de pago.','exclamation')
+IF  rm_c10.c10_tipo_pago = 'R' AND vm_flag_forma_pago = 'S' THEN
 	CALL fl_mostrar_mensaje('Debe generar la forma de pago.','exclamation')
 	RETURN 9
 END IF
@@ -1097,7 +1047,6 @@ END IF
 --- PARA VALIDAR QUE GENERE LA RETENCION DE LA ORDEN DE COMPRA ---
 
 IF rm_c00.c00_cuando_ret = 'C' AND tot_ret = 0 THEN
-	--CALL fgl_winmessage(vg_producto,'Debe ingresar las retenciones.','exclamation')
 	CALL fl_mostrar_mensaje('Debe ingresar las retenciones.','exclamation')
 	RETURN 9
 END IF
@@ -1191,8 +1140,6 @@ INITIALIZE r_b12.* TO NULL
 CALL fl_lee_tipo_orden_compra(rm_c10.c10_tipo_orden) RETURNING r_c01.*
 CALL fl_lee_compania_contabilidad(vg_codcia) RETURNING r_b00.*
 IF rm_c10.c10_ord_trabajo IS NULL THEN
---IF r_c01.c01_gendia_auto = 'N' THEN 
-	--IF r_b00.b00_inte_online = 'S' THEN
 		IF (r_c01.c01_modulo <> 'AF' AND r_c01.c01_modulo <> 'CI') OR
 		    r_c01.c01_modulo IS NULL
 		THEN
@@ -1206,8 +1153,6 @@ IF rm_c10.c10_ord_trabajo IS NULL THEN
 		IF int_flag THEN
 			RETURN 0
 		END IF
-	--END IF
---END IF
 END IF
 COMMIT WORK
 IF r_b12.b12_compania IS NOT NULL THEN
@@ -1238,7 +1183,6 @@ END IF
 IF rm_c00.c00_cuando_ret = 'C' THEN
 	CALL imprime_retenciones()
 END IF
---CALL fgl_winmessage(vg_producto,'Proceso realizado Ok.','info')
 CALL fl_mostrar_mensaje('Proceso realizado Ok.','info')
 	
 CLEAR FORM
@@ -1355,10 +1299,6 @@ DECLARE q_sri CURSOR FOR
 		WHERE g37_compania   = vg_codcia
 		  AND g37_localidad  = vg_codloc
 		  AND g37_tipo_doc   = 'RT'
-		{--
-	  	  AND g37_fecha_emi <= DATE(TODAY)
-	  	  AND g37_fecha_exp >= DATE(TODAY)
-		--}
 		  AND g37_secuencia IN
 			(SELECT MAX(g37_secuencia)
 				FROM gent037
@@ -1530,7 +1470,6 @@ SELECT p20_saldo_cap INTO r_p23.p23_saldo_cap
 		  
 LET val_pagar = rm_c13.c13_tot_recep
 UPDATE cxpt020 SET p20_saldo_cap = 0
-	--rm_c13.c13_tot_recep
 	WHERE p20_compania  = vg_codcia
 	  AND p20_localidad = vg_codloc
 	  AND p20_codprov   = r_p23.p23_codprov
@@ -1562,7 +1501,6 @@ LET retVal = fl_actualiza_control_secuencias(vg_codcia, vg_codloc, modulo,
 
 IF retVal = 0 THEN
 	SET LOCK MODE TO NOT WAIT
-	--CALL fgl_winmessage(vg_producto,'No existe configuracion de secuencias para este tipo de transacción.','stop')
 	CALL fl_mostrar_mensaje('No existe configuracion de secuencias para este tipo de transacción.','stop')
 	EXIT PROGRAM
 END IF
@@ -1602,38 +1540,6 @@ CALL control_DISPLAY_array_ordt015()
 CLOSE WINDOW w_202_2
 
 END FUNCTION
-
-
-{
-FUNCTION control_cargar_ordt015_2()
-DEFINE r_c12		RECORD LIKE ordt012.*
-DEFINE i,k		SMALLINT
-
-DECLARE q_ordt015_2 CURSOR FOR 
-	SELECT * FROM ordt015 
-		WHERE c15_compania  = vg_codcia
-		  AND c15_localidad = vg_codloc
-		  AND c15_numero_oc = rm_c13.c13_numero_oc
-		  AND c15_num_recep = rm_c13.c13_num_recep
-
-LET i = 1
-FOREACH q_ordt015_2 INTO r_c15.*
-
-	LET r_detalle_2[i].c15_dividendo  = r_c15.c15_dividendo
-	LET r_detalle_2[i].c15_fecha_vcto = r_c15.c15_fecha_vcto
-	LET r_detalle_2[i].c15_valor_cap  = r_c15.c15_valor_cap
-	LET r_detalle_2[i].c15_valor_int  = r_c15.c15_valor_int
-
-	LET i = i + 1
-
-END FOREACH
-
-LET i = i - 1
-
-LET pagos = i
-
-END FUNCTION
-}
 
 
 
@@ -1924,7 +1830,6 @@ INPUT BY NAME rm_c13.c13_numero_oc, rm_c13.c13_num_guia, rm_c13.c13_fecha_cadu,
 						 rm_c13.c13_numero_oc)
 				RETURNING r_c10.*
                 	IF r_c10.c10_numero_oc IS  NULL THEN
-		    		--CALL fgl_winmessage(vg_producto,'No existe la orden de compra en la Compañía. ','exclamation')
 				CALL fl_mostrar_mensaje('No existe la orden de compra en la Compañía.','exclamation')
 				CLEAR nomprov
                         	NEXT FIELD c13_numero_oc
@@ -1935,14 +1840,12 @@ INPUT BY NAME rm_c13.c13_numero_oc, rm_c13.c13_num_guia, rm_c13.c13_fecha_cadu,
 
 			IF r_c10.c10_estado = 'A' THEN
 				DISPLAY rm_p01.p01_nomprov TO nomprov
-				--CALL fgl_winmessage(vg_producto,'La Orden de Compra no ha sido aprobada.','exclamation')
 				CALL fl_mostrar_mensaje('La Orden de Compra no ha sido aprobada.','exclamation')
 				NEXT FIELD c13_numero_oc
 			END IF
 
 			IF r_c10.c10_estado = 'C' THEN
 				DISPLAY rm_p01.p01_nomprov TO nomprov
-				--CALL fgl_winmessage(vg_producto,'La Orden de Compra está cerrada.','exclamation')
 				CALL fl_mostrar_mensaje('La Orden de Compra está cerrada.','exclamation')
 				NEXT FIELD c13_numero_oc
 			END IF
@@ -1954,7 +1857,6 @@ INPUT BY NAME rm_c13.c13_numero_oc, rm_c13.c13_num_guia, rm_c13.c13_fecha_cadu,
 			   rm_c01.c01_modulo     = 'RE'
 			   THEN
 				DISPLAY rm_p01.p01_nomprov TO nomprov
-				--CALL fgl_winmessage(vg_producto,'La orden de compra pertenece a inventarios debe ser recibida por compra local.','exclamation')
 				CALL fl_mostrar_mensaje('La orden de compra pertenece a inventarios debe ser recibida por compra local.','exclamation')
                        		NEXT FIELD c13_numero_oc
 			END IF 
@@ -2022,8 +1924,6 @@ INPUT BY NAME rm_c13.c13_numero_oc, rm_c13.c13_num_guia, rm_c13.c13_fecha_cadu,
 		CALL retorna_num_aut()
 	AFTER FIELD c13_fecha_cadu
 		IF rm_c13.c13_fecha_cadu IS NOT NULL THEN
-			--CALL retorna_fin_mes(rm_c13.c13_fecha_cadu)
-			--	RETURNING rm_c13.c13_fecha_cadu
 			DISPLAY BY NAME rm_c13.c13_fecha_cadu
 		END IF
 
@@ -2068,7 +1968,6 @@ INPUT BY NAME rm_c13.c13_numero_oc, rm_c13.c13_num_guia, rm_c13.c13_fecha_cadu,
 						 rm_c13.c13_num_guia, 1)
 			RETURNING r_p20.*
 		IF r_p20.p20_num_doc IS NOT NULL THEN
-			--CALL fgl_winmessage(vg_producto,'La factura ya ha sido recibida.','exclamation')
 			CALL fl_mostrar_mensaje('La factura ya ha sido recibida.','exclamation')
 			NEXT FIELD c13_num_guia
 		END IF
@@ -2142,7 +2041,6 @@ WHILE TRUE
 				IF r_detalle[i].c14_cantidad > 
 				   r_detalle[i].c11_cant_ped 	
 				   THEN
-					--CALL fgl_winmessage(vg_producto,'La cantidad recibida debe ser menor o igual a la pedida.','exclamation')
 					CALL fl_mostrar_mensaje('La cantidad recibida debe ser menor o igual a la pedida.','exclamation')
 					NEXT FIELD c14_cantidad		
 				END IF
@@ -2364,7 +2262,6 @@ FOREACH q_cons2 INTO r_c11.*
 		END IF
 		LET i = i + 1
         	IF i > vm_max_detalle THEN
-			--CALL fgl_winmessage(vg_producto,'La cantidad de elementos del detalle supero la cantidad de elementos del arreglo','stop')
 			CALL fl_mostrar_mensaje('La cantidad de elementos del detalle supero la cantidad de elementos del arreglo','stop')
 			EXIT PROGRAM
 		END IF	
@@ -2373,7 +2270,6 @@ FOREACH q_cons2 INTO r_c11.*
 END FOREACH 
 LET i = i - 1
 IF i = 0 THEN 
-	--CALL fgl_winmessage(vg_producto,'No hay elementos del detalle que recibir','exclamation')
 	CALL fl_mostrar_mensaje('No hay elementos del detalle que recibir.','exclamation')
 END IF
 
@@ -2483,7 +2379,6 @@ INPUT BY NAME pagos, rm_c13.c13_interes, fecha_pago, dias_pagos
 		--#CALL dialog.keysetlabel("CONTROL-W","")
 	AFTER FIELD fecha_pago
 		IF fecha_pago < vg_fecha THEN
-			--CALL fgl_winmessage(vg_producto,'Debe ingresar una fecha mayor o igual a la de hoy.','exclamation')
 			CALL fl_mostrar_mensaje('Debe ingresar una fecha mayor o igual a la de hoy.','exclamation')
 			NEXT FIELD fecha_pago
 		END IF
@@ -2502,19 +2397,16 @@ INPUT BY NAME pagos, rm_c13.c13_interes, fecha_pago, dias_pagos
 
 	AFTER INPUT 
 		IF pagos IS NULL THEN
-			--CALL fgl_winmessage(vg_producto,'Debe ingresar el número de pagos para generar el detalle.','exclamation')
 			CALL fl_mostrar_mensaje('Debe ingresar el número de pagos para generar el detalle.','exclamation')
 			NEXT FIELD pagos
 		END IF
 			
 		IF fecha_pago IS NULL THEN
-			--CALL fgl_winmessage(vg_producto,'Debe ingresar la fecha del primer pago de la orden de compra.','exclamation')
 			CALL fl_mostrar_mensaje('Debe ingresar la fecha del primer pago de la orden de compra.','exclamation')
 			NEXT FIELD fecha_pago
 		END IF
 
 		IF dias_pagos IS NULL THEN
-			--CALL fgl_winmessage(vg_producto,'Debe ingresar el número de días entre pagos para generar el detalle.','exclamation')
 			CALL fl_mostrar_mensaje('Debe ingresar el número de días entre pagos para generar el detalle.','exclamation')
 			NEXT FIELD dias_pagos
 		END IF
@@ -2589,20 +2481,17 @@ WHILE TRUE
 				IF r_detalle_2[k].c15_fecha_vcto >=
 				   r_detalle_2[k + 1].c15_fecha_vcto
 				   THEN
-					--CALL fgl_winmessage(vg_producto,'Existen fechas que resultan menores a las ingresadas anteriormente en los pagos. ','exclamation')
 					CALL fl_mostrar_mensaje('Existen fechas que resultan menores a las ingresadas anteriormente en los pagos.','exclamation')
 					EXIT INPUT
 				END IF
 			END FOR	
 
 			IF tot_cap > tot_recep THEN
-				--CALL fgl_winmessage(vg_producto,'El total del valor capital es mayor al total de la deuda. ','exclamation')
 				CALL fl_mostrar_mensaje('El total del valor capital es mayor al total de la deuda.','exclamation')
 				EXIT INPUT
 			END IF
 
 			IF tot_cap < tot_recep THEN
-				--CALL fgl_winmessage(vg_producto,'El total del valor capital es menor al total de la deuda. ','exclamation')
 				CALL fl_mostrar_mensaje('El total del valor capital es menor al total de la deuda.','exclamation')
 				EXIT INPUT
 			END IF
@@ -2941,7 +2830,6 @@ CALL fl_lee_orden_compra(vg_codcia, vg_codloc, rm_c13.c13_numero_oc)
 
 CALL fl_lee_auxiliares_generales(vg_codcia, vg_codloc) RETURNING r_b42.*
 IF r_b42.b42_compania IS NULL THEN
-	--CALL fgl_winmessage(vg_producto,'No se han configurado auxiliares contables para IVA.','exclamation')
 	CALL fl_mostrar_mensaje('No se han configurado auxiliares contables para IVA.','exclamation')
 	LET int_flag = 1
 	CLOSE WINDOW w_202_4
@@ -2951,7 +2839,6 @@ END IF
 CALL fl_lee_proveedor_localidad(vg_codcia, vg_codloc, rm_c10.c10_codprov)
 	RETURNING r_p02.*
 IF r_p02.p02_codprov IS NULL THEN
-	--CALL fgl_winmessage(vg_producto,'No se han configurado auxiliares contables para este proveedor.','exclamation')
 	CALL fl_mostrar_mensaje('No se han configurado auxiliares contables para este proveedor.','exclamation')
 	LET int_flag = 1
 	CLOSE WINDOW w_202_4
@@ -2961,7 +2848,6 @@ END IF
 LET impto = rm_c13.c13_tot_impto
 
 IF impto IS NULL THEN
-	--CALL fgl_winmessage(vg_producto,'No se ha realizado ninguna recepción.','exclamation')
 	CALL fl_mostrar_mensaje('No se ha realizado ninguna recepción.','exclamation')
 	LET int_flag = 1
 	CLOSE WINDOW w_202_4
@@ -3122,19 +3008,16 @@ WHILE NOT salir
 		AFTER FIELD b13_cuenta
 			IF r_ctas[i].cuenta IS NULL AND modificable(cuenta)
 			THEN
--- :)
 				IF cuenta IS NOT NULL THEN
 					DELETE FROM tmp_cuenta
 						WHERE te_cuenta = cuenta
 				END IF
--- :)
 				CONTINUE INPUT
 			END IF
 			IF (r_ctas[i].cuenta IS NULL 
 			 OR cuenta <> r_ctas[i].cuenta) 
 			AND NOT modificable(cuenta) 
 			THEN
-				--CALL fgl_winmessage(vg_producto,'No puede modificar esta cuenta.','exclamation')
 				CALL fl_mostrar_mensaje('No puede modificar esta cuenta.','exclamation')
 				LET r_ctas[i].cuenta = cuenta
 				DISPLAY r_ctas[i].cuenta TO r_ctas[j].b13_cuenta
@@ -3143,7 +3026,6 @@ WHILE NOT salir
 			IF (cuenta IS NULL OR cuenta <> r_ctas[i].cuenta) 
 			AND NOT modificable(r_ctas[i].cuenta) 
 			THEN
-				--CALL fgl_winmessage(vg_producto,'No puede volver a ingresar esta cuenta.','exclamation')
 				CALL fl_mostrar_mensaje('No puede volver a ingresar esta cuenta.','exclamation')
 				LET r_ctas[i].cuenta = ' '
 				NEXT FIELD b13_cuenta
@@ -3151,7 +3033,6 @@ WHILE NOT salir
 			CALL fl_lee_cuenta(vg_codcia, r_ctas[i].cuenta) 
 				RETURNING r_b10.*
 			IF r_b10.b10_cuenta IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'No existe cuenta contable.','exclamation')
 				CALL fl_mostrar_mensaje('No existe cuenta contable.','exclamation')
 				NEXT FIELD b13_cuenta
 			END IF
@@ -3159,12 +3040,10 @@ WHILE NOT salir
 				CALL fl_mostrar_mensaje('Cuenta no permite movimiento.', 'exclamation')
 				NEXT FIELD b13_cuenta
 			END IF
--- :)
 			IF cuenta IS NOT NULL THEN
 				DELETE FROM tmp_cuenta
 					WHERE te_cuenta = cuenta
 			END IF
--- :)
 			CALL inserta_tabla_temporal(r_ctas[i].cuenta,
 				r_ctas[i].valor_db, r_ctas[i].valor_cr, 'V')
 				RETURNING tot_debito, tot_credito
@@ -3193,17 +3072,6 @@ WHILE NOT salir
 					r_ctas[i].valor_db, r_ctas[i].valor_cr,
 					'V') RETURNING tot_debito, tot_credito
 				DISPLAY BY NAME tot_debito, tot_credito
-			{
-				IF cuenta_distribucion(vg_codcia, 
-						       r_ctas[i].cuenta) 
-				AND rm_cuenta[i].valor_debito > 0
-				THEN
-					CALL muestra_distribucion(vg_codcia,
-						rm_cuenta[i].cuenta,
-						rm_cuenta[i].valor_debito)
-					LET int_flag = 0
-				END IF
-			}
 			END IF
 		BEFORE FIELD valor_cr 
 			IF NOT modificable(r_ctas[i].cuenta) THEN
@@ -3225,17 +3093,6 @@ WHILE NOT salir
 					r_ctas[i].valor_db, r_ctas[i].valor_cr,
 					'V') RETURNING tot_debito, tot_credito
 				DISPLAY BY NAME tot_debito, tot_credito
-			{
-				IF cuenta_distribucion(vg_codcia, 
-						       rm_cuenta[i].cuenta) 
-				AND rm_cuenta[i].valor_credito > 0
-				THEN
-					CALL muestra_distribucion(vg_codcia,
-						rm_cuenta[i].cuenta,
-						rm_cuenta[i].valor_credito)
-					LET int_flag = 0
-				END IF
-			}
 			END IF
 		AFTER INPUT
 			IF tot_debito IS NULL THEN
@@ -3640,23 +3497,17 @@ CALL fl_lee_orden_compra(vg_codcia, vg_codloc, rm_c13.c13_numero_oc)
 CALL fl_lee_tipo_comprobante_contable(vg_codcia, 'DO') RETURNING r_b03.*
 IF r_b03.b03_compania IS NULL THEN
 	ROLLBACK WORK
-	--CALL fgl_winmessage(vg_producto,'No existe tipo de comprobante para Diario de Compras: DO','exclamation')
 	CALL fl_mostrar_mensaje('No existe tipo de comprobante para Diario de Compras: DO.','exclamation')
 	EXIT PROGRAM
 END IF
-{
-LET glosa = rm_p01.p01_nomprov[1,19], ' ', rm_c13.c13_factura
-}
 LET glosa = 'OC # ', rm_c13.c13_numero_oc USING "<<<<<<<&", ' RECEPCION # ',
 		rm_c13.c13_num_recep USING "<<<<<<<&"
 INITIALIZE r_b12.* TO NULL
 LET r_b12.b12_compania    = vg_codcia  
--- OjO confirmar
 LET r_b12.b12_tipo_comp   = r_b03.b03_tipo_comp
 LET r_b12.b12_num_comp    = fl_numera_comprobante_contable(vg_codcia,
                             	r_b12.b12_tipo_comp, YEAR(vg_fecha), MONTH(vg_fecha))
 LET r_b12.b12_estado      = 'A' 
---LET r_b12.b12_glosa       = 'COMPROBANTE: ' || glosa CLIPPED 
 LET r_b12.b12_glosa       = rm_b12.b12_glosa CLIPPED
 LET r_b12.b12_origen      = 'A' 
 LET r_b12.b12_moneda      = r_c10.c10_moneda 
@@ -3668,14 +3519,12 @@ LET r_b12.b12_fecing      = fl_current()
 
 INSERT INTO ctbt012 VALUES(r_b12.*)
 
---
 IF r_b12.b12_moneda = r_b00.b00_moneda_base THEN
 	LET expr_valor = ' (te_valor_cr * (-1)), 0 '
 ELSE
 	LET expr_valor = ' (te_valor_cr * (-1) * ', r_b12.b12_paridad, 
 			 '), (te_valor_cr * (-1))'
 END IF
---
 
 CALL fl_lee_proveedor_localidad(vg_codcia, vg_codloc, r_c10.c10_codprov)
 	RETURNING r_p02.*
@@ -3711,14 +3560,13 @@ LET query = 'INSERT INTO ctbt013 (b13_compania, b13_tipo_comp, b13_num_comp, ',
 PREPARE stmnt3 FROM query
 EXECUTE stmnt3
 
---
 IF r_b12.b12_moneda = r_b00.b00_moneda_base THEN
 	LET expr_valor = ' te_valor_db, 0 '
 ELSE
 	LET expr_valor = ' (te_valor_db * ', r_b12.b12_paridad, 
 			 '), te_valor_db'
 END IF
---
+
 LET query = 'INSERT INTO ctbt013 (b13_compania, b13_tipo_comp, b13_num_comp, ',
 	    '			  b13_secuencia, b13_cuenta, ',
 	    '			  b13_glosa, b13_valor_base, b13_valor_aux, ',
@@ -3772,7 +3620,6 @@ SELECT ROWID INTO vm_rows_recep[vm_num_recep]
 	  AND c13_numero_oc = vg_numero_oc  
           AND c13_num_recep = vg_num_recep
 IF STATUS = NOTFOUND THEN
-        --CALL fgl_winmessage(vg_producto,'No existe recepción de orden de compra.','stop')
 	CALL fl_mostrar_mensaje('No existe recepción de orden de compra.','stop')
         EXIT PROGRAM
 ELSE
