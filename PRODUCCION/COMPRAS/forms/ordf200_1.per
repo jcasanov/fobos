@@ -10,13 +10,13 @@ SCREEN
 Orden Trabajo:[c17   ] [c18                 ] Forma Pago:[c31         ] 
    Referencia:[c19                          ]
       Usuario:[c052      ]  Proforma Inventario: [c053    ]   [c050] de [c051]
- [b|b0        |b1      |b2                      |b3   |b4        |b5        ]
-[a|c20       |c21   ] [c22                     |c23  |c24       |c25       |y] 
-[a|c20       |c21   ] [c22                     |c23  |c24       |c25       |y] 
-[a|c20       |c21   ] [c22                     |c23  |c24       |c25       |y] 
-[a|c20       |c21   ] [c22                     |c23  |c24       |c25       |y] 
-[a|c20       |c21   ] [c22                     |c23  |c24       |c25       |y] 
-[a|c20       |c21   ] [c22                     |c23  |c24       |c25       |y] 
+ [b|b0        |b1      |b2                     |b3    |b4        |b5        ]
+[a|c20       |c21   ] [c22                    |c23   |c24       |c25       |y] 
+[a|c20       |c21   ] [c22                    |c23   |c24       |c25       |y] 
+[a|c20       |c21   ] [c22                    |c23   |c24       |c25       |y] 
+[a|c20       |c21   ] [c22                    |c23   |c24       |c25       |y] 
+[a|c20       |c21   ] [c22                    |c23   |c24       |c25       |y] 
+[a|c20       |c21   ] [c22                    |c23   |c24       |c25       |y] 
   Valor Factura antes Iva:[z001         ]              Subtotal:[c26       ] 
         Diferencia Cuadre:[z002         ]             Descuento:[c27       ] 
                    Seguro:[y056         ]              Impuesto:[c28       ] 
@@ -79,8 +79,8 @@ c21 = ordt011.c11_codigo, REVERSE, UPSHIFT, OPTIONS = '-nolist',
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 c22 = ordt011.c11_descrip, REVERSE, UPSHIFT, SCROLL,
 	OPTIONS = '-nolist';
-c23 = ordt011.c11_descuento, REVERSE, INCLUDE = (0 TO 99.99),
-	OPTIONS = '-nolist', FORMAT = '#&.##';
+c23 = ordt011.c11_descuento, REVERSE, INCLUDE = (0 TO 100.00),
+	OPTIONS = '-nolist', FORMAT = '##&.##';
 c24 = ordt011.c11_precio, REVERSE, FORMAT = '##,##&.###',
 	OPTIONS = '-nolist', INCLUDE = (0.001 TO 99999.999);
 c25 = formonly.subtotal TYPE DECIMAL(12,2), REVERSE, FORMAT = '###,##&.##', 
