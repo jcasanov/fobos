@@ -2578,10 +2578,6 @@ INPUT ARRAY r_detalle WITHOUT DEFAULTS FROM r_detalle.*
 			CALL fl_mostrar_mensaje('Digite detalle.','exclamation')
 			NEXT FIELD c11_cant_ped
 		END IF  
-		IF rm_c10.c10_dif_cuadre > 1 OR rm_c10.c10_dif_cuadre < -1 THEN
-			CALL fl_mostrar_mensaje('La diferencia de cuadre no debe ser mayor que 1.','exclamation')
-			NEXT FIELD c11_cant_ped
-		END IF  
 		IF rm_c10.c10_tot_compra = 0 THEN
 			NEXT FIELD c11_cant_ped
 		END IF
