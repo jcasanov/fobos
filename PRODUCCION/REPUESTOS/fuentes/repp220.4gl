@@ -1878,11 +1878,6 @@ IF rm_r21.r21_num_ot IS NOT NULL OR rm_r21.r21_num_presup IS NOT NULL THEN
 END IF 
 CALL fl_lee_proforma_rep(vg_codcia, vg_codloc, rm_r21.r21_numprof)
 	RETURNING rm_r21.*
-CALL fl_control_status_caja(vg_codcia, vg_codloc, 'P') RETURNING int_flag
-IF int_flag <> 0 THEN
-	LET int_flag = 0
-	RETURN
-END IF	
 IF rm_r21.r21_cod_tran IS NOT NULL THEN
 	CALL fl_mostrar_mensaje('Esta proforma ya fue facturada, no puede ser convertida en preventa.','exclamation')             	
 	RETURN
