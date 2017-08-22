@@ -447,20 +447,12 @@ INPUT BY NAME rm_p33.p33_numero_oc, rm_p33.p33_cod_prov_nue,
 				CALL fl_mostrar_mensaje('Numero de Autorizacion no tiene completo el numero de digitos.', 'exclamation')
 				NEXT FIELD p33_num_aut_nue
 			END IF
-			{-- OJO
-			IF rm_p33.p33_num_aut_nue[1, 1] <> '1' THEN
-				CALL fl_mostrar_mensaje('Numero de Autorizacion es incorrecto.', 'exclamation')
-				NEXT FIELD p33_num_aut_nue
-			END IF
-			--}
 			IF NOT fl_valida_numeros(rm_p33.p33_num_aut_nue) THEN
 				NEXT FIELD p33_num_aut_nue
 			END IF
 		END IF
 	AFTER FIELD p33_fec_cad_nue
 		IF rm_p33.p33_fec_cad_nue IS NOT NULL THEN
-			--CALL retorna_fin_mes(rm_p33.p33_fec_cad_nue)
-			--	RETURNING rm_p33.p33_fec_cad_nue
 			DISPLAY BY NAME rm_p33.p33_fec_cad_nue
 		END IF
 	AFTER INPUT

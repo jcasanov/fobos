@@ -380,14 +380,12 @@ INPUT BY NAME rm_par.*
 						rm_par.z20_codcli)
 			RETURNING r_z02.*
 		IF r_z02.z02_zona_cobro IS NOT NULL THEN
-			--IF rm_par.z24_zona_cobro <> r_z02.z02_zona_cobro THEN
 				LET rm_par.z24_zona_cobro = r_z02.z02_zona_cobro
 				CALL fl_lee_zona_cobro(rm_par.z24_zona_cobro)
 					RETURNING r_z06.*
 				DISPLAY BY NAME rm_par.z24_zona_cobro,
 						r_z06.z06_nombre
 				CONTINUE INPUT
-			--END IF
 		END IF
 	AFTER FIELD z20_codcli
 		IF rm_par.z20_codcli IS NOT NULL THEN
@@ -401,12 +399,6 @@ INPUT BY NAME rm_par.*
 				CALL fl_mensaje_estado_bloqueado()
 				NEXT FIELD z20_codcli
 			END IF
-			{--
-			IF r_z01.z01_tipo_doc_id <> 'R' THEN
-				CALL fl_mostrar_mensaje('Este cliente no tiene configurado RUC, por lo tanto no puede digitarle retenciones.', 'exclamation')
-				NEXT FIELD z20_codcli
-			END IF
-			--}
 			LET rm_par.z01_nomcli = r_z01.z01_nomcli
 			DISPLAY BY NAME rm_par.z01_nomcli
 			IF rm_par.tipo_venta <> 'C' THEN
@@ -576,7 +568,6 @@ CREATE TEMP TABLE tmp_det
 	)
 IF rm_par.rezagadas = 'S' THEN
 	CALL fecha_ultima() RETURNING fec_ult
-	--LET dias_tope = (TODAY - MDY(01, 01, YEAR(fec_ult))) + 1
 	LET dias_tope = (vg_fecha - MDY(01, 01, YEAR(vg_fecha) - 1)) + 1
 END IF
 CASE rm_par.z20_areaneg
@@ -632,7 +623,6 @@ IF rm_par.tipo_venta = 'R' OR rm_par.tipo_venta = 'T' THEN
 			'EXTEND(DATE(DATE("', vg_fecha, '") - ', dias_tope + 1, ' UNITS DAY), ',
 				'YEAR TO MONTH) ',
 		'   AND NOT EXISTS ',
-			--'(SELECT 1 FROM ', retorna_base_loc() CLIPPED,
 			'(SELECT 1 FROM cajt014 ',
 				'WHERE j14_compania  = z20_compania ',
 				'  AND j14_localidad = z20_localidad ',
@@ -668,7 +658,6 @@ IF rm_par.tipo_venta = 'R' OR rm_par.tipo_venta = 'T' THEN
 			'EXTEND(DATE(DATE("', vg_fecha, '") - ', dias_tope + 1, ' UNITS DAY), ',
 				'YEAR TO MONTH) ',
 		'   AND NOT EXISTS ',
-			--'(SELECT 1 FROM ', retorna_base_loc() CLIPPED,
 			'(SELECT 1 FROM cajt014 ',
 				'WHERE j14_compania  = z20_compania ',
 				'  AND j14_localidad = z20_localidad ',
@@ -745,7 +734,6 @@ LET query = 'INSERT INTO tmp_det ',
 			'WHERE j01_compania  = j10_compania ',
 			'  AND j01_retencion = "S") ',
 		'   AND NOT EXISTS ',
-			--'(SELECT 1 FROM ', retorna_base_loc() CLIPPED,
 			'(SELECT 1 FROM cajt014 ',
 				'WHERE j14_compania  = j10_compania ',
 				'  AND j14_localidad = j10_localidad ',
@@ -970,7 +958,6 @@ WHILE NOT salir
 				END IF
 			END IF
 		AFTER INPUT
-			--IF vg_codloc < 3 OR vg_codloc > 5 THEN
 			IF rm_par.devuelve = 'S' THEN
 				SELECT NVL(SUM(valor_ret), 0) INTO total_ret
 				FROM tmp_ret
@@ -1798,12 +1785,6 @@ INPUT BY NAME rm_j14.j14_num_ret_sri, rm_j14.j14_autorizacion,
 			CALL fl_mostrar_mensaje('El numero de la autorizacion ingresado es incorrecto.', 'exclamation')
 			NEXT FIELD j14_autorizacion
 		END IF
-		{-- OJO
-		IF rm_j14.j14_autorizacion[1, 1] <> '1' THEN
-			CALL fl_mostrar_mensaje('Numero de Autorizacion es incorrecto.', 'exclamation')
-			NEXT FIELD j14_autorizacion
-		END IF
-		--}
 		IF NOT fl_valida_numeros(rm_j14.j14_autorizacion) THEN
 			NEXT FIELD j14_autorizacion
 		END IF
@@ -1826,18 +1807,10 @@ INPUT BY NAME rm_j14.j14_num_ret_sri, rm_j14.j14_autorizacion,
 			NEXT FIELD j14_fecha_emi
 		END IF
 		LET fec_ult = NULL
-		--IF fin_mes < (TODAY - (dias_tope + 1) UNITS DAY) THEN
 			CALL fecha_ultima() RETURNING fec_ult
 			IF (YEAR(fec_ult) <> YEAR(rm_j14.j14_fecha_emi) AND
 			    YEAR(vg_fecha) <> YEAR(rm_j14.j14_fecha_emi))
 			THEN
-				{--
-				LET mensaje = 'No se puede cargar retenciones ',
-						'a una factura con fecha de ',
-						'mas de ',
-						dias_tope + 1 USING "<<&",
-						' dias, ó con una fecha de un ',
-				--}
 				LET mensaje = 'No se puede cargar retenciones ',
 						'a una factura de un año ',
 						'que esta CERRADO o DECLARADO.'
@@ -1845,19 +1818,6 @@ INPUT BY NAME rm_j14.j14_num_ret_sri, rm_j14.j14_autorizacion,
 				NEXT FIELD j14_fecha_emi
 			END IF
 			LET fecha_tope = fec_ult - 1 UNITS DAY
-		--END IF
-		{--
-		IF (EXTEND(fec_ult - 1 UNITS DAY, YEAR TO MONTH) = 
-		    EXTEND(rm_j14.j14_fecha_emi, YEAR TO MONTH))
-		THEN
-			LET mensaje = 'No se puede cargar retenciones ',
-					'a una factura de este mes ',
-					'porque esta CERRADO o DECLARADO en ',
-					'el módulo del SRI.'
-			CALL fl_mostrar_mensaje(mensaje, 'exclamation')
-			NEXT FIELD j14_fecha_emi
-		END IF
-		--}
 		IF rm_j14.j14_fecha_emi < fecha_min THEN
 			LET mensaje = 'La fecha de emision del comprobante no',
 					' puede ser menor que la fecha de',
@@ -1866,21 +1826,6 @@ INPUT BY NAME rm_j14.j14_num_ret_sri, rm_j14.j14_autorizacion,
 			CALL fl_mostrar_mensaje(mensaje, 'exclamation')
 			NEXT FIELD j14_fecha_emi
 		END IF
-		{--
-		IF rm_j14.j14_fecha_emi > fecha_tope THEN
-			LET mensaje = 'La fecha de emision del comprobante no',
-					' puede ser mayor a ',
-					dias_tope + 1 USING "<<&",
-					' dias que la ',
-					'fecha fin de mes de factura (',
-					fin_mes USING "dd-mm-yyyy", ').'
-				LET mensaje = 'No se puede cargar retenciones ',
-						'a una factura de un año ',
-						'que esta CERRADO o DECLARADO.'
-			CALL fl_mostrar_mensaje(mensaje, 'exclamation')
-			NEXT FIELD j14_fecha_emi
-		END IF
-		--}
 		LET fecha2 = rm_j14.j14_fecha_emi
 		IF YEAR(vg_fecha) <> YEAR(rm_j14.j14_fecha_emi) THEN
 			LET fecha2 = fec_ult
@@ -2327,13 +2272,6 @@ IF LENGTH(num_ret_sri[1, 7]) <> 7 THEN
 	CALL fl_mostrar_mensaje('Digite correctamente el punto de venta o el punto de emision.', 'exclamation')
 	RETURN 0
 END IF
-{--
-LET lim = LENGTH(num_ret_sri)
-IF NOT fl_solo_numeros(num_ret_sri[9, lim]) THEN
-	CALL fl_mostrar_mensaje('Digite solo numeros para el numero del comprobante.', 'exclamation')
-	RETURN 0
-END IF
---}
 IF NOT fl_valida_numeros(num_ret_sri[1, 3]) THEN
 	RETURN 0
 END IF
@@ -2863,7 +2801,6 @@ CREATE TEMP TABLE tmp_doc
 	)
 BEGIN WORK
 	DECLARE q_ret_doc CURSOR WITH HOLD FOR
-		--SELECT UNIQUE num_ret_sri, cod_pago, tipo_ret, porc_ret
 		SELECT UNIQUE num_ret_sri
 			FROM tmp_ret
 			ORDER BY num_ret_sri
@@ -2902,8 +2839,6 @@ BEGIN WORK
 				ROLLBACK WORK
 				RETURN 0
 			END IF
-			--IF vg_codloc < 3 OR vg_codloc > 5 THEN
-			--IF vg_codloc <> 2 AND vg_codloc <> 4 THEN
 				CALL generar_egreso_efectivo_caja(r_ret_p.num_ret_s)
 					RETURNING resul, r_j10.*
 				IF NOT resul THEN
@@ -2912,7 +2847,6 @@ BEGIN WORK
 					ROLLBACK WORK
 					RETURN 0
 				END IF
-			--END IF
 			UPDATE tmp_doc
 				SET tip_trn = r_z22.z22_tipo_trn,
 				    num_trn = r_z22.z22_num_trn,
@@ -2948,11 +2882,6 @@ IF vg_base <> 'acero_gc' AND vg_base <> 'acero_qs' THEN
 						r_z22.z22_tipo_trn,
 						r_z22.z22_num_trn,
 						vm_tipo_fue, vm_num_sol)
-		{-- OJO
-		IF vg_codloc >= 3 AND vg_codloc <= 5 THEN
-			CONTINUE FOREACH
-		END IF
-		--}
 		UPDATE cajt010
 			SET j10_tip_contable =
 				(SELECT UNIQUE z40_tipo_comp
@@ -3074,9 +3003,6 @@ IF tipo = 'P' THEN
 				  AND z20_cod_tran  = cod_tr
 				  AND z20_num_tran  = num_tr
 				  AND z20_saldo_cap > 0)
-		  --AND cod_pago    = r_ret_p.cod_pago
-		  --AND tipo_ret    = r_ret_p.tipo_ret
-		  --AND porc_ret    = r_ret_p.porc_ret
 	UPDATE tmp_ret
 		SET numero_sol = r_z24.z24_numero_sol
 		WHERE num_ret_sri IN
@@ -3086,23 +3012,14 @@ IF tipo = 'P' THEN
 				  AND z20_cod_tran  = cod_tr
 				  AND z20_num_tran  = num_tr
 				  AND z20_saldo_cap > 0)
-		  --AND cod_pago    = r_ret_p.cod_pago
-		  --AND tipo_ret    = r_ret_p.tipo_ret
-		  --AND porc_ret    = r_ret_p.porc_ret
 ELSE
 	SELECT NVL(SUM(valor_ret), 0)
 		INTO r_z24.z24_total_cap
 		FROM tmp_ret
 		WHERE num_ret_sri = r_ret_p.num_ret_s
-		  --AND cod_pago    = r_ret_p.cod_pago
-		  --AND tipo_ret    = r_ret_p.tipo_ret
-		  --AND porc_ret    = r_ret_p.porc_ret
 	UPDATE tmp_ret
 		SET numero_sol = r_z24.z24_numero_sol
 		WHERE num_ret_sri = r_ret_p.num_ret_s
-		  --AND cod_pago    = r_ret_p.cod_pago
-		  --AND tipo_ret    = r_ret_p.tipo_ret
-		  --AND porc_ret    = r_ret_p.porc_ret
 END IF
 LET r_z24.z24_total_int  = 0
 LET r_z24.z24_total_mora = 0
@@ -3177,9 +3094,6 @@ FOR i = 1 TO vm_num_rows
 			WHERE numero_sol  = r_z24.z24_numero_sol
 			  AND num_fac_sri = rm_adi[i].num_sri
 			  AND num_ret_sri = r_ret_p.num_ret_s
-			  --AND cod_pago    = r_ret_p.cod_pago
-			  --AND tipo_ret    = r_ret_p.tipo_ret
-			  --AND porc_ret    = r_ret_p.porc_ret
 			GROUP BY 1, 2
 	FOREACH q_ret_det_sol INTO cod_tran, num_tran, val_r
 		CALL fl_lee_documento_deudor_cxc(vg_codcia, r_z24.z24_localidad,
@@ -3196,7 +3110,6 @@ FOR i = 1 TO vm_num_rows
 			LET r_z25.z25_tipo_doc  = rm_detalle[i].z20_tipo_doc
 	    		LET r_z25.z25_num_doc   = rm_adi[i].z20_num_doc  
 		    	LET r_z25.z25_dividendo = rm_adi[i].z20_dividendo
-		    	--LET r_z25.z25_valor_cap = rm_detalle[i].valor_ret
 		    	LET r_z25.z25_valor_cap = val_r
 			INSERT INTO cxct025 VALUES (r_z25.*)
 		END IF
@@ -3441,9 +3354,6 @@ DECLARE q_ret2 CURSOR FOR
 		FROM tmp_ret
 		WHERE cod_pago    = codigo_pago
 		  AND num_ret_sri = r_ret_p.num_ret_s
-		 -- AND cod_pago    = r_ret_p.cod_pago
-		 -- AND tipo_ret    = r_ret_p.tipo_ret
-		 -- AND porc_ret    = r_ret_p.porc_ret
 LET i = 1
 FOREACH q_ret2 INTO r_j14.j14_num_ret_sri, r_j14.j14_autorizacion,
 			r_j14.j14_fecha_emi, rm_detret[i].*, num_s, cod_tran,
@@ -3795,8 +3705,7 @@ SELECT UNIQUE num_ret_sri
 	INTO r_z21.z21_num_sri
 	FROM tmp_ret
 	WHERE numero_sol = r_z24.z24_numero_sol
-LET r_z21.z21_referencia = 'DOC. RT P/ FA - SIN SALDO '--, r_z21.z21_cod_tran,
-				--'-', r_z21.z21_num_tran USING "<<<<<<<&"
+LET r_z21.z21_referencia = 'DOC. RT P/ FA - SIN SALDO '
 LET r_z21.z21_fecha_emi  = vg_fecha
 LET r_z21.z21_moneda     = r_z24.z24_moneda
 LET r_z21.z21_paridad    = r_z24.z24_paridad
@@ -4053,9 +3962,6 @@ DEFINE resul		SMALLINT
 DECLARE q_di CURSOR FOR
 	SELECT * FROM tmp_ret
 		WHERE num_ret_sri = r_ret_p.num_ret_s
-		  --AND cod_pago    = r_ret_p.cod_pago
-		  --AND tipo_ret    = r_ret_p.tipo_ret
-		  --AND porc_ret    = r_ret_p.porc_ret
 FOREACH q_di INTO r_ret.*
 	INITIALIZE r_z20.* TO NULL
 	LET r_z20.z20_compania   = vg_codcia
