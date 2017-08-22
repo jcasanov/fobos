@@ -222,14 +222,14 @@ SELECT * INTO rm_j04.* FROM cajt004
 	WHERE j04_compania    = vg_codcia
 	  AND j04_localidad   = vg_codloc
 	  AND j04_codigo_caja = rm_j02.j02_codigo_caja
-	  AND j04_fecha_aper  = TODAY
+	  AND j04_fecha_aper  = vg_fecha
 	  AND j04_secuencia   =
 		(SELECT MAX(j04_secuencia)
 			FROM cajt004
 			WHERE j04_compania    = vg_codcia
 			  AND j04_localidad   = vg_codloc
 			  AND j04_codigo_caja = rm_j02.j02_codigo_caja
-			  AND j04_fecha_aper  = TODAY)
+			  AND j04_fecha_aper  = vg_fecha)
 IF STATUS = NOTFOUND THEN 
 	CALL fl_mostrar_mensaje('La caja no esta aperturada.', 'stop')
 	EXIT PROGRAM
@@ -577,7 +577,7 @@ CREATE TEMP TABLE tmp_det
 IF rm_par.rezagadas = 'S' THEN
 	CALL fecha_ultima() RETURNING fec_ult
 	--LET dias_tope = (TODAY - MDY(01, 01, YEAR(fec_ult))) + 1
-	LET dias_tope = (TODAY - MDY(01, 01, YEAR(TODAY) - 1)) + 1
+	LET dias_tope = (vg_fecha - MDY(01, 01, YEAR(vg_fecha) - 1)) + 1
 END IF
 CASE rm_par.z20_areaneg
 	WHEN 1
@@ -629,7 +629,7 @@ IF rm_par.tipo_venta = 'R' OR rm_par.tipo_venta = 'T' THEN
 		'   AND z20_saldo_cap    > 0 ',
 		'   AND z20_dividendo    = 1 ',
 		'   AND EXTEND(z20_fecha_emi, YEAR TO MONTH) >= ',
-			'EXTEND(DATE(TODAY - ', dias_tope + 1, ' UNITS DAY), ',
+			'EXTEND(DATE("', vg_fecha, '" - ', dias_tope + 1, ' UNITS DAY), ',
 				'YEAR TO MONTH) ',
 		'   AND NOT EXISTS ',
 			--'(SELECT 1 FROM ', retorna_base_loc() CLIPPED,
@@ -665,7 +665,7 @@ IF rm_par.tipo_venta = 'R' OR rm_par.tipo_venta = 'T' THEN
 		'   AND z20_saldo_cap    = 0 ',
 		'   AND z20_dividendo    = 1 ',
 		'   AND EXTEND(z20_fecha_emi, YEAR TO MONTH) >= ',
-			'EXTEND(DATE(TODAY - ', dias_tope + 1, ' UNITS DAY), ',
+			'EXTEND(DATE("', vg_fecha, '" - ', dias_tope + 1, ' UNITS DAY), ',
 				'YEAR TO MONTH) ',
 		'   AND NOT EXISTS ',
 			--'(SELECT 1 FROM ', retorna_base_loc() CLIPPED,
@@ -727,7 +727,7 @@ LET query = 'INSERT INTO tmp_det ',
 		'   AND j10_tipo_destino    = "', vm_cod_tran, '"',
 		'   AND j10_estado          = "P" ',
 		'   AND EXTEND(j10_fecha_pro, YEAR TO MONTH) >= ',
-			'EXTEND(DATE(TODAY - ', dias_tope + 1, ' UNITS DAY), ',
+			'EXTEND(DATE("', vg_fecha, '" - ', dias_tope + 1, ' UNITS DAY), ',
 				'YEAR TO MONTH) ',
 		'   AND r38_compania        = j10_compania ',
 		'   AND r38_localidad       = j10_localidad ',
@@ -1726,7 +1726,7 @@ DEFINE cambi		SMALLINT
 
 OPTIONS INPUT NO WRAP
 IF rm_j14.j14_fecha_emi IS NULL THEN
-	LET rm_j14.j14_fecha_emi = TODAY
+	LET rm_j14.j14_fecha_emi = vg_fecha
 END IF
 LET int_flag = 0
 INPUT BY NAME rm_j14.j14_num_ret_sri, rm_j14.j14_autorizacion,
@@ -1821,7 +1821,7 @@ INPUT BY NAME rm_j14.j14_num_ret_sri, rm_j14.j14_autorizacion,
 		LET fin_mes    = MDY(MONTH(fecha_min), 01, YEAR(fecha_min))
 				+ 1 UNITS MONTH - 1 UNITS DAY
 		LET fecha_tope = fin_mes + (dias_tope + 1) UNITS DAY
-		IF rm_j14.j14_fecha_emi > TODAY THEN
+		IF rm_j14.j14_fecha_emi > vg_fecha THEN
 			CALL fl_mostrar_mensaje('La fecha de retencion no puede ser mayor a la fecha de hoy.', 'exclamation')
 			NEXT FIELD j14_fecha_emi
 		END IF
@@ -1829,7 +1829,7 @@ INPUT BY NAME rm_j14.j14_num_ret_sri, rm_j14.j14_autorizacion,
 		--IF fin_mes < (TODAY - (dias_tope + 1) UNITS DAY) THEN
 			CALL fecha_ultima() RETURNING fec_ult
 			IF (YEAR(fec_ult) <> YEAR(rm_j14.j14_fecha_emi) AND
-			    YEAR(TODAY) <> YEAR(rm_j14.j14_fecha_emi))
+			    YEAR(vg_fecha) <> YEAR(rm_j14.j14_fecha_emi))
 			THEN
 				{--
 				LET mensaje = 'No se puede cargar retenciones ',
@@ -1882,7 +1882,7 @@ INPUT BY NAME rm_j14.j14_num_ret_sri, rm_j14.j14_autorizacion,
 		END IF
 		--}
 		LET fecha2 = rm_j14.j14_fecha_emi
-		IF YEAR(TODAY) <> YEAR(rm_j14.j14_fecha_emi) THEN
+		IF YEAR(vg_fecha) <> YEAR(rm_j14.j14_fecha_emi) THEN
 			LET fecha2 = fec_ult
 			IF fecha2 IS NULL THEN
 				LET fecha2 = rm_j14.j14_fecha_emi
@@ -3112,7 +3112,7 @@ IF rm_par.tipo_venta = 'C' THEN
 END IF
 LET r_z24.z24_subtipo    = 1
 LET r_z24.z24_usuario    = vg_usuario
-LET r_z24.z24_fecing     = CURRENT
+LET r_z24.z24_fecing     = fl_current()
 INSERT INTO cxct024 VALUES (r_z24.*)
 RETURN r_z24.*
 
@@ -3270,10 +3270,10 @@ IF STATUS = NOTFOUND THEN
 	IF r_j10.j10_valor = 0 THEN
 		LET r_j10.j10_valor = r_z24.z24_total_cap + r_z24.z24_total_int
 	END IF
-	LET r_j10.j10_fecha_pro   = CURRENT
+	LET r_j10.j10_fecha_pro   = fl_current()
 	LET r_j10.j10_codigo_caja = rm_j02.j02_codigo_caja
 	LET r_j10.j10_usuario     = vg_usuario 
-	LET r_j10.j10_fecing      = CURRENT
+	LET r_j10.j10_fecing      = fl_current()
 	INSERT INTO cajt010 VALUES(r_j10.*)
 ELSE
 	LET r_j10.j10_areaneg     = r_z24.z24_areaneg
@@ -3289,10 +3289,10 @@ ELSE
 	IF r_j10.j10_valor = 0 THEN
 		LET r_j10.j10_valor = r_z24.z24_total_cap + r_z24.z24_total_int
 	END IF
-	LET r_j10.j10_fecha_pro   = CURRENT
+	LET r_j10.j10_fecha_pro   = fl_current()
 	LET r_j10.j10_codigo_caja = rm_j02.j02_codigo_caja
 	LET r_j10.j10_usuario     = vg_usuario
-	LET r_j10.j10_fecing      = CURRENT
+	LET r_j10.j10_fecing      = fl_current()
 	UPDATE cajt010 SET * = r_j10.* WHERE CURRENT OF q_j10
 END IF
 CLOSE q_j10
@@ -3480,7 +3480,7 @@ FOREACH q_ret2 INTO r_j14.j14_num_ret_sri, r_j14.j14_autorizacion,
 			LET cont_cred              = r_t23.t23_cont_cred
 	END CASE
 	IF r_j14.j14_fec_emi_fact IS NULL THEN
-		LET r_j14.j14_fec_emi_fact = TODAY
+		LET r_j14.j14_fec_emi_fact = vg_fecha
 	END IF
 	LET r_j14.j14_tipo_ret     = rm_detret[i].j14_tipo_ret
 	LET r_j14.j14_porc_ret     = rm_detret[i].j14_porc_ret
@@ -3494,7 +3494,7 @@ FOREACH q_ret2 INTO r_j14.j14_num_ret_sri, r_j14.j14_autorizacion,
 	LET r_j14.j14_tipo_comp    = NULL
 	LET r_j14.j14_num_comp     = NULL
 	LET r_j14.j14_usuario      = vg_usuario
-	LET r_j14.j14_fecing       = CURRENT
+	LET r_j14.j14_fecing       = fl_current()
 	INSERT INTO cajt014 VALUES (r_j14.*)
 	LET i = i + 1
 END FOREACH
@@ -3511,6 +3511,10 @@ DEFINE r_z22		RECORD LIKE cxct022.*
 DEFINE r_z24		RECORD LIKE cxct024.*
 DEFINE resp		CHAR(10)
 DEFINE comando		VARCHAR(80)
+
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
+LET fecha_actual = fl_current()
 
 CALL valida_num_solicitud(r_j10.*) RETURNING r_z24.*
 IF r_z24.z24_compania IS NULL THEN
@@ -3542,7 +3546,7 @@ UPDATE cajt010
 	SET j10_estado       = 'P',
 	    j10_tipo_destino = r_j10.j10_tipo_destino,
 	    j10_num_destino  = r_j10.j10_num_destino,
-	    j10_fecha_pro    = CURRENT
+	    j10_fecha_pro    = fecha_actual
 	WHERE CURRENT OF q_ccaj
 RETURN 1
 
@@ -3641,7 +3645,7 @@ LET r_z22.z22_areaneg    = r_j10.j10_areaneg
 LET r_z22.z22_referencia = 'SOLIC. COBRO: ',
 				r_z24.z24_numero_sol USING '#####&',
 				' POR RETENCION.'
-LET r_z22.z22_fecha_emi  = TODAY
+LET r_z22.z22_fecha_emi  = vg_fecha
 LET r_z22.z22_moneda     = r_z24.z24_moneda
 LET r_z22.z22_paridad    = r_z24.z24_paridad
 LET r_z22.z22_tasa_mora  = 0
@@ -3654,7 +3658,7 @@ IF rm_par.tipo_venta = 'C' THEN
 END IF
 LET r_z22.z22_origen     = 'A'
 LET r_z22.z22_usuario    = vg_usuario
-LET r_z22.z22_fecing     = CURRENT + segundo UNITS SECOND
+LET r_z22.z22_fecing     = fl_current() + segundo UNITS SECOND
 INSERT INTO cxct022 VALUES (r_z22.*)
 DECLARE q_ddoc CURSOR FOR 
 	SELECT * FROM cxct025
@@ -3793,7 +3797,7 @@ SELECT UNIQUE num_ret_sri
 	WHERE numero_sol = r_z24.z24_numero_sol
 LET r_z21.z21_referencia = 'DOC. RT P/ FA - SIN SALDO '--, r_z21.z21_cod_tran,
 				--'-', r_z21.z21_num_tran USING "<<<<<<<&"
-LET r_z21.z21_fecha_emi  = TODAY
+LET r_z21.z21_fecha_emi  = vg_fecha
 LET r_z21.z21_moneda     = r_z24.z24_moneda
 LET r_z21.z21_paridad    = r_z24.z24_paridad
 LET r_z21.z21_val_impto  = 0
@@ -3802,7 +3806,7 @@ LET r_z21.z21_saldo      = r_z24.z24_total_cap
 LET r_z21.z21_subtipo    = r_z24.z24_subtipo
 LET r_z21.z21_origen     = 'A'
 LET r_z21.z21_usuario    = vg_usuario
-LET r_z21.z21_fecing     = CURRENT
+LET r_z21.z21_fecing     = fl_current()
 INSERT INTO cxct021 VALUES (r_z21.*)
 RETURN r_z21.*
 
@@ -3839,7 +3843,7 @@ FOREACH q_cajas_j13 INTO codigo_pago, moneda, valor
 				WHERE j13_compania     = vg_codcia
 				  AND j13_localidad    = vg_codloc
 				  AND j13_codigo_caja  = rm_j02.j02_codigo_caja
-				  AND j13_fecha        = TODAY
+				  AND j13_fecha        = vg_fecha
 				  AND j13_moneda       = moneda
 				  AND j13_trn_generada = r_j10.j10_tipo_destino
 				  AND j13_codigo_pago  = codigo_pago
@@ -3858,7 +3862,7 @@ FOREACH q_cajas_j13 INTO codigo_pago, moneda, valor
 			LET r_j13.j13_compania     = vg_codcia
 			LET r_j13.j13_localidad    = vg_codloc
 			LET r_j13.j13_codigo_caja  = rm_j02.j02_codigo_caja
-			LET r_j13.j13_fecha        = TODAY
+			LET r_j13.j13_fecha        = vg_fecha
 			LET r_j13.j13_moneda       = moneda
 			LET r_j13.j13_trn_generada = r_j10.j10_tipo_destino
 			LET r_j13.j13_codigo_pago  = codigo_pago
@@ -4066,7 +4070,7 @@ FOREACH q_di INTO r_ret.*
 	LET r_z20.z20_areaneg    = rm_par.z20_areaneg
 	LET r_z20.z20_referencia = 'DOC.RT ', r_ret_p.num_ret_s CLIPPED,
 					' P/FA-SIN SALDO'
-	LET r_z20.z20_fecha_emi  = TODAY
+	LET r_z20.z20_fecha_emi  = vg_fecha
 	LET r_z20.z20_fecha_vcto = r_z20.z20_fecha_emi + 1 UNITS DAY
 	LET r_z20.z20_tasa_int   = 0 
 	LET r_z20.z20_tasa_mora  = 0
@@ -4085,7 +4089,7 @@ FOREACH q_di INTO r_ret.*
 	LET r_z20.z20_num_tran   = r_ret.num_tr
 	LET r_z20.z20_num_sri    = r_ret_p.num_ret_s
 	LET r_z20.z20_usuario    = vg_usuario
-	LET r_z20.z20_fecing     = CURRENT
+	LET r_z20.z20_fecing     = fl_current()
 	INSERT INTO cxct020 VALUES (r_z20.*)
 END FOREACH
 CALL fl_genera_saldos_cliente(vg_codcia, vg_codloc, r_z20.z20_codcli)
@@ -4197,7 +4201,7 @@ LET r_z22.z22_areaneg    = r_j10.j10_areaneg
 LET r_z22.z22_referencia = 'APLIC. COBRO: ',
 				r_j10.j10_num_fuente USING '#####&',
 				' EN RETENCIONES.'
-LET r_z22.z22_fecha_emi  = TODAY
+LET r_z22.z22_fecha_emi  = vg_fecha
 LET r_z22.z22_moneda     = r_j10.j10_moneda
 LET r_z22.z22_paridad    = rm_par.z20_paridad
 LET r_z22.z22_tasa_mora  = 0
@@ -4207,7 +4211,7 @@ LET r_z22.z22_total_mora = 0
 LET r_z22.z22_subtipo    = 1
 LET r_z22.z22_origen     = 'A'
 LET r_z22.z22_usuario    = vg_usuario
-LET r_z22.z22_fecing     = CURRENT + segundo UNITS SECOND
+LET r_z22.z22_fecing     = fl_current() + segundo UNITS SECOND
 INSERT INTO cxct022 VALUES (r_z22.*)
 LET r_z23.z23_compania   = r_z22.z22_compania
 LET r_z23.z23_localidad  = r_z22.z22_localidad
@@ -4412,7 +4416,7 @@ SELECT NVL(SUM(valor_ret), 0)
 	INTO r_j10.j10_valor
 	FROM tmp_ret
 	WHERE num_ret_sri = num_ret_s
-LET r_j10.j10_fecha_pro    = CURRENT
+LET r_j10.j10_fecha_pro    = fl_current()
 LET r_j10.j10_codigo_caja  = rm_j02.j02_codigo_caja 
 LET r_j10.j10_tipo_destino = r_j10.j10_tipo_fuente
 LET r_j10.j10_num_destino  = r_j10.j10_num_fuente
@@ -4421,7 +4425,7 @@ LET r_j10.j10_referencia   = 'EGRESO DE CAJA # ',
 				'. POR DEVOLUCION DE EFECTIVO EN RETENCIONES.'
 LET r_j10.j10_banco        = 0
 LET r_j10.j10_numero_cta   = 0
-LET r_j10.j10_fecing       = CURRENT
+LET r_j10.j10_fecing       = fl_current()
 LET r_j10.j10_usuario      = vg_usuario
 INSERT INTO cajt010 VALUES (r_j10.*)
 WHENEVER ERROR CONTINUE
@@ -4464,7 +4468,7 @@ WHILE NOT salir
 			WHERE j13_compania     = r_j10.j10_compania
 			  AND j13_localidad    = r_j10.j10_localidad
 			  AND j13_codigo_caja  = r_j10.j10_codigo_caja
-			  AND j13_fecha        = TODAY
+			  AND j13_fecha        = vg_fecha
 	 		  AND j13_moneda       = r_j10.j10_moneda
 			  AND j13_trn_generada = r_j10.j10_tipo_fuente
 			  AND j13_codigo_pago  = 'EF'
@@ -4493,7 +4497,7 @@ WHILE NOT salir
 	ELSE
 		INSERT INTO cajt013
 			VALUES(r_j10.j10_compania, r_j10.j10_localidad,
-				r_j10.j10_codigo_caja, TODAY, r_j10.j10_moneda,
+				r_j10.j10_codigo_caja, vg_fecha, r_j10.j10_moneda,
 				r_j10.j10_tipo_fuente, 'EF', r_j10.j10_valor)
 	END IF
 	CLOSE q_j13_2
