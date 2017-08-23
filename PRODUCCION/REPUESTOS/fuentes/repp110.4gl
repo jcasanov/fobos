@@ -14,7 +14,6 @@ DEFINE vm_r_rows 	ARRAY[1000] OF INTEGER
 DEFINE vm_row_current   SMALLINT        -- FILA CORRIENTE DEL ARREGLO
 DEFINE vm_num_rows      SMALLINT        -- CANTIDAD DE FILAS LEIDAS
 DEFINE vm_max_rows      SMALLINT        -- MAXIMO DE FILAS LEIDAS
-DEFINE vm_demonios      VARCHAR(12)
 DEFINE vm_flag_mant     CHAR(1)
 
 
@@ -24,11 +23,10 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
+CALL startlog('../logs/repp110.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN
-     	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.','stop')
 	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
      	EXIT PROGRAM
 END IF
@@ -345,9 +343,8 @@ INPUT BY NAME rm_r70.r70_linea, rm_r70.r70_sub_linea, rm_r70.r70_desc_sub
         	       	CALL fl_lee_linea_rep(vg_codcia, rm_r70.r70_linea)
           	        	RETURNING r_lin.*
                        	IF r_lin.r03_codigo IS NULL THEN
-                               	--CALL fgl_winmessage(vg_producto,'La Línea de Venta no existe en la compañía.','exclamation')
-				CALL fl_mostrar_mensaje('La Línea de Venta no existe en la compañía.','exclamation')
-                                NEXT FIELD r70_linea
+							CALL fl_mostrar_mensaje('La Línea de Venta no existe en la compañía.','exclamation')
+                            NEXT FIELD r70_linea
                	        END IF
                        	IF r_lin.r03_estado = 'B' THEN
 				CALL fl_mensaje_estado_bloqueado()

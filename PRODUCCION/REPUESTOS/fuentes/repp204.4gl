@@ -376,7 +376,7 @@ END IF
 IF vm_flag_mant = 'I' AND vm_flag_grabar THEN
 	LET vm_grabado = 1
 	BEGIN WORK
-		LET rm_r16.r16_fecing = CURRENT
+		LET rm_r16.r16_fecing = fl_current()
 		INSERT INTO rept016 VALUES (rm_r16.*)
 		CALL grabar_detalle()
 	COMMIT WORK
@@ -467,7 +467,7 @@ LET rm_r16.r16_compania    = vg_codcia
 LET rm_r16.r16_localidad   = vg_codloc
 LET rm_r16.r16_estado      = 'A'
 LET rm_r16.r16_tipo        = 'E'
-LET rm_r16.r16_fec_envio   = CURRENT
+LET rm_r16.r16_fec_envio   = fl_current()
 LET rm_r16.r16_moneda      = rg_gen.g00_moneda_base
 LET rm_r16.r16_maximo      = 0
 LET rm_r16.r16_minimo      = 0
@@ -475,7 +475,7 @@ LET rm_r16.r16_periodo_vta = 0
 LET rm_r16.r16_pto_reorden = 0
 LET rm_r16.r16_flag_estad  = 'M'
 LET rm_r16.r16_usuario     = vg_usuario
-LET rm_r16.r16_fecing      = CURRENT
+LET rm_r16.r16_fecing      = fl_current()
 CALL fl_lee_moneda(rm_r16.r16_moneda) RETURNING r_g13.*
 IF r_g13.g13_moneda IS NULL THEN
         --CALL fgl_winmessage(vg_producto,'No existe ninguna moneda base','stop')
@@ -904,8 +904,7 @@ INPUT BY NAME rm_r16.r16_pedido, rm_r16.r16_tipo, rm_r16.r16_linea,
 		END IF
 	AFTER FIELD r16_fec_envio
 		IF rm_r16.r16_fec_envio IS NOT NULL THEN
-			IF rm_r16.r16_fec_envio > TODAY THEN
-				--CALL fgl_winmessage(vg_producto,'La fecha de envío no puede ser mayor a la fecha de hoy','exclamation')
+			IF rm_r16.r16_fec_envio > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha de envío no puede ser mayor a la fecha de hoy.','exclamation')
 				NEXT FIELD r16_fec_envio
 			END IF
@@ -1092,30 +1091,10 @@ INPUT ARRAY rm_repd WITHOUT DEFAULTS FROM rm_repd.*
 			DISPLAY rm_repd[i].r17_fob TO rm_repd[j].r17_fob
 			IF rm_r16.r16_linea <> 'TODAS' THEN
 				IF r_r10.r10_linea <> rm_r16.r16_linea THEN
-					--CALL fgl_winmessage(vg_producto,'División del Item es diferente de la División de cabecera.','exclamation')
 					CALL fl_mostrar_mensaje('División del Item es diferente de la División de cabecera.','exclamation')
 					NEXT FIELD r17_item
 				END IF 
 			END IF 
-----
-{--
- -- VALIDACION DE LA MONEDA DEL FOB CON LA DE MONEDA DE CABECERA
-			IF r_r10.r10_monfob <> rm_r16.r16_moneda THEN
-				--CALL fgl_winmessage(vg_producto,'Moneda del Item es diferente de la moneda de cabecera.','exclamation')
-				CALL fl_mostrar_mensaje('Moneda del Item es diferente de la moneda de cabecera.','exclamation')
-				NEXT FIELD r17_item
-			END IF
---}
-----
-{ 
-SE COMENTA UNICAMENTE POR EL CASO DE DITECA, EXISTEN 609.000 ITEMS SIN FOB
-SIN EMBARGO ANALIZANDO SI NO TIENE FOB SE DEBE PODER DIGITAR, SI LO PERMITE.
-			IF r_r10.r10_fob = 0 THEN
-				--CALL fgl_winmessage(vg_producto,'Item no tiene FOB.','exclamation')
-				CALL fl_mostrar_mensaje('Item no tiene FOB.','exclamation')
-				NEXT FIELD r17_item
-			END IF
-}
 			IF r_r10.r10_estado = 'B' THEN
 				CALL fl_mensaje_estado_bloqueado()
 				NEXT FIELD r17_item
@@ -1127,7 +1106,6 @@ SIN EMBARGO ANALIZANDO SI NO TIENE FOB SE DEBE PODER DIGITAR, SI LO PERMITE.
 				    i <> k
 				    THEN
 					LET mensaje = 'El item ya fue ingresado en la posicion ' || k || ', desea ir a esa posición?'
-					--CALL fgl_winquestion(vg_producto,mensaje,'Yes', 'Yes|No', 'question', 1)
 					CALL fl_hacer_pregunta(mensaje, 'Yes')
 						RETURNING resp	
 					IF resp = 'Yes' THEN
@@ -1138,16 +1116,11 @@ SIN EMBARGO ANALIZANDO SI NO TIENE FOB SE DEBE PODER DIGITAR, SI LO PERMITE.
 						LET in_array = 1
 						EXIT INPUT
 					END IF
-					--CALL fgl_winmessage(vg_producto,'No puede ingresar items repetidos.','exclamation')
 					CALL fl_mostrar_mensaje('No puede ingresar items repetidos.','exclamation')
 					NEXT FIELD r17_item
                			END IF
 			END FOR
-			IF r_r10.r10_costo_mb <= 0.01 AND
-			   --fl_item_tiene_movimientos(r_r10.r10_compania,
-			--				r_r10.r10_codigo)
-			   tiene_stock_local(r_r10.r10_codigo) > 0
-			THEN
+			IF r_r10.r10_costo_mb <= 0.01 AND tiene_stock_local(r_r10.r10_codigo) > 0 THEN
 				CALL fl_mostrar_mensaje('Debe estar configurado correctamente el costo del item y NO con costo menor igual a 0.01.', 'exclamation')
 				NEXT FIELD r17_item
 			END IF
@@ -1186,7 +1159,6 @@ SIN EMBARGO ANALIZANDO SI NO TIENE FOB SE DEBE PODER DIGITAR, SI LO PERMITE.
 		END IF
 		LET vm_num_repd = arr_count()
 		IF vm_num_repd = 0 THEN
-			--CALL fgl_winmessage(vg_producto,'Escriba algo en el detalle.','exclamation')
 			CALL fl_mostrar_mensaje('Escriba algo en el detalle.','exclamation')
 			NEXT FIELD r17_item
 		END IF
@@ -1303,8 +1275,6 @@ IF vm_num_rows > 0 THEN
 		 AND r17_compania  = r16_compania
 		 AND r17_localidad = r16_localidad
 		 AND r17_pedido    = r16_pedido
-		 --AND r17_estado    = vm_estado
-		 --AND r17_cantrec   < r17_cantped
         OPEN q_dt
         FETCH q_dt INTO rm_r16.*
         IF STATUS = NOTFOUND THEN
@@ -1357,8 +1327,6 @@ LET query = 'SELECT r17_item, r10_nombre, r17_cantrec, r17_fob, ' ||
                 'WHERE r17_compania = ' || vg_codcia ||
 		' AND r17_localidad = ' || vg_codloc ||
 		' AND r17_pedido    = ' || '"' || num_reg || '"' ||
-		--' AND r17_estado    = "' || vm_estado || '"' ||
-		--' AND r17_cantrec   < r17_cantped ' ||
 		' AND r17_compania  = r10_compania ' ||
 		' AND r17_item      = r10_codigo ' ||
 		'ORDER BY r17_orden '
@@ -1374,9 +1342,8 @@ FOREACH q_cons1 INTO rm_repd[i].*, orden, cant, estado
         LET i = i + 1
         IF vm_num_repd > vm_max_elm THEN
         	LET vm_num_repd = vm_num_repd - 1
-		CALL fl_mensaje_arreglo_incompleto()
-		EXIT PROGRAM
-                --EXIT FOREACH
+			CALL fl_mensaje_arreglo_incompleto()
+			EXIT PROGRAM
         END IF
 END FOREACH
 IF vm_num_repd > 0 THEN
@@ -1428,24 +1395,6 @@ LET vm_columna_2 = 2
 LET col          = 1
 WHILE TRUE
 	CALL mostrar_botones_detalle()
-	{--
-	BEGIN WORK
-	WHENEVER ERROR CONTINUE
-	DECLARE q_up2 CURSOR FOR SELECT * FROM rept016
-		WHERE r16_compania  = vg_codcia
-		  AND r16_localidad = vg_codloc
-		  AND r16_pedido    = vm_r_rows[vm_row_current]
-		FOR UPDATE
-	OPEN q_up2
-	FETCH q_up2 INTO r_r16.*
-	IF STATUS < 0 THEN
-		ROLLBACK WORK
-		CALL fl_mensaje_bloqueo_otro_usuario()
-		WHENEVER ERROR STOP
-		RETURN
-	END IF
-	WHENEVER ERROR STOP
-	--}
 	LET query = 'SELECT r17_item, r10_nombre, r17_cantrec, r17_fob, ',
 			' r17_cantped * r17_fob, r17_orden, r17_cantped, ',
 			' r17_estado ',
@@ -1453,8 +1402,6 @@ WHILE TRUE
 	                'WHERE r17_compania = ', vg_codcia,
 			' AND r17_localidad = ', vg_codloc,
 			' AND r17_pedido    = "', rm_r16.r16_pedido, '"',
-			--' AND r17_estado    = "', vm_estado, '"',
-			--' AND r17_cantrec   < r17_cantped ',
 			' AND r17_compania  = r10_compania ', 
 			' AND r17_item      = r10_codigo ',  
 			" ORDER BY ", vm_columna_1, ' ', rm_orden[vm_columna_1],
@@ -1527,7 +1474,6 @@ WHILE TRUE
 	END DISPLAY
 	IF int_flag = 1 THEN
 		CALL muestra_contadores_det(0)
-		--ROLLBACK WORK
 		EXIT WHILE
 	END IF
 	IF col <> vm_columna_1 THEN
@@ -1540,7 +1486,6 @@ WHILE TRUE
 	ELSE
 		LET rm_orden[vm_columna_1] = 'ASC'
 	END IF
-	--COMMIT WORK
 END WHILE
 
 END FUNCTION
@@ -1634,7 +1579,6 @@ FUNCTION control_eliminacion()
 DEFINE resp		CHAR(6)
 
 IF rm_r16.r16_estado <> 'A' THEN
-	--CALL fgl_winmessage(vg_producto,'El estado del pedido debe ser activo.','exclamation')
 	CALL fl_mostrar_mensaje('El estado del pedido debe ser activo.','exclamation')
 	RETURN
 END IF
@@ -1659,7 +1603,6 @@ IF resp = 'Yes' THEN
 		      r16_localidad = rm_r16.r16_localidad AND 
 		      r16_pedido    = rm_r16.r16_pedido
 	COMMIT WORK
-	--CALL fgl_winmessage(vg_producto,'El pedido ha sido eliminado.','info')
 	CALL fl_mostrar_mensaje('El pedido ha sido eliminado.','info')
 	EXIT PROGRAM
 END IF

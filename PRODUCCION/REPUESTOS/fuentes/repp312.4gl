@@ -88,8 +88,8 @@ DISPLAY FORM f_repf312
 LET vm_max_rows  = 15000
 INITIALIZE rm_r19.*, vm_fecha_ini, vm_fecha_fin, vm_bodega, vm_moneda, tipo_vta,
 	tit_tipo_vta TO NULL
-LET vm_fecha_ini = TODAY
-LET vm_fecha_fin = TODAY
+LET vm_fecha_ini = vg_fecha
+LET vm_fecha_fin = vg_fecha
 LET vm_moneda	 = rg_gen.g00_moneda_base
 LET tipo_vta     = 'T'
 CALL muestra_tipo_vta()
@@ -119,7 +119,6 @@ DISPLAY rm_g13.g13_nombre TO nom_moneda
 --#DISPLAY 'Codigo'     TO tit_col2
 --#DISPLAY 'Nombre' 	TO tit_col3
 --#DISPLAY 'Total'	TO tit_col4
---LET filtro_val = 0.01
 LET filtro_val = NULL
 WHILE TRUE
 	IF num_args() = 11 THEN
@@ -298,12 +297,6 @@ INPUT BY NAME vm_fecha_ini, vm_fecha_fin, vm_moneda, tipo_vta, vm_bodega,
 				CALL fl_mostrar_mensaje('No existe este vendedor en la compania.','exclamation')
 				NEXT FIELD r19_vendedor
 			END IF
-			{--
-			IF r_r01.r01_estado = 'B' THEN
-				CALL fl_mensaje_estado_bloqueado()
-				NEXT FIELD r19_vendedor
-			END IF
-			--}
 			DISPLAY r_r01.r01_nombres TO tit_vendedor
 		ELSE
 			CLEAR tit_vendedor
@@ -316,12 +309,6 @@ INPUT BY NAME vm_fecha_ini, vm_fecha_fin, vm_moneda, tipo_vta, vm_bodega,
 				CLEAR tit_tipcli
 			END IF
 		END IF
-{
-	AFTER FIELD filtro_val
-		IF filtro_val IS NULL THEN
-			NEXT FIELD filtro_val
-		END IF
-}
 	AFTER INPUT 
 		IF vm_fecha_ini > vm_fecha_fin THEN
 			CALL fl_mostrar_mensaje('La fecha inicial debe ser menor que la fecha final.','exclamation')
@@ -402,15 +389,12 @@ LET expr_sql = 'SELECT r19_cod_tran, r01_iniciales, r19_codcli, ',
 			' INTO TEMP tmp_zorroluis'
 PREPARE consulta FROM expr_sql
 EXECUTE consulta
---UPDATE tmp_zorroluis SET r19_nomcli = "CONSUMIDOR FINAL"
---	WHERE r19_codcli IS NULL
 SELECT r01_iniciales, r19_codcli, r19_nomcli, SUM(totol) total, r01_nombres,
 	r19_vendedor
 	FROM tmp_zorroluis
 	GROUP BY 1, 2, 3, 5, 6
 	INTO TEMP tmp_clientes
 DROP TABLE tmp_zorroluis
---UPDATE tmp_clientes SET total = total * (-1) WHERE r19_cod_tran IN ('DF','AF')
 LET columna    = 4
 LET r_orden[1] = 'DESC'
 LET r_orden[2] = 'DESC'
@@ -436,11 +420,6 @@ WHILE TRUE
 	LET i = 1
 	FOREACH q_consulta_2 INTO r_detalle[i].*, rm_vend[i].*
 		LET total_neto = total_neto + r_detalle[i].r19_tot_neto
-		{
-		IF num_args() = 5 THEN
-			CALL imprimir_background(i)
-		END IF
-		}
 		LET i = i + 1
 		IF i > vm_max_rows THEN
 			CALL fl_mensaje_arreglo_incompleto()
@@ -548,7 +527,6 @@ LET run_prog = 'fglrun '
 IF vg_gui = 0 THEN
 	LET run_prog = 'fglgo '
 END IF
---LET vendedor = rm_r19.r19_vendedor
 IF vendedor IS NULL THEN
 	LET vendedor = 0
 END IF
@@ -576,7 +554,7 @@ IF vg_gui = 0 THEN
 	CALL fl_mostrar_mensaje('Este programa no esta para este tipo de terminales.', 'exclamation')
 	RETURN
 END IF
-LET fecha       = TODAY
+LET fecha       = vg_fecha
 LET command_run = 'cd ..', vg_separador, '..', vg_separador, 'COBRANZAS',
 		vg_separador, 'fuentes', vg_separador, '; fglrun cxcp314 ',
 		vg_base, ' "CO" ', vg_codcia, ' ', vg_codloc, ' ',
@@ -735,7 +713,6 @@ IF int_flag THEN
 END IF
 
 START REPORT rep_cliventas TO PIPE comando
---START REPORT rep_cliventas TO FILE "clientes.jcm"
 FOR i = 1 TO numelm
 	OUTPUT TO REPORT rep_cliventas(r_detalle[i].*)
 END FOR
@@ -832,7 +809,7 @@ PAGE HEADER
 
 	SKIP 1 LINES
 
-	PRINT COLUMN 01, "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 01, "FECHA IMPRESION: ", vg_fecha USING "dd-mm-yyyy",
 		1 SPACES, TIME,
 	      COLUMN 60, usuario CLIPPED
 	SKIP 1 LINES

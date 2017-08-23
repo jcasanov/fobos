@@ -16,9 +16,7 @@ DEFINE vm_r_rows	ARRAY[1000] OF LIKE rept015.r15_item
 				-- ARREGLO DE ITEMS LEIDOS
 DEFINE vm_row_current   SMALLINT        -- FILA CORRIENTE DEL ARREGLO
 DEFINE vm_num_rows      SMALLINT        -- CANTIDAD DE FILAS LEIDAS
-DEFINE vm_demonios      VARCHAR(12)
 DEFINE vm_flag_mant     CHAR(1)
-DEFINE vm_resp		CHAR(6)
 DEFINE vm_num_eq     	SMALLINT
 DEFINE vm_max_rows     	SMALLINT
 DEFINE vm_elementos    	SMALLINT
@@ -36,11 +34,10 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
+CALL startlog('../logs/repp109.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN
-     	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto','stop')
 	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
      	EXIT PROGRAM
 END IF
@@ -85,7 +82,6 @@ MENU 'OPCIONES'
 	COMMAND KEY('I') 'Ingresar' 'Ingresar nuevos registros.'
 		CALL control_ingreso()
 		IF vm_num_rows <= 1 THEN
-			--HIDE OPTION 'Mantenimiento'
 			HIDE OPTION 'Avanzar'
 			HIDE OPTION 'Retroceder'
 			IF vm_num_rows = 0 THEN
@@ -205,7 +201,6 @@ IF NOT int_flag THEN
 	IF arr_count() > 0 THEN
 		CALL fl_mensaje_registro_modificado()
 	ELSE 
-		--CALL fgl_winmessage(vg_producto,'Se eliminaron todas las equivalencias del Item ','exclamation')
 		CALL fl_mostrar_mensaje('Se eliminaron todas las equivalencias del Item.','exclamation')
 		CLEAR FORM
 		CALL control_DISPLAY_botones()
@@ -214,8 +209,6 @@ IF NOT int_flag THEN
 		CALL muestra_contadores(vm_row_current, vm_num_rows)
 		RETURN
 	END IF
-	--LET expr_sql = "r15_item = '",rm_equi.r15_item CLIPPED, "'"
-	--CALL valida_mantenimiento(expr_sql)
 	CALL lee_muestra_registro(vm_r_rows[vm_row_current])
 ELSE 
 	ROLLBACK WORK
@@ -283,7 +276,6 @@ FOREACH q_equi INTO vm_r_rows[vm_num_rows]
 END FOREACH
 LET vm_num_rows = vm_num_rows - 1
 IF vm_num_rows = 0 AND  vm_flag_mant <> 'M' AND vm_flag_mant <> 'I' THEN
-	--CALL fgl_winmessage(vg_producto,'No se encontraron registros con el criterio indicado', 'exclamation')
 	CALL fl_mostrar_mensaje('No se encontraron registros con el criterio indicado.','exclamation')
 	LET vm_row_current = 0
 	CALL muestra_contadores(vm_row_current, vm_num_rows)
@@ -368,7 +360,6 @@ IF NOT int_flag THEN
 		CALL fl_mensaje_registro_ingresado()
 	ELSE 
 		LET vm_row_current = 0
-		--CALL fgl_winmessage(vg_producto,'No existen equivalencias para el item ','exclamation')
 		CALL fl_mostrar_mensaje('No existen equivalencias para el item.','exclamation')
 		CLEAR FORM
 		CALL control_DISPLAY_botones()
@@ -428,7 +419,6 @@ INPUT BY NAME rm_equi.r15_item  WITHOUT DEFAULTS
      		    CALL fl_lee_item(vg_codcia, rm_equi.r15_item)
 			RETURNING rm_item.*
                     IF rm_item.r10_codigo IS NULL THEN
-                        --CALL fgl_winmessage(vg_producto,'El item no existe.','exclamation')
 			CALL fl_mostrar_mensaje('El item no existe.','exclamation')
                         NEXT FIELD r15_item
                     END IF
@@ -485,14 +475,12 @@ INPUT ARRAY rm_equi_item  WITHOUT DEFAULTS FROM rm_equi_item.*
 	    	IF rm_equi_item[i].r15_equivalente IS NOT NULL THEN
 			IF rm_equi.r15_item = rm_equi_item[i].r15_equivalente
 			THEN
-				--CALL fgl_winmessage(vg_producto,'Item no puede ser equivalente a si mismo','exclamation')
 				CALL fl_mostrar_mensaje('Item no puede ser equivalente a si mismo.','exclamation')
 				NEXT FIELD r15_equivalente
 			END IF
      			CALL fl_lee_item(vg_codcia, rm_equi_item[i].r15_equivalente)
 				RETURNING rm_item.*
                 	IF rm_item.r10_codigo IS NULL THEN
-                       		--CALL fgl_winmessage(vg_producto,'El item no existe.','exclamation')
 				CALL fl_mostrar_mensaje('El item no existe.','exclamation')
                        		NEXT FIELD r15_equivalente
                 	END IF
@@ -501,7 +489,6 @@ INPUT ARRAY rm_equi_item  WITHOUT DEFAULTS FROM rm_equi_item.*
 					rm_equi_item[j].r10_nombre
 			FOR k = 1 TO arr_count()
 				IF rm_equi_item[i].r15_equivalente = rm_equi_item[k].r15_equivalente AND i <> k THEN
-					--CALL fgl_winmessage(vg_producto,'No puede ingresar items repetidos','exclamation')
 					CALL fl_mostrar_mensaje('No puede ingresar items repetidos.','exclamation')
 					NEXT FIELD r15_equivalente
                			END IF

@@ -28,7 +28,6 @@ CALL startlog('../logs/repp205.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN          -- Validar # parámetros correcto
-	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto', 'stop')
 	CALL fl_mostrar_mensaje('Número de parametros incorrecto.', 'stop')
 	EXIT PROGRAM
 END IF
@@ -144,7 +143,6 @@ IF vm_num_rows = 0 THEN
 END IF
 CALL mostrar_registro(vm_r_rows[vm_row_current])
 IF rm_rep.r16_estado <> 'A' THEN
-	--CALL fgl_winmessage(vg_producto,'Registro ya ha sido confirmado.','exclamation')
 	CALL fl_mostrar_mensaje('Registro ya ha sido confirmado.','exclamation')
 	RETURN
 END IF
@@ -325,9 +323,8 @@ INPUT BY NAME rm_rep.r16_fec_llegada
 		LET fec_llegada = rm_rep.r16_fec_llegada
 	AFTER FIELD r16_fec_llegada
 		IF rm_rep.r16_fec_llegada IS NOT NULL THEN
-			IF rm_rep.r16_fec_llegada < TODAY
+			IF rm_rep.r16_fec_llegada < vg_fecha
 			OR rm_rep.r16_fec_llegada < rm_rep.r16_fec_envio THEN
-				--CALL fgl_winmessage(vg_producto,'La fecha de llegada es incorrecta.','exclamation')
 				CALL fl_mostrar_mensaje('La fecha de llegada es incorrecta.','exclamation')
 				NEXT FIELD r16_fec_llegada
 			END IF
@@ -392,7 +389,6 @@ IF vm_num_rows > 0 THEN
         SELECT * INTO rm_rep.* FROM rept016 WHERE ROWID = num_reg
         IF STATUS = NOTFOUND THEN
 		LET mensaje ='No existe registro con índice: ' || vm_row_current
-        	--CALL fgl_winmessage (vg_producto,mensaje,'exclamation')
 		CALL fl_mostrar_mensaje(mensaje,'exclamation')
                 RETURN
         END IF	

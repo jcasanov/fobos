@@ -36,11 +36,6 @@ DEFINE rm_detadu 	ARRAY [1300] OF RECORD
 				r82_peso_item	LIKE rept082.r82_peso_item,
 				total_peso	DECIMAL(13,4),
 				r82_prec_exfab	LIKE rept082.r82_prec_exfab,
--- r82_prec_fob_mi, r82_prec_fob_mb
--- estos campos son llenados segun NPC por la liquidación por lo tanto no 
--- es necesario mostrarlos en este proceso (RCA)
---				r82_prec_fob_mi	LIKE rept082.r82_prec_fob_mi,
---				r82_prec_fob_mb	LIKE rept082.r82_prec_fob_mb,
 				total_fob	DECIMAL(13,4)
 			END RECORD
 DEFINE rm_detadu_aux	ARRAY [1300] OF RECORD
@@ -53,8 +48,6 @@ DEFINE rm_detadu_aux	ARRAY [1300] OF RECORD
 				r82_peso_item	LIKE rept082.r82_peso_item,
 				total_peso	DECIMAL(13,4),
 				r82_prec_exfab	LIKE rept082.r82_prec_exfab,
---				r82_prec_fob_mi	LIKE rept082.r82_prec_fob_mi,
---				r82_prec_fob_mb	LIKE rept082.r82_prec_fob_mb,
 				total_fob	DECIMAL(13,4)
 			END RECORD
 DEFINE vm_total_cant	DECIMAL(22,10)
@@ -77,7 +70,6 @@ CALL startlog('../logs/repp233.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 AND num_args() <> 5 THEN  -- Validar # parámetros correcto
-	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto', 'stop')
 	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.', 'stop')
 	EXIT PROGRAM
 END IF
@@ -361,7 +353,7 @@ CALL fl_lee_nota_pedido_rep(vg_codcia, vg_codloc, rm_r81.r81_pedido)
 	RETURNING r_r81.*
 IF r_r81.r81_compania IS NULL THEN
 	CALL grabar_pedido()
-	LET rm_r81.r81_fecing = CURRENT
+	LET rm_r81.r81_fecing = fl_current()
 	INSERT INTO rept081 VALUES (rm_r81.*)
 	CALL grabar_detalle()
 	COMMIT WORK
@@ -414,8 +406,8 @@ LET r_r16.r16_proveedor   = rm_r81.r81_cod_prov
 LET r_r16.r16_moneda      = rm_r81.r81_moneda_base
 LET r_r16.r16_demora      = 0
 LET r_r16.r16_seguridad   = 0
-LET r_r16.r16_fec_envio   = TODAY
-LET r_r16.r16_fec_llegada = TODAY
+LET r_r16.r16_fec_envio   = vg_fecha
+LET r_r16.r16_fec_llegada = vg_fecha
 LET r_r16.r16_maximo      = 0
 LET r_r16.r16_minimo      = 0
 LET r_r16.r16_periodo_vta = 0
@@ -423,7 +415,7 @@ LET r_r16.r16_pto_reorden = 0
 LET r_r16.r16_flag_estad  = 'M'
 LET r_r16.r16_aux_cont    = rm_r16.r16_aux_cont
 LET r_r16.r16_usuario     = rm_r81.r81_usuario
-LET r_r16.r16_fecing      = CURRENT
+LET r_r16.r16_fecing      = fl_current()
 INSERT INTO rept016 VALUES (r_r16.*)
 
 END FUNCTION
@@ -468,18 +460,11 @@ FOR i = 1 TO vm_num_repd
 	LET r_r17.r17_fob         = rm_detadu[i].r82_prec_exfab
 	LET r_r17.r17_cantped     = rm_detadu[i].r82_cantidad
 	LET r_r17.r17_cantrec     = 0
-	--LET r_r17.r17_exfab_mb    = r_r17.r17_fob / rm_r81.r81_paridad_div
 	LET r_r17.r17_exfab_mb    = r_r17.r17_fob * rm_r81.r81_paridad_div
 	LET r_r17.r17_desp_mi     = 0
 	LET r_r17.r17_desp_mb     = 0
--- Se agrega cero (0) a r_r17.r17_tot_fob_mi y r_r17.r17_tot_fob_mb
--- Si no se cae por que se obvio por cambios en forma, estos campos
--- son llenados segun NPC por la liquidación por lo tanto no es necesario
--- mostrarlos en este proceso (RCA)
 	LET r_r17.r17_tot_fob_mi  = 0
 	LET r_r17.r17_tot_fob_mb  = 0
---	LET r_r17.r17_tot_fob_mi  = rm_detadu[i].r82_prec_fob_mi
---	LET r_r17.r17_tot_fob_mb  = rm_detadu[i].r82_prec_fob_mb
 	LET r_r17.r17_flete       = 0
 	LET r_r17.r17_seguro      = 0
 	LET r_r17.r17_cif         = 0
@@ -506,13 +491,8 @@ FOR i = 1 TO vm_num_repd
 			rm_detadu[i].r82_cod_item_prov, 
 			rm_detadu[i].r82_descripcion, rm_detadu[i].r82_cod_unid,
 		 	rm_detadu[i].r82_cantidad, rm_detadu[i].r82_prec_exfab,
--- r82_prec_fob_mi, r82_prec_fob_mb
--- estos campos son llenados segun NPC por la liquidación por lo tanto no
--- es necesario mostrarlos en este proceso, se los encera (RCA)
 		 	0,
 		 	0,
---		 	rm_detadu[i].r82_prec_fob_mi,
---			rm_detadu[i].r82_prec_fob_mb, 
 			rm_detadu[i].r82_partida, sec_partida,
 			rm_r82.r82_porc_arancel, rm_r82.r82_porc_salvagu,
 		 	rm_detadu[i].r82_peso_item)
@@ -589,7 +569,6 @@ DECLARE q_r16 CURSOR FOR
 OPEN q_r16
 FETCH q_r16 INTO r_r16.*
 IF STATUS < 0 THEN
-	--ROLLBACK WORK
 	CALL fl_mensaje_bloqueo_otro_usuario()
 	WHENEVER ERROR STOP
 	RETURN 1
@@ -652,14 +631,11 @@ IF num_args() = 4 THEN
 		r81_tot_cargos_mb, r82_partida, r82_item, r82_cod_item_prov,
 		r82_descripcion, r82_cod_unid, r82_cantidad, r82_peso_item,
 		r82_prec_exfab, r81_usuario
---                r82_prec_fob_mi, r82_prec_fob_mb, r81_usuario
 		ON KEY(F1,CONTROL-W)
 			CALL llamar_visor_teclas()
 		ON KEY(F2)
 			IF INFIELD(r81_pedido) THEN
 				CALL fl_ayuda_nota_pedido(vg_codcia)
---				CALL fl_ayuda_pedidos_rep(vg_codcia, vg_codloc,
---								'T', 'T')
 					RETURNING codpe_aux, proveedor
 				LET int_flag = 0
 				IF codpe_aux IS NOT NULL THEN
@@ -809,12 +785,6 @@ INPUT BY NAME rm_r81.r81_pedido, rm_r81.r81_fecha, rm_r81.r81_moneda_base,
         	        	RETURNING resp
               		IF resp = 'Yes' THEN
 				LET int_flag = 1
-				{--
-				IF vm_r_rows[vm_row_current] IS NULL THEN
-					LET vm_num_rows    = 0
-					LET vm_row_current = 0
-				END IF
-				--}
 				RETURN
                 	END IF
 		ELSE
@@ -897,7 +867,6 @@ INPUT BY NAME rm_r81.r81_pedido, rm_r81.r81_fecha, rm_r81.r81_moneda_base,
 			LET paridad = rm_r81.r81_paridad_div
 		END IF
 	BEFORE FIELD moneda9
-		--LET moneda9 = rm_r81.r81_moneda_base
 		CALL fl_lee_moneda(vm_moneda_ped) RETURNING r_g13.*
 		LET moneda9 = r_g13.g13_simbolo
 	AFTER FIELD moneda9
@@ -907,14 +876,6 @@ INPUT BY NAME rm_r81.r81_pedido, rm_r81.r81_fecha, rm_r81.r81_moneda_base,
 			CALL fl_mostrar_mensaje('Digite un pedido.','exclamation')
 			NEXT FIELD r81_pedido
 		END IF
-		{--
-		IF vm_num_rows = 0 THEN
-			LET vm_num_rows = 1
-		END IF
-		IF vm_row_current = 0 THEN
-			LET vm_row_current = 1
-		END IF
-		--}
 		CALL fl_lee_nota_pedido_rep(vg_codcia, vg_codloc,
 						rm_r81.r81_pedido)
 			RETURNING r_r81.*
@@ -1042,7 +1003,6 @@ INPUT BY NAME rm_r81.r81_pedido, rm_r81.r81_fecha, rm_r81.r81_moneda_base,
                 ELSE
                         CLEAR tit_aux_con
                 END IF
-	--AFTER FIELD r81_tot_exfab, r81_tot_desp_mi
 	AFTER FIELD r81_tot_desp_mi
 		IF rm_r81.r81_tot_exfab IS NULL THEN
 			LET rm_r81.r81_tot_exfab = 0
@@ -1050,47 +1010,24 @@ INPUT BY NAME rm_r81.r81_pedido, rm_r81.r81_fecha, rm_r81.r81_moneda_base,
 		IF rm_r81.r81_tot_desp_mi IS NULL THEN
 			LET rm_r81.r81_tot_desp_mi = 0
 		END IF
-		{--
-		LET rm_r81.r81_tot_exfab = 
-			fl_retorna_precision_valor(rm_r81.r81_moneda_base,
-							rm_r81.r81_tot_exfab)
-		LET rm_r81.r81_tot_desp_mi = 
-				fl_retorna_precision_valor(vm_moneda_ped,
-							rm_r81.r81_tot_desp_mi)
-		--}
 		DISPLAY BY NAME rm_r81.r81_tot_exfab, rm_r81.r81_tot_desp_mi
 		CALL calcular_totales_cab()
 	AFTER FIELD r81_tot_flete
 		IF rm_r81.r81_tot_flete IS NULL THEN
 			LET rm_r81.r81_tot_flete = 0
 		END IF
-		{--
-		LET rm_r81.r81_tot_flete = 
-			fl_retorna_precision_valor(rm_r81.r81_moneda_base,
-							rm_r81.r81_tot_flete)
-		--}
 		DISPLAY BY NAME rm_r81.r81_tot_flete
 		CALL calcular_totales_cab()
 	AFTER FIELD r81_tot_seguro
 		IF rm_r81.r81_tot_seguro IS NULL THEN
 			LET rm_r81.r81_tot_seguro = 0
 		END IF
-		{--
-		LET rm_r81.r81_tot_seguro = 
-			fl_retorna_precision_valor(rm_r81.r81_moneda_base,
-							rm_r81.r81_tot_seguro)
-		--}
 		DISPLAY BY NAME rm_r81.r81_tot_seguro
 		CALL calcular_totales_cab()
 	AFTER FIELD r81_tot_seg_neto
 		IF rm_r81.r81_tot_seg_neto IS NULL THEN
 			LET rm_r81.r81_tot_seg_neto = 0
 		END IF
-		{--
-		LET rm_r81.r81_tot_seg_neto =
-			fl_retorna_precision_valor(rm_r81.r81_moneda_base,
-							rm_r81.r81_tot_seg_neto)
-		--}
 		DISPLAY BY NAME rm_r81.r81_tot_seg_neto
 		CALL calcular_totales_cab()
 	AFTER INPUT
@@ -1120,7 +1057,7 @@ LET rm_r81.r81_tot_seguro    = 0
 LET rm_r81.r81_tot_seg_neto  = 0
 LET rm_r81.r81_tot_cargos_mb = 0
 LET rm_r81.r81_usuario       = vg_usuario
-LET rm_r81.r81_fecing        = CURRENT
+LET rm_r81.r81_fecing        = fl_current()
 CALL muestra_nota_ped()
 
 END FUNCTION
@@ -1178,9 +1115,6 @@ FOREACH q_r17 INTO r_r17.*
 	LET rm_detadu[vm_num_repd].r82_cantidad    = r_r17.r17_cantped
 	LET rm_detadu[vm_num_repd].r82_peso_item   = r_r17.r17_peso
 	LET rm_detadu[vm_num_repd].r82_prec_exfab  = r_r17.r17_fob
---OJO
---	LET rm_detadu[vm_num_repd].r82_prec_fob_mi = r_r17.r17_tot_fob_mi
---	LET rm_detadu[vm_num_repd].r82_prec_fob_mb = r_r17.r17_tot_fob_mb
 	CALL calcular_datos_item(vm_num_repd, 0, 0)
 	LET rm_detadu_aux[vm_num_repd].* = rm_detadu[vm_num_repd].*
 	LET vm_num_repd = vm_num_repd + 1
@@ -1220,8 +1154,6 @@ LET rm_detadu[i].r82_peso_item   = r_r10.r10_peso
 LET rm_detadu[i].r82_cantidad    = 0
 LET rm_detadu[i].r82_peso_item   = r_r10.r10_peso
 LET rm_detadu[i].r82_prec_exfab  = r_r10.r10_fob
---LET rm_detadu[i].r82_prec_fob_mi = 0
---LET rm_detadu[i].r82_prec_fob_mb = 0
 CALL calcular_datos_item(i, j, flag)
 LET rm_detadu_aux[i].* = rm_detadu[i].*
 IF flag THEN
@@ -1239,10 +1171,6 @@ IF flag THEN
 		rm_detadu[j].r82_peso_item
 	DISPLAY rm_detadu[i].r82_prec_exfab    TO
 		rm_detadu[j].r82_prec_exfab
---	DISPLAY rm_detadu[i].r82_prec_fob_mi   TO
---		rm_detadu[j].r82_prec_fob_mi
---	DISPLAY rm_detadu[i].r82_prec_fob_mb   TO
---		rm_detadu[j].r82_prec_fob_mb
 END IF
 
 END FUNCTION
@@ -1253,18 +1181,9 @@ FUNCTION calcular_datos_item2(num)
 DEFINE i, num		SMALLINT
 
 LET rm_r81.r81_tot_exfab  = 0
---LET rm_r81.r81_tot_fob_mi = 0
---LET rm_r81.r81_tot_fob_mb = 0
---OJO
 FOR i = 1 TO num
 	LET rm_r81.r81_tot_exfab  = rm_r81.r81_tot_exfab +
 				     rm_detadu[i].total_fob
-	{--
---	LET rm_r81.r81_tot_fob_mi = rm_r81.r81_tot_fob_mi +
--- 				     rm_detadu[i].r82_prec_fob_mi
---	LET rm_r81.r81_tot_fob_mb = rm_r81.r81_tot_fob_mb +
--- 				     rm_detadu[i].r82_prec_fob_mb
-	--}
 END FOR
 CALL calcular_totales_fob()
 
@@ -1383,6 +1302,8 @@ DEFINE salir		SMALLINT
 DEFINE in_array		SMALLINT
 DEFINE mensaje		VARCHAR(100)
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 INITIALIZE r_r82.*, capitulo TO NULL
 LET i        = 1
 LET in_array = 0
@@ -1403,12 +1324,6 @@ WHILE NOT salir
 				CALL muestra_lineas_detalle()
 				CALL muestra_contadores_det(0)
  	      			LET int_flag = 1
-				{--
-				IF vm_r_rows[vm_row_current] IS NULL THEN
-					LET vm_num_rows    = 0
-					LET vm_row_current = 0
-				END IF
-				--}
 				EXIT WHILE
 	       	       	END IF	
 		ON KEY(F1,CONTROL-W)
@@ -1422,7 +1337,6 @@ WHILE NOT salir
                                 CALL fl_lee_partida(partida)
                                         RETURNING r_g16.*
 					LET partida2 = partida,'-',r_g16.g16_nacional,'-',r_g16.g16_verifcador
---
 					LET rm_detadu[i].r82_partida = partida2
 					DISPLAY rm_detadu[i].r82_partida TO
 						rm_detadu[j].r82_partida 
@@ -1532,8 +1446,6 @@ WHILE NOT salir
 	               			END IF
 				END FOR
 				IF r_r10.r10_costo_mb <= 0.01 AND
-				 --fl_item_tiene_movimientos(r_r10.r10_compania,
-					--		r_r10.r10_codigo)
 				   tiene_stock_local(r_r10.r10_codigo) > 0
 				THEN
 					CALL fl_mostrar_mensaje('Debe estar configurado correctamente el costo del item y NO con costo menor igual a 0.01.', 'exclamation')
@@ -1593,20 +1505,15 @@ WHILE NOT salir
 					CONTINUE INPUT
 				END IF
 				WHENEVER ERROR STOP
-				UPDATE rept010 SET r10_peso       =
-						rm_detadu[l].r82_peso_item,
-					           r10_uni_med    =
-						rm_detadu[l].r82_cod_unid,
-					   	   r10_partida    =
-						rm_detadu[l].r82_partida,
-					   	   r10_cod_comerc = 
-						rm_detadu[l].r82_cod_item_prov,
-			-- SE EXCLUYO EL 12/MAR/2008
-			   	   --r10_modelo = rm_detadu[l].r82_descripcion,
-						   r10_fob    =
-						rm_detadu[l].r82_prec_exfab,
-						   r10_usu_cosrepo = vg_usuario,
-						   r10_fec_cosrepo = CURRENT
+
+				LET fecha_actual = fl_current()
+				UPDATE rept010 SET r10_peso        = rm_detadu[l].r82_peso_item,
+					               r10_uni_med     = rm_detadu[l].r82_cod_unid,
+					   	           r10_partida     = rm_detadu[l].r82_partida,
+					   	           r10_cod_comerc  = rm_detadu[l].r82_cod_item_prov,
+						           r10_fob         = rm_detadu[l].r82_prec_exfab,
+						           r10_usu_cosrepo = vg_usuario,
+						           r10_fec_cosrepo = fecha_actual
 					WHERE CURRENT OF q_r10
 				CLOSE q_r10
 				FREE q_r10
@@ -1664,16 +1571,7 @@ END FUNCTION
 FUNCTION calcular_totales_fob()
 
 LET rm_r81.r81_tot_fob_mi   = rm_r81.r81_tot_exfab   + rm_r81.r81_tot_desp_mi
-{--
-LET rm_r81.r81_tot_fob_mi   = fl_retorna_precision_valor(vm_moneda_ped,
-							rm_r81.r81_tot_fob_mi)
---}
---LET rm_r81.r81_tot_fob_mb   = rm_r81.r81_tot_fob_mi  / rm_r81.r81_paridad_div
 LET rm_r81.r81_tot_fob_mb   = rm_r81.r81_tot_fob_mi  * rm_r81.r81_paridad_div
-{--
-LET rm_r81.r81_tot_fob_mb   = fl_retorna_precision_valor(rm_r81.r81_moneda_base,
-							rm_r81.r81_tot_fob_mb)
---}
 DISPLAY BY NAME rm_r81.r81_tot_exfab,rm_r81.r81_tot_fob_mi,rm_r81.r81_tot_fob_mb
 
 END FUNCTION
@@ -1683,17 +1581,8 @@ END FUNCTION
 FUNCTION calcular_totales_cab()
 
 CALL calcular_totales_fob()
---LET rm_r81.r81_tot_car_fle  = rm_r81.r81_tot_fob_mi  + rm_r81.r81_tot_flete
 LET rm_r81.r81_tot_car_fle  = rm_r81.r81_tot_fob_mb  + rm_r81.r81_tot_flete
-{--
-LET rm_r81.r81_tot_car_fle  = fl_retorna_precision_valor(rm_r81.r81_moneda_base,
-							rm_r81.r81_tot_car_fle)
---}
 LET rm_r81.r81_tot_cargos_mb= rm_r81.r81_tot_car_fle + rm_r81.r81_tot_seguro
-{--
-LET rm_r81.r81_tot_cargos_mb= fl_retorna_precision_valor(rm_r81.r81_moneda_base,
-					     	       rm_r81.r81_tot_cargos_mb)
---}
 DISPLAY BY NAME rm_r81.r81_tot_fob_mi, rm_r81.r81_tot_fob_mb,
 		rm_r81.r81_tot_car_fle, rm_r81.r81_tot_cargos_mb
 CALL mostrar_campo_nuevos_valor()
@@ -1883,7 +1772,6 @@ LET query = 'SELECT *, rowid FROM rept082 ',
                 'WHERE r82_compania  = ', vg_codcia,
 		'  AND r82_localidad = ', vg_codloc,
 		'  AND r82_pedido    = "', num_reg, '"',
-		--'ORDER BY rowid '
 		' ORDER BY r82_sec_item '
 PREPARE cons1 FROM query
 DECLARE q_cons1 CURSOR FOR cons1
@@ -1900,8 +1788,6 @@ FOREACH q_cons1 INTO r_r82.*, orden
 	LET rm_detadu[i].total_peso        = r_r82.r82_cantidad *
 						r_r82.r82_peso_item
 	LET rm_detadu[i].r82_prec_exfab    = r_r82.r82_prec_exfab
---	LET rm_detadu[i].r82_prec_fob_mi   = r_r82.r82_prec_fob_mi
---	LET rm_detadu[i].r82_prec_fob_mb   = r_r82.r82_prec_fob_mb
 	LET rm_detadu[i].total_fob         = r_r82.r82_cantidad *
 						r_r82.r82_prec_exfab
 	LET rm_detadu_aux[i].* = rm_detadu[i].*
@@ -1982,11 +1868,6 @@ WHILE TRUE
 		LET rm_detadu[vm_num_repd].total_peso = r_r82.r82_cantidad *
 							r_r82.r82_peso_item
 		LET rm_detadu[vm_num_repd].r82_prec_exfab = r_r82.r82_prec_exfab
--- OJO
---		LET rm_detadu[vm_num_repd].r82_prec_fob_mi =
---							r_r82.r82_prec_fob_mi
---		LET rm_detadu[vm_num_repd].r82_prec_fob_mb =
---							r_r82.r82_prec_fob_mb
 		LET rm_detadu[vm_num_repd].total_fob = r_r82.r82_cantidad *
 							r_r82.r82_prec_exfab
 		LET rm_detadu_aux[vm_num_repd].* = rm_detadu[vm_num_repd].*
@@ -2089,20 +1970,6 @@ END FUNCTION
 
 
 FUNCTION mostrar_botones_detalle()
-
-{
---#DISPLAY 'Item'                  TO tit_col1
---#DISPLAY 'Cod. Item Prov.'       TO tit_col2
---#DISPLAY 'Descripcion Cod. Item' TO tit_col3
---#DISPLAY 'Unidad'                TO tit_col4
---#DISPLAY 'Cantidad'              TO tit_col5
---#DISPLAY 'Peso Uni.'             TO tit_col6
---#DISPLAY 'Total Peso'            TO tit_col7
---#DISPLAY 'EX-FCA DIV.'           TO tit_col8
---#DISPLAY 'FOB DIV.'              TO tit_col9
---#DISPLAY 'FOB BASE'              TO tit_col10
---#DISPLAY 'Total FOB BASE'        TO tit_col11
-}
 
 --#DISPLAY 'Partida'               TO tit_col1
 --#DISPLAY 'Item'       	   TO tit_col2
@@ -2287,30 +2154,6 @@ END FUNCTION
 FUNCTION muestra_monedas()
 DEFINE r_g13		RECORD LIKE gent013.*
 
-{--
-DISPLAY rm_r81.r81_moneda_base TO moneda1
-DISPLAY rm_r81.r81_moneda_base TO moneda2	-- OJO
---DISPLAY vm_moneda_ped          TO moneda2
-DISPLAY rm_r81.r81_moneda_base TO moneda3
-DISPLAY vm_moneda_ped          TO moneda4
-
-{--
-DISPLAY rm_r81.r81_moneda_base TO moneda5
-DISPLAY rm_r81.r81_moneda_base TO moneda6
-DISPLAY rm_r81.r81_moneda_base TO moneda7
-DISPLAY rm_r81.r81_moneda_base TO moneda8
-DISPLAY rm_r81.r81_moneda_base TO moneda9
-LET moneda9 = rm_r81.r81_moneda_base
---}
-
-DISPLAY vm_moneda_ped          TO moneda5
-DISPLAY vm_moneda_ped          TO moneda6
-DISPLAY vm_moneda_ped          TO moneda7
-DISPLAY vm_moneda_ped          TO moneda8
-DISPLAY vm_moneda_ped          TO moneda9
-LET moneda9 = vm_moneda_ped
---}
-
 CALL fl_lee_moneda(rm_r81.r81_moneda_base) RETURNING r_g13.*
 DISPLAY r_g13.g13_simbolo TO moneda1
 DISPLAY r_g13.g13_simbolo TO moneda2
@@ -2337,19 +2180,12 @@ END FUNCTION
 
 FUNCTION mostrar_campo_nuevos_valor()
 
---DISPLAY (rm_r81.r81_tot_exfab / rm_r81.r81_paridad_div)   TO r81_tot_exfab_base
 DISPLAY (rm_r81.r81_tot_exfab * rm_r81.r81_paridad_div)   TO r81_tot_exfab_base
---DISPLAY (rm_r81.r81_tot_desp_mi / rm_r81.r81_paridad_div) TO r81_tot_desp_mb
 DISPLAY (rm_r81.r81_tot_desp_mi * rm_r81.r81_paridad_div) TO r81_tot_desp_mb
---DISPLAY (rm_r81.r81_tot_flete * rm_r81.r81_paridad_div)   TO r81_tot_flete_mi
 DISPLAY (rm_r81.r81_tot_flete / rm_r81.r81_paridad_div)   TO r81_tot_flete_mi
---DISPLAY (rm_r81.r81_tot_car_fle * rm_r81.r81_paridad_div) TO r81_tot_car_fle_mi
 DISPLAY (rm_r81.r81_tot_car_fle / rm_r81.r81_paridad_div) TO r81_tot_car_fle_mi
---DISPLAY (rm_r81.r81_tot_seguro * rm_r81.r81_paridad_div)  TO r81_tot_seguro_mi
 DISPLAY (rm_r81.r81_tot_seguro / rm_r81.r81_paridad_div)  TO r81_tot_seguro_mi
---DISPLAY (rm_r81.r81_tot_seg_neto * rm_r81.r81_paridad_div)TO r81_tot_seg_neto_mi
 DISPLAY (rm_r81.r81_tot_seg_neto / rm_r81.r81_paridad_div)TO r81_tot_seg_neto_mi
---DISPLAY (rm_r81.r81_tot_cargos_mb * rm_r81.r81_paridad_div) TO r81_tot_cargos_mi
 DISPLAY (rm_r81.r81_tot_cargos_mb / rm_r81.r81_paridad_div) TO r81_tot_cargos_mi
 
 END FUNCTION
@@ -2464,7 +2300,7 @@ IF STATUS = NOTFOUND THEN
 	CALL retorna_sec() RETURNING rm_r83.r83_cod_desc_item
 	LET rm_r84.r84_descripcion = NULL
 	LET rm_r84.r84_usuario     = vg_usuario
-	LET rm_r84.r84_fecing      = CURRENT
+	LET rm_r84.r84_fecing      = fl_current()
 ELSE
 	CALL fl_lee_desc_subtitulo(vg_codcia, rm_r83.r83_cod_desc_item)
 		RETURNING rm_r84.*
@@ -2508,8 +2344,6 @@ INPUT BY NAME rm_r83.r83_cod_desc_item, rm_r84.r84_descripcion
 			END IF
 			DISPLAY BY NAME rm_r84.r84_descripcion
 		ELSE
---			CALL retorna_sec() RETURNING rm_r83.r83_cod_desc_item
---			DISPLAY BY NAME rm_r83.r83_cod_desc_item
 			LET rm_r84.r84_descripcion = NULL
 			CLEAR r84_descripcion
 		END IF
@@ -2518,7 +2352,6 @@ INPUT BY NAME rm_r83.r83_cod_desc_item, rm_r84.r84_descripcion
 		DELETE FROM rept083
 			WHERE r83_compania = vg_codcia
 			  AND r83_item     = rm_r83.r83_item
-		--IF rm_r83.r83_cod_desc_item IS NULL THEN
 		IF rm_r84.r84_descripcion IS NULL THEN
 			LET int_flag = 1
 		END IF
@@ -2602,7 +2435,7 @@ ELSE
 	LET rm_r84.r84_compania      = vg_codcia
 	LET rm_r84.r84_cod_desc_item = rm_r83.r83_cod_desc_item
 	LET rm_r84.r84_usuario       = vg_usuario
-	LET rm_r84.r84_fecing        = CURRENT
+	LET rm_r84.r84_fecing        = fl_current()
 	INSERT INTO rept084 VALUES(rm_r84.*)
 END IF
 CLOSE q_up_r84

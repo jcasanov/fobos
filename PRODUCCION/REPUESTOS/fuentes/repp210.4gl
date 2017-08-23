@@ -94,7 +94,6 @@ DEFINE vm_size_arr		SMALLINT   -- FILAS EN PANTALLA
 DEFINE vm_size_arr3		SMALLINT   -- FILAS EN PANTALLA
 DEFINE vm_ind_docs 		SMALLINT   -- INDICE DE DOCUMENTOS
 DEFINE vm_ind_div 		SMALLINT   -- INDICE DE DIVIDENDOS
-DEFINE vm_cont_cred 		LIKE rept023.r23_cont_cred -- TIPO DE PAGO
 DEFINE vm_flag_anticipos	CHAR(1) -- PARA SABER SI TIENE O NO ANTICIPOS
 					-- 'S' o 'N'
 DEFINE vm_flag_grabar		CHAR(1) -- PARA SABER SI TIENE O NO QUE GRABAR
@@ -113,6 +112,12 @@ CLEAR SCREEN
 CALL startlog('../logs/repp210.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
+
+{*
+ * 4 argumentos es la llamada normal: base modulo codcia codloc
+ * 5 argumentos 
+ * 6 argumentos es aprobación de crédito automático desde la proforma
+ *}
 IF num_args() <> 4 AND num_args() <> 5 AND num_args() <> 6 THEN
 	-- Validar # parámetros correcto
 	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.', 'stop')
@@ -402,22 +407,16 @@ WHILE TRUE
 			LET j = scr_line()
 			CALL control_ver_preventa(r_detalle[i].num_preventa)
 			LET int_flag = 0
-{--
-		ON KEY(UP,DOWN,RETURN, TAB)
-			LET i = arr_curr()
-			LET j = scr_line()
-			CALL muestra_contadores(i)
---}
-       		--#BEFORE DISPLAY
-       	        	--#CALL dialog.keysetlabel('ACCEPT', '')
+       	--#BEFORE DISPLAY
+       	    --#CALL dialog.keysetlabel('ACCEPT', '')
 			--#CALL dialog.keysetlabel("F1","")
 			--#CALL dialog.keysetlabel("CONTROL-W","")
 		--#BEFORE ROW
 			--#LET i = arr_curr()
 			--#LET j = scr_line()
 			--#CALL muestra_contadores(i)
-        	--#AFTER DISPLAY
-               		 --#CONTINUE DISPLAY
+        --#AFTER DISPLAY
+            --#CONTINUE DISPLAY
 		ON KEY(F15)
 			LET k = 1
 			LET int_flag = 2
@@ -850,7 +849,6 @@ BEGIN WORK
 			RETURNING done
 		IF done = 0 THEN
 			ROLLBACK WORK
-			--CALL fgl_winmessage(vg_producto,'No realizo la transacción. ','exclamation')
 			CALL fl_mostrar_mensaje('No realizo la transacción. ','exclamation')
 			RETURN
 		END IF
@@ -860,14 +858,12 @@ BEGIN WORK
 		RETURNING done
 	IF done = 0 THEN
 		ROLLBACK WORK
-		--CALL fgl_winmessage(vg_producto,'Ha ocurrido un error en la actualización de la caja.','exclamation')
 		CALL fl_mostrar_mensaje('Ha ocurrido un error en la actualización de la caja.','exclamation')
 		RETURN
 	END IF 
 
 IF STATUS < 0 THEN
 	ROLLBACK WORK
-	--CALL fgl_winmessage(vg_producto,'No se pudo realizar la transacción a ocurrido un error. ','exclamation')
 	CALL fl_mostrar_mensaje('No se pudo realizar la transacción a ocurrido un error. ','exclamation')
 	RETURN
 END IF
@@ -975,7 +971,6 @@ DEFINE intentar         SMALLINT
 DEFINE resp             CHAR(6)
                                                                                 
 LET intentar = 1
---CALL fgl_winquestion(vg_producto,'Registro bloqueado por otro usuario, desea intentarlo nuevamente','No','Yes|No','question',1)
 CALL fl_hacer_pregunta('Registro bloqueado por otro usuario, desea intentarlo nuevamente','No')
 	RETURNING resp
 IF resp = 'No' THEN
@@ -1281,7 +1276,6 @@ WHILE TRUE
 						dias_entre_pagos USING "<<<&",
 						' días.'
 				CALL fl_mostrar_mensaje(mensaje, 'exclamation')
-				--NEXT FIELD r26_fec_vcto
 			END IF
 		AFTER FIELD r26_valor_cap
 			IF r_detalle_3[i].r26_valor_cap IS NOT NULL THEN
@@ -1294,18 +1288,15 @@ WHILE TRUE
 				IF r_detalle_3[k].r26_fec_vcto >=
 				   r_detalle_3[k + 1].r26_fec_vcto
 				   THEN
-					--CALL fgl_winmessage(vg_producto,'Existen fechas que resultan menores a las ingresadas anteriormente en los pagos. ','exclamation')
 					CALL fl_mostrar_mensaje('Existen fechas que resultan menores a las ingresadas anteriormente en los pagos. ','exclamation')
 					EXIT INPUT
 				END IF
 			END FOR	
 			IF vm_total > rm_r25.r25_valor_cred THEN
-				--CALL fgl_winmessage(vg_producto,'El total del valor capital es mayor al total de la deuda. ','exclamation')
 				CALL fl_mostrar_mensaje('El total del valor capital es mayor al total de la deuda. ','exclamation')
 				EXIT INPUT
 			END IF
 			IF vm_total < rm_r25.r25_valor_cred THEN
-				--CALL fgl_winmessage(vg_producto,'El total del valor capital es menor al total de la deuda. ','exclamation')
 				CALL fl_mostrar_mensaje('El total del valor capital es menor al total de la deuda. ','exclamation')
 				EXIT INPUT
 			END IF
@@ -1313,7 +1304,6 @@ WHILE TRUE
 -- Para evitar que se grabe una fecha de vencimiento < a today (1822)
 			FOR i = 1 TO rm_r25.r25_dividendos
 				IF r_detalle_3[i].r26_fec_vcto < vg_fecha THEN
-					--CALL fgl_winmessage(vg_producto,'La fecha de vencimiento no puede ser menor a la fecha de hoy.','exclamation')
 					CALL fl_mostrar_mensaje('La fecha de vencimiento no puede ser menor a la fecha de hoy.','exclamation')
 					CONTINUE INPUT
 				END IF
@@ -1421,7 +1411,6 @@ IF total_anticipos_aux = total_anticipos THEN
 	LET vm_ind_docs = i
 
 	IF i = 0 THEN
-		--CALL fgl_winmessage(vg_producto,'No hay documentos a favor para este cliente.','exclamation')
 		CALL fl_mostrar_mensaje('No hay documentos a favor para este cliente.','exclamation')
 		LET rm_r25.r25_valor_ant = 0
 		CLOSE WINDOW w_repp210_3
@@ -1543,13 +1532,11 @@ INPUT BY NAME rm_r25.r25_numprev, rm_r23.r23_codcli, rm_r23.r23_nomcli,
 						dias_entre_pagos USING "<<<&",
 						' días.'
 				CALL fl_mostrar_mensaje(mensaje, 'exclamation')
-				--NEXT FIELD fecha_primer_pago
 			END IF
 		END IF
 	AFTER INPUT
 		CALL fl_lee_compania_cobranzas(vg_codcia) RETURNING r_z00.* 
 		IF r_z00.z00_bloq_vencido = 'S' THEN
-			--IF vg_codloc = 3 OR vg_codloc = 4 OR vg_codloc = 5 THEN
 				CALL fl_lee_cliente_localidad(vg_codcia,
 							vg_codloc,
 							rm_r23.r23_codcli)
@@ -1558,7 +1545,6 @@ INPUT BY NAME rm_r25.r25_numprev, rm_r23.r23_codcli, rm_r23.r23_nomcli,
 					CALL fl_mostrar_mensaje('El plazo de crédito no puede ser mayor al límite de días crédito del cliente.', 'exclamation')
 					NEXT FIELD r25_plazo
 				END IF
-			--END IF
 		END IF
 		IF rm_r25.r25_dividendos > rm_z61.z61_max_pagos THEN
 			CALL fl_mostrar_mensaje('El número de pagos no puede ser mayor al maximo de pagos.', 'exclamation')
@@ -1635,7 +1621,6 @@ INPUT ARRAY r_detalle_2 WITHOUT DEFAULTS FROM r_detalle_2.*
 		IF r_detalle_2[i].r27_valor IS NOT NULL THEN
 			IF r_detalle_2[i].r27_valor > r_detalle_2[i].z21_saldo
 			   THEN
-				--CALL fgl_winmessage(vg_producto,'El saldo del documento es insuficiente.','exclamation')
 				CALL fl_mostrar_mensaje('El saldo del documento es insuficiente.','exclamation')
 				NEXT FIELD r27_valor
 			END IF
@@ -1652,12 +1637,10 @@ INPUT ARRAY r_detalle_2 WITHOUT DEFAULTS FROM r_detalle_2.*
 	AFTER INPUT 
 		CALL calcula_total_anticipos(vm_ind_docs)
 		IF total_anticipos > rm_r23.r23_tot_neto THEN
-			--CALL fgl_winmessage(vg_producto,'El total de los pagos anticipados aplicados es mayor al total de la factura.','exclamation') 
 			CALL fl_mostrar_mensaje('El total de los pagos anticipados aplicados es mayor al total de la factura.','exclamation') 
 			CONTINUE INPUT
 		END IF
 		IF total_anticipos = rm_r23.r23_tot_neto THEN
-			--CALL fgl_winquestion(vg_producto,'El total de los pagos anticipados aplicados es igual al total de la factura, desea realizar la factura al contado', 'No', 'Yes|No','question', 1)
 			CALL fl_hacer_pregunta('El total de los pagos anticipados aplicados es igual al total de la factura, desea realizar la factura al contado','No')
 				 RETURNING resp 
 			IF resp = 'Yes' THEN
@@ -1679,8 +1662,6 @@ IF int_flag THEN
 	RETURN
 END IF
 END WHILE
-
---CLOSE WINDOW w_repp210_3
 
 END FUNCTION
 
@@ -1711,7 +1692,6 @@ WHENEVER ERROR CONTINUE
 WHENEVER ERROR STOP
 IF STATUS < 0 THEN
 	ROLLBACK WORK
-	--CALL fgl_winmessage(vg_producto,'La preventa está siendo modificada, no se realizará la actualización.','exclamation')
 	CALL fl_mostrar_mensaje('La preventa está siendo modificada, no se realizará la actualización.','exclamation')
 	RETURN done
 END IF
@@ -1746,7 +1726,6 @@ FOR i = 1 TO vm_ind_docs
 END FOR 
 COMMIT WORK
 LET done = 1
---CALL fgl_winmessage(vg_producto,'Proceso realizado Ok.','info')
 CALL fl_mostrar_mensaje('Proceso realizado Ok.','info')
 LET run_prog = 'fglrun '
 IF vg_gui = 0 THEN
@@ -1797,7 +1776,6 @@ WHILE (intentar)
 			FOR UPDATE
 	WHENEVER ERROR STOP
 	IF STATUS < 0 THEN
-		--CALL fgl_winquestion(vg_producto,'Registro está siendo modificado por otro usuario, desea intentarlo nuevamente','No','Yes|No','question',1)
 		CALL fl_hacer_pregunta('Registro está siendo modificado por otro usuario, desea intentarlo nuevamente','No')
 			RETURNING resp
 		IF resp = 'No' THEN
@@ -1958,14 +1936,12 @@ IF valor > 0 THEN
 	IF r_z00.z00_bloq_vencido = 'S' THEN
 		CALL fl_mostrar_mensaje(mens CLIPPED || ' activo el bloqueo de proformar y facturar a clientes con saldos vencidos. El cliente debera cancelar sus deudas.',icono)
 		LET flag_error = 1
-		--IF vg_codloc = 3 OR vg_codloc = 4 OR vg_codloc = 5 THEN
 			CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc,
 							codcli)
 				RETURNING r_z02.*
 			IF r_z02.z02_credit_dias > 0 THEN
 				LET flag_error = 0
 			END IF
-		--END IF
 	END IF
 END IF
 RETURN flag_error
@@ -1995,7 +1971,7 @@ DEFINE query		CHAR(800)
 CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc, rm_r23.r23_codcli)
 	RETURNING r_z02.*
 IF r_z02.z02_credit_dias < 1 THEN
-	CALL fl_mostrar_mensaje('NO SE PUEDE PROCESAR ESTE CREDITO PORQUE EL CLIENTE NO TIENE DIAS DE CREDITO.', 'exclamation')
+	CALL fl_mostrar_mensaje('No se puede procesar este crédito porque el cliente no tiene días de crédito.', 'exclamation')
 	RETURN 0
 END IF
 IF NOT genera_tabla_trabajo_detalle() THEN
@@ -2245,10 +2221,6 @@ DROP TABLE tmp_z21
 DELETE FROM tmp_fav WHERE saldo_mov = 0
 SELECT COUNT(*) INTO num_fav FROM tmp_fav
 ERROR ' '
-IF num_fav = 0 THEN
-	--DROP TABLE tmp_fav
-	--RETURN
-END IF
 SELECT z21_localidad, z21_codcli, z01_nomcli, NVL(SUM(saldo_mov), 0) saldo_fav
 	FROM tmp_fav
 	GROUP BY 1, 2, 3

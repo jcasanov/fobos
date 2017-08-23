@@ -2361,10 +2361,6 @@ END IF
 				  AND g37_localidad  = vg_codloc
 				  AND g37_tipo_doc   = "NC"
 		  		  AND g37_cont_cred  = "N"
-				{--
-			  	  AND g37_fecha_emi <= DATE(TODAY)
-			  	  AND g37_fecha_exp >= DATE(TODAY)
-				--}
 				  AND g37_secuencia IN
 					(SELECT MAX(g37_secuencia)
 					FROM gent037
@@ -2477,7 +2473,6 @@ IF rm_r19.r19_cod_tran = vm_cod_anu THEN
 END IF
 LET num_row = 0
 IF inserta_nc THEN
-	--IF TODAY = DATE(rm_fact.r19_fecing) AND
 	CALL fl_actualiza_control_secuencias(vg_codcia, vg_codloc, 'CO', 'AA',
 						r_nc.z21_tipo_doc)
 		RETURNING num_nc

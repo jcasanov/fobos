@@ -18,7 +18,6 @@ DEFINE vm_r_rows ARRAY[1000] OF INTEGER -- ARREGLO DE ROWID DE FILAS LEIDAS
 DEFINE vm_row_current   SMALLINT        -- FILA CORRIENTE DEL ARREGLO
 DEFINE vm_num_rows      SMALLINT        -- CANTIDAD DE FILAS LEIDAS
 DEFINE vm_max_rows      SMALLINT        -- MAXIMO DE FILAS LEIDAS
-DEFINE vm_demonios      VARCHAR(12)
 DEFINE vm_flag_mant     CHAR(1)
 
 MAIN
@@ -26,13 +25,12 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
+CALL startlog('../logs/repp100.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN
-     	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.','stop')
 	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
-     	EXIT PROGRAM
+    EXIT PROGRAM
 END IF
 LET vg_base     = arg_val(1)
 LET vg_modulo   = arg_val(2)
@@ -444,7 +442,6 @@ INPUT BY NAME rm_pcia.r00_compania,    rm_pcia.r00_cia_taller,
 			CALL fl_lee_compania(rm_pcia.r00_compania)
 				RETURNING rm_cia.*
 			IF rm_cia.g01_compania IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'No existe la compañía ','exclamation')
 				CALL fl_mostrar_mensaje('No existe la compañía.','exclamation')
 				NEXT FIELD r00_compania
 			END IF
@@ -452,7 +449,6 @@ INPUT BY NAME rm_pcia.r00_compania,    rm_pcia.r00_cia_taller,
 			CALL fl_lee_compania_repuestos(rm_pcia.r00_compania)
 				RETURNING rm_pcia2.*
 			IF rm_pcia2.r00_compania IS NOT NULL THEN
-				--CALL fgl_winmessage(vg_producto,'Ya existe configuración para esta compañía ','exclamation')
 				CALL fl_mostrar_mensaje('Ya existe configuración para esta compañía.','exclamation')
 				NEXT FIELD r00_compania
 			END IF
@@ -465,7 +461,6 @@ INPUT BY NAME rm_pcia.r00_compania,    rm_pcia.r00_cia_taller,
 			CALL fl_lee_compania(rm_pcia.r00_cia_taller)
 				RETURNING rm_cia.*
 			IF rm_cia.g01_compania IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'No existe la compañía ','exclamation')
 				CALL fl_mostrar_mensaje('No existe la compañía.','exclamation')
 				NEXT FIELD r00_cia_taller
 			END IF
@@ -473,29 +468,15 @@ INPUT BY NAME rm_pcia.r00_compania,    rm_pcia.r00_cia_taller,
 		ELSE
 			CLEAR nom_cia_tal
 		END IF
-	{--
-	BEFORE FIELD r00_codcli_tal
-		IF rm_pcia.r00_compania = rm_pcia.r00_cia_taller THEN
-			NEXT FIELD NEXT
-		END IF
-	--}
 	AFTER FIELD r00_codcli_tal
 		IF rm_pcia.r00_codcli_tal IS NOT NULL THEN
 			CALL fl_lee_cliente_general(rm_pcia.r00_codcli_tal)
 				RETURNING r_z01.*
 			IF r_z01.z01_codcli IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'El cliente no existe en la Compañía.','exclamation')
 				CALL fl_mostrar_mensaje('El cliente no existe en la Compañía.','exclamation')
 				NEXT FIELD r00_codcli_tal
 			END IF
 			DISPLAY r_z01.z01_nomcli TO nom_cli_tal
-		{--
-			IF rm_pcia.r00_compania = rm_pcia.r00_cia_taller THEN
-				INITIALIZE rm_pcia.r00_codcli_tal TO NULL
-				DISPLAY BY NAME rm_pcia.r00_codcli_tal
-				CLEAR nom_cli_tal
-			END IF
-		--}
 		ELSE
 			CLEAR nom_cli_tal
 		END IF
@@ -506,12 +487,10 @@ INPUT BY NAME rm_pcia.r00_compania,    rm_pcia.r00_cia_taller,
 			                       rm_pcia.r00_bodega_fact)
                        		RETURNING rm_bod.*
                         IF rm_bod.r02_codigo IS NULL THEN
-                                --CALL fgl_winmessage (vg_producto,'La Bodega no existe en la compañía ','exclamation')
 				CALL fl_mostrar_mensaje('La Bodega no existe en la compañía.','exclamation')
                                 NEXT FIELD r00_bodega_fact
                         END IF
 			IF rm_bod.r02_factura = 'N' THEN
-                                --CALL fgl_winmessage (vg_producto,'La Bodega no factura ','exclamation')
 				CALL fl_mostrar_mensaje('La Bodega no factura.','exclamation')
 				NEXT FIELD r00_pcia.r00_bodega_fact
 			END IF
@@ -545,7 +524,6 @@ INPUT BY NAME rm_pcia.r00_compania,    rm_pcia.r00_cia_taller,
 				DISPLAY BY NAME rm_pcia.r00_numlin_fact
 			ELSE 
 				IF rm_pcia.r00_numlin_fact > 60 THEN
-					--CALL FGL_WINMESSAGE(vg_producto,'No puede ingresar un número de líneas superior a 60 cuando es una sola página. ','exclamation')
 					CALL fl_mostrar_mensaje('No puede ingresar un número de líneas superior a 60 cuando es una sola página.','exclamation')
 					NEXT FIELD r00_numlin_fact
 				END IF
@@ -558,7 +536,6 @@ INPUT BY NAME rm_pcia.r00_compania,    rm_pcia.r00_cia_taller,
 			DISPLAY BY NAME rm_pcia.r00_numlin_fact
 		ELSE
 			IF rm_pcia.r00_numlin_fact > 60 THEN
-				--CALL FGL_WINMESSAGE(vg_producto,'No puede ingresar un número de líneas superior a 60 cuando es una sola página. ','exclamation')
 				CALL fl_mostrar_mensaje('No puede ingresar un número de líneas superior a 60 cuando es una sola página.','exclamation')
 				NEXT FIELD r00_numlin_fact
 			END IF
@@ -568,19 +545,15 @@ INPUT BY NAME rm_pcia.r00_compania,    rm_pcia.r00_cia_taller,
 		IF rm_pcia.r00_compania <> rm_pcia.r00_cia_taller AND
 		   rm_pcia.r00_codcli_tal IS NULL 
 		   THEN
-			--CALL fgl_winmessage(vg_producto,'Digite el cliente de la Compañía Taller. ','exclamation')
 			CALL fl_mostrar_mensaje('Digite el consumidor final de la Compañía.','exclamation')
 			NEXT FIELD r00_codcli_tal
 		END IF
-	{--
 		IF rm_pcia.r00_compania = rm_pcia.r00_cia_taller AND
 		   rm_pcia.r00_codcli_tal IS NOT NULL 
 		   THEN
-			--CALL fgl_winmessage(vg_producto,'No debe digitar cliente si la Compañía Taller es la misma de Repuesto. ','exclamation')
 			CALL fl_mostrar_mensaje('No debe digitar cliente si la Compañía Taller es la misma de Inventario. ','exclamation')
 			NEXT FIELD r00_codcli_tal
 		END IF
-	--}
         	 IF NOT FIELD_TOUCHED(r00_compania,    r00_cia_taller,
 			          r00_bodega_fact, r00_dias_prof,
 				  r00_expi_prof,   r00_dias_dev, 
@@ -642,40 +615,3 @@ DISPLAY "" AT 1,1
 DISPLAY row_current, " de ", num_rows AT 1, 69
                                                                                 
 END FUNCTION
-
-                                                                                
-                                                                                
-FUNCTION no_validar_parametros()
-                                                                                
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-        CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'sto
-p')
-        EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-        CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'st
-op')
-        EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-     CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 			 'stop')
-     EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-        LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-        CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc,
-			    'stop')
-        EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-      CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 			  'stop')
-      EXIT PROGRAM
-END IF
-                                                                                
-END FUNCTION
-

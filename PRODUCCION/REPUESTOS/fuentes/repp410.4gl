@@ -207,7 +207,7 @@ FOREACH q_rept020 INTO r_r20.*
 	LET r_rep.descuento		= r_r20.r20_descuento
 	LET r_rep.valor_tot		= (r_r20.r20_cant_ven * r_r20.r20_precio) -
 							   r_r20.r20_val_descto
-	--QUITAR ESTA HUEVADA, PARA OTRA INSTALACION
+	--XXX QUITAR ESTO PARA OTRA INSTALACION
 	IF vg_codloc <> 3 AND vg_codloc <> 4 AND vg_codloc <> 5 THEN
 		IF vg_codcia = 1 THEN
 			OUTPUT TO REPORT report_factura(r_rep.*)
@@ -215,11 +215,11 @@ FOREACH q_rept020 INTO r_r20.*
 			OUTPUT TO REPORT report_factura3(r_rep.*)
 		END IF
 	ELSE
-		--QUITAR ESTA HUEVADA, PARA OTRA INSTALACION
+		--XXX QUITAR ESTO PARA OTRA INSTALACION
 		OUTPUT TO REPORT report_factura2(r_rep.*)
 	END IF
 END FOREACH
---QUITAR ESTA HUEVADA, PARA OTRA INSTALACION
+--XXX QUITAR ESTO PARA OTRA INSTALACION
 IF vg_codloc <> 3 AND vg_codloc <> 4 AND vg_codloc <> 5 THEN
 	IF vg_codcia = 1 THEN
 		FINISH REPORT report_factura
@@ -230,7 +230,7 @@ IF vg_codloc <> 3 AND vg_codloc <> 4 AND vg_codloc <> 5 THEN
 		FINISH REPORT report_factura3
 	END IF
 ELSE
-	--QUITAR ESTA HUEVADA, PARA OTRA INSTALACION
+	--XXX QUITAR ESTO PARA OTRA INSTALACION
 	FINISH REPORT report_factura2
 END IF
 
@@ -381,15 +381,7 @@ PAGE HEADER
 	SKIP 4 LINES
 	print ASCII escape;
 	print ASCII act_comp
-	{--
-	PRINT COLUMN 108, ASCII escape, ASCII act_12cpi, ASCII escape,
-			ASCII act_dob1, ASCII act_dob2,
-			ASCII escape, ASCII act_neg,
-			"No. ", factura,
-			ASCII escape, ASCII act_dob1, ASCII des_dob,
-			ASCII escape, ASCII act_12cpi, ASCII escape, ASCII des_neg,
-			ASCII escape, ASCII act_comp
-	--}
+
 	PRINT COLUMN 010, r_z02.z02_referencia CLIPPED,
 		  COLUMN 077, ASCII escape, ASCII act_10cpi,
 					ASCII escape, ASCII act_neg,
@@ -403,7 +395,6 @@ PAGE HEADER
 	      COLUMN 068, r_g31.g31_nombre CLIPPED
 	PRINT COLUMN 013, rm_r19.r19_cedruc
 	PRINT COLUMN 093, r_r21.r21_forma_pago CLIPPED
---	      COLUMN 123, (fecha_vcto - DATE(rm_r19.r19_fecing) + 1) USING "##0"
 	SKIP 2 LINES
 
 ON EVERY ROW
@@ -439,7 +430,7 @@ END REPORT
 
 
 
-REPORT report_factura2(r_rep)	--QUITAR ESTA HUEVADA, PARA OTRA INSTALACION
+REPORT report_factura2(r_rep)	--XXX QUITAR ESTO PARA OTRA INSTALACION
 DEFINE r_rep		RECORD
 				r20_item	LIKE rept020.r20_item,
 				desc_clase	LIKE rept072.r72_desc_clase,
@@ -575,7 +566,6 @@ PAGE HEADER
 	SKIP 1 LINES
 	print ASCII escape;
 	print ASCII act_comp
-	--IF vg_codloc = 3 THEN
 	PRINT COLUMN 052, ASCII escape, ASCII act_12cpi, ASCII escape,
 			ASCII act_dob1, ASCII act_dob2,
 			ASCII escape, ASCII act_neg,
@@ -585,20 +575,10 @@ PAGE HEADER
 		ASCII escape, ASCII act_dob1, ASCII des_dob,
 		ASCII escape, ASCII act_12cpi, ASCII escape, ASCII des_neg,
 		ASCII escape, ASCII act_comp
-	--20/05/2014
-	--PRINT COLUMN 27,  "ALMACEN : ", rm_loc.g02_nombre,
 	PRINT COLUMN 060, ASCII escape, ASCII act_10cpi,
 		ASCII escape, ASCII act_neg,
 		"FECHA FACTURA : ", DATE(rm_r19.r19_fecing) USING "dd-mm-yyyy",
 		ASCII escape, ASCII des_neg
-	{--
-	ELSE
-	PRINT COLUMN 27,  "ALMACEN : ", rm_loc.g02_nombre,
-	      COLUMN 94,  "No. ", rm_r19.r19_cod_tran, " ", factura
-	PRINT COLUMN 94,  "FECHA FACTURA : ", DATE(rm_r19.r19_fecing) 
-			 			USING "dd-mm-yyyy"
-	END IF
-	--}
 	SKIP 1 LINES
 	print ASCII escape;
 	print ASCII act_comp;
@@ -617,7 +597,6 @@ PAGE HEADER
 	      COLUMN 069, "RETENCION  : ", fl_justifica_titulo('I', v_r, 15)
 	PRINT COLUMN 001, "VENDEDOR(A)     : ", r_r01.r01_nombres,
 	      COLUMN 069, "CREDITO    : ", fl_justifica_titulo('I', v_c, 15)
-	--SKIP 2 LINES
 	SKIP 1 LINES
 	PRINT "------------------------------------------------------------------------------------------------------------------------------------"
 	PRINT COLUMN 002, "CODIGO",
@@ -630,7 +609,6 @@ PAGE HEADER
 	      COLUMN 121, "VALOR TOTAL"
 	PRINT "------------------------------------------------------------------------------------------------------------------------------------"
 	SKIP 1 LINES
-	--SKIP 1 LINES
 
 ON EVERY ROW
 	NEED 2 LINES
@@ -645,14 +623,9 @@ ON EVERY ROW
 	      COLUMN 118, r_rep.valor_tot	USING '###,###,##&.##'
 	
 PAGE TRAILER
-	--NEED 4 LINES
-	--LET label_letras = fl_retorna_letras(rm_r19.r19_moneda, valor_pag)
 	CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc, rm_r19.r19_codcli)
 		RETURNING r_z02.*
 	SKIP 2 LINES
-	--SKIP 3 LINES
-	--PRINT COLUMN 02, "SOMOS CONTRIBUYENTES ESPECIALES, RESOLUCION No. 5368",
-	--PRINT COLUMN 60,  "-------------------------",
 	PRINT COLUMN 002, ASCII escape, ASCII act_12cpi, ASCII escape,
 			ASCII act_dob1, ASCII act_dob2,
 			ASCII escape, ASCII act_neg,
@@ -662,14 +635,6 @@ PAGE TRAILER
 		ASCII escape, ASCII act_comp,
 	      COLUMN 085, "TOTAL BRUTO",
 	      COLUMN 105, rm_r19.r19_tot_bruto	USING "#,###,###,##&.##"
-	{--
-	IF vg_codloc = 6 OR vg_codloc = 7 THEN
-		PRINT COLUMN 008, "www.herramientasyanclajes.com";
-	ELSE
-		PRINT COLUMN 008, "w w w . a c e r o c o m e r c i a l . c o m";
-	END IF
-	PRINT COLUMN 60,  " RECIBI FACTURA ORIGINAL ",
-	--}
 	PRINT COLUMN 002, "Estimado cliente: Su comprobante electronico ",
 			"usted lo recibira en su cuenta de correo:",
 	      COLUMN 096, "DESCUENTOS",
@@ -683,11 +648,6 @@ PAGE TRAILER
 			"comprobantes electronicos a traves del portal",
 	      COLUMN 096, "I. V. A. (", rm_r19.r19_porc_impto USING "#&", ") %",
 	      COLUMN 118, impuesto		USING "###,###,##&.##"
-	{--
-	IF mensaje_fa_ant IS NOT NULL THEN
-		PRINT COLUMN 006, mensaje_fa_ant CLIPPED;
-	END IF
-	--}
 	PRINT COLUMN 002, "web ",
 			ASCII escape, ASCII act_neg,
 			"https://innobeefactura.com.",
@@ -695,7 +655,6 @@ PAGE TRAILER
 			" Sus datos para el primer acceso son Usuario: ",
 	      COLUMN 100, "TRANSPORTE",
 	      COLUMN 122, rm_r19.r19_flete	USING "###,###,##&.##"
-	--PRINT COLUMN 02,  "SON: ", label_letras[1,87],
 	PRINT COLUMN 002, ASCII escape, ASCII act_neg,
 			rm_r19.r19_cedruc CLIPPED, "@innobeefactura.com",
 			ASCII escape, ASCII des_neg,
@@ -857,13 +816,9 @@ PAGE HEADER
 			factura, ASCII escape, ASCII des_neg,
 		      COLUMN 103, "FECHA FACTURA : ", DATE(rm_r19.r19_fecing) 
 		 			USING "dd-mm-yyyy"
-	--20/05/2014
-		--PRINT COLUMN 27,  "ALMACEN : ", rm_loc.g02_nombre CLIPPED
 		PRINT " "
 		SKIP 1 LINES
 	ELSE
-	--20/05/2014
-		--PRINT COLUMN 27,  "ALMACEN : ", rm_loc.g02_nombre CLIPPED,
 		PRINT COLUMN 57, ASCII escape, ASCII act_neg,
 			"No. ", rm_r19.r19_cod_tran, " ",
 			rm_loc.g02_serie_cia USING "&&&", "-",
@@ -892,7 +847,6 @@ PAGE HEADER
 	--#IF vg_codloc = 6 THEN
 		--#SKIP 1 LINES
 	--#END IF
-	--PRINT "------------------------------------------------------------------------------------------------------------------------------------"
 	PRINT COLUMN 02,  "CODIGO",
 	      COLUMN 11,  "DESCRIPCION",
 	      COLUMN 56,  "MEDIDA",
@@ -901,8 +855,6 @@ PAGE HEADER
 	      COLUMN 96,  "PRECIO VENTA",
 	      COLUMN 110, "%DSCTO",
 	      COLUMN 121, "VALOR TOTAL"
-	--PRINT "------------------------------------------------------------------------------------------------------------------------------------"
-	--SKIP 1 LINES
 
 ON EVERY ROW
 	NEED 2 LINES
@@ -917,11 +869,8 @@ ON EVERY ROW
 	      COLUMN 118, r_rep.valor_tot	USING '###,###,##&.##'
 	
 PAGE TRAILER
-	--NEED 4 LINES
 	LET label_letras = fl_retorna_letras(rm_r19.r19_moneda, valor_pag)
 	SKIP 1 LINES
-	--PRINT COLUMN 02,  "SOMOS CONTRIBUYENTES ESPECIALES D.G.R. # 39",
-	--PRINT COLUMN 02, "SOMOS CONTRIBUYENTES ESPECIALES, RESOLUCION No. 5368",
 	PRINT COLUMN 60,  "-------------------------",
 	      COLUMN 95,  "TOTAL BRUTO",
 	      COLUMN 116, rm_r19.r19_tot_bruto	USING "#,###,###,##&.##"
@@ -945,16 +894,10 @@ PAGE TRAILER
 			"usted recibira un email de notificacion;",
 	      COLUMN 95,  "I. V. A. (", rm_r19.r19_porc_impto USING "#&", ") %",
 	      COLUMN 118, impuesto		USING "###,###,##&.##"
-	{--
-	IF mensaje_fa_ant IS NOT NULL THEN
-		PRINT COLUMN 006, mensaje_fa_ant CLIPPED;
-	END IF
-	--}
 	PRINT COLUMN 002, "tambien podra consultar y descargar sus ",
 			"comprobantes electronicos desde cualquier lugar",
 	      COLUMN 95,  "TRANSPORTE",
 	      COLUMN 118, rm_r19.r19_flete	USING "###,###,##&.##"
-	--PRINT COLUMN 02,  "SON: ", label_letras[1,87],
 	PRINT COLUMN 002, "(24/7), a traves de nuestro portal web ",
 			ASCII escape, ASCII act_neg,
 			"https://innobeefactura.com.",
@@ -1056,8 +999,6 @@ PAGE HEADER
 	SKIP 2 LINES
 	print ASCII escape;
 	print ASCII act_comp
-	--20/05/2014
-	--PRINT COLUMN 001, "ALMACEN: ", rm_loc.g02_nombre CLIPPED,
 	PRINT COLUMN 048, "DETALLE DIVIDENDOS A PAGAR POR FACTURA",
 	      COLUMN 112, ASCII escape, ASCII act_neg,
 			"No. FA ", rm_loc.g02_serie_cia USING "&&&", "-",

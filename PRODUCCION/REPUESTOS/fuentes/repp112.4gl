@@ -14,21 +14,22 @@ DEFINE vm_r_rows	ARRAY[1000] OF INTEGER
 DEFINE vm_row_current   SMALLINT        -- FILA CORRIENTE DEL ARREGLO
 DEFINE vm_num_rows      SMALLINT        -- CANTIDAD DE FILAS LEIDAS
 DEFINE vm_max_rows      SMALLINT        -- MAXIMO DE FILAS LEIDAS
-DEFINE vm_demonios      VARCHAR(12)
 DEFINE vm_flag_mant     CHAR(1)
+
+
+
 
 MAIN
                                                                                 
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
+CALL startlog('../logs/repp112.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN
-     	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.','stop')
 	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
-     	EXIT PROGRAM
+   	EXIT PROGRAM
 END IF
 LET vg_base     = arg_val(1)
 LET vg_modulo   = arg_val(2)

@@ -120,8 +120,8 @@ IF vg_gui = 0 THEN
 END IF
 INITIALIZE vm_bodega_ori, vm_bodega_des, vm_vend_bod, tit_bodega_ori,
 		tit_bodega_des, tit_vend_bod, referencia, tiene_cru TO NULL
-LET vm_fecha_ini = MDY(MONTH(TODAY), 01, YEAR(TODAY))
-LET vm_fecha_fin = TODAY
+LET vm_fecha_ini = MDY(MONTH(vg_fecha), 01, YEAR(vg_fecha))
+LET vm_fecha_fin = vg_fecha
 IF rm_r01.r01_tipo <> 'J' AND rm_r01.r01_tipo <> 'G' THEN
 	LET vm_vend_bod  = rm_r01.r01_codigo
 	LET tit_vend_bod = rm_r01.r01_nombres
@@ -207,7 +207,7 @@ INPUT BY NAME vm_fecha_ini, vm_fecha_fin, vm_bodega_ori, vm_bodega_des,
 			LET fec_ini = vm_fecha_ini
 			DISPLAY BY NAME vm_fecha_ini
 		END IF
-		IF vm_fecha_ini > TODAY THEN
+		IF vm_fecha_ini > vg_fecha THEN
 			CALL fl_mostrar_mensaje('La Fecha Inicial no puede ser mayor a la fecha de hoy.', 'exclamation')
 			NEXT FIELD vm_fecha_ini
 		END IF
@@ -216,7 +216,7 @@ INPUT BY NAME vm_fecha_ini, vm_fecha_fin, vm_bodega_ori, vm_bodega_des,
 			LET fec_fin = vm_fecha_fin
 			DISPLAY BY NAME vm_fecha_fin
 		END IF
-		IF vm_fecha_fin > TODAY THEN
+		IF vm_fecha_fin > vg_fecha THEN
 			CALL fl_mostrar_mensaje('La Fecha Final no puede ser mayor a la fecha de hoy.', 'exclamation')
 			NEXT FIELD vm_fecha_fin
 		END IF
@@ -562,7 +562,7 @@ PAGE HEADER
 		PRINT 1 SPACES
 	END IF
 	SKIP 1 LINES
-	PRINT COLUMN 001, "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 001, "FECHA IMPRESION: ", vg_fecha USING "dd-mm-yyyy",
  		1 SPACES, TIME,
 	      COLUMN 062, usuario
 	PRINT "--------------------------------------------------------------------------------"

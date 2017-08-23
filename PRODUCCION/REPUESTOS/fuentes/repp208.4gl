@@ -29,11 +29,10 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
+CALL startlog('../logs/repp208.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN          -- Validar # parámetros correcto
-	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.','stop')
 	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
@@ -199,7 +198,6 @@ SELECT ROWID INTO vm_rows[vm_num_rows]
 	  AND r28_localidad = vg_codloc
 	  AND r28_numliq    = rm_r28.r28_numliq
 IF STATUS = NOTFOUND THEN
-	--CALL fgl_winmessage(vg_producto,'Número de liquidación no existe.','exclamation')
 	CALL fl_mostrar_mensaje('Número de liquidación no existe.','exclamation')
 	LET vm_num_rows = vm_num_rows - 1
 	IF vm_num_rows = 0 THEN
@@ -324,8 +322,6 @@ END FUNCTION
 FUNCTION muestra_contadores()
 DEFINE nrow		SMALLINT
 
---DISPLAY '   ' TO n_estado
---CLEAR n_estado
 LET nrow = 1
 IF vg_gui = 0 THEN
 	LET nrow = 3
@@ -387,7 +383,6 @@ DEFINE intentar		SMALLINT
 DEFINE resp		CHAR(6)
 
 LET intentar = 1
---CALL fgl_winquestion(vg_producto,'Registro bloqueado por otro usuario, desea intentarlo nuevamente','No','Yes|No','question',1)
 	CALL fl_hacer_pregunta('Registro bloqueado por otro usuario, desea intentarlo nuevamente','No')
 	RETURNING resp
 IF resp = 'No' THEN
@@ -435,12 +430,10 @@ IF vm_num_rows = 0 THEN
 END IF
 CALL lee_muestra_registro(vm_rows[vm_row_current])
 IF rm_r28.r28_estado = 'P' THEN
-	--CALL fgl_winmessage(vg_producto,'La liquidación ya fue cerrada.','exclamation')
 	CALL fl_mostrar_mensaje('La liquidación ya fue cerrada.','exclamation')
 	RETURN
 END IF
 IF rm_r28.r28_estado <> 'A' THEN
-	--CALL fgl_winmessage(vg_producto,'Esta liquidación no está activa.', 'exclamation')
 	CALL fl_mostrar_mensaje('Esta liquidación no está activa.', 'exclamation')
 	RETURN
 END IF
@@ -448,7 +441,6 @@ IF rm_r28.r28_tot_fob_mb <= 0 THEN
 	CALL fl_mostrar_mensaje('La liquidación no tiene total fob.','exclamation')
 	RETURN
 END IF
---SELECT ROUND(SUM(r17_cantrec * r17_fob),2) INTO tot_fob_rec
 SELECT SUM(r17_cantrec * r17_fob) INTO tot_fob_rec
 	FROM rept029, rept017
 	WHERE r29_compania  = rm_r28.r28_compania  AND 
@@ -567,9 +559,6 @@ DEFINE rst		RECORD LIKE rept011.*
 DEFINE r_prov		RECORD LIKE cxpt001.*
 DEFINE r_det		RECORD LIKE rept020.*
 DEFINE r_art, r_aant	RECORD LIKE rept010.*
---DEFINE item         	LIKE rept010.r10_codigo
---DEFINE cantped		LIKE rept017.r17_cantped
---DEFINE cantrec		LIKE rept017.r17_cantrec
 DEFINE costo_ing	DECIMAL(22,10)
 DEFINE costo_nue	DECIMAL(22,10)
 DEFINE fob		LIKE rept017.r17_fob
@@ -652,7 +641,6 @@ ELSE
 	IF r_g14.g14_serial IS NULL THEN
 		ROLLBACK WORK
 		LET mensaje = 'No hay paridad de conversión de: ', rm_r28.r28_moneda, ' a ', rg_gen.g00_moneda_base
-		--CALL fgl_winmessage(vg_producto, mensaje, 'stop')
 		CALL fl_mostrar_mensaje(mensaje, 'stop')
 		EXIT PROGRAM
 	END IF
@@ -667,7 +655,7 @@ LET rm_ctrn.r19_tot_neto 	= 0
 LET rm_ctrn.r19_flete 		= 0
 LET rm_ctrn.r19_numliq 		= rm_r28.r28_numliq
 LET rm_ctrn.r19_usuario 	= vg_usuario
-LET rm_ctrn.r19_fecing 		= CURRENT
+LET rm_ctrn.r19_fecing 		= fl_current()
 INSERT INTO rept019 VALUES (rm_ctrn.*)
 SET LOCK MODE TO WAIT 5
 LET i = 0
@@ -686,10 +674,8 @@ WHILE TRUE
 		CONTINUE WHILE
 	END IF
 	LET costo_ing = r_r17.r17_costuni_ing
-	--LET costo_ing = fl_retorna_precision_valor(rm_r28.r28_moneda, costo_ing)
 	CALL fl_obtiene_costo_item_imp(vg_codcia, rm_r28.r28_moneda,
 					r_r17.r17_item,
-	--CALL fl_obtiene_costo_item(vg_codcia, rm_r28.r28_moneda, r_r17.r17_item,
 		r_r17.r17_cantrec, costo_ing)
 		RETURNING costo_nue
 	DECLARE q_ust CURSOR FOR SELECT * FROM rept011
@@ -704,14 +690,14 @@ WHILE TRUE
 		      r11_item      = r_r17.r17_item   -- Stock anterior todas las bodegas
 	UPDATE rept011 SET r11_stock_act  = r11_stock_act + r_r17.r17_cantrec,
 			   r11_ing_dia    = r11_ing_dia   + r_r17.r17_cantrec,
-			   r11_fec_ulting = TODAY,
+			   r11_fec_ulting = vg_fecha,
 			   r11_tip_ulting = rm_ctrn.r19_cod_tran,
 			   r11_num_ulting = rm_ctrn.r19_num_tran
 		WHERE CURRENT OF q_ust
 	CALL fl_lee_item(vg_codcia, r_r17.r17_item) RETURNING r_art.*
 	LET r_aant.* = r_art.*
 	LET r_art.r10_precio_ant  = r_art.r10_precio_mb
-	LET r_art.r10_fec_camprec = CURRENT
+	LET r_art.r10_fec_camprec = fl_current()
 	LET r_art.r10_costo_mb    = costo_nue
 	LET r_art.r10_costult_mb  = costo_ing
 	LET r_art.r10_cantped     = r_art.r10_cantped - r_r17.r17_cantrec
@@ -720,10 +706,6 @@ WHILE TRUE
 	END IF
 	UPDATE rept010 SET r10_costo_mb		= r_art.r10_costo_mb,
 	                   r10_costult_mb	= r_art.r10_costult_mb
-	                   --r10_precio_mb	= r_art.r10_precio_mb,
-	                   --r10_precio_ant	= r_art.r10_precio_ant,
-	                   --r10_fec_camprec	= r_art.r10_fec_camprec,
-	                   --r10_cantped  	= r_art.r10_cantped
 		WHERE r10_compania = vg_codcia AND 
 		      r10_codigo   = r_art.r10_codigo
 	INITIALIZE r_det.* TO NULL
@@ -760,7 +742,6 @@ WHILE TRUE
 				         (costo_ing * r_r17.r17_cantrec)
 END WHILE
 IF i = 0 THEN 
-	--CALL fgl_winmessage(vg_producto,'No se procesó ningún item, verifique pedidos asignados en la liquidación.','stop')
 	CALL fl_mostrar_mensaje('No se procesó ningún item, verifique pedidos asignados en la liquidación.','stop')
 	EXIT PROGRAM
 END IF
@@ -865,7 +846,7 @@ LET r_r19.r19_tot_dscto  	= 0.0
 LET r_r19.r19_tot_neto		= r_r19.r19_tot_costo
 LET r_r19.r19_flete      	= 0.0
 LET r_r19.r19_usuario      	= vg_usuario
-LET r_r19.r19_fecing      	= CURRENT
+LET r_r19.r19_fecing      	= fl_current()
 INSERT INTO rept019 VALUES (r_r19.*)
 INITIALIZE r_r20.* TO NULL
 LET r_r20.r20_compania		= vg_codcia
@@ -939,7 +920,7 @@ FOREACH q_trans_d INTO r_dtrn.*
 		LET r_r11.r11_stock_act = 0
 	END IF
 	LET r_r20.r20_stock_bd   = r_r11.r11_stock_act 
-	LET r_r20.r20_fecing	 = CURRENT
+	LET r_r20.r20_fecing	 = fl_current()
 	INSERT INTO rept020 VALUES(r_r20.*)
 	UPDATE rept011
 		SET r11_stock_act = r11_stock_act - r_dtrn.r20_cant_ven,

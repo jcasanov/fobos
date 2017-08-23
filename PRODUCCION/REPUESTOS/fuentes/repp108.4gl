@@ -146,7 +146,6 @@ MENU 'OPCIONES'
 		IF vm_num_rows = 1 THEN
 			SHOW OPTION 'Modificar'
 			SHOW OPTION 'Bloquear/Activar'
-			--IF vg_usuario = 'PETEWETT' THEN
 			IF tiene_acceso_clonador() THEN
 				SHOW OPTION 'Clonar Item'
 			END IF
@@ -186,7 +185,6 @@ MENU 'OPCIONES'
 			SHOW OPTION 'Pedidos'
 			SHOW OPTION 'Ubicación'
 			SHOW OPTION 'Usr. Cambio Prec'
-			--IF vg_usuario = 'PETEWETT' THEN
 			IF tiene_acceso_clonador() THEN
 				SHOW OPTION 'Clonar Item'
 			END IF
@@ -210,7 +208,6 @@ MENU 'OPCIONES'
 			SHOW OPTION 'Pedidos'
 			SHOW OPTION 'Ubicación'
 			SHOW OPTION 'Usr. Cambio Prec'
-			--IF vg_usuario = 'PETEWETT' THEN
 			IF tiene_acceso_clonador() THEN
 				SHOW OPTION 'Clonar Item'
 			END IF

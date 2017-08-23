@@ -135,8 +135,8 @@ THEN
 	DISPLAY BY NAME rm_par.r19_vendedor, rm_par.nom_vend
 END IF
 INITIALIZE rm_par.* TO NULL
-LET rm_par.fecha_ini  = TODAY
-LET rm_par.fecha_fin  = TODAY
+LET rm_par.fecha_ini  = vg_fecha
+LET rm_par.fecha_fin  = vg_fecha
 LET rm_par.tipo_venta = 'T'
 LET vm_num_det        = 0
 WHILE TRUE
@@ -346,7 +346,7 @@ INPUT BY NAME rm_par.*
 		END IF
 	AFTER FIELD fecha_ini 
 		IF rm_par.fecha_ini IS NOT NULL THEN
-			IF rm_par.fecha_ini > TODAY THEN
+			IF rm_par.fecha_ini > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha de inicio no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD fecha_ini
 			END IF
@@ -356,7 +356,7 @@ INPUT BY NAME rm_par.*
 		END IF
 	AFTER FIELD fecha_fin 
 		IF rm_par.fecha_fin IS NOT NULL THEN
-			IF rm_par.fecha_fin > TODAY THEN
+			IF rm_par.fecha_fin > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha de término no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD fecha_fin
 			END IF
@@ -462,7 +462,6 @@ WHILE NOT salir
 			EXIT DISPLAY
 		BEFORE DISPLAY
 			CALL dialog.keysetlabel("ACCEPT","")
-			--CALL dialog.keysetlabel("CONTROL-V","Imprimir Comp.")
 		BEFORE ROW
 			LET i = arr_curr()
 			LET j = scr_line()

@@ -13,8 +13,6 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_demonios	VARCHAR(12)
-
 DEFINE vm_transaccion   LIKE rept019.r19_cod_tran
 DEFINE vm_dev_tran      LIKE rept019.r19_cod_tran
 
@@ -299,7 +297,7 @@ LET rm_r19.r19_cod_tran   = vm_transaccion
 LET rm_r19.r19_tipo_dev   = vm_dev_tran      
 LET rm_r19.r19_flete      = 0
 LET rm_r19.r19_usuario    = vg_usuario
-LET rm_r19.r19_fecing     = CURRENT
+LET rm_r19.r19_fecing     = fl_current()
 
 CALL lee_datos()
 IF INT_FLAG THEN
@@ -435,20 +433,17 @@ FREE  q_t23
 IF vm_transaccion = vm_dev_fact THEN
 	IF vg_codcia = rm_r00.r00_cia_taller THEN
 		ROLLBACK WORK
-		--CALL fgl_winmessage(vg_producto,'La transacción devuelta es una factura, y la compañía del Taller no debe ser la misma que Repuestos','stop')
 		CALL fl_mostrar_mensaje('La transacción devuelta es una factura, y la compañía del Taller no debe ser la misma que Inventario.','stop')
 		EXIT PROGRAM
 	END IF
 	IF rm_r00.r00_codcli_tal IS NULL THEN
 		ROLLBACK WORK
-		--CALL fgl_winmessage(vg_producto,'No está configurado el código de cliente para la compañía del Taller', 'stop')
 		CALL fl_mostrar_mensaje('No está configurado el código de cliente para la compañía del Taller', 'stop')
 		EXIT PROGRAM
 	END IF
 	IF rm_r19.r19_codcli IS NULL OR rm_r19.r19_codcli <> 
 		rm_r00.r00_codcli_tal IS NULL THEN
 		ROLLBACK WORK
-		--CALL fgl_winmessage(vg_producto,
 		CALL fl_mostrar_mensaje('Código cliente en la factura no es del Taller', 'stop')
 		EXIT PROGRAM
 	END IF
@@ -531,22 +526,19 @@ INPUT BY NAME rm_r19.r19_cod_tran, rm_r19.r19_tipo_dev, rm_r19.r19_num_dev,
 			rm_r19.r19_tipo_dev, rm_r19.r19_num_dev)
 			RETURNING r_r19.*
 		IF r_r19.r19_ord_trabajo IS NULL THEN
-			--CALL fgl_winmessage(vg_producto,'La transacción no está asociada a una orden de trabajo.','exclamation')
 			CALL fl_mostrar_mensaje('La transacción no está asociada a una orden de trabajo.','exclamation')
 			INITIALIZE r_r19.* TO NULL 
 			CALL muestra_etiquetas(r_r19.*)
 			NEXT FIELD r19_num_dev
 		END IF
-		IF TODAY > date(r_r19.r19_fecing) + rm_t00.t00_dias_dev THEN
-			--CALL fgl_winmessage(vg_producto,'Ha excedido el limite de tiempo permitido para realizar devoluciones.','exclamation')
+		IF vg_fecha > date(r_r19.r19_fecing) + rm_t00.t00_dias_dev THEN
 			CALL fl_mostrar_mensaje('Ha excedido el limite de tiempo permitido para realizar devoluciones.','exclamation')
 			INITIALIZE r_r19.* TO NULL 
 			CALL muestra_etiquetas(r_r19.*)
 			NEXT FIELD r19_num_dev
 		END IF
 		IF rm_t00.t00_dev_mes = 'S' THEN
-			IF month(r_r19.r19_fecing) <> month(TODAY) THEN
-				--CALL fgl_winmessage(vg_producto,'La devolución debe realizarse en el mismo mes en que se realizó la venta.','exclamation')
+			IF month(r_r19.r19_fecing) <> month(vg_fecha) THEN
 				CALL fl_mostrar_mensaje('La devolución debe realizarse en el mismo mes en que se realizó la venta.','exclamation')
 				INITIALIZE r_r19.* TO NULL 
 				CALL muestra_etiquetas(r_r19.*)
@@ -556,14 +548,12 @@ INPUT BY NAME rm_r19.r19_cod_tran, rm_r19.r19_tipo_dev, rm_r19.r19_num_dev,
 		CALL fl_lee_orden_trabajo(vg_codcia, vg_codloc, 
 			r_r19.r19_ord_trabajo) RETURNING r_t23.*
 		IF r_t23.t23_orden IS NULL THEN
-			--CALL fgl_winmessage(vg_producto,'Orden de trabajo no existe.','exclamation')
 			CALL fl_mostrar_mensaje('Orden de trabajo no existe.','exclamation')
 			INITIALIZE r_r19.* TO NULL
 			CALL muestra_etiquetas(r_r19.*)
 			NEXT FIELD r19_num_dev
 		END IF
 		IF r_t23.t23_estado <> 'A' THEN
-			--CALL fgl_winmessage(vg_producto,'Orden de trabajo no está activa.','exclamation')
 			CALL fl_mostrar_mensaje('Orden de trabajo no está activa.','exclamation')
 			INITIALIZE r_r19.* TO NULL
 			CALL muestra_etiquetas(r_r19.*)
@@ -621,7 +611,6 @@ FOR i = 1 TO vm_indice
 END FOR
 
 IF NOT flag THEN
-	--CALL fgl_winmessage(vg_producto,'Esta factura ya ha sido devuelta por completo.','exclamation')
 	CALL fl_mostrar_mensaje('Esta factura ya ha sido devuelta por completo.','exclamation')
 	LET INT_FLAG = 1
 	RETURN
@@ -662,7 +651,6 @@ WHILE NOT salir
 				NEXT FIELD r20_cant_dev
 			END IF
 			IF rm_venta[i].cant_dev > rm_venta[i].cant_ven THEN
-				--CALL fgl_winmessage(vg_producto,'La cantidad a devolver debe ser menor o igual a la cantidad despachada.','exclamation')
 				CALL fl_mostrar_mensaje('La cantidad a devolver debe ser menor o igual a la cantidad despachada.','exclamation')
 				NEXT FIELD r20_cant_dev
 			END IF
@@ -769,7 +757,6 @@ CONSTRUCT BY NAME expr_sql
 				LET mensaje = 'El código de la transacción '||
                                             'debe ser ' || vm_dev_req ||
 					    ' o ' || vm_dev_fact || '.'
-         			--CALL fgl_winmessage(vg_producto, mensaje, 'exclamation')
 				CALL fl_mostrar_mensaje(mensaje, 'exclamation')
                         	NEXT FIELD r19_cod_tran
 			END IF 
@@ -783,9 +770,8 @@ CONSTRUCT BY NAME expr_sql
 				LET mensaje = 'El código de la venta '||
                                             'debe ser ' || vm_requisicion ||
 					    ' o ' || vm_factura || '.'
-         			--CALL fgl_winmessage(vg_producto, mensaje, 'exclamation')
 				CALL fl_mostrar_mensaje(mensaje, 'exclamation')
-                        	NEXT FIELD r19_tipo_dev
+                NEXT FIELD r19_tipo_dev
 			END IF 
 		END IF
 	AFTER FIELD r19_vendedor
@@ -1130,7 +1116,6 @@ IF retVal <> -1 THEN
 	 EXIT WHILE
 END IF
 
---CALL fgl_winquestion(vg_producto,'La tabla de secuencias de transacciones está siendo accesada por otro usuario, espere unos segundos y vuelva a intentar','No','Yes|No|Cancel','question',1)
 CALL fl_hacer_pregunta('La tabla de secuencias de transacciones está siendo accesada por otro usuario, espere unos segundos y vuelva a intentar','No')
 	RETURNING resp 
 IF resp <> 'Yes' THEN
@@ -1258,7 +1243,6 @@ DEFINE intentar		SMALLINT
 DEFINE resp		CHAR(6)
 
 LET intentar = 1
---CALL fgl_winquestion(vg_producto,'Registro bloqueado por otro usuario, desea intentarlo nuevamente','No','Yes|No','question',1)
 CALL fl_hacer_pregunta('Registro bloqueado por otro usuario, desea intentarlo nuevamente','No')
 	RETURNING resp
 IF resp = 'No' THEN
@@ -1343,7 +1327,7 @@ FOR i = 1 TO vm_indice
 	LET r_r20.r20_cant_dev   = 0
 	LET r_r20.r20_cant_ent   = 0
 
-	LET r_r20.r20_fecing     = CURRENT
+	LET r_r20.r20_fecing     = fl_current()
 
 	LET r_r20.r20_orden      = rm_datos[i].orden                  
 	LET orden = orden + 1
@@ -1613,7 +1597,7 @@ LET r_nc.z21_num_doc 	= num_nc
 LET r_nc.z21_areaneg 	= r_glin.g20_areaneg
 LET r_nc.z21_referencia = 'DEV. FACTURA: ', rm_r19.r19_tipo_dev, ' ',
 			   rm_r19.r19_num_dev USING '<<<<<<<<<<<<<&'
-LET r_nc.z21_fecha_emi 	= TODAY
+LET r_nc.z21_fecha_emi 	= vg_fecha
 LET r_nc.z21_moneda 	= rm_r19.r19_moneda
 LET r_nc.z21_paridad 	= 1
 IF r_nc.z21_moneda <> rg_gen.g00_moneda_base THEN
@@ -1621,7 +1605,6 @@ IF r_nc.z21_moneda <> rg_gen.g00_moneda_base THEN
 		RETURNING r.*
 	IF r.g14_serial IS NULL THEN
 		ROLLBACK WORK
-		--CALL fgl_winmessage(vg_producto,'No hay factor de conversión','stop')
 		CALL fl_mostrar_mensaje('No hay factor de conversión.','stop')
 		EXIT PROGRAM
 	END IF
@@ -1633,7 +1616,7 @@ LET r_nc.z21_saldo 	= valor_credito
 LET r_nc.z21_subtipo 	= 1
 LET r_nc.z21_origen 	= 'A'
 LET r_nc.z21_usuario 	= vg_usuario
-LET r_nc.z21_fecing 	= CURRENT
+LET r_nc.z21_fecing 	= fl_current()
 INSERT INTO cxct021 VALUES (r_nc.*)
 LET num_row = SQLCA.SQLERRD[6]
 CALL fl_aplica_documento_favor(vg_codcia, vg_codloc, r_nc.z21_codcli, 
@@ -1690,7 +1673,6 @@ ELSE
 END IF
 
 IF vm_num_rows = 0 THEN
-	--CALL fgl_winmessage(vg_producto,'No existen devoluciones para esta requisición.','info')
 	CALL fl_mostrar_mensaje('No existen devoluciones para esta requisición.','info')
 	EXIT PROGRAM
 END IF

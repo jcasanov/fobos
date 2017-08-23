@@ -14,7 +14,6 @@ DEFINE rm_lin 		RECORD LIKE rept003.*
 DEFINE rm_rot 		RECORD LIKE rept004.*
 DEFINE rm_titem 	RECORD LIKE rept006.*
 DEFINE rm_mon	 	RECORD LIKE gent013.*
-DEFINE vm_demonios	VARCHAR(12)
 DEFINE vm_flag_mant     CHAR(1)
 DEFINE vm_num_row       INTEGER
 DEFINE campo_base	VARCHAR(15)
@@ -24,11 +23,10 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
+CALL startlog('../logs/repp222.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN
-	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.','stop')
 	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
      	EXIT PROGRAM
 END IF
@@ -81,7 +79,6 @@ WHILE TRUE
 	IF int_flag THEN
 		EXIT WHILE
 	END IF
-	--CALL fgl_winquestion(vg_producto,'Está seguro que desea realizar el cambio de precio ','No','Yes|No|Cancel','question',1)
 	CALL fl_hacer_pregunta('Está seguro que desea realizar el cambio de precio ','No')
 		RETURNING resp
 	IF resp = 'Yes' THEN
@@ -90,7 +87,6 @@ WHILE TRUE
 		UPDATE rept032 SET r32_estado = 'P'
 			WHERE r32_numreg = rm_cam.r32_numreg
 		COMMIT WORK
-		--CALL fgl_winmessage(vg_producto,'Proceso realizado Ok.','info')
 		CALL fl_mostrar_mensaje('Proceso realizado Ok.','info')
 		CLOSE WINDOW w_cam2
 		CLEAR FORM
@@ -170,13 +166,11 @@ INPUT BY NAME 	rm_cam.r32_numreg
 				WHERE r32_compania = vg_codcia
 				AND   r32_numreg = rm_cam.r32_numreg
                         IF status = NOTFOUND THEN
-                                --CALL fgl_winmessage(vg_producto,'No existe Número de registro de cambio de precio.','exclamation')
 				CALL fl_mostrar_mensaje('No existe Número de registro de cambio de precio.','exclamation')
                                 NEXT FIELD r32_numreg
                         END IF
 			CALL lee_muestra_registro(vm_num_row)
 			IF rm_cam.r32_estado = 'P' THEN
-                                --CALL fgl_winmessage(vg_producto,'Registro de cambio de precio ya fue procesado.','exclamation')
 				CALL fl_mostrar_mensaje('Registro de cambio de precio ya fue procesado.','exclamation')
                                 NEXT FIELD r32_numreg
                         END IF
@@ -201,6 +195,8 @@ DEFINE r_item_act ARRAY[10]  OF RECORD
 	END RECORD	
 DEFINE i,j,k,filas_pant  SMALLINT
 DEFINE flag 		 SMALLINT
+
+DEFINE fecha_actual DATETIME YEAR TO SECOND
 
 LET i = 1
 LET k = 0
@@ -272,12 +268,14 @@ FOREACH q_item INTO r_item.*
 	IF rg_gen.g00_moneda_alt IS NOT NULL THEN
 		LET precio_nuevo_ma =  fl_retorna_precision_valor(rg_gen.g00_moneda_alt, precio_nuevo_ma)
 	END IF
+
+	LET fecha_actual = fl_current()
 	CASE rm_cam.r32_moneda
 		WHEN 'A'
 			UPDATE rept010
 				SET r10_precio_ant   = r_item.r10_precio_mb,
 		    		    r10_precio_mb    = precio_nuevo_mb,
-		    		    r10_fec_camprec  = CURRENT
+		    		    r10_fec_camprec  = fecha_actual
 				WHERE r10_compania   = vg_codcia
 				AND   r10_codigo     = r_item.r10_codigo
 
@@ -290,7 +288,7 @@ FOREACH q_item INTO r_item.*
 		WHEN 'B'
 			UPDATE rept010
 				SET r10_precio_ma    = precio_nuevo_ma,
-		    		    r10_fec_camprec  = CURRENT
+		    		    r10_fec_camprec  = fecha_actual
 				WHERE r10_compania   = vg_codcia
 				AND   r10_codigo     = r_item.r10_codigo
 

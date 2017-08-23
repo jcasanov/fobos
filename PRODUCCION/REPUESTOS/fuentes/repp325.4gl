@@ -143,7 +143,7 @@ CALL borrar_cabecera()
 CALL mostrar_botones_det()
 LET rm_r89.r89_usuario = vg_usuario
 CALL obtener_fecha_ini()
-LET vm_fecha_fin       = TODAY
+LET vm_fecha_fin       = vg_fecha
 LET codloc = vg_codloc
 IF vg_codloc = 3 THEN
 	LET codloc = 5
@@ -441,7 +441,7 @@ INPUT BY NAME rm_r89.r89_usuario, vm_fecha_ini, vm_fecha_fin, vm_bodega,
 			LET vm_fecha_ini = fecha_ini
 			DISPLAY BY NAME vm_fecha_ini
 		END IF
-		IF vm_fecha_ini > TODAY THEN
+		IF vm_fecha_ini > vg_fecha THEN
 			CALL fl_mostrar_mensaje('La Fecha Inicial no puede ser mayor a la de hoy.','exclamation')
 			NEXT FIELD vm_fecha_ini
 		END IF
@@ -450,7 +450,7 @@ INPUT BY NAME rm_r89.r89_usuario, vm_fecha_ini, vm_fecha_fin, vm_bodega,
 			LET vm_fecha_fin = fecha_fin
 			DISPLAY BY NAME vm_fecha_fin
 		END IF
-		IF vm_fecha_fin > TODAY THEN
+		IF vm_fecha_fin > vg_fecha THEN
 			CALL fl_mostrar_mensaje('La Fecha Final no puede ser mayor a la de hoy.','exclamation')
 			NEXT FIELD vm_fecha_fin
 		END IF
@@ -580,11 +580,11 @@ IF resul2 THEN
 			NVL((SELECT anio
 				FROM tmp_ite
 				WHERE bodega = r20_bodega
-				  AND item   = r20_item), YEAR(TODAY)) anio,
+				  AND item   = r20_item), YEAR(vg_fecha)) anio,
 			NVL((SELECT mes
 				FROM tmp_ite
 				WHERE bodega = r20_bodega
-				  AND item   = r20_item), MONTH(TODAY)) mes,
+				  AND item   = r20_item), MONTH(vg_fecha)) mes,
 			r10_marca marca, r72_desc_clase clase,
 			0.00 sto_act, cant_pend
 			FROM temp_pend, rept010, rept072
@@ -596,31 +596,6 @@ IF resul2 THEN
 			  AND r72_cod_grupo  = r10_cod_grupo
 			  AND r72_cod_clase  = r10_cod_clase
 		INTO TEMP t2
-	{--
-	ELSE
-		SELECT r20_bodega bodega, r20_item item, r10_nombre descrip,
-			0.00 vendible, 0.00 no_vend, 0.00 total, "" mens_dife,
-			NVL((SELECT anio
-				FROM tmp_ite
-				WHERE bodega = r20_bodega
-				  AND item   = r20_item), YEAR(TODAY)) anio,
-			NVL((SELECT mes
-				FROM tmp_ite
-				WHERE bodega = r20_bodega
-				  AND item   = r20_item), MONTH(TODAY)) mes,
-			r10_marca marca, r72_desc_clase clase,
-			0.00 sto_act, cant_pend
-			FROM temp_pend, rept010, rept072
-			WHERE r10_compania   = vg_codcia
-			  AND r10_codigo     = r20_item
-			  AND r72_compania   = r10_compania
-			  AND r72_linea      = r10_linea
-			  AND r72_sub_linea  = r10_sub_linea
-			  AND r72_cod_grupo  = r10_cod_grupo
-			  AND r72_cod_clase  = r10_cod_clase
-			INTO TEMP t2
-	END IF
-	--}
 	SELECT bodega, item, descrip, NVL(SUM(vendible), 0) vendible,
 		NVL(SUM(no_vend), 0) no_vend, NVL(SUM(total), 0) total,
 		mens_dife, anio, mes, marca, clase,
@@ -682,13 +657,6 @@ LET query = 'SELECT bodega, item, descrip, vendible, no_vend, total, ',
 PREPARE exec_t5 FROM query
 EXECUTE exec_t5
 DROP TABLE t4
-{--
-IF NOT resul2 THEN
-	SELECT * FROM t5 INTO TEMP tmp_inv
-	DROP TABLE t5
-	RETURN resul
-END IF
---}
 LET expr_dif = NULL
 IF vm_diferencia = 'D' THEN
 	LET expr_dif = ' WHERE mens_dife <> "" '
@@ -696,19 +664,12 @@ END IF
 IF vm_diferencia = 'S' THEN
 	LET expr_dif = ' WHERE mens_dife = "" '
 END IF
-{--
-LET query = 'SELECT *, NVL((SELECT cant_pend ',
-			'FROM temp_pend ',
-			'WHERE r20_bodega = bodega ',
-			'  AND r20_item   = item), 0) cant_pend2 ',
---}
 LET query = 'SELECT * FROM t5 ',
 		expr_dif CLIPPED,
 		' INTO TEMP tmp_inv '
 PREPARE exec_inv FROM query
 EXECUTE exec_inv
 DROP TABLE t5
---DROP TABLE temp_pend
 RETURN resul
 
 END FUNCTION
@@ -835,12 +796,7 @@ PREPARE exec_pend FROM query
 EXECUTE exec_pend
 DROP TABLE t2
 DROP TABLE t3
-{
-SELECT COUNT(*) INTO cuantos FROM temp_pend
-IF cuantos = 0 THEN
-	RETURN 0
-END IF
-}
+
 RETURN 1
 
 END FUNCTION
@@ -884,8 +840,6 @@ FUNCTION mostrar_botones_det()
 --#DISPLAY 'Descripción'	TO tit_col3
 --#DISPLAY 'Vendible'		TO tit_col4
 --#DISPLAY 'No Vend.'		TO tit_col5
---DISPLAY 'Total'		TO tit_col6
---DISPLAY 'Diferencia'		TO tit_col7
 --#DISPLAY 'Stock'		TO tit_col6
 --#DISPLAY 'Pend.'		TO tit_col7
 --#DISPLAY 'Mens. Dif.'		TO tit_col8
@@ -983,7 +937,6 @@ END FUNCTION
 FUNCTION calcular_valores(i, j)
 DEFINE i, j		SMALLINT
 
---LET rm_inventario[i].r89_suma = rm_inventario[i].r89_bueno + rm_inventario[i].r89_incompleto
 LET rm_inventario[i].r89_suma = rm_periodo[i].stock_act
 				- rm_periodo[i].cant_pend
 DISPLAY rm_inventario[i].r89_suma TO rm_inventario[j].r89_suma
@@ -997,7 +950,6 @@ FUNCTION calcular_diferencia(i, j)
 DEFINE i, j		SMALLINT
 DEFINE tit_diferencia	DECIMAL(8,2)
 
---LET tit_diferencia = rm_inventario[i].r89_suma - rm_periodo[i].stock_act
 LET tit_diferencia = (rm_inventario[i].r89_bueno
 			+ rm_inventario[i].r89_incompleto)
 			- rm_periodo[i].stock_act
@@ -1020,7 +972,7 @@ END FUNCTION
  
 FUNCTION obtener_fecha_ini()
 
-SELECT NVL(DATE(MIN(r11_fec_corte)), TODAY)
+SELECT NVL(DATE(MIN(r11_fec_corte)), vg_fecha)
 	INTO vm_fecha_ini
 	FROM resp_exis
 	WHERE r11_compania = vg_codcia
@@ -1132,7 +1084,7 @@ PAGE HEADER
 	PRINT COLUMN 022, "** FECHA FINAL   : ", vm_fecha_fin
 							USING "dd-mm-yyyy"
 	SKIP 1 LINES
-	PRINT COLUMN 001, "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 001, "FECHA IMPRESION: ", vg_fecha USING "dd-mm-yyyy",
  		1 SPACES, TIME,
 	      COLUMN 062, usuario
 	PRINT "--------------------------------------------------------------------------------"
@@ -1192,10 +1144,6 @@ LET query = 'SELECT (SELECT g02_abreviacion ',
 			'WHERE g02_compania  = r02_compania ',
 			'  AND g02_localidad = ', vg_codloc, ') loc, ',
 			'bodega, r02_nombre, marca, clase, descrip, item, ',
-			{-- OJO CAMBIADO EL 24/02/2011
-			mens_dife, r89_bueno, r89_incompleto,
-			sto_act - cant_pend, cant_pend, r10_precio_mb, usuario
-			--}
 			'mens_dife, r89_bueno, r89_incompleto, ',
 			'sto_act - cant_pend sto_cong, r11_stock_act, ',
 			'cant_pend, r10_precio_mb, usuario, ',
@@ -1640,15 +1588,6 @@ LET query = 'SELECT r11_bodega bod, r02_nombre nom, COUNT(*) tot_reg, ',
 			'  AND DATE(r89_fecing) BETWEEN "', vm_fecha_ini,
 						 '" AND "', vm_fecha_fin,
 			'") tot_dig ',
-		{
-		'(((SELECT COUNT(*) ',
-			'FROM rept089 ',
-			'WHERE r89_compania     = r11_compania ',
-			'  AND r89_bodega       = r11_bodega ',
-			'  AND DATE(r89_fecing) BETWEEN "', vm_fecha_ini,
-						 '" AND "', vm_fecha_fin,
-			'") / COUNT(*)) * 100) porcentaje ',
-		}
 		'FROM resp_exis, rept002 ',
 		'WHERE r11_compania        = ', vg_codcia,
 		'  AND DATE(r11_fec_corte) BETWEEN "', vm_fecha_ini,

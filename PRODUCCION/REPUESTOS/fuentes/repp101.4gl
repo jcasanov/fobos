@@ -15,7 +15,6 @@ DEFINE vm_r_rows ARRAY[1000] OF INTEGER -- ARREGLO DE ROWID DE FILAS LEIDAS
 DEFINE vm_row_current	SMALLINT	-- FILA CORRIENTE DEL ARREGLO
 DEFINE vm_num_rows	SMALLINT	-- CANTIDAD DE FILAS LEIDAS
 DEFINE vm_max_rows      SMALLINT        -- MAXIMO DE FILAS LEIDAS
-DEFINE vm_demonios	VARCHAR(12)
 DEFINE vm_flag_mant         CHAR(1)
 
 
@@ -25,7 +24,7 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
+CALL startlog('../logs/repp101.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN
@@ -430,7 +429,6 @@ INPUT BY NAME rm_vend.r01_nombres, rm_vend.r01_iniciales, rm_vend.r01_codrol,
 		CALL fl_lee_trabajador_roles(vg_codcia, rm_vend.r01_codrol)
 			RETURNING rm_rol.*
 		IF rm_rol.n30_nombres  IS NULL THEN
-	             	--CALL fgl_winmessage(vg_producto,'No existe código de rol.','exclamation')
 			CALL fl_mostrar_mensaje('No existe código de rol.','exclamation')
 		     	NEXT FIELD r01_codrol 
 		END IF
@@ -438,19 +436,8 @@ INPUT BY NAME rm_vend.r01_nombres, rm_vend.r01_iniciales, rm_vend.r01_codrol,
 			CALL fl_mostrar_mensaje('Código de Rol no esta con estado ACTIVO.', 'exclamation')
 			NEXT FIELD r01_codrol
 		END IF
-		IF rm_vend.r01_tipo = 'E' THEN
-			--CALL fgl_winmessage(vg_producto,'No puede asignarle un código de rol a un vendedor externo.', 'exclamation')
-			--CALL fl_mostrar_mensaje('No puede asignarle un código de rol a un vendedor externo.', 'exclamation')
-			--NEXT FIELD r01_codrol
-		END IF
             ELSE
 	        LET int_flag = 0
-		{
-		IF rm_vend.r01_tipo = 'I' THEN
-			CALL fl_mostrar_mensaje('Trabajador es empleado interno, debe asignarle un código de rol', 'exclamation')
-			NEXT FIELD r01_codrol
-           	END IF
-		}
             END IF
 		INITIALIZE serial TO NULL
 		SELECT r01_codigo, r01_iniciales INTO serial, iniciales
@@ -461,10 +448,9 @@ INPUT BY NAME rm_vend.r01_nombres, rm_vend.r01_iniciales, rm_vend.r01_codrol,
 		   IF vm_flag_mant = 'I' OR
 		      (vm_flag_mant = 'M' AND rm_vend.r01_codigo <> serial)
 		   THEN
-			LET mensaje = 'Las iniciales ya fueron asignadas ' ||
-					'al vendedor de código  '|| serial
-		   	--CALL fgl_winmessage(vg_producto,mensaje,'exclamation')
-			CALL fl_mostrar_mensaje(mensaje,'exclamation')
+				LET mensaje = 'Las iniciales ya fueron asignadas ' ||
+						'al vendedor de código  '|| serial
+				CALL fl_mostrar_mensaje(mensaje,'exclamation')
 		      	NEXT FIELD r01_iniciales
 		   END IF
 		END IF
@@ -505,40 +491,3 @@ DISPLAY "" AT 1,1
 DISPLAY row_current, " de ", num_rows AT 1, 69
                                                                                 
 END FUNCTION
-
-
-
-FUNCTION no_validar_parametros()
-                                                                                
-CALL fl_lee_modulo(vg_modulo) RETURNING rg_mod.*
-IF rg_mod.g50_modulo IS NULL THEN
-        CALL fgl_winmessage(vg_producto, 'No existe módulo: ' || vg_modulo, 'sto
-p')
-        EXIT PROGRAM
-END IF
-CALL fl_lee_compania(vg_codcia) RETURNING rg_cia.*
-IF rg_cia.g01_compania IS NULL THEN
-        CALL fgl_winmessage(vg_producto, 'No existe compañía: '|| vg_codcia, 'st
-op')
-        EXIT PROGRAM
-END IF
-IF rg_cia.g01_estado <> 'A' THEN
-     CALL fgl_winmessage(vg_producto, 'Compañía no está activa: ' || vg_codcia, 			 'stop')
-     EXIT PROGRAM
-END IF
-IF vg_codloc IS NULL THEN
-        LET vg_codloc   = fl_retorna_agencia_default(vg_codcia)
-END IF
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING rg_loc.*
-IF rg_loc.g02_localidad IS NULL THEN
-        CALL fgl_winmessage(vg_producto, 'No existe localidad: ' || vg_codloc,
-			    'stop')
-        EXIT PROGRAM
-END IF
-IF rg_loc.g02_estado <> 'A' THEN
-      CALL fgl_winmessage(vg_producto, 'Localidad no está activa: '|| vg_codloc, 			  'stop')
-      EXIT PROGRAM
-END IF
-                                                                                
-END FUNCTION
-

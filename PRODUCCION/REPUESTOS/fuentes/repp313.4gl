@@ -405,11 +405,11 @@ INPUT BY NAME rm_r34.r34_estado, rm_r34.r34_bodega, vm_fecha_ini, vm_fecha_fin
 		END IF
 		IF rm_r34.r34_estado = 'D' THEN
 			IF vm_fecha_ini IS NULL THEN
-				LET vm_fecha_ini = TODAY
+				LET vm_fecha_ini = vg_fecha
 				DISPLAY BY NAME vm_fecha_ini
 			END IF
 			IF vm_fecha_fin IS NULL THEN
-				LET vm_fecha_fin = TODAY
+				LET vm_fecha_fin = vg_fecha
 				DISPLAY BY NAME vm_fecha_fin
 			END IF
 		END IF
@@ -431,12 +431,12 @@ INPUT BY NAME rm_r34.r34_estado, rm_r34.r34_bodega, vm_fecha_ini, vm_fecha_fin
 		END IF
 	AFTER FIELD vm_fecha_ini 
 		IF vm_fecha_ini IS NOT NULL THEN
-			IF vm_fecha_ini > TODAY THEN
+			IF vm_fecha_ini > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La Fecha Inicial no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD vm_fecha_ini
 			END IF
 			IF vm_fecha_fin IS NULL THEN
-				LET vm_fecha_fin = TODAY
+				LET vm_fecha_fin = vg_fecha
 			END IF
 			DISPLAY BY NAME vm_fecha_fin
 		ELSE
@@ -447,7 +447,7 @@ INPUT BY NAME rm_r34.r34_estado, rm_r34.r34_bodega, vm_fecha_ini, vm_fecha_fin
 		END IF
 	AFTER FIELD vm_fecha_fin 
 		IF vm_fecha_fin IS NOT NULL THEN
-			IF vm_fecha_fin > TODAY THEN
+			IF vm_fecha_fin > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La Fecha Final no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD vm_fecha_fin
 			END IF
@@ -651,7 +651,7 @@ LET fec_ini = vm_fecha_ini
 LET fec_fin = vm_fecha_fin
 IF vm_fecha_ini IS NULL THEN
 	LET fec_ini = MDY(01, 01, 2003)
-	LET fec_fin = TODAY
+	LET fec_fin = vg_fecha
 END IF
 LET fec_i = EXTEND(fec_ini, YEAR TO SECOND)
 LET fec_f = EXTEND(fec_fin, YEAR TO SECOND) + 23 UNITS HOUR + 59 UNITS MINUTE
@@ -959,7 +959,7 @@ PAGE HEADER
 		PRINT COLUMN 001, 1 SPACES
 	END IF
 	SKIP 1 LINES
-	PRINT COLUMN 001, "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 001, "FECHA IMPRESION: ", vg_fecha USING "dd-mm-yyyy",
  		1 SPACES, TIME,
 	      COLUMN 071, usuario
 	PRINT "--------------------------------------------------------------------------------"
@@ -1066,7 +1066,7 @@ PAGE HEADER
 		PRINT COLUMN 001, 1 SPACES
 	END IF
 	SKIP 1 LINES
-	PRINT COLUMN 001, "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 001, "FECHA IMPRESION: ", vg_fecha USING "dd-mm-yyyy",
  		1 SPACES, TIME,
 	      COLUMN 114, usuario
 	PRINT "------------------------------------------------------------------------------------------------------------------------------------"

@@ -67,7 +67,6 @@ CALL startlog('../logs/repp207.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 AND num_args() <> 5 THEN	-- Validar # parámetros correcto
-	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.','stop')
 	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
@@ -307,9 +306,9 @@ LET rm_r28.r28_tot_arancel  = 0.0
 LET rm_r28.r28_tot_salvagu  = 0.0 
 LET rm_r28.r28_tot_cargos   = 0.0 
 LET rm_r28.r28_tot_costimp  = 0.0 
-LET rm_r28.r28_fecha_lleg   = TODAY
-LET rm_r28.r28_fecha_ing    = TODAY
-LET rm_r28.r28_fecing       = CURRENT
+LET rm_r28.r28_fecha_lleg   = vg_fecha
+LET rm_r28.r28_fecha_ing    = vg_fecha
+LET rm_r28.r28_fecing       = fl_current()
 LET rm_r28.r28_usuario      = vg_usuario
 IF vg_gui = 0 THEN
 	CALL muestra_flag_flete(rm_r28.r28_flag_flete)
@@ -336,7 +335,7 @@ ELSE
 	LET rm_r28.r28_numliq = rm_r28.r28_numliq + 1
 END IF  
 LET rm_r28.r28_codprov   = rm_pedido[1].proveedor
-LET rm_r28.r28_fecha_ing = CURRENT
+LET rm_r28.r28_fecha_ing = fl_current()
 INSERT INTO rept028 VALUES (rm_r28.*)
 DISPLAY BY NAME rm_r28.r28_numliq
 LET rowid  = SQLCA.SQLERRD[6] 	-- Rowid de la ultima fila procesada
@@ -699,7 +698,7 @@ WHILE NOT salir
 			--#CALL dialog.keysetlabel("CONTROL-W","")
 			IF vm_ind_rub = 0 THEN
 				INITIALIZE rm_rubros[1].* TO NULL
-				LET rm_rubros[1].fecha = CURRENT
+				LET rm_rubros[1].fecha = fl_current()
 				DISPLAY rm_rubros[1].* TO ra_rubros[1].*
 				CONTINUE INPUT
 			END IF
@@ -717,12 +716,6 @@ WHILE NOT salir
 			LET total = total_cargos(arr_count())
 			DISPLAY total TO total_cargos
 			CALL muestra_contadores_rub(i, max_row)
-		{
-		BEFORE INSERT
-			INITIALIZE rm_rubros[i].* TO NULL
-			LET rm_rubros[i].fecha     = CURRENT
-			DISPLAY rm_rubros[i].* TO ra_rubros[j].*
-		}
 		BEFORE DELETE
 			CALL deleteRow(i, arr_count())
 		AFTER DELETE
@@ -739,7 +732,6 @@ WHILE NOT salir
 			       CALL fl_lee_rubro_liquidacion(rm_rubros[i].rubro)
 					RETURNING r_g17.*
 				IF r_g17.g17_codrubro IS NULL THEN
-					--CALL fgl_winmessage(vg_producto,'Rubro no existe.','exclamation')
 					CALL fl_mostrar_mensaje('Rubro no existe.','exclamation')
 					NEXT FIELD r30_codrubro
 				END IF
@@ -760,7 +752,6 @@ WHILE NOT salir
 			CALL fl_lee_moneda(rm_rubros[i].moneda)
 				RETURNING r_mon.*
 			IF r_mon.g13_moneda IS NULL THEN	
-				--CALL FGL_WINMESSAGE(vg_producto,'Moneda no existe.','exclamation')
 				CALL fl_mostrar_mensaje('Moneda no existe.','exclamation')
 				NEXT FIELD r30_moneda
 			END IF
@@ -956,7 +947,6 @@ DEFINE intentar		SMALLINT
 DEFINE resp		CHAR(6)
 
 LET intentar = 1
---CALL fgl_winquestion(vg_producto,'Registro bloqueado por otro usuario, desea intentarlo nuevamente', 'No', 'Yes|No', 'question', 1)
 CALL fl_hacer_pregunta('Registro bloqueado por otro usuario, desea intentarlo nuevamente','No')
 	RETURNING resp
 IF resp = 'No' THEN
@@ -1227,18 +1217,6 @@ INPUT BY NAME rm_r28.r28_origen, rm_r28.r28_flag_flete, rm_r28.r28_forma_pago,
 				DISPLAY r_r02.r02_nombre TO n_bodega
 			END IF
 		END IF
-		{--
-		IF INFIELD(r28_moneda) THEN
-			CALL fl_ayuda_monedas() 
-				RETURNING r_mon.g13_moneda, r_mon.g13_nombre, 
-					  r_mon.g13_decimales 
-			IF r_mon.g13_moneda IS NOT NULL THEN
-				LET rm_r28.r28_moneda = r_mon.g13_moneda
-				DISPLAY r_mon.g13_moneda TO r28_moneda
-				DISPLAY r_mon.g13_nombre TO n_moneda
-			END IF	
-		END IF
-		--}
 		LET INT_FLAG = 0
 	ON KEY(F5)
 		CALL ingresa_pedidos('I')
@@ -1266,18 +1244,6 @@ INPUT BY NAME rm_r28.r28_origen, rm_r28.r28_flag_flete, rm_r28.r28_forma_pago,
 			CALL fl_mostrar_mensaje('Digite el pedido primero.','exclamation')
 			CALL ingresa_pedidos('I')
 			LET int_flag = 0
-			--NEXT FIELD r28_origen
-		END IF
-		IF flag = 'I' THEN
-			{--
-			LET rm_r28.r28_paridad =
-					calcula_paridad(rm_r28.r28_moneda,
-							 rg_gen.g00_moneda_base)
-			IF rm_r28.r28_paridad IS NULL THEN
-				NEXT FIELD r28_paridad
-			END IF
-			DISPLAY BY NAME rm_r28.r28_paridad
-			--}
 		END IF
 	AFTER FIELD r28_flag_flete
 		IF vg_gui = 0 THEN
@@ -1295,7 +1261,6 @@ INPUT BY NAME rm_r28.r28_origen, rm_r28.r28_flag_flete, rm_r28.r28_forma_pago,
 				IF r_r02.r02_estado <> 'B' THEN
 					DISPLAY r_r02.r02_nombre TO n_bodega
 				ELSE
-					--CALL fgl_winmessage(vg_producto,'Bodega está bloqueada.','exclamation')
 					CALL fl_mostrar_mensaje('Bodega está bloqueada.','exclamation')
 					CLEAR n_bodega 
 					NEXT FIELD r28_bodega
@@ -1305,7 +1270,6 @@ INPUT BY NAME rm_r28.r28_origen, rm_r28.r28_flag_flete, rm_r28.r28_forma_pago,
 					NEXT FIELD r28_bodega
 				END IF
 			ELSE
-				--CALL fgl_winmessage(vg_producto,'Bodega no existe.','exclamation')
 				CALL fl_mostrar_mensaje('Bodega no existe.','exclamation')
 				CLEAR n_bodega
 				NEXT FIELD r28_bodega
@@ -1375,7 +1339,6 @@ INPUT BY NAME rm_r28.r28_origen, rm_r28.r28_flag_flete, rm_r28.r28_forma_pago,
 			DISPLAY BY NAME rm_r28.r28_paridad
 		END IF
 		IF vm_ind_ped = 0 THEN
-			--CALL fgl_winquestion(vg_producto,'No ha ingresado ningun pedido, y no podrá grabar. ¿Desea especificar algún pedido? ','No','Yes|No','question',1)
 			CALL fl_mostrar_mensaje('No ha ingresado ningun pedido, hágalo para poder grabar.','exclamation')
 			CONTINUE INPUT
 		END IF
@@ -1593,7 +1556,6 @@ END IF
 CALL muestra_etiquetas()
 CALL muestra_contadores()
 LET vm_ind_ped = lee_pedidos()
---CALL calcular_liquidacion()
 CALL carga_tabla_aranceles()
 CALL carga_tabla_temporal_prorrateo()
 
@@ -1672,7 +1634,6 @@ SELECT ROWID INTO vm_rows[vm_num_rows]
 	  AND r28_localidad = vg_codloc
 	  AND r28_numliq    = vm_numliq
 IF STATUS = NOTFOUND THEN
-	--CALL fgl_winmessage(vg_producto,'Liquidación no existe.','exclamation')
 	CALL fl_mostrar_mensaje('Liquidación no existe.','exclamation')
 	EXIT PROGRAM
 ELSE
@@ -1782,7 +1743,6 @@ END IF
 -- no deben de modificarse los pedidos
 IF rm_r28.r28_estado = 'P' OR vm_numliq <> 0 OR flag = 'C' THEN
 	IF vm_ind_ped = 0 THEN
-		--CALL fgl_winmessage(vg_producto,'No hay pedidos asignados a esta liquidación.','exclamation')
 		CALL fl_mostrar_mensaje('No hay pedidos asignados a esta liquidación.','exclamation')
 		RETURN
 	END IF
@@ -1847,9 +1807,6 @@ WHILE NOT salir
 				CALL fl_ayuda_pedidos_rep(vg_codcia, vg_codloc,
 							'R', 'T')
 					RETURNING r_r16.r16_pedido 
---				 	       r_p01.p01_nomprov,
---					       r_r16.r16_estado, 
---					       r_r16.r16_tipo        
 				IF r_r16.r16_pedido IS NOT NULL THEN
 					LET rm_pedido[i].pedido =
 								r_r16.r16_pedido
@@ -1862,7 +1819,6 @@ WHILE NOT salir
 			IF rm_pedido[i].pedido IS NOT NULL THEN
 				CALL muestra_detalle_pedido(rm_pedido[i].pedido)
 			ELSE
-				--CALL fgl_winmessage(vg_producto,'Ingrese un pedido primero.','exclamation')
 				CALL fl_mostrar_mensaje('Ingrese un pedido primero.','exclamation')
 			END IF
 		BEFORE ROW
@@ -1886,13 +1842,11 @@ WHILE NOT salir
 						rm_pedido[i].pedido)
 				RETURNING r_r16.*
 			IF r_r16.r16_pedido IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'El pedido no existe.','exclamation') 
 				CALL fl_mostrar_mensaje('El pedido no existe.','exclamation') 
 				NEXT FIELD r16_pedido
 			END IF
 			IF r_r16.r16_estado <> 'R' AND r_r16.r16_estado <> 'L'
 			THEN
-				--CALL fgl_winmessage(vg_producto,'No puede liquidar este pedido.','exclamation')
 				CALL fl_mostrar_mensaje('No puede liquidar este pedido.','exclamation')
 				NEXT FIELD r16_pedido
 			END IF
@@ -1907,7 +1861,6 @@ WHILE NOT salir
 			  	  AND r17_pedido    = rm_pedido[i].pedido
 				  AND r17_estado IN ('R', 'L')
 			IF contador = 0 THEN
-				--CALL fgl_winmessage(vg_producto,'No existen items recibidos ni liquidados en el pedido.','exclamation')
 				CALL fl_mostrar_mensaje('No existen items recibidos ni liquidados en el pedido.','exclamation')
 				NEXT FIELD r16_pedido
 			END IF

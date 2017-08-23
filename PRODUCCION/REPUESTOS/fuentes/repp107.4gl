@@ -10,8 +10,6 @@
 
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_demonios	VARCHAR(12)
-
 		---- CONFIGURACION LINEA DE VENTA ----
 DEFINE vm_rows		ARRAY[400] OF RECORD   -- REGISTROS DEL MANTENIMIENTO
 				 r07_linea 	LIKE rept007.r07_linea,
@@ -65,11 +63,10 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
+CALL startlog('../logs/repp107.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN          -- Validar # parámetros correcto
-	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto','stop')
 	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
@@ -382,7 +379,6 @@ IF NOT int_flag THEN
 	IF arr_count() > 0 THEN
 		CALL fl_mensaje_registro_modificado()
 	ELSE 
-		--CALL fgl_winmessage(vg_producto,'Se eliminaron todas las configuraciones de descuentos para esta Línea, Moneda, y Tipo de factura.','exclamation')
 		CALL fl_mostrar_mensaje('Se eliminaron todas las configuraciones de descuentos para esta Línea, Moneda, y Tipo de factura.','exclamation')
 		CLEAR FORM
 		CALL control_DISPLAY_botones()
@@ -472,7 +468,6 @@ FOREACH q_conf INTO vm_rows[vm_num_rows].*
 END FOREACH
 LET vm_num_rows = vm_num_rows - 1
 IF vm_num_rows = 0 AND  vm_flag_mant <> 'M' AND vm_flag_mant <> 'I' THEN
-	--CALL fgl_winmessage(vg_producto,'No se encontraron registros con el criterio indicado', 'exclamation')
 	CALL fl_mostrar_mensaje('No se encontraron registros con el criterio indicado', 'exclamation')
 	LET vm_row_current = 0
 	CALL muestra_contadores()
@@ -579,7 +574,6 @@ ELSE
 		CALL fl_mensaje_registro_ingresado()
 	ELSE 
 		LET vm_row_current = 0
-		--CALL fgl_winmessage(vg_producto,'No existen Configuración de descuentos para la Línea, Moneda, Tipo Factura. ','exclamation')
 		CALL fl_mostrar_mensaje('No existen Configuración de descuentos para la Línea, Moneda, Tipo Factura.','exclamation')
 		CLEAR FORM
 		CALL control_DISPLAY_botones()
@@ -647,7 +641,6 @@ INPUT BY NAME rm_r07.r07_linea, rm_r07.r07_moneda, rm_r07.r07_cont_cred
                     CALL fl_lee_linea_rep(vg_codcia, rm_r07.r07_linea)
                                 RETURNING rm_r03.*
                         IF rm_r03.r03_codigo IS NULL THEN
-                                --CALL fgl_winmessage(vg_producto,'La Línea de venta no existe en la compañía ','exclamation')
 				CALL fl_mostrar_mensaje('La Línea de venta no existe en la compañía.','exclamation')
                                 NEXT FIELD r07_linea
                         END IF
@@ -660,7 +653,6 @@ INPUT BY NAME rm_r07.r07_linea, rm_r07.r07_moneda, rm_r07.r07_cont_cred
                 	CALL fl_lee_moneda(rm_r07.r07_moneda) 
 				RETURNING rm_g13.*
                    	IF rm_g13.g13_moneda IS NULL THEN
-                        	--CALL fgl_winmessage(vg_producto,'Moneda no existe.','exclamation')
 				CALL fl_mostrar_mensaje('Moneda no existe.','exclamation')
                         	NEXT FIELD r07_moneda
                    	END IF
@@ -671,7 +663,6 @@ INPUT BY NAME rm_r07.r07_linea, rm_r07.r07_moneda, rm_r07.r07_cont_cred
 			IF rm_r07.r07_moneda <> rg_gen.g00_moneda_base AND
 			   rm_r07.r07_moneda <> rg_gen.g00_moneda_alt
 			   THEN			   
-				--CALL fgl_winmessage(vg_producto,'La moneda ingresada no está configurada como moneda base ni alterna. ','exclamation')
 				CALL fl_mostrar_mensaje('La moneda ingresada no está configurada como moneda base ni alterna.','exclamation')
 				NEXT FIELD r07_moneda
 			END IF
@@ -732,7 +723,6 @@ INPUT ARRAY r_detalle  WITHOUT DEFAULTS FROM r_detalle.*
 				IF r_detalle[i].r07_monto_ini >=
 				   r_detalle[i].r07_monto_fin 
 				   THEN
-					--CALL fgl_winmessage(vg_producto,'El monto inicial debe ser menor al monto final. ','exclamation')
 					CALL fl_mostrar_mensaje('El monto inicial debe ser menor al monto final.','exclamation')
 					NEXT FIELD r07_monto_ini
 				END IF 
@@ -744,7 +734,6 @@ INPUT ARRAY r_detalle  WITHOUT DEFAULTS FROM r_detalle.*
 				   r_detalle[k].r07_monto_fin AND 
 				   i <> k 
 				   THEN
-					--CALL fgl_winmessage(vg_producto,'No puede ingresar un monto que se encuentre dentro de un rango ya ingresado.','exclamation')
 					CALL fl_mostrar_mensaje('No puede ingresar un monto que se encuentre dentro de un rango ya ingresado.','exclamation')
 					NEXT FIELD r07_monto_ini
                			END IF
@@ -762,7 +751,6 @@ INPUT ARRAY r_detalle  WITHOUT DEFAULTS FROM r_detalle.*
 			IF r_detalle[i].r07_monto_fin <= 
 			   r_detalle[i].r07_monto_ini
 			   THEN
-				--CALL fgl_winmessage(vg_producto,'El monto final debe ser mayor al monto inicial. ','exclamation')
 				CALL fl_mostrar_mensaje('El monto final debe ser mayor al monto inicial. ','exclamation')
 				NEXT FIELD r07_monto_fin
 			END IF
@@ -773,7 +761,6 @@ INPUT ARRAY r_detalle  WITHOUT DEFAULTS FROM r_detalle.*
 				   r_detalle[k].r07_monto_fin AND 
 				   i <> k 
 				   THEN
-					--CALL fgl_winmessage(vg_producto,'No puede ingresar un monto que se encuentre dentro de un rango ya ingresado.','exclamation')
 					CALL fl_mostrar_mensaje('No puede ingresar un monto que se encuentre dentro de un rango ya ingresado.','exclamation')
 					NEXT FIELD r07_monto_fin
                			END IF
@@ -956,7 +943,6 @@ IF NOT int_flag THEN
 	IF arr_count() > 0 THEN
 		CALL fl_mensaje_registro_modificado()
 	ELSE 
-		--CALL fgl_winmessage(vg_producto,'Se eliminaron todas las configuracionres de descuentos para esta Línea, Moneda, y Tipo de factura.','exclamation')
 		CALL fl_mostrar_mensaje('Se eliminaron todas las configuracionres de descuentos para esta Línea, Moneda, y Tipo de factura.','exclamation')
 		CLEAR FORM
 		CALL control_DISPLAY_botones()
@@ -1048,7 +1034,6 @@ END FOREACH
 
 LET vm_num_rows_2 = vm_num_rows_2 - 1
 IF vm_num_rows_2 = 0 AND  vm_flag_mant <> 'M' AND vm_flag_mant <> 'I' THEN
-	--CALL fgl_winmessage(vg_producto,'No se encontraron registros con el criterio indicado.', 'exclamation')
 	CALL fl_mostrar_mensaje('No se encontraron registros con el criterio indicado.', 'exclamation')
 	LET vm_row_current_2 = 0
 	CALL muestra_contadores_2()
@@ -1110,7 +1095,6 @@ IF NOT int_flag THEN
 	CALL lee_detalle_2()
 ELSE
 	ROLLBACK WORK
-	--RETURN
 END IF
 IF NOT int_flag THEN
 	SELECT UNIQUE r08_rotacion, r08_moneda, r08_cont_cred
@@ -1150,7 +1134,6 @@ IF NOT int_flag THEN
 		CALL fl_mensaje_registro_ingresado()
 	ELSE 
 		LET vm_row_current_2 = 0
-		--CALL fgl_winmessage(vg_producto,'No existen Configuración de descuentos para la Línea, Moneda, Tipo Factura. ','exclamation')
 		CALL fl_mostrar_mensaje('No existen Configuración de descuentos para la Línea, Moneda, Tipo Factura. ','exclamation')
 		CLEAR FORM
 		CALL control_DISPLAY_botones()
@@ -1221,9 +1204,8 @@ INPUT BY NAME rm_r08.r08_rotacion, rm_r08.r08_moneda, rm_r08.r08_cont_cred
                     CALL fl_lee_indice_rotacion(vg_codcia, rm_r08.r08_rotacion)
                                 RETURNING rm_r04.*
                         IF rm_r04.r04_rotacion IS NULL THEN
-                                --CALL fgl_winmessage (vg_producto,'El Indice de Rotación no existe en la Compañía.','exclamation')
-				CALL fl_mostrar_mensaje('El Indice de Rotación no existe en la Compañía.','exclamation')
-                                NEXT FIELD r08_rotacion
+							CALL fl_mostrar_mensaje('El Indice de Rotación no existe en la Compañía.','exclamation')
+                            NEXT FIELD r08_rotacion
                         END IF
                    DISPLAY rm_r04.r04_nombre TO nom_rotacion
                 ELSE
@@ -1234,9 +1216,8 @@ INPUT BY NAME rm_r08.r08_rotacion, rm_r08.r08_moneda, rm_r08.r08_cont_cred
                 	CALL fl_lee_moneda(rm_r08.r08_moneda) 
 				RETURNING rm_g13.*
                    	IF rm_g13.g13_moneda IS NULL THEN
-                        	--CALL fgl_winmessage(vg_producto,'Moneda no existe','exclamation')
-				CALL fl_mostrar_mensaje('Moneda no existe.','exclamation')
-                        	NEXT FIELD r08_moneda
+						CALL fl_mostrar_mensaje('Moneda no existe.','exclamation')
+                        NEXT FIELD r08_moneda
                    	END IF
                    	IF rm_g13.g13_estado = 'B' THEN
 				CALL fl_mensaje_estado_bloqueado()
@@ -1245,7 +1226,6 @@ INPUT BY NAME rm_r08.r08_rotacion, rm_r08.r08_moneda, rm_r08.r08_cont_cred
 			IF rm_r08.r08_moneda <> rg_gen.g00_moneda_base AND
 			   rm_r08.r08_moneda <> rg_gen.g00_moneda_alt
 			   THEN			   
-				--CALL fgl_winmessage(vg_producto,'La moneda ingresada no está configurada como moneda base ni alterna. ','exclamation')
 				CALL fl_mostrar_mensaje('La moneda ingresada no está configurada como moneda base ni alterna. ','exclamation')
 				NEXT FIELD r08_moneda
 			END IF
@@ -1306,7 +1286,6 @@ INPUT ARRAY r_detalle_2  WITHOUT DEFAULTS FROM r_detalle_2.*
 				IF r_detalle_2[i].r08_monto_ini >=
 				   r_detalle_2[i].r08_monto_fin 
 				   THEN
-					--CALL fgl_winmessage(vg_producto,'El monto inicial debe ser menor al monto final. ','exclamation')
 					CALL fl_mostrar_mensaje('El monto inicial debe ser menor al monto final.','exclamation')
 					NEXT FIELD r08_monto_ini
 				END IF 
@@ -1318,7 +1297,6 @@ INPUT ARRAY r_detalle_2  WITHOUT DEFAULTS FROM r_detalle_2.*
 				   r_detalle_2[k].r08_monto_fin AND 
 				   i <> k 
 				   THEN
-					--CALL fgl_winmessage(vg_producto,'No puede ingresar un monto que se encuentre dentro de un rango ya ingresado.','exclamation')
 					CALL fl_mostrar_mensaje('No puede ingresar un monto que se encuentre dentro de un rango ya ingresado.','exclamation')
 					NEXT FIELD r08_monto_ini
                			END IF
@@ -1336,7 +1314,6 @@ INPUT ARRAY r_detalle_2  WITHOUT DEFAULTS FROM r_detalle_2.*
 			IF r_detalle_2[i].r08_monto_fin <= 
 			   r_detalle_2[i].r08_monto_ini
 			   THEN
-				--CALL fgl_winmessage(vg_producto,'El monto final debe ser mayor al monto inicial. ','exclamation')
 				CALL fl_mostrar_mensaje('El monto final debe ser mayor al monto inicial. ','exclamation')
 				NEXT FIELD r08_monto_fin
 			END IF
@@ -1347,7 +1324,6 @@ INPUT ARRAY r_detalle_2  WITHOUT DEFAULTS FROM r_detalle_2.*
 				   r_detalle_2[k].r08_monto_fin AND 
 				   i <> k 
 				   THEN
-					--CALL fgl_winmessage(vg_producto,'No puede ingresar un monto que se encuentre dentro de un rango ya ingresado.','exclamation')
 					CALL fl_mostrar_mensaje('No puede ingresar un monto que se encuentre dentro de un rango ya ingresado.','exclamation')
 					NEXT FIELD r08_monto_fin
                			END IF

@@ -324,24 +324,10 @@ PAGE HEADER
 					r_r96.r96_num_entrega)
 		RETURNING r_r36.*
 	CALL fl_lee_cod_transaccion(rm_r19.r19_cod_tran) RETURNING r_g21.*
-	{--
-	INITIALIZE r_r38.* TO NULL
-	SELECT * INTO r_r38.*
-		FROM rept038
-		WHERE r38_compania    = rm_r19.r19_compania
-		  AND r38_localidad   = rm_r19.r19_localidad
-		  AND r38_tipo_fuente = 'PR'
-		  AND r38_cod_tran    = rm_r19.r19_cod_tran
-		  AND r38_num_tran    = rm_r19.r19_num_tran
-	CALL fl_lee_tipo_doc(r_r38.r38_tipo_doc) RETURNING r_z04.*
-	LET numero = r_r38.r38_num_sri CLIPPED, ' (',
-			rm_r19.r19_num_tran USING "<<<<<<<&", ')'
-	--}
 	CALL fl_lee_tipo_doc(rm_r19.r19_cod_tran) RETURNING r_z04.*
 	LET numero = rm_g02.g02_serie_cia USING "&&&", "-",
 			rm_g02.g02_serie_loc USING "&&&", "-",
 			rm_r19.r19_num_tran USING "&&&&&&&&&"
-	--LET documento = "COMPROBANTE GUIA DE REMISION No. GR - ",
 	LET documento = "GUIA DE REMISION No. GR - ",
 			rm_g02.g02_serie_cia USING "&&&", "-",
 			rm_g02.g02_serie_loc USING "&&&", "-",
@@ -350,14 +336,6 @@ PAGE HEADER
 	CALL fl_lee_modulo(vg_modulo) RETURNING r_g50.*
 	LET modulo = "MODULO: ", r_g50.g50_nombre[1, 19] CLIPPED
 	SKIP 2 LINES
-	{--
-	print ASCII escape;
-	print ASCII act_comp
-	PRINT COLUMN 001, ASCII escape, ASCII act_neg, modulo CLIPPED,
-	      COLUMN 039, documento CLIPPED,
-	      COLUMN 126, UPSHIFT(vg_proceso),
-			ASCII escape, ASCII des_neg
-	--}
 	PRINT COLUMN 002, ASCII escape, ASCII act_12cpi, ASCII escape,
 			ASCII act_dob1, ASCII act_dob2,
 			ASCII escape, ASCII act_neg,
@@ -385,7 +363,6 @@ PAGE HEADER
 		PRINT COLUMN 070, "TIPO: ",
 		      COLUMN 100, r_g21.g21_nombre CLIPPED
 	END IF
-	--SKIP 1 LINES
 	PRINT COLUMN 001, ASCII escape, ASCII act_neg,
 			"MOTIVO DEL TRASLADO: ",
 			ASCII escape, ASCII des_neg,
@@ -435,8 +412,6 @@ PAGE HEADER
 	END IF
 	PRINT COLUMN 100, proc_orden2 CLIPPED
 	SKIP 1 LINES
-	--PRINT COLUMN 070, "AUTORIZACION SRI: ",
-	--      COLUMN 100, rm_r95.r95_autoriz_sri
 	PRINT COLUMN 001, "FECHA DE EMISON: ",
 	      COLUMN 024, rm_r95.r95_fecha_emi USING "dd-mm-yyyy",
 	      COLUMN 070, ASCII escape, ASCII act_neg,
@@ -467,7 +442,7 @@ PAGE HEADER
 	      COLUMN 033, rm_r95.r95_pers_id_dest CLIPPED
 	PRINT COLUMN 001, "PUNTO DE LLEGADA: ",
 	      COLUMN 033, rm_r95.r95_punto_lleg[1, 97] CLIPPED
-	PRINT COLUMN 001, "FECHA IMPRESION : ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 001, "FECHA IMPRESION : ", vg_fecha USING "dd-mm-yyyy",
 		1 SPACES, TIME,
 	      COLUMN 114, "USUARIO: ", usuario
 	SKIP 1 LINES
@@ -523,7 +498,6 @@ ON LAST ROW
 	END IF
 
 PAGE TRAILER
-	--IF rm_r19.r19_cod_tran = 'FA' THEN
 		IF vm_guia_cp THEN
 			DECLARE q_cp2 CURSOR FOR
 				SELECT r19_codcli
@@ -563,28 +537,6 @@ PAGE TRAILER
 				ASCII escape, ASCII act_neg,
 				rm_r19.r19_cedruc CLIPPED, ".",
 				ASCII escape, ASCII des_neg
-	{--
-	ELSE
-		PRINT COLUMN 002, ASCII escape, ASCII act_12cpi, ASCII escape,
-				ASCII act_dob1, ASCII act_dob2,
-				ASCII escape, ASCII act_neg,
-		      COLUMN 008, "COPIA SIN DERECHO A CREDITO TRIBUTARIO",
-			ASCII escape, ASCII act_dob1, ASCII des_dob,
-			ASCII escape, ASCII act_10cpi,
-			ASCII escape, ASCII des_neg
-		PRINT COLUMN 002, "Estimado cliente: Por cada comprobante electronico,",
-				" usted recibira un email de notificacion;",
-				" tambien podra consultar y descargar"
-		PRINT COLUMN 002, "sus comprobantes electronicos desde cualquier ",
-				"lugar (24/7), a traves de nuestro portal web ",
-				ASCII escape, ASCII act_neg,
-				"https://innobeefactura.com.",
-				ASCII escape, ASCII des_neg
-		PRINT COLUMN 001, " "
-		PRINT COLUMN 001, " "
-		PRINT COLUMN 001, " "
-	END IF
-	--}
 	print ASCII escape;
 	print ASCII desact_comp 
 
@@ -605,7 +557,6 @@ DEFINE r_rep		RECORD
 DEFINE r_z04		RECORD LIKE cxct004.*
 DEFINE r_g21		RECORD LIKE gent021.*
 DEFINE r_r36		RECORD LIKE rept036.*
---DEFINE r_r38		RECORD LIKE rept038.*
 DEFINE r_r96		RECORD LIKE rept096.*
 DEFINE r_g50		RECORD LIKE gent050.*
 DEFINE documento	VARCHAR(60)
@@ -655,18 +606,6 @@ PAGE HEADER
 					r_r96.r96_num_entrega)
 		RETURNING r_r36.*
 	CALL fl_lee_cod_transaccion(rm_r19.r19_cod_tran) RETURNING r_g21.*
-	{--
-	INITIALIZE r_r38.* TO NULL
-	SELECT * INTO r_r38.*
-		FROM rept038
-		WHERE r38_compania    = rm_r19.r19_compania
-		  AND r38_localidad   = rm_r19.r19_localidad
-		  AND r38_tipo_fuente = 'PR'
-		  AND r38_cod_tran    = rm_r19.r19_cod_tran
-		  AND r38_num_tran    = rm_r19.r19_num_tran
-	CALL fl_lee_tipo_doc(r_r38.r38_tipo_doc) RETURNING r_z04.*
-	LET numero = r_r38.r38_num_sri CLIPPED, ' (', rm_r19.r19_num_tran USING "<<<<<<<&", ')'
-	--}
 	CALL fl_lee_tipo_doc(rm_r19.r19_cod_tran) RETURNING r_z04.*
 	LET numero = rm_g02.g02_serie_cia USING "&&&", "-",
 			rm_g02.g02_serie_loc USING "&&&", "-",

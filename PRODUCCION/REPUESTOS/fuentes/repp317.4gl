@@ -122,7 +122,7 @@ CALL borrar_cabecera()
 CALL mostrar_botones_det()
 LET rm_r89.r89_usuario = vg_usuario
 CALL obtener_fecha_ini()
-LET vm_fecha_fin       = TODAY
+LET vm_fecha_fin       = vg_fecha
 LET vm_ordenar         = 'N'
 WHILE TRUE
 	CALL borrar_detalle()
@@ -393,7 +393,7 @@ INPUT BY NAME rm_r89.r89_usuario, vm_fecha_ini, vm_fecha_fin, vm_bodega,
 			LET vm_fecha_ini = fecha_ini
 			DISPLAY BY NAME vm_fecha_ini
 		END IF
-		IF vm_fecha_ini > TODAY THEN
+		IF vm_fecha_ini > vg_fecha THEN
 			CALL fl_mostrar_mensaje('La Fecha Inicial no puede ser mayor a la de hoy.','exclamation')
 			NEXT FIELD vm_fecha_ini
 		END IF
@@ -402,7 +402,7 @@ INPUT BY NAME rm_r89.r89_usuario, vm_fecha_ini, vm_fecha_fin, vm_bodega,
 			LET vm_fecha_fin = fecha_fin
 			DISPLAY BY NAME vm_fecha_fin
 		END IF
-		IF vm_fecha_fin > TODAY THEN
+		IF vm_fecha_fin > vg_fecha THEN
 			CALL fl_mostrar_mensaje('La Fecha Final no puede ser mayor a la de hoy.','exclamation')
 			NEXT FIELD vm_fecha_fin
 		END IF
@@ -555,6 +555,8 @@ DEFINE r_inv_aux	RECORD
 				r89_stock_act	LIKE rept089.r89_stock_act
 			END RECORD
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 BEGIN WORK
 	WHENEVER ERROR STOP
 	DECLARE q_modinv CURSOR FOR
@@ -609,6 +611,7 @@ BEGIN WORK
 		ROLLBACK WORK
 		RETURN
 	END IF
+	LET fecha_actual = fl_current()
 	UPDATE rept089 SET r89_stock_act  = rm_inventario[i].r89_stock_act,
 			   r89_bueno      = rm_inventario[i].r89_bueno,
 			   r89_incompleto = rm_inventario[i].r89_incompleto,
@@ -705,7 +708,7 @@ END FUNCTION
  
 FUNCTION obtener_fecha_ini()
 
-SELECT NVL(MIN(r89_fecing), TODAY) INTO vm_fecha_ini
+SELECT NVL(MIN(r89_fecing), vg_fecha) INTO vm_fecha_ini
 	FROM rept089
 	WHERE r89_compania      = vg_codcia
 	  AND r89_localidad     = vg_codloc
@@ -819,7 +822,7 @@ PAGE HEADER
 	PRINT COLUMN 022, "** FECHA FINAL   : ", vm_fecha_fin
 							USING "dd-mm-yyyy"
 	SKIP 1 LINES
-	PRINT COLUMN 001, "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 001, "FECHA IMPRESION: ", vg_fecha USING "dd-mm-yyyy",
  		1 SPACES, TIME,
 	      COLUMN 062, usuario
 	PRINT "--------------------------------------------------------------------------------"

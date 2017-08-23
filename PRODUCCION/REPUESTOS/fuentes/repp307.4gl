@@ -113,8 +113,8 @@ CALL fl_lee_usuario(vg_usuario) RETURNING rm_g05.*
 LET vm_num_rows    = 0
 LET vm_row_current = 0
 LET vm_num_det     = 0
-LET vm_fecha_desde = TODAY
-LET vm_fecha_hasta = TODAY
+LET vm_fecha_desde = vg_fecha
+LET vm_fecha_hasta = vg_fecha
 LET vm_solo_fact   = 'N'
 LET vm_solo_costo  = 'N'
 CALL setear_botones_det()
@@ -388,7 +388,7 @@ INPUT BY NAME rm_r20.r20_item, vm_bodega, vm_solo_fact, vm_fecha_desde,
 		END IF
 	AFTER FIELD vm_fecha_desde 
 		IF vm_fecha_desde IS NOT NULL THEN
-			IF vm_fecha_desde > TODAY THEN
+			IF vm_fecha_desde > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La Fecha Desde, no puede ser mayor a la fecha de hoy.', 'exclamation')
 				NEXT FIELD vm_fecha_desde
 			END IF
@@ -402,7 +402,7 @@ INPUT BY NAME rm_r20.r20_item, vm_bodega, vm_solo_fact, vm_fecha_desde,
 		END IF
 	AFTER FIELD vm_fecha_hasta 
 		IF vm_fecha_hasta IS NOT NULL THEN
-			IF vm_fecha_hasta > TODAY THEN
+			IF vm_fecha_hasta > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La Fecha Hasta, no puede ser mayor a la fecha de hoy.','exclamation')
 				NEXT FIELD vm_fecha_hasta
 			END IF
@@ -1330,7 +1330,7 @@ PAGE HEADER
 	PRINT COLUMN 010, "** FECHA FINAL   : ", vm_fecha_hasta
 							USING "dd-mm-yyyy"
 	SKIP 1 LINES
-	PRINT COLUMN 001, "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 001, "FECHA IMPRESION: ", vg_fecha USING "dd-mm-yyyy",
  		1 SPACES, TIME,
 	      COLUMN 062, usuario
 	PRINT "--------------------------------------------------------------------------------"
@@ -1444,7 +1444,7 @@ PAGE HEADER
 	PRINT COLUMN 010, "** FECHA FINAL   : ", vm_fecha_hasta
 							USING "dd-mm-yyyy"
 	SKIP 1 LINES
-	PRINT COLUMN 001, "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 001, "FECHA IMPRESION: ", vg_fecha USING "dd-mm-yyyy",
  		1 SPACES, TIME,
 	      COLUMN 062, usuario
 	PRINT "--------------------------------------------------------------------------------"

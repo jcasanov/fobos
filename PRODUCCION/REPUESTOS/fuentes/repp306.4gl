@@ -80,7 +80,7 @@ INITIALIZE rm_par.* TO NULL
 LET rm_par.r21_moneda = rg_gen.g00_moneda_base
 CALL fl_lee_moneda(rm_par.r21_moneda) RETURNING r_mon.* 
 LET rm_par.tit_moneda = r_mon.g13_nombre
-LET rm_par.fecha_fin = TODAY
+LET rm_par.fecha_fin = vg_fecha
 LET lin_menu = 0
 LET row_ini  = 3
 LET num_rows = 22
@@ -236,7 +236,7 @@ INPUT BY NAME rm_par.*
 	AFTER FIELD fecha_ini
 		IF rm_par.fecha_ini IS NOT NULL THEN
 			IF rm_par.fecha_fin IS NULL THEN
-				LET rm_par.fecha_fin = TODAY
+				LET rm_par.fecha_fin = vg_fecha
 				DISPLAY BY NAME rm_par.fecha_fin
 			END IF
 		END IF
@@ -688,7 +688,7 @@ PAGE HEADER
 	ELSE
 		SKIP 1 LINES
 	END IF
-	PRINT COLUMN 01, "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 01, "FECHA IMPRESION: ", vg_fecha USING "dd-mm-yyyy",
 		1 SPACES, TIME,
 	      COLUMN 72, usuario
 	SKIP 2 LINES

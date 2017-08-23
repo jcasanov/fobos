@@ -112,9 +112,9 @@ IF NOT hecho THEN
 	ROLLBACK WORK
 	EXIT PROGRAM
 END IF
---IF rm_cprev.r23_num_ot IS NULL THEN
-	CALL genera_orden_despacho()
---END IF
+
+CALL genera_orden_despacho()
+
 CALL actualiza_item_seriados()
 UPDATE rept021 SET r21_cod_tran = rm_cabt.r19_cod_tran,
                    r21_num_tran = rm_cabt.r19_num_tran

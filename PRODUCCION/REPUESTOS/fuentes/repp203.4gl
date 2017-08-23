@@ -31,11 +31,14 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
+CALL startlog('../logs/repp203.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
+
+{*
+ * 4 argumentos es la llamada normal
+ *}
 IF num_args() <> 4 THEN
-     	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto','stop')
 	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
      	EXIT PROGRAM
 END IF
@@ -152,7 +155,6 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 			CALL fl_lee_pedido_rep(vg_codcia, vg_codloc, rm_par.r16_pedido)
 					RETURNING r_r16.*
 			IF r_r16.r16_pedido IS NOT NULL THEN
-				--CALL fgl_winmessage(vg_producto,'Pedido ya existe', 'exclamation')
 				CALL fl_mostrar_mensaje('Pedido ya existe.', 'exclamation')
 				NEXT FIELD r16_pedido
 			END IF
@@ -161,7 +163,6 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 		IF rm_par.r16_linea IS NOT NULL THEN                                           	
 			CALL fl_lee_linea_rep(vg_codcia, rm_par.r16_linea) RETURNING r_r03.*                                       
         		IF r_r03.r03_codigo IS NULL THEN                                    
-        			--CALL fgl_winmessage(vg_producto,'Línea no existe', 'exclamation')
 				CALL fl_mostrar_mensaje('Línea no existe.', 'exclamation')
         			NEXT FIELD r16_linea                                           
         		END IF                      
@@ -170,7 +171,6 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 		IF rm_par.r16_proveedor IS NOT NULL THEN                                           
 			CALL fl_lee_proveedor(rm_par.r16_proveedor) RETURNING r_p01.*   
         		IF r_p01.p01_codprov IS NULL THEN                                       
-        			--CALL fgl_winmessage(vg_producto,'Proveedor no existe.', 'exclamation')
 				CALL fl_mostrar_mensaje('Proveedor no existe.', 'exclamation')
         			NEXT FIELD r16_proveedor                                           
         		END IF     
@@ -178,8 +178,7 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
         		CALL fl_lee_proveedor_localidad(vg_codcia, vg_codloc, 
         					rm_par.r16_proveedor) RETURNING rm_p02.*              
         		IF rm_p02.p02_codprov IS NULL THEN                                          
-        			--CALL fgl_winmessage(vg_producto,'Proveedor no está activado para la compañía.', 'exclamation')
-				CALL fl_mostrar_mensaje('Proveedor no está activado para la compañía.', 'exclamation')
+					CALL fl_mostrar_mensaje('Proveedor no está activado para la compañía.', 'exclamation')
         			NEXT FIELD r16_proveedor                                                                  
         	 	END IF                                                                                                                                            
         	ELSE
@@ -189,8 +188,7 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
         	IF rm_par.bod_est IS NOT NULL THEN                                                                   
         		CALL fl_lee_bodega_rep(vg_codcia, rm_par.bod_est) RETURNING r_r02.*                                      
         		IF r_r02.r02_codigo IS NULL THEN                                                                  
-        			--CALL fgl_winmessage(vg_producto,'Bodega no existe.', 'exclamation')                        
-				CALL fl_mostrar_mensaje('Bodega no existe.', 'exclamation')                        
+					CALL fl_mostrar_mensaje('Bodega no existe.', 'exclamation')                        
         			NEXT FIELD bod_est                                                                   
         		END IF                                                                                             
         		DISPLAY r_r02.r02_nombre TO name_bod                                                             
@@ -206,23 +204,13 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 		END IF
 	AFTER INPUT
 		IF rm_par.periodo_vtp > rm_par.r16_periodo_vta THEN
-			--CALL fgl_winmessage(vg_producto,'El periodo de cálculo para ventas perdidas no puede ser mayor al de las ventas.','exclamation')
 			CALL fl_mostrar_mensaje('El periodo de cálculo para ventas perdidas no puede ser mayor al de las ventas.','exclamation')
-                	NEXT FIELD periodo_vtp
-                END IF                                                                                                                                                                                 
+            NEXT FIELD periodo_vtp
+        END IF                                                                                                                                                                                 
 		IF rm_par.r16_minimo >= rm_par.r16_maximo THEN
-			--CALL fgl_winmessage(vg_producto,'El periodo mínimo debe ser menor al máximo. ', 'exclamation')
 			CALL fl_mostrar_mensaje('El periodo mínimo debe ser menor al máximo. ', 'exclamation')
                         NEXT FIELD r16_minimo
                 END IF                                          
-	{
-                IF rm_par.r16_pto_reorden < rm_par.r16_minimo OR
-                	rm_par.r16_pto_reorden >= rm_par.r16_maximo THEN
-                	--CALL fgl_winmessage(vg_producto,'El punto de reorden debe ser igual o mayor que el mínimo, y menor que el máximo.','exclamation')
-			CALL fl_mostrar_mensaje('El punto de reorden debe ser igual o mayor que el mínimo, y menor que el máximo.','exclamation')
-                        NEXT FIELD r16_pto_reorden
-            	END IF
-	}
 END INPUT
 
 END FUNCTION            
@@ -250,34 +238,7 @@ DEFINE uni_minimo		DECIMAL(10,2)
 DEFINE i			INTEGER
 
 INITIALIZE r_r16.* TO NULL
-{--
-DECLARE qu_gl CURSOR FOR SELECT g20_grupo_linea FROM gent020
-	WHERE g20_compania = vg_codcia
-OPEN qu_gl 
-FETCH qu_gl INTO grupo_linea 
-IF STATUS = NOTFOUND THEN                              
-	ROLLBACK WORK
-	CALL fl_mostrar_mensaje('No hay grupo de línea configurado.','stop') 
-	EXIT PROGRAM
-END IF
-CALL fl_lee_compania_repuestos(vg_codcia) RETURNING r_r00.*
-DECLARE q_lindo CURSOR FOR SELECT UNIQUE b40_transito FROM ctbt040
-	WHERE b40_compania    = vg_codcia AND 
-	      b40_localidad   = vg_codloc AND 
-	      b40_modulo      = vg_modulo AND 
-	      b40_bodega      = r_r00.r00_bodega_fact AND
-	      b40_grupo_linea = grupo_linea
-OPEN q_lindo 
-FETCH q_lindo INTO r_r16.r16_aux_cont
-IF status = NOTFOUND THEN
-	DECLARE q_cttran CURSOR FOR 
-		SELECT b10_cuenta FROM ctbt010
-			WHERE b10_compania = vg_codcia	
-	OPEN q_cttran
-	FETCH q_cttran INTO r_r16.r16_aux_cont
-END IF
---}
-LET r_r16.r16_aux_cont = NULL
+
 IF rm_par.bod_est IS NOT NULL THEN
 	SELECT r02_codigo FROM rept002 
 		WHERE r02_estado = 'A' AND r02_codigo = rm_par.bod_est
@@ -302,10 +263,10 @@ LET r_r16.r16_seguridad 	= rm_p02.p02_dias_seguri
 LET r_r16.r16_maximo  		= rm_par.r16_maximo
 LET r_r16.r16_minimo  		= rm_par.r16_minimo
 LET r_r16.r16_periodo_vta     	= rm_par.r16_periodo_vta
-LET r_r16.r16_pto_reorden  	= 0                     --rm_par.r16_pto_reorden
+LET r_r16.r16_pto_reorden  	= 0     
 LET r_r16.r16_flag_estad  	= 'M'
 LET r_r16.r16_usuario 		= vg_usuario
-LET r_r16.r16_fecing 		= CURRENT
+LET r_r16.r16_fecing 		= fl_current()
 INSERT INTO rept016 VALUES (r_r16.*)
 LET total_items = 0
 SELECT r12_item FROM temp_vta
@@ -320,7 +281,6 @@ DECLARE qu_sug CURSOR FOR
 		      r10_estado   = 'A'
 LET i = 0
 FOREACH qu_sug INTO r_r10.*
-	--DISPLAY i, '  ', total_items, '  ', r_r10.r10_codigo
 	LET i = i + 1
 	IF r_r10.r10_linea <> rm_par.r16_linea THEN
 		CONTINUE FOREACH
@@ -417,7 +377,6 @@ FOREACH qu_sug INTO r_r10.*
 	INSERT INTO rept018 VALUES (r_r18.*)
 END FOREACH	
 IF total_items = 0 THEN
-     	--CALL fgl_winmessage(vg_producto,'No se generó pedido, verifique parámetros.', 'stop')
 	CALL fl_mostrar_mensaje('No se generó pedido, verifique parámetros.', 'stop')
 	DELETE FROM rept016 
 		WHERE r16_compania  = vg_codcia AND 
@@ -434,7 +393,7 @@ DEFINE meses_vta		SMALLINT
 DEFINE meses_vtp		SMALLINT
 DEFINE fecha_ini, fecha_fin	DATE            
 
-LET fecha_fin = TODAY - 1                                    
+LET fecha_fin = vg_fecha - 1                                    
 LET fecha_ini = fecha_fin - (rm_par.r16_periodo_vta * 30) + 1
 SELECT r12_item, SUM(r12_uni_venta - r12_uni_dev) te_uni_vta FROM rept012 
 	WHERE r12_compania = vg_codcia AND 
@@ -442,7 +401,7 @@ SELECT r12_item, SUM(r12_uni_venta - r12_uni_dev) te_uni_vta FROM rept012
 	      r12_bodega IN (SELECT r02_codigo FROM temp_bodegas)
 	GROUP BY 1
 	INTO TEMP temp_vta
-LET fecha_fin = TODAY - 1                                    	  
+LET fecha_fin = vg_fecha - 1                                    	  
 LET fecha_ini = fecha_fin - (rm_par.periodo_vtp * 30) + 1
 SELECT r12_item, SUM(r12_uni_perdi) te_uni_vtp FROM rept012 
 	WHERE r12_compania = vg_codcia AND                                        

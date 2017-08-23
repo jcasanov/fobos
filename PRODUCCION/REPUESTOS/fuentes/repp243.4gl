@@ -117,8 +117,8 @@ DEFINE i,j,col		SMALLINT
 DEFINE query		CHAR(3000)
 DEFINE expr_sql         CHAR(400)
 
-LET vm_fecha_ini = TODAY
-LET vm_fecha_fin = TODAY
+LET vm_fecha_ini = vg_fecha
+LET vm_fecha_fin = vg_fecha
 WHILE TRUE
 	DELETE FROM tmp_sri 
 	LET vm_num_det = 0
@@ -146,7 +146,6 @@ WHILE TRUE
 			' FROM rept095, rept097, OUTER rept096 ',
 			' WHERE r95_compania      = ', vg_codcia,
 			'   AND r95_localidad     = ', vg_codloc,
-			--'   AND r95_estado        = "A"',
 			'   AND DATE(r95_fecing)  BETWEEN "', vm_fecha_ini,
 						  '" AND "', vm_fecha_fin,'"',
 			'   AND ', expr_sql CLIPPED,
@@ -193,10 +192,8 @@ WHILE TRUE
 			ON KEY(F5)
 				LET i = arr_curr()
 				LET j = scr_line()
-				--IF rm_det[i].r95_estado = 'A' THEN
-					CALL control_modificar(i, j)
-					LET int_flag = 0
-				--END IF
+				CALL control_modificar(i, j)
+				LET int_flag = 0
 			ON KEY(F6)
 				LET i = arr_curr()
 				LET j = scr_line()
@@ -227,11 +224,7 @@ WHILE TRUE
 				--#LET j = scr_line()
 				--#CALL muestra_contadores_det(i, vm_num_det)
 				--#DISPLAY BY NAME rm_adi[i].*
-				--IF rm_det[i].r95_estado = 'A' THEN
-					--#CALL dialog.keysetlabel("F5","Modificar")
-				--ELSE
-					--CALL dialog.keysetlabel("F5","")
-				--END IF
+				--#CALL dialog.keysetlabel("F5","Modificar")
 			--#AFTER DISPLAY 
 				--#CONTINUE DISPLAY
 		END DISPLAY
@@ -266,7 +259,7 @@ DEFINE mensaje		VARCHAR(250)
 
 OPTIONS INPUT NO WRAP
 INITIALIZE expr_sql, nulo TO NULL
-LET fecha_ini = TODAY - (TODAY - MDY(01, 01, YEAR(TODAY))) UNITS DAY
+LET fecha_ini = vg_fecha - (vg_fecha - MDY(01, 01, YEAR(vg_fecha))) UNITS DAY
 LET int_flag  = 0
 INPUT BY NAME vm_fecha_ini, vm_fecha_fin
 	WITHOUT DEFAULTS
@@ -280,22 +273,22 @@ INPUT BY NAME vm_fecha_ini, vm_fecha_fin
 		--#CALL dialog.keysetlabel("CONTROL-W","")
 	AFTER FIELD vm_fecha_ini 
 		IF vm_fecha_ini IS NOT NULL THEN
-			IF vm_fecha_ini > TODAY THEN
+			IF vm_fecha_ini > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha inicial no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD vm_fecha_ini
 			END IF
 		ELSE
-			LET vm_fecha_ini = TODAY
+			LET vm_fecha_ini = vg_fecha
 			DISPLAY BY NAME vm_fecha_ini
 		END IF
 	AFTER FIELD vm_fecha_fin 
 		IF vm_fecha_fin IS NOT NULL THEN
-			IF vm_fecha_fin > TODAY THEN
+			IF vm_fecha_fin > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha final no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD vm_fecha_fin
 			END IF
 		ELSE
-			LET vm_fecha_fin = TODAY
+			LET vm_fecha_fin = vg_fecha
 			DISPLAY BY NAME vm_fecha_fin
 		END IF
 	AFTER INPUT
@@ -358,10 +351,6 @@ BEGIN WORK
 			WHERE g37_compania  =  vg_codcia
 			  AND g37_localidad =  vg_codloc
 			  AND g37_tipo_doc  =  vm_tipo_doc
-			{--
-		  	  AND g37_fecha_emi <= DATE(TODAY)
-		  	  AND g37_fecha_exp >= DATE(TODAY)
-			--}
 			  AND g37_secuencia IN
 				(SELECT MAX(g37_secuencia)
 				FROM gent037

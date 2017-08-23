@@ -130,8 +130,8 @@ DISPLAY r_g13.g13_nombre TO tit_moneda
 LET vm_moneda_des  = r_g13.g13_nombre
 LET vm_stock_tot   = 'S'
 LET vm_stock_loc   = 'S'
-LET rm_r31.r31_ano = YEAR(TODAY)
-LET rm_r31.r31_mes = MONTH(TODAY)
+LET rm_r31.r31_ano = YEAR(vg_fecha)
+LET rm_r31.r31_mes = MONTH(vg_fecha)
 CALL fl_retorna_nombre_mes(rm_r31.r31_mes) RETURNING tit_mes
 DISPLAY BY NAME tit_mes
 LET vm_precios     = 'N'
@@ -263,20 +263,16 @@ INPUT BY NAME vm_moneda, rm_r11.r11_bodega, rm_r10.r10_linea,
                        	CALL fl_lee_moneda(vm_moneda)
                                	RETURNING r_g13.*
                        	IF r_g13.g13_moneda IS NULL THEN
-                               	--CALL fgl_winmessage(vg_producto,'Moneda no existe.','exclamation')
-				CALL fl_mostrar_mensaje('Moneda no existe.','exclamation')
-                               	NEXT FIELD vm_moneda
+							CALL fl_mostrar_mensaje('Moneda no existe.','exclamation')
+                            NEXT FIELD vm_moneda
                        	END IF
-                       	IF vm_moneda <> rg_gen.g00_moneda_base
-                       	AND vm_moneda <> rg_gen.g00_moneda_alt THEN
-                               	--CALL fgl_winmessage(vg_producto,'La moneda solo puede ser moneda base o alterna.','exclamation')
-				CALL fl_mostrar_mensaje('La moneda solo puede ser moneda base o alterna.','exclamation')
-                               	NEXT FIELD vm_moneda
-			END IF
+                       	IF vm_moneda <> rg_gen.g00_moneda_base AND vm_moneda <> rg_gen.g00_moneda_alt THEN
+							CALL fl_mostrar_mensaje('La moneda solo puede ser moneda base o alterna.','exclamation')
+                            NEXT FIELD vm_moneda
+						END IF
                	ELSE
                        	LET vm_moneda = rg_gen.g00_moneda_base
-                       	CALL fl_lee_moneda(vm_moneda)
-				RETURNING r_g13.*
+                       	CALL fl_lee_moneda(vm_moneda) RETURNING r_g13.*
                        	DISPLAY BY NAME vm_moneda
                	END IF
                	DISPLAY r_g13.g13_nombre TO tit_moneda
@@ -286,9 +282,8 @@ INPUT BY NAME vm_moneda, rm_r11.r11_bodega, rm_r10.r10_linea,
                        	CALL fl_lee_bodega_rep(vg_codcia, rm_r11.r11_bodega)
                      		RETURNING r_r02.*
                         IF r_r02.r02_compania IS NULL THEN
-                               	--CALL fgl_winmessage(vg_producto,'Bodega no existe.','exclamation')
-				CALL fl_mostrar_mensaje('Bodega no existe.','exclamation')
-                               	NEXT FIELD r11_bodega
+							CALL fl_mostrar_mensaje('Bodega no existe.','exclamation')
+                            NEXT FIELD r11_bodega
                         END IF
 			DISPLAY r_r02.r02_nombre TO tit_bodega
 		ELSE
@@ -551,8 +546,8 @@ INPUT BY NAME vm_moneda, rm_r11.r11_bodega, rm_r10.r10_linea,
 			NEXT FIELD r10_marca2
 		END IF
 		INITIALIZE vm_bodega TO NULL
-		IF rm_r31.r31_ano = YEAR(TODAY)	AND
-		   rm_r31.r31_mes = MONTH(TODAY) THEN
+		IF rm_r31.r31_ano = YEAR(vg_fecha)	AND
+		   rm_r31.r31_mes = MONTH(vg_fecha) THEN
 			IF rm_r11.r11_bodega IS NOT NULL THEN
 				LET vm_bodega = '   AND r11_bodega   = "',
 						rm_r11.r11_bodega, '"'
@@ -566,8 +561,8 @@ INPUT BY NAME vm_moneda, rm_r11.r11_bodega, rm_r10.r10_linea,
 END INPUT
 IF vm_moneda = rg_gen.g00_moneda_base THEN
 	IF vm_precios = 'S' THEN
-		IF rm_r31.r31_ano = YEAR(TODAY)	AND
-		   rm_r31.r31_mes = MONTH(TODAY) THEN
+		IF rm_r31.r31_ano = YEAR(vg_fecha)	AND
+		   rm_r31.r31_mes = MONTH(vg_fecha) THEN
 			LET expr_sql = ', r10_precio_mb '
 		ELSE
 			LET expr_sql = ', r31_precio_mb '
@@ -576,8 +571,8 @@ IF vm_moneda = rg_gen.g00_moneda_base THEN
 END IF
 IF vm_moneda = rg_gen.g00_moneda_alt THEN
 	IF vm_precios = 'S' THEN
-		IF rm_r31.r31_ano = YEAR(TODAY)	AND
-		   rm_r31.r31_mes = MONTH(TODAY) THEN
+		IF rm_r31.r31_ano = YEAR(vg_fecha)	AND
+		   rm_r31.r31_mes = MONTH(vg_fecha) THEN
 			LET expr_sql = ', r10_precio_ma '
 		ELSE
 			LET expr_sql = ', r31_precio_ma '
@@ -621,7 +616,7 @@ CALL fl_lee_ciudad(rm_g02.g02_ciudad) RETURNING r_g31.*
 IF vm_precios = 'S' THEN
 	LET expr_sql = expr_sql CLIPPED, ' precio_sto '
 END IF
-IF rm_r31.r31_ano = YEAR(TODAY) AND rm_r31.r31_mes = MONTH(TODAY) THEN
+IF rm_r31.r31_ano = YEAR(vg_fecha) AND rm_r31.r31_mes = MONTH(vg_fecha) THEN
 	LET query = 'SELECT r10_sec_item, r10_linea, r10_sub_linea,',
 		' r10_cod_grupo, r10_cod_clase, r10_codigo, r10_marca,',
 		' r10_nombre, r11_bodega, r11_stock_act, 0 sto_nac, 0 sto_tot,',
@@ -729,7 +724,7 @@ IF vm_bodega IS NULL THEN
 	LET expr_loc  = '   AND g02_compania  = r02_compania ',
 			'   AND g02_localidad = r02_localidad '
 END IF
-IF rm_r31.r31_ano = YEAR(TODAY) AND rm_r31.r31_mes = MONTH(TODAY) THEN
+IF rm_r31.r31_ano = YEAR(vg_fecha) AND rm_r31.r31_mes = MONTH(vg_fecha) THEN
 	LET query = 'SELECT NVL(SUM(r11_stock_act), 0) ',
 			' FROM tmp_stocks, rept002 ', tabla_loc CLIPPED,
 		        ' WHERE r10_codigo    = "', codigo, '"',
@@ -1193,7 +1188,7 @@ PAGE HEADER
 	PRINT COLUMN 044, "** ANIO   : ", rm_r31.r31_ano USING "&&&&"
 	PRINT COLUMN 044, "** MES    : ", rm_r31.r31_mes USING "&&", ' ',tit_mes
 	SKIP 1 LINES 
-	PRINT COLUMN 001,"FECHA DE IMPRESION: ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 001,"FECHA DE IMPRESION: ", vg_fecha USING "dd-mm-yyyy",
 		1 SPACES, TIME,
 	      COLUMN 114, usuario
 	PRINT "------------------------------------------------------------------------------------------------------------------------------------"
@@ -1313,52 +1308,7 @@ AFTER GROUP OF r_rep.clase
 	PRINT COLUMN 104, tot_sto_t_cla		USING "----,--&.#"
 	SKIP 1 LINES
 	
-{--
-AFTER GROUP OF r_rep.grupo
-	NEED 3 LINES
-	PRINT COLUMN 082, "----------",
-	      COLUMN 093, "----------",
-	      COLUMN 104, "----------"
-	PRINT COLUMN 060, "TOTALES DEL GRUPO ==> ",
-	      COLUMN 082, tot_sto_l_grp		USING "----,--&.#",
-	      COLUMN 093, tot_sto_n_grp		USING "----,--&.#",
-	      COLUMN 104, tot_sto_t_grp		USING "----,--&.#"
-	SKIP 1 LINES
-
-AFTER GROUP OF r_rep.sublinea
-	NEED 3 LINES
-	PRINT COLUMN 082, "----------",
-	      COLUMN 093, "----------",
-	      COLUMN 104, "----------"
-	PRINT COLUMN 058, "TOTALES DE LA LINEA ==> ",
-	      COLUMN 082, tot_sto_l_lin		USING "-------&.#",
-	      COLUMN 093, tot_sto_n_lin		USING "-------&.#",
-	      COLUMN 104, tot_sto_t_lin		USING "-------&.#"
-	SKIP 1 LINES
-
-AFTER GROUP OF r_rep.linea
-	NEED 3 LINES
-	PRINT COLUMN 082, "----------",
-	      COLUMN 093, "----------",
-	      COLUMN 104, "----------"
-	PRINT COLUMN 058, "TOTALES DE DIVISION ==> ",
-	      COLUMN 082, tot_sto_l_div		USING "-------&.#",
-	      COLUMN 093, tot_sto_n_div		USING "-------&.#",
-	      COLUMN 104, tot_sto_t_div		USING "-------&.#"
-	SKIP 1 LINES
---}
-
 ON LAST ROW
-	{--
-	NEED 2 LINES
-	PRINT COLUMN 082, "----------",
-	      COLUMN 093, "----------",
-	      COLUMN 104, "----------"
-	PRINT COLUMN 060, "TOTALES GENERALES ==> ",
-	      COLUMN 082, tot_sto_l_gen		USING "-------&.#",
-	      COLUMN 093, tot_sto_n_gen		USING "-------&.#",
-	      COLUMN 104, tot_sto_t_gen		USING "-------&.#";
-	--}
 	print ASCII escape;
 	print ASCII desact_comp
 

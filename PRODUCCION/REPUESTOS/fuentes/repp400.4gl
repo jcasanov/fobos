@@ -23,11 +23,10 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
+CALL startlog('../logs/repp400.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN   -- Validar # parámetros correcto
-	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.','stop')
 	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
@@ -97,14 +96,13 @@ DEFINE total_net	DECIMAL(12,2)
 DEFINE comando		VARCHAR(100)
 DEFINE expr_tipo	VARCHAR(50)
 
-LET vm_fecha_ini = TODAY
-LET vm_fecha_fin = TODAY
+LET vm_fecha_ini = vg_fecha
+LET vm_fecha_fin = vg_fecha
 LET rm_rep.r19_moneda = rg_gen.g00_moneda_base
 CALL fl_lee_moneda(rm_rep.r19_moneda) RETURNING r_mon.*
 IF r_mon.g13_moneda IS NULL THEN
-       	--CALL fgl_winmessage(vg_producto,'No existe moneda base.','stop')
 	CALL fl_mostrar_mensaje('No existe moneda base.','stop')
-        EXIT PROGRAM
+    EXIT PROGRAM
 END IF
 LET rm_rep.r19_cont_cred = 'T'
 IF vg_gui = 0 THEN
@@ -235,16 +233,13 @@ INPUT BY NAME rm_rep.r19_moneda, rm_rep.r19_vendedor, vm_fecha_ini,
                        	CALL fl_lee_moneda(rm_rep.r19_moneda)
                                	RETURNING r_mon.*
                        	IF r_mon.g13_moneda IS NULL THEN
-                               	--CALL fgl_winmessage(vg_producto,'Moneda no existe.','exclamation')
-				CALL fl_mostrar_mensaje('Moneda no existe.','exclamation')
-                               	NEXT FIELD r19_moneda
+							CALL fl_mostrar_mensaje('Moneda no existe.','exclamation')
+                            NEXT FIELD r19_moneda
                        	END IF
-                       	IF rm_rep.r19_moneda <> rg_gen.g00_moneda_base
-                       	AND rm_rep.r19_moneda <> rg_gen.g00_moneda_alt THEN
-                               	--CALL fgl_winmessage(vg_producto,'La moneda solo puede ser moneda base o alterna.','exclamation')
-				CALL fl_mostrar_mensaje('La moneda solo puede ser moneda base o alterna.','exclamation')
-                               	NEXT FIELD r19_moneda
-			END IF
+                       	IF rm_rep.r19_moneda <> rg_gen.g00_moneda_base AND rm_rep.r19_moneda <> rg_gen.g00_moneda_alt THEN
+							CALL fl_mostrar_mensaje('La moneda solo puede ser moneda base o alterna.','exclamation')
+                           	NEXT FIELD r19_moneda
+						END IF
                	ELSE
                        	LET rm_rep.r19_moneda = rg_gen.g00_moneda_base
                        	CALL fl_lee_moneda(rm_rep.r19_moneda)
@@ -255,8 +250,7 @@ INPUT BY NAME rm_rep.r19_moneda, rm_rep.r19_vendedor, vm_fecha_ini,
 		LET vm_moneda_des = r_mon.g13_nombre
 	AFTER FIELD vm_fecha_ini 
 		IF vm_fecha_ini IS NOT NULL THEN
-			IF vm_fecha_ini > TODAY THEN
-				--CALL fgl_winmessage(vg_producto,'La fecha de inicio no puede ser mayor a la de hoy.','exclamation')
+			IF vm_fecha_ini > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha de inicio no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD vm_fecha_ini
 			END IF
@@ -266,8 +260,7 @@ INPUT BY NAME rm_rep.r19_moneda, rm_rep.r19_vendedor, vm_fecha_ini,
 		END IF
 	AFTER FIELD vm_fecha_fin 
 		IF vm_fecha_fin IS NOT NULL THEN
-			IF vm_fecha_fin > TODAY THEN
-				--CALL fgl_winmessage(vg_producto,'La fecha de término no puede ser mayor a la de hoy.','exclamation')
+			IF vm_fecha_fin > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha de término no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD vm_fecha_fin
 			END IF
@@ -280,7 +273,6 @@ INPUT BY NAME rm_rep.r19_moneda, rm_rep.r19_vendedor, vm_fecha_ini,
 			CALL fl_lee_vendedor_rep(vg_codcia, rm_rep.r19_vendedor)
 				RETURNING rm_r01.*
 			IF rm_r01.r01_codigo IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'Vendedor no existe.','exclamation')
 				CALL fl_mostrar_mensaje('Vendedor no existe.','exclamation')
 				NEXT FIELD r19_vendedor
 			END IF 
@@ -298,7 +290,6 @@ INPUT BY NAME rm_rep.r19_moneda, rm_rep.r19_vendedor, vm_fecha_ini,
 		END IF
 	AFTER INPUT
 		IF vm_fecha_ini > vm_fecha_fin THEN
-			--CALL fgl_winmessage(vg_producto,'Fecha inicial debe ser menor a fecha final.','exclamation')
 			CALL fl_mostrar_mensaje('Fecha inicial debe ser menor a fecha final.','exclamation')
 			NEXT FIELD vm_fecha_ini
 		END IF
@@ -360,10 +351,6 @@ PAGE HEADER
 	CALL fl_justifica_titulo('D', usuario, 19) RETURNING usuario
 	CALL fl_justifica_titulo('I', 'LISTADO DETALLE DE FACTURACION', 80)
 		RETURNING titulo
-	{FOR i = 1 TO long
-		LET titulo[i,i] = modulo[i,i]
-	END FOR}
---	LET titulo = modulo, titulo 
 	LET tipo   = rm_rep.r19_cont_cred
 	IF tipo = 'T' THEN
 		LET tipo = NULL
@@ -395,7 +382,7 @@ PAGE HEADER
 			--#END IF
 		END IF
 	END IF
-	PRINT COLUMN 01, "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 01, "FECHA IMPRESION: ", vg_fecha USING "dd-mm-yyyy",
 		1 SPACES, TIME,
 	      COLUMN 128, usuario
 	SKIP 1 LINES

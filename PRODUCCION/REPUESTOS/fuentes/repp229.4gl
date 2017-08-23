@@ -20,14 +20,13 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
+CALL startlog('../logs/repp229.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 
 IF num_args() <> 4 THEN
-	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.','stop')
 	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
-     	EXIT PROGRAM
+    EXIT PROGRAM
 END IF
 
 LET vg_base	= arg_val(1)
@@ -82,14 +81,13 @@ CLEAR FORM
 
 CALL fl_lee_compania_repuestos(vg_codcia) RETURNING rm_r00.*
 IF rm_r00.r00_compania IS NULL THEN
-	--CALL fgl_winmessage(vg_producto,'No existe configuración para esta compania.','stop')
 	CALL fl_mostrar_mensaje('No existe configuración para esta compania.','stop')
 	EXIT PROGRAM
 END IF
 
 IF rm_r00.r00_anopro IS NULL THEN 
-	LET vm_anio = YEAR(TODAY)
-	LET vm_mes  = MONTH(TODAY)
+	LET vm_anio = YEAR(vg_fecha)
+	LET vm_mes  = MONTH(vg_fecha)
 ELSE
 	LET vm_anio = rm_r00.r00_anopro
 	LET vm_mes  = rm_r00.r00_mespro
@@ -102,7 +100,6 @@ DISPLAY mens_mes TO nom_mes
 
 MENU 'OPCIONES'
 	COMMAND KEY('C') 'Cerrar Mes'
-		--CALL fgl_winquestion(vg_producto,'Está seguro que desea realizar el cierre del mes de INVENTARIO.','No','Yes|No|Cancel','question',1)
 		CALL fl_hacer_pregunta('Está seguro que desea realizar el cierre del mes de INVENTARIO.','No')
 			RETURNING resp
 		IF resp = 'Yes' THEN
@@ -129,10 +126,10 @@ DEFINE mes,anho		SMALLINT
 DEFINE dia, mes2, anho2	SMALLINT
 DEFINE fecha		DATE
 
-IF anho < YEAR(TODAY) THEN
+IF anho < YEAR(vg_fecha) THEN
 	RETURN 1
 ELSE
-	IF mes < MONTH(TODAY) THEN
+	IF mes < MONTH(vg_fecha) THEN
 		RETURN 1
 	END IF
 END IF
@@ -148,8 +145,7 @@ END IF
 LET fecha = mdy(mes2, 1, anho2)
 LET fecha = fecha - 1
 
-IF TODAY < fecha THEN
-	--CALL fgl_winmessage(vg_producto,'Aún no se puede cerrar el mes.','exclamation')
+IF vg_fecha < fecha THEN
 	CALL fl_mostrar_mensaje('Aún no se puede cerrar el mes.','exclamation')
 	RETURN 0
 END IF

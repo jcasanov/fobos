@@ -81,8 +81,8 @@ END FUNCTION
 FUNCTION control_reporte()
 
 INITIALIZE rm_par.* TO NULL
-SELECT MDY(MONTH(NVL(MAX(DATE(r95_fecing)), TODAY)), 01,
-	YEAR(NVL(MAX(DATE(r95_fecing)), TODAY))) + 1 UNITS MONTH - 1 UNITS DAY
+SELECT MDY(MONTH(NVL(MAX(DATE(r95_fecing)), vg_fecha)), 01,
+	YEAR(NVL(MAX(DATE(r95_fecing)), vg_fecha))) + 1 UNITS MONTH - 1 UNITS DAY
 	INTO vm_fin_mes
 	FROM rept095
 	WHERE r95_compania  = vg_codcia
@@ -120,8 +120,7 @@ INPUT BY NAME rm_par.*
 		LET fec_fin = rm_par.fecha_fin
 	AFTER FIELD fecha_ini 
 		IF rm_par.fecha_ini IS NOT NULL THEN
-			--IF rm_par.fecha_ini > vm_fin_mes THEN
-			IF rm_par.fecha_ini > TODAY THEN
+			IF rm_par.fecha_ini > vg_fecha THEN
 				LET mensaje = 'La fecha inicial no puede ser ',
 						'mayor a la fecha: ',
 						vm_fin_mes USING "dd-mm-yyyy",
@@ -137,8 +136,7 @@ INPUT BY NAME rm_par.*
 		END IF
 	AFTER FIELD fecha_fin 
 		IF rm_par.fecha_fin IS NOT NULL THEN
-			--IF rm_par.fecha_fin > vm_fin_mes THEN
-			IF rm_par.fecha_fin > TODAY THEN
+			IF rm_par.fecha_fin > vg_fecha THEN
 				LET mensaje = 'La fecha final no puede ser ',
 						'mayor a la fecha: ',
 						vm_fin_mes USING "dd-mm-yyyy",
@@ -314,7 +312,7 @@ PAGE HEADER
 	PRINT COLUMN 052, "** FECHA FINAL   : ", rm_par.fecha_fin
 							USING "dd-mm-yyyy"
 	SKIP 1 LINES
-	PRINT COLUMN 001, "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 001, "FECHA IMPRESION: ", vg_fecha USING "dd-mm-yyyy",
  		1 SPACES, TIME,
 	      COLUMN 114, usuario
 	PRINT "------------------------------------------------------------------------------------------------------------------------------------"
@@ -351,7 +349,5 @@ ON LAST ROW
 	print ASCII des_neg;
 	print ASCII escape;
 	print ASCII desact_comp
-	--print ASCII escape;
-	--print ASCII act_10cpi
 
 END REPORT

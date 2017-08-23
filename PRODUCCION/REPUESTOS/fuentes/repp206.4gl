@@ -8,7 +8,6 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_demonios	VARCHAR(12)
 DEFINE vm_detalle	SMALLINT	-- NUMERO DE ELEMENTOS DEL DETALLE
 DEFINE vm_max_elm	SMALLINT
 -- ---------------------
@@ -265,11 +264,6 @@ DEFINE r_r11		RECORD LIKE rept011.*
 
 IF rm_r16.r16_estado <> 'P' THEN
 	FOR i = 1 TO vm_detalle
-{
-		IF r_detalle[i].r17_cantrec = 0 THEN
-			CONTINUE FOR
-		END IF
-}
 		UPDATE rept017 
 			SET   r17_cantrec   = r_detalle[i].r17_cantrec, 
 			      r17_estado    = 'R',
@@ -441,15 +435,6 @@ WHILE TRUE
 			LET r_r17.r17_fob = r_detalle[i].r17_fob
 		AFTER FIELD r17_cantrec
 			IF r_detalle[i].r17_cantrec IS NOT NULL THEN
-			{
-				IF r_detalle[i].r17_cantrec > 
-				   r_detalle[i].r17_cantped
-				   THEN
-					--CALL fgl_winmessage(vg_producto,'La cantidad recibida no puede ser superior a la cantidad pedida. Debe ingresar una cantidad igual o menor a la pedida.','exclamation')
-					CALL fl_mostrar_mensaje('La cantidad recibida no puede ser superior a la cantidad pedida. Debe ingresar una cantidad igual o menor a la pedida.','exclamation')
-					NEXT FIELD r17_cantrec
-				END IF
-			}
 				CALL calcula_totales()
 				DISPLAY r_detalle[i].subtotal_item TO
 					r_detalle[j].subtotal_item

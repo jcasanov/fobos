@@ -87,24 +87,14 @@ DEFINE row_ini  	SMALLINT
 DEFINE num_rows 	SMALLINT
 DEFINE num_cols 	SMALLINT
 
-{--
-CREATE TEMP TABLE temp_prof(
-		r21_numprof	INTEGER,
-		r21_nomcli	VARCHAR(50),
-		siglas_vend	CHAR(3),
-		fecha_max	DATE,
-		r21_tot_bruto	DECIMAL(14,2),
-		r21_cod_tran	CHAR(2)
-	)
---}
 INITIALIZE rm_par.* TO NULL
 LET vm_max_rows       = 2000
 LET vm_max_det        = 30
 LET rm_par.r21_moneda = rg_gen.g00_moneda_base
 CALL fl_lee_moneda(rm_par.r21_moneda) RETURNING r_mon.* 
 LET rm_par.tit_moneda = r_mon.g13_nombre
-LET rm_par.fecha_ini  = TODAY
-LET rm_par.fecha_fin  = TODAY
+LET rm_par.fecha_ini  = vg_fecha
+LET rm_par.fecha_fin  = vg_fecha
 LET rm_par.hora_ini   = '08:00'
 LET rm_par.hora_fin   = '17:00'
 LET lin_menu = 0
@@ -218,7 +208,7 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 		LET hor_fin = rm_par.hora_fin
 	AFTER FIELD fecha_ini
 		IF rm_par.fecha_ini IS NOT NULL THEN
-			IF rm_par.fecha_ini > TODAY THEN
+			IF rm_par.fecha_ini > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha inicial debe ser menor o igual a la fecha de hoy.','exclamation')
 				NEXT FIELD fecha_ini
 			END IF
@@ -228,7 +218,7 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 		END IF
 	AFTER FIELD fecha_fin
 		IF rm_par.fecha_fin IS NOT NULL THEN
-			IF rm_par.fecha_fin > TODAY THEN
+			IF rm_par.fecha_fin > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha final debe ser menor o igual a la fecha de hoy.','exclamation')
 				NEXT FIELD fecha_fin
 			END IF
@@ -370,16 +360,6 @@ IF i = 0 THEN
 END IF
 LET hor_ini = rm_par.hora_ini
 LET hor_fin = rm_par.hora_fin
-{--
-DECLARE q_pr CURSOR FOR SELECT * FROM temp_prof2
-FOREACH q_pr INTO fecing, r_prof.*
-	LET hora = EXTEND(fecing, HOUR TO SECOND)
-	IF (hora < hor_ini) OR (hora > hor_fin) THEN
-		CONTINUE FOREACH
-	END IF
-	INSERT INTO temp_prof VALUES(r_prof.*)
-END FOREACH
---}
 LET query = 'SELECT r21_numprof, r21_nomcli, r01_iniciales, fecha_max, ',
 		  ' r21_tot_bruto, r21_cod_tran ',
 		  ' FROM temp_prof2 ',
@@ -392,7 +372,6 @@ DROP TABLE temp_prof2
 SELECT COUNT(*) INTO i FROM temp_prof
 IF i = 0 THEN
 	CALL fl_mostrar_mensaje('No se encontro ninguna proforma en este rango de horas.', 'exclamation')
-	--DELETE FROM temp_prof
 	DROP TABLE temp_prof
 	LET int_flag = 1
 	RETURN

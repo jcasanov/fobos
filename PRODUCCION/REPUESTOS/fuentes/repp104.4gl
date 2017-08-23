@@ -15,7 +15,6 @@ DEFINE vm_r_rows	ARRAY[1000] OF INTEGER -- ARREGLO ROWID DE FILAS LEIDAS
 DEFINE vm_row_current   SMALLINT        -- FILA CORRIENTE DEL ARREGLO
 DEFINE vm_num_rows      SMALLINT        -- CANTIDAD DE FILAS LEIDAS
 DEFINE vm_max_rows      SMALLINT        -- MAXIMO DE FILAS LEIDAS
-DEFINE vm_demonios      VARCHAR(12)
 DEFINE vm_flag_mant     CHAR(1)
 
 
@@ -25,13 +24,12 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
+CALL startlog('../logs/repp104.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN
-     	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto','stop')
 	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
-     	EXIT PROGRAM
+    EXIT PROGRAM
 END IF
 LET vg_base    = arg_val(1)
 LET vg_modulo  = arg_val(2)
@@ -361,7 +359,6 @@ INPUT BY NAME rm_irot.r04_rotacion, rm_irot.r04_nombre, rm_irot.r04_pedido,
 							rm_irot.r04_rotacion)
 				RETURNING rm_irot2.*
 			IF rm_irot2.r04_rotacion IS NOT NULL THEN
-				--CALL fgl_winmessage (vg_producto,'El índice de rotacion ya existe en la compañía','exclamation')
 				CALL fl_mostrar_mensaje('El índice de rotacion ya existe en la compañía.','exclamation')
 				NEXT FIELD r04_rotacion
 			END IF
@@ -374,7 +371,6 @@ INPUT BY NAME rm_irot.r04_rotacion, rm_irot.r04_nombre, rm_irot.r04_pedido,
 	      		WHERE r04_compania = vg_codcia
 	      		AND   r04_nombre   = rm_irot.r04_nombre
 	      		IF status <> NOTFOUND THEN
-                 		--CALL fgl_winmessage (vg_producto,'El nombre del índice de rotación ya ha sido asignado al registro de codigo '|| codigo, 'exclamation')
 				CALL fl_mostrar_mensaje('El nombre del índice de rotación ya ha sido asignado al registro de codigo '|| codigo, 'exclamation')
 	         		NEXT FIELD r04_nombre  
               		END IF

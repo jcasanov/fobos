@@ -1327,7 +1327,7 @@ PAGE HEADER
 		PRINT 1 SPACES
 	END IF
 	SKIP 1 LINES
-	PRINT COLUMN 001, "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 001, "FECHA IMPRESION: ", vg_fecha USING "dd-mm-yyyy",
  		1 SPACES, TIME,
 	      COLUMN 062, usuario
 	PRINT "--------------------------------------------------------------------------------"
@@ -1586,7 +1586,7 @@ CALL fl_lee_bodega_rep(vg_codcia, bodega) RETURNING r_r02.*
 CALL fl_lee_item(vg_codcia, item) RETURNING r_r10.*
 DISPLAY BY NAME r_r02.r02_codigo, r_r02.r02_nombre, r_r10.r10_codigo,
 		r_r10.r10_nombre, stock_var
-LET fecha_fin = TODAY
+LET fecha_fin = vg_fecha
 LET fecha_ini = MDY(MONTH(fecha_fin), 01, YEAR(fecha_fin))
 WHILE TRUE
 	LET int_flag = 0
@@ -1606,7 +1606,7 @@ WHILE TRUE
 			LET fec_fin = fecha_fin
 		AFTER FIELD fecha_ini
 			IF fecha_ini IS NOT NULL THEN
-				IF fecha_ini > TODAY THEN
+				IF fecha_ini > vg_fecha THEN
 					CALL fl_mostrar_mensaje('La Fecha Inicial no puede ser mayor que la fecha de hoy.', 'exclamation')
 					NEXT FIELD fecha_ini
 				END IF
@@ -1616,7 +1616,7 @@ WHILE TRUE
 			END IF
 		AFTER FIELD fecha_fin
 			IF fecha_fin IS NOT NULL THEN
-				IF fecha_fin > TODAY THEN
+				IF fecha_fin > vg_fecha THEN
 					CALL fl_mostrar_mensaje('La Fecha Final no puede ser mayor que la fecha de hoy.', 'exclamation')
 					NEXT FIELD fecha_fin
 				END IF

@@ -18,7 +18,6 @@ DEFINE vm_r_rows ARRAY[1000] OF INTEGER -- ARREGLO DE ROWID DE FILAS LEIDAS
 DEFINE vm_row_current	SMALLINT	-- FILA CORRIENTE DEL ARREGLO
 DEFINE vm_num_rows	SMALLINT	-- CANTIDAD DE FILAS LEIDAS
 DEFINE vm_max_rows      SMALLINT        -- MAXIMO DE FILAS LEIDAS
-DEFINE vm_demonios	VARCHAR(12)
 DEFINE vm_flag_mant     CHAR(1)
 
 MAIN
@@ -30,7 +29,6 @@ CALL startlog('../logs/errores')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN
-	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.','stop')
 	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
      	EXIT PROGRAM
 END IF
@@ -276,8 +274,8 @@ FUNCTION control_ingreso()
 LET vm_flag_mant = 'I'
 CLEAR FORM
 INITIALIZE rm_cam.* TO NULL
-LET rm_cam.r32_fecing     = CURRENT
-LET rm_cam.r32_fecpro     = CURRENT
+LET rm_cam.r32_fecing     = fl_current()
+LET rm_cam.r32_fecpro     = fl_current()
 LET rm_cam.r32_usuario    = vg_usuario
 LET rm_cam.r32_compania   = vg_codcia
 LET rm_cam.r32_moneda     = 'A'
@@ -331,7 +329,6 @@ END FUNCTION
 FUNCTION control_modificacion()
 
 IF rm_cam.r32_estado = 'P' THEN
-	--CALL fgl_winmessage(vg_producto,'No puede modificar un registro que se encuentra procesado.','exclamation')
 	CALL fl_mostrar_mensaje('No puede modificar un registro que se encuentra procesado.','exclamation')
 	RETURN
 END IF
@@ -434,9 +431,8 @@ INPUT BY NAME 	rm_cam.r32_linea, rm_cam.r32_rotacion, rm_cam.r32_tipo_item,
                     CALL fl_lee_tipo_item(rm_cam.r32_tipo_item)
                                 RETURNING rm_titem.*
                         IF rm_titem.r06_codigo IS NULL THEN
-                                --CALL fgl_winmessage(vg_producto,'El Tipo de Item no existe en la compañía.','exclamation')
-				CALL fl_mostrar_mensaje('El Tipo de Item no existe en la compañía.','exclamation')
-                                NEXT FIELD r32_tipo_item
+							CALL fl_mostrar_mensaje('El Tipo de Item no existe en la compañía.','exclamation')
+                            NEXT FIELD r32_tipo_item
                         END IF
 			DISPLAY rm_titem.r06_nombre TO nom_tipo
 		ELSE
@@ -447,9 +443,8 @@ INPUT BY NAME 	rm_cam.r32_linea, rm_cam.r32_rotacion, rm_cam.r32_tipo_item,
                     CALL fl_lee_linea_rep(vg_codcia, rm_cam.r32_linea)
                                 RETURNING rm_lin.*
                         IF rm_lin.r03_codigo IS NULL THEN
-                                --CALL fgl_winmessage(vg_producto,'La Línea de venta no existe en la compañía.','exclamation')
-				CALL fl_mostrar_mensaje('La Línea de venta no existe en la compañía.','exclamation')
-                                NEXT FIELD r32_linea
+							CALL fl_mostrar_mensaje('La Línea de venta no existe en la compañía.','exclamation')
+                            NEXT FIELD r32_linea
                         END IF
 			DISPLAY rm_lin.r03_nombre TO nom_lin
 		ELSE 
@@ -460,9 +455,8 @@ INPUT BY NAME 	rm_cam.r32_linea, rm_cam.r32_rotacion, rm_cam.r32_tipo_item,
                     CALL fl_lee_indice_rotacion(vg_codcia, rm_cam.r32_rotacion)
                                 RETURNING rm_rot.*
                         IF rm_rot.r04_rotacion IS NULL THEN
-                                --CALL fgl_winmessage(vg_producto,'El Indice de Rotación no existe en la compañía.','exclamation')
-				CALL fl_mostrar_mensaje('El Indice de Rotación no existe en la compañía.','exclamation')
-                                NEXT FIELD r32_rotacion
+							CALL fl_mostrar_mensaje('El Indice de Rotación no existe en la compañía.','exclamation')
+                            NEXT FIELD r32_rotacion
                         END IF
 			DISPLAY rm_rot.r04_nombre TO nom_rot
 		ELSE 
@@ -489,7 +483,6 @@ INPUT BY NAME 	rm_cam.r32_linea, rm_cam.r32_rotacion, rm_cam.r32_tipo_item,
 			IF rg_gen.g00_moneda_alt IS NULL
 			OR rg_gen.g00_moneda_alt = ' '
 				THEN 
-					--CALL fgl_winmessage(vg_producto,'No esta configurada la Moneda Alterna.','exclamation')
 					CALL fl_mostrar_mensaje('No esta configurada la Moneda Alterna.','exclamation')
 					NEXT FIELD r32_moneda
 			END IF

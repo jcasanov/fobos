@@ -14,7 +14,6 @@ DEFINE vm_r_rows	ARRAY[1000] OF INTEGER
 DEFINE vm_row_current   SMALLINT        -- FILA CORRIENTE DEL ARREGLO
 DEFINE vm_num_rows      SMALLINT        -- CANTIDAD DE FILAS LEIDAS
 DEFINE vm_max_rows      SMALLINT        -- MAXIMO DE FILAS LEIDAS
-DEFINE vm_demonios      VARCHAR(12)
 DEFINE vm_flag_mant     CHAR(1)
 
 MAIN
@@ -22,11 +21,10 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/errores')
+CALL startlog('../logs/repp111.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 3 THEN
-     	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto.','stop')
 	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
      	EXIT PROGRAM
 END IF
@@ -367,9 +365,8 @@ INPUT BY NAME rm_r71.r71_linea, rm_r71.r71_sub_linea, rm_r71.r71_cod_grupo,
         	       	CALL fl_lee_linea_rep(vg_codcia, rm_r71.r71_linea)
           	        	RETURNING r_lin.*
                        	IF r_lin.r03_codigo IS NULL THEN
-                               	--CALL fgl_winmessage(vg_producto,'La Línea de Venta no existe en la compañía.','exclamation')
-				CALL fl_mostrar_mensaje('La Línea de Venta no existe en la compañía.','exclamation')
-                                NEXT FIELD r71_linea
+							CALL fl_mostrar_mensaje('La Línea de Venta no existe en la compañía.','exclamation')
+                            NEXT FIELD r71_linea
                	        END IF
                        	IF r_lin.r03_estado = 'B' THEN
 				CALL fl_mensaje_estado_bloqueado()
@@ -385,9 +382,8 @@ INPUT BY NAME rm_r71.r71_linea, rm_r71.r71_sub_linea, rm_r71.r71_cod_grupo,
 							rm_r71.r71_sub_linea)
           	        	RETURNING r_sub.*
                        	IF r_sub.r70_sub_linea IS NULL THEN
-                               	--CALL fgl_winmessage (vg_producto,'La Sublínea de Venta no existe en la compañía.','exclamation')
-				CALL fl_mostrar_mensaje('La Sublínea de Venta no existe en la compañía.','exclamation')
-                                NEXT FIELD r71_sub_linea
+							CALL fl_mostrar_mensaje('La Sublínea de Venta no existe en la compañía.','exclamation')
+                            NEXT FIELD r71_sub_linea
                	        END IF
 			DISPLAY r_sub.r70_desc_sub TO tit_sub_linea
 		ELSE 
@@ -400,7 +396,6 @@ INPUT BY NAME rm_r71.r71_linea, rm_r71.r71_sub_linea, rm_r71.r71_cod_grupo,
 						rm_r71.r71_cod_grupo)
 				RETURNING r_grp.*
 			IF r_grp.r71_cod_grupo IS NOT NULL THEN
-				--CALL fgl_winmessage(vg_producto,'El Grupo ya existe para esta Sublínea de Venta.','exclamation')
 				CALL fl_mostrar_mensaje('El Grupo ya existe para esta Sublínea de Venta.','exclamation')
 				NEXT FIELD r71_cod_grupo
 			END IF

@@ -126,8 +126,8 @@ IF r_g13.g13_moneda IS NULL THEN
         EXIT PROGRAM
 END IF
 DISPLAY r_g13.g13_nombre TO tit_moneda
-LET vm_fecha_ini  = TODAY
-LET vm_fecha_fin  = TODAY
+LET vm_fecha_ini  = vg_fecha
+LET vm_fecha_fin  = vg_fecha
 LET vm_moneda_des = r_g13.g13_nombre
 LET rm_par.cont_cred = 'T'
 WHILE TRUE
@@ -296,7 +296,7 @@ INPUT BY NAME rm_r19.r19_moneda, rm_r19.r19_cod_tran, vm_fecha_ini,vm_fecha_fin,
 		END IF		 
 	AFTER FIELD vm_fecha_ini 
 		IF vm_fecha_ini IS NOT NULL THEN
-			IF vm_fecha_ini > TODAY THEN
+			IF vm_fecha_ini > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha de inicio no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD vm_fecha_ini
 			END IF
@@ -306,7 +306,7 @@ INPUT BY NAME rm_r19.r19_moneda, rm_r19.r19_cod_tran, vm_fecha_ini,vm_fecha_fin,
 		END IF
 	AFTER FIELD vm_fecha_fin 
 		IF vm_fecha_fin IS NOT NULL THEN
-			IF vm_fecha_fin > TODAY THEN
+			IF vm_fecha_fin > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha de término no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD vm_fecha_fin
 			END IF
@@ -721,10 +721,6 @@ PAGE HEADER
 	CALL fl_justifica_titulo('I', 'LISTADO DETALLE DE TRANSACCIONES', 80)
 		RETURNING titulo
 	CALL fl_lee_cod_transaccion(rm_r19.r19_cod_tran) RETURNING r_g21.*
-	{FOR i = 1 TO long
-		LET titulo[i,i] = modulo[i,i]
-	END FOR}
---	LET titulo = modulo, titulo 
 	print ASCII escape;
 	print ASCII act_comp;
 	print ASCII escape;
@@ -742,7 +738,7 @@ PAGE HEADER
 	PRINT COLUMN 47,  "** FECHA INICIAL : ", vm_fecha_ini USING "dd-mm-yyyy"
 	PRINT COLUMN 47,  "** FECHA FINAL   : ", vm_fecha_fin USING "dd-mm-yyyy"
 	SKIP 1 LINES
-	PRINT COLUMN 01,  "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 01,  "FECHA IMPRESION: ", vg_fecha USING "dd-mm-yyyy",
  		1 SPACES, TIME,
 	      COLUMN 130, usuario
 	--print '&k2S'	                -- Letra condensada (16 cpi)
@@ -893,7 +889,7 @@ PAGE HEADER
 		END IF
 	END IF
 	SKIP 1 LINES
-	PRINT COLUMN 01,  "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 01,  "FECHA IMPRESION: ", vg_fecha USING "dd-mm-yyyy",
 		1 SPACES, TIME,
 	      COLUMN 114, usuario
 	--print '&k2S'	                -- Letra condensada (16 cpi)
@@ -976,10 +972,6 @@ PAGE HEADER
 	CALL fl_justifica_titulo('I', 'LISTADO DETALLE DE TRANSACCIONES', 80)
 		RETURNING titulo
 	CALL fl_lee_cod_transaccion(rm_r19.r19_cod_tran) RETURNING r_g21.*
-	{FOR i = 1 TO long
-		LET titulo[i,i] = modulo[i,i]
-	END FOR}
---	LET titulo = modulo, titulo 
 	print ASCII escape;
 	print ASCII act_comp
 	PRINT COLUMN 01,  rm_g01.g01_razonsocial,
@@ -995,7 +987,7 @@ PAGE HEADER
 	PRINT COLUMN 27,  "** FECHA INICIAL : ", vm_fecha_ini USING "dd-mm-yyyy"
 	PRINT COLUMN 27,  "** FECHA FINAL   : ", vm_fecha_fin USING "dd-mm-yyyy"
 	SKIP 1 LINES
-	PRINT COLUMN 01,  "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 01,  "FECHA IMPRESION: ", vg_fecha USING "dd-mm-yyyy",
 		1 SPACES, TIME,
 	      COLUMN 73, usuario
 	--print '&k2S'	                -- Letra condensada (16 cpi)
@@ -1070,10 +1062,6 @@ PAGE HEADER
 	CALL fl_justifica_titulo('I', 'LISTADO DETALLE DE TRANSACCIONES', 80)
 		RETURNING titulo
 	CALL fl_lee_cod_transaccion(rm_r19.r19_cod_tran) RETURNING r_g21.*
-	{FOR i = 1 TO long
-		LET titulo[i,i] = modulo[i,i]
-	END FOR}
---	LET titulo = modulo, titulo 
 	print ASCII escape;
 	print ASCII act_comp
 	PRINT COLUMN 01,  rm_g01.g01_razonsocial,
@@ -1089,7 +1077,7 @@ PAGE HEADER
 	PRINT COLUMN 27,  "** FECHA INICIAL : ", vm_fecha_ini USING "dd-mm-yyyy"
 	PRINT COLUMN 27,  "** FECHA FINAL   : ", vm_fecha_fin USING "dd-mm-yyyy"
 	SKIP 1 LINES
-	PRINT COLUMN 01,  "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 01,  "FECHA IMPRESION: ", vg_fecha USING "dd-mm-yyyy",
 		1 SPACES, TIME,
 	      COLUMN 74, usuario
 	--print '&k2S'	                -- Letra condensada (16 cpi)
