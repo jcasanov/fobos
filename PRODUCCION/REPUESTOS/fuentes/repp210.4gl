@@ -300,7 +300,7 @@ LET query = 'SELECT r23_nomcli, r23_estado, r23_codcli, r23_moneda, ',
 		' r23_numprev, r23_tot_neto ',
 	        ' FROM rept023 WHERE r23_compania  =  ', vg_codcia,
 		' AND r23_localidad =  ', vg_codloc,
-		--' AND r23_cont_cred = "', vm_credito,'"', 
+		' AND r23_cont_cred = "', vm_credito,'"', 
 		' AND r23_estado    = "', vm_estado_2,'"'
 PREPARE cons FROM query
 DECLARE q_cons CURSOR FOR cons
@@ -338,7 +338,6 @@ END FOREACH
 LET i = i - 1
 
 IF i = 0 THEN
-	--CALL fgl_winmessage(vg_producto,'No existen preventas a crédito.','info')
 	CALL fl_mostrar_mensaje('No existen preventas a crédito.','info')
 	EXIT PROGRAM
 END IF
@@ -610,6 +609,10 @@ LET entro_cre = 0
 CALL fl_lee_configuracion_credito_cxc(vg_codcia, vg_codloc) RETURNING rm_z61.*
 CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc, rm_r23.r23_codcli)
 	RETURNING r_z02.*
+IF r_z02.z02_credit_auto = 'N' THEN
+	CALL fl_mostrar_mensaje('El cliente no esta configurado para autorizar crédito en la preventa.', 'exclamation')
+	RETURN
+END IF
 IF r_z02.z02_num_pagos IS NOT NULL THEN
 	LET rm_z61.z61_num_pagos = r_z02.z02_num_pagos
 END IF
@@ -644,7 +647,6 @@ CALL control_saldos_vencidos(vg_codcia, rm_r23.r23_codcli, 0)
 IF flag_error AND num_args() = 5 THEN
 	RETURN
 END IF
---IF (vg_codloc = 1 OR vg_codloc = 3 OR vg_codloc = 4 OR vg_codloc = 5) AND i > 0 THEN
 IF i > 0 THEN
 	IF NOT tiene_cupo_credito(numprev, i) THEN
 		LET entro_cre = 1
@@ -718,8 +720,6 @@ IF num_args() = 5 THEN
 	EXIT PROGRAM
 END IF
 
---CALL funcion_master()
-
 END FUNCTION
 
 
@@ -731,6 +731,9 @@ DEFINE done		SMALLINT
 CALL control_forma_pago(numprev, 1)
 CALL control_credito()
 CALL control_grabar() RETURNING done
+IF NOT done THEN
+	EXIT PROGRAM
+END IF
 
 END FUNCTION
 
@@ -775,16 +778,22 @@ FUNCTION control_grabar()
 DEFINE i,done 		SMALLINT
 DEFINE resp		CHAR(6)
 DEFINE r_r23		RECORD LIKE rept023.*
+DEFINE r_z02		RECORD LIKE cxct002.*
 DEFINE mensaje		VARCHAR(100)
 
 LET done = 0
 IF vm_flag_grabar = 'N' THEN
-	--CALL fgl_winmessage(vg_producto,'Aun no ha actualizado el crédito. ','exclamation')
 	CALL fl_mostrar_mensaje('Aun no ha actualizado el crédito. ','exclamation')
 	RETURN done
 END IF
 CALL fl_lee_preventa_rep(vg_codcia, vg_codloc, rm_r23.r23_numprev)
 	RETURNING r_r23.*
+CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc, r_r23.r23_codcli)
+	RETURNING r_z02.*
+IF r_z02.z02_credit_auto = 'N' THEN
+	CALL fl_mostrar_mensaje('El cliente no esta configurado para autorizar crédito en la preventa.', 'exclamation')
+	RETURN done
+END IF
 IF r_r23.r23_compania IS NULL OR r_r23.r23_estado = 'F' OR 
    r_r23.r23_cod_tran IS NOT NULL THEN
 	LET mensaje = 'Lo siento, La Preventa ', rm_r23.r23_numprev USING "#######&", ' ya ha sido facturada.'
