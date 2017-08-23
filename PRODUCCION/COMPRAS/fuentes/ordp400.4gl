@@ -367,12 +367,10 @@ PAGE HEADER
 	CALL fl_justifica_titulo('C', documento, 80) RETURNING titulo
 	LET titulo = modulo, titulo
 	LET subtotal    = (rm_c10.c10_tot_repto + rm_c10.c10_tot_mano) -
-			   rm_c10.c10_tot_dscto + rm_c10.c10_dif_cuadre +
-			   rm_c10.c10_otros
+			   rm_c10.c10_tot_dscto + rm_c10.c10_otros
 	LET impuesto    = rm_c10.c10_tot_compra - (rm_c10.c10_tot_repto +
 			  rm_c10.c10_tot_mano) + rm_c10.c10_tot_dscto -
-			  rm_c10.c10_flete - rm_c10.c10_otros -
-			  rm_c10.c10_dif_cuadre
+			  rm_c10.c10_flete - rm_c10.c10_otros 
 	LET valor_pag   = rm_c10.c10_tot_compra
 	LET orden_trab  = rm_c10.c10_ord_trabajo
 	IF rm_c10.c10_tipo_pago = 'R' THEN
