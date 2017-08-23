@@ -115,8 +115,18 @@ CLEAR SCREEN
 CALL startlog('../logs/ordp200.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
-IF num_args() <> 4 AND num_args() <> 5 AND num_args() <> 6
-THEN     -- Validar # parametros correcto
+
+{*
+ * 4 argumentos: base modulo codcia codloc
+ *   - Llamada en modo mantenimiento estándar desde menú u otros programas
+ * 5 argumentos: base modulo codcia codloc numord
+ *   - Llamada en modo consulta estándar
+ * 6 argumentos: base modulo codcia codloc modo_llamada numprof 
+ *   - modo_llamada:I => Genera una OC para el número de proforma enviado 
+ *   - modo_llamada:M => Edita una OC relacionada al número de proforma enviado 
+ *} 
+IF num_args() <> 4 AND num_args() <> 5 AND num_args() <> 6 THEN
+	-- Validar # parametros correcto
 	CALL fl_mostrar_mensaje('Número de parametros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
@@ -1651,7 +1661,7 @@ END FUNCTION
 
 FUNCTION control_lee_cabecera()
 DEFINE resp 		CHAR(6)
-DEFINE done			SMALLINT
+DEFINE done, unavez	SMALLINT
 DEFINE r_b43		RECORD LIKE ctbt043.*
 DEFINE r_s23_s		RECORD LIKE srit023.*
 DEFINE r_s23_n		RECORD LIKE srit023.*
@@ -1659,7 +1669,6 @@ DEFINE r_r01		RECORD LIKE rept001.*
 DEFINE r_r21		RECORD LIKE rept021.*
 DEFINE r_c10		RECORD LIKE ordt010.*
 
-LET int_flag = 0
 CALL calcula_totales(vm_num_detalles,1)
 IF vm_flag_llam = 'I' THEN
 
@@ -1682,7 +1691,8 @@ IF vm_flag_llam = 'I' THEN
 		CALL fl_lee_proforma_rep(vg_codcia, vg_codloc, vm_numprof)
 			RETURNING r_r21.*
 		LET rm_c10.c10_referencia = r_r21.r21_nomcli
-		CALL fl_lee_vendedor_rep(vg_codcia, r_r21.r21_vendedor) RETURNING r_r01.*
+		CALL fl_lee_vendedor_rep(vg_codcia, r_r21.r21_vendedor)
+			RETURNING r_r01.*
 		LET rm_c10.c10_solicitado = r_r01.r01_nombres
 	END IF
 	CALL fl_lee_tipo_orden_compra(rm_c10.c10_tipo_orden) RETURNING rm_c01.*
@@ -1693,35 +1703,33 @@ IF vm_flag_llam = 'I' THEN
 	DISPLAY rm_c01.c01_nombre TO nom_tipo_orden
 END IF
 DISPLAY BY NAME rm_c10.c10_dif_cuadre, rm_c10.c10_usuario
-INPUT BY NAME rm_c10.c10_codprov,
-              rm_c10.c10_moneda,       rm_c10.c10_tipo_orden,
-	      rm_c10.c10_cod_depto,    
-	      rm_c10.c10_atencion,      rm_c10.c10_referencia ,  
-           rm_c10.c10_porc_impto, 
-              vm_calc_iva,             rm_c10.c10_porc_descto,  
-              rm_c10.c10_recargo,      rm_c10.c10_solicitado,
-	      rm_c10.c10_ord_trabajo,  rm_c10.c10_tipo_pago,   
-	     
-          rm_c10.c10_otros,
-	      rm_c10.c10_flete, rm_c10.c10_numprof, valor_fact 
-	      WITHOUT DEFAULTS
-	ON KEY (INTERRUPT)
-		IF NOT FIELD_TOUCHED(c10_cod_depto,  c10_tipo_orden,
-				     c10_codprov,    c10_atencion, 
-				     c10_solicitado, c10_ord_trabajo,
-				     c10_referencia, rm_c10.c10_numprof)
+LET unavez   = 0
+LET int_flag = 0
+INPUT BY NAME rm_c10.c10_moneda, rm_c10.c10_tipo_orden, rm_c10.c10_cod_depto,
+		rm_c10.c10_codprov, rm_c10.c10_atencion, rm_c10.c10_referencia,
+		rm_c10.c10_porc_impto, vm_calc_iva, rm_c10.c10_porc_descto,
+		rm_c10.c10_recargo, rm_c10.c10_solicitado, rm_c10.c10_ord_trabajo,
+		rm_c10.c10_tipo_pago, rm_c10.c10_otros, rm_c10.c10_flete,
+		rm_c10.c10_numprof, valor_fact
+	WITHOUT DEFAULTS
+	ON KEY(INTERRUPT)
+		IF NOT FIELD_TOUCHED(c10_moneda, c10_tipo_orden, c10_cod_depto,
+							 c10_codprov, c10_atencion, c10_referencia,
+							 c10_porc_impto, vm_calc_iva, c10_porc_descto,
+							 c10_recargo, c10_solicitado, c10_ord_trabajo,
+							 c10_tipo_pago, c10_otros, c10_flete, c10_numprof,
+							 valor_fact)
 		THEN
-			RETURN
+			EXIT INPUT
 		END IF
-		LET INT_FLAG = 0
-		CALL fl_mensaje_abandonar_proceso()
-                	RETURNING resp
+		LET int_flag = 0
+		CALL fl_mensaje_abandonar_proceso() RETURNING resp
 		IF resp = 'Yes' THEN
 			LET int_flag = 1
-			RETURN
+			EXIT INPUT
 		END IF
-        ON KEY(F1,CONTROL-W)
-		CALL llamar_visor_teclas()
+		ON KEY(F1,CONTROL-W)
+			CALL llamar_visor_teclas()
 	ON KEY(F2)
 		IF INFIELD(c10_moneda) THEN
 			CALL fl_ayuda_monedas()
@@ -1733,7 +1741,6 @@ INPUT BY NAME rm_c10.c10_codprov,
 				DISPLAY rm_g13.g13_nombre TO nom_moneda
 		      	END IF
 		END IF
-
 		IF INFIELD(c10_cod_depto) THEN
 			CALL fl_ayuda_departamentos(vg_codcia)
 			     	RETURNING rm_g34.g34_cod_depto, 
@@ -1744,7 +1751,6 @@ INPUT BY NAME rm_c10.c10_codprov,
 			        DISPLAY  rm_g34.g34_nombre TO nom_departamento
 			END IF
 		END IF
-
 		IF INFIELD(c10_codprov) THEN
 			CALL fl_ayuda_proveedores()
 				RETURNING rm_p01.p01_codprov, 
@@ -1753,20 +1759,19 @@ INPUT BY NAME rm_c10.c10_codprov,
 				LET rm_c10.c10_codprov = rm_p01.p01_codprov
 				DISPLAY BY NAME rm_c10.c10_codprov
 				DISPLAY rm_p01.p01_nomprov TO nom_proveedor
+				LET unavez = 1
 			END IF
 		END IF
-
 		IF INFIELD(c10_tipo_orden) THEN
 			CALL fl_ayuda_tipos_ordenes_compras('A')
 				RETURNING rm_c01.c01_tipo_orden,
 					  rm_c01.c01_nombre
 			IF rm_c01.c01_tipo_orden IS NOT NULL THEN
-				LET rm_c10.c10_tipo_orden =rm_c01.c01_tipo_orden
+				LET rm_c10.c10_tipo_orden = rm_c01.c01_tipo_orden
 				DISPLAY BY NAME rm_c10.c10_tipo_orden
 				DISPLAY rm_c01.c01_nombre TO nom_tipo_orden
 			END IF 
 		END IF
-
 		IF INFIELD(c10_ord_trabajo) THEN
 			IF vm_flag_llam = 'I' THEN
 				LET rm_c10.c10_ord_trabajo = NULL
@@ -1783,36 +1788,34 @@ INPUT BY NAME rm_c10.c10_codprov,
 					nom_ord_trabajo
 			END IF
 		END IF
-
 		LET int_flag = 0
-
 	BEFORE INPUT
 		--#CALL dialog.keysetlabel("F1","")
 		--#CALL dialog.keysetlabel("CONTROL-W","")
+		IF num_args() = 6 THEN
+			NEXT FIELD c10_codprov
+		END IF
+	BEFORE FIELD c10_tipo_orden
+		IF vm_flag_mant = 'M' THEN
+			NEXT FIELD NEXT
+		END IF
+	BEFORE FIELD c10_codprov
+		IF rm_p01.p01_codprov IS NULL THEN
+			IF NOT unavez THEN
+				LET unavez = 1
+				NEXT FIELD c10_atencion
+			END IF
+		END IF
 	AFTER FIELD c10_porc_impto
-		CALL fl_obtener_aux_cont_sust(vg_codcia, rm_c10.c10_tipo_orden,
-						'S')
+		CALL fl_obtener_aux_cont_sust(vg_codcia, rm_c10.c10_tipo_orden, 'S')
 			RETURNING r_s23_s.*
-		CALL fl_obtener_aux_cont_sust(vg_codcia, rm_c10.c10_tipo_orden,
-						'N')
+		CALL fl_obtener_aux_cont_sust(vg_codcia, rm_c10.c10_tipo_orden, 'N')
 			RETURNING r_s23_n.*
 		IF r_s23_s.s23_compania IS NULL AND r_s23_n.s23_compania IS NULL
 		THEN
 			CALL fl_mostrar_mensaje('Este tipo de orden de compra no tiene ningun codigo de sustento tributario. POR FAVOR LLAME AL ADMINISTRADOR.', 'exclamation')
 			NEXT FIELD c10_porc_impto
 		END IF
-		{--
-		IF rm_c01.c01_aux_cont IS NULL THEN
-			IF rm_c10.c10_porc_impto <> 0 THEN
-				LET rm_c10.c10_porc_impto = 0
-				DISPLAY BY NAME rm_c10.c10_porc_impto
-				CONTINUE INPUT
-			END IF
-		ELSE
-			LET rm_c10.c10_porc_impto = rg_gen.g00_porc_impto
-			DISPLAY BY NAME rm_c10.c10_porc_impto
-		END IF
-		--}
 		IF rm_c10.c10_porc_impto = 0 THEN
 			IF r_s23_n.s23_compania IS NULL THEN
 				CALL fl_mostrar_mensaje('Este tipo de orden de compra no tiene ningun codigo de sustento tributario exento de IVA.', 'info')
@@ -1827,17 +1830,14 @@ INPUT BY NAME rm_c10.c10_codprov,
 		IF rm_c10.c10_porc_impto <> 0 
 		AND rm_c10.c10_porc_impto <> rg_gen.g00_porc_impto 
 		THEN
-			--CALL fgl_winmessage(vg_producto,'Este no es un porcentaje de impuesto valido.','exclamation')
 			CALL fl_mostrar_mensaje('Este no es un porcentaje de impuesto valido.','exclamation')
 			NEXT FIELD c10_porc_impto
 		END IF
-
 	AFTER FIELD c10_moneda
 		IF rm_c10.c10_moneda IS NOT NULL THEN
 			CALL fl_lee_moneda(rm_c10.c10_moneda)
 				RETURNING rm_g13.*
                 	IF rm_g13.g13_moneda IS  NULL THEN
-		    		--CALL fgl_winmessage(vg_producto,'La moneda no existe en la Compañía. ','exclamation')
 				CALL fl_mostrar_mensaje('La moneda no existe en la Compañía.','exclamation')
 				CLEAR nom_moneda
                         	NEXT FIELD c10_moneda
@@ -1845,7 +1845,6 @@ INPUT BY NAME rm_c10.c10_codprov,
 			IF  rm_c10.c10_moneda <> rg_gen.g00_moneda_base AND
 			    rm_c10.c10_moneda <> rg_gen.g00_moneda_alt
 			    THEN
-				--CALL fgl_winmessage(vg_producto,'La Moneda ingresada no es la moneda base ni la moneda alterna','exclamation')
 				CALL fl_mostrar_mensaje('La Moneda ingresada no es la moneda base ni la moneda alterna.','exclamation')
 				CLEAR nom_moneda
 				NEXT FIELD c10_moneda
@@ -1861,7 +1860,6 @@ INPUT BY NAME rm_c10.c10_codprov,
 							rg_gen.g00_moneda_base)
 					RETURNING rm_g14.*
 				IF rm_g14.g14_tasa IS NULL THEN
-					--CALL fgl_winmessage(vg_producto,'No existe conversión entre la moneda base y la moneda alterna. Debe revisar la configuración. ','exclamation')
 					CALL fl_mostrar_mensaje('No existe conversión entre la moneda base y la moneda alterna. Debe revisar la configuración.','exclamation')
 					EXIT PROGRAM
 				END IF 
@@ -1872,18 +1870,11 @@ INPUT BY NAME rm_c10.c10_codprov,
 		ELSE
 			CLEAR nom_moneda
                 END IF
-
-	BEFORE FIELD c10_tipo_orden
-		IF vm_flag_mant = 'M' THEN
-			NEXT FIELD NEXT
-		END IF
-
 	AFTER FIELD c10_tipo_orden
 		IF rm_c10.c10_tipo_orden IS NOT NULL THEN
 			CALL fl_lee_tipo_orden_compra(rm_c10.c10_tipo_orden)
 				RETURNING rm_c01.*
 			IF rm_c01.c01_tipo_orden IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'No existe el tipo de orden en la Compañía.','exclamation')
 				CALL fl_mostrar_mensaje('No existe el tipo de orden en la Compañía.','exclamation')
 				NEXT FIELD c10_tipo_orden
 			END IF
@@ -1944,7 +1935,6 @@ INPUT BY NAME rm_c10.c10_codprov,
 						 rm_c10.c10_cod_depto)
 				RETURNING rm_g34.*
 			IF rm_g34.g34_cod_depto IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'No existe el departamento en la Compañía.','exclamation')
 				CALL fl_mostrar_mensaje('No existe el departamento en la Compañía.','exclamation')
 				NEXT FIELD c10_cod_depto
 			END IF
@@ -1952,13 +1942,11 @@ INPUT BY NAME rm_c10.c10_codprov,
 		ELSE	
 			CLEAR nom_departamento
 		END IF
-
 	AFTER FIELD c10_codprov
 		IF rm_c10.c10_codprov IS NOT NULL THEN
 			CALL fl_lee_proveedor(rm_c10.c10_codprov)
 				RETURNING rm_p01.*
 			IF rm_p01.p01_codprov IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'No existe el proveedor en la Compañía.','exclamation')
 				CALL fl_mostrar_mensaje('No existe el proveedor en la Compañía.','exclamation')
 				NEXT FIELD c10_codprov
 			END IF
@@ -1970,7 +1958,6 @@ INPUT BY NAME rm_c10.c10_codprov,
 		ELSE	
 			CLEAR nom_proveedor
 		END IF
-
 	AFTER FIELD c10_ord_trabajo
 		IF vm_flag_llam = 'I' THEN
 			LET rm_c10.c10_ord_trabajo = NULL
@@ -1982,12 +1969,10 @@ INPUT BY NAME rm_c10.c10_codprov,
 						  rm_c10.c10_ord_trabajo)
 				RETURNING rm_t23.*
 			IF rm_t23.t23_orden IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'No existe la orden de trabajo en la Compañía.','exclamation')
 				CALL fl_mostrar_mensaje('No existe la orden de trabajo en la Compañía.','exclamation')
 				NEXT FIELD c10_ord_trabajo
 			END IF
 			IF rm_c01.c01_modulo IS NULL OR rm_c01.c01_modulo <> 'TA' THEN
-				--CALL fgl_winmessage(vg_producto,'La orden de trabajo solo es obligatorio cuando la orden sea por bienes y servicios.','exclamation')
 				CALL fl_mostrar_mensaje('La orden de trabajo solo es obligatorio cuando la orden sea por bienes y servicios.','exclamation')
 				INITIALIZE rm_c10.c10_ord_trabajo TO NULL
 				CLEAR c10_ord_trabajo
@@ -2179,6 +2164,9 @@ END IF
 INITIALIZE r_r10.*, r_r22.* TO NULL
 
 CALL fl_lee_tipo_orden_compra(rm_c10.c10_tipo_orden) RETURNING r_c01.*
+IF num_args() = 6 THEN
+	CALL calcula_totales(arr_count(),k)
+END IF
 LET int_flag = 0
 INPUT ARRAY r_detalle WITHOUT DEFAULTS FROM r_detalle.*
 	ON KEY(INTERRUPT)
