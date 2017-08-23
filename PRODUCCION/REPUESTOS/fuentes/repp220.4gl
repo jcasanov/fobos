@@ -2969,19 +2969,22 @@ WHILE (intentar)
 			FOR UPDATE
 	OPEN  q_j10 
 	FETCH q_j10 INTO r_j10.*
-	WHENEVER ERROR STOP
 	IF STATUS < 0 THEN
 		LET intentar = mensaje_intentar()
+		IF intentar THEN
+			CLOSE q_j10
+		END IF
 	ELSE
 		LET intentar = 0
 		LET done = 1
 	END IF
+	WHENEVER ERROR STOP
 END WHILE
 IF NOT intentar AND NOT done THEN
 	RETURN done
 END IF
 
-IF STATUS <> NOTFOUND THEN
+IF r_j10.j10_compania IS NOT NULL THEN
 	DELETE FROM cajt011 
 		WHERE j11_compania    = r_j10.j10_compania 
 		  AND j11_localidad   = r_j10.j10_localidad 
