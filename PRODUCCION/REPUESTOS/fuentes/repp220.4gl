@@ -1918,6 +1918,7 @@ IF num_args() <> 6 THEN
 		RETURN
 	END IF
 END IF
+
 -- Empieza el proceso 
 BEGIN WORK 
 LET flag_bloqueo = 0
@@ -2212,11 +2213,11 @@ DECLARE q_elimpre CURSOR FOR
 OPEN q_elimpre
 FETCH q_elimpre INTO r_r23.*
 IF STATUS < 0 THEN
+	WHENEVER ERROR STOP
 	DROP TABLE te_qulazo
+	CLOSE q_elimpre
 	ROLLBACK WORK
 	LET flag = 1
-	CLOSE q_elimpre
-	WHENEVER ERROR STOP
 	CALL fl_mensaje_bloqueo_otro_usuario()
 	RETURN flag
 END IF
@@ -2224,6 +2225,7 @@ WHENEVER ERROR STOP
 IF r_r23.r23_compania IS NULL THEN
 	CLOSE q_elimpre
 	DROP TABLE te_qulazo
+	ROLLBACK WORK
 	RETURN flag
 END IF
 WHENEVER ERROR CONTINUE
@@ -2235,8 +2237,8 @@ UPDATE rept021
 	  AND r21_localidad = vg_codloc
 	  AND r21_numprof   = rm_r21.r21_numprof
 IF STATUS <> 0 THEN
-	ROLLBACK WORK
 	WHENEVER ERROR STOP 
+	ROLLBACK WORK
 	CALL fl_mostrar_mensaje('Ha ocurrido un error grave y no se pudo actualizar la proforma. Por favor llame al ADMINISTRADOR', 'stop')
 	RETURN flag
 END IF
