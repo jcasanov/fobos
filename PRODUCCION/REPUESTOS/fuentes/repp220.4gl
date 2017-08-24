@@ -1921,6 +1921,7 @@ END IF
 
 -- Empieza el proceso 
 BEGIN WORK 
+CALL retorna_preventa() RETURNING numprev
 LET flag_bloqueo = 0
 CALL eliminar_preventa_anterior() RETURNING flag_bloqueo
 IF flag_bloqueo THEN
@@ -1996,27 +1997,27 @@ FOR i = 1 TO preventas
 	IF salir THEN
 		EXIT FOR
 	END IF
-
 	{*
 	 * Primero leemos la tabla de secuencias, si obtenemos un valor no nulo y 
 	 * mayor a cero usamos ese valor para insertar; caso contrario recurrimos 
 	 * al viejo y efectivo método de buscar el último registro y sumarle uno
 	 *}
-	LET numprev = fl_actualiza_control_secuencias(vg_codcia, vg_codloc,
-												  vg_modulo, 'AA', 'PV')
-	IF numprev IS NULL OR numprev <= 0 THEN
-		SELECT MAX(r23_numprev) + 1
-		  INTO numprev
-		  FROM rept023
-		 WHERE r23_compania  = vg_codcia
-		   AND r23_localidad = vg_codloc
+	IF numprev IS NULL THEN
+		LET numprev = fl_actualiza_control_secuencias(vg_codcia, vg_codloc,
+													  vg_modulo, 'AA', 'PV')
+		IF numprev IS NULL OR numprev <= 0 THEN
+			SELECT MAX(r23_numprev) + 1
+			  INTO numprev
+			  FROM rept023
+			 WHERE r23_compania  = vg_codcia
+			   AND r23_localidad = vg_codloc
 
-		-- Si el resultado es nulo, es el primer registro
-		IF numprev IS NULL THEN
-			LET numprev = 1
+			-- Si el resultado es nulo, es el primer registro
+			IF numprev IS NULL THEN
+				LET numprev = 1
+			END IF
 		END IF
 	END IF
-
 	LET rm_r23.r23_numprev = numprev
 	FOR k = 1 TO vm_num_detalles
 		IF rm_r00.r00_fact_sin_stock = 'S' THEN

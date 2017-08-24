@@ -529,13 +529,13 @@ WHILE (intentar)
 			FOR UPDATE
 	OPEN  q_c10
 	FETCH q_c10 INTO r_c10.*
-	WHENEVER ERROR STOP
 	IF STATUS < 0 THEN
 		LET intentar = mensaje_intentar()
 	ELSE
 		LET intentar = 0
 		LET done = 1
 	END IF
+	WHENEVER ERROR STOP
 END WHILE
 IF NOT intentar AND NOT done THEN
 	ROLLBACK WORK
@@ -714,9 +714,9 @@ DECLARE q_p01 CURSOR FOR
 OPEN q_p01
 FETCH q_p01 INTO r_p01.*
 IF STATUS < 0 THEN
+	WHENEVER ERROR STOP
 	ROLLBACK WORK
 	CALL fl_mostrar_mensaje('El código del proveedor esta bloqueado por otro proceso.', 'stop')
-	WHENEVER ERROR STOP
 	RETURN
 END IF
 WHENEVER ERROR STOP
@@ -1677,119 +1677,134 @@ END FUNCTION
 
 
 FUNCTION graba_detalle(r_c13)
-
-DEFINE intentar		SMALLINT
-DEFINE done 		SMALLINT
-DEFINE i		SMALLINT
-DEFINE orden    	SMALLINT
-DEFINE costo_ing	DECIMAL(12,2)
-DEFINE costo_nue	DECIMAL(12,2)
-DEFINE descto_unit	DECIMAL(12,2)
+DEFINE intentar			SMALLINT
+DEFINE done, i, orden	SMALLINT
+DEFINE costo_ing		DECIMAL(12,2)
+DEFINE costo_nue		DECIMAL(12,2)
+DEFINE descto_unit		DECIMAL(12,2)
 DEFINE costo_adi_unit	DECIMAL(12,2)
-DEFINE r_r10, r_aux	RECORD LIKE rept010.*
-DEFINE r_r11		RECORD LIKE rept011.*
-DEFINE r_r20		RECORD LIKE rept020.*
-DEFINE r_c13		RECORD LIKE ordt013.*
-DEFINE r_c14		RECORD LIKE ordt014.*
+DEFINE mensaje			VARCHAR(200)
+DEFINE r_r10, r_aux		RECORD LIKE rept010.*
+DEFINE r_r11			RECORD LIKE rept011.*
+DEFINE r_r20			RECORD LIKE rept020.*
+DEFINE r_c13			RECORD LIKE ordt013.*
+DEFINE r_c14			RECORD LIKE ordt014.*
 
 INITIALIZE r_r20.* TO NULL
 LET r_r20.r20_compania  = vg_codcia
 LET r_r20.r20_localidad = vg_codloc
 LET r_r20.r20_cod_tran  = rm_r19.r19_cod_tran
 LET r_r20.r20_num_tran  = rm_r19.r19_num_tran
-
 LET r_r20.r20_cant_dev   = 0
 LET r_r20.r20_cant_ent   = 0
 LET r_r20.r20_costnue_mb = 0
 LET r_r20.r20_costnue_ma = 0
-
 LET r_r20.r20_fecing     = fl_current()
-
-LET orden = 1
 CALL prorratea_costos_adicionales()
+LET orden = 1
+LET done  = 1
 FOR i = 1 TO vm_indice
 	IF rm_compra[i].cant_ven = 0 THEN
 		CONTINUE FOR
 	END IF
-	LET r_r20.r20_orden      = orden
-	LET orden = orden + 1                      
-	LET descto_unit    = rm_datos[i].val_descto / rm_compra[i].cant_ven 
-	LET costo_adi_unit = rm_datos[i].costo_adi / rm_compra[i].cant_ven 
-	LET descto_unit    = fl_retorna_precision_valor(rm_r19.r19_moneda, descto_unit)
-	LET costo_adi_unit = fl_retorna_precision_valor(rm_r19.r19_moneda, costo_adi_unit)
-	LET costo_ing      = rm_compra[i].precio - descto_unit + costo_adi_unit
-			 
-	CALL fl_obtiene_costo_item(vg_codcia, rm_r19.r19_moneda,rm_compra[i].item,
-			rm_compra[i].cant_ven, costo_ing)
+	LET r_r20.r20_orden = orden
+	LET orden           = orden + 1                      
+	LET descto_unit     = rm_datos[i].val_descto / rm_compra[i].cant_ven 
+	LET costo_adi_unit  = rm_datos[i].costo_adi / rm_compra[i].cant_ven 
+	LET descto_unit     = fl_retorna_precision_valor(rm_r19.r19_moneda,
+														descto_unit)
+	LET costo_adi_unit  = fl_retorna_precision_valor(rm_r19.r19_moneda,
+														costo_adi_unit)
+	LET costo_ing       = rm_compra[i].precio - descto_unit + costo_adi_unit
+	CALL fl_obtiene_costo_item(vg_codcia, rm_r19.r19_moneda, rm_compra[i].item,
+								rm_compra[i].cant_ven, costo_ing)
 		RETURNING costo_nue
-    	CALL fl_lee_item(vg_codcia, rm_compra[i].item) RETURNING r_r10.*
-	LET r_aux.* = r_r10.*
+	CALL fl_lee_item(vg_codcia, rm_compra[i].item) RETURNING r_r10.*
+	LET r_aux.*               = r_r10.*
 	LET r_r10.r10_precio_ant  = r_r10.r10_precio_mb
 	LET r_r10.r10_fec_camprec = fl_current()
-	LET r_r10.r10_precio_mb   = costo_nue + 
-				   (costo_nue * rm_r19.r19_fact_venta / 100)
-	LET r_r10.r10_precio_mb   = fl_retorna_precision_valor(rm_r19.r19_moneda, r_r10.r10_precio_mb)
+	LET r_r10.r10_precio_mb   = costo_nue +
+								(costo_nue * rm_r19.r19_fact_venta / 100)
+	LET r_r10.r10_precio_mb   = fl_retorna_precision_valor(rm_r19.r19_moneda,
+															r_r10.r10_precio_mb)
 	LET r_r10.r10_costo_mb    = costo_nue
-	LET r_r20.r20_costnue_mb  = costo_nue
-	LET r_r10.r10_costult_mb  = costo_ing
-	--LET r_r10.r10_fob         = costo_ing
-	LET r_r10.r10_fob         = rm_compra[i].precio - descto_unit
-								-- 20-05-2008
-	UPDATE rept010 SET r10_costo_mb		= r_r10.r10_costo_mb,
-	                   r10_costult_mb	= r_r10.r10_costult_mb,
-			   r10_fob              = r_r10.r10_fob
-	                   --r10_precio_mb	= r_r10.r10_precio_mb,
-	                   --r10_precio_ant	= r_r10.r10_precio_ant,
-	                   --r10_fec_camprec	= r_r10.r10_fec_camprec
-		WHERE r10_compania = vg_codcia AND 
-		      r10_codigo   = rm_compra[i].item
-	SELECT SUM(r11_stock_act) INTO r_r20.r20_stock_bd FROM rept011
-		WHERE r11_compania  = vg_codcia AND
-		      r11_item      = rm_compra[i].item   -- Stock anterior en 
-							-- todas las bodegas
+	-- Cambio solicitado por JCM el 23-08-2017 en item que ingresan con costo 0
+	IF r_r10.r10_costo_mb >= 0.01 THEN
+		LET r_r20.r20_costnue_mb = costo_nue
+	ELSE
+		LET r_r20.r20_costnue_mb = r_aux.r10_costo_mb
+	END IF
+	IF costo_ing >= 0.01 THEN
+		LET r_r10.r10_costult_mb = costo_ing
+	ELSE
+		LET r_r10.r10_costult_mb = r_aux.r10_costult_mb
+	END IF
+	--
+	LET r_r10.r10_fob         = rm_compra[i].precio - descto_unit -- 20-05-2008
+	-- Cambio solicitado por JCM el 23-08-2017 en item que ingresan con costo 0
+	IF r_r10.r10_costo_mb >= 0.01 THEN
+		WHENEVER ERROR CONTINUE
+		UPDATE rept010
+			SET r10_costo_mb   = r_r10.r10_costo_mb,
+				r10_costult_mb = r_r10.r10_costult_mb,
+				r10_fob        = r_r10.r10_fob
+			WHERE r10_compania = vg_codcia
+			  AND r10_codigo   = rm_compra[i].item
+		IF STATUS < 0 THEN
+			WHENEVER ERROR STOP
+			LET mensaje = 'No se pudo actualizar el costo del ítem ',
+							rm_compra[i].item USING "<<<<<<&", ' en el maestro',
+							' de ítems. Por favor llame al Administrador.'
+			CALL fl_mostrar_mensaje(mensaje, 'exclamation')
+			LET done = 0
+			EXIT FOR
+		END IF
+		WHENEVER ERROR STOP
+	END IF
+	--
+	SELECT SUM(r11_stock_act)
+		INTO r_r20.r20_stock_bd
+		FROM rept011
+		WHERE r11_compania = vg_codcia
+		  AND r11_item     = rm_compra[i].item -- Stock anterior todas las bod.
 	IF r_r20.r20_stock_bd IS NULL THEN
 		LET r_r20.r20_stock_bd = 0
 	END IF
 	LET done = actualiza_existencias(i)
 	IF NOT done THEN
-		RETURN done
+		EXIT FOR
 	END IF
-
 	LET r_r20.r20_cant_ven   = rm_compra[i].cant_ven
-    	LET r_r20.r20_descuento  = rm_compra[i].descuento
-    	LET r_r20.r20_val_descto = rm_datos[i].val_descto
-    	LET r_r20.r20_val_impto  = 
-		rm_compra[i].total * (rm_r19.r19_porc_impto / 100)
-	LET r_r20.r20_val_impto  = fl_retorna_precision_valor(rm_r19.r19_moneda, r_r20.r20_val_impto)
-
-	LET r_r20.r20_cant_ped   = rm_compra[i].cant_ped   
-
-    	LET r_r20.r20_linea      = r_r10.r10_linea				
+   	LET r_r20.r20_descuento  = rm_compra[i].descuento
+   	LET r_r20.r20_val_descto = rm_datos[i].val_descto
+   	LET r_r20.r20_val_impto  = rm_compra[i].total *(rm_r19.r19_porc_impto / 100)
+	LET r_r20.r20_val_impto  = fl_retorna_precision_valor(rm_r19.r19_moneda,
+															r_r20.r20_val_impto)
+	LET r_r20.r20_cant_ped   = rm_compra[i].cant_ped
+   	LET r_r20.r20_linea      = r_r10.r10_linea				
 	LET r_r20.r20_rotacion   = r_r10.r10_rotacion
 	LET r_r20.r20_fob        = r_r10.r10_fob             
 	LET r_r20.r20_costant_mb = r_aux.r10_costo_mb
 	LET r_r20.r20_costant_ma = r_aux.r10_costo_ma
-
-	CALL fl_lee_stock_rep(vg_codcia, rm_r19.r19_bodega_ori,	
-		rm_compra[i].item) RETURNING r_r11.*
+	CALL fl_lee_stock_rep(vg_codcia, rm_r19.r19_bodega_ori,	rm_compra[i].item)
+		RETURNING r_r11.*
 	IF r_r11.r11_compania IS NULL THEN
 		LET r_r20.r20_ubicacion = 'SN'
     		LET r_r20.r20_stock_ant = 0 
 	ELSE
 		LET r_r20.r20_ubicacion = r_r11.r11_ubicacion
-    		LET r_r20.r20_stock_ant = 
-			r_r11.r11_stock_act - r_r20.r20_cant_ped
+    	LET r_r20.r20_stock_ant = r_r11.r11_stock_act - r_r20.r20_cant_ped
 	END IF
 	LET r_r20.r20_bodega     = rm_r19.r19_bodega_ori
 	LET r_r20.r20_item       = rm_compra[i].item       
 	LET r_r20.r20_precio     = rm_compra[i].precio
-
 	LET r_r20.r20_cant_ent   = rm_compra[i].cant_ven   
-	--LET r_r20.r20_costo      = rm_compra[i].precio
-	LET r_r20.r20_costo      = costo_ing	-- PUESTO EL 09-02-2009
-
+	IF costo_ing >= 0.01 THEN -- PUESTO EL 09-02-2009 y cambiado el 24-08-2017
+		LET r_r20.r20_costo = costo_ing
+	ELSE
+		LET r_r20.r20_costo = r_aux.r10_costo_mb
+	END IF
 	INSERT INTO rept020 VALUES (r_r20.*)
-	
 	-- Graba detalle de recepcion
 	LET r_c14.c14_compania   = vg_codcia
 	LET r_c14.c14_localidad  = vg_codloc
@@ -1803,13 +1818,10 @@ FOR i = 1 TO vm_indice
 	LET r_c14.c14_val_descto = rm_datos[i].val_descto
 	LET r_c14.c14_precio     = rm_compra[i].precio
 	LET r_c14.c14_val_impto  = ((r_c14.c14_cantidad * r_c14.c14_precio) -
- 				    r_c14.c14_val_descto) * 
-				   rm_r19.r19_porc_impto / 100	
+							r_c14.c14_val_descto) * rm_r19.r19_porc_impto / 100	
 	LET r_c14.c14_paga_iva   = 'S'
 	INSERT INTO ordt014 VALUES(r_c14.*)
 END FOR 
-LET done = 1
-
 RETURN done
 
 END FUNCTION
@@ -3183,7 +3195,6 @@ IF NOT done THEN
 				      r_ret[i].tipo_ret, ' (',
 				      r_ret[i].porc, '%).'
 	END CASE
-	--CALL fgl_winmessage(vg_producto, mensaje, 'stop')
 	CALL fl_mostrar_mensaje(mensaje, 'stop')
 	ROLLBACK WORK
 	EXIT PROGRAM
@@ -3242,9 +3253,9 @@ DECLARE q_sri CURSOR FOR
 OPEN q_sri
 FETCH q_sri INTO r_g37.*
 IF STATUS < 0 THEN
+	WHENEVER ERROR STOP
 	ROLLBACK WORK
 	CALL fl_mostrar_mensaje('Lo siento ahora no puede modificar este No. del SRI, porque ésta secuencia se encuentra bloqueada por otro usuario.', 'stop')
-	WHENEVER ERROR STOP
 	EXIT PROGRAM
 END IF
 WHENEVER ERROR STOP
@@ -3893,14 +3904,11 @@ DECLARE q_fact CURSOR WITH HOLD FOR
 		ORDER BY fecha ASC, r20_num_tran ASC
 LET num_f = NULL
 FOREACH q_fact INTO r_fact.*
---display r_fact.*
 	IF num_f IS NULL OR r_fact.num_tran <> num_f THEN
 		CALL transferir_item_bod_ss_bod_res(r_fact.*)
 	END IF
 	LET num_f = r_fact.num_tran
 END FOREACH
---rollback work
---exit program
 CALL dropear_tablas_tmp()
 CALL fl_mostrar_mensaje('Transferencias por CRUCE de BODEGA "SIN STOCK" con la bodega ' || rm_r19.r19_bodega_ori CLIPPED || ' generadas OK.', 'info')
 

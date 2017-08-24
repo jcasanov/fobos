@@ -11,12 +11,12 @@ SCREEN
   Autorización SRI: [c099                                               ]
            Usuario: [c011  ] [c103                                        ]
             Bodega: [a2] [c104                ]            [c050] de [c051]
-     [lbl1      |lbl2      |lbl3       |lbl4 |lbl5         |lbl6           ]   
-    [c035      |c036      |c033     ] [c045 |c041         |c105           ]
-    [c035      |c036      |c033     ] [c045 |c041         |c105           ]
-    [c035      |c036      |c033     ] [c045 |c041         |c105           ]
-    [c035      |c036      |c033     ] [c045 |c041         |c105           ]
-    [c035      |c036      |c033     ] [c045 |c041         |c105           ]
+    [lbl1      |lbl2      |lbl3       |lbl4  |lbl5         |lbl6           ]   
+   [c035      |c036      |c033     ] [c045  |c041         |c105           ]
+   [c035      |c036      |c033     ] [c045  |c041         |c105           ]
+   [c035      |c036      |c033     ] [c045  |c041         |c105           ]
+   [c035      |c036      |c033     ] [c045  |c041         |c105           ]
+   [c035      |c036      |c033     ] [c045  |c041         |c105           ]
                        Seguro:[y051     ]       Subtotal: [c030           ]
                         Flete:[y050     ]      Descuento: [c031           ]
                   Dif. Cuadre:[y052     ]       Impuesto: [c023           ]
@@ -55,7 +55,7 @@ c036 = rept020.r20_cant_ven, OPTIONS='-nolist', INCLUDE=(0.00 TO 999999.99),
        FORMAT='###,##&.##' ;
 c041 = rept020.r20_precio, FORMAT='#,###,##&.###', OPTIONS='-nolist',
 	NOENTRY;
-c045 = rept020.r20_descuento, FORMAT='#&.##', NOENTRY, OPTIONS='-nolist';
+c045 = rept020.r20_descuento, FORMAT='##&.##', NOENTRY, OPTIONS='-nolist';
 c105 = FORMONLY.total, NOENTRY, FORMAT='####,###,##&.##', OPTIONS='-nolist';
 
 c106 = FORMONLY.vm_fec_aut TYPE CHAR,    UPSHIFT, AUTONEXT;
