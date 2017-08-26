@@ -1728,40 +1728,26 @@ FOR i = 1 TO vm_indice
 	LET r_r10.r10_precio_mb   = fl_retorna_precision_valor(rm_r19.r19_moneda,
 															r_r10.r10_precio_mb)
 	LET r_r10.r10_costo_mb    = costo_nue
-	-- Cambio solicitado por JCM el 23-08-2017 en item que ingresan con costo 0
-	IF r_r10.r10_costo_mb >= 0.01 THEN
-		LET r_r20.r20_costnue_mb = costo_nue
-	ELSE
-		LET r_r20.r20_costnue_mb = r_aux.r10_costo_mb
-	END IF
-	IF costo_ing >= 0.01 THEN
-		LET r_r10.r10_costult_mb = costo_ing
-	ELSE
-		LET r_r10.r10_costult_mb = r_aux.r10_costult_mb
-	END IF
-	--
+	LET r_r20.r20_costnue_mb  = costo_nue
+	LET r_r10.r10_costult_mb  = costo_ing
 	LET r_r10.r10_fob         = rm_compra[i].precio - descto_unit -- 20-05-2008
-	-- Cambio solicitado por JCM el 23-08-2017 en item que ingresan con costo 0
-	IF r_r10.r10_costo_mb >= 0.01 THEN
-		WHENEVER ERROR CONTINUE
-		UPDATE rept010
-			SET r10_costo_mb   = r_r10.r10_costo_mb,
-				r10_costult_mb = r_r10.r10_costult_mb,
-				r10_fob        = r_r10.r10_fob
-			WHERE r10_compania = vg_codcia
-			  AND r10_codigo   = rm_compra[i].item
-		IF STATUS < 0 THEN
-			WHENEVER ERROR STOP
-			LET mensaje = 'No se pudo actualizar el costo del ítem ',
-							rm_compra[i].item USING "<<<<<<&", ' en el maestro',
-							' de ítems. Por favor llame al Administrador.'
-			CALL fl_mostrar_mensaje(mensaje, 'exclamation')
-			LET done = 0
-			EXIT FOR
-		END IF
+	WHENEVER ERROR CONTINUE
+	UPDATE rept010
+		SET r10_costo_mb   = r_r10.r10_costo_mb,
+			r10_costult_mb = r_r10.r10_costult_mb,
+			r10_fob        = r_r10.r10_fob
+		WHERE r10_compania = vg_codcia
+		  AND r10_codigo   = rm_compra[i].item
+	IF STATUS < 0 THEN
 		WHENEVER ERROR STOP
+		LET mensaje = 'No se pudo actualizar el costo del ítem ',
+						rm_compra[i].item USING "<<<<<<&", ' en el maestro',
+						' de ítems. Por favor llame al Administrador.'
+		CALL fl_mostrar_mensaje(mensaje, 'exclamation')
+		LET done = 0
+		EXIT FOR
 	END IF
-	--
+	WHENEVER ERROR STOP
 	SELECT SUM(r11_stock_act)
 		INTO r_r20.r20_stock_bd
 		FROM rept011
@@ -1790,7 +1776,7 @@ FOR i = 1 TO vm_indice
 		RETURNING r_r11.*
 	IF r_r11.r11_compania IS NULL THEN
 		LET r_r20.r20_ubicacion = 'SN'
-    		LET r_r20.r20_stock_ant = 0 
+    	LET r_r20.r20_stock_ant = 0 
 	ELSE
 		LET r_r20.r20_ubicacion = r_r11.r11_ubicacion
     	LET r_r20.r20_stock_ant = r_r11.r11_stock_act - r_r20.r20_cant_ped
@@ -1799,11 +1785,7 @@ FOR i = 1 TO vm_indice
 	LET r_r20.r20_item       = rm_compra[i].item       
 	LET r_r20.r20_precio     = rm_compra[i].precio
 	LET r_r20.r20_cant_ent   = rm_compra[i].cant_ven   
-	IF costo_ing >= 0.01 THEN -- PUESTO EL 09-02-2009 y cambiado el 24-08-2017
-		LET r_r20.r20_costo = costo_ing
-	ELSE
-		LET r_r20.r20_costo = r_aux.r10_costo_mb
-	END IF
+	LET r_r20.r20_costo      = costo_ing  -- PUESTO EL 09-02-2009
 	INSERT INTO rept020 VALUES (r_r20.*)
 	-- Graba detalle de recepcion
 	LET r_c14.c14_compania   = vg_codcia
