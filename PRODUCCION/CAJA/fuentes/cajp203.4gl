@@ -443,21 +443,20 @@ END IF
 LET int_flag = 0
 INPUT BY NAME rm_j10.j10_tipo_fuente, rm_j10.j10_num_fuente, rm_r38.r38_num_sri
 	WITHOUT DEFAULTS
-	ON KEY (INTERRUPT)
+	ON KEY(INTERRUPT)
 		IF NOT FIELD_TOUCHED(j10_tipo_fuente, j10_num_fuente,
-					rm_r38.r38_num_sri)
+							 rm_r38.r38_num_sri)
 		THEN
 			LET int_flag = 1
 			EXIT INPUT
 		END IF
-
 		LET int_flag = 0
 		CALL fl_mensaje_abandonar_proceso() RETURNING resp
 		IF resp = 'Yes' THEN
 			LET int_flag = 1
 			EXIT INPUT
 		END IF
-       	ON KEY(F1,CONTROL-W)
+   	ON KEY(F1,CONTROL-W)
 		CALL control_visor_teclas_caracter_1() 
 	ON KEY(F2)
 		IF INFIELD(j10_num_fuente) THEN
@@ -640,6 +639,9 @@ INPUT BY NAME rm_j10.j10_tipo_fuente, rm_j10.j10_num_fuente, rm_r38.r38_num_sri
 				THEN
 					CALL fl_mostrar_mensaje('No puede factura esta preventa, porque no tiene IVA y el cliente esta configurado para calcular pago de impuestos.', 'exclamation')
 					CONTINUE INPUT
+				END IF
+				IF NOT facturar_sin_stock() THEN
+					NEXT FIELD j10_num_fuente
 				END IF
 			WHEN 'PV'
 				CALL fl_lee_preventa_veh(vg_codcia, vg_codloc,
@@ -5234,6 +5236,78 @@ END FUNCTION
 
 
 
+FUNCTION muestra_tipo_fuente(tipo)
+DEFINE tipo		LIKE cajt010.j10_tipo_fuente
+
+IF tipo = 'OT' THEN
+	DISPLAY 'ORDEN DE TRABAJO' TO tit_tipo_fuente
+END IF
+IF tipo = 'PR' THEN
+	DISPLAY 'PREVENTA DE INVENTARIOS' TO tit_tipo_fuente
+END IF
+{--
+IF tipo = 'PV' THEN
+	DISPLAY 'PREVENTA DE VEHICULOS' TO tit_tipo_fuente
+END IF
+--}
+IF tipo = 'SC' THEN
+	DISPLAY 'SOLICITUD COBRO CLIENTES' TO tit_tipo_fuente
+END IF
+IF tipo = 'OI' THEN
+	DISPLAY 'OTROS INGRESOS' TO tit_tipo_fuente
+END IF
+IF tipo = 'EC' THEN
+	DISPLAY 'EGRESOS DE CAJA' TO tit_tipo_fuente
+END IF
+
+END FUNCTION
+
+
+
+FUNCTION facturar_sin_stock()
+DEFINE r_reg		RECORD
+						bodega		LIKE rept011.r11_bodega,
+						item		LIKE rept011.r11_item,
+						stock		LIKE rept011.r11_stock_act
+					END RECORD
+DEFINE r_r00		RECORD LIKE rept000.*
+DEFINE resul		SMALLINT
+DEFINE query		CHAR(800)
+DEFINE mensaje		VARCHAR(200)
+
+LET resul = 1
+CALL fl_lee_compania_repuestos(vg_codcia) RETURNING r_r00.*
+IF r_r00.r00_fact_sin_stock = 'S' THEN
+	RETURN resul
+END IF
+LET query = 'SELECT r24_bodega, r24_item, NVL(SUM(r11_stock_act), 0) stock ',
+				'FROM rept024, OUTER rept011 ',
+				'WHERE r24_compania  = ', vg_codcia,
+				'  AND r24_localidad = ', vg_codloc,
+				'  AND r24_numprev   = ', rm_j10.j10_num_fuente,
+				'  AND r11_compania  = r24_compania ',
+				'  AND r11_bodega    = r24_bodega ',
+				'  AND r11_item      = r24_item ',
+				'GROUP BY 1, 2 '
+PREPARE val_sin_stock FROM query
+DECLARE q_val_sin_stock CURSOR FOR val_sin_stock
+FOREACH q_val_sin_stock INTO r_reg.*
+	IF r_reg.stock > 0 THEN
+		CONTINUE FOREACH
+	END IF
+	LET mensaje = 'El item ', r_reg.item CLIPPED, ' en la bodega ',
+					r_reg.bodega CLIPPED, ' no tiene STOCK, por tal motivo no ',
+					'puede facturar esta preventa.'
+	CALL fl_mostrar_mensaje(mensaje, 'exclamation')
+	LET resul = 0
+	EXIT FOREACH
+END FOREACH
+RETURN resul
+
+END FUNCTION
+
+
+
 FUNCTION llamar_visor_teclas()
 DEFINE a		SMALLINT
 
@@ -5303,33 +5377,5 @@ DISPLAY '<F7>      Retención'                AT a,2
 DISPLAY  'F7' AT a,3 ATTRIBUTE(REVERSE)
 LET a = fgl_getkey()
 CLOSE WINDOW w_tf
-
-END FUNCTION
-
-
-
-FUNCTION muestra_tipo_fuente(tipo)
-DEFINE tipo		LIKE cajt010.j10_tipo_fuente
-
-IF tipo = 'OT' THEN
-	DISPLAY 'ORDEN DE TRABAJO' TO tit_tipo_fuente
-END IF
-IF tipo = 'PR' THEN
-	DISPLAY 'PREVENTA DE INVENTARIOS' TO tit_tipo_fuente
-END IF
-{--
-IF tipo = 'PV' THEN
-	DISPLAY 'PREVENTA DE VEHICULOS' TO tit_tipo_fuente
-END IF
---}
-IF tipo = 'SC' THEN
-	DISPLAY 'SOLICITUD COBRO CLIENTES' TO tit_tipo_fuente
-END IF
-IF tipo = 'OI' THEN
-	DISPLAY 'OTROS INGRESOS' TO tit_tipo_fuente
-END IF
-IF tipo = 'EC' THEN
-	DISPLAY 'EGRESOS DE CAJA' TO tit_tipo_fuente
-END IF
 
 END FUNCTION

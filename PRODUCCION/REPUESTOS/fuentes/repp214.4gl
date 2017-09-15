@@ -106,6 +106,7 @@ DEFINE rm_r00			RECORD LIKE rept000.*
 DEFINE rm_c00			RECORD LIKE ordt000.*
 DEFINE vm_stock_pend		SMALLINT
 DEFINE rm_vend			RECORD LIKE rept001.*
+DEFINE vm_cod_tran_ne	LIKE rept019.r19_cod_tran
 
 
 
@@ -178,8 +179,9 @@ ELSE
 END IF
 DISPLAY FORM f_214
 
-LET vm_num_rows = 0
+LET vm_num_rows    = 0
 LET vm_row_current = 0
+LET vm_cod_tran_ne = 'NE'
 INITIALIZE rm_r19.* TO NULL
 
 CALL muestra_contadores()
@@ -453,6 +455,7 @@ DEFINE r_c13		RECORD LIKE ordt013.*
 DEFINE r_p01		RECORD LIKE cxpt001.*
 DEFINE r_p02		RECORD LIKE cxpt002.*
 DEFINE r_g13		RECORD LIKE gent013.*
+DEFINE r_r41		RECORD LIKE rept041.*
 DEFINE i		SMALLINT
 
 DEFINE cantidad_ped	DECIMAL (8,2)
@@ -739,11 +742,25 @@ THEN
 END IF
 CLOSE q_p01
 FREE q_p01
-CALL proceso_cruce_de_bodegas()
+IF rm_r00.r00_concil_cl_im = 'N' THEN
+	CALL proceso_cruce_de_bodegas()
+END IF
 
 COMMIT WORK
 CALL fl_control_master_contab_repuestos(rm_r19.r19_compania, 
 	rm_r19.r19_localidad, rm_r19.r19_cod_tran, rm_r19.r19_num_tran)
+
+DECLARE q_cont_ne CURSOR FOR
+	SELECT * FROM rept041
+		WHERE r41_compania  = rm_r19.r19_compania
+		  AND r41_localidad = rm_r19.r19_localidad
+		  AND r41_cod_tran  = rm_r19.r19_cod_tran
+		  AND r41_num_tran  = rm_r19.r19_num_tran
+		ORDER BY r41_num_tr ASC
+FOREACH q_cont_ne INTO r_r41.*
+	CALL fl_control_master_contab_repuestos(vg_codcia, vg_codloc,
+											r_r41.r41_cod_tr, r_r41.r41_num_tr)
+END FOREACH
 
 IF vm_num_rows = vm_max_rows THEN
 	LET vm_num_rows = 1
@@ -3642,93 +3659,6 @@ END FUNCTION
 
 
 
-FUNCTION llamar_visor_teclas()
-DEFINE a		CHAR(1)
-
-IF vg_gui = 0 THEN
-	CALL fl_visor_teclas_caracter() RETURNING int_flag 
-	LET a = fgl_getkey()
-	CLOSE WINDOW w_tf
-	LET int_flag = 0
-END IF
-
-END FUNCTION
-
-
-
-FUNCTION control_visor_teclas_caracter_1() 
-DEFINE a, fila		INTEGER
-
-CALL fl_visor_teclas_caracter() RETURNING fila
-LET a = fila + 2
-DISPLAY 'Teclas exclusivas de este proceso:' AT a,2 ATTRIBUTE(REVERSE)	
-LET a = a + 1
-DISPLAY '<F5>      Ver Orden Compra'         AT a,2
-DISPLAY  'F5' AT a,3 ATTRIBUTE(REVERSE)
-LET a = fgl_getkey()
-CLOSE WINDOW w_tf
-
-END FUNCTION
-
-
-
-FUNCTION control_visor_teclas_caracter_2() 
-DEFINE a, fila		INTEGER
-
-CALL fl_visor_teclas_caracter() RETURNING fila
-LET a = fila + 2
-DISPLAY 'Teclas exclusivas de este proceso:' AT a,2 ATTRIBUTE(REVERSE)	
-LET a = a + 1
-DISPLAY '<F12>     Salir'                    AT a,2
-DISPLAY  'F12' AT a,3 ATTRIBUTE(REVERSE)
-LET a = fgl_getkey()
-CLOSE WINDOW w_tf
-
-END FUNCTION
-
-
-
-FUNCTION control_visor_teclas_caracter_3() 
-DEFINE a, fila		INTEGER
-
-CALL fl_visor_teclas_caracter() RETURNING fila
-LET a = fila + 2
-DISPLAY 'Teclas exclusivas de este proceso:' AT a,2 ATTRIBUTE(REVERSE)	
-LET a = a + 1
-DISPLAY '<F5>      Facturas Cruce'           AT a,2
-DISPLAY  'F5' AT a,3 ATTRIBUTE(REVERSE)
-LET a = a + 1
-DISPLAY '<F6>      Fact. Item Cruce'         AT a,2
-DISPLAY  'F6' AT a,3 ATTRIBUTE(REVERSE)
-LET a = a + 1
-DISPLAY '<F7>      Imprimir Compra Local'    AT a,2
-DISPLAY  'F7' AT a,3 ATTRIBUTE(REVERSE)
-LET a = fgl_getkey()
-CLOSE WINDOW w_tf
-
-END FUNCTION
-
-
-
-FUNCTION control_visor_teclas_caracter_4() 
-DEFINE a, fila		INTEGER
-
-CALL fl_visor_teclas_caracter() RETURNING fila
-LET a = fila + 2
-DISPLAY 'Teclas exclusivas de este proceso:' AT a,2 ATTRIBUTE(REVERSE)	
-LET a = a + 1
-DISPLAY '<F5>      Factura'                  AT a,2
-DISPLAY  'F5' AT a,3 ATTRIBUTE(REVERSE)
-LET a = a + 1
-DISPLAY '<F6>      Transferencia'            AT a,2
-DISPLAY  'F6' AT a,3 ATTRIBUTE(REVERSE)
-LET a = fgl_getkey()
-CLOSE WINDOW w_tf
-
-END FUNCTION
-
-
-
 FUNCTION muestra_descripciones(item, linea, sub_linea, cod_grupo, cod_clase)
 DEFINE item		LIKE rept010.r10_codigo
 DEFINE linea		LIKE rept010.r10_linea
@@ -4310,7 +4240,7 @@ END IF
 INITIALIZE r_r19.*, r_fact_i.* TO NULL
 LET r_r19.r19_compania		= vg_codcia
 LET r_r19.r19_localidad   	= vg_codloc
-LET r_r19.r19_cod_tran    	= 'TR'
+LET r_r19.r19_cod_tran    	= vm_cod_tran_ne
 CALL fl_actualiza_control_secuencias(vg_codcia, vg_codloc, vg_modulo, 'AA',
 					r_r19.r19_cod_tran)
 	RETURNING r_r19.r19_num_tran
@@ -4341,8 +4271,8 @@ LET r_r19.r19_cedruc     	= ' '
 LET r_r19.r19_vendedor   	= r_fact.r19_vendedor
 LET r_r19.r19_descuento  	= 0.0
 LET r_r19.r19_porc_impto 	= 0.0
-LET r_r19.r19_tipo_dev          = r_fact.cod_tran
-LET r_r19.r19_num_dev           = r_fact.num_tran
+LET r_r19.r19_tipo_dev      = r_fact.cod_tran
+LET r_r19.r19_num_dev       = r_fact.num_tran
 LET r_r19.r19_bodega_ori 	= rm_r19.r19_bodega_ori
 LET r_r19.r19_bodega_dest	= r_fact.bodega
 LET r_r19.r19_moneda     	= rg_gen.g00_moneda_base
@@ -4648,7 +4578,7 @@ LET query = 'SELECT d.r20_item item_c, d.r20_cant_ven, ',
 				'FROM rept019 e, rept020 f ',
 				'WHERE e.r19_compania   = b.r19_compania ',
 				'  AND e.r19_localidad  = b.r19_localidad ',
-				'  AND e.r19_cod_tran   = "TR" ',
+				'  AND e.r19_cod_tran   = "', vm_cod_tran_ne, '" ',
 				'  AND e.r19_bodega_ori = b.r19_bodega_ori ',
 				'  AND e.r19_tipo_dev   = b.r19_tipo_dev ',
 				'  AND e.r19_num_dev    = b.r19_num_dev ',
@@ -4662,7 +4592,7 @@ LET query = 'SELECT d.r20_item item_c, d.r20_cant_ven, ',
 				'FROM rept019 e, rept020 f ',
 				'WHERE e.r19_compania   = b.r19_compania ',
 				'  AND e.r19_localidad  = b.r19_localidad ',
-				'  AND e.r19_cod_tran   = "TR" ',
+				'  AND e.r19_cod_tran   = "', vm_cod_tran_ne, '" ',
 				'  AND e.r19_bodega_dest= b.r19_bodega_dest ',
 				'  AND e.r19_tipo_dev   = b.r19_tipo_dev ',
 				'  AND e.r19_num_dev    = b.r19_num_dev ',
@@ -4778,8 +4708,8 @@ WHILE TRUE
 			LET int_flag = 0
 		ON KEY(F6)
 			LET j = arr_curr()
-			CALL fl_ver_transaccion_rep(vg_codcia, vg_codloc,
-						'TR', r_factcru[j].num_tran)
+			CALL fl_ver_transaccion_rep(vg_codcia, vg_codloc, vm_cod_tran_ne,
+										r_factcru[j].num_tran)
 			LET int_flag = 0
 		ON KEY(F15)
 			LET col = 1
@@ -4921,7 +4851,7 @@ LET query = 'SELECT d.r20_item item_c, b.r19_num_dev, ',
 				'FROM rept019 e, rept020 f ',
 				'WHERE e.r19_compania   = b.r19_compania ',
 				'  AND e.r19_localidad  = b.r19_localidad ',
-				'  AND e.r19_cod_tran   = "TR" ',
+				'  AND e.r19_cod_tran   = "', vm_cod_tran_ne, '" ',
 				'  AND e.r19_bodega_ori = b.r19_bodega_ori ',
 				'  AND e.r19_tipo_dev   = b.r19_tipo_dev ',
 				'  AND e.r19_num_dev    = b.r19_num_dev ',
@@ -4935,7 +4865,7 @@ LET query = 'SELECT d.r20_item item_c, b.r19_num_dev, ',
 				'FROM rept019 e, rept020 f ',
 				'WHERE e.r19_compania   = b.r19_compania ',
 				'  AND e.r19_localidad  = b.r19_localidad ',
-				'  AND e.r19_cod_tran   = "TR" ',
+				'  AND e.r19_cod_tran   = "', vm_cod_tran_ne, '" ',
 				'  AND e.r19_bodega_dest= b.r19_bodega_dest ',
 				'  AND e.r19_tipo_dev   = b.r19_tipo_dev ',
 				'  AND e.r19_num_dev    = b.r19_num_dev ',
@@ -5026,8 +4956,8 @@ WHILE TRUE
 			LET int_flag = 0
 		ON KEY(F6)
 			LET j = arr_curr()
-			CALL fl_ver_transaccion_rep(vg_codcia, vg_codloc,
-						'TR', r_detcru[j].num_tran)
+			CALL fl_ver_transaccion_rep(vg_codcia, vg_codloc, vm_cod_tran_ne,
+										r_detcru[j].num_tran)
 			LET int_flag = 0
 		ON KEY(F15)
 			LET col = 1
@@ -5114,5 +5044,92 @@ LET vm_num_aut = vm_num_aut, rm_p01.p01_num_doc CLIPPED, '2',
 					rm_r19.r19_oc_externa[9, 17] CLIPPED,
 					rm_p01.p01_num_aut
 DISPLAY BY NAME vm_num_aut
+
+END FUNCTION
+
+
+
+FUNCTION llamar_visor_teclas()
+DEFINE a		CHAR(1)
+
+IF vg_gui = 0 THEN
+	CALL fl_visor_teclas_caracter() RETURNING int_flag 
+	LET a = fgl_getkey()
+	CLOSE WINDOW w_tf
+	LET int_flag = 0
+END IF
+
+END FUNCTION
+
+
+
+FUNCTION control_visor_teclas_caracter_1() 
+DEFINE a, fila		INTEGER
+
+CALL fl_visor_teclas_caracter() RETURNING fila
+LET a = fila + 2
+DISPLAY 'Teclas exclusivas de este proceso:' AT a,2 ATTRIBUTE(REVERSE)	
+LET a = a + 1
+DISPLAY '<F5>      Ver Orden Compra'         AT a,2
+DISPLAY  'F5' AT a,3 ATTRIBUTE(REVERSE)
+LET a = fgl_getkey()
+CLOSE WINDOW w_tf
+
+END FUNCTION
+
+
+
+FUNCTION control_visor_teclas_caracter_2() 
+DEFINE a, fila		INTEGER
+
+CALL fl_visor_teclas_caracter() RETURNING fila
+LET a = fila + 2
+DISPLAY 'Teclas exclusivas de este proceso:' AT a,2 ATTRIBUTE(REVERSE)	
+LET a = a + 1
+DISPLAY '<F12>     Salir'                    AT a,2
+DISPLAY  'F12' AT a,3 ATTRIBUTE(REVERSE)
+LET a = fgl_getkey()
+CLOSE WINDOW w_tf
+
+END FUNCTION
+
+
+
+FUNCTION control_visor_teclas_caracter_3() 
+DEFINE a, fila		INTEGER
+
+CALL fl_visor_teclas_caracter() RETURNING fila
+LET a = fila + 2
+DISPLAY 'Teclas exclusivas de este proceso:' AT a,2 ATTRIBUTE(REVERSE)	
+LET a = a + 1
+DISPLAY '<F5>      Facturas Cruce'           AT a,2
+DISPLAY  'F5' AT a,3 ATTRIBUTE(REVERSE)
+LET a = a + 1
+DISPLAY '<F6>      Fact. Item Cruce'         AT a,2
+DISPLAY  'F6' AT a,3 ATTRIBUTE(REVERSE)
+LET a = a + 1
+DISPLAY '<F7>      Imprimir Compra Local'    AT a,2
+DISPLAY  'F7' AT a,3 ATTRIBUTE(REVERSE)
+LET a = fgl_getkey()
+CLOSE WINDOW w_tf
+
+END FUNCTION
+
+
+
+FUNCTION control_visor_teclas_caracter_4() 
+DEFINE a, fila		INTEGER
+
+CALL fl_visor_teclas_caracter() RETURNING fila
+LET a = fila + 2
+DISPLAY 'Teclas exclusivas de este proceso:' AT a,2 ATTRIBUTE(REVERSE)	
+LET a = a + 1
+DISPLAY '<F5>      Factura'                  AT a,2
+DISPLAY  'F5' AT a,3 ATTRIBUTE(REVERSE)
+LET a = a + 1
+DISPLAY '<F6>      Transferencia'            AT a,2
+DISPLAY  'F6' AT a,3 ATTRIBUTE(REVERSE)
+LET a = fgl_getkey()
+CLOSE WINDOW w_tf
 
 END FUNCTION

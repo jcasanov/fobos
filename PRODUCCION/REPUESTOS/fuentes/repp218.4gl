@@ -58,6 +58,7 @@ DEFINE rm_r00			RECORD LIKE rept000.*
 DEFINE rm_c10			RECORD LIKE ordt010.*
 DEFINE vm_fact_nue		LIKE rept019.r19_oc_externa
 DEFINE vm_cruce			SMALLINT
+DEFINE vm_cod_tran_ne	LIKE rept019.r19_cod_tran
 
 
 
@@ -134,8 +135,9 @@ ELSE
 END IF
 DISPLAY FORM f_218
 
-LET vm_num_rows = 0
+LET vm_num_rows    = 0
 LET vm_row_current = 0
+LET vm_cod_tran_ne = 'NE'
 INITIALIZE rm_r19.* TO NULL
 
 CALL muestra_contadores()
@@ -279,6 +281,7 @@ END FUNCTION
 
 
 FUNCTION control_ingreso()
+DEFINE r_r41		RECORD LIKE rept041.*
 
 DEFINE r_g13		RECORD LIKE gent013.*
 
@@ -448,6 +451,18 @@ END IF
 COMMIT WORK
 CALL fl_control_master_contab_repuestos(rm_r19.r19_compania, 
 	rm_r19.r19_localidad, rm_r19.r19_cod_tran, rm_r19.r19_num_tran)
+
+DECLARE q_cont_ne CURSOR FOR
+	SELECT * FROM rept041
+		WHERE r41_compania  = rm_r19.r19_compania
+		  AND r41_localidad = rm_r19.r19_localidad
+		  AND r41_cod_tran  = rm_r19.r19_cod_tran
+		  AND r41_num_tran  = rm_r19.r19_num_tran
+		ORDER BY r41_num_tr ASC
+FOREACH q_cont_ne INTO r_r41.*
+	CALL fl_control_master_contab_repuestos(vg_codcia, vg_codloc,
+											r_r41.r41_cod_tr, r_r41.r41_num_tr)
+END FOREACH
 
 IF vm_num_rows = vm_max_rows THEN
 	LET vm_num_rows = 1
@@ -2211,7 +2226,7 @@ DECLARE q_trans CURSOR FOR
 			(SELECT 1 FROM rept019 a
 				WHERE a.r19_compania    = c.r19_compania
 				  AND a.r19_localidad   = c.r19_localidad
-				  AND a.r19_cod_tran    = "TR"
+				  AND a.r19_cod_tran    = vm_cod_tran_ne
 				  AND a.r19_tipo_dev    = c.r19_tipo_dev
 				  AND a.r19_num_dev     = c.r19_num_dev
 				  AND a.r19_bodega_ori  = c.r19_bodega_dest
@@ -2266,7 +2281,7 @@ DEFINE mensaje		VARCHAR(200)
 INITIALIZE r_r19.* TO NULL
 LET r_r19.r19_compania		= vg_codcia
 LET r_r19.r19_localidad   	= vg_codloc
-LET r_r19.r19_cod_tran    	= 'TR'
+LET r_r19.r19_cod_tran    	= vm_cod_tran_ne
 CALL fl_actualiza_control_secuencias(vg_codcia, vg_codloc, vg_modulo, 'AA',
 					r_r19.r19_cod_tran)
 	RETURNING r_r19.r19_num_tran

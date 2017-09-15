@@ -149,7 +149,7 @@ CLEAR FORM
 LET int_flag = 0
 CONSTRUCT BY NAME expr_sql ON r00_compania, r00_cia_taller, r00_bodega_fact,
 		 r00_dias_prof, r00_expi_prof, r00_dias_dev, r00_dias_dev, 
-		 r00_fact_sin_stock
+		 r00_fact_sin_stock, r00_concil_cl_im
 	ON KEY(F2)
 		IF INFIELD(r00_compania) THEN
 		     CALL fl_ayuda_compania()
@@ -237,6 +237,7 @@ LET rm_pcia.r00_tipo_fact   = 'U'
 LET rm_pcia.r00_contr_prof  = 'S'
 LET rm_pcia.r00_mespro      = MONTH(vg_fecha)
 LET rm_pcia.r00_anopro      = YEAR(vg_fecha)
+LET rm_pcia.r00_concil_cl_im = 'N'
 DISPLAY BY NAME rm_pcia.r00_estado
 DISPLAY 'ACTIVO' TO tit_estado
 CALL lee_datos()
@@ -357,7 +358,7 @@ INPUT BY NAME rm_pcia.r00_compania,    rm_pcia.r00_cia_taller,
 	      rm_pcia.r00_contr_prof,
 	      rm_pcia.r00_dias_prof,   rm_pcia.r00_expi_prof,  
 	      rm_pcia.r00_dias_dev,    rm_pcia.r00_dev_mes,
-	      rm_pcia.r00_fact_sin_stock,
+	      rm_pcia.r00_fact_sin_stock, rm_pcia.r00_concil_cl_im,
 	      rm_pcia.r00_mespro,      rm_pcia.r00_anopro,   
 	      rm_pcia.r00_valmin_ccli, rm_pcia.r00_codcli_tal,
 	      rm_pcia.r00_tipo_costo,  
@@ -370,7 +371,7 @@ INPUT BY NAME rm_pcia.r00_compania,    rm_pcia.r00_cia_taller,
 				  r00_expi_prof,   r00_dias_dev, 
 				  r00_tipo_fact,   r00_numlin_fact,
 				  r00_tipo_margen, r00_tipo_costo,
-				  r00_fact_sin_stock,   r00_tipo_descto,
+				  r00_fact_sin_stock, r00_concil_cl_im, r00_tipo_descto,
 				  r00_codcli_tal,  r00_contr_prof)
                     THEN
                         LET INT_FLAG = 0
@@ -559,7 +560,7 @@ INPUT BY NAME rm_pcia.r00_compania,    rm_pcia.r00_cia_taller,
 				  r00_expi_prof,   r00_dias_dev, 
 				  r00_tipo_fact,   r00_numlin_fact,
 				  r00_tipo_margen, r00_tipo_costo,
-				  r00_fact_sin_stock,   r00_tipo_descto,
+				  r00_fact_sin_stock, r00_concil_cl_im, r00_tipo_descto,
 				  r00_codcli_tal,  r00_contr_prof,
 				  r00_valmin_ccli)
                     THEN
@@ -583,8 +584,8 @@ SELECT * INTO rm_pcia.* FROM rept000 WHERE ROWID = num_row
 IF STATUS = NOTFOUND THEN
 	ERROR 'No existe registro con rowid: ', num_row
 END IF
-DISPLAY BY NAME rm_pcia.r00_compania THRU rm_pcia.r00_mespro     
-DISPLAY BY NAME rm_pcia.r00_valmin_ccli
+DISPLAY BY NAME rm_pcia.r00_compania THRU rm_pcia.r00_mespro
+DISPLAY BY NAME rm_pcia.r00_valmin_ccli, rm_pcia.r00_concil_cl_im     
 CALL fl_lee_bodega_rep(vg_codcia,rm_pcia.r00_bodega_fact)
 	RETURNING rm_bod.*
 	DISPLAY rm_bod.r02_nombre TO nom_bod

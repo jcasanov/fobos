@@ -38,6 +38,8 @@ DEFINE r_desp 		ARRAY [1000] OF RECORD
 DEFINE vm_orden		ARRAY [1000] OF LIKE rept035.r35_orden
 DEFINE vm_ord_ori	LIKE rept034.r34_num_ord_des
 DEFINE vm_num_ent	LIKE rept036.r36_num_entrega
+DEFINE vm_cod_tran_ne	LIKE rept019.r19_cod_tran
+DEFINE vm_num_tran_ne	LIKE rept019.r19_num_tran
 DEFINE rm_g05		RECORD LIKE gent005.*
 
 
@@ -83,8 +85,10 @@ DEFINE num_cols 	SMALLINT
 CALL fl_nivel_isolation()
 CALL fl_retorna_usuario()
 CALL fl_lee_usuario(vg_usuario) RETURNING rm_g05.*
-LET vm_max_rows = 1000
-LET vm_max_elm  = 1000
+LET vm_max_rows    = 1000
+LET vm_max_elm     = 1000
+LET vm_cod_tran_ne = 'NE'
+LET vm_num_tran_ne = NULL
 IF num_args() = 7 THEN
 	CALL ejecutar_nota_de_entrega_automatica()
 	EXIT PROGRAM
@@ -171,7 +175,7 @@ MENU 'OPCIONES'
 		IF resp = 1 THEN
 			CONTINUE MENU
 		END IF
-                CALL control_nota_entrega()
+		CALL control_nota_entrega()
 	COMMAND KEY('C') 'Consultar' 'Consultar un registro. '
                 CALL control_consulta()
                 IF vm_num_rows <= 1 THEN
@@ -336,6 +340,10 @@ FOREACH q_notent INTO r_r34.*
 	CALL muestra_siguiente_registro()
 END FOREACH
 COMMIT WORK
+IF vm_num_tran_ne IS NOT NULL THEN
+	CALL fl_control_master_contab_repuestos(vg_codcia, vg_codloc,
+											vm_cod_tran_ne, vm_num_tran_ne)
+END IF
 {--
 display ' fin programa '
 display ' '
@@ -349,6 +357,7 @@ END FUNCTION
 
 FUNCTION control_nota_entrega()
 DEFINE r_r19		RECORD LIKE rept019.*
+DEFINE num_oc		LIKE ordt010.c10_numero_oc
 DEFINE cant_tot_fac	DECIMAL(8,2)
 DEFINE cant_tot_dev	DECIMAL(8,2)
 
@@ -364,16 +373,55 @@ CALL mostrar_registro(vm_r_rows[vm_row_current], 0)
 IF num_args() <> 7 THEN
 	BEGIN WORK
 END IF
+LET num_oc = NULL
+DECLARE q_num_oc CURSOR FOR
+	SELECT c10_numero_oc
+		FROM rept021, ordt010
+		WHERE r21_compania  = vg_codcia
+		  AND r21_localidad = vg_codloc
+		  AND r21_cod_tran  = rm_r34.r34_cod_tran
+		  AND r21_num_tran  = rm_r34.r34_num_tran
+		  AND c10_compania  = r21_compania
+		  AND c10_localidad = r21_localidad
+		  AND c10_numprof   = r21_numprof
+		  AND c10_estado    = 'C'
+OPEN q_num_oc
+FETCH q_num_oc INTO num_oc
+CLOSE q_num_oc
+FREE q_num_oc
+IF num_oc IS NULL THEN
+	INITIALIZE r_r19.* TO NULL
+	DECLARE q_transf_desp CURSOR FOR
+		SELECT * FROM rept019
+			WHERE r19_compania    = vg_codcia
+			  AND r19_localidad   = vg_codloc
+			  AND r19_cod_tran    = 'TR'
+			  AND r19_tipo_dev    = rm_r34.r34_cod_tran
+			  AND r19_num_dev     = rm_r34.r34_num_tran
+			  AND r19_bodega_dest = vm_bodega_real
+	OPEN q_transf_desp
+	FETCH q_transf_desp INTO r_r19.*
+	CLOSE q_transf_desp
+	FREE q_transf_desp
+	IF r_r19.r19_compania IS NULL THEN
+		ROLLBACK WORK
+		CALL fl_mostrar_mensaje('No se puede generar Nota de Entrega de una Factura que NO tiene transferencia por Compra local o por despacho.', 'exclamation')
+		CALL mostrar_registro_al_salir(0, 0)
+		LET vm_bodega_real = NULL
+		CLEAR vm_bodega_real, tit_bodega_real
+		RETURN
+	END IF
+END IF
 CALL fl_lee_cabecera_transaccion_rep(vg_codcia, vg_codloc, rm_r34.r34_cod_tran,
 					rm_r34.r34_num_tran)
 	RETURNING r_r19.*
 IF r_r19.r19_tipo_dev IS NOT NULL THEN
 	IF r_r19.r19_tipo_dev = 'AF' THEN
+		ROLLBACK WORK
 		CALL fl_mostrar_mensaje('No se puede generar Nota de Entrega de una Factura Anulada.', 'exclamation')
 		CALL mostrar_registro_al_salir(0, 0)
 		LET vm_bodega_real = NULL
 		CLEAR vm_bodega_real, tit_bodega_real
-		ROLLBACK WORK
 		RETURN
 	END IF
 	IF r_r19.r19_tipo_dev = 'DF' THEN
@@ -641,7 +689,7 @@ SELECT r19_bodega_ori bod_ori, r20_item item_c,
 	FROM rept019, rept020
 	WHERE r19_compania    = rm_r34.r34_compania
 	  AND r19_localidad   = rm_r34.r34_localidad
-	  AND r19_cod_tran    = 'TR'
+	  AND r19_cod_tran    = vm_cod_tran_ne
 	  AND r19_bodega_dest = rm_r34.r34_bodega
 	  AND r19_tipo_dev    = rm_r34.r34_cod_tran
 	  AND r19_num_dev     = rm_r34.r34_num_tran
@@ -859,6 +907,10 @@ IF vm_flag_grabar THEN
 				RETURNING resul
 		END IF
 		COMMIT WORK
+		IF vm_num_tran_ne IS NOT NULL THEN
+			CALL fl_control_master_contab_repuestos(vg_codcia, vg_codloc,
+												vm_cod_tran_ne, vm_num_tran_ne)
+		END IF
 		{--
 		display ' fin caca '
 		display ' '
@@ -1054,10 +1106,10 @@ DEFINE num_tran		VARCHAR(15)
 DEFINE genero_det, j	SMALLINT
 DEFINE resul		SMALLINT
 
-INITIALIZE r_r19.* TO NULL
+INITIALIZE r_r19.*, vm_num_tran_ne TO NULL
 LET r_r19.r19_compania		= vg_codcia
 LET r_r19.r19_localidad   	= vg_codloc
-LET r_r19.r19_cod_tran    	= 'TR'
+LET r_r19.r19_cod_tran    	= vm_cod_tran_ne
 CALL fl_actualiza_control_secuencias(vg_codcia, vg_codloc, vg_modulo, 'AA',
 					r_r19.r19_cod_tran)
 	RETURNING r_r19.r19_num_tran
@@ -1069,9 +1121,8 @@ END IF
 IF r_r19.r19_num_tran = -1 THEN
 	SET LOCK MODE TO WAIT
 	WHILE r_r19.r19_num_tran = -1
-		CALL fl_actualiza_control_secuencias(vg_codcia, vg_codloc, 
-							vg_modulo, 'AA',
-							r_r19.r19_cod_tran)
+		CALL fl_actualiza_control_secuencias(vg_codcia, vg_codloc, vg_modulo,
+											'AA', r_r19.r19_cod_tran)
 			RETURNING r_r19.r19_num_tran
 	END WHILE
 	SET LOCK MODE TO NOT WAIT
@@ -1092,8 +1143,8 @@ END IF
 LET r_r19.r19_vendedor   	= vm_vendedor
 LET r_r19.r19_descuento  	= 0.0
 LET r_r19.r19_porc_impto 	= 0.0
-LET r_r19.r19_tipo_dev          = rm_r34.r34_cod_tran
-LET r_r19.r19_num_dev           = rm_r34.r34_num_tran
+LET r_r19.r19_tipo_dev      = rm_r34.r34_cod_tran
+LET r_r19.r19_num_dev       = rm_r34.r34_num_tran
 LET r_r19.r19_bodega_ori 	= vm_bodega_real
 LET r_r19.r19_bodega_dest	= rm_r34.r34_bodega
 LET r_r19.r19_moneda     	= rg_gen.g00_moneda_base
@@ -1118,7 +1169,7 @@ LET r_r20.r20_descuento  	= 0.0
 LET r_r20.r20_val_descto 	= 0.0
 LET r_r20.r20_val_impto  	= 0.0
 LET r_r20.r20_ubicacion  	= 'SN'
-LET genero_det                  = 0
+LET genero_det              = 0
 FOR j = 1 TO vm_num_repd
 	IF r_desp[j].r35_cant_ent = 0 THEN
 		CONTINUE FOR
@@ -1137,9 +1188,9 @@ FOR j = 1 TO vm_num_repd
 			  AND r36_num_ord_des = rm_r34.r34_num_ord_des
 			  AND r36_bodega_real = r_r19.r19_bodega_ori
 			  AND r37_compania    = r36_compania
-      			  AND r37_localidad   = r36_localidad
-       			  AND r37_bodega      = r36_bodega
-       			  AND r37_num_entrega = r36_num_entrega
+   			  AND r37_localidad   = r36_localidad
+   			  AND r37_bodega      = r36_bodega
+   			  AND r37_num_entrega = r36_num_entrega
 			  AND r37_item        = r_desp[j].r35_item
 	END IF
 --display 'bodega ', r_r19.r19_bodega_ori, ' item = ', r_desp[j].r35_item, '  cant_ent = ', cant_ent
@@ -1167,8 +1218,8 @@ FOR j = 1 TO vm_num_repd
 --display '       ', '  cant_ent = ', cant_ent
 	LET genero_det = 1
 	CALL fl_lee_item(vg_codcia, r_desp[j].r35_item) RETURNING r_r10.*
-	LET r_r19.r19_tot_costo  = r_r19.r19_tot_costo + 
-				  (cant_ent * r_r10.r10_costo_mb)
+	LET r_r19.r19_tot_costo  = r_r19.r19_tot_costo +
+								(cant_ent * r_r10.r10_costo_mb)
 	LET r_r20.r20_cant_ped   = cant_ent
 	LET r_r20.r20_cant_ven   = cant_ent
 	LET r_r20.r20_bodega     = r_r19.r19_bodega_ori
@@ -1234,9 +1285,10 @@ IF genero_det THEN
 		  AND r19_localidad = vg_codloc
 		  AND r19_cod_tran  = r_r19.r19_cod_tran
 		  AND r19_num_tran  = r_r19.r19_num_tran
-	LET num_tran = r_r19.r19_num_tran
+	LET num_tran       = r_r19.r19_num_tran
+	LET vm_num_tran_ne = r_r19.r19_num_tran
 	IF num_args() <> 7 THEN
-		CALL fl_mostrar_mensaje('Se genero transferencia automatica' ||
+		CALL fl_mostrar_mensaje('Se genero nota de egreso automatica' ||
 			' No. ' || num_tran || '. De la bodega '
 			|| r_r19.r19_bodega_ori || ' a la bodega '
 			|| r_r19.r19_bodega_dest || '.', 'info')
@@ -1270,7 +1322,7 @@ DECLARE q_item_tien CURSOR FOR
 		FROM rept019, rept020, rept041
 		WHERE r19_compania  = vg_codcia
 		  AND r19_localidad = vg_codloc
-		  AND r19_cod_tran  = 'TR'
+		  AND r19_cod_tran  = vm_cod_tran_ne
 		  AND r19_tipo_dev  = rm_r34.r34_cod_tran
 		  AND r19_num_dev   = rm_r34.r34_num_tran
 		  AND r20_compania  = r19_compania
@@ -2399,7 +2451,7 @@ LET query = 'SELECT NVL(SUM(r20_cant_ven), 0) * (-1) cant_tr ',
 		' FROM rept019, rept020 ',
 		' WHERE r19_compania    = ', vg_codcia,
 		'   AND r19_localidad   = ', vg_codloc,
-		'   AND r19_cod_tran    = "TR" ',
+		'   AND r19_cod_tran    = "', vm_cod_tran_ne, '" ',
 		'   AND r19_bodega_ori  = "', bodega, '"',
 		'   AND r19_bodega_dest = "', vm_bodega_real, '"',
 		'   AND r19_tipo_dev    = "', rm_r34.r34_cod_tran, '"',
@@ -2414,7 +2466,7 @@ LET query = 'SELECT NVL(SUM(r20_cant_ven), 0) * (-1) cant_tr ',
 		' FROM rept019, rept020 ',
 		' WHERE r19_compania    = ', vg_codcia,
 		'   AND r19_localidad   = ', vg_codloc,
-		'   AND r19_cod_tran    = "TR" ',
+		'   AND r19_cod_tran    = "', vm_cod_tran_ne, '" ',
 		'   AND r19_bodega_ori  = "', vm_bodega_real, '"',
 		'   AND r19_bodega_dest = "', bodega, '"',
 		'   AND r19_tipo_dev    = "', rm_r34.r34_cod_tran, '"',

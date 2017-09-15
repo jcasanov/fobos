@@ -51,7 +51,6 @@ DEFINE vm_curr_arr      SMALLINT        -- Indica la posición actual en el
 DEFINE vm_scr_lin       SMALLINT	-- Lineas en pantalla                   
 DEFINE vm_numprof		LIKE rept021.r21_numprof
 DEFINE vm_flag_calculo_impto    CHAR(1)
-DEFINE vm_bod_sstock		LIKE rept002.r02_codigo
 DEFINE vm_size_arr		SMALLINT
 DEFINE vm_flag_mant 		CHAR(1)
 DEFINE vm_flag_vendedor		CHAR(1)
@@ -190,18 +189,7 @@ CALL control_DISPLAY_botones()
 CALL retorna_tam_arr()        
 LET vm_num_rows    = 0           
 LET vm_row_current = 0        
-INITIALIZE rm_r21.*, vm_bod_sstock TO NULL                                      
-SELECT r02_codigo
-	INTO vm_bod_sstock
-	FROM rept002
-	WHERE r02_compania  = vg_codcia                                 
-	  AND r02_localidad = vg_codloc
-	  AND r02_estado    = "A"                                      
-	  AND r02_tipo      = "S"                                       
-IF vm_bod_sstock IS NULL THEN
-	CALL fl_mostrar_mensaje('No hay bodega sin stock configurada.','stop') 
-	EXIT PROGRAM
-END IF
+INITIALIZE rm_r21.* TO NULL                                      
 CALL muestra_contadores()
 MENU 'OPCIONES'                                                                 
 	BEFORE MENU                                                             
@@ -367,16 +355,7 @@ END IF
 CALL retorna_tam_arr()        
 LET vm_num_rows    = 0           
 LET vm_row_current = 0        
-INITIALIZE rm_r21.*, vm_bod_sstock TO NULL                                      
-SELECT r02_codigo INTO vm_bod_sstock FROM rept002                               
-		WHERE r02_compania  = vg_codcia                                 
-		  AND r02_localidad = vg_codloc
-		  AND r02_estado    = "A"                                      
-		  AND r02_tipo      = "S"                                       
-IF vm_bod_sstock IS NULL THEN
-	CALL fl_mostrar_mensaje('No hay bodega sin stock configurada.','stop') 
-	EXIT PROGRAM
-END IF
+INITIALIZE rm_r21.* TO NULL                                      
 CALL fl_lee_proforma_rep(vg_codcia, vg_codloc, vm_numprof) RETURNING rm_r21.*
 IF rm_r21.r21_compania IS NULL THEN
 	CALL fl_mostrar_mensaje('Proforma no existe.', 'stop')
@@ -472,6 +451,7 @@ LET vm_ind_arr = 0
 CLEAR FORM
 CALL control_DISPLAY_botones()
 LET vm_flag_mant = 'I'
+-- XXX
 INITIALIZE rm_r01.*, rm_r03.*, rm_r04.*, rm_r10.*, rm_r11.* TO NULL
 INITIALIZE rm_r03.*, rm_r04.*, rm_r10.*, rm_r11.*, rm_g13.* TO NULL
 INITIALIZE rm_g14.*, rm_g20.*, rm_z01.*, rm_z02.* TO NULL
@@ -486,6 +466,7 @@ LET rm_r21.r21_porc_impto = rg_gen.g00_porc_impto
 LET rm_r21.r21_descuento  =  0.0 
 LET rm_r21.r21_flete      =  0 
 LET rm_r21.r21_factor_fob = 1   
+-- XXX
 LET rm_r21.r21_trans_fact = 'N'
 LET rm_r21.r21_modelo     = '.' 
 LET rm_r21.r21_vendedor   = rm_vend.r01_codigo
@@ -1139,35 +1120,26 @@ WHILE NOT salir
 		ON KEY(F2)          
 			IF INFIELD(r22_bodega) THEN  
 				CALL fl_ayuda_bodegas_rep(vg_codcia, vg_codloc, 'A', '2', 'R', 'S', '6')
-					RETURNING r_r02.r02_codigo, 
-						  r_r02.r02_nombre
+					RETURNING r_r02.r02_codigo, r_r02.r02_nombre
 				IF r_r02.r02_codigo IS NOT NULL THEN
-					LET r_detalle[i].r22_bodega = 
-						r_r02.r02_codigo
-					DISPLAY r_detalle[i].r22_bodega TO
-						r_detalle[j].r22_bodega
+					LET r_detalle[i].r22_bodega = r_r02.r02_codigo
+					DISPLAY r_detalle[i].r22_bodega TO r_detalle[j].r22_bodega
 				END IF
 			END IF
 			IF INFIELD(r22_item) THEN  
-                		CALL fl_ayuda_maestro_items_stock(vg_codcia,                       	     
-														  rm_r21.r21_grupo_linea, r_detalle[i].r22_bodega)
-                     		RETURNING rm_r10.r10_codigo, rm_r10.r10_nombre,
-					  rm_r10.r10_linea,rm_r10.r10_precio_mb,
-					  rm_r11.r11_bodega, stock         
-                     	        IF rm_r10.r10_codigo IS NOT NULL THEN     
+				CALL fl_ayuda_maestro_items_stock(vg_codcia, rm_r21.r21_grupo_linea, r_detalle[i].r22_bodega)
+                     RETURNING rm_r10.r10_codigo, rm_r10.r10_nombre,
+				rm_r10.r10_linea,rm_r10.r10_precio_mb,
+				rm_r11.r11_bodega, stock         
+                IF rm_r10.r10_codigo IS NOT NULL THEN     
 					LET r_detalle[i].r22_item = rm_r10.r10_codigo
+					-- XXX 
 					IF rm_r11.r11_bodega IS NOT NULL THEN
 						LET r_detalle[i].r22_bodega = rm_r11.r11_bodega
-					ELSE
-     				        	IF r_detalle[i].r22_bodega IS NULL THEN
-						
-     				        		LET r_detalle[i].r22_bodega = vm_bod_sstock
-						END IF
-						
 					END IF
-     				        DISPLAY r_detalle[i].r22_bodega TO r_detalle[j].r22_bodega 
-     				        DISPLAY r_detalle[i].r22_item TO r_detalle[j].r22_item 
-                        	END IF			
+     				DISPLAY r_detalle[i].r22_bodega TO r_detalle[j].r22_bodega 
+     				DISPLAY r_detalle[i].r22_item TO r_detalle[j].r22_item 
+            	END IF			
 			END IF 
 			LET int_flag = 0
 		ON KEY(F6)
@@ -1186,8 +1158,7 @@ WHILE NOT salir
 				NEXT FIELD r22_bodega
 			END IF  
 		ON KEY(F9)
-			LET subtot_net = rm_r21.r21_tot_bruto -
-					 rm_r21.r21_tot_dscto
+			LET subtot_net = rm_r21.r21_tot_bruto - rm_r21.r21_tot_dscto
 			ERROR 'El Subtotal - Descuento es : ', subtot_net
 		BEFORE INPUT
 			--#CALL dialog.keysetlabel("F1","")
@@ -1229,42 +1200,20 @@ WHILE NOT salir
 			DISPLAY r_detalle[i].subtotal_item TO 
 				r_detalle[j].subtotal_item   
 		AFTER FIELD r22_bodega 
-			IF r_detalle[i].r22_bodega IS NULL AND 
-			   r_detalle[i].r22_item IS NOT NULL THEN
-                       		CALL retorna_stock_item(vg_codcia, r_detalle[i].r22_bodega, r_detalle[i].r22_item, 'I')
-                       			RETURNING r_detalle[i].r22_bodega, 
-                       			          r_detalle[i].stock_tot, 
-                       				  r_detalle[i].stock_loc
-				DISPLAY r_detalle[i].r22_bodega TO 
-					        r_detalle[j].r22_bodega
-				DISPLAY r_detalle[i].stock_tot TO 
-					        r_detalle[j].stock_tot
-				DISPLAY r_detalle[i].stock_loc TO 
-					        r_detalle[j].stock_loc
-			END IF	
+			IF r_detalle[i].r22_bodega IS NULL AND
+			   r_detalle[i].r22_item IS NOT NULL
+			THEN
+				CALL retorna_stock_item(vg_codcia, r_detalle[i].r22_bodega,
+										r_detalle[i].r22_item, 'I')
+					RETURNING r_detalle[i].r22_bodega, r_detalle[i].stock_tot,
+								r_detalle[i].stock_loc
+				DISPLAY r_detalle[i].r22_bodega TO r_detalle[j].r22_bodega
+				DISPLAY r_detalle[i].stock_tot  TO r_detalle[j].stock_tot
+				DISPLAY r_detalle[i].stock_loc  TO r_detalle[j].stock_loc
+			END IF
 			IF r_detalle[i].r22_bodega IS NOT NULL THEN
-				IF NOT valida_bodega(vg_codcia, 
-					   r_detalle[i].r22_bodega) THEN
+				IF NOT valida_bodega(vg_codcia, r_detalle[i].r22_bodega) THEN
 					NEXT FIELD r22_bodega
-				END IF
-				IF r_detalle[i].r22_item IS NOT NULL AND
-				   r_detalle[i].r22_cantidad IS NOT NULL THEN
-					 IF r_detalle[i].r22_bodega <> vm_bod_sstock THEN
-					 	CALL fl_lee_stock_rep(vg_codcia, 
-						r_detalle[i].r22_bodega,
-						r_detalle[i].r22_item)
-				      		RETURNING r_r11.* 
-
-						IF r_r11.r11_stock_act IS NULL THEN
-							LET r_r11.r11_stock_act = 0
-						END IF
-						IF r_r11.r11_stock_act < r_detalle[i].r22_cantidad THEN 
-							LET mensaje = 'El item: ', r_detalle[i].r22_item CLIPPED,
-						      ' no tiene stock suficiente.'
-							CALL fl_mostrar_mensaje(mensaje,'exclamation') 			
-							NEXT FIELD r22_bodega
-						END IF
-					END IF	
 				END IF
 			END IF
 		BEFORE FIELD r22_item                       
@@ -1341,13 +1290,10 @@ WHILE NOT salir
 					IF k = i THEN
 						CONTINUE FOR
 					END IF
-                       			IF r_detalle[i].r22_item =
-						 r_detalle[k].r22_item AND 
-                       			   r_detalle[i].r22_bodega =
-						 r_detalle[k].r22_bodega AND 
-					   r_detalle[k].r22_bodega <> vm_bod_sstock THEN
-						LET cant_prof = cant_prof + 
-						    r_detalle[k].r22_cantidad
+                    IF r_detalle[i].r22_item = r_detalle[k].r22_item AND 
+                       r_detalle[i].r22_bodega = r_detalle[k].r22_bodega 
+					THEN 
+						LET cant_prof = cant_prof + r_detalle[k].r22_cantidad
 					END IF
 				END FOR
                        		LET r_detalle[i].stock_loc = r_detalle[i].stock_loc - cant_prof
@@ -1379,44 +1325,9 @@ WHILE NOT salir
 					CALL fl_mostrar_mensaje('El Item no pertenece al Grupo de Línea de Venta. ','exclamation')
 					NEXT FIELD r22_item
 				END IF                                        
-				--- VALIDACIÓN DE VENTA SIN STOCK              
-				CALL fl_lee_stock_rep(vg_codcia, 
-						r_detalle[i].r22_bodega,
-						r_detalle[i].r22_item)
-				      		RETURNING r_r11.* 
-				IF r_r11.r11_stock_act IS NULL OR r_r11.r11_stock_act < 0 THEN
-					LET r_r11.r11_stock_act = 0
-				END IF
-				LET stock = r_detalle[i].r22_cantidad - r_r11.r11_stock_act	
-				IF r_detalle[i].r22_bodega <> vm_bod_sstock THEN                            
-				IF stock > 0 AND r_r11.r11_stock_act > 0 THEN
-					LET r_detalle[i].r22_cantidad = r_r11.r11_stock_act
-					CALL fl_mostrar_mensaje('Stock insuficiente.', 'exclamation')
-					DISPLAY r_detalle[i].r22_cantidad TO 
-					        r_detalle[j].r22_cantidad
-				END IF
-				END IF
-				LET r_detalle[i].subtotal_item = r_detalle[i].r22_precio * r_detalle[i].r22_cantidad                                    	
-				DISPLAY r_detalle[i].r22_precio TO 
-					r_detalle[j].r22_precio
-				DISPLAY r_detalle[i].subtotal_item TO 
-					r_detalle[j].subtotal_item
-				IF r_r11.r11_stock_act = 0 AND r_detalle[i].r22_bodega <> vm_bod_sstock THEN                            
-					CALL fl_hacer_pregunta('Este ítem no tiene stock. Desea hacer una proforma sin stock','No')
-						RETURNING resp              
-					LET int_flag = 0                   
-					IF resp = 'Yes' THEN              
-						IF vm_bod_sstock IS NULL THEN
-							CALL fl_mostrar_mensaje('No hay bodega configurada para venta sin stock.','exclamation')
-						        NEXT FIELD r22_item
-						END IF
-						LET r_detalle[i].r22_bodega = vm_bod_sstock
-						DISPLAY r_detalle[i].r22_bodega 
-							TO r_detalle[j].r22_bodega      
-					ELSE  
-						NEXT FIELD r22_item
-					END IF  
-				END IF         
+				LET r_detalle[i].subtotal_item = r_detalle[i].r22_precio * r_detalle[i].r22_cantidad
+				DISPLAY r_detalle[i].r22_precio TO r_detalle[j].r22_precio
+				DISPLAY r_detalle[i].subtotal_item TO r_detalle[j].subtotal_item
 				LET k = i - j + 1 
 				CALL calcula_totales(arr_count(),k)
 			ELSE
@@ -1524,19 +1435,23 @@ CALL fl_lee_bodega_rep(codcia, bodega) RETURNING r_r02.*
 IF r_r02.r02_compania IS NULL THEN
 	CALL fl_mostrar_mensaje('Bodega no existe.','exclamation') 
 	RETURN 0
-END IF	
+END IF
 IF r_r02.r02_localidad <> vg_codloc THEN
 	CALL fl_mostrar_mensaje('Esta bodega no pertenece a esta localidad.','exclamation') 			
 	RETURN 0
-END IF	
+END IF
 IF r_r02.r02_tipo = 'L' THEN
 	CALL fl_mostrar_mensaje('Esta bodega no es física.','exclamation')
 	RETURN 0
-END IF	
+END IF
 IF r_r02.r02_factura <> 'S' THEN
 	CALL fl_mostrar_mensaje('Esta bodega no es de facturación.','exclamation') 			
 	RETURN 0
-END IF	
+END IF
+IF r_r02.r02_tipo_ident <> 'V' THEN
+	CALL fl_mostrar_mensaje('La bodega debe ser común.','exclamation') 			
+	RETURN 0
+END IF
 RETURN 1
 
 END FUNCTION
@@ -2044,17 +1959,17 @@ FOR i = 1 TO preventas
 		LET rm_r24.r24_localidad    = vg_codloc 
 		LET rm_r24.r24_numprev      = rm_r23.r23_numprev
 		LET rm_r24.r24_bodega       = r_detprev.bodega
-                LET rm_r24.r24_numprev      = rm_r23.r23_numprev 
-        	LET rm_r24.r24_proformado   = 'S'
-	        LET rm_r24.r24_cant_ped     = r_detprev.cantidad 
-	        LET rm_r24.r24_cant_ven     = r_detprev.cantidad
-        	LET rm_r24.r24_item         = r_detprev.item 
-        	LET rm_r24.r24_descuento    = r_detprev.descto
-        	LET rm_r24.r24_precio       = r_detprev.precio
-       		LET rm_r24.r24_orden        = j 
-        	LET rm_r24.r24_linea        = r_detprev.linea 
-		CALL fl_lee_stock_rep(vg_codcia, rm_r24.r24_bodega,
-				      rm_r24.r24_item) RETURNING r_r11.* 
+        LET rm_r24.r24_numprev      = rm_r23.r23_numprev 
+      	LET rm_r24.r24_proformado   = 'S'
+	    LET rm_r24.r24_cant_ped     = r_detprev.cantidad 
+	    LET rm_r24.r24_cant_ven     = r_detprev.cantidad
+       	LET rm_r24.r24_item         = r_detprev.item 
+       	LET rm_r24.r24_descuento    = r_detprev.descto
+       	LET rm_r24.r24_precio       = r_detprev.precio
+       	LET rm_r24.r24_orden        = j 
+       	LET rm_r24.r24_linea        = r_detprev.linea 
+		CALL fl_lee_stock_rep(vg_codcia, rm_r24.r24_bodega, rm_r24.r24_item)
+			RETURNING r_r11.* 
 		IF r_r11.r11_stock_act IS NULL THEN
 			LET r_r11.r11_stock_act = 0
 		END IF	
@@ -2077,6 +1992,7 @@ FOR i = 1 TO preventas
 			ROLLBACK WORK
 			RETURN
 		END IF	
+		{--	Comentado el 31-08-2017
 		IF r_r11.r11_stock_act < rm_r24.r24_cant_ped THEN
 			CALL fl_lee_bodega_rep(vg_codcia, rm_r24.r24_bodega) 
 				RETURNING r_r02.* 
@@ -2097,15 +2013,14 @@ FOR i = 1 TO preventas
 				RETURN 
 			END IF 
 		END IF
-	        LET rm_r24.r24_val_descto   = 
-	        	(r_detprev.cantidad * r_detprev.precio) *  
-	        	(r_detprev.descto / 100)
-	        LET rm_r24.r24_val_impto    =
-			((r_detprev.cantidad * r_detprev.precio) - 
-	                  rm_r24.r24_val_descto) *
-			(rm_r23.r23_porc_impto / 100)
+		--}
+	    LET rm_r24.r24_val_descto = (r_detprev.cantidad * r_detprev.precio) *
+	        						(r_detprev.descto / 100)
+        LET rm_r24.r24_val_impto  = ((r_detprev.cantidad * r_detprev.precio) -
+									  rm_r24.r24_val_descto) *
+									 (rm_r23.r23_porc_impto / 100)
 		INSERT INTO rept024 VALUES(rm_r24.*)
-	       	LET j = j + 1
+       	LET j = j + 1
 		INITIALIZE r_detprev.* TO NULL 
 		FETCH q_prof INTO orden, r_detprev.*
 		IF STATUS = NOTFOUND THEN
@@ -2142,14 +2057,14 @@ FOR i = 1 TO preventas
 	LET rm_r23.r23_tot_bruto = vm_subtotal
 	LET rm_r23.r23_tot_dscto = vm_descuento
 	-- Para sacar el impuesto del total bruto
-	LET vm_impuesto= (vm_subtotal - vm_descuento) * 
-			  rm_r23.r23_porc_impto / 100
+	LET vm_impuesto= (vm_subtotal - vm_descuento) * rm_r23.r23_porc_impto / 100
 	LET rm_r23.r23_tot_neto  = vm_subtotal - vm_descuento + vm_impuesto +
 				   rm_r23.r23_flete
-	UPDATE rept023 SET r23_tot_costo = rm_r23.r23_tot_costo,
-		           r23_tot_bruto = rm_r23.r23_tot_bruto,
-	      	      	   r23_tot_dscto = rm_r23.r23_tot_dscto,
-	      	      	   r23_tot_neto  = rm_r23.r23_tot_neto 
+	UPDATE rept023
+		SET r23_tot_costo = rm_r23.r23_tot_costo,
+		    r23_tot_bruto = rm_r23.r23_tot_bruto,
+	        r23_tot_dscto = rm_r23.r23_tot_dscto,
+	        r23_tot_neto  = rm_r23.r23_tot_neto 
 		WHERE r23_compania  = vg_codcia
 		  AND r23_localidad = vg_codloc
 		  AND r23_numprev   = rm_r23.r23_numprev
@@ -2377,9 +2292,9 @@ FOR i = 1 TO vm_ind_arr
 		IF k = i THEN
 			CONTINUE FOR
 		END IF
-                IF r_detalle[i].r22_item   = r_detalle[k].r22_item AND 
-                   r_detalle[i].r22_bodega = r_detalle[k].r22_bodega AND 
-		   r_detalle[k].r22_bodega <> vm_bod_sstock THEN
+		IF r_detalle[i].r22_item   = r_detalle[k].r22_item AND 
+           r_detalle[i].r22_bodega = r_detalle[k].r22_bodega 
+		THEN 
 			LET cant_prof = cant_prof + r_detalle[k].r22_cantidad
 		END IF
 	END FOR
@@ -2387,31 +2302,14 @@ FOR i = 1 TO vm_ind_arr
         	LET r_detalle[i].stock_loc = r_detalle[i].stock_loc - cant_prof
 	END IF
 	-- OJO REVISAR ***NPC
-	IF r_detalle[i].r22_bodega <> vm_bod_sstock THEN
-		LET dias_trans = vg_fecha - DATE(rm_r21.r21_fecing)
-		IF (rm_r21.r21_cod_tran IS NULL) AND
-		   NOT (rm_r00.r00_dias_prof < dias_trans OR
-			rm_r00.r00_dias_prof = 0)
+	LET dias_trans = vg_fecha - DATE(rm_r21.r21_fecing)
+	IF (rm_r21.r21_cod_tran IS NULL) AND
+	   NOT (rm_r00.r00_dias_prof < dias_trans OR rm_r00.r00_dias_prof = 0)
+	THEN
+		IF r_detalle[i].stock_loc > 0 AND r_detalle[i].r22_cantidad > r_detalle[i].stock_loc
 		THEN
-			IF r_detalle[i].stock_loc > 0 AND 
-			   r_detalle[i].r22_cantidad > r_detalle[i].stock_loc
-			THEN
-				LET r_detalle[i].r22_cantidad =
-							r_detalle[i].stock_loc
-				LET r_detalle[i].subtotal_item =
-							r_r22.r22_precio *
-						       r_detalle[i].r22_cantidad
-			END IF
-		END IF
-	END IF
-	--- VALIDACIÓN DE VENTA SIN STOCK              
-	LET stock = r_detalle[i].r22_cantidad - r_detalle[i].stock_loc	
-	IF rm_r21.r21_cod_tran IS NULL THEN
-		IF (stock > 0 AND r_detalle[i].r22_bodega <> vm_bod_sstock) AND
-		   NOT (rm_r00.r00_dias_prof < dias_trans OR
-			rm_r00.r00_dias_prof = 0)
-		THEN
-			LET r_detalle[i].r22_bodega = vm_bod_sstock
+			LET r_detalle[i].r22_cantidad = r_detalle[i].stock_loc
+			LET r_detalle[i].subtotal_item = r_r22.r22_precio * r_detalle[i].r22_cantidad
 		END IF
 	END IF
 END FOR
@@ -2474,9 +2372,6 @@ FOREACH q_barc INTO r_r11.*
 		LET stock_tot = stock_tot + r_r11.r11_stock_act
 	END IF		           
 END FOREACH
-IF bodega IS NULL THEN
-	LET bodega  = vm_bod_sstock
-END IF
 
 RETURN bodega, stock_tot, stock_loc
 

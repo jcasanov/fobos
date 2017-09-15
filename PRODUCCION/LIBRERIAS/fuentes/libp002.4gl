@@ -28,6 +28,7 @@ DEFINE cod_tran_a	LIKE rept019.r19_cod_tran
 DEFINE tipo		LIKE ctbt012.b12_tipo_comp
 DEFINE num		LIKE ctbt012.b12_num_comp
 DEFINE hecho		SMALLINT
+DEFINE flag_fac_dev	SMALLINT
 
 INITIALIZE vm_cod_tran, vm_num_tran TO NULL
 LET vm_cod_tran = cod_tran
@@ -77,7 +78,12 @@ CASE rm_crep.r19_cod_tran
 	WHEN 'FA'
 		CALL fl_contabiliza_venta_repuestos(8)
 		LET vm_indice = vm_indice + 1
-		CALL fl_contabiliza_costo_venta_repuestos(27,0)
+	WHEN 'NE'
+		LET flag_fac_dev = 0
+		IF rm_crep.r19_tipo_dev = 'DF' OR rm_crep.r19_tipo_dev = 'AF' THEN
+			LET flag_fac_dev = 1
+		END IF
+		CALL fl_contabiliza_costo_venta_repuestos(27, flag_fac_dev)
 		LET vm_indice = vm_indice + 1
 	WHEN 'AF'
 		CALL fl_contabiliza_anulacion_fact_repuestos(10)
@@ -86,10 +92,12 @@ CASE rm_crep.r19_cod_tran
 		LET vm_fact_anu = 0
 		CALL fl_contabiliza_dev_venta_repuestos(10)
 		LET vm_indice = vm_indice + 1
+		{--
 		IF vm_fact_anu = 0 THEN
 			CALL fl_contabiliza_costo_venta_repuestos(27, 1)
 			LET vm_indice = vm_indice + 1
 		END IF
+		--}
 	WHEN 'IM'
 		CALL fl_contabiliza_importaciones(15)
 		LET vm_indice = vm_indice + 1

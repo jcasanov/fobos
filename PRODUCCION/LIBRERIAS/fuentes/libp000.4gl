@@ -1701,7 +1701,7 @@ CASE cod_tran
 			      vg_separador, run_prog, 'repp215 ', base, ' ',
 			      'RE', codcia, ' ', codloc,
 			      ' ', cod_tran, ' ', num_tran   
-	WHEN 'TR'
+	WHEN 'TR' OR 'NE'
 		LET comando = 'cd ..', vg_separador, '..', vg_separador,
 			      'REPUESTOS', vg_separador, 'fuentes', 
 			      vg_separador, run_prog, 'repp216 ', base, ' ',

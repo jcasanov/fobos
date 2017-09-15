@@ -9,7 +9,7 @@ SCREEN
    Activar control de margenes de utilidad en proformas: [g]
 Días Validéz Precios Proforma: [f02] Permite facturación sin stock: [e]
      Días Expiración Proforma: [f03]                Devolución Mes: [f]
-              Días Devolución: [f04 ]
+              Días Devolución: [f04 ]  Conciliar CL/IM contra recepción ?: [h]
                Mes de Proceso: [c020]               Año de Proceso: [c021]    
 
                    Valor Maximo para Facturas de Consumidor Final: [v001     ] 
@@ -73,4 +73,7 @@ g    = rept000.r00_contr_prof,
 c020 = rept000.r00_mespro, NOENTRY;
 c021 = rept000.r00_anopro, NOENTRY;
 v001 = r00_valmin_ccli, FORMAT = '##,##&.##', INCLUDE = (0 TO 99999), REVERSE;
+h    = rept000.r00_concil_cl_im, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'N',
+	COMMENT = 'Marque para hacer el cruce de stock de CL/IM en la recepción.';
 END

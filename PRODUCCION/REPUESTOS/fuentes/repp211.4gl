@@ -10,7 +10,6 @@ GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
 DEFINE vm_preventa      LIKE rept023.r23_numprev
 DEFINE vm_tipo_doc	CHAR(2)
-DEFINE vm_tot_costo	DECIMAL(14,2)
 DEFINE rm_ccaj		RECORD LIKE cajt010.*
 DEFINE rm_cprev		RECORD LIKE rept023.*
 DEFINE rm_cpago		RECORD LIKE rept025.*
@@ -67,7 +66,6 @@ BEGIN WORK
 CALL valida_preventa()
 CALL valida_proforma()
 CALL verifica_forma_pago()
-CALL actualiza_existencias()
 CALL genera_factura()
 UPDATE rept023 SET r23_estado   = 'F',
 	 	   r23_cod_tran = rm_cabt.r19_cod_tran,
@@ -120,7 +118,9 @@ UPDATE rept021 SET r21_cod_tran = rm_cabt.r19_cod_tran,
                    r21_num_tran = rm_cabt.r19_num_tran
 	WHERE CURRENT OF q_prof
 IF rm_r88.r88_compania IS NOT NULL THEN
-	CALL transferir_item_bod_ss_bod_res()
+	CALL transferir_item_bod_ss_bod_res('R')
+ELSE
+	CALL transferir_item_bod_ss_bod_res('D')
 END IF
 COMMIT WORK
 IF vg_codloc <> 2 AND vg_codloc <> 4 THEN
@@ -410,94 +410,6 @@ END FUNCTION
 
 
 
-FUNCTION actualiza_existencias()
-DEFINE r		RECORD LIKE rept024.*
-DEFINE r_r02		RECORD LIKE rept002.*
-DEFINE i		SMALLINT
-DEFINE costo		DECIMAL(14,2)
-DEFINE mensaje		VARCHAR(100)
-
-WHENEVER ERROR STOP
-SET LOCK MODE TO WAIT 1
-DECLARE q_dprev CURSOR FOR SELECT * FROM rept024
-	WHERE r24_compania  = vg_codcia AND 
-	      r24_localidad = vg_codloc AND 
-	      r24_numprev   = vm_preventa
-	ORDER BY r24_orden
-LET i = 0
-LET vm_tot_costo = 0
-FOREACH q_dprev INTO r.*
-	IF r.r24_cant_ven = 0 THEN
-		CONTINUE FOREACH
-	END IF
-	CALL fl_lee_item(r.r24_compania, r.r24_item)
-		RETURNING rm_item.*
-	IF rm_cprev.r23_moneda = rg_gen.g00_moneda_base THEN
-		LET costo = rm_item.r10_costo_mb
-	ELSE
-		LET costo = rm_item.r10_costo_ma
-	END IF
-	LET vm_tot_costo = vm_tot_costo + (r.r24_cant_ven * costo)
-	CALL fl_lee_bodega_rep(r.r24_compania, r.r24_bodega)
-		RETURNING r_r02.*
-	CALL fl_lee_stock_rep(r.r24_compania, r.r24_bodega, r.r24_item)
-		RETURNING rm_stock.*
-	IF status = NOTFOUND AND r_r02.r02_tipo = 'S' THEN
-		INITIALIZE rm_stock.* TO NULL
-		LET rm_stock.r11_compania  = r.r24_compania
-		LET rm_stock.r11_bodega    = r.r24_bodega
-		LET rm_stock.r11_item      = r.r24_item
-		LET rm_stock.r11_ubicacion = 'NOLOC'
-		LET rm_stock.r11_stock_act = 0
-		LET rm_stock.r11_stock_ant = 0
-		LET rm_stock.r11_ing_dia   = 0
-		LET rm_stock.r11_egr_dia   = 0
-		INSERT INTO rept011 VALUES (rm_stock.*)
-	END IF
-	WHENEVER ERROR CONTINUE
-	DECLARE q_upexi CURSOR FOR 
-		SELECT * FROM rept011 
-			WHERE r11_compania = r.r24_compania AND 
-			      r11_bodega   = r.r24_bodega AND 
-			      r11_item     = r.r24_item
-			FOR UPDATE
-	OPEN q_upexi
-	FETCH q_upexi INTO rm_stock.*
-	IF (status = NOTFOUND OR rm_stock.r11_stock_act <= 0) AND 
-		r_r02.r02_tipo <> 'S' THEN
-		ROLLBACK WORK
-		LET mensaje = 'Item ' || r.r24_item || ' no tiene stock'
-		CALL fl_mostrar_mensaje(mensaje, 'stop')
-		EXIT PROGRAM
-	END IF
-	IF status < 0 THEN
-		ROLLBACK WORK
-		CALL fl_mostrar_mensaje('Registro de existencia está bloqueado por otro usuario.','stop')
-		EXIT PROGRAM
-	END IF
-	IF rm_stock.r11_stock_act < r.r24_cant_ven AND 
-		r_r02.r02_tipo <> 'S' THEN
-		ROLLBACK WORK
-		LET mensaje = 'Item ' || r.r24_item ||
-				' no tiene suficiente stock'
-		CALL fl_mostrar_mensaje(mensaje, 'stop')
-		EXIT PROGRAM
-	END IF
-	LET rm_stock.r11_stock_act = rm_stock.r11_stock_act - r.r24_cant_ven
-	UPDATE rept011 SET r11_stock_act = rm_stock.r11_stock_act,
-			   r11_egr_dia   = r11_egr_dia + r.r24_cant_ven
-		WHERE CURRENT OF q_upexi
-	LET i = i + 1
-END FOREACH
-IF i = 0 THEN
-	ROLLBACK WORK
-	CALL fl_mostrar_mensaje('La preventa no tiene detalle de items.','stop')
-	EXIT PROGRAM
-END IF
-
-END FUNCTION
-
-
 FUNCTION genera_factura()
 DEFINE numero 		INTEGER
 DEFINE costo		DECIMAL(14,2)
@@ -541,7 +453,7 @@ LET rm_cabt.r19_fact_venta  	= NULL
 LET rm_cabt.r19_moneda      	= rm_cprev.r23_moneda
 LET rm_cabt.r19_paridad 	= rm_cprev.r23_paridad
 LET rm_cabt.r19_precision   	= rm_cprev.r23_precision
-LET rm_cabt.r19_tot_costo   	= vm_tot_costo 
+LET rm_cabt.r19_tot_costo   	= rm_cprev.r23_tot_costo 
 LET rm_cabt.r19_tot_bruto   	= rm_cprev.r23_tot_bruto
 LET rm_cabt.r19_tot_dscto   	= rm_cprev.r23_tot_dscto
 LET rm_cabt.r19_tot_neto 	= rm_cprev.r23_tot_neto
@@ -551,6 +463,13 @@ LET rm_cabt.r19_usuario 	= vg_usuario
 CALL obtener_usuario_por_refacturacion()
 LET rm_cabt.r19_fecing 		= fl_current()
 INSERT INTO rept019 VALUES (rm_cabt.*)
+
+DECLARE q_dprev CURSOR FOR SELECT * FROM rept024
+	WHERE r24_compania  = vg_codcia AND 
+	      r24_localidad = vg_codloc AND 
+	      r24_numprev   = vm_preventa
+	ORDER BY r24_orden
+WHENEVER ERROR STOP
 FOREACH q_dprev INTO r.*
 	IF r.r24_cant_ven = 0 THEN
 		CONTINUE FOREACH
@@ -564,6 +483,11 @@ FOREACH q_dprev INTO r.*
 	END IF
 	CALL fl_lee_stock_rep(r.r24_compania, r.r24_bodega, r.r24_item)
 		RETURNING rm_stock.*
+	IF rm_stock.r11_item IS NULL THEN
+		LET rm_stock.r11_ubicacion = 'SN'
+		LET rm_stock.r11_stock_act = 0 
+	END IF
+
     	LET rm_dett.r20_compania 	= vg_codcia
     	LET rm_dett.r20_localidad 	= vg_codloc
     	LET rm_dett.r20_cod_tran 	= rm_cabt.r19_cod_tran
@@ -588,7 +512,7 @@ FOREACH q_dprev INTO r.*
     	LET rm_dett.r20_costant_ma 	= rm_item.r10_costo_ma
     	LET rm_dett.r20_costnue_mb 	= rm_item.r10_costo_mb
     	LET rm_dett.r20_costnue_ma 	= rm_item.r10_costo_ma
-    	LET rm_dett.r20_stock_ant 	= rm_stock.r11_stock_act +r.r24_cant_ven
+    	LET rm_dett.r20_stock_ant 	= rm_stock.r11_stock_act + r.r24_cant_ven
     	LET rm_dett.r20_stock_bd 	= 0
     	LET rm_dett.r20_fecing 		= fl_current()
 	INSERT INTO rept020 VALUES (rm_dett.*)
@@ -1005,33 +929,70 @@ END FUNCTION
 
 
 
-FUNCTION transferir_item_bod_ss_bod_res()
+FUNCTION transferir_item_bod_ss_bod_res(flag)
+DEFINE flag			CHAR(1)
 DEFINE r_r10		RECORD LIKE rept010.*
 DEFINE r_r11		RECORD LIKE rept011.*
 DEFINE r_r19		RECORD LIKE rept019.*
 DEFINE r_r20		RECORD LIKE rept020.*
+DEFINE cod_tran		LIKE rept019.r19_cod_tran
 DEFINE num_tran		LIKE rept019.r19_num_tran
+DEFINE num_oc		LIKE ordt010.c10_numero_oc
+DEFINE query		CHAR(800)
 
-DECLARE q_trans_ori_cab CURSOR FOR
-	SELECT * FROM rept019
-		WHERE r19_compania  = rm_r88.r88_compania
-		  AND r19_localidad = rm_r88.r88_localidad
-		  AND r19_cod_tran  = 'TR'
-		  AND r19_tipo_dev  = rm_r88.r88_cod_fact
-		  AND r19_num_dev   = rm_r88.r88_num_fact
-		  AND EXISTS
-			(SELECT 1 FROM rept041
-				WHERE r41_compania   = r19_compania
-				  AND r41_localidad  = r19_localidad
-				  AND r41_cod_tran  NOT IN ('DF', 'AF')
-				  AND r41_cod_tr     = r19_cod_tran
-				  AND r41_num_tr     = r19_num_tran)
-		ORDER BY r19_fecing, r19_num_tran
+IF flag = 'D' THEN
+	LET num_oc = NULL
+	DECLARE q_num_oc CURSOR FOR
+		SELECT c10_numero_oc
+			FROM rept021, ordt010
+			WHERE r21_compania  = vg_codcia
+			  AND r21_localidad = vg_codloc
+			  AND r21_cod_tran  = rm_cabt.r19_cod_tran
+			  AND r21_num_tran  = rm_cabt.r19_num_tran
+			  AND c10_compania  = r21_compania
+			  AND c10_localidad = r21_localidad
+			  AND c10_numprof   = r21_numprof
+			  AND c10_estado    = 'C'
+	OPEN q_num_oc
+	FETCH q_num_oc INTO num_oc
+	CLOSE q_num_oc
+	FREE q_num_oc
+	IF num_oc IS NOT NULL THEN
+		RETURN
+	END IF
+	LET query = 'SELECT * FROM rept019 ',
+				'WHERE r19_compania  = ', vg_codcia,
+				'  AND r19_localidad = ', vg_codloc,
+				'  AND r19_cod_tran  = "', rm_cabt.r19_cod_tran, '"',
+				'  AND r19_num_tran  = ', rm_cabt.r19_num_tran
+END IF
+LET cod_tran = 'TR'
+IF flag = 'R' THEN
+	LET query = 'SELECT * FROM rept019 ',
+				'WHERE r19_compania  = ', rm_r88.r88_compania,
+				'  AND r19_localidad = ', rm_r88.r88_localidad,
+				'  AND r19_cod_tran  = "', cod_tran, '"',
+				'  AND r19_tipo_dev  = "', rm_r88.r88_cod_fact, '"',
+				'  AND r19_num_dev   = ', rm_r88.r88_num_fact,
+				'  AND EXISTS ',
+					'(SELECT 1 FROM rept041 ',
+						'WHERE r41_compania   = r19_compania ',
+						'  AND r41_localidad  = r19_localidad ',
+						'  AND r41_cod_tran  NOT IN ("DF", "AF") ',
+						'  AND r41_cod_tr     = r19_cod_tran ',
+						'  AND r41_num_tr     = r19_num_tran) ',
+				'ORDER BY r19_fecing, r19_num_tran'
+END IF
+PREPARE trans_ori_cab FROM query
+DECLARE q_trans_ori_cab CURSOR FOR trans_ori_cab
 FOREACH q_trans_ori_cab INTO r_r19.*
 	LET num_tran = r_r19.r19_num_tran
+	IF flag = 'D' THEN
+		LET r_r19.r19_cod_tran = cod_tran
+	END IF
 	CALL fl_actualiza_control_secuencias(r_r19.r19_compania,
-						r_r19.r19_localidad, vg_modulo,
-						'AA', r_r19.r19_cod_tran)
+											r_r19.r19_localidad, vg_modulo,
+											'AA', r_r19.r19_cod_tran)
 		RETURNING r_r19.r19_num_tran
 	IF r_r19.r19_num_tran = 0 THEN
 		ROLLBACK WORK	
@@ -1042,25 +1003,60 @@ FOREACH q_trans_ori_cab INTO r_r19.*
 		SET LOCK MODE TO WAIT
 		WHILE r_r19.r19_num_tran = -1
 			CALL fl_actualiza_control_secuencias(r_r19.r19_compania,
-						r_r19.r19_localidad, vg_modulo,
-						'AA', r_r19.r19_cod_tran)
+													r_r19.r19_localidad,
+													vg_modulo, 'AA',
+													r_r19.r19_cod_tran)
 				RETURNING r_r19.r19_num_tran
 		END WHILE
 		SET LOCK MODE TO NOT WAIT
 	END IF
-	LET r_r19.r19_referencia = 'TR. AUTO. FA-',
-					rm_r88.r88_num_fact USING "<<<<<<&",' ',
-					r_r19.r19_cod_tran CLIPPED, '-',
-					num_tran USING "<<<<<<&", ' REFACTU.'
+	IF flag = 'R' THEN
+		LET r_r19.r19_referencia = 'TR. AUTO. FA-',
+								rm_r88.r88_num_fact USING "<<<<<<&",' ',
+								r_r19.r19_cod_tran CLIPPED, '-',
+								num_tran USING "<<<<<<&", ' REFACTU.'
+	END IF
+	IF flag = 'D' THEN
+		LET r_r19.r19_referencia = 'TR. DESPACHO FA-',
+								rm_cabt.r19_cod_tran USING "<<<<<<&",' ',
+								rm_cabt.r19_num_tran CLIPPED
+	END IF
 	LET r_r19.r19_tipo_dev   = rm_cabt.r19_cod_tran
 	LET r_r19.r19_num_dev    = rm_cabt.r19_num_tran
+	IF flag = 'D' THEN
+		LET r_r19.r19_bodega_dest = NULL
+		DECLARE q_bod_desp CURSOR FOR
+			SELECT r02_codigo
+				FROM rept002
+				WHERE r02_compania    = vg_codcia
+				  AND r02_localidad   = vg_codloc
+				  AND r02_estado      = 'A'
+				  AND r02_tipo        = 'L'
+				  AND r02_area        = 'R'
+				  AND r02_factura     = 'N'
+				  AND r02_tipo_ident  = 'D'
+		OPEN q_bod_desp
+		FETCH q_bod_desp INTO r_r19.r19_bodega_dest
+		CLOSE q_bod_desp
+		FREE q_bod_desp
+		IF r_r19.r19_bodega_dest IS NULL THEN
+			ROLLBACK WORK
+			CALL fl_mostrar_mensaje('No existe configurado la bodega de despacho. Por favor llame al administrador.', 'stop')
+			EXIT PROGRAM
+		END IF
+	END IF
 	LET r_r19.r19_usuario    = vg_usuario
 	LET r_r19.r19_fecing     = fl_current()
 	INSERT INTO rept019 VALUES (r_r19.*)
-	INSERT INTO rept041
-		VALUES(r_r19.r19_compania, r_r19.r19_localidad,
-			rm_r88.r88_cod_fact, rm_r88.r88_num_fact,
-			r_r19.r19_cod_tran, r_r19.r19_num_tran)
+	IF flag = 'R' THEN
+		INSERT INTO rept041
+			VALUES(r_r19.r19_compania, r_r19.r19_localidad,
+					rm_r88.r88_cod_fact, rm_r88.r88_num_fact,
+					r_r19.r19_cod_tran, r_r19.r19_num_tran)
+	END IF
+	IF flag = 'D' THEN
+		LET r_r19.r19_cod_tran = rm_cabt.r19_cod_tran
+	END IF
 	DECLARE q_trans_ori_det CURSOR FOR
 		SELECT * FROM rept020
 			WHERE r20_compania  = r_r19.r19_compania
@@ -1070,11 +1066,9 @@ FOREACH q_trans_ori_cab INTO r_r19.*
 			ORDER BY r20_orden
 	FOREACH q_trans_ori_det INTO r_r20.*
 		LET r_r20.r20_num_tran   = r_r19.r19_num_tran
-		CALL fl_lee_item(r_r20.r20_compania, r_r20.r20_item)
-			RETURNING r_r10.*
-		LET r_r19.r19_tot_costo  = r_r19.r19_tot_costo +
-						(r_r20.r20_cant_ven *
-						 r_r10.r10_costo_mb)
+		CALL fl_lee_item(r_r20.r20_compania, r_r20.r20_item) RETURNING r_r10.*
+		LET r_r19.r19_tot_costo  = r_r19.r19_tot_costo + (r_r20.r20_cant_ven *
+									r_r10.r10_costo_mb)
 		LET r_r20.r20_costo      = r_r10.r10_costo_mb 
 		LET r_r20.r20_fob        = r_r10.r10_fob 
 		LET r_r20.r20_linea      = r_r10.r10_linea 
@@ -1085,14 +1079,13 @@ FOREACH q_trans_ori_cab INTO r_r19.*
 		LET r_r20.r20_costant_ma = r_r10.r10_costo_ma
 		LET r_r20.r20_costnue_ma = r_r10.r10_costo_ma
 		CALL fl_lee_stock_rep(r_r20.r20_compania, r_r19.r19_bodega_ori,
-					r_r20.r20_item)
+								r_r20.r20_item)
 			RETURNING r_r11.*
 		IF r_r11.r11_stock_act IS NULL THEN
 			LET r_r11.r11_stock_act = 0
 		END IF
 		LET r_r20.r20_stock_ant  = r_r11.r11_stock_act 
-		CALL fl_lee_stock_rep(vg_codcia, r_r19.r19_bodega_dest,
-					r_r20.r20_item)
+		CALL fl_lee_stock_rep(vg_codcia, r_r19.r19_bodega_dest, r_r20.r20_item)
 			RETURNING r_r11.*
 		IF r_r11.r11_stock_act IS NULL THEN
 			LET r_r11.r11_stock_act = 0

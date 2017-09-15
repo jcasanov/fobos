@@ -86,6 +86,7 @@ DEFINE vm_impuesto    	DECIMAL(12,2)	-- TOTAL DEL IMPUESTO
 DEFINE vg_cod_tran 	LIKE gent021.g21_cod_tran
 DEFINE vg_num_tran	LIKE rept019.r19_num_tran
 DEFINE vm_cruce		SMALLINT
+DEFINE vm_cod_tran_ne	LIKE rept019.r19_cod_tran
 
 
 
@@ -179,6 +180,7 @@ CALL control_DISPLAY_botones()
 CALL retorna_tam_arr()
 LET vm_num_rows    = 0
 LET vm_row_current = 0
+LET vm_cod_tran_ne = 'NE'
 CALL muestra_contadores()
 MENU 'OPCIONES'
 	BEFORE MENU	
@@ -312,6 +314,7 @@ DEFINE r_r02		RECORD LIKE rept002.*
 DEFINE r_r88		RECORD LIKE rept088.*
 DEFINE r_t23		RECORD LIKE talt023.*
 DEFINE r19_referencia	LIKE rept019.r19_referencia
+DEFINE r_r41		RECORD LIKE rept041.*
 
 CALL retorna_tam_arr()
 LET vm_num_rows    = 0
@@ -557,6 +560,17 @@ COMMIT WORK
 IF vg_codloc <> 2 AND vg_codloc <> 4 THEN
 	CALL fl_control_master_contab_repuestos(vg_codcia, vg_codloc,
 				rm_r19.r19_cod_tran, rm_r19.r19_num_tran)
+	DECLARE q_cont_ne CURSOR FOR
+		SELECT * FROM rept041
+			WHERE r41_compania  = rm_r19.r19_compania
+			  AND r41_localidad = rm_r19.r19_localidad
+			  AND r41_cod_tran  = rm_r19.r19_cod_tran
+			  AND r41_num_tran  = rm_r19.r19_num_tran
+			ORDER BY r41_num_tr ASC
+	FOREACH q_cont_ne INTO r_r41.*
+		CALL fl_control_master_contab_repuestos(vg_codcia, vg_codloc,
+											r_r41.r41_cod_tr, r_r41.r41_num_tr)
+	END FOREACH
 END IF
 SELECT * INTO r_z21.* FROM cxct021
 	WHERE z21_compania  = vg_codcia
@@ -775,6 +789,7 @@ DEFINE pago_fact_nc_pa 	CHAR(1)
 DEFINE val_ant 		DECIMAL(12,2)
 DEFINE r_z21		RECORD LIKE cxct021.*
 DEFINE r_r02		RECORD LIKE rept002.*
+DEFINE r_r41		RECORD LIKE rept041.*
 
 CLEAR FORM
 LET vm_flag_mant = 'I'
@@ -1037,6 +1052,17 @@ COMMIT WORK
 IF vg_codloc <> 2 AND vg_codloc <> 4 THEN
 	CALL fl_control_master_contab_repuestos(vg_codcia, vg_codloc,
 				rm_r19.r19_cod_tran, rm_r19.r19_num_tran)
+	DECLARE q_cont_ne2 CURSOR FOR
+		SELECT * FROM rept041
+			WHERE r41_compania  = rm_r19.r19_compania
+			  AND r41_localidad = rm_r19.r19_localidad
+			  AND r41_cod_tran  = rm_r19.r19_cod_tran
+			  AND r41_num_tran  = rm_r19.r19_num_tran
+			ORDER BY r41_num_tr ASC
+	FOREACH q_cont_ne2 INTO r_r41.*
+		CALL fl_control_master_contab_repuestos(vg_codcia, vg_codloc,
+											r_r41.r41_cod_tr, r_r41.r41_num_tr)
+	END FOREACH
 END IF
 CALL muestra_contadores()
 SELECT * INTO r_z21.* FROM cxct021
@@ -2751,7 +2777,7 @@ DECLARE q_retorno_t CURSOR FOR
 		FROM rept019, rept020
 		WHERE r19_compania    = vg_codcia
 		  AND r19_localidad   = vg_codloc
-		  AND r19_cod_tran    = 'TR'
+		  AND r19_cod_tran    = vm_cod_tran_ne
 		  AND r19_bodega_dest = r_detalle[i].r20_bodega
 		  AND r19_ord_trabajo = rm_r19.r19_ord_trabajo
 		  AND r20_compania    = r19_compania
@@ -2770,8 +2796,8 @@ FOREACH q_retorno_t INTO r_r20.*
 	LET num_tran = r_r20.r20_num_tran
 	LET cant     = cant + cant_dev
 	INSERT INTO tmp_item_ret
-		VALUES('TR', num_tran, r_r20.r20_bodega,r_detalle[i].r20_bodega,
-			r_detalle[i].r20_item, cant_dev,
+		VALUES(vm_cod_tran_ne, num_tran, r_r20.r20_bodega,
+			r_detalle[i].r20_bodega, r_detalle[i].r20_item, cant_dev,
 			r_detalle[i].r20_cant_dev)
 	IF cant >= r_detalle[i].r20_cant_dev THEN
 		EXIT FOREACH
@@ -2792,7 +2818,7 @@ SELECT NVL(SUM(r20_cant_ven), 0) * (-1) cant_tr
 	FROM rept019, rept020
 	WHERE r19_compania    = vg_codcia
 	  AND r19_localidad   = vg_codloc
-	  AND r19_cod_tran    = 'TR'
+	  AND r19_cod_tran    = vm_cod_tran_ne
 	  AND r19_bodega_ori  = bodega
 	  AND r19_bodega_dest = bod_real
 	  AND r19_tipo_dev    = rm_r19.r19_tipo_dev
@@ -2807,7 +2833,7 @@ SELECT NVL(SUM(r20_cant_ven), 0) cant_tr
 	FROM rept019, rept020
 	WHERE r19_compania    = vg_codcia
 	  AND r19_localidad   = vg_codloc
-	  AND r19_cod_tran    = 'TR'
+	  AND r19_cod_tran    = vm_cod_tran_ne
 	  AND r19_bodega_ori  = bod_real
 	  AND r19_bodega_dest = bodega
 	  AND r19_tipo_dev    = rm_r19.r19_tipo_dev
@@ -3684,7 +3710,7 @@ LET query = 'SELECT UNIQUE b.* ',
 		' FROM rept019 c, rept041 b ',
 		' WHERE c.r19_compania    = ', r_r19.r19_compania,
 		'   AND c.r19_localidad   = ', r_r19.r19_localidad,
-		'   AND c.r19_cod_tran    = "TR"',
+		'   AND c.r19_cod_tran    = "', vm_cod_tran_ne, '"',
 		'   AND c.r19_tipo_dev    = "', r_r19.r19_tipo_dev, '"',
 		'   AND c.r19_num_dev     = ', r_r19.r19_num_dev,
 		'   AND b.r41_compania    = c.r19_compania ',
@@ -3695,7 +3721,8 @@ LET query = 'SELECT UNIQUE b.* ',
 			' (SELECT 1 FROM rept019 a, rept041 d ',
 				' WHERE a.r19_compania    = b.r41_compania ',
                                 '   AND a.r19_localidad   = b.r41_localidad ',
-                                '   AND a.r19_cod_tran   IN ("TR") ',
+                                '   AND a.r19_cod_tran   IN ("', vm_cod_tran_ne,
+															'") ',
                                 '   AND a.r19_tipo_dev    = c.r19_tipo_dev ',
                                 '   AND a.r19_num_dev     = c.r19_num_dev ',
                                 '   AND a.r19_bodega_ori  = c.r19_bodega_dest ',
@@ -3797,7 +3824,7 @@ DEFINE k, l, encont	SMALLINT
 INITIALIZE r_r19.* TO NULL
 LET r_r19.r19_compania		= vg_codcia
 LET r_r19.r19_localidad   	= vg_codloc
-LET r_r19.r19_cod_tran    	= 'TR'
+LET r_r19.r19_cod_tran    	= vm_cod_tran_ne
 CALL fl_actualiza_control_secuencias(vg_codcia, vg_codloc, vg_modulo, 'AA',
 					r_r19.r19_cod_tran)
 	RETURNING r_r19.r19_num_tran
@@ -3990,7 +4017,7 @@ DECLARE q_tiene CURSOR FOR
 		FROM rept019 c, rept041 b
 		WHERE c.r19_compania    = vg_codcia
 		  AND c.r19_localidad   = vg_codloc
-		  AND c.r19_cod_tran    = "TR"
+		  AND c.r19_cod_tran    = vm_cod_tran_ne
 		  AND c.r19_tipo_dev    = vm_cod_tran
 		  AND c.r19_num_dev     = rm_r19.r19_num_dev
 		  AND b.r41_compania    = c.r19_compania
