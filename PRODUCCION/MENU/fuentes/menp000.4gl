@@ -3308,7 +3308,7 @@ CASE c
 		THEN
 			EXIT CASE
 		END IF
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'COMPRAS', vg_separador, 'fuentes', vg_separador, '; fglrun ordp103 ', vg_base, ' ', 'OC', vg_codcia, ' ', vg_codloc
+		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'COMPRAS', vg_separador, 'fuentes', vg_separador, '; fglrun ordp103 ', vg_base, ' ', 'OC', vg_codcia
 		RUN ejecuta
 	WHEN 0
 		CLOSE WINDOW w_menu_configuracion
