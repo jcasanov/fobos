@@ -8,37 +8,41 @@
 --------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_nuevoprog     CHAR(400)
-DEFINE rm_z20		RECORD LIKE cxct020.*
-DEFINE rm_z26		RECORD LIKE cxct026.*
-DEFINE localidad	LIKE gent002.g02_localidad
-DEFINE tipo_fecha	CHAR(1)
-DEFINE vm_fecha_ini	DATE
-DEFINE vm_fecha_fin	DATE
+DEFINE rm_z20			RECORD LIKE cxct020.*
+DEFINE rm_z26			RECORD LIKE cxct026.*
+DEFINE localidad		LIKE gent002.g02_localidad
+DEFINE tipo_fecha		CHAR(1)
+DEFINE vm_fecha_ini		DATE
+DEFINE vm_fecha_fin		DATE
 DEFINE vm_num_det       SMALLINT
 DEFINE vm_max_det       SMALLINT
 DEFINE vm_scr_lin       SMALLINT
 DEFINE vm_total         DECIMAL(12,2)
-DEFINE rm_det		ARRAY[10000] OF RECORD
-				z01_nomcli	LIKE cxct001.z01_nomcli,
-				z26_localidad	LIKE cxct026.z26_localidad,
-				g08_nombre	LIKE gent008.g08_nombre,
-				z26_num_cheque	LIKE cxct026.z26_num_cheque,
-				z26_fecha_cobro	LIKE cxct026.z26_fecha_cobro,
-				z26_valor	LIKE cxct026.z26_valor
-			END RECORD
-DEFINE rm_che		ARRAY[10000] OF RECORD
-				z26_codcli	LIKE cxct026.z26_codcli,
-				z26_banco	LIKE cxct026.z26_banco,
-				z26_num_cta	LIKE cxct026.z26_num_cta,
-				z26_num_cheque	LIKE cxct026.z26_num_cheque,
-				z26_tipo_doc	LIKE cxct026.z26_tipo_doc,
-				z26_num_doc	LIKE cxct026.z26_num_doc,
-				z26_dividendo	LIKE cxct026.z26_dividendo
-			END RECORD
-DEFINE rm_orden 	ARRAY[10] OF CHAR(4)
-DEFINE vm_columna_1	SMALLINT
-DEFINE vm_columna_2	SMALLINT
+DEFINE rm_det			ARRAY[10000] OF RECORD
+							z01_nomcli		LIKE cxct001.z01_nomcli,
+							z26_localidad	LIKE cxct026.z26_localidad,
+							g08_nombre		LIKE gent008.g08_nombre,
+							z26_num_cheque	LIKE cxct026.z26_num_cheque,
+							z26_fecha_cobro	LIKE cxct026.z26_fecha_cobro,
+							z26_valor		LIKE cxct026.z26_valor
+						END RECORD
+DEFINE rm_che			ARRAY[10000] OF RECORD
+							z26_codcli		LIKE cxct026.z26_codcli,
+							z26_banco		LIKE cxct026.z26_banco,
+							z26_num_cta		LIKE cxct026.z26_num_cta,
+							z26_num_cheque	LIKE cxct026.z26_num_cheque,
+							z26_estado		LIKE cxct026.z26_estado
+						END RECORD
+DEFINE rm_docs			ARRAY[10000] OF RECORD
+							z26_tipo_doc	LIKE cxct026.z26_tipo_doc,
+							z26_num_doc		LIKE cxct026.z26_num_doc,
+							z26_dividendo	LIKE cxct026.z26_dividendo,
+							z20_fecha_vcto	LIKE cxct020.z20_fecha_vcto,
+							z26_valor		LIKE cxct026.z26_valor
+						END RECORD
+DEFINE rm_orden		 	ARRAY[10] OF CHAR(4)
+DEFINE vm_columna_1		SMALLINT
+DEFINE vm_columna_2		SMALLINT
 
 
 
@@ -47,7 +51,8 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/cxcp303.err')
+LET vg_proceso = arg_val(0)
+CALL startlog('../logs/' || vg_proceso CLIPPED || '.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN   -- Validar # parámetros correcto
@@ -58,7 +63,6 @@ LET vg_base    = arg_val(1)
 LET vg_modulo  = arg_val(2)
 LET vg_codcia  = arg_val(3)
 LET vg_codloc  = arg_val(4)
-LET vg_proceso = 'cxcp303'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
 --#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
@@ -88,15 +92,15 @@ IF vg_gui = 0 THEN
 	LET num_rows = 20
 	LET num_cols = 78
 END IF
-OPEN WINDOW w_mas AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
+OPEN WINDOW w_cxcf303_1 AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
 	ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE lin_menu,
 		  BORDER, MESSAGE LINE LAST - 1) 
 IF vg_gui = 1 THEN
-	OPEN FORM f_cxc FROM "../forms/cxcf303_1"
+	OPEN FORM f_cxcf303_1 FROM "../forms/cxcf303_1"
 ELSE
-	OPEN FORM f_cxc FROM "../forms/cxcf303_1c"
+	OPEN FORM f_cxcf303_1 FROM "../forms/cxcf303_1c"
 END IF
-DISPLAY FORM f_cxc
+DISPLAY FORM f_cxcf303_1
 LET vm_scr_lin = 0
 CALL muestra_contadores_det(0, 0)
 CALL borrar_cabecera()
@@ -111,7 +115,7 @@ END FUNCTION
 FUNCTION control_consulta()
 DEFINE r_g13		RECORD LIKE gent013.*
 
-LET vm_fecha_ini      = TODAY
+LET vm_fecha_ini      = vg_fecha
 LET tipo_fecha        = 'C'
 LET rm_z26.z26_estado = 'A'
 LET rm_z20.z20_moneda = rg_gen.g00_moneda_base
@@ -142,12 +146,12 @@ END FUNCTION
 
 
 FUNCTION muestra_consulta()
-DEFINE i, j, col	SMALLINT
-DEFINE query		CHAR(1200)
+DEFINE i, j, col		SMALLINT
+DEFINE query			CHAR(1500)
 DEFINE expr_sql         VARCHAR(100)
 DEFINE expr_estado      VARCHAR(100)
-DEFINE expr_loc		VARCHAR(100)
-DEFINE expr_fecha	VARCHAR(100)
+DEFINE expr_loc			VARCHAR(100)
+DEFINE expr_fecha		VARCHAR(100)
 
 LET expr_sql = NULL
 IF rm_z26.z26_codcli IS NOT NULL THEN
@@ -195,6 +199,34 @@ ELSE
 		END IF
 	END IF
 END IF
+LET query = 'SELECT z01_nomcli, z26_localidad, g08_nombre, z26_num_cheque, ',
+					'z26_fecha_cobro, z26_valor, z26_codcli, z26_banco, ',
+					'z26_num_cta, z26_num_cheque AS num_che, z26_tipo_doc, ',
+					'z26_num_doc, z26_dividendo, z20_fecha_vcto, z26_estado ',
+				' FROM cxct026, cxct001, gent008, cxct020 ',
+				' WHERE z26_compania    = ', vg_codcia,
+				expr_loc CLIPPED,
+				expr_sql CLIPPED, 
+				expr_estado CLIPPED,
+				expr_fecha CLIPPED,
+				'  AND z01_codcli       = z26_codcli ',
+				'  AND g08_banco        = z26_banco ',
+				'  AND z20_compania     = z26_compania ',
+				'  AND z20_localidad    = z26_localidad ',
+				'  AND z20_codcli       = z26_codcli ',
+				'  AND z20_tipo_doc     = z26_tipo_doc ',
+				'  AND z20_num_doc      = z26_num_doc ',
+				'  AND z20_dividendo    = z26_dividendo ',
+				'INTO TEMP tmp_det '
+PREPARE exec_tmp FROM query
+EXECUTE exec_tmp
+LET vm_num_det = 0
+SELECT COUNT(*) INTO vm_num_det FROM tmp_det
+IF vm_num_det = 0 THEN
+	DROP TABLE tmp_det
+	CALL fl_mensaje_consulta_sin_registros()
+	RETURN
+END IF
 FOR i = 1 TO 10
 	LET rm_orden[i] = ' ' 
 END FOR
@@ -204,20 +236,12 @@ LET vm_columna_2  = 1
 LET rm_orden[col] = 'DESC'
 WHILE TRUE
 	LET query = 'SELECT z01_nomcli, z26_localidad, g08_nombre, ',
-			'z26_num_cheque, z26_fecha_cobro, z26_valor, ',
-			'z26_codcli, z26_banco, z26_num_cta, ',
-			'z26_num_cheque, z26_tipo_doc, z26_num_doc, ',
-			'z26_dividendo ',
-			' FROM cxct026, cxct001, gent008 ',
-			' WHERE z26_compania    = ', vg_codcia,
-			expr_loc CLIPPED,
-			expr_sql CLIPPED, 
-			expr_estado CLIPPED,
-			expr_fecha CLIPPED,
-			'  AND z01_codcli       = z26_codcli ',
-			'  AND g08_banco        = z26_banco ',
-			' ORDER BY ', vm_columna_1, ' ', rm_orden[vm_columna_1],
-				 ', ', vm_columna_2, ' ', rm_orden[vm_columna_2]
+					'z26_num_cheque, z26_fecha_cobro, SUM(z26_valor), ',
+					'z26_codcli, z26_banco, z26_num_cta, num_che, z26_estado ',
+					' FROM tmp_det ',
+					' GROUP BY 1, 2, 3, 4, 5, 7, 8, 9, 10, 11 ',
+					' ORDER BY ', vm_columna_1, ' ', rm_orden[vm_columna_1],
+							', ', vm_columna_2, ' ', rm_orden[vm_columna_2]
 	PREPARE deto FROM query
 	DECLARE q_deto CURSOR FOR deto
 	LET vm_num_det = 1
@@ -228,18 +252,14 @@ WHILE TRUE
 		END IF
 	END FOREACH
 	LET vm_num_det = vm_num_det - 1
-	IF vm_num_det = 0 THEN
-		CALL fl_mensaje_consulta_sin_registros()
-		EXIT WHILE
-	END IF
 	CALL sacar_total()
-	CALL set_count(vm_num_det)
 	LET int_flag = 0
+	CALL set_count(vm_num_det)
 	DISPLAY ARRAY rm_det TO rm_det.*
 		ON KEY(INTERRUPT)
 			LET int_flag = 1
 			EXIT DISPLAY
-       		ON KEY(F1,CONTROL-W)
+   		ON KEY(F1,CONTROL-W)
 			CALL control_visor_teclas_caracter_1() 
 		ON KEY(RETURN)
 			LET i = arr_curr()
@@ -247,17 +267,25 @@ WHILE TRUE
 			DISPLAY rm_det[i].z01_nomcli TO tit_cliente
 		ON KEY(F5)
 			LET i = arr_curr()
-			CALL ver_cheque(i)
+			CALL ver_cheque(i, 'E')
 			LET int_flag = 0
 		ON KEY(F6)
 			LET i = arr_curr()
-			CALL ver_documento_deudor(i)
+			IF rm_che[i].z26_estado = 'A' THEN
+				CALL ver_cheque(i, 'D')
+			ELSE
+				CALL fl_mostrar_mensaje('Este cheque todavía no se puede procesar.', 'exclamation')
+			END IF
 			LET int_flag = 0
 		ON KEY(F7)
 			LET i = arr_curr()
-			CALL ver_estado_cuenta(i)
+			CALL ver_documento_deudor(i)
 			LET int_flag = 0
 		ON KEY(F8)
+			LET i = arr_curr()
+			CALL ver_estado_cuenta(i)
+			LET int_flag = 0
+		ON KEY(F9)
 			CALL imprimir_listado()
 			LET int_flag = 0
 		ON KEY(F15)
@@ -306,6 +334,7 @@ WHILE TRUE
 		LET rm_orden[vm_columna_1] = 'ASC'
 	END IF
 END WHILE
+DROP TABLE tmp_det
 
 END FUNCTION
 
@@ -515,8 +544,8 @@ END FUNCTION
 FUNCTION mostrar_cabecera_forma()
 
 --#DISPLAY 'Cliente'		TO tit_col1
---#DISPLAY 'LC'			TO tit_col2
---#DISPLAY 'Banco'		TO tit_col3
+--#DISPLAY 'LC'				TO tit_col2
+--#DISPLAY 'Banco'			TO tit_col3
 --#DISPLAY 'No. Cheque'		TO tit_col4
 --#IF tipo_fecha = 'C' THEN
 	--#DISPLAY 'Fecha Cob.' TO tit_col5
@@ -563,86 +592,125 @@ END FUNCTION
 
 
 
-FUNCTION ver_cheque(i)
+FUNCTION ver_cheque(i, flag)
 DEFINE i		SMALLINT
-DEFINE run_prog		CHAR(10)
+DEFINE flag		CHAR(1)
+DEFINE param	VARCHAR(100)
 
-{-- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE --}
-LET run_prog = '; fglrun '
-IF vg_gui = 0 THEN
-	LET run_prog = '; fglgo '
+LET param = ' ', rm_det[i].z26_localidad, ' ', rm_che[i].z26_codcli, ' ',
+			rm_che[i].z26_banco, ' ', rm_che[i].z26_num_cta, ' ',
+			rm_che[i].z26_num_cheque
+IF flag = 'D' THEN
+	LET param = param, ' ', rm_det[i].z26_valor, ' ', rm_det[i].z26_fecha_cobro
 END IF
-{--- ---}
-LET vm_nuevoprog = 'cd ..', vg_separador, '..', vg_separador, 'COBRANZAS',
-	vg_separador, 'fuentes', vg_separador, run_prog, 'cxcp206 ', vg_base,
-	' ', vg_modulo, ' ', vg_codcia, ' ', rm_det[i].z26_localidad, ' ',
-	rm_che[i].z26_codcli, ' ', rm_che[i].z26_banco, ' ',
-	rm_che[i].z26_num_cta, ' ', rm_che[i].z26_num_cheque
-RUN vm_nuevoprog
+CALL fl_ejecuta_comando('COBRANZAS', vg_modulo, 'cxcp206', param, 0)
 
 END FUNCTION
 
 
 
 FUNCTION ver_documento_deudor(i)
-DEFINE i		SMALLINT
+DEFINE i			SMALLINT
 DEFINE run_prog		CHAR(10)
+DEFINE query		CHAR(800)
+DEFINE num_row		SMALLINT
+DEFINE max_row		SMALLINT
+DEFINE total		DECIMAL(12,2)
+DEFINE param		VARCHAR(60)
 
-{-- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE --}
-LET run_prog = '; fglrun '
-IF vg_gui = 0 THEN
-	LET run_prog = '; fglgo '
+OPEN WINDOW w_cxcf303_2 AT 08, 20 WITH 15 ROWS, 49 COLUMNS
+	ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE 0, BORDER,
+				MESSAGE LINE LAST) 
+IF vg_gui = 1 THEN
+	OPEN FORM f_cxcf303_2 FROM "../forms/cxcf303_2"
+ELSE
+	OPEN FORM f_cxcf303_2 FROM "../forms/cxcf303_2c"
 END IF
-{--- ---}
-LET vm_nuevoprog = 'cd ..', vg_separador, '..', vg_separador, 'COBRANZAS',
-	vg_separador, 'fuentes', vg_separador, run_prog, 'cxcp200 ', vg_base,
-	' ', vg_modulo, ' ', vg_codcia, ' ', rm_det[i].z26_localidad, ' ',
-	rm_che[i].z26_codcli, ' ', rm_che[i].z26_tipo_doc, ' ',
-	rm_che[i].z26_num_doc, ' ', rm_che[i].z26_dividendo
-RUN vm_nuevoprog
+DISPLAY FORM f_cxcf303_2
+LET query = 'SELECT z26_tipo_doc, z26_num_doc, z26_dividendo, z20_fecha_vcto, ',
+					'z26_valor ',
+				'FROM tmp_det ',
+				'WHERE z26_codcli = ', rm_che[i].z26_codcli,
+				'ORDER BY 1, 2, 3, 4 '
+PREPARE cons_docs FROM query
+DECLARE q_cons_docs CURSOR FOR cons_docs
+LET max_row = 1
+LET total   = 0
+FOREACH q_cons_docs INTO rm_docs[max_row].*
+	LET total   = total + rm_docs[max_row].z26_valor
+	LET max_row = max_row + 1
+END FOREACH
+LET max_row = max_row - 1
+--#DISPLAY 'TD'			TO tit_col1
+--#DISPLAY 'Numero'		TO tit_col2
+--#DISPLAY 'Div'		TO tit_col3
+--#DISPLAY 'Fecha Vcto'	TO tit_col4
+--#DISPLAY 'Valor'		TO tit_col5
+DISPLAY BY NAME total
+LET int_flag = 0
+CALL set_count(max_row)
+DISPLAY ARRAY rm_docs TO rm_docs.*
+	ON KEY(INTERRUPT)
+		LET int_flag = 1
+		EXIT DISPLAY
+   	ON KEY(F1,CONTROL-W)
+		CALL control_visor_teclas_caracter_1() 
+	ON KEY(F5)
+		LET num_row = arr_curr()
+		LET run_prog = '; fglrun '
+		IF vg_gui = 0 THEN
+			LET run_prog = '; fglgo '
+		END IF
+		LET param = ' ', rm_det[i].z26_localidad, ' ',
+						rm_che[i].z26_codcli, ' ',
+						rm_docs[num_row].z26_tipo_doc, ' ',
+						rm_docs[num_row].z26_num_doc, ' ',
+						rm_docs[num_row].z26_dividendo
+		CALL fl_ejecuta_comando('COBRANZAS', vg_modulo, 'cxcp200', param, 0)
+		LET int_flag = 0
+	--#BEFORE DISPLAY
+		--#CALL dialog.keysetlabel('ACCEPT','')
+		--#CALL dialog.keysetlabel("RETURN","")
+		--#CALL dialog.keysetlabel("F1","")
+		--#CALL dialog.keysetlabel("CONTROL-W","")
+	--#BEFORE ROW
+		--#LET num_row = arr_curr()
+		--#CALL muestra_contadores_det(num_row, max_row)
+	--#AFTER DISPLAY 
+		--#CONTINUE DISPLAY
+END DISPLAY
+LET int_flag = 0
+CLOSE WINDOW w_cxcf303_2
+RETURN
 
 END FUNCTION
 
 
 
 FUNCTION ver_estado_cuenta(i)
-DEFINE i		SMALLINT
-DEFINE run_prog		CHAR(10)
+DEFINE i			SMALLINT
+DEFINE param		VARCHAR(60)
 DEFINE fecha		DATE
 DEFINE codloc		LIKE gent002.g02_localidad
 
-{-- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE --}
-LET run_prog = '; fglrun '
-IF vg_gui = 0 THEN
-	LET run_prog = '; fglgo '
-END IF
-{--- ---}
 LET codloc = 0
 IF localidad IS NOT NULL THEN
 	LET codloc = localidad
 END IF
-{--
-LET vm_nuevoprog = 'cd ..', vg_separador, '..', vg_separador, 'COBRANZAS',
-	vg_separador, 'fuentes', vg_separador, run_prog, 'cxcp305 ', vg_base,
-	' ', vg_modulo, ' ', vg_codcia, ' ', codloc, ' ', rm_che[i].z26_codcli,
-	' ', rm_z20.z20_moneda
---}
-LET fecha = TODAY
+LET fecha = vg_fecha
 IF vm_fecha_ini IS NOT NULL THEN
 	LET fecha = vm_fecha_ini
 END IF
-LET vm_nuevoprog = 'fglrun cxcp314 ', vg_base, ' ', vg_modulo, ' ', vg_codcia,
-			' ', vg_codloc, ' ', rm_z20.z20_moneda, ' ', fecha, ' ',
-			' "T" 0.01 "N" ', codloc, ' ', rm_che[i].z26_codcli
-RUN vm_nuevoprog
+LET param = ' ', rm_z20.z20_moneda, ' ', vg_fecha, ' "T" 0.01 "N" ',
+			codloc USING "<<<&", ' ', rm_che[i].z26_codcli USING "<<<<<&"
+CALL fl_ejecuta_comando('COBRANZAS', vg_modulo, 'cxcp314', param, 1)
 
 END FUNCTION
 
 
 
 FUNCTION imprimir_listado()
-DEFINE i		SMALLINT
-DEFINE run_prog		CHAR(10)
+DEFINE param		VARCHAR(60)
 DEFINE codloc		LIKE gent002.g02_localidad
 DEFINE codcli		LIKE cxct001.z01_codcli
 
@@ -654,18 +722,10 @@ LET codcli = 0
 IF rm_z26.z26_codcli IS NOT NULL THEN
 	LET codcli = rm_z26.z26_codcli
 END IF
-{-- ESTO PARA LLAMAR AL PROGRAMA SEGÚN SEA EL AMBIENTE --}
-LET run_prog = '; fglrun '
-IF vg_gui = 0 THEN
-	LET run_prog = '; fglgo '
-END IF
-{--- ---}
-LET vm_nuevoprog = 'cd ..', vg_separador, '..', vg_separador, 'COBRANZAS',
-	vg_separador, 'fuentes', vg_separador, run_prog, 'cxcp408 ', vg_base,
-	' ', vg_modulo, ' ', vg_codcia, ' ', vg_codloc, ' "', rm_z26.z26_estado,
-	'" "', rm_z20.z20_moneda, '" ', codcli, ' ', codloc, ' "', vm_fecha_ini,
-	'" "', vm_fecha_fin, '" "', tipo_fecha, '"'
-RUN vm_nuevoprog
+LET param = ' "', rm_z26.z26_estado, '" "', rm_z20.z20_moneda, '" ', codcli,
+			' ', codloc, ' "', vm_fecha_ini, '" "', vm_fecha_fin, '" "',
+			tipo_fecha, '"'
+CALL fl_ejecuta_comando('COBRANZAS', vg_modulo, 'cxcp408', param, 1)
 
 END FUNCTION
 
@@ -692,17 +752,20 @@ CALL fl_visor_teclas_caracter() RETURNING fila
 LET a = fila + 2
 DISPLAY 'Teclas exclusivas de este proceso:' AT a,2 ATTRIBUTE(REVERSE)	
 LET a = a + 1
-DISPLAY '<F5>      Cheque'                   AT a,2
+DISPLAY '<F5>                Cheque'         AT a,2
 DISPLAY  'F5' AT a,3 ATTRIBUTE(REVERSE)
 LET a = a + 1
-DISPLAY '<F6>      Documento'                AT a,2
+DISPLAY '<F6>       Det. Che. Docs.'         AT a,2
 DISPLAY  'F6' AT a,3 ATTRIBUTE(REVERSE)
 LET a = a + 1
-DISPLAY '<F7>      Estado Cuenta'            AT a,2
+DISPLAY '<F7>         Detalle Docs.'         AT a,2
 DISPLAY  'F7' AT a,3 ATTRIBUTE(REVERSE)
 LET a = a + 1
-DISPLAY '<F8>      Imprimir Listado'         AT a,2
+DISPLAY '<F8>         Estado Cuenta'         AT a,2
 DISPLAY  'F8' AT a,3 ATTRIBUTE(REVERSE)
+LET a = a + 1
+DISPLAY '<F9>      Imprimir Listado'         AT a,2
+DISPLAY  'F9' AT a,3 ATTRIBUTE(REVERSE)
 LET a = fgl_getkey()
 CLOSE WINDOW w_tf
 

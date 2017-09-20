@@ -2743,7 +2743,7 @@ DISPLAY "Autorización Cobro"    TO c500   ## Botón 5 cxcp204
 DISPLAY "Autorización P.A."     TO c600   ## Botón 6 cxcp205
 DISPLAY "Cheques Postfechados"  TO c700   ## Botón 7 cxcp206
 DISPLAY "Cheques Protestados"   TO c800   ## Botón 8 cxcp207
-DISPLAY "Ciere Mensual"   	TO c900   ## Botón 9 cxcp208
+DISPLAY "Cierre Mensual"	   	TO c900   ## Botón 9 cxcp208
 DISPLAY "Correccion SRI N/D"   	TO c1000  ## Botón 10 cxcp209
 DISPLAY "Correccion SRI N/C"   	TO c1100  ## Botón 11 cxcp210
 DISPLAY "Digitación Retención"  TO c1200  ## Botón 12 cxcp211

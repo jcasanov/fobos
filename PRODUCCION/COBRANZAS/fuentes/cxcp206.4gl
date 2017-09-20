@@ -4,6 +4,7 @@
 -- Autor            : NPC
 -- Formato Ejecucion: fglrun cxcp206 base módulo compañía localidad
 --			[cliente] [banco] [numero_cuenta] [numero_cheque]
+--			[[valor_cheque]] [[fecha_cobro]]
 -- Ultima Correccion: 15-ago-2017
 -- Motivo Correccion: 
 --------------------------------------------------------------------------------
@@ -29,7 +30,7 @@ DEFINE rm_detalle		ARRAY[10000] OF RECORD
 							z26_num_doc			LIKE cxct026.z26_num_doc,
 							z26_dividendo		LIKE cxct026.z26_dividendo,
 							z26_referencia		LIKE cxct026.z26_referencia,
-							areaneg				LIKE gent003.g03_nombre,
+							z20_fecha_vcto		LIKE cxct020.z20_fecha_vcto,
 							z20_saldo_cap		LIKE cxct020.z20_saldo_cap,
 							valor_che			LIKE cxct020.z20_valor_cap,
 							sel_documento		CHAR(1)
@@ -50,18 +51,19 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/cxcp206.err')
+LET vg_proceso = arg_val(0)
+CALL startlog('../logs/' || vg_proceso CLIPPED || '.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
-IF num_args() <> 4 AND num_args() <> 8 THEN  -- Validar # parámetros correcto
-	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.', 'stop')
+IF num_args() <> 4 AND num_args() <> 8 AND num_args() <> 10 THEN
+	-- Validar # parámetros correcto
+	CALL fl_mostrar_mensaje('Número de parametros incorrecto.', 'stop')
 	EXIT PROGRAM
 END IF
 LET vg_base    = arg_val(1)
 LET vg_modulo  = arg_val(2)
 LET vg_codcia  = arg_val(3)
 LET vg_codloc  = arg_val(4)
-LET vg_proceso = 'cxcp206'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
 --#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
@@ -154,7 +156,7 @@ FUNCTION botones_cabecera_forma()
 --#DISPLAY "Documento"		TO tit_col2
 --#DISPLAY "DIV."			TO tit_col3
 --#DISPLAY "Referencia"		TO tit_col4
---#DISPLAY "Areaneg"		TO tit_col5
+--#DISPLAY "Fecha Vcto"		TO tit_col5
 --#DISPLAY "Saldo Doc."		TO tit_col6
 --#DISPLAY "Valor Che."		TO tit_col7
 --#DISPLAY "C"				TO tit_col8
@@ -164,6 +166,8 @@ END FUNCTION
 
 
 FUNCTION control_master()
+DEFINE r_z01		RECORD LIKE cxct001.*
+DEFINE r_g08		RECORD LIKE gent008.*
 
 CALL fl_retorna_usuario()
 INITIALIZE rm_z26.* TO NULL
@@ -175,14 +179,32 @@ LET rm_z26.z26_usuario   = vg_usuario
 WHILE TRUE
 	CALL borrar_detalle()
 	CALL muestra_contadores(0, 0)
-	CALL lee_parametros()
-	IF int_flag THEN
-		EXIT WHILE
+	IF num_args() <> 10 THEN
+		CALL lee_parametros()
+		IF int_flag THEN
+			EXIT WHILE
+		END IF
+	ELSE
+		LET rm_par.z26_codcli      = arg_val(5)
+		LET rm_par.z26_banco       = arg_val(6)
+		LET rm_par.z26_num_cta     = arg_val(7)
+		LET rm_par.z26_num_cheque  = arg_val(8)
+		LET rm_par.z26_valor       = arg_val(9)
+		LET rm_par.z26_fecha_cobro = arg_val(10)
+		CALL fl_lee_cliente_general(rm_par.z26_codcli) RETURNING r_z01.*
+		CALL fl_lee_banco_general(rm_par.z26_banco) RETURNING r_g08.*
+		LET rm_par.tit_nombre_cli  = r_z01.z01_nomcli
+		LET rm_par.tit_banco       = r_g08.g08_nombre
+		DISPLAY BY NAME rm_par.*
 	END IF
 	CALL cargar_detalle()
 	IF vm_num_det = 0 THEN
 		CALL fl_mensaje_consulta_sin_registros()
-		CONTINUE WHILE
+		IF num_args() <> 10 THEN
+			CONTINUE WHILE
+		ELSE
+			EXIT WHILE
+		END IF
 	END IF
 	WHILE TRUE
 		CALL leer_detalle()
@@ -191,6 +213,9 @@ WHILE TRUE
 		END IF
 		CALL grabar_detalle()
 	END WHILE
+	IF num_args() = 10 THEN
+		EXIT WHILE
+	END IF
 END WHILE
 
 END FUNCTION
@@ -219,7 +244,7 @@ INPUT BY NAME rm_par.*
 		EXIT INPUT
 	ON KEY(F2)
 		IF INFIELD(z26_codcli) THEN
-			CALL fl_ayuda_cliente_localidad(vg_codcia, vg_codloc)
+			CALL fl_ayuda_cliente_localidad_cobrar(vg_codcia, vg_codloc, 'D') 
 				RETURNING cod_aux, nom_aux
 			IF cod_aux IS NOT NULL THEN
 				LET rm_par.z26_codcli     = cod_aux
@@ -239,15 +264,17 @@ INPUT BY NAME rm_par.*
 				CALL fl_ayuda_cheques_postfechados(vg_codcia, vg_codloc,
 													rm_par.z26_codcli)
 					RETURNING r_z26.z26_banco, r_z26.z26_num_cheque,
-								r_z26.z26_num_cta, r_z26.z26_valor
+								r_z26.z26_num_cta, r_z26.z26_valor,
+								r_z26.z26_fecha_cobro
 				IF r_z26.z26_banco IS NOT NULL THEN
 					LET rm_par.z26_banco      = r_z26.z26_banco
 					CALL fl_lee_banco_general(rm_par.z26_banco)
 						RETURNING r_g08.*
-					LET rm_par.tit_banco      = r_g08.g08_nombre
-					LET rm_par.z26_num_cheque = r_z26.z26_num_cheque
-					LET rm_par.z26_num_cta    = r_z26.z26_num_cta
-					LET rm_par.z26_valor      = NULL
+					LET rm_par.tit_banco       = r_g08.g08_nombre
+					LET rm_par.z26_num_cheque  = r_z26.z26_num_cheque
+					LET rm_par.z26_num_cta     = r_z26.z26_num_cta
+					LET rm_par.z26_valor       = NULL
+					LET rm_par.z26_fecha_cobro = r_z26.z26_fecha_cobro
 					SELECT NVL(SUM(z26_valor), 0)
 						INTO rm_par.z26_valor
 						FROM cxct026
@@ -331,20 +358,7 @@ INPUT BY NAME rm_par.*
 			CALL fl_mostrar_mensaje('El valor del cheque debe ser mayor a cero.','exclamation')
 			NEXT FIELD z26_valor
 		END IF
-		INITIALIZE r_z26.* TO NULL
-		DECLARE q_cheque CURSOR FOR
-			SELECT * FROM cxct026
-				WHERE z26_compania   = vg_codcia
-				  AND z26_localidad  = vg_codloc
-				  AND z26_codcli     = rm_par.z26_codcli
-				  AND z26_banco      = rm_par.z26_banco
-				  AND z26_num_cta    = rm_par.z26_num_cta
-				  AND z26_num_cheque = rm_par.z26_num_cheque
-				ORDER BY z26_secuencia
-		OPEN q_cheque
-		FETCH q_cheque INTO r_z26.*
-		CLOSE q_cheque
-		FREE q_cheque
+		CALL lee_cheque_postfechado() RETURNING r_z26.*
 		IF r_z26.z26_compania IS NOT NULL THEN
 			IF r_z26.z26_estado <> 'A' THEN
 				CASE r_z26.z26_estado
@@ -379,7 +393,7 @@ LET query = 'SELECT z20_tipo_doc, z20_num_doc, z20_dividendo,',
 						'  AND r38_cod_tran    = r19_cod_tran ',
 						'  AND r38_num_tran    = r19_num_tran) ',
 						'AS z26_referencia,',
-					' g03_nombre AS areaneg,',
+					' z20_fecha_vcto AS fecha_vcto,',
 					' (z20_saldo_cap + z20_saldo_int) AS saldo_cap,',
 					' NVL(z26_valor, 0) AS valor_che,',
 					' CASE WHEN z26_valor IS NULL ',
@@ -437,8 +451,8 @@ DEFINE i, j			SMALLINT
 DEFINE k, cont		SMALLINT
 DEFINE referen		LIKE cxct026.z26_referencia
 
-CALL set_count(vm_num_det)
 LET int_flag = 0
+CALL set_count(vm_num_det)
 INPUT ARRAY rm_detalle WITHOUT DEFAULTS FROM rm_detalle.*
 	ON KEY(INTERRUPT)
 		LET int_flag = 0
@@ -455,6 +469,10 @@ INPUT ARRAY rm_detalle WITHOUT DEFAULTS FROM rm_detalle.*
 			CALL control_consulta(i)
 			LET int_flag = 0
 		END IF
+	ON KEY(F6)
+		LET i = arr_curr()
+		CALL generar_solicitud_cobro(i)
+		LET int_flag = 0
 	BEFORE INPUT
 		--#CALL dialog.keysetlabel("F1", "")
 		--#CALL dialog.keysetlabel("CONTROL-W", "")
@@ -471,7 +489,9 @@ INPUT ARRAY rm_detalle WITHOUT DEFAULTS FROM rm_detalle.*
 		IF i > vm_num_det THEN
 			LET vm_num_det = vm_num_det + 1
 		END IF
+		CALL muestra_contadores(i, vm_num_det)
 		DISPLAY BY NAME rm_adi[i].z20_valor_cap
+		--#CALL dialog.keysetlabel("F6", "Autorización Cobro")
 	BEFORE FIELD z26_referencia
 		LET i = arr_curr()
 		LET j = scr_line()
@@ -583,6 +603,7 @@ INPUT ARRAY rm_detalle WITHOUT DEFAULTS FROM rm_detalle.*
 			CONTINUE INPUT
 		END IF
 END INPUT
+CALL muestra_contadores(0, 0)
 
 END FUNCTION
 
@@ -902,12 +923,14 @@ END FUNCTION
 
 
 FUNCTION retorna_estado()
+DEFINE estado		VARCHAR(15)
 
-IF rm_z26.z26_estado = 'A' THEN
-	RETURN 'ACTIVO'
-ELSE
-	RETURN 'BLOQUEADO'
-END IF
+CASE rm_z26.z26_estado
+	WHEN 'A' LET estado = 'ACTIVO'
+	WHEN 'B' LET estado = 'BLOQUEADO'
+	WHEN 'C' LET estado = 'COBRADO'
+END CASE
+RETURN estado
 
 END FUNCTION
 
@@ -916,11 +939,7 @@ END FUNCTION
 FUNCTION muestra_estado()
 DEFINE tit_estado_che	VARCHAR(15)
 
-IF rm_z26.z26_estado = 'A' THEN
-	LET tit_estado_che = 'ACTIVO'
-ELSE
-	LET tit_estado_che = 'BLOQUEADO'
-END IF
+LET tit_estado_che = retorna_estado()
 DISPLAY BY NAME rm_z26.z26_estado, tit_estado_che
 
 END FUNCTION
@@ -1072,6 +1091,265 @@ END REPORT
 
 
 
+FUNCTION generar_solicitud_cobro(i)
+DEFINE i			SMALLINT
+DEFINE r_z02		RECORD LIKE cxct002.*
+DEFINE r_z24		RECORD LIKE cxct024.*
+DEFINE r_z25		RECORD LIKE cxct025.*
+DEFINE r_z26		RECORD LIKE cxct026.*
+DEFINE r_j10		RECORD LIKE cajt010.*
+DEFINE r_j11		RECORD LIKE cajt011.*
+DEFINE orden, j		LIKE cxct025.z25_orden
+DEFINE mensaje		VARCHAR(200)
+DEFINE grabo		SMALLINT
+DEFINE resp			CHAR(6)
+
+CALL lee_cheque_postfechado() RETURNING r_z26.*
+IF r_z26.z26_compania IS NULL THEN
+	CALL fl_mostrar_mensaje('Este cheque todavia no se ha registrado y no se puede hacer Autorización de Cobro.', 'exclamation')
+	RETURN
+END IF
+IF rm_par.z26_fecha_cobro > vg_fecha THEN
+	CALL fl_mostrar_mensaje('Este cheque todavia no se lo puede cobrar.', 'exclamation')
+	RETURN
+END IF
+INITIALIZE r_z24.* TO NULL
+DECLARE q_numsol CURSOR FOR
+	SELECT * FROM cxct024
+		WHERE z24_compania  = vg_codcia
+		  AND z24_localidad = vg_codloc
+		  AND z24_codcli    = rm_par.z26_codcli
+		  AND z24_estado    = 'A'
+OPEN q_numsol
+FETCH q_numsol INTO r_z24.*
+IF r_z24.z24_compania IS NOT NULL THEN
+	CALL fl_mostrar_mensaje('Este cliente ya tiene generado una Autorización de Cobro que esta ACTIVA. Por favor procesela primero.', 'exclamation')
+	CALL mostrar_solicitud_cobro(r_z24.z24_numero_sol)
+	RETURN
+END IF
+CLOSE q_numsol
+FREE q_numsol
+LET int_flag = 0
+CALL fl_hacer_pregunta('Esta seguro de generar esta Autorización de Cobro ?', 'Yes')
+	RETURNING resp
+IF resp <> 'Yes' THEN
+	RETURN
+END IF
+INITIALIZE r_z24.*, r_z25.*, r_j10.*, r_j11.* TO NULL
+BEGIN WORK
+WHENEVER ERROR CONTINUE
+	LET r_z24.z24_compania   = vg_codcia
+	LET r_z24.z24_localidad  = vg_codloc
+	SELECT NVL(MAX(z24_numero_sol), 1)
+		INTO r_z24.z24_numero_sol
+		FROM cxct024
+		WHERE z24_compania  = r_z24.z24_compania
+		  AND z24_localidad = r_z24.z24_localidad
+	IF r_z24.z24_numero_sol IS NULL THEN
+		LET r_z24.z24_numero_sol = 1
+	ELSE
+		LET r_z24.z24_numero_sol = r_z24.z24_numero_sol + 1
+	END IF
+	LET r_z24.z24_areaneg    = rm_adi[i].areaneg
+											-- OJO: NPC
+	LET r_z24.z24_linea      = 'VTASI'		-- No poner en duro, ver como se
+											-- puede arreglar
+	LET r_z24.z24_codcli     = rm_par.z26_codcli
+	LET r_z24.z24_tipo       = 'P'
+	LET r_z24.z24_estado     = 'A'
+	LET r_z24.z24_referencia = 'APLICACION CHEQUE POSTFECHADO'
+	LET r_z24.z24_moneda     = rg_gen.g00_moneda_base
+	CALL calcula_paridad(r_z24.z24_moneda, rg_gen.g00_moneda_base)
+		RETURNING r_z24.z24_paridad 
+	LET r_z24.z24_tasa_mora  = 0
+	LET r_z24.z24_total_int  = 0
+	LET r_z24.z24_total_cap  = rm_par.z26_valor
+	LET r_z24.z24_total_mora = 0
+	LET r_z24.z24_zona_cobro = 1
+	LET r_z24.z24_subtipo    = 1
+	LET r_z24.z24_usuario    = vg_usuario
+	LET r_z24.z24_fecing     = fl_current()
+	INSERT INTO cxct024 VALUES (r_z24.*)
+	IF STATUS <> 0 THEN
+		WHENEVER ERROR STOP
+		ROLLBACK WORK
+		CALL fl_mostrar_mensaje('No se pudo crear la Autorización de Cobro. Por favor llame al Administrador.', 'exclamation')
+		RETURN
+	END IF
+	LET grabo = 1
+	LET orden = 1
+	FOR j = 1 TO vm_num_det
+		IF rm_detalle[j].sel_documento = 'N' THEN
+			CONTINUE FOR
+		END IF
+		LET r_z25.z25_compania   = r_z24.z24_compania
+		LET r_z25.z25_localidad  = r_z24.z24_localidad
+		LET r_z25.z25_numero_sol = r_z24.z24_numero_sol
+		LET r_z25.z25_orden      = orden
+		LET r_z25.z25_codcli     = r_z24.z24_codcli
+		LET r_z25.z25_tipo_doc   = rm_detalle[j].z26_tipo_doc
+		LET r_z25.z25_num_doc    = rm_detalle[j].z26_num_doc
+		LET r_z25.z25_dividendo  = rm_detalle[j].z26_dividendo
+		LET r_z25.z25_valor_cap  = rm_detalle[j].valor_che
+		LET r_z25.z25_valor_int  = 0
+		LET r_z25.z25_valor_mora = 0
+		INSERT INTO cxct025 VALUES (r_z25.*)
+		IF STATUS <> 0 THEN
+			LET grabo = 0
+			WHENEVER ERROR STOP
+			ROLLBACK WORK
+			LET mensaje = 'No se pudo grabar el documento ',
+							r_z25.z25_tipo_doc, '-', r_z25.z25_num_doc CLIPPED,
+							'-', r_z25.z25_dividendo USING "&&&",
+							'. Por favor llame al Administrador.'
+			CALL fl_mostrar_mensaje(mensaje, 'exclamation')
+			EXIT FOR
+		END IF
+		LET orden = orden + 1
+	END FOR 
+	IF NOT grabo THEN
+		RETURN
+	END IF
+	LET r_j10.j10_compania    = r_z24.z24_compania
+	LET r_j10.j10_localidad   = r_z24.z24_localidad
+	LET r_j10.j10_tipo_fuente = 'SC'
+	LET r_j10.j10_num_fuente  = r_z24.z24_numero_sol
+	LET r_j10.j10_areaneg     = r_z24.z24_areaneg
+	LET r_j10.j10_estado      = 'A'
+	LET r_j10.j10_codcli      = r_z24.z24_codcli
+	LET r_j10.j10_nomcli      = rm_par.tit_nombre_cli
+	LET r_j10.j10_moneda      = r_z24.z24_moneda
+	LET r_j10.j10_valor       = r_z24.z24_total_cap + r_z24.z24_total_int
+	LET r_j10.j10_fecha_pro   = fl_current()
+	INITIALIZE r_j10.j10_codigo_caja, r_j10.j10_tipo_destino,
+				r_j10.j10_num_destino, r_j10.j10_referencia, r_j10.j10_banco,
+				r_j10.j10_numero_cta, r_j10.j10_tip_contable,
+				r_j10.j10_num_contable
+		TO NULL    
+	LET r_j10.j10_usuario     = vg_usuario 
+	LET r_j10.j10_fecing      = r_j10.j10_fecha_pro
+	INSERT INTO cajt010 VALUES(r_j10.*)
+	IF STATUS <> 0 THEN
+		WHENEVER ERROR STOP
+		ROLLBACK WORK
+		CALL fl_mostrar_mensaje('No se pudo crear el registro en Caja. Por favor llame al Administrador.', 'exclamation')
+		RETURN
+	END IF
+	LET r_j11.j11_compania     = r_j10.j10_compania
+	LET r_j11.j11_localidad    = r_j10.j10_localidad
+	LET r_j11.j11_tipo_fuente  = r_j10.j10_tipo_fuente
+	LET r_j11.j11_num_fuente   = r_j10.j10_num_fuente
+	LET r_j11.j11_secuencia    = 1
+	LET r_j11.j11_codigo_pago  = 'CP'
+	LET r_j11.j11_moneda       = r_z24.z24_moneda
+	LET r_j11.j11_paridad      = r_z24.z24_paridad
+	LET r_j11.j11_valor        = r_j10.j10_valor
+	LET r_j11.j11_cod_bco_tarj = rm_par.z26_banco
+	LET r_j11.j11_num_ch_aut   = rm_par.z26_num_cheque
+	LET r_j11.j11_num_cta_tarj = rm_par.z26_num_cta
+	LET r_j11.j11_protestado   = 'N'
+	INSERT INTO cajt011 VALUES(r_j11.*)
+	IF STATUS <> 0 THEN
+		WHENEVER ERROR STOP
+		ROLLBACK WORK
+		CALL fl_mostrar_mensaje('No se pudo crear el registro de detalle en Caja. Por favor llame al Administrador.', 'exclamation')
+		RETURN
+	END IF
+	CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc, r_z24.z24_codcli)
+		RETURNING r_z02.*
+	IF r_z02.z02_zona_cobro IS NULL THEN
+		DECLARE q_z02 CURSOR FOR
+			SELECT * FROM cxct002
+				WHERE z02_compania  = vg_codcia
+				  AND z02_localidad = vg_codloc
+				  AND z02_codcli    = r_z02.z02_codcli
+			FOR UPDATE
+		OPEN q_z02
+		FETCH q_z02 INTO r_z02.*
+		UPDATE cxct002
+			SET z02_zona_cobro = r_z24.z24_zona_cobro
+			WHERE CURRENT OF q_z02
+		IF STATUS <> 0 THEN
+			WHENEVER ERROR STOP
+			ROLLBACK WORK
+			CALL fl_mostrar_mensaje('No se pudo actualizar la zona de cobro en el cliente. Por favor llame al Administrador.', 'exclamation')
+			RETURN
+		END IF
+		CLOSE q_z02
+		FREE q_z02
+	END IF
+WHENEVER ERROR STOP
+COMMIT WORK
+CALL fl_mostrar_mensaje('Autorización de Cobro generada OK.', 'info')
+CALL mostrar_solicitud_cobro(r_z24.z24_numero_sol)
+
+END FUNCTION
+
+
+
+FUNCTION mostrar_solicitud_cobro(numero_sol)
+DEFINE numero_sol	LIKE cxct024.z24_numero_sol
+DEFINE resp			CHAR(6)
+DEFINE param		VARCHAR(60)
+
+LET int_flag = 0
+CALL fl_hacer_pregunta('Desea ver esa Autorización de Cobro ?', 'No')
+	RETURNING resp
+IF resp = 'Yes' THEN
+	LET param = ' ', numero_sol
+	CALL fl_ejecuta_comando('COBRANZAS', vg_modulo, 'cxcp204', param, 1)
+END IF
+
+END FUNCTION
+
+
+
+FUNCTION calcula_paridad(moneda_ori, moneda_dest)
+DEFINE moneda_ori	LIKE veht036.v36_moneda
+DEFINE moneda_dest	LIKE veht036.v36_moneda
+DEFINE paridad		LIKE veht036.v36_paridad_mb
+DEFINE r_g14		RECORD LIKE gent014.*
+
+IF moneda_ori = moneda_dest THEN
+	LET paridad = 1 
+ELSE
+	CALL fl_lee_factor_moneda(moneda_ori, moneda_dest) RETURNING r_g14.*
+	IF r_g14.g14_serial IS NULL THEN
+		INITIALIZE paridad TO NULL
+		CALL fl_mostrar_mensaje('No existe factor de conversión para esta moneda.','exclamation')
+	ELSE
+		LET paridad = r_g14.g14_tasa 
+	END IF
+END IF
+RETURN paridad
+
+END FUNCTION
+
+
+
+FUNCTION lee_cheque_postfechado()
+DEFINE r_z26		RECORD LIKE cxct026.*
+
+INITIALIZE r_z26.* TO NULL
+DECLARE q_cheque CURSOR FOR
+	SELECT * FROM cxct026
+		WHERE z26_compania   = vg_codcia
+		  AND z26_localidad  = vg_codloc
+		  AND z26_codcli     = rm_par.z26_codcli
+		  AND z26_banco      = rm_par.z26_banco
+		  AND z26_num_cta    = rm_par.z26_num_cta
+		  AND z26_num_cheque = rm_par.z26_num_cheque
+		ORDER BY z26_secuencia
+OPEN q_cheque
+FETCH q_cheque INTO r_z26.*
+CLOSE q_cheque
+FREE q_cheque
+RETURN r_z26.*
+
+END FUNCTION
+
+
+
 FUNCTION llamar_visor_teclas()
 DEFINE a		CHAR(1)
 
@@ -1093,8 +1371,11 @@ CALL fl_visor_teclas_caracter() RETURNING fila
 LET a = fila + 2
 DISPLAY 'Teclas exclusivas de este proceso:' AT a,2 ATTRIBUTE(REVERSE)	
 LET a = a + 1
-DISPLAY '<F5>      Documento Deudor'         AT a,2
+DISPLAY '<F5>           Ver Detalle'         AT a,2
 DISPLAY  'F5' AT a,3 ATTRIBUTE(REVERSE)
+LET a = a + 1
+DISPLAY '<F6>    Autorización Cobro'         AT a,2
+DISPLAY  'F6' AT a,3 ATTRIBUTE(REVERSE)
 LET a = fgl_getkey()
 CLOSE WINDOW w_tf
 

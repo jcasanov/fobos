@@ -1158,9 +1158,10 @@ DEFINE tipo_cta		LIKE gent009.g09_tipo_cta
 DEFINE numero_cta 	LIKE gent009.g09_numero_cta
 DEFINE numero_ch	LIKE cajt011.j11_num_ch_aut
 DEFINE valor_ch		LIKE cajt011.j11_valor 
+DEFINE fecha_cob	LIKE cxct026.z26_fecha_cobro
 DEFINE i, j, salir	SMALLINT
-DEFINE resul		SMALLINT
-DEFINE resp		CHAR(6)
+DEFINE resul, k		SMALLINT
+DEFINE resp			CHAR(6)
 DEFINE cont_cred	LIKE cajt001.j01_cont_cred
 DEFINE total		LIKE cajt011.j11_valor
 DEFINE vuelto, val, dif	LIKE cajt011.j11_valor
@@ -1172,6 +1173,7 @@ DEFINE r_g09		RECORD LIKE gent009.*
 DEFINE r_g10		RECORD LIKE gent010.*
 DEFINE r_mon		RECORD LIKE gent013.*
 DEFINE r_j01		RECORD LIKE cajt001.*
+DEFINE r_j11		RECORD LIKE cajt011.*
 DEFINE r_z02		RECORD LIKE cxct002.*
 DEFINE r_b10		RECORD LIKE ctbt010.*
 DEFINE tiene_tj		SMALLINT
@@ -1183,6 +1185,26 @@ OPTIONS
 LET cont_cred = 'R'
 IF rm_j10.j10_tipo_fuente = 'PR' OR rm_j10.j10_tipo_fuente = 'OT' THEN
 	LET cont_cred = 'C'
+END IF
+IF rm_j10.j10_tipo_fuente = 'SC' THEN
+	INITIALIZE r_j11.* TO NULL
+	DECLARE q_j11_cp CURSOR FOR
+		SELECT * FROM cajt011
+			WHERE j11_compania    = vg_codcia
+			  AND j11_localidad   = vg_codloc
+			  AND j11_tipo_fuente = rm_j10.j10_tipo_fuente
+			  AND j11_num_fuente  = rm_j10.j10_num_fuente
+			ORDER BY j11_secuencia
+	LET k = 1
+	FOREACH q_j11_cp INTO r_j11.*
+		LET rm_j11[k].forma_pago   = r_j11.j11_codigo_pago
+		LET rm_j11[k].moneda       = r_j11.j11_moneda
+		LET rm_j11[k].cod_bco_tarj = r_j11.j11_cod_bco_tarj
+		LET rm_j11[k].num_ch_aut   = r_j11.j11_num_ch_aut
+		LET rm_j11[k].num_cta_tarj = r_j11.j11_num_cta_tarj
+		LET rm_j11[k].valor        = r_j11.j11_valor 
+		LET k                      = k + 1
+	END FOREACH
 END IF
 LET salir = 0
 WHILE NOT salir
@@ -1229,7 +1251,7 @@ INPUT ARRAY rm_j11 WITHOUT DEFAULTS FROM ra_j11.*
 				CALL fl_ayuda_cheques_postfechados(vg_codcia,
 						vg_codloc, rm_j10.j10_codcli) 
 					RETURNING banco, numero_ch, numero_cta,
-							valor_ch
+							valor_ch, fecha_cob
 				IF numero_cta IS NOT NULL THEN
 					LET rm_j11[i].cod_bco_tarj = banco
 					LET rm_j11[i].num_ch_aut   = numero_ch
@@ -4087,7 +4109,7 @@ IF rm_j10.j10_valor > 0 THEN
 	CALL graba_detalle()
 	CALL actualiza_acumulados_caja('I')
 	IF rm_j10.j10_tipo_fuente = 'SC' THEN
-		CALL actualiza_cheques_postfechados('B')
+		CALL actualiza_cheques_postfechados('C')
 	END IF
 
 END IF
@@ -4377,6 +4399,11 @@ LET total = calcula_total(vm_indice)
 IF total > rm_j10.j10_valor THEN
 	LET vuelto = total - rm_j10.j10_valor
 END IF
+DELETE FROM cajt011
+	WHERE j11_compania    = vg_codcia
+	  AND j11_localidad   = vg_codloc
+	  AND j11_tipo_fuente = rm_j10.j10_tipo_fuente
+	  AND j11_num_fuente  = rm_j10.j10_num_fuente
 LET secuencia = 1
 FOR i = 1 TO vm_indice 
 	INITIALIZE r_j11.* TO NULL

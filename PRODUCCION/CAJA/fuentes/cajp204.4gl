@@ -48,6 +48,7 @@ END MAIN
 FUNCTION control_master_caja()
 DEFINE resp		CHAR(10)
 DEFINE comando		VARCHAR(80)
+DEFINE fecha_pro	LIKE cajt010.j10_fecha_pro
 
 LET vm_tipo_doc = 'PG'
 BEGIN WORK
@@ -57,11 +58,12 @@ BEGIN WORK
 		SET z24_estado = 'P'
 		WHERE CURRENT OF q_nsol 
 	CALL fl_genera_saldos_cliente(vg_codcia, vg_codloc, rm_csol.z24_codcli)
+	LET fecha_pro = fl_current()
 	UPDATE cajt010
 		SET j10_estado = 'P',
 		    j10_tipo_destino = rm_cpag.z22_tipo_trn,
 		    j10_num_destino  = rm_cpag.z22_num_trn,
-		    j10_fecha_pro    = fl_current()
+		    j10_fecha_pro    = fecha_pro
 		WHERE CURRENT OF q_ccaj
 COMMIT WORK
 CALL fl_control_master_contab_ingresos_caja(vg_codcia, vg_codloc,

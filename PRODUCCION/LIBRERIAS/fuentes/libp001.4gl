@@ -19260,11 +19260,13 @@ CLOSE WINDOW w_chepos
 IF int_flag <> 0 THEN
 	INITIALIZE rh_chepos[1].* TO NULL
 	RETURN rh_chepos[1].z26_banco, rh_chepos[1].z26_num_cheque,
-		rh_chepos[1].z26_num_cta, rh_chepos[1].z26_valor
+			rh_chepos[1].z26_num_cta, rh_chepos[1].z26_valor,
+			rh_chepos[1].z26_fecha_cobro
 END IF
 LET i = arr_curr()
 RETURN rh_chepos[i].z26_banco, rh_chepos[i].z26_num_cheque,
-	rh_chepos[i].z26_num_cta, rh_chepos[i].z26_valor
+		rh_chepos[i].z26_num_cta, rh_chepos[i].z26_valor,
+		rh_chepos[i].z26_fecha_cobro
 
 END FUNCTION
 

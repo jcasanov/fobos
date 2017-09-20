@@ -1,0 +1,49 @@
+DATABASE aceros
+SCREEN
+{
+                            
+                                [c030] de [c031]
+ [c0|c001             |c02|c003      |c004      ]
+[c1|c011             |c12|c013      |c014      ]
+[c1|c011             |c12|c013      |c014      ]
+[c1|c011             |c12|c013      |c014      ]
+[c1|c011             |c12|c013      |c014      ]
+[c1|c011             |c12|c013      |c014      ]
+[c1|c011             |c12|c013      |c014      ]
+[c1|c011             |c12|c013      |c014      ]
+[c1|c011             |c12|c013      |c014      ]
+[c1|c011             |c12|c013      |c014      ]
+[c1|c011             |c12|c013      |c014      ]
+                              Total:[c020      ]
+
+}
+TABLES
+cxct020
+cxct026
+ATTRIBUTES
+c030 = FORMONLY.num_row, NOENTRY, UPSHIFT, REVERSE;
+c031 = FORMONLY.max_row, NOENTRY, UPSHIFT, REVERSE;
+
+c0   = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
+c001 = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
+c02  = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
+c003 = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
+c004 = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
+
+c1   = cxct026.z26_tipo_doc, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c011 = cxct026.z26_num_doc, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c12  = cxct026.z26_dividendo, NOENTRY, UPSHIFT, FORMAT = '&&&',
+		OPTIONS = '-nolist';
+c013 = cxct020.z20_fecha_vcto, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+		OPTIONS = '-nolist';
+c014 = cxct026.z26_valor, NOENTRY, UPSHIFT, FORMAT = '###,##&.##',
+		OPTIONS = '-nolist';
+
+c020 = FORMONLY.total, NOENTRY, UPSHIFT, REVERSE, FORMAT = '###,##&.##';
+END
+KEYS
+F5 = 'Documento'
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_docs[10] (z26_tipo_doc, z26_num_doc, z26_dividendo,
+							z20_fecha_vcto, z26_valor)

@@ -58,7 +58,8 @@ c031 = cxct026.z26_num_doc, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
 c032 = cxct026.z26_dividendo, NOENTRY, UPSHIFT, FORMAT = '&&&',
 		OPTIONS = '-nolist';
 c033 = cxct026.z26_referencia, AUTONEXT, UPSHIFT, SCROLL, OPTIONS = '-nolist';
-c034 = FORMONLY.areaneg, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c034 = cxct020.z20_fecha_vcto, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+		OPTIONS = '-nolist';
 c035 = cxct020.z20_saldo_cap, NOENTRY, UPSHIFT, FORMAT = '###,##&.##',
 		COLOR = RED, OPTIONS = '-nolist';
 c036 = FORMONLY.valor_che TYPE DECIMAL NOT NULL, REQUIRED, AUTONEXT, UPSHIFT,
@@ -79,5 +80,5 @@ F5 = 'Ver Detalle'
 INSTRUCTIONS
 DELIMITERS '||'
 SCREEN RECORD rm_detalle[12] (z26_tipo_doc, z26_num_doc, z26_dividendo,
-								z26_referencia, areaneg, z20_saldo_cap,
+								z26_referencia, z20_fecha_vcto, z20_saldo_cap,
 								valor_che, sel_documento)

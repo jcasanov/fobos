@@ -156,11 +156,11 @@ END FUNCTION
 
 
 FUNCTION ejecutar_listado()
-DEFINE query		CHAR(1200)
+DEFINE query			CHAR(1300)
 DEFINE expr_sql         VARCHAR(100)
 DEFINE expr_estado      VARCHAR(100)
-DEFINE expr_loc		VARCHAR(100)
-DEFINE expr_fecha	VARCHAR(100)
+DEFINE expr_loc			VARCHAR(100)
+DEFINE expr_fecha		VARCHAR(100)
 DEFINE comando          VARCHAR(100)
 
 CALL fl_control_reportes() RETURNING comando
@@ -215,7 +215,7 @@ ELSE
 END IF
 LET query = 'SELECT g03_abreviacion, z26_fecha_cobro, z01_nomcli, ',
 		' z26_referencia, g08_nombre, z26_num_cta, z26_num_cheque, ',
-		' z26_estado, z26_valor ',
+		' z26_estado, SUM(z26_valor) ',
 		' FROM cxct026, cxct001, gent008, OUTER gent003 ',
 		' WHERE z26_compania    = ', vg_codcia,
 		expr_loc CLIPPED,
@@ -226,6 +226,7 @@ LET query = 'SELECT g03_abreviacion, z26_fecha_cobro, z01_nomcli, ',
 		'  AND g03_compania     = z26_compania ',
 		'  AND g03_areaneg      = z26_areaneg ',
 		'  AND g08_banco        = z26_banco ',
+		' GROUP BY 1, 2, 3, 4, 5, 6, 7, 8 ',
 		' ORDER BY 2 DESC'
 PREPARE expresion FROM query
 DECLARE q_rep CURSOR FOR expresion
