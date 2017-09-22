@@ -3393,6 +3393,9 @@ FUNCTION grabar_retenciones()
 DEFINE query		CHAR(800)
 DEFINE i		SMALLINT
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
+LET fecha_actual = fl_current()
 IF rm_z01.z01_personeria = 'N' THEN
 	RETURN
 END IF
@@ -3414,12 +3417,12 @@ FOR i = 1 TO vm_num_ret
 			rm_detret[i].z08_porcentaje,rm_detret[i].z08_codigo_sri,
 			rm_detret[i].z08_fecha_ini_porc,
 			rm_detret[i].z08_defecto, rm_detret[i].z08_flete,
-			vg_usuario, fl_current())
+			vg_usuario, fecha_actual)
 	LET query = 'INSERT INTO cxct009 ',
 			'SELECT ', vg_codcia, ', ', rm_z01.z01_codcli, ', ',
 				'tipo_ret, porc_ret, codigo_sri, fec_ini_por, ',
 				'cod_pago, cont_cred, aux_cont, "', vg_usuario,
-				'",  "', fl_current(), '"',
+				'",  "', fecha_actual, '"',
 			' FROM tmp_z09 ',
 			' WHERE tipo_ret   = "', rm_detret[i].z08_tipo_ret, '"',
 			'   AND porc_ret   = ',	rm_detret[i].z08_porcentaje,
