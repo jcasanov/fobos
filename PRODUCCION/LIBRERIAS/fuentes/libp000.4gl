@@ -8049,7 +8049,7 @@ IF (cedruc[3, 3] = 6) OR (cedruc[3, 3] = 8) THEN
 		RETURN 1
 	END IF
 END IF
-IF ((cedruc[3, 3] < 3) OR (cedruc[3, 3] > 5)) AND (cedruc[3, 3] <> 7) THEN
+IF ((cedruc[3, 3] < 3) OR (cedruc[3, 3] >= 5)) AND (cedruc[3, 3] <> 7) THEN
 	FOR i = 1 TO lim - 1
 		LET valor[i] = cedruc[i, i]
 		IF (i mod 2) <> 0 THEN
