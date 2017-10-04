@@ -430,16 +430,16 @@ FOREACH q_cons INTO tipo, fecha, valor, codloc
 	LET val6  = 0
 	LET val7  = 0
 	IF rm_par.ind_venc = "V" THEN
-		IF fecha >= TODAY THEN
+		IF fecha >= vg_fecha THEN
 			LET val1 = valor
 		END IF
-		LET dias = TODAY - fecha
+		LET dias = vg_fecha - fecha
 	END IF
 	IF rm_par.ind_venc = "P" THEN
-		IF fecha < TODAY THEN
+		IF fecha < vg_fecha THEN
 			LET val1 = valor
 		END IF
-		LET dias = fecha - TODAY
+		LET dias = fecha - vg_fecha
 	END IF
 	IF val1 = 0 THEN
 		IF dias >= rm_par.rango1_i AND 

@@ -162,11 +162,11 @@ CREATE TEMP TABLE tmp_doc_cob
 INITIALIZE rm_par.*, vm_fecha_ini TO NULL
 LET vm_max_rows       = 15000
 LET vm_fecha_ini      = rm_z60.z60_fecha_carga
-LET rm_par.fecha_ini  = MDY(MONTH(TODAY), 01, YEAR(TODAY))
+LET rm_par.fecha_ini  = MDY(MONTH(vg_fecha), 01, YEAR(vg_fecha))
 IF vm_fecha_ini > rm_par.fecha_ini THEN
 	LET rm_par.fecha_ini = vm_fecha_ini + 1 UNITS DAY
 END IF
-LET rm_par.fecha_fin  = TODAY
+LET rm_par.fecha_fin  = vg_fecha
 LET vm_divisor        = 1
 LET vm_tipo           = NULL
 CALL mover_parametros(1)
@@ -175,7 +175,7 @@ IF int_flag THEN
 	RETURN
 END IF
 IF vm_tipo = 'P' THEN
-	LET rm_par2.fecha_ini = MDY(01, 01, YEAR(TODAY))
+	LET rm_par2.fecha_ini = MDY(01, 01, YEAR(vg_fecha))
 	IF vm_fecha_ini > rm_par2.fecha_ini THEN
 		LET rm_par2.fecha_ini = vm_fecha_ini + 1 UNITS DAY
 	END IF
@@ -492,7 +492,7 @@ INPUT BY NAME rm_par.*
 		LET fec_fin = rm_par.fecha_fin
 	AFTER FIELD fecha_ini 
 		IF rm_par.fecha_ini IS NOT NULL THEN
-			IF rm_par.fecha_ini > TODAY THEN
+			IF rm_par.fecha_ini > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha inicial no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD fecha_ini
 			END IF
@@ -506,7 +506,7 @@ INPUT BY NAME rm_par.*
 		END IF
 	AFTER FIELD fecha_fin 
 		IF rm_par.fecha_fin IS NOT NULL THEN
-			IF rm_par.fecha_fin > TODAY THEN
+			IF rm_par.fecha_fin > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha final no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD fecha_fin
 			END IF
@@ -685,7 +685,7 @@ INPUT BY NAME rm_par2.*
 		LET fec_fin = rm_par2.fecha_fin
 	AFTER FIELD fecha_ini 
 		IF rm_par2.fecha_ini IS NOT NULL THEN
-			IF rm_par2.fecha_ini > TODAY THEN
+			IF rm_par2.fecha_ini > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha inicial no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD fecha_ini
 			END IF
@@ -699,7 +699,7 @@ INPUT BY NAME rm_par2.*
 		END IF
 	AFTER FIELD fecha_fin 
 		IF rm_par2.fecha_fin IS NOT NULL THEN
-			IF rm_par2.fecha_fin > TODAY THEN
+			IF rm_par2.fecha_fin > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha final no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD fecha_fin
 			END IF
@@ -809,8 +809,8 @@ CASE flag
 		LET rm_par.fecha_ini      = rm_par2.fecha_ini
 		LET rm_par.fecha_fin      = DATE(rm_par2.fecha_fin)
 						+ 1 UNITS MONTH - 1 UNITS DAY
-		IF rm_par.fecha_fin > TODAY THEN
-			LET rm_par.fecha_fin = TODAY
+		IF rm_par.fecha_fin > vg_fecha THEN
+			LET rm_par.fecha_fin = vg_fecha
 		END IF
 		LET rm_par.area_n         = rm_par2.area_n
 		LET rm_par.tit_area       = rm_par2.tit_area
@@ -3319,7 +3319,7 @@ PAGE HEADER
 	END IF
 	PRINT COLUMN 051, UPSHIFT(tit_precision)
 	SKIP 1 LINES
-	PRINT COLUMN 001, 'FECHA IMPRESION: ', TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 001, 'FECHA IMPRESION: ', vg_fecha USING "dd-mm-yyyy",
  		1 SPACES, TIME,
 	      COLUMN 062, usuario
 	PRINT "--------------------------------------------------------------------------------"
@@ -3409,7 +3409,7 @@ PAGE HEADER
 	END IF
 	PRINT COLUMN 051, UPSHIFT(tit_precision)
 	SKIP 1 LINES
-	PRINT COLUMN 001, 'FECHA IMPRESION: ', TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 001, 'FECHA IMPRESION: ', vg_fecha USING "dd-mm-yyyy",
  		1 SPACES, TIME,
 	      COLUMN 062, usuario
 	PRINT "--------------------------------------------------------------------------------"

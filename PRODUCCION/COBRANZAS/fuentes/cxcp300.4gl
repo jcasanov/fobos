@@ -260,7 +260,7 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 		END IF
 		IF rm_par.fecha_ini IS NULL THEN
 			LET rm_par.fecha_ini = MDY(1,1,2000)
-			LET rm_par.fecha_fin = TODAY
+			LET rm_par.fecha_fin = vg_fecha
 		END IF
 END INPUT
 

@@ -100,8 +100,8 @@ IF r_g13.g13_moneda IS NULL THEN
 	EXIT PROGRAM
 END IF
 LET rm_par.nombre  = r_g13.g13_nombre
-LET rm_par.inicial = TODAY
-LET rm_par.final   = TODAY
+LET rm_par.inicial = vg_fecha
+LET rm_par.final   = vg_fecha
 WHILE (TRUE)
 	CALL control_ingreso()
 	IF int_flag = 1 THEN
@@ -258,7 +258,7 @@ FORMAT
 	PRINT COLUMN 48, "** FECHA INICIAL: ", rm_par.inicial USING "dd-mm-yyyy"
 	PRINT COLUMN 48, "** FECHA FINAL  : ", rm_par.final USING "dd-mm-yyyy"
 	SKIP 1 LINES
-	PRINT COLUMN 01, "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy", 
+	PRINT COLUMN 01, "FECHA IMPRESION: ", vg_fecha USING "dd-mm-yyyy", 
 			 1 SPACES, TIME,
               COLUMN 123, usuario
       	SKIP 1 LINES

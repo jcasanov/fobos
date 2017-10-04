@@ -236,7 +236,7 @@ WHILE TRUE
 			LET dias       = NULL
 			LET tit_estado = 'Cancelado'
 			IF valor_aux <> 0 THEN
-				LET dias = r_report.fecha_vcto - TODAY
+				LET dias = r_report.fecha_vcto - vg_fecha
 				IF dias < 0 THEN
 					LET tit_estado = 'Vencido'
 				ELSE
@@ -523,7 +523,7 @@ PAGE HEADER
 	      COLUMN 099, "S A L D O       : ", tot_saldo
 						USING "-,---,---,--&.##"
 	SKIP 1 LINES
-	PRINT COLUMN 001, "FECHA DE IMPRESION: ", TODAY USING "dd-mm-yyyy", 
+	PRINT COLUMN 001, "FECHA DE IMPRESION: ", vg_fecha USING "dd-mm-yyyy", 
 	                 1 SPACES, TIME,
 	      COLUMN 114, usuario
 	PRINT "------------------------------------------------------------------------------------------------------------------------------------"

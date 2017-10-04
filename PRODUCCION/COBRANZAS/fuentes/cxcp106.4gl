@@ -196,10 +196,10 @@ LET rm_cxc.z03_dcto_item_r  = 0
 LET rm_cxc.z03_dcto_mano_c  = 0
 LET rm_cxc.z03_dcto_mano_r  = 0
 LET rm_cxc.z03_usuario      = vg_usuario
-LET rm_cxc.z03_fecing       = CURRENT
+LET rm_cxc.z03_fecing       = fl_current()
 CALL leer_datos('I')
 IF NOT int_flag THEN
-	LET rm_cxc.z03_fecing  = CURRENT
+	LET rm_cxc.z03_fecing  = fl_current()
 	INSERT INTO cxct003 VALUES (rm_cxc.*)
 	IF vm_num_rows = vm_max_rows THEN
 		LET vm_num_rows = 1

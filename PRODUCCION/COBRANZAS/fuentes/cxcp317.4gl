@@ -136,8 +136,8 @@ DISPLAY "Valor Ret."	TO tit_col6
 DISPLAY "T"		TO tit_col7
 CALL muestra_contadores(0, vm_num_rows)
 INITIALIZE rm_par.* TO NULL
-LET rm_par.fecha_ini = MDY(MONTH(TODAY), 01, YEAR(TODAY))
-LET rm_par.fecha_fin = TODAY
+LET rm_par.fecha_ini = MDY(MONTH(vg_fecha), 01, YEAR(vg_fecha))
+LET rm_par.fecha_fin = vg_fecha
 LET rm_par.cont_cred = 'T'
 WHILE TRUE
 	CALL borrar_detalle()
@@ -245,7 +245,7 @@ INPUT BY NAME rm_par.*
 			LET rm_par.fecha_ini = fec_ini
 			DISPLAY BY NAME rm_par.fecha_ini
 		END IF
-		IF rm_par.fecha_ini > TODAY THEN
+		IF rm_par.fecha_ini > vg_fecha THEN
 			CALL fl_mostrar_mensaje('La fecha del periodo inicial no puede ser mayor a la fecha de hoy.', 'exclamation')
 			NEXT FIELD fecha_ini
 		END IF
@@ -254,7 +254,7 @@ INPUT BY NAME rm_par.*
 			LET rm_par.fecha_fin = fec_fin
 			DISPLAY BY NAME rm_par.fecha_fin
 		END IF
-		IF rm_par.fecha_fin > TODAY THEN
+		IF rm_par.fecha_fin > vg_fecha THEN
 			CALL fl_mostrar_mensaje('La fecha del periodo final no puede ser mayor a la fecha de hoy.', 'exclamation')
 			NEXT FIELD fecha_fin
 		END IF
@@ -1113,7 +1113,7 @@ PAGE HEADER
 		rm_par.fecha_ini USING "dd-mm-yyyy", '  -  ',
 		rm_par.fecha_fin USING "dd-mm-yyyy"
 	SKIP 1 LINES
-	PRINT COLUMN 001, 'FECHA IMPRESION  : ', DATE(TODAY) USING "dd-mm-yyyy",
+	PRINT COLUMN 001, 'FECHA IMPRESION  : ', DATE(vg_fecha) USING "dd-mm-yyyy",
 		1 SPACES, TIME,
 	      COLUMN 078, usuario
 	PRINT COLUMN 001, '------------------------------------------------------------------------------------------------'

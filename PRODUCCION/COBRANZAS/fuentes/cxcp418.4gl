@@ -84,7 +84,7 @@ OPEN FORM f_par FROM "../forms/cxcf418_1"
 DISPLAY FORM f_par
 INITIALIZE rm_par.* TO NULL
 LET rm_par.moneda    = rg_gen.g00_moneda_base
-LET rm_par.fecha_ini = MDY(MONTH(TODAY), 01, YEAR(TODAY))
+LET rm_par.fecha_ini = MDY(MONTH(vg_fecha), 01, YEAR(vg_fecha))
 LET vm_fin_mes       = rm_par.fecha_ini + 1 UNITS MONTH - 1 UNITS DAY
 LET rm_par.fecha_fin = vm_fin_mes
 LET rm_par.con_retencion = 'N'
@@ -271,7 +271,7 @@ INPUT BY NAME rm_par.*
 			CALL fl_mostrar_mensaje('La Fecha Inicial no puede ser menor a la Fecha de Inicio de las COBRANZAS en el FOBOS.', 'exclamation')
 			NEXT FIELD fecha_ini
 		END IF
-		IF rm_par.fecha_ini > TODAY THEN
+		IF rm_par.fecha_ini > vg_fecha THEN
 			CALL fl_mostrar_mensaje('La Fecha Inicial no puede ser mayor a la Fecha de Hoy.', 'exclamation')
 			NEXT FIELD fecha_ini
 		END IF
@@ -962,7 +962,7 @@ PAGE HEADER
 		END IF
 	END IF
 	SKIP 1 LINES
-	PRINT COLUMN 001, "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 001, "FECHA IMPRESION: ", vg_fecha USING "dd-mm-yyyy",
  		1 SPACES, TIME,
 	      COLUMN 142, usuario
 	PRINT "----------------------------------------------------------------------------------------------------------------------------------------------------------------"

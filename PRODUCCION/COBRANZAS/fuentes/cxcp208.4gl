@@ -115,8 +115,8 @@ DEFINE tit_mes		VARCHAR(12)
 DEFINE anho		SMALLINT
 
 IF rm_z00.z00_mespro IS NULL THEN
-        LET anho = YEAR(TODAY)
-        LET mes  = MONTH(TODAY)
+        LET anho = YEAR(vg_fecha)
+        LET mes  = MONTH(vg_fecha)
 ELSE
         LET anho = rm_z00.z00_anopro
         LET mes  = rm_z00.z00_mespro
@@ -138,10 +138,10 @@ DEFINE mes,anho		SMALLINT
 DEFINE dia, mes2, anho2	SMALLINT
 DEFINE fecha		DATE
 
-IF anho < YEAR(TODAY) THEN
+IF anho < YEAR(vg_fecha) THEN
         RETURN 1
 ELSE
-        IF mes < MONTH(TODAY) THEN
+        IF mes < MONTH(vg_fecha) THEN
                 RETURN 1
         END IF
 END IF
@@ -157,7 +157,7 @@ END IF
 LET fecha = mdy(mes2, 1, anho2)
 LET fecha = fecha - 1
                                                                                 
-IF TODAY < fecha THEN
+IF vg_fecha < fecha THEN
         --CALL fgl_winmessage(vg_producto,'Aún no se puede cerrar el mes.','exclamation')
 	CALL fl_mostrar_mensaje('Aún no se puede cerrar el mes.','exclamation')
         RETURN 0

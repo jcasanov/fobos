@@ -231,7 +231,7 @@ FUNCTION control_ingreso()
 OPTIONS INPUT WRAP
 CLEAR FORM
 INITIALIZE rm_tipdoc.* TO NULL
-LET rm_tipdoc.z04_fecing  = CURRENT
+LET rm_tipdoc.z04_fecing  = fl_current()
 LET rm_tipdoc.z04_usuario = vg_usuario 
 LET rm_tipdoc.z04_estado  = 'A'
 LET rm_tipdoc.z04_tipo    = 'D'

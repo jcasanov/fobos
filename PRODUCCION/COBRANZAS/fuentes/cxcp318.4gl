@@ -109,8 +109,8 @@ LET vm_num_rows      = 0
 LET rm_par.modulo    = vg_modulo
 CALL fl_lee_modulo(rm_par.modulo) RETURNING r_g50.*
 LET rm_par.nom_mod   = r_g50.g50_nombre
-LET rm_par.fecha_ini = MDY(MONTH(TODAY), 01, YEAR(TODAY))
-LET rm_par.fecha_fin = TODAY
+LET rm_par.fecha_ini = MDY(MONTH(vg_fecha), 01, YEAR(vg_fecha))
+LET rm_par.fecha_fin = vg_fecha
 LET rm_par.ind_doc   = 'D'
 CALL titulos_columnas()
 DISPLAY BY NAME rm_par.*
@@ -270,7 +270,7 @@ INPUT BY NAME rm_par.*
 			LET rm_par.fecha_ini = fec_ini
 			DISPLAY BY NAME rm_par.fecha_ini
 		END IF
-		IF rm_par.fecha_ini > TODAY THEN
+		IF rm_par.fecha_ini > vg_fecha THEN
 			CALL fl_mostrar_mensaje('La fecha inicial no puede ser mayor que la fecha de hoy.', 'exclamation')
 			NEXT FIELD fecha_ini
 		END IF
@@ -279,7 +279,7 @@ INPUT BY NAME rm_par.*
 			LET rm_par.fecha_fin = fec_fin
 			DISPLAY BY NAME rm_par.fecha_fin
 		END IF
-		IF rm_par.fecha_fin > TODAY THEN
+		IF rm_par.fecha_fin > vg_fecha THEN
 			CALL fl_mostrar_mensaje('La fecha final no puede ser mayor que la fecha de hoy.', 'exclamation')
 			NEXT FIELD fecha_fin
 		END IF
@@ -1063,7 +1063,7 @@ LET expr_loc   = ' '
 IF codloc IS NOT NULL THEN
 	LET expr_loc = '   AND z23_localidad = ', codloc
 END IF
-LET fecha2   = EXTEND(TODAY, YEAR TO SECOND) + 23 UNITS HOUR +
+LET fecha2   = EXTEND(vg_fecha, YEAR TO SECOND) + 23 UNITS HOUR +
 		59 UNITS MINUTE + 59 UNITS SECOND
 LET fecha1   = EXTEND(rm_detalle[pos].fecha, YEAR TO SECOND)
 LET expr_fec = '   AND z22_fecing    BETWEEN "', fecha1,
@@ -1262,7 +1262,7 @@ END FOR
 LET r_orden[3] = 'DESC'
 LET columna_1  = 3
 LET columna_2  = 1
-LET fecha2   = EXTEND(TODAY, YEAR TO SECOND) + 23 UNITS HOUR +
+LET fecha2   = EXTEND(vg_fecha, YEAR TO SECOND) + 23 UNITS HOUR +
 		59 UNITS MINUTE + 59 UNITS SECOND
 LET fecha1   = EXTEND(rm_detalle[pos].fecha, YEAR TO SECOND)
 LET expr_fec = '   AND p22_fecing    BETWEEN "', fecha1,
@@ -1601,7 +1601,7 @@ PAGE HEADER
 			rm_par.fecha_ini USING "dd-mm-yyyy", '  -  ',
 			rm_par.fecha_fin USING "dd-mm-yyyy"
 	SKIP 1 LINES
-	PRINT COLUMN 001, 'FECHA IMPRESION  : ', DATE(TODAY) USING "dd-mm-yyyy",
+	PRINT COLUMN 001, 'FECHA IMPRESION  : ', DATE(vg_fecha) USING "dd-mm-yyyy",
 		1 SPACES, TIME,
 	      COLUMN 078, usuario
 	PRINT COLUMN 001, '------------------------------------------------------------------------------------------------'

@@ -191,7 +191,7 @@ INITIALIZE rm_z24.* TO NULL
 LET rm_z24.z24_compania   = vg_codcia
 LET rm_z24.z24_localidad  = vg_codloc
 LET rm_z24.z24_usuario    = vg_usuario
-LET rm_z24.z24_fecing     = CURRENT
+LET rm_z24.z24_fecing     = fl_current()
 LET rm_z24.z24_tipo       = 'A' -- Solicitud de cobro de pago anticipado
 LET rm_z24.z24_tasa_mora  = 0	-- Hasta que se implemente el proceso 
 LET rm_z24.z24_total_mora = 0   -- para calcular el interes por mora
@@ -1071,9 +1071,9 @@ FETCH q_j10 INTO r_j10.*
 		LET r_j10.j10_nomcli      = r_z01.z01_nomcli
 		LET r_j10.j10_moneda      = rm_z24.z24_moneda
 		LET r_j10.j10_valor       = rm_z24.z24_total_cap
-		LET r_j10.j10_fecha_pro   = CURRENT
+		LET r_j10.j10_fecha_pro   = fl_current()
 		LET r_j10.j10_usuario     = vg_usuario 
-		LET r_j10.j10_fecing      = CURRENT
+		LET r_j10.j10_fecing      = fl_current()
 		LET r_j10.j10_compania    = vg_codcia
 		LET r_j10.j10_localidad   = vg_codloc
 		LET r_j10.j10_tipo_fuente = 'SC'
@@ -1097,9 +1097,9 @@ FETCH q_j10 INTO r_j10.*
 		LET r_j10.j10_nomcli    = r_z01.z01_nomcli
 		LET r_j10.j10_moneda    = rm_z24.z24_moneda
 		LET r_j10.j10_valor     = rm_z24.z24_total_cap 
-		LET r_j10.j10_fecha_pro = CURRENT
+		LET r_j10.j10_fecha_pro = fl_current()
 		LET r_j10.j10_usuario   = vg_usuario 
-		LET r_j10.j10_fecing    = CURRENT
+		LET r_j10.j10_fecing    = fl_current()
 	
 		UPDATE cajt010 SET * = r_j10.* WHERE CURRENT OF q_j10
 	END IF

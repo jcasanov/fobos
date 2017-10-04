@@ -108,8 +108,8 @@ DEFINE expr_sql         CHAR(600)
 DEFINE r_mon		RECORD LIKE gent013.*
 DEFINE expr_loc		VARCHAR(50)
 
-LET vm_fecha_ini = TODAY
-LET vm_fecha_fin = TODAY
+LET vm_fecha_ini = vg_fecha
+LET vm_fecha_fin = vg_fecha
 LET rm_caj.j12_moneda = rg_gen.g00_moneda_base
 CALL fl_lee_moneda(rm_caj.j12_moneda) RETURNING r_mon.*
 IF r_mon.g13_moneda IS NULL THEN
@@ -366,7 +366,7 @@ INPUT BY NAME rm_caj.j12_moneda, vm_fecha_ini, vm_fecha_fin, localidad,
                 END IF
 	AFTER FIELD vm_fecha_ini 
 		IF vm_fecha_ini IS NOT NULL THEN
-			IF vm_fecha_ini > TODAY THEN
+			IF vm_fecha_ini > vg_fecha THEN
 				--CALL fgl_winmessage(vg_producto,'La fecha de inicio no puede ser mayor a la de hoy.','exclamation')
 				CALL fl_mostrar_mensaje('La fecha de inicio no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD vm_fecha_ini
@@ -374,7 +374,7 @@ INPUT BY NAME rm_caj.j12_moneda, vm_fecha_ini, vm_fecha_fin, localidad,
 		END IF
 	AFTER FIELD vm_fecha_fin 
 		IF vm_fecha_fin IS NOT NULL THEN
-			IF vm_fecha_fin > TODAY THEN
+			IF vm_fecha_fin > vg_fecha THEN
 				--CALL fgl_winmessage(vg_producto,'La fecha de término no puede ser mayor a la de hoy.','exclamation')
 				CALL fl_mostrar_mensaje('La fecha de término no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD vm_fecha_fin
@@ -502,7 +502,7 @@ LET vm_nuevoprog = 'cd ..', vg_separador, '..', vg_separador, 'COBRANZAS',
 	' ', vg_modulo, ' ', vg_codcia, ' ', codloc, ' ',
 	rm_che[i].j12_codcli, ' ', rm_caj.j12_moneda
 --}
-LET fecha = TODAY
+LET fecha = vg_fecha
 IF vm_fecha_fin IS NOT NULL THEN
 	LET fecha = vm_fecha_fin
 END IF

@@ -255,7 +255,7 @@ LET rm_cobra.z05_compania =  vg_codcia
 LET rm_cobra.z05_estado   = 'A'
 LET rm_cobra.z05_comision = 'N'
 LET rm_cobra.z05_tipo     = 'C'
-LET rm_cobra.z05_fecing   = CURRENT
+LET rm_cobra.z05_fecing   = fl_current()
 LET rm_cobra.z05_usuario  = vg_usuario 
 DISPLAY 'ACTIVO' TO tit_estado
 LET rm_cobra.z05_codigo   = 1
@@ -269,7 +269,7 @@ IF NOT int_flag THEN
 		LET max_cobra = 1
 	END IF
 	LET rm_cobra.z05_codigo = max_cobra  
-	LET rm_cobra.z05_fecing = CURRENT
+	LET rm_cobra.z05_fecing = fl_current()
       	INSERT INTO cxct005 VALUES (rm_cobra.*)
 	LET num_aux = SQLCA.SQLERRD[6] 
 	IF vm_num_rows = vm_max_rows THEN

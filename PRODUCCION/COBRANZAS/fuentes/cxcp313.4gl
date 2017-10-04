@@ -70,8 +70,8 @@ DISPLAY FORM f_cxcf313_1
 INITIALIZE vm_usua_caja TO NULL
 CALL mostrar_botones()
 LET vm_max_det   = 20000
-LET vm_fecha_ini = TODAY
-LET vm_fecha_fin = TODAY
+LET vm_fecha_ini = vg_fecha
+LET vm_fecha_fin = vg_fecha
 WHILE TRUE
 	CALL borrar_detalle()
 	CALL lee_parametros() RETURNING expr_sql
@@ -139,7 +139,7 @@ INPUT BY NAME vm_usua_caja, vm_fecha_ini, vm_fecha_fin
 		END IF
 	AFTER FIELD vm_fecha_ini 
 		IF vm_fecha_ini IS NOT NULL THEN
-			IF vm_fecha_ini > TODAY THEN
+			IF vm_fecha_ini > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La Fecha Inicial no puede ser mayor a la fecha de hoy.','exclamation')
 				NEXT FIELD vm_fecha_ini
 			END IF
@@ -149,7 +149,7 @@ INPUT BY NAME vm_usua_caja, vm_fecha_ini, vm_fecha_fin
 		END IF
 	AFTER FIELD vm_fecha_fin 
 		IF vm_fecha_fin IS NOT NULL THEN
-			IF vm_fecha_fin > TODAY THEN
+			IF vm_fecha_fin > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La Fecha Final no puede ser mayor a la fecha de hoy.','exclamation')
 				NEXT FIELD vm_fecha_fin
 			END IF
@@ -488,7 +488,7 @@ PAGE HEADER
 	PRINT COLUMN 018, "** FECHA FINAL   : ", vm_fecha_fin
 							USING "dd-mm-yyyy"
 	SKIP 1 LINES
-	PRINT COLUMN 001, "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 001, "FECHA IMPRESION: ", vg_fecha USING "dd-mm-yyyy",
  		1 SPACES, TIME,
 	      COLUMN 062, usuario
 	PRINT "--------------------------------------------------------------------------------"

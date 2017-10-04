@@ -116,8 +116,8 @@ INITIALIZE rm_par.* TO NULL
 LET rm_par.moneda = rg_gen.g00_moneda_base
 CALL fl_lee_moneda(rm_par.moneda) RETURNING r_moneda.* 
 DISPLAY r_moneda.g13_nombre TO desc_moneda
-LET rm_par.inicial    = TODAY
-LET rm_par.final      = TODAY
+LET rm_par.inicial    = vg_fecha
+LET rm_par.final      = vg_fecha
 LET rm_par.saldo      = 'S'
 LET rm_par.origen_doc = 'M'
 WHILE (TRUE)
@@ -442,12 +442,12 @@ INPUT BY NAME rm_par.localidad, rm_par.moneda, rm_par.documento, rm_par.area,
 			END IF
 		END IF
         AFTER INPUT
-                IF rm_par.inicial > TODAY THEN
+                IF rm_par.inicial > vg_fecha THEN
                         --CALL fgl_winmessage(vg_producto,'La fecha inicial debe ser menor a la de hoy.','exclamation')
 			CALL fl_mostrar_mensaje('La fecha inicial debe ser menor a la de hoy.','exclamation')
                         NEXT FIELD inicial
                 END IF
-                IF rm_par.final > TODAY THEN
+                IF rm_par.final > vg_fecha THEN
                         --CALL fgl_winmessage(vg_producto,'La fecha final debe ser menor a la de hoy.','exclamation')
 			CALL fl_mostrar_mensaje('La fecha final debe ser menor a la de hoy.','exclamation')
                         NEXT FIELD final
@@ -557,7 +557,7 @@ PAGE HEADER
 		END IF
 	END IF
         SKIP 1 LINES
-	PRINT COLUMN 001, 'FECHA IMPRESION: ', TODAY USING 'dd-mm-yyyy', 
+	PRINT COLUMN 001, 'FECHA IMPRESION: ', vg_fecha USING 'dd-mm-yyyy', 
 			 1 SPACES, TIME,
               COLUMN 123, usuario
       	SKIP 1 LINES

@@ -104,8 +104,8 @@ END IF
 DISPLAY FORM frm_listado
 LET int_flag = 0
 INITIALIZE rm_par.* TO NULL 
-LET rm_par.inicial = TODAY
-LET rm_par.final   = TODAY
+LET rm_par.inicial = vg_fecha
+LET rm_par.final   = vg_fecha
 LET vm_tipo	   = 'T'
 WHILE (TRUE)
 	CALL control_ingreso()
@@ -441,7 +441,7 @@ INPUT BY NAME rm_par.j10_codigo_caja, rm_par.moneda, rm_par.inicial,
 		END IF
 	AFTER FIELD inicial
 		IF rm_par.inicial IS NOT NULL THEN
-			IF rm_par.inicial > TODAY THEN
+			IF rm_par.inicial > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha inicial debe ser menor o igual a la fecha de hoy.','exclamation')
 				NEXT FIELD inicial
 			END IF
@@ -451,7 +451,7 @@ INPUT BY NAME rm_par.j10_codigo_caja, rm_par.moneda, rm_par.inicial,
 		END IF
 	AFTER FIELD final
 		IF rm_par.final IS NOT NULL THEN
-			IF rm_par.final > TODAY THEN
+			IF rm_par.final > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha final debe ser menor o igual a la fecha de hoy.','exclamation')
 				NEXT FIELD final
 			END IF
@@ -548,7 +548,7 @@ PAGE HEADER
 	END IF
 	PRINT COLUMN 37, '** TIPO         : ', vm_tipo, ' ', tipo
 	SKIP 1 LINES
-	PRINT COLUMN 01, 'FECHA IMPRESION: ', TODAY USING 'dd-mm-yyyy', 
+	PRINT COLUMN 01, 'FECHA IMPRESION: ', vg_fecha USING 'dd-mm-yyyy', 
 		 1 SPACES, TIME,
               COLUMN 122, usuario
       	SKIP 1 LINES

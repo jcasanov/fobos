@@ -140,7 +140,7 @@ DEFINE nom_aux		LIKE cxct001.z01_nomcli
 DEFINE fecha_fin	DATE
 
 INITIALIZE r_cli.*, r_cli_gen.*, cod_aux TO NULL
-LET vm_fecha_fin = TODAY
+LET vm_fecha_fin = vg_fecha
 LET int_flag = 0
 INPUT BY NAME rm_j10.j10_codcli, vm_fecha_ini, vm_fecha_fin
 	WITHOUT DEFAULTS
@@ -192,7 +192,7 @@ INPUT BY NAME rm_j10.j10_codcli, vm_fecha_ini, vm_fecha_fin
 		END IF
 	AFTER FIELD vm_fecha_ini 
 		IF vm_fecha_ini IS NOT NULL THEN
-			IF vm_fecha_ini > TODAY THEN
+			IF vm_fecha_ini > vg_fecha THEN
 				--CALL fgl_winmessage(vg_producto,'La fecha de inicio no puede ser mayor a la de hoy.','exclamation')
 				CALL fl_mostrar_mensaje('La fecha de inicio no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD vm_fecha_ini
@@ -200,7 +200,7 @@ INPUT BY NAME rm_j10.j10_codcli, vm_fecha_ini, vm_fecha_fin
 		END IF
 	AFTER FIELD vm_fecha_fin 
 		IF vm_fecha_fin IS NOT NULL THEN
-			IF vm_fecha_fin > TODAY THEN
+			IF vm_fecha_fin > vg_fecha THEN
 				--CALL fgl_winmessage(vg_producto,'La fecha de término no puede ser mayor a la de hoy.','exclamation')
 				CALL fl_mostrar_mensaje('La fecha de término no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD vm_fecha_fin
@@ -417,7 +417,7 @@ WHENEVER ERROR STOP
 CALL cargar_datos_cheque(i)
 CALL leer_datos(i)
 IF NOT int_flag THEN
-	LET rm_j12.j12_fecing = CURRENT
+	LET rm_j12.j12_fecing = fl_current()
 	CALL fl_actualiza_control_secuencias(vg_codcia, vg_codloc, vg_modulo,
 						'AA', vm_documento)
 		RETURNING rm_j12.j12_nd_interna
@@ -449,7 +449,7 @@ IF NOT int_flag THEN
 	END IF
 	LET rm_cxc.z20_paridad = r_mon_par.g14_tasa
 	--LET fecha_aux = TODAY + 30
-	LET fecha_aux = TODAY
+	LET fecha_aux = vg_fecha
 	--LET rm_cxc.z20_val_impto = (rm_j12.j12_valor * rg_gen.g00_porc_impto)
 				   --/ (100 + rg_gen.g00_porc_impto)
 	LET rm_cxc.z20_val_impto = 0
@@ -458,7 +458,7 @@ IF NOT int_flag THEN
 	INSERT INTO cxct020 VALUES (rm_j12.j12_compania, rm_j12.j12_localidad,
 			rm_j12.j12_codcli, vm_documento,rm_j12.j12_nd_interna,1,
 			rm_j12.j12_areaneg, rm_j12.j12_referencia,
-			TODAY, fecha_aux, 0, 0, rm_j12.j12_moneda,
+			vg_fecha, fecha_aux, 0, 0, rm_j12.j12_moneda,
 			rm_cxc.z20_paridad, rm_cxc.z20_val_impto, 
 			rm_j12.j12_valor, 0,
 			rm_j12.j12_valor, 0, rm_cxc.z20_cartera,
@@ -476,7 +476,7 @@ IF NOT int_flag THEN
 	END IF
 	INSERT INTO cxct020 VALUES (rm_j12.j12_compania, rm_j12.j12_localidad,
 			rm_j12.j12_codcli, vm_nota_deb, r_z20.z20_num_doc, 1,
-			rm_j12.j12_areaneg, rm_j12.j12_referencia, TODAY,
+			rm_j12.j12_areaneg, rm_j12.j12_referencia, vg_fecha,
 			fecha_aux, 0, 0, rm_j12.j12_moneda, rm_cxc.z20_paridad,
 			rm_cxc.z20_val_impto, valor_doc, 0, valor_doc, 0,
 			rm_cxc.z20_cartera, rm_cxc.z20_linea, NULL, 'A', NULL,
@@ -544,7 +544,7 @@ LET rm_j12.j12_moneda       = r_caj.j10_moneda
 LET rm_j12.j12_valor        = 0
 LET valor_doc               = 0
 LET rm_j12.j12_usuario      = vg_usuario
-LET rm_j12.j12_fecing       = CURRENT
+LET rm_j12.j12_fecing       = fl_current()
 CALL mostrar_registro(i)
 
 END FUNCTION
@@ -671,7 +671,7 @@ INPUT BY NAME rm_j12.j12_codcli, rm_j12.j12_referencia, rm_j12.j12_valor,
 		END IF
 	AFTER FIELD j12_nd_fec_bco
 		IF rm_j12.j12_nd_fec_bco IS NOT NULL THEN
-			IF rm_j12.j12_nd_fec_bco > TODAY THEN
+			IF rm_j12.j12_nd_fec_bco > vg_fecha THEN
 				--CALL fgl_winmessage(vg_producto,'La fecha de la Nota de Débito no puede ser mayor a la fecha de hoy.','exclamation')
 				CALL fl_mostrar_mensaje('La fecha de la Nota de Débito no puede ser mayor a la fecha de hoy.','exclamation')
 				NEXT FIELD j12_nd_fec_bco
@@ -996,7 +996,7 @@ INITIALIZE r_b12.* TO NULL
 LET r_b12.b12_compania    = vg_codcia
 LET r_b12.b12_tipo_comp   = 'DC'
 LET r_b12.b12_num_comp    = fl_numera_comprobante_contable(r_b12.b12_compania,
-				r_b12.b12_tipo_comp, YEAR(TODAY), MONTH(TODAY))
+				r_b12.b12_tipo_comp, YEAR(vg_fecha), MONTH(vg_fecha))
 IF r_b12.b12_num_comp = '0' OR r_b12.b12_num_comp = '-1' THEN
 	ROLLBACK WORK
 	EXIT PROGRAM
@@ -1024,14 +1024,14 @@ ELSE
 	END IF
 END IF
 LET r_b12.b12_paridad     = r_g14.g14_tasa
-LET r_b12.b12_fec_proceso = TODAY
+LET r_b12.b12_fec_proceso = vg_fecha
 LET r_b12.b12_fec_reversa = NULL
 LET r_b12.b12_tip_reversa = NULL
 LET r_b12.b12_num_reversa = NULL
 LET r_b12.b12_fec_modifi  = NULL
 LET r_b12.b12_modulo      = 'CO'
 LET r_b12.b12_usuario     = vg_usuario
-LET r_b12.b12_fecing      = CURRENT
+LET r_b12.b12_fecing      = fl_current()
 INSERT INTO ctbt012 VALUES(r_b12.*)
 INITIALIZE r_b13.* TO NULL
 LET r_b13.b13_compania    = r_b12.b12_compania
@@ -1050,7 +1050,7 @@ ELSE
 END IF
 LET r_b13.b13_num_concil  = NULL
 LET r_b13.b13_filtro      = NULL
-LET r_b13.b13_fec_proceso = TODAY
+LET r_b13.b13_fec_proceso = vg_fecha
 LET r_b13.b13_codcli      = rm_j12.j12_codcli
 LET r_b13.b13_codprov 	  = NULL
 LET r_b13.b13_pedido      = NULL

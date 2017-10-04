@@ -115,7 +115,7 @@ LET rm_par.moneda = r.g00_moneda_base
 CALL fl_lee_moneda(rm_par.moneda) RETURNING rm_mon.*
 LET rm_par.tit_mon     = rm_mon.g13_nombre
 LET rm_par.ind_venc    = 'T'
-LET rm_par.fecha_cart  = TODAY
+LET rm_par.fecha_cart  = vg_fecha
 LET rm_par.ind_doc     = 'D'
 LET vm_fecha_ini       = rm_z60.z60_fecha_carga
 LET vm_imprimir        = 'R'
@@ -488,14 +488,14 @@ INPUT BY NAME rm_par2.*
 		EXIT INPUT
 	AFTER FIELD fec_emi_ini
 		IF rm_par2.fec_emi_ini IS NOT NULL THEN
-			IF rm_par2.fec_emi_ini > TODAY THEN
+			IF rm_par2.fec_emi_ini > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha de emisión inicial no puede ser mayor a la fecha de hoy.', 'exclamation')
 				NEXT FIELD fec_emi_ini
 			END IF
 		END IF
 	AFTER FIELD fec_emi_fin
 		IF rm_par2.fec_emi_fin IS NOT NULL THEN
-			IF rm_par2.fec_emi_fin > TODAY THEN
+			IF rm_par2.fec_emi_fin > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha de emisión final no puede ser mayor a la fecha de hoy.', 'exclamation')
 				NEXT FIELD fec_emi_fin
 			END IF
@@ -967,7 +967,7 @@ WHILE TRUE
 			CALL control_generar_archivo()
 			LET int_flag = 0
 		ON KEY(F9)
-			IF rm_par.fecha_cart = TODAY AND rm_par.ind_venc = 'V'
+			IF rm_par.fecha_cart = vg_fecha AND rm_par.ind_venc = 'V'
 			THEN
 				CALL generar_pdf()
 				LET int_flag = 0
@@ -999,7 +999,7 @@ WHILE TRUE
 		BEFORE DISPLAY 
 			--#CALL dialog.keysetlabel("ACCEPT","")
 			--#CALL dialog.keysetlabel("F8","Archivo")
-			--#IF rm_par.fecha_cart = TODAY AND
+			--#IF rm_par.fecha_cart = vg_fecha AND
 				--#rm_par.ind_venc = 'V'
 			--#THEN
 				--#CALL dialog.keysetlabel("F9","PDF")
@@ -1260,7 +1260,7 @@ PAGE HEADER
 		PRINT " "
 	END IF
 	SKIP 1 LINES
-	PRINT COLUMN 001, "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 001, "FECHA IMPRESION: ", vg_fecha USING "dd-mm-yyyy",
  		1 SPACES, TIME,
 	      COLUMN 062, usuario
 	PRINT "--------------------------------------------------------------------------------"

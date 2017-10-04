@@ -129,7 +129,7 @@ END FUNCTION
 FUNCTION control_reporte()
 DEFINE r_g13		RECORD LIKE gent013.*
 
-LET vm_fecha_ini      = TODAY
+LET vm_fecha_ini      = vg_fecha
 LET tipo_fecha        = 'C'
 LET rm_z26.z26_estado = 'A'
 LET rm_z20.z20_moneda = rg_gen.g00_moneda_base
@@ -501,7 +501,7 @@ PAGE HEADER
 		PRINT COLUMN 001, 1 SPACES
 	END IF
 	SKIP 1 LINES
-	PRINT COLUMN 001, "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 001, "FECHA IMPRESION: ", vg_fecha USING "dd-mm-yyyy",
 		1 SPACES, TIME,
               COLUMN 114, usuario
 	PRINT "------------------------------------------------------------------------------------------------------------------------------------"

@@ -170,7 +170,7 @@ LET rm_par.tit_mon     = r_g13.g13_nombre
 LET rm_par.incluir_sal = 'N'
 LET rm_par.tipo_saldo  = 'T'
 LET rm_par.valor       = 0.01
-LET rm_par.fecha_cart  = TODAY
+LET rm_par.fecha_cart  = vg_fecha
 LET vm_fecha_ini       = rm_z60.z60_fecha_carga
 LET lin_menu           = 0
 LET row_ini            = 3
@@ -914,7 +914,7 @@ LET query = 'INSERT INTO tempo_doc ',
 				' ELSE z21_valor',
 			' END) * (-1) saldo_mov, ',
 			' z21_cod_tran, z21_num_tran, z21_linea, z04_tipo, ',
-			' "A Favor", 0, TODAY, z21_num_sri ',
+			' "A Favor", 0, "', vg_fecha, '", z21_num_sri ',
 		' FROM tmp_z21, gent002, cxct001 ',
 		' WHERE g02_compania   = z21_compania ',
 		'   AND g02_localidad  = z21_localidad ',
@@ -1123,7 +1123,7 @@ IF rm_par.localidad IS NOT NULL THEN
 END IF
 LET expr_fec = '   AND z26_estado        = "A"',
 		'   AND DATE(z26_fecing) <= "', rm_par.fecha_cart, '"'
-IF rm_par.fecha_cart < TODAY THEN
+IF rm_par.fecha_cart < vg_fecha THEN
 	LET expr_fec = '   AND z26_fecha_cobro  >= "', rm_par.fecha_cart, '"',
 			'   AND DATE(z26_fecing) <= "', rm_par.fecha_cart, '"'
 END IF
@@ -2275,7 +2275,7 @@ IF codloc IS NOT NULL THEN
 END IF
 LET expr_fec = '   AND z26_estado        = "A"',
 		'   AND DATE(z26_fecing) <= "', rm_par.fecha_cart, '"'
-IF rm_par.fecha_cart < TODAY THEN
+IF rm_par.fecha_cart < vg_fecha THEN
 	LET expr_fec = '   AND z26_fecha_cobro  >= "', rm_par.fecha_cart, '"',
 			'   AND DATE(z26_fecing) <= "', rm_par.fecha_cart, '"'
 END IF
@@ -3391,7 +3391,7 @@ PAGE HEADER
 	      COLUMN 099, "S A L D O       : ", tot_saldo
 						USING "-,---,---,--&.##"
 	SKIP 1 LINES
-	PRINT COLUMN 001, "FECHA DE IMPRESION: ", TODAY USING "dd-mm-yyyy", 
+	PRINT COLUMN 001, "FECHA DE IMPRESION: ", vg_fecha USING "dd-mm-yyyy", 
 	                 1 SPACES, TIME,
 	      COLUMN 114, usuario
 	PRINT "------------------------------------------------------------------------------------------------------------------------------------"
@@ -3540,7 +3540,7 @@ PAGE HEADER
 		      COLUMN 102, "TOTAL A FAVOR: ", tot_favor
 						USING "-,---,---,--&.##"
 	SKIP 1 LINES
-	PRINT COLUMN 001, "FECHA DE IMPRESION: ", TODAY USING "dd-mm-yyyy", 
+	PRINT COLUMN 001, "FECHA DE IMPRESION: ", vg_fecha USING "dd-mm-yyyy", 
 	                 1 SPACES, TIME,
 	      COLUMN 114, usuario
 	PRINT "------------------------------------------------------------------------------------------------------------------------------------"

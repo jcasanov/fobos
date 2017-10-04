@@ -103,8 +103,8 @@ DISPLAY FORM f_rep
 CALL campos_forma()
 CALL fl_lee_moneda(rg_gen.g00_moneda_base) RETURNING r_g13.*
 INITIALIZE rm_par.* TO NULL
-LET rm_par.anho       = YEAR(TODAY)
-LET rm_par.mes        = MONTH(TODAY)
+LET rm_par.anho       = YEAR(vg_fecha)
+LET rm_par.mes        = MONTH(vg_fecha)
 LET rm_par.g13_moneda = r_g13.g13_moneda
 LET rm_par.g13_nombre = r_g13.g13_nombre
 LET rm_par.tipo_vcto  = 'T'
@@ -169,7 +169,7 @@ WHILE TRUE
 		CONTINUE WHILE
 	END IF
 	CALL fl_lee_compania(vg_codcia) RETURNING rm_g01.*
-	IF YEAR(TODAY) <> rm_par.anho OR MONTH(TODAY) <> rm_par.mes THEN
+	IF YEAR(vg_fecha) <> rm_par.anho OR MONTH(vg_fecha) <> rm_par.mes THEN
 		LET query = prepare_query_cxct050()
 	ELSE
 		LET query = prepare_query_cxct020()
@@ -544,15 +544,15 @@ END IF
 
 CASE rm_par.tipo_vcto 
 	WHEN 'P'
-		LET expr_vcto = ' AND z50_fecha_vcto >= TODAY '
+		LET expr_vcto = ' AND z50_fecha_vcto >= "', vg_fecha, '"'
 		IF rm_par.dias_ini IS NOT NULL THEN
-			LET expr_dias =' AND (z50_fecha_vcto - TODAY) BETWEEN ',
+			LET expr_dias =' AND (z50_fecha_vcto - "', vg_fecha, '") BETWEEN ',
 					rm_par.dias_ini, ' AND ',rm_par.dias_fin
 		END IF
 	WHEN 'V'
-		LET expr_vcto = ' AND z50_fecha_vcto < TODAY '
+		LET expr_vcto = ' AND z50_fecha_vcto < "', vg_fecha, '"'
 		IF rm_par.dias_ini IS NOT NULL THEN
-			LET expr_dias =' AND (TODAY - z50_fecha_vcto) BETWEEN ',
+			LET expr_dias =' AND ("', vg_fecha, '" - z50_fecha_vcto) BETWEEN ',
 					rm_par.dias_ini, ' AND ',rm_par.dias_fin
 		END IF
 	OTHERWISE
@@ -567,7 +567,7 @@ END IF
 
 LET query = 'SELECT z50_areaneg, z02_zona_cobro, z50_codcli, z01_nomcli, ',
 	          ' z50_tipo_doc, z50_num_doc, z50_dividendo, z50_num_sri, ',
-		  ' z50_fecha_emi, z50_fecha_vcto, (z50_fecha_vcto - TODAY), ',
+		  ' z50_fecha_emi, z50_fecha_vcto, (z50_fecha_vcto - "', vg_fecha, '"), ',
 	          ' (z50_saldo_cap + z50_saldo_int), z50_compania, ',
 		  ' z50_localidad, z50_cod_tran, z50_num_tran ',
 	    	' FROM cxct050, cxct001, cxct002 ', 
@@ -627,15 +627,15 @@ END IF
 
 CASE rm_par.tipo_vcto 
 	WHEN 'P'
-		LET expr_vcto = ' AND z20_fecha_vcto >= TODAY '
+		LET expr_vcto = ' AND z20_fecha_vcto >= "', vg_fecha, '"'
 		IF rm_par.dias_ini IS NOT NULL THEN
-			LET expr_dias =' AND (z20_fecha_vcto - TODAY) BETWEEN ',
+			LET expr_dias =' AND (z20_fecha_vcto - "', vg_fecha, '") BETWEEN ',
 					rm_par.dias_ini, ' AND ',rm_par.dias_fin
 		END IF
 	WHEN 'V'
-		LET expr_vcto = ' AND z20_fecha_vcto < TODAY '
+		LET expr_vcto = ' AND z20_fecha_vcto < "', vg_fecha, '" '
 		IF rm_par.dias_ini IS NOT NULL THEN
-			LET expr_dias =' AND (TODAY - z20_fecha_vcto) BETWEEN ',
+			LET expr_dias =' AND ("', vg_fecha, '" - z20_fecha_vcto) BETWEEN ',
 					rm_par.dias_ini, ' AND ',rm_par.dias_fin
 		END IF
 	OTHERWISE
@@ -651,7 +651,7 @@ END IF
 LET query = 'SELECT z20_areaneg, z02_zona_cobro, z20_codcli, z01_nomcli, ',
 	          ' z20_tipo_doc, z20_num_doc, z20_dividendo, z20_num_sri, ',
 		  ' z20_fecha_emi, z20_fecha_vcto, ',
-		  ' (z20_fecha_vcto - TODAY) antiguedad, ',
+		  ' (z20_fecha_vcto - "', vg_fecha, '") antiguedad, ',
 	          ' (z20_saldo_cap + z20_saldo_int) saldo, ',
 		  ' z20_compania, z20_localidad, z20_cod_tran, z20_num_tran ',
 	    	' FROM cxct020, cxct001, cxct002 ', 
@@ -793,7 +793,7 @@ PAGE HEADER
 			rm_par.localidad USING '&&', " ", rm_par.tit_localidad
 	--#END IF
 	SKIP 1 LINES
-	PRINT COLUMN 001, "FECHA DE IMPRESION: ", TODAY USING "dd-mm-yyyy", 
+	PRINT COLUMN 001, "FECHA DE IMPRESION: ", vg_fecha USING "dd-mm-yyyy", 
 	                 1 SPACES, TIME,
 	      COLUMN 114, usuario
 	--print '&k2S'	                -- Letra condensada (16 cpi)

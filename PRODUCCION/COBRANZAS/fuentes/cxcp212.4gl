@@ -310,7 +310,7 @@ LET query = 'SELECT cajt014.*, j14_cod_tran z20_tipo_doc,',
 		expr_tip CLIPPED,
 		'   AND j14_tipo_fue      = "PR" ',
 		'   AND j14_fec_emi_fact >= ',
-			'EXTEND(DATE(TODAY - ', dias_tope + 1, ' UNITS DAY), ',
+			'EXTEND(DATE("', vg_fecha, '" - ', dias_tope + 1, ' UNITS DAY), ',
 				'YEAR TO MONTH) ',
 		'   AND EXISTS ',
 			'(SELECT 1 FROM ', retorna_base_loc() CLIPPED,
@@ -338,7 +338,7 @@ LET query = 'SELECT cajt014.*, j14_cod_tran z20_tipo_doc,',
 		expr_tip CLIPPED,
 		'   AND j14_tipo_fue      = "OT" ',
 		'   AND j14_fec_emi_fact >= ',
-			'EXTEND(DATE(TODAY - ', dias_tope + 1, ' UNITS DAY), ',
+			'EXTEND(DATE("', vg_fecha, '" - ', dias_tope + 1, ' UNITS DAY), ',
 				'YEAR TO MONTH) ',
 		'   AND EXISTS ',
 			'(SELECT 1 FROM talt023 ',
@@ -739,7 +739,7 @@ END IF
 LET r_z20.z20_areaneg    = rm_adi[i].j10_areaneg
 LET r_z20.z20_referencia = 'DOC.RT ', rm_detalle[i].j14_num_ret_sri CLIPPED,
 				' P/FA-ELIMINACION'
-LET r_z20.z20_fecha_emi  = TODAY
+LET r_z20.z20_fecha_emi  = vg_fecha
 LET r_z20.z20_fecha_vcto = r_z20.z20_fecha_emi + 1 UNITS DAY
 LET r_z20.z20_tasa_int   = 0 
 LET r_z20.z20_tasa_mora  = 0
@@ -758,7 +758,7 @@ LET r_z20.z20_cod_tran   = rm_adi[i].j14_cod_tran
 LET r_z20.z20_num_tran   = rm_adi[i].j14_num_tran
 LET r_z20.z20_num_sri    = rm_detalle[i].j14_num_ret_sri
 LET r_z20.z20_usuario    = vg_usuario
-LET r_z20.z20_fecing     = CURRENT
+LET r_z20.z20_fecing     = fl_current()
 INSERT INTO cxct020 VALUES (r_z20.*)
 RETURN 1
 
@@ -883,7 +883,7 @@ LET r_z22.z22_areaneg    = r_j10.j10_areaneg
 LET r_z22.z22_referencia = 'APLIC. COBRO: ',
 				r_j10.j10_num_fuente USING '#####&',
 				' EN ELIMINACION RET.'
-LET r_z22.z22_fecha_emi  = TODAY
+LET r_z22.z22_fecha_emi  = vg_fecha
 LET r_z22.z22_moneda     = r_j10.j10_moneda
 LET r_z22.z22_paridad    = 1
 LET r_z22.z22_tasa_mora  = 0
@@ -893,7 +893,7 @@ LET r_z22.z22_total_mora = 0
 LET r_z22.z22_subtipo    = 1
 LET r_z22.z22_origen     = 'A'
 LET r_z22.z22_usuario    = vg_usuario
-LET r_z22.z22_fecing     = CURRENT
+LET r_z22.z22_fecing     = fl_current()
 INSERT INTO cxct022 VALUES (r_z22.*)
 LET r_z23.z23_compania   = r_z22.z22_compania
 LET r_z23.z23_localidad  = r_z22.z22_localidad
@@ -1076,7 +1076,7 @@ DEFINE aux_ret		LIKE cajt001.j01_aux_cont
 INITIALIZE r_ccomp.* TO NULL
 LET r_ccomp.b12_compania    = vg_codcia
 LET r_ccomp.b12_tipo_comp   = 'DC'
-LET r_ccomp.b12_fec_proceso = TODAY
+LET r_ccomp.b12_fec_proceso = vg_fecha
 CALL fl_numera_comprobante_contable(r_ccomp.b12_compania, r_ccomp.b12_tipo_comp,
 		YEAR(r_ccomp.b12_fec_proceso), MONTH(r_ccomp.b12_fec_proceso))
 	RETURNING r_ccomp.b12_num_comp
@@ -1097,7 +1097,7 @@ LET r_ccomp.b12_moneda    = rm_adi[i].j10_moneda
 LET r_ccomp.b12_paridad   = 1
 LET r_ccomp.b12_modulo    = vg_modulo
 LET r_ccomp.b12_usuario   = vg_usuario
-LET r_ccomp.b12_fecing    = CURRENT
+LET r_ccomp.b12_fecing    = fl_current()
 INSERT INTO ctbt012 VALUES (r_ccomp.*)
 CALL fl_lee_area_negocio(vg_codcia, rm_adi[i].j10_areaneg) RETURNING r_g03.* 
 CALL fl_lee_auxiliares_caja(vg_codcia, vg_codloc, r_g03.g03_modulo,
@@ -1735,7 +1735,7 @@ PAGE HEADER
 	PRINT COLUMN 028, '** TIPO         : ', rm_par.cont_cred, ' ',
 		retorna_cont_cred(rm_par.cont_cred) CLIPPED
 	SKIP 1 LINES
-	PRINT COLUMN 001, 'FECHA IMPRESION  : ', DATE(TODAY) USING "dd-mm-yyyy",
+	PRINT COLUMN 001, 'FECHA IMPRESION  : ', DATE(vg_fecha) USING "dd-mm-yyyy",
 		1 SPACES, TIME,
 	      COLUMN 078, usuario
 	PRINT COLUMN 001, '------------------------------------------------------------------------------------------------'

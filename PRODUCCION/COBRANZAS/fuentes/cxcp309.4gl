@@ -63,8 +63,8 @@ OPEN WINDOW w_imp AT 3,2 WITH 22 ROWS, 80 COLUMNS
 OPEN FORM f_cons FROM '../forms/cxcf309_1'
 DISPLAY FORM f_cons
 LET first_time = 1
-LET fecha_ini  = TODAY 
-LET fecha_fin  = TODAY + 15 
+LET fecha_ini  = vg_fecha 
+LET fecha_fin  = vg_fecha + 15 
 LET moneda     = rg_gen.g00_moneda_base
 DISPLAY BY NAME fecha_ini, fecha_fin, moneda
 CALL fl_lee_moneda(moneda) RETURNING rm_g13.*

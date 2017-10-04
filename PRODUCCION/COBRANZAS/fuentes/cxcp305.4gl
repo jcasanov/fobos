@@ -1029,7 +1029,7 @@ FOREACH q_doc INTO r_doc.*, tit_area
 	LET dias       = NULL
 	LET tit_estado = 'Cancelado'
 	IF valor_aux <> 0 THEN
-		LET dias = r_doc.z20_fecha_vcto - TODAY
+		LET dias = r_doc.z20_fecha_vcto - vg_fecha
 		IF dias < 0 THEN
 			LET tit_estado = 'Vencido'
 		ELSE

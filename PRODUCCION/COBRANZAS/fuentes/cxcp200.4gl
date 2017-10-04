@@ -185,7 +185,7 @@ CALL fl_lee_compania_cobranzas(vg_codcia)
 LET rm_z20.z20_compania  = vg_codcia
 LET rm_z20.z20_localidad = vg_codloc
 LET rm_z20.z20_dividendo = 1
-LET rm_z20.z20_fecha_emi = CURRENT
+LET rm_z20.z20_fecha_emi = fl_current()
 LET rm_z20.z20_tasa_int  = 0 
 LET rm_z20.z20_tasa_mora = r_cia.z00_tasa_mora
 LET rm_z20.z20_moneda    = rg_gen.g00_moneda_base
@@ -196,7 +196,7 @@ LET rm_z20.z20_saldo_int = 0
 LET rm_z20.z20_paridad   = 1
 LET rm_z20.z20_origen    = 'M'
 LET rm_z20.z20_usuario   = vg_usuario
-LET rm_z20.z20_fecing    = CURRENT
+LET rm_z20.z20_fecing    = fl_current()
 CALL fl_lee_moneda(rm_z20.z20_moneda) RETURNING r_mon.*
 IF r_mon.g13_moneda IS NULL THEN
         CALL fl_mostrar_mensaje('No existe ninguna moneda base.','stop')
@@ -255,7 +255,7 @@ IF NOT int_flag THEN
 			END IF
 		END IF
 		DISPLAY BY NAME rm_z20.z20_num_doc
-		LET rm_z20.z20_fecing = CURRENT
+		LET rm_z20.z20_fecing = fl_current()
 		INSERT INTO cxct020 VALUES (rm_z20.*)
 		LET num_aux = SQLCA.SQLERRD[6] 
 		CALL fl_genera_saldos_cliente(vg_codcia, vg_codloc,
@@ -750,9 +750,9 @@ INPUT BY NAME rm_z20.z20_codcli, rm_z20.z20_tipo_doc, rm_z20.z20_num_doc,
 		END IF
 	AFTER FIELD z20_fecha_emi
 		IF rm_z20.z20_fecha_emi IS NOT NULL THEN
-			IF rm_z20.z20_fecha_emi > TODAY 
-			OR (MONTH(rm_z20.z20_fecha_emi) <> MONTH(TODAY)
-			OR YEAR(rm_z20.z20_fecha_emi) <> YEAR(TODAY)) THEN
+			IF rm_z20.z20_fecha_emi > vg_fecha 
+			OR (MONTH(rm_z20.z20_fecha_emi) <> MONTH(vg_fecha)
+			OR YEAR(rm_z20.z20_fecha_emi) <> YEAR(vg_fecha)) THEN
 				CALL fl_mostrar_mensaje('La fecha de emisión debe ser de hoy o del presente mes.','exclamation')
 				NEXT FIELD z20_fecha_emi
 			END IF
@@ -1064,7 +1064,7 @@ IF STATUS = NOTFOUND THEN
 	RETURN
 END IF
 IF num_args() = 9 THEN
-	IF arg_val(9) < TODAY THEN
+	IF arg_val(9) < vg_fecha THEN
 		CALL obtener_saldo_deudor_fecha()
 	END IF
 END IF

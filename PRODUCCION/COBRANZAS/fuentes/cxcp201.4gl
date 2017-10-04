@@ -197,7 +197,7 @@ CLEAR z21_paridad, z21_saldo, z21_origen, tit_nombre_cli, tit_tipo_doc,
 LET val_base             = 0
 LET rm_z21.z21_compania  = vg_codcia
 LET rm_z21.z21_localidad = vg_codloc
-LET rm_z21.z21_fecha_emi = TODAY
+LET rm_z21.z21_fecha_emi = vg_fecha
 LET rm_z21.z21_moneda    = rg_gen.g00_moneda_base
 LET rm_z21.z21_valor     = 0
 LET rm_z21.z21_saldo     = 0
@@ -205,7 +205,7 @@ LET rm_z21.z21_val_impto = 0
 LET rm_z21.z21_paridad   = 1
 LET rm_z21.z21_origen    = 'M'
 LET rm_z21.z21_usuario   = vg_usuario
-LET rm_z21.z21_fecing    = CURRENT
+LET rm_z21.z21_fecing    = fl_current()
 DISPLAY BY NAME rm_z21.z21_val_impto
 CALL fl_lee_moneda(rm_z21.z21_moneda) RETURNING r_mon.*
 IF r_mon.g13_moneda IS NULL THEN
@@ -260,7 +260,7 @@ IF NOT int_flag THEN
 			EXIT PROGRAM
 		END IF
 		DISPLAY BY NAME rm_z21.z21_num_doc
-		LET rm_z21.z21_fecing = CURRENT
+		LET rm_z21.z21_fecing = fl_current()
 		INSERT INTO cxct021 VALUES (rm_z21.*)
 		LET num_aux = SQLCA.SQLERRD[6] 
 		CALL fl_genera_saldos_cliente(vg_codcia, vg_codloc,
@@ -775,9 +775,9 @@ INPUT BY NAME rm_z21.z21_codcli, rm_z21.z21_tipo_doc, flag_impto,
 		END IF
 	AFTER FIELD z21_fecha_emi
 		IF rm_z21.z21_fecha_emi IS NOT NULL THEN
-			IF rm_z21.z21_fecha_emi > TODAY
-			OR (MONTH(rm_z21.z21_fecha_emi) <> MONTH(TODAY)
-			OR YEAR(rm_z21.z21_fecha_emi) <> YEAR(TODAY)) THEN
+			IF rm_z21.z21_fecha_emi > vg_fecha
+			OR (MONTH(rm_z21.z21_fecha_emi) <> MONTH(vg_fecha)
+			OR YEAR(rm_z21.z21_fecha_emi) <> YEAR(vg_fecha)) THEN
 				CALL fl_mostrar_mensaje('La fecha de emisión debe ser de hoy o del presente mes.','exclamation')
 				NEXT FIELD z21_fecha_emi
 			END IF
@@ -992,7 +992,7 @@ IF STATUS = NOTFOUND THEN
 	RETURN
 END IF
 IF num_args() = 8 THEN
-	IF arg_val(8) < TODAY THEN
+	IF arg_val(8) < vg_fecha THEN
 		CALL obtener_saldo_a_favor_fecha()
 	END IF
 END IF

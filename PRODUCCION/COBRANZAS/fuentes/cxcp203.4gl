@@ -261,7 +261,7 @@ END FOR
 LET rm_z22.z22_compania   = vg_codcia
 LET rm_z22.z22_localidad  = vg_codloc
 LET rm_z22.z22_tipo_trn   = vm_tipo_trn
-LET rm_z22.z22_fecha_emi  = TODAY
+LET rm_z22.z22_fecha_emi  = vg_fecha
 LET rm_z22.z22_moneda     = rg_gen.g00_moneda_base
 LET rm_z22.z22_paridad    = 1
 LET rm_z22.z22_tasa_mora  = 0
@@ -270,7 +270,7 @@ LET rm_z22.z22_total_int  = 0
 LET rm_z22.z22_total_mora = 0
 LET rm_z22.z22_origen     = 'M'
 LET rm_z22.z22_usuario    = vg_usuario
-LET rm_z22.z22_fecing     = CURRENT
+LET rm_z22.z22_fecing     = fl_current()
 
 LET rm_z23.z23_compania   = vg_codcia
 LET rm_z23.z23_localidad  = vg_codloc
@@ -325,7 +325,7 @@ IF NOT int_flag THEN
 		ROLLBACK WORK
 		EXIT PROGRAM
 	END IF
-	LET rm_z22.z22_fecing = CURRENT
+	LET rm_z22.z22_fecing = fl_current()
 --display 'cxcp203: fecha antes insert ', rm_z22.z22_fecing
 --display ' '
 	INSERT INTO cxct022 VALUES (rm_z22.*)
@@ -1629,12 +1629,12 @@ END FUNCTION
 FUNCTION mensaje_fecha(i)
 DEFINE i,dias		INTEGER
 
-IF rm_sld[i].z20_fecha_vcto >= TODAY THEN
+IF rm_sld[i].z20_fecha_vcto >= vg_fecha THEN
 	DISPLAY 'POR VENCER' TO tit_fecha_vcto
 ELSE
 	DISPLAY 'VENCIDO' TO tit_fecha_vcto
 END IF
-LET dias = rm_sld[i].z20_fecha_vcto - TODAY
+LET dias = rm_sld[i].z20_fecha_vcto - vg_fecha
 DISPLAY dias TO tit_dias
 
 END FUNCTION

@@ -243,7 +243,7 @@ CLEAR FORM
 INITIALIZE rm_zoncob.* TO NULL
 LET rm_zoncob.z06_estado   = 'A'
 LET rm_zoncob.z06_comision = 'N'
-LET rm_zoncob.z06_fecing   = CURRENT
+LET rm_zoncob.z06_fecing   = fl_current()
 LET rm_zoncob.z06_usuario  = vg_usuario 
 DISPLAY 'ACTIVO' TO tit_estado
 DISPLAY BY NAME rm_zoncob.z06_fecing, rm_zoncob.z06_usuario
@@ -256,7 +256,7 @@ IF NOT int_flag THEN
 		LET max_zona = 1
 	END IF
       	LET rm_zoncob.z06_zona_cobro = max_zona
-	LET rm_zoncob.z06_fecing     = CURRENT
+	LET rm_zoncob.z06_fecing     = fl_current()
       	INSERT INTO cxct006 VALUES (rm_zoncob.*)
 	LET num_aux = SQLCA.SQLERRD[6] 
 	IF vm_num_rows = vm_max_rows THEN
