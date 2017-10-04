@@ -299,7 +299,7 @@ LET rm_r43.r43_compania   = vg_codcia
 LET rm_r43.r43_localidad  = vg_codloc
 LET rm_r43.r43_cod_ventas = rm_r01.r01_codigo
 LET rm_r43.r43_usuario    = vg_usuario
-LET rm_r43.r43_fecing     = CURRENT
+LET rm_r43.r43_fecing     = fl_current()
 DISPLAY BY NAME rm_r43.r43_cod_ventas, rm_r01.r01_nombres, rm_r43.r43_usuario,
 		rm_r43.r43_fecing
 CALL lee_datos()
@@ -1413,7 +1413,7 @@ WHILE TRUE
 		FROM rept043
 		WHERE r43_compania  = rm_r43.r43_compania
 		  AND r43_localidad = rm_r43.r43_localidad
-	LET rm_r43.r43_fecing = CURRENT
+	LET rm_r43.r43_fecing = fl_current()
 	WHENEVER ERROR CONTINUE
 	INSERT INTO rept043 VALUES (rm_r43.*)
 	IF STATUS = 0 THEN
@@ -1515,7 +1515,7 @@ FOREACH q_ins_r44 INTO r_det.*, r_adi.*
 	CALL fl_lee_marca_rep(vg_codcia, r_r44.r44_marca_t) RETURNING r_r73.*
 	LET r_r44.r44_desc_marca_t = r_r73.r73_desc_marca
 	LET r_r44.r44_usuario      = rm_r43.r43_usuario
-	LET r_r44.r44_fecing       = CURRENT
+	LET r_r44.r44_fecing       = fl_current()
 	WHENEVER ERROR CONTINUE
 	INSERT INTO rept044 VALUES (r_r44.*)
 	IF STATUS <> 0 THEN
@@ -2021,6 +2021,8 @@ DEFINE resul		SMALLINT
 DEFINE varusu		VARCHAR(100)
 DEFINE resp		CHAR(6)
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 INITIALIZE r_r19.*, r_r20.* TO NULL
 CALL fl_actualiza_control_secuencias(vg_codcia, vg_codloc, 'RE', 'AA', cod_tran)
 	RETURNING num_tran
@@ -2076,7 +2078,7 @@ LET r_r19.r19_tot_dscto   = 0
 LET r_r19.r19_tot_neto 	  = 0
 LET r_r19.r19_flete 	  = 0
 LET r_r19.r19_usuario 	  = vg_usuario
-LET r_r19.r19_fecing 	  = CURRENT
+LET r_r19.r19_fecing 	  = fl_current()
 INSERT INTO rept019 VALUES (r_r19.*)
 CASE cod_tran
 	WHEN 'A-'
@@ -2171,12 +2173,13 @@ FOREACH q_det2 INTO item, cantidad
 		LET r_r20.r20_costnue_mb  = costo_ing
     		LET r_r20.r20_costo 	  = costo_nue
 		WHENEVER ERROR CONTINUE
+        LET fecha_actual = fl_current()
 		WHILE TRUE
 			UPDATE rept010
 				SET r10_costo_mb    = r_r10.r10_costo_mb,
 				    r10_costult_mb  = r_r10.r10_costult_mb,
 				    r10_usu_cosrepo = vg_usuario,
-				    r10_fec_cosrepo = CURRENT
+				    r10_fec_cosrepo = fecha_actual
 				WHERE r10_compania = vg_codcia
 				  AND r10_codigo   = item
 			IF STATUS = 0 THEN
@@ -2338,7 +2341,7 @@ FOREACH q_det2 INTO item, cantidad
 		END IF
 	END IF
 	LET r_r20.r20_stock_bd   = 0
-	LET r_r20.r20_fecing     = CURRENT
+	LET r_r20.r20_fecing     = fl_current()
 	INSERT INTO rept020 VALUES (r_r20.*)
 	IF r_r20.r20_cod_tran <> 'AC' THEN
 		LET r_r19.r19_tot_costo = r_r19.r19_tot_costo +
@@ -2369,7 +2372,7 @@ ELSE
 	INSERT INTO rept045
 		VALUES (rm_r43.r43_compania, rm_r43.r43_localidad,
 			rm_r43.r43_traspaso, r_r19.r19_cod_tran,
-			r_r19.r19_num_tran, rm_r43.r43_usuario, CURRENT)
+			r_r19.r19_num_tran, rm_r43.r43_usuario, fecha_actual)
 	{--
 	IF ctos = 1 THEN
 		LET mensaje = 'Se genero el ajuste para traspaso: ',
@@ -2595,7 +2598,7 @@ PAGE HEADER
 			" ", rm_r43.r43_desc_grupo CLIPPED
 	PRINT COLUMN 027, "MARCA ORIGEN    : ", rm_r43.r43_marca CLIPPED,
 			" ", rm_r43.r43_desc_marca CLIPPED
-	PRINT COLUMN 001, "FECHA IMPRESION: ", DATE(TODAY) USING 'dd-mm-yyyy',
+	PRINT COLUMN 001, "FECHA IMPRESION: ", DATE(vg_fecha) USING 'dd-mm-yyyy',
 		1 SPACES, TIME,
 	      COLUMN 045, "REFERENCIA : ", rm_r43.r43_referencia CLIPPED,
 	      COLUMN 123, usuario CLIPPED

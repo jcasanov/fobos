@@ -270,7 +270,7 @@ PAGE HEADER
 	PRINT COLUMN 20, "** Fecha Llegada : ", r_rep.r16_fec_llegada
 						USING "dd-mm-yyyy"
 	PRINT COLUMN 20, "** Referencia    : ", r_rep.r16_referencia
-	PRINT COLUMN 01, "Fecha  : ", TODAY USING "dd-mm-yyyy", 1 SPACES, TIME,
+	PRINT COLUMN 01, "Fecha  : ", vg_fecha USING "dd-mm-yyyy", 1 SPACES, TIME,
 	      COLUMN 97, usuario
 	SKIP 1 LINES
 	PRINT COLUMN 1,   "Item",

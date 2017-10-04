@@ -201,7 +201,7 @@ WHILE TRUE
 		CALL datos_defaults(2)
 		CONTINUE WHILE
 	END IF
-	LET rm_sto.te_fecing = CURRENT
+	LET rm_sto.te_fecing = fl_current()
 	INSERT INTO te_stofis VALUES(rm_sto.*)
 	CALL ubicar_posicion(SQLCA.SQLERRD[6])
 	CALL fl_mensaje_registro_ingresado()
@@ -363,9 +363,9 @@ LET rm_sto.te_bueno      = 0
 LET rm_sto.te_incompleto = 0
 LET rm_sto.te_mal_est    = 0
 LET rm_sto.te_suma       = 0
-LET rm_sto.te_fecha      = TODAY
+LET rm_sto.te_fecha      = vg_fecha
 LET rm_sto.te_usuario    = vg_usuario
-LET rm_sto.te_fecing     = CURRENT
+LET rm_sto.te_fecing     = fl_current()
 CALL calcular_diferencia()
 
 END FUNCTION
@@ -591,7 +591,7 @@ IF flag THEN
 		RETURN
 	END IF
 END IF
-LET rm_sto.te_fec_modifi = CURRENT
+LET rm_sto.te_fec_modifi = fl_current()
 UPDATE te_stofis SET * = rm_sto.* WHERE CURRENT OF q_up
 COMMIT WORK
 CALL mostrar_registro(vm_r_rows[vm_row_current])

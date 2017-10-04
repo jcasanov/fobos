@@ -1172,7 +1172,7 @@ LET expr_loc   = ' '
 IF codloc IS NOT NULL THEN
 	LET expr_loc = '   AND z23_localidad = ', codloc
 END IF
-LET fecha2   = EXTEND(TODAY, YEAR TO SECOND) + 23 UNITS HOUR +
+LET fecha2   = EXTEND(vg_fecha, YEAR TO SECOND) + 23 UNITS HOUR +
 		59 UNITS MINUTE + 59 UNITS SECOND
 LET expr_fec = '   AND z22_fecing    <= "', fecha2, '"'
 LET expr_sql = '   AND z23_tipo_doc   = ? ',

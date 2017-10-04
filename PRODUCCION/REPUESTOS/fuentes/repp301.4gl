@@ -119,7 +119,7 @@ LET vm_num_det = 0
 INITIALIZE rm_r19.*, utilidad_desde, utilidad_hasta, 
 	   vm_fecha_desde, vm_fecha_hasta TO NULL
 
-LET vm_fecha_hasta    = TODAY
+LET vm_fecha_hasta    = vg_fecha
 LET rm_r19.r19_moneda = rg_gen.g00_moneda_base
 LET vm_tipo_tran      = 'FA'
 IF vg_gui = 0 THEN
@@ -232,7 +232,7 @@ DEFINE r_g13		RECORD LIKE gent013.*
 
 	AFTER FIELD vm_fecha_desde 
 		IF vm_fecha_desde IS NOT NULL THEN
-			IF vm_fecha_desde > TODAY THEN
+			IF vm_fecha_desde > vg_fecha THEN
 				--CALL fgl_winmessage(vg_producto,'La fecha de inicio no puede ser mayor a la de hoy.','exclamation')
 				CALL fl_mostrar_mensaje('La fecha de inicio no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD vm_fecha_desde
@@ -249,7 +249,7 @@ DEFINE r_g13		RECORD LIKE gent013.*
 
 	AFTER FIELD vm_fecha_hasta 
 		IF vm_fecha_hasta IS NOT NULL THEN
-			IF vm_fecha_hasta > TODAY THEN
+			IF vm_fecha_hasta > vg_fecha THEN
 				--CALL fgl_winmessage(vg_producto,'La fecha de término no puede ser mayor a la de hoy.','exclamation')
 				CALL fl_mostrar_mensaje('La fecha de término no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD vm_fecha_hasta

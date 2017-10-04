@@ -334,10 +334,10 @@ LET rm_r95.r95_localidad     = vg_codloc
 LET rm_r95.r95_estado        = 'A'
 LET rm_r95.r95_motivo        = 'V'
 LET rm_r95.r95_entre_local   = 'N'
-LET rm_r95.r95_fecha_initras = TODAY
-LET rm_r95.r95_fecha_emi     = TODAY
+LET rm_r95.r95_fecha_initras = vg_fecha
+LET rm_r95.r95_fecha_emi     = vg_fecha
 LET rm_r95.r95_usuario       = vg_usuario
-LET rm_r95.r95_fecing        = CURRENT
+LET rm_r95.r95_fecing        = fl_current()
 DISPLAY BY NAME rm_r95.r95_usuario, rm_r95.r95_fecing
 CALL muestra_estado()
 CALL muestra_motivo()
@@ -732,7 +732,7 @@ INPUT BY NAME rm_r97.r97_cod_tran, rm_r97.r97_num_tran, rm_r95.r95_num_sri,
 			LET rm_r95.r95_fecha_initras = fecha_ini
 			DISPLAY BY NAME rm_r95.r95_fecha_initras
 		END IF
-		IF rm_r95.r95_fecha_initras < TODAY THEN
+		IF rm_r95.r95_fecha_initras < vg_fecha THEN
 			CALL fl_mostrar_mensaje('La fecha de iniciación del traslado no puede ser menor a la fecha de hoy.', 'exclamation')
 			NEXT FIELD r95_fecha_initras
 		END IF
@@ -753,7 +753,7 @@ INPUT BY NAME rm_r97.r97_cod_tran, rm_r97.r97_num_tran, rm_r95.r95_num_sri,
 		END IF
 	AFTER FIELD r95_fecha_fintras
 		IF rm_r95.r95_fecha_fintras IS NOT NULL THEN
-			IF rm_r95.r95_fecha_fintras < TODAY THEN
+			IF rm_r95.r95_fecha_fintras < vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha de terminación del traslado no puede ser menor a la fecha de hoy.', 'exclamation')
 				NEXT FIELD r95_fecha_fintras
 			END IF
@@ -774,7 +774,7 @@ INPUT BY NAME rm_r97.r97_cod_tran, rm_r97.r97_num_tran, rm_r95.r95_num_sri,
 			LET rm_r95.r95_fecha_emi = fecha_emi
 			DISPLAY BY NAME rm_r95.r95_fecha_emi
 		END IF
-		IF rm_r95.r95_fecha_emi < TODAY THEN
+		IF rm_r95.r95_fecha_emi < vg_fecha THEN
 			CALL fl_mostrar_mensaje('La fecha de emisión no puede ser menor a la fecha de hoy.', 'exclamation')
 			NEXT FIELD r95_fecha_emi
 		END IF

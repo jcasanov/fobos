@@ -251,7 +251,7 @@ PAGE HEADER
 						  rm_r02.r02_nombre,
 	      COLUMN 69,  "FAX                : ", rm_loc.g02_fax1, " ",
 						   rm_loc.g02_fax2
-	PRINT COLUMN 01,  "FECHA IMPRESION   : ", DATE(TODAY)
+	PRINT COLUMN 01,  "FECHA IMPRESION   : ", DATE(vg_fecha)
 			USING 'dd-mm-yyyy', 1 SPACES, TIME,
 	      COLUMN 69,  "USUARIO            : ", rm_r01.r01_nombres
 	SKIP 1 LINES

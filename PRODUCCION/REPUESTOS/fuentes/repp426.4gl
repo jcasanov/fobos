@@ -363,10 +363,10 @@ PAGE HEADER
 
 	--print '&k2S'	                -- Letra condensada (16 cpi)
 
-	LET mes = fl_retorna_nombre_mes(MONTH(TODAY))
+	LET mes = fl_retorna_nombre_mes(MONTH(vg_fecha))
 	PRINT COLUMN 1, 'No Pedido: ', rm_rep.r16_pedido, 
 		COLUMN 50,fl_justifica_titulo('I',mes,10),
-			1 SPACES, TODAY USING "dd-mm-yyyy", 1 SPACES, TIME,
+			1 SPACES, vg_fecha USING "dd-mm-yyyy", 1 SPACES, TIME,
 		COLUMN 98, 'Página: ', PAGENO USING '&&&' 
 
 	SKIP 1 LINES

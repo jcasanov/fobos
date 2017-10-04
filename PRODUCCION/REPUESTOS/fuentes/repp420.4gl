@@ -62,7 +62,7 @@ CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
 
 LET vm_moneda	  = rg_gen.g00_moneda_base
-LET vm_fecha_fin  = TODAY
+LET vm_fecha_fin  = vg_fecha
 LET vm_tipo_tran  = 'FA'
 LET vm_columna_1  = 1
 LET vm_col1_orden = 'ASC'
@@ -318,7 +318,7 @@ INPUT BY NAME vm_moneda, vm_tipo_tran, vm_fecha_ini, vm_fecha_fin,
 
 	AFTER FIELD vm_fecha_ini
 		IF vm_fecha_ini IS NOT NULL THEN
-			IF vm_fecha_ini > TODAY THEN
+			IF vm_fecha_ini > vg_fecha THEN
 				--CALL fgl_winmessage(vg_producto,'La fecha de inicio no puede ser mayor a la de hoy.','exclamation')
 				CALL fl_mostrar_mensaje('La fecha de inicio no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD vm_fecha_ini
@@ -335,7 +335,7 @@ INPUT BY NAME vm_moneda, vm_tipo_tran, vm_fecha_ini, vm_fecha_fin,
 
 	AFTER FIELD vm_fecha_fin
 		IF vm_fecha_fin IS NOT NULL THEN
-			IF vm_fecha_fin > TODAY THEN
+			IF vm_fecha_fin > vg_fecha THEN
 				--CALL fgl_winmessage(vg_producto,'La fecha de término no puede ser mayor a la de hoy.','exclamation')
 				CALL fl_mostrar_mensaje('La fecha de término no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD vm_fecha_fin
@@ -450,7 +450,7 @@ PAGE HEADER
 	--#END IF
 	
 	SKIP 1 LINES
-	PRINT COLUMN 01, "Fecha de Impresión: ", TODAY USING "dd-mm-yyyy", 1 SPACES, TIME,
+	PRINT COLUMN 01, "Fecha de Impresión: ", vg_fecha USING "dd-mm-yyyy", 1 SPACES, TIME,
 	      COLUMN 72, usuario
 	SKIP 1 LINES
 	--#print '&k2S'	                -- Letra condensada (16 cpi)

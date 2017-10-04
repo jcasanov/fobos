@@ -209,7 +209,7 @@ PAGE HEADER
 	PRINT COLUMN 01, "VENDEDOR        : ", r_r01.r01_nombres,
 	      COLUMN 67, "ALMACEN          : ", rm_cia.g01_razonsocial
 	PRINT COLUMN 67, "RUC              : ", rm_loc.g02_numruc
-	PRINT COLUMN 01, "FECHA IMPRESION : ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 01, "FECHA IMPRESION : ", vg_fecha USING "dd-mm-yyyy",
 		1 SPACES, TIME,
 	      COLUMN 67, "USUARIO          : ", vg_usuario,
 	      COLUMN 125, UPSHIFT(vg_proceso) 

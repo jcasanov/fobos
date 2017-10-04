@@ -264,7 +264,7 @@ PAGE HEADER
 	PRINT COLUMN 28, "** FECHA DE ENVÍO: ", rm_rep.r16_fec_envio
 						USING "dd-mm-yyyy"
 	PRINT COLUMN 28, "** REFERENCIA    : ", rm_rep.r16_referencia
-	PRINT COLUMN 01, "FECHA DE IMPRESION: ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 01, "FECHA DE IMPRESION: ", vg_fecha USING "dd-mm-yyyy",
 		1 SPACES, TIME,
 	      COLUMN 113, usuario
 	SKIP 1 LINES

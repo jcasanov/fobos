@@ -369,7 +369,7 @@ END IF
 CALL control_ingreso(tipo_proc)
 IF tipo_proc = 2 THEN
 	LET archivo = '$HOME/PRECIOS/precios_', vg_usuario CLIPPED, '_',
-			TODAY USING "yyyy-mm-dd", '_', TIME, '.csv'
+			vg_fecha USING "yyyy-mm-dd", '_', TIME, '.csv'
 	LET archivo = 'mv -f precios.csv ', archivo CLIPPED
 	RUN archivo
 ELSE
@@ -727,7 +727,7 @@ IF flag <> 3 THEN
 	CLEAR FORM
 	OPTIONS INPUT WRAP
 	LET rm_r85.r85_compania    = vg_codcia
-	LET rm_r85.r85_fec_camprec = TODAY
+	LET rm_r85.r85_fec_camprec = vg_fecha
 	LET rm_r85.r85_estado      = 'A'
 	CASE flag
 		WHEN 1 LET rm_r85.r85_tipo_carga = 'N'
@@ -737,7 +737,7 @@ IF flag <> 3 THEN
 	LET rm_r85.r85_porc_aum    = 0
 	LET rm_r85.r85_porc_dec    = 0
 	LET rm_r85.r85_usuario     = vg_usuario
-	LET rm_r85.r85_fecing      = CURRENT
+	LET rm_r85.r85_fecing      = fl_current()
 	DISPLAY BY NAME rm_r85.r85_fec_camprec, rm_r85.r85_estado,
 			rm_r85.r85_precio_nue, rm_r85.r85_porc_aum,
 			rm_r85.r85_porc_dec, rm_r85.r85_fecing,
@@ -793,7 +793,7 @@ IF NOT int_flag THEN
 				INTO rm_r85.r85_codigo
 				FROM rept085
 				WHERE r85_compania = rm_r85.r85_compania
-			LET rm_r85.r85_fecing = CURRENT
+			LET rm_r85.r85_fecing = fl_current()
         		INSERT INTO rept085 VALUES (rm_r85.*)
 			LET num_aux = SQLCA.SQLERRD[6] 
 			CALL genera_detalle()
@@ -1339,6 +1339,8 @@ DEFINE expr_par		VARCHAR(100)
 DEFINE expr_uti		VARCHAR(100)
 DEFINE query		CHAR(1200)
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 LET expr_div = NULL
 IF rm_r85.r85_division IS NOT NULL THEN
 	LET expr_div = '   AND r10_linea     = "', rm_r85.r85_division CLIPPED,
@@ -1438,12 +1440,13 @@ IF flag = 2 THEN
 	RETURN 1
 END IF
 CALL usuario_camprec()
+LET fecha_actual = fl_current()
 UPDATE rept010
 	SET r10_precio_ant  = r10_precio_mb,
 	    r10_precio_mb   = (SELECT precio_c
 					FROM tmp_prec1
 					WHERE item = r10_codigo),
-	    r10_fec_camprec = CURRENT
+	    r10_fec_camprec = fecha_actual
 	WHERE r10_compania  = vg_codcia
 	  AND r10_codigo   IN (SELECT item FROM tmp_prec1)
 IF STATUS < 0 THEN
@@ -1744,7 +1747,7 @@ FOREACH q_r87 INTO codigo, precio_nue
 	LET r_r87.r87_precio_act  = precio_nue
 	LET r_r87.r87_precio_ant  = r_r10.r10_precio_mb
 	LET r_r87.r87_usu_camprec = vg_usuario
-	LET r_r87.r87_fec_camprec = CURRENT
+	LET r_r87.r87_fec_camprec = fl_current()
 	INSERT INTO rept087 VALUES (r_r87.*)
 END FOREACH
 

@@ -873,7 +873,7 @@ PAGE HEADER
 	LET act_comp	= 15		# Activar Comprimido.
 	LET desact_comp	= 18		# Cancelar Comprimido.
 	LET modulo      = "MODULO: INVENTARIO"
-	LET fecha	= TODAY USING "dd-mm-yyyy"
+	LET fecha	= vg_fecha USING "dd-mm-yyyy"
 	LET usuario     = "USUARIO: ", vg_usuario CLIPPED
 	CALL fl_justifica_titulo('D', usuario, 19) RETURNING usuario
 	CALL fl_justifica_titulo('C', 'LISTA DE PRECIOS PVP AL ' || fecha, 80)
@@ -936,7 +936,7 @@ PAGE HEADER
 	--#END IF
 	--}
 	SKIP 1 LINES 
-	PRINT COLUMN 001,"FECHA DE IMPRESION: ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 001,"FECHA DE IMPRESION: ", vg_fecha USING "dd-mm-yyyy",
 		1 SPACES, TIME,
 	      COLUMN 114, usuario
 	PRINT "------------------------------------------------------------------------------------------------------------------------------------"

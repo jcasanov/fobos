@@ -143,7 +143,7 @@ CALL borrar_cabecera()
 CALL mostrar_botones_det()
 LET rm_r89.r89_usuario = vg_usuario
 CALL obtener_fecha_ini()
-LET vm_fecha_fin       = TODAY
+LET vm_fecha_fin       = vg_fecha
 LET codloc = vg_codloc
 IF vg_codloc = 3 THEN
 	LET codloc = 5
@@ -423,8 +423,8 @@ FOR i = 1 TO vm_num_det
 		LET r_r89.r89_suma       = r_r89.r89_bueno
 						+ r_r89.r89_incompleto
 						+ r_r89.r89_mal_est
-		LET r_r89.r89_fecha      = TODAY
-		LET r_r89.r89_fecing     = CURRENT
+		LET r_r89.r89_fecha      = vg_fecha
+		LET r_r89.r89_fecing     = fl_current()
 		WHENEVER ERROR CONTINUE
 		INSERT INTO rept089 VALUES (r_r89.*)
 		WHENEVER ERROR STOP
@@ -437,7 +437,7 @@ FOR i = 1 TO vm_num_det
 		--				+ r_r89.r89_incompleto
 		--				+ r_r89.r89_mal_est
 		LET r_r89.r89_usu_modifi = vg_usuario
-		LET r_r89.r89_fec_modifi = CURRENT
+		LET r_r89.r89_fec_modifi = fl_current()
 		WHILE TRUE
 			WHENEVER ERROR CONTINUE
 			UPDATE rept089
@@ -720,7 +720,7 @@ INPUT BY NAME vm_bodega, vm_item, vm_posicionar, rm_r89.r89_usuario,
 			LET vm_fecha_ini = fecha_ini
 			DISPLAY BY NAME vm_fecha_ini
 		END IF
-		IF vm_fecha_ini > TODAY THEN
+		IF vm_fecha_ini > vg_fecha THEN
 			CALL fl_mostrar_mensaje('La Fecha Inicial no puede ser mayor a la de hoy.','exclamation')
 			NEXT FIELD vm_fecha_ini
 		END IF
@@ -729,7 +729,7 @@ INPUT BY NAME vm_bodega, vm_item, vm_posicionar, rm_r89.r89_usuario,
 			LET vm_fecha_fin = fecha_fin
 			DISPLAY BY NAME vm_fecha_fin
 		END IF
-		IF vm_fecha_fin > TODAY THEN
+		IF vm_fecha_fin > vg_fecha THEN
 			CALL fl_mostrar_mensaje('La Fecha Final no puede ser mayor a la de hoy.','exclamation')
 			NEXT FIELD vm_fecha_fin
 		END IF
@@ -935,11 +935,11 @@ DROP TABLE t1
 			NVL((SELECT anio
 				FROM tmp_ite
 				WHERE bodega = r20_bodega
-				  AND item   = r20_item), YEAR(TODAY)) anio,
+				  AND item   = r20_item), YEAR(vg_fecha)) anio,
 			NVL((SELECT mes
 				FROM tmp_ite
 				WHERE bodega = r20_bodega
-				  AND item   = r20_item), MONTH(TODAY)) mes,
+				  AND item   = r20_item), MONTH(vg_fecha)) mes,
 			r10_marca marca, r72_desc_clase clase,
 			0.00 sto_act, cant_pend
 			FROM temp_pend, rept010, rept072
@@ -1337,7 +1337,7 @@ END FUNCTION
  
 FUNCTION obtener_fecha_ini()
 
-SELECT NVL(DATE(MIN(r11_fec_corte)), TODAY)
+SELECT NVL(DATE(MIN(r11_fec_corte)), vg_fecha)
 	INTO vm_fecha_ini
 	FROM resp_exis
 	WHERE r11_compania = vg_codcia
@@ -1457,7 +1457,7 @@ PAGE HEADER
 	PRINT COLUMN 022, "** FECHA FINAL   : ", vm_fecha_fin
 							USING "dd-mm-yyyy"
 	SKIP 1 LINES
-	PRINT COLUMN 001, "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 001, "FECHA IMPRESION: ", vg_fecha USING "dd-mm-yyyy",
  		1 SPACES, TIME,
 	      COLUMN 062, usuario
 	PRINT "--------------------------------------------------------------------------------"

@@ -117,8 +117,8 @@ FUNCTION control_consulta()
 DEFINE r_g13		RECORD LIKE gent013.*
 
 INITIALIZE rm_par.* TO NULL
-LET rm_par.fecha_ini  = TODAY
-LET rm_par.fecha_fin  = TODAY
+LET rm_par.fecha_ini  = vg_fecha
+LET rm_par.fecha_fin  = vg_fecha
 LET rm_par.r19_moneda = rg_gen.g00_moneda_base
 CALL fl_lee_moneda(rm_par.r19_moneda) RETURNING r_g13.*
 IF r_g13.g13_moneda IS NULL THEN
@@ -454,7 +454,7 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 		DISPLAY BY NAME rm_par.n_cod_tran
 	AFTER FIELD fecha_ini 
 		IF rm_par.fecha_ini IS NOT NULL THEN
-			IF rm_par.fecha_ini > TODAY THEN
+			IF rm_par.fecha_ini > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha de inicio no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD fecha_ini
 			END IF
@@ -464,7 +464,7 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 		END IF
 	AFTER FIELD fecha_fin 
 		IF rm_par.fecha_fin IS NOT NULL THEN
-			IF rm_par.fecha_fin > TODAY THEN
+			IF rm_par.fecha_fin > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha de término no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD fecha_fin
 			END IF
@@ -887,7 +887,7 @@ PAGE HEADER
 	PRINT COLUMN 022, "** FECHA FINAL   : ", rm_par.fecha_fin
 							USING "dd-mm-yyyy"
 	SKIP 1 LINES
-	PRINT COLUMN 001, "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 001, "FECHA IMPRESION: ", vg_fecha USING "dd-mm-yyyy",
  		1 SPACES, TIME,
 	      COLUMN 062, usuario
 	PRINT "--------------------------------------------------------------------------------"

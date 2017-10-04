@@ -295,7 +295,7 @@ PAGE HEADER
 	      COLUMN 67, "ALMACEN          : ", rm_cia.g01_razonsocial
 	--PRINT COLUMN 01, "LOCALIDAD       : ", rm_loc.g02_nombre,
 	PRINT COLUMN 67, "RUC              : ", rm_loc.g02_numruc
-	PRINT COLUMN 01, "FECHA IMPRESION : ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 01, "FECHA IMPRESION : ", vg_fecha USING "dd-mm-yyyy",
 		1 SPACES, TIME,
 	      COLUMN 67, "USUARIO          : ", vg_usuario,
 	      COLUMN 125, UPSHIFT(vg_proceso) 

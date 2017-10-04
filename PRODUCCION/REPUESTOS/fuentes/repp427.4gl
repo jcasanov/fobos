@@ -273,7 +273,7 @@ PAGE HEADER
 	--#print '&k2S'	        -- Letra (16 cpi)
 
 	PRINT COLUMN 1, 'Fecha de Impresión: ',
-	      COLUMN 30, TODAY USING 'dd-mm-yyyy', 1 SPACES, TIME,
+	      COLUMN 30, vg_fecha USING 'dd-mm-yyyy', 1 SPACES, TIME,
 	      COLUMN 75,'Página: ', 
 	      COLUMN 88, fl_justifica_titulo('D',PAGENO,10)	USING '&&&'
 	PRINT COLUMN 1, 'Bodega: ', 

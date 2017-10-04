@@ -116,7 +116,7 @@ END FUNCTION
 FUNCTION control_proceso()
 
 LET rm_par.estado    = 'A'
-LET rm_par.fecha_fin = TODAY
+LET rm_par.fecha_fin = vg_fecha
 LET rm_par.fecha_ini = rm_par.fecha_fin - 30 UNITS DAY
 WHILE TRUE
 	CLEAR FORM
@@ -161,7 +161,7 @@ INPUT BY NAME rm_par.*
 			LET rm_par.fecha_ini = fec_ini
 			DISPLAY BY NAME rm_par.fecha_ini
 		END IF
-		IF rm_par.fecha_ini > TODAY THEN
+		IF rm_par.fecha_ini > vg_fecha THEN
 			CALL fl_mostrar_mensaje('La Fecha Inicial no puede ser mayor que la Fecha de Hoy.','exclamation')
 			NEXT FIELD fecha_ini
 		END IF
@@ -170,7 +170,7 @@ INPUT BY NAME rm_par.*
 			LET rm_par.fecha_fin = fec_fin
 			DISPLAY BY NAME rm_par.fecha_fin
 		END IF
-		IF rm_par.fecha_fin > TODAY THEN
+		IF rm_par.fecha_fin > vg_fecha THEN
 			CALL fl_mostrar_mensaje('La Fecha Final no puede ser mayor que la Fecha de Hoy.','exclamation')
 			NEXT FIELD fecha_fin
 		END IF
@@ -333,6 +333,8 @@ DEFINE mensaje		VARCHAR(100)
 DEFINE resp		CHAR(6)
 DEFINE query		CHAR(600)
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 INITIALIZE r_r85.*, r_r85_ant.* TO NULL
 SELECT * INTO r_r85.*
 	FROM rept085
@@ -429,9 +431,10 @@ FOREACH q_rev INTO r_r86.*
 	CLOSE q_r10
 	FREE q_r10
 END FOREACH
+LET fecha_actual = fl_current()
 WHENEVER ERROR CONTINUE
 UPDATE rept085 SET r85_estado      = 'R',
-		   r85_fec_reversa = CURRENT
+		   r85_fec_reversa = fecha_actual
 	WHERE r85_compania = r_r85.r85_compania
 	  AND r85_codigo   = r_r85.r85_codigo
 IF STATUS < 0 THEN
@@ -539,7 +542,7 @@ SELECT NVL(MAX(r87_secuencia), 0) + 1 INTO r_r87.r87_secuencia
 LET r_r87.r87_precio_act  = precio_nue
 LET r_r87.r87_precio_ant  = precio_ant
 LET r_r87.r87_usu_camprec = vg_usuario
-LET r_r87.r87_fec_camprec = CURRENT
+LET r_r87.r87_fec_camprec = fl_current()
 {--
 IF fec_camp IS NOT NULL THEN
 	LET r_r87.r87_fec_camprec = fec_camp

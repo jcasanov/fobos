@@ -819,7 +819,7 @@ LET rm_item.r10_usu_cosrepo = NULL
 LET rm_item.r10_fec_cosrepo = NULL
 --IF rm_item.r10_costrepo_mb IS NOT NULL THEN
 	LET rm_item.r10_usu_cosrepo = vg_usuario
-	LET rm_item.r10_fec_cosrepo = CURRENT
+	LET rm_item.r10_fec_cosrepo = fl_current()
 --END IF
 DISPLAY BY NAME rm_item.r10_usu_cosrepo, rm_item.r10_fec_cosrepo
 
@@ -870,7 +870,7 @@ DISPLAY FORM f_repf246_8
 DISPLAY BY NAME rm_item.r10_codigo, rm_item.r10_nombre
 INITIALIZE r_r02.*, vm_stock_inicial TO NULL
 LET bodega    = NULL
-LET fecha_fin = TODAY
+LET fecha_fin = vg_fecha
 LET fecha_ini = MDY(MONTH(fecha_fin), 01, YEAR(fecha_fin))
 WHILE TRUE
 	LET int_flag = 0
@@ -919,7 +919,7 @@ WHILE TRUE
 			END IF
 		AFTER FIELD fecha_ini
 			IF fecha_ini IS NOT NULL THEN
-				IF fecha_ini > TODAY THEN
+				IF fecha_ini > vg_fecha THEN
 					CALL fl_mostrar_mensaje('La Fecha Inicial no puede ser mayor que la fecha de hoy.', 'exclamation')
 					NEXT FIELD fecha_ini
 				END IF
@@ -938,7 +938,7 @@ WHILE TRUE
 			END IF
 		AFTER FIELD fecha_fin
 			IF fecha_fin IS NOT NULL THEN
-				IF fecha_fin > TODAY THEN
+				IF fecha_fin > vg_fecha THEN
 					CALL fl_mostrar_mensaje('La Fecha Final no puede ser mayor que la fecha de hoy.', 'exclamation')
 					NEXT FIELD fecha_fin
 				END IF

@@ -309,7 +309,7 @@ IF NOT validar_caja() THEN
 	LET int_flag = 1
 	EXIT PROGRAM
 END IF
-IF DATE(r_r19.r19_fecing) + rm_r00.r00_dias_dev < TODAY THEN
+IF DATE(r_r19.r19_fecing) + rm_r00.r00_dias_dev < vg_fecha THEN
 	LET mensaje = 'La Factura ', rm_r88.r88_num_fact USING "<<<<<<&",
 			' no puede ser Refacturada porque supero el plazo',
 			' para su devolución.'
@@ -416,7 +416,7 @@ IF r_r21.r21_compania IS NULL THEN
 	EXIT PROGRAM
 END IF
 LET rm_r88.r88_numprof = r_r21.r21_numprof
-LET rm_r88.r88_fecing  = CURRENT
+LET rm_r88.r88_fecing  = fl_current()
 BEGIN WORK
 	IF r_r88.r88_cod_fact IS NULL THEN
 		INSERT INTO rept088 VALUES (rm_r88.*)
@@ -457,11 +457,11 @@ LET rm_r88.r88_compania  = vg_codcia
 LET rm_r88.r88_localidad = vg_codloc
 LET rm_r88.r88_cod_fact  = "FA"
 LET rm_r88.r88_usuario   = vg_usuario
-LET rm_r88.r88_fecing    = CURRENT
+LET rm_r88.r88_fecing    = fl_current()
 DISPLAY BY NAME rm_r88.r88_cod_fact, rm_r88.r88_usuario, rm_r88.r88_fecing
 CALL lee_datos()
 IF NOT int_flag THEN
-	LET rm_r88.r88_fecing = CURRENT
+	LET rm_r88.r88_fecing = fl_current()
 	BEGIN WORK
 		INSERT INTO rept088 VALUES (rm_r88.*)
 		LET num_aux = SQLCA.SQLERRD[6]
@@ -725,7 +725,7 @@ INPUT BY NAME rm_r88.r88_num_fact, rm_r88.r88_codcli_nue,
 				LET int_flag = 1
 				RETURN
 			END IF
-			IF DATE(r_r19.r19_fecing) + rm_r00.r00_dias_dev < TODAY
+			IF DATE(r_r19.r19_fecing) + rm_r00.r00_dias_dev < vg_fecha
 			THEN
 				CALL fl_mostrar_mensaje('La Factura no puede ser Refacturada porque supero el plazo para su devolución.', 'exclamation')
 				NEXT FIELD r88_num_fact
@@ -1354,13 +1354,13 @@ FOREACH q_j90 INTO r_j90.*
 		WHERE j04_compania    = vg_codcia
 		  AND j04_localidad   = vg_codloc
 		  AND j04_codigo_caja = r_j90.j90_codigo_caja
-		  AND j04_fecha_aper  = TODAY
+		  AND j04_fecha_aper  = vg_fecha
 		  AND j04_secuencia   = (SELECT MAX(j04_secuencia) 
 	  			FROM cajt004
   				WHERE j04_compania    = vg_codcia
   				  AND j04_localidad   = vg_codloc
   				  AND j04_codigo_caja = r_j90.j90_codigo_caja
-  				  AND j04_fecha_aper  = TODAY)
+  				  AND j04_fecha_aper  = vg_fecha)
 	IF STATUS <> NOTFOUND THEN 
 		LET salir = 1
 		EXIT FOREACH

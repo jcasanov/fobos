@@ -618,7 +618,7 @@ BEGIN WORK
 			   r89_mal_est    = rm_inventario[i].r89_mal_est,
 			   r89_suma       = rm_inventario[i].r89_suma,
 			   r89_usu_modifi = vg_usuario,
-			   r89_fec_modifi = CURRENT
+			   r89_fec_modifi = fecha_actual
 		WHERE CURRENT OF q_modinv
 COMMIT WORK
 CALL fl_mensaje_registro_modificado()

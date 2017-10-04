@@ -467,7 +467,7 @@ CALL control_DISPLAY_botones()
 INITIALIZE rm_r19.*, rm_r20.* TO NULL
 
 -- INITIAL VALUES FOR rm_r19 FIELDS
-LET rm_r19.r19_fecing     = CURRENT
+LET rm_r19.r19_fecing     = fl_current()
 LET rm_r19.r19_usuario    = vg_usuario
 LET rm_r19.r19_compania   = vg_codcia
 LET rm_r19.r19_localidad  = vg_codloc
@@ -502,8 +502,8 @@ IF int_flag THEN
 END IF
 
 	-- ACTUALIZO LA FECHA DE INGRESO --
-LET rm_r19.r19_fecing    = CURRENT
-LET rm_r20.r20_fecing    = CURRENT
+LET rm_r19.r19_fecing    = fl_current()
+LET rm_r20.r20_fecing    = fl_current()
 DISPLAY BY NAME rm_r19.r19_fecing
 	-----------------------------------
 
@@ -595,7 +595,7 @@ IF NOT vm_act_sto_bd THEN
     	LET r_r94.r94_num_tran 	 = rm_r19.r19_num_tran
     	LET r_r94.r94_fecing 	 = rm_r19.r19_fecing
     	LET r_r94.r94_locali_fin = vg_codloc
-    	LET r_r94.r94_fecing_fin = CURRENT
+    	LET r_r94.r94_fecing_fin = fl_current()
 	LET r_r94.r94_traspasada = 'N'
 	INSERT INTO rept094 VALUES (r_r94.*)
 END IF
@@ -1967,12 +1967,12 @@ IF (localidad_bodega(bodega_ori) = 1 AND localidad_bodega(bodega_dest) = 3) OR
    (localidad_bodega(bodega_ori) = 3 AND localidad_bodega(bodega_dest) = 1) OR
    (localidad_bodega(bodega_ori) = 6 AND localidad_bodega(bodega_dest) = 7) OR
    (localidad_bodega(bodega_ori) = 7 AND localidad_bodega(bodega_dest) = 6) THEN
-	IF (TODAY >= MDY(12, 24, YEAR(TODAY))) AND 
-	   (TODAY <= MDY(12, 31, YEAR(TODAY))) THEN
+	IF (vg_fecha >= MDY(12, 24, YEAR(vg_fecha))) AND 
+	   (vg_fecha <= MDY(12, 31, YEAR(vg_fecha))) THEN
 		LET mensaje = 'No pueden hacerse Transferencias de QUITO-GYE ',
 				'o de GYE-QUITO entre el 28-12-',
-				YEAR(TODAY) USING "&&&&", ' y el 31-12-',
-				YEAR(TODAY) USING "&&&&", '.'
+				YEAR(vg_fecha) USING "&&&&", ' y el 31-12-',
+				YEAR(vg_fecha) USING "&&&&", '.'
 		CALL fl_mostrar_mensaje(mensaje, 'exclamation')
 		LET resul = 1
 	END IF

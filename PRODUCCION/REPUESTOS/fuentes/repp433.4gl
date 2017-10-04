@@ -643,7 +643,7 @@ PAGE HEADER
 	LET act_12cpi	= 77		# Comprimido 12 CPI.
 	LET act_neg	= 71		# Activar negrita.
 	LET des_neg	= 72		# Desactivar negrita.
-	LET fechaimpre  = CURRENT
+	LET fechaimpre  = fl_current()
 	CALL fl_lee_pedido_rep(rm_r81.r81_compania, rm_r81.r81_localidad,
 				rm_r81.r81_pedido)
 		RETURNING r_r16.*

@@ -286,6 +286,8 @@ FUNCTION grabar_detalle()
 DEFINE i		SMALLINT
 DEFINE r_r93		RECORD LIKE rept093.*
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 BEGIN WORK
 FOR i = 1 TO vm_num_det
 	INITIALIZE r_r93.* TO NULL
@@ -312,12 +314,13 @@ FOR i = 1 TO vm_num_det
 		  AND r93_item     = rm_pedido[i].r93_item
 	LET rm_pedido[i].r93_cantpend = rm_pedido[i].r93_cantpend +
 					rm_pedido[i].r93_cantpedir
+    LET fecha_actual = fl_current()
 	INSERT INTO rept093
 		VALUES(vg_codcia, rm_pedido[i].r93_item,
 			rm_pedido[i].r93_cod_pedido, rm_pedido[i].r93_stock_max,
 			rm_pedido[i].r93_stock_min, rm_pedido[i].r93_stock_act,
 			rm_pedido[i].r93_cantpend, rm_pedido[i].r93_cantpedir,
-			vg_usuario, CURRENT)
+			vg_usuario, fecha_actual)
 END FOR
 COMMIT WORK
 CALL fl_mostrar_mensaje('Proceso Terminado OK.', 'info')

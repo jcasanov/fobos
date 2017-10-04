@@ -99,7 +99,7 @@ CALL fl_lee_configuracion_facturacion() RETURNING r.*
 LET rm_par.moneda = r.g00_moneda_base
 CALL fl_lee_moneda(rm_par.moneda) RETURNING rm_mon.*
 LET rm_par.tit_mon = rm_mon.g13_nombre
-LET rm_par.ano     = YEAR(TODAY)
+LET rm_par.ano     = YEAR(vg_fecha)
 LET vm_campo_orden= 6
 LET vm_tipo_orden = 'DESC'
 LET rm_par.mes1   = 'S'
@@ -210,7 +210,7 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 		END IF
 		LET int_flag = 0
 	AFTER FIELD ano
-		IF rm_par.ano > YEAR(TODAY) THEN
+		IF rm_par.ano > YEAR(vg_fecha) THEN
 			CALL fl_mostrar_mensaje('Año incorrecto.','exclamation')
 			NEXT FIELD ano
 		END IF

@@ -85,7 +85,7 @@ DISPLAY FORM f_repf311
 INITIALIZE rm_r11.*, rm_r10.*, vm_fecha, vm_linea, vm_tipo, vm_rotacion,
 	   vm_bodega TO NULL
 
-LET vm_fecha = TODAY
+LET vm_fecha = vg_fecha
 
 --#DISPLAY 'Item'        TO tit_col1
 --#DISPLAY 'Descripción' TO tit_col2

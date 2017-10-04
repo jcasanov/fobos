@@ -283,7 +283,7 @@ INITIALIZE linea TO NULL
 INITIALIZE rm_r20.* TO NULL
 
 -- INITIAL VALUES FOR rm_r19 FIELDS
-LET rm_r19.r19_fecing     = CURRENT
+LET rm_r19.r19_fecing     = fl_current()
 LET rm_r19.r19_usuario    = vg_usuario
 LET rm_r19.r19_compania   = vg_codcia
 LET rm_r19.r19_localidad  = vg_codloc
@@ -344,8 +344,8 @@ IF INT_FLAG THEN
 	RETURN
 END IF
 	-- ACTUALIZO LOS VALORES DEFAULTS QUE INGRESE AL INICIO DE LEE DATOS --
-LET rm_r19.r19_fecing = CURRENT
-LET rm_r20.r20_fecing = CURRENT
+LET rm_r19.r19_fecing = fl_current()
+LET rm_r20.r20_fecing = fl_current()
 LET rm_r19.r19_tot_costo = vm_total
 LET rm_r19.r19_tot_neto = vm_total2
 DISPLAY BY NAME rm_r19.r19_fecing

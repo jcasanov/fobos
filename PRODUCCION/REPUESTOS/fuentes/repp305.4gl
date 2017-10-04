@@ -91,7 +91,7 @@ CALL fl_lee_moneda(rm_par.moneda) RETURNING rm_mon.*
 LET rm_par.tit_mon = rm_mon.g13_nombre
 LET vm_campo_orden= 5
 LET vm_tipo_orden = 'DESC'
-LET rm_par.ano    = YEAR(TODAY)
+LET rm_par.ano    = YEAR(vg_fecha)
 LET vm_cant_val   = 'V'
 LET rm_par.mes1   = 'S'
 LET rm_par.mes2   = 'S'
@@ -181,7 +181,7 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 			END IF
 		END IF
 	AFTER FIELD ano
-		IF rm_par.ano > YEAR(TODAY) THEN
+		IF rm_par.ano > YEAR(vg_fecha) THEN
 			--CALL fgl_winmessage(vg_producto,'Año incorrecto.','exclamation')
 			CALL fl_mostrar_mensaje('Año incorrecto.','exclamation')
 			NEXT FIELD ano

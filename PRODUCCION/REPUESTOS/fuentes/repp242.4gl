@@ -232,7 +232,7 @@ INITIALIZE rm_r98.* TO NULL
 LET rm_r98.r98_compania  = vg_codcia
 LET rm_r98.r98_localidad = vg_codloc
 LET rm_r98.r98_usuario   = vg_usuario
-LET rm_r98.r98_fecing    = CURRENT
+LET rm_r98.r98_fecing    = fl_current()
 DISPLAY BY NAME rm_r98.r98_usuario, rm_r98.r98_fecing
 CALL lee_parametros()
 IF int_flag THEN
@@ -500,14 +500,14 @@ INPUT BY NAME rm_r98.r98_vend_ant, rm_r98.r98_vend_nue, rm_r98.r98_fecha_ini,
 		END IF
 	AFTER FIELD r98_fecha_ini
 		IF rm_r98.r98_fecha_ini IS NOT NULL THEN
-			IF rm_r98.r98_fecha_ini > TODAY THEN
+			IF rm_r98.r98_fecha_ini > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha inicial no puede ser mayor a la fecha de hoy.', 'exclamation')
 				NEXT FIELD r98_fecha_ini
 			END IF
 		END IF
 	AFTER FIELD r98_fecha_fin
 		IF rm_r98.r98_fecha_fin IS NOT NULL THEN
-			IF rm_r98.r98_fecha_fin > TODAY THEN
+			IF rm_r98.r98_fecha_fin > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha final no puede ser mayor a la fecha de hoy.', 'exclamation')
 				NEXT FIELD r98_fecha_fin
 			END IF
@@ -1192,7 +1192,7 @@ WHILE TRUE
 		  AND r98_vend_ant  = rm_r98.r98_vend_ant
 		  AND r98_vend_nue  = rm_r98.r98_vend_nue
 	LET rm_r98.r98_estado = "P"
-	LET rm_r98.r98_fecing = CURRENT
+	LET rm_r98.r98_fecing = fl_current()
 	WHENEVER ERROR CONTINUE
 	INSERT INTO rept098 VALUES (rm_r98.*)
 	IF STATUS = 0 THEN

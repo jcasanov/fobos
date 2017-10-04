@@ -636,6 +636,7 @@ DEFINE r_r10		RECORD LIKE rept010.*
 DEFINE i, j, l		SMALLINT
 DEFINE mensaje		VARCHAR(100)
 DEFINE resp		CHAR(6)
+DEFINE fecha_actual DATETIME YEAR TO SECOND
 
 LET j = 0
 LET l = 0
@@ -673,11 +674,12 @@ FOR i = 1 TO vm_num_rows
 	END WHILE
 	WHENEVER ERROR STOP
 	IF rm_act[i].act_prec = 'S' THEN
+		LET fecha_actual = fl_current()
 		CALL usuario_camprec(i)
 		UPDATE rept010
 			SET r10_precio_ant  = r10_precio_mb,
 			    r10_precio_mb   = rm_item[i].precio,
-			    r10_fec_camprec = CURRENT	-- NO TENIA EL PROG.
+			    r10_fec_camprec = fecha_actual	-- NO TENIA EL PROG.
 			WHERE CURRENT OF q_r10
 		LET j = j + 1
 	END IF
@@ -764,7 +766,7 @@ SELECT NVL(MAX(r87_secuencia), 0) + 1 INTO r_r87.r87_secuencia
 LET r_r87.r87_precio_act  = rm_item[i].precio
 LET r_r87.r87_precio_ant  = r_r10.r10_precio_mb
 LET r_r87.r87_usu_camprec = vg_usuario
-LET r_r87.r87_fec_camprec = CURRENT
+LET r_r87.r87_fec_camprec = fl_current()
 INSERT INTO rept087 VALUES (r_r87.*)
 
 END FUNCTION

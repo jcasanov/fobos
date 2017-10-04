@@ -373,7 +373,7 @@ PAGE HEADER
 						rm_r02_dest.r02_nombre
 	PRINT COLUMN 01,  "DIRECCION       : ", r_loc_ori.g02_direccion,
 	      COLUMN 67,  "DIRECCION      : ", r_loc_dest.g02_direccion
-	PRINT COLUMN 01,  "FECHA IMPRESION : ", DATE(TODAY) USING 'dd-mm-yyyy',
+	PRINT COLUMN 01,  "FECHA IMPRESION : ", DATE(vg_fecha) USING 'dd-mm-yyyy',
 		1 SPACES, TIME,
    	      COLUMN 67,  "USUARIO        : ", usuario,
 	      COLUMN 125, UPSHIFT(vg_proceso)

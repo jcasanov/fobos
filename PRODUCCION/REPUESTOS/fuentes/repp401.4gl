@@ -445,7 +445,7 @@ PAGE HEADER
 			ASCII escape, ASCII des_neg,
 			ASCII escape, ASCII act_comp
 	SKIP 1 LINES
-	PRINT COLUMN 01,  "FECHA IMPRESION : ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 01,  "FECHA IMPRESION : ", vg_fecha USING "dd-mm-yyyy",
 		1 SPACES, TIME,
 	      COLUMN 123, usuario
 	SKIP 1 LINES

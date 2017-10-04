@@ -236,7 +236,7 @@ PAGE HEADER
 	--#IF rm_par.filtro <> 'XX' THEN
 		PRINT COLUMN 20, "** Filtro         : ", rm_par.filtro
 	--#END IF
-	PRINT COLUMN 01, "Fecha  : ", TODAY USING "dd-mm-yyyy", 1 SPACES, TIME,
+	PRINT COLUMN 01, "Fecha  : ", vg_fecha USING "dd-mm-yyyy", 1 SPACES, TIME,
 	      COLUMN 62, usuario
 	SKIP 1 LINES
 	--#print '&k4S'	                -- Letra condensada (12 cpi)

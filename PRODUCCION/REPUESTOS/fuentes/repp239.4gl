@@ -235,7 +235,7 @@ IF NOT int_flag THEN
 		  AND r89_usuario   = rm_r89.r89_usuario
 		  AND r89_anio      = rm_r89.r89_anio
 		  AND r89_mes       = rm_r89.r89_mes
-	LET rm_r89.r89_fecing = CURRENT
+	LET rm_r89.r89_fecing = fl_current()
 	IF rm_r89.r89_stock_act IS NULL THEN
 		LET rm_r89.r89_stock_act = 0
 	END IF
@@ -267,7 +267,7 @@ IF int_flag THEN
 	RETURN
 END IF
 LET rm_r89.r89_usu_modifi = vg_usuario
-LET rm_r89.r89_fec_modifi = CURRENT
+LET rm_r89.r89_fec_modifi = fl_current()
 UPDATE rept089 SET * = rm_r89.* WHERE CURRENT OF q_up
 COMMIT WORK
 CALL mostrar_registro(vm_r_rows[vm_row_current])
@@ -450,19 +450,19 @@ END IF
 IF vg_usuario = 'DIANMEND' THEN
 	LET rm_r89.r89_bodega = 'E2'
 END IF
-SELECT NVL(MAX(YEAR(r11_fec_corte)), YEAR(TODAY))
+SELECT NVL(MAX(YEAR(r11_fec_corte)), YEAR(vg_fecha))
 	INTO rm_r89.r89_anio
 	FROM resp_exis
 	WHERE r11_compania = vg_codcia
-LET rm_r89.r89_mes        = MONTH(TODAY)
+LET rm_r89.r89_mes        = MONTH(vg_fecha)
 LET rm_r89.r89_stock_act  = 0
 LET rm_r89.r89_bueno      = 0
 LET rm_r89.r89_incompleto = 0
 LET rm_r89.r89_mal_est    = 0
 LET rm_r89.r89_suma       = 0
-LET rm_r89.r89_fecha      = TODAY
+LET rm_r89.r89_fecha      = vg_fecha
 LET rm_r89.r89_usuario    = vg_usuario
-LET rm_r89.r89_fecing     = CURRENT
+LET rm_r89.r89_fecing     = fl_current()
 CALL calcular_diferencia()
 
 END FUNCTION

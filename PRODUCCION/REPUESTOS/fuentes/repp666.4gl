@@ -107,7 +107,7 @@ LET vm_max_rows = 1000
 --#DISPLAY '#'          TO tit_col8
 --#DISPLAY 'Destino'    TO tit_col9
 LET vm_estado    = 'P'
-LET vm_fecha_fin = TODAY
+LET vm_fecha_fin = vg_fecha
 LET vm_fecha_ini = vm_fecha_fin - 30 UNITS DAY
 INITIALIZE rm_g02.* TO NULL
 CALL obtener_localidad()
@@ -247,7 +247,7 @@ INPUT BY NAME vm_estado, vm_fecha_ini, vm_fecha_fin, rm_g02.g02_localidad
 			LET vm_fecha_ini = fecha_ini
 			DISPLAY BY NAME vm_fecha_ini
 		END IF
-		IF vm_fecha_ini > TODAY THEN
+		IF vm_fecha_ini > vg_fecha THEN
 			CALL fl_mostrar_mensaje('La Fecha Inicial no puede ser mayor que la Fecha de Hoy.', 'exclamation')
 			NEXT FIELD vm_fecha_ini
 		END IF
@@ -256,7 +256,7 @@ INPUT BY NAME vm_estado, vm_fecha_ini, vm_fecha_fin, rm_g02.g02_localidad
 			LET vm_fecha_fin = fecha_fin
 			DISPLAY BY NAME vm_fecha_fin
 		END IF
-		IF vm_fecha_fin > TODAY THEN
+		IF vm_fecha_fin > vg_fecha THEN
 			CALL fl_mostrar_mensaje('La Fecha Final no puede ser mayor que la Fecha de Hoy.', 'exclamation')
 			NEXT FIELD vm_fecha_fin
 		END IF
@@ -816,7 +816,7 @@ LET r_r19.r19_vendedor = r_r01.r01_codigo
 LET r_r19.r19_usuario  = vg_usuario
 LET num_tran_ori       = r_r19.r19_num_tran
 LET fecing_ori         = r_r19.r19_fecing
-LET r_r19.r19_fecing   = CURRENT
+LET r_r19.r19_fecing   = fl_current()
 LET r_r19.r19_localidad= vg_codloc
 BEGIN WORK
 IF NOT flag THEN
@@ -844,7 +844,7 @@ IF NOT flag THEN
 	LET r_r19.r19_referencia = 'TRANS. TRANSFER. REVERSADA (',
 					cod_tran, '-', num_tran USING "<<<<<<&",
 					')'
-	LET r_r19.r19_fecing     = CURRENT
+	LET r_r19.r19_fecing     = fl_current()
 END IF
 INSERT INTO rept019 VALUES (r_r19.*)
 IF flag THEN
@@ -871,7 +871,7 @@ DECLARE qu_dtr CURSOR FOR cons_dtr
 FOREACH qu_dtr INTO r_r20.*
 	IF NOT flag THEN
 		LET r_r20.r20_bodega = r_r19.r19_bodega_ori
-		LET r_r20.r20_fecing = CURRENT
+		LET r_r20.r20_fecing = fl_current()
 	END IF
 	LET r_r20.r20_num_tran = r_r19.r19_num_tran
 	CALL fl_lee_stock_rep(vg_codcia, bod_aux, r_r20.r20_item)
@@ -1831,7 +1831,7 @@ LET r_r19.r19_tot_dscto  	= 0.0
 LET r_r19.r19_tot_neto		= r_r19.r19_tot_costo
 LET r_r19.r19_flete      	= 0.0
 LET r_r19.r19_usuario      	= vg_usuario
-LET r_r19.r19_fecing      	= CURRENT
+LET r_r19.r19_fecing      	= fl_current()
 INSERT INTO rept019 VALUES (r_r19.*)
 INITIALIZE r_r20.* TO NULL
 LET r_r20.r20_compania		= vg_codcia
@@ -1943,7 +1943,7 @@ FOREACH q_fact_i INTO r_fact_i.*
 		LET r_r11.r11_stock_act = 0
 	END IF
 	LET r_r20.r20_stock_bd   = r_r11.r11_stock_act 
-	LET r_r20.r20_fecing	 = CURRENT
+	LET r_r20.r20_fecing	 = fl_current()
 	INSERT INTO rept020 VALUES(r_r20.*)
 	UPDATE rept011
 		SET r11_stock_act = r11_stock_act - cant_d,
