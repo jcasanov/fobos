@@ -594,14 +594,6 @@ INPUT BY NAME rm_j10.j10_tipo_fuente, rm_j10.j10_num_fuente, rm_r38.r38_num_sri
 				CALL fl_lee_cliente_localidad(vg_codcia,
 						vg_codloc, r_j10.j10_codcli)
 					RETURNING r_z02.*
-{JCM
-				IF r_z02.z02_email IS NULL THEN	
-					CALL fl_mostrar_mensaje('Cliente no tiene registrado el correo electrónico para esta localidad.','exclamation')
-					NEXT FIELD j10_num_fuente
-				ELSE
-					CALL fl_mostrar_mensaje('Cliente tiene registrado este correo electrónico para esta localidad: ' || r_z02.z02_email CLIPPED || '.', 'info')
-				END IF
-}
 				CALL fl_lee_preventa_rep(vg_codcia, vg_codloc,
 					r_j10.j10_num_fuente) RETURNING r_r23.*
 				IF r_r23.r23_numprev IS NULL THEN
@@ -674,14 +666,6 @@ INPUT BY NAME rm_j10.j10_tipo_fuente, rm_j10.j10_num_fuente, rm_r38.r38_num_sri
 				CALL fl_lee_cliente_localidad(vg_codcia,
 						vg_codloc, r_j10.j10_codcli)
 					RETURNING r_z02.*
-{JCM
-				IF r_z02.z02_email IS NULL THEN	
-					CALL fl_mostrar_mensaje('Cliente no tiene registrado el correo electrónico para esta localidad.','exclamation')
-					NEXT FIELD j10_num_fuente
-				ELSE
-					CALL fl_mostrar_mensaje('Cliente tiene registrado este correo electrónico para esta localidad: ' || r_z02.z02_email CLIPPED || '.', 'info')
-				END IF
-}
 				CALL fl_lee_orden_trabajo(vg_codcia, vg_codloc,
 					r_j10.j10_num_fuente) RETURNING r_t23.*
 				IF r_t23.t23_orden IS NULL THEN
@@ -782,7 +766,6 @@ INPUT BY NAME rm_j10.j10_tipo_fuente, rm_j10.j10_num_fuente, rm_r38.r38_num_sri
 				CALL validar_num_sri(1) RETURNING resul
 				CASE resul
 					WHEN -1
-						--ROLLBACK WORK
 						EXIT PROGRAM
 					WHEN 0
 						NEXT FIELD r38_num_sri
@@ -797,13 +780,6 @@ INPUT BY NAME rm_j10.j10_tipo_fuente, rm_j10.j10_num_fuente, rm_r38.r38_num_sri
 		END IF
 		IF NOT tiene_configuracion_contable_impto() THEN
 			CONTINUE INPUT
-		END IF
-		IF rm_j10.j10_tipo_fuente = 'PR' THEN
-			{--
-			IF NOT valido_preventas_con_ot() THEN
-				CONTINUE INPUT
-			END IF
-			--}
 		END IF
 END INPUT
 
@@ -1039,16 +1015,6 @@ DEFINE cod_tran		LIKE rept019.r19_cod_tran
 DEFINE cont		INTEGER
 DEFINE flag		SMALLINT
 
--- OJO PUESTO PARA LA NOTA DE VENTA
-{--
-IF vg_codloc = 3 THEN
-	CALL fl_lee_cliente_general(rm_j10.j10_codcli) RETURNING r_z01.*
-	IF r_z01.z01_tipo_doc_id <> 'R' THEN
-		LET vm_tipo_doc = 'NV'
-	END IF
-END IF
---}
---
 CALL retorna_cont_cred() RETURNING cont_cred
 CALL fl_validacion_num_sri(vg_codcia, vg_codloc, vm_tipo_doc, cont_cred,
 				rm_r38.r38_num_sri)
@@ -1097,10 +1063,6 @@ SELECT COUNT(*) INTO cont
 	WHERE g37_compania   = vg_codcia
 	  AND g37_localidad  = vg_codloc
 	  AND g37_tipo_doc   = vm_tipo_doc
-	{--
-  	  AND g37_fecha_emi <= DATE(TODAY)
-  	  AND g37_fecha_exp >= DATE(TODAY)
-	--}
 	  AND g37_secuencia IN
 		(SELECT MAX(g37_secuencia)
 			FROM gent037
@@ -1283,8 +1245,7 @@ INPUT ARRAY rm_j11 WITHOUT DEFAULTS FROM ra_j11.*
 						TO ra_j11[j].j11_num_cta_tarj
 				END IF	
 			ELSE
-				IF rm_j11[i].forma_pago <> 'CP' --OR
-				   --rm_j10.j10_tipo_fuente <> 'SC'
+				IF rm_j11[i].forma_pago <> 'CP' 
 				THEN
 				  CALL ayudas_bco_tarj(rm_j11[i].forma_pago)
 					RETURNING rm_j11[i].cod_bco_tarj
@@ -1292,13 +1253,6 @@ INPUT ARRAY rm_j11 WITHOUT DEFAULTS FROM ra_j11.*
 					ra_j11[j].j11_cod_bco_tarj
 				END IF
 			END IF
-			{-- OJO QUITAR CUANDO ESTE ARREGLADO FORMAS PAGO EN CAJA
-			IF rm_j11[i].forma_pago = 'CP' THEN
-				LET rm_j11[i].forma_pago = vm_cheque
-				DISPLAY rm_j11[i].forma_pago TO
-					ra_j11[j].j11_codigo_pago
-			END IF
-			--}
 		END IF
 		LET INT_FLAG = 0
 	ON KEY(F5)
@@ -1437,10 +1391,6 @@ INPUT ARRAY rm_j11 WITHOUT DEFAULTS FROM ra_j11.*
 		   fl_determinar_si_es_retencion(vg_codcia,rm_j11[i].forma_pago,
 						cont_cred)
 		THEN
-			IF cont_cred = 'R' THEN
-				--CALL fl_mostrar_mensaje('LAS RETENCIONES DE CLIENTES SOLO SE PUEDEN INGRESAR POR DIGITACION DE RETENCIONES.', 'info')
-				--NEXT FIELD j11_codigo_pago
-			END IF
 			CALL detalle_retenciones(i, j, 'I')
 			IF rm_j10.j10_tipo_fuente = 'SC' THEN
 				EXIT INPUT
@@ -1601,16 +1551,8 @@ INPUT ARRAY rm_j11 WITHOUT DEFAULTS FROM ra_j11.*
 		--#CALL dialog.keysetlabel('F7', '')
 		DISPLAY BY NAME vuelto
 		IF fgl_lastkey() = fgl_keyval('return') THEN
-			--NEXT FIELD ra_j11[j-1].j11_codigo_pago
 			NEXT FIELD j11_codigo_pago
 		END IF
-		{-- OJO QUITAR CUANDO ESTE ARREGLADO FORMAS DE PAGO EN CAJA
-		IF rm_j11[i].forma_pago = 'CP' THEN
-			LET rm_j11[i].forma_pago = vm_cheque
-			DISPLAY rm_j11[i].forma_pago TO
-				ra_j11[j].j11_codigo_pago
-		END IF
-		--}
 		IF fl_determinar_si_es_retencion(vg_codcia,rm_j11[i].forma_pago,
 						cont_cred)
 		THEN
@@ -1632,13 +1574,6 @@ INPUT ARRAY rm_j11 WITHOUT DEFAULTS FROM ra_j11.*
 			LET vuelto = 0
 		END IF
 		DISPLAY BY NAME vuelto
-		{-- OJO QUITAR CUANDO ESTE ARREGLADO FORMAS DE PAGO EN CAJA
-		IF rm_j11[i].forma_pago = 'CP' THEN
-			LET rm_j11[i].forma_pago = vm_cheque
-			DISPLAY rm_j11[i].forma_pago TO
-				ra_j11[j].j11_codigo_pago
-		END IF
-		--}
 	AFTER INPUT
 		LET tiene_tj = 0
 		LET tiene_rt = 0
@@ -1691,8 +1626,6 @@ INPUT ARRAY rm_j11 WITHOUT DEFAULTS FROM ra_j11.*
 			END IF
 			IF rm_j11[i].forma_pago = vm_cheque OR
 			   rm_j11[i].forma_pago[1, 1]  = 'T'
-			--OR fl_determinar_si_es_retencion(vg_codcia,
-			--			rm_j11[i].forma_pago, cont_cred)
 			THEN
 				IF repetidos_num_ch_aut(i) THEN
 					CALL fl_mostrar_mensaje('No puede repetir un mismo número de tarjeta, cheque o autorización.', 'exclamation')
@@ -3145,12 +3078,6 @@ INPUT BY NAME rm_j14.j14_num_ret_sri, rm_j14.j14_autorizacion,
 			CALL fl_mostrar_mensaje('El numero de la autorizacion ingresado es incorrecto.', 'exclamation')
 			NEXT FIELD j14_autorizacion
 		END IF
-		{-- OJO
-		IF rm_j14.j14_autorizacion[1, 1] <> '1' THEN
-			CALL fl_mostrar_mensaje('Numero de Autorizacion es incorrecto.', 'exclamation')
-			NEXT FIELD j14_autorizacion
-		END IF
-		--}
 		IF NOT fl_valida_numeros(rm_j14.j14_autorizacion) THEN
 			NEXT FIELD j14_autorizacion
 		END IF
@@ -3565,13 +3492,6 @@ IF LENGTH(num_ret_sri[1, 7]) <> 7 THEN
 	CALL fl_mostrar_mensaje('Digite correctamente el punto de venta o el punto de emision.', 'exclamation')
 	RETURN 0
 END IF
-{--
-LET lim = LENGTH(num_ret_sri)
-IF NOT fl_solo_numeros(num_ret_sri[9, lim]) THEN
-	CALL fl_mostrar_mensaje('Digite solo numeros para el numero del comprobante.', 'exclamation')
-	RETURN 0
-END IF
---}
 IF NOT fl_valida_numeros(num_ret_sri[1, 3]) THEN
 	RETURN 0
 END IF
@@ -4190,10 +4110,6 @@ IF rm_j10.j10_estado = 'P' THEN
 				  AND g37_localidad  = vg_codloc
 				  AND g37_tipo_doc   = vm_tipo_doc
 		  		  AND g37_cont_cred  = cont_cred
-				{--
-			  	  AND g37_fecha_emi <= DATE(TODAY)
-			  	  AND g37_fecha_exp >= DATE(TODAY)
-				--}
 				  AND g37_secuencia IN
 					(SELECT MAX(g37_secuencia)
 					FROM gent037
@@ -5272,11 +5188,6 @@ END IF
 IF tipo = 'PR' THEN
 	DISPLAY 'PREVENTA DE INVENTARIOS' TO tit_tipo_fuente
 END IF
-{--
-IF tipo = 'PV' THEN
-	DISPLAY 'PREVENTA DE VEHICULOS' TO tit_tipo_fuente
-END IF
---}
 IF tipo = 'SC' THEN
 	DISPLAY 'SOLICITUD COBRO CLIENTES' TO tit_tipo_fuente
 END IF

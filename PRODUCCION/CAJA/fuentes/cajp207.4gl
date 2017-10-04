@@ -1056,30 +1056,6 @@ LET query = ' SELECT j11_tipo_fuente, j11_num_fuente, j11_num_ch_aut, ',
 		'   AND j11_moneda      = "', rm_j05.j05_moneda, '"',
 		'   AND j11_codigo_pago = "', vm_cheque, '"',
 		'   AND j11_num_egreso  IS NULL ',
-{
-		' UNION ',
-		' SELECT j11_tipo_fuente, j11_num_fuente, j11_num_ch_aut, ', 
-		'j11_num_cta_tarj, j11_cod_bco_tarj, j11_valor, "N" n_eg',
-		' FROM cajt010, cajt011, cxct026 ',
-		' WHERE j10_compania    = ', vg_codcia,
-		'   AND j10_localidad   = ', vg_codloc,
-		'   AND j10_estado      NOT IN ("E") ',
-		'   AND j10_codigo_caja = ', rm_j05.j05_codigo_caja,
-		'   AND j11_compania    = j10_compania ',
-		'   AND j11_localidad   = j10_localidad ',
-		'   AND j11_tipo_fuente = j10_tipo_fuente ',
-		'   AND j11_num_fuente  = j10_num_fuente ',
-		'   AND j11_moneda      = "', rm_j05.j05_moneda, '"',
-		'   AND j11_codigo_pago = "', vm_che_cp, '"',
-		'   AND j11_num_egreso  IS NULL ',
-		'   AND z26_compania    = j10_compania ',
-		'   AND z26_localidad   = j10_localidad ',
-		'   AND z26_codcli      = j10_codcli ',
-		'   AND z26_banco       = j11_cod_bco_tarj ',
-		'   AND z26_num_cta     = j11_num_cta_tarj ',
-		'   AND z26_num_cheque  = j11_num_ch_aut ',
-		'   AND z26_fecha_cobro <= TODAY ',
-}
 	' INTO TEMP t1 '
 PREPARE exe_tmp FROM query
 EXECUTE exe_tmp
@@ -1110,7 +1086,6 @@ DEFINE tot_egreso_ch	DECIMAL(12,2)
 
 CALL lee_cajt011()
 IF vm_ind_egr = 0 THEN
-	--CALL fgl_winmessage(vg_producto,'No se han ingresado cheques a esta caja.','exclamation')
 	CALL fl_mostrar_mensaje('No hay cheques pendientes en esta caja.','exclamation')
 	RETURN
 END IF
@@ -1213,7 +1188,6 @@ WHILE NOT salir
 			
 				CALL actualiza_check(i)
 					
-				--NEXT FIELD ra_egresos[j].check
 				NEXT FIELD check
 			END IF
 		AFTER INPUT
@@ -1984,17 +1958,6 @@ WHILE NOT salir
 					r_ctas[i].valor_db, r_ctas[i].valor_cr,
 					'V') RETURNING tot_debito, tot_credito
 				DISPLAY BY NAME tot_debito, tot_credito
-			{
-				IF cuenta_distribucion(vg_codcia, 
-						       r_ctas[i].cuenta) 
-				AND rm_cuenta[i].valor_debito > 0
-				THEN
-					CALL muestra_distribucion(vg_codcia,
-						rm_cuenta[i].cuenta,
-						rm_cuenta[i].valor_debito)
-					LET int_flag = 0
-				END IF
-			}
 			END IF
 		BEFORE FIELD valor_cr 
 			IF NOT modificable(r_ctas[i].cuenta) THEN
@@ -2016,26 +1979,13 @@ WHILE NOT salir
 					r_ctas[i].valor_db, r_ctas[i].valor_cr,
 					'V') RETURNING tot_debito, tot_credito
 				DISPLAY BY NAME tot_debito, tot_credito
-			{
-				IF cuenta_distribucion(vg_codcia, 
-						       rm_cuenta[i].cuenta) 
-				AND rm_cuenta[i].valor_credito > 0
-				THEN
-					CALL muestra_distribucion(vg_codcia,
-						rm_cuenta[i].cuenta,
-						rm_cuenta[i].valor_credito)
-					LET int_flag = 0
-				END IF
-			}
 			END IF
 		AFTER INPUT
 			IF tot_debito <> tot_credito THEN
-				--CALL fgl_winmessage(vg_producto,'Los valores en el débito y el crédito deben ser iguales.','exclamation')
 				CALL fl_mostrar_mensaje('Los valores en el débito y el crédito deben ser iguales.','exclamation')
 				CONTINUE INPUT
 			END IF
 			IF tot_debito <> tot_egr THEN
-				--CALL fgl_winmessage(vg_producto,'Los valores en el débito y el crédito deben ser iguales al total egresado.','exclamation')
 				CALL fl_mostrar_mensaje('Los valores en el débito y el crédito deben ser iguales al total egresado.','exclamation')
 				CONTINUE INPUT
 			END IF

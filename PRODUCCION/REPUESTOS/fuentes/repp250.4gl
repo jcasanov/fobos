@@ -183,25 +183,16 @@ IF NOT generar_tabla_trabajo() THEN
 END IF
 DECLARE q_deto CURSOR FOR
 	SELECT bodega, item, descrip, vendible, no_vend, total,
-		--sto_act - cant_pend, cant_pend,
 		mens_dife, diferencia, anio, mes, sto_act, cant_pend, usuario, usu_mod,
 		marca, clase
 		FROM tmp_inv
 		-- OJO CAMBIAR PARA EL generador de archivos
 		ORDER BY bodega, marca, clase, item, descrip
-		--ORDER BY bodega, marca, clase, descrip, item
-		--ORDER BY bodega, marca, item
 		--
 LET vm_num_det = 1
 FOREACH q_deto INTO rm_inventario[vm_num_det].*, rm_periodo[vm_num_det].*,
 			desc_mar, desc_cla
 	IF rm_inventario[vm_num_det].mens_dif = "NO DIGITAD" THEN
-	--IF rm_inventario[vm_num_det].r89_suma = 0 THEN
-	{--
-	IF rm_inventario[vm_num_det].r89_bueno = 0 AND
-	   rm_inventario[vm_num_det].r89_incompleto = 0
-	THEN
-	--}
 		LET rm_inventario[vm_num_det].r89_bueno      = NULL
 		LET rm_inventario[vm_num_det].r89_incompleto = NULL
 		LET rm_inventario[vm_num_det].r89_suma       = NULL
@@ -340,19 +331,7 @@ INPUT ARRAY rm_inventario WITHOUT DEFAULTS FROM rm_inventario.*
 		THEN
 			LET rm_inventario[i].r89_incompleto = 0
 		END IF
-		--DISPLAY rm_inventario[i].r89_bueno TO rm_inventario[j].r89_bueno
-		--DISPLAY rm_inventario[i].r89_incompleto
-		--	TO rm_inventario[j].r89_incompleto
 		CALL obtener_totales(i, j)
-		{--
-		IF rm_inventario[i].r89_suma = 0 THEN
-			LET rm_inventario[i].r89_bueno      = NULL
-			LET rm_inventario[i].r89_incompleto = NULL
-			LET rm_inventario[i].r89_suma       = NULL
-			LET rm_inventario[i].mens_dif       = NULL
-			DISPLAY rm_inventario[i].* TO rm_inventario[j].*
-		END IF
-		--}
 	AFTER INPUT
 		--
 		IF total_suma = 0 AND vm_num_det > 1 THEN
@@ -376,9 +355,6 @@ BEGIN WORK
 WHENEVER ERROR CONTINUE
 SET LOCK MODE TO WAIT 3
 FOR i = 1 TO vm_num_det
-	IF rm_inventario[i].r89_suma IS NULL THEN
-		--CONTINUE FOR
-	END IF
 	IF rm_inventario[i].r89_bueno IS NULL AND
 	   rm_inventario[i].r89_incompleto IS NULL 
 	THEN
@@ -389,7 +365,6 @@ FOR i = 1 TO vm_num_det
 		  AND r89_localidad = vg_codloc
 		  AND r89_bodega    = rm_inventario[i].r89_bodega
 		  AND r89_item      = rm_inventario[i].r89_item
-		  --AND r89_usuario   = rm_r89.r89_usuario
 		  AND r89_anio      = rm_periodo[i].r89_anio
 		  AND r89_mes       = rm_periodo[i].r89_mes
 	IF STATUS = NOTFOUND THEN
@@ -415,11 +390,9 @@ FOR i = 1 TO vm_num_det
 			WHERE r11_compania = vg_codcia
 			  AND r11_bodega   = rm_inventario[i].r89_bodega
 			  AND r11_item     = rm_inventario[i].r89_item
-		--LET r_r89.r89_stock_act  = rm_periodo[i].stock_act
 		LET r_r89.r89_bueno      = rm_inventario[i].r89_bueno
 		LET r_r89.r89_incompleto = rm_inventario[i].r89_incompleto
 		LET r_r89.r89_mal_est    = 0.00
-		--LET r_r89.r89_suma       = rm_inventario[i].r89_suma
 		LET r_r89.r89_suma       = r_r89.r89_bueno
 						+ r_r89.r89_incompleto
 						+ r_r89.r89_mal_est
@@ -433,9 +406,6 @@ FOR i = 1 TO vm_num_det
 		LET r_r89.r89_incompleto = rm_inventario[i].r89_incompleto
 		LET r_r89.r89_mal_est    = 0.00
 		LET r_r89.r89_suma       = rm_inventario[i].r89_suma
-		--LET r_r89.r89_suma       = r_r89.r89_bueno
-		--				+ r_r89.r89_incompleto
-		--				+ r_r89.r89_mal_est
 		LET r_r89.r89_usu_modifi = vg_usuario
 		LET r_r89.r89_fec_modifi = fl_current()
 		WHILE TRUE
@@ -451,7 +421,6 @@ FOR i = 1 TO vm_num_det
 				  AND r89_localidad= vg_codloc
 				  AND r89_bodega   = rm_inventario[i].r89_bodega
 				  AND r89_item     = rm_inventario[i].r89_item
-				  --AND r89_usuario  = rm_r89.r89_usuario
 				  AND r89_anio     = rm_periodo[i].r89_anio
 				  AND r89_mes      = rm_periodo[i].r89_mes
 			IF STATUS <> 0 THEN
@@ -513,7 +482,6 @@ LET rm_orden[vm_columna_2] = 'ASC'
 WHILE TRUE
 	LET query = 'SELECT bodega, item, descrip, vendible, no_vend, ',
 				'total, ',
-				--'sto_act - cant_pend, cant_pend, ',
 				'mens_dife, diferencia, anio, mes, cant_pend, ',
 				'sto_act, usuario, usu_mod, marca, clase ',
 			' FROM tmp_inv ',
@@ -813,17 +781,6 @@ IF vm_item IS NOT NULL AND vm_posicionar = 'N' THEN
 	LET expr_ite2 = '   AND r89_item      = "', vm_item CLIPPED, '"'
 END IF
 LET expr_usu = NULL
-{--
-IF vm_consultar = 'S' THEN
-	IF rm_r89.r89_usuario IS NOT NULL THEN
-		LET expr_usu = '   AND (r89_usuario    = "',
-				rm_r89.r89_usuario CLIPPED, '"',
-				' OR r89_usu_modifi = "', 
-				rm_r89.r89_usuario CLIPPED, '")'
-	END IF
-END IF
-IF vm_consultar = 'N' THEN
---}
 	LET query = 'SELECT * FROM resp_exis ',
 		' WHERE r11_compania   =  ', vg_codcia,
 		expr_bod CLIPPED, 
@@ -854,7 +811,6 @@ IF vm_consultar = 'N' THEN
 	PREPARE exec_exis FROM query
 	EXECUTE exec_exis
 	DROP TABLE t_e
---END IF
 LET query = 'SELECT r89_bodega bodega, r89_item item, r10_nombre descrip, ',
 			'NVL(SUM(r89_bueno), 0) vendible, ',
 			'NVL(SUM(r89_incompleto), 0) no_vend, ',
@@ -888,7 +844,6 @@ LET query = 'SELECT r89_bodega bodega, r89_item item, r10_nombre descrip, ',
 		' INTO TEMP tmp_r89 '
 PREPARE exec_r89 FROM query
 EXECUTE exec_r89
---IF vm_consultar = 'N' THEN
 	SELECT a.* FROM tmp_exis a
 		WHERE NOT EXISTS
 			(SELECT 1 FROM tmp_r89 b
@@ -900,11 +855,6 @@ EXECUTE exec_r89
 		SELECT * FROM tmp_r89
 		INTO TEMP t1
 	DROP TABLE tmp_exis
-{
-ELSE
-	SELECT * FROM tmp_r89 INTO TEMP t1
-END IF
-}
 DROP TABLE tmp_r89
 SELECT COUNT(*) INTO cuantos FROM t1
 LET resul = 1
@@ -921,8 +871,6 @@ SELECT bodega, item, descrip, NVL(SUM(vendible), 0) vendible,
 	GROUP BY 1, 2, 3, 7, 8, 9, 10, 11, 13, 14
 	INTO TEMP tmp_ite
 DROP TABLE t1
---IF vm_consultar = 'N' THEN
-	--CALL tiene_stock_pendiente() RETURNING resul2
 	LET resul2 = 0
 	IF resul2 THEN
 		SELECT bodega, item, descrip, vendible, no_vend, total,
@@ -974,11 +922,6 @@ DROP TABLE t1
 	ELSE
 		SELECT * FROM tmp_ite INTO TEMP t3
 	END IF
-{--
-ELSE
-	SELECT * FROM tmp_ite INTO TEMP t3
-END IF
---}
 DROP TABLE tmp_ite
 SELECT bodega, item, descrip, NVL(SUM(vendible), 0) vendible,
 	NVL(SUM(no_vend), 0) no_vend, NVL(SUM(total), 0) total, mens_dife,
@@ -996,13 +939,6 @@ IF resul2 THEN
 END IF
 LET query = 'SELECT bodega, item, descrip, vendible, no_vend, total, ',
 			'CASE WHEN sto_act < total THEN "SOBRANTE" ',
-			{--
-			'CASE WHEN sto_act < total THEN ',
-				'CASE WHEN ', subquery CLIPPED, ' > 0 ',
-						'THEN "PENDIENTE" ',
-						'ELSE "SOBRANTE" ',
-				'END ',
-			--}
 			'     WHEN sto_act > total AND mens_dife IS NULL ',
 				'THEN "FALTANTE" ',
 			'     WHEN mens_dife IS NOT NULL ',
@@ -1195,9 +1131,6 @@ FUNCTION mostrar_botones_det()
 --#DISPLAY 'Vendible'		TO tit_col4
 --#DISPLAY 'No Vend.'		TO tit_col5
 --#DISPLAY 'Total'		TO tit_col6
---DISPLAY 'Difer.'		TO tit_col7
---DISPLAY 'Stock'		TO tit_col6
---DISPLAY 'Pend.'		TO tit_col7
 --#DISPLAY 'Mens. Dif.'		TO tit_col7
 
 END FUNCTION
@@ -1296,7 +1229,6 @@ DEFINE i, j		SMALLINT
 --
 LET rm_inventario[i].r89_suma = rm_inventario[i].r89_bueno + rm_inventario[i].r89_incompleto
 --
---LET rm_inventario[i].r89_suma = rm_periodo[i].stock_act - rm_periodo[i].cant_pend
 DISPLAY rm_inventario[i].r89_suma TO rm_inventario[j].r89_suma
 CALL calcular_diferencia(i, j)
 
@@ -1308,7 +1240,6 @@ FUNCTION calcular_diferencia(i, j)
 DEFINE i, j		SMALLINT
 DEFINE tit_diferencia	DECIMAL(8,2)
 
---LET tit_diferencia = rm_inventario[i].r89_suma - rm_periodo[i].stock_act
 LET tit_diferencia = (rm_inventario[i].r89_bueno
 			+ rm_inventario[i].r89_incompleto)
 			- rm_periodo[i].stock_act
@@ -1321,14 +1252,7 @@ END IF
 IF tit_diferencia < 0 THEN
 	LET rm_inventario[i].mens_dif = 'FALTANTE'
 END IF
-{--
-IF rm_periodo[i].cant_pend <> 0 THEN
-	LET rm_inventario[i].mens_dif = 'PENDIENTE'
-END IF
-LET rm_periodo[i].diferencia = tit_diferencia
---}
 LET rm_periodo[i].diferencia = rm_periodo[i].cant_pend
---DISPLAY rm_periodo[i].diferencia  TO rm_periodo[j].diferencia
 DISPLAY rm_inventario[i].mens_dif TO rm_inventario[j].mens_dif
 
 END FUNCTION
@@ -1341,14 +1265,6 @@ SELECT NVL(DATE(MIN(r11_fec_corte)), vg_fecha)
 	INTO vm_fecha_ini
 	FROM resp_exis
 	WHERE r11_compania = vg_codcia
-{--
-SELECT NVL(MIN(r89_fecing), TODAY) INTO vm_fecha_ini
-	FROM rept089
-	WHERE r89_compania      = vg_codcia
-	  AND r89_localidad     = vg_codloc
-	  AND r89_usuario       = rm_r89.r89_usuario
-	  AND YEAR(r89_fecing) >= 2006
---}
 
 END FUNCTION
 
@@ -1524,12 +1440,10 @@ LET query = 'SELECT (SELECT g02_abreviacion ',
 				'THEN mens_dife ',
 				'ELSE "" ',
 			'END mens_dife, r89_bueno, r89_incompleto, ',
-			--'(sto_act - total) diferencia, NVL(cant_pend,0) ca_p, ',
 			'sto_act - NVL(cant_pend, 0) stock, ',
 			'NVL(cant_pend, 0) cant_p, ',
 			'r10_precio_mb, usuario ',
 		'FROM tmp_inv, rept002, OUTER rept089, rept010 ',
-		--FROM tmp_inv, rept002, rept089, rept010
 		'WHERE r02_compania  = ', vg_codcia,
 		'  AND r02_codigo    = bodega ',
 		'  AND r89_compania  = r02_compania ',
@@ -1547,8 +1461,6 @@ UNLOAD TO "../../../tmp/repp250.unl"
 	SELECT * FROM tmp_arch
 		-- OJO CAMBIAR PARA EL generador de archivos
 		ORDER BY bodega, marca, clase, item, descrip
-		--ORDER BY bodega, marca, clase, descrip, item
-		--ORDER BY bodega, marca, item
 		--
 RUN "mv ../../../tmp/repp250.unl $HOME/tmp/"
 LET mensaje = 'Archivo Generado en ', FGL_GETENV("HOME"), '/tmp/repp250.unl',

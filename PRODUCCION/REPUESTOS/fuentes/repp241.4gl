@@ -361,44 +361,6 @@ IF int_flag THEN
 	END IF
 	RETURN
 END IF
-{
-LET rm_r95.r95_fecing = CURRENT
-BEGIN WORK
-CALL fl_lee_localidad(codcia, codloc) RETURNING r_g02.*
-WHILE TRUE
-	SELECT NVL(MAX(r95_guia_remision) + 1, 1)
-		INTO rm_r95.r95_guia_remision
-		FROM rept095
-		WHERE r95_compania  = rm_r95.r95_compania
-		  AND r95_localidad = rm_r95.r95_localidad
-	LET rm_r95.r95_fecing = CURRENT
-	WHENEVER ERROR CONTINUE
-	INSERT INTO rept095 VALUES (rm_r95.*)
-	IF STATUS = 0 THEN
-		WHENEVER ERROR STOP
-		EXIT WHILE
-	END IF
-END WHILE
-IF num_ent IS NOT NULL THEN
-	LET r_r96.r96_compania      = codcia
-	LET r_r96.r96_localidad     = codloc
-	LET r_r96.r96_guia_remision = rm_r95.r95_guia_remision
-	LET r_r96.r96_bodega        = bodega
-	LET r_r96.r96_num_entrega   = num_ent
-	INSERT INTO rept096 VALUES (r_r96.*)
-END IF
-IF cod_tran IS NOT NULL THEN
-	LET r_r97.r97_compania      = codcia
-	LET r_r97.r97_localidad     = codloc
-	LET r_r97.r97_guia_remision = rm_r95.r95_guia_remision
-	LET r_r97.r97_cod_tran      = cod_tran
-	LET r_r97.r97_num_tran      = num_tran
-	INSERT INTO rept097 VALUES (r_r97.*)
-END IF
-	INSERT INTO rept095 VALUES (rm_r95.*)
-	LET num_aux = SQLCA.SQLERRD[6]
-COMMIT WORK
-}
 IF vm_num_rows = vm_max_rows THEN
 	LET vm_num_rows  = 1
 ELSE
@@ -813,7 +775,6 @@ INPUT BY NAME rm_r97.r97_cod_tran, rm_r97.r97_num_tran, rm_r95.r95_num_sri,
 		END IF
 END INPUT
 IF NOT int_flag THEN
-	--CALL mostrar_notas_entrega()
 	CALL muestra_detalle('I')
 END IF
 
@@ -912,15 +873,6 @@ IF cod_tran = cod_tran2 THEN
 	END IF
 END IF
 RETURN 1
-{
-SELECT NVL(SUM(r20_cant_ven), 0)
-	INTO tot_cant_fac
-	FROM rept020
-	WHERE r20_compania  = vg_codcia
-	  AND r20_localidad = vg_codloc
-	  AND r20_cod_tran  = r_r19.r19_cod_tran
-	  AND r20_num_tran  = r_r19.r19_num_tran
-}
 
 END FUNCTION
 
