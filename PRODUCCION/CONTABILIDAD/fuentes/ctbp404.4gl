@@ -151,7 +151,7 @@ WHILE TRUE
 					RETURNING r_b10.*
 				IF r_b10.b10_nivel = vm_nivel_max THEN
 					LET fec_ini = fecha
-					LET fec_fin = TODAY
+					LET fec_fin = vg_fecha
 					LET flag    = 'A'
 				END IF
 				CALL fl_obtener_saldo_cuentas_patrimonio(vg_codcia,
@@ -574,7 +574,7 @@ PAGE HEADER
 				 " del ", fl_justifica_titulo('I', rm_par.anho, 4)
 	END IF
 	SKIP 1 LINES
-	PRINT COLUMN 01, "FECHA DE IMPRESION: ", TODAY USING "dd-mm-yyyy", 
+	PRINT COLUMN 01, "FECHA DE IMPRESION: ", vg_fecha USING "dd-mm-yyyy", 
 	                 1 SPACES, TIME,
 	      COLUMN 61, usuario
 	SKIP 1 LINES

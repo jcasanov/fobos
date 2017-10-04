@@ -146,8 +146,8 @@ IF r_mon.g13_moneda IS NULL THEN
 ELSE
         DISPLAY r_mon.g13_nombre TO tit_mon_bas
 END IF
-LET rm_b10.b00_periodo_ini = CURRENT
-LET rm_b10.b00_periodo_ini = CURRENT
+LET rm_b10.b00_periodo_ini = fl_current()
+LET rm_b10.b00_periodo_ini = fl_current()
 LET rm_b10.b00_inte_online = 'S'
 LET rm_b10.b00_mayo_online = 'S'
 LET rm_b10.b00_modi_compma = 'N'

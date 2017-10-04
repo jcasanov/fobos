@@ -366,8 +366,8 @@ LET r_b12.b12_compania  = r_b14.b14_compania
 LET r_b12.b12_tipo_comp = r_b14.b14_tipo_comp
 LET r_b12.b12_num_comp  = fl_numera_comprobante_contable(r_b14.b14_compania, 
 				                         r_b14.b14_tipo_comp, 
-  							 YEAR(TODAY), 
-							 MONTH(TODAY))
+  							 YEAR(vg_fecha), 
+							 MONTH(vg_fecha))
 LET r_b12.b12_estado    = 'A'
 LET r_b12.b12_glosa     = r_b14.b14_glosa
 IF r_b12.b12_tipo_comp  = 'EG' THEN
@@ -377,10 +377,10 @@ END IF
 LET r_b12.b12_origen    = 'A'
 LET r_b12.b12_moneda    = r_b14.b14_moneda
 LET r_b12.b12_paridad   = r_b14.b14_paridad
-LET r_b12.b12_fec_proceso = TODAY
+LET r_b12.b12_fec_proceso = vg_fecha
 LET r_b12.b12_modulo    = 'CB'
 LET r_b12.b12_usuario   = vg_usuario
-LET r_b12.b12_fecing    = CURRENT
+LET r_b12.b12_fecing    = fl_current()
 
 INSERT INTO ctbt012 VALUES (r_b12.*)
 

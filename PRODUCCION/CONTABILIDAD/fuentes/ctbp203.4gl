@@ -402,7 +402,7 @@ END IF
 CALL leer_cabecera()
 IF NOT int_flag THEN
 	IF vm_flag_fecini = 'I' OR vm_flag_mant = 'I' THEN
-		LET rm_b30.b30_fecing  = CURRENT
+		LET rm_b30.b30_fecing  = fl_current()
 		LET rm_b30.b30_usuario = vg_usuario
 		SELECT MAX(b30_num_concil) INTO rm_b30.b30_num_concil
 			FROM ctbt030
@@ -731,6 +731,7 @@ END FUNCTION
 
 
 FUNCTION reapertura_registro()
+DEFINE fecha_actual DATETIME YEAR TO SECOND
 
 IF rm_b30.b30_estado = 'C' THEN
         DISPLAY 'ACTIVA' TO tit_estado
@@ -760,10 +761,11 @@ END IF
 COMMIT WORK
 WHENEVER ERROR STOP
 IF rm_b30.b30_tipcomp_gen IS NOT NULL THEN
+	LET fecha_actual = fl_current()
 	CALL fl_mayoriza_comprobante(vg_codcia, rm_b30.b30_tipcomp_gen, 
 			     rm_b30.b30_numcomp_gen, 'D')
 	UPDATE ctbt012 SET b12_estado     = 'E',
-		   	   b12_fec_modifi = CURRENT
+		   	   b12_fec_modifi = fecha_actual
 		WHERE b12_compania  = rm_b30.b30_compania
 	  	  AND b12_tipo_comp = rm_b30.b30_tipcomp_gen
 	  	  AND b12_num_comp  = rm_b30.b30_numcomp_gen
@@ -948,7 +950,7 @@ INPUT BY NAME rm_b30.b30_numero_cta, rm_b30.b30_fecha_ini, rm_b30.b30_fecha_fin,
 	AFTER FIELD b30_fecha_ini 
 		IF vm_flag_fecini = 'I' THEN
 			IF rm_b30.b30_fecha_ini IS NOT NULL THEN
-				IF rm_b30.b30_fecha_ini > TODAY THEN
+				IF rm_b30.b30_fecha_ini > vg_fecha THEN
 					CALL fgl_winmessage(vg_producto,'La Fecha Inicial no puede ser mayor a la de hoy.','exclamation')
 					NEXT FIELD b30_fecha_ini
 				END IF
@@ -960,7 +962,7 @@ INPUT BY NAME rm_b30.b30_numero_cta, rm_b30.b30_fecha_ini, rm_b30.b30_fecha_fin,
 		END IF
 	AFTER FIELD b30_fecha_fin 
 		IF rm_b30.b30_fecha_fin IS NOT NULL THEN
-			IF rm_b30.b30_fecha_fin > TODAY THEN
+			IF rm_b30.b30_fecha_fin > vg_fecha THEN
 				CALL fgl_winmessage(vg_producto,'La Fecha Final no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD b30_fecha_fin
 			END IF
@@ -1669,6 +1671,8 @@ DEFINE num_concil	VARCHAR(10)
 DEFINE secuencia	SMALLINT
 DEFINE resul		SMALLINT
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 IF vm_num_det = 0 AND vm_num_mov = 0 THEN
 	CALL fgl_winmessage(vg_producto, 'Conciliación no puede ser cerrada sin tener movimientos.', 'exclamation')
 	RETURN
@@ -1713,7 +1717,7 @@ IF vm_num_mov > 0 THEN
 	LET rm_b12.b12_fec_modifi  = NULL
 	LET rm_b12.b12_modulo	   = 'CB'
 	LET rm_b12.b12_usuario     = vg_usuario
-	LET rm_b12.b12_fecing      = CURRENT
+	LET rm_b12.b12_fecing      = fl_current()
 	INSERT INTO ctbt012 VALUES(rm_b12.*)
 	FOR i = 1 TO vm_num_mov
 		CALL obtener_valores_deb_cre_mov(i)
@@ -1745,8 +1749,9 @@ IF vm_num_mov > 0 THEN
 			NULL, rm_b12.b12_fec_proceso)
 END IF
 LET rm_b30.b30_estado = 'C'
+LET fecha_actual = fl_current()
 UPDATE ctbt030 SET b30_estado       = rm_b30.b30_estado,
-		   b30_fecha_cie    = CURRENT,
+		   b30_fecha_cie    = fecha_actual,
 		   b30_tipcomp_gen  = tipo,
 		   b30_numcomp_gen  = rm_b12.b12_num_comp,
 		   b30_saldo_cont   = rm_b30.b30_saldo_cont,

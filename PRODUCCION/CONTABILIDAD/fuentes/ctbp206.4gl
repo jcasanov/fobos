@@ -89,8 +89,8 @@ WHILE TRUE
 		LET vm_mespro_ini = 1
 		LET vm_anopro_ini = vm_anopro_ini + 1
 	END IF
-	LET vm_anopro_fin = YEAR(TODAY)
-	LET vm_mespro_fin = MONTH(TODAY) - 1
+	LET vm_anopro_fin = YEAR(vg_fecha)
+	LET vm_mespro_fin = MONTH(vg_fecha) - 1
 	IF vm_mespro_fin = 0 THEN
 		LET vm_mespro_fin = 12
 		LET vm_anopro_fin = vm_anopro_fin - 1
@@ -163,8 +163,8 @@ INPUT BY NAME vm_mespro_ini, vm_anopro_ini, vm_mespro_fin, vm_anopro_fin
 		DISPLAY BY NAME tit_mes_ini
 		LET fecha = MDY(vm_mespro_ini, 01, vm_anopro_ini)
 				+ 1 UNITS MONTH - 1 UNITS DAY
-		IF fecha >= TODAY THEN
-			IF MONTH(fecha) = MONTH(TODAY) THEN
+		IF fecha >= vg_fecha THEN
+			IF MONTH(fecha) = MONTH(vg_fecha) THEN
 				CALL fl_mostrar_mensaje('El mes actual no puede ser cerrado dentro del mismo mes.', 'exclamation')
 			ELSE
 				CALL fl_mostrar_mensaje('El periodo Inicial para el cierre mensual esta incorrecto.', 'exclamation')
@@ -185,7 +185,7 @@ INPUT BY NAME vm_mespro_ini, vm_anopro_ini, vm_mespro_fin, vm_anopro_fin
 		END IF
 		LET fecha = MDY(vm_anopro_ini, 01, vm_anopro_ini)
 				+ 1 UNITS MONTH
-		IF YEAR(fecha) > YEAR(TODAY) THEN
+		IF YEAR(fecha) > YEAR(vg_fecha) THEN
 			CALL fl_mostrar_mensaje('Año Inicial de proceso contable esta incorrecto.', 'exclamation')
 			NEXT FIELD vm_anopro_ini
 		END IF
@@ -200,8 +200,8 @@ INPUT BY NAME vm_mespro_ini, vm_anopro_ini, vm_mespro_fin, vm_anopro_fin
 		DISPLAY BY NAME tit_mes_fin
 		LET fecha = MDY(vm_mespro_fin, 01, vm_anopro_fin)
 				+ 1 UNITS MONTH - 1 UNITS DAY
-		IF fecha >= TODAY THEN
-			IF MONTH(fecha) = MONTH(TODAY) THEN
+		IF fecha >= vg_fecha THEN
+			IF MONTH(fecha) = MONTH(vg_fecha) THEN
 				CALL fl_mostrar_mensaje('El mes actual no puede ser cerrado dentro del mismo mes.', 'exclamation')
 			ELSE
 				CALL fl_mostrar_mensaje('El periodo final para el cierre mensual esta incorrecto.', 'exclamation')
@@ -222,7 +222,7 @@ INPUT BY NAME vm_mespro_ini, vm_anopro_ini, vm_mespro_fin, vm_anopro_fin
 		END IF
 		LET fecha = MDY(vm_anopro_fin, 01, vm_anopro_fin)
 				+ 1 UNITS MONTH
-		IF YEAR(fecha) > YEAR(TODAY) THEN
+		IF YEAR(fecha) > YEAR(vg_fecha) THEN
 			CALL fl_mostrar_mensaje('Año Final de proceso contable esta incorrecto.', 'exclamation')
 			NEXT FIELD vm_anopro_fin
 		END IF
@@ -239,8 +239,8 @@ INPUT BY NAME vm_mespro_ini, vm_anopro_ini, vm_mespro_fin, vm_anopro_fin
 		END IF
 		LET fecha = MDY(vm_mespro_ini, 01, vm_anopro_ini)
 				+ 1 UNITS MONTH - 1 UNITS DAY
-		IF fecha >= TODAY THEN
-			IF MONTH(fecha) = MONTH(TODAY) THEN
+		IF fecha >= vg_fecha THEN
+			IF MONTH(fecha) = MONTH(vg_fecha) THEN
 				CALL fl_mostrar_mensaje('El mes actual no puede ser cerrado dentro del mismo mes.', 'exclamation')
 			ELSE
 				CALL fl_mostrar_mensaje('El periodo Inicial para el cierre mensual esta incorrecto.', 'exclamation')
@@ -249,8 +249,8 @@ INPUT BY NAME vm_mespro_ini, vm_anopro_ini, vm_mespro_fin, vm_anopro_fin
 		END IF
 		LET fecha = MDY(vm_mespro_fin, 01, vm_anopro_fin)
 				+ 1 UNITS MONTH - 1 UNITS DAY
-		IF fecha >= TODAY THEN
-			IF MONTH(fecha) = MONTH(TODAY) THEN
+		IF fecha >= vg_fecha THEN
+			IF MONTH(fecha) = MONTH(vg_fecha) THEN
 				CALL fl_mostrar_mensaje('El mes actual no puede ser cerrado dentro del mismo mes.', 'exclamation')
 			ELSE
 				CALL fl_mostrar_mensaje('El periodo final para el cierre mensual esta incorrecto.', 'exclamation')
@@ -286,7 +286,7 @@ ELSE
 	LET fecha = MDY(1,1,anio + 1)
 END IF
 LET fecha = fecha - 1 UNITS DAY
-IF fecha > TODAY THEN
+IF fecha > vg_fecha THEN
 	CALL fgl_winmessage(vg_producto,'Muy pronto para cerrar este mes. Debe hacerlo el último día del mes', 'exclamation')
 	RETURN 0
 END IF

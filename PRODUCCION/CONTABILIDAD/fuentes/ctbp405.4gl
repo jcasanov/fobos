@@ -127,8 +127,8 @@ FUNCTION control_reporte()
 LET vm_moneda = rg_gen.g00_moneda_base
 CALL fl_lee_moneda(vm_moneda) RETURNING rm_g13.*
 DISPLAY rm_g13.g13_nombre TO nom_moneda
-LET vm_fecha_ini = TODAY
-LET vm_fecha_fin = TODAY
+LET vm_fecha_ini = vg_fecha
+LET vm_fecha_fin = vg_fecha
 WHILE TRUE
 	LET vm_tot_debito  = 0
 	LET vm_tot_credito = 0
@@ -463,7 +463,7 @@ PAGE HEADER
 	PRINT COLUMN 001, 'USUARIO: ',
 	      COLUMN 023, vg_usuario
 	PRINT COLUMN 001, 'FECHA DE IMPRESION: ',
-	      COLUMN 023, TODAY USING 'dd-mm-yyyy', 1 SPACES, TIME
+	      COLUMN 023, vg_fecha USING 'dd-mm-yyyy', 1 SPACES, TIME
 	PRINT '------------------------------------------------------------------------------------------------------------------------------------'
 	PRINT COLUMN 001, 'TP',
 	      COLUMN 004, 'NUMERO',
@@ -487,7 +487,7 @@ BEFORE GROUP OF r_b13.b13_cuenta
 	ELSE
 		CALL fl_obtener_saldo_cuentas_patrimonio(vg_codcia,
 					r_b10.b10_cuenta, rm_g13.g13_moneda,
-					fecha_ini, TODAY, 'A')
+					fecha_ini, vg_fecha, 'A')
 			RETURNING vm_saldo, val1
 	END IF
 	PRINT COLUMN 001, r_b10.b10_descripcion, ': ', r_b10.b10_cuenta,

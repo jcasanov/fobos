@@ -130,8 +130,8 @@ LET vm_page   = 66
 LET vm_moneda = rg_gen.g00_moneda_base
 CALL fl_lee_moneda(vm_moneda) RETURNING rm_g13.*
 DISPLAY rm_g13.g13_nombre TO nom_moneda
-LET vm_fecha_ini = TODAY
-LET vm_fecha_fin = TODAY
+LET vm_fecha_ini = vg_fecha
+LET vm_fecha_fin = vg_fecha
 LET vm_fec_arran  = rm_z60.z60_fecha_carga
 LET vm_incluir    = 'N'
 LET vm_ver_saldos = 'N'
@@ -427,11 +427,11 @@ INPUT BY NAME 	vm_cta_inicial,	vm_moneda, vm_fecha_ini, vm_fecha_fin,
 		IF vm_fecha_fin IS NULL THEN
 			NEXT FIELD vm_fecha_fin
 		END IF
-		IF vm_fecha_ini > TODAY THEN
+		IF vm_fecha_ini > vg_fecha THEN
 			CALL fl_mostrar_mensaje('La Fecha Inicial debe ser menor igual a la de hoy.','exclamation')
 			NEXT FIELD vm_fecha_fin
 		END IF
-		IF vm_fecha_fin > TODAY THEN
+		IF vm_fecha_fin > vg_fecha THEN
 			CALL fl_mostrar_mensaje('La Fecha Final debe ser menor igual a la de hoy.','exclamation')
 			NEXT FIELD vm_fecha_fin
 		END IF
@@ -573,7 +573,7 @@ PAGE HEADER
 	                 vm_fecha_fin USING 'dd-mm-yyyy'
 	PRINT COLUMN 45, '** FILTRO      : ', filtro, ' ', expr_filtro 
 	SKIP 1 LINES
-	PRINT COLUMN 1,  'FECHA DE IMPRESION: ', TODAY USING 'dd-mm-yyyy',
+	PRINT COLUMN 1,  'FECHA DE IMPRESION: ', vg_fecha USING 'dd-mm-yyyy',
 		1 SPACES, TIME,
 	      COLUMN 114,  usuario
 	PRINT '------------------------------------------------------------------------------------------------------------------------------------'

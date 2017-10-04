@@ -139,10 +139,10 @@ LET rm_ctb.b02_compania = vg_codcia
 LET rm_ctb.b02_tipo_cta = 'B'
 LET rm_ctb.b02_tipo_mov = 'D'
 LET rm_ctb.b02_usuario = vg_usuario
-LET rm_ctb.b02_fecing = CURRENT
+LET rm_ctb.b02_fecing = fl_current()
 CALL leer_datos('I')
 IF NOT int_flag THEN
-	LET rm_ctb.b02_fecing = CURRENT
+	LET rm_ctb.b02_fecing = fl_current()
 	INSERT INTO ctbt002 VALUES (rm_ctb.*)
 	LET vm_num_rows = vm_num_rows + 1
 	LET vm_row_current = vm_num_rows

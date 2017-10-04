@@ -88,7 +88,7 @@ CALL fl_lee_compania_contabilidad(vg_codcia) RETURNING rg_cont.*
 INITIALIZE rm_par.* TO NULL
 LET rm_par.moneda = rg_cont.b00_moneda_base
 LET rm_par.ano    = rg_cont.b00_anopro
-LET rm_par.mes    = MONTH(TODAY)
+LET rm_par.mes    = MONTH(vg_fecha)
 SELECT MAX(b01_nivel) INTO vm_max_nivel FROM ctbt001
 IF vm_max_nivel IS NULL THEN
 	CALL fgl_winmessage(vg_producto,'Nivel no está configurado.','stop')

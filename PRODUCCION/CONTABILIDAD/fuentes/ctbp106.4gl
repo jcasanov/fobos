@@ -154,7 +154,7 @@ LET rm_b10.b10_tipo_mov		= NULL
 LET rm_b10.b10_saldo_ma		= 'N'
 LET rm_b10.b10_permite_mov	= 'N'
 LET rm_b10.b10_usuario		= vg_usuario
-LET rm_b10.b10_fecing		= CURRENT
+LET rm_b10.b10_fecing		= fl_current()
 
 CALL muestra_estado()
 CALL leer_datos('I') RETURNING crea
@@ -165,7 +165,7 @@ IF int_flag THEN
 	END IF
 	RETURN
 END IF
-LET rm_b10.b10_fecing = CURRENT
+LET rm_b10.b10_fecing = fl_current()
 BEGIN WORK
 	INSERT INTO ctbt010 VALUES (rm_b10.*)
 	IF vm_num_rows = vm_max_rows THEN

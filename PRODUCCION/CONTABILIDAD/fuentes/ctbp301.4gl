@@ -150,7 +150,7 @@ WHILE TRUE
 					LET flag    = 'S'
 					IF nivel = vm_nivel_max THEN
 						LET fec_ini = fecha
-						LET fec_fin = TODAY
+						LET fec_fin = vg_fecha
 						LET flag    = 'A'
 					END IF
 					CALL fl_obtener_saldo_cuentas_patrimonio(vg_codcia, rm_det[vm_num_det].b10_cuenta, vm_moneda, fec_ini, fec_fin, flag)

@@ -90,8 +90,8 @@ CALL muestra_contadores_det(0, vm_num_det)
 CALL borrar_cabecera()
 CALL borrar_detalle()
 CALL mostrar_botones_detalle()
-LET vm_fecha_ini = TODAY
-LET vm_fecha_fin = TODAY
+LET vm_fecha_ini = vg_fecha
+LET vm_fecha_fin = vg_fecha
 LET vm_expr_sql  = '1 = 1'
 WHILE TRUE
 	CALL control_consulta()
@@ -284,7 +284,7 @@ INPUT BY NAME rm_b10.b10_cuenta, vm_fecha_ini, vm_fecha_fin, rm_b12.b12_moneda
         	DISPLAY r_mon.g13_nombre TO tit_moneda
 	AFTER FIELD vm_fecha_ini 
 		IF vm_fecha_ini IS NOT NULL THEN
-			IF vm_fecha_ini > TODAY THEN
+			IF vm_fecha_ini > vg_fecha THEN
 				CALL fgl_winmessage(vg_producto,'La fecha de inicio no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD vm_fecha_ini
 			END IF
@@ -294,7 +294,7 @@ INPUT BY NAME rm_b10.b10_cuenta, vm_fecha_ini, vm_fecha_fin, rm_b12.b12_moneda
 		END IF
 	AFTER FIELD vm_fecha_fin 
 		IF vm_fecha_fin IS NOT NULL THEN
-			IF vm_fecha_fin > TODAY THEN
+			IF vm_fecha_fin > vg_fecha THEN
 				CALL fgl_winmessage(vg_producto,'La fecha de término no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD vm_fecha_fin
 			END IF
@@ -749,7 +749,7 @@ IF rm_b10.b10_cuenta[1, 1] <> '3' THEN
 		RETURNING vm_saldo_al
 ELSE
 	CALL fl_obtener_saldo_cuentas_patrimonio(vg_codcia, rm_b10.b10_cuenta,
-				rm_b12.b12_moneda, vm_saldo_fec, TODAY, 'A')
+				rm_b12.b12_moneda, vm_saldo_fec, vg_fecha, 'A')
 		RETURNING vm_saldo_al, val1
 END IF
 DISPLAY BY NAME vm_saldo_al, vm_saldo_fec

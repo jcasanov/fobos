@@ -314,7 +314,7 @@ LET r_b12.b12_num_reversa = NULL
 LET r_b12.b12_fec_modifi  = NULL
 LET r_b12.b12_modulo      = vg_modulo
 LET r_b12.b12_usuario     = vg_usuario
-LET r_b12.b12_fecing      = CURRENT
+LET r_b12.b12_fecing      = fl_current()
 INSERT INTO ctbt012 VALUES(r_b12.*)
 LET secuencia             = 1
 LET valor_acum            = 0
@@ -350,7 +350,7 @@ LET r_b50.b50_tipo_comp = r_b12.b12_tipo_comp
 LET r_b50.b50_num_comp  = r_b12.b12_num_comp
 LET r_b50.b50_anio      = YEAR(r_b12.b12_fec_proceso)
 LET r_b50.b50_usuario   = vg_usuario
-LET r_b50.b50_fecing    = CURRENT
+LET r_b50.b50_fecing    = fl_current()
 INSERT INTO ctbt050 VALUES(r_b50.*)
 CALL fl_mostrar_mensaje('Contabilizacion generada Ok. Comprobante ' || r_b12.b12_tipo_comp || '-' || r_b12.b12_num_comp || '.', 'info')
 RETURN 1
@@ -417,6 +417,8 @@ DEFINE tot_db		DECIMAL(15,2)
 DEFINE tot_cr		DECIMAL(15,2)
 DEFINE num_row		INTEGER
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 CALL fl_lee_compania_contabilidad(codcia) RETURNING r_cia.*
 IF r_cia.b00_compania IS NULL THEN
 	CALL fl_mostrar_mensaje('Compañía no esta configurada en Contabilidad', 'exclamation')
@@ -446,7 +448,8 @@ SELECT * FROM ctbt006
 	      b06_mes      = mes
 LET num_row = 0
 IF status = NOTFOUND THEN
-	INSERT INTO ctbt006 VALUES (codcia, ano, mes, vg_usuario, CURRENT)
+	LET fecha_actual = fl_current()
+	INSERT INTO ctbt006 VALUES (codcia, ano, mes, vg_usuario, fecha_actual)
 	LET num_row = SQLCA.SQLERRD[6]
 END IF
 ERROR 'Bloqueando maestro de saldos'

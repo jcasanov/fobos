@@ -465,7 +465,7 @@ FOREACH q_magu INTO cuenta, descripcion, estado
 			RETURNING saldo_ant
 	ELSE
 		CALL fl_obtener_saldo_cuentas_patrimonio(vg_codcia, cuenta,
-						rm_par.moneda, fecha, TODAY,'A')
+						rm_par.moneda, fecha, vg_fecha,'A')
 			RETURNING saldo_ant, val1
 	END IF
 	LET mov_neto = 0
@@ -655,7 +655,7 @@ FOREACH q_sum INTO cuenta, descripcion, estado, nivel, mov_neto_db, mov_neto_cr
 			RETURNING saldo_ant
 	ELSE
 		CALL fl_obtener_saldo_cuentas_patrimonio(vg_codcia, cuenta,
-						rm_par.moneda, fecha, TODAY,'A')
+						rm_par.moneda, fecha, vg_fecha,'A')
 			RETURNING saldo_ant, val1
 	END IF
 	IF vm_nivel_max <> nivel THEN
@@ -857,7 +857,7 @@ PAGE HEADER
 		PRINT COLUMN 102, "  Incluido Diario Cierre anual."
 	END IF
 	SKIP 1 LINES
-	PRINT COLUMN 01, "Fecha de Impresión: ", TODAY USING "dd-mm-yyyy", 
+	PRINT COLUMN 01, "Fecha de Impresión: ", vg_fecha USING "dd-mm-yyyy", 
 	                 1 SPACES, TIME,
 	      COLUMN 113, usuario
 	LET fecha = MDY(vm_mes_ant, 1, vm_ano_ant) + 1 UNITS MONTH 

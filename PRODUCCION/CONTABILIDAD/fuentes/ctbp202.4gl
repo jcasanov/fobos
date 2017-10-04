@@ -231,12 +231,12 @@ DEFINE done 		SMALLINT
 CLEAR FORM
 INITIALIZE rm_b14.* TO NULL
 
-LET rm_b14.b14_fecing    = CURRENT
+LET rm_b14.b14_fecing    = fl_current()
 LET rm_b14.b14_usuario   = vg_usuario
 LET rm_b14.b14_compania  = vg_codcia
 LET rm_b14.b14_moneda    = rm_b00.b00_moneda_base
 LET rm_b14.b14_estado    = 'A'
-LET rm_b14.b14_fecha_ini = TODAY
+LET rm_b14.b14_fecha_ini = vg_fecha
 CALL muestra_etiquetas()
 
 
@@ -500,7 +500,7 @@ INPUT BY NAME rm_b14.b14_codigo,    rm_b14.b14_tipo_comp,  rm_b14.b14_estado,
 		IF rm_b14.b14_fecha_ini IS NULL THEN
 			CONTINUE INPUT
 		END IF
-		IF rm_b14.b14_fecha_ini < TODAY THEN
+		IF rm_b14.b14_fecha_ini < vg_fecha THEN
 			CALL fgl_winmessage(vg_producto,
 				'La fecha inicial debe ser mayor o igual ' ||
 				'a la fecha de hoy.',

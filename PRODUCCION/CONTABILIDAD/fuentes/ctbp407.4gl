@@ -294,7 +294,7 @@ PAGE HEADER
 	PRINT COLUMN 47,  '** Fecha Inicial : ', vm_fecha_ini USING 'dd-mm-yyyy'
 	PRINT COLUMN 47,  '** Fecha Final   : ', vm_fecha_fin USING 'dd-mm-yyyy'
 	PRINT COLUMN 1, 'Fecha Impresión: ',
-		TODAY USING 'dd-mm-yyyy', 1 SPACES, TIME,
+		vg_fecha USING 'dd-mm-yyyy', 1 SPACES, TIME,
 	      COLUMN 113, usuario
 	SKIP 1 LINES
 	PRINT '-----------------------------------------------------------------------------------------------------------------------------------'
@@ -402,7 +402,7 @@ PAGE HEADER
 	PRINT COLUMN 47,  '** Fecha Inicial : ', vm_fecha_ini USING 'dd-mm-yyyy'
 	PRINT COLUMN 47,  '** Fecha Final   : ', vm_fecha_fin USING 'dd-mm-yyyy'
 	PRINT COLUMN 1, 'Fecha Impresión: ',
-		TODAY USING 'dd-mm-yyyy', 1 SPACES, TIME,
+		vg_fecha USING 'dd-mm-yyyy', 1 SPACES, TIME,
 	      COLUMN 113, usuario
 	SKIP 1 LINES
 	PRINT '-----------------------------------------------------------------------------------------------------------------------------------'

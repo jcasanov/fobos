@@ -80,7 +80,7 @@ WHILE TRUE
 	END FOR
 	CLEAR FORM
 	LET rm_ctb.b06_compania = vg_codcia
-	LET rm_ctb.b06_ano      = year(TODAY)
+	LET rm_ctb.b06_ano      = year(vg_fecha)
 	LET tit_enero		= 'N'
 	LET tit_febrero		= 'N'
 	LET tit_marzo		= 'N'
@@ -94,7 +94,7 @@ WHILE TRUE
 	LET tit_noviembre	= 'N'
 	LET tit_diciembre	= 'N'
 	LET rm_ctb.b06_usuario  = vg_usuario
-	LET rm_ctb.b06_fecing   = CURRENT
+	LET rm_ctb.b06_fecing   = fl_current()
 	CALL leer_anio()
 	IF NOT int_flag THEN
 		BEGIN WORK
@@ -111,7 +111,7 @@ WHILE TRUE
 		IF NOT int_flag THEN
 			DELETE FROM ctbt006 WHERE b06_compania = vg_codcia
 					      AND b06_ano      = rm_ctb.b06_ano
-			LET rm_ctb.b06_fecing   = CURRENT
+			LET rm_ctb.b06_fecing   = fl_current()
 			FOR i = 1 TO 12
 				IF rm_mes[i] <> 0 THEN
 					INSERT INTO ctbt006 VALUES(
@@ -163,7 +163,7 @@ INPUT BY NAME rm_ctb.b06_ano
 			CALL llamar_registro()
 			CALL fl_lee_compania_contabilidad(vg_codcia)
 				RETURNING r_cia.*
-			IF rm_ctb.b06_ano > year(TODAY) THEN
+			IF rm_ctb.b06_ano > year(vg_fecha) THEN
 				CALL fgl_winmessage(vg_producto,'Año mayor al año de proceso.','exclamation')
 				NEXT FIELD b06_ano
 			END IF
@@ -172,7 +172,7 @@ INPUT BY NAME rm_ctb.b06_ano
 				NEXT FIELD b06_ano
 			END IF
 		ELSE
-			LET rm_ctb.b06_ano = year(TODAY)
+			LET rm_ctb.b06_ano = year(vg_fecha)
 			DISPLAY BY NAME rm_ctb.b06_ano
 		END IF
 END INPUT
@@ -222,7 +222,7 @@ INPUT BY NAME tit_enero, tit_febrero, tit_marzo, tit_abril, tit_mayo, tit_junio,
 				DISPLAY BY NAME tit_enero
 			END IF
 		END IF
-		IF 1 > month(TODAY) AND rm_ctb.b06_ano = year(TODAY) THEN
+		IF 1 > month(vg_fecha) AND rm_ctb.b06_ano = year(vg_fecha) THEN
 			IF tit_enero = 'S' THEN
 				CALL fgl_winmessage(vg_producto,'No puede bloquear mes mayor al corriente.','exclamation')
 				LET tit_enero = 'N'
@@ -237,7 +237,7 @@ INPUT BY NAME tit_enero, tit_febrero, tit_marzo, tit_abril, tit_mayo, tit_junio,
 				DISPLAY BY NAME tit_febrero
 			END IF
 		END IF
-		IF 2 > month(TODAY) AND rm_ctb.b06_ano = year(TODAY) THEN
+		IF 2 > month(vg_fecha) AND rm_ctb.b06_ano = year(vg_fecha) THEN
 			IF tit_febrero = 'S' THEN
 				CALL fgl_winmessage(vg_producto,'No puede bloquear mes mayor al corriente.','exclamation')
 				LET tit_febrero = 'N'
@@ -252,7 +252,7 @@ INPUT BY NAME tit_enero, tit_febrero, tit_marzo, tit_abril, tit_mayo, tit_junio,
 				DISPLAY BY NAME tit_marzo
 			END IF
 		END IF
-		IF 3 > month(TODAY) AND rm_ctb.b06_ano = year(TODAY) THEN
+		IF 3 > month(vg_fecha) AND rm_ctb.b06_ano = year(vg_fecha) THEN
 			IF tit_marzo = 'S' THEN
 				CALL fgl_winmessage(vg_producto,'No puede bloquear mes mayor al corriente.','exclamation')
 				LET tit_marzo = 'N'
@@ -267,7 +267,7 @@ INPUT BY NAME tit_enero, tit_febrero, tit_marzo, tit_abril, tit_mayo, tit_junio,
 				DISPLAY BY NAME tit_abril
 			END IF
 		END IF
-		IF 4 > month(TODAY) AND rm_ctb.b06_ano = year(TODAY) THEN
+		IF 4 > month(vg_fecha) AND rm_ctb.b06_ano = year(vg_fecha) THEN
 			IF tit_abril = 'S' THEN
 				CALL fgl_winmessage(vg_producto,'No puede bloquear mes mayor al corriente.','exclamation')
 				LET tit_abril = 'N'
@@ -282,7 +282,7 @@ INPUT BY NAME tit_enero, tit_febrero, tit_marzo, tit_abril, tit_mayo, tit_junio,
 				DISPLAY BY NAME tit_mayo
 			END IF
 		END IF
-		IF 5 > month(TODAY) AND rm_ctb.b06_ano = year(TODAY) THEN
+		IF 5 > month(vg_fecha) AND rm_ctb.b06_ano = year(vg_fecha) THEN
 			IF tit_mayo = 'S' THEN
 				CALL fgl_winmessage(vg_producto,'No puede bloquear mes mayor al corriente.','exclamation')
 				LET tit_mayo = 'N'
@@ -297,7 +297,7 @@ INPUT BY NAME tit_enero, tit_febrero, tit_marzo, tit_abril, tit_mayo, tit_junio,
 				DISPLAY BY NAME tit_junio
 			END IF
 		END IF
-		IF 6 > month(TODAY) AND rm_ctb.b06_ano = year(TODAY) THEN
+		IF 6 > month(vg_fecha) AND rm_ctb.b06_ano = year(vg_fecha) THEN
 			IF tit_junio = 'S' THEN
 				CALL fgl_winmessage(vg_producto,'No puede bloquear mes mayor al corriente.','exclamation')
 				LET tit_junio = 'N'
@@ -312,7 +312,7 @@ INPUT BY NAME tit_enero, tit_febrero, tit_marzo, tit_abril, tit_mayo, tit_junio,
 				DISPLAY BY NAME tit_julio
 			END IF
 		END IF
-		IF 7 > month(TODAY) AND rm_ctb.b06_ano = year(TODAY) THEN
+		IF 7 > month(vg_fecha) AND rm_ctb.b06_ano = year(vg_fecha) THEN
 			IF tit_julio = 'S' THEN
 				CALL fgl_winmessage(vg_producto,'No puede bloquear mes mayor al corriente.','exclamation')
 				LET tit_julio = 'N'
@@ -327,7 +327,7 @@ INPUT BY NAME tit_enero, tit_febrero, tit_marzo, tit_abril, tit_mayo, tit_junio,
 				DISPLAY BY NAME tit_agosto
 			END IF
 		END IF
-		IF 8 > month(TODAY) AND rm_ctb.b06_ano = year(TODAY) THEN
+		IF 8 > month(vg_fecha) AND rm_ctb.b06_ano = year(vg_fecha) THEN
 			IF tit_agosto = 'S' THEN
 				CALL fgl_winmessage(vg_producto,'No puede bloquear mes mayor al corriente.','exclamation')
 				LET tit_agosto = 'N'
@@ -342,7 +342,7 @@ INPUT BY NAME tit_enero, tit_febrero, tit_marzo, tit_abril, tit_mayo, tit_junio,
 				DISPLAY BY NAME tit_septiembre
 			END IF
 		END IF
-		IF 9 > month(TODAY) AND rm_ctb.b06_ano = year(TODAY) THEN
+		IF 9 > month(vg_fecha) AND rm_ctb.b06_ano = year(vg_fecha) THEN
 			IF tit_septiembre = 'S' THEN
 				CALL fgl_winmessage(vg_producto,'No puede bloquear mes mayor al corriente.','exclamation')
 				LET tit_septiembre = 'N'
@@ -357,7 +357,7 @@ INPUT BY NAME tit_enero, tit_febrero, tit_marzo, tit_abril, tit_mayo, tit_junio,
 				DISPLAY BY NAME tit_octubre
 			END IF
 		END IF
-		IF 10 > month(TODAY) AND rm_ctb.b06_ano = year(TODAY) THEN
+		IF 10 > month(vg_fecha) AND rm_ctb.b06_ano = year(vg_fecha) THEN
 			IF tit_octubre = 'S' THEN
 				CALL fgl_winmessage(vg_producto,'No puede bloquear mes mayor al corriente.','exclamation')
 				LET tit_octubre = 'N'
@@ -372,7 +372,7 @@ INPUT BY NAME tit_enero, tit_febrero, tit_marzo, tit_abril, tit_mayo, tit_junio,
 				DISPLAY BY NAME tit_noviembre
 			END IF
 		END IF
-		IF 11 > month(TODAY) AND rm_ctb.b06_ano = year(TODAY) THEN
+		IF 11 > month(vg_fecha) AND rm_ctb.b06_ano = year(vg_fecha) THEN
 			IF tit_noviembre = 'S' THEN
 				CALL fgl_winmessage(vg_producto,'No puede bloquear mes mayor al corriente.','exclamation')
 				LET tit_noviembre = 'N'
@@ -387,7 +387,7 @@ INPUT BY NAME tit_enero, tit_febrero, tit_marzo, tit_abril, tit_mayo, tit_junio,
 				DISPLAY BY NAME tit_diciembre
 			END IF
 		END IF
-		IF 12 > month(TODAY) AND rm_ctb.b06_ano = year(TODAY) THEN
+		IF 12 > month(vg_fecha) AND rm_ctb.b06_ano = year(vg_fecha) THEN
 			IF tit_diciembre = 'S' THEN
 				CALL fgl_winmessage(vg_producto,'No puede bloquear mes mayor al corriente.','exclamation')
 				LET tit_diciembre = 'N'

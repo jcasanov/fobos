@@ -77,8 +77,8 @@ DISPLAY FORM f_bal
 CALL fl_lee_compania_contabilidad(vg_codcia) RETURNING rg_cont.*
 INITIALIZE rm_par.* TO NULL
 LET rm_par.moneda  = rg_cont.b00_moneda_base
-LET rm_par.ano     = YEAR(TODAY)
-LET rm_par.mes     = MONTH(TODAY)
+LET rm_par.ano     = YEAR(vg_fecha)
+LET rm_par.mes     = MONTH(vg_fecha)
 SELECT MAX(b01_nivel) INTO vm_max_nivel FROM ctbt001
 IF vm_max_nivel IS NULL THEN
 	CALL fgl_winmessage(vg_producto,'Nivel no está configurado.','stop')
@@ -183,7 +183,7 @@ INPUT BY NAME rm_par.ano, rm_par.diario_cie, rm_par.moneda, rm_par.ccosto
 			DISPLAY BY NAME rm_par.tit_mon
 		END IF
 	AFTER FIELD ano
-		IF rm_par.ano > YEAR(TODAY) THEN
+		IF rm_par.ano > YEAR(vg_fecha) THEN
 			CALL fgl_winmessage(vg_producto, 'Año incorrecto', 'exclamation')
 			NEXT FIELD ano
 		END IF

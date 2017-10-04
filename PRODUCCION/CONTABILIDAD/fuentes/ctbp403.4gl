@@ -72,8 +72,8 @@ IF num_args() = 11 THEN
 	CALL llamada_otro_prog()
 	EXIT PROGRAM
 END IF
-LET rm_par.anho           = YEAR(TODAY)
-LET rm_par.mes            = MONTH(TODAY)
+LET rm_par.anho           = YEAR(vg_fecha)
+LET rm_par.mes            = MONTH(vg_fecha)
 LET rm_par.n_mes 	  = get_month_name(rm_par.mes) CLIPPED
 LET rm_par.imprime_saldos = 'S'	
 LET rm_par.moneda         = rg_gen.g00_moneda_base
@@ -423,7 +423,7 @@ PAGE HEADER
 	END IF
 	
 	SKIP 1 LINES
-	PRINT COLUMN 001, "Fecha de Impresión: ", TODAY USING "dd-mm-yyyy", 
+	PRINT COLUMN 001, "Fecha de Impresión: ", vg_fecha USING "dd-mm-yyyy", 
 	                 1 SPACES, TIME,
 	      COLUMN 113 , usuario
 	SKIP 1 LINES

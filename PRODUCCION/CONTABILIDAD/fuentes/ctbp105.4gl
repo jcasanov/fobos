@@ -136,14 +136,14 @@ FUNCTION control_ingreso()
 CALL fl_retorna_usuario()
 INITIALIZE rm_ctb.* TO NULL
 LET rm_ctb.b07_usuario = vg_usuario
-LET rm_ctb.b07_fecing = CURRENT
+LET rm_ctb.b07_fecing = fl_current()
 LET rm_ctb.b07_estado = 'A'
 CLEAR tit_est
 CLEAR tit_estado_doc
 CALL muestra_estado()
 CALL leer_datos('I')
 IF NOT int_flag THEN
-	LET rm_ctb.b07_fecing = CURRENT
+	LET rm_ctb.b07_fecing = fl_current()
 	INSERT INTO ctbt007 VALUES (rm_ctb.*)
 	LET vm_num_rows = vm_num_rows + 1
 	LET vm_row_current = vm_num_rows

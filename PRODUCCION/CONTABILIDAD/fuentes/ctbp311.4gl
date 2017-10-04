@@ -76,8 +76,8 @@ DEFINE i,j,l,col        SMALLINT
 DEFINE query            VARCHAR(1000)
 DEFINE query2           VARCHAR(1000)
 
-LET vm_fecha_ini       = TODAY
-LET vm_fecha_fin       = TODAY
+LET vm_fecha_ini       = vg_fecha
+LET vm_fecha_fin       = vg_fecha
 DISPLAY BY NAME vm_fecha_ini, vm_fecha_fin
 
 WHILE TRUE
@@ -173,14 +173,14 @@ INPUT BY NAME vm_fecha_ini, vm_fecha_fin
                 LET fecha_fin = vm_fecha_fin
         AFTER FIELD vm_fecha_ini
                 IF vm_fecha_ini IS NOT NULL THEN
-                        IF vm_fecha_ini > TODAY THEN
+                        IF vm_fecha_ini > vg_fecha THEN
                                 CALL fgl_winmessage(vg_producto,'La fecha de inicio no puede ser mayor a la de hoy.','exclamation')
                                 NEXT FIELD vm_fecha_ini
                         END IF
                 END IF
 	AFTER FIELD vm_fecha_fin
                 IF vm_fecha_fin IS NOT NULL THEN
-                        IF vm_fecha_fin > TODAY THEN
+                        IF vm_fecha_fin > vg_fecha THEN
                                 CALL fgl_winmessage(vg_producto,'La fecha de término no puede ser mayor a la de hoy.','exclamation')
                                 NEXT FIELD vm_fecha_fin
                         END IF

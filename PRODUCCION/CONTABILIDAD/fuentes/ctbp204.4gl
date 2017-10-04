@@ -111,21 +111,21 @@ LET vm_anopro_ini = arg_val(5)
 LET vm_anopro_fin = arg_val(6)
 LET vm_mespro_ini = arg_val(7)
 LET vm_mespro_fin = arg_val(8)
-IF vm_anopro_ini > YEAR(TODAY) OR vm_anopro_ini < rm_b00.b00_anopro THEN
+IF vm_anopro_ini > YEAR(vg_fecha) OR vm_anopro_ini < rm_b00.b00_anopro THEN
 	DISPLAY 'Año Inicial de proceso contable está incorrecto.'
 	EXIT PROGRAM
 END IF
-IF vm_anopro_fin > YEAR(TODAY) OR vm_anopro_fin < rm_b00.b00_anopro THEN
+IF vm_anopro_fin > YEAR(vg_fecha) OR vm_anopro_fin < rm_b00.b00_anopro THEN
 	DISPLAY 'Año Final de proceso contable está incorrecto.'
 	EXIT PROGRAM
 END IF
 LET fecha = MDY(vm_mespro_ini, 1, vm_anopro_ini)
-IF fecha > TODAY OR fecha < rm_b00.b00_fecha_cm THEN
+IF fecha > vg_fecha OR fecha < rm_b00.b00_fecha_cm THEN
 	DISPLAY 'Mes Inicial para la remayorización está incorrecto.'
 	EXIT PROGRAM
 END IF
 LET fecha = MDY(vm_mespro_fin, 1, vm_anopro_fin)
-IF fecha > TODAY OR fecha < rm_b00.b00_fecha_cm THEN
+IF fecha > vg_fecha OR fecha < rm_b00.b00_fecha_cm THEN
 	DISPLAY 'Mes Inicial para la remayorización está incorrecto.'
 	EXIT PROGRAM
 END IF
@@ -150,10 +150,10 @@ END FUNCTION
 FUNCTION control_ingreso()
 
 CLEAR FORM
-LET vm_anopro_ini = YEAR(TODAY)
-LET vm_mespro_ini = MONTH(TODAY) 
-LET vm_anopro_fin = YEAR(TODAY)
-LET vm_mespro_fin = MONTH(TODAY) 
+LET vm_anopro_ini = YEAR(vg_fecha)
+LET vm_mespro_ini = MONTH(vg_fecha) 
+LET vm_anopro_fin = YEAR(vg_fecha)
+LET vm_mespro_fin = MONTH(vg_fecha) 
 CALL mostrar_registro()
 WHILE TRUE
 	CALL leer_mes()
@@ -210,7 +210,7 @@ INPUT BY NAME vm_anopro_ini, vm_anopro_fin, vm_mespro_ini, vm_mespro_fin
 		LET mes_fin = vm_mespro_fin
 	AFTER FIELD vm_anopro_ini
 		IF vm_anopro_ini IS NOT NULL THEN
-			IF vm_anopro_ini > YEAR(TODAY) OR
+			IF vm_anopro_ini > YEAR(vg_fecha) OR
 			   vm_anopro_ini < rm_b00.b00_anopro
 			THEN
 				CALL fl_mostrar_mensaje('Año Inicial de proceso contable está incorrecto.', 'exclamation')
@@ -222,7 +222,7 @@ INPUT BY NAME vm_anopro_ini, vm_anopro_fin, vm_mespro_ini, vm_mespro_fin
 		END IF
 	AFTER FIELD vm_anopro_fin
 		IF vm_anopro_fin IS NOT NULL THEN
-			IF vm_anopro_fin > YEAR(TODAY) OR
+			IF vm_anopro_fin > YEAR(vg_fecha) OR
 			   vm_anopro_fin < rm_b00.b00_anopro
 			THEN
 				CALL fl_mostrar_mensaje('Año Final de proceso contable está incorrecto.', 'exclamation')
@@ -235,7 +235,7 @@ INPUT BY NAME vm_anopro_ini, vm_anopro_fin, vm_mespro_ini, vm_mespro_fin
 	AFTER FIELD vm_mespro_ini
 		IF vm_mespro_ini IS NOT NULL THEN
 			LET fecha = MDY(vm_mespro_ini, 1, vm_anopro_ini)
-			IF fecha > TODAY OR fecha < rm_b00.b00_fecha_cm THEN
+			IF fecha > vg_fecha OR fecha < rm_b00.b00_fecha_cm THEN
 				CALL fl_mostrar_mensaje('Mes Inicial para la remayorización está incorrecto.', 'exclamation')
 				NEXT FIELD vm_mespro_ini
 			END IF
@@ -250,7 +250,7 @@ INPUT BY NAME vm_anopro_ini, vm_anopro_fin, vm_mespro_ini, vm_mespro_fin
 	AFTER FIELD vm_mespro_fin
 		IF vm_mespro_fin IS NOT NULL THEN
 			LET fecha = MDY(vm_mespro_fin, 1, vm_anopro_fin)
-			IF fecha > TODAY OR fecha < rm_b00.b00_fecha_cm THEN
+			IF fecha > vg_fecha OR fecha < rm_b00.b00_fecha_cm THEN
 				CALL fl_mostrar_mensaje('Mes Inicial para la remayorización está incorrecto.', 'exclamation')
 				NEXT FIELD vm_mespro_fin
 			END IF

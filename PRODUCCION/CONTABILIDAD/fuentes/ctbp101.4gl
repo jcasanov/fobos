@@ -129,7 +129,7 @@ FUNCTION control_ingreso()
 CALL fl_retorna_usuario()
 INITIALIZE rm_ctb.* TO NULL
 LET rm_ctb.b01_usuario = vg_usuario
-LET rm_ctb.b01_fecing = CURRENT
+LET rm_ctb.b01_fecing = fl_current()
 CALL leer_datos('I')
 IF NOT int_flag THEN
 	-- Hay que obtener el nivel de la cuenta
@@ -139,7 +139,7 @@ IF NOT int_flag THEN
 	END IF
 	LET rm_ctb.b01_nivel = rm_ctb.b01_nivel + 1
 
-	LET rm_ctb.b01_fecing = CURRENT
+	LET rm_ctb.b01_fecing = fl_current()
 	INSERT INTO ctbt001 VALUES (rm_ctb.*)
 	LET vm_num_rows = vm_num_rows + 1
 	LET vm_row_current = vm_num_rows

@@ -310,13 +310,13 @@ DEFINE j		SMALLINT
 CLEAR FORM
 INITIALIZE rm_b12.* TO NULL
 
-LET rm_b12.b12_fecing   = CURRENT
+LET rm_b12.b12_fecing   = fl_current()
 LET rm_b12.b12_usuario  = vg_usuario
 LET rm_b12.b12_compania = vg_codcia
 LET rm_b12.b12_moneda   = rm_b00.b00_moneda_base
 LET rm_b12.b12_estado   = 'A'
 LET rm_b12.b12_origen   = 'M'
-LET rm_b12.b12_fec_proceso = TODAY
+LET rm_b12.b12_fec_proceso = vg_fecha
 CALL muestra_etiquetas()
 
 CALL lee_datos('I')
@@ -509,7 +509,7 @@ WHENEVER ERROR STOP
 
 SET LOCK MODE TO NOT WAIT
 
-LET rm_b12.b12_fec_modifi = CURRENT
+LET rm_b12.b12_fec_modifi = fl_current()
 
 UPDATE ctbt012 SET * = rm_b12.* WHERE CURRENT OF q_upd2
 
@@ -701,7 +701,7 @@ INPUT BY NAME rm_b12.b12_tipo_comp,  rm_b12.b12_num_comp,    rm_b12.b12_estado,
 		IF rm_b12.b12_fec_proceso IS NULL THEN
 			CONTINUE INPUT
 		END IF
-		IF rm_b12.b12_fec_proceso > TODAY THEN
+		IF rm_b12.b12_fec_proceso > vg_fecha THEN
 			--CALL fgl_winmessage(vg_producto,'La fecha de proceso no puede ser mayor a la fecha actual.','exclamation')
 			CALL fl_mostrar_mensaje('La fecha de proceso no puede ser mayor a la fecha actual.','exclamation')
 			NEXT FIELD b12_fec_proceso
@@ -1853,6 +1853,8 @@ FUNCTION control_eliminacion()
 DEFINE resp		CHAR(6)
 DEFINE done		SMALLINT
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 IF vm_num_rows = 0 THEN   
 	CALL fl_mensaje_consultar_primero()
 	RETURN
@@ -1909,9 +1911,10 @@ IF STATUS < 0 THEN
 	RETURN
 END IF  
 WHENEVER ERROR STOP
+LET fecha_actual = fl_current()
 UPDATE ctbt012
 	SET b12_estado     = 'E',
-	    b12_fec_modifi = CURRENT
+	    b12_fec_modifi = fecha_actual
 	WHERE CURRENT OF q_del
 LET done = elimina_origen()
 IF NOT done THEN
@@ -1983,6 +1986,8 @@ DEFINE r_p22		RECORD LIKE cxpt022.*
 DEFINE r_p23		RECORD LIKE cxpt023.*
 DEFINE r_p27		RECORD LIKE cxpt027.*
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 LET done     = 0
 INITIALIZE r_p27.* TO NULL
 SET LOCK MODE TO WAIT 5
@@ -2006,8 +2011,9 @@ IF NOT done THEN
 	RETURN done
 END IF
 IF STATUS <> NOTFOUND THEN
+	LET fecha_actual = fl_current()
 	UPDATE cxpt027 SET p27_estado = 'E',
-			   p27_fecha_eli = CURRENT
+			   p27_fecha_eli = fecha_actual
 		 WHERE CURRENT OF q_rt1
 END IF
 CLOSE q_rt1
@@ -2022,7 +2028,7 @@ LET r_p22.p22_num_trn    = fl_actualiza_control_secuencias(r_p24.p24_compania,
 				r_p24.p24_localidad, 'TE', 'AA', vm_ajuste)
 LET r_p22.p22_referencia = 'ELIM. COMPROBANTE: ', rm_b12.b12_tipo_comp,
 			   '-', rm_b12.b12_num_comp  
-LET r_p22.p22_fecha_emi  = TODAY
+LET r_p22.p22_fecha_emi  = vg_fecha
 LET r_p22.p22_moneda     = r_p24.p24_moneda 
 LET r_p22.p22_paridad    = r_p24.p24_paridad
 LET r_p22.p22_tasa_mora  = 0
@@ -2031,7 +2037,7 @@ LET r_p22.p22_total_int  = 0
 LET r_p22.p22_total_mora = 0 
 LET r_p22.p22_origen     = 'A' 
 LET r_p22.p22_usuario    = vg_usuario    
-LET r_p22.p22_fecing     = CURRENT
+LET r_p22.p22_fecing     = fl_current()
 INSERT INTO cxpt022 VALUES(r_p22.*)
 {--
 SELECT p23_codprov codprov, p23_tipo_doc td, p23_num_doc num, p23_div_doc div_d
@@ -2187,8 +2193,8 @@ LET r_p20.p20_num_doc     = fl_actualiza_control_secuencias(r_p24.p24_compania,
 LET r_p20.p20_dividendo   = 1 
 LET r_p20.p20_referencia  = 'ELIM. COMPROBANTE: ', rm_b12.b12_tipo_comp,
 			    '-', rm_b12.b12_num_comp
-LET r_p20.p20_fecha_emi   = TODAY
-LET r_p20.p20_fecha_vcto  = TODAY
+LET r_p20.p20_fecha_emi   = vg_fecha
+LET r_p20.p20_fecha_vcto  = vg_fecha
 LET r_p20.p20_tasa_int    = 0   
 LET r_p20.p20_tasa_mora   = 0  
 LET r_p20.p20_moneda      = r_p24.p24_moneda 
@@ -2205,7 +2211,7 @@ LET r_p20.p20_cod_depto   = 1  ## Se le agrega este LET se estaba cayendo al
                                ## insertar nulo en un campo not null (RCA)
 LET r_p20.p20_origen      = 'A'
 LET r_p20.p20_usuario     = vg_usuario
-LET r_p20.p20_fecing      = CURRENT
+LET r_p20.p20_fecing      = fl_current()
 INSERT INTO cxpt020 VALUES (r_p20.*)
 INITIALIZE r_p22.* TO NULL
 LET r_p22.p22_compania   = r_p24.p24_compania 
@@ -2215,7 +2221,7 @@ LET r_p22.p22_tipo_trn   = vm_ajuste
 LET r_p22.p22_num_trn    = fl_actualiza_control_secuencias(r_p24.p24_compania,
 				r_p24.p24_localidad, 'TE', 'AA', vm_ajuste)
 LET r_p22.p22_referencia = 'APLICACION NOTA DEBITO # ', r_p20.p20_num_doc
-LET r_p22.p22_fecha_emi  = TODAY
+LET r_p22.p22_fecha_emi  = vg_fecha
 LET r_p22.p22_moneda     = r_p24.p24_moneda 
 LET r_p22.p22_paridad    = r_p24.p24_paridad
 LET r_p22.p22_tasa_mora  = 0
@@ -2224,7 +2230,7 @@ LET r_p22.p22_total_int  = 0
 LET r_p22.p22_total_mora = 0 
 LET r_p22.p22_origen     = 'A' 
 LET r_p22.p22_usuario    = vg_usuario    
-LET r_p22.p22_fecing     = CURRENT
+LET r_p22.p22_fecing     = fl_current()
 INSERT INTO cxpt022 VALUES(r_p22.*)
 INITIALIZE r_p23.* TO NULL
 LET r_p23.p23_compania   = r_p22.p22_compania  

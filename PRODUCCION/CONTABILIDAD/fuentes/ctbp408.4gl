@@ -381,7 +381,7 @@ PAGE HEADER
 	      COLUMN 126, UPSHIFT(vg_proceso) 
 	SKIP 2 LINES
 	PRINT COLUMN 1, 'Fecha Impresión: ',
-		TODAY USING 'dd-mm-yyyy', 1 SPACES, TIME,
+		vg_fecha USING 'dd-mm-yyyy', 1 SPACES, TIME,
 	      COLUMN 114, usuario
 	PRINT '------------------------------------------------------------------------------------------------------------------------------------'
 	SKIP 1 LINES
@@ -501,7 +501,7 @@ PAGE HEADER
 	      COLUMN 126, UPSHIFT(vg_proceso) 
 	SKIP 2 LINES
 	PRINT COLUMN 1, 'Fecha Impresión: ',
-		TODAY USING 'dd-mm-yyyy', 1 SPACES, TIME,
+		vg_fecha USING 'dd-mm-yyyy', 1 SPACES, TIME,
 	      COLUMN 114, usuario
 	PRINT '------------------------------------------------------------------------------------------------------------------------------------'
 	PRINT COLUMN 1,   'Comprobante',

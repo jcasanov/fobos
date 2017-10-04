@@ -137,14 +137,14 @@ CALL fl_retorna_usuario()
 INITIALIZE rm_ctb.* TO NULL
 LET rm_ctb.b08_compania = vg_codcia
 LET rm_ctb.b08_usuario = vg_usuario
-LET rm_ctb.b08_fecing = CURRENT
+LET rm_ctb.b08_fecing = fl_current()
 LET rm_ctb.b08_estado = 'A'
 CLEAR tit_est
 CLEAR tit_estado_fil
 CALL muestra_estado()
 CALL leer_datos('I')
 IF NOT int_flag THEN
-	LET rm_ctb.b08_fecing = CURRENT
+	LET rm_ctb.b08_fecing = fl_current()
 	INSERT INTO ctbt008 VALUES (rm_ctb.*)
 	LET vm_num_rows = vm_num_rows + 1
 	LET vm_row_current = vm_num_rows
