@@ -115,8 +115,8 @@ DEFINE tipo_comp	LIKE ctbt012.b12_tipo_comp
 DEFINE num_comp		LIKE ctbt012.b12_num_comp
 DEFINE r_j02		RECORD LIKE cajt002.*
 
-LET vm_fecha_ini = TODAY
-LET vm_fecha_fin = TODAY
+LET vm_fecha_ini = vg_fecha
+LET vm_fecha_fin = vg_fecha
 CALL fl_lee_usuario(vg_usuario) RETURNING rm_g05.*
 IF rm_g05.g05_tipo = 'UF' THEN
 	INITIALIZE r_j02.* TO NULL
@@ -526,7 +526,7 @@ INPUT BY NAME rm_caj.j10_codigo_caja, vm_fecha_ini, vm_fecha_fin
 		END IF
 	AFTER FIELD vm_fecha_ini 
 		IF vm_fecha_ini IS NOT NULL THEN
-			IF vm_fecha_ini > TODAY THEN
+			IF vm_fecha_ini > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha de inicio no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD vm_fecha_ini
 			END IF
@@ -536,7 +536,7 @@ INPUT BY NAME rm_caj.j10_codigo_caja, vm_fecha_ini, vm_fecha_fin
 		END IF
 	AFTER FIELD vm_fecha_fin 
 		IF vm_fecha_fin IS NOT NULL THEN
-			IF vm_fecha_fin > TODAY THEN
+			IF vm_fecha_fin > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha de término no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD vm_fecha_fin
 			END IF

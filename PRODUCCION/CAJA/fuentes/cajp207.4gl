@@ -296,7 +296,7 @@ DEFINE r_j02		RECORD LIKE cajt002.*
 CLEAR FORM
 INITIALIZE rm_j10.* TO NULL
 
-LET rm_j10.j10_fecing      = CURRENT
+LET rm_j10.j10_fecing      = fl_current()
 LET rm_j10.j10_fecha_pro   = rm_j10.j10_fecing
 LET rm_j10.j10_usuario     = vg_usuario
 LET rm_j10.j10_compania    = vg_codcia
@@ -321,14 +321,14 @@ BEGIN WORK
 		WHERE j04_compania    = vg_codcia
 		  AND j04_localidad   = vg_codloc
 		  AND j04_codigo_caja = r_j02.j02_codigo_caja
-		  AND j04_fecha_aper  = TODAY
+		  AND j04_fecha_aper  = vg_fecha
 		  AND j04_secuencia   = (SELECT MAX(j04_secuencia) 
 		  				FROM cajt004
 	  					WHERE j04_compania  = vg_codcia
 	  				  	  AND j04_localidad = vg_codloc
 	  					  AND j04_codigo_caja 
 	  					  	= r_j02.j02_codigo_caja
-	  					  AND j04_fecha_aper  = TODAY)
+	  					  AND j04_fecha_aper  = vg_fecha)
 
 IF rm_j04.j04_codigo_caja IS NULL THEN
 	ROLLBACK WORK
@@ -808,7 +808,7 @@ IF rm_j10.j10_estado = 'E' THEN
 	CALL fl_mostrar_mensaje('Este registro ya ha sido eliminado.','exclamation')
 	RETURN
 END IF
-IF DATE(rm_j10.j10_fecha_pro) <> TODAY THEN
+IF DATE(rm_j10.j10_fecha_pro) <> vg_fecha THEN
 	CALL fl_mostrar_mensaje('Solo puede eliminar egresos realizados hoy.','exclamation')
 	RETURN
 END IF
@@ -817,14 +817,14 @@ SELECT * INTO rm_j04.* FROM cajt004
 	WHERE j04_compania    = vg_codcia
 	  AND j04_localidad   = vg_codloc
 	  AND j04_codigo_caja = r_j02.j02_codigo_caja
-	  AND j04_fecha_aper  = TODAY
+	  AND j04_fecha_aper  = vg_fecha
 	  AND j04_secuencia   = (SELECT MAX(j04_secuencia) 
 	  				FROM cajt004
   					WHERE j04_compania  = vg_codcia
   				  	  AND j04_localidad = vg_codloc
   					  AND j04_codigo_caja 
   					  	= r_j02.j02_codigo_caja
-  					  AND j04_fecha_aper  = TODAY)
+  					  AND j04_fecha_aper  = vg_fecha)
 
 IF rm_j04.j04_codigo_caja IS NULL THEN
 	ROLLBACK WORK
@@ -1407,7 +1407,7 @@ WHILE NOT salir
 				WHERE j13_compania     = vg_codcia
 				  AND j13_localidad    = vg_codloc
 				  AND j13_codigo_caja  = rm_j10.j10_codigo_caja
-				  AND j13_fecha        = TODAY
+				  AND j13_fecha        = vg_fecha
 		 		  AND j13_moneda       = rm_j10.j10_moneda
 				  AND j13_trn_generada = vm_egr_caja
 				  AND j13_codigo_pago  IN (codigo_pago)
@@ -2188,7 +2188,7 @@ LET r_b12.b12_compania    = vg_codcia
 -- OjO confirmar
 LET r_b12.b12_tipo_comp   = r_b03.b03_tipo_comp
 LET r_b12.b12_num_comp    = fl_numera_comprobante_contable(vg_codcia,
-                            	r_b12.b12_tipo_comp, YEAR(TODAY), MONTH(TODAY))
+                            	r_b12.b12_tipo_comp, YEAR(vg_fecha), MONTH(vg_fecha))
 LET r_b12.b12_estado      = 'A' 
 IF rm_j10.j10_valor > 0 THEN
 	CASE vg_codloc
@@ -2215,11 +2215,11 @@ LET r_b12.b12_origen      = 'A'
 LET r_b12.b12_moneda      = rm_j10.j10_moneda
 LET r_b12.b12_paridad     = calcula_paridad(rm_j10.j10_moneda,
 					    rg_gen.g00_moneda_base) 
-LET r_b12.b12_fec_proceso = TODAY
+LET r_b12.b12_fec_proceso = vg_fecha
 -- OjO EG no esta relacionado al modulo CG
 LET r_b12.b12_modulo      = r_b03.b03_modulo
 LET r_b12.b12_usuario     = vg_usuario 
-LET r_b12.b12_fecing      = CURRENT
+LET r_b12.b12_fecing      = fl_current()
 INSERT INTO ctbt012 VALUES(r_b12.*)
 --
 IF r_b12.b12_moneda = r_b00.b00_moneda_base THEN

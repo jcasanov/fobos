@@ -82,7 +82,7 @@ CREATE TEMP TABLE tmp_sri(
 LET vm_tipo_doc  = 'NV'
 LET vm_tipo_doc2 = 'FA'
 LET vm_max_det   = 10000
-LET fecha_arran  = TODAY
+LET fecha_arran  = vg_fecha
 DECLARE q_g37 CURSOR FOR
 	SELECT g37_fecha_emi, g37_secuencia FROM gent037
 		WHERE g37_compania  = vg_codcia
@@ -127,8 +127,8 @@ DEFINE i,j,col		SMALLINT
 DEFINE query		CHAR(1200)
 DEFINE expr_sql         CHAR(400)
 
-LET vm_fecha_ini = TODAY
-LET vm_fecha_fin = TODAY
+LET vm_fecha_ini = vg_fecha
+LET vm_fecha_fin = vg_fecha
 WHILE TRUE
 	DELETE FROM tmp_sri 
 	LET vm_num_det = 0
@@ -301,7 +301,7 @@ DEFINE mensaje		VARCHAR(250)
 OPTIONS INPUT NO WRAP
 INITIALIZE expr_sql, nulo TO NULL
 --LET fecha_ini = TODAY - (TODAY - MDY(01, 01, YEAR(TODAY))) UNITS DAY
-LET fecha_ini = MDY(12, 01, YEAR(TODAY) - 1)
+LET fecha_ini = MDY(12, 01, YEAR(vg_fecha) - 1)
 LET int_flag  = 0
 INPUT BY NAME vm_fecha_ini, vm_fecha_fin
 	WITHOUT DEFAULTS
@@ -315,7 +315,7 @@ INPUT BY NAME vm_fecha_ini, vm_fecha_fin
 		--#CALL dialog.keysetlabel("CONTROL-W","")
 	AFTER FIELD vm_fecha_ini 
 		IF vm_fecha_ini IS NOT NULL THEN
-			IF vm_fecha_ini > TODAY THEN
+			IF vm_fecha_ini > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha inicial no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD vm_fecha_ini
 			END IF
@@ -324,17 +324,17 @@ INPUT BY NAME vm_fecha_ini, vm_fecha_fin
 				NEXT FIELD vm_fecha_ini
 			END IF
 		ELSE
-			LET vm_fecha_ini = TODAY
+			LET vm_fecha_ini = vg_fecha
 			DISPLAY BY NAME vm_fecha_ini
 		END IF
 	AFTER FIELD vm_fecha_fin 
 		IF vm_fecha_fin IS NOT NULL THEN
-			IF vm_fecha_fin > TODAY THEN
+			IF vm_fecha_fin > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha final no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD vm_fecha_fin
 			END IF
 		ELSE
-			LET vm_fecha_fin = TODAY
+			LET vm_fecha_fin = vg_fecha
 			DISPLAY BY NAME vm_fecha_fin
 		END IF
 	AFTER INPUT

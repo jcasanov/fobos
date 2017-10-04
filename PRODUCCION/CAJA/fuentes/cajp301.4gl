@@ -99,11 +99,11 @@ END FUNCTION
 FUNCTION control_consulta()
 
 LET vm_fecha_ini = NULL
-SELECT NVL(MAX(DATE(j04_fecha_cierre)), TODAY) INTO vm_fecha_ini
+SELECT NVL(MAX(DATE(j04_fecha_cierre)), vg_fecha) INTO vm_fecha_ini
 	FROM cajt004
 	WHERE j04_compania  = vg_codcia
 	  AND j04_localidad = vg_codloc
-LET vm_fecha_fin = TODAY
+LET vm_fecha_fin = vg_fecha
 WHILE TRUE
 	LET vm_num_det = 0
 	CALL borrar_detalle()
@@ -174,7 +174,7 @@ INPUT BY NAME rm_j10.j10_codigo_caja, vm_fecha_ini, vm_fecha_fin
 		END IF
 	AFTER FIELD vm_fecha_ini 
 		IF vm_fecha_ini IS NOT NULL THEN
-			IF vm_fecha_ini > TODAY THEN
+			IF vm_fecha_ini > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La Fecha Inicial no puede ser mayor a la fecha de hoy.', 'exclamation')
 				NEXT FIELD vm_fecha_ini
 			END IF
@@ -184,7 +184,7 @@ INPUT BY NAME rm_j10.j10_codigo_caja, vm_fecha_ini, vm_fecha_fin
 		END IF
 	AFTER FIELD vm_fecha_fin 
 		IF vm_fecha_fin IS NOT NULL THEN
-			IF vm_fecha_fin > TODAY THEN
+			IF vm_fecha_fin > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La Fecha Final no puede ser mayor a la Fecha de hoy.', 'exclamation')
 				NEXT FIELD vm_fecha_fin
 			END IF

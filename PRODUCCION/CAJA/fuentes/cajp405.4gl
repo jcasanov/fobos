@@ -137,8 +137,8 @@ END RECORD
 
 INITIALIZE rm_par.* TO NULL
 
-LET rm_par.fecha_ini = TODAY
-LET rm_par.fecha_fin = TODAY
+LET rm_par.fecha_ini = vg_fecha
+LET rm_par.fecha_fin = vg_fecha
 
 WHILE TRUE
 	CALL lee_parametros()
@@ -322,7 +322,7 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 
 	AFTER FIELD fecha_ini
 		IF rm_par.fecha_ini IS NOT NULL THEN
-			IF rm_par.fecha_ini > TODAY THEN
+			IF rm_par.fecha_ini > vg_fecha THEN
 				--CALL fgl_winmessage(vg_producto,'La fecha de inicio no puede ser mayor a la de hoy.','exclamation')
 				CALL fl_mostrar_mensaje('La fecha de inicio no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD fecha_ini
@@ -339,7 +339,7 @@ INPUT BY NAME rm_par.* WITHOUT DEFAULTS
 
 	AFTER FIELD fecha_fin
 		IF rm_par.fecha_fin IS NOT NULL THEN
-			IF rm_par.fecha_fin > TODAY THEN
+			IF rm_par.fecha_fin > vg_fecha THEN
 				--CALL fgl_winmessage(vg_producto,'La fecha de término no puede ser mayor a la de hoy.','exclamation')
 				CALL fl_mostrar_mensaje('La fecha de término no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD fecha_fin
@@ -468,7 +468,7 @@ PAGE HEADER
 				" ", rm_par.j01_nombre
 	--#END IF
 	SKIP 1 LINES
-	PRINT COLUMN 01, "Fecha de Impresión: ", TODAY USING "dd-mm-yyyy", 
+	PRINT COLUMN 01, "Fecha de Impresión: ", vg_fecha USING "dd-mm-yyyy", 
 	                 1 SPACES, TIME,
 	      COLUMN 142, usuario
 	SKIP 1 LINES

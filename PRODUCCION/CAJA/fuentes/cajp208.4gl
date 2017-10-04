@@ -496,7 +496,7 @@ FOREACH q_cajas_j13 INTO codigo_pago, moneda, valor
 				WHERE j13_compania     = vg_codcia
 				  AND j13_localidad    = vg_codloc
 				  AND j13_codigo_caja  = rm_j02.j02_codigo_caja
-				  AND j13_fecha        = TODAY
+				  AND j13_fecha        = vg_fecha
 				  AND j13_moneda       = moneda
 				  AND j13_trn_generada = rm_j10.j10_tipo_destino
 				  AND j13_codigo_pago  = codigo_pago
@@ -518,7 +518,7 @@ FOREACH q_cajas_j13 INTO codigo_pago, moneda, valor
 		LET r_j13.j13_compania     = vg_codcia
 		LET r_j13.j13_localidad    = vg_codloc
 		LET r_j13.j13_codigo_caja  = rm_j02.j02_codigo_caja
-		LET r_j13.j13_fecha        = TODAY
+		LET r_j13.j13_fecha        = vg_fecha
 		LET r_j13.j13_moneda       = moneda
 		LET r_j13.j13_trn_generada = rm_j10.j10_tipo_destino
 		LET r_j13.j13_codigo_pago  = codigo_pago
@@ -695,7 +695,7 @@ IF rm_j10.j10_estado = 'E' THEN
 	RETURN
 END IF
 
-IF DATE(rm_j10.j10_fecha_pro) <> TODAY THEN
+IF DATE(rm_j10.j10_fecha_pro) <> vg_fecha THEN
 	--CALL fgl_winmessage(vg_producto,'Solo puede eliminar ingresos realizados hoy.','exclamation')
 	CALL fl_mostrar_mensaje('Solo puede eliminar ingresos realizados hoy.','exclamation')
 	RETURN
@@ -706,13 +706,13 @@ SELECT * INTO rm_j04.* FROM cajt004
 	WHERE j04_compania    = vg_codcia
 	  AND j04_localidad   = vg_codloc
 	  AND j04_codigo_caja = rm_j02.j02_codigo_caja
-	  AND j04_fecha_aper  = TODAY
+	  AND j04_fecha_aper  = vg_fecha
 	  AND j04_secuencia   = (SELECT MAX(j04_secuencia) 
 	  			FROM cajt004
   				WHERE j04_compania    = vg_codcia
   				  AND j04_localidad   = vg_codloc
   				  AND j04_codigo_caja = rm_j02.j02_codigo_caja
-  				  AND j04_fecha_aper  = TODAY)
+  				  AND j04_fecha_aper  = vg_fecha)
 IF STATUS = NOTFOUND THEN 
 	--CALL fgl_winmessage(vg_producto,'La caja no está aperturada.','exclamation')
 	CALL fl_mostrar_mensaje('La caja no está aperturada.','exclamation')
@@ -920,7 +920,7 @@ LET r_z22.z22_num_trn    = fl_actualiza_control_secuencias(r_j10.j10_compania,
 LET r_z22.z22_areaneg    = r_j10.j10_areaneg
 LET r_z22.z22_referencia = 'ELIMINACION: ', r_j10.j10_tipo_destino,
 			   '-', r_j10.j10_num_destino
-LET r_z22.z22_fecha_emi  = TODAY
+LET r_z22.z22_fecha_emi  = vg_fecha
 LET r_z22.z22_moneda     = r_j10.j10_moneda 
 LET r_z22.z22_paridad    = calcula_paridad(r_j10.j10_moneda, 
 					   rg_gen.g00_moneda_base) 
@@ -930,7 +930,7 @@ LET r_z22.z22_total_int  = 0
 LET r_z22.z22_total_mora = 0 
 LET r_z22.z22_origen     = 'A' 
 LET r_z22.z22_usuario    = vg_usuario    
-LET r_z22.z22_fecing     = CURRENT
+LET r_z22.z22_fecing     = fl_current()
 INSERT INTO cxct022 VALUES(r_z22.*)
 
 DECLARE q_aj1 CURSOR FOR 
@@ -1085,8 +1085,8 @@ LET r_z20.z20_dividendo   = 1
 LET r_z20.z20_areaneg     = r_j10.j10_areaneg
 LET r_z20.z20_referencia  = 'ELIMINACION: ', r_j10.j10_tipo_destino,
 			    '-', r_j10.j10_num_destino
-LET r_z20.z20_fecha_emi   = TODAY
-LET r_z20.z20_fecha_vcto  = TODAY
+LET r_z20.z20_fecha_emi   = vg_fecha
+LET r_z20.z20_fecha_vcto  = vg_fecha
 LET r_z20.z20_tasa_int    = 0   
 LET r_z20.z20_tasa_mora   = 0  
 LET r_z20.z20_moneda      = r_j10.j10_moneda 
@@ -1118,7 +1118,7 @@ END IF
 LET r_z20.z20_linea       = r_g20.g20_grupo_linea
 LET r_z20.z20_origen      = 'A'
 LET r_z20.z20_usuario     = vg_usuario
-LET r_z20.z20_fecing      = CURRENT
+LET r_z20.z20_fecing      = fl_current()
 INSERT INTO cxct020 VALUES (r_z20.*)
 
 INITIALIZE r_z22.* TO NULL
@@ -1130,7 +1130,7 @@ LET r_z22.z22_num_trn    = fl_actualiza_control_secuencias(r_j10.j10_compania,
 				r_j10.j10_localidad, 'TE', 'AA', vm_ajuste)
 LET r_z22.z22_areaneg    = r_j10.j10_areaneg
 LET r_z22.z22_referencia = 'APLICACION NOTA DEBITO # ', r_z20.z20_num_doc
-LET r_z22.z22_fecha_emi  = TODAY
+LET r_z22.z22_fecha_emi  = vg_fecha
 LET r_z22.z22_moneda     = r_j10.j10_moneda 
 LET r_z22.z22_paridad    = calcula_paridad(r_j10.j10_moneda, 
 					   rg_gen.g00_moneda_base) 
@@ -1140,7 +1140,7 @@ LET r_z22.z22_total_int  = 0
 LET r_z22.z22_total_mora = 0 
 LET r_z22.z22_origen     = 'A' 
 LET r_z22.z22_usuario    = vg_usuario    
-LET r_z22.z22_fecing     = CURRENT
+LET r_z22.z22_fecing     = fl_current()
 INSERT INTO cxct022 VALUES(r_z22.*)
 
 INITIALIZE r_z23.* TO NULL

@@ -144,14 +144,14 @@ WHILE NOT salir
 		WHERE j04_compania    = vg_codcia
 		  AND j04_localidad   = vg_codloc
 		  AND j04_codigo_caja = rm_j02.j02_codigo_caja
-		  AND j04_fecha_aper  = TODAY
+		  AND j04_fecha_aper  = vg_fecha
 		  AND j04_secuencia   = (SELECT MAX(j04_secuencia) 
 		  			FROM cajt004
 	  				WHERE j04_compania  = vg_codcia
 	  				  AND j04_localidad = vg_codloc
 	  				  AND j04_codigo_caja 
 	  				  	= rm_j02.j02_codigo_caja
-	  				  AND j04_fecha_aper  = TODAY)
+	  				  AND j04_fecha_aper  = vg_fecha)
 
 	IF STATUS = NOTFOUND THEN 
 		--CALL fgl_winmessage(vg_producto,'La caja no está aperturada.','exclamation')
@@ -167,13 +167,13 @@ WHILE NOT salir
 	LET rm_j10.j10_localidad   = vg_codloc
 	LET rm_j10.j10_estado      = 'A'
 	LET rm_j10.j10_usuario     = vg_usuario
-	LET rm_j10.j10_fecing      = CURRENT
+	LET rm_j10.j10_fecing      = fl_current()
 	LET rm_j10.j10_tipo_fuente = vm_otros_ingresos
 	LET rm_j10.j10_moneda      = rg_gen.g00_moneda_base
 	LET rm_j10.j10_codigo_caja = rm_j02.j02_codigo_caja
 	CALL fl_lee_moneda(rm_j10.j10_moneda) RETURNING r_g13.*
 	DISPLAY r_g13.g13_nombre TO n_moneda
-	LET rm_j10.j10_fecha_pro   = CURRENT
+	LET rm_j10.j10_fecha_pro   = fl_current()
 
 	CALL lee_datos_cabecera()
 	IF INT_FLAG THEN
@@ -1182,7 +1182,7 @@ FOREACH q_cajas_j13 INTO codigo_pago, moneda, valor
 				WHERE j13_compania     = vg_codcia
 				  AND j13_localidad    = vg_codloc
 				  AND j13_codigo_caja  = rm_j02.j02_codigo_caja
-				  AND j13_fecha        = TODAY
+				  AND j13_fecha        = vg_fecha
 				  AND j13_moneda       = moneda
 				  AND j13_trn_generada = rm_j10.j10_tipo_destino
 				  AND j13_codigo_pago  = codigo_pago
@@ -1205,7 +1205,7 @@ FOREACH q_cajas_j13 INTO codigo_pago, moneda, valor
 			LET r_j13.j13_compania     = vg_codcia
 			LET r_j13.j13_localidad    = vg_codloc
 			LET r_j13.j13_codigo_caja  = rm_j02.j02_codigo_caja
-			LET r_j13.j13_fecha        = TODAY
+			LET r_j13.j13_fecha        = vg_fecha
 			LET r_j13.j13_moneda       = moneda
 			LET r_j13.j13_trn_generada = rm_j10.j10_tipo_destino
 			LET r_j13.j13_codigo_pago  = codigo_pago
@@ -1845,7 +1845,7 @@ LET r_b12.b12_compania    = vg_codcia
 -- OjO confirmar
 LET r_b12.b12_tipo_comp   = r_b03.b03_tipo_comp
 LET r_b12.b12_num_comp    = fl_numera_comprobante_contable(vg_codcia,
-                            	r_b12.b12_tipo_comp, YEAR(TODAY), MONTH(TODAY))
+                            	r_b12.b12_tipo_comp, YEAR(vg_fecha), MONTH(vg_fecha))
 LET r_b12.b12_estado      = 'A' 
 LET r_b12.b12_glosa       = 'COMPROBANTE: ' || glosa CLIPPED || '. ' ||
 			    rm_j10.j10_referencia CLIPPED 
@@ -1853,10 +1853,10 @@ LET r_b12.b12_origen      = 'A'
 LET r_b12.b12_moneda      = rm_j10.j10_moneda
 LET r_b12.b12_paridad     = calcula_paridad(rm_j10.j10_moneda,
 					    rg_gen.g00_moneda_base) 
-LET r_b12.b12_fec_proceso = TODAY
+LET r_b12.b12_fec_proceso = vg_fecha
 LET r_b12.b12_modulo      = 'CG'                
 LET r_b12.b12_usuario     = vg_usuario 
-LET r_b12.b12_fecing      = CURRENT
+LET r_b12.b12_fecing      = fl_current()
 
 INSERT INTO ctbt012 VALUES(r_b12.*)
 

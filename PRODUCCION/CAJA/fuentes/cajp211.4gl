@@ -136,8 +136,8 @@ LET vm_max_rows = 20000
 --#DISPLAY 'Valor Ret.'		TO tit_col6
 LET vm_size_arr = fgl_scr_size('rm_detalle')
 INITIALIZE rm_j10.*, rm_j14.*, rm_par.* TO NULL
-LET rm_par.fecha_ini   = TODAY
-LET rm_par.fecha_fin   = TODAY
+LET rm_par.fecha_ini   = vg_fecha
+LET rm_par.fecha_fin   = vg_fecha
 LET rm_par.tipo_fuente = 'PR'
 WHILE TRUE
 	CALL borrar_pantalla()
@@ -236,7 +236,7 @@ INPUT BY NAME rm_par.*
 		LET fec_fin = rm_par.fecha_fin
 	AFTER FIELD fecha_ini 
 		IF rm_par.fecha_ini IS NOT NULL THEN
-			IF rm_par.fecha_ini > TODAY THEN
+			IF rm_par.fecha_ini > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha de inicio no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD fecha_ini
 			END IF
@@ -246,7 +246,7 @@ INPUT BY NAME rm_par.*
 		END IF
 	AFTER FIELD fecha_fin 
 		IF rm_par.fecha_fin IS NOT NULL THEN
-			IF rm_par.fecha_fin > TODAY THEN
+			IF rm_par.fecha_fin > vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha de término no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD fecha_fin
 			END IF
@@ -1269,7 +1269,7 @@ OPTIONS INPUT NO WRAP
 LET rm_j14.j14_num_ret_sri = rm_detalle[posi].j11_num_ch_aut
 IF tipo_llamada = 'I' THEN
 	IF rm_j14.j14_fecha_emi IS NULL THEN
-		LET rm_j14.j14_fecha_emi   = TODAY
+		LET rm_j14.j14_fecha_emi   = vg_fecha
 	END IF
 END IF
 LET num_ret                = NULL
@@ -1377,7 +1377,7 @@ INPUT BY NAME rm_j14.j14_num_ret_sri, rm_j14.j14_autorizacion,
 			DISPLAY BY NAME rm_j14.j14_fecha_emi
 		END IF
 		IF tipo_llamada = 'I' THEN
-			IF rm_j14.j14_fecha_emi < TODAY THEN
+			IF rm_j14.j14_fecha_emi < vg_fecha THEN
 				CALL fl_mostrar_mensaje('La fecha de emision del comprobante no puede ser menor que la fecha de hoy.', 'exclamation')
 				NEXT FIELD j14_fecha_emi
 			END IF
@@ -1406,7 +1406,7 @@ INPUT BY NAME rm_j14.j14_num_ret_sri, rm_j14.j14_autorizacion,
 			NEXT FIELD j14_fecha_emi
 		END IF
 		IF (MDY(MONTH(fecha_min), 01, YEAR(fecha_min)) + 1 UNITS MONTH
-			- 1 UNITS DAY) < (TODAY - (dias_tope + 1) UNITS DAY)
+			- 1 UNITS DAY) < (vg_fecha - (dias_tope + 1) UNITS DAY)
 		THEN
 			LET mensaje = 'No se puede cargar retenciones a una ',
 					'factura con fecha de mas de ',
@@ -2031,7 +2031,7 @@ FOREACH q_ret2 INTO r_j14.j14_num_ret_sri, r_j14.j14_autorizacion,
 				  AND b12_subtipo   = 41
 	END CASE
 	LET r_j14.j14_usuario      = vg_usuario
-	LET r_j14.j14_fecing       = CURRENT
+	LET r_j14.j14_fecing       = fl_current()
 	INSERT INTO cajt014 VALUES (r_j14.*)
 	LET i = i + 1
 END FOREACH
@@ -2233,7 +2233,7 @@ PAGE HEADER
 		PRINT 1 SPACES
 	END IF
 	SKIP 1 LINES
-	PRINT COLUMN 001, "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 001, "FECHA IMPRESION: ", vg_fecha USING "dd-mm-yyyy",
  		1 SPACES, TIME,
 	      COLUMN 062, usuario
 	PRINT "--------------------------------------------------------------------------------"
