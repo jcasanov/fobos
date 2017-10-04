@@ -278,7 +278,7 @@ PAGE HEADER
 --
 
 	SKIP 1 LINES
-	PRINT COLUMN 01, "Fecha impresión: ", TODAY USING "dd-mmm-yyyy", 1 SPACES, TIME,
+	PRINT COLUMN 01, "Fecha impresión: ", vg_fecha USING "dd-mmm-yyyy", 1 SPACES, TIME,
 	      COLUMN 93, usuario
 	SKIP 1 LINES
 	PRINT COLUMN 1,  'Cant.',

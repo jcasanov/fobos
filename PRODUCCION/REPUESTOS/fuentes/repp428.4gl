@@ -169,7 +169,7 @@ PAGE HEADER
 	--#print '&k4S'	                -- Letra condensada (12 cpi)
 
 	PRINT COLUMN 1, rg_cia.g01_razonsocial
-	PRINT COLUMN 1, 'Fecha de Impresión: ', TODAY USING 'dd-mm-yyyy',
+	PRINT COLUMN 1, 'Fecha de Impresión: ', vg_fecha USING 'dd-mm-yyyy',
 			 1 SPACES, TIME,
 		COLUMN 48, 'Página: ', PAGENO USING '&&&'
 
