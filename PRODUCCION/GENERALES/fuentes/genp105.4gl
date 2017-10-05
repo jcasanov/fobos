@@ -139,7 +139,7 @@ FUNCTION control_ingreso()
 CLEAR FORM
 INITIALIZE rm_imp.* TO NULL
 
-LET rm_imp.g06_fecing = CURRENT
+LET rm_imp.g06_fecing = fl_current()
 LET rm_imp.g06_usuario = vg_usuario
 
 CALL lee_datos('I')

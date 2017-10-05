@@ -141,7 +141,7 @@ LET rm_par.moneda      = rg_gen.g00_moneda_base
 LET rm_par.ind_venc    = 'T'
 LET rm_par.incluir_sal = 'N'
 LET rm_par.ind_doc     = 'D'
-LET rm_par.fecha_cart  = TODAY
+LET rm_par.fecha_cart  = vg_fecha
 LET vm_fecha_ini       = rm_z60.z60_fecha_carga
 LET vm_contab          = 'C'
 IF num_args() >= 5 THEN
@@ -2406,7 +2406,7 @@ PAGE HEADER
 			rm_par.fecha_vcto2 USING 'dd-mm-yyyy'
 	END IF
 	SKIP 1 LINES
-	PRINT COLUMN 001, "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 001, "FECHA IMPRESION: ", vg_fecha USING "dd-mm-yyyy",
  		1 SPACES, TIME,
 	      COLUMN 062, usuario
 	PRINT "--------------------------------------------------------------------------------"

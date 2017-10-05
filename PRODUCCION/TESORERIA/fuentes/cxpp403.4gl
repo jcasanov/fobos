@@ -297,7 +297,7 @@ PAGE HEADER
 	      COLUMN 21, rm_b12.b12_fec_proceso USING 'dd-mm-yyyy',
 	      COLUMN 64, 'Origen: ',
 	      COLUMN 80, tit_origen
-	PRINT COLUMN 01, "Fecha de Impresión: ", TODAY USING "dd-mm-yyyy", 
+	PRINT COLUMN 01, "Fecha de Impresión: ", vg_fecha USING "dd-mm-yyyy", 
 	                 1 SPACES, TIME,
 	      COLUMN 112, usuario
 

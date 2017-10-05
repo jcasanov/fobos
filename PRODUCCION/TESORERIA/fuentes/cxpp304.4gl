@@ -152,8 +152,8 @@ LET vm_filas_pant = fgl_scr_size('r_detalle')
 LET vm_num_det = 0
 
 INITIALIZE rm_p27.*, rm_p28.*, vm_fecha_desde, vm_proveedor TO NULL
-LET vm_fecha_desde    = TODAY
-LET vm_fecha_hasta    = TODAY
+LET vm_fecha_desde    = vg_fecha
+LET vm_fecha_hasta    = vg_fecha
 WHILE TRUE
 	IF vm_num_det = 0 THEN
 		FOR i = 1 TO vm_filas_pant
@@ -278,7 +278,7 @@ DEFINE fec_fin		DATE
 				CALL fl_mostrar_mensaje('La fecha final no debe ser mayor a la de fecha de inicio.','exclamation')
 				NEXT FIELD vm_fecha_hasta
 			END IF
-			IF vm_fecha_hasta > TODAY THEN
+			IF vm_fecha_hasta > vg_fecha THEN
 				--CALL fgl_winmessage(vg_producto,'La fecha final no puede ser mayor a la de hoy.','exclamation')
 				CALL fl_mostrar_mensaje('La fecha final no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD vm_fecha_hasta
@@ -809,6 +809,8 @@ DEFINE r_p28		RECORD LIKE cxpt028.*
 DEFINE mensaje		VARCHAR(200)
 DEFINE resp		CHAR(6)
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 BEGIN WORK
 WHENEVER ERROR CONTINUE
 DECLARE q_lret CURSOR FOR 
@@ -863,7 +865,7 @@ LET r_p22.p22_num_trn    = fl_actualiza_control_secuencias(rm_p27.p27_compania,
 				rm_p27.p27_localidad, 'TE', 'AA', 'AJ')
 LET r_p22.p22_referencia = 'ELIM. RETENCION: ', rm_p27.p27_num_ret
 			    USING '<<<<<&'
-LET r_p22.p22_fecha_emi  = TODAY
+LET r_p22.p22_fecha_emi  = vg_fecha
 LET r_p22.p22_moneda     = rm_p27.p27_moneda 
 LET r_p22.p22_paridad    = rm_p27.p27_paridad
 LET r_p22.p22_tasa_mora  = 0
@@ -872,7 +874,7 @@ LET r_p22.p22_total_int  = 0
 LET r_p22.p22_total_mora = 0 
 LET r_p22.p22_origen     = 'A' 
 LET r_p22.p22_usuario    = vg_usuario    
-LET r_p22.p22_fecing     = CURRENT
+LET r_p22.p22_fecing     = fl_current()
 INSERT INTO cxpt022 VALUES(r_p22.*)
 DECLARE q_dret CURSOR FOR 
 	SELECT * FROM cxpt028
@@ -921,7 +923,7 @@ UPDATE cxpt022 SET * = r_p22.*
 	  AND p22_num_trn   = r_p22.p22_num_trn
 CALL fl_genera_saldos_proveedor(vg_codcia, vg_codloc, rm_p27.p27_codprov)
 LET rm_p27.p27_estado    = 'E'
-LET rm_p27.p27_fecha_eli = CURRENT
+LET rm_p27.p27_fecha_eli = fl_current()
 UPDATE cxpt027 SET p27_estado    = rm_p27.p27_estado,
 		   p27_fecha_eli = rm_p27.p27_fecha_eli
 	WHERE CURRENT OF q_lret
@@ -936,13 +938,14 @@ IF rm_p27.p27_tip_contable IS NOT NULL THEN
 		COMMIT WORK
 		RETURN 1
 	ELSE	
+		LET fecha_actual = fl_current()
 		IF r_b12.b12_estado = 'M' THEN
 			COMMIT WORK
 			CALL fl_mayoriza_comprobante(vg_codcia, 
 				r_b12.b12_tipo_comp, r_b12.b12_num_comp, 'D')
 			BEGIN WORK
 			UPDATE ctbt012 SET b12_estado = 'E',
-		   		           b12_fec_modifi = CURRENT
+		   		           b12_fec_modifi = fecha_actual
 	 	            WHERE b12_compania  = rm_p27.p27_compania     AND
 	 		          b12_tipo_comp = rm_p27.p27_tip_contable AND
 	 		          b12_num_comp  = rm_p27.p27_num_contable
@@ -951,7 +954,7 @@ IF rm_p27.p27_tip_contable IS NOT NULL THEN
 		END IF
 		IF r_b12.b12_estado <> 'E' THEN
 			UPDATE ctbt012 SET b12_estado = 'E',
-		   		           b12_fec_modifi = CURRENT
+		   		           b12_fec_modifi = fecha_actual
 	 	            WHERE b12_compania  = rm_p27.p27_compania     AND
 	 		          b12_tipo_comp = rm_p27.p27_tip_contable AND
 	 		          b12_num_comp  = rm_p27.p27_num_contable

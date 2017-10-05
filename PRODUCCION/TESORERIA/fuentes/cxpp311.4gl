@@ -128,7 +128,7 @@ LET vm_max_rows         = 32766
 LET rm_par.moneda       = rg_gen.g00_moneda_base
 CALL fl_lee_moneda(rm_par.moneda) RETURNING rm_mon.*
 LET rm_par.tit_mon      = rm_mon.g13_nombre
-LET rm_par.fecha_cart   = TODAY
+LET rm_par.fecha_cart   = vg_fecha
 LET vm_fecha_ini        = rm_z60.z60_fecha_carga
 LET rm_par.tipo_detalle = 'P'
 LET rm_par.ind_venc     = 'V'
@@ -1441,7 +1441,7 @@ PAGE HEADER
 		rm_par.fecha_cart USING 'dd-mm-yyyy'
 	PRINT COLUMN 051, UPSHIFT(tit_precision)
 	SKIP 1 LINES
-	PRINT COLUMN 001, "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 001, "FECHA IMPRESION: ", vg_fecha USING "dd-mm-yyyy",
  		1 SPACES, TIME,
 	      COLUMN 062, usuario
 	PRINT "--------------------------------------------------------------------------------"

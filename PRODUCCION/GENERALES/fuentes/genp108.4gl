@@ -140,7 +140,7 @@ INITIALIZE rm_g10.* TO NULL
 LET rm_g10.g10_compania  = vg_codcia
 LET rm_g10.g10_estado    = 'A'
 LET rm_g10.g10_cont_cred = 'C'
-LET rm_g10.g10_fecing    = CURRENT
+LET rm_g10.g10_fecing    = fl_current()
 LET rm_g10.g10_usuario   = vg_usuario 
 DISPLAY BY NAME rm_g10.g10_estado, rm_g10.g10_fecing, rm_g10.g10_usuario
 DISPLAY 'ACTIVO' TO tit_estado
@@ -173,7 +173,7 @@ WHILE TRUE
 		EXIT WHILE
 	END IF
 END WHILE
-LET rm_g10.g10_fecing  = CURRENT
+LET rm_g10.g10_fecing  = fl_current()
 INSERT INTO gent010 VALUES (rm_g10.*)
 DISPLAY BY NAME rm_g10.g10_tarjeta
 IF vm_num_rows = vm_max_rows THEN

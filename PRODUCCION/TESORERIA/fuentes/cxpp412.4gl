@@ -117,8 +117,8 @@ INITIALIZE rm_par.* TO NULL
 LET rm_par.moneda = rg_gen.g00_moneda_base
 CALL fl_lee_moneda(rm_par.moneda) RETURNING r_g13.*
 DISPLAY r_g13.g13_nombre TO desc_moneda
-LET rm_par.inicial = TODAY
-LET rm_par.final   = TODAY
+LET rm_par.inicial = vg_fecha
+LET rm_par.final   = vg_fecha
 
 WHILE (TRUE)
 	CALL control_ingreso()
@@ -455,7 +455,7 @@ FORMAT
 
 	SKIP 1 LINES
 	
-	PRINT 01, 'Fecha impresión: ', TODAY USING 'dd-mm-yyyy', 
+	PRINT 01, 'Fecha impresión: ', vg_fecha USING 'dd-mm-yyyy', 
 			 1 SPACES, TIME,
               COLUMN 120, usuario
                                                                                 

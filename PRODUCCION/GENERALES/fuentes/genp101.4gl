@@ -229,7 +229,7 @@ FUNCTION control_ingreso()
 OPTIONS INPUT WRAP
 CLEAR FORM
 INITIALIZE rm_cia.* TO NULL
-LET rm_cia.g01_fecing = CURRENT
+LET rm_cia.g01_fecing = fl_current()
 LET rm_cia.g01_usuario = vg_usuario 
 LET rm_cia.g01_principal = 'N'                                                                          
 DISPLAY BY NAME rm_cia.g01_fecing, rm_cia.g01_usuario

@@ -139,7 +139,7 @@ FUNCTION control_ingreso()
 CLEAR FORM
 INITIALIZE rm_ban.* TO NULL
 
-LET rm_ban.g08_fecing  = CURRENT
+LET rm_ban.g08_fecing  = fl_current()
 LET rm_ban.g08_usuario = vg_usuario
 
 CALL lee_datos()

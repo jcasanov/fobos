@@ -110,8 +110,8 @@ INITIALIZE rm_par.* TO NULL
 LET rm_par.moneda = rg_gen.g00_moneda_base
 CALL fl_lee_moneda(rm_par.moneda) RETURNING r_g13.*
 DISPLAY r_g13.g13_nombre TO desc_moneda
-LET rm_par.inicial  = MDY(MONTH(TODAY), 01, YEAR(TODAY))
-LET rm_par.final    = TODAY
+LET rm_par.inicial  = MDY(MONTH(vg_fecha), 01, YEAR(vg_fecha))
+LET rm_par.final    = vg_fecha
 LET rm_par.agrup_p  = 'N'
 LET rm_par.agrup_s  = 'N'
 WHILE TRUE
@@ -696,7 +696,7 @@ PAGE HEADER
 		PRINT COLUMN 040, '** Tipo Retencion   : T O D O S'
 	END IF
 	SKIP 1 LINES
-	PRINT COLUMN 001, 'Fecha impresión: ', TODAY USING 'dd-mmm-yyyy', 
+	PRINT COLUMN 001, 'Fecha impresión: ', vg_fecha USING 'dd-mmm-yyyy', 
 			 1 SPACES, TIME,
               COLUMN 123, usuario
 	PRINT COLUMN 001, '------------------------------------------------------------------------------------------------------------------------------------'
@@ -839,7 +839,7 @@ PAGE HEADER
 		PRINT COLUMN 040, '** Tipo Retencion   : T O D O S'
 	END IF
 	SKIP 1 LINES
-	PRINT COLUMN 001, 'Fecha impresión: ', TODAY USING 'dd-mmm-yyyy', 
+	PRINT COLUMN 001, 'Fecha impresión: ', vg_fecha USING 'dd-mmm-yyyy', 
 			 1 SPACES, TIME,
               COLUMN 123, usuario
 	PRINT COLUMN 001, '------------------------------------------------------------------------------------------------------------------------------------'
@@ -1003,7 +1003,7 @@ PAGE HEADER
 		PRINT COLUMN 040, '** Tipo Retencion   : T O D O S'
 	END IF
 	SKIP 1 LINES
-	PRINT COLUMN 001, 'Fecha impresión: ', TODAY USING 'dd-mmm-yyyy', 
+	PRINT COLUMN 001, 'Fecha impresión: ', vg_fecha USING 'dd-mmm-yyyy', 
 			 1 SPACES, TIME,
               COLUMN 123, usuario
 	PRINT COLUMN 001, '------------------------------------------------------------------------------------------------------------------------------------'

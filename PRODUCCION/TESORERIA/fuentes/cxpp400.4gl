@@ -91,8 +91,8 @@ CALL campos_forma()
 
 CALL fl_lee_moneda(rg_gen.g00_moneda_base) RETURNING r_g13.*
 INITIALIZE rm_par.* TO NULL
-LET rm_par.anho       = YEAR(TODAY)
-LET rm_par.mes        = MONTH(TODAY)
+LET rm_par.anho       = YEAR(vg_fecha)
+LET rm_par.mes        = MONTH(vg_fecha)
 LET rm_par.g13_moneda = r_g13.g13_moneda
 LET rm_par.g13_nombre = r_g13.g13_nombre
 LET rm_par.tipo_vcto  = 'T'
@@ -176,7 +176,7 @@ WHILE TRUE
 	END IF
 	CALL fl_lee_compania(vg_codcia) RETURNING rm_g01.*
 	
-	IF year(TODAY) <> rm_par.anho OR month(TODAY) <> rm_par.mes THEN
+	IF year(vg_fecha) <> rm_par.anho OR month(vg_fecha) <> rm_par.mes THEN
 		LET query = prepare_query_cxpt050()
 	ELSE
 		LET query = prepare_query_cxpt020()
@@ -323,15 +323,15 @@ END IF
 
 CASE rm_par.tipo_vcto 
 	WHEN 'P'
-		LET expr_vcto = ' AND p50_fecha_vcto >= TODAY '
+		LET expr_vcto = ' AND p50_fecha_vcto >= "', vg_fecha, '" '
 		IF rm_par.dias_ini IS NOT NULL THEN
-			LET expr_dias = ' AND (p50_fecha_vcto - TODAY) BETWEEN ',
+			LET expr_dias = ' AND (p50_fecha_vcto - "', vg_fecha, '") BETWEEN ',
 					rm_par.dias_ini, ' AND ', rm_par.dias_fin
 		END IF
 	WHEN 'V'
-		LET expr_vcto = ' AND p50_fecha_vcto < TODAY '
+		LET expr_vcto = ' AND p50_fecha_vcto < "', vg_fecha, '" '
 		IF rm_par.dias_ini IS NOT NULL THEN
-			LET expr_dias = ' AND (TODAY - p50_fecha_vcto) BETWEEN ',
+			LET expr_dias = ' AND ("', vg_fecha, '" - p50_fecha_vcto) BETWEEN ',
 					rm_par.dias_ini, ' AND ', rm_par.dias_fin
 		END IF
 	OTHERWISE
@@ -341,7 +341,7 @@ END CASE
 
 LET query = 'SELECT p50_codprov, p01_nomprov, p50_numero_oc, ',
 	          ' p50_tipo_doc, p50_num_doc, p50_dividendo, p50_fecha_emi, ',
-	          ' p50_fecha_vcto, (p50_fecha_vcto - TODAY), ',
+	          ' p50_fecha_vcto, (p50_fecha_vcto - "', vg_fecha, '"), ',
 	          ' (p50_saldo_cap + p50_saldo_int) ',
 	    	' FROM cxpt050, cxpt001 ', 
 	    	' WHERE p50_ano = ', rm_par.anho,
@@ -373,15 +373,15 @@ END IF
 
 CASE rm_par.tipo_vcto 
 	WHEN 'P'
-		LET expr_vcto = ' AND p20_fecha_vcto >= TODAY '
+		LET expr_vcto = ' AND p20_fecha_vcto >= "', vg_fecha, '" '
 		IF rm_par.dias_ini IS NOT NULL THEN
-			LET expr_dias = ' AND (p20_fecha_vcto - TODAY) BETWEEN ',
+			LET expr_dias = ' AND (p20_fecha_vcto - "', vg_fecha, '") BETWEEN ',
 					rm_par.dias_ini, ' AND ', rm_par.dias_fin
 		END IF
 	WHEN 'V'
-		LET expr_vcto = ' AND p20_fecha_vcto < TODAY '
+		LET expr_vcto = ' AND p20_fecha_vcto < "', vg_fecha, '" '
 		IF rm_par.dias_ini IS NOT NULL THEN
-			LET expr_dias = ' AND (TODAY - p20_fecha_vcto) BETWEEN ',
+			LET expr_dias = ' AND ("', vg_fecha, '" - p20_fecha_vcto) BETWEEN ',
 					rm_par.dias_ini, ' AND ', rm_par.dias_fin
 		END IF
 	OTHERWISE
@@ -391,7 +391,7 @@ END CASE
 
 LET query = 'SELECT p20_codprov, p01_nomprov, p20_numero_oc, ',
 	          ' p20_tipo_doc, p20_num_doc, p20_dividendo, p20_fecha_emi, ',
-	          ' p20_fecha_vcto, (p20_fecha_vcto - TODAY) antiguedad, ',
+	          ' p20_fecha_vcto, (p20_fecha_vcto - "', vg_fecha, '") antiguedad, ',
 	          ' (p20_saldo_cap + p20_saldo_int) saldo ',
 	    	' FROM cxpt020, cxpt001 ', 
 	    	' WHERE p20_compania = ', vg_codcia,
@@ -504,7 +504,7 @@ PAGE HEADER
 	--#END IF
 	
 	SKIP 1 LINES
-	PRINT COLUMN 01, "Fecha de Impresión: ", TODAY USING "dd-mm-yyyy", 
+	PRINT COLUMN 01, "Fecha de Impresión: ", vg_fecha USING "dd-mm-yyyy", 
 	                 1 SPACES, TIME,
 	      COLUMN 68, usuario
 

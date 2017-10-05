@@ -1222,6 +1222,8 @@ END FUNCTION
 FUNCTION grabar_impresora_usr()
 DEFINE i, flag		SMALLINT
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 BEGIN WORK
 DELETE FROM gent007 WHERE g07_user = rm_g05.g05_usuario
 LET flag = 0
@@ -1229,9 +1231,10 @@ FOR i = 1 TO vm_num_imp
 	IF rm_impresoras[i].impresora = 'N' THEN
 		CONTINUE FOR
 	END IF
+	LET fecha_actual = fl_current()
 	INSERT INTO gent007
 		VALUES(rm_g05.g05_usuario, rm_impresoras[i].g07_impresora, 
-			rm_impresoras[i].g07_default, vg_usuario, CURRENT)
+			rm_impresoras[i].g07_default, vg_usuario, fecha_actual)
 	LET flag = 1
 END FOR
 COMMIT WORK

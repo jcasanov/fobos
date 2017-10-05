@@ -95,7 +95,7 @@ LET rm_par.moneda = r.g00_moneda_base
 CALL fl_lee_moneda(rm_par.moneda) RETURNING rm_mon.*
 LET rm_par.tit_mon    = rm_mon.g13_nombre
 LET rm_par.ind_venc   = 'T'
-LET rm_par.fecha_cart = TODAY
+LET rm_par.fecha_cart = vg_fecha
 LET rm_par.ind_doc    = 'D'
 LET vm_fecha_ini      = rm_z60.z60_fecha_carga
 LET vm_imprimir       = 'R'
@@ -772,7 +772,7 @@ PAGE HEADER
 		PRINT " "
 	END IF
 	SKIP 1 LINES
-	PRINT COLUMN 001, "FECHA IMPRESION: ", TODAY USING "dd-mm-yyyy",
+	PRINT COLUMN 001, "FECHA IMPRESION: ", vg_fecha USING "dd-mm-yyyy",
  		1 SPACES, TIME,
 	      COLUMN 062, usuario
 	PRINT "--------------------------------------------------------------------------------"

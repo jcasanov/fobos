@@ -148,7 +148,7 @@ CLEAR FORM
 INITIALIZE rm_cta.* TO NULL
 
 LET rm_cta.g09_compania = vg_codcia
-LET rm_cta.g09_fecing   = CURRENT
+LET rm_cta.g09_fecing   = fl_current()
 LET rm_cta.g09_usuario  = vg_usuario
 LET rm_cta.g09_moneda   = rg_gen.g00_moneda_base
 LET rm_cta.g09_estado   = 'A'

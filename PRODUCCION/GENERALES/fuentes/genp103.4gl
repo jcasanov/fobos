@@ -211,7 +211,7 @@ OPTIONS INPUT WRAP
 CLEAR FORM
 INITIALIZE rm_area.* TO NULL
 CLEAR tit_modulo
-LET rm_area.g03_fecing = CURRENT
+LET rm_area.g03_fecing = fl_current()
 LET rm_area.g03_usuario = vg_usuario
 LET rm_area.g03_compania = vg_codcia
 DISPLAY BY NAME rm_area.g03_fecing, rm_area.g03_usuario

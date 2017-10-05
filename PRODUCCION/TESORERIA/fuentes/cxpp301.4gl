@@ -230,7 +230,7 @@ PREPARE doc FROM query
 DECLARE q_doc CURSOR FOR doc
 LET num_doc = 0
 FOREACH q_doc INTO r_doc.*
-	IF r_doc.p20_fecha_vcto >= TODAY THEN
+	IF r_doc.p20_fecha_vcto >= vg_fecha THEN
 		LET pven = r_doc.p20_saldo_cap + r_doc.p20_saldo_int
 		LET venc = 0
 	ELSE
@@ -238,27 +238,27 @@ FOREACH q_doc INTO r_doc.*
 		LET pven = 0
 	END IF
 	IF rm_par.ind_venc = 'V' THEN
-		IF r_doc.p20_fecha_vcto >= TODAY THEN
+		IF r_doc.p20_fecha_vcto >= vg_fecha THEN
 			CONTINUE FOREACH
 		END IF
 		IF rm_par.dias_i IS NULL THEN
 			LET rm_par.dias_i = 1
 			LET rm_par.dias_f = 9999
 		END IF
-		LET dias = TODAY - r_doc.p20_fecha_vcto
+		LET dias = vg_fecha - r_doc.p20_fecha_vcto
 		IF dias < rm_par.dias_i OR dias > rm_par.dias_f THEN
 			CONTINUE FOREACH
 		END IF
 	END IF		
 	IF rm_par.ind_venc = 'P' THEN
-		IF r_doc.p20_fecha_vcto < TODAY THEN
+		IF r_doc.p20_fecha_vcto < vg_fecha THEN
 			CONTINUE FOREACH
 		END IF
 		IF rm_par.dias_i IS NULL THEN
 			LET rm_par.dias_i = 0
 			LET rm_par.dias_f = 9999
 		END IF
-		LET dias = r_doc.p20_fecha_vcto - TODAY
+		LET dias = r_doc.p20_fecha_vcto - vg_fecha
 		IF dias < rm_par.dias_i OR dias > rm_par.dias_f THEN
 			CONTINUE FOREACH
 		END IF

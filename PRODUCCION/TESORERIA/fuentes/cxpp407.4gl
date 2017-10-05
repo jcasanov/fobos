@@ -321,7 +321,7 @@ PAGE HEADER
 
 	SKIP 1 LINES
 
-	PRINT COLUMN 01, "Fecha de Impresión: ", TODAY USING "dd-mm-yyyy", 
+	PRINT COLUMN 01, "Fecha de Impresión: ", vg_fecha USING "dd-mm-yyyy", 
 	                 1 SPACES, TIME,
 	      COLUMN 74, "Usuario: ", fl_justifica_titulo('D', vg_usuario, 10) 
 
