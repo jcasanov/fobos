@@ -1017,9 +1017,9 @@ FOREACH q_trans_ori_cab INTO r_r19.*
 								num_tran USING "<<<<<<&", ' REFACTU.'
 	END IF
 	IF flag = 'D' THEN
-		LET r_r19.r19_referencia = 'TR. DESPACHO FA-',
-								rm_cabt.r19_cod_tran USING "<<<<<<&",' ',
-								rm_cabt.r19_num_tran CLIPPED
+		LET r_r19.r19_referencia = 'TR. DESPACHO ',
+								rm_cabt.r19_cod_tran CLIPPED, '-',
+								rm_cabt.r19_num_tran USING "<<<<<<&"
 	END IF
 	LET r_r19.r19_tipo_dev   = rm_cabt.r19_cod_tran
 	LET r_r19.r19_num_dev    = rm_cabt.r19_num_tran
@@ -1065,6 +1065,7 @@ FOREACH q_trans_ori_cab INTO r_r19.*
 			  AND r20_num_tran  = num_tran
 			ORDER BY r20_orden
 	FOREACH q_trans_ori_det INTO r_r20.*
+		LET r_r20.r20_cod_tran   = cod_tran
 		LET r_r20.r20_num_tran   = r_r19.r19_num_tran
 		CALL fl_lee_item(r_r20.r20_compania, r_r20.r20_item) RETURNING r_r10.*
 		LET r_r19.r19_tot_costo  = r_r19.r19_tot_costo + (r_r20.r20_cant_ven *
@@ -1099,8 +1100,8 @@ FOREACH q_trans_ori_cab INTO r_r19.*
 			    r19_tot_neto  = r_r19.r19_tot_bruto
 			WHERE r19_compania  = vg_codcia
 			  AND r19_localidad = vg_codloc
-			  AND r19_cod_tran  = r_r19.r19_cod_tran
-			  AND r19_num_tran  = r_r19.r19_num_tran
+			  AND r19_cod_tran  = r_r20.r20_cod_tran
+			  AND r19_num_tran  = r_r20.r20_num_tran
 	END FOREACH
 END FOREACH
 
