@@ -300,14 +300,22 @@ FOR i = 1 TO vm_indice
 	END IF
 END FOR
 
-SELECT MAX(z24_numero_sol) INTO rm_z24.z24_numero_sol
-	FROM cxct024
-	WHERE z24_compania  = vg_codcia
-	  AND z24_localidad = vg_codloc
-IF rm_z24.z24_numero_sol IS NULL THEN
-	LET rm_z24.z24_numero_sol = 1
-ELSE
-	LET rm_z24.z24_numero_sol = rm_z24.z24_numero_sol + 1
+CALL fl_actualiza_control_secuencias(vg_codcia, vg_codloc, vg_modulo,
+										'AA', 'SC')
+	RETURNING rm_z24.z24_numero_sol
+IF rm_z24.z24_numero_sol = 0 THEN
+	ROLLBACK WORK
+	CALL fl_mostrar_mensaje('No existe control de secuencia para Solicitud de Cobro, no se puede asignar un número de transacción a la operación.','stop')
+	EXIT PROGRAM
+END IF
+IF rm_z24.z24_numero_sol = -1 THEN
+	SET LOCK MODE TO WAIT
+	WHILE rm_z24.z24_numero_sol = -1
+		CALL fl_actualiza_control_secuencias(vg_codcia, vg_codloc, vg_modulo,
+												'AA', 'SC')
+			RETURNING rm_z24.z24_numero_sol
+	END WHILE
+	SET LOCK MODE TO NOT WAIT
 END IF
 
 INSERT INTO cxct024 VALUES (rm_z24.*)

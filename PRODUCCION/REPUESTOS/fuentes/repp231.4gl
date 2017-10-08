@@ -1077,16 +1077,22 @@ FUNCTION retorna_num_ent(bodega)
 DEFINE bodega		LIKE rept036.r36_bodega
 DEFINE num_entrega	INTEGER
 
-SELECT MAX(r36_num_entrega)
-	INTO num_entrega
-	FROM rept036
-	WHERE r36_compania  = rm_r34.r34_compania
-	  AND r36_localidad = rm_r34.r34_localidad
-	  AND r36_bodega    = bodega
-IF num_entrega IS NULL THEN
-	LET num_entrega = 1
-ELSE
-	LET num_entrega = num_entrega + 1
+CALL fl_actualiza_control_secuencias(rm_r34.r34_compania, rm_r34.r34_localidad,
+									vg_modulo, bodega, 'ND')
+	RETURNING num_entrega
+IF num_entrega = 0 THEN
+	ROLLBACK WORK	
+	CALL fl_mostrar_mensaje('No existe control de secuencia para esta Notas de Despacho, no se puede asignar un número de transacción a la operación.','stop')
+	EXIT PROGRAM
+END IF
+IF num_entrega = -1 THEN
+	SET LOCK MODE TO WAIT
+	WHILE num_entrega = -1
+		CALL fl_actualiza_control_secuencias(rm_r34.r34_compania,
+								rm_r34.r34_localidad, vg_modulo, bodega, 'ND')
+			RETURNING num_entrega
+	END WHILE
+	SET LOCK MODE TO NOT WAIT
 END IF
 RETURN num_entrega
 

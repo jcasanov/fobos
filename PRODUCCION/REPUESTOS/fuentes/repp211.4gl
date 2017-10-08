@@ -751,12 +751,24 @@ LET entregar_en = r_r34.r34_entregar_en
 FOREACH qu_nalga INTO bod
 	LET i = i + 1
 	LET r_r34.r34_bodega = bod
-	SELECT MAX(r34_num_ord_des) + 1 INTO r_r34.r34_num_ord_des FROM rept034
-		WHERE r34_compania  = rm_cabt.r19_compania  AND 
-	      	      r34_localidad = rm_cabt.r19_localidad AND 
-	      	      r34_bodega    = bod
-	IF r_r34.r34_num_ord_des IS NULL THEN
-		LET r_r34.r34_num_ord_des = 1
+	CALL fl_actualiza_control_secuencias(rm_cabt.r19_compania,
+									rm_cabt.r19_localidad, vg_modulo,
+									r_r34.r34_bodega, 'OD')
+		RETURNING r_r34.r34_num_ord_des
+	IF r_r34.r34_num_ord_des = 0 THEN
+		ROLLBACK WORK
+		CALL fl_mostrar_mensaje('No existe control de secuencia para Ordenes de Despacho, no se puede asignar un número de transacción a la operación.','stop')
+		EXIT PROGRAM
+	END IF
+	IF r_r34.r34_num_ord_des = -1 THEN
+		SET LOCK MODE TO WAIT
+		WHILE r_r34.r34_num_ord_des = -1
+			CALL fl_actualiza_control_secuencias(rm_cabt.r19_compania,
+										rm_cabt.r19_localidad, vg_modulo,
+										r_r34.r34_bodega, 'OD')
+				RETURNING r_r34.r34_num_ord_des
+		END WHILE
+		SET LOCK MODE TO NOT WAIT
 	END IF
 	CALL retorna_entregar_en_refacturacion(r_r34.r34_bodega,
 						r_r34.r34_entregar_en)
