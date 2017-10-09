@@ -2810,7 +2810,7 @@ IF rm_item.r10_proveedor IS NOT NULL THEN
 	CLOSE q_cost_prov
 	FREE q_cost_prov
 	LET rm_item.r10_precio_mb = r_c04.c04_pvp_prov_sug
-	LET rm_item.r10_costo_mb  = r_c04.c04_costo_prov
+	LET rm_item.r10_costo_mb  = r_c04.c04_precio_prov
 END IF
 LET rm_item.r10_estado = 'A'
 LET act_lista_precios = 'S'
@@ -3061,12 +3061,12 @@ BEGIN WORK
 		LET query = 'INSERT INTO ordt004 ',
 						'(c04_compania, c04_localidad, c04_codprov,',
 						' c04_cod_item, c04_fecha_vigen, c04_pvp_prov_sug,',
-						' c04_desc_prov, c04_costo_prov, c04_fecha_fin,',
+						' c04_desc_prov, c04_precio_prov, c04_fecha_fin,',
 						' c04_usuario, c04_fecing) ',
 						'SELECT c04_compania, c04_localidad, c04_codprov, ',
 							'"', rm_item.r10_codigo CLIPPED, '", ',
 							'"', vg_fecha, '", c04_pvp_prov_sug, ',
-							'c04_desc_prov, c04_costo_prov, c04_fecha_fin, ',
+							'c04_desc_prov, c04_precio_prov, c04_fecha_fin, ',
 							'"', vg_usuario CLIPPED, '", "', fecha_actual, '" ',
 			  			' FROM ordt004 ',
 						' WHERE c04_compania  = ', vg_codcia,

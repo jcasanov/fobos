@@ -2081,7 +2081,7 @@ DEFINE r_r22		RECORD LIKE rept022.*
 -- Para los valores de la lista de precios
 DEFINE pvp_prov_sug	 LIKE ordt004.c04_pvp_prov_sug
 DEFINE desc_prov	 LIKE ordt004.c04_desc_prov
-DEFINE costo_prov	 LIKE ordt004.c04_costo_prov
+DEFINE precio_prov	 LIKE ordt004.c04_precio_prov
 
 CALL retorna_tam_arr()
 LET vm_filas_pant  = vm_size_arr
@@ -2107,7 +2107,7 @@ IF vm_flag_llam = 'I' THEN
 	-- En el pedido se deben acumular los items
 	DECLARE q_r22 CURSOR FOR
 		SELECT r22_item, r10_nombre, c04_pvp_prov_sug, c04_desc_prov,
-               c04_costo_prov, r22_precio, sum(r22_cantidad)
+               c04_precio_prov, r22_precio, sum(r22_cantidad)
 			FROM rept022, rept010, OUTER ordt004
 			WHERE r22_compania  = vg_codcia
 			  AND r22_localidad = vg_codloc
@@ -2121,12 +2121,12 @@ IF vm_flag_llam = 'I' THEN
 			  AND c04_fecha_vigen <= vg_fecha
 			  AND (c04_fecha_fin IS NULL OR c04_fecha_fin > vg_fecha)
 			GROUP BY r22_item, r10_nombre, c04_pvp_prov_sug, c04_desc_prov,
-               		 c04_costo_prov, r22_precio
+               		 c04_precio_prov, r22_precio
 
 	LET valor_fact = 0
 	LET k = 1
 	FOREACH q_r22 INTO r_detalle[k].c11_codigo, r_detalle[k].c11_descrip,
-						pvp_prov_sug, desc_prov, costo_prov, r_detalle[k].c11_precio,
+						pvp_prov_sug, desc_prov, precio_prov, r_detalle[k].c11_precio,
 						r_detalle[k].c11_cant_ped	
 
 		LET r_detalle[k].c11_tipo = 'B'
@@ -2138,8 +2138,8 @@ IF vm_flag_llam = 'I' THEN
 			LET r_detalle[k].c11_precio = pvp_prov_sug 
 			LET r_detalle[k].c11_descuento = desc_prov 
 		ELSE
-			IF costo_prov IS NOT NULL THEN
-				LET r_detalle[k].c11_precio = costo_prov
+			IF precio_prov IS NOT NULL THEN
+				LET r_detalle[k].c11_precio = precio_prov
 				LET r_detalle[k].c11_descuento = 0 
 			END IF
 		END IF
