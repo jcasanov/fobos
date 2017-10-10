@@ -316,6 +316,8 @@ DEFINE r_t23		RECORD LIKE talt023.*
 DEFINE r19_referencia	LIKE rept019.r19_referencia
 DEFINE r_r41		RECORD LIKE rept041.*
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 CALL retorna_tam_arr()
 LET vm_num_rows    = 0
 LET vm_row_current = 0
@@ -523,9 +525,10 @@ IF vm_cruce THEN
 	DROP TABLE tmp_r41
 END IF
 {-- NUEVO PARA COMPLACER A CP --}
+LET fecha_actual = fl_current()
 WHENEVER ERROR CONTINUE
 UPDATE rept019
-	SET r19_fecing = fl_current() + 3 UNITS SECOND
+	SET r19_fecing = fecha_actual + 3 UNITS SECOND
 	WHERE r19_compania  = vg_codcia
 	  AND r19_localidad = vg_codloc
 	  AND r19_cod_tran  = rm_r19.r19_cod_tran
@@ -540,7 +543,7 @@ IF STATUS < 0 THEN
 END IF
 WHENEVER ERROR CONTINUE
 UPDATE rept020
-	SET r20_fecing = fl_current() + 3 UNITS SECOND
+	SET r20_fecing = fecha_actual + 3 UNITS SECOND
 	WHERE r20_compania  = vg_codcia
 	  AND r20_localidad = vg_codloc
 	  AND r20_cod_tran  = rm_r19.r19_cod_tran
@@ -791,6 +794,8 @@ DEFINE r_z21		RECORD LIKE cxct021.*
 DEFINE r_r02		RECORD LIKE rept002.*
 DEFINE r_r41		RECORD LIKE rept041.*
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 CLEAR FORM
 LET vm_flag_mant = 'I'
 CALL control_DISPLAY_botones()
@@ -1017,7 +1022,7 @@ END IF
 {-- NUEVO PARA COMPLACER A CP --}
 WHENEVER ERROR CONTINUE
 UPDATE rept019
-	SET r19_fecing = fl_current() + 3 UNITS SECOND
+	SET r19_fecing = fecha_actual + 3 UNITS SECOND
 	WHERE r19_compania  = vg_codcia
 	  AND r19_localidad = vg_codloc
 	  AND r19_cod_tran  = rm_r19.r19_cod_tran
@@ -1032,7 +1037,7 @@ IF STATUS < 0 THEN
 END IF
 WHENEVER ERROR CONTINUE
 UPDATE rept020
-	SET r20_fecing = fl_current() + 3 UNITS SECOND
+	SET r20_fecing = fecha_actual + 3 UNITS SECOND
 	WHERE r20_compania  = vg_codcia
 	  AND r20_localidad = vg_codloc
 	  AND r20_cod_tran  = rm_r19.r19_cod_tran

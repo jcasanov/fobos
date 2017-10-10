@@ -480,6 +480,8 @@ DEFINE num_ret		LIKE cxpt027.p27_num_ret
 DEFINE tip_comp		LIKE ctbt012.b12_tipo_comp
 DEFINE num_comp		LIKE ctbt012.b12_num_comp
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 CALL control_update_ordt011()	-- DETALLE DE LA ORDEN DE COMPRA
 CALL control_update_ordt013()	-- RECEPCION
 IF rm_c10.c10_tipo_pago = 'R' THEN
@@ -489,6 +491,7 @@ IF rm_c10.c10_tipo_pago = 'R' THEN
 		EXIT PROGRAM
 	END IF
 END IF
+LET fecha_actual = fl_current()
 IF rm_c13.c13_tot_recep = rm_c10.c10_tot_compra THEN
 	UPDATE ordt010 SET c10_estado = 'P' WHERE CURRENT OF q_ordt010
 END IF		
@@ -524,7 +527,7 @@ IF STATUS <> NOTFOUND THEN
 	CALL fl_mayoriza_comprobante(r_b12.b12_compania, r_b12.b12_tipo_comp, r_b12.b12_num_comp, 'D')
 	SET LOCK MODE TO WAIT 5
 	UPDATE ctbt012 SET b12_estado     = 'E',
-			   b12_fec_modifi = fl_current() 
+			   b12_fec_modifi = fecha_actual 
 		WHERE b12_compania  = r_b12.b12_compania  AND 
 		      b12_tipo_comp = r_b12.b12_tipo_comp AND 
 		      b12_num_comp  = r_b12.b12_num_comp
@@ -567,7 +570,7 @@ IF num_ret IS NOT NULL THEN
 							r_b12.b12_num_comp, 'D')
 			SET LOCK MODE TO WAIT 5
 			UPDATE ctbt012 SET b12_estado     = 'E',
-					   b12_fec_modifi = fl_current() 
+					   b12_fec_modifi = fecha_actual 
 				WHERE b12_compania  = r_b12.b12_compania  AND 
 				      b12_tipo_comp = r_b12.b12_tipo_comp AND 
 				      b12_num_comp  = r_b12.b12_num_comp
@@ -676,9 +679,11 @@ END FUNCTION
 
 FUNCTION control_update_ordt013()
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 UPDATE ordt013 
 	SET c13_estado      = 'E',
-	    c13_fecha_eli   = fl_current()	
+	    c13_fecha_eli   = fecha_actual	
 	WHERE c13_compania  = vg_codcia
 	  AND c13_localidad = vg_codloc
 	  AND c13_numero_oc = rm_c13.c13_numero_oc
@@ -690,6 +695,8 @@ END FUNCTION
 
 FUNCTION control_update_cxpt027()
 DEFINE num_ret		LIKE cxpt028.p28_num_ret
+
+DEFINE fecha_actual DATETIME YEAR TO SECOND
 
 DECLARE q_cxpt028 CURSOR FOR 
 	SELECT  UNIQUE p28_num_ret FROM cxpt028
@@ -704,7 +711,7 @@ CLOSE q_cxpt028
 FREE  q_cxpt028
 UPDATE cxpt027 
 	SET p27_estado      = 'E',
-	    p27_fecha_eli   = fl_current()	
+	    p27_fecha_eli   = fecha_actual	
 	WHERE p27_compania  = vg_codcia
 	  AND p27_localidad = vg_codloc
 	  AND p27_num_ret   = num_ret

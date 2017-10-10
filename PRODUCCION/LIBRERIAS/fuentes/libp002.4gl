@@ -585,6 +585,8 @@ DEFINE r_r40		RECORD LIKE rept040.*
 DEFINE r_b12		RECORD LIKE ctbt012.*
 DEFINE i		SMALLINT
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 CALL fl_lee_cabecera_transaccion_rep(rm_crep.r19_compania,rm_crep.r19_localidad,
 	rm_crep.r19_tipo_dev, rm_crep.r19_num_dev)
 	RETURNING r_fact.*
@@ -620,8 +622,9 @@ FOREACH cu_repcont INTO r_r40.*
 			r_r40.r40_tipo_comp, r_r40.r40_num_comp)
 		RETURNING r_b12.*
 	SET LOCK MODE TO WAIT 5
+	LET fecha_actual = fl_current()
 	UPDATE ctbt012 SET b12_estado     = 'E',
-			   b12_fec_modifi = fl_current() 
+			   b12_fec_modifi = fecha_actual 
 		WHERE b12_compania  = r_b12.b12_compania  AND 
 		      b12_tipo_comp = r_b12.b12_tipo_comp AND 
 		      b12_num_comp  = r_b12.b12_num_comp
@@ -1047,6 +1050,8 @@ DEFINE r_r40		RECORD LIKE rept040.*
 DEFINE r_b12		RECORD LIKE ctbt012.*
 DEFINE i		SMALLINT
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 CALL fl_lee_cabecera_transaccion_rep(rm_crep.r19_compania,rm_crep.r19_localidad,
 	rm_crep.r19_tipo_dev, rm_crep.r19_num_dev)
 	RETURNING r_comp.*
@@ -1078,8 +1083,9 @@ IF rm_crep.r19_tot_neto = r_comp.r19_tot_neto THEN
 			r_r40.r40_tipo_comp, r_r40.r40_num_comp)
 		RETURNING r_b12.*
 	SET LOCK MODE TO WAIT 5
+	LET fecha_actual = fl_current()
 	UPDATE ctbt012 SET b12_estado     = 'E',
-			   b12_fec_modifi = fl_current() 
+			   b12_fec_modifi = fecha_actual 
 		WHERE b12_compania  = r_b12.b12_compania  AND 
 		      b12_tipo_comp = r_b12.b12_tipo_comp AND 
 		      b12_num_comp  = r_b12.b12_num_comp

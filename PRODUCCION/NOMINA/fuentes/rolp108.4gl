@@ -2003,6 +2003,8 @@ DEFINE tab1, tab2	CHAR(2)
 DEFINE i, lim, pos	SMALLINT
 DEFINE ctos1, ctos2	INTEGER
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 SELECT a.*, TRIM(n30_nombres) nom_empl
 	FROM rolt056 a, rolt030
 	WHERE a.n56_compania  = rm_n30.n30_compania
@@ -2087,6 +2089,7 @@ SELECT TRIM(cta_s[9, 11]) sec_max
 	FROM t1
 	INTO TEMP t2
 DROP TABLE t1
+LET fecha_actual = fl_current()
 let query = 'SELECT b.cuenta[1, 8] || ',
 			'(SELECT sec_max FROM t2) cuenta, ',
 		'TRIM(b.nomcta) || " " || TRIM(n30_nombres) nomcta ',
@@ -2105,7 +2108,7 @@ LET query = 'INSERT INTO ctbt010 ',
 		'TRIM(b.nomcta) || " " || TRIM(n30_nombres) nomcta, ',
 		'a.b10_estado estado, a.b10_tipo_cta t_c, a.b10_tipo_mov t_m, ',
 		'a.b10_nivel nivel, a.b10_saldo_ma sal_ma, "',
-		vg_usuario CLIPPED, '" usua, "', fl_current(), '", fec ',
+		vg_usuario CLIPPED, '" usua, "', fecha_actual, '", fec ',
 		'FROM tmp_b10 b, ctbt010 a, rolt030 ',
 		'WHERE a.b10_compania = ', vg_codcia,
 		'  AND a.b10_cuenta   = b.cuenta ',
@@ -2135,7 +2138,7 @@ LET query = 'INSERT INTO rolt056 ',
 					'(SELECT sec_max FROM t2) ',
 			'END, ',
 		 	'a.n56_aux_otr_ing, a.n56_aux_iess, a.n56_aux_otr_egr,',
-			' a.n56_aux_banco, "', vg_usuario CLIPPED, '", "', fl_current(), '"',
+			' a.n56_aux_banco, "', vg_usuario CLIPPED, '", "', fecha_actual, '"',
 		' FROM tmp_n56 a, rolt030 ',
 		' WHERE n30_compania = ', vg_codcia,
 		'   AND n30_cod_trab = ', rm_n30.n30_cod_trab

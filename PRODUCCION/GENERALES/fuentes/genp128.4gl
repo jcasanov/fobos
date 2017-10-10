@@ -310,6 +310,8 @@ FUNCTION control_ingreso()
 DEFINE num_aux		INTEGER
 DEFINE query		VARCHAR(400)
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 OPTIONS INPUT WRAP
 CLEAR FORM
 INITIALIZE rm_modu.* TO NULL
@@ -317,6 +319,7 @@ LET rm_modu.g54_fecing  = fl_current()
 LET rm_modu.g54_usuario = vg_usuario 
 LET rm_modu.g54_estado  = "A" 
 LET rm_modu.g54_tipo    = 'M'
+LET fecha_actual        = fl_current()
 DISPLAY BY NAME rm_modu.g54_fecing, rm_modu.g54_usuario, rm_modu.g54_estado
 CALL ingresa_datos('I')
 IF NOT int_flag THEN
@@ -328,7 +331,7 @@ IF NOT int_flag THEN
 					rm_modu.g54_modulo, '", "',
 					rm_modu.g54_proceso CLIPPED, '", "',
 					vg_usuario CLIPPED, '", "',
-					fl_current(), '"',
+					fecha_actual, '"',
 				' FROM gent005 ',
 				' WHERE g05_estado  = "A" ',
 				'   AND g05_tipo   <> "AG"'

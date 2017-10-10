@@ -380,6 +380,8 @@ END FUNCTION
 FUNCTION control_actualizacion()
 DEFINE done,j            SMALLINT
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 LET j	     = 1
 LET done     = 0
 WHILE TRUE
@@ -392,7 +394,7 @@ WHILE TRUE
 		UPDATE ordt010 
 			SET c10_estado      = 'P',
 			    c10_usua_aprob  = vg_usuario,
-			    c10_fecha_aprob = fl_current()
+			    c10_fecha_aprob = fecha_actual
                       WHERE c10_compania    = vg_codcia
                         AND c10_localidad   = vg_codloc
                         AND c10_numero_oc   = r_detalle[j].c10_numero_oc

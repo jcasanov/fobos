@@ -1036,6 +1036,8 @@ DEFINE r_b12		RECORD LIKE ctbt012.*
 DEFINE comando		VARCHAR(250)
 DEFINE run_prog		CHAR(10)
 
+DEFINE fecha_actual DATETIME YEAR TO SECOND
+
 --- PARA VALIDAR QUE GENERE LA FORMA DE PAGO CUANDO ES UNA RECEPCION PARCIAL ---
 
 IF  rm_c10.c10_tipo_pago = 'R' AND vm_flag_forma_pago = 'S' THEN
@@ -1052,6 +1054,7 @@ IF rm_c00.c00_cuando_ret = 'C' AND tot_ret = 0 THEN
 END IF
 -----------------------------------------------------------------------
 
+LET fecha_actual = fl_current()
 IF vm_flag_recep = 'S' THEN
 	CALL fl_hacer_pregunta('La orden de compra no ha sido recibida completamente desea recibir restante ?','No')
 		RETURNING resp
@@ -1063,13 +1066,13 @@ IF vm_flag_recep = 'S' THEN
 	UPDATE ordt010 SET c10_estado      = estado,
 			   c10_factura     = rm_c13.c13_num_guia,
 			   c10_fecha_fact  = vg_fecha,
-			   c10_fecha_entre = fl_current()	
+			   c10_fecha_entre = fecha_actual	
 		WHERE CURRENT OF q_ordt010 
 ELSE
 	UPDATE ordt010 SET c10_estado      = 'C',
 			   c10_factura     = rm_c13.c13_num_guia,
 			   c10_fecha_fact  = vg_fecha,
-			   c10_fecha_entre = fl_current()	
+			   c10_fecha_entre = fecha_actual	
 		WHERE CURRENT OF q_ordt010 
 END IF
 
