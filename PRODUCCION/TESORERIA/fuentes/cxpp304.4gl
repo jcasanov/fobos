@@ -166,10 +166,6 @@ WHILE TRUE
 	END IF
 	CLEAR FORM 
 	CALL control_DISPLAY_botones()
-	IF vg_gui = 1 THEN
-		DISPLAY "" AT 21, 4
-		DISPLAY '0', ' de ', '0' AT 21, 4
-	END IF
 	DELETE FROM tmp_consulta
 
 	CALL control_lee_cabecera()
@@ -209,7 +205,7 @@ FUNCTION control_DISPLAY_botones_2()
 
 --#DISPLAY 'TP'       		TO tit_col1
 --#DISPLAY 'No Documento'	TO tit_col2
---#DISPLAY 'TP Retención'	TO tit_col3
+--#DISPLAY 'Tipo RT'		TO tit_col3
 --#DISPLAY '%'      		TO tit_col4
 --#DISPLAY 'Valor Base'   	TO tit_col5
 --#DISPLAY 'Valor Ret'	 	TO tit_col6
@@ -655,7 +651,7 @@ WHILE TRUE
 		--#BEFORE ROW
 			--#LET i = arr_curr()
 			--#LET j = scr_line()
-			--#CALL muestra_contadores_det(i, vm_num_det)
+			--#CALL muestra_contadores_det(i, num_det)
 
 		--#AFTER DISPLAY 
 			--#CONTINUE DISPLAY

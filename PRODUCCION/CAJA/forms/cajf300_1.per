@@ -48,7 +48,7 @@ c020 = FORMONLY.j10_fecha_pro TYPE DATE, NOENTRY, FORMAT = 'dd-mm-yyyy',
 c021 = FORMONLY.j10_nomcli, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
 c3   = cajt010.j10_tipo_destino, NOENTRY, UPSHIFT, OPTIONS = '-nolist',
 	COMMENTS = 'DOC.: FA FACTURA, PG PAGOS, PA, PAGOS ANTIC., OI OTROS INGRESOS, EC EGRESOS CAJA';
-c022 = cajt010.j10_num_destino, NOENTRY, UPSHIFT, FORMAT = '<<<<<&',
+c022 = cajt010.j10_num_destino, NOENTRY, UPSHIFT, FORMAT = '#####&',
 	OPTIONS = '-nolist';
 c023 = FORMONLY.j10_referencia, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
 c4   = cajt011.j11_codigo_pago, NOENTRY, UPSHIFT, OPTIONS = '-nolist';

@@ -413,7 +413,6 @@ IF rm_r19.r19_tot_neto = rm_fact.r19_tot_neto THEN
 	   NOT tiene_nota_entrega(rm_fact.r19_cod_tran, rm_fact.r19_num_tran)
 	THEN
 {-- DESAPARECEN LAS ANULACIONES DE FACTURA --}
-		--LET vm_cod_tran_2 = vm_cod_anu
 		LET vm_cod_tran_2 = vm_cod_dev
 		IF rm_fact.r19_cont_cred = 'R' THEN 
 			IF NOT verifica_saldo_fact_devuelta() THEN
@@ -497,11 +496,6 @@ IF flag_transf THEN
 	CALL transferencia_retorno()
 	DELETE FROM tmp_item_ret
 END IF
---display ' fin programa '
---display ' '
---display ' '
---rollback work
---exit program
 IF rm_r19.r19_cod_tran <> vm_cod_dev THEN
 	CALL verifica_pago_tarjeta_credito()
 END IF
@@ -1020,6 +1014,7 @@ IF vm_cruce THEN
 	DROP TABLE tmp_r41
 END IF
 {-- NUEVO PARA COMPLACER A CP --}
+LET fecha_actual = fl_current()
 WHENEVER ERROR CONTINUE
 UPDATE rept019
 	SET r19_fecing = fecha_actual + 3 UNITS SECOND
