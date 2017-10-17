@@ -66,7 +66,7 @@ DEFER INTERRUPT
 CLEAR SCREEN
 
 LET vg_proceso = arg_val(0)
-CALL startlog('../logs/', vg_proceso CLIPPED, '.err')
+CALL startlog('../logs/' || vg_proceso CLIPPED || '.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 
