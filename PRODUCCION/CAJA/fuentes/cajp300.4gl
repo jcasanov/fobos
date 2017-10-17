@@ -9,7 +9,6 @@
 ------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_nuevoprog     CHAR(400)
 DEFINE rm_g05		RECORD LIKE gent005.*
 DEFINE rm_caj		RECORD LIKE cajt010.*
 DEFINE vm_max_det       SMALLINT
@@ -43,7 +42,8 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/cajp300.err')
+LET vg_proceso = arg_val(0)
+CALL startlog('../logs/', vg_proceso CLIPPED, '.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN   -- Validar # parámetros correcto
@@ -54,7 +54,6 @@ LET vg_base     = arg_val(1)
 LET vg_modulo   = arg_val(2)
 LET vg_codcia   = arg_val(3)
 LET vg_codloc   = arg_val(4)
-LET vg_proceso = 'cajp300'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
 --#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
@@ -147,9 +146,9 @@ WHILE TRUE
 	FOR i = 1 TO 10
 		LET rm_orden[i] = '' 
 	END FOR
-	LET rm_orden[1]  = 'ASC'
+	LET rm_orden[1]  = 'DESC'
 	LET vm_columna_1 = 1
-	LET vm_columna_2 = 2
+	LET vm_columna_2 = 4
 	LET col          = 1
 	WHILE TRUE
 		LET query = 'SELECT * FROM tmp_caj ',
@@ -437,7 +436,8 @@ LET query = query CLIPPED,
 		' INTO TEMP t1 '
 PREPARE exec_tmp FROM query
 EXECUTE exec_tmp
-LET query = 'SELECT fec_pro, nomcli, tip_des, j10_num_destino AS num_des, ',
+LET query = 'SELECT fec_pro, nomcli, tip_des, ',
+			'CAST(j10_num_destino AS INTEGER) AS num_des, ',
 			'j10_referencia AS referencia, ',
 			'j11_codigo_pago AS cod_pag, j11_valor AS val_trn, ',
 			'cia, loc, tip_fue, num_fue, codcli ',
@@ -649,6 +649,7 @@ FUNCTION ver_forma_pago(i)
 DEFINE i		SMALLINT
 DEFINE prog		CHAR(10)
 DEFINE run_prog		CHAR(10)
+DEFINE nuevoprog     CHAR(400)
 
 IF rm_det[i].j10_tipo_destino <> 'OI' THEN
 	LET prog = 'cajp203'
@@ -659,12 +660,12 @@ LET run_prog = '; fglrun '
 IF vg_gui = 0 THEN
 	LET run_prog = '; fglgo '
 END IF
-LET vm_nuevoprog = 'cd ..', vg_separador, '..', vg_separador, 'CAJA',
+LET nuevoprog = 'cd ..', vg_separador, '..', vg_separador, 'CAJA',
 	vg_separador, 'fuentes', vg_separador, run_prog, prog, ' ', vg_base,
 	' ', vg_modulo, ' ', rm_cajs[i].j10_compania, ' ',
 	rm_cajs[i].j10_localidad, ' ', '"', rm_cajs[i].j10_tipo_fuente, '"',
 	' ', rm_cajs[i].j10_num_fuente
-RUN vm_nuevoprog
+RUN nuevoprog
 
 END FUNCTION
 
@@ -759,22 +760,14 @@ DEFINE comando 		VARCHAR(255)
 DEFINE tipo_comp	LIKE ctbt012.b12_tipo_comp
 DEFINE num_comp		LIKE ctbt012.b12_num_comp
 DEFINE run_prog		CHAR(10)
-DEFINE base		CHAR(40)
 
-IF FGL_GETENV("INFORMIXSERVER") = "ACUIO02" THEN
-	RETURN
-END IF
 LET run_prog = '; fglrun '
 IF vg_gui = 0 THEN
 	LET run_prog = '; fglgo '
 END IF
-LET base = vg_base
-IF base_servi() IS NOT NULL THEN
-	LET base = 'acero_qm'
-END IF
 LET comando = 'cd ..', vg_separador, '..', vg_separador,
 	      'CONTABILIDAD', vg_separador, 'fuentes', 
-	      vg_separador, run_prog, 'ctbp201 ', base CLIPPED, ' ',
+	      vg_separador, run_prog, 'ctbp201 ', vg_base CLIPPED, ' ',
 	      'CB ', vg_codcia, ' ', tipo_comp, ' ', num_comp
 
 RUN comando
@@ -861,7 +854,6 @@ DEFINE lin_menu		SMALLINT
 DEFINE row_ini  	SMALLINT
 DEFINE num_rows 	SMALLINT
 DEFINE num_cols 	SMALLINT
-DEFINE servi		CHAR(40)
 
 LET max_rows = 50
 INITIALIZE query TO NULL
@@ -922,15 +914,9 @@ CASE tipo_fuente
 		            '     AND b04_compania  = b12_compania ',
 		            '     AND b04_subtipo   = b12_subtipo '
 	WHEN 'EC'
-		LET servi = base_servi()
-		IF servi IS NOT NULL THEN
-			LET servi = servi CLIPPED, ':'
-		END IF
 		LET query = 'SELECT j10_tip_contable, j10_num_contable, ',
 				'   b12_fec_proceso, b04_nombre ',
-			    '	FROM cajt010, ', servi CLIPPED,
-					'ctbt012, OUTER ', servi CLIPPED,
-						'ctbt004 ',
+			    '	FROM cajt010, ctbt012, OUTER ctbt004 ',
 			    ' 	WHERE j10_compania     = ', vg_codcia,
 			    '	  AND j10_localidad    = ', vg_codloc,
 			    '	  AND j10_tipo_destino = "', tipo_destino, '"',
@@ -1051,26 +1037,6 @@ FOR i = 1 TO vm_num_det
 	END IF
 END FOR
 DISPLAY BY NAME vm_total
-
-END FUNCTION
-
-
-
-FUNCTION base_servi()
-DEFINE bas_ser		CHAR(40)
-
-LET bas_ser = FGL_GETENV("INFORMIXSERVER")
-IF FGL_GETENV("INFORMIXSERVER") = "ACUIO02" OR
-   FGL_GETENV("INFORMIXSERVER") = "idsuio02"
-THEN
-	LET bas_ser = 'idsuio01'
-END IF
-IF vg_base = 'acero_qs' THEN
-	LET bas_ser = 'acero_qm@', bas_ser CLIPPED
-ELSE
-	LET bas_ser = NULL
-END IF
-RETURN bas_ser
 
 END FUNCTION
 
