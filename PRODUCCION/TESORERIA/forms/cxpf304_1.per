@@ -1,25 +1,25 @@
 DATABASE aceros
 SCREEN
 {
-      Proveedor:[c0        ] [c1                             ]
- Desde la Fecha:[c2        ]                
- Hasta la Fecha:[c3        ]
+      Proveedor: [c0        ] [c1                                            ]
+ Desde la Fecha: [c2        ]                     Hasta la Fecha: [c3        ]
 
-  [b0        |b1                      |b2       |b3     |b4|b5             ]
- [c4        |c5                      |c6       |c7     |c8|c9             ]
- [c4        |c5                      |c6       |c7     |c8|c9             ]
- [c4        |c5                      |c6       |c7     |c8|c9             ]
- [c4        |c5                      |c6       |c7     |c8|c9             ]
- [c4        |c5                      |c6       |c7     |c8|c9             ]
- [c4        |c5                      |c6       |c7     |c8|c9             ]
- [c4        |c5                      |c6       |c7     |c8|c9             ]
- [c4        |c5                      |c6       |c7     |c8|c9             ]
- [c4        |c5                      |c6       |c7     |c8|c9             ]
- [c4        |c5                      |c6       |c7     |c8|c9             ]
- [c4        |c5                      |c6       |c7     |c8|c9             ]
- [c4        |c5                      |c6       |c7     |c8|c9             ]
- [c4        |c5                      |c6       |c7     |c8|c9             ]
- [c4        |c5                      |c6       |c7     |c8|c9             ]
+                                                              [c050] de [c051]
+ [b0        |b1                         |b2               |b3    |b4        |b]
+[c4        |c5                         |c6               |c7    |c8        |c]
+[c4        |c5                         |c6               |c7    |c8        |c]
+[c4        |c5                         |c6               |c7    |c8        |c]
+[c4        |c5                         |c6               |c7    |c8        |c]
+[c4        |c5                         |c6               |c7    |c8        |c]
+[c4        |c5                         |c6               |c7    |c8        |c]
+[c4        |c5                         |c6               |c7    |c8        |c]
+[c4        |c5                         |c6               |c7    |c8        |c]
+[c4        |c5                         |c6               |c7    |c8        |c]
+[c4        |c5                         |c6               |c7    |c8        |c]
+[c4        |c5                         |c6               |c7    |c8        |c]
+[c4        |c5                         |c6               |c7    |c8        |c]
+[c4        |c5                         |c6               |c7    |c8        |c]
+[c4        |c5                         |c6               |c7    |c8        |c]
 
 }
 TABLES
@@ -28,12 +28,15 @@ TABLES
 
 ATTRIBUTES
 
+c050 = FORMONLY.num_rows, NOENTRY, REVERSE, UPSHIFT;
+c051 = FORMONLY.max_rows, NOENTRY, REVERSE, UPSHIFT;
+
 b0  = FORMONLY.tit_col1, WIDGET = 'BUTTON', CONFIG = 'F15';
 b1  = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
 b2  = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
 b3  = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
 b4  = FORMONLY.tit_col5, WIDGET = 'BUTTON', CONFIG = 'F19';
-b5  = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
+b   = FORMONLY.tit_col6, WIDGET = 'BUTTON', CONFIG = 'F20';
 
 c0  = FORMONLY.vm_proveedor TYPE INTEGER, WIDGET = 'FIELD_BMP',
 	CONFIG = 'lista.bmp F2';
@@ -45,16 +48,13 @@ c3  = FORMONLY.vm_fecha_hasta TYPE DATE, REVERSE, AUTONEXT,
 	UPSHIFT, REQUIRED, FORMAT = 'dd-mm-yyyy', COMMENTS = 'Fecha en formato: dd-mm-aaaa';
 c4  = FORMONLY.fecha     TYPE DATE, FORMAT = 'dd-mm-yyyy', OPTIONS = '-nolist';
 c5  = FORMONLY.proveedor TYPE VARCHAR, OPTIONS = '-nolist';
-c6  = FORMONLY.estado    TYPE VARCHAR, OPTIONS = '-nolist';
-c7  = FORMONLY.num_ret   TYPE INTEGER, OPTIONS = '-nolist';
-c8  = FORMONLY.moneda    TYPE VARCHAR, OPTIONS = '-nolist';
-c9  = cxpt027.p27_total_ret, FORMAT = '---,---,--&.##', OPTIONS = '-nolist';
-
-end
-
+c6  = FORMONLY.num_ret_sri TYPE VARCHAR, OPTIONS = '-nolist';
+c7  = FORMONLY.num_ret   TYPE INTEGER, FORMAT = '<<<<<&', OPTIONS = '-nolist';
+c8  = cxpt027.p27_total_ret, FORMAT = '---,--&.##', OPTIONS = '-nolist';
+c   = cxpt027.p27_estado, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+END
 KEYS
 	F5 = 'Documento'
-
 INSTRUCTIONS
-SCREEN RECORD r_detalle[14] (fecha,  proveedor, estado, num_ret, 
-			     moneda, p27_total_ret)
+SCREEN RECORD r_detalle[14] (fecha, proveedor, num_ret_sri, num_ret,
+							p27_total_ret, p27_estado)

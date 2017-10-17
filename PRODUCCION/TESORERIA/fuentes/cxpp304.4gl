@@ -22,14 +22,14 @@ DEFINE rm_orden 	ARRAY[10] OF CHAR(4)
 DEFINE vm_columna_1	SMALLINT
 DEFINE vm_columna_2	SMALLINT
 
-DEFINE r_detalle	ARRAY [1000] OF RECORD
-				fecha		DATE,
-				proveedor	LIKE cxpt001.p01_nomprov,
-				estado		VARCHAR(9),
-				num_ret		LIKE cxpt027.p27_num_ret,
-				moneda		LIKE cxpt027.p27_moneda,
-				p27_total_ret	LIKE cxpt027.p27_total_ret
-			END RECORD
+DEFINE r_detalle		ARRAY [1000] OF RECORD
+							fecha			DATE,
+							proveedor		LIKE cxpt001.p01_nomprov,
+							num_ret_sri		LIKE cxpt029.p29_num_sri,
+							num_ret			LIKE cxpt027.p27_num_ret,
+							p27_total_ret	LIKE cxpt027.p27_total_ret,
+							p27_estado		LIKE cxpt027.p27_estado
+						END RECORD
 
 DEFINE r_detalle_2	ARRAY [1000] OF RECORD
 				p28_tipo_doc	LIKE cxpt028.p28_tipo_doc,
@@ -64,7 +64,9 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/cxpp304.err')
+
+LET vg_proceso = arg_val(0)
+CALL startlog('../logs/', vg_proceso CLIPPED, '.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 
@@ -80,8 +82,6 @@ LET vg_codloc    = arg_val(4)
 LET vg_proveedor = arg_val(5)
 LET vg_num_ret   = arg_val(6)
 
-LET vg_proceso = 'cxpp304'
-
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
 --#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
@@ -91,15 +91,15 @@ CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CREATE TEMP TABLE tmp_consulta(
 	fecha		DATE,
 	proveedor	VARCHAR(40),
-	estado		VARCHAR(9),
+	num_ret_sri	VARCHAR(21),
 	num_ret		INTEGER,
-	moneda		CHAR(2),
 	p27_total_ret	DECIMAL(11,2),
+	estado		CHAR(1),
 	codprov		INTEGER)
 
 CREATE TEMP TABLE tmp_consulta_2(
 	p28_tipo_doc	CHAR(2),
-	p28_num_doc	VARCHAR(15),
+	p28_num_doc	VARCHAR(17),
 	tipo_ret	VARCHAR(10),
 	p28_porcentaje	DECIMAL(5,2),
 	p28_valor_base	DECIMAL(12,2),
@@ -182,7 +182,6 @@ WHILE TRUE
 	END IF
 
 	IF vm_num_det = 0 THEN
-		--CALL fgl_winmessage(vg_producto,'No se encontraron registros con el criterio indicado.','exclamation')
 		CALL fl_mostrar_mensaje('No se encontraron registros con el criterio indicado.','exclamation')
 		CONTINUE WHILE
 	END IF
@@ -195,12 +194,12 @@ END FUNCTION
 
 FUNCTION control_DISPLAY_botones()
 
---#DISPLAY 'Fecha'     		TO tit_col1
---#DISPLAY 'Proveedor'		TO tit_col2
---#DISPLAY 'Estado'		TO tit_col3
---#DISPLAY 'Num Ret'   		TO tit_col4
---#DISPLAY 'MO'     		TO tit_col5
---#DISPLAY 'Total Recepción' 	TO tit_col6
+--#DISPLAY 'Fecha'     			TO tit_col1
+--#DISPLAY 'Proveedor'			TO tit_col2
+--#DISPLAY 'Num Ret SRI'   		TO tit_col3
+--#DISPLAY 'NumRet'   			TO tit_col4
+--#DISPLAY 'Total'			 	TO tit_col5
+--#DISPLAY 'E'				 	TO tit_col6
 
 END FUNCTION
 
@@ -274,17 +273,14 @@ DEFINE fec_fin		DATE
 	AFTER FIELD vm_fecha_hasta 
 		IF vm_fecha_hasta IS NOT NULL THEN
 			IF vm_fecha_hasta < vm_fecha_desde THEN
-				--CALL fgl_winmessage(vg_producto,'La fecha final no debe ser mayor a la de fecha de inicio.','exclamation')
 				CALL fl_mostrar_mensaje('La fecha final no debe ser mayor a la de fecha de inicio.','exclamation')
 				NEXT FIELD vm_fecha_hasta
 			END IF
 			IF vm_fecha_hasta > vg_fecha THEN
-				--CALL fgl_winmessage(vg_producto,'La fecha final no puede ser mayor a la de hoy.','exclamation')
 				CALL fl_mostrar_mensaje('La fecha final no puede ser mayor a la de hoy.','exclamation')
 				NEXT FIELD vm_fecha_hasta
 			END IF
 			IF vm_fecha_desde < '01-01-1900' THEN
-				--CALL fgl_winmessage(vg_producto,'Debe ingresa fechas mayores a las del año 1900.','exclamation')	
 				CALL fl_mostrar_mensaje('Debe ingresa fechas mayores a las del año 1900.','exclamation')
 				NEXT FIELD vm_fecha_hasta
 			END IF
@@ -296,12 +292,10 @@ DEFINE fec_fin		DATE
 	AFTER FIELD vm_fecha_desde 
 		IF vm_fecha_desde IS NOT NULL THEN
 			IF vm_fecha_desde > vm_fecha_hasta THEN
-				--CALL fgl_winmessage(vg_producto,'La fecha de inicio debe ser menor a la fecha final.','exclamation')
 				CALL fl_mostrar_mensaje('La fecha de inicio debe ser menor a la fecha final.','exclamation')
 				NEXT FIELD vm_fecha_desde
 			END IF
 			IF vm_fecha_hasta < '01-01-1900' THEN
-				--CALL fgl_winmessage(vg_producto,'Debe ingresa fechas mayores a las del año 1889.','exclamation')	
 				CALL fl_mostrar_mensaje('Debe ingresa fechas mayores a las del año 1889.','exclamation')
 				NEXT FIELD vm_fecha_desde
 			END IF
@@ -325,7 +319,6 @@ DEFINE fec_fin		DATE
 			CALL fl_lee_proveedor(vm_proveedor)
 				RETURNING r_p01.*
 			IF r_p01.p01_codprov IS NULL THEN
-				--CALL fgl_winmessage(vg_producto,'No existe el proveedor en la Compañía.','exclamation')
 				CALL fl_mostrar_mensaje('No existe el proveedor en la Compañía.','exclamation')
 				CLEAR nom_proveedor
 				NEXT FIELD vm_proveedor
@@ -337,12 +330,10 @@ DEFINE fec_fin		DATE
 
 	AFTER INPUT
 		IF vm_fecha_desde IS NULL AND vm_fecha_hasta IS NOT NULL THEN
-			--CALL fgl_winmessage(vg_producto,'Debe ingresar la fecha de inicio.','exclamation') 
 			CALL fl_mostrar_mensaje('Debe ingresar la fecha de inicio.','exclamation') 
 			NEXT FIELD vm_fecha_desde
 		END IF
 		IF vm_fecha_hasta IS NULL AND vm_fecha_desde IS NOT NULL THEN
-			--CALL fgl_winmessage(vg_producto,'Debe ingresar la fecha de inicio.','exclamation') 
 			CALL fl_mostrar_mensaje('Debe ingresar la fecha de inicio.','exclamation') 
 			NEXT FIELD vm_fecha_hasta
 		END IF
@@ -354,11 +345,12 @@ END FUNCTION
 
 
 FUNCTION control_consulta()
-DEFINE query         	CHAR(500)
+DEFINE query         	CHAR(800)
 DEFINE i		SMALLINT
 DEFINE r_p01		RECORD LIKE cxpt001.*
 DEFINE r_p27		RECORD LIKE cxpt027.*
 DEFINE r_p28		RECORD LIKE cxpt028.*
+DEFINE r_p29		RECORD LIKE cxpt029.*
 DEFINE expr_fecha	VARCHAR(150)
 DEFINE expr_prov	VARCHAR(50)
 
@@ -374,12 +366,15 @@ IF vm_proveedor IS NOT NULL THEN
 	LET expr_prov = ' p27_codprov = ',vm_proveedor	
 END IF
 
-LET query = 'SELECT cxpt027.*, cxpt001.* '||
-		' FROM cxpt027, cxpt001'||
-		' WHERE p27_compania   = '|| vg_codcia ||
-		'   AND p27_localidad  = '|| vg_codloc ||
-		'   AND '|| expr_prov CLIPPED ||
-		'   AND '|| expr_fecha CLIPPED || 
+LET query = 'SELECT cxpt027.*, p29_num_sri, cxpt001.* ',
+		' FROM cxpt027, cxpt029, cxpt001',
+		' WHERE p27_compania   = ', vg_codcia ,
+		'   AND p27_localidad  = ', vg_codloc ,
+		'   AND ', expr_prov CLIPPED ,
+		'   AND ', expr_fecha CLIPPED , 
+		'   AND p29_compania   = p27_compania ',
+		'   AND p29_localidad  = p27_localidad ',
+		'   AND p29_num_ret    = p27_num_ret ',
 		'   AND p27_codprov    = p01_codprov'
 		
 PREPARE consulta FROM query
@@ -387,22 +382,16 @@ PREPARE consulta FROM query
 DECLARE q_consulta CURSOR FOR consulta
 
 LET i = 1
-FOREACH q_consulta INTO r_p27.*, r_p01.*
+FOREACH q_consulta INTO r_p27.*, r_p29.p29_num_sri, r_p01.*
 
 	LET r_detalle[i].fecha         = DATE(r_p27.p27_fecing)
 	LET r_detalle[i].proveedor     = r_p01.p01_nomprov
+	LET r_detalle[i].num_ret_sri   = r_p29.p29_num_sri
 	LET r_detalle[i].num_ret       = r_p27.p27_num_ret
-	LET r_detalle[i].moneda        = r_p27.p27_moneda
 	LET r_detalle[i].p27_total_ret = r_p27.p27_total_ret
+	LET r_detalle[i].p27_estado    = r_p27.p27_estado
 
 	LET r_detalle_1[i].codprov     = r_p01.p01_codprov
-
-	CASE r_p27.p27_estado 
-		WHEN 'A'
-			LET r_detalle[i].estado = 'ACTIVA'
-		WHEN 'E'
-			LET r_detalle[i].estado = 'ELIMINADA'
-	END CASE 
 
 	INSERT INTO tmp_consulta VALUES(r_detalle[i].*,r_detalle_1[i].*)
 		
@@ -458,7 +447,7 @@ WHILE TRUE
 		--#BEFORE ROW
 			--#LET i = arr_curr()
 			--#LET j = scr_line()
-			--#CALL muestra_contadores_det(i)
+			--#CALL muestra_contadores_det(i, vm_num_det)
 
 		--#AFTER DISPLAY 
 			--#CONTINUE DISPLAY
@@ -562,11 +551,6 @@ DISPLAY FORM f_cxpp304_2
 
 CLEAR FORM
 CALL control_DISPLAY_botones_2()
-{
-FOR m = 1 TO vm_filas_pant
-	INITIALIZE r_detalle[m].* TO NULL
-END FOR
-}
 
 DECLARE q_cxpt028 CURSOR FOR 
 	SELECT * FROM cxpt028 
@@ -609,7 +593,6 @@ END FOREACH
 LET num_det = m - 1
 
 IF num_det = 0 THEN
-	--CALL FGL_WINMESSAGE(vg_producto,'No existen detalle de retenciones para esta retención.','exclamation')
 	CALL fl_mostrar_mensaje('No existen detalle de retenciones para esta retención.','exclamation')
 	CLOSE WINDOW w_cxpp304_2
 	RETURN
@@ -672,7 +655,7 @@ WHILE TRUE
 		--#BEFORE ROW
 			--#LET i = arr_curr()
 			--#LET j = scr_line()
-			--#CALL muestra_contadores_det(i)
+			--#CALL muestra_contadores_det(i, vm_num_det)
 
 		--#AFTER DISPLAY 
 			--#CONTINUE DISPLAY
@@ -765,13 +748,11 @@ END FUNCTION
 
 
 
-FUNCTION muestra_contadores_det(i)
-DEFINE i           SMALLINT
+FUNCTION muestra_contadores_det(num_rows, max_rows)
+DEFINE num_rows		SMALLINT
+DEFINE max_rows		SMALLINT
 
-IF vg_gui = 1 THEN
-	DISPLAY '' AT 21, 4
-	DISPLAY i, ' de ', vm_num_det AT 21,4
-END IF
+DISPLAY BY NAME num_rows, max_rows
 
 END FUNCTION
 
