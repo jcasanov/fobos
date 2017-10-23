@@ -1196,6 +1196,7 @@ DEFINE r_dcomp		RECORD LIKE ctbt013.*
 DEFINE pedido		LIKE rept029.r29_pedido
 DEFINE nom_cta		LIKE ctbt010.b10_descripcion
 DEFINE est_cta		LIKE ctbt010.b10_estado
+DEFINE num_sri		LIKE rept038.r38_num_sri
 DEFINE mensaje		VARCHAR(200)
         
 DECLARE q_mast CURSOR FOR SELECT UNIQUE te_tipo_comp, te_subtipo, te_indice 
@@ -1225,9 +1226,35 @@ FOREACH q_mast INTO tipo_comp, subtipo, indice
     	LET r_ccomp.b12_subtipo 	= subtipo
 	IF vm_cod_tran IS NOT NULL THEN
     		LET r_ccomp.b12_fec_proceso = rm_crep.r19_fecing
-    		LET r_ccomp.b12_glosa	= 'COMPROBANTE: ',
-			rm_crep.r19_cod_tran, ' ', rm_crep.r19_num_tran 
-			USING '<<<<<<<<<<<<<<<'
+    		LET r_ccomp.b12_glosa	= 'COMPROBANTE: '
+			IF vm_cod_tran <> 'FA' AND vm_cod_tran <> 'CL' THEN
+				LET r_ccomp.b12_glosa = r_ccomp.b12_glosa CLIPPED, ' ',
+							rm_crep.r19_cod_tran, ' ',
+							rm_crep.r19_num_tran USING '<<<<<<<<<<<<<<<'
+			ELSE
+				IF vm_cod_tran = 'FA' THEN
+					LET num_sri = NULL
+					DECLARE q_num_sri CURSOR FOR
+						SELECT r38_num_sri
+							FROM rept038
+							WHERE r38_compania    = rm_crep.r19_compania
+							  AND r38_localidad   = rm_crep.r19_localidad
+							  AND r38_tipo_doc    = rm_crep.r19_cod_tran
+							  AND r38_tipo_fuente = "PR"
+							  AND r38_cod_tran    = rm_crep.r19_cod_tran
+							  AND r38_num_tran    = rm_crep.r19_num_tran
+					OPEN q_num_sri
+					FETCH q_num_sri INTO num_sri
+					CLOSE q_num_sri
+					FREE q_num_sri
+				ELSE
+					LET num_sri = rm_crep.r19_oc_externa CLIPPED
+				END IF
+				LET r_ccomp.b12_glosa = r_ccomp.b12_glosa CLIPPED, ' ',
+							rm_crep.r19_cod_tran, ' No. SRI ', num_sri CLIPPED,
+							' No. INT. ', 
+							rm_crep.r19_num_tran USING '<<<<<<<<<<<<<<<'
+			END IF
 	ELSE
     		LET r_ccomp.b12_fec_proceso = vm_fecha_fin
     		LET r_ccomp.b12_glosa = 'COMPROBANTES ',

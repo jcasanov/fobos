@@ -8,8 +8,6 @@
 --------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE vm_preventa      LIKE rept023.r23_numprev
-DEFINE vm_tipo_doc	CHAR(2)
 DEFINE rm_ccaj		RECORD LIKE cajt010.*
 DEFINE rm_cprev		RECORD LIKE rept023.*
 DEFINE rm_cpago		RECORD LIKE rept025.*
@@ -19,6 +17,9 @@ DEFINE rm_item		RECORD LIKE rept010.*
 DEFINE rm_stock		RECORD LIKE rept011.*
 DEFINE rm_r21		RECORD LIKE rept021.*
 DEFINE rm_r88		RECORD LIKE rept088.*
+DEFINE vm_tipo_doc	LIKE rept019.r19_cod_tran
+DEFINE vm_preventa	LIKE rept023.r23_numprev
+DEFINE vm_num_sri	LIKE rept038.r38_num_sri
 
 
 
@@ -27,10 +28,11 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/repp211.err')
+LET vg_proceso = arg_val(0)
+CALL startlog('../logs/' || vg_proceso CLIPPED || '.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
-IF num_args() <> 4 THEN          -- Validar # parámetros correcto
+IF num_args() <> 5 THEN          -- Validar # parámetros correcto
 	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
@@ -38,8 +40,8 @@ LET vg_base     = arg_val(1)
 LET vg_codcia   = arg_val(2)
 LET vg_codloc   = arg_val(3)
 LET vm_preventa = arg_val(4)
+LET vm_num_sri  = arg_val(5)
 LET vg_modulo   = 'RE'
-LET vg_proceso  = 'repp211'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
 CALL fl_validar_parametros()
@@ -122,6 +124,7 @@ IF rm_r88.r88_compania IS NOT NULL THEN
 ELSE
 	CALL transferir_item_bod_ss_bod_res('D')
 END IF
+CALL genera_num_sri()
 COMMIT WORK
 IF vg_codloc <> 2 AND vg_codloc <> 4 THEN
 	CALL fl_control_master_contab_repuestos(vg_codcia, vg_codloc, 
@@ -1116,6 +1119,81 @@ FOREACH q_trans_ori_cab INTO r_r19.*
 			  AND r19_num_tran  = r_r20.r20_num_tran
 	END FOREACH
 END FOREACH
+
+END FUNCTION
+
+
+
+FUNCTION genera_num_sri()
+DEFINE r_g37			RECORD LIKE gent037.*
+DEFINE sec_sri			LIKE gent037.g37_sec_num_sri
+DEFINE cont_cred		LIKE gent037.g37_cont_cred
+DEFINE cuantos			SMALLINT
+
+CALL retorna_cont_cred() RETURNING cont_cred
+WHENEVER ERROR CONTINUE
+DECLARE q_sri CURSOR FOR
+	SELECT * FROM gent037
+		WHERE g37_compania   = vg_codcia
+		  AND g37_localidad  = vg_codloc
+		  AND g37_tipo_doc   = vm_tipo_doc
+  		  AND g37_cont_cred  = cont_cred
+		  AND g37_secuencia IN
+			(SELECT MAX(g37_secuencia)
+				FROM gent037
+				WHERE g37_compania  = vg_codcia
+				  AND g37_localidad = vg_codloc
+				  AND g37_tipo_doc  = vm_tipo_doc)
+	FOR UPDATE
+OPEN q_sri
+FETCH q_sri INTO r_g37.*
+IF STATUS < 0 THEN
+	ROLLBACK WORK
+	CALL fl_mostrar_mensaje('Lo siento ahora no puede modificar este No. del SRI, porque ésta secuencia se encuentra bloqueada por otro usuario.','stop')
+	WHENEVER ERROR STOP
+	EXIT PROGRAM
+END IF
+WHENEVER ERROR STOP
+LET cuantos = 8 + r_g37.g37_num_dig_sri
+LET sec_sri = vm_num_sri[9, cuantos] USING "#########"
+UPDATE gent037
+	SET g37_sec_num_sri = sec_sri
+	WHERE g37_compania     = r_g37.g37_compania
+	  AND g37_localidad    = r_g37.g37_localidad
+	  AND g37_tipo_doc     = r_g37.g37_tipo_doc
+	  AND g37_secuencia    = r_g37.g37_secuencia
+	  AND g37_sec_num_sri <= sec_sri
+INSERT INTO rept038
+	VALUES(vg_codcia, vg_codloc, r_g37.g37_tipo_doc, "PR", vm_tipo_doc,
+				rm_cabt.r19_num_tran, vm_num_sri)
+
+END FUNCTION
+
+
+
+FUNCTION retorna_cont_cred()
+DEFINE r_r23		RECORD LIKE rept023.*
+DEFINE cont_cred	LIKE gent037.g37_cont_cred
+DEFINE cont			INTEGER
+
+LET cont_cred = 'N'
+SELECT COUNT(*) INTO cont
+	FROM gent037
+	WHERE g37_compania   = vg_codcia
+	  AND g37_localidad  = vg_codloc
+	  AND g37_tipo_doc   = vm_tipo_doc
+	  AND g37_secuencia IN
+		(SELECT MAX(g37_secuencia)
+			FROM gent037
+			WHERE g37_compania  = vg_codcia
+			  AND g37_localidad = vg_codloc
+			  AND g37_tipo_doc  = vm_tipo_doc)
+IF cont > 1 THEN
+	CALL fl_lee_preventa_rep(vg_codcia, vg_codloc, vm_preventa)
+		RETURNING r_r23.*
+	LET cont_cred = r_r23.r23_cont_cred
+END IF
+RETURN cont_cred
 
 END FUNCTION
 

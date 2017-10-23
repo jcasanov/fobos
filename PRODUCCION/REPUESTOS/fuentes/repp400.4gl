@@ -83,18 +83,21 @@ END FUNCTION
 
 FUNCTION control_reporte()
 DEFINE i,col		SMALLINT
-DEFINE query		CHAR(1000)
+DEFINE query		CHAR(1500)
 DEFINE r_rep		RECORD LIKE rept019.*
 DEFINE r_gen		RECORD LIKE gent021.*
 DEFINE r_mon		RECORD LIKE gent013.*
+DEFINE fecha_ord	DATE
+DEFINE subtotal		DECIMAL(11,2)
 DEFINE valor_iva	DECIMAL(11,2)
 DEFINE total_bru	DECIMAL(12,2)
 DEFINE total_des	DECIMAL(11,2)
+DEFINE total_sub	DECIMAL(11,2)
 DEFINE total_iva	DECIMAL(11,2)
-DEFINE total_fle	DECIMAL(11,2)
 DEFINE total_net	DECIMAL(12,2)
 DEFINE comando		VARCHAR(100)
 DEFINE expr_tipo	VARCHAR(50)
+DEFINE expr_vend	VARCHAR(100)
 
 LET vm_fecha_ini = vg_fecha
 LET vm_fecha_fin = vg_fecha
@@ -121,28 +124,32 @@ WHILE TRUE
 		CONTINUE WHILE
 	END IF
 	CALL fl_lee_compania(vg_codcia) RETURNING rm_cia.*
+	LET expr_vend = NULL
+	IF rm_rep.r19_vendedor IS NOT NULL THEN
+		LET expr_vend = '  AND r19_vendedor  = ', rm_rep.r19_vendedor
+	END IF
 	LET expr_tipo = NULL
 	IF rm_rep.r19_cont_cred <> 'T' THEN
-		LET expr_tipo = '  AND r19_cont_cred = "',
-				rm_rep.r19_cont_cred, '"'
+		LET expr_tipo = '  AND r19_cont_cred = "', rm_rep.r19_cont_cred, '"'
 	END IF
 	LET total_bru = 0
 	LET total_des = 0
+	LET total_sub = 0
 	LET total_iva = 0
-	LET total_fle = 0
 	LET total_net = 0
 	LET query = 'SELECT *, r19_tot_neto - (r19_tot_bruto - r19_tot_dscto) ',
-			' - r19_flete ',
+			' - r19_flete, (r19_tot_bruto - r19_tot_dscto), DATE(r19_fecing) ',
 			'FROM rept019 ',
 			'WHERE r19_compania  = ', vg_codcia,
 			'  AND r19_localidad = ', vg_codloc,
 			'  AND (r19_cod_tran = "', vm_tipo_fact, '"',
 			'   OR r19_cod_tran   IN ("DF","AF")) ',
 			expr_tipo CLIPPED,
+			expr_vend CLIPPED,
 			'  AND r19_moneda    = "', rm_rep.r19_moneda, '"',
 			'  AND DATE(r19_fecing) BETWEEN "', vm_fecha_ini,
 			'" AND "', vm_fecha_fin, '"',
-			' ORDER BY 37, 3, 4'
+			' ORDER BY 40, 3 DESC, 4 ASC'
 	PREPARE deto FROM query
 	DECLARE q_deto CURSOR FOR deto
 	OPEN q_deto
@@ -153,29 +160,25 @@ WHILE TRUE
 		CONTINUE WHILE
 	END IF
 	CLOSE q_deto
-	START REPORT rep_costos TO PIPE comando
-	FOREACH q_deto INTO r_rep.*, valor_iva
-		IF rm_rep.r19_vendedor IS NOT NULL AND
-		   rm_rep.r19_vendedor <> r_rep.r19_vendedor THEN
-			CONTINUE FOREACH
-		END IF
+	START REPORT rep_fact_devol TO PIPE comando
+	FOREACH q_deto INTO r_rep.*, valor_iva, subtotal, fecha_ord
 		IF r_rep.r19_cod_tran = 'DF' OR r_rep.r19_cod_tran = 'AF' THEN
 			LET r_rep.r19_tot_bruto = r_rep.r19_tot_bruto * (-1)
 			LET r_rep.r19_tot_dscto = r_rep.r19_tot_dscto * (-1)
+			LET subtotal            = subtotal * (-1)
 			LET valor_iva           = valor_iva * (-1)
 			LET r_rep.r19_flete     = r_rep.r19_flete * (-1)
 			LET r_rep.r19_tot_neto  = r_rep.r19_tot_neto * (-1)
 		END IF
 		LET total_bru = total_bru + r_rep.r19_tot_bruto
 		LET total_des = total_des + r_rep.r19_tot_dscto
+		LET total_sub = total_sub + subtotal
 		LET total_iva = total_iva + valor_iva
-		LET total_fle = total_fle + r_rep.r19_flete
 		LET total_net = total_net + r_rep.r19_tot_neto
-		OUTPUT TO REPORT rep_costos(r_rep.*, valor_iva, total_bru,
-					total_des, total_iva, total_fle,
-					total_net)
+		OUTPUT TO REPORT rep_fact_devol(r_rep.*, valor_iva, subtotal, total_bru,
+					total_des, total_sub, total_iva, total_net)
 	END FOREACH
-	FINISH REPORT rep_costos
+	FINISH REPORT rep_fact_devol
 END WHILE
 
 END FUNCTION
@@ -299,19 +302,20 @@ END FUNCTION
 
 
 
-REPORT rep_costos(r_rep, valor_iva, total_bru, total_des, total_iva, total_fle,
-		total_net)
+REPORT rep_fact_devol(r_rep, valor_iva, subtotal, total_bru, total_des,
+						total_sub, total_iva, total_net)
 DEFINE r_rep		RECORD LIKE rept019.*
+DEFINE valor_iva	DECIMAL(11,2)
+DEFINE subtotal		DECIMAL(11,2)
+DEFINE total_bru	DECIMAL(12,2)
+DEFINE total_des	DECIMAL(11,2)
+DEFINE total_sub	DECIMAL(11,2)
+DEFINE total_iva	DECIMAL(11,2)
+DEFINE total_net	DECIMAL(12,2)
 DEFINE r_r19		RECORD LIKE rept019.*
 DEFINE r_r38		RECORD LIKE rept038.*
 DEFINE cod_tran		LIKE rept019.r19_cod_tran
 DEFINE num_tran		LIKE rept019.r19_num_tran
-DEFINE valor_iva	DECIMAL(11,2)
-DEFINE total_bru	DECIMAL(12,2)
-DEFINE total_des	DECIMAL(11,2)
-DEFINE total_iva	DECIMAL(11,2)
-DEFINE total_fle	DECIMAL(11,2)
-DEFINE total_net	DECIMAL(12,2)
 DEFINE usuario		VARCHAR(19,15)
 DEFINE titulo		VARCHAR(80)
 DEFINE modulo		VARCHAR(40)
@@ -395,8 +399,8 @@ PAGE HEADER
 	      COLUMN 48,  "CLIENTE",
 	      COLUMN 76,  "   VALOR BRUTO",
 	      COLUMN 91,  " VALOR DSCTO.",
-	      COLUMN 105, "    VALOR IVA",
-	      COLUMN 119, "  VALOR FLETE",
+	      COLUMN 105, "     SUBTOTAL",
+	      COLUMN 119, "    VALOR IVA",
 	      COLUMN 133, "    VALOR NETO"
 	PRINT "--------------------------------------------------------------------------------------------------------------------------------------------------"
 
@@ -434,11 +438,11 @@ ON EVERY ROW
 	      COLUMN 12,  r_rep.r19_cod_tran,
 	      COLUMN 15,  factura,
 	      COLUMN 31,  r_r38.r38_num_sri,
-	      COLUMN 48,  r_rep.r19_nomcli[1,27],
+	      COLUMN 48,  r_rep.r19_nomcli[1, 27],
 	      COLUMN 76,  r_rep.r19_tot_bruto USING "---,---,--&.##",
 	      COLUMN 91,  r_rep.r19_tot_dscto USING "--,---,--&.##",
-	      COLUMN 105, valor_iva           USING "--,---,--&.##",
-	      COLUMN 119, r_rep.r19_flete     USING "--,---,--&.##",
+	      COLUMN 105, subtotal            USING "--,---,--&.##",
+	      COLUMN 119, valor_iva           USING "--,---,--&.##",
 	      COLUMN 133, r_rep.r19_tot_neto  USING "---,---,--&.##"
 	
 ON LAST ROW
@@ -451,8 +455,8 @@ ON LAST ROW
 	PRINT COLUMN 63, "TOTALES ==>  ",
 	      COLUMN 76,  total_bru USING "---,---,--&.##",
 	      COLUMN 91,  total_des USING "--,---,--&.##",
-	      COLUMN 105, total_iva USING "--,---,--&.##",
-	      COLUMN 119, total_fle USING "--,---,--&.##",
+	      COLUMN 105, total_sub USING "--,---,--&.##",
+	      COLUMN 119, total_iva USING "--,---,--&.##",
 	      COLUMN 133, total_net USING "---,---,--&.##";
 	print ASCII escape;
 	print ASCII desact_comp;

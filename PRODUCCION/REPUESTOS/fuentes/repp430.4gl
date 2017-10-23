@@ -445,11 +445,12 @@ DEFINE query		CHAR(1200)
 DEFINE r_r02		RECORD LIKE rept002.*
 DEFINE r_r19		RECORD LIKE rept019.*
 DEFINE r_rep		RECORD LIKE rept019.*
+DEFINE subtotal		DECIMAL(11,2)
 DEFINE valor_iva	DECIMAL(11,2)
 DEFINE total_bru	DECIMAL(12,2)
 DEFINE total_des	DECIMAL(11,2)
+DEFINE total_sub	DECIMAL(11,2)
 DEFINE total_iva	DECIMAL(11,2)
-DEFINE total_fle	DECIMAL(11,2)
 DEFINE total_net	DECIMAL(12,2)
 DEFINE total_cos	DECIMAL(12,2)
 DEFINE flag		VARCHAR(1)
@@ -464,8 +465,8 @@ END IF
 CALL fl_lee_compania(vg_codcia) RETURNING rm_g01.*
 LET total_bru       = 0
 LET total_des       = 0
+LET total_sub       = 0
 LET total_iva       = 0
-LET total_fle       = 0
 LET total_net       = 0
 LET total_cos       = 0
 LET vm_total_fob_im = 0
@@ -478,7 +479,7 @@ THEN
 	END IF
 END IF
 LET query = 'SELECT *, r19_tot_neto - (r19_tot_bruto - r19_tot_dscto) ',
-		' - r19_flete ',
+		' - r19_flete, (r19_tot_bruto - r19_tot_dscto), DATE(r19_fecing) ',
 		' FROM rept019 ',
 		'WHERE r19_compania  = ', vg_codcia,
 		'  AND r19_localidad = ', vg_codloc,
@@ -487,7 +488,7 @@ LET query = 'SELECT *, r19_tot_neto - (r19_tot_bruto - r19_tot_dscto) ',
 		'  AND DATE(r19_fecing) BETWEEN "', vm_fecha_ini,
 		'" AND "', vm_fecha_fin, '"',
 		expr_cr CLIPPED,
-		' ORDER BY r19_fecing, r19_num_tran'
+		' ORDER BY 40, 4'
 PREPARE deto FROM query
 DECLARE q_deto CURSOR FOR deto
 OPEN q_deto
@@ -516,10 +517,11 @@ END IF
 IF rm_r19.r19_cod_tran = 'IM' THEN
 	START REPORT rep_importaciones TO PIPE comando
 END IF
-FOREACH q_deto INTO r_rep.*, valor_iva
+FOREACH q_deto INTO r_rep.*, valor_iva, subtotal
 	IF r_rep.r19_cod_tran = 'DF' AND r_rep.r19_cod_tran = 'AF' THEN
 		LET r_rep.r19_tot_bruto = r_rep.r19_tot_bruto * (-1)
 		LET r_rep.r19_tot_dscto = r_rep.r19_tot_dscto * (-1)
+		LET subtotal            = subtotal * (-1)
 		LET valor_iva           = valor_iva * (-1)
 		LET r_rep.r19_flete     = r_rep.r19_flete * (-1)
 		LET r_rep.r19_tot_neto  = r_rep.r19_tot_neto * (-1)
@@ -551,8 +553,8 @@ FOREACH q_deto INTO r_rep.*, valor_iva
 		CLOSE q_comloc
 		FREE q_comloc
 	END IF
+	LET total_sub = total_sub + subtotal
 	LET total_iva = total_iva + valor_iva
-	LET total_fle = total_fle + r_rep.r19_flete
 	LET total_net = total_net + r_rep.r19_tot_neto
 	IF rm_r19.r19_cod_tran <> 'TR' THEN
 		LET total_cos = total_cos + r_rep.r19_tot_costo
@@ -562,9 +564,9 @@ FOREACH q_deto INTO r_rep.*, valor_iva
 	  OR rm_r19.r19_cod_tran = 'RQ' OR rm_r19.r19_cod_tran = 'DR'
 	THEN
 		LET flag = 'F'
-		OUTPUT TO REPORT rep_fact_dev(r_rep.*, valor_iva,
-				total_bru, total_des, total_iva,
-				total_fle, total_net, total_cos, flag)
+		OUTPUT TO REPORT rep_fact_dev(r_rep.*, valor_iva, subtotal,
+				total_bru, total_des, total_sub,
+				total_iva, total_net, total_cos, flag)
 	END IF
 	IF rm_r19.r19_cod_tran = 'CL' OR rm_r19.r19_cod_tran = 'DC'
 	THEN
@@ -572,9 +574,9 @@ FOREACH q_deto INTO r_rep.*, valor_iva
 			CONTINUE FOREACH
 		END IF
 		LET flag = 'D'
-		OUTPUT TO REPORT rep_fact_dev(r_rep.*, valor_iva,
-				total_bru, total_des, total_iva,
-				total_fle, total_net, 0, flag)
+		OUTPUT TO REPORT rep_fact_dev(r_rep.*, valor_iva, subtotal,
+				total_bru, total_des, total_sub,
+				total_iva, total_net, 0, flag)
 	END IF
 	IF rm_r19.r19_cod_tran = 'TR' THEN
 		IF rm_par.loc1 IS NOT NULL THEN
@@ -672,18 +674,20 @@ END FUNCTION
 
 
 
-REPORT rep_fact_dev (r_rep, valor_iva, total_bru, total_des, total_iva,
-			total_fle, total_net, total_cos, flag)
+REPORT rep_fact_dev(r_rep, valor_iva, subtotal, total_bru, total_des, total_sub,
+			total_iva, total_net, total_cos, flag)
 DEFINE r_rep		RECORD LIKE rept019.*
-DEFINE r_g21		RECORD LIKE gent021.*
 DEFINE valor_iva	DECIMAL(11,2)
+DEFINE subtotal		DECIMAL(11,2)
 DEFINE total_bru	DECIMAL(12,2)
 DEFINE total_des	DECIMAL(11,2)
+DEFINE total_sub	DECIMAL(11,2)
 DEFINE total_iva	DECIMAL(11,2)
-DEFINE total_fle	DECIMAL(11,2)
 DEFINE total_net	DECIMAL(12,2)
 DEFINE total_cos	DECIMAL(12,2)
 DEFINE flag		VARCHAR(1)
+DEFINE r_g21		RECORD LIKE gent021.*
+DEFINE num_sri		LIKE rept038.r38_num_sri
 DEFINE usuario		VARCHAR(19,15)
 DEFINE titulo		VARCHAR(80)
 DEFINE modulo		VARCHAR(40)
@@ -743,15 +747,16 @@ PAGE HEADER
 	      COLUMN 130, usuario
 	--print '&k2S'	                -- Letra condensada (16 cpi)
 	PRINT "----------------------------------------------------------------------------------------------------------------------------------------------------"
-	PRINT COLUMN 01,  "FECHA",
-	      COLUMN 12,  "TP",
-	      COLUMN 15,  "TRAN.",
-	      COLUMN 21,  "FACTURA",
-	      COLUMN 31,  "CLIENTE",
-	      COLUMN 58,  "VALOR BRUTO",
-	      COLUMN 72,  "VALOR DSCTO.",
-	      COLUMN 90,  "VALOR IVA",
-	      COLUMN 103, "VALOR FLETE",
+	PRINT COLUMN 001, "FECHA",
+	      COLUMN 012, "TP",
+	      COLUMN 015, "TRAN",
+	      COLUMN 021, "DF/AF",
+	      COLUMN 027, "NUM SRI",
+	      COLUMN 037, "CLIENTE",
+	      COLUMN 058, "VALOR BRUTO",
+	      COLUMN 072, "VALOR DSCTO.",
+	      COLUMN 091, "SUBTOTAL",
+	      COLUMN 105, "VALOR IVA",
 	      COLUMN 121, "VALOR NETO";
 	IF flag = 'F' THEN
 	      PRINT COLUMN 138, "VALOR COSTO"
@@ -764,18 +769,18 @@ ON EVERY ROW
 	--OJO
 	NEED 3 LINES
 	LET fecha   = DATE(r_rep.r19_fecing)
-	LET factura = r_rep.r19_num_tran
-	CALL fl_justifica_titulo('I', factura, 15) RETURNING factura
-	PRINT COLUMN 01,  fecha USING "dd-mm-yyyy",
-	      COLUMN 12,  r_rep.r19_cod_tran,
-	      COLUMN 15,  factura,
-	      COLUMN 21,  r_rep.r19_num_dev USING "<<<<<<<<<",
-	      COLUMN 31,  r_rep.r19_nomcli[1,21],
-	      COLUMN 55,  r_rep.r19_tot_bruto USING "---,---,--&.##",
-	      COLUMN 70,  r_rep.r19_tot_dscto USING "---,---,--&.##",
-	      COLUMN 85,  valor_iva           USING "---,---,--&.##",
-	      COLUMN 100, r_rep.r19_flete     USING "---,---,--&.##",
-	      COLUMN 116, r_rep.r19_tot_neto  USING "-,---,---,--&.##";
+	CALL retorna_numsri(r_rep.*) RETURNING num_sri
+	PRINT COLUMN 001, fecha					USING "dd-mm-yyyy",
+	      COLUMN 012, r_rep.r19_cod_tran,
+	      COLUMN 015, r_rep.r19_num_tran	USING "<<<<&",
+	      COLUMN 021, r_rep.r19_num_dev		USING "<<<<&",
+	      COLUMN 027, num_sri[9, 17]		CLIPPED,
+	      COLUMN 037, r_rep.r19_nomcli[1, 17],
+	      COLUMN 055, r_rep.r19_tot_bruto	USING "---,---,--&.##",
+	      COLUMN 070, r_rep.r19_tot_dscto	USING "---,---,--&.##",
+	      COLUMN 085, subtotal				USING "---,---,--&.##",
+	      COLUMN 100, valor_iva				USING "---,---,--&.##",
+	      COLUMN 116, r_rep.r19_tot_neto	USING "-,---,---,--&.##";
 	IF flag = 'F' THEN
 	      PRINT COLUMN 133, r_rep.r19_tot_costo USING "-,---,---,--&.##"
 	ELSE
@@ -784,9 +789,9 @@ ON EVERY ROW
 	
 ON LAST ROW
 	NEED 2 LINES
-	PRINT COLUMN 55,  "--------------",
-	      COLUMN 70,  "--------------",
-	      COLUMN 85,  "--------------",
+	PRINT COLUMN 055, "--------------",
+	      COLUMN 070, "--------------",
+	      COLUMN 085, "--------------",
 	      COLUMN 100, "--------------",
 	      COLUMN 116, "----------------";
 	IF flag = 'F' THEN
@@ -794,10 +799,10 @@ ON LAST ROW
 	ELSE
 	      PRINT COLUMN 133, " "
 	END IF
-	PRINT COLUMN 42, "TOTALES ==>  ", total_bru USING "---,---,--&.##",
-	      COLUMN 70,  total_des USING "---,---,--&.##",
-	      COLUMN 85,  total_iva USING "---,---,--&.##",
-	      COLUMN 100, total_fle USING "---,---,--&.##",
+	PRINT COLUMN 042, "TOTALES ==>  ", total_bru USING "---,---,--&.##",
+	      COLUMN 070, total_des USING "---,---,--&.##",
+	      COLUMN 085, total_sub USING "---,---,--&.##",
+	      COLUMN 100, total_iva USING "---,---,--&.##",
 	      COLUMN 116, total_net USING "-,---,---,--&.##";
 	IF flag = 'F' THEN
 	      PRINT COLUMN 133, total_cos USING "-,---,---,--&.##";
@@ -1137,6 +1142,43 @@ ON LAST ROW
 	print ASCII desact_comp 
 
 END REPORT
+
+
+
+FUNCTION retorna_numsri(r_r19)
+DEFINE r_r19		RECORD LIKE rept019.*
+DEFINE query		CHAR(800)
+DEFINE num_sri		LIKE rept038.r38_num_sri
+
+IF r_r19.r19_cod_tran = 'FA' THEN
+	LET query = 'SELECT r38_num_sri ',
+					'FROM rept038 ',
+					'WHERE r38_compania    = ', r_r19.r19_compania,
+					'  AND r38_localidad   = ', r_r19.r19_localidad,
+					'  AND r38_tipo_doc    = "', r_r19.r19_cod_tran, '"',
+					'  AND r38_tipo_fuente = "PR"',
+					'  AND r38_cod_tran    = "', r_r19.r19_cod_tran, '"',
+					'  AND r38_num_tran    = ', r_r19.r19_num_tran
+ELSE
+	LET query = 'SELECT z21_num_sri ',
+					'FROM cxct021 ',
+					'WHERE z21_compania    = ', r_r19.r19_compania,
+					'  AND z21_localidad   = ', r_r19.r19_localidad,
+					'  AND z21_tipo_doc    = "NC"',
+					'  AND z21_cod_cli     = ', r_r19.r19_codcli,
+					'  AND z21_cod_tran    = "', r_r19.r19_cod_tran, '"',
+					'  AND z21_num_tran    = ', r_r19.r19_num_tran
+END IF
+LET num_sri = NULL
+PREPARE exec_sri FROM query
+DECLARE q_num_sri CURSOR FOR exec_sri
+OPEN q_num_sri
+FETCH q_num_sri INTO num_sri
+CLOSE q_num_sri
+FREE q_num_sri
+RETURN num_sri
+
+END FUNCTION
 
 
 

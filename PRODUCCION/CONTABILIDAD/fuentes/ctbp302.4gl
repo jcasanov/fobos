@@ -165,8 +165,8 @@ ELSE
 END IF
 LET query = 'SELECT b10_cuenta, b10_estado FROM ctbt010 ',
 		' WHERE b10_compania = ', vg_codcia,
-		'   AND b10_cuenta   MATCHES "', cod_aux, '"',
-		'   AND b10_nivel    = ', vm_nivel
+		'   AND b10_cuenta   MATCHES "', cod_aux, '"'
+		--'   AND b10_nivel    = ', vm_nivel
 PREPARE cons FROM query	
 DECLARE q_cons CURSOR FOR cons
 LET vm_num_rows = 1
@@ -235,7 +235,7 @@ INPUT BY NAME rm_b10.b10_cuenta, vm_fecha_ini, vm_fecha_fin, rm_b12.b12_moneda
 		EXIT PROGRAM
 	ON KEY(F2)
 		IF INFIELD(b10_cuenta) THEN
-			CALL fl_ayuda_cuenta_contable(vg_codcia, vm_nivel)
+			CALL fl_ayuda_cuenta_contable(vg_codcia, -1)
 				RETURNING cod_aux, nom_aux
 			LET int_flag = 0
 			IF cod_aux IS NOT NULL THEN

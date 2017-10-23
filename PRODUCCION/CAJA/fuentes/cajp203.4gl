@@ -4010,8 +4010,8 @@ END FUNCTION
 
 FUNCTION proceso_master_transacciones_caja()
 DEFINE done 		SMALLINT
-DEFINE comando		CHAR(250)
-DEFINE run_prog		CHAR(10)
+DEFINE comando		VARCHAR(250)
+DEFINE run_prog		VARCHAR(10)
 DEFINE r_z24		RECORD LIKE cxct024.*
 DEFINE r_g37		RECORD LIKE gent037.*
 DEFINE cont_cred	LIKE gent037.g37_cont_cred
@@ -4055,7 +4055,7 @@ CASE rm_j10.j10_tipo_fuente
 	      		      'REPUESTOS', vg_separador, 'fuentes', 
 			      vg_separador, run_prog, 'repp211 ', vg_base, ' ',
 			      vg_codcia, ' ', vg_codloc, ' ', 
-			       rm_j10.j10_num_fuente 
+			       rm_j10.j10_num_fuente, ' ', rm_r38.r38_num_sri
 
 	WHEN 'PV' 	-- fglrun vehp203 vg_base vg_codcia num_prev
 		LET comando = 'cd ..', vg_separador, '..', vg_separador,
@@ -4100,8 +4100,7 @@ CALL fl_lee_cabecera_caja(vg_codcia, vg_codloc, rm_j10.j10_tipo_fuente,
 IF rm_j10.j10_estado = 'P' THEN
 	BEGIN WORK
 	CALL actualiza_acumulados_tipo_transaccion('I')
-	IF rm_j10.j10_tipo_fuente = 'PR' OR rm_j10.j10_tipo_fuente = 'PV' OR
-	   rm_j10.j10_tipo_fuente = 'OT' THEN
+	IF rm_j10.j10_tipo_fuente = 'PV' OR rm_j10.j10_tipo_fuente = 'OT' THEN
 		CALL retorna_cont_cred() RETURNING cont_cred
 		WHENEVER ERROR CONTINUE
 		DECLARE q_sri CURSOR FOR
