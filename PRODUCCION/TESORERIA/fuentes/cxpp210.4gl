@@ -149,7 +149,8 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/cxpp210.err')
+LET vg_proceso = arg_val(0)
+CALL startlog('../logs/' || vg_proceso CLIPPED || '.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 AND num_args() <> 5 THEN     -- Validar # parametros correcto
@@ -161,7 +162,6 @@ LET vg_modulo  = arg_val(2)
 LET vg_codcia  = arg_val(3)
 LET vg_codloc  = arg_val(4)
 LET vg_num_ord = arg_val(5)
-LET vg_proceso = 'cxpp210'
 
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	-- Asigna un valor por default a vg_codloc
@@ -1319,14 +1319,7 @@ DEFINE r_s23		RECORD LIKE srit023.*
 LET done = 1
 LET rm_c10.c10_fecing = fl_current()
 
-SELECT MAX(c10_numero_oc) + 1 INTO rm_c10.c10_numero_oc
-	FROM  ordt010
-	WHERE c10_compania  = vg_codcia
-	AND   c10_localidad = vg_codloc
-
-IF rm_c10.c10_numero_oc IS NULL THEN
-	LET rm_c10.c10_numero_oc = 1
-END IF
+LET rm_c10.c10_numero_oc = genera_secuencia_oc()
 
 --WHENEVER ERROR CONTINUE
 WHENEVER ERROR STOP
@@ -1347,10 +1340,7 @@ DISPLAY BY NAME rm_c10.c10_numero_oc
 
 IF status < 0 THEN
 	WHENEVER ERROR STOP
-	SELECT MAX(c10_numero_oc) + 1 INTO rm_c10.c10_numero_oc
-		FROM  ordt010
-		WHERE c10_compania  = vg_codcia
-		AND   c10_localidad = vg_codloc
+	LET rm_c10.c10_numero_oc   = genera_secuencia_oc()
 	LET rm_c10.c10_estado      = 'P'
 	LET rm_c10.c10_usua_aprob  = vg_usuario
 	LET rm_c10.c10_fecha_aprob = fl_current()
@@ -4477,6 +4467,38 @@ ELSE
 		WHERE ROWID = num_row
 END IF
 RETURN valor_aplicado
+
+END FUNCTION
+
+
+
+FUNCTION genera_secuencia_oc()
+DEFINE num_oc		LIKE ordt010.c10_numero_oc
+
+{*
+ * Primero leemos la tabla de secuencias, si obtenemos un valor no nulo y 
+ * mayor a cero usamos ese valor para insertar; caso contrario recurrimos 
+ * al viejo y efectivo método de buscar el último registro y sumarle uno
+ *}
+
+LET num_oc = fl_actualiza_control_secuencias(vg_codcia, vg_codloc, 'OC',
+											 'AA', 'OC')
+IF num_oc IS NOT NULL AND num_oc > 0 THEN
+	RETURN num_oc
+END IF
+
+SELECT MAX(c10_numero_oc) + 1
+  INTO num_oc
+  FROM ordt010
+ WHERE c10_compania  = vg_codcia
+   AND c10_localidad = vg_codloc
+
+-- Si el resultado es nulo, es el primer registro
+IF num_oc IS NULL THEN   
+	LET num_oc = 1
+END IF
+
+RETURN num_oc
 
 END FUNCTION
 
