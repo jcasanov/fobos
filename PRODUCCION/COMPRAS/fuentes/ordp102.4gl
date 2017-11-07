@@ -733,11 +733,14 @@ FOREACH q_c03 INTO rm_c03.*
 END FOREACH
 LET vm_num_det = vm_num_det - 1
 IF vm_num_det = 0 THEN
+	LET vm_num_det = 1
+	{--
 	ROLLBACK WORK
 	CALL fl_mensaje_consulta_sin_registros()
 	CLOSE WINDOW w_ordf102_2
 	LET int_flag = 0
 	RETURN
+	--}
 END IF
 DISPLAY BY NAME rm_c03.c03_tipo_ret, rm_c02.c02_nombre, rm_c03.c03_porcentaje
 CALL set_count(vm_num_det)
@@ -800,8 +803,8 @@ INPUT ARRAY rm_retsri WITHOUT DEFAULTS FROM rm_retsri.*
 	BEFORE INPUT
 		--#CALL dialog.keysetlabel("F1","")
 		--#CALL dialog.keysetlabel("CONTROL-W","")
-		--#CALL dialog.keysetlabel("INSERT","")
-		--#CALL dialog.keysetlabel("DELETE","")
+		--CALL dialog.keysetlabel("INSERT","")
+		--CALL dialog.keysetlabel("DELETE","")
 	BEFORE ROW
 		LET i          = arr_curr()
 		LET j          = scr_line()
@@ -819,15 +822,27 @@ INPUT ARRAY rm_retsri WITHOUT DEFAULTS FROM rm_retsri.*
 			DISPLAY rm_retsri[i].c03_ingresa_proc TO
 				rm_retsri[j].c03_ingresa_proc
 		END IF
+		IF rm_retsri[i].c03_tipo_fuente IS NULL THEN
+			LET rm_retsri[i].c03_tipo_fuente = 'B'
+			DISPLAY rm_retsri[i].c03_tipo_fuente TO
+				rm_retsri[j].c03_tipo_fuente
+		END IF
+		IF rm_retsri[i].c03_estado IS NULL THEN
+			LET rm_retsri[i].c03_estado = 'A'
+			DISPLAY rm_retsri[i].c03_estado TO
+				rm_retsri[j].c03_estado
+		END IF
 		IF NOT insertar THEN
 			--#CALL dialog.keysetlabel("F5","Eliminar")
 		ELSE
 			--#CALL dialog.keysetlabel("F5","")
 		END IF
+	{--
 	BEFORE DELETE
-		--#CANCEL DELETE
+		CANCEL DELETE
 	BEFORE INSERT
-		--#CANCEL INSERT
+		CANCEL INSERT
+	--}
 	AFTER FIELD c03_codigo_sri, c03_concepto_ret
 		IF rm_retsri[i].c03_estado IS NULL THEN
 			LET rm_retsri[i].c03_estado = 'A'

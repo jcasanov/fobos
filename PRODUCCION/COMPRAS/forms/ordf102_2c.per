@@ -31,10 +31,10 @@ c001 = ordt003.c03_porcentaje, NOENTRY, REVERSE, UPSHIFT, FORMAT = '##&.##';
 c010 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
 c011 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
 
-c030 = ordt003.c03_codigo_sri, AUTONEXT, UPSHIFT;
-c031 = ordt003.c03_concepto_ret, AUTONEXT;
-c032 = ordt003.c03_fecha_ini_porc, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy';
-c033 = ordt003.c03_fecha_fin_porc, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c030 = ordt003.c03_codigo_sri, NOENTRY, UPSHIFT;
+c031 = ordt003.c03_concepto_ret, NOENTRY;
+c032 = ordt003.c03_fecha_ini_porc, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
+c033 = ordt003.c03_fecha_fin_porc, NOENTRY, UPSHIFT, FORMAT = 'dd-mm-yyyy';
 f    = ordt003.c03_ingresa_proc, UPSHIFT, INCLUDE = ('S', 'N'), DEFAULT = 'N',
 	COMMENTS = 'Seleccione si código del SRI ingresa porcentaje o no.';
 g    = ordt003.c03_estado, NOENTRY, UPSHIFT;

@@ -39,7 +39,8 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/cxpp101.err')
+LET vg_proceso = arg_val(0)
+CALL startlog('../logs/' || vg_proceso CLIPPED || '.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 AND num_args() <> 5 THEN   -- Validar # parámetros correcto
@@ -50,7 +51,6 @@ LET vg_base    = arg_val(1)
 LET vg_modulo  = arg_val(2)
 LET vg_codcia  = arg_val(3)
 LET vg_codloc  = arg_val(4)
-LET vg_proceso = 'cxpp101'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
 --#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
@@ -218,7 +218,7 @@ LET rm_p01.p01_fecing       = fl_current()
 
 LET rm_p02.p02_compania     = vg_codcia
 LET rm_p02.p02_localidad    = vg_codloc
-LET rm_p02.p02_int_ext      = 'E'
+LET rm_p02.p02_int_ext      = 'I'
 LET rm_p02.p02_credit_dias  = 0
 LET rm_p02.p02_cupocred_mb  = 0
 LET rm_p02.p02_cupocred_ma  = 0
@@ -737,13 +737,13 @@ INPUT BY NAME rm_p01.p01_nomprov, rm_p01.p01_personeria, rm_p01.p01_num_doc,
 	BEFORE FIELD p01_direccion1
 		IF rm_p01.p01_personeria = 'N' THEN
 			IF rm_p01.p01_tipo_doc = 'R' THEN
-				CALL fgl_winmessage(vg_producto,'Una persona natural no puede tener asignado Ruc.','exclamation')
-				NEXT FIELD p01_tipo_doc
+				--CALL fgl_winmessage(vg_producto,'Una persona natural no puede tener asignado Ruc.','exclamation')
+				--NEXT FIELD p01_tipo_doc
 			END IF
 		ELSE
 			IF rm_p01.p01_tipo_doc <> 'R' THEN
-				CALL fgl_winmessage(vg_producto,'Una persona jurídica no puede tener asignado Cédula o Pasaporte.','exclamation')
-				NEXT FIELD p01_tipo_doc
+				--CALL fgl_winmessage(vg_producto,'Una persona jurídica no puede tener asignado Cédula o Pasaporte.','exclamation')
+				--NEXT FIELD p01_tipo_doc
 			END IF
 		END IF
 	BEFORE FIELD p01_ciudad
@@ -755,11 +755,13 @@ INPUT BY NAME rm_p01.p01_nomprov, rm_p01.p01_personeria, rm_p01.p01_num_doc,
 		DISPLAY rm_p01.p01_nomprov TO tit_nombre_pro
 	AFTER FIELD p01_num_doc
 		IF rm_p01.p01_num_doc IS NOT NULL THEN
+			{--
 			IF rm_p01.p01_personeria = 'N' THEN
 				LET rm_p01.p01_tipo_doc = 'C'
 			ELSE
 				LET rm_p01.p01_tipo_doc = 'R'
 			END IF
+			--}
 			DISPLAY BY NAME rm_p01.p01_tipo_doc
 			CALL validar_cedruc(rm_p01.p01_codprov,
 						rm_p01.p01_num_doc)
