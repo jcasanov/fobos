@@ -33,7 +33,8 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/srip201.err')
+LET vg_proceso = arg_val(0)
+CALL startlog('../logs/' || vg_proceso CLIPPED || '.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN
@@ -44,7 +45,6 @@ LET vg_base    = arg_val(1)
 LET vg_modulo  = arg_val(2)
 LET vg_codcia  = arg_val(3)
 LET vg_codloc  = arg_val(4)
-LET vg_proceso = 'srip201'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()
 --#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
@@ -470,7 +470,7 @@ ELSE
 END IF
 DISPLAY FORM f_srif201_2
 IF rm_par.anio_ini IS NULL THEN
-	SELECT NVL(MAX(MDY(s21_mes, 01, s21_anio) + 1 UNITS MONTH), TODAY)
+	SELECT NVL(MAX(MDY(s21_mes, 01, s21_anio) + 1 UNITS MONTH), vg_fecha)
 		INTO fecha
 		FROM srit021
 		WHERE s21_compania   = vg_codcia
@@ -601,7 +601,7 @@ LET vm_flag_mant         = 'I'
 LET rm_s21.s21_compania  = vg_codcia
 LET rm_s21.s21_localidad = vg_codloc
 LET rm_s21.s21_estado    = 'P'
-LET rm_s21.s21_fecing    = CURRENT
+LET rm_s21.s21_fecing    = fl_current()
 LET rm_s21.s21_usuario   = vg_usuario
 DISPLAY BY NAME rm_s21.s21_fecing, rm_s21.s21_usuario
 CALL muestra_estado()
@@ -657,7 +657,7 @@ IF int_flag THEN
 END IF
 LET rm_s21.s21_estado        = 'P'
 LET rm_s21.s21_usuario_modif = vg_usuario
-LET rm_s21.s21_fec_modif     = CURRENT
+LET rm_s21.s21_fec_modif     = fl_current()
 UPDATE srit021 SET * = rm_s21.* WHERE CURRENT OF q_up
 COMMIT WORK
 CALL lee_muestra_registro(vm_r_rows[vm_row_current])
@@ -913,8 +913,10 @@ CASE flag
 	WHEN 3
 		--CALL fl_hacer_pregunta('Desea generar el archivo en XML de anulados ?', 'Yes')			RETURNING resp
 		CASE tip_ane
-			WHEN 'G' LET param = ' "U" "V" "W" "X"'
-				 LET posi  = 20
+			--WHEN 'G' LET param = ' "U" "V" "W" "X"'
+				 --LET posi  = 20
+			WHEN 'G' LET param = ' "U" "V"'
+				 LET posi  = 12
 			WHEN 'Q' LET param = ' "U" "V" "W" "X" "Y"'
 				 LET posi  = 24
 			WHEN 'N' LET param = ' "U" "V" "W" "X" "Y" "Z"'
@@ -934,9 +936,12 @@ LET fecha = MDY(MONTH(rm_s21.s21_fecha_emi_vta), 01,
 LET comando = 'cd ..', vg_separador, '..', vg_separador, 'SRI', vg_separador,
 		'fuentes', vg_separador, '; umask 0002; fglrun srip200 ',
 		vg_base, ' "', vg_modulo, '" ', vg_codcia, ' ', vg_codloc, ' "',
-		fecha, '" "', rm_s21.s21_fecha_emi_vta, '" "', rm_par.tipo_gye,
-		'" "', rm_par.tipo_uio, '" "', rm_par.tipo_nac, '" ',
+		{--
+		fecha, '" "', rm_s21.s21_fecha_emi_vta, '" "', rm_par.tipo_gye, '" "',
+		rm_par.tipo_uio, '" "', rm_par.tipo_nac, '" ',
 		archivo CLIPPED
+		--}
+		fecha, '" "', rm_s21.s21_fecha_emi_vta, '" ', archivo CLIPPED
 RUN comando
 IF flag = 1 THEN
 	IF vm_num_rows > 0 THEN
@@ -1027,7 +1032,7 @@ DEFINE estado		LIKE srit021.s21_estado
 IF rm_s21.s21_estado = 'G' THEN
 	LET fecha = MDY(rm_s21.s21_mes, 01, rm_s21.s21_anio)
 			+ 1 UNITS MONTH - 1 UNITS DAY
-	IF TODAY <= fecha THEN
+	IF vg_fecha <= fecha THEN
 		CALL fl_mostrar_mensaje('No se puede CERRAR el anexo de este mes, mientras la fecha de hoy no sea mayor que fin de mes.', 'exclamation')
 		RETURN
 	END IF
