@@ -10,16 +10,16 @@
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
                                                                                 
 DEFINE rm_par		RECORD
-				anio_ini	SMALLINT,
-				mes_ini		SMALLINT,
-				anio_fin	SMALLINT,
-				mes_fin		SMALLINT,
-				col_ord		SMALLINT
-			END RECORD
+						anio_ini	SMALLINT,
+						mes_ini		SMALLINT,
+						anio_fin	SMALLINT,
+						mes_fin		SMALLINT,
+						col_ord		SMALLINT
+					END RECORD
 DEFINE rm_colord	ARRAY[33] OF RECORD
-				num_cols	SMALLINT,
-				des_cols	VARCHAR(40)
-			END RECORD
+						num_cols	SMALLINT,
+						des_cols	VARCHAR(40)
+					END RECORD
 DEFINE num_row		SMALLINT
 DEFINE max_row		SMALLINT
 
@@ -30,7 +30,8 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/srip202.err')
+LET vg_proceso = arg_val(0)
+CALL startlog('../logs/' || vg_proceso CLIPPED || '.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN
@@ -41,7 +42,6 @@ LET vg_base    = arg_val(1)
 LET vg_modulo  = arg_val(2)
 LET vg_codcia  = arg_val(3)
 LET vg_codloc  = arg_val(4)
-LET vg_proceso = 'srip202'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()
 --#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
@@ -81,7 +81,7 @@ ELSE
 END IF
 DISPLAY FORM f_srif202_1
 INITIALIZE rm_par.* TO NULL
-LET fecha = MDY(MONTH(TODAY), 01, YEAR(TODAY)) - 1 UNITS DAY
+LET fecha = MDY(MONTH(vg_fecha), 01, YEAR(vg_fecha)) -- 1 UNITS DAY
 LET rm_par.anio_ini = YEAR(fecha)
 LET rm_par.mes_ini  = MONTH(fecha)
 LET rm_par.anio_fin = YEAR(fecha)

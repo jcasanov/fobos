@@ -3,7 +3,7 @@
 -- Elaboración         : 02-Jun-2007
 -- Autor               : NPC
 -- Formato de Ejecución: fglrun srip203 Base Modulo Compañía Localidad
---			[anio] [mes] [orden]
+--							[anio] [mes] [orden]
 -- Ultima Correción    : 
 -- Motivo Corrección   : 
 --------------------------------------------------------------------------------
@@ -24,7 +24,8 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/srip203.err')
+LET vg_proceso = arg_val(0)
+CALL startlog('../logs/' || vg_proceso CLIPPED || '.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 7 AND num_args() <> 8 THEN
@@ -35,7 +36,6 @@ LET vg_base    = arg_val(1)
 LET vg_modulo  = arg_val(2)
 LET vg_codcia  = arg_val(3)
 LET vg_codloc  = arg_val(4)
-LET vg_proceso = 'srip203'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()
 --#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
@@ -112,6 +112,7 @@ DEFINE registro		CHAR(11600)
 DEFINE query		CHAR(21500)
 DEFINE salida		CHAR(1500)
 DEFINE primera		SMALLINT
+DEFINE total_ventas	DECIMAL(12,2)
 
 LET fecha = EXTEND(MDY(mes, 01, anio), YEAR TO MONTH)
 LET query = 'SELECT NVL((SELECT UNIQUE p28_num_ret ',
@@ -153,7 +154,7 @@ LET query = 'SELECT NVL((SELECT UNIQUE p28_num_ret ',
 		'END aut, ',
 		'TO_CHAR(c13_fecha_recep, "%d/%m/%Y") fecha_reg, ', 
 		'TO_CHAR(c13_fecha_recep, "%d/%m/%Y") fecha_emi, ',
-		'TO_CHAR(TODAY,"%m/%Y") fecha_cad, ',
+		'TO_CHAR(DATE("', vg_fecha, '"),"%m/%Y") fecha_cad, ',
 		'CASE WHEN c10_tot_impto = 0 ',
 			'THEN c10_tot_compra ',
 			'ELSE c10_flete ',
@@ -387,7 +388,7 @@ LET query = 'SELECT NVL((SELECT UNIQUE p28_num_ret ',
 		'"1109999999" aut, ',
 		'TO_CHAR(p20_fecha_emi, "%d/%m/%Y") fecha_reg, ',
 		'TO_CHAR(p20_fecha_emi, "%d/%m/%Y") fecha_emi,',
-		'TO_CHAR(TODAY,"%m/%Y") fecha_cad, ',
+		'TO_CHAR(DATE("', vg_fecha, '"),"%m/%Y") fecha_cad, ',
 		{--
 		'CASE WHEN p20_valor_impto = 0 THEN p20_valor_fact ELSE 0 END ',
 		'base_sin, CASE WHEN p20_valor_impto > 0 THEN ',
@@ -575,24 +576,24 @@ LET query = 'SELECT UNIQUE NVL((SELECT sec_rt ',
 			'p20_tipo_doc, p20_num_doc ',
 		'FROM t1 ',
 		'ORDER BY ', orden CLIPPED
-INITIALIZE r_g01.*, r_g02.* TO NULL
-SELECT g02_numruc, g01_razonsocial, g02_direccion, g02_telefono1, g02_fax1,
-	g02_correo, g01_cedrepl
-	INTO r_g02.g02_numruc, r_g01.g01_razonsocial, r_g02.g02_direccion,
-		r_g02.g02_telefono1, r_g02.g02_fax1, r_g02.g02_correo,
-		r_g01.g01_cedrepl
-	FROM gent001, gent002
-	WHERE g01_compania  = vg_codcia
-	  AND g02_compania  = g01_compania
-	  AND g02_localidad = vg_codloc
+CALL fl_lee_compania(vg_codcia) RETURNING r_g01.*
+CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING r_g02.*
+LET total_ventas = 0
+SELECT NVL(SUM(s21_bas_imp_gr_iva), 0)
+	INTO total_ventas
+	FROM srit021
+	WHERE s21_compania  = vg_codcia
+	  AND s21_localidad = vg_codloc
+	  AND s21_anio      = anio
+	  AND s21_mes       = mes
 DISPLAY '<?xml version="1.0" encoding="UTF-8" ?>'
 DISPLAY '<iva>'
 DISPLAY '<TipoIDInformante>R</TipoIDInformante>'
 DISPLAY '<IdInformante>', r_g02.g02_numruc CLIPPED, '</IdInformante>'
-DISPLAY '<razonSocial>ACERO COMERCIAL ECUATORIANO SA</razonSocial>'
+DISPLAY '<razonSocial>', r_g01.g01_razonsocial CLIPPED, '</razonSocial>'
 DISPLAY '<Anio>', anio USING "&&&&", '</Anio>'
 DISPLAY '<Mes>', mes USING "&&", '</Mes>'
-DISPLAY '<totalVentas>0.00</totalVentas>'
+DISPLAY '<totalVentas>', total_ventas, '</totalVentas>'
 DISPLAY '<codigoOperativo>IVA</codigoOperativo>'
 PREPARE cons FROM query
 DECLARE q_cons CURSOR FOR cons
@@ -682,7 +683,7 @@ FOREACH q_cons INTO r_doc.*, r_adi.*
 				'<pagExtSujRetNorLeg>NA</pagExtSujRetNorLeg>',
  			'</pagoExterior>',
 			'<formasDePago>',
-				'<formaPago>02</formaPago>',
+				'<formaPago>01</formaPago>',
 			'</formasDePago>'
 	LET salida = at_air(r_adi.*) CLIPPED
 	IF salida IS NOT NULL THEN
