@@ -9,24 +9,24 @@
 --------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
-DEFINE rm_par 		RECORD 
-				fecha_ini	DATE,
-				fecha_fin	DATE
-			END RECORD
-DEFINE rm_det 		RECORD
-				fecha		DATE,
-				t23_num_factura	LIKE talt023.t23_num_factura,
-				t23_orden	LIKE talt023.t23_orden,
-				t23_val_mo_tal	LIKE talt023.t23_val_mo_tal,
-				tot_oc		DECIMAL(14,2),
-				tot_fa		DECIMAL(14,2),
-				tot_ot		DECIMAL(14,2),
-				t23_estado	LIKE talt023.t23_estado
-			END RECORD
-DEFINE rm_g01		RECORD LIKE gent001.*
-DEFINE rm_r00		RECORD LIKE rept000.*
-DEFINE vm_tip_anexo	LIKE srit004.s04_codigo
-DEFINE vm_fin_mes	DATE
+DEFINE rm_par 			RECORD 
+							fecha_ini	DATE,
+							fecha_fin	DATE
+						END RECORD
+DEFINE rm_det 			RECORD
+							fecha		DATE,
+							t23_num_factura	LIKE talt023.t23_num_factura,
+							t23_orden	LIKE talt023.t23_orden,
+							t23_val_mo_tal	LIKE talt023.t23_val_mo_tal,
+							tot_oc		DECIMAL(14,2),
+							tot_fa		DECIMAL(14,2),
+							tot_ot		DECIMAL(14,2),
+							t23_estado	LIKE talt023.t23_estado
+						END RECORD
+DEFINE rm_g01			RECORD LIKE gent001.*
+DEFINE rm_r00			RECORD LIKE rept000.*
+DEFINE vm_tip_anexo		LIKE srit004.s04_codigo
+DEFINE vm_fin_mes		DATE
 
 
 
@@ -405,8 +405,8 @@ LET query = 'INSERT INTO tmp_anu ',
 		'   AND s04_codigo    = s19_tipo_comp) tipo_comp, ',
 		--}
 		' b.g37_pref_sucurs, b.g37_pref_pto_vta, r38_num_sri[9, 16]',
-		' num_sri_ini, r38_num_sri[9, 16] num_sri_fin, g02_numaut_sri,',
-		' fecha_anu fecha ',
+		' num_sri_ini, r38_num_sri[9, 16] num_sri_fin, g02_numaut_sri',--,',
+		--' fecha_anu fecha ',
 		' FROM tmp_tal, rept038, gent037 b, gent002 ',
 		' WHERE t23_estado      = "D" ',
 		'   AND num_tran        = (SELECT num_anu FROM t2 ',
@@ -894,6 +894,9 @@ LET query = 'INSERT INTO srit021 ',
 		'  s21_monto_ret_rent, s21_estado, s21_usuario, s21_fecing) ',
 		' SELECT ', vg_codcia, ', ', vg_codloc, ', ',
 			YEAR(rm_par.fecha_fin), ', ', MONTH(rm_par.fecha_fin),
+			--', tmp_s21.*, "G", "', UPSHIFT(vg_usuario) CLIPPED,
+			--'", CURRENT ',
+			--', tmp_s21.*,'
 			', tipo_id, cedruc, tipo_comp, fecha_cont, num_comp, ',
 			' fecha_vta, base_imp, iva_pre, SUM(valor_vta_civa), ',
 			' cod_por_iva, SUM(valor_iva), base_ice, cod_por_ice, ',
@@ -901,7 +904,7 @@ LET query = 'INSERT INTO srit021 ',
 			' monto_ret_iva_bie, monto_iva_ser, cod_ret_ser, ',
 			' monto_ret_iva_ser, ret_pre, concepto, base_rent, ',
 			' porc_rent, monto_ret, "G", "',
-			UPSHIFT(vg_usuario) CLIPPED, '", "', fl_current(), '"',
+			UPSHIFT(vg_usuario) CLIPPED, '", "', fl_current(), '" ',
 			' FROM tmp_s21 ',
 			' GROUP BY 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14,',
 				' 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,',
@@ -978,7 +981,8 @@ LET query = 'INSERT INTO srit021 ',
 		' monto_ret_iva_bie, monto_iva_ser, cod_ret_ser,',
 		' monto_ret_iva_ser, ret_pre, cod_concep, base_imponible,',
 		' val_porc, valor_reten, "G", "', UPSHIFT(vg_usuario) CLIPPED,
-		'", "', fl_current(), '"',
+		'", CURRENT ',
+		--' FROM tmp_cli_fal, tmp_ret_fal_tot ',
 		' FROM tmp_faltantes ',
 		' WHERE s21_cia IS NULL '
 PREPARE cons_s21_2 FROM query
@@ -1150,8 +1154,8 @@ LET query = 'SELECT CASE WHEN LENGTH(cedruc) = 13 AND ',
 		--}
 		' END tipo_comp, ',
 		' b.g37_pref_sucurs, b.g37_pref_pto_vta, r38_num_sri[9, 16]',
-		' num_sri_ini, r38_num_sri[9, 16] num_sri_fin, g02_numaut_sri,',
-		' fecha_vta fecha ',
+		' num_sri_ini, r38_num_sri[9, 16] num_sri_fin, g02_numaut_sri',--,',
+		--' fecha_vta fecha ',
 		' FROM t1, ', base_suc CLIPPED, 'rept038, ', base_suc CLIPPED,
 			'gent037 b, ', base_suc CLIPPED, 'gent002 ',
 		' WHERE tipo_dev        = "AF" ',
@@ -1732,8 +1736,14 @@ END FUNCTION
 
 
 FUNCTION generar_archivo_venta_xml()
+DEFINE r_g01		RECORD LIKE gent001.*
+DEFINE r_g02		RECORD LIKE gent002.*
 DEFINE r_s21		RECORD LIKE srit021.*
+DEFINE codestablec	LIKE gent037.g37_pref_sucurs
 DEFINE registro		CHAR(4000)
+DEFINE tipo			CHAR(1)
+DEFINE total_venta	DECIMAL(12,2)
+DEFINE total_iva	DECIMAL(12,2)
 
 DECLARE q_s21 CURSOR FOR 
 	SELECT * FROM srit021
@@ -1741,40 +1751,72 @@ DECLARE q_s21 CURSOR FOR
 	  AND s21_localidad = vg_codloc
 	  AND s21_anio      = YEAR(rm_par.fecha_fin)
 	  AND s21_mes       = MONTH(rm_par.fecha_fin)
+CALL fl_lee_compania(vg_codcia) RETURNING r_g01.*
+CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING r_g02.*
 DISPLAY '<?xml version="1.0" encoding="UTF-8"?>'
 DISPLAY '<iva xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
-DISPLAY '<numeroRuc>1790008959001</numeroRuc>'
-DISPLAY '<razonSocial>ACERO COMERCIAL ECUATORIANO S.A.</razonSocial>'
-DISPLAY '<direccionMatriz>AV. LA PRENSA</direccionMatriz>'
-DISPLAY '<telefono>022454333</telefono>'
-DISPLAY '<email>infouio@acerocomercial.com</email>'
-DISPLAY '<tpIdRepre>C</tpIdRepre>'
-DISPLAY '<idRepre>0915392880</idRepre>'
-DISPLAY '<rucContador>0915392880001</rucContador>'
+DISPLAY '<numeroRuc>', r_g02.g02_numruc CLIPPED, '</numeroRuc>'
+DISPLAY '<razonSocial>', r_g01.g01_razonsocial CLIPPED, '</razonSocial>'
+DISPLAY '<direccionMatriz>', r_g02.g02_direccion CLIPPED, '</direccionMatriz>'
+DISPLAY '<telefono>', r_g02.g02_telefono1 CLIPPED, '</telefono>'
+DISPLAY '<email>', r_g02.g02_correo CLIPPED, '</email>'
+LET tipo = 'P'
+IF LENGTH(r_g01.g01_cedrepl) = 10 THEN
+	LET tipo = 'C'
+END IF
+IF LENGTH(r_g01.g01_cedrepl) = 13 THEN
+	LET tipo = 'R'
+END IF
+DISPLAY '<tpIdRepre>', tipo, '</tpIdRepre>'
+DISPLAY '<idRepre>', r_g01.g01_cedrepl CLIPPED, '</idRepre>'
+--
+--XXX AQUI DEBE IR RUC DEL CONTADOR QUE SE LO DEBE PONER EN LA gent001 o gent002
+--    POR AHORA ESTARA EN "DURO".
+--
+DISPLAY '<rucContador>0802232132001</rucContador>'
+--
 DISPLAY '<anio>', YEAR(rm_par.fecha_fin), '</anio>'
 DISPLAY '<mes>', MONTH(rm_par.fecha_fin) USING "&&", '</mes>'
 DISPLAY '<compras>'
 DISPLAY '</compras>'
+LET total_venta = 0
+LET total_iva   = 0
 LET registro = '<ventas>'
 FOREACH q_s21 INTO r_s21.*
-	LET registro = registro CLIPPED, '<detalleVentas>',
-			'<tpIdCliente>', r_s21.s21_ident_cli, '</tpIdCliente>',
-			'<idCliente>', r_s21.s21_num_doc_id, '</idCliente>',
+	LET total_venta = total_venta + r_s21.s21_bas_imp_gr_iva
+	LET total_iva   = total_iva + r_s21.s21_monto_iva
+	LET registro    = registro CLIPPED,
+		'<detalleVentas>',
+		'<tpIdCliente>', r_s21.s21_ident_cli, '</tpIdCliente>',
+		'<idCliente>', r_s21.s21_num_doc_id, '</idCliente>',
+		'<parteRelVtas>SI</parteRelVtas>',
 		'<tipoComprobante>', r_s21.s21_tipo_comp, '</tipoComprobante>',
-		'<fechaRegistro>', r_s21.s21_fecha_reg_cont USING "dd/mm/yyyy", '</fechaRegistro>',
+		--'<fechaRegistro>', r_s21.s21_fecha_reg_cont USING "dd/mm/yyyy",'</fechaRegistro>',
+		'<tipoEmision>F</tipoEmision>',
 		'<numeroComprobantes>', r_s21.s21_num_comp_emi, '</numeroComprobantes> ',
-		'<fechaEmision>', r_s21.s21_fecha_emi_vta USING "dd/mm/yyyy", '</fechaEmision> ',
+		--'<fechaEmision>', r_s21.s21_fecha_emi_vta USING "dd/mm/yyyy",'</fechaEmision> ',
+		'<baseNoGraIva>', r_s21.s21_base_imp_tar_0, '</baseNoGraIva> ',
 		'<baseImponible>', r_s21.s21_base_imp_tar_0, '</baseImponible> ',
-		'<ivaPresuntivo>', r_s21.s21_iva_presuntivo, '</ivaPresuntivo> ',
-		'<baseImpGrav>', r_s21.s21_bas_imp_gr_iva, '</baseImpGrav> ',
-		'<porcentajeIva>', r_s21.s21_cod_porc_iva, '</porcentajeIva> ',
+		--'<ivaPresuntivo>', r_s21.s21_iva_presuntivo, '</ivaPresuntivo> ',
+		--'<baseImpGrav>', r_s21.s21_bas_imp_gr_iva, '</baseImpGrav> ',
+		'<baseImpGrav>', r_s21.s21_base_imp_tar_0, '</baseImpGrav> ',
+		--'<porcentajeIva>', r_s21.s21_cod_porc_iva, '</porcentajeIva> ',
 		'<montoIva>', r_s21.s21_monto_iva, '</montoIva> ',
-		'<baseImpIce>', r_s21.s21_base_imp_ice, '</baseImpIce> ',
-		'<porcentajeIce>', r_s21.s21_cod_porc_ice, '</porcentajeIce> ',
+		--'<baseImpIce>', r_s21.s21_base_imp_ice, '</baseImpIce> ',
+		--'<porcentajeIce>', r_s21.s21_cod_porc_ice, '</porcentajeIce> ',
+		'<compensaciones>',
+		'<compensacion>',
+		'<tipoCompe>02</tipoCompe>',
+		'<monto>0.00</monto>',
+		'</compensacion>',
+		'</compensaciones>',
 		'<montoIce>', r_s21.s21_monto_ice, '</montoIce> ',
-		'<montoIvaBienes>', r_s21.s21_monto_iva_bie, '</montoIvaBienes> ',
-		'<porRetBienes>', r_s21.s21_cod_ret_ivabie, '</porRetBienes> ',
-		'<valorRetBienes>', r_s21.s21_mon_ret_ivabie, '</valorRetBienes> ',
+		--'<montoIvaBienes>', r_s21.s21_monto_iva_bie, '</montoIvaBienes> ',
+		--'<porRetBienes>', r_s21.s21_cod_ret_ivabie, '</porRetBienes> ',
+		--'<valorRetBienes>', r_s21.s21_mon_ret_ivabie, '</valorRetBienes> ',
+		'<valorRetIva>', r_s21.s21_mon_ret_ivabie, '</valorRetIva>',
+		'<valorRetRenta>', r_s21.s21_monto_ret_rent, '</valorRetRenta>',
+		{--
 		'<montoIvaServicios>', r_s21.s21_monto_iva_ser, '</montoIvaServicios> ',
 		'<porRetServicios>', r_s21.s21_cod_ret_ivaser, '</porRetServicios> ',
 		'<valorRetServicios>', r_s21.s21_mon_ret_ivaser, '</valorRetServicios> ',
@@ -1789,13 +1831,43 @@ FOREACH q_s21 INTO r_s21.*
 	ELSE
 		LET registro = registro CLIPPED, '<air/>'
 	END IF
-	LET registro = registro CLIPPED, '</detalleVentas>'
+	--}
+	--
+	--XXX SE DEBE CREAR LA TABLA srit026 CON LA TABLA 13 DE LA FICHA TECNICA
+	--    DEL SRI Y RELACIONARLA CON LA TABLA cajt001.
+	--    POR AHORA ESTARA EN "DURO".
+	--
+	'<formasDePago>',
+	'<formaPago>01</formaPago>',
+	'</formasDePago>'
+	LET registro = registro CLIPPED,
+	'</detalleVentas>'
 	DISPLAY registro CLIPPED
 	LET registro = ' '
 END FOREACH
 DISPLAY '</ventas>'
-DISPLAY '<importaciones>'
-DISPLAY '</importaciones>'
+LET codestablec = NULL
+SELECT g37_pref_sucurs
+		INTO codestablec
+		FROM gent037 b
+		WHERE b.g37_compania  = vg_codcia
+		  AND b.g37_localidad = vg_codloc
+		  AND b.g37_tipo_doc  = "FA"
+		  AND b.g37_secuencia =
+			(SELECT MAX(a.g37_secuencia)
+				FROM gent037 a
+				WHERE a.g37_compania  = b.g37_compania
+				  AND a.g37_localidad = b.g37_localidad
+				  AND a.g37_tipo_doc  = b.g37_tipo_doc)
+--DISPLAY '<importaciones>'
+--DISPLAY '</importaciones>'
+DISPLAY '<ventasEstablecimiento>'
+DISPLAY '<ventaEst>'
+DISPLAY '<codEstab>', codestablec, '</codEstab>'
+DISPLAY '<ventasEstab>', total_venta, '</ventasEstab>'
+DISPLAY '<ivaComp>', total_iva, '</ivaComp>'
+DISPLAY '</ventaEst>'
+DISPLAY '</ventasEstablecimiento>'
 DISPLAY '<exportaciones>'
 DISPLAY '</exportaciones>'
 DISPLAY '<recap>'
@@ -1835,7 +1907,7 @@ FOREACH q_anu INTO r_anu.*
 			'<secuencialInicio>',r_anu.numini,'</secuencialInicio>',
 			'<secuencialFin>', r_anu.numfin, '</secuencialFin>',
 			'<autorizacion>', r_anu.autoriz, '</autorizacion>',
-			'<fechaAnulacion>', r_anu.fecha, '</fechaAnulacion>',
+			--'<fechaAnulacion>', r_anu.fecha, '</fechaAnulacion>',
 			'</detalleAnulados>'
 	DISPLAY registro CLIPPED
 	LET registro = ' '

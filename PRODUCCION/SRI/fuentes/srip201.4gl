@@ -470,13 +470,18 @@ ELSE
 END IF
 DISPLAY FORM f_srif201_2
 IF rm_par.anio_ini IS NULL THEN
-	SELECT NVL(MAX(MDY(s21_mes, 01, s21_anio) + 1 UNITS MONTH), vg_fecha)
-		INTO fecha
-		FROM srit021
-		WHERE s21_compania   = vg_codcia
-		  AND s21_localidad  = vg_codloc
-		  --AND s21_estado    <> 'G'
-		  AND s21_estado    NOT IN ('G', 'P')
+	LET query = 'SELECT NVL(MAX(MDY(s21_mes, 01, s21_anio) + 1 UNITS MONTH), ',
+						'"', vg_fecha, '") fecha ',
+					'FROM srit021 ',
+				'WHERE s21_compania   = ', vg_codcia,
+				'  AND s21_localidad  = ', vg_codloc,
+				--'  AND s21_estado    <> 'G'
+				'  AND s21_estado    NOT IN ("G", "P") ',
+				'INTO TEMP tmp_fecha '
+	PREPARE exec_fec FROM query
+	EXECUTE exec_fec
+	SELECT * INTO fecha FROM tmp_fecha
+	DROP TABLE tmp_fecha
 	LET rm_par.anio_ini = YEAR(fecha)
 	LET rm_par.mes_ini  = MONTH(fecha)
 	LET rm_par.anio_fin = YEAR(fecha)
