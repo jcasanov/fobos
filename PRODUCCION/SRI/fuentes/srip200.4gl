@@ -1741,7 +1741,6 @@ DEFINE r_g02		RECORD LIKE gent002.*
 DEFINE r_s21		RECORD LIKE srit021.*
 DEFINE codestablec	LIKE gent037.g37_pref_sucurs
 DEFINE registro		CHAR(4000)
-DEFINE tipo			CHAR(1)
 DEFINE total_venta	DECIMAL(12,2)
 DEFINE total_iva	DECIMAL(12,2)
 
@@ -1755,31 +1754,43 @@ CALL fl_lee_compania(vg_codcia) RETURNING r_g01.*
 CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING r_g02.*
 DISPLAY '<?xml version="1.0" encoding="UTF-8"?>'
 DISPLAY '<iva xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
-DISPLAY '<numeroRuc>', r_g02.g02_numruc CLIPPED, '</numeroRuc>'
+DISPLAY '<TipoIDInformante>R</TipoIDInformante>'
+DISPLAY '<IdInformante>', r_g02.g02_numruc CLIPPED, '</IdInformante>'
 DISPLAY '<razonSocial>', r_g01.g01_razonsocial CLIPPED, '</razonSocial>'
-DISPLAY '<direccionMatriz>', r_g02.g02_direccion CLIPPED, '</direccionMatriz>'
-DISPLAY '<telefono>', r_g02.g02_telefono1 CLIPPED, '</telefono>'
-DISPLAY '<email>', r_g02.g02_correo CLIPPED, '</email>'
-LET tipo = 'P'
-IF LENGTH(r_g01.g01_cedrepl) = 10 THEN
-	LET tipo = 'C'
-END IF
-IF LENGTH(r_g01.g01_cedrepl) = 13 THEN
-	LET tipo = 'R'
-END IF
-DISPLAY '<tpIdRepre>', tipo, '</tpIdRepre>'
-DISPLAY '<idRepre>', r_g01.g01_cedrepl CLIPPED, '</idRepre>'
---
---XXX AQUI DEBE IR RUC DEL CONTADOR QUE SE LO DEBE PONER EN LA gent001 o gent002
---    POR AHORA ESTARA EN "DURO".
---
-DISPLAY '<rucContador>0802232132001</rucContador>'
---
+--DISPLAY '<direccionMatriz>', r_g02.g02_direccion CLIPPED, '</direccionMatriz>'
+--DISPLAY '<telefono>', r_g02.g02_telefono1 CLIPPED, '</telefono>'
+--DISPLAY '<email>', r_g02.g02_correo CLIPPED, '</email>'
+--DISPLAY '<tpIdRepre>', r_g01.g01_tip_docid_rep, '</tpIdRepre>'
+--DISPLAY '<idRepre>', r_g01.g01_cedrepl CLIPPED, '</idRepre>'
+--DISPLAY '<rucContador>', r_g01.g01_num_docid_con CLIPPED, '</rucContador>'
 DISPLAY '<anio>', YEAR(rm_par.fecha_fin), '</anio>'
 DISPLAY '<mes>', MONTH(rm_par.fecha_fin) USING "&&", '</mes>'
+LET total_venta = 0
+SELECT NVL(SUM(s21_bas_imp_gr_iva), 0)
+	INTO total_venta
+	FROM srit021
+	WHERE s21_compania  = vg_codcia
+	  AND s21_localidad = vg_codloc
+	  AND s21_anio      = YEAR(rm_par.fecha_fin)
+	  AND s21_mes       = MONTH(rm_par.fecha_fin)
+LET codestablec = NULL
+SELECT g37_pref_sucurs
+		INTO codestablec
+		FROM gent037 b
+		WHERE b.g37_compania  = vg_codcia
+		  AND b.g37_localidad = vg_codloc
+		  AND b.g37_tipo_doc  = "FA"
+		  AND b.g37_secuencia =
+			(SELECT MAX(a.g37_secuencia)
+				FROM gent037 a
+				WHERE a.g37_compania  = b.g37_compania
+				  AND a.g37_localidad = b.g37_localidad
+				  AND a.g37_tipo_doc  = b.g37_tipo_doc)
+DISPLAY 'numEstabRuc>', codestablec, '</numEstabRuc>'
+DISPLAY '<totalVentas>', total_venta, '</totalVentas>'
+DISPLAY '<codigoOperativo>IVA</codigoOperativo>'
 DISPLAY '<compras>'
 DISPLAY '</compras>'
-LET total_venta = 0
 LET total_iva   = 0
 LET registro = '<ventas>'
 FOREACH q_s21 INTO r_s21.*
@@ -1846,19 +1857,6 @@ FOREACH q_s21 INTO r_s21.*
 	LET registro = ' '
 END FOREACH
 DISPLAY '</ventas>'
-LET codestablec = NULL
-SELECT g37_pref_sucurs
-		INTO codestablec
-		FROM gent037 b
-		WHERE b.g37_compania  = vg_codcia
-		  AND b.g37_localidad = vg_codloc
-		  AND b.g37_tipo_doc  = "FA"
-		  AND b.g37_secuencia =
-			(SELECT MAX(a.g37_secuencia)
-				FROM gent037 a
-				WHERE a.g37_compania  = b.g37_compania
-				  AND a.g37_localidad = b.g37_localidad
-				  AND a.g37_tipo_doc  = b.g37_tipo_doc)
 --DISPLAY '<importaciones>'
 --DISPLAY '</importaciones>'
 DISPLAY '<ventasEstablecimiento>'
