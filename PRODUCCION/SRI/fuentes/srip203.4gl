@@ -3,7 +3,7 @@
 -- Elaboración         : 02-Jun-2007
 -- Autor               : NPC
 -- Formato de Ejecución: fglrun srip203 Base Modulo Compañía Localidad
---							[anio] [mes] [orden]
+--							[anio] [mes] [orden] [[agrupado_proveedor=X]]
 -- Ultima Correción    : 
 -- Motivo Corrección   : 
 --------------------------------------------------------------------------------
@@ -606,14 +606,12 @@ FOREACH q_cons INTO r_doc.*, r_adi.*
 	ELSE
 		LET registro = '<detalleCompras>'
 	END IF
-	{--
 	IF num_args() = 8 THEN
 		LET registro = registro CLIPPED,
 			'<codProv>', r_adi.proveedor USING "<<<<<<&",
 			'</codProv>',
 			'<nomProv>', r_adi.nomprov CLIPPED, '</nomProv>'
 	END IF
-	--}
 	LET registro = registro CLIPPED,
 			'<codSustento>', r_doc.sustento USING "&&",
 			'</codSustento>',
@@ -653,6 +651,7 @@ FOREACH q_cons INTO r_doc.*, r_adi.*
 			'</baseImponible>',
 			'<baseImpGrav>', r_doc.base_con USING "<<<<<<<<&.&&",
 			'</baseImpGrav>',
+			'<baseImpExe>0.00</baseImpExe>',
 			'<montoIce>', r_doc.monto_ice USING "<<<<<<<<&.&&",
 			'</montoIce>',
 			'<montoIva>', r_doc.monto_iva USING "<<<<<<<<&.&&",

@@ -1786,7 +1786,7 @@ SELECT g37_pref_sucurs
 				WHERE a.g37_compania  = b.g37_compania
 				  AND a.g37_localidad = b.g37_localidad
 				  AND a.g37_tipo_doc  = b.g37_tipo_doc)
-DISPLAY 'numEstabRuc>', codestablec, '</numEstabRuc>'
+DISPLAY '<numEstabRuc>', codestablec, '</numEstabRuc>'
 DISPLAY '<totalVentas>', total_venta, '</totalVentas>'
 DISPLAY '<codigoOperativo>IVA</codigoOperativo>'
 DISPLAY '<compras>'
@@ -1801,7 +1801,7 @@ FOREACH q_s21 INTO r_s21.*
 		'<tpIdCliente>', r_s21.s21_ident_cli, '</tpIdCliente>',
 		'<idCliente>', r_s21.s21_num_doc_id, '</idCliente>',
 		'<parteRelVtas>SI</parteRelVtas>',
-		'<tipoComprobante>', r_s21.s21_tipo_comp, '</tipoComprobante>',
+		'<tipoComprobante>', r_s21.s21_tipo_comp CLIPPED, '</tipoComprobante>',
 		--'<fechaRegistro>', r_s21.s21_fecha_reg_cont USING "dd/mm/yyyy",'</fechaRegistro>',
 		'<tipoEmision>F</tipoEmision>',
 		'<numeroComprobantes>', r_s21.s21_num_comp_emi, '</numeroComprobantes> ',
