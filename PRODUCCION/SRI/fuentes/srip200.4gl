@@ -897,7 +897,7 @@ LET query = 'INSERT INTO srit021 ',
 			--', tmp_s21.*, "G", "', UPSHIFT(vg_usuario) CLIPPED,
 			--'", CURRENT ',
 			--', tmp_s21.*,'
-			', tipo_id, cedruc, tipo_comp, fecha_cont, num_comp, ',
+			', tipo_id, cedruc, LPAD(tipo_comp, 2, 0), fecha_cont, num_comp, ',
 			' fecha_vta, base_imp, iva_pre, SUM(valor_vta_civa), ',
 			' cod_por_iva, SUM(valor_iva), base_ice, cod_por_ice, ',
 			' monto_ice, monto_iva_bie, cod_por_bie, ',
@@ -975,7 +975,7 @@ LET query = 'INSERT INTO srit021 ',
 			'   AND s12_codigo   = tipo_doc_id)) tipo_id,',
 			--}
 		', tipo_id_fin, ',
-		' cedruc_ret, tipo_comp, fecha_cont, num_comp, fecha_vta,',
+		' cedruc_ret, LPAD(tipo_comp, 2, 0), fecha_cont, num_comp, fecha_vta,',
 		' base_imp, iva_pre, valor_vta_civa, cod_por_iva, valor_iva,',
 		' base_ice, cod_por_ice,monto_ice, monto_iva_bie, cod_por_bie,',
 		' monto_ret_iva_bie, monto_iva_ser, cod_ret_ser,',
@@ -1659,7 +1659,7 @@ DELETE FROM srit021
 		  AND srit021.s21_base_imp_tar_0 = 0.00
 		  AND srit021.s21_bas_imp_gr_iva = 0.00
 		  AND srit021.s21_monto_iva      = 0.00)
-UPDATE t1 SET s21_tipo_comp      = '4',
+UPDATE t1 SET s21_tipo_comp      = '04',
 	      s21_base_imp_tar_0 = 0.00,
 	      s21_bas_imp_gr_iva = 0.00,
 	      s21_monto_iva      = 0.00,
@@ -1763,8 +1763,8 @@ DISPLAY '<razonSocial>', r_g01.g01_razonsocial CLIPPED, '</razonSocial>'
 --DISPLAY '<tpIdRepre>', r_g01.g01_tip_docid_rep, '</tpIdRepre>'
 --DISPLAY '<idRepre>', r_g01.g01_cedrepl CLIPPED, '</idRepre>'
 --DISPLAY '<rucContador>', r_g01.g01_num_docid_con CLIPPED, '</rucContador>'
-DISPLAY '<anio>', YEAR(rm_par.fecha_fin), '</anio>'
-DISPLAY '<mes>', MONTH(rm_par.fecha_fin) USING "&&", '</mes>'
+DISPLAY '<Anio>', YEAR(rm_par.fecha_fin), '</Anio>'
+DISPLAY '<Mes>', MONTH(rm_par.fecha_fin) USING "&&", '</Mes>'
 LET total_venta = 0
 SELECT NVL(SUM(s21_bas_imp_gr_iva), 0)
 	INTO total_venta
@@ -1801,7 +1801,7 @@ FOREACH q_s21 INTO r_s21.*
 		'<tpIdCliente>', r_s21.s21_ident_cli, '</tpIdCliente>',
 		'<idCliente>', r_s21.s21_num_doc_id, '</idCliente>',
 		'<parteRelVtas>SI</parteRelVtas>',
-		'<tipoComprobante>', r_s21.s21_tipo_comp CLIPPED, '</tipoComprobante>',
+		'<tipoComprobante>', r_s21.s21_tipo_comp USING "&&", '</tipoComprobante>',
 		--'<fechaRegistro>', r_s21.s21_fecha_reg_cont USING "dd/mm/yyyy",'</fechaRegistro>',
 		'<tipoEmision>F</tipoEmision>',
 		'<numeroComprobantes>', r_s21.s21_num_comp_emi, '</numeroComprobantes> ',
