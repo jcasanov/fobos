@@ -554,7 +554,7 @@ LET expr_val = 'CASE WHEN r19_cod_tran = "FA" ',
 LET tabla     = NULL
 LET expr_join = NULL
 IF rm_par.bodega IS NULL AND rm_par.item IS NULL THEN
-	LET tabla     = ', rept020 '
+	LET tabla     = ' rept020, '
 	LET expr_join = '   AND r20_compania  = r19_compania ',
 			'   AND r20_localidad = r19_localidad ',
 			'   AND r20_cod_tran  = r19_cod_tran ',
