@@ -93,7 +93,8 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/cxpp207.err')
+LET vg_proceso = arg_val(0)
+CALL startlog('../logs/' || vg_proceso CLIPPED || '.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN   -- Validar # parámetros correcto
@@ -105,7 +106,6 @@ LET vg_base     = arg_val(1)
 LET vg_modulo   = arg_val(2)
 LET vg_codcia   = arg_val(3)
 LET vg_codloc   = arg_val(4)
-LET vg_proceso = 'cxpp207'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
 --#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
@@ -209,6 +209,7 @@ DEFINE r_p02		RECORD LIKE cxpt002.*
 DEFINE r_p27		RECORD LIKE cxpt027.*
 DEFINE r_b00		RECORD LIKE ctbt000.*
 DEFINE r_b12		RECORD LIKE ctbt012.*
+DEFINE tot_reten	LIKE cxpt022.p22_total_cap
 
 LET rm_p27.p27_estado  = 'A'
 LET rm_p27.p27_paridad = 1
@@ -385,23 +386,29 @@ WHILE TRUE
 							EXIT PROGRAM
 						  END IF
 						END IF
-						  CALL graba_ajuste_retencion()
+						  CALL graba_ajuste_retencion() RETURNING tot_reten
+						IF tot_reten > 0 THEN
 						  CALL contabilizacion_ret(i)
 							RETURNING r_b12.*
+						END IF
 						  DELETE FROM tmp_retenciones
 						  COMMIT WORK
+						IF tot_reten > 0 THEN
 						  CALL fl_lee_compania_contabilidad(vg_codcia)
 							RETURNING r_b00.*
 						  IF r_b00.b00_mayo_online = 'S'
 						  THEN
 							CALL fl_mayoriza_comprobante(r_b12.b12_compania, r_b12.b12_tipo_comp, r_b12.b12_num_comp, 'M')
 						  END IF
+						END IF
 						  CALL fl_lee_retencion_cxp(
 							vg_codcia, vg_codloc,
 							vm_num_ret)
 							RETURNING r_p27.*
+						IF tot_reten > 0 THEN
 						  CALL imprime_retenciones(
 									r_p27.*)
+						END IF
 						CALL generar_doc_elec(r_p27.p27_num_ret)
 						  CALL fl_mensaje_registro_ingresado()
 						  LET int_flag = 0
@@ -443,7 +450,7 @@ WHILE TRUE
 							ROLLBACK WORK
 							EXIT PROGRAM
 						  END IF
-						  CALL graba_ajuste_retencion()
+						  CALL graba_ajuste_retencion() RETURNING tot_reten
 						  CALL contabilizacion_ret(i)
 							RETURNING r_b12.*
 						  DELETE FROM tmp_retenciones
@@ -1329,6 +1336,7 @@ FOREACH q_ret3 INTO r_p28.*
 	FREE  q_saldo2
 END FOREACH
 CALL fl_genera_saldos_proveedor(vg_codcia, vg_codloc, rm_p27.p27_codprov)
+RETURN r_p22.p22_total_cap
 
 END FUNCTION
 

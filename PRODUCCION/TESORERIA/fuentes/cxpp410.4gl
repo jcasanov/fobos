@@ -51,7 +51,8 @@ MAIN
                                                                                 
 DEFER QUIT
 DEFER INTERRUPT
-CALL startlog('../logs/cxpp410.err')
+LET vg_proceso = arg_val(0)
+CALL startlog('../logs/' || vg_proceso CLIPPED || '.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN   
@@ -62,7 +63,6 @@ LET vg_base    = arg_val(1)
 LET vg_modulo  = arg_val(2)
 LET vg_codcia  = arg_val(3)
 LET vg_codloc  = arg_val(4)
-LET vg_proceso = 'cxpp410'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
 --#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
@@ -416,12 +416,17 @@ IF rm_par.tipo_oc IS NOT NULL THEN
 			'   AND c10_estado       = "C" ',
 			'   AND c10_fecha_fact   = p20_fecha_emi '
 END IF
+{
+ La tabla cxpt029 se puso en un OUTER porque el SRI incluyo
+ el codigo 332 que es para retenciones CERO en compras de proveedor.
+ Anteriormente el programa no incluia las retenciones con valor cero.
+}
 LET query = 'SELECT p28_codigo_sri, p01_nomprov, p27_fecing, p28_num_ret,',
 		' p28_num_doc, p20_fecha_emi, p28_tipo_ret,',
 		' p27_moneda, p28_valor_base, p28_porcentaje,',
 		' p28_valor_ret, p20_compania, p20_localidad, ',
 		' p20_numero_oc, p20_codprov, p29_num_sri ',
-		' FROM cxpt027, cxpt028, cxpt029, cxpt020, cxpt001',
+		' FROM cxpt027, cxpt028, cxpt020, cxpt001, OUTER cxpt029',
 		' WHERE p27_compania     = ', vg_codcia,
 		'   AND p27_localidad    = ', vg_codloc,
 		'   AND p27_estado       = "A" ',
@@ -435,9 +440,6 @@ LET query = 'SELECT p28_codigo_sri, p01_nomprov, p27_fecing, p28_num_ret,',
 		'   AND p28_codprov      = p27_codprov ',
 		expr_ret CLIPPED,
 		expr_sri CLIPPED,
-		'   AND p29_compania     = p27_compania ',
-		'   AND p29_localidad    = p27_localidad ',
-		'   AND p29_num_ret      = p27_num_ret ',
 		'   AND p20_compania     = p28_compania ',
 		'   AND p20_localidad    = p28_localidad ',
 		'   AND p20_codprov      = p28_codprov ',
@@ -445,6 +447,9 @@ LET query = 'SELECT p28_codigo_sri, p01_nomprov, p27_fecing, p28_num_ret,',
 		'   AND p20_num_doc      = p28_num_doc ',
 		'   AND p20_dividendo    = p28_dividendo ',
 		'   AND p01_codprov      = p20_codprov ',
+		'   AND p29_compania     = p27_compania ',
+		'   AND p29_localidad    = p27_localidad ',
+		'   AND p29_num_ret      = p27_num_ret ',
 		' INTO TEMP tmp_ret '
 PREPARE gen_tmp FROM query
 EXECUTE gen_tmp
@@ -487,7 +492,6 @@ END IF
 LET enter = 13
 DECLARE q_rep1 CURSOR FOR SELECT * FROM tmp_ret ORDER BY 3, 4, 2, 7, 10
 FOREACH q_rep1 INTO rm_consulta.*
-	--LET registro = rm_consulta.codigo_sri CLIPPED, '|',
 	LET registro = rm_consulta.proveedor CLIPPED, '|',
 			DATE(rm_consulta.fecha_retencion) USING "dd-mm-yyyy",
 			'|', rm_consulta.num_retencion CLIPPED, '|',

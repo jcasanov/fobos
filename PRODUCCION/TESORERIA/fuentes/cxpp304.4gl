@@ -64,7 +64,6 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-
 LET vg_proceso = arg_val(0)
 CALL startlog('../logs/' || vg_proceso CLIPPED || '.err')
 --#CALL fgl_init4js()
@@ -169,11 +168,11 @@ WHILE TRUE
 	DELETE FROM tmp_consulta
 
 	CALL control_lee_cabecera()
-	IF INT_FLAG THEN
+	IF int_flag THEN
 		CONTINUE WHILE
 	END IF
 	CALL control_consulta()
-	IF INT_FLAG THEN
+	IF int_flag THEN
 		CONTINUE WHILE
 	END IF
 
@@ -181,7 +180,7 @@ WHILE TRUE
 		CALL fl_mostrar_mensaje('No se encontraron registros con el criterio indicado.','exclamation')
 		CONTINUE WHILE
 	END IF
-	CALL control_DISPLAY_array()
+	CALL control_detalle()
 END WHILE
 
 END FUNCTION
@@ -226,7 +225,7 @@ DEFINE fec_fin		DATE
 		RETURNING r_p01.*
 	DISPLAY r_p01.p01_nomprov TO nom_proveedor
 
-	LET INT_FLAG   = 0
+	LET int_flag   = 0
 	INPUT BY NAME vm_proveedor, vm_fecha_desde, vm_fecha_hasta  
 		      WITHOUT DEFAULTS
 
@@ -239,7 +238,7 @@ DEFINE fec_fin		DATE
 		   THEN
 			EXIT PROGRAM
 		END IF
-		LET INT_FLAG = 1 
+		LET int_flag = 1 
 		RETURN
 
         ON KEY(F1,CONTROL-W)
@@ -256,7 +255,7 @@ DEFINE fec_fin		DATE
 				DISPLAY r_p01.p01_nomprov TO nom_proveedor
 			END IF
 		END IF
-		LET INT_FLAG = 0
+		LET int_flag = 0
 
 	BEFORE INPUT
 		--#CALL dialog.keysetlabel("F1","")
@@ -362,16 +361,21 @@ IF vm_proveedor IS NOT NULL THEN
 	LET expr_prov = ' p27_codprov = ',vm_proveedor	
 END IF
 
+{
+ La tabla cxpt029 se puso en un OUTER porque el SRI incluyo
+ el codigo 332 que es para retenciones CERO en compras de proveedor.
+ Anteriormente el programa no incluia las retenciones con valor cero.
+}
 LET query = 'SELECT cxpt027.*, p29_num_sri, cxpt001.* ',
-		' FROM cxpt027, cxpt029, cxpt001',
+		' FROM cxpt027, cxpt001, OUTER cxpt029',
 		' WHERE p27_compania   = ', vg_codcia ,
 		'   AND p27_localidad  = ', vg_codloc ,
 		'   AND ', expr_prov CLIPPED ,
 		'   AND ', expr_fecha CLIPPED , 
+		'   AND p01_codprov    = p27_codprov',
 		'   AND p29_compania   = p27_compania ',
 		'   AND p29_localidad  = p27_localidad ',
-		'   AND p29_num_ret    = p27_num_ret ',
-		'   AND p27_codprov    = p01_codprov'
+		'   AND p29_num_ret    = p27_num_ret '
 		
 PREPARE consulta FROM query
 
@@ -404,7 +408,7 @@ END FUNCTION
 
 
 
-FUNCTION control_DISPLAY_array()
+FUNCTION control_detalle()
 DEFINE query 		CHAR(300)
 DEFINE i,j,m,col 	SMALLINT
 
@@ -449,7 +453,7 @@ WHILE TRUE
 			--#CONTINUE DISPLAY
 
 		ON KEY(INTERRUPT)
-			LET INT_FLAG = 1
+			LET int_flag = 1
 			EXIT DISPLAY
 
         	ON KEY(F1,CONTROL-W)
@@ -460,7 +464,7 @@ WHILE TRUE
 			LET j = scr_line()
 			CALL control_ver_retencion(r_detalle_1[i].codprov,
 						   r_detalle[i].num_ret)
-			LET INT_FLAG = 0
+			LET int_flag = 0
 
 		ON KEY(F15)
 			LET col = 1
@@ -635,7 +639,7 @@ WHILE TRUE
 	END FOREACH
 
 	CALL set_count(num_det)
-	LET INT_FLAG = 0
+	LET int_flag = 0
 	DISPLAY ARRAY r_detalle_2 TO r_detalle_2.*
 
 		--#BEFORE DISPLAY
@@ -657,7 +661,7 @@ WHILE TRUE
 			--#CONTINUE DISPLAY
 
 		ON KEY(INTERRUPT)
-			LET INT_FLAG = 1
+			LET int_flag = 1
 			EXIT DISPLAY
 
         	ON KEY(F1,CONTROL-W)
