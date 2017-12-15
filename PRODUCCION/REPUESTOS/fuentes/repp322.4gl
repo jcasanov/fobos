@@ -405,8 +405,8 @@ DEFINE query		CHAR(600)
 IF NOT preparar_tabla_temp_consulta() THEN
 	RETURN
 END IF
-LET vm_columna_1           = 13
-LET vm_columna_2           = 11
+LET vm_columna_1           = 1
+LET vm_columna_2           = 2
 LET rm_orden[vm_columna_1] = 'ASC'
 LET rm_orden[vm_columna_2] = 'ASC'
 INITIALIZE col TO NULL
