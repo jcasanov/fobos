@@ -401,7 +401,6 @@ END FUNCTION
 FUNCTION mostrar_consulta()
 DEFINE i, j, col, salir	SMALLINT
 DEFINE query		CHAR(600)
-DEFINE ordena		INTEGER
 
 IF NOT preparar_tabla_temp_consulta() THEN
 	RETURN
@@ -415,14 +414,14 @@ LET salir = 0
 WHILE NOT salir
 	LET query = "SELECT r19_cod_tran, r19_num_tran, tot_bruto, tot_dscto, ",
 			"subtotal, tot_iva, flete, tot_neto, r19_codcli, ",
-			"r19_nomcli, DATE(fec_tran), g21_nombre, orden ",
+			"r19_nomcli, DATE(fec_tran), g21_nombre ",
 			" FROM tmp_vta ",
                    	" ORDER BY ", vm_columna_1, " ", rm_orden[vm_columna_1],
 				", ", vm_columna_2, " ", rm_orden[vm_columna_2]
 	PREPARE venta FROM query
 	DECLARE q_venta CURSOR FOR venta
 	LET i = 1
-	FOREACH q_venta INTO rm_detalle[i].*, rm_adi[i].*, ordena
+	FOREACH q_venta INTO rm_detalle[i].*, rm_adi[i].*
 		LET i = i + 1
 		IF i > vm_max_det THEN
 			EXIT FOREACH
@@ -495,6 +494,20 @@ END FUNCTION
 
 
 
+{ XXX
+  Esta función arma una consulta SQL de forma dinámica, pero tiene
+  algunos problemas que deben revisarse:
+  * incluye la tabla rept020, lo que causa que se dupliquen datos [1]
+    pero no usa esa tabla nunca. pensé que lo hacía para filtrar 
+    por bodega pero aunque entre los parámetros pide la bodega no
+    filtra.
+  * esta consulta considera NV como comprobante de venta pero al cambiar
+    el signo de las DF y AF, sólo pregunta por FA y asume que lo demás
+    es negativo. Lo que significa que las NV (si las hubiera) saldrán
+    negativas.
+
+[1] por ahora se eliminan los duplicados usando un GROUP BY 
+}
 FUNCTION preparar_tabla_temp_consulta()
 DEFINE fec_ini, fec_fin	LIKE rept019.r19_fecing
 DEFINE expr_tip		VARCHAR(100)
@@ -562,8 +575,7 @@ IF rm_par.bodega IS NULL AND rm_par.item IS NULL THEN
 END IF
 LET query = 'SELECT r19_cod_tran, r19_num_tran, ',
 		expr_val CLIPPED,
-		' r19_codcli, r19_nomcli, r19_fecing fec_tran, g21_nombre, ',
-		'rept019.ROWID orden ',
+		' r19_codcli, r19_nomcli, r19_fecing fec_tran, g21_nombre ',
 		' FROM rept019, ', tabla CLIPPED, ' gent021 ',
 		' WHERE r19_compania  = ', vg_codcia,
 		'   AND r19_localidad = ', vg_codloc,
@@ -576,6 +588,7 @@ LET query = 'SELECT r19_cod_tran, r19_num_tran, ',
 					' AND "', fec_fin, '"',
 		expr_join CLIPPED,
 		'   AND g21_cod_tran  = r19_cod_tran ',
+		' GROUP BY 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ',
 		' INTO TEMP tmp_vta '
 PREPARE exec_tmp FROM query
 EXECUTE exec_tmp
