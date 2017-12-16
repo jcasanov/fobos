@@ -284,7 +284,7 @@ FOREACH q_seno INTO tipo_comp, subtipo, indice
     	LET r_ccomp.b12_estado 		= 'A'
     	LET r_ccomp.b12_subtipo 	= subtipo
 	IF vm_compra IS NOT NULL THEN
-    		LET r_ccomp.b12_fec_proceso = rm_c13.c13_fecha_recep
+    		LET r_ccomp.b12_fec_proceso = rm_c13.c13_fec_emi_fac
     		LET r_ccomp.b12_glosa	= 'COMPRA: ', rm_c10.c10_numero_oc 
 			USING '<<<<<<',
             	        ',  FAC.: ', rm_c13.c13_factura CLIPPED,

@@ -25,6 +25,7 @@ DEFINE rm_g13	 	RECORD LIKE gent013.*	-- MONEDAS
 DEFINE rm_g14	 	RECORD LIKE gent014.*	-- CONVERSION MONEDAS
 DEFINE rm_r02	 	RECORD LIKE rept002.*	-- BODEGA
 DEFINE rm_b12	 	RECORD LIKE ctbt012.*
+DEFINE rm_b00	 	RECORD LIKE ctbt000.*
 
 DEFINE rm_c00		RECORD LIKE ordt000.*	-- CONFIGURACION DE OC
 DEFINE rm_c02		RECORD LIKE ordt002.*	-- PORCENTAJE DE RETENCIONES OC
@@ -112,6 +113,7 @@ DEFINE val_neto		LIKE rept019.r19_tot_neto
 DEFINE val_pagar	LIKE rept019.r19_tot_neto
 DEFINE tot_ret		LIKE rept019.r19_tot_neto
 ---------------------------------------------------------------
+DEFINE fecha_tope		LIKE ctbt000.b00_fecha_cm
 
 DEFINE vg_num_recep	LIKE ordt013.c13_num_recep
 
@@ -128,7 +130,8 @@ DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
 
-CALL startlog('../logs/ordp202.err')
+LET vg_proceso = arg_val(0)
+CALL startlog('../logs/' || vg_proceso CLIPPED || '.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 
@@ -146,7 +149,6 @@ INITIALIZE vg_num_recep TO NULL
 IF num_args() = 6 THEN
 	LET vg_num_recep = arg_val(6)
 END IF
-LET vg_proceso = 'ordp202'
 
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()
@@ -206,6 +208,12 @@ END IF
 LET run_prog = 'fglrun '
 IF vg_gui = 0 THEN
 	LET run_prog = 'fglgo '
+END IF
+
+CALL fl_lee_compania_contabilidad(vg_codcia) RETURNING rm_b00.*
+LET fecha_tope = rm_b00.b00_fecha_cm + 1 UNITS MONTH
+IF fecha_tope < rm_b00.b00_periodo_ini THEN
+	LET fecha_tope = rm_b00.b00_periodo_ini
 END IF
 
 MENU 'OPCIONES'
@@ -539,7 +547,7 @@ CALL fl_lee_orden_compra(vg_codcia, vg_codloc, vg_numero_oc)
 			rm_c13.c13_estado,    rm_c13.c13_fecha_eli,
 			rm_c13.c13_dif_cuadre, 
 			rm_c13.c13_flete, rm_c13.c13_otros,
-	      		rm_c13.c13_fec_aut, rm_c13.c13_num_aut,
+	      		rm_c13.c13_fec_emi_fac, rm_c13.c13_num_aut,
 			rm_c13.c13_serie_comp
 
 IF vg_gui = 0 THEN
@@ -1776,24 +1784,23 @@ END FUNCTION
 
 
 FUNCTION control_lee_cabecera()
-DEFINE resp 		CHAR(6)
-DEFINE done, lim	SMALLINT
 DEFINE r_c10	 	RECORD LIKE ordt010.*
 DEFINE r_p20	 	RECORD LIKE cxpt020.*
 DEFINE oc_ant		LIKE ordt010.c10_numero_oc
+DEFINE resp 		CHAR(6)
+DEFINE done, lim	SMALLINT
+DEFINE mensaje		VARCHAR(200)
 
 LET vm_calc_iva = 'S' 
 
 LET int_flag = 0
 INPUT BY NAME rm_c13.c13_numero_oc, rm_c13.c13_num_guia, rm_c13.c13_fecha_cadu,
-	      rm_c13.c13_fec_aut, rm_c13.c13_num_aut, rm_c13.c13_serie_comp,
+	      rm_c13.c13_fec_emi_fac, rm_c13.c13_num_aut, rm_c13.c13_serie_comp,
 	      vm_calc_iva 
-	      WITHOUT DEFAULTS
-
+	WITHOUT DEFAULTS
 	ON KEY (INTERRUPT)
 		LET int_flag = 0
-		CALL fl_mensaje_abandonar_proceso()
-                	RETURNING resp
+		CALL fl_mensaje_abandonar_proceso() RETURNING resp
 		IF resp = 'Yes' THEN
 			LET int_flag = 1
 			RETURN
@@ -1930,15 +1937,13 @@ INPUT BY NAME rm_c13.c13_numero_oc, rm_c13.c13_num_guia, rm_c13.c13_fecha_cadu,
 			DISPLAY BY NAME rm_c13.c13_fecha_cadu
 		END IF
 
-	AFTER FIELD c13_fec_aut
-		IF rm_c13.c13_fec_aut IS NOT NULL THEN
-			IF LENGTH(rm_c13.c13_fec_aut) <> 14 THEN
-				CALL fl_mostrar_mensaje('Numero de Fecha de Autorizacion no tiene completo el total de digitos.', 'exclamation')
-				NEXT FIELD c13_fec_aut
-			END IF
-			IF NOT fl_valida_numeros(rm_c13.c13_fec_aut) THEN
-				NEXT FIELD c13_fec_aut
-			END IF
+	AFTER FIELD c13_fec_emi_fac
+		IF rm_c13.c13_fec_emi_fac < fecha_tope THEN
+			LET mensaje = 'La fecha de emisión de factura no puede ser menor',
+							' que la fecha: ', fecha_tope USING "dd-mm-yyyy",
+							' del modulo de Contabilidad.'
+			CALL fl_mostrar_mensaje(mensaje, 'exclamation')
+			NEXT FIELD c13_fec_emi_fac
 		END IF
 
 	AFTER FIELD c13_num_aut
@@ -2365,7 +2370,7 @@ DEFINE resp 	CHAR(6)
 
 LET int_flag = 0
 INPUT BY NAME pagos, rm_c13.c13_interes, fecha_pago, dias_pagos 
-	      WITHOUT DEFAULTS
+	WITHOUT DEFAULTS
 	ON KEY(INTERRUPT)
 		LET int_flag = 0
 		CALL fl_mensaje_abandonar_proceso()
@@ -3243,7 +3248,7 @@ LET r_b12.b12_num_cheque  = NULL
 LET r_b12.b12_origen      = 'A'
 LET r_b12.b12_moneda      = r_c10.c10_moneda
 LET r_b12.b12_paridad     = r_c10.c10_paridad
-LET r_b12.b12_fec_proceso = vg_fecha
+LET r_b12.b12_fec_proceso = rm_c13.c13_fec_emi_fac
 LET r_b12.b12_fec_reversa = NULL
 LET r_b12.b12_tip_reversa = NULL
 LET r_b12.b12_num_reversa = NULL
@@ -3382,7 +3387,7 @@ ELSE
 END IF
 LET r_b13.b13_num_concil  = NULL
 LET r_b13.b13_filtro      = NULL
-LET r_b13.b13_fec_proceso = vg_fecha
+LET r_b13.b13_fec_proceso = rm_c13.c13_fec_emi_fac
 LET r_b13.b13_codcli      = NULL
 LET r_b13.b13_codprov     = r_c10.c10_codprov
 LET r_b13.b13_pedido      = NULL
@@ -3515,7 +3520,7 @@ LET r_b12.b12_glosa       = rm_b12.b12_glosa CLIPPED
 LET r_b12.b12_origen      = 'A' 
 LET r_b12.b12_moneda      = r_c10.c10_moneda 
 LET r_b12.b12_paridad     = r_c10.c10_paridad 
-LET r_b12.b12_fec_proceso = vg_fecha
+LET r_b12.b12_fec_proceso = rm_c13.c13_fec_emi_fac
 LET r_b12.b12_modulo      = r_b03.b03_modulo
 LET r_b12.b12_usuario     = vg_usuario 
 LET r_b12.b12_fecing      = fl_current()

@@ -7,7 +7,7 @@ SCREEN
           Impuesto: [c006 ]%               Descuento: [c007 ]%  
          Proveedor: [c109  |c100                                          ] 
            Factura: [c005             ]       Factor Precio: [c018        ]% 
-     Fec. Aut. SRI: [c106          ] Ser.Comp.: [c101  ] Cad.: [c040      ]
+  Fecha Emi. Fact.: [c106      ]     Ser.Comp.: [c101  ] Cad.: [c040      ]
   Autorización SRI: [c099                                               ]
            Usuario: [c011  ] [c103                                        ]
             Bodega: [a2] [c104                ]            [c050] de [c051]
@@ -27,6 +27,7 @@ TABLES
 rept019
 rept020
 ordt010
+ordt013
 ATTRIBUTES
 a0   = rept019.r19_cod_tran, NOENTRY, REVERSE, UPSHIFT;
 c002 = rept019.r19_num_tran, NOENTRY, REVERSE,
@@ -58,7 +59,9 @@ c041 = rept020.r20_precio, FORMAT='#,###,##&.###', OPTIONS='-nolist',
 c045 = rept020.r20_descuento, FORMAT='##&.##', NOENTRY, OPTIONS='-nolist';
 c105 = FORMONLY.total, NOENTRY, FORMAT='####,###,##&.##', OPTIONS='-nolist';
 
-c106 = FORMONLY.vm_fec_aut TYPE CHAR,    UPSHIFT, AUTONEXT;
+c106 = ordt013.c13_fec_emi_fac, UPSHIFT, AUTONEXT, REVERSE,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha de la factura en formato dd-mm-aaaa';
 c099 = FORMONLY.vm_num_aut TYPE CHAR NOT NULL,    REVERSE, UPSHIFT, REQUIRED,
 	AUTONEXT;
 c101 = FORMONLY.vm_serie_comp TYPE CHAR NOT NULL, REVERSE, UPSHIFT, REQUIRED,

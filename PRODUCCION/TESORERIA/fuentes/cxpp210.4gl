@@ -26,6 +26,7 @@ DEFINE rm_p01		 	RECORD LIKE cxpt001.*	-- PROVEEDORES
 DEFINE rm_t23		 	RECORD LIKE talt023.*	-- ORDENES DE TRABAJO
 DEFINE rm_g13		 	RECORD LIKE gent013.*	-- MONEDAS
 DEFINE rm_g14		 	RECORD LIKE gent014.*	-- CONVERSION MONEDAS
+DEFINE rm_b00		 	RECORD LIKE ctbt000.*
 DEFINE r_detalle	ARRAY[250] OF RECORD
 				c11_tipo	LIKE ordt011.c11_tipo,
 				c11_cant_ped	LIKE ordt011.c11_cant_ped,
@@ -140,6 +141,7 @@ DEFINE val_pagar	LIKE rept019.r19_tot_neto
 DEFINE tot_ret		LIKE rept019.r19_tot_neto
 DEFINE vm_nota_credito  LIKE cxct021.z21_tipo_doc
 DEFINE vm_fact_nue	LIKE ordt013.c13_factura
+DEFINE fecha_tope		LIKE ctbt000.b00_fecha_cm
 ---------------------------------------------------------------
 
 
@@ -222,6 +224,12 @@ LET vm_row_current = 0
 INITIALIZE rm_c10.*, rm_c11.* TO NULL
 
 CALL muestra_contadores()
+
+CALL fl_lee_compania_contabilidad(vg_codcia) RETURNING rm_b00.*
+LET fecha_tope = rm_b00.b00_fecha_cm + 1 UNITS MONTH
+IF fecha_tope < rm_b00.b00_periodo_ini THEN
+	LET fecha_tope = rm_b00.b00_periodo_ini
+END IF
 
 MENU 'OPCIONES'
 	BEFORE MENU
@@ -1430,18 +1438,19 @@ END FUNCTION
 
 
 FUNCTION control_lee_cabecera()
-DEFINE resp 		CHAR(6)
-DEFINE done, lim	SMALLINT
 DEFINE r_p20		RECORD LIKE cxpt020.*
 DEFINE r_s23_s		RECORD LIKE srit023.*
 DEFINE r_s23_n		RECORD LIKE srit023.*
 DEFINE otros		LIKE ordt010.c10_otros
 DEFINE flete		LIKE ordt010.c10_flete
+DEFINE resp 		CHAR(6)
+DEFINE done, lim	SMALLINT
+DEFINE mensaje		VARCHAR(200)
 
 LET int_flag = 0
 CALL calcula_totales(vm_num_detalles,1)
 DISPLAY BY NAME rm_c10.c10_usuario
-INPUT BY NAME rm_c10.c10_codprov, rm_c13.c13_num_guia, rm_c13.c13_fec_aut,
+INPUT BY NAME rm_c10.c10_codprov, rm_c13.c13_num_guia, rm_c13.c13_fec_emi_fac,
 	rm_c13.c13_num_aut, rm_c13.c13_fecha_cadu,
 	rm_c10.c10_tipo_orden, rm_c10.c10_porc_impto, rm_c10.c10_sustento_sri,
 	rm_c10.c10_referencia, rm_c10.c10_cod_depto, valor_fact,
@@ -1449,7 +1458,7 @@ INPUT BY NAME rm_c10.c10_codprov, rm_c13.c13_num_guia, rm_c13.c13_fec_aut,
 	WITHOUT DEFAULTS
 	ON KEY (INTERRUPT)
 		IF NOT FIELD_TOUCHED(rm_c10.c10_codprov, rm_c13.c13_num_guia,
-				rm_c13.c13_fec_aut, rm_c13.c13_num_aut,
+				rm_c13.c13_fec_emi_fac, rm_c13.c13_num_aut,
 				rm_c13.c13_fecha_cadu, rm_c10.c10_tipo_orden,
 				rm_c10.c10_porc_impto, rm_c10.c10_codprov,
 				rm_c10.c10_sustento_sri,
@@ -1717,19 +1726,15 @@ INPUT BY NAME rm_c10.c10_codprov, rm_c13.c13_num_guia, rm_c13.c13_fec_aut,
 			NEXT FIELD c13_fecha_cadu
 		END IF
 		IF rm_c13.c13_fecha_cadu IS NOT NULL THEN
-			--CALL retorna_fin_mes(rm_c13.c13_fecha_cadu)
-				--RETURNING rm_c13.c13_fecha_cadu
 			DISPLAY BY NAME rm_c13.c13_fecha_cadu
 		END IF
-	AFTER FIELD c13_fec_aut
-		IF rm_c13.c13_fec_aut IS NOT NULL THEN
-			IF LENGTH(rm_c13.c13_fec_aut) <> 14 THEN
-				CALL fl_mostrar_mensaje('Numero de Fecha de Autorizacion no tiene completo el total de digitos.', 'exclamation')
-				NEXT FIELD c13_fec_aut
-			END IF
-			IF NOT fl_valida_numeros(rm_c13.c13_fec_aut) THEN
-				NEXT FIELD c13_fec_aut
-			END IF
+	AFTER FIELD c13_fec_emi_fac
+		IF rm_c13.c13_fec_emi_fac < fecha_tope THEN
+			LET mensaje = 'La fecha de emisión de factura no puede ser menor',
+							' que la fecha: ', fecha_tope USING "dd-mm-yyyy",
+							' del modulo de Contabilidad.'
+			CALL fl_mostrar_mensaje(mensaje, 'exclamation')
+			NEXT FIELD c13_fec_emi_fac
 		END IF
 	AFTER FIELD c13_num_aut
 		IF rm_c13.c13_num_aut IS NULL THEN
@@ -2174,7 +2179,7 @@ DISPLAY BY NAME rm_c10.c10_numero_oc, rm_c10.c10_estado,  rm_c10.c10_moneda,
 		rm_c10.c10_tot_compra, vm_subtotal,
 		rm_c10.c10_tot_impto,  rm_c10.c10_flete, rm_c10.c10_otros,
 		valor_fact, rm_c10.c10_usuario,
-		rm_c13.c13_num_guia, rm_c13.c13_fec_aut, rm_c13.c13_num_aut,
+		rm_c13.c13_num_guia, rm_c13.c13_fec_emi_fac, rm_c13.c13_num_aut,
 		rm_c13.c13_fecha_cadu
 
 IF vg_gui = 0 THEN
@@ -3680,7 +3685,7 @@ ELSE
 END IF
 LET r_b13.b13_num_concil  = NULL
 LET r_b13.b13_filtro      = NULL
-LET r_b13.b13_fec_proceso = vg_fecha
+LET r_b13.b13_fec_proceso = rm_c13.c13_fec_emi_fac
 LET r_b13.b13_codcli      = NULL
 LET r_b13.b13_codprov     = r_c10.c10_codprov
 LET r_b13.b13_pedido      = NULL
@@ -3800,9 +3805,6 @@ IF r_b03.b03_compania IS NULL THEN
 	CALL fl_mostrar_mensaje('No existe tipo de comprobante para Diario de Compras: DO.','exclamation')
 	EXIT PROGRAM
 END IF
-{
-LET glosa = rm_p01.p01_nomprov[1,19], ' ', rm_c13.c13_factura
-}
 LET glosa = 'OC # ', rm_c13.c13_numero_oc USING "<<<<<<<&", ' RECEPCION # ',
 		rm_c13.c13_num_recep USING "<<<<<<<&"
 INITIALIZE r_b12.* TO NULL
@@ -3812,12 +3814,11 @@ LET r_b12.b12_tipo_comp   = r_b03.b03_tipo_comp
 LET r_b12.b12_num_comp    = fl_numera_comprobante_contable(vg_codcia,
                             	r_b12.b12_tipo_comp, YEAR(vg_fecha), MONTH(vg_fecha))
 LET r_b12.b12_estado      = 'A' 
---LET r_b12.b12_glosa       = 'COMPROBANTE: ' || glosa CLIPPED 
 LET r_b12.b12_glosa       = rm_b12.b12_glosa CLIPPED
 LET r_b12.b12_origen      = 'A' 
 LET r_b12.b12_moneda      = r_c10.c10_moneda 
 LET r_b12.b12_paridad     = r_c10.c10_paridad 
-LET r_b12.b12_fec_proceso = vg_fecha
+LET r_b12.b12_fec_proceso = rm_c13.c13_fec_emi_fac
 LET r_b12.b12_modulo      = r_b03.b03_modulo
 LET r_b12.b12_usuario     = vg_usuario 
 LET r_b12.b12_fecing      = fl_current()

@@ -5,7 +5,7 @@ SCREEN
 Fecha Ingreso:[c1                  ]	    Fecha de Elim:[a2                 ]
      No Orden:[c2   ][c33                  ]Forma de Pago:[c18           ]
       Factura:[c4               ]  Fec. Caduc.:[c040      ]
-Fec. Aut. SRI:[c102          ]   Serie Comprobante:[c101  ]
+Fec. Emi. Fac:[c102      ]       Serie Comprobante:[c101  ]
  No. Aut. SRI:[c100                                               ]
               [c] Calcular el impuesto sobre el Subtotal
  [b    |b0   |b1      |b2                                 |b3   |b4        ]
@@ -76,8 +76,9 @@ c18 = ordt010.c10_tipo_pago, REVERSE, NOENTRY,
 
 c100 = ordt013.c13_num_aut,    UPSHIFT, REVERSE;
 c101 = ordt013.c13_serie_comp, UPSHIFT, REVERSE;
-c102 = ordt013.c13_fec_aut,    UPSHIFT, AUTONEXT,
-	COMMENTS = "Digite este campo para AUTORIZACIONES con # DE AUT. MAYOR A DIEZ DIGITOS.";
+c102 = ordt013.c13_fec_emi_fac, UPSHIFT, AUTONEXT, REVERSE,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha de la factura en formato dd-mm-aaaa';
 
 c    = FORMONLY.vm_calc_iva, WIDGET='CHECK', CONFIG='S D acknowledge', 
 	DEFAULT='D', COMMENT='Indique si desea calcular el impuesto sobre el subtotal o sobre el detalle.';

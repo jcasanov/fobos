@@ -29,7 +29,8 @@ DEFINE vm_max_rows	SMALLINT
 
 DEFINE vm_max_detalle	SMALLINT	-- NUMERO MAXIMO ELEMENTOS DEL DETALLE
 
-DEFINE vm_num_aut	LIKE ordt013.c13_num_aut
+DEFINE c13_fec_emi_fac	LIKE ordt013.c13_fec_emi_fac
+DEFINE vm_num_aut		LIKE ordt013.c13_num_aut
 DEFINE vm_serie_comp	LIKE ordt013.c13_serie_comp
 DEFINE vm_fecha_cadu	LIKE ordt013.c13_fecha_cadu
 --
@@ -104,9 +105,11 @@ DEFINE tot_sub			LIKE ordt010.c10_tot_compra
 -- Registro de la tabla de configuración del módulo de repuestos
 DEFINE rm_r00			RECORD LIKE rept000.*
 DEFINE rm_c00			RECORD LIKE ordt000.*
+DEFINE rm_b00			RECORD LIKE ctbt000.*
 DEFINE vm_stock_pend		SMALLINT
 DEFINE rm_vend			RECORD LIKE rept001.*
 DEFINE vm_cod_tran_ne	LIKE rept019.r19_cod_tran
+DEFINE fecha_tope		LIKE ctbt000.b00_fecha_cm
 
 
 
@@ -115,7 +118,8 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/repp214.err')
+LET vg_proceso = arg_val(0)
+CALL startlog('../logs/' || vg_proceso CLIPPED || '.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 AND num_args() <> 6 AND num_args() <> 7 THEN
@@ -127,7 +131,6 @@ LET vg_base    = arg_val(1)
 LET vg_modulo  = arg_val(2)
 LET vg_codcia  = arg_val(3)
 LET vg_codloc  = arg_val(4)
-LET vg_proceso = 'repp214'
 
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	-- Asigna un valor por default a vg_codloc
@@ -204,6 +207,12 @@ IF rm_c00.c00_compania IS NULL THEN
 	--CALL fgl_winmessage(vg_producto,'No existe registro de configuración en el módulo de ordenes de compra para esta compañía.','exclamation')
 	CALL fl_mostrar_mensaje('No existe registro de configuración en el módulo de ordenes de compra para esta compañía.','exclamation')
 	EXIT PROGRAM
+END IF
+
+CALL fl_lee_compania_contabilidad(vg_codcia) RETURNING rm_b00.*
+LET fecha_tope = rm_b00.b00_fecha_cm + 1 UNITS MONTH
+IF fecha_tope < rm_b00.b00_periodo_ini THEN
+	LET fecha_tope = rm_b00.b00_periodo_ini
 END IF
 
 -- OjO
@@ -782,34 +791,34 @@ END FUNCTION
 
 
 FUNCTION lee_datos()
-DEFINE resp 		CHAR(6)
 DEFINE r_r01		RECORD LIKE rept001.*
 DEFINE r_r02		RECORD LIKE rept002.*
 DEFINE r_c01		RECORD LIKE ordt001.*
 DEFINE r_c10		RECORD LIKE ordt010.*
 DEFINE r_p20		RECORD LIKE cxpt020.*
-DEFINE contador		SMALLINT
 DEFINE oc_ant		LIKE ordt010.c10_numero_oc
+DEFINE resp 		CHAR(6)
+DEFINE contador		SMALLINT
+DEFINE mensaje		VARCHAR(200)
 
-INITIALIZE vm_num_aut, vm_serie_comp, vm_fecha_cadu TO NULL
+INITIALIZE vm_num_aut, vm_serie_comp, vm_fecha_cadu, c13_fec_emi_fac TO NULL
 LET rm_r19.r19_fact_venta = 0.01
 LET int_flag = 0
 INPUT BY NAME rm_r19.r19_cod_tran, rm_r19.r19_oc_interna, rm_r19.r19_oc_externa,
-		rm_r19.r19_fact_venta, vm_serie_comp, vm_fecha_cadu, vm_num_aut,
-		rm_r19.r19_vendedor, rm_r19.r19_bodega_ori
+		rm_r19.r19_fact_venta, c13_fec_emi_fac, vm_serie_comp, vm_fecha_cadu,
+		vm_num_aut, rm_r19.r19_vendedor, rm_r19.r19_bodega_ori
 	WITHOUT DEFAULTS
 	ON KEY(INTERRUPT)
 		IF NOT FIELD_TOUCHED(rm_r19.r19_cod_tran, rm_r19.r19_oc_interna,
 						 rm_r19.r19_oc_externa, rm_r19.r19_fact_venta,
-						 vm_serie_comp, vm_fecha_cadu, vm_num_aut,
-						 rm_r19.r19_vendedor, rm_r19.r19_bodega_ori)
+						 c13_fec_emi_fac, vm_serie_comp, vm_fecha_cadu,
+						vm_num_aut, rm_r19.r19_vendedor, rm_r19.r19_bodega_ori)
 		THEN
 			RETURN
 		END IF
 
 		LET INT_FLAG = 0
-		CALL fl_mensaje_abandonar_proceso()
-                	RETURNING resp
+		CALL fl_mensaje_abandonar_proceso() RETURNING resp
 		IF resp = 'Yes' THEN
 			LET INT_FLAG = 1
 			RETURN
@@ -1018,6 +1027,13 @@ INPUT BY NAME rm_r19.r19_cod_tran, rm_r19.r19_oc_interna, rm_r19.r19_oc_externa,
 		IF vm_fecha_cadu < vg_fecha THEN
 			CALL fl_mostrar_mensaje('La fecha de caducidad no puede ser menor a la fecha de hoy.', 'exclamation')
 			NEXT FIELD vm_fecha_cadu
+		END IF
+		IF c13_fec_emi_fac < fecha_tope THEN
+			LET mensaje = 'La fecha de emisión de factura no puede ser menor',
+							' que la fecha: ', fecha_tope USING "dd-mm-yyyy",
+							' del modulo de Contabilidad.'
+			CALL fl_mostrar_mensaje(mensaje, 'exclamation')
+			NEXT FIELD c13_fec_emi_fac
 		END IF
 END INPUT
 LET rm_c10.* = r_c10.*
@@ -1254,9 +1270,9 @@ END FUNCTION
 
 
 FUNCTION lee_muestra_registro(row)
-DEFINE row 		INTEGER
-
-DEFINE iva		LIKE rept019.r19_tot_dscto
+DEFINE row			INTEGER
+DEFINE iva			LIKE rept019.r19_tot_dscto
+DEFINE r_c13		RECORD LIKE ordt013.*
 
 IF vm_num_rows <= 0 THEN
 	RETURN
@@ -1287,14 +1303,20 @@ DISPLAY BY NAME rm_r19.r19_cod_tran,
 		rm_c10.c10_dif_cuadre,
 		rm_r19.r19_tot_neto
 
-SELECT c13_num_aut, c13_serie_comp, c13_fecha_cadu
-	INTO vm_num_aut, vm_serie_comp, vm_fecha_cadu
+INITIALIZE r_c13.* TO NULL
+SELECT * INTO r_c13.*
 	FROM ordt013
-	WHERE c13_compania  = vg_codcia AND c13_localidad = vg_codloc
+	WHERE c13_compania  = vg_codcia
+	  AND c13_localidad = vg_codloc
 	  AND c13_numero_oc = rm_r19.r19_oc_interna
 	  AND c13_factura   = rm_r19.r19_oc_externa
 
-DISPLAY BY NAME vm_num_aut, vm_serie_comp, vm_fecha_cadu
+LET c13_fec_emi_fac = r_c13.c13_fec_emi_fac
+LET vm_num_aut      = r_c13.c13_num_aut
+LET vm_serie_comp   = r_c13.c13_serie_comp
+LET vm_fecha_cadu   = r_c13.c13_fecha_cadu
+
+DISPLAY BY NAME vm_num_aut, vm_serie_comp, vm_fecha_cadu, c13_fec_emi_fac
 		
 CALL muestra_etiquetas()
 CALL muestra_contadores()
@@ -2043,12 +2065,13 @@ LET r_c13.c13_tot_recep   = rm_r19.r19_tot_neto
 LET r_c13.c13_usuario     = vg_usuario
 LET r_c13.c13_fecing      = rm_r19.r19_fecing
 
-LET r_c13.c13_num_aut     = vm_num_aut
-LET r_c13.c13_serie_comp  = vm_serie_comp
-LET r_c13.c13_fecha_cadu  = vm_fecha_cadu
-LET r_c13.c13_flete       = rm_c10.c10_flete
-LET r_c13.c13_otros       = rm_c10.c10_otros
-LET r_c13.c13_dif_cuadre  = rm_c10.c10_dif_cuadre
+LET r_c13.c13_fec_emi_fac = c13_fec_emi_fac
+LET r_c13.c13_num_aut      = vm_num_aut
+LET r_c13.c13_serie_comp   = vm_serie_comp
+LET r_c13.c13_fecha_cadu   = vm_fecha_cadu
+LET r_c13.c13_flete        = rm_c10.c10_flete
+LET r_c13.c13_otros        = rm_c10.c10_otros
+LET r_c13.c13_dif_cuadre   = rm_c10.c10_dif_cuadre
 
 SELECT MAX(c13_num_recep) INTO r_c13.c13_num_recep
 	FROM ordt013
@@ -2147,7 +2170,8 @@ LET c10_interes = r_c10.c10_interes
 LET fecha_pago  = vg_fecha + 30
 LET dias_pagos  = 30
 
-INPUT BY NAME pagos, c10_interes, fecha_pago, dias_pagos WITHOUT DEFAULTS
+INPUT BY NAME pagos, c10_interes, fecha_pago, dias_pagos
+	WITHOUT DEFAULTS
 	ON KEY (INTERRUPT)
 		LET INT_FLAG = 0
 		CALL fl_mensaje_abandonar_proceso() RETURNING resp
@@ -2346,7 +2370,7 @@ LET r_p20.p20_localidad   = vg_codloc
 LET r_p20.p20_codprov     = r_c10.c10_codprov
 LET r_p20.p20_usuario     = vg_usuario
 LET r_p20.p20_fecing      = fl_current()
-LET r_p20.p20_fecha_emi	  = vg_fecha
+LET r_p20.p20_fecha_emi	  = c13_fec_emi_fac
 LET r_p20.p20_tipo_doc    = 'FA'
 LET r_p20.p20_num_doc     = rm_r19.r19_oc_externa
 LET r_p20.p20_referencia  = 'COMPRA LOCAL # ' || rm_r19.r19_num_tran
@@ -3563,7 +3587,8 @@ IF vg_gui = 0 THEN
 	CALL muestra_impresion(impresion)
 END IF
 LET int_flag = 0
-INPUT BY NAME impresion WITHOUT DEFAULTS
+INPUT BY NAME impresion
+	WITHOUT DEFAULTS
 	ON KEY(INTERRUPT)
 		LET int_flag = 1
 		EXIT INPUT

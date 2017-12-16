@@ -7,7 +7,7 @@ SCREEN
 
        Moneda: [c1] [c003              ]  Fecha Ingreso: [c004               ]
     Proveedor: [c010 ] [c011                                        ]
-      Factura: [c005             ]        Fec. Aut. SRI: [c024          ]
+      Factura: [c005             ]   Fecha Emi. Factura: [c024      ]
  No. Aut. SRI: [c006                                                ]
                                         Fecha Caducidad: [c040      ]
  Tipo Factura: [c007 ] [c008           ]       Impuesto: [c009  ]%
@@ -40,8 +40,9 @@ c003 = FORMONLY.nom_moneda TYPE VARCHAR, NOENTRY;
 c004 = ordt010.c10_fecing, REVERSE, UPSHIFT, NOENTRY;
 c005 = ordt013.c13_num_guia, REVERSE, UPSHIFT, 
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
-c024 = ordt013.c13_fec_aut, UPSHIFT, AUTONEXT,
-	COMMENTS = "Digite este campo para AUTORIZACIONES con # DE AUT. MAYOR A DIEZ DIGITOS.";
+c024 = ordt013.c13_fec_emi_fac, UPSHIFT, AUTONEXT, REVERSE,
+	FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha de la factura en formato dd-mm-aaaa';
 c006 = ordt013.c13_num_aut, UPSHIFT, REVERSE;
 c007 = ordt010.c10_tipo_orden, REVERSE, INCLUDE = (0 TO 9999),
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';

@@ -1,21 +1,22 @@
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
 DEFINE vm_programa      VARCHAR(12)
-DEFINE rm_crep		RECORD LIKE rept019.*
-DEFINE rm_auxv		RECORD LIKE ctbt040.*
-DEFINE rm_auxc		RECORD LIKE ctbt041.*
-DEFINE rm_auxg		RECORD LIKE ctbt042.*
-DEFINE rm_ctb		RECORD LIKE ctbt000.*
-DEFINE rm_c10		RECORD LIKE ordt010.*
-DEFINE rm_r28		RECORD LIKE rept028.*
-DEFINE vm_modulo	LIKE gent050.g50_modulo
-DEFINE vm_tipo_comp	LIKE ctbt012.b12_tipo_comp
-DEFINE vm_indice	SMALLINT
-DEFINE vm_fecha_ini	DATE
-DEFINE vm_fecha_fin	DATE
-DEFINE vm_cod_tran	LIKE rept019.r19_cod_tran
-DEFINE vm_num_tran	LIKE rept019.r19_num_tran
-DEFINE vm_fact_anu	SMALLINT
+DEFINE rm_crep			RECORD LIKE rept019.*
+DEFINE rm_auxv			RECORD LIKE ctbt040.*
+DEFINE rm_auxc			RECORD LIKE ctbt041.*
+DEFINE rm_auxg			RECORD LIKE ctbt042.*
+DEFINE rm_ctb			RECORD LIKE ctbt000.*
+DEFINE rm_c10			RECORD LIKE ordt010.*
+DEFINE rm_r28			RECORD LIKE rept028.*
+DEFINE vm_modulo		LIKE gent050.g50_modulo
+DEFINE vm_tipo_comp		LIKE ctbt012.b12_tipo_comp
+DEFINE vm_indice		SMALLINT
+DEFINE vm_fecha_ini		DATE
+DEFINE vm_fecha_fin		DATE
+DEFINE vm_fec_emi_fact	LIKE ordt013.c13_fec_emi_fac
+DEFINE vm_cod_tran		LIKE rept019.r19_cod_tran
+DEFINE vm_num_tran		LIKE rept019.r19_num_tran
+DEFINE vm_fact_anu		SMALLINT
 
 
 
@@ -938,7 +939,6 @@ DECLARE q_clok CURSOR FOR
 		      c13_localidad = rm_crep.r19_localidad  AND 
 		      c13_numero_oc = rm_crep.r19_oc_interna AND
 		      c13_fecha_recep = rm_crep.r19_fecing 
-		      --DATE(c13_fecha_recep) = DATE(rm_crep.r19_fecing) 
 		ORDER BY c13_num_recep DESC
 OPEN q_clok 
 FETCH q_clok INTO r_c13.*
@@ -946,6 +946,7 @@ IF status = NOTFOUND THEN
 	CALL fl_mostrar_mensaje('No hay recepción en ordt013: ' || rm_crep.r19_cod_tran || ' ' || rm_crep.r19_num_tran, 'stop')
 	EXIT PROGRAM
 END IF
+LET vm_fec_emi_fact = r_c13.c13_fec_emi_fac
 LET glosa = r_p01.p01_nomprov[1,19], ' ', r_c13.c13_factura
 IF rm_crep.r19_tot_neto <> r_c13.c13_tot_recep THEN
 	CALL fl_mostrar_mensaje('No cuadra total neto en rept019 y ordt013: ' || rm_crep.r19_cod_tran || ' ' || rm_crep.r19_num_tran, 'stop')
@@ -1226,6 +1227,9 @@ FOREACH q_mast INTO tipo_comp, subtipo, indice
     	LET r_ccomp.b12_subtipo 	= subtipo
 	IF vm_cod_tran IS NOT NULL THEN
     		LET r_ccomp.b12_fec_proceso = rm_crep.r19_fecing
+			IF vm_cod_tran = 'CL' THEN
+    			LET r_ccomp.b12_fec_proceso = vm_fec_emi_fact
+			END IF
     		LET r_ccomp.b12_glosa	= 'COMPROBANTE: '
 			IF vm_cod_tran <> 'FA' AND vm_cod_tran <> 'CL' THEN
 				LET r_ccomp.b12_glosa = r_ccomp.b12_glosa CLIPPED, ' ',
@@ -1290,7 +1294,7 @@ FOREACH q_mast INTO tipo_comp, subtipo, indice
     		LET r_dcomp.b13_glosa 		= glosa
     		LET r_dcomp.b13_valor_base 	= valor
     		LET r_dcomp.b13_valor_aux 	= 0
-    		LET r_dcomp.b13_fec_proceso 	= r_ccomp.b12_fec_proceso
+    		LET r_dcomp.b13_fec_proceso	= r_ccomp.b12_fec_proceso
     		LET r_dcomp.b13_num_concil 	= 0
 		CASE rm_crep.r19_cod_tran
 			WHEN 'FA'
