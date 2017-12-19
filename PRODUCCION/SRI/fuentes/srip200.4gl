@@ -1743,7 +1743,6 @@ DEFINE codestablec	LIKE gent037.g37_pref_sucurs
 DEFINE query		CHAR(800)
 DEFINE registro		CHAR(4000)
 DEFINE total_venta	DECIMAL(12,2)
-DEFINE total_iva	DECIMAL(12,2)
 
 DECLARE q_s21 CURSOR FOR 
 	SELECT * FROM srit021
@@ -1799,10 +1798,8 @@ DISPLAY '<totalVentas>', total_venta, '</totalVentas>'
 DISPLAY '<codigoOperativo>IVA</codigoOperativo>'
 DISPLAY '<compras>'
 DISPLAY '</compras>'
-LET total_iva = 0
 LET registro  = '<ventas>'
 FOREACH q_s21 INTO r_s21.*
-	LET total_iva   = total_iva + r_s21.s21_monto_iva
 	LET registro    = registro CLIPPED,
 		'<detalleVentas>',
 		'<tpIdCliente>', r_s21.s21_ident_cli, '</tpIdCliente>',
@@ -1825,12 +1822,12 @@ FOREACH q_s21 INTO r_s21.*
 		'<montoIva>', r_s21.s21_monto_iva, '</montoIva> ',
 		--'<baseImpIce>', r_s21.s21_base_imp_ice, '</baseImpIce> ',
 		--'<porcentajeIce>', r_s21.s21_cod_porc_ice, '</porcentajeIce> ',
-		'<compensaciones>',
-		'<compensacion>',
-		'<tipoCompe>02</tipoCompe>',
-		'<monto>0.00</monto>',
-		'</compensacion>',
-		'</compensaciones>',
+		--'<compensaciones>',
+		--'<compensacion>',
+		--'<tipoCompe>02</tipoCompe>',
+		--'<monto>0.00</monto>',
+		--'</compensacion>',
+		--'</compensaciones>',
 		'<montoIce>', r_s21.s21_monto_ice, '</montoIce> ',
 		--'<montoIvaBienes>', r_s21.s21_monto_iva_bie, '</montoIvaBienes> ',
 		--'<porRetBienes>', r_s21.s21_cod_ret_ivabie, '</porRetBienes> ',
@@ -1876,7 +1873,7 @@ DISPLAY '<ventasEstablecimiento>'
 DISPLAY '<ventaEst>'
 DISPLAY '<codEstab>', codestablec, '</codEstab>'
 DISPLAY '<ventasEstab>', total_venta, '</ventasEstab>'
-DISPLAY '<ivaComp>', total_iva, '</ivaComp>'
+DISPLAY '<ivaComp>0.00</ivaComp>'
 DISPLAY '</ventaEst>'
 DISPLAY '</ventasEstablecimiento>'
 DISPLAY '<exportaciones>'
