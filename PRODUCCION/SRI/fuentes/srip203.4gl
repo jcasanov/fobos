@@ -718,9 +718,8 @@ END FUNCTION
 FUNCTION at_air(proveedor, nomprov, tipo, numero)
 DEFINE proveedor	LIKE cxpt020.p20_codprov
 DEFINE nomprov		LIKE cxpt001.p01_nomprov
-DEFINE tipo		LIKE cxpt020.p20_tipo_doc
+DEFINE tipo			LIKE cxpt020.p20_tipo_doc
 DEFINE numero		LIKE cxpt020.p20_num_doc
---DEFINE divid		LIKE cxpt020.p20_dividendo
 DEFINE tempo		CHAR(160)
 DEFINE salida		CHAR(1500)
 DEFINE query		CHAR(2500)
@@ -869,16 +868,17 @@ END FUNCTION
 FUNCTION datos_ret(proveedor, nomprov, tipo, numero, tip_ret)
 DEFINE proveedor	LIKE cxpt020.p20_codprov
 DEFINE nomprov		LIKE cxpt001.p01_nomprov
-DEFINE tipo		LIKE cxpt020.p20_tipo_doc
+DEFINE tipo			LIKE cxpt020.p20_tipo_doc
 DEFINE numero		LIKE cxpt020.p20_num_doc
---DEFINE divid		LIKE cxpt020.p20_dividendo
 DEFINE tip_ret		CHAR(1)
-DEFINE posi		CHAR(1)
+DEFINE posi			CHAR(1)
 DEFINE salida		CHAR(800)
 
 LET salida = NULL
---IF query_datos_ret(proveedor, tipo, numero, divid, tip_ret, 1, 1) IS NULL THEN
 IF query_datos_ret(proveedor, tipo, numero, tip_ret, 1, 1) IS NULL THEN
+	RETURN salida
+END IF
+IF query_datos_ret(proveedor, tipo, numero, tip_ret, 4, 1) IS NULL THEN
 	RETURN salida
 END IF
 CASE tip_ret
@@ -886,31 +886,26 @@ CASE tip_ret
 	WHEN 'I' LET posi = '2'
 END CASE
 LET salida = '<estabRetencion', posi, '>',
-			--query_datos_ret(proveedor, tipo, numero, divid,
 			query_datos_ret(proveedor, tipo, numero,
 					tip_ret, 1, 0) CLIPPED
 			USING "&&&",
 		'</estabRetencion', posi, '>',
 		'<ptoEmiRetencion', posi, '>',
-			--query_datos_ret(proveedor, tipo, numero, divid,
 			query_datos_ret(proveedor, tipo, numero,
 					tip_ret, 2, 0) CLIPPED
 			USING "&&&",
 		'</ptoEmiRetencion', posi, '>',
 		'<secRetencion', posi, '>',
-			--query_datos_ret(proveedor, tipo, numero, divid,
 			query_datos_ret(proveedor, tipo, numero,
                                         tip_ret, 5, 0) CLIPPED
 			USING "&&&&&&&",
 		'</secRetencion', posi, '>',
 		'<autRetencion', posi, '>',
-			--query_datos_ret(proveedor, tipo, numero, divid,
 			query_datos_ret(proveedor, tipo, numero,
                                         tip_ret, 4, 0) CLIPPED
 			USING "&&&&&&&&&&",
 		'</autRetencion', posi, '>',
 		'<fechaEmiRet', posi, '>',
-			--query_datos_ret(proveedor, tipo, numero, divid,
 			query_datos_ret(proveedor, tipo, numero,
 					tip_ret, 3, 0) CLIPPED,
 		'</fechaEmiRet', posi, '>'
