@@ -1740,6 +1740,7 @@ DEFINE r_g01		RECORD LIKE gent001.*
 DEFINE r_g02		RECORD LIKE gent002.*
 DEFINE r_s21		RECORD LIKE srit021.*
 DEFINE codestablec	LIKE gent037.g37_pref_sucurs
+DEFINE query		CHAR(800)
 DEFINE registro		CHAR(4000)
 DEFINE total_venta	DECIMAL(12,2)
 DEFINE total_iva	DECIMAL(12,2)
@@ -1765,14 +1766,21 @@ DISPLAY '<razonSocial>', r_g01.g01_razonsocial CLIPPED, '</razonSocial>'
 --DISPLAY '<rucContador>', r_g01.g01_num_docid_con CLIPPED, '</rucContador>'
 DISPLAY '<Anio>', YEAR(rm_par.fecha_fin), '</Anio>'
 DISPLAY '<Mes>', MONTH(rm_par.fecha_fin) USING "&&", '</Mes>'
-LET total_venta = 0
-SELECT NVL(SUM(s21_bas_imp_gr_iva), 0)
-	INTO total_venta
-	FROM srit021
-	WHERE s21_compania  = vg_codcia
-	  AND s21_localidad = vg_codloc
-	  AND s21_anio      = YEAR(rm_par.fecha_fin)
-	  AND s21_mes       = MONTH(rm_par.fecha_fin)
+LET query = 'SELECT NVL(SUM((s21_bas_imp_gr_iva + s21_base_imp_tar_0) * ',
+				'CASE WHEN s21_tipo_comp = "04" ',
+					'THEN -1 ',
+					'ELSE 1 ',
+				'END), 0) AS total_venta ',
+		'FROM srit021 ',
+		' WHERE s21_compania  = ', vg_codcia,
+		'   AND s21_localidad = ', vg_codloc,
+		'   AND s21_anio      = ', YEAR(rm_par.fecha_fin),
+		'   AND s21_mes       = ', MONTH(rm_par.fecha_fin),
+		' INTO TEMP tmp_vta '
+PREPARE exec_tmp_vta FROM query
+EXECUTE exec_tmp_vta
+SELECT * INTO total_venta FROM tmp_vta
+DROP TABLE tmp_vta
 LET codestablec = NULL
 SELECT g37_pref_sucurs
 		INTO codestablec
@@ -1791,10 +1799,9 @@ DISPLAY '<totalVentas>', total_venta, '</totalVentas>'
 DISPLAY '<codigoOperativo>IVA</codigoOperativo>'
 DISPLAY '<compras>'
 DISPLAY '</compras>'
-LET total_iva   = 0
-LET registro = '<ventas>'
+LET total_iva = 0
+LET registro  = '<ventas>'
 FOREACH q_s21 INTO r_s21.*
-	LET total_venta = total_venta + r_s21.s21_bas_imp_gr_iva
 	LET total_iva   = total_iva + r_s21.s21_monto_iva
 	LET registro    = registro CLIPPED,
 		'<detalleVentas>',
