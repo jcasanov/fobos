@@ -229,19 +229,20 @@ PAGE HEADER
 	LET des_dob		= 48		# Desactivar Doble Ancho
 	LET act_neg		= 71		# Activar la negrita
 	LET des_neg		= 72		# Desactivar la negrita
-	SKIP 10 LINES
+	SKIP 9 LINES
 	print ASCII escape;
 	print ASCII act_comp;
 	PRINT COLUMN 008, rm_p01.p01_codprov USING "###&&&",
-	      COLUMN 014, nomprov2 CLIPPED
-	PRINT COLUMN 008, rm_p01.p01_num_doc,
+	      COLUMN 014, nomprov2 CLIPPED,
 	      COLUMN 081, ASCII escape, ASCII act_neg,
-	      COLUMN 083, DATE(rm_p27.p27_fecing) USING "dd-mm-yyyy",
+	      COLUMN 090, DATE(rm_p27.p27_fecing) USING "dd-mm-yyyy",
 		ASCII escape, ASCII des_neg,
 		ASCII escape, ASCII act_comp
+	SKIP 1 LINES
+	PRINT COLUMN 008, rm_p01.p01_num_doc,
+		  COLUMN 095, "FACTURA"
 	PRINT COLUMN 008, rm_p01.p01_direccion1[1,40],
-		  COLUMN 092, "FACTURA"
-	PRINT COLUMN 092, r_iva_fuente.p28_num_doc CLIPPED
+	      COLUMN 095, r_iva_fuente.p28_num_doc CLIPPED
 	SKIP 3 LINES
 
 ON EVERY ROW
@@ -252,15 +253,16 @@ ON EVERY ROW
 								r_iva_fuente.p28_porcentaje)
 		RETURNING r_c02.*
 	PRINT COLUMN 001, YEAR(rm_p27.p27_fecing)		USING "####",
-	      COLUMN 010, r_iva_fuente.p28_valor_base	USING "###,###,##&.##",
-	      COLUMN 038, r_c02.c02_nombre CLIPPED,
-		  COLUMN 062, codigo_var CLIPPED,
-	      COLUMN 074, r_iva_fuente.p28_porcentaje	USING "##&.##",
+	      COLUMN 015, r_iva_fuente.p28_valor_base	USING "###,###,##&.##",
+	      COLUMN 045, r_c02.c02_nombre CLIPPED,
+		  COLUMN 067, codigo_var CLIPPED,
+	      COLUMN 080, r_iva_fuente.p28_porcentaje	USING "##&.##",
 	      COLUMN 096, r_iva_fuente.p28_valor_ret	USING "###,###,##&.##"
 	LET vm_total_val = vm_total_val + r_iva_fuente.p28_valor_ret
 
 ON LAST ROW
 	--#SKIP vm_lin_max LINES
+	SKIP 1 LINES
 	NEED 1 LINES
 	PRINT COLUMN 096, vm_total_val					USING "###,###,##&.##"
 	print ASCII escape;
