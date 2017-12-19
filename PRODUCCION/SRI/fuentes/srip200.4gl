@@ -1807,7 +1807,10 @@ FOREACH q_s21 INTO r_s21.*
 		'<numeroComprobantes>', r_s21.s21_num_comp_emi, '</numeroComprobantes> ',
 		--'<fechaEmision>', r_s21.s21_fecha_emi_vta USING "dd/mm/yyyy",'</fechaEmision> ',
 		'<baseNoGraIva>', r_s21.s21_base_imp_tar_0, '</baseNoGraIva> ',
-		'<baseImponible>', r_s21.s21_bas_imp_gr_iva, '</baseImponible> ',
+{** ESTE CAMPO VA POR AHORA EN CERO, PERO SE DEBE CONSIDERAR TAIFA 0%
+-------------------------------------------------------------------------------
+		'<baseImponible>0.00</baseImponible> ',
+-----------------------------------------------------------------------------**}
 		--'<ivaPresuntivo>', r_s21.s21_iva_presuntivo, '</ivaPresuntivo> ',
 		--'<baseImpGrav>', r_s21.s21_bas_imp_gr_iva, '</baseImpGrav> ',
 		'<baseImpGrav>', r_s21.s21_bas_imp_gr_iva, '</baseImpGrav> ',
@@ -1826,8 +1829,8 @@ FOREACH q_s21 INTO r_s21.*
 		--'<porRetBienes>', r_s21.s21_cod_ret_ivabie, '</porRetBienes> ',
 		--'<valorRetBienes>', r_s21.s21_mon_ret_ivabie, '</valorRetBienes> ',
 		'<valorRetIva>', r_s21.s21_mon_ret_ivabie, '</valorRetIva>',
-		'<valorRetRenta>', r_s21.s21_monto_ret_rent, '</valorRetRenta>',
-		{--
+		'<valorRetRenta>', r_s21.s21_monto_ret_rent, '</valorRetRenta>'
+	{--
 		'<montoIvaServicios>', r_s21.s21_monto_iva_ser, '</montoIvaServicios> ',
 		'<porRetServicios>', r_s21.s21_cod_ret_ivaser, '</porRetServicios> ',
 		'<valorRetServicios>', r_s21.s21_mon_ret_ivaser, '</valorRetServicios> ',
@@ -1848,9 +1851,12 @@ FOREACH q_s21 INTO r_s21.*
 	--    DEL SRI Y RELACIONARLA CON LA TABLA cajt001.
 	--    POR AHORA ESTARA EN "DURO".
 	--
-	'<formasDePago>',
-	'<formaPago>01</formaPago>',
-	'</formasDePago>'
+	IF r_s21.s21_tipo_comp <> 4 THEN
+		LET registro = registro CLIPPED,
+						'<formasDePago>',
+						'<formaPago>01</formaPago>',
+						'</formasDePago>'
+	END IF
 	LET registro = registro CLIPPED,
 	'</detalleVentas>'
 	DISPLAY registro CLIPPED
