@@ -1807,10 +1807,10 @@ FOREACH q_s21 INTO r_s21.*
 		'<numeroComprobantes>', r_s21.s21_num_comp_emi, '</numeroComprobantes> ',
 		--'<fechaEmision>', r_s21.s21_fecha_emi_vta USING "dd/mm/yyyy",'</fechaEmision> ',
 		'<baseNoGraIva>', r_s21.s21_base_imp_tar_0, '</baseNoGraIva> ',
-{** ESTE CAMPO VA POR AHORA EN CERO, PERO SE DEBE CONSIDERAR TAIFA 0%
--------------------------------------------------------------------------------
+		{*
+         * ESTE CAMPO VA POR AHORA EN CERO, PERO SE DEBE CONSIDERAR TAIFA 0%
+         *}
 		'<baseImponible>0.00</baseImponible> ',
------------------------------------------------------------------------------**}
 		--'<ivaPresuntivo>', r_s21.s21_iva_presuntivo, '</ivaPresuntivo> ',
 		--'<baseImpGrav>', r_s21.s21_bas_imp_gr_iva, '</baseImpGrav> ',
 		'<baseImpGrav>', r_s21.s21_bas_imp_gr_iva, '</baseImpGrav> ',
