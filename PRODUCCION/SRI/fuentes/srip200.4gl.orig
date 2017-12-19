@@ -160,6 +160,8 @@ DEFINE porc_imp		LIKE gent000.g00_porc_impto
 DEFINE valor_siva_aux	DECIMAL(14,2)
 DEFINE ctos		INTEGER
 define valor		integer
+--define val_ret		decimal(14,2)
+--define c		char(20)
 
 INITIALIZE r_s21.* TO NULL
 DECLARE q_estado CURSOR FOR
@@ -189,7 +191,28 @@ IF vg_codcia = 1 AND (vg_codloc = 1 OR vg_codloc = 3) THEN
 	INSERT INTO tmp_anu SELECT * FROM t3
 	DROP TABLE t3
 END IF
-
+{--
+CALL obtener_devoluciones(1)
+SELECT * FROM t1 INTO TEMP tmp_df
+DROP TABLE t1
+IF vg_codcia = 1 AND (vg_codloc = 1 OR vg_codloc = 3) THEN
+	CALL obtener_devoluciones(2)
+	INSERT INTO tmp_df SELECT * FROM t1
+	DROP TABLE t1
+END IF
+SELECT tipo_df, num_df
+	FROM tmp_fact, tmp_df
+	WHERE tipo_df  = cod_tran
+	  AND num_df   = num_tran
+	  AND valor_df = (valor_vta_civa + valor_vta_siva)
+	INTO TEMP tmp_elim
+DROP TABLE tmp_df
+DELETE FROM tmp_fact
+	WHERE EXISTS (SELECT * FROM tmp_elim
+			WHERE tipo_df = cod_tran
+			  AND num_df  = num_tran)
+DROP TABLE tmp_elim
+--}
 DECLARE q_verif CURSOR FOR
 	SELECT codcli, cod_tran, num_tran, cedruc_v FROM tmp_fact
 		WHERE LENGTH(cedruc_v) = 13
@@ -223,6 +246,8 @@ LET query = 'SELECT tipo_doc_id, cedruc, ',
 		' INTO TEMP tmp_anexo'
 PREPARE cons_tmp_anexo FROM query 
 EXECUTE cons_tmp_anexo
+--select count(*) into valor from tmp_anexo where cedruc = '9999999999999'
+--display 'en into temp ', valor
 SELECT cedruc doccli, cod_tran c_tran, num_tran n_tran, COUNT(*) cuantos
 	FROM tmp_fact
 	GROUP BY 1, 2, 3
@@ -335,6 +360,19 @@ LET query = 'SELECT t23_cod_cliente codcli, t23_num_factura num_tran, ',
 		' INTO TEMP tmp_tal '
 PREPARE cons_tmp_tal FROM query 
 EXECUTE cons_tmp_tal
+{--
+LET query = 'SELECT t28_factura FROM talt028 ',
+		' WHERE t28_compania        = ', vg_codcia,
+		'   AND t28_localidad       = ', vg_codloc,
+		'   AND DATE(t28_fec_anula) BETWEEN "', rm_par.fecha_ini,
+					     '" AND "', rm_par.fecha_fin, '"',
+		' INTO TEMP tmp_tal_df '
+PREPARE cons_tmp_tal_df FROM query 
+EXECUTE cons_tmp_tal_df
+DELETE FROM tmp_tal
+	WHERE EXISTS (SELECT * FROM tmp_tal_df WHERE t28_factura = num_tran)
+DROP TABLE tmp_tal_df
+--}
 LET query = 'SELECT num_tran num_anu, z21_tipo_doc ',
 		' FROM tmp_tal, OUTER cxct021 ',
 		' WHERE t23_estado    = "D" ',
@@ -351,8 +389,24 @@ DELETE FROM t2 WHERE z21_tipo_doc IS NOT NULL
 LET query = 'INSERT INTO tmp_anu ',
 		'SELECT CASE WHEN r38_cod_tran = "FA" THEN 1 ',
 			'WHEN r38_cod_tran = "NV" THEN 2 END tipo_comp, ',
+		{--
+		' SELECT (SELECT s04_codigo FROM srit019, srit004 ',
+		' WHERE s19_compania  = ', vg_codcia,
+		'   AND s19_sec_tran  = ',
+		' (SELECT s03_codigo FROM srit003 ',
+		' WHERE s03_compania  = ', vg_codcia,
+		'   AND s03_cod_ident = ',
+			' (SELECT s12_codigo FROM srit012 ',
+			' WHERE s12_compania = s03_compania ',
+			'   AND s12_codigo   = tipo_doc_id)) ',
+		'   AND s19_cod_ident = tipo_doc_id ',
+		'   AND s19_tipo_doc  = "FA" ',
+		'   AND s04_compania  = s19_compania ',
+		'   AND s04_codigo    = s19_tipo_comp) tipo_comp, ',
+		--}
 		' b.g37_pref_sucurs, b.g37_pref_pto_vta, r38_num_sri[9, 16]',
 		' num_sri_ini, r38_num_sri[9, 16] num_sri_fin, g02_numaut_sri',--,',
+		--' fecha_anu fecha ',
 		' FROM tmp_tal, rept038, gent037 b, gent002 ',
 		' WHERE t23_estado      = "D" ',
 		'   AND num_tran        = (SELECT num_anu FROM t2 ',
@@ -421,8 +475,12 @@ FOREACH q_tal INTO r_tal.*
 		VALUES (r_tal.z01_tipo_doc_id, r_tal.z01_num_doc_id, "FA",
 			rm_par.fecha_fin, porc_imp, r_tal.val_ci, r_tal.val_si, 
 			0.00, 0.00, '000', 0, 0, 0)
+--select count(*) into valor from tmp_anexo where cedruc = '9999999999999'
+--display 'en foreach ', valor
 END FOREACH
 CALL obtener_retenciones(1, 1)
+--select sum(valor_reten) into val_ret from t1 where cedruc = '9999999999999'
+--display 'en t1 ', val_ret
 SELECT * FROM t1 WHERE tipo_doc_id IS NOT NULL INTO TEMP tmp_ret
 SELECT b13_codcli, z01_tipo_doc_id tipo_doc_id, z01_num_doc_id cedruc,
 	cod_concep, (valor_reten / (1.00 / 100)) base_imponible,
@@ -432,10 +490,21 @@ SELECT b13_codcli, z01_tipo_doc_id tipo_doc_id, z01_num_doc_id cedruc,
 	  AND b13_codcli  = z01_codcli
 	INTO TEMP tmp_ret_fal
 UPDATE tmp_ret_fal SET tipo_doc_id = 'F' WHERE cedruc = '9999999999999'
+{--
+select count(*) into resul from t1 where tipo_doc_id is null
+display resul
+unload to "reten_sri_fal.txt"
+	select b13_codcli, tipo_doc_id, cedruc, valor_reten from tmp_ret_fal
+--}
 unload to "reten_sri.txt" select b13_codcli, cedruc, valor_reten from tmp_ret
+--select count(*) into resul from tmp_ret where b13_codcli in (3882,99,8851,350)
+--display resul
+--select sum(valor_reten) into val_ret from tmp_ret where cedruc = '9999999999999'
+--display 'en tmp_ret ', val_ret
+--select sum(valor_reten) into val_ret from tmp_ret_fal where cedruc = '9999999999999'
+--display 'en tmp_ret_fal ', val_ret
 DROP TABLE t1
 DROP TABLE tmp_tal
-
 LET query = 'SELECT CASE WHEN tipo_doc_id = "R" AND ',
 			' b13_codcli <> ', rm_r00.r00_codcli_tal,
 			' THEN "R" ',
@@ -453,8 +522,14 @@ LET query = 'SELECT CASE WHEN tipo_doc_id = "R" AND ',
 		' INTO TEMP tmp_ret_fal_tot '
 PREPARE exec_ret_fal_tot FROM query
 EXECUTE exec_ret_fal_tot
+--select sum(valor_reten) into val_ret from tmp_ret_fal_tot
+--	where cedruc_ret = '9999999999999'
+--display 'en tmp_ret_fal_tot ', val_ret
+--unload to "reten_sri_fal.txt"
+--	select tipo_doc_id, cedruc_ret, valor_reten from tmp_ret_fal_tot
+--select count(*) into resul from tmp_ret_fal_tot
+--display resul
 DROP TABLE tmp_ret_fal
-
 LET query = 'SELECT CASE WHEN tipo_doc_id = "R" AND ',
 			' b13_codcli <> ', rm_r00.r00_codcli_tal,
 			' THEN cedruc ',
@@ -475,8 +550,10 @@ UPDATE tmp_ret_tot SET val_porc = 1.00 WHERE valor_reten <> 0
 UPDATE tmp_ret_tot
 	SET base_imponible  = (valor_reten / (val_porc / 100))
 	WHERE valor_reten  <> 0 
+--select sum(valor_reten) into val_ret from tmp_ret_tot
+--	where cedruc_ret = '9999999999999'
+--display 'en tmp_ret_tot ', val_ret
 DROP TABLE tmp_ret
-
 UPDATE tmp_tot
 	SET cuantos = (SELECT cuantos_tal FROM tmp_tot_tal
 			WHERE cedruc_tal = doccli)
@@ -484,7 +561,6 @@ UPDATE tmp_tot
 			WHERE cedruc_tal = doccli)
 	  AND c_tran = "FA"
 DROP TABLE tmp_tot_tal
-
 LET query = 'SELECT CASE WHEN LENGTH(z01_num_doc_id) = 13 ',
 			'THEN "R" ',
 			'ELSE "F" ',
@@ -505,12 +581,15 @@ LET query = 'SELECT CASE WHEN LENGTH(z01_num_doc_id) = 13 ',
 		' INTO TEMP tmp_fav '
 PREPARE cons_tmp_fav FROM query 
 EXECUTE cons_tmp_fav
-
-{*
- * XXX
- * La variable base_suc es un rezago de la época del sistema en
- * Acero Comercial. Debe eliminarse para limpiar el código
- *}
+IF vg_codcia = 1 AND (vg_codloc = 1 OR vg_codloc = 3) THEN
+	--CALL obtener_nc_sucursal()
+END IF
+CASE vg_codloc
+	WHEN 1
+		LET base_suc = 'acero_gc:'
+	WHEN 3
+		LET base_suc = 'acero_qs:'
+END CASE
 LET base_suc = NULL
 CALL obtener_fact_dev_nc(base_suc, 'tmp_fav')
 UPDATE tmp_fav
@@ -557,7 +636,8 @@ INSERT INTO tmp_anexo
 		NVL(SUM(z21_val_impto), 0), NVL(SUM(flete_nc), 0),'000', 0, 0, 0
 		FROM tmp_nc
 		GROUP BY 1, 2, 3, 4, 5, 10, 11, 12, 13
-
+--select count(*) into valor from tmp_anexo where cedruc = '9999999999999'
+--display 'primer insert ', valor
 INSERT INTO tmp_tot
 	SELECT z01_num_doc_id, z21_tipo_doc, z21_num_doc, COUNT(*)
 		FROM tmp_nc
@@ -599,6 +679,9 @@ LET query = 'SELECT CASE WHEN LENGTH(z01_num_doc_id) = 13 ',
 		' INTO TEMP tmp_nd '
 PREPARE cons_tmp_nd FROM query 
 EXECUTE cons_tmp_nd
+IF vg_codcia = 1 AND (vg_codloc = 1 OR vg_codloc = 3) THEN
+	--CALL obtener_nd_sucursal()
+END IF
 UPDATE tmp_nd
 	SET z01_num_doc_id = "9999999999999"
 	WHERE LENGTH(z01_num_doc_id) = 10
@@ -609,6 +692,8 @@ INSERT INTO tmp_anexo
 		NVL(SUM(z20_val_impto), 0), NVL(SUM(flete_nd), 0),'000', 0, 0, 0
 		FROM tmp_nd
 		GROUP BY 1, 2, 3, 4, 5, 10, 11, 12, 13
+--select count(*) into valor from tmp_anexo where cedruc = '9999999999999'
+--display 'segundo insert ', valor
 INSERT INTO tmp_tot
 	SELECT z01_num_doc_id, z20_tipo_doc, z20_num_doc, COUNT(*)
 		FROM tmp_nd
@@ -707,12 +792,33 @@ LET query = 'SELECT UNIQUE (SELECT s18_sec_tran ',
 				' ELSE 0.00 ',
 			' END valor_iva, ',
 		' 0.00 base_ice, 0.00 cod_por_ice, 0.00 monto_ice, ',
+		--' valor_iva monto_iva_bie, ',
 		' 0.00 monto_iva_bie, ',
 		' (SELECT s09_codigo FROM srit009 ',
 			' WHERE s09_compania  = ', vg_codcia,
 			'   AND s09_codigo    = 0 ',
 			'   AND s09_tipo_porc = "B") cod_por_bie, ',
 		' 0.00 monto_ret_iva_bie, ',
+		{--
+		' CASE WHEN (SELECT s04_codigo FROM srit019, srit004 ',
+			' WHERE s19_compania  = ', vg_codcia,
+			'   AND s19_sec_tran  = ',
+			' (SELECT s03_codigo FROM srit003 ',
+				' WHERE s03_compania  = ', vg_codcia,
+				'   AND s03_cod_ident = ',
+				' (SELECT s12_codigo FROM srit012 ',
+				' WHERE s12_compania = s03_compania ',
+				'   AND s12_codigo   = tipo_doc_id)) ',
+			'   AND s19_cod_ident = tipo_doc_id ',
+			'   AND s19_tipo_doc  = cod_tran ',
+			'   AND s04_compania  = s19_compania ',
+			'   AND s04_codigo    = s19_tipo_comp) = 18 THEN ',
+			' NVL((SELECT val_ser_tal FROM tmp_tot_ser ',
+				' WHERE cedruc_tal   = cedruc ',
+				'   AND tipo_doc_tal = tipo_doc_id), 0) ',
+				' ELSE 0.00 ',
+			' END monto_iva_ser, ',
+		--}
 		' 0.00 monto_iva_ser, "0" cod_ret_ser, ',
 		' 0.00 monto_ret_iva_ser, ',
 		' "N" ret_pre, concepto, base_rent, porc_rent, monto_ret ',
@@ -720,11 +826,17 @@ LET query = 'SELECT UNIQUE (SELECT s18_sec_tran ',
 		' INTO TEMP tmp_s21 '
 PREPARE exec_anexo FROM query
 EXECUTE exec_anexo
+--select sum(monto_ret) into val_ret from tmp_s21 where cedruc = '9999999999999'
+--display 'en tmp_s21 ', val_ret
+{
+select count(*) into valor from tmp_s21 where cedruc = '9999999999999'
+and tipo_id = '04'
+display 'en tmp_z21 ', valor
+}
 DROP TABLE tmp_fact
 DROP TABLE tmp_anexo
 DROP TABLE tmp_tot_ser
 DROP TABLE tmp_tot_f
-
 CASE vg_codloc
 	WHEN 1    LET codloc = 2
 	WHEN 3    LET codloc = 4
@@ -782,6 +894,9 @@ LET query = 'INSERT INTO srit021 ',
 		'  s21_monto_ret_rent, s21_estado, s21_usuario, s21_fecing) ',
 		' SELECT ', vg_codcia, ', ', vg_codloc, ', ',
 			YEAR(rm_par.fecha_fin), ', ', MONTH(rm_par.fecha_fin),
+			--', tmp_s21.*, "G", "', UPSHIFT(vg_usuario) CLIPPED,
+			--'", CURRENT ',
+			--', tmp_s21.*,'
 			', tipo_id, cedruc, LPAD(tipo_comp, 2, 0), fecha_cont, num_comp, ',
 			' fecha_vta, base_imp, iva_pre, SUM(valor_vta_civa), ',
 			' cod_por_iva, SUM(valor_iva), base_ice, cod_por_ice, ',
@@ -828,7 +943,16 @@ SELECT tmp_cli_fal.*, (SELECT s18_sec_tran FROM srit018
 	  AND s21_num_doc_id = cedruc_ret
 	  AND s21_tipo_comp  = tipo_comp
 	INTO TEMP tmp_faltantes
-
+{
+DELETE FROM tmp_faltantes
+	WHERE cedruc IN (SELECT s21_num_doc_id FROM srit021
+		 WHERE s21_compania   = vg_codcia
+		   AND s21_localidad  = vg_codloc
+		   AND s21_anio       = YEAR(rm_par.fecha_fin)
+		   AND s21_mes        = MONTH(rm_par.fecha_fin)
+		   AND s21_num_doc_id = cedruc
+		   AND s21_tipo_comp  = '18')
+}
 LET query = 'INSERT INTO srit021 ',
 		' (s21_compania, s21_localidad, s21_anio, s21_mes,',
 		'  s21_ident_cli, s21_num_doc_id, s21_tipo_comp,',
@@ -842,6 +966,14 @@ LET query = 'INSERT INTO srit021 ',
 		'  s21_monto_ret_rent, s21_estado, s21_usuario, s21_fecing) ',
 		' SELECT UNIQUE ', vg_codcia, ', ', vg_codloc, ', ',
 			YEAR(rm_par.fecha_fin), ', ', MONTH(rm_par.fecha_fin),
+			{--
+			', (SELECT s03_codigo FROM srit003 ',
+			' WHERE s03_compania  = ', vg_codcia,
+			'   AND s03_cod_ident = ',
+			' (SELECT s12_codigo FROM srit012 ',
+			' WHERE s12_compania = s03_compania ',
+			'   AND s12_codigo   = tipo_doc_id)) tipo_id,',
+			--}
 		', tipo_id_fin, ',
 		' cedruc_ret, LPAD(tipo_comp, 2, 0), fecha_cont, num_comp, fecha_vta,',
 		' base_imp, iva_pre, valor_vta_civa, cod_por_iva, valor_iva,',
@@ -850,6 +982,7 @@ LET query = 'INSERT INTO srit021 ',
 		' monto_ret_iva_ser, ret_pre, cod_concep, base_imponible,',
 		' val_porc, valor_reten, "G", "', UPSHIFT(vg_usuario) CLIPPED,
 		'", CURRENT ',
+		--' FROM tmp_cli_fal, tmp_ret_fal_tot ',
 		' FROM tmp_faltantes ',
 		' WHERE s21_cia IS NULL '
 PREPARE cons_s21_2 FROM query
@@ -981,6 +1114,8 @@ LET query = 'SELECT r19_codcli codcli, ',
 		' WHERE r19_compania     = ', vg_codcia,
 		'   AND r19_localidad    = ', codloc,
 		'   AND r19_cod_tran     IN ("FA", "NV") ',
+		--'   AND (r19_tipo_dev    IN ("TR", "DF") ',
+		--'    OR r19_tipo_dev     IS NULL) ',
 		'   AND DATE(r19_fecing) BETWEEN "', rm_par.fecha_ini,
 					  '" AND "', rm_par.fecha_fin, '"',
 		'   AND z01_codcli       = r19_codcli ',
@@ -1001,9 +1136,26 @@ EXECUTE cons_t2
 DELETE FROM t2 WHERE z21_tipo_doc IS NOT NULL
 LET query = 'SELECT CASE WHEN LENGTH(cedruc) = 13 AND ',
 		' fp_digito_veri(cedruc) = 1 THEN 1 ELSE 2',
+		{--
+		'(SELECT s04_codigo FROM ', base_suc CLIPPED, 'srit019, ',
+			base_suc CLIPPED, 'srit004 ',
+		' WHERE s19_compania  = ', vg_codcia,
+		'   AND s19_sec_tran  = ',
+		' (SELECT s03_codigo FROM ', base_suc CLIPPED, 'srit003 ',
+		' WHERE s03_compania  = ', vg_codcia,
+		'   AND s03_cod_ident = ',
+			' (SELECT s12_codigo FROM ',base_suc CLIPPED,'srit012 ',
+			' WHERE s12_compania = s03_compania ',
+			'   AND s12_codigo   = tipo_doc_id)) ',
+		'   AND s19_cod_ident = tipo_doc_id ',
+		'   AND s19_tipo_doc  = cod_tran ',
+		'   AND s04_compania  = s19_compania ',
+		'   AND s04_codigo    = s19_tipo_comp) tipo_comp, ',
+		--}
 		' END tipo_comp, ',
 		' b.g37_pref_sucurs, b.g37_pref_pto_vta, r38_num_sri[9, 16]',
 		' num_sri_ini, r38_num_sri[9, 16] num_sri_fin, g02_numaut_sri',--,',
+		--' fecha_vta fecha ',
 		' FROM t1, ', base_suc CLIPPED, 'rept038, ', base_suc CLIPPED,
 			'gent037 b, ', base_suc CLIPPED, 'gent002 ',
 		' WHERE tipo_dev        = "AF" ',
@@ -1081,6 +1233,83 @@ LET query = 'SELECT CASE WHEN LENGTH(r19_cedruc) = 13 ',
 		' INTO TEMP t1 '
 PREPARE cons_tdf FROM query 
 EXECUTE cons_tdf
+
+END FUNCTION
+
+
+
+FUNCTION obtener_nc_sucursal()
+DEFINE query		VARCHAR(3000)
+DEFINE base_suc		VARCHAR(10)
+DEFINE codloc		LIKE rept019.r19_localidad
+--define valor		integer
+
+CASE vg_codloc
+	WHEN 1
+		LET base_suc = 'acero_gc:'
+		LET codloc   = 2
+	WHEN 3
+		LET base_suc = 'acero_qs:'
+		LET codloc   = 4
+END CASE
+LET query = 'SELECT CASE WHEN LENGTH(z01_num_doc_id) = 13 ',
+			'THEN "R" ',
+			'ELSE "F" ',
+			'END z01_tipo_doc_id, z01_num_doc_id, z21_codcli, ',
+		' z21_tipo_doc, z21_num_doc, z21_valor, ',
+		' CASE WHEN z21_val_impto > 0 ',
+			' THEN ', rg_gen.g00_porc_impto,
+			' ELSE 0.00 ',
+		' END porc, ',
+		' z21_val_impto, z21_cod_tran, z21_num_tran, z21_areaneg, ',
+		'"', rm_par.fecha_fin, '" z21_fecha_emi, z21_localidad ',
+		' FROM ', base_suc CLIPPED, 'cxct021, ',
+			base_suc CLIPPED, 'cxct001 ',
+		' WHERE z21_compania   = ', vg_codcia,
+		'   AND z21_localidad  = ', codloc,
+		'   AND z21_tipo_doc   = "NC" ',
+		'   AND z21_fecha_emi  BETWEEN "', rm_par.fecha_ini,
+					'" AND "', rm_par.fecha_fin, '"',
+		'   AND z21_saldo      = 0 ',
+		'   AND z21_origen     = "A" ',
+		'   AND z21_valor      = (SELECT NVL(SUM(z23_valor_cap + ',
+						'z23_valor_int), 0) * (-1) ',
+					' FROM ', base_suc CLIPPED, 'cxct023, ',
+						base_suc CLIPPED, 'cxct022 ',
+					' WHERE z23_compania  = z21_compania ',
+					'   AND z23_localidad = z21_localidad ',
+					'   AND z23_codcli    = z21_codcli ',
+					'   AND z23_tipo_favor= z21_tipo_doc ',
+					'   AND z23_doc_favor = z21_num_doc ',
+					'   AND z22_compania  = z23_compania ',
+					'   AND z22_localidad = z23_localidad ',
+					'   AND z22_codcli    = z23_codcli ',
+					'   AND z22_tipo_trn  = z23_tipo_trn ',
+					'   AND z22_num_trn   = z23_num_trn ',
+					' AND DATE(z22_fecing)= z21_fecha_emi)',
+		'   AND z01_codcli     = z21_codcli ',
+		' INTO TEMP tmp_nc_suc '
+PREPARE cons_tmp_nc_suc FROM query 
+EXECUTE cons_tmp_nc_suc
+CALL obtener_fact_dev_nc(base_suc, 'tmp_nc_suc')
+UPDATE tmp_nc_suc
+	SET z01_tipo_doc_id = (SELECT b.z01_tipo_doc_id FROM tmp_ncdf b
+				WHERE b.num_doc = z21_num_doc),
+	    z01_num_doc_id  = (SELECT b.z01_num_doc_id FROM tmp_ncdf b
+				WHERE b.num_doc = z21_num_doc)
+	WHERE EXISTS (SELECT a.z21_tipo_doc, a.num_doc, a.z21_cod_tran,
+				a.z21_num_tran
+			FROM tmp_ncdf a
+			WHERE a.z21_tipo_doc = z21_tipo_doc
+			  AND a.num_doc      = z21_num_doc
+			  AND a.z21_cod_tran = z21_cod_tran
+			  AND a.z21_num_tran = z21_num_tran)
+	  AND z21_areaneg = 1
+DROP TABLE tmp_ncdf
+--select count(*) into valor from t2
+--display valor
+INSERT INTO tmp_fav SELECT * FROM tmp_nc_suc
+DROP TABLE tmp_nc_suc
 
 END FUNCTION
 
@@ -1226,6 +1455,7 @@ CASE flag_join
 		LET tabla_fact  = 'tmp_tal'
 END CASE
 LET query = 'SELECT UNIQUE codcli, tipo_doc_id, cedruc ',
+		--' FROM ', tabla_fact CLIPPED,
 		' FROM tmp_fact ',
 		' UNION ',
 			' SELECT UNIQUE codcli, tipo_doc_id, cedruc ',
@@ -1247,6 +1477,7 @@ LET query = 'SELECT UNIQUE b13_codcli, tipo_doc_id, cedruc, "307" cod_concep,',
 		'   AND b13_codcli      = codcli ',
 		'   AND b13_cuenta      IN ("11300201002", b42_retencion, "11300201003") ',
 		'   AND b42_compania    = b12_compania ',
+		--'   AND b42_localidad   = 1 ',
 		'   AND b42_localidad   = ', vg_codloc,
 		' GROUP BY 1, 2, 3, 4, 5, 6 ',
 		' INTO TEMP t1 '
@@ -1255,6 +1486,98 @@ EXECUTE exec_tmp_ret
 DROP TABLE t2
 
 END FUNCTION
+
+
+
+{-- OJO FUNNCION QUE OBTIENE LA RETENCION DE LA FORMA PAGO 
+FUNCTION obtener_retenciones2(flag, flag_join)
+DEFINE flag, flag_join	SMALLINT
+DEFINE query		VARCHAR(4000)
+DEFINE base_suc		VARCHAR(10)
+DEFINE tabla_fact	VARCHAR(15)
+DEFINE localidad	VARCHAR(15)
+DEFINE areaneg		LIKE cxct024.z24_areaneg
+DEFINE tipo_fuente	LIKE cajt010.j10_tipo_fuente
+
+CASE flag
+	WHEN 1
+		LET base_suc  = NULL
+		LET localidad = ' local '
+	WHEN 2
+		CASE vg_codloc
+			WHEN 1
+				LET base_suc  = 'acero_gc:'
+				LET localidad = ' 2 '
+			WHEN 3
+				LET base_suc  = 'acero_qs:'
+				LET localidad = ' 4 '
+		END CASE
+END CASE
+CASE flag_join
+	WHEN 1
+		LET tabla_fact  = 'tmp_fact'
+		LET tipo_fuente = 'PR'
+		LET areaneg     = 1
+	WHEN 2
+		LET tabla_fact  = 'tmp_tal'
+		LET tipo_fuente = 'OT'
+		LET areaneg     = 2
+END CASE
+LET query = 'SELECT UNIQUE j10_codcli, tipo_doc_id, cedruc, "307" cod_concep,',
+		' 1111111.11 base_imponible, 1.11 val_porc,',
+		' NVL(SUM(j11_valor), 0) valor_reten',
+		' FROM ', tabla_fact CLIPPED, ', ', base_suc CLIPPED,
+			'cajt010, ', base_suc CLIPPED, 'cajt011 ' ,
+		' WHERE cont_cred        = "C" ',
+		'   AND j10_compania     = ', vg_codcia,
+		'   AND j10_localidad    = ', localidad,
+		'   AND j10_tipo_fuente  = "', tipo_fuente, '"',
+		'   AND j10_codcli       = codcli ',
+		'   AND j10_tipo_destino IN ("FA", "NV") ',
+		'   AND j10_num_destino  = num_tran ',
+		'   AND j10_estado       = "P" ',
+		'   AND j11_compania     = j10_compania ',
+		'   AND j11_localidad    = j10_localidad ',
+		'   AND j11_tipo_fuente  = j10_tipo_fuente ',
+		'   AND j11_num_fuente   = j10_num_fuente ',
+		'   AND j11_codigo_pago  = "RT" ',
+		' GROUP BY 1, 2, 3, 4, 5, 6 '
+IF flag = 1 THEN
+	LET query = query CLIPPED,
+		' UNION ',
+		' SELECT UNIQUE j10_codcli, tipo_doc_id, cedruc, "307"',
+			' cod_concep, 1111111.11 base_imponible,1.11 val_porc,',
+			' NVL(SUM(j11_valor), 0) valor_reten ',
+			' FROM ', tabla_fact CLIPPED, ', cxct024, cxct025,',
+				' cajt010, cajt011 ' ,
+			' WHERE cont_cred        = "R" ',
+			'   AND z24_compania     = ', vg_codcia,
+			'   AND z24_localidad    = ', localidad,
+			'   AND z24_codcli       = codcli ',
+			'   AND z24_areaneg      = ', areaneg,
+			'   AND z25_compania     = z24_compania ',
+			'   AND z25_localidad    = z24_localidad ',
+			'   AND z25_numero_sol   = z24_numero_sol ',
+			'   AND z25_tipo_doc     IN ("FA", "NV") ',
+			'   AND z25_num_doc      = num_tran ',
+			'   AND j10_compania     = z25_compania ',
+			'   AND j10_localidad    = z25_localidad ',
+			'   AND j10_tipo_fuente  = "SC" ',
+			'   AND j10_num_fuente   = z25_numero_sol ',
+			'   AND j10_estado       = "P" ',
+			'   AND j11_compania     = j10_compania ',
+			'   AND j11_localidad    = j10_localidad ',
+			'   AND j11_tipo_fuente  = j10_tipo_fuente ',
+			'   AND j11_num_fuente   = j10_num_fuente ',
+			'   AND j11_codigo_pago  = "RT" ',
+			' GROUP BY 1, 2, 3, 4, 5, 6 '
+END IF
+LET query = query CLIPPED, ' INTO TEMP t1 '
+PREPARE exec_tmp_ret FROM query
+EXECUTE exec_tmp_ret
+
+END FUNCTION
+--}
 
 
 
@@ -1434,7 +1757,13 @@ DISPLAY '<iva xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
 DISPLAY '<TipoIDInformante>R</TipoIDInformante>'
 DISPLAY '<IdInformante>', r_g02.g02_numruc CLIPPED, '</IdInformante>'
 DISPLAY '<razonSocial>', r_g01.g01_razonsocial CLIPPED, '</razonSocial>'
-DISPLAY '<Anio>', YEAR(rm_par.fecha_fin) USING "&&&&", '</Anio>'
+--DISPLAY '<direccionMatriz>', r_g02.g02_direccion CLIPPED, '</direccionMatriz>'
+--DISPLAY '<telefono>', r_g02.g02_telefono1 CLIPPED, '</telefono>'
+--DISPLAY '<email>', r_g02.g02_correo CLIPPED, '</email>'
+--DISPLAY '<tpIdRepre>', r_g01.g01_tip_docid_rep, '</tpIdRepre>'
+--DISPLAY '<idRepre>', r_g01.g01_cedrepl CLIPPED, '</idRepre>'
+--DISPLAY '<rucContador>', r_g01.g01_num_docid_con CLIPPED, '</rucContador>'
+DISPLAY '<Anio>', YEAR(rm_par.fecha_fin), '</Anio>'
 DISPLAY '<Mes>', MONTH(rm_par.fecha_fin) USING "&&", '</Mes>'
 LET query = 'SELECT NVL(SUM((s21_bas_imp_gr_iva + s21_base_imp_tar_0) * ',
 				'CASE WHEN s21_tipo_comp = "04" ',
@@ -1465,7 +1794,7 @@ SELECT g37_pref_sucurs
 				  AND a.g37_localidad = b.g37_localidad
 				  AND a.g37_tipo_doc  = b.g37_tipo_doc)
 DISPLAY '<numEstabRuc>', codestablec, '</numEstabRuc>'
-DISPLAY '<totalVentas>', total_venta USING "<<<<<<<<<<<&.&&", '</totalVentas>'
+DISPLAY '<totalVentas>', total_venta, '</totalVentas>'
 DISPLAY '<codigoOperativo>IVA</codigoOperativo>'
 DISPLAY '<compras>'
 DISPLAY '</compras>'
@@ -1477,44 +1806,73 @@ FOREACH q_s21 INTO r_s21.*
 		'<idCliente>', r_s21.s21_num_doc_id, '</idCliente>',
 		'<parteRelVtas>SI</parteRelVtas>',
 		'<tipoComprobante>', r_s21.s21_tipo_comp USING "&&", '</tipoComprobante>',
+		--'<fechaRegistro>', r_s21.s21_fecha_reg_cont USING "dd/mm/yyyy",'</fechaRegistro>',
 		'<tipoEmision>F</tipoEmision>',
-		'<numeroComprobantes>', r_s21.s21_num_comp_emi USING "<<<<<<", '</numeroComprobantes> ',
-		'<baseNoGraIva>', r_s21.s21_base_imp_tar_0 USING "<<<<<<<<<<<&.&&", '</baseNoGraIva> ',
+		'<numeroComprobantes>', r_s21.s21_num_comp_emi, '</numeroComprobantes> ',
+		--'<fechaEmision>', r_s21.s21_fecha_emi_vta USING "dd/mm/yyyy",'</fechaEmision> ',
+		'<baseNoGraIva>', r_s21.s21_base_imp_tar_0, '</baseNoGraIva> ',
 		{*
-         * XXX 
-		 * Este campo va por ahora en cero, pero se debe considerar tarifa 0%
+         * ESTE CAMPO VA POR AHORA EN CERO, PERO SE DEBE CONSIDERAR TAIFA 0%
          *}
 		'<baseImponible>0.00</baseImponible> ',
-		'<baseImpGrav>', r_s21.s21_bas_imp_gr_iva USING "<<<<<<<<<<<&.&&", '</baseImpGrav> ',
-		'<montoIva>', r_s21.s21_monto_iva USING "<<<<<<<<<<<&.&&", '</montoIva> ',
-		{*
-		 * XXX
-         * Etiquetas como <compensaciones> corresponden a funcionalidades que
-		 * el sistema aún no tiene así que no aplican
-		 *}
-		'<montoIce>', r_s21.s21_monto_ice USING "<<<<<<<<<<<&.&&", '</montoIce> ',
-		'<valorRetIva>', r_s21.s21_mon_ret_ivabie USING "<<<<<<<<<<<&.&&", '</valorRetIva>',
-		'<valorRetRenta>', r_s21.s21_monto_ret_rent USING "<<<<<<<<<<<&.&&", '</valorRetRenta>'
-		{*
-		 * XXX 
-		 * Se debe crear la tabla srit026 con la tabla 13 de la ficha tecnica
-		 * del SRI y relacionarla con la tabla cajt001.
-		 *}
-		IF r_s21.s21_tipo_comp <> 4 THEN
-			LET registro = registro CLIPPED,
-							'<formasDePago>',
-							'<formaPago>01</formaPago>',
-							'</formasDePago>'
-		END IF
-		LET registro = registro CLIPPED, '</detalleVentas>'
-		DISPLAY registro CLIPPED
-		LET registro = ' '
+		--'<ivaPresuntivo>', r_s21.s21_iva_presuntivo, '</ivaPresuntivo> ',
+		--'<baseImpGrav>', r_s21.s21_bas_imp_gr_iva, '</baseImpGrav> ',
+		'<baseImpGrav>', r_s21.s21_bas_imp_gr_iva, '</baseImpGrav> ',
+		--'<porcentajeIva>', r_s21.s21_cod_porc_iva, '</porcentajeIva> ',
+		'<montoIva>', r_s21.s21_monto_iva, '</montoIva> ',
+		--'<baseImpIce>', r_s21.s21_base_imp_ice, '</baseImpIce> ',
+		--'<porcentajeIce>', r_s21.s21_cod_porc_ice, '</porcentajeIce> ',
+		--'<compensaciones>',
+		--'<compensacion>',
+		--'<tipoCompe>02</tipoCompe>',
+		--'<monto>0.00</monto>',
+		--'</compensacion>',
+		--'</compensaciones>',
+		'<montoIce>', r_s21.s21_monto_ice, '</montoIce> ',
+		--'<montoIvaBienes>', r_s21.s21_monto_iva_bie, '</montoIvaBienes> ',
+		--'<porRetBienes>', r_s21.s21_cod_ret_ivabie, '</porRetBienes> ',
+		--'<valorRetBienes>', r_s21.s21_mon_ret_ivabie, '</valorRetBienes> ',
+		'<valorRetIva>', r_s21.s21_mon_ret_ivabie, '</valorRetIva>',
+		'<valorRetRenta>', r_s21.s21_monto_ret_rent, '</valorRetRenta>'
+	{--
+		'<montoIvaServicios>', r_s21.s21_monto_iva_ser, '</montoIvaServicios> ',
+		'<porRetServicios>', r_s21.s21_cod_ret_ivaser, '</porRetServicios> ',
+		'<valorRetServicios>', r_s21.s21_mon_ret_ivaser, '</valorRetServicios> ',
+		'<retPresuntiva>', r_s21.s21_ret_presuntivo, '</retPresuntiva>'
+	IF r_s21.s21_concepto_ret <> '000' THEN
+		LET registro = registro CLIPPED, '<air>','<detalleAir>',
+			'<codRetAir>', r_s21.s21_concepto_ret, '</codRetAir>',
+			'<baseImpAir>',r_s21.s21_base_imp_renta,'</baseImpAir>',
+			'<porcentajeAir>', r_s21.s21_porc_ret_renta,'</porcentajeAir>',
+			'<valRetAir>', r_s21.s21_monto_ret_rent,'</valRetAir>',
+			'</detalleAir>','</air>'
+	ELSE
+		LET registro = registro CLIPPED, '<air/>'
+	END IF
+	--}
+	--
+	--XXX SE DEBE CREAR LA TABLA srit026 CON LA TABLA 13 DE LA FICHA TECNICA
+	--    DEL SRI Y RELACIONARLA CON LA TABLA cajt001.
+	--    POR AHORA ESTARA EN "DURO".
+	--
+	IF r_s21.s21_tipo_comp <> 4 THEN
+		LET registro = registro CLIPPED,
+						'<formasDePago>',
+						'<formaPago>01</formaPago>',
+						'</formasDePago>'
+	END IF
+	LET registro = registro CLIPPED,
+	'</detalleVentas>'
+	DISPLAY registro CLIPPED
+	LET registro = ' '
 END FOREACH
 DISPLAY '</ventas>'
+--DISPLAY '<importaciones>'
+--DISPLAY '</importaciones>'
 DISPLAY '<ventasEstablecimiento>'
 DISPLAY '<ventaEst>'
 DISPLAY '<codEstab>', codestablec, '</codEstab>'
-DISPLAY '<ventasEstab>', total_venta USING "<<<<<<<<<<<&.&&", '</ventasEstab>'
+DISPLAY '<ventasEstab>', total_venta, '</ventasEstab>'
 DISPLAY '<ivaComp>0.00</ivaComp>'
 DISPLAY '</ventaEst>'
 DISPLAY '</ventasEstablecimiento>'
@@ -1557,6 +1915,7 @@ FOREACH q_anu INTO r_anu.*
 			'<secuencialInicio>',r_anu.numini,'</secuencialInicio>',
 			'<secuencialFin>', r_anu.numfin, '</secuencialFin>',
 			'<autorizacion>', r_anu.autoriz, '</autorizacion>',
+			--'<fechaAnulacion>', r_anu.fecha, '</fechaAnulacion>',
 			'</detalleAnulados>'
 	DISPLAY registro CLIPPED
 	LET registro = ' '
