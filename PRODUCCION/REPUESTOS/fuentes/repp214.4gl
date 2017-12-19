@@ -1016,7 +1016,6 @@ INPUT BY NAME rm_r19.r19_cod_tran, rm_r19.r19_oc_interna, rm_r19.r19_oc_externa,
 			r_c10.c10_codprov, vm_factura, rm_r19.r19_oc_externa,
 			1) RETURNING r_p20.*
 		IF r_p20.p20_num_doc IS NOT NULL THEN
-			--CALL fgl_winmessage(vg_producto,'Esta factura ya existe para este provedor.','exclamation')
 			CALL fl_mostrar_mensaje('Esta factura ya existe para este provedor.','exclamation')
 			NEXT FIELD r19_oc_externa
 		END IF
@@ -1024,8 +1023,8 @@ INPUT BY NAME rm_r19.r19_cod_tran, rm_r19.r19_oc_interna, rm_r19.r19_oc_externa,
 			CALL fl_mostrar_mensaje('Digite la fecha de caducidad.', 'exclamation')
 			NEXT FIELD vm_fecha_cadu
 		END IF
-		IF vm_fecha_cadu < vg_fecha THEN
-			CALL fl_mostrar_mensaje('La fecha de caducidad no puede ser menor a la fecha de hoy.', 'exclamation')
+		IF vm_fecha_cadu < c13_fec_emi_fac THEN
+			CALL fl_mostrar_mensaje('La fecha de caducidad no puede ser menor a la fecha de emisión de la factura.', 'exclamation')
 			NEXT FIELD vm_fecha_cadu
 		END IF
 		IF c13_fec_emi_fac < fecha_tope THEN
@@ -1057,7 +1056,6 @@ IF INT_FLAG THEN
 END IF
 
 IF vm_indice = 0 THEN
-	--CALL fgl_winmessage(vg_producto,'La orden de compra ya fue recibida por completo.','exclamation')
 	CALL fl_mostrar_mensaje('La orden de compra ya fue recibida por completo.','exclamation')
 	LET INT_FLAG = 1
 	RETURN
@@ -1103,7 +1101,6 @@ WHILE NOT salir
 			LET rm_compra[i].cant_ven = rm_compra[i].cant_ped
 			DISPLAY rm_compra[i].cant_ven TO ra_compra[j].r20_cant_ven
 			IF rm_compra[i].cant_ven > rm_compra[i].cant_ped THEN
-				--CALL fgl_winmessage(vg_producto,'Debe poner una cantidad menor o igual a la cantidad disponible.','exclamation')
 				CALL fl_mostrar_mensaje('Debe poner una cantidad menor o igual a la cantidad disponible.','exclamation')
 				NEXT FIELD r20_cant_ven
 			END IF
@@ -1540,7 +1537,6 @@ ELSE
 	CALL fl_lee_factor_moneda(moneda_ori, moneda_dest) 
 		RETURNING r_g14.*
 	IF r_g14.g14_serial IS NULL THEN
-		--CALL fgl_winmessage(vg_producto,'No existe factor de conversión para esta moneda.','exclamation')
 		CALL fl_mostrar_mensaje('No existe factor de conversión para esta moneda.','exclamation')
 		INITIALIZE paridad TO NULL
 	ELSE
@@ -1574,7 +1570,6 @@ IF retVal <> -1 THEN
 	 EXIT WHILE
 END IF
 
---CALL fgl_winquestion(vg_producto,'La tabla de secuencias de transacciones está siendo accesada por otro usuario, espere unos segundos y vuelva a intentar','No','Yes|No|Cancel','question',1)
 CALL fl_hacer_pregunta('La tabla de secuencias de transacciones está siendo accesada por otro usuario, espere unos segundos y vuelva a intentar','No')
 	RETURNING resp 
 IF resp <> 'Yes' THEN
@@ -1698,7 +1693,6 @@ DEFINE intentar		SMALLINT
 DEFINE resp		CHAR(6)
 
 LET intentar = 1
---CALL fgl_winquestion(vg_producto,'Registro bloqueado por otro usuario, desea intentarlo nuevamente','No','Yes|No','question',1)
 CALL fl_hacer_pregunta('Registro bloqueado por otro usuario, desea intentarlo nuevamente','No')
 	RETURNING resp
 IF resp = 'No' THEN
@@ -2702,20 +2696,17 @@ MENU 'OPCIONES'
 		IF rm_r19.r19_cont_cred = 'R' THEN
 			CALL muestra_forma_pago()
 		ELSE
-			--CALL fgl_winmessage(vg_producto,'La compra se está realizando al contado.','exclamation')
 			CALL fl_mostrar_mensaje('La compra se está realizando al contado.','exclamation')
 		END IF
 	COMMAND KEY('R') 'Retenciones'		'Ver retenciones.'
 		IF r_c00.c00_cuando_ret = 'C' THEN
 			CALL muestra_retenciones(r_c10.*)
 		ELSE
-			--CALL fgl_winmessage(vg_producto,'La compañía realiza las retenciones al pagar la factura.','exclamation')
 			CALL fl_mostrar_mensaje('La compañía realiza las retenciones al pagar la factura.','exclamation')
 		END IF
 	COMMAND KEY('G') 'Grabar'		'Graba compra local.'
 		LET INT_FLAG = 0
 		IF r_c00.c00_cuando_ret = 'C' AND tot_ret = 0 THEN
-			--CALL fgl_winquestion(vg_producto,'No se han indicado retenciones. Seguro de generar la Compra Local sin retenciones?','No','Yes|No','question',1)
 			CALL fl_hacer_pregunta('No se han indicado retenciones. Seguro de generar la Compra Local sin retenciones?','No')
 				RETURNING resp
 			IF resp <> 'Yes' THEN
