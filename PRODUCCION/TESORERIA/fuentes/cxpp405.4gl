@@ -232,8 +232,8 @@ PAGE HEADER
 	SKIP 9 LINES
 	print ASCII escape;
 	print ASCII act_comp;
-	PRINT COLUMN 008, rm_p01.p01_codprov USING "###&&&",
-	      COLUMN 014, nomprov2 CLIPPED,
+	PRINT COLUMN 008, '(', rm_p01.p01_codprov USING "###&&&", ')',
+	      COLUMN 017, nomprov2 CLIPPED,
 	      COLUMN 081, ASCII escape, ASCII act_neg,
 	      COLUMN 090, DATE(rm_p27.p27_fecing) USING "dd-mm-yyyy",
 		ASCII escape, ASCII des_neg,
