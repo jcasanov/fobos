@@ -87,7 +87,8 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/cxcp311.err')
+LET vg_proceso = arg_val(0)
+CALL startlog('../logs/' || vg_proceso CLIPPED || '.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN          -- Validar # parametros correcto
@@ -98,7 +99,6 @@ LET vg_base    = arg_val(1)
 LET vg_modulo  = arg_val(2)
 LET vg_codcia  = arg_val(3)
 LET vg_codloc  = arg_val(4)
-LET vg_proceso = 'cxcp311'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
 --#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
@@ -810,7 +810,7 @@ LET query = query CLIPPED,
 				'   AND loc6 = localidad) ',
 			' FROM tempo_doc, tmp_des ',
 				expr_sql CLIPPED,
-			' GROUP BY 1, 2, 3'
+			' GROUP BY 1, 2, 3, 4, 5, 6, 7, 8, 9'
 {--
 IF rm_par.tipo_detalle = 'P' THEN
 	LET query = query CLIPPED,

@@ -75,7 +75,8 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/cxcp317.err')
+LET vg_proceso = arg_val(0)
+CALL startlog('../logs/' || vg_proceso CLIPPED || '.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN
@@ -86,7 +87,6 @@ LET vg_base    = arg_val(1)
 LET vg_modulo  = arg_val(2)
 LET vg_codcia  = arg_val(3)
 LET vg_codloc  = arg_val(4)
-LET vg_proceso = 'cxcp317'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()
 --#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
@@ -355,6 +355,7 @@ DEFINE base_loc		VARCHAR(10)
 
 LET base_loc = NULL
 LET query    = query_contado_credito('C', 'PR', 'OT', 'SC', base_loc)
+{--
 IF vg_codloc = 1 OR vg_codloc = 3 THEN
 	CASE vg_codloc
 		WHEN 1 LET base_loc = 'acero_gc:'
@@ -364,6 +365,7 @@ IF vg_codloc = 1 OR vg_codloc = 3 THEN
 			' UNION ',
 		query_contado_credito('C', 'PR', 'OT', 'SC', base_loc) CLIPPED
 END IF
+--}
 RETURN query CLIPPED
 
 END FUNCTION

@@ -75,7 +75,8 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/cxcp316.err')
+LET vg_proceso = arg_val(0)
+CALL startlog('../logs/' || vg_proceso CLIPPED || '.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN          -- Validar # parametros correcto
@@ -86,7 +87,6 @@ LET vg_base    = arg_val(1)
 LET vg_modulo  = arg_val(2)
 LET vg_codcia  = arg_val(3)
 LET vg_codloc  = arg_val(4)
-LET vg_proceso = 'cxcp316'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
 --#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
@@ -1021,11 +1021,13 @@ IF rm_par.codcli IS NOT NULL THEN
 	LET expr_clz = '   AND z22_codcli      = ', rm_par.codcli
 END IF
 LET query = query_clientes_ventas(fecha_ini, fecha_fin, 1)
+{--
 IF vg_codcia = 1 THEN
 	LET query = query CLIPPED,
 			' UNION ',
 			query_clientes_ventas(fecha_ini, fecha_fin, 2)
 END IF
+--}
 LET query = query CLIPPED,
 		' UNION ',
 		' SELECT UNIQUE t23_compania cia, t23_localidad loc,',
@@ -1374,6 +1376,7 @@ DEFINE fecha_fin	LIKE cxct022.z22_fecing
 DEFINE query		CHAR(1600)
 
 LET query = query_facturas_caja(fecha_ini, fecha_fin, 1)
+{--
 IF vg_codcia = 1 THEN
 	LET query = query CLIPPED,
 		' UNION ALL ',
@@ -1382,6 +1385,7 @@ END IF
 IF rm_par.localidad IS NOT NULL AND rm_par.localidad <> vg_codloc THEN
 	LET query = query_facturas_caja(fecha_ini, fecha_fin, 2)
 END IF
+--}
 LET query = query CLIPPED, ' INTO TEMP tmp_j10 '
 PREPARE exec_j10 FROM query
 EXECUTE exec_j10
@@ -1498,8 +1502,8 @@ DEFINE tipo		SMALLINT
 DEFINE query		CHAR(6000)
 
 LET query = query_venta_aprob(fecha_ini, fecha_fin, 1, tipo) CLIPPED,
-		' UNION ALL ',
-		query_venta_aprob(fecha_ini, fecha_fin, 2, tipo) CLIPPED,
+		--' UNION ALL ',
+		--query_venta_aprob(fecha_ini, fecha_fin, 2, tipo) CLIPPED,
 		' UNION ALL ',
 		query_venta_aprob_tal(fecha_ini, fecha_fin, tipo) CLIPPED
 IF vg_codcia > 1 OR rm_par.localidad = vg_codloc THEN
@@ -1507,24 +1511,29 @@ IF vg_codcia > 1 OR rm_par.localidad = vg_codloc THEN
 			' UNION ALL ',
 			query_venta_aprob_tal(fecha_ini,fecha_fin,tipo) CLIPPED
 END IF
+{--
 IF vg_codcia = 1 AND rm_par.localidad <> vg_codloc THEN
 	LET query = query_venta_aprob(fecha_ini, fecha_fin, 2, tipo) CLIPPED
 END IF
+--}
 CASE rm_par.area_n
 	WHEN 1
 		LET query = query_venta_aprob(fecha_ini, fecha_fin, 1, tipo)
-				CLIPPED, ' UNION ALL ',
-				query_venta_aprob(fecha_ini, fecha_fin, 2, tipo)
+				CLIPPED
+				--' UNION ALL ',
+				--query_venta_aprob(fecha_ini, fecha_fin, 2, tipo)
 		IF rm_par.localidad = vg_codloc THEN
 			LET query = query_venta_aprob(fecha_ini, fecha_fin, 1,
 							tipo)
 		END IF
+	{--
 		IF rm_par.localidad IS NOT NULL AND
 		   rm_par.localidad <> vg_codloc
 		THEN
 			LET query = query_venta_aprob(fecha_ini, fecha_fin, 2,
 							tipo)
 		END IF
+	--}
 	WHEN 2
 		LET query = query_venta_aprob(fecha_ini, fecha_fin, 1, tipo)
 				CLIPPED, ' UNION ALL ',
