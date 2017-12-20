@@ -768,9 +768,8 @@ END FUNCTION
 
 FUNCTION query_datos_ret(proveedor, tipo, numero, tip_ret, opc, flag)
 DEFINE proveedor	LIKE cxpt020.p20_codprov
-DEFINE tipo		LIKE cxpt020.p20_tipo_doc
+DEFINE tipo			LIKE cxpt020.p20_tipo_doc
 DEFINE numero		LIKE cxpt020.p20_num_doc
---DEFINE divid		LIKE cxpt020.p20_dividendo
 DEFINE tip_ret		CHAR(1)
 DEFINE opc, flag	SMALLINT
 DEFINE salida		CHAR(50)
@@ -820,17 +819,11 @@ CASE opc
 				'g37_secuencia 	= p32_secuencia),0) '
 	WHEN 5 
 		LET campos = 'NVL((SELECT UNIQUE p29_num_sri[9,', long_dig,'] ',
-				'FROM 	cxpt029 ',
+				'FROM cxpt029 ',
 				'WHERE ',
 				'p29_compania	= p27_compania AND  ',
 				'p29_localidad 	= p27_localidad AND ',
 				'p29_num_ret 	= p27_num_ret ),0)  '
-		{--
-		IF vg_codcia = 2 THEN
-			LET campos ='"01/', mes USING "&&", '/',
-					anio USING "&&&&", '" p27_fecing'
-		END IF
-		--}
 END CASE
 LET salida = NULL
 LET query  = 'SELECT UNIQUE p27_num_ret, ', campos CLIPPED,
@@ -845,7 +838,6 @@ LET query  = 'SELECT UNIQUE p27_num_ret, ', campos CLIPPED,
 		'   AND p28_codprov     = ', proveedor,
 		'   AND p28_tipo_doc    = "', tipo, '" ',
 		'   AND p28_num_doc     = "', numero, '" ',
-		--'   AND p28_dividendo   = ', divid
 		'   AND p28_dividendo   = 1 '
 PREPARE cons_ret FROM query
 DECLARE q_ret CURSOR FOR cons_ret
@@ -878,7 +870,7 @@ LET salida = NULL
 IF query_datos_ret(proveedor, tipo, numero, tip_ret, 1, 1) IS NULL THEN
 	RETURN salida
 END IF
-IF query_datos_ret(proveedor, tipo, numero, tip_ret, 4, 1) IS NULL THEN
+IF query_datos_ret(proveedor, tipo, numero, tip_ret, 5, 0) = '0' THEN
 	RETURN salida
 END IF
 CASE tip_ret
@@ -898,7 +890,7 @@ LET salida = '<estabRetencion', posi, '>',
 		'<secRetencion', posi, '>',
 			query_datos_ret(proveedor, tipo, numero,
                                         tip_ret, 5, 0) CLIPPED
-			USING "&&&&&&&",
+			USING "&&&&&&&&&",
 		'</secRetencion', posi, '>',
 		'<autRetencion', posi, '>',
 			query_datos_ret(proveedor, tipo, numero,
