@@ -1411,10 +1411,10 @@ DROP TABLE t1
 END FUNCTION
 
 
-{*
+{**
  * El anexo se genera según la ficha técnica del SRI que se encuentra en: 
  * http://descargas.sri.gob.ec/download/anexos/ats/FICHA_TECNICA_ATS_JULIO2016.pdf
- *}
+ **}
 FUNCTION generar_archivo_venta_xml()
 DEFINE r_g01		RECORD LIKE gent001.*
 DEFINE r_g02		RECORD LIKE gent002.*
