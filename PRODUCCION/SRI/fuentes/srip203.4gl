@@ -64,6 +64,10 @@ END FUNCTION
 
 
 
+{*
+ * El anexo se genera según la ficha técnica del SRI que se encuentra en: 
+ * http://descargas.sri.gob.ec/download/anexos/ats/FICHA_TECNICA_ATS_JULIO2016.pdf
+ *}
 FUNCTION ejecuta_proceso()
 DEFINE r_doc		RECORD
 				num_ret		CHAR(12),
