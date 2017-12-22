@@ -69,7 +69,7 @@ DEFINE num_cols 	SMALLINT
 CALL fl_nivel_isolation()
 LET lin_menu   = 0
 LET row_ini    = 3
-LET num_rows   = 6
+LET num_rows   = 8
 LET num_cols   = 80
 IF vg_gui = 0 THEN
 	LET lin_menu = 1

@@ -95,7 +95,7 @@ WHILE TRUE
 		EXIT WHILE
 	END IF
 	CALL ejecuta_proceso(1)
-	CALL ejecuta_proceso(2)
+	--CALL ejecuta_proceso(2)
 	CALL fl_mostrar_mensaje('Archivo Generado OK.', 'info')
 END WHILE
 

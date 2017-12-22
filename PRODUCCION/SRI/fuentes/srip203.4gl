@@ -112,6 +112,7 @@ DEFINE r_adi		RECORD
 			END RECORD
 DEFINE r_g01		RECORD LIKE gent001.*
 DEFINE r_g02		RECORD LIKE gent002.*
+DEFINE codestablec	LIKE gent037.g37_pref_sucurs
 DEFINE fecha		DATETIME YEAR TO MONTH
 DEFINE registro		CHAR(11600)
 DEFINE query		CHAR(21500)
@@ -601,6 +602,19 @@ PREPARE exec_tmp_vta FROM query
 EXECUTE exec_tmp_vta
 SELECT * INTO total_ventas FROM tmp_vta
 DROP TABLE tmp_vta
+LET codestablec = NULL
+SELECT g37_pref_sucurs
+		INTO codestablec
+		FROM gent037 b
+		WHERE b.g37_compania  = vg_codcia
+		  AND b.g37_localidad = vg_codloc
+		  AND b.g37_tipo_doc  = "FA"
+		  AND b.g37_secuencia =
+			(SELECT MAX(a.g37_secuencia)
+				FROM gent037 a
+				WHERE a.g37_compania  = b.g37_compania
+				  AND a.g37_localidad = b.g37_localidad
+				  AND a.g37_tipo_doc  = b.g37_tipo_doc)
 DISPLAY '<?xml version="1.0" encoding="UTF-8" ?>'
 DISPLAY '<iva>'
 DISPLAY '<TipoIDInformante>R</TipoIDInformante>'
@@ -608,6 +622,7 @@ DISPLAY '<IdInformante>', r_g02.g02_numruc CLIPPED, '</IdInformante>'
 DISPLAY '<razonSocial>', r_g01.g01_razonsocial CLIPPED, '</razonSocial>'
 DISPLAY '<Anio>', anio USING "&&&&", '</Anio>'
 DISPLAY '<Mes>', mes USING "&&", '</Mes>'
+DISPLAY '<numEstabRuc>', codestablec CLIPPED, '</numEstabRuc>'
 DISPLAY '<totalVentas>', total_ventas USING "<<<<<<<<<<<&.&&", '</totalVentas>'
 DISPLAY '<codigoOperativo>IVA</codigoOperativo>'
 LET num_ret_ant = NULL
@@ -629,7 +644,8 @@ FOREACH q_cons INTO r_doc.*, r_adi.*
 			'<tpIdProv>', r_doc.idtipo CLIPPED, '</tpIdProv>',
 			'<idProv>', r_doc.idprov[1,13] CLIPPED, '</idProv>',
 			'<tipoComprobante>', r_doc.tc USING "&&", '</tipoComprobante>',
-			'<parteRel>SI</parteRel>',
+			'<parteRel>SI</parteRel>'
+			{--
 			'<tipoProv>'
 			CASE r_adi.personeria
 				WHEN 'N' LET registro = registro CLIPPED, '01'
@@ -638,6 +654,7 @@ FOREACH q_cons INTO r_doc.*, r_adi.*
 			LET registro = registro CLIPPED,
 			'</tipoProv>',
 			'<denopr>', r_adi.nomprov CLIPPED, '</denopr>'
+			--}
 			IF vg_codcia = 1 THEN
 				LET registro = registro CLIPPED,
 								'<fechaRegistro>', r_doc.fecha_reg CLIPPED,
@@ -664,21 +681,21 @@ FOREACH q_cons INTO r_doc.*, r_adi.*
 			END IF
 			LET registro = registro CLIPPED,
 			'<autorizacion>', r_doc.aut, '</autorizacion>',
-			'<baseNoGraIva>0.00</baseNoGraIva>',
+			'<baseNoGraIva>0</baseNoGraIva>',
 			'<baseImponible>',r_doc.base_sin USING "<<<<<<<<&.&&",
 			'</baseImponible>',
 			'<baseImpGrav>', r_doc.base_con USING "<<<<<<<<&.&&",
 			'</baseImpGrav>',
-			'<baseImpExe>0.00</baseImpExe>',
+			'<baseImpExe>0</baseImpExe>',
 			'<montoIce>', r_doc.monto_ice USING "<<<<<<<<&.&&",
 			'</montoIce>',
 			'<montoIva>', r_doc.monto_iva USING "<<<<<<<<&.&&",
 			'</montoIva>',
-			'<valRetBien10>0.00</valRetBien10>',
-			'<valRetServ20>0.00</valRetServ20>',
+			'<valRetBien10>0</valRetBien10>',
+			'<valRetServ20>0</valRetServ20>',
 			'<valorRetBienes>', r_doc.bienesValor USING "<<<<<<<<&.&&",
 			'</valorRetBienes>',
-			'<valRetServ50>0.00</valRetServ50>'
+			'<valRetServ50>0</valRetServ50>'
 			IF r_doc.tc <> '03' THEN
 				LET registro = registro CLIPPED,
 								'<valorRetServicios>',
@@ -693,8 +710,11 @@ FOREACH q_cons INTO r_doc.*, r_adi.*
 								'</valRetServ100>'
 			END IF
 			LET registro = registro CLIPPED,
+			'<totbasesImpReemb>0.00</totbasesImpReemb>',
  			'<pagoExterior>',
 				'<pagoLocExt>01</pagoLocExt>',
+				'<tipoRegi>01</tipoRegi>',
+				'<paisEfecPagoGen>NA</paisEfecPagoGen>',
 				'<paisEfecPago>NA</paisEfecPago>',
 				'<aplicConvDobTrib>NA</aplicConvDobTrib>',
 				'<pagExtSujRetNorLeg>NA</pagExtSujRetNorLeg>',
@@ -722,10 +742,8 @@ FOREACH q_cons INTO r_doc.*, r_adi.*
 	END IF
 	LET salida = NULL
 	LET registro = registro CLIPPED,
-			--'<docModificado>',
-			--'</docModificado>',
-			'<baseImpExeReemb>0.00</baseImpExeReemb>',
-			'<totbasesImpReemb>0.00</totbasesImpReemb>',
+			--'<docModificado></docModificado>',
+			--'<baseImpExeReemb>0.00</baseImpExeReemb>',
 			'</detalleCompras>'
 	DISPLAY registro CLIPPED
 	LET primera     = 0
