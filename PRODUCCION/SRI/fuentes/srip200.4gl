@@ -69,7 +69,7 @@ DEFINE num_cols 	SMALLINT
 CALL fl_nivel_isolation()
 LET lin_menu   = 0
 LET row_ini    = 3
-LET num_rows   = 8
+LET num_rows   = 10
 LET num_cols   = 80
 IF vg_gui = 0 THEN
 	LET lin_menu = 1
@@ -120,11 +120,8 @@ WHILE TRUE
 		WHEN 6 CALL generar_archivo()
 		WHEN 7 CALL generar_archivo_venta_xml()
 		WHEN 8 CALL generar_archivo()
-		       CALL generar_archivo_anula_xml()
+			   CALL generar_archivo_anula_xml()
 	END CASE
-	IF num_args() = 4 THEN
-		CALL generar_archivo()
-	END IF
 	IF num_args() <> 4 THEN
 		EXIT WHILE
 	END IF
@@ -134,32 +131,39 @@ END FUNCTION
 
 
 
+{**
+	ESTA FUNCION GENERA EL ARCHIVO CONSOLIDADO DE LAS VENTAS USANDO LAS TABLAS:
+		rept019
+		rept020
+		talt021
+		talt023
+		cxct020
+		cxct021
+**}
+
 FUNCTION generar_archivo()
 DEFINE r_mov		RECORD
-				cod_cli		LIKE cxct001.z01_codcli,
-				cod_t		LIKE rept019.r19_cod_tran,
-				num_t		LIKE rept019.r19_num_tran,
-				ced_ruc		LIKE rept019.r19_cedruc
-			END RECORD
+						cod_cli		LIKE cxct001.z01_codcli,
+						cod_t		LIKE rept019.r19_cod_tran,
+						num_t		LIKE rept019.r19_num_tran,
+						ced_ruc		LIKE rept019.r19_cedruc
+					END RECORD
 DEFINE r_tal		RECORD
-				z01_tipo_doc_id	LIKE cxct001.z01_tipo_doc_id,
-				z01_num_doc_id	LIKE cxct001.z01_num_doc_id,
-				val_iva		DECIMAL(12,2),
-				val_ci		DECIMAL(12,2),
-				val_si		DECIMAL(12,2)
-			END RECORD
+						z01_tipo_doc_id	LIKE cxct001.z01_tipo_doc_id,
+						z01_num_doc_id	LIKE cxct001.z01_num_doc_id,
+						val_iva		DECIMAL(12,2),
+						val_ci		DECIMAL(12,2),
+						val_si		DECIMAL(12,2)
+					END RECORD
 DEFINE query		VARCHAR(4000)
-DEFINE base_suc		VARCHAR(10)
 DEFINE comando		VARCHAR(100)
 DEFINE archivo		VARCHAR(50)
 DEFINE resul		SMALLINT
 DEFINE r_s21		RECORD LIKE srit021.*
 DEFINE r_z01		RECORD LIKE cxct001.*
-DEFINE codloc		LIKE srit021.s21_localidad
 DEFINE porc_imp		LIKE gent000.g00_porc_impto
 DEFINE valor_siva_aux	DECIMAL(14,2)
-DEFINE ctos		INTEGER
-define valor		integer
+DEFINE ctos			INTEGER
 
 INITIALIZE r_s21.* TO NULL
 DECLARE q_estado CURSOR FOR
@@ -177,21 +181,10 @@ IF r_s21.s21_estado = 'D' THEN
 	CALL fl_mostrar_mensaje('No puede generar el anexo de ventas para este periodo. Ya esta declarado.', 'exclamation')
 	RETURN
 END IF
-CALL obtener_facturas(1)
-SELECT * FROM t1 INTO TEMP tmp_fact
-DROP TABLE t1
-SELECT * FROM t3 INTO TEMP tmp_anu
-DROP TABLE t3
-IF vg_codcia = 1 AND (vg_codloc = 1 OR vg_codloc = 3) THEN
-	CALL obtener_facturas(2)
-	INSERT INTO tmp_fact SELECT * FROM t1
-	DROP TABLE t1
-	INSERT INTO tmp_anu SELECT * FROM t3
-	DROP TABLE t3
-END IF
-
+CALL obtener_facturas()
 DECLARE q_verif CURSOR FOR
-	SELECT codcli, cod_tran, num_tran, cedruc_v FROM tmp_fact
+	SELECT codcli, cod_tran, num_tran, cedruc_v
+		FROM tmp_fact
 		WHERE LENGTH(cedruc_v) = 13
 FOREACH q_verif INTO r_mov.*
 	CALL fl_validar_cedruc_dig_ver(r_mov.ced_ruc) RETURNING resul
@@ -207,20 +200,20 @@ FOREACH q_verif INTO r_mov.*
 	END IF
 END FOREACH
 LET query = 'SELECT tipo_doc_id, cedruc, ',
-		'CASE WHEN LENGTH(cedruc) = 13 AND ',
-			' codcli <> ', rm_r00.r00_codcli_tal,
-			'THEN cod_tran ',
-			'ELSE "NV" ',
-		'END cod_tran, ',
-		'fecha_vta, porc_impto, ',
-		'NVL(SUM(valor_vta_civa), 0) valor_vta_civa, ',
-		'NVL(SUM(valor_vta_siva), 0) valor_vta_siva, ',
-		'NVL(SUM(valor_iva), 0) valor_iva, ',
-		'NVL(SUM(r19_flete), 0) flete, "00000" concepto, ',
-		'1111111.11 base_rent, 111.11 porc_rent, 1111111.11 monto_ret ',
-		' FROM tmp_fact ',
-		' GROUP BY 1, 2, 3, 4, 5, 10, 11, 12, 13 ',
-		' INTO TEMP tmp_anexo'
+				'CASE WHEN LENGTH(cedruc) = 13 AND ',
+							'codcli <> ', rm_r00.r00_codcli_tal, ' ',
+					'THEN cod_tran ',
+					'ELSE "NV" ',
+				'END cod_tran, ',
+				'fecha_vta, porc_impto, ',
+				'NVL(SUM(valor_vta_civa), 0) valor_vta_civa, ',
+				'NVL(SUM(valor_vta_siva), 0) valor_vta_siva, ',
+				'NVL(SUM(valor_iva), 0) valor_iva, ',
+				'NVL(SUM(r19_flete), 0) flete, "00000" concepto, ',
+				'1111111.11 base_rent, 111.11 porc_rent, 1111111.11 monto_ret ',
+			' FROM tmp_fact ',
+			' GROUP BY 1, 2, 3, 4, 5, 10, 11, 12, 13 ',
+			' INTO TEMP tmp_anexo'
 PREPARE cons_tmp_anexo FROM query 
 EXECUTE cons_tmp_anexo
 SELECT cedruc doccli, cod_tran c_tran, num_tran n_tran, COUNT(*) cuantos
@@ -228,164 +221,173 @@ SELECT cedruc doccli, cod_tran c_tran, num_tran n_tran, COUNT(*) cuantos
 	GROUP BY 1, 2, 3
 	INTO TEMP tmp_tot
 LET query = 'SELECT t23_cod_cliente codcli, t23_num_factura num_tran, ',
-		' CASE WHEN t23_val_impto > 0 THEN ',
-		' t23_val_mo_tal + ',
-		' CASE WHEN t23_estado = "F" THEN ',
-			'(SELECT NVL(SUM((c11_precio - c11_val_descto)',
-			' * (1 + c10_recargo / 100)), 0) ',
-			' FROM ordt010, ordt011 ',
-			' WHERE c10_compania    = t23_compania ',
-			'   AND c10_localidad   = t23_localidad ',
-			'   AND c10_ord_trabajo = t23_orden ',
-			'   AND c10_estado      = "C" ',
-			'   AND c11_compania    = c10_compania ',
-			'   AND c11_localidad   = c10_localidad ',
-			'   AND c11_numero_oc   = c10_numero_oc ',
-			'   AND c11_tipo        = "S") + ',
-			'(SELECT NVL(SUM(((c11_cant_ped * c11_precio)',
-			' - c11_val_descto) * (1 + c10_recargo / 100))',
-			', 0) ',
-			' FROM ordt010, ordt011 ',
-			' WHERE c10_compania    = t23_compania ',
-			'   AND c10_localidad   = t23_localidad ',
-			'   AND c10_ord_trabajo = t23_orden ',
-			'   AND c10_estado      = "C" ',
-			'   AND c11_compania    = c10_compania ',
-			'   AND c11_localidad   = c10_localidad ',
-			'   AND c11_numero_oc   = c10_numero_oc ',
-			'   AND c11_tipo        = "B") + ',
-			' CASE WHEN (SELECT COUNT(*) FROM ordt010 ',
-				' WHERE c10_compania    = t23_compania ',
-				'   AND c10_localidad   = t23_localidad ',
-				'   AND c10_ord_trabajo = t23_orden ',
-				'   AND c10_estado      = "C") = 0 ',
-			' THEN (t23_val_rp_tal + t23_val_rp_ext + ',
-			       't23_val_rp_cti + t23_val_otros2) ',
-			' ELSE 0.00 ',
-			' END ',
-		' ELSE (t23_val_mo_ext + t23_val_mo_cti + ',
-			't23_val_rp_tal + t23_val_rp_ext + ',
-			't23_val_rp_cti + t23_val_otros2) ',
-		' END ',
-		' ELSE 0.00 ',
-		' END valor_tal_civa, ',
-		' CASE WHEN t23_val_impto = 0 THEN ',
-		' t23_val_mo_tal + ',
-		' CASE WHEN t23_estado = "F" THEN ',
-			'(SELECT NVL(SUM((c11_precio - c11_val_descto)',
-			' * (1 + c10_recargo / 100)), 0) ',
-			' FROM ordt010, ordt011 ',
-			' WHERE c10_compania    = t23_compania ',
-			'   AND c10_localidad   = t23_localidad ',
-			'   AND c10_ord_trabajo = t23_orden ',
-			'   AND c10_estado      = "C" ',
-			'   AND c11_compania    = c10_compania ',
-			'   AND c11_localidad   = c10_localidad ',
-			'   AND c11_numero_oc   = c10_numero_oc ',
-			'   AND c11_tipo        = "S") + ',
-			'(SELECT NVL(SUM(((c11_cant_ped * c11_precio)',
-			' - c11_val_descto) * (1 + c10_recargo / 100))',
-			', 0) ',
-			' FROM ordt010, ordt011 ',
-			' WHERE c10_compania    = t23_compania ',
-			'   AND c10_localidad   = t23_localidad ',
-			'   AND c10_ord_trabajo = t23_orden ',
-			'   AND c10_estado      = "C" ',
-			'   AND c11_compania    = c10_compania ',
-			'   AND c11_localidad   = c10_localidad ',
-			'   AND c11_numero_oc   = c10_numero_oc ',
-			'   AND c11_tipo        = "B") + ',
-			' CASE WHEN (SELECT COUNT(*) FROM ordt010 ',
-				' WHERE c10_compania    = t23_compania ',
-				'   AND c10_localidad   = t23_localidad ',
-				'   AND c10_ord_trabajo = t23_orden ',
-				'   AND c10_estado      = "C") = 0 ',
-			' THEN (t23_val_rp_tal + t23_val_rp_ext + ',
-			       't23_val_rp_cti + t23_val_otros2) ',
-			' ELSE 0.00 ',
-			' END ',
-		' ELSE (t23_val_mo_ext + t23_val_mo_cti + ',
-			't23_val_rp_tal + t23_val_rp_ext + ',
-			't23_val_rp_cti + t23_val_otros2) ',
-		' END ',
-		' ELSE 0.00 ',
-		' END valor_tal_siva, ',
-		' t23_val_impto, ',
-		'CASE WHEN z01_tipo_doc_id = "R" AND ',
-			' t23_cod_cliente <> ', rm_r00.r00_codcli_tal,
-			' THEN "R" ',
-			' ELSE "F" ',
-		'END tipo_doc_id, ',
-		'CASE WHEN z01_tipo_doc_id = "R" AND ',
-			' t23_cod_cliente <> ', rm_r00.r00_codcli_tal,
-			' THEN z01_num_doc_id ',
-			' ELSE "9999999999999" ',
-		'END cedruc, t23_cont_cred cont_cred, t23_localidad local, ',
-		' t23_estado, DATE(t28_fec_anula) fecha_anu ',
-		' FROM talt023, cxct001, OUTER talt028 ',
-		' WHERE t23_compania          = ', vg_codcia,
-		'   AND t23_localidad         = ', vg_codloc,
-		'   AND t23_estado            IN ("F", "D") ',
-		'   AND DATE(t23_fec_factura) BETWEEN "', rm_par.fecha_ini,
-						'" AND "',rm_par.fecha_fin, '"',
-		'   AND z01_codcli            = t23_cod_cliente ',
-		'   AND t28_compania          = t23_compania ',
-		'   AND t28_localidad         = t23_localidad ',
-		'   AND t28_factura           = t23_num_factura ',
-		' INTO TEMP tmp_tal '
+				'CASE WHEN t23_val_impto > 0 ',
+					'THEN t23_val_mo_tal + ',
+					'CASE WHEN t23_estado = "F" ',
+						'THEN ',
+						'(SELECT NVL(SUM((c11_precio - c11_val_descto) ',
+							'* (1 + c10_recargo / 100)), 0) ',
+						'FROM ordt010, ordt011 ',
+						'WHERE c10_compania    = t23_compania ',
+						'  AND c10_localidad   = t23_localidad ',
+						'  AND c10_ord_trabajo = t23_orden ',
+						'  AND c10_estado      = "C" ',
+						'  AND c11_compania    = c10_compania ',
+						'  AND c11_localidad   = c10_localidad ',
+						'  AND c11_numero_oc   = c10_numero_oc ',
+						'  AND c11_tipo        = "S") + ',
+						'(SELECT NVL(SUM(((c11_cant_ped * c11_precio) ',
+						' - c11_val_descto) * (1 + c10_recargo / 100)), 0) ',
+						'FROM ordt010, ordt011 ',
+						'WHERE c10_compania    = t23_compania ',
+						'  AND c10_localidad   = t23_localidad ',
+						'  AND c10_ord_trabajo = t23_orden ',
+						'  AND c10_estado      = "C" ',
+						'  AND c11_compania    = c10_compania ',
+						'  AND c11_localidad   = c10_localidad ',
+						'  AND c11_numero_oc   = c10_numero_oc ',
+						'  AND c11_tipo        = "B") + ',
+							'CASE WHEN ',
+									'(SELECT COUNT(*) FROM ordt010 ',
+									'WHERE c10_compania    = t23_compania ',
+									'  AND c10_localidad   = t23_localidad ',
+									'  AND c10_ord_trabajo = t23_orden ',
+									'  AND c10_estado      = "C") = 0 ',
+								'THEN (t23_val_rp_tal + t23_val_rp_ext + ',
+								       't23_val_rp_cti + t23_val_otros2) ',
+								'ELSE 0.00 ',
+							'END ',
+						'ELSE (t23_val_mo_ext + t23_val_mo_cti + ',
+								't23_val_rp_tal + t23_val_rp_ext + ',
+								't23_val_rp_cti + t23_val_otros2) ',
+					'END ',
+					'ELSE 0.00 ',
+				'END valor_tal_civa, ',
+				'CASE WHEN t23_val_impto = 0 ',
+					'THEN t23_val_mo_tal + ',
+					'CASE WHEN t23_estado = "F" ',
+						'THEN ',
+						'(SELECT NVL(SUM((c11_precio - c11_val_descto) ',
+							' * (1 + c10_recargo / 100)), 0) ',
+						'FROM ordt010, ordt011 ',
+						'WHERE c10_compania    = t23_compania ',
+						'  AND c10_localidad   = t23_localidad ',
+						'  AND c10_ord_trabajo = t23_orden ',
+						'  AND c10_estado      = "C" ',
+						'  AND c11_compania    = c10_compania ',
+						'  AND c11_localidad   = c10_localidad ',
+						'  AND c11_numero_oc   = c10_numero_oc ',
+						'  AND c11_tipo        = "S") + ',
+						'(SELECT NVL(SUM(((c11_cant_ped * c11_precio) ',
+						' - c11_val_descto) * (1 + c10_recargo / 100)), 0) ',
+						'FROM ordt010, ordt011 ',
+						'WHERE c10_compania    = t23_compania ',
+						'  AND c10_localidad   = t23_localidad ',
+						'  AND c10_ord_trabajo = t23_orden ',
+						'  AND c10_estado      = "C" ',
+						'  AND c11_compania    = c10_compania ',
+						'  AND c11_localidad   = c10_localidad ',
+						'  AND c11_numero_oc   = c10_numero_oc ',
+						'  AND c11_tipo        = "B") + ',
+							'CASE WHEN ',
+									'(SELECT COUNT(*) FROM ordt010 ',
+									'WHERE c10_compania    = t23_compania ',
+									'  AND c10_localidad   = t23_localidad ',
+									'  AND c10_ord_trabajo = t23_orden ',
+									'  AND c10_estado      = "C") = 0 ',
+								'THEN (t23_val_rp_tal + t23_val_rp_ext + ',
+								       't23_val_rp_cti + t23_val_otros2) ',
+								'ELSE 0.00 ',
+							'END ',
+					'ELSE (t23_val_mo_ext + t23_val_mo_cti + ',
+							't23_val_rp_tal + t23_val_rp_ext + ',
+							't23_val_rp_cti + t23_val_otros2) ',
+					'END ',
+					'ELSE 0.00 ',
+				'END valor_tal_siva, ',
+				't23_val_impto, ',
+				'CASE WHEN z01_tipo_doc_id = "R" AND ',
+							' t23_cod_cliente <> ', rm_r00.r00_codcli_tal, ' ',
+					'THEN "R" ',
+					'ELSE "F" ',
+				'END tipo_doc_id, ',
+				'CASE WHEN z01_tipo_doc_id = "R" AND ',
+						' t23_cod_cliente <> ', rm_r00.r00_codcli_tal, ' ',
+					'THEN z01_num_doc_id ',
+					'ELSE "9999999999999" ',
+				'END cedruc, ',
+				't23_cont_cred cont_cred, t23_localidad local, t23_estado, ',
+				'DATE(t28_fec_anula) fecha_anu ',
+			'FROM talt023, cxct001, OUTER talt028 ',
+			'WHERE t23_compania           = ', vg_codcia,
+			'  AND t23_localidad          = ', vg_codloc,
+			'  AND t23_estado            IN ("F", "D") ',
+			'  AND DATE(t23_fec_factura) BETWEEN "', rm_par.fecha_ini,
+										  '" AND "', rm_par.fecha_fin, '"',
+			'  AND z01_codcli             = t23_cod_cliente ',
+			'  AND t28_compania           = t23_compania ',
+			'  AND t28_localidad          = t23_localidad ',
+			'  AND t28_factura            = t23_num_factura ',
+			'INTO TEMP tmp_tal '
 PREPARE cons_tmp_tal FROM query 
 EXECUTE cons_tmp_tal
 LET query = 'SELECT num_tran num_anu, z21_tipo_doc ',
-		' FROM tmp_tal, OUTER cxct021 ',
-		' WHERE t23_estado    = "D" ',
-		'   AND z21_compania  = ', vg_codcia,
-		'   AND z21_localidad = local ',
-		'   AND z21_tipo_doc  = "NC" ',
-		'   AND z21_areaneg   = 2 ',
-		'   AND z21_cod_tran  = "FA" ',
-		'   AND z21_num_tran  = num_tran ',
-		' INTO TEMP t2 '
+				'FROM tmp_tal, OUTER cxct021 ',
+				'WHERE t23_estado    = "D" ',
+				'  AND z21_compania  = ', vg_codcia,
+				'  AND z21_localidad = local ',
+				'  AND z21_tipo_doc  = "NC" ',
+				'  AND z21_areaneg   = 2 ',
+				'  AND z21_cod_tran  = "FA" ',
+				'  AND z21_num_tran  = num_tran ',
+				'INTO TEMP t2 '
 PREPARE cons_t2_tal FROM query 
 EXECUTE cons_t2_tal
 DELETE FROM t2 WHERE z21_tipo_doc IS NOT NULL
 LET query = 'INSERT INTO tmp_anu ',
-		'SELECT CASE WHEN r38_cod_tran = "FA" THEN 1 ',
-			'WHEN r38_cod_tran = "NV" THEN 2 END tipo_comp, ',
-		' b.g37_pref_sucurs, b.g37_pref_pto_vta, r38_num_sri[9, 16]',
-		' num_sri_ini, r38_num_sri[9, 16] num_sri_fin, g02_numaut_sri',--,',
-		' FROM tmp_tal, rept038, gent037 b, gent002 ',
-		' WHERE t23_estado      = "D" ',
-		'   AND num_tran        = (SELECT num_anu FROM t2 ',
-					' WHERE num_anu  = num_tran) ',
-		'   AND r38_compania    = ', vg_codcia,
-		'   AND r38_localidad   = local ',
-		'   AND r38_tipo_fuente = "OT" ',
-		'   AND r38_cod_tran    IN ("FA", "NV") ',
-		'   AND r38_num_tran    = num_tran ',
-		'   AND b.g37_compania  = r38_compania ',
-		'   AND b.g37_localidad = r38_localidad ',
-		'   AND b.g37_tipo_doc  = r38_cod_tran ',
-		'   AND b.g37_secuencia = ',
-			' (SELECT MAX(a.g37_secuencia) ',
-				' FROM gent037 a ',
-				' WHERE a.g37_compania  = b.g37_compania ',
-				'   AND a.g37_localidad = b.g37_localidad ',
-				'   AND a.g37_tipo_doc  = b.g37_tipo_doc) ',
-		'   AND g02_compania    = b.g37_compania ',
-		'   AND g02_localidad   = b.g37_localidad '
-PREPARE cons_tmp_anu FROM query 
-EXECUTE cons_tmp_anu
+				'SELECT CASE WHEN r38_cod_tran = "FA" THEN 1 ',
+							'WHEN r38_cod_tran = "NV" THEN 2 ',
+						'END tipo_comp, ',
+		'b.g37_pref_sucurs, b.g37_pref_pto_vta, r38_num_sri[9, 17] ',
+		'num_sri_ini, r38_num_sri[9, 17] num_sri_fin, g02_numaut_sri ',
+		'FROM tmp_tal, rept038, gent037 b, gent002 ',
+		'WHERE t23_estado      = "D" ',
+		'  AND num_tran        = ',
+				'(SELECT num_anu ',
+					'FROM t2 ',
+					'WHERE num_anu  = num_tran) ',
+		'  AND r38_compania    = ', vg_codcia,
+		'  AND r38_localidad   = local ',
+		'  AND r38_tipo_fuente = "OT" ',
+		'  AND r38_cod_tran    IN ("FA", "NV") ',
+		'  AND r38_num_tran    = num_tran ',
+		'  AND b.g37_compania  = r38_compania ',
+		'  AND b.g37_localidad = r38_localidad ',
+		'  AND b.g37_tipo_doc  = r38_cod_tran ',
+		'  AND b.g37_secuencia = ',
+				'(SELECT MAX(a.g37_secuencia) ',
+					'FROM gent037 a ',
+					'WHERE a.g37_compania  = b.g37_compania ',
+					'  AND a.g37_localidad = b.g37_localidad ',
+					'  AND a.g37_tipo_doc  = b.g37_tipo_doc) ',
+		'  AND g02_compania    = b.g37_compania ',
+		'  AND g02_localidad   = b.g37_localidad '
+PREPARE insert_tmp_anu FROM query 
+EXECUTE insert_tmp_anu
 IF num_args() = 8 THEN
 	RETURN
 END IF
 DELETE FROM tmp_tal
 	WHERE t23_estado = 'D'
-	  AND num_tran   = (SELECT num_anu FROM t2 WHERE num_anu = num_tran)
+	  AND num_tran   =
+			(SELECT num_anu
+				FROM t2
+				WHERE num_anu = num_tran)
 DROP TABLE t2
 SELECT tipo_doc_id tipo_doc_tal, cedruc cedruc_tal,
-	NVL(SUM(t23_val_impto), 0) val_ser_tal,
-	NVL(SUM(valor_tal_civa), 0) valor_tal_civa,
-	NVL(SUM(valor_tal_siva), 0) valor_tal_siva
+		NVL(SUM(t23_val_impto), 0) val_ser_tal,
+		NVL(SUM(valor_tal_civa), 0) valor_tal_civa,
+		NVL(SUM(valor_tal_siva), 0) valor_tal_siva
 	FROM tmp_tal
 	GROUP BY 1, 2
 	INTO TEMP tmp_tot_ser
@@ -393,7 +395,8 @@ SELECT tipo_doc_id tipo_doc_tal, cedruc cedruc_tal, COUNT(*) cuantos_tal
 	FROM tmp_tal
 	GROUP BY 1, 2
 	INTO TEMP tmp_tot_tal
-DECLARE q_tal CURSOR FOR SELECT * FROM tmp_tot_ser 
+DECLARE q_tal CURSOR FOR
+	SELECT * FROM tmp_tot_ser 
 FOREACH q_tal INTO r_tal.*
 	DECLARE q_tal_a CURSOR FOR
 		SELECT * FROM tmp_anexo
@@ -419,51 +422,38 @@ FOREACH q_tal INTO r_tal.*
 	END IF
 	INSERT INTO tmp_anexo
 		VALUES (r_tal.z01_tipo_doc_id, r_tal.z01_num_doc_id, "FA",
-			rm_par.fecha_fin, porc_imp, r_tal.val_ci, r_tal.val_si, 
-			0.00, 0.00, '000', 0, 0, 0)
+				rm_par.fecha_fin, porc_imp, r_tal.val_ci, r_tal.val_si, 
+				0.00, 0.00, '000', 0, 0, 0)
 END FOREACH
-CALL obtener_retenciones(1, 1)
-SELECT * FROM t1 WHERE tipo_doc_id IS NOT NULL INTO TEMP tmp_ret
-SELECT b13_codcli, z01_tipo_doc_id tipo_doc_id, z01_num_doc_id cedruc,
-	cod_concep, (valor_reten / (1.00 / 100)) base_imponible,
-	1.00 val_porc, valor_reten
-	FROM t1, cxct001
-	WHERE tipo_doc_id IS NULL
-	  AND b13_codcli  = z01_codcli
-	INTO TEMP tmp_ret_fal
-UPDATE tmp_ret_fal SET tipo_doc_id = 'F' WHERE cedruc = '9999999999999'
-unload to "reten_sri.txt" select b13_codcli, cedruc, valor_reten from tmp_ret
-DROP TABLE t1
+CALL obtener_retenciones()
 DROP TABLE tmp_tal
-
 LET query = 'SELECT CASE WHEN tipo_doc_id = "R" AND ',
-			' b13_codcli <> ', rm_r00.r00_codcli_tal,
-			' THEN "R" ',
-			' ELSE "F" ',
-		' END tipo_doc_id, ',
-		' CASE WHEN tipo_doc_id = "R" AND ',
-			' b13_codcli <> ', rm_r00.r00_codcli_tal,
-			' THEN cedruc ',
-			' ELSE "9999999999999" ',
-		' END cedruc_ret, cod_concep, NVL(SUM(base_imponible), 0) ',
-		' base_imponible, val_porc, ',
-		' NVL(SUM(valor_reten), 0) valor_reten ',
-		' FROM tmp_ret_fal ',
-		' GROUP BY 1, 2, 3, 5 ',
-		' INTO TEMP tmp_ret_fal_tot '
+							'codcli <> ', rm_r00.r00_codcli_tal, ' ',
+						'THEN "R" ',
+						'ELSE "F" ',
+					'END tipo_doc_id, ',
+					'CASE WHEN tipo_doc_id = "R" AND ',
+							'codcli <> ', rm_r00.r00_codcli_tal, ' ',
+						'THEN cedruc ',
+						'ELSE "9999999999999" ',
+					'END cedruc_ret, ',
+				'cod_concep, NVL(SUM(base_imponible), 0) base_imponible, ',
+				'val_porc, NVL(SUM(valor_reten), 0) valor_reten ',
+			'FROM tmp_ret_fal ',
+			'GROUP BY 1, 2, 3, 5 ',
+			'INTO TEMP tmp_ret_fal_tot '
 PREPARE exec_ret_fal_tot FROM query
 EXECUTE exec_ret_fal_tot
 DROP TABLE tmp_ret_fal
-
 LET query = 'SELECT CASE WHEN tipo_doc_id = "R" AND ',
-			' b13_codcli <> ', rm_r00.r00_codcli_tal,
-			' THEN cedruc ',
-			' ELSE "9999999999999" ',
-		' END cedruc_ret, cod_concep, base_imponible, val_porc, ',
-		' NVL(SUM(valor_reten), 0) valor_reten ',
-		' FROM tmp_ret ',
-		' GROUP BY 1, 2, 3, 4 ',
-		' INTO TEMP tmp_ret_tot '
+							'codcli <> ', rm_r00.r00_codcli_tal, ' ',
+						'THEN cedruc ',
+						'ELSE "9999999999999" ',
+					'END cedruc_ret, cod_concep, base_imponible, val_porc, ',
+				'NVL(SUM(valor_reten), 0) valor_reten ',
+			'FROM tmp_ret ',
+			'GROUP BY 1, 2, 3, 4 ',
+			'INTO TEMP tmp_ret_tot '
 PREPARE exec_ret_tot FROM query
 EXECUTE exec_ret_tot
 UPDATE tmp_ret_tot
@@ -471,59 +461,60 @@ UPDATE tmp_ret_tot
 	    base_imponible = 0.00,
 	    val_porc       = 0.00
 	WHERE valor_reten = 0 
-UPDATE tmp_ret_tot SET val_porc = 1.00 WHERE valor_reten <> 0 
+UPDATE tmp_ret_tot
+	SET val_porc = 1.00
+	WHERE valor_reten <> 0 
 UPDATE tmp_ret_tot
 	SET base_imponible  = (valor_reten / (val_porc / 100))
 	WHERE valor_reten  <> 0 
 DROP TABLE tmp_ret
-
 UPDATE tmp_tot
-	SET cuantos = (SELECT cuantos_tal FROM tmp_tot_tal
-			WHERE cedruc_tal = doccli)
-	WHERE EXISTS (SELECT cedruc_tal FROM tmp_tot_tal
+	SET cuantos =
+			(SELECT cuantos_tal
+				FROM tmp_tot_tal
+				WHERE cedruc_tal = doccli)
+	WHERE EXISTS
+		(SELECT cedruc_tal
+			FROM tmp_tot_tal
 			WHERE cedruc_tal = doccli)
 	  AND c_tran = "FA"
 DROP TABLE tmp_tot_tal
-
 LET query = 'SELECT CASE WHEN LENGTH(z01_num_doc_id) = 13 ',
-			'THEN "R" ',
-			'ELSE "F" ',
-			'END z01_tipo_doc_id, z01_num_doc_id, z21_codcli, ',
-		' z21_tipo_doc, z21_num_doc, z21_valor, ',
-		' CASE WHEN z21_val_impto > 0 ',
-			' THEN ', rg_gen.g00_porc_impto,
-			' ELSE 0.00 ',
-		' END porc, ',
-		' z21_val_impto, z21_cod_tran, z21_num_tran, z21_areaneg, ',
-		'"', rm_par.fecha_fin, '" z21_fecha_emi, z21_localidad ',
-		' FROM cxct021, cxct001 ',
-		' WHERE z21_compania   = ', vg_codcia,
-		'   AND z21_tipo_doc   = "NC" ',
-		'   AND z21_fecha_emi  BETWEEN "', rm_par.fecha_ini,
-					'" AND "', rm_par.fecha_fin, '"',
-		'   AND z01_codcli     = z21_codcli ',
-		' INTO TEMP tmp_fav '
+						'THEN "R" ',
+						'ELSE "F" ',
+					'END z01_tipo_doc_id, z01_num_doc_id, z21_codcli, ',
+				'z21_tipo_doc, z21_num_doc, z21_valor, ',
+				'CASE WHEN z21_val_impto > 0 ',
+					'THEN ', rg_gen.g00_porc_impto, ' ',
+					'ELSE 0.00 ',
+				'END porc, ',
+				'z21_val_impto, z21_cod_tran, z21_num_tran, z21_areaneg, ',
+				'"', rm_par.fecha_fin, '" z21_fecha_emi, z21_localidad ',
+			'FROM cxct021, cxct001 ',
+			'WHERE z21_compania   = ', vg_codcia,
+			'  AND z21_tipo_doc   = "NC" ',
+			'  AND z21_fecha_emi  BETWEEN "', rm_par.fecha_ini,
+								   '" AND "', rm_par.fecha_fin, '"',
+			'  AND z01_codcli     = z21_codcli ',
+			'INTO TEMP tmp_fav '
 PREPARE cons_tmp_fav FROM query 
 EXECUTE cons_tmp_fav
-
-{*
- * XXX
- * La variable base_suc es un rezago de la época del sistema en
- * Acero Comercial. Debe eliminarse para limpiar el código
- *}
-LET base_suc = NULL
-CALL obtener_fact_dev_nc(base_suc, 'tmp_fav')
+CALL obtener_fact_dev_nc('tmp_fav')
 UPDATE tmp_fav
-	SET z01_tipo_doc_id = (SELECT b.z01_tipo_doc_id FROM tmp_ncdf b
+	SET z01_tipo_doc_id =
+				(SELECT b.z01_tipo_doc_id
+				FROM tmp_ncdf b
 				WHERE b.num_doc      = z21_num_doc
 				  AND b.z21_cod_tran = z21_cod_tran
 				  AND b.z21_num_tran = z21_num_tran),
-	    z01_num_doc_id  = (SELECT b.z01_num_doc_id FROM tmp_ncdf b
+	    z01_num_doc_id  =
+				(SELECT b.z01_num_doc_id
+				FROM tmp_ncdf b
 				WHERE b.num_doc      = z21_num_doc
 				  AND b.z21_cod_tran = z21_cod_tran
 				  AND b.z21_num_tran = z21_num_tran)
-	WHERE EXISTS (SELECT a.z21_tipo_doc, a.num_doc, a.z21_cod_tran,
-				a.z21_num_tran
+	WHERE EXISTS
+		(SELECT a.z21_tipo_doc, a.num_doc, a.z21_cod_tran, a.z21_num_tran
 			FROM tmp_ncdf a
 			WHERE a.z21_tipo_doc = z21_tipo_doc
 			  AND a.num_doc      = z21_num_doc
@@ -557,15 +548,14 @@ INSERT INTO tmp_anexo
 		NVL(SUM(z21_val_impto), 0), NVL(SUM(flete_nc), 0),'000', 0, 0, 0
 		FROM tmp_nc
 		GROUP BY 1, 2, 3, 4, 5, 10, 11, 12, 13
-
 INSERT INTO tmp_tot
 	SELECT z01_num_doc_id, z21_tipo_doc, z21_num_doc, COUNT(*)
 		FROM tmp_nc
 		GROUP BY 1, 2, 3
 UPDATE tmp_anexo
 	SET porc_impto = rg_gen.g00_porc_impto
-	WHERE EXISTS (SELECT z01_tipo_doc_id, z01_num_doc_id, z21_tipo_doc,
-				z21_fecha_emi
+	WHERE EXISTS
+		(SELECT z01_tipo_doc_id, z01_num_doc_id, z21_tipo_doc, z21_fecha_emi
 			FROM tmp_nc
 			WHERE tipo_doc_id = z01_tipo_doc_id
 			  AND cedruc      = z01_num_doc_id
@@ -573,23 +563,23 @@ UPDATE tmp_anexo
 			  AND fecha_vta   = z21_fecha_emi)
 DROP TABLE tmp_nc
 LET query = 'SELECT CASE WHEN LENGTH(z01_num_doc_id) = 13 ',
-			'THEN "R" ',
-			'ELSE "F" ',
-			'END z01_tipo_doc_id, z01_num_doc_id, z20_tipo_doc, ',
-		' z20_num_doc, "', rm_par.fecha_fin, '" z20_fecha_emi, ',
-		' CASE WHEN z20_val_impto > 0 ',
-			' THEN ', rg_gen.g00_porc_impto,
-			' ELSE 0.00 ',
-		' END porc, ',
-		' CASE WHEN z20_val_impto > 0 ',
-			' THEN (z20_valor_cap + z20_valor_int) - z20_val_impto',
-			' ELSE 0.00 ',
-		' END valor_civa, ',
-		' CASE WHEN z20_val_impto = 0 ',
-			' THEN (z20_valor_cap + z20_valor_int) ',
-			' ELSE 0.00 ',
-		' END valor_siva, ',
-		' z20_val_impto, 0.00 flete_nd ',
+						'THEN "R" ',
+						'ELSE "F" ',
+					'END z01_tipo_doc_id, z01_num_doc_id, z20_tipo_doc, ',
+				' z20_num_doc, "', rm_par.fecha_fin, '" z20_fecha_emi, ',
+			' CASE WHEN z20_val_impto > 0 ',
+				' THEN ', rg_gen.g00_porc_impto,
+				' ELSE 0.00 ',
+			' END porc, ',
+			' CASE WHEN z20_val_impto > 0 ',
+				' THEN (z20_valor_cap + z20_valor_int) - z20_val_impto',
+				' ELSE 0.00 ',
+			' END valor_civa, ',
+			' CASE WHEN z20_val_impto = 0 ',
+				' THEN (z20_valor_cap + z20_valor_int) ',
+				' ELSE 0.00 ',
+			' END valor_siva, ',
+			' z20_val_impto, 0.00 flete_nd ',
 		' FROM cxct020, cxct001 ',
 		' WHERE z20_compania   = ', vg_codcia,
 		'   AND z20_tipo_doc   = "ND" ',
@@ -724,15 +714,9 @@ DROP TABLE tmp_fact
 DROP TABLE tmp_anexo
 DROP TABLE tmp_tot_ser
 DROP TABLE tmp_tot_f
-
-CASE vg_codloc
-	WHEN 1    LET codloc = 2
-	WHEN 3    LET codloc = 4
-	OTHERWISE LET codloc = vg_codloc
-END CASE
 LET query = 'DELETE FROM srit021 ',
 		' WHERE s21_compania  = ', vg_codcia,
-		'   AND s21_localidad IN (', vg_codloc, ', ', codloc, ') ',
+		'   AND s21_localidad = ', vg_codloc,
 		'   AND s21_anio      = ', YEAR(rm_par.fecha_fin),
 		'   AND s21_mes       = ', MONTH(rm_par.fecha_fin)
 PREPARE cons_del FROM query
@@ -828,7 +812,6 @@ SELECT tmp_cli_fal.*, (SELECT s18_sec_tran FROM srit018
 	  AND s21_num_doc_id = cedruc_ret
 	  AND s21_tipo_comp  = tipo_comp
 	INTO TEMP tmp_faltantes
-
 LET query = 'INSERT INTO srit021 ',
 		' (s21_compania, s21_localidad, s21_anio, s21_mes,',
 		'  s21_ident_cli, s21_num_doc_id, s21_tipo_comp,',
@@ -935,14 +918,13 @@ END FUNCTION
 
 
 
-FUNCTION obtener_facturas(flag)
-DEFINE flag		SMALLINT
-DEFINE query		VARCHAR(4000)
-DEFINE base_suc		VARCHAR(10)
-DEFINE codloc		LIKE rept019.r19_localidad
+{**
+	OBTIENE LAS FACTURAS DE INVENTARIO: rept019
+**}
 
-LET base_suc = NULL
-LET codloc   = vg_codloc
+FUNCTION obtener_facturas()
+DEFINE query		VARCHAR(4000)
+
 LET query = 'SELECT r19_codcli codcli, ',
 		'CASE WHEN LENGTH(r19_cedruc) = 13 AND ',
 			' r19_codcli <> ', rm_r00.r00_codcli_tal,
@@ -976,64 +958,68 @@ LET query = 'SELECT r19_codcli codcli, ',
 		'END valor_iva, "', rm_par.fecha_fin, '" fecha_vta, ',
 		' r19_flete, r19_porc_impto porc_impto, r19_cedruc cedruc_v,',
 		' r19_cont_cred cont_cred, r19_localidad local ',
-		' FROM ', base_suc CLIPPED, 'rept019, ',
-			base_suc CLIPPED, 'cxct001 ',
+		' FROM rept019, cxct001 ',
 		' WHERE r19_compania     = ', vg_codcia,
-		'   AND r19_localidad    = ', codloc,
+		'   AND r19_localidad    = ', vg_codloc,
 		'   AND r19_cod_tran     IN ("FA", "NV") ',
 		'   AND DATE(r19_fecing) BETWEEN "', rm_par.fecha_ini,
-					  '" AND "', rm_par.fecha_fin, '"',
+								  '" AND "', rm_par.fecha_fin, '"',
 		'   AND z01_codcli       = r19_codcli ',
-		' INTO TEMP t1 ' 
-PREPARE cons_t1 FROM query 
-EXECUTE cons_t1
+		' INTO TEMP tmp_fact ' 
+PREPARE cons_tmp_fact FROM query 
+EXECUTE cons_tmp_fact
 LET query = 'SELECT tipo_dev tipo_anu, num_dev num_anu, z21_tipo_doc ',
-		' FROM t1, OUTER ', base_suc CLIPPED, 'cxct021 ',
-		' WHERE t1.tipo_dev   = "AF" ',
+		' FROM tmp_fact, OUTER cxct021 ',
+		' WHERE tmp_fact.tipo_dev   = "AF" ',
 		'   AND z21_compania  = ', vg_codcia,
-		'   AND z21_localidad = ', codloc,
+		'   AND z21_localidad = ', vg_codloc,
 		'   AND z21_tipo_doc  = "NC" ',
-		'   AND z21_cod_tran  = t1.tipo_dev ',
-		'   AND z21_num_tran  = t1.num_dev ',
+		'   AND z21_cod_tran  = tmp_fact.tipo_dev ',
+		'   AND z21_num_tran  = tmp_fact.num_dev ',
 		' INTO TEMP t2 '
 PREPARE cons_t2 FROM query 
 EXECUTE cons_t2
 DELETE FROM t2 WHERE z21_tipo_doc IS NOT NULL
-LET query = 'SELECT CASE WHEN LENGTH(cedruc) = 13 AND ',
-		' fp_digito_veri(cedruc) = 1 THEN 1 ELSE 2',
-		' END tipo_comp, ',
-		' b.g37_pref_sucurs, b.g37_pref_pto_vta, r38_num_sri[9, 16]',
-		' num_sri_ini, r38_num_sri[9, 16] num_sri_fin, g02_numaut_sri',--,',
-		' FROM t1, ', base_suc CLIPPED, 'rept038, ', base_suc CLIPPED,
-			'gent037 b, ', base_suc CLIPPED, 'gent002 ',
-		' WHERE tipo_dev        = "AF" ',
-		'   AND num_dev         = (SELECT num_anu FROM t2 ',
+LET query = 'SELECT ',
+				'CASE WHEN LENGTH(cedruc) = 13 AND fp_digito_veri(cedruc) = 1 ',
+						'THEN 1 ',
+						'ELSE 2 ',
+				'END tipo_comp, ',
+				'b.g37_pref_sucurs, b.g37_pref_pto_vta, r38_num_sri[9, 17] ',
+				'num_sri_ini, r38_num_sri[9, 17] num_sri_fin, g02_numaut_sri ',
+			'FROM tmp_fact, rept038, gent037 b, gent002 ',
+			'WHERE tipo_dev         = "AF" ',
+			'  AND num_dev          = ',
+					'(SELECT num_anu ',
+					' FROM t2 ',
 					' WHERE tipo_anu = tipo_dev ',
 					'   AND num_anu  = num_dev) ',
-		'   AND r38_compania    = ', vg_codcia,
-		'   AND r38_localidad   = local ',
-		'   AND r38_tipo_fuente = "PR" ',
-		'   AND r38_cod_tran    IN ("FA", "NV") ',
-		'   AND r38_num_tran    = num_tran ',
-		'   AND b.g37_compania  = r38_compania ',
-		'   AND b.g37_localidad = r38_localidad ',
-		'   AND b.g37_tipo_doc  = r38_cod_tran ',
-		'   AND b.g37_secuencia = ',
+			'  AND r38_compania     = ', vg_codcia,
+			'  AND r38_localidad    = local ',
+			'  AND r38_tipo_fuente  = "PR" ',
+			'  AND r38_cod_tran    IN ("FA", "NV") ',
+			'  AND r38_num_tran     = num_tran ',
+			'  AND b.g37_compania   = r38_compania ',
+			'  AND b.g37_localidad  = r38_localidad ',
+			'  AND b.g37_tipo_doc   = r38_cod_tran ',
+			'  AND b.g37_secuencia  = ',
 			' (SELECT MAX(a.g37_secuencia) ',
-				' FROM ', base_suc CLIPPED, 'gent037 a ',
-				' WHERE a.g37_compania  = b.g37_compania ',
-				'   AND a.g37_localidad = b.g37_localidad ',
-				'   AND a.g37_tipo_doc  = b.g37_tipo_doc) ',
-		'   AND g02_compania    = b.g37_compania ',
-		'   AND g02_localidad   = b.g37_localidad ',
-		' INTO TEMP t3 '
-PREPARE cons_t3 FROM query 
-EXECUTE cons_t3
-DELETE FROM t1
+				'FROM gent037 a ',
+				'WHERE a.g37_compania  = b.g37_compania ',
+				'  AND a.g37_localidad = b.g37_localidad ',
+				'  AND a.g37_tipo_doc  = b.g37_tipo_doc) ',
+			'  AND g02_compania    = b.g37_compania ',
+			'  AND g02_localidad   = b.g37_localidad ',
+			'INTO TEMP tmp_anu '
+PREPARE cons_tmp_anu FROM query 
+EXECUTE cons_tmp_anu
+DELETE FROM tmp_fact
 	WHERE tipo_dev = "AF"
-	  AND num_dev  = (SELECT num_anu FROM t2
-				WHERE tipo_anu = tipo_dev
-				  AND num_anu  = num_dev)
+	  AND num_dev  =
+		(SELECT num_anu
+			FROM t2
+			WHERE tipo_anu = tipo_dev
+			  AND num_anu  = num_dev)
 DROP TABLE t2
 
 END FUNCTION
@@ -1086,8 +1072,11 @@ END FUNCTION
 
 
 
-FUNCTION obtener_fact_dev_nc(base_suc, tabla)
-DEFINE base_suc		VARCHAR(10)
+{**
+	OBTIENE LAS N/C Y DEVOLUCIONES DE INVENTARIO
+**}
+
+FUNCTION obtener_fact_dev_nc(tabla)
 DEFINE tabla		VARCHAR(15)
 DEFINE query		VARCHAR(3000)
 
@@ -1116,38 +1105,8 @@ LET query = 'SELECT CASE WHEN (SELECT LENGTH(a.r19_cedruc) ',
 		'   AND b.r19_compania  = ', vg_codcia,
 		'   AND b.r19_localidad = z21_localidad ',
 		'   AND b.r19_cod_tran  = z21_cod_tran ',
-		'   AND b.r19_num_tran  = z21_num_tran '
-IF vg_codcia = 1 THEN
-	LET query = query CLIPPED,
-		' UNION ',
-		' SELECT CASE WHEN (SELECT LENGTH(a.r19_cedruc) ',
-				'FROM ', base_suc CLIPPED, 'rept019 a ',
-				'WHERE a.r19_compania  = b.r19_compania ',
-				'  AND a.r19_localidad = b.r19_localidad ',
-				'  AND a.r19_cod_tran  = b.r19_tipo_dev ',
-				'  AND a.r19_num_tran  = b.r19_num_dev) = 13',
-			' THEN "R" ',
-			' ELSE "F" ',
-			' END z01_tipo_doc_id, ',
-		' CASE WHEN (SELECT LENGTH(a.r19_cedruc) ',
-				'FROM ', base_suc CLIPPED, 'rept019 a ',
-				'WHERE a.r19_compania  = b.r19_compania ',
-				'  AND a.r19_localidad = b.r19_localidad ',
-				'  AND a.r19_cod_tran  = b.r19_tipo_dev ',
-				'  AND a.r19_num_tran  = b.r19_num_dev) = 13',
-			' THEN z01_num_doc_id ',
-			' ELSE "9999999999999" ',
-			' END z01_num_doc_id, z21_codcli, z21_tipo_doc,',
-		' z21_num_doc num_doc, z21_valor, z21_val_impto, z21_cod_tran,',
-		' z21_num_tran, z21_areaneg, z21_fecha_emi ',
-		' FROM ', tabla CLIPPED, ', ', base_suc CLIPPED, 'rept019 b ',
-		' WHERE z21_areaneg     = 1 ',
-		'   AND b.r19_compania  = ', vg_codcia,
-		'   AND b.r19_localidad = z21_localidad ',
-		'   AND b.r19_cod_tran  = z21_cod_tran ',
-		'   AND b.r19_num_tran  = z21_num_tran '
-END IF
-LET query = query CLIPPED, ' INTO TEMP tmp_ncdf '
+		'   AND b.r19_num_tran  = z21_num_tran ',
+		' INTO TEMP tmp_ncdf '
 PREPARE cons_tmp_ncdf FROM query 
 EXECUTE cons_tmp_ncdf
 
@@ -1202,57 +1161,39 @@ END FUNCTION
 
 
 
-FUNCTION obtener_retenciones(flag, flag_join)
-DEFINE flag, flag_join	SMALLINT
-DEFINE query		VARCHAR(4000)
-DEFINE tabla_fact	VARCHAR(15)
-DEFINE localidad	VARCHAR(15)
+{**
+	OBTIENE LAS RETENCIONES DE LAS FACTURAS DE CLIENTES
+**}
 
-CASE flag
-	WHEN 1
-		LET localidad = ' local '
-	WHEN 2
-		CASE vg_codloc
-			WHEN 1
-				LET localidad = ' 2 '
-			WHEN 3
-				LET localidad = ' 4 '
-		END CASE
-END CASE
-CASE flag_join
-	WHEN 1
-		LET tabla_fact  = 'tmp_fact'
-	WHEN 2
-		LET tabla_fact  = 'tmp_tal'
-END CASE
-LET query = 'SELECT UNIQUE codcli, tipo_doc_id, cedruc ',
-		' FROM tmp_fact ',
-		' UNION ',
-			' SELECT UNIQUE codcli, tipo_doc_id, cedruc ',
-			' FROM tmp_tal ',
-		' INTO TEMP t2 '
-PREPARE cli_t2 FROM query
-EXECUTE cli_t2
-LET query = 'SELECT UNIQUE b13_codcli, tipo_doc_id, cedruc, "307" cod_concep,',
-		' 1111111.11 base_imponible, 1.11 val_porc,',
-		' NVL(SUM(b13_valor_base), 0) valor_reten ',
-		' FROM ctbt012, ctbt013, ctbt042, OUTER t2 ',
-		' WHERE b12_compania    = ', vg_codcia,
-		'   AND b12_estado      = "M" ',
-		'   AND b12_fec_proceso BETWEEN "', rm_par.fecha_ini,
-					 '" AND "', rm_par.fecha_fin, '"',
-		'   AND b13_compania    = b12_compania ',
-		'   AND b13_tipo_comp   = b12_tipo_comp ',
-		'   AND b13_num_comp    = b12_num_comp ',
-		'   AND b13_codcli      = codcli ',
-		'   AND b13_cuenta      IN ("11300201002", b42_retencion, "11300201003") ',
-		'   AND b42_compania    = b12_compania ',
-		'   AND b42_localidad   = ', vg_codloc,
-		' GROUP BY 1, 2, 3, 4, 5, 6 ',
-		' INTO TEMP t1 '
+FUNCTION obtener_retenciones()
+DEFINE query		VARCHAR(800)
+
+LET query = 'SELECT codcli, tipo_doc_id, cedruc, "307" cod_concep, ',
+					'1111111.11 base_imponible, 1.11 val_porc, ',
+					'0.00 valor_reten ',
+				'FROM tmp_fact ',
+				'GROUP BY 1, 2, 3, 4, 5, 6, 7 ',
+			'UNION ',
+			'SELECT codcli, tipo_doc_id, cedruc, "307" cod_concep, ',
+					'1111111.11 base_imponible, 1.11 val_porc, ',
+					'0.00 valor_reten ',
+				'FROM tmp_tal ',
+				'GROUP BY 1, 2, 3, 4, 5, 6, 7 ',
+			'INTO TEMP t1 '
 PREPARE exec_tmp_ret FROM query
 EXECUTE exec_tmp_ret
-DROP TABLE t2
+SELECT * FROM t1 WHERE tipo_doc_id IS NOT NULL INTO TEMP tmp_ret
+SELECT codcli, z01_tipo_doc_id tipo_doc_id, z01_num_doc_id cedruc, cod_concep,
+		(valor_reten / (1.00 / 100)) base_imponible, 1.00 val_porc, valor_reten
+	FROM t1, cxct001
+	WHERE tipo_doc_id IS NULL
+	  AND codcli  = z01_codcli
+	INTO TEMP tmp_ret_fal
+UPDATE tmp_ret_fal
+	SET tipo_doc_id = 'F'
+	WHERE cedruc = '9999999999999'
+--unload to "reten_sri.txt" select codcli, cedruc, valor_reten from tmp_ret
+DROP TABLE t1
 
 END FUNCTION
 
@@ -1540,14 +1481,14 @@ END FUNCTION
 
 FUNCTION generar_archivo_anula_xml()
 DEFINE r_anu		RECORD
-				comp		LIKE srit004.s04_codigo,
-				punto		LIKE gent037.g37_pref_sucurs,
-				estab		LIKE gent037.g37_pref_pto_vta,
-				numini		LIKE rept038.r38_num_sri,
-				numfin		LIKE rept038.r38_num_sri,
-				autoriz		LIKE gent002.g02_numaut_sri,
-				fecha		DATE
-			END RECORD
+						comp		LIKE srit004.s04_codigo,
+						punto		LIKE gent037.g37_pref_sucurs,
+						estab		LIKE gent037.g37_pref_pto_vta,
+						numini		LIKE rept038.r38_num_sri,
+						numfin		LIKE rept038.r38_num_sri,
+						autoriz		LIKE gent002.g02_numaut_sri,
+						fecha		DATE
+					END RECORD
 DEFINE registro		CHAR(4000)
 
 DECLARE q_anu CURSOR FOR SELECT * FROM tmp_anu ORDER BY 4
@@ -1564,7 +1505,9 @@ FOREACH q_anu INTO r_anu.*
 	DISPLAY registro CLIPPED
 	LET registro = ' '
 END FOREACH
-DISPLAY '</anulados>'
+IF registro = ' ' THEN
+	DISPLAY '</anulados>'
+END IF
 CALL fl_mostrar_mensaje('Archivo XML de anulados generado OK.', 'info')
 
 END FUNCTION

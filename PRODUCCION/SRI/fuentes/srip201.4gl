@@ -432,16 +432,10 @@ FOREACH q_uni INTO rm_s21.*, vm_r_rows[vm_num_rows]
 END FOREACH
 LET vm_num_rows = vm_num_rows - 1
 IF vm_num_rows = 0 THEN
-	{--
-	CALL control_generar(1)
-	CALL control_generar(2)
-	CALL control_generar(3)
-	--}
-	--CALL fl_mensaje_consulta_sin_registros()
 	LET vm_row_current = 1
 	CALL muestra_contadores(vm_row_current, vm_num_rows)
-        CLEAR FORM
-        RETURN
+    CLEAR FORM
+    RETURN
 END IF
 LET vm_row_current = 1
 CALL muestra_contadores(vm_row_current, vm_num_rows)
@@ -517,7 +511,7 @@ LET int_flag = 0
 FOR a = rm_par.anio_ini TO rm_par.anio_fin
 	FOR m = rm_par.mes_ini TO rm_par.mes_fin
 		LET rm_s21.s21_fecha_emi_vta = MDY(m, 01, a) + 1 UNITS MONTH
-						- 1 UNITS DAY
+										- 1 UNITS DAY
 		IF rm_par.tipo_gye = 'S' THEN
 			CASE flag
 				WHEN 'I'
@@ -590,7 +584,7 @@ END IF
 LET vm_row_current = 1
 CALL muestra_contadores(vm_row_current, vm_num_rows)
 CALL lee_muestra_registro(vm_r_rows[vm_row_current])
-CALL fl_mostrar_mensaje('Archivo Regenerado OK.', 'info')
+--CALL fl_mostrar_mensaje('Archivo Regenerado OK.', 'info')
 
 END FUNCTION
 
@@ -761,7 +755,7 @@ DEFINE cuantos		INTEGER
 
 LET int_flag = 0 
 INPUT BY NAME rm_par.anio_fin, rm_par.mes_fin, rm_par.tipo_gye, rm_par.tipo_uio,
-	rm_par.tipo_nac
+		rm_par.tipo_nac
 	WITHOUT DEFAULTS
 	ON KEY(INTERRUPT)
 		IF FIELD_TOUCHED(rm_par.anio_fin, rm_par.mes_fin,
@@ -799,7 +793,6 @@ INPUT BY NAME rm_par.anio_fin, rm_par.mes_fin, rm_par.tipo_gye, rm_par.tipo_uio,
 				  AND s21_localidad  = vg_codloc
 				  AND s21_anio       = rm_par.anio_fin
 				  AND s21_mes        = rm_par.mes_fin
-				  --AND s21_estado    <> 'G'
 				  AND s21_estado    NOT IN ('G', 'P')
 		OPEN q_s21
 		FETCH q_s21 INTO r_s21.*
@@ -836,10 +829,8 @@ INPUT BY NAME rm_par.anio_fin, rm_par.mes_fin, rm_par.tipo_gye, rm_par.tipo_uio,
 			  AND s21_anio      = YEAR(fecha)
 			  AND s21_mes       = MONTH(fecha)
 			  AND s21_estado    = 'G'
-			  --AND s21_estado    NOT IN ('G', 'P')
 		IF cuantos > 0 THEN
-			CALL fl_mostrar_mensaje('Existe otro anexo generado. Cierrelo si desea generar uno nuevo.', 'exclamation')
-			CONTINUE INPUT
+			CALL fl_mostrar_mensaje('Existe otro anexo generado, por favor verifiquelo.', 'info')
 		END IF
 END INPUT
 IF int_flag THEN
@@ -886,7 +877,7 @@ END FUNCTION
 
 
 FUNCTION control_generar(flag, tip_ane)
-DEFINE flag		SMALLINT
+DEFINE flag			SMALLINT
 DEFINE tip_ane		CHAR(1)
 DEFINE fecha		DATE
 DEFINE long, posi	SMALLINT
@@ -894,59 +885,44 @@ DEFINE query		CHAR(6000)
 DEFINE comando		VARCHAR(600)
 DEFINE archivo		VARCHAR(150)
 DEFINE param		VARCHAR(25)
-DEFINE resp		VARCHAR(6)
 
 LET int_flag = 0
 CASE flag
 	WHEN 1
-		--CALL fl_hacer_pregunta('Se va a generar nuevamente el anexo transaccional de ventas. Si ha hecho alguna modificación, la perdera. Desea continuar ?', 'no')			RETURNING resp
 		LET archivo = NULL
 	WHEN 2
-		--CALL fl_hacer_pregunta('Desea generar el archivo en XML de ventas ?', 'Yes')			RETURNING resp
 		CASE tip_ane
 			WHEN 'G' LET param = ' "U"'
-				 LET posi  = 8
+					 LET posi  = 8
 			WHEN 'Q' LET param = ' "U" "V"'
-				 LET posi  = 12
+					 LET posi  = 12
 			WHEN 'N' LET param = ' "U" "V" "W"'
-				 LET posi  = 16
+					 LET posi  = 16
 		END CASE
 		LET archivo = param CLIPPED,' > $HOME/tmp/anexo_ventas_',
-				MONTH(rm_s21.s21_fecha_emi_vta) USING "&&", '-',
-				YEAR(rm_s21.s21_fecha_emi_vta) USING "&&&&",
-				'_', tip_ane CLIPPED, '.xml ' 
+						MONTH(rm_s21.s21_fecha_emi_vta) USING "&&", '-',
+						YEAR(rm_s21.s21_fecha_emi_vta) USING "&&&&",
+						'_', tip_ane CLIPPED, '.xml ' 
 	WHEN 3
-		--CALL fl_hacer_pregunta('Desea generar el archivo en XML de anulados ?', 'Yes')			RETURNING resp
 		CASE tip_ane
-			--WHEN 'G' LET param = ' "U" "V" "W" "X"'
-				 --LET posi  = 20
 			WHEN 'G' LET param = ' "U" "V"'
-				 LET posi  = 12
+					 LET posi  = 12
 			WHEN 'Q' LET param = ' "U" "V" "W" "X" "Y"'
-				 LET posi  = 24
+					 LET posi  = 24
 			WHEN 'N' LET param = ' "U" "V" "W" "X" "Y" "Z"'
-				 LET posi  = 28
+					 LET posi  = 28
 		END CASE
 		LET archivo = param CLIPPED, ' > $HOME/tmp/anulados_',
-				MONTH(rm_s21.s21_fecha_emi_vta) USING "&&", '-',
-				YEAR(rm_s21.s21_fecha_emi_vta) USING "&&&&",
-				'_', tip_ane CLIPPED, '.xml ' 
+						MONTH(rm_s21.s21_fecha_emi_vta) USING "&&", '-',
+						YEAR(rm_s21.s21_fecha_emi_vta) USING "&&&&",
+						'_', tip_ane CLIPPED, '.xml ' 
 END CASE
-LET resp = 'Yes'
-IF resp <> 'Yes' THEN
-	RETURN
-END IF
 LET fecha = MDY(MONTH(rm_s21.s21_fecha_emi_vta), 01,
-		YEAR(rm_s21.s21_fecha_emi_vta))
+				YEAR(rm_s21.s21_fecha_emi_vta))
 LET comando = 'cd ..', vg_separador, '..', vg_separador, 'SRI', vg_separador,
-		'fuentes', vg_separador, '; umask 0002; fglrun srip200 ',
-		vg_base, ' "', vg_modulo, '" ', vg_codcia, ' ', vg_codloc, ' "',
-		{--
-		fecha, '" "', rm_s21.s21_fecha_emi_vta, '" "', rm_par.tipo_gye, '" "',
-		rm_par.tipo_uio, '" "', rm_par.tipo_nac, '" ',
-		archivo CLIPPED
-		--}
-		fecha, '" "', rm_s21.s21_fecha_emi_vta, '" ', archivo CLIPPED
+				'fuentes', vg_separador, '; umask 0002; fglrun srip200 ',
+				vg_base, ' "', vg_modulo, '" ', vg_codcia, ' ', vg_codloc, ' "',
+				fecha, '" "', rm_s21.s21_fecha_emi_vta, '" ', archivo CLIPPED
 RUN comando
 IF flag = 1 THEN
 	IF vm_num_rows > 0 THEN
@@ -957,10 +933,6 @@ IF flag = 1 THEN
 END IF
 LET long    = LENGTH(archivo)
 LET archivo = 'unix2dos ', archivo[posi, long] CLIPPED
-RUN archivo
-LET posi    = 10
-LET long    = LENGTH(archivo)
---LET archivo = 'mv -f ', archivo[posi, long] CLIPPED, ' $HOME/tmp/'
 RUN archivo
 LET query = 'SELECT s21_ident_cli, s21_num_doc_id,',
 		' CASE WHEN s21_num_doc_id <> "9999999999999" THEN ',
@@ -988,14 +960,7 @@ LET query = 'SELECT s21_ident_cli, s21_num_doc_id,',
 		' INTO TEMP t1 '
 PREPARE exec_t1_final FROM query
 EXECUTE exec_t1_final
---UNLOAD TO '$HOME/tmp/anexo_ventas.unl' SELECT * FROM t1
 DROP TABLE t1
-LET archivo = 'anexo_ventas_', MONTH(rm_s21.s21_fecha_emi_vta) USING "&&",
-		'-', YEAR(rm_s21.s21_fecha_emi_vta) USING "&&&&", '_',
-		vg_codloc USING "&&", '.unl ' 
-LET comando = 'mv ../../../tmp/anexo_ventas.unl $HOME/tmp/', archivo CLIPPED
---RUN comando
---CALL fl_mostrar_mensaje('Archivo Regenerado OK.', 'info')
 
 END FUNCTION
 
