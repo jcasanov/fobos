@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------
--- Titulo              : srip201.4gl -- Mantenimiento anexo de ventas
+-- Titulo              : srip201.4gl -- Mantenimiento Anexo Transaccional
 -- Elaboración         : 21-Sep-2006
 -- Autor               : NPC
 -- Formato de Ejecución: fglrun srip201 Base Modulo Compañía Localidad
@@ -12,14 +12,11 @@ GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 DEFINE rm_s00   	RECORD LIKE srit000.*
 DEFINE rm_s21   	RECORD LIKE srit021.*
 DEFINE rm_par		RECORD
-				anio_ini	SMALLINT,
-				mes_ini		SMALLINT,
-				anio_fin	SMALLINT,
-				mes_fin		SMALLINT,
-				tipo_gye	CHAR(1),
-				tipo_uio	CHAR(1),
-				tipo_nac	CHAR(1)
-			END RECORD
+						anio_ini	SMALLINT,
+						mes_ini		SMALLINT,
+						anio_fin	SMALLINT,
+						mes_fin		SMALLINT
+					END RECORD
 DEFINE vm_r_rows	ARRAY[30000] OF INTEGER
 DEFINE vm_row_current   SMALLINT        -- FILA CORRIENTE DEL ARREGLO
 DEFINE vm_num_rows      SMALLINT        -- CANTIDAD DE FILAS LEIDAS
@@ -63,12 +60,6 @@ DEFINE num_rows 	SMALLINT
 DEFINE num_cols 	SMALLINT
 
 CALL fl_nivel_isolation()
-{
-CALL fl_chequeo_mes_proceso_sri(vg_codcia) RETURNING int_flag
-IF int_flag THEN
-	RETURN
-END IF
-}
 CALL fl_lee_configuracion_sri(vg_codcia) RETURNING rm_s00.*
 IF rm_s00.s00_compania IS NULL THEN
 	CALL fl_mostrar_mensaje('No existe configurada la compania de SRI.', 'stop')
@@ -110,7 +101,6 @@ MENU 'OPCIONES'
 		HIDE OPTION 'Genera Anexo XML'
 		HIDE OPTION 'Genera Anula XML'
 	COMMAND KEY('I') 'Ingresar' 'Ingresar nuevos registros. '
-		--CALL control_ingreso()
 		CALL control_parametros('I')
 		IF vm_num_rows = 1 THEN
 			SHOW OPTION 'Modificar'
@@ -446,15 +436,14 @@ END FUNCTION
 
 
 FUNCTION control_parametros(flag)
-DEFINE flag		CHAR(1)
-DEFINE fec_i, fec_f	DATE
-DEFINE fecha		DATE
-DEFINE a, m		SMALLINT
-DEFINE query		CHAR(800)
+DEFINE flag				CHAR(1)
+DEFINE fecha			DATE
+DEFINE fec_i, fec_f		DATE
+DEFINE query			CHAR(800)
 
 OPTIONS INPUT WRAP
 CLEAR FORM
-OPEN WINDOW w_srif201_2 AT 06, 17 WITH 08 ROWS, 46 COLUMNS
+OPEN WINDOW w_srif201_2 AT 06, 17 WITH 04 ROWS, 46 COLUMNS
     ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE 0,
 		MESSAGE LINE LAST, BORDER)
 IF vg_gui = 1 THEN
@@ -469,7 +458,6 @@ IF rm_par.anio_ini IS NULL THEN
 					'FROM srit021 ',
 				'WHERE s21_compania   = ', vg_codcia,
 				'  AND s21_localidad  = ', vg_codloc,
-				--'  AND s21_estado    <> 'G'
 				'  AND s21_estado    NOT IN ("G", "P") ',
 				'INTO TEMP tmp_fecha '
 	PREPARE exec_fec FROM query
@@ -480,20 +468,6 @@ IF rm_par.anio_ini IS NULL THEN
 	LET rm_par.mes_ini  = MONTH(fecha)
 	LET rm_par.anio_fin = YEAR(fecha)
 	LET rm_par.mes_fin  = MONTH(fecha)
-	LET rm_par.tipo_nac = 'N'
-	IF vg_codcia = 2 THEN
-		LET rm_par.tipo_gye = 'N'
-		LET rm_par.tipo_uio = 'N'
-		LET rm_par.tipo_nac = 'S'
-	END IF
-	CASE vg_codloc
-		WHEN 1
-			LET rm_par.tipo_gye = 'S'
-			LET rm_par.tipo_uio = 'N'
-		WHEN 3
-			LET rm_par.tipo_gye = 'N'
-			LET rm_par.tipo_uio = 'S'
-	END CASE
 	LET fecha = MDY(MONTH(fecha), 01, YEAR(fecha)) - 1 UNITS DAY
 END IF
 CALL lee_parametros(fecha, flag)
@@ -507,63 +481,20 @@ IF int_flag THEN
 	RETURN
 END IF
 CLOSE WINDOW w_srif201_2
+CALL control_generar()
 LET int_flag = 0
-FOR a = rm_par.anio_ini TO rm_par.anio_fin
-	FOR m = rm_par.mes_ini TO rm_par.mes_fin
-		LET rm_s21.s21_fecha_emi_vta = MDY(m, 01, a) + 1 UNITS MONTH
-										- 1 UNITS DAY
-		IF rm_par.tipo_gye = 'S' THEN
-			CASE flag
-				WHEN 'I'
-					CALL control_generar(1, 'G')
-					CALL control_generar(2, 'G')
-					CALL control_generar(3, 'G')
-				WHEN '1'
-					CALL control_generar(1, 'G')
-				WHEN '2'
-					CALL control_generar(2, 'G')
-				WHEN '3'
-					CALL control_generar(3, 'G')
-			END CASE
-		END IF
-		IF rm_par.tipo_uio = 'S' THEN
-			CASE flag
-				WHEN 'I'
-					CALL control_generar(1, 'Q')
-					CALL control_generar(2, 'Q')
-					CALL control_generar(3, 'Q')
-				WHEN '1'
-					CALL control_generar(1, 'Q')
-				WHEN '2'
-					CALL control_generar(2, 'Q')
-				WHEN '3'
-					CALL control_generar(3, 'Q')
-			END CASE
-		END IF
-		IF rm_par.tipo_nac = 'S' THEN
-			CASE flag
-				WHEN 'I'
-					CALL control_generar(1, 'N')
-					CALL control_generar(2, 'N')
-					CALL control_generar(3, 'N')
-				WHEN '1'
-					CALL control_generar(1, 'N')
-				WHEN '2'
-					CALL control_generar(2, 'N')
-				WHEN '3'
-					CALL control_generar(3, 'N')
-			END CASE
-		END IF
-	END FOR
-END FOR
-LET fec_i = MDY(rm_par.mes_ini, 01, rm_par.anio_ini)
-LET fec_f = MDY(rm_par.mes_fin, 01, rm_par.anio_fin) + 1 UNITS MONTH
-		- 1 UNITS DAY
+LET rm_s21.s21_fecha_emi_vta = MDY(rm_par.mes_fin, 01, rm_par.anio_fin)
+								+ 1 UNITS MONTH - 1 UNITS DAY
+LET fec_i                    = MDY(MONTH(rm_s21.s21_fecha_emi_vta), 01,
+									YEAR(rm_s21.s21_fecha_emi_vta))
+LET fec_f                    = MDY(MONTH(rm_s21.s21_fecha_emi_vta), 01,
+									YEAR(rm_s21.s21_fecha_emi_vta))
+								+ 1 UNITS MONTH - 1 UNITS DAY
 LET query = 'SELECT *, ROWID FROM srit021 ',
-		' WHERE s21_compania      = ', vg_codcia,
-		'   AND s21_fecha_emi_vta BETWEEN "', fec_i,
-					   '" AND "', fec_f, '"',
-		' ORDER BY s21_num_doc_id'
+				' WHERE s21_compania      = ', vg_codcia,
+				'   AND s21_fecha_emi_vta BETWEEN "', fec_i,
+										   '" AND "', fec_f, '"',
+				' ORDER BY s21_num_doc_id'
 PREPARE cons2 FROM query
 DECLARE q_uni2 CURSOR FOR cons2
 LET vm_num_rows = 1
@@ -747,21 +678,17 @@ END FUNCTION
 
 FUNCTION lee_parametros(fecha, flag)
 DEFINE fecha		DATE
-DEFINE flag		CHAR(1)
+DEFINE flag			CHAR(1)
 DEFINE r_s21		RECORD LIKE srit021.*
 DEFINE ano_f, mes_f	SMALLINT
 DEFINE resp      	CHAR(6)
 DEFINE cuantos		INTEGER
 
 LET int_flag = 0 
-INPUT BY NAME rm_par.anio_fin, rm_par.mes_fin, rm_par.tipo_gye, rm_par.tipo_uio,
-		rm_par.tipo_nac
+INPUT BY NAME rm_par.anio_fin, rm_par.mes_fin
 	WITHOUT DEFAULTS
 	ON KEY(INTERRUPT)
-		IF FIELD_TOUCHED(rm_par.anio_fin, rm_par.mes_fin,
-				 rm_par.tipo_gye, rm_par.tipo_uio,
-				 rm_par.tipo_nac)
-		THEN
+		IF FIELD_TOUCHED(rm_par.anio_fin, rm_par.mes_fin) THEN
 			LET int_flag = 0
 			CALL fl_mensaje_abandonar_proceso() RETURNING resp
 			IF resp = 'Yes' THEN
@@ -806,21 +733,6 @@ INPUT BY NAME rm_par.anio_fin, rm_par.mes_fin, rm_par.tipo_gye, rm_par.tipo_uio,
 				DISPLAY BY NAME rm_par.anio_fin, rm_par.mes_fin
 				CONTINUE INPUT
 			END IF
-		END IF
-		IF rm_par.tipo_gye IS NULL THEN
-			CONTINUE INPUT
-		END IF
-		IF rm_par.tipo_uio IS NULL THEN
-			CONTINUE INPUT
-		END IF
-		IF rm_par.tipo_nac IS NULL THEN
-			CONTINUE INPUT
-		END IF
-		IF rm_par.tipo_gye = 'N' AND rm_par.tipo_uio = 'N' AND
-		   rm_par.tipo_nac = 'N'
-		THEN
-			CALL fl_mostrar_mensaje('Al menos debe escojer un tipo de generacion de anexo.', 'exclamation')
-			CONTINUE INPUT
 		END IF
 		SELECT COUNT(*) INTO cuantos
 			FROM srit021
@@ -876,91 +788,25 @@ END FUNCTION
 
 
 
-FUNCTION control_generar(flag, tip_ane)
-DEFINE flag			SMALLINT
-DEFINE tip_ane		CHAR(1)
-DEFINE fecha		DATE
-DEFINE long, posi	SMALLINT
-DEFINE query		CHAR(6000)
-DEFINE comando		VARCHAR(600)
-DEFINE archivo		VARCHAR(150)
-DEFINE param		VARCHAR(25)
+FUNCTION control_generar()
+DEFINE long			SMALLINT
+DEFINE comando		VARCHAR(250)
+DEFINE archivo		VARCHAR(120)
 
-LET int_flag = 0
-CASE flag
-	WHEN 1
-		LET archivo = NULL
-	WHEN 2
-		CASE tip_ane
-			WHEN 'G' LET param = ' "U"'
-					 LET posi  = 8
-			WHEN 'Q' LET param = ' "U" "V"'
-					 LET posi  = 12
-			WHEN 'N' LET param = ' "U" "V" "W"'
-					 LET posi  = 16
-		END CASE
-		LET archivo = param CLIPPED,' > $HOME/tmp/anexo_ventas_',
-						MONTH(rm_s21.s21_fecha_emi_vta) USING "&&", '-',
-						YEAR(rm_s21.s21_fecha_emi_vta) USING "&&&&",
-						'_', tip_ane CLIPPED, '.xml ' 
-	WHEN 3
-		CASE tip_ane
-			WHEN 'G' LET param = ' "U" "V"'
-					 LET posi  = 12
-			WHEN 'Q' LET param = ' "U" "V" "W" "X" "Y"'
-					 LET posi  = 24
-			WHEN 'N' LET param = ' "U" "V" "W" "X" "Y" "Z"'
-					 LET posi  = 28
-		END CASE
-		LET archivo = param CLIPPED, ' > $HOME/tmp/anulados_',
-						MONTH(rm_s21.s21_fecha_emi_vta) USING "&&", '-',
-						YEAR(rm_s21.s21_fecha_emi_vta) USING "&&&&",
-						'_', tip_ane CLIPPED, '.xml ' 
-END CASE
-LET fecha = MDY(MONTH(rm_s21.s21_fecha_emi_vta), 01,
-				YEAR(rm_s21.s21_fecha_emi_vta))
+LET archivo = ' > $HOME/tmp/anexo_transaccional_', rm_par.anio_fin USING "&&&&",
+				'-', rm_par.mes_fin USING "&&", '_', vg_base CLIPPED, '.xml ' 
 LET comando = 'cd ..', vg_separador, '..', vg_separador, 'SRI', vg_separador,
-				'fuentes', vg_separador, '; umask 0002; fglrun srip200 ',
-				vg_base, ' "', vg_modulo, '" ', vg_codcia, ' ', vg_codloc, ' "',
-				fecha, '" "', rm_s21.s21_fecha_emi_vta, '" ', archivo CLIPPED
+				'fuentes', vg_separador, '; umask 0002; fglrun srip206 ',
+				vg_base, ' "', vg_modulo, '" ', vg_codcia, ' ', vg_codloc, ' ',
+				rm_par.anio_fin, ' ', rm_par.mes_fin, archivo CLIPPED
 RUN comando
-IF flag = 1 THEN
-	IF vm_num_rows > 0 THEN
-		CALL lee_muestra_registro(vm_r_rows[vm_row_current])
-		CALL muestra_contadores(vm_row_current, vm_num_rows)
-	END IF
-	RETURN
+IF vm_num_rows > 0 THEN
+	CALL lee_muestra_registro(vm_r_rows[vm_row_current])
+	CALL muestra_contadores(vm_row_current, vm_num_rows)
 END IF
 LET long    = LENGTH(archivo)
-LET archivo = 'unix2dos ', archivo[posi, long] CLIPPED
+LET archivo = 'unix2dos ', archivo[4, long] CLIPPED
 RUN archivo
-LET query = 'SELECT s21_ident_cli, s21_num_doc_id,',
-		' CASE WHEN s21_num_doc_id <> "9999999999999" THEN ',
-			' (SELECT TRIM(a.z01_nomcli) FROM cxct001 a ',
-			' WHERE a.z01_codcli = (SELECT MAX(b.z01_codcli) ',
-						'FROM cxct001 b ',
-						'WHERE TRIM(b.z01_num_doc_id)=',
-							'TRIM(s21_num_doc_id) ',
-						'  AND z01_estado = "A")) ',
-			' ELSE "CONSUMIDOR FINAL" ',
-		' END nomcliente, ',
-		' s21_tipo_comp, s21_fecha_reg_cont, s21_num_comp_emi, ',
-		' s21_fecha_emi_vta, s21_base_imp_tar_0, s21_iva_presuntivo, ',
-		' s21_bas_imp_gr_iva, s21_cod_porc_iva, s21_monto_iva, ',
-		' s21_base_imp_ice, s21_cod_porc_ice, s21_monto_ice, ',
-		' s21_monto_iva_bie, s21_cod_ret_ivabie, s21_mon_ret_ivabie, ',
-		' s21_monto_iva_ser, s21_cod_ret_ivaser, s21_mon_ret_ivaser, ',
-		' s21_ret_presuntivo, s21_concepto_ret, s21_base_imp_renta, ',
-		' s21_porc_ret_renta, s21_monto_ret_rent ',
-		' FROM srit021 ',
-		' WHERE s21_compania  = ', vg_codcia,
-		'   AND s21_localidad = ', vg_codloc,
-		'   AND s21_anio      = ', YEAR(rm_s21.s21_fecha_emi_vta),
-		'   AND s21_mes       = ', MONTH(rm_s21.s21_fecha_emi_vta),
-		' INTO TEMP t1 '
-PREPARE exec_t1_final FROM query
-EXECUTE exec_t1_final
-DROP TABLE t1
 
 END FUNCTION
 
@@ -1049,31 +895,6 @@ WHENEVER ERROR CONTINUE
 		CALL lee_muestra_registro(vm_r_rows[vm_row_current])
 		RETURN
 	END IF
-	{--
-	IF rm_s21.s21_estado = 'C' THEN
-		LET palabra  = 'REAPERTURAR'
-		LET mensaje  = 'Desea ', palabra CLIPPED, frase CLIPPED
-		LET int_flag = 0
-		CALL fl_hacer_pregunta(mensaje, 'No') RETURNING resp
-		IF resp = 'Yes' THEN
-			LET estado = 'P'
-		ELSE
-			LET palabra  = 'DECLARAR'
-			LET mensaje  = 'Desea ', palabra CLIPPED, frase CLIPPED
-			LET int_flag = 0
-			CALL fl_hacer_pregunta(mensaje, 'Yes') RETURNING resp
-			IF resp <> 'Yes' THEN
-				ROLLBACK WORK
-				CALL lee_muestra_registro(vm_r_rows[vm_row_current])
-				RETURN
-			END IF
-			LET estado = 'D'
-		END IF
-	ELSE
-		LET estado  = 'C'
-		LET palabra = 'CERRAR'
-	END IF
-	--}
 	LET mensaje  = 'Esta seguro de ', palabra CLIPPED, frase CLIPPED
 	LET int_flag = 0
 	CALL fl_hacer_pregunta(mensaje, 'Yes') RETURNING resp
@@ -1093,7 +914,6 @@ WHENEVER ERROR CONTINUE
 	UPDATE srit021
 		SET s21_estado = rm_s21.s21_estado
 		WHERE s21_compania  = rm_s21.s21_compania
-		  --AND s21_localidad = rm_s21.s21_localidad
 		  AND s21_anio      = rm_s21.s21_anio
 		  AND s21_mes       = rm_s21.s21_mes
 	UPDATE srit000

@@ -1,363 +1,469 @@
 --------------------------------------------------------------------------------
--- Titulo              : srip202.4gl -- Mantenimiento anexo de compras
--- Elaboración         : 02-Jun-2007
--- Autor               : NPC
--- Formato de Ejecución: fglrun srip202 Base Modulo Compañía Localidad
--- Ultima Correción    : 
--- Motivo Corrección   : 
+-- Titulo           : srip202.4gl - Anexo Transaccional Anulados
+-- Elaboracion (Ori): 29-Ago-2006
+-- Elaboracion      : 26-Dic-2017
+-- Autor            : NPC
+-- Formato Ejecucion: fglrun srip202 base módulo compañía localidad
+--			             fec_ini fec_fin
+-- Ultima Correccion: 
+-- Motivo Correccion: 
 --------------------------------------------------------------------------------
-                                                                                
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
-                                                                                
-DEFINE rm_par		RECORD
-						anio_ini	SMALLINT,
-						mes_ini		SMALLINT,
-						anio_fin	SMALLINT,
-						mes_fin		SMALLINT,
-						col_ord		SMALLINT
-					END RECORD
-DEFINE rm_colord	ARRAY[33] OF RECORD
-						num_cols	SMALLINT,
-						des_cols	VARCHAR(40)
-					END RECORD
-DEFINE num_row		SMALLINT
-DEFINE max_row		SMALLINT
+
+DEFINE rm_par 			RECORD 
+							fecha_ini	DATE,
+							fecha_fin	DATE
+						END RECORD
+DEFINE rm_det 			RECORD
+							fecha		DATE,
+							t23_num_factura	LIKE talt023.t23_num_factura,
+							t23_orden	LIKE talt023.t23_orden,
+							t23_val_mo_tal	LIKE talt023.t23_val_mo_tal,
+							tot_oc		DECIMAL(14,2),
+							tot_fa		DECIMAL(14,2),
+							tot_ot		DECIMAL(14,2),
+							t23_estado	LIKE talt023.t23_estado
+						END RECORD
+DEFINE rm_g01			RECORD LIKE gent001.*
+DEFINE rm_r00			RECORD LIKE rept000.*
+DEFINE vm_tip_anexo		LIKE srit004.s04_codigo
+DEFINE vm_fin_mes		DATE
 
 
 
 MAIN
 
-DEFER QUIT
+DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
 LET vg_proceso = arg_val(0)
 CALL startlog('../logs/' || vg_proceso CLIPPED || '.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
-IF num_args() <> 4 THEN
-	CALL fl_mostrar_mensaje('Número de parametros incorrecto.','stop')
-     	EXIT PROGRAM
+IF num_args() <> 6 THEN
+	-- Validar # parámetros correcto
+	CALL fl_mostrar_mensaje('Número de parametros incorrecto.', 'stop')
+	EXIT PROGRAM
 END IF
 LET vg_base    = arg_val(1)
 LET vg_modulo  = arg_val(2)
 LET vg_codcia  = arg_val(3)
 LET vg_codloc  = arg_val(4)
 CALL fl_activar_base_datos(vg_base)
-CALL fl_seteos_defaults()
+CALL fl_seteos_defaults()	
 --#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
 CALL fl_validar_parametros()
 CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 CALL funcion_master()
-                                                                                
+
 END MAIN
 
 
 
 FUNCTION funcion_master()
-DEFINE lin_menu		SMALLINT
-DEFINE row_ini  	SMALLINT
-DEFINE num_rows 	SMALLINT
-DEFINE num_cols 	SMALLINT
-DEFINE fecha		DATE
 
 CALL fl_nivel_isolation()
-LET lin_menu    = 0
-LET row_ini     = 3
-LET num_rows    = 8
-LET num_cols    = 80
-IF vg_gui = 0 THEN
-	LET lin_menu = 1
-	LET row_ini  = 4
-	LET num_rows = 20
-	LET num_cols = 78
+LET vm_tip_anexo = 2
+CALL fl_lee_compania(vg_codcia) RETURNING rm_g01.*
+CALL fl_lee_compania_repuestos(vg_codcia) RETURNING rm_r00.*
+IF rm_r00.r00_compania IS NULL THEN
+	CALL fl_mostrar_mensaje('No está creada una compañía para el módulo de inventarios.','stop')
+	RETURN
 END IF
-OPEN WINDOW w_srif202_1 AT row_ini, 2 WITH num_rows ROWS, num_cols COLUMNS
-    ATTRIBUTE(FORM LINE FIRST + 1, COMMENT LINE LAST, MENU LINE lin_menu,
-		MESSAGE LINE LAST, BORDER)
-IF vg_gui = 1 THEN
-	OPEN FORM f_srif202_1 FROM '../forms/srif202_1'
-ELSE
-	OPEN FORM f_srif202_1 FROM '../forms/srif202_1c'
-END IF
-DISPLAY FORM f_srif202_1
 INITIALIZE rm_par.* TO NULL
-LET fecha = MDY(MONTH(vg_fecha), 01, YEAR(vg_fecha)) -- 1 UNITS DAY
-LET rm_par.anio_ini = YEAR(fecha)
-LET rm_par.mes_ini  = MONTH(fecha)
-LET rm_par.anio_fin = YEAR(fecha)
-LET rm_par.mes_fin  = MONTH(fecha)
-LET rm_par.col_ord  = 1
-CALL cargar_ordamiento()
-DISPLAY rm_colord[rm_par.col_ord].des_cols TO tit_col_ord
-WHILE TRUE
-	CALL lee_parametros()
-	IF int_flag THEN
-		EXIT WHILE
+LET rm_par.fecha_ini = MDY(MONTH(vg_fecha), 1, YEAR(vg_fecha))
+LET rm_par.fecha_fin = rm_par.fecha_ini + 1 UNITS MONTH - 1 UNITS DAY
+LET vm_fin_mes       = rm_par.fecha_fin
+LET rm_par.fecha_ini = arg_val(5)
+LET rm_par.fecha_fin = arg_val(6)
+CALL generar_archivo()
+DROP TABLE tmp_fact
+DROP TABLE tmp_tal
+CALL generar_archivo_anula_xml()
+DROP TABLE tmp_anu
+
+END FUNCTION
+
+
+
+{**
+	ESTA FUNCION GENERA EL ARCHIVO CONSOLIDADO DE LAS VENTAS USANDO LAS TABLAS:
+		rept019
+		rept020
+		talt021
+		talt023
+		cxct020
+		cxct021
+**}
+
+FUNCTION generar_archivo()
+DEFINE r_mov		RECORD
+						cod_cli		LIKE cxct001.z01_codcli,
+						cod_t		LIKE rept019.r19_cod_tran,
+						num_t		LIKE rept019.r19_num_tran,
+						ced_ruc		LIKE rept019.r19_cedruc
+					END RECORD
+DEFINE r_tal		RECORD
+						z01_tipo_doc_id	LIKE cxct001.z01_tipo_doc_id,
+						z01_num_doc_id	LIKE cxct001.z01_num_doc_id,
+						val_iva		DECIMAL(12,2),
+						val_ci		DECIMAL(12,2),
+						val_si		DECIMAL(12,2)
+					END RECORD
+DEFINE query		VARCHAR(4000)
+DEFINE comando		VARCHAR(100)
+DEFINE archivo		VARCHAR(50)
+DEFINE resul		SMALLINT
+DEFINE r_s21		RECORD LIKE srit021.*
+DEFINE r_z01		RECORD LIKE cxct001.*
+DEFINE porc_imp		LIKE gent000.g00_porc_impto
+DEFINE valor_siva_aux	DECIMAL(14,2)
+DEFINE ctos			INTEGER
+
+INITIALIZE r_s21.* TO NULL
+DECLARE q_estado CURSOR FOR
+	SELECT UNIQUE s21_estado
+	FROM srit021
+	WHERE s21_compania  = vg_codcia
+	  AND s21_localidad = vg_codloc
+	  AND s21_anio      = YEAR(rm_par.fecha_fin)
+	  AND s21_mes       = MONTH(rm_par.fecha_fin)
+OPEN q_estado
+FETCH q_estado INTO r_s21.s21_estado
+CLOSE q_estado
+FREE q_estado
+IF r_s21.s21_estado = 'D' THEN
+	CALL fl_mostrar_mensaje('No puede generar el anexo de ventas para este periodo. Ya esta declarado.', 'exclamation')
+	RETURN
+END IF
+CALL obtener_facturas()
+DECLARE q_verif CURSOR FOR
+	SELECT codcli, cod_tran, num_tran, cedruc_v
+		FROM tmp_fact
+		WHERE LENGTH(cedruc_v) = 13
+FOREACH q_verif INTO r_mov.*
+	CALL fl_validar_cedruc_dig_ver(r_mov.ced_ruc) RETURNING resul
+	IF NOT resul THEN
+		UPDATE tmp_fact
+			SET tipo_doc_id = 'P',
+			    cod_tran    = 'FA',
+			    cedruc      = r_mov.ced_ruc
+			WHERE codcli   = r_mov.cod_cli
+			  AND cod_tran = r_mov.cod_t
+			  AND num_tran = r_mov.num_t
+			  AND cedruc_v = r_mov.ced_ruc
 	END IF
-	CALL ejecuta_proceso(1)
-	--CALL ejecuta_proceso(2)
-	CALL fl_mostrar_mensaje('Archivo Generado OK.', 'info')
-END WHILE
+END FOREACH
+LET query = 'SELECT t23_cod_cliente codcli, t23_num_factura num_tran, ',
+				'CASE WHEN t23_val_impto > 0 ',
+					'THEN t23_val_mo_tal + ',
+					'CASE WHEN t23_estado = "F" ',
+						'THEN ',
+						'(SELECT NVL(SUM((c11_precio - c11_val_descto) ',
+							'* (1 + c10_recargo / 100)), 0) ',
+						'FROM ordt010, ordt011 ',
+						'WHERE c10_compania    = t23_compania ',
+						'  AND c10_localidad   = t23_localidad ',
+						'  AND c10_ord_trabajo = t23_orden ',
+						'  AND c10_estado      = "C" ',
+						'  AND c11_compania    = c10_compania ',
+						'  AND c11_localidad   = c10_localidad ',
+						'  AND c11_numero_oc   = c10_numero_oc ',
+						'  AND c11_tipo        = "S") + ',
+						'(SELECT NVL(SUM(((c11_cant_ped * c11_precio) ',
+						' - c11_val_descto) * (1 + c10_recargo / 100)), 0) ',
+						'FROM ordt010, ordt011 ',
+						'WHERE c10_compania    = t23_compania ',
+						'  AND c10_localidad   = t23_localidad ',
+						'  AND c10_ord_trabajo = t23_orden ',
+						'  AND c10_estado      = "C" ',
+						'  AND c11_compania    = c10_compania ',
+						'  AND c11_localidad   = c10_localidad ',
+						'  AND c11_numero_oc   = c10_numero_oc ',
+						'  AND c11_tipo        = "B") + ',
+							'CASE WHEN ',
+									'(SELECT COUNT(*) FROM ordt010 ',
+									'WHERE c10_compania    = t23_compania ',
+									'  AND c10_localidad   = t23_localidad ',
+									'  AND c10_ord_trabajo = t23_orden ',
+									'  AND c10_estado      = "C") = 0 ',
+								'THEN (t23_val_rp_tal + t23_val_rp_ext + ',
+								       't23_val_rp_cti + t23_val_otros2) ',
+								'ELSE 0.00 ',
+							'END ',
+						'ELSE (t23_val_mo_ext + t23_val_mo_cti + ',
+								't23_val_rp_tal + t23_val_rp_ext + ',
+								't23_val_rp_cti + t23_val_otros2) ',
+					'END ',
+					'ELSE 0.00 ',
+				'END valor_tal_civa, ',
+				'CASE WHEN t23_val_impto = 0 ',
+					'THEN t23_val_mo_tal + ',
+					'CASE WHEN t23_estado = "F" ',
+						'THEN ',
+						'(SELECT NVL(SUM((c11_precio - c11_val_descto) ',
+							' * (1 + c10_recargo / 100)), 0) ',
+						'FROM ordt010, ordt011 ',
+						'WHERE c10_compania    = t23_compania ',
+						'  AND c10_localidad   = t23_localidad ',
+						'  AND c10_ord_trabajo = t23_orden ',
+						'  AND c10_estado      = "C" ',
+						'  AND c11_compania    = c10_compania ',
+						'  AND c11_localidad   = c10_localidad ',
+						'  AND c11_numero_oc   = c10_numero_oc ',
+						'  AND c11_tipo        = "S") + ',
+						'(SELECT NVL(SUM(((c11_cant_ped * c11_precio) ',
+						' - c11_val_descto) * (1 + c10_recargo / 100)), 0) ',
+						'FROM ordt010, ordt011 ',
+						'WHERE c10_compania    = t23_compania ',
+						'  AND c10_localidad   = t23_localidad ',
+						'  AND c10_ord_trabajo = t23_orden ',
+						'  AND c10_estado      = "C" ',
+						'  AND c11_compania    = c10_compania ',
+						'  AND c11_localidad   = c10_localidad ',
+						'  AND c11_numero_oc   = c10_numero_oc ',
+						'  AND c11_tipo        = "B") + ',
+							'CASE WHEN ',
+									'(SELECT COUNT(*) FROM ordt010 ',
+									'WHERE c10_compania    = t23_compania ',
+									'  AND c10_localidad   = t23_localidad ',
+									'  AND c10_ord_trabajo = t23_orden ',
+									'  AND c10_estado      = "C") = 0 ',
+								'THEN (t23_val_rp_tal + t23_val_rp_ext + ',
+								       't23_val_rp_cti + t23_val_otros2) ',
+								'ELSE 0.00 ',
+							'END ',
+					'ELSE (t23_val_mo_ext + t23_val_mo_cti + ',
+							't23_val_rp_tal + t23_val_rp_ext + ',
+							't23_val_rp_cti + t23_val_otros2) ',
+					'END ',
+					'ELSE 0.00 ',
+				'END valor_tal_siva, ',
+				't23_val_impto, ',
+				'CASE WHEN z01_tipo_doc_id = "R" AND ',
+							' t23_cod_cliente <> ', rm_r00.r00_codcli_tal, ' ',
+					'THEN "R" ',
+					'ELSE "F" ',
+				'END tipo_doc_id, ',
+				'CASE WHEN z01_tipo_doc_id = "R" AND ',
+						' t23_cod_cliente <> ', rm_r00.r00_codcli_tal, ' ',
+					'THEN z01_num_doc_id ',
+					'ELSE "9999999999999" ',
+				'END cedruc, ',
+				't23_cont_cred cont_cred, t23_localidad local, t23_estado, ',
+				'DATE(t28_fec_anula) fecha_anu ',
+			'FROM talt023, cxct001, OUTER talt028 ',
+			'WHERE t23_compania           = ', vg_codcia,
+			'  AND t23_localidad          = ', vg_codloc,
+			'  AND t23_estado            IN ("F", "D") ',
+			'  AND DATE(t23_fec_factura) BETWEEN "', rm_par.fecha_ini,
+										  '" AND "', rm_par.fecha_fin, '"',
+			'  AND z01_codcli             = t23_cod_cliente ',
+			'  AND t28_compania           = t23_compania ',
+			'  AND t28_localidad          = t23_localidad ',
+			'  AND t28_factura            = t23_num_factura ',
+			'INTO TEMP tmp_tal '
+PREPARE cons_tmp_tal FROM query 
+EXECUTE cons_tmp_tal
+LET query = 'SELECT num_tran num_anu, z21_tipo_doc ',
+				'FROM tmp_tal, OUTER cxct021 ',
+				'WHERE t23_estado    = "D" ',
+				'  AND z21_compania  = ', vg_codcia,
+				'  AND z21_localidad = local ',
+				'  AND z21_tipo_doc  = "NC" ',
+				'  AND z21_areaneg   = 2 ',
+				'  AND z21_cod_tran  = "FA" ',
+				'  AND z21_num_tran  = num_tran ',
+				'INTO TEMP t2 '
+PREPARE cons_t2_tal FROM query 
+EXECUTE cons_t2_tal
+DELETE FROM t2 WHERE z21_tipo_doc IS NOT NULL
+LET query = 'INSERT INTO tmp_anu ',
+				'SELECT CASE WHEN r38_cod_tran = "FA" THEN 1 ',
+							'WHEN r38_cod_tran = "NV" THEN 2 ',
+						'END tipo_comp, ',
+		'b.g37_pref_sucurs, b.g37_pref_pto_vta, r38_num_sri[9, 17] ',
+		'num_sri_ini, r38_num_sri[9, 17] num_sri_fin, g02_numaut_sri ',
+		'FROM tmp_tal, rept038, gent037 b, gent002 ',
+		'WHERE t23_estado      = "D" ',
+		'  AND num_tran        = ',
+				'(SELECT num_anu ',
+					'FROM t2 ',
+					'WHERE num_anu  = num_tran) ',
+		'  AND r38_compania    = ', vg_codcia,
+		'  AND r38_localidad   = local ',
+		'  AND r38_tipo_fuente = "OT" ',
+		'  AND r38_cod_tran    IN ("FA", "NV") ',
+		'  AND r38_num_tran    = num_tran ',
+		'  AND b.g37_compania  = r38_compania ',
+		'  AND b.g37_localidad = r38_localidad ',
+		'  AND b.g37_tipo_doc  = r38_cod_tran ',
+		'  AND b.g37_secuencia = ',
+				'(SELECT MAX(a.g37_secuencia) ',
+					'FROM gent037 a ',
+					'WHERE a.g37_compania  = b.g37_compania ',
+					'  AND a.g37_localidad = b.g37_localidad ',
+					'  AND a.g37_tipo_doc  = b.g37_tipo_doc) ',
+		'  AND g02_compania    = b.g37_compania ',
+		'  AND g02_localidad   = b.g37_localidad '
+PREPARE insert_tmp_anu FROM query 
+EXECUTE insert_tmp_anu
+UNLOAD TO 'anulados.unl' SELECT * FROM tmp_anu
+LET archivo = '$HOME/tmp/anulados_', vg_codloc USING "&&", '-',
+		YEAR(rm_par.fecha_fin) USING "&&&&",'-',
+		MONTH(rm_par.fecha_fin) USING "&&", '.unl ' 
+LET comando = 'mv anulados.unl ', archivo CLIPPED
+RUN comando
 
 END FUNCTION
 
 
 
-FUNCTION lee_parametros()
-DEFINE resp      	CHAR(6)
-DEFINE ano_i, ano_f	SMALLINT
-DEFINE mes_i, mes_f	SMALLINT
-DEFINE fec_ini, fec_fin	DATE
-DEFINE col		SMALLINT
-DEFINE des		VARCHAR(40)
+{**
+	OBTIENE LAS FACTURAS DE INVENTARIO: rept019
+**}
 
-LET int_flag = 0 
-INPUT BY NAME rm_par.*
-	WITHOUT DEFAULTS
-	ON KEY(INTERRUPT)
-		IF FIELD_TOUCHED(rm_par.*) THEN
-			LET int_flag = 0
-			CALL fl_mensaje_abandonar_proceso() RETURNING resp
-			IF resp = 'Yes' THEN
-				LET int_flag = 1
-				RETURN
-			END IF
-		ELSE
-			RETURN
-		END IF
-	ON KEY(F2)
-		IF INFIELD(col_ord) THEN
-			CALL tipo_ordenamiento() RETURNING col, des
-			LET int_flag = 0
-			IF col IS NOT NULL THEN
-				LET rm_par.col_ord = col
-			ELSE
-				LET des = rm_colord[rm_par.col_ord].des_cols
-			END IF
-			DISPLAY BY NAME rm_par.col_ord
-			DISPLAY des TO tit_col_ord
-		END IF
-	BEFORE FIELD anio_ini
-		LET ano_i = rm_par.anio_ini
-	BEFORE FIELD mes_ini
-		LET mes_i = rm_par.mes_ini
-	BEFORE FIELD anio_fin
-		LET ano_f = rm_par.anio_fin
-	BEFORE FIELD mes_fin
-		LET mes_f = rm_par.mes_fin
-	AFTER FIELD anio_ini
-		IF rm_par.anio_ini IS NULL THEN
-			LET rm_par.anio_ini = ano_i
-			DISPLAY BY NAME rm_par.anio_ini
-		END IF
-	AFTER FIELD mes_ini
-		IF rm_par.mes_ini IS NULL THEN
-			LET rm_par.mes_ini = mes_i
-			DISPLAY BY NAME rm_par.mes_ini
-		END IF
-	AFTER FIELD anio_fin
-		IF rm_par.anio_fin IS NULL THEN
-			LET rm_par.anio_fin = ano_f
-			DISPLAY BY NAME rm_par.anio_fin
-		END IF
-	AFTER FIELD mes_fin
-		IF rm_par.mes_fin IS NULL THEN
-			LET rm_par.mes_fin = mes_f
-			DISPLAY BY NAME rm_par.mes_fin
-		END IF
-	AFTER FIELD col_ord
-		IF rm_par.col_ord IS NOT NULL THEN
-			DISPLAY rm_colord[rm_par.col_ord].num_cols
-				TO col_ord
-			DISPLAY rm_colord[rm_par.col_ord].des_cols
-				TO tit_col_ord
-		ELSE
-			CLEAR tit_col_ord
-		END IF
-	AFTER INPUT
-		LET fec_ini = MDY(rm_par.mes_ini, 01, rm_par.anio_ini)
-		LET fec_fin = MDY(rm_par.mes_fin, 01, rm_par.anio_fin)
-				+ 1 UNITS MONTH - 1 UNITS DAY
-		IF fec_ini > fec_fin THEN
-			CALL fl_mostrar_mensaje('El período inicial no puede ser mayor al período final.', 'exclamation')
-			CONTINUE INPUT
-		END IF
-END INPUT
+FUNCTION obtener_facturas()
+DEFINE query		VARCHAR(4000)
 
-END FUNCTION
-
-
-
-FUNCTION cargar_ordamiento()
-
-LET rm_colord[01].num_cols = 1
-LET rm_colord[01].des_cols = 'Numero Retencion'
-LET rm_colord[02].num_cols = 2
-LET rm_colord[02].des_cols = 'Modulo'
-LET rm_colord[03].num_cols = 3
-LET rm_colord[03].des_cols = 'Sustento'
-LET rm_colord[04].num_cols = 4
-LET rm_colord[04].des_cols = 'Idtipo'
-LET rm_colord[05].num_cols = 5
-LET rm_colord[05].des_cols = 'Idprov'
-LET rm_colord[06].num_cols = 6
-LET rm_colord[06].des_cols = 'TC'
-LET rm_colord[07].num_cols = 7
-LET rm_colord[07].des_cols = 'Establecimiento'
-LET rm_colord[08].num_cols = 8
-LET rm_colord[08].des_cols = 'P. Emision'
-LET rm_colord[09].num_cols = 9
-LET rm_colord[09].des_cols = 'Secuencia'
-LET rm_colord[10].num_cols = 10
-LET rm_colord[10].des_cols = 'Autorizacion'
-LET rm_colord[11].num_cols = 11
-LET rm_colord[11].des_cols = 'Fecha_reg'
-LET rm_colord[12].num_cols = 12
-LET rm_colord[12].des_cols = 'Fecha_emi'
-LET rm_colord[13].num_cols = 13
-LET rm_colord[13].des_cols = 'Fecha_cad'
-LET rm_colord[14].num_cols = 14
-LET rm_colord[14].des_cols = 'Base_sin'
-LET rm_colord[15].num_cols = 15
-LET rm_colord[15].des_cols = 'Base_con'
-LET rm_colord[16].num_cols = 16
-LET rm_colord[16].des_cols = 'Base_ice'
-LET rm_colord[17].num_cols = 17
-LET rm_colord[17].des_cols = 'Porc_iva'
-LET rm_colord[18].num_cols = 18
-LET rm_colord[18].des_cols = 'Porc_ice'
-LET rm_colord[19].num_cols = 19
-LET rm_colord[19].des_cols = 'Monto_iva'
-LET rm_colord[20].num_cols = 20
-LET rm_colord[20].des_cols = 'Monto_ice'
-LET rm_colord[21].num_cols = 21
-LET rm_colord[21].des_cols = 'BienesBase'
-LET rm_colord[22].num_cols = 22
-LET rm_colord[22].des_cols = 'BienesPorc'
-LET rm_colord[23].num_cols = 23
-LET rm_colord[23].des_cols = 'BienesValor'
-LET rm_colord[24].num_cols = 24
-LET rm_colord[24].des_cols = 'ServiciosBase'
-LET rm_colord[25].num_cols = 25
-LET rm_colord[25].des_cols = 'ServiciosPorc'
-LET rm_colord[26].num_cols = 26
-LET rm_colord[26].des_cols = 'ServiciosValor'
-LET rm_colord[27].num_cols = 27
-LET rm_colord[27].des_cols = 'Nom_mes'
-LET rm_colord[28].num_cols = 28
-LET rm_colord[28].des_cols = 'Anio_reg'
-LET rm_colord[29].num_cols = 29
-LET rm_colord[29].des_cols = 'Usuario'
-LET rm_colord[30].num_cols = 30
-LET rm_colord[30].des_cols = 'Proveedor'
-LET rm_colord[31].num_cols = 31
-LET rm_colord[31].des_cols = 'Nom_Prov'
-LET rm_colord[32].num_cols = 32
-LET rm_colord[32].des_cols = 'Tipo'
-LET rm_colord[33].num_cols = 33
-LET rm_colord[33].des_cols = 'Numero'
---LET rm_colord[34].num_cols = 34
---LET rm_colord[34].des_cols = 'Dividendo'
-LET num_row                = 33
-LET max_row                = 33
+LET query = 'SELECT r19_codcli codcli, ',
+		'CASE WHEN LENGTH(r19_cedruc) = 13 AND ',
+			' r19_codcli <> ', rm_r00.r00_codcli_tal,
+			'THEN r19_cod_tran ',
+			'ELSE "NV" ',
+		'END cod_tran, ',
+		'r19_num_tran num_tran, r19_tipo_dev tipo_dev, ',
+		'r19_num_dev num_dev, ',
+		'CASE WHEN LENGTH(r19_cedruc) = 13 AND ',
+			' r19_codcli <> ', rm_r00.r00_codcli_tal,
+			'THEN "R" ',
+			'ELSE "F" ',
+		'END tipo_doc_id, ',
+		'CASE WHEN LENGTH(r19_cedruc) = 13 AND ',
+			' r19_codcli <> ', rm_r00.r00_codcli_tal,
+			'THEN r19_cedruc ',
+			'ELSE "9999999999999" ',
+		'END cedruc, ',
+		'CASE WHEN r19_porc_impto = 0 THEN ',
+			' (r19_tot_neto - r19_flete) ',
+			' ELSE 0.00 ',
+		'END valor_vta_siva, ',
+		'CASE WHEN r19_porc_impto > 0 THEN ',
+			' (r19_tot_bruto - r19_tot_dscto) ',
+			' ELSE 0.00 ',
+		'END valor_vta_civa, ',
+		'CASE WHEN r19_porc_impto > 0 THEN ',
+			' (r19_tot_neto - r19_tot_bruto + ',
+			' r19_tot_dscto - r19_flete) ',
+			' ELSE 0.00 ',
+		'END valor_iva, "', rm_par.fecha_fin, '" fecha_vta, ',
+		' r19_flete, r19_porc_impto porc_impto, r19_cedruc cedruc_v,',
+		' r19_cont_cred cont_cred, r19_localidad local ',
+		' FROM rept019, cxct001 ',
+		' WHERE r19_compania     = ', vg_codcia,
+		'   AND r19_localidad    = ', vg_codloc,
+		'   AND r19_cod_tran     IN ("FA", "NV") ',
+		'   AND DATE(r19_fecing) BETWEEN "', rm_par.fecha_ini,
+								  '" AND "', rm_par.fecha_fin, '"',
+		'   AND z01_codcli       = r19_codcli ',
+		' INTO TEMP tmp_fact ' 
+PREPARE cons_tmp_fact FROM query 
+EXECUTE cons_tmp_fact
+LET query = 'SELECT tipo_dev tipo_anu, num_dev num_anu, z21_tipo_doc ',
+		' FROM tmp_fact, OUTER cxct021 ',
+		' WHERE tmp_fact.tipo_dev   = "AF" ',
+		'   AND z21_compania  = ', vg_codcia,
+		'   AND z21_localidad = ', vg_codloc,
+		'   AND z21_tipo_doc  = "NC" ',
+		'   AND z21_cod_tran  = tmp_fact.tipo_dev ',
+		'   AND z21_num_tran  = tmp_fact.num_dev ',
+		' INTO TEMP t2 '
+PREPARE cons_t2 FROM query 
+EXECUTE cons_t2
+DELETE FROM t2 WHERE z21_tipo_doc IS NOT NULL
+LET query = 'SELECT ',
+				'CASE WHEN LENGTH(cedruc) = 13 AND fp_digito_veri(cedruc) = 1 ',
+						'THEN 1 ',
+						'ELSE 2 ',
+				'END tipo_comp, ',
+				'b.g37_pref_sucurs, b.g37_pref_pto_vta, r38_num_sri[9, 17] ',
+				'num_sri_ini, r38_num_sri[9, 17] num_sri_fin, g02_numaut_sri ',
+			'FROM tmp_fact, rept038, gent037 b, gent002 ',
+			'WHERE tipo_dev         = "AF" ',
+			'  AND num_dev          = ',
+					'(SELECT num_anu ',
+					' FROM t2 ',
+					' WHERE tipo_anu = tipo_dev ',
+					'   AND num_anu  = num_dev) ',
+			'  AND r38_compania     = ', vg_codcia,
+			'  AND r38_localidad    = local ',
+			'  AND r38_tipo_fuente  = "PR" ',
+			'  AND r38_cod_tran    IN ("FA", "NV") ',
+			'  AND r38_num_tran     = num_tran ',
+			'  AND b.g37_compania   = r38_compania ',
+			'  AND b.g37_localidad  = r38_localidad ',
+			'  AND b.g37_tipo_doc   = r38_cod_tran ',
+			'  AND b.g37_secuencia  = ',
+			' (SELECT MAX(a.g37_secuencia) ',
+				'FROM gent037 a ',
+				'WHERE a.g37_compania  = b.g37_compania ',
+				'  AND a.g37_localidad = b.g37_localidad ',
+				'  AND a.g37_tipo_doc  = b.g37_tipo_doc) ',
+			'  AND g02_compania    = b.g37_compania ',
+			'  AND g02_localidad   = b.g37_localidad ',
+			'INTO TEMP tmp_anu '
+PREPARE cons_tmp_anu FROM query 
+EXECUTE cons_tmp_anu
+DELETE FROM tmp_fact
+	WHERE tipo_dev = "AF"
+	  AND num_dev  =
+		(SELECT num_anu
+			FROM t2
+			WHERE tipo_anu = tipo_dev
+			  AND num_anu  = num_dev)
+DROP TABLE t2
 
 END FUNCTION
 
 
 
-FUNCTION tipo_ordenamiento()
-DEFINE lin_menu		SMALLINT
-DEFINE row_ini  	SMALLINT
-DEFINE num_rows 	SMALLINT
-DEFINE num_cols, i	SMALLINT
-DEFINE num_aux		SMALLINT
-DEFINE des_aux		VARCHAR(40)
+{**
+ * El anexo se genera según la ficha técnica del SRI que se encuentra en: 
+ * http://descargas.sri.gob.ec/download/anexos/ats/FICHA_TECNICA_ATS_JULIO2016.pdf
+ **}
 
-LET lin_menu = 0
-LET row_ini  = 7
-LET num_rows = 14
-LET num_cols = 26
-IF vg_gui = 0 THEN
-	LET lin_menu = 1
-	LET row_ini  = 6
-	LET num_rows = 15
-	LET num_cols = 27
+FUNCTION generar_archivo_anula_xml()
+DEFINE r_anu		RECORD
+						comp		LIKE srit004.s04_codigo,
+						punto		LIKE gent037.g37_pref_sucurs,
+						estab		LIKE gent037.g37_pref_pto_vta,
+						numini		LIKE rept038.r38_num_sri,
+						numfin		LIKE rept038.r38_num_sri,
+						autoriz		LIKE gent002.g02_numaut_sri,
+						fecha		DATE
+					END RECORD
+DEFINE registro		CHAR(4000)
+DEFINE genero		SMALLINT
+
+DECLARE q_anu CURSOR FOR SELECT * FROM tmp_anu ORDER BY 4
+LET genero = 0
+FOREACH q_anu INTO r_anu.*
+	LET registro = registro CLIPPED, '<detalleAnulados>',
+  			'<tipoComprobante>', r_anu.comp USING "&&", '</tipoComprobante>',
+			'<establecimiento>', r_anu.punto CLIPPED, '</establecimiento>',
+			'<puntoEmision>', r_anu.estab CLIPPED, '</puntoEmision>',
+			'<secuencialInicio>',r_anu.numini USING "&&&&&&&&&",
+			'</secuencialInicio>',
+			'<secuencialFin>', r_anu.numfin USING "&&&&&&&&&",
+			'</secuencialFin>',
+			'<autorizacion>', r_anu.autoriz CLIPPED, '</autorizacion>',
+			'</detalleAnulados>'
+	DISPLAY registro CLIPPED
+	LET registro = ' '
+	LET genero = 1
+END FOREACH
+IF genero THEN
+	CALL fl_mostrar_mensaje('Anexo Anulados Generado OK.', 'info')
 END IF
-OPEN WINDOW w_srif202_2 AT row_ini, 44 WITH num_rows ROWS, num_cols COLUMNS
-    ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MENU LINE lin_menu,
-		MESSAGE LINE LAST, BORDER)
-IF vg_gui = 1 THEN
-	OPEN FORM f_srif202_2 FROM '../forms/srif202_2'
-ELSE
-	OPEN FORM f_srif202_2 FROM '../forms/srif202_2c'
-END IF
-DISPLAY FORM f_srif202_2
---#DISPLAY "Col."		TO tit_col1
---#DISPLAY "Descripcion"	TO tit_col2
-CALL set_count(num_row)
-LET int_flag = 0
-DISPLAY ARRAY rm_colord TO rm_colord.*
-       	ON KEY(INTERRUPT)   
-		LET int_flag = 1
-       	        EXIT DISPLAY  
-       	ON KEY(RETURN)   
-		--#LET i = arr_curr()	
-       	        EXIT DISPLAY  
-	--#BEFORE DISPLAY 
-		--#CALL dialog.keysetlabel('ACCEPT', '')   
-		--#CALL dialog.keysetlabel("F1","") 
-		--#CALL dialog.keysetlabel("CONTROL-W","") 
-	--#BEFORE ROW 
-		--#LET i = arr_curr()	
-END DISPLAY
-CLOSE WINDOW w_srif202_2
-IF int_flag THEN
-	INITIALIZE num_aux, des_aux TO NULL
-	RETURN num_aux, des_aux
-END IF
-LET i = arr_curr()
-RETURN rm_colord[i].num_cols, rm_colord[i].des_cols
-
-END FUNCTION
-
-
-
-FUNCTION ejecuta_proceso(flag)
-DEFINE flag		SMALLINT
-DEFINE comando		VARCHAR(400)
-DEFINE archivo		VARCHAR(100)
-DEFINE long, posi	SMALLINT
-DEFINE anio, mes	SMALLINT
-
-FOR anio = rm_par.anio_ini TO rm_par.anio_fin
-	FOR mes = rm_par.mes_ini TO rm_par.mes_fin
-		LET archivo = ' > anexo_compras_'
-		IF flag = 2 THEN
-			LET archivo = archivo CLIPPED, 'prov_'
-		END IF
-		LET archivo = archivo CLIPPED, mes USING "&&", '-',
-				anio USING "&&&&", '_', vg_codloc USING "&&",
-				'.xml ' 
-		LET posi    = 4
-		LET comando = 'cd ..', vg_separador, '..', vg_separador, 'SRI',
-				vg_separador, 'fuentes', vg_separador,
-				'; umask 0002; fglrun srip203 ', vg_base, ' "',
-				vg_modulo, '" ', vg_codcia, ' ', vg_codloc, ' ',
-				anio, ' ', mes, ' ',
-				rm_colord[rm_par.col_ord].num_cols
-		IF flag = 2 THEN
-			LET comando = comando CLIPPED, ' X '
-		END IF
-		LET comando = comando CLIPPED, ' ', archivo CLIPPED
-		RUN comando
-		LET long    = LENGTH(archivo)
-		LET archivo = 'unix2dos ', archivo[posi, long] CLIPPED
-		RUN archivo
-		LET posi    = 10
-		LET long    = LENGTH(archivo)
-		LET archivo = 'mv ', archivo[posi, long] CLIPPED, ' $HOME/tmp/'
-		RUN archivo
-	END FOR
-END FOR
 
 END FUNCTION

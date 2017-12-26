@@ -1,9 +1,9 @@
 --------------------------------------------------------------------------------
--- Titulo              : srip203.4gl -- Mantenimiento anexo de compras
+-- Titulo              : srip203.4gl -- Mantenimiento Anexo de Compras
 -- Elaboración         : 02-Jun-2007
 -- Autor               : NPC
 -- Formato de Ejecución: fglrun srip203 Base Modulo Compañía Localidad
---							[anio] [mes] [orden] [[agrupado_proveedor=X]]
+--							[anio] [mes] [orden]
 -- Ultima Correción    : 
 -- Motivo Corrección   : 
 --------------------------------------------------------------------------------
@@ -28,9 +28,9 @@ LET vg_proceso = arg_val(0)
 CALL startlog('../logs/' || vg_proceso CLIPPED || '.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
-IF num_args() <> 7 AND num_args() <> 8 THEN
+IF num_args() <> 7 THEN
 	CALL fl_mostrar_mensaje('Número de parametros incorrecto.','stop')
-     	EXIT PROGRAM
+	EXIT PROGRAM
 END IF
 LET vg_base    = arg_val(1)
 LET vg_modulo  = arg_val(2)
@@ -68,6 +68,7 @@ END FUNCTION
  * El anexo se genera según la ficha técnica del SRI que se encuentra en: 
  * http://descargas.sri.gob.ec/download/anexos/ats/FICHA_TECNICA_ATS_JULIO2016.pdf
  **}
+
 FUNCTION ejecuta_proceso()
 DEFINE r_doc		RECORD
 				num_ret		CHAR(12),
@@ -78,9 +79,7 @@ DEFINE r_doc		RECORD
 				tc		LIKE srit019.s19_tipo_comp,
 				estableci	CHAR(3),
 				pemision	CHAR(3),
-				--secuencia	CHAR(10),
 				secuencia	LIKE cxpt020.p20_num_doc,
-				--aut		LIKE ordt013.c13_num_aut,
 				aut		VARCHAR(40),
 				fecha_reg	CHAR(10),
 				fecha_emi	CHAR(10),
@@ -108,17 +107,12 @@ DEFINE r_adi		RECORD
 				personeria	LIKE cxpt001.p01_personeria,
 				tipo		LIKE cxpt020.p20_tipo_doc,
 				numero		LIKE cxpt020.p20_num_doc
-				--divid		LIKE cxpt020.p20_dividendo
 			END RECORD
-DEFINE r_g01		RECORD LIKE gent001.*
-DEFINE r_g02		RECORD LIKE gent002.*
-DEFINE codestablec	LIKE gent037.g37_pref_sucurs
 DEFINE fecha		DATETIME YEAR TO MONTH
 DEFINE registro		CHAR(11600)
 DEFINE query		CHAR(21500)
 DEFINE salida		CHAR(1500)
 DEFINE primera		SMALLINT
-DEFINE total_ventas	DECIMAL(12,2)
 
 LET fecha = EXTEND(MDY(mes, 01, anio), YEAR TO MONTH)
 LET query = 'SELECT NVL((SELECT UNIQUE p28_num_ret ',
@@ -350,8 +344,6 @@ LET query = 'SELECT NVL((SELECT UNIQUE p28_num_ret ',
 	'  AND c10_compania   = c13_compania ',
 	'  AND c10_localidad  = c13_localidad ',
 	'  AND c10_numero_oc  = c13_numero_oc ',
-	--'  and c10_factura    = "001-001-0202903"',
-	--'  and c10_factura    = "001-001-0187740"',
 	'  AND c10_compania   = p20_compania ',
 	'  AND c10_localidad  = p20_localidad ',
 	'  AND c10_numero_oc  = p20_numero_oc ',
@@ -395,11 +387,6 @@ LET query = 'SELECT NVL((SELECT UNIQUE p28_num_ret ',
 		'TO_CHAR(p20_fecha_emi, "%d/%m/%Y") fecha_reg, ',
 		'TO_CHAR(p20_fecha_emi, "%d/%m/%Y") fecha_emi,',
 		'TO_CHAR(DATE("', vg_fecha, '"),"%m/%Y") fecha_cad, ',
-		{--
-		'CASE WHEN p20_valor_impto = 0 THEN p20_valor_fact ELSE 0 END ',
-		'base_sin, CASE WHEN p20_valor_impto > 0 THEN ',
-		'(p20_valor_fact - p20_valor_impto) ELSE 0 END base_con, ',
-		--}
 		'0 base_sin, p20_valor_fact base_con, 0 base_ice, ',
 		'NVL((SELECT UNIQUE CASE WHEN s08_codigo = 0 ',
 						'THEN 2 ',
@@ -545,8 +532,6 @@ LET query = 'SELECT NVL((SELECT UNIQUE p28_num_ret ',
 		'WHERE p20_codprov   = p01_codprov ',
 		'  AND p20_tipo_doc  = "FA" ',
 		'  AND p20_compania  = ', vg_codcia,
-		--'  and p20_num_doc   = "001-001-0202903"',
-		--'  and p20_num_doc   = "001-001-0187740"',
 		'  AND p20_numero_oc IS NULL ',
 		'  AND EXTEND(p20_fecha_emi, YEAR TO MONTH) = "', fecha, '"',
 	'INTO TEMP t1 '
@@ -557,7 +542,6 @@ SELECT p20_codprov codp, p20_tipo_doc tp, p20_num_doc num_d, COUNT(*) tot_reg
 	WHERE sec           = 'NR'
 	  AND p20_dividendo > 1
 	GROUP BY 1, 2, 3
-	--HAVING COUNT(*) > 1
 	INTO TEMP t2
 SELECT UNIQUE codp, tp, num_d, sec sec_rt
 	FROM t1, t2
@@ -585,76 +569,16 @@ LET query = 'SELECT UNIQUE ',
 				'ORDER BY ', orden CLIPPED
 PREPARE cons FROM query
 DECLARE q_cons CURSOR FOR cons
-CALL fl_lee_compania(vg_codcia) RETURNING r_g01.*
-CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING r_g02.*
-LET query = 'SELECT NVL(SUM((s21_bas_imp_gr_iva + s21_base_imp_tar_0) * ',
-				'CASE WHEN s21_tipo_comp = "04" ',
-					'THEN -1 ',
-					'ELSE 1 ',
-				'END), 0) AS total_venta ',
-		'FROM srit021 ',
-		' WHERE s21_compania  = ', vg_codcia,
-		'   AND s21_localidad = ', vg_codloc,
-		'   AND s21_anio      = ', anio,
-		'   AND s21_mes       = ', mes,
-		' INTO TEMP tmp_vta '
-PREPARE exec_tmp_vta FROM query
-EXECUTE exec_tmp_vta
-SELECT * INTO total_ventas FROM tmp_vta
-DROP TABLE tmp_vta
-LET codestablec = NULL
-SELECT g37_pref_sucurs
-		INTO codestablec
-		FROM gent037 b
-		WHERE b.g37_compania  = vg_codcia
-		  AND b.g37_localidad = vg_codloc
-		  AND b.g37_tipo_doc  = "FA"
-		  AND b.g37_secuencia =
-			(SELECT MAX(a.g37_secuencia)
-				FROM gent037 a
-				WHERE a.g37_compania  = b.g37_compania
-				  AND a.g37_localidad = b.g37_localidad
-				  AND a.g37_tipo_doc  = b.g37_tipo_doc)
-DISPLAY '<?xml version="1.0" encoding="UTF-8" ?>'
-DISPLAY '<iva>'
-DISPLAY '<TipoIDInformante>R</TipoIDInformante>'
-DISPLAY '<IdInformante>', r_g02.g02_numruc CLIPPED, '</IdInformante>'
-DISPLAY '<razonSocial>', r_g01.g01_razonsocial CLIPPED, '</razonSocial>'
-DISPLAY '<Anio>', anio USING "&&&&", '</Anio>'
-DISPLAY '<Mes>', mes USING "&&", '</Mes>'
-DISPLAY '<numEstabRuc>', codestablec CLIPPED, '</numEstabRuc>'
-DISPLAY '<totalVentas>', total_ventas USING "<<<<<<<<<<<&.&&", '</totalVentas>'
-DISPLAY '<codigoOperativo>IVA</codigoOperativo>'
 LET num_ret_ant = NULL
 LET salida      = NULL
 LET primera     = 1
 FOREACH q_cons INTO r_doc.*, r_adi.*
-	IF primera THEN
-		LET registro = '<compras>', '<detalleCompras>'
-	ELSE
-		LET registro = '<detalleCompras>'
-	END IF
-	IF num_args() = 8 THEN
-		LET registro = registro CLIPPED,
-			'<codProv>', r_adi.proveedor USING "<<<<<<&", '</codProv>',
-			'<nomProv>', r_adi.nomprov CLIPPED, '</nomProv>'
-	END IF
-	LET registro = registro CLIPPED,
+	LET registro = '<detalleCompras>',
 			'<codSustento>', r_doc.sustento USING "&&", '</codSustento>',
 			'<tpIdProv>', r_doc.idtipo CLIPPED, '</tpIdProv>',
 			'<idProv>', r_doc.idprov[1,13] CLIPPED, '</idProv>',
 			'<tipoComprobante>', r_doc.tc USING "&&", '</tipoComprobante>',
 			'<parteRel>SI</parteRel>'
-			{--
-			'<tipoProv>'
-			CASE r_adi.personeria
-				WHEN 'N' LET registro = registro CLIPPED, '01'
-				WHEN 'J' LET registro = registro CLIPPED, '02'
-			END CASE
-			LET registro = registro CLIPPED,
-			'</tipoProv>',
-			'<denopr>', r_adi.nomprov CLIPPED, '</denopr>'
-			--}
 			IF vg_codcia = 1 THEN
 				LET registro = registro CLIPPED,
 								'<fechaRegistro>', r_doc.fecha_reg CLIPPED,
@@ -742,18 +666,15 @@ FOREACH q_cons INTO r_doc.*, r_adi.*
 	END IF
 	LET salida = NULL
 	LET registro = registro CLIPPED,
-			--'<docModificado></docModificado>',
-			--'<baseImpExeReemb>0.00</baseImpExeReemb>',
 			'</detalleCompras>'
 	DISPLAY registro CLIPPED
 	LET primera     = 0
 	LET registro    = NULL
 	LET num_ret_ant = NULL
 END FOREACH
-DISPLAY '</compras>'
-DISPLAY '</iva>'
 DROP TABLE t1
 DROP TABLE t3
+CALL fl_mostrar_mensaje('Anexo de Compras Generado OK.', 'info')
 
 END FUNCTION
 

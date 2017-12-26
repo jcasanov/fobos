@@ -6763,17 +6763,14 @@ DEFINE c		SMALLINT
 WHILE TRUE
 	OPEN WINDOW w_menu_sri AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		ATTRIBUTE(FORM LINE FIRST , COMMENT LINE LAST, MENU LINE FIRST,
-			  BORDER, MESSAGE LINE LAST - 2) 
+			  		BORDER, MESSAGE LINE LAST - 2) 
 	OPEN FORM f_menf163 FROM '../forms/menf163'
 	DISPLAY FORM f_menf163
-	DISPLAY "boton_sri"		TO a      ## Picture 
-	DISPLAY "Anexo Ventas"		TO c100   ## Botón 1 srip201
-	DISPLAY "Anexo Compras"		TO c200   ## Botón 2 srip202
-	--DISPLAY "Control Doc. SRI"	TO c300   ## Botón 3 genp141
-	--DISPLAY "Control Sec. SRI"	TO c400   ## Botón 4 genp142
-	DISPLAY "Control Sec. SRI"	TO c300   ## Botón 3 genp144
-	DISPLAY "Config.Codigos SRI"	TO c400   ## Botón 4 srip204
-	DISPLAY "Gen. Doc. Elec."	TO c500   ## Botón 5 srip205
+	DISPLAY "boton_sri"					TO a      ## Picture 
+	DISPLAY "Anexo Transaccional"		TO c100   ## Botón 1 srip201
+	DISPLAY "Control Sec. SRI"			TO c200   ## Botón 3 genp144
+	DISPLAY "Config.Codigos SRI"		TO c300   ## Botón 4 srip204
+	DISPLAY "Gen. Doc. Elec."			TO c400   ## Botón 5 srip205
 	LET c = fgl_getkey()
 	CASE c
 		WHEN 1
@@ -6786,39 +6783,13 @@ WHILE TRUE
 			RUN ejecuta
 		WHEN 2
 			IF NOT fl_control_acceso_proceso_men(vg_usuario,
-						vg_codcia, 'SR', 'srip202')
-			THEN
-				EXIT CASE
-			END IF
-			LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'SRI', vg_separador, 'fuentes', vg_separador, '; umask 0002; fglrun srip202 ', vg_base, ' ', 'SR', vg_codcia, ' ', vg_codloc
-			RUN ejecuta
-		{--
-		WHEN 3 
-			IF NOT fl_control_acceso_proceso_men(vg_usuario,
-						vg_codcia, 'GE', 'genp141')
-			THEN
-				EXIT CASE
-			END IF
-			LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'GENERALES', vg_separador, 'fuentes', vg_separador, '; fglrun genp141 ', vg_base, ' ', 'GE', vg_codcia, ' ', vg_codloc
-			RUN ejecuta
-		WHEN 4
-			IF NOT fl_control_acceso_proceso_men(vg_usuario,
-						vg_codcia, 'GE', 'genp142')
-			THEN
-				EXIT CASE
-			END IF
-			LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'GENERALES', vg_separador, 'fuentes', vg_separador, '; fglrun genp142 ', vg_base, ' ', 'GE', vg_codcia, ' ', vg_codloc
-			RUN ejecuta
-		--}
-		WHEN 3
-			IF NOT fl_control_acceso_proceso_men(vg_usuario,
 						vg_codcia, 'GE', 'genp144')
 			THEN
 				EXIT CASE
 			END IF
 			LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'GENERALES', vg_separador, 'fuentes', vg_separador, '; fglrun genp144 ', vg_base, ' ', 'GE', vg_codcia, ' ', vg_codloc
 			RUN ejecuta
-		WHEN 4
+		WHEN 3
 			IF NOT fl_control_acceso_proceso_men(vg_usuario,
 						vg_codcia, 'SR', 'srip204')
 			THEN
@@ -6826,7 +6797,7 @@ WHILE TRUE
 			END IF
 			LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'SRI', vg_separador, 'fuentes', vg_separador, '; fglrun srip204 ', vg_base, ' ', 'SR', vg_codcia, ' ', vg_codloc
 			RUN ejecuta
-		WHEN 5
+		WHEN 4
 			IF NOT fl_control_acceso_proceso_men(vg_usuario,
 						vg_codcia, 'SR', 'srip205')
 			THEN
