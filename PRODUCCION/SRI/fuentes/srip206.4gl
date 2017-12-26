@@ -75,6 +75,7 @@ LET vm_fecha_emi_vta = MDY(rm_par.mes_fin, 01, rm_par.anio_fin) + 1 UNITS MONTH
 						- 1 UNITS DAY
 CALL fl_lee_compania(vg_codcia) RETURNING r_g01.*
 CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING r_g02.*
+CALL control_generar_anexo_ventas(1)
 DISPLAY '<?xml version="1.0" encoding="UTF-8"?>'
 DISPLAY '<iva xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
 DISPLAY '<TipoIDInformante>R</TipoIDInformante>'
@@ -117,7 +118,6 @@ DISPLAY '<compras>'
 CALL control_generar_anexo_compras()
 DISPLAY '</compras>'
 DISPLAY '<ventas>'
-CALL control_generar_anexo_ventas(1)
 CALL control_generar_anexo_ventas(2)
 DISPLAY '</ventas>'
 DISPLAY '<ventasEstablecimiento>'

@@ -314,11 +314,11 @@ MENU 'OPCIONES'
 				HIDE OPTION 'Declarar Anexo'
 			END IF
 		END IF
-        COMMAND KEY('G') 'Generar Anexo' 'Generar anexo transaccional ventas.'
+	COMMAND KEY('G') 'Generar Anexo' 'Generar anexo transaccional ventas.'
 		CALL control_parametros('1')
-        COMMAND KEY('X') 'Genera Anexo XML' 'Generar anexo transaccional ventas en XML.'
+	COMMAND KEY('X') 'Genera Anexo XML' 'Generar anexo transaccional ventas en XML.'
 		CALL control_parametros('2')
-        COMMAND KEY('Y') 'Genera Anula XML' 'Generar anulados de ventas en XML.'
+	COMMAND KEY('Y') 'Genera Anula XML' 'Generar anulados de ventas en XML.'
 		CALL control_parametros('3')
 	COMMAND KEY('A') 'Avanzar' 'Ver siguiente registro'
 		IF vm_row_current < vm_num_rows THEN
