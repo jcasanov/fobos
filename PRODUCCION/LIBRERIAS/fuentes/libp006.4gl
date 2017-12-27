@@ -273,8 +273,19 @@ DECLARE q_seno CURSOR FOR SELECT UNIQUE te_tipo_comp, te_subtipo, te_indice
 	ORDER BY 3
 FOREACH q_seno INTO tipo_comp, subtipo, indice
 	INITIALIZE r_ccomp.* TO NULL
-	LET r_ccomp.b12_num_comp = fl_numera_comprobante_contable(rm_c13.c13_compania,
-		tipo_comp, YEAR(rm_c13.c13_fecha_recep), MONTH(rm_c13.c13_fecha_recep))
+	IF vm_compra IS NOT NULL THEN
+		LET r_ccomp.b12_num_comp = fl_numera_comprobante_contable(
+										rm_c13.c13_compania,
+										tipo_comp,
+										YEAR(rm_c13.c13_fec_emi_fac),
+										MONTH(rm_c13.c13_fec_emi_fac))
+	ELSE
+		LET r_ccomp.b12_num_comp = fl_numera_comprobante_contable(
+										rm_c13.c13_compania,
+										tipo_comp,
+										YEAR(rm_c13.c13_fecha_recep),
+										MONTH(rm_c13.c13_fecha_recep))
+	END IF
 	IF r_ccomp.b12_num_comp = '-1' THEN
 		ROLLBACK WORK
 		EXIT PROGRAM

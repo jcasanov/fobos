@@ -1215,8 +1215,19 @@ IF rm_crep.r19_cod_tran = 'IM' THEN
 END IF
 FOREACH q_mast INTO tipo_comp, subtipo, indice
 	INITIALIZE r_ccomp.* TO NULL
-	LET r_ccomp.b12_num_comp = fl_numera_comprobante_contable(rm_crep.r19_compania,
-		tipo_comp, YEAR(rm_crep.r19_fecing), MONTH(rm_crep.r19_fecing))
+	IF vm_cod_tran = 'CL' THEN
+		LET r_ccomp.b12_num_comp = fl_numera_comprobante_contable(
+										rm_crep.r19_compania,
+										tipo_comp,
+										YEAR(vm_fec_emi_fact),
+										MONTH(vm_fec_emi_fact))
+	ELSE
+		LET r_ccomp.b12_num_comp = fl_numera_comprobante_contable(
+										rm_crep.r19_compania,
+										tipo_comp,
+										YEAR(rm_crep.r19_fecing),
+										MONTH(rm_crep.r19_fecing))
+	END IF
 	IF r_ccomp.b12_num_comp = '-1' THEN
 		ROLLBACK WORK
 		EXIT PROGRAM

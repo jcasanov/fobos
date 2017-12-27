@@ -3234,8 +3234,11 @@ IF cuenta_cxp IS NULL THEN
 END IF
 LET r_b12.b12_compania    = vg_codcia
 LET r_b12.b12_tipo_comp   = 'DC'
+LET r_b12.b12_fec_proceso = rm_c13.c13_fec_emi_fac
 LET r_b12.b12_num_comp    = fl_numera_comprobante_contable(vg_codcia,
-                            	r_b12.b12_tipo_comp, YEAR(vg_fecha), MONTH(vg_fecha))
+                            	r_b12.b12_tipo_comp,
+								YEAR(r_b12.b12_fec_proceso),
+								MONTH(r_b12.b12_fec_proceso))
 LET r_b12.b12_estado      = 'A'
 IF r_c01.c01_modulo = 'AF' THEN
 	LET r_b12.b12_subtipo = 60
@@ -3248,7 +3251,6 @@ LET r_b12.b12_num_cheque  = NULL
 LET r_b12.b12_origen      = 'A'
 LET r_b12.b12_moneda      = r_c10.c10_moneda
 LET r_b12.b12_paridad     = r_c10.c10_paridad
-LET r_b12.b12_fec_proceso = rm_c13.c13_fec_emi_fac
 LET r_b12.b12_fec_reversa = NULL
 LET r_b12.b12_tip_reversa = NULL
 LET r_b12.b12_num_reversa = NULL
@@ -3513,14 +3515,16 @@ LET glosa = 'OC # ', rm_c13.c13_numero_oc USING "<<<<<<<&", ' RECEPCION # ',
 INITIALIZE r_b12.* TO NULL
 LET r_b12.b12_compania    = vg_codcia  
 LET r_b12.b12_tipo_comp   = r_b03.b03_tipo_comp
+LET r_b12.b12_fec_proceso = rm_c13.c13_fec_emi_fac
 LET r_b12.b12_num_comp    = fl_numera_comprobante_contable(vg_codcia,
-                            	r_b12.b12_tipo_comp, YEAR(vg_fecha), MONTH(vg_fecha))
+								r_b12.b12_tipo_comp,
+								YEAR(r_b12.b12_fec_proceso),
+								MONTH(r_b12.b12_fec_proceso))
 LET r_b12.b12_estado      = 'A' 
 LET r_b12.b12_glosa       = rm_b12.b12_glosa CLIPPED
 LET r_b12.b12_origen      = 'A' 
 LET r_b12.b12_moneda      = r_c10.c10_moneda 
 LET r_b12.b12_paridad     = r_c10.c10_paridad 
-LET r_b12.b12_fec_proceso = rm_c13.c13_fec_emi_fac
 LET r_b12.b12_modulo      = r_b03.b03_modulo
 LET r_b12.b12_usuario     = vg_usuario 
 LET r_b12.b12_fecing      = fl_current()
