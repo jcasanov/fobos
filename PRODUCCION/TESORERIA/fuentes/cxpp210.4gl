@@ -3814,8 +3814,8 @@ LET r_b12.b12_tipo_comp   = r_b03.b03_tipo_comp
 LET r_b12.b12_fec_proceso = rm_c13.c13_fec_emi_fac
 LET r_b12.b12_num_comp    = fl_numera_comprobante_contable(vg_codcia,
 								r_b12.b12_tipo_comp,
-								YEAR(r_b12.b12_tipo_comp),
-								MONTH(r_b12.b12_tipo_comp))
+								YEAR(r_b12.b12_fec_proceso),
+								MONTH(r_b12.b12_fec_proceso))
 LET r_b12.b12_estado      = 'A' 
 LET r_b12.b12_glosa       = rm_b12.b12_glosa CLIPPED
 LET r_b12.b12_origen      = 'A' 
