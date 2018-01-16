@@ -1,0 +1,17 @@
+#!/bin/bash
+
+for modulo in ACTIVOS CAJA COBRANZAS COMPRAS CONTABILIDAD GENERALES LIBRERIAS MENU NOMINA REPUESTOS SRI TALLER TESORERIA
+do
+	cd $modulo
+	cd fuentes
+	for j in ???p???.4gl
+	do
+		git diff $j $HOME/PRODUCCION/$modulo/fuentes/$j
+	done
+	cd ../forms
+	for j in ???f*.per
+	do
+		git diff $j $HOME/PRODUCCION/$modulo/forms/$j
+	done
+	cd ../..
+done
