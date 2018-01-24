@@ -13,7 +13,6 @@ DEFINE vm_rows		ARRAY[1000] OF INTEGER 	-- ARREGLO DE ROWID DE FILAS
 DEFINE vm_row_current	SMALLINT	-- FILA CORRIENTE DEL ARREGLO
 DEFINE vm_num_rows	SMALLINT	-- CANTIDAD DE FILAS LEIDAS
 DEFINE ejecuta		VARCHAR(200)
---DEFINE fondo		CHAR(25)
 DEFINE fondo_pp		CHAR(25)
 DEFINE fondo_phobos	CHAR(25)
 DEFINE a		CHAR(25)
@@ -37,7 +36,6 @@ LET vg_proceso   = 'menp000'
 LET vm_titprog   = 'MENU PRINCIPAL - PHOBOS'
 LET fondo_pp     = 'phobos_biger'
 LET fondo_phobos = 'phobos_titulo'
---LET fondo   	 = 'phobos_small'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
 --#CALL fgl_settitle(vg_proceso || ' - ' || vm_titprog)
@@ -71,7 +69,6 @@ CASE p
                 CLOSE WINDOW w_primera_pantalla
                 CALL funcion_master()
 	WHEN 0 
-		--CLOSE WINDOW w_menu_vehiculos
 		CLOSE WINDOW w_primera_pantalla
   		EXIT PROGRAM
 	WHEN 2016 
@@ -96,7 +93,6 @@ OPEN FORM f_menf100 FROM '../forms/menf100r'
 
 DISPLAY FORM f_menf100
 --DISPLAY "Vehículos" 	TO c1000   ## Botón
---DISPLAY "Maquinarias" 	TO c1000   ## Botón
 DISPLAY "Inventarios" 	TO c2000   ## Botón
 DISPLAY "Talleres"  	TO c3000   ## Botón
 DISPLAY "Cobranzas"    	TO c4000   ## Botón
@@ -111,7 +107,6 @@ DISPLAY "S.R.I." 	TO c11000  ## Botón
 DISPLAY "phobos_titulo" TO c30000  ## Phobos
 
 --DISPLAY "vehiculos"   TO c1001   ## Picture 
---DISPLAY "maquinarias"   TO c1001   ## Picture 
 DISPLAY "repuestos"     TO c2001   ## Picture 
 DISPLAY "talleres"    	TO c3001   ## Picture 
 DISPLAY "talleres_dit"  TO c3001   ## Picture 
@@ -125,12 +120,6 @@ DISPLAY "activos"	TO c10001  ## Picture
 DISPLAY "generales"  	TO c20001  ## Picture
 DISPLAY "sri"	  	TO c11001  ## Picture
 
---OPEN WINDOW lwin AT 01,83 WITH 19 ROWS, 20 COLUMNS
---     ATTRIBUTE(BLINK,BOLD,FORM LINE 1)
---     OPEN FORM logo FROM "../forms/logo"
---     DISPLAY FORM logo ATTRIBUTE(BLINK,BOLD)
---     DISPLAY "phobos_titulo.bmp" TO F1 ATTRIBUTE(BLINK,REVERSE)
-
 LET a = fgl_getkey()
 IF a = 3001 THEN
 	CALL fl_ayuda_compania_principal() RETURNING cod_cia, cod_local
@@ -140,16 +129,6 @@ IF a = 3001 THEN
 		CALL fl_cabecera_pantalla(vg_codcia, vg_codloc, vg_modulo, vg_proceso)
 	END IF
 END IF
-{--
-IF a = 3010 THEN
-	IF fl_control_acceso_proceso_men(vg_usuario, vg_codcia, vg_modulo,
-					'menp000')
-	THEN
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'MENU', vg_separador, 'fuentes', vg_separador, '; sh -c "fglrun menp000 ', vg_base, ' ', vg_modulo, '"'
-		RUN ejecuta
-	END IF
-END IF
---}
 IF a = 26 THEN
 	IF tiene_acceso(vg_usuario, vg_codcia, 'VE') THEN
 		CLOSE WINDOW w_menu_principal
@@ -253,7 +232,6 @@ OPEN WINDOW w_menu_vehiculos AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf101 FROM '../forms/menf101'
 DISPLAY FORM f_menf101
---DISPLAY fondo		  TO c000   ## Picture
 DISPLAY "boton_vehiculos" TO a      ## Picture 
 DISPLAY "Configuraciones" TO c100   ## Botón
 DISPLAY "Transacciones"   TO c200   ## Botón
@@ -309,7 +287,6 @@ OPEN WINDOW w_menu_configuracion AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf102 FROM '../forms/menf102'
 DISPLAY FORM f_menf102
---DISPLAY fondo		TO c000   ## Picture
 DISPLAY "boton_configuracion"	TO a      ## Picture 
 DISPLAY "Compañías"     TO c100   ## Botón 1
 DISPLAY "Vend./Bodeg" TO c200   ## Botón 2
@@ -381,7 +358,6 @@ OPEN WINDOW w_menu_transacciones AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf103 FROM '../forms/menf103'
 DISPLAY FORM f_menf103
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_transaciones"	TO a      ## Picture 
 DISPLAY "Series"     		TO c100   ## Botón 1
 DISPLAY "Proformas"     	TO c200   ## Botón 2
@@ -451,7 +427,6 @@ OPEN WINDOW w_menu_pedidos AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf104 FROM '../forms/menf104'
 DISPLAY FORM f_menf104
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_pedidos"	        TO a      ## Picture 
 DISPLAY "Ingreso Pedidos"     	TO c100   ## Botón 1
 DISPLAY "Recepción Pedidos"    	TO c200   ## Botón 2
@@ -504,7 +479,6 @@ OPEN WINDOW w_menu_consultas AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf106 FROM '../forms/menf106'
 DISPLAY FORM f_menf106
---DISPLAY fondo		  	TO c000   ## Picture
 DISPLAY "boton_consultas"	TO a      ## Picture 
 DISPLAY "Estadística Bodegas"   TO c100   ## Botón 1  vehp300
 DISPLAY "Estadística Vendedor"  TO c200   ## Botón 2  vehp301
@@ -589,7 +563,6 @@ OPEN WINDOW w_menu_reportes AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf107 FROM '../forms/menf107'
 DISPLAY FORM f_menf107
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_reportes"	TO a      ## Picture 
 DISPLAY "Ventas/Devoluciones"	TO c100   ## Botón 1
 DISPLAY "Transacciones"     	TO c200   ## Botón 2
@@ -696,8 +669,6 @@ OPEN WINDOW w_menu_repuestos AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf110 FROM '../forms/menf110'
 DISPLAY FORM f_menf110
---DISPLAY fondo		  TO c000   ## Picture
---DISPLAY "boton_repuestos" TO a      ## Picture 
 DISPLAY "boton_invetarios" TO a      ## Picture 
 DISPLAY "Configuraciones" TO c100   ## Botón
 DISPLAY "Transacciones"   TO c200   ## Botón
@@ -758,7 +729,6 @@ OPEN WINDOW w_menu_configuracion AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf102 FROM '../forms/menf102'
 DISPLAY FORM f_menf102
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_configuracion"	TO a      ## Picture 
 DISPLAY "Compañías"     	TO c100   ## Botón 1 repp100
 DISPLAY "Divisiones" 		TO c200   ## Botón 2 repp101
@@ -912,11 +882,6 @@ CASE c
 		END IF
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp115 ', vg_base, ' ', 'RE', vg_codcia
 		RUN ejecuta
-	{--
-	WHEN 16
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp116 ', vg_base, ' ', 'RE', vg_codcia, ' ', vg_codloc
-		RUN ejecuta
-	--}
 	WHEN 16
 		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
 							'RE', 'repp114')
@@ -1050,54 +1015,35 @@ OPEN WINDOW w_menu_transacciones AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf108 FROM '../forms/menf108'
 DISPLAY FORM f_menf108
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_transaciones"	TO a      ## Picture  
 DISPLAY "Proformas"    		TO c100   ## Botón 1  repp220
 DISPLAY "Compra Local"     	TO c200   ## Botón 2  repp214
 DISPLAY "Transferencias"        TO c300   ## Botón 3  repp216
 DISPLAY "Transf. para Fact."	TO c400   ## Botón 4  repp251
---DISPLAY "Pre-Ventas"		TO c400   ## Botón 4  repp209
---DISPLAY "Composicion Item"	TO c400   ## Boton 4 repp248
 DISPLAY "Dev. Compra Local"	TO c500   ## Botón 5  repp218
 DISPLAY "Items"          	TO c600   ## Botón 6  repp108
 DISPLAY "Aprobación Pre-Venta" 	TO c700   ## Botón 7  repp223
 DISPLAY "Manejo Especial Items"	TO c800
---DISPLAY "Reclasificación Item" 	TO c900   ## Botón 9  repp224
 DISPLAY "Aprobación Crédito"  	TO c1000  ## Botón 9 repp210
---DISPLAY "Mantenimiento Precio" 	TO c1100  ## Botón 10 repp221
 DISPLAY "Cambio de Precios" 	TO c1100  ## Botón 10  repp235
 DISPLAY "Ajustes Existencias"  	TO c1200  ## Botón 11 repp212
 DISPLAY "Devolución Facturas"  	TO c1300  ## Botón 12 repp217
 DISPLAY "Ajustes Costos"  	TO c1400  ## Botón 13 repp213
---DISPLAY "Substituciones"	TO c1500  ## Botón 15 repp200
 DISPLAY "Ordenes de Despacho" 	TO c1600  ## Botón 14 repp231
---DISPLAY "Ventas Perdidas" 	TO c1700  ## Botón 17 repp201
 DISPLAY "Cierre Mensual" 	TO c1800  ## Botón 15 repp229
 DISPLAY "Precios Manuales" 	TO c1900  ## Botón 16 repp234
 DISPLAY "Transmisión Transf." 	TO c2000  ## Botón 17 repp666
 DISPLAY "Reversar Cambio Prec." TO c2100  ## Botón 18 repp236
---DISPLAY "Inventario Fis. 2003"  TO c2200  ## Botón 19 repp238
 DISPLAY "Refacturación"         TO c2200  ## Botón 20 repp237
 DISPLAY "Inventario Físico"     TO c2300  ## Botón 21 repp239 y repp250
 DISPLAY "Pedido Prov. Locales"  TO c2400  ## Botón 22 repp240
 DISPLAY "Tr. Bodega Carcelen"  TO c2500  ## Botón 23 repp667
---DISPLAY "Guías de Remisión"     TO c2600  ## Botón 24 repp241
 DISPLAY "Logística"             TO c2600  ## Botón 24 repp241
 DISPLAY "Cambiar Vendedor"      TO c2700  ## Botón 25 repp242
 DISPLAY "Corrección GR SRI"     TO c2800  ## Botón 26 repp243
 DISPLAY "Priorizacion Entreg."  TO c2900  ## Boton 27 repp244
 DISPLAY "Tansf. Bodega Cont."   TO c3000  ## Boton 28 repp245
 DISPLAY "Tansf. Especiales"   TO c3000  ## Boton 28 repp245
-
---DISPLAY "Tansf. Bodega Cont."   TO c3000  ## Boton 28 repp245
-
---DISPLAY "Generar Inventario"	TO c1500  ## Botón 15 repp225
---DISPLAY "Ventas al Taller"	TO c1600  ## Botón 16 repp215
---DISPLAY "Conteo Inventario"	TO c1800  ## Botón 18 repp226
---DISPLAY "Dev. Ventas Taller"	TO c1900  ## Botón 19 repp219
---DISPLAY "Cierre Inventario"	TO c2100  ## Botón 21 repp227
---DISPLAY "Actualización V.P." 	TO c2300  ## Botón 23 repp202
-
 
 LET d = fgl_getkey()
 
@@ -1162,11 +1108,6 @@ CASE d
 	WHEN 8
 		CLOSE WINDOW w_menu_transacciones
 		CALL menu_composicion_items()
-	{--
-	WHEN 9
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp224 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
-		RUN ejecuta
-	--}
 	WHEN 9
 		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
 							'RE', 'repp210')
@@ -1175,12 +1116,6 @@ CASE d
 		END IF
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp210 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
 		RUN ejecuta
-	{--
-	WHEN 10
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp221 ', vg_base, ' ',
-'RE', vg_codcia
-		RUN ejecuta
-	--}
 	WHEN 10
 		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
 							'RE', 'repp235')
@@ -1214,11 +1149,6 @@ CASE d
 		END IF
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp213 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
 		RUN ejecuta
-	{--
-	WHEN 15
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp200 ', vg_base, ' ', 'RE', vg_codcia
-		RUN ejecuta
-	--}
 	WHEN 14
 		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
 							'RE', 'repp231')
@@ -1227,11 +1157,6 @@ CASE d
 		END IF
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp231 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
 		RUN ejecuta
-	{--
-	WHEN 17
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp201 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
-		RUN ejecuta
-	--}
 	WHEN 15
 		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
 							'RE', 'repp229')
@@ -1264,16 +1189,6 @@ CASE d
 		END IF
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp236 ', vg_base, ' ', 'RE', vg_codcia
 		RUN ejecuta
-	{--
-	WHEN 19
-		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
-							'RE', 'repp238')
-		THEN
-			EXIT CASE
-		END IF
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp238 ', vg_base, ' ', 'RE', vg_codcia, ' ', vg_codloc
-		RUN ejecuta
-	--}
 	WHEN 19
 		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
 							'RE', 'repp237')
@@ -1291,7 +1206,6 @@ CASE d
 				EXIT WHILE
 			END IF
 		END WHILE
-		--CALL fgl_keysetlabel('RETURN','')
 		IF c = 'I' OR c = 'i' THEN
 			LET programa = 'repp239'
 		ELSE
@@ -1323,15 +1237,6 @@ CASE d
 	WHEN 23
 		CLOSE WINDOW w_menu_transacciones
 		CALL menu_logistica()
-	{--
-		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
-							'RE', 'repp241')
-		THEN
-			EXIT CASE
-		END IF
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp241 ', vg_base, ' ', 'RE', vg_codcia, ' ', vg_codloc
-		RUN ejecuta
-	--}
 	WHEN 24
 		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
 							'RE', 'repp242')
@@ -1359,40 +1264,10 @@ CASE d
 	WHEN 3014
 		CLOSE WINDOW w_menu_transacciones
 		CALL menu_transferencias()
-		{--
-		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
-							'RE', 'repp245')
-		THEN
-			EXIT CASE
-		END IF
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp245 ', vg_base, ' ', 'RE', vg_codcia, ' ', vg_codloc
-		RUN ejecuta
-		--}
 	WHEN 0
 		CLOSE WINDOW w_menu_transacciones
 		CALL menu_repuestos()
 END CASE
-	{--
-	WHEN 15
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp225 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
-		RUN ejecuta
-	WHEN 16
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp215 ', vg_base, ' ',
-'RE', vg_codcia, vg_codloc
-		RUN ejecuta
-	WHEN 18
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp226 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
-		RUN ejecuta
-	WHEN 19
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp219 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
-		RUN ejecuta
-	WHEN 21
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp227 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
-		RUN ejecuta
-	WHEN 23
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp202 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
-		RUN ejecuta
-	--}
 END WHILE
 
 END FUNCTION
@@ -1562,7 +1437,6 @@ OPEN WINDOW w_menu_pedidos AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf109 FROM '../forms/menf109'
 DISPLAY FORM f_menf109
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_pedidos"	        TO a      ## Picture 
 DISPLAY "Pedidos Sugeridos"    	TO c100   ## Botón 1 repp203
 DISPLAY "Items"			TO c200   ## Boton  8 repp246
@@ -1676,7 +1550,6 @@ OPEN WINDOW w_menu_consultas AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf112 FROM '../forms/menf112'
 DISPLAY FORM f_menf112
---DISPLAY fondo		  	TO c000   ## Picture
 DISPLAY "boton_consultas"	 TO a      ## Picture 
 DISPLAY "Proformas" 	 	 TO c100   ## Botón 1 repp300
 DISPLAY "Items"         	 TO c200   ## Botón 2 repp301
@@ -1953,36 +1826,21 @@ OPEN WINDOW w_menu_reportes AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf113 FROM '../forms/menf113'
 DISPLAY FORM f_menf113
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_reportes"	TO a      ## Picture 
---DISPLAY "Proformas"             TO c100   ## Botón 1 repp400
 DISPLAY "Nota de Pedido"    	TO c100   ## Botón 1 repp401
 DISPLAY "Existencias"   	TO c200   ## Botón 2 repp402
 DISPLAY "Facturas/Devolución"	TO c300   ## Botón 3 repp403
---DISPLAY "Comprob. Importación" 	TO c500   ## Botón 5 repp404
---DISPLAY "Movimientos de Items" 	TO c600   ## Botón 6 repp405
---DISPLAY "Resumen de Ventas"  	        TO c700   ## Botón 7 repp406
 DISPLAY "Impresión Recepción"	TO c400   ## Botón 4 repp407
 DISPLAY "Ubicación de Items"    TO c500   ## Botón 5 repp408
 DISPLAY "Transacciones" 	TO c600   ## Botón 6 repp409
---DISPLAY "Liquidación" 	 	TO c700   ## Botón 7 repp419
---DISPLAY "Control Inv. Físico" 	TO c1200  ## Botón 12 repp420
 DISPLAY "Margenes de Utilidad" 	TO c800   ## Botón 8 repp421
---DISPLAY "Pedido Sugerido"  	TO c1400  ## Botón 14 repp425
---DISPLAY "Resumen Inventario"  	TO c1500  ## Botón 15 repp423
 DISPLAY "Lista de Precios"      TO c900   ## Botón 9 repp430
 DISPLAY "Pedido Emergencia" 	TO c1000  ## Botón 10 repp426
 DISPLAY "Guías de Remisión" 	TO c1100  ## Botón 10 repp435
---DISPLAY "Diferencias"      	TO c1800  ## Botón 18 repp427
 
 LET h = fgl_getkey()
 
 CASE h
-	{--
-	WHEN 1
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp419 ', vg_base, ' ', 'RE', vg_codcia
-		RUN ejecuta
-	--}
 	WHEN 1
 		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
 							'RE', 'repp426')
@@ -2008,17 +1866,6 @@ CASE h
 		END IF
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp400 ', vg_base, ' ', 'RE', vg_codcia, ' ', vg_codloc
 		RUN ejecuta
-	{--
-	WHEN 5
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp409 ', vg_base, ' ', 'RE', vg_codcia
-		RUN ejecuta
-	WHEN 6
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp421 ', vg_base, ' ', 'RE', vg_codcia
-		RUN ejecuta
-	WHEN 7
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp401 ', vg_base, ' ', 'RE', vg_codcia, ' ', vg_codloc
-		RUN ejecuta
-	--}
 	WHEN 4
 		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
 							'RE', 'repp407')
@@ -2043,14 +1890,6 @@ CASE h
 		END IF
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp430 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
 		RUN ejecuta
-	{--
-	WHEN 7
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp408 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
-		RUN ejecuta
-	WHEN 12
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp425 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
-		RUN ejecuta
-	--}
 	WHEN 7
 		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
 							'RE', 'repp420')
@@ -2059,14 +1898,6 @@ CASE h
 		END IF
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp420 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
 		RUN ejecuta
-	{--
-	WHEN 14
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp405 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
-		RUN ejecuta
-	WHEN 15
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp402 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
-		RUN ejecuta
-	--}
 	WHEN 8
 		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
 							'RE', 'repp404')
@@ -2092,11 +1923,6 @@ CASE h
 		END IF
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp435 ', vg_base, ' ', 'RE', vg_codcia, ' ', vg_codloc
 		RUN ejecuta
-	{--
-	WHEN 18
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'REPUESTOS', vg_separador, 'fuentes', vg_separador, '; fglrun repp423 ', vg_base, ' ', 'RE', vg_codcia, vg_codloc
-		RUN ejecuta
-	--}
 	WHEN 0
 		CLOSE WINDOW w_menu_reportes
 		CALL menu_repuestos()
@@ -2124,7 +1950,6 @@ OPEN WINDOW w_menu_talleres AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf114 FROM '../forms/menf114'
 DISPLAY FORM f_menf114
---DISPLAY fondo		  TO c000   ## Picture
 DISPLAY "boton_talleres"  TO a      ## Picture 
 DISPLAY "Configuraciones" TO c100   ## Botón
 DISPLAY "Transacciones"   TO c200   ## Botón
@@ -2176,7 +2001,6 @@ OPEN WINDOW w_menu_configuracion AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf115 FROM '../forms/menf115'
 DISPLAY FORM f_menf115
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_configuracion"	TO a      ## Picture 
 DISPLAY "Compañías"     	TO c100   ## Botón 1 talp100
 DISPLAY "Marcas" 		TO c200   ## Botón 2 talp101
@@ -2285,7 +2109,6 @@ OPEN WINDOW w_menu_transacciones AT 3,2 WITH 22 ROWS, 80 COLUMNS
 	  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf116 FROM '../forms/menf116'
 DISPLAY FORM f_menf116
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_transaciones"	TO a      ## Picture 
 DISPLAY "Presupuestos"     	TO c100   ## Botón 1
 DISPLAY "Tareas / Presupuesto"  TO c200   ## Botón 2
@@ -2446,7 +2269,6 @@ OPEN WINDOW w_menu_consultas AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf118 FROM '../forms/menf118'
 DISPLAY FORM f_menf118
---DISPLAY fondo		  	TO c000   ## Picture
 DISPLAY "boton_consultas"	TO a      ## Picture 
 DISPLAY "Ordenes de Trabajo"	TO c100   ## Botón 1 talp300
 DISPLAY "Estadística Facturas"  TO c200   ## Botón 3 talp310
@@ -2532,10 +2354,8 @@ OPEN WINDOW w_menu_reportes AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf119 FROM '../forms/menf119'
 DISPLAY FORM f_menf119
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_reportes"	TO a      ## Picture 
 DISPLAY "Facturación"		TO c100   ## Botón 1 talp400
---DISPLAY "Presupuestos"    	TO c200   ## Botón 2 talp401
 DISPLAY "Gastos por O.T."  	TO c300   ## Botón 3 talp405
 
 LET h = fgl_getkey()
@@ -2549,11 +2369,6 @@ CASE h
 		END IF
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'TALLER', vg_separador, 'fuentes', vg_separador, '; fglrun talp400 ', vg_base, ' ', 'TA', vg_codcia, vg_codloc
 		RUN ejecuta
-	{--
-	WHEN 2
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'TALLER', vg_separador, 'fuentes', vg_separador, '; fglrun talp401 ', vg_base, ' ', 'TA', vg_codcia, vg_codloc
-		RUN ejecuta
-	--}
 	WHEN 2
 		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
 							'TA', 'talp405')
@@ -2590,7 +2405,6 @@ OPEN WINDOW w_menu_cobranzas AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf120 FROM '../forms/menf120'
 DISPLAY FORM f_menf120
---DISPLAY fondo		  TO c000   ## Picture
 DISPLAY "boton_cobranzas" TO a      ## Picture 
 DISPLAY "Configuraciones" TO c100   ## Botón
 DISPLAY "Transacciones"   TO c200   ## Botón
@@ -2643,7 +2457,6 @@ OPEN WINDOW w_menu_configuracion AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf121 FROM '../forms/menf121'
 DISPLAY FORM f_menf121
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_configuracion"	TO a      ## Picture 
 DISPLAY "Compañías"     	TO c100   ## Botón 1 cxcp100
 DISPLAY "Clientes Cia. / Loc." 	TO c200   ## Botón 2 cxcp101
@@ -2733,7 +2546,6 @@ OPEN WINDOW w_menu_transacciones AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf122 FROM '../forms/menf122'
 DISPLAY FORM f_menf122
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_transaciones"	TO a      ## Picture 
 DISPLAY "Documentos Deudores"  	TO c100   ## Botón 1 cxcp200
 DISPLAY "Documentos a Favor"   	TO c200   ## Botón 2 cxcp201
@@ -2888,7 +2700,6 @@ OPEN WINDOW w_menu_consultas AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf123 FROM '../forms/menf123'
 DISPLAY FORM f_menf123
---DISPLAY fondo		  	TO c000   ## Picture
 DISPLAY "boton_consultas"	TO a      ## Picture 
 DISPLAY "Cheques Postfechados" 	TO c100   ## Botón 1  cxcp303
 DISPLAY "Cheques Protestados"   TO c200   ## Botón 2  cxcp304
@@ -3068,7 +2879,6 @@ OPEN WINDOW w_menu_reportes AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf124 FROM '../forms/menf124'
 DISPLAY FORM f_menf124
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_reportes"	TO a      ## Picture 
 DISPLAY "Detalle Cartera"       TO c100   ## Botón 1  cxcp400
 DISPLAY "Resúmen Cartera"       TO c200   ## Botón 2  cxcp401
@@ -3212,7 +3022,6 @@ OPEN WINDOW w_menu_tesoreria AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf125 FROM '../forms/menf125'
 DISPLAY FORM f_menf125
---DISPLAY fondo		  TO c000   ## Picture
 DISPLAY "boton_tesoreria" TO a      ## Picture 
 DISPLAY "Configuraciones" TO c100   ## Botón
 DISPLAY "Transacciones"   TO c200   ## Botón
@@ -3259,7 +3068,6 @@ OPEN WINDOW w_menu_configuracion AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf126 FROM '../forms/menf126'
 DISPLAY FORM f_menf126
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_configuracion"	TO a      ## Picture 
 DISPLAY "Compañías"     	TO c100   ## Botón 1 cxpp100
 DISPLAY "Proveedores Cía/Loc" 	TO c200   ## Botón 2 cxpp101
@@ -3341,7 +3149,6 @@ OPEN WINDOW w_menu_transacciones AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf127 FROM '../forms/menf127'
 DISPLAY FORM f_menf127
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_transaciones"	TO a      ## Picture 
 DISPLAY "Documentos Deudores"  	TO c100   ## Botón 1 cxpp200
 DISPLAY "Documentos a Favor"   	TO c200   ## Botón 2 cxpp201
@@ -3479,7 +3286,6 @@ OPEN WINDOW w_menu_consultas AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf128 FROM '../forms/menf128'
 DISPLAY FORM f_menf128
---DISPLAY fondo		  	TO c000   ## Picture
 DISPLAY "boton_consultas"	TO a      ## Picture 
 DISPLAY "Estado Cuentas Prov." 	TO c100   ## Botón 1  cxpp300
 DISPLAY "Anl. Cartera Prov." 	TO c200   ## Botón 2  cxpp301
@@ -3560,16 +3366,6 @@ CASE g
 		END IF
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'TESORERIA', vg_separador, 'fuentes', vg_separador, '; fglrun cxpp311 ', vg_base, ' ', 'TE', ' ', vg_codcia, ' ', vg_codloc
 		RUN ejecuta
-	{--
-	WHEN 9
-		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
-							'TE', 'cxpp312')
-		THEN
-			EXIT CASE
-		END IF
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'TESORERIA', vg_separador, 'fuentes', vg_separador, '; fglrun cxpp312 ', vg_base, ' ', 'TE', ' ', vg_codcia, ' ', vg_codloc
-		RUN ejecuta
-	--}
 	WHEN 9
 		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
 							'TE', 'cxpp314')
@@ -3617,7 +3413,6 @@ OPEN WINDOW w_menu_reportes AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf129 FROM '../forms/menf129'
 DISPLAY FORM f_menf129
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_reportes"	TO a      ## Picture
 
 DISPLAY "Detalle Cartera"       TO c100   ## Botón 1 cxpp400
@@ -3726,7 +3521,6 @@ OPEN WINDOW w_menu_contabilidad AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf130 FROM '../forms/menf130'
 DISPLAY FORM f_menf130
---DISPLAY fondo		  TO c000   ## Picture
 DISPLAY "boton_cobranzas" TO a      ## Picture 
 DISPLAY "Configuraciones" TO c100   ## Botón
 DISPLAY "Transacciones"   TO c200   ## Botón
@@ -3779,7 +3573,6 @@ OPEN WINDOW w_menu_configuracion AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf131 FROM '../forms/menf131'
 DISPLAY FORM f_menf131
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_configuracion"	TO a      ## Picture 
 DISPLAY "Compañías"     	TO c100   ## Botón 1 ctbp100
 DISPLAY "Niveles Plan Cuentas" 	TO c200   ## Botón 2 ctbp101
@@ -3912,7 +3705,6 @@ OPEN WINDOW w_menu_transacciones AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf132 FROM '../forms/menf132'
 DISPLAY FORM f_menf132
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_transaciones"	TO a      ## Picture 
 DISPLAY "Bloqueo Meses"   	TO c100   ## Botón 1 ctbp200
 DISPLAY "Diarios Contables"   	TO c200   ## Botón 2 ctbp201
@@ -4028,7 +3820,6 @@ OPEN WINDOW w_menu_consultas AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf133 FROM '../forms/menf133'
 DISPLAY FORM f_menf133
---DISPLAY fondo		  	TO c000   ## Picture
 DISPLAY "boton_consultas"	TO a      ## Picture 
 DISPLAY "Plan de Cuentas" 	TO c100   ## Botón 1  ctbp301
 DISPLAY "Movimientos Cuentas"   TO c200   ## Botón 2  ctbp302
@@ -4144,7 +3935,6 @@ OPEN WINDOW w_menu_reportes AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf134 FROM '../forms/menf134'
 DISPLAY FORM f_menf134
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_reportes"	TO a      ## Picture 
 DISPLAY "Balance Comprobación"  TO c100   ## Botón 1 ctbp401
 DISPLAY "Balance General"   	TO c200   ## Botón 2 ctbp402
@@ -4198,11 +3988,6 @@ CASE h
 		END IF
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'CONTABILIDAD', vg_separador, 'fuentes', vg_separador, '; umask 0002; fglrun ctbp405 ', vg_base, ' ', 'CB', vg_codcia, vg_codloc, ' > $HOME/tmp/ctbp405.txt '
 		RUN ejecuta
-	{--
-	WHEN 6
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'CONTABILIDAD', vg_separador, 'fuentes', vg_separador, '; fglrun ctbp406 ', vg_base, ' ', 'CB', vg_codcia, vg_codloc
-		RUN ejecuta
-	--}
 	WHEN 6
 		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
 							'CB', 'ctbp408')
@@ -4243,7 +4028,6 @@ OPEN WINDOW w_menu_compras AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf135 FROM '../forms/menf135'
 DISPLAY FORM f_menf135
---DISPLAY fondo		  TO c000   ## Picture
 DISPLAY "boton_compras"   TO a      ## Picture 
 DISPLAY "Configuraciones" TO c100   ## Botón
 DISPLAY "Transacciones"   TO c200   ## Botón
@@ -4290,7 +4074,6 @@ OPEN WINDOW w_menu_configuracion AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf136 FROM '../forms/menf136'
 DISPLAY FORM f_menf136
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_configuracion"	TO a      ## Picture 
 DISPLAY "Compañías"     	TO c100   ## Botón 1 ordp100
 DISPLAY "Tipos de O. Compras" 	TO c200   ## Botón 2 ordp101
@@ -4338,7 +4121,6 @@ OPEN WINDOW w_menu_transacciones AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf137 FROM '../forms/menf137'
 DISPLAY FORM f_menf137
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_transaciones"	TO a      ## Picture 
 DISPLAY "Ingreso O. Compras"   	TO c100   ## Botón 1 ordp200
 DISPLAY "Ingreso de Facturas"   TO c200  ## Botón 11 cxpp210
@@ -4410,10 +4192,8 @@ OPEN WINDOW w_menu_consultas AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf138 FROM '../forms/menf138'
 DISPLAY FORM f_menf138
---DISPLAY fondo		  	TO c000   ## Picture
 DISPLAY "boton_consultas"	TO a      ## Picture 
 DISPLAY "Consulta O. Compras"   TO c100   ## Botón 1  ordp300
---DISPLAY "Esdísticas de Compras"	TO c200   ## Botón 2  ordp301
 DISPLAY "Compras Proveedores"  TO c200   ## Botón 2  ordp302
 
 LET g = fgl_getkey()
@@ -4457,11 +4237,9 @@ OPEN WINDOW w_menu_reportes AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf139 FROM '../forms/menf139'
 DISPLAY FORM f_menf139
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_reportes"	TO a      ## Picture 
 DISPLAY "Impresión O. Compras"	TO c100   ## Botón 1 ordp400
 DISPLAY "Detalle O. Compras"  	TO c200   ## Botón 2 ordp401
---DISPLAY "Recepción O. Compras" 	TO c300   ## Botón 3 ordp402
 
 LET h = fgl_getkey()
 
@@ -4482,11 +4260,6 @@ CASE h
 		END IF
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'COMPRAS', vg_separador, 'fuentes', vg_separador, '; umask 0002; fglrun ordp401 ', vg_base, ' ', 'OC', vg_codcia, vg_codloc, ' > ordp401.txt'
 		RUN ejecuta
-	{--
-	WHEN 3
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'COMPRAS', vg_separador, 'fuentes', vg_separador, '; fglrun ordp402 ', vg_base, ' ', 'OC', vg_codcia, vg_codloc
-		RUN ejecuta
-	--}
 	WHEN 0
 		CLOSE WINDOW w_menu_reportes
 		CALL menu_compras()
@@ -4512,7 +4285,6 @@ OPEN WINDOW w_menu_caja AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf140 FROM '../forms/menf140'
 DISPLAY FORM f_menf140
---DISPLAY fondo		  TO c000   ## Picture
 DISPLAY "boton_caja"      TO a      ## Picture 
 DISPLAY "Configuraciones" TO c100   ## Botón
 DISPLAY "Transacciones"   TO c200   ## Botón
@@ -4559,7 +4331,6 @@ OPEN WINDOW w_menu_configuracion AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf141 FROM '../forms/menf141'
 DISPLAY FORM f_menf141
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_configuracion"	TO a      ## Picture 
 DISPLAY "Parámetros Generales"	TO c100   ## Botón 1 cajp100
 DISPLAY "Tipos Formas Pagos" 	TO c200   ## Botón 2 cajp101
@@ -4618,7 +4389,6 @@ OPEN WINDOW w_menu_transacciones AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf142 FROM '../forms/menf142'
 DISPLAY FORM f_menf142
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_transaciones"	TO a      ## Picture 
 DISPLAY "Apertura de Caja"   	TO c100   ## Botón 1 cajp200
 DISPLAY "Reapertura de Caja" 	TO c200   ## Botón 2 cajp201
@@ -4754,7 +4524,6 @@ OPEN WINDOW w_menu_consultas AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf143 FROM '../forms/menf143'
 DISPLAY FORM f_menf143
---DISPLAY fondo		  	TO c000   ## Picture
 DISPLAY "boton_consultas"	TO a      ## Picture 
 DISPLAY "Transacciones Caja"   	TO c100   ## Botón 1  cajp300
 DISPLAY "Cierres Caja"   	TO c200   ## Botón 2  cajp301
@@ -4799,7 +4568,6 @@ OPEN WINDOW w_menu_reportes AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf144 FROM '../forms/menf144'
 DISPLAY FORM f_menf144
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_reportes"	TO a      ## Picture 
 DISPLAY "Valores Recaudados" 	TO c100   ## Botón 2 cajp402
 DISPLAY "Egresos de Caja" 	TO c200   ## Botón 3 cajp405
@@ -4847,7 +4615,6 @@ OPEN WINDOW w_menu_configuracion AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf141 FROM '../forms/menf145'
 DISPLAY FORM f_menf141
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_configuracion"	TO a      ## Picture 
 DISPLAY "Parámetros Generales"	TO c100   ## Botón 1 ccht000
 DISPLAY "Configuración" 	TO c200   ## Botón 2 ccht001
@@ -4915,7 +4682,6 @@ OPEN WINDOW w_menu_configuracion AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf146 FROM '../forms/menf146'
 DISPLAY FORM f_menf146
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_generales"	TO a      ## Picture 
 DISPLAY "Parámetros Generales"	TO c100   ## Botón 1  genp100
 DISPLAY "Compañías"	 	TO c200   ## Botón 2  genp101
@@ -5169,11 +4935,6 @@ CASE c
 		END IF
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'GENERALES', vg_separador, 'fuentes', vg_separador, '; fglrun genp126 ', vg_base, ' ', 'GE'
 		RUN ejecuta
-	{--
-	WHEN 3022
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'GENERALES', vg_separador, 'fuentes', vg_separador, '; fglrun genp127 ', vg_base, ' ', 'GE', vg_codcia
-		RUN ejecuta
-	--}
 	WHEN 3022
 		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
 							'GE', 'genp128')
@@ -5198,11 +4959,6 @@ CASE c
 		END IF
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'GENERALES', vg_separador, 'fuentes', vg_separador, '; fglrun genp140 ', vg_base, ' ', 'GE', vg_codcia
 		RUN ejecuta
-	{--
-	WHEN 3025
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'GENERALES', vg_separador, 'fuentes', vg_separador, '; fglrun genp130 ', vg_base, ' ', 'GE', vg_codcia
-		RUN ejecuta
-	--}
 	WHEN 0
 		CLOSE WINDOW w_menu_configuracion
 		CALL funcion_master()
@@ -5228,7 +4984,6 @@ OPEN WINDOW w_menu_activos AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf147 FROM '../forms/menf147'
 DISPLAY FORM f_menf147
---DISPLAY fondo		  TO c000   ## Picture
 DISPLAY "boton_activos"   TO a      ## Picture 
 DISPLAY "Configuraciones" TO c100   ## Botón
 DISPLAY "Transacciones"   TO c200   ## Botón
@@ -5278,7 +5033,6 @@ OPEN WINDOW w_menu_configuracion AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf148 FROM '../forms/menf148'
 DISPLAY FORM f_menf148
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_configuracion"	TO a      ## Picture 
 DISPLAY "Parámetros Compañía"	TO c100   ## Botón 1 actp100
 DISPLAY "Grupos Activos Fijos" 	TO c200   ## Botón 2 actp101
@@ -5377,7 +5131,6 @@ OPEN WINDOW w_menu_consultas AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf149 FROM '../forms/menf149'
 DISPLAY FORM f_menf149
---DISPLAY fondo		  	TO c000   ## Picture
 DISPLAY "boton_consultas"	TO a      ## Picture 
 DISPLAY "Activos Fijos" 	TO c100   ## Boton 1  actp300
 DISPLAY "Movimientos"	 	TO c200   ## Boton 2  actp301
@@ -5451,7 +5204,6 @@ OPEN WINDOW w_menu_transacciones AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf150 FROM '../forms/menf150'
 DISPLAY FORM f_menf150
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_transaciones"	TO a      ## Picture 
 DISPLAY "Transferencias"   	TO c100   ## Botón 1 actp200
 DISPLAY "Venta / Baja"   	TO c200   ## Botón 2 actp202
@@ -5506,7 +5258,6 @@ OPEN WINDOW w_menu_reportes AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf151 FROM '../forms/menf151'
 DISPLAY FORM f_menf151
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_reportes"	TO a      ## Picture 
 DISPLAY "Activos Fijos" 	TO c100   ## Botón 2 actp400
 DISPLAY "Depreciación Activos" 	TO c200   ## Botón 3 actp401
@@ -5554,7 +5305,6 @@ OPEN WINDOW w_menu_nomina AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf152 FROM '../forms/menf152'
 DISPLAY FORM f_menf152
---DISPLAY fondo		  TO c000   ## Picture
 DISPLAY "boton_nomina"    TO a      ## Picture 
 DISPLAY "Configuraciones" TO c100   ## Botón
 DISPLAY "Procesos"        TO c200   ## Botón
@@ -5610,14 +5360,12 @@ OPEN WINDOW w_menu_configuracion AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf153 FROM '../forms/menf153'
 DISPLAY FORM f_menf153
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_configuracion"	TO a      ## Picture 
 DISPLAY "Parametros Compañía"	TO c100   ## Botón 1 rolp100
 DISPLAY "Compañías Nómina" 	TO c200   ## Botón 2 rolp101
 DISPLAY "Impuesto a la Renta"  	TO c300   ## Botón 3 rolp102
 DISPLAY "Rubros Generales"  	TO c400   ## Botón 4 rolp103
 DISPLAY "Asignación Rubros"  	TO c500   ## Botón 5 rolp104
---DISPLAY "Rubros de Cálculo"  	TO c600   ## Botón 6 rolp105
 DISPLAY "Rubros Fijos"  	TO c700   ## Botón 6 rolp106
 DISPLAY "Procesos de Roles"  	TO c800   ## Botón 7 rolp107
 DISPLAY "Empleados"  		TO c900   ## Botón 8 rolp108
@@ -5671,11 +5419,6 @@ CASE c
 		END IF
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'NOMINA', vg_separador, 'fuentes', vg_separador, '; fglrun rolp104 ', vg_base, ' ', 'RO', ' ', vg_codcia
 		RUN ejecuta
-	{--
-	WHEN 6
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'NOMINA', vg_separador, 'fuentes', vg_separador, '; fglrun rolp105 ', vg_base, ' ', 'RO', ' ', vg_codcia
-		RUN ejecuta
-	--}
 	WHEN 6
 		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
 							'RO', 'rolp106')
@@ -5908,10 +5651,7 @@ OPEN WINDOW w_menu_consultas AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf155 FROM '../forms/menf155'
 DISPLAY FORM f_menf155
---DISPLAY fondo		  	TO c000   ## Picture
 DISPLAY "boton_consultas"	TO a      ## Picture 
-#DISPLAY "Acumulados Cía/Dpto"	TO c100   ## Botón 1 rolp300
-#DISPLAY "Análisis por Rubros"  	TO c200   ## Botón 3 rolp301
 DISPLAY "Empleados"   		TO c300   ## Botón 4 rolp302
 DISPLAY "Liquidaciones"   	TO c400   ## Botón 5 rolp303
 DISPLAY "Anticipos"   	 	TO c500   ## Botón 6 rolp304
@@ -6035,25 +5775,13 @@ OPEN WINDOW w_menu_reportes AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf156 FROM '../forms/menf156'
 DISPLAY FORM f_menf156
---DISPLAY fondo			TO c000   ## Picture
 DISPLAY "boton_reportes"	TO a      ## Picture  
 DISPLAY "Trabajadores"		TO c100   ## Botón 1  rolp400
---DISPLAY "Valores Rubros Fijos"	TO c200   ## Botón 2  rolp401
---DISPLAY "Rubros Generales"     	TO c300   ## Botón 3  rolp402
 DISPLAY "Nómina por Tipo Pago"	TO c400   ## Botón 4  rolp403
---DISPLAY "Liquidaciones Rubros" 	TO c500   ## Botón 5  rolp404
---DISPLAY "Recibo Pago Jub." 	TO c500   ## Botón 5  rolp404
 DISPLAY "Recibo de Pago Liq." 	TO c600   ## Botón 6  rolp405
 DISPLAY "Carta al Banco" 	TO c700   ## Botón 7  rolp406
---DISPLAY "Listado Provisiones"  	TO c800   ## Botón 8  rolp407
 DISPLAY "Planilla I.E.S.S."  	TO c900   ## Botón 9  rolp408
---DISPLAY "Control Décimos"  	TO c1000  ## Botón 10 rolp409
---DISPLAY "Liquidación Décimos"	TO c1100  ## Botón 11 rolp410
---DISPLAY "Control F. Reserva"	TO c1200  ## Botón 12 rolp411
 DISPLAY "Planilla F. Reserva"	TO c1300  ## Botón 13 rolp412
---DISPLAY "Impuesto a la Renta"	TO c1400  ## Botón 14 rolp413
---DISPLAY "Planilla Imp. Renta" 	TO c1500  ## Botón 15 rolp414
---DISPLAY "Liq. Usos Varios"     	TO c1600  ## Botón 16 rolp415
 DISPLAY "List. Ing/Dscto Nom." 	TO c1700  ## Botón 17 rolp416
 DISPLAY "Recibo de Pago Dec." 	TO c1800  ## Botón 18 rolp410
 DISPLAY "Recibo de Pago Uti." 	TO c1900  ## Botón 19 rolp420
@@ -6073,14 +5801,6 @@ CASE d
 		END IF
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'NOMINA', vg_separador, 'fuentes', vg_separador, '; fglrun rolp400 ', vg_base, ' ', 'RO', vg_codcia
 		RUN ejecuta
-	{--
-	WHEN 2
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'NOMINA', vg_separador, 'fuentes', vg_separador, '; fglrun rolp401 ', vg_base, ' ', 'RO', vg_codcia, vg_codloc
-		RUN ejecuta
-	WHEN 3
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'NOMINA', vg_separador, 'fuentes', vg_separador, '; fglrun rolp402 ', vg_base, ' ', 'RO', vg_codcia, vg_codloc
-		RUN ejecuta
-	--}
 	WHEN 2
 		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
 							'RO', 'rolp403')
@@ -6089,11 +5809,6 @@ CASE d
 		END IF
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'NOMINA', vg_separador, 'fuentes', vg_separador, '; fglrun rolp403 ', vg_base, ' ', 'RO', vg_codcia
 		RUN ejecuta
-	{--
-	WHEN 5
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'NOMINA', vg_separador, 'fuentes', vg_separador, '; fglrun rolp404 ', vg_base, ' ', 'RO', vg_codcia
-		RUN ejecuta
-	--}
 	WHEN 3
 		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
 							'RO', 'rolp405')
@@ -6110,11 +5825,6 @@ CASE d
 		END IF
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'NOMINA', vg_separador, 'fuentes', vg_separador, '; fglrun rolp406 ', vg_base, ' ', 'RO', vg_codcia
 		RUN ejecuta
-	{--
-	WHEN 8
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'NOMINA', vg_separador, 'fuentes', vg_separador, '; fglrun rolp407 ', vg_base, ' ', 'RO', vg_codcia
-		RUN ejecuta
-	--}
 	WHEN 5
 		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
 							'RO', 'rolp408')
@@ -6123,17 +5833,6 @@ CASE d
 		END IF
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'NOMINA', vg_separador, 'fuentes', vg_separador, '; umask 0002; fglrun rolp408 ', vg_base, ' ', 'RO', vg_codcia, ' > aporte_iess.txt'
 		RUN ejecuta
-	{--
-	WHEN 10
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'NOMINA', vg_separador, 'fuentes', vg_separador, '; fglrun rolp409 ', vg_base, ' ', 'RO', vg_codcia
-		RUN ejecuta
-	WHEN 11
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'NOMINA', vg_separador, 'fuentes', vg_separador, '; fglrun rolp410 ', vg_base, ' ', 'RO', vg_codcia
-		RUN ejecuta
-	WHEN 12
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'NOMINA', vg_separador, 'fuentes', vg_separador, '; fglrun rolp411 ', vg_base, ' ', 'RO', vg_codcia, vg_codloc
-		RUN ejecuta
-	--}
 	WHEN 6
 		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
 							'RO', 'rolp412')
@@ -6142,17 +5841,6 @@ CASE d
 		END IF
 		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'NOMINA', vg_separador, 'fuentes', vg_separador, '; umask 0002; fglrun rolp412 ', vg_base, ' ', 'RO', vg_codcia, ' > fondo_reser.txt'
 		RUN ejecuta
-	{--
-	WHEN 14
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'NOMINA', vg_separador, 'fuentes', vg_separador, '; fglrun rolp413 ', vg_base, ' ', 'RO', vg_codcia, vg_codloc
-		RUN ejecuta
-	WHEN 15
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'NOMINA', vg_separador, 'fuentes', vg_separador, '; fglrun rolp414 ', vg_base, ' ', 'RO', vg_codcia, vg_codloc
-		RUN ejecuta
-	WHEN 16
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'NOMINA', vg_separador, 'fuentes', vg_separador, '; fglrun rolp415 ', vg_base, ' ', 'RO', vg_codcia
-		RUN ejecuta
-	--}
 	WHEN 7
 		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
 							'RO', 'rolp416')
@@ -6228,7 +5916,6 @@ OPEN WINDOW w_menu_club AT 3,2 WITH 22 ROWS, 80 COLUMNS
 		  BORDER, MESSAGE LINE LAST - 2) 
 OPEN FORM f_menf157 FROM '../forms/menf157'
 DISPLAY FORM f_menf157
---DISPLAY fondo		  TO c000   ## Picture
 DISPLAY "boton_club"      TO a      ## Picture 
 DISPLAY "Parámetros Club"	TO c100   ## Botón 1 rolp130
 DISPLAY "Casas Comerciales" 	TO c200   ## Botón 2 rolp131
@@ -6369,7 +6056,6 @@ CASE d
 				EXIT WHILE
 			END IF
 		END WHILE
-		--CALL fgl_keysetlabel('RETURN','')
 		IF c = 'R' OR c = 'r' THEN
 			LET programa = 'rolp201'
 		ELSE
