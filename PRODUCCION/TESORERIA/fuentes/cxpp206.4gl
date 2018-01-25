@@ -1202,7 +1202,6 @@ FOREACH q_dte INTO i, cuenta, glosa, valor_db, valor_cr
     		LET r.b13_valor_base = valor_cr * -1
 	END IF
     	LET r.b13_fec_proceso 	= vg_fecha
-    	LET r.b13_num_concil 	= 0
     	LET r.b13_codprov 	= rm_ordp.p24_codprov
 	INSERT INTO ctbt013 VALUES (r.*) 
 END FOREACH

@@ -155,7 +155,6 @@ CREATE TEMP TABLE tmp_detalle(
 	secuencia	SMALLINT,
 	cuenta		CHAR(12),
 	tipo_doc	CHAR(3),
-	--glosa		VARCHAR(35),
 	glosa		VARCHAR(90),
 	valor_debito	DECIMAL(14,2),
 	valor_credito	DECIMAL(14,2),
@@ -1381,7 +1380,7 @@ IF i > vm_ind_cta THEN
 		FETCH q_tmp
 		IF STATUS = NOTFOUND THEN
 			INSERT INTO tmp_detalle
-				VALUES(sec, rm_cuenta[i].*, 0, rm_otros[i].*)
+				VALUES(sec, rm_cuenta[i].*, NULL, rm_otros[i].*)
 			LET vm_ind_cta = vm_ind_cta + 1
 		END IF
 	END IF
@@ -1674,7 +1673,7 @@ LET vm_columna_1 = 5
 LET vm_columna_2 = 6
 LET rm_orden[vm_columna_1]  = 'DESC'
 LET rm_orden[vm_columna_2]  = 'ASC'
-INITIALIZE col TO NULL
+INITIALIZE num_concil, col TO NULL
 
 LET salir = 0
 WHILE NOT salir

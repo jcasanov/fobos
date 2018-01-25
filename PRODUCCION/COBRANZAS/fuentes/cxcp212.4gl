@@ -1190,7 +1190,7 @@ ELSE
 END IF
 LET r_dcomp.b13_valor_aux   = 0
 LET r_dcomp.b13_fec_proceso = r_ccomp.b12_fec_proceso
-LET r_dcomp.b13_num_concil  = 0
+LET r_dcomp.b13_num_concil  = NULL
 LET r_dcomp.b13_codcli      = rm_adi[i].j10_codcli
 INSERT INTO ctbt013 VALUES(r_dcomp.*)
 IF STATUS <> 0 THEN

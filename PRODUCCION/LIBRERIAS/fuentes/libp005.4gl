@@ -999,7 +999,6 @@ FOREACH q_roco INTO tipo_comp, subtipo, indice
     		LET r_dcomp.b13_valor_base 	= valor
     		LET r_dcomp.b13_valor_aux 	= 0
     		LET r_dcomp.b13_fec_proceso 	= r_ccomp.b12_fec_proceso
-    		LET r_dcomp.b13_num_concil  	= 0
 		LET r_dcomp.b13_codcli          = rm_orden.t23_cod_cliente
 		SELECT b10_descripcion, b10_estado
 			INTO nom_cta, est_cta

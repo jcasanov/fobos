@@ -507,7 +507,6 @@ FOREACH q_mast INTO tipo_comp, subtipo, indice
     		LET r_dcomp.b13_valor_base 	= valor
     		LET r_dcomp.b13_valor_aux 	= 0
     		LET r_dcomp.b13_fec_proceso 	= r_ccomp.b12_fec_proceso
-    		LET r_dcomp.b13_num_concil 	= 0
     		LET r_dcomp.b13_codcli   	= rm_caja.j10_codcli
 		INSERT INTO ctbt013 VALUES(r_dcomp.*)
 	END FOREACH

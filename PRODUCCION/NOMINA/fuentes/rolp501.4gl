@@ -712,7 +712,7 @@ FOREACH q_mast INTO r.*
     	LET r_dcomp.b13_valor_base 	= r.te_valor
     	LET r_dcomp.b13_valor_aux 	= 0
     	LET r_dcomp.b13_fec_proceso 	= r_ccomp.b12_fec_proceso
-    	LET r_dcomp.b13_num_concil 	= 0
+    	LET r_dcomp.b13_num_concil 	= NULL
 	INSERT INTO ctbt013 VALUES(r_dcomp.*)
 END FOREACH
 INSERT INTO rolt053

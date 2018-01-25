@@ -1306,7 +1306,6 @@ FOREACH q_mast INTO tipo_comp, subtipo, indice
     		LET r_dcomp.b13_valor_base 	= valor
     		LET r_dcomp.b13_valor_aux 	= 0
     		LET r_dcomp.b13_fec_proceso	= r_ccomp.b12_fec_proceso
-    		LET r_dcomp.b13_num_concil 	= 0
 		CASE rm_crep.r19_cod_tran
 			WHEN 'FA'
     				LET r_dcomp.b13_codcli  = rm_crep.r19_codcli

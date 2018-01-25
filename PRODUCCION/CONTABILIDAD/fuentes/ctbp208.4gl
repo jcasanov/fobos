@@ -386,10 +386,10 @@ INSERT INTO ctbt012 VALUES (r_b12.*)
 
 LET query = 'INSERT INTO ctbt013(b13_compania, b13_tipo_comp, b13_num_comp, ',
 			       ' b13_secuencia, b13_cuenta, b13_valor_base, ',
-			       ' b13_valor_aux, b13_num_concil, b13_fec_proceso) ', 
+			       ' b13_valor_aux, b13_fec_proceso) ', 
 		' SELECT ', r_b12.b12_compania, ', "', r_b12.b12_tipo_comp,  
 		      '", "', r_b12.b12_num_comp, '", b15_secuencia, ',
-                         'b15_cuenta, b15_valor_base, b15_valor_aux, 0, "', 
+                         'b15_cuenta, b15_valor_base, b15_valor_aux, "', 
 		         r_b12.b12_fec_proceso,
 			'" FROM ctbt015 ',
 			' WHERE b15_compania = ', r_b14.b14_compania,
