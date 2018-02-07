@@ -201,22 +201,13 @@ DEFINE dias, dias_ini	SMALLINT
 LET vm_num_liq = 0
 LET expr_sql = 'SELECT * FROM rolt030 ',
 			' WHERE n30_compania = ', vg_codcia,
-			'   AND n30_estado   = "A" '
+			'   AND (n30_estado   = "A") ',
+			'   OR  (n30_estado     = "I" ',
+			'   AND  n30_fecha_sal >= "', rm_par.n32_fecha_ini, '") '
 IF num_args() = 5 THEN
 	LET expr_sql = expr_sql CLIPPED, ' AND n30_cod_trab = ', vm_cod_trab
 END IF
-LET expr_sql = expr_sql CLIPPED,
-		' UNION ',
-		' SELECT * FROM rolt030 ',
-			' WHERE n30_compania = ', vg_codcia,
-			'   AND n30_estado   = "I" ',
-			'   AND n30_fecha_sal  >= "', rm_par.n32_fecha_ini, '"'
-IF num_args() = 5 THEN
-	LET expr_sql = expr_sql CLIPPED, ' AND n30_cod_trab = ', vm_cod_trab
-END IF
-IF vg_codcia = 1 THEN
-	LET expr_sql = expr_sql CLIPPED, ' ORDER BY n30_nombres '
-END IF
+LET expr_sql = expr_sql CLIPPED, ' ORDER BY n30_nombres '
 PREPARE trab FROM expr_sql
 DECLARE q_trab CURSOR FOR trab
 CALL fl_lee_parametros_club_roles(vg_codcia) RETURNING r_n60.*
