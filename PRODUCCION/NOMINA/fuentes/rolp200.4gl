@@ -593,22 +593,15 @@ DECLARE q_rub CURSOR FOR
 				  AND n11_cod_liqrol = rm_par.n32_cod_liqrol)
 LET expr_trab = NULL
 IF rm_par.cod_trab IS NOT NULL THEN
-	LET expr_trab = '   AND n30_cod_trab    = ', rm_par.cod_trab
+	LET expr_trab = '  AND n30_cod_trab   = ', rm_par.cod_trab
 END IF
 LET query = 'SELECT * FROM rolt030 ',
-		' WHERE n30_compania    = ', vg_codcia,
-		expr_trab CLIPPED,
-		'   AND n30_estado      = "A" ',
-		' UNION ',
-		' SELECT * FROM rolt030 ',
-			' WHERE n30_compania    = ', vg_codcia,
+			'WHERE n30_compania   = ', vg_codcia,
 			expr_trab CLIPPED,
-			'   AND n30_estado      = "I" ',
-			'   AND n30_fecha_sal  >= "', rm_par.n32_fecha_ini, '"'
-IF vg_codcia = 1 THEN
-	LET query = query CLIPPED,
-			' ORDER BY n30_compania, n30_cod_trab '	
-END IF
+			'  AND (n30_estado     = "A") ',
+			'   OR (n30_estado     = "I" ',
+			'  AND  n30_fecha_sal >= "', rm_par.n32_fecha_ini, '") ',
+			'ORDER BY n30_compania, n30_cod_trab '	
 PREPARE stmnt1 FROM query
 DECLARE qu_trab CURSOR FOR stmnt1
 CALL fl_lee_proceso_roles(rm_par.n32_cod_liqrol) RETURNING r_n03.*
