@@ -4,31 +4,36 @@ SCREEN
                                                               [x001] de [y001]
 
      Código Proveedor: [c000       ]
-     Nombre Proveedor: [c001                                              ]
+     Nombre Proveedor: [c001                                                 ]
 
-    Tipo de Documento: [a0] [c002           ]
+    Tipo de Documento: [a0] [c002           ]              Calcula Impto?: [z]
      Número Documento: [c003           ]
  Subtipo de Documento: [b01] [c004                          ]
            Referencia: [c007                                ]
 
-     Fecha de Emisión: [c008      ]
-               Moneda: [a1] [c009           ]
-    Paridad Cambiaria: [c010                ]
-       Valor Original: [c011             ]        Saldo: [c012             ]
-               Origen: [c013             ]
+     Fecha de Emisión: [c008      ]               Valor Base: [c016          ]
+               Moneda: [a1] [c009           ]   Valor Impto.: [c017          ]
+    Paridad Cambiaria: [c010                ]    Valor Total: [c011          ]
+               Origen: [c013             ]             Saldo: [c012          ]
 
-
+                                          Trans. Origen: [c0][c050           ]
               Usuario: [c014      ]    Fecha de Ingreso: [c015               ]
 }
 TABLES
 cxpt021
 ATTRIBUTES
+x001 = FORMONLY.vm_num_current1, NOENTRY;
+y001 = FORMONLY.vm_num_rows1, NOENTRY;
+
 c000 = cxpt021.p21_codprov, AUTONEXT, REVERSE,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 c001 = FORMONLY.tit_nombre_pro, NOENTRY, REVERSE, UPSHIFT;
 a0   = cxpt021.p21_tipo_doc, AUTONEXT, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
 c002 = FORMONLY.tit_tipo_doc, NOENTRY, REVERSE, UPSHIFT;
+z    = FORMONLY.flag_impto TYPE CHAR NOT NULL, AUTONEXT, UPSHIFT,
+	WIDGET = 'CHECK', CONFIG = 'S N acknowledge', DEFAULT = 'S',
+	INCLUDE = ('S', 'N');
 c003 = cxpt021.p21_num_doc, AUTONEXT, REVERSE, UPSHIFT,
 	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2',
 	COMMENTS = 'Numeración automatica en Notas Crédito. Ingreso manual otro No. Doc.';
@@ -44,14 +49,17 @@ a1   = cxpt021.p21_moneda, AUTONEXT, REVERSE, UPSHIFT,
 c009 = FORMONLY.tit_mon_bas, NOENTRY, REVERSE, UPSHIFT;
 c010 = cxpt021.p21_paridad, NOENTRY, REVERSE, INCLUDE = (1 TO 999999.999999999),
 	FORMAT = '#,###,##&.#########';
-c011 = cxpt021.p21_valor, AUTONEXT, REVERSE, INCLUDE = (0 TO 9999999999.99),
-	FORMAT = '#,###,###,##&.##';
-c012 = cxpt021.p21_saldo, AUTONEXT, REVERSE, FORMAT = '#,###,###,##&.##';
+c016 = FORMONLY.val_base TYPE DECIMAL(12,2) NOT NULL, AUTONEXT, REQUIRED,
+       FORMAT = '###,###,##&.##', INCLUDE = (0.01 TO 999999999.99);
+c017 = cxpt021.p21_val_impto, NOENTRY, REQUIRED, FORMAT = '###,###,##&.##';
+c011 = cxpt021.p21_valor, NOENTRY, REVERSE, INCLUDE = (0 TO 999999999.99),
+	FORMAT = '---,---,--&.##';
+c012 = cxpt021.p21_saldo, NOENTRY, REVERSE, FORMAT = '---,---,--&.##';
 c013 = cxpt021.p21_origen, NOENTRY, REVERSE, UPSHIFT,
 	WIDGET = 'RADIO', CONFIG = 'M Manual A Automatico', DEFAULT = 'M';
+
+c0   = cxpt021.p21_cod_tran, NOENTRY, UPSHIFT;
+c050 = cxpt021.p21_num_tran, NOENTRY, UPSHIFT;
 c014 = cxpt021.p21_usuario, NOENTRY, REVERSE, UPSHIFT;
 c015 = cxpt021.p21_fecing, NOENTRY, REVERSE, UPSHIFT;
-
-x001 = FORMONLY.vm_num_current1, NOENTRY;
-y001 = FORMONLY.vm_num_rows1, NOENTRY;
-end
+END
