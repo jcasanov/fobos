@@ -1,11 +1,11 @@
 --------------------------------------------------------------------------------
--- Titulo           : srip200.4gl - Anexo Transaccional Ventas
--- Elaboracion      : 29-Ago-2006
--- Autor            : NPC
--- Formato Ejecucion: fglrun srip200 base módulo compañía localidad
+-- Titulo              : srip200.4gl - Anexo Transaccional Ventas
+-- Elaboracion         : 29-Ago-2006
+-- Autor               : NPC
+-- Formato de Ejecucion: fglrun srip200 base módulo compañía localidad
 --			             [fec_ini] [fec_fin] [[flag_xml]]
--- Ultima Correccion: 
--- Motivo Correccion: 
+-- Ultima Correccion   : 
+-- Motivo Correccion   : 
 --------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
@@ -1123,37 +1123,38 @@ DECLARE q_s21 CURSOR FOR
 	  AND s21_mes       = MONTH(rm_par.fecha_fin)
 FOREACH q_s21 INTO r_s21.*
 	LET registro    = registro CLIPPED,
-		'<detalleVentas>',
-		'<tpIdCliente>', r_s21.s21_ident_cli, '</tpIdCliente>',
-		'<idCliente>', r_s21.s21_num_doc_id, '</idCliente>',
-		'<parteRelVtas>SI</parteRelVtas>',
-		'<tipoComprobante>', r_s21.s21_tipo_comp USING "&&",
-		'</tipoComprobante>',
-		'<tipoEmision>F</tipoEmision>',
-		'<numeroComprobantes>', r_s21.s21_num_comp_emi USING "<<<<<<",
-		'</numeroComprobantes> ',
-		'<baseNoGraIva>', r_s21.s21_base_imp_tar_0 USING "<<<<<<<<<<<&.&&",
-		'</baseNoGraIva> ',
+		'\t<detalleVentas>\n',
+		'\t\t<tpIdCliente>', r_s21.s21_ident_cli, '</tpIdCliente>\n',
+		'\t\t<idCliente>', r_s21.s21_num_doc_id, '</idCliente>\n',
+		'\t\t<parteRelVtas>SI</parteRelVtas>\n',
+		'\t\t<tipoComprobante>', r_s21.s21_tipo_comp USING "&&",
+		'</tipoComprobante>\n',
+		'\t\t<tipoEmision>F</tipoEmision>\n',
+		'\t\t<numeroComprobantes>', r_s21.s21_num_comp_emi USING "<<<<<<",
+		'</numeroComprobantes>\n',
+		'\t\t<baseNoGraIva>', r_s21.s21_base_imp_tar_0 USING "<<<<<<<<<<<&.&&",
+		'</baseNoGraIva>\n',
 		{*
          * XXX 
 		 * Este campo va por ahora en cero, pero se debe considerar tarifa 0%
          *}
-		'<baseImponible>0.00</baseImponible> ',
-		'<baseImpGrav>', r_s21.s21_bas_imp_gr_iva USING "<<<<<<<<<<<&.&&",
-		'</baseImpGrav> ',
-		'<montoIva>', r_s21.s21_monto_iva USING "<<<<<<<<<<<&.&&",
-		'</montoIva> ',
+		'\t\t<baseImponible>0.00</baseImponible>\n',
+		'\t\t<baseImpGrav>', r_s21.s21_bas_imp_gr_iva USING "<<<<<<<<<<<&.&&",
+		'</baseImpGrav>\n',
+		'\t\t<montoIva>', r_s21.s21_monto_iva USING "<<<<<<<<<<<&.&&",
+		'</montoIva>\n',
+		--
 		{*
 		 * XXX
          * Etiquetas como <compensaciones> corresponden a funcionalidades que
 		 * el sistema aún no tiene así que no aplican
 		 *}
-		'<montoIce>', r_s21.s21_monto_ice USING "<<<<<<<<<<<&.&&",
-		'</montoIce> ',
-		'<valorRetIva>', r_s21.s21_mon_ret_ivabie USING "<<<<<<<<<<<&.&&",
-		'</valorRetIva>',
-		'<valorRetRenta>', r_s21.s21_monto_ret_rent USING "<<<<<<<<<<<&.&&",
-		'</valorRetRenta>'
+		'\t\t<montoIce>', r_s21.s21_monto_ice USING "<<<<<<<<<<<&.&&",
+		'</montoIce>\n',
+		'\t\t<valorRetIva>', r_s21.s21_mon_ret_ivabie USING "<<<<<<<<<<<&.&&",
+		'</valorRetIva>\n',
+		'\t\t<valorRetRenta>', r_s21.s21_monto_ret_rent USING "<<<<<<<<<<<&.&&",
+		'</valorRetRenta>\n'
 		{*
 		 * XXX 
 		 * Se debe crear la tabla srit026 con la tabla 13 de la ficha tecnica
@@ -1161,12 +1162,12 @@ FOREACH q_s21 INTO r_s21.*
 		 *}
 		IF r_s21.s21_tipo_comp <> 4 THEN
 			LET registro = registro CLIPPED,
-							'<formasDePago>',
-							'<formaPago>01</formaPago>',
-							'</formasDePago>'
+							'\t\t<formasDePago>\n',
+							'\t\t\t<formaPago>20</formaPago>\n',
+							'\t\t</formasDePago>\n'
 		END IF
 		LET registro = registro CLIPPED,
-						'</detalleVentas>'
+						'\t</detalleVentas>'
 		DISPLAY registro CLIPPED
 		LET registro = ' '
 END FOREACH

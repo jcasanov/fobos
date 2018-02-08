@@ -448,16 +448,17 @@ DEFINE genero		SMALLINT
 DECLARE q_anu CURSOR FOR SELECT * FROM tmp_anu ORDER BY 4
 LET genero = 0
 FOREACH q_anu INTO r_anu.*
-	LET registro = registro CLIPPED, '<detalleAnulados>',
-  			'<tipoComprobante>', r_anu.comp USING "&&", '</tipoComprobante>',
-			'<establecimiento>', r_anu.punto CLIPPED, '</establecimiento>',
-			'<puntoEmision>', r_anu.estab CLIPPED, '</puntoEmision>',
-			'<secuencialInicio>',r_anu.numini USING "&&&&&&&&&",
-			'</secuencialInicio>',
-			'<secuencialFin>', r_anu.numfin USING "&&&&&&&&&",
-			'</secuencialFin>',
-			'<autorizacion>', r_anu.autoriz CLIPPED, '</autorizacion>',
-			'</detalleAnulados>'
+	LET registro = registro CLIPPED, '\t<detalleAnulados>\n',
+  			'\t\t<tipoComprobante>', r_anu.comp USING "&&",
+			'</tipoComprobante>\n',
+			'\t\t<establecimiento>', r_anu.punto CLIPPED,'</establecimiento>\n',
+			'\t\t<puntoEmision>', r_anu.estab CLIPPED, '</puntoEmision>\n',
+			'\t\t<secuencialInicio>',r_anu.numini USING "&&&&&&&&&",
+			'</secuencialInicio>\n',
+			'\t\t<secuencialFin>', r_anu.numfin USING "&&&&&&&&&",
+			'</secuencialFin>\n',
+			'\t\t<autorizacion>', r_anu.autoriz CLIPPED, '</autorizacion>\n',
+			'\t</detalleAnulados>'
 	DISPLAY registro CLIPPED
 	LET registro = ' '
 	LET genero = 1
