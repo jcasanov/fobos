@@ -6,7 +6,7 @@ SCREEN
    Orden de Compra: [c014      ]              Moneda: [a4|c102            ]    
           Impuesto: [c006 ]%               Descuento: [c007 ]%  
          Proveedor: [c109       |c100                                     ] 
-           Factura: [c005           ]    Factor Venta: [c018        ]% 
+ No. Nota Cred SRI: [c005             ]    Factor Venta: [c018        ]% 
           Vendedor: [c011  ] [c103                                        ]
             Bodega: [a2] [c104                ]            [c050] de [c051]
    [lbl1      |lbl2      |lbl3       |lbl4 |lbl5          |lbl6            ]
@@ -31,7 +31,7 @@ a0   = rept019.r19_cod_tran, NOENTRY, REVERSE, UPSHIFT;
 a1   = rept019.r19_tipo_dev, NOENTRY, REVERSE, UPSHIFT;
 c002 = rept019.r19_num_tran, NOENTRY, REVERSE;
 c003 = rept019.r19_num_dev, REVERSE, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
-c005 = rept019.r19_oc_externa, NOENTRY, UPSHIFT, REVERSE;
+c005 = rept019.r19_oc_externa, AUTONEXT, UPSHIFT, REVERSE;
 c006 = rept019.r19_porc_impto, NOENTRY, REVERSE, FORMAT='#&.##';
 c007 = rept019.r19_descuento, NOENTRY, REVERSE, FORMAT='#&.##';
 c011 = rept019.r19_vendedor, REVERSE, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';

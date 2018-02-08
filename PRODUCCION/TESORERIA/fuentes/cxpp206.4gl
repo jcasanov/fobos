@@ -1083,7 +1083,21 @@ LET rm_fav.p21_origen 		= 'A'
 LET rm_fav.p21_orden_pago	= rm_ordp.p24_orden_pago
 LET rm_fav.p21_usuario 		= vg_usuario
 LET rm_fav.p21_fecing 		= fl_current()
+
+--
+{XXX La tabla cxpt021 se le incluyó los siguientes campos el 02/01/2018:
+		- p21_val_impto
+		- p21_cod_tran
+		- p21_num_tran
+		- p21_num_sri
+		- p21_num_aut
+		- p21_fec_emi_nc
+		- p21_fec_emi_aut
+
+ XXX}
+
 INSERT INTO cxpt021 VALUES (rm_fav.*)
+--
 
 END FUNCTION
 

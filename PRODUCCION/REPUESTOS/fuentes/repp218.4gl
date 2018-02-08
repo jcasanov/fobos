@@ -67,7 +67,8 @@ MAIN
 DEFER QUIT
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/repp218.err')
+LET vg_proceso = arg_val(0)
+CALL startlog('../logs/' || vg_proceso CLIPPED || '.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 AND num_args() <> 6 AND num_args() <> 7 AND num_args() <> 8
@@ -79,8 +80,6 @@ LET vg_base    = arg_val(1)
 LET vg_modulo  = arg_val(2)
 LET vg_codcia  = arg_val(3)
 LET vg_codloc  = arg_val(4)
-LET vg_proceso = 'repp218'
-
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	-- Asigna un valor por default a vg_codloc
 			        -- que luego puede ser reemplazado si se 
@@ -472,7 +471,7 @@ END IF
 LET vm_rows[vm_num_rows] = rowid
 LET vm_row_current = vm_num_rows
 
-CALL cambiar_numero_fact()
+--CALL cambiar_numero_fact()
 
 CALL lee_muestra_registro(vm_rows[vm_row_current])
 CALL fl_mensaje_registro_ingresado()
@@ -541,14 +540,12 @@ INPUT BY NAME rm_r19.r19_cod_tran, rm_r19.r19_tipo_dev, rm_r19.r19_num_dev,
 			RETURNING r_r19.*
 		LET rm_cl.* = r_r19.*
 		IF r_r19.r19_oc_interna IS NULL THEN
-			--CALL fgl_winmessage(vg_producto,'La transacción no está asociada a una orden de compra.','exclamation')
 			CALL fl_mostrar_mensaje('La transacción no está asociada a una orden de compra.','exclamation')
 			INITIALIZE r_r19.* TO NULL 
 			CALL muestra_etiquetas(r_r19.*)
 			NEXT FIELD r19_num_dev
 		END IF
 		IF vg_fecha > (date(r_r19.r19_fecing) + rm_r00.r00_dias_dev) THEN
-			--CALL fgl_winmessage(vg_producto,'Ha excedido el limite de tiempo permitido para realizar devoluciones.','exclamation')
 			CALL fl_mostrar_mensaje('Ha excedido el limite de tiempo permitido para realizar devoluciones.','exclamation')
 			INITIALIZE r_r19.* TO NULL 
 			CALL muestra_etiquetas(r_r19.*)
@@ -556,13 +553,19 @@ INPUT BY NAME rm_r19.r19_cod_tran, rm_r19.r19_tipo_dev, rm_r19.r19_num_dev,
 		END IF
 		IF rm_r00.r00_dev_mes = 'S' THEN
 			IF month(r_r19.r19_fecing) <> month(vg_fecha) THEN
-				--CALL fgl_winmessage(vg_producto,'La devolución debe realizarse en el mismo mes en que se realizó la venta.','exclamation')
 				CALL fl_mostrar_mensaje('La devolución debe realizarse en el mismo mes en que se realizó la venta.','exclamation')
 				INITIALIZE r_r19.* TO NULL 
 				CALL muestra_etiquetas(r_r19.*)
 				NEXT FIELD r19_num_dev
 			END IF
 		END IF
+
+		{--
+			** ESTA VALIDACION SE COMENTA EL 18/01/2018 PARA VER ANALIZAR
+				CON LA NUEVA ESTRUCTURACIÓN DEL PROCESO DE COMPRA LOCAL
+				SI SE DEBE O MANTENER
+			**
+
 		-- Valida si los items recibidos han sido afectados por 
 		-- alguna transacción
 		IF items_alterados(r_r19.*) THEN
@@ -577,6 +580,8 @@ INPUT BY NAME rm_r19.r19_cod_tran, rm_r19.r19_tipo_dev, rm_r19.r19_num_dev,
 			CALL muestra_etiquetas(r_r19.*)
 			NEXT FIELD r19_num_dev
 		END IF
+		--}
+
 		CALL fl_lee_orden_compra(vg_codcia, vg_codloc, 
 			r_r19.r19_oc_interna) RETURNING rm_c10.*
 		IF rm_c10.c10_numero_oc IS NULL THEN
@@ -621,7 +626,10 @@ INPUT BY NAME rm_r19.r19_cod_tran, rm_r19.r19_tipo_dev, rm_r19.r19_num_dev,
 		LET rm_r19.r19_vendedor    = r_r19.r19_vendedor
 		LET rm_r19.r19_bodega_ori  = r_r19.r19_bodega_ori
 		CALL muestra_etiquetas(rm_r19.*)
-	{--
+	{** Se habilita este codigo para poder validar el ingreso del No. SRI 
+		para la N/C del proveedor
+	 **}
+
 	AFTER INPUT
 		LET rm_r19.r19_oc_externa = rm_r19.r19_oc_externa CLIPPED
 		IF rm_r19.r19_oc_externa IS NULL THEN
@@ -641,7 +649,8 @@ INPUT BY NAME rm_r19.r19_cod_tran, rm_r19.r19_tipo_dev, rm_r19.r19_num_dev,
 		END IF
 		LET vm_fact_nue           = rm_r19.r19_oc_externa
 		LET rm_r19.r19_oc_externa = aux_fact
-	--}
+		--
+
 END INPUT
 
 END FUNCTION
@@ -893,8 +902,7 @@ END IF
 CALL fl_lee_orden_compra(vg_codcia, vg_codloc, rm_r19.r19_oc_interna) 
 	RETURNING rm_c10.*
 LET iva = (rm_r19.r19_tot_neto - rm_r19.r19_tot_bruto) + rm_r19.r19_tot_dscto - 
-	 	      rm_c10.c10_dif_cuadre - rm_c10.c10_flete - 
-		      rm_c10.c10_otros
+	 	      rm_c10.c10_flete - rm_c10.c10_otros
 
 DISPLAY BY NAME rm_r19.r19_cod_tran,   
                 rm_r19.r19_num_tran,   
@@ -1254,9 +1262,8 @@ IF cant_ven = cant_dev THEN
 	LET descto = rm_cl.r19_tot_dscto
 	LET bruto  = rm_cl.r19_tot_bruto
 	LET precio = rm_cl.r19_tot_neto
-        LET iva    = (rm_cl.r19_tot_neto - bruto) + descto - 
-	 	      rm_c10.c10_dif_cuadre - rm_c10.c10_flete - 
-		      rm_c10.c10_otros
+    LET iva    = (rm_cl.r19_tot_neto - bruto) + descto - 
+		 	      rm_c10.c10_flete - rm_c10.c10_otros
 END IF
 LET rm_r19.r19_tot_dscto  = descto
 LET rm_r19.r19_tot_bruto  = bruto
@@ -1783,6 +1790,22 @@ LET r_p21.p21_valor        = rm_r19.r19_tot_neto
 LET r_p21.p21_saldo        = rm_r19.r19_tot_neto
 LET r_p21.p21_subtipo      = 1
 LET r_p21.p21_origen       = 'A'
+
+--
+{XXX La tabla cxpt021 se le incluyó estos campos el 02/01/2018:}
+
+LET r_p21.p21_cod_tran     = rm_r19.r19_cod_tran
+LET r_p21.p21_num_tran     = rm_r19.r19_num_tran
+LET r_p21.p21_val_impto    = (rm_r19.r19_tot_neto - rm_r19.r19_tot_bruto)
+								+ rm_r19.r19_tot_dscto - rm_c10.c10_flete
+								- rm_c10.c10_otros
+
+{** Puesto el 05/01/2018 **}
+LET r_p21.p21_num_sri      = rm_r19.r19_oc_externa
+--
+
+--
+
 LET r_p21.p21_usuario      = vg_usuario
 LET r_p21.p21_fecing       = fl_current()
 
@@ -2070,6 +2093,9 @@ END FUNCTION
 
 
 
+{** SE COMENTA ESTA FUNCION HASTA DETERMINAR PORQUE CAMBIA EL NUMERO DE LA
+	FACTURA DEL PROVEEDOR
+
 FUNCTION cambiar_numero_fact()
 DEFINE r_c10		RECORD LIKE ordt010.*
 DEFINE r_p20		RECORD LIKE cxpt020.*
@@ -2198,6 +2224,8 @@ DELETE FROM cxpt020
 COMMIT WORK
 
 END FUNCTION
+
+**}
 
 
 

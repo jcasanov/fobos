@@ -1764,7 +1764,25 @@ LET r_p21.p21_subtipo    = 1
 LET r_p21.p21_origen     = 'A'
 LET r_p21.p21_usuario    = vg_usuario
 LET r_p21.p21_fecing     = CURRENT
+
+--
+{XXX La tabla cxpt021 se le incluyó los siguientes campos el 02/01/2018:
+		- p21_val_impto
+		- p21_cod_tran
+		- p21_num_tran
+		- p21_num_sri
+		- p21_num_aut
+		- p21_fec_emi_nc
+		- p21_fec_emi_aut
+
+	Estos campos aceptan valores nulos y no se ve afectado este proceso.
+	Cabe señalar que posiblemente se incluya el campo p21_ord_trabajo
+
+ XXX}
+
 INSERT INTO cxpt021 VALUES(r_p21.*)
+--
+
 -- Para aplicar la nota de credito
 DECLARE q_ddev CURSOR FOR 
 	SELECT * FROM cxpt020

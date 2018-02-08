@@ -1,0 +1,23 @@
+DATABASE aceros
+SCREEN
+{
+                     DATOS ADICIONALES NOTA DE CREDITO
+                    ---------------------------------
+
+         No. N/C SRI: [c000             ]
+
+        No. Aut. SRI: [c001                                               ]
+
+  Fecha Emi. N/C SRI: [c002      ]        Fecha Emi. Aut. SRI: [c003      ]
+
+}
+TABLES
+cxpt021
+ATTRIBUTES
+c000 = cxpt021.p21_num_sri, AUTONEXT, UPSHIFT;
+c001 = cxpt021.p21_num_aut, AUTONEXT, UPSHIFT;
+c002 = cxpt021.p21_fec_emi_nc, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite fecha de emisión N/C proveedor en formato = dd-mm-aaaa';
+c003 = cxpt021.p21_fec_emi_aut, AUTONEXT, UPSHIFT, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite fecha de autorizacion N/C proveedor en formato = dd-mm-aaaa';
+END

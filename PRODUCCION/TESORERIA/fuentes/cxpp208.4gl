@@ -17,18 +17,18 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/cxpp208.err')
+LET vg_proceso = arg_val(0)
+CALL startlog('../logs/' || vg_proceso CLIPPED || '.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN          -- Validar # parámetros correcto
-	CALL fgl_winmessage(vg_producto, 'Número de parámetros incorrecto', 'stop')
+	CALL fl_mostrar_mensaje('Número de parámetros incorrecto', 'stop')
 	EXIT PROGRAM
 END IF
 LET vg_base     = arg_val(1)
 LET vg_modulo   = arg_val(2)
 LET vg_codcia   = arg_val(3)
 LET vg_codloc   = arg_val(4)
-LET vg_proceso = 'cxpp208'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
 --#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
@@ -194,6 +194,17 @@ DELETE FROM cxpt051 WHERE p51_ano       = anho
 	  	      AND p51_mes       = mes 
 	              AND p51_compania  = vg_codcia
 	              AND p51_localidad = vg_codloc
+
+{XXX La tabla cxpt051 se le incluyó los mismos campos que fueron incluidos
+	 en la tabla cxpt021 el 02/01/2018; estos campos son:
+		- p51_val_impto
+		- p51_cod_tran
+		- p51_num_tran
+		- p51_num_sri
+		- p51_num_aut
+		- p51_fec_emi_nc
+		- p51_fec_emi_aut
+ XXX}
 
 LET query = 'INSERT INTO cxpt051 ',
 		' SELECT ', anho, ', ', mes, ', * FROM cxpt021 ',
