@@ -71,43 +71,45 @@ END FUNCTION
 
 FUNCTION ejecuta_proceso()
 DEFINE r_doc		RECORD
-				num_ret		CHAR(12),
-				modulo		CHAR(2),
-				sustento	LIKE srit023.s23_sustento_sri,
-				idtipo		CHAR(2),
-				idprov		LIKE cxpt001.p01_num_doc,
-				tc		LIKE srit019.s19_tipo_comp,
-				estableci	CHAR(3),
-				pemision	CHAR(3),
-				secuencia	LIKE cxpt020.p20_num_doc,
-				aut		VARCHAR(40),
-				fecha_reg	CHAR(10),
-				fecha_emi	CHAR(10),
-				fecha_cad	CHAR(10),
-				base_sin	DECIMAL(12,2),
-				base_con	DECIMAL(12,2),
-				base_ice	DECIMAL(12,2),
-				porc_iva	DECIMAL(12,2),
-				porc_ice	DECIMAL(5,2),
-				monto_iva	DECIMAL(12,2),
-				monto_ice	DECIMAL(12,2),
-				bienesBase	VARCHAR(40),
-				bienesPorc	VARCHAR(40),
-				bienesValor	VARCHAR(40),
-				serviciosBase	VARCHAR(40),
-				serviciosPorc	VARCHAR(40),
-				serviciosValor	VARCHAR(40),
-				nom_mes		CHAR(3),
-				anio_reg	SMALLINT,
-				usuario		LIKE ordt010.c10_usuario
-			END RECORD
+						num_ret			CHAR(12),
+						modulo			CHAR(2),
+						sustento		LIKE srit023.s23_sustento_sri,
+						idtipo			CHAR(2),
+						idprov			LIKE cxpt001.p01_num_doc,
+						tc				LIKE srit019.s19_tipo_comp,
+						estableci		CHAR(3),
+						pemision		CHAR(3),
+						secuencia		LIKE cxpt020.p20_num_doc,
+						aut				VARCHAR(51),
+						fecha_reg		CHAR(10),
+						fecha_emi		CHAR(10),
+						fecha_cad		CHAR(10),
+						base_sin		DECIMAL(12,2),
+						base_con		DECIMAL(12,2),
+						base_ice		DECIMAL(12,2),
+						porc_iva		DECIMAL(12,2),
+						porc_ice		DECIMAL(5,2),
+						monto_iva		DECIMAL(12,2),
+						monto_ice		DECIMAL(12,2),
+						bienesBase		VARCHAR(40),
+						bienesPorc		VARCHAR(40),
+						bienesValor		VARCHAR(40),
+						serviciosBase	VARCHAR(40),
+						serviciosPorc	VARCHAR(40),
+						serviciosValor	VARCHAR(40),
+						nom_mes			CHAR(3),
+						anio_reg		SMALLINT,
+						usuario			LIKE ordt010.c10_usuario
+					END RECORD
 DEFINE r_adi		RECORD
-				proveedor	LIKE cxpt020.p20_codprov,
-				nomprov		LIKE cxpt001.p01_nomprov,
-				personeria	LIKE cxpt001.p01_personeria,
-				tipo		LIKE cxpt020.p20_tipo_doc,
-				numero		LIKE cxpt020.p20_num_doc
-			END RECORD
+						proveedor		LIKE cxpt020.p20_codprov,
+						nomprov			LIKE cxpt001.p01_nomprov,
+						personeria		LIKE cxpt001.p01_personeria,
+						tipo			LIKE cxpt020.p20_tipo_doc,
+						numero			LIKE cxpt020.p20_num_doc
+					END RECORD
+DEFINE r_r19		RECORD LIKE rept019.*
+DEFINE r_c13		RECORD LIKE ordt013.*
 DEFINE fecha		DATETIME YEAR TO MONTH
 DEFINE registro		CHAR(11600)
 DEFINE query		CHAR(21500)
@@ -144,10 +146,7 @@ LET query = 'SELECT NVL((SELECT UNIQUE p28_num_ret ',
 			'  AND s19_sec_tran  = s18_sec_tran) tc, ',
 		'c10_factura[1,3] establecimiento, ',
 		'c10_factura[5,7] pemision, ',
-		'CASE WHEN p20_codprov IN (477, 1057) ',
-			'THEN c10_factura[11,', long_dig, '] ',
-			'ELSE c10_factura[9,', long_dig, '] ',
-		'END secuencia, ',
+		'c10_factura[9,', long_dig, '] secuencia, ',
 		'CASE WHEN c13_fec_aut IS NULL ',
 			'THEN c13_num_aut ',
 			'ELSE TRIM(c13_fec_aut) || TRIM(p01_num_doc) || TRIM(c13_num_aut) ',
@@ -284,40 +283,40 @@ LET query = 'SELECT NVL((SELECT UNIQUE p28_num_ret ',
 			'FROM cxpt028, cxpt027, ordt002, srit009 ',
 			'WHERE p27_estado      = "A" ',
 			'  AND p28_tipo_ret    = "I" ',
-                        '  AND c02_tipo_fuente IN ("S","T") ',
-                        '  AND p27_compania    = p28_compania ',
-                        '  AND p27_localidad   = p28_localidad ',
-                        '  AND p27_num_ret     = p28_num_ret ',
-                        '  AND p28_compania    = p20_compania ',
-                        '  AND p28_localidad   = p20_localidad ',
-                        '  AND p28_tipo_doc    = p20_tipo_doc ',
-                        '  AND p28_num_doc     = p20_num_doc ',
-                        '  AND p28_codprov     = p20_codprov ',
-                        '  AND p28_dividendo   = p20_dividendo ',
-                        '  AND c02_compania    = p28_compania ',
-                        '  AND c02_tipo_ret    = p28_tipo_ret ',
-                        '  AND c02_porcentaje  = p28_porcentaje ',
-                        '  AND s09_compania    = c02_compania ',
-                        '  AND s09_tipo_porc   = c02_tipo_fuente ',
-                        '  AND REPLACE(s09_descripcion,"/","") = ',
+			'  AND c02_tipo_fuente IN ("S","T") ',
+			'  AND p27_compania    = p28_compania ',
+			'  AND p27_localidad   = p28_localidad ',
+			'  AND p27_num_ret     = p28_num_ret ',
+			'  AND p28_compania    = p20_compania ',
+			'  AND p28_localidad   = p20_localidad ',
+			'  AND p28_tipo_doc    = p20_tipo_doc ',
+			'  AND p28_num_doc     = p20_num_doc ',
+			'  AND p28_codprov     = p20_codprov ',
+			'  AND p28_dividendo   = p20_dividendo ',
+			'  AND c02_compania    = p28_compania ',
+			'  AND c02_tipo_ret    = p28_tipo_ret ',
+			'  AND c02_porcentaje  = p28_porcentaje ',
+			'  AND s09_compania    = c02_compania ',
+			'  AND s09_tipo_porc   = c02_tipo_fuente ',
+			'  AND REPLACE(s09_descripcion,"/","") = ',
 				'c02_porcentaje), 0) serviciosPorc, ',
 			'NVL((SELECT p28_valor_ret ',
 				'FROM cxpt028, cxpt027, ordt002 ',
 				'WHERE p27_estado      = "A" ',
 				'  AND p28_tipo_ret    = "I" ',
 				'  AND c02_tipo_fuente IN ("S","T") ',
-	                        '  AND p27_compania    = p28_compania ',
-        	                '  AND p27_localidad   = p28_localidad ',
-                	        '  AND p27_num_ret     = p28_num_ret ',
-	                        '  AND p28_compania    = p20_compania ',
-        	                '  AND p28_localidad   = p20_localidad ',
-                	        '  AND p28_tipo_doc    = p20_tipo_doc ',
-                        	'  AND p28_num_doc     = p20_num_doc ',
-	                        '  AND p28_codprov     = p20_codprov ',
-        	                '  AND p28_dividendo   = p20_dividendo ',
-	                        '  AND c02_compania    = p28_compania ',
-	                        '  AND c02_tipo_ret    = p28_tipo_ret ',
-	                        '  AND c02_porcentaje  = p28_porcentaje), ',
+				'  AND p27_compania    = p28_compania ',
+				'  AND p27_localidad   = p28_localidad ',
+				'  AND p27_num_ret     = p28_num_ret ',
+				'  AND p28_compania    = p20_compania ',
+				'  AND p28_localidad   = p20_localidad ',
+				'  AND p28_tipo_doc    = p20_tipo_doc ',
+				'  AND p28_num_doc     = p20_num_doc ',
+				'  AND p28_codprov     = p20_codprov ',
+				'  AND p28_dividendo   = p20_dividendo ',
+				'  AND c02_compania    = p28_compania ',
+				'  AND c02_tipo_ret    = p28_tipo_ret ',
+				'  AND c02_porcentaje  = p28_porcentaje), ',
 			'0) serviciosValor, ',
 		'CASE    WHEN MONTH(c10_fecing) = 01 THEN "ENE" ',
 			'WHEN MONTH(c10_fecing) = 02 THEN "FEB" ',
@@ -376,13 +375,10 @@ LET query = 'SELECT NVL((SELECT UNIQUE p28_num_ret ',
 			'  AND s18_tipo_tran = 1 ',
 			'  AND s18_cod_ident = p01_tipo_doc ',
 			'  AND s19_cod_ident = s18_cod_ident ',
-			'  AND s19_tipo_doc  = "FA" ',
+			'  AND s19_tipo_doc  = p20_tipo_doc ',
 			'  AND s19_sec_tran  = s18_sec_tran) tc, ',
 		'p20_num_doc[1,3] establecimiento, p20_num_doc[5,7] pemision, ',
-		'CASE WHEN p20_codprov IN (477, 1057) ',
-			'THEN p20_num_doc[11,', long_dig, '] ',
-			'ELSE p20_num_doc[9,', long_dig, '] ',
-		'END secuencia, ',
+		'p20_num_doc[9,', long_dig, '] secuencia, ',
 		'"1109999999" aut, ',
 		'TO_CHAR(p20_fecha_emi, "%d/%m/%Y") fecha_reg, ',
 		'TO_CHAR(p20_fecha_emi, "%d/%m/%Y") fecha_emi,',
@@ -415,44 +411,44 @@ LET query = 'SELECT NVL((SELECT UNIQUE p28_num_ret ',
 			'  AND c02_tipo_ret    = p28_tipo_ret ',
 			'  AND c02_porcentaje  = p28_porcentaje), ',
 		'0) bienesBase, ',
-                'NVL((SELECT s09_codigo ',
-                        ' FROM cxpt028, cxpt027, ordt002, srit009 ',
-                        ' WHERE p27_estado      = "A" ',
-                        '   AND p28_tipo_ret    = "I" ',
-                        '   AND c02_tipo_fuente = "B" ',
-                        '   AND p27_compania    = p28_compania ',
-                        '   AND p27_localidad   = p28_localidad ',
-                        '   AND p27_num_ret     = p28_num_ret ',
-                        '   AND p28_compania    = p20_compania ',
-                        '   AND p28_localidad   = p20_localidad ',
-                        '   AND p28_tipo_doc    = p20_tipo_doc ',
-                        '   AND p28_num_doc     = p20_num_doc ',
-                        '   AND p28_codprov     = p20_codprov ',
-                        '   AND p28_dividendo   = p20_dividendo ',
-                        '   AND c02_compania    = p28_compania ',
-                        '   AND c02_tipo_ret    = p28_tipo_ret ',
-                        '   AND c02_porcentaje  = p28_porcentaje ',
+		'NVL((SELECT s09_codigo ',
+			' FROM cxpt028, cxpt027, ordt002, srit009 ',
+			' WHERE p27_estado      = "A" ',
+			'   AND p28_tipo_ret    = "I" ',
+			'   AND c02_tipo_fuente = "B" ',
+			'   AND p27_compania    = p28_compania ',
+			'   AND p27_localidad   = p28_localidad ',
+			'   AND p27_num_ret     = p28_num_ret ',
+			'   AND p28_compania    = p20_compania ',
+			'   AND p28_localidad   = p20_localidad ',
+			'   AND p28_tipo_doc    = p20_tipo_doc ',
+			'   AND p28_num_doc     = p20_num_doc ',
+			'   AND p28_codprov     = p20_codprov ',
+			'   AND p28_dividendo   = p20_dividendo ',
+			'   AND c02_compania    = p28_compania ',
+			'   AND c02_tipo_ret    = p28_tipo_ret ',
+			'   AND c02_porcentaje  = p28_porcentaje ',
 			'   AND s09_compania    = c02_compania ', 
 			'   AND s09_tipo_porc   = c02_tipo_fuente ', 
 			'   AND REPLACE(s09_descripcion,"/","") = ',
 				'c02_porcentaje), 0) bienesPorcentaje, ',
 			'NVL((SELECT p28_valor_ret ',
 				'FROM cxpt028, cxpt027, ordt002 ',
-	                        'WHERE p27_estado      = "A" ',
-        	                '  AND p28_tipo_ret    = "I" ',
-                	        '  AND c02_tipo_fuente = "B" ',
+				'WHERE p27_estado      = "A" ',
+				'  AND p28_tipo_ret    = "I" ',
+				'  AND c02_tipo_fuente = "B" ',
 				'  AND p27_compania    = p28_compania ',
-                	        '  AND p27_localidad   = p28_localidad ',
-                        	'  AND p27_num_ret     = p28_num_ret ',
-	                        '  AND p28_compania    = p20_compania ',
-        	                '  AND p28_localidad   = p20_localidad ',
-                	        '  AND p28_tipo_doc    = p20_tipo_doc ',
-                        	'  AND p28_num_doc     = p20_num_doc ',
-	                        '  AND p28_codprov     = p20_codprov ',
-        	                '  AND p28_dividendo   = p20_dividendo ',
-                	        '  AND c02_compania    = p28_compania ',
-	                        '  AND c02_tipo_ret    = p28_tipo_ret ',
-        	                '  AND c02_porcentaje  = p28_porcentaje), ',
+				'  AND p27_localidad   = p28_localidad ',
+				'  AND p27_num_ret     = p28_num_ret ',
+				'  AND p28_compania    = p20_compania ',
+				'  AND p28_localidad   = p20_localidad ',
+				'  AND p28_tipo_doc    = p20_tipo_doc ',
+				'  AND p28_num_doc     = p20_num_doc ',
+				'  AND p28_codprov     = p20_codprov ',
+				'  AND p28_dividendo   = p20_dividendo ',
+				'  AND c02_compania    = p28_compania ',
+				'  AND c02_tipo_ret    = p28_tipo_ret ',
+				'  AND c02_porcentaje  = p28_porcentaje), ',
 			'0) bienesValor, ',
 			'NVL((SELECT p28_valor_base ',
 				'FROM cxpt028, cxpt027, ordt002 ',
@@ -474,24 +470,24 @@ LET query = 'SELECT NVL((SELECT UNIQUE p28_num_ret ',
 			'0) serviciosBase, ',
 			'NVL((SELECT s09_codigo ',
 				'FROM cxpt028, cxpt027, ordt002, srit009 ',
-	                        'WHERE p27_estado      = "A" ',
-        	                '  AND p28_tipo_ret    = "I" ',
-                	        '  AND c02_tipo_fuente = "S" ',
-                        	'  AND p27_compania    = p28_compania ',
-	                        '  AND p27_localidad   = p28_localidad ',
-        	                '  AND p27_num_ret     = p28_num_ret ',
-                	        '  AND p28_compania    = p20_compania ',
-                        	'  AND p28_localidad   = p20_localidad ',
-	                        '  AND p28_tipo_doc    = p20_tipo_doc ',
-        	                '  AND p28_num_doc     = p20_num_doc ',
-                	        '  AND p28_codprov     = p20_codprov ',
-                        	'  AND p28_dividendo   = p20_dividendo ',
-	                        '  AND c02_compania    = p28_compania ',
-        	                '  AND c02_tipo_ret    = p28_tipo_ret ',
-                	        '  AND c02_porcentaje  = p28_porcentaje ',
-	                        '  AND s09_compania    = c02_compania ',
-        	                '  AND s09_tipo_porc   = c02_tipo_fuente ',
-                	        '  AND REPLACE(s09_descripcion,"/","") = ',
+				'WHERE p27_estado      = "A" ',
+				'  AND p28_tipo_ret    = "I" ',
+				'  AND c02_tipo_fuente = "S" ',
+				'  AND p27_compania    = p28_compania ',
+				'  AND p27_localidad   = p28_localidad ',
+				'  AND p27_num_ret     = p28_num_ret ',
+				'  AND p28_compania    = p20_compania ',
+				'  AND p28_localidad   = p20_localidad ',
+				'  AND p28_tipo_doc    = p20_tipo_doc ',
+				'  AND p28_num_doc     = p20_num_doc ',
+				'  AND p28_codprov     = p20_codprov ',
+				'  AND p28_dividendo   = p20_dividendo ',
+				'  AND c02_compania    = p28_compania ',
+				'  AND c02_tipo_ret    = p28_tipo_ret ',
+				'  AND c02_porcentaje  = p28_porcentaje ',
+				'  AND s09_compania    = c02_compania ',
+				'  AND s09_tipo_porc   = c02_tipo_fuente ',
+				'  AND REPLACE(s09_descripcion,"/","") = ',
 					'c02_porcentaje), 0) serviciosPorc, ',
 		'NVL((SELECT p28_valor_ret ',
 			'FROM cxpt028, cxpt027, ordt002 ',
@@ -530,21 +526,90 @@ LET query = 'SELECT NVL((SELECT UNIQUE p28_num_ret ',
 		'p20_tipo_doc, p20_num_doc, p20_dividendo ',
 		'FROM cxpt020, cxpt001 ',
 		'WHERE p20_codprov   = p01_codprov ',
-		'  AND p20_tipo_doc  = "FA" ',
+		'  AND p20_tipo_doc  IN ("FA", "LC") ',
 		'  AND p20_compania  = ', vg_codcia,
 		'  AND p20_numero_oc IS NULL ',
 		'  AND EXTEND(p20_fecha_emi, YEAR TO MONTH) = "', fecha, '"',
-	'INTO TEMP t1 '
-PREPARE exec_t1 FROM query
-EXECUTE exec_t1
+
+	{** Se agrego este UNION SELECT para obtener las N/C que se generan desde
+		INVENTARIO o desde el TALLER
+	 **}
+
+	' UNION ',
+	' SELECT "NR" sec, "TE" modulo, "06" sustento, ',
+		'(SELECT s18_sec_tran ',
+			'FROM srit018 ',
+			'WHERE s18_compania  = p21_compania ',
+			'  AND s18_tipo_tran = 1 ',
+			'  AND s18_cod_ident = p01_tipo_doc) idtipo, ',
+		'p01_num_doc idprov, ',
+		'(SELECT s19_tipo_comp ',
+			'FROM srit018, srit019 ',
+			'WHERE s18_compania  = p21_compania ',
+			'  AND s18_tipo_tran = 2 ',
+			'  AND s18_cod_ident = p01_tipo_doc ',
+			'  AND s19_cod_ident = s18_cod_ident ',
+			'  AND s19_tipo_doc  = "NC" ',
+			'  AND s19_sec_tran  = s18_sec_tran) tc, ',
+		'p21_num_sri[1,3] establecimiento, p21_num_sri[5,7] pemision, ',
+		'p21_num_sri[9,', long_dig, '] secuencia, ',
+		'p21_num_aut aut, ',
+		'TO_CHAR(p21_fecha_emi, "%d/%m/%Y") fecha_reg, ',
+		'TO_CHAR(p21_fec_emi_nc, "%d/%m/%Y") fecha_emi,',
+		'TO_CHAR(DATE("', vg_fecha, '"),"%m/%Y") fecha_cad, ',
+		'0 base_sin, (p21_valor - p21_val_impto) base_con, 0 base_ice, ',
+		'NVL((SELECT UNIQUE CASE WHEN s08_codigo = 0 ',
+						'THEN 2 ',
+						'ELSE s08_codigo ',
+					'END s08_codigo ',
+			'FROM srit008 ',
+			'WHERE s08_compania   = p21_compania ',
+			'  AND s08_porcentaje = ',
+				'ROUND((p21_val_impto / (p21_valor - p21_val_impto)) * 100, ',
+						'2)), 2) iva, ',
+		'"0" ice, p21_val_impto monto_iva, ',
+		'"0.00" monto_ice, ',
+		'0 bienesBase, ',
+		'0 bienesPorcentaje, ',
+		'0 bienesValor, ',
+		'0 serviciosBase, ',
+		'0 serviciosPorc, ',
+		'0 serviciosValor, ',
+		'CASE    WHEN MONTH(p21_fec_emi_nc) = 01 THEN "ENE" ',
+			'WHEN MONTH(p21_fec_emi_nc) = 02 THEN "FEB" ',
+			'WHEN MONTH(p21_fec_emi_nc) = 03 THEN "MAR" ',
+			'WHEN MONTH(p21_fec_emi_nc) = 04 THEN "ABR" ',
+			'WHEN MONTH(p21_fec_emi_nc) = 05 THEN "MAY" ',
+			'WHEN MONTH(p21_fec_emi_nc) = 06 THEN "JUN" ',
+			'WHEN MONTH(p21_fec_emi_nc) = 07 THEN "JUL" ',
+			'WHEN MONTH(p21_fec_emi_nc) = 08 THEN "AGO" ',
+			'WHEN MONTH(p21_fec_emi_nc) = 09 THEN "SEP" ',
+			'WHEN MONTH(p21_fec_emi_nc) = 10 THEN "OCT" ',
+			'WHEN MONTH(p21_fec_emi_nc) = 11 THEN "NOV" ',
+			'WHEN MONTH(p21_fec_emi_nc) = 12 THEN "DIC" ',
+		'END mes, YEAR(p21_fec_emi_nc) anio, p21_usuario usuario, ',
+		'p21_codprov p20_codprov, ',
+		'REPLACE(REPLACE(REPLACE(p01_nomprov, "&", "&amp;"),',
+				' "Ñ","&#209;"), "ñ","&#241;") nomprov, p01_personeria pers, ',
+		'p21_cod_tran p20_tipo_doc, p21_num_tran || "" p20_num_doc, 1 p20_dividendo ',
+		'FROM cxpt021, cxpt001 ',
+		'WHERE p21_codprov   = p01_codprov ',
+		'  AND p21_tipo_doc  = "NC" ',
+		'  AND p21_compania  = ', vg_codcia,
+		'  AND EXTEND(p21_fec_emi_nc, YEAR TO MONTH) = "', fecha, '"',
+	--
+
+	'INTO TEMP tmp_anexo '
+PREPARE exec_tmp_anexo FROM query
+EXECUTE exec_tmp_anexo
 SELECT p20_codprov codp, p20_tipo_doc tp, p20_num_doc num_d, COUNT(*) tot_reg
-	FROM t1
+	FROM tmp_anexo
 	WHERE sec           = 'NR'
 	  AND p20_dividendo > 1
 	GROUP BY 1, 2, 3
 	INTO TEMP t2
 SELECT UNIQUE codp, tp, num_d, sec sec_rt
-	FROM t1, t2
+	FROM tmp_anexo, t2
 	WHERE p20_codprov   = codp
 	  AND p20_tipo_doc  = tp
 	  AND p20_num_doc   = num_d
@@ -565,7 +630,7 @@ LET query = 'SELECT UNIQUE ',
 					'serviciosBase, serviciosPorc, serviciosValor, ',
 					'mes, anio, usuario, p20_codprov, nomprov, pers, ',
 					'p20_tipo_doc, p20_num_doc ',
-				'FROM t1 ',
+				'FROM tmp_anexo ',
 				'ORDER BY ', orden CLIPPED
 PREPARE cons FROM query
 DECLARE q_cons CURSOR FOR cons
@@ -573,106 +638,160 @@ LET num_ret_ant = NULL
 LET salida      = NULL
 LET primera     = 1
 FOREACH q_cons INTO r_doc.*, r_adi.*
-	LET registro = '<detalleCompras>',
-			'<codSustento>', r_doc.sustento USING "&&", '</codSustento>',
-			'<tpIdProv>', r_doc.idtipo CLIPPED, '</tpIdProv>',
-			'<idProv>', r_doc.idprov[1,13] CLIPPED, '</idProv>',
-			'<tipoComprobante>', r_doc.tc USING "&&", '</tipoComprobante>',
-			'<parteRel>SI</parteRel>'
+	LET registro = '\t<detalleCompras>\n',
+			'\t\t<codSustento>', r_doc.sustento USING "&&", '</codSustento>\n',
+			'\t\t<tpIdProv>', r_doc.idtipo CLIPPED, '</tpIdProv>\n',
+			'\t\t<idProv>', r_doc.idprov[1,13] CLIPPED, '</idProv>\n',
+			'\t\t<tipoComprobante>', r_doc.tc USING "&&",'</tipoComprobante>\n',
+			'\t\t<parteRel>SI</parteRel>\n'
 			IF vg_codcia = 1 THEN
 				LET registro = registro CLIPPED,
-								'<fechaRegistro>', r_doc.fecha_reg CLIPPED,
-								'</fechaRegistro>'
+								'\t\t<fechaRegistro>', r_doc.fecha_reg CLIPPED,
+								'</fechaRegistro>\n'
 			ELSE
 				LET registro = registro CLIPPED,
-								'<fechaRegistro>', '01/', mes USING "&&", '/',
+								'\t\t<fechaRegistro>', '01/', mes USING "&&", '/',
 													anio USING "&&&&",
-								'</fechaRegistro>'
+								'</fechaRegistro>\n'
 			END IF
 			LET registro = registro CLIPPED,
-			'<establecimiento>', r_doc.estableci, '</establecimiento>',
-			'<puntoEmision>', r_doc.pemision, '</puntoEmision>',
-			'<secuencial>', r_doc.secuencia CLIPPED,'</secuencial>'
+			'\t\t<establecimiento>', r_doc.estableci, '</establecimiento>\n',
+			'\t\t<puntoEmision>', r_doc.pemision, '</puntoEmision>\n',
+			'\t\t<secuencial>', r_doc.secuencia CLIPPED,'</secuencial>\n'
 			IF vg_codcia = 1 THEN
 				LET registro = registro CLIPPED,
-								'<fechaEmision>', r_doc.fecha_emi CLIPPED,
-								'</fechaEmision>'
+								'\t\t<fechaEmision>', r_doc.fecha_emi CLIPPED,
+								'</fechaEmision>\n'
 			ELSE
 				LET registro = registro CLIPPED,
-								'<fechaEmision>', '01/', mes USING "&&", '/',
+								'\t\t<fechaEmision>', '01/', mes USING "&&",'/',
 													anio USING "&&&&",
-								'</fechaEmision>'
+								'</fechaEmision>\n'
 			END IF
 			LET registro = registro CLIPPED,
-			'<autorizacion>', r_doc.aut, '</autorizacion>',
-			'<baseNoGraIva>0</baseNoGraIva>',
-			'<baseImponible>',r_doc.base_sin USING "<<<<<<<<&.&&",
-			'</baseImponible>',
-			'<baseImpGrav>', r_doc.base_con USING "<<<<<<<<&.&&",
-			'</baseImpGrav>',
-			'<baseImpExe>0</baseImpExe>',
-			'<montoIce>', r_doc.monto_ice USING "<<<<<<<<&.&&",
-			'</montoIce>',
-			'<montoIva>', r_doc.monto_iva USING "<<<<<<<<&.&&",
-			'</montoIva>',
-			'<valRetBien10>0</valRetBien10>',
-			'<valRetServ20>0</valRetServ20>',
-			'<valorRetBienes>', r_doc.bienesValor USING "<<<<<<<<&.&&",
-			'</valorRetBienes>',
-			'<valRetServ50>0</valRetServ50>'
-			IF r_doc.tc <> '03' THEN
+			'\t\t<autorizacion>', r_doc.aut, '</autorizacion>\n',
+			'\t\t<baseNoGraIva>0</baseNoGraIva>\n',
+			'\t\t<baseImponible>',r_doc.base_sin USING "<<<<<<<<&.&&",
+			'</baseImponible>\n',
+			'\t\t<baseImpGrav>', r_doc.base_con USING "<<<<<<<<&.&&",
+			'</baseImpGrav>\n',
+			'\t\t<baseImpExe>0</baseImpExe>\n',
+			'\t\t<montoIce>', r_doc.monto_ice USING "<<<<<<<<&.&&",
+			'</montoIce>\n',
+			'\t\t<montoIva>', r_doc.monto_iva USING "<<<<<<<<&.&&",
+			'</montoIva>\n',
+			'\t\t<valRetBien10>0</valRetBien10>\n',
+			'\t\t<valRetServ20>0</valRetServ20>\n',
+			'\t\t<valorRetBienes>', r_doc.bienesValor USING "<<<<<<<<&.&&",
+			'</valorRetBienes>\n',
+			'\t\t<valRetServ50>0.00</valRetServ50>\n'
+		{** Esto se cambio porque en el DIMM esto validaba antes por
+			tipo de comprobante y ahora en por sustento
+		**}
+			--IF r_doc.tc <> '03' THEN
+			IF r_doc.sustento = '06' THEN
+		--
 				LET registro = registro CLIPPED,
-								'<valorRetServicios>',
+								'\t\t<valorRetServicios>',
 									r_doc.serviciosValor USING "<<<<<<<<&.&&",
-								'</valorRetServicios>',
-								'<valRetServ100>0.00</valRetServ100>'
+								'</valorRetServicios>\n',
+								'\t\t<valRetServ100>0.00</valRetServ100>\n'
 			ELSE
 				LET registro = registro CLIPPED,
-								'<valorRetServicios>0.00</valorRetServicios>',
-								'<valRetServ100>',
+								'\t\t<valorRetServicios>0.00',
+								'</valorRetServicios>\n',
+								'\t\t<valRetServ100>',
 									r_doc.serviciosValor USING "<<<<<<<<&.&&",
-								'</valRetServ100>'
+								'</valRetServ100>\n'
 			END IF
 			LET registro = registro CLIPPED,
-			'<totbasesImpReemb>0.00</totbasesImpReemb>',
- 			'<pagoExterior>',
-				'<pagoLocExt>01</pagoLocExt>',
-				'<tipoRegi>01</tipoRegi>',
-				'<paisEfecPagoGen>NA</paisEfecPagoGen>',
-				'<paisEfecPago>NA</paisEfecPago>',
-				'<aplicConvDobTrib>NA</aplicConvDobTrib>',
-				'<pagExtSujRetNorLeg>NA</pagExtSujRetNorLeg>',
- 			'</pagoExterior>',
-			'<formasDePago>',
-				'<formaPago>01</formaPago>',
-			'</formasDePago>'
-	LET salida = at_air(r_adi.proveedor, r_adi.nomprov,
-						r_adi.tipo, r_adi.numero) CLIPPED
-	IF salida IS NOT NULL THEN
+			'\t\t<totbasesImpReemb>0.00</totbasesImpReemb>\n',
+ 			'\t\t<pagoExterior>\n',
+				'\t\t\t<pagoLocExt>01</pagoLocExt>\n',
+				'\t\t\t<paisEfecPago>NA</paisEfecPago>\n',
+				'\t\t\t<aplicConvDobTrib>NA</aplicConvDobTrib>\n',
+				'\t\t\t<pagExtSujRetNorLeg>NA</pagExtSujRetNorLeg>\n',
+ 			'\t\t</pagoExterior>\n'
+
+		{** Según lo validado por el DIMM para el ATS de compras
+			Solo se declara la forma de pago cuando la base imponible es
+			menor a $ 1000.00
+		**}
+
+			IF (r_doc.base_con + r_doc.monto_iva + r_doc.monto_ice) >= 1000 THEN
+				LET registro = registro CLIPPED,
+								'\t\t<formasDePago>\n',
+									'\t\t\t<formaPago>20</formaPago>\n',
+								'\t\t</formasDePago>\n'
+			END IF
+		--
+
+	{** Esta condicion es validar que el tipo de comprobante de una N/C 
+		no le ponga los campos de retencion en el ATS
+	**}
+	--
+	IF r_doc.tc <> '04' THEN
+		LET salida = at_air(r_adi.proveedor, r_adi.nomprov,
+							r_adi.tipo, r_adi.numero)
+		IF salida IS NOT NULL THEN
+			LET registro = registro CLIPPED,
+				'\t\t<air>\n', salida CLIPPED, '\t\t</air>\n'
+		END IF
+		LET salida = NULL
+		LET salida = datos_ret(r_adi.proveedor, r_adi.nomprov,
+								r_adi.tipo, r_adi.numero, 'F') CLIPPED
+		IF salida IS NOT NULL THEN
+			LET registro = registro CLIPPED, salida CLIPPED
+		END IF
+		LET salida = NULL
+		LET salida = datos_ret(r_adi.proveedor, r_adi.nomprov,
+								r_adi.tipo, r_adi.numero, 'I') CLIPPED
+		IF salida IS NOT NULL THEN
+			LET registro = registro CLIPPED, salida CLIPPED
+		END IF
+		LET salida = NULL
+	ELSE
+		CALL fl_lee_cabecera_transaccion_rep(vg_codcia, vg_codloc, r_adi.tipo, 
+											r_adi.numero)
+			RETURNING r_r19.*
+		CALL fl_lee_cabecera_transaccion_rep(vg_codcia, vg_codloc,
+											r_r19.r19_tipo_dev, 
+											r_r19.r19_num_dev)
+			RETURNING r_r19.*
+		INITIALIZE r_c13.* TO NULL
+		DECLARE q_c13 CURSOR FOR
+			SELECT * FROM ordt013
+				WHERE c13_compania  = vg_codcia
+				  AND c13_localidad = vg_codloc
+				  AND c13_numero_oc = r_r19.r19_oc_interna
+				  AND c13_estado    = 'E'
+				ORDER BY c13_fecing DESC
+		OPEN q_c13
+		FETCH q_c13 INTO r_c13.*
+		CLOSE q_c13
+		FREE q_c13
 		LET registro = registro CLIPPED,
-			'<air>', salida CLIPPED, '</air>'
+				'\t\t<docModificado>01</docModificado>\n',
+				'\t\t<estabModificado>', r_r19.r19_oc_externa[1, 3] USING "&&&",
+				'</estabModificado>\n',
+				'\t\t<ptoEmiModificado>',r_r19.r19_oc_externa[5, 7] USING "&&&",
+				'</ptoEmiModificado>\n',
+				'\t\t<secModificado>',
+						r_r19.r19_oc_externa[9, long_dig] USING "&&&&&&&&&",
+				'</secModificado>\n',
+				'\t\t<autModificado>', r_c13.c13_num_aut CLIPPED,
+				'</autModificado>\n'
 	END IF
-	LET salida = NULL
-	LET salida = datos_ret(r_adi.proveedor, r_adi.nomprov,
-							r_adi.tipo, r_adi.numero, 'F') CLIPPED
-	IF salida IS NOT NULL THEN
-		LET registro = registro CLIPPED, salida CLIPPED
-	END IF
-	LET salida = NULL
-	LET salida = datos_ret(r_adi.proveedor, r_adi.nomprov,
-							r_adi.tipo, r_adi.numero, 'I') CLIPPED
-	IF salida IS NOT NULL THEN
-		LET registro = registro CLIPPED, salida CLIPPED
-	END IF
-	LET salida = NULL
+	--
+
 	LET registro = registro CLIPPED,
-			'</detalleCompras>'
+			'\t</detalleCompras>'
 	DISPLAY registro CLIPPED
 	LET primera     = 0
 	LET registro    = NULL
 	LET num_ret_ant = NULL
 END FOREACH
-DROP TABLE t1
+DROP TABLE tmp_anexo
 DROP TABLE t3
 CALL fl_mostrar_mensaje('Anexo de Compras Generado OK.', 'info')
 
@@ -685,41 +804,68 @@ DEFINE proveedor	LIKE cxpt020.p20_codprov
 DEFINE nomprov		LIKE cxpt001.p01_nomprov
 DEFINE tipo			LIKE cxpt020.p20_tipo_doc
 DEFINE numero		LIKE cxpt020.p20_num_doc
-DEFINE tempo		CHAR(160)
+DEFINE tempo		VARCHAR(200)
 DEFINE salida		CHAR(1500)
-DEFINE query		CHAR(2500)
+DEFINE query		CHAR(3000)
+DEFINE i, lim		SMALLINT
 
 LET tempo  = NULL
 LET salida = ' '
-LET query  = 'SELECT "<detalleAir><codRetAir>" || TRIM(NVL(p28_codigo_sri, "307"))',
-			' || "</codRetAir> " || "<baseImpAir>" || ',
-			'CASE WHEN p28_codigo_sri = "322" THEN ROUND(p28_valor_base * p28_porcentaje, 2) ELSE p28_valor_base END || "</baseImpAir>" ',
-			'|| "<porcentajeAir>" || CASE WHEN p28_codigo_sri = "322" THEN 1.00 ELSE p28_porcentaje END || ',
-			'"</porcentajeAir>" ||  "<valRetAir>" || p28_valor_ret',
-			' || "</valRetAir></detalleAir>" ',
-			' FROM cxpt027, cxpt028, cxpt020, ordt002 ',
-			' WHERE p27_compania   = ', vg_codcia,
-			'   AND p27_localidad  = ', vg_codloc,
-			'   AND p27_estado     = "A" ',
-			'   AND p28_compania   = p27_compania ',
-			'   AND p28_localidad  = p27_localidad ',
-			'   AND p28_num_ret    = p27_num_ret ',
-			'   AND	p28_tipo_ret   = "F" ',
-			'   AND p28_tipo_doc   = "', tipo, '"',
-			'   AND p28_num_doc    = "', numero, '"',
-			'   AND p28_codprov    = ', proveedor,
-			'   AND p20_compania   = p28_compania ',
-			'   AND p20_localidad  = p28_localidad ',
-			'   AND p20_tipo_doc   = p28_tipo_doc ',
-			'   AND p20_num_doc    = p28_num_doc ',
-			'   AND p20_codprov    = p28_codprov ',
-			'   AND p20_dividendo  = p28_dividendo ',
-			'   AND c02_compania   = p28_compania ',
-			'   AND c02_tipo_ret   = p28_tipo_ret ',
-			'   AND c02_porcentaje = p28_porcentaje	'
+LET query  = 'SELECT "<detalleAir>',
+					 '<codRetAir>" || TRIM(NVL(p28_codigo_sri, "307")) || "',
+					 '</codRetAir>" || "',
+					 '<baseImpAir>" || ',
+						'CASE WHEN p28_codigo_sri = "322" ',
+							'THEN ROUND(p28_valor_base * p28_porcentaje, 2) ',
+							'ELSE p28_valor_base ',
+						'END || "',
+					 '</baseImpAir>" || "',
+					 '<porcentajeAir>" || ',
+						'CASE WHEN p28_codigo_sri = "322" ',
+							'THEN 1.00 ',
+							'ELSE p28_porcentaje ',
+						'END || "',
+					 '</porcentajeAir>" || "',
+					 '<valRetAir>" || p28_valor_ret || "',
+					 '</valRetAir>" || "',
+					 '</detalleAir>" ',
+			'FROM cxpt027, cxpt028, cxpt020, ordt002 ',
+			'WHERE p27_compania   = ', vg_codcia,
+			'  AND p27_localidad  = ', vg_codloc,
+			'  AND p27_estado     = "A" ',
+			'  AND p28_compania   = p27_compania ',
+			'  AND p28_localidad  = p27_localidad ',
+			'  AND p28_num_ret    = p27_num_ret ',
+			'  AND p28_tipo_ret   = "F" ',
+			'  AND p28_tipo_doc   = "', tipo, '"',
+			'  AND p28_num_doc    = "', numero, '"',
+			'  AND p28_codprov    = ', proveedor,
+			'  AND p20_compania   = p28_compania ',
+			'  AND p20_localidad  = p28_localidad ',
+			'  AND p20_tipo_doc   = p28_tipo_doc ',
+			'  AND p20_num_doc    = p28_num_doc ',
+			'  AND p20_codprov    = p28_codprov ',
+			'  AND p20_dividendo  = p28_dividendo ',
+			'  AND c02_compania   = p28_compania ',
+			'  AND c02_tipo_ret   = p28_tipo_ret ',
+			'  AND c02_porcentaje = p28_porcentaje '
 PREPARE cons_air FROM query
 DECLARE q_cons_air CURSOR FOR cons_air
 FOREACH q_cons_air INTO tempo
+	LET lim = LENGTH(tempo) - 1
+	FOR i = 1 TO lim
+		IF tempo[i, i+1] = "><" AND tempo[i, i+4] <> "</det" THEN
+			LET tempo = tempo[1, i], '\n\t\t\t\t', tempo[i+1, lim+1] CLIPPED
+			LET lim   = LENGTH(tempo)
+		END IF
+	END FOR
+	LET lim    = LENGTH(tempo)
+	LET tempo  = '\t\t\t', tempo[1, lim] CLIPPED
+	LET lim    = LENGTH(tempo)
+	LET i      = (lim - LENGTH("</detalleAir>"))
+	LET tempo  = tempo[1, i-1], tempo[i+1, lim] CLIPPED
+	LET lim    = LENGTH(tempo)
+	LET tempo  = tempo[1, lim] CLIPPED, '\n'
 	LET salida = salida CLIPPED, tempo CLIPPED
 END FOREACH
 IF salida = ' ' THEN
@@ -842,30 +988,30 @@ CASE tip_ret
 	WHEN 'F' LET posi = '1'
 	WHEN 'I' LET posi = '2'
 END CASE
-LET salida = '<estabRetencion', posi, '>',
+LET salida = '\t\t<estabRetencion', posi, '>',
 			query_datos_ret(proveedor, tipo, numero,
 					tip_ret, 1, 0) CLIPPED
 			USING "&&&",
-		'</estabRetencion', posi, '>',
-		'<ptoEmiRetencion', posi, '>',
+		'</estabRetencion', posi, '>\n',
+		'\t\t<ptoEmiRetencion', posi, '>',
 			query_datos_ret(proveedor, tipo, numero,
 					tip_ret, 2, 0) CLIPPED
 			USING "&&&",
-		'</ptoEmiRetencion', posi, '>',
-		'<secRetencion', posi, '>',
+		'</ptoEmiRetencion', posi, '>\n',
+		'\t\t<secRetencion', posi, '>',
 			query_datos_ret(proveedor, tipo, numero,
                                         tip_ret, 5, 0) CLIPPED
 			USING "&&&&&&&&&",
-		'</secRetencion', posi, '>',
-		'<autRetencion', posi, '>',
+		'</secRetencion', posi, '>\n',
+		'\t\t<autRetencion', posi, '>',
 			query_datos_ret(proveedor, tipo, numero,
                                         tip_ret, 4, 0) CLIPPED
 			USING "&&&&&&&&&&",
-		'</autRetencion', posi, '>',
-		'<fechaEmiRet', posi, '>',
+		'</autRetencion', posi, '>\n',
+		'\t\t<fechaEmiRet', posi, '>',
 			query_datos_ret(proveedor, tipo, numero,
 					tip_ret, 3, 0) CLIPPED,
-		'</fechaEmiRet', posi, '>'
+		'</fechaEmiRet', posi, '>\n'
 RETURN salida
 
 END FUNCTION

@@ -70,14 +70,15 @@ DEFINE codestablec	LIKE gent037.g37_pref_sucurs
 DEFINE query		CHAR(800)
 DEFINE registro		CHAR(4000)
 DEFINE total_venta	DECIMAL(12,2)
+DEFINE ctos_af		INTEGER
 
 LET vm_fecha_emi_vta = MDY(rm_par.mes_fin, 01, rm_par.anio_fin) + 1 UNITS MONTH
 						- 1 UNITS DAY
 CALL fl_lee_compania(vg_codcia) RETURNING r_g01.*
 CALL fl_lee_localidad(vg_codcia, vg_codloc) RETURNING r_g02.*
 CALL control_generar_anexo_ventas(1)
-DISPLAY '<?xml version="1.0" encoding="UTF-8"?>'
-DISPLAY '<iva xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
+DISPLAY '<?xml version="1.0" encoding="UTF-8" standalone="no"?>'
+DISPLAY '<iva>'
 DISPLAY '<TipoIDInformante>R</TipoIDInformante>'
 DISPLAY '<IdInformante>', r_g02.g02_numruc CLIPPED, '</IdInformante>'
 DISPLAY '<razonSocial>', r_g01.g01_razonsocial CLIPPED, '</razonSocial>'
@@ -115,29 +116,56 @@ DISPLAY '<numEstabRuc>', codestablec, '</numEstabRuc>'
 DISPLAY '<totalVentas>', total_venta USING "<<<<<<<<<<<&.&&", '</totalVentas>'
 DISPLAY '<codigoOperativo>IVA</codigoOperativo>'
 DISPLAY '<compras>'
-CALL control_generar_anexo_compras()
+	CALL control_generar_anexo_compras()
 DISPLAY '</compras>'
 DISPLAY '<ventas>'
-CALL control_generar_anexo_ventas(2)
+	CALL control_generar_anexo_ventas(2)
 DISPLAY '</ventas>'
 DISPLAY '<ventasEstablecimiento>'
-DISPLAY '<ventaEst>'
-DISPLAY '<codEstab>', codestablec, '</codEstab>'
-DISPLAY '<ventasEstab>', total_venta USING "<<<<<<<<<<<&.&&", '</ventasEstab>'
-DISPLAY '<ivaComp>0.00</ivaComp>'
-DISPLAY '</ventaEst>'
+DISPLAY '\t<ventaEst>'
+DISPLAY '\t\t<codEstab>', codestablec, '</codEstab>'
+DISPLAY '\t\t<ventasEstab>', total_venta USING "<<<<<<<<<<<&.&&", '</ventasEstab>'
+DISPLAY '\t\t<ivaComp>0.00</ivaComp>'
+DISPLAY '\t</ventaEst>'
 DISPLAY '</ventasEstablecimiento>'
+
+{** ESTAS ETIQUETAS SON PARTE DEL ANEXO, PERO NO DEBEN IR SI NO HAY DATOS
+ --
 DISPLAY '<exportaciones>'
 DISPLAY '</exportaciones>'
 DISPLAY '<recap>'
 DISPLAY '</recap>'
 DISPLAY '<fideicomisos>'
 DISPLAY '</fideicomisos>'
-DISPLAY '<anulados>'
-CALL control_generar_anexo_anulados()
-DISPLAY '</anulados>'
+ --
+ **}
+
+{** Se valida preguntando si existen Facturas Anuladas en el periodo de la
+	generación del ATS
+ **}
+
+SELECT COUNT(*) INTO ctos_af
+	FROM rept019
+	WHERE r19_compania      = vg_codcia
+	  AND r19_localidad     = vg_codloc
+	  AND r19_cod_tran      = 'AF'
+	  AND YEAR(r19_fecing)  = rm_par.anio_fin
+	  AND MONTH(r19_fecing) = rm_par.mes_fin
+
+IF ctos_af > 0 THEN
+	DISPLAY '<anulados>'
+		CALL control_generar_anexo_anulados()
+	DISPLAY '</anulados>'
+END IF
+--
+
+{** ESTAS ETIQUETAS SON PARTE DEL ANEXO, PERO NO DEBEN IR SI NO HAY DATOS
+ --
 DISPLAY '<rendFinancieros>'
 DISPLAY '</rendFinancieros>'
+ --
+ **}
+
 DISPLAY '</iva>'
 CALL fl_mostrar_mensaje('Anexo Transaccional Generado OK.', 'info')
 
