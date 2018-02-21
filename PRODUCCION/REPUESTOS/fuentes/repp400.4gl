@@ -23,7 +23,9 @@ MAIN
 DEFER QUIT 
 DEFER INTERRUPT
 CLEAR SCREEN
-CALL startlog('../logs/repp400.err')
+LET vg_proceso = arg_val(0)
+
+CALL startlog('../logs/' || vg_proceso CLIPPED || '.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
 IF num_args() <> 4 THEN   -- Validar # parámetros correcto
@@ -34,7 +36,6 @@ LET vg_base    = arg_val(1)
 LET vg_modulo  = arg_val(2)
 LET vg_codcia  = arg_val(3)
 LET vg_codloc  = arg_val(4)
-LET vg_proceso = 'repp400'
 CALL fl_activar_base_datos(vg_base)
 CALL fl_seteos_defaults()	
 --#CALL fgl_settitle(vg_proceso || ' - ' || vg_producto)
@@ -439,11 +440,11 @@ ON EVERY ROW
 	      COLUMN 15,  factura,
 	      COLUMN 31,  r_r38.r38_num_sri,
 	      COLUMN 48,  r_rep.r19_nomcli[1, 27],
-	      COLUMN 76,  r_rep.r19_tot_bruto USING "---,---,--&.##",
-	      COLUMN 91,  r_rep.r19_tot_dscto USING "--,---,--&.##",
-	      COLUMN 105, subtotal            USING "--,---,--&.##",
-	      COLUMN 119, valor_iva           USING "--,---,--&.##",
-	      COLUMN 133, r_rep.r19_tot_neto  USING "---,---,--&.##"
+	      COLUMN 77,  r_rep.r19_tot_bruto USING "---,---,--&.##",
+	      COLUMN 92,  r_rep.r19_tot_dscto USING  "--,---,--&.##",
+	      COLUMN 106, subtotal            USING  "--,---,--&.##",
+	      COLUMN 120, valor_iva           USING  "--,---,--&.##",
+	      COLUMN 134, r_rep.r19_tot_neto  USING "---,---,--&.##"
 	
 ON LAST ROW
 	NEED 2 LINES
