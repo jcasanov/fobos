@@ -5449,9 +5449,9 @@ INITIALIZE r_gen.g07_impresora TO NULL
 DECLARE qu_refle CURSOR FOR 
 	SELECT g07_impresora FROM gent007 
 		WHERE g07_user = vg_usuario AND g07_default = 'S'
-OPEN qu_refle
-FETCH qu_refle INTO r_gen.g07_impresora
-CLOSE qu_refle
+OPEN qu_refleext
+FETCH qu_refleext INTO r_gen.g07_impresora
+CLOSE qu_refleext
 CALL fl_lee_impresora(r_gen.g07_impresora) RETURNING r_gen2.*
 DISPLAY BY NAME r_gen2.g06_nombre
 LET int_flag = 0
