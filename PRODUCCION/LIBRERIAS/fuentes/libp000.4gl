@@ -5427,6 +5427,8 @@ DEFINE codi_aux		LIKE gent006.g06_impresora
 DEFINE nomi_aux		LIKE gent006.g06_nombre
 DEFINE comando		VARCHAR(100)
 DEFINE row_ini		SMALLINT
+DEFINE archivo		VARCHAR(32)
+DEFINE pdf	        VARCHAR(32)
 
 LET row_ini = 4
 IF vg_gui = 0 THEN
@@ -5436,59 +5438,63 @@ OPEN WINDOW w_forext AT row_ini, 9 WITH 10 ROWS, 63 COLUMNS
         ATTRIBUTE(FORM LINE FIRST, COMMENT LINE LAST, MESSAGE LINE LAST,
                    MENU LINE 0, BORDER)
 IF vg_gui = 1 THEN
-	OPEN FORM f_ayuf311 FROM "../../../PRODUCCION/LIBRERIAS/forms/ayuf311"
+	OPEN FORM f_ayuf304 FROM "../../../PRODUCCION/LIBRERIAS/forms/ayuf311"
 ELSE
-	OPEN FORM f_ayuf311 FROM "../../../PRODUCCION/LIBRERIAS/forms/ayuf304c"
+	OPEN FORM f_ayuf304 FROM "../../../PRODUCCION/LIBRERIAS/forms/ayuf304c"
 END IF
-DISPLAY FORM f_ayuf311
+DISPLAY FORM f_ayuf304
 INITIALIZE codi_aux, comando TO NULL
 LET tit_impresion = 'I'
 INITIALIZE r_gen.g07_impresora TO NULL
-DECLARE qu_repoext CURSOR FOR 
+DECLARE qu_refle CURSOR FOR 
 	SELECT g07_impresora FROM gent007 
 		WHERE g07_user = vg_usuario AND g07_default = 'S'
-OPEN qu_repoext
-FETCH qu_repoext INTO r_gen.g07_impresora
-CLOSE qu_repoext
+OPEN qu_refle
+FETCH qu_refle INTO r_gen.g07_impresora
+CLOSE qu_refle
 CALL fl_lee_impresora(r_gen.g07_impresora) RETURNING r_gen2.*
 DISPLAY BY NAME r_gen2.g06_nombre
 LET int_flag = 0
-INPUT BY NAME tit_impresion, r_gen.g07_impresora
+INPUT BY NAME tit_impresion, r_gen.g07_impresora, archivo, pdf
 	WITHOUT DEFAULTS
 	ON KEY(INTERRUPT)
 		LET int_flag = 1
 		EXIT INPUT
 	ON KEY(F2)
 		IF INFIELD(g07_impresora) THEN
-               		CALL fl_ayuda_impresoras(vg_usuario)
-                       		RETURNING codi_aux, nomi_aux
-       		      	LET int_flag = 0
-                      	IF codi_aux IS NOT NULL THEN
-                              	LET r_gen.g07_impresora = codi_aux
-                               	DISPLAY BY NAME r_gen.g07_impresora
-                               	DISPLAY nomi_aux TO g06_nombre
-                       	END IF
-                END IF
-	AFTER FIELD tit_impresion
-		IF tit_impresion <> 'I' THEN
-			EXIT INPUT
+			CALL fl_ayuda_impresoras(vg_usuario) RETURNING codi_aux, nomi_aux
+			LET int_flag = 0
+			IF codi_aux IS NOT NULL THEN
+				LET r_gen.g07_impresora = codi_aux
+				DISPLAY BY NAME r_gen.g07_impresora
+   				DISPLAY nomi_aux TO g06_nombre
+			END IF
 		END IF
-		IF tit_impresion = 'P' THEN
-                        LET r_gen.g07_impresora = NULL
-			CLEAR g07_impresora, g06_nombre
+	AFTER FIELD tit_impresion
+		CASE tit_impresion 
+			WHEN 'P'
+            	INITIALIZE r_gen.g07_impresora, archivo, pdf TO NULL
+				CLEAR g07_impresora, g06_nombre, archivo, pdf
+			WHEN 'I'
+				NEXT FIELD g07_impresora
+			WHEN 'A'
+				NEXT FIELD archivo
+			WHEN 'F'
+				NEXT FIELD pdf
+		END CASE
+	BEFORE FIELD g07_impresora
+		IF tit_impresion <> 'I' THEN
+			NEXT FIELD NEXT
 		END IF
 	AFTER FIELD g07_impresora
 		IF r_gen.g07_impresora IS NOT NULL THEN
-			CALL fl_lee_impresora(r_gen.g07_impresora)
-				RETURNING r_gen2.*
+			CALL fl_lee_impresora(r_gen.g07_impresora) RETURNING r_gen2.*
 			IF r_gen2.g06_impresora IS NULL THEN
 				CALL fl_mostrar_mensaje('Impresora no existe.','exclamation')
 				NEXT FIELD g07_impresora
 			END IF
 			DISPLAY BY NAME r_gen2.g06_nombre
-			CALL fl_lee_impresora_usr(vg_usuario,
-							r_gen.g07_impresora)
-				RETURNING r_g07.*
+			CALL fl_lee_impresora_usr(vg_usuario, r_gen.g07_impresora) RETURNING r_g07.*
 			IF r_g07.g07_impresora IS NULL THEN
 				CALL fl_mostrar_mensaje('Esta impresora no esta asignada a este usuario.','exclamation')
 				NEXT FIELD g07_impresora
@@ -5496,29 +5502,47 @@ INPUT BY NAME tit_impresion, r_gen.g07_impresora
 		ELSE
 			CLEAR g06_nombre
 		END IF
-	AFTER INPUT
-		IF tit_impresion = 'I' THEN
-			IF r_gen.g07_impresora IS NULL THEN
-				CALL fl_mostrar_mensaje('Escoja una Impresora.','exclamation')
-				NEXT FIELD g07_impresora
-			END IF
+	BEFORE FIELD archivo
+		IF tit_impresion <> 'A' THEN
+			NEXT FIELD NEXT
 		END IF
+	BEFORE FIELD pdf
+		IF tit_impresion <> 'F' THEN
+			NEXT FIELD NEXT
+		END IF
+	AFTER INPUT
+		CASE tit_impresion 
+			WHEN 'I'
+				IF r_gen.g07_impresora IS NULL THEN
+					CALL fl_mostrar_mensaje('Escoja una impresora.','exclamation')
+					NEXT FIELD g07_impresora
+				END IF
+			WHEN 'A'
+				IF archivo IS NULL THEN
+					CALL fl_mostrar_mensaje('Digite un nombre de archivo.','exclamation')
+					NEXT FIELD archivo
+				END IF
+			WHEN 'F'
+				IF pdf IS NULL THEN
+					CALL fl_mostrar_mensaje('Digite un nombre de archivo.','exclamation')
+					NEXT FIELD pdf
+				END IF
+		END CASE
 END INPUT
 IF NOT int_flag THEN
-	IF tit_impresion = 'I' THEN
-		LET comando = 'lpr -o raw -P ', r_gen.g07_impresora
-	END IF
-	IF tit_impresion = 'P' THEN
-		LET comando = 'fglpager'
-	END IF
-	IF tit_impresion = 'A' THEN
-		INITIALIZE r_gen2.g06_nombre TO NULL
-		OPTIONS INPUT NO WRAP
-		INPUT BY NAME r_gen2.g06_nombre
-		LET comando = 'enscript -B -f Courier6.9 -o - | ps2pdf - ', 
-					  FGL_GETENV('HOME') CLIPPED, vg_separador, 
-                      '/tmp', vg_separador, r_gen2.g06_nombre, '.pdf'
-	END IF
+	CASE tit_impresion  
+		WHEN 'I'
+			LET comando = 'lpr -o raw -P ', r_gen.g07_impresora
+		WHEN 'P'
+			LET comando = 'fglpager'
+		WHEN 'A'
+			LET comando = 'cat > ', FGL_GETENV('HOME') CLIPPED, vg_separador, 
+                                    'tmp', vg_separador, archivo CLIPPED, '.wri'
+		WHEN 'F'
+			LET comando = 'enscript -B -f Courier6.9 -o - | ps2pdf - ', 
+					  		FGL_GETENV('HOME') CLIPPED, vg_separador, 
+                      		'tmp', vg_separador, pdf CLIPPED, '.pdf'
+	END CASE
 END IF
 CLOSE WINDOW w_forext
 RETURN tit_impresion, comando
@@ -5536,6 +5560,7 @@ DEFINE codi_aux		LIKE gent006.g06_impresora
 DEFINE nomi_aux		LIKE gent006.g06_nombre
 DEFINE comando		VARCHAR(100)
 DEFINE row_ini		SMALLINT
+DEFINE archivo		VARCHAR(32)
 
 LET row_ini = 4
 IF vg_gui = 0 THEN
@@ -5562,42 +5587,44 @@ CLOSE qu_refle
 CALL fl_lee_impresora(r_gen.g07_impresora) RETURNING r_gen2.*
 DISPLAY BY NAME r_gen2.g06_nombre
 LET int_flag = 0
-INPUT BY NAME tit_impresion, r_gen.g07_impresora
+INPUT BY NAME tit_impresion, r_gen.g07_impresora, archivo
 	WITHOUT DEFAULTS
 	ON KEY(INTERRUPT)
 		LET int_flag = 1
 		EXIT INPUT
 	ON KEY(F2)
 		IF INFIELD(g07_impresora) THEN
-               		CALL fl_ayuda_impresoras(vg_usuario)
-                       		RETURNING codi_aux, nomi_aux
-       		      	LET int_flag = 0
-                      	IF codi_aux IS NOT NULL THEN
-                              	LET r_gen.g07_impresora = codi_aux
-                               	DISPLAY BY NAME r_gen.g07_impresora
-                               	DISPLAY nomi_aux TO g06_nombre
-                       	END IF
-                END IF
-	AFTER FIELD tit_impresion
-		IF tit_impresion <> 'I' THEN
-			EXIT INPUT
+			CALL fl_ayuda_impresoras(vg_usuario) RETURNING codi_aux, nomi_aux
+			LET int_flag = 0
+			IF codi_aux IS NOT NULL THEN
+				LET r_gen.g07_impresora = codi_aux
+				DISPLAY BY NAME r_gen.g07_impresora
+   				DISPLAY nomi_aux TO g06_nombre
+			END IF
 		END IF
-		IF tit_impresion = 'P' THEN
-                        LET r_gen.g07_impresora = NULL
-			CLEAR g07_impresora, g06_nombre
+	AFTER FIELD tit_impresion
+		CASE tit_impresion 
+			WHEN 'P'
+            	INITIALIZE r_gen.g07_impresora, archivo TO NULL
+				CLEAR g07_impresora, g06_nombre, archivo
+			WHEN 'I'
+				NEXT FIELD g07_impresora
+			WHEN 'A'
+				NEXT FIELD archivo
+		END CASE
+	BEFORE FIELD g07_impresora
+		IF tit_impresion <> 'I' THEN
+			NEXT FIELD NEXT
 		END IF
 	AFTER FIELD g07_impresora
 		IF r_gen.g07_impresora IS NOT NULL THEN
-			CALL fl_lee_impresora(r_gen.g07_impresora)
-				RETURNING r_gen2.*
+			CALL fl_lee_impresora(r_gen.g07_impresora) RETURNING r_gen2.*
 			IF r_gen2.g06_impresora IS NULL THEN
 				CALL fl_mostrar_mensaje('Impresora no existe.','exclamation')
 				NEXT FIELD g07_impresora
 			END IF
 			DISPLAY BY NAME r_gen2.g06_nombre
-			CALL fl_lee_impresora_usr(vg_usuario,
-							r_gen.g07_impresora)
-				RETURNING r_g07.*
+			CALL fl_lee_impresora_usr(vg_usuario, r_gen.g07_impresora) RETURNING r_g07.*
 			IF r_g07.g07_impresora IS NULL THEN
 				CALL fl_mostrar_mensaje('Esta impresora no esta asignada a este usuario.','exclamation')
 				NEXT FIELD g07_impresora
@@ -5605,21 +5632,34 @@ INPUT BY NAME tit_impresion, r_gen.g07_impresora
 		ELSE
 			CLEAR g06_nombre
 		END IF
-	AFTER INPUT
-		IF tit_impresion = 'I' THEN
-			IF r_gen.g07_impresora IS NULL THEN
-				CALL fl_mostrar_mensaje('Escoja una Impresora.','exclamation')
-				NEXT FIELD g07_impresora
-			END IF
+	BEFORE FIELD archivo
+		IF tit_impresion <> 'A' THEN
+			NEXT FIELD NEXT
 		END IF
+	AFTER INPUT
+		CASE tit_impresion 
+			WHEN 'I'
+				IF r_gen.g07_impresora IS NULL THEN
+					CALL fl_mostrar_mensaje('Escoja una impresora.','exclamation')
+					NEXT FIELD g07_impresora
+				END IF
+			WHEN 'A'
+				IF archivo IS NULL THEN
+					CALL fl_mostrar_mensaje('Digite un nombre de archivo.','exclamation')
+					NEXT FIELD g07_impresora
+				END IF
+		END CASE
 END INPUT
 IF NOT int_flag THEN
-	IF tit_impresion = 'I' THEN
-		LET comando = 'lpr -o raw -P ', r_gen.g07_impresora
-	END IF
-	IF tit_impresion = 'P' THEN
-		LET comando = 'fglpager'
-	END IF
+	CASE tit_impresion  
+		WHEN 'I'
+			LET comando = 'lpr -o raw -P ', r_gen.g07_impresora
+		WHEN 'P'
+			LET comando = 'fglpager'
+		WHEN 'A'
+			LET comando = 'cat > $HOME', vg_separador, 'tmp',  
+                                         vg_separador, archivo CLIPPED, '.wri'
+	END CASE
 END IF
 CLOSE WINDOW w_for
 RETURN comando
