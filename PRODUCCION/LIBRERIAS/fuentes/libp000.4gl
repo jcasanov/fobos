@@ -5446,7 +5446,7 @@ DISPLAY FORM f_ayuf304
 INITIALIZE codi_aux, comando TO NULL
 LET tit_impresion = 'I'
 INITIALIZE r_gen.g07_impresora TO NULL
-DECLARE qu_refle CURSOR FOR 
+DECLARE qu_refleext CURSOR FOR 
 	SELECT g07_impresora FROM gent007 
 		WHERE g07_user = vg_usuario AND g07_default = 'S'
 OPEN qu_refleext
