@@ -1,0 +1,59 @@
+DATABASE aceros
+SCREEN
+{
+   Localidad: [c000]
+     Usuario: [c001      ] [c002                          ]
+       Fecha: [c003      ]
+                                                             [c004] de [c005]
+  [c1|c011                          |c012                |c013     |c014     ]
+ [c2|c021                          |c022                |c023     |c024     ]
+ [c2|c021                          |c022                |c023     |c024     ]
+ [c2|c021                          |c022                |c023     |c024     ]
+ [c2|c021                          |c022                |c023     |c024     ]
+ [c2|c021                          |c022                |c023     |c024     ]
+ [c2|c021                          |c022                |c023     |c024     ]
+ [c2|c021                          |c022                |c023     |c024     ]
+ [c2|c021                          |c022                |c023     |c024     ]
+ [c2|c021                          |c022                |c023     |c024     ]
+ [c2|c021                          |c022                |c023     |c024     ]
+ [c2|c021                          |c022                |c023     |c024     ]
+ [c2|c021                          |c022                |c023     |c024     ]
+ [c2|c021                          |c022                |c023     |c024     ]
+ [c2|c021                          |c022                |c023     |c024     ]
+}
+TABLES
+gent005
+gent015
+gent050
+gent100
+gent101
+ATTRIBUTES
+c000 = gent100.g100_localidad, AUTONEXT, REVERSE, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c001 = gent100.g100_usuario, AUTONEXT, UPSHIFT,
+	WIDGET = 'FIELD_BMP', CONFIG = 'lista.bmp F2';
+c002 = gent005.g05_nombres, NOENTRY, UPSHIFT;
+c003 = gent100.g100_fecha, AUTONEXT, UPSHIFT, REVERSE, FORMAT = 'dd-mm-yyyy',
+	COMMENTS = 'Digite la fecha en formato dd-mm-aaaa.';
+
+c004 = FORMONLY.num_row, NOENTRY, REVERSE, UPSHIFT;
+c005 = FORMONLY.max_row, NOENTRY, REVERSE, UPSHIFT;
+
+c1   = FORMONLY.tit_col1 , WIDGET = 'BUTTON', CONFIG = 'F15'; 
+c011 = FORMONLY.tit_col2 , WIDGET = 'BUTTON', CONFIG = 'F16'; 
+c012 = FORMONLY.tit_col3 , WIDGET = 'BUTTON', CONFIG = 'F17'; 
+c013 = FORMONLY.tit_col4 , WIDGET = 'BUTTON', CONFIG = 'F18'; 
+c014 = FORMONLY.tit_col5 , WIDGET = 'BUTTON', CONFIG = 'F19'; 
+
+c2   = gent101.g101_tipo, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c021 = gent015.g15_nombre, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c022 = gent050.g50_nombre, NOENTRY, UPSHIFT, OPTIONS = '-nolist';
+c023 = gent101.g101_numero_ini, AUTONEXT, UPSHIFT, FORMAT = "#######&",
+	INCLUDE = (0 TO 999999999), OPTIONS = '-nolist';
+c024 = gent101.g101_numero_fin, AUTONEXT, UPSHIFT, FORMAT = "#######&",
+	INCLUDE = (0 TO 999999999), OPTIONS = '-nolist';
+END
+INSTRUCTIONS
+DELIMITERS '||'
+SCREEN RECORD rm_detalle[14] (g101_tipo, g15_nombre, g50_nombre,
+								g101_numero_ini, g101_numero_fin)

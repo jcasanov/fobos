@@ -4709,7 +4709,8 @@ DISPLAY "Zonas de Venta "       TO c2300  ## Botón 23 genp122
 DISPLAY "Centros de Costos"     TO c2400  ## Botón 24 genp123
 DISPLAY "Departamentos"         TO c2500  ## Botón 25 genp124
 DISPLAY "Cargos" 		TO c2600  ## Botón 26 genp125
-DISPLAY "Dias Feriados" 	TO c2700  ## Botón 27 genp126
+--DISPLAY "Dias Feriados" 	TO c2700  ## Botón 27 genp126
+DISPLAY "Cambio Fecha Sist." 	TO c2700  ## Botón 27 genp145
 --DISPLAY "Módulos/Bases Datos"   TO c2800  ## Botón 28 genp127
 DISPLAY "Procesos por Módulos"  TO c2900  ## Botón 29 genp128
 DISPLAY "Usuarios Modulo/Cía"   TO c3000  ## Botón 30 genp129
@@ -4929,12 +4930,13 @@ CASE c
 		RUN ejecuta
 	WHEN 3021
 		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
-							'GE', 'genp126')
+							'GE', 'genp145')
 		THEN
 			EXIT CASE
 		END IF
-		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'GENERALES', vg_separador, 'fuentes', vg_separador, '; fglrun genp126 ', vg_base, ' ', 'GE'
+		LET ejecuta = 'cd ..', vg_separador, '..', vg_separador, 'GENERALES', vg_separador, 'fuentes', vg_separador, '; fglrun genp145 ', vg_base, ' ', 'GE', ' ', vg_codcia
 		RUN ejecuta
+		EXIT PROGRAM
 	WHEN 3022
 		IF NOT fl_control_acceso_proceso_men(vg_usuario, vg_codcia,
 							'GE', 'genp128')
