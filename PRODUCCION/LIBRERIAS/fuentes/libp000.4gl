@@ -10150,7 +10150,31 @@ END FUNCTION
 
 FUNCTION fl_retorna_fecha_proceso()
 
+DEFINE fecha DATE
+
 INITIALIZE vg_fecha TO NULL
+
+{*
+ * Para determinar el valor de vg_fecha primero se verifica:
+ * * la variable de ambiente FOBOS_FECHA
+ * * tabla fobos
+ * * TODAY 
+ *}
+
+{*
+ * La variable FOBOS_FECHA debe tener formato dd/mm/aaaa 
+ * de lo contrario se carga NULL
+ *}
+IF FGL_GETENV('FOBOS_FECHA') IS NOT NULL THEN
+	LET fecha = FGL_GETENV('FOBOS_FECHA')
+	IF fecha IS NULL THEN
+		CALL fl_mostrar_mensaje('El formato de fecha es incorrecto.', 'stop')
+		EXIT PROGRAM
+	END IF
+	LET vg_fecha = fecha
+	RETURN
+END IF
+
 SELECT fb_fechasist INTO vg_fecha FROM fobos WHERE fb_usar_fechasist = 'S' 
 IF vg_fecha IS NULL THEN
 	LET vg_fecha = TODAY
