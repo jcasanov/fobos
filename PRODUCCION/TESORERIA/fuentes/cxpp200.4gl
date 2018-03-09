@@ -583,12 +583,6 @@ INPUT BY NAME rm_p20.p20_codprov, rm_p20.p20_tipo_doc, rm_p20.p20_num_doc,
 				CALL fgl_winmessage(vg_producto,'Tipo de documento debe ser deudor.','exclamation')
 				NEXT FIELD p20_tipo_doc
 			END IF
-			IF rm_p20.p20_tipo_doc <> 'DO'
-			AND rm_p20.p20_tipo_doc <> 'FA'
-			AND rm_p20.p20_tipo_doc <> 'ND' THEN
-				CALL fgl_winmessage(vg_producto,'Tipo de documento debe ser deudor.','exclamation')
-				NEXT FIELD p20_tipo_doc
-			END IF
 			IF rm_p20.p20_tipo_doc = 'FA' THEN
 				CALL fl_mostrar_mensaje('Las FACTURAS DE PROVEEDORES se ingresan por la opcion INGRESO FACTURAS del menu transacciones.','exclamation')
 				NEXT FIELD p20_tipo_doc
