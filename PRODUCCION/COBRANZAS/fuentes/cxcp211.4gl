@@ -1859,20 +1859,13 @@ END FUNCTION
 FUNCTION fecha_ultima()
 DEFINE fec_ult		DATE
 DEFINE codloc		LIKE gent002.g02_localidad
-DEFINE bas_aux		CHAR(20)
 DEFINE query		CHAR(800)
 
-LET codloc  = vg_codloc
-LET bas_aux = vg_base
-IF vg_codloc = 4 OR vg_codloc = 5 THEN
-	LET codloc  = 3
-	LET bas_aux = 'acero_qm'
-END IF
 LET query = 'SELECT MAX(MDY(s21_mes, 01, s21_anio) ',
 		'+ 1 UNITS MONTH - 1 UNITS DAY) + 1 UNITS DAY ',
-		'FROM ', bas_aux CLIPPED, ':srit021 ',
+		'FROM srit021 ',
 		'WHERE s21_compania   = ', vg_codcia,
-		'  AND s21_localidad  = ', codloc,
+		'  AND s21_localidad  = ', vg_codloc,
 		'  AND s21_estado    IN ("D", "C") '
 PREPARE c_fec_ult FROM query
 DECLARE q_fec_ult CURSOR FOR c_fec_ult
@@ -2859,62 +2852,59 @@ BEGIN WORK
 		LET segundo = segundo + 1
 	END FOREACH
 COMMIT WORK
-IF vg_base <> 'acero_gc' AND vg_base <> 'acero_qs' THEN
-	DECLARE q_doc CURSOR WITH HOLD FOR
-		SELECT UNIQUE tipo_sol, num_sol, tip_trn, num_trn, tip_ec,
-			num_ec
-			FROM tmp_doc
-			ORDER BY 1, 2
-	FOREACH q_doc INTO vm_tipo_fue, vm_num_sol, r_z22.z22_tipo_trn,
-				r_z22.z22_num_trn, r_j10.j10_tipo_fuente,
-				r_j10.j10_num_fuente
-		CALL fl_contabilizacion_trans_caja_ret(vg_codcia, vg_codloc,
+
+{* La contabilización debe hacerse en su propia transacción *}
+DECLARE q_doc CURSOR WITH HOLD FOR
+	SELECT UNIQUE tipo_sol, num_sol, tip_trn, num_trn, tip_ec, num_ec
+  	  FROM tmp_doc
+	  ORDER BY 1, 2
+
+FOREACH q_doc INTO vm_tipo_fue, vm_num_sol, r_z22.z22_tipo_trn, r_z22.z22_num_trn, 
+                   r_j10.j10_tipo_fuente, r_j10.j10_num_fuente
+	CALL fl_contabilizacion_trans_caja_ret(vg_codcia, vg_codloc,
 							vm_tipo_fue, vm_num_sol,
 							r_z22.z22_tipo_trn,
 							r_z22.z22_num_trn)
-		IF r_z22.z22_tipo_trn IS NULL THEN
-			CONTINUE FOREACH
-		END IF
-		IF tipo = 'P' THEN
-			CONTINUE FOREACH
-		END IF
-		CALL fl_contabilizacion_trans_caja_ret(vg_codcia, vg_codloc,
+	IF r_z22.z22_tipo_trn IS NULL THEN
+		CONTINUE FOREACH
+	END IF
+	IF tipo = 'P' THEN
+		CONTINUE FOREACH
+	END IF
+	CALL fl_contabilizacion_trans_caja_ret(vg_codcia, vg_codloc,
 						r_z22.z22_tipo_trn,
 						r_z22.z22_num_trn,
 						vm_tipo_fue, vm_num_sol)
-		UPDATE cajt010
-			SET j10_tip_contable =
-				(SELECT UNIQUE z40_tipo_comp
-					FROM cxct040
-					WHERE z40_compania  = j10_compania
-					  AND z40_localidad = j10_localidad
-					  AND z40_codcli    = j10_codcli
-					  AND z40_tipo_doc  = r_z22.z22_tipo_trn
-					  AND z40_num_doc   =r_z22.z22_num_trn),
-			    j10_num_contable =
-				(SELECT UNIQUE z40_num_comp
-					FROM cxct040
-					WHERE z40_compania  = j10_compania
-					  AND z40_localidad = j10_localidad
-					  AND z40_codcli    = j10_codcli
-					  AND z40_tipo_doc  = r_z22.z22_tipo_trn
-					  AND z40_num_doc   = r_z22.z22_num_trn)
-			WHERE j10_compania    = vg_codcia
-			  AND j10_localidad   = vg_codloc
-			  AND j10_tipo_fuente = r_j10.j10_tipo_fuente
-			  AND j10_num_fuente  = r_j10.j10_num_fuente
-	END FOREACH
-END IF
+	UPDATE cajt010
+	   SET j10_tip_contable = (SELECT UNIQUE z40_tipo_comp
+					             FROM cxct040
+				            	WHERE z40_compania  = j10_compania
+					              AND z40_localidad = j10_localidad
+					              AND z40_codcli    = j10_codcli
+					              AND z40_tipo_doc  = r_z22.z22_tipo_trn
+					              AND z40_num_doc   =r_z22.z22_num_trn),
+		   j10_num_contable = (SELECT UNIQUE z40_num_comp
+					             FROM cxct040
+								WHERE z40_compania  = j10_compania
+								  AND z40_localidad = j10_localidad
+								  AND z40_codcli    = j10_codcli
+								  AND z40_tipo_doc  = r_z22.z22_tipo_trn
+								  AND z40_num_doc   = r_z22.z22_num_trn)
+	 WHERE j10_compania    = vg_codcia
+	   AND j10_localidad   = vg_codloc
+	   AND j10_tipo_fuente = r_j10.j10_tipo_fuente
+	   AND j10_num_fuente  = r_j10.j10_num_fuente
+END FOREACH
+
 BEGIN WORK
-	CALL actualiza_detalle_retencion(1)
+CALL actualiza_detalle_retencion(1)
 COMMIT WORK
+
 DECLARE q_impr CURSOR FOR SELECT UNIQUE num_sol FROM tmp_doc ORDER BY 1
 FOREACH q_impr INTO vm_num_sol
 	CALL imprime_comprobante(vm_num_sol)
 END FOREACH
-IF vg_base <> 'acero_gc' AND vg_base <> 'acero_qs' THEN
-	CALL imprime_contabilizacion()
-END IF
+CALL imprime_contabilizacion()
 DROP TABLE tmp_doc
 RETURN 1
 
