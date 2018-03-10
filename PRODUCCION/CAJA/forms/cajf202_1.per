@@ -35,7 +35,8 @@ b1   = FORMONLY.tit_col2, WIDGET = 'BUTTON', CONFIG = 'F16';
 b2   = FORMONLY.tit_col3, WIDGET = 'BUTTON', CONFIG = 'F17';
 b3   = FORMONLY.tit_col4, WIDGET = 'BUTTON', CONFIG = 'F18';
 
-c0   = cajt004.j04_fecha_cierre,  REVERSE, NOENTRY;
+c0   = cajt004.j04_fecha_cierre, REVERSE, NOENTRY, FORMAT='dd-mm-yyyy',
+	COMMENT='Digite fecha en formato: dd-mm-aaaa';
 c1   = cajt004.j04_usuario,     REVERSE, NOENTRY;
 c2   = cajt002.j02_nombre_caja, REVERSE, NOENTRY;
 
