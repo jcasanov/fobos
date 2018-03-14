@@ -679,7 +679,7 @@ CALL control_DISPLAY_botones()
 LET int_flag = 0
 IF num_args() = 4 THEN
 	CONSTRUCT BY NAME expr_sql 
-		  ON r21_numprof,  r21_num_tran,  r21_moneda,   
+		  ON r21_numprof,  r21_num_tran,  r21_moneda, r21_fecing,  
 		     r21_codcli,   r21_dias_prof, r21_nomcli, r21_cedruc,
 		     r21_dircli,   r21_telcli,	  r21_atencion, r21_referencia,
 		     r21_forma_pago, r21_vendedor--, r21_trans_fact
