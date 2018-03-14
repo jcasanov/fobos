@@ -2957,19 +2957,6 @@ DEFINE r_z24, r_sol	RECORD LIKE cxct024.*
 INITIALIZE r_z24.* TO NULL
 LET r_z24.z24_compania   = vg_codcia
 LET r_z24.z24_localidad  = vg_codloc
-WHILE TRUE
-	SELECT NVL(MAX(z24_numero_sol), 0) + 1
-		INTO r_z24.z24_numero_sol
-		FROM cxct024
-		WHERE z24_compania  = vg_codcia
-		  AND z24_localidad = vg_codloc
-	CALL fl_lee_solicitud_cobro_cxc(vg_codcia, vg_codloc,
-					r_z24.z24_numero_sol)
-		RETURNING r_sol.*
-	IF r_sol.z24_numero_sol IS NULL THEN
-		EXIT WHILE
-	END IF
-END WHILE
 LET r_z24.z24_areaneg    = rm_par.z20_areaneg
 LET r_z24.z24_linea      = rm_par.z20_linea
 LET r_z24.z24_codcli     = rm_par.z20_codcli
@@ -3020,6 +3007,25 @@ END IF
 LET r_z24.z24_subtipo    = 1
 LET r_z24.z24_usuario    = vg_usuario
 LET r_z24.z24_fecing     = fl_current()
+
+CALL fl_actualiza_control_secuencias(vg_codcia, vg_codloc, vg_modulo,
+										'AA', 'SC')
+	RETURNING r_z24.z24_numero_sol
+IF r_z24.z24_numero_sol = 0 THEN
+	ROLLBACK WORK
+	CALL fl_mostrar_mensaje('No existe control de secuencia para Solicitud de Cobro, no se puede asignar un número de transacción a la operación.','stop')
+	EXIT PROGRAM
+END IF
+IF r_z24.z24_numero_sol = -1 THEN
+	SET LOCK MODE TO WAIT
+	WHILE r_z24.z24_numero_sol = -1
+		CALL fl_actualiza_control_secuencias(vg_codcia, vg_codloc, vg_modulo,
+												'AA', 'SC')
+			RETURNING r_z24.z24_numero_sol
+	END WHILE
+	SET LOCK MODE TO NOT WAIT
+END IF
+
 INSERT INTO cxct024 VALUES (r_z24.*)
 RETURN r_z24.*
 
