@@ -1520,6 +1520,8 @@ DEFINE i		SMALLINT
 DEFINE filas_pant	SMALLINT
 DEFINE tot_val_pagar 	LIKE cxct024.z24_total_cap
 
+DEFINE num_sri		LIKE rept038.r38_num_sri
+
 LET filas_pant = fgl_scr_size('ra_docs')
 
 FOR i = 1 TO filas_pant 
@@ -1564,6 +1566,10 @@ IF vm_fecha[1] >= vg_fecha THEN
 ELSE
 	DISPLAY 'Vencido' TO n_estado_vcto
 END IF
+
+CALL obtener_num_sri(rm_trandocs[1].cod_tran, rm_trandocs[1].num_tran, rm_z24.z24_areaneg) 
+	RETURNING num_sri
+DISPLAY BY NAME num_sri
 
 END FUNCTION
 
