@@ -1090,7 +1090,7 @@ DEFINE salir		SMALLINT
 DEFINE col              SMALLINT
 DEFINE query            CHAR(500)
 
-DEFINE num_sri			rept038.r38_num_sri
+DEFINE num_sri			LIKE rept038.r38_num_sri
 
 CASE flag          
 	WHEN 'I'
@@ -1760,7 +1760,7 @@ DEFINE salir            SMALLINT
 DEFINE col              SMALLINT
 DEFINE query            CHAR(500)
 
-DEFINE num_sri		rept038.r38_num_sri
+DEFINE num_sri		LIKE rept038.r38_num_sri
 
 IF vm_num_rows <= 0 THEN
 	CALL fl_mensaje_consultar_primero()
