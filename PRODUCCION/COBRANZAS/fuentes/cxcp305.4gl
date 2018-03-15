@@ -663,8 +663,7 @@ WHILE TRUE
 				     --#num_tran, codcli, val_original
 				--#FROM temp_doc 
 				--#WHERE ROWID = rm_rowid[i]
-			--#CALL obtener_num_sri(cod_tran, num_tran,
-						--#rm_dcli[i].tit_loc, areaneg)
+			--#CALL obtener_num_sri(cod_tran, num_tran, areaneg)
 				--#RETURNING num_sri
 			--#MESSAGE i, ' de ', vm_num_doc, 
 				--#'    Valor Original: ', 
@@ -688,8 +687,7 @@ WHILE TRUE
 					num_tran, codcli, val_original
 				FROM temp_doc 
 				WHERE ROWID = rm_rowid[i]
-			CALL obtener_num_sri(cod_tran, num_tran,
-						rm_dcli[i].tit_loc, areaneg)
+			CALL obtener_num_sri(cod_tran, num_tran, areaneg)
 				RETURNING num_sri
 			MESSAGE i, ' de ', vm_num_doc, '    Valor Original: ',
 				val_original USING '#,###,###,##&.##',
@@ -2316,37 +2314,28 @@ END FUNCTION
 
 
 
-FUNCTION obtener_num_sri(cod_tran, num_tran, tit_loc, areaneg)
+FUNCTION obtener_num_sri(cod_tran, num_tran, areaneg)
 DEFINE cod_tran		LIKE cxct021.z21_cod_tran
 DEFINE num_tran		LIKE cxct021.z21_num_tran
-DEFINE tit_loc		LIKE gent002.g02_localidad
 DEFINE areaneg		LIKE cxct020.z20_areaneg
 DEFINE r_r38		RECORD LIKE rept038.*
 DEFINE tipo_fuente	LIKE rept038.r38_tipo_fuente
 DEFINE query		CHAR(600)
-DEFINE base_suc		VARCHAR(10)
 
 INITIALIZE r_r38.* TO NULL
 IF cod_tran IS NULL THEN
 	RETURN r_r38.r38_num_sri
 END IF
 LET tipo_fuente = NULL
-LET base_suc    = NULL
 IF areaneg = 1 THEN
 	LET tipo_fuente = 'PR'
 END IF
 IF areaneg = 2 THEN
 	LET tipo_fuente = 'OT'
 END IF
-IF tit_loc = 2 THEN
-	LET base_suc = 'acero_gc:'
-END IF
-IF tit_loc = 4 THEN
-	LET base_suc = 'acero_qs:'
-END IF
-LET query = 'SELECT * FROM ', base_suc CLIPPED, 'rept038',
+LET query = 'SELECT * FROM rept038',
 		' WHERE r38_compania    = ', vg_codcia,
-		'   AND r38_localidad   = ', tit_loc,
+		'   AND r38_localidad   = ', vg_codloc,
 		'   AND r38_tipo_doc   IN ("FA", "NV") ',
 		'   AND r38_tipo_fuente = "', tipo_fuente, '"',
 		'   AND r38_cod_tran    = "', cod_tran, '"',

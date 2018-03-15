@@ -18,7 +18,7 @@ SCREEN
  [a1|c020           |c01|c027            |c026            |c028            ]
                         [c041            |c040            |c042            ]
 
- Fecha de Vencimiento: [c023      |c024        ]                         
+ Fecha de Vencimiento: [c023      |c024        ]        [c025              ]                    
 
  Ingresado Por: [c013      ]         Fecha de Ingreso: [c014               ]
 }
@@ -54,6 +54,9 @@ c028 = FORMONLY.valor_pagar TYPE DECIMAL(12,2), FORMAT='#,###,###,##&.##',
 c023 = FORMONLY.z20_fecha_vcto TYPE DATE, COLOR = RED WHERE c023 < TODAY,  
 	FORMAT = 'dd-mm-yyyy', NOENTRY; 
 c024 = FORMONLY.n_estado_vcto, COLOR = RED WHERE c024 = 'Vencido', NOENTRY; 
+
+c025 = FORMONLY.num_sri, NOENTRY; 
+
 a3   = FORMONLY.bt_tipo_doc,   WIDGET = 'BUTTON', CONFIG = 'F15';
 c030 = FORMONLY.bt_nro_doc,    WIDGET = 'BUTTON', CONFIG = 'F16';
 c02  = FORMONLY.bt_dividendo,  WIDGET = 'BUTTON', CONFIG = 'F17';

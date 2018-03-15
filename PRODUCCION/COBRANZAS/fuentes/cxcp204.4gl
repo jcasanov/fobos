@@ -33,6 +33,10 @@ DEFINE rm_docs		ARRAY[3000] OF RECORD
 			    valor_pagar         DECIMAL (12,2)          
 			END RECORD
 DEFINE vm_fecha		ARRAY[3000] OF LIKE cxct020.z20_fecha_vcto
+DEFINE rm_trandocs	ARRAY[3000] OF RECORD
+				cod_tran			LIKE cxct020.z20_cod_tran,
+				num_tran			LIKE cxct020.z20_num_tran
+END RECORD
 
 
 
@@ -118,9 +122,10 @@ CREATE TEMP TABLE tmp_detalle(
 	interes             DECIMAL(12,2),             
 	capital             DECIMAL(12,2),              
 	valor_pagar         DECIMAL(12,2),
-	fecha_vcto	    DATE
+	fecha_vcto	    	DATE,
+	cod_tran			CHAR(2),
+	num_tran			DECIMAL(15,0)
 )
---CREATE UNIQUE INDEX tmp_pk ON tmp_detalle(tipo_doc ASC, num_doc ASC, dividendo ASC)
 
 FOR i = 1 TO 10
         LET rm_orden[i] = 'ASC'
@@ -1085,6 +1090,8 @@ DEFINE salir		SMALLINT
 DEFINE col              SMALLINT
 DEFINE query            CHAR(500)
 
+DEFINE num_sri			rept038.r38_num_sri
+
 CASE flag          
 	WHEN 'I'
 		CALL lee_dividendos()
@@ -1125,7 +1132,7 @@ WHILE NOT salir
         PREPARE deto FROM query
         DECLARE q_deto CURSOR FOR deto 
         LET i = 1
-        FOREACH q_deto INTO rm_docs[i].*, vm_fecha[i]
+        FOREACH q_deto INTO rm_docs[i].*, vm_fecha[i], rm_trandocs[i].*
 		IF rm_docs[i].valor_pagar IS NULL THEN
 			LET rm_docs[i].valor_pagar = 0
 		END IF
@@ -1266,6 +1273,9 @@ WHILE NOT salir
 			ELSE
 				DISPLAY 'Vencido' TO n_estado_vcto
 			END IF
+			CALL obtener_num_sri(rm_trandocs[i].cod_tran, rm_trandocs[i].num_tran, rm_z24.z24_areaneg) 
+				RETURNING num_sri
+			DISPLAY BY NAME num_sri
 			CALL calcula_totales()
 		BEFORE DELETE	
 			EXIT INPUT
@@ -1330,7 +1340,7 @@ DELETE FROM tmp_detalle
 
 INSERT INTO tmp_detalle
 	SELECT z20_tipo_doc, z20_num_doc, z20_dividendo, z20_saldo_int, 
-	       z20_saldo_cap, 0, z20_fecha_vcto
+	       z20_saldo_cap, 0, z20_fecha_vcto, z20_cod_tran, z20_num_tran
 		FROM cxct020
 		WHERE z20_compania  = vg_codcia
 		  AND z20_localidad = vg_codloc
@@ -1530,7 +1540,7 @@ END IF
 DECLARE q_q1 CURSOR FOR SELECT * FROM tmp_detalle
 	
 LET i = 1
-FOREACH q_q1 INTO rm_docs[i].*, vm_fecha[i]
+FOREACH q_q1 INTO rm_docs[i].*, vm_fecha[i], rm_trandocs[i].*
         LET i = i + 1
         IF i > filas_pant THEN
 		EXIT FOREACH
@@ -1565,7 +1575,8 @@ DELETE FROM tmp_detalle;
 
 INSERT INTO tmp_detalle
 	SELECT z20_tipo_doc, z20_num_doc, z20_dividendo, z20_saldo_int,
-	       z20_saldo_cap, (z25_valor_cap + z25_valor_int), z20_fecha_vcto
+	       z20_saldo_cap, (z25_valor_cap + z25_valor_int), z20_fecha_vcto, 
+		   z20_cod_tran, z20_num_tran
 		FROM cxct020, OUTER cxct025
 		WHERE z20_compania   = vg_codcia
 		  AND z20_localidad  = vg_codloc
@@ -1593,7 +1604,8 @@ DELETE FROM tmp_detalle
 
 INSERT INTO tmp_detalle
 	SELECT z25_tipo_doc, z25_num_doc, z25_dividendo, z20_saldo_int,
-	       z20_saldo_cap, (z25_valor_cap + z25_valor_int), z20_fecha_vcto
+	       z20_saldo_cap, (z25_valor_cap + z25_valor_int), z20_fecha_vcto,
+		   z20_cod_tran, z20_num_tran
 		FROM cxct025, cxct020
 		WHERE z25_compania   = vg_codcia
 		  AND z25_localidad  = vg_codloc
@@ -1748,6 +1760,8 @@ DEFINE salir            SMALLINT
 DEFINE col              SMALLINT
 DEFINE query            CHAR(500)
 
+DEFINE num_sri		rept038.r38_num_sri
+
 IF vm_num_rows <= 0 THEN
 	CALL fl_mensaje_consultar_primero()
 	RETURN
@@ -1769,7 +1783,7 @@ WHILE NOT salir
         PREPARE deto2 FROM query
         DECLARE q_deto2 CURSOR FOR deto2 
         LET i = 1
-        FOREACH q_deto2 INTO rm_docs[i].*, vm_fecha[i]
+        FOREACH q_deto2 INTO rm_docs[i].*, vm_fecha[i], rm_trandocs[i].*
                 LET i = i + 1
                 IF i > vm_max_indice THEN
                         EXIT FOREACH
@@ -1820,6 +1834,9 @@ WHILE NOT salir
 			--#ELSE
 				--#DISPLAY 'Vencido' TO n_estado_vcto
 			--#END IF
+			--#CALL obtener_num_sri(rm_trandocs[i].cod_tran, rm_trandocs[i].num_tran, rm_z24.z24_areaneg) 
+			    --#RETURNING num_sri
+			--#DISPLAY BY NAME num_sri
 		--#BEFORE DISPLAY
 			--#CALL dialog.keysetlabel('ACCEPT', '')
 			--#CALL dialog.keysetlabel("F1","")
@@ -2118,3 +2135,43 @@ LET a = fgl_getkey()
 CLOSE WINDOW w_tf
 
 END FUNCTION
+
+
+
+FUNCTION obtener_num_sri(cod_tran, num_tran, areaneg)
+DEFINE cod_tran		LIKE cxct021.z21_cod_tran
+DEFINE num_tran		LIKE cxct021.z21_num_tran
+DEFINE areaneg		LIKE cxct020.z20_areaneg
+DEFINE r_r38		RECORD LIKE rept038.*
+DEFINE tipo_fuente	LIKE rept038.r38_tipo_fuente
+DEFINE query		CHAR(600)
+
+INITIALIZE r_r38.* TO NULL
+IF cod_tran IS NULL THEN
+	RETURN r_r38.r38_num_sri
+END IF
+LET tipo_fuente = NULL
+IF areaneg = 1 THEN
+	LET tipo_fuente = 'PR'
+END IF
+IF areaneg = 2 THEN
+	LET tipo_fuente = 'OT'
+END IF
+LET query = 'SELECT * FROM rept038',
+		' WHERE r38_compania    = ', vg_codcia,
+		'   AND r38_localidad   = ', vg_codloc,
+		'   AND r38_tipo_doc   IN ("FA", "NV") ',
+		'   AND r38_tipo_fuente = "', tipo_fuente, '"',
+		'   AND r38_cod_tran    = "', cod_tran, '"',
+		'   AND r38_num_tran    = ', num_tran
+PREPARE cons_r38 FROM query
+DECLARE q_r38 CURSOR FOR cons_r38
+OPEN q_r38
+FETCH q_r38 INTO r_r38.*
+CLOSE q_r38
+FREE q_r38
+RETURN r_r38.r38_num_sri
+
+END FUNCTION
+
+
