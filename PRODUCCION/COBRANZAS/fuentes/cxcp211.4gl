@@ -574,16 +574,14 @@ CASE rm_par.z20_areaneg
 	WHEN 1
 		LET tipo_f   = 'PR'
 		LET expr_sub = '   AND NOT EXISTS ',
- 				'(SELECT 1 FROM ', retorna_base_loc() CLIPPED,
-						'rept019 a ',
+ 				'(SELECT 1 FROM rept019 a ',
 				'WHERE a.r19_compania   = z20_compania ',
 				'  AND a.r19_localidad  = z20_localidad ',
 				'  AND a.r19_cod_tran   = z20_cod_tran ',
 				'  AND a.r19_num_tran   = z20_num_tran ',
 				'  AND a.r19_tot_bruto <= ',
 					' (SELECT SUM(r19_tot_bruto) ',
-					'FROM ', retorna_base_loc() CLIPPED,
-						'rept019 b ',
+					'FROM rept019 b ',
 					'WHERE b.r19_compania = a.r19_compania',
 					'  AND b.r19_localidad=a.r19_localidad',
 					'  AND b.r19_cod_tran  IN ("DF", "AF")',
@@ -610,7 +608,7 @@ IF rm_par.tipo_venta = 'R' OR rm_par.tipo_venta = 'T' THEN
 		' 0.00 valor_ret, "N" cheq, z20_num_doc, z20_dividendo,',
 		' r38_num_sri, z20_cod_tran, z20_num_tran,',
 		' r38_num_sri num_r_sri, r38_tipo_fuente, "" ',
-		' FROM cxct020, ', retorna_base_loc() CLIPPED, 'rept038 ',
+		' FROM cxct020, rept038 ',
 		' WHERE z20_compania     = ', vg_codcia,
 		'   AND z20_localidad    = ', vg_codloc,
 		'   AND z20_codcli       = ', rm_par.z20_codcli,
@@ -645,7 +643,7 @@ IF rm_par.tipo_venta = 'R' OR rm_par.tipo_venta = 'T' THEN
 		' 0.00 valor_ret, "N" cheq, z20_num_doc, z20_dividendo,',
 		' r38_num_sri, z20_cod_tran, z20_num_tran,',
 		' r38_num_sri num_r_sri, r38_tipo_fuente, "" ',
-		' FROM cxct020, ', retorna_base_loc() CLIPPED, 'rept038 ',
+		' FROM cxct020, rept038 ',
 		' WHERE z20_compania     = ', vg_codcia,
 		'   AND z20_localidad    = ', vg_codloc,
 		'   AND z20_codcli       = ', rm_par.z20_codcli,
@@ -730,7 +728,7 @@ LET query = 'INSERT INTO tmp_det ',
 		'   AND j11_num_fuente      = j10_num_fuente ',
 		'   AND j11_codigo_pago    NOT IN ',
 			'(SELECT j01_codigo_pago ',
-			'FROM ', retorna_base_loc() CLIPPED, 'cajt001 ',
+			'FROM cajt001 ',
 			'WHERE j01_compania  = j10_compania ',
 			'  AND j01_retencion = "S") ',
 		'   AND NOT EXISTS ',
@@ -1388,7 +1386,7 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 					'c03_tipo_fuente = "B" OR "RJ" = "',
 						cod_pag CLIPPED, '" THEN',
 			' (SELECT r23_tot_bruto - r23_tot_dscto ',
-				'FROM ', retorna_base_loc() CLIPPED, 'rept023 ',
+				'FROM rept023 ',
 				'WHERE r23_compania  = z08_compania ',
 				'  AND r23_localidad = ', vg_codloc,
 				'  AND r23_numprev   = ', num_f,
@@ -1436,7 +1434,7 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 					'c03_tipo_fuente = "B" ',
 				'OR "RJ" = "', cod_pag CLIPPED, '" THEN',
 			' (SELECT r23_tot_bruto - r23_tot_dscto ',
-				'FROM ', retorna_base_loc() CLIPPED, 'rept023 ',
+				'FROM rept023 ',
 				'WHERE r23_compania  = z08_compania ',
 				'  AND r23_localidad = ', vg_codloc,
 				'  AND r23_numprev   = ', num_f,
@@ -1508,7 +1506,7 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 			' CASE WHEN "', tipo_f, '" = "PR" AND ',
 					'c03_tipo_fuente = "B" THEN',
 			' (SELECT r23_flete ',
-				'FROM ', retorna_base_loc() CLIPPED, 'rept023 ',
+				'FROM rept023 ',
 				'WHERE r23_compania  = z08_compania ',
 				'  AND r23_localidad = ', vg_codloc,
 				'  AND r23_numprev   = ', num_f,
@@ -1518,7 +1516,7 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 			' CASE WHEN "', tipo_f, '" = "PR" AND ',
 					'c03_tipo_fuente = "B" THEN',
 			' (SELECT r23_flete ',
-				'FROM ', retorna_base_loc() CLIPPED, 'rept023 ',
+				'FROM rept023 ',
 				'WHERE r23_compania  = z08_compania ',
 				'  AND r23_localidad = ', vg_codloc,
 				'  AND r23_numprev   = ', num_f,
@@ -1547,8 +1545,7 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 			'   AND j91_cont_cred      = "R" ',
 			'   AND j91_tipo_ret       = c02_tipo_ret ',
 			'   AND j91_porcentaje     = c02_porcentaje ',
-			'   AND EXISTS (SELECT 1 FROM ',
-					retorna_base_loc() CLIPPED, 'rept023 ',
+			'   AND EXISTS (SELECT 1 FROM rept023 ',
 				'WHERE r23_compania  = z08_compania ',
 				'  AND r23_localidad = ', vg_codloc,
 				'  AND r23_numprev   = ', num_f,
@@ -1560,7 +1557,7 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 					'c03_tipo_fuente = "B" THEN',
 			' (SELECT r23_tot_neto - r23_tot_bruto + ',
 					'r23_tot_dscto - r23_flete ',
-				'FROM ', retorna_base_loc() CLIPPED, 'rept023 ',
+				'FROM rept023 ',
 				'WHERE r23_compania  = z08_compania ',
 				'  AND r23_localidad = ', vg_codloc,
 				'  AND r23_numprev   = ', num_f,
@@ -1578,7 +1575,7 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 					'c03_tipo_fuente = "B" THEN',
 			' (SELECT r23_tot_neto - r23_tot_bruto + ',
 					'r23_tot_dscto - r23_flete ',
-				'FROM ', retorna_base_loc() CLIPPED, 'rept023 ',
+				'FROM rept023 ',
 				'WHERE r23_compania  = z08_compania ',
 				'  AND r23_localidad = ', vg_codloc,
 				'  AND r23_numprev   = ', num_f,
@@ -2615,7 +2612,7 @@ END IF
 IF cod_tran IS NULL AND num_tran IS NULL THEN
 	RETURN r_r19.*
 END IF
-LET query = 'SELECT * FROM ', retorna_base_loc() CLIPPED, 'rept019 ',
+LET query = 'SELECT * FROM rept019 ',
 		' WHERE r19_compania  = ', codcia,
 		'   AND r19_localidad = ', codloc,
 		'   AND r19_cod_tran  = "', cod_tran, '"',
@@ -2650,7 +2647,7 @@ IF NOT (codloc = 2 OR codloc = 4) THEN
 		  AND r23_num_tran  = num_tran
 	RETURN r_r23.*
 END IF
-LET query = 'SELECT * FROM ', retorna_base_loc() CLIPPED, 'rept023 ',
+LET query = 'SELECT * FROM rept023 ',
 		' WHERE r23_compania  = ', codcia,
 		'   AND r23_localidad = ', codloc,
 		'   AND r23_cod_tran  = "', cod_tran, '"',
@@ -2667,26 +2664,6 @@ END FUNCTION
 
 
 
-FUNCTION retorna_base_loc()
-DEFINE base_loc		VARCHAR(10)
-
-LET base_loc = NULL
-IF NOT (vg_codloc = 2 OR vg_codloc = 4 OR vg_codloc = 5) THEN
-	RETURN base_loc CLIPPED
-END IF
-SELECT g56_base_datos INTO base_loc
-	FROM gent056
-	WHERE g56_compania  = vg_codcia
-	  AND g56_localidad = vg_codloc
-IF base_loc IS NOT NULL THEN
-	LET base_loc = base_loc CLIPPED, ':'
-END IF
-RETURN base_loc CLIPPED
-
-END FUNCTION
-
-
-
 FUNCTION retorna_tipo_doc(posi, tipo_f)
 DEFINE posi		SMALLINT
 DEFINE tipo_f		LIKE cajt010.j10_tipo_fuente
@@ -2696,7 +2673,7 @@ DEFINE query		CHAR(1000)
 LET query = 'SELECT r38_tipo_doc '
 IF (vg_codloc = 2 OR vg_codloc = 4 OR vg_codloc = 5) THEN
 	LET query = query CLIPPED,
-		' FROM ', retorna_base_loc() CLIPPED, 'rept038'
+		' FROM rept038'
 ELSE
 	LET query = query CLIPPED, ' FROM rept038'
 END IF
