@@ -21,8 +21,8 @@ DEFINE rm_par 		RECORD
 				z20_moneda	LIKE cxct020.z20_moneda,
 				g13_nombre	LIKE gent013.g13_nombre,
 				z20_paridad	LIKE cxct020.z20_paridad,
-				z24_zona_cobro	LIKE cxct024.z24_zona_cobro,
-				z06_nombre	LIKE cxct006.z06_nombre
+				z24_cobrador	LIKE cxct024.z24_cobrador,
+				z05_nombres	LIKE cxct005.z05_nombres
 			END RECORD
 DEFINE rm_detalle	ARRAY[20000] OF RECORD
 				z20_localidad	LIKE cxct020.z20_localidad,
@@ -276,18 +276,17 @@ END FUNCTION
 
 FUNCTION lee_parametros()
 DEFINE r_z01		RECORD LIKE cxct001.*
-DEFINE r_z02		RECORD LIKE cxct002.*
-DEFINE r_z06		RECORD LIKE cxct006.*
+DEFINE r_z05		RECORD LIKE cxct005.*
 DEFINE r_g03		RECORD LIKE gent003.*
 DEFINE r_g20		RECORD LIKE gent020.*
 
 LET int_flag = 0
 INPUT BY NAME rm_par.*
 	WITHOUT DEFAULTS
-        ON KEY(INTERRUPT)
+	ON KEY(INTERRUPT)
 		LET int_flag = 1
 		EXIT INPUT
-        ON KEY(F1,CONTROL-W)
+	ON KEY(F1,CONTROL-W)
 		CALL llamar_visor_teclas()
 	ON KEY(F2)
 		IF INFIELD(z20_codcli) THEN
@@ -299,18 +298,6 @@ INPUT BY NAME rm_par.*
 				LET rm_par.z01_nomcli = r_z01.z01_nomcli
 				DISPLAY BY NAME rm_par.z20_codcli,
 						rm_par.z01_nomcli
-				IF rm_par.tipo_venta <> 'C' THEN
-					CONTINUE INPUT
-				END IF
-				CALL fl_lee_cliente_localidad(vg_codcia,
-							vg_codloc,
-							rm_par.z20_codcli)
-			 		RETURNING r_z02.*
-				LET rm_par.z24_zona_cobro = r_z02.z02_zona_cobro
-				CALL fl_lee_zona_cobro(rm_par.z24_zona_cobro)
-					RETURNING r_z06.*
-				DISPLAY BY NAME rm_par.z24_zona_cobro,
-						r_z06.z06_nombre
 			END IF
 		END IF
 		IF INFIELD(z20_areaneg) THEN
@@ -349,43 +336,35 @@ INPUT BY NAME rm_par.*
 						rm_par.g03_nombre
 			END IF
 		END IF
-		IF INFIELD(z24_zona_cobro) THEN
+		IF INFIELD(z24_cobrador) THEN
 			IF rm_par.tipo_venta = 'C' THEN
 				CONTINUE INPUT
 			END IF
-			IF r_z02.z02_zona_cobro IS NOT NULL THEN
-				CONTINUE INPUT
-			END IF
-			CALL fl_ayuda_zona_cobro('T', 'A')
-				RETURNING r_z06.z06_zona_cobro, r_z06.z06_nombre
-			IF r_z06.z06_zona_cobro IS NOT NULL THEN
-				LET rm_par.z24_zona_cobro = r_z06.z06_zona_cobro
-				LET rm_par.z06_nombre     = r_z06.z06_nombre
-				DISPLAY BY NAME rm_par.z24_zona_cobro,
-						rm_par.z06_nombre
+			CALL fl_ayuda_cobradores(vg_codcia, 'T', 'T', 'A')
+				RETURNING r_z05.z05_codigo, r_z05.z05_nombres
+			IF r_z05.z05_codigo IS NOT NULL THEN
+				LET rm_par.z24_cobrador = r_z05.z05_codigo
+				LET rm_par.z05_nombres  = r_z05.z05_nombres
+				DISPLAY BY NAME rm_par.z24_cobrador, rm_par.z05_nombres
 			END IF
 		END IF
 		LET int_flag = 0
 	BEFORE INPUT
 		--#CALL dialog.keysetlabel("F1","")
 		--#CALL dialog.keysetlabel("CONTROL-W","")
-	BEFORE FIELD z24_zona_cobro
+	BEFORE FIELD z24_cobrador
 		IF rm_par.tipo_venta = 'C' THEN
-			LET rm_par.z24_zona_cobro = NULL
-			LET rm_par.z06_nombre     = NULL
-			DISPLAY BY NAME rm_par.z24_zona_cobro, rm_par.z06_nombre
+			LET rm_par.z24_cobrador = NULL
+			LET rm_par.z05_nombres  = NULL
+			DISPLAY BY NAME rm_par.z24_cobrador, rm_par.z05_nombres
 			CONTINUE INPUT
 		END IF
-		CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc,
-						rm_par.z20_codcli)
-			RETURNING r_z02.*
-		IF r_z02.z02_zona_cobro IS NOT NULL THEN
-				LET rm_par.z24_zona_cobro = r_z02.z02_zona_cobro
-				CALL fl_lee_zona_cobro(rm_par.z24_zona_cobro)
-					RETURNING r_z06.*
-				DISPLAY BY NAME rm_par.z24_zona_cobro,
-						r_z06.z06_nombre
-				CONTINUE INPUT
+		CALL fl_lee_cobrador_cxc(vg_codcia, rm_par.z24_cobrador)
+			RETURNING r_z05.*
+		IF r_z05.z05_codigo IS NOT NULL THEN
+			LET rm_par.z24_cobrador = r_z05.z05_codigo
+			DISPLAY BY NAME rm_par.z24_cobrador, r_z05.z05_nombres
+			CONTINUE INPUT
 		END IF
 	AFTER FIELD z20_codcli
 		IF rm_par.z20_codcli IS NOT NULL THEN
@@ -399,18 +378,14 @@ INPUT BY NAME rm_par.*
 				CALL fl_mensaje_estado_bloqueado()
 				NEXT FIELD z20_codcli
 			END IF
+			{--
+			IF r_z01.z01_tipo_doc_id <> 'R' THEN
+				CALL fl_mostrar_mensaje('Este cliente no tiene configurado RUC, por lo tanto no puede digitarle retenciones.', 'exclamation')
+				NEXT FIELD z20_codcli
+			END IF
+			--}
 			LET rm_par.z01_nomcli = r_z01.z01_nomcli
 			DISPLAY BY NAME rm_par.z01_nomcli
-			IF rm_par.tipo_venta <> 'C' THEN
-				CONTINUE INPUT
-			END IF
-			CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc,
-							rm_par.z20_codcli)
-		 		RETURNING r_z02.*
-			LET rm_par.z24_zona_cobro = r_z02.z02_zona_cobro
-			CALL fl_lee_zona_cobro(rm_par.z24_zona_cobro)
-				RETURNING r_z06.*
-			DISPLAY BY NAME rm_par.z24_zona_cobro, r_z06.z06_nombre
 		ELSE
 			LET rm_par.z01_nomcli = NULL
 			CLEAR z01_nomcli
@@ -466,53 +441,42 @@ INPUT BY NAME rm_par.*
 		LET rm_par.g03_nombre = r_g03.g03_nombre
 		DISPLAY BY NAME rm_par.z20_areaneg, rm_par.g03_nombre,
 				rm_par.g20_nombre
-	AFTER FIELD z24_zona_cobro
+	AFTER FIELD z24_cobrador
+		IF rm_par.z24_cobrador IS NULL THEN
+			LET rm_par.z05_nombres  = NULL
+			DISPLAY BY NAME rm_par.z05_nombres
+			CONTINUE INPUT
+		END IF
 		IF rm_par.tipo_venta = 'C' THEN
-			LET rm_par.z24_zona_cobro = NULL
-			LET rm_par.z06_nombre     = NULL
-			DISPLAY BY NAME rm_par.z24_zona_cobro, rm_par.z06_nombre
+			LET rm_par.z24_cobrador = NULL
+			LET rm_par.z05_nombres  = NULL
+			DISPLAY BY NAME rm_par.z24_cobrador, rm_par.z05_nombres
 			CONTINUE INPUT
 		END IF
-		IF rm_par.z24_zona_cobro IS NULL OR
-		   rm_par.z24_zona_cobro <> r_z02.z02_zona_cobro
-		THEN
-			LET rm_par.z24_zona_cobro = r_z02.z02_zona_cobro
-			CALL fl_lee_zona_cobro(rm_par.z24_zona_cobro)
-				RETURNING r_z06.*
-			LET rm_par.z06_nombre = r_z06.z06_nombre
-			DISPLAY BY NAME rm_par.z24_zona_cobro, r_z06.z06_nombre
-			CONTINUE INPUT
+		CALL fl_lee_cobrador_cxc(vg_codcia, rm_par.z24_cobrador)
+			RETURNING r_z05.*
+		IF r_z05.z05_codigo IS NULL THEN
+			CALL fl_mostrar_mensaje('Cobrador no existe.', 'exclamation')
+			NEXT FIELD z24_cobrador
 		END IF
-		CALL fl_lee_zona_cobro(rm_par.z24_zona_cobro)
-			RETURNING r_z06.*
-		IF r_z06.z06_zona_cobro IS NULL THEN
-			CALL fl_mostrar_mensaje('Zona de Cobro no existe.', 'exclamation')
-			NEXT FIELD z24_zona_cobro
-		END IF
-		IF r_z06.z06_estado = 'B' THEN
+		IF r_z05.z05_estado = 'B' THEN
 			CALL fl_mensaje_estado_bloqueado()
-			NEXT FIELD z24_zona_cobro
+			NEXT FIELD z24_cobrador
 		END IF
-		LET rm_par.z06_nombre = r_z06.z06_nombre
-		DISPLAY BY NAME rm_par.z06_nombre
+		LET rm_par.z05_nombres = r_z05.z05_nombres
+		DISPLAY BY NAME rm_par.z05_nombres
 	AFTER INPUT
-		IF rm_par.z24_zona_cobro IS NULL THEN
+		IF rm_par.z24_cobrador IS NULL THEN
 			IF rm_par.tipo_venta = 'C' THEN
-				LET rm_par.z24_zona_cobro = NULL
-				LET rm_par.z06_nombre     = NULL
-				DISPLAY BY NAME rm_par.z24_zona_cobro,
-						rm_par.z06_nombre
+				LET rm_par.z24_cobrador = NULL
+				LET rm_par.z05_nombres  = NULL
+				DISPLAY BY NAME rm_par.z24_cobrador,
+						rm_par.z05_nombres
 			ELSE
-				CALL fl_mostrar_mensaje('Digite la Zona de Cobro.', 'exclamation')
-				CONTINUE INPUT
+				CALL fl_mostrar_mensaje('Digite el Cobrador.', 'exclamation')
+				NEXT FIELD z24_cobrador
 			END IF
 		END IF
-		CALL fl_lee_zona_cobro(rm_par.z24_zona_cobro) RETURNING r_z06.*
-		IF r_z06.z06_estado = 'B' THEN
-			CALL fl_mostrar_mensaje('La Zona de Cobro esta con estado BLOQUEADO.', 'exclamation')
-			NEXT FIELD z24_zona_cobro
-		END IF
-		LET rm_par.z06_nombre = r_z06.z06_nombre
 END INPUT
 IF rm_par.tipo_venta IS NULL THEN
 	LET rm_par.tipo_venta = 'T'
@@ -568,6 +532,7 @@ CREATE TEMP TABLE tmp_det
 	)
 IF rm_par.rezagadas = 'S' THEN
 	CALL fecha_ultima() RETURNING fec_ult
+	--LET dias_tope = (vg_fecha - MDY(01, 01, YEAR(fec_ult))) + 1
 	LET dias_tope = (vg_fecha - MDY(01, 01, YEAR(vg_fecha) - 1)) + 1
 END IF
 CASE rm_par.z20_areaneg
@@ -621,6 +586,7 @@ IF rm_par.tipo_venta = 'R' OR rm_par.tipo_venta = 'T' THEN
 			'EXTEND(DATE(DATE("', vg_fecha, '") - ', dias_tope + 1, ' UNITS DAY), ',
 				'YEAR TO MONTH) ',
 		'   AND NOT EXISTS ',
+			--'(SELECT 1 FROM ', retorna_base_loc() CLIPPED,
 			'(SELECT 1 FROM cajt014 ',
 				'WHERE j14_compania  = z20_compania ',
 				'  AND j14_localidad = z20_localidad ',
@@ -656,6 +622,7 @@ IF rm_par.tipo_venta = 'R' OR rm_par.tipo_venta = 'T' THEN
 			'EXTEND(DATE(DATE("', vg_fecha, '") - ', dias_tope + 1, ' UNITS DAY), ',
 				'YEAR TO MONTH) ',
 		'   AND NOT EXISTS ',
+			--'(SELECT 1 FROM ', retorna_base_loc() CLIPPED,
 			'(SELECT 1 FROM cajt014 ',
 				'WHERE j14_compania  = z20_compania ',
 				'  AND j14_localidad = z20_localidad ',
@@ -732,6 +699,7 @@ LET query = 'INSERT INTO tmp_det ',
 			'WHERE j01_compania  = j10_compania ',
 			'  AND j01_retencion = "S") ',
 		'   AND NOT EXISTS ',
+			--'(SELECT 1 FROM ', retorna_base_loc() CLIPPED,
 			'(SELECT 1 FROM cajt014 ',
 				'WHERE j14_compania  = j10_compania ',
 				'  AND j14_localidad = j10_localidad ',
@@ -956,6 +924,7 @@ WHILE NOT salir
 				END IF
 			END IF
 		AFTER INPUT
+			--IF vg_codloc < 3 OR vg_codloc > 5 THEN
 			IF rm_par.devuelve = 'S' THEN
 				SELECT NVL(SUM(valor_ret), 0) INTO total_ret
 				FROM tmp_ret
@@ -1309,29 +1278,14 @@ DEFINE cod_tr		LIKE cajt010.j10_tipo_destino
 DEFINE num_tr		LIKE cajt010.j10_num_destino
 DEFINE num_s		LIKE rept038.r38_num_sri
 DEFINE tip_d		LIKE rept038.r38_tipo_doc
-DEFINE cod_pag		LIKE cajt091.j91_codigo_pago
 DEFINE query		CHAR(8000)
 DEFINE expr_sql		VARCHAR(100)
 DEFINE expr_tip		VARCHAR(150)
-DEFINE expr_par		VARCHAR(200)
-DEFINE l, lim, ctos	INTEGER
+DEFINE l, lim		INTEGER
 
 CALL retorna_num_fue(i) RETURNING num_f
 CALL retorna_ret_fac(i) RETURNING tipo_f, cod_tr, num_tr, num_s
 IF registros_retenciones(numero_ret, i) = 0 THEN
-	LET cod_pag  = "RT"
-	LET expr_par = '   AND z08_defecto        = "S" '
-	SELECT COUNT(*)
-		INTO ctos
-		FROM gent010
-		WHERE g10_compania = vg_codcia
-		  AND g10_codcobr  = rm_par.z20_codcli
-		  AND g10_estado   = "A"
-	IF ctos > 0 THEN
-		LET cod_pag  = "RJ"
-		LET expr_par = '   AND z08_defecto        = "N" ',
-				'   AND z08_flete          = "N" '
-	END IF
 	CASE tipo_f
 		WHEN "PR" LET tipo_fue = 'B'
 		WHEN "OT" LET tipo_fue = 'S'
@@ -1356,8 +1310,7 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 				'  AND t23_localidad = ', vg_codloc,
 				'  AND t23_orden     = ', num_f, ') > 0) OR ',
 				' ("', tipo_f, '" = "OT" AND ',
-					'c03_tipo_fuente = "T") OR "RJ" = "',
-						cod_pag CLIPPED, '"',
+					'c03_tipo_fuente = "T") ',
 				'THEN z08_tipo_ret ',
 			' END, ',
 			' CASE WHEN ("', tipo_f, '" = "PR" AND ',
@@ -1377,14 +1330,12 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 				'  AND t23_localidad = ', vg_codloc,
 				'  AND t23_orden     = ', num_f, ') > 0) OR ',
 				' ("', tipo_f, '" = "OT" AND ',
-					'c03_tipo_fuente = "T") OR "RJ" = "',
-						cod_pag CLIPPED, '"',
+					'c03_tipo_fuente = "T") ',
 				'THEN z08_porcentaje ',
 			' END, ',
 			' z08_codigo_sri, c03_concepto_ret, ',
 			' CASE WHEN "', tipo_f, '" = "PR" AND ',
-					'c03_tipo_fuente = "B" OR "RJ" = "',
-						cod_pag CLIPPED, '" THEN',
+					'c03_tipo_fuente = "B" THEN',
 			' (SELECT r23_tot_bruto - r23_tot_dscto ',
 				'FROM rept023 ',
 				'WHERE r23_compania  = z08_compania ',
@@ -1398,7 +1349,7 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 				'WHERE t23_compania  = z08_compania ',
 				'  AND t23_localidad = ', vg_codloc,
 				'  AND t23_orden     = ', num_f, ') > 0 ',
-				'OR "RJ" = "', cod_pag CLIPPED, '" THEN',
+				'THEN',
 			' (SELECT t23_val_mo_cti ',
 				'FROM talt023 ',
 				'WHERE t23_compania  = z08_compania ',
@@ -1412,7 +1363,7 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 				'WHERE t23_compania  = z08_compania ',
 				'  AND t23_localidad = ', vg_codloc,
 				'  AND t23_orden     = ', num_f, ') > 0 ',
-				'OR "RJ" = "', cod_pag CLIPPED, '" THEN',
+				'THEN',
 			' (SELECT t23_val_mo_tal - t23_vde_mo_tal ',
 				'FROM talt023 ',
 				'WHERE t23_compania  = z08_compania ',
@@ -1420,8 +1371,7 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 				'  AND t23_orden     = ', num_f,
 				')',
 			'      WHEN "', tipo_f, '" = "OT" AND ',
-					'c03_tipo_fuente = "T" ',
-				'OR "RJ" = "', cod_pag CLIPPED, '" THEN',
+					'c03_tipo_fuente = "T" THEN ',
 			' (SELECT t23_tot_bruto - t23_vde_mo_tal ',
 				'FROM talt023 ',
 				'WHERE t23_compania  = z08_compania ',
@@ -1431,8 +1381,7 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 			--' ELSE 0 ',
 			' END, ',
 			' CASE WHEN "', tipo_f, '" = "PR" AND ',
-					'c03_tipo_fuente = "B" ',
-				'OR "RJ" = "', cod_pag CLIPPED, '" THEN',
+					'c03_tipo_fuente = "B" THEN',
 			' (SELECT r23_tot_bruto - r23_tot_dscto ',
 				'FROM rept023 ',
 				'WHERE r23_compania  = z08_compania ',
@@ -1446,7 +1395,7 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 				'WHERE t23_compania  = z08_compania ',
 				'  AND t23_localidad = ', vg_codloc,
 				'  AND t23_orden     = ', num_f, ') > 0 ',
-				'OR "RJ" = "', cod_pag CLIPPED, '" THEN',
+				'THEN',
 			' (SELECT t23_val_mo_cti ',
 				'FROM talt023 ',
 				'WHERE t23_compania  = z08_compania ',
@@ -1460,7 +1409,7 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 				'WHERE t23_compania  = z08_compania ',
 				'  AND t23_localidad = ', vg_codloc,
 				'  AND t23_orden     = ', num_f, ') > 0 ',
-				'OR "RJ" = "', cod_pag CLIPPED, '" THEN',
+				'THEN',
 			' (SELECT t23_val_mo_tal - t23_vde_mo_tal ',
 				'FROM talt023 ',
 				'WHERE t23_compania  = z08_compania ',
@@ -1468,8 +1417,7 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 				'  AND t23_orden     = ', num_f,
 				')',
 			'      WHEN "', tipo_f, '" = "OT" AND ',
-					'c03_tipo_fuente = "T" ',
-				'OR "RJ" = "', cod_pag CLIPPED, '" THEN',
+					'c03_tipo_fuente = "T" THEN ',
 			' (SELECT t23_tot_bruto - t23_vde_mo_tal ',
 				'FROM talt023 ',
 				'WHERE t23_compania  = z08_compania ',
@@ -1484,7 +1432,7 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 			' FROM cxct008, ordt003, ordt002, cajt091 ',
 			' WHERE z08_compania       = ', vg_codcia,
 			'   AND z08_codcli         = ', rm_par.z20_codcli,
-			expr_par CLIPPED,
+			'   AND z08_defecto        = "S" ',
 			'   AND c03_compania       = z08_compania ',
 			'   AND c03_tipo_ret       = z08_tipo_ret ',
 			'   AND c03_porcentaje     = z08_porcentaje ',
@@ -1496,7 +1444,7 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 			'   AND c02_porcentaje     = c03_porcentaje ',
 			'   AND c02_estado         = "A" ',
 			'   AND j91_compania       = c02_compania ',
-			'   AND j91_codigo_pago    = "', cod_pag CLIPPED, '"',
+			'   AND j91_codigo_pago    = "RT" ',
 			'   AND j91_cont_cred      = "R" ',
 			'   AND j91_tipo_ret       = c02_tipo_ret ',
 			'   AND j91_porcentaje     = c02_porcentaje ',
@@ -1541,7 +1489,7 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 			'   AND c02_porcentaje     = c03_porcentaje ',
 			'   AND c02_estado         = "A" ',
 			'   AND j91_compania       = c02_compania ',
-			'   AND j91_codigo_pago    = "', cod_pag CLIPPED, '"',
+			'   AND j91_codigo_pago    = "RT" ',
 			'   AND j91_cont_cred      = "R" ',
 			'   AND j91_tipo_ret       = c02_tipo_ret ',
 			'   AND j91_porcentaje     = c02_porcentaje ',
@@ -1608,7 +1556,7 @@ IF registros_retenciones(numero_ret, i) = 0 THEN
 			'   AND c02_estado         = "A" ',
 			'   AND c02_tipo_fuente    = "', tipo_fue, '"',
 			'   AND j91_compania       = c02_compania ',
-			'   AND j91_codigo_pago    = "', cod_pag CLIPPED, '"',
+			'   AND j91_codigo_pago    = "RT" ',
 			'   AND j91_cont_cred      = "R" ',
 			'   AND j91_tipo_ret       = c02_tipo_ret ',
 			'   AND j91_porcentaje     = c02_porcentaje '
@@ -1782,6 +1730,12 @@ INPUT BY NAME rm_j14.j14_num_ret_sri, rm_j14.j14_autorizacion,
 			CALL fl_mostrar_mensaje('El numero de la autorizacion ingresado es incorrecto.', 'exclamation')
 			NEXT FIELD j14_autorizacion
 		END IF
+		{-- OJO
+		IF rm_j14.j14_autorizacion[1, 1] <> '1' THEN
+			CALL fl_mostrar_mensaje('Numero de Autorizacion es incorrecto.', 'exclamation')
+			NEXT FIELD j14_autorizacion
+		END IF
+		--}
 		IF NOT fl_valida_numeros(rm_j14.j14_autorizacion) THEN
 			NEXT FIELD j14_autorizacion
 		END IF
@@ -1804,10 +1758,18 @@ INPUT BY NAME rm_j14.j14_num_ret_sri, rm_j14.j14_autorizacion,
 			NEXT FIELD j14_fecha_emi
 		END IF
 		LET fec_ult = NULL
+		--IF fin_mes < (vg_fecha - (dias_tope + 1) UNITS DAY) THEN
 			CALL fecha_ultima() RETURNING fec_ult
 			IF (YEAR(fec_ult) <> YEAR(rm_j14.j14_fecha_emi) AND
 			    YEAR(vg_fecha) <> YEAR(rm_j14.j14_fecha_emi))
 			THEN
+				{--
+				LET mensaje = 'No se puede cargar retenciones ',
+						'a una factura con fecha de ',
+						'mas de ',
+						dias_tope + 1 USING "<<&",
+						' dias, ó con una fecha de un ',
+				--}
 				LET mensaje = 'No se puede cargar retenciones ',
 						'a una factura de un año ',
 						'que esta CERRADO o DECLARADO.'
@@ -1815,6 +1777,19 @@ INPUT BY NAME rm_j14.j14_num_ret_sri, rm_j14.j14_autorizacion,
 				NEXT FIELD j14_fecha_emi
 			END IF
 			LET fecha_tope = fec_ult - 1 UNITS DAY
+		--END IF
+		{--
+		IF (EXTEND(fec_ult - 1 UNITS DAY, YEAR TO MONTH) = 
+		    EXTEND(rm_j14.j14_fecha_emi, YEAR TO MONTH))
+		THEN
+			LET mensaje = 'No se puede cargar retenciones ',
+					'a una factura de este mes ',
+					'porque esta CERRADO o DECLARADO en ',
+					'el módulo del SRI.'
+			CALL fl_mostrar_mensaje(mensaje, 'exclamation')
+			NEXT FIELD j14_fecha_emi
+		END IF
+		--}
 		IF rm_j14.j14_fecha_emi < fecha_min THEN
 			LET mensaje = 'La fecha de emision del comprobante no',
 					' puede ser menor que la fecha de',
@@ -1823,6 +1798,21 @@ INPUT BY NAME rm_j14.j14_num_ret_sri, rm_j14.j14_autorizacion,
 			CALL fl_mostrar_mensaje(mensaje, 'exclamation')
 			NEXT FIELD j14_fecha_emi
 		END IF
+		{--
+		IF rm_j14.j14_fecha_emi > fecha_tope THEN
+			LET mensaje = 'La fecha de emision del comprobante no',
+					' puede ser mayor a ',
+					dias_tope + 1 USING "<<&",
+					' dias que la ',
+					'fecha fin de mes de factura (',
+					fin_mes USING "dd-mm-yyyy", ').'
+				LET mensaje = 'No se puede cargar retenciones ',
+						'a una factura de un año ',
+						'que esta CERRADO o DECLARADO.'
+			CALL fl_mostrar_mensaje(mensaje, 'exclamation')
+			NEXT FIELD j14_fecha_emi
+		END IF
+		--}
 		LET fecha2 = rm_j14.j14_fecha_emi
 		IF YEAR(vg_fecha) <> YEAR(rm_j14.j14_fecha_emi) THEN
 			LET fecha2 = fec_ult
@@ -1856,13 +1846,20 @@ END FUNCTION
 FUNCTION fecha_ultima()
 DEFINE fec_ult		DATE
 DEFINE codloc		LIKE gent002.g02_localidad
+DEFINE bas_aux		CHAR(20)
 DEFINE query		CHAR(800)
 
+LET codloc  = vg_codloc
+LET bas_aux = vg_base
+IF vg_codloc = 4 OR vg_codloc = 5 THEN
+	LET codloc  = 3
+	LET bas_aux = 'acero_qm'
+END IF
 LET query = 'SELECT MAX(MDY(s21_mes, 01, s21_anio) ',
 		'+ 1 UNITS MONTH - 1 UNITS DAY) + 1 UNITS DAY ',
-		'FROM srit021 ',
+		'FROM ', bas_aux CLIPPED, ':srit021 ',
 		'WHERE s21_compania   = ', vg_codcia,
-		'  AND s21_localidad  = ', vg_codloc,
+		'  AND s21_localidad  = ', codloc,
 		'  AND s21_estado    IN ("D", "C") '
 PREPARE c_fec_ult FROM query
 DECLARE q_fec_ult CURSOR FOR c_fec_ult
@@ -2262,6 +2259,13 @@ IF LENGTH(num_ret_sri[1, 7]) <> 7 THEN
 	CALL fl_mostrar_mensaje('Digite correctamente el punto de venta o el punto de emision.', 'exclamation')
 	RETURN 0
 END IF
+{--
+LET lim = LENGTH(num_ret_sri)
+IF NOT fl_solo_numeros(num_ret_sri[9, lim]) THEN
+	CALL fl_mostrar_mensaje('Digite solo numeros para el numero del comprobante.', 'exclamation')
+	RETURN 0
+END IF
+--}
 IF NOT fl_valida_numeros(num_ret_sri[1, 3]) THEN
 	RETURN 0
 END IF
@@ -2771,6 +2775,7 @@ CREATE TEMP TABLE tmp_doc
 	)
 BEGIN WORK
 	DECLARE q_ret_doc CURSOR WITH HOLD FOR
+		--SELECT UNIQUE num_ret_sri, cod_pago, tipo_ret, porc_ret
 		SELECT UNIQUE num_ret_sri
 			FROM tmp_ret
 			ORDER BY num_ret_sri
@@ -2809,6 +2814,7 @@ BEGIN WORK
 				ROLLBACK WORK
 				RETURN 0
 			END IF
+			--IF vg_codloc < 3 OR vg_codloc > 5 THEN
 				CALL generar_egreso_efectivo_caja(r_ret_p.num_ret_s)
 					RETURNING resul, r_j10.*
 				IF NOT resul THEN
@@ -2817,6 +2823,7 @@ BEGIN WORK
 					ROLLBACK WORK
 					RETURN 0
 				END IF
+			--END IF
 			UPDATE tmp_doc
 				SET tip_trn = r_z22.z22_tipo_trn,
 				    num_trn = r_z22.z22_num_trn,
@@ -2829,59 +2836,67 @@ BEGIN WORK
 		LET segundo = segundo + 1
 	END FOREACH
 COMMIT WORK
-
-{* La contabilización debe hacerse en su propia transacción *}
-DECLARE q_doc CURSOR WITH HOLD FOR
-	SELECT UNIQUE tipo_sol, num_sol, tip_trn, num_trn, tip_ec, num_ec
-  	  FROM tmp_doc
-	  ORDER BY 1, 2
-
-FOREACH q_doc INTO vm_tipo_fue, vm_num_sol, r_z22.z22_tipo_trn, r_z22.z22_num_trn, 
-                   r_j10.j10_tipo_fuente, r_j10.j10_num_fuente
-	CALL fl_contabilizacion_trans_caja_ret(vg_codcia, vg_codloc,
+IF vg_base <> 'acero_gc' AND vg_base <> 'acero_qs' THEN
+	DECLARE q_doc CURSOR WITH HOLD FOR
+		SELECT UNIQUE tipo_sol, num_sol, tip_trn, num_trn, tip_ec,
+			num_ec
+			FROM tmp_doc
+			ORDER BY 1, 2
+	FOREACH q_doc INTO vm_tipo_fue, vm_num_sol, r_z22.z22_tipo_trn,
+				r_z22.z22_num_trn, r_j10.j10_tipo_fuente,
+				r_j10.j10_num_fuente
+		CALL fl_contabilizacion_trans_caja_ret(vg_codcia, vg_codloc,
 							vm_tipo_fue, vm_num_sol,
 							r_z22.z22_tipo_trn,
 							r_z22.z22_num_trn)
-	IF r_z22.z22_tipo_trn IS NULL THEN
-		CONTINUE FOREACH
-	END IF
-	IF tipo = 'P' THEN
-		CONTINUE FOREACH
-	END IF
-	CALL fl_contabilizacion_trans_caja_ret(vg_codcia, vg_codloc,
+		IF r_z22.z22_tipo_trn IS NULL THEN
+			CONTINUE FOREACH
+		END IF
+		IF tipo = 'P' THEN
+			CONTINUE FOREACH
+		END IF
+		CALL fl_contabilizacion_trans_caja_ret(vg_codcia, vg_codloc,
 						r_z22.z22_tipo_trn,
 						r_z22.z22_num_trn,
 						vm_tipo_fue, vm_num_sol)
-	UPDATE cajt010
-	   SET j10_tip_contable = (SELECT UNIQUE z40_tipo_comp
-					             FROM cxct040
-				            	WHERE z40_compania  = j10_compania
-					              AND z40_localidad = j10_localidad
-					              AND z40_codcli    = j10_codcli
-					              AND z40_tipo_doc  = r_z22.z22_tipo_trn
-					              AND z40_num_doc   =r_z22.z22_num_trn),
-		   j10_num_contable = (SELECT UNIQUE z40_num_comp
-					             FROM cxct040
-								WHERE z40_compania  = j10_compania
-								  AND z40_localidad = j10_localidad
-								  AND z40_codcli    = j10_codcli
-								  AND z40_tipo_doc  = r_z22.z22_tipo_trn
-								  AND z40_num_doc   = r_z22.z22_num_trn)
-	 WHERE j10_compania    = vg_codcia
-	   AND j10_localidad   = vg_codloc
-	   AND j10_tipo_fuente = r_j10.j10_tipo_fuente
-	   AND j10_num_fuente  = r_j10.j10_num_fuente
-END FOREACH
-
+		{-- OJO
+		IF vg_codloc >= 3 AND vg_codloc <= 5 THEN
+			CONTINUE FOREACH
+		END IF
+		--}
+		UPDATE cajt010
+			SET j10_tip_contable =
+				(SELECT UNIQUE z40_tipo_comp
+					FROM cxct040
+					WHERE z40_compania  = j10_compania
+					  AND z40_localidad = j10_localidad
+					  AND z40_codcli    = j10_codcli
+					  AND z40_tipo_doc  = r_z22.z22_tipo_trn
+					  AND z40_num_doc   =r_z22.z22_num_trn),
+			    j10_num_contable =
+				(SELECT UNIQUE z40_num_comp
+					FROM cxct040
+					WHERE z40_compania  = j10_compania
+					  AND z40_localidad = j10_localidad
+					  AND z40_codcli    = j10_codcli
+					  AND z40_tipo_doc  = r_z22.z22_tipo_trn
+					  AND z40_num_doc   = r_z22.z22_num_trn)
+			WHERE j10_compania    = vg_codcia
+			  AND j10_localidad   = vg_codloc
+			  AND j10_tipo_fuente = r_j10.j10_tipo_fuente
+			  AND j10_num_fuente  = r_j10.j10_num_fuente
+	END FOREACH
+END IF
 BEGIN WORK
-CALL actualiza_detalle_retencion(1)
+	CALL actualiza_detalle_retencion(1)
 COMMIT WORK
-
 DECLARE q_impr CURSOR FOR SELECT UNIQUE num_sol FROM tmp_doc ORDER BY 1
 FOREACH q_impr INTO vm_num_sol
 	CALL imprime_comprobante(vm_num_sol)
 END FOREACH
-CALL imprime_contabilizacion()
+IF vg_base <> 'acero_gc' AND vg_base <> 'acero_qs' THEN
+	CALL imprime_contabilizacion()
+END IF
 DROP TABLE tmp_doc
 RETURN 1
 
@@ -2911,9 +2926,6 @@ END IF
 IF NOT actualiza_caja(r_z24.*) THEN
 	RETURN 0
 END IF
-IF NOT actualiza_zona_cobr_z02(r_z24.*) THEN
-	RETURN 0
-END IF
 LET vm_num_sol = r_z24.z24_numero_sol
 RETURN 1
 
@@ -2934,6 +2946,22 @@ DEFINE r_z24, r_sol	RECORD LIKE cxct024.*
 INITIALIZE r_z24.* TO NULL
 LET r_z24.z24_compania   = vg_codcia
 LET r_z24.z24_localidad  = vg_codloc
+CALL fl_actualiza_control_secuencias(vg_codcia, vg_codloc, vg_modulo, 'AA','SC')
+	RETURNING r_z24.z24_numero_sol
+IF r_z24.z24_numero_sol = 0 THEN
+	ROLLBACK WORK
+	CALL fl_mostrar_mensaje('No existe control de secuencia para Solicitud de Cobro, no se puede asignar un número de transacción a la operación.','stop')
+	EXIT PROGRAM
+END IF
+IF r_z24.z24_numero_sol = -1 THEN
+	SET LOCK MODE TO WAIT
+	WHILE r_z24.z24_numero_sol = -1
+		CALL fl_actualiza_control_secuencias(vg_codcia, vg_codloc, vg_modulo,
+											'AA', 'SC')
+			RETURNING r_z24.z24_numero_sol
+	END WHILE
+	SET LOCK MODE TO NOT WAIT
+END IF
 LET r_z24.z24_areaneg    = rm_par.z20_areaneg
 LET r_z24.z24_linea      = rm_par.z20_linea
 LET r_z24.z24_codcli     = rm_par.z20_codcli
@@ -2957,6 +2985,9 @@ IF tipo = 'P' THEN
 				  AND z20_cod_tran  = cod_tr
 				  AND z20_num_tran  = num_tr
 				  AND z20_saldo_cap > 0)
+		  --AND cod_pago    = r_ret_p.cod_pago
+		  --AND tipo_ret    = r_ret_p.tipo_ret
+		  --AND porc_ret    = r_ret_p.porc_ret
 	UPDATE tmp_ret
 		SET numero_sol = r_z24.z24_numero_sol
 		WHERE num_ret_sri IN
@@ -2966,43 +2997,30 @@ IF tipo = 'P' THEN
 				  AND z20_cod_tran  = cod_tr
 				  AND z20_num_tran  = num_tr
 				  AND z20_saldo_cap > 0)
+		  --AND cod_pago    = r_ret_p.cod_pago
+		  --AND tipo_ret    = r_ret_p.tipo_ret
+		  --AND porc_ret    = r_ret_p.porc_ret
 ELSE
 	SELECT NVL(SUM(valor_ret), 0)
 		INTO r_z24.z24_total_cap
 		FROM tmp_ret
 		WHERE num_ret_sri = r_ret_p.num_ret_s
+		  --AND cod_pago    = r_ret_p.cod_pago
+		  --AND tipo_ret    = r_ret_p.tipo_ret
+		  --AND porc_ret    = r_ret_p.porc_ret
 	UPDATE tmp_ret
 		SET numero_sol = r_z24.z24_numero_sol
 		WHERE num_ret_sri = r_ret_p.num_ret_s
+		  --AND cod_pago    = r_ret_p.cod_pago
+		  --AND tipo_ret    = r_ret_p.tipo_ret
+		  --AND porc_ret    = r_ret_p.porc_ret
 END IF
 LET r_z24.z24_total_int  = 0
 LET r_z24.z24_total_mora = 0
-LET r_z24.z24_zona_cobro = rm_par.z24_zona_cobro
-IF rm_par.tipo_venta = 'C' THEN
-	LET r_z24.z24_zona_cobro = NULL
-END IF
+LET r_z24.z24_cobrador   = rm_par.z24_cobrador
 LET r_z24.z24_subtipo    = 1
 LET r_z24.z24_usuario    = vg_usuario
 LET r_z24.z24_fecing     = fl_current()
-
-CALL fl_actualiza_control_secuencias(vg_codcia, vg_codloc, vg_modulo,
-										'AA', 'SC')
-	RETURNING r_z24.z24_numero_sol
-IF r_z24.z24_numero_sol = 0 THEN
-	ROLLBACK WORK
-	CALL fl_mostrar_mensaje('No existe control de secuencia para Solicitud de Cobro, no se puede asignar un número de transacción a la operación.','stop')
-	EXIT PROGRAM
-END IF
-IF r_z24.z24_numero_sol = -1 THEN
-	SET LOCK MODE TO WAIT
-	WHILE r_z24.z24_numero_sol = -1
-		CALL fl_actualiza_control_secuencias(vg_codcia, vg_codloc, vg_modulo,
-												'AA', 'SC')
-			RETURNING r_z24.z24_numero_sol
-	END WHILE
-	SET LOCK MODE TO NOT WAIT
-END IF
-
 INSERT INTO cxct024 VALUES (r_z24.*)
 RETURN r_z24.*
 
@@ -3067,6 +3085,9 @@ FOR i = 1 TO vm_num_rows
 			WHERE numero_sol  = r_z24.z24_numero_sol
 			  AND num_fac_sri = rm_adi[i].num_sri
 			  AND num_ret_sri = r_ret_p.num_ret_s
+			  --AND cod_pago    = r_ret_p.cod_pago
+			  --AND tipo_ret    = r_ret_p.tipo_ret
+			  --AND porc_ret    = r_ret_p.porc_ret
 			GROUP BY 1, 2
 	FOREACH q_ret_det_sol INTO cod_tran, num_tran, val_r
 		CALL fl_lee_documento_deudor_cxc(vg_codcia, r_z24.z24_localidad,
@@ -3083,6 +3104,7 @@ FOR i = 1 TO vm_num_rows
 			LET r_z25.z25_tipo_doc  = rm_detalle[i].z20_tipo_doc
 	    		LET r_z25.z25_num_doc   = rm_adi[i].z20_num_doc  
 		    	LET r_z25.z25_dividendo = rm_adi[i].z20_dividendo
+		    	--LET r_z25.z25_valor_cap = rm_detalle[i].valor_ret
 		    	LET r_z25.z25_valor_cap = val_r
 			INSERT INTO cxct025 VALUES (r_z25.*)
 		END IF
@@ -3189,51 +3211,6 @@ END FUNCTION
 
 
 
-FUNCTION actualiza_zona_cobr_z02(r_z24)
-DEFINE r_z24		RECORD LIKE cxct024.*
-DEFINE intentar		SMALLINT
-DEFINE done    		SMALLINT
-DEFINE r_z02		RECORD LIKE cxct002.*
-
-LET intentar = 1
-LET done = 0
-CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc, r_z24.z24_codcli)
-	RETURNING r_z02.*
-IF r_z02.z02_zona_cobro IS NOT NULL THEN
-	RETURN 1
-END IF
-WHILE (intentar)
-	WHENEVER ERROR CONTINUE
-		DECLARE q_z02 CURSOR FOR
-			SELECT * FROM cxct002
-				WHERE z02_compania  = vg_codcia
-				  AND z02_localidad = vg_codloc
-				  AND z02_codcli    = r_z02.z02_codcli
-			FOR UPDATE
-	WHENEVER ERROR STOP
-	IF STATUS < 0 THEN
-		LET intentar = mensaje_intentar()
-	ELSE
-		LET intentar = 0
-		LET done = 1
-	END IF
-END WHILE
-IF NOT intentar AND NOT done THEN
-	RETURN done
-END IF
-OPEN q_z02
-FETCH q_z02 INTO r_z02.*
-UPDATE cxct002
-	SET z02_zona_cobro = r_z24.z24_zona_cobro
-	WHERE CURRENT OF q_z02
-CLOSE q_z02
-FREE q_z02
-RETURN done
-
-END FUNCTION
-
-
-
 FUNCTION genera_forma_pago(r_ret_p, segundo)
 DEFINE r_ret_p		RECORD
 				num_ret_s		CHAR(21),
@@ -3327,6 +3304,9 @@ DECLARE q_ret2 CURSOR FOR
 		FROM tmp_ret
 		WHERE cod_pago    = codigo_pago
 		  AND num_ret_sri = r_ret_p.num_ret_s
+		 -- AND cod_pago    = r_ret_p.cod_pago
+		 -- AND tipo_ret    = r_ret_p.tipo_ret
+		 -- AND porc_ret    = r_ret_p.porc_ret
 LET i = 1
 FOREACH q_ret2 INTO r_j14.j14_num_ret_sri, r_j14.j14_autorizacion,
 			r_j14.j14_fecha_emi, rm_detret[i].*, num_s, cod_tran,
@@ -3535,10 +3515,7 @@ LET r_z22.z22_tasa_mora  = 0
 LET r_z22.z22_total_cap  = r_z24.z24_total_cap
 LET r_z22.z22_total_int  = r_z24.z24_total_int
 LET r_z22.z22_total_mora = r_z24.z24_total_mora
-LET r_z22.z22_zona_cobro = r_z24.z24_zona_cobro
-IF rm_par.tipo_venta = 'C' THEN
-	LET r_z22.z22_zona_cobro = NULL
-END IF
+LET r_z22.z22_cobrador 	 = r_z24.z24_cobrador
 LET r_z22.z22_origen     = 'A'
 LET r_z22.z22_usuario    = vg_usuario
 LET r_z22.z22_fecing     = fl_current() + segundo UNITS SECOND
@@ -3678,7 +3655,8 @@ SELECT UNIQUE num_ret_sri
 	INTO r_z21.z21_num_sri
 	FROM tmp_ret
 	WHERE numero_sol = r_z24.z24_numero_sol
-LET r_z21.z21_referencia = 'DOC. RT P/ FA - SIN SALDO '
+LET r_z21.z21_referencia = 'DOC. RT P/ FA - SIN SALDO '--, r_z21.z21_cod_tran,
+				--'-', r_z21.z21_num_tran USING "<<<<<<<&"
 LET r_z21.z21_fecha_emi  = vg_fecha
 LET r_z21.z21_moneda     = r_z24.z24_moneda
 LET r_z21.z21_paridad    = r_z24.z24_paridad
@@ -3935,6 +3913,9 @@ DEFINE resul		SMALLINT
 DECLARE q_di CURSOR FOR
 	SELECT * FROM tmp_ret
 		WHERE num_ret_sri = r_ret_p.num_ret_s
+		  --AND cod_pago    = r_ret_p.cod_pago
+		  --AND tipo_ret    = r_ret_p.tipo_ret
+		  --AND porc_ret    = r_ret_p.porc_ret
 FOREACH q_di INTO r_ret.*
 	INITIALIZE r_z20.* TO NULL
 	LET r_z20.z20_compania   = vg_codcia
