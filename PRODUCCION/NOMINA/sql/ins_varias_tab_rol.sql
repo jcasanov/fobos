@@ -6,6 +6,12 @@
 
 begin work;
 
+	insert into rolt000
+		select * from acero_gm:rolt000;
+
+	insert into rolt001
+		select * from acero_gm:rolt001;
+
 	update rolt001
 		set n01_ano_proceso = 2017,
 			n01_mes_proceso = 12
