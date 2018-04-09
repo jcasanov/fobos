@@ -283,6 +283,7 @@ WHILE TRUE
 				--#CONTINUE DISPLAY
 		END DISPLAY
 		IF int_flag = 1 THEN
+			LET int_flag = 0
 			DROP TABLE tmp_caj
 			EXIT WHILE
 		END IF

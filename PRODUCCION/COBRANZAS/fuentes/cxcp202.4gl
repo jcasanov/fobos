@@ -1556,18 +1556,19 @@ WHILE TRUE
 			--#CONTINUE DISPLAY
 	END DISPLAY
 	IF int_flag = 1 THEN
-                CALL muestra_contadores_det(0)
-                EXIT WHILE
-        END IF
-        IF col <> vm_columna_1 THEN
-                LET vm_columna_2           = vm_columna_1
-                LET rm_orden[vm_columna_2] = rm_orden[vm_columna_1]
-                LET vm_columna_1           = col
-        END IF
+		LET int_flag = 0
+        CALL muestra_contadores_det(0)
+        EXIT WHILE
+    END IF
+    IF col <> vm_columna_1 THEN
+		LET vm_columna_2           = vm_columna_1
+		LET rm_orden[vm_columna_2] = rm_orden[vm_columna_1]
+		LET vm_columna_1           = col
+    END IF
         IF rm_orden[vm_columna_1] = 'ASC' THEN
-                LET rm_orden[vm_columna_1] = 'DESC'
+        	LET rm_orden[vm_columna_1] = 'DESC'
         ELSE
-                LET rm_orden[vm_columna_1] = 'ASC'
+        	LET rm_orden[vm_columna_1] = 'ASC'
         END IF
 END WHILE
 
