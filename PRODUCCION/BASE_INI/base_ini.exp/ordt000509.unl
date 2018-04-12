@@ -1,0 +1,57 @@
+1|F|1.0|304|04/01/2003|A|Remuneracion a otros trabajadores autonomos|12/31/2008|N|B|||||FOBOS|2006-10-26 11:27:23|
+1|F|1.0|306|04/01/2003|A|Por compras locales de materia prima|12/31/2008|N|B|||||FOBOS|2006-10-26 11:27:23|
+1|F|1.0|307|04/01/2003|A|Por compras locales de bienes no producidos por la sociedad|12/31/2008|N|B|||||FOBOS|2006-10-26 11:27:23|
+1|F|1.0|309|04/01/2003|A|Por suministros y materiales|12/31/2008|N|B|||||FOBOS|2006-10-26 11:27:23|
+1|F|1.0|310|04/01/2003|A|Por repuestos y herramientas|12/31/2008|N|B|||||FOBOS|2006-10-26 11:27:23|
+1|F|1.0|311|04/01/2003|A|Por lubricantes|12/31/2008|N|B|||||FOBOS|2006-10-26 11:27:23|
+1|F|1.0|312|04/01/2003|A|Por activos fijos|12/31/2008|N|B|||||FOBOS|2006-10-26 11:27:23|
+1|F|1.0|313|04/01/2003|A|Por concepto de servicio de transporte privado de pasajeros o servicio publico o privado de carga|12/31/2008|N|B|||||FOBOS|2006-10-26 11:27:23|
+1|F|1.0|317|04/01/2003|A|Por comisiones pagadas a sociedades |12/31/2008|N|B|||||FOBOS|2006-10-26 11:27:23|
+1|F|1.0|318|04/01/2003|A|Por promocion y publicidad|12/31/2008|N|B|||||FOBOS|2006-10-26 11:27:23|
+1|F|1.0|319|04/01/2003|A|Por arrendamiento mercantil local|12/31/2008|N|B|||||FOBOS|2006-10-26 11:27:23|
+1|F|1.0|322|04/01/2003|A|Por seguros y reaseguros (10% del valor de las primas facturadas)|12/31/2008|N|B|||||FOBOS|2006-10-26 11:27:23|
+1|F|1.0|324|04/01/2003|A|Por pagos o creditos en cuenta realizados por empresas emisoras de tarjetas de credito|12/31/2008|N|B|||||FOBOS|2006-10-26 11:27:23|
+1|F|1.0|326|04/01/2003|A|Por intereses y comisiones en operaciones de credito entre las inst. Del sistema financiero|12/31/2008|N|B|||||FOBOS|2006-10-26 11:27:23|
+1|F|1.0|329|04/01/2003|A|Por otros servicios|12/31/2008|N|B|||||FOBOS|2006-10-26 11:27:23|
+1|F|1.0|331|04/01/2003|A|"Por agua, energía, luz y telecomunicaciones"|12/31/2008|N|B|||||FOBOS|2006-10-26 11:27:23|
+1|F|1.0|340|02/01/2009|A|Otras retenciones aplicables el 1%||S|B|||||FOBOS|2009-02-10 16:45:45|
+1|F|1.0|341|02/01/2009|E|Otras retenciones aplicables el 2%||S|B|||||FOBOS|2009-03-11 09:16:45|
+1|F|1.0|309|02/01/2009|A|Servicios de Publicidad y Comunicacion||N|B|||||FOBOS|2009-06-19 13:37:37|
+1|F|1.0|310|02/01/2009|A|Servicios Transporte Privado de Pasajeros o Servicio Publico Privado de Carga||N|B|||||FOBOS|2009-06-19 13:37:37|
+1|F|1.0|312|02/01/2009|A|Transferencia de Bienes Muebles de Naturaleza Corporal||N|B|||||FOBOS|2009-06-19 13:37:37|
+1|F|10.0|303|02/01/2009|A|Prestacion de Servicios Profesionales||N|S|||||FOBOS|2011-09-02 16:16:12|
+1|I|100.0|801|12/31/2006|A|IVA por la Prestaci¢n de Serivicios Profesionales.||N|T|||||FOBOS|2007-01-08 18:20:40|
+1|I|100.0|805|12/31/2006|A|IVA en otras compras de bienes y servicios con emisi¢n de Liquidaci¢n de Compras y de Servicios.||N|T|||||FOBOS|2007-01-08 18:20:40|
+1|I|100.0|725|02/01/2009|A|IVA por la Prestaci¢n de Serivicios Profesionales||N|T|||||FOBOS|2009-02-10 16:45:45|
+1|I|100.0|731|02/01/2012|A|IVA por la Prestaci¢n de Serivicios Profesionales                                                                                                      ||S|T|||||FOBOS|2017-06-08 16:45:45|
+1|F|2.0|304|04/01/2003|A|Remuneracion a otros trabajadores autonomos|12/31/2008|N|S|||||FOBOS|2006-10-26 11:27:23|
+1|F|2.0|306|04/01/2003|A|Por compras locales de materia prima|12/31/2008|N|S|||||FOBOS|2006-10-26 11:27:23|
+1|F|2.0|307|04/01/2003|A|Por compras locales de bienes no producidos por la sociedad|12/31/2008|N|S|||||FOBOS|2006-10-26 11:27:23|
+1|F|2.0|309|04/01/2003|A|Por suministros y materiales|12/31/2008|N|S|||||FOBOS|2006-10-26 11:27:23|
+1|F|2.0|310|04/01/2003|A|Por repuestos y herramientas|12/31/2008|N|S|||||FOBOS|2006-10-26 11:27:23|
+1|F|2.0|311|04/01/2003|A|Por lubricantes|12/31/2008|N|S|||||FOBOS|2006-10-26 11:27:23|
+1|F|2.0|312|04/01/2003|A|Por activos fijos|12/31/2008|N|S|||||FOBOS|2006-10-26 11:27:23|
+1|F|2.0|314|04/01/2003|A|Por regalias, derechos de autor, marcas, patentes y similares - Sociedades|12/31/2008|N|S|||||FOBOS|2006-10-26 11:27:23|
+1|F|2.0|317|04/01/2003|A|Por comisiones pagadas a sociedades |12/31/2008|N|S|||||FOBOS|2006-10-26 11:27:23|
+1|F|2.0|318|04/01/2003|A|Por promocion y publicidad|12/31/2008|N|S|||||FOBOS|2006-10-26 11:27:23|
+1|F|2.0|319|04/01/2003|A|Por arrendamiento mercantil local|12/31/2008|N|S|||||FOBOS|2006-10-26 11:27:23|
+1|F|2.0|322|04/01/2003|A|Por seguros y reaseguros (10% del valor de las primas facturadas)|12/31/2008|N|S|||||FOBOS|2006-10-26 11:27:23|
+1|F|2.0|324|04/01/2003|A|Por pagos o creditos en cuenta realizados por empresas emisoras de tarjetas de credito|12/31/2008|N|S|||||FOBOS|2006-10-26 11:27:23|
+1|F|2.0|329|04/01/2003|A|Por otros servicios|12/31/2008|N|S|||||FOBOS|2006-10-26 11:27:23|
+1|F|2.0|331|04/01/2003|A|"Por agua, energía, luz y telecomunicaciones"|12/31/2008|N|S|||||FOBOS|2006-10-26 11:27:23|
+1|F|2.0|341|02/01/2009|A|Otras retenciones aplicables el 2%||N|S|||||FOBOS|2009-02-10 16:45:45|
+1|F|2.0|308|02/01/2009|A|Servicios entre sociedades||N|S|||||FOBOS|2009-02-11 10:53:31|
+1|F|2.0|307|02/01/2009|A|Servicios Prodomina Mano de Obra||S|S|||||FOBOS|2009-06-19 13:37:37|
+1|I|30.0|819|12/31/2006|A|IVA por la compra de bienes.||N|B|||||FOBOS|2007-01-08 18:18:49|
+1|I|30.0|725|02/01/2016|A|IVA por la compra de bienes||S|B|||||FOBOS|2009-02-10 16:45:45|
+1|I|70.0|813|12/31/2006|A|IVA por la prestaci¢n de otros servicios.||N|S|||||FOBOS|2007-01-08 18:19:41|
+1|I|70.0|723|02/01/2009|A|IVA por la prestaci¢n de otros servicios||S|S|||||FOBOS|2009-02-10 16:45:45|
+1|F|0.0|308|04/01/2003|A|Por compras locales de materia prima no sujeta a retención |12/31/2008|N|B|||||FOBOS|2006-10-26 11:27:23|
+1|F|0.0|323B2|04/01/2003|A|Por rendimientos financieros:  depósitos en cuentas de ahorros - personas naturales|12/31/2008|N|B|||||FOBOS|2006-10-26 11:27:23|
+1|F|0.0|323C|04/01/2003|A|Por rendimientos financieros:  depósitos en cuentas corrientes exentas|12/31/2008|N|B|||||FOBOS|2006-10-26 11:27:23|
+1|F|0.0|332|04/01/2003|A|Otras compras de bienes y servicios no sujetas a retención||N|B|||||FOBOS|2006-10-26 11:27:23|
+1|F|0.0|333|04/01/2003|A|Convenio de Débito o Recaudación|12/31/2008|S|B|||||FOBOS|2006-10-26 11:27:23|
+1|F|0.0|401|04/01/2003|A|Con convenio de doble tributacion|12/31/2008|S|B|||||FOBOS|2006-10-26 11:27:23|
+1|F|8.0|304|01/01/2016|A|Servicios predomina el intelecto no relacionados con el t¡tulo profesional||N|B|||||FOBOS|2017-12-09 00:17:40|
+1|F|2.0|344|01/01/2015|A|Otras retenciones aplicables el 2%                 ||N|S|FOBOS||FOBOS||FOBOS|2018-03-10 16:31:45|
+1|I|70.0|729|01/01/2016|A|IVA por la prestaci¢n de otros servicios 70%                                                                                                           ||S|S|FOBOS||FOBOS||FOBOS|2009-02-10 16:45:45|
