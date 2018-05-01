@@ -401,6 +401,7 @@ LET query = 'SELECT CASE WHEN tipo_doc_id = "R" AND ',
 					'END cedruc_ret, cod_concep, base_imponible, val_porc, ',
 				'NVL(SUM(valor_reten), 0) valor_reten ',
 			'FROM tmp_ret ',
+			'WHERE j14_tipo_ret = "F" ',
 			'GROUP BY 1, 2, 3, 4 ',
 			'INTO TEMP tmp_ret_tot '
 PREPARE exec_ret_tot FROM query
@@ -924,27 +925,27 @@ END FUNCTION
 
 {**
 	OBTIENE LAS RETENCIONES DE LAS FACTURAS DE CLIENTES
+    XXX - en la fuente y de iva?
 **}
 
 FUNCTION obtener_retenciones()
 
 SELECT codcli, tipo_doc_id, cedruc, j14_codigo_sri AS cod_concep,
-		SUM(j14_base_imp) AS base_imponible, j14_porc_ret AS val_porc,
+		SUM(j14_base_imp) AS base_imponible, j14_porc_ret AS val_porc, j14_tipo_ret, 
 		SUM(j14_valor_ret) AS valor_reten
 		FROM tmp_fact, cajt014
 		WHERE j14_cedruc   = cedruc
 		  AND j14_tipo_fue = "PR"
-		GROUP BY 1, 2, 3, 4, 6
+		GROUP BY 1, 2, 3, 4, 6, 7
 UNION
 SELECT codcli, tipo_doc_id, cedruc, j14_codigo_sri AS cod_concep,
-		SUM(j14_base_imp) AS base_imponible, j14_porc_ret AS val_porc,
+		SUM(j14_base_imp) AS base_imponible, j14_porc_ret AS val_porc, j14_tipo_ret,
 		SUM(j14_valor_ret) AS valor_reten
 		FROM tmp_tal, cajt014
 		WHERE j14_cedruc   = cedruc
 		  AND j14_tipo_fue = "OT"
-		GROUP BY 1, 2, 3, 4, 6
+		GROUP BY 1, 2, 3, 4, 6, 7
 	INTO TEMP tmp_ret
---unload to "reten_sri.txt" select codcli, cedruc, valor_reten from tmp_ret
 
 END FUNCTION
 
