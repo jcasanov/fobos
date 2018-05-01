@@ -308,12 +308,6 @@ LET query = 'INSERT INTO tmp_anu ',
 		'  AND g02_localidad   = b.g37_localidad '
 PREPARE insert_tmp_anu FROM query 
 EXECUTE insert_tmp_anu
-UNLOAD TO 'anulados.unl' SELECT * FROM tmp_anu
-LET archivo = '$HOME/tmp/anulados_', vg_codloc USING "&&", '-',
-		YEAR(rm_par.fecha_fin) USING "&&&&",'-',
-		MONTH(rm_par.fecha_fin) USING "&&", '.unl ' 
-LET comando = 'mv anulados.unl ', archivo CLIPPED
-RUN comando
 
 END FUNCTION
 

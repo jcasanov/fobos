@@ -768,39 +768,6 @@ EXECUTE cons_s21_2
 DROP TABLE tmp_cli_fal
 DROP TABLE tmp_faltantes
 CALL verificacion_retenciones_negativas()
-LET query = 'SELECT s21_ident_cli, s21_num_doc_id,',
-		' CASE WHEN s21_num_doc_id <> "9999999999999" THEN ',
-			' (SELECT TRIM(a.z01_nomcli) FROM cxct001 a ',
-			' WHERE a.z01_codcli = (SELECT MAX(b.z01_codcli) ',
-						'FROM cxct001 b ',
-						'WHERE TRIM(b.z01_num_doc_id)=',
-							'TRIM(s21_num_doc_id) ',
-						'  AND z01_estado = "A")) ',
-			' ELSE "CONSUMIDOR FINAL" ',
-		' END nomcliente, ',
-		' s21_tipo_comp, s21_fecha_reg_cont, s21_num_comp_emi, ',
-		' s21_fecha_emi_vta, s21_base_imp_tar_0, s21_iva_presuntivo, ',
-		' s21_bas_imp_gr_iva, s21_cod_porc_iva, s21_monto_iva, ',
-		' s21_base_imp_ice, s21_cod_porc_ice, s21_monto_ice, ',
-		' s21_monto_iva_bie, s21_cod_ret_ivabie, s21_mon_ret_ivabie, ',
-		' s21_monto_iva_ser, s21_cod_ret_ivaser, s21_mon_ret_ivaser, ',
-		' s21_ret_presuntivo, s21_concepto_ret, s21_base_imp_renta, ',
-		' s21_porc_ret_renta, s21_monto_ret_rent ',
-		' FROM srit021 ',
-		' WHERE s21_compania  = ', vg_codcia,
-		'   AND s21_localidad = ', vg_codloc,
-		'   AND s21_anio      = ', YEAR(rm_par.fecha_fin),
-		'   AND s21_mes       = ', MONTH(rm_par.fecha_fin),
-		' INTO TEMP t1 '
-PREPARE exec_t1_final FROM query
-EXECUTE exec_t1_final
-UNLOAD TO 'anexo_ventas.unl' SELECT * FROM t1
-LET archivo = '$HOME/tmp/anexo_ventas_', vg_codloc USING "&&", '-',
-		YEAR(rm_par.fecha_fin) USING "&&&&",'-',
-		MONTH(rm_par.fecha_fin) USING "&&", '.unl ' 
-LET comando = 'mv anexo_ventas.unl ', archivo CLIPPED
-RUN comando
-DROP TABLE t1
 
 END FUNCTION
 
