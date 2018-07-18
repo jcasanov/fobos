@@ -393,7 +393,8 @@ FOREACH q_tal INTO r_tal.*
 				0.00, 0.00, '000', 0, 0, 0)
 END FOREACH
 CALL obtener_retenciones()
-DROP TABLE tmp_tal
+
+{* tmp_tot_ret: *}
 LET query = 'SELECT CASE WHEN tipo_doc_id = "R" AND ',
 							'codcli <> ', rm_r00.r00_codcli_tal, ' ',
 						'THEN cedruc ',
@@ -903,6 +904,8 @@ SELECT codcli, tipo_doc_id, cedruc, j14_codigo_sri AS cod_concep,
 		FROM tmp_fact, cajt014
 		WHERE j14_cedruc   = cedruc
 		  AND j14_tipo_fue = "PR"
+          AND j14_cod_tran = cod_tran 
+          AND j14_num_tran = num_tran 
 		GROUP BY 1, 2, 3, 4, 6, 7
 UNION
 SELECT codcli, tipo_doc_id, cedruc, j14_codigo_sri AS cod_concep,
@@ -911,8 +914,12 @@ SELECT codcli, tipo_doc_id, cedruc, j14_codigo_sri AS cod_concep,
 		FROM tmp_tal, cajt014
 		WHERE j14_cedruc   = cedruc
 		  AND j14_tipo_fue = "OT"
+          AND j14_cod_tran = "FA"
+          AND j14_num_tran = num_tran 
 		GROUP BY 1, 2, 3, 4, 6, 7
 	INTO TEMP tmp_ret
+
+DROP TABLE tmp_tal
 
 END FUNCTION
 
