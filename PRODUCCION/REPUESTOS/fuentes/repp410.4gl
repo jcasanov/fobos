@@ -238,6 +238,7 @@ END FUNCTION
 
 
 
+{* Este vale para JADESA, parece *}
 REPORT report_factura(r_rep)
 DEFINE r_rep		RECORD
 						r20_item	LIKE rept020.r20_item,
@@ -378,7 +379,7 @@ PAGE HEADER
 	CALL fl_lee_cliente_localidad(vg_codcia, vg_codloc, rm_r19.r19_codcli)
 		RETURNING r_z02.*
 	CALL fl_lee_ciudad(r_z01.z01_ciudad) RETURNING r_g31.*
-	SKIP 4 LINES
+	SKIP 5 LINES
 	print ASCII escape;
 	print ASCII act_comp
 
