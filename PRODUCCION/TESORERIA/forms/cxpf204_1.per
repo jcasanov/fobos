@@ -17,7 +17,7 @@ SCREEN
 [c023|a3|c026             |a00|c029      |c028            |c030            |c]
 [c103                                ] [c032            |c033            ]
 
-Estado Documento: [c031        |c104 ]
+Estado Documento: [c031        |c104 ]       Retenciones: [c034|c035         ]
 
 Ingresado Por: [c019      ]         Fecha de Ingreso:[c020               ]
 }
@@ -42,14 +42,19 @@ c028 = cxpt020.p20_saldo_cap, NOENTRY, FORMAT='#,###,###,##&.##',
 	OPTIONS='-nolist';
 c029 = cxpt020.p20_fecha_vcto,   NOENTRY, FORMAT='dd-mm-yyyy', 
 	OPTIONS='-nolist';
-c030 = FORMONLY.valor_pagar, FORMAT='#,###,###,##&.##', NOENTRY, 
+c030 = FORMONLY.valor_pagar, FORMAT='#,###,###,##&.##', 
 	OPTIONS='-nolist';
+c    = FORMONLY.check, WIDGET='CHECK', CONFIG='S N acknowledge', AUTONEXT,
+	OPTIONS='-nolist', DEFAULT='N';
 
 c031 = FORMONLY.n_estado_vcto, NOENTRY, COLOR=RED WHERE C031 = 'Vencido'; 
 c104 = FORMONLY.dias, NOENTRY, FORMAT='----&', COLOR=RED WHERE c104 < 0;
 
 c032 = FORMONLY.total_saldo,  NOENTRY, FORMAT='#,###,###,##&.##';
 c033 = FORMONLY.total_pagar,  NOENTRY, FORMAT='#,###,###,##&.##';
+
+c034 = FORMONLY.cant_ret, NOENTRY, FORMAT='##&';
+c035 = FORMONLY.tot_ret,  NOENTRY, FORMAT='###,##&.##';
 
 c100 = FORMONLY.n_moneda,  NOENTRY;
 c101 = FORMONLY.n_banco,   NOENTRY;
@@ -63,14 +68,10 @@ lbl3 = FORMONLY.bt_fecha,     WIDGET='BUTTON', CONFIG='F19';
 lbl4 = FORMONLY.bt_saldo,     WIDGET='BUTTON', CONFIG='F20';
 lbl5 = FORMONLY.bt_valor,     WIDGET='BUTTON', CONFIG='F21';
 
-c    = FORMONLY.check, WIDGET='CHECK', CONFIG='S N acknowledge', AUTONEXT,
-	OPTIONS='-nolist', DEFAULT='N';
 end
 
 INSTRUCTIONS
 SCREEN RECORD ra_docs[10] (p25_codprov, p25_tipo_doc, p25_num_doc, p25_dividendo, p20_fecha_vcto, p20_saldo_cap, valor_pagar, check) 
 
 KEYS
-F5 = 'Pagar'
-F6 = 'Totales'
-F7 = 'Estado Cuenta'
+F5 = 'Estado Cuenta'

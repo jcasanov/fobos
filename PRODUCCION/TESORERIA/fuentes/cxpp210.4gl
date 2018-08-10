@@ -8,6 +8,8 @@
 --------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
+DEFINE vm_factura	LIKE rept019.r19_cod_tran
+
 DEFINE vm_rows			ARRAY[1000] OF INTEGER
 DEFINE vm_row_current		SMALLINT
 DEFINE vm_num_rows		SMALLINT
@@ -117,7 +119,6 @@ DEFINE vm_activo_mod		LIKE ordt001.c01_modulo
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
-DEFINE rm_c00		RECORD LIKE ordt000.*	-- CONFIGURACION DE OC
 DEFINE rm_c14	 	RECORD LIKE ordt014.*	-- DETALLE RECEPCION
 DEFINE rm_c15	 	RECORD LIKE ordt015.*	-- PAGOS
 DEFINE rm_b12	 	RECORD LIKE ctbt012.*
@@ -192,9 +193,10 @@ IF num_args() = 4 THEN
 		RETURN
 	END IF
 END IF
-LET vm_max_rows     = 1000
-LET vm_max_detalle  = 250
-LET vm_activo_mod   = 'AF'
+LET vm_max_rows    = 1000
+LET vm_max_detalle = 250
+LET vm_activo_mod  = 'AF'
+LET vm_factura     = 'FA'
 
 LET lin_menu = 0
 LET row_ini  = 3
@@ -1175,11 +1177,12 @@ FUNCTION control_ingreso()
 DEFINE i 		SMALLINT
 DEFINE intentar 	SMALLINT
 DEFINE done 		SMALLINT
+DEFINE r_c00	 	RECORD LIKE ordt000.*
 
 CLEAR FORM
 
 LET vm_flag_mant = 'I'
-INITIALIZE rm_c10.*, rm_c11.*, rm_c13.* TO NULL
+INITIALIZE r_c00.*, rm_c10.*, rm_c11.*, rm_c13.* TO NULL
 
 -- INITIAL VALUES FOR rm_c10 FIELDS
 --LET rm_c10.c10_tipo_pago   = 'C'
@@ -1293,6 +1296,14 @@ CALL lee_muestra_registro(vm_rows[vm_row_current])
 CALL control_recepcion() RETURNING done
 CALL control_grabar() RETURNING done
 CALL imprimir_orden()
+
+CALL fl_lee_compania_orden_compra(vg_codcia) RETURNING r_c00.*
+IF r_c00.c00_cuando_ret = 'C' THEN
+	CALL ejecuta_comando('TESORERIA', 'TE', 'cxpp207', 
+                         	vg_codloc || ' ' || rm_c10.c10_codprov || 
+                         	' F ' || vm_factura || ' ' || rm_c13.c13_factura) 
+END IF
+
 CALL lee_muestra_registro(vm_rows[vm_row_current])
 LET vm_flag_mant = 'C'
 CALL fl_mensaje_registro_ingresado()
@@ -1765,7 +1776,7 @@ INPUT BY NAME rm_c10.c10_codprov, rm_c13.c13_num_guia, rm_c13.c13_fec_emi_fac,
 		END IF
 		}
 		CALL fl_lee_documento_deudor_cxp(vg_codcia, vg_codloc, 
-						 rm_c10.c10_codprov, 'FA',
+						 rm_c10.c10_codprov, vm_factura,
 						 rm_c13.c13_num_guia, 1)
 			RETURNING r_p20.*
 		IF r_p20.p20_num_doc IS NOT NULL THEN
@@ -2431,7 +2442,7 @@ END FUNCTION
 FUNCTION control_recepcion()
 DEFINE i 	SMALLINT
 
-INITIALIZE rm_c00.*, rm_c14.*, vm_flag_forma_pago TO NULL
+INITIALIZE rm_c14.*, vm_flag_forma_pago TO NULL
 LET tot_ret = 0
 
 LET rm_c13.c13_fecing  = fl_current()
@@ -2452,7 +2463,7 @@ FETCH q_ordt010 INTO rm_c10.*
 
 IF STATUS < 0 THEN
 	ROLLBACK WORK 
-	INITIALIZE rm_c00.*, rm_c14.*, vm_flag_forma_pago TO NULL
+	INITIALIZE rm_c14.*, vm_flag_forma_pago TO NULL
 	CALL fl_mostrar_mensaje('La orden de compra está siendo recibida por otro usuario.','exclamation')
 	WHENEVER ERROR STOP
 	RETURN 0
@@ -2463,7 +2474,7 @@ CALL control_cargar_detalle()
 
 IF vm_ind_arr = 0 THEN
 	ROLLBACK WORK 
-	INITIALIZE rm_c00.*, rm_c14.*, vm_flag_forma_pago TO NULL
+	INITIALIZE rm_c14.*, vm_flag_forma_pago TO NULL
 	RETURN 0
 END IF
 
@@ -2603,7 +2614,7 @@ LET r_p23.p23_codprov   = r_p22.p22_codprov
 LET r_p23.p23_tipo_trn  = r_p22.p22_tipo_trn
 LET r_p23.p23_num_trn   = r_p22.p22_num_trn
 
-LET r_p23.p23_tipo_doc   = 'FA'
+LET r_p23.p23_tipo_doc   = vm_factura
 LET r_p23.p23_num_doc    = rm_c13.c13_factura
 LET r_p23.p23_div_doc    = 1		-- Un solo divividendo 
 LET r_p23.p23_valor_int  = 0
@@ -3135,7 +3146,7 @@ LET r_p20.p20_codprov     = rm_c10.c10_codprov
 LET r_p20.p20_usuario     = vg_usuario
 LET r_p20.p20_fecing      = fl_current()
 LET r_p20.p20_fecha_emi	  = vg_fecha
-LET r_p20.p20_tipo_doc    = 'FA'
+LET r_p20.p20_tipo_doc    = vm_factura
 LET r_p20.p20_num_doc     = rm_c13.c13_factura
 LET r_p20.p20_referencia  = 'RECEPCION # ' || rm_c13.c13_num_recep
 LET r_p20.p20_porc_impto  = rm_c10.c10_porc_impto
@@ -3293,7 +3304,7 @@ DECLARE q_p28 CURSOR FOR
 		WHERE p28_compania  = vg_codcia
 		  AND p28_localidad = vg_codloc
 		  AND p28_codprov   = rm_c10.c10_codprov
-		  AND p28_tipo_doc  = 'FA'
+		  AND p28_tipo_doc  = vm_factura
 		  AND p28_num_doc   = rm_c13.c13_factura
 
 IF rm_c10.c10_moneda = rg_gen.g00_moneda_base THEN
@@ -4188,7 +4199,7 @@ FOREACH q_ordt013_2 INTO rm_c13.*
 			WHERE p28_compania  = rm_c10.c10_compania
 			  AND p28_localidad = rm_c10.c10_localidad
 			  AND p28_codprov   = rm_c10.c10_codprov
-			  AND p28_tipo_doc  = 'FA'
+			  AND p28_tipo_doc  = vm_factura
 			  AND p28_num_doc   = rm_c13.c13_factura
 	OPEN  q_cxpt028
 	FETCH q_cxpt028 INTO num_ret
@@ -4393,7 +4404,7 @@ DECLARE q_ddev CURSOR FOR
 		WHERE p20_compania                  = vg_codcia
 	          AND p20_localidad                 = vg_codloc
 	          AND p20_codprov                   = rm_c10.c10_codprov
-	          AND p20_tipo_doc                  = 'FA'
+	          AND p20_tipo_doc                  = vm_factura
 	          AND p20_num_doc                   = rm_c13.c13_factura
 		  AND p20_saldo_cap + p20_saldo_int > 0
 		FOR UPDATE
@@ -4587,7 +4598,7 @@ FOREACH q_eli_cont INTO r_c10.*, r_c13.*
 			WHERE p28_compania  = r_c10.c10_compania
 			  AND p28_localidad = r_c10.c10_localidad
 			  AND p28_codprov   = r_c10.c10_codprov
-			  AND p28_tipo_doc  = 'FA'
+			  AND p28_tipo_doc  = vm_factura
 			  AND p28_num_doc   = r_c13.c13_factura
 	OPEN  q_obtret
 	FETCH q_obtret INTO num_ret
@@ -4687,7 +4698,7 @@ CLOSE q_recep
 FREE q_recep
 LET i   = 1
 LET lim = LENGTH(r_c13.c13_factura)
-CALL fl_lee_documento_deudor_cxp(vg_codcia, vg_codloc, r_c10.c10_codprov, 'FA',
+CALL fl_lee_documento_deudor_cxp(vg_codcia, vg_codloc, r_c10.c10_codprov, vm_factura,
 				r_c13.c13_factura, 1)
 	RETURNING r_p20.*
 WHILE TRUE
@@ -4695,7 +4706,7 @@ WHILE TRUE
 				r_p20.p20_num_doc[5, lim] CLIPPED,
 				i USING "<<<<<<<<&"
 	CALL fl_lee_documento_deudor_cxp(vg_codcia, vg_codloc,
-					r_c10.c10_codprov, 'FA',
+					r_c10.c10_codprov, vm_factura,
 					vm_fact_nue, 1)
 		RETURNING r_p20.*
 	IF r_p20.p20_compania IS NULL THEN
@@ -4728,7 +4739,7 @@ DECLARE q_p23 CURSOR FOR
 		WHERE p23_compania  = vg_codcia
 	          AND p23_localidad = vg_codloc
 	          AND p23_codprov   = r_c10.c10_codprov
-	          AND p23_tipo_doc  = 'FA'
+	          AND p23_tipo_doc  = vm_factura
 	          AND p23_num_doc   = r_c13.c13_factura
 OPEN q_p23
 FETCH q_p23 INTO r_p23.*
@@ -4738,7 +4749,7 @@ IF STATUS = NOTFOUND THEN
 			' WHERE p20_compania  = ', vg_codcia,
 			'   AND p20_localidad = ', vg_codloc,
 			'   AND p20_codprov   = ', r_c10.c10_codprov,
-			'   AND p20_tipo_doc  = "FA" ',
+			'   AND p20_tipo_doc  = "', vm_factura, '"',
 			'   AND p20_num_doc   = "', r_c13.c13_factura, '"'
 	PREPARE exec_up03 FROM query
 	EXECUTE exec_up03
@@ -4749,7 +4760,7 @@ SELECT * FROM cxpt020
 	WHERE p20_compania  = vg_codcia
           AND p20_localidad = vg_codloc
           AND p20_codprov   = r_c10.c10_codprov
-          AND p20_tipo_doc  = 'FA'
+          AND p20_tipo_doc  = vm_factura
           AND p20_num_doc   = r_c13.c13_factura
 	INTO TEMP tmp_p20
 LET query = 'UPDATE tmp_p20 ',
@@ -4757,7 +4768,7 @@ LET query = 'UPDATE tmp_p20 ',
 		' WHERE p20_compania  = ', vg_codcia,
 		'   AND p20_localidad = ', vg_codloc,
 		'   AND p20_codprov   = ', r_c10.c10_codprov,
-		'   AND p20_tipo_doc  = "FA" ',
+		'   AND p20_tipo_doc  = "', vm_factura, '"',
 		'   AND p20_num_doc   = "', r_c13.c13_factura, '"'
 PREPARE exec_up04 FROM query
 EXECUTE exec_up04
@@ -4767,7 +4778,7 @@ LET query = 'UPDATE cxpt023 ',
 		' WHERE p23_compania  = ', vg_codcia,
 		'   AND p23_localidad = ', vg_codloc,
 		'   AND p23_codprov   = ', r_c10.c10_codprov,
-		'   AND p23_tipo_doc  = "FA" ',
+		'   AND p23_tipo_doc  = "', vm_factura, '"',
 		'   AND p23_num_doc   = "', r_c13.c13_factura, '"'
 PREPARE exec_up05 FROM query
 EXECUTE exec_up05
@@ -4776,7 +4787,7 @@ LET query = 'UPDATE cxpt025 ',
 		' WHERE p25_compania  = ', vg_codcia,
 		'   AND p25_localidad = ', vg_codloc,
 		'   AND p25_codprov   = ', r_c10.c10_codprov,
-		'   AND p25_tipo_doc  = "FA" ',
+		'   AND p25_tipo_doc  = "', vm_factura, '"',
 		'   AND p25_num_doc   = "', r_c13.c13_factura, '"'
 PREPARE exec_up06 FROM query
 EXECUTE exec_up06
@@ -4785,7 +4796,7 @@ LET query = 'UPDATE cxpt028 ',
 		' WHERE p28_compania  = ', vg_codcia,
 		'   AND p28_localidad = ', vg_codloc,
 		'   AND p28_codprov   = ', r_c10.c10_codprov,
-		'   AND p28_tipo_doc  = "FA" ',
+		'   AND p28_tipo_doc  = "', vm_factura, '"',
 		'   AND p28_num_doc   = "', r_c13.c13_factura, '"'
 PREPARE exec_up07 FROM query
 EXECUTE exec_up07
@@ -4794,7 +4805,7 @@ LET query = 'UPDATE cxpt041 ',
 		' WHERE p41_compania  = ', vg_codcia,
 		'   AND p41_localidad = ', vg_codloc,
 		'   AND p41_codprov   = ', r_c10.c10_codprov,
-		'   AND p41_tipo_doc  = "FA" ',
+		'   AND p41_tipo_doc  = "', vm_factura, '"',
 		'   AND p41_num_doc   = "', r_c13.c13_factura, '"'
 PREPARE exec_up08 FROM query
 EXECUTE exec_up08
@@ -4802,7 +4813,7 @@ LET query = 'DELETE FROM cxpt020 ',
 		' WHERE p20_compania  = ', vg_codcia,
 		'   AND p20_localidad = ', vg_codloc,
 		'   AND p20_codprov   = ', r_c10.c10_codprov,
-		'   AND p20_tipo_doc  = "FA" ',
+		'   AND p20_tipo_doc  = "', vm_factura, '"',
 		'   AND p20_num_doc   = "', r_c13.c13_factura, '"'
 PREPARE exec_del01 FROM query
 EXECUTE exec_del01

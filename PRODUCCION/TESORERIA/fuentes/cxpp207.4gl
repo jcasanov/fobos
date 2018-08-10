@@ -2,9 +2,20 @@
 -- Titulo           : cxpp207.4gl - Ingreso comprobantes de retención
 -- Elaboracion      : 17-dic-2001
 -- Autor            : NPC
--- Formato Ejecucion: fglrun cxpp207 base módulo compañía localidad
--- Ultima Correccion: 
--- Motivo Correccion: 
+-- Formato Ejecucion: fglrun cxpp207 base módulo compañía localidad 
+--                                   [codprov] [F] [tipo_doc] [num_doc]
+--                                   [codprov] [P] [tipo_trn] [num_trn]
+--
+-- Si el programa recibe:
+-- * 4 parámetros, está siendo llamado desde el menú
+-- * 8 parámetros, está siendo llamado desde otro programa
+--   el 5to parámetro siempre será el proveedor, el 6to parámetro indica
+--   si el programa que invoca es un programa de ingreso de factura de
+--   compras (cxpp210, ordp202 y repp214) o el programa de pago de facturas
+--   (cxpp206)  
+--
+-- XXX se debe actualizar r19_num_ret? se usa? HINT: en JADESA no se ha usado
+-- XXX se debe actualizar c13_num_ret? se usa? HINT: en JADESA no se ha usado
 --------------------------------------------------------------------------------
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
@@ -59,20 +70,7 @@ DEFINE val_impto	LIKE rept019.r19_tot_dscto
 DEFINE val_neto		LIKE rept019.r19_tot_neto
 DEFINE tot_ret		LIKE rept019.r19_tot_neto
 ------------------------------------------------------
----- DEFINICION DE LOS CAMPOS DE LA VENTANA DE FORMA DE PAGO ----
 
-DEFINE vm_filas_pant		SMALLINT
-
-DEFINE tot_dias			SMALLINT	
-DEFINE pagos			SMALLINT
-DEFINE fecha_pago		DATE
-DEFINE dias_pagos		SMALLINT
-DEFINE c10_interes		LIKE ordt010.c10_interes
-DEFINE tot_compra		LIKE ordt010.c10_tot_compra
-DEFINE tot_cap			LIKE ordt010.c10_tot_compra
-DEFINE tot_int			LIKE ordt010.c10_tot_compra
-DEFINE tot_sub			LIKE ordt010.c10_tot_compra
----------------------------------------------------------------
 DEFINE rm_retsri	ARRAY[10000] OF RECORD
 			c03_codigo_sri		LIKE ordt003.c03_codigo_sri,
 			c03_concepto_ret	LIKE ordt003.c03_concepto_ret,
@@ -97,8 +95,7 @@ LET vg_proceso = arg_val(0)
 CALL startlog('../logs/' || vg_proceso CLIPPED || '.err')
 --#CALL fgl_init4js()
 CALL fl_marca_registrada_producto()
-IF num_args() <> 4 THEN   -- Validar # parámetros correcto
-	--CALL fgl_winmessage(vg_producto,'Número de parámetros incorrecto', 'stop')
+IF num_args() <> 4 AND num_args() <> 8 THEN   
 	CALL fl_mostrar_mensaje('Número de parámetros incorrecto.','stop')
 	EXIT PROGRAM
 END IF
@@ -199,7 +196,7 @@ END FUNCTION
 
 FUNCTION control_consulta()
 DEFINE i,j,k,col,done	SMALLINT
-DEFINE query		CHAR(1000)
+DEFINE query		CHAR(3000)
 DEFINE r_mon		RECORD LIKE gent013.*
 DEFINE r_cxp_aux	RECORD LIKE cxpt020.*
 DEFINE l,retenciones	SMALLINT
@@ -212,15 +209,14 @@ DEFINE r_b12		RECORD LIKE ctbt012.*
 DEFINE tot_reten	LIKE cxpt022.p22_total_cap
 
 LET rm_p27.p27_estado  = 'A'
-LET rm_p27.p27_paridad = 1
 LET rm_p27.p27_usuario = vg_usuario
 LET rm_p27.p27_fecing  = fl_current()
 LET rm_p27.p27_moneda  = rg_gen.g00_moneda_base
+LET rm_p27.p27_paridad = 1
 CALL fl_lee_moneda(rm_p27.p27_moneda) RETURNING r_mon.*
 IF r_mon.g13_moneda IS NULL THEN
-       	--CALL fgl_winmessage(vg_producto,'Moneda no existe moneda base.','stop')
 	CALL fl_mostrar_mensaje('Moneda no existe moneda base.','stop')
-        EXIT PROGRAM
+	EXIT PROGRAM
 END IF
 CALL muestra_estado()
 DISPLAY r_mon.g13_nombre TO tit_moneda
@@ -235,30 +231,56 @@ WHILE TRUE
 		EXIT WHILE
 	END IF
 	DELETE FROM tmp_detalle_ret
-	INSERT INTO tmp_detalle_ret
-		SELECT p20_tipo_doc, p20_num_doc, MIN(p20_fecha_emi),
-			p20_valor_fact, 0, p20_referencia
-			FROM cxpt020
-			WHERE p20_compania  = vg_codcia
-			  AND p20_localidad = vg_codloc
-			  AND p20_codprov   = rm_p27.p27_codprov
-			  AND p20_dividendo = 1
-			  AND p20_moneda    = rm_p27.p27_moneda
-			  AND NOT EXISTS
-				(SELECT 1 FROM cxpt028, cxpt027
-				WHERE p28_compania  = p20_compania
-				  AND p28_localidad = p20_localidad
-				  AND p28_codprov   = p20_codprov
-				  AND p28_tipo_doc  = p20_tipo_doc
-			 	  AND p28_num_doc   = p20_num_doc
-			  	  AND p27_compania  = p28_compania
-			  	  AND p27_localidad = p28_localidad
-			 	  AND p27_num_ret   = p28_num_ret
-			  	  AND p27_estado    = 'A')
-			GROUP BY 1, 2, 4, 5, 6
-			HAVING SUM(p20_saldo_cap + p20_saldo_int) > 0
+	LET query = 'INSERT INTO tmp_detalle_ret ',
+				'SELECT p20_tipo_doc, p20_num_doc, p20_fecha_emi, ',
+				'		p20_valor_fact, 0, p20_referencia ',
+				'  FROM cxpt020 ',
+				' WHERE p20_compania  = ', vg_codcia, 
+			  	'	AND p20_localidad = ', vg_codloc,
+			  	'	AND p20_codprov   = ', rm_p27.p27_codprov 
+	IF num_args() = 8 THEN
+		CASE arg_val(6) 
+			WHEN 'F'
+				LET query = query CLIPPED, ' AND p20_tipo_doc = "', arg_val(7), '"', 
+										   ' AND p20_num_doc = "', arg_val(8), '"'
+			WHEN 'P'
+				LET query = query CLIPPED, ' AND EXISTS (SELECT 1 FROM cxpt023 ',
+								   '              WHERE p23_compania  = p20_compania ',
+								   '                AND p23_localidad = p20_localidad ',
+								   '                AND p23_codprov   = p20_codprov ',
+								   '                AND p23_tipo_trn  = "', arg_val(7), '"', 
+								   '                AND p23_num_trn   = ', arg_val(8), 
+								   '                AND p23_tipo_doc  = p20_tipo_doc ',
+								   '                AND p23_num_doc   = p20_num_doc ',
+								   '                AND p23_div_doc   = p20_dividendo) '
+		END CASE
+	END IF
+	-- Las retenciones se pagan siempre del dividendo 1,
+	-- no hay una razón técnica para esto sino que es más
+	-- conveniente
+	LET query = query CLIPPED, 
+			  	'	AND p20_dividendo = 1 ',
+				'   AND p20_saldo_cap + p20_saldo_int > 0 ',
+			  	'	AND p20_moneda    = "', rm_p27.p27_moneda, '"',
+			  	'	AND NOT EXISTS (SELECT 1 FROM cxpt028, cxpt027 ',
+				'					 WHERE p28_compania  = p20_compania ',
+			    '				       AND p28_localidad = p20_localidad ',
+				'				 	   AND p28_codprov   = p20_codprov ',
+				'				  	   AND p28_tipo_doc  = p20_tipo_doc ',
+			 	'				 	   AND p28_num_doc   = p20_num_doc ', 
+			  	'				 	   AND p27_compania  = p28_compania ',
+			  	'				 	   AND p27_localidad = p28_localidad ',
+				' 				 	   AND p27_num_ret   = p28_num_ret ',
+			 	'				  	   AND p27_estado    = "A") '
+	PREPARE stmt_p207_01 FROM query
+	EXECUTE stmt_p207_01
+
 	SELECT COUNT(*) INTO vm_num_det FROM tmp_detalle_ret
 	IF vm_num_det = 0 THEN
+		IF num_args() = 8 THEN
+			EXIT PROGRAM
+		END IF
+
 		CALL fl_mensaje_consulta_sin_registros()
 		CONTINUE WHILE
 	END IF
@@ -305,6 +327,10 @@ WHILE TRUE
 				--#CONTINUE DISPLAY
 			ON KEY(INTERRUPT)
 				LET int_flag = 1
+				IF num_args() = 8 THEN
+					EXIT PROGRAM
+				END IF
+
 				EXIT DISPLAY
         		ON KEY(F1,CONTROL-W)
 				CALL control_visor_teclas_caracter_1() 
@@ -387,13 +413,13 @@ WHILE TRUE
 						  END IF
 						END IF
 						  CALL graba_ajuste_retencion() RETURNING tot_reten
-						IF tot_reten > 0 THEN
+						IF tot_reten <> 0 THEN
 						  CALL contabilizacion_ret(i)
 							RETURNING r_b12.*
 						END IF
 						  DELETE FROM tmp_retenciones
 						  COMMIT WORK
-						IF tot_reten > 0 THEN
+						IF tot_reten <> 0 THEN
 						  CALL fl_lee_compania_contabilidad(vg_codcia)
 							RETURNING r_b00.*
 						  IF r_b00.b00_mayo_online = 'S'
@@ -405,7 +431,7 @@ WHILE TRUE
 							vg_codcia, vg_codloc,
 							vm_num_ret)
 							RETURNING r_p27.*
-						IF tot_reten > 0 THEN
+						IF tot_reten <> 0 THEN
 						  CALL imprime_retenciones(
 									r_p27.*)
 						END IF
@@ -521,6 +547,15 @@ DEFINE deci_aux         LIKE gent013.g13_decimales
 DEFINE codprov		LIKE cxpt027.p27_codprov
 DEFINE nomprov		LIKE cxpt001.p01_nomprov
 
+IF num_args() = 8 THEN
+	LET rm_p27.p27_codprov = arg_val(5)
+	CALL fl_lee_proveedor(rm_p27.p27_codprov) RETURNING r_pro.*
+	DISPLAY BY NAME rm_p27.p27_codprov, rm_p27.p27_moneda
+	DISPLAY r_pro.p01_nomprov TO tit_nombre_pro
+
+	RETURN
+END IF
+
 INITIALIZE mone_aux, codprov TO NULL
 LET int_flag = 0
 INPUT BY NAME rm_p27.p27_codprov, rm_p27.p27_moneda
@@ -532,74 +567,70 @@ INPUT BY NAME rm_p27.p27_codprov, rm_p27.p27_moneda
 		CALL llamar_visor_teclas()
 	ON KEY(F2)
 		IF INFIELD(p27_codprov) THEN
-			CALL fl_ayuda_proveedores_localidad(vg_codcia,vg_codloc)
+			CALL fl_ayuda_proveedores_localidad(vg_codcia, vg_codloc)
 				RETURNING codprov, nomprov
-                       	IF codprov IS NOT NULL THEN
-                             	LET rm_p27.p27_codprov = codprov
-                               	DISPLAY BY NAME rm_p27.p27_codprov
-                               	DISPLAY nomprov TO tit_nombre_pro
-                        END IF
-                END IF
+			IF codprov IS NOT NULL THEN
+				LET rm_p27.p27_codprov = codprov
+				DISPLAY BY NAME rm_p27.p27_codprov
+				DISPLAY nomprov TO tit_nombre_pro
+			END IF
+		END IF
 		IF INFIELD(p27_moneda) THEN
-               		CALL fl_ayuda_monedas()
-                       		RETURNING mone_aux, nomm_aux, deci_aux
-       		      	LET int_flag = 0
-                      	IF mone_aux IS NOT NULL THEN
-                              	LET rm_p27.p27_moneda = mone_aux
-                               	DISPLAY BY NAME rm_p27.p27_moneda
-                               	DISPLAY nomm_aux TO tit_moneda
-                       	END IF
-                END IF
+			CALL fl_ayuda_monedas()
+				RETURNING mone_aux, nomm_aux, deci_aux
+			LET int_flag = 0
+			IF mone_aux IS NOT NULL THEN
+				LET rm_p27.p27_moneda = mone_aux
+				DISPLAY BY NAME rm_p27.p27_moneda
+				DISPLAY nomm_aux TO tit_moneda
+			END IF
+		END IF
 	BEFORE INPUT
 		--#CALL dialog.keysetlabel("F1","")
 		--#CALL dialog.keysetlabel("CONTROL-W","")
 	AFTER FIELD p27_moneda
-               	IF rm_p27.p27_moneda IS NOT NULL THEN
-                       	CALL fl_lee_moneda(rm_p27.p27_moneda)
-                               	RETURNING r_mon.*
-                       	IF r_mon.g13_moneda IS NULL THEN
-                               	--CALL fgl_winmessage(vg_producto,'Moneda no existe.','exclamation')
+		IF rm_p27.p27_moneda IS NOT NULL THEN
+			CALL fl_lee_moneda(rm_p27.p27_moneda)
+				RETURNING r_mon.*
+			IF r_mon.g13_moneda IS NULL THEN
 				CALL fl_mostrar_mensaje('Moneda no existe.','exclamation')
-                               	NEXT FIELD p27_moneda
-                       	END IF
+				NEXT FIELD p27_moneda
+			END IF
 			IF r_mon.g13_estado = 'B' THEN
-                                CALL fl_mensaje_estado_bloqueado()
+           		CALL fl_mensaje_estado_bloqueado()
 				NEXT FIELD p20_moneda
 			END IF
 			IF rm_p27.p27_moneda = rg_gen.g00_moneda_base THEN
 				LET r_mon_par.g14_tasa = 1
 			ELSE
-				CALL fl_lee_factor_moneda(rm_p27.p27_moneda,
-							rg_gen.g00_moneda_base)
+				CALL fl_lee_factor_moneda(rm_p27.p27_moneda, rg_gen.g00_moneda_base)
 					RETURNING r_mon_par.*
 				IF r_mon_par.g14_serial IS NULL THEN
-					--CALL fgl_winmessage(vg_producto,'La paridad para está moneda no existe.','exclamation')
 					CALL fl_mostrar_mensaje('La paridad para está moneda no existe.','exclamation')
 					NEXT FIELD p27_moneda
 				END IF
 			END IF
 			LET rm_p27.p27_paridad = r_mon_par.g14_tasa
 			DISPLAY BY NAME rm_p27.p27_paridad
-               	ELSE
-                       	LET rm_p27.p27_moneda = rg_gen.g00_moneda_base
-                       	CALL fl_lee_moneda(rm_p27.p27_moneda)
+		ELSE
+			LET rm_p27.p27_moneda = rg_gen.g00_moneda_base
+			CALL fl_lee_moneda(rm_p27.p27_moneda)
 				RETURNING r_mon.*
-                       	DISPLAY BY NAME rm_p27.p27_moneda
-               	END IF
-               	DISPLAY r_mon.g13_nombre TO tit_moneda
+			DISPLAY BY NAME rm_p27.p27_moneda
+		END IF
+		DISPLAY r_mon.g13_nombre TO tit_moneda
 	AFTER FIELD p27_codprov
-               	IF rm_p27.p27_codprov IS NOT NULL THEN
-                       	CALL fl_lee_proveedor(rm_p27.p27_codprov)
-                     		RETURNING r_pro.*
-                        IF r_pro.p01_codprov IS NULL THEN
-                               	--CALL fgl_winmessage(vg_producto,'Proveedor no existe.','exclamation')
+		IF rm_p27.p27_codprov IS NOT NULL THEN
+			CALL fl_lee_proveedor(rm_p27.p27_codprov)
+				RETURNING r_pro.*
+			IF r_pro.p01_codprov IS NULL THEN
 				CALL fl_mostrar_mensaje('Proveedor no existe.','exclamation')
-                               	NEXT FIELD p27_codprov
-                        END IF
+				NEXT FIELD p27_codprov
+			END IF
 			DISPLAY r_pro.p01_nomprov TO tit_nombre_pro
 		ELSE
 			CLEAR tit_nombre_pro
-                END IF
+		END IF
 END INPUT
 
 END FUNCTION
@@ -762,7 +793,6 @@ INPUT BY NAME val_bienes, val_servi, val_impto, val_neto
 			LET val_bienes = 0
 		END IF
 		IF val_bienes > val_neto THEN
-			--CALL fgl_winmessage(vg_producto,'Debe ingresar un valor menor valor neto.','exclamation')
 			CALL fl_mostrar_mensaje('Debe ingresar un valor menor valor neto.','exclamation')
 			NEXT FIELD val_bienes
 		END IF
@@ -773,7 +803,6 @@ INPUT BY NAME val_bienes, val_servi, val_impto, val_neto
 			LET val_servi = 0
 		END IF
 		IF val_servi > val_neto THEN
-			--CALL fgl_winmessage(vg_producto,'Debe ingresar un valor menor valor neto.','exclamation')
 			CALL fl_mostrar_mensaje('Debe ingresar un valor menor valor neto.','exclamation')
 			NEXT FIELD val_servi
 		END IF			
@@ -781,7 +810,6 @@ INPUT BY NAME val_bienes, val_servi, val_impto, val_neto
 		DISPLAY BY NAME val_bienes, val_servi
 	AFTER INPUT
 		IF (val_bienes + val_servi) <> (val_neto - val_impto) THEN
-			--CALL fgl_winmessage(vg_producto,'Total neto menos iva debe ser igual al valor bienes mas valor servicios.','exclamation')
 			CALL fl_mostrar_mensaje('Total neto menos iva debe ser igual al valor bienes mas valor servicios.','exclamation')
 			CONTINUE INPUT
 		END IF
@@ -831,7 +859,6 @@ WHILE NOT salir
 		CALL fl_mostrar_mensaje('No hay datos a mostrar.','exclamation')
 		LET int_flag = 1
 		RETURN
-		--LET ind_ret = 1
 	END IF
 	CALL set_count(ind_ret)
 	INPUT ARRAY r_ret WITHOUT DEFAULTS FROM ra_ret.*
@@ -904,7 +931,6 @@ WHILE NOT salir
 			IF r_ret[i].check = 'S' THEN
 				IF r_ret[i].val_base IS NULL OR 
 				   r_ret[i].val_base = 0 THEN
-					--CALL fgl_winmessage(vg_producto,'Digite valor base.', 'exclamation')
 					CALL fl_mostrar_mensaje('Digite valor base.', 'exclamation')
 					NEXT FIELD val_base
 				END IF
@@ -981,7 +1007,6 @@ WHILE NOT salir
 				CONTINUE INPUT
 			END IF
 			IF tot_ret > val_neto THEN
-				--CALL fgl_winmessage(vg_producto,'El valor de las retenciones no debe ser mayor al valor neto.','exclamation')
 				CALL fl_mostrar_mensaje('El valor de las retenciones no debe ser mayor al valor neto.','exclamation')
 				CONTINUE INPUT
 			END IF
@@ -1001,7 +1026,6 @@ WHILE NOT salir
 				END IF
 			END FOR
 			IF iva > 100 THEN
-				--CALL fgl_winmessage(vg_producto,'Las retenciones sobre el iva no pueden exceder al 100% del iva.','exclamation')
 				CALL fl_mostrar_mensaje('Las retenciones sobre el iva no pueden exceder al 100% del iva.','exclamation')
 				CONTINUE INPUT
 			END IF
@@ -1268,7 +1292,6 @@ LET r_p22.p22_num_trn   = nextValInSequence('TE', r_p22.p22_tipo_trn)
 IF r_p22.p22_num_trn = -1 THEN
 	LET int_flag = 1
 	ROLLBACK WORK
-	--CALL fgl_winmessage(vg_producto,'No puede generar la retención en este momento.','stop')
 	CALL fl_mostrar_mensaje('No puede generar la retención en este momento.','stop')
 	EXIT PROGRAM
 END IF

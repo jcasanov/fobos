@@ -1,57 +1,42 @@
 DATABASE aceros
-SCREEN {
+SCREEN 
+{
 
-       Proveedor: [c000                                       ]
+ Glosa: [c060                                                               ]
 
-                                     Valor Bienes: [c001            ]
-                                  Valor Servicios: [c002            ]
-                                         Impuesto: [c003            ]
-                                                   ------------------
-                                       Valor Neto: [c004            ]
-          
-    [lbl1                |lbl2|lbl3          |lbl4  |lbl5           ]   
- [c|c010                |c005|c006          |c007  |c008            ]
- [c|c010                |c005|c006          |c007  |c008            ]
- [c|c010                |c005|c006          |c007  |c008            ]
- [c|c010                |c005|c006          |c007  |c008            ]
- [c|c010                |c005|c006          |c007  |c008            ]
-                                                   ------------------
-                                Total Retenciones: [c011            ]
-                                            Saldo: [c009            ] 
+ [lb1          ][lb2                       |lb4             |lb5             ]
+[c018        ] [a4                        |c020            |c021            ]
+[c018        ] [a4                        |c020            |c021            ]
+[c018        ] [a4                        |c020            |c021            ]
+[c018        ] [a4                        |c020            |c021            ]
+[c018        ] [a4                        |c020            |c021            ]
+[c018        ] [a4                        |c020            |c021            ]
+[c018        ] [a4                        |c020            |c021            ]
+                                          [c050            |c051            ]
+
 }
-end
-
+TABLES
+ctbt012
+ctbt013
 ATTRIBUTES
-c000 = FORMONLY.n_proveedor, NOENTRY, REVERSE;
-c001 = FORMONLY.val_bienes,  NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
-c002 = FORMONLY.val_servi,   NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
-c003 = FORMONLY.val_impto,   NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
-c004 = FORMONLY.val_neto,    NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
+c060 = ctbt012.b12_glosa, REVERSE, UPSHIFT, SCROLL;
+c050 = FORMONLY.tot_debito, NOENTRY, FORMAT='#,###,###,##&.##';
+c051 = FORMONLY.tot_credito, NOENTRY, FORMAT='#,###,###,##&.##';
 
-c005 = FORMONLY.tipo_ret,    NOENTRY, REVERSE,
-	OPTIONS='-nolist';
-c006 = FORMONLY.val_base,    INCLUDE = (0 TO 99999999.99), REVERSE, 
-        FORMAT='##,###,##&.##',
-	OPTIONS='-nolist';
-c007 = FORMONLY.porc,        NOENTRY, REVERSE, FORMAT='##&.##',
-	OPTIONS='-nolist';
-c008 = FORMONLY.subtotal,    NOENTRY, REVERSE, FORMAT='#,###,###,##&.##',
-	OPTIONS='-nolist';
-c010 = FORMONLY.n_retencion, NOENTRY, REVERSE, OPTIONS='-nolist';
+c018 = ctbt013.b13_cuenta, UPSHIFT, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2',
+	OPTIONS='-nolist', COMMENT='Digite cuenta de gastos.';
+a4 = FORMONLY.n_cuenta, UPSHIFT, NOENTRY, OPTIONS='-nolist';
+c020 = FORMONLY.valor_db, OPTIONS='-nolist', 
+	FORMAT='#,###,###,##&.##', INCLUDE=(0 TO 9999999999.99);
+c021 = FORMONLY.valor_cr, OPTIONS='-nolist', 
+	FORMAT='#,###,###,##&.##', INCLUDE=(0 TO 9999999999.99);
 
-c009 = FORMONLY.val_pagar,   NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
-c011 = FORMONLY.tot_ret,     NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
-
-c    = FORMONLY.check,	     WIDGET='CHECK', CONFIG='S N acknowledge',
-	AUTONEXT, DEFAULT='N', OPTIONS='-nolist';
-	
-lbl1 = FORMONLY.bt_nom_ret,  WIDGET='BUTTON', CONFIG='F15';
-lbl2 = FORMONLY.bt_tipo_ret, WIDGET='BUTTON', CONFIG='F16';
-lbl3 = FORMONLY.bt_base,     WIDGET='BUTTON', CONFIG='F17';
-lbl4 = FORMONLY.bt_porc,     WIDGET='BUTTON', CONFIG='F18';
-lbl5 = FORMONLY.bt_valor,    WIDGET='BUTTON', CONFIG='F19';
-
-end
-
+lb1  = FORMONLY.bt_cuenta     , WIDGET='BUTTON', CONFIG='F15'; 
+lb2  = FORMONLY.bt_descripcion, WIDGET='BUTTON', CONFIG='F16';
+lb4  = FORMONLY.bt_valor_db   , WIDGET='BUTTON', CONFIG='F17';
+lb5  = FORMONLY.bt_valor_cr   , WIDGET='BUTTON', CONFIG='F18';
+END
+KEYS
+F5 = 'Cabecera'
 INSTRUCTIONS
-SCREEN RECORD ra_ret[5] (check, n_retencion, tipo_ret, val_base, porc, subtotal)
+SCREEN RECORD r_ctas[7] (b13_cuenta, n_cuenta, valor_db, valor_cr)

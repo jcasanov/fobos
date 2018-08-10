@@ -1,68 +1,69 @@
-DATABASE FORMONLY
-SCREEN
+DATABASE aceros
+SCREEN 
 {
-      Proveedor: [c000|c001                                    ]
-      Documento: [a1|c006              ]       Dividendo : [c01]     
-----------------------------------------------------------------------
-   Valor Bienes: [c007            ]
-Valor Servicios: [c008            ]
-         I.V.A.: [c009            ]
-                 ------------------
-     Total Neto: [c010            ]  Valor a Pagar: [c018            ]
-                                                      [c051] de [c052]
-     Descripción    SRI   Ti.R   Valor Base   Porc.      Subtotal
- [c|c015          |c020  |c011|c012          |c013  |c014            ]
- [c|c015          |c020  |c011|c012          |c013  |c014            ]
- [c|c015          |c020  |c011|c012          |c013  |c014            ]
- [c|c015          |c020  |c011|c012          |c013  |c014            ]
-                                                    ------------------
-                                 Total Retenciones: [c017            ]
-                                  Valor del Cheque: [c016            ]
- [c050                                                               ]
+       Orden Pago: [c002       ]                  Estado: [b|c100      ]
+        Proveedor: [c004       ] [c102                                 ]
+            Banco: [c000] [c104               ]  Cta.: [c001           ]   
+           Moneda: [a0] [c103           ] Paridad: [c006               ]
+        No Cheque: [c050       ]        Valor Cheque: [c051            ]
+       Referencia: [c010                                ]               
+
+    TP  No. Documento  No. Fecha Vcto   Saldo Capital    Valor a Pagar
+   [a1|c020           |c01|c027      |c026            |c028            ]
+   [a1|c020           |c01|c027      |c026            |c028            ]
+   [a1|c020           |c01|c027      |c026            |c028            ]
+   [a1|c020           |c01|c027      |c026            |c028            ]
+   [a1|c020           |c01|c027      |c026            |c028            ]
+   [a1|c020           |c01|c027      |c026            |c028            ]
+   [a1|c020           |c01|c027      |c026            |c028            ]
+                          	     [c041            |c042            ]
+
+ Ingresado Por: [c013      ]     Fecha de Ingreso: [c014               ]
 }
-END   
-
+TABLES
+cxpt024
+cxpt025
 ATTRIBUTES
-c000 = FORMONLY.cod_proveedor, REVERSE,               NOENTRY;
-c001 = FORMONLY.n_proveedor,   REVERSE,               NOENTRY;
-a1   = FORMONLY.tipo_doc,      REVERSE,               NOENTRY;
-c006 = FORMONLY.num_doc,       REVERSE,               NOENTRY;
-c01  = FORMONLY.dividendo TYPE SMALLINT, REVERSE, FORMAT='#&&', NOENTRY;
+c000 = cxpt024.p24_banco, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c001 = cxpt024.p24_numero_cta, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c002 = cxpt024.p24_orden_pago, REVERSE, NOENTRY, UPSHIFT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c004 = cxpt024.p24_codprov, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+b = cxpt024.p24_estado, NOENTRY, UPSHIFT, REVERSE;
+a0 = cxpt024.p24_moneda, REVERSE, UPSHIFT, AUTONEXT,
+	COMMENTS = 'Presione F2 para obtener la ayuda del campo.'; 
+c006 = cxpt024.p24_paridad, NOENTRY, REVERSE, FORMAT='#,###,##&.#########';
+c010 = cxpt024.p24_referencia, NOENTRY, UPSHIFT;
+c013 = cxpt024.p24_usuario, REVERSE, NOENTRY, UPSHIFT;
+c014 = cxpt024.p24_fecing, REVERSE, NOENTRY;
+
+a1 = cxpt025.p25_tipo_doc, NOENTRY;
+c020 = cxpt025.p25_num_doc, NOENTRY;
+c01 = cxpt025.p25_dividendo, NOENTRY, FORMAT='#&&';
+c026 = p25_valor_cap, FORMAT='#,###,###,##&.##', NOENTRY;
+c028 = FORMONLY.valor_pagar TYPE DECIMAL(12,2), FORMAT='#,###,###,##&.##',     
+	INCLUDE=(0.0 TO 9999999999.99);
+c027 = FORMONLY.p20_fecha_vcto TYPE DATE, NOENTRY, FORMAT = 'dd-mm-yyyy'; 
 	
-c007 = FORMONLY.val_bienes TYPE DECIMAL (12,2), REVERSE,
-	FORMAT='#,###,###,##&.##', INCLUDE=(0 TO 9999999999.99),
-	COMMENTS='Valor bienes de la factura.';
-c008 = FORMONLY.val_servi TYPE DECIMAL (12,2), REVERSE,
-	FORMAT='#,###,###,##&.##',
-	INCLUDE=(0 TO 9999999999.99),
-	COMMENTS='Valor servicios de la factura.';
-c009 = FORMONLY.val_impto TYPE DECIMAL (12,2),   NOENTRY, REVERSE,
-	FORMAT='#,###,###,##&.##';
-c010 = FORMONLY.val_neto TYPE DECIMAL (12,2),    NOENTRY, REVERSE,
-	FORMAT='#,###,###,##&.##';
-c011 = FORMONLY.tipo_ret,    NOENTRY;
-c012 = FORMONLY.val_base TYPE DECIMAL (12,2), NOENTRY, FORMAT='###,###,##&.##';
-c013 = FORMONLY.porc TYPE DECIMAL (6,2), NOENTRY, FORMAT='##&.##';
-c014 = FORMONLY.subtotal TYPE DECIMAL(12,2), NOENTRY, FORMAT='#,###,###,##&.##';
-c015 = FORMONLY.n_retencion, NOENTRY;
-c020 = FORMONLY.c_sri, NOENTRY, UPSHIFT;
+c041 = cxpt024.p24_total_cap, FORMAT='#,###,###,##&.##', NOENTRY; 
+c042 = FORMONLY.tot_val_pagar TYPE DECIMAL (12,2), FORMAT='#,###,###,##&.##',
+	NOENTRY; 
 
-c016 = FORMONLY.val_cheque TYPE DECIMAL (12,2),  NOENTRY, REVERSE,
-	FORMAT='#,###,###,##&.##';
-c017 = FORMONLY.tot_ret TYPE DECIMAL (12,2),     NOENTRY, REVERSE,
-	FORMAT='#,###,###,##&.##';
-c018 = FORMONLY.val_pagar TYPE DECIMAL (12,2), REVERSE,
-	FORMAT='#,###,###,##&.##',
-	INCLUDE=(0 TO 9999999999.99);
+c050 = cxpt024.p24_numero_che, NOENTRY;
+c051 = cxpt024.p24_total_che,  NOENTRY, FORMAT='#,###,###,##&.##';
 
-c    = FORMONLY.check TYPE CHAR, INCLUDE = ('S', 'N'),
-	AUTONEXT, DEFAULT='N';
-c050 = FORMONLY.tit_codigo_sri, NOENTRY, REVERSE;
+c100 = FORMONLY.n_estado,  NOENTRY;
+c102 = FORMONLY.n_proveedor, NOENTRY;
+c103 = FORMONLY.n_moneda,  NOENTRY;
+c104 = FORMONLY.n_banco,   NOENTRY;
+end
 
-c051 = FORMONLY.num_rows, NOENTRY, REVERSE;
-c052 = FORMONLY.max_rows, NOENTRY, REVERSE;
-END
 INSTRUCTIONS
 DELIMITERS '||'
-SCREEN RECORD ra_ret[4] (check, n_retencion, c_sri, tipo_ret, val_base, porc,
-				subtotal)
+SCREEN RECORD ra_docs[7] (p25_tipo_doc, p25_num_doc, p25_dividendo, p20_fecha_vcto, p25_valor_cap, valor_pagar)
+
+--KEYS
+--F5 = 'Estado Cuenta'

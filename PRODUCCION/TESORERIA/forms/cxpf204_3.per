@@ -1,78 +1,75 @@
-DATABASE FORMONLY
-SCREEN
+DATABASE aceros
+SCREEN 
 {
+       Orden Pago: [c002       ]                  Estado: [b|c100      ]
+        Proveedor: [c004       ] [c102                                 ]
+            Banco: [c000] [c104               ]  Cta.: [c001           ]   
+           Moneda: [a0] [c103           ] Paridad: [c006               ]
+        No Cheque: [c050       ]        Valor Cheque: [c051            ]
+       Referencia: [c010                                ]               
 
-      Proveedor: [c000|c001                                    ]
-      Documento: [a1|c006              ]       Dividendo : [c01]     
-----------------------------------------------------------------------
-   Valor Bienes: [c007            ]
-Valor Servicios: [c008            ]
-         I.V.A.: [c009            ]
-                 ------------------
-     Total Neto: [c010            ]  Valor a Pagar: [c018            ]
-          
-   [c051] de [c052]
-    [lbl1          |lbl6  |lbl2|lbl3          |lbl4  |lbl5            ]   
- [c|c015          |c020  |c011|c012          |c013  |c014            ]
- [c|c015          |c020  |c011|c012          |c013  |c014            ]
- [c|c015          |c020  |c011|c012          |c013  |c014            ]
- [c|c015          |c020  |c011|c012          |c013  |c014            ]
- [c|c015          |c020  |c011|c012          |c013  |c014            ]
-                                                    ------------------
-                                 Total Retenciones: [c017            ]
-                                  Valor del Cheque: [c016            ]
- [c050                                                               ]
+    [a3|c030           |c02|c033      |c034            |c035           ]
+   [a1|c020           |c01|c027      |c026            |c028            ]
+   [a1|c020           |c01|c027      |c026            |c028            ]
+   [a1|c020           |c01|c027      |c026            |c028            ]
+   [a1|c020           |c01|c027      |c026            |c028            ]
+   [a1|c020           |c01|c027      |c026            |c028            ]
+   [a1|c020           |c01|c027      |c026            |c028            ]
+   [a1|c020           |c01|c027      |c026            |c028            ]
+   [a1|c020           |c01|c027      |c026            |c028            ]
+                          	     [c041            |c042            ]
+
+ Ingresado Por: [c013      ]         Fecha de Ingreso: [c014               ]
 }
-END   
-
+end
+TABLES
+cxpt024
+cxpt025
 ATTRIBUTES
-c000 = FORMONLY.cod_proveedor, REVERSE,               NOENTRY;
-c001 = FORMONLY.n_proveedor,   REVERSE,               NOENTRY;
-a1   = FORMONLY.tipo_doc,      REVERSE,               NOENTRY;
-c006 = FORMONLY.num_doc,       REVERSE,               NOENTRY;
-c01  = FORMONLY.dividendo,     REVERSE, FORMAT='#&&', NOENTRY;
+c000 = cxpt024.p24_banco, REVERSE, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c001 = cxpt024.p24_numero_cta, REVERSE, WIDGET='FIELD_BMP', 
+	CONFIG='lista.bmp F2';
+c002 = cxpt024.p24_orden_pago, REVERSE, NOENTRY, WIDGET='FIELD_BMP',
+	CONFIG='lista.bmp F2';
+c004 = cxpt024.p24_codprov, REVERSE, WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+b = cxpt024.p24_estado, NOENTRY, UPSHIFT, REVERSE;
+a0 = cxpt024.p24_moneda, REVERSE, UPSHIFT, AUTONEXT,
+	WIDGET='FIELD_BMP', CONFIG='lista.bmp F2';
+c006 = cxpt024.p24_paridad, NOENTRY, REVERSE, FORMAT='#,###,##&.#########';
+c010 = cxpt024.p24_referencia, NOENTRY, UPSHIFT;
+c013 = cxpt024.p24_usuario, REVERSE, NOENTRY, UPSHIFT;
+c014 = cxpt024.p24_fecing, REVERSE, NOENTRY;
+
+a1 = cxpt025.p25_tipo_doc, NOENTRY, OPTIONS='-nolist';
+c020 = cxpt025.p25_num_doc, NOENTRY, OPTIONS='-nolist';
+c01 = cxpt025.p25_dividendo, NOENTRY, OPTIONS='-nolist', FORMAT='&&';
+c026 = p25_valor_cap, FORMAT='#,###,###,##&.##', NOENTRY, OPTIONS='-nolist';
+c028 = FORMONLY.valor_pagar TYPE DECIMAL(12,2), FORMAT='#,###,###,##&.##',     
+	OPTIONS='-nolist', INCLUDE=(0.0 TO 9999999999.99);
+c027 = FORMONLY.p20_fecha_vcto TYPE DATE, NOENTRY, OPTIONS='-nolist',
+	FORMAT = 'dd-mm-yyyy'; 
 	
-c007 = FORMONLY.val_bienes,           REVERSE, FORMAT='#,###,###,##&.##',
-	INCLUDE=(0 TO 9999999999.99),
-	COMMENT='Valor bienes de la factura.';
-c008 = FORMONLY.val_servi,            REVERSE, FORMAT='#,###,###,##&.##',
-	INCLUDE=(0 TO 9999999999.99),
-	COMMENT='Valor servicios de la factura.';
-c009 = FORMONLY.val_impto,   NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
-c010 = FORMONLY.val_neto,    NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
-c011 = FORMONLY.tipo_ret,    NOENTRY, OPTIONS='-nolist';
-c012 = FORMONLY.val_base,    NOENTRY, FORMAT='##,###,##&.##',
-	OPTIONS='-nolist';
-c013 = FORMONLY.porc,        NOENTRY, FORMAT='##&.##',
-	OPTIONS='-nolist';
-c014 = FORMONLY.subtotal,    NOENTRY, FORMAT='#,###,###,##&.##',
-	OPTIONS='-nolist';
-c015 = FORMONLY.n_retencion, NOENTRY, OPTIONS='-nolist';
-c020 = FORMONLY.c_sri, NOENTRY, OPTIONS = '-nolist';
+a3   = FORMONLY.bt_tipo_doc,   WIDGET = 'BUTTON', CONFIG = 'F15';
+c030 = FORMONLY.bt_nro_doc,    WIDGET = 'BUTTON', CONFIG = 'F16';
+c02  = FORMONLY.bt_dividendo,  WIDGET = 'BUTTON', CONFIG = 'F17';
+c033 = FORMONLY.bt_fecha_vcto, WIDGET = 'BUTTON', CONFIG = 'F18';
+c034 = FORMONLY.bt_capital,    WIDGET = 'BUTTON', CONFIG = 'F19';
+c035 = FORMONLY.bt_valor,      WIDGET = 'BUTTON', CONFIG = 'F20';
 
-c016 = FORMONLY.val_cheque,  NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
-c017 = FORMONLY.tot_ret,     NOENTRY, REVERSE, FORMAT='#,###,###,##&.##';
-c018 = FORMONLY.val_pagar,            REVERSE, FORMAT='#,###,###,##&.##',
-	INCLUDE=(0 TO 9999999999.99);
+c041 = cxpt024.p24_total_cap, FORMAT='#,###,###,##&.##', NOENTRY; 
+c042 = FORMONLY.tot_val_pagar, FORMAT='#,###,###,##&.##', NOENTRY; 
 
-c    = FORMONLY.check,	     WIDGET='CHECK', CONFIG='S N acknowledge',
-	AUTONEXT, DEFAULT='N', OPTIONS='-nolist';
-	
-lbl1 = FORMONLY.bt_nom_ret,  WIDGET='BUTTON', CONFIG='F15';
-lbl6 = FORMONLY.bt_sri,      WIDGET='BUTTON', CONFIG='F16';
-lbl2 = FORMONLY.bt_tipo_ret, WIDGET='BUTTON', CONFIG='F17';
-lbl3 = FORMONLY.bt_base,     WIDGET='BUTTON', CONFIG='F18';
-lbl4 = FORMONLY.bt_porc,     WIDGET='BUTTON', CONFIG='F19';
-lbl5 = FORMONLY.bt_valor,    WIDGET='BUTTON', CONFIG='F20';
+c050 = cxpt024.p24_numero_che, NOENTRY;
+c051 = cxpt024.p24_total_che,  NOENTRY, FORMAT='#,###,###,##&.##';
 
-c050 = FORMONLY.tit_codigo_sri, NOENTRY, REVERSE;
+c100 = FORMONLY.n_estado,  NOENTRY;
+c102 = FORMONLY.n_proveedor, NOENTRY;
+c103 = FORMONLY.n_moneda,  NOENTRY;
+c104 = FORMONLY.n_banco,   NOENTRY;
+end
 
-c051 = FORMONLY.num_rows, NOENTRY, REVERSE;
-c052 = FORMONLY.max_rows, NOENTRY, REVERSE;
-END
-KEYS
-F5 = 'Valor a Pagar'
 INSTRUCTIONS
-DELIMITERS '||'
-SCREEN RECORD ra_ret[5] (check, n_retencion, c_sri, tipo_ret, val_base, porc,
-				subtotal)
+SCREEN RECORD ra_docs[8] (p25_tipo_doc, p25_num_doc, p25_dividendo, p20_fecha_vcto, p25_valor_cap, valor_pagar)
+
+KEYS
+F5 = 'Estado Cuenta'

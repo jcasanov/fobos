@@ -10,14 +10,10 @@
 GLOBALS '../../../PRODUCCION/LIBRERIAS/fuentes/globales.4gl'
 
 DEFINE vm_factura	LIKE rept019.r19_cod_tran
-DEFINE vm_retencion	LIKE rept019.r19_cod_tran
 DEFINE vm_ajuste	LIKE cxpt022.p22_tipo_trn
 DEFINE vm_transaccion   LIKE rept019.r19_cod_tran
 
 DEFINE vm_num_tran	LIKE rept019.r19_num_tran
-
--- Para guardar el numero del documento de retenciones
-DEFINE vm_num_ret 	LIKE cxpt027.p27_num_ret
 
 -- CADA VEZ QUE SE REALIZE UNA CONSULTA SE GUARDARAN LOS ROWID DE CADA FILA 
 -- RECUPERADA EN UNA TABLA LLAMADA r_rows QUE TENDRA 1000 ELEMENTOS
@@ -133,9 +129,7 @@ LET vg_codcia  = arg_val(3)
 LET vg_codloc  = arg_val(4)
 
 CALL fl_activar_base_datos(vg_base)
-CALL fl_seteos_defaults()	-- Asigna un valor por default a vg_codloc
-			        -- que luego puede ser reemplazado si se 
-                            	-- mantiene sin comentario la siguiente linea
+CALL fl_seteos_defaults()	
 
 LET vm_num_tran = 0
 IF num_args() <> 4 THEN
@@ -197,14 +191,12 @@ LET ind_max_ret = 50
 
 CALL fl_lee_compania_repuestos(vg_codcia) RETURNING rm_r00.*
 IF rm_r00.r00_compania IS NULL THEN
-	--CALL fgl_winmessage(vg_producto,'No existe registro de configuración en el módulo de repuestos para esta compañía.','exclamation')
 	CALL fl_mostrar_mensaje('No existe registro de configuración en el módulo de repuestos para esta compañía.','exclamation')
 	EXIT PROGRAM
 END IF
 
 CALL fl_lee_compania_orden_compra(vg_codcia) RETURNING rm_c00.*
 IF rm_c00.c00_compania IS NULL THEN
-	--CALL fgl_winmessage(vg_producto,'No existe registro de configuración en el módulo de ordenes de compra para esta compañía.','exclamation')
 	CALL fl_mostrar_mensaje('No existe registro de configuración en el módulo de ordenes de compra para esta compañía.','exclamation')
 	EXIT PROGRAM
 END IF
@@ -218,7 +210,6 @@ END IF
 -- OjO
 LET vm_transaccion = 'CL'       
 LET vm_factura     = 'FA'
-LET vm_retencion   = 'RT'
 LET vm_ajuste      = 'AJ'
 --
 
@@ -481,7 +472,6 @@ DEFINE query		CHAR(400)
 
 DEFINE fecha_actual DATETIME YEAR TO SECOND
 
-LET vm_num_ret = NULL
 CLEAR FORM
 INITIALIZE rm_r19.* TO NULL
 
@@ -771,6 +761,14 @@ FOREACH q_cont_ne INTO r_r41.*
 											r_r41.r41_cod_tr, r_r41.r41_num_tr)
 END FOREACH
 
+CALL control_imprimir(1)
+
+IF rm_c00.c00_cuando_ret = 'C' THEN
+	CALL ejecuta_comando('TESORERIA', 'TE', 'cxpp207', 
+                         	vg_codloc || ' ' || rm_c10.c10_codprov || 
+                         	' F ' || vm_factura || ' ' || rm_r19.r19_oc_externa) 
+END IF
+
 IF vm_num_rows = vm_max_rows THEN
 	LET vm_num_rows = 1
 ELSE
@@ -780,7 +778,6 @@ LET vm_rows[vm_num_rows] = rowid
 LET vm_row_current = vm_num_rows
 
 CALL muestra_contadores()
-CALL control_imprimir(1)
 CALL fl_mensaje_registro_ingresado()
 IF tiene_facturas_cruce() THEN
 	CALL muestra_fact_items_cruce()
@@ -2089,7 +2086,7 @@ FUNCTION orden_compra()
 DEFINE param		VARCHAR(60)
 
 LET param = ' ', vg_codloc, ' ', rm_r19.r19_oc_interna
-CALL ejecuta_comando('COMPRAS', 'OC', 'ordp200 ', param)
+CALL ejecuta_comando('COMPRAS', 'OC', 'ordp200', param)
 
 END FUNCTION
 
@@ -2365,7 +2362,7 @@ LET r_p20.p20_codprov     = r_c10.c10_codprov
 LET r_p20.p20_usuario     = vg_usuario
 LET r_p20.p20_fecing      = fl_current()
 LET r_p20.p20_fecha_emi	  = c13_fec_emi_fac
-LET r_p20.p20_tipo_doc    = 'FA'
+LET r_p20.p20_tipo_doc    = vm_factura
 LET r_p20.p20_num_doc     = rm_r19.r19_oc_externa
 LET r_p20.p20_referencia  = 'COMPRA LOCAL # ' || rm_r19.r19_num_tran
 LET r_p20.p20_porc_impto  = rm_r19.r19_porc_impto
@@ -2617,7 +2614,6 @@ DEFINE i		SMALLINT
 DEFINE done 		SMALLINT
 
 DEFINE r_p01		RECORD LIKE cxpt001.*
-DEFINE r_c00		RECORD LIKE ordt000.*
 DEFINE r_c02		RECORD LIKE ordt002.*
 DEFINE r_p05		RECORD LIKE cxpt005.*
 DEFINE r_c10		RECORD LIKE ordt010.*
@@ -2625,70 +2621,9 @@ DEFINE r_c13		RECORD LIKE ordt013.*
 DEFINE resp 		CHAR(6)
 
 CALL fl_lee_proveedor(r_c10.c10_codprov)	RETURNING r_p01.*
-CALL fl_lee_compania_orden_compra(vg_codcia)	RETURNING r_c00.*
-
-LET val_servi  = 0
-LET val_bienes = rm_r19.r19_tot_bruto - rm_r19.r19_tot_dscto + rm_c10.c10_otros     
-LET val_impto  = val_bienes * (rm_r19.r19_porc_impto / 100)
-LET val_neto   = rm_r19.r19_tot_neto
-LET val_pagar  = val_neto
-LET val_bienes = val_bienes + rm_c10.c10_flete
-LET tot_ret    = 0
-
-LET ind_ret = 0
-IF r_c00.c00_cuando_ret = 'C' THEN
-	DECLARE q_ret CURSOR FOR
-		SELECT * FROM ordt002, OUTER cxpt005
-			WHERE c02_compania   = vg_codcia
-		  	  AND p05_compania   = c02_compania
-		  	  AND p05_codprov    = r_c10.c10_codprov
-		  	  AND p05_tipo_ret   = c02_tipo_ret
-		  	  AND p05_porcentaje = c02_porcentaje 
-
-	LET i = 1
-	FOREACH q_ret INTO r_c02.*, r_p05.*
-		IF r_c02.c02_tipo_ret = 'F' AND r_p01.p01_ret_fuente = 'N' 
-		THEN
-			CONTINUE FOREACH
-		END IF
-		IF r_c02.c02_tipo_ret = 'I' AND r_p01.p01_ret_impto = 'N' 
-		THEN
-			CONTINUE FOREACH
-		END IF
-		LET r_ret[i].n_retencion = r_c02.c02_nombre
-		LET r_ret[i].tipo_ret    = r_c02.c02_tipo_ret
-		LET r_ret[i].porc        = r_c02.c02_porcentaje
-		LET r_ret[i].val_base    = 0
-		LET r_ret[i].subtotal    = 0
-		LET r_ret[i].check       = 'N'
-		IF r_p05.p05_tipo_ret IS NOT NULL THEN
-			LET r_ret[i].check = 'S'
-			IF r_p05.p05_tipo_ret = 'I' THEN
-				LET r_ret[i].val_base = val_impto
-			ELSE
-				LET r_ret[i].val_base = val_bienes
-			END IF
-			LET r_ret[i].subtotal = 
-				(r_ret[i].val_base * 
-				(r_p05.p05_porcentaje / 100))
-			LET tot_ret = tot_ret + r_ret[i].subtotal 
-			LET val_pagar = val_pagar - r_ret[i].subtotal
-		END IF
-		LET i = i + 1
-		IF i > ind_max_ret THEN
-			EXIT FOREACH
-		END IF
-	END FOREACH
-	LET i = i - 1
-
-	LET ind_ret = i
-END IF
 
 MENU 'OPCIONES'
 	BEFORE MENU
-		IF r_c00.c00_cuando_ret = 'P' THEN
-			HIDE OPTION 'Retenciones'
-		END IF
 		IF rm_r19.r19_cont_cred = 'C' THEN
 			HIDE OPTION 'Forma Pago'
 		END IF
@@ -2698,51 +2633,20 @@ MENU 'OPCIONES'
 		ELSE
 			CALL fl_mostrar_mensaje('La compra se está realizando al contado.','exclamation')
 		END IF
-	COMMAND KEY('R') 'Retenciones'		'Ver retenciones.'
-		IF r_c00.c00_cuando_ret = 'C' THEN
-			CALL muestra_retenciones(r_c10.*)
-		ELSE
-			CALL fl_mostrar_mensaje('La compañía realiza las retenciones al pagar la factura.','exclamation')
-		END IF
 	COMMAND KEY('G') 'Grabar'		'Graba compra local.'
 		LET INT_FLAG = 0
-		IF r_c00.c00_cuando_ret = 'C' AND tot_ret = 0 THEN
-			CALL fl_hacer_pregunta('No se han indicado retenciones. Seguro de generar la Compra Local sin retenciones?','No')
-				RETURNING resp
-			IF resp <> 'Yes' THEN
-				CONTINUE MENU
-			END IF
-		END IF
 		-- SI la compra es al contado solo grabara un registro
 		CALL genera_documentos_deudores(r_c13.*, r_c10.*)
+{
+XXX
 		IF r_c00.c00_cuando_ret = 'C' THEN
-			LET done = graba_retenciones(r_c10.*)
-			-- SI done = 1 hubieron retenciones
-			-- SI done = 0 no hubieron retenciones y no se 
-			-- hara ajuste
-			INITIALIZE rm_p29.* TO NULL
-			IF validar_num_sri(1) <> 1 THEN
-				ROLLBACK WORK
-				EXIT PROGRAM
-			END IF
-			CALL genera_num_ret_sri()
-			IF done THEN
 				UPDATE rept019
 					SET r19_num_ret = vm_num_ret
 					WHERE r19_compania = rm_r19.r19_compania
 					AND  r19_localidad= rm_r19.r19_localidad
 					AND  r19_cod_tran = rm_r19.r19_cod_tran
 					AND  r19_num_tran = rm_r19.r19_num_tran
-				CALL graba_ajuste_retencion(r_c10.*)
-				-- REGRESA INT_FLAG = 1 CUANDO HUBO UN ERROR EN
-				-- LA FUNCION DE SECUENCIAS DE TRANSACCIONES Y 
-				-- DEBE DESHACER TODO
-				IF INT_FLAG THEN
-					LET INT_FLAG = 1
-					EXIT MENU
-				END IF
-			END IF
-		END IF
+}
 		-- SI la compra local es al contado debe grabarse un ajuste
 		-- para darse de baja el documento
 		IF rm_r19.r19_cont_cred = 'C' THEN
@@ -2888,110 +2792,6 @@ END FUNCTION
 
 
 
-FUNCTION graba_ajuste_retencion(r_c10)
-
-DEFINE r_c10		RECORD LIKE ordt010.*
-DEFINE r_p22		RECORD LIKE cxpt022.*
-DEFINE r_p23		RECORD LIKE cxpt023.*
-DEFINE r_p28		RECORD LIKE cxpt028.*
-
-DEFINE i		SMALLINT
-DEFINE orden		SMALLINT
-
-INITIALIZE r_p22.* TO NULL
-INITIALIZE r_p23.* TO NULL
-
--- Graba Cabecera Ajuste Documento
-LET r_p22.p22_compania   = vg_codcia
-LET r_p22.p22_localidad  = vg_codloc
-LET r_p22.p22_codprov    = r_c10.c10_codprov
-LET r_p22.p22_tipo_trn   = vm_ajuste
-
-LET r_p22.p22_num_trn    = nextValInSequence('TE', r_p22.p22_tipo_trn)
-IF r_p22.p22_num_trn     = -1 THEN
-	LET INT_FLAG = 1
-	RETURN
-END IF
-
-LET r_p22.p22_referencia = 'RETENCIONES EN COMPRA LOCAL # '|| 
-			   rm_r19.r19_num_tran
-LET r_p22.p22_fecha_emi  = vg_fecha
-LET r_p22.p22_moneda     = rm_r19.r19_moneda
-LET r_p22.p22_paridad    = rm_r19.r19_paridad
-LET r_p22.p22_tasa_mora  = 0
-LET r_p22.p22_total_cap  = (val_neto - val_pagar) * (-1)
-LET r_p22.p22_total_int  = 0
-LET r_p22.p22_total_mora = 0
-LET r_p22.p22_origen     = 'A'
-LET r_p22.p22_usuario    = vg_usuario
-LET r_p22.p22_fecing     = fl_current()
-
-INSERT INTO cxpt022 VALUES(r_p22.*)
---------------------------------------------------------------------------
-
-LET r_p23.p23_compania  = r_p22.p22_compania
-LET r_p23.p23_localidad = r_p22.p22_localidad
-LET r_p23.p23_codprov   = r_p22.p22_codprov
-LET r_p23.p23_tipo_trn  = r_p22.p22_tipo_trn
-LET r_p23.p23_num_trn   = r_p22.p22_num_trn
-
-	LET r_p23.p23_tipo_doc   = 'FA'
-	LET r_p23.p23_num_doc    = rm_r19.r19_oc_externa
-	LET r_p23.p23_valor_int  = 0
-	LET r_p23.p23_valor_mora = 0
-	LET r_p23.p23_saldo_int  = 0
-
-LET orden = 1
-
-DECLARE q_ret2 CURSOR FOR 
-	SELECT * FROM cxpt028
-		WHERE p28_compania  = vg_codcia
-		  AND p28_localidad = vg_codloc
-		  AND p28_num_ret   = vm_num_ret
-		ORDER BY p28_secuencia
-		
-FOREACH q_ret2 INTO r_p28.*
-	WHENEVER ERROR CONTINUE
-	SET LOCK MODE TO WAIT 3
-	DECLARE q_saldo2 CURSOR FOR
-		SELECT p20_saldo_cap FROM cxpt020
-			WHERE p20_compania  = vg_codcia
-			  AND p20_localidad = vg_codloc
-			  AND p20_codprov   = r_p23.p23_codprov
-			  AND p20_tipo_doc  = r_p23.p23_tipo_doc
-			  AND p20_num_doc   = r_p23.p23_num_doc
-			  AND p20_dividendo = r_p28.p28_dividendo
-		FOR UPDATE OF p20_saldo_cap
-	SET LOCK MODE TO NOT WAIT
-	WHENEVER ERROR STOP
-	
-	OPEN  q_saldo2
-	FETCH q_saldo2 INTO r_p23.p23_saldo_cap
-	IF STATUS < 0 THEN
-		ROLLBACK WORK
-		EXIT PROGRAM
-	END IF
-		
-	LET r_p23.p23_orden     = orden
-	LET orden = orden + 1
-	LET r_p23.p23_div_doc   = r_p28.p28_dividendo
-	LET r_p23.p23_valor_cap = r_p28.p28_valor_ret * (-1)
-		
-	INSERT INTO cxpt023 VALUES(r_p23.*)
-		
-	UPDATE cxpt020 
-		SET p20_saldo_cap = p20_saldo_cap - r_p28.p28_valor_ret
-		WHERE CURRENT OF q_saldo2
-			
-	CLOSE q_saldo2
-	FREE  q_saldo2
-END FOREACH
-FREE q_ret2
-		  
-END FUNCTION
-
-
-
 FUNCTION graba_ajuste_documento_contado(r_c10)
 
 DEFINE r_c10		RECORD LIKE ordt010.*
@@ -3035,7 +2835,7 @@ LET r_p23.p23_codprov   = r_p22.p22_codprov
 LET r_p23.p23_tipo_trn  = r_p22.p22_tipo_trn
 LET r_p23.p23_num_trn   = r_p22.p22_num_trn
 
-LET r_p23.p23_tipo_doc   = 'FA'
+LET r_p23.p23_tipo_doc   = vm_factura
 LET r_p23.p23_num_doc    = rm_r19.r19_oc_externa
 LET r_p23.p23_div_doc    = 1		-- Un solo divividendo 
 LET r_p23.p23_valor_int  = 0
@@ -3079,219 +2879,6 @@ END FUNCTION
 
 
 
-FUNCTION graba_retenciones(r_c10)
-
-DEFINE r_c10		RECORD LIKE ordt010.*
-
-DEFINE r_p27		RECORD LIKE cxpt027.*
-DEFINE r_p28		RECORD LIKE cxpt028.*
-
-DEFINE i		SMALLINT
-DEFINE done		SMALLINT
-DEFINE orden		SMALLINT
-
-DEFINE dividendo 	SMALLINT
-DEFINE saldo		DECIMAL(12,2)
-DEFINE mensaje		CHAR(100)
-
-LET done = 1
-IF (val_neto - val_pagar) = 0 THEN
-	-- No se ha retenido nada, no se generara ajuste
-	LET done = 0
-	RETURN done
-END IF
-
-INITIALIZE r_p27.* TO NULL
-INITIALIZE r_p28.* TO NULL
-
-LET r_p27.p27_compania      = vg_codcia
-LET r_p27.p27_localidad     = vg_codloc
-LET r_p27.p27_estado        = 'A'
-LET r_p27.p27_codprov       = r_c10.c10_codprov
-LET r_p27.p27_moneda        = rm_r19.r19_moneda
-LET r_p27.p27_paridad       = rm_r19.r19_paridad
-LET r_p27.p27_total_ret     = tot_ret
-LET r_p27.p27_origen        = 'A'
-LET r_p27.p27_usuario       = vg_usuario
-LET r_p27.p27_fecing        = fl_current()
-
-LET r_p27.p27_num_ret = nextValInSequence('TE', vm_retencion)
-IF r_p27.p27_num_ret = -1 THEN
-	LET INT_FLAG = 1
-	-- OJO
-	RETURN 0
-END IF
-
-INSERT INTO cxpt027 VALUES(r_p27.*) 
-
-LET vm_num_ret = r_p27.p27_num_ret
--- Graba Detalle Retencion
-
-LET r_p28.p28_compania   = vg_codcia        
-LET r_p28.p28_localidad  = vg_codloc
-LET r_p28.p28_num_ret    = r_p27.p27_num_ret
-LET r_p28.p28_codprov    = r_p27.p27_codprov
-LET r_p28.p28_tipo_doc   = 'FA'
-LET r_p28.p28_num_doc    = rm_r19.r19_oc_externa
-LET r_p28.p28_valor_fact = rm_r19.r19_tot_neto
-
-DECLARE q_saldo CURSOR FOR
-	SELECT p20_dividendo, p20_saldo_cap
-		FROM cxpt020
-		WHERE p20_compania  = vg_codcia
-		  AND p20_localidad = vg_codloc
-		  AND p20_codprov   = r_p28.p28_codprov
-		  AND p20_tipo_doc  = r_p28.p28_tipo_doc
-		  AND p20_num_doc   = r_p28.p28_num_doc
-		  AND p20_saldo_cap > 0
-		ORDER BY p20_dividendo ASC
-
-FOR i = 1 TO ind_ret
-	IF r_ret[i].check = 'S' THEN
-		EXIT FOR
-	END IF
-END FOR
-
--- Si no hay retenciones que hacer se borra la cabecera
-IF i > ind_ret THEN
-	DELETE FROM cxpt027 
-		WHERE p27_compania  = r_p27.p27_compania
-		  AND p27_localidad = r_p27.p27_localidad
-		  AND p27_num_ret   = r_p27.p27_num_ret
-	RETURN 0
-END IF
-
-LET orden = 1
-FOREACH q_saldo INTO dividendo, saldo
-	LET done  = 0	
-	IF saldo < r_ret[i].subtotal THEN
-		CONTINUE FOREACH
-	END IF
-		
-	WHILE saldo >= r_ret[i].subtotal
-		IF r_ret[i].check = 'N' THEN
-			LET i = i + 1
-			IF i > ind_ret THEN
-				EXIT FOREACH
-			END IF
-			CONTINUE WHILE
-		END IF
- 		
-		LET r_p28.p28_secuencia  = orden
-		LET orden = orden + 1
-		LET r_p28.p28_dividendo  = dividendo
-		LET r_p28.p28_tipo_ret   = r_ret[i].tipo_ret
-		LET r_p28.p28_porcentaje = r_ret[i].porc
-		LET r_p28.p28_valor_base = r_ret[i].val_base
-		LET r_p28.p28_valor_ret  = r_ret[i].subtotal
-	
-		INSERT INTO cxpt028 VALUES(r_p28.*)
-
-		LET done = 1
-		LET saldo = saldo - r_ret[i].subtotal
-		LET i = i + 1
-		IF i > ind_ret THEN
-			EXIT FOREACH
-		END IF		
-	END WHILE
-END FOREACH
-IF NOT done THEN
-	LET mensaje = 'No pudo hacerse la retención'
-	CASE r_ret[i].tipo_ret
-		WHEN 'I'
-			LET mensaje = mensaje, ' sobre el IVA (',
-				      r_ret[i].porc || '%).'
-		WHEN 'F'
-			LET mensaje = mensaje, ' en la fuente (',
-				      r_ret[i].porc, '%).'
-		OTHERWISE
-			LET mensaje = mensaje, ' ', 
-				      r_ret[i].tipo_ret, ' (',
-				      r_ret[i].porc, '%).'
-	END CASE
-	CALL fl_mostrar_mensaje(mensaje, 'stop')
-	ROLLBACK WORK
-	EXIT PROGRAM
-END IF
-
-RETURN done
-
-END FUNCTION
-
-
-
-FUNCTION validar_num_sri(validar)
-DEFINE validar		SMALLINT
-DEFINE r_g37		RECORD LIKE gent037.*
-DEFINE cont		INTEGER
-DEFINE flag		SMALLINT
-
-CALL fl_validacion_num_sri(vg_codcia, vg_codloc, 'RT', 'N', rm_p29.p29_num_sri)
-	RETURNING r_g37.*, rm_p29.p29_num_sri, flag
-CASE flag
-	WHEN -1
-		RETURN -1
-	WHEN 0
-		RETURN  0
-END CASE
-IF validar = 1 THEN
-	SELECT COUNT(*) INTO cont FROM cxpt029
-		WHERE p29_compania  = vg_codcia
-		  AND p29_localidad = vg_codloc
-  		  AND p29_num_sri   = rm_p29.p29_num_sri
-	IF cont > 0 THEN
-		CALL fl_mostrar_mensaje('La secuencia del SRI ' || rm_p29.p29_num_sri[9,15] || ' ya existe.','exclamation')
-		RETURN 0
-	END IF
-END IF
-RETURN 1
-
-END FUNCTION
-
-
-
-FUNCTION genera_num_ret_sri()
-DEFINE r_g37		RECORD LIKE gent037.*
-DEFINE sec_sri		LIKE gent037.g37_sec_num_sri
-DEFINE cuantos		SMALLINT
-
-WHENEVER ERROR CONTINUE
-DECLARE q_sri CURSOR FOR
-	SELECT * FROM gent037
-		WHERE g37_compania   = vg_codcia
-		  AND g37_localidad  = vg_codloc
-		  AND g37_tipo_doc   = 'RT'
-	  	  AND g37_fecha_emi <= DATE(vg_fecha)
-	  	  AND g37_fecha_exp >= DATE(vg_fecha)
-		FOR UPDATE
-OPEN q_sri
-FETCH q_sri INTO r_g37.*
-IF STATUS < 0 THEN
-	WHENEVER ERROR STOP
-	ROLLBACK WORK
-	CALL fl_mostrar_mensaje('Lo siento ahora no puede modificar este No. del SRI, porque ésta secuencia se encuentra bloqueada por otro usuario.', 'stop')
-	EXIT PROGRAM
-END IF
-WHENEVER ERROR STOP
-LET cuantos = 8 + r_g37.g37_num_dig_sri
-LET sec_sri = rm_p29.p29_num_sri[9, cuantos] USING "########"
-UPDATE gent037
-	SET g37_sec_num_sri = sec_sri
-	WHERE g37_compania     = r_g37.g37_compania
-	  AND g37_localidad    = r_g37.g37_localidad
-	  AND g37_tipo_doc     = r_g37.g37_tipo_doc
-	  AND g37_secuencia    = r_g37.g37_secuencia
-	  AND g37_sec_num_sri <= sec_sri
-INSERT INTO cxpt029
-	VALUES (vg_codcia, vg_codloc, vm_num_ret, rm_p29.p29_num_sri)
-INSERT INTO cxpt032
-	VALUES (vg_codcia, vg_codloc, vm_num_ret, r_g37.g37_tipo_doc,
-		r_g37.g37_secuencia)
-
-END FUNCTION
-
-
-
 FUNCTION setea_nombre_botones_f3()
 
 --#DISPLAY 'Descripción' TO bt_nom_ret
@@ -3309,7 +2896,7 @@ DEFINE param		VARCHAR(60)
 
 LET param = ' ', vg_codloc, ' ', rm_r19.r19_cod_tran, ' ', rm_r19.r19_num_tran,
 		' X D'
-CALL ejecuta_comando('REPUESTOS', vg_modulo, 'repp218 ', param)
+CALL ejecuta_comando('REPUESTOS', vg_modulo, 'repp218', param)
 
 END FUNCTION
 
@@ -3321,13 +2908,13 @@ LET vm_num_rows = 1
 LET vm_row_current = 1
 
 SELECT ROWID INTO vm_rows[vm_num_rows]
-	FROM rept019
-	WHERE r19_compania  = vg_codcia
-	  AND r19_localidad = vg_codloc
-	  AND r19_cod_tran  = vm_transaccion
-	  AND r19_num_tran  = vm_num_tran
+  FROM rept019
+ WHERE r19_compania  = vg_codcia
+   AND r19_localidad = vg_codloc
+   AND r19_cod_tran  = vm_transaccion
+   AND r19_num_tran  = vm_num_tran
+
 IF STATUS = NOTFOUND THEN
-	--CALL fgl_winmessage(vg_producto,'No existe compra local.','exclamation')
 	CALL fl_mostrar_mensaje('No existe compra local.','exclamation')
 	EXIT PROGRAM
 ELSE
@@ -3358,23 +2945,20 @@ END IF
 CALL fl_lee_orden_compra(vg_codcia, vg_codloc, rm_r19.r19_oc_interna)
 	RETURNING r_c10.*
 IF r_c10.c10_numero_oc IS NULL THEN
-	--CALL fgl_winmessage(vg_producto,'Orden de compra no existe.','exclamation')
 	CALL fl_mostrar_mensaje('Orden de compra no existe.','exclamation')
 	RETURN
 END IF
 
 CALL fl_lee_proveedor(r_c10.c10_codprov)	RETURNING r_p01.*
 IF r_p01.p01_codprov IS NULL THEN
-	--CALL fgl_winmessage(vg_producto,'Proveedor no existe.','exclamation')
 	CALL fl_mostrar_mensaje('Proveedor no existe.','exclamation')
 	RETURN
 END IF
 
 CALL fl_lee_documento_deudor_cxp(vg_codcia, vg_codloc, r_c10.c10_codprov,
-				 'FA', rm_r19.r19_oc_externa, 1)
+				 vm_factura, rm_r19.r19_oc_externa, 1)
 	RETURNING r_p20.*
 IF r_p20.p20_num_doc IS NULL THEN
-	--CALL fgl_winmessage(vg_producto,'No se generaron documentos para esta compra local.','exclamation')
 	CALL fl_mostrar_mensaje('No se generaron documentos para esta compra local.','exclamation')
 	RETURN
 END IF
@@ -3407,7 +2991,6 @@ WHILE NOT salir
 IF ind_ret > 0 THEN
 	CALL set_count(ind_ret)
 ELSE
-	--CALL fgl_winmessage(vg_producto,'No hay datos a mostrar.','exclamation')
 	CALL fl_mostrar_mensaje('No hay datos a mostrar.','exclamation')
 	RETURN
 END IF
@@ -3438,7 +3021,6 @@ INPUT ARRAY r_ret WITHOUT DEFAULTS FROM ra_ret.*
 		IF r_ret[i].check = 'N' THEN
 			LET r_ret[i].check = 'S'
 			DISPLAY r_ret[i].* TO ra_ret[j].*
-			--NEXT FIELD ra_ret[j-1].check
 			NEXT FIELD check
 		END IF
 	AFTER INPUT 
@@ -3476,7 +3058,7 @@ DECLARE q_p28 CURSOR FOR
 		WHERE p28_compania   = vg_codcia
 		  AND p28_localidad  = vg_codloc
 		  AND p28_codprov    = r_c10.c10_codprov
-		  AND p28_tipo_doc   = 'FA'
+		  AND p28_tipo_doc   = vm_factura
 		  AND p28_num_doc    = rm_r19.r19_oc_externa
 		  AND c02_compania   = p28_compania
 		  AND c02_tipo_ret   = p28_tipo_ret
@@ -3635,9 +3217,9 @@ DEFINE param		VARCHAR(60)
 LET param = vg_codloc, ' "', cod_tran, '" ', num_tran CLIPPED
 CASE reporte
 	WHEN 1
-		LET prog = 'repp413 '
+		LET prog = 'repp413'
 	WHEN 2
-		LET prog = 'repp415 '
+		LET prog = 'repp415'
 END CASE
 CALL ejecuta_comando('REPUESTOS', vg_modulo, prog, param)
 
@@ -3658,7 +3240,7 @@ IF vg_gui = 0 THEN
 	LET run_prog = '; fglgo '
 END IF
 LET comando = 'cd ..', vg_separador, '..', vg_separador, modulo,
-		vg_separador, 'fuentes', vg_separador, run_prog, prog,
+		vg_separador, 'fuentes', vg_separador, run_prog, prog, ' ',
 		vg_base, ' ', mod, ' ', vg_codcia, ' ', param
 RUN comando
 
@@ -4720,7 +4302,7 @@ WHILE TRUE
 		ON KEY(F5)
 			LET j = arr_curr()
 			CALL fl_ver_transaccion_rep(vg_codcia, vg_codloc,
-						'FA', r_factcru[j].num_fact)
+						vm_factura, r_factcru[j].num_fact)
 			LET int_flag = 0
 		ON KEY(F6)
 			LET j = arr_curr()
@@ -4968,7 +4550,7 @@ WHILE TRUE
 		ON KEY(F5)
 			LET j = arr_curr()
 			CALL fl_ver_transaccion_rep(vg_codcia, vg_codloc,
-						'FA', r_detcru[j].num_fact)
+						vm_factura, r_detcru[j].num_fact)
 			LET int_flag = 0
 		ON KEY(F6)
 			LET j = arr_curr()

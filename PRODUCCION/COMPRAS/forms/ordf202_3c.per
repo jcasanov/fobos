@@ -1,54 +1,39 @@
-DATABASE FORMONLY
-SCREEN
+DATABASE aceros
+SCREEN 
 {
 
-         Proveedor: [c000                                    ]
+ Glosa: [c060                                                               ]
 
-                                     Valor Bienes: [c001            ]
-                                  Valor Servicios: [c002            ]
-                                         Impuesto: [c003            ]
-                                                   ------------------
-                                       Valor Neto: [c004            ]
-          
-  C      Descripción     Tipo   Valor Base     %        Subtotal       
- [c|c010                |c005|c006          |c007  |c008            ]
- [c|c010                |c005|c006          |c007  |c008            ]
- [c|c010                |c005|c006          |c007  |c008            ]
- [c|c010                |c005|c006          |c007  |c008            ]
- [c|c010                |c005|c006          |c007  |c008            ]
-                                                   ------------------
-                                Total Retenciones: [c011            ]
-                                            Saldo: [c009            ] 
+     Cuenta              Descripción             Débtio           Crédito
+ [c018        ] [a4                       |c020            |c021            ]
+ [c018        ] [a4                       |c020            |c021            ]
+ [c018        ] [a4                       |c020            |c021            ]
+ [c018        ] [a4                       |c020            |c021            ]
+ [c018        ] [a4                       |c020            |c021            ]
+ [c018        ] [a4                       |c020            |c021            ]
+ [c018        ] [a4                       |c020            |c021            ]
+                                          [c050            |c051            ]
+
 }
+TABLES
+ctbt012
+ctbt013
 ATTRIBUTES
-c000 = FORMONLY.n_proveedor TYPE VARCHAR, REVERSE, NOENTRY;
-c001 = FORMONLY.val_bienes TYPE DECIMAL (12,2), NOENTRY, REVERSE,
+c060 = ctbt012.b12_glosa, REVERSE, UPSHIFT;
+c050 = FORMONLY.tot_debito TYPE DECIMAL (12,2), NOENTRY,
 	FORMAT='#,###,###,##&.##';
-c002 = FORMONLY.val_servi TYPE DECIMAL (12,2), NOENTRY, REVERSE,
-	FORMAT='#,###,###,##&.##';
-c003 = FORMONLY.val_impto TYPE DECIMAL (12,2), NOENTRY, REVERSE,
-	FORMAT='#,###,###,##&.##';
-c004 = FORMONLY.val_neto TYPE DECIMAL (12,2), NOENTRY, REVERSE,
+c051 = FORMONLY.tot_credito TYPE DECIMAL (12,2), NOENTRY,
 	FORMAT='#,###,###,##&.##';
 
-c005 = FORMONLY.tipo_ret TYPE CHAR, NOENTRY, REVERSE;
-c006 = FORMONLY.val_base TYPE DECIMAL (12,2), INCLUDE = (0 TO 999999999.99),
-	REVERSE, FORMAT='###,###,##&.##';
-c007 = FORMONLY.porc TYPE DECIMAL (5,2), NOENTRY, REVERSE, FORMAT='##&.##';
-c008 = FORMONLY.subtotal TYPE DECIMAL (12,2), NOENTRY, REVERSE,
-	FORMAT='#,###,###,##&.##';
-c010 = FORMONLY.n_retencion TYPE VARCHAR, NOENTRY, REVERSE;
+c018 = ctbt013.b13_cuenta, UPSHIFT, REVERSE,
+	COMMENTS='Digite cuenta de gastos.';
+a4   = FORMONLY.n_cuenta TYPE VARCHAR, UPSHIFT, NOENTRY;
+c020 = FORMONLY.valor_db TYPE DECIMAL (12,2),  
+	FORMAT='#,###,###,##&.##', INCLUDE=(0 TO 9999999999.99);
+c021 = FORMONLY.valor_cr TYPE DECIMAL (12,2), 
+	FORMAT='#,###,###,##&.##', INCLUDE=(0 TO 9999999999.99);
 
-c009 = FORMONLY.val_pagar TYPE DECIMAL (12,2), NOENTRY, REVERSE,
-	FORMAT='#,###,###,##&.##';
-c011 = FORMONLY.tot_ret TYPE DECIMAL (12,2), NOENTRY, REVERSE,
-	FORMAT='#,###,###,##&.##';
-
-c    = FORMONLY.check TYPE CHAR, INCLUDE = ('S', 'N'),
-	AUTONEXT, DEFAULT='N';
-	
-end
-
+END
 INSTRUCTIONS
 DELIMITERS '||'
-SCREEN RECORD ra_ret[5] (check, n_retencion, tipo_ret, val_base, porc, subtotal)
+SCREEN RECORD r_ctas[7] (b13_cuenta, n_cuenta, valor_db, valor_cr)
