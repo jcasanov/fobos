@@ -234,7 +234,9 @@ DEFINE fecha_actual DATETIME YEAR TO SECOND
 BEGIN WORK
 
 WHENEVER ERROR CONTINUE
-	CALL borrar_fuentes_no_procesados()
+-- XXX hay que pensar más en esto, por ahora es una molestia 
+--     debido a que cambiamos la fecha con mucha frecuencia
+--	CALL borrar_fuentes_no_procesados()
 	CALL evaluar_proformas_vta_perdida()
 WHENEVER ERROR STOP
 
