@@ -407,13 +407,18 @@ IF int_flag THEN
 	END IF
 	RETURN
 END IF
+
+{*
+ * Una factura puede ser anulada si cumplen las siguientes condiciones: 
+ * * es en el mismos día y no existen notas de entrega 
+ * * es al contado, o siendo de crédito el cliente no ha pagado aún nada
+ *}
 LET vm_cod_tran_2 = vm_cod_dev
 IF rm_r19.r19_tot_neto = rm_fact.r19_tot_neto THEN
 	IF vg_fecha = DATE(rm_fact.r19_fecing) AND
 	   NOT tiene_nota_entrega(rm_fact.r19_cod_tran, rm_fact.r19_num_tran)
 	THEN
-{-- DESAPARECEN LAS ANULACIONES DE FACTURA --}
-		LET vm_cod_tran_2 = vm_cod_dev
+		LET vm_cod_tran_2 = vm_cod_anu
 		IF rm_fact.r19_cont_cred = 'R' THEN 
 			IF NOT verifica_saldo_fact_devuelta() THEN
 				LET vm_cod_tran_2 = vm_cod_dev
@@ -868,14 +873,18 @@ IF int_flag THEN
 	END IF
 	RETURN
 END IF
-{-- AQUI ESTABA LA LLAMADA DEL CRUCE DE BODEGAS --}
+
+{*
+ * Una factura puede ser anulada si cumplen las siguientes condiciones: 
+ * * es en el mismos día y no existen notas de entrega 
+ * * es al contado, o siendo de crédito el cliente no ha pagado aún nada
+ *}
 LET vm_cod_tran_2 = vm_cod_dev
 IF rm_r19.r19_tot_neto = rm_fact.r19_tot_neto THEN
 	IF vg_fecha = DATE(rm_fact.r19_fecing) AND
 	   NOT tiene_nota_entrega(rm_fact.r19_cod_tran, rm_fact.r19_num_tran)
 	THEN
-		--LET vm_cod_tran_2 = vm_cod_anu
-		LET vm_cod_tran_2 = vm_cod_dev
+		LET vm_cod_tran_2 = vm_cod_anu
 		IF rm_fact.r19_cont_cred = 'R' THEN 
 			IF NOT verifica_saldo_fact_devuelta() THEN
 				LET vm_cod_tran_2 = vm_cod_dev
@@ -3410,7 +3419,6 @@ SELECT SUM(z20_saldo_cap) INTO saldo_fact FROM cxct020
 	      z20_codcli    = rm_fact.r19_codcli
 IF saldo_fact IS NULL THEN
 	ROLLBACK WORK
-	--CALL fgl_winmessage(vg_producto,'Factura crédito no existe en módulo de Cobranzas. Devolución no se ejecutó','stop')
 	CALL fl_mostrar_mensaje('Factura crédito no existe en módulo de Cobranzas. Devolución no se ejecutó','stop')
 	EXIT PROGRAM
 END IF	
