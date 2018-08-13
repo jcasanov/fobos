@@ -422,7 +422,7 @@ PAGE TRAILER
 	SKIP 1 LINES
 	PRINT COLUMN 104, rm_r19.r19_porc_impto USING "#&",
 		  COLUMN 118, impuesto		USING "###,###,##&.##"
-	SKIP 1 LINES
+	SKIP 2 LINES
 	PRINT COLUMN 118, valor_pag		USING "###,###,##&.##";
 	print ASCII escape;
 	print ASCII desact_comp 

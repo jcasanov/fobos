@@ -238,12 +238,11 @@ PAGE HEADER
 	      COLUMN 090, DATE(rm_p27.p27_fecing) USING "dd-mm-yyyy",
 		ASCII escape, ASCII des_neg,
 		ASCII escape, ASCII act_comp
-	SKIP 1 LINES
 	PRINT COLUMN 008, rm_p01.p01_num_doc,
 		  COLUMN 095, "FACTURA"
 	PRINT COLUMN 008, rm_p01.p01_direccion1[1,40],
 	      COLUMN 095, r_iva_fuente.p28_num_doc CLIPPED
-	SKIP 3 LINES
+	SKIP 4 LINES
 
 ON EVERY ROW
 	NEED 1 LINES
