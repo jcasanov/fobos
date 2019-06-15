@@ -306,9 +306,12 @@ LET query = 'SELECT t23_cod_cliente codcli, t23_num_factura num_tran, ',
 				'CASE WHEN z01_tipo_doc_id = "R" AND ',
 							' t23_cod_cliente <> ', rm_r00.r00_codcli_tal, ' ',
 					'THEN "R" ',
+				'     WHEN z01_tipo_doc_id = "C" AND ',
+							' t23_cod_cliente <> ', rm_r00.r00_codcli_tal, ' ',
+					'THEN "C" ',
 					'ELSE "F" ',
 				'END tipo_doc_id, ',
-				'CASE WHEN z01_tipo_doc_id = "R" AND ',
+				'CASE WHEN (z01_tipo_doc_id = "R" OR z01_tipo_doc_id = "C") AND ',
 						' t23_cod_cliente <> ', rm_r00.r00_codcli_tal, ' ',
 					'THEN z01_num_doc_id ',
 					'ELSE "9999999999999" ',
@@ -395,7 +398,7 @@ END FOREACH
 CALL obtener_retenciones()
 
 {* tmp_tot_ret: *}
-LET query = 'SELECT CASE WHEN tipo_doc_id = "R" AND ',
+LET query = 'SELECT CASE WHEN (tipo_doc_id = "R" OR tipo_doc_id = "C") AND ',
 							'codcli <> ', rm_r00.r00_codcli_tal, ' ',
 						'THEN cedruc ',
 						'ELSE "9999999999999" ',
@@ -426,6 +429,8 @@ UPDATE tmp_tot
 DROP TABLE tmp_tot_tal
 LET query = 'SELECT CASE WHEN LENGTH(z01_num_doc_id) = 13 ',
 						'THEN "R" ',
+					' WHEN LENGTH(z01_num_doc_id) = 10 ',
+						'THEN "C" ',
 						'ELSE "F" ',
 					'END z01_tipo_doc_id, z01_num_doc_id, z21_codcli, ',
 				'z21_tipo_doc, z21_num_doc, z21_valor, ',
@@ -483,10 +488,12 @@ LET query = 'SELECT UNIQUE z01_tipo_doc_id, z01_num_doc_id, z21_tipo_doc, ',
 PREPARE cons_tmp_nc FROM query 
 EXECUTE cons_tmp_nc
 DROP TABLE tmp_fav
+{-- SE QUITA HASTA CONFIRMAR QUE PUEDE PONERSE UN NUMERO DE CEDULA
 UPDATE tmp_nc
 	SET z01_num_doc_id = "9999999999999"
 	WHERE LENGTH(z01_num_doc_id) = 10
 	  AND z01_tipo_doc_id        = "F"
+--}
 INSERT INTO tmp_anexo
 	SELECT z01_tipo_doc_id, z01_num_doc_id, z21_tipo_doc, z21_fecha_emi,
 		0.00, NVL(SUM(valor_civa), 0), NVL(SUM(valor_siva), 0),
@@ -509,6 +516,8 @@ UPDATE tmp_anexo
 DROP TABLE tmp_nc
 LET query = 'SELECT CASE WHEN LENGTH(z01_num_doc_id) = 13 ',
 						'THEN "R" ',
+					' WHEN LENGTH(z01_num_doc_id) = 10 ',
+						'THEN "C" ',
 						'ELSE "F" ',
 					'END z01_tipo_doc_id, z01_num_doc_id, z20_tipo_doc, ',
 				' z20_num_doc, "', rm_par.fecha_fin, '" z20_fecha_emi, ',
@@ -534,10 +543,12 @@ LET query = 'SELECT CASE WHEN LENGTH(z01_num_doc_id) = 13 ',
 		' INTO TEMP tmp_nd '
 PREPARE cons_tmp_nd FROM query 
 EXECUTE cons_tmp_nd
+{-- SE QUITA HASTA CONFIRMAR QUE PUEDE PONERSE UN NUMERO DE CEDULA
 UPDATE tmp_nd
 	SET z01_num_doc_id = "9999999999999"
 	WHERE LENGTH(z01_num_doc_id) = 10
 	  AND z01_tipo_doc_id        = "F"
+--}
 INSERT INTO tmp_anexo
 	SELECT z01_tipo_doc_id, z01_num_doc_id, z20_tipo_doc, z20_fecha_emi,
 		0.00, NVL(SUM(valor_civa), 0), NVL(SUM(valor_siva), 0),
@@ -556,7 +567,8 @@ UPDATE tmp_anexo
 			WHERE tipo_doc_id = z01_tipo_doc_id
 			  AND cedruc      = z01_num_doc_id
 			  AND cod_tran    = z20_tipo_doc
-			  AND fecha_vta   = z20_fecha_emi)
+			  AND fecha_vta   = z20_fecha_emi
+			GROUP BY 1, 2, 3, 4)
 DROP TABLE tmp_nd
 SELECT doccli, c_tran, COUNT(*) cuantos
 	FROM tmp_tot
@@ -782,7 +794,7 @@ FUNCTION obtener_facturas()
 DEFINE query		VARCHAR(4000)
 
 LET query = 'SELECT r19_codcli codcli, ',
-		'CASE WHEN LENGTH(r19_cedruc) = 13 AND ',
+		'CASE WHEN (LENGTH(r19_cedruc) = 13 OR LENGTH(r19_cedruc) = 10) AND ',
 			' r19_codcli <> ', rm_r00.r00_codcli_tal,
 			'THEN r19_cod_tran ',
 			'ELSE "NV" ',
@@ -792,9 +804,12 @@ LET query = 'SELECT r19_codcli codcli, ',
 		'CASE WHEN LENGTH(r19_cedruc) = 13 AND ',
 			' r19_codcli <> ', rm_r00.r00_codcli_tal,
 			'THEN "R" ',
+		'     WHEN LENGTH(r19_cedruc) = 10 AND ',
+			' r19_codcli <> ', rm_r00.r00_codcli_tal,
+			'THEN "C" ',
 			'ELSE "F" ',
 		'END tipo_doc_id, ',
-		'CASE WHEN LENGTH(r19_cedruc) = 13 AND ',
+		'CASE WHEN (LENGTH(r19_cedruc) = 13 OR LENGTH(r19_cedruc) = 10) AND ',
 			' r19_codcli <> ', rm_r00.r00_codcli_tal,
 			'THEN r19_cedruc ',
 			'ELSE "9999999999999" ',
@@ -864,6 +879,13 @@ LET query = 'SELECT CASE WHEN (SELECT LENGTH(a.r19_cedruc) ',
 				'  AND a.r19_cod_tran  = b.r19_tipo_dev ',
 				'  AND a.r19_num_tran  = b.r19_num_dev) = 13',
 			' THEN "R" ',
+			' WHEN (SELECT LENGTH(a.r19_cedruc) ',
+				'FROM rept019 a ',
+				'WHERE a.r19_compania  = b.r19_compania ',
+				'  AND a.r19_localidad = b.r19_localidad ',
+				'  AND a.r19_cod_tran  = b.r19_tipo_dev ',
+				'  AND a.r19_num_tran  = b.r19_num_dev) = 10',
+			' THEN "C" ',
 			' ELSE "F" ',
 			' END z01_tipo_doc_id, ',
 		' CASE WHEN (SELECT LENGTH(a.r19_cedruc) ',
@@ -871,7 +893,7 @@ LET query = 'SELECT CASE WHEN (SELECT LENGTH(a.r19_cedruc) ',
 				'WHERE a.r19_compania  = b.r19_compania ',
 				'  AND a.r19_localidad = b.r19_localidad ',
 				'  AND a.r19_cod_tran  = b.r19_tipo_dev ',
-				'  AND a.r19_num_tran  = b.r19_num_dev) = 13',
+				'  AND a.r19_num_tran  = b.r19_num_dev) IN (10, 13)',
 			' THEN z01_num_doc_id ',
 			' ELSE "9999999999999" ',
 			' END z01_num_doc_id, z21_codcli, z21_tipo_doc,',
@@ -1100,7 +1122,7 @@ FOREACH q_s21 INTO r_s21.*
 	LET registro    = registro CLIPPED,
 		'\t<detalleVentas>\n',
 		'\t\t<tpIdCliente>', r_s21.s21_ident_cli, '</tpIdCliente>\n',
-		'\t\t<idCliente>', r_s21.s21_num_doc_id, '</idCliente>\n',
+		'\t\t<idCliente>', r_s21.s21_num_doc_id CLIPPED, '</idCliente>\n',
 		'\t\t<parteRelVtas>SI</parteRelVtas>\n',
 		'\t\t<tipoComprobante>', r_s21.s21_tipo_comp USING "&&",
 		'</tipoComprobante>\n',
