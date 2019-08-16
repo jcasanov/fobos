@@ -2,15 +2,17 @@ DATABASE aceros
 SCREEN
 {
 
-            TIPO ORDEN DE TRABAJO
-            --------------------
+                DATOS ORDEN DE TRABAJO
+                ---------------------
 
- Tipo Orden: [c] [c000           ]
+     Tipo Orden: [c] [c000           ]
+        Subtipo: [d] [c001                     ]
 
-    Subtipo: [d] [c001                     ]
+ Asesor/Técnico: [c002] [c003                          ]
 
 }
 TABLES
+talt003
 talt023
 ATTRIBUTES
 c    = talt023.t23_tipo_ot, REQUIRED, REVERSE, AUTONEXT, UPSHIFT,
@@ -19,4 +21,7 @@ c000 = FORMONLY.desc_tipo_ot, NOENTRY, REVERSE, UPSHIFT;
 d    = talt023.t23_subtipo_ot, REQUIRED, REVERSE, AUTONEXT, UPSHIFT,
 	WIDGET = "FIELD_BMP", CONFIG = "lista.bmp F2";
 c001 = FORMONLY.desc_subtipo_ot, NOENTRY, REVERSE, UPSHIFT;
+c002 = talt003.t03_mecanico, REQUIRED, REVERSE, AUTONEXT, UPSHIFT,
+	WIDGET = "FIELD_BMP", CONFIG = "lista.bmp F2";
+c003 = talt003.t03_nombres, NOENTRY, REVERSE, UPSHIFT;
 END
