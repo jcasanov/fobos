@@ -1260,7 +1260,7 @@ DEFINE flag		SMALLINT
 CALL borrar_detalle()
 CALL generar_temp_det(flag)
 CALL cargar_det_temp()
-IF vm_num_det = 0 THEN 
+IF vm_num_det = 0 AND flag <> 'I' THEN
 	DROP TABLE tmp_detalle
 	RETURN
 END IF
